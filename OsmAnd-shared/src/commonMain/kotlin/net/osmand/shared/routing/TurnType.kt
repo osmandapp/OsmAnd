@@ -491,6 +491,8 @@ class TurnType(
 			"sharp_right" -> TSHR
 			"sharp_left" -> TSHL
 			"reverse" -> TU
+			// not an OSM value: a u turn to the right, left-side navigation
+			"reverse_right" -> TRU
 			// unknown string
 			else -> C
 		}

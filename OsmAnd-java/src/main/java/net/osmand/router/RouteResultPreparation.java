@@ -964,18 +964,24 @@ public class RouteResultPreparation {
 				if (ut) {
 					tnext.setSkipToSpeak(true);
 					if (tl && TurnType.isLeftTurnNoUTurn(tnext.getValue())) {
-						TurnType tt = TurnType.valueOf(TurnType.TU, false);
-						tt.setLanes(t.getLanes());
-						return tt;
+						return withUTurnLanes(TurnType.valueOf(TurnType.TU, false), result, i, t);
 					} else if (tr && TurnType.isRightTurnNoUTurn(tnext.getValue())) {
-						TurnType tt = TurnType.valueOf(TurnType.TU, true);
-						tt.setLanes(t.getLanes());
-						return tt;
+						return withUTurnLanes(TurnType.valueOf(TurnType.TU, true), result, i, t);
 					}
 				}
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * The lanes of the turn that only begins the U-turn were picked for that turn, so the reverse
+	 * lane is not among the active ones. They are taken again for the U-turn the driver really makes.
+	 */
+	private TurnType withUTurnLanes(TurnType uTurn, List<RouteSegmentResult> result, int i, TurnType t) {
+		int[] lanes = getTurnLanesInfo(result.get(i - 1), result.get(i), uTurn.getValue());
+		uTurn.setLanes(lanes != null ? lanes : t.getLanes());
+		return uTurn;
 	}
 
 	private String getStreetName(List<RouteSegmentResult> result, int i, boolean dir) {

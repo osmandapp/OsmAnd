@@ -85,7 +85,7 @@ object TurnPreparation {
 				t = TurnLanes.getActiveTurnType(lanes, leftSide, t)
 				t.lanes = lanes
 			} else if (fromTag != TurnType.C) {
-				t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent)
+				t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist))
 				if (t != null) {
 					val mainTurnType = TurnType.valueOf(fromTag, leftSide)
 					val lanes = t.lanes
@@ -128,7 +128,7 @@ object TurnPreparation {
 			t = TurnLanes.getActiveTurnType(lanes, leftSide, t)
 			t.lanes = lanes
 		} else {
-			t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent)
+			t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist))
 		}
 		if (t != null) {
 			t.turnAngle = (-mpi).toFloat()
@@ -251,18 +251,47 @@ object TurnPreparation {
 				if (ut) {
 					tnext.isSkipToSpeak = true
 					if (tl && TurnType.isLeftTurnNoUTurn(tnext.value)) {
-						val tt = TurnType.valueOf(TurnType.TU, false)
-						tt.lanes = t.lanes
-						return tt
+						return withUTurnLanes(TurnType.valueOf(TurnType.TU, false), result, i, t)
 					} else if (tr && TurnType.isRightTurnNoUTurn(tnext.value)) {
-						val tt = TurnType.valueOf(TurnType.TU, true)
-						tt.lanes = t.lanes
-						return tt
+						return withUTurnLanes(TurnType.valueOf(TurnType.TU, true), result, i, t)
 					}
 				}
 			}
 		}
 		return null
+	}
+
+	/**
+	 * Direction of the road before the junction. A short previous segment gives a noisy bearing,
+	 * so the baseline is extended backwards while the road continues without junctions.
+	 */
+	private fun getBearingEndExtended(result: List<RouteSegmentResult>, i: Int, bearingDist: Float): Float {
+		val prev = result[i - 1]
+		var bearing = prev.getBearingEnd()
+		var length = if (prev.getDistance() > 0) prev.getDistance().toDouble() else bearingDist.toDouble()
+		var k = i - 2
+		while (k >= 0 && length < bearingDist) {
+			val before = result[k]
+			if (before.getDistance() <= 0 || before.getTurnType() != null
+				|| before.getAttachedRoutes(before.getEndPointIndex()).isNotEmpty()) {
+				// a junction in between, the road before it goes in another direction
+				break
+			}
+			bearing = before.getBearingEnd()
+			length += before.getDistance()
+			k--
+		}
+		return bearing
+	}
+
+	/**
+	 * The lanes of the turn that only begins the u turn were picked for that turn, so the reverse
+	 * lane is not among the active ones. They are taken again for the u turn the driver really makes.
+	 */
+	private fun withUTurnLanes(uTurn: TurnType, result: List<RouteSegmentResult>, i: Int, t: TurnType): TurnType {
+		val lanes = TurnLanes.getTurnLanesInfo(result[i - 1], result[i], uTurn.value)
+		uTurn.lanes = lanes ?: t.lanes
+		return uTurn
 	}
 
 	/** The road's name, falling back to the neighbour in the given direction when it has none. */
