@@ -55,8 +55,6 @@
     <string name="intermediate_waypoint">Промежуточная точка</string>
     <string name="intermediate_destinations">Промежуточные точки</string>
     <string name="arrive_at_time">Прибытие в %1$s</string>
-    <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
-    <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
     <string name="private_access_routing_req">Пункт назначения расположен на частной территории. Разрешить использование частных дорог на маршруте\?</string>
     <string name="restart_search">Искать снова</string>
     <string name="increase_search_radius">Увеличить радиус поиска</string>
@@ -277,7 +275,6 @@
     <string name="recording_unavailable">недоступно</string>
     <string name="recording_context_menu_arecord">Записать аудио</string>
     <string name="recording_context_menu_vrecord">Записать видео</string>
-    <string name="layer_recordings">Слой медиазаписей</string>
     <string name="recording_context_menu_play">Проиграть</string>
     <string name="recording_description">Запись %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запись</string>
@@ -285,7 +282,6 @@
     <string name="audionotes_location_not_defined">Нажмите «Использовать позицию…», чтобы добавить заметку к месту.</string>
     <string name="map_widget_audionotes">Аудиозаметки</string>
     <string name="audionotes_plugin_description">Создавайте в пути аудио-, видео- и фотозаметки, используя виджет или контекстное меню.</string>
-    <string name="audionotes_plugin_name">Аудио/видеозаметки</string>
     <string name="srtm_plugin_name">Ландшафт</string>
     <string name="rendering_attr_noAdminboundaries_name">Границы</string>
     <string name="rendering_attr_noAdminboundaries_description">Скрыть региональные границы (admin levels 5-9).</string>
@@ -1253,7 +1249,6 @@
     <string name="download_wikipedia_maps">Википедия</string>
     <string name="read_full_article">Открыть в Википедии</string>
     <string name="shared_string_import2osmand">Импорт в OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Удалить заметки (%1$d)\?</string>
     <string name="gps_network_not_enabled">Служба определения местоположения выключена. Включить?</string>
     <string name="lang_es_ar">Испанский (аргентинский)</string>
     <string name="lang_nb">Норвежский букмол</string>
@@ -1402,7 +1397,6 @@
     <string name="shared_string_update">Обновить</string>
     <string name="shared_string_upload">Отправить</string>
     <string name="osm_edit_created_poi">Создана OSM POI</string>
-    <string name="av_locations">Места</string>
     <string name="read_more">Подробнее</string>
     <string name="whats_new">Что нового в</string>
     <string name="save_poi_without_poi_type_message">Сохранить POI без указания типа\?</string>
@@ -1493,7 +1487,6 @@
     <string name="finish_navigation">Завершить навигацию</string>
     <string name="avoid_road">Избегать на маршруте</string>
     <string name="dashboard_or_drawer_description">Предлагается выбрать, прежде всего, управление приложением через гибкую панель управления или статическое меню. Ваш выбор всегда может быть изменён в настройках панели управления.</string>
-    <string name="watch">Просмотр</string>
     <string name="shared_string_add_to_map_markers">Добавить к маркерам</string>
     <string name="storage_directory_shared">Общее хранилище</string>
     <string name="access_shared_string_navigate_up">Перейти вверх</string>
@@ -1554,7 +1547,6 @@
     <string name="get_it">Получить</string>
     <string name="osm_live_banner_desc">Получите неограниченное количество скачиваний карт, а также еженедельные, ежедневные и даже почасовые обновления.</string>
     <string name="select_voice_provider">Голосовое сопровождение</string>
-    <string name="av_locations_descr">GPX-файл с координатами.</string>
     <string name="lang_ast">Астурийский</string>
     <string name="lang_hsb">Верхнелужицкий</string>
     <string name="lang_be_by">Белорусский (латиница)</string>
@@ -1799,11 +1791,6 @@
     <string name="marker_activated">Маркер %s активирован.</string>
     <string name="one_tap_active_descr">Нажатие на маркер на карте переместит его в начало списка активных маркеров, минуя контекстное меню.</string>
     <string name="one_tap_active">Активация одним нажатием</string>
-    <string name="empty_state_av_notes">Делайте заметки!</string>
-    <string name="empty_state_av_notes_desc">Добавьте аудио-, видео- или фотозаметки в любую точку на карте, используя виджет или контекстное меню.</string>
-    <string name="notes_by_date">Заметки по дате</string>
-    <string name="by_date">По дате</string>
-    <string name="by_type">По типу</string>
     <string name="modify_the_search_query">Измените ваш запрос.</string>
     <string name="osm_recipient_stat">Правок %1$s, сумма %2$s mBTC</string>
     <string name="osm_recipients_label">OSM получатели</string>
@@ -2417,7 +2404,6 @@
     <string name="live_monitoring">Онлайн-трекинг</string>
     <string name="save_track_logging_accuracy">Точность журналирования</string>
     <string name="tracks_view_descr">Записанные треки находятся в %1$s или папке OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Ваши OSM-заметки находятся в %1$s.</string>
     <string name="video_notes">Видеозаметки</string>
     <string name="photo_notes">Фотозаметки</string>
     <string name="plugin_global_prefs_info">Эти настройки плагина применяются ко всем профилям</string>

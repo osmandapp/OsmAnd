@@ -101,7 +101,7 @@ public class HelpArticleUtils {
 			case "plugins_accessibility":
 				return ctx.getString(R.string.shared_string_accessibility);
 			case "plugins_audio_video_notes":
-				return ctx.getString(R.string.audionotes_plugin_name);
+				return ctx.getString(R.string.shared_string_media);
 			case "plugins_development":
 				return ctx.getString(R.string.debugging_and_development);
 			case "plugins_external_sensors":

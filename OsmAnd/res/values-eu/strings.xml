@@ -74,7 +74,6 @@
     <string name="recording_unavailable">ez eskuragarri</string>
     <string name="recording_context_menu_arecord">Grabatu audio ohar bat</string>
     <string name="recording_context_menu_vrecord">Grabatu bideo ohar bat</string>
-    <string name="layer_recordings">Grabaketa geruza</string>
     <string name="recording_context_menu_play">Erreproduzitu</string>
     <string name="recording_description">%1$s %3$s %2$s grabatzen</string>
     <string name="recording_default_name">Grabatzen</string>
@@ -84,7 +83,6 @@
     <string name="audionotes_location_not_defined">Sakatu \"Erabili kokapena…\" oharra kokapenera gehitzeko.</string>
     <string name="map_widget_audionotes">Audio oharrak</string>
     <string name="audionotes_plugin_description">Hartu audio/argazki/bideo oharrak bidaian zehar, zuzenean mapan botoi bat erabiliz edo kokalekuaren araberako laster-menuan.</string>
-    <string name="audionotes_plugin_name">Audio/bideo oharrak</string>
     <string name="srtm_plugin_description">Lurzoruaren informazioa, hala nola sestra-kurbak, mendiko itzalak eta maldak, lur-erliebea, nabigagarritasuna eta abar ikusmenaren arabera ebaluatzen laguntzen dizu. Informazio topografikoa mapan malda itzalez, sestra-kurben bidez eta/edo malda-kolorearen bidez irudikatu daiteke. \n \nAzpiko datuak SRTM eta ASTER-en jatorria dira. \n \nIrakurketa gehiago %1$s helbidean.</string>
     <string name="srtm_plugin_name">Topografia</string>
     <string name="download_select_map_types">Beste mapak</string>
@@ -926,7 +924,6 @@
     <string name="shared_string_navigation">Nabigazioa</string>
     <string name="simulate_your_location_stop_descr">Utzi kokapena simulatzeari.</string>
     <string name="looking_up_address">Helbidea bilatzen</string>
-    <string name="av_locations">Kokapenak</string>
     <string name="plugin_settings">Gehigarriak</string>
     <string name="routing_attr_avoid_shuttle_train_name">Tren transbordadorerik ez</string>
     <string name="no_updates_available">Ez dago eguneraketarik eskuragarri</string>
@@ -975,7 +972,6 @@
     <string name="welmode_download_maps">Deskargatu mapak</string>
     <string name="welcome_header">Ongi etorri</string>
     <string name="current_route">Uneko ibilbidea</string>
-    <string name="local_recordings_delete_all_confirm">%1$d ohar ezabatu nahi dituzu\?</string>
     <string name="shared_string_go">Joan</string>
     <string name="osmand_parking_overdue">iraungita</string>
     <string name="action_create">Sortze ekintza</string>
@@ -1131,7 +1127,6 @@
     <string name="si_min_m">Minutu miliaro</string>
     <string name="si_nm_h">Itsas miliak orduko (korapiloak)</string>
     <string name="nm_h">kn</string>
-    <string name="av_locations_descr">GPX fitxategia kokalekuekin.</string>
     <string name="traffic_warning_hazard">Arriskua</string>
     <string name="rendering_value_boldOutline_name">Ingerada lodia</string>
     <string name="download_live_updates">Berehalako eguneraketak</string>
@@ -1252,7 +1247,6 @@
     <string name="lang_az">Azerbaijanera</string>
     <string name="lang_new">Newar / Nepal Bhasa</string>
     <string name="delay_to_start_navigation">Hasi biraz-birako jarraibideak hau eta gero…</string>
-    <string name="watch">Ikusi</string>
     <string name="search_radius_proximity">Erradioa</string>
     <string name="save_global_track_interval">Erregistro tarte orokorra</string>
     <string name="save_track_interval_globally">Erregistro-tartea</string>
@@ -1797,8 +1791,6 @@
     <string name="will_open_on">Irekitze-ordua</string>
     <string name="additional_actions">Ekintza gehigarriak</string>
     <string name="shared_string_without_name">Izenik gabe</string>
-    <string name="av_locations_selected_desc">Hautatutako oharren koordenatuak eta datuak dituen GPX fitxategia.</string>
-    <string name="av_locations_all_desc">Ohar guztien koordenatuak eta datuak dituen GPX fitxategia.</string>
     <string name="modify_the_search_query">Aldatu zure bilaketa.</string>
     <string name="shared_string_actions">Ekintzak</string>
     <string name="shared_string_marker">Markatzailea</string>
@@ -1810,11 +1802,6 @@
     <string name="marker_activated">%s markatzailea aktibatuta.</string>
     <string name="one_tap_active_descr">Sakatu markatzaile bat berau markatzaile aktiboen goialdera eramateko laster-menua ireki gabe.</string>
     <string name="one_tap_active">\'Ukitu bat\' aktibatuta</string>
-    <string name="empty_state_av_notes">Hartu oharrak!</string>
-    <string name="empty_state_av_notes_desc">Gehitu audioa, bideoa edo argazkia mapako edozein punturentzat, trepeta edo laster-menua erabiliz.</string>
-    <string name="notes_by_date">Audio/bideo oharrak datako</string>
-    <string name="by_date">Datako</string>
-    <string name="by_type">Motako</string>
     <string name="looking_for_tracks_with_waypoints">Bide-puntuak dituzten arrastoak bilatzen</string>
     <string name="shared_string_more_without_dots">Gehiago</string>
     <string name="appearance_on_the_map">Maparen itxura</string>
@@ -2564,7 +2551,6 @@
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="tracks_view_descr">Zure grabatutako arrastoak, %1$s, edo OsmAnd karpetan daude.</string>
-    <string name="multimedia_notes_view_descr">Zure OSM oharrak hemen zaude: %1$s.</string>
     <string name="video_notes">Bideo oharrak</string>
     <string name="photo_notes">Argazki oharrak</string>
     <string name="accessibility_announce">Iragarri</string>

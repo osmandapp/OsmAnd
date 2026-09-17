@@ -6,7 +6,6 @@
     <string name="recording_unavailable">ikke tilgængelig</string>
     <string name="recording_context_menu_arecord">Optag lydnote</string>
     <string name="recording_context_menu_vrecord">Optag videonote</string>
-    <string name="layer_recordings">Optagelser</string>
     <string name="recording_context_menu_play">Afspil</string>
     <string name="recording_description">Optagelse %1$s %3$s %2$s</string>
     <string name="recording_default_name">Optager</string>
@@ -14,7 +13,6 @@
     <string name="audionotes_location_not_defined">Tryk på \'Brug placering...\' for at tilføje en note til placeringen.</string>
     <string name="map_widget_audionotes">Lydnoter</string>
     <string name="audionotes_plugin_description">Tag lyd-/foto-/videnotater under en tur ved hjælp af enten en kortknap eller kontekstmenuen for stedet.</string>
-    <string name="audionotes_plugin_name">Lyd-/videonoter</string>
     <string name="srtm_plugin_description">Viser terræn og detaljeret topografi for en visuel forståelse af landskabets relief og fremkommelighed ved hjælp af konturlinjer, skyggeeffekter eller farvelægning af skråninger og en 3D-visning.\n \nFor at aktivere disse funktioner for en region skal du desuden downloade konturlinjer og/eller terrænkort (3D), der er sammensat af SRTM- og ASTER-data. \n \nYderligere oplysninger findes på %1$s.</string>
     <string name="srtm_plugin_name">Topografi</string>
     <string name="download_select_map_types">Andre kort</string>
@@ -879,7 +877,6 @@
     <string name="device_memory">Lagerplads</string>
     <string name="notes">A/V-noter</string>
     <string name="online_map">Online kort</string>
-    <string name="watch">Vis</string>
     <string name="share_note">Del note</string>
     <string name="plugin_touringview_name">Touring kortvisning</string>
     <string name="plugin_nautical_descr">Beriger dit kort med oplysninger om sejlruter, navigationslys, nautiske farezoner, zoner med sejlads- eller anløbsrestriktioner osv. For at bruge den skal du downloade de respektive nautiske kort og aktivere stilen \"Søkort\" under \"Konfigurer kort\".
@@ -1030,7 +1027,6 @@
     <string name="shared_string_show_details">Vis detaljer</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importer til OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Slet %1$d noter\?</string>
     <string name="disable_recording_once_app_killed">Forhindr selvstændig logning</string>
     <string name="gps_network_not_enabled">Placeringtjenesten er slukket. Slå det til\?</string>
     <string name="lang_vo">Volapük</string>
@@ -1110,8 +1106,6 @@
     <string name="next_proceed">Næste</string>
     <string name="opening_at">Åbner kl.</string>
     <string name="closing_at">Lukker</string>
-    <string name="av_locations_descr">GPX-fil med placeringer.</string>
-    <string name="av_locations">Placeringer</string>
     <string name="tab_title_basic">Grundlæggende</string>
     <string name="contact_info">Kontaktoplysninger</string>
     <string name="add_opening_hours">Tilføj åbningstider</string>
@@ -1794,14 +1788,7 @@
     <string name="marker_activated">Markør %s er aktiveret.</string>
     <string name="one_tap_active_descr">Tryk på en markør på kortet for at flytte den til toppen af de aktive markører uden at åbne kontekstmenuen.</string>
     <string name="one_tap_active">\'Et tryk\' aktivering</string>
-    <string name="empty_state_av_notes">Tag noter!</string>
-    <string name="empty_state_av_notes_desc">Tilføj lyd-, video- eller fotonoter til ethvert punkt på kortet ved hjælp af modul- eller kontekstmenuer.</string>
-    <string name="notes_by_date">A/V-noter efter dato</string>
-    <string name="by_date">Efter dato</string>
-    <string name="by_type">Efter type</string>
     <string name="modify_the_search_query">Ændr søgning.</string>
-    <string name="av_locations_selected_desc">GPX-fil med koordinaterne og data for de valgte noter.</string>
-    <string name="av_locations_all_desc">GPX-fil med koordinater og data for alle noter.</string>
     <string name="osm_recipient_stat">Redigeringer %1$s, sum %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-modtagere</string>
     <string name="total_donations">Samlede donationer</string>
@@ -2399,7 +2386,6 @@
     <string name="live_monitoring">Online sporing</string>
     <string name="save_track_logging_accuracy">Lognøjagtighed</string>
     <string name="tracks_view_descr">Dine optagede spor er i %1$s eller i OsmAnd-mappen.</string>
-    <string name="multimedia_notes_view_descr">Dine OSM-bemærkninger er i %1$s.</string>
     <string name="video_notes">Videonoter</string>
     <string name="photo_notes">Fotonoter</string>
     <string name="accessibility_announce">Meddel</string>

@@ -79,7 +79,6 @@
     <string name="recording_unavailable">kullanılamaz</string>
     <string name="recording_context_menu_arecord">Sesli bir not al</string>
     <string name="recording_context_menu_vrecord">Bir video notu al</string>
-    <string name="layer_recordings">Kayıt katmanı</string>
     <string name="recording_description">Kayıt %3$s nın %1$s %2$s</string>
     <string name="recording_default_name">Kayıt</string>
     <string name="shared_string_control_stop">Durdur</string>
@@ -88,7 +87,6 @@
     <string name="audionotes_location_not_defined">Konuma bir not eklemek için \'Konumu kullan…\' düğmesine dokunun.</string>
     <string name="map_widget_audionotes">Sesli notlar</string>
     <string name="audionotes_plugin_description">Bir harita düğmesi veya konum içerik menüsünü kullanarak yolculuk sırasında ses/fotoğraf/video notları alın.</string>
-    <string name="audionotes_plugin_name">Ses/video notları</string>
     <string name="srtm_plugin_name">Topoğrafya</string>
     <string name="download_select_map_types">Diğer haritalar</string>
     <string name="download_roads_only_item">Sadece yollar</string>
@@ -756,7 +754,6 @@
     <string name="shared_string_photo">Fotoğraf</string>
     <string name="back_to_map">Haritaya dön</string>
     <string name="share_note">Not paylaş</string>
-    <string name="watch">İzle</string>
     <string name="notes">Sesli/Görüntülü notlar</string>
     <string name="online_map">Çevrim içi harita</string>
     <string name="device_memory">Aygıt belleği</string>
@@ -787,7 +784,6 @@
     <string name="shared_string_import2osmand">OsmAnd\'a aktar</string>
     <string name="read_full_article">Tüm metni oku (çevrim içi)</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
-    <string name="local_recordings_delete_all_confirm">%1$d not silinsin mi\?</string>
     <string name="plugin_nautical_name">Deniz haritası görünümü</string>
     <string name="plugin_ski_name">Kayak haritası görünümü</string>
     <string name="text_size">Yazı boyutu</string>
@@ -814,8 +810,6 @@
     <string name="gpx_info_avg_altitude">Ortalama yükseklik: %1$s</string>
     <string name="rendering_value_pink_name">Pembe</string>
     <string name="rendering_value_brown_name">Kahverengi</string>
-    <string name="av_locations_descr">Konumlu GPX dosyası.</string>
-    <string name="av_locations">Lokasyonlar</string>
     <string name="plugin_settings">Eklentiler</string>
     <string name="routing_attr_avoid_shuttle_train_description">Shuttle trenlerini kullanmaktan kaçınır</string>
     <string name="traffic_warning_hazard">Tehlike</string>
@@ -1476,11 +1470,6 @@
     <string name="marker_activated">%s işaretleyicisi etkinleştirildi.</string>
     <string name="one_tap_active_descr">İçerik menüsünü açmadan, harita üzerinde bir belirtecin üzerine bas ve aktif belirteçlerin üzerine sürükle.</string>
     <string name="one_tap_active">\'Tek basış\' aktif</string>
-    <string name="empty_state_av_notes">Not alın!</string>
-    <string name="empty_state_av_notes_desc">Widget veya içerik menülerini kullanarak, haritadaki herhangi bir nokta için ses, video veya fotoğraf notları ekleyin.</string>
-    <string name="notes_by_date">Tarihe göre sesli/görüntülü notlar</string>
-    <string name="by_date">Tarihe göre</string>
-    <string name="by_type">Türe göre</string>
     <string name="shared_string_more_without_dots">Daha fazla</string>
     <string name="appearance_on_the_map">Harita üzerinde görünüm</string>
     <string name="favourites_group">Favoriler kategorisi</string>
@@ -2051,8 +2040,6 @@
     <string name="show_arrows_descr">Etkin işaretleyicilerin yönünü belirten bir veya iki ok gösterin.</string>
     <string name="empty_state_markers_groups_desc">Sık kullanılan grupları ya da ara noktaları işaretleyici olarak içe aktarın.</string>
     <string name="empty_state_markers_history_desc">Geçildi olarak işaretlenen işaretleyiciler bu ekranda görünecektir.</string>
-    <string name="av_locations_selected_desc">Koordinatlar ve seçilen notların verileri olan GPX dosyası.</string>
-    <string name="av_locations_all_desc">Koordinatlar ve tüm notların verileri olan GPX dosyası.</string>
     <string name="osm_recipient_stat">%1$s düzenleme, toplam %2$s mBTC</string>
     <string name="what_is_here">Burada ne var:</string>
     <string name="parked_at">park edilmiş</string>
@@ -2536,7 +2523,6 @@
     <string name="app_mode_osm">OSM</string>
     <string name="logcat_buffer_descr">Uygulamanın ayrıntılı günlük kayıtlarına göz atın ve paylaşın</string>
     <string name="tracks_view_descr">Kayıtlı yollarınız %1$s veya OsmAnd klasöründe.</string>
-    <string name="multimedia_notes_view_descr">OSM notlarınız %1$s içindedir.</string>
     <string name="permission_is_required">Bu seçeneği kullanmak için izin gereklidir.</string>
     <string name="monitoring_min_speed_descr">Bu, belirli bir hızın altındaki noktaları kaydetmemek için bir düşük hızda kesme filtresidir. Bu, harita üzerinde görüntülendiğinde kaydedilen yolların daha düzgün görünmesini sağlayabilir.</string>
     <string name="monitoring_min_speed_descr_side_effect">Yan etki: Kaydedilen yolunuzda en düşük hız kriterinin karşılanmadığı tüm bölümler eksik olacaktır (örn. bisikletinizi dik bir tepeye doğru ittiğiniz yer). Ayrıca, molalar gibi dinlenme süreleri hakkında hiçbir bilgi olmayacaktır. Bunun, seyahatinizin toplam uzunluğunu, hareket zamanını veya ortalama hızınızı belirlemeye çalışırken olduğu gibi herhangi bir inceleme veya sonrasındaki işlemler üzerinde etkileri vardır.</string>

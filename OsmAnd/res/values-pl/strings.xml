@@ -585,7 +585,6 @@
     <string name="srtm_plugin_name">Topografia</string>
     <string name="srtm_plugin_description">Informacje o terenie, takie jak linie konturowe, odcienie wzgórz i stoki, pomagają wizualnie ocenić układ terenu i rzeźbę terenu, żeglowność i inne. Informacje topograficzne mogą być na mapie reprezentowane przez cieniowanie stoków, linie konturowe i/lub kolorystykę stromości. \n \nDane bazowe pochodzą z SRTM i ASTER. \n \nWięcej informacji na stronie %1$s.</string>
     <string name="audionotes_plugin_description">Rób notatki audio/zdjęcia/wideo podczas podróży, używając przycisku mapy lub menu kontekstowego lokalizacji.</string>
-    <string name="audionotes_plugin_name">Uwagi audio/wideo</string>
     <string name="audionotes_location_not_defined">Naciśnij „Użyj położenia…”, aby dodać uwagę do lokalizacji.</string>
     <string name="map_widget_audionotes">Uwagi z audio</string>
     <string name="av_def_action_video">Nagranie filmu</string>
@@ -593,7 +592,6 @@
     <string name="av_video_format">Format wideo</string>
     <string name="recording_error">Nagrywanie nie powiodło się</string>
     <string name="recording_unavailable">niedostępne</string>
-    <string name="layer_recordings">Warstwa nagrywania</string>
     <string name="recording_context_menu_play">Odtwórz</string>
     <string name="recording_description">Nagranie %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nagranie</string>
@@ -1009,7 +1007,6 @@
 \nNie potrzeba pobierać specjalnej mapy, ten widok jest tworzony z map standardowych. 
 \n 
 \nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy.</string>
-    <string name="watch">Oglądaj</string>
     <string name="rendering_attr_pisteGrooming_name">Ratrakowanie</string>
     <string name="remove_the_tag">Usuń znacznik</string>
     <string name="version_settings">Kompilacje</string>
@@ -1070,7 +1067,6 @@
     <string name="read_full_article">Czytaj cały artykuł (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="shared_string_show_details">Wyświetl szczegóły</string>
-    <string name="local_recordings_delete_all_confirm">Usunąć %1$d uwag\?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="light_theme">Jasny</string>
     <string name="dark_theme">Ciemny</string>
@@ -1128,7 +1124,6 @@
     <string name="successfully_uploaded_pattern">Wysłano {0}/{1}</string>
     <string name="try_again">Spróbuj ponownie</string>
     <string name="error_message_pattern">Błąd: {0}</string>
-    <string name="av_locations">Położenia</string>
     <string name="plugin_settings">Wtyczki</string>
     <string name="routing_attr_avoid_shuttle_train_name">Bez pociągu wahadłowego</string>
     <string name="routing_attr_avoid_shuttle_train_description">Unika korzystania z pociągów wahadłowych</string>
@@ -1142,7 +1137,6 @@
     <string name="poi_dialog_poi_type">Rodzaj użytecznego miejsca</string>
     <string name="poi_action_delete">usuń</string>
     <string name="building_number">Numer budynku</string>
-    <string name="av_locations_descr">Plik GPX z lokalizacjami.</string>
     <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
     <string name="download_live_updates">Aktualizowanie na bieżąco</string>
     <string name="tab_title_basic">Podstawowe</string>
@@ -1783,8 +1777,6 @@
     <string name="shared_string_actions">Czynności</string>
     <string name="shared_string_marker">Znacznik</string>
     <string name="marker_activated">Uaktywniono znacznik %s.</string>
-    <string name="by_date">Według daty</string>
-    <string name="by_type">Według rodzaju</string>
     <string name="parked_at">zaparkowano o</string>
     <string name="without_time_limit">Bez ograniczenia czasu</string>
     <string name="context_menu_points_of_group">Wszystkie punkty w grupie</string>
@@ -1792,9 +1784,6 @@
     <string name="what_is_here">Co tu jest:</string>
     <string name="context_menu_read_full_article">Czytaj cały artykuł</string>
     <string name="context_menu_read_article">Czytaj artykuł</string>
-    <string name="empty_state_av_notes">Notuj!</string>
-    <string name="empty_state_av_notes_desc">Dodaj uwagi audio, wideo lub zdjęcia do dowolnego punktu na mapie za pomocą widżetów lub menu kontekstowego.</string>
-    <string name="notes_by_date">Uwagi A/V według daty</string>
     <string name="empty_state_markers_groups">Importuj grupy</string>
     <string name="add_favourites_group_to_markers_descr">Wybierz kategorię Ulubione, aby dodać znaczniki.</string>
     <string name="tap_on_map_to_hide_interface_descr">Dotknięcie na mapie włącza lub wyłącza przyciski sterowania i widżety.</string>
@@ -1820,8 +1809,6 @@
     <string name="choose_file_type">Wybierz typ pliku</string>
     <string name="all_data">Wszystkie dane</string>
     <string name="osm_notes">Uwagi OSM</string>
-    <string name="av_locations_selected_desc">Plik GPX ze współrzędnymi i danymi wybranych uwag.</string>
-    <string name="av_locations_all_desc">Plik GPX ze współrzędnymi i danymi wszystkich uwag.</string>
     <string name="modify_the_search_query">Zmień wyszukiwanie.</string>
     <string name="one_tap_active_descr">Dotknięciem znacznika na mapie przenosi go na górę listy aktywnych znaczników, bez otwierania menu kontekstowego.</string>
     <string name="one_tap_active">Aktywacja jednym dotknięciem</string>
@@ -2516,7 +2503,6 @@
     <string name="monitoring_min_accuracy_descr">Spowoduje to rejestrowanie tylko punktów mierzonych przy minimalnym wskaźniku dokładności (w metrach/stopach, zgodnie z raportem systemu Android dla Twojego chipsetu). Dokładność to bliskość pomiarów do rzeczywistej pozycji i nie jest bezpośrednio związana z precyzją, która jest rozrzutem powtarzanych pomiarów.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Zalecenie: trudno jest przewidzieć, jakie dane zostaną zarejestrowane, a jakie nie. Możliwe, że najlepiej będzie wyłączyć ten filtr.</string>
     <string name="monitoring_min_distance_descr">Włączenie tego filtra pozwala uniknąć dodatkowego rejestrowania danych, gdy ruch jest prawie niewykryty. Poprawia również przestrzenny wygląd ścieżek bez dalszej obróbki.</string>
-    <string name="multimedia_notes_view_descr">Twoje uwagi OSM są w %1$s.</string>
     <string name="osm_authorization_success">Uwierzytelniono</string>
     <string name="monitoring_min_speed_descr_side_effect">Efekt uboczny: trasa nie będzie zawierała sekcji, w których nie zostało spełnione kryterium minimalnej prędkości (np. podczas pchania roweru pod strome wzgórze). Nie będzie również zawierała informacji o czasach odpoczynku, np. przerwach. Ma to wpływ na analizę i przetwarzanie końcowe, np. przy próbie określenia całkowitej długości trasy, czasu w ruchu lub średniej prędkości.</string>
     <string name="rearrange_categories">Zmień układ kategorii</string>

@@ -197,11 +197,9 @@
     <string name="intermediate_points_change_order">تغيير الفرز</string>
     <string name="recording_context_menu_arecord">خذ ملاحظة صوتية</string>
     <string name="recording_context_menu_vrecord">خذ ملاحظة فيديو</string>
-    <string name="layer_recordings">طبقة التسجيل</string>
     <string name="recording_description">تسجيل %1$s %3$s %2$s</string>
     <string name="map_widget_av_notes">ملاحظات صوت/فيديو</string>
     <string name="audionotes_plugin_description">هذا الملحق يوفر وظائف لتدوين ملاحظات صوتية/مصورة/فيديو خلال الرحلة، سواء باستخدام زر على شاشة الخريطة، أو مباشرة من القائمة لأي موقع على الخريطة.</string>
-    <string name="audionotes_plugin_name">ملاحظات صوت/فيديو</string>
     <string name="download_roads_only_maps">خرائط الطرقات فقط</string>
     <string name="rendering_attr_noAdminboundaries_description">منع عرض الحدود الإقليمية (المستويات الإدارية من 5-9).</string>
     <string name="rendering_attr_showRoadMaps_description">تحديد وقت عرض خرائط الطرقات فقط :</string>
@@ -607,7 +605,6 @@
     <string name="welmode_download_maps">إدارة الخرائط</string>
     <string name="shared_string_add_to_favorites">إضافة إلى المفضلة</string>
     <string name="shared_string_my_places">المعالم المفضلة</string>
-    <string name="watch">شاهد</string>
     <string name="routing_attr_no_new_routing_name">قواعد توجيه No v1.9</string>
     <string name="navigate_point_northing">نحو الشمال</string>
     <string name="home_button">المنزل</string>
@@ -1103,8 +1100,6 @@
     <string name="no_address_found">لم يتم تحديد عنوان</string>
     <string name="shared_string_location">الموقع</string>
     <string name="share_menu_location">مشاركة الموقع</string>
-    <string name="av_locations_descr">ملف GPX مرفق بملاحظات عن المواقع و الأماكن.</string>
-    <string name="av_locations">المواقع</string>
     <string name="gps_network_not_enabled">خدمة تحديد الموقع موقفة. هل تريد تشغيلها ؟</string>
     <string name="update_now">حدث الآن</string>
     <string name="available_maps">الخرائط الموجودة</string>
@@ -1310,7 +1305,6 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">الانتماء لشبكة الاتصال</string>
     <string name="rendering_value_walkingRoutesOSMC_name">تلوين وفق رمز تنزه OSMC</string>
     <string name="shared_string_logoff">خروج</string>
-    <string name="local_recordings_delete_all_confirm">حذف %1$d ملاحظة؟</string>
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1).</string>
     <string name="rendering_attr_hideWoodScrubs_name">خشب وشجيرات</string>
     <string name="lang_hu_formal">المجرية (الرسمية)</string>
@@ -1769,7 +1763,6 @@
     <string name="modify_the_search_query">تعديل طلب البحث.</string>
     <string name="marker_activated">تم تنشيط التوجيه المباشر %s.</string>
     <string name="one_tap_active_descr">انقر على التوجيه المباشر في الخريطة لجعله الاعلى بدون فتح القائمة.</string>
-    <string name="empty_state_av_notes">تدوين ملاحظات!</string>
     <string name="without_time_limit">بدون حد زمني</string>
     <string name="context_menu_read_full_article">اقرأ المقال كاملا</string>
     <string name="context_menu_read_article">قراءة المقال</string>
@@ -1782,9 +1775,6 @@
     <string name="additional_actions">إجراءات إضافية</string>
     <string name="shared_string_actions">إجراءات</string>
     <string name="shared_string_marker">توجيه مباشر</string>
-    <string name="notes_by_date">الملاحظات حسب التاريخ</string>
-    <string name="by_date">حسب التاريخ</string>
-    <string name="by_type">حسب النوع</string>
     <string name="shared_string_more_without_dots">المزيد</string>
     <string name="appearance_on_the_map">التوجيه المباشر</string>
     <string name="shared_string_gpx_waypoints">نقاط المسار</string>
@@ -1972,10 +1962,7 @@
     <string name="default_render_descr">الغرض العام. إظهار المدن الكثيفة بشكل واضح. بخطوط الكنتور ، والطرق ، وجودة السطح ، وقيود الوصول ، ودروع الطرق ، وعرض المسارات وفقا لمقياس SAC / CAI ، وميزات رياضة الماء الأبيض.</string>
     <string name="travel_card_download_descr">قم بتنزيل إرشادات السفر هذه من ويكي الرحلات لعرض مقالات حول الأماكن في العالم بدون إنترنت.</string>
     <string name="welcome_to_open_beta_description">دليل السفر حاليا على أساس Wikivoyage. اختبار كافة الميزات أثناء اختبار بيتا المفتوحة مجانا.</string>
-    <string name="av_locations_selected_desc">ملف GPX مع الإحداثيات والبيانات من الملاحظات المحددة.</string>
-    <string name="av_locations_all_desc">ملف GPX مع الإحداثيات والبيانات من كافة الملاحظات.</string>
     <string name="one_tap_active">انقر لتنشيط توجيه الهدف</string>
-    <string name="empty_state_av_notes_desc">إضافة ملاحظة صوتية أو فيديو أو صورة لكل نقطة على الخريطة، باستخدام القائمة السفلية أو الملحق.</string>
     <string name="looking_for_tracks_with_waypoints">ابحث عن المسارات مع نقاط الطريق</string>
     <string name="add_track_to_markers_descr">حدد مسار لإضافة نقاط الطريق إلى العلامات(يتم سرد المسارات فقط مع نقاط الطريق).</string>
     <string name="empty_state_markers_active_desc">نقرة طويلة أو قصيرة على الأماكن ثم اضغط على زر التوجيه المباشر.</string>
@@ -2404,7 +2391,6 @@
     <string name="permission_is_required">الإذن مطلوب لاستخدام هذا الخيار.</string>
     <string name="monitoring_min_speed_descr_side_effect">اعراض جانبية: سيفقد المسار الخاص بك جميع الأقسام التي لم يتحقق فيها معيار الحد الأدنى للسرعة (على سبيل المثال ، حيث تدفع دراجتك أعلى تل شديد الانحدار). أيضا ، لن تكون هناك معلومات حول فترات الراحة ، مثل الاستراحات. هذا له تأثيرات على أي تحليل أو مرحلة ما بعد المعالجة ، مثل عند محاولة تحديد المدة الإجمالية لرحلتك ، أو وقت الحركة ، أو متوسط سرعتك.</string>
     <string name="tracks_view_descr">المسارات المسجلة الخاصة بك هي في %1$s، أو مجلد أوسماند.</string>
-    <string name="multimedia_notes_view_descr">ملاحظات OSM موجودة في%1$s.</string>
     <string name="osm_edits_view_descr">عرض كل التعديلات التي لم يتم تحميلها أو أخطاء OSM في %1$s. التغييرات التي تم رفعها فعلا لن تظهر بعد الآن.</string>
     <string name="monitoring_min_speed_descr">مرشح قطع سرعة منخفضة لعدم تسجيل نقاط أقل من سرعة معينة. وهذا قد يجعل المسارات المسجلة تبدو أكثر سلاسة عند عرضها على الخريطة.</string>
     <string name="monitoring_min_speed_descr_recommendation">التوصية: حاول استخدام كشف الحركة عبر مرشح الحد الأدنى للإزاحة للتسجيل (B) أولاً ، فقد ينتج عنه نتائج أفضل ، ويستهلك بيانات أقل. إذا استمرت المسارات الخاصة بك مزعجة عند السرعات المنخفضة ، فجرب القيم غير الصفرية هنا. يرجى ملاحظة أن بعض القياسات قد لا تبلغ عن أي قيمة سرعة على الإطلاق (بعض الطرق المستندة إلى الشبكة) ، وفي هذه الحالة لن تسجل أي شيء.</string>

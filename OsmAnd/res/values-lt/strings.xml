@@ -552,7 +552,6 @@
     <string name="download_select_map_types">Kiti žemėlapiai</string>
     <string name="download_srtm_maps">SRTM žemėlapiai</string>
     <string name="audionotes_plugin_description">Padarykite garso / nuotraukų / vaizdo įrašus kelionės metu naudodami žemėlapio mygtuką arba vietos kontekstinį meniu.</string>
-    <string name="audionotes_plugin_name">Audio užrašų įskiepis</string>
     <string name="audionotes_location_not_defined">Pasirinkite „Naudoti vietą …“ pridėti pastabą specifinei vietai.</string>
     <string name="map_widget_audionotes">Audio užrašai</string>
     <string name="av_def_action_video">Įrašyti vaizdą</string>
@@ -562,7 +561,6 @@
     <string name="recording_unavailable">neprieinama</string>
     <string name="recording_context_menu_arecord">Įrašyti audio žinutę</string>
     <string name="recording_context_menu_vrecord">Įrašyti vaizdo žinutę</string>
-    <string name="layer_recordings">Įrašų sluoksnis</string>
     <string name="recording_context_menu_play">Groti</string>
     <string name="recording_description">Įrašas %1$s %3$s %2$s</string>
     <string name="recording_default_name">Įrašas</string>
@@ -933,7 +931,6 @@
     <string name="plugin_nautical_name">Jūriniai žemėlapiai</string>
     <string name="device_memory">Įrenginio atmintis</string>
     <string name="free">Laisva %1$s</string>
-    <string name="watch">Žiūrėti</string>
     <string name="notes">Pastabos</string>
     <string name="online_map">Žemėlapis online</string>
     <string name="shared_string_audio">Garsas</string>
@@ -1030,7 +1027,6 @@
     <string name="read_full_article">Skaityti visą straipsnį (internete)</string>
     <string name="shared_string_wikipedia">Vikipedija</string>
     <string name="shared_string_show_details">Rodyti detales</string>
-    <string name="local_recordings_delete_all_confirm">Ketinate ištrinti %1$d pastabas. Ar tikrai to norite?</string>
     <string name="download_wikipedia_maps">Vikipedija</string>
     <string name="light_theme">Šviesi</string>
     <string name="dark_theme">Tamsi</string>
@@ -1102,7 +1098,6 @@
     <string name="shared_string_undo">Atšaukti</string>
     <string name="shared_string_card_was_hidden">Kortelė paslėpta</string>
     <string name="plugin_settings">Įskiepiai</string>
-    <string name="av_locations">Vietovės</string>
     <string name="building_number">Pastato numeris</string>
     <string name="next_proceed">Toliau</string>
     <string name="add_opening_hours">Pridėti darbo valandas</string>
@@ -1174,7 +1169,6 @@
     <string name="simulate_initial_startup">Imituoti pirmą programos paleidimą</string>
     <string name="simulate_your_location_stop_descr">Išjungti mano pozicijos simuliavimą.</string>
     <string name="simulate_your_location_descr">Simuliuoti jūsų vietą naudojant apskaičiuotą maršrutą ar įrašytą GPX.</string>
-    <string name="av_locations_descr">GPX failas su užrašų vietomis.</string>
     <string name="favourites_context_menu_add">Pridėti įsimintą vietą</string>
     <string name="favourites">Įsimintos vietos</string>
     <string name="show_free_version_banner">Rodyti nemokamos versijos pranešimą</string>
@@ -1693,9 +1687,6 @@
     <string name="shared_string_added">Pridėta</string>
     <string name="marker_activated">Žymeklis %s aktyvuotas.</string>
     <string name="one_tap_active">Aktyvavimas \"vienu lietimu\"</string>
-    <string name="empty_state_av_notes">Kurkite pastabas!</string>
-    <string name="by_date">Pagal datą</string>
-    <string name="by_type">Pagal tipą</string>
     <string name="shared_string_more_without_dots">Daugiau</string>
     <string name="add_group">Pridėti grupę</string>
     <string name="empty_state_markers_active">Sukurk žemėlapio žymeklius!</string>
@@ -1716,7 +1707,6 @@
     <string name="show_arrows_on_the_map">Rodyti rodykles žemėlapyje</string>
     <string name="show_passed">Rodyti praeitą</string>
     <string name="hide_passed">Slėpti praeitą</string>
-    <string name="notes_by_date">Užrašai pagal datą</string>
     <string name="appearance_on_the_map">Išvaizda žemėlapyje</string>
     <string name="will_open_tomorrow_at">Atsidarys rytoj</string>
     <string name="rendering_attr_hidePOILabels_name">LV pavadinimai</string>
@@ -1734,13 +1724,10 @@
     <string name="will_open_at">Atsidaro</string>
     <string name="will_open_on">Atsidaro</string>
     <string name="additional_actions">Papildomi veiksmai</string>
-    <string name="av_locations_selected_desc">GPX failas su koordinačių ir pasirinktų pastabų duomenimis.</string>
-    <string name="av_locations_all_desc">GPX failas su koordinačių ir visų pastabų duomenimis.</string>
     <string name="shared_string_actions">Veiksmai</string>
     <string name="shared_string_marker">Žymeklis</string>
     <string name="empty_state_osm_edits_descr">Kurkite arba keiskite OSM LV-as, užrašykite arba komentuokite OSM pastabas bei dalinkitės įrašytais GPX failais.</string>
     <string name="one_tap_active_descr">Spustelėkite žymeklį ant žemėlapio norėdami jį perkelti į aktyvių žymeklių sarašo viršų neatveriant kontekstinio meniu.</string>
-    <string name="empty_state_av_notes_desc">Pridėkite garso, vaizdo įrašą ar nuotrauką kiekviename žemėlapio taške naudodami valdiklį arba kontekstinį meniu.</string>
     <string name="add_favourites_group_to_markers_descr">Pasirinkite pamėgtų kategoriją norėdami įtraukti į žymeklius.</string>
     <string name="show_number_pad">Rodyti skaičių klaviatūrą</string>
     <string name="mark_passed">Pažymėti kaip praeitą</string>

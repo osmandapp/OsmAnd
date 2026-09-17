@@ -251,8 +251,6 @@
     <string name="add_group">Ychwanegu grŵp</string>
     <string name="appearance_on_the_map">Ymddangosiad ar y map</string>
     <string name="shared_string_more_without_dots">Mwy</string>
-    <string name="by_type">Yn ôl math</string>
-    <string name="by_date">Yn ôl dyddiad</string>
     <string name="shared_string_added">Ychwanegwyd</string>
     <string name="shared_string_edited">Golygwyd</string>
     <string name="shared_string_deleted">Dileuwyd</string>
@@ -525,7 +523,6 @@
     <string name="osm_live_subscribe_btn">Tanysgrifio</string>
     <string name="shared_string_widgets">Teclynnau</string>
     <string name="shared_string_send">Anfon</string>
-    <string name="av_locations">Lleoliadau</string>
     <string name="lang_sq">Albanieg</string>
     <string name="lang_ku">Cwrdeg</string>
     <string name="shared_string_wikipedia">Wicipedia</string>
@@ -777,7 +774,6 @@
     <string name="recording_photo_description">Llun %1$s %2$s</string>
     <string name="recording_unavailable">dim ar gael</string>
     <string name="av_video_format">Fformat allbwn fideo</string>
-    <string name="layer_recordings">Haen recordio</string>
     <string name="recording_context_menu_arecord">Gwneud nodyn sain</string>
     <string name="recording_context_menu_vrecord">Gwneud nodyn fideo</string>
     <string name="recording_error">Methodd y recordio</string>
@@ -1149,7 +1145,6 @@
     <string name="shared_string_favorites">Ffefrynnau</string>
     <string name="shared_string_tracks">Traciau</string>
     <string name="audionotes_plugin_description">Gwnewch nodiadau sain/llun/fideo yn ystod taith, naill ai gyda botwm map neu ddewislen cyd-destun lleoliad.</string>
-    <string name="watch">Gwylio</string>
     <string name="home">Dashfwrdd</string>
     <string name="lang_cy">Cymraeg</string>
     <string name="intermediate_points_change_order">Newid trefn</string>
@@ -1164,7 +1159,6 @@
     <string name="nautical_depth">Dyfnder morol</string>
     <string name="shared_string_filters">Hidlyddion</string>
     <string name="srtm_plugin_name">Cyfuchliniau</string>
-    <string name="audionotes_plugin_name">Nodiadau sain / fideo</string>
     <string name="speak_speed_limit">Terfyn cyflymder</string>
     <string name="shared_string_target_points">Cyrchfannau</string>
     <string name="gpx_tags_txt">Tagiau</string>
@@ -2109,7 +2103,6 @@
     <string name="process_downloading_service">Gwasanaeth lawrlwytho OsmAnd</string>
     <string name="profile_type_descr_string">Math: %s</string>
     <string name="profile_alert_cant_delete_base">Ni ellir dileu proffiliau craidd OsmAnd</string>
-    <string name="empty_state_av_notes_desc">Ychwanegwch nodiadau sain, video neu luniau at unrhyw bwynt ar y map gan ddefnyddio\'r dewislenni cyd-destun neu ategion.</string>
     <string name="move_all_to_history">Symud y cwbl i\'r hanes</string>
     <string name="animate_my_location">Animeiddio fy lleoliad</string>
     <string name="map_screen_orientation">Gorweddiad y sgrin</string>
@@ -2705,7 +2698,6 @@
     <string name="sunrise_at">Codiad haul am %1$s</string>
     <string name="monitoring_min_speed">Isafswm cyflymder</string>
     <string name="import_routing_file">Mewnforio ffeil llwybro</string>
-    <string name="multimedia_notes_view_descr">Mae eich nodiadau OSM yn %1$s.</string>
     <string name="reset_confirmation_descr">Mae tapio %1$s yn dileu eich holl newidiadau.</string>
     <string name="monitoring_min_distance_descr_side_effect">Sgil effeithiau: Nid yw cyfnodau o orffwys yn cael eu cofnodi o gwbl neu o un pwynt yr un yn unig. Mae’n bosibl y bydd symudiadau bach (byd go iawn) (e.e. i’r ochr, i nodi troad posibl ar eich taith) yn cael eu hidlo allan. Mae eich ffeil yn cynnwys llai o wybodaeth ar gyfer ôl-brosesu, ac mae ganddi ystadegau gwaeth trwy hidlo pwyntiau sy\'n amlwg yn ddiangen ar amser cofnodi, tra\'n cadw o bosibl arteffactau a achosir gan dderbyniad gwael neu effeithiau chipset GPS.</string>
     <string name="shared_string_mode">Modd</string>
@@ -2898,7 +2890,6 @@
     <string name="saved_articles">Erthyglau â nod tudalen</string>
     <string name="wikivoyage_search_hint">Chwilio am wlad, dinas neu dalaith</string>
     <string name="osm_notes">Nodiadau OSM</string>
-    <string name="av_locations_selected_desc">Ffeil GPX gyda chyfesurynnau a data\'r nodiadau a ddewiswyd.</string>
     <string name="route_calculation">Cyfrifo\'r llwybr</string>
     <string name="rendering_value_dark_brown_name">Brown tywyll</string>
     <string name="edit_filter">Golygu categorïau</string>
@@ -2907,7 +2898,6 @@
     <string name="distance_farthest">Y pellaf yn gyntaf</string>
     <string name="distance_nearest">Yr agosaf yn gyntaf</string>
     <string name="what_is_here">Beth sydd yma:</string>
-    <string name="empty_state_av_notes">Gwnewch nodiadau!</string>
     <string name="import_as_gpx">Mewnforio fel ffeil GPX</string>
     <string name="wrong_input">Mewnbwn anghywir</string>
     <string name="gpx_logging_no_data">Dim data</string>
@@ -2953,7 +2943,6 @@
     <string name="shared_string_gpx_file">Ffeil GPX</string>
     <string name="delete_search_history">Dileu hanes chwilio</string>
     <string name="osc_file_desc">OSC - addas i\'w allforio i OpenStreetMap.</string>
-    <string name="av_locations_all_desc">Ffeil GPX gyda chyfesurynnau a data\'r holl nodiadau.</string>
     <string name="route_is_calculated">Llwybr wedi\'i gyfrifo</string>
     <string name="context_menu_item_modify_note">Addasu nodyn OSM</string>
     <string name="nm">nmi</string>
@@ -2967,7 +2956,6 @@
     <string name="article_removed">Erthygl wedi\'i dileu</string>
     <string name="coords_format">Fformat cyfesurynnau</string>
     <string name="shared_string_is_open_24_7">Ar agor 24/7</string>
-    <string name="local_recordings_delete_all_confirm">Dileu %1$d nodyn\?</string>
     <string name="save_track_interval_globally">Cyfnod logio</string>
     <string name="send_search_query">Anfon ymholiad chwilio\?</string>
     <string name="data_is_not_available">Data ddim ar gael</string>
@@ -3105,7 +3093,6 @@
     <string name="osn_add_dialog_error">Methu creu nodyn.</string>
     <string name="share_osm_edits_subject">Golygiadau OSM a rennir trwy OsmAnd</string>
     <string name="looking_up_address">Chwilio am gyfeiriad</string>
-    <string name="av_locations_descr">Ffeil GPX gyda lleoliadau.</string>
     <string name="lang_pms">Piedmonaidd</string>
     <string name="lang_sh">Serbo-Croateg</string>
     <string name="lang_ceb">Cebuano</string>
@@ -3179,7 +3166,6 @@
     <string name="start_editing_card_image_text">Y canllaw teithio byd-eang rhad ac am ddim y gall unrhyw un ei olygu.</string>
     <string name="monthly_map_updates">Diweddariadau map misol</string>
     <string name="osm_edits_export_desc">Allforio fel nodiadau OSM, POIs, neu\'r ddau.</string>
-    <string name="notes_by_date">Nodiadau A/V yn ôl dyddiad</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Dim ffyrdd iâ na rhydiau</string>
     <string name="selected_categories">Categorïau dethol</string>
     <string name="create_custom_poi">Creu hidlydd cyfaddas</string>

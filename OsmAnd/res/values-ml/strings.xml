@@ -19,7 +19,6 @@
     <string name="shared_string_location">സ്ഥാനം</string>
     <string name="nm">നോ. മൈല്‍</string>
     <string name="si_nm">നോട്ടിക്കല്‍ മൈല്‍</string>
-    <string name="av_locations">സ്ഥലങ്ങള്‍</string>
     <string name="rendering_value_orange_name">ഓറഞ്ച്</string>
     <string name="shared_string_wikipedia">വിക്കിപീഡിയ</string>
     <string name="rendering_value_disabled_name">നിര്‍ജ്ജീവമാക്കിയ</string>
@@ -334,12 +333,10 @@
     <string name="av_audio_bitrate_descr">ശബ്ദ നിലവാരം തെരഞ്ഞെടുക്കുക</string>
     <string name="access_from_map_description">മെനുബട്ടണ്‍ മെനുവിന് പകരം ഡാഷ് ബോര്‍ഡ് തുറക്കും</string>
     <string name="access_from_map">ഭൂപടത്തില്‍ നിന്നു പ്രവേശിക്കുക</string>
-    <string name="av_locations_descr">സ്ഥലക്കുറിപ്പുകളോടെയുള്ള ജിപിഎക്സ് ഫയല്‍.</string>
     <string name="light_theme">പ്രകാശമയം</string>
     <string name="agps_info">അസിസ്റ്റഡ് ജിപിഎസ് വിവരങ്ങള്‍</string>
     <string name="action_create">സൃഷ്ടിക്കുക</string>
     <string name="action_modify">നവീകരിക്കുക</string>
-    <string name="audionotes_plugin_name">ഓഡിയോ/വീഡിയോ കുറിപ്പുകള്‍</string>
     <string name="avoid_roads_msg">"നിങ്ങള്‍ക്ക് ചില വഴികള്‍ തെരഞ്ഞൊഴിവാക്കി പുതിയ റൂട്ട് കണ്ട്പിടിക്കാവുന്നതാണ് "</string>
     <string name="live_monitoring_start">ഓണ്‍ലൈന്‍ റിക്കോഡിങ്ങ് ആരംഭിക്കൂ</string>
     <string name="live_monitoring_stop">"ഓണ്‍ലൈന്‍ റിക്കോഡിങ്ങ് നിര്‍ത്തുക "</string>
@@ -1088,7 +1085,6 @@
     <string name="prefer_in_routing_title">ഇഷ്ടങ്ങള്‍…</string>
     <string name="recording_context_menu_arecord">ശബ്ദം കുറിപ്പ് എടുക്കുക</string>
     <string name="recording_context_menu_vrecord">വീഡിയോ കുറിപ്പ് എടുക്കുക</string>
-    <string name="layer_recordings">റിക്കോഡിങ്ങ് പാളീ</string>
     <string name="poi_filter_food_shop">കട(ആഹാരം)</string>
     <string name="poi_filter_fuel">"ഇന്ധനം "</string>
     <string name="osmand_play_title_30_chars">ഓഎസ്എംആന്ഡ് ഭൂപടങ്ങളും വഴികാട്ടിയും</string>
@@ -1135,7 +1131,6 @@
     <string name="osmand_parking_plugin_name">പാര്‍ക്കിങ്ങ് സ്ഥാനം</string>
     <string name="osmand_parking_plugin_description">"പാര്‍ക്കിങ്ങ് സ്ഥാന അനുബന്ധം എവിടെയാണ് കാര്‍ പാര്‍ക്ക് ചെയ്തത് എന്നും എത്രസമയം കൂടി ലഭ്യമാണ്(സമയപരിമിതമെങ്കില്‍) ഓര്‍മിപ്പിക്കുന്നു.\n\nപാര്‍ക്കിങ്ങ് സ്ഥലവും സമയവും ഓഎസ്എംആന്ഡിന്റെ ഡാഷ്ബോഡിലും ഭൂപത്തിലും കാണാവുന്നതാണ്. കൂടാതെ ആന്ഡ്രോയിഡ് കലണ്ടറിലൊരു  ഓര്‍മ്മക്കത്ത് ചേര്‍ക്കാവുന്നതാണ്."</string>
     <string name="osm_editing_plugin_name">ഓഎസ്എം തിരുത്തലുകള്‍</string>
-    <string name="watch">നിരീക്ഷണം</string>
     <string name="rendering_attr_publicTransportMode_name">ബസ് ,ട്രോളിബസ് , ഷട്ടില്‍ റൂട്ടുകള്‍</string>
     <string name="impassable_road">"റോഡുകള്‍  ഒഴിവാക്കുക…"</string>
     <string name="fav_point_dublicate">ഇഷ്ടമുള്ളവയുടെ പേര് ഓന്നിലധികം പകര്‍പ്പിലുണ്ട്</string>
@@ -1357,9 +1352,6 @@
     <string name="shared_string_marker">"മാര്‍ക്കര്‍ "</string>
     <string name="shared_string_deleted">"നീക്കം ചെയ്തത് "</string>
     <string name="shared_string_edited">"തിരുത്തിയത് "</string>
-    <string name="empty_state_av_notes">"കുറിപ്പെഴുതുക! "</string>
-    <string name="by_date">ദിനം</string>
-    <string name="by_type">ഇനം</string>
     <string name="appearance_on_the_map">"മാപ്പിലെ ആകാരം "</string>
     <string name="empty_state_markers_active">"മാപ്പ്  മാര്‍ക്കര്‍ നിര്‍മ്മിക്കുക"</string>
     <string name="coordinate_input">"കോഓര്‍ഡിനേറ്റ്  ഇന്‍പുട്ട് "</string>
@@ -1429,7 +1421,6 @@
     <string name="last_intermediate_dest_description">"ഇടലക്ഷ്യസ്ഥാനം ചേര്‍ക്കുക "</string>
     <string name="additional_actions">കൂടുതല്‍ പ്രവര്‍ത്തികള്‍</string>
     <string name="one_tap_active">ഒറ്റ ഞെക്കില്‍ അക്ടീവാക്കുക</string>
-    <string name="notes_by_date">"കുറിപ്പുകള്‍ ദിനമനുസരിച്ച് "</string>
     <string name="looking_for_tracks_with_waypoints">വേ പോയിന്റുകളുള്ള പാതകള്‍ തെരയുന്നു</string>
     <string name="add_track_to_markers_descr">മാര്‍ക്കറാക്കാനുള്ള വേപോയിന്റുകളുള്ള പാത തിരഞ്ഞെടുക്കുക.</string>
     <string name="add_favourites_group_to_markers_descr">"മാര്‍ക്കറിലേക്ക് ചേര്‍ക്കാനായുള്ള  ഫേവറൈറ്റുകളുടെ ഇനം തിരഞ്ഞെടുക്കുക."</string>
@@ -1479,7 +1470,6 @@
     <string name="specified_directiory_not_writeable">നിർദ്ദിഷ്ട ഡയറക്ടറിയിൽ മാപ്പ് സൃഷ്ടിക്കാൻ കഴിഞ്ഞില്ല</string>
     <string name="rendering_attr_OSMMapperAssistant_name">ഒഎസ്എം മാപ്പർ അസിസ്റ്റന്റ്</string>
     <string name="osm_changes_added_to_local_edits">പ്രാദേശിക മാറ്റങ്ങളിലേക്ക് OSM മാറ്റങ്ങൾ ചേർത്തു</string>
-    <string name="local_recordings_delete_all_confirm">നിങ്ങൾ %1$d കുറിപ്പുകൾ ഇല്ലാതാക്കാൻ പോകുന്നു. ഉറപ്പാണോ\?</string>
     <string name="parking_place_limited">പാർക്കിങ്ങ് സമയം നിയന്ത്രിതം</string>
     <string name="shared_string_collapse">ചുരുക്കുക</string>
     <string name="osmand_accessibility_description">ഈ പ്ലഗിൻ ഉപകരണത്തിന്റെ അക്സസ്സിബിലിറ്റി സവിശേഷതകൾ OsmAnd- ൽ നേരിട്ട് ലഭ്യമാക്കുന്നു. ഉദാ: നിങ്ങളുടെ സ്ഥാനം പ്രഖ്യാപിക്കുക, സ്വയം ടിടിഎസ് ശബ്ദങ്ങൾക്കായുള്ള സംഭാഷണ നിരക്ക് ക്രമീകരിക്കുക, സൂം നിയന്ത്രണത്തിനു ട്രാക്ക്ബോൾ ഉപയോഗിക്കുക, ടെക്സ്റ്റ്-ടു-സ്പീച്ച് ഫീഡ്ബാക്ക് ഉപയോഗിക്കുക.</string>
@@ -1800,10 +1790,7 @@
     <string name="shared_string_added">ചേർത്തു</string>
     <string name="marker_activated">മാർക്കർ %s സജീവമാക്കി.</string>
     <string name="one_tap_active_descr">"സന്ദർഭ മെനു തുറക്കാതെ തന്നെ  മാപ്പിലെ മാർക്കർ ടാപ്പുചെയ്ത്  സജീവമായ മാർക്കറുകളുടെ മുകളിലേക്ക് അതിനെ നീക്കാം"</string>
-    <string name="empty_state_av_notes_desc">"വിഡ്ജെറ്റ് അല്ലെങ്കിൽ സന്ദർഭ മെനു ഉപയോഗിച്ച്  എല്ലാ പോയിന്റിലേക്കും ഓഡിയോ, വീഡിയോ അല്ലെങ്കിൽ ഫോട്ടോ കുറിപ്പുകള്‍ ചേർക്കുക."</string>
     <string name="modify_the_search_query">തിരയൽ ചോദ്യം പരിഷ്ക്കരിക്കുക.</string>
-    <string name="av_locations_selected_desc">തിരഞ്ഞെടുത്ത കുറിപ്പുകളുടെ കോർഡിനേറ്റുകളും ഡാറ്റയും ഉള്ള ജിപിഎക്സ് ഫയൽ.</string>
-    <string name="av_locations_all_desc">എല്ലാ കുറിപ്പുകളുടെയും കോർഡിനേറ്റുകളും ഡാറ്റയും ഉള്ള ജിപിഎക്സ് ഫയൽ.</string>
     <string name="osm_recipient_stat">എഡിറ്റുകൾ %1$s, തുക %2$s mBTC</string>
     <string name="osm_recipients_label">OSM സ്വീകർത്താക്കൾ</string>
     <string name="what_is_here">എന്താണ് ഇവിടെയുള്ളത്:</string>

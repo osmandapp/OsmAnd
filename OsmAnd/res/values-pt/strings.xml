@@ -558,7 +558,6 @@
     <string name="recording_error">A gravação falhou</string>
     <string name="recording_context_menu_arecord">Gravar nota de áudio</string>
     <string name="recording_context_menu_vrecord">Gravar nota de vídeo</string>
-    <string name="layer_recordings">Camada de trilhos gravados</string>
     <string name="recording_context_menu_play">Reproduzir</string>
     <string name="access_arrival_time">Hora de chegada</string>
     <string name="item_checked">marcado</string>
@@ -578,7 +577,6 @@
     <string name="audionotes_location_not_defined">Toque em \"Usar localização…\" para adicionar uma nota ao local especificado.</string>
     <string name="map_widget_audionotes">Notas de áudio</string>
     <string name="audionotes_plugin_description">Permite adicionar notas de áudio, fotografia e vídeo durante uma viagem, usando um botão no ecrã do mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
-    <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
     <string name="recording_photo_description">Fotografia %1$s de %2$s</string>
     <string name="av_def_action_picture">Tirar uma fotografia</string>
     <string name="srtm_plugin_description">Fornece terreno e topografia detalhada para uma compreensão visual do relevo e da transitabilidade da paisagem, utilizando linhas de contorno, sombreamento de colinas ou coloração de declives e uma vista 3D.\n\nPara ativar estes recursos para uma região, precisa descarregar adicionalmente o mapa de linhas de contorno e/ou terreno (3D), compilado a partir de dados SRTM e ASTER.\n\nLeitura adicional em %1$s.</string>
@@ -880,7 +878,6 @@
     <string name="agps_data_last_downloaded">Últimos dados A-GPS descarregados: %1$s</string>
     <string name="welmode_download_maps">Descarregar mapas</string>
     <string name="rendering_attr_pisteGrooming_name">Preparação de pista</string>
-    <string name="watch">Ver</string>
     <string name="navigate_point_northing">Norte</string>
     <string name="navigate_point_easting">Este</string>
     <string name="storage_directory_internal_app">Memória interna da aplicação</string>
@@ -1046,8 +1043,6 @@
     <string name="simulate_your_location_stop_descr">Parar de simular a sua posição.</string>
     <string name="simulate_your_location_descr">Simule a sua posição utilizando uma rota calculada ou uma trajeto GPX gravado.</string>
     <string name="looking_up_address">A procurar o endereço</string>
-    <string name="av_locations_descr">Ficheiro GPX com localizações.</string>
-    <string name="av_locations">Localizações</string>
     <string name="plugin_settings">Complementos</string>
     <string name="routing_attr_avoid_shuttle_train_name">Evitar comboios vaivém</string>
     <string name="routing_attr_avoid_shuttle_train_description">Evita usar comboios vaivém, em pequenos trajetos predefinidos como aeroportos</string>
@@ -1110,7 +1105,6 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Afiliação da rede</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Sair</string>
-    <string name="local_recordings_delete_all_confirm">Eliminar %1$d notas\?</string>
     <string name="plugin_touringview_descr">Esta opção muda o estilo de mapa do OsmAnd para a \"vista turística\", uma visualização especial do mapa com altos detalhes, para viajantes e motoristas profissionais.
 \n
 \nEsta visualização fornece, em qualquer nível de ampliação do mapa, a quantidade máxima de informação da viagem disponível no mapa (particularmente estradas, trilhos, caminhos e marcas de orientação).
@@ -1617,8 +1611,6 @@
     <string name="will_open_at">Abre às</string>
     <string name="will_open_on">Abre às</string>
     <string name="additional_actions">Ações adicionais</string>
-    <string name="av_locations_selected_desc">Ficheiro GPX com coordenadas e dados das notas selecionadas.</string>
-    <string name="av_locations_all_desc">Ficheiro GPX com coordenadas e dados de todas as notas.</string>
     <string name="modify_the_search_query">Altere a sua pesquisa.</string>
     <string name="shared_string_actions">Ações</string>
     <string name="shared_string_marker">Marcador</string>
@@ -1630,11 +1622,6 @@
     <string name="marker_activated">Marcador %s ativado.</string>
     <string name="one_tap_active_descr">Toque num marcador no mapa para movê-lo para a parte superior dos marcadores ativos sem abrir o menu de contexto.</string>
     <string name="one_tap_active">\"Um toque\" ativo</string>
-    <string name="empty_state_av_notes">Adicione notas!</string>
-    <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou fotografia em qualquer ponto do mapa, usando o widget ou o menu de contexto.</string>
-    <string name="notes_by_date">Notas de áudio/vídeo por data</string>
-    <string name="by_date">Por data</string>
-    <string name="by_type">Por tipo</string>
     <string name="looking_for_tracks_with_waypoints">A procurar trilhos com pontos de rota</string>
     <string name="shared_string_more_without_dots">Mais</string>
     <string name="appearance_on_the_map">Aparência no mapa</string>
@@ -2519,7 +2506,6 @@
     <string name="accessibility_announce">Avisar por voz</string>
     <string name="photo_notes">Notas fotográficas</string>
     <string name="video_notes">Notas de vídeo</string>
-    <string name="multimedia_notes_view_descr">As suas notas do OpenStreetMap estão em %1$s.</string>
     <string name="tracks_view_descr">Os seus trilhos gravados estão em %1$s ou na pasta OsmAnd.</string>
     <string name="save_track_logging_accuracy">Precisão do registo</string>
     <string name="live_monitoring">Rastreamento online</string>

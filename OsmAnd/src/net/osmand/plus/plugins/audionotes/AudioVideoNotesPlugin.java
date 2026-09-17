@@ -231,7 +231,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public String getName() {
-		return app.getString(R.string.audionotes_plugin_name);
+		return app.getString(R.string.shared_string_media);
 	}
 
 	@Override

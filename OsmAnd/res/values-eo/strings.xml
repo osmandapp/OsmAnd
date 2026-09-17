@@ -192,8 +192,6 @@
     <string name="simulate_your_location_stop_descr">Ĉesigi simuladon de pozicio.</string>
     <string name="simulate_your_location_descr">Simuli vian pozicion uzante komputitan kurson aŭ registritan GPX-spuron.</string>
     <string name="looking_up_address">Serĉado de adreso</string>
-    <string name="av_locations_descr">GPX-dosiero kun lokoj.</string>
-    <string name="av_locations">Lokoj</string>
     <string name="plugin_settings">Kromprogramoj</string>
     <string name="routing_attr_avoid_shuttle_train_name">Sen aŭt-ŝarĝtrajnoj</string>
     <string name="routing_attr_avoid_shuttle_train_description">Eviti ŝarĝvagonarojn por transporti aŭtojn</string>
@@ -358,7 +356,6 @@
     <string name="agps_data_last_downloaded">A-GPS-datumoj elŝutitaj je %1$s</string>
     <string name="current_route">Nuna kurso</string>
     <string name="osm_changes_added_to_local_edits">OSM-ŝanĝoj aldonitaj al loka ŝanĝaro</string>
-    <string name="local_recordings_delete_all_confirm">Ĉu forigi %1$d notojn\?</string>
     <string name="delay_to_start_navigation">Ekigi gvidadon kurbiĝo-post-kurbiĝo post…</string>
     <string name="shared_string_go">Ekigi</string>
     <string name="osmand_parking_overdue">posttempa</string>
@@ -399,7 +396,6 @@
     <string name="rename_failed">Fiaskis ŝanĝi nomon.</string>
     <string name="back_to_map">Reen mapen</string>
     <string name="share_note">Kunhavigi noton</string>
-    <string name="watch">Montri</string>
     <string name="notes">Sonaj/videaj notoj</string>
     <string name="online_map">Enreta mapo</string>
     <string name="free">Libera %1$s</string>
@@ -743,12 +739,10 @@
     <string name="recording_unavailable">nedisponebla</string>
     <string name="recording_context_menu_arecord">Krei sonan noton</string>
     <string name="recording_context_menu_vrecord">Krei filman noton</string>
-    <string name="layer_recordings">Tavolo de registrado</string>
     <string name="recording_context_menu_play">Ludi</string>
     <string name="recording_description">Registraĵo %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registraĵo</string>
     <string name="map_widget_av_notes">Sonaj/filmaj notoj</string>
-    <string name="audionotes_plugin_name">Sonaj/filmaj notoj</string>
     <string name="audionotes_plugin_description">Fari fotajn/sonajn/filmajn notojn dum ekskurso, aŭ per butono sur la map‑ekrano, aŭ per la kunteksta menuo de loko.</string>
     <string name="map_widget_audionotes">Sonaj notoj</string>
     <string name="audionotes_location_not_defined">Frapetu “Uzi pozicion…” por aldoni noton al la loko.</string>
@@ -1791,11 +1785,6 @@
     <string name="marker_activated">Aktivis markon %s.</string>
     <string name="one_tap_active_descr">Per frapeti markon sur la mapo, movi ĝin al komenco de la listo senmalfermante kuntekstan menuon.</string>
     <string name="one_tap_active">Aktivigi per unu frapeto</string>
-    <string name="empty_state_av_notes">Fari notojn</string>
-    <string name="empty_state_av_notes_desc">Aldonu sonajn, filmajn aŭ fotajn notojn al iu ajn punkto sur la mapo per la fenestraĵo aŭ kunteksta menuo.</string>
-    <string name="notes_by_date">Notoj laŭ dato</string>
-    <string name="by_date">Laŭ dato</string>
-    <string name="by_type">Laŭ speco</string>
     <string name="modify_the_search_query">Modifu vian serĉpeton.</string>
     <string name="what_is_here">Tie ĉi:</string>
     <string name="parked_at">parkumita je</string>
@@ -1810,8 +1799,6 @@
     <string name="will_open_at">Malfermiĝos je</string>
     <string name="will_open_on">Malfermiĝos je</string>
     <string name="additional_actions">Pliaj agoj</string>
-    <string name="av_locations_selected_desc">GPX-dosiero enhavanta koordinatojn kaj datumojn de elektitaj notoj.</string>
-    <string name="av_locations_all_desc">GPX-dosiero kun koordinatoj kaj datumoj de ĉiuj notoj.</string>
     <string name="shared_string_actions">Agoj</string>
     <string name="shared_string_marker">Marko</string>
     <string name="osm_recipient_stat">%1$s redaktoj, %2$s m₿ tute</string>
@@ -2393,7 +2380,6 @@
     <string name="live_monitoring">Perreta spurado</string>
     <string name="save_track_logging_accuracy">Precizo de registrado</string>
     <string name="tracks_view_descr">Viaj registritaj spuroj troviĝas en %1$s aŭ en la dosierujo OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Viaj notoj troviĝas en %1$s.</string>
     <string name="video_notes">Filmaj notoj</string>
     <string name="photo_notes">Fotaj notoj</string>
     <string name="button_rate">Taksi</string>

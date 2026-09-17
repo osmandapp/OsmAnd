@@ -428,7 +428,6 @@
     <string name="announcement_time_approach">اقترب</string>
     <string name="select_shape">تحديد الشكل</string>
     <string name="relative_bearing_widget_desc">يوضح الزاوية بين اتجاه الحركة إلى الأمام والنقطة المستهدفة.</string>
-    <string name="av_locations_all_desc">ملف GPX مع الإحداثيات والبيانات من كافة الملاحظات.</string>
     <string name="included_categories">الفئات المدرجة</string>
     <string name="shared_string_kilograms">كيلوغرامات</string>
     <string name="average_glide_time_interval_desc">حدد الفاصل الزمني لحساب متوسط الانحدار.</string>
@@ -513,7 +512,6 @@
     <string name="key_event_action_previous_app_profile">ملف تعريف التطبيق السابق</string>
     <string name="fast_route_mode_descr">تفعيل لحساب الطريق الأسرع أو تعطيل لحساب مسار أقل استهلاكا للوقود.</string>
     <string name="previous_route">الطريق السابق</string>
-    <string name="av_locations_descr">ملف GPX مرفق بملاحظات عن المواقع و الأماكن.</string>
     <string name="quick_action_contour_lines_descr">زر إظهار أو إخفاء الخطوط المحيطية على الخريطة.</string>
     <string name="show_toast_about_key_pressed">عرض تلميح حول الضغط على المفتاح</string>
     <string name="routing_attr_avoid_4wd_only_name">تجنب طرق الدفع الرباعي</string>
@@ -534,7 +532,6 @@
     <string name="logcat_buffer_descr">التحقق من السجلات التفصيلية للتطبيق ومشاركتها</string>
     <string name="rendering_attr_surface_grass_name">عشب</string>
     <string name="routing_attr_avoid_sett_name">بدون ضبط</string>
-    <string name="watch">شاهد</string>
     <string name="quick_action_show_navigation_finish_dialog">إظهار نافذة \'انتهاء الملاحة\'</string>
     <string name="routing_attr_driving_style_balance_name">متوازن</string>
     <string name="layer_map_appearance">تخصيص الشاشة</string>
@@ -804,7 +801,6 @@
     <string name="shared_string_enable">تفعيل</string>
     <string name="key_event_action_move_left">حرك لليسار</string>
     <string name="ttsvoice">تحويل النص إلى كلام -</string>
-    <string name="multimedia_notes_view_descr">ملاحظات OSM موجودة في%1$s.</string>
     <string name="use_dev_url_descr">قم بالتبديل لاستخدام dev.openstreetmap.org بدلاً من openstreetmap.org لاختبار تحميل OSM Note / POI / GPX.</string>
     <string name="gpx_selection_track">%1$s
 \nمسار %2$s</string>
@@ -1728,7 +1724,6 @@
     <string name="use_drawer_btn">استعمل القائمة</string>
     <string name="fav_point_emoticons_message">تم تعديل اسم النقطة المفضلة إلى %1$s لتسهيل حفظ النص مع الوجوه التعبيرية بشكل صحيح إلى ملف.</string>
     <string name="type_city_town">اكتب المدينة / البلدة / المنطقة</string>
-    <string name="empty_state_av_notes">تدوين ملاحظات!</string>
     <string name="online_routing_engines">محركات التوجيه عبر الإنترنت</string>
     <string name="feedback">الأصداء</string>
     <string name="osmand_team">فريق أوسماند</string>
@@ -1761,7 +1756,6 @@
     <string name="second_next_turn_widget_desc">يعرض الويدجت معلومات حول المنعطف التالي الثاني الذي يتم تمكينه إذا انعطف ضمن مسافة قريبة.</string>
     <string name="other_menu_group">أخرى</string>
     <string name="reading_files">قراءة الملفات …</string>
-    <string name="audionotes_plugin_name">ملاحظات صوتية/مصورة</string>
     <string name="routing_attr_avoid_shuttle_train_description">يتجنب استخدام القطارات المكوكية</string>
     <string name="weather_temperature_fahrenheit">فهرنهايت</string>
     <string name="shared_string_qr_code">رمز QR</string>
@@ -1825,7 +1819,6 @@
     <string name="make_active">تنشيط التوجيه المباشر</string>
     <string name="shared_string_close_the_dialog">إغلاق مربع الحوار</string>
     <string name="auth_failed">فشل الترخيص</string>
-    <string name="layer_recordings">طبقة التسجيل</string>
     <string name="rendering_value_darkyellow_name">أصفر غامق</string>
     <string name="shared_string_duplicate">نسخ</string>
     <string name="shared_string_disabled">معطل</string>
@@ -2159,7 +2152,6 @@
     <string name="routing_attr_avoid_motorway_name">الطرق السريعة</string>
     <string name="osm_live_payment_discount_descr">وفر %1$s</string>
     <string name="reset_to_original">إعادة الضبط إلى الأصلي</string>
-    <string name="notes_by_date">الملاحظات حسب التاريخ</string>
     <string name="save_poi_value_exceed_length">اختصر طول الوسم\"%s\" إلى أقل من 255 حرف.</string>
     <string name="map_widget_camera_distance_desc">يظهر ارتفاع الكاميرا فوق المستوى السطحي.</string>
     <string name="delete_waypoints">احذف الإحداثيات</string>
@@ -2245,7 +2237,6 @@
     <string name="configure_map">ضبط الخريطة</string>
     <string name="rendering_attr_tracktype_grade1_name">الصلبة (المعبدة)</string>
     <string name="storage_found_files_descr">اضغط على \"%1$s\" لنسخ %2$s ملف من \"%3$s\" إلى \"%4$s\". قد يستغرق بعض الوقت.</string>
-    <string name="local_recordings_delete_all_confirm">حذف %1$d ملاحظة؟</string>
     <string name="marker_moved_to_active">التوجيه المباشر انتقل كنشط</string>
     <string name="lang_mk">المقدونية</string>
     <string name="select_animate_speedup">حدد سرعة محاكاة المسار:</string>
@@ -2269,12 +2260,10 @@
     <string name="x_axis">محور-اكس</string>
     <string name="wikipedia_and_travel_maps">خرائط الويكبيديا والسفر</string>
     <string name="will_close_at">يغلق على</string>
-    <string name="av_locations_selected_desc">ملف GPX مع الإحداثيات والبيانات من الملاحظات المحددة.</string>
     <string name="add_time_span">إضافة فترة زمنية</string>
     <string name="keep_passed_markers">إبقاء التوجيه المباشر المتجاوز</string>
     <string name="quick_action_auto_zoom">التكبير التلقائي</string>
     <string name="lang_nl">الهولندية</string>
-    <string name="empty_state_av_notes_desc">إضافة ملاحظة صوتية أو فيديو أو صورة لكل نقطة على الخريطة، باستخدام القائمة السفلية أو الملحق.</string>
     <string name="shared_string_logoff">خروج</string>
     <string name="location_simulation_cutoff">محاكاة تخطي الأمتار الأولى</string>
     <string name="coord_input_save_as_track">حفظ كمسار</string>
@@ -2404,7 +2393,6 @@
     <string name="quick_action_auto_zoom_desc">زر تشغيل أو إيقاف التكبير التلقائي وفقاً لسرعتك.</string>
     <string name="second_marker_widget_desc">يمكنك تكوين الويدجت لإظهار المسافة أو الوقت المقدر للوصول المتبقي للتوجيه المباشر للخريطة الثانية.</string>
     <string name="rendering_value_highContrastRoads_name">طرق بتباين عالي</string>
-    <string name="by_type">حسب النوع</string>
     <string name="nm_h">عقدة بحرية</string>
     <string name="show_start_dialog">إظهار مربع حوار البدء</string>
     <string name="rendering_attr_depthContours_description">إظهار نقاط ومعالم العمق.</string>
@@ -3594,7 +3582,6 @@
     <string name="shared_string_add_profile">إضافة وضع</string>
     <string name="terrain_slider_description">تعيين مستويات التكبير/التصغير الدنيا والقصوى التي سيتم عرض الطبقة بها.</string>
     <string name="select_map_marker">حدد توجيه مباشر</string>
-    <string name="av_locations">المواقع</string>
     <string name="external_sensor_name_property_description">اسم المستشعر</string>
     <string name="osb_comment_dialog_error">لا يمكن إضافة تعليق.</string>
     <string name="av_camera_focus_hiperfocal">التركيز البؤري</string>
@@ -4452,7 +4439,6 @@
     <string name="city_type_city">مدينة</string>
     <string name="follow">بدء الملاحة</string>
     <string name="added_profiles">الأوضاع المضافة</string>
-    <string name="by_date">حسب التاريخ</string>
     <string name="routing_attr_avoid_subway_description">تجنب قطارالأنفاق والنقل بالسكك الحديدية خفيفة الوزن</string>
     <string name="buy">شراء</string>
     <string name="today">اليوم</string>

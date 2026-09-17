@@ -53,7 +53,6 @@
     <string name="recording_unavailable">անհասանելի է</string>
     <string name="recording_context_menu_arecord">Կատարել աուդիո նշում</string>
     <string name="recording_context_menu_vrecord">Կատարել վիդեո նշում</string>
-    <string name="layer_recordings">Աուդիո-ձայնագրությունների շերտ</string>
     <string name="recording_context_menu_play">Նվագել</string>
     <string name="recording_description">Գրանցում %1$s %3$s %2$s</string>
     <string name="recording_default_name">Ձայնագրություն\\գրառում</string>
@@ -524,8 +523,6 @@
     <string name="simulate_your_location_stop_descr">Դադարեցնել սիմուլյացիան։</string>
     <string name="simulate_your_location_descr">Խթանել ձեր դիրքորոշումը, օգտագործելով հաշվարկված երթուղին կամ գրանցված GPX երթուղին։</string>
     <string name="looking_up_address">Հասցեի որոնում</string>
-    <string name="av_locations_descr">GPX ֆայլը կոորդինատներով։</string>
-    <string name="av_locations">Գտնվելու վայրերը</string>
     <string name="plugin_settings">Պլագիններ</string>
     <string name="routing_attr_avoid_shuttle_train_name">Առանց բեռնատար գնացքների</string>
     <string name="routing_attr_avoid_shuttle_train_description">Խուսափեք գնացքներից</string>
@@ -630,7 +627,6 @@
     <string name="welcome_header">Բարի գալուստ</string>
     <string name="current_route">Ընթացիկ երթուղին</string>
     <string name="osm_changes_added_to_local_edits">OSM-ի փոփոխությունները մուտքագրվել են տեղական տվյալների բազայում</string>
-    <string name="local_recordings_delete_all_confirm">Դուք համոզված եք, որ ուզուն եք ջնջել %1$d նշումներ\?</string>
     <string name="delay_to_start_navigation">Նավիգացիաի մեկնարկի հետաձքումը…</string>
     <string name="shared_string_go">Գնացինք</string>
     <string name="osmand_parking_overdue">ժամկետանց</string>
@@ -739,7 +735,6 @@
 \nԱյս դիտումը կարող է վերադարձվել կամ կրկին անջատել այն այս կետից, կամ փոխելով «Քարտեզի ոճը», «Կարգավորել քարտեզը» կետից, ըստ ցանկության:</string>
     <string name="plugin_nautical_name">Ծովային քարտեզի դիտում</string>
     <string name="plugin_ski_name">Դահուկային քարտեզի դիտում</string>
-    <string name="audionotes_plugin_name">Աուդիո և վիդեո նշումներ</string>
     <string name="audionotes_plugin_description">Աուդիո/Վիդեո նշումների plugin-ը հնարավորություն են տալիս ստեղծել աուդիո/լուսանկարներ/վիդեո նշումներ վարելու ժամանակ կամ կոճակի միջոցով քարտեզի էկրանին վրա կամ անմիջապես համատեքստային մենյուի միջոցով ցանկացած դիրքի համար քարտեզի վրա:</string>
     <string name="osmand_parking_plugin_name">Ավտոկայանատեղ</string>
     <string name="osmand_parking_plugin_description">Թույլ է տալիս գրանցել, թե որտեղ է ձեր մեքենան կայանել և որքան ժամանակ է մնացել ավտոկայանատեղը ազատելու (եթե առկա է ժամկետ): \nԹե տեղը, թե ժամանակը տեսանելի են OsmAnd-ի վահանակի վրա, ինչպես նաև քարտեզի էկրանին ինչպես նաև վիդժետի մեջ: Android օրացույցին կարելի է միացնել որպես հիշեցում:</string>
@@ -755,7 +750,6 @@
     <string name="rename_failed">Չհաջողվեց վերանվանել:</string>
     <string name="back_to_map">Վերադառնալ քարտեզին</string>
     <string name="share_note">Տարածեք նշումը</string>
-    <string name="watch">Դիտել</string>
     <string name="notes">A/V նշումներ</string>
     <string name="online_map">Առցանց քարտեզ</string>
     <string name="free">Ազատ է %1$s</string>
@@ -1868,19 +1862,12 @@
     <string name="will_open_at">Կբացվի</string>
     <string name="will_open_on">Կբացվի</string>
     <string name="additional_actions">Լրացուցիչ գործողություններ</string>
-    <string name="av_locations_selected_desc">GPX ֆայլը կոորդինատներով և ընտրված գրառումների տվյալներով:</string>
-    <string name="av_locations_all_desc">GPX ֆայլը կոորդինատներով և բոլոր նշումների տվյալները։</string>
     <string name="modify_the_search_query">Փոխեք որոնման հարցումը:</string>
     <string name="shared_string_actions">Գործողություններ</string>
     <string name="shared_string_marker">Մարկեր</string>
     <string name="marker_activated">Մարկեր %s ակտիվացված է:</string>
     <string name="one_tap_active_descr">Քարտեզի վրա մարկերի նշումը, տեղափոխելու է այն առաջին տեղը ակտիվ մարկերների ցուցակում, առանց կոնտեքստային մենյուն բացելու։</string>
     <string name="one_tap_active">Մեկ սեղմումով ակտիվացում</string>
-    <string name="empty_state_av_notes">Նշումներ կատարեք:</string>
-    <string name="empty_state_av_notes_desc">Տեղադրեք աուդիո, վիդեո կամ ֆոտո գրառումներ քարտեզի ցանկացած կետի վրա, օգտագործելով վիջեթ կամ համատեքստային մենյու:</string>
-    <string name="notes_by_date">Նշումներ ըստ ամսաթվի</string>
-    <string name="by_date">Ըստ ամսաթվի</string>
-    <string name="by_type">Ըստ տեսակի</string>
     <string name="looking_for_tracks_with_waypoints">Տրեկների որոնում ճանապարհային կետեր հետ</string>
     <string name="show_guide_line_descr">Ցուցադրել ուղեցույցները ձեր գտնվելու վայրից մինչև ակտիվ մարկերներ:</string>
     <string name="show_arrows_descr">Ցուցադրել մեկ կամ երկու նետ, նշելով ակտիվ մարկերների ուղղությունը:</string>

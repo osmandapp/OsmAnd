@@ -779,7 +779,6 @@
     <string name="coordinates_format">Format koordinatow</string>
     <string name="my_location">Moje stejišćo</string>
     <string name="shared_string_sort">Sortěrować</string>
-    <string name="local_recordings_delete_all_confirm">Chceš %1$d noticu wotstronić. Sy sej wěsty/a?</string>
     <string name="shared_string_delete">Wotstronić</string>
     <string name="shared_string_delete_all">Wšitke wotstronić</string>
     <string name="local_osm_changes_delete_all_confirm">Chceš %1$d změnow na OSM wotstronić. Sy sej wěsty/a?</string>
@@ -847,7 +846,6 @@
     <string name="shared_string_apply">Přewzać</string>
     <string name="shared_string_do_not_show_again">Wjace njepokazać</string>
     <string name="record_plugin_name">Nahrawanje jězbow</string>
-    <string name="audionotes_plugin_name">Awdijowe/widejowe noticy</string>
     <string name="audionotes_plugin_description">Přidatk za awdijowe/widejowe noticy skići móžnosć, po puću awdijowe/fotowe/widejowe noticy za wěstu poziciju nahrać, pak přez kneflk na kartowym wobrazu, abo direktnje přez kontekstowy meni.</string>
     <string name="osm_editing_plugin_name">Wobdźěłanje OSM</string>
     <string name="rendering_attr_roadStyle_name">Stil pućow</string>
@@ -954,7 +952,6 @@
     <string name="context_menu_item_open_note">OSM-noticu wočinić</string>
     <string name="osm_edit_created_note">OSM-notica je so wutworiła</string>
     <string name="osn_reopen_dialog_title">Noticu znowa wočinić</string>
-    <string name="av_locations_descr">GPX-dataja z městnami noticow.</string>
     <string name="share_note">Noticu rozšěrić</string>
     <string name="stop_routing_confirm">Chceš nawigaciju woprawdźe přetorhnyć?</string>
     <string name="recording_context_menu_arecord">Awdio-noticu nahrać</string>
@@ -967,17 +964,12 @@
     <string name="open_from">Wočinjene wot</string>
     <string name="open_till">Wočinjene hač do</string>
     <string name="additional_actions">Přidatne akcije</string>
-    <string name="av_locations_selected_desc">GPX-dataja z koordinatami a datami wubranych noticow.</string>
-    <string name="av_locations_all_desc">GPX-dataja z koordinatami a datami wšěch noticow.</string>
     <string name="modify_the_search_query">Twoje pytanje změnić.</string>
     <string name="shared_string_actions">Akcije</string>
     <string name="empty_state_osm_edits">OSM-objekty wutworić abo wobdźěłać</string>
     <string name="shared_string_deleted">Wotstronjene</string>
     <string name="shared_string_edited">Wobdźěłane</string>
     <string name="shared_string_added">Přidate</string>
-    <string name="notes_by_date">A/W noticy po datumje</string>
-    <string name="by_date">po datumje</string>
-    <string name="by_type">po družinje</string>
     <string name="empty_state_markers_groups_desc">Faworitowe skupiny abo pućne dypki jako markěrowanja importować.</string>
     <string name="show_number_pad">Ličbny blok pokazać</string>
     <string name="shared_string_paste">Zasadźić</string>
@@ -1020,7 +1012,6 @@
     <string name="shared_string_type">Družina</string>
     <string name="no_address_found">Žana adresa postajena</string>
     <string name="nm">nmi</string>
-    <string name="av_locations">Městna</string>
     <string name="rendering_value_pink_name">pink</string>
     <string name="rendering_value_translucent_pink_name">transparentny pink</string>
     <string name="shared_string_logoff">Wotzjewić</string>

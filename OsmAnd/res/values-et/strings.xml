@@ -67,7 +67,6 @@
     <string name="shared_string_online_maps">Veebikaardid</string>
     <string name="record_plugin_name">Teekonna salvestamine</string>
     <string name="plugin_nautical_name">Merenduskaardi vaade</string>
-    <string name="audionotes_plugin_name">Audio/video märkmed</string>
     <string name="shared_string_accessibility">Hõlpsus</string>
     <string name="debugging_and_development">OsmAndi arendus</string>
     <string name="back_to_map">Tagasi kaardile</string>
@@ -330,13 +329,7 @@
     <string name="shared_string_added">Lisatud</string>
     <string name="marker_activated">Marker %s aktiveeritud.</string>
     <string name="one_tap_active">\'Ühe puudutusega\' aktiveerimine</string>
-    <string name="empty_state_av_notes">Tee märkmeid!</string>
-    <string name="notes_by_date">Märkmed kuupäevade järgi</string>
-    <string name="by_date">Kuupäevade järgi</string>
-    <string name="by_type">Liigi järgi</string>
     <string name="modify_the_search_query">Muuda oma otsingut.</string>
-    <string name="av_locations_selected_desc">GPX fail valitud märkmete koordinaatide ja andmetega.</string>
-    <string name="av_locations_all_desc">GPX fail kõikide märkmete koordinaatide ja andmetega.</string>
     <string name="what_is_here">Siin on:</string>
     <string name="parked_at">pargitud</string>
     <string name="pick_up_till">Pealekorje kuni</string>
@@ -825,8 +818,6 @@
     <string name="nautical_maps">Merekaardid</string>
     <string name="depth_contour_descr">Meresügavuse kõrgusjooned ja meremärgid.</string>
     <string name="index_item_world_wikivoyage">Ülemaailmsed Wikivoyage artiklid</string>
-    <string name="av_locations_descr">GPX fail asukohtadega.</string>
-    <string name="av_locations">Asukohad</string>
     <string name="plugin_settings">Lisad</string>
     <string name="routing_attr_avoid_shuttle_train_name">Kiirrongita</string>
     <string name="routing_attr_avoid_shuttle_train_description">Väldib kiirrongi kasutamist</string>
@@ -912,7 +903,6 @@
     <string name="shared_string_search">Otsi</string>
     <string name="shared_string_show_description">Kuva kirjeldus.</string>
     <string name="osm_changes_added_to_local_edits">OSM muudatused lisatud kohalike muudatuste hulka</string>
-    <string name="local_recordings_delete_all_confirm">Kustutada %1$d märget\?</string>
     <string name="delay_to_start_navigation">Alusta pöörangupõhist juhendamist peale…</string>
     <string name="shared_string_go">Mine</string>
     <string name="osm_edits">OSMi muudatused</string>
@@ -962,7 +952,6 @@
     <string name="osmand_parking_plugin_name">Parkimiskoht</string>
     <string name="osm_editing_plugin_name">OpenStreetMap\'i muutmine</string>
     <string name="rename_failed">Nime muutmine ei õnnestunud.</string>
-    <string name="watch">Vaata</string>
     <string name="rendering_attr_pisteGrooming_name">Nõlva hooldus</string>
     <string name="remove_the_tag">EEMALDA SILT</string>
     <string name="version_settings">Avaldatud versioonid</string>
@@ -1249,7 +1238,6 @@
     <string name="recording_unavailable">puudub</string>
     <string name="recording_context_menu_arecord">Loo helimärge</string>
     <string name="recording_context_menu_vrecord">Loo videomärge</string>
-    <string name="layer_recordings">Salvestuskiht</string>
     <string name="recording_context_menu_play">Esita</string>
     <string name="recording_description">Salvestus %1$s %3$s %2$s</string>
     <string name="recording_default_name">Salvestamine</string>
@@ -1954,7 +1942,6 @@
     <string name="empty_state_markers_history_desc">Läbituks märgitud markerid ilmuvad siia ekraanile.</string>
     <string name="empty_state_osm_edits_descr">Loo või muuda OpenStreetMap huvipunkte, ava või kommenteeri OSM märkmeid ja lisa salvestatud GPX faile.</string>
     <string name="one_tap_active_descr">Puuduta markerit kaardil selle liigutamiseks aktiivsete markerite algusesse ilma kontekstimenüüd avamata.</string>
-    <string name="empty_state_av_notes_desc">Lisa heli, video või fotomärge igale punktile kaardil, kasutades vidinat või kontekstimenüüd.</string>
     <string name="osm_recipient_stat">Muudatusi %1$s, kokku %2$s mBTC</string>
     <string name="lang_lo">lao</string>
     <string name="gpx_file_desc">GPX - sobib ekspordiks JOSM või teistesse OSM redaktoritesse.</string>
@@ -2396,7 +2383,6 @@
     <string name="live_monitoring">Veebis jälgimine</string>
     <string name="save_track_logging_accuracy">Logimise täpsus</string>
     <string name="tracks_view_descr">Sinu salvestatud rajad asuvad %1$s või OsmAnd kataloogis.</string>
-    <string name="multimedia_notes_view_descr">Sinu OSM märkmed asuvad %1$s.</string>
     <string name="video_notes">Video märkmed</string>
     <string name="photo_notes">Foto märkmed</string>
     <string name="accessibility_announce">Teata</string>

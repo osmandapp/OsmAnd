@@ -517,14 +517,12 @@
     <string name="intermediate_points_change_order">Canvia l\'ordre</string>
     <string name="recording_default_name">Enregistrament</string>
     <string name="recording_description">Enregistrament %1$s %3$s %2$s</string>
-    <string name="layer_recordings">Capa d\'enregistraments</string>
     <string name="shared_string_control_stop">Atura</string>
     <string name="av_video_format">Format de sortida de vídeo</string>
     <string name="map_widget_audionotes">Notes d\'àudio</string>
     <string name="shared_string_control_start">Comença</string>
     <string name="audionotes_location_not_defined">Premeu «Usa localització…» per afegir una nota a la localització.</string>
     <string name="audionotes_plugin_description">Agafa notes d\'àudio/foto/vídeo durant un viatge, utilitzant un botó de mapa o el menú contextual de la ubicació.</string>
-    <string name="audionotes_plugin_name">Connector de notes d\'àudio</string>
     <string name="srtm_plugin_name">Topografia</string>
     <string name="download_roads_only_item">Carreteres</string>
     <string name="download_regular_maps">Mapes estàndards</string>
@@ -931,7 +929,6 @@
     <string name="device_memory">Memòria del dispositiu</string>
     <string name="shared_string_audio">Àudio</string>
     <string name="share_note">Comparteix la nota</string>
-    <string name="watch">Visualitza</string>
     <string name="notes">Notes d\'àudio/vídeo</string>
     <string name="online_map">Mapa en línia</string>
     <string name="track_segments">Segments de traça</string>
@@ -1025,7 +1022,6 @@
     <string name="gps_network_not_enabled">El servei de posicionament està aturat. El voleu activar\?</string>
     <string name="disable_recording_once_app_killed">Evita la gravació en procés de fons</string>
     <string name="shared_string_import2osmand">Importa a l\'OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Voleu suprimir %1$d notes?</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_th">Tailandès</string>
     <string name="lang_te">Telugu</string>
@@ -1104,8 +1100,6 @@
     <string name="next_proceed">Següent</string>
     <string name="opening_at">Obert a les</string>
     <string name="closing_at">Tanquen a les</string>
-    <string name="av_locations">Ubicacions</string>
-    <string name="av_locations_descr">Fitxer GPX amb posicions.</string>
     <string name="contact_info">Informació de contacte</string>
     <string name="add_opening_hours">Afegeix l\'horari de servei</string>
     <string name="poi_dialog_poi_type">Tipus de PDI</string>
@@ -1787,11 +1781,6 @@
     <string name="shared_string_added">S\'ha afegit</string>
     <string name="marker_activated">Marcador %s activat.</string>
     <string name="one_tap_active_descr">Premeu un marcador del mapa per arrossegar-lo al capdamunt dels marcadors actius sense obrir el menú de context.</string>
-    <string name="empty_state_av_notes">Feu anotacions!</string>
-    <string name="empty_state_av_notes_desc">Afegeix notes d\'àudio, vídeo o foto a qualsevol punt del mapa mitjançant l\'ús dels ginys o menús contextuals.</string>
-    <string name="notes_by_date">Notes A/V per data</string>
-    <string name="by_date">Per data</string>
-    <string name="by_type">Per tipus</string>
     <string name="modify_the_search_query">Modifiqueu la vostra cerca.</string>
     <string name="one_tap_active">\'Un toc\' actiu</string>
     <string name="what_is_here">El que hi ha aquí:</string>
@@ -1807,8 +1796,6 @@
     <string name="will_open_at">Obre a les</string>
     <string name="will_open_on">Obre a les</string>
     <string name="additional_actions">Accions addicionals</string>
-    <string name="av_locations_selected_desc">Fitxer GPX amb coordenades i dades de les notes seleccionades.</string>
-    <string name="av_locations_all_desc">Fitxer GPX amb coordenades i dades de totes les notes.</string>
     <string name="shared_string_actions">Accions</string>
     <string name="shared_string_marker">Marcador</string>
     <string name="osm_recipient_stat">%1$s edicions, %2$s mBTC en total</string>
@@ -2388,7 +2375,6 @@
     <string name="live_monitoring_descr">Permet compartir la ubicació actual utilitzant l\'enregistrament de viatges.</string>
     <string name="live_monitoring">Seguiment en línia</string>
     <string name="save_track_logging_accuracy">Precisió de registre</string>
-    <string name="multimedia_notes_view_descr">Les vostres notes OSM són a %1$s.</string>
     <string name="video_notes">Notes de vídeo</string>
     <string name="photo_notes">Notes de fotos</string>
     <string name="app_mode_osm">OSM</string>

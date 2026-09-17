@@ -2315,7 +2315,6 @@
     <string name="live_monitoring">線上追蹤</string>
     <string name="save_track_logging_accuracy">記錄精度</string>
     <string name="tracks_view_descr">您已紀錄的軌跡位於 %1$s，或是 OsmAnd 資料夾。</string>
-    <string name="multimedia_notes_view_descr">您的 OSM 註記位於 %1$s。</string>
     <string name="video_notes">視訊註記</string>
     <string name="photo_notes">照片註記</string>
     <string name="accessibility_announce">播報</string>
@@ -2836,8 +2835,6 @@
     <string name="will_open_at">開始營業時間</string>
     <string name="will_open_on">營業日期</string>
     <string name="additional_actions">其他選項</string>
-    <string name="av_locations_selected_desc">包括坐標和所選註解資料的 GPX 檔案。</string>
-    <string name="av_locations_all_desc">包括坐標和所有註解資料的 GPX 檔案。</string>
     <string name="modify_the_search_query">更改您的搜尋。</string>
     <string name="shared_string_actions">選項</string>
     <string name="shared_string_marker">旗標</string>
@@ -2849,11 +2846,6 @@
     <string name="marker_activated">標記 %s 已啟動。</string>
     <string name="one_tap_active_descr">輕觸在地圖上的旗標，將其移動到活動標記的頂端，而不用打開內容選單。</string>
     <string name="one_tap_active">「點一下」啟動</string>
-    <string name="empty_state_av_notes">新增筆記！</string>
-    <string name="empty_state_av_notes_desc">您可以透過小工具或內容選單，在地圖上的任何位置加入音訊、影片或照片筆記。</string>
-    <string name="notes_by_date">以日期排序的音訊／視訊註記</string>
-    <string name="by_date">按照日期</string>
-    <string name="by_type">按照類型</string>
     <string name="looking_for_tracks_with_waypoints">尋找有航點的軌跡</string>
     <string name="shared_string_more_without_dots">更多</string>
     <string name="appearance_on_the_map">在地圖上顯示</string>
@@ -3333,8 +3325,6 @@
     <string name="simulate_your_location_stop_descr">停止位置模擬。</string>
     <string name="simulate_your_location_descr">模擬目前位置，以便在路線規劃或記錄 GPX 軌跡時使用。</string>
     <string name="looking_up_address">搜尋地址</string>
-    <string name="av_locations_descr">GPX 檔案加上地點。</string>
-    <string name="av_locations">地點</string>
     <string name="plugin_settings">外掛元件</string>
     <string name="routing_attr_avoid_shuttle_train_name">避免車載列車</string>
     <string name="routing_attr_avoid_shuttle_train_description">避免車載列車路線</string>
@@ -3443,7 +3433,6 @@
     <string name="welcome_header">歡迎</string>
     <string name="current_route">目前的路線</string>
     <string name="osm_changes_added_to_local_edits">OSM 變更已加入本機編輯設定</string>
-    <string name="local_recordings_delete_all_confirm">您是否要刪除 %1$d 個註記？</string>
     <string name="delay_to_start_navigation">指引後開始路線建議…</string>
     <string name="shared_string_go">開始</string>
     <string name="osmand_parking_overdue">已逾期</string>
@@ -3550,7 +3539,6 @@
     <string name="plugin_nautical_descr">使用航行路線、航道燈、海域危險區域、航行或停泊限制區等資訊。如要使用此功能，請下載相應的海圖，並在「地圖設定」中啟用「海圖」樣式 \n \n更多詳情請瀏覽 %1$s 。</string>
     <string name="plugin_ski_name">滑雪視圖</string>
     <string name="plugin_ski_descr">設計用於冬季運動場域的導航：顯示滑雪雪道、纜車和越野滑雪道，並以彩色線條標示難度等級。如要使用此功能，請啟用此插件，並前往「設定地圖」，選擇「冬季和滑雪」地圖樣式。</string>
-    <string name="audionotes_plugin_name">語音/影像備註</string>
     <string name="audionotes_plugin_description">在旅程中透過地圖按鈕或位置選單，快速記錄語音、相片或影片備註。</string>
     <string name="osmand_parking_plugin_name">泊車地點</string>
     <string name="osmand_parking_plugin_description">標記車輛停泊位置，並在停車計時器到期時通知行事曆。要設置旗標，請在地圖上選擇地點，點選「選項」，然後選擇「新增泊車位」。</string>
@@ -3563,7 +3551,6 @@
     <string name="rename_failed">重新命名失敗。</string>
     <string name="back_to_map">返回地圖</string>
     <string name="share_note">分享註解</string>
-    <string name="watch">觀看</string>
     <string name="notes">音訊與視訊註記</string>
     <string name="online_map">線上地圖</string>
     <string name="free">%1$s 可用</string>
@@ -3916,7 +3903,6 @@
     <string name="recording_unavailable">無法使用</string>
     <string name="recording_context_menu_arecord">錄音附註</string>
     <string name="recording_context_menu_vrecord">錄影附註</string>
-    <string name="layer_recordings">記錄層</string>
     <string name="recording_context_menu_play">播放</string>
     <string name="recording_description">錄製 %1$s %3$s %2$s</string>
     <string name="recording_default_name">錄製中</string>

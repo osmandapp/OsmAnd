@@ -51,7 +51,6 @@
     <string name="recording_unavailable">nedostupan</string>
     <string name="recording_context_menu_arecord">Napravi zvučnu belešku</string>
     <string name="recording_context_menu_vrecord">Napravi belešku videa</string>
-    <string name="layer_recordings">Nivo za snimanje</string>
     <string name="recording_context_menu_play">Reprodukcija</string>
     <string name="recording_default_name">Snimanje</string>
     <string name="shared_string_control_start">Kreni</string>
@@ -194,7 +193,6 @@
     <string name="plugin_ski_descr">Napravljeno za navođenje po oblastima zimskih sportova. Pregleda skijaške staze i skijaške žičare, poljske skijaške putanje, sa obojenim linijama koje ukazujućim na težinu staza. Radi korišćenja ovog dodatka promeni izgled mape na \"Podesi mapu\" pa izgled \"Zima i skijanje\".</string>
     <string name="shared_string_audio">Audio</string>
     <string name="share_note">Deli belešku</string>
-    <string name="watch">Gledati</string>
     <string name="notes">Beleške zvuka/videa</string>
     <string name="online_map">Mapa sa interneta</string>
     <string name="free">Slobodno %1$s</string>
@@ -1505,7 +1503,6 @@
     <string name="osmand_parking_overdue">zakasneo</string>
     <string name="shared_string_go">Idi</string>
     <string name="delay_to_start_navigation">Pokrenite detaljno navođenje nakon…</string>
-    <string name="local_recordings_delete_all_confirm">Obrisati %1$d beleške(i)?</string>
     <string name="osm_changes_added_to_local_edits">Izmene OSM-a dodate skupu lokalnih izmena</string>
     <string name="current_route">Trenutna ruta</string>
     <string name="welcome_header">Dobrodošli</string>
@@ -1613,8 +1610,6 @@
     <string name="routing_attr_avoid_shuttle_train_description">Autovozove</string>
     <string name="routing_attr_avoid_shuttle_train_name">Autovoz</string>
     <string name="plugin_settings">Dodaci</string>
-    <string name="av_locations">Lokacije</string>
-    <string name="av_locations_descr">GPX fajl sa lokacijama.</string>
     <string name="looking_up_address">Traži se adresa</string>
     <string name="simulate_your_location_descr">Simuliraj upotrebom proračunate rute ili snimka GPX-a.</string>
     <string name="simulate_your_location_stop_descr">Zaustavi simuliranje lokacije.</string>
@@ -1667,11 +1662,6 @@
     <string name="appearance_on_the_map">Izgled na mapi</string>
     <string name="shared_string_more_without_dots">Još</string>
     <string name="looking_for_tracks_with_waypoints">Pretraga putanja sa prolaznim tačkama</string>
-    <string name="by_type">Po vrsti</string>
-    <string name="by_date">Po danu</string>
-    <string name="notes_by_date">Beleške po datumu</string>
-    <string name="empty_state_av_notes_desc">Dodaj zvučnu, video ili slikovnu belešku na svaku tačku mape koristeći vidžet ili priručne menije.</string>
-    <string name="empty_state_av_notes">Pravi beleške!</string>
     <string name="one_tap_active">\'Jedan tap\' aktivan</string>
     <string name="one_tap_active_descr">Tapni marker na mapi radi njegovog pomeranja na vrh aktivnih markera bez otvaranja priručnog menija.</string>
     <string name="marker_activated">Marker %s aktivan.</string>
@@ -2230,8 +2220,6 @@
     <string name="shared_string_marker">Marker</string>
     <string name="shared_string_actions">Akcije</string>
     <string name="modify_the_search_query">izmeni pretragu.</string>
-    <string name="av_locations_all_desc">GPX- fajl sa koordinatama i podacima svih beležaka.</string>
-    <string name="av_locations_selected_desc">GPX fajl sa koordinatama i podacima izabrane beleške.</string>
     <string name="additional_actions">Dodatne akcije</string>
     <string name="will_open_on">Otvara se u</string>
     <string name="will_open_at">Otvara se u</string>
@@ -2558,7 +2546,6 @@
     <string name="osmand_parking_plugin_description">Označava gde su vam auta ostavljena i obaveštava kalendar kada će isteći vreme parkiranja. Za postavljanje markera, izaberi mesto na mapi, idi na \"Radnje\" i tapni na \"Dodaj parking\".</string>
     <string name="osmand_parking_plugin_name">Parking pozicija</string>
     <string name="audionotes_plugin_description">Pravi zvučne/video beleške tokom putovanja, koristeći bilo dugme mape ili kontekstni meni lokacije.</string>
-    <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
     <string name="plugin_touringview_descr">Uključivanjem ovog pogleda se menja način izgeda mape na „Turistički pregled“, koji je naročiti bogati pregled za turiste i službene vozače. \n\nOvaj pogled nudi, na svakom stupnju približavanja najveću količinu turističkih detalja na podacima mape (posebno puteve, tragove, staze i znakove snalaženja u prostoru). \n\nTakođe i jasno predstavlja sve vrste puteva po boji, tako da nikad ne bude zabune, što je korisno kada se npr. voze veća vozila. \n\nA nudi se i posebne turističke mogućnosti kao što su prikaz biciklističkih ili planinskih puteva. \n\nNije potrebno preuzimanje posebne mape, pogled se pravi od običnih mapi. \n\nOvaj pogled se može isključiti tako što se ili ovde isključi, ili tako što se, po želji, promeni način izgleda mape pod Podesi mapu.</string>
     <string name="plugin_touringview_name">Turistički pregled mape</string>
     <string name="srtm_plugin_description">Pruža teren i detaljnu topografiju za vizuelno razumevanje reljefa pejzaža i prohodnosti, koristeći konturne linije, senčenje brda ili bojenje padina i 3D prikaz.\n\nDa biste omogućili ove funkcije za region, potrebno je dodatno da preuzmete kartu konturnih linija i/ili terena (3D), sastavljenu iz SRTM i ASTER podataka.\n\nViše informacija na %1$s.</string>
@@ -2736,7 +2723,6 @@
     <string name="accessibility_announce">Najavi</string>
     <string name="photo_notes">Foto beleške</string>
     <string name="video_notes">Video beleške</string>
-    <string name="multimedia_notes_view_descr">Tvoje beleške OSM-a su u %1$s.</string>
     <string name="tracks_view_descr">Snimljene trase su u %1$s, ili u folderu OsmAnda.</string>
     <string name="save_track_logging_accuracy">Tačnost beleženja</string>
     <string name="live_monitoring">Praćenje preko interneta</string>

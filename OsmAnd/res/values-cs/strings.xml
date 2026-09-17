@@ -544,7 +544,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic (administrativní úrovně 5-9).</string>
     <string name="download_select_map_types">Ostatní mapy</string>
-    <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
     <string name="srtm_plugin_description">Poskytuje terén a podrobnou topografii pro vizuální pochopení reliéfu krajiny a sjízdnosti pomocí vrstevnic, stínování kopců nebo zbarvení svahů a 3D zobrazení.\n\nChcete-li tyto funkce pro danou oblast aktivovat, musíte si dodatečně stáhnout mapu vrstevnic a/nebo terénu (3D), sestavenou z dat SRTM a ASTER.\n\nDalší informace najdete na %1$s.</string>
     <string name="srtm_plugin_name">Topografie</string>
     <string name="download_srtm_maps">Vrstevnice</string>
@@ -560,7 +559,6 @@
     <string name="av_video_format">Formát videozáznamu</string>
     <string name="recording_error">Nahrávání selhalo</string>
     <string name="recording_unavailable">nedostupné</string>
-    <string name="layer_recordings">Audio/video nahrávky</string>
     <string name="recording_description">Nahrávka %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nahrávání</string>
     <string name="shared_string_control_start">Start</string>
@@ -929,7 +927,6 @@
     <string name="free">%1$s volných</string>
     <string name="device_memory">Paměť zařízení</string>
     <string name="shared_string_audio">Audio</string>
-    <string name="watch">Zobrazit</string>
     <string name="shared_string_selected">Vybraný</string>
     <string name="rename_failed">Přejmenování selhalo.</string>
     <string name="shared_string_currently_recording_track">Právě zaznamenávaná trasa</string>
@@ -1024,7 +1021,6 @@
     <string name="rendering_value_disabled_name">Vypnuto</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Příslušnost k síti</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
-    <string name="local_recordings_delete_all_confirm">Smazat %1$d poznámek\?</string>
     <string name="download_wikipedia_maps">Wikipedie</string>
     <string name="rendering_value_red_name">Červená</string>
     <string name="rendering_value_default13_name">Výchozí (13)</string>
@@ -1066,8 +1062,6 @@
     <string name="shared_string_skip">Přeskočit</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="plugin_settings">Moduly</string>
-    <string name="av_locations_descr">GPX soubor s umístěními.</string>
-    <string name="av_locations">Umístění</string>
     <string name="routing_attr_avoid_shuttle_train_name">Žádný autovlak</string>
     <string name="routing_attr_avoid_shuttle_train_description">Vyhne se použití autovlaků</string>
     <string name="lang_la">Latina</string>
@@ -1732,11 +1726,6 @@
     <string name="shared_string_added">Přidáno</string>
     <string name="marker_activated">Značka %s aktivována.</string>
     <string name="one_tap_active_descr">Klepněte na značku na mapě pro její přesunutí na první místo v aktivních značkách bez otevření kontextové nabídky.</string>
-    <string name="empty_state_av_notes">Dělejte si poznámky!</string>
-    <string name="empty_state_av_notes_desc">Přidejte audio, video nebo fotografické poznámky pro libovolný bod na mapě, pomocí nástroje nebo kontextového menu.</string>
-    <string name="notes_by_date">Multimediální poznámky podle data</string>
-    <string name="by_date">Podle datumu</string>
-    <string name="by_type">Podle typu</string>
     <string name="empty_state_markers_active_desc">Klepnutím nebo přidržením označte \'Místa\', pak klepněte na tlačítko značky s vlajkou.</string>
     <string name="modify_the_search_query">Změňte vyhledávací dotaz.</string>
     <string name="one_tap_active">Funkce \"Jedním stiskem\" je aktivní</string>
@@ -1755,8 +1744,6 @@
     <string name="will_open_at">Otevírá v</string>
     <string name="will_open_on">Otevírá v</string>
     <string name="additional_actions">Další akce</string>
-    <string name="av_locations_selected_desc">GPX soubor se souřadnicemi a daty vybraných poznámek.</string>
-    <string name="av_locations_all_desc">GPS soubor se souřadnicemi a daty všech poznámek.</string>
     <string name="shared_string_actions">Akce</string>
     <string name="winter_and_ski_renderer">Zimní</string>
     <string name="touring_view_renderer">Cestovní</string>
@@ -2741,7 +2728,6 @@
     <string name="osm_editing">Editace OSM</string>
     <string name="accessibility_announce">Oznámení</string>
     <string name="photo_notes">Foto-poznámky</string>
-    <string name="multimedia_notes_view_descr">Vaše OSM poznámky jsou v %1$s.</string>
     <string name="tracks_view_descr">Všechny vaše zaznamenané stopy jsou v %1$s, nebo ve složce OsmAnd.</string>
     <string name="save_track_logging_accuracy">Přesnost záznamu</string>
     <string name="live_monitoring">Sledování online</string>

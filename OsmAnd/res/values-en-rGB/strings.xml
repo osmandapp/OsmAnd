@@ -502,7 +502,6 @@
     <string name="shared_string_markers">Markers</string>
     <string name="set_step_size_summary">Choose a step size to group your tracks.</string>
     <string name="set_step_size">Set step size</string>
-    <string name="audionotes_plugin_name">Audio/video notes</string>
     <string name="organize_by_summary">Automatically organise your tracks into groups based on a selected parameter like activity, speed, or location.</string>
     <string name="shared_string_accessibility">Accessibility</string>
     <string name="organize_by">Organise by</string>

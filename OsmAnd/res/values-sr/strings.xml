@@ -52,7 +52,6 @@
     <string name="recording_unavailable">недоступан</string>
     <string name="recording_context_menu_arecord">Направи звучну белешку</string>
     <string name="recording_context_menu_vrecord">Направи белешку видеа</string>
-    <string name="layer_recordings">Слој за снимање</string>
     <string name="recording_context_menu_play">Изведи</string>
     <string name="recording_default_name">Снимање</string>
     <string name="shared_string_control_start">Почни</string>
@@ -196,7 +195,6 @@
     <string name="plugin_ski_descr">Направљено за навођење по областима зимских спортова. Прегледајте скијашке стазе и скијашке жичаре, пољске скијашке стазе, са обојеним линијама које указују на тежину стаза. Ради коришћења овог прикључка промените изглед карте на \"Подеси карту\" на изглед \"Зима и скијање\".</string>
     <string name="shared_string_audio">Звук</string>
     <string name="share_note">Дели белешку</string>
-    <string name="watch">Прегледај</string>
     <string name="notes">Белешке звука/видеа</string>
     <string name="online_map">Карта са мреже</string>
     <string name="free">Слободно %1$s</string>
@@ -280,8 +278,6 @@
     <string name="simulate_your_location_stop_descr">Заустави опонашање свог положаја.</string>
     <string name="simulate_your_location_descr">Опонашај употребом прорачунате путање или трага ГПИкс-а.</string>
     <string name="looking_up_address">Претражујем адресу</string>
-    <string name="av_locations_descr">Датотека ГПИкс са положајима.</string>
-    <string name="av_locations">Положаји</string>
     <string name="plugin_settings">Додаци</string>
     <string name="rendering_value_boldOutline_name">Задебљај обрисне линије</string>
     <string name="no_updates_available">Нема доступних надградњи</string>
@@ -357,7 +353,6 @@
     <string name="welcome_header">Добродошли</string>
     <string name="current_route">Тренутна путања</string>
     <string name="osm_changes_added_to_local_edits">Измене ОСМ-а додате скупу местних измена</string>
-    <string name="local_recordings_delete_all_confirm">Обрисати %1$d белешке(и)\?</string>
     <string name="delay_to_start_navigation">Покрени навођење скретања након…</string>
     <string name="action_modify">Дејство измене</string>
     <string name="action_delete">Дејство брисања</string>
@@ -435,7 +430,6 @@
     <string name="record_plugin_name">Снимање путовања</string>
     <string name="srtm_plugin_name">Топографија</string>
     <string name="plugin_touringview_name">Туристички преглед карте</string>
-    <string name="audionotes_plugin_name">Звучне/видео белешке</string>
     <string name="audionotes_plugin_description">Правите звучне/видео белешке за време путовања, или кроз дугме на карти или кроз приручни изборник положаја.</string>
     <string name="osmand_parking_plugin_name">Положај паркирања</string>
     <string name="osmand_parking_plugin_description">Означава где су вам кола остављена, и обавештава Вам календар када ће истећи време паркирања. Ради смештаја ознаке, изаберите место на карти, идите на \"Радње\", и тапните на \"Додај паркиралиште\".</string>
@@ -986,8 +980,6 @@
     <string name="will_open_at">Отвара се у</string>
     <string name="will_open_on">Отвара се у</string>
     <string name="additional_actions">Додатне радње</string>
-    <string name="av_locations_selected_desc">Датотека ГПИкс-а са координатама и подацима изабране белешке.</string>
-    <string name="av_locations_all_desc">Датотека ГПИкс-а са координатама и подацима свих бележака.</string>
     <string name="modify_the_search_query">Измените претрагу.</string>
     <string name="shared_string_actions">Радње</string>
     <string name="shared_string_marker">Ознака</string>
@@ -999,11 +991,6 @@
     <string name="marker_activated">Покренута је ознака %s.</string>
     <string name="one_tap_active_descr">Тапните ознаку на карти ради њеног померања на врх покренутих ознака без отварања приручног изборника.</string>
     <string name="one_tap_active">Покретање на \'један тап\'</string>
-    <string name="empty_state_av_notes">Правите белешке!</string>
-    <string name="empty_state_av_notes_desc">Додајте звучну, видео или сликовну белешку на сваку тачку карте користећи справице или приручне изборнике.</string>
-    <string name="notes_by_date">З/В белешке по датуму</string>
-    <string name="by_date">По дану</string>
-    <string name="by_type">По врсти</string>
     <string name="looking_for_tracks_with_waypoints">Претрага за траговима са пролазним тачкама</string>
     <string name="shared_string_more_without_dots">Још</string>
     <string name="add_track_to_markers_descr">Одаберите са којег трага да додате пролазне тачке на ознаке.</string>
@@ -2383,7 +2370,6 @@
     <string name="live_monitoring">Праћење преко интернета</string>
     <string name="save_track_logging_accuracy">Тачност бележења</string>
     <string name="tracks_view_descr">Ваш снимљени трагови су у %1$s, или у фасцикли ОсмАнда.</string>
-    <string name="multimedia_notes_view_descr">Ваше белешке ОСМ-а су у %1$s.</string>
     <string name="video_notes">Белешке видеа</string>
     <string name="photo_notes">Белешке слика</string>
     <string name="accessibility_announce">Објави</string>

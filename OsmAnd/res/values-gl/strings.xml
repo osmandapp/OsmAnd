@@ -276,7 +276,6 @@
     <string name="recording_unavailable">non dispoñíbel</string>
     <string name="recording_context_menu_arecord">Gravar unha nota de son</string>
     <string name="recording_context_menu_vrecord">Tomar unha nota de vídeo</string>
-    <string name="layer_recordings">Capa de gravacións</string>
     <string name="recording_context_menu_play">Reproducir</string>
     <string name="recording_description">Gravación %1$s %3$s %2$s</string>
     <string name="recording_default_name">Gravación</string>
@@ -286,7 +285,6 @@
     <string name="audionotes_location_not_defined">Preme \'Empregar localización…\' para engadir unha nota á localización.</string>
     <string name="map_widget_audionotes">Notas de son</string>
     <string name="audionotes_plugin_description">Fai notas de audio, fotografías e/ou vídeos durante unha viaxe, empregando un botón no mapa ou o menú contextual da localización.</string>
-    <string name="audionotes_plugin_name">Notas de son/vídeo</string>
     <string name="srtm_plugin_name">Topografía</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_roads_only_item">Só as estradas</string>
@@ -974,7 +972,6 @@
     <string name="welmode_download_maps">Baixar mapas</string>
     <string name="welcome_header">Reciba a benvida</string>
     <string name="current_route">Rota actual</string>
-    <string name="local_recordings_delete_all_confirm">Eliminar %1$d notas\?</string>
     <string name="shared_string_go">Ir</string>
     <string name="osm_edits">Edicións do OSM</string>
     <string name="osmand_parking_hour">h</string>
@@ -1006,7 +1003,6 @@
     <string name="plugin_ski_name">Vista dos mapas de esquí</string>
     <string name="back_to_map">Volver ao mapa</string>
     <string name="share_note">Compartir nota</string>
-    <string name="watch">Vixiar</string>
     <string name="notes">Notas multimedia</string>
     <string name="online_map">Mapa na rede</string>
     <string name="device_memory">Memoria do dispositivo</string>
@@ -1076,7 +1072,6 @@
     <string name="add_opening_hours">Engadir as horas de apertura</string>
     <string name="working_days">Días laborábeis</string>
     <string name="favourites">Favoritos</string>
-    <string name="av_locations">Localizacións</string>
     <string name="rendering_value_boldOutline_name">Bordo groso</string>
     <string name="lang_nv">Navaho</string>
     <string name="agps_info">Información de A-GPS</string>
@@ -1146,7 +1141,6 @@
     <string name="feedback">Enquisa</string>
     <string name="shared_string_contact">Contacto</string>
     <string name="map_legend">Lenda do mapa</string>
-    <string name="av_locations_descr">Ficheiro GPX con localizacións.</string>
     <string name="plugin_touringview_name">Vista de mapa turístico</string>
     <string name="plugin_touringview_descr">Ó activares esta vista múdase o estilo do mapa do OsmAnd cara a \"Vista turística\", que é unha vista especial moi detallada para viaxeiros e condutores profesionais. 
 \n 
@@ -1674,8 +1668,6 @@
     <string name="will_open_at">Abre ás</string>
     <string name="will_open_on">Abre ás</string>
     <string name="additional_actions">Accións adicionais</string>
-    <string name="av_locations_selected_desc">Ficheiro GPX con coordenadas e datos das notas escollidas.</string>
-    <string name="av_locations_all_desc">Ficheiro GPX cas coordenadas e datos de tódalas notas.</string>
     <string name="modify_the_search_query">Mudar a procura.</string>
     <string name="shared_string_actions">Accións</string>
     <string name="shared_string_marker">Marcaxe</string>
@@ -1687,11 +1679,6 @@
     <string name="marker_activated">Activouse a marcaxe %s.</string>
     <string name="one_tap_active_descr">Preme nunha marcaxe do mapa para movela cara a parte de enriba das marcaxes activas sen abrir o menú contextual.</string>
     <string name="one_tap_active">Activar cun toque</string>
-    <string name="empty_state_av_notes">Crea notas!</string>
-    <string name="empty_state_av_notes_desc">Engadir notas de son, vídeo ou imaxe a calquera punto do mapa empregando os trebellos ou os menús contextuais.</string>
-    <string name="notes_by_date">Notas A/V por data</string>
-    <string name="by_date">Por data</string>
-    <string name="by_type">Por tipo</string>
     <string name="looking_for_tracks_with_waypoints">Estase a procurar pistas con puntos de pasaxe</string>
     <string name="shared_string_more_without_dots">Máis</string>
     <string name="add_favourites_group_to_markers_descr">Escolle unha categoría dos Favoritos para engadir ás marcaxes.</string>
@@ -2397,7 +2384,6 @@
     <string name="live_monitoring">Seguimento en liña</string>
     <string name="save_track_logging_accuracy">Precisión de rexistro</string>
     <string name="tracks_view_descr">As túas pistas gravadas están en %1$s, ou no cartafol do OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">As túas notas do OSM están en %1$s.</string>
     <string name="video_notes">Notas de vídeo</string>
     <string name="photo_notes">Notas de imaxe</string>
     <string name="accessibility_announce">Anuncio</string>

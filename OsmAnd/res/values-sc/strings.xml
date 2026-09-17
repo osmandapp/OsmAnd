@@ -173,7 +173,6 @@
     <string name="recording_unavailable">non disponìbile</string>
     <string name="recording_context_menu_arecord">Registra una nota àudio</string>
     <string name="recording_context_menu_vrecord">Registra una nota vìdeo</string>
-    <string name="layer_recordings">Istratu regitratziònes</string>
     <string name="recording_context_menu_play">Reprodui</string>
     <string name="recording_description">Registratzione %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registrende</string>
@@ -183,7 +182,6 @@
     <string name="audionotes_location_not_defined">Toca \"Imprea positzione…\" pro annànghere una nota a sa positzione.</string>
     <string name="map_widget_audionotes">Notas àudio</string>
     <string name="audionotes_plugin_description">Crea notas àudio/foto/vìdeu durante unu biàgiu, impreende o unu butone in sa mapa o su menù de cuntestu de sa positzione.</string>
-    <string name="audionotes_plugin_name">Estensione notas àudio/vìdeo</string>
     <string name="srtm_plugin_description">Sas informatziones de su terrinu, che a sas curvas de livellu, sas umbraduras de sos rilievos e sas pendèntzias, t\'agiudant a valutare cun sos ogros tuos sa dispositzione de su terrinu, sa navigabilidade e àteru. Sas informatziones topogràficas in una mapa si podent rapresentare cun s\'umbradura de sas pendèntzias, curvas de livellu e/o su colore de s\'àngulu de inclinatzione. \n \nSos datos impreados benint dae su SRTM e dae s\'ASTER. \n \nÀteras informatziones in %1$s.</string>
     <string name="srtm_plugin_name">Curvas de livellu</string>
     <string name="download_select_map_types">Àteras mapas</string>
@@ -953,7 +951,6 @@
     <string name="rendering_attr_pisteGrooming_name">Pista abbatigada</string>
     <string name="free">Lìbera %1$s</string>
     <string name="device_memory">Memòria dispositivu</string>
-    <string name="watch">Relògiu</string>
     <string name="notes">Notas àudio/vìdeu</string>
     <string name="online_map">Mapa in lìnia</string>
     <string name="share_note">Cumpartzi sa nota</string>
@@ -1048,7 +1045,6 @@
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
     <string name="read_full_article">Leghe s\'artìculu intreu (in lìnia)</string>
     <string name="shared_string_show_details">Ammustra minujas</string>
-    <string name="local_recordings_delete_all_confirm">Iscantzellare %1$d notas\?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="gps_network_not_enabled">Su servìtziu de localizatzione est istudadu. Lu cheres allùghere\?</string>
     <string name="disable_recording_once_app_killed">Èvita/istransi sa registratzione autònoma</string>
@@ -1130,8 +1126,6 @@
     <string name="next_proceed">Imbeniente</string>
     <string name="opening_at">Aberit a sas</string>
     <string name="closing_at">Serrat a sas</string>
-    <string name="av_locations_descr">Documentu GPX cun positziones.</string>
-    <string name="av_locations">Localidades</string>
     <string name="contact_info">Informatziones de cuntatu</string>
     <string name="add_opening_hours">Annanghe s’oràriu de abertura</string>
     <string name="poi_dialog_poi_type">Casta de PDI</string>
@@ -1881,11 +1875,6 @@
     <string name="marker_activated">Marcadore %s ativadu.</string>
     <string name="one_tap_active_descr">Incarca in unu marcadore in sa mapa pro lu moere in sa prima positzione in sos marcadores ativos, chene abèrrere su menù contestuale.</string>
     <string name="one_tap_active">\'Un\'incarcu\' ativu</string>
-    <string name="empty_state_av_notes">Piga notas!</string>
-    <string name="empty_state_av_notes_desc">Annanghe notas sonoras, vìdeos o fotografias a cada puntu in sa mapa, impreende su widget o sos menùs cuntestuales.</string>
-    <string name="notes_by_date">Notas sonoras/in vìdeu pro data</string>
-    <string name="by_date">Pro data</string>
-    <string name="by_type">Pro casta</string>
     <string name="modify_the_search_query">Muda sa chirca tua.</string>
     <string name="what_is_here">Ite b\'at inoghe:</string>
     <string name="parked_at">parchegiadu in</string>
@@ -1900,8 +1889,6 @@
     <string name="will_open_at">Aberit a sas</string>
     <string name="will_open_on">Aberit a sas</string>
     <string name="additional_actions">Atziones additzionales</string>
-    <string name="av_locations_selected_desc">Documentu GPX cun coordinadas e datos de sas notas ichertadas.</string>
-    <string name="av_locations_all_desc">Documentu GPX cun coordinadas e datos de totu sas notas.</string>
     <string name="shared_string_actions">Atziones</string>
     <string name="shared_string_marker">Marcadore</string>
     <string name="osm_recipient_stat">Modìficas %1$s, sum %2$s mBTC</string>
@@ -2520,7 +2507,6 @@
     <string name="live_monitoring">Arrastamentu in lìnia</string>
     <string name="save_track_logging_accuracy">Pretzisione de registratzione</string>
     <string name="tracks_view_descr">Podes agatare totu sas rastas registradas tuas in %1$s o in sa cartella de OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Sas notas tuas sunt in %1$s.</string>
     <string name="video_notes">Vìdeo-notas</string>
     <string name="photo_notes">Foto-notas</string>
     <string name="accessibility_announce">Annùntzia</string>

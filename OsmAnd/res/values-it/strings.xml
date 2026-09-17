@@ -518,7 +518,6 @@
     <string name="srtm_plugin_name">Topografia</string>
     <string name="srtm_plugin_description">Informazioni sul terreno come curve di livello, ombreggiature e pendii ti aiutano a valutare visivamente la conformazione del terreno e il rilievo, la navigabilità e altro ancora. Le informazioni topografiche possono essere rappresentate mediante ombreggiatura della pendenza, curve di livello e/o colorazione della pendenza. \n \nI dati di base sono forniti da SRTM e ASTER. \n \nUlteriori approfondimenti su %1$s.</string>
     <string name="audionotes_plugin_description">Crea note audio/foto/video durante un viaggio, utilizzando un pulsante della mappa o il menu contestuale della posizione.</string>
-    <string name="audionotes_plugin_name">Note audio/video</string>
     <string name="audionotes_location_not_defined">Tocca \'Utilizza posizione...\' per aggiungere una posizione alla nota.</string>
     <string name="map_widget_audionotes">Note audio</string>
     <string name="av_def_action_video">Registra video</string>
@@ -528,7 +527,6 @@
     <string name="recording_unavailable">non disponibile</string>
     <string name="recording_context_menu_arecord">Registra una nota audio</string>
     <string name="recording_context_menu_vrecord">Registra una nota video</string>
-    <string name="layer_recordings">Livello registrazioni</string>
     <string name="recording_context_menu_play">Riproduci</string>
     <string name="recording_description">Registrazione %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registrazione in corso</string>
@@ -873,7 +871,6 @@
     <string name="rendering_attr_pisteGrooming_name">Piste per sci da fondo</string>
     <string name="free">Libera %1$s</string>
     <string name="device_memory">Memoria dispositivo</string>
-    <string name="watch">Guarda</string>
     <string name="notes">Note A/V</string>
     <string name="online_map">Mappa online</string>
     <string name="share_note">Condividi l\'appunto</string>
@@ -1028,7 +1025,6 @@
     <string name="read_full_article">Leggi l\'articolo intero (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="shared_string_show_details">Mostra i dettagli</string>
-    <string name="local_recordings_delete_all_confirm">Confermi l\'eliminazione di %1$d nota/e\?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="lang_es_ar">Spagnolo (Argentina)</string>
     <string name="lang_nb">Norvegese bokmål</string>
@@ -1108,8 +1104,6 @@
     <string name="next_proceed">Avanti</string>
     <string name="opening_at">Apre alle</string>
     <string name="closing_at">Chiude alle</string>
-    <string name="av_locations_descr">File GPX con posizioni.</string>
-    <string name="av_locations">Posizioni</string>
     <string name="contact_info">Informazioni di contatto</string>
     <string name="add_opening_hours">Aggiungi orari di apertura</string>
     <string name="poi_dialog_poi_type">Tipo di PDI</string>
@@ -1772,11 +1766,6 @@
     <string name="marker_activated">Marcatore %s attivato.</string>
     <string name="one_tap_active_descr">Tocca un marcatore sulla mappa per muoverlo al primo posto nei marcatori attivi senza aprire il menù contestuale.</string>
     <string name="one_tap_active">\'Un tap\' attivo</string>
-    <string name="empty_state_av_notes">Prendi delle note!</string>
-    <string name="empty_state_av_notes_desc">Aggiungi note audio, video o foto in qualsiasi punto sulla mappa, utilizzando i widget o il menù contestuale.</string>
-    <string name="notes_by_date">Note a/v per data</string>
-    <string name="by_date">Per data</string>
-    <string name="by_type">Per tipo</string>
     <string name="modify_the_search_query">Cambia la tua ricerca.</string>
     <string name="osmand_extended_description_part6">Pedone, escursionismo, turistico\n • La mappa mostra i percorsi pedonali ed escursionistici\n • Wikipedia può dirti molto nelle visite alle città nel tuo linguaggio preferito\n • Le fermate dei trasporti pubblici (bus, tram, treni), inclusi i nomi delle linee, aiutano a navigare in una nuova città\n • La navigazione GPS nella modalità pedone costruisce il tuo percorso usando i percorsi pedonali\n • Carica e segui un percorso GPX o registrarne uno e condividilo</string>
     <string name="what_is_here">Cosa c\'è qui:</string>
@@ -1792,8 +1781,6 @@
     <string name="will_open_at">Aprirà alle</string>
     <string name="will_open_on">Aprirà alle</string>
     <string name="additional_actions">Altre azioni</string>
-    <string name="av_locations_selected_desc">File GPX con le coordinate e i dati delle note selezionate.</string>
-    <string name="av_locations_all_desc">File GPX con le coordinate e i dati di tutte le note.</string>
     <string name="shared_string_actions">Azioni</string>
     <string name="shared_string_marker">Marcatore</string>
     <string name="shared_string_without_name">Senza nome</string>
@@ -2393,7 +2380,6 @@
     <string name="live_monitoring">Tracciamento online</string>
     <string name="save_track_logging_accuracy">Precisione di registrazione</string>
     <string name="tracks_view_descr">Le tue tracce registrate sono in %1$s o nella cartella OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Le tue note OSM sono in %1$s.</string>
     <string name="video_notes">Note video</string>
     <string name="photo_notes">Note fotografiche</string>
     <string name="plugin_global_prefs_info">Queste impostazioni del plugin sono globali e si applicano a tutti i profili</string>

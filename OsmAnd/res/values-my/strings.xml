@@ -350,17 +350,12 @@
     <string name="will_open_at">ဖွင့်ချိန်</string>
     <string name="will_open_on">ဖွင့်ချိန်</string>
     <string name="additional_actions">အပိုလုပ်ဆောင်မှုများ</string>
-    <string name="av_locations_all_desc">ကိုသြဒီနိတ်များနှင့်မှတ်စုအားလုံး၏အချက်အလက်များပါသော GPX ဖိုင်။</string>
     <string name="shared_string_actions">လုပ်ဆောင်ချက်များ</string>
     <string name="shared_string_marker">အမှတ်အသား</string>
     <string name="empty_state_osm_edits">OSM အရာဝတ္ထုများကိုဖန်တီးခြင်းသို့မဟုတ်ပြုပြင်ခြင်း</string>
     <string name="shared_string_deleted">ဖျက်လိုက်သည်</string>
     <string name="shared_string_edited">တည်းဖြတ်သည်</string>
     <string name="shared_string_added">ထည့်သည်</string>
-    <string name="empty_state_av_notes">မှတ်စုယူပါ။</string>
-    <string name="empty_state_av_notes_desc">အသံ၊ ဗွီဒီယိုသို့မဟုတ်ဓာတ်ပုံမှတ်စုကိုဝစ်ဂျက် (သို့) ဆက်စပ်မီနူးကို သုံး၍ မြေပုံပေါ်ရှိအမှတ်အားလုံးကိုထည့်ပါ။</string>
-    <string name="by_date">နေ့စွဲအလိုက်</string>
-    <string name="by_type">အမျိုးအလိုက်</string>
     <string name="shared_string_more_without_dots">နောက်ထပ်</string>
     <string name="appearance_on_the_map">မြေပုံပေါ်တွင်ပုံပန်းသဏ္ဌာန်</string>
     <string name="favourites_group">အနှစ်သက်ဆုံးအမျိုးအစား</string>

@@ -323,7 +323,6 @@
     <string name="recording_unavailable">niedastupny</string>
     <string name="recording_context_menu_arecord">Zapіsać aŭdyjo-natatku</string>
     <string name="recording_context_menu_vrecord">Zapіsać vіdea-natatku</string>
-    <string name="layer_recordings">Słoj zapіsu</string>
     <string name="recording_context_menu_play">Hrać</string>
     <string name="recording_description">Zapіs %1$s %3$s %2$s</string>
     <string name="recording_default_name">Zapіs</string>
@@ -333,7 +332,6 @@
     <string name="audionotes_location_not_defined">Miescaznachodžannie dlia pryviazki natatki pakuĺ jašče nie vyznačylasia. «Vykarystać miescaznachodžańnie…» kab pryznačyć natatku ŭ vybranym miescy.</string>
     <string name="map_widget_audionotes">Aŭdyjo-natatkі</string>
     <string name="audionotes_plugin_description">Modul dla stvareńnia aŭdyjo/vіdea-natatak padčas padarožžaŭ, z dapamohaj vykarystańnia knopkі na ekranie mapy abo praz kantekstnaje meniu na lubym miescy na mapie.</string>
-    <string name="audionotes_plugin_name">Aŭdyjo/vіdea-natatkі</string>
     <string name="srtm_plugin_name">Іzalinіі vyšyń</string>
     <string name="download_select_map_types">Іnšyja mapy</string>
     <string name="download_roads_only_item">Tolkі darohі</string>
@@ -1094,8 +1092,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="simulate_your_location_stop_descr">Spynić emuliacyju svajho stanovišča.</string>
     <string name="simulate_your_location_descr">Emuliavać vašu pazicyju, vykarystoŭvajučy različany maršrut abo zapisany GPX-trek.</string>
     <string name="looking_up_address">Pošuk adresy</string>
-    <string name="av_locations_descr">GPX-fajl z miecaznachodžanniem zaŭvah.</string>
-    <string name="av_locations">Miescaznachodžańnі</string>
     <string name="plugin_settings">Moduli</string>
     <string name="routing_attr_avoid_shuttle_train_name">Paźbiahać transfier-ciahnіk</string>
     <string name="routing_attr_avoid_shuttle_train_description">Pazbiahać vykarystannia pryharadnych ciahnikoŭ</string>
@@ -1190,7 +1186,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="welcome_header">Vіtajem</string>
     <string name="current_route">Dziejny maršrut</string>
     <string name="osm_changes_added_to_local_edits">Źmieny OSM dadadzienyja da lakalnaha naboru źmienaŭ</string>
-    <string name="local_recordings_delete_all_confirm">Vy źbіrajeciesia vydalić %1$d natatkі. Vy ŭpeŭnienyja?</string>
     <string name="delay_to_start_navigation">Pačać pakrokavaje kiravannie praz…</string>
     <string name="shared_string_go">Pajechali</string>
     <string name="osmand_parking_overdue">Sastareli</string>
@@ -1250,7 +1245,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="rename_failed">Pierajmienavannie nie atrymalasia.</string>
     <string name="back_to_map">Viarnucca da mapy</string>
     <string name="share_note">Padzialicca natatkaju</string>
-    <string name="watch">Sačyć</string>
     <string name="notes">Natatkі</string>
     <string name="online_map">Іnternet mapa</string>
     <string name="free">Voĺna %1$s</string>
@@ -1857,13 +1851,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_edited">Adredahavana</string>
     <string name="shared_string_added">Dadadziena</string>
     <string name="marker_activated">Paznaka %s aktyvavanaja.</string>
-    <string name="notes_by_date">Natatki pa dacie</string>
-    <string name="by_date">Pa dacie</string>
-    <string name="by_type">Pa typu</string>
     <string name="one_tap_active_descr">Nacisk na paznaku na mapie pieramiescić hetuju paznaku na pieršaje miesca ŭ spisie aktyŭnych paznakaŭ biez adkryccia kantekstnaha mieniu.</string>
     <string name="one_tap_active">Aktyvacyja adnym naciskam</string>
-    <string name="empty_state_av_notes">Rabi natatki!</string>
-    <string name="empty_state_av_notes_desc">Dadajcie aŭdyjo-, videa- ci fotanatatku na lubuju kropku na mapie, vykarystoŭvajučy vidžet ci kantekstnaje mieniu.</string>
     <string name="modify_the_search_query">Źmianicie pošukavy zapyt.</string>
     <string name="what_is_here">Što tut:</string>
     <string name="parked_at">pryparkavany na</string>
@@ -1873,8 +1862,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="context_menu_read_article">Čytać artykul</string>
     <string name="context_menu_points_of_group">Usie kropki hrupy</string>
     <string name="additional_actions">Dadatkovyja dziejańni</string>
-    <string name="av_locations_selected_desc">GPX-fajl z kaardynatami i danymi vybranych natatak.</string>
-    <string name="av_locations_all_desc">GPX-fajl z kaardynatami i danymi ŭsich natatak.</string>
     <string name="shared_string_actions">Dziejanni</string>
     <string name="shared_string_marker">Paznaka</string>
     <string name="osm_recipient_stat">Zmien %1$s, suma %2$s mBTC</string>

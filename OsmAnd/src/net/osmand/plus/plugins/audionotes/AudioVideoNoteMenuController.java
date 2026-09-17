@@ -137,7 +137,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 	public String getCommonTypeStr() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return mapActivity.getString(R.string.audionotes_plugin_name);
+			return mapActivity.getString(R.string.shared_string_media);
 		} else {
 			return "";
 		}

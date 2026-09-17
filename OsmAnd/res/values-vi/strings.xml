@@ -3187,7 +3187,6 @@
     <string name="keep_both_desc">Các mục được nhập sẽ được thêm với tiền tố</string>
     <string name="select_data_to_import">Chọn dữ liệu sẽ được nhập.</string>
     <string name="live_monitoring_descr">Cho phép chia sẻ vị trí hiện tại bằng việc ghi hành trình.</string>
-    <string name="multimedia_notes_view_descr">Ghi chú OSM của bạn nằm trong %1$s.</string>
     <string name="shared_string_importing">Đang nhập</string>
     <string name="file_does_not_contain_routing_rules">Không có quy tắc chỉ đường nào trong \'%1$s\'. Vui lòng chọn một tệp khác.</string>
     <string name="restore_all_profile_settings">Khôi phục tất cả cài đặt hồ sơ?</string>
@@ -3641,8 +3640,6 @@
     <string name="will_close_at">Đóng lúc</string>
     <string name="will_open_at">Mở lúc</string>
     <string name="will_open_on">Mở lúc</string>
-    <string name="av_locations_selected_desc">Tệp GPX với tọa độ và dữ liệu của các ghi chú đã chọn.</string>
-    <string name="av_locations_all_desc">Tệp GPX với tọa độ và dữ liệu của tất cả ghi chú.</string>
     <string name="modify_the_search_query">Thay đổi tìm kiếm của bạn.</string>
     <string name="shared_string_marker">Điểm đánh dấu</string>
     <string name="empty_state_osm_edits">Tạo hoặc sửa đổi các đối tượng OpenStreetMap</string>
@@ -3650,11 +3647,6 @@
     <string name="marker_activated">Điểm đánh dấu %s đã được kích hoạt.</string>
     <string name="one_tap_active_descr">Chạm một điểm đánh dấu trên bản đồ để chuyển nó đến đầu các điểm đánh dấu đang hoạt động mà không cần mở menu ngữ cảnh.</string>
     <string name="one_tap_active">\'Một chạm\' đang hoạt động</string>
-    <string name="empty_state_av_notes">Tạo ghi chú!</string>
-    <string name="empty_state_av_notes_desc">Thêm ghi chú bằng âm thanh, video hoặc hình ảnh đến bất kì điểm nào trên bản đồ bằng cách sử dụng widget hoặc menu ngữ cảnh.</string>
-    <string name="notes_by_date">Ghi chú A/V theo ngày</string>
-    <string name="by_date">Theo ngày</string>
-    <string name="by_type">Theo loại</string>
     <string name="looking_for_tracks_with_waypoints">Đang tìm những hành trình với điểm dừng</string>
     <string name="shared_string_more_without_dots">Thêm</string>
     <string name="appearance_on_the_map">Cách hiển thị trên bản đồ</string>
@@ -4506,8 +4498,6 @@
     <string name="min_km">phút/km</string>
     <string name="m_s">m/s</string>
     <string name="simulate_your_location_descr">Mô phỏng vị trí của bạn bằng cách dùng một tuyến đường đã được tính toán hoặc một hành trình GPX đã ghi.</string>
-    <string name="av_locations_descr">Tệp GPX với vị trí.</string>
-    <string name="av_locations">Vị trí</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Mặc định (màu xanh lục lam mờ)</string>
     <string name="rendering_value_defaultMedium_name">Mặc định (trung bình)</string>
     <string name="rendering_value_darkyellow_name">Màu vàng đậm</string>
@@ -4538,7 +4528,6 @@
     <string name="osm_changes_added_to_local_edits">Các thay đổi OSM đã được thêm vào bộ thay đổi cục bộ</string>
     <string name="osm_edits">Chỉnh sửa OSM</string>
     <string name="shared_string_online_maps">Bản đồ trực tuyến</string>
-    <string name="audionotes_plugin_name">Ghi chú âm thanh/video</string>
     <string name="osmand_parking_plugin_name">Vị trí đỗ xe</string>
     <string name="settings_privacy">Quyền riêng tư</string>
     <string name="avoid_roads_msg">Kích hoạt một tuyến đường khác bằng cách chọn những đường cần tránh</string>

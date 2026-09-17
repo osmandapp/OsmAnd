@@ -523,7 +523,6 @@
     <string name="recording_unavailable">nedostupné</string>
     <string name="recording_context_menu_arecord">Zaznamenať zvukovú poznámku</string>
     <string name="recording_context_menu_vrecord">Zaznamenať video poznámku</string>
-    <string name="layer_recordings">Vrstva s poznámkami</string>
     <string name="recording_context_menu_play">Prehrať</string>
     <string name="recording_description">Záznam %1$s %2$s %3$s</string>
     <string name="recording_default_name">Záznam</string>
@@ -531,7 +530,6 @@
     <string name="audionotes_location_not_defined">Stlačte \"Použiť polohu…\" pre pridanie poznámky k polohe.</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytvárajte obrazové/zvukové/video poznámky počas výletu, buď tlačidlom na mape alebo v kontextovom menu polohy na mape.</string>
-    <string name="audionotes_plugin_name">Audio/video poznámky</string>
     <string name="srtm_plugin_description">Poskytuje terén a detailnú topografiu pre vizuálne pochopenie reliéfu krajiny a jej schodnosť, pomocou vrstevníc, tieňovaných svahov, vyfarbením svahov a 3D zobrazenia.\n \nPre zapnutie týchto funkcií na oblasti musíte dodatočne stiahnuť mapu vrstevníc a/alebo terénu (3D), spracovanú z údajov SRTM a ASTER.\n \nĎalšie podrobnosti na %1$s.</string>
     <string name="srtm_plugin_name">Topografia</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
@@ -891,7 +889,6 @@
 \n 
 \nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
     <string name="plugin_touringview_name">Cestovný mapový pohľad</string>
-    <string name="watch">Zobraziť</string>
     <string name="rename_failed">Premenovanie zlyhalo.</string>
     <string name="back_to_map">Späť na mapu</string>
     <string name="track_segments">Úseky stopy</string>
@@ -1026,7 +1023,6 @@
     <string name="shared_string_show_details">Zobraziť detaily</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importovať do OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Vymazať %1$d poznámok\?</string>
     <string name="gps_network_not_enabled">Služba zisťovania pozície je vypnutá. Zapnúť teraz\?</string>
     <string name="disable_recording_once_app_killed">Zakázať samostatné zaznamenávanie</string>
     <string name="lang_es_ar">Španielčina (Argentína)</string>
@@ -1098,8 +1094,6 @@
     <string name="shared_string_undo">Vrátiť späť</string>
     <string name="shared_string_skip">Preskočiť</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="av_locations_descr">GPX súbor s pozíciami.</string>
-    <string name="av_locations">Pozície</string>
     <string name="plugin_settings">Zásuvné moduly</string>
     <string name="routing_attr_avoid_shuttle_train_name">Nepoužiť autovlak</string>
     <string name="routing_attr_avoid_shuttle_train_description">Vyhnúť sa použitiu autovlakov</string>
@@ -1772,11 +1766,6 @@
     <string name="shared_string_added">Pridané</string>
     <string name="marker_activated">Značka %s aktivovaná.</string>
     <string name="one_tap_active_descr">Potlačte značku na mape na jej presunutie na prvé miesto v aktívnych značkách bez otvárania kontextového menu.</string>
-    <string name="empty_state_av_notes">Urobte poznámky!</string>
-    <string name="empty_state_av_notes_desc">Pridajte zvukové, video alebo fotografické poznámky k ľubovoľnému bodu na mape, pomocou nástroja alebo kontextového menu.</string>
-    <string name="notes_by_date">Mediálne poznámky podľa dátumu</string>
-    <string name="by_date">Podľa dátumu</string>
-    <string name="by_type">Podľa typu</string>
     <string name="one_tap_active">\"Jedno stlačenie\" aktívne</string>
     <string name="modify_the_search_query">Zmeňte vyhľadávacie kritériá.</string>
     <string name="what_is_here">Čo je tu:</string>
@@ -1792,8 +1781,6 @@
     <string name="will_open_at">Otvorí o</string>
     <string name="will_open_on">Otvorí o</string>
     <string name="additional_actions">Ďalšie akcie</string>
-    <string name="av_locations_selected_desc">Súbor GPX so súradnicami a údajmi vybraných poznámok.</string>
-    <string name="av_locations_all_desc">Súbor GPX so súradnicami a údajmi všetkých poznámok.</string>
     <string name="shared_string_actions">Akcie</string>
     <string name="shared_string_marker">Značka</string>
     <string name="osm_recipient_stat">Počet úprav %1$s, suma %2$s mBTC</string>
@@ -2376,7 +2363,6 @@
     <string name="live_monitoring">Sledovanie online</string>
     <string name="save_track_logging_accuracy">Presnosť záznamu</string>
     <string name="tracks_view_descr">Všetky vaše zaznamenané stopy sú v %1$s, alebo v priečinku OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Vaše OSM poznámky sú v %1$s.</string>
     <string name="video_notes">Video-poznámky</string>
     <string name="photo_notes">Foto-poznámky</string>
     <string name="accessibility_announce">Oznámenie</string>

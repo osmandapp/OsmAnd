@@ -102,7 +102,6 @@
     <string name="record_plugin_name">ಪ್ರಯಾಣ ದಾಖಲಿಸಿಕೊಳ್ಳುವುದು</string>
     <string name="plugin_nautical_name">ಹಡಗಿನ ನಕ್ಷೆ ವೀಕ್ಷಣೆ</string>
     <string name="plugin_ski_name">ಆಕಾಶ ನಕ್ಷೆ ವೀಕ್ಷಣೆ</string>
-    <string name="audionotes_plugin_name">ದೃಶ್ಯ / ಶ್ರಾವ್ಯ ಟಿಪ್ಪಣೆಗಳು</string>
     <string name="osmand_parking_plugin_name">ನಿಲುಗಡೆ ಸ್ಥಾನ</string>
     <string name="shared_string_accessibility">ಲಭ್ಯಾರ್ಹತೆ</string>
     <string name="osm_editing_plugin_name">ಒಎಸ್ಎಂ ಸಂಪಾದನೆ</string>
@@ -110,7 +109,6 @@
     <string name="rename_failed">ಮರುನಾಮಕರಣ ವಿಫಲವಾಗಿದೆ.</string>
     <string name="back_to_map">ನಕ್ಷೆಗೆ ಹಿಂದುರುಗಿ</string>
     <string name="share_note">ಟಿಪ್ಪಣಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳಿ</string>
-    <string name="watch">ನೋಡಿ</string>
     <string name="notes">ಟಿಪ್ಪಣಿಗಳು</string>
     <string name="online_map">ಮಿಂಬಲೆ ನಕ್ಷೆ</string>
     <string name="remove_the_tag">ಟ್ಯಾಗ್ಅನ್ನು ತೆಗೆಯಿರಿ</string>

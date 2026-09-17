@@ -497,7 +497,6 @@
     <string name="recording_description">Запис %1$s %3$s %2$s</string>
     <string name="map_widget_audionotes">Аудіопримітки</string>
     <string name="audionotes_plugin_description">Робіть аудіо/фото/відео примітки під час подорожі використовуючи кнопку на мапі або контекстне меню.</string>
-    <string name="audionotes_plugin_name">Аудіо/відео примітки</string>
     <string name="srtm_plugin_description">Надає рельєф місцевості та детальну топографію для візуального розуміння рельєфу ландшафту та прохідності, використовуючи контурні лінії, зафарбовування пагорбів або схилів, а також 3D-вигляд.\n\nЩоб активувати ці функції для регіону, вам потрібно додатково завантажити карту контурних ліній та/або рельєфу місцевості (3D), складену з даних SRTM та ASTER.\n\nДодаткова інформація на %1$s.</string>
     <string name="srtm_plugin_name">Топографія</string>
     <string name="download_select_map_types">Інші мапи</string>
@@ -554,7 +553,6 @@
     <string name="int_continuosly">Безперервно</string>
     <string name="email">e-mail</string>
     <string name="map_widget_gps_info">GPS дані</string>
-    <string name="layer_recordings">Шар записів</string>
     <string name="osmand_play_title_30_chars">OsmAnd Мапи та Навігація</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Мапи та Навігація</string>
     <string name="download_regular_maps">Стандартна мапа</string>
@@ -883,7 +881,6 @@
     <string name="traffic_warning_calming">Заспокоєння руху</string>
     <string name="traffic_warning_speed_camera">Камера контролю швидкості</string>
     <string name="traffic_warning">Попередження на дорозі</string>
-    <string name="watch">Перегляд</string>
     <string name="rendering_attr_pisteGrooming_name">Тип лижні</string>
     <string name="routing_attr_no_new_routing_name">Не використовувати правила маршрутизації версії 1.9</string>
     <string name="navigate_point_northing">Північної широти</string>
@@ -1077,7 +1074,6 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Належність до мережі</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Вийти</string>
-    <string name="local_recordings_delete_all_confirm">Вилучити %1$d приміток\?</string>
     <string name="download_wikipedia_maps">Вікіпедія</string>
     <string name="rendering_value_default13_name">Типово (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Типово (напівпрозорий блакитний)</string>
@@ -1158,7 +1154,6 @@
     <string name="shared_string_navigation">Навігація</string>
     <string name="simulate_your_location_stop_descr">Зупинити симуляцію вашої позиції.</string>
     <string name="looking_up_address">Пошук адреси</string>
-    <string name="av_locations">Місця</string>
     <string name="plugin_settings">Плагіни</string>
     <string name="routing_attr_avoid_shuttle_train_name">Уник. приміських поїздів</string>
     <string name="routing_attr_avoid_shuttle_train_description">Уникати приміських поїздів</string>
@@ -1290,7 +1285,6 @@
     <string name="active_markers">Наявні позначки</string>
     <string name="map_markers">Позначки</string>
     <string name="map_marker">Позначка мапи</string>
-    <string name="av_locations_descr">GPX-файл з координатами.</string>
     <string name="show_free_version_banner_description">Навіть, якщо Ви придбали платну версію, Ви все ще можете бачити банер для безплатної версії.</string>
     <string name="dashboard_or_drawer_description">На вибір пропонується керувати застосунком головним чином за допомогою гнучкої панелі керування або статичного меню. Ваш вибір завжди може бути змінений в налаштуваннях панелі керування.</string>
     <string name="map_marker_1st">Перша позначка мапи</string>
@@ -1794,11 +1788,6 @@
     <string name="marker_activated">Позначку %s увімкнено.</string>
     <string name="one_tap_active_descr">Натискання на позначку на мапі перемістить її на перше місце в списку активних позначок, не відкриваючи контекстне меню.</string>
     <string name="one_tap_active">Активація дотиком</string>
-    <string name="empty_state_av_notes">Робіть примітки!</string>
-    <string name="empty_state_av_notes_desc">Додайте аудіо, відео або фотопримітку в будь-яку точку на мапі використовуючи віджет або контекстне меню.</string>
-    <string name="notes_by_date">Примітки за датою</string>
-    <string name="by_date">За датою</string>
-    <string name="by_type">За типом</string>
     <string name="modify_the_search_query">Змінити пошуковий запит.</string>
     <string name="what_is_here">Що тут:</string>
     <string name="parked_at">початок стоянки</string>
@@ -1813,8 +1802,6 @@
     <string name="will_open_at">Відкриється о</string>
     <string name="will_open_on">Відкриється о</string>
     <string name="additional_actions">Додаткові дії</string>
-    <string name="av_locations_selected_desc">Файл GPX з координатами та даними вибраних нотаток.</string>
-    <string name="av_locations_all_desc">Файл GPX з координатами та даними всіх нотаток.</string>
     <string name="shared_string_actions">Дії</string>
     <string name="shared_string_marker">Позначка</string>
     <string name="osm_recipient_stat">Редагувань %1$s, сума %2$s mBTC</string>
@@ -2399,7 +2386,6 @@
     <string name="live_monitoring">Онлайн моніторинг</string>
     <string name="save_track_logging_accuracy">Точність запису</string>
     <string name="tracks_view_descr">Ви можете знайти всі записи в %1$s або в теці OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Ваші Нотатки OSM знаходяться в %1$s.</string>
     <string name="video_notes">Відеопримітки</string>
     <string name="photo_notes">Фотопримітки</string>
     <string name="accessibility_announce">Оголошення</string>

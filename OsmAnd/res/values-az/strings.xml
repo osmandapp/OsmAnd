@@ -230,11 +230,9 @@
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Şəkil</string>
     <string name="shared_string_online_maps">Onlayn xəritələr</string>
-    <string name="audionotes_plugin_name">Səs/video qeydləri</string>
     <string name="rename_failed">Yenidən adlandırıla bilmədi.</string>
     <string name="back_to_map">Xəritəyə qayıt</string>
     <string name="share_note">Qeydi paylaş</string>
-    <string name="watch">İzlə</string>
     <string name="notes">A/V qeydlər</string>
     <string name="online_map">Onlayn xəritə</string>
     <string name="free">%1$s boş</string>
@@ -868,7 +866,6 @@
     <string name="min_mile">dəq/mil</string>
     <string name="si_nm">Dəniz mili</string>
     <string name="si_nm_h">Saatda dəniz mili (düyünlər)</string>
-    <string name="av_locations">Məkanlar</string>
     <string name="traffic_warning_hazard">Təhlükə</string>
     <string name="rendering_value_boldOutline_name">Qalın kontur</string>
     <string name="no_updates_available">Yeniləmə mövcud deyil</string>
@@ -1081,7 +1078,6 @@
     <string name="osb_comment_dialog_error">Rəy əlavə edilə bilmədi.</string>
     <string name="share_osm_edits_subject">OSM düzəlişləri OsmAnd ilə paylaşılıb</string>
     <string name="rendering_attr_showProposed_name">Təklif olunan obyektlər</string>
-    <string name="local_recordings_delete_all_confirm">%1$d qeyd silinsin\?</string>
     <string name="osm_live_ask_for_purchase">Zəhmət olmasa əvvəlcə OsmAnd Live abunəliyini alın</string>
     <string name="storage_directory_shared">Paylaşılan yaddaş</string>
     <string name="donations">İanələr</string>
@@ -1208,8 +1204,6 @@
     <string name="what_is_here">Burada nə var:</string>
     <string name="context_menu_points_of_group">Qrupun bütün nöqtələri</string>
     <string name="additional_actions">Əlavə fəaliyyətlər</string>
-    <string name="av_locations_selected_desc">Seçilən qeydlərin koordinatları və məlumatları olan GPX faylı.</string>
-    <string name="av_locations_all_desc">Bütün qeydlərin koordinatları və məlumatları olan GPX faylı.</string>
     <string name="shared_string_actions">Fəaliyyətlər</string>
     <string name="shared_string_marker">İşarə</string>
     <string name="empty_state_osm_edits">OpenStreetMap obyektləri yarat və ya dəyiş</string>
@@ -1217,9 +1211,6 @@
     <string name="shared_string_edited">Düzəliş edildi</string>
     <string name="shared_string_added">Əlavə edildi</string>
     <string name="marker_activated">İşarə %s aktivləşdirildi.</string>
-    <string name="notes_by_date">Tarixə görə A/V qeydlər</string>
-    <string name="by_date">Tarixə görə</string>
-    <string name="by_type">Növünə görə</string>
     <string name="looking_for_tracks_with_waypoints">Yol nöqtələri olan izlər axtarılır</string>
     <string name="shared_string_more_without_dots">Daha çox</string>
     <string name="appearance_on_the_map">Xəritədə görünüş</string>
@@ -1357,8 +1348,6 @@
     <string name="last_intermediate_dest_description">Ara dayanacaq əlavə edir</string>
     <string name="first_intermediate_dest_description">İlk dayanacaq əlavə edir</string>
     <string name="subsequent_dest_description">Təyinat nöqtəsini yuxarı daşı və yarat</string>
-    <string name="empty_state_av_notes">Qeydlər yarat!</string>
-    <string name="empty_state_av_notes_desc">Vidcetlər və ya kontekst menyularından istifadə edərək xəritədəki istənilən nöqtəyə səs, video və ya şəkil qeydləri əlavə edin.</string>
     <string name="import_gpx_file_description">Favoritlər və ya GPX faylı kimi idxal edilə bilər.</string>
     <string name="plan_route_no_markers_toast">Bu funksiyanı istifadə etmək üçün ən azı bir işarə əlavə etməlisiniz.</string>
     <string name="osn_modify_dialog_error">Qeyd dəyişdirilə bilmədi.</string>
@@ -2024,7 +2013,6 @@
     <string name="osmand_maps_plus_tagline">Çoxaldılmış funksiyalar əldə edin</string>
     <string name="offline_wikivoyage">Oflayn Vikisəyahət</string>
     <string name="wikipedia_and_wikivoyage_offline">Vikipediya və Vikisəyahət oflayn</string>
-    <string name="multimedia_notes_view_descr">OSM qeydləriniz %1$s-dədir.</string>
     <string name="tracks_view_descr">Qeyd edilmiş izləriniz %1$s-də və ya OsmAnd qovluğundadır.</string>
     <string name="reset_confirmation_descr">%1$s düyməsinə toxunmaq bütün dəyişiklikləri silir.</string>
     <string name="reset_all_profile_settings_descr">Bütün profil parametrləri quraşdırma standartlarına sıfırlanacaq.</string>

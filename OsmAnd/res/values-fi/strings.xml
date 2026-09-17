@@ -437,7 +437,6 @@
     <string name="shared_string_audio">Ääni</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Kuva</string>
-    <string name="audionotes_plugin_name">Ääni/video muistiinpanot</string>
     <string name="rendering_attr_hideHouseNumbers_name">Talonumerot</string>
     <string name="agps_data_last_downloaded">A-GPS tiedot ladattu: %1$s</string>
     <string name="specified_directiory_not_writeable">Karttoja ei voitu luoda valittuun hakemistoon</string>
@@ -803,8 +802,6 @@
     <string name="shared_string_navigation">Navigointi</string>
     <string name="simulate_your_location_stop_descr">Lopeta sijainnin simulointi.</string>
     <string name="simulate_your_location_descr">Simuloi laskettua reittiä tai tallennettua GPX-reittiä.</string>
-    <string name="av_locations_descr">GPX-tiedosto sijainneilla.</string>
-    <string name="av_locations">Sijainnit</string>
     <string name="routing_attr_avoid_shuttle_train_name">Ei liityntäjunaa</string>
     <string name="routing_attr_avoid_shuttle_train_description">Vältää liityntäjunien käyttöä</string>
     <string name="traffic_warning_hazard">Varoitus</string>
@@ -835,11 +832,9 @@
     <string name="restart_is_required">Muutosten käyttöönottaminen vaatii uudelleenkäynnistystä.</string>
     <string name="disable_recording_once_app_killed">Estä erillinen kirjaus</string>
     <string name="shared_string_logoff">Kirjaudu ulos</string>
-    <string name="local_recordings_delete_all_confirm">Haluatko varmasti poistaa %1$d huomautukset\?</string>
     <string name="osmand_parking_plugin_name">Pysäköinnin sijainti</string>
     <string name="osm_editing_plugin_name">OSM muokkaus</string>
     <string name="share_note">Jaa huomautus</string>
-    <string name="watch">Katso</string>
     <string name="online_map">Online kartta</string>
     <string name="device_memory">Laitteen muisti</string>
     <string name="rendering_attr_pisteGrooming_name">Rinnehuolto</string>
@@ -1238,7 +1233,6 @@
     <string name="route_from">Mistä:</string>
     <string name="download_using_mobile_internet">Ei yhdistetty Wi-Fi-verkkoon. Haluatko käyttää nykyistä Internet-yhteyttä lataukseen\?</string>
     <string name="recording_context_menu_vrecord">Tee video huomautus</string>
-    <string name="layer_recordings">Nauhoitustaso</string>
     <string name="recording_default_name">Nauhoitetaan</string>
     <string name="map_widget_av_notes">Audio/video huomautukset</string>
     <string name="map_widget_audionotes">Audio huomautukset</string>
@@ -1499,8 +1493,6 @@
     <string name="context_menu_read_article">Lue artikkeli</string>
     <string name="context_menu_points_of_group">Kaikki ryhmän pisteet</string>
     <string name="open_from">Avoinna alkaen</string>
-    <string name="av_locations_selected_desc">GPX-tiedosto, jossa koordinaatit ja valittujen huomautuksien tiedot.</string>
-    <string name="av_locations_all_desc">GPX-tiedosto, jossa koordinaatit ja kaikkien huomautuksien data.</string>
     <string name="modify_the_search_query">Vaihda hakuasi.</string>
     <string name="shared_string_actions">Toiminnot</string>
     <string name="shared_string_marker">Markkeri</string>
@@ -1512,8 +1504,6 @@
     <string name="marker_activated">Markkeri %s aktivoitu.</string>
     <string name="one_tap_active_descr">Napauta kartalla olevaa markkeria siirtääksesi se ylimmäksi aktiiviseksi markkeriksi avaamatta kontekstivalikkoa.</string>
     <string name="one_tap_active">\"Yhden napautuksen\" aktivointi</string>
-    <string name="empty_state_av_notes">Tee muistiinpanoja!</string>
-    <string name="empty_state_av_notes_desc">Lisää ääni-, video- tai kuvamuistiinpano mihin tahansa kartan pisteeseen käyttämällä widgettiä tai valikkoa.</string>
     <string name="shared_string_more_without_dots">Lisää</string>
     <string name="appearance_on_the_map">Ulkoasu kartalla</string>
     <string name="add_track_to_markers_descr">Valitse jälki lisätäksesi sen väyläpisteet markkereihin.</string>
@@ -2378,9 +2368,6 @@
     <string name="mapillary_menu_title_pano">Näytä vain 360° kuvat</string>
     <string name="mapillary_menu_date_from">Mistä</string>
     <string name="shared_string_to">Minne</string>
-    <string name="by_type">Tyypin mukaan</string>
-    <string name="by_date">Päivämäärän mukaan</string>
-    <string name="notes_by_date">A/V-muistiinpanot päivämäärän mukaan</string>
     <string name="additional_actions">Lisätoiminnot</string>
     <string name="will_open_on">Avautuu klo</string>
     <string name="will_open_at">Avautuu klo</string>
@@ -2401,7 +2388,6 @@
     <string name="accessibility_announce">Ilmoita</string>
     <string name="photo_notes">Valokuvamuistiinpanot</string>
     <string name="video_notes">Videomuistiinpanot</string>
-    <string name="multimedia_notes_view_descr">OSM-huomautuksesi ovat polussa %1$s.</string>
     <string name="tracks_view_descr">Tallennetut jälkesi ovat kansiossa %1$s tai OsmAnd-kansiossa.</string>
     <string name="save_track_logging_accuracy">Kirjaustarkkuus</string>
     <string name="live_monitoring">Online-seuranta</string>

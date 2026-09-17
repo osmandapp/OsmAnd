@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="shared_string_my_places">Meus lugares</string>
-    <string name="watch">Ver</string>
     <string name="rendering_attr_pisteGrooming_name">Pista de preparação</string>
     <string name="routing_attr_no_new_routing_name">Evitar regras de roteamento da v1.9</string>
     <string name="navigate_point_northing">Norte (N)</string>
@@ -151,7 +150,6 @@
     <string name="plugin_nautical_descr">Enriquece o seu mapa com informações sobre rotas de navegação, luzes de navegação, zonas náuticas de perigo, zonas com restrições de navegação ou atracação, etc. \n \nLeitura adicional em %1$s.</string>
     <string name="plugin_ski_name">Mapa de esqui</string>
     <string name="plugin_ski_descr">Projetado para navegar em áreas de esportes de inverno: veja pistas de esqui e teleféricos e pistas de esqui cross country, com linhas coloridas indicando as classificações de dificuldade. Para usar, habilite este plugin e também vá em \"Configurar mapa\" e escolha o estilo de mapa \"Inverno e esqui\".</string>
-    <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
     <string name="audionotes_plugin_description">Faça anotações de áudio/foto/vídeo durante uma viagem, usando um botão de mapa ou o menu de contexto da localização.</string>
     <string name="osmand_parking_plugin_name">Estacionamento</string>
     <string name="shared_string_accessibility">Acessibilidade</string>
@@ -518,7 +516,6 @@
     <string name="recording_unavailable">Indisponível</string>
     <string name="recording_context_menu_arecord">Tomar nota de áudio</string>
     <string name="recording_context_menu_vrecord">Tomar nota de vídeo</string>
-    <string name="layer_recordings">Camada de gravação</string>
     <string name="recording_context_menu_play">Tocar</string>
     <string name="recording_description">Gravação %1$s %3$s %2$s</string>
     <string name="recording_default_name">Gravação</string>
@@ -1048,7 +1045,6 @@
     <string name="shared_string_wikipedia">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importar para OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Excluir %1$d notas\?</string>
     <string name="disable_recording_once_app_killed">Impedir o registro autônomo</string>
     <string name="gps_network_not_enabled">O serviço de localização está desligado. Deseja ligar\?</string>
     <string name="lang_vo">Volapuque</string>
@@ -1129,8 +1125,6 @@
     <string name="next_proceed">Próximo</string>
     <string name="opening_at">Abre às</string>
     <string name="closing_at">Fecha às</string>
-    <string name="av_locations_descr">Arquivo GPX com posições.</string>
-    <string name="av_locations">Posições</string>
     <string name="contact_info">Informações de contato</string>
     <string name="add_opening_hours">Adicionar horário de funcionamento</string>
     <string name="poi_dialog_poi_type">Tipo de POI</string>
@@ -1502,10 +1496,6 @@
     <string name="marker_activated">Marcador %s foi ativado.</string>
     <string name="one_tap_active_descr">Toque num marcador do mapa para movê-lo para o topo dos marcadores ativos sem abrir o menu de contexto.</string>
     <string name="one_tap_active">Ativo com \'um toque\'</string>
-    <string name="empty_state_av_notes">Faça anotações!</string>
-    <string name="notes_by_date">Notas A/V por data</string>
-    <string name="by_date">Por data</string>
-    <string name="by_type">Por tipo</string>
     <string name="looking_for_tracks_with_waypoints">Procurando trilhas com pontos de passagem</string>
     <string name="shared_string_more_without_dots">Mais</string>
     <string name="appearance_on_the_map">Aparência no mapa</string>
@@ -1621,7 +1611,6 @@
     <string name="rendering_attr_surfaceIntegrity_name">Integridade da superfície da via</string>
     <string name="search_hint">Digite cidade, endereço, nome do POI</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
-    <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou os menus de contexto.</string>
     <string name="quick_action_add_destination_desc">Um botão para fazer com que a tela centralize o destino da rota, um destino selecionado anteriormente se tornaria o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Um botão para fazer com que a tela centralize o novo destino da rota, substituindo o destino selecionado anteriormente (se houver).</string>
     <string name="quick_action_add_first_intermediate_desc">Um botão para fazer com que a tela centralize o primeiro destino intermediário.</string>
@@ -1632,7 +1621,6 @@
     <string name="christmas_desc">Antecipando os feriados de Natal e ano novo, você pode optar por exibir POIs relacionados ao Natal, como árvores de Natal, mercados, etc.</string>
     <string name="get_it">Adquira já</string>
     <string name="osm_live_banner_desc">Obtenha downloads ilimitados de mapas, adicionando atualizações semanais, diárias e a cada hora.</string>
-    <string name="av_locations_all_desc">Arquivo GPX com coordenadas e dados de todas as notas.</string>
     <string name="rendering_attr_hideOverground_name">Objetos superficiais</string>
     <string name="route_stops_before">%1$s paradas antes</string>
     <string name="dist_away_from_my_location">Pesquisar a %1$s daqui</string>
@@ -1668,7 +1656,6 @@
     <string name="will_open_at">Abre às</string>
     <string name="will_open_on">Abre às</string>
     <string name="additional_actions">Ações adicionais</string>
-    <string name="av_locations_selected_desc">Arquivo GPX com coordenadas e dados das notas selecionadas.</string>
     <string name="shared_string_actions">Ações</string>
     <string name="shared_string_marker">Marcador</string>
     <string name="access_autoannounce_period">Período de auto-anúncio</string>
@@ -2517,7 +2504,6 @@
     <string name="live_monitoring">Rastreamento online</string>
     <string name="save_track_logging_accuracy">Precisão de registro</string>
     <string name="tracks_view_descr">Você pode encontrar todas as suas faixas gravadas em %1$s ou na pasta OsmAnd usando o gerenciador de arquivos.</string>
-    <string name="multimedia_notes_view_descr">Você pode encontrar todas as suas anotações em %1$s.</string>
     <string name="video_notes">Notas de vídeo</string>
     <string name="photo_notes">Notas fotográficas</string>
     <string name="accessibility_announce">Anunciar</string>

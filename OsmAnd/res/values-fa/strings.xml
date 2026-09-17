@@ -30,7 +30,6 @@
     <string name="recording_error">ضبط نشد</string>
     <string name="recording_context_menu_arecord">گرفتن یادداشت صوتی</string>
     <string name="recording_context_menu_vrecord">گرفتن یادداشت ویدئویی</string>
-    <string name="layer_recordings">لایهٔ ضبط‌شده‌ها</string>
     <string name="recording_context_menu_play">پخش</string>
     <string name="recording_default_name">در حال ضبط</string>
     <string name="shared_string_control_stop">توقف</string>
@@ -38,7 +37,6 @@
     <string name="map_widget_av_notes">یادداشت‌های صوتی/تصویری</string>
     <string name="map_widget_audionotes">یادداشت‌های صوتی</string>
     <string name="audionotes_plugin_description">امکان افزودن یادداشت‌های صوتی، تصویری و ویدئویی در نقاط نقشه.</string>
-    <string name="audionotes_plugin_name">یادداشت‌های صوتی/تصویری</string>
     <string name="download_select_map_types">نقشه‌های دیگر</string>
     <string name="download_regular_maps">نقشهٔ استاندارد</string>
     <string name="download_roads_only_maps">فقط نقشهٔ جاده‌ها</string>
@@ -814,7 +812,6 @@
     <string name="plugin_touringview_name">نمای گردشگری نقشه</string>
     <string name="shared_string_audio">شنیداری</string>
     <string name="share_note">هم‌رسانی یادداشت</string>
-    <string name="watch">مشاهده</string>
     <string name="notes">یادداشت‌های صوتی/تصویری</string>
     <string name="online_map">نقشهٔ آنلاین</string>
     <string name="device_memory">حافظهٔ دستگاه</string>
@@ -1352,7 +1349,6 @@
     <string name="shared_string_import2osmand">درون‌برد به OsmAnd</string>
     <string name="read_full_article">مقالهٔ کامل را بخوانید (آنلاین)</string>
     <string name="shared_string_wikipedia">ویکی‌پدیا</string>
-    <string name="local_recordings_delete_all_confirm">آیا %1$d یادداشت پاک شود؟</string>
     <string name="osmand_parking_hour">س</string>
     <string name="shared_string_minute_lowercase">min</string>
     <string name="shared_string_collapse">مخفی شود</string>
@@ -1591,7 +1587,6 @@
     <string name="lang_mk">مقدونی</string>
     <string name="lang_fy">فریسی غربی</string>
     <string name="lang_als">آلبانیایی (تُسک)</string>
-    <string name="av_locations">مکان‌ها</string>
     <string name="routing_attr_avoid_shuttle_train_name">قطار خطی</string>
     <string name="routing_attr_avoid_shuttle_train_description">از قطار خطی پرهیز می‌کند</string>
     <string name="traffic_warning_hazard">خطر</string>
@@ -1650,7 +1645,6 @@
     <string name="round_trip">سفر رفت‌وبرگشتی</string>
     <string name="plan_route_no_markers_toast">برای استفاده از این قابلیت باید حداقل یک نشانه بیافزایید.</string>
     <string name="shared_string_road">جاده</string>
-    <string name="av_locations_descr">پروندهٔ GPX از موقعیت‌ها.</string>
     <string name="osmand_plus_extended_description_part1">برنامهٔ OsmAnd+‎ (مخفف OSM Automated Navigation Directions به‌معنی راهنمای خودکار ناوبری بر پایهٔ OSM) یک نرم‌افزار نقشه و ناوبری است که به گسترهٔ وسیعی از دادهٔ OSM دسترسی دارد. این دادهٔ رایگان و جهانی با بالاترین کیفیت ارائه می‌شود.
 \n
 \nراهبر دیداری و شنیداری، مشاهدهٔ نقاط توجه (POIها یا Points of interest)، ایجاد و مدیریت ردهای GPX، استفاده از تصویرسازی منحنی‌های میزان و اطلاعات ارتفاع، انتخاب حالت‌های پیاده، دوچرخه، خودرو، امکان ویرایش مکان‌ها و... چیزهایی هستند که تجربهٔ مؤثر و لذت‌بخشی را در کار با نقشه برایتان به ارمغان می‌آورد.
@@ -1721,11 +1715,6 @@
     <string name="marker_activated">نشانهٔ %s فعال شد.</string>
     <string name="one_tap_active_descr">یکی از نشانه‌های روی نقشه را لمس کنید تا بدون نیاز به بازکردن فهرست زمینه، آن را در صدر نشانه‌های فعال قرار دهید.</string>
     <string name="one_tap_active">فعال‌سازی «با یک لمس»</string>
-    <string name="empty_state_av_notes">یادداشت بگذارید!</string>
-    <string name="empty_state_av_notes_desc">با استفاده از ابزارک یا فهرست زمینه، برای هر نقطه‌ای روی نقشه یادداشت صوتی، عکسی یا ویدئویی بگذارید.</string>
-    <string name="notes_by_date">یادداشت‌های صوتی/تصویری بر پایه تاریخ</string>
-    <string name="by_date">بر پایه تاریخ</string>
-    <string name="by_type">بر پایه نوع</string>
     <string name="modify_the_search_query">جستجوی خود را تغییر دهید.</string>
     <string name="what_is_here">چیزهایی که اینجاست:</string>
     <string name="parked_at">ساعت پارک</string>
@@ -1740,8 +1729,6 @@
     <string name="will_open_at">ساعت بازکردن</string>
     <string name="will_open_on">زمان بازشدن</string>
     <string name="additional_actions">کنش‌های بیشتر</string>
-    <string name="av_locations_selected_desc">پروندهٔ GPX از مختصات و مشخصات یادداشت‌های انتخابی.</string>
-    <string name="av_locations_all_desc">پروندهٔ GPX از مختصات و مشخصات همهٔ یادداشت‌ها.</string>
     <string name="shared_string_actions">کنش‌ها</string>
     <string name="shared_string_marker">نشانه</string>
     <string name="osm_recipient_stat">ویرایش‌ها: %1$s، مبلغ: %2$s هزارم بیت‌کوین</string>
@@ -2347,7 +2334,6 @@
     <string name="live_monitoring_adress">نشانی وب</string>
     <string name="live_monitoring_descr">اجازه می‌دهد موقعیت کنونی با استفاده از ضبط سفر هم‌رسانی شود.</string>
     <string name="tracks_view_descr">ردهای ضبط‌شدهٔ شما در %1$s یا در پوشهٔ OsmAnd قرار دارند.</string>
-    <string name="multimedia_notes_view_descr">یادداشت‌های OSMای شما در %1$s قرار دارند.</string>
     <string name="osm_edits_view_descr">همهٔ ویرایش‌ها یا یادداشت‌های OSMای بارگذاری نشدهٔ خود را در %1$s ببینید. تغییرات بارگذاری شده را دیگر نمی‌بینید.</string>
     <string name="logcat_buffer_descr">لاگ‌های باجزئیات برنامه را بررسی و هم‌رسانی کنید</string>
     <string name="osm_authorization_success">احراز هویت موفقیت‌آمیز بود</string>

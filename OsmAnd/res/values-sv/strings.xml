@@ -452,14 +452,12 @@
     <string name="recording_unavailable">inte tillgänglig</string>
     <string name="recording_context_menu_arecord">Gör en ljudanteckning</string>
     <string name="recording_context_menu_vrecord">Gör en videoanteckning</string>
-    <string name="layer_recordings">Inspelningsskikt</string>
     <string name="recording_context_menu_play">Spela upp</string>
     <string name="recording_description">Inspelning %1$s %3$s %2$s</string>
     <string name="recording_default_name">Spelar in</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
     <string name="map_widget_audionotes">Ljudanteckningar</string>
     <string name="audionotes_plugin_description">Ta ljud-/foto-/videoanteckningar under en resa, med antingen en kartknapp eller platsens snabbmeny.</string>
-    <string name="audionotes_plugin_name">Ljud-/videoanteckningar</string>
     <string name="download_select_map_types">Andra kartor</string>
     <string name="srtm_plugin_name">Topografi</string>
     <string name="download_srtm_maps">Höjdkurvsdata</string>
@@ -877,7 +875,6 @@
 \n
 \nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.</string>
     <string name="plugin_touringview_name">Vägkartsvy</string>
-    <string name="watch">Visa</string>
     <string name="rename_failed">Namnbytet misslyckades.</string>
     <string name="back_to_map">Tillbaka till kartan</string>
     <string name="track_segments">Spårsegment</string>
@@ -993,7 +990,6 @@
     <string name="read_full_article">Läs hela artikeln (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="shared_string_show_details">Visa detaljer</string>
-    <string name="local_recordings_delete_all_confirm">Ta bort %1$d anteckningar\?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importera till OsmAnd</string>
     <string name="gps_network_not_enabled">Platstjänsten är av. Vill du slå på den\?</string>
@@ -1074,8 +1070,6 @@
     <string name="next_proceed">Nästa</string>
     <string name="opening_at">Öppnar</string>
     <string name="closing_at">Stänger</string>
-    <string name="av_locations">Platser</string>
-    <string name="av_locations_descr">GPX-fil med platser.</string>
     <string name="poi_dialog_poi_type">Typ av POI</string>
     <string name="add_opening_hours">Lägg till öppettider</string>
     <string name="contact_info">Kontaktinformation</string>
@@ -1595,10 +1589,6 @@
     <string name="shared_string_edited">Redigerad</string>
     <string name="shared_string_added">Tillagd</string>
     <string name="marker_activated">Markör %s aktiverad.</string>
-    <string name="empty_state_av_notes">Gör anteckningar!</string>
-    <string name="notes_by_date">A/V-anteckningar efter datum</string>
-    <string name="by_date">Efter datum</string>
-    <string name="by_type">Efter typ</string>
     <string name="looking_for_tracks_with_waypoints">Söker efter spår med waypoints</string>
     <string name="shared_string_more_without_dots">Mer</string>
     <string name="appearance_on_the_map">Utseende på kartan</string>
@@ -1652,13 +1642,10 @@
     <string name="will_open_at">Öppnar vid</string>
     <string name="will_open_on">Öppnar vid</string>
     <string name="additional_actions">Ytterligare åtgärder</string>
-    <string name="av_locations_selected_desc">GPX-fil med koordinater och data för valda anteckningar.</string>
-    <string name="av_locations_all_desc">GPX-fil med koordinater och data för alla anteckningar.</string>
     <string name="shared_string_actions">Åtgärder</string>
     <string name="shared_string_marker">Markör</string>
     <string name="one_tap_active_descr">Tryck på en markör på kartan för att flytta den till toppen av de aktiva markörerna utan att öppna sammanhangsmenyn.</string>
     <string name="one_tap_active">\'Ett tryck\' aktiv</string>
-    <string name="empty_state_av_notes_desc">Lägg till ljud-, video- eller foto-notering för varje punkt på kartan med hjälp av widgeten eller menyn.</string>
     <string name="add_track_to_markers_descr">Välj ett spår för att lägga till dess vägpunkter bland markörerna.</string>
     <string name="add_favourites_group_to_markers_descr">Välj en favoritkategori att lägga till i markörerna.</string>
     <string name="shared_string_gpx_waypoints">Spåra vägpunkter</string>
@@ -3894,7 +3881,6 @@
     <string name="reset_confirmation_descr">Att klicka %1$s avfärdar alla dina ändringar.</string>
     <string name="searching_gps">Söker GPS</string>
     <string name="shared_string_rows">Rader</string>
-    <string name="multimedia_notes_view_descr">Dina OSM-anteckningar är i %1$s.</string>
     <string name="press_button_to_link_with_action">Tryck på knappen på din enhet för att koppla den till åtgärden: %1$s</string>
     <string name="public_transport_ped_route_title">Vägen till fots är ca %1$s, och kan vara snabbare än kollektivtrafik</string>
     <string name="shared_string_button">Knapp</string>

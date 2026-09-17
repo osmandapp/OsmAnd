@@ -523,7 +523,6 @@
     <string name="download_srtm_maps">Ισοϋψείς καμπύλες</string>
     <string name="map_widget_audionotes">Ηχητικές σημειώσεις</string>
     <string name="audionotes_plugin_description">Πάρτε σημειώσεις ήχου/φωτογραφίας/βίντεο κατά τη διάρκεια του ταξιδιού, χρησιμοποιώντας είτε ένα πλήκτρο στον χάρτη, ή τη θέση στο μενού περιβάλλοντος.</string>
-    <string name="audionotes_plugin_name">Σημειώσεις ήχου/video</string>
     <string name="recording_unavailable">μη διαθέσιμο</string>
     <string name="recording_context_menu_arecord">Κάντε ηχητική σημείωση</string>
     <string name="recording_context_menu_vrecord">Κάντε σημείωση video</string>
@@ -543,7 +542,6 @@
     <string name="av_def_action_picture">Λήψη φωτογραφίας</string>
     <string name="recording_context_menu_precord">Λήψη φωτογραφίας</string>
     <string name="audionotes_location_not_defined">Πάτησε στο \"Χρήση τοποθεσίας …\" για να προσθέσετε μια σημείωση στην τοποθεσία.</string>
-    <string name="layer_recordings">Επίπεδο εγγραφής</string>
     <string name="shared_string_control_start">Έναρξη</string>
     <string name="prefer_motorways">Να προτιμώνται αυτοκινητόδρομοι</string>
     <string name="prefer_in_routing_title">Να προτιμώνται…</string>
@@ -969,7 +967,6 @@
     <string name="shared_string_logoff">Αποσύνδεση</string>
     <string name="filter_poi_hint">Φιλτράρισμα κατά όνομα</string>
     <string name="shared_string_manage">Διαχείριση</string>
-    <string name="local_recordings_delete_all_confirm">Διαγραφή %1$d σημειώσεων;</string>
     <string name="delay_to_start_navigation">Εκκίνηση της βήμα-βήμα καθοδήγησης μετά από.…</string>
     <string name="shared_string_go">Εκτέλεση</string>
     <string name="short_location_on_map">Γ. Πλ %1$s
@@ -982,7 +979,6 @@
     <string name="simulate_your_location">Προσομοίωση της θέση σας</string>
     <string name="rendering_value_highContrastRoads_name">Δρόμοι με υψηλή αντίθεση</string>
     <string name="plugin_settings">Πρόσθετα</string>
-    <string name="av_locations">Τοποθεσίες</string>
     <string name="favorite_category_dublicate_message">Παρακαλούμε, χρησιμοποιήστε όνομα κατηγορίας που δεν υπάρχει ήδη.</string>
     <string name="favorite_category_name">Όνομα κατηγορίας</string>
     <string name="favorite_category_add_new_title">Προσθήκη νέας κατηγορίας</string>
@@ -1047,8 +1043,6 @@
     <string name="will_open_at">Ανοίγει στις</string>
     <string name="will_open_on">Ανοίγει στις</string>
     <string name="additional_actions">Πρόσθετες ενέργειες</string>
-    <string name="av_locations_selected_desc">Αρχείο GPX με συντεταγμένες και δεδομένα από τις επιλεγμένες σημειώσεις.</string>
-    <string name="av_locations_all_desc">Αρχείο GPX με συντεταγμένες και δεδομένα από όλες τις σημειώσεις.</string>
     <string name="modify_the_search_query">Αλλάξτε την αναζήτησή σας.</string>
     <string name="shared_string_actions">Ενέργειες</string>
     <string name="shared_string_marker">Δείκτης</string>
@@ -1060,9 +1054,6 @@
     <string name="marker_activated">Ο δείκτης %s ενεργοποιήθηκε.</string>
     <string name="one_tap_active_descr">Πατήστε ένα δείκτη στο χάρτη για να τον μετακινήσετε στην κορυφή των ενεργών δεικτών χωρίς να ανοίξει το συναφές μενού.</string>
     <string name="one_tap_active">Ενεργό το \'Ένα πάτημα\'</string>
-    <string name="empty_state_av_notes">Κρατήστε σημειώσεις!</string>
-    <string name="empty_state_av_notes_desc">Προσθέστε ήχο, βίντεο ή φωτοσημειώσεις για κάθε σημείο στο χάρτη, χρησιμοποιώντας τα γραφικά στοιχεία ή τα μενού περιβάλλοντος.</string>
-    <string name="notes_by_date">Σημειώσεις ήχου/βίντεο κατά ημερομηνία</string>
     <string name="download_maps_travel">Ταξιδιωτικοί οδηγοί</string>
     <string name="article_removed">Το άρθρο αφαιρέθηκε</string>
     <string name="wikivoyage_search_hint">Αναζήτηση για χώρα, πόλη, ή επαρχία</string>
@@ -1113,8 +1104,6 @@
     <string name="all_data">Όλα τα δεδομένα</string>
     <string name="osm_notes">Σημειώσεις OSM</string>
     <string name="will_open_tomorrow_at">Ανοίγει αύριο στις</string>
-    <string name="by_date">Κατά ημερομηνία</string>
-    <string name="by_type">Κατά τύπο</string>
     <string name="looking_for_tracks_with_waypoints">Αναζήτηση για ίχνη με σημεία διαδρομής</string>
     <string name="shared_string_more_without_dots">Περισσότερα</string>
     <string name="appearance_on_the_map">Εμφάνιση στον χάρτη</string>
@@ -1559,7 +1548,6 @@
     <string name="simulate_your_location_stop_descr">Παύση προσομοίωσης της θέσης σας.</string>
     <string name="simulate_your_location_descr">Προσομοίωση της θέσης σας χρησιμοποιώντας υπολογισμένη διαδρομή ή καταγεγραμμένη διαδρομή GPX.</string>
     <string name="looking_up_address">Αναζήτηση διεύθυνσης</string>
-    <string name="av_locations_descr">Αρχείο GPX με τοποθεσίες.</string>
     <string name="download_live_updates">Ζωντανές ενημερώσεις</string>
     <string name="rendering_attr_currentTrackColor_description">Χρώμα GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Πλάτος GPX</string>
@@ -1624,7 +1612,6 @@
 \nΠεραιτέρω ανάγνωση στο %1$s.</string>
     <string name="plugin_ski_name">Προβολή χάρτη χιονοδρομιών</string>
     <string name="plugin_ski_descr">Σχεδιασμένο για πλοήγηση σε περιοχές χειμερινών σπορ: Δείτε πίστες σκι και ανελκυστήρες σκι, και πίστες σκι αντοχής, με χρωματισμένες γραμμές που δηλώνουν τους βαθμούς δυσκολίας. Για να το χρησιμοποιήσετε, ενεργοποιήστε αυτό το πρόσθετο και πηγαίνετε επίσης στο \"Διαμόρφωση χάρτη\" και επιλέξτε το στυλ χάρτη \"Χειμώνας και σκι\".</string>
-    <string name="watch">Παρακολούθηση</string>
     <string name="online_map">Χάρτης με σύνδεση</string>
     <string name="rendering_attr_pisteGrooming_name">Συντήρηση πίστας</string>
     <string name="version_settings">Δομήσεις</string>
@@ -2370,7 +2357,6 @@
     <string name="live_monitoring">Διαδικτυακή παρακολούθηση</string>
     <string name="save_track_logging_accuracy">Ακρίβεια καταγραφής</string>
     <string name="tracks_view_descr">Οι καταγραμμένες διαδρομές είναι στο %1$s, ή στον φάκελο OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Οι σημειώσεις σας OSM είναι στο %1$s.</string>
     <string name="video_notes">Σημειώσεις βίντεο</string>
     <string name="photo_notes">Σημειώσεις φωτογραφίας</string>
     <string name="accessibility_announce">Αναγγελία</string>

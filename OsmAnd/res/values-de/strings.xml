@@ -643,12 +643,10 @@
     <string name="recording_context_menu_show">Anzeigen</string>
     <string name="recording_photo_description">Foto %1$s von %2$s</string>
     <string name="recording_context_menu_precord">Foto aufnehmen</string>
-    <string name="layer_recordings">Audio-/Videonotizen</string>
     <string name="map_widget_av_notes">Audio-/Videonotizen</string>
     <string name="monitoring_settings">Streckenaufzeichnung</string>
     <string name="map_widget_audionotes">Audionotizen</string>
     <string name="audionotes_plugin_description">Machen Sie während einer Reise Audio-/Foto-/Videonotizen, entweder über eine Kartenschaltfläche oder das Standortkontextmenü.</string>
-    <string name="audionotes_plugin_name">Audio-/Videonotizen</string>
     <string name="audionotes_location_not_defined">Benutzen Sie „Standort verwenden …“, um dem Ort eine Notiz zuzuweisen.</string>
     <string name="stop_routing_confirm">Navigation stoppen\?</string>
     <string name="prefer_motorways">Autobahnen bevorzugen</string>
@@ -990,7 +988,6 @@
     <string name="notes">Audio-/Videonotizen</string>
     <string name="online_map">Online-Karte</string>
     <string name="shared_string_export">Exportieren</string>
-    <string name="watch">Ansehen</string>
     <string name="share_note">Notiz mitteilen</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_selected">Ausgewählte</string>
@@ -1112,7 +1109,6 @@
     <string name="lang_vo">Volapük</string>
     <string name="lang_new">Newari / Nepal Bhasa</string>
     <string name="lang_ceb">Cebuano</string>
-    <string name="local_recordings_delete_all_confirm">%1$d Notizen löschen\?</string>
     <string name="lang_te">Telugu</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Netzwerkzugehörigkeit</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
@@ -1246,10 +1242,8 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen.</string>
     <string name="share_osm_edits_subject">OSM-Bearbeitung mit OsmAnd geteilt</string>
-    <string name="av_locations_descr">GPX-Datei mit Standorten.</string>
     <string name="shared_string_location">Standort</string>
     <string name="shared_string_commit">Bestätigen</string>
-    <string name="av_locations">Standorte</string>
     <string name="shared_string_hide">Verbergen</string>
     <string name="av_video_quality_low">Niedrigste Qualität</string>
     <string name="av_video_quality_high">Höchste Qualität</string>
@@ -1801,12 +1795,7 @@
     <string name="shared_string_added">Hinzugefügt</string>
     <string name="marker_activated">Markierung %s aktiviert.</string>
     <string name="one_tap_active_descr">Markierung auf der Karte antippen, um sie an die erste Stelle der aktiven Markierungen zu verschieben, ohne das Kontextmenü zu öffnen.</string>
-    <string name="empty_state_av_notes">Machen Sie sich Notizen!</string>
-    <string name="by_date">Nach Datum</string>
-    <string name="by_type">Nach Typ</string>
     <string name="import_gpx_file_description">kann als Favorit oder GPX-Datei importiert werden.</string>
-    <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu einem beliebigen Punkt auf der Karte hinzufügen, indem Sie die Widgets oder Kontextmenüs verwenden.</string>
-    <string name="notes_by_date">Audio-/Videonotizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
     <string name="one_tap_active">„Ein Klick“ aktiv</string>
     <string name="what_is_here">Was ist hier:</string>
@@ -1822,8 +1811,6 @@
     <string name="additional_actions">Zusätzliche Aktionen</string>
     <string name="parked_at">geparkt um</string>
     <string name="pick_up_till">Abholung bis</string>
-    <string name="av_locations_selected_desc">GPX-Datei mit Koordinaten und Daten der ausgewählten Notizen.</string>
-    <string name="av_locations_all_desc">GPX-Datei mit Koordinaten und Daten aller Notizen.</string>
     <string name="shared_string_actions">Aktionen</string>
     <string name="shared_string_marker">Markierung</string>
     <string name="add_track_to_markers_descr">Wählen Sie einen Track aus, um dessen Wegpunkte zu den Markierungen hinzuzufügen.</string>
@@ -2411,7 +2398,6 @@
     <string name="photo_notes">Fotonotizen</string>
     <string name="osm_editing">OSM-Bearbeitung</string>
     <string name="app_mode_osm">OSM</string>
-    <string name="multimedia_notes_view_descr">Ihre OSM-Hinweise sind in %1$s.</string>
     <string name="button_rate">Bewerten</string>
     <string name="logcat_buffer_descr">Detaillierte App-Protokolle einsehen und freigeben</string>
     <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>

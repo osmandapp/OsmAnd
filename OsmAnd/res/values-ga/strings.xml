@@ -92,7 +92,6 @@
     <string name="favorite">Ceanán</string>
     <string name="safe_settings">Sábháilte</string>
     <string name="map_rendering_engine">Inneall rindreáil na léarscáile</string>
-    <string name="watch">Amharc</string>
     <string name="rendering_category_routes">Bealaí</string>
     <string name="amenity_type_historic">Stairiúil</string>
     <string name="min_mile">nóim/míle</string>
@@ -742,7 +741,6 @@
     <string name="version_settings">Leaganacha</string>
     <string name="south_west">siar ó dheas</string>
     <string name="favourites_group">Catagóir na gceanán</string>
-    <string name="av_locations">Suíomhanna</string>
     <string name="external_sensor_name_property_description">Ainm an bhraiteora</string>
     <string name="lang_my">Burmais</string>
     <string name="lang_kab">Caibílis</string>
@@ -1552,7 +1550,6 @@
     <string name="shared_string_time_span">Tréimhse</string>
     <string name="sort_duration_descending">Fad ama is faide ar dtús</string>
     <string name="type_city_town">Clóscríobh cathair/baile/ceantar</string>
-    <string name="empty_state_av_notes">Déan nótaí!</string>
     <string name="coordinate_input">Iontráil na gcomhordanáidí</string>
     <string name="sort_duration_ascending">An fad ama is lú ar dtús</string>
     <string name="interrupt_music">Cuir ceol ar sos</string>
@@ -1590,7 +1587,6 @@
     <string name="help_article_map_map_context_menu_name">Roghchlár comhthéacsúil na léarscáile</string>
     <string name="additional_actions">Gníomhartha breise</string>
     <string name="add_tag">Cuir clib leis</string>
-    <string name="by_type">De réir cineáil</string>
     <string name="show_cameras">Ceamaraí luais</string>
     <string name="free_version_title">Leagan saor in aisce</string>
     <string name="rotate_map_to">Treo na léarscáile</string>
@@ -1684,7 +1680,6 @@
     <string name="rotate_map_manual_opt">Rothlú de láimh</string>
     <string name="show_map">Taispeáin an léarscáil</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Gan srian)</string>
-    <string name="by_date">De réir dáta</string>
     <string name="online_photos">Grianghraif ar líne</string>
     <string name="coordinates_format">Formáid na gcomhordanáidí</string>
     <string name="enter_lon">Cuir isteach domhanfhad</string>
@@ -2349,7 +2344,6 @@
     <string name="divider_descr">Eilimintí faoi bhun an phointe seo scartha ag roinnteoir.</string>
     <string name="reset_plugin_to_default">Athshocraigh socruithe an bhreiseáin mar réamhshocrú</string>
     <string name="multimedia_notes_prefs_descr">Méid pictiúr, caighdeán fuaime agus físe</string>
-    <string name="notes_by_date">Nótaí A/V de réir dáta</string>
     <string name="av_video_quality_descr">Roghnaigh caighdeán an fhíseáin.</string>
     <string name="osm_edit_created_note">Cruthaíodh Nóta OSM</string>
     <string name="speed_limit_exceed">Lamháltas teorann luais</string>
@@ -2408,7 +2402,6 @@
     <string name="rec_split_clip_length_desc">Uasteorainn ama do ghearrthóga taifeadta.</string>
     <string name="av_audio_format">Formáid aschuir fuaime</string>
     <string name="shared_string_show_all">Taispeáin gach rud</string>
-    <string name="audionotes_plugin_name">Nótaí fuaime/físe</string>
     <string name="gpx_selection_points">%1$s \nPointí</string>
     <string name="unsaved_changes_will_be_lost">Caillfear aon athruithe gan sábháil. Lean ar aghaidh?</string>
     <string name="how_to_open_wiki_title">Conas ailt Vicipéid a oscailt?</string>
@@ -3264,7 +3257,6 @@
     <string name="wikivoyage_download_pics_descr">Is féidir íomhánna Airteagal a íoslódáil lena n-úsáid as líne.\nAr fáil i gcónaí in \'Fiosraigh\' → \'Roghanna\'.</string>
     <string name="clear_all_intermediates">Glan gach ceann scríbe idirmheánach</string>
     <string name="enter_lat_and_lon">Iontráil domhanleithead agus domhanfhad</string>
-    <string name="av_locations_all_desc">Comhad GPX le comhordanáidí agus sonraí na nótaí go léir.</string>
     <string name="modify_the_search_query">Athraigh do chuardach.</string>
     <string name="empty_state_osm_edits_descr">Cruthaigh nó mionathraigh POIanna OpenStreetMap, oscail nó trácht ar nótaí OSM, agus cuir comhaid GPX taifeadta leis.</string>
     <string name="one_tap_active">\'Sconna amháin\' gníomhach</string>
@@ -3413,7 +3405,6 @@
     <string name="prefer_motorways">Is fearr le mótarbhealaí</string>
     <string name="recording_context_menu_arecord">Tóg nóta fuaime</string>
     <string name="recording_context_menu_vrecord">Tóg nóta físe</string>
-    <string name="layer_recordings">Sraith taifeadta</string>
     <string name="map_widget_audionotes">Nótaí fuaime</string>
     <string name="download_roads_only_item">Bóithre amháin</string>
     <string name="rendering_attr_noAdminboundaries_description">Taispeáint teorainneacha réigiúnacha a chosc (leibhéil riaracháin 5–9).</string>
@@ -3642,7 +3633,6 @@
     <string name="store_tracks_in_monthly_directories">Stóráil rianta taifeadta i bhfillteáin mhíosúla</string>
     <string name="map_widget_ruler_control">Rialóir ga</string>
     <string name="gps_network_not_enabled">Tá an tseirbhís suímh as. Cas air?</string>
-    <string name="local_recordings_delete_all_confirm">Scrios nótaí%1$d?</string>
     <string name="auto_announce_on">Tosaigh fógairt uathoibríoch</string>
     <string name="dismiss_changes_descr">Déanfar gach athrú a dhíbhe.</string>
     <string name="gps_filter_smoothing_desc">Socraigh an fad tairsí idir pointí.\nBeidh pointí rian nach bhfuil ar a laghad an t-achar ar shiúl ón bpointe infheicthe deireanach a chur i bhfolach.\nBí ar an eolas go bhféadfadh tairseacha arda róshimpliú a dhéanamh ar gheoiméadracht an riain.</string>
@@ -3653,7 +3643,6 @@
     <string name="delete_version_history">Scrios stair na leaganacha</string>
     <string name="shared_string_hillshade">Cnocán</string>
     <string name="import_complete_description">Iompórtáilte na sonraí go léir ón %1$s. Bain úsáid as na cnaipí thíos chun aon chuid den aip a oscailt chun é a bhainistiú.</string>
-    <string name="multimedia_notes_view_descr">Tá do nótaí OSM i %1$s.</string>
     <string name="show_from_zoom_level">Tosaíonn an taispeáint ag an leibhéal zúmála</string>
     <string name="shared_string_clear_all">Glan gach rud</string>
     <string name="osmand_accessibility_description">Cuireann gnéithe inrochtaineachta an ghléis ar fáil go díreach in OsmAnd. Éascaíonn sé seo, e.g. an ráta cainte a choigeartú le haghaidh guthanna téacs-go-hurlabhra, nascleanúint D-pad a chumrú, trackball a úsáid le haghaidh rialú zúmála, nó aiseolas téacs-go-hurlabhra, mar shampla chun do sheasamh a fhógairt go huathoibríoch.</string>
@@ -3983,7 +3972,6 @@
     <string name="select_voice_provider">Roghnaigh treoir ghutha</string>
     <string name="map_downloaded">Léarscáil íoslódáilte</string>
     <string name="favorite_category_dublicate_message">Bain úsáid as ainm catagóire nach bhfuil ann cheana féin.</string>
-    <string name="av_locations_descr">Comhad GPX le suíomhanna.</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Réamhshocrú (cian tréshoilseach)</string>
     <string name="srtm_plugin_description">Soláthraíonn sé tír-raon agus topagrafaíocht mhionsonraithe le haghaidh tuiscint amhairc ar fhaoiseamh tírdhreacha agus inrochtaineacht, ag baint úsáide as línte comhrianta, scáthú cnoic nó dathú fána, agus radharc 3T.\n\nChun na gnéithe seo a chumasú do réigiún, ní mór duit an léarscáil Línte Comhrianta agus/nó Tír-raon (3T) a íoslódáil freisin, arna tiomsú ó shonraí SRTM agus ASTER.\n\nTuilleadh léitheoireachta ag %1$s.</string>
     <string name="plugin_touringview_descr">Athraíonn an dearcadh seo stíl léarscáile OsmAnd go \'Amharc camchuairte\', is dearcadh speisialta ard-mhionsonraithe é seo do thaistealaithe agus do thiománaithe gairmiúla. \n\nSoláthraíonn an t-amharc seo, ag aon zúmáil léarscáile ar leith, an t-uasmhéid sonraí taistil atá ar fáil sna sonraí léarscáile (go háirithe bóithre, rianta, cosáin, agus marcanna treoshuímh). \n\nLéiríonn sé go soiléir freisin gach cineál bóithre gan débhrí trí chódú datha, rud atá úsáideach nuair a bhíonn feithiclí móra á dtiomáint, mar shampla. \n\nAgus soláthraíonn sé roghanna speisialta camchuairte ar nós bealaí rothar nó bealaí sléibhe Alpach a thaispeáint. \n\nNíl gá le híoslódáil léarscáile speisialta, cruthaítear an t-amharc ónár léarscáileanna caighdeánacha. \n\nIs féidir an t-amharc seo a chur ar ais trí é a dhíghníomhachtú arís anseo, nó tríd an \'Stíl Léarscáile\' a athrú faoi \'Cumraigh léarscáil\' de réir mar is gá.</string>
@@ -4212,7 +4200,6 @@
     <string name="new_plugin_added">Breiseán nua curtha leis</string>
     <string name="general_settings_profile_descr">Téama app, aonaid, réigiún</string>
     <string name="increase_search_radius_to">Leathnaigh ga an chuardaigh go %1$s</string>
-    <string name="empty_state_av_notes_desc">Cuir nótaí fuaime, físe nó grianghraf le pointe ar bith ar an léarscáil trí úsáid a bhaint as na giuirléidí nó na biachláir chomhthéacs.</string>
     <string name="speech_rate_descr">Sonraigh an ráta cainte le haghaidh téacs-go-hurlabhra.</string>
     <string name="complex_route_calculation_failed">Theip ar ríomh tapa bealaigh (%s), fallback to slow calculation.</string>
     <string name="app_mode_default">Brabhsáil an léarscáil</string>
@@ -4373,7 +4360,6 @@
     <string name="online_map_url_helper_text">Iontráil nó greamaigh an URL don fhoinse ar líne.</string>
     <string name="turn_screen_on_power_button_disabled">Díchumasaithe. Éilíonn \'Coinnigh an scáileán ar\' faoi \'Timeout after wake-up\'.</string>
     <string name="profile_backup_failed">Níorbh fhéidir cúltaca a dhéanamh den phróifíl.</string>
-    <string name="av_locations_selected_desc">Comhad GPX le comhordanáidí agus sonraí na nótaí roghnaithe.</string>
     <string name="christmas_desc">Réamh-mheas laethanta saoire na Nollag agus na hAthbhliana, is féidir leat a roghnú POIanna gaolmhara a thaispeáint cosúil le crainn agus margaí Nollag, etc.</string>
     <string name="storage_permission_restart_is_required">Tá cead anois ag an aip scríobh chuig stóráil sheachtrach, ach caithfear tosú arís chun é sin a dhéanamh.</string>
     <string name="shared_string_reverse_order">Ordú droim ar ais</string>

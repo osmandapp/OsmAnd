@@ -525,7 +525,6 @@
     <string name="map_widget_av_notes">音訊/視訊的附註</string>
     <string name="map_widget_audionotes">音訊註解</string>
     <string name="audionotes_plugin_description">在旅途中輕鬆記錄音訊、相片或視訊，只需透過地圖按鈕或位置選單即可。</string>
-    <string name="audionotes_plugin_name">旅程筆記</string>
     <string name="srtm_plugin_name">地形</string>
     <string name="download_select_map_types">其他地圖</string>
     <string name="download_roads_only_item">僅道路</string>
@@ -548,7 +547,6 @@
     <string name="incomplete_locale">未完成</string>
     <string name="delete_point">刪除標點</string>
     <string name="plugin_distance_point">標點</string>
-    <string name="layer_recordings">記錄層</string>
     <string name="audionotes_location_not_defined">輕觸「使用位置……」以添加註記到地點。</string>
     <string name="srtm_plugin_description">提供地形與詳細地形圖，透過等高線、山丘陰影或坡度著色與 3D 檢視，協助視覺化理解地貌起伏與通行性。\n\n欲啟用區域內此類功能，需額外下載由 SRTM 與 ASTER 資料編譯的等高線及/或地形 (3D) 地圖。\n \n更多詳情請見 %1$s 。</string>
     <string name="av_camera_focus">相機對焦類型</string>
@@ -853,7 +851,6 @@
     <string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>
     <string name="free">%1$s 可用</string>
     <string name="device_memory">裝置記憶體</string>
-    <string name="watch">觀看</string>
     <string name="notes">音訊與視訊註記</string>
     <string name="online_map">線上地圖</string>
     <string name="share_note">分享註解</string>
@@ -981,7 +978,6 @@
     <string name="shared_string_show_details">顯示詳細資訊</string>
     <string name="download_wikipedia_maps">維基百科</string>
     <string name="shared_string_import2osmand">匯入到 OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">您是否要刪除 %1$d 個註記？</string>
     <string name="gps_network_not_enabled">位置服務已關閉。您是否要將其開啟？</string>
     <string name="disable_recording_once_app_killed">預防單獨的日誌記錄</string>
     <string name="lang_vo">沃拉普克語</string>
@@ -1062,8 +1058,6 @@
     <string name="opening_at">營業於</string>
     <string name="closing_at">結束於</string>
     <string name="next_proceed">下頁</string>
-    <string name="av_locations_descr">GPX 檔案加上地點。</string>
-    <string name="av_locations">地點</string>
     <string name="contact_info">連絡資訊</string>
     <string name="add_opening_hours">增設營業時間</string>
     <string name="poi_dialog_poi_type">POI 類型</string>
@@ -1700,15 +1694,8 @@
     <string name="shared_string_added">已增加</string>
     <string name="marker_activated">標記 %s 已啟動。</string>
     <string name="one_tap_active">「點一下」啟動</string>
-    <string name="empty_state_av_notes">新增筆記！</string>
-    <string name="empty_state_av_notes_desc">您可以透過小工具或內容選單，在地圖上的任何位置加入音訊、影片或照片筆記。</string>
-    <string name="notes_by_date">以日期排序的音訊／視訊註記</string>
-    <string name="by_date">按照日期</string>
-    <string name="by_type">按照類型</string>
     <string name="one_tap_active_descr">輕觸在地圖上的標記，將其移動到活動標記的頂端，而不用打開內容選單。</string>
     <string name="modify_the_search_query">變更您的搜尋。</string>
-    <string name="av_locations_selected_desc">包括座標和所選註解資料的 GPX 檔案。</string>
-    <string name="av_locations_all_desc">包括座標和所有註解資料的 GPX 檔案。</string>
     <string name="osm_recipient_stat">編輯 %1$s，合計 %2$s mBTC</string>
     <string name="osm_recipients_label">OSM 收件人</string>
     <string name="total_donations">捐款總計</string>
@@ -2308,7 +2295,6 @@
     <string name="app_mode_osm">OSM</string>
     <string name="logcat_buffer_descr">檢查及分享應用程式的詳細紀錄</string>
     <string name="tracks_view_descr">您已紀錄的軌跡位於 %1$s，或是 OsmAnd 資料夾。</string>
-    <string name="multimedia_notes_view_descr">您的 OSM 註記位於 %1$s。</string>
     <string name="osm_edits_view_descr">在 %1$s 中檢視您所有尚未上傳的編輯或 OSM 臭蟲。已上傳的更改將不會再顯示。</string>
     <string name="permission_is_required">使用此選項需要權限。</string>
     <string name="monitoring_min_speed_descr">低速攔截器將不記錄低於特定速度的點。在地圖上查看時，或會使記錄的軌跡看起來更平滑。</string>

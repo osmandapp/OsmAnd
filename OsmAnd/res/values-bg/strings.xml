@@ -62,7 +62,6 @@
     <string name="recording_unavailable">недостъпно</string>
     <string name="recording_context_menu_arecord">Направи аудио бележка</string>
     <string name="recording_context_menu_vrecord">Направи видео бележка</string>
-    <string name="layer_recordings">Маркери за бележки</string>
     <string name="recording_context_menu_play">Старт</string>
     <string name="recording_description">Запис %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запис</string>
@@ -72,7 +71,6 @@
     <string name="audionotes_location_not_defined">Докоснете \"Използване на мястото...\" за да добавите бележка там.</string>
     <string name="map_widget_audionotes">Аудио бележки</string>
     <string name="audionotes_plugin_description">Добавяйте бележки (гласови, снимка или видео) по време на пътуване, ползвайки специалния бутон или контекстното меню.</string>
-    <string name="audionotes_plugin_name">Аудио/видео бележки</string>
     <string name="srtm_plugin_description">Информацията за терена, като контурни линии, хълмове и склонове, помага визуално да оцените разположението на земята и релефа, възможностите за навигация и др. Топографската информация може да бъде представена на картата чрез контурни линии, засенчване на релефа и/или оцветяване на стръмнините. \n \nДанните, върху които лежи тази функционалност, произхождат от SRTM и ASTER. \n \nОще информация на %1$s.</string>
     <string name="srtm_plugin_name">Релеф</string>
     <string name="download_select_map_types">Други карти</string>
@@ -887,7 +885,6 @@
     <string name="rename_failed">Неуспешно преименуване.</string>
     <string name="back_to_map">Назад към картата</string>
     <string name="share_note">Сподели бележката</string>
-    <string name="watch">Виж</string>
     <string name="notes">A/V бележки</string>
     <string name="online_map">Онлайн карта</string>
     <string name="free">Свободни %1$s</string>
@@ -968,7 +965,6 @@
     <string name="disable_recording_once_app_killed">Предотвратяване на самостоятелно записване</string>
     <string name="shared_string_import2osmand">Внасяне в OsmAnd</string>
     <string name="read_full_article">Прочетете пълната статия (онлайн)</string>
-    <string name="local_recordings_delete_all_confirm">Премахване на %1$d бележки\?</string>
     <string name="shared_string_release">Дата на издание</string>
     <string name="keep_informing">Повтаряне на напътствията</string>
     <string name="keep_informing_never">Само ръчно (докосване на стрелката)</string>
@@ -1139,8 +1135,6 @@
     <string name="shared_string_location">Местоположение</string>
     <string name="simulate_your_location_stop_descr">Спиране на симулацията на място.</string>
     <string name="simulate_your_location_descr">Симулира местоположението с помощта на изчисления маршрут или записана следа на GPX.</string>
-    <string name="av_locations_descr">Файл на GPX с координати.</string>
-    <string name="av_locations">Места</string>
     <string name="routing_attr_avoid_shuttle_train_name">Избягване на трансферен влак</string>
     <string name="routing_attr_avoid_shuttle_train_description">Избягване ползването на трансферни влакове</string>
     <string name="traffic_warning_hazard">Опасност</string>
@@ -1398,8 +1392,6 @@
     <string name="will_open_at">Отваря в</string>
     <string name="will_open_on">Отваря в</string>
     <string name="additional_actions">Допълнителни действия</string>
-    <string name="av_locations_selected_desc">GPX файл с координати и данни от избрани бележки.</string>
-    <string name="av_locations_all_desc">GPX файл с координати и данни от всички бележки.</string>
     <string name="modify_the_search_query">Променете своето търсене.</string>
     <string name="shared_string_actions">Действия</string>
     <string name="shared_string_marker">Маркер</string>
@@ -1597,7 +1589,6 @@
     <string name="accessibility_announce">Обявяване</string>
     <string name="photo_notes">Фото бележки</string>
     <string name="video_notes">Видео бележки</string>
-    <string name="multimedia_notes_view_descr">Вашите OSM бележки са в %1$s.</string>
     <string name="save_track_logging_accuracy">Точност на регистриране</string>
     <string name="osm_editing_prefs_descr">Вход, парола, редактиране офлайн</string>
     <string name="reset_plugin_to_default">Нулиране на настройките на добавката</string>
@@ -3887,8 +3878,6 @@
     <string name="shared_string_map_center">Център на картата</string>
     <string name="navigate_point_olc">Отворен код за местоположение (OLC)</string>
     <string name="add_group">Добавяне на група</string>
-    <string name="by_date">По дата</string>
-    <string name="by_type">По вид</string>
     <string name="select_icon_profile_dialog_title">Избиране на пиктограма</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="select_category_descr">Изберете категория или добавете нова</string>

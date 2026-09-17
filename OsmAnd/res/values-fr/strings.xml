@@ -529,7 +529,6 @@
     <string name="audionotes_location_not_defined">Appuyez sur « Utiliser la position… » pour ajouter une note sur le point.</string>
     <string name="map_widget_audionotes">Notes audio</string>
     <string name="audionotes_plugin_description">Prenez des notes audio, photo ou vidéo pendant un trajet, via un bouton sur la carte ou le menu contextuel de n\'importe quel point.</string>
-    <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     <string name="av_def_action_video">Enregistrer une vidéo</string>
     <string name="av_def_action_audio">Enregistrer une note audio</string>
     <string name="av_video_format">Format de sortie vidéo</string>
@@ -537,7 +536,6 @@
     <string name="recording_unavailable">non disponible</string>
     <string name="recording_context_menu_arecord">Prendre une note audio</string>
     <string name="recording_context_menu_vrecord">Prendre une note vidéo</string>
-    <string name="layer_recordings">Notes A/V</string>
     <string name="recording_context_menu_play">Lire</string>
     <string name="recording_description">Enregistrement %1$s %3$s %2$s</string>
     <string name="recording_default_name">Enregistrement en cours</string>
@@ -912,7 +910,6 @@
     <string name="device_memory">Stockage de l\'appareil</string>
     <string name="notes">Notes A/V</string>
     <string name="online_map">Carte en ligne</string>
-    <string name="watch">Suivre</string>
     <string name="shared_string_audio">Audio</string>
     <string name="share_note">Partager la note</string>
     <string name="shared_string_export">Exporter</string>
@@ -994,7 +991,6 @@
     <string name="shared_string_wikipedia">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Supprimer %1$d notes \?</string>
     <string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
     <string name="disable_recording_once_app_killed">Empêcher l’enregistrement après fermeture de l’application</string>
     <string name="lang_ms">Malaisien</string>
@@ -1074,7 +1070,6 @@
     <string name="closing_at">Fermeture à</string>
     <string name="add_opening_hours">Ajouter des heures d\'ouverture</string>
     <string name="poi_dialog_poi_type">Type de POI</string>
-    <string name="av_locations">Positions</string>
     <string name="poi_action_delete">Supprimer</string>
     <string name="contact_info">Contact</string>
     <string name="please_specify_poi_type">Veuillez indiquer un type de POI.</string>
@@ -1086,7 +1081,6 @@
     <string name="routing_attr_avoid_shuttle_train_description">Éviter les trains-navettes</string>
     <string name="shared_string_card_was_hidden">La carte a été masquée</string>
     <string name="routing_attr_avoid_shuttle_train_name">Éviter les trains-navettes</string>
-    <string name="av_locations_descr">Fichier GPX avec positions.</string>
     <string name="simulate_your_location_stop_descr">Arrêter de simuler votre position.</string>
     <string name="simulate_your_location_descr">Simuler votre position à partir d\'un fichier GPX ou d\'une route calculée.</string>
     <string name="are_you_sure">Êtes-vous sûr \?</string>
@@ -1739,15 +1733,8 @@
     <string name="marker_activated">Marque %s activée.</string>
     <string name="one_tap_active_descr">Appuyez sur une marque de la carte pour qu\'elle devienne immédiatement la première marque active sans utiliser le menu contextuel.</string>
     <string name="one_tap_active">Appui court sur une marque</string>
-    <string name="empty_state_av_notes">Prenez des notes !</string>
-    <string name="empty_state_av_notes_desc">Associer des notes sonore, vidéo ou photo à n\'importe quel point de la carte depuis le widget ou le menu contextuel.</string>
-    <string name="notes_by_date">Notes A/V par date</string>
-    <string name="by_date">Par date</string>
-    <string name="by_type">Par type</string>
     <string name="modify_the_search_query">Modifier votre recherche.</string>
     <string name="total_donations">Total des dons</string>
-    <string name="av_locations_selected_desc">Fichier GPX comprenant les coordonnées et le contenu des notes sélectionnées.</string>
-    <string name="av_locations_all_desc">Fichier GPX contenant les coordonnées et les notes.</string>
     <string name="osm_recipient_stat">Modifications : %1$s, Total : %2$s mBTC</string>
     <string name="osm_recipients_label">Destinataires OSM</string>
     <string name="what_is_here">Ce qu\'il y a ici :</string>
@@ -2339,7 +2326,6 @@
     <string name="live_monitoring">Suivi en ligne</string>
     <string name="save_track_logging_accuracy">Précision de l\'enregistrement</string>
     <string name="tracks_view_descr">Vos traces enregistrées se trouvent dans %1$s ou dans le dossier OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Vos notes OSM se trouvent dans %1$s.</string>
     <string name="video_notes">Notes vidéo</string>
     <string name="photo_notes">Notes photo</string>
     <string name="accessibility_announce">Annonce</string>

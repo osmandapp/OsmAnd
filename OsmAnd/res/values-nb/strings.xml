@@ -659,7 +659,6 @@
     <string name="map_underlay">Underlagskart</string>
     <string name="layer_overlay">Overleggskart…</string>
     <string name="map_overlay">Overleggskart</string>
-    <string name="audionotes_plugin_name">Audio/video-notater</string>
     <string name="osm_editing_plugin_name">OSM-redigering</string>
     <string name="plugin_ski_name">Skikartvisning</string>
     <string name="osmand_accessibility_description">Gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks. justering av talehastigheten for tekst-til-tale -stemmer, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for forstørrelseskontroll, eller tekst-til-tale-tilbakemelding, f.eks. auto-annonsering av din posisjon.</string>
@@ -732,7 +731,6 @@
     <string name="shared_string_deselect_all">Fravelg alle</string>
     <string name="shared_string_more_actions">Flere handlinger</string>
     <string name="shared_string_action_template">Handling {0}</string>
-    <string name="watch">Se</string>
     <string name="delay_to_start_navigation">Start trinnvis veiledning etter…</string>
     <string name="welmode_download_maps">Kartnedlasting</string>
     <string name="welcome_header">Velkommen</string>
@@ -920,7 +918,6 @@
     <string name="si_kmh">Kilometer i timen</string>
     <string name="si_m_s">Meter per sekund</string>
     <string name="si_min_km">Minutter per kilometer</string>
-    <string name="av_locations">Posisjoner</string>
     <string name="plugin_settings">Programtillegg</string>
     <string name="rendering_value_boldOutline_name">Tykke omriss</string>
     <string name="rendering_attr_roadStyle_description">Veistil</string>
@@ -1242,14 +1239,12 @@
     <string name="si_nm_h">Nautisk mil i timen (knop)</string>
     <string name="simulate_your_location_stop_descr">Stopp simulering av din posisjon.</string>
     <string name="simulate_your_location_descr">Simuler din posisjon ved bruk av en beregnet rute eller et GPX-spor som er tatt opp.</string>
-    <string name="av_locations_descr">GPX-fil med plasseringer.</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-farge</string>
     <string name="gps_network_not_enabled">Posisjonstjeneste avslått. Slå den på\?</string>
     <string name="disable_recording_once_app_killed">Forhindre uavhengig logging</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Farge etter rutenettverk</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM Mapper-assistent</string>
     <string name="osm_changes_added_to_local_edits">OSM-endringer lagt til lokale endringssett</string>
-    <string name="local_recordings_delete_all_confirm">Er du sikker på at du vil slette %1$d notater\?</string>
     <string name="shared_string_currently_recording_track">Gjeldende opptaksspor</string>
     <string name="track_segments">Sporsegmenter</string>
     <string name="track_points">Sporpunkter</string>
@@ -1293,7 +1288,6 @@
     <string name="recording_error">Opptak mislyktes</string>
     <string name="recording_context_menu_arecord">Ta et lydnotat</string>
     <string name="recording_context_menu_vrecord">Ta et videonotat</string>
-    <string name="layer_recordings">Opptakslag</string>
     <string name="recording_description">Innspilling %1$s %3$s %2$s</string>
     <string name="recording_default_name">Spiller inn</string>
     <string name="map_widget_av_notes">Lyd/video-notater</string>
@@ -1650,11 +1644,6 @@
     <string name="marker_activated">Markøren %s er aktivert.</string>
     <string name="one_tap_active_descr">Trykk en markør på kartet for å flytte den til toppen av de aktive markørene uten å åpne lokalmenyen.</string>
     <string name="one_tap_active">«Ett-trykk» aktiv</string>
-    <string name="empty_state_av_notes">Ta notater!</string>
-    <string name="empty_state_av_notes_desc">Legg til lyd-, video- eller bildenotater til et hvilket som helst punkt på kartet ved bruk av modul eller lokalmeny.</string>
-    <string name="notes_by_date">Lyd/video-notater etter dato</string>
-    <string name="by_date">Etter dato</string>
-    <string name="by_type">Etter type</string>
     <string name="shared_string_more_without_dots">Mer</string>
     <string name="add_favourites_group_to_markers_descr">Velg en favorittkategori å tillegge markørene.</string>
     <string name="show_number_pad">Vis numerisk tastatur</string>
@@ -1716,8 +1705,6 @@
     <string name="context_menu_read_full_article">Les hele artikkelen</string>
     <string name="context_menu_read_article">Les artikkel</string>
     <string name="context_menu_points_of_group">Alle punkter i gruppen</string>
-    <string name="av_locations_selected_desc">GPX-fil med de valgte notatenes koordinater og data.</string>
-    <string name="av_locations_all_desc">GPX-fil med alle notaters koordinater og data.</string>
     <string name="open_from">Åpen fra</string>
     <string name="open_till">Åpen til</string>
     <string name="will_close_at">Stenger</string>
@@ -2516,7 +2503,6 @@
     <string name="live_monitoring">Nettbasert sporing</string>
     <string name="save_track_logging_accuracy">Loggingsnøyaktighet</string>
     <string name="tracks_view_descr">Dine innspilte spor er i %1$s, eller i OsmAnd-mappen.</string>
-    <string name="multimedia_notes_view_descr">Du finner alle dine OSM-notater i %1$s.</string>
     <string name="video_notes">Videonotater</string>
     <string name="photo_notes">Bildenotater</string>
     <string name="accessibility_announce">Kunngjør</string>

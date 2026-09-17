@@ -347,7 +347,6 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="recording_unavailable">利用できません</string>
     <string name="recording_context_menu_arecord">音声を録音</string>
     <string name="recording_context_menu_vrecord">動画メモを撮影</string>
-    <string name="layer_recordings">記録レイヤー</string>
     <string name="recording_context_menu_play">再生</string>
     <string name="recording_description">記録中 %1$s %3$s %2$s</string>
     <string name="recording_default_name">記録中</string>
@@ -543,7 +542,6 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="audionotes_location_not_defined">マップ上を長押しでメニューを開き、右端のボタン[その他]から任意の形式のメモを取ることができます。</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">マップ内ボタンや位置情報のコンテキストメニューから、旅行中の音声/写真/動画メモを取ることができます。</string>
-    <string name="audionotes_plugin_name">音声/動画メモ</string>
     <string name="srtm_plugin_name">等高線</string>
     <string name="download_select_map_types">他のマップ</string>
     <string name="download_srtm_maps">等高線</string>
@@ -965,7 +963,6 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="rename_failed">リネーム出来ませんでした</string>
     <string name="back_to_map">マップ画面に戻る</string>
     <string name="share_note">メモを共有</string>
-    <string name="watch">表示</string>
     <string name="notes">記録したメモ</string>
     <string name="online_map">オンラインマップ</string>
     <string name="free">空き %1$s</string>
@@ -1064,7 +1061,6 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="read_full_article">記事全文を読む (オンライン)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="shared_string_show_details">パーソナルトラッカーIDを表示</string>
-    <string name="local_recordings_delete_all_confirm">%1$d個のメモを削除しますか？</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="do_you_like_osmand">OsmAndを気に入っていただけましたか？</string>
     <string name="user_hates_app_get_feedback">理由を教えてください。</string>
@@ -1087,8 +1083,6 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="shared_string_undo">元に戻す</string>
     <string name="shared_string_skip">スキップ</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="av_locations_descr">位置情報付きGPXファイルです。</string>
-    <string name="av_locations">位置</string>
     <string name="poi_action_delete">削除</string>
     <string name="shared_string_card_was_hidden">項目は非表示</string>
     <string name="building_number">棟の番号</string>
@@ -1770,10 +1764,6 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="marker_activated">マーカー%sがアクティブ化されました。</string>
     <string name="one_tap_active_descr">コンテキストメニューを開かずにマップ上のマーカーをタップするだけで1番目のマーカーとしてアクティブ化させます。</string>
     <string name="one_tap_active">ワンタップアクティブ</string>
-    <string name="empty_state_av_notes">場所に関するメモをつけよう！</string>
-    <string name="empty_state_av_notes_desc">ウィジェットやコンテキストメニューから、マップ上の任意の地点に音声、動画、写真を利用したメモをつけることができます。</string>
-    <string name="by_date">日付別</string>
-    <string name="by_type">種類別</string>
     <string name="tap_on_map_to_hide_interface_descr">マップ画面のタップで操作ボタンやウィジェットの表示を切り替えます。</string>
     <string name="tap_on_map_to_hide_interface">フルスクリーンモード</string>
     <string name="live_monitoring_max_interval_to_send_desrc">送信用現在地データをネット接続せずにどのくらいの時間記録するか、バッファを指定します</string>
@@ -1781,15 +1771,12 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="context_menu_read_article">記事を読む</string>
     <string name="context_menu_points_of_group">同じグループのお気に入り地点</string>
     <string name="additional_actions">追加のアクション</string>
-    <string name="av_locations_selected_desc">選択された注釈と座標が付属しているGPXファイル。</string>
-    <string name="av_locations_all_desc">全ての注釈と座標が付属していGPXファイル。</string>
     <string name="modify_the_search_query">検索方式を変更します。</string>
     <string name="shared_string_marker">マーカー</string>
     <string name="empty_state_osm_edits">OpenStreetMapオブジェクトの作成または変更</string>
     <string name="shared_string_deleted">削除予定</string>
     <string name="shared_string_edited">編集されました</string>
     <string name="shared_string_added">追加しました</string>
-    <string name="notes_by_date">日付別音声/動画メモ</string>
     <string name="add_group">グループの追加</string>
     <string name="empty_state_osm_edits_descr">OpenStreetMap用POIの作成や変更、OSMメモを開いたり注釈を加えたりはもちろん、記録したGPXファイルをOSMへ提供したり出来ます。</string>
     <string name="mark_passed">通過済みにする</string>
@@ -2423,7 +2410,6 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="live_monitoring">オンライン追跡</string>
     <string name="save_track_logging_accuracy">ロギング精度</string>
     <string name="tracks_view_descr">記録された経路は%1$s、またはOsmAndフォルダーにあります。</string>
-    <string name="multimedia_notes_view_descr">OSMメモは%1$sにあります。</string>
     <string name="video_notes">動画メモ</string>
     <string name="photo_notes">写真メモ</string>
     <string name="accessibility_announce">案内</string>

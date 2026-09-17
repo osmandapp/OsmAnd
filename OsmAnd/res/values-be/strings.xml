@@ -78,7 +78,6 @@
     <string name="recording_unavailable">недаступна</string>
     <string name="recording_context_menu_arecord">Запісаць аўдыянататку</string>
     <string name="recording_context_menu_vrecord">Запісаць відэанататку</string>
-    <string name="layer_recordings">Пласт запісу</string>
     <string name="recording_context_menu_play">Граць</string>
     <string name="recording_description">Запіс %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запіс</string>
@@ -86,7 +85,6 @@
     <string name="audionotes_location_not_defined">Націсніце \"Выкарыстаць месцазнаходжанне…\" для запісу нататкі для абранага месца.</string>
     <string name="map_widget_audionotes">Аўдыянататкі</string>
     <string name="audionotes_plugin_description">Стварайце аўдыё / фота / відэа нататкі падчас паездкі кнопкай мапы альбо праз кантэкстнае меню.</string>
-    <string name="audionotes_plugin_name">Аўдыё/відэа нататкі</string>
     <string name="srtm_plugin_name">Контурныя лініі</string>
     <string name="download_select_map_types">Іншыя мапы</string>
     <string name="download_roads_only_item">Толькі дарогі</string>
@@ -907,7 +905,6 @@
     <string name="rendering_attr_pisteGrooming_name">Дагляд трасы</string>
     <string name="free">Вольна %1$s</string>
     <string name="device_memory">Памяць прылады</string>
-    <string name="watch">Сачыць</string>
     <string name="notes">Нататкі аўдыё/відэа</string>
     <string name="online_map">Сеціўная мапа</string>
     <string name="share_note">Падзяліцца нататкаю</string>
@@ -1058,7 +1055,6 @@
     <string name="read_full_article">Чытаць артыкул цалкам (у сеціве)</string>
     <string name="shared_string_show_details">Паказаць падрабязнасці</string>
     <string name="download_wikipedia_maps">Вікіпедыя</string>
-    <string name="local_recordings_delete_all_confirm">Выдаліць %1$d нататак\?</string>
     <string name="shared_string_import2osmand">Імпартаваць у OsmAnd</string>
     <string name="disable_recording_once_app_killed">Прадухіліць аўтаномны запіс</string>
     <string name="gps_network_not_enabled">Служба вызначэння месцазнаходжання адключаная. Уключыць яе\?</string>
@@ -1144,8 +1140,6 @@
     <string name="add_opening_hours">Дадаць гадзіны працы</string>
     <string name="poi_dialog_poi_type">Тып POI</string>
     <string name="please_specify_poi_type">Калі ласка, вызначце тып POI.</string>
-    <string name="av_locations_descr">GPX-файл з мясцінамі.</string>
-    <string name="av_locations">Месцазнаходжанні</string>
     <string name="poi_action_delete">выдаліць</string>
     <string name="working_days">Працоўныя дні</string>
     <string name="favourites">Улюбёныя</string>
@@ -1886,15 +1880,10 @@
     <string name="shared_string_deleted">Выдалена</string>
     <string name="shared_string_edited">Адрэдагавана</string>
     <string name="marker_activated">Адзнака %s актываваная.</string>
-    <string name="notes_by_date">Нататкі па даце</string>
-    <string name="by_date">Па даце</string>
-    <string name="by_type">Па тыпу</string>
     <string name="empty_state_osm_edits_descr">Стварайце або змяняйце OSM POI, адкрывайце або каментуйце OSM-нататкі, а таксама адпраўляйце запісаныя GPX-файлы.</string>
     <string name="shared_string_added">Дададзена</string>
     <string name="one_tap_active_descr">Націск на адзнаку на мапе перамесціць яе на першае месца ў спісе актыўных без адкрыцця кантэкстнага меню.</string>
     <string name="one_tap_active">Актывацыя адным націскам</string>
-    <string name="empty_state_av_notes">Стварайце нататкі!</string>
-    <string name="empty_state_av_notes_desc">Дадайце аўдыё-, відэа- ці фотанататку ў любы пункт на мапе праз віджэт ці кантэкстнае меню.</string>
     <string name="modify_the_search_query">Змяніце пошукавы запыт.</string>
     <string name="what_is_here">Што тут:</string>
     <string name="parked_at">прыпаркаваны на</string>
@@ -1904,8 +1893,6 @@
     <string name="context_menu_read_article">Чытаць артыкул</string>
     <string name="context_menu_points_of_group">Усе пункты групы</string>
     <string name="additional_actions">Дадатковыя дзеянні</string>
-    <string name="av_locations_selected_desc">GPX-файл з каардынатамі і данымі абраных нататак.</string>
-    <string name="av_locations_all_desc">GPX-файл з каардынатамі і данымі ўсіх нататак.</string>
     <string name="shared_string_actions">Дзеянні</string>
     <string name="shared_string_marker">Адзнака</string>
     <string name="osm_recipient_stat">Змен %1$s, сума %2$s mBTC</string>
@@ -2765,7 +2752,6 @@
     <string name="sort_by_category">Сартаваць па катэгорыі</string>
     <string name="shared_string_resume">Працягнуць</string>
     <string name="accessibility_announce">Абвестка</string>
-    <string name="multimedia_notes_view_descr">Вашыя нататкі OSM знаходзяцца ў %1$s.</string>
     <string name="tracks_view_descr">Вашыя запісаныя сляды знаходзяцца ў %1$s альбо каталозе OsmAnd.</string>
     <string name="osm_authorization_success">Паспяховая аўтарызацыя</string>
     <string name="multimedia_rec_split_title">Падзел запісу</string>

@@ -520,12 +520,10 @@
     <string name="download_select_map_types">Egyéb térképek</string>
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
-    <string name="audionotes_plugin_name">Hang- és videójegyzetek</string>
     <string name="srtm_plugin_description">A domborzat és a részletes topográfia segítségével vizuálisan megérthetővé teszi a táj domborzatát és átjárhatóságát, kontúrvonalak, domborzati árnyékolás vagy lejtő színezés és 3D nézet segítségével.\n\nAhhoz, hogy ezeket a funkciókat engedélyezze egy régióban, le kell töltenie a kontúrvonalak és/vagy a domborzati (3D) térképet, amely SRTM- és ASTER-adatokból áll össze.\n\nTovábbi információk: %1$s.</string>
     <string name="recording_unavailable">nem elérhető</string>
     <string name="recording_context_menu_arecord">Hangjegyzet készítése</string>
     <string name="recording_context_menu_vrecord">Videójegyzet készítése</string>
-    <string name="layer_recordings">Rögzítési réteg</string>
     <string name="recording_context_menu_play">Lejátszás</string>
     <string name="recording_default_name">Rögzítés</string>
     <string name="shared_string_control_start">Indítás</string>
@@ -904,7 +902,6 @@
     <string name="device_memory">Eszköz memóriája</string>
     <string name="free">%1$s szabad</string>
     <string name="rendering_attr_pisteGrooming_name">Sípálya kezeltség</string>
-    <string name="watch">Óra</string>
     <string name="notes">Hang/videó jegyzetek</string>
     <string name="online_map">Online térkép</string>
     <string name="shared_string_audio">Hang</string>
@@ -999,7 +996,6 @@
     <string name="shared_string_wikipedia">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importálás az OsmAnd programba</string>
-    <string name="local_recordings_delete_all_confirm">Töröl %1$d jegyzetet\?</string>
     <string name="disable_recording_once_app_killed">Önálló naplózás megakadályozása</string>
     <string name="gps_network_not_enabled">A helymeghatározó szolgáltatás ki van kapcsolva. Bekapcsolja\?</string>
     <string name="lang_vo">volapük</string>
@@ -1107,8 +1103,6 @@
     <string name="shared_string_navigation">Navigáció</string>
     <string name="simulate_your_location_stop_descr">Pozíciószimuláció leállítása.</string>
     <string name="simulate_your_location_descr">Szimuláció megtervezett útvonallal vagy rögzített GPX-nyomvonallal.</string>
-    <string name="av_locations_descr">GPX-fájl helyszínekkel.</string>
-    <string name="av_locations">Helyszínek</string>
     <string name="routing_attr_avoid_shuttle_train_name">Autószállító vonat nélkül</string>
     <string name="routing_attr_avoid_shuttle_train_description">Elkerüli az autószállító vonatok használatát</string>
     <string name="favourites_context_menu_add">Kedvenc hozzáadása</string>
@@ -1682,11 +1676,6 @@
     <string name="marker_activated">%s jelölő aktiválva.</string>
     <string name="one_tap_active_descr">Koppintson a térképen egy jelölőre, hogy az aktív jelölők tetejére lépjen anélkül, hogy megnyitná a környezeti menüt.</string>
     <string name="one_tap_active">Aktiválás egy koppintással</string>
-    <string name="empty_state_av_notes">Készítsen jegyzeteket!</string>
-    <string name="empty_state_av_notes_desc">Hang-, videó-, vagy fényképjegyzet hozzáadása a térkép bármely pontjához, modul vagy környezeti menü használatával.</string>
-    <string name="notes_by_date">Hang/kép jegyzetek dátum szerint</string>
-    <string name="by_date">Dátum szerint</string>
-    <string name="by_type">Típus szerint</string>
     <string name="looking_for_tracks_with_waypoints">Útpontokat tartalmazó nyomvonalak keresése</string>
     <string name="shared_string_more_without_dots">Egyéb</string>
     <string name="appearance_on_the_map">Megjelenítés a térképen</string>
@@ -1725,8 +1714,6 @@
     <string name="will_open_at">Nyitás:</string>
     <string name="will_open_on">Nyitás:</string>
     <string name="additional_actions">További műveletek</string>
-    <string name="av_locations_selected_desc">GPX-fájl a kijelölt jegyzetek koordinátáival és adataival.</string>
-    <string name="av_locations_all_desc">GPX-fájl az összes jegyzet koordinátáival és adataival.</string>
     <string name="modify_the_search_query">Keresés módosítása.</string>
     <string name="shared_string_actions">Műveletek</string>
     <string name="shared_string_marker">Jelölő</string>
@@ -2344,7 +2331,6 @@
     <string name="live_monitoring">Online nyomvonalrögzítés</string>
     <string name="save_track_logging_accuracy">Naplózás pontossága</string>
     <string name="tracks_view_descr">Az összes rögzített nyomvonal megtalálható itt: %1$s, vagy az OsmAnd mappában.</string>
-    <string name="multimedia_notes_view_descr">Az OSM-jegyzeteit megtalálja itt: %1$s.</string>
     <string name="video_notes">Videójegyzetek</string>
     <string name="photo_notes">Fényképes jegyzetek</string>
     <string name="accessibility_announce">Bemondás</string>

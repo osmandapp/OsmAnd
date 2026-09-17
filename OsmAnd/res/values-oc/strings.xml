@@ -265,10 +265,6 @@
     <string name="shared_string_added">Ajustat</string>
     <string name="marker_activated">Marcador %s activat.</string>
     <string name="one_tap_active">\'Un tòc\' actiu</string>
-    <string name="empty_state_av_notes">Notatz !</string>
-    <string name="notes_by_date">Nòtas ordenadas per data</string>
-    <string name="by_date">Per data</string>
-    <string name="by_type">Per tipe</string>
     <string name="shared_string_more_without_dots">Mai</string>
     <string name="appearance_on_the_map">Aparença de la mapa</string>
     <string name="favourites_group">Categoria de luòcs preferits</string>
@@ -852,7 +848,6 @@
     <string name="shared_string_help">Ajuda</string>
     <string name="record_plugin_name">Enregistrament d\'escorregudas</string>
     <string name="plugin_touringview_name">Vista toristica de la mapa</string>
-    <string name="audionotes_plugin_name">Nòtas audio/video</string>
     <string name="osmand_parking_plugin_name">Posicion d\'aparcament</string>
     <string name="osm_editing_plugin_name">Modificar OpenStreetMap</string>
     <string name="shared_string_favorites">Preferéncias</string>

@@ -594,7 +594,6 @@
     <string name="recording_unavailable">Nav pieejams</string>
     <string name="recording_context_menu_arecord">Sākt audio ierakstu</string>
     <string name="recording_context_menu_vrecord">Sākt video ierakstu</string>
-    <string name="layer_recordings">Ieraksta slānis</string>
     <string name="recording_context_menu_play">Atskaņot</string>
     <string name="recording_description">Ieraksta %1$s %3$s %2$s</string>
     <string name="recording_default_name">Ierakstīšana</string>
@@ -604,7 +603,6 @@
     <string name="audionotes_location_not_defined">Šai piezīmei nav definēta atrašanās vieta. Lai to izdarītu, izvēlieties \"Lietot atrašanās vietu…\".</string>
     <string name="map_widget_audionotes">Audio ieraksti</string>
     <string name="audionotes_plugin_description">Ceļojuma laikā veikt audio/video vai foto ierakstus ar pogas palīdzību uz kartes vai caur konteksta izvēlni no jebkuras vietas kartē.</string>
-    <string name="audionotes_plugin_name">Audio/video ieraksti</string>
     <string name="srtm_plugin_name">Kontūrlīniju spraudnis</string>
     <string name="download_select_map_types">Pārējās kartes</string>
     <string name="download_roads_only_item">Tikai ceļi</string>
@@ -914,7 +912,6 @@
     <string name="rename_failed">Neizdevās mainīt nosaukumu.</string>
     <string name="back_to_map">Atpakaļ kartē</string>
     <string name="share_note">Kopīgot ierakstus</string>
-    <string name="watch">Skatīties</string>
     <string name="notes">Ieraksti</string>
     <string name="online_map">Karte tiešsaistē</string>
     <string name="free">"Brīvi %1$s "</string>
@@ -1139,8 +1136,6 @@
     <string name="simulate_your_location_stop_descr">Pārtraukt pozīcijas imitāciju</string>
     <string name="simulate_your_location_descr">Imitēt pēc aprēķinātā maršruta vai ierakstītā GPX</string>
     <string name="looking_up_address">Adreses meklēšana</string>
-    <string name="av_locations_descr">GPX fails ar Audio/Video piezīmēm</string>
-    <string name="av_locations">Vietas</string>
     <string name="routing_attr_avoid_shuttle_train_name">Izvairīties no starppilsētu vilcieniem</string>
     <string name="traffic_warning_hazard">Bīstamība</string>
     <string name="rendering_value_boldOutline_name">Biezas kontūras</string>
@@ -1195,7 +1190,6 @@
     <string name="rendering_value_disabled_name">Izslēgts</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Krāsas pēc infrastruktūras veida</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Krāsas pēc OSMC simbola</string>
-    <string name="local_recordings_delete_all_confirm">Vai vēlaties izdzēst %1$d ierakstus\?</string>
     <string name="rendering_attr_roadStyle_description">Pārklājuma veidi</string>
     <string name="routing_attr_avoid_stairs_name">Bez kāpnēm</string>
     <string name="routing_attr_avoid_stairs_description">Bez kāpnēm</string>
@@ -2067,13 +2061,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="looking_for_tracks_with_waypoints">Meklē trekus ar ceļapunktiem</string>
     <string name="one_tap_active_descr">Uzspiediet marķieri uz kartes, lai to pārvietotu aktīvo marķieru virspusē bez konteksta izvēlnes atvēršanas.</string>
     <string name="one_tap_active">\"Viens pieskāriens\" aktīvs</string>
-    <string name="empty_state_av_notes">Izveidojiet piezīmes!</string>
-    <string name="empty_state_av_notes_desc">Pievienojiet audio, video vai fotogrāfiju piezīmes jebkurā vietā uz kartes, izmantojot logrīku vai konteksta izvēlni.</string>
-    <string name="notes_by_date">Piezīmes pēc datuma</string>
-    <string name="by_date">Pēc datuma</string>
-    <string name="by_type">Pēc tipa</string>
-    <string name="av_locations_selected_desc">GPX fails ar koordinātām un atzīmētajām piezīmēm.</string>
-    <string name="av_locations_all_desc">GPX fails ar koordinātām un visām piezīmēm.</string>
     <string name="osm_recipient_stat">Labojumi %1$s, summa %2$s mBTC</string>
     <string name="osm_recipients_label">OSM saņēmēji</string>
     <string name="total_donations">Kopējie ziedojumi</string>
@@ -2324,7 +2311,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="live_monitoring">Sekošana tiešsaistē</string>
     <string name="save_track_logging_accuracy">žurnalēšanas precizitāte</string>
     <string name="tracks_view_descr">Jūsu ierakstītie treki atrodas %1$s vai OsmAnd mapē.</string>
-    <string name="multimedia_notes_view_descr">Jūsu OSM piezīmes atrodas %1$s.</string>
     <string name="video_notes">Video piezīmes</string>
     <string name="photo_notes">Foto piezīmes</string>
     <string name="accessibility_announce">Paziņošana</string>

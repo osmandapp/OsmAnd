@@ -582,11 +582,9 @@
     <string name="audionotes_location_not_defined">יש לגעת ב‚שימוש במיקום…’ כדי להוסיף הערה למיקום.</string>
     <string name="map_widget_audionotes">הערות קוליות</string>
     <string name="audionotes_plugin_description">יצירת הערות קוליות/תמונה/וידאו במהלך טיול, או באמצעות כפתור על המפה או ישירות מתפריט ההקשר של המיקום.</string>
-    <string name="audionotes_plugin_name">תוסף הערות קוליות</string>
     <string name="recording_unavailable">לא זמין</string>
     <string name="recording_context_menu_arecord">הקלטת הערה קולית</string>
     <string name="recording_context_menu_vrecord">צילום הערת וידאו</string>
-    <string name="layer_recordings">שכבת ההקלטה</string>
     <string name="recording_context_menu_play">נגינה</string>
     <string name="recording_description">מתבצעת הקלטה %1$s %3$s %2$s</string>
     <string name="recording_default_name">בהקלטה</string>
@@ -935,7 +933,6 @@
     <string name="shared_string_select">בחירה</string>
     <string name="switch_start_finish">היפוך בין נקודות ההתחלה והיעד</string>
     <string name="rendering_attr_hideIcons_name">סמלי נקודות עניין</string>
-    <string name="av_locations">מיקומים</string>
     <string name="plugin_settings">תוספים</string>
     <string name="traffic_warning_hazard">סכנה</string>
     <string name="no_updates_available">אין עדכונים זמינים</string>
@@ -1338,7 +1335,6 @@
     <string name="simulate_your_location_stop_descr">הפסקת הדמיית המיקום שלך.</string>
     <string name="simulate_your_location_descr">הדמיית המיקום שלך באמצעות נתיב מחושב או מסלול GPX מוקלט.</string>
     <string name="looking_up_address">הכתובת בחיפוש</string>
-    <string name="av_locations_descr">קובץ GPX עם מיקומים.</string>
     <string name="routing_attr_avoid_shuttle_train_name">ללא רכבות שאטל</string>
     <string name="routing_attr_avoid_shuttle_train_description">מונע שימוש ברכבות שאטל</string>
     <string name="rendering_value_boldOutline_name">קו מתאר מודגש</string>
@@ -1375,7 +1371,6 @@
     <string name="welcome_header">ברוך בואך</string>
     <string name="current_route">הנתיב הנוכחי</string>
     <string name="osm_changes_added_to_local_edits">השינויים ב־OSM נוספו לערכת השינויים המקומית</string>
-    <string name="local_recordings_delete_all_confirm">למחוק %1$d הערות\?</string>
     <string name="navigate_point_zone">אזור</string>
     <string name="error_avoid_specific_road">לא נמצא מעקף</string>
     <string name="home_button">בית</string>
@@ -1401,11 +1396,6 @@
     <string name="shared_string_edited">נערכה</string>
     <string name="shared_string_added">נוספה</string>
     <string name="marker_activated">הסמן %s הופעל.</string>
-    <string name="empty_state_av_notes">אפשר ליצור הערות!</string>
-    <string name="empty_state_av_notes_desc">ניתן להוסיף הערה מסוג שמע, וידאו או תמונה לכל נקודה במפה באמצעות הווידג׳טים או תפריטי ההקשר.</string>
-    <string name="notes_by_date">הערות שמע/וידאו לפי תאריך</string>
-    <string name="by_date">לפי תאריך</string>
-    <string name="by_type">לפי סוג</string>
     <string name="subscribe_email_desc">ניתן להירשם לרשימת הדיוור שלנו כדי לקבל הנחות על היישומון ולקבל עוד 3 הורדות של מפות בחינם!</string>
     <string name="depth_contour_descr">מפות קווי מתאר של עומק הים וסמנים ימיים.</string>
     <string name="sea_depth_thanks">תודה לך על רכישת ‚קווי המתאר של עומק הים’</string>
@@ -1642,8 +1632,6 @@
     <string name="will_open_at">פתיחה בשעה</string>
     <string name="will_open_on">פתיחה ב־</string>
     <string name="additional_actions">פעולות נוספות</string>
-    <string name="av_locations_selected_desc">קובץ GPX עם נקודות ציון ונתונים על ההערות הנבחרות.</string>
-    <string name="av_locations_all_desc">קובץ GPX עם נקודות ציון ונתונים על כל ההערות.</string>
     <string name="shared_string_actions">פעולות</string>
     <string name="shared_string_marker">סמן</string>
     <string name="routing_attr_driving_style_safety_name">העדפת דרכים משניות</string>
@@ -1905,7 +1893,6 @@
     <string name="wikivoyage_travel_guide">מדריכי תיירות</string>
     <string name="wikivoyage_travel_guide_descr">מדריכים למקומות המעניינים ביותר בעולם, בתוך OsmAnd, ללא חיבור לאינטרנט.</string>
     <string name="popular_destinations">יעדים נפוצים</string>
-    <string name="watch">צפייה</string>
     <string name="transport_nearby_routes_within">נתיבים קרובים בטווח של עד</string>
     <string name="action_create">פעולת יצירה</string>
     <string name="action_modify">פעולת שינוי</string>
@@ -2646,7 +2633,6 @@
     <string name="osm_edits_view_descr">ניתן לצפות בכל העריכות או בתקלות ב־OSM שטרם הועלו תחת %1$s. שינויים שהועלו לא יופיעו עוד.</string>
     <string name="hillshade_description">מפת הצללה עם צבעי הצללה כהים כדי להדגיש מדרונות, פסגות ועמקים.</string>
     <string name="shared_string_octagon">מתומן</string>
-    <string name="multimedia_notes_view_descr">הערות ה־OSM שלך הן תחת %1$s.</string>
     <string name="tracks_view_descr">המסלולים המוקלטים שלך נמצאים תחת %1$s, או בתיקייה של OsmAnd.</string>
     <string name="app_mode_ski_snowmobile">אופנוע שלג</string>
     <string name="custom_osmand_plugin">תוסף OsmAnd מותאם אישית</string>

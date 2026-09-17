@@ -524,13 +524,11 @@
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="audionotes_plugin_description">Tome notas de audio / foto / video durante un viaje, utilizando un botón de mapa o el menú contextual de la ubicación.</string>
-    <string name="audionotes_plugin_name">Notas de audio/vídeo</string>
     <string name="audionotes_location_not_defined">Pulsa en «Usar ubicación…» para añadir una nota a la ubicación.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="recording_unavailable">no disponible</string>
     <string name="recording_context_menu_arecord">Grabar audio</string>
     <string name="recording_context_menu_vrecord">Grabar vídeo</string>
-    <string name="layer_recordings">Capa de grabaciones</string>
     <string name="recording_context_menu_play">Escuchar</string>
     <string name="recording_default_name">Grabación</string>
     <string name="shared_string_control_stop">Parar</string>
@@ -913,7 +911,6 @@
     <string name="plugin_nautical_descr">Enriquece el mapa con información sobre rutas náuticas, marcas de navegación náutica, áreas marinas peligrosas, zonas restringidas para navegar o atracar, etc. Para usarlo, descarga los respectivos mapas náuticos y activa el estilo «Mapa náutico» en «Configurar mapa». \n \nSigue leyendo en %1$s.</string>
     <string name="plugin_ski_descr">Diseñado para navegar por zonas de deportes de invierno: Consulta pistas de esquí, remontes y pistas de esquí de fondo, con líneas de colores que indican la dificultad. Para usarlo, activa este complemento y, en \"Configurar mapa\", selecciona el estilo \"Invierno y esquí\".</string>
     <string name="plugin_touringview_descr">Activando esta vista, el estilo del mapa OsmAnd cambia a la «Vista turística», una vista de alto detalle especial para viajeros y conductores profesionales. \n \nEsta vista provee, en cualquier nivel de zum del mapa, la máxima cantidad de detalles turísticos disponibles en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación). \n \nTambién representa claramente todos los tipos de caminos sin ambigüedades por códigos de color, útil por ejemplo, cuando se conducen vehículos grandes. \n \nY proporciona opciones especiales de turismo, como mostrar las rutas ciclistas o rutas de montaña alpina. \n \nNo necesita descargar un mapa especial, la vista se crea a partir de nuestros mapas estándar. \n \nEsta vista puede revertirse cuando quiera, desactivando de nuevo aquí o cambiando el «Estilo del mapa» desde «Configurar mapa».</string>
-    <string name="watch">Ver</string>
     <string name="plugin_touringview_name">Vista turística</string>
     <string name="rename_failed">Fallo al renombrar.</string>
     <string name="shared_string_currently_recording_track">Grabando traza actual</string>
@@ -989,7 +986,6 @@
     <string name="read_full_article">Leer artículo completo (en línea)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="shared_string_show_details">Ver detalles</string>
-    <string name="local_recordings_delete_all_confirm">¿Borrar %1$d notas\?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="gps_network_not_enabled">Servicio de ubicación desactivado. ¿Quiere activarlo?</string>
     <string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
@@ -1071,8 +1067,6 @@
     <string name="next_proceed">Siguiente</string>
     <string name="opening_at">Abren a las</string>
     <string name="closing_at">Cierran a las</string>
-    <string name="av_locations_descr">Archivo GPX con ubicaciones.</string>
-    <string name="av_locations">Ubicaciones</string>
     <string name="contact_info">Información de contacto</string>
     <string name="add_opening_hours">Añadir horario de apertura</string>
     <string name="poi_dialog_poi_type">Tipo de PDI</string>
@@ -1739,11 +1733,6 @@
     <string name="marker_activated">Marcador «%s» activado.</string>
     <string name="one_tap_active_descr">Pulsa un marcador en el mapa para moverlo al primer lugar de los marcadores activos, sin abrir el menú contextual.</string>
     <string name="one_tap_active">Activar «Una pulsación»</string>
-    <string name="empty_state_av_notes">¡Toma notas!</string>
-    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto a cualquier punto del mapa, usando el widget o el menú contextual.</string>
-    <string name="notes_by_date">Notas A/V por fecha</string>
-    <string name="by_date">Por fecha</string>
-    <string name="by_type">Por tipo</string>
     <string name="what_is_here">Aquí hay:</string>
     <string name="parked_at">aparcado a las</string>
     <string name="pick_up_till">Recoger hasta las</string>
@@ -1757,8 +1746,6 @@
     <string name="will_open_at">Abre a las</string>
     <string name="will_open_on">Abre a las</string>
     <string name="additional_actions">Acciones adicionales</string>
-    <string name="av_locations_selected_desc">Archivo GPX con coordenadas y datos de las notas elegidas.</string>
-    <string name="av_locations_all_desc">Archivo GPX con coordenadas y datos de todas las notas.</string>
     <string name="shared_string_actions">Acciones</string>
     <string name="shared_string_marker">Marcador</string>
     <string name="osm_recipient_stat">Ediciones: %1$s, total: %2$s mBTC</string>
@@ -2341,7 +2328,6 @@
     <string name="live_monitoring">Seguimiento en línea</string>
     <string name="save_track_logging_accuracy">Precisión de registro</string>
     <string name="tracks_view_descr">Puedes encontrar todas tus trazas grabadas en «%1$s» o en la carpeta OsmAnd usando el administrador de archivos.</string>
-    <string name="multimedia_notes_view_descr">Puedes encontrar todas tus notas multimedia en «%1$s».</string>
     <string name="video_notes">Notas de video</string>
     <string name="photo_notes">Notas fotográficas</string>
     <string name="accessibility_announce">Anunciar</string>

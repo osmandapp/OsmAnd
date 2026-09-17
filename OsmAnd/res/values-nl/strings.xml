@@ -536,13 +536,11 @@
     <string name="download_select_map_types">Andere kaarten</string>
     <string name="download_srtm_maps">Hoogtelijnen</string>
     <string name="audionotes_plugin_description">Maak audio/foto/video-notities tijdens een reis door gebruik te maken van een knop op de kaart of het locatie context menu.</string>
-    <string name="audionotes_plugin_name">Audio-/videonotities</string>
     <string name="audionotes_location_not_defined">Schakel \'locatie\' in om een notitie aan de locatie toe te voegen.</string>
     <string name="map_widget_audionotes">Audionotities</string>
     <string name="recording_unavailable">niet beschikbaar</string>
     <string name="recording_context_menu_arecord">Audionotitie opnemen</string>
     <string name="recording_context_menu_vrecord">Videonotitie opnemen</string>
-    <string name="layer_recordings">Opname laag</string>
     <string name="recording_context_menu_play">Afspelen</string>
     <string name="recording_description">Opname %1$s %3$s %2$s</string>
     <string name="recording_default_name">Opname</string>
@@ -885,7 +883,6 @@
     <string name="plugin_install_needs_network">Om deze plugin te installeren is een internetverbinding nodig.</string>
     <string name="plugin_nautical_name">Nautische kaartweergave</string>
     <string name="shared_string_get">Installeren</string>
-    <string name="watch">Bekijk</string>
     <string name="rendering_attr_pisteGrooming_name">Piste verzorging</string>
     <string name="track_segments">GPX-track-segmenten</string>
     <string name="track_points">GPX-track-punten</string>
@@ -1039,7 +1036,6 @@
     <string name="gps_network_not_enabled">Locatiedienst staat uit. Wil je die aanzetten\?</string>
     <string name="read_full_article">Lees volledig artikel (online)</string>
     <string name="shared_string_show_details">Toon details</string>
-    <string name="local_recordings_delete_all_confirm">%1$d notities verwijderen\?</string>
     <string name="light_theme">Licht</string>
     <string name="dark_theme">Donker</string>
     <string name="lang_tl">Tagalog</string>
@@ -1133,8 +1129,6 @@
     <string name="shared_string_navigation">Navigatie</string>
     <string name="simulate_your_location_stop_descr">Positiesimulatie beëindigen.</string>
     <string name="simulate_your_location_descr">Routesimulatie met een berekende route of een opgeslagen GPX-track.</string>
-    <string name="av_locations_descr">GPX-bestand met locaties.</string>
-    <string name="av_locations">Locaties van geselecteerde AV-Notities</string>
     <string name="plugin_settings">Plugins</string>
     <string name="routing_attr_avoid_shuttle_train_name">Geen autotreinen</string>
     <string name="routing_attr_avoid_shuttle_train_description">Vermijdt gebruik autotreinen</string>
@@ -1858,15 +1852,8 @@
     <string name="shared_string_deleted">Verwijderd</string>
     <string name="shared_string_edited">Gewijzigd</string>
     <string name="shared_string_added">Toegevoegd</string>
-    <string name="av_locations_selected_desc">GPX-bestand met coördinaten en gegevens van de geselecteerde notities.</string>
-    <string name="av_locations_all_desc">GPX-bestand met coördinaten en gegevens van alle notities.</string>
     <string name="empty_state_osm_edits_descr">OpenStreetMap-POIs aanmaken of wijzigen, OSM-opmerkingen aanmaken of becommentariëren en opgenomen GPX-tracks bijdragen.</string>
     <string name="marker_activated">Markering %s is geactiveerd.</string>
-    <string name="empty_state_av_notes">Notities maken!</string>
-    <string name="empty_state_av_notes_desc">Audio-, video- of fotonotities toevoegen aan elk willekeurig punt op de kaart door gebruik te maken van de widgets of contextmenu’s.</string>
-    <string name="notes_by_date">Audio/Video-notities op datum</string>
-    <string name="by_date">Op datum</string>
-    <string name="by_type">Op type</string>
     <string name="shared_string_more_without_dots">Meer</string>
     <string name="show_number_pad">Toon cijfertoetsenbord</string>
     <string name="shared_string_restart">App herstarten</string>
@@ -2488,7 +2475,6 @@
     <string name="live_monitoring">Online volgen</string>
     <string name="save_track_logging_accuracy">Logging nauwkeurigheid</string>
     <string name="tracks_view_descr">De opgenomen tracks zijn opgeslagen in %1$s, of in de OsmAnd-map.</string>
-    <string name="multimedia_notes_view_descr">Je kan al je notities terugvinden in %1$s.</string>
     <string name="video_notes">Videonotities</string>
     <string name="photo_notes">Fotonotities</string>
     <string name="accessibility_announce">Meld</string>

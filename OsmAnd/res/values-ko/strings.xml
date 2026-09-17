@@ -482,14 +482,12 @@
     <string name="recording_unavailable">사용 불가능</string>
     <string name="recording_context_menu_arecord">소리 녹음</string>
     <string name="recording_context_menu_vrecord">영상 녹화</string>
-    <string name="layer_recordings">레코딩 레이어</string>
     <string name="recording_context_menu_play">재생</string>
     <string name="recording_description">레코딩 %1$s %3$s %2$s</string>
     <string name="recording_default_name">레코딩</string>
     <string name="map_widget_av_notes">소리/영상 노트</string>
     <string name="map_widget_audionotes">소리 노트</string>
     <string name="audionotes_plugin_description">이 플러그인은 여행하는 동안 소리/사진/영상을 찍기 위한 기능과 버튼을 제공합니다.</string>
-    <string name="audionotes_plugin_name">소리/영상 노트</string>
     <string name="srtm_plugin_name">등고선</string>
     <string name="download_select_map_types">다른 지도</string>
     <string name="download_roads_only_item">도로 전용</string>
@@ -861,7 +859,6 @@
     <string name="rendering_attr_pisteGrooming_name">Piste grooming (손질)</string>
     <string name="free">무료 %1$s</string>
     <string name="device_memory">장치 메모리</string>
-    <string name="watch">보기(Watch)</string>
     <string name="notes">노트</string>
     <string name="online_map">온라인 지도</string>
     <string name="share_note">노트 공유</string>
@@ -1002,7 +999,6 @@
     <string name="read_full_article">전체 기사 읽기 (온라인)</string>
     <string name="shared_string_wikipedia">위키백과</string>
     <string name="shared_string_show_details">세부 정보 보기</string>
-    <string name="local_recordings_delete_all_confirm">%1$d 노트를 삭제 하려고 합니다. 확실한가요?</string>
     <string name="light_theme">밝은</string>
     <string name="dark_theme">어두운</string>
     <string name="lang_pms">피에몬테 어</string>
@@ -1076,8 +1072,6 @@
     <string name="shared_string_undo">실행 취소</string>
     <string name="shared_string_skip">건너뛰기</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="av_locations_descr">Gpx 파일에 위치와 관련된 메모를 첨부합니다.</string>
-    <string name="av_locations">위치</string>
     <string name="poi_action_delete">삭제</string>
     <string name="show_on_start">시작할 때 보여주기</string>
     <string name="tab_title_basic">기본</string>
@@ -3813,7 +3807,6 @@
     <string name="lang_oc">오크어</string>
     <string name="configure_navigation">탐색 구성</string>
     <string name="turn_screen_on_power_button_disabled">지원하다 \'Keep Screen on\' 을 \'Timeout after Wake-up\' 으로 요구합니다.</string>
-    <string name="av_locations_selected_desc">선택된 노트의 좌표와 데이터를 가진 GPX 파일.</string>
     <string name="turn_screen_on_power_button">전원 버튼</string>
     <string name="change_markers_position">변경 마커 위치</string>
     <string name="add_track_to_markers_descr">Markers에 대한 통로를 추가하기 위해 트랙을 선택합니다.</string>
@@ -3912,7 +3905,6 @@
 \nAndroid \'Apps\' 설정에서 제거 할 수 있습니다.</string>
     <string name="wikivoyage_download_pics_descr">문서 이미지는 오프라인 사용으로 다운로드 할 수 있습니다.
 \n\'Explore\' → \'Options\'에서 항상 사용할 수 있습니다.</string>
-    <string name="empty_state_av_notes_desc">위젯 또는 컨텍스트 메뉴를 사용하여 지도에 오디오, 비디오 또는 사진 메모를 추가하십시오.</string>
     <string name="all_markers_moved_to_history">모든지도 마커는 역사로 이동</string>
     <string name="marker_moved_to_history">Map Marker가 역사로 이동</string>
     <string name="quick_action_take_audio_note_descr">화면의 중간에 오디오 메모를 추가하는 버튼.</string>
@@ -4200,7 +4192,6 @@
     <string name="routing_profile_direct_to">다이렉트-투-포인트</string>
     <string name="live_monitoring_adress">웹 주소</string>
     <string name="multimedia_notes_prefs_descr">그림 크기, 오디오 및 영상 품질</string>
-    <string name="multimedia_notes_view_descr">OSM 노트는 %1$s입니다.</string>
     <string name="desert_render_descr">사막과 다른 sparsely 대중적인 지역을 위해. 더 자세히.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>

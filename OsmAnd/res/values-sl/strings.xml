@@ -574,12 +574,10 @@
     <string name="map_widget_av_notes">Zvočni in video zaznamki</string>
     <string name="map_widget_audionotes">Zvočni zaznamek</string>
     <string name="audionotes_plugin_description">Med potovanjem lahko z gumbom na zemljevidu ali v kontekstnem meniju lokacije ustvarjaš zvočne/fotografske/video opombe.</string>
-    <string name="audionotes_plugin_name">Zvočni in video zaznamki</string>
     <string name="download_srtm_maps">Podatki izohips</string>
     <string name="recording_unavailable">ni na voljo</string>
     <string name="recording_context_menu_arecord">Posnemi zvočni zaznamek</string>
     <string name="recording_context_menu_vrecord">Posnemi video zaznamek</string>
-    <string name="layer_recordings">Sloj posnetka</string>
     <string name="shared_string_control_start">Začni ↦</string>
     <string name="av_def_action_video">Snemanje videa</string>
     <string name="av_def_action_audio">Snemanje zvoka</string>
@@ -994,7 +992,6 @@
     <string name="shared_string_go">Začni ↝</string>
     <string name="osmand_parking_overdue">prekoračen čas</string>
     <string name="shared_string_places">Kraji</string>
-    <string name="watch">Poglej</string>
     <string name="specified_directiory_not_writeable">V navedeno mapo ni mogoče shraniti zemljevidov</string>
     <string name="storage_directory_external">Zunanje mesto za shranjevanje</string>
     <string name="storage_directory_multiuser">Shranjevanje za različne uporabnike</string>
@@ -1048,7 +1045,6 @@
     <string name="shared_string_show_details">Pokaži podrobnosti</string>
     <string name="download_wikipedia_maps">Wikipedija</string>
     <string name="shared_string_import2osmand">Uvozi v OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Želiš izbrisati %1$d opomb\?</string>
     <string name="gps_network_not_enabled">Storitev lokacija ni omogočena. Ali jo želiš omogočiti\?</string>
     <string name="disable_recording_once_app_killed">Prepreči samostojno beleženje</string>
     <string name="lang_vo">Volapik</string>
@@ -1128,8 +1124,6 @@
     <string name="routing_attr_avoid_shuttle_train_name">Brez prevoza z vlakom</string>
     <string name="routing_attr_avoid_shuttle_train_description">Izogni se vožnji z vlakom</string>
     <string name="favourites">Priljubljene</string>
-    <string name="av_locations_descr">Datoteka GPX z lokacijami.</string>
-    <string name="av_locations">Mesta</string>
     <string name="poi_action_delete">izbriši</string>
     <string name="tab_title_basic">Osnovno</string>
     <string name="tab_title_advanced">Napredno</string>
@@ -1838,8 +1832,6 @@
     <string name="shared_string_deleted">Izbrisano</string>
     <string name="shared_string_edited">Urejeno</string>
     <string name="shared_string_added">Dodano</string>
-    <string name="by_date">Po datumu</string>
-    <string name="by_type">Po vrsti</string>
     <string name="shared_string_more_without_dots">Več ...</string>
     <string name="shared_string_right">Desno</string>
     <string name="shared_string_left">Levo</string>
@@ -1863,9 +1855,6 @@
     <string name="marker_activated">Označba %s je dejavna.</string>
     <string name="one_tap_active_descr">Za samodejno prestavljanje na vrh seznama, enostavno pritisnite označbo na zemljevidu.</string>
     <string name="one_tap_active">Zagon z enim pritiskom</string>
-    <string name="empty_state_av_notes">Zabeležite si opombe!</string>
-    <string name="empty_state_av_notes_desc">Dodaj slikovne, zvokovne ali video opombe za katerokoli točko na zemljevidu prek gradnika ali kontekstnega menija.</string>
-    <string name="notes_by_date">A/V opombe po datumu</string>
     <string name="looking_for_tracks_with_waypoints">Iskanje sledi z vmesnimi točkami</string>
     <string name="add_track_to_markers_descr">Izbor sledi za dodajanje vmesnik točk kot označbe.</string>
     <string name="add_favourites_group_to_markers_descr">Izberi kategorijo priljubljenih, ki jih želiš dodati med označbe.</string>
@@ -1898,8 +1887,6 @@
     <string name="will_open_at">Odpre se ob</string>
     <string name="will_open_on">Odpre se ob</string>
     <string name="additional_actions">Dodatna dejanja</string>
-    <string name="av_locations_selected_desc">Datoteka GPX s koordinatami in podatki izbranih sporočil.</string>
-    <string name="av_locations_all_desc">Datoteka GPX s koordinatami in podatki vseh sporočil.</string>
     <string name="shared_string_actions">Dejanja</string>
     <string name="shared_string_marker">Označba</string>
     <string name="osm_recipient_stat">Število urejanj %1$s, vsota %2$s mBTC</string>
@@ -3529,7 +3516,6 @@
     <string name="reset_to_default_category_button_promo">»Ponastavi na privzeto« bo vrstni red razvrščanja znova ponastavil na privzeto ob namestitvi.</string>
     <string name="accessibility_mode_disabled">Način dostopnosti je v vašem sistemu Android izklopljen.</string>
     <string name="tracks_view_descr">Posnete sledi so v mapi %1$s ali v mapi OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Tvoje opombe OSM so v %1$s.</string>
     <string name="plugin_prefs_reset_successful">Vse nastavitve vtičnikov so obnovljene na privzete vrednosti.</string>
     <string name="edit_profiles_descr">Privzetega OsmAnd profila ni mogoče izbrisati, temveč ga je mogoče onemogočiti (na prejšnjem zaslonu) ali razvrstiti na dno.</string>
     <string name="reset_confirmation_descr">S pritiskom na %1$s bodo zavržene vse spremembe.</string>

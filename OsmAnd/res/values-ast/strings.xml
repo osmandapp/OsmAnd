@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
     <string name="no_updates_available">No updates available</string>
     <string name="download_live_updates">Anovamientos en direuto</string>
@@ -124,7 +123,6 @@
     <string name="shared_string_video">Videu</string>
     <string name="shared_string_photo">Semeya</string>
     <string name="shared_string_online_maps">Mapes en llinia</string>
-    <string name="audionotes_plugin_name">Notes d\'audiu/videu</string>
     <string name="shared_string_accessibility">Accesibilidá</string>
     <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
     <string name="debugging_and_development">Desendolcu d\'OsmAnd</string>
@@ -327,7 +325,6 @@
     <string name="missing_write_external_storage_permission">OsmAnd lacks permission to use the memory card</string>
     <string name="only_download_over_wifi">Only download on Wi-Fi</string>
     <string name="audionotes_location_not_defined">Tap \'Use location…\' to add a note to the location.</string>
-    <string name="local_recordings_delete_all_confirm">Delete %1$d notes\?</string>
     <string name="shared_string_go">Go</string>
     <string name="shared_string_map">Mapa</string>
     <string name="shared_string_favorites">Favoritos</string>
@@ -553,10 +550,6 @@
     <string name="marker_activated">Marker %s activated.</string>
     <string name="one_tap_active_descr">Tap a marker on the map to move it to the top of the active markers without opening the context menu.</string>
     <string name="one_tap_active">\'One tap\' active</string>
-    <string name="empty_state_av_notes_desc">Add audio, video, or photo notes to any point on the map by using the widgets or context menus.</string>
-    <string name="notes_by_date">A/V notes by date</string>
-    <string name="by_date">Pola data</string>
-    <string name="by_type">Pol tipu</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="appearance_on_the_map">Aspeutu nel mapa</string>
     <string name="empty_state_markers_groups">Import groups</string>
@@ -911,7 +904,6 @@
     <string name="print_route">Print route</string>
     <string name="app_mode_aircraft">Aeronave</string>
     <string name="map_widget_gps_info">Información del GPS</string>
-    <string name="layer_recordings">Recording layer</string>
     <string name="poi_filter_accomodation">Accommodation</string>
     <string name="osmand_plus_extended_description_part8">Approximate map coverage and quality:
 \n • Western Europe: ****
@@ -1774,7 +1766,6 @@
     <string name="rendering_attr_streetLighting_name">Street lighting</string>
     <string name="gps_status">Estáu del GPS</string>
     <string name="rendering_attr_pisteGrooming_name">Piste grooming</string>
-    <string name="watch">Watch</string>
     <string name="share_note">Share note</string>
     <string name="back_to_map">Back to map</string>
     <string name="osmand_development_plugin_description">Los axustes pal desendolcu y pa la depuración de carauterístiques como la simulación de la navegación, el rindimientu de la renderización o los avisos per voz. Esti plugin ta diseñáu pa desendolcadores, nun se precisa pa l\'usu normal de l\'aplicación.</string>
@@ -1823,7 +1814,6 @@
     <string name="rendering_value_boldOutline_name">Bold outline</string>
     <string name="routing_attr_avoid_shuttle_train_description">Avoids using shuttle trains</string>
     <string name="routing_attr_avoid_shuttle_train_name">No shuttle train</string>
-    <string name="av_locations_descr">GPX file with locations.</string>
     <string name="simulate_your_location_descr">Simulate your position using a calculated route or a recorded GPX track.</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position.</string>
     <string name="shared_string_trip_recording">Trip recording</string>
@@ -2098,13 +2088,10 @@
     <string name="add_favourites_group_to_markers_descr">Select a category of Favorites to add to the markers.</string>
     <string name="add_track_to_markers_descr">Select a track to add its waypoints to the markers.</string>
     <string name="looking_for_tracks_with_waypoints">Looking for tracks with waypoints</string>
-    <string name="empty_state_av_notes">Make notes!</string>
     <string name="shared_string_added">Added</string>
     <string name="shared_string_edited">Edited</string>
     <string name="shared_string_deleted">Deleted</string>
     <string name="empty_state_osm_edits_descr">Create or modify OpenStreetMap POIs, open or comment on OSM notes, and contribute recorded GPX files.</string>
-    <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
-    <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="will_open_on">Opens at</string>
     <string name="open_till">Open till</string>
     <string name="open_from">Open from</string>
@@ -2371,7 +2358,6 @@
     <string name="accessibility_announce">Anunciu</string>
     <string name="photo_notes">Photo notes</string>
     <string name="video_notes">Video notes</string>
-    <string name="multimedia_notes_view_descr">Your OSM notes are in %1$s.</string>
     <string name="tracks_view_descr">Los trazaos rexistraos tán en %1$s o na carpeta d\'OsmAnd.</string>
     <string name="save_track_logging_accuracy">Precisión del rexistru</string>
     <string name="live_monitoring">Online tracking</string>
