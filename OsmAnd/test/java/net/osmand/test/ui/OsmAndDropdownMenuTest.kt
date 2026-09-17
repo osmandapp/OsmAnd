@@ -2,7 +2,6 @@ package net.osmand.test.ui
 
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
-import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -30,6 +29,7 @@ import net.osmand.plus.widgets.popup.MENU_LABEL_HEIGHT
 import net.osmand.plus.widgets.popup.MENU_SCREEN_MARGIN
 import net.osmand.plus.widgets.popup.MENU_SUPPORTING_TEXT_EXTRA_HEIGHT
 import net.osmand.plus.widgets.popup.AndroidDrawableIcon
+import net.osmand.plus.widgets.popup.MENU_SHADOW_PADDING
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenu
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuColors
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuContainer
