@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="battery_saving_mode_descr">Limits the map to 20 frames per second to reduce battery drain and device heating. Map movement becomes less smooth.</string>
 	<string name="astro_eclipse_column_below_horizon">Below horizon</string>
 	<string name="quick_action_add_track">Add track</string>
 	<string name="quick_action_tracks_select_descr">Add one or more tracks to show or hide them on the map with a single tap.</string>

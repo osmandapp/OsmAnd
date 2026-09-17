@@ -60,14 +60,6 @@
 		android:title="@string/simulate_obd" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="battery_saving"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/battery_saving_mode" />
-
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="transparent_status_bar"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
