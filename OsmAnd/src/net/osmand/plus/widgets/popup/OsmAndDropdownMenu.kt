@@ -610,16 +610,13 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 	val isRtl = anchorView.layoutDirection == View.LAYOUT_DIRECTION_RTL
 	val isAnchorOnRight = anchorCenterX > screenWidth / 2
 
-	val gravity = displayData.dropDownGravity ?: run {
-		if (isAnchorOnRight) {
-			if (isRtl) Gravity.START or Gravity.TOP else Gravity.END or Gravity.TOP
-		} else {
-			if (isRtl) Gravity.END or Gravity.TOP else Gravity.START or Gravity.TOP
-		}
+	val gravity = if (isAnchorOnRight) {
+		if (isRtl) Gravity.START or Gravity.TOP else Gravity.END or Gravity.TOP
+	} else {
+		if (isRtl) Gravity.END or Gravity.TOP else Gravity.START or Gravity.TOP
 	}
 
-	val defaultHOffset = if (isAnchorOnRight) shadowPaddingPx else -shadowPaddingPx
-	var hOffset = (displayData.horizontalOffset ?: 0) + defaultHOffset
+	var hOffset = if (isAnchorOnRight) shadowPaddingPx else -shadowPaddingPx
 	if (isAnchorOnRight) {
 		val maxHOffset = screenWidth - screenMarginPx - (anchorLocation[0] + anchorView.width) + shadowPaddingPx
 		if (hOffset > maxHOffset) {
@@ -702,9 +699,9 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 	val effectiveMenuHeightPx = minOf(actualMenuHeightPx, maxMenuHeightPx)
 
 	val vOffset = if (shouldShowAbove) {
-		-anchorView.height - effectiveMenuHeightPx + shadowPaddingPx - verticalSpacingPx + (displayData.verticalOffset ?: 0)
+		-anchorView.height - effectiveMenuHeightPx + shadowPaddingPx - verticalSpacingPx
 	} else {
-		(displayData.verticalOffset ?: 0) - shadowPaddingPx + verticalSpacingPx
+		-shadowPaddingPx + verticalSpacingPx
 	}
 
 	val popupWindow = PopupWindow(

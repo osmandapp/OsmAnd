@@ -47,10 +47,6 @@ public class PopUpMenuDisplayData {
 	@Deprecated
 	public boolean limitHeight = false;
 
-	public Integer dropDownGravity;
-	public Integer horizontalOffset;
-	public Integer verticalOffset;
-
 	public enum CustomDropDown {
 		AUTO_DROP_DOWN,
 		TOP_DROPDOWN,

@@ -311,9 +311,6 @@ class OsmAndDropdownMenuTest {
 		val anchorView = View(context)
 		val displayData = PopUpMenuDisplayData().apply {
 			this.anchorView = anchorView
-			dropDownGravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
-			horizontalOffset = 12
-			verticalOffset = 24
 			bgColor = Color.DarkGray.toArgb()
 			customDropDown = PopUpMenuDisplayData.CustomDropDown.TOP_DROPDOWN
 		}
