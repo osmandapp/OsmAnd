@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Body of the Enter MMSI dialog. The title, the corner radius and the outer paddings come from
+	the Material 3 dialog style, so they are not repeated here.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingStart="@dimen/ui_dialog_padding"
+	android:paddingEnd="@dimen/ui_dialog_padding">
+
+	<androidx.appcompat.widget.AppCompatTextView
+		android:id="@+id/supporting_text"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/ais_enter_mmsi_desc"
+		android:textColor="?attr/colorOnSurfaceVariant"
+		android:textSize="@dimen/default_desc_text_size"
+		app:lineHeight="@dimen/ui_line_height_body" />
+
+	<com.google.android.material.textfield.TextInputLayout
+		android:id="@+id/mmsi_layout"
+		style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/content_padding"
+		android:hint="@string/ais_mmsi"
+		app:endIconDrawable="@drawable/ic_action_clear_field"
+		app:endIconMode="clear_text">
+
+		<com.google.android.material.textfield.TextInputEditText
+			android:id="@+id/mmsi_edit"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:digits="0123456789"
+			android:importantForAutofill="no"
+			android:inputType="number"
+			android:maxLength="9"
+			android:maxLines="1" />
+	</com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

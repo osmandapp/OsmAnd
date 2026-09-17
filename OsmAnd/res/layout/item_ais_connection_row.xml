@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Connection row of the Vessel tracker (AIS) screen. The icon colour is a second channel for
+	the connection state, never the only one - the status line always states it in words.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bg_ui_segment_first"
+	android:orientation="vertical"
+	android:paddingBottom="@dimen/content_padding">
+
+	<LinearLayout
+		android:id="@+id/connection_content"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:clickable="true"
+		android:focusable="true"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/ui_row_min_height"
+		android:orientation="horizontal"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding">
+
+		<FrameLayout
+			android:layout_width="@dimen/ui_icon_size"
+			android:layout_height="@dimen/ui_icon_size"
+			android:layout_marginEnd="@dimen/ui_row_icon_gap">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/icon"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:importantForAccessibility="no"
+				android:src="@drawable/ic_action_antenna" />
+
+			<com.google.android.material.progressindicator.CircularProgressIndicator
+				android:id="@+id/progress"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:indeterminate="true"
+				android:visibility="gone"
+				app:indicatorColor="?attr/colorPrimary"
+				app:indicatorSize="@dimen/ui_icon_size"
+				app:trackThickness="2dp" />
+		</FrameLayout>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingBottom="@dimen/content_padding_small">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/ais_connection"
+				android:textColor="?attr/colorOnSurface"
+				android:textSize="@dimen/default_list_text_size"
+				app:lineHeight="@dimen/ui_line_height_title" />
+
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/subtitle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textColor="?attr/colorOnSurfaceVariant"
+				android:textSize="@dimen/default_desc_text_size"
+				app:lineHeight="@dimen/ui_line_height_body"
+				tools:text="Connection failed • TCP" />
+		</LinearLayout>
+	</LinearLayout>
+
+	<com.google.android.material.button.MaterialButton
+		android:id="@+id/connection_action"
+		style="@style/Widget.Material3.Button.TonalButton"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		tools:text="@string/external_device_details_connect" />
+</LinearLayout>

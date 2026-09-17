@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Content of GroupHeaderView. A title placed on the surface, above the card it describes.
+	Never put it inside a card.
+-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:parentTag="android.widget.LinearLayout">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/title"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_weight="1"
+		android:ellipsize="end"
+		android:maxLines="1"
+		android:textColor="?attr/colorOnSurfaceVariant"
+		android:textSize="@dimen/default_list_text_size"
+		app:lineHeight="@dimen/ui_line_height_title"
+		app:typefaceWeight="medium"
+		tools:text="@string/ais_connection" />
+
+	<com.google.android.material.button.MaterialButton
+		android:id="@+id/trailing_action"
+		style="?attr/materialIconButtonStyle"
+		android:layout_width="@dimen/ui_touch_target"
+		android:layout_height="@dimen/ui_touch_target"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/content_padding_small"
+		android:insetTop="0dp"
+		android:insetBottom="0dp"
+		android:minWidth="@dimen/ui_touch_target"
+		android:minHeight="@dimen/ui_touch_target"
+		android:visibility="gone"
+		app:iconGravity="textStart"
+		app:iconPadding="0dp"
+		app:iconSize="@dimen/ui_icon_size"
+		app:iconTint="?attr/colorOnSurfaceVariant"
+		tools:icon="@drawable/ic_action_reset"
+		tools:visibility="visible" />
+</merge>

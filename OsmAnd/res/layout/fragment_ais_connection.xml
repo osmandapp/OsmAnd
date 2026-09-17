@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Connection screen of the Vessel tracker (AIS) plugin.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/colorSurface"
+	android:orientation="vertical">
+
+	<include layout="@layout/ui_material_app_bar" />
+
+	<ScrollView
+		android:id="@+id/scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingBottom="@dimen/content_padding">
+
+			<com.google.android.material.button.MaterialButtonToggleGroup
+				android:id="@+id/protocol_toggle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding_half"
+				android:layout_marginEnd="@dimen/content_padding"
+				app:selectionRequired="true"
+				app:singleSelection="true">
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/protocol_tcp"
+					style="@style/Widget.Material3Expressive.Button"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/ais_protocol_tcp"
+					android:textColor="@color/ui_toggle_button_text"
+					app:backgroundTint="@color/ui_toggle_button_background" />
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/protocol_udp"
+					style="@style/Widget.Material3Expressive.Button"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/ais_protocol_udp"
+					android:textColor="@color/ui_toggle_button_text"
+					app:backgroundTint="@color/ui_toggle_button_background" />
+			</com.google.android.material.button.MaterialButtonToggleGroup>
+
+			<net.osmand.plus.widgets.ui.ScreenDescriptionView
+				android:id="@+id/screen_description"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/host_layout"
+				style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:hint="@string/ais_host_or_ip">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/host_edit"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:importantForAutofill="no"
+					android:inputType="textUri"
+					android:maxLines="1" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/port_layout"
+				style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:hint="@string/ais_port">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/port_edit"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:importantForAutofill="no"
+					android:inputType="number"
+					android:maxLines="1" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<com.google.android.material.button.MaterialButton
+				android:id="@+id/save_button"
+				style="@style/Widget.Material3Expressive.Button"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:enabled="false"
+				android:text="@string/shared_string_save"
+				android:textColor="@color/ui_save_button_text"
+				app:backgroundTint="@color/ui_save_button_background" />
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>
