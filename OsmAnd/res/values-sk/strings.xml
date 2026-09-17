@@ -5344,4 +5344,6 @@
     <string name="quick_action_tracks_select_descr">Pridať jednu alebo viac stôp, ktoré budú zobrazené alebo skryté na mape jedným stlačením.</string>
     <string name="quick_action_tracks_always_ask_descr">Stlačenie tejto akcie otvorí zoznam stôp, z ktorých jednu alebo viaceré môžete zobraziť alebo skryť.</string>
     <string name="quick_action_all_tracks">Všetky stopy</string>
+    <string name="crash_report_sent">Hlásenie odoslané. Ďakujeme!</string>
+    <string name="crash_report_send_failed">Nepodarilo sa odoslať hlásenie. Skúste znova neskôr.</string>
 </resources>
