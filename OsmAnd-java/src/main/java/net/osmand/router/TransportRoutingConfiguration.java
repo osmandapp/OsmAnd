@@ -43,6 +43,9 @@ public class TransportRoutingConfiguration {
 	private Map<String, Integer> boardingTimes = new HashMap<String, Integer>();
 	private int defaultChangeTime = 0;
 	private Map<String, Integer> changingTimes = new HashMap<String, Integer>();
+	// ferry crossing, see FerryRoutingHelper
+	public int ferryBoardingTime;
+	public int ferryTerminalTime;
 	
 	public boolean useSchedule;
 	// 10 seconds based
@@ -74,10 +77,10 @@ public class TransportRoutingConfiguration {
 		return defaultStopTime;
 	}
 	
-	// waiting for a vehicle: half of its interval if known, otherwise boarding time
-	public double getWaitTime(String routeType, int intervalSeconds) {
+	// waiting for a vehicle (half of its interval if known) and getting on it
+	public double getBoardingTime(String routeType, int intervalSeconds) {
 		if (FerryRoutingHelper.FERRY.equals(routeType)) {
-			return FerryRoutingHelper.getWaitTime(router, intervalSeconds);
+			return FerryRoutingHelper.getBoardingTime(ferryBoardingTime, ferryTerminalTime, intervalSeconds);
 		}
 		return intervalSeconds > 0 ? intervalSeconds / 2.0 : getBoardingTime(routeType);
 	}
@@ -148,9 +151,13 @@ public class TransportRoutingConfiguration {
 	}
 	
 
-	public TransportRoutingConfiguration(GeneralRouter prouter, Map<String, String> params) {
+	public TransportRoutingConfiguration(RoutingConfiguration.Builder config, GeneralRouter prouter, Map<String, String> params) {
 		if(prouter != null) {
 			this.router = prouter.build(params);
+			ferryBoardingTime = RoutingConfiguration.parseSilentInt(
+					config.getAttribute(prouter, FerryRoutingHelper.BOARDING_TIME_ATTRIBUTE), 0);
+			ferryTerminalTime = RoutingConfiguration.parseSilentInt(
+					config.getAttribute(prouter, FerryRoutingHelper.TERMINAL_TIME_ATTRIBUTE), 0);
 			walkRadius =  router.getIntAttribute("walkRadius", walkRadius);
 			walkChangeRadius =  router.getIntAttribute("walkChangeRadius", walkChangeRadius);
 			ZOOM_TO_LOAD_TILES =  router.getIntAttribute("zoomToLoadTiles", ZOOM_TO_LOAD_TILES);
