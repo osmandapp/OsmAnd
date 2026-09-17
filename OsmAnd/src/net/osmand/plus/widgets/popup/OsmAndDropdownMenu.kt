@@ -618,15 +618,15 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 		}
 	}
 
-	val defaultHOffset = if (isAnchorOnRight) -screenMarginPx else screenMarginPx
+	val defaultHOffset = if (isAnchorOnRight) shadowPaddingPx else -shadowPaddingPx
 	var hOffset = (displayData.horizontalOffset ?: 0) + defaultHOffset
 	if (isAnchorOnRight) {
-		val maxHOffset = screenWidth - screenMarginPx - (anchorLocation[0] + anchorView.width)
+		val maxHOffset = screenWidth - screenMarginPx - (anchorLocation[0] + anchorView.width) + shadowPaddingPx
 		if (hOffset > maxHOffset) {
 			hOffset = maxHOffset
 		}
 	} else {
-		val minHOffset = screenMarginPx - anchorLocation[0]
+		val minHOffset = screenMarginPx - anchorLocation[0] - shadowPaddingPx
 		if (hOffset < minHOffset) {
 			hOffset = minHOffset
 		}

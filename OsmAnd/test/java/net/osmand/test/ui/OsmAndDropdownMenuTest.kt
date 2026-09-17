@@ -445,18 +445,19 @@ class OsmAndDropdownMenuTest {
 		val context = InstrumentationRegistry.getInstrumentation().targetContext
 		val metrics = context.resources.displayMetrics
 		val screenMarginPx = AndroidUtils.dpToPx(context, MENU_SCREEN_MARGIN.value)
+		val shadowPaddingPx = AndroidUtils.dpToPx(context, MENU_SHADOW_PADDING.value)
 		val screenWidth = metrics.widthPixels
 
 		val leftAnchorX = 10
-		val minHOffset = screenMarginPx - leftAnchorX
-		val defaultLeftHOffset = screenMarginPx
+		val minHOffset = screenMarginPx - leftAnchorX - shadowPaddingPx
+		val defaultLeftHOffset = -shadowPaddingPx
 		val clampedLeftHOffset = maxOf(defaultLeftHOffset + (-500), minHOffset)
 		assertEquals(minHOffset, clampedLeftHOffset)
 
 		val anchorWidth = 100
 		val rightAnchorX = screenWidth - 120
-		val maxHOffset = screenWidth - screenMarginPx - (rightAnchorX + anchorWidth)
-		val defaultRightHOffset = -screenMarginPx
+		val maxHOffset = screenWidth - screenMarginPx - (rightAnchorX + anchorWidth) + shadowPaddingPx
+		val defaultRightHOffset = shadowPaddingPx
 		val clampedRightHOffset = minOf(defaultRightHOffset + 500, maxHOffset)
 		assertEquals(maxHOffset, clampedRightHOffset)
 	}
