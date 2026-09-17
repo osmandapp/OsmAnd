@@ -516,5 +516,17 @@ class TurnType(
 			}
 			return turn
 		}
+
+		@JvmStatic
+		fun hasActiveLane(lanes: IntArray?): Boolean {
+			if (lanes != null) {
+				for (lane in lanes) {
+					if (lane % 2 == 1) {
+						return true
+					}
+				}
+			}
+			return false
+		}
 	}
 }

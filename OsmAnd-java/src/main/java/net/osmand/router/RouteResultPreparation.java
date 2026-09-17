@@ -980,7 +980,11 @@ public class RouteResultPreparation {
 	 */
 	private TurnType withUTurnLanes(TurnType uTurn, List<RouteSegmentResult> result, int i, TurnType t) {
 		int[] lanes = getTurnLanesInfo(result.get(i - 1), result.get(i), uTurn.getValue());
-		uTurn.setLanes(lanes != null ? lanes : t.getLanes());
+		if (TurnType.hasActiveLane(lanes)) {
+			uTurn.setLanes(lanes);
+		} else {
+			uTurn.setLanes(t.getLanes());
+		}
 		return uTurn;
 	}
 

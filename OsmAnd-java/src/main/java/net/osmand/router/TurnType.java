@@ -625,4 +625,15 @@ public class TurnType {
 	public void setOtherTurnAngles(List<Float> turnAngles) {
 		this.otherTurnAngles = turnAngles;
 	}
+
+	public static boolean hasActiveLane(int[] lanes) {
+		if (lanes != null) {
+			for (int lane : lanes) {
+				if (lane % 2 == 1) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

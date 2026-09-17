@@ -284,13 +284,13 @@ object TurnPreparation {
 		return bearing
 	}
 
-	/**
-	 * The lanes of the turn that only begins the u turn were picked for that turn, so the reverse
-	 * lane is not among the active ones. They are taken again for the u turn the driver really makes.
-	 */
 	private fun withUTurnLanes(uTurn: TurnType, result: List<RouteSegmentResult>, i: Int, t: TurnType): TurnType {
 		val lanes = TurnLanes.getTurnLanesInfo(result[i - 1], result[i], uTurn.value)
-		uTurn.lanes = lanes ?: t.lanes
+		if (TurnType.hasActiveLane(lanes)) {
+			uTurn.lanes = lanes
+		} else {
+			uTurn.lanes = t.lanes
+		}
 		return uTurn
 	}
 
