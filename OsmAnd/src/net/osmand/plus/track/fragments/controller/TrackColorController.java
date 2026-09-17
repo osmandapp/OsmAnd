@@ -7,6 +7,7 @@ import static net.osmand.shared.routing.ColoringType.TRACK_SOLID;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.color.palette.gradient.GradientPaletteController;
 import net.osmand.plus.card.color.palette.solid.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.solid.SolidPaletteController;
@@ -40,7 +42,9 @@ import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -76,7 +80,13 @@ public class TrackColorController extends ColoringStyleCardController implements
 		if (!isAvailableInSubscription(coloringStyle)) {
 			container.addView(new PromoBannerCard(activity).build());
 		} else if (coloringType.isTrackSolid()) {
-			container.addView(new ColorsPaletteCard(activity, getColorsPaletteController()).build());
+			View paletteView = new ColorsPaletteCard(activity, getColorsPaletteController()).build();
+			if (drawInfo.getLineStyleType() != GpxLineStyleType.SOLID) {
+				View descriptionView = new DescriptionCard(activity, R.string.gpx_color_desc_unavailable_for_style).build();
+				container.addView(AndroidUiHelper.wrapWithLinearLayout(activity, LinearLayout.VERTICAL, paletteView, descriptionView));
+			} else {
+				container.addView(paletteView);
+			}
 		} else if (ColoringType.Companion.isColorTypeInPurpose(coloringType, ColoringPurpose.TRACK) && coloringType.toGradientScaleType() != null) {
 			GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
 			container.addView(new GradientColorsPaletteCard(activity, getGradientPaletteController(gradientScaleType)).build());
@@ -162,6 +172,9 @@ public class TrackColorController extends ColoringStyleCardController implements
 		if (coloringStyle == null) {
 			return false;
 		}
+		if (!coloringStyle.getType().isTrackSolid() && drawInfo.getLineStyleType() != GpxLineStyleType.SOLID) {
+			return false;
+		}
 		if (selectedGpx == null || coloringStyle.getType() != ATTRIBUTE && drawInfo.isCurrentRecording()) {
 			return true;
 		}
@@ -173,7 +186,9 @@ public class TrackColorController extends ColoringStyleCardController implements
 	                                                  @NonNull View view) {
 		ColoringType coloringType = coloringStyle.getType();
 		String text = "";
-		if (coloringType == ColoringType.SPEED) {
+		if (!coloringType.isTrackSolid() && drawInfo.getLineStyleType() != GpxLineStyleType.SOLID) {
+			text = app.getString(R.string.gpx_color_unavailable_for_line_style);
+		} else if (coloringType == ColoringType.SPEED) {
 			text = app.getString(R.string.track_has_no_speed);
 		} else if (CollectionUtils.equalsToAny(coloringType, ColoringType.ALTITUDE, ColoringType.SLOPE)) {
 			text = app.getString(R.string.track_has_no_altitude);
