@@ -5340,4 +5340,6 @@
     <string name="quick_action_tracks_select_descr">Dodajte jednu ili više putanja kako biste ih prikazali ili sakrili na mapi jednim dodirom.</string>
     <string name="quick_action_tracks_always_ask_descr">Dodirivanjem ove radnje otvara se lista putanja, gde možete prikazati ili sakriti jednu ili više njih.</string>
     <string name="quick_action_all_tracks">Sve putanje</string>
+    <string name="crash_report_sent">Izveštaj je poslat. Hvala vam!</string>
+    <string name="crash_report_send_failed">Izveštaj nije mogao biti poslat. Pokušajte ponovo kasnije.</string>
 </resources>
