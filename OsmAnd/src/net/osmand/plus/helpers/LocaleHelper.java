@@ -129,7 +129,7 @@ public class LocaleHelper {
 			return false;
 		}
 		for (String systemLocaleId : Resources.getSystem().getAssets().getLocales()) {
-			Locale systemLocale = Locale.forLanguageTag(systemLocaleId.replace('_', '-'));
+			Locale systemLocale = Locale.forLanguageTag(systemLocaleId);
 			if (Objects.equals(locale.getLanguage(), systemLocale.getLanguage())) {
 				return true;
 			}
