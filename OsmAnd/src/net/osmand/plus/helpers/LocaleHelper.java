@@ -79,7 +79,7 @@ public class LocaleHelper {
 			currentLocale = SupportedLocale.normalizeToOsmandLegacy(currentLocale);
 
 			if (!Algorithms.stringsEqual(currentLocale, locale)) {
-				if (Algorithms.isEmpty(currentLocale) && !Algorithms.isEmpty(locale)) {
+				if (Algorithms.isEmpty(currentLocale) && !isLocaleSupportedBySystem(locale)) {
 					// Ignore empty OS response if vendor firmware rejected a rare tag (e.g., "sc").
 				} else {
 					// Sync with OS if user changed the language via Android App Info.
@@ -121,6 +121,20 @@ public class LocaleHelper {
 
 			localizedConf = new Configuration(newConfig);
 		}
+	}
+
+	private boolean isLocaleSupportedBySystem(@NonNull String localeId) {
+		Locale locale = SupportedLocale.parseLocale(localeId);
+		if (locale == null) {
+			return false;
+		}
+		for (String systemLocaleId : Resources.getSystem().getAssets().getLocales()) {
+			Locale systemLocale = Locale.forLanguageTag(systemLocaleId);
+			if (Objects.equals(locale.getLanguage(), systemLocale.getLanguage())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void setLanguage(@NonNull Context context) {
