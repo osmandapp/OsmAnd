@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.PopupWindow
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -92,7 +93,7 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			for ((isNight, themeName) in themes) {
 				var anchorView: View? = null
 				var overlayView: View? = null
-				var popupWindow: android.widget.PopupWindow? = null
+				var popupWindow: PopupWindow? = null
 
 				val showLatch = CountDownLatch(1)
 				activity.runOnUiThread {
@@ -217,6 +218,7 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			// 2. CloudTrashFragment
 			RealScreenMenuScenario(2, "CloudTrashFragment_empty", "CloudTrashFragment.java:130") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					layoutId = R.layout.simple_popup_menu_item
 					menuItems = listOf(
 						PopUpMenuItem.Builder(ctx)
 							.setTitleId(R.string.shared_string_empty_trash)
@@ -229,8 +231,8 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(3, "BaseMultiStateCard_states", "BaseMultiStateCardController.java:66") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_show).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_hide).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_show).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_hide).create()
 					)
 				}
 			},
@@ -238,8 +240,13 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(4, "GradientPalette_delete", "GradientPaletteController.kt:165") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					widthMode = PopUpMenuWidthMode.STANDARD
+					layoutId = R.layout.popup_menu_item_full_divider
+					showCompound = false
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_remove).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_rename).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_outlined, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_edit).setIcon(getThemedIcon(ctx, R.drawable.ic_action_appearance_outlined, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_duplicate).setIcon(getThemedIcon(ctx, R.drawable.ic_action_copy, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_remove).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
 					)
 				}
 			},
@@ -247,14 +254,19 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(5, "SolidPalette_delete", "SolidPaletteController.kt:158") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					widthMode = PopUpMenuWidthMode.STANDARD
+					layoutId = R.layout.popup_menu_item_full_divider
+					showCompound = false
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_remove).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_edit).setIcon(getThemedIcon(ctx, R.drawable.ic_action_appearance_outlined, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_duplicate).setIcon(getThemedIcon(ctx, R.drawable.ic_action_copy, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_remove).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
 					)
 				}
 			},
 			// 6. CoordinatesGridController
 			RealScreenMenuScenario(6, "CoordinatesGrid_format", "CoordinatesGridController.java:152") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
 						PopUpMenuItem.Builder(ctx).setTitle("D.DDDDD°").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
 						PopUpMenuItem.Builder(ctx).setTitle("D° M.MMM'").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
@@ -267,9 +279,10 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			// 7. TracksTabsFragment (Options)
 			RealScreenMenuScenario(7, "TracksTabs_options", "TracksTabsFragment.java:197", alignRight = true) { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					layoutId = R.layout.simple_popup_menu_item
 					menuItems = listOf(
 						PopUpMenuItem.Builder(ctx).setTitle("Change appearance (3)").setIcon(getThemedIcon(ctx, R.drawable.ic_action_appearance, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_import).setIcon(getThemedIcon(ctx, R.drawable.ic_action_import, night)).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_import).setIcon(getThemedIcon(ctx, R.drawable.ic_action_import_to, night)).create()
 					)
 				}
 			},
@@ -277,9 +290,11 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(8, "TracksTabs_folder_options", "TracksTabsFragment.java:456") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_rename).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_outlined, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_move).setIcon(getThemedIcon(ctx, R.drawable.ic_action_folder_stroke, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_rename).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_dark, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_share).setIcon(getThemedIcon(ctx, R.drawable.ic_action_gshare_dark, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_export).setIcon(getThemedIcon(ctx, R.drawable.ic_action_export, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_dark, night)).create()
 					)
 				}
 			},
@@ -287,9 +302,8 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(9, "GroupMenuProvider_download", "GroupMenuProvider.java:162") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Download all").setIcon(getThemedIcon(ctx, R.drawable.ic_action_device_download, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Reload").setIcon(getThemedIcon(ctx, R.drawable.ic_action_reset, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Delete all").setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_select).setIcon(getThemedIcon(ctx, R.drawable.ic_action_select_all, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_import).setIcon(getThemedIcon(ctx, R.drawable.ic_action_import, night)).showTopDivider(true).create()
 					)
 				}
 			},
@@ -298,6 +312,7 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 				PopUpMenuDisplayData().apply {
 					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.info_button).setIcon(getThemedIcon(ctx, R.drawable.ic_action_info_outlined, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_update).setIcon(getThemedIcon(ctx, R.drawable.ic_action_update, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.local_index_mi_backup).setIcon(getThemedIcon(ctx, R.drawable.ic_action_box_closed_arrow, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
@@ -307,29 +322,34 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			// 11. AttachedMediaGridController
 			RealScreenMenuScenario(11, "AttachedMediaGrid_item", "AttachedMediaGridController.kt:295") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_view).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_export).setIcon(getThemedIcon(ctx, R.drawable.ic_action_export, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).create()
 					)
 				}
 			},
 			// 12. AttachedMediaUiHelper
 			RealScreenMenuScenario(12, "AttachedMediaUiHelper_options", "AttachedMediaUiHelper.java:125") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Save to gallery").create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.recording_context_menu_precord).setIcon(getThemedIcon(ctx, R.drawable.ic_action_photo_dark, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.recording_context_menu_vrecord).setIcon(getThemedIcon(ctx, R.drawable.ic_action_video_dark, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.recording_context_menu_arecord).setIcon(getThemedIcon(ctx, R.drawable.ic_action_micro_dark, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.choose_from_gallery).setIcon(getThemedIcon(ctx, R.drawable.ic_action_photo_album, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.choose_from_files).setIcon(getThemedIcon(ctx, R.drawable.ic_action_group_list, night)).create()
 					)
 				}
 			},
 			// 13. GalleryPhotoPagerFragment
 			RealScreenMenuScenario(13, "GalleryPhotoPager_options", "GalleryPhotoPagerFragment.java:449") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_export).setIcon(getThemedIcon(ctx, R.drawable.ic_action_export, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_details).setIcon(getThemedIcon(ctx, R.drawable.ic_action_layers, night)).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_details).setIcon(getThemedIcon(ctx, R.drawable.ic_action_info_outlined, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.open_in_browser).setIcon(getThemedIcon(ctx, R.drawable.ic_action_external_link, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_download).setIcon(getThemedIcon(ctx, R.drawable.ic_action_gsave_dark, night)).create()
 					)
 				}
 			},
@@ -337,15 +357,19 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(14, "GallerySortBarView_sort", "GallerySortBarView.kt:115") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Date (newest first)").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Date (oldest first)").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Name").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.gallery_sort_nearest).setIcon(getThemedIcon(ctx, R.drawable.ic_action_nearest_map_center, night)).setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.gallery_sort_last_modified).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_date, night)).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.gallery_sort_name_a_z).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_ascending, night)).showTopDivider(true).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.gallery_sort_name_z_a).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_descending, night)).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.gallery_sort_newest_first).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_date_31, night)).showTopDivider(true).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.gallery_sort_oldest_first).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_date_1, night)).setSelected(false).create()
 					)
 				}
 			},
 			// 15. HelpMainFragment
 			RealScreenMenuScenario(15, "HelpMainFragment_options", "HelpMainFragment.java:181") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					layoutId = R.layout.simple_popup_menu_item
 					menuItems = listOf(
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.send_crash_log).setIcon(getThemedIcon(ctx, R.drawable.ic_action_bug_outlined_send, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.send_logcat_log).setIcon(getThemedIcon(ctx, R.drawable.ic_action_file_report_outlined_send, night)).create(),
@@ -357,18 +381,19 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(16, "EditKeyAssignment_action", "EditKeyAssignmentController.java:155") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Zoom in").create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Zoom out").create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Center to location").showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_rename).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_outlined, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_remove).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
 					)
 				}
 			},
 			// 17. InputDevicesAdapter
 			RealScreenMenuScenario(17, "InputDevices_device", "InputDevicesAdapter.java:144") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					layoutId = R.layout.simple_popup_menu_item
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_rename).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_rename).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_outlined, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_duplicate).setIcon(getThemedIcon(ctx, R.drawable.ic_action_copy, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_remove).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
 					)
 				}
 			},
@@ -376,10 +401,10 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(18, "EditorIconScreen_category", "EditorIconScreenController.java:149") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Special").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Transport").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Food").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Tourism").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitle("Special").create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Transport").create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Food").create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Tourism").create()
 					)
 				}
 			},
@@ -387,9 +412,8 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(19, "DirectionIndication_style", "DirectionIndicationDialogFragment.java:112") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Arrow").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Pointer").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Circle").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_one).setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_two).setSelected(false).create()
 					)
 				}
 			},
@@ -397,19 +421,24 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(20, "SelectFile_format", "SelectFileBottomSheet.java:198") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("GPX").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("KML").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("GeoJSON").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_last_modified).setIcon(getThemedIcon(ctx, R.drawable.ic_action_time_start, night)).setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_name_ascending).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_ascending, night)).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_name_descending).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_descending, night)).setSelected(false).create()
 					)
 				}
 			},
 			// 21. FavoriteMenu (Item options)
 			RealScreenMenuScenario(21, "FavoriteMenu_item_options", "FavoriteMenu.java:196") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					layoutId = R.layout.popup_menu_item_full_divider
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_show_on_map).setIcon(getThemedIcon(ctx, R.drawable.ic_action_layers, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_edit).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_outlined, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_export).setIcon(getThemedIcon(ctx, R.drawable.ic_action_export, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Favorite Point").setTitleSize(14).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_edit).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_dark, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_move).setIcon(getThemedIcon(ctx, R.drawable.ic_action_folder_move_outlined, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_share).setIcon(getThemedIcon(ctx, R.drawable.ic_action_gshare_dark, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_add_to_map_markers).setIcon(getThemedIcon(ctx, R.drawable.ic_action_add_to_markers, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.add_to_track).setIcon(getThemedIcon(ctx, R.drawable.ic_action_track_add, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.add_to_navigation).setIcon(getThemedIcon(ctx, R.drawable.ic_action_navigation_outlined, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
 					)
 				}
@@ -418,9 +447,11 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(22, "FavoriteMenu_group_options", "FavoriteMenu.java:323") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.change_appearance).setIcon(getThemedIcon(ctx, R.drawable.ic_action_appearance, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_select).setIcon(getThemedIcon(ctx, R.drawable.ic_action_deselect_all, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.add_new_folder).setIcon(getThemedIcon(ctx, R.drawable.ic_action_folder_add_outlined, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.change_appearance).setIcon(getThemedIcon(ctx, R.drawable.ic_action_appearance_outlined, night)).showTopDivider(true).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_rename).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_outlined, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_export).setIcon(getThemedIcon(ctx, R.drawable.ic_action_export, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_move).setIcon(getThemedIcon(ctx, R.drawable.ic_action_folder_move_outlined, night)).showTopDivider(true).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
 					)
 				}
@@ -429,10 +460,11 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(23, "FavoriteMenu_sort", "FavoriteMenu.java:453", alignRight = false) { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_by_name).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Date (newest)").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Date (oldest)").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_by_distance).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_last_modified).setIcon(getThemedIcon(ctx, R.drawable.ic_action_time, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_name_ascending).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_ascending, night)).setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_name_descending).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_descending, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_by_nearest_to_current_location).setIcon(getThemedIcon(ctx, R.drawable.ic_action_nearby, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_by_nearest_to_map_center).setIcon(getThemedIcon(ctx, R.drawable.ic_action_nearest_map_center, night)).create()
 					)
 				}
 			},
@@ -440,8 +472,7 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(24, "FavoriteMenu_batch", "FavoriteMenu.java:494") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Move to group").create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.change_appearance).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_move).setIcon(getThemedIcon(ctx, R.drawable.ic_action_folder_move_outlined, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
 					)
 				}
@@ -450,8 +481,8 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(25, "FavoriteMenu_export", "FavoriteMenu.java:636") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Export as GPX").create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Export as CSV").create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_share).setIcon(getThemedIcon(ctx, R.drawable.ic_action_gshare_dark, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).create()
 					)
 				}
 			},
@@ -459,9 +490,9 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(26, "FavoriteMenu_filter", "FavoriteMenu.java:713") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_all).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Personal").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Places to visit").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_select).setIcon(getThemedIcon(ctx, R.drawable.ic_action_deselect_all, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.add_new_folder).setIcon(getThemedIcon(ctx, R.drawable.ic_action_folder_add_outlined, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_import).setIcon(getThemedIcon(ctx, R.drawable.ic_action_import, night)).showTopDivider(true).create()
 					)
 				}
 			},
@@ -469,10 +500,13 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(27, "TrackFoldersHelper_track", "TrackFoldersHelper.java:201") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_edit).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_outlined, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_appearance).setIcon(getThemedIcon(ctx, R.drawable.ic_action_appearance, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_show_on_map).setIcon(getThemedIcon(ctx, R.drawable.ic_show_on_map, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.analyze_on_map).setIcon(getThemedIcon(ctx, R.drawable.ic_action_info_dark, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_move).setIcon(getThemedIcon(ctx, R.drawable.ic_action_folder_stroke, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_rename).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_dark, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_share).setIcon(getThemedIcon(ctx, R.drawable.ic_action_gshare_dark, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_export).setIcon(getThemedIcon(ctx, R.drawable.ic_action_export, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_dark, night)).create()
 					)
 				}
 			},
@@ -480,9 +514,10 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(28, "TrackFoldersHelper_folder", "TrackFoldersHelper.java:270") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_rename).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_outlined, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_rename).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_dark, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_share).setIcon(getThemedIcon(ctx, R.drawable.ic_action_gshare_dark, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_export).setIcon(getThemedIcon(ctx, R.drawable.ic_action_export, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_dark, night)).create()
 					)
 				}
 			},
@@ -490,8 +525,11 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(29, "TrackFoldersHelper_multi", "TrackFoldersHelper.java:369") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.change_activity).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.change_appearance).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_show_on_map).setIcon(getThemedIcon(ctx, R.drawable.ic_show_on_map, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_share).setIcon(getThemedIcon(ctx, R.drawable.ic_action_gshare_dark, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_move).setIcon(getThemedIcon(ctx, R.drawable.ic_action_folder_move, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.change_activity).setIcon(getThemedIcon(ctx, R.drawable.ic_action_activity, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.change_appearance).setIcon(getThemedIcon(ctx, R.drawable.ic_action_appearance, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
 					)
 				}
@@ -500,8 +538,10 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(30, "SmartFolder_options", "SmartFolderFragment.kt:112") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_edit).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_select).setIcon(getThemedIcon(ctx, R.drawable.ic_action_deselect_all, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_refresh).setIcon(getThemedIcon(ctx, R.drawable.ic_action_update, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.edit_filter).setIcon(getThemedIcon(ctx, R.drawable.ic_action_filter_dark, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.organize_by).setIcon(getThemedIcon(ctx, R.drawable.ic_action_tracks_organize, night)).showTopDivider(true).create()
 					)
 				}
 			},
@@ -509,26 +549,35 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(31, "SplitSegment_method", "SplitSegmentDialogFragment.java:249") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("By distance").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("By time interval").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("By track points").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitle("By distance").setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitle("By time interval").setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitle("By track points").setSelected(false).create()
 					)
 				}
 			},
 			// 32. StarMapSearchDialogFragment (Sort)
 			RealScreenMenuScenario(32, "StarMapSearch_sort", "StarMapSearchDialogFragment.kt:1622", alignRight = false) { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					layoutId = R.layout.popup_star_search_menu_item
+					widthMode = PopUpMenuWidthMode.STANDARD
+					showCompound = true
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Magnitude (brightest first)").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Name (A to Z)").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Constellation").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Distance").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitle(ctx.getString(R.string.sort_by)).setTitleBold(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_name_ascending).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_ascending, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_name_descending).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_descending, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.astro_sort_brightest_first).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_brightest, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.astro_sort_faintest_first).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_faintest, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.astro_sort_rises_soonest).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_rises, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.astro_sort_sets_soonest).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_sets, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
 					)
 				}
 			},
 			// 33. StarMapSearchDialogFragment (Filter)
 			RealScreenMenuScenario(33, "StarMapSearch_filter", "StarMapSearchDialogFragment.kt:1745", alignRight = true) { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					layoutId = R.layout.popup_star_search_menu_item
+					widthMode = PopUpMenuWidthMode.STANDARD
+					showCompound = true
 					limitHeight = true
 					menuItems = listOf(
 						PopUpMenuItem.Builder(ctx).setTitle("Type").setTitleBold(true).create(),
@@ -537,18 +586,20 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 						PopUpMenuItem.Builder(ctx).setTitle("Category").setTitleBold(true).showTopDivider(true).create(),
 						PopUpMenuItem.Builder(ctx).setTitle("Solar system").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(true).create(),
 						PopUpMenuItem.Builder(ctx).setTitle("Stars").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Deep sky").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.astro_deep_sky).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(false).create()
 					)
 				}
 			},
 			// 34. TerrainFragment
 			RealScreenMenuScenario(34, "Terrain_color_ramp", "TerrainFragment.java:248") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					layoutId = R.layout.popup_menu_item_checkbox
+					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Default relief").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Warm palette").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Cold palette").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Hypsometric").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitle("Default relief").setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Warm palette").setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Cold palette").setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Hypsometric").setSelected(false).create()
 					)
 				}
 			},
@@ -556,96 +607,97 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			RealScreenMenuScenario(35, "Buildings3D_color", "Buildings3DColorScreenController.kt:85") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Single color").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Height based").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Type based").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.quick_action_map_style).setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_custom).setSelected(false).create()
 					)
 				}
 			},
 			// 36. OfflineWeatherForecastCard
 			RealScreenMenuScenario(36, "OfflineWeather_layer", "OfflineWeatherForecastCard.java:233") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					layoutId = R.layout.popup_menu_item_full_divider
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Precipitation").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Wind speed").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Temperature").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Atmospheric pressure").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_update).setIcon(getThemedIcon(ctx, R.drawable.ic_action_refresh_dark, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_remove).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
 					)
 				}
 			},
 			// 37. WeatherContoursButton
 			RealScreenMenuScenario(37, "WeatherContours_interval", "WeatherContoursButton.java:143") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("1 hPa").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("2 hPa").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("4 hPa").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("8 hPa").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_settings_weather_temp).setIcon(getThemedIcon(ctx, R.drawable.ic_action_thermometer, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_settings_weather_precip).setIcon(getThemedIcon(ctx, R.drawable.ic_action_precipitation, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_settings_weather_wind).setIcon(getThemedIcon(ctx, R.drawable.ic_action_wind, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_settings_weather_cloud).setIcon(getThemedIcon(ctx, R.drawable.ic_action_clouds, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_settings_weather_air_pressure).setIcon(getThemedIcon(ctx, R.drawable.ic_action_air_pressure, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
 					)
 				}
 			},
 			// 38. WeatherLayersButton
 			RealScreenMenuScenario(38, "WeatherLayers_type", "WeatherLayersButton.java:157") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					layoutId = R.layout.popup_menu_item_full_divider_check_box
+					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Wind gusts").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Cloud cover").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Rain / Snow").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_settings_weather_cloud).setIcon(getThemedIcon(ctx, R.drawable.ic_action_clouds, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_settings_weather_temp).setIcon(getThemedIcon(ctx, R.drawable.ic_action_thermometer, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_settings_weather_air_pressure).setIcon(getThemedIcon(ctx, R.drawable.ic_action_air_pressure, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_settings_weather_wind).setIcon(getThemedIcon(ctx, R.drawable.ic_action_wind, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_settings_weather_precip).setIcon(getThemedIcon(ctx, R.drawable.ic_action_precipitation, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(false).create()
 					)
 				}
 			},
-			// 39. SelectNavProfileBottomSheet
+			// 39. SelectNavProfile_options
 			RealScreenMenuScenario(39, "SelectNavProfile_options", "SelectNavProfileBottomSheet.java:274") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.copy_from_other_profile).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.reset_to_default).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).create()
 					)
 				}
 			},
-			// 40. QuickActionListFragment
+			// 40. QuickActionList_item
 			RealScreenMenuScenario(40, "QuickActionList_item", "QuickActionListFragment.java:355") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_edit).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_move_up).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_move_down).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_appearance).setIcon(getThemedIcon(ctx, R.drawable.ic_action_appearance, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_rename).setIcon(getThemedIcon(ctx, R.drawable.ic_action_edit_outlined, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
 					)
 				}
 			},
-			// 41. SliderButtonsCard
+			// 41. SliderButtonsCard_options
 			RealScreenMenuScenario(41, "SliderButtonsCard_options", "SliderButtonsCard.java:131") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Small buttons").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Medium buttons").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Large buttons").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitle("Small buttons").create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Medium buttons").create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Large buttons").create()
 					)
 				}
 			},
-			// 42. ChooseRouteFragment
+			// 42. ChooseRoute_alternative
 			RealScreenMenuScenario(42, "ChooseRoute_alternative", "ChooseRouteFragment.java:527") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Alternative 1 (Fastest)").setSupportingText("35 min • 28 km").create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Alternative 2 (Shortest)").setSupportingText("42 min • 22 km").create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Alternative 3 (No tolls)").setSupportingText("48 min • 31 km").showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.share_as_file).setIcon(getThemedIcon(ctx, R.drawable.ic_action_file_routing, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.share_link).setIcon(getThemedIcon(ctx, R.drawable.ic_action_link, night)).create()
 					)
 				}
 			},
-			// 43. FollowTrackFragment
+			// 43. FollowTrack_options
 			RealScreenMenuScenario(43, "FollowTrack_options", "FollowTrackFragment.java:535") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_last_modified).setIcon(getThemedIcon(ctx, R.drawable.ic_action_time_start, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_last_modified).setIcon(getThemedIcon(ctx, R.drawable.ic_action_time_start, night)).setSelected(true).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_name_ascending).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_ascending, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_name_descending).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_descending, night)).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_name_descending).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_descending, night)).create()
 					)
 				}
 			},
-			// 44. ChipsLayout
+			// 44. ChipsLayout_filter
 			RealScreenMenuScenario(44, "ChipsLayout_filter", "ChipsLayout.kt:388") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
@@ -656,123 +708,135 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 					)
 				}
 			},
-			// 45. RouteParametersFragment (Avoid roads)
+			// 45. RouteParameters_avoid
 			RealScreenMenuScenario(45, "RouteParameters_avoid", "RouteParametersFragment.java:474") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Avoid toll roads").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Avoid motorways").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Avoid unpaved roads").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Avoid ferries").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.auto_zoom_discrete).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.auto_zoom_smooth).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
 					)
 				}
 			},
-			// 46. RouteParametersFragment (Vehicle type)
+			// 46. RouteParameters_vehicle
 			RealScreenMenuScenario(46, "RouteParameters_vehicle", "RouteParametersFragment.java:496") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Default car").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Electric vehicle").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Van / SUV").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitle("Automatic").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Car").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Bicycle").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Pedestrian").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
+						PopUpMenuItem.Builder(ctx).setTitle("None").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
 					)
 				}
 			},
-			// 47. Track3DCard
+			// 47. Track3D_mode
 			RealScreenMenuScenario(47, "Track3D_mode", "Track3DCard.java:180") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Altitude").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Speed").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Slope").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitle("None").create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Solid").create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Altitude").create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Speed").create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Slope").create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Upward gradient").showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitle("Downward gradient").create()
 					)
 				}
 			},
-			// 48. WidgetsContextMenu
+			// 48. WidgetsContextMenu_actions
 			RealScreenMenuScenario(48, "WidgetsContextMenu_actions", "WidgetsContextMenu.java:105") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					widthMode = PopUpMenuWidthMode.STANDARD
+					showCompound = false
+					customDropDown = PopUpMenuDisplayData.CustomDropDown.NONE
+					layoutId = R.layout.popup_menu_item_full_divider
 					menuItems = listOf(
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_settings).setIcon(getThemedIcon(ctx, R.drawable.ic_action_settings_outlined, night)).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_delete).setIcon(getThemedIcon(ctx, R.drawable.ic_action_delete_outlined, night)).showTopDivider(true).create()
 					)
 				}
 			},
-			// 49. PanelAppearanceFragment
+			// 49. PanelAppearance_options
 			RealScreenMenuScenario(49, "PanelAppearance_options", "PanelAppearanceFragment.kt:359") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Top panel").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Bottom panel").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Left panel").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_default).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_transparent).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_custom).create()
 					)
 				}
 			},
-			// 50. WidgetsAppearanceFragment
+			// 50. WidgetsAppearance_style
 			RealScreenMenuScenario(50, "WidgetsAppearance_style", "WidgetsAppearanceFragment.kt:293") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					layoutId = R.layout.popup_menu_item_full_divider
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Small text size").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Medium text size").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Large text size").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.copy_from).setTitleBold(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.another_profile).setIcon(getThemedIcon(ctx, R.drawable.ic_action_copy, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_widget_left).setIcon(getThemedIcon(ctx, R.drawable.ic_action_device_portrait_panel_left, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.top_widgets_panel).setIcon(getThemedIcon(ctx, R.drawable.ic_action_device_portrait_panel_top, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.bottom_widgets_panel).setIcon(getThemedIcon(ctx, R.drawable.ic_action_device_portrait_panel_bottom, night)).create()
 					)
 				}
 			},
-			// 51. DefaultMapButtonFragment
+			// 51. DefaultMapButton_options
 			RealScreenMenuScenario(51, "DefaultMapButton_options", "DefaultMapButtonFragment.java:160") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Show always").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Show in navigation only").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Hide").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.reset_to_default).setIcon(getThemedIcon(ctx, R.drawable.ic_action_reset, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.copy_from_other_profile).setIcon(getThemedIcon(ctx, R.drawable.ic_action_copy, night)).create()
 					)
 				}
 			},
-			// 52. DefaultMapButtonsFragment
+			// 52. DefaultMapButtons_list
 			RealScreenMenuScenario(52, "DefaultMapButtons_list", "DefaultMapButtonsFragment.java:114") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_move_up).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_move_down).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.reset_to_default).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_appearance).setIcon(getThemedIcon(ctx, R.drawable.ic_action_appearance, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.reset_to_default).setIcon(getThemedIcon(ctx, R.drawable.ic_action_reset, night)).showTopDivider(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.copy_from_other_profile).setIcon(getThemedIcon(ctx, R.drawable.ic_action_copy, night)).create()
 					)
 				}
 			},
-			// 53. ConfigureScreenFragment
+			// 53. ConfigureScreen_options
 			RealScreenMenuScenario(53, "ConfigureScreen_options", "ConfigureScreenFragment.java:200") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_help).setIcon(getThemedIcon(ctx, R.drawable.ic_action_help_online, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.map_screen_layout).setIcon(getThemedIcon(ctx, R.drawable.ic_action_map_screen_layout_portrait, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.copy_from_other_profile).setIcon(getThemedIcon(ctx, R.drawable.ic_action_copy, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_help).setIcon(getThemedIcon(ctx, R.drawable.ic_action_help, night)).showTopDivider(true).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.reset_to_default).setIcon(getThemedIcon(ctx, R.drawable.ic_action_reset, night)).showTopDivider(true).create()
 					)
 				}
 			},
-			// 54. ConfigureWidgetsFragment
+			// 54. ConfigureWidgets_category
 			RealScreenMenuScenario(54, "ConfigureWidgets_category", "ConfigureWidgetsFragment.java:313") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Navigation widgets").create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Trip recording").create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Speed and altitude").create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Special tools").showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.copy_from_portrait_layout).setIcon(getThemedIcon(ctx, R.drawable.ic_action_copy_from_portrait, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.copy_from_other_profile).setIcon(getThemedIcon(ctx, R.drawable.ic_action_copy, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.reset_to_default).setIcon(getThemedIcon(ctx, R.drawable.ic_action_reset, night)).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_help).setIcon(getThemedIcon(ctx, R.drawable.ic_action_help, night)).create()
 					)
 				}
 			},
-			// 55. WidgetInfoBaseFragment
+			// 55. WidgetInfoBase_units
 			RealScreenMenuScenario(55, "WidgetInfoBase_units", "WidgetInfoBaseFragment.java:144") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Kilometers / meters").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Miles / feet").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Nautical miles").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_duplicate).setIcon(getThemedIcon(ctx, R.drawable.ic_action_copy, night)).create()
 					)
 				}
 			},
 			// 56. WikipediaPoiMenu
 			RealScreenMenuScenario(56, "WikipediaPoiMenu_actions", "WikipediaPoiMenu.java:250") { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
+					widthMode = PopUpMenuWidthMode.STANDARD
 					menuItems = listOf(
-						PopUpMenuItem.Builder(ctx).setTitle("Open full article").setIcon(getThemedIcon(ctx, R.drawable.ic_action_book_info, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_show_on_map).setIcon(getThemedIcon(ctx, R.drawable.ic_action_layers, night)).create(),
-						PopUpMenuItem.Builder(ctx).setTitle("Download images for offline").setIcon(getThemedIcon(ctx, R.drawable.ic_action_device_download, night)).showTopDivider(true).create()
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_offline_only).setIcon(getThemedIcon(ctx, R.drawable.ic_action_offline, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
+						PopUpMenuItem.Builder(ctx).setTitleId(R.string.shared_string_online_only).setIcon(getThemedIcon(ctx, R.drawable.ic_world_globe_dark, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(false).create()
 					)
 				}
 			}

@@ -2,6 +2,8 @@ package net.osmand.plus.widgets.popup
 
 import android.content.ContextWrapper
 import android.content.res.Configuration
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.Gravity
@@ -9,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import androidx.annotation.DrawableRes
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ScrollState
@@ -21,7 +24,6 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -87,7 +89,7 @@ internal val MENU_SHADOW_PADDING = 16.dp
 internal val MENU_SCREEN_MARGIN = 16.dp
 internal val MENU_VERTICAL_SPACING = 4.dp
 internal val MENU_HORIZONTAL_PADDING = 12.dp
-internal val MENU_ICON_SIZE = 20.dp
+internal val MENU_ICON_SIZE = 24.dp
 internal val MENU_SECTION_GAP = 2.dp
 internal val MENU_CONTAINER_VERTICAL_PADDING = 2.dp
 internal val MENU_ITEM_HEIGHT = 48.dp
@@ -101,6 +103,8 @@ data class OsmAndDropdownMenuOption<T>(
 	val title: String,
 	@DrawableRes val iconId: Int? = null,
 	val iconDrawable: Drawable? = null,
+	val iconColor: Color? = null,
+	val isDestructive: Boolean = false,
 	val supportingText: String? = null,
 	val labelText: String? = null,
 	val selected: Boolean = false,
@@ -126,7 +130,8 @@ data class OsmAndDropdownMenuColors(
 	val secondaryText: Color,
 	val icon: Color,
 	val selected: Color,
-	val control: Color
+	val control: Color,
+	val error: Color = Color.Unspecified
 )
 
 object OsmAndDropdownMenuDefaults {
@@ -141,7 +146,8 @@ object OsmAndDropdownMenuDefaults {
 		secondaryText: Color = MaterialTheme.colorScheme.onSurfaceVariant,
 		icon: Color = MaterialTheme.colorScheme.onSurfaceVariant,
 		selected: Color = MaterialTheme.colorScheme.primary,
-		control: Color = MaterialTheme.colorScheme.onSurfaceVariant
+		control: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+		error: Color = MaterialTheme.colorScheme.error
 	): OsmAndDropdownMenuColors {
 		return OsmAndDropdownMenuColors(
 			background = background,
@@ -150,7 +156,8 @@ object OsmAndDropdownMenuDefaults {
 			secondaryText = secondaryText,
 			icon = icon,
 			selected = selected,
-			control = control
+			control = control,
+			error = error
 		)
 	}
 }
@@ -165,15 +172,17 @@ fun OsmAndDropdownMenuTheme(
 		!it.settings.isLightContent
 	} ?: ((configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
 
-	val primary = colorResource(if (isNight) R.color.active_color_primary_dark else R.color.active_color_primary_light)
+	val primary = colorResource(if (isNight) R.color.primary_dark else R.color.primary_light)
 	val surfaceContainer = colorResource(if (isNight) R.color.surface_container_dark else R.color.surface_container_light)
 	val outlineVariant = colorResource(if (isNight) R.color.outline_variant_dark else R.color.outline_variant_light)
 	val onSurface = colorResource(if (isNight) R.color.on_surface_dark else R.color.on_surface_light)
 	val onSurfaceVariant = colorResource(if (isNight) R.color.on_surface_variant_dark else R.color.on_surface_variant_light)
+	val error = colorResource(if (isNight) R.color.error_dark else R.color.error_light)
 
 	MaterialTheme(
 		colorScheme = MaterialTheme.colorScheme.copy(
 			primary = primary,
+			error = error,
 			surface = surfaceContainer,
 			surfaceContainer = surfaceContainer,
 			surfaceContainerHigh = surfaceContainer,
@@ -257,12 +266,14 @@ fun <T> OsmAndDropdownMenuContent(
 				}
 
 				val titleColor = option.titleColor
-					?: if (option.titleBold) {
+					?: if (!option.enabled) {
+						(colors?.text ?: MaterialTheme.colorScheme.onSurface).copy(alpha = 0.38f)
+					} else if (option.isDestructive) {
+						colors?.error?.takeIf { it != Color.Unspecified } ?: MaterialTheme.colorScheme.error
+					} else if (option.titleBold) {
 						colors?.secondaryText ?: MaterialTheme.colorScheme.onSurfaceVariant
-					} else if (option.enabled) {
-						colors?.text ?: Color.Unspecified
 					} else {
-						colors?.text?.copy(alpha = 0.38f) ?: MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+						colors?.text ?: Color.Unspecified
 					}
 
 				val text: @Composable () -> Unit = {
@@ -301,11 +312,16 @@ fun <T> OsmAndDropdownMenuContent(
 				val leadingIcon: (@Composable () -> Unit)? = when {
 					option.iconId != null -> {
 						{
-							val baseColor = colors?.icon ?: MaterialTheme.colorScheme.onSurfaceVariant
+							val resolvedColor = when {
+								!option.enabled -> (option.iconColor ?: colors?.icon ?: MaterialTheme.colorScheme.onSurfaceVariant).copy(alpha = 0.38f)
+								option.isDestructive -> colors?.error?.takeIf { it != Color.Unspecified } ?: MaterialTheme.colorScheme.error
+								option.iconColor != null -> option.iconColor
+								else -> colors?.icon ?: MaterialTheme.colorScheme.onSurfaceVariant
+							}
 							Icon(
 								painter = painterResource(option.iconId),
 								contentDescription = null,
-								tint = if (option.enabled) baseColor else baseColor.copy(alpha = 0.38f),
+								tint = resolvedColor,
 								modifier = Modifier.size(MENU_ICON_SIZE)
 							)
 						}
@@ -313,8 +329,15 @@ fun <T> OsmAndDropdownMenuContent(
 
 					option.iconDrawable != null -> {
 						{
+							val resolvedColor = when {
+								!option.enabled -> (option.iconColor ?: colors?.icon ?: MaterialTheme.colorScheme.onSurfaceVariant).copy(alpha = 0.38f)
+								option.isDestructive -> colors?.error?.takeIf { it != Color.Unspecified } ?: MaterialTheme.colorScheme.error
+								option.iconColor != null -> option.iconColor
+								else -> colors?.icon ?: MaterialTheme.colorScheme.onSurfaceVariant
+							}
 							AndroidDrawableIcon(
 								drawable = option.iconDrawable,
+								tint = resolvedColor,
 								modifier = Modifier.size(MENU_ICON_SIZE)
 							)
 						}
@@ -336,8 +359,10 @@ fun <T> OsmAndDropdownMenuContent(
 								verticalAlignment = Alignment.CenterVertically
 							) {
 								if (option.trailingBadgeIcon != null) {
+									val badgeColor = option.trailingBadgeColor ?: colors?.selected ?: MaterialTheme.colorScheme.onSurfaceVariant
 									AndroidDrawableIcon(
 										drawable = option.trailingBadgeIcon,
+										tint = badgeColor,
 										modifier = Modifier.size(16.dp)
 									)
 									Spacer(modifier = Modifier.width(4.dp))
@@ -381,8 +406,10 @@ fun <T> OsmAndDropdownMenuContent(
 										modifier = Modifier.size(MENU_ICON_SIZE)
 									)
 								} else if (trailingDrawable != null) {
+									val baseIconColor = colors?.icon ?: MaterialTheme.colorScheme.onSurfaceVariant
 									AndroidDrawableIcon(
 										drawable = trailingDrawable,
+										tint = if (option.enabled) baseIconColor else baseIconColor.copy(alpha = 0.38f),
 										modifier = Modifier.size(MENU_ICON_SIZE)
 									)
 								}
@@ -783,6 +810,8 @@ fun PopUpMenuItem.toDropdownOption(displayData: PopUpMenuDisplayData? = null): O
 		value = this,
 		title = title?.toString() ?: "",
 		iconDrawable = icon,
+		iconColor = iconColor?.let { Color(it) },
+		isDestructive = isDestructive,
 		supportingText = supportingText?.toString(),
 		labelText = labelText?.toString(),
 		selected = isSelected,
@@ -819,11 +848,15 @@ fun AndroidDrawableIcon(
 	tint: Color = Color.Unspecified
 ) {
 	val mutatedDrawable = remember(drawable, tint) {
-		(drawable.constantState?.newDrawable() ?: drawable).mutate().apply {
-			if (tint != Color.Unspecified) {
-				setTint(tint.toArgb())
-			}
+		val base = drawable.constantState?.newDrawable() ?: drawable
+		val wrapped = DrawableCompat.wrap(base).mutate()
+		if (tint != Color.Unspecified) {
+			val argb = tint.toArgb()
+			DrawableCompat.setTint(wrapped, argb)
+			DrawableCompat.setTintMode(wrapped, PorterDuff.Mode.SRC_IN)
+			wrapped.colorFilter = PorterDuffColorFilter(argb, PorterDuff.Mode.SRC_IN)
 		}
+		wrapped
 	}
 	Canvas(modifier = modifier) {
 		drawIntoCanvas { canvas ->

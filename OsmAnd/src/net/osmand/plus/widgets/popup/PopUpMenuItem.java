@@ -7,6 +7,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.R;
+
 public class PopUpMenuItem {
 
 	public enum CompoundButtonType {
@@ -19,6 +21,9 @@ public class PopUpMenuItem {
 	private final Integer titleColor;
 	private final Integer titleSize;
 	private final Drawable icon;
+	@ColorInt
+	private final Integer iconColor;
+	private final boolean isDestructive;
 	private final TrailingBadge trailingBadge;
 	private final Drawable trailingIcon;
 	private final CharSequence trailingText;
@@ -39,6 +44,8 @@ public class PopUpMenuItem {
 			@ColorInt @Nullable Integer titleColor,
 			Integer titleSize,
 			Drawable icon,
+			@ColorInt @Nullable Integer iconColor,
+			boolean isDestructive,
 			TrailingBadge trailingBadge,
 			Drawable trailingIcon,
 			CharSequence trailingText,
@@ -57,6 +64,8 @@ public class PopUpMenuItem {
 		this.titleColor = titleColor;
 		this.titleSize = titleSize;
 		this.icon = icon;
+		this.iconColor = iconColor;
+		this.isDestructive = isDestructive;
 		this.trailingBadge = trailingBadge;
 		this.trailingIcon = trailingIcon;
 		this.trailingText = trailingText;
@@ -89,6 +98,16 @@ public class PopUpMenuItem {
 
 	public Drawable getIcon() {
 		return icon;
+	}
+
+	@ColorInt
+	@Nullable
+	public Integer getIconColor() {
+		return iconColor;
+	}
+
+	public boolean isDestructive() {
+		return isDestructive;
 	}
 
 	@Nullable
@@ -195,6 +214,9 @@ public class PopUpMenuItem {
 		private Integer titleColor;
 		private Integer titleSize = 16; // SP
 		private Drawable icon;
+		@ColorInt
+		private Integer iconColor;
+		private boolean isDestructive;
 		private TrailingBadge trailingBadge;
 		private Drawable trailingIcon;
 		private CharSequence trailingText;
@@ -217,6 +239,13 @@ public class PopUpMenuItem {
 
 		public Builder setTitleId(int titleId) {
 			this.title = ctx.getString(titleId);
+			if (titleId == R.string.shared_string_delete
+					|| titleId == R.string.shared_string_remove
+					|| titleId == R.string.shared_string_empty_trash
+					|| titleId == R.string.shared_string_delete_all
+					|| titleId == R.string.delete_folder) {
+				this.isDestructive = true;
+			}
 			return this;
 		}
 
@@ -242,6 +271,16 @@ public class PopUpMenuItem {
 
 		public Builder setIcon(Drawable icon) {
 			this.icon = icon;
+			return this;
+		}
+
+		public Builder setIconColor(@ColorInt @Nullable Integer iconColor) {
+			this.iconColor = iconColor;
+			return this;
+		}
+
+		public Builder setDestructive(boolean destructive) {
+			this.isDestructive = destructive;
 			return this;
 		}
 
@@ -333,7 +372,7 @@ public class PopUpMenuItem {
 		}
 
 		public PopUpMenuItem create() {
-			return new PopUpMenuItem(title, titleColor, titleSize, icon, trailingBadge,
+			return new PopUpMenuItem(title, titleColor, titleSize, icon, iconColor, isDestructive, trailingBadge,
 					trailingIcon, trailingText, supportingText, labelText,
 					onClickListener, compoundBtnColor, compoundButtonType, selected,
 					showTopDivider, showTopGap, titleBold, dismissOnClick, tag);

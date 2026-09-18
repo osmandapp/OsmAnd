@@ -63,6 +63,8 @@ class OsmAndDropdownMenuTest {
 		assertEquals("Item Title", option.title)
 		assertNull(option.iconId)
 		assertNull(option.iconDrawable)
+		assertNull(option.iconColor)
+		assertFalse(option.isDestructive)
 		assertNull(option.supportingText)
 		assertFalse(option.selected)
 		assertNull(option.selectedColor)
@@ -85,6 +87,8 @@ class OsmAndDropdownMenuTest {
 			value = 42,
 			title = "Custom Title",
 			iconId = R.drawable.ic_action_settings,
+			iconColor = Color.Red,
+			isDestructive = true,
 			supportingText = "Custom Description",
 			labelText = "Section Header",
 			selected = true,
@@ -102,6 +106,8 @@ class OsmAndDropdownMenuTest {
 		assertEquals(42, option.value)
 		assertEquals("Custom Title", option.title)
 		assertEquals(R.drawable.ic_action_settings, option.iconId)
+		assertEquals(Color.Red, option.iconColor)
+		assertTrue(option.isDestructive)
 		assertEquals("Custom Description", option.supportingText)
 		assertEquals("Section Header", option.labelText)
 		assertTrue(option.selected)
@@ -146,7 +152,8 @@ class OsmAndDropdownMenuTest {
 			secondaryText = Color.DarkGray,
 			icon = Color.Blue,
 			selected = Color.Green,
-			control = Color.Red
+			control = Color.Red,
+			error = Color.Yellow
 		)
 
 		assertEquals(Color.White, colors.background)
@@ -156,6 +163,7 @@ class OsmAndDropdownMenuTest {
 		assertEquals(Color.Blue, colors.icon)
 		assertEquals(Color.Green, colors.selected)
 		assertEquals(Color.Red, colors.control)
+		assertEquals(Color.Yellow, colors.error)
 	}
 
 	@Test
@@ -171,6 +179,8 @@ class OsmAndDropdownMenuTest {
 			.setTitle("Delete")
 			.showTopDivider(true)
 			.setTitleBold(true)
+			.setDestructive(true)
+			.setIconColor(android.graphics.Color.RED)
 			.create()
 
 		val options = listOf(item1, item2).toDropdownOptions()
@@ -181,12 +191,16 @@ class OsmAndDropdownMenuTest {
 		assertTrue(option1.selected)
 		assertTrue(option1.enabled)
 		assertTrue(option1.showDividerAfter)
+		assertFalse(option1.isDestructive)
+		assertNull(option1.iconColor)
 
 		val option2 = options[1]
 		assertEquals("Delete", option2.title)
 		assertTrue(option2.titleBold)
 		assertTrue(option2.enabled)
 		assertFalse(option2.showDividerAfter)
+		assertTrue(option2.isDestructive)
+		assertEquals(Color(android.graphics.Color.RED), option2.iconColor)
 
 		val disabledItem = PopUpMenuItem.Builder(context)
 			.setTitle("Disabled Item")
