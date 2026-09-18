@@ -39,6 +39,18 @@ public class MapViewWithLayers extends FrameLayout {
 
 	private RenderingViewSetupListener renderingViewSetupListener;
 	private AtlasMapRendererView atlasMapRendererView;
+	@Nullable
+	private MapRendererView retainedMapRendererView;
+
+	/**
+	 * Holds the initialized map renderer of a map view whose activity is being recreated.
+	 * Android hands it over to the replacement activity only when that activity is really
+	 * created again, so no configuration change has to be guessed
+	 */
+	public static class RetainedRenderer {
+		@Nullable
+		private MapRendererView mapRendererView;
+	}
 
 	public MapViewWithLayers(@NonNull Context context) {
 		this(context, null);
@@ -89,10 +101,29 @@ public class MapViewWithLayers extends FrameLayout {
 			mapView.setMapRenderer(null, false);
 			resetMapRendererView();
 		}
+		// Nothing took the renderer of the previous activity's view over, so it has to be released
+		releaseRetainedRenderer();
+
 		AndroidUiHelper.updateVisibility(surfaceView, !useAndroidAuto && !useOpenglRender);
 		AndroidUiHelper.updateVisibility(mapLayersView, !useAndroidAuto && useOpenglRender);
 		AndroidUiHelper.updateVisibility(atlasMapRendererView, !useAndroidAuto && useOpenglRender);
 		AndroidUiHelper.updateVisibility(androidAutoPlaceholder, useAndroidAuto);
+	}
+
+	/**
+	 * Takes the map renderer that the previous activity's map view kept for this one
+	 */
+	public void setRetainedRenderer(@NonNull RetainedRenderer retained) {
+		retainedMapRendererView = retained.mapRendererView;
+		retained.mapRendererView = null;
+	}
+
+	private void releaseRetainedRenderer() {
+		MapRendererView mapRendererView = retainedMapRendererView;
+		if (mapRendererView != null) {
+			retainedMapRendererView = null;
+			mapRendererView.stopRenderer();
+		}
 	}
 
 	private void resetMapRendererView() {
@@ -124,6 +155,13 @@ public class MapViewWithLayers extends FrameLayout {
 				atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
 			} else {
 				atlasMapRendererView.handleOnCreate(null);
+			}
+			if (mapRendererView == null) {
+				// Renderer of the previous activity's map view, suspended by its onDestroy().
+				// It's taken right before the handover, so that it's released by
+				// setupRenderingView() when there's no renderer context to hand it to
+				mapRendererView = retainedMapRendererView;
+				retainedMapRendererView = null;
 			}
 			// Get MSAA setting from development plugin
 			boolean enableMSAA = settings.ENABLE_MSAA.get();
@@ -163,15 +201,27 @@ public class MapViewWithLayers extends FrameLayout {
 		}
 	}
 
-	public void onDestroy() {
+	public void onDestroy(@Nullable RetainedRenderer retained) {
 		if (atlasMapRendererView != null) {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
 				mapView.setMapRenderer(null, true);
-				resetMapRendererView();
-				atlasMapRendererView.handleOnDestroy();
+				MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+				boolean retainRenderer = retained != null && mapRendererContext != null
+						&& mapRendererContext.getMapRendererView() == atlasMapRendererView
+						&& atlasMapRendererView.suspendRenderer();
+				if (retainRenderer) {
+					// The renderer and its EGL contexts stay alive until the map view of the
+					// recreated activity takes them over in setupAtlasMapRendererView()
+					retained.mapRendererView = atlasMapRendererView;
+					mapRendererContext.setMapRendererView(null);
+				} else {
+					resetMapRendererView();
+					atlasMapRendererView.handleOnDestroy();
+				}
 			}
 		}
+		releaseRetainedRenderer();
 		mapView.clearTouchDetectors();
 		app.getOsmandMap().removeRenderingViewSetupListener(getRenderingViewSetupListener());
 	}
