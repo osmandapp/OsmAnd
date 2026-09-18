@@ -225,34 +225,66 @@ public class GeocodingUtilities {
 	}
 	
 	private boolean matchStreetName(String s1, String s2, boolean matchWithCommonWords) {
-		if (Algorithms.isEmpty(s1) || Algorithms.isEmpty(s2)) {
+		return new StreetNameMatcher(s1).matches(s2, matchWithCommonWords);
+	}
+
+	/**
+	 * Keeps everything that depends only on the searched street name: the parsed words and the collator.
+	 * It is compared against every street candidate of one request, so parsing it once per request
+	 * instead of once per candidate removes most of the allocations of the address lookup.
+	 */
+	private class StreetNameMatcher {
+
+		private final String name;
+		private final String undashedName;
+		private final Collator collator = Collator.getInstance();
+		private List<String> words;
+		private List<String> wordsWithCommonWords;
+
+		StreetNameMatcher(String name) {
+			this.name = name;
+			// Strip dashes before split to match "NC 42" == "NC-42"
+			this.undashedName = name == null ? null : name.replace("-", " ");
+		}
+
+		boolean matches(String streetName, boolean matchWithCommonWords) {
+			if (Algorithms.isEmpty(name) || Algorithms.isEmpty(streetName)) {
+				return false;
+			}
+			if (Algorithms.stringsEqual(name, streetName)) {
+				return true;
+			}
+			String undashed = streetName.replace("-", " ");
+			List<String> nameWords = getWords(false);
+			if (!nameWords.isEmpty() && nameWords.equals(sortedWords(undashed, false))) {
+				return true;
+			}
+			if (matchWithCommonWords) {
+				List<String> nameWordsWithCommon = getWords(true);
+				return !nameWordsWithCommon.isEmpty()
+						&& nameWordsWithCommon.equals(sortedWords(undashed, true));
+			}
 			return false;
 		}
-		if (Algorithms.stringsEqual(s1, s2)) {
-			return true;
+
+		private List<String> getWords(boolean includeCommonWords) {
+			if (includeCommonWords) {
+				if (wordsWithCommonWords == null) {
+					wordsWithCommonWords = sortedWords(undashedName, true);
+				}
+				return wordsWithCommonWords;
+			}
+			if (words == null) {
+				words = sortedWords(undashedName, false);
+			}
+			return words;
 		}
 
-		// Strip dashes before split to match "NC 42" == "NC-42"
-		String undashed1 = s1.replace("-", " ");
-		String undashed2 = s2.replace("-", " ");
-
-		List<String> s1words = prepareStreetName(undashed1, false);
-		List<String> s2words = prepareStreetName(undashed2, false);
-		s1words.sort(Collator.getInstance());
-		s2words.sort(Collator.getInstance());
-		if (!s1words.isEmpty() && s1words.equals(s2words)) {
-			return true;
+		private List<String> sortedWords(String streetName, boolean includeCommonWords) {
+			List<String> result = prepareStreetName(streetName, includeCommonWords);
+			result.sort(collator);
+			return result;
 		}
-
-		if (matchWithCommonWords) {
-			s1words = prepareStreetName(undashed1, true);
-			s2words = prepareStreetName(undashed2, true);
-			s1words.sort(Collator.getInstance());
-			s2words.sort(Collator.getInstance());
-			return !s1words.isEmpty() && s1words.equals(s2words);
-		}
-
-		return false;
 	}
 
 	public List<GeocodingResult> justifyReverseGeocodingSearch(final GeocodingResult road, BinaryMapIndexReader reader,
@@ -275,6 +307,7 @@ public class GeocodingUtilities {
 		}
 
 		final boolean addCommonWordsFinal = addCommonWords;
+		final StreetNameMatcher roadNameMatcher = new StreetNameMatcher(road.streetName);
 		if (!streetNamesUsed.isEmpty()) {
 			String longestWord = "";
 			for (int i = 0; i < streetNamesUsed.size(); i++) {
@@ -288,7 +321,7 @@ public class GeocodingUtilities {
 						@Override
 						public boolean publish(MapObject object) {
 							if (object instanceof Street that
-									&& matchStreetName(road.streetName, that.getName(), addCommonWordsFinal)) {
+									&& roadNameMatcher.matches(that.getName(), addCommonWordsFinal)) {
 								double d = MapUtils.getDistance(that.getLocation(), road.searchPoint.getLatitude(),
 										road.searchPoint.getLongitude());
 								// double check to support old format
