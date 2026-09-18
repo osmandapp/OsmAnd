@@ -5,13 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-/**
- * A cancelled search has to come back as a result, not as an exception.
- *
- * Java throws `InterruptedException` out of the planner and android catches it around the call;
- * on iOS there is nothing to catch with - a Kotlin exception reaching Objective-C terminates the
- * app - so the shared planner returns the reason instead of throwing it.
- */
+/** A cancelled search comes back as an error result, not as an exception. */
 class RouteCancellationTest {
 
 	@Test
@@ -25,7 +19,7 @@ class RouteCancellationTest {
 			RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS = false
 			val ctx = fe.buildRoutingContext(config, readers, RouteCalculationMode.NORMAL)
 			val progress = RouteCalculationProgress()
-			progress.isCancelled = true // as the app does when a newer calculation supersedes this one
+			progress.isCancelled = true
 			ctx.calculationProgress = progress
 
 			val res = fe.searchRoute(ctx, entry.startPoint, entry.endPoint, null)

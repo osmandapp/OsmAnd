@@ -180,7 +180,6 @@ class RoutePlannerFrontEnd {
 		try {
 			return gctx.searchGpxRouteInternal(this, gpxPoints, resultMatcher, useExternalTimestamps)
 		} catch (e: RouteCalculationInterruptedException) {
-			// the same reason as in [searchRoute]: this may not throw at the Objective-C boundary
 			resultMatcher?.publish(null)
 			return gctx
 		} catch (e: Exception) {
@@ -259,13 +258,8 @@ class RoutePlannerFrontEnd {
 	}
 
 	/**
-	 * The route from [start] to [end] through [intermediates], or a result carrying the reason there
-	 * is none.
-	 *
-	 * Java throws out of its own method - `InterruptedException` when the calculation was cancelled,
-	 * whatever else went wrong otherwise - and android catches it around the call. A Kotlin exception
-	 * cannot be caught from Objective-C: it terminates the process instead. So nothing leaves this
-	 * method, and a caller that cancelled recognises its own cancellation in the progress.
+	 * The route from [start] to [end] through [intermediates]. A cancelled or failed calculation comes
+	 * back as an error result, never as an exception.
 	 */
 	fun searchRoute(
 		ctx: RoutingContext, start: KLatLon, end: KLatLon, intermediates: List<KLatLon>?,
