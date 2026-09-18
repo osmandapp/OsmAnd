@@ -1606,8 +1606,8 @@
     <string name="shared_string_options">選項</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd 將連接標點與已選取設定檔的路徑。</string>
     <string name="choose_navigation_type">選擇導航設定檔</string>
-    <string name="empty_state_favourites">加入我的最愛</string>
-    <string name="empty_state_favourites_desc">您可以匯入收藏項目，或直接在地圖上標記新的最愛地點。</string>
+    <string name="empty_state_favourites">新增到最愛</string>
+    <string name="empty_state_favourites_desc">匯入最後或是新增透過在地圖上標示點來新增。</string>
     <string name="import_track">匯入 GPX 檔案</string>
     <string name="import_track_desc">%1$s 檔案不包含航點，您是否要將其匯入為軌跡？</string>
     <string name="move_point">移動標點</string>
@@ -3152,7 +3152,7 @@
     <string name="gps_filter_precision">GPS 精度</string>
     <string name="gps_filter_smoothing">平滑</string>
     <string name="save_changes_into_file">將變更儲存至檔案</string>
-    <string name="save_as_copy">另存為副本</string>
+    <string name="save_as_copy">儲存為複本</string>
     <string name="gps_filter_actions_description">OsmAnd 將套用變更至軌跡而不更新檔案。您可以手動儲存變更。</string>
     <string name="shared_string_gps_filter">GPS 過濾條件</string>
     <string name="storage_migration_wrong_folder_warning">在選定的資料夾中找不到 OsmAnd 資料。請再試一次。</string>
@@ -4847,7 +4847,7 @@
     <string name="add_to_track">新增到軌跡</string>
     <string name="unpin_folder">取消釘選資料夾</string>
     <string name="pin_folder">釘選資料夾</string>
-    <string name="favorite_search_empty_state_description">請調整您的搜尋或篩選條件，看看是否有所幫助</string>
+    <string name="favorite_search_empty_state_description">調整你的搜尋或是篩選也許能有幫助</string>
     <string name="favorites_empty_folder_description">此資料夾尚無任何點。</string>
     <string name="building_3d_low_details_content_desc">3D 建築低細節</string>
     <string name="building_3d_high_details_content_desc">3D 建築高</string>
@@ -5203,4 +5203,7 @@
     <string name="quick_action_tracks_select_descr">透過點一下來在地圖上新增一條或是多條軌跡。</string>
     <string name="quick_action_tracks_always_ask_descr">點一下來開啟軌跡清單，可以顯示一條或是多修軌跡。</string>
     <string name="quick_action_all_tracks">所有軌跡</string>
+    <string name="battery_saving_mode_descr">將地圖影格率限制為每秒 20 個影格，以減少電池耗電量及裝置發熱。地圖移動會變得較不流暢。</string>
+    <string name="crash_report_sent">已傳送回報。感謝！</string>
+    <string name="crash_report_send_failed">無法傳送回報。稍後再試。</string>
 </resources>

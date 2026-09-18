@@ -3331,7 +3331,7 @@
     <string name="poi_climbing_sport_yes">Sport: ja</string>
     <string name="poi_ref_post">Postnummer</string>
     <string name="poi_money_transfer">Pengaöverföring</string>
-    <string name="poi_payment_centre">BEtalningscentral</string>
+    <string name="poi_payment_centre">Betalningscentral</string>
     <string name="poi_post_flats">Lägenhet</string>
     <string name="poi_post_housenumber">Husnummer</string>
     <string name="poi_post_street">Gata</string>
@@ -3888,7 +3888,7 @@
     <string name="poi_cliff_diving">Klippdykning</string>
     <string name="poi_bullfighting">Tjurfäktning</string>
     <string name="poi_bobsleigh">Bob</string>
-    <string name="poi_biathlon">SKidskytte</string>
+    <string name="poi_biathlon">Skidskytte</string>
     <string name="poi_aikido">Aikido</string>
     <string name="poi_water_ski">Vattenskidor</string>
     <string name="poi_water_polo">Vattenpolo</string>
@@ -5184,4 +5184,5 @@
     <string name="poi_website_menu">Meny</string>
     <string name="poi_air_conditioning_yes">Ja</string>
     <string name="poi_air_conditioning_no">Nej</string>
+    <string name="poi_disc_golf_course">Discgolfbana</string>
 </resources>
