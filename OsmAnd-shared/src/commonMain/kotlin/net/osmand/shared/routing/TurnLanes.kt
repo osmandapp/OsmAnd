@@ -192,7 +192,13 @@ object TurnLanes {
 			if (!isNoneLane(lanes[i])) {
 				res.append(lanes[i])
 			} else if (value == null) {
-				res.append("through")
+				var append = "through"
+				if (i > 0 && TurnType.isRightTurn(TurnType.convertType(lanes[i - 1]))) {
+					append = lanes[i - 1]
+				} else if (i < lanes.size - 1 && TurnType.isLeftTurn(TurnType.convertType(lanes[i + 1]))) {
+					append = lanes[i + 1]
+				}
+				res.append(append)
 			} else {
 				res.append(value).append(if (through != null) ";through" else "")
 			}
@@ -264,7 +270,7 @@ object TurnLanes {
 		return lanes
 	}
 
-	/** Every distinct turn the string mentions, in the order it first mentions them. */
+	/** Every distinct turn the string mentions, from left to right. */
 	@JvmStatic
 	fun getUniqTurnTypes(turnLanes: String): IntArray {
 		val turnTypes = LinkedHashSet<Int>()
@@ -275,12 +281,8 @@ object TurnLanes {
 				turnTypes.add(TurnType.convertType(laneOptions[j]))
 			}
 		}
-		val r = IntArray(turnTypes.size)
-		var i = 0
-		for (t in turnTypes) {
-			r[i++] = t
-		}
-		return r
+		// the directions of the junction from left to right, the order of the tag doesn't matter
+		return turnTypes.sortedBy { TurnType.orderFromLeftToRight(it) }.toIntArray()
 	}
 
 	/**

@@ -2340,11 +2340,11 @@ public class RouteResultPreparation {
 				turnTypes.add(turn);
 			}
 		}
-		Iterator<Integer> it = turnTypes.iterator();
-		int[] r = new int[turnTypes.size()];
-		int i = 0;
-		while (it.hasNext()) {
-			r[i++] = it.next();
+		Integer[] array = turnTypes.toArray(new Integer[0]);
+		Arrays.sort(array, Comparator.comparingInt(TurnType::orderFromLeftToRight));
+		int[] r = new int[array.length];
+		for (int i = 0; i < array.length; i++) {
+			r[i] = array[i];
 		}
 		return r;
 	}
@@ -2639,7 +2639,13 @@ public class RouteResultPreparation {
 			if (!isNoneLane(lanes[i])) {
 				res.append(lanes[i]);
 			} else if (noneValues[k] == null) {
-				res.append("through");
+				String append = "through";
+				if (i > 0 && TurnType.isRightTurn(TurnType.convertType(lanes[i - 1]))) {
+					append = lanes[i - 1];
+				} else if (i < lanes.length - 1 && TurnType.isLeftTurn(TurnType.convertType(lanes[i + 1]))) {
+					append = lanes[i + 1];
+				}
+				res.append(append);
 				k++;
 			} else {
 				res.append(noneValues[k++]).append(through != null ? ";through" : "");
