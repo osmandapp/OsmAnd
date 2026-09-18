@@ -664,15 +664,11 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		amenity.setName(QuickSearchListItem.getName(app, searchResult));
 		amenity.setType(app.getPoiTypes().getOtherPoiCategory());
 		amenity.setSubType("");
-		amenity.setAdditionalInfo(Amenity.GPX_ICON, getSpatialSearchMapIconName(searchResult));
+		String iconName = QuickSearchListItem.getAddressIconName(searchResult);
+		if (iconName != null) {
+			amenity.setAdditionalInfo(Amenity.GPX_ICON, iconName);
+		}
 		return amenity;
-	}
-
-	@NonNull
-	private String getSpatialSearchMapIconName(@NonNull SearchResult searchResult) {
-		return searchResult.objectType == ObjectType.HOUSE
-				? "ic_action_building"
-				: "ic_action_street_name";
 	}
 
 	private void clearSpatialSearchMapObjects() {
