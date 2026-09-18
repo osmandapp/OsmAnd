@@ -177,7 +177,17 @@ class RoutePlannerFrontEnd {
 		gctx: GpxRouteApproximation, gpxPoints: List<GpxPoint>, resultMatcher: ResultMatcher<GpxRouteApproximation?>?,
 		useExternalTimestamps: Boolean
 	): GpxRouteApproximation {
-		return gctx.searchGpxRouteInternal(this, gpxPoints, resultMatcher, useExternalTimestamps)
+		try {
+			return gctx.searchGpxRouteInternal(this, gpxPoints, resultMatcher, useExternalTimestamps)
+		} catch (e: RouteCalculationInterruptedException) {
+			// the same reason as in [searchRoute]: this may not throw at the Objective-C boundary
+			resultMatcher?.publish(null)
+			return gctx
+		} catch (e: Exception) {
+			log.error("Gpx approximation failed: " + e.message, e)
+			resultMatcher?.publish(null)
+			return gctx
+		}
 	}
 
 	/**
@@ -248,7 +258,30 @@ class RoutePlannerFrontEnd {
 		return res
 	}
 
+	/**
+	 * The route from [start] to [end] through [intermediates], or a result carrying the reason there
+	 * is none.
+	 *
+	 * Java throws out of its own method - `InterruptedException` when the calculation was cancelled,
+	 * whatever else went wrong otherwise - and android catches it around the call. A Kotlin exception
+	 * cannot be caught from Objective-C: it terminates the process instead. So nothing leaves this
+	 * method, and a caller that cancelled recognises its own cancellation in the progress.
+	 */
 	fun searchRoute(
+		ctx: RoutingContext, start: KLatLon, end: KLatLon, intermediates: List<KLatLon>?,
+		routeDirectionArg: PrecalculatedRouteDirection?
+	): RouteCalcResult {
+		try {
+			return runSearchRoute(ctx, start, end, intermediates, routeDirectionArg)
+		} catch (e: RouteCalculationInterruptedException) {
+			return RouteCalcResult(e.message ?: "Route calculation interrupted")
+		} catch (e: Exception) {
+			log.error("Route calculation failed: " + e.message, e)
+			return RouteCalcResult("Route calculation failed: " + e.message)
+		}
+	}
+
+	private fun runSearchRoute(
 		ctx: RoutingContext, start: KLatLon, end: KLatLon, intermediates: List<KLatLon>?,
 		routeDirectionArg: PrecalculatedRouteDirection?
 	): RouteCalcResult {
