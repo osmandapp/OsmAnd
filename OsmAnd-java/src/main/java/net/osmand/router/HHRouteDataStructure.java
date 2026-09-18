@@ -362,6 +362,78 @@ public class HHRouteDataStructure {
 			}
 		}
 
+		/** An edge cost that differs from the file's: the cost, or below zero for an edge to skip. */
+		static class EdgeCost {
+			final NetworkDBPoint other;
+			double dist;
+
+			EdgeCost(NetworkDBPoint other, double dist) {
+				this.other = other;
+				this.dist = dist;
+			}
+		}
+
+		// by the point whose list holds the edge, for its outgoing and its incoming list
+		private final TIntObjectHashMap<List<EdgeCost>> correctedOut = new TIntObjectHashMap<>();
+		private final TIntObjectHashMap<List<EdgeCost>> correctedIn = new TIntObjectHashMap<>();
+
+		/** Sets the cost of a loaded edge; the cost outlives the edge, it is put back whenever the edge is read again. */
+		public void setEdgeCost(NetworkDBSegment segment, double dist) {
+			segment.dist = dist;
+			if (segment.direction) {
+				rememberEdgeCost(segment.start, true, segment.end, dist);
+			} else {
+				rememberEdgeCost(segment.end, false, segment.start, dist);
+			}
+		}
+
+		/** An edge the file does not have, in start's outgoing list or in end's incoming one: now if the list is loaded, and whenever it is read. */
+		public void addEdge(NetworkDBPoint start, NetworkDBPoint end, double dist, boolean out) {
+			rememberEdgeCost(out ? start : end, out, out ? end : start, dist);
+			List<NetworkDBSegment> segments = (out ? start : end).connected(!out);
+			if (segments != null) {
+				segments.add(new NetworkDBSegment(start, end, dist, out, false));
+			}
+		}
+
+		private void rememberEdgeCost(NetworkDBPoint owner, boolean out, NetworkDBPoint other, double dist) {
+			TIntObjectHashMap<List<EdgeCost>> corrected = out ? correctedOut : correctedIn;
+			List<EdgeCost> list = corrected.get(owner.index);
+			if (list == null) {
+				list = new ArrayList<>(2);
+				corrected.put(owner.index, list);
+			}
+			for (EdgeCost c : list) {
+				if (c.other == other) {
+					c.dist = dist;
+					return;
+				}
+			}
+			list.add(new EdgeCost(other, dist));
+		}
+
+		/** Puts the remembered costs onto a freshly read list of edges, adding the edges the file does not have. */
+		public void applyEdgeCosts(NetworkDBPoint point, List<NetworkDBSegment> segments, boolean out) {
+			List<EdgeCost> corrections = (out ? correctedOut : correctedIn).get(point.index);
+			if (corrections == null) {
+				return;
+			}
+			for (EdgeCost c : corrections) {
+				boolean found = false;
+				for (NetworkDBSegment s : segments) {
+					if ((out ? s.end : s.start) == c.other) {
+						s.dist = c.dist;
+						found = true;
+						break;
+					}
+				}
+				if (!found && c.dist >= 0) {
+					segments.add(out ? new NetworkDBSegment(point, c.other, c.dist, true, false)
+							: new NetworkDBSegment(c.other, point, c.dist, false, false));
+				}
+			}
+		}
+
 		public void setStartEnd(LatLon start, LatLon end) {
 			if (start != null) {
 				startY = MapUtils.get31TileNumberY(start.getLatitude());
@@ -596,6 +668,8 @@ public class HHRouteDataStructure {
 	}
 	
 	public static class RoutingStats {
+		/** How many times the hub-graph search was run again because the roads disagreed with it. */
+		public int recalculations = 0;
 		int firstRouteVisitedVertices = 0;
 		int visitedVertices = 0;
 		int uniqueVisitedVertices = 0;
@@ -677,10 +751,14 @@ public class HHRouteDataStructure {
 	
 	public static <T extends NetworkDBPoint> void setSegments(HHRoutingContext<T> ctx, T point,
 			byte[] in, byte[] out) {
-		point.connectedSet(true, HHRouteDataStructure.parseSegments(in, ctx.pointsById,
-				ctx.getIncomingPoints(point), point, false));
-		point.connectedSet(false, HHRouteDataStructure.parseSegments(out, ctx.pointsById,
-				ctx.getOutgoingPoints(point), point, true));		
+		List<NetworkDBSegment> incoming = HHRouteDataStructure.parseSegments(in, ctx.pointsById,
+				ctx.getIncomingPoints(point), point, false);
+		ctx.applyEdgeCosts(point, incoming, false);
+		point.connectedSet(true, incoming);
+		List<NetworkDBSegment> outgoing = HHRouteDataStructure.parseSegments(out, ctx.pointsById,
+				ctx.getOutgoingPoints(point), point, true);
+		ctx.applyEdgeCosts(point, outgoing, true);
+		point.connectedSet(false, outgoing);
 	}
 	
 	private static List<NetworkDBSegment> parseSegments(byte[] bytes, TLongObjectHashMap<? extends NetworkDBPoint> pntsById,
