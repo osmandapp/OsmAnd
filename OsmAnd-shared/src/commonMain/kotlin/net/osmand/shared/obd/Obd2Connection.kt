@@ -116,9 +116,9 @@ class Obd2Connection(
 					hexValues[0] != commandType.code ||
 					hexValues[1] != commandCode) {
 					log("Incorrect answer data (size ${hexValues.size}) for $fullCommand")
-				} else {
-					hexValues = hexValues.copyOfRange(2, hexValues.size)
+					return OBDResponse.ERROR
 				}
+				hexValues = hexValues.copyOfRange(2, hexValues.size)
 				return OBDResponse(hexValues)
 			} else {
 				return OBDResponse(
