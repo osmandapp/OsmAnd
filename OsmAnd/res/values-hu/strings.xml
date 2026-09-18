@@ -5274,4 +5274,5 @@
     <string name="quick_action_all_tracks">Összes nyomvonal</string>
     <string name="crash_report_sent">Jelentés elküldve. Köszönjük!</string>
     <string name="crash_report_send_failed">Nem sikerült elküldeni a jelentést. Próbálja meg később.</string>
+    <string name="battery_saving_mode_descr">A térképmegjelenítés sebessége 20 fps-re korlátozódik az akkumulátor lemerülésének és az eszköz túlmelegedésének csökkentése érdekében. A térkép mozgása kevésbé lesz egyenletes.</string>
 </resources>
