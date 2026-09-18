@@ -19,9 +19,12 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.BinaryMapReaderResource;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.IndexConstants;
 
 import org.apache.commons.logging.Log;
+
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,8 +32,8 @@ import java.util.List;
 
 /**
  * Runtime state attached to a crash report, to tell an out of memory hang from an ordinary one:
- * heap and PSS sizes, the ART garbage collector counters, how many maps are installed, which
- * plugins are on and whether navigation was running.
+ * heap and PSS sizes, the ART garbage collector counters, how many maps are installed, how many
+ * GPX tracks are stored and shown, which plugins are on and whether navigation was running.
  * <p>
  * Counts and flags only. No file names, no coordinates, no profile names, no account data —
  * nothing that identifies a user or where they are.
@@ -38,6 +41,8 @@ import java.util.List;
 public class CrashReportState {
 
 	private static final Log log = PlatformUtil.getLog(CrashReportState.class);
+
+	private static final int MAX_TRACKS_DEPTH = 8;
 
 	private static final String[] RUNTIME_STATS = {
 			"art.gc.gc-count",
@@ -57,6 +62,7 @@ public class CrashReportState {
 			appendDevice(sb, app);
 			appendMemory(sb, app);
 			appendMaps(sb, app);
+			appendTracks(sb, app);
 			appendState(sb, app);
 		} catch (RuntimeException e) {
 			log.error(e);
@@ -159,6 +165,47 @@ public class CrashReportState {
 		sb.append(" wiki=").append(wiki);
 		sb.append(" srtm=").append(srtm);
 		sb.append(" travel=").append(travel).append('\n');
+	}
+
+	private static void appendTracks(@NonNull StringBuilder sb, @NonNull OsmandApplication app) {
+		DirStats stats = new DirStats();
+		collect(app.getAppPath(IndexConstants.GPX_INDEX_DIR), stats, 0);
+		sb.append("tracks: files=").append(stats.files);
+		sb.append(" size=").append(mb(stats.bytes)).append('\n');
+
+		long points = 0;
+		int loaded = 0;
+		List<SelectedGpxFile> selected = app.getSelectedGpxHelper().getSelectedGPXFiles();
+		for (SelectedGpxFile selectedGpxFile : selected) {
+			if (selectedGpxFile.isLoaded()) {
+				loaded++;
+			}
+			points += selectedGpxFile.getPointsToDisplayCount();
+		}
+		sb.append("tracks shown: files=").append(selected.size());
+		sb.append(" loaded=").append(loaded);
+		sb.append(" points=").append(points).append('\n');
+	}
+
+	// counts only, never a file name; bounded depth so a deep import tree cannot stall the report
+	private static void collect(@Nullable File dir, @NonNull DirStats stats, int depth) {
+		File[] files = depth > MAX_TRACKS_DEPTH || dir == null ? null : dir.listFiles();
+		if (files == null) {
+			return;
+		}
+		for (File file : files) {
+			if (file.isDirectory()) {
+				collect(file, stats, depth + 1);
+			} else if (file.getName().endsWith(IndexConstants.GPX_FILE_EXT)) {
+				stats.files++;
+				stats.bytes += file.length();
+			}
+		}
+	}
+
+	private static class DirStats {
+		int files;
+		long bytes;
 	}
 
 	private static void appendState(@NonNull StringBuilder sb, @NonNull OsmandApplication app) {
