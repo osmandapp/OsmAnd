@@ -223,7 +223,7 @@ class RoutePlannerBenchmarkTest {
 
 		val OBF_DIRECTORIES = listOf(
 			"/Users/crimean/tmp/maps",
-			"/Users/crimean/Library/Developer/CoreSimulator/Devices/2B4A49F7-4769-4207-93AD-2DFF3B315735/data/Containers/Data/Application/1D97C071-99BF-41BC-BC02-A1CF7EEF3BCD/Documents/Resources",
+			"/Users/crimean/Library/Developer/CoreSimulator/Devices/8EF526D0-82BA-4064-AAB7-DF0DF1DB295C/data/Containers/Data/Application/E87C1EF5-1A76-4428-B814-0AE88A59A87C/Documents/Resources",
 		)
 
 		private const val NOORD_HOLLAND = "Netherlands_noord-holland_europe.obf"

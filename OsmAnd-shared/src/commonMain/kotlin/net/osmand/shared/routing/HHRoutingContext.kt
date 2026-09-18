@@ -170,6 +170,58 @@ class HHRoutingContext {
 		}
 	}
 
+	/** An edge cost that differs from the file's: the cost, or below zero for an edge to skip. */
+	class EdgeCost(@JvmField val other: NetworkDBPoint, @JvmField var dist: Double)
+
+	/** By the point whose list holds the edge, for its outgoing and its incoming list. */
+	private val correctedOut = KTIntObjectMap<MutableList<EdgeCost>>()
+	private val correctedIn = KTIntObjectMap<MutableList<EdgeCost>>()
+
+	/** Sets the cost of a loaded edge; the cost outlives the edge, it is put back whenever the edge is read again. */
+	fun setEdgeCost(segment: NetworkDBSegment, dist: Double) {
+		segment.dist = dist
+		if (segment.direction) {
+			remember(segment.start, true, segment.end, dist)
+		} else {
+			remember(segment.end, false, segment.start, dist)
+		}
+	}
+
+	/** An edge the file does not have, in [start]'s outgoing list or in [end]'s incoming one: now if the list is loaded, and whenever it is read. */
+	fun addEdge(start: NetworkDBPoint, end: NetworkDBPoint, dist: Double, out: Boolean) {
+		remember(if (out) start else end, out, if (out) end else start, dist)
+		(if (out) start else end).connected(!out)?.add(NetworkDBSegment(start, end, dist, out, false))
+	}
+
+	private fun remember(owner: NetworkDBPoint, out: Boolean, other: NetworkDBPoint, dist: Double) {
+		val list = (if (out) correctedOut else correctedIn).getOrPut(owner.index) { ArrayList(2) }
+		for (c in list) {
+			if (c.other === other) {
+				c.dist = dist
+				return
+			}
+		}
+		list.add(EdgeCost(other, dist))
+	}
+
+	/** Puts the remembered costs onto [point]'s freshly read list of edges, adding the edges the file does not have. */
+	fun applyEdgeCosts(point: NetworkDBPoint, segments: MutableList<NetworkDBSegment>, out: Boolean) {
+		val corrections = (if (out) correctedOut else correctedIn)[point.index] ?: return
+		for (c in corrections) {
+			var found = false
+			for (s in segments) {
+				if ((if (out) s.end else s.start) === c.other) {
+					s.dist = c.dist
+					found = true
+					break
+				}
+			}
+			if (!found && c.dist >= 0) {
+				segments.add(if (out) NetworkDBSegment(point, c.other, c.dist, true, false) else NetworkDBSegment(c.other, point, c.dist, false, false))
+			}
+		}
+	}
+
 	fun setStartEnd(start: KLatLon?, end: KLatLon?) {
 		if (start != null) {
 			startY = KMapUtils.get31TileNumberY(start.latitude)

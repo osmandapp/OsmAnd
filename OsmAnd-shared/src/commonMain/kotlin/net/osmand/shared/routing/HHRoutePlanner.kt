@@ -18,6 +18,7 @@ import net.osmand.shared.util.collections.KPriorityQueue
 import net.osmand.shared.util.collections.KTIntArrayList
 import net.osmand.shared.util.collections.KTLongHashSet
 import net.osmand.shared.util.collections.KTLongObjectMap
+import net.osmand.shared.util.runGarbageCollector
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.math.PI
@@ -144,6 +145,14 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 
 			progress.hhIteration(if (calcCount == 0) HHIteration.DETAILED else HHIteration.RECALCULATION)
 			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && sl > 0) { " Parse detailed route segments..." }
+			if (hctx.stats.uniqueVisitedVertices > FREE_EDGES_SETTLED_POINTS) {
+				// the detailed phase reads roads, not hub edges; a recalculation reads the edges again,
+				// with the costs the roads corrected
+				hctx.unloadAllConnections()
+				if (COLLECT_GARBAGE_AFTER_FREEING_EDGES) {
+					runGarbageCollector()
+				}
+			}
 			time = nanoTime()
 			recalc = retrieveSegmentsGeometry(hctx, found, hctx.requireConfig().ROUTE_ALL_SEGMENTS, progress)
 			if (progress.isCancelled) {
@@ -154,6 +163,7 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 			hctx.stats.routingTime += time / 1e6
 			calcCount++
 			if (recalc) {
+				hctx.stats.recalculations++
 				if (calcCount > maxCountReiteration) {
 					if (sl >= 0) {
 						printFinalMessage(" [too many cancelled]", start, end, startTime, hctx)
@@ -952,7 +962,7 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 				}
 				val smallestSegmentCost = smallestSegmentCost(hctx, point, nextPoint)
 				LOG.warn("Incorrect distance %s -> %s: db = %.2f > fastest %.2f".format(point, nextPoint, connected.dist, smallestSegmentCost))
-				connected.dist = smallestSegmentCost
+				hctx.setEdgeCost(connected, smallestSegmentCost)
 			}
 			val cost = point.rt(reverse).rtDistanceFromStart + connected.dist + hctx.distanceToEnd(reverse, nextPoint)
 			if (ASSERT_COST_INCREASING && point.rt(reverse).rtCost - cost > 1) {
@@ -1102,7 +1112,7 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 					if (full) {
 						recalculateNetworkCluster(hctx, segment.start)
 					}
-					segment.dist = -1.0
+					hctx.setEdgeCost(segment, -1.0)
 					return true
 				}
 				val maxIncCostCoefficient = if (incorrectCostAtStartEnd) config.MAX_INC_COST_CF_VIGILANT else config.MAX_INC_COST_CF
@@ -1116,7 +1126,7 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 							)
 						)
 					}
-					segment.dist = f.distanceFromStart.toDouble()
+					hctx.setEdgeCost(segment, f.distanceFromStart.toDouble())
 					// correct every underestimated shortcut of this route before recalculating it
 					costIncreased = true
 					continue
@@ -1149,6 +1159,9 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 		}
 		// hctx.rctx.calculationProgress = new RouteCalculationProgress(); // we should reuse same progress for cancellation
 		rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING * 2
+		if (start.connected(false) == null) {
+			hctx.loadNetworkSegmentPoint(start, false)
+		}
 		val ps = calcRPId(s, s.getSegmentStart().toInt(), s.getSegmentEnd().toInt())
 		val ps2 = calcRPId(s, s.getSegmentEnd().toInt(), s.getSegmentStart().toInt())
 		val bounds = ExcludeKTLongObjectMap<RouteSegment>(hctx.boundaries, ps, ps2)
@@ -1179,15 +1192,15 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 					val c = start.getSegment(p, true)
 					if (c != null) {
 						// System.out.printf("Corrected dist %.2f -> %.2f\n", c.dist, routeTime);
-						c.dist = routeTime
+						hctx.setEdgeCost(c, routeTime)
 					} else {
-						start.connected!!.add(NetworkDBSegment(start, p, routeTime, true, false))
+						hctx.addEdge(start, p, routeTime, true)
 					}
 					val co = p.getSegment(start, false)
 					if (co != null) {
-						co.dist = routeTime
+						hctx.setEdgeCost(co, routeTime)
 					} else {
-						p.connectedReverse?.add(NetworkDBSegment(start, p, routeTime, false, false))
+						hctx.addEdge(start, p, routeTime, false)
 					}
 				}
 			}
@@ -1195,10 +1208,10 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 		for (c in start.connected!!) {
 			if (!resUnique.containsKey(c.end.getGeoPntId())) {
 //				System.out.printf("Remove connection %s -> %s\n", start, c.end); // to debug later if all correct
-				c.dist = -1.0 // disable as not found
+				hctx.setEdgeCost(c, -1.0) // disable as not found
 				val co = c.end.getSegment(start, false)
 				if (co != null) {
-					co.dist = -1.0
+					hctx.setEdgeCost(co, -1.0)
 				}
 			}
 		}
@@ -1313,6 +1326,17 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 	companion object {
 		private val LOG = LoggerFactory.getLogger("HHRoutePlanner")
 
+		/**
+		 * Above this many points settled by the hub search, its loaded edges are dropped before the
+		 * detailed phase: a long route holds millions of them and the detailed phase needs none.
+		 */
+		@JvmField
+		var FREE_EDGES_SETTLED_POINTS = 20000
+
+		/** Whether the memory of the dropped edges is collected at once, before the detailed phase allocates. */
+		@JvmField
+		var COLLECT_GARBAGE_AFTER_FREEING_EDGES = false
+
 		@JvmField
 		var DEBUG_VERBOSE_LEVEL = 0
 
@@ -1412,9 +1436,11 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 			return RouteSegmentPoint(s.getRoad(), s.getSegmentStart().toInt(), s.getSegmentEnd().toInt(), 0.0)
 		}
 
-		/** Java calls `System.gc()` and prints the heap here; Kotlin/Native has no such call, so only the log line stays. */
 		@JvmStatic
 		fun printGCInformation(gc: Boolean) {
+			if (gc) {
+				runGarbageCollector()
+			}
 			if (DEBUG_VERBOSE_LEVEL > 0) {
 				LOG.info("***** Memory used: not measured *****")
 			}
