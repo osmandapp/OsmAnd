@@ -100,8 +100,8 @@ public class QuickSearchListItem {
 		return isDestinationHistory(searchResult);
 	}
 
-	public boolean isLegacyHistoryItem() {
-		return isLegacySearchHistory(searchResult);
+	public boolean isHistoryItem() {
+		return getHistoryEntry() != null;
 	}
 
 	@Nullable
@@ -635,13 +635,6 @@ public class QuickSearchListItem {
 				&& searchResult.objectType == ObjectType.RECENT_OBJ
 				&& searchResult.object instanceof HistoryEntry entry
 				&& isNavigationHistoryEntry(entry);
-	}
-
-	private static boolean isLegacySearchHistory(@Nullable SearchResult searchResult) {
-		return searchResult != null
-				&& searchResult.objectType == ObjectType.RECENT_OBJ
-				&& searchResult.object instanceof HistoryEntry entry
-				&& !isNavigationHistoryEntry(entry);
 	}
 
 	@NonNull

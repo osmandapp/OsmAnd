@@ -17,6 +17,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -996,7 +997,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					}
 				} else if (word.getLocation() != null) {
 					SearchResult searchResult = word.getResult();
-					Object object = searchResult.object;
+					Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(app, searchResult);
+					Object object = pair.second;
 
 					if (word.getType() == ObjectType.CITY || word.getType() == ObjectType.VILLAGE) {
 						Amenity amenity = app.getSearchUICore().findAmenity(searchResult.localeName,
@@ -1006,10 +1008,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						}
 					}
 
-					String name = QuickSearchListItem.getName(app, searchResult);
-					String typeName = QuickSearchListItem.getTypeName(app, searchResult);
-					PointDescription pointDescription = new PointDescription(
-							PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+					PointDescription pointDescription = pair.first;
+					if (pointDescription == null) {
+						String name = QuickSearchListItem.getName(app, searchResult);
+						String typeName = QuickSearchListItem.getTypeName(app, searchResult);
+						pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+					}
 					Object historyObject = SearchHistoryHelper.createHistoryObject(object, searchResult);
 					settings.setMapLocationToShow(
 							searchResult.location.getLatitude(), searchResult.location.getLongitude(),
