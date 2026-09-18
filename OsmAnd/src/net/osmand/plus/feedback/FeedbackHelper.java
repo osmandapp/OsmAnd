@@ -41,6 +41,7 @@ public class FeedbackHelper {
 	private static final Log log = PlatformUtil.getLog(FeedbackHelper.class);
 
 	public static final String EXCEPTION_PATH = "exception.log";
+	private static final String STATE_PATH = "state.txt";
 	private static final String CRASH_REPORT_URL = "https://osmand.net/api/crash-report";
 	private static final int MAX_SYSTEM_CRASH_LOGS_IN_REPORT = 3;
 	private static final long MAX_EXCEPTION_LOG_IN_REPORT = 10 * 1024 * 1024;
@@ -152,6 +153,7 @@ public class FeedbackHelper {
 
 	private void writeCrashReport(@NonNull OutputStream outputStream) throws IOException {
 		ZipOutputStream zip = new ZipOutputStream(outputStream);
+		putZipEntry(zip, STATE_PATH, CrashReportState.build(app).getBytes());
 		File crashLog = getCrashLog();
 		if (crashLog != null) {
 			putZipEntry(zip, crashLog, MAX_EXCEPTION_LOG_IN_REPORT);
@@ -161,6 +163,12 @@ public class FeedbackHelper {
 			putZipEntry(zip, file, Long.MAX_VALUE);
 		}
 		zip.finish();
+	}
+
+	private static void putZipEntry(@NonNull ZipOutputStream zip, @NonNull String name, @NonNull byte[] content) throws IOException {
+		zip.putNextEntry(new ZipEntry(name));
+		zip.write(content);
+		zip.closeEntry();
 	}
 
 	// writes at most the last maxLength bytes of the file
