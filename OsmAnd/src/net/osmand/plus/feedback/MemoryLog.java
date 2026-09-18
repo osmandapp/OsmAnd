@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.routing.RoutingHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -44,6 +45,9 @@ public class MemoryLog {
 	public static final String MEMORY_LOG_NAME = "memory_log.txt";
 
 	private static final long SAMPLE_INTERVAL = 30 * 1000L;
+	// once the heap is filling up the interesting part is minutes long, not half an hour
+	private static final long BUSY_SAMPLE_INTERVAL = 5 * 1000L;
+	private static final float BUSY_HEAP_RATIO = 0.7f;
 	// an activity destroyed longer ago than this and still not collected is counted as retained
 	private static final long RETAINED_AFTER = 60 * 1000L;
 	private static final long MAX_FILE_SIZE = 64 * 1024;
@@ -63,12 +67,20 @@ public class MemoryLog {
 	private static final List<DestroyedActivity> DESTROYED = new ArrayList<>();
 
 	private static long lastSampleTime;
+	private static long peakUsed;
 	private static boolean sessionStarted;
 
 	// called from a background thread, at most once per SAMPLE_INTERVAL
 	public static synchronized void sample(@NonNull OsmandApplication app) {
 		long time = SystemClock.elapsedRealtime();
-		if (lastSampleTime != 0 && time - lastSampleTime < SAMPLE_INTERVAL) {
+		Runtime runtime = Runtime.getRuntime();
+		long used = runtime.totalMemory() - runtime.freeMemory();
+		long max = runtime.maxMemory();
+		// the peak between two samples matters more than the value at the sample itself:
+		// a route calculation can take the heap up and give it back within one interval
+		peakUsed = Math.max(peakUsed, used);
+		long interval = max > 0 && used > max * BUSY_HEAP_RATIO ? BUSY_SAMPLE_INTERVAL : SAMPLE_INTERVAL;
+		if (lastSampleTime != 0 && time - lastSampleTime < interval) {
 			return;
 		}
 		lastSampleTime = time;
@@ -79,7 +91,8 @@ public class MemoryLog {
 				sb.append("--- start ").append(Version.getAppVersion(app));
 				sb.append(" sdk=").append(Build.VERSION.SDK_INT).append('\n');
 			}
-			String sample = buildSample(time);
+			String sample = buildSample(app, time, used, max);
+			peakUsed = 0;
 			sb.append(sample).append('\n');
 			append(getFile(app), sb.toString());
 			setProcessStateSummary(app, sample);
@@ -94,14 +107,11 @@ public class MemoryLog {
 	}
 
 	@NonNull
-	private static String buildSample(long time) {
-		Runtime runtime = Runtime.getRuntime();
-		long used = runtime.totalMemory() - runtime.freeMemory();
-		long max = runtime.maxMemory();
-
+	private static String buildSample(@NonNull OsmandApplication app, long time, long used, long max) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("t=").append(time / 1000);
 		sb.append(" heap=").append(mb(used)).append('/').append(mb(max));
+		sb.append(" peak=").append(mb(peakUsed));
 		sb.append(" nat=").append(mb(Debug.getNativeHeapAllocatedSize()));
 		sb.append(" thr=").append(Thread.activeCount());
 		for (String[] stat : RUNTIME_STATS) {
@@ -112,7 +122,36 @@ public class MemoryLog {
 		if (retained != null) {
 			sb.append(' ').append(retained);
 		}
+		String busy = busyWith(app);
+		if (busy != null) {
+			sb.append(" busy=").append(busy);
+		}
 		return sb.toString();
+	}
+
+	// what the app was doing when the sample was taken, so that a heap spike can be told
+	// apart from a leak: a route calculation and a search allocate a lot on purpose
+	@Nullable
+	private static String busyWith(@NonNull OsmandApplication app) {
+		StringBuilder sb = new StringBuilder();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		if (routingHelper.isRouteBeingCalculated()) {
+			append(sb, "routing");
+		}
+		if (routingHelper.isFollowingMode()) {
+			append(sb, "navigation");
+		}
+		if (app.getDownloadThread().isDownloading()) {
+			append(sb, "download");
+		}
+		return sb.length() > 0 ? sb.toString() : null;
+	}
+
+	private static void append(@NonNull StringBuilder sb, @NonNull String value) {
+		if (sb.length() > 0) {
+			sb.append(',');
+		}
+		sb.append(value);
 	}
 
 	// activities are destroyed by the system, so any that outlive their onDestroy by a while is
