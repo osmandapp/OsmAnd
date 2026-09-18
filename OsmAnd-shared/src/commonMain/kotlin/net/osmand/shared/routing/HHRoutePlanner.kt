@@ -171,20 +171,9 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 				"%d iterations, %.2f ms".format(iteration, hctx.stats.routingTime - firstIterationTime)
 			}
 		}
-		if (hctx.requireConfig().CALC_ALTERNATIVES) {
-			progress.hhIteration(HHIteration.ALTERNATIVES)
-			printf(sl > 0) { " Alternative routes..." }
-			val time = nanoTime()
-			calcAlternativeRoute(route, start, end, progress)
-			if (progress.isCancelled) {
-				return cancelledStatus(hctx, stPoints, endPoints)
-			}
-			hctx.stats.altRoutingTime += (nanoTime() - time) / 1e6
-			hctx.stats.routingTime += hctx.stats.altRoutingTime
-			printf(sl > 0) { "%d %.2f ms".format(route.altRoutes.size, hctx.stats.altRoutingTime) }
-		}
+		// no alternatives step: java's plateau method is a draft for testing and is not ported here
 		val time = nanoTime()
-		printf(sl > 0) { " Prepare results (turns, alt routes)..." }
+		printf(sl > 0) { " Prepare results (turns)..." }
 
 		if (hctx.requireConfig().USE_GC_MORE_OFTEN) {
 			hctx.unloadAllConnections()
@@ -218,11 +207,6 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 		}
 		progress.raiseFastRoutingStatus(FastRoutingState.Status.SUCCESS)
 		return route
-	}
-
-	/** The alternatives step of the search; nothing is found, java's plateau method is not ported. */
-	private fun calcAlternativeRoute(route: HHNetworkRouteRes, start: KLatLon, end: KLatLon, progress: RouteCalculationProgress) {
-		route.altRoutes.clear()
 	}
 
 	private fun printFinalMessage(msg: String, start: KLatLon, end: KLatLon, startTime: Long, hctx: HHRoutingContext) {
@@ -1371,7 +1355,6 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 //			c.preloadSegments();
 				c.ROUTE_LAST_MILE = true
 				c.calcDetailed(2)
-//			c.calcAlternative();
 //			c.gc();
 				DEBUG_VERBOSE_LEVEL = 0
 //			c.INITIAL_DIRECTION = 30 / 180.0 * Math.PI;

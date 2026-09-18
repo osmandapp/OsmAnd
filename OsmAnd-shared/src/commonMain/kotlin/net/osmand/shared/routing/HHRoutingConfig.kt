@@ -7,8 +7,8 @@ import kotlin.jvm.JvmStatic
 
 /**
  * How the HH (highway hierarchies) search is run: which search over the hub graph, how much of the
- * route is resolved on the detailed roads, how many times it may be recalculated when the hub graph
- * and the roads disagree, and whether alternatives are looked for.
+ * route is resolved on the detailed roads, and how many times it may be recalculated when the hub
+ * graph and the roads disagree.
  *
  * The apps use [astar] with [calcDetailed] of [CALCULATE_ALL_DETAILED]; the other factories are for
  * the tools that build and check the hub graph.
@@ -62,16 +62,10 @@ class HHRoutingConfig {
 	var ROUTE_ALL_SEGMENTS: Boolean = false
 
 	@JvmField
-	var ROUTE_ALL_ALT_SEGMENTS: Boolean = false
-
-	@JvmField
 	var PRELOAD_SEGMENTS: Boolean = false
 
 	@JvmField
 	var CACHE_CALCULATION_CONTEXT: Boolean = false
-
-	@JvmField
-	var CALC_ALTERNATIVES: Boolean = false
 
 	@JvmField
 	var USE_GC_MORE_OFTEN: Boolean = false
@@ -111,15 +105,9 @@ class HHRoutingConfig {
 		return this
 	}
 
-	fun calcAlternative(): HHRoutingConfig {
-		this.CALC_ALTERNATIVES = true
-		return this
-	}
-
 	fun calcDetailed(segments: Int): HHRoutingConfig {
 		this.ROUTE_LAST_MILE = true
 		this.ROUTE_ALL_SEGMENTS = segments >= 1
-		this.ROUTE_ALL_ALT_SEGMENTS = segments >= 2
 		return this
 	}
 
