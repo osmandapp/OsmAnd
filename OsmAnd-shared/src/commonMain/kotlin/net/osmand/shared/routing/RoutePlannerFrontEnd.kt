@@ -147,8 +147,6 @@ class RoutePlannerFrontEnd {
 
 	fun isHHRoutingConfigured(): Boolean = this.hhRoutingConfig != null
 
-	fun getHHRoutingConfig(): HHRoutingConfig? = this.hhRoutingConfig
-
 	fun setDefaultHHRoutingConfig() {
 		this.hhRoutingConfig = defaultHHConfig()
 	}

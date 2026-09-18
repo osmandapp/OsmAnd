@@ -32,15 +32,6 @@ class HHNetworkRouteRes : RouteCalcResult {
 		return d
 	}
 
-	override fun getAlternatives(): List<List<RouteSegmentResult>> {
-		// altRoutes is the storage - this is the same list seen through the generic result
-		val alts = ArrayList<List<RouteSegmentResult>>(altRoutes.size)
-		for (alt in altRoutes) {
-			alts.add(alt.detailed)
-		}
-		return alts
-	}
-
 	fun getHHRoutingDetailed(): Double {
 		var d = 0.0
 		for (r in segments) {
