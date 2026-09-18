@@ -54,6 +54,15 @@ import net.osmand.util.MapUtils;
 
 public class HHRoutePlanner<T extends NetworkDBPoint> {
 	public static int DEBUG_VERBOSE_LEVEL = 0;
+
+	/**
+	 * Above this many points settled by the hub search, its loaded edges are dropped before the
+	 * detailed phase: a long route holds millions of them and the detailed phase needs none.
+	 */
+	public static int FREE_EDGES_SETTLED_POINTS = 20000;
+
+	/** Whether the memory of the dropped edges is collected at once, before the detailed phase allocates. */
+	public static boolean COLLECT_GARBAGE_AFTER_FREEING_EDGES = false;
 	static final double MINIMAL_COST = 0.01;
 	private static final int PNT_SHORT_ROUTE_START_END = -1000;
 	public static final int MAX_POINTS_CLUSTER_ROUTING = 150000;
@@ -239,6 +248,14 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			
 			progress.hhIteration(calcCount == 0 ? HHIteration.DETAILED : HHIteration.RECALCULATION);
 			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, " Parse detailed route segments...");
+			if (hctx.stats.uniqueVisitedVertices > FREE_EDGES_SETTLED_POINTS) {
+				// the detailed phase reads roads, not hub edges; a recalculation reads the edges again,
+				// with the costs the roads corrected
+				hctx.unloadAllConnections();
+				if (COLLECT_GARBAGE_AFTER_FREEING_EDGES) {
+					System.gc();
+				}
+			}
 			time = System.nanoTime();
 			recalc = retrieveSegmentsGeometry(hctx, rrp, route, hctx.config.ROUTE_ALL_SEGMENTS, progress);
 			if (progress.isCancelled) {
@@ -249,6 +266,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.stats.routingTime += time / 1e6;
 			calcCount++;
 			if (recalc) {
+				hctx.stats.recalculations++;
 				if (calcCount > maxCountReiteration) {
 					if (SL >= 0) {
 						printFinalMessage(" [too many cancelled]", start, end, startTime, hctx);
@@ -1123,7 +1141,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 				double smallestSegmentCost = smallestSegmentCost(hctx, point, nextPoint);
 				System.err.printf("Incorrect distance %s -> %s: db = %.2f > fastest %.2f \n", point, nextPoint, connected.dist, smallestSegmentCost);
-				connected.dist = smallestSegmentCost;
+				hctx.setEdgeCost(connected, smallestSegmentCost);
 			}
 			double cost = point.rt(reverse).rtDistanceFromStart  + connected.dist + hctx.distanceToEnd(reverse, nextPoint);
 			if (ASSERT_COST_INCREASING && point.rt(reverse).rtCost - cost > 1) {
@@ -1275,7 +1293,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					if (full) {
 						recalculateNetworkCluster(hctx, s.segment.start);
 					}
-					s.segment.dist = -1;
+					hctx.setEdgeCost(s.segment, -1);
 					return true;
 				}
 				double maxIncCostCoefficient = incorrectCostAtStartEnd
@@ -1288,7 +1306,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 								f.distanceFromStart, s.segment.dist, s.segment.start, s.segment.end,
 								acceptCostIncrease ? "keep detailed geometry" : "recalculate route");
 					}
-					s.segment.dist = f.distanceFromStart;
+					hctx.setEdgeCost(s.segment, f.distanceFromStart);
 					if (!acceptCostIncrease) {
 						// correct every underestimated shortcut of this route before recalculating it
 						costIncreased = true;
@@ -1310,7 +1328,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return costIncreased;
 	}
 	
-	private void recalculateNetworkCluster(HHRoutingContext<T> hctx, NetworkDBPoint start) throws InterruptedException, IOException {
+	private void recalculateNetworkCluster(HHRoutingContext<T> hctx, NetworkDBPoint start) throws InterruptedException, IOException, SQLException {
 		BinaryRoutePlanner plan = new BinaryRoutePlanner();
 		hctx.rctx.config.planRoadDirection = 1; 
 		hctx.rctx.config.heuristicCoefficient = 0;
@@ -1323,6 +1341,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		// hctx.rctx.calculationProgress = new RouteCalculationProgress(); // we should reuse same progress for cancellation
 		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING * 2;
+		if (start.connected(false) == null) {
+			hctx.loadNetworkSegmentPoint((T) start, false);
+		}
 		long ps = calcRPId(s, s.getSegmentStart(), s.getSegmentEnd());
 		long ps2 = calcRPId(s, s.getSegmentEnd(), s.getSegmentStart());
 		ExcludeTLongObjectMap<RouteSegment> bounds = new ExcludeTLongObjectMap<>(hctx.boundaries, ps, ps2);
@@ -1352,15 +1373,15 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					NetworkDBSegment c = start.getSegment(p, true);
 					if (c != null) {
 						// System.out.printf("Corrected dist %.2f -> %.2f\n", c.dist, routeTime);
-						c.dist = routeTime;
+						hctx.setEdgeCost(c, routeTime);
 					} else {
-						start.connected.add(new NetworkDBSegment(start, p, routeTime, true, false));
+						hctx.addEdge(start, p, routeTime, true);
 					}
 					NetworkDBSegment co = p.getSegment(start, false);
 					if (co != null) {
-						co.dist = routeTime;
-					} else if (p.connectedReverse != null) {
-						p.connectedReverse.add(new NetworkDBSegment(start, p, routeTime, false, false));
+						hctx.setEdgeCost(co, routeTime);
+					} else {
+						hctx.addEdge(start, p, routeTime, false);
 					}
 				}
 			}
@@ -1368,10 +1389,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		for (NetworkDBSegment c : start.connected) {
 			if (!resUnique.containsKey(c.end.getGeoPntId())) {
 //				System.out.printf("Remove connection %s -> %s\n", start, c.end); // to debug later if all correct
-				c.dist = -1; // disable as not found
+				hctx.setEdgeCost(c, -1); // disable as not found
 				NetworkDBSegment co = c.end.getSegment(start, false);
 				if (co != null) {
-					co.dist = -1;
+					hctx.setEdgeCost(co, -1);
 				}
 			}
 		}
