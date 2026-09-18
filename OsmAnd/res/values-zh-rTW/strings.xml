@@ -5203,4 +5203,7 @@
     <string name="quick_action_tracks_select_descr">透過點一下來在地圖上新增一條或是多條軌跡。</string>
     <string name="quick_action_tracks_always_ask_descr">點一下來開啟軌跡清單，可以顯示一條或是多修軌跡。</string>
     <string name="quick_action_all_tracks">所有軌跡</string>
+    <string name="battery_saving_mode_descr">將地圖影格率限制為每秒 20 個影格，以減少電池耗電量及裝置發熱。地圖移動會變得較不流暢。</string>
+    <string name="crash_report_sent">已傳送回報。感謝！</string>
+    <string name="crash_report_send_failed">無法傳送回報。稍後再試。</string>
 </resources>
