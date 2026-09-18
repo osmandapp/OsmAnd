@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,6 +52,28 @@ class NativeCrashHandler {
 			return exitReasons.isEmpty() ? 0 : exitReasons.get(0).getTimestamp();
 		}
 		return 0;
+	}
+
+	// what the system knows about the exits themselves: why the process died, how big it was
+	// and the state the app recorded before dying (see MemoryLog)
+	@NonNull
+	String buildExitInfo() {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+			return "";
+		}
+		StringBuilder sb = new StringBuilder();
+		for (ApplicationExitInfo exitInfo : getExitReasonsApi30()) {
+			sb.append("exit: reason=").append(exitInfo.getReason());
+			sb.append(" importance=").append(exitInfo.getImportance());
+			sb.append(" pss=").append(exitInfo.getPss()).append("kB");
+			sb.append(" rss=").append(exitInfo.getRss()).append("kB");
+			sb.append(" ago=").append((System.currentTimeMillis() - exitInfo.getTimestamp()) / 1000).append("s\n");
+			byte[] summary = exitInfo.getProcessStateSummary();
+			if (summary != null && summary.length > 0) {
+				sb.append("  before exit: ").append(new String(summary, StandardCharsets.US_ASCII)).append('\n');
+			}
+		}
+		return sb.toString();
 	}
 
 	// newest first
