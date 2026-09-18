@@ -5158,4 +5158,6 @@
     <string name="history_is_turned_off">El historial está desactivado</string>
     <string name="search_and_navigation_history_disabled_descr">Se desactivó el historial de búsquedas y navegación. Actívelo en Configuración para ver aquí la actividad reciente.</string>
     <string name="open_history_settings">Abrir configuración de historial</string>
+    <string name="route_calculation_use_existing_maps">Usar mapas existentes</string>
+    <string name="required_maps_missing_and_outdated_title">Mapas faltantes y desactualizados</string>
 </resources>

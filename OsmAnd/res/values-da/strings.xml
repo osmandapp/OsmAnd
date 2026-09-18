@@ -5400,4 +5400,6 @@
     <string name="quick_action_tracks_select_descr">Tilføj et eller flere spor for at vise eller skjule dem på kortet med et enkelt tryk.</string>
     <string name="quick_action_tracks_always_ask_descr">Med et tryk på denne handling åbnes listen over spor, hvor du kan vise eller skjule et eller flere af dem.</string>
     <string name="quick_action_all_tracks">Alle spor</string>
+    <string name="crash_report_sent">Rapport sendt. Tak!</string>
+    <string name="crash_report_send_failed">Kunne ikke sende rapporten. Prøv igen senere.</string>
 </resources>
