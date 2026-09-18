@@ -427,7 +427,7 @@
     <string name="rendering_attr_showRoadMaps_name">Kartor med enbart vägar</string>
     <string name="download_roads_only_item">Bara vägar</string>
     <string name="download_regular_maps">Standardkartor</string>
-    <string name="download_roads_only_maps">Karta med enbart vägar</string>
+    <string name="download_roads_only_maps">Karta med endast vägar</string>
     <string name="safe_mode_description">Kör appen i (långsammare) felsäkert läge.</string>
     <string name="safe_mode">Felsäkert läge</string>
     <string name="edit_filter_create_message">Filter %1$s skapat</string>
@@ -3162,7 +3162,7 @@
     <string name="ant_write_to_gpx">Skriv data till spåret</string>
     <string name="depth_contour_lines">Djupkurvor</string>
     <string name="empty_screen_view_selected_weather_data">Slå på för att visa valda väderdata på kartan.</string>
-    <string name="dismiss_changes_descr">Alla ändringar kommer att avvisas.</string>
+    <string name="dismiss_changes_descr">Alla ändringar förkastas.</string>
     <string name="quick_action_temperature_layer">En knapp för att visa eller dölja temperaturlagret på kartan.</string>
     <string name="quick_action_air_pressure_layer">En knapp för att visa eller dölja lufttryckslagret på kartan.</string>
     <string name="temperature_layer">Temperaturlager</string>
@@ -4211,7 +4211,7 @@
     <string name="getting_list_of_required_maps">Hämtar lista över kartor som krävs…</string>
     <string name="required_maps">Kartor som krävs</string>
     <string name="missing_maps_description">Några offlinekartor som krävs för denna rutt saknas eller är inte uppdaterade. Vänliga ladda ned eller uppdatera dessa kartor.</string>
-    <string name="missing_maps_header">Kartor som saknas eller inte är uppdaterade</string>
+    <string name="missing_maps_header">Saknade eller inaktuella kartor</string>
     <string name="route_line_use_coloring_altitude">Ruttlinjen färgläggs efter höjd.</string>
     <string name="route_line_use_coloring_speed">Ruttlinje färgläggs efter rörelsens hastighet.</string>
     <string name="title_3d_track">3D-spår</string>
@@ -4768,7 +4768,7 @@
     <string name="max_weight_at_full_load_description">Ange ditt fordons maxvikt vid full last för att undvika vägar och broar med viktbegränsningar.</string>
     <string name="max_axle_load_description">Ange ditt fordons maximala axellast för att undvika vägar och broar med viktbegränsningar.</string>
     <string name="private_access_routing_req_short">Tillåt att använda en privat väg för att nå din destination?</string>
-    <string name="view_on_phone">Visa på telefon</string>
+    <string name="view_on_phone">Visa på telefonen</string>
     <string name="average_elevation">Medelhöjd</string>
     <string name="ascent">Stigning</string>
     <string name="descent">Sänkning</string>
@@ -4856,7 +4856,7 @@
     <string name="rendering_attr_showLNAMmarker_description">Visa ENC-markörer</string>
     <string name="centimeter">cm</string>
     <string name="shared_string_centimeters">centimeter</string>
-    <string name="bicycle_width_limit_description">Ange din cykelbredd för att undvika smala cykelvägar.</string>
+    <string name="bicycle_width_limit_description">Ange cykelns bredd för att undvika smala cykelbanor.</string>
     <string name="copy_link">Kopiera länk</string>
     <string name="rendering_attr_shellsStyle_name">Skalstil</string>
     <string name="rendering_attr_spotDistance_name">Intervall mellan djuplodningar</string>
@@ -4867,7 +4867,7 @@
     <string name="rendering_attr_tidalFlatStyle_description">Tidvattenvåtmarkens karaktär</string>
     <string name="rendering_attr_watercolor_name">Akvarell</string>
     <string name="show_spherical_map_description">Visa sfäroidmodell av jorden</string>
-    <string name="show_debug_tile">Visa information om ruta</string>
+    <string name="show_debug_tile">Visa rutinformation</string>
     <string name="enable_msaa">Aktivera MSAA</string>
     <string name="lang_crh">Krimtatariska (latin)</string>
     <string name="lang_en_barebones">Engelska (grundläggande)</string>
@@ -4912,7 +4912,7 @@
     <string name="shared_string_magnitude">Magnitud</string>
     <string name="astro_rise">Stigning</string>
     <string name="astro_set">Nedgång</string>
-    <string name="show_expand_button">Visa expanderingsknapp</string>
+    <string name="show_expand_button">Visa knappen Expandera</string>
     <string name="imprecise_coordinates">Oprecisa koordinater</string>
     <string name="gpx_too_many_points_visible_warning">En stor mängd synliga GPX spår leder till hög minnesanvändning</string>
     <string name="sort_highest_first">Fallande</string>
@@ -4948,7 +4948,7 @@
     <string name="map_screen_layout">Kartskärmens layout</string>
     <string name="map_screen_layout_descr">Välj om du vill använda en enda layout för alla orienteringar, eller anpassa Stående och Landskap separat.</string>
     <string name="backup_deleted_all_data">Raderade data.</string>
-    <string name="backup_deleting_all_data">Raderade data.</string>
+    <string name="backup_deleting_all_data">Raderar data…</string>
     <string name="astronomy_plugin_name">Astronomi</string>
     <string name="share_favorites_media_preparation_failed">Kunde inte inkludera bifogad media. Delar endast punkter.</string>
     <plurals name="files_count">
@@ -5324,4 +5324,7 @@
     <string name="quick_action_tracks_select_descr">Lägg till ett eller flera spår för att med ett enkelt tryck visa eller dölja dem på kartan.</string>
     <string name="quick_action_all_tracks">Alla spår</string>
     <string name="quick_action_tracks_always_ask_descr">Tryck på denna snabbåtgärd öppnar listan över spår, där du kan visa eller dölja en eller flera av dem.</string>
+    <string name="crash_report_sent">Rapporten har skickats. Tack!</string>
+    <string name="crash_report_send_failed">Det gick inte att skicka rapporten. Försök igen senare.</string>
+    <string name="battery_saving_mode_descr">Begränsar kartan till 20 bildrutor per sekund för att minska batteriförbrukningen och enhetens uppvärmning. Kartans rörelser blir mindre mjuka.</string>
 </resources>
