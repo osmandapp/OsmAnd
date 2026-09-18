@@ -119,10 +119,6 @@ public class PopUpMenuItem {
 		return tag;
 	}
 
-	public boolean hasCustomization() {
-		return isShowCompoundBtn() || getTitleColor() != null || titleBold || trailingBadge != null;
-	}
-
 	public static class TrailingBadge {
 		private final Drawable icon;
 		private final CharSequence title;
