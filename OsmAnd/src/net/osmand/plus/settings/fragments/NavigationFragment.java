@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
@@ -45,6 +46,10 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	private RoutingProfilesHolder routingProfiles;
 	private RoutingDataUtils routingDataUtils;
 	private Preference navigationType;
+	private SwitchPreferenceCompat speakRoutingAlarms;
+
+	private final StateChangedListener<Boolean> voiceMuteListener = change -> app
+			.runInUIThread(() -> speakRoutingAlarms.setChecked(!change));
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +57,18 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		routingDataUtils = new RoutingDataUtils(app);
 		updateRoutingProfiles();
 		setupOnBackPressedCallback();
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		settings.VOICE_MUTE.addListener(voiceMuteListener);
+	}
+
+	@Override
+	public void onStop() {
+		settings.VOICE_MUTE.removeListener(voiceMuteListener);
+		super.onStop();
 	}
 
 	private void setupOnBackPressedCallback() {
@@ -113,7 +130,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		Drawable enabled = getActiveIcon(R.drawable.ic_action_volume_up);
 		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
-		SwitchPreferenceCompat speakRoutingAlarms = findPreference(settings.VOICE_MUTE.getId());
+		speakRoutingAlarms = findPreference(settings.VOICE_MUTE.getId());
 		speakRoutingAlarms.setIcon(icon);
 		speakRoutingAlarms.setChecked(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
 	}

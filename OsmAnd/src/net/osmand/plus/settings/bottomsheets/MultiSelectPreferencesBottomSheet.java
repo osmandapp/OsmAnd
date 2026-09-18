@@ -8,11 +8,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.plus.R;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -21,7 +25,9 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet {
@@ -40,6 +46,7 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 	private String[] prefsIds;
 	private CharSequence[] entries;
 	private final Set<String> enabledPrefs = new HashSet<>();
+	private final Map<CommonPreference<Boolean>, StateChangedListener<Boolean>> prefListeners = new HashMap<>();
 
 	private boolean prefChanged;
 
@@ -119,6 +126,66 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 		dismiss();
 	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		addPreferenceListeners();
+	}
+
+	@Override
+	public void onStop() {
+		removePreferenceListeners();
+		super.onStop();
+	}
+
+	private void addPreferenceListeners() {
+		removePreferenceListeners();
+		if (prefsIds != null) {
+			for (String prefId : prefsIds) {
+				OsmandPreference<?> pref = settings.getPreference(prefId);
+				if (pref instanceof CommonPreference<?> commonPref && commonPref.getDefaultValue() instanceof Boolean) {
+					@SuppressWarnings("unchecked")
+					CommonPreference<Boolean> booleanPref = (CommonPreference<Boolean>) commonPref;
+					StateChangedListener<Boolean> listener = change -> updatePreferenceState(prefId);
+					prefListeners.put(booleanPref, listener);
+					booleanPref.addListener(listener);
+				}
+			}
+		}
+	}
+
+	private void removePreferenceListeners() {
+		for (Map.Entry<CommonPreference<Boolean>, StateChangedListener<Boolean>> entry : prefListeners.entrySet()) {
+			entry.getKey().removeListener(entry.getValue());
+		}
+		prefListeners.clear();
+	}
+
+	private void updatePreferenceState(String prefId) {
+		app.runInUIThread(() -> {
+			if (!isAdded()) {
+				return;
+			}
+			OsmandPreference<?> pref = settings.getPreference(prefId);
+			if (pref instanceof CommonPreference<?> commonPref) {
+				boolean enabled = Boolean.TRUE.equals(commonPref.getModeValue(getAppMode()));
+				if (enabled) {
+					enabledPrefs.add(prefId);
+				} else {
+					enabledPrefs.remove(prefId);
+				}
+				for (BaseBottomSheetItem item : items) {
+					if (item instanceof BottomSheetItemWithCompoundButton buttonItem) {
+						if (Algorithms.objectEquals(buttonItem.getTag(), prefId)) {
+							buttonItem.setChecked(enabled);
+							break;
+						}
+					}
+				}
+			}
+		});
+	}
+
 	@Nullable
 	private MultiSelectBooleanPreference getListPreference() {
 		return (MultiSelectBooleanPreference) getPreference();
@@ -131,10 +198,19 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 				return;
 			}
 			enabledPrefs.clear();
-			enabledPrefs.addAll(multiSelectBooleanPreference.getValues());
-			prefChanged = false;
 			entries = multiSelectBooleanPreference.getEntries();
 			prefsIds = multiSelectBooleanPreference.getPrefsIds();
+			for (String prefId : prefsIds) {
+				OsmandPreference<?> pref = settings.getPreference(prefId);
+				if (pref instanceof CommonPreference<?> commonPref) {
+					if (Boolean.TRUE.equals(commonPref.getModeValue(getAppMode()))) {
+						enabledPrefs.add(prefId);
+					}
+				} else if (multiSelectBooleanPreference.getValues().contains(prefId)) {
+					enabledPrefs.add(prefId);
+				}
+			}
+			prefChanged = false;
 		} else {
 			enabledPrefs.clear();
 			enabledPrefs.addAll(savedInstanceState.getStringArrayList(ENABLED_PREFERENCES_IDS));

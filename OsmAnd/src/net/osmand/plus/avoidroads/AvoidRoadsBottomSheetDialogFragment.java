@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.StateChangedListener;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -62,6 +63,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private RoutingOptionsHelper routingOptionsHelper;
 
 	private Map<String, Boolean> routingParametersMap;
+	private final Map<CommonPreference<Boolean>, StateChangedListener<Boolean>> routingPrefListeners = new HashMap<>();
 	private List<AvoidRoadInfo> removedImpassableRoads;
 	private final List<String> enabledFiles = new ArrayList<>();
 	private LinearLayout stylesContainer;
@@ -280,6 +282,61 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	public void setCompoundButtonColor(@ColorInt int compoundButtonColor) {
 		this.compoundButtonColor = compoundButtonColor;
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		addRoutingPrefListeners();
+	}
+
+	@Override
+	public void onStop() {
+		removeRoutingPrefListeners();
+		super.onStop();
+	}
+
+	private void addRoutingPrefListeners() {
+		removeRoutingPrefListeners();
+		ApplicationMode mode = getTargetAppMode();
+		for (String parameterId : routingParametersMap.keySet()) {
+			GeneralRouter.RoutingParameter parameter = routingOptionsHelper.getRoutingPrefsForAppModeById(mode, parameterId);
+			if (parameter != null) {
+				CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+				StateChangedListener<Boolean> listener = change -> updateRoutingParamState(parameterId, preference);
+				routingPrefListeners.put(preference, listener);
+				preference.addListener(listener);
+			}
+		}
+	}
+
+	private void removeRoutingPrefListeners() {
+		for (Map.Entry<CommonPreference<Boolean>, StateChangedListener<Boolean>> entry : routingPrefListeners.entrySet()) {
+			entry.getKey().removeListener(entry.getValue());
+		}
+		routingPrefListeners.clear();
+	}
+
+	private void updateRoutingParamState(String parameterId, CommonPreference<Boolean> preference) {
+		app.runInUIThread(() -> {
+			if (!isAdded()) {
+				return;
+			}
+			boolean enabled = preference.getModeValue(getTargetAppMode());
+			routingParametersMap.put(parameterId, enabled);
+			for (BaseBottomSheetItem item : items) {
+				if (item instanceof BottomSheetItemWithCompoundButton buttonItem) {
+					if (Algorithms.objectEquals(buttonItem.getTag(), parameterId)) {
+						buttonItem.setChecked(enabled);
+						break;
+					}
+				}
+			}
+		});
+	}
+
+	private ApplicationMode getTargetAppMode() {
+		return appMode != null ? appMode : app.getRoutingHelper().getAppMode();
 	}
 
 	@Override
