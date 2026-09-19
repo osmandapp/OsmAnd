@@ -86,8 +86,12 @@ object HHRouteDataStructure {
 	 */
 	@JvmStatic
 	fun setSegments(ctx: HHRoutingContext, point: NetworkDBPoint, inBytes: ByteArray?, outBytes: ByteArray?) {
-		point.connectedSet(true, parseSegments(inBytes, ctx.getIncomingPoints(point), point, false))
-		point.connectedSet(false, parseSegments(outBytes, ctx.getOutgoingPoints(point), point, true))
+		val incoming = parseSegments(inBytes, ctx.getIncomingPoints(point), point, false)
+		ctx.applyEdgeCosts(point, incoming, false)
+		point.connectedSet(true, incoming)
+		val outgoing = parseSegments(outBytes, ctx.getOutgoingPoints(point), point, true)
+		ctx.applyEdgeCosts(point, outgoing, true)
+		point.connectedSet(false, outgoing)
 	}
 
 	internal fun parseSegments(
@@ -175,6 +179,10 @@ class RoutingStats {
 
 	@JvmField
 	var uniqueVisitedVertices: Int = 0
+
+	/** How many times the hub-graph search was run again because the roads disagreed with it. */
+	@JvmField
+	var recalculations: Int = 0
 
 	@JvmField
 	var addedVertices: Int = 0
