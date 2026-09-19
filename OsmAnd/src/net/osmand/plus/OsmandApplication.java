@@ -572,6 +572,12 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@Override
+	public void onTrimMemory(int level) {
+		super.onTrimMemory(level);
+		MemoryLog.onTrimMemory(level);
+	}
+
+	@Override
 	public void onConfigurationChanged(@NonNull Configuration newConfig) {
 		Resources resources = getResources();
 		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
