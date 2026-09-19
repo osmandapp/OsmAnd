@@ -5346,4 +5346,5 @@
     <string name="quick_action_all_tracks">Všetky stopy</string>
     <string name="crash_report_sent">Hlásenie odoslané. Ďakujeme!</string>
     <string name="crash_report_send_failed">Nepodarilo sa odoslať hlásenie. Skúste znova neskôr.</string>
+    <string name="battery_saving_mode_descr">Obmedzí vykresľovanie mapy na 20 snímok za sekundu pre zníženie spotreby batérie a prehrievania zariadenia. Pohyb mapy bude menej plynulý.</string>
 </resources>
