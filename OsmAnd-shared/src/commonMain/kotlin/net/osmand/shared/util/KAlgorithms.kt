@@ -244,6 +244,28 @@ object KAlgorithms {
 		mapRect.bottom = if (mapRect.bottom == 0.0) gpxRect.bottom else min(mapRect.bottom, gpxRect.bottom)
 	}
 
+	fun sanitizeFileName(fileName: String): String {
+		return fileName
+			.replace("/", "_")
+			.replace("\\", "_")
+			.replace(":", "_")
+			.replace(";", "_")
+			.replace("*", "_")
+			.replace("?", "_")
+			.replace("`", "_")
+			.replace("'", "_")
+			.replace("\"", "_")
+			.replace("<", "_")
+			.replace(">", "_")
+			.replace("|", "_")
+			.replace("&", "_")
+			.replace("\u0000", "_")
+			.replace("\n", "_")
+			.replace("\r", "_")
+			.replace("\t", " ")
+			.trim()
+	}
+
 	fun capitalizeFirstLetter(s: String?): String? {
 		return if (!s.isNullOrEmpty()) {
 			s[0].uppercaseChar().toString() + if (s.length > 1) s.substring(1) else ""

@@ -13,11 +13,10 @@ import kotlin.math.sqrt
  * names. The numbers mean nothing without [mapIndex], which holds the table that decodes them.
  *
  * A copy of `BinaryMapDataObject` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS. Two differences from java. `toString` prints the raw id, because turning it
- * back into an osm id belongs to `ObfConstants`, which is not copied yet. And where java hands
- * back a null it read - a name the string table had nothing for, a type its section has no rule
- * for - this answers "" or leaves the entry out instead of throwing; the reader fills names and
- * their order together, so no object read out of a file gets there.
+ * copy is for iOS. One difference from java: where java hands back a null it read - a name the
+ * string table had nothing for, a type its section has no rule for - this answers "" or leaves the
+ * entry out instead of throwing; the reader fills names and their order together, so no object
+ * read out of a file gets there.
  */
 class BinaryMapDataObject {
 
@@ -379,7 +378,7 @@ class BinaryMapDataObject {
 			POLYGON_RULES -> "Polygon"
 			else -> "Point"
 		}
-		return "$obj $id"
+		return "$obj " + ObfConstants.getOsmObjectId(this)
 	}
 
 	fun isDeleted(): Boolean {
