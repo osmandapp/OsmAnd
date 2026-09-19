@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="collect_heap_histogram">Collect heap histogram</string>
+	<string name="collect_heap_histogram_descr">Dump the java heap, count the objects of every class in it and keep only the counts. The dump itself is deleted right away and never leaves the device; the counts are attached to the next problem report.</string>
 <!--
 	README:
 	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
