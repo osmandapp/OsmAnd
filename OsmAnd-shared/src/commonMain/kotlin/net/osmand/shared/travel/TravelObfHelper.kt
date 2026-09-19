@@ -408,9 +408,11 @@ class TravelObfHelper(
 	 * Articles whose name matches [searchQuery], in the app language and then in english.
 	 * [matcher] decides what matching means; the default treats the query as an unfinished word.
 	 */
+	fun search(searchQuery: String, reqNumber: Int): List<WikivoyageSearchResult> =
+		search(searchQuery, reqNumber, defaultNameMatcher(searchQuery))
+
 	fun search(
-		searchQuery: String, reqNumber: Int,
-		matcher: KStringMatcher = defaultNameMatcher(searchQuery)
+		searchQuery: String, reqNumber: Int, matcher: KStringMatcher
 	): List<WikivoyageSearchResult> = synchronized(lock) {
 		val appLang = context.getLanguage()
 		var res = searchWithLang(searchQuery, appLang, reqNumber, matcher)
@@ -675,10 +677,11 @@ class TravelObfHelper(
 	}
 
 	/** Builds the article's gpx file, unless it is built already. */
-	fun readGpxFile(
-		article: TravelArticle,
-		isCancelled: TravelObfGpxBuilder.Cancellable = TravelObfGpxBuilder.Cancellable { false }
-	): GpxFile? {
+	fun readGpxFile(article: TravelArticle): GpxFile? =
+		readGpxFile(article) { false }
+
+	/** @param isCancelled asked between files, so a build can be dropped when nothing waits for it. */
+	fun readGpxFile(article: TravelArticle, isCancelled: TravelObfGpxBuilder.Cancellable): GpxFile? {
 		if (!article.gpxFileRead) {
 			val gpxFile = gpxBuilder.buildGpxFile(context.getTravelGpxRepositories(), article, isCancelled)
 			article.gpxFileRead = gpxFile != null
