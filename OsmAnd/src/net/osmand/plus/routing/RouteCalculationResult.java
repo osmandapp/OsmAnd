@@ -1118,6 +1118,7 @@ public class RouteCalculationResult {
 		return 0;
 	}
 
+	// cost of the routing search (includes penalties affecting only the route choice), use getWholeTime() to show
 	public float getRoutingTime() {
 		return routingTime;
 	}
@@ -1132,6 +1133,17 @@ public class RouteCalculationResult {
 
 	public int getLoadedTiles() {
 		return loadedTiles;
+	}
+
+	public int getWholeTime() {
+		int time = 0;
+		List<RouteSegmentResult> route = getOriginalRoute();
+		if (route != null) {
+			for (RouteSegmentResult segment : route) {
+				time += segment.getSegmentTime();
+			}
+		}
+		return time;
 	}
 
 	public int getWholeDistance() {
