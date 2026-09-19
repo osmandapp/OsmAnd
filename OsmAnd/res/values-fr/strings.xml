@@ -4880,8 +4880,8 @@
     <string name="avg_speed">Vitesse moyenne</string>
     <string name="organize_by_max_speed">Vitesse maximale</string>
     <string name="organize_by_max_altitude">Altitude maximale</string>
-    <string name="copy_from_portrait_layout">Copier à partir de la mise en page Portrait</string>
-    <string name="copy_from_landscape_layout">Copier à partir de la mise en page Paysage</string>
+    <string name="copy_from_portrait_layout">Copier à partir de la mise en page « Portrait »</string>
+    <string name="copy_from_landscape_layout">Copier à partir de la mise en page « Paysage »</string>
     <string name="panels_layout_compact">Compact</string>
     <string name="panels_layout_wide">Large</string>
     <string name="panels_layout">Disposition des panneaux</string>
