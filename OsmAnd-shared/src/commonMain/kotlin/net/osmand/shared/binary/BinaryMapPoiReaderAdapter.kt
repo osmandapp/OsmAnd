@@ -4,22 +4,27 @@ import net.osmand.shared.data.Amenity
 import net.osmand.shared.data.AmenityRoutePoint
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.data.KLocation
+import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.osm.PoiCategory
 import net.osmand.shared.search.core.KHashQuadTree
+import net.osmand.shared.api.KStringMatcherMode
+import net.osmand.shared.util.KCollatorStringMatcher
 import net.osmand.shared.util.KMapUtils
+import net.osmand.shared.util.KSearchAlgorithms
 import net.osmand.shared.util.collections.KTIntArrayList
 import net.osmand.shared.util.collections.KTIntLongMap
 import net.osmand.shared.util.collections.KTLongHashSet
+import kotlin.math.abs
 
 /**
  * Reads the poi section of an obf file: the tables that decode an amenity, the r-tree of boxes
  * over it, and the amenities themselves.
  *
  * A copy of `BinaryMapPoiReaderAdapter` in OsmAnd-java, which stays there for android and tools;
- * this copy is for iOS. The name index - the part that finds an amenity by its name rather than by
- * where it is - is not copied here; it comes with the search by name. The read statistics java
- * collects behind its stats hooks are left out, as they serve the obf inspection tools.
+ * this copy is for iOS. The read statistics java collects behind its stats hooks are left out, as
+ * they serve the obf inspection tools, and so is `readNameIndex`, which walks the whole name index
+ * for those same tools.
  *
  * Amenities are stored twice over: once in the boxes of the tree, which carry only the types they
  * hold, and once in the data blocks the boxes point at. A search walks the tree with the filter,
@@ -535,6 +540,363 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 		}
 	}
 
+
+	/**
+	 * Name index
+	 */
+
+	private fun normalizeSearchPoiByNameQuery(query: String): String =
+		query.replace("\"", "").lowercase()
+
+	/**
+	 * The amenities of [region] whose name matches the request's query. The name index gives the
+	 * offsets of the data blocks that hold a candidate; the blocks are then read and each amenity
+	 * matched again, because a block holds more than the one name that pointed at it.
+	 */
+	fun searchPoiByName(region: PoiRegion, req: SearchRequest<Amenity>) {
+		var offsets = KTIntLongMap()
+		val query = normalizeSearchPoiByNameQuery(req.nameQuery ?: "")
+		val matcher = KCollatorStringMatcher(query, req.matcherMode)
+		val indexOffset = codedIS.getTotalBytesRead()
+		var coordsTagGroups = KTLongHashSet()
+		while (true) {
+			if (req.isCancelled()) {
+				return
+			}
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return
+				OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER -> {
+					val length = readInt()
+					val oldLimit = codedIS.pushLimitLong(length)
+					// here offsets are sorted by distance
+					offsets = readPoiNameIndex(query, req, region, coordsTagGroups)
+					coordsTagGroups = region.checkMissingTagGroups(coordsTagGroups)
+					codedIS.popLimit(oldLimit)
+				}
+				OsmAndPoiIndex.BOXES_FIELD_NUMBER -> {
+					val length = readInt()
+					val oldLimit = codedIS.pushLimitLong(length)
+					if (coordsTagGroups.size() > 0) {
+						readBoxField(
+							0, 0, 0, 0, 0, 0, 0, KTIntLongMap(), null, req, region,
+							prepareTileIdsToCheckTagGroups(coordsTagGroups)
+						)
+					} else {
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
+					}
+					codedIS.popLimit(oldLimit)
+				}
+				OsmAndPoiIndex.POIDATA_FIELD_NUMBER -> {
+					// also offsets can be randomly skipped by limit
+					val offKeys = sortOffsetsForReading(offsets)
+					for (offKey in offKeys) {
+						codedIS.seek(offKey + indexOffset)
+						val len = readInt()
+						val oldLim = codedIS.pushLimitLong(len)
+						readPoiData(matcher, req, region)
+						codedIS.popLimit(oldLim)
+
+						if (req.isCancelled() || req.limitExceeded()) {
+							return
+						}
+					}
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
+					if (coordsTagGroups.size() > 0) {
+						region.updReadTagGroups(coordsTagGroups)
+					}
+					return
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
+	/**
+	 * The nearest blocks first, and the rest in buckets by file offset, so that a search that stops
+	 * early has the closest answers and one that runs on still reads forward through the file.
+	 *
+	 * Java leaves blocks at the same distance in the order its hash map happened to hand them out,
+	 * which no other map reproduces; this breaks such ties by offset instead.
+	 */
+	private fun sortOffsetsForReading(offsets: KTIntLongMap): IntArray {
+		val offKeys = offsets.keys()
+		if (offKeys.isEmpty()) {
+			return offKeys
+		}
+		val byDistance = offKeys.sortedWith(compareBy({ offsets[it] }, { it })).toIntArray()
+		var p = BUCKET_SEARCH_BY_NAME * 3
+		if (p < byDistance.size) {
+			var i = p + BUCKET_SEARCH_BY_NAME
+			while (true) {
+				if (i > byDistance.size) {
+					byDistance.sort(p, byDistance.size)
+					break
+				} else {
+					byDistance.sort(p, i)
+				}
+				p = i
+				i += BUCKET_SEARCH_BY_NAME
+			}
+		}
+		return byDistance
+	}
+
+	/**
+	 * Walks the name index for [query]: its string table gives the prefixes a query word could sit
+	 * under, and the data under each prefix gives the blocks. A query of several words keeps only
+	 * the blocks every word points at, unless the mode is MULTISEARCH, which keeps them all.
+	 */
+	private fun readPoiNameIndex(
+		query: String, req: SearchRequest<Amenity>, region: PoiRegion, tagGroupCoords: KTLongHashSet
+	): KTIntLongMap {
+		val offsets = KTIntLongMap()
+		var offset = 0L
+		val listOfSepOffsets = ArrayList<KTIntLongMap>()
+		val queries = KSearchAlgorithms.splitAndNormalize(query, true)
+		var queryTokens: MutableList<QueryToken>? = null
+		while (true) {
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return offsets
+				OsmAndPoiNameIndex.TABLE_FIELD_NUMBER -> {
+					val length = readInt()
+					val oldLimit = codedIS.pushLimitLong(length)
+					offset = codedIS.getTotalBytesRead()
+
+					val prefixCandidates = map.readIndexedStringTablePrefixes(queries)
+					val tokens = ArrayList<QueryToken>(queries.size)
+					for (i in queries.indices) {
+						tokens.add(QueryToken(queries[i], req.matcherMode, prefixCandidates[i]))
+					}
+					queryTokens = tokens
+					codedIS.popLimit(oldLimit)
+				}
+				OsmAndPoiNameIndex.DATA_FIELD_NUMBER -> {
+					val tokens = queryTokens
+					if (tokens != null) {
+						for (tokenMatch in tokens) {
+							val offsetMap = KTIntLongMap()
+							listOfSepOffsets.add(offsetMap)
+							for (prefix in tokenMatch.prefixes) {
+								codedIS.seek(prefix.offset + offset)
+								val len = codedIS.readRawVarint32()
+								val oldLim = codedIS.pushLimitLong(len.toLong())
+								readPoiNameIndexData(offsetMap, req, region, tagGroupCoords, tokenMatch, prefix)
+								codedIS.popLimit(oldLim)
+								if (req.isCancelled()) {
+									codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
+									return offsets
+								}
+							}
+						}
+					}
+					if (listOfSepOffsets.size > 0) {
+						if (req.matcherMode == KStringMatcherMode.MULTISEARCH) {
+							for (m in listOfSepOffsets) {
+								offsets.putAll(m)
+							}
+						} else {
+							offsets.putAll(listOfSepOffsets[0])
+							for (j in 1 until listOfSepOffsets.size) {
+								val mp = listOfSepOffsets[j]
+								// calculate intersection of mp & offsets
+								for (chKey in offsets.keys()) {
+									if (!mp.containsKey(chKey)) {
+										offsets.remove(chKey)
+									}
+								}
+							}
+						}
+					}
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
+					return offsets
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
+	/**
+	 * The entries under one prefix of the name index. Each name is the prefix plus a suffix from
+	 * the dictionary at the head of the block, so the dictionary decides which entries can match
+	 * before any of them is read.
+	 */
+	private fun readPoiNameIndexData(
+		offsets: KTIntLongMap, req: SearchRequest<Amenity>, region: PoiRegion,
+		tagGroupCoords: KTLongHashSet, token: QueryToken?, prefix: QueryToken.Prefix?
+	) {
+		var suffixDictionary: MutableList<String>? = null
+		val mask = if (token == null || prefix == null) null else token.SuffixMask(prefix)
+		var suffixDictionaryInitialized = false
+		var emptySuffixes = false
+		while (true) {
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return
+				OsmAndPoiNameIndexData.SUFFIXESDICTIONARY_FIELD_NUMBER -> {
+					val encodedSuffix = codedIS.readString()
+					var dictionary = suffixDictionary
+					if (dictionary == null) {
+						dictionary = ArrayList()
+						suffixDictionary = dictionary
+					}
+					if (KSearchAlgorithms.OLD_EMPTY_SUFFIX_DICTIONARY_SENTINEL == encodedSuffix) {
+						emptySuffixes = true
+					} else {
+						val prevSuffix = if (dictionary.isEmpty()) null else dictionary[dictionary.size - 1]
+						dictionary.add(
+							KSearchAlgorithms.nameIndexDecodeDictionarySuffix(prevSuffix, encodedSuffix)
+						)
+					}
+				}
+				OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER -> {
+					val dictionary = suffixDictionary
+					if (emptySuffixes || (dictionary != null && dictionary.size == 1 &&
+								dictionary[0] == KSearchAlgorithms.EMPTY_SUFFIX_DICTIONARY_SENTINEL)
+					) {
+						if (prefix != null && token != null && !token.matchFullPrefix(prefix.key)) {
+							codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
+							return
+						}
+					}
+					if (!suffixDictionaryInitialized && mask != null) {
+						mask.setDictionary(suffixDictionary)
+						suffixDictionaryInitialized = true
+					}
+					val len = codedIS.readRawVarint32()
+					val oldLim = codedIS.pushLimitLong(len.toLong())
+					readPoiNameIndexDataAtom(offsets, req, region, tagGroupCoords, mask)
+					codedIS.popLimit(oldLim)
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
+	/** One entry of the name index: the tile it sits in and the block that holds it. */
+	private fun readPoiNameIndexDataAtom(
+		offsets: KTIntLongMap, req: SearchRequest<Amenity>, region: PoiRegion,
+		tagGroupCoords: KTLongHashSet, suffixMask: QueryToken.SuffixMask?
+	) {
+		var x = 0
+		var y = 0
+		var zoom = 15
+		var shift = Int.MIN_VALUE
+		var matched = false
+		var noBisetIndex = true
+		var maskIndex = 0
+		while (true) {
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> {
+					if ((suffixMask != null && suffixMask.shouldPassThrough()) || noBisetIndex) {
+						// intermediate version ignore
+						matched = true
+					}
+					if (!matched) {
+						return
+					}
+					if (shift != Int.MIN_VALUE) {
+						val x31 = x shl (31 - zoom)
+						val y31 = y shl (31 - zoom)
+						val x31r = (x + 1) shl (31 - zoom)
+						val y31b = (y + 1) shl (31 - zoom)
+						val r = KQuadRect(x31.toDouble(), y31.toDouble(), x31r.toDouble(), y31b.toDouble())
+						if (req.contains(x31, y31, x31, y31) ||
+							r.contains(req.x.toDouble(), req.y.toDouble(), req.x.toDouble(), req.y.toDouble())
+						) {
+							val d = abs(req.x.toLong() - x31) + abs(req.y.toLong() - y31)
+							offsets.put(shift, d)
+							tagGroupCoords.add(KHashQuadTree.encodeTileId(EVAL_TAG_GROUP_ZOOM, x31, y31))
+						}
+					}
+					return
+				}
+				OsmAndPoiNameIndexDataAtom.X_FIELD_NUMBER -> x = codedIS.readUInt32()
+				OsmAndPoiNameIndexDataAtom.Y_FIELD_NUMBER -> y = codedIS.readUInt32()
+				OsmAndPoiNameIndexDataAtom.ZOOM_FIELD_NUMBER -> zoom = codedIS.readUInt32()
+				OsmAndPoiNameIndexDataAtom.SUFFIXESBITSETINDEX_FIELD_NUMBER -> {
+					noBisetIndex = false
+					val index = codedIS.readUInt32()
+					if (!matched && suffixMask != null && suffixMask.isMatched(maskIndex, index)) {
+						matched = true
+					}
+					maskIndex++
+				}
+				OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER -> {
+					val l = readInt()
+					if (l > Int.MAX_VALUE) {
+						throw IllegalStateException()
+					}
+					shift = l.toInt()
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
+	/**
+	 * One data block, with every amenity in it matched against the query by name. A block is read
+	 * because one of its amenities matched in the index, and the rest of it has to be filtered out
+	 * here.
+	 */
+	private fun readPoiData(matcher: KCollatorStringMatcher, req: SearchRequest<Amenity>, region: PoiRegion) {
+		var x = 0
+		var y = 0
+		var zoom = 0
+		while (true) {
+			if (req.isCancelled() || req.limitExceeded()) {
+				return
+			}
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return
+				OsmAndPoiBoxData.X_FIELD_NUMBER -> x = codedIS.readUInt32()
+				OsmAndPoiBoxData.ZOOM_FIELD_NUMBER -> zoom = codedIS.readUInt32()
+				OsmAndPoiBoxData.Y_FIELD_NUMBER -> y = codedIS.readUInt32()
+				OsmAndPoiBoxData.POIDATA_FIELD_NUMBER -> {
+					val len = codedIS.readRawVarint32()
+					val oldLim = codedIS.pushLimitLong(len.toLong())
+					val am = readPoiPoint(0, Int.MAX_VALUE, 0, Int.MAX_VALUE, x, y, zoom, req, region, false)
+					codedIS.popLimit(oldLim)
+					if (am != null) {
+						var matches = matcher.matches(am.getName().lowercase()) ||
+								matcher.matches(am.getEnName(true).lowercase())
+						if (!matches) {
+							for (s in am.getOtherNames()) {
+								matches = matcher.matches(s.lowercase())
+								if (matches) {
+									break
+								}
+							}
+							if (!matches) {
+								for (key in am.getAdditionalInfoKeys()) {
+									if (ObfConstants.isTagIndexedForSearchAsName(key) ||
+										ObfConstants.isTagNonIndexedForSearchAsName(key) ||
+										ObfConstants.isTagIndexedForSearchAsId(key) ||
+										ObfConstants.isTagIndexedAsSearchRelated(key)
+									) {
+										// isTagIndexedAsSearchRelated could be toggled off to avoid unnecessary matches
+										matches = matcher.matches(am.getAdditionalInfo(key) ?: "")
+										if (matches) {
+											break
+										}
+									}
+								}
+							}
+						}
+						if (matches) {
+							req.collectRawData(am)
+							req.publish(am)
+						}
+					}
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
 	/** Whether a box holds anything the filter wants, from the list of types the box carries. */
 	private fun checkCategories(req: SearchRequest<Amenity>, region: PoiRegion): Boolean {
 		while (true) {
@@ -804,6 +1166,7 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 		internal const val CATEGORY_MASK = (1 shl SHIFT_BITS_CATEGORY) - 1
 		private const val ZOOM_TO_SKIP_FILTER_READ = 6
 		private const val ZOOM_TO_SKIP_FILTER = 3
+		private const val BUCKET_SEARCH_BY_NAME = 15 // should be bigger 100?
 		private const val BASE_POI_SHIFT = SHIFT_BITS_CATEGORY // 7
 		private const val FINAL_POI_SHIFT = BinaryMapIndexReader.SHIFT_COORDINATES // 5
 		private const val BASE_POI_ZOOM = 31 - BASE_POI_SHIFT // 24 zoom
@@ -884,6 +1247,24 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 		const val TEXTVALUES_FIELD_NUMBER = 15
 		const val PRECISIONXY_FIELD_NUMBER = 16
 		const val TAGGROUPS_FIELD_NUMBER = 17
+	}
+
+	private object OsmAndPoiNameIndex {
+		const val TABLE_FIELD_NUMBER = 3
+		const val DATA_FIELD_NUMBER = 5
+	}
+
+	private object OsmAndPoiNameIndexData {
+		const val SUFFIXESDICTIONARY_FIELD_NUMBER = 2
+		const val ATOMS_FIELD_NUMBER = 3
+	}
+
+	private object OsmAndPoiNameIndexDataAtom {
+		const val ZOOM_FIELD_NUMBER = 2
+		const val X_FIELD_NUMBER = 3
+		const val Y_FIELD_NUMBER = 4
+		const val SUFFIXESBITSETINDEX_FIELD_NUMBER = 5
+		const val SHIFTTO_FIELD_NUMBER = 14
 	}
 
 	private object OsmAndPoiTagGroups {
