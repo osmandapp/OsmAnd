@@ -1,10 +1,13 @@
 package net.osmand.shared.binary
 
+import net.osmand.shared.data.Amenity
 import net.osmand.shared.data.KLatLon
+import net.osmand.shared.data.KLocation
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.routing.RouteDataObject
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.api.KStringMatcherMode
+import net.osmand.shared.osm.PoiCategory
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.collections.KPriorityQueue
 import net.osmand.shared.util.collections.KTIntArrayList
@@ -13,6 +16,8 @@ import net.osmand.shared.util.collections.KTLongObjectMap
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * What a search asks the reader for and where its results go: a bounding box in 31 coordinates or a
@@ -64,7 +69,7 @@ class SearchRequest<T> {
 	// search on the path
 	/** Tile of zoom 16 to the pairs of points, always an even count, where the path crosses it. */
 	@JvmField
-	var tiles: KTLongObjectMap<MutableList<KLatLon>>? = null
+	var tiles: KTLongObjectMap<MutableList<KLocation>>? = null
 
 	@JvmField
 	var radius: Double = -1.0
@@ -78,6 +83,14 @@ class SearchRequest<T> {
 	/** Map search only: which type numbers are worth reading an object for. */
 	@JvmField
 	var searchFilter: SearchFilter? = null
+
+	/** Poi search only: which kinds of amenity to keep. */
+	@JvmField
+	var poiTypeFilter: SearchPoiTypeFilter? = null
+
+	/** Poi search only: which values of a top index attribute to keep. */
+	@JvmField
+	var poiAdditionalFilter: SearchPoiAdditionalFilter? = null
 
 	// cache information
 	@JvmField
@@ -282,6 +295,14 @@ class SearchRequest<T> {
 	companion object {
 		const val ZOOM_TO_SEARCH_POI: Int = 16
 
+		/** Keeps every amenity, and says it is not empty so that the boxes are still checked. */
+		@JvmField
+		val ACCEPT_ALL_POI_TYPE_FILTER: SearchPoiTypeFilter = object : SearchPoiTypeFilter {
+			override fun isEmpty(): Boolean = false
+
+			override fun accept(type: PoiCategory?, subcategory: String): Boolean = true
+		}
+
 		@JvmStatic
 		@JvmOverloads
 		fun buildSearchRequest(
@@ -301,6 +322,142 @@ class SearchRequest<T> {
 			request.zoom = zoom
 			request.searchFilter = searchFilter
 			request.resultMatcher = resultMatcher
+			return request
+		}
+
+		/**
+		 * A search along [route] - the points of a path - out to [radius] metres either side. The
+		 * path is cut into zoom 16 tiles, each holding the pairs of points that cross it, so that
+		 * an amenity is only measured against the stretch of path near it.
+		 */
+		@JvmStatic
+		fun buildSearchPoiRequest(
+			route: List<KLocation>,
+			radius: Double,
+			poiTypeFilter: SearchPoiTypeFilter?,
+			resultMatcher: ResultMatcher<Amenity>?
+		): SearchRequest<Amenity> {
+			val request = SearchRequest<Amenity>()
+			val coeff = (radius / KMapUtils.getTileDistanceWidth(ZOOM_TO_SEARCH_POI.toDouble())).toFloat()
+			val zooms = KTLongObjectMap<MutableList<KLocation>>()
+			for (i in 1 until route.size) {
+				val cr = route[i]
+				val pr = route[i - 1]
+				val tx = KMapUtils.getTileNumberX(ZOOM_TO_SEARCH_POI.toDouble(), cr.longitude)
+				val ty = KMapUtils.getTileNumberY(ZOOM_TO_SEARCH_POI.toDouble(), cr.latitude)
+				val px = KMapUtils.getTileNumberX(ZOOM_TO_SEARCH_POI.toDouble(), pr.longitude)
+				val py = KMapUtils.getTileNumberY(ZOOM_TO_SEARCH_POI.toDouble(), pr.latitude)
+				val topLeftX = min(tx, px) - coeff
+				val topLeftY = min(ty, py) - coeff
+				val bottomRightX = max(tx, px) + coeff
+				val bottomRightY = max(ty, py) + coeff
+				var x = topLeftX.toInt()
+				while (x <= bottomRightX) {
+					var y = topLeftY.toInt()
+					while (y <= bottomRightY) {
+						val hash = (x.toLong() shl ZOOM_TO_SEARCH_POI) + y
+						var ll = zooms[hash]
+						if (ll == null) {
+							ll = ArrayList()
+							zooms.put(hash, ll)
+						}
+						ll.add(pr)
+						ll.add(cr)
+						y++
+					}
+					x++
+				}
+			}
+			var sleft = Int.MAX_VALUE
+			var sright = 0
+			var stop = Int.MAX_VALUE
+			var sbottom = 0
+			for (vl in zooms.keys()) {
+				val x = (vl shr ZOOM_TO_SEARCH_POI) shl (31 - ZOOM_TO_SEARCH_POI)
+				val y = (vl and ((1L shl ZOOM_TO_SEARCH_POI) - 1)) shl (31 - ZOOM_TO_SEARCH_POI)
+				sleft = min(x, sleft.toLong()).toInt()
+				stop = min(y, stop.toLong()).toInt()
+				sbottom = max(y, sbottom.toLong()).toInt()
+				sright = max(x, sright.toLong()).toInt()
+			}
+			request.radius = radius
+			request.left = sleft
+			request.zoom = -1
+			request.right = sright
+			request.top = stop
+			request.bottom = sbottom
+			request.tiles = zooms
+			request.poiTypeFilter = poiTypeFilter
+			request.resultMatcher = resultMatcher
+			return request
+		}
+
+		@JvmStatic
+		@JvmOverloads
+		fun buildSearchPoiRequest(
+			sleft: Int,
+			sright: Int,
+			stop: Int,
+			sbottom: Int,
+			zoom: Int,
+			poiTypeFilter: SearchPoiTypeFilter?,
+			poiTopIndexAdditionalFilter: SearchPoiAdditionalFilter? = null,
+			matcher: ResultMatcher<Amenity>? = null
+		): SearchRequest<Amenity> {
+			val request = SearchRequest<Amenity>()
+			request.left = sleft
+			request.right = sright
+			request.top = stop
+			request.bottom = sbottom
+			request.zoom = zoom
+			request.poiTypeFilter = poiTypeFilter
+			request.poiAdditionalFilter = poiTopIndexAdditionalFilter
+			request.resultMatcher = matcher
+			return request
+		}
+
+		@JvmStatic
+		@JvmOverloads
+		fun buildSearchPoiRequest(
+			latLon: KLatLon,
+			radius: Int,
+			zoom: Int,
+			poiTypeFilter: SearchPoiTypeFilter?,
+			matcher: ResultMatcher<Amenity>? = null
+		): SearchRequest<Amenity> {
+			val request = SearchRequest<Amenity>()
+			request.setBBoxRadius(latLon.latitude, latLon.longitude, radius)
+			request.zoom = zoom
+			request.poiTypeFilter = poiTypeFilter
+			request.resultMatcher = matcher
+			return request
+		}
+
+		@JvmStatic
+		@JvmOverloads
+		fun buildSearchPoiRequest(
+			x: Int,
+			y: Int,
+			nameFilter: String,
+			sleft: Int,
+			sright: Int,
+			stop: Int,
+			sbottom: Int,
+			poiTypeFilter: SearchPoiTypeFilter? = null,
+			resultMatcher: ResultMatcher<Amenity>? = null,
+			rawDataCollector: ResultMatcher<Amenity>? = null
+		): SearchRequest<Amenity> {
+			val request = SearchRequest<Amenity>()
+			request.x = x
+			request.y = y
+			request.left = sleft
+			request.right = sright
+			request.top = stop
+			request.bottom = sbottom
+			request.poiTypeFilter = poiTypeFilter
+			request.resultMatcher = resultMatcher
+			request.rawDataCollector = rawDataCollector
+			request.nameQuery = nameFilter.trim()
 			return request
 		}
 

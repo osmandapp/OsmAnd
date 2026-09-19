@@ -1,5 +1,7 @@
 package net.osmand.shared.binary
 
+import net.osmand.shared.data.Amenity
+import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.routing.testEnvironment
 import net.osmand.shared.routing.testPlatformName
 import okio.FileSystem
@@ -8,11 +10,12 @@ import kotlin.test.Test
 import kotlin.time.TimeSource
 
 /**
- * How long the shared copy takes to read a map section, which is the question the port is asked:
- * whether an obf can be searched on Kotlin/Native without the C++ core.
+ * How long the shared copy takes to read a map section and a poi section, which is the question
+ * the port is asked: whether an obf can be searched on Kotlin/Native without the C++ core.
  *
- * The same corpus and the same two phases run through the java reader and through this copy on the
- * jvm in `MapSectionBenchmarkTest` in OsmAnd-java, so the columns can be put side by side. The
+ * The same corpus and the same phases run through the java reader and through this copy on the jvm
+ * in `MapSectionBenchmarkTest` and `PoiSearchBenchmarkTest` in OsmAnd-java, so the columns can be
+ * put side by side. The
  * copy is a straight port of java's algorithm, so nothing here defends a design decision; what it
  * answers is the cost of the collections that replaced trove, of the strings java interns and this
  * does not, and of Kotlin/Native itself.
@@ -36,12 +39,13 @@ import kotlin.time.TimeSource
  * ```
  * phase     java (jvm)   copy (jvm)   copy (native)
  * open         4.6 ms       3.8 ms          2.4 ms
- * search      15.8 ms       9.5 ms         22.0 ms     47393 objects
- * per object   0.33 us      0.20 us         0.46 us
+ * search      15.8 ms       9.5 ms         22.0 ms     47393 map objects
+ * poi           2.1 ms      2.3 ms          3.5 ms      6285 amenities
  * ```
- * Kotlin/Native reads an object in about the time the java reader takes on the jvm, and in about
- * twice the time this same code takes there. The open column is not a like for like: java also
- * reads the address, poi and transport headers, which the copy skips.
+ * Kotlin/Native reads a map object in about the time the java reader takes on the jvm, and in
+ * about twice the time this same code takes there; an amenity costs it only half again as much.
+ * The open column is not a like for like: java also reads the address and transport headers,
+ * which the copy skips.
  */
 class MapReaderBenchmarkTest {
 
@@ -97,7 +101,52 @@ class MapReaderBenchmarkTest {
 		}
 		println("  ${"search".padEnd(10)} ${searchMs.format1().padStart(9)} ${objects.toString().padStart(9)} " +
 				(searchMs * 1000 / objects).format2().padStart(10))
+
+		val poiTypes = poiTypes()
+		if (poiTypes == null) {
+			println("  poi        poi_types.xml not found, skipped")
+			println("")
+			return
+		}
+		MapPoiTypes.setDefault(poiTypes)
+		var poiMs = Double.MAX_VALUE
+		var amenities = 0
+		repeat(WARMUP_ROUNDS + MEASURED_ROUNDS) { round ->
+			val readers = files.map { BinaryMapIndexReader(it) }
+			val mark = TimeSource.Monotonic.markNow()
+			var read = 0
+			repeat(POI_PASSES_PER_ROUND) {
+				read = 0
+				for (reader in readers) {
+					val req = SearchRequest.buildSearchPoiRequest(
+						0, Int.MAX_VALUE, 0, Int.MAX_VALUE, -1, null, null, null
+					)
+					read += reader.searchPoi(req).size
+				}
+			}
+			val ms = mark.elapsedNow().inWholeMicroseconds / 1000.0 / POI_PASSES_PER_ROUND
+			readers.forEach { it.close() }
+			if (round >= WARMUP_ROUNDS && ms < poiMs) {
+				poiMs = ms
+				amenities = read
+			}
+		}
+		println("  ${"poi".padEnd(10)} ${poiMs.format1().padStart(9)} ${amenities.toString().padStart(9)} " +
+				(poiMs * 1000 / amenities).format2().padStart(10))
 		println("")
+	}
+
+	/** The poi search needs the type registry, which the poi section decodes its numbers through. */
+	private fun poiTypes(): MapPoiTypes? {
+		for (directory in directories()) {
+			val path = "$directory/poi_types.xml".toPath()
+			if (FileSystem.SYSTEM.exists(path)) {
+				val types = MapPoiTypes(path.toString())
+				types.init()
+				return types
+			}
+		}
+		return null
 	}
 
 	/** Every zoom the file has a level for, so that the whole section is read. */
@@ -116,6 +165,7 @@ class MapReaderBenchmarkTest {
 	private fun directories(): List<String> {
 		val directories = ArrayList(TEST_RESOURCE_DIRECTORIES)
 		testEnvironment("OSMAND_OBF_DIRECTORY")?.let { directories.add(0, it) }
+		testEnvironment("OSMAND_TEST_RESOURCES")?.let { directories.add(0, it) }
 		return directories
 	}
 
@@ -152,6 +202,9 @@ class MapReaderBenchmarkTest {
 	companion object {
 		const val WARMUP_ROUNDS = 3
 		const val MEASURED_ROUNDS = 5
+
+		/** One pass over the poi sections is only a few milliseconds, too little to time. */
+		const val POI_PASSES_PER_ROUND = 10
 
 		/** Relative to `OsmAnd-shared`, which is where both the jvm test and the native binary run. */
 		val TEST_RESOURCE_DIRECTORIES = listOf(
