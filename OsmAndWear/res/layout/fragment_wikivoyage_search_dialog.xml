@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/wikivoyage_bg_color"
+	android:orientation="vertical"
+	android:clickable="true"
+	android:focusable="true">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dashboard_map_toolbar"
+			android:background="?attr/wikivoyage_card_bg_color"
+			android:minHeight="@dimen/dashboard_map_toolbar">
+
+			<include layout="@layout/search_text_layout"/>
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:clipToPadding="false"
+		android:paddingBottom="@dimen/map_markers_recycler_view_padding_bottom"
+		android:scrollbars="vertical"/>
+
+</LinearLayout>

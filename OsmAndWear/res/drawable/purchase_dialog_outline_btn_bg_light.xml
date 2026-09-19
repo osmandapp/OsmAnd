@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/switch_button_active_stroke_light" />
+            <corners android:radius="@dimen/dlg_button_rect_rad" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/switch_button_active_light" />
+            <corners android:radius="@dimen/dlg_button_rect_rad" />
+            <stroke android:width="1dp" android:color="@color/active_color_primary_light" />
+        </shape>
+    </item>
+</selector>

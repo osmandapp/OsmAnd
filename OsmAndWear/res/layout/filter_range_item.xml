@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:clipChildren="false"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
+	android:gravity="center_vertical"
+	android:orientation="vertical">
+
+	<include layout="@layout/track_filter_header" />
+
+	<LinearLayout
+		android:id="@+id/range_input_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<net.osmand.plus.widgets.OsmandTextFieldBoxes
+			android:id="@+id/value_from"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding_half"
+			android:layout_marginBottom="@dimen/list_content_padding"
+			android:layout_weight="1"
+			android:focusable="true"
+			android:focusableInTouchMode="true"
+			app:errorColor="@color/color_invalid"
+			app:labelText="@string/route_from"
+			app:primaryColor="@color/active_color_primary_dark"
+			app:secondaryColor="?android:textColorSecondary">
+
+			<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+				android:id="@+id/value_from_et"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="number"
+				android:maxLength="6"
+				android:maxLines="1"
+				android:scrollHorizontally="true" />
+
+		</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+		<net.osmand.plus.widgets.OsmandTextFieldBoxes
+			android:id="@+id/value_to"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding_half"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/list_content_padding"
+			android:layout_weight="1"
+			android:focusable="true"
+			android:focusableInTouchMode="true"
+			app:errorColor="@color/color_invalid"
+			app:labelText="@string/route_to"
+			app:primaryColor="@color/active_color_primary_dark"
+			app:secondaryColor="?android:textColorSecondary">
+
+			<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+				android:id="@+id/value_to_et"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="number"
+				android:maxLength="6"
+				android:maxLines="1"
+				android:scrollHorizontally="true" />
+
+		</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+	</LinearLayout>
+
+	<com.google.android.material.slider.RangeSlider
+		android:id="@+id/slider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding_small"
+		android:layout_marginLeft="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding_small"
+		android:layout_marginRight="@dimen/content_padding_small" />
+
+	<LinearLayout
+		android:id="@+id/min_max_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:orientation="horizontal"
+
+		android:paddingBottom="@dimen/content_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/min_filter_value"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:gravity="center"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			android:textStyle="normal"
+			tools:text="0 m" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/max_filter_value"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/dialog_content_margin"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			android:translationX="-40dp"
+			android:textStyle="normal"
+			tools:text="125 m" />
+
+	</LinearLayout>
+
+	<include layout="@layout/divider" />
+
+</LinearLayout>

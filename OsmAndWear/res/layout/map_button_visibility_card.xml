@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/card_and_list_background_basic"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/title"
+		style="@style/TitleStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_small"
+		tools:text="@string/key_event_action_change_map_orientation" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/content_padding"
+		android:background="?attr/divider_color_basic" />
+
+	<include
+		android:id="@+id/visibility_button"
+		layout="@layout/configure_screen_list_item" />
+
+</LinearLayout>

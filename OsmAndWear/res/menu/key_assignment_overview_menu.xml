@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<item
+		android:id="@+id/action_edit"
+		android:icon="@drawable/ic_action_edit_outlined"
+		android:title="@string/shared_string_edit"
+		app:iconTint="?attr/default_icon_color"
+		app:showAsAction="always" />
+
+	<item
+		android:id="@+id/action_overflow_menu"
+		android:icon="@drawable/ic_overflow_menu_dark"
+		android:title="@string/shared_string_menu"
+		app:iconTint="?attr/default_icon_color"
+		app:showAsAction="always" />
+</menu>
