@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<!--
+	README:
+	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
+	- If you edit a strings.xml file directly, please make sure:
+	   1. To not produce duplicate strings (check by name if a string already exists)
+	   2. Every apostrophe (quote) is preceded by a backslash.
+	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
+	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
+	Strings for OsmAnd core
+	Thx - Hardy
+-->
 	<string name="java_memory">Java memory</string>
 	<string name="ais_load_data_descr">Replay AIS messages from a recorded file.</string>
 	<string name="map_rendering">Map rendering</string>
@@ -14,17 +25,6 @@
 	<string name="heap_dump_auto">Collect on high usage</string>
 	<string name="heap_dump_auto_descr">Over 350 MB, once per 15 min.</string>
 	<string name="visualizing_button_grid_descr">Cells, slots, frames and logs.</string>
-<!--
-	README:
-	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
-	- If you edit a strings.xml file directly, please make sure:
-	   1. To not produce duplicate strings (check by name if a string already exists)
-	   2. Every apostrophe (quote) is preceded by a backslash.
-	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
-	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
-	Strings for OsmAnd core
-	Thx - Hardy
--->
 	<string name="crash_report_sent">Report sent. Thank you!</string>
 	<string name="crash_report_send_failed">Could not send the report. Try again later.</string>
 	<string name="share_favorites_media_preparation_failed">Couldn\'t include attached media. Sharing points only.</string>
