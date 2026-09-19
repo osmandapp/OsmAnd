@@ -37,6 +37,20 @@ object KAlgorithms {
 		return s == null || s.trim().isEmpty()
 	}
 
+	fun containsChar(s: String?, chars: CharArray): Boolean {
+		if (s == null) {
+			return false
+		}
+		for (ch in s) {
+			for (aChar in chars) {
+				if (ch == aChar) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+
 	fun hash(vararg values: Any?): Int {
 		return values.contentHashCode()
 	}
