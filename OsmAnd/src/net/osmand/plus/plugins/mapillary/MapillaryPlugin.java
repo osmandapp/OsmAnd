@@ -39,8 +39,10 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -273,6 +275,37 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Override
 	public boolean isMenuControllerSupported(MenuController menuController) {
 		return true;
+	}
+
+	@Nullable
+	private MapWidgetInfo getDefaultWidgetInfo(@NonNull MapActivity mapActivity) {
+		// Only the default Mapillary widget, not custom duplicates.
+		return mapActivity.getMapLayers().getMapWidgetRegistry()
+				.getWidgetInfoById(WidgetType.MAPILLARY.id);
+	}
+
+	public boolean isWidgetVisible(@NonNull MapActivity mapActivity) {
+		MapWidgetInfo widgetInfo = getDefaultWidgetInfo(mapActivity);
+		return widgetInfo != null && widgetInfo.isEnabledForAppMode(
+				app.getSettings().getApplicationMode(), ScreenLayoutMode.getDefault(mapActivity));
+	}
+
+	public void setWidgetVisible(@NonNull MapActivity mapActivity, boolean visible) {
+		MapWidgetInfo widgetInfo = getDefaultWidgetInfo(mapActivity);
+		if (widgetInfo == null) {
+			return;
+		}
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+		if (widgetInfo.isEnabledForAppMode(appMode, layoutMode) != visible) {
+			MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
+			widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, visible, layoutMode, false);
+			MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+			if (mil != null) {
+				mil.recreateControls();
+			}
+			mapActivity.refreshMap();
+		}
 	}
 
 	@Override

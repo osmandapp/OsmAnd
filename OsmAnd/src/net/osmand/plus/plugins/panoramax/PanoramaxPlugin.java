@@ -23,19 +23,12 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
-import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -56,7 +49,6 @@ public class PanoramaxPlugin extends OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(PanoramaxPlugin.class);
 
 	public final OsmandPreference<Boolean> SHOW_PANORAMAX;
-	public final OsmandPreference<Boolean> PANORAMAX_FIRST_DIALOG_SHOWN;
 
 	public final CommonPreference<Boolean> USE_PANORAMAX_FILTER;
 	public final CommonPreference<String> PANORAMAX_FILTER_USER_KEY;
@@ -74,7 +66,6 @@ public class PanoramaxPlugin extends OsmandPlugin {
 		super(app);
 
 		SHOW_PANORAMAX = registerBooleanPreference("show_panoramax", false).makeProfile();
-		PANORAMAX_FIRST_DIALOG_SHOWN = registerBooleanPreference("panoramax_first_dialog_shown", false).makeGlobal();
 
 		USE_PANORAMAX_FILTER = registerBooleanPreference("use_panoramax_filters", false).makeGlobal().makeShared();
 		PANORAMAX_FILTER_USER_KEY = registerStringPreference("panoramax_filter_user_key", "").makeGlobal().makeShared();
@@ -128,14 +119,6 @@ public class PanoramaxPlugin extends OsmandPlugin {
 
 	private void createLayers(@NonNull Context context) {
 		vectorLayer = new PanoramaxVectorLayer(context);
-	}
-
-	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		if (widgetType == WidgetType.PANORAMAX) {
-			return new PanoramaxMapWidget(mapActivity, customId, widgetsPanel);
-		}
-		return null;
 	}
 
 	@Override
@@ -218,14 +201,6 @@ public class PanoramaxPlugin extends OsmandPlugin {
 				.setListener(listener));
 	}
 
-	@Override
-	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos,
-			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
-		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
-		MapWidget widget = createMapWidgetForParams(mapActivity, WidgetType.PANORAMAX);
-		widgetsInfos.add(creator.createWidgetInfo(widget));
-	}
-
 	// No context menu gallery row: OnlinePhotosGroup has no Panoramax member, so it could only
 	// ever render empty. Pictures are reached by tapping the map layer instead.
 
@@ -247,10 +222,6 @@ public class PanoramaxPlugin extends OsmandPlugin {
 	@Override
 	public void mapActivityPause(@NonNull MapActivity activity) {
 		this.mapActivity = null;
-	}
-
-	public static boolean openPanoramax(@NonNull FragmentActivity activity) {
-		return openPanoramax(activity, null);
 	}
 
 	/**
