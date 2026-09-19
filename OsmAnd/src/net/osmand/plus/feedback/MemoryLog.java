@@ -81,6 +81,9 @@ public class MemoryLog {
 	private static final long SUMMARY_BUDGET_MS = 200;
 	// a heap smaller than this explains itself; below it a histogram is not worth seconds of freeze
 	private static final long HISTOGRAM_HEAP_THRESHOLD = 350L * 1024 * 1024;
+	// many devices cap the heap at 256 MB, where the absolute threshold can never be reached,
+	// so a heap that is nearly full counts as well
+	private static final float HISTOGRAM_HEAP_RATIO = 0.8f;
 	private static final long HISTOGRAM_INTERVAL = 15 * 60 * 1000L;
 	// worth knowing what the smaps walk actually costs on a device, not only when it is too slow
 	private static final long SUMMARY_REPORT_MS = 25;
@@ -507,7 +510,8 @@ public class MemoryLog {
 	// costs seconds, so it happens rarely and only when a person turned it on
 	@Nullable
 	private static String maybeCollectHistogram(@NonNull OsmandApplication app, long time, long used) {
-		if (used < HISTOGRAM_HEAP_THRESHOLD) {
+		long max = Runtime.getRuntime().maxMemory();
+		if (used < Math.min(HISTOGRAM_HEAP_THRESHOLD, (long) (max * HISTOGRAM_HEAP_RATIO))) {
 			return null;
 		}
 		if (lastHistogramTime != 0 && time - lastHistogramTime < HISTOGRAM_INTERVAL) {
