@@ -165,6 +165,10 @@ public class FeedbackHelper {
 		if (FileUtils.isNonEmptyFile(memoryLog)) {
 			putZipEntry(zip, memoryLog, MAX_MEMORY_LOG_IN_REPORT);
 		}
+		File heapHistogram = HeapDump.getHistogramFile(app);
+		if (FileUtils.isNonEmptyFile(heapHistogram)) {
+			putZipEntry(zip, heapHistogram, MAX_MEMORY_LOG_IN_REPORT);
+		}
 		File crashLog = getCrashLog();
 		if (crashLog != null) {
 			putZipEntry(zip, crashLog, MAX_EXCEPTION_LOG_IN_REPORT);

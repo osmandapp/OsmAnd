@@ -5,6 +5,7 @@ import static net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimula
 
 import android.app.Activity;
 import android.content.Intent;
+import android.widget.Toast;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
@@ -20,6 +21,8 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.feedback.HeapDump;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.aistracker.AisLoadTask;
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
@@ -38,11 +41,13 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener {
 
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
+	private static final String COLLECT_HEAP_HISTOGRAM = "collect_heap_histogram";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
@@ -89,6 +94,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupBatterySavingModePref();
 		setupSimulateOBDDataPref();
+		setupCollectHeapHistogramPref();
 		setupSimulateInitialStartupPref();
 		setupFullscreenMapDrawingModePref();
 		setupShouldShowFreeVersionBannerPref();
@@ -156,6 +162,13 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		debugRenderingInfo.setIconSpaceReserved(false);
 	}
 
+
+	private void setupCollectHeapHistogramPref() {
+		Preference preference = findPreference(COLLECT_HEAP_HISTOGRAM);
+		if (preference != null) {
+			preference.setIconSpaceReserved(false);
+		}
+	}
 
 	private void setupSimulateInitialStartupPref() {
 		Preference simulateInitialStartup = findPreference(SIMULATE_INITIAL_STARTUP);
@@ -391,6 +404,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 				SimulateLocationFragment.showInstance(activity.getSupportFragmentManager(), null, false);
 			}
 			return true;
+		} else if (COLLECT_HEAP_HISTOGRAM.equals(prefId)) {
+			collectHeapHistogram();
+			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
 			app.getAppInitializer().resetFirstTimeRun();
 			settings.FIRST_MAP_IS_DOWNLOADED.resetToDefault();
@@ -430,6 +446,23 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			AndroidUtils.startActivityForResultIfSafe(this, intent, OPEN_AIS_FILE_REQUEST);
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	// dumping stops the world for seconds, so it must not run on the main thread, and the
+	// result is a single line the person who pressed the button can read
+	private void collectHeapHistogram() {
+		Toast.makeText(app, R.string.collect_heap_histogram, Toast.LENGTH_SHORT).show();
+		new Thread(() -> {
+			String message;
+			try {
+				message = HeapDump.collect(app);
+			} catch (IOException | RuntimeException e) {
+				PlatformUtil.getLog(DevelopmentSettingsFragment.class).error(e);
+				message = "Heap histogram failed: " + e.getMessage();
+			}
+			String result = message;
+			app.runInUIThread(() -> Toast.makeText(app, result, Toast.LENGTH_LONG).show());
+		}, "HeapHistogram").start();
 	}
 
 	@Override

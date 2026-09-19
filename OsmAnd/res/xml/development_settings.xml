@@ -75,6 +75,13 @@
 		android:title="@string/transparent_status_bar" />
 
 	<Preference
+		android:key="collect_heap_histogram"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/collect_heap_histogram_descr"
+		android:title="@string/collect_heap_histogram" />
+
+	<Preference
 		android:key="simulate_initial_startup"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
