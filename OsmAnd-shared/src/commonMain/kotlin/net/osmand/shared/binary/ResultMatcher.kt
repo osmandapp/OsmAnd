@@ -12,4 +12,7 @@ interface ResultMatcher<T> {
 
 	/** @return true to stop the search. */
 	fun isCancelled(): Boolean
+
+	/** @return true when [obj] was turned down for being a duplicate of one already published. */
+	fun isSkippedDuplication(): Boolean = false
 }
