@@ -16,7 +16,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
@@ -84,7 +83,7 @@ public class MemoryLog {
 	// many devices cap the heap at 256 MB, where the absolute threshold can never be reached,
 	// so a heap that is nearly full counts as well
 	private static final float HISTOGRAM_HEAP_RATIO = 0.8f;
-	private static final long HISTOGRAM_INTERVAL = 15 * 60 * 1000L;
+	private static final long HISTOGRAM_INTERVAL = 30 * 60 * 1000L;
 	// worth knowing what the smaps walk actually costs on a device, not only when it is too slow
 	private static final long SUMMARY_REPORT_MS = 25;
 
@@ -150,7 +149,7 @@ public class MemoryLog {
 			sb.append(sample).append('\n');
 			append(getFile(app), sb.toString());
 			setProcessStateSummary(app, buildProcessSummary(time, used, max));
-		} catch (RuntimeException e) {
+		} catch (RuntimeException | OutOfMemoryError e) {
 			log.error(e);
 		}
 	}
@@ -507,7 +506,7 @@ public class MemoryLog {
 	}
 
 	// a histogram is worth taking when the heap is large enough to be worth explaining, and it
-	// costs seconds, so it happens rarely and only when a person turned it on
+	// costs seconds, so it happens at most twice an hour and can be turned off
 	@Nullable
 	private static String maybeCollectHistogram(@NonNull OsmandApplication app, long time, long used) {
 		long max = Runtime.getRuntime().maxMemory();
@@ -517,19 +516,16 @@ public class MemoryLog {
 		if (lastHistogramTime != 0 && time - lastHistogramTime < HISTOGRAM_INTERVAL) {
 			return null;
 		}
-		try {
-			OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
-			if (plugin == null || !plugin.AUTO_HEAP_HISTOGRAM.get()) {
-				return null;
-			}
-		} catch (RuntimeException e) {
+		if (!app.getSettings().AUTO_HEAP_HISTOGRAM.get()) {
 			return null;
 		}
 		lastHistogramTime = time;
 		try {
 			HeapDump.collect(app);
 			return "histogram=taken";
-		} catch (IOException | RuntimeException e) {
+		} catch (IOException | RuntimeException | OutOfMemoryError e) {
+			// the heap is nearly full by definition here, so running out while writing the
+			// histogram is expected rather than exceptional
 			log.error(e);
 			return "histogram=failed";
 		}
