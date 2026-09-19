@@ -5,9 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import com.vividsolutions.jts.geom.Coordinate;
@@ -122,7 +124,9 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	private void recreateBitmaps() {
 		selectedImage = getScaledBitmap(R.drawable.map_panoramax_location);
 		headingImage = getScaledBitmap(R.drawable.map_panoramax_location_view_angle);
-		point = getScaledBitmap(R.drawable.map_panoramax_photo_dot);
+		// The dot is a vector, which BitmapFactory cannot decode, so it is rasterized here.
+		Drawable dot = AppCompatResources.getDrawable(getContext(), R.drawable.map_panoramax_photo_dot);
+		point = dot != null ? AndroidUtils.createScaledBitmap(dot, getTextScale()) : null;
 	}
 
 	@Override
