@@ -19,8 +19,8 @@ import kotlin.jvm.JvmStatic
  * path to search along, what to match, and how much of it to keep.
  *
  * Copy of `BinaryMapIndexReader.SearchRequest` in OsmAnd-java, which is one class for every kind of
- * search. The filters over map and poi types, and the read statistics, come with the sections they
- * belong to; everything a search needs to say where and what to look for is here.
+ * search. The poi type filters and the read statistics come with the sections they belong to;
+ * everything a search needs to say where and what to look for is here.
  *
  * Not thread safe: one request belongs to one search.
  */
@@ -74,6 +74,10 @@ class SearchRequest<T> {
 
 	@JvmField
 	var matcherMode: KStringMatcherMode = KStringMatcherMode.CHECK_STARTS_FROM_SPACE
+
+	/** Map search only: which type numbers are worth reading an object for. */
+	@JvmField
+	var searchFilter: SearchFilter? = null
 
 	// cache information
 	@JvmField
@@ -277,6 +281,28 @@ class SearchRequest<T> {
 
 	companion object {
 		const val ZOOM_TO_SEARCH_POI: Int = 16
+
+		@JvmStatic
+		@JvmOverloads
+		fun buildSearchRequest(
+			sleft: Int,
+			sright: Int,
+			stop: Int,
+			sbottom: Int,
+			zoom: Int,
+			searchFilter: SearchFilter?,
+			resultMatcher: ResultMatcher<BinaryMapDataObject>? = null
+		): SearchRequest<BinaryMapDataObject> {
+			val request = SearchRequest<BinaryMapDataObject>()
+			request.left = sleft
+			request.right = sright
+			request.top = stop
+			request.bottom = sbottom
+			request.zoom = zoom
+			request.searchFilter = searchFilter
+			request.resultMatcher = resultMatcher
+			return request
+		}
 
 		@JvmStatic
 		@JvmOverloads
