@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -272,6 +273,24 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 					})
 					.create();
 			items.add(addToTrackGroupItem);
+
+			BaseBottomSheetItem addToNavigationItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_navigation_outlined))
+					.setTitle(getString(R.string.add_to_navigation))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(view -> {
+						BaseFavoriteListFragment fragment = getFavoriteListFragment();
+						if (fragment != null) {
+							List<FavouritePoint> points = new ArrayList<>();
+							for (FavoriteGroup favoriteGroup : groupsToAdd) {
+								points.addAll(favoriteGroup.getPoints());
+							}
+							FavoriteMenu.addToNavigation(app, requireActivity(), points, fragment);
+							dismiss();
+						}
+					})
+					.create();
+			items.add(addToNavigationItem);
 		}
 		items.add(new DividerHalfItem(getContext()));
 
