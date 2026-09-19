@@ -491,6 +491,8 @@ class TurnType(
 			"sharp_right" -> TSHR
 			"sharp_left" -> TSHL
 			"reverse" -> TU
+			// not an OSM value: a u turn to the right, left-side navigation
+			"reverse_right" -> TRU
 			// unknown string
 			else -> C
 		}
@@ -513,6 +515,18 @@ class TurnType(
 				}
 			}
 			return turn
+		}
+
+		@JvmStatic
+		fun hasActiveLane(lanes: IntArray?): Boolean {
+			if (lanes != null) {
+				for (lane in lanes) {
+					if (lane % 2 == 1) {
+						return true
+					}
+				}
+			}
+			return false
 		}
 	}
 }

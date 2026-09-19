@@ -95,7 +95,13 @@ public class RouteResultPreparationTest {
             }
         }
         
-        String fileName = "src/test/resources/Turn_lanes_test.obf";
+        Map<String, String> params = te.getParams();
+        if (params == null) {
+            params = new HashMap<>();
+        }
+        // a case can bring its own small map instead of growing the shared one
+        String fileName = params.containsKey("map") ? "src/test/resources/turn_lanes/" + params.get("map")
+                : "src/test/resources/Turn_lanes_test.obf";
         File fl = new File(fileName);
     
         RandomAccessFile raf = new RandomAccessFile(fl, "r");
@@ -103,10 +109,6 @@ public class RouteResultPreparationTest {
         RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
         if (useNative) {
             Objects.requireNonNull(nativeLibrary).initMapFile(fl.getAbsolutePath(), true);
-        }
-        Map<String, String> params = te.getParams();
-        if (params == null) {
-            params = new HashMap<>();
         }
         params.put("car", "true");
         RoutingMemoryLimits memoryLimit = new RoutingMemoryLimits(
