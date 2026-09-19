@@ -50,11 +50,23 @@ public class HeapHistogram {
 	};
 	private static final int[] PRIMITIVE_SIZES = {0, 0, 0, 0, 1, 2, 4, 8, 1, 2, 4, 8};
 
+	// arrays smaller than this are left unattributed: they are many and carry few bytes, and a
+	// map over all of them would be a larger allocation than anything this class is measuring
+	private static final int BIG_ARRAY_BYTES = 1024;
+
 	private final Map<Long, String> strings = new HashMap<>();
 	private final Map<Long, Long> classNames = new HashMap<>();
 	private final Map<Long, long[]> byClass = new HashMap<>();
 	private final Map<Integer, long[]> byHeap = new HashMap<>();
 	private final Map<Long, Long> heapNames = new HashMap<>();
+	// array object id -> {bytes, the key naming its kind}
+	private final Map<Long, long[]> bigArrays = new HashMap<>();
+	private final Map<Long, Long> superClasses = new HashMap<>();
+	private final Map<Long, byte[]> declaredFields = new HashMap<>();
+	private final Map<Long, int[]> objectFieldOffsets = new HashMap<>();
+	// "owner class -> array kind" -> {bytes, count}
+	private final Map<String, long[]> owners = new HashMap<>();
+	private byte[] instance = new byte[4096];
 
 	private int idSize = 4;
 	private int currentHeap;
@@ -63,12 +75,19 @@ public class HeapHistogram {
 	public static String analyze(@NonNull File hprof) throws IOException {
 		HeapHistogram histogram = new HeapHistogram();
 		try (InputStream in = new BufferedInputStream(new FileInputStream(hprof), 256 * 1024)) {
-			histogram.read(new Reader(in));
+			histogram.read(new Reader(in), false);
+		}
+		if (!histogram.bigArrays.isEmpty()) {
+			// a second walk finds which object holds each large array: the first cannot, because
+			// an array is written to the dump before whatever points at it
+			try (InputStream in = new BufferedInputStream(new FileInputStream(hprof), 256 * 1024)) {
+				histogram.read(new Reader(in), true);
+			}
 		}
 		return histogram.format();
 	}
 
-	private void read(@NonNull Reader in) throws IOException {
+	private void read(@NonNull Reader in, boolean secondPass) throws IOException {
 		// "JAVA PROFILE 1.0.3\0", then the identifier size and a timestamp
 		while (in.readByte() != 0) {
 			// the version string, its length is not given anywhere
@@ -87,18 +106,22 @@ public class HeapHistogram {
 			long end = in.position() + length;
 			switch (tag) {
 				case TAG_STRING:
-					long id = in.readId(idSize);
-					strings.put(id, in.readString((int) (end - in.position())));
+					if (!secondPass) {
+						long id = in.readId(idSize);
+						strings.put(id, in.readString((int) (end - in.position())));
+					}
 					break;
 				case TAG_LOAD_CLASS:
-					in.skip(4);
-					long classId = in.readId(idSize);
-					in.skip(4);
-					classNames.put(classId, in.readId(idSize));
+					if (!secondPass) {
+						in.skip(4);
+						long classId = in.readId(idSize);
+						in.skip(4);
+						classNames.put(classId, in.readId(idSize));
+					}
 					break;
 				case TAG_HEAP_DUMP:
 				case TAG_HEAP_DUMP_SEGMENT:
-					readHeapDump(in, end);
+					readHeapDump(in, end, secondPass);
 					break;
 				default:
 					break;
@@ -109,7 +132,7 @@ public class HeapHistogram {
 		}
 	}
 
-	private void readHeapDump(@NonNull Reader in, long end) throws IOException {
+	private void readHeapDump(@NonNull Reader in, long end, boolean secondPass) throws IOException {
 		while (in.position() < end) {
 			int sub = in.readByte() & 0xff;
 			switch (sub) {
@@ -117,29 +140,43 @@ public class HeapHistogram {
 					in.skip(idSize + 4);
 					long cls = in.readId(idSize);
 					long size = in.readInt() & 0xffffffffL;
-					count(cls, size + idSize + OBJECT_OVERHEAD);
-					in.skip(size);
+					if (secondPass) {
+						attributeArrays(in, cls, size);
+					} else {
+						count(cls, size + idSize + OBJECT_OVERHEAD);
+						in.skip(size);
+					}
 					break;
 				}
 				case SUB_OBJECT_ARRAY_DUMP: {
-					in.skip(idSize + 4);
+					long arrayId = in.readId(idSize);
+					in.skip(4);
 					long num = in.readInt() & 0xffffffffL;
 					long elementClass = in.readId(idSize);
-					count(-elementClass, num * idSize + ARRAY_OVERHEAD);
+					long bytes = num * idSize + ARRAY_OVERHEAD;
+					if (!secondPass) {
+						count(-elementClass, bytes);
+						rememberBigArray(arrayId, bytes, -elementClass);
+					}
 					in.skip(num * idSize);
 					break;
 				}
 				case SUB_PRIMITIVE_ARRAY_DUMP: {
-					in.skip(idSize + 4);
+					long arrayId = in.readId(idSize);
+					in.skip(4);
 					long num = in.readInt() & 0xffffffffL;
 					int type = in.readByte() & 0xff;
 					int elementSize = type < PRIMITIVE_SIZES.length ? PRIMITIVE_SIZES[type] : 1;
-					count(Long.MIN_VALUE + type, num * elementSize + ARRAY_OVERHEAD);
+					long bytes = num * elementSize + ARRAY_OVERHEAD;
+					if (!secondPass) {
+						count(Long.MIN_VALUE + type, bytes);
+						rememberBigArray(arrayId, bytes, Long.MIN_VALUE + type);
+					}
 					in.skip(num * elementSize);
 					break;
 				}
 				case SUB_CLASS_DUMP:
-					skipClassDump(in);
+					readClassDump(in, secondPass);
 					break;
 				case SUB_HEAP_DUMP_INFO: {
 					currentHeap = in.readInt();
@@ -182,8 +219,11 @@ public class HeapHistogram {
 		}
 	}
 
-	private void skipClassDump(@NonNull Reader in) throws IOException {
-		in.skip(idSize + 4L + idSize * 6L + 4L);
+	private void readClassDump(@NonNull Reader in, boolean secondPass) throws IOException {
+		long classId = in.readId(idSize);
+		in.skip(4);
+		long superClass = in.readId(idSize);
+		in.skip(idSize * 5L + 4L);
 		int constants = in.readShort() & 0xffff;
 		for (int i = 0; i < constants; i++) {
 			in.skip(2);
@@ -195,7 +235,101 @@ public class HeapHistogram {
 			in.skip(valueSize(in.readByte() & 0xff));
 		}
 		int fields = in.readShort() & 0xffff;
-		in.skip((idSize + 1L) * fields);
+		if (secondPass) {
+			in.skip((idSize + 1L) * fields);
+			return;
+		}
+		byte[] types = new byte[fields];
+		for (int i = 0; i < fields; i++) {
+			in.skip(idSize);
+			types[i] = (byte) in.readByte();
+		}
+		superClasses.put(classId, superClass);
+		declaredFields.put(classId, types);
+	}
+
+	private void rememberBigArray(long arrayId, long bytes, long kind) {
+		if (bytes >= BIG_ARRAY_BYTES) {
+			bigArrays.put(arrayId, new long[] {bytes, kind});
+		}
+	}
+
+	/** Reads one instance and credits any large array it points at to this instance's class. */
+	private void attributeArrays(@NonNull Reader in, long classId, long size) throws IOException {
+		int[] offsets = offsetsOf(classId);
+		if (offsets.length == 0 || size > Integer.MAX_VALUE) {
+			in.skip(size);
+			return;
+		}
+		int length = (int) size;
+		if (instance.length < length) {
+			instance = new byte[length];
+		}
+		in.readFully(instance, length);
+		for (int offset : offsets) {
+			if (offset + idSize > length) {
+				break;
+			}
+			long target = readId(instance, offset);
+			if (target == 0) {
+				continue;
+			}
+			long[] array = bigArrays.remove(target);
+			if (array != null) {
+				String key = className(classId) + " -> " + nameOf(array[1]);
+				long[] owner = owners.get(key);
+				if (owner == null) {
+					owner = new long[2];
+					owners.put(key, owner);
+				}
+				owner[0] += array[0];
+				owner[1]++;
+			}
+		}
+	}
+
+	private long readId(@NonNull byte[] bytes, int offset) {
+		long value = 0;
+		for (int i = 0; i < idSize; i++) {
+			value = (value << 8) | (bytes[offset + i] & 0xff);
+		}
+		return value;
+	}
+
+	/** Offsets of the object fields of a class, its own first and then its superclasses'. */
+	@NonNull
+	private int[] offsetsOf(long classId) {
+		int[] cached = objectFieldOffsets.get(classId);
+		if (cached != null) {
+			return cached;
+		}
+		int[] offsets = new int[16];
+		int found = 0;
+		int offset = 0;
+		long current = classId;
+		while (current != 0) {
+			byte[] types = declaredFields.get(current);
+			if (types == null) {
+				break;
+			}
+			for (byte type : types) {
+				if (type == 2) {
+					if (found == offsets.length) {
+						int[] bigger = new int[found * 2];
+						System.arraycopy(offsets, 0, bigger, 0, found);
+						offsets = bigger;
+					}
+					offsets[found++] = offset;
+				}
+				offset += valueSize(type);
+			}
+			Long superClass = superClasses.get(current);
+			current = superClass != null ? superClass : 0;
+		}
+		int[] result = new int[found];
+		System.arraycopy(offsets, 0, result, 0, found);
+		objectFieldOffsets.put(classId, result);
+		return result;
 	}
 
 	private int valueSize(int type) {
@@ -261,6 +395,26 @@ public class HeapHistogram {
 			sb.append("heap ").append(name != null ? name : String.valueOf(heap.getKey()));
 			sb.append(' ').append(heap.getValue()[1] / 1024).append("K ");
 			sb.append(heap.getValue()[0]).append(" objects\n");
+		}
+		if (!owners.isEmpty()) {
+			List<Map.Entry<String, long[]>> held = new ArrayList<>(owners.entrySet());
+			Collections.sort(held, (a, b) -> Long.compare(b.getValue()[0], a.getValue()[0]));
+			sb.append("--- bytesK count holder of arrays >= ").append(BIG_ARRAY_BYTES / 1024).append("K\n");
+			int written = 0;
+			for (Map.Entry<String, long[]> entry : held) {
+				if (entry.getValue()[0] < 64 * 1024 || written++ >= 40) {
+					break;
+				}
+				sb.append(entry.getValue()[0] / 1024).append('\t');
+				sb.append(entry.getValue()[1]).append('\t');
+				sb.append(entry.getKey()).append('\n');
+			}
+			long unattributed = 0;
+			for (long[] array : bigArrays.values()) {
+				unattributed += array[0];
+			}
+			sb.append("unattributed\t").append(bigArrays.size()).append('\t');
+			sb.append(unattributed / 1024).append("K still held by arrays or roots\n");
 		}
 		sb.append("--- bytesK count class\n");
 		for (Map.Entry<Long, long[]> entry : entries) {
@@ -331,6 +485,18 @@ public class HeapHistogram {
 				return value;
 			}
 			return readInt() & 0xffffffffL;
+		}
+
+		void readFully(@NonNull byte[] into, int length) throws IOException {
+			int read = 0;
+			while (read < length) {
+				int step = in.read(into, read, length - read);
+				if (step < 0) {
+					throw new EOFException();
+				}
+				read += step;
+			}
+			position += length;
 		}
 
 		@NonNull

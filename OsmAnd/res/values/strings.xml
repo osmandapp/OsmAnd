@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="collect_heap_histogram">Collect heap histogram</string>
-	<string name="collect_heap_histogram_descr">Dump the java heap, count the objects of every class in it and keep only the counts. The dump itself is deleted right away and never leaves the device; the counts are attached to the next problem report.</string>
+	<string name="java_memory">Java memory</string>
+	<string name="ais_load_data_descr">Replay AIS messages from a recorded file.</string>
+	<string name="map_rendering">Map rendering</string>
+	<string name="simulate_ui">Simulate first start</string>
+	<string name="simulate_ui_descr">First run, free version banner, discount sheet.</string>
+	<string name="heap_dump">Heap dump</string>
+	<string name="heap_dump_descr">Count objects in the java heap.</string>
+	<string name="heap_dump_collect">Collect &amp; analyze now</string>
+	<string name="heap_dump_collect_descr">Takes a few seconds, shows the result.</string>
+	<string name="heap_dump_share">Share report</string>
+	<string name="heap_dump_share_descr">Sends the last report to the server.</string>
+	<string name="heap_dump_auto">Collect on high usage</string>
+	<string name="heap_dump_auto_descr">Over 350 MB, once per 15 min.</string>
+	<string name="visualizing_button_grid_descr">Cells, slots, frames and logs.</string>
 <!--
 	README:
 	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
@@ -659,7 +671,7 @@
     <string name="hmd_promo_description_years">Free access to features including unlimited map downloads, 3D relief etc. for %1$s years</string>
     <string name="shared_string_road_exit">Exit</string>
     <string name="popular_places_nearby">Popular places nearby</string>
-    <string name="ais_load_data">Load AIS data from file</string>
+    <string name="ais_load_data">Simulate vessel traffic</string>
     <string name="ais_address_settings">IP address settings</string>
     <string name="ais_address_settings_description">Choose the NMEA protocol (UDP/TCP) and specify the corresponding addresses and ports</string>
     <string name="ais_nmea_protocol">Protocol for NMEA data reception</string>

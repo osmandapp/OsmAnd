@@ -44,7 +44,7 @@ public class HeapDump {
 	}
 
 	/**
-	 * @return a short line describing what was written, for showing to the person who asked
+	 * @return the histogram that was written, for showing to the person who asked
 	 * @throws IOException when the dump could not be taken or read
 	 */
 	@NonNull
@@ -72,8 +72,7 @@ public class HeapDump {
 				out.write(header(app, dump.length(), dumped, analyzed));
 				out.write(histogram);
 			}
-			return "Heap histogram written: " + histogramFile.length() / 1024 + " KB from a "
-					+ dump.length() / (1024 * 1024) + " MB dump, " + (dumped + analyzed) / 1000 + " s";
+			return header(app, dump.length(), dumped, analyzed) + histogram;
 		} finally {
 			if (dump.exists() && !dump.delete()) {
 				log.error("Could not delete the heap dump at " + dump.getAbsolutePath());

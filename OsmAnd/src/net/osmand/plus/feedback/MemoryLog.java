@@ -16,6 +16,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
@@ -68,9 +69,9 @@ public class MemoryLog {
 	private static final long BUSY_RSS_GROWTH_KB = 100 * 1024;
 	// an activity destroyed longer ago than this and still not collected is counted as retained
 	private static final long RETAINED_AFTER = 60 * 1000L;
-	// with the full census a sample is one to two kilobytes; this holds days of them and
-	// compresses to a small fraction of that inside the crash report
-	private static final long MAX_FILE_SIZE = 64 * 1024 * 1024;
+	// a sample is a few hundred bytes, so this holds days of them, and as text it compresses to
+	// a couple of hundred kilobytes inside the crash report
+	private static final long MAX_FILE_SIZE = 4 * 1024 * 1024;
 	private static final int ROTATE_BUFFER = 256 * 1024;
 	private static final int THREAD_GROUPS = 8;
 	private static final long CLOCK_TICKS_PER_SECOND = 100;
@@ -78,6 +79,9 @@ public class MemoryLog {
 	// Debug.getMemoryInfo() walks smaps, which is not free on a process of this size
 	private static final int SUMMARY_EVERY = 2;
 	private static final long SUMMARY_BUDGET_MS = 200;
+	// a heap smaller than this explains itself; below it a histogram is not worth seconds of freeze
+	private static final long HISTOGRAM_HEAP_THRESHOLD = 350L * 1024 * 1024;
+	private static final long HISTOGRAM_INTERVAL = 15 * 60 * 1000L;
 	// worth knowing what the smaps walk actually costs on a device, not only when it is too slow
 	private static final long SUMMARY_REPORT_MS = 25;
 
@@ -108,6 +112,7 @@ public class MemoryLog {
 	private static long previousRead;
 	private static long previousWrite;
 	private static boolean summaryDue;
+	private static long lastHistogramTime;
 	private static int trimLevel = -1;
 	private static int trimCount;
 
@@ -191,6 +196,10 @@ public class MemoryLog {
 		String busy = busyWith(app);
 		if (busy != null) {
 			sb.append(" busy=").append(busy);
+		}
+		String histogram = maybeCollectHistogram(app, time, used);
+		if (histogram != null) {
+			sb.append(' ').append(histogram);
 		}
 		return sb.toString();
 	}
@@ -492,6 +501,34 @@ public class MemoryLog {
 			sb.append(',');
 		}
 		sb.append(name).append(':').append(value);
+	}
+
+	// a histogram is worth taking when the heap is large enough to be worth explaining, and it
+	// costs seconds, so it happens rarely and only when a person turned it on
+	@Nullable
+	private static String maybeCollectHistogram(@NonNull OsmandApplication app, long time, long used) {
+		if (used < HISTOGRAM_HEAP_THRESHOLD) {
+			return null;
+		}
+		if (lastHistogramTime != 0 && time - lastHistogramTime < HISTOGRAM_INTERVAL) {
+			return null;
+		}
+		try {
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
+			if (plugin == null || !plugin.AUTO_HEAP_HISTOGRAM.get()) {
+				return null;
+			}
+		} catch (RuntimeException e) {
+			return null;
+		}
+		lastHistogramTime = time;
+		try {
+			HeapDump.collect(app);
+			return "histogram=taken";
+		} catch (IOException | RuntimeException e) {
+			log.error(e);
+			return "histogram=failed";
+		}
 	}
 
 	// what the app was doing when the sample was taken, so that a heap spike can be told
