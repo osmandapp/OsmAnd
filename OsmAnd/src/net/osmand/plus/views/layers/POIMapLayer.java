@@ -56,6 +56,7 @@ import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.render.TravelRendererHelper.OnFileVisibilityChangeListener;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.clickable.ClickableWayHelper;
@@ -76,6 +77,7 @@ import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.search.core.SearchResult;
 import net.osmand.shared.util.ImageLoaderCallback;
 import net.osmand.shared.util.LoadingImage;
 import net.osmand.shared.util.NetworkImageLoader;
@@ -557,9 +559,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			if (id == null) {
 				id = RenderingIcons.getIconNameForAmenity(app, amenity);
 			}
-			Integer iconId = id != null ? RenderingIcons.getResId(id) : null;
+			int iconId = RenderingIcons.getPointIconId(getContext(), id, R.drawable.mx_special_marker);
 			PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
-					getContext(), getColor(amenity), true, iconId != null ? iconId : R.drawable.mx_special_marker);
+					getContext(), getColor(amenity), true, iconId);
 			pointImageDrawable.setAlpha(0.8f);
 			Bitmap bitmap = app.getPoiTypes().isOtherCategory(amenity.getType())
 					? pointImageDrawable.getSmallMergedBitmap(getTextScale())
@@ -627,7 +629,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public void collectAmenitiesFromPoint(@NonNull MapSelectionResult result) {
 		PointF point = result.getPoint();
 		RotatedTileBox tileBox = result.getTileBox();
-		List<Amenity> objects = data.getDisplayedResults();
+		List<Amenity> objects = customObjectsDelegate != null
+				? customObjectsDelegate.getMapObjects() : data.getDisplayedResults();
 
 		if (tileBox.getZoom() >= START_ZOOM && !Algorithms.isEmpty(objects)) {
 			MapRendererView mapRenderer = getMapRenderer();
@@ -911,8 +914,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 							id = RenderingIcons.getIconNameForAmenity(app, o);
 						}
 						if (id != null) {
+							int iconId = RenderingIcons.getPointIconId(getContext(), id, R.drawable.mx_special_marker);
 							PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
-									getContext(), getColor(o), true, RenderingIcons.getResId(id));
+									getContext(), getColor(o), true, iconId);
 							pointImageDrawable.setAlpha(0.8f);
 							pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 						}
@@ -1055,8 +1059,20 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Override
 	public PointDescription getObjectName(Object o) {
+		SearchResult searchResult = getSearchResult(o);
+		if (searchResult != null) {
+			return QuickSearchListItem.getPointDescriptionObject(app, searchResult).first;
+		}
 		Amenity amenity = getAmenity(o);
 		return amenity != null ? new PointDescription(POINT_TYPE_POI, getAmenityName(amenity)) : null;
+	}
+
+	@Nullable
+	private SearchResult getSearchResult(@Nullable Object object) {
+		if (object instanceof SearchResultAmenity searchResultAmenity) {
+			return searchResultAmenity.getSearchResult();
+		}
+		return object instanceof SearchResult searchResult ? searchResult : null;
 	}
 
 	@Nullable
@@ -1105,12 +1121,20 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			return renderedObject.getLatLon();
 		} else if (object instanceof MapObject mapObject) {
 			return mapObject.getLocation();
+		} else if (object instanceof SearchResult searchResult) {
+			return searchResult.location != null ? searchResult.location
+					: searchResult.object instanceof MapObject mapObject ? mapObject.getLocation() : null;
 		}
 		return null;
 	}
 
 	@Override
 	public boolean showMenuAction(@Nullable Object object) {
+		SearchResult searchResult = getSearchResult(object);
+		if (searchResult != null) {
+			ContextMenuLayer contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
+			return contextMenuLayer != null && contextMenuLayer.showContextMenu(searchResult);
+		}
 		Amenity amenity = getAmenity(object);
 		MapActivity activity = view.getMapActivity();
 		if (activity != null && amenity != null) {
@@ -1340,5 +1364,19 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	@Override
 	public long getPointOrder(Object object) {
 		return isTopPlace(object) ? getTopPlaceBaseOrder() : getPointsOrder();
+	}
+
+	public static class SearchResultAmenity extends Amenity {
+
+		private final SearchResult searchResult;
+
+		public SearchResultAmenity(@NonNull SearchResult searchResult) {
+			this.searchResult = searchResult;
+		}
+
+		@NonNull
+		public SearchResult getSearchResult() {
+			return searchResult;
+		}
 	}
 }
