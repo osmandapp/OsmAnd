@@ -19,6 +19,7 @@ import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnFileUploadCallback;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -41,8 +42,13 @@ public class FeedbackHelper {
 	private static final Log log = PlatformUtil.getLog(FeedbackHelper.class);
 
 	public static final String EXCEPTION_PATH = "exception.log";
+	private static final String STATE_PATH = "state.txt";
+	private static final String EXIT_INFO_PATH = "exit_info.txt";
 	private static final String CRASH_REPORT_URL = "https://osmand.net/api/crash-report";
 	private static final int MAX_SYSTEM_CRASH_LOGS_IN_REPORT = 3;
+	// the memory log is kept at this size on disk too, so the whole ring travels; as text it
+	// compresses to a couple of hundred kilobytes
+	private static final long MAX_MEMORY_LOG_IN_REPORT = 4 * 1024 * 1024;
 	private static final long MAX_EXCEPTION_LOG_IN_REPORT = 10 * 1024 * 1024;
 
 	private final OsmandApplication app;
@@ -152,6 +158,19 @@ public class FeedbackHelper {
 
 	private void writeCrashReport(@NonNull OutputStream outputStream) throws IOException {
 		ZipOutputStream zip = new ZipOutputStream(outputStream);
+		putZipEntry(zip, STATE_PATH, CrashReportState.build(app).getBytes());
+		String exitInfo = nativeCrashHandler.buildExitInfo();
+		if (!Algorithms.isEmpty(exitInfo)) {
+			putZipEntry(zip, EXIT_INFO_PATH, exitInfo.getBytes());
+		}
+		File memoryLog = MemoryLog.getFile(app);
+		if (FileUtils.isNonEmptyFile(memoryLog)) {
+			putZipEntry(zip, memoryLog, MAX_MEMORY_LOG_IN_REPORT);
+		}
+		File heapHistogram = HeapDump.getHistogramFile(app);
+		if (FileUtils.isNonEmptyFile(heapHistogram)) {
+			putZipEntry(zip, heapHistogram, MAX_MEMORY_LOG_IN_REPORT);
+		}
 		File crashLog = getCrashLog();
 		if (crashLog != null) {
 			putZipEntry(zip, crashLog, MAX_EXCEPTION_LOG_IN_REPORT);
@@ -161,6 +180,12 @@ public class FeedbackHelper {
 			putZipEntry(zip, file, Long.MAX_VALUE);
 		}
 		zip.finish();
+	}
+
+	private static void putZipEntry(@NonNull ZipOutputStream zip, @NonNull String name, @NonNull byte[] content) throws IOException {
+		zip.putNextEntry(new ZipEntry(name));
+		zip.write(content);
+		zip.closeEntry();
 	}
 
 	// writes at most the last maxLength bytes of the file

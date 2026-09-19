@@ -86,6 +86,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public static final String DOWNLOAD_BUILD_NAME = "osmandToInstall.apk";
 
 	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
+	public final OsmandPreference<Boolean> AUTO_HEAP_HISTOGRAM;
 	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
 	public final OsmandPreference<Boolean> SAVE_LOCATION_PROVIDER_TO_GPX;
@@ -122,6 +123,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.USE_SPATIAL_TEXT_SEARCH);
 
 		USE_RASTER_SQLITEDB = registerBooleanPreference("use_raster_sqlitedb", false).makeGlobal().makeShared().cache();
+		AUTO_HEAP_HISTOGRAM = registerBooleanPreference("auto_heap_histogram", true).makeGlobal().makeShared().cache();
 		SAVE_BEARING_TO_GPX = registerBooleanPreference("save_bearing_to_gpx", false).makeGlobal().makeShared().cache();
 		SAVE_HEADING_TO_GPX = registerBooleanPreference("save_heading_to_gpx", true).makeGlobal().makeShared().cache();
 		SAVE_LOCATION_PROVIDER_TO_GPX = registerBooleanPreference("save_location_provider_to_gpx", true).makeGlobal().makeShared().cache();
