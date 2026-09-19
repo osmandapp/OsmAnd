@@ -10,11 +10,18 @@ import kotlin.test.Test
 import kotlin.time.TimeSource
 
 /**
- * How long the shared copy takes to read a map section and a poi section, which is the question
- * the port is asked: whether an obf can be searched on Kotlin/Native without the C++ core.
+ * How long the shared copy takes to read an obf file, which is the question the port is asked:
+ * whether one can be read on Kotlin/Native without the C++ core.
+ *
+ * An obf file is a handful of sections, and this times the two the port has brought over so far.
+ * The **map section** is what draws the map: roads, buildings and areas with their geometry and
+ * tags, written once per zoom range. The **poi section** is what search reads: amenities, each a
+ * point with a type and its tags. The same thing is often in both - a bakery is a point in the poi
+ * section and may be a building outline in the map section - so the two counts do not add up to
+ * "everything in the file", and neither is a subset of the other.
  *
  * The same corpus and the same phases run through the java reader and through this copy on the jvm
- * in `MapSectionBenchmarkTest` and `PoiSearchBenchmarkTest` in OsmAnd-java, so the columns can be
+ * in `ObfReaderBenchmarkTest` in OsmAnd-java, so the columns can be
  * put side by side. The
  * copy is a straight port of java's algorithm, so nothing here defends a design decision; what it
  * answers is the cost of the collections that replaced trove, of the strings java interns and this
@@ -24,47 +31,47 @@ import kotlin.time.TimeSource
  * normal run**: it only does anything when `OSMAND_MAP_BENCHMARK` is set, since a Kotlin/Native
  * test binary cannot be told to run an ignored test. On the jvm, from `android`:
  * ```
- * OSMAND_MAP_BENCHMARK=1 ./gradlew --no-daemon :OsmAnd-shared:jvmTest --tests "*MapReaderBenchmarkTest" -i
+ * OSMAND_MAP_BENCHMARK=1 ./gradlew --no-daemon :OsmAnd-shared:jvmTest --tests "*ObfReaderBenchmarkTest" -i
  * ```
  * On Kotlin/Native only the **release** binary says anything about speed:
  * ```
  * ./gradlew :OsmAnd-shared:linkReleaseTestIosSimulatorArm64
  * cd OsmAnd-shared && SIMCTL_CHILD_OSMAND_MAP_BENCHMARK=1 xcrun simctl spawn --standalone <udid> \
- *   build/bin/iosSimulatorArm64/releaseTest/test.kexe --ktest_filter='net.osmand.shared.binary.MapReaderBenchmarkTest.*'
+ *   build/bin/iosSimulatorArm64/releaseTest/test.kexe --ktest_filter='net.osmand.shared.binary.ObfReaderBenchmarkTest.*'
  * ```
  * The native binary does not run in the repository, so it has to be told where the maps are with
  * `SIMCTL_CHILD_OSMAND_OBF_DIRECTORY`.
  *
- * Over the 26 obf files of the tests, reading every object of every zoom level once:
+ * Over the 26 obf files of the tests:
  * ```
- * phase     java (jvm)   copy (jvm)   copy (native)
- * open         4.6 ms       3.8 ms          2.4 ms
- * search      15.8 ms       9.5 ms         22.0 ms     47393 map objects
- * poi           2.1 ms      2.3 ms          3.5 ms      6285 amenities
+ * what                            java (jvm)   copy (jvm)   copy (native)   count
+ * open the files                      4.3 ms       3.7 ms          2.4 ms      26
+ * read every map object, all zooms   15.1 ms       9.5 ms         22.0 ms   47393
+ * read every amenity                  1.9 ms       2.0 ms          3.6 ms    6285
  * ```
  * Kotlin/Native reads a map object in about the time the java reader takes on the jvm, and in
  * about twice the time this same code takes there; an amenity costs it only half again as much.
- * The open column is not a like for like: java also reads the address and transport headers,
- * which the copy skips.
+ * Opening is not a like for like: java also reads the address and transport headers, which the
+ * copy skips.
  */
-class MapReaderBenchmarkTest {
+class ObfReaderBenchmarkTest {
 
 	@Test
-	fun benchmarkMapSection() {
+	fun benchmarkObfReader() {
 		if (testEnvironment("OSMAND_MAP_BENCHMARK") == null) {
-			println("MapReaderBenchmarkTest: set OSMAND_MAP_BENCHMARK to run")
+			println("ObfReaderBenchmarkTest: set OSMAND_MAP_BENCHMARK to run")
 			return
 		}
 		val files = files()
 		if (files.isEmpty()) {
-			println("MapReaderBenchmarkTest: no obf files found, looked in ${directories()}")
+			println("ObfReaderBenchmarkTest: no obf files found, looked in ${directories()}")
 			return
 		}
 		println("")
-		println("### map section, shared copy on ${testPlatformName()}, ${files.size} files, " +
+		println("### obf reader, shared copy on ${testPlatformName()}, ${files.size} files, " +
 				"$WARMUP_ROUNDS warmup / $MEASURED_ROUNDS measured, best time")
 		println("")
-		println("  ${"phase".padEnd(10)} ${"ms".padStart(9)} ${"objects".padStart(9)} ${"us/object".padStart(10)}")
+		println("  ${"what".padEnd(34)} ${"ms".padStart(9)} ${"count".padStart(9)} ${"us each".padStart(9)}")
 
 		var openMs = Double.MAX_VALUE
 		repeat(WARMUP_ROUNDS + MEASURED_ROUNDS) { round ->
@@ -76,7 +83,7 @@ class MapReaderBenchmarkTest {
 				openMs = ms
 			}
 		}
-		println("  ${"open".padEnd(10)} ${openMs.format1().padStart(9)} ${"".padStart(9)} ${"".padStart(10)}")
+		row("open the files", openMs, files.size, false)
 
 		var searchMs = Double.MAX_VALUE
 		var objects = 0
@@ -99,12 +106,11 @@ class MapReaderBenchmarkTest {
 				objects = read
 			}
 		}
-		println("  ${"search".padEnd(10)} ${searchMs.format1().padStart(9)} ${objects.toString().padStart(9)} " +
-				(searchMs * 1000 / objects).format2().padStart(10))
+		row("read every map object, all zooms", searchMs, objects, true)
 
 		val poiTypes = poiTypes()
 		if (poiTypes == null) {
-			println("  poi        poi_types.xml not found, skipped")
+			println("  read every amenity                 poi_types.xml not found, skipped")
 			println("")
 			return
 		}
@@ -131,9 +137,14 @@ class MapReaderBenchmarkTest {
 				amenities = read
 			}
 		}
-		println("  ${"poi".padEnd(10)} ${poiMs.format1().padStart(9)} ${amenities.toString().padStart(9)} " +
-				(poiMs * 1000 / amenities).format2().padStart(10))
+		row("read every amenity", poiMs, amenities, true)
 		println("")
+	}
+
+	private fun row(what: String, ms: Double, count: Int, perItem: Boolean) {
+		val each = if (perItem && count > 0) (ms * 1000 / count).format2() else ""
+		println("  ${what.padEnd(34)} ${ms.format1().padStart(9)} ${count.toString().padStart(9)} " +
+				each.padStart(9))
 	}
 
 	/** The poi search needs the type registry, which the poi section decodes its numbers through. */
