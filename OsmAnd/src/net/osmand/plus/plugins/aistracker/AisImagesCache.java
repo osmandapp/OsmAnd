@@ -24,14 +24,22 @@ public class AisImagesCache {
 
 	@Nullable
 	public Bitmap getBitmap(@DrawableRes int drawableId) {
+		return getBitmap(drawableId, 1f);
+	}
+
+	/**
+	 * @param extraScale on top of the text scale, for symbols drawn smaller than the rest
+	 */
+	@Nullable
+	public Bitmap getBitmap(@DrawableRes int drawableId, float extraScale) {
 		Bitmap bitmap = null;
 		if (drawableId != 0) {
-			float textScale = OsmandMapLayer.getTextScale(app);
-			long key = ((long) drawableId << 32L) + (int)(textScale * 1000);
+			float scale = OsmandMapLayer.getTextScale(app) * extraScale;
+			long key = ((long) drawableId << 32L) + (int) (scale * 1000);
 			bitmap = bitmapCache.get(key);
 			if (bitmap == null) {
 				Drawable icon = app.getUIUtilities().getIcon(drawableId);
-				bitmap = AndroidUtils.drawableToBitmap(icon, textScale, true);
+				bitmap = AndroidUtils.drawableToBitmap(icon, scale, true);
 				bitmapCache.put(key, bitmap);
 			}
 		}
