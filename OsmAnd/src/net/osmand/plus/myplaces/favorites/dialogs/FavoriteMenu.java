@@ -41,6 +41,7 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteFolder;
+import net.osmand.plus.myplaces.favorites.FavouritesFileHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -367,7 +368,7 @@ public class FavoriteMenu {
 			return oldPath;
 		}
 		if (!FavoriteFolderPath.isValidSegment(newSegment)) {
-			app.showShortToastMessage(R.string.favorite_folder_invalid_name);
+			app.showShortToastMessage(R.string.favorite_folder_invalid_name, FavouritesFileHelper.SUBFOLDER_PLACEHOLDER);
 			return null;
 		}
 		String parentPath = FavoriteFolderPath.parentPath(oldPath);

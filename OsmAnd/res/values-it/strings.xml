@@ -5049,7 +5049,7 @@
     <string name="astro_filter_visible_now">Visibile ora</string>
     <string name="astro_filter_show_all">Mostra tutto</string>
     <string name="favorite_confirm_delete_folder">Quest\'azione eliminerà la cartella \"%1$s\", incluse le sottocartelle e %2$d punto(i) preferito(i).</string>
-    <string name="favorite_folder_invalid_name">Il nome della cartella non può contenere / o _%_</string>
+    <string name="favorite_folder_invalid_name">Il nome della cartella non può contenere / o %1$s</string>
     <string name="favorite_folder_duplicate_message">Usare un nome per la cartella che non esista già.</string>
     <string name="favorite_folder_name">Nome della cartella</string>
     <string name="edit_folder">Modifica cartella</string>

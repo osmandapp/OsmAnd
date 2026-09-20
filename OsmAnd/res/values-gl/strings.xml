@@ -3402,7 +3402,7 @@
     <string name="no_media_descr">Podes engadir fotos, vídeos ou notas de audio desde a cámara ou a túa galería.</string>
     <string name="favorite_confirm_delete_folder">Isto eliminará o cartafol \"%1$s\", incluíndo subcartafoles e %2$d punto(s) favorito(s).</string>
     <string name="favorite_folder_rename_conflict">Xa existe un cartafol con este nome.</string>
-    <string name="favorite_folder_invalid_name">O nome do cartafol non pode conter / ou _%_</string>
+    <string name="favorite_folder_invalid_name">O nome do cartafol non pode conter / ou %1$s</string>
     <string name="favorite_folder_duplicate_message">Usa un nome de cartafol que non exista xa.</string>
     <string name="favorite_folder_name">Nome do cartafol</string>
     <string name="edit_folder">Editar cartafol</string>
