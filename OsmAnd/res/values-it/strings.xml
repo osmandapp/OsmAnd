@@ -5398,4 +5398,14 @@
     <string name="battery_saving_mode_descr">Limita la mappa a 20 fotogrammi al secondo per ridurre il consumo della batteria e il surriscaldamento del dispositivo. Il movimento della mappa diventa meno fluido.</string>
     <string name="crash_report_sent">Rapporto inviato. Grazie!</string>
     <string name="crash_report_send_failed">Impossibile inviare il rapporto. Riprova più tardi.</string>
+    <string name="java_memory">Memoria Java</string>
+    <string name="ais_load_data_descr">Riproduci i messaggi AIS da un file registrato.</string>
+    <string name="map_rendering">Resa grafica della mappa</string>
+    <string name="simulate_ui">Simula il primo avvio</string>
+    <string name="simulate_ui_descr">Primo avvio, banner della versione gratuita, foglio degli sconti.</string>
+    <string name="heap_dump">Istantanea della memoria heap</string>
+    <string name="heap_dump_descr">Conta gli oggetti nella memoria heap di Java.</string>
+    <string name="heap_dump_collect">Raccogli e analizza ora</string>
+    <string name="heap_dump_collect_descr">Impiega alcuni secondi, mostra il risultato.</string>
+    <string name="heap_dump_share">Condividi il rapporto</string>
 </resources>
