@@ -142,8 +142,6 @@ class SearchRequest<T> {
 		this.bottom = bottom
 	}
 
-	fun isSkippedDuplication(): Boolean = resultMatcher?.isSkippedDuplication() == true
-
 	fun publish(obj: T): Boolean {
 		val matcher = resultMatcher
 		if (matcher == null || matcher.publish(obj)) {
