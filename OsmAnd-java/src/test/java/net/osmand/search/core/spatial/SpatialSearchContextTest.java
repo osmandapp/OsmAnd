@@ -10,11 +10,15 @@ import org.junit.Test;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.NameIndexReader;
+import net.osmand.binary.OsmandOdb.CommonIndexedStats;
 import net.osmand.data.City;
+import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchGlobalCache;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
+import net.osmand.util.SearchAlgorithms;
 
 public class SpatialSearchContextTest {
 
@@ -63,5 +67,52 @@ public class SpatialSearchContextTest {
 		} finally {
 			reader.close();
 		}
+	}
+
+	/**
+	 * Common words of the address index as the 2026-09 maps store them: word, frequency, non-indexed.
+	 * A kind word ranks a house whose street the query never named last, so a street name taken for
+	 * one sends "707 John Street Elmira" below "601 Johnson Street" and "9 Lange Straße Stuttgart"
+	 * below "9 Stuttgarter Straße".
+	 */
+	@Test
+	public void testStreetNameWordsAreNotKindWords() {
+		SpatialSearchContext context = new SpatialSearchContext(SpatialTextSearchSettings.defaultSettings(),
+				Collections.emptyList(), null, new LatLon(0, 0));
+		NameIndexReader pennsylvania = addressIndex(
+				"street", 75284, 72691,
+				"avenue", 34308, 33753,
+				"john", 432, 157,
+				"main", 2113, 122);
+		NameIndexReader stuttgart = addressIndex(
+				"strasse", 15140, 15126,
+				"weg", 5465, 5458,
+				"lange", 377, 125,
+				"hohe", 327, 86);
+
+		Assert.assertTrue("street", context.isKindWord(pennsylvania, "street"));
+		Assert.assertTrue("avenue", context.isKindWord(pennsylvania, "avenue"));
+		Assert.assertTrue("straße", context.isKindWord(stuttgart, "straße"));
+		Assert.assertTrue("weg", context.isKindWord(stuttgart, "weg"));
+
+		Assert.assertFalse("john", context.isKindWord(pennsylvania, "john"));
+		Assert.assertFalse("main", context.isKindWord(pennsylvania, "main"));
+		Assert.assertFalse("lange", context.isKindWord(stuttgart, "lange"));
+		Assert.assertFalse("hohe", context.isKindWord(stuttgart, "hohe"));
+	}
+
+	private static NameIndexReader addressIndex(Object... wordFreqNonindexed) {
+		CommonIndexedStats.Builder stats = CommonIndexedStats.newBuilder();
+		String previous = null;
+		for (int i = 0; i < wordFreqNonindexed.length; i += 3) {
+			String word = SearchAlgorithms.alignChars((String) wordFreqNonindexed[i]);
+			stats.addValue(SearchAlgorithms.nameIndexEncodeSuffix(word, previous));
+			stats.addMatched((Integer) wordFreqNonindexed[i + 1]);
+			stats.addNonindexed((Integer) wordFreqNonindexed[i + 2]);
+			previous = word;
+		}
+		NameIndexReader indx = new NameIndexReader(new AddressRegion());
+		indx.setCommonIndexed(stats.build());
+		return indx;
 	}
 }

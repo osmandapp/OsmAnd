@@ -270,6 +270,22 @@ class AstroDataDbProvider : AstroDataProvider() {
 			} else { lang }
 
 			val db = dbHelper.readableDatabase
+
+			val languagesCursor = db.query(
+				TABLE_WIKIPEDIA, arrayOf(COL_WIKI_LANG), "$COL_WIKI_WIKIDATA = ?",arrayOf(wikidataId), null, null, null
+			)
+
+			val languages = mutableSetOf<String>()
+
+			languagesCursor.use { c ->
+				while(c.moveToNext()) {
+					val l = c.getString(0)
+					if (l != null) {
+						languages.add(l)
+					}
+				}
+			}
+
 			val cursor = db.query(
 				TABLE_WIKIPEDIA,
 				null,
@@ -308,7 +324,8 @@ class AstroDataDbProvider : AstroDataProvider() {
 			}
 
 			db.close()
-			return bestArticle ?: enArticle
+			val result = (bestArticle ?: enArticle)?.copy(wikiContentLocales = languages.toSet())
+			return result
 		} catch (e: Exception) {
 			LOG.error("Error reading Wikipedia article from DB", e)
 		}

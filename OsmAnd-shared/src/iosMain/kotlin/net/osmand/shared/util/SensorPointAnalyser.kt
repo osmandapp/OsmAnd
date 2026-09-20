@@ -20,11 +20,13 @@ object SensorPointAnalyser {
 		SENSOR_TAG_TEMPERATURE_W,
 		SENSOR_TAG_TEMPERATURE_A
 	)
+	private val SENSOR_GPX_TAG_SET = SENSOR_GPX_TAGS.toHashSet()
 
 	fun onAnalysePoint(analysis: GpxTrackAnalysis, point: WptPt, attribute: PointAttributes) {
+		val hasSensorKey = hasAnySensorKey(point)
 		val anyValueSet = attribute.hasAnySensorValueSet()
 		for (tag in SENSOR_GPX_TAGS) {
-			if (!anyValueSet) {
+			if (!anyValueSet && hasSensorKey) {
 				val value = getPointAttribute(point, tag, Float.NaN)
 				attribute.setAttributeValue(tag, value)
 			}
@@ -33,6 +35,25 @@ object SensorPointAnalyser {
 				analysis.setHasData(tag, true)
 			}
 		}
+	}
+
+	private fun hasAnySensorKey(point: WptPt): Boolean {
+		val extensions = point.extensions
+		val deferred = point.deferredExtensions
+		if (extensions.isNullOrEmpty() && deferred.isNullOrEmpty()) {
+			return false
+		}
+		if (extensions != null) {
+			for (key in extensions.keys) {
+				if (SENSOR_GPX_TAG_SET.contains(key)) return true
+			}
+		}
+		if (deferred != null) {
+			for (key in deferred.keys) {
+				if (SENSOR_GPX_TAG_SET.contains(key)) return true
+			}
+		}
+		return false
 	}
 
 	fun getPointAttribute(wptPt: WptPt, key: String, defaultValue: Float): Float {

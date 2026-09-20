@@ -40,6 +40,7 @@ import net.osmand.shared.util.PlatformUtil;
 import net.osmand.util.*;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.text.DecimalFormat;
@@ -398,9 +399,9 @@ public class SearchCoreFactory {
 			}
 			while (offlineIndexes.hasNext()) {
 				BinaryMapIndexReader r = offlineIndexes.next();
-				if (!townCitiesCache.contains(r.getRegionName())) {
+				if (!townCitiesCache.contains(r)) {
 					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
-					townCitiesCache.add(r.getRegionName());
+					townCitiesCache.add(r);
 					for (City c  : l) {
 						if (phrase.getSettings().isExportObjects()) {
 							resultMatcher.exportCity(phrase, c);
@@ -626,7 +627,7 @@ public class SearchCoreFactory {
 				String wordToSearch = phrase.getUnknownWordToSearch();
 				List<String> wordToSearchSplit = splitAndNormalize(wordToSearch, true);
 				if (wordToSearchSplit.size() > 1) {
-					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
+					wordToSearch = SearchPhrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
 				}
 				SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 						phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
@@ -1876,12 +1877,20 @@ public class SearchCoreFactory {
 		private QuadTree<City> boundariesQR = new QuadTree<City>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				12, 0.55f);
 		
-		public boolean contains(String value) {
-			return townCitiesInit.contains(value);
+		public boolean contains(BinaryMapIndexReader reader) {
+			return townCitiesInit.contains(getKey(reader));
 		}
 		
-		public void add(String value) {
-			townCitiesInit.add(value);
+		public void add(BinaryMapIndexReader reader) {
+			townCitiesInit.add(getKey(reader));
+		}
+
+		// files could share the same region name (ex. old combined German state maps are all "Germany"),
+		// so cities must be cached per file, otherwise only the first file of the region is loaded
+		private String getKey(BinaryMapIndexReader reader) {
+			File file = reader.getFile();
+			String name = file != null ? file.getAbsolutePath() : reader.getRegionName();
+			return name + "_" + reader.getDateCreated();
 		}
 		
 		public void insertCityQR(City c, QuadRect r) {

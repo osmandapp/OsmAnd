@@ -359,7 +359,7 @@
     <string name="osmand_development_plugin_description">Incluye funciones de prueba y depuración de OsmAnd: simula rutas de navegación, monitorea el renderizado de la pantalla, revisa el rendimiento, etc. Este complemento no se necesita para el uso normal de la aplicación.</string>
     <string name="plugins_screen">Complementos</string>
     <string name="prefs_plugins">Complementos</string>
-    <string name="osm_editing_plugin_description">Haz contribuciones en OpenStreetMap, un proyecto de mapeo de dominio público, global, libre, abierto e impulsado por la comunidad. \n \nEn nuestro sitio web, puedes encontrar una guía de cómo colaborar en el mapa - %1$s.</string>
+    <string name="osm_editing_plugin_description">Colabore con OpenStreetMap, una comunidad global que mantiene un mapa completo del mundo y ofrece datos de código abierto actualizados a todos los usuarios.\n\nPuede encontrar instrucciones sobre cómo editar el mapa en nuestro sitio web %1$s.</string>
     <string name="play_commands_of_currently_selected_voice">Elige una voz y reproduce pruebas de los avisos:</string>
     <string name="debugging_and_development">Desarrollo de OsmAnd</string>
     <string name="test_voice_prompts">Probar indicaciones por voz</string>
@@ -447,8 +447,8 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Lugar del aparcamiento</string>
-    <string name="osmand_parking_plugin_description">Marque dónde está estacionado su automóvil y notifique a su calendario cuándo caducará el parquímetro. Para colocar el marcador, elija un lugar en el mapa, vaya a \"Acciones\" y toque \"Agregar estacionamiento\".</string>
-    <string name="osmand_parking_plugin_name">Aparcamiento</string>
+    <string name="osmand_parking_plugin_description">Marque dónde está estacionado su auto y avise a su calendario cuándo vencerá el parquímetro. Para colocar el marcador, elija un lugar en el mapa, vaya a «Acciones» y toque «Añadir aparcamiento».</string>
+    <string name="osmand_parking_plugin_name">Posición de aparcamiento</string>
     <string name="context_menu_item_add_parking_point">Marcar como ubicación de aparcamiento</string>
     <string name="starting_point_too_far">Punto de partida demasiado lejos del camino más cercano.</string>
     <string name="global_app_allocated_memory_descr">Memoria asignada %1$s MB (Límite Android %2$s MB, Dalvik %3$s MB).</string>
@@ -871,11 +871,11 @@
     <string name="rendering_value_orange_name">Anaranjado</string>
     <string name="routing_attr_no_new_routing_name">Sin reglas de navegación v1.9</string>
     <string name="routing_attr_no_new_routing_description">No usar reglas de navegación introducidas en v.1.9.</string>
-    <string name="rendering_value_germanRoadAtlas_name">Estilo vial alemán</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atlas de carreteras alemán</string>
     <string name="traffic_warning_railways">Paso a nivel</string>
     <string name="traffic_warning_pedestrian">Paso de peatones</string>
     <string name="show_pedestrian_warnings">Pasos de peatones</string>
-    <string name="rendering_value_americanRoadAtlas_name">Estilo vial estadounidense</string>
+    <string name="rendering_value_americanRoadAtlas_name">Atlas de carreteras estadounidense</string>
     <string name="navigate_point_easting">Al este (lat)</string>
     <string name="navigate_point_northing">Al norte (lon)</string>
     <string name="speak_pedestrian">Pasos de peatones</string>
@@ -4114,7 +4114,7 @@
     <string name="discard_changes_prompt">¿Descartar los cambios?</string>
     <string name="row_number">Fila %1$s</string>
     <string name="tripltek_promo">Oferta de Tripltek por %1$s meses</string>
-    <string name="tripltek_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
+    <string name="tripltek_promo_description">Acceso gratuito a funciones como descargas ilimitadas de mapas, relieve en 3D, etc., por %1$s mes</string>
     <string name="see_all_plans">Ver todos los planes</string>
     <string name="key_assignments">Asignaciones de tecla</string>
     <string name="topography_maps">Mapas topográficos</string>
@@ -4355,7 +4355,7 @@
     <string name="auto_25_chars_route_kr">Manténgase a la derecha</string>
     <string name="driving_region_uk">Reino Unido y similares</string>
     <string name="driving_region_india">India</string>
-    <string name="hugerock_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
+    <string name="hugerock_promo_description">Acceso gratuito a funciones como descargas ilimitadas de mapas, relieve en 3D, etc., por %1$s mes</string>
     <string name="hugerock_promo">Oferta de Hugerock por %1$s meses</string>
     <string name="ask_every_time">Preguntar siempre</string>
     <string name="detailed_track_guidance">Guía detallada de la traza</string>
@@ -4639,7 +4639,7 @@
     <string name="poi_source">Fuente de PDI</string>
     <string name="shared_string_switch">Cambiar</string>
     <string name="battery_level">Nivel de batería</string>
-    <string name="hmd_promo_description_years">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s años</string>
+    <string name="hmd_promo_description_years">Acceso gratuito a funciones como descargas ilimitadas de mapas, relieve en 3D, etc., por %1$s años</string>
     <string name="add_to_navigation">Agregar a la navegación</string>
     <string name="routing_attr_allow_ferries_name">Permitir ferrys</string>
     <string name="plugin_ais_tracker_name">Localizador de buques AIS</string>
@@ -4653,7 +4653,7 @@
     <string name="ais_ship_lost_timeout_description">Establecer tiempo de espera para visibilidad obsoleta del barco: después de este tiempo sin recepción de señal, el símbolo del barco aparecerá tachado.</string>
     <string name="release_5_1">• Se ha añadido compatibilidad al comprar por Internet y entre plataformas\n\n • Se ha movido la opción \"Unidades de temperatura\" a los ajustes generales para facilitar el acceso\n\n • Se ha añadido el indicador del nivel de batería para sensores BLE\n\n • Nueva interfaz de usuario más intuitiva para la elección de puntos en la navegación\n\n • Se ha mejorado la visibilidad de los widget con un contorno nuevo\n\n • Se ha añadido un analizador de ascenso y descenso\n\n • Mayor integración de Wikipedia y Wikiviajes para más PDI.</string>
     <string name="shared_string_split_by">Dividir por</string>
-    <string name="plugin_ais_tracker_disclaimer">AVISO LEGAL\n\nEste complemento es un proyecto como hobby y no está diseñado para ser fiable y correcto. NO confíe en este software de ninguna manera, incluyendo para la navegación y/o la seguridad de la vida.</string>
+    <string name="plugin_ais_tracker_disclaimer">DESCARGO DE RESPONSABILIDAD\n\nEste complemento es un proyecto personal y no está pensado para su uso en aplicaciones críticas. No garantiza fiabilidad ni precisión. No confíe en este programa para la navegación, la seguridad de las personas ni ninguna otra operación esencial.</string>
     <string name="ais_ship_lost_timeout">Tiempo de espera del barco desactualizado</string>
     <string name="sensor_data">Datos del sensor</string>
     <string name="battery">batería</string>
@@ -5079,8 +5079,8 @@
     <string name="astro_designations">Designaciones</string>
     <string name="shared_string_world_weather_map">Mapamundi meteorológico</string>
     <string name="shared_string_note">Nota</string>
-    <string name="media_storage_camera_folder_note_descr">El audio se guardara en/OsmAnd.</string>
-    <string name="always_keep_local_copy">Siempre mantener una copia local</string>
+    <string name="media_storage_camera_folder_note_descr">El audio se guarda en Music/OsmAnd.</string>
+    <string name="always_keep_local_copy">Siempre conservar una copia local</string>
     <string name="always_keep_local_copy_description">Los archivos multimedia permanecen adjuntos incluso si el original se elimina de la galería o de los archivos.</string>
     <string name="use_spatial_text_search">Utilizar la búsqueda de texto espacial</string>
     <string name="use_spatial_text_search_description">Sustituya las API de búsqueda rápida estándar por el motor de búsqueda de texto espacial experimental.</string>
@@ -5134,4 +5134,30 @@
     <string name="sort_by_nearest_to_map_center">Cercano al centro del mapa</string>
     <string name="routing_attr_motor_type_ethanol_name">Etanol</string>
     <string name="astronomy_map">Mapa astronómico</string>
+    <plurals name="files_count">
+        <item quantity="one">%d archivo</item>
+        <item quantity="many">%d de archivos</item>
+        <item quantity="other">%d archivos</item>
+    </plurals>
+    <string name="preparing_file">Preparando archivo</string>
+    <string name="shared_string_archive">Archivador</string>
+    <string name="share_favorites_with_media_description">Los puntos favoritos de %1$s tienen multimedia adjunta. Comparta solo los puntos o los puntos con multimedia en forma de archivador.</string>
+    <string name="share_favorites_points_only">Solo puntos</string>
+    <string name="share_favorites_points_and_media">Puntos y multimedia</string>
+    <string name="share_favorites_preparation_failed">No se pudieron preparar los archivos para compartirlos.</string>
+    <string name="share_favorites_share_failed">No se pudo compartir el archivo.</string>
+    <string name="share_favorites_missing_media_warning">No se pudieron incluir algunos archivos adjuntos.</string>
+    <string name="search_on_web">Buscar en la web</string>
+    <string name="release_5_4">• Interfaz de búsqueda renovada: ordenación, filtros por categorías y aspecto más limpio\n\n • Adjunte fotos y archivos multimedia a «Favoritos»\n\n • «Favoritos»: compatibilidad con subgrupos y carpetas que se pueden anclar\n\n • Coordenadas: la búsqueda, la gratícula del mapa y la visualización de puntos de interés (PDI) ahora son compatibles con los sistemas de localización EPSG y Maidenhead\n\n • Se han solucionado las interrupciones en la navegación; posibilidad de cambiar entre enrutados estándar y rápido\n\n • Configure la escala del mapa de Android Auto de forma independiente a la de su teléfono\n\n • Nueva búsqueda espacial: encuentre lugares y busque en los alrededores de un lugar\n\n • Se han añadido a la sección de astronomía los eclipses solares y lunares</string>
+    <string name="duplicate_map_standard_exists_desc">Ya dispone del mapa estándar para %1$s. Si descarga el mapa de solo carreteras, se duplicarán los datos y podría reducirse el rendimiento.\n\nSi lo sustituye, se eliminarán los datos de búsqueda de direcciones y de puntos de interés incluidos en el mapa estándar.</string>
+    <string name="quick_action_all_tracks">Todos los trayectos</string>
+    <string name="share_favorites_media_preparation_failed">No se pudo incluir la multimedia adjunta. Se compartirán solo los puntos.</string>
+    <string name="quick_action_add_track">Añadir trayecto</string>
+    <string name="another_profile">Otro perfil</string>
+    <string name="last_week">Semana pasada</string>
+    <string name="history_is_turned_off">El historial está desactivado</string>
+    <string name="search_and_navigation_history_disabled_descr">Se desactivó el historial de búsquedas y navegación. Actívelo en Configuración para ver aquí la actividad reciente.</string>
+    <string name="open_history_settings">Abrir configuración de historial</string>
+    <string name="route_calculation_use_existing_maps">Usar mapas existentes</string>
+    <string name="required_maps_missing_and_outdated_title">Mapas faltantes y desactualizados</string>
 </resources>
