@@ -115,6 +115,7 @@ public class TransportRoutePlanner {
 			if (routeTravelSpeed == 0) {
 				continue;
 			}
+			boolean ferryRoute = TransportFerryHelper.isFerry(segment.road);
 			double travelSpeed = TransportFerryHelper.getTravelSpeed(segment.road, routeTravelSpeed);
 			TransportStop prevStop = segment.getStop(segment.segStart);
 			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
@@ -141,13 +142,14 @@ public class TransportRoutePlanner {
 					travelTime += interval * 10;
 				} else {
 					// a ferry stop is counted only when the ride continues past it (end of the loop)
-					int stopTime = TransportFerryHelper.isFerry(segment.road) ? 0 : ctx.cfg.getStopTime(segment.road.getType());
+					int stopTime = ferryRoute ? 0 : ctx.cfg.getStopTime(segment.road.getType());
 					double crossingTime = TransportFerryHelper.getCrossingTime(ctx.cfg, segment.road, ind);
 					travelTime += stopTime + segmentDist / travelSpeed + crossingTime;
 					crossingsTime += crossingTime;
 				}
-				double alightingTime = TransportFerryHelper.getAlightingTime(ctx.cfg, segment.road, ind);
-				double ferryTime = TransportFerryHelper.isFerry(segment.road) ? travelTime + alightingTime : crossingsTime;
+				// leaving the vehicle here costs the time to get off a ferry
+				double timeToLeave = travelTime + TransportFerryHelper.getAlightingTime(ctx.cfg, segment.road, ind);
+				double ferryTime = ferryRoute ? timeToLeave : crossingsTime;
 				// the ferry hasn't left the terminal yet: nowhere to get off
 				boolean sameTerminal = TransportFerryHelper.isSameTerminal(segment.road, segment.segStart, ind);
 				if (segment.distFromStart + travelTime > finishTime * ctx.cfg.increaseForAlternativesRoutes) {
@@ -175,11 +177,11 @@ public class TransportRoutePlanner {
 						nextSegment.parentRoute = segment;
 						nextSegment.parentStop = ind;
 						nextSegment.walkDist = MapUtils.getDistance(nextSegment.getLocation(), stop.getLocation());
-						nextSegment.parentTravelTime = travelTime + alightingTime;
+						nextSegment.parentTravelTime = timeToLeave;
 						nextSegment.parentTravelDist = travelDist;
 						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + (junctionStop ? 0 :
 								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType()));
-						nextSegment.distFromStart = segment.distFromStart + travelTime + alightingTime + walkTime;
+						nextSegment.distFromStart = segment.distFromStart + timeToLeave + walkTime;
 						nextSegment.ferryTime = segment.ferryTime + ferryTime;
 						nextSegment.nonce = nonce++;
 						if (ctx.cfg.useSchedule) {
@@ -208,10 +210,10 @@ public class TransportRoutePlanner {
 						finish.parentRoute = segment;
 						finish.parentStop = ind;
 						finish.walkDist = distToEnd;
-						finish.parentTravelTime = travelTime + alightingTime;
+						finish.parentTravelTime = timeToLeave;
 						finish.parentTravelDist = travelDist;
 						double walkTime = distToEnd / ctx.cfg.walkSpeed;
-						finish.distFromStart = segment.distFromStart + travelTime + alightingTime + walkTime;
+						finish.distFromStart = segment.distFromStart + timeToLeave + walkTime;
 						finish.ferryTime = segment.ferryTime + ferryTime;
 						finish.nonce = nonce++;
 					}
@@ -533,9 +535,6 @@ public class TransportRoutePlanner {
 
 		public List<Way> getGeometry() {
 			route.mergeForwardWays();
-			if (TransportFerryHelper.isFerry(route)) {
-				return TransportFerryHelper.getGeometry(route, start, end);
-			}
 			if (DISPLAY_FULL_SEGMENT_ROUTE) {
 				System.out.println("TOTAL SEGMENTS: " + route.getForwardWays().size());
 				if (route.getForwardWays().size() > DISPLAY_SEGMENT_IND && DISPLAY_SEGMENT_IND != -1) {
@@ -565,10 +564,13 @@ public class TransportRoutePlanner {
 					} 
 				}
 			}
-			boolean validOneWay = startInd.way != null && startInd.way == endInd.way && startInd.ind <= endInd.ind;
+			// parallel ways of one route (ferry berths) are merged into a way going there and back,
+			// so the part between the stops can be in any direction
+			boolean validOneWay = startInd.way != null && startInd.way == endInd.way;
 			if (validOneWay) {
 				Way way = new Way(GEOMETRY_WAY_ID);
-				for (int k = startInd.ind; k <= endInd.ind; k++) {
+				int step = startInd.ind <= endInd.ind ? 1 : -1;
+				for (int k = startInd.ind; k != endInd.ind + step; k += step) {
 					way.addNode(startInd.way.getNodes().get(k));
 				}
 				return Collections.singletonList(way);

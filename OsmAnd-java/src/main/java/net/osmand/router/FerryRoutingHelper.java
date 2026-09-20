@@ -90,7 +90,10 @@ public class FerryRoutingHelper {
 			if (speed <= 0) {
 				speed = ctx.getRouter().defineVehicleSpeed(road, rr.isForwardDirection());
 			}
-			double time = rr.getDistance() / (speed > 0 ? speed : ctx.getRouter().getDefaultSpeed());
+			if (speed <= 0) {
+				speed = ctx.getRouter().getDefaultSpeed();
+			}
+			double time = rr.getDistance() / speed;
 			int start = Math.min(rr.getStartPointIndex(), rr.getEndPointIndex());
 			int end = Math.max(rr.getStartPointIndex(), rr.getEndPointIndex());
 			for (int point = start + 1; point < end; point++) {

@@ -1,19 +1,14 @@
 package net.osmand.router;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 /**
  * Public transport ferries: routes built by the map creator from route=ferry ways without a route relation
@@ -21,15 +16,15 @@ import net.osmand.util.MapUtils;
  */
 public class TransportFerryHelper {
 
-	// stops generated at ferry way ends (not present in OSM): "0,5"
-	public static final String SYNTHETIC_STOPS_TAG = "osmand:synthetic_ferry_stops";
-	// synthetic stops in the water joining ferry ways: only a change to the next ferry way at the same stop
-	public static final String JUNCTION_STOPS_TAG = "osmand:ferry_junction_stops";
+	// stops generated at ferry way ends (not present in OSM), "j" marks a junction of ferry ways
+	// in the water (only a change to the next ferry way at the same stop): "0,3:j,5"
+	public static final String FERRY_STOPS_TAG = "osmand:ferry_stops";
+	public static final String JUNCTION_VALUE = "j";
 	// non-ferry route goes over a ferry before these stops:
 	// "stop index:ferry interval:ferry duration:ferry length" (seconds and meters, 0 - unknown)
 	public static final String CROSSINGS_TAG = "osmand:ferry_crossings";
 
-	public static void addStopTag(Map<String, String> tags, String tag, int stop, Object value) {
+	public static void addStopTag(Map<String, String> tags, String tag, int stop, String value) {
 		tags.merge(tag, value == null ? String.valueOf(stop) : stop + ":" + value, (a, b) -> a + "," + b);
 	}
 
@@ -38,11 +33,11 @@ public class TransportFerryHelper {
 	}
 
 	public static boolean isSyntheticStop(TransportRoute route, int stop) {
-		return getStopValue(route, SYNTHETIC_STOPS_TAG, stop) != null;
+		return getStopValue(route, FERRY_STOPS_TAG, stop) != null;
 	}
 
 	public static boolean isJunctionStop(TransportRoute route, int stop) {
-		return getStopValue(route, JUNCTION_STOPS_TAG, stop) != null;
+		return JUNCTION_VALUE.equals(getStopValue(route, FERRY_STOPS_TAG, stop));
 	}
 
 	// synthetic stop from the stops tree is marked in the stop lists of its routes
@@ -132,61 +127,6 @@ public class TransportFerryHelper {
 	private static int getDuration(TransportRoute route) {
 		return isFerry(route) ? FerryRoutingHelper.parseDuration(route.getTags().get(FerryRoutingHelper.DURATION_TAG),
 				route.getDistance()) : 0;
-	}
-
-	// Parallel ferry ways of different berths can be merged into one way going there and back,
-	// so each hop takes the shortest part of a way between the nodes closest to its stops (in any direction)
-	public static List<Way> getGeometry(TransportRoute route, int start, int end) {
-		Way geometry = new Way(TransportRoutePlanner.GEOMETRY_WAY_ID);
-		for (int i = start; i < end; i++) {
-			for (Node n : getHopGeometry(route, i)) {
-				geometry.addNode(n);
-			}
-		}
-		return Collections.singletonList(geometry);
-	}
-
-	private static List<Node> getHopGeometry(TransportRoute route, int stop) {
-		LatLon from = route.getForwardStops().get(stop).getLocation();
-		LatLon to = route.getForwardStops().get(stop + 1).getLocation();
-		List<Node> best = Arrays.asList(new Node(from.getLatitude(), from.getLongitude(), -1),
-				new Node(to.getLatitude(), to.getLongitude(), -1));
-		double bestCost = Double.MAX_VALUE;
-		for (Way way : route.getForwardWays()) {
-			if (way.getNodes().isEmpty()) {
-				continue;
-			}
-			int fromInd = getClosestNode(way, from);
-			int toInd = getClosestNode(way, to);
-			List<Node> nodes = new ArrayList<>(way.getNodes().subList(Math.min(fromInd, toInd), Math.max(fromInd, toInd) + 1));
-			if (fromInd > toInd) {
-				Collections.reverse(nodes);
-			}
-			double length = 0;
-			for (int k = 1; k < nodes.size(); k++) {
-				length += MapUtils.getDistance(nodes.get(k - 1).getLatLon(), nodes.get(k).getLatLon());
-			}
-			double fromDist = MapUtils.getDistance(from, nodes.get(0).getLatLon());
-			double toDist = MapUtils.getDistance(to, nodes.get(nodes.size() - 1).getLatLon());
-			double cost = fromDist + toDist + length; // the shortest part, not going there and back
-			if (fromDist < TransportRoutePlanner.MIN_DIST_STOP_TO_GEOMETRY
-					&& toDist < TransportRoutePlanner.MIN_DIST_STOP_TO_GEOMETRY && cost < bestCost) {
-				bestCost = cost;
-				best = nodes;
-			}
-		}
-		return best;
-	}
-
-	private static int getClosestNode(Way way, LatLon location) {
-		int closest = 0;
-		for (int i = 1; i < way.getNodes().size(); i++) {
-			if (MapUtils.getDistance(location, way.getNodes().get(i).getLatLon())
-					< MapUtils.getDistance(location, way.getNodes().get(closest).getLatLon())) {
-				closest = i;
-			}
-		}
-		return closest;
 	}
 
 	// ferry ways joined by a junction stop in the water are one ferry ride
