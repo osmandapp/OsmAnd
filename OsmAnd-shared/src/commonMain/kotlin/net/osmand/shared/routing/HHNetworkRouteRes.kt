@@ -4,7 +4,7 @@ import kotlin.jvm.JvmField
 
 /**
  * What the HH search came back with: the hub-graph edges the route follows, each resolved to
- * detailed road segments, and the alternatives if they were asked for.
+ * detailed road segments.
  *
  * A copy of `HHRouteDataStructure.HHNetworkRouteRes` in OsmAnd-java, which stays there for
  * android and tools; this copy is for iOS.
@@ -17,9 +17,6 @@ class HHNetworkRouteRes : RouteCalcResult {
 	@JvmField
 	var segments: MutableList<HHNetworkSegmentRes> = ArrayList()
 
-	@JvmField
-	var altRoutes: MutableList<HHNetworkRouteRes> = ArrayList()
-
 	constructor() : super(ArrayList<RouteSegmentResult>())
 
 	constructor(error: String) : super(error)
@@ -30,15 +27,6 @@ class HHNetworkRouteRes : RouteCalcResult {
 			d += r.rtTimeHHSegments
 		}
 		return d
-	}
-
-	override fun getAlternatives(): List<List<RouteSegmentResult>> {
-		// altRoutes is the storage - this is the same list seen through the generic result
-		val alts = ArrayList<List<RouteSegmentResult>>(altRoutes.size)
-		for (alt in altRoutes) {
-			alts.add(alt.detailed)
-		}
-		return alts
 	}
 
 	fun getHHRoutingDetailed(): Double {
@@ -55,7 +43,6 @@ class HHNetworkRouteRes : RouteCalcResult {
 		} else {
 			detailed.addAll(res.detailed)
 			segments.addAll(res.segments)
-			altRoutes.clear() // not supported with intermediate points
 		}
 	}
 }

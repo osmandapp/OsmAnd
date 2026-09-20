@@ -435,7 +435,7 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 		}
 	}
 
-	fun initRouteTypesIfNeeded(req: SearchRequest, list: List<RouteSubregion>) {
+	fun initRouteTypesIfNeeded(req: SearchRequest<RouteDataObject>, list: List<RouteSubregion>) {
 		for (rs in list) {
 			if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
 				initRouteRegion(rs.routeReg)
@@ -495,7 +495,7 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 		}
 	}
 
-	fun searchRouteRegionTree(req: SearchRequest, list: List<RouteSubregion>, toLoad: MutableList<RouteSubregion>): List<RouteSubregion> {
+	fun searchRouteRegionTree(req: SearchRequest<RouteDataObject>, list: List<RouteSubregion>, toLoad: MutableList<RouteSubregion>): List<RouteSubregion> {
 		for (rs in list) {
 			if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
 				if (rs.subregions == null) {

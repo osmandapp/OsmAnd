@@ -5214,4 +5214,7 @@
     <string name="quick_action_tracks_select_descr">Cuir rian amháin nó níos mó leis chun iad a thaispeáint nó a cheilt ar an léarscáil le sconne amháin.</string>
     <string name="quick_action_tracks_always_ask_descr">Má dhéantar an gníomh seo a thapáil, osclaítear liosta na rian, áit ar féidir leat ceann amháin nó níos mó díobh a thaispeáint nó a cheilt.</string>
     <string name="quick_action_all_tracks">Gach rian</string>
+    <string name="battery_saving_mode_descr">Cuirtear teorainn leis an léarscáil go 20 fráma sa soicind chun ídiú ceallraí agus téamh na feiste a laghdú. Bíonn gluaiseacht na léarscáile níos lú réidh dá bharr.</string>
+    <string name="crash_report_sent">Tuairisc seolta. Go raibh maith agat!</string>
+    <string name="crash_report_send_failed">Níorbh fhéidir an tuairisc a sheoladh. Bain triail as arís níos déanaí.</string>
 </resources>

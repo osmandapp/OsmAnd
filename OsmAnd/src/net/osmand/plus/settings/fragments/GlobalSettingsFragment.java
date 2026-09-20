@@ -54,6 +54,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		setupDefaultAppModePref();
 		setupPreferredLocalePref();
 		setupMapRenderingEnginePref();
+		setupBatterySavingModePref();
 		setupExternalStorageDirPref();
 		setupMediaStoragePref();
 
@@ -190,7 +191,10 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				LocationSourceBottomSheet.showInstance(manager, this);
 			}
 		} else if (prefId.equals(MAP_RENDERING_ENGINE_ID)) {
-			new MapRenderingEngineDialog(app, getActivity()).showDialog(this::setupMapRenderingEnginePref);
+			new MapRenderingEngineDialog(app, getActivity()).showDialog(() -> {
+				setupMapRenderingEnginePref();
+				setupBatterySavingModePref();
+			});
 		}
 
 		return super.onPreferenceClick(preference);
@@ -263,6 +267,14 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		preference.setIcon(getContentIcon(R.drawable.ic_map));
 		preference.setSummary(settings.USE_OPENGL_RENDER.get() ? R.string.map_rendering_engine_v2 : R.string.map_rendering_engine_v1);
 		//preference.setVisible(Version.isOpenGlAvailable(app));
+	}
+
+	private void setupBatterySavingModePref() {
+		SwitchPreferenceEx preference = requirePreference(settings.BATTERY_SAVING_MODE.getId());
+		preference.setIcon(getPersistentPrefIcon(R.drawable.ic_action_battery));
+		preference.setDescription(R.string.battery_saving_mode_descr);
+		// only the OpenGL (version 2) renderer limits its frame rate
+		preference.setVisible(settings.USE_OPENGL_RENDER.get());
 	}
 
 	private void setupSendAnonymousDataPref() {

@@ -50,27 +50,14 @@ class BinaryRoutePlanner {
 		ctx: RoutingContext, start: RouteSegmentPoint?, end: RouteSegmentPoint?,
 		boundaries: KTLongObjectLookup<RouteSegment>?
 	): FinalRouteSegment? {
-		return searchRouteInternal(ctx, start, end, boundaries, null, null)
-	}
-
-	/**
-	 * @param visitedDirectOut  when given, it is used as the visited set of the forward search, so the
-	 *                          caller keeps the search tree after the call (see HHAlternativeRoutes)
-	 * @param visitedOppositeOut the same for the backward search
-	 */
-	fun searchRouteInternal(
-		ctx: RoutingContext, start: RouteSegmentPoint?, end: RouteSegmentPoint?,
-		boundaries: KTLongObjectLookup<RouteSegment>?, visitedDirectOut: KTLongObjectMap<RouteSegment>?,
-		visitedOppositeOut: KTLongObjectMap<RouteSegment>?
-	): FinalRouteSegment? {
 		// measure time
 		ctx.memoryOverhead = 1000
 		// Initializing priority queue to visit way segments
 		val graphDirectSegments = KPriorityQueue<RouteSegmentCost>(50, SegmentsComparator())
 		val graphReverseSegments = KPriorityQueue<RouteSegmentCost>(50, SegmentsComparator())
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
-		val visitedDirectSegments = visitedDirectOut ?: KTLongObjectMap()
-		val visitedOppositeSegments = visitedOppositeOut ?: KTLongObjectMap()
+		val visitedDirectSegments = KTLongObjectMap<RouteSegment>()
+		val visitedOppositeSegments = KTLongObjectMap<RouteSegment>()
 		initQueuesWithStartEnd(ctx, start, end, graphDirectSegments, graphReverseSegments)
 
 		val onlyBackward = ctx.getPlanRoadDirection() < 0
@@ -119,13 +106,6 @@ class BinaryRoutePlanner {
 					val visitedSegments = if (forwardSearch) visitedDirectSegments else visitedOppositeSegments
 					if (!visitedSegments.containsKey(calculateRoutePointId(segment))) {
 						visitedSegments.put(calculateRoutePointId(segment), segment)
-					}
-					skipSegment = true
-				} else if (ctx.config.altHorizon > 0) {
-					// alternative routes are read off the two trees, so the search must not stop at the
-					// first meeting point - it keeps the cheapest one and settles on (see altHorizon)
-					if (finalSegment == null || segment.distanceFromStart < finalSegment.distanceFromStart) {
-						finalSegment = segment
 					}
 					skipSegment = true
 				} else {
@@ -224,9 +204,6 @@ class BinaryRoutePlanner {
 			if (progress != null && progress.isCancelled) {
 				throw RouteCalculationInterruptedException("Route calculation interrupted")
 			}
-			if (ctx.config.altHorizon > 0 && finalSegment != null && leftAltHorizon(ctx, finalSegment, graphDirectSegments, graphReverseSegments)) {
-				break
-			}
 		}
 		val progress = ctx.calculationProgress
 		if (progress != null) {
@@ -236,20 +213,6 @@ class BinaryRoutePlanner {
 			progress.oppositeQueueSize += graphReverseSegments.size
 		}
 		return finalSegment
-	}
-
-	/**
-	 * Everything still in the queues costs more than the band the alternatives may live in, so no
-	 * route through a node settled from here on could be proposed anyway.
-	 */
-	private fun leftAltHorizon(
-		ctx: RoutingContext, finalSegment: FinalRouteSegment,
-		direct: KPriorityQueue<RouteSegmentCost>, reverse: KPriorityQueue<RouteSegmentCost>
-	): Boolean {
-		if (direct.isEmpty() || reverse.isEmpty()) {
-			return true
-		}
-		return direct.peek()!!.cost + reverse.peek()!!.cost > finalSegment.distanceFromStart * (1 + ctx.config.altHorizon)
 	}
 
 	private fun checkIfGraphIsEmpty(
@@ -522,10 +485,8 @@ class BinaryRoutePlanner {
 			// reassign @distanceFromStart to make it correct for visited segment
 			currentSegment.distanceFromStart = distFromStartPlusSegmentTime
 
-			if (bothDirVisited && ctx.config.altHorizon <= 0) {
+			if (bothDirVisited) {
 				// We stop here for shortcut creation (we can't improve the neighbors if they're already visited cause the opposite is min - prove by contradiction)
-				// Alternatives need the opposite: the two trees have to grow through each other, or the
-				// only road points settled by both are the handful on the frontier (see altHorizon).
 				if (TRACE_ROUTING) {
 					println("  " + currentSegment.segEnd + ">> 2 dir visited")
 				}

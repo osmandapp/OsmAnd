@@ -97,17 +97,6 @@ class HHRoutingContext {
 	@JvmField
 	var queueRev: KPriorityQueue<NetworkDBPointCost> = createQueue()
 
-	/**
-	 * The road segments the route actually starts and ends on, as chosen by the last-mile search
-	 * (they can differ from the nearest ones after a reiteration). Kept because the alternatives
-	 * of a short route are searched on the detailed graph - see HHAlternativeRoutes.
-	 */
-	@JvmField
-	var startSegment: RouteSegmentPoint? = null
-
-	@JvmField
-	var endSegment: RouteSegmentPoint? = null
-
 	private fun createQueue(): KPriorityQueue<NetworkDBPointCost> {
 		return KPriorityQueue(11) { o1, o2 -> o1.cost.compareTo(o2.cost) }
 	}

@@ -65,8 +65,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 							ref.otherWordsNotFound--;
 						}
 					}
-					// building-street
-					if (check.atom.type > atom.type) {
+					// building-street, but a house the map does not have stays its street
+					if (check.atom.type > atom.type ? atom.bldObject != null || atom.type != SpatialSearchToken.BUILDING_TYPE
+							: check.atom.type == SpatialSearchToken.BUILDING_TYPE && check.atom.bldObject == null) {
 						// existing street - swap
 						check.atom = atom;
 						break;

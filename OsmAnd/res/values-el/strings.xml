@@ -3130,7 +3130,7 @@
 \nΑυτή η ενέργεια δεν μπορεί να αναιρεθεί.</string>
     <string name="free_account">Δωρεάν λογαριασμός</string>
     <string name="ant_plus_searching_text_description">Παρακαλούμε κρατήστε την συσκευή κοντά στον αισθητήρα. Πρέπει να έχετε ενεργοποιημένο τον αισθητήρα για να μπορεί να τον βρει το OsmAnd.</string>
-    <string name="report_an_issues">Αναφέρετε ένα ζήτημα</string>
+    <string name="report_an_issues">Αναφέρετε ένα πρόβλημα</string>
     <string name="telegram_chats">Συνομιλίες Telegram</string>
     <string name="routing_attr_hazmat_category_usa_9_name">Διάφορα</string>
     <string name="shared_string_new_track">Νέο ίχνος</string>
@@ -3899,7 +3899,7 @@
     <string name="obd_fuel_type_bifuel_hydrogen">Διπλό καύσιμο που τρέχει Υδρογόνο</string>
     <string name="quick_action_search_view_desc">Διακόπτης για άνοιγμα ή κλείσιμο της αναζήτησης σε όψη.</string>
     <string name="continue_with">Συνέχεια με %1$s</string>
-    <string name="send_logcat_log">Αποστολή καταγραφής logcat</string>
+    <string name="send_logcat_log">Αποστολή αρχείων καταγραφής τρέχουσας συνεδρίας</string>
     <string name="backup_conflicts">Συγκρούσεις</string>
     <string name="set_work">Ορισμός εργασίας</string>
     <string name="obd_air_intake_temp_desc">Δείχνει την θερμοκρασία πολλαπλής εισαγωγής αέρα στον κινητήρα.</string>
@@ -4642,11 +4642,11 @@
     <string name="send_crash_log_descr">Περιλαμβάνει μόνο πληροφορίες σχετικά με τα κρασαρίσματα</string>
     <string name="rendering_engine_failed">Η απεικόνιση του χάρτη του OsmAnd έχει κρασάρει πρόσφατα.</string>
     <string name="share_crash_log">Κοινοποίηση αρχείου καταγραφής κρασαρίσματος</string>
-    <string name="send_crash_log">Αποστολή αρχείου καταγραφής κρασαρίσματος</string>
+    <string name="send_crash_log">Αποστολή αρχείων καταγραφής κρασαρίσματος εφαρμογής</string>
     <string name="has_vehicle_metrics">Με δεδομένα OBDII</string>
     <string name="lang_mi">Μάορι</string>
     <string name="access_pinch_zoom_magnification">Μεγέθυνση εστίασης με τσίμπημα</string>
-    <string name="access_pinch_zoom_magnification_descr">Χρήση κλιμάκωσης της περιοχής θέασης αντί των διακριτών επιπέδων εστίασης κατά τη διάρκεια των χειρονομιών μεγεθυνσης.</string>
+    <string name="access_pinch_zoom_magnification_descr">Χρήση κλιμάκωσης της περιοχής θέασης (μεγέθυνση) αντί των διακριτών επιπέδων εστίασης κατά τη διάρκεια της χειρονομίας μεγέθυνσης.</string>
     <string name="release_4_7">• Νέο γραφικό στοιχείο \"Ταχύμετρο\" συμβατό με το Android Auto\n\n • Διαμόρφωση της οθόνης χάρτη με προσθήκη πολλαπλών κουμπιών \"Γρήγορη Ενέργεια\"\n\n • Βελτιωμένη αναγνωσιμότητα των δεδομένων σε γραφήματα\n\n • Προσθήκη φίλτρων για δεδομένα αισθητήρων από ίχνη\n\n • Βελτιωμένη εμφάνιση της εξατομίκευσης για ομάδες ιχνών\n\n • Προσθήκη υποστήρθξης για πρόσθετες ετικέτες GPX\n\n • Προσαρμογή για \"Απόσταση κατά την πλοήγηση\": επιλέξτε μεταξύ ακριβών ή στρογγυλοποιημένων προς τα πάνω αριθμών\n\n • Ενοποιημένο UI για επιλογή ιχνών\n\n • Αλλαγή σύνδεσης OpenStreetMap σε OAuth 2.0</string>
     <string name="distance_during_navigation_description">Επιλέξτε πώς θα εμφανίζονται οι πληροφορίες απόστασης στα γραφικά στοιχεία πλοήγησης (απόσταση σε σημείο, επόμενη στροφή, λωρίδες).\n\nΕπιλέξτε “%1$s” για ακριβή αριθμούς, ή “%2$s” για ευκολότερη αναγνωσιμότητα.</string>
     <string name="attach_to_the_roads">Προσκόλληση στους δρόμους</string>
@@ -5099,7 +5099,7 @@
     <string name="always_keep_local_copy_description">Το πολυμέσο μένει πάντα συνημμένο ακόμη κι αν το αρχικό έχει διαγραφεί από τη Συλλογή ή τα αρχεία.</string>
     <string name="use_spatial_text_search">Χρήση αναζήτησης χωρικού κειμένου</string>
     <string name="use_spatial_text_search_description">Αντικαθιστά την τυπική γρήγορη αναζήτηση μέσω API με την πειραματική μηχανή αναζήτησης χωρικού κειμένου.</string>
-    <string name="release_5_4">• Ανανεωμένο UI αναζήτησης: ταξινόμηση, φίλτρα κατηγοριών, πιο καθαρή εμφάνιση\n\n • Επισυνάψτε φωτογραφίες και πολυμέσα στα Αγαπημένα\n\n • Αγαπημένα: υποστήριξη υποομάδων και καρφιτσωμένο φάκελοι\n\n • Συντεταγμένες: η αναζήτηση, το πλέγμα χάρτη και η εμφάνιση ΣΕ τώρα υποστηρίζουν EPSG και σύστημα εντοπισμού Maidenhead\n\n • Επιδιόρθωση διακοπών πλοήγησης: εναλλαγή μεταξύ Τυπικής και Γρήγορης δρομολόγησης\n\n • Ορίστε την κλίμακα χάρτη στο Android Auto χωριστά από το τηλέφωνό σας\n\n• Νέα χωρική αναζήτηση — βρείτε μέρη και αναζητήστε γύρω από ένα μέρος\n\n • Προστέθηκαν εκλείψεις ήλιου και σελήνης στην Αστρονομία</string>
+    <string name="release_5_4">• Ανανεωμένο UI αναζήτησης: ταξινόμηση, φίλτρα κατηγοριών, πιο καθαρή εμφάνιση\n\n • Επισυνάψτε φωτογραφίες και πολυμέσα στα Αγαπημένα\n\n • Αγαπημένα: υποστήριξη υποομάδων και καρφιτσωμένοι φάκελοι\n\n • Συντεταγμένες: η αναζήτηση, το πλέγμα χάρτη και η εμφάνιση ΣΕ τώρα υποστηρίζουν EPSG και σύστημα εντοπισμού Maidenhead\n\n • Επιδιόρθωση διακοπών πλοήγησης: εναλλαγή μεταξύ Τυπικής και Γρήγορης δρομολόγησης\n\n • Ορίστε την κλίμακα χάρτη στο Android Auto χωριστά από το τηλέφωνό σας\n\n• Νέα χωρική αναζήτηση — βρείτε μέρη και αναζητήστε γύρω από ένα μέρος\n\n • Προστέθηκαν εκλείψεις ήλιου και σελήνης στην Αστρονομία</string>
     <string name="astro_lunar_eclipse">Έκλειψη σελήνης</string>
     <string name="astro_lunar_eclipse_subtitle">Εξερευνήστε εκλείψεις σελήνης παγκοσμίως</string>
     <string name="astro_previous_lunar_eclipse">Προηγούμενη έκλειψη σελήνης</string>
@@ -5166,4 +5166,11 @@
     <string name="share_favorites_missing_media_warning">Δεν ήταν δυνατή η συμπερίληψη μερικών συνημμένων πολυμέσων.</string>
     <string name="search_on_web">Αναζήτηση στον ιστό</string>
     <string name="astro_eclipse_column_below_horizon">Κάτω από τον ορίζοντα</string>
+    <string name="quick_action_add_track">Προσθήκη ίχνους</string>
+    <string name="quick_action_all_tracks">Όλα τα ίχνη</string>
+    <string name="quick_action_tracks_select_descr">Προσθέστε ένα ή περισσότερα ίχνη για εμφάνιση ή απόκρυψη τους στον χάρτη με ένα πάτημα.</string>
+    <string name="quick_action_tracks_always_ask_descr">Πατώντας αυτή την ενέργεια, ανοίγει τη λίστα των ιχνών όπου μπορείτε να εμφανίσετε ή να αποκρύψετε ένα ή περισσότερα από αυτά.</string>
+    <string name="battery_saving_mode_descr">Περιορίζει τον χάρτη στα 20 καρέ ανά δευτερόλεπτο (FPS) για να μειωθεί η κατανάλωση της μπαταρίας και το ζέσταμα της συσκευής. Η κίνηση του χάρτη γίνεται λιγότερη ομαλή.</string>
+    <string name="crash_report_sent">Η αναφορά στάλθηκε. Ευχαριστούμε!</string>
+    <string name="crash_report_send_failed">Δεν ήταν δυνατή η αποστολή της αναφοράς. Δοκιμάστε ξανά αργότερα.</string>
 </resources>

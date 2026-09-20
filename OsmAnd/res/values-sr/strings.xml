@@ -5343,4 +5343,7 @@
     <string name="quick_action_tracks_select_descr">Додајте једну или више путања како бисте их приказали или сакрили на мапи једним додиром.</string>
     <string name="quick_action_tracks_always_ask_descr">Додиривањем ове радње отвара се листа путања, где можете приказати или сакрити једну или више њих.</string>
     <string name="quick_action_all_tracks">Све путање</string>
+    <string name="crash_report_sent">Извештај је послат. Хвала вам!</string>
+    <string name="crash_report_send_failed">Извештај није могао бити послат. Покушајте поново касније.</string>
+    <string name="battery_saving_mode_descr">Ограничава приказ мапе на 20 сличица у секунди како би се смањила потрошња батерије и загревање уређаја. Кретање мапе постаје мање глатко.</string>
 </resources>

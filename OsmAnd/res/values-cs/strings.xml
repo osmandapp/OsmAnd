@@ -5289,4 +5289,6 @@
     <string name="astro_eclipse_phase_penumbral">Penumbrální</string>
     <string name="astro_lunar_eclipse_calculating_state">Výpočet viditelnosti na mapě…</string>
     <string name="astro_eclipse_column_below_horizon">Pod obzorem</string>
+    <string name="crash_report_send_failed">Hlášení se nepodařilo odeslat. Zkuste to znovu později.</string>
+    <string name="crash_report_sent">Hlášení odesláno. Děkujeme!</string>
 </resources>

@@ -4493,7 +4493,7 @@
     <string name="percent_hour">%/h</string>
     <string name="kpa_unit">kPa</string>
     <string name="simulate_obd">Simuler des données OBD</string>
-    <string name="obd_engine_runtime_desc">Indique depuis combien de temps le moteur tourne depuis son démarrage.</string>
+    <string name="obd_engine_runtime_desc">Affiche la durée de fonctionnement du moteur depuis son dernier démarrage.</string>
     <string name="obd_throttle_position_desc">Indique l\'angle du papillon des gaz dans le corps du papillon.</string>
     <string name="obd_throttle_position">Position du papillon des gaz</string>
     <string name="obd_fuel_pressure">Pression du carburant</string>
@@ -4880,8 +4880,8 @@
     <string name="avg_speed">Vitesse moyenne</string>
     <string name="organize_by_max_speed">Vitesse maximale</string>
     <string name="organize_by_max_altitude">Altitude maximale</string>
-    <string name="copy_from_portrait_layout">Copier à partir de la mise en page Portrait</string>
-    <string name="copy_from_landscape_layout">Copier à partir de la mise en page Paysage</string>
+    <string name="copy_from_portrait_layout">Copier à partir de la mise en page « Portrait »</string>
+    <string name="copy_from_landscape_layout">Copier à partir de la mise en page « Paysage »</string>
     <string name="panels_layout_compact">Compact</string>
     <string name="panels_layout_wide">Large</string>
     <string name="panels_layout">Disposition des panneaux</string>
@@ -5274,4 +5274,7 @@
     <string name="quick_action_tracks_select_descr">Ajoutez une ou plusieurs traces pour les afficher ou les masquer sur la carte d\'un seul appui.</string>
     <string name="quick_action_tracks_always_ask_descr">Cette action ouvre la liste des traces qui permet de sélectionner quelle(s) trace(s) afficher ou masquer.</string>
     <string name="quick_action_all_tracks">Toutes les traces</string>
+    <string name="crash_report_sent">Le rapport a été envoyé. Merci !</string>
+    <string name="crash_report_send_failed">Impossible d\'envoyer le rapport. Veuillez réessayer plus tard.</string>
+    <string name="battery_saving_mode_descr">Réduit la fréquence d’affichage de la carte à 20 images / seconde pour améliorer l’autonomie de la batterie et limiter l\'échauffement de l\'appareil. Le déplacement de la carte sera moins fluide.</string>
 </resources>

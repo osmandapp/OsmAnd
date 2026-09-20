@@ -63,6 +63,7 @@ import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
+import net.osmand.plus.feedback.MemoryLog;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.gallery.GalleryHelper;
@@ -342,6 +343,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private synchronized void startDiagnostics() {
 		OsmAndDiagnosticThread diagnosticThread = this.diagnosticThread;
 		if (diagnosticThread == null || !diagnosticThread.isAlive()) {
+			MemoryLog.watchActivities(this);
 			diagnosticThread = new OsmAndDiagnosticThread(this);
 			diagnosticThread.start();
 			this.diagnosticThread = diagnosticThread;
@@ -570,6 +572,12 @@ public class OsmandApplication extends MultiDexApplication {
 	public void onLowMemory() {
 		super.onLowMemory();
 		resourceManager.onLowMemory();
+	}
+
+	@Override
+	public void onTrimMemory(int level) {
+		super.onTrimMemory(level);
+		MemoryLog.onTrimMemory(level);
 	}
 
 	@Override

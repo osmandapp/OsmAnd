@@ -189,9 +189,6 @@ class RoutingStats {
 	var loadEdgesTime: Double = 0.0
 
 	@JvmField
-	var altRoutingTime: Double = 0.0
-
-	@JvmField
 	var routingTime: Double = 0.0
 
 	@JvmField
