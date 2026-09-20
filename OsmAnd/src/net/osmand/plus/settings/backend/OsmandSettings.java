@@ -1472,6 +1472,11 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SEND_ANONYMOUS_DATA_REQUEST_PROCESSED = new BooleanPreference(this, "send_anonymous_data_request_processed", false).makeGlobal().cache();
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_REQUESTS_COUNT = new IntPreference(this, "send_anonymous_data_requests_count", 0).makeGlobal().cache();
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_LAST_REQUEST_NS = new IntPreference(this, "send_anonymous_data_last_request_ns", -1).makeGlobal().cache();
+
+	// a heap histogram is collected by itself when the heap grows past what a healthy session
+	// needs, so that a report from a device in trouble says what the heap was made of
+	public final OsmandPreference<Boolean> AUTO_HEAP_HISTOGRAM = new BooleanPreference(this, "auto_heap_histogram", true).makeGlobal().makeShared().cache();
+
 	// timestamp of the newest system crash (ANR, native) the crash dialog was already shown for
 	public final OsmandPreference<Long> LAST_SHOWN_SYSTEM_CRASH_TIME = new LongPreference(this, "last_shown_system_crash_time", 0).makeGlobal();
 

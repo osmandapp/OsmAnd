@@ -14,7 +14,6 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.feedback.HeapDump;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
 import org.apache.commons.logging.Log;
@@ -57,22 +56,19 @@ public class HeapDumpBottomSheet extends BasePreferenceBottomSheet {
 
 		items.add(new DividerHalfItem(getContext()));
 
-		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
-		if (plugin != null) {
-			BottomSheetItemWithCompoundButton[] auto = new BottomSheetItemWithCompoundButton[1];
-			auto[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-					.setChecked(plugin.AUTO_HEAP_HISTOGRAM.get())
-					.setDescription(getString(R.string.heap_dump_auto_descr))
-					.setTitle(getString(R.string.heap_dump_auto))
-					.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
-					.setOnClickListener(v -> {
-						boolean checked = !auto[0].isChecked();
-						plugin.AUTO_HEAP_HISTOGRAM.set(checked);
-						auto[0].setChecked(checked);
-					})
-					.create();
-			items.add(auto[0]);
-		}
+		BottomSheetItemWithCompoundButton[] auto = new BottomSheetItemWithCompoundButton[1];
+		auto[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(settings.AUTO_HEAP_HISTOGRAM.get())
+				.setDescription(getString(R.string.heap_dump_auto_descr))
+				.setTitle(getString(R.string.heap_dump_auto))
+				.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
+				.setOnClickListener(v -> {
+					boolean checked = !auto[0].isChecked();
+					settings.AUTO_HEAP_HISTOGRAM.set(checked);
+					auto[0].setChecked(checked);
+				})
+				.create();
+		items.add(auto[0]);
 	}
 
 	private void collect() {
@@ -81,7 +77,7 @@ public class HeapDumpBottomSheet extends BasePreferenceBottomSheet {
 			String summary;
 			try {
 				summary = HeapDump.collect(app);
-			} catch (IOException | RuntimeException e) {
+			} catch (IOException | RuntimeException | OutOfMemoryError e) {
 				LOG.error(e);
 				summary = "Failed: " + e.getMessage();
 			}
