@@ -13,6 +13,7 @@ import org.junit.Test;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Way;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.MapUtils;
 
 public class PublicTransportRouteTestingTest {
@@ -220,6 +221,7 @@ public class PublicTransportRouteTestingTest {
 				Collections.emptyMap());
 		List<TransportRouteResult> results = new TransportRoutePlanner().buildRoute(new TransportRoutingContext(cfg, null, readers), start, end);
 		Assert.assertFalse("Routing failed to produce a result", results.isEmpty());
+		checkFerryRules(results);
 
 		List<Way> geometry = results.get(0).getSegments().get(0).getGeometry();
 		StringBuilder res = new StringBuilder();
@@ -231,6 +233,22 @@ public class PublicTransportRouteTestingTest {
 			res.append(String.format(Locale.US, "Way %d: %d nodes, %.0f m", way.getId(), way.getNodes().size(), length));
 		}
 		return res.toString();
+	}
+
+	// a ferry ride is one segment: ferry ways joined at a junction in the water are merged, so a change
+	// of segments there (an extra transfer on the map) or two ferry segments in a row is an error
+	private void checkFerryRules(List<TransportRouteResult> results) {
+		for (TransportRouteResult result : results) {
+			TransportRouteResultSegment previous = null;
+			for (TransportRouteResultSegment segment : result.getSegments()) {
+				Assert.assertFalse("Change of segments at a junction in the water: " + segment.route.getRef(),
+						previous != null && TransportFerryHelper.isJunctionStop(previous.route, previous.end));
+				Assert.assertFalse("Two ferry segments in a row: " + segment.route.getRef(),
+						previous != null && TransportFerryHelper.isFerry(previous.route)
+								&& TransportFerryHelper.isFerry(segment.route));
+				previous = segment;
+			}
+		}
 	}
 
 	private List<String> calculateRoute(String obfFileName, LatLon start, LatLon end) throws Exception {
@@ -247,6 +265,7 @@ public class PublicTransportRouteTestingTest {
 		TransportRoutePlanner planner = new TransportRoutePlanner();
 		List<TransportRouteResult> results = planner.buildRoute(ctx, start, end);
 		Assert.assertNotNull("Routing failed to produce a result list", results);
+		checkFerryRules(results);
 
 		List<String> actualResults = new ArrayList<>();
 		for (TransportRouteResult r : results) {
