@@ -1,6 +1,7 @@
 package net.osmand.plus.feedback;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.BufferedInputStream;
 import java.io.EOFException;
@@ -54,6 +55,14 @@ public class HeapHistogram {
 	// map over all of them would be a larger allocation than anything this class is measuring
 	private static final int BIG_ARRAY_BYTES = 1024;
 
+	// every object that owns memory outside the Java heap registers it here, and the registry
+	// knows how many bytes one such object costs; the thunks are what the count comes from
+	private static final String REGISTRY_CLASS = "libcore.util.NativeAllocationRegistry";
+	private static final String THUNK_CLASS = "libcore.util.NativeAllocationRegistry$CleanerThunk";
+	// a platform that laid the fields out differently would have us read arbitrary numbers as
+	// registry ids, and a map that grows with every thunk is the one thing this must not do
+	private static final int MAX_REGISTRIES = 4096;
+
 	private final Map<Long, String> strings = new HashMap<>();
 	private final Map<Long, Long> classNames = new HashMap<>();
 	private final Map<Long, long[]> byClass = new HashMap<>();
@@ -66,6 +75,12 @@ public class HeapHistogram {
 	private final Map<Long, int[]> objectFieldOffsets = new HashMap<>();
 	// "owner class -> array kind" -> {bytes, count}
 	private final Map<String, long[]> owners = new HashMap<>();
+	// registry object id -> {bytes one allocation costs, allocations registered}
+	private final Map<Long, long[]> registries = new HashMap<>();
+	private long registryClassId;
+	private long thunkClassId;
+	private int registrySizeOffset = -1;
+	private int thunkRegistryOffset = -1;
 	private byte[] instance = new byte[4096];
 
 	private int idSize = 4;
@@ -77,7 +92,7 @@ public class HeapHistogram {
 		try (InputStream in = new BufferedInputStream(new FileInputStream(hprof), 256 * 1024)) {
 			histogram.read(new Reader(in), false);
 		}
-		if (!histogram.bigArrays.isEmpty()) {
+		if (!histogram.bigArrays.isEmpty() || histogram.thunkRegistryOffset >= 0) {
 			// a second walk finds which object holds each large array: the first cannot, because
 			// an array is written to the dump before whatever points at it
 			try (InputStream in = new BufferedInputStream(new FileInputStream(hprof), 256 * 1024)) {
@@ -137,11 +152,14 @@ public class HeapHistogram {
 			int sub = in.readByte() & 0xff;
 			switch (sub) {
 				case SUB_INSTANCE_DUMP: {
-					in.skip(idSize + 4);
+					long objectId = in.readId(idSize);
+					in.skip(4);
 					long cls = in.readId(idSize);
 					long size = in.readInt() & 0xffffffffL;
 					if (secondPass) {
-						attributeArrays(in, cls, size);
+						if (!readNativeAllocation(in, objectId, cls, size)) {
+							attributeArrays(in, cls, size);
+						}
 					} else {
 						count(cls, size + idSize + OBJECT_OVERHEAD);
 						in.skip(size);
@@ -239,13 +257,101 @@ public class HeapHistogram {
 			in.skip((idSize + 1L) * fields);
 			return;
 		}
+		String name = className(classId);
+		boolean watched = REGISTRY_CLASS.equals(name) || THUNK_CLASS.equals(name);
 		byte[] types = new byte[fields];
+		long[] fieldNames = watched ? new long[fields] : null;
 		for (int i = 0; i < fields; i++) {
-			in.skip(idSize);
+			long fieldName = in.readId(idSize);
+			if (fieldNames != null) {
+				fieldNames[i] = fieldName;
+			}
 			types[i] = (byte) in.readByte();
+		}
+		if (watched) {
+			rememberNativeFields(classId, name, types, fieldNames);
 		}
 		superClasses.put(classId, superClass);
 		declaredFields.put(classId, types);
+	}
+
+	/**
+	 * Finds where NativeAllocationRegistry keeps the size of one allocation and where a thunk
+	 * keeps the registry it belongs to. The names come from the dump, so a platform that renamed
+	 * them simply leaves this section out instead of reporting invented numbers.
+	 */
+	private void rememberNativeFields(long classId, @NonNull String className,
+	                                  @NonNull byte[] types, @NonNull long[] fieldNames) {
+		boolean registry = REGISTRY_CLASS.equals(className);
+		if (registry) {
+			registryClassId = classId;
+		} else {
+			thunkClassId = classId;
+		}
+		int offset = 0;
+		for (int i = 0; i < types.length; i++) {
+			String field = strings.get(fieldNames[i]);
+			if (registry && types[i] == 11 && "size".equals(field)) {
+				registrySizeOffset = offset;
+			} else if (!registry && types[i] == 2 && field != null && field.startsWith("this$")) {
+				thunkRegistryOffset = offset;
+			}
+			offset += valueSize(types[i]);
+		}
+	}
+
+	/** @return true when the instance was read rather than skipped */
+	private boolean readNativeAllocation(@NonNull Reader in, long objectId, long classId, long size)
+			throws IOException {
+		boolean isRegistry = classId == registryClassId && registrySizeOffset >= 0;
+		boolean isThunk = classId == thunkClassId && thunkRegistryOffset >= 0;
+		if (!isRegistry && !isThunk || size > Integer.MAX_VALUE) {
+			return false;
+		}
+		int length = (int) size;
+		if (instance.length < length) {
+			instance = new byte[length];
+		}
+		in.readFully(instance, length);
+		if (isRegistry && registrySizeOffset + 8 <= length) {
+			long[] entry = entryFor(objectId);
+			if (entry != null) {
+				entry[0] = readLong(instance, registrySizeOffset);
+			}
+		} else if (isThunk && thunkRegistryOffset + idSize <= length) {
+			long registry = readId(instance, thunkRegistryOffset);
+			long[] entry = registry != 0 ? entryFor(registry) : null;
+			if (entry != null) {
+				entry[1]++;
+			}
+		}
+		return true;
+	}
+
+	@Nullable
+	private long[] entryFor(long registryId) {
+		long[] entry = registries.get(registryId);
+		if (entry == null) {
+			if (registries.size() >= MAX_REGISTRIES) {
+				return null;
+			}
+			entry = new long[2];
+			registries.put(registryId, entry);
+		}
+		return entry;
+	}
+
+	/**
+	 * Remembers which class holds a registry. A thunk points at its own registry and would name
+	 * itself, which says nothing; anything else that holds one is the class whose objects the
+	 * registry accounts for.
+	 */
+	private long readLong(@NonNull byte[] bytes, int offset) {
+		long value = 0;
+		for (int i = 0; i < 8; i++) {
+			value = (value << 8) | (bytes[offset + i] & 0xff);
+		}
+		return value;
 	}
 
 	private void rememberBigArray(long arrayId, long bytes, long kind) {
@@ -377,6 +483,51 @@ public class HeapHistogram {
 		return name != null ? name : "unknown";
 	}
 
+	/**
+	 * What the Java heap says about memory that is not in it: every object holding a native
+	 * buffer registers its size, so the dump can name the classes behind the native heap.
+	 */
+	private void appendNativeAllocations(@NonNull StringBuilder sb) {
+		// a registry per object is the common case, so listing them one by one says nothing;
+		// what a report needs is whether the bytes are a few large buffers or many small ones
+		Map<Long, long[]> bySize = new HashMap<>();
+		long total = 0;
+		long count = 0;
+		for (long[] registry : registries.values()) {
+			long bytes = registry[0] * registry[1];
+			if (bytes <= 0) {
+				continue;
+			}
+			total += bytes;
+			count += registry[1];
+			long bucket = Long.highestOneBit(registry[0]);
+			long[] sum = bySize.get(bucket);
+			if (sum == null) {
+				sum = new long[2];
+				bySize.put(bucket, sum);
+			}
+			sum[0] += bytes;
+			sum[1] += registry[1];
+		}
+		if (count == 0) {
+			return;
+		}
+		sb.append("--- native registered ").append(total / 1024).append("K in ");
+		sb.append(count).append(" allocations, ").append(registries.size()).append(" registries\n");
+		List<Map.Entry<Long, long[]>> buckets = new ArrayList<>(bySize.entrySet());
+		Collections.sort(buckets, (a, b) -> Long.compare(b.getValue()[0], a.getValue()[0]));
+		sb.append("--- bytesK count bytes each\n");
+		int written = 0;
+		for (Map.Entry<Long, long[]> bucket : buckets) {
+			if (written++ >= 8) {
+				break;
+			}
+			sb.append(bucket.getValue()[0] / 1024).append('\t');
+			sb.append(bucket.getValue()[1]).append('\t');
+			sb.append(bucket.getKey()).append('\n');
+		}
+	}
+
 	@NonNull
 	private String format() {
 		List<Map.Entry<Long, long[]>> entries = new ArrayList<>(byClass.entrySet());
@@ -416,6 +567,7 @@ public class HeapHistogram {
 			sb.append("unattributed\t").append(bigArrays.size()).append('\t');
 			sb.append(unattributed / 1024).append("K still held by arrays or roots\n");
 		}
+		appendNativeAllocations(sb);
 		sb.append("--- bytesK count class\n");
 		for (Map.Entry<Long, long[]> entry : entries) {
 			if (entry.getValue()[1] < 64 * 1024) {
