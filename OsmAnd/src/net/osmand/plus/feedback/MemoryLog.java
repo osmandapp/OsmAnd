@@ -41,6 +41,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Memory samples written to disk while the app runs, so that a crash report sent after the
@@ -125,7 +127,7 @@ public class MemoryLog {
 	private static long lastSampleTime;
 	private static long peakUsed;
 	private static boolean sessionStarted;
-	private static boolean activitiesWatched;
+	private static final AtomicBoolean activitiesWatched = new AtomicBoolean();
 	private static int sampleCount;
 	private static boolean summaryAffordable = true;
 	private static boolean smapsAffordable = true;
@@ -139,8 +141,11 @@ public class MemoryLog {
 	private static long previousWrite;
 	private static boolean summaryDue;
 	private static long lastHistogramTime;
-	private static int trimLevel = -1;
-	private static int trimCount;
+	// written from the main thread and read by the sampler, so they are kept lock free: the
+	// callback is a counter update and must never wait behind a walk of the process. Level and
+	// count share one value so that a sample cannot read one of them from a later trim than the
+	// other: the high half holds the level raised by one, the low half the number of calls.
+	private static final AtomicLong trims = new AtomicLong();
 
 	// called from a background thread, at most once per SAMPLE_INTERVAL
 	public static synchronized void sample(@NonNull OsmandApplication app) {
@@ -185,9 +190,11 @@ public class MemoryLog {
 
 	// the system asking for memory back is the clearest sign that the process is in trouble,
 	// and it arrives on the main thread, so it is only remembered here and written by the sample
-	public static synchronized void onTrimMemory(int level) {
-		trimLevel = Math.max(trimLevel, level);
-		trimCount++;
+	public static void onTrimMemory(int level) {
+		trims.accumulateAndGet(level, (current, raised) -> {
+			long highest = Math.max(current >>> 32, raised + 1);
+			return (highest << 32) | ((current & 0xffffffffL) + 1);
+		});
 	}
 
 	@NonNull
@@ -215,10 +222,10 @@ public class MemoryLog {
 		if (retained != null) {
 			sb.append(' ').append(retained);
 		}
+		long trimmed = trims.getAndSet(0);
+		long trimCount = trimmed & 0xffffffffL;
 		if (trimCount > 0) {
-			sb.append(" trim=").append(trimLevel).append('x').append(trimCount);
-			trimLevel = -1;
-			trimCount = 0;
+			sb.append(" trim=").append((trimmed >>> 32) - 1).append('x').append(trimCount);
 		}
 		String busy = busyWith(app);
 		if (busy != null) {
@@ -738,12 +745,12 @@ public class MemoryLog {
 
 	// activities are destroyed by the system, so any that outlive their onDestroy by a while is
 	// either a leak or a slow collection; both are worth knowing about before the process died
-	public static synchronized void watchActivities(@NonNull OsmandApplication app) {
-		if (activitiesWatched) {
-			// diagnostics restart every time the app comes back to the foreground
+	public static void watchActivities(@NonNull OsmandApplication app) {
+		// diagnostics restart every time the app comes back to the foreground, and this is
+		// called from the main thread, which must not wait for a sample to finish
+		if (!activitiesWatched.compareAndSet(false, true)) {
 			return;
 		}
-		activitiesWatched = true;
 		app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
 			@Override
 			public void onActivityDestroyed(@NonNull Activity activity) {
