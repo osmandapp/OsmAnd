@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,6 +51,15 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 
 	private static final String MESSAGE_TYPE_PICTURE = "picture";
 
+	private static final String MESSAGE_TYPE_HEADING = "heading";
+
+	/** Smallest rotation worth redrawing the map for, in degrees. Shared by both filters. */
+	private static final int HEADING_MIN_DELTA = 1;
+
+	private static final int VIEWER_HEADING_INTERVAL_MS = 150;
+
+	private static final long HEADING_MIN_INTERVAL_MS = 100;
+
 	private static final Pattern IMAGE_ID_PATTERN = Pattern.compile("[A-Za-z0-9._:-]{1,64}");
 
 	private static final String VIEWER_STYLE =
@@ -61,42 +71,103 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 					+ "transition:opacity 0.5s ease-in-out,transform 0.5s ease-in-out}"
 					+ "#viewer.pnx-grid-toggled ~ #attribution{opacity:0;transform:translateY(100%)}";
 
-	private static final String VIEWER_SCRIPT =
-			"function(nonce){"
-					+ "var viewer=document.getElementById('viewer');"
-					+ "var attribution=document.getElementById('attribution');"
-					+ "var port=null;"
-					+ "var picture=null;"
-					+ "function attributionText(){"
-					+ "var meta=viewer.psv&&viewer.psv.getPictureMetadata();"
-					+ "var caption=meta&&meta.caption;"
-					+ "var parts=['\\u00A9 Panoramax'];"
-					+ "if(caption&&caption.producer&&caption.producer.length){"
-					+ "parts.push(caption.producer[caption.producer.length-1]);}"
-					+ "if(caption&&caption.date instanceof Date&&!isNaN(caption.date)){"
-					+ "parts.push(caption.date.toLocaleDateString());}"
-					+ "if(meta&&meta.properties&&meta.properties.license){"
-					+ "parts.push(meta.properties.license);}"
-					+ "return parts.join(' \\u00B7 ');}"
-					+ "function sendPicture(){"
-					+ "if(!port||!picture){return;}"
-					+ "port.postMessage(JSON.stringify({type:'" + MESSAGE_TYPE_PICTURE + "',"
-					+ "id:picture.picId,lat:picture.lat,lon:picture.lon,heading:picture.x}));}"
-					+ "function onPictureLoaded(e){"
-					+ "picture=e&&e.detail;"
-					+ "attribution.textContent=attributionText();"
-					+ "sendPicture();}"
-					+ "function onHandshake(e){"
-					+ "if(e.data!==nonce||!e.ports||!e.ports.length){return;}"
-					+ "port=e.ports[0];"
-					+ "window.removeEventListener('message',onHandshake);"
-					+ "sendPicture();}"
-					+ "window.addEventListener('message',onHandshake);"
-					+ "viewer.addEventListener('psv:picture-loaded',onPictureLoaded);"
-					+ "setTimeout(function(){"
-					+ "if(!customElements.get('pnx-photo-viewer')){pnxFail();}"
-					+ "}," + VIEWER_TIMEOUT_MS + ");"
-					+ "}";
+	private static final String VIEWER_SCRIPT = String.join("\n",
+			"function(nonce) {",
+			"  var viewer = document.getElementById('viewer');",
+			"  var attribution = document.getElementById('attribution');",
+			"  var port = null;",
+			"  var picture = null;",
+			"  var sentHeading = null;",
+			"  var pendingHeading = null;",
+			"  var headingTimer = null;",
+			"  var headingSentAt = 0;",
+			"",
+			"  function attributionText() {",
+			"    var meta = viewer.psv && viewer.psv.getPictureMetadata();",
+			"    var caption = meta && meta.caption;",
+			"    var parts = ['\\u00A9 Panoramax'];",
+			"    if (caption && caption.producer && caption.producer.length) {",
+			"      parts.push(caption.producer[caption.producer.length - 1]);",
+			"    }",
+			"    if (caption && caption.date instanceof Date && !isNaN(caption.date)) {",
+			"      parts.push(caption.date.toLocaleDateString());",
+			"    }",
+			"    if (meta && meta.properties && meta.properties.license) {",
+			"      parts.push(meta.properties.license);",
+			"    }",
+			"    return parts.join(' \\u00B7 ');",
+			"  }",
+			"",
+			"  function sendPicture() {",
+			"    if (!port || !picture) { return; }",
+			"    port.postMessage(JSON.stringify({type: '" + MESSAGE_TYPE_PICTURE + "',",
+			"      id: picture.picId, lat: picture.lat, lon: picture.lon, heading: picture.x}));",
+			"  }",
+			"",
+			"  function normalizeAngle(a) { var n = a % 360; return n < 0 ? n + 360 : n; }",
+			"",
+			"  function angleDiff(a, b) { var d = Math.abs(a - b); return d > 180 ? 360 - d : d; }",
+			"",
+			"  function toAngle(v) {",
+			"    return typeof v === 'number' && isFinite(v) ? normalizeAngle(v) : null;",
+			"  }",
+			"",
+			"  function flushHeading() {",
+			"    headingTimer = null;",
+			"    if (!port || pendingHeading === null) { return; }",
+			"    var heading = pendingHeading;",
+			"    pendingHeading = null;",
+			"    if (sentHeading !== null && angleDiff(heading, sentHeading) < " + HEADING_MIN_DELTA + ") { return; }",
+			"    sentHeading = heading;",
+			"    headingSentAt = performance.now();",
+			"    port.postMessage(JSON.stringify({type: '" + MESSAGE_TYPE_HEADING + "',",
+			"      heading: heading}));",
+			"  }",
+			"",
+			"  function onViewRotated(e) {",
+			"    var heading = toAngle(e && e.detail ? e.detail.x : null);",
+			"    if (heading === null) { return; }",
+			"    if (headingTimer !== null) { pendingHeading = heading; return; }",
+			"    if (sentHeading !== null && angleDiff(heading, sentHeading) < " + HEADING_MIN_DELTA + ") {",
+			"      pendingHeading = null; return;",
+			"    }",
+			"    pendingHeading = heading;",
+			"    headingTimer = setTimeout(flushHeading,",
+			"      Math.max(0, " + VIEWER_HEADING_INTERVAL_MS + " - (performance.now() - headingSentAt)));",
+			"  }",
+			"",
+			// The new picture carries its own heading, so the filter restarts from it
+			// instead of from whatever the previous picture was left pointing at.
+			"  function resetHeading() {",
+			"    if (headingTimer !== null) { clearTimeout(headingTimer); headingTimer = null; }",
+			"    pendingHeading = null;",
+			"    sentHeading = toAngle(picture ? picture.x : null);",
+			"    headingSentAt = performance.now();",
+			"  }",
+			"",
+			"  function onPictureLoaded(e) {",
+			"    picture = e && e.detail;",
+			"    resetHeading();",
+			"    attribution.textContent = attributionText();",
+			"    sendPicture();",
+			"  }",
+			"",
+			"  function onHandshake(e) {",
+			"    if (e.data !== nonce || !e.ports || !e.ports.length) { return; }",
+			"    port = e.ports[0];",
+			"    window.removeEventListener('message', onHandshake);",
+			"    if (headingTimer !== null) { clearTimeout(headingTimer); headingTimer = null; }",
+			"    sendPicture();",
+			"    flushHeading();",
+			"  }",
+			"",
+			"  window.addEventListener('message', onHandshake);",
+			"  viewer.addEventListener('psv:picture-loaded', onPictureLoaded);",
+			"  viewer.addEventListener('psv:view-rotated', onViewRotated);",
+			"  setTimeout(function() {",
+			"    if (!customElements.get('pnx-photo-viewer')) { pnxFail(); }",
+			"  }, " + VIEWER_TIMEOUT_MS + ");",
+			"}");
 
 	private String imageId;
 	private LatLon latLon;
@@ -105,6 +176,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 
 	private WebMessagePort viewerPort;
 	private String viewerNonce;
+	private long lastHeadingTime;
 
 	public PanoramaxImageDialog(@NonNull MapActivity mapActivity, @NonNull Bundle bundle) {
 		super(mapActivity, CardDialogType.PANORAMAX);
@@ -307,9 +379,15 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		} catch (JSONException e) {
 			return;
 		}
-		if (!MESSAGE_TYPE_PICTURE.equals(message.optString("type"))) {
-			return;
+		String type = message.optString("type");
+		if (MESSAGE_TYPE_PICTURE.equals(type)) {
+			onPictureMessage(message);
+		} else if (MESSAGE_TYPE_HEADING.equals(type)) {
+			onHeadingMessage(message);
 		}
+	}
+
+	private void onPictureMessage(@NonNull JSONObject message) {
 		String id = message.optString("id");
 		double lat = message.optDouble("lat", Double.NaN);
 		double lon = message.optDouble("lon", Double.NaN);
@@ -323,7 +401,49 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		imageId = id;
 		latLon = new LatLon(lat, lon);
 		compassAngle = heading;
+		// The picture carries its own heading, so the next rotation must not be rate limited
+		// against the one that belonged to the previous picture.
+		lastHeadingTime = 0;
 		setImageLocation(latLon, heading, false);
+	}
+
+	private void onHeadingMessage(@NonNull JSONObject message) {
+		double heading = normalizeHeading(message.optDouble("heading", Double.NaN));
+		if (Double.isNaN(heading)) {
+			return;
+		}
+		long time = SystemClock.elapsedRealtime();
+		if (time - lastHeadingTime < HEADING_MIN_INTERVAL_MS
+				|| angleDifference(heading, compassAngle) < HEADING_MIN_DELTA) {
+			return;
+		}
+		lastHeadingTime = time;
+		compassAngle = heading;
+		setImageHeading(heading);
+	}
+
+	/**
+	 * Rotates the selected image marker in place. Unlike
+	 * {@link #setImageLocation(LatLon, double, boolean)} it never touches the map position.
+	 */
+	private void setImageHeading(double heading) {
+		MapActivity mapActivity = getMapActivity();
+		PanoramaxLayer layer = mapActivity.getMapView().getLayerByClass(PanoramaxVectorLayer.class);
+		if (layer != null) {
+			layer.setSelectedImageCameraAngle((float) heading);
+			mapActivity.refreshMap();
+		}
+	}
+
+	/**
+	 * Both headings are normalized first, because one kept from a tile is not guaranteed to be
+	 * in range and a raw difference above 360 would otherwise come out negative.
+	 *
+	 * @return the smaller of the two angles between the headings, so 359 and 1 are 2 apart.
+	 */
+	private static double angleDifference(double first, double second) {
+		double difference = Math.abs(normalizeHeading(first) - normalizeHeading(second));
+		return difference > 180 ? 360 - difference : difference;
 	}
 
 	/** @return the heading in [0, 360), or NaN when the viewer did not report a usable one. */
