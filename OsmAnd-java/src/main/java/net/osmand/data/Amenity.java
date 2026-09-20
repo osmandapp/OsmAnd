@@ -334,6 +334,12 @@ public class Amenity extends MapObject {
 		}
 	}
 
+	public void removeAdditionalInfo(String tag) {
+		if (additionalInfo != null) {
+			additionalInfo.remove(tag);
+		}
+	}
+
 	public void copyAdditionalInfo(Amenity amenity, boolean overwrite) {
 		copyAdditionalInfo(amenity.getInternalAdditionalInfoMap(), overwrite);
 	}
