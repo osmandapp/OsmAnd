@@ -47,12 +47,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.AbstractMap;
+import java.util.AbstractSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Map.Entry;
 import java.util.Stack;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.TimeZone;
 
 @Deprecated
@@ -81,6 +87,9 @@ public class GPXUtilities {
 	public static final String POINT_ELEVATION = "ele";
 	public static final String POINT_SPEED = "speed";
 	public static final String POINT_BEARING = "bearing";
+	public static final String POINT_HEADING = "heading";
+	private static final String GPXTPX_TRACK_POINT_EXTENSION = GPXTPX_PREFIX + "TrackPointExtension";
+	private static final String EXTENSIONS_WRITER_KEY = "extensions";
 
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
 	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
@@ -165,27 +174,227 @@ public class GPXUtilities {
 		void writeExtensions(XmlSerializer serializer);
 	}
 
+	private static final String[] EMPTY_EXTENSIONS = new String[0];
+
+	private static final Map<String, String> SHARED_TAG_NAMES = new ConcurrentHashMap<>();
+
+	/** Tag names come from a small vocabulary, so one instance of every name is shared. */
+	static String internTagName(String name) {
+		String shared = SHARED_TAG_NAMES.putIfAbsent(name, name);
+		return shared != null ? shared : name;
+	}
+
+	/**
+	 * Mutable view over the extensions of one {@link GPXExtensions}, which keeps them as a single
+	 * array of [key, value, key, value ...] sorted by key and looked up with a binary search. A
+	 * recorded point carries 4-8 extensions and a LinkedHashMap spends about 40 bytes on every one
+	 * of them plus its own table; here a point pays one array and one reference per key and value.
+	 */
+	static class ExtensionsMap extends AbstractMap<String, String> {
+
+		private final GPXExtensions owner;
+
+		ExtensionsMap(GPXExtensions owner) {
+			this.owner = owner;
+		}
+
+		private String[] data() {
+			String[] data = owner.extensionsArray;
+			return data == null ? EMPTY_EXTENSIONS : data;
+		}
+
+		private void setData(String[] data) {
+			owner.extensionsArray = data.length == 0 ? null : data;
+		}
+
+		@Override
+		public int size() {
+			return data().length / 2;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return data().length == 0;
+		}
+
+		@Override
+		public boolean containsKey(Object key) {
+			return key instanceof String && indexOf(data(), (String) key) >= 0;
+		}
+
+		@Override
+		public String get(Object key) {
+			if (!(key instanceof String)) {
+				return null;
+			}
+			String[] data = data();
+			int index = indexOf(data, (String) key);
+			return index >= 0 ? data[index + 1] : null;
+		}
+
+		@Override
+		public String put(String key, String value) {
+			String[] data = data();
+			int index = indexOf(data, key);
+			if (index >= 0) {
+				String previous = data[index + 1];
+				data[index + 1] = value;
+				return previous;
+			}
+			int insert = -(index + 1);
+			String[] updated = new String[data.length + 2];
+			System.arraycopy(data, 0, updated, 0, insert);
+			updated[insert] = internTagName(key);
+			updated[insert + 1] = value;
+			System.arraycopy(data, insert, updated, insert + 2, data.length - insert);
+			setData(updated);
+			return null;
+		}
+
+		@Override
+		public String remove(Object key) {
+			if (!(key instanceof String)) {
+				return null;
+			}
+			String[] data = data();
+			int index = indexOf(data, (String) key);
+			if (index < 0) {
+				return null;
+			}
+			String previous = data[index + 1];
+			String[] updated = new String[data.length - 2];
+			System.arraycopy(data, 0, updated, 0, index);
+			System.arraycopy(data, index + 2, updated, index, data.length - index - 2);
+			setData(updated);
+			return previous;
+		}
+
+		@Override
+		public void clear() {
+			owner.extensionsArray = null;
+		}
+
+		@Override
+		public Set<Entry<String, String>> entrySet() {
+			return new AbstractSet<Entry<String, String>>() {
+
+				@Override
+				public int size() {
+					return ExtensionsMap.this.size();
+				}
+
+				@Override
+				public Iterator<Entry<String, String>> iterator() {
+					return new Iterator<Entry<String, String>>() {
+
+						private int index = 0;
+
+						@Override
+						public boolean hasNext() {
+							return index < data().length;
+						}
+
+						@Override
+						public Entry<String, String> next() {
+							String[] data = data();
+							if (index >= data.length) {
+								throw new NoSuchElementException();
+							}
+							Entry<String, String> entry = new ExtensionEntry(data[index], data[index + 1]);
+							index += 2;
+							return entry;
+						}
+
+						@Override
+						public void remove() {
+							index -= 2;
+							ExtensionsMap.this.remove(data()[index]);
+						}
+					};
+				}
+			};
+		}
+
+		private class ExtensionEntry implements Entry<String, String> {
+
+			private final String key;
+			private String value;
+
+			ExtensionEntry(String key, String value) {
+				this.key = key;
+				this.value = value;
+			}
+
+			@Override
+			public String getKey() {
+				return key;
+			}
+
+			@Override
+			public String getValue() {
+				return value;
+			}
+
+			@Override
+			public String setValue(String newValue) {
+				String previous = value;
+				value = newValue;
+				ExtensionsMap.this.put(key, newValue);
+				return previous;
+			}
+		}
+
+		/** Index of the key inside the array, or -(insertion point) - 1 when it is not there. */
+		private static int indexOf(String[] data, String key) {
+			int low = 0;
+			int high = data.length / 2 - 1;
+			while (low <= high) {
+				int mid = (low + high) >>> 1;
+				int compare = data[mid * 2].compareTo(key);
+				if (compare < 0) {
+					low = mid + 1;
+				} else if (compare > 0) {
+					high = mid - 1;
+				} else {
+					return mid * 2;
+				}
+			}
+			return -(low * 2) - 1;
+		}
+	}
+
 	public interface GPXExtensionsReader {
 		boolean readExtensions(GPXFile res, XmlPullParser parser) throws IOException, XmlPullParserException;
 	}
 
 	public static class GPXExtensions {
 
-		public Map<String, String> extensions = null;
+		// [key, value, key, value ...] sorted by key - see ExtensionsMap
+		String[] extensionsArray = null;
 		public Map<String, GPXExtensionsWriter> extensionsWriters = null;
 
+		public boolean hasExtensions() {
+			return extensionsArray != null;
+		}
+
 		public Map<String, String> getExtensionsToRead() {
-			if (extensions == null) {
+			if (extensionsArray == null) {
 				return Collections.emptyMap();
 			}
-			return extensions;
+			return new ExtensionsMap(this);
 		}
 
 		public Map<String, String> getExtensionsToWrite() {
-			if (extensions == null) {
-				extensions = new LinkedHashMap<>();
+			return new ExtensionsMap(this);
+		}
+
+		public void setExtensions(Map<String, String> values) {
+			if (values == null || values.isEmpty()) {
+				extensionsArray = null;
+				return;
 			}
-			return extensions;
+			extensionsArray = null;
+			getExtensionsToWrite().putAll(values);
 		}
 
 		public Map<String, GPXExtensionsWriter> getExtensionsWriters() {
@@ -221,7 +430,8 @@ public class GPXUtilities {
 
 		public String getColorValue() {
 			String value = null;
-			if (extensions != null) {
+			if (extensionsArray != null) {
+				Map<String, String> extensions = getExtensionsToRead();
 				value = extensions.get(COLOR_NAME_EXTENSION);
 				if (value == null) {
 					value = extensions.get("colour");
@@ -1274,13 +1484,16 @@ public class GPXUtilities {
 		if (!Double.isNaN(p.hdop)) {
 			writeNotNullText(serializer, "hdop", DECIMAL_FORMAT.format(p.hdop));
 		}
+		// speed and heading are serialized from the fields, and the tags that are dropped below are
+		// dropped from this copy - writing a file must not change the point it writes
+		Map<String, String> extensions = new LinkedHashMap<>();
 		if (p.speed > 0) {
-			p.getExtensionsToWrite().put(POINT_SPEED, DECIMAL_FORMAT.format(p.speed));
+			extensions.put(POINT_SPEED, DECIMAL_FORMAT.format(p.speed));
 		}
 		if (!Float.isNaN(p.heading)) {
-			p.getExtensionsToWrite().put("heading", String.valueOf(Math.round(p.heading)));
+			extensions.put(POINT_HEADING, String.valueOf(Math.round(p.heading)));
 		}
-		Map<String, String> extensions = p.getExtensionsToRead();
+		extensions.putAll(p.getExtensionsToRead());
 		if (!"rtept".equals(serializer.getName())) {
 			// Leave "profile" and "trkpt" tags for rtept only
 			extensions.remove(PROFILE_TYPE_EXTENSION);
@@ -1304,8 +1517,21 @@ public class GPXUtilities {
 				extensions.remove(BACKGROUND_TYPE_EXTENSION);
 			}
 		}
+		// a writer that was already there belongs to the point (a recording plugin puts the
+		// sensor values in one); the ones created here exist only for this serialization
+		boolean keepTrackPointExtension = p.extensionsWriters != null
+				&& p.extensionsWriters.containsKey(GPXTPX_TRACK_POINT_EXTENSION);
 		assignExtensionWriter(p, extensions);
 		writeExtensions(serializer, null, p, null);
+		if (p.extensionsWriters != null) {
+			p.extensionsWriters.remove(EXTENSIONS_WRITER_KEY);
+			if (!keepTrackPointExtension) {
+				p.extensionsWriters.remove(GPXTPX_TRACK_POINT_EXTENSION);
+			}
+			if (p.extensionsWriters.isEmpty()) {
+				p.extensionsWriters = null;
+			}
+		}
 		if (progress != null) {
 			progress.progress(1);
 		}
@@ -1323,10 +1549,10 @@ public class GPXUtilities {
 			}
 		}
 		if (!Algorithms.isEmpty(regularExtensions)) {
-			wptPt.setExtensionsWriter("extensions", createExtensionsWriter(regularExtensions, true));
+			wptPt.setExtensionsWriter(EXTENSIONS_WRITER_KEY, createExtensionsWriter(regularExtensions, true));
 		}
 		if (!Algorithms.isEmpty(gpxtpxExtensions)) {
-			wptPt.setExtensionsWriter("gpxtpx:TrackPointExtension", createGpxTpxExtensionsWriter(gpxtpxExtensions, false));
+			wptPt.setExtensionsWriter(GPXTPX_TRACK_POINT_EXTENSION, createGpxTpxExtensionsWriter(gpxtpxExtensions, false));
 		}
 	}
 
@@ -1584,6 +1810,9 @@ public class GPXUtilities {
 	}
 
 	public static GPXFile loadGPXFile(InputStream stream, GPXExtensionsReader extensionsReader, boolean addGeneralTrack) {
+		// extension values of a track repeat themselves point after point ("gps", "1.4", "171.6"),
+		// so one instance per distinct value is kept for the whole file instead of one per point
+		Map<String, String> valuePool = new HashMap<>();
 		GPXFile gpxFile = new GPXFile(null);
 		gpxFile.metadata.time = 0;
 		try {
@@ -1650,12 +1879,15 @@ public class GPXUtilities {
 										for (Entry<String, String> entry : values.entrySet()) {
 											String t = entry.getKey().toLowerCase();
 											String supportedTag = getExtensionsSupportedTag(t);
-											String value = entry.getValue();
-											parse.getExtensionsToWrite().put(supportedTag, value);
+											String value = valuePool.computeIfAbsent(entry.getValue(), v -> v);
 											if (parse instanceof WptPt wptPt) {
 												if (POINT_SPEED.equals(t)) {
 													try {
 														wptPt.speed = Float.parseFloat(value);
+														if (wptPt.speed > 0) {
+															// writeWpt() regenerates it from the field
+															continue;
+														}
 													} catch (NumberFormatException e) {
 														log.debug(e.getMessage(), e);
 													}
@@ -1666,6 +1898,7 @@ public class GPXUtilities {
 													}
 												}
 											}
+											parse.getExtensionsToWrite().put(supportedTag, value);
 										}
 									}
 								}
@@ -1831,8 +2064,11 @@ public class GPXUtilities {
 								try {
 									String value = readText(parser, POINT_SPEED);
 									if (!Algorithms.isEmpty(value)) {
-										((WptPt) parse).speed = Float.parseFloat(value);
-										parse.getExtensionsToWrite().put(POINT_SPEED, value);
+										WptPt point = (WptPt) parse;
+										point.speed = Float.parseFloat(value);
+										if (point.speed <= 0) {
+											point.getExtensionsToWrite().put(POINT_SPEED, value);
+										}
 									}
 								} catch (NumberFormatException e) {
 								}
