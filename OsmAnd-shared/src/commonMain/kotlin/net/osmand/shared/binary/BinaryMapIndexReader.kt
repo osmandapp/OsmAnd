@@ -194,7 +194,7 @@ class BinaryMapIndexReader {
 		}
 	}
 
-	fun searchRouteIndexTree(req: SearchRequest, list: List<RouteSubregion>): List<RouteSubregion> {
+	fun searchRouteIndexTree(req: SearchRequest<RouteDataObject>, list: List<RouteSubregion>): List<RouteSubregion> {
 		req.numberOfVisitedObjects = 0
 		req.numberOfAcceptedObjects = 0
 		req.numberOfAcceptedSubtrees = 0

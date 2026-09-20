@@ -1,20 +1,46 @@
 package net.osmand.shared.binary
 
+import net.osmand.shared.data.KLatLon
+import net.osmand.shared.data.KQuadRect
+import net.osmand.shared.routing.RouteDataObject
+import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.api.KStringMatcherMode
+import net.osmand.shared.util.KMapUtils
+import net.osmand.shared.util.collections.KPriorityQueue
+import net.osmand.shared.util.collections.KTIntArrayList
+import net.osmand.shared.util.collections.KTLongArrayList
+import net.osmand.shared.util.collections.KTLongObjectMap
 import kotlin.jvm.JvmField
+import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 
 /**
- * What a routing search asks the reader for: a bounding box in 31 coordinates, and where the
- * counters of what was read go.
+ * What a search asks the reader for and where its results go: a bounding box in 31 coordinates or a
+ * path to search along, what to match, and how much of it to keep.
  *
- * The routing part of `BinaryMapIndexReader.SearchRequest` in OsmAnd-java, which is one generic
- * class for every kind of search. Routing uses only the box and the four counters, so that is
- * all this carries; the search kinds that need a name query or a poi filter will extend it when
- * they are copied.
+ * Copy of `BinaryMapIndexReader.SearchRequest` in OsmAnd-java, which is one class for every kind of
+ * search. The filters over map and poi types, and the read statistics, come with the sections they
+ * belong to; everything a search needs to say where and what to look for is here.
+ *
+ * Not thread safe: one request belongs to one search.
  */
-class SearchRequest {
+class SearchRequest<T> {
+
+	private var searchResults: MutableList<T> = mutableListOf()
+	private var land: Boolean = false
+	private var ocean: Boolean = false
+
+	private var resultMatcher: ResultMatcher<T>? = null
+	private var rawDataCollector: ResultMatcher<T>? = null
 
 	// 31 zoom tiles
+	// common variables
+	@JvmField
+	var x: Int = 0
+
+	@JvmField
+	var y: Int = 0
+
 	@JvmField
 	var left: Int = 0
 
@@ -26,6 +52,48 @@ class SearchRequest {
 
 	@JvmField
 	var bottom: Int = 0
+
+	private var searchBoxes: Collection<KQuadRect>? = null
+
+	@JvmField
+	var zoom: Int = 15
+
+	@JvmField
+	var limit: Int = -1
+
+	// search on the path
+	/** Tile of zoom 16 to the pairs of points, always an even count, where the path crosses it. */
+	@JvmField
+	var tiles: KTLongObjectMap<MutableList<KLatLon>>? = null
+
+	@JvmField
+	var radius: Double = -1.0
+
+	@JvmField
+	var nameQuery: String? = null
+
+	@JvmField
+	var matcherMode: KStringMatcherMode = KStringMatcherMode.CHECK_STARTS_FROM_SPACE
+
+	// cache information
+	@JvmField
+	val cacheCoordinates = KTIntArrayList()
+
+	@JvmField
+	val cacheTypes = KTIntArrayList()
+
+	@JvmField
+	val cacheIdsA = KTLongArrayList()
+
+	@JvmField
+	val cacheIdsB = KTLongArrayList()
+
+	@JvmField
+	val cacheIdsC = KTLongArrayList()
+
+	// TRACE INFO
+	@JvmField
+	var log: Boolean = true
 
 	@JvmField
 	var numberOfVisitedObjects: Int = 0
@@ -39,20 +107,190 @@ class SearchRequest {
 	@JvmField
 	var numberOfAcceptedSubtrees: Int = 0
 
+	private var interrupted: Boolean = false
+
+	private var priorityQueue: KPriorityQueue<T & Any>? = null
+	private var priorityQueueLimit: Int = 0
+
+	fun getTileHashOnPath(lat: Double, lon: Double): Long {
+		val x = KMapUtils.getTileNumberX(ZOOM_TO_SEARCH_POI.toDouble(), lon).toInt().toLong()
+		val y = KMapUtils.getTileNumberY(ZOOM_TO_SEARCH_POI.toDouble(), lat).toInt().toLong()
+		return (x shl ZOOM_TO_SEARCH_POI) or y
+	}
+
+	fun setBBoxRadius(lat: Double, lon: Double, radiusMeters: Int) {
+		val dx = KMapUtils.getTileNumberX(16.0, lon)
+		val half16t = KMapUtils.getDistance(
+			lat, KMapUtils.getLongitudeFromTile(16.0, dx.toInt() + 0.5),
+			lat, KMapUtils.getLongitudeFromTile(16.0, dx.toInt().toDouble())
+		)
+		val cf31 = (radiusMeters.toDouble() / (half16t * 2)) * (1 shl 15)
+		y = KMapUtils.get31TileNumberY(lat)
+		x = KMapUtils.get31TileNumberX(lon)
+		left = (x - cf31).toInt()
+		right = (x + cf31).toInt()
+		top = (y - cf31).toInt()
+		bottom = (y + cf31).toInt()
+	}
+
+	fun setBBox(x31: Int, y31: Int, left: Int, top: Int, right: Int, bottom: Int) {
+		x = x31
+		y = y31
+		this.left = left
+		this.right = right
+		this.top = top
+		this.bottom = bottom
+	}
+
+	fun publish(obj: T): Boolean {
+		val matcher = resultMatcher
+		if (matcher == null || matcher.publish(obj)) {
+			val queue = priorityQueue
+			if (queue != null && obj != null) {
+				queue.add(obj)
+				if (queue.size() > priorityQueueLimit) {
+					queue.poll()
+				}
+			} else {
+				searchResults.add(obj)
+			}
+			return true
+		}
+		return false
+	}
+
+	fun collectRawData(obj: T) {
+		rawDataCollector?.publish(obj)
+	}
+
+	fun publishOceanTile(ocean: Boolean) {
+		if (ocean) {
+			this.ocean = true
+		} else {
+			this.land = true
+		}
+	}
+
+	fun getSearchResults(): MutableList<T> = searchResults
+
+	fun setResultMatcher(resultMatcher: ResultMatcher<T>?) {
+		this.resultMatcher = resultMatcher
+	}
+
+	fun getResultMatcher(): ResultMatcher<T>? = resultMatcher
+
+	fun setRawDataCollector(rawDataCollector: ResultMatcher<T>?) {
+		this.rawDataCollector = rawDataCollector
+	}
+
+	fun setInterrupted(interrupted: Boolean) {
+		this.interrupted = interrupted
+	}
+
+	fun limitExceeded(): Boolean = limit != -1 && searchResults.size > limit
+
+	fun setLimit(limit: Int) {
+		this.limit = limit
+	}
+
+	fun isCancelled(): Boolean {
+		if (interrupted) {
+			return true
+		}
+		return resultMatcher?.isCancelled() == true
+	}
+
+	fun isOcean(): Boolean = ocean
+
+	fun isLand(): Boolean = land
+
 	fun intersects(l: Int, t: Int, r: Int, b: Int): Boolean =
 		r >= left && l <= right && t <= bottom && b >= top
 
 	fun contains(l: Int, t: Int, r: Int, b: Int): Boolean =
 		r <= right && l >= left && b <= bottom && t >= top
 
+	fun getLeft(): Int = left
+
+	fun getRight(): Int = right
+
+	fun getBottom(): Int = bottom
+
+	fun getTop(): Int = top
+
+	fun getZoom(): Int = zoom
+
+	fun clearSearchResults() {
+		// recreate whole list to allow GC collect old data
+		searchResults = mutableListOf()
+		cacheCoordinates.clear()
+		cacheTypes.clear()
+		cacheIdsA.clear()
+		cacheIdsB.clear()
+		cacheIdsC.clear()
+		land = false
+		ocean = false
+		numberOfVisitedObjects = 0
+		numberOfAcceptedObjects = 0
+		numberOfReadSubtrees = 0
+		numberOfAcceptedSubtrees = 0
+	}
+
+	fun isBboxSpecified(): Boolean = left != 0 || right != 0
+
+	fun hasSearchBoxes(): Boolean = searchBoxes != null
+
+	fun containsSearchBox(left: Int, top: Int, right: Int, bottom: Int): Boolean {
+		val boxes = searchBoxes
+		if (KAlgorithms.isEmpty(boxes)) {
+			return false
+		}
+		val searchRect = KQuadRect(
+			left.toDouble(), top.toDouble(), right.toDouble(), bottom.toDouble()
+		)
+		for (box in boxes!!) {
+			if (searchRect.contains(box)) {
+				return true
+			}
+		}
+		return false
+	}
+
+	fun clearSearchBoxes() {
+		searchBoxes = null
+	}
+
+	fun setSearchBoxes(searchBoxes: Collection<KQuadRect>?) {
+		this.searchBoxes = searchBoxes
+	}
+
+	fun setMatcherMode(mode: KStringMatcherMode) {
+		matcherMode = mode
+	}
+
+	fun setPriorityQueue(priorityQueue: KPriorityQueue<T & Any>?, priorityQueueLimit: Int) {
+		this.priorityQueue = priorityQueue
+		this.priorityQueueLimit = priorityQueueLimit
+	}
+
 	companion object {
+		const val ZOOM_TO_SEARCH_POI: Int = 16
+
 		@JvmStatic
-		fun buildSearchRouteRequest(sleft: Int, sright: Int, stop: Int, sbottom: Int): SearchRequest {
-			val request = SearchRequest()
+		@JvmOverloads
+		fun buildSearchRouteRequest(
+			sleft: Int,
+			sright: Int,
+			stop: Int,
+			sbottom: Int,
+			matcher: ResultMatcher<RouteDataObject>? = null
+		): SearchRequest<RouteDataObject> {
+			val request = SearchRequest<RouteDataObject>()
 			request.left = sleft
 			request.right = sright
 			request.top = stop
 			request.bottom = sbottom
+			request.resultMatcher = matcher
 			return request
 		}
 	}
