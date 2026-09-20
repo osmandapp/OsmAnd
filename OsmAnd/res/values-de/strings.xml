@@ -2422,7 +2422,7 @@
     <string name="live_monitoring_time_buffer">Zeitpuffer</string>
     <string name="live_monitoring_tracking_interval">Aufzeichnungsintervall</string>
     <string name="live_monitoring_adress">Webadresse</string>
-    <string name="monitoring_notification">Benachrichtigung</string>
+    <string name="monitoring_notification">Schaltfläche \'Aufnehmen\' in Benachrichtigungen anzeigen</string>
     <string name="monitoring_min_speed">Mindestgeschwindigkeit</string>
     <string name="monitoring_min_accuracy">Mindestgenauigkeit</string>
     <string name="monitoring_min_distance">Minimale Verschiebung</string>
