@@ -5,6 +5,7 @@ import net.osmand.shared.gpx.PointAttributes
 import okio.Buffer
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -173,6 +174,47 @@ class GpxUtilitiesLoadTest {
 		assertTrue(generalSegment.points[1].lastPoint)
 		assertTrue(generalSegment.points[2].firstPoint)
 		assertTrue(generalSegment.points[3].lastPoint)
+	}
+
+	@Test
+	fun testSpeedIsNotDuplicatedIntoPointExtensions() {
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="test">
+			  <trk>
+			    <trkseg>
+			      <trkpt lat="10.0" lon="20.0">
+			        <extensions><speed>5.5</speed><bearing>42.0</bearing></extensions>
+			      </trkpt>
+			      <trkpt lat="10.1" lon="20.1"><speed>7.25</speed></trkpt>
+			    </trkseg>
+			  </trk>
+			</gpx>
+			""".trimIndent(),
+			addGeneralTrack = false
+		)
+
+		assertNull(gpxFile.error)
+		val points = gpxFile.tracks[0].segments[0].points
+		assertEquals(5.5f, points[0].speed)
+		assertEquals(42.0f, points[0].bearing)
+		assertEquals(7.25f, points[1].speed)
+		// the value is kept in the field only - a string copy per point costs a map per point
+		assertFalse(points[0].getExtensionsToRead().containsKey(GpxUtilities.POINT_SPEED))
+		assertEquals("42.0", points[0].getExtensionsToRead()[GpxUtilities.POINT_BEARING])
+		assertNull(points[1].extensions)
+
+		val saved = writeGpxToString(gpxFile)
+		// saving must not attach the extensions map, the deferred map or the writers back to a point
+		assertNull(points[1].extensions)
+		assertNull(points[1].deferredExtensions)
+		assertTrue(points[0].extensionsWriters.isNullOrEmpty())
+
+		val reloaded = loadGpx(saved, addGeneralTrack = false)
+		val reloadedPoints = reloaded.tracks[0].segments[0].points
+		assertEquals(5.5f, reloadedPoints[0].speed)
+		assertEquals(42.0f, reloadedPoints[0].bearing)
+		assertEquals(7.2f, reloadedPoints[1].speed) // the writer has always reformatted speed as #.#
 	}
 
 	private fun buildTimedTrackGpx(pointsCount: Int, startTime: Long): String {
