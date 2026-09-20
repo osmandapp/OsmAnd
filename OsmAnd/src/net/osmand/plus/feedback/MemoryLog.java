@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
@@ -26,6 +27,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -79,6 +81,25 @@ public class MemoryLog {
 	// Debug.getMemoryInfo() walks smaps, which is not free on a process of this size
 	private static final int SUMMARY_EVERY = 2;
 	private static final long SUMMARY_BUDGET_MS = 200;
+	// reading every mapping costs far more than the Debug counters, so it happens rarely
+	private static final int SMAPS_EVERY = 10;
+	// the first walk runs interpreted and costs ~270 ms, later ones settle around 70 ms
+	private static final long SMAPS_BUDGET_MS = 600;
+	private static final int SMAPS_BUFFER = 64 * 1024;
+	private static final int SMAPS_DALVIK = 0;
+	private static final int SMAPS_NATIVE = 1;
+	private static final int SMAPS_GPU = 2;
+	private static final int SMAPS_SO = 3;
+	private static final int SMAPS_CODE = 4;
+	private static final int SMAPS_OBF = 5;
+	private static final int SMAPS_FONT = 6;
+	private static final int SMAPS_STACK = 7;
+	private static final int SMAPS_ANON = 8;
+	private static final int SMAPS_OTHER = 9;
+	// graphics mostly does not appear here: EGL and GL buffers are counted by mtrack rather
+	// than mapped into the process, which is what Debug.getMemoryStat("summary.graphics") reads
+	private static final String[] SMAPS_CATEGORIES =
+			{"dalvik", "native", "gpu", "so", "code", "obf", "font", "stack", "anon", "other"};
 	// a heap smaller than this explains itself; below it a histogram is not worth seconds of freeze
 	private static final long HISTOGRAM_HEAP_THRESHOLD = 350L * 1024 * 1024;
 	// many devices cap the heap at 256 MB, where the absolute threshold can never be reached,
@@ -107,6 +128,8 @@ public class MemoryLog {
 	private static boolean activitiesWatched;
 	private static int sampleCount;
 	private static boolean summaryAffordable = true;
+	private static boolean smapsAffordable = true;
+	private static int smapsCount;
 	private static long previousAllocated;
 	private static long previousBlockingGcTime;
 	private static long lastRss;
@@ -182,6 +205,7 @@ public class MemoryLog {
 		appendRuntimeStats(sb);
 		appendVmCounts(sb);
 		appendProcessSummary(sb);
+		appendSmaps(sb);
 		appendThreadNames(sb);
 		String held = buildHeld(app);
 		if (held != null) {
@@ -435,6 +459,158 @@ public class MemoryLog {
 			summaryAffordable = false;
 			sb.append(" summaryMs=").append(spent);
 		}
+	}
+
+	/**
+	 * The Debug counters say how much, /proc/self/smaps says where: every mapping is named, and
+	 * Android names the anonymous ones too, so "native" stops being one number and becomes scudo,
+	 * the GPU driver, the mapped libraries and the maps a person opened.
+	 * <p>
+	 * Only the categories are written, never the names of the mapped files: those are the maps
+	 * somebody downloaded, which is where they live and where they travel.
+	 */
+	private static void appendSmaps(@NonNull StringBuilder sb) {
+		if (!smapsAffordable || !summaryDue || smapsCount++ % SMAPS_EVERY != 0) {
+			return;
+		}
+		long start = SystemClock.uptimeMillis();
+		String categories = readSmapsByCategory();
+		long spent = SystemClock.uptimeMillis() - start;
+		if (categories != null) {
+			sb.append(" smaps=").append(categories);
+			sb.append(" smapsMs=").append(spent);
+		}
+		if (spent > SMAPS_BUDGET_MS) {
+			// a process with tens of thousands of mappings can make this cost more than it says
+			smapsAffordable = false;
+		}
+	}
+
+	/**
+	 * smaps is a couple of megabytes of text and tens of thousands of lines, so it is scanned as
+	 * bytes: decoding it into strings costs several times more than the kernel spends producing it.
+	 */
+	@Nullable
+	private static String readSmapsByCategory() {
+		long[] totals = new long[SMAPS_CATEGORIES.length];
+		int category = SMAPS_OTHER;
+		byte[] buffer = new byte[SMAPS_BUFFER];
+		int filled = 0;
+		try (FileInputStream in = new FileInputStream("/proc/self/smaps")) {
+			while (true) {
+				int read = in.read(buffer, filled, buffer.length - filled);
+				if (read > 0) {
+					filled += read;
+				}
+				int lineStart = 0;
+				int i = 0;
+				while (i < filled) {
+					if (buffer[i] != '\n') {
+						i++;
+						continue;
+					}
+					// only two lines out of the twenty-five a mapping prints are worth looking at,
+					// and the rest are told apart by their first byte alone
+					byte first = buffer[lineStart];
+					if (first == 'R' && lineStart + 1 < i && buffer[lineStart + 1] == 's') {
+						totals[category] += parseKb(buffer, lineStart + 4, i);
+					} else if (first >= '0' && first <= '9' || first >= 'a' && first <= 'f') {
+						category = categoryOf(new String(buffer, lineStart, i - lineStart,
+								StandardCharsets.US_ASCII));
+					}
+					i++;
+					lineStart = i;
+				}
+				if (read < 0) {
+					// smaps always ends with a newline, so nothing is left behind here
+					break;
+				}
+				if (lineStart > 0) {
+					System.arraycopy(buffer, lineStart, buffer, 0, filled - lineStart);
+					filled -= lineStart;
+				} else if (filled == buffer.length) {
+					// a line longer than the buffer can only be a path we do not need in full
+					filled = 0;
+				}
+			}
+		} catch (IOException | RuntimeException e) {
+			log.error(e);
+			return null;
+		}
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < totals.length; i++) {
+			long mb = totals[i] / 1024;
+			if (mb > 0) {
+				if (sb.length() > 0) {
+					sb.append(',');
+				}
+				sb.append(SMAPS_CATEGORIES[i]).append(':').append(mb);
+			}
+		}
+		return sb.length() > 0 ? sb.toString() : null;
+	}
+
+	private static long parseKb(@NonNull byte[] b, int from, int to) {
+		long value = 0;
+		for (int i = from; i < to; i++) {
+			byte c = b[i];
+			if (c >= '0' && c <= '9') {
+				value = value * 10 + (c - '0');
+			} else if (value > 0) {
+				break;
+			}
+		}
+		return value;
+	}
+
+	private static int categoryOf(@NonNull String header) {
+		// address perms offset dev inode [name] — an anonymous mapping simply has no sixth field,
+		// and taking the last one instead would read the inode as a name
+		int i = 0;
+		int length = header.length();
+		for (int field = 0; field < 5 && i < length; field++) {
+			while (i < length && header.charAt(i) != ' ') {
+				i++;
+			}
+			while (i < length && header.charAt(i) == ' ') {
+				i++;
+			}
+		}
+		String name = i < length ? header.substring(i) : "";
+		if (name.isEmpty()) {
+			return SMAPS_ANON;
+		}
+		if (name.startsWith("[anon:dalvik") || name.startsWith("[anon:Zygote")) {
+			return SMAPS_DALVIK;
+		}
+		if (name.startsWith("[anon:scudo") || name.startsWith("[anon:libc_malloc")
+				|| name.startsWith("[anon:GWP-ASan") || name.startsWith("[anon:bionic")) {
+			return SMAPS_NATIVE;
+		}
+		if (name.startsWith("[stack") || name.startsWith("[anon:stack_and_tls")
+				|| name.startsWith("[anon:thread")) {
+			return SMAPS_STACK;
+		}
+		if (name.startsWith("/dev/kgsl") || name.startsWith("/dev/mali") || name.startsWith("/dev/dri")
+				|| name.startsWith("/dev/dma_heap") || name.startsWith("/dmabuf")
+				|| name.contains("gralloc") || name.startsWith("/dev/ashmem")) {
+			return SMAPS_GPU;
+		}
+		if (name.endsWith(".so")) {
+			return SMAPS_SO;
+		}
+		if (name.endsWith(".apk") || name.endsWith(".jar") || name.endsWith(".dex")
+				|| name.endsWith(".odex") || name.endsWith(".vdex") || name.endsWith(".oat")
+				|| name.endsWith(".art")) {
+			return SMAPS_CODE;
+		}
+		if (name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+			return SMAPS_OBF;
+		}
+		if (name.endsWith(".ttf") || name.endsWith(".otf")) {
+			return SMAPS_FONT;
+		}
+		return SMAPS_OTHER;
 	}
 
 	// what a few subsystems hold right now, in objects rather than bytes: counting bytes needs
