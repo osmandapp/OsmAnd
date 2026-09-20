@@ -17,8 +17,8 @@ actual object ImportHelper {
 	@Throws(IOException::class)
 	actual fun loadGPXFileFromArchive(source: Source): Pair<GpxFile, Long> {
 		val stream = ZipInputStream(SourceInputStream(source))
-		var entry: ZipEntry
-		while ((stream.nextEntry.also { entry = it }) != null) {
+		while (true) {
+			val entry: ZipEntry = stream.nextEntry ?: break
 			if (entry.name.endsWith(IndexConstants.GPX_FILE_EXT)) {
 				val fileSize = entry.size
 				return Pair(loadGpxFile(stream.source()), fileSize)
