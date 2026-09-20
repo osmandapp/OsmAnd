@@ -1,7 +1,9 @@
 package net.osmand.shared.binary
 
 import net.osmand.shared.data.Amenity
+import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.io.KFile
+import net.osmand.shared.osm.PoiCategory
 import net.osmand.shared.routing.HHRouteRegionPointsCtx
 import net.osmand.shared.routing.HHRoutingContext
 import net.osmand.shared.routing.NetworkDBPoint
@@ -10,6 +12,7 @@ import net.osmand.shared.routing.RouteRegion
 import net.osmand.shared.routing.RouteSubregion
 import net.osmand.shared.util.collections.KTIntArrayList
 import net.osmand.shared.util.collections.KTIntObjectMap
+import net.osmand.shared.util.KCollatorStringMatcher
 import net.osmand.shared.util.collections.KTLongHashSet
 import net.osmand.shared.util.collections.KTLongObjectMap
 import okio.FileHandle
@@ -891,6 +894,188 @@ class BinaryMapIndexReader {
 		return sr.getSearchResults()
 	}
 
+	/** The amenities of every poi section whose name matches the request's query. */
+	fun searchPoiByName(req: SearchRequest<Amenity>): MutableList<Amenity> {
+		val nameQuery = req.nameQuery
+		if (nameQuery == null || nameQuery.isEmpty()) {
+			throw IllegalArgumentException()
+		}
+		for (poiIndex in poiIndexes) {
+			poiAdapter.initCategories(poiIndex)
+			codedIS.seek(poiIndex.filePointer)
+			val old = codedIS.pushLimitLong(poiIndex.length)
+			poiAdapter.searchPoiByName(poiIndex, req)
+			codedIS.popLimit(old)
+		}
+		return req.getSearchResults()
+	}
+
+	/**
+	 * The categories whose name starts with [query], and for the rest the subcategories that do.
+	 * A category that matches itself is put in with a null list, meaning all of its subcategories.
+	 */
+	fun searchPoiCategoriesByName(
+		query: String, map: MutableMap<PoiCategory, MutableList<String>?>
+	): MutableMap<PoiCategory, MutableList<String>?> {
+		if (query.isEmpty()) {
+			throw IllegalArgumentException()
+		}
+		for (poiIndex in poiIndexes) {
+			poiAdapter.initCategories(poiIndex)
+			for (i in poiIndex.categories.indices) {
+				val cat = poiIndex.categories[i]
+				val catType = poiIndex.categoriesType[i] ?: continue
+				if (KCollatorStringMatcher.cmatches(cat, query, KStringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
+					map[catType] = null
+				} else {
+					val subcats = poiIndex.subcategories[i]
+					for (subcat in subcats) {
+						if (KCollatorStringMatcher.cmatches(
+								subcat, query, KStringMatcherMode.CHECK_STARTS_FROM_SPACE
+							)
+						) {
+							if (!map.containsKey(catType)) {
+								map[catType] = ArrayList()
+							}
+							map[catType]?.add(subcat)
+						}
+					}
+				}
+			}
+		}
+		return map
+	}
+
+	/** The additional attributes whose name starts with [query], letter for letter. */
+	fun searchPoiSubTypesByPrefix(query: String): MutableList<PoiSubType> {
+		if (query.isEmpty()) {
+			throw IllegalArgumentException()
+		}
+		val list = ArrayList<PoiSubType>()
+		for (poiIndex in poiIndexes) {
+			poiAdapter.initCategories(poiIndex)
+			for (subType in poiIndex.subTypes) {
+				if (subType.name?.startsWith(query) == true) {
+					list.add(subType)
+				}
+			}
+		}
+		return list
+	}
+
+	/** The attributes the files were written with a top index for, which can be filtered on. */
+	fun getTopIndexSubTypes(): MutableList<PoiSubType> {
+		val list = ArrayList<PoiSubType>()
+		for (poiIndex in poiIndexes) {
+			poiAdapter.initCategories(poiIndex)
+			list.addAll(poiIndex.topIndexSubTypes)
+		}
+		return list
+	}
+
+	/**
+	 * Where in the name index each of [queries] could sit. The index is a tree of string tables
+	 * whose keys build up a name letter by letter, so a query word is looked for down every branch
+	 * whose key it still shares a start with, in either direction: "bak" reaches "bakery", and
+	 * "bakery" reaches the branch keyed "bak".
+	 */
+	internal fun readIndexedStringTablePrefixes(queries: List<String>): List<List<QueryToken.Prefix>> {
+		val prefixesByQuery = ArrayList<MutableMap<String, Int>>(queries.size)
+		for (i in queries.indices) {
+			prefixesByQuery.add(LinkedHashMap())
+		}
+		readIndexedStringTablePrefixes(queries, "", prefixesByQuery)
+
+		val result = ArrayList<List<QueryToken.Prefix>>(queries.size)
+		for (prefixes in prefixesByQuery) {
+			val tokenPrefixes = ArrayList<QueryToken.Prefix>(prefixes.size)
+			for (entry in prefixes.entries) {
+				tokenPrefixes.add(QueryToken.Prefix(entry.key, entry.value))
+			}
+			result.add(tokenPrefixes)
+		}
+		return result
+	}
+
+	private fun readIndexedStringTablePrefixes(
+		queries: List<String?>, prefix: String, prefixesByQuery: List<MutableMap<String, Int>>
+	) {
+		val matched = BooleanArray(queries.size)
+		val matchedSubtables = BooleanArray(queries.size)
+		var key: String? = null
+		var shouldWeReadSubtable = false
+		while (true) {
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return
+				IndexedStringTable.KEY_FIELD_NUMBER -> {
+					var read = codedIS.readString()
+					if (prefix.isNotEmpty()) {
+						read = prefix + read
+					}
+					key = read
+					shouldWeReadSubtable = matchIndexedStringTablePrefix(queries, read, matched, matchedSubtables)
+				}
+				IndexedStringTable.VAL_FIELD_NUMBER -> {
+					val value = readInt().toInt() // FIXME for 64 bit support
+					for (i in queries.indices) {
+						if (matched[i] && key != null) {
+							val tokenPrefixes = prefixesByQuery[i]
+							val previousOffset = tokenPrefixes[key]
+							if (previousOffset == null) {
+								tokenPrefixes[key] = value
+							} else if (previousOffset != value) {
+								throw IllegalStateException(
+									"Indexed string table contains multiple offsets for key: $key"
+								)
+							}
+						}
+					}
+				}
+				IndexedStringTable.SUBTABLES_FIELD_NUMBER -> {
+					val len = codedIS.readRawVarint32()
+					val oldLim = codedIS.pushLimitLong(len.toLong())
+					if (shouldWeReadSubtable && key != null) {
+						val subqueries = ArrayList<String?>(queries)
+						for (i in queries.indices) {
+							if (!matchedSubtables[i]) {
+								subqueries[i] = null
+							}
+						}
+						readIndexedStringTablePrefixes(subqueries, key, prefixesByQuery)
+					} else {
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
+					}
+					codedIS.popLimit(oldLim)
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
+	private fun matchIndexedStringTablePrefix(
+		queries: List<String?>, key: String, matched: BooleanArray, matchedSubtables: BooleanArray
+	): Boolean {
+		var shouldWeReadSubtable = false
+		for (i in queries.indices) {
+			val query = queries[i]
+			matched[i] = false
+			matchedSubtables[i] = false
+			if (query == null) {
+				continue
+			}
+			val keyStartsWithQuery =
+				KCollatorStringMatcher.cmatches(key, query, KStringMatcherMode.CHECK_ONLY_STARTS_WITH)
+			val queryStartsWithKey =
+				KCollatorStringMatcher.cmatches(query, key, KStringMatcherMode.CHECK_ONLY_STARTS_WITH)
+			val potentialBranchMatch = keyStartsWithQuery || queryStartsWithKey
+			matched[i] = potentialBranchMatch
+			matchedSubtables[i] = potentialBranchMatch
+			shouldWeReadSubtable = shouldWeReadSubtable || potentialBranchMatch
+		}
+		return shouldWeReadSubtable
+	}
+
 	fun close() {
 		handle.close()
 	}
@@ -978,6 +1163,12 @@ class BinaryMapIndexReader {
 		const val LABELCOORDINATES_FIELD_NUMBER = 8
 		const val STRINGNAMES_FIELD_NUMBER = 10
 		const val ID_FIELD_NUMBER = 12
+	}
+
+	private object IndexedStringTable {
+		const val KEY_FIELD_NUMBER = 3
+		const val VAL_FIELD_NUMBER = 4
+		const val SUBTABLES_FIELD_NUMBER = 5
 	}
 
 	private object StringTable {

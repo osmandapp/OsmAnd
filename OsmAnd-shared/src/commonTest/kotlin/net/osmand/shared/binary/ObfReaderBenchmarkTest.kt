@@ -46,13 +46,16 @@ import kotlin.time.TimeSource
  * ```
  * what                            java (jvm)   copy (jvm)   copy (native)   count
  * open the files                      4.3 ms       3.7 ms          2.4 ms      26
- * read every map object, all zooms   15.1 ms       9.5 ms         22.0 ms   47393
+ * read every map object, all zooms   15.6 ms       9.4 ms         21.5 ms   47393
  * read every amenity                  1.9 ms       2.0 ms          3.6 ms    6285
+ * find amenities by name (20)        25.1 ms      15.4 ms         34.0 ms     360
  * ```
  * Kotlin/Native reads a map object in about the time the java reader takes on the jvm, and in
  * about twice the time this same code takes there; an amenity costs it only half again as much.
- * Opening is not a like for like: java also reads the address and transport headers, which the
- * copy skips.
+ * On the name search the copy is half again faster than java on the jvm, which is the collation
+ * key of `KCollatorStringMatcher` paying off; Kotlin/Native then pays its usual factor of about
+ * two on top, which lands it somewhat above java on the jvm. Opening is not a like for like: java
+ * also reads the address and transport headers, which the copy skips.
  */
 class ObfReaderBenchmarkTest {
 
@@ -138,7 +141,57 @@ class ObfReaderBenchmarkTest {
 			}
 		}
 		row("read every amenity", poiMs, amenities, true)
+
+		val queries = queries(files)
+		var nameMs = Double.MAX_VALUE
+		var found = 0
+		repeat(WARMUP_ROUNDS + MEASURED_ROUNDS) { round ->
+			val readers = files.map { BinaryMapIndexReader(it) }
+			val mark = TimeSource.Monotonic.markNow()
+			var read = 0
+			for (reader in readers) {
+				for (query in queries) {
+					val req = SearchRequest.buildSearchPoiRequest(
+						0, 0, query, 0, Int.MAX_VALUE, 0, Int.MAX_VALUE, null, null, null
+					)
+					read += reader.searchPoiByName(req).size
+				}
+			}
+			val ms = mark.elapsedNow().inWholeMicroseconds / 1000.0
+			readers.forEach { it.close() }
+			if (round >= WARMUP_ROUNDS && ms < nameMs) {
+				nameMs = ms
+				found = read
+			}
+		}
+		println("  ${"find amenities by name (${queries.size} queries)".padEnd(34)} " +
+				"${nameMs.format1().padStart(9)} ${found.toString().padStart(9)} ${"".padStart(9)}")
 		println("")
+	}
+
+	/** The first names the files hold, so that the queries hit something on any corpus. */
+	private fun queries(files: List<String>): List<String> {
+		val names = LinkedHashSet<String>()
+		for (path in files) {
+			val reader = BinaryMapIndexReader(path)
+			val req = SearchRequest.buildSearchPoiRequest(
+				0, Int.MAX_VALUE, 0, Int.MAX_VALUE, -1, null, null, null
+			)
+			for (amenity in reader.searchPoi(req)) {
+				val name = amenity.getName()
+				if (name.isNotEmpty()) {
+					names.add(name)
+				}
+				if (names.size >= QUERIES) {
+					break
+				}
+			}
+			reader.close()
+			if (names.size >= QUERIES) {
+				break
+			}
+		}
+		return names.toList()
 	}
 
 	private fun row(what: String, ms: Double, count: Int, perItem: Boolean) {
@@ -216,6 +269,9 @@ class ObfReaderBenchmarkTest {
 
 		/** One pass over the poi sections is only a few milliseconds, too little to time. */
 		const val POI_PASSES_PER_ROUND = 10
+
+		/** How many of the names the files hold are searched for. */
+		const val QUERIES = 20
 
 		/** Relative to `OsmAnd-shared`, which is where both the jvm test and the native binary run. */
 		val TEST_RESOURCE_DIRECTORIES = listOf(
