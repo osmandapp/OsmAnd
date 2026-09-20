@@ -162,6 +162,24 @@ class TravelObfHelperTest {
 		assertNull(helper.searchTravelGpx(KLatLon(50.05, 14.05), ""))
 	}
 
+	/**
+	 * Reading a map section reads its encoding rules first, so a file the tap cannot be in must not
+	 * be asked at all - that is what a tap used to pay for every installed map.
+	 */
+	@Test
+	fun aFileTheTapIsNotInIsNotRead() {
+		val near = FakeAmenityIndexRepository(KFile("Near.obf"))
+		val far = FakeAmenityIndexRepository(KFile("Far.obf"), coversMapSection = false)
+		val helper = TravelObfHelper(
+			FakeTravelObfContext(travelGpx = listOf(near.repository, far.repository))
+		)
+
+		helper.searchTravelGpxByRouteTypes(KLatLon(50.05, 14.05), setOf("hiking"))
+
+		assertEquals(1, near.mapSearches)
+		assertEquals(0, far.mapSearches)
+	}
+
 	/** The world file covers everything and holds no tracks, so it is never searched. */
 	@Test
 	fun theWorldFileIsSkippedWhenLookingForATrack() {

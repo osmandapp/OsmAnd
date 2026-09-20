@@ -141,6 +141,23 @@ public class TravelRepositoryCompatTest {
 		}
 	}
 
+	/** Whether a map search would reach the file at all, which decides if it is opened at all. */
+	@Test
+	public void mapSectionIntersectsIsTheSame() {
+		for (PoiRegion region : java.getPoiIndexes()) {
+			for (double[] point : samplePoints(region)) {
+				for (int zoom : new int[] {15, 16, 17}) {
+					net.osmand.shared.binary.SearchRequest<net.osmand.shared.binary.BinaryMapDataObject> req =
+							net.osmand.shared.binary.SearchRequest.buildSearchRequest(0, 0, 0, 0, zoom, null);
+					req.setBBoxRadius(point[0], point[1], 1000);
+					assertEquals("map intersects " + point[0] + " " + point[1] + " zoom " + zoom,
+							java.containsMapData(req.left, req.top, req.right, req.bottom, zoom),
+							repository.isMapSectionIntersects(req));
+				}
+			}
+		}
+	}
+
 	/** Whether a request's box touches any poi section of the file. */
 	@Test
 	public void poiSectionIntersectsIsTheSame() {

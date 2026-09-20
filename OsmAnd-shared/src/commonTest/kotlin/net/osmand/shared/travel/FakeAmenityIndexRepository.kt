@@ -23,7 +23,8 @@ class FakeAmenityIndexRepository(
 	private val amenities: List<Amenity> = emptyList(),
 	private val mapObjects: List<BinaryMapDataObject> = emptyList(),
 	private val regions: List<PoiRegion> = listOf(wholeWorldRegion()),
-	private val worldMap: Boolean = false
+	private val worldMap: Boolean = false,
+	private val coversMapSection: Boolean = true
 ) {
 
 	var poiSearches: Int = 0
@@ -82,6 +83,8 @@ class FakeAmenityIndexRepository(
 			publishAmenities(searchRequest, matchByName = true)
 			return searchRequest.getSearchResults()
 		}
+
+		override fun isMapSectionIntersects(searchRequest: SearchRequest<*>): Boolean = coversMapSection
 
 		override fun isPoiSectionIntersects(searchRequest: SearchRequest<*>): Boolean = true
 

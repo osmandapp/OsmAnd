@@ -47,6 +47,9 @@ interface AmenityIndexRepository {
 
 	fun isPoiSectionIntersects(searchRequest: SearchRequest<*>): Boolean
 
+	/** Whether a map search would reach this file at all, answered without reading it. */
+	fun isMapSectionIntersects(searchRequest: SearchRequest<*>): Boolean
+
 	fun searchAmenitiesByName(
 		x: Int, y: Int, l: Int, t: Int, r: Int, b: Int, query: String,
 		resultMatcher: ResultMatcher<Amenity>?

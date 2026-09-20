@@ -156,6 +156,12 @@ class TravelObfHelper(
 
 		if (!KAlgorithms.isEmpty(osmRouteTypeTags)) {
 			for (repo in context.getTravelGpxRepositories()) {
+				// searchMapIndex reads the encoding rules of a map section before it looks at the
+				// zoom and the box, so without this every installed file is read when a route is
+				// first tapped, one on another continent included
+				if (!repo.isMapSectionIntersects(mapRequest)) {
+					continue
+				}
 				repo.searchMapIndex(mapRequest)
 			}
 			if (routeIds.isNotEmpty()) {

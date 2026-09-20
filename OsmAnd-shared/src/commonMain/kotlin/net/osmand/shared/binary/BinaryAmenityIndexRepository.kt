@@ -187,6 +187,19 @@ open class BinaryAmenityIndexRepository(
 		return fileName.startsWith(WORLD_REGION_ID + "_") || fileName.contains("basemap")
 	}
 
+	/**
+	 * Answered from the roots of the map sections, which are read when the file is opened, so
+	 * nothing is read here. Android asks its shallow reader for this because its per-section
+	 * readers each open a file handle; here [ObfReaderSupplier] hands out the one open reader.
+	 */
+	override fun isMapSectionIntersects(searchRequest: SearchRequest<*>): Boolean {
+		val reader = getOpenReader() ?: return false
+		return reader.containsMapData(
+			searchRequest.left, searchRequest.top, searchRequest.right, searchRequest.bottom,
+			searchRequest.zoom
+		)
+	}
+
 	override fun isPoiSectionIntersects(searchRequest: SearchRequest<*>): Boolean {
 		for (index in getReaderPoiIndexes()) {
 			if (searchRequest.intersects(index.left31, index.top31, index.right31, index.bottom31)) {
