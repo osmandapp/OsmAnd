@@ -376,10 +376,11 @@ class BinaryHHRouteReaderAdapter internal constructor(private val map: BinaryMap
 							val olLimit = codedIS.pushLimitLong(len.toLong())
 							val s = readSegments()
 							codedIS.popLimit(olLimit)
-							if (point != null) {
-								// not used from this file
-								HHRouteDataStructure.setSegments(ctx, point, s.segmentsIn, s.segmentsOut)
-								loaded += (point.connected(true)?.size ?: 0) + (point.connected(false)?.size ?: 0)
+							// a block carries every point of its id range, so re-reading it for one
+							// point must not overwrite what the others already hold
+							if (point != null && point.connected(reverse) == null) {
+								HHRouteDataStructure.setSegments(ctx, point, s.segmentsIn, s.segmentsOut, reverse)
+								loaded += point.connected(reverse)?.size ?: 0
 							}
 						}
 					}

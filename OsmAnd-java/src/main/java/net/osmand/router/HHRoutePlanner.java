@@ -1097,7 +1097,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		int cnt = hctx.loadNetworkSegmentPoint(point, reverse);
 		hctx.stats.loadEdgesCnt += cnt;
 		hctx.stats.loadEdgesTime += (System.nanoTime() - tm) / 1e6;
-		for (NetworkDBSegment connected : point.connected(reverse)) {
+		for (NetworkDBSegment connected : hctx.connectedLoaded(point, reverse)) {
 			T nextPoint = (T) (reverse ? connected.start : connected.end);
 			if (!hctx.config.USE_CH && !hctx.config.USE_CH_SHORTCUTS && connected.shortcut) {
 				continue;
@@ -1123,7 +1123,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 				double smallestSegmentCost = smallestSegmentCost(hctx, point, nextPoint);
 				System.err.printf("Incorrect distance %s -> %s: db = %.2f > fastest %.2f \n", point, nextPoint, connected.dist, smallestSegmentCost);
-				connected.dist = smallestSegmentCost;
+				HHRouteDataStructure.editDist(connected, smallestSegmentCost);
 			}
 			double cost = point.rt(reverse).rtDistanceFromStart  + connected.dist + hctx.distanceToEnd(reverse, nextPoint);
 			if (ASSERT_COST_INCREASING && point.rt(reverse).rtCost - cost > 1) {
@@ -1137,6 +1137,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				addPointToQueue(hctx, queue, reverse, nextPoint, point, connected.dist, cost);
 			}
 		}
+		hctx.expanded(point, reverse);
 	}
 
 	private boolean touchesStartOrEnd(T point, T nextPoint, boolean reverse) {
@@ -1275,7 +1276,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					if (full) {
 						recalculateNetworkCluster(hctx, s.segment.start);
 					}
-					s.segment.dist = -1;
+					HHRouteDataStructure.editDist(s.segment, -1);
 					return true;
 				}
 				double maxIncCostCoefficient = incorrectCostAtStartEnd
@@ -1288,7 +1289,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 								f.distanceFromStart, s.segment.dist, s.segment.start, s.segment.end,
 								acceptCostIncrease ? "keep detailed geometry" : "recalculate route");
 					}
-					s.segment.dist = f.distanceFromStart;
+					HHRouteDataStructure.editDist(s.segment, f.distanceFromStart);
 					if (!acceptCostIncrease) {
 						// correct every underestimated shortcut of this route before recalculating it
 						costIncreased = true;
@@ -1349,29 +1350,36 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					p.endY = o.getEndPointY();
 					float routeTime = o.getDistanceFromStart()
 							+ plan.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2 + 1;
+					ensureLoaded(hctx, start, false);
+					ensureLoaded(hctx, p, true);
+					start.edgesEdited = true;
+					p.edgesEdited = true;
 					NetworkDBSegment c = start.getSegment(p, true);
 					if (c != null) {
 						// System.out.printf("Corrected dist %.2f -> %.2f\n", c.dist, routeTime);
-						c.dist = routeTime;
+						HHRouteDataStructure.editDist(c, routeTime);
 					} else {
 						start.connected.add(new NetworkDBSegment(start, p, routeTime, true, false));
 					}
 					NetworkDBSegment co = p.getSegment(start, false);
 					if (co != null) {
-						co.dist = routeTime;
+						HHRouteDataStructure.editDist(co, routeTime);
 					} else if (p.connectedReverse != null) {
 						p.connectedReverse.add(new NetworkDBSegment(start, p, routeTime, false, false));
 					}
 				}
 			}
 		}
+		ensureLoaded(hctx, start, false);
 		for (NetworkDBSegment c : start.connected) {
 			if (!resUnique.containsKey(c.end.getGeoPntId())) {
 //				System.out.printf("Remove connection %s -> %s\n", start, c.end); // to debug later if all correct
-				c.dist = -1; // disable as not found
+				HHRouteDataStructure.editDist(c, -1); // disable as not found
+				ensureLoaded(hctx, c.end, true);
+				c.end.edgesEdited = true;
 				NetworkDBSegment co = c.end.getSegment(start, false);
 				if (co != null) {
-					co.dist = -1;
+					HHRouteDataStructure.editDist(co, -1);
 				}
 			}
 		}
@@ -1433,12 +1441,19 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	}
 
 
+	/** Every read of an edge list goes through here, so a dropped one is simply parsed again. */
+	@SuppressWarnings("unchecked")
+	private void ensureLoaded(HHRoutingContext<T> hctx, NetworkDBPoint pnt, boolean reverse) {
+		hctx.connectedLoaded((T) pnt, reverse);
+	}
+
 	HHNetworkRouteRes createRouteSegmentFromFinalPoint(HHRoutingContext<T> hctx, NetworkDBPoint pnt) {
 		HHNetworkRouteRes route = new HHNetworkRouteRes();
 		if (pnt != null) {
 			NetworkDBPoint itPnt = pnt;
 			while (itPnt.rt(true).rtRouteToPoint != null) {
 				NetworkDBPoint nextPnt = itPnt.rt(true).rtRouteToPoint;
+				ensureLoaded(hctx, nextPnt, true);
 				NetworkDBSegment segment = nextPnt.getSegment(itPnt, false);
 				HHNetworkSegmentRes res = new HHNetworkSegmentRes(segment);
 				route.segments.add(res);
@@ -1455,6 +1470,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			itPnt = pnt;
 			while (itPnt.rt(false).rtRouteToPoint != null) {
 				NetworkDBPoint nextPnt = itPnt.rt(false).rtRouteToPoint;
+				ensureLoaded(hctx, nextPnt, false);
 				NetworkDBSegment segment = nextPnt.getSegment(itPnt, true);
 				HHNetworkSegmentRes res = new HHNetworkSegmentRes(segment);
 				route.segments.add(res);

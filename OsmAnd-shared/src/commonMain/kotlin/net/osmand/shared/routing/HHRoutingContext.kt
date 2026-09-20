@@ -219,6 +219,42 @@ class HHRoutingContext {
 		return false
 	}
 
+	/** how many hub-graph edges are materialised right now */
+	var loadedEdges: Long = 0
+	private val evictPoints = ArrayDeque<NetworkDBPoint>()
+	private val evictDirs = ArrayDeque<Boolean>()
+
+	/** The edge list, parsed now if it was never loaded or has since been dropped. */
+	fun connectedLoaded(point: NetworkDBPoint, reverse: Boolean): MutableList<NetworkDBSegment> {
+		if (point.connected(reverse) == null) {
+			loadNetworkSegmentPoint(point, reverse)
+		}
+		return point.connected(reverse)!!
+	}
+
+	/**
+	 * The search is done with this point for now. Nothing is dropped here: a point often comes back
+	 * a few expansions later with a cheaper way in, so eviction lags behind by the whole queue and
+	 * starts only once [HHRoutingConfig.MAX_LOADED_EDGES] is passed.
+	 */
+	fun expanded(point: NetworkDBPoint, reverse: Boolean) {
+		evictPoints.addLast(point)
+		evictDirs.addLast(reverse)
+		val budget = config?.MAX_LOADED_EDGES ?: 0
+		while (budget > 0 && loadedEdges > budget && evictPoints.size > 1) {
+			val p = evictPoints.removeFirst()
+			val rev = evictDirs.removeFirst()
+			if (p.edgesEdited) {
+				continue
+			}
+			val l = p.connected(rev)
+			if (l != null) {
+				loadedEdges -= l.size
+				p.connectedSet(rev, null)
+			}
+		}
+	}
+
 	fun loadNetworkSegmentPoint(point: NetworkDBPoint, reverse: Boolean): Int {
 		val mapId = point.mapId
 		val r = regions[mapId.toInt()]

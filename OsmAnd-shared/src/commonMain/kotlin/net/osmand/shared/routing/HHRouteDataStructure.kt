@@ -86,8 +86,39 @@ object HHRouteDataStructure {
 	 */
 	@JvmStatic
 	fun setSegments(ctx: HHRoutingContext, point: NetworkDBPoint, inBytes: ByteArray?, outBytes: ByteArray?) {
-		point.connectedSet(true, parseSegments(inBytes, ctx.getIncomingPoints(point), point, false))
-		point.connectedSet(false, parseSegments(outBytes, ctx.getOutgoingPoints(point), point, true))
+		setSegments(ctx, point, inBytes, outBytes, null)
+	}
+
+	/**
+	 * A block carries both directions of every point it covers, but a search expands a point in one
+	 * direction only. [only] materialises just that side; the other one is parsed if it is read.
+	 */
+	@JvmStatic
+	fun setSegments(
+		ctx: HHRoutingContext, point: NetworkDBPoint, inBytes: ByteArray?, outBytes: ByteArray?,
+		only: Boolean?
+	) {
+		if (only == null || only) {
+			point.connectedSet(true, parseSegments(inBytes, ctx.getIncomingPoints(point), point, false))
+			ctx.loadedEdges += point.connected(true)!!.size
+		}
+		if (only == null || !only) {
+			point.connectedSet(false, parseSegments(outBytes, ctx.getOutgoingPoints(point), point, true))
+			ctx.loadedEdges += point.connected(false)!!.size
+		}
+	}
+
+	/**
+	 * The one way an edge's cost changes after it was read. The file holds an estimate; once the
+	 * detailed route between two hub points is known, its real cost - or -1 for "no road there
+	 * after all" - is written back and the hub search runs again with it. Re-reading the edge would
+	 * hand back the estimate and the search would take it again, so both ends are pinned.
+	 */
+	@JvmStatic
+	fun editDist(segment: NetworkDBSegment, dist: Double) {
+		segment.dist = dist
+		segment.start.edgesEdited = true
+		segment.end.edgesEdited = true
 	}
 
 	internal fun parseSegments(

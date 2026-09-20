@@ -99,6 +99,9 @@ open class NetworkDBPoint {
 		}
 	}
 
+	/** the first and last mile write their own cost into this point's edges, so they cannot be re-read */
+	var edgesEdited = false
+
 	fun connected(rev: Boolean): MutableList<NetworkDBSegment>? = if (rev) connectedReverse else connected
 
 	fun setDistanceToEnd(rev: Boolean, segmentDist: Double) {

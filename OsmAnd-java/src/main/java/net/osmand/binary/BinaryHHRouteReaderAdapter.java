@@ -440,11 +440,14 @@ public class BinaryHHRouteReaderAdapter {
 						long olLimit = codedIS.pushLimitLong(len);
 						HHRoutePointSegments s = readSegments();
 						codedIS.popLimit(olLimit);
-						if (point != null) {
-							// not used from this file
+						// a block carries every point of its id range, so re-reading it for one point
+						// would overwrite what the others already hold - the first/last mile adds
+						// segments to them and disables others in place, and that must survive
+						if (point != null && point.connected(reverse) == null) {
 							HHRouteDataStructure.setSegments(ctx, point, s.getSegmentsIn().toByteArray(),
-									s.getSegmentsOut().toByteArray());
-							loaded += point.connected(true).size() + point.connected(false).size();
+									s.getSegmentsOut().toByteArray(), reverse);
+							List<?> l = point.connected(reverse);
+							loaded += l == null ? 0 : l.size();
 						}
 					}
 
