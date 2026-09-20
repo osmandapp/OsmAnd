@@ -1480,6 +1480,9 @@ public class OsmandSettings {
 	// timestamp of the newest system crash (ANR, native) the crash dialog was already shown for
 	public final OsmandPreference<Long> LAST_SHOWN_SYSTEM_CRASH_TIME = new LongPreference(this, "last_shown_system_crash_time", 0).makeGlobal();
 
+	// hash of the release notes the "What's new" dialog was already shown for
+	public final OsmandPreference<String> LAST_SHOWN_RELEASE_NOTES = new StringPreference(this, "last_shown_release_notes", "").makeGlobal();
+
 	public final OsmandPreference<Boolean> SEND_UNIQUE_USER_IDENTIFIER = new BooleanPreference(this, "send_unique_user_identifier", true).makeGlobal().cache();
 
 	public final CommonPreference<LocationSource> LOCATION_SOURCE = new EnumStringPreference<>(this, "location_source",
