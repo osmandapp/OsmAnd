@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
 import net.osmand.data.LatLon;
@@ -400,7 +401,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 						locationServicesAnimationKey);
 			}
 
-			PointI start31 = mapRenderer.getTarget();
+			PointI start31 = MapRendererContext.getTarget31(mapRenderer);
 			PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
 			animateTarget = Math.abs(finish31.getX() - start31.getX()) > 5 || Math.abs(finish31.getY() - start31.getY()) > 5;
 			if (animateTarget) {
@@ -554,7 +555,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				animator.cancelCurrentAnimation(userInteractionAnimationKey, AnimatedValue.Zoom);
 			}
 
-			PointI start31 = mapRenderer.getTarget();
+			PointI start31 = MapRendererContext.getTarget31(mapRenderer);
 			PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
 			if (finish31.getX() != start31.getX() || finish31.getY() != start31.getY()) {
 				float duration = animationTime / 1000f;
@@ -671,8 +672,9 @@ public class AnimateDraggingMapThread implements TouchListener {
 		int initFlatTarget31X = initFlatTarget31.getX();
 		int initFlatTarget31Y = initFlatTarget31.getY();
 		float initZoom = mapRenderer.getZoom();
-		float initAzimuth = mapRenderer.getAzimuth();
-		float initElevationAngle = mapRenderer.getElevationAngle();
+		float initAzimuth = mapState.getAzimuth();
+		float initElevationAngle = mapState.getElevationAngle();
+		PointI target31 = new PointI();
 
 		boolean animateTarget = false;
 		boolean animateZoom = false;
@@ -690,11 +692,12 @@ public class AnimateDraggingMapThread implements TouchListener {
 			if (mapRenderer == null) {
 				break;
 			}
-			PointI target31 = mapRenderer.getTarget();
-			PointI flatTarget31 = mapRenderer.getState().getTarget31();
-			float azimuth = mapRenderer.getAzimuth();
+			MapRendererContext.getTarget31(mapRenderer, target31);
+			mapState = mapRenderer.getState();
+			PointI flatTarget31 = mapState.getTarget31();
+			float azimuth = mapState.getAzimuth();
 			float zoom = mapRenderer.getZoom();
-			float elevationAngle = mapRenderer.getElevationAngle();
+			float elevationAngle = mapState.getElevationAngle();
 
 			if (!animateTarget) {
 				animateTarget = initFlatTarget31X != flatTarget31.getX()
@@ -988,7 +991,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				animatingMapAnimator();
 
 				resetMapTarget();
-				PointI target31 = mapRenderer.getTarget();
+				PointI target31 = MapRendererContext.getTarget31(mapRenderer);
 				tileView.setTarget31(target31.getX(), target31.getY(), notifyListener);
 			} else {
 				float curX = endX;

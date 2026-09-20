@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
@@ -78,6 +79,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	//OpenGL
 	private final RouteRenderState renderState = new RouteRenderState();
+	// filled on every frame; created there, after the native core has loaded
+	private PointI frameTarget31;
 	private LocationPointsTileProvider trackChartPointsProvider;
 	private MapMarkersCollection highlightedPointCollection;
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
@@ -517,7 +520,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				boolean useMapCenter = useMapCenter();
 				if (mapRenderer != null) {
 					if (useMapCenter) {
-						PointI target31 = mapRenderer.getTarget();
+						if (frameTarget31 == null) {
+							frameTarget31 = new PointI();
+						}
+						PointI target31 = MapRendererContext.getTarget31(mapRenderer, frameTarget31);
 						currentLocation.setLatitude(MapUtils.get31LatitudeY(target31.getY()));
 						currentLocation.setLongitude(MapUtils.get31LongitudeX(target31.getX()));
 					} else {

@@ -113,6 +113,27 @@ public class MapRendererContext {
 	}
 
 	/**
+	 * The location under the map target: the same value as {@link MapRendererView#getTarget()},
+	 * which copies the whole renderer state twice to produce it. Every such copy is a native
+	 * allocation plus a Java object with a finalizer, and the frame paths ask for the target
+	 * continuously. Lives here because {@code MapRendererView} keeps its renderer to this package.
+	 */
+	@NonNull
+	public static PointI getTarget31(@NonNull MapRendererView mapRendererView) {
+		return getTarget31(mapRendererView, new PointI());
+	}
+
+	/**
+	 * Reads the location under the map target into {@code target31} and returns it, so that a
+	 * caller running on every frame can keep one point instead of allocating one per frame.
+	 */
+	@NonNull
+	public static PointI getTarget31(@NonNull MapRendererView mapRendererView, @NonNull PointI target31) {
+		mapRendererView._mapRenderer.getMapTargetLocation(target31);
+		return target31;
+	}
+
+	/**
 	 * Bounds specified map renderer view to this context
 	 *
 	 * @param mapRendererView Reference to MapRendererView

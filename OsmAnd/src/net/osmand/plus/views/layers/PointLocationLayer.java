@@ -26,6 +26,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.Location;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AnimatedValue;
 import net.osmand.core.jni.FColorRGB;
@@ -123,6 +124,8 @@ public class PointLocationLayer extends OsmandMapLayer
 	private Float lastHeadingCached;
 	private MarkerState currentMarkerState = STAY;
 	private LatLon lastMarkerLocation;
+	// filled on every frame; created there, after the native core has loaded
+	private PointI frameTarget31;
 
 	public enum MarkerState {
 		STAY,
@@ -252,7 +255,10 @@ public class PointLocationLayer extends OsmandMapLayer
 		super.onUpdateFrame(mapRenderer);
 		if (isMarkerLinkedToMapTarget()) {
 			Location location = getPointLocation();
-			updateMarker(location, mapRenderer.getTarget(), 0);
+			if (frameTarget31 == null) {
+				frameTarget31 = new PointI();
+			}
+			updateMarker(location, MapRendererContext.getTarget31(mapRenderer, frameTarget31), 0);
 		} else if (isUserInterruptingMovingToMyLocation()) {
 			updateMarker(getPointLocation(), null, 0);
 		} else if (isMapLinkedToLocation() && !isMovingToMyLocation()) {
@@ -471,7 +477,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				animationThread.animatePositionTo(locMarker.marker, target31, animationDuration);
 			} else {
 				locMarker.marker.setPosition(target31);
-				mapRenderer.setMyLocationCirclePosition(locMarker.marker.getPosition());
+				mapRenderer.setMyLocationCirclePosition(target31);
 			}
 			float circleRadius = location.getAccuracy();
 			boolean withCircle = shouldShowLocationRadius(currentMarkerState);

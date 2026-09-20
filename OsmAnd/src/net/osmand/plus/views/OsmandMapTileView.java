@@ -1577,7 +1577,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
 				int centerX31 = center31.getX();
 				int centerY31 = center31.getY();
-				PointI target31 = mapRenderer.getTarget();
+				PointI target31 = MapRendererContext.getTarget31(mapRenderer);
 				float azimuth = mapRenderer.getAzimuth();
 				int targetX = target31.getX() - centerX31;
 				int targetY = target31.getY() - centerY31;
@@ -1635,7 +1635,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
 				int centerX31After = center31.getX();
 				int centerY31After = center31.getY();
-				PointI target31 = mapRenderer.getTarget();
+				PointI target31 = MapRendererContext.getTarget31(mapRenderer);
 				int targetX = target31.getX() - (centerX31After - centerX31Before);
 				int targetY = target31.getY() - (centerY31After - centerY31Before);
 				// Shift map
@@ -1769,7 +1769,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				PointI prevPoint31 = new PointI();
 				if (mapRenderer.getLocationFromScreenPoint(center, prevPoint31)
 						&& mapRenderer.getLocationFromScreenPoint(newCenter, point31)) {
-					point31 = NativeUtilities.calculateNewTarget31(mapRenderer.getTarget(),
+					point31 = NativeUtilities.calculateNewTarget31(MapRendererContext.getTarget31(mapRenderer),
 							new PointI(point31.getX() - prevPoint31.getX(), point31.getY() - prevPoint31.getY()));
 					mapRenderer.setTarget(point31);
 					currentViewport.setLatLonCenter(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
@@ -1793,7 +1793,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			PointI from31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) (fromX), (int) (fromY));
 			PointI to31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) (toX), (int) (toY));
 			if (from31 != null && to31 != null) {
-				PointI target31 = mapRenderer.getTarget();
+				PointI target31 = MapRendererContext.getTarget31(mapRenderer);
 				setTarget31Impl(target31.getX() - (to31.getX() - from31.getX()),
 						target31.getY() - (to31.getY() - from31.getY()));
 			}
