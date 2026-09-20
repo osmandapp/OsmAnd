@@ -13,6 +13,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
+import net.osmand.plus.myplaces.favorites.FavouritesFileHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -104,7 +105,7 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 	protected String getInvalidNameError(@NonNull String trimmedName) {
 		return pointsGroup != null || trimmedName.isEmpty() || FavoriteFolderPath.isValidSegment(trimmedName)
 				? null
-				: getString(R.string.favorite_folder_invalid_name);
+				: getString(R.string.favorite_folder_invalid_name, FavouritesFileHelper.SUBFOLDER_PLACEHOLDER);
 	}
 
 	@NonNull

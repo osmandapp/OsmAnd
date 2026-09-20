@@ -4901,7 +4901,7 @@
     <string name="save_and_access_articles_offline">Verileri kaydedin ve makalelere çevrim dışı olarak her yerden erişin</string>
     <string name="app_profile">Uygulama profili</string>
     <string name="favorite_folder_rename_conflict">Bu ada sahip bir dizin zaten var.</string>
-    <string name="favorite_folder_invalid_name">Klasör adı / veya _%_ karakterlerini içeremez</string>
+    <string name="favorite_folder_invalid_name">Klasör adı / veya %1$s karakterlerini içeremez</string>
     <string name="favorite_folder_duplicate_message">Henüz kullanılmayan bir klasör adı kullanın.</string>
     <string name="favorite_folder_name">Klasör adı</string>
     <string name="edit_folder">Klasörü düzenle</string>

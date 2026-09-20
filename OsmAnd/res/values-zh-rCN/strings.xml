@@ -5226,7 +5226,7 @@
     <string name="coordinate_format_primary">主要</string>
     <string name="favorite_confirm_delete_folder">将删除文件夹“%1$s”，包括其子文件夹和 %2$d 个收藏点。</string>
     <string name="favorite_folder_rename_conflict">已存在同名文件夹。</string>
-    <string name="favorite_folder_invalid_name">文件夹名称不能包含 / 或 _%_</string>
+    <string name="favorite_folder_invalid_name">文件夹名称不能包含 / 或 %1$s</string>
     <string name="favorite_folder_duplicate_message">请使用未被占用的文件夹名称。</string>
     <string name="favorite_folder_name">文件夹名称</string>
     <string name="edit_folder">编辑文件夹</string>

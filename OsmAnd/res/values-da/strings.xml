@@ -5194,7 +5194,7 @@
     <string name="obd_simulation_device">Simuleringsenhed</string>
     <string name="favorite_confirm_delete_folder">Dette vil slette mappen \"%1$s\", inklusive undermapper og %2$d favoritpunkt(er).</string>
     <string name="favorite_folder_rename_conflict">Der findes allerede en mappe med dette navn.</string>
-    <string name="favorite_folder_invalid_name">Mappenavnet må ikke indeholde / eller _%_</string>
+    <string name="favorite_folder_invalid_name">Mappenavnet må ikke indeholde / eller %1$s</string>
     <string name="favorite_folder_duplicate_message">Brug et mappenavn, der ikke allerede findes.</string>
     <string name="favorite_folder_name">Mappenavn</string>
     <string name="edit_folder">Rediger mappe</string>

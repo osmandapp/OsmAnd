@@ -5066,7 +5066,7 @@
     <string name="obd_simulation_device">Szimulációs eszköz</string>
     <string name="favorite_confirm_delete_folder">Ez törli a(z) „%1$s” nevű mappát, beleértve a beágyazott mappákat és %2$d darab kedvenc pontot is.</string>
     <string name="favorite_folder_rename_conflict">Már létezik ilyen nevű mappa.</string>
-    <string name="favorite_folder_invalid_name">A mappanév nem tartalmazhat / vagy _%_ karaktert</string>
+    <string name="favorite_folder_invalid_name">A mappanév nem tartalmazhat / vagy %1$s karaktert</string>
     <string name="favorite_folder_duplicate_message">Használjon olyan mappanevet, amely még nem létezik.</string>
     <string name="favorite_folder_name">Mappa neve</string>
     <string name="edit_folder">Mappa szerkesztése</string>

@@ -5174,7 +5174,7 @@
     <string name="astro_designations">Bezeichnungen</string>
     <string name="obd_simulation_device">Simulationsgerät</string>
     <string name="favorite_folder_rename_conflict">Ein Ordner mit diesem Namen ist bereits vorhanden.</string>
-    <string name="favorite_folder_invalid_name">Der Ordnername darf kein / oder _%_ enthalten</string>
+    <string name="favorite_folder_invalid_name">Der Ordnername darf kein / oder %1$s enthalten</string>
     <string name="favorite_folder_duplicate_message">Verwenden Sie einen Ordnernamen, der noch nicht vorhanden ist.</string>
     <string name="favorite_folder_name">Ordnername</string>
     <string name="edit_folder">Ordner bearbeiten</string>
