@@ -25,8 +25,27 @@ public final class TestObf {
 	private TestObf() {
 	}
 
-	/** The obf files, in a fixed order: the turn lanes map first, then the routing maps by name. */
+	/**
+	 * The obf files, in a fixed order: the turn lanes map first, then the routing maps by name.
+	 *
+	 * {@code OSMAND_OBF_CORPUS} replaces them with the files it names, separated by {@code :}. The
+	 * files that ship with the tests are small and were built years ago: none carries poi tag
+	 * groups or a top index, so the branches of the poi reader that read those are only reached by
+	 * pointing this at a real regional map:
+	 * <pre>
+	 * OSMAND_OBF_CORPUS=/path/Ukraine_transcarpathia_europe.obf \
+	 *   ./gradlew :OsmAnd-java:cleanTest :OsmAnd-java:test --tests "*PoiSearchCompatTest"
+	 * </pre>
+	 */
 	public static List<File> files() {
+		String corpus = System.getenv("OSMAND_OBF_CORPUS");
+		if (corpus != null && !corpus.isEmpty()) {
+			List<File> named = new ArrayList<>();
+			for (String path : corpus.split(":")) {
+				named.add(new File(path));
+			}
+			return named;
+		}
 		List<File> files = new ArrayList<>();
 		File resources = new File("src/test/resources");
 		files.add(new File(resources, "Turn_lanes_test.obf"));
