@@ -1826,10 +1826,10 @@ public class BinaryMapIndexReader {
 				raf.close();
 			}
 			codedIS = null;
-			mapIndexes.clear();
-			addressIndexes.clear();
-			transportIndexes.clear();
-			poiIndexes.clear();
+			mapIndexes = new ArrayList<MapIndex>();
+			addressIndexes = new ArrayList<AddressRegion>();
+			transportIndexes = new ArrayList<TransportIndex>();
+			poiIndexes = new ArrayList<PoiRegion>();
 		}
 	}
 
