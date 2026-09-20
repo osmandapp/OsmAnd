@@ -1637,7 +1637,7 @@
     <string name="my_location">我的位置</string>
     <string name="shared_string_finish">完成</string>
     <string name="plan_route">規劃路徑</string>
-    <string name="shared_string_sort">分類</string>
+    <string name="shared_string_sort">排序</string>
     <string name="coordinate_input">座標輸入</string>
     <string name="marker_save_as_track_descr">將您的標記匯出到下方的 GPX 檔案：</string>
     <string name="move_to_history">移至歷程</string>
@@ -4554,7 +4554,7 @@
     <string name="show_image_previews">顯示影像預覽</string>
     <string name="layer_coordinates_grid">座標網格</string>
     <string name="quick_action_showhide_coordinates_grid_descr">顯示或關閉檢視地圖上座標網格。</string>
-    <string name="shared_string_manual">手動</string>
+    <string name="shared_string_manual">手冊</string>
     <string name="shared_string_map_center">地圖中心</string>
     <string name="choose_location_on_map">選擇地圖上的位置。</string>
     <string name="prime_meridian">格林威治子午線</string>
@@ -4818,11 +4818,11 @@
     <string name="galactic_line">銀道</string>
     <string name="meridian_line">子午線</string>
     <string name="equator_line">天球赤道</string>
-    <string name="copy_from_portrait_layout">從直式版面複製</string>
-    <string name="copy_from_landscape_layout">從橫式版面複製</string>
-    <string name="panels_layout_compact">精簡</string>
-    <string name="panels_layout_wide">寬</string>
-    <string name="panels_layout">面板佈局</string>
+    <string name="copy_from_portrait_layout">從橫向樣式複製</string>
+    <string name="copy_from_landscape_layout">從直式樣式複製</string>
+    <string name="panels_layout_compact">緊實</string>
+    <string name="panels_layout_wide">寬闊</string>
+    <string name="panels_layout">面板樣式</string>
     <string name="panels_layout_descr">為頂部與底部面板選擇佈局。它們可以是寬版面，橫跨整個螢幕寬度；或是精簡版面，嵌入側邊面板與按鈕之間。</string>
     <string name="single_layout">單一佈局</string>
     <string name="separate_layouts">分離佈局</string>
@@ -5213,4 +5213,11 @@
     <string name="heap_dump_auto">蒐集高用量狀況</string>
     <string name="heap_dump_auto_descr">當堆疊快滿時，每 30 分鐘執行一次。</string>
     <string name="visualizing_button_grid_descr">儲存格、槽位、框架與紀錄檔。</string>
+    <string name="java_memory">Java 記憶體</string>
+    <string name="ais_load_data_descr">從已記錄檔案重播 AIS 訊息。</string>
+    <string name="map_rendering">地圖渲染</string>
+    <string name="simulate_ui">模擬第一開始</string>
+    <string name="simulate_ui_descr">首先執行，免費版本橫幅，打折版本。</string>
+    <string name="heap_dump">堆疊轉儲</string>
+    <string name="heap_dump_descr">從 java 轉儲計算物件。</string>
 </resources>
