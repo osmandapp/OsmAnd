@@ -1,5 +1,6 @@
 package net.osmand.shared.binary
 
+import net.osmand.shared.data.Amenity
 import net.osmand.shared.io.KFile
 import net.osmand.shared.routing.HHRouteRegionPointsCtx
 import net.osmand.shared.routing.HHRoutingContext
@@ -9,6 +10,7 @@ import net.osmand.shared.routing.RouteRegion
 import net.osmand.shared.routing.RouteSubregion
 import net.osmand.shared.util.collections.KTIntArrayList
 import net.osmand.shared.util.collections.KTIntObjectMap
+import net.osmand.shared.util.collections.KTLongHashSet
 import net.osmand.shared.util.collections.KTLongObjectMap
 import okio.FileHandle
 import okio.FileSystem
@@ -36,12 +38,14 @@ class BinaryMapIndexReader {
 	internal val codedIS: CodedInputStream
 	private val routeAdapter: BinaryMapRouteReaderAdapter
 	private val hhAdapter: BinaryHHRouteReaderAdapter
+	private val poiAdapter: BinaryMapPoiReaderAdapter
 
 	private var version: Int = 0
 	private var dateCreated: Long = 0
 	private var initCorrectly = false
 
 	private val mapIndexes = ArrayList<MapIndex>()
+	private val poiIndexes = ArrayList<PoiRegion>()
 	private val routingIndexes = ArrayList<RouteRegion>()
 	private val hhIndexes = ArrayList<HHRouteRegion>()
 	private var basemap = false
@@ -52,6 +56,7 @@ class BinaryMapIndexReader {
 		this.codedIS = CodedInputStream(handle)
 		this.routeAdapter = BinaryMapRouteReaderAdapter(this)
 		this.hhAdapter = BinaryHHRouteReaderAdapter(this)
+		this.poiAdapter = BinaryMapPoiReaderAdapter(this)
 		init()
 	}
 
@@ -100,8 +105,18 @@ class BinaryMapIndexReader {
 					codedIS.seek(mapIndex.filePointer + mapIndex.length)
 					mapIndexes.add(mapIndex)
 				}
+				OsmAndStructure.POIINDEX_FIELD_NUMBER -> {
+					val poiInd = PoiRegion()
+					poiInd.length = readInt()
+					poiInd.filePointer = codedIS.getTotalBytesRead()
+					val oldLimit = codedIS.pushLimitLong(poiInd.length)
+					poiAdapter.readPoiIndex(poiInd, false)
+					codedIS.popLimit(oldLimit)
+					codedIS.seek(poiInd.filePointer + poiInd.length)
+					poiIndexes.add(poiInd)
+				}
 				OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER,
-				OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER, OsmAndStructure.POIINDEX_FIELD_NUMBER -> {
+				OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER -> {
 					val length = readInt()
 					codedIS.seek(codedIS.getTotalBytesRead() + length)
 				}
@@ -128,6 +143,20 @@ class BinaryMapIndexReader {
 	fun isBasemap(): Boolean = basemap
 
 	fun containsMapData(): Boolean = mapIndexes.size > 0
+
+	fun getPoiIndexes(): List<PoiRegion> = poiIndexes
+
+	fun containsPoiData(): Boolean = poiIndexes.size > 0
+
+	fun containsPoiData(left31x: Int, top31y: Int, right31x: Int, bottom31y: Int): Boolean {
+		for (index in poiIndexes) {
+			if (right31x >= index.left31 && left31x <= index.right31 &&
+				index.top31 <= bottom31y && index.bottom31 >= top31y) {
+				return true
+			}
+		}
+		return false
+	}
 
 	fun getRoutingIndexes(): List<RouteRegion> = routingIndexes
 
@@ -795,6 +824,73 @@ class BinaryMapIndexReader {
 		return dataObject
 	}
 
+	/**
+	 * Poi section
+	 */
+
+	/** Reads the decoding tables of [poiIndex], unless they are read already. */
+	fun initCategories(poiIndex: PoiRegion) {
+		poiAdapter.initCategories(poiIndex)
+	}
+
+	fun initCategories() {
+		for (poiIndex in poiIndexes) {
+			poiAdapter.initCategories(poiIndex)
+		}
+	}
+
+	fun searchPoi(req: SearchRequest<Amenity>): MutableList<Amenity> = searchPoi(req, null)
+
+	/** Every amenity of every poi section that the request's box and filters accept. */
+	fun searchPoi(req: SearchRequest<Amenity>, onlyIndex: PoiRegion?): MutableList<Amenity> {
+		req.numberOfVisitedObjects = 0
+		req.numberOfAcceptedObjects = 0
+		req.numberOfAcceptedSubtrees = 0
+		req.numberOfReadSubtrees = 0
+		val lst = if (onlyIndex == null) poiIndexes else listOf(onlyIndex)
+		for (poiIndex in lst) {
+			poiAdapter.initCategories(poiIndex)
+			codedIS.seek(poiIndex.filePointer)
+			val old = codedIS.pushLimitLong(poiIndex.length)
+			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex)
+			codedIS.popLimit(old)
+		}
+		return req.getSearchResults()
+	}
+
+	/**
+	 * Reads the tag groups of the tiles of [tileIds] that this section has not read yet, so that
+	 * the amenities already in hand can be told which settlements they are in. False when there is
+	 * nothing left to read.
+	 */
+	fun readAmenityBboxes(pr: PoiRegion, tileIds: KTLongHashSet): Boolean {
+		poiAdapter.initCategories(pr)
+		val missing = pr.checkMissingTagGroups(tileIds)
+		if (missing.size() == 0) {
+			return false
+		}
+		val sr = SearchRequest<Amenity>()
+		codedIS.seek(pr.filePointer)
+		val oldLim = codedIS.pushLimitLong(pr.length)
+		pr.updReadTagGroups(missing) // update before as tileIds is modified
+		poiAdapter.readPoiBboxes(pr, sr, missing)
+		codedIS.popLimit(oldLim)
+
+		return true
+	}
+
+	/** One block of amenities at a known offset, or one amenity of it when [index] is not -1. */
+	fun readAmenityBlock(pr: PoiRegion, offset: Long, index: Int): MutableList<Amenity> {
+		poiAdapter.initCategories(pr)
+		codedIS.seek(pr.filePointer + offset)
+		val len = readInt()
+		val oldLim = codedIS.pushLimitLong(len)
+		val sr = SearchRequest<Amenity>()
+		poiAdapter.readPoiData(0, Int.MAX_VALUE, 0, Int.MAX_VALUE, sr, pr, index, null, 0)
+		codedIS.popLimit(oldLim)
+		return sr.getSearchResults()
+	}
+
 	fun close() {
 		handle.close()
 	}
@@ -805,7 +901,7 @@ class BinaryMapIndexReader {
 		const val TRANSPORTINDEX_FIELD_NUMBER = 4
 		const val MAPINDEX_FIELD_NUMBER = BinaryMapIndexReader.MAPINDEX_FIELD_NUMBER
 		const val ADDRESSINDEX_FIELD_NUMBER = 7
-		const val POIINDEX_FIELD_NUMBER = 8
+		const val POIINDEX_FIELD_NUMBER = BinaryMapIndexReader.POIINDEX_FIELD_NUMBER
 		const val ROUTINGINDEX_FIELD_NUMBER = 9
 		const val HHROUTINGINDEX_FIELD_NUMBER = BinaryMapIndexReader.HHROUTINGINDEX_FIELD_NUMBER
 		const val DATECREATED_FIELD_NUMBER = 18
@@ -822,6 +918,9 @@ class BinaryMapIndexReader {
 
 		/** The field of `OsmAndStructure` a map section occupies; [MapIndex.getFieldNumber]. */
 		const val MAPINDEX_FIELD_NUMBER = 6
+
+		/** The field of `OsmAndStructure` a poi section occupies; [PoiRegion.getFieldNumber]. */
+		const val POIINDEX_FIELD_NUMBER = 8
 
 		/** The field of `OsmAndStructure` an HH routing section occupies; [HHRouteRegion.getFieldNumber]. */
 		const val HHROUTINGINDEX_FIELD_NUMBER = 10
