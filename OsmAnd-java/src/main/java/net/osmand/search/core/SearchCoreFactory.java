@@ -792,7 +792,6 @@ public class SearchCoreFactory {
 			}
 			ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
 				int limit = 0;
-				boolean isSkipped = false;
 
 				@Override
 				public boolean publish(Amenity object) {
@@ -804,7 +803,6 @@ public class SearchCoreFactory {
 					}
 					String poiID = object.getType().getKeyName() + "_" + object.getId();
 					if (ids.contains(poiID)) {
-						isSkipped = true;
 						return false;
 					}
 					SearchResult sr = new SearchResult(phrase);
@@ -854,11 +852,6 @@ public class SearchCoreFactory {
 				@Override
 				public boolean isCancelled() {
 					return resultMatcher.isCancelled() && (limit < LIMIT);
-				}
-
-				@Override
-				public boolean isSkippedDuplication() {
-					return isSkipped;
 				}
 			};
 
