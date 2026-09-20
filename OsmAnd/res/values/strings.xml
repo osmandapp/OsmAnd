@@ -3251,7 +3251,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="live_monitoring_time_buffer">Time buffer</string>
     <string name="live_monitoring_tracking_interval">Tracking interval</string>
     <string name="live_monitoring_adress">Web address</string>
-    <string name="monitoring_notification">Show Record button in Notifications</string>
+    <string name="monitoring_notification">Show \'Record\' button in Notifications</string>
     <string name="monitoring_min_speed">Minimum speed</string>
     <string name="monitoring_min_accuracy">Minimum accuracy</string>
     <string name="monitoring_min_distance">Minimum displacement</string>
