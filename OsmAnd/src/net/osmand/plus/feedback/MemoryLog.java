@@ -84,6 +84,11 @@ public class MemoryLog {
 	private static final long SUMMARY_BUDGET_MS = 200;
 	// reading every mapping costs far more than the Debug counters, so it happens rarely
 	private static final int SMAPS_EVERY = 10;
+	// once every ten summaries is once every ten minutes, and the sample that gets it is the
+	// first one of the process, where nothing is allocated yet: a session that ends before the
+	// tenth summary says where nothing went. A process that has grown this much since the last
+	// walk is worth another one, so the breakdown lands on the growth rather than on the start
+	private static final long SMAPS_RSS_GROWTH_KB = 200 * 1024;
 	// the first walk runs interpreted and costs ~270 ms, later ones settle around 70 ms
 	private static final long SMAPS_BUDGET_MS = 600;
 	private static final int SMAPS_BUFFER = 64 * 1024;
@@ -131,6 +136,7 @@ public class MemoryLog {
 	private static boolean summaryAffordable = true;
 	private static boolean smapsAffordable = true;
 	private static int smapsCount;
+	private static long smapsRss;
 	private static long previousAllocated;
 	private static long previousBlockingGcTime;
 	private static long lastRss;
@@ -476,9 +482,14 @@ public class MemoryLog {
 	 * somebody downloaded, which is where they live and where they travel.
 	 */
 	private static void appendSmaps(@NonNull StringBuilder sb) {
-		if (!smapsAffordable || !summaryDue || smapsCount++ % SMAPS_EVERY != 0) {
+		boolean periodic = summaryDue && smapsCount++ % SMAPS_EVERY == 0;
+		// growth does not wait for a summary sample: a peak of a few hundred megabytes can come
+		// and go inside one 30 s interval, and it is the peak the breakdown is wanted for
+		boolean grown = smapsRss > 0 && lastRss - smapsRss > SMAPS_RSS_GROWTH_KB;
+		if (!smapsAffordable || !(periodic || grown)) {
 			return;
 		}
+		smapsRss = lastRss;
 		long start = SystemClock.uptimeMillis();
 		String categories = readSmapsByCategory();
 		long spent = SystemClock.uptimeMillis() - start;
@@ -486,9 +497,14 @@ public class MemoryLog {
 			sb.append(" smaps=").append(categories);
 			sb.append(" smapsMs=").append(spent);
 		}
-		if (spent > SMAPS_BUDGET_MS) {
-			// a process with tens of thousands of mappings can make this cost more than it says
+		// a process with tens of thousands of mappings can make this cost more than it says, but
+		// the first walk of a process runs interpreted over a cold page cache: 205 to 2137 ms
+		// measured on a Pixel 9 Pro XL against 71 to 122 ms warm, so the warm-up never decides
+		// this. A field that stops appearing without saying so is
+		// indistinguishable from one that was never built, hence smapsOff
+		if (spent > SMAPS_BUDGET_MS && smapsCount > 1) {
 			smapsAffordable = false;
+			sb.append(" smapsOff=").append(spent);
 		}
 	}
 
