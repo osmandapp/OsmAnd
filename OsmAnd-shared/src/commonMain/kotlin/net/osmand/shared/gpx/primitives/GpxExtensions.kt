@@ -8,30 +8,37 @@ import net.osmand.shared.util.KAlgorithms
 
 open class GpxExtensions {
 
-	var extensions: MutableMap<String, String>? = null
-	var deferredExtensions: MutableMap<String, String>? = null
+	// [key, value, key, value ...] sorted by key - see GpxExtensionsMap
+	internal var extensionsArray: Array<String?>? = null
+	internal var deferredArray: Array<String?>? = null
 	var extensionsWriters: MutableMap<String, GpxExtensionsWriter>? = null
 
+	var extensions: MutableMap<String, String>?
+		get() = if (extensionsArray == null) null else GpxExtensionsMap(this, false)
+		set(value) {
+			extensionsArray = GpxExtensionsMap.toArray(value)
+		}
+
+	var deferredExtensions: MutableMap<String, String>?
+		get() = if (deferredArray == null) null else GpxExtensionsMap(this, true)
+		set(value) {
+			deferredArray = GpxExtensionsMap.toArray(value)
+		}
+
 	fun getExtensionsToRead(): Map<String, String> {
-		return extensions ?: emptyMap()
+		return if (extensionsArray == null) emptyMap() else GpxExtensionsMap(this, false)
 	}
 
 	fun getExtensionsToWrite(): MutableMap<String, String> {
-		if (extensions == null) {
-			extensions = LinkedHashMap()
-		}
-		return extensions!!
+		return GpxExtensionsMap(this, false)
 	}
 
 	fun getDeferredExtensionsToRead(): Map<String, String> {
-		return deferredExtensions ?: emptyMap()
+		return if (deferredArray == null) emptyMap() else GpxExtensionsMap(this, true)
 	}
 
 	fun getDeferredExtensionsToWrite(): MutableMap<String, String> {
-		if (deferredExtensions == null) {
-			deferredExtensions = LinkedHashMap()
-		}
-		return deferredExtensions!!
+		return GpxExtensionsMap(this, true)
 	}
 
 	fun getExtensionsWritersToWrite(): MutableMap<String, GpxExtensionsWriter> {
@@ -62,7 +69,7 @@ open class GpxExtensions {
 
 	fun getColor(defColor: Int?): Int? {
 		var clrValue: String? = null
-		val extensions = this.extensions
+		val extensions = if (extensionsArray != null) getExtensionsToRead() else null
 		if (extensions != null) {
 			clrValue = extensions[COLOR_NAME_EXTENSION]
 			if (clrValue == null) {

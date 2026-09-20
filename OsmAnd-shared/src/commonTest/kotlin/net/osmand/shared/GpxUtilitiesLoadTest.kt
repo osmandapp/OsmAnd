@@ -1,6 +1,10 @@
 package net.osmand.shared
 
 import net.osmand.shared.gpx.GpxUtilities
+import net.osmand.shared.gpx.GpxFile
+import net.osmand.shared.gpx.primitives.Track
+import net.osmand.shared.gpx.primitives.TrkSegment
+import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.gpx.PointAttributes
 import okio.Buffer
 import kotlin.test.Test
@@ -8,6 +12,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertSame
 import kotlin.test.assertTrue
 
 class GpxUtilitiesLoadTest {
@@ -201,12 +206,14 @@ class GpxUtilitiesLoadTest {
 		assertEquals(7.25f, points[1].speed)
 		// the value is kept in the field only - a string copy per point costs a map per point
 		assertFalse(points[0].getExtensionsToRead().containsKey(GpxUtilities.POINT_SPEED))
+		// bearing keeps its own string: the writer has no field to regenerate it from
 		assertEquals("42.0", points[0].getExtensionsToRead()[GpxUtilities.POINT_BEARING])
 		assertNull(points[1].extensions)
 
 		val saved = writeGpxToString(gpxFile)
 		// saving must not attach the extensions map, the deferred map or the writers back to a point
 		assertNull(points[1].extensions)
+		assertEquals(1, points[0].getExtensionsToRead().size)
 		assertNull(points[1].deferredExtensions)
 		assertTrue(points[0].extensionsWriters.isNullOrEmpty())
 
@@ -215,6 +222,70 @@ class GpxUtilitiesLoadTest {
 		assertEquals(5.5f, reloadedPoints[0].speed)
 		assertEquals(42.0f, reloadedPoints[0].bearing)
 		assertEquals(7.2f, reloadedPoints[1].speed) // the writer has always reformatted speed as #.#
+	}
+
+	@Test
+	fun testRepeatedExtensionValuesAreSharedInsideAFile() {
+		val points = 64
+		val gpx = loadGpx(
+			buildString {
+				append("<gpx version=\"1.1\" creator=\"test\"><trk><trkseg>")
+				for (index in 0 until points) {
+					append("<trkpt lat=\"10.0\" lon=\"20.0\"><extensions>")
+					append("<provider>gps</provider><vm_bvol>12.4</vm_bvol>")
+					append("</extensions></trkpt>")
+				}
+				append("</trkseg></trk></gpx>")
+			},
+			addGeneralTrack = false
+		)
+
+		assertNull(gpx.error)
+		val loaded = gpx.tracks[0].segments[0].points
+		assertEquals(points, loaded.size)
+		val first = loaded.first().getExtensionsToRead()
+		for (point in loaded) {
+			val extensions = point.getExtensionsToRead()
+			assertEquals("gps", extensions["provider"])
+			// one instance of every distinct value and of every tag name for the whole file
+			assertSame(first["provider"], extensions["provider"])
+			assertSame(first["vm_bvol"], extensions["vm_bvol"])
+			assertSame(first.keys.first(), extensions.keys.first())
+		}
+	}
+
+	@Test
+	fun testRecordedPluginValuesSurviveASave() {
+		// what SavingTrackHelper does with the values the plugins attach to a recorded point
+		val point = WptPt()
+		point.lat = 10.0
+		point.lon = 20.0
+		point.speed = 5.5f
+		point.heading = 42f
+		GpxUtilities.assignExtensionWriter(
+			point, mapOf("vm_rpm" to "2400", PointAttributes.SENSOR_TAG_HEART_RATE to "145"), "plugins")
+
+		val segment = TrkSegment()
+		segment.points.add(point)
+		val track = Track()
+		track.segments.add(segment)
+		val gpxFile = GpxFile("test")
+		gpxFile.tracks.add(track)
+
+		val saved = writeGpxToString(gpxFile)
+		assertTrue(saved.contains("<osmand:vm_rpm>2400</osmand:vm_rpm>"), saved)
+		assertTrue(saved.contains("<gpxtpx:hr>145</gpxtpx:hr>"), saved)
+		assertTrue(saved.contains("<osmand:speed>5.5</osmand:speed>"), saved)
+		assertTrue(saved.contains("<osmand:heading>42.0</osmand:heading>"), saved)
+
+		// the plugin writer and its values stay on the point, the analysers read them from there
+		assertEquals("2400", point.getDeferredExtensionsToRead()["vm_rpm"])
+		assertEquals("145", point.getDeferredExtensionsToRead()[PointAttributes.SENSOR_TAG_HEART_RATE])
+		assertNotNull(point.getExtensionsWriter("plugins"))
+		assertNull(point.extensions)
+
+		// and saving twice writes the same file
+		assertEquals(saved, writeGpxToString(gpxFile))
 	}
 
 	private fun buildTimedTrackGpx(pointsCount: Int, startTime: Long): String {

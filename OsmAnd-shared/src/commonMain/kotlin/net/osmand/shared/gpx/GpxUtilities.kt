@@ -81,6 +81,7 @@ object GpxUtilities {
 	const val POINT_ELEVATION = "ele"
 	const val POINT_SPEED = "speed"
 	const val POINT_BEARING = "bearing"
+	const val POINT_HEADING = "heading"
 
 	const val MIN_ELEVATION = "min_ele"
 	const val MAX_ELEVATION = "max_ele"
@@ -802,7 +803,7 @@ object GpxUtilities {
 			extensions[POINT_SPEED] = formatDecimal(p.speed.toDouble())
 		}
 		if (!p.heading.isNaN()) {
-			extensions["heading"] = round(p.heading).toString()
+			extensions[POINT_HEADING] = round(p.heading).toString()
 		}
 		extensions.putAll(p.getExtensionsToRead())
 		if (serializer.getName() != "rtept") {
@@ -1286,6 +1287,9 @@ object GpxUtilities {
 		addGeneralTrack: Boolean
 	): GpxFile {
 		val insideTagDepth = mutableMapOf("trk" to 0)
+		// extension values of a track repeat themselves point after point ("gps", "1.4", "171.6"),
+		// so one instance per distinct value is kept for the whole file instead of one per point
+		val valuePool = HashMap<String, String>()
 		oneOffLogParseTimeErrors = true
 		val gpxFile = GpxFile(null)
 		gpxFile.metadata.time = 0
@@ -1361,7 +1365,7 @@ object GpxUtilities {
 										parser
 									)
 								) {
-									readExtensionsText(parser, tag, parse)
+									readExtensionsText(parser, tag, parse, valuePool)
 								}
 							}
 						}
@@ -1739,7 +1743,12 @@ object GpxUtilities {
 	}
 
 	@Throws(XmlParserException::class, IOException::class)
-	private fun readExtensionsText(parser: XmlPullParser, key: String, target: GpxExtensions) {
+	private fun readExtensionsText(
+		parser: XmlPullParser,
+		key: String,
+		target: GpxExtensions,
+		valuePool: MutableMap<String, String>
+	) {
 		var tok: Int
 		var text: StringBuilder? = null
 		while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
@@ -1748,7 +1757,9 @@ object GpxUtilities {
 				if (tag != null && text != null) {
 					val value = text.toString()
 					if (!value.isBlank()) {
-						applyExtensionValue(target, getQualifiedExtensionTagName(parser) ?: tag, value)
+						applyExtensionValue(
+							target, getQualifiedExtensionTagName(parser) ?: tag,
+							valuePool.getOrPut(value) { value })
 					}
 				}
 				if (tag == key) {
