@@ -68,7 +68,7 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 	private final float density;
 	private final OsmandApplication app;
 
-	private ConcurrentHashMap <AreaI, QuadTree<PanoramaxImage>> pointsMap;
+	private final ConcurrentHashMap <AreaI, QuadTree<PanoramaxImage>> pointsMap;
 	private final ConcurrentHashMap <AreaI, TileRequest> lazyLoadMap;
 	private final GeometryTilesCache geometryTilesCache;
 	private final PanoramaxBitmapTileCache panoramaxBitmapTileCache;
@@ -308,7 +308,7 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 	}
 
 	public void setVisibleBBox31(AreaI visibleBBox31, int zoom) {
-		if (zoom < MIN_POINTS_ZOOM || pointsMap == null || pointsMap.size() == 0) {
+		if (zoom < MIN_POINTS_ZOOM) {
 			return;
 		}
 		if (storedEnlargedBBox31 != null && storedEnlargedBBox31.contains(visibleBBox31)) {
@@ -319,17 +319,11 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 		//enlarge visible bbox in 2 times
 		AreaI enlargedBbox31 = visibleBBox31.getEnlargedBy(delta / 2);
 
-		Map<AreaI, QuadTree<PanoramaxImage>> resultMap = new HashMap<>();
-		for (Map.Entry<AreaI, QuadTree<PanoramaxImage>> entry : pointsMap.entrySet()) {
-			AreaI tileArea = entry.getKey();
-			if (enlargedBbox31.intersects(tileArea)) {
-				resultMap.put(tileArea, entry.getValue());
-			}
-		}
-		pointsMap.clear();
-		if (resultMap.size() > 0) {
-			pointsMap = new ConcurrentHashMap<>(resultMap);
-		}
+		// Pruned in place. Tile workers keep inserting while this runs, so rebuilding the maps
+		// here would drop whatever they added between the copy and the reassignment.
+		pointsMap.keySet().removeIf(tileArea -> !enlargedBbox31.intersects(tileArea));
+		lazyLoadMap.keySet().removeIf(tileArea -> !enlargedBbox31.intersects(tileArea));
+
 		storedEnlargedBBox31 = enlargedBbox31;
 	}
 
