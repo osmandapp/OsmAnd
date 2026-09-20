@@ -752,9 +752,7 @@ public class TransportRoutePlanner {
 			if (ntrr.alternativeRoutes != null && ntrr.alternativeRoutes.length > 0) {
 				trr.alternativeRoutes = convertToTransportRoutingResult(ntrr.alternativeRoutes, cfg);
 			}
-			TransportFerryHelper.mergeJunctionSegments(trr.getSegments());
-
-			convertedRes.add(trr);
+			convertedRes.add(trr); // junction segments are already merged by the native prepareResults
 		}
 		convertedStopsCache.clear();
 		convertedRoutesCache.clear();
