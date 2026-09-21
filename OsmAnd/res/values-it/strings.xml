@@ -2430,7 +2430,7 @@
     <string name="live_monitoring_time_buffer">Buffer temporale</string>
     <string name="live_monitoring_tracking_interval">Intervallo di tracciamento</string>
     <string name="live_monitoring_adress">Indirizzo web</string>
-    <string name="monitoring_notification">Notifiche</string>
+    <string name="monitoring_notification">Mostra il pulsante \"Registra\" nelle notifiche</string>
     <string name="monitoring_min_speed">Velocità minima</string>
     <string name="monitoring_min_accuracy">Accuratezza minima</string>
     <string name="monitoring_min_distance">Minimo spostamento</string>
@@ -4685,7 +4685,7 @@
     <string name="shared_string_default_view">Vista di default</string>
     <string name="map_widget_route_information">Informazioni sul percorso</string>
     <string name="shared_string_length">Lunghezza</string>
-    <string name="ais_load_data">Carica i dati AIS dal file</string>
+    <string name="ais_load_data">Simula il traffico navale</string>
     <string name="ais_nmea_protocol_description">Scegli il protocollo per la ricezione dei dati NMEA</string>
     <string name="ais_address_nmea_server">Indirizzo IP della sorgente dati NMEA</string>
     <string name="ais_address_nmea_server_description">Definisci l\'indirizzo IP della sorgente dati NMEA (se viene utilizzato TCP)</string>
@@ -4919,7 +4919,7 @@
     <string name="rendering_attr_spotSize_description">Dimensione dei punti di profondità</string>
     <string name="help_article_navigation_routing_ski_routing_name">Piste da sci e percorsi</string>
     <string name="show_local_names">Mostra i nomi locali</string>
-    <string name="rendering_attr_pisteRoutes_name">Discese e percorsi da sci</string>
+    <string name="rendering_attr_pisteRoutes_name">Piste e percorsi per sci</string>
     <string name="download_wikipedia_label">Scarica Wikipedia</string>
     <string name="vehicle_metrics_chart_category">Metriche del veicolo</string>
     <string name="delete_folder_description">Cancellare la cartella \"%1$s\"?</string>
@@ -5408,4 +5408,8 @@
     <string name="heap_dump_collect">Raccogli e analizza ora</string>
     <string name="heap_dump_collect_descr">Impiega alcuni secondi, mostra il risultato.</string>
     <string name="heap_dump_share">Condividi il rapporto</string>
+    <string name="heap_dump_share_descr">Invia l\'ultimo rapporto al server.</string>
+    <string name="heap_dump_auto">Raccogli in caso di utilizzo elevato</string>
+    <string name="heap_dump_auto_descr">Quando la memoria heap è quasi piena, una volta ogni 30 minuti.</string>
+    <string name="visualizing_button_grid_descr">Celle, slot, frame e log.</string>
 </resources>

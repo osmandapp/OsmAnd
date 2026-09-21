@@ -2753,7 +2753,7 @@
     <string name="monitoring_min_distance">Najmanji pomeraj</string>
     <string name="monitoring_min_accuracy">Najmanja preciznost</string>
     <string name="monitoring_min_speed">Najmanja brzina</string>
-    <string name="monitoring_notification">Obaveštenje</string>
+    <string name="monitoring_notification">Prikaži dugme „Snimi” u obaveštenjima</string>
     <string name="shared_string_capacity">Kapacitet</string>
     <string name="metric_ton">t</string>
     <string name="cubic_m">m³</string>
@@ -4592,7 +4592,7 @@
     <string name="record_obd_data">Snimi statistiku vozila</string>
     <string name="wunderlinq_datagrid">WunderLINK Datagrid</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s po %2$s</string>
-    <string name="obd_engine_runtime_desc">Pokazuje koliko dugo motor radi od kada je pokrenut.</string>
+    <string name="obd_engine_runtime_desc">Prikazuje koliko dugo motor radi od trenutka pokretanja.</string>
     <string name="obd_calculated_engine_load_desc">Prikazuje procenat raspoložive snage motora koja se koristi u datom trenutku.</string>
     <string name="obd_fuel_consumption_desc">Prikazuje stopu potrošnje goriva od strane motora, izračunato na osnovu preostalog goriva, veličine rezervoara i udaljenosti pokrivene kao što je određeno GPS-om.</string>
     <string name="obd_fuel_consumption">Potrošnja goriva</string>
@@ -4661,7 +4661,7 @@
     <string name="ais_cpa_warning_distance">Upozorenje udaljenosti za najbližu tačku približavanja (CPA)</string>
     <string name="plugin_ais_tracker_name">AIS tragač plovila</string>
     <string name="plugin_ais_tracker_description">Prikaz AIS pozicija i informacija o okolnim plovilima. AIS podaci se primaju preko mreže sa eksternog AIS prijemnika.</string>
-    <string name="ais_load_data">Učitaj AIS podatke iz datoteke</string>
+    <string name="ais_load_data">Simulirajte saobraćaj plovila</string>
     <string name="plugin_ais_tracker_disclaimer">ODRICANJE ODGOVORNOSTI\n\nOvaj dodatak je hobi projekat i nije dizajniran za pouzdanost i ispravnost. Nemojte se oslanjati na ovaj softver ni na koji način uključujući navigaciju i/ili bezbednost života.</string>
     <string name="ais_port_nmea_server_description">Definišite broj TCP porta NMEA izvora podataka</string>
     <string name="ais_cpa_warning_time_description">Ako je TCPA (vreme za dostizanje CPA sa drugim plovilom) manji od ove vrednosti, plovilo je označeno crvenom bojom.</string>
@@ -4946,10 +4946,10 @@
     <string name="avg_speed">Sred. brzina</string>
     <string name="organize_by_max_speed">Maks. brzina</string>
     <string name="organize_by_max_altitude">Maks. nadmorska visina</string>
-    <string name="copy_from_portrait_layout">Kopiraj iz Uspravnog rasporeda</string>
-    <string name="copy_from_landscape_layout">Kopiraj iz Pejzažnog rasporeda</string>
-    <string name="panels_layout_compact">Kompaktno</string>
-    <string name="panels_layout_wide">Široko</string>
+    <string name="copy_from_portrait_layout">Kopiraj iz Portret rasporeda</string>
+    <string name="copy_from_landscape_layout">Kopiraj iz Pejzaž rasporeda</string>
+    <string name="panels_layout_compact">Kompaktan</string>
+    <string name="panels_layout_wide">Širok</string>
     <string name="panels_layout">Raspored panela</string>
     <string name="panels_layout_descr">Izaberite raspored za gornji i donji panel. Mogu biti široki, koji se prostiru preko cele širine ekrana, ili kompaktni, koji se uklapaju između bočnih panela i dugmadi.</string>
     <string name="single_layout">Jedan raspored</string>
@@ -5343,4 +5343,18 @@
     <string name="crash_report_sent">Izveštaj je poslat. Hvala vam!</string>
     <string name="crash_report_send_failed">Izveštaj nije mogao biti poslat. Pokušajte ponovo kasnije.</string>
     <string name="battery_saving_mode_descr">Ograničava prikaz mape na 20 sličica u sekundi kako bi se smanjila potrošnja baterije i zagrevanje uređaja. Kretanje mape postaje manje glatko.</string>
+    <string name="java_memory">Java memorija</string>
+    <string name="ais_load_data_descr">Reprodukujte AIS poruke iz snimljene datoteke.</string>
+    <string name="map_rendering">Iscrtavanje mape</string>
+    <string name="simulate_ui">Simulirajte prvo pokretanje</string>
+    <string name="simulate_ui_descr">Prvo pokretanje, baner besplatne verzije, list popusta.</string>
+    <string name="heap_dump">Izpis hipa</string>
+    <string name="heap_dump_descr">Prebrojte objekte u Java hipu.</string>
+    <string name="heap_dump_collect">Prikupi i analiziraj odmah</string>
+    <string name="heap_dump_collect_descr">Traje nekoliko sekundi i prikazuje rezultat.</string>
+    <string name="heap_dump_share">Podeli izveštaj</string>
+    <string name="heap_dump_share_descr">Šalje poslednji izveštaj serveru.</string>
+    <string name="heap_dump_auto">Prikupi pri visokoj upotrebi</string>
+    <string name="heap_dump_auto_descr">Kada je hip skoro pun, jednom na svakih 30 minuta.</string>
+    <string name="visualizing_button_grid_descr">Ćelije, slotovi, okviri i zapisi.</string>
 </resources>
