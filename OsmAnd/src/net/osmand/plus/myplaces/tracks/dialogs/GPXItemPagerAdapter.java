@@ -31,7 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 
-import net.osmand.plus.charts.ElevationChart;
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -186,12 +186,6 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	@Nullable
-	private String getTrackPath() {
-		GpxFile gpxFile = displayHelper.getGpx();
-		return gpxFile != null ? gpxFile.getPath() : null;
-	}
-
-	@Nullable
 	private GpxFile getFilteredGpxFile() {
 		String gpxPath = displayHelper.getGpx() != null ? displayHelper.getGpx().getPath() : null;
 		if (gpxPath != null) {
@@ -237,8 +231,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
 		boolean withoutGaps = shouldCalculateWithoutGaps();
 		if (chart != null && analysis != null) {
-			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType,
-					selectedMainAxisType, withoutGaps, getTrackPath());
+			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType, selectedMainAxisType, withoutGaps);
 			if (!Algorithms.isEmpty(dataSets)) {
 				dataSetsMap.remove(tabType);
 			}
@@ -349,7 +342,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return view;
 	}
 
-	private void setupSpeedTab(View view, net.osmand.plus.charts.ElevationChart chart, int position) {
+	private void setupSpeedTab(View view, com.github.mikephil.charting.charts.ElevationChart chart, int position) {
 		if (analysis != null && analysis.isSpeedSpecified()) {
 			if (analysis.hasSpeedData()) {
 				setupChartWithAppearance(chart);

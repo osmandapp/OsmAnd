@@ -16,7 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.charts.ElevationChart;
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.DataSet;
@@ -276,7 +276,7 @@ public class ElevationProfileWidget extends MapWidget {
 			if (showSlopes) {
 				OrderedLineDataSet slopeDataSet = ChartUtils.createGPXSlopeDataSet(app, chart, analysis,
 						GPXDataSetType.SLOPE, GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
-				if (slopeDataSet != null && !ChartUtils.applyColorSource(app, chart, elevationDataSet, slopeDataSet)) {
+				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);
 				}
 				this.slopeDataSet = slopeDataSet;

@@ -92,16 +92,8 @@ public class GpxMarkerView extends MarkerView {
 				secondDataSet = temp;
 			}
 
-
-			ChartColorSource colorSource = secondDataSet == null ? firstDataSet.getColorSource() : null;
-			Integer secondValueColor = null;
-			if (colorSource != null) {
-				secondDataSet = colorSource.getDataSet();
-				secondValueColor = colorSource.getColorAt(entry.getX());
-			}
-
-			updateYAxisValue(entry, firstDataSet, firstYAxisContainer, null);
-			updateYAxisValue(entry, secondDataSet, secondYAxisContainer, secondValueColor);
+			updateYAxisValue(entry, firstDataSet, firstYAxisContainer);
+			updateYAxisValue(entry, secondDataSet, secondYAxisContainer);
 			updateXAxisValue(firstDataSet, entry);
 		} else {
 			AndroidUiHelper.setVisibility(GONE, firstYAxisContainer, secondYAxisContainer, xAxisContainer);
@@ -110,8 +102,7 @@ public class GpxMarkerView extends MarkerView {
 		super.refreshContent(entry, highlight);
 	}
 
-	private void updateYAxisValue(@NonNull Entry entry, @Nullable OrderedLineDataSet dataSet,
-			@NonNull View container, @Nullable Integer valueColor) {
+	private void updateYAxisValue(@NonNull Entry entry, @Nullable OrderedLineDataSet dataSet, @NonNull View container) {
 		AndroidUiHelper.updateVisibility(container, dataSet != null);
 		if (dataSet == null) {
 			return;
@@ -124,7 +115,7 @@ public class GpxMarkerView extends MarkerView {
 		String formattedValue = dataSet.getMarkerValueFormatter().formatValue(getMyApplication(), y);
 
 		textValue.setText(formattedValue);
-		textValue.setTextColor(valueColor != null ? valueColor : dataSet.getColor());
+		textValue.setTextColor(dataSet.getColor());
 		textUnits.setText(dataSet.getUnits());
 	}
 
