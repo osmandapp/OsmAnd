@@ -31,17 +31,15 @@ object TurnPreparation {
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private const val SLOW_DOWN_SPEED = 2.0
 
-	private const val TRAFFIC_SIGNALS_NEARBY_MAX_DISTANCE = "trafficSignalsNearbyMaxDistance"
-	private const val TRAFFIC_SIGNALS_NEARBY_PENALTY_FACTOR = "trafficSignalsNearbyPenaltyFactor"
+	// A signalized intersection is described by several nodes within a few tens of meters of each other:
+	// the junction itself and the signalled crossings on its approaches. Everything within this distance
+	// of the first one is the same intersection.
+	private const val TRAFFIC_SIGNALS_INTERSECTION_SIZE = 60.0
 
-	private class TimeCalculationState(router: GeneralRouter) {
+	private class TimeCalculationState {
 		var currentDistance = 0.0
-		// distance of the last traffic signal charged with the full penalty (start of the current group)
-		var lastFullPenaltyDistance = -1.0
-		val trafficSignalsNearbyMaxDistance =
-			router.getFloatAttribute(TRAFFIC_SIGNALS_NEARBY_MAX_DISTANCE, 0f).toDouble()
-		val trafficSignalsNearbyPenaltyFactor =
-			router.getFloatAttribute(TRAFFIC_SIGNALS_NEARBY_PENALTY_FACTOR, 1f).toDouble()
+		// distance of the first traffic signal of the intersection being passed
+		var lastIntersectionDistance = -1.0
 	}
 
 	// ---- the manoeuvres ----
@@ -423,7 +421,7 @@ object TurnPreparation {
 	 */
 	@JvmStatic
 	fun calculateTimeSpeed(request: RoutingRequest, result: List<RouteSegmentResult>) {
-		val state = TimeCalculationState(request.getRouter() as GeneralRouter)
+		val state = TimeCalculationState()
 		for (i in result.indices) {
 			if (i > 0) {
 				state.currentDistance += result[i - 1].getDistance().toDouble()
@@ -434,7 +432,7 @@ object TurnPreparation {
 
 	@JvmStatic
 	fun calculateTimeSpeed(request: RoutingRequest, rr: RouteSegmentResult) {
-		calculateTimeSpeed(request, rr, TimeCalculationState(request.getRouter() as GeneralRouter))
+		calculateTimeSpeed(request, rr, TimeCalculationState())
 	}
 
 	private fun calculateTimeSpeed(
@@ -487,19 +485,17 @@ object TurnPreparation {
 			if (obstacle < 0) {
 				obstacle = 0.0
 			} else if (obstacle > 0 && road.hasTrafficLightAt(j)) {
-				// Inside a group of traffic signals located nearby take the full penalty only for the
-				// first one. (After a red signal the next ones are usually green.) The group is
-				// restarted as soon as trafficSignalsNearbyMaxDistance is passed since the last fully
-				// penalized signal, so that a long chain of closely spaced signals is not discounted
-				// endlessly.
+				// A driver stops once per intersection, not once per signalled node of it, so only the
+				// first signal of an intersection is charged and the rest of the same intersection is
+				// free.
 				// XXXXX XXXXX   ->   Xxxxx Xxxxx
 				val signalDistance = state.currentDistance + distance
-				val startsNewGroup = state.lastFullPenaltyDistance < 0 ||
-						signalDistance - state.lastFullPenaltyDistance >= state.trafficSignalsNearbyMaxDistance
-				if (startsNewGroup) {
-					state.lastFullPenaltyDistance = signalDistance
+				val startsNewIntersection = state.lastIntersectionDistance < 0 ||
+						signalDistance - state.lastIntersectionDistance >= TRAFFIC_SIGNALS_INTERSECTION_SIZE
+				if (startsNewIntersection) {
+					state.lastIntersectionDistance = signalDistance
 				} else {
-					obstacle *= state.trafficSignalsNearbyPenaltyFactor
+					obstacle = 0.0
 				}
 			}
 			distOnRoadToPass += d / speed + obstacle // this is time in seconds

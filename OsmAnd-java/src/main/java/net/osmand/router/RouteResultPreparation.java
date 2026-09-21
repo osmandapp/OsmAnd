@@ -325,24 +325,19 @@ public class RouteResultPreparation {
 	private static final double SLOW_DOWN_SPEED_THRESHOLD = 15;
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private static final double SLOW_DOWN_SPEED = 2;
-	private static final String TRAFFIC_SIGNALS_NEARBY_MAX_DISTANCE = "trafficSignalsNearbyMaxDistance";
-	private static final String TRAFFIC_SIGNALS_NEARBY_PENALTY_FACTOR = "trafficSignalsNearbyPenaltyFactor";
+	// A signalized intersection is described by several nodes within a few tens of meters of each other:
+	// the junction itself and the signalled crossings on its approaches. Everything within this distance
+	// of the first one is the same intersection.
+	private static final double TRAFFIC_SIGNALS_INTERSECTION_SIZE = 60;
 
 	private static class TimeCalculationState {
 		double currentDistance;
-		// distance of the last traffic signal charged with the full penalty (start of the current group)
-		double lastFullPenaltyDistance = -1;
-		final double trafficSignalsNearbyMaxDistance;
-		final double trafficSignalsNearbyPenaltyFactor;
-
-		TimeCalculationState(GeneralRouter router) {
-			trafficSignalsNearbyMaxDistance = router.getFloatAttribute(TRAFFIC_SIGNALS_NEARBY_MAX_DISTANCE, 0);
-			trafficSignalsNearbyPenaltyFactor = router.getFloatAttribute(TRAFFIC_SIGNALS_NEARBY_PENALTY_FACTOR, 1);
-		}
+		// distance of the first traffic signal of the intersection being passed
+		double lastIntersectionDistance = -1;
 	}
 
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
-		TimeCalculationState state = new TimeCalculationState((GeneralRouter) ctx.getRouter());
+		TimeCalculationState state = new TimeCalculationState();
 
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
@@ -354,7 +349,7 @@ public class RouteResultPreparation {
 	}
 
 	public static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr) {
-		calculateTimeSpeed(ctx, rr, new TimeCalculationState((GeneralRouter) ctx.getRouter()));
+		calculateTimeSpeed(ctx, rr, new TimeCalculationState());
 	}
 
 	private static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr, TimeCalculationState state) {
@@ -402,18 +397,16 @@ public class RouteResultPreparation {
 			if (obstacle < 0) {
 				obstacle = 0;
 			} else if (obstacle > 0 && road.hasTrafficLightAt(j)) {
-				// Inside a group of traffic signals located nearby take the full penalty only for the first one.
-				// (After a red signal the next ones are usually green.) The group is restarted as soon as
-				// trafficSignalsNearbyMaxDistance is passed since the last fully penalized signal, so that a long
-				// chain of closely spaced signals is not discounted endlessly.
+				// A driver stops once per intersection, not once per signalled node of it, so only the
+				// first signal of an intersection is charged and the rest of the same intersection is free.
 				// XXXXX XXXXX   ->   Xxxxx Xxxxx
 				double signalDistance = state.currentDistance + distance;
-				boolean startsNewGroup = state.lastFullPenaltyDistance < 0
-						|| signalDistance - state.lastFullPenaltyDistance >= state.trafficSignalsNearbyMaxDistance;
-				if (startsNewGroup) {
-					state.lastFullPenaltyDistance = signalDistance;
+				boolean startsNewIntersection = state.lastIntersectionDistance < 0
+						|| signalDistance - state.lastIntersectionDistance >= TRAFFIC_SIGNALS_INTERSECTION_SIZE;
+				if (startsNewIntersection) {
+					state.lastIntersectionDistance = signalDistance;
 				} else {
-					obstacle = obstacle * state.trafficSignalsNearbyPenaltyFactor;
+					obstacle = 0;
 				}
 			}
 			distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
