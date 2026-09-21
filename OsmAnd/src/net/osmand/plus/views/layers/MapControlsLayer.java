@@ -96,6 +96,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			customMapButtons = new ArrayList<>();
 			mapTransparencyHelper.destroyTransparencyBar();
 			mapRouteInfoMenu = null;
+			visibilityHelper = null;
 			mapHudLayout = null;
 			mapHudContainer = null;
 		}

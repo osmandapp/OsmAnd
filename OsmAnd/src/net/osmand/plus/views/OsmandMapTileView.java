@@ -360,6 +360,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		if (mapActivity == null) {
+			// both are set by the activity in onCreate and capture it
+			trackBallDelegate = null;
+			accessibilityActions = null;
+		}
 	}
 
 	public void setupTouchDetectors(@NonNull Context ctx) {

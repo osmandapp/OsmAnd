@@ -124,6 +124,9 @@ public class MapActivityActions extends MapActions {
 			this.drawerLogoHeader = new ImageView(activity);
 			this.drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(activity, 8f),
 					AndroidUtils.dpToPx(activity, 16f), 0, 0);
+		} else {
+			// the view was created with the activity and keeps it
+			this.drawerLogoHeader = null;
 		}
 	}
 

@@ -171,6 +171,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			}
 		} else {
 			mapMultiSelectionMenu.setMapActivity(mapActivity);
+			if (mapActivity == null && !mapMultiSelectionMenu.isVisible()) {
+				// a closed menu has nothing to keep for the next activity, and its
+				// controller holds the destroyed one: drop it, the next attach creates a new one
+				this.mapMultiSelectionMenu = null;
+			}
 		}
 
 		if (favoritePointEditor != null) {

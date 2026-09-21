@@ -174,6 +174,15 @@ public class MapViewWithLayers extends FrameLayout {
 		}
 		mapView.clearTouchDetectors();
 		app.getOsmandMap().removeRenderingViewSetupListener(getRenderingViewSetupListener());
+		// the application-scoped map view must not keep this activity's views (the car surface,
+		// if it is the current one, stays)
+		OsmAndMapLayersView mapLayersView = findViewById(R.id.MapLayersView);
+		OsmAndMapSurfaceView surfaceView = findViewById(R.id.MapView);
+		if (mapView.getView() == mapLayersView) {
+			mapLayersView.setMapView(null);
+		} else if (mapView.getView() == surfaceView) {
+			surfaceView.setMapView(null);
+		}
 	}
 
 	@NonNull
