@@ -405,8 +405,13 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				this.idle1k = renderer.getIdleTimePartLast1K();
 				this.gpu1k = renderer.getGPUWaitTimePartLast1K();
 
-				float cpuBasic = renderer.getBasicThreadsCPULoad();
-				this.cpuBasic = cpuBasic > 0 ? cpuBasic : 0; // NaN
+				try {
+					float cpuBasic = renderer.getBasicThreadsCPULoad();
+					this.cpuBasic = cpuBasic > 0 ? cpuBasic : 0; // NaN
+				} catch (NullPointerException e) {
+					// the load comes from the native renderer, which the main thread drops in stopRenderer()
+					// while this sample is taken off it; the frame counters above are plain fields
+				}
 
 				Intent batteryIntent = AndroidUtils.registerBroadcastReceiver(app, Intent.ACTION_BATTERY_CHANGED, null, false);
 				if (batteryIntent != null) {
