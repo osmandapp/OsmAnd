@@ -320,10 +320,19 @@ public class RouteResultPreparation {
 	private static final double SLOW_DOWN_SPEED_THRESHOLD = 15;
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private static final double SLOW_DOWN_SPEED = 2;
+	private static final String TRAFFIC_SIGNALS_NEARBY_MAX_DISTANCE = "trafficSignalsNearbyMaxDistance";
+	private static final String TRAFFIC_SIGNALS_NEARBY_PENALTY_FACTOR = "trafficSignalsNearbyPenaltyFactor";
 
 	private static class TimeCalculationState {
 		double currentDistance;
 		double lastTrafficSignalDistance = -1;
+		final double trafficSignalsNearbyMaxDistance;
+		final double trafficSignalsNearbyPenaltyFactor;
+
+		TimeCalculationState(GeneralRouter router) {
+			trafficSignalsNearbyMaxDistance = router.getFloatAttribute(TRAFFIC_SIGNALS_NEARBY_MAX_DISTANCE, 0);
+			trafficSignalsNearbyPenaltyFactor = router.getFloatAttribute(TRAFFIC_SIGNALS_NEARBY_PENALTY_FACTOR, 1);
+		}
 	}
 
 	private static boolean segmentHasTag(RouteDataObject road, int segmentIndex, String tag) {
@@ -340,7 +349,7 @@ public class RouteResultPreparation {
 	}
 
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
-		TimeCalculationState state = new TimeCalculationState();
+		TimeCalculationState state = new TimeCalculationState((GeneralRouter) ctx.getRouter());
 
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
@@ -352,7 +361,7 @@ public class RouteResultPreparation {
 	}
 
 	public static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr) {
-		calculateTimeSpeed(ctx, rr, new TimeCalculationState());
+		calculateTimeSpeed(ctx, rr, new TimeCalculationState((GeneralRouter) ctx.getRouter()));
 	}
 
 	private static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr, TimeCalculationState state) {
@@ -407,10 +416,10 @@ public class RouteResultPreparation {
 					double currentDistance = state.currentDistance + distance;
 					double distanceFromPreviousStop = currentDistance - state.lastTrafficSignalDistance;
 					state.lastTrafficSignalDistance = currentDistance;
-					if (isFirstStop || distanceFromPreviousStop >= 100) {
+					if (isFirstStop || distanceFromPreviousStop >= state.trafficSignalsNearbyMaxDistance) {
 						obstacle = obstacle * 1.0;
 					} else {
-						obstacle = obstacle * 0.25;
+						obstacle = obstacle * state.trafficSignalsNearbyPenaltyFactor;
 					}
 				}
 			}
