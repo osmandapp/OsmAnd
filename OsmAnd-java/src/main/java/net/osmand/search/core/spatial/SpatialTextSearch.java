@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -691,6 +692,38 @@ public class SpatialTextSearch {
 		return limitPoiCat;
 	}
 
+	/**
+	 * "cafe near me" is the query "cafe" at the point the search runs from: the words say where to look, not what to
+	 * look for. Read as a name they match POIs called "... Near Me" and the answer they build hides the category.
+	 */
+	private static final Set<String> AT_THE_POINT_OPERATORS = new HashSet<>(Arrays.asList(
+			"near me", "nearby", "near by", "around me", "close to me",
+			"in der nahe", "in meiner nahe",
+			"vicino a me", "qui vicino",
+			"pres de moi", "autour de moi",
+			"cerca de mi",
+			"рядом", "рядом со мной", "поблизости",
+			"поблизу", "поруч зi мною"));
+
+	private static final int MAX_OPERATOR_WORDS = 3;
+
+	/** drops the operator when it closes the query and something is left to search for */
+	private void cutAtThePointOperator(List<SpatialSearchToken> tokens) {
+		for (int len = Math.min(MAX_OPERATOR_WORDS, tokens.size() - 1); len >= 1; len--) {
+			StringBuilder tail = new StringBuilder();
+			for (int i = tokens.size() - len; i < tokens.size(); i++) {
+				if (tail.length() > 0) {
+					tail.append(' ');
+				}
+				tail.append(SearchAlgorithms.alignChars(tokens.get(i).word));
+			}
+			if (AT_THE_POINT_OPERATORS.contains(tail.toString())) {
+				tokens.subList(tokens.size() - len, tokens.size()).clear();
+				return;
+			}
+		}
+	}
+
 	public List<SpatialSearchToken> splitWords(SpatialSearchContext ctx, String input) {
 		List<String> owords = new ArrayList<String>();
 		// split by hyphen as we supposed to index them separately
@@ -705,6 +738,7 @@ public class SpatialTextSearch {
 					owords.get(ind), tokens.size());
 			tokens.add(token);
 		}
+		cutAtThePointOperator(tokens);
 		for (SpatialSearchToken t : tokens) {
 			for (SpatialSearchToken o : tokens) {
 				t.numberNamedByOther |= t.mainNumber > 0 && o != t && SearchAlgorithms.letters(o.wordNoDot) > 0
