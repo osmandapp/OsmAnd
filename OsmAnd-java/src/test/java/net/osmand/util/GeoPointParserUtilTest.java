@@ -887,4 +887,27 @@ public class GeoPointParserUtilTest {
 			throw new RuntimeException("URLs not equal; actual=" + actual + ", expected=" + expected);
 	}
 
+	@Test
+	public void testParseGeoAction() {
+		// Opaque URI
+		Assert.assertEquals("exit_navigation", GeoPointParserUtil.parseGeoAction("geo.action:?act=exit_navigation"));
+		Assert.assertEquals("mute", GeoPointParserUtil.parseGeoAction("geo.action.offline:?act=mute"));
+		Assert.assertEquals("unmute", GeoPointParserUtil.parseGeoAction("geo.action:?act=unmute&source=assistant"));
+		Assert.assertEquals("exit_navigation", GeoPointParserUtil.parseGeoAction("geo.action:?foo=bar&act=exit_navigation"));
+
+		// Hierarchical URI (empty authority / 3 slashes, host, etc.)
+		Assert.assertEquals("exit_navigation", GeoPointParserUtil.parseGeoAction("geo.action:///?act=exit_navigation"));
+		Assert.assertEquals("exit_navigation", GeoPointParserUtil.parseGeoAction("geo.action://host/?act=exit_navigation"));
+
+		// Case-insensitivity
+		Assert.assertEquals("exit_navigation", GeoPointParserUtil.parseGeoAction("geo.action:?ACT=EXIT_NAVIGATION"));
+		Assert.assertEquals("mute", GeoPointParserUtil.parseGeoAction("GEO.ACTION:?act=MUTE"));
+
+		// Edge cases & non-action URIs
+		Assert.assertEquals("", GeoPointParserUtil.parseGeoAction("geo:52.52,13.40"));
+		Assert.assertEquals("", GeoPointParserUtil.parseGeoAction("https://osmand.net"));
+		Assert.assertEquals("", GeoPointParserUtil.parseGeoAction("geo.action:"));
+		Assert.assertEquals("", GeoPointParserUtil.parseGeoAction(null));
+	}
+
 }

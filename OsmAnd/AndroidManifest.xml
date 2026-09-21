@@ -559,6 +559,14 @@
 				<data android:scheme="osmand.navigation" />
 			</intent-filter>
 
+			<!-- custom navigation action intents (Google Assistant / Gemini) -->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:scheme="geo.action" />
+				<data android:scheme="geo.action.offline" />
+			</intent-filter>
+
 			<!-- osmand api -->
 			<intent-filter>
 				<data android:scheme="osmand.api" />
@@ -1194,6 +1202,13 @@
 			<intent-filter>
 				<action android:name="androidx.car.app.CarAppService" />
 				<category android:name="androidx.car.app.category.NAVIGATION"/>
+			</intent-filter>
+
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:scheme="geo.action" />
+				<data android:scheme="geo.action.offline" />
 			</intent-filter>
 		</service>
 	</application>
