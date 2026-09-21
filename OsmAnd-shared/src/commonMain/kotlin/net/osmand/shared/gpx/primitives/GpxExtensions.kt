@@ -61,9 +61,12 @@ open class GpxExtensions {
 	}
 
 	fun copyExtensions(e: GpxExtensions) {
-		val extensionsToRead = e.getExtensionsToRead()
-		if (extensionsToRead.isNotEmpty()) {
-			getExtensionsToWrite().putAll(extensionsToRead.toMap())
+		val source = e.extensionsArray ?: return
+		if (extensionsArray == null) {
+			// a fresh copy, the usual case: one array instead of a map and an insert per key
+			extensionsArray = source.copyOf()
+		} else {
+			getExtensionsToWrite().putAll(e.getExtensionsToRead().toMap())
 		}
 	}
 

@@ -128,6 +128,25 @@ class GpxExtensionsMapTest {
 		assertSame(firstKey, secondKey)
 	}
 
+	@Test
+	fun testCopyConstructorCopiesTheExtensions() {
+		val point = WptPt()
+		point.getExtensionsToWrite()["color"] = "#ff0000"
+		point.getExtensionsToWrite()["icon"] = "special_star"
+		val copy = WptPt(point)
+		assertEquals(point.getExtensionsToRead(), copy.getExtensionsToRead())
+		// the copy owns its data
+		copy.getExtensionsToWrite()["color"] = "#00ff00"
+		copy.getExtensionsToWrite()["address"] = "somewhere"
+		assertEquals(mapOf("color" to "#ff0000", "icon" to "special_star"), point.getExtensionsToRead())
+
+		// copying into a point that already has extensions merges them
+		val merged = WptPt()
+		merged.getExtensionsToWrite()["address"] = "elsewhere"
+		merged.copyExtensions(point)
+		assertEquals(mapOf("address" to "elsewhere", "color" to "#ff0000", "icon" to "special_star"), merged.getExtensionsToRead())
+	}
+
 	/** A name built at runtime, the way the parser produces it - never the same instance. */
 	private fun keyCopy(): String = StringBuilder().append("gpxtpx:").append("cad").toString()
 }

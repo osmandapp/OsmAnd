@@ -417,9 +417,15 @@ public class GPXUtilities {
 		}
 
 		public void copyExtensions(GPXExtensions e) {
-			Map<String, String> extensionsToRead = e.getExtensionsToRead();
-			if (!extensionsToRead.isEmpty()) {
-				getExtensionsToWrite().putAll(extensionsToRead);
+			String[] source = e.extensionsArray;
+			if (source == null) {
+				return;
+			}
+			if (extensionsArray == null) {
+				// a fresh copy, the usual case: one array instead of a map and an insert per key
+				extensionsArray = source.clone();
+			} else {
+				getExtensionsToWrite().putAll(e.getExtensionsToRead());
 			}
 		}
 
