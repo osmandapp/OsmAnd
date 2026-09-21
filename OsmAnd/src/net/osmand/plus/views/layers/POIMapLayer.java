@@ -559,7 +559,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			if (id == null) {
 				id = RenderingIcons.getIconNameForAmenity(app, amenity);
 			}
-			int iconId = RenderingIcons.getPointIconId(getContext(), id, R.drawable.mx_special_marker);
+			int iconId = RenderingIcons.getResIdOrDefault(getContext(), id, R.drawable.mx_special_marker);
 			PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
 					getContext(), getColor(amenity), true, iconId);
 			pointImageDrawable.setAlpha(0.8f);
@@ -914,7 +914,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 							id = RenderingIcons.getIconNameForAmenity(app, o);
 						}
 						if (id != null) {
-							int iconId = RenderingIcons.getPointIconId(getContext(), id, R.drawable.mx_special_marker);
+							int iconId = RenderingIcons.getResIdOrDefault(getContext(), id, R.drawable.mx_special_marker);
 							PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
 									getContext(), getColor(o), true, iconId);
 							pointImageDrawable.setAlpha(0.8f);

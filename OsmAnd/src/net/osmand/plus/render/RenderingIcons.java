@@ -263,7 +263,7 @@ public class RenderingIcons {
 	}
 
 	@DrawableRes
-	public static int getPointIconId(@NonNull Context ctx, @Nullable String id, @DrawableRes int defIconId) {
+	public static int getResIdOrDefault(@NonNull Context ctx, @Nullable String id, @DrawableRes int defIconId) {
 		if (Algorithms.isEmpty(id)) {
 			return defIconId;
 		}

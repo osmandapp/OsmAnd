@@ -496,7 +496,7 @@ public class QuickSearchListItem {
 			case CITY:
 			case BOUNDARY:
 				// the same mapping as the map marker of an address result uses
-				int cityIconId = RenderingIcons.getPointIconId(app,
+				int cityIconId = RenderingIcons.getResIdOrDefault(app,
 						getAddressIconName(searchResult), R.drawable.ic_action_building2);
 				return getIcon(app, cityIconId, defIconColor);
 			case VILLAGE:
