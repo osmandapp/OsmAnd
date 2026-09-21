@@ -31,9 +31,6 @@ object TurnPreparation {
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private const val SLOW_DOWN_SPEED = 2.0
 
-	// A signalized intersection is described by several nodes within a few tens of meters of each other:
-	// the junction itself and the signalled crossings on its approaches. Everything within this distance
-	// of the first one is the same intersection.
 	private const val TRAFFIC_SIGNALS_INTERSECTION_SIZE = 60.0
 
 	private class TimeCalculationState {
@@ -485,10 +482,7 @@ object TurnPreparation {
 			if (obstacle < 0) {
 				obstacle = 0.0
 			} else if (obstacle > 0 && road.hasTrafficLightAt(j)) {
-				// A driver stops once per intersection, not once per signalled node of it, so only the
-				// first signal of an intersection is charged and the rest of the same intersection is
-				// free.
-				// XXXXX XXXXX   ->   Xxxxx Xxxxx
+				// A driver stops once per intersection
 				val signalDistance = state.currentDistance + distance
 				val startsNewIntersection = state.lastIntersectionDistance < 0 ||
 						signalDistance - state.lastIntersectionDistance >= TRAFFIC_SIGNALS_INTERSECTION_SIZE

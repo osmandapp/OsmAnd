@@ -325,9 +325,7 @@ public class RouteResultPreparation {
 	private static final double SLOW_DOWN_SPEED_THRESHOLD = 15;
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private static final double SLOW_DOWN_SPEED = 2;
-	// A signalized intersection is described by several nodes within a few tens of meters of each other:
-	// the junction itself and the signalled crossings on its approaches. Everything within this distance
-	// of the first one is the same intersection.
+
 	private static final double TRAFFIC_SIGNALS_INTERSECTION_SIZE = 60;
 
 	private static class TimeCalculationState {
@@ -397,9 +395,7 @@ public class RouteResultPreparation {
 			if (obstacle < 0) {
 				obstacle = 0;
 			} else if (obstacle > 0 && road.hasTrafficLightAt(j)) {
-				// A driver stops once per intersection, not once per signalled node of it, so only the
-				// first signal of an intersection is charged and the rest of the same intersection is free.
-				// XXXXX XXXXX   ->   Xxxxx Xxxxx
+				// A driver stops once per intersection
 				double signalDistance = state.currentDistance + distance;
 				boolean startsNewIntersection = state.lastIntersectionDistance < 0
 						|| signalDistance - state.lastIntersectionDistance >= TRAFFIC_SIGNALS_INTERSECTION_SIZE;
