@@ -340,7 +340,7 @@ public class SpeedometerWidget {
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		boolean nightMode = drawSettings != null ? drawSettings.isNightMode() : app.getDaynightHelper().isNightMode(settings.getApplicationMode(), widgetNightModeUsageContext);
+		boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), widgetNightModeUsageContext);
 		updateInfo(drawSettings, nightMode);
 	}
 

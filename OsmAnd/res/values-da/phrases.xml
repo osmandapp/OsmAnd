@@ -3677,7 +3677,7 @@
     <string name="poi_goods_yes">Ja</string>
     <string name="poi_goods_designated">Udpeget</string>
     <string name="poi_disabled_yes">Ja</string>
-    <string name="poi_disabled_designated">Udpeget</string>
+    <string name="poi_disabled_designated">Udpeget;Adgang forbeholdt handicappede</string>
     <string name="poi_cellar_entrance">Kælderindgang</string>
     <string name="poi_health_food">Helsekost</string>
     <string name="poi_craft_builder">Bygherre</string>
@@ -4316,4 +4316,7 @@
     <string name="poi_ski_filter">Velegnet til ski</string>
     <string name="poi_horse_filter">Velegnet til ridning</string>
     <string name="poi_winter_hiking_filter">Velegnet til vintervandring</string>
+    <string name="poi_air_conditioning_yes">Ja</string>
+    <string name="poi_air_conditioning_no">Nej</string>
+    <string name="poi_disc_golf_course">Discgolfbane</string>
 </resources>

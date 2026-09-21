@@ -5,11 +5,11 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
+import net.osmand.shared.favorites.FavoriteFolderPath;
 import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.util.Algorithms;
 

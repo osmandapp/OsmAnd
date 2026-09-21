@@ -2,6 +2,11 @@ APP_STL := c++_shared
 APP_CPPFLAGS := -std=c++14 -fexceptions -frtti
 APP_SHORT_COMMANDS := true
 
+# Android 15 and newer run with 16 KB memory pages on some devices, and a library whose LOAD
+# segments are aligned to the old 4 KB cannot be mapped there. NDK r27 does this by default;
+# this keeps it correct with older toolchains too.
+APP_LDFLAGS := -Wl,-z,max-page-size=16384
+
 # Specify least supported Android platform version
 APP_PLATFORM := android-21
 

@@ -2413,7 +2413,7 @@
     <string name="live_monitoring_time_buffer">Tidsbuffer</string>
     <string name="live_monitoring_tracking_interval">Sporingsinterval</string>
     <string name="live_monitoring_adress">Webadresse</string>
-    <string name="monitoring_notification">Meddelelse</string>
+    <string name="monitoring_notification">Vis knappen \'Optag\' i notifikationer</string>
     <string name="monitoring_min_speed">Min. hastighed</string>
     <string name="monitoring_min_accuracy">Min. nøjagtighed</string>
     <string name="monitoring_min_distance">Min. forskydning</string>
@@ -4699,7 +4699,7 @@
     <string name="ais_ship_lost_timeout_description">Indstil timeout for skibs forældet synlighed: Efter dette tidsrum uden signalmodtagelse vil skibssymbolet blive streget ud.</string>
     <string name="ais_object_lost_timeout">Timeout for synlighed, når skib mistes</string>
     <string name="ais_object_lost_timeout_description">Indstil en timeout for AIS-objektets synlighed: Hvis der ikke modtages noget signal inden for den angivne varighed, fjernes objektet automatisk fra skærmen.</string>
-    <string name="ais_load_data">Indlæs AIS-data fra fil</string>
+    <string name="ais_load_data">Simuler fartøjstrafik</string>
     <string name="ais_cpa_warning_distance_description">Skibe fremhæves med rødt, hvis CPA (Closest Point of Approach) er under den definerede tærskel, og TCPA (Time to CPA) falder inden for den advarselstid, der er angivet i indstillingen \'Advarselstid til at nå CPA\'.</string>
     <string name="ais_address_settings">Indstillinger for IP-adresse</string>
     <string name="ais_address_settings_description">Vælg NMEA-protokollen (UDP/TCP) og angiv de tilhørende adresser og porte</string>
@@ -4910,7 +4910,7 @@
     <string name="miles">Miles</string>
     <string name="mpg">MPG</string>
     <string name="access_pinch_zoom_magnification">Forstørrelse med knibezoom</string>
-    <string name="access_pinch_zoom_magnification_descr">Brug viewport-skalering i stedet for separate zoom-niveauer ved zoom-bevægelser.</string>
+    <string name="access_pinch_zoom_magnification_descr">Brug viewport-skalering (forstørrelse) i stedet for separate zoom-niveauer ved zoom-bevægelsen.</string>
     <string name="show_spherical_map_description">Vis sfærisk model af Jorden</string>
     <string name="shared_string_price">Pris</string>
     <string name="rendering_attr_showSkiSlopes_name">Vis skiløjper</string>
@@ -5395,4 +5395,24 @@
     <string name="share_favorites_share_failed">Det var ikke muligt at dele filen.</string>
     <string name="share_favorites_missing_media_warning">Nogle af de vedhæftede mediefiler kunne ikke medtages.</string>
     <string name="search_on_web">Søg på nettet</string>
+    <string name="astro_eclipse_column_below_horizon">Under horisonten</string>
+    <string name="quick_action_add_track">Tilføj spor</string>
+    <string name="quick_action_tracks_select_descr">Tilføj et eller flere spor for at vise eller skjule dem på kortet med et enkelt tryk.</string>
+    <string name="quick_action_tracks_always_ask_descr">Med et tryk på denne handling åbnes listen over spor, hvor du kan vise eller skjule et eller flere af dem.</string>
+    <string name="quick_action_all_tracks">Alle spor</string>
+    <string name="crash_report_sent">Rapport sendt. Tak!</string>
+    <string name="crash_report_send_failed">Kunne ikke sende rapporten. Prøv igen senere.</string>
+    <string name="battery_saving_mode_descr">Begrænser kortvisningen til 20 billeder pr. sekund for at mindske batteriforbruget og enhedens varmeudvikling. Kortets bevægelse bliver mindre jævn.</string>
+    <string name="java_memory">Java-hukommelse</string>
+    <string name="ais_load_data_descr">Afspil AIS-meddelelser fra en optaget fil.</string>
+    <string name="map_rendering">Kortgengivelse</string>
+    <string name="simulate_ui">Simuler første start</string>
+    <string name="simulate_ui_descr">Første kørsel, banner for gratisversion, rabatark.</string>
+    <string name="heap_dump_descr">Tæl objekter i Java-heapen.</string>
+    <string name="heap_dump_collect">Indsaml og analyser nu</string>
+    <string name="heap_dump_collect_descr">Tager et par sekunder, viser resultatet.</string>
+    <string name="heap_dump_share">Del rapport</string>
+    <string name="heap_dump_share_descr">Sender den seneste rapport til serveren.</string>
+    <string name="heap_dump_auto">Indsaml ved højt forbrug</string>
+    <string name="heap_dump_auto_descr">Når heapen er næsten fuld, én gang hvert 30. minut.</string>
 </resources>

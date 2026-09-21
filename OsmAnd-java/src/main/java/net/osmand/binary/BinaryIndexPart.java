@@ -30,6 +30,10 @@ public abstract class BinaryIndexPart {
 		return name;
 	}
 	
+	public boolean isBasemap() {
+		return name != null && name.startsWith("basemap");
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}

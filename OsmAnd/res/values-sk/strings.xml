@@ -5335,7 +5335,16 @@
     <string name="share_favorites_preparation_failed">Nepodarilo sa pripraviť súbory na zdieľanie.</string>
     <string name="share_favorites_share_failed">Nepodarilo sa zdieľať súbor.</string>
     <string name="share_favorites_missing_media_warning">Niektoré pripojené mediálne súbory sa nepodarilo zahrnúť.</string>
-    <string name="release_5_4">• Nové priestorové vyhľadávanie — nájdite miesta a hľadajte okolo miesta\n\n • Vynovené rozhranie pre vyhľadávanie: triedenie, filtre kategórií, prehľadnejší vzhľad\n\n • Pripájanie fotografií a médií k obľúbeným bodom\n\n • Obľúbené: podskupiny a pripnuteľné priečinky\n\n • Súradnice: vyhľadávanie, mapová mriežka a zobrazenie bodov záujmu podporujú aj lokátory EPSG a Maidenhead\n\n • Opravené výpadky navigácie; prepínanie medzi štandardným a rýchlym výpočtom trasy\n\n • Nastavenie mierky mapy pre Android Auto nezávisle od nastavenia pre telefón\n\n • Modul Astronómia pridal zatmenia Slnka a Mesiaca</string>
+    <string name="release_5_4">• Vynovené rozhranie pre vyhľadávanie: triedenie, filtre kategórií, prehľadnejší vzhľad\n\n • Pripájanie fotografií a médií k obľúbeným bodom\n\n • Obľúbené: podskupiny a pripnuteľné priečinky\n\n • Súradnice: vyhľadávanie, mapová mriežka a zobrazenie bodov záujmu podporujú aj lokátory EPSG a Maidenhead\n\n • Opravené výpadky navigácie; prepínanie medzi štandardným a rýchlym výpočtom trasy\n\n • Nastavenie mierky mapy pre Android Auto nezávisle od nastavenia pre telefón\n\n • Nové priestorové vyhľadávanie — nájdite miesta a hľadajte okolo miesta\n\n • Modul Astronómia pridal zatmenia Slnka a Mesiaca</string>
     <string name="astro_lunar_eclipse_calculating_state">Výpočet viditeľnosti v strede mapy…</string>
     <string name="astro_lunar_eclipse_visibility_loading">Výpočet viditeľnosti…</string>
+    <string name="astro_eclipse_column_below_horizon">Pod horizontom</string>
+    <string name="search_on_web">Hľadať na webe</string>
+    <string name="quick_action_add_track">Pridať stopu</string>
+    <string name="quick_action_tracks_select_descr">Pridať jednu alebo viac stôp, ktoré budú zobrazené alebo skryté na mape jedným stlačením.</string>
+    <string name="quick_action_tracks_always_ask_descr">Stlačenie tejto akcie otvorí zoznam stôp, z ktorých jednu alebo viaceré môžete zobraziť alebo skryť.</string>
+    <string name="quick_action_all_tracks">Všetky stopy</string>
+    <string name="crash_report_sent">Hlásenie odoslané. Ďakujeme!</string>
+    <string name="crash_report_send_failed">Nepodarilo sa odoslať hlásenie. Skúste znova neskôr.</string>
+    <string name="battery_saving_mode_descr">Obmedzí vykresľovanie mapy na 20 snímok za sekundu pre zníženie spotreby batérie a prehrievania zariadenia. Pohyb mapy bude menej plynulý.</string>
 </resources>

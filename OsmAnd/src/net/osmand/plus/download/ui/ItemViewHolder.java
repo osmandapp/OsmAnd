@@ -89,6 +89,10 @@ public class ItemViewHolder {
 	boolean silentCancelDownload;
 	boolean showProgressInDesc;
 	boolean isUpdatesMode;
+	boolean showRegionInDescription;
+
+	@Nullable
+	private String regionName;
 
 	private final DateFormat dateFormat;
 
@@ -161,6 +165,18 @@ public class ItemViewHolder {
 		this.isUpdatesMode = inUpdatesMode;
 	}
 
+	/**
+	 * Shows the region the item belongs to in the description line and keeps the title
+	 * to a single line. Used by the "Maps & Resources" search results.
+	 */
+	public void setShowRegionInDescription(boolean showRegionInDescription) {
+		this.showRegionInDescription = showRegionInDescription;
+	}
+
+	public void setRegionName(@Nullable String regionName) {
+		this.regionName = regionName;
+	}
+
 	private void initAppStatusVariables() {
 		srtmDisabled = context.isSrtmDisabled();
 		nauticalPluginDisabled = context.isNauticalPluginDisabled();
@@ -189,7 +205,12 @@ public class ItemViewHolder {
 		} else {
 			name = downloadItem.getVisibleName(context, app.getRegions(), showParentRegionName, useShortName);
 		}
-		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
+		String text;
+		if (showRegionInDescription) {
+			text = !Algorithms.isEmpty(cityName) ? cityName : name;
+		} else {
+			text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
+		}
 		tvName.setText(text);
 		ViewCompat.setAccessibilityDelegate(ivBtnRight, new AccessibilityAssistant(context) {
 
@@ -230,17 +251,17 @@ public class ItemViewHolder {
 			pbProgress.setVisibility(View.GONE);
 			tvDesc.setVisibility(View.VISIBLE);
 			if (downloadItem instanceof CustomIndexItem && (((CustomIndexItem) downloadItem).getSubName(context) != null)) {
-				tvDesc.setText(((CustomIndexItem) downloadItem).getSubName(context));
+				setDescription(((CustomIndexItem) downloadItem).getSubName(context));
 			} else if ((downloadItem.getType() == DEPTH_CONTOUR_FILE
 					|| downloadItem.getType() == DEPTH_MAP_FILE) && !depthContoursPurchased) {
-				tvDesc.setText(context.getString(R.string.depth_contour_descr));
+				setDescription(context.getString(R.string.depth_contour_descr));
 			} else if ((downloadItem.getType() == SRTM_COUNTRY_FILE
 					|| downloadItem.getType() == HILLSHADE_FILE
 					|| downloadItem.getType() == SLOPE_FILE) && srtmDisabled) {
 				if (showTypeInName) {
-					tvDesc.setText("");
+					setDescription("");
 				} else {
-					tvDesc.setText(downloadItem.getType().getString(context));
+					setDescription(downloadItem.getType().getString(context));
 				}
 			} else if (downloadItem instanceof MultipleDownloadItem) {
 				setupCommonMultipleDescription((MultipleDownloadItem) downloadItem);
@@ -327,7 +348,7 @@ public class ItemViewHolder {
 					R.string.ltr_or_rtl_combine_via_bold_point, fullDescription,
 					date);
 		}
-		tvDesc.setText(fullDescription);
+		setDescription(fullDescription);
 	}
 
 	private void setupCommonDescription(@NonNull DownloadItem item) {
@@ -349,7 +370,20 @@ public class ItemViewHolder {
 			}
 			fullDescription = String.format(pattern, size, date);
 		}
-		tvDesc.setText(fullDescription);
+		setDescription(fullDescription);
+	}
+
+	/**
+	 * Prepends the region name to the description when the item is shown in the search results,
+	 * so that maps with equal names could be distinguished by the country they belong to.
+	 */
+	private void setDescription(@Nullable String description) {
+		String regionName = showRegionInDescription ? this.regionName : null;
+		if (!Algorithms.isEmpty(regionName)) {
+			description = Algorithms.isEmpty(description) ? regionName
+					: context.getString(R.string.ltr_or_rtl_combine_via_bold_point, regionName, description);
+		}
+		tvDesc.setText(description);
 	}
 
 	private void showIndeterminateProgress() {

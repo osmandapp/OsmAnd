@@ -41,6 +41,7 @@ class StarMapCameraHelper(
 
 	private var cameraDevice: CameraDevice? = null
 	private var captureSession: CameraCaptureSession? = null
+	private var cameraOpenRequested = false
 	private var previewSize: Size? = null
 	private var baseTransformMatrix: Matrix? = null
 
@@ -131,6 +132,7 @@ class StarMapCameraHelper(
 			return
 		}
 
+		cameraOpenRequested = true
 		if (cameraTextureView.isAvailable) {
 			startCameraSession()
 		} else {
@@ -175,16 +177,25 @@ class StarMapCameraHelper(
 
 			manager.openCamera(cameraId, object : CameraDevice.StateCallback() {
 				override fun onOpened(camera: CameraDevice) {
+					if (!cameraOpenRequested) {
+						// The overlay was closed while the camera was still opening
+						camera.close()
+						return
+					}
 					cameraDevice = camera
 					createCaptureSession()
 				}
 				override fun onDisconnected(camera: CameraDevice) {
 					camera.close()
-					cameraDevice = null
+					if (cameraDevice === camera) {
+						cameraDevice = null
+					}
 				}
 				override fun onError(camera: CameraDevice, error: Int) {
 					camera.close()
-					cameraDevice = null
+					if (cameraDevice === camera) {
+						cameraDevice = null
+					}
 				}
 			}, null)
 		} catch (e: Exception) {
@@ -293,6 +304,7 @@ class StarMapCameraHelper(
 
 	private fun createCaptureSession() {
 		try {
+			val device = cameraDevice ?: return
 			val texture = cameraTextureView.surfaceTexture!!
 			if (previewSize != null) {
 				texture.setDefaultBufferSize(previewSize!!.width, previewSize!!.height)
@@ -301,14 +313,21 @@ class StarMapCameraHelper(
 			}
 			val surface = Surface(texture)
 
-			val builder = cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
-			builder?.addTarget(surface)
+			val builder = device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
+			builder.addTarget(surface)
 
-			cameraDevice?.createCaptureSession(listOf(surface), object : CameraCaptureSession.StateCallback() {
+			device.createCaptureSession(listOf(surface), object : CameraCaptureSession.StateCallback() {
 				override fun onConfigured(session: CameraCaptureSession) {
+					if (cameraDevice !== device) {
+						// The camera was closed or reopened while the session was being configured
+						session.close()
+						return
+					}
 					captureSession = session
-					builder?.build()?.let {
-						session.setRepeatingRequest(it, null, null)
+					try {
+						session.setRepeatingRequest(builder.build(), null, null)
+					} catch (e: Exception) {
+						log.error("Failed to start camera preview", e)
 					}
 				}
 				override fun onConfigureFailed(session: CameraCaptureSession) {}
@@ -319,6 +338,7 @@ class StarMapCameraHelper(
 	}
 
 	private fun closeCamera() {
+		cameraOpenRequested = false
 		captureSession?.close()
 		captureSession = null
 		cameraDevice?.close()

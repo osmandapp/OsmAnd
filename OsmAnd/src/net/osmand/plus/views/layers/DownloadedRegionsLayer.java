@@ -72,6 +72,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private OsmandApplication app;
 	private Paint paintDownloaded;
 	private Path pathDownloaded;
+	private Paint paintOutdated;
+	private Path pathOutdated;
 	private Paint paintSelected;
 	private Path pathSelected;
 	private Paint paintBackuped;
@@ -96,6 +98,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	//OpenGL
 	private PolygonsCollection polygonsCollection;
 	private int downloadedSize;
+	private int outdatedSize;
 	private int backupedSize;
 	private boolean hasSelectedRegion;
 	private int polygonId = 1;
@@ -104,6 +107,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private boolean onMapsChanged;
 	private boolean cachedShowDownloadedMaps;
 	List<WorldRegion> downloadedRegions;
+	List<WorldRegion> outdatedRegions;
 	List<WorldRegion> backupedRegions;
 	private MapSuggestionController mapSuggestionController;
 
@@ -160,15 +164,17 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		cachedShowDownloadedMaps = isShowDownloadedMaps();
 		mapSuggestionController = new MapSuggestionController(view);
 
-		paintDownloaded = getPaint(getColor(R.color.region_uptodate));
-		paintSelected = getPaint(getColor(R.color.region_selected));
-		paintBackuped = getPaint(getColor(R.color.region_backuped));
+		paintDownloaded = getPaint(getColor(R.color.map_region_downloaded_fill));
+		paintOutdated = getPaint(getColor(R.color.map_region_outdated_fill));
+		paintSelected = getPaint(getColor(R.color.map_region_selected_fill));
+		paintBackuped = getPaint(getColor(R.color.map_region_deactivated_fill));
 
 		textPaint = new TextPaint();
 
 		updatePaints();
 
 		pathDownloaded = new Path();
+		pathOutdated = new Path();
 		pathSelected = new Path();
 		pathBackuped = new Path();
 
@@ -261,11 +267,16 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			if (isShowDownloadedMaps() && isZoomToShowBorders) {
 				if (!currentObjects.isEmpty()) {
 					List<BinaryMapDataObject> downloadedObjects = new ArrayList<>();
+					List<BinaryMapDataObject> outdatedObjects = new ArrayList<>();
 					List<BinaryMapDataObject> backupedObjects = new ArrayList<>();
 					for (BinaryMapDataObject o : currentObjects) {
-						boolean downloaded = rm.checkIfObjectDownloaded(osmandRegions.getDownloadName(o));
-						boolean backuped = rm.checkIfObjectBackuped(osmandRegions.getDownloadName(o));
-						if (downloaded) {
+						String downloadName = osmandRegions.getDownloadName(o);
+						boolean downloaded = rm.checkIfObjectDownloaded(downloadName);
+						boolean outdated = downloaded && rm.checkIfObjectOutdated(downloadName);
+						boolean backuped = rm.checkIfObjectBackuped(downloadName);
+						if (outdated) {
+							outdatedObjects.add(o);
+						} else if (downloaded) {
 							downloadedObjects.add(o);
 						} else if (backuped) {
 							backupedObjects.add(o);
@@ -273,6 +284,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 					}
 					if (!backupedObjects.isEmpty()) {
 						drawMapObjectsPolygons(canvas, tileBox, backupedObjects, pathBackuped, paintBackuped);
+					}
+					if (!outdatedObjects.isEmpty()) {
+						drawMapObjectsPolygons(canvas, tileBox, outdatedObjects, pathOutdated, paintOutdated);
 					}
 					if (!downloadedObjects.isEmpty()) {
 						drawMapObjectsPolygons(canvas, tileBox, downloadedObjects, pathDownloaded, paintDownloaded);
@@ -584,6 +598,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (mapRenderer == null) {
 			return;
 		}
+		WorldRegion selectedRegion = this.selectedRegion;
 		boolean showDownloadedMaps = isShowDownloadedMaps();
 		boolean showDownloadedMapsChanged = cachedShowDownloadedMaps != showDownloadedMaps;
 		cachedShowDownloadedMaps = showDownloadedMaps;
@@ -591,6 +606,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			clearPolygonsCollections();
 			onMapsChanged = false;
 			downloadedRegions = null;
+			outdatedRegions = null;
 			backupedRegions = null;
 		}
 		if (polygonsCollection != null
@@ -599,44 +615,55 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			return;
 		}
 		List<WorldRegion> downloadedRegions = new ArrayList<>();
+		List<WorldRegion> outdatedRegions = new ArrayList<>();
 		List<WorldRegion> backupedRegions = new ArrayList<>();
 		if (showDownloadedMaps && zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS) {
-			if (this.downloadedRegions == null || this.backupedRegions == null) {
+			if (this.downloadedRegions == null || this.outdatedRegions == null || this.backupedRegions == null) {
 				List<WorldRegion> worldRegions = osmandRegions.getAllRegionData();
 				for (WorldRegion wr : worldRegions) {
 					String n = wr.getRegionDownloadName();
-					if (rm.checkIfObjectDownloaded(n)) {
+					boolean downloaded = rm.checkIfObjectDownloaded(n);
+					boolean outdated = downloaded && rm.checkIfObjectOutdated(n);
+					boolean backuped = rm.checkIfObjectBackuped(n);
+					if (outdated) {
+						outdatedRegions.add(wr);
+					} else if (downloaded) {
 						downloadedRegions.add(wr);
-					} else if (rm.checkIfObjectBackuped(n)) {
+					} else if (backuped) {
 						backupedRegions.add(wr);
 					}
 				}
 				this.downloadedRegions = new ArrayList<>(downloadedRegions);
+				this.outdatedRegions = new ArrayList<>(outdatedRegions);
 				this.backupedRegions = new ArrayList<>(backupedRegions);
 			} else {
 				downloadedRegions = new ArrayList<>(this.downloadedRegions);
+				outdatedRegions = new ArrayList<>(this.outdatedRegions);
 				backupedRegions = new ArrayList<>(this.backupedRegions);
 			}
 		}
 
-		WorldRegion selectedRegion = this.selectedRegion;
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION) {
 			if (selectedRegion != null) {
 				downloadedRegions.remove(selectedRegion);
+				outdatedRegions.remove(selectedRegion);
 				backupedRegions.remove(selectedRegion);
 			}
 		}
 		if (backupedSize != backupedRegions.size()
+				|| outdatedSize != outdatedRegions.size()
 				|| downloadedSize != downloadedRegions.size()
 				|| hasSelectedRegion == (selectedRegion == null)) {
 			clearPolygonsCollections();
 			backupedSize = backupedRegions.size();
+			outdatedSize = outdatedRegions.size();
 			downloadedSize = downloadedRegions.size();
 			hasSelectedRegion = selectedRegion != null;
 		}
 		int baseOrder = getBaseOrder();
 		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS) {
 			baseOrder = addToPolygonsCollection(downloadedRegions, paintDownloaded, baseOrder);
+			baseOrder = addToPolygonsCollection(outdatedRegions, paintOutdated, baseOrder);
 			baseOrder = addToPolygonsCollection(backupedRegions, paintBackuped, baseOrder);
 		}
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION && selectedRegion != null) {

@@ -2586,7 +2586,7 @@
     <string name="live_monitoring_time_buffer">Idő puffer</string>
     <string name="live_monitoring_tracking_interval">Rögzítési időköz</string>
     <string name="live_monitoring_adress">Webcím</string>
-    <string name="monitoring_notification">Értesítés</string>
+    <string name="monitoring_notification">A „Rögzítés” gomb megjelenítése az értesítésekben</string>
     <string name="monitoring_min_speed">Legkisebb sebesség</string>
     <string name="monitoring_min_accuracy">Legkisebb pontosság</string>
     <string name="monitoring_min_distance">Legkisebb elmozdulás</string>
@@ -2627,7 +2627,7 @@
     <string name="track_show_start_finish_icons">Kiindulási pont és az úti cél ikonjainak megjelenítése</string>
     <string name="shared_string_file_name">Fájlnév</string>
     <string name="select_track_width">Vastagság kiválasztása</string>
-    <string name="plan_route_trim_after">Kiigazítás ez után:</string>
+    <string name="plan_route_trim_after">Következők levágása:</string>
     <string name="all_previous_segments_will_be_recalc">Minden korábbi szakasz újra lesz számítva a kiválasztott profilnak megfelelően.</string>
     <string name="previous_segment">Előző szakasz</string>
     <string name="monitoring_min_accuracy_descr">Ez csak a legalább minimális pontossággal mért pontokat rögzíti (méterben/lábban, ahogy azt az Android a lapkakészletnek közvetíti). A pontosság (accuracy) a mérések valódi helyzethez való közelsége, és nem kapcsolódik közvetlenül az ismételt mérések szórásának pontosságához (precision).</string>
@@ -2657,7 +2657,7 @@
     <string name="gpx_direction_arrows">Iránymutató nyilak</string>
     <string name="monitoring_min_distance_descr_recommendation">Ajánlás: Állítson be 5 méteres elmozdulást, ha nem szükséges ennél finomabb részleteket rögzítenie, és nyugalmi állapotban sincs szüksége további adatokra.</string>
     <string name="next_segment">Következő szakasz</string>
-    <string name="plan_route_trim_before">Kiigazítás ez előtt:</string>
+    <string name="plan_route_trim_before">Előzőek levágása:</string>
     <string name="simplified_track">Egyszerűsített nyomvonal</string>
     <string name="shared_string_done">Kész</string>
     <string name="shared_string_is_saved">elmentve</string>
@@ -2666,7 +2666,7 @@
     <string name="monitoring_min_accuracy_descr_remark">Megjegyzés: Ha a GPS közvetlenül a rögzítés előtt ki volt kapcsolva, akkor rosszabb lehet az első mért pont pontossága. A kódban ezért szeretnénk majd talán várni egy-két másodpercet egy pont rögzítése előtt (vagy a 3 egymást követő pont közül a legjobbat rögzíteni vagy valami hasonló), de ezt még nem programoztuk le.</string>
     <string name="delete_address">Cím törlése</string>
     <string name="context_menu_item_add_waypoint">Útpont hozzáadása a nyomvonalhoz</string>
-    <string name="plan_route_change_route_type_after">Útvonaltípus módosítása ez után:</string>
+    <string name="plan_route_change_route_type_after">Útvonaltípus módosítása utána</string>
     <string name="shared_string_gpx_route">Útvonal követése</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Ajánlás: Nehéz megjósolni, hogy mi kerül rögzítésre és mi nem, így talán a legjobb ezt a szűrőt kikapcsolni.</string>
     <string name="map_widget_monitoring">Utazás rögzítése</string>
@@ -2688,7 +2688,7 @@
     <string name="listed_exist">A felsorolt %1$s már létezik az OsmAndban.</string>
     <string name="all_previous_segments">Minden korábbi szakasz</string>
     <string name="plan_route_select_track_file_for_open">Válassza ki a megnyitni kívánt nyomvonalfájlt.</string>
-    <string name="plan_route_change_route_type_before">Útvonaltípus módosítása ez előtt:</string>
+    <string name="plan_route_change_route_type_before">Útvonaltípus módosítása előtte</string>
     <string name="route_between_points_whole_track_button_desc">A teljes útvonal újra lesz számítva a kiválasztott profilnak megfelelően.</string>
     <string name="save_as_new_track">Mentés új nyomvonalként</string>
     <string name="reverse_route">Útvonal megfordítása</string>
@@ -2771,8 +2771,8 @@
     <string name="lang_de_casual">német (tegeződő)</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Könnyű légi jármű</string>
-    <string name="plan_route_split_before">Elvágás ez előtt:</string>
-    <string name="plan_route_split_after">Elvágás ez után:</string>
+    <string name="plan_route_split_before">Elvágás előtte</string>
+    <string name="plan_route_split_after">Elvágás utána</string>
     <string name="plan_route_add_new_segment">Új szakasz hozzáadása</string>
     <string name="release_3_9">• Lehetőség az összes adat exportálására és importálására, beleértve a beállításokat, erőforrásokat és a kedvenceket is \n \n • Útvonaltervezés: grafikonok a nyomvonalszakaszokhoz útvonallal, valamint lehetőség több nyomvonalszakasz létrehozására és szerkesztésére \n \n • OAuth hitelesítési módszer az OpenStreetMap-hez, az OSM-párbeszédpanelek felhasználói felületének javítása \n \n • Egyéni színek támogatása a kedvenceknél és a nyomvonalak útpontjainál</string>
     <string name="profile_type_osmand_string">OsmAnd-profil</string>
@@ -3967,7 +3967,7 @@
     <string name="send_logcat_log_descr">Részletes naplófájl</string>
     <string name="send_crash_log_descr">Csak az összeomlásokról tartalmaz információkat</string>
     <string name="open_issue_on_github_descr">Tegyen fel kérdést, javasoljon funkciókat</string>
-    <string name="report_an_issues">Jelentsen be hibát</string>
+    <string name="report_an_issues">Hibajelentés</string>
     <string name="help_article_map_vector_maps_name">Vektoros térképek (térképstílusok)</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Térkép képernyő navigáció közben</string>
@@ -4583,7 +4583,7 @@
     <string name="map_widget_route_information_desc">Megjeleníti az aktív navigációs útvonal becsült érkezési idejét, a fennmaradó utazási időt és a távolságot.</string>
     <string name="ais_cpa_warning_distance_description">A hajók piros színnel lesznek kiemelve meg, ha a CPA (legközelebbi megközelítési pont) a meghatározott küszöbérték alatt van, és a TCPA (a CPA-ig hátralévő idő) a „Figyelmeztetési idő a legközelebbi megközelítési pont (CPA) előtt” beállításban megadott figyelmeztetés idejébe esik.</string>
     <string name="ais_object_lost_timeout_description">Állítsa be az AIS-objektumok láthatóságának időtúllépését: Ha a megadott időtartamon belül nem érkezik jel, az objektum automatikusan eltávolításra kerül a kijelzőről.</string>
-    <string name="ais_load_data">AIS-adatok betöltése fájlból</string>
+    <string name="ais_load_data">Hajóforgalom szimulálása</string>
     <string name="ais_port_nmea_local_description">Határozza meg azt az UPD-portot, amelyen az OsmAnd NMEA-adatokat fogadhat</string>
     <string name="ais_object_lost_timeout">Láthatósági időtúllépés az elveszett hajóknál</string>
     <string name="ais_ship_lost_timeout_description">Állítsa be a hajó elavult láthatóságának időtúllépését: ezen jelfogadás nélküli idő letelte után a hajó szimbóluma áthúzásra kerül.</string>
@@ -4782,7 +4782,7 @@
     <string name="miles">Mérföld</string>
     <string name="mpg">Mérf./gal</string>
     <string name="access_pinch_zoom_magnification">Csippentéses nagyítás</string>
-    <string name="access_pinch_zoom_magnification_descr">Nagyítás közben a különálló nagyítási szintek helyett használja a nézetablak méretezését.</string>
+    <string name="access_pinch_zoom_magnification_descr">Nézetablak méretezésének (nagyítása) használata a különálló nagyítási szintek helyett nagyításkor.</string>
     <string name="show_spherical_map_description">A Föld gömbmodelljének megjelenítése</string>
     <string name="shared_string_price">Ár</string>
     <string name="rendering_attr_showSkiSlopes_name">Sípályák megjelenítése</string>
@@ -5252,7 +5252,7 @@
     <string name="use_spatial_text_search_description">Térbeli szövegkeresőmotor (kísérleti) használata a szabványos gyorskeresési API-k helyett.</string>
     <string name="always_keep_local_copy">Mindig legyen helyi másolat</string>
     <string name="always_keep_local_copy_description">A médiafájlok akkor is megmaradnak, ha az eredeti fájlt törlik a galériából vagy a fájlok közül.</string>
-    <string name="release_5_4">• Megújult keresőfelület: rendezés, kategóriaszűrők, letisztultabb megjelenés\n\n • Fotók és médiafájlok csatolása a kedvencekhez\n\n • Kedvencek: alcsoportok támogatása és kitűzhető mappák\n\n • Koordináták: a keresés, a térképrács és a POI-megjelenítés mostantól támogatja az EPSG és a Maidenhead helymeghatározó szolgáltatásokat\n\n • Navigáció megszakadásainak javítása; váltás a „Szabványos” és a „Gyors” útvonaltervezés között\n\n • Az Android Auto térkép méretarányának a telefontól független beállítása\n\n• Új térbeli keresés, helyek keresése és egy hely környékének átkutatása\n\n • A csillagászat részhez hozzá lett adva a nap- és holdfogyatkozások</string>
+    <string name="release_5_4">• Megújult keresőfelület: rendezés, kategóriaszűrők, letisztultabb megjelenés\n\n • Fotók és médiafájlok csatolása a kedvencekhez\n\n • Kedvencek: alcsoportok támogatása és kitűzhető mappák\n\n • Koordináták: a keresés, a térképrács és a POI-megjelenítés mostantól támogatja az EPSG által ismert koordináta-formátumokat és a Maidenhead helykódokat\n\n • Navigáció megszakadásainak javítása; váltás a „Szabványos” és a „Gyors” útvonaltervezés között\n\n • Az Android Auto térképméretarányának beállítása a telefontól függetlenül\n\n• Új térbeli keresés: helyek keresése és egy hely környékének átkutatása\n\n • A csillagászati módhoz hozzá lettek adva a nap- és holdfogyatkozások</string>
     <plurals name="files_count">
         <item quantity="one">%d fájl</item>
         <item quantity="other">%d fájl</item>
@@ -5267,4 +5267,26 @@
     <string name="share_favorites_missing_media_warning">Néhány csatolt médiafájl nem volt beilleszthető.</string>
     <string name="share_favorites_media_preparation_failed">Nem sikerült beilleszteni a csatolt médiafájlokat. Csak pontok megosztása.</string>
     <string name="search_on_web">Keresés a világhálón</string>
+    <string name="astro_eclipse_column_below_horizon">Horizont alatt</string>
+    <string name="quick_action_add_track">Nyomvonal hozzáadása</string>
+    <string name="quick_action_tracks_select_descr">Adjon hozzá egy vagy több nyomvonalat, hogy egyetlen koppintással megjeleníthesse vagy elrejthesse őket a térképen.</string>
+    <string name="quick_action_tracks_always_ask_descr">Erre a műveletre koppintva megnyílik a nyomvonalak listája, ahol megjeleníthet vagy elrejthet egyet vagy többet közülük.</string>
+    <string name="quick_action_all_tracks">Összes nyomvonal</string>
+    <string name="crash_report_sent">Jelentés elküldve. Köszönjük!</string>
+    <string name="crash_report_send_failed">Nem sikerült elküldeni a jelentést. Próbálja meg később.</string>
+    <string name="battery_saving_mode_descr">A térképmegjelenítés sebessége 20 fps-re korlátozódik az akkumulátor lemerülésének és az eszköz túlmelegedésének csökkentése érdekében. A térkép mozgása kevésbé lesz egyenletes.</string>
+    <string name="java_memory">Java memória</string>
+    <string name="ais_load_data_descr">AIS-üzenetek visszajátszása rögzített fájlból.</string>
+    <string name="map_rendering">Térképmegjelenítés</string>
+    <string name="simulate_ui">Első indítás szimulálása</string>
+    <string name="simulate_ui_descr">Első futtatás, ingyenes verziós reklámcsík, kedvezményes lap.</string>
+    <string name="heap_dump">Heap-memóriakép</string>
+    <string name="heap_dump_descr">Objektumok megszámlálása a Java-heapben.</string>
+    <string name="heap_dump_collect">Gyűjtés és elemzés most</string>
+    <string name="heap_dump_collect_descr">Néhány másodpercet vesz igénybe, majd megjeleníti az eredményt.</string>
+    <string name="heap_dump_share">Jelentés megosztása</string>
+    <string name="heap_dump_share_descr">Elküldi a legutóbbi jelentést a kiszolgálóra.</string>
+    <string name="heap_dump_auto">Gyűjtés magas használat esetén</string>
+    <string name="visualizing_button_grid_descr">Cellák, rekeszek, keretek és naplók.</string>
+    <string name="heap_dump_auto_descr">Amikor a heap majdnem megtelt, 30 percenként egyszer.</string>
 </resources>

@@ -17,6 +17,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -235,7 +236,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private static boolean isDebugMode = SearchUICore.isDebugMode();
 	private ProcessTopIndex processTopIndexAfterLoad = ProcessTopIndex.NO;
-	private final Stack<SearchPhrase> addressSearchStack = new Stack<>();
+	private final Stack<String> addressSearchStack = new Stack<>();
 
 	private enum ProcessTopIndex {
 		FILTER,
@@ -663,15 +664,11 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		amenity.setName(QuickSearchListItem.getName(app, searchResult));
 		amenity.setType(app.getPoiTypes().getOtherPoiCategory());
 		amenity.setSubType("");
-		amenity.setAdditionalInfo(Amenity.GPX_ICON, getSpatialSearchMapIconName(searchResult));
+		String iconName = QuickSearchListItem.getAddressIconName(searchResult);
+		if (iconName != null) {
+			amenity.setAdditionalInfo(Amenity.GPX_ICON, iconName);
+		}
 		return amenity;
-	}
-
-	@NonNull
-	private String getSpatialSearchMapIconName(@NonNull SearchResult searchResult) {
-		return searchResult.objectType == ObjectType.HOUSE
-				? "ic_action_building"
-				: "ic_action_street_name";
 	}
 
 	private void clearSpatialSearchMapObjects() {
@@ -727,7 +724,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (tabBarHidden) {
 			resetSpatialSearchScope();
 			if (!addressSearchStack.isEmpty()) {
-				String newText = addressSearchStack.pop().getFullSearchPhrase();
+				String newText = addressSearchStack.pop();
 				searchEditText.setText(newText);
 				searchEditText.setSelection(newText.length());
 			} else {
@@ -872,6 +869,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		paused = false;
 		cancelPrev = false;
 		hidden = false;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateBackPressedCallbackState();
+		}
 		refreshSearchContentAfterShow();
 		addressSearchStack.clear();
 		if (interruptedSearch) {
@@ -890,6 +891,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void hide() {
 		paused = true;
 		hidden = true;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateBackPressedCallbackState();
+		}
 		expired = searchType != QuickSearchType.REGULAR;
 		hideTimeMs = System.currentTimeMillis();
 		interruptedSearch = searching;
@@ -988,7 +993,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					}
 				} else if (word.getLocation() != null) {
 					SearchResult searchResult = word.getResult();
-					Object object = searchResult.object;
+					Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(app, searchResult);
+					Object object = pair.second;
 
 					if (word.getType() == ObjectType.CITY || word.getType() == ObjectType.VILLAGE) {
 						Amenity amenity = app.getSearchUICore().findAmenity(searchResult.localeName,
@@ -998,10 +1004,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						}
 					}
 
-					String name = QuickSearchListItem.getName(app, searchResult);
-					String typeName = QuickSearchListItem.getTypeName(app, searchResult);
-					PointDescription pointDescription = new PointDescription(
-							PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+					PointDescription pointDescription = pair.first;
+					if (pointDescription == null) {
+						String name = QuickSearchListItem.getName(app, searchResult);
+						String typeName = QuickSearchListItem.getTypeName(app, searchResult);
+						pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+					}
 					Object historyObject = SearchHistoryHelper.createHistoryObject(object, searchResult);
 					settings.setMapLocationToShow(
 							searchResult.location.getLatitude(), searchResult.location.getLongitude(),
@@ -1812,6 +1820,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			hidden = false;
+			mapActivity.updateBackPressedCallbackState();
 			hideToolbar();
 			mapActivity.updateStatusBarColor();
 			mapActivity.refreshMap();
@@ -3447,13 +3457,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				|| searchResult.objectType == GPX_TRACK) {
 			mainSearchFragment.showResult(searchResult);
 		} else {
+			saveAddressSearchState();
 			completeQueryWithObject(searchResult);
-			onSearchResultSelected();
 		}
 	}
 
-	public void onSearchResultSelected() {
-		SearchResultCollection searchResult = searchHelper.getCore().getCurrentSearchResult();
-		addressSearchStack.push(searchResult.getPhrase());
+	// Should be called before the selected result is applied to the search query,
+	// so that back navigation restores exactly the query which is displayed now.
+	public void saveAddressSearchState() {
+		addressSearchStack.push(searchEditText.getText().toString());
 	}
 }

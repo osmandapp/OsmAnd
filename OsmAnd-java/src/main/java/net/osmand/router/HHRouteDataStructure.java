@@ -13,10 +13,11 @@ import java.util.TreeMap;
 
 import com.google.protobuf.CodedInputStream;
 
+import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TLongHashSet;
+import net.osmand.binary.BinaryHHRouteReaderAdapter;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -24,6 +25,7 @@ import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.util.MapUtils;
 
@@ -57,12 +59,40 @@ public class HHRouteDataStructure {
 		boolean PRELOAD_SEGMENTS = false;
 		
 		boolean CACHE_CALCULATION_CONTEXT = false;
-		boolean CALC_ALTERNATIVES = false;
+		public boolean CALC_ALTERNATIVES = false;
 		boolean USE_GC_MORE_OFTEN = false;
 		
-		double ALT_EXCLUDE_RAD_MULT = 0.3; // radius multiplier to exclude points
-		double ALT_EXCLUDE_RAD_MULT_IN = 3; // skip some points to speed up calculation
-		double ALT_NON_UNIQUENESS = 0.7; // 0.7 - 30% of points must be unique
+		// ---- alternative routes (plateau / via-node method), see HHRoutePlanner.calcAlternativeRoute ----
+		// A candidate route goes through a "via node" v settled by both search trees: sp(s,v) + sp(v,t).
+		// Its plateau is the maximal chain of hub-graph edges around v that belongs to BOTH trees, i.e.
+		// the stretch the alternative drives as its own optimal road. Three explicit admissibility rules:
+		//   1) stretch    cost(alt) <= (1 + ALT_STRETCH) * cost(opt) + ALT_STRETCH_ABS
+		//   2) plateau    plateau(v) >= ALT_MIN_PLATEAU * cost(alt)          (local optimality)
+		//   3) distinct   own roads >= max(ALT_MIN_DISTINCT_FLOOR, ALT_MIN_DISTINCT_REL * len(opt))
+		// ALT_STRETCH also bounds the search horizon, so it directly trades quality for speed.
+		public int ALT_MAX_COUNT = 2; // how many alternatives to return
+		public double ALT_STRETCH = 0.4; // hard limit of relative cost overhead (and search bound)
+		public double ALT_STRETCH_PREFERRED = 0.15; // alternatives below this limit are proposed first
+		// A relative limit alone is harsh on a short route: on a 7 minute drive it rejects everything
+		// that is not within 3 minutes of the fastest way, and the only other way through a city block
+		// rarely is. On a route long enough for ALT_STRETCH to mean minutes this allowance is nothing.
+		public double ALT_STRETCH_ABS = 180; // seconds allowed on top of ALT_STRETCH
+		public double ALT_MIN_PLATEAU = 0.1; // min share of the route driven as its own optimal road
+		public double ALT_MAX_SHARING = 0.6; // coarse hub-graph pre-filter (stage 1)
+		public double ALT_MIN_DISTINCT_REL = 0.2; // exact geometry filter (stage 2), share of main length
+		// Only a floor under the relative rule, for routes too short to make it meaningful: a fixed
+		// requirement of a kilometre or two is a third of a 4 km city route and rejects everything
+		// there, while asking nothing extra of a route long enough for the relative rule to bind.
+		public double ALT_MIN_DISTINCT_FLOOR = 300; // exact geometry filter (stage 2), meters
+		// Max detailed expansions in stage 2 (time guard). Retries of a candidate whose shortcuts
+		// disagree with the detailed roads count against it, so this is not "number of candidates".
+		public int ALT_MAX_EXPAND = 8;
+		public double ALT_MAX_RETRACED = 100; // meters an alternative may drive twice (u-turn tolerance)
+		// The detailed graph is searched again when the hub graph offers nothing, and that search grows
+		// with the route: measured 44 ms at 423 s of cost, 197 ms at 645 s, 274 ms at 978 s and 700 ms
+		// on a 140 km route that had no alternative to find anyway. Beyond a city hop it is not worth it.
+		public double ALT_DETAILED_MAX_COST = 900; // seconds, above this only the hub graph is searched
+		public double ALT_RANK_COST_WEIGHT = 3; // rank: (1 - shared) - weight * stretch
 
 		double MAX_COST;
 		int MAX_DEPTH = -1; // max depth to go to
@@ -119,6 +149,12 @@ public class HHRouteDataStructure {
 		
 		public HHRoutingConfig calcAlternative() {
 			this.CALC_ALTERNATIVES = true;
+			return this;
+		}
+
+		public HHRoutingConfig calcAlternative(int maxCount) {
+			this.CALC_ALTERNATIVES = maxCount > 0;
+			this.ALT_MAX_COUNT = maxCount;
 			return this;
 		}
 		
@@ -242,6 +278,13 @@ public class HHRouteDataStructure {
 		Queue<NetworkDBPointCost<T>> queuePos = createQueue();
 		Queue<NetworkDBPointCost<T>> queueRev = createQueue();
 
+		/**
+		 * The road segments the route actually starts and ends on, as chosen by the last-mile search
+		 * (they can differ from the nearest ones after a reiteration). Kept because the alternatives
+		 * of a short route are searched on the detailed graph - see HHAlternativeRoutes.
+		 */
+		RouteSegmentPoint startSegment, endSegment;
+
 
 
 		private PriorityQueue<NetworkDBPointCost<T>> createQueue() {
@@ -358,6 +401,116 @@ public class HHRouteDataStructure {
 			return points;
 		}
 
+		/**
+		 * Copies the points of an initialized context for another routing context over the same file
+		 * (each routing context has its own reader): nothing is parsed or filtered again.
+		 * Segments are not copied, the copy loads them lazily. Returns null if the copy isn't possible.
+		 */
+		public static HHRoutingContext<NetworkDBPoint> copy(HHRoutingContext<NetworkDBPoint> src, RoutingContext rctx) {
+			if (!src.initialized) {
+				return null;
+			}
+			HHRoutingContext<NetworkDBPoint> c = new HHRoutingContext<>();
+			c.rctx = rctx;
+			for (HHRouteRegionPointsCtx<NetworkDBPoint> r : src.regions) {
+				HHRouteRegion fileRegion = null;
+				BinaryMapIndexReader file = null;
+				for (BinaryMapIndexReader reader : rctx.map.keySet()) {
+					for (HHRouteRegion h : reader.getHHRoutingIndexes()) {
+						if (r.file != null && reader.getFile().equals(r.file.getFile())
+								&& h.getFilePointer() == r.fileRegion.getFilePointer()) {
+							fileRegion = h;
+							file = reader;
+						}
+					}
+				}
+				if (fileRegion == null) {
+					return null;
+				}
+				BinaryHHRouteReaderAdapter.copySegmentHeaders(r.fileRegion, fileRegion);
+				c.regions.add(new HHRouteRegionPointsCtx<>(r.id, fileRegion, file, r.routingProfile));
+			}
+			int maxIndex = 0;
+			for (NetworkDBPoint p : src.pointsById.valueCollection()) {
+				if (p.getClass() != NetworkDBPoint.class) {
+					return null;
+				}
+				maxIndex = Math.max(maxIndex, p.index);
+			}
+			// index is a dense global id
+			NetworkDBPoint[] byIndex = new NetworkDBPoint[maxIndex + 1];
+			c.pointsById = new TLongObjectHashMap<>(src.pointsById.size());
+			TLongObjectIterator<NetworkDBPoint> it = src.pointsById.iterator();
+			while (it.hasNext()) {
+				it.advance();
+				NetworkDBPoint s = it.value();
+				NetworkDBPoint p = new NetworkDBPoint();
+				p.tagValues = s.tagValues;
+				p.index = s.index;
+				p.clusterId = s.clusterId;
+				p.fileId = s.fileId;
+				p.mapId = s.mapId;
+				p.incomplete = s.incomplete;
+				p.roadId = s.roadId;
+				p.start = s.start;
+				p.end = s.end;
+				p.startX = s.startX;
+				p.startY = s.startY;
+				p.endX = s.endX;
+				p.endY = s.endY;
+				p.rtExclude = s.rtExclude;
+				p.markSegmentsNotLoaded();
+				byIndex[p.index] = p;
+				c.pointsById.put(it.key(), p);
+			}
+			for (NetworkDBPoint s : src.pointsById.valueCollection()) {
+				if (s.dualPoint != null) {
+					byIndex[s.index].dualPoint = byIndex[s.dualPoint.index];
+				}
+			}
+			c.pointsByGeo = new TLongObjectHashMap<>(src.pointsByGeo.size());
+			c.boundaries = new TLongObjectHashMap<>(src.pointsByGeo.size());
+			it = src.pointsByGeo.iterator();
+			while (it.hasNext()) {
+				it.advance();
+				c.pointsByGeo.put(it.key(), byIndex[it.value().index]);
+				// not copied from src.boundaries: it holds the start and end of a route running there
+				c.boundaries.put(it.key(), null);
+			}
+			c.clusterInPoints = copyClusters(src.clusterInPoints, byIndex);
+			c.clusterOutPoints = copyClusters(src.clusterOutPoints, byIndex);
+			for (NetworkDBPoint p : c.pointsById.valueCollection()) {
+				LatLon latlon = p.getPoint();
+				c.pointsRect.registerObject(latlon.getLatitude(), latlon.getLongitude(), p);
+			}
+			for (int i = 0; i < src.regions.size(); i++) {
+				it = src.regions.get(i).pntsByFileId.iterator();
+				while (it.hasNext()) {
+					it.advance();
+					c.regions.get(i).pntsByFileId.put(it.key(), byIndex[it.value().index]);
+				}
+			}
+			c.filterRoutingParameters = new TreeMap<>(src.filterRoutingParameters);
+			rctx.hhHasUnsupportedParameters = src.rctx.hhHasUnsupportedParameters;
+			c.initialized = true;
+			return c;
+		}
+
+		private static TIntObjectHashMap<List<NetworkDBPoint>> copyClusters(TIntObjectHashMap<List<NetworkDBPoint>> src,
+				NetworkDBPoint[] byIndex) {
+			TIntObjectHashMap<List<NetworkDBPoint>> res = new TIntObjectHashMap<>(src.size());
+			TIntObjectIterator<List<NetworkDBPoint>> it = src.iterator();
+			while (it.hasNext()) {
+				it.advance();
+				List<NetworkDBPoint> l = new ArrayList<>(it.value().size());
+				for (NetworkDBPoint p : it.value()) {
+					l.add(byIndex[p.index]);
+				}
+				res.put(it.key(), l);
+			}
+			return res;
+		}
+
 		public int loadNetworkSegments(Collection<T> valueCollection) throws SQLException {
 			int loaded = 0;
 			for (HHRouteRegionPointsCtx<T> r : regions) {
@@ -464,7 +617,6 @@ public class HHRouteDataStructure {
 		public RoutingStats stats;
 		public List<HHNetworkSegmentRes> segments = new ArrayList<>();
 		public List<HHNetworkRouteRes> altRoutes = new ArrayList<>();
-		public TLongHashSet uniquePoints = new TLongHashSet();
 		
 		public HHNetworkRouteRes() {
 			super(new ArrayList<RouteSegmentResult>());
@@ -483,6 +635,16 @@ public class HHRouteDataStructure {
 			return d;
 		}
 		
+		@Override
+		public List<List<RouteSegmentResult>> getAlternatives() {
+			// altRoutes is the storage - this is the same list seen through the generic result
+			List<List<RouteSegmentResult>> alts = new ArrayList<>(altRoutes.size());
+			for (HHNetworkRouteRes alt : altRoutes) {
+				alts.add(alt.detailed);
+			}
+			return alts;
+		}
+
 		public double getHHRoutingDetailed() {
 			double d = 0;
 			for (HHNetworkSegmentRes r : segments) {
@@ -497,8 +659,7 @@ public class HHRouteDataStructure {
 			} else {
 				detailed.addAll(res.detailed);
 				segments.addAll(res.segments);
-				altRoutes.clear();
-				uniquePoints.clear();
+				altRoutes.clear(); // not supported with intermediate points
 			}
 		}
 		

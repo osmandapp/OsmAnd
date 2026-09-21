@@ -3,6 +3,46 @@
 
 	<style name="OsmandMaterialDarkTheme" parent="Theme.Material3.Dark">
 
+		<item name="colorPrimary">@color/primary_dark</item>
+		<item name="colorOnPrimary">@color/on_primary_dark</item>
+		<item name="colorPrimaryContainer">@color/primary_container_dark</item>
+		<item name="colorOnPrimaryContainer">@color/on_primary_container_dark</item>
+		
+		<item name="colorSecondary">@color/secondary_dark</item>
+		<item name="colorOnSecondary">@color/on_secondary_dark</item>
+		<item name="colorSecondaryContainer">@color/secondary_container_dark</item>
+		<item name="colorOnSecondaryContainer">@color/on_secondary_container_dark</item>
+		
+		<item name="colorSurface">@color/surface_dark</item>
+		<item name="colorSurfaceContainer">@color/surface_container_dark</item>
+		<item name="colorSurfaceContainerLow">@color/surface_container_dark</item>
+		<item name="colorSurfaceContainerHigh">@color/surface_container_highest_dark</item>
+		<item name="colorSurfaceContainerHighest">@color/surface_container_highest_dark</item>
+		<item name="colorOnSurface">@color/on_surface_dark</item>
+		<item name="colorOnSurfaceVariant">@color/on_surface_variant_dark</item>
+		
+		<item name="colorOutline">@color/outline_dark</item>
+		<item name="colorOutlineVariant">@color/outline_variant_dark</item>
+		
+		<item name="colorError">@color/error_dark</item>
+		<item name="colorOnError">@color/on_error_dark</item>
+		
+		<item name="android:colorBackground">@color/surface_dark</item>
+		<item name="scrimBackground">@color/scrim_dark</item>
+		
+		<item name="colorPrimaryPressed">@color/primary_pressed_dark</item>
+		<item name="colorPrimaryContainerPressed">@color/primary_container_pressed_dark</item>
+		<item name="colorSurfaceContainerHighestPressed">@color/surface_container_highest_pressed_dark</item>
+		<item name="colorOnSurfaceTertiary">@color/on_surface_tertiary_dark</item>
+		<item name="colorOnSurfaceDisabled">@color/on_surface_disabled_dark</item>
+		<item name="colorOutlineDisabled">@color/outline_disabled_dark</item>
+		
+		<item name="colorSuccess">@color/success_dark</item>
+		<item name="colorWarning">@color/warning_dark</item>
+		<item name="colorSuccessIcon">@color/success_icon_dark</item>
+		<item name="colorWarningIcon">@color/warning_icon_dark</item>
+		<item name="colorErrorIcon">@color/error_icon_dark</item>
+
 		<item name="text_color_primary_v2">@color/text_color_primary_dark_v2</item>
 		<item name="icon_color_default_v2">@color/icon_color_default_dark_v2</item>
 		<item name="icon_color_active_v2">@color/icon_color_active_dark_v2</item>
