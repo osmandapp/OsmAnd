@@ -5149,7 +5149,7 @@
     <string name="no_media_descr">Ви можете додавати фотографії, відео або аудіонотатки з камери чи бібліотеки.</string>
     <string name="favorite_confirm_delete_folder">Це видалить папку \"%1$s\", включаючи вкладені папки та %2$d точок обраного.</string>
     <string name="favorite_folder_rename_conflict">Папка з такою назвою вже існує.</string>
-    <string name="favorite_folder_invalid_name">Назва папки не може містити / або _%_</string>
+    <string name="favorite_folder_invalid_name">Назва папки не може містити / або %1$s</string>
     <string name="favorite_folder_duplicate_message">Використовуйте ім\'я папки, якого ще не існує.</string>
     <string name="favorite_folder_name">Назва папки</string>
     <string name="edit_folder">Редагувати папку</string>

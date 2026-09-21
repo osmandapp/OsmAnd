@@ -195,10 +195,17 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 					}
 				}
 				List<BinaryMapDataObject> queriedResults = getResults();
-				if (queriedData != null && queriedData.containsTileBox(newBox) && queriedData.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
-					return queriedResults != null && (queriedResults.isEmpty() || Math.abs(queriedData.getZoom() - newBox.getZoom()) <= 1);
+				if (queriedData == null || queriedResults == null || queriedData.getZoom() < ZOOM_TO_SHOW_MAP_NAMES) {
+					return false;
 				}
-				return false;
+				// from this zoom on the results are the regions at the centre of the queried box, so they
+				// hold while the centre stays inside that box, whichever way the map has turned since ...
+				if (queriedData.containsLatLon(newBox.getLatitude(), newBox.getLongitude())) {
+					return queriedResults.isEmpty() || Math.abs(queriedData.getZoom() - newBox.getZoom()) <= 1;
+				}
+				// ... and while it stays inside one of them that is downloaded: every reader of the
+				// results takes that as "the map is here", and a query parses megabytes of polygons
+				return containsDownloadedRegion(queriedResults, newBox);
 			}
 
 			@Override
@@ -372,6 +379,20 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		} catch (IOException e) {
 			return null;
 		}
+	}
+
+	private boolean containsDownloadedRegion(@NonNull List<BinaryMapDataObject> regions, @NonNull RotatedTileBox box) {
+		int x31 = box.getCenter31X();
+		int y31 = box.getCenter31Y();
+		for (BinaryMapDataObject region : regions) {
+			if (OsmandRegions.contain(region, x31, y31)) {
+				String downloadName = osmandRegions.getDownloadName(region);
+				if (!Algorithms.isEmpty(downloadName) && rm.checkIfObjectDownloaded(downloadName)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private boolean checkIfMapEmpty(int zoom) {

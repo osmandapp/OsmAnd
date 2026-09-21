@@ -420,7 +420,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 			return true;
 		}
 		if (!FavoriteFolderPath.isValidSegment(newSegment)) {
-			app.showShortToastMessage(R.string.favorite_folder_invalid_name);
+			app.showShortToastMessage(R.string.favorite_folder_invalid_name, FavoriteFolderPath.SUBFOLDER_PLACEHOLDER);
 			return false;
 		}
 		String parentPath = FavoriteFolderPath.parentPath(folderPath);

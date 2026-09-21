@@ -401,6 +401,7 @@ public class RoutingHelper {
 
 	public void removeListener(@NonNull IRouteInformationListener lt) {
 		listeners = Algorithms.updateWeakReferencesList(listeners, lt, false);
+		transportRoutingHelper.removeListener(lt);
 	}
 
 

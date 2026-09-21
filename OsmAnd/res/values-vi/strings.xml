@@ -4331,7 +4331,7 @@
     <string name="no_media_descr">Bạn có thể thêm ảnh, video, hoặc ghi chú bằng âm thanh từ máy ảnh hoặc thư viện của bạn.</string>
     <string name="favorite_confirm_delete_folder">Điều này sẽ xóa thư mục \"%1$s\", bao gồm cả các thư mục con và %2$d điểm yêu thích.</string>
     <string name="favorite_folder_rename_conflict">Một thư mục với tên này đã tồn tại.</string>
-    <string name="favorite_folder_invalid_name">Tên thư mục không được chứa ký tự / hoặc _%_</string>
+    <string name="favorite_folder_invalid_name">Tên thư mục không được chứa ký tự / hoặc %1$s</string>
     <string name="favorite_folder_duplicate_message">Dùng tên thư mục mà chưa tồn tại.</string>
     <string name="favorite_folder_name">Tên thư mục</string>
     <string name="edit_folder">Chỉnh sửa thư mục</string>

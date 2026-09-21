@@ -5187,7 +5187,7 @@
     <string name="no_media_descr">Pode adicionar fotos, vídeos ou notas de áudio da sua câmara, ou da sua galeria.</string>
     <string name="favorite_confirm_delete_folder">Isso apagará a pasta \"%1$s\", incluindo pastas aninhadas e %2$d ponto(s) favorito(s).</string>
     <string name="favorite_folder_rename_conflict">Já existe uma pasta com este nome.</string>
-    <string name="favorite_folder_invalid_name">O nome da pasta não pode conter / ou _%_</string>
+    <string name="favorite_folder_invalid_name">O nome da pasta não pode conter / ou %1$s</string>
     <string name="favorite_folder_duplicate_message">Use um nome de pasta que ainda não exista.</string>
     <string name="favorite_folder_name">Nome da pasta</string>
     <string name="edit_folder">Editar pasta</string>

@@ -4466,7 +4466,7 @@
     <string name="backup_deleted_all_data">Andmed on kustutatud.</string>
     <string name="backup_deleting_all_data">Kustutan andmeid…</string>
     <string name="favorite_folder_rename_conflict">Sellise nimega kaust on juba olemas.</string>
-    <string name="favorite_folder_invalid_name">Kausta nimes ei tohi olla tähemärke: / või _%_</string>
+    <string name="favorite_folder_invalid_name">Kausta nimes ei tohi olla tähemärke: / või %1$s</string>
     <string name="favorite_folder_duplicate_message">Pruugi kaustanime, mida veel pole olemas.</string>
     <string name="favorite_folder_name">Kausta nimi</string>
     <string name="edit_folder">Muuda kausta</string>

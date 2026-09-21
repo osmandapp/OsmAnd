@@ -5142,7 +5142,7 @@
     <string name="coordinate_format_discard_changes">Henda breytingum</string>
     <string name="coordinate_format_select_other">Veldu annað snið</string>
     <string name="coordinate_format_primary">Aðal</string>
-    <string name="favorite_folder_invalid_name">Heiti möppu má ekki innihalda / eða _%_</string>
+    <string name="favorite_folder_invalid_name">Heiti möppu má ekki innihalda / eða %1$s</string>
     <string name="favorite_folder_name">Heiti möppu</string>
     <string name="edit_folder">Breyta möppu</string>
     <string name="map_widget_memory_info">Upplýsingar um minni</string>

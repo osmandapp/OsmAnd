@@ -5506,7 +5506,7 @@
     <string name="coordinate_format_primary">Utama</string>
     <string name="favorite_confirm_delete_folder">Tindakan ini akan menghapus folder \"%1$s\", termasuk folder di dalamnya dan %2$d titik favorit.</string>
     <string name="favorite_folder_rename_conflict">Folder dengan nama ini sudah ada.</string>
-    <string name="favorite_folder_invalid_name">Nama folder tidak boleh mengandung / atau _%_</string>
+    <string name="favorite_folder_invalid_name">Nama folder tidak boleh mengandung / atau %1$s</string>
     <string name="favorite_folder_duplicate_message">Gunakan nama folder yang belum ada.</string>
     <string name="favorite_folder_name">Nama folder</string>
     <string name="edit_folder">Edit folder</string>

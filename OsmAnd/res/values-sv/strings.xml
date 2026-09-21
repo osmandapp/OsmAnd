@@ -5070,7 +5070,7 @@
     <string name="coordinate_format_select_other">Välj annat format</string>
     <string name="favorite_confirm_delete_folder">Detta kommer att radera mappen \"%1$s\", inklusive undermappar och %2$d favoritpunkt(er).</string>
     <string name="favorite_folder_rename_conflict">Det finns redan en mapp med detta namn.</string>
-    <string name="favorite_folder_invalid_name">Mappnamn kan inte innehålla / eller _%_</string>
+    <string name="favorite_folder_invalid_name">Mappnamn kan inte innehålla / eller %1$s</string>
     <string name="favorite_folder_duplicate_message">Använd ett mappnamn som inte redan existerar.</string>
     <string name="favorite_folder_name">Mappnamn</string>
     <string name="edit_folder">Redigera mapp</string>

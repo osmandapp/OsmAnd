@@ -367,7 +367,7 @@ public class FavoriteMenu {
 			return oldPath;
 		}
 		if (!FavoriteFolderPath.isValidSegment(newSegment)) {
-			app.showShortToastMessage(R.string.favorite_folder_invalid_name);
+			app.showShortToastMessage(R.string.favorite_folder_invalid_name, FavoriteFolderPath.SUBFOLDER_PLACEHOLDER);
 			return null;
 		}
 		String parentPath = FavoriteFolderPath.parentPath(oldPath);
