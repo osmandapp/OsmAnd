@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.github.mikephil.charting.charts.ElevationChart;
+import net.osmand.plus.charts.ElevationChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
@@ -130,7 +130,7 @@ public class SimpleRouteCard extends MapBaseCard {
 				dataSets.add(elevationDataSet);
 				slopeDataSet = createGPXSlopeDataSet(app, chart, analysis, GPXDataSetType.SLOPE, DISTANCE,
 						elevationDataSet.getEntries(), true, true, false);
-				if (slopeDataSet != null) {
+				if (slopeDataSet != null && !ChartUtils.applyColorSource(app, chart, elevationDataSet, slopeDataSet)) {
 					dataSets.add(slopeDataSet);
 				}
 				data = new LineData(dataSets);
