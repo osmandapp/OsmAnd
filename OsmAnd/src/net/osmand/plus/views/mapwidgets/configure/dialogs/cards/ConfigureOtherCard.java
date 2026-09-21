@@ -55,7 +55,7 @@ public class ConfigureOtherCard extends MapBaseCard {
 				setupDisplayPositionButton(appMode),
 				setupDistanceRulerButton(appMode),
 				setupSpeedometerButton(appMode),
-				setupAndroidAutoAWidgetsButton()
+				setupAndroidAutoWidgetsButton()
 		).filter(Objects::nonNull).collect(Collectors.toList());
 		for (int i = 0; i < rows.size(); i++) {
 			AndroidUiHelper.updateVisibility(rows.get(i).findViewById(R.id.short_divider), i != rows.size() - 1);
@@ -117,7 +117,7 @@ public class ConfigureOtherCard extends MapBaseCard {
 		return button;
 	}
 
-	private View setupAndroidAutoAWidgetsButton() {
+	private View setupAndroidAutoWidgetsButton() {
 		boolean isAndroidAutoAvailable = InAppPurchaseUtils.isAndroidAutoAvailable(getMyApplication());
 		boolean modeIsCompatible = appMode.isAndroidAutoCompatible();
 		boolean shouldShow = isAndroidAutoAvailable && modeIsCompatible;

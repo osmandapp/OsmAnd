@@ -557,19 +557,19 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			setupTabIconColor(tab, profileColor);
 		}
 
-		tabLayout.post( () -> {
-            if (isTabLayoutAvailable()) {
-                tabLayout.setVisibility(View.VISIBLE);
-            } else {
-                tabLayout.setVisibility(View.GONE);
-            }
-        });
+		tabLayout.post(() -> {
+			if (isTabLayoutAvailable()) {
+				tabLayout.setVisibility(View.VISIBLE);
+			} else {
+				tabLayout.setVisibility(View.GONE);
+			}
+		});
 	}
 
 	private boolean isTabLayoutAvailable() {
 		return !isAndroidAutoMode;
 	}
-	
+
 	public void setupTabIconColor(@Nullable Tab tab, int color) {
 		if (tab != null) {
 			Drawable icon = tab.getIcon();
@@ -600,7 +600,11 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 	@Override
 	public void onWidgetSelectedToAdd(@NonNull String widgetsId, @NonNull WidgetsPanel panel, boolean recreateControls) {
-		controller.openAddNewWidgetScreen(requireMapActivity(), panel, widgetsId, selectedAppMode, this);
+		if (isAndroidAutoMode) {
+			controller.openAddNewAAWidgetScreen(requireMapActivity(), panel, widgetsId, selectedAppMode, this);
+		} else {
+			controller.openAddNewWidgetScreen(requireMapActivity(), panel, widgetsId, selectedAppMode, this);
+		}
 	}
 
 	public void createWidgets(@NonNull List<MapWidgetInfo> newWidgetInfos) {

@@ -97,15 +97,18 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	private long lastWidgetsUpdateTime;
 	private boolean widgetsUpdateScheduled;
-	private final Handler widgetsUpdatehandler = new Handler(Looper.getMainLooper());
+	private final Handler widgetsUpdateHandler = new Handler(Looper.getMainLooper());
 	private final Runnable widgetsUpdateRunnable = () -> {
 		widgetsUpdateScheduled = false;
 
 		long currentTime = SystemClock.uptimeMillis();
 		long elapsedTime = currentTime - lastWidgetsUpdateTime;
 		if (elapsedTime >= WIDGETS_UPDATE_INTERVAL_MS) {
+			SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
+			if (surfaceRenderer != null) {
+				surfaceRenderer.renderFrame();
+			}
 			lastWidgetsUpdateTime = currentTime;
-			updateWidgetsInternal();
 		}
 
 		scheduleWidgetsUpdate();
@@ -131,6 +134,11 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().addListener(this);
+	}
+
+	@Override
+	public void onStart(@NonNull LifecycleOwner owner) {
+		getApp().getMapWidgetRegistry().recreateAndroidAutoWidgets();
 	}
 
 	@Override
@@ -175,42 +183,46 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
 		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		if (surfaceRenderer != null) {
-			float density = surfaceRenderer.getDensity();
-			DrawSettings drawSettings = getDrawSettings(surfaceRenderer);
-			// SpeedometerWidget shrinks itself by 0.77 for Android Auto, which leaves it much
-			// smaller than the alarm widget next to it - unlike on the phone, where the two are
-			// about the same size. The alarm widget already has a car sized layout.
-			DrawSettings speedometerSettings = getDrawSettings(surfaceRenderer, SPEEDOMETER_CAR_SCALE);
-
-			alarmWidget.updateInfo(drawSettings, true);
-			speedometerWidget.updateInfo(speedometerSettings, drawSettings.isNightMode());
-
-			Bitmap alarmBitmap = alarmWidget.getWidgetBitmap();
-			Bitmap speedometerBitmap = speedometerWidget.getWidgetBitmap();
-
-			Rect area = new Rect(visibleArea);
-			int bitmapMargin = 10;
-			int bitmapLeft = area.right;
-			int speedometerTop = area.top + bitmapMargin;
-			int widgetPanelTopOffset = 0;
-			if (speedometerBitmap != null) {
-				bitmapLeft -= (bitmapMargin + speedometerBitmap.getWidth());
-				canvas.drawBitmap(speedometerBitmap, bitmapLeft, speedometerTop, new Paint());
-				widgetPanelTopOffset = speedometerBitmap.getHeight() + 2 * bitmapMargin;
-			}
-
-			Rect alarmArea = null;
-			if (alarmBitmap != null) {
-				bitmapLeft -= (bitmapMargin + alarmBitmap.getWidth());
-				canvas.drawBitmap(alarmBitmap, bitmapLeft, speedometerTop, new Paint());
-				alarmArea = new Rect(bitmapLeft, speedometerTop,
-						bitmapLeft + alarmBitmap.getWidth(),
-						speedometerTop + alarmBitmap.getHeight());
-			}
-			// The speedometer is always there while driving, so the panel simply starts below it.
-			// The alarm comes and goes, hiding the rows it covers keeps the panel from jumping.
-			widgetsPanel.drawWidgets(canvas, area, drawSettings, density, widgetPanelTopOffset, alarmArea);
+			drawFrame(canvas, visibleArea, surfaceRenderer);
 		}
+	}
+
+	private void drawFrame(@NonNull Canvas canvas, @NonNull Rect visibleArea, SurfaceRenderer surfaceRenderer) {
+		float density = surfaceRenderer.getDensity();
+		DrawSettings drawSettings = getDrawSettings(surfaceRenderer);
+		// SpeedometerWidget shrinks itself by 0.77 for Android Auto, which leaves it much
+		// smaller than the alarm widget next to it - unlike on the phone, where the two are
+		// about the same size. The alarm widget already has a car sized layout.
+		DrawSettings speedometerSettings = getDrawSettings(surfaceRenderer, SPEEDOMETER_CAR_SCALE);
+
+		alarmWidget.updateInfo(drawSettings, true);
+		speedometerWidget.updateInfo(speedometerSettings, drawSettings.isNightMode());
+
+		Bitmap alarmBitmap = alarmWidget.getWidgetBitmap();
+		Bitmap speedometerBitmap = speedometerWidget.getWidgetBitmap();
+
+		Rect area = new Rect(visibleArea);
+		int bitmapMargin = 10;
+		int bitmapLeft = area.right;
+		int speedometerTop = area.top + bitmapMargin;
+		int widgetPanelTopOffset = 0;
+		if (speedometerBitmap != null) {
+			bitmapLeft -= (bitmapMargin + speedometerBitmap.getWidth());
+			canvas.drawBitmap(speedometerBitmap, bitmapLeft, speedometerTop, new Paint());
+			widgetPanelTopOffset = speedometerBitmap.getHeight() + 2 * bitmapMargin;
+		}
+
+		Rect alarmArea = null;
+		if (alarmBitmap != null) {
+			bitmapLeft -= (bitmapMargin + alarmBitmap.getWidth());
+			canvas.drawBitmap(alarmBitmap, bitmapLeft, speedometerTop, new Paint());
+			alarmArea = new Rect(bitmapLeft, speedometerTop,
+					bitmapLeft + alarmBitmap.getWidth(),
+					speedometerTop + alarmBitmap.getHeight());
+		}
+		// The speedometer is always there while driving, so the panel simply starts below it.
+		// The alarm comes and goes, hiding the rows it covers keeps the panel from jumping.
+		widgetsPanel.drawWidgets(canvas, area, drawSettings, density, widgetPanelTopOffset, alarmArea);
 	}
 
 	@Override
@@ -235,17 +247,21 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	@Override
 	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
-		loadWidgets();
+		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
+		if (surfaceRenderer != null) {
+			DrawSettings drawSettings = getDrawSettings(surfaceRenderer);
+			widgetsPanel.onWidgetRegistered(drawSettings, widgetInfo);
+		}
 	}
 
 	@Override
 	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
-		loadWidgets();
+		widgetsPanel.onWidgetVisibilityChanged(widgetInfo);
 	}
 
 	@Override
 	public void onWidgetsCleared() {
-		loadWidgets();
+		widgetsPanel.clearWidgets();
 	}
 
 	/**
@@ -512,12 +528,12 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		if (!widgetsUpdateScheduled) {
             long elapsedTime = SystemClock.uptimeMillis() - lastWidgetsUpdateTime;
             long delay = Math.max(0, WIDGETS_UPDATE_INTERVAL_MS - elapsedTime);
-            widgetsUpdateScheduled = widgetsUpdatehandler.postDelayed(widgetsUpdateRunnable, delay);
+            widgetsUpdateScheduled = widgetsUpdateHandler.postDelayed(widgetsUpdateRunnable, delay);
 		}
 	}
 
 	private void stopWidgetUpdates() {
-		widgetsUpdatehandler.removeCallbacks(widgetsUpdateRunnable);
+		widgetsUpdateHandler.removeCallbacks(widgetsUpdateRunnable);
 	}
 
 	private void loadWidgets() {
@@ -525,16 +541,9 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		if (surfaceRenderer != null) {
 			DrawSettings drawSettings = getDrawSettings(surfaceRenderer);
 			widgetsPanel.reloadWidgets(drawSettings);
-			widgetsPanel.updateWidgetsInfo(drawSettings);
 		}
 	}
 
-	private void updateWidgetsInternal() {
-		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
-		if (surfaceRenderer != null) {
-			widgetsPanel.updateWidgetsInfo(getDrawSettings(surfaceRenderer));
-		}
-	}
 
 	private DrawSettings getDrawSettings(@NonNull SurfaceRenderer surfaceRenderer) {
 		return getDrawSettings(surfaceRenderer, 1f);

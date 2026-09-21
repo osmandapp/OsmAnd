@@ -61,6 +61,7 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 
 	public static final String KEY_SELECTED_PANEL = "key_selected_panel";
 	public static final String KEY_SEARCH_MODE = "key_search_mode";
+	private static final String KEY_ANDROID_AUTO_MODE = "key_android_auto_mode";
 	public static final int PAYLOAD_SEPARATOR_UPDATE = 1;
 
 	private ApplicationMode selectedAppMode;
@@ -96,7 +97,9 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 		if (savedInstanceState != null) {
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(KEY_SELECTED_PANEL));
 			searchMode = savedInstanceState.getBoolean(KEY_SEARCH_MODE);
+			isAndroidAutoMode = savedInstanceState.getBoolean(KEY_ANDROID_AUTO_MODE, false);
 		}
+
 
 		onBackPressedCallback = new OnBackPressedCallback(true) {
 			@Override
@@ -523,6 +526,7 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 		super.onSaveInstanceState(outState);
 		outState.putString(KEY_SELECTED_PANEL, selectedPanel.name());
 		outState.putBoolean(KEY_SEARCH_MODE, searchMode);
+		outState.putBoolean(KEY_ANDROID_AUTO_MODE, isAndroidAutoMode);
 	}
 
 	private static class SearchWidgetsDiffCallback extends Callback {

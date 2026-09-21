@@ -33,8 +33,6 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 
 	private WidgetSize selectedWidgetSize;
 
-	protected boolean isAndroidAutoMode;
-
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);

@@ -57,7 +57,7 @@ class PanelAppearanceSettingsManager(
 	}
 
 	private fun registerSettings() {
-		for (panel in WidgetsPanel.values()) {
+		for (panel in WidgetsPanel.entries) {
 			val panelSettings = PanelAppearanceSettings(settings, panel)
 			settingsByPanel[panel] = panelSettings
 			panelSettings.addListener(preferenceListener)

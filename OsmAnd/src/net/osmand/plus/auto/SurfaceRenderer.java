@@ -42,6 +42,8 @@ import net.osmand.plus.views.OsmandMapTileView.ElevationListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
+import java.util.function.Function;
+
 /**
  * A very simple implementation of a renderer for the app's background surface.
  */
@@ -554,7 +556,6 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			surface.unlockCanvasAndPost(canvas);
 		}
 	}
-
 
 	@Nullable
 	public Rect getVisibleArea() {

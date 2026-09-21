@@ -358,6 +358,19 @@ public enum WidgetType {
 	}
 
 	@Nullable
+	public WidgetsPanel getAndroidAutoPanel(@NonNull String widgetId, @NonNull ApplicationMode mode,
+	                                        @NonNull OsmandSettings settings) {
+		if (!this.supportsAndroidAuto) {
+			return null;
+		}
+		WidgetsPanel widgetsPanel = findAndroidAutoWidgetPanel(widgetId, settings, mode);
+		if (widgetsPanel != null) {
+			return widgetsPanel;
+		}
+		return WidgetsPanel.ANDROID_AUTO;
+	}
+
+	@Nullable
 	public static WidgetsPanel findWidgetPanel(@NonNull String widgetId, @NonNull OsmandSettings settings,
 			@Nullable ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		if (appMode == null) {
@@ -365,7 +378,7 @@ public enum WidgetType {
 		}
 		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
 		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
-		for (WidgetsPanel widgetsPanel : WidgetsPanel.values()) {
+		for (WidgetsPanel widgetsPanel : WidgetsPanel.mapPanels) {
 			if (widgetsPanel.getOrderPreference(settings, layoutMode).isSetForMode(appMode)) {
 				setPanels.add(widgetsPanel);
 			} else {
@@ -379,6 +392,35 @@ public enum WidgetType {
 		}
 		for (WidgetsPanel panel : unsetPanels) {
 			if (panel.contains(widgetId, settings, appMode, layoutMode)) {
+				return panel;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static WidgetsPanel findAndroidAutoWidgetPanel(@NonNull String widgetId, @NonNull OsmandSettings settings,
+			@Nullable ApplicationMode appMode) {
+		if (appMode == null) {
+			appMode = settings.getApplicationMode();
+		}
+		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
+		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
+		WidgetsPanel widgetsPanel = WidgetsPanel.ANDROID_AUTO;
+
+			if (widgetsPanel.getOrderPreference(settings, null).isSetForMode(appMode)) {
+				setPanels.add(widgetsPanel);
+			} else {
+				unsetPanels.add(widgetsPanel);
+
+		}
+		for (WidgetsPanel panel : setPanels) {
+			if (panel.contains(widgetId, settings, appMode, null)) {
+				return panel;
+			}
+		}
+		for (WidgetsPanel panel : unsetPanels) {
+			if (panel.contains(widgetId, settings, appMode, null)) {
 				return panel;
 			}
 		}

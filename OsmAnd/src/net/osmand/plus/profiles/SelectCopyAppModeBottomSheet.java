@@ -30,11 +30,6 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 	private ApplicationMode selectedAppMode;
 	private boolean filterAndroidAutoCompatibleModes;
 
-//	@Override
-//	public void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//	}
-
 	@Override
 	protected void initParams(Bundle savedInstanceState) {
 		super.initParams(savedInstanceState);

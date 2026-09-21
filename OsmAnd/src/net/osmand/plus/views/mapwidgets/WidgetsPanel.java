@@ -20,12 +20,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public enum WidgetsPanel {
 
@@ -44,6 +39,10 @@ public enum WidgetsPanel {
 	private static final List<String> ORIGINAL_TOP_ORDER = new ArrayList<>();
 	private static final List<String> ORIGINAL_BOTTOM_ORDER = new ArrayList<>();
 	private static final List<String> ORIGINAL_ANDROID_AUTO_ORDER = new ArrayList<>();
+
+	public static final List<WidgetsPanel> mapPanels = List.of(
+			LEFT, RIGHT, TOP, BOTTOM
+	);
 
 	static {
 		for (WidgetType widget : WidgetType.values()) {
@@ -140,22 +139,10 @@ public enum WidgetsPanel {
 		return getPagedOrder(appMode, widgetId, settings, layoutMode).second;
 	}
 
-	public Map<String, Integer> getAndroidAutoWidgetsOrders(@NonNull ApplicationMode appMode,
-	                                                        @NonNull OsmandSettings settings,
-	                                                        @NonNull Collection<MapWidgetInfo> widgets
-	                                                        ) {
+	public List<String> getAndroidAutoWidgetsOrder(@NonNull ApplicationMode appMode,
+	                                               @NonNull OsmandSettings settings) {
 		ListStringPreference preference = getOrderPreference(settings, null);
-		List<String> widgetIds = preference.getStringsListForProfile(appMode);
-		Map<String, Integer> savedOrders = new HashMap<>();
-		if (!Algorithms.isEmpty(widgetIds)) {
-			for (int i = 0; i < widgetIds.size(); i++) {
-				savedOrders.put(widgetIds.get(i), i);
-			}
-		}
-		return widgets.stream().collect(Collectors.toMap(
-				(w) -> w.key,
-				(w) -> Optional.ofNullable(savedOrders.get(w.key)).orElse(DEFAULT_ORDER))
-		);
+		return preference.getStringsListForProfile(appMode);
 	}
 
 	@NonNull

@@ -67,8 +67,10 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	protected float measuredAAHeight = 0f;
 	protected float measuredAAWidth = 0f;
 
+	protected boolean isAndroidAuto;
+
 	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
-			@Nullable String customId, @Nullable WidgetsPanel panel) {
+	                 @Nullable String customId, @Nullable WidgetsPanel panel) {
 		this.app = mapActivity.getApp();
 		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
@@ -179,12 +181,8 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		return measuredAAWidth;
 	}
 
-//	public float measureHeightForAndroidAuto(int maxWidthPx) {
-//		return 0f;
-//	}
-
 	public void drawForAndroidAuto(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings,
-								   float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
+	                               float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
 	}
 
 	public final void markAndroidAutoLayoutNeeded() {
@@ -204,7 +202,8 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 	// endregion
 
-	@NonNull
+	// null in case of android auto widge
+	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
 	}
@@ -225,7 +224,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 
 	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode,
-			@NonNull ApplicationMode appMode, @Nullable String customId) {
+	                                 @NonNull ApplicationMode appMode, @Nullable String customId) {
 	}
 
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, @NonNull List<MapWidget> followingWidgets) {
@@ -266,7 +265,9 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 
 	protected abstract void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings);
-	protected void updateInfoForAndroidAuto(@Nullable DrawSettings drawSettings) {}
+
+	protected void updateInfoForAndroidAuto(@Nullable DrawSettings drawSettings) {
+	}
 
 	@Override
 	public final void applyPanelAppearance(@NonNull ResolvedPanelAppearance appearance) {
@@ -275,8 +276,10 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		} else {
 			panelAppearance = appearance;
 			nightMode = appearance.getNightMode();
-			getView();
-			onPanelAppearanceChanged(appearance);
+			if (mapActivity != null) {
+				getView();
+				onPanelAppearanceChanged(appearance);
+			}
 		}
 	}
 
@@ -314,7 +317,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 
 	public static void updateTextColor(@Nullable TextView text, @Nullable TextView textShadow,
-			@ColorInt int textColor, @ColorInt int textShadowColor, boolean boldText, int shadowRadius) {
+	                                   @ColorInt int textColor, @ColorInt int textShadowColor, boolean boldText, int shadowRadius) {
 		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
 
 		updateTextShadow(textShadow, textShadowColor, shadowRadius, typefaceStyle);
@@ -326,7 +329,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 
 	public static void updateTextColor(@Nullable OutlinedTextContainer text, @Nullable TextView textShadow,
-			@ColorInt int textColor, @ColorInt int textShadowColor, boolean boldText, int shadowRadius) {
+	                                   @ColorInt int textColor, @ColorInt int textShadowColor, boolean boldText, int shadowRadius) {
 		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
 
 		updateTextShadow(textShadow, textShadowColor, shadowRadius, typefaceStyle);
@@ -338,7 +341,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		}
 	}
 
-	private static void updateTextShadow(@Nullable TextView textShadow, @ColorInt int textShadowColor, int shadowRadius, int typefaceStyle){
+	private static void updateTextShadow(@Nullable TextView textShadow, @ColorInt int textShadowColor, int shadowRadius, int typefaceStyle) {
 		if (textShadow != null) {
 			if (shadowRadius > 0) {
 				AndroidUiHelper.updateVisibility(textShadow, true);
@@ -372,7 +375,11 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		return app;
 	}
 
-	protected boolean isAndroidAuto() {
-		return panel.isAndroidAutoPanel();
+	public boolean isAndroidAuto() {
+		return isAndroidAuto;
+	}
+
+	public void setAndroidAuto(boolean androidAuto) {
+		isAndroidAuto = androidAuto;
 	}
 }

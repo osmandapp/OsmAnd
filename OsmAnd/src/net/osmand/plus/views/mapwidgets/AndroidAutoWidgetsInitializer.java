@@ -21,7 +21,7 @@ public class AndroidAutoWidgetsInitializer {
 	private final OsmandSettings settings;
 	private final ApplicationMode appMode;
 
-    private final WidgetInfoCreator.WidgetFactory factory;
+	private final WidgetInfoCreator.WidgetFactory factory;
 	private final WidgetInfoCreator creator;
 
 	private final List<MapWidgetInfo> mapWidgetsCache = new ArrayList<>();
@@ -50,7 +50,7 @@ public class AndroidAutoWidgetsInitializer {
 			for (String key : widgetKeys) {
 				WidgetType widgetType = WidgetType.getById(key);
 				if (widgetType != null) {
-					MapWidgetInfo widgetInfo = creator.createWidgetInfo(factory, key, widgetType);
+					MapWidgetInfo widgetInfo = creator.createAndroidAutoWidgetInfo(factory, key, widgetType);
 					if (widgetInfo != null) {
 						mapWidgetsCache.add(widgetInfo);
 					}
@@ -60,9 +60,8 @@ public class AndroidAutoWidgetsInitializer {
 	}
 
 
-	@SuppressWarnings("unused")
-    private void addWidgetInfo(@NonNull WidgetType widgetType) {
-		MapWidgetInfo widgetInfo = creator.createWidgetInfo(factory, widgetType);
+	private void addWidgetInfo(@NonNull WidgetType widgetType) {
+		MapWidgetInfo widgetInfo = creator.createAndroidAutoWidgetInfo(factory, widgetType);
 		if (widgetInfo != null) {
 			mapWidgetsCache.add(widgetInfo);
 		}
@@ -85,7 +84,7 @@ public class AndroidAutoWidgetsInitializer {
 		@Override
 		public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel) {
 			// add more types here as android auto support is added to widgets
-			switch (widgetType){
+			switch (widgetType) {
 				case CURRENT_TIME:
 					return new CurrentTimeWidget(app, customId, panel);
 				default:

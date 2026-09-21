@@ -50,6 +50,12 @@ public class ConfigureWidgetsController implements IDialogController {
 		openAddNewWidgetScreen(mapActivity, selectedPanel, widgetId, selectedAppMode, false, fragment);
 	}
 
+	public void openAddNewAAWidgetScreen(@NonNull MapActivity mapActivity, @NonNull WidgetsPanel selectedPanel,
+	                                   @NonNull String widgetId, @NonNull ApplicationMode selectedAppMode,
+	                                   @NonNull ConfigureWidgetsFragment fragment) {
+		openAddNewWidgetScreen(mapActivity, selectedPanel, widgetId, selectedAppMode, true, fragment);
+	}
+
 	public void openAddNewWidgetScreen(@NonNull MapActivity mapActivity, @NonNull WidgetsPanel selectedPanel,
 	                                   @NonNull String widgetId, @NonNull ApplicationMode selectedAppMode,
 									   boolean isAndroidAutoMode,

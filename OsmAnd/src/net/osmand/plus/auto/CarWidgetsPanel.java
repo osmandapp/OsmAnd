@@ -29,9 +29,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Prototype of a generic widgets panel drawn over the Android Auto map surface.
@@ -70,12 +68,10 @@ public class CarWidgetsPanel {
 	private final OsmandApplication app;
 	private final WidgetsPanel panel;
 
-	private final List<MapWidget> widgets = new ArrayList<>();
+	private final List<MapWidgetInfo> widgetInfos = new ArrayList<>();
+	private final Set<String> visibleWidgetIds = new HashSet<>();
 	private final RectF lastPanelBounds = new RectF();
 
-	private ApplicationMode cachedAppMode;
-	private Boolean cachedNightMode;
-	private List<String> cachedWidgetIds = new ArrayList<>();
 	private int firstVisibleWidget;
 	private int lastVisibleCount;
 
@@ -102,47 +98,57 @@ public class CarWidgetsPanel {
 
 		dividerPaint.setDither(true);
 		dividerPaint.setAntiAlias(true);
-		backgroundPaint.setStyle(Paint.Style.FILL);
-	}
 
-	public void updateWidgetsInfo(DrawSettings drawSettings) {
-		for (MapWidget w : widgets) {
-			w.updateInfo(drawSettings);
-		}
+		backgroundPaint.setStyle(Paint.Style.FILL);
+		backgroundPaint.setAntiAlias(true);
 	}
 
 	public void reloadWidgets(DrawSettings drawSettings) {
 		clearWidgets();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		List<MapWidgetInfo> widgetInfos = getWidgetInfos(appMode);
-		List<String> widgetIds = widgetInfos.stream().map(v -> v.key).collect(Collectors.toList());
+		List<MapWidgetInfo> newWidgetInfos = getWidgetInfos(appMode);
+
+		if (Algorithms.isEmpty(newWidgetInfos)) {
+			return;
+		}
+
 		boolean nightMode = drawSettings.isNightMode();
-		cachedAppMode = appMode;
-		cachedNightMode = nightMode;
-		cachedWidgetIds = widgetIds;
-		recreateWidgets(nightMode, widgetInfos);
+		float density = app.getResources().getDisplayMetrics().density;
+		ResolvedPanelAppearance appearance = app.getPanelAppearanceSettingsManager()
+				.resolveCommitted(panel, null, nightMode, false, density, true);
+		applyPanelAppearance(appearance);
+
+		ApplicationMode applicationMode = app.getSettings().getApplicationMode();
+		List<String> visibilities = MapWidgetInfo.getAndroidAutoWidgetsVisibility(app, applicationMode);
+		for (MapWidgetInfo info : newWidgetInfos) {
+			MapWidget widget = info.widget;
+			widget.applyPanelAppearanceForAndroidAuto(appearance);
+			widgetInfos.add(info);
+			if (info.isEnabledForAppMode(applicationMode, visibilities)) {
+				visibleWidgetIds.add(info.key);
+			}
+		}
 	}
 
 	/**
-	 * @param topOffset constant offset from the top of the visible area, it only depends on the
-	 *                  speedometer, which does not appear and disappear while driving.
+	 * @param topOffset  constant offset from the top of the visible area, it only depends on the
+	 *                   speedometer, which does not appear and disappear while driving.
 	 * @param hiddenArea area covered by a transient widget (the alarm). Rows that fall into it are
 	 *                   hidden and their slots are kept, so that the panel never shifts.
-	 * @return height occupied by the panel in surface pixels.
 	 */
-	public float drawWidgets(@NonNull Canvas canvas, @NonNull Rect visibleArea,
-			@NonNull DrawSettings drawSettings, float carDensity, float topOffset,
-			@Nullable Rect hiddenArea) {
+	public void drawWidgets(@NonNull Canvas canvas, @NonNull Rect visibleArea,
+	                        @NonNull DrawSettings drawSettings, float carDensity, float topOffset,
+	                        @Nullable Rect hiddenArea) {
 		lastPanelBounds.setEmpty();
 		lastVisibleCount = 0;
 		if (!app.getSettings().AA_SHOW_WIDGETS_PANEL.get()
 				|| visibleArea.width() < MIN_SURFACE_WIDTH_DP * carDensity) {
-			return 0;
+			return;
 		}
-		if (widgets.isEmpty()) {
-			return 0;
+		if (widgetInfos.isEmpty()) {
+			return;
 		}
-		if (firstVisibleWidget >= widgets.size()) {
+		if (firstVisibleWidget >= widgetInfos.size()) {
 			firstVisibleWidget = 0;
 		}
 		// Widget views are inflated with the application resources, so they are measured in phone
@@ -179,12 +185,14 @@ public class CarWidgetsPanel {
 		List<MapWidget> drawnWidgets = new ArrayList<>();
 
 		float y = contentTop;
-		for (int i = firstVisibleWidget; i < widgets.size(); i++) {
-			MapWidget widget = widgets.get(i);
-			if (!widget.shouldDrawForAndroidAuto()) {
+		for (int i = firstVisibleWidget; i < widgetInfos.size(); i++) {
+			MapWidgetInfo widgetInfo = widgetInfos.get(i);
+			if (!shouldDrawWidget(widgetInfo)) {
 				lastVisibleCount++;
 				continue;
 			}
+			MapWidget widget = widgetInfo.widget;
+			widget.updateInfo(drawSettings);
 			widget.layoutAAIfNeeded(app, widgetWidth, isRtl);
 			float measuredHeight = widget.getMeasuredAAHeight();
 			if (measuredHeight <= 0) {
@@ -207,11 +215,11 @@ public class CarWidgetsPanel {
 				bottoms.add(y + height);
 			}
 			// The slot is kept even for a hidden widget, the panel must not shift.
-			y += height;// + dividerWidth;
+			y += height;
 			lastVisibleCount++;
 		}
 		if (drawnWidgets.isEmpty()) {
-			return 0;
+			return;
 		}
 
 		//  Rows hidden by the reserved area split the panel into several blocks, each of them gets its own outline.
@@ -230,7 +238,6 @@ public class CarWidgetsPanel {
 				blockStart = i;
 			}
 		}
-		return lastPanelBounds.height();
 	}
 
 	private void drawBlock(@NonNull Canvas canvas,
@@ -320,25 +327,8 @@ public class CarWidgetsPanel {
 			return false;
 		}
 		int next = firstVisibleWidget + Math.max(lastVisibleCount, 1);
-		firstVisibleWidget = next < widgets.size() ? next : 0;
+		firstVisibleWidget = next < widgetInfos.size() ? next : 0;
 		return true;
-	}
-
-	@NonNull
-	private List<MapWidget> getWidgets(boolean nightMode) {
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		List<MapWidgetInfo> widgetInfos = getWidgetInfos(appMode);
-		List<String> widgetIds = widgetInfos.stream().map(v -> v.key).collect(Collectors.toList());
-
-		if (appMode != cachedAppMode
-				|| !Boolean.valueOf(nightMode).equals(cachedNightMode)
-				|| !Algorithms.objectEquals(widgetIds, cachedWidgetIds)) {
-			cachedAppMode = appMode;
-			cachedNightMode = nightMode;
-			cachedWidgetIds = widgetIds;
-			recreateWidgets(nightMode, widgetInfos);
-		}
-		return widgets;
 	}
 
 	private List<MapWidgetInfo> getWidgetInfos(@NonNull ApplicationMode appMode) {
@@ -348,24 +338,42 @@ public class CarWidgetsPanel {
 		return new ArrayList<>(widgetInfos);
 	}
 
-	private void recreateWidgets(boolean nightMode, @Nullable List<MapWidgetInfo> widgetInfos) {
-		widgets.clear();
-		firstVisibleWidget = 0;
-
-		if (Algorithms.isEmpty(widgetInfos)) {
-			return;
+	public void onWidgetVisibilityChanged(MapWidgetInfo widgetInfo) {
+		boolean isEnabled = widgetInfo.isEnabledForAndroidAutoMode(app.getSettings().getApplicationMode());
+		if (isEnabled) {
+			visibleWidgetIds.add(widgetInfo.key);
+		} else {
+			visibleWidgetIds.remove(widgetInfo.key);
 		}
+	}
 
+	public void onWidgetRegistered(DrawSettings drawSettings, MapWidgetInfo widgetInfo) {
+		List<String> widgetsOrder = panel.getAndroidAutoWidgetsOrder(app.getSettings().getApplicationMode(), app.getSettings());
+		int index = widgetsOrder.indexOf(widgetInfo.key);
+		if (index == -1) {
+			if (widgetInfos.isEmpty()) {
+				index = 0;
+			} else {
+				index = widgetInfos.size() - 1;
+			}
+		}
+		widgetInfos.add(index, widgetInfo);
+
+		boolean nightMode = drawSettings.isNightMode();
 		float density = app.getResources().getDisplayMetrics().density;
 		ResolvedPanelAppearance appearance = app.getPanelAppearanceSettingsManager()
 				.resolveCommitted(panel, null, nightMode, false, density, true);
 		applyPanelAppearance(appearance);
+		MapWidget widget = widgetInfo.widget;
+		widget.applyPanelAppearance(appearance);
 
-		for (MapWidgetInfo info : widgetInfos) {
-			MapWidget widget = info.widget;
-			widget.applyPanelAppearance(appearance);
-			widgets.add(widget);
-		}
+	}
+	private void recreateWidgets(boolean nightMode, @Nullable List<MapWidgetInfo> newWidgetInfos) {
+
+	}
+
+	private boolean shouldDrawWidget(MapWidgetInfo widgetInfo) {
+		return widgetInfo.widget.shouldDrawForAndroidAuto() && visibleWidgetIds.contains(widgetInfo.key);
 	}
 
 	private void applyPanelAppearance(@NonNull ResolvedPanelAppearance appearance) {
@@ -377,11 +385,10 @@ public class CarWidgetsPanel {
 	}
 
 	public void clearWidgets() {
-		widgets.clear();
+		widgetInfos.clear();
+		visibleWidgetIds.clear();
 		lastPanelBounds.setEmpty();
 		lastVisibleCount = 0;
 		firstVisibleWidget = 0;
-		cachedAppMode = null;
-		cachedNightMode = null;
 	}
 }

@@ -30,7 +30,6 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -72,7 +71,7 @@ public class WidgetsSettingsHelper {
 
 	public void resetConfigureScreenSettings() {
 		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode,
-				layoutMode, MATCHING_PANELS_MODE, Arrays.asList(WidgetsPanel.values()));
+				layoutMode, MATCHING_PANELS_MODE, WidgetsPanel.mapPanels);
 		for (MapWidgetInfo widgetInfo : allWidgetInfos) {
 			widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, null, layoutMode, false);
 		}
@@ -87,15 +86,18 @@ public class WidgetsSettingsHelper {
 		settings.getMapInfoControls(layoutMode).resetModeToDefault(appMode);
 		settings.getCustomWidgetsKeys(layoutMode).resetModeToDefault(appMode);
 
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
+		for (WidgetsPanel panel : WidgetsPanel.mapPanels) {
 			panel.getOrderPreference(settings, layoutMode).resetModeToDefault(appMode);
 		}
+		WidgetsPanel.ANDROID_AUTO.getOrderPreference(settings, null).resetModeToDefault(appMode);
 
 		settings.getPanelsLayoutMode(mapActivity, layoutMode).resetModeToDefault(appMode);
 		settings.getTransparentMapThemePreference(layoutMode).resetModeToDefault(appMode);
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
+		for (WidgetsPanel panel : WidgetsPanel.mapPanels) {
 			appearanceSettingsManager.get(panel).resetToDefault(appMode, layoutMode);
 		}
+		appearanceSettingsManager.get(WidgetsPanel.ANDROID_AUTO).resetToDefault(appMode, null);
+
 		mapButtonsHelper.getCompassButtonState().getVisibilityPref().resetModeToDefault(appMode);
 		settings.SHOW_DISTANCE_RULER.resetModeToDefault(appMode);
 		mapButtonsHelper.resetButtonStatesForMode(appMode, mapButtonsHelper.getAllButtonsStates());
@@ -105,14 +107,18 @@ public class WidgetsSettingsHelper {
 	}
 
 	public void copyConfigureScreenSettings(@NonNull ApplicationMode fromAppMode) {
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
+		for (WidgetsPanel panel : WidgetsPanel.mapPanels) {
 			copyWidgetsForPanel(fromAppMode, layoutMode, panel);
 		}
+		copyWidgetsForPanel(fromAppMode, null, WidgetsPanel.ANDROID_AUTO);
+
 		copyPrefFromAppMode(settings.getPanelsLayoutMode(mapActivity, layoutMode), fromAppMode);
 		copyPrefFromAppMode(settings.getTransparentMapThemePreference(layoutMode), fromAppMode);
-		for (WidgetsPanel panel : WidgetsPanel.values()) {
+		for (WidgetsPanel panel : WidgetsPanel.mapPanels) {
 			appearanceSettingsManager.get(panel).copyFromProfile(fromAppMode, appMode, layoutMode);
 		}
+		appearanceSettingsManager.get(WidgetsPanel.ANDROID_AUTO).copyFromProfile(fromAppMode, appMode, null);
+
 		copyPrefFromAppMode(mapButtonsHelper.getCompassButtonState().getVisibilityPref(), fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_DISTANCE_RULER, fromAppMode);
 		copyPrefFromAppMode(settings.POSITION_PLACEMENT_ON_MAP, fromAppMode);

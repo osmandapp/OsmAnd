@@ -1490,14 +1490,21 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Float> MAP_DENSITY = new FloatPreference(this, "map_density_n", 1f).makeProfile().cache();
+
 	public final CommonPreference<Float> AA_MAP_DENSITY = new FloatPreference(this, "aa_map_density_n", 1f).makeProfile().cache();
 	public final CommonPreference<AndroidAutoMapMode> AA_MAP_NIGHT_MODE =
 			new EnumStringPreference<>(this, "aa_map_mode", AndroidAutoMapMode.AUTOMATIC, AndroidAutoMapMode.values()).makeProfile().cache();
 	public final OsmandPreference<Boolean> AA_SHOW_WIDGETS_PANEL = new BooleanPreference(this, "aa_show_widgets_panel", true).makeProfile().cache();
 	/** Widget ids shown on the Android Auto widgets panel, separated by {@code ;}. */
-	public ListStringPreference AA_WIDGETS_ORDER = (ListStringPreference) new ListStringPreference(this,
+	public final ListStringPreference AA_WIDGETS_ORDER = (ListStringPreference) new ListStringPreference(this,
 															"aa_widgets_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.ANDROID_AUTO.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+	private final ListStringPreference AA_CUSTOM_WIDGET_KEYS = (ListStringPreference) new ListStringPreference(this, "aa_custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
 
+	public ListStringPreference getAndroidAutoCustomWidgetsKeys() {
+		return AA_CUSTOM_WIDGET_KEYS;
+	}
+
+	public final CommonPreference<String> AA_WIDGETS_VISIBILITY = new StringPreference(this, "aa_widgets_visibility", "").makeProfile();
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference(this, "show_poi_label", false).makeProfile();
 
 	public final OsmandPreference<Boolean> ONLINE_PHOTOS_ROW_COLLAPSED = new BooleanPreference(this, "online_photos_menu_collapsed", true).makeGlobal().makeShared();
@@ -2134,12 +2141,6 @@ public class OsmandSettings {
 
 	public ListStringPreference getCustomWidgetsKeys(@Nullable ScreenLayoutMode layoutMode) {
 		return getLayoutPreference(CUSTOM_WIDGETS_KEYS, layoutMode);
-	}
-
-	private final ListStringPreference AA_CUSTOM_WIDGET_KEYS = (ListStringPreference) new ListStringPreference(this, "aa_custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
-
-	public ListStringPreference getAndroidAutoCustomWidgetsKeys() {
-		return AA_CUSTOM_WIDGET_KEYS;
 	}
 
 	public final OsmandPreference<Boolean> USE_SEPARATE_LAYOUTS = new BooleanPreference(this, "use_separate_layouts", false).makeProfile();

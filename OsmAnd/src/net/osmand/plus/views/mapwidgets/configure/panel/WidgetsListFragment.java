@@ -266,13 +266,18 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		for (MapWidgetInfo widget : widgetsForPanel) {
 			boolean enabledFromApply = enabledWidgetsIds.contains(widget.key);
 			if (widget.isEnabledForAppMode(appMode, widgetsVisibility) != enabledFromApply) {
-				widgetRegistry.enableDisableWidgetForMode(appMode, widget, enabledFromApply, layoutMode, false);
-			}
+                if (isAndroidAutoMode) {
+                    widgetRegistry.enableDisableAndroidAutoWidgetForMode(appMode, widget, enabledFromApply);
+                } else {
+                    widgetRegistry.enableDisableWidgetForMode(appMode, widget, enabledFromApply, layoutMode, false);
+                }
+            }
 		}
 	}
 
 	private void applyWidgetsOrder(@NonNull List<List<String>> pagedOrder) {
 		if (isAndroidAutoMode) {
+			selectedPanel.setWidgetsOrder(getAppMode(), pagedOrder, settings, null);
 			widgetRegistry.reorderAndroidAutoWidgets();
 		} else {
 			ScreenLayoutMode layoutMode = getScreenLayoutMode();

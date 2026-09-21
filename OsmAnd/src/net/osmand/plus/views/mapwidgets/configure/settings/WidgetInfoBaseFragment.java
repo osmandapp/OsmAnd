@@ -198,7 +198,11 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		if (widgetState != null) {
 			widgetState.copyPrefs(appMode, duplicateId);
 		}
-		duplicateWidgetInfo.enableDisableForMode(appMode, true, layoutMode);
+		if (isAndroidAutoMode) {
+			duplicateWidgetInfo.enableDisableAndroidAutoForMode(appMode, true);
+		} else {
+			duplicateWidgetInfo.enableDisableForMode(appMode, true, layoutMode);
+		}
 		widgetInfo.widget.copySettings(appMode, duplicateId);
 
 		Map<Integer, List<String>> pagedOrder = new LinkedHashMap<>();

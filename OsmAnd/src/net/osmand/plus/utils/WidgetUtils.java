@@ -75,7 +75,6 @@ public class WidgetUtils {
 			addAndroidAutoWidgetToEnd(app, widgetInfo, panel, appMode);
 		}
 		widgetRegistry.enableDisableAndroidAutoWidgetForMode(appMode, widgetInfo, true);
-		// todo: update widget infos?
 	}
 
 
@@ -138,7 +137,7 @@ public class WidgetUtils {
 	                                               Map<Integer, List<String>> pagedOrder,
 	                                               OsmandSettings settings,
 												   boolean isAndroidAuto) {
-		widgetRegistry.getWidgetsForPanel(targetWidget.getWidgetPanel()).remove(targetWidget);
+		widgetRegistry.getWidgetsForPanel(targetWidget.getWidgetPanel(), isAndroidAuto).remove(targetWidget);
 		targetWidget.setWidgetPanel(widgetsPanel);
 
 		for (MapWidgetInfo widget : enabledWidgets) {

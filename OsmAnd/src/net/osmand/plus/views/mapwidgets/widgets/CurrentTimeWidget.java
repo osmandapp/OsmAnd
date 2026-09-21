@@ -19,8 +19,6 @@ public class CurrentTimeWidget extends SimpleWidget {
 	private static final long UPDATE_INTERVAL_MILLIS = 5000;
 
 	private long cachedTime;
-	private String cachedText;
-	private String cachedSmallText;
 
 	public CurrentTimeWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, CURRENT_TIME, customId, widgetsPanel);
