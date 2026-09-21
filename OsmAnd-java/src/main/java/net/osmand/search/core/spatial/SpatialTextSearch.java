@@ -196,7 +196,9 @@ public class SpatialTextSearch {
 		public int PIPELINE_MAX_STEPS = 8; // 0 - fully covered 1 object, 1 - 2 objects, 2 - 3 objects ...
 		// {100, 500} - STOP EVALUATION - if at least 100 fully covered or 500 2 objects
 		public int MAX_PIPELINE_ANY_RES = 10000;
-		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] { 50, 3, 1 };
+		// a chain of 3 objects ("street x district x state") is only reached when 2-object results do not end the
+		// search: 3 of them used to, and the street the query names was never built
+		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] { 50, 50, 1 };
 //		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] {1}; // just 1 result to stop
 		public int PIPELINE_FREQUENT_OBJECTS_THRESHOLD = 5000;
 		public int PIPELINE_MAX_VIRTUAL_MASKS = 7;
