@@ -24,30 +24,36 @@ public class TransportFerryHelper {
 	// non-ferry route goes over a ferry before these stops:
 	// "stop index:ferry interval:ferry duration:ferry length" (seconds and meters, 0 - unknown)
 	public static final String CROSSINGS_TAG = "osmand_ferry_crossings";
-	// the same generated stop in the stops tree, which the map reads without its routes: value "yes"
-	public static final String SYNTHETIC_STOP_TAG = "osmand_ferry_synthetic";
+	// the same generated stop in the stops tree, which the map reads without its routes
+	private static final String SYNTHETIC_STOP_TAG = "osmand_ferry_synthetic";
 
 	public static void addStopTag(Map<String, String> tags, String tag, int stop, String value) {
 		tags.merge(tag, value == null ? String.valueOf(stop) : stop + ":" + value, (a, b) -> a + "," + b);
+	}
+
+	public static void markSyntheticStop(TransportStop stop) {
+		stop.setName(SYNTHETIC_STOP_TAG, "yes");
 	}
 
 	public static boolean isFerry(TransportRoute route) {
 		return FerryRoutingHelper.FERRY.equals(route.getType());
 	}
 
+	// the route lists the indexes of its generated stops
 	public static boolean isSyntheticStop(TransportRoute route, int stop) {
 		return getStopValue(route, FERRY_STOPS_TAG, stop) != null;
+	}
+
+	// the same stop in the stops tree carries the flag itself: a stop of a route has no name tags
+	public static boolean isSyntheticStop(TransportStop stop) {
+		return stop.getNamesMap(false).containsKey(SYNTHETIC_STOP_TAG);
 	}
 
 	public static boolean isJunctionStop(TransportRoute route, int stop) {
 		return JUNCTION_VALUE.equals(getStopValue(route, FERRY_STOPS_TAG, stop));
 	}
 
-	// stop of the stops tree: it carries the flag itself, a stop of a route has no name tags
-	public static boolean isSyntheticStop(TransportStop stop) {
-		return stop.getNamesMap(false).containsKey(SYNTHETIC_STOP_TAG);
-	}
-
+	// stops of the route the map draws
 	public static List<TransportStop> getVisibleStops(TransportRoute route) {
 		List<TransportStop> stops = new ArrayList<>();
 		for (int i = 0; i < route.getForwardStops().size(); i++) {
