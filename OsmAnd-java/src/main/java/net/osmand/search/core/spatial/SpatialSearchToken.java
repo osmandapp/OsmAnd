@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import com.google.protobuf.ByteString;
 
@@ -151,6 +152,19 @@ public class SpatialSearchToken {
 	}
 	
 	
+	/**
+	 * The key the keys read for this word are cached under. The prefix matcher accepts a key of a poi category only
+	 * when the token found categories of its own, and which categories a token gets depends on the other words of the
+	 * query (they share {@link SpatialTextSearchSettings#LIMIT_POI_CATEGORY_BY_FREQ}). Cached under the bare word, the
+	 * keys of one query would be reused by the next one in the same process.
+	 */
+	String atomsCacheKey() {
+		if (poiCategoryKeysToAutocomplete.isEmpty()) {
+			return word;
+		}
+		return word + '\u0000' + String.join(",", new TreeSet<>(poiCategoryKeysToAutocomplete));
+	}
+
 	public boolean isOnlyFullMatch() {
 		return incomplete && word.length() <= MIN_CHAR_INCOMPLETE + 1;
 	}
