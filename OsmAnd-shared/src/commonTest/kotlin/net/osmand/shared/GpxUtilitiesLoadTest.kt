@@ -288,6 +288,26 @@ class GpxUtilitiesLoadTest {
 		assertEquals(saved, writeGpxToString(gpxFile))
 	}
 
+	@Test
+	fun testSpeedFieldWinsOverTheStringKeptInTheMap() {
+		// a non-positive speed stays in the map as a string; a value set on the field afterwards
+		// is still the one that gets written, as it was when the fields were pushed into the map
+		val gpxFile = loadGpx(
+			"<gpx version=\"1.1\" creator=\"test\"><trk><trkseg>"
+					+ "<trkpt lat=\"10.0\" lon=\"20.0\"><extensions><speed>0</speed></extensions></trkpt>"
+					+ "</trkseg></trk></gpx>",
+			addGeneralTrack = false
+		)
+		assertNull(gpxFile.error)
+		val point = gpxFile.tracks[0].segments[0].points[0]
+		assertEquals("0", point.getExtensionsToRead()[GpxUtilities.POINT_SPEED])
+		point.speed = 5.5f
+
+		val saved = writeGpxToString(gpxFile)
+		assertTrue(saved.contains("<osmand:speed>5.5</osmand:speed>"), saved)
+		assertFalse(saved.contains("<osmand:speed>0</osmand:speed>"), saved)
+	}
+
 	private fun buildTimedTrackGpx(pointsCount: Int, startTime: Long): String {
 		return buildString {
 			append("<gpx version=\"1.1\" creator=\"test\"><trk><trkseg>")

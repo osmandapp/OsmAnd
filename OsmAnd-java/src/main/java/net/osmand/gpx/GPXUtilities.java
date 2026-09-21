@@ -1485,15 +1485,15 @@ public class GPXUtilities {
 			writeNotNullText(serializer, "hdop", DECIMAL_FORMAT.format(p.hdop));
 		}
 		// speed and heading are serialized from the fields, and the tags that are dropped below are
-		// dropped from this copy - writing a file must not change the point it writes
-		Map<String, String> extensions = new LinkedHashMap<>();
+		// dropped from this copy - writing a file must not change the point it writes. The fields
+		// still win over a string that stayed in the map, as they did when they were pushed into it
+		Map<String, String> extensions = new LinkedHashMap<>(p.getExtensionsToRead());
 		if (p.speed > 0) {
 			extensions.put(POINT_SPEED, DECIMAL_FORMAT.format(p.speed));
 		}
 		if (!Float.isNaN(p.heading)) {
 			extensions.put(POINT_HEADING, String.valueOf(Math.round(p.heading)));
 		}
-		extensions.putAll(p.getExtensionsToRead());
 		if (!"rtept".equals(serializer.getName())) {
 			// Leave "profile" and "trkpt" tags for rtept only
 			extensions.remove(PROFILE_TYPE_EXTENSION);

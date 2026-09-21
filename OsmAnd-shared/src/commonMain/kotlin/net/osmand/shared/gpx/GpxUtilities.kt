@@ -797,15 +797,16 @@ object GpxUtilities {
 			writeNotNullText(serializer, "hdop", formatDecimal(p.hdop.toDouble()))
 		}
 		// speed and heading live in the fields; they are serialized from there instead of being
-		// pushed into the point's own extensions map, which cost a LinkedHashMap per point per save
+		// pushed into the point's own extensions map, which cost a LinkedHashMap per point per save.
+		// The fields still win over a string that stayed in the map, as they did when pushed in
 		val extensions = LinkedHashMap<String, String>()
+		extensions.putAll(p.getExtensionsToRead())
 		if (p.speed > 0) {
 			extensions[POINT_SPEED] = formatDecimal(p.speed.toDouble())
 		}
 		if (!p.heading.isNaN()) {
 			extensions[POINT_HEADING] = round(p.heading).toString()
 		}
-		extensions.putAll(p.getExtensionsToRead())
 		if (serializer.getName() != "rtept") {
 			extensions.remove(PROFILE_TYPE_EXTENSION)
 			extensions.remove(TRKPT_INDEX_EXTENSION)

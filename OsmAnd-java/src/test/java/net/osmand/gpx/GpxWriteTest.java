@@ -68,6 +68,22 @@ public class GpxWriteTest {
 		assertEquals(written, writeGpx(gpxFile));
 	}
 
+	@Test
+	public void testSpeedFieldWinsOverTheStringKeptInTheMap() {
+		// a non-positive speed stays in the map as a string; a value set on the field afterwards
+		// is still the one that gets written, as it was when the fields were pushed into the map
+		GPXFile gpxFile = loadGpx("<gpx version=\"1.1\" creator=\"test\"><trk><trkseg>"
+				+ "<trkpt lat=\"10.0\" lon=\"20.0\"><extensions><speed>0</speed></extensions></trkpt>"
+				+ "</trkseg></trk></gpx>");
+		WptPt point = gpxFile.tracks.get(0).segments.get(0).points.get(0);
+		assertEquals("0", point.getExtensionsToRead().get(GPXUtilities.POINT_SPEED));
+		point.speed = 5.5f;
+
+		String written = writeGpx(gpxFile);
+		assertTrue(written.contains("<osmand:speed>5.5</osmand:speed>"));
+		assertFalse(written.contains("<osmand:speed>0</osmand:speed>"));
+	}
+
 	private GPXFile loadGpx(String xml) {
 		GPXFile gpxFile = GPXUtilities.loadGPXFile(
 				new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
