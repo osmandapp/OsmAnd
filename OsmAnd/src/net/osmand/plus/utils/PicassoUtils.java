@@ -114,6 +114,13 @@ public class PicassoUtils {
 		return INSTANCE;
 	}
 
+	// drops the decoded images only; the disk cache and the loaded-URL map stay
+	public synchronized static void trimMemory() {
+		if (INSTANCE != null) {
+			INSTANCE.memoryCache.clear();
+		}
+	}
+
 	public void clearAllPicassoCache() {
 		if (memoryCache != null) {
 			memoryCache.clear();

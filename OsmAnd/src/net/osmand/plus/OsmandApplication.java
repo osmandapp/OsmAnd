@@ -115,6 +115,7 @@ import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.PointImageUtils;
@@ -575,6 +576,16 @@ public class OsmandApplication extends MultiDexApplication {
 	public void onTrimMemory(int level) {
 		super.onTrimMemory(level);
 		MemoryLog.onTrimMemory(level);
+		if (level >= TRIM_MEMORY_UI_HIDDEN) {
+			// the map is off screen: images and point icons are created again on demand
+			PicassoUtils.trimMemory();
+			PointImageUtils.clearCache();
+		}
+		if (level >= TRIM_MEMORY_BACKGROUND && resourceManager != null) {
+			// the process is on the background list: raster tiles and the map objects of the
+			// legacy renderer are loaded again when the map is shown
+			resourceManager.onTrimMemory(level);
+		}
 	}
 
 	@Override

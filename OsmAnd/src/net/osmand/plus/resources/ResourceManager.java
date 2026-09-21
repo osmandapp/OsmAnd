@@ -1037,6 +1037,13 @@ public class ResourceManager {
 		System.gc();
 	}
 
+	// the caches the map fills again by itself, for the trim levels the system sends more often
+	public void onTrimMemory(int level) {
+		log.info("On trim memory " + level);
+		clearTiles();
+		renderer.clearCache();
+	}
+
 	public GeoidAltitudeCorrection getGeoidAltitudeCorrection() {
 		return geoidAltitudeCorrection;
 	}
