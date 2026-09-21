@@ -218,7 +218,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 
 	@Override
 	public void updateCompassValue(float value) {
-		if (!isCompassRulerVisible() || !hasSignificantHeadingChange(value)) {
+		// the heading check is a subtraction; the visibility check collects the widget list
+		if (!hasSignificantHeadingChange(value) || !isCompassRulerVisible()) {
 			return;
 		}
 
