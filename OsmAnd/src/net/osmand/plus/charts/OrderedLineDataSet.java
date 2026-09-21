@@ -2,6 +2,7 @@ package net.osmand.plus.charts;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IOrderedLineDataSet;
 
 import net.osmand.plus.charts.GpxMarkerView.MarkerValueFormatter;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -9,9 +10,8 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-public class OrderedLineDataSet extends LineDataSet {
+public class OrderedLineDataSet extends LineDataSet implements IOrderedLineDataSet {
 
 	private final GPXDataSetType dataSetType;
 	private final GPXDataSetAxisType dataSetAxisType;
@@ -19,7 +19,6 @@ public class OrderedLineDataSet extends LineDataSet {
 	private final boolean leftAxis;
 
 	private String units;
-	private ChartColorSource colorSource;
 	private float priority;
 	private float divX = 1f;
 
@@ -69,15 +68,7 @@ public class OrderedLineDataSet extends LineDataSet {
 		this.units = units;
 	}
 
-	@Nullable
-	public ChartColorSource getColorSource() {
-		return colorSource;
-	}
-
-	public void setColorSource(@Nullable ChartColorSource colorSource) {
-		this.colorSource = colorSource;
-	}
-
+	@Override
 	public boolean isLeftAxis() {
 		return leftAxis;
 	}

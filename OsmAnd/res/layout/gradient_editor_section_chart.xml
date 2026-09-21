@@ -6,7 +6,7 @@
     android:background="?attr/list_background_color"
     android:orientation="vertical">
 
-    <net.osmand.plus.charts.GradientChart
+    <com.github.mikephil.charting.charts.GradientChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="@dimen/route_info_chart_height" />
