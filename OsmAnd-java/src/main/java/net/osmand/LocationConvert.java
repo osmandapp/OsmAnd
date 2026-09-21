@@ -25,6 +25,11 @@ public class LocationConvert {
 	private static final char DELIMITER_SECONDS = '″';
 	private static final char DELIMITER_SPACE = ' ';
 
+	private static final String[] DEGREE_PATTERNS = {"##0.00000", "00.000", "00.0"};
+	// a DecimalFormat is not thread-safe, and building one with its symbols goes through ICU;
+	// the coordinates widgets format twice a second
+	private static final ThreadLocal<DecimalFormat[]> DEGREE_FORMATS = new ThreadLocal<>();
+
 	
 
 	/**
@@ -204,21 +209,35 @@ public class LocationConvert {
 
 	private static String formatDegrees(double coordinate, int outputType, StringBuilder sb) {
 		if (outputType == FORMAT_DEGREES) {
-			sb.append(new DecimalFormat("##0.00000", new DecimalFormatSymbols(Locale.US)).format(coordinate));
+			sb.append(getDegreeFormat(FORMAT_DEGREES).format(coordinate));
 			sb.append(DELIMITER_DEGREES);
 		} else if (outputType == FORMAT_MINUTES) {
 			coordinate = formatCoordinate(coordinate, sb, DELIMITER_DEGREES);
 			sb.append(DELIMITER_SPACE);
-			sb.append(new DecimalFormat("00.000", new DecimalFormatSymbols(Locale.US)).format(coordinate));
+			sb.append(getDegreeFormat(FORMAT_MINUTES).format(coordinate));
 			sb.append(DELIMITER_MINUTES);
 		} else if (outputType == FORMAT_SECONDS) {
 			coordinate = formatCoordinate(coordinate, sb, DELIMITER_DEGREES);
 			sb.append(DELIMITER_SPACE);
 			coordinate = formatCoordinate(coordinate, sb, DELIMITER_MINUTES);
 			sb.append(DELIMITER_SPACE);
-			sb.append(new DecimalFormat("00.0", new DecimalFormatSymbols(Locale.US)).format(coordinate));
+			sb.append(getDegreeFormat(FORMAT_SECONDS).format(coordinate));
 			sb.append(DELIMITER_SECONDS);
 		}
 		return sb.toString();
+	}
+
+	private static DecimalFormat getDegreeFormat(int outputType) {
+		DecimalFormat[] formats = DEGREE_FORMATS.get();
+		if (formats == null) {
+			formats = new DecimalFormat[DEGREE_PATTERNS.length];
+			DEGREE_FORMATS.set(formats);
+		}
+		DecimalFormat format = formats[outputType];
+		if (format == null) {
+			format = new DecimalFormat(DEGREE_PATTERNS[outputType], new DecimalFormatSymbols(Locale.US));
+			formats[outputType] = format;
+		}
+		return format;
 	}
 }
