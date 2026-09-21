@@ -662,7 +662,10 @@ public class AndroidUtils {
 			int charactersToShow = paint.breakText(text, true, viewWidth, null);
 			text = text.substring(0, charactersToShow);
 		}
-		textView.setText(text);
+		// TextView lays an unchanged string out again; the coordinates widgets set theirs twice a second
+		if (!text.contentEquals(textView.getText())) {
+			textView.setText(text);
+		}
 	}
 
 	public static int getMaxPossibleTextSize(@NonNull String text, @Nullable Typeface typeface,
