@@ -505,13 +505,16 @@ public class BinaryRoutePlanner {
 		int x = segment.road.getPoint31XTile(segment.getSegmentEnd());
 		int y = segment.road.getPoint31YTile(segment.getSegmentEnd());
 		float priority = router.defineSpeedPriority(segment.road, segment.isPositive());
-		float speed = (router.defineRoutingSpeed(segment.road, segment.isPositive()) * priority);
+		float roadSpeed = router.defineRoutingSpeed(segment.road, segment.isPositive());
+		float speed = (roadSpeed * priority);
 		if (speed == 0) {
 			speed = router.getDefaultSpeed() * priority;
 		}
 		// speed can not exceed max default speed according to A*
-		if (speed > router.getMaxSpeed()) {
-			speed = router.getMaxSpeed();
+		// (unless the router gives the road a higher speed of its own: a vehicle carried by a ferry)
+		float maxSpeed = Math.max(router.getMaxSpeed(), roadSpeed);
+		if (speed > maxSpeed) {
+			speed = maxSpeed;
 		}
 		float distOnRoadToPass = (float) squareRootDist(prevX, prevY, x, y);
 		return distOnRoadToPass / speed;
