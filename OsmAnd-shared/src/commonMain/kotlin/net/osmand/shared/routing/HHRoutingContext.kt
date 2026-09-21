@@ -79,6 +79,8 @@ class HHRoutingContext {
 	var endY: Int = 0
 
 	// Route runtime vars
+	private var loadedEdges = 0L
+	private val expandedPoints = ArrayDeque<NetworkDBPoint>() // unload order
 	@JvmField
 	var queueAdded: MutableList<NetworkDBPoint> = ArrayList()
 
@@ -168,6 +170,8 @@ class HHRoutingContext {
 		pointsById.forEachValue { p ->
 			p.markSegmentsNotLoaded()
 		}
+		loadedEdges = 0
+		expandedPoints.clear()
 	}
 
 	fun setStartEnd(start: KLatLon?, end: KLatLon?) {
@@ -222,7 +226,23 @@ class HHRoutingContext {
 	fun loadNetworkSegmentPoint(point: NetworkDBPoint, reverse: Boolean): Int {
 		val mapId = point.mapId
 		val r = regions[mapId.toInt()]
-		return r.file.loadNetworkSegmentPoint(this, r, point, reverse)
+		val loaded = r.file.loadNetworkSegmentPoint(this, r, point, reverse)
+		loadedEdges += loaded
+		return loaded
+	}
+
+	// unload with delay: point could be expanded again soon with a better cost
+	fun unloadExpandedSegments(point: NetworkDBPoint) {
+		expandedPoints.addLast(point)
+		val max = config?.MAX_LOADED_EDGES ?: 0
+		while (max > 0 && loadedEdges > max && expandedPoints.size > 1) {
+			val p = expandedPoints.removeFirst()
+			if (p.edgesEdited) {
+				continue
+			}
+			loadedEdges -= (p.connected(false)?.size ?: 0) + (p.connected(true)?.size ?: 0)
+			p.markSegmentsNotLoaded()
+		}
 	}
 
 	fun getRoutingInfo(): String {
