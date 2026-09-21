@@ -360,10 +360,9 @@ fun <T> OsmAndDropdownMenuContent(
 								verticalAlignment = Alignment.CenterVertically
 							) {
 								if (option.trailingBadgeIcon != null) {
-									val badgeColor = option.trailingBadgeColor ?: colors?.selected ?: MaterialTheme.colorScheme.onSurfaceVariant
+									// Badge icons are multi-colour (e.g. the Maps+ logo), so they are drawn as provided
 									AndroidDrawableIcon(
 										drawable = option.trailingBadgeIcon,
-										tint = badgeColor,
 										modifier = Modifier.size(16.dp)
 									)
 									Spacer(modifier = Modifier.width(4.dp))
