@@ -325,32 +325,15 @@ public class RouteResultPreparation {
 	private static final double SLOW_DOWN_SPEED_THRESHOLD = 15;
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private static final double SLOW_DOWN_SPEED = 2;
-
-	private static final double TRAFFIC_SIGNALS_INTERSECTION_SIZE = 60;
-
-	private static class TimeCalculationState {
-		double currentDistance;
-		// distance of the first traffic signal of the intersection being passed
-		double lastIntersectionDistance = -1;
-	}
-
+	
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
-		TimeCalculationState state = new TimeCalculationState();
-
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
-			if (i > 0) {
-				state.currentDistance += result.get(i - 1).getDistance();
-			}
-			calculateTimeSpeed(ctx, rr, state);
+			calculateTimeSpeed(ctx, rr);
 		}
 	}
 
 	public static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr) {
-		calculateTimeSpeed(ctx, rr, new TimeCalculationState());
-	}
-
-	private static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr, TimeCalculationState state) {
 		// Naismith's/Scarf rules add additional travel time when moving uphill
 		boolean useNaismithRule = false;
 		double scarfSeconds = 0; // Additional time as per Naismith/Scarf
@@ -394,16 +377,6 @@ public class RouteResultPreparation {
 			double obstacle = ctx.getRouter().defineObstacle(road, j, !plus);
 			if (obstacle < 0) {
 				obstacle = 0;
-			} else if (obstacle > 0 && road.hasTrafficLightAt(j)) {
-				// A driver stops once per intersection
-				double signalDistance = state.currentDistance + distance;
-				boolean startsNewIntersection = state.lastIntersectionDistance < 0
-						|| signalDistance - state.lastIntersectionDistance >= TRAFFIC_SIGNALS_INTERSECTION_SIZE;
-				if (startsNewIntersection) {
-					state.lastIntersectionDistance = signalDistance;
-				} else {
-					obstacle = 0;
-				}
 			}
 			distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
 
