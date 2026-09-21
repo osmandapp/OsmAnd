@@ -100,6 +100,8 @@ class GpxExtensionsMapTest {
 		val point = WptPt()
 		point.extensions = linkedMapOf("speed" to "5.5", "color" to "#ff0000")
 		assertEquals(mapOf("color" to "#ff0000", "speed" to "5.5"), point.getExtensionsToRead())
+		// equal maps hash alike - the entries carry the Map.Entry contract
+		assertEquals(mapOf("color" to "#ff0000", "speed" to "5.5").hashCode(), point.getExtensionsToRead().hashCode())
 		point.extensions = null
 		assertNull(point.extensions)
 		assertTrue(point.getExtensionsToRead().isEmpty())

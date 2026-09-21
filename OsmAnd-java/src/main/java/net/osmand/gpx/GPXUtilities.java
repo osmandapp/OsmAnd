@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Map.Entry;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
@@ -341,6 +342,17 @@ public class GPXUtilities {
 				value = newValue;
 				ExtensionsMap.this.put(key, newValue);
 				return previous;
+			}
+
+			@Override
+			public boolean equals(Object o) {
+				return o instanceof Entry<?, ?> entry
+						&& Objects.equals(key, entry.getKey()) && Objects.equals(value, entry.getValue());
+			}
+
+			@Override
+			public int hashCode() {
+				return Objects.hashCode(key) ^ Objects.hashCode(value);
 			}
 		}
 
