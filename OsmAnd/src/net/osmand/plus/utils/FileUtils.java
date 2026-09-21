@@ -51,8 +51,10 @@ public class FileUtils {
 
 	public static final int APPROXIMATE_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 
-	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/\\\\<>]");
-	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|\\\\<>]");
+	public static final String ILLEGAL_FILE_NAME_CHARS = "/ \\ : * ? \" < > |";
+	public static final String ILLEGAL_PATH_NAME_CHARS = "\\ : * ? \" < > |";
+	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[" + Pattern.quote(ILLEGAL_FILE_NAME_CHARS.replace(" ", "")) + "]");
+	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[" + Pattern.quote(ILLEGAL_PATH_NAME_CHARS.replace(" ", "")) + "]");
 
 	public static void renameFile(@NonNull FragmentActivity activity, @NonNull File file,
 			@Nullable Fragment target, boolean usedOnMap) {
@@ -249,7 +251,7 @@ public class FileUtils {
 		}
 		Pattern illegalCharactersPattern = dirAllowed ? ILLEGAL_PATH_NAME_CHARACTERS : ILLEGAL_FILE_NAME_CHARACTERS;
 		if (illegalCharactersPattern.matcher(newName).find()) {
-			app.showToastMessage(R.string.file_name_containes_illegal_char);
+			app.showToastMessage(R.string.file_name_containes_illegal_char, dirAllowed ? ILLEGAL_PATH_NAME_CHARS : ILLEGAL_FILE_NAME_CHARS);
 			return null;
 		}
 		File dest = new File(source.getParentFile(), newName);

@@ -1285,7 +1285,6 @@
     <string name="avoid_road">Evitar camino</string>
     <string name="full_report">Informe completo</string>
     <string name="report">Informe</string>
-    <string name="file_name_containes_illegal_char">Carácter ilegal en el nombre del archivo</string>
     <string name="map_mode">Modo del mapa</string>
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Mediano</string>

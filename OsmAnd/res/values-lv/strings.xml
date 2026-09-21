@@ -1291,7 +1291,6 @@ failu(s)?
     <string name="storage_directory_shared">Kopīgā krātuve</string>
     <string name="full_report">Pilnais pārskats</string>
     <string name="number_of_contributors">Līdzstrādnieku skaits</string>
-    <string name="file_name_containes_illegal_char">Faila vārds satur neatļautas rakstu zīmes</string>
     <string name="access_hint_enter_name">Ievadiet vārdu</string>
     <string name="access_map_linked_to_location">Karte ir piesaistīta atrašanās vietai</string>
     <string name="access_collapsed_list">Sakļauts saraksts</string>

@@ -985,7 +985,6 @@
     <string name="shared_string_near">Nær</string>
     <string name="looking_up_address">Ser etter adresse</string>
     <string name="cancel_route">Vil du forkaste ruten\?</string>
-    <string name="file_name_containes_illegal_char">Ulovlig tegn i filnavn</string>
     <string name="rendering_value_thin_name">Tynn</string>
     <string name="rendering_value_medium_name">Middels</string>
     <string name="rendering_value_bold_name">Fet</string>

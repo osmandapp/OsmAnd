@@ -3324,7 +3324,6 @@
     <string name="quick_action_map_style_switch">Stilul hărții a fost schimbat în \"%s\".</string>
     <string name="quick_action_item_screen">Ecran %d</string>
     <string name="quick_action_item_action">Acțiune %d</string>
-    <string name="file_name_containes_illegal_char">Caracter ilegal în numele fișierului</string>
     <string name="dashboard_or_drawer_description">Puteți alege să controlați aplicația în principal prin intermediul tabloului de bord flexibil sau al unui meniu static. Alegerea dvs. poate fi oricând schimbată în setările tabloului de bord.</string>
     <string name="osmand_extended_description_part5">Ciclism
 \n - Găsiți pistele pentru biciclete pe hartă

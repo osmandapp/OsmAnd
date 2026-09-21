@@ -1342,7 +1342,6 @@
     <string name="osm_editors_ranking">Рейтинг маперів OSM</string>
     <string name="osm_live_ask_for_purchase">Будь ласка, спочатку передплатіть OsmAnd Live</string>
     <string name="upload_osm_note">Надіслати Нотатку OSM</string>
-    <string name="file_name_containes_illegal_char">Неприпустимі символи в назві файлу</string>
     <string name="access_direction_audio_feedback">Озвучувати напрямок</string>
     <string name="access_direction_audio_feedback_descr">Індикація звуком напрямку на цільову точку.</string>
     <string name="access_direction_haptic_feedback">Тактильна індикація напрямку</string>

@@ -1611,7 +1611,6 @@
     <string name="morning">Јутром</string>
     <string name="number_of_contributors">Број сарадника</string>
     <string name="number_of_edits">Број измена</string>
-    <string name="file_name_containes_illegal_char">Недозвољен знак у имену датотеке</string>
     <string name="configure_screen_quick_action">Брзе радње</string>
     <string name="quick_action_item_action">Радња %d</string>
     <string name="quick_action_item_screen">Заслон %d</string>

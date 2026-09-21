@@ -1800,7 +1800,6 @@
     <string name="number_of_contributors">Αριθμός συντελεστών</string>
     <string name="number_of_edits">Αριθμός επεξεργασιών</string>
     <string name="reports_for">Αναφορά για</string>
-    <string name="file_name_containes_illegal_char">Ακατάλληλος χαρακτήρας στο όνομα αρχείου</string>
     <string name="configure_screen_quick_action">Γρήγορη ενέργεια</string>
     <string name="quick_action_item_action">Ενέργεια %d</string>
     <string name="quick_action_item_screen">Οθόνη %d</string>

@@ -1114,7 +1114,6 @@
     <string name="lang_als">Albaniera (Tosk)</string>
     <string name="osm_edit_created_poi">OSM POI-a sortuta</string>
     <string name="map_downloaded_descr">%1$sko mapa erabili dezakezu orain.</string>
-    <string name="file_name_containes_illegal_char">Fitxategi-izenak karaktere baliogaberen bat du</string>
     <string name="show_something_on_map">Erakutsi %1$s mapan</string>
     <string name="dist_away_from_my_location">Bilatu %1$sra</string>
     <string name="share_history_subject">OsmAnd bidez partekatua</string>

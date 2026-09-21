@@ -1360,7 +1360,6 @@
     <string name="rendering_value_bold_name">Kalın</string>
     <string name="storage_permission_restart_is_required">Uygulamanın şimdi harici depolamaya yazma izni var, ancak bunu yapmak için yeniden başlatılması gerekir.</string>
     <string name="full_report">Tam rapor</string>
-    <string name="file_name_containes_illegal_char">Dosya adında geçersiz karakter</string>
     <string name="shared_string_is_open_24_7">7/24 açık</string>
     <string name="coords_format">Koordinat biçimi</string>
     <string name="app_mode_bus">Otobüs</string>

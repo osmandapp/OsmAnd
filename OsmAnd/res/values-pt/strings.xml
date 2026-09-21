@@ -1160,7 +1160,6 @@
     <string name="osm_user_stat">Edições %1$s, posição %2$s, total de edições %3$s</string>
     <string name="osm_editors_ranking">Classificação de editores do OSM</string>
     <string name="osm_live_subscribe_btn">Subscrever</string>
-    <string name="file_name_containes_illegal_char">Caractere inválido no nome do ficheiro</string>
     <string name="reports_for">Relatório para</string>
     <string name="number_of_contributors">Número de colaboradores</string>
     <string name="number_of_edits">Número de edições</string>
