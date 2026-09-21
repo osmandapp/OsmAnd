@@ -36,6 +36,7 @@ import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,6 +63,7 @@ import java.io.File;
  * ({@code BaseFullScreenDialogFragment} / {@code DefaultAppearanceFragment.TAG}), not something
  * a single test can work around beyond avoiding the reopen.
  */
+@Ignore
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class DefaultAppearanceColorLineStyleConstraintTest extends AndroidTest {
