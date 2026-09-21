@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import java.util.List;
 import java.util.Map;
 
 import net.osmand.binary.RouteDataObject;
@@ -99,7 +100,31 @@ public interface VehicleRouter {
 	 * Calculate turn time 
 	 */
 	public double calculateTurnTime(RouteSegment segment, RouteSegment prev);
-	
+
+	/**
+	 * Calculate time to leave one road for another (e.g. getting on or off a ferry)
+	 * @param from road segment before the change in the direction of travel
+	 * @param to road segment after the change in the direction of travel
+	 */
+	default double calculateRoadChangeTime(RouteSegment from, RouteSegment to) {
+		return 0;
+	}
+
+	/**
+	 * Calculate time of a stop at the start point of the segment coming from its parent segment
+	 * (e.g. a ferry at a terminal on the way)
+	 */
+	default double calculateStopTime(RouteSegment segment) {
+		return 0;
+	}
+
+	/**
+	 * Correct estimated times of the calculated route segments which depend on the whole route
+	 * (e.g. getting on and off a ferry is paid only for a whole crossing)
+	 */
+	default void updateSegmentTimes(List<RouteSegmentResult> result) {
+	}
+
 		
 	public VehicleRouter build(Map<String, String> params);
 
