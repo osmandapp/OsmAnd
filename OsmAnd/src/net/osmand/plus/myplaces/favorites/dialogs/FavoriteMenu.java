@@ -659,7 +659,7 @@ public class FavoriteMenu {
 		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.add_to_navigation)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_navigation_outlined))
-				.setOnClickListener(v -> addToNavigation(app, activity, points, fragmentStateHolder))
+				.setOnClickListener(v -> addToNavigation(activity, points, fragmentStateHolder))
 				.create());
 
 		items.add(new PopUpMenuItem.Builder(activity)
@@ -687,21 +687,20 @@ public class FavoriteMenu {
 		PopUpMenu.show(displayData);
 	}
 
-	static void addToNavigation(@NonNull OsmandApplication app, @NonNull Context activity,
-	                            @NonNull Collection<FavouritePoint> points, @NonNull FragmentStateHolder fragmentStateHolder) {
-		if (points.isEmpty()) {
-			return;
-		}
+	static void addToNavigation(@NonNull Context context, @NonNull Collection<FavouritePoint> points,
+	                            @NonNull FragmentStateHolder stateHolder) {
+		OsmandApplication app = AndroidUtils.getApp(context);
 		List<TargetPoint> targetPoints = new ArrayList<>();
 		for (FavouritePoint point : points) {
-			TargetPoint targetPoint = new TargetPoint(new LatLon(point.getLatitude(), point.getLongitude()), point.getPointDescription(app));
-			targetPoints.add(targetPoint);
+			LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+			targetPoints.add(new TargetPoint(latLon, point.getPointDescription(app)));
 		}
 		app.getTargetPointsHelper().reorderAllTargetPoints(targetPoints, true);
 		app.getSettings().navigateDialog();
+
 		Bundle args = new Bundle();
 		args.putBoolean(CLOSE_ALL_FRAGMENTS, true);
-		MapActivity.launchMapActivityMoveToTop(activity, fragmentStateHolder.storeState(), null, args);
+		MapActivity.launchMapActivityMoveToTop(context, stateHolder.storeState(), null, args);
 	}
 
 	private void deleteSelection(@NonNull FavoriteSelection selection) {

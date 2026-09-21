@@ -278,17 +278,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 					.setIcon(getContentIcon(R.drawable.ic_action_navigation_outlined))
 					.setTitle(getString(R.string.add_to_navigation))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(view -> {
-						BaseFavoriteListFragment fragment = getFavoriteListFragment();
-						if (fragment != null) {
-							List<FavouritePoint> points = new ArrayList<>();
-							for (FavoriteGroup favoriteGroup : groupsToAdd) {
-								points.addAll(favoriteGroup.getPoints());
-							}
-							FavoriteMenu.addToNavigation(app, requireActivity(), points, fragment);
-							dismiss();
-						}
-					})
+					.setOnClickListener(view -> addToNavigation())
 					.create();
 			items.add(addToNavigationItem);
 		}
@@ -342,6 +332,18 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		if (result == ShareHandlingResult.GPX_FALLBACK_REQUIRED) {
 			fragment.shareFavorites(subtreeGroups, folderPath);
 		}
+		dismiss();
+	}
+
+	private void addToNavigation() {
+		BaseFavoriteListFragment fragment = getFavoriteListFragment();
+		if (fragment == null) return;
+
+		List<FavouritePoint> points = new ArrayList<>();
+		for (FavoriteGroup group : subtreeGroups) {
+			points.addAll(group.getPoints());
+		}
+		FavoriteMenu.addToNavigation(requireActivity(), points, fragment);
 		dismiss();
 	}
 
