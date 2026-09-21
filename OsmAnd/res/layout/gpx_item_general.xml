@@ -59,7 +59,7 @@
 	</LinearLayout>
 
 
-	<com.github.mikephil.charting.charts.ElevationChart
+	<net.osmand.plus.charts.ElevationChart
 		android:id="@+id/chart"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/list_item_description_width"

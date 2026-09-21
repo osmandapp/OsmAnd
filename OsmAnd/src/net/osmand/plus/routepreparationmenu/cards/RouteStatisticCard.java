@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.github.mikephil.charting.charts.ElevationChart;
+import net.osmand.plus.charts.ElevationChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
@@ -202,7 +202,7 @@ public class RouteStatisticCard extends MapBaseCard {
 			dataSets.add(elevationDataSet);
 			slopeDataSet = ChartUtils.createGPXSlopeDataSet(app, mChart, analysis,
 					GPXDataSetType.SLOPE, GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
-			if (slopeDataSet != null) {
+			if (slopeDataSet != null && !ChartUtils.applyColorSource(app, mChart, elevationDataSet, slopeDataSet)) {
 				dataSets.add(slopeDataSet);
 			}
 			this.elevationDataSet = elevationDataSet;

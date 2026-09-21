@@ -105,7 +105,7 @@
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size" />
 
-					<com.github.mikephil.charting.charts.GradientChart
+					<net.osmand.plus.charts.GradientChart
 						android:id="@+id/chart"
 						android:layout_width="match_parent"
 						android:layout_height="@dimen/route_info_chart_height" />

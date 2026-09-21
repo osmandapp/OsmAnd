@@ -4,9 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
-import com.github.mikephil.charting.charts.GradientChart
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.renderer.GradientXAxisRenderer
 import com.github.mikephil.charting.utils.MPPointF
 import com.github.mikephil.charting.utils.Transformer
 import com.github.mikephil.charting.utils.Utils
