@@ -104,6 +104,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		long currentTime = SystemClock.uptimeMillis();
 		long elapsedTime = currentTime - lastWidgetsUpdateTime;
 		if (elapsedTime >= WIDGETS_UPDATE_INTERVAL_MS) {
+			lastWidgetsUpdateTime = currentTime;
 			updateWidgetsInternal();
 		}
 
