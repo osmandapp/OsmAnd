@@ -31,6 +31,19 @@ object TurnPreparation {
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private const val SLOW_DOWN_SPEED = 2.0
 
+	private const val TRAFFIC_SIGNALS_NEARBY_MAX_DISTANCE = "trafficSignalsNearbyMaxDistance"
+	private const val TRAFFIC_SIGNALS_NEARBY_PENALTY_FACTOR = "trafficSignalsNearbyPenaltyFactor"
+
+	private class TimeCalculationState(router: GeneralRouter) {
+		var currentDistance = 0.0
+		// distance of the last traffic signal charged with the full penalty (start of the current group)
+		var lastFullPenaltyDistance = -1.0
+		val trafficSignalsNearbyMaxDistance =
+			router.getFloatAttribute(TRAFFIC_SIGNALS_NEARBY_MAX_DISTANCE, 0f).toDouble()
+		val trafficSignalsNearbyPenaltyFactor =
+			router.getFloatAttribute(TRAFFIC_SIGNALS_NEARBY_PENALTY_FACTOR, 1f).toDouble()
+	}
+
 	// ---- the manoeuvres ----
 
 	/**
@@ -410,13 +423,23 @@ object TurnPreparation {
 	 */
 	@JvmStatic
 	fun calculateTimeSpeed(request: RoutingRequest, result: List<RouteSegmentResult>) {
+		val state = TimeCalculationState(request.getRouter() as GeneralRouter)
 		for (i in result.indices) {
-			calculateTimeSpeed(request, result[i])
+			if (i > 0) {
+				state.currentDistance += result[i - 1].getDistance().toDouble()
+			}
+			calculateTimeSpeed(request, result[i], state)
 		}
 	}
 
 	@JvmStatic
 	fun calculateTimeSpeed(request: RoutingRequest, rr: RouteSegmentResult) {
+		calculateTimeSpeed(request, rr, TimeCalculationState(request.getRouter() as GeneralRouter))
+	}
+
+	private fun calculateTimeSpeed(
+		request: RoutingRequest, rr: RouteSegmentResult, state: TimeCalculationState
+	) {
 		// Naismith's/Scarf rules add additional travel time when moving uphill
 		var useNaismithRule = false
 		var scarfSeconds = 0.0 // Additional time as per Naismith/Scarf
@@ -463,6 +486,21 @@ object TurnPreparation {
 			var obstacle = request.getRouter().defineObstacle(road, j, !plus).toDouble()
 			if (obstacle < 0) {
 				obstacle = 0.0
+			} else if (obstacle > 0 && road.hasTrafficLightAt(j)) {
+				// Inside a group of traffic signals located nearby take the full penalty only for the
+				// first one. (After a red signal the next ones are usually green.) The group is
+				// restarted as soon as trafficSignalsNearbyMaxDistance is passed since the last fully
+				// penalized signal, so that a long chain of closely spaced signals is not discounted
+				// endlessly.
+				// XXXXX XXXXX   ->   Xxxxx Xxxxx
+				val signalDistance = state.currentDistance + distance
+				val startsNewGroup = state.lastFullPenaltyDistance < 0 ||
+						signalDistance - state.lastFullPenaltyDistance >= state.trafficSignalsNearbyMaxDistance
+				if (startsNewGroup) {
+					state.lastFullPenaltyDistance = signalDistance
+				} else {
+					obstacle *= state.trafficSignalsNearbyPenaltyFactor
+				}
 			}
 			distOnRoadToPass += d / speed + obstacle // this is time in seconds
 

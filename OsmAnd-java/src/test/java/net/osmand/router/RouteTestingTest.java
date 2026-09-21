@@ -182,6 +182,7 @@ public class RouteTestingTest {
 				break;
 			}
 			checkRoutingTime(ctx, params);
+			checkEtaTime(routeSegments, params);
 			for (Entry<String, String> es : expectedResults.entrySet()) {
 				long id = RouterUtilTest.getRoadId(es.getKey());
 				int point = RouterUtilTest.getRoadStartPoint(es.getKey());
@@ -217,6 +218,24 @@ public class RouteTestingTest {
 		}
 	}
 	
+	private void checkEtaTime(List<RouteSegmentResult> routeSegments, Map<String, String> params) {
+		if (!params.containsKey("minEtaTime") && !params.containsKey("maxEtaTime")) {
+			return;
+		}
+		float etaTime = 0;
+		for (RouteSegmentResult r : routeSegments) {
+			etaTime += r.getSegmentTime();
+		}
+		if (params.containsKey("minEtaTime")) {
+			float minEtaTime = Float.parseFloat(params.get("minEtaTime"));
+			Assert.assertTrue("Calculated eta time " + etaTime + " is less then min eta time " + minEtaTime, etaTime >= minEtaTime);
+		}
+		if (params.containsKey("maxEtaTime")) {
+			float maxEtaTime = Float.parseFloat(params.get("maxEtaTime"));
+			Assert.assertTrue("Calculated eta time " + etaTime + " is bigger then max eta time " + maxEtaTime, etaTime <= maxEtaTime);
+		}
+	}
+
 	private void checkRoutingTime(RoutingContext ctx, Map<String, String> params) {
 		if (params.containsKey("maxRoutingTime")) {
 			float maxRoutingTime = Float.parseFloat(params.get("maxRoutingTime"));

@@ -330,7 +330,8 @@ public class RouteResultPreparation {
 
 	private static class TimeCalculationState {
 		double currentDistance;
-		double lastTrafficSignalDistance = -1;
+		// distance of the last traffic signal charged with the full penalty (start of the current group)
+		double lastFullPenaltyDistance = -1;
 		final double trafficSignalsNearbyMaxDistance;
 		final double trafficSignalsNearbyPenaltyFactor;
 
@@ -338,19 +339,6 @@ public class RouteResultPreparation {
 			trafficSignalsNearbyMaxDistance = router.getFloatAttribute(TRAFFIC_SIGNALS_NEARBY_MAX_DISTANCE, 0);
 			trafficSignalsNearbyPenaltyFactor = router.getFloatAttribute(TRAFFIC_SIGNALS_NEARBY_PENALTY_FACTOR, 1);
 		}
-	}
-
-	private static boolean segmentHasTag(RouteDataObject road, int segmentIndex, String tag) {
-		int[] segmentPointTypes = road.getPointTypes(segmentIndex);
-		if (segmentPointTypes != null) {
-			for (int type : segmentPointTypes) {
-				RouteTypeRule rule = road.region.quickGetEncodingRule(type);
-				if (rule != null && rule.getValue().equals(tag)) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
@@ -413,19 +401,19 @@ public class RouteResultPreparation {
 			double obstacle = ctx.getRouter().defineObstacle(road, j, !plus);
 			if (obstacle < 0) {
 				obstacle = 0;
-			} else if (obstacle > 0) {
-				if (segmentHasTag(road, j, "traffic_signals")) {
-					// For groups with many traffic signals nearby take penalty only for first one. (After red signal next usually are green)
-					// XXXXX XXXXX   ->   Xxxxx Xxxxx
-					boolean isFirstStop = state.lastTrafficSignalDistance == -1;
-					double currentDistance = state.currentDistance + distance;
-					double distanceFromPreviousStop = currentDistance - state.lastTrafficSignalDistance;
-					state.lastTrafficSignalDistance = currentDistance;
-					if (isFirstStop || distanceFromPreviousStop >= state.trafficSignalsNearbyMaxDistance) {
-						obstacle = obstacle * 1.0;
-					} else {
-						obstacle = obstacle * state.trafficSignalsNearbyPenaltyFactor;
-					}
+			} else if (obstacle > 0 && road.hasTrafficLightAt(j)) {
+				// Inside a group of traffic signals located nearby take the full penalty only for the first one.
+				// (After a red signal the next ones are usually green.) The group is restarted as soon as
+				// trafficSignalsNearbyMaxDistance is passed since the last fully penalized signal, so that a long
+				// chain of closely spaced signals is not discounted endlessly.
+				// XXXXX XXXXX   ->   Xxxxx Xxxxx
+				double signalDistance = state.currentDistance + distance;
+				boolean startsNewGroup = state.lastFullPenaltyDistance < 0
+						|| signalDistance - state.lastFullPenaltyDistance >= state.trafficSignalsNearbyMaxDistance;
+				if (startsNewGroup) {
+					state.lastFullPenaltyDistance = signalDistance;
+				} else {
+					obstacle = obstacle * state.trafficSignalsNearbyPenaltyFactor;
 				}
 			}
 			distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
