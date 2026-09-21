@@ -1401,7 +1401,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					|| mapActivityInvalidated || invalidated || newTsRenderer || !renderedSegments.contains(ts);
 			if (ts.getRenderer() instanceof RenderableSegment renderableSegment) {
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
-				GpxLineStyleType lineStyleType = selected
+				GpxLineStyleType lineStyleType = selected && coloringType.isTrackSolid()
 						? appearanceHelper.getLineStyleTypeForTrack(gpxFile, gpxItem, dirItem)
 						: GpxLineStyleType.SOLID;
 				if (hasMapRenderer || coloringType.isRouteInfoAttribute()) {

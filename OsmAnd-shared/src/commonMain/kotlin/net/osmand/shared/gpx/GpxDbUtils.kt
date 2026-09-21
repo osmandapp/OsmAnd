@@ -241,7 +241,7 @@ object GpxDbUtils {
 		if (oldVersion < 33) {
 			db.execSQL(getCreateAppearanceTriggerQuery(GPX_DIR_TABLE_NAME, GPX_DIR_APPEARANCE_TRIGGER))
 		}
-		if (oldVersion < 36) {
+		if (oldVersion < 37) {
 			db.execSQL("DROP TRIGGER IF EXISTS $GPX_APPEARANCE_TRIGGER")
 			db.execSQL("DROP TRIGGER IF EXISTS $GPX_DIR_APPEARANCE_TRIGGER")
 			db.execSQL(getCreateAppearanceTriggerQuery(GPX_TABLE_NAME, GPX_APPEARANCE_TRIGGER))

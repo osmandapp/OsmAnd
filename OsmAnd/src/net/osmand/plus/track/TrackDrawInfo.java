@@ -11,6 +11,7 @@ import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.shared.gpx.GpxParameter.LINE_STYLE;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -159,7 +160,7 @@ public class TrackDrawInfo {
 		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
 		joinSegments = helper.requireParameter(item, JOIN_SEGMENTS);
 		showArrows = helper.requireParameter(item, SHOW_ARROWS);
-		lineStyleType = helper.getLineStyleTypeForTrack(gpxFile, item, null);
+		lineStyleType = GpxLineStyleType.Companion.getLineStyleType(helper.requireParameter(item, LINE_STYLE));
 		showStartFinish = helper.isShowStartFinishForTrack(gpxFile, item, null);
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));

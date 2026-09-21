@@ -2,6 +2,7 @@ package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.shared.gpx.GpxParameter.LINE_STYLE;
 import static net.osmand.shared.gpx.ColoringPurpose.TRACK;
 import static net.osmand.shared.routing.ColoringType.TRACK_SOLID;
@@ -35,7 +36,6 @@ import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.shared.gpx.enums.GpxLineStyleType;
-import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.GpxAppearanceAdapter;
@@ -144,7 +144,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 		if (gradientPaletteController == null) {
 			gradientPaletteController = new GradientPaletteController(app, paletteCategory);
 		}
-		gradientPaletteController.updatePalette(paletteCategory, PaletteConstants.DEFAULT_NAME);
+		gradientPaletteController.updatePalette(paletteCategory, data.getParameter(COLOR_PALETTE));
 		gradientPaletteController.setPaletteListener(getExternalListener());
 		return gradientPaletteController;
 	}
