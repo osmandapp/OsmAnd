@@ -138,17 +138,15 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	}
 
 	protected void setTextNoUpdateVisibility(String text, String subtext) {
+		String newText = text == null ? "" : text;
+		String newSubtext = subtext == null ? "" : subtext;
 		getView().setContentDescription(combine(text, subtext));
-		if (text == null) {
-			setText("");
-		} else {
-			setText(text);
+		if (TextUtils.equals(textView.getText(), newText) && TextUtils.equals(smallTextView.getText(), newSubtext)) {
+			// TextView lays out even an unchanged string again; most widgets update twice a second
+			return;
 		}
-		if (subtext == null) {
-			setSmallText("");
-		} else {
-			setSmallText(subtext);
-		}
+		setText(newText);
+		setSmallText(newSubtext);
 	}
 
 	private void setText(String text) {
