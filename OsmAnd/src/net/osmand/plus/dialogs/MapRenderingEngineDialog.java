@@ -11,8 +11,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -78,14 +76,13 @@ public class MapRenderingEngineDialog {
 		if (app.isApplicationInitializing()) {
 			String title = app.getString(R.string.loading_smth, "");
 			ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
-			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onFinish(@NonNull AppInitializer init) {
-					if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
-						progress.dismiss();
-					}
-					updateRenderingEngine(openglEnabled, listener);
+			// removed once fired: a plain listener would keep the activity and the dialog for
+			// the life of the process
+			app.getAppInitializer().addOnFinishListener(init -> {
+				if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
+					progress.dismiss();
 				}
+				updateRenderingEngine(openglEnabled, listener);
 			});
 		} else {
 			updateRenderingEngine(openglEnabled, listener);

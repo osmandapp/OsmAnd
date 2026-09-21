@@ -40,8 +40,6 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.plus.AppInitializeListener;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -747,13 +745,10 @@ public class ImportHelper {
 
 	private <P> void executeImportTask(AsyncTask<P, ?, ?> importTask, P... requests) {
 		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializeListener() {
-
-				@Override
-				public void onFinish(@NonNull AppInitializer init) {
-					if (importTask.getStatus() == Status.PENDING) {
-						OsmAndTaskManager.executeTask(importTask, requests);
-					}
+			// removed once fired: a plain listener would stay for the life of the process
+			app.getAppInitializer().addOnFinishListener(init -> {
+				if (importTask.getStatus() == Status.PENDING) {
+					OsmAndTaskManager.executeTask(importTask, requests);
 				}
 			});
 		} else {
