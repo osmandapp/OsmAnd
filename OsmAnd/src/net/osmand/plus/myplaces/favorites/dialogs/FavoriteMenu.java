@@ -7,6 +7,7 @@ import static net.osmand.plus.utils.AndroidUtils.truncateWithEllipsis;
 import static net.osmand.plus.utils.UiUtilities.getThemedContext;
 import static net.osmand.shared.gpx.GpxFile.DEFAULT_WPT_GROUP_NAME;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -65,6 +66,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -657,20 +659,7 @@ public class FavoriteMenu {
 		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.add_to_navigation)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_navigation_outlined))
-				.setOnClickListener(v -> {
-					List<TargetPoint> targetPoints = new ArrayList<>();
-					for (FavouritePoint point : points) {
-						TargetPoint targetPoint = new TargetPoint(new LatLon(point.getLatitude(), point.getLongitude()), point.getPointDescription(app));
-						targetPoints.add(targetPoint);
-					}
-					app.getTargetPointsHelper().reorderAllTargetPoints(targetPoints, true);
-					app.getSettings().navigateDialog();
-					Bundle args = new Bundle();
-					args.putBoolean(CLOSE_ALL_FRAGMENTS, true);
-
-					Bundle bundle = fragmentStateHolder.storeState();
-					MapActivity.launchMapActivityMoveToTop(activity, bundle, null, args);
-				})
+				.setOnClickListener(v -> addToNavigation(activity, points, fragmentStateHolder))
 				.create());
 
 		items.add(new PopUpMenuItem.Builder(activity)
@@ -696,6 +685,22 @@ public class FavoriteMenu {
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
 		PopUpMenu.show(displayData);
+	}
+
+	static void addToNavigation(@NonNull Context context, @NonNull Collection<FavouritePoint> points,
+	                            @NonNull FragmentStateHolder stateHolder) {
+		OsmandApplication app = AndroidUtils.getApp(context);
+		List<TargetPoint> targetPoints = new ArrayList<>();
+		for (FavouritePoint point : points) {
+			LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+			targetPoints.add(new TargetPoint(latLon, point.getPointDescription(app)));
+		}
+		app.getTargetPointsHelper().reorderAllTargetPoints(targetPoints, true);
+		app.getSettings().navigateDialog();
+
+		Bundle args = new Bundle();
+		args.putBoolean(CLOSE_ALL_FRAGMENTS, true);
+		MapActivity.launchMapActivityMoveToTop(context, stateHolder.storeState(), null, args);
 	}
 
 	private void deleteSelection(@NonNull FavoriteSelection selection) {
