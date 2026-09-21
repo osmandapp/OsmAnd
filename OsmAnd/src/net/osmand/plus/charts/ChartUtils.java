@@ -1,7 +1,7 @@
 package net.osmand.plus.charts;
 
 import static android.text.format.DateUtils.HOUR_IN_MILLIS;
-import static com.github.mikephil.charting.charts.ElevationChart.GRID_LINE_LENGTH_X_AXIS_DP;
+import static net.osmand.plus.charts.ElevationChart.GRID_LINE_LENGTH_X_AXIS_DP;
 import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
 import static net.osmand.plus.charts.GPXDataSetAxisType.TIME;
 import static net.osmand.plus.charts.GPXDataSetAxisType.TIME_OF_DAY;
@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.BarLineChartBase;
-import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -36,7 +35,6 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.Utils;
 
 import net.osmand.gpx.ElevationDiffsCalculator;
 import net.osmand.gpx.ElevationDiffsCalculator.Extremum;
@@ -46,6 +44,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.download.local.dialogs.MemoryInfo;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
@@ -74,6 +73,7 @@ public class ChartUtils {
 	public static final int CHART_LABEL_COUNT = 3;
 	private static final int MAX_CHART_DATA_ITEMS = 10000;
 	public static final int MAX_CHART_TYPES = 2;
+	public static final int DEFAULT_SLOPE_WINDOW_M = 20;
 
 	public static void setupElevationChart(ElevationChart chart) {
 		setupElevationChart(chart, new ElevationChartAppearance());
@@ -374,7 +374,7 @@ public class ChartUtils {
 		xAxis.setDrawGridLines(true);
 		xAxis.setGridLineWidth(1.0F);
 		xAxis.setGridColor(xAxisGridColor);
-		xAxis.enableGridDashedLine(Utils.dpToPx(app, GRID_LINE_LENGTH_X_AXIS_DP), Float.MAX_VALUE, 0.0F);
+		xAxis.enableGridDashedLine(AndroidUtils.dpToPx(app, GRID_LINE_LENGTH_X_AXIS_DP), Float.MAX_VALUE, 0.0F);
 		xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 		xAxis.setTextColor(labelsColor);
 		xAxis.setAvoidFirstLastClipping(true);
@@ -700,6 +700,68 @@ public class ChartUtils {
 		return yAxis;
 	}
 
+	/**
+	 * Prototype for issue #24575 draw the second selected data set as the colouring of the first
+	 * one rather than as a separate line. Gated behind the development plugin.
+	 */
+	private static int getSlopeWindow() {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
+		if (plugin != null && plugin.CHART_COLOR_BY_SECOND_DATASET.get()) {
+			return plugin.CHART_SLOPE_WINDOW.get();
+		}
+		return DEFAULT_SLOPE_WINDOW_M;
+	}
+
+	public static boolean isColorBySecondDataSetEnabled() {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
+		return plugin != null && plugin.CHART_COLOR_BY_SECOND_DATASET.get();
+	}
+
+	/**
+	 * Prototype for issue #24575 instead of drawing {@code colorDataSet} as a second line, use its
+	 * values to colour {@code lineDataSet}.
+	 * <p>
+	 * Callers assemble their data sets in several different places, so this is the single point that
+	 * decides whether the pair collapses into one coloured line. When it returns true the caller must
+	 * add only {@code lineDataSet} to the chart.
+	 */
+	public static boolean applyColorSource(@NonNull OsmandApplication app,
+	                                       @NonNull BarLineChartBase<?> chart,
+	                                       @Nullable OrderedLineDataSet lineDataSet,
+	                                       @Nullable OrderedLineDataSet colorDataSet) {
+		return applyColorSource(app, chart, lineDataSet, colorDataSet, null);
+	}
+
+	public static boolean applyColorSource(@NonNull OsmandApplication app,
+	                                       @NonNull BarLineChartBase<?> chart,
+	                                       @Nullable OrderedLineDataSet lineDataSet,
+	                                       @Nullable OrderedLineDataSet colorDataSet,
+	                                       @Nullable String trackPath) {
+		if (lineDataSet == null || colorDataSet == null || !isColorBySecondDataSetEnabled()) {
+			return false;
+		}
+		ChartColorSource colorSource = ChartColorSource.create(app, colorDataSet, trackPath);
+		if (colorSource == null) {
+			return false;
+		}
+		lineDataSet.setColorSource(colorSource);
+		lineDataSet.setDrawFilled(true);
+		adoptAxisOfLineDataSet(chart, lineDataSet);
+		return true;
+	}
+
+	private static void adoptAxisOfLineDataSet(@NonNull BarLineChartBase<?> chart,
+	                                           @NonNull OrderedLineDataSet lineDataSet) {
+		YAxis lineAxis = getYAxis(chart, null, !lineDataSet.isLeftAxis());
+		YAxis otherAxis = getYAxis(chart, null, lineDataSet.isLeftAxis());
+
+		otherAxis.setValueFormatter(lineAxis.getValueFormatter());
+		otherAxis.setGranularity(lineAxis.getGranularity());
+		otherAxis.setGranularityEnabled(lineAxis.isGranularityEnabled());
+		otherAxis.resetAxisMinimum();
+		otherAxis.resetAxisMaximum();
+	}
+
 	public static YAxis getYAxis(BarLineChartBase<?> chart, Integer textColor, boolean useRightAxis) {
 		YAxis yAxis = useRightAxis ? chart.getAxisRight() : chart.getAxisLeft();
 		if (textColor != null) {
@@ -775,7 +837,7 @@ public class ChartUtils {
 			return null;
 		}
 
-		double SLOPE_PROXIMITY = Math.max(20, STEP * 2);
+		double SLOPE_PROXIMITY = Math.max(getSlopeWindow(), STEP * 2);
 
 		if (totalDistance - SLOPE_PROXIMITY < 0) {
 			if (useRightAxis) {
@@ -872,6 +934,18 @@ public class ChartUtils {
 	                                             @Nullable GPXDataSetType secondType,
 	                                             GPXDataSetAxisType gpxDataSetAxisType,
 	                                             boolean calcWithoutGaps) {
+		return getDataSets(chart, app, analysis, firstType, secondType, gpxDataSetAxisType,
+				calcWithoutGaps, null);
+	}
+
+	public static List<ILineDataSet> getDataSets(LineChart chart,
+	                                             OsmandApplication app,
+	                                             GpxTrackAnalysis analysis,
+	                                             @NonNull GPXDataSetType firstType,
+	                                             @Nullable GPXDataSetType secondType,
+	                                             GPXDataSetAxisType gpxDataSetAxisType,
+	                                             boolean calcWithoutGaps,
+	                                             @Nullable String trackPath) {
 		if (app == null || chart == null || analysis == null) {
 			return new ArrayList<>();
 		}
@@ -884,6 +958,10 @@ public class ChartUtils {
 		} else {
 			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, secondType, gpxDataSetAxisType, calcWithoutGaps, false);
 			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, firstType, gpxDataSetAxisType, calcWithoutGaps, true);
+			if (applyColorSource(app, chart, dataSet1, dataSet2, trackPath)) {
+				result.add(dataSet1);
+				return result;
+			}
 			if (dataSet1 == null && dataSet2 == null) {
 				return new ArrayList<>();
 			} else if (dataSet1 == null) {
@@ -946,14 +1024,15 @@ public class ChartUtils {
 
 	@Nullable
 	public static List<GPXDataSetType> getSavedChartTypes(@NonNull ListStringPreference listStringPreference) {
-		List<GPXDataSetType> savedYAxisTypes = new ArrayList<>();
 		List<String> setTypes = listStringPreference.getStringsList();
 		if (Algorithms.isEmpty(setTypes)) {
 			return null;
 		}
 
-		for (GPXDataSetType type : GPXDataSetType.values()) {
-			if (setTypes.contains(type.name())) {
+		List<GPXDataSetType> savedYAxisTypes = new ArrayList<>();
+		for (String name : setTypes) {
+			GPXDataSetType type = getDataSetTypeByName(name);
+			if (type != null && !savedYAxisTypes.contains(type)) {
 				savedYAxisTypes.add(type);
 				if (savedYAxisTypes.size() >= MAX_CHART_TYPES) {
 					break;
@@ -962,6 +1041,16 @@ public class ChartUtils {
 		}
 
 		return Algorithms.isEmpty(savedYAxisTypes) ? null : savedYAxisTypes;
+	}
+
+	@Nullable
+	private static GPXDataSetType getDataSetTypeByName(@Nullable String name) {
+		for (GPXDataSetType type : GPXDataSetType.values()) {
+			if (type.name().equals(name)) {
+				return type;
+			}
+		}
+		return null;
 	}
 
 	@NonNull

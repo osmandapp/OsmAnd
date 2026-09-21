@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import com.github.mikephil.charting.charts.GradientChart;
+import net.osmand.plus.charts.GradientChart;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import net.osmand.plus.R;

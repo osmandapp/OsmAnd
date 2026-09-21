@@ -19,7 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.github.mikephil.charting.charts.ElevationChart;
+import net.osmand.plus.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -713,6 +713,12 @@ public class TrackDetailsMenu {
 					dataSets.add(dataSet);
 				}
 			}
+		}
+
+		String trackPath = selectedGpxFile != null ? selectedGpxFile.getGpxFile().getPath() : null;
+		if (dataSets.size() == 2 && ChartUtils.applyColorSource(app, chart,
+				(OrderedLineDataSet) dataSets.get(0), (OrderedLineDataSet) dataSets.get(1), trackPath)) {
+			dataSets.remove(1);
 		}
 
 		Collections.sort(dataSets, (ds1, ds2) -> {
