@@ -29,6 +29,19 @@ class GpxExtensionsMapTest {
 	}
 
 	@Test
+	fun testGetExtensionReadsWithoutTheView() {
+		val point = WptPt()
+		assertNull(point.getExtension("speed"))
+		point.getExtensionsToWrite()["speed"] = "5.5"
+		point.getExtensionsToWrite()["color"] = "#ff0000"
+		assertEquals("5.5", point.getExtension("speed"))
+		assertEquals("#ff0000", point.getExtension("color"))
+		assertNull(point.getExtension("missing"))
+		point.getExtensionsToWrite().remove("speed")
+		assertNull(point.getExtension("speed"))
+	}
+
+	@Test
 	fun testKeysAreKeptSorted() {
 		val point = WptPt()
 		val extensions = point.getExtensionsToWrite()

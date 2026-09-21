@@ -149,7 +149,7 @@ internal class GpxExtensionsMap(
 		private val EMPTY = arrayOfNulls<String>(0)
 
 		/** Index of the key inside the array, or `-(insertion point) - 1` when it is not there. */
-		private fun indexOf(array: Array<String?>, key: String): Int {
+		internal fun indexOf(array: Array<String?>, key: String): Int {
 			var low = 0
 			var high = array.size / 2 - 1
 			while (low <= high) {

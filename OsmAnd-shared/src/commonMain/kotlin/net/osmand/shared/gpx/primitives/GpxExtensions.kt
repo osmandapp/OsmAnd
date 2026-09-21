@@ -25,6 +25,13 @@ open class GpxExtensions {
 			deferredArray = GpxExtensionsMap.toArray(value)
 		}
 
+	/** One extension without building the map view - for the getters called per point per frame. */
+	fun getExtension(key: String): String? {
+		val array = extensionsArray ?: return null
+		val index = GpxExtensionsMap.indexOf(array, key)
+		return if (index >= 0) array[index + 1] else null
+	}
+
 	fun getExtensionsToRead(): Map<String, String> {
 		return if (extensionsArray == null) emptyMap() else GpxExtensionsMap(this, false)
 	}
@@ -71,20 +78,10 @@ open class GpxExtensions {
 	}
 
 	fun getColor(defColor: Int?): Int? {
-		var clrValue: String? = null
-		val extensions = if (extensionsArray != null) getExtensionsToRead() else null
-		if (extensions != null) {
-			clrValue = extensions[COLOR_NAME_EXTENSION]
-			if (clrValue == null) {
-				clrValue = extensions["colour"]
-			}
-			if (clrValue == null) {
-				clrValue = extensions["displaycolor"]
-			}
-			if (clrValue == null) {
-				clrValue = extensions["displaycolour"]
-			}
-		}
+		val clrValue = getExtension(COLOR_NAME_EXTENSION)
+			?: getExtension("colour")
+			?: getExtension("displaycolor")
+			?: getExtension("displaycolour")
 		return GpxUtilities.parseColor(clrValue, defColor)
 	}
 
@@ -102,7 +99,7 @@ open class GpxExtensions {
 		getExtensionsToWrite().remove(COLOR_NAME_EXTENSION)
 	}
 
-	fun getWidth(defaultWidth: String?) = extensions?.get(LINE_WIDTH_EXTENSION) ?: defaultWidth
+	fun getWidth(defaultWidth: String?) = getExtension(LINE_WIDTH_EXTENSION) ?: defaultWidth
 
 	fun setWidth(width: String?) {
 		width?.let {
