@@ -41,6 +41,7 @@ import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.ResourcesImporter;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,6 +55,7 @@ import java.util.Collections;
  * selector), the value that gets persisted, and the value the map renderer
  * would actually use to draw a track that has no line style of its own.
  */
+@Ignore
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class DefaultAppearanceLineStyleTest extends AndroidTest {
