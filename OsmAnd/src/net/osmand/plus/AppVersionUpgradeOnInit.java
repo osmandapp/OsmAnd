@@ -66,7 +66,7 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.preferences.*;
-import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
+import net.osmand.plus.settings.coordinates.BuiltInCoordinateFormat;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.GridFormat;
@@ -81,6 +81,7 @@ import net.osmand.plus.views.mapwidgets.WidgetsIdsMapper;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettings;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -1217,7 +1218,7 @@ public class AppVersionUpgradeOnInit {
 	@NonNull
 	public static List<String> getLegacyCoordinateFormatPreferredIds(int legacyFormat) {
 		LinkedHashSet<String> ids = new LinkedHashSet<>();
-		String primaryId = CoordinateFormatIds.fromOldFormat(legacyFormat);
+		String primaryId = BuiltInCoordinateFormat.fromOldFormat(legacyFormat);
 		if (primaryId != null) {
 			ids.add(primaryId);
 		}

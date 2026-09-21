@@ -1,6 +1,8 @@
 package net.osmand.plus.settings.coordinates
 
 import net.osmand.plus.OsmandApplication
+import net.osmand.shared.settings.coordinates.CoordinateFormat
+import net.osmand.shared.settings.coordinates.EpsgCatalogRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -12,7 +14,7 @@ import kotlinx.coroutines.launch
 class CoordinateFormatHelper(private val app: OsmandApplication) {
 
 	val transformer = EpsgCoordinateTransformer(app)
-	val repository = EpsgCatalogRepository(app)
+	val repository = EpsgCatalogRepository()
 	val gridFormatProvider = CoordinateGridFormatProvider(app, repository)
 	val formatter = CoordinateFormatFormatter(app, transformer)
 
