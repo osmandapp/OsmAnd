@@ -315,6 +315,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 
 	public boolean isRulerWidgetOn() {
 		MapActivity activity = getMapActivity();
+		boolean on = false;
 		if (activity != null) {
 			ApplicationMode appMode = app.getSettings().getApplicationMode();
 			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
@@ -322,13 +323,13 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			rulerWidgets.clear();
 			widgetRegistry.collectWidgetsInfo(rulerWidgets, appMode, layoutMode, null, RADIUS_RULER, true);
 
-			for (int i = 0; i < rulerWidgets.size(); i++) {
-				if (isPanelVisible(rulerWidgets.get(i).getWidgetPanel())) {
-					return true;
-				}
+			for (int i = 0; i < rulerWidgets.size() && !on; i++) {
+				on = isPanelVisible(rulerWidgets.get(i).getWidgetPanel());
 			}
+			// the widgets hold their activity: keep none of them between two draws
+			rulerWidgets.clear();
 		}
-		return false;
+		return on;
 	}
 
 	private boolean isPanelVisible(WidgetsPanel widgetsPanel) {
