@@ -321,6 +321,11 @@ public class RouteResultPreparation {
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private static final double SLOW_DOWN_SPEED = 2;
 
+	private static class TimeCalculationState {
+		double currentDistance;
+		double lastTrafficSignalDistance = -1;
+	}
+
 	private static boolean segmentHasTag(RouteDataObject road, int segmentIndex, String tag) {
 		int[] segmentPointTypes = road.getPointTypes(segmentIndex);
 		if (segmentPointTypes != null) {
@@ -335,18 +340,22 @@ public class RouteResultPreparation {
 	}
 
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
-		ctx.currentCalculatedDistance = 0.0;
-		ctx.lastTrafficSignalDistance = -1;
+		TimeCalculationState state = new TimeCalculationState();
 
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			if (i > 0) {
-				ctx.currentCalculatedDistance += result.get(i-1).getDistance();
+				state.currentDistance += result.get(i - 1).getDistance();
 			}
-			calculateTimeSpeed(ctx, rr);
+			calculateTimeSpeed(ctx, rr, state);
 		}
 	}
+
 	public static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr) {
+		calculateTimeSpeed(ctx, rr, new TimeCalculationState());
+	}
+
+	private static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr, TimeCalculationState state) {
 		// Naismith's/Scarf rules add additional travel time when moving uphill
 		boolean useNaismithRule = false;
 		double scarfSeconds = 0; // Additional time as per Naismith/Scarf
@@ -391,13 +400,13 @@ public class RouteResultPreparation {
 			if (obstacle < 0) {
 				obstacle = 0;
 			} else if (obstacle > 0) {
-				if (segmentHasTag(road, j,"traffic_signals")) {
+				if (segmentHasTag(road, j, "traffic_signals")) {
 					// For groups with many traffic signals nearby take penalty only for first one. (After red signal next usually are green)
 					// XXXXX XXXXX   ->   Xxxxx Xxxxx
-					boolean isFirstStop = ctx.lastTrafficSignalDistance == -1;
-					double currentDistance = ctx.currentCalculatedDistance + distance;
-					double distanceFromPreviousStop = currentDistance - ctx.lastTrafficSignalDistance;
-					ctx.lastTrafficSignalDistance = currentDistance;
+					boolean isFirstStop = state.lastTrafficSignalDistance == -1;
+					double currentDistance = state.currentDistance + distance;
+					double distanceFromPreviousStop = currentDistance - state.lastTrafficSignalDistance;
+					state.lastTrafficSignalDistance = currentDistance;
 					if (isFirstStop || distanceFromPreviousStop >= 100) {
 						obstacle = obstacle * 1.0;
 					} else {
