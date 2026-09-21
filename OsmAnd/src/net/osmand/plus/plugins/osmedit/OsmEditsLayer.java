@@ -7,7 +7,6 @@ import static net.osmand.plus.plugins.osmedit.data.OsmPoint.Group.BUG;
 import static net.osmand.plus.plugins.osmedit.data.OsmPoint.Group.POI;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 
@@ -430,17 +429,13 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		PointI position = new PointI(x, y);
 
 		PointImageDrawable pointImageDrawable = createOsmPointIcon(osmPoint); //TODO bug with detect icon in getIcon()
-		Bitmap bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
-		if (bitmap == null) {
-			return;
-		}
 
 		MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 		mapMarkerBuilder
 				.setPosition(position)
 				.setIsHidden(false)
 				.setBaseOrder(getPointsOrder())
-				.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
+				.setPinIcon(pointImageDrawable.getBigMergedSkImage(textScale, false))
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 
 		mapMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);

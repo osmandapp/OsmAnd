@@ -3,7 +3,6 @@ package net.osmand.plus.views.layers.core;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -29,7 +28,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -80,7 +78,6 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 
 		@Override
 		public SingleSkImage getImageBitmap(boolean isFullSize) {
-			Bitmap bitmap;
 			if (!osmNote.isOpened() && !showClosed) {
 				return SwigUtilities.nullSkImage();
 			}
@@ -97,7 +94,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 				PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 						ContextCompat.getColor(ctx, backgroundColorRes), true, false, iconId,
 						BACKGROUND_TYPE);
-				bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
+				return pointImageDrawable.getBigMergedSkImage(textScale, false);
 			} else {
 				int backgroundColorRes;
 				if (osmNote.isOpened()) {
@@ -108,9 +105,8 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 				PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 						ContextCompat.getColor(ctx, backgroundColorRes), true,
 						false, DEFAULT_UI_ICON_ID, BACKGROUND_TYPE);
-				bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
+				return pointImageDrawable.getSmallMergedSkImage(textScale);
 			}
-			return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
 		}
 
 		@Override
