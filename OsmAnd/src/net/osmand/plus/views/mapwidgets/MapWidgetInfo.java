@@ -201,13 +201,22 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		}
 	}
 
+	// the last preference value and its split: every widget update of every panel asks for it
+	private static volatile Object[] cachedVisibility;
+
 	@NonNull
 	public static List<String> getWidgetsVisibility(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		String widgetsVisibilityString = getVisibilityPreference(app, layoutMode).getModeValue(appMode);
 		if (Algorithms.isEmpty(widgetsVisibilityString)) {
 			return Collections.emptyList();
 		}
-		return Arrays.asList(widgetsVisibilityString.split(SETTINGS_SEPARATOR));
+		Object[] cached = cachedVisibility;
+		if (cached == null || !widgetsVisibilityString.equals(cached[0])) {
+			cached = new Object[] {widgetsVisibilityString,
+					Collections.unmodifiableList(Arrays.asList(widgetsVisibilityString.split(SETTINGS_SEPARATOR)))};
+			cachedVisibility = cached;
+		}
+		return (List<String>) cached[1];
 	}
 
 	@NonNull
