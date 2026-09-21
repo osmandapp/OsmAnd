@@ -82,5 +82,6 @@
 		android:layout_height="wrap_content"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding"
+		app:cornerRadius="@dimen/ui_corner_radius_button"
 		tools:text="@string/external_device_details_connect" />
 </LinearLayout>

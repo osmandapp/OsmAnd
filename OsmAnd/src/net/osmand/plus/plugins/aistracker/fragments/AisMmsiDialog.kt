@@ -1,12 +1,16 @@
 package net.osmand.plus.plugins.aistracker.fragments
 
-import android.view.WindowManager
+import android.app.AlertDialog.BUTTON_POSITIVE
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.WindowManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import net.osmand.plus.R
 import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.plus.plugins.aistracker.AisFormatter
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin
 
 /**
@@ -26,7 +30,7 @@ object AisMmsiDialog {
 		val editText: TextInputEditText = view.findViewById(R.id.mmsi_edit)
 
 		val savedMmsi = plugin.AIS_OWN_MMSI.get()
-		val savedText = if (savedMmsi == 0) "" else savedMmsi.toString()
+		val savedText = if (savedMmsi == 0) "" else AisFormatter.formatMmsi(savedMmsi)
 		editText.setText(savedText)
 		editText.setSelection(savedText.length)
 
@@ -38,7 +42,7 @@ object AisMmsiDialog {
 			.create()
 
 		dialog.setOnShowListener {
-			val saveButton = dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)
+			val saveButton = dialog.getButton(BUTTON_POSITIVE)
 			var validationRequested = false
 
 			fun currentText() = editText.text?.toString().orEmpty()
@@ -46,17 +50,21 @@ object AisMmsiDialog {
 			fun hasChanges() = currentText() != savedText
 
 			fun updateState() {
-				saveButton.isEnabled = isValid() && hasChanges()
+				val valid = isValid()
+				/* the error is shown on Save and, from the first failed Save on, while typing */
 				if (validationRequested) {
 					inputLayout.error =
-						if (isValid()) null else context.getString(R.string.ais_error_mmsi_length)
+						if (valid) null else context.getString(R.string.ais_error_mmsi_length)
 				}
+				/* Save stays enabled until the first failed attempt - otherwise the error could
+				 * never be shown - and follows the validity from then on */
+				saveButton.isEnabled = hasChanges() && (valid || !validationRequested)
 			}
 
-			editText.addTextChangedListener(object : android.text.TextWatcher {
+			editText.addTextChangedListener(object : TextWatcher {
 				override fun beforeTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) = Unit
 				override fun onTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) = Unit
-				override fun afterTextChanged(s: android.text.Editable?) = updateState()
+				override fun afterTextChanged(s: Editable?) = updateState()
 			})
 			updateState()
 

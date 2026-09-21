@@ -53,6 +53,7 @@ import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.srtm.TerrainMode;
 import net.osmand.plus.profiles.LocationIcon;
@@ -175,8 +176,10 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_3_05 = 5305;
 	public static final int VERSION_5_3_06 = 5306;
 	public static final int VERSION_5_4_01 = 5401;
+	// 5402 - 5.4-02 (Migrate the AIS CPA warning time to the CPA master switch)
+	public static final int VERSION_5_4_02 = 5402;
 
-	public static final int LAST_APP_VERSION = VERSION_5_4_01;
+	public static final int LAST_APP_VERSION = VERSION_5_4_02;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -353,6 +356,9 @@ public class AppVersionUpgradeOnInit {
 					app.getAppInitializer().addOnStartListener(
 							init -> migrateTransparentWidgetsToPanelsAppearance()
 					);
+				}
+				if (prevAppVersion < VERSION_5_4_02) {
+					migrateAisCpaWarningTimeToSwitch(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -1104,6 +1110,27 @@ public class AppVersionUpgradeOnInit {
 						PanelAppearanceSettings appearanceSettings = app.getPanelAppearanceSettingsManager().get(panel);
 						appearanceSettings.getBackgroundModePref(layoutMode).setModeValue(appMode, PanelBackgroundMode.TRANSPARENT);
 					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * The Vessel tracker (AIS) plugin used to express "collision warning off" as a zero warning
+	 * time. It has a master switch now, so a positive warning time the user had set means the
+	 * switch is on, and a zero goes back to the default so the new screen shows a valid value.
+	 */
+	private void migrateAisCpaWarningTimeToSwitch(@NonNull OsmandSettings settings) {
+		CommonPreference<Integer> warningTime = new IntPreference(settings,
+				AisTrackerPlugin.AIS_CPA_WARNING_TIME_ID, 0).makeProfile();
+		CommonPreference<Boolean> cpaEnabled = new BooleanPreference(settings,
+				AisTrackerPlugin.AIS_CPA_ENABLED_ID, false).makeProfile();
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			if (warningTime.isSetForMode(mode)) {
+				if (warningTime.getModeValue(mode) > 0) {
+					cpaEnabled.setModeValue(mode, true);
+				} else {
+					warningTime.resetModeToDefault(mode);
 				}
 			}
 		}

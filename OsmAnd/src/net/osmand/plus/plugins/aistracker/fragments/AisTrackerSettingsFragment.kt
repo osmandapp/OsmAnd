@@ -17,6 +17,7 @@ import net.osmand.plus.plugins.aistracker.AisConnectionState
 import net.osmand.plus.plugins.aistracker.AisFormatter
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.ui.GroupFooterView
 import net.osmand.plus.widgets.ui.SegmentedList
 import net.osmand.plus.widgets.ui.SettingRow
@@ -42,6 +43,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 	private lateinit var mmsiRow: SettingRow
 	private lateinit var showOnMapRow: SettingRow
 	private lateinit var connectionFooter: GroupFooterView
+	private lateinit var vesselsHeader: View
 	private lateinit var connectionGroup: ViewGroup
 	private lateinit var vesselsGroup: ViewGroup
 	private lateinit var myVesselGroup: ViewGroup
@@ -72,6 +74,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		vesselsGroup = view.findViewById(R.id.vessels_group)
 		myVesselGroup = view.findViewById(R.id.my_vessel_group)
 		connectionFooter = view.findViewById(R.id.connection_footer)
+		vesselsHeader = view.findViewById(R.id.vessels_header)
 
 		connectionRow = view.findViewById(R.id.connection_row)
 		connectionIcon = connectionRow.findViewById(R.id.icon)
@@ -177,7 +180,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		val mmsi = plugin.AIS_OWN_MMSI.get()
 		val mmsiSet = mmsi != 0
 		mmsiRow.setSubtitle(
-			if (mmsiSet) mmsi.toString() else getString(R.string.ais_mmsi_not_set))
+			if (mmsiSet) AisFormatter.formatMmsi(mmsi) else getString(R.string.ais_mmsi_not_set))
 
 		showOnMapRow.setChecked(mmsiSet && plugin.AIS_DISPLAY_OWN_POSITION.get())
 		showOnMapRow.setRowEnabled(mmsiSet)
@@ -198,9 +201,11 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		/* the connection row carries an action button, so it has its own layout and is bound here
 		 * instead of through SettingRow */
 		val subtitle: TextView = connectionRow.findViewById(R.id.subtitle)
-		subtitle.text = getString(R.string.ltr_or_rtl_combine_via_bold_point,
-			getString(state.titleId), protocolName())
-		subtitle.setTextColor(AndroidUtils.getColorFromAttr(context, subtitleColorAttr(state)))
+		val status = getString(state.titleId)
+		/* only the status word takes the state colour, the protocol stays in the default one */
+		subtitle.text = UiUtilities.createColorSpannable(
+			getString(R.string.ltr_or_rtl_combine_via_bold_point, status, protocolName()),
+			AndroidUtils.getColorFromAttr(context, subtitleColorAttr(state)), status)
 
 		val connecting = state == AisConnectionState.CONNECTING
 		connectionIcon.visibility = if (connecting) View.GONE else View.VISIBLE
@@ -216,6 +221,11 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 
 		val connected = state == AisConnectionState.CONNECTED
 		connectionFooter.visibility = if (connected) View.VISIBLE else View.GONE
+		/* the 16dp gap to the next group comes from the footer while it is shown; without the
+		 * footer the header of the next group has to bring it itself */
+		(vesselsHeader.layoutParams as ViewGroup.MarginLayoutParams).topMargin =
+			if (connected) 0 else resources.getDimensionPixelSize(R.dimen.ui_group_gap)
+		vesselsHeader.requestLayout()
 		if (connected) {
 			val vessels = getString(R.string.ais_vessels_on_the_map, plugin.vesselsCount)
 			/* the position half is only meaningful while the stream is the location source */
@@ -269,19 +279,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		})
 
 	private fun resetPluginSettings() {
-		plugin.AIS_NMEA_PROTOCOL.resetToDefault()
-		plugin.AIS_NMEA_IP_ADDRESS.resetToDefault()
-		plugin.AIS_NMEA_TCP_PORT.resetToDefault()
-		plugin.AIS_NMEA_UDP_PORT.resetToDefault()
-		plugin.AIS_RECEIVE_IN_BACKGROUND.resetToDefault()
-		plugin.AIS_USE_NMEA_LOCATION.resetToDefault()
-		plugin.AIS_OBJ_LOST_TIMEOUT.resetToDefault()
-		plugin.AIS_SHIP_LOST_TIMEOUT.resetToDefault()
-		plugin.AIS_CPA_ENABLED.resetToDefault()
-		plugin.AIS_CPA_WARNING_TIME.resetToDefault()
-		plugin.AIS_CPA_WARNING_DISTANCE.resetToDefault()
-		plugin.AIS_OWN_MMSI.resetToDefault()
-		plugin.AIS_DISPLAY_OWN_POSITION.resetToDefault()
+		plugin.resetSettings()
 		updateContent()
 	}
 

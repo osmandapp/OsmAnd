@@ -8,11 +8,13 @@ import io.ktor.network.sockets.aSocket
 import io.ktor.network.sockets.openReadChannel
 import io.ktor.utils.io.readText
 import io.ktor.utils.io.readUTF8Line
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -35,6 +37,7 @@ import net.sf.marineapi.nmea.event.SentenceListener
 import net.sf.marineapi.nmea.parser.SentenceFactory
 import net.sf.marineapi.nmea.sentence.AISSentence
 import net.sf.marineapi.nmea.sentence.PositionSentence
+import kotlin.concurrent.Volatile
 
 open class AisMessageListener {
 
@@ -45,6 +48,8 @@ open class AisMessageListener {
     private val aisObjectListener: AisObjectListener
     private val nmeaLocationListener: NmeaLocationListener?
     private val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+    /* cleared by stopListener() on the caller's thread and read by the network coroutine */
+    @Volatile
     private var connectionListener: AisConnectionListener? = null
     private var networkJob: Job? = null
     private val listeners = mutableListOf<SentenceListener>()
@@ -109,6 +114,19 @@ open class AisMessageListener {
                         val line = readChannel.readUTF8Line() ?: break
                         processLine(line)
                     }
+                    if (isActive) {
+                        /* the server closed the stream - without this the UI would keep saying
+                         * "connected" until the next attempt starts */
+                        LoggerFactory.getLogger("AisMessageListener").debug("TCP stream closed by the server")
+                        connectionListener?.onAisConnectionFailed(null)
+                    }
+                } catch (e: CancellationException) {
+                    if (e is TimeoutCancellationException) {
+                        LoggerFactory.getLogger("AisMessageListener").error("TCP connect timeout")
+                        connectionListener?.onAisConnectionFailed(e.message)
+                    } else {
+                        throw e // stopListener() cancelled the job, that is not a failure
+                    }
                 } catch (e: Exception) {
                     LoggerFactory.getLogger("AisMessageListener").error("TCP exception: ${e.message}")
                     connectionListener?.onAisConnectionFailed(e.message)
@@ -142,6 +160,8 @@ open class AisMessageListener {
                             }
                         }
                     }
+                } catch (e: CancellationException) {
+                    throw e // stopListener() cancelled the job, that is not a failure
                 } catch (e: Exception) {
                     LoggerFactory.getLogger("AisMessageListener").error("UDP exception: ${e.message}")
                     connectionListener?.onAisConnectionFailed(e.message)

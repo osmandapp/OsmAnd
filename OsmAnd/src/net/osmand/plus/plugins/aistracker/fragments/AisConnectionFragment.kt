@@ -11,7 +11,6 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import net.osmand.plus.R
-import net.osmand.plus.plugins.aistracker.AisTrackerPlugin
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_NMEA_PROTOCOL_TCP
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_NMEA_PROTOCOL_UDP
 import net.osmand.plus.widgets.ui.ScreenDescriptionView
@@ -116,6 +115,11 @@ class AisConnectionFragment : AisBaseFragment() {
 	}
 
 	private fun hasChanges(): Boolean {
+		if (!plugin.isConnectionConfigured) {
+			/* nothing is saved yet - the first Save is what sets the connection up, even when
+			 * the user keeps the default values */
+			return true
+		}
 		val tcp = protocol == AIS_NMEA_PROTOCOL_TCP
 		if (protocol != plugin.AIS_NMEA_PROTOCOL.get()) {
 			return true
@@ -142,30 +146,15 @@ class AisConnectionFragment : AisBaseFragment() {
 		if (!isHostValid() || !isPortValid()) {
 			return
 		}
-		val tcp = protocol == AIS_NMEA_PROTOCOL_TCP
-		plugin.AIS_NMEA_PROTOCOL.set(protocol)
-		if (tcp) {
-			plugin.AIS_NMEA_IP_ADDRESS.set(currentHost())
-			plugin.AIS_NMEA_TCP_PORT.set(currentPort().toInt())
-		} else {
-			plugin.AIS_NMEA_UDP_PORT.set(currentPort().toInt())
-		}
-		/* an open socket would no longer match what the screen shows, so it is dropped and
-		 * reopened with the new values */
-		if (plugin.connectionState.connectionActive) {
-			plugin.connect()
-		}
+		/* stored together: the plugin reopens an open socket with the new values once */
+		plugin.applyConnectionSettings(protocol, currentHost(), currentPort().toInt())
 		requireActivity().onBackPressed()
 	}
 
 	private fun resetConnectionSettings() {
-		plugin.AIS_NMEA_PROTOCOL.resetToDefault()
-		plugin.AIS_NMEA_IP_ADDRESS.resetToDefault()
-		plugin.AIS_NMEA_TCP_PORT.resetToDefault()
-		plugin.AIS_NMEA_UDP_PORT.resetToDefault()
+		plugin.resetConnectionSettings()
 		protocol = plugin.AIS_NMEA_PROTOCOL.get()
-		toggleGroup.check(
-			if (protocol == AisTrackerPlugin.AIS_NMEA_PROTOCOL_TCP) R.id.protocol_tcp else R.id.protocol_udp)
+		toggleGroup.check(if (protocol == AIS_NMEA_PROTOCOL_TCP) R.id.protocol_tcp else R.id.protocol_udp)
 		updateProtocol()
 	}
 }

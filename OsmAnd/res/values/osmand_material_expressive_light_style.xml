@@ -7,12 +7,12 @@
 		<item name="colorOnPrimary">@color/on_primary_light</item>
 		<item name="colorPrimaryContainer">@color/primary_container_light</item>
 		<item name="colorOnPrimaryContainer">@color/on_primary_container_light</item>
-		
+
 		<item name="colorSecondary">@color/secondary_light</item>
 		<item name="colorOnSecondary">@color/on_secondary_light</item>
 		<item name="colorSecondaryContainer">@color/secondary_container_light</item>
 		<item name="colorOnSecondaryContainer">@color/on_secondary_container_light</item>
-		
+
 		<item name="colorSurface">@color/surface_light</item>
 		<item name="colorSurfaceContainer">@color/surface_container_light</item>
 		<item name="colorSurfaceContainerLow">@color/surface_container_light</item>
@@ -20,13 +20,13 @@
 		<item name="colorSurfaceContainerHighest">@color/surface_container_highest_light</item>
 		<item name="colorOnSurface">@color/on_surface_light</item>
 		<item name="colorOnSurfaceVariant">@color/on_surface_variant_light</item>
-		
+
 		<item name="colorOutline">@color/outline_light</item>
 		<item name="colorOutlineVariant">@color/outline_variant_light</item>
-		
+
 		<item name="colorError">@color/error_light</item>
 		<item name="colorOnError">@color/on_error_light</item>
-		
+
 		<item name="android:colorBackground">@color/surface_light</item>
 		<item name="scrimBackground">@color/scrim_light</item>
 
@@ -36,7 +36,7 @@
 		<item name="colorOnSurfaceTertiary">@color/on_surface_tertiary_light</item>
 		<item name="colorOnSurfaceDisabled">@color/on_surface_disabled_light</item>
 		<item name="colorOutlineDisabled">@color/outline_disabled_light</item>
-		
+
 		<item name="colorSuccess">@color/success_light</item>
 		<item name="colorWarning">@color/warning_light</item>
 		<item name="colorSuccessIcon">@color/success_icon_light</item>

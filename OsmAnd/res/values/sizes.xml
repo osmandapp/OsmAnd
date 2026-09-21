@@ -519,10 +519,8 @@
 	<dimen name="ui_row_icon_gap">32dp</dimen>
 	<dimen name="ui_line_height_title">24dp</dimen>
 	<dimen name="ui_line_height_body">20dp</dimen>
-	<dimen name="ui_image_inset">24dp</dimen>
 	<dimen name="ui_text_gap">2dp</dimen>
 	<dimen name="ui_dialog_padding">24dp</dimen>
-	<dimen name="ui_slider_height">48dp</dimen>
 	<dimen name="ui_switch_height">32dp</dimen>
 	<dimen name="ui_main_switch_height">56dp</dimen>
 	<dimen name="ui_corner_radius_button">8dp</dimen>

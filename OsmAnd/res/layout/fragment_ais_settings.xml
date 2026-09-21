@@ -53,10 +53,12 @@
 				android:layout_height="wrap_content"
 				android:visibility="gone" />
 
+			<!-- the top margin is dropped while the connection footer above supplies the gap -->
 			<net.osmand.plus.widgets.ui.GroupHeaderView
 				android:id="@+id/vessels_header"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/ui_group_gap"
 				app:groupHeaderTitle="@string/ais_vessels_on_the_map_group" />
 
 			<LinearLayout

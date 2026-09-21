@@ -28,6 +28,7 @@ import net.osmand.shared.aistracker.AisDataListener;
 import net.osmand.shared.aistracker.AisLocation;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -51,8 +52,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class AisTrackerPlugin extends OsmandPlugin {
 
 	static private final int SIMULATED_LATENCY_TIME_MS = 100;
-	/* no AIS message within this time while the socket is open means "No data received": */
+	/* no NMEA sentence within this time while the socket is open means "No data received": */
 	private static final long AIS_NO_DATA_TIMEOUT_MS = 60_000;
+	private static final long AIS_NO_DATA_CHECK_INTERVAL_MS = 5_000;
 	/* the phone GPS stays ignored for this long after every position from the NMEA stream, so a
 	 * stream that stops hands the position back instead of freezing it: */
 	private static final long IGNORE_PHONE_LOCATION_TIMEOUT_MS = 10_000;
@@ -113,17 +115,17 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	/* replaces the phone position with the one the NMEA stream carries: */
 	public final CommonPreference<Boolean> AIS_USE_NMEA_LOCATION;
 
-	/* timestamp of last AIS message received for all instances: */
-	private long lastMessageReceived = 0;
+	/* timestamp of the last NMEA sentence (AIS message or position) received for all instances,
+	 * written by the network thread and read by the UI: */
+	private volatile long lastMessageReceived = 0;
+	/* written by the network thread and by the UI, see setConnectionState(): */
 	@NonNull
-	private AisConnectionState connectionState = AisConnectionState.NOT_CONNECTED;
+	private volatile AisConnectionState connectionState = AisConnectionState.NOT_CONNECTED;
 	private final List<AisConnectionStateListener> connectionStateListeners = new CopyOnWriteArrayList<>();
 	private Location fakeOwnPosition = null; // used for test purposes to fake own position
 	@Nullable
 	private volatile Location nmeaLocation = null;
 
-	private final StateChangedListener<String> addrPrefListener = change -> restartNetworkListener();
-	private final StateChangedListener<Integer> protocolPortPrefListener = change -> restartNetworkListener();
 	private final StateChangedListener<Boolean> receiveInBackgroundPrefListener = enabled -> {
 		if (enabled) {
 			updateAisBackgroundService();
@@ -261,10 +263,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		AIS_CONNECTION_ENABLED = registerBooleanPreference(AIS_CONNECTION_ENABLED_ID, true);
 		AIS_CPA_ENABLED = registerBooleanPreference(AIS_CPA_ENABLED_ID, false);
 		AIS_USE_NMEA_LOCATION = registerBooleanPreference(AIS_USE_NMEA_LOCATION_ID, false);
-		AIS_NMEA_IP_ADDRESS.addListener(addrPrefListener);
-		AIS_NMEA_PROTOCOL.addListener(protocolPortPrefListener);
-		AIS_NMEA_TCP_PORT.addListener(protocolPortPrefListener);
-		AIS_NMEA_UDP_PORT.addListener(protocolPortPrefListener);
+		/* the connection preferences have no listeners: the Connection screen saves them together
+		 * through applyConnectionSettings(), which reopens the socket once */
 		AIS_RECEIVE_IN_BACKGROUND.addListener(receiveInBackgroundPrefListener);
 	}
 
@@ -371,11 +371,15 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	}
 
 	/**
-	 * The connection is "not set up" only for TCP - UDP works out of the box on the default port.
+	 * The connection is set up once the user saved it on the Connection screen at least once -
+	 * a user of the old preference screen has one of these preferences set as well - and, for
+	 * TCP, named a host. Until then the plugin does not open a socket on its own.
 	 */
 	public boolean isConnectionConfigured() {
-		return AIS_NMEA_PROTOCOL.get() != AIS_NMEA_PROTOCOL_TCP
-				|| !Algorithms.isEmpty(AIS_NMEA_IP_ADDRESS.get());
+		boolean saved = AIS_NMEA_PROTOCOL.isSet() || AIS_NMEA_IP_ADDRESS.isSet()
+				|| AIS_NMEA_TCP_PORT.isSet() || AIS_NMEA_UDP_PORT.isSet();
+		return saved && (AIS_NMEA_PROTOCOL.get() != AIS_NMEA_PROTOCOL_TCP
+				|| !Algorithms.isEmpty(AIS_NMEA_IP_ADDRESS.get()));
 	}
 
 	@NonNull
@@ -383,14 +387,14 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		if (!isConnectionConfigured()) {
 			return AisConnectionState.NOT_SET_UP;
 		}
-		if (connectionState == AisConnectionState.CONNECTED
-				&& System.currentTimeMillis() - lastMessageReceived > AIS_NO_DATA_TIMEOUT_MS) {
-			return AisConnectionState.NO_DATA;
-		}
 		return connectionState;
 	}
 
-	private void setConnectionState(@NonNull AisConnectionState state) {
+	/**
+	 * Called from the network thread and from the UI, so the compare and the assignment are one
+	 * step; the listeners are always notified on the UI thread.
+	 */
+	private synchronized void setConnectionState(@NonNull AisConnectionState state) {
 		if (connectionState != state) {
 			connectionState = state;
 			AisConnectionState reported = getConnectionState();
@@ -400,6 +404,38 @@ public class AisTrackerPlugin extends OsmandPlugin {
 				}
 			});
 		}
+	}
+
+	/** Every NMEA sentence counts as data - an AIS message as well as a position of the stream. */
+	private void onDataReceived() {
+		lastMessageReceived = System.currentTimeMillis();
+		if (connectionState == AisConnectionState.NO_DATA) {
+			setConnectionState(AisConnectionState.CONNECTED);
+		}
+	}
+
+	/* runs on the UI thread every AIS_NO_DATA_CHECK_INTERVAL_MS while the socket is open: */
+	private final Runnable noDataCheck = new Runnable() {
+		@Override
+		public void run() {
+			AisConnectionState state = connectionState;
+			if (state == AisConnectionState.CONNECTED
+					&& System.currentTimeMillis() - lastMessageReceived > AIS_NO_DATA_TIMEOUT_MS) {
+				setConnectionState(AisConnectionState.NO_DATA);
+			}
+			if (state == AisConnectionState.CONNECTED || state == AisConnectionState.NO_DATA) {
+				app.runInUIThread(this, AIS_NO_DATA_CHECK_INTERVAL_MS);
+			}
+		}
+	};
+
+	private void startNoDataCheck() {
+		app.getUiHandler().removeCallbacks(noDataCheck);
+		app.runInUIThread(noDataCheck, AIS_NO_DATA_CHECK_INTERVAL_MS);
+	}
+
+	private void stopNoDataCheck() {
+		app.getUiHandler().removeCallbacks(noDataCheck);
 	}
 
 	/** Opens the connection and remembers that the user wants it open. */
@@ -412,7 +448,45 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	public void disconnect() {
 		AIS_CONNECTION_ENABLED.set(false);
 		stopAisListener();
-		setConnectionState(AisConnectionState.NOT_CONNECTED);
+	}
+
+	/**
+	 * Stores what the user saved on the Connection screen. An open socket would no longer match
+	 * the saved values, so it is dropped and reopened with them - once, not per preference.
+	 * A connection the user closed stays closed.
+	 *
+	 * @param port the port of the given protocol; the port of the other protocol is kept.
+	 */
+	public void applyConnectionSettings(int protocol, @Nullable String host, int port) {
+		AIS_NMEA_PROTOCOL.set(protocol);
+		if (protocol == AIS_NMEA_PROTOCOL_TCP) {
+			AIS_NMEA_IP_ADDRESS.set(host);
+			AIS_NMEA_TCP_PORT.set(port);
+		} else {
+			AIS_NMEA_UDP_PORT.set(port);
+		}
+		restartNetworkListener();
+	}
+
+	/** Resets the connection settings only; the plugin is back in the "not set up" state. */
+	public void resetConnectionSettings() {
+		AIS_NMEA_PROTOCOL.resetToDefault();
+		AIS_NMEA_IP_ADDRESS.resetToDefault();
+		AIS_NMEA_TCP_PORT.resetToDefault();
+		AIS_NMEA_UDP_PORT.resetToDefault();
+		restartNetworkListener();
+	}
+
+	/** Resets every setting of the plugin, including the connection and the own vessel. */
+	public void resetSettings() {
+		for (OsmandPreference<?> preference : getPreferences()) {
+			preference.resetToDefault();
+		}
+		restartNetworkListener();
+		AisTrackerLayer layer = this.layer;
+		if (layer != null) {
+			layer.refreshOwnObjectVisibility();
+		}
 	}
 
 	public int getVesselsCount() {
@@ -429,6 +503,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	 * a short while, so a stream that goes silent hands the position back instead of freezing it.
 	 */
 	private void onNmeaLocationReceived(@NonNull AisLocation location) {
+		onDataReceived();
 		Location result = new Location(NMEA_LOCATION_PROVIDER,
 				location.getLatitude(), location.getLongitude());
 		result.setTime(System.currentTimeMillis());
@@ -441,8 +516,12 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		nmeaLocation = result;
 
 		if (AIS_USE_NMEA_LOCATION.get()) {
-			app.runInUIThread(() -> app.getLocationProvider()
-					.setCustomLocation(result, IGNORE_PHONE_LOCATION_TIMEOUT_MS));
+			app.runInUIThread(() -> {
+				/* checked again: the user may have turned the setting off in the meantime */
+				if (AIS_USE_NMEA_LOCATION.get()) {
+					app.getLocationProvider().setCustomLocation(result, IGNORE_PHONE_LOCATION_TIMEOUT_MS);
+				}
+			});
 		}
 	}
 
@@ -542,7 +621,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	}
 
 	public void onAisObjectReceived(@NonNull AisObject ais) {
-		lastMessageReceived = ais.getLastUpdate();
+		onDataReceived();
 		AisTrackerLayer layer = this.layer;
 		if (layer != null) {
 			layer.onAisObjectReceived(ais);
@@ -573,10 +652,11 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
 		@Override
 		public void onAisConnected() {
-			/* the socket is open, but no AIS message arrived yet - getConnectionState() turns this
-			 * into NO_DATA once the silence gets too long */
+			/* the socket is open, but nothing arrived yet - the check turns this into NO_DATA
+			 * once the silence gets too long */
 			lastMessageReceived = System.currentTimeMillis();
 			setConnectionState(AisConnectionState.CONNECTED);
+			startNoDataCheck();
 		}
 
 		@Override
@@ -611,6 +691,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		}
 		aisDataManager.stopUpdates();
 		stopAisBackgroundService();
+		stopNoDataCheck();
 		setConnectionState(AisConnectionState.NOT_CONNECTED);
 	}
 

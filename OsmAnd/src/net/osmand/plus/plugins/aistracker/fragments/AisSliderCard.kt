@@ -43,8 +43,17 @@ class AisSliderCard<T>(
 		titleView.setText(titleId)
 	}
 
+	/**
+	 * Puts the handle on [value]. A value that is not on the scale - written by an older version
+	 * or an imported profile - is replaced by the first stop, and the replacement is committed,
+	 * so the preference and the screen never disagree.
+	 */
 	fun setValue(value: T) {
-		val index = values.indexOf(value).let { if (it < 0) 0 else it }
+		var index = values.indexOf(value)
+		if (index < 0) {
+			index = 0
+			onValueChanged(values[index])
+		}
 		slider.value = index.toFloat()
 		updateLabels(values[index])
 	}

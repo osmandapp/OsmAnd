@@ -106,7 +106,8 @@
 				android:enabled="false"
 				android:text="@string/shared_string_save"
 				android:textColor="@color/ui_save_button_text"
-				app:backgroundTint="@color/ui_save_button_background" />
+				app:backgroundTint="@color/ui_save_button_background"
+				app:cornerRadius="@dimen/ui_corner_radius_button" />
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>

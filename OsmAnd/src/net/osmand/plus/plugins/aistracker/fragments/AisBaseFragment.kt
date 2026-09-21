@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.aistracker.fragments
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.AttrRes
@@ -55,7 +56,7 @@ abstract class AisBaseFragment : BaseMaterialFragment() {
 			val icon = AppCompatResources.getDrawable(view.context, resetIconId)?.mutate()
 			icon?.setTint(themedColor(view, R.attr.colorOnSurfaceVariant))
 			setIcon(icon)
-			setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS)
+			setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 			setOnMenuItemClickListener {
 				onReset()
 				true

@@ -45,8 +45,5 @@ enum class AisConnectionState(
 		R.string.ais_connection_failed,
 		R.string.external_device_details_connect,
 		R.attr.colorError,
-		true);
-
-	val connectionActive: Boolean
-		get() = this == CONNECTING || this == CONNECTED || this == NO_DATA
+		true)
 }

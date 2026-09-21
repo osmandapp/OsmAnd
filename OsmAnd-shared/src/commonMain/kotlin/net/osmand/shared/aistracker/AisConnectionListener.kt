@@ -10,6 +10,10 @@ interface AisConnectionListener {
 
 	fun onAisConnected()
 
-	/** Called when the socket is closed after an error. [message] is the reason, if any. */
+	/**
+	 * Called when the socket is closed before [stopListener][AisMessageListener.stopListener] -
+	 * after an error, a connect timeout or because the server closed the stream. [message] is the
+	 * reason, if any. The listener retries after a delay and reports [onAisConnecting] again.
+	 */
 	fun onAisConnectionFailed(message: String?)
 }
