@@ -1,8 +1,7 @@
-package net.osmand.plus.settings.coordinates
+package net.osmand.shared.settings.coordinates
 
-import net.osmand.LocationConvert
-import java.util.Collections
-import java.util.Locale
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 object CoordinateFormatIds {
 
@@ -19,23 +18,20 @@ object CoordinateFormatIds {
 	const val EPSG_PREFIX = "epsg:"
 
 	@JvmField
-	val DEFAULT_FORMAT_IDS: List<String> = Collections.unmodifiableList(
+	val DEFAULT_FORMAT_IDS: List<String> =
 		listOf(BUILTIN_DDD, BUILTIN_DDM, BUILTIN_DMS, BUILTIN_UTM, BUILTIN_OLC)
-	)
 
 	@JvmField
-	val ALL_BUILT_IN_FORMAT_IDS: List<String> = Collections.unmodifiableList(
-		listOf(
-			BUILTIN_DDD,
-			BUILTIN_DDM,
-			BUILTIN_DMS,
-			BUILTIN_UTM,
-			BUILTIN_OLC,
-			BUILTIN_MGRS,
-			BUILTIN_SWISS_GRID,
-			BUILTIN_SWISS_GRID_PLUS,
-			BUILTIN_MAIDENHEAD
-		)
+	val ALL_BUILT_IN_FORMAT_IDS: List<String> = listOf(
+		BUILTIN_DDD,
+		BUILTIN_DDM,
+		BUILTIN_DMS,
+		BUILTIN_UTM,
+		BUILTIN_OLC,
+		BUILTIN_MGRS,
+		BUILTIN_SWISS_GRID,
+		BUILTIN_SWISS_GRID_PLUS,
+		BUILTIN_MAIDENHEAD
 	)
 
 	private val builtInIds = ALL_BUILT_IN_FORMAT_IDS.toSet()
@@ -52,29 +48,15 @@ object CoordinateFormatIds {
 	@JvmStatic
 	fun getEpsgCode(id: String?): Int? {
 		val trimmed = id?.trim() ?: return null
-		if (!trimmed.lowercase(Locale.US).startsWith(EPSG_PREFIX)) {
+		if (!trimmed.lowercase().startsWith(EPSG_PREFIX)) {
 			return null
 		}
 		val code = trimmed.substring(EPSG_PREFIX.length).trim()
 		return code.toIntOrNull()?.takeIf { it > 0 }
 	}
 
-	@JvmStatic
-	fun fromOldFormat(format: Int): String? = when (format) {
-		LocationConvert.FORMAT_DEGREES -> BUILTIN_DDD
-		LocationConvert.FORMAT_MINUTES -> BUILTIN_DDM
-		LocationConvert.FORMAT_SECONDS -> BUILTIN_DMS
-		LocationConvert.UTM_FORMAT -> BUILTIN_UTM
-		LocationConvert.OLC_FORMAT -> BUILTIN_OLC
-		LocationConvert.MGRS_FORMAT -> BUILTIN_MGRS
-		LocationConvert.SWISS_GRID_FORMAT -> BUILTIN_SWISS_GRID
-		LocationConvert.SWISS_GRID_PLUS_FORMAT -> BUILTIN_SWISS_GRID_PLUS
-		LocationConvert.MAIDENHEAD_FORMAT -> BUILTIN_MAIDENHEAD
-		else -> null
-	}
-
 	private fun normalizeBuiltInId(id: String?): String? {
-		val normalized = id?.trim()?.lowercase(Locale.US) ?: return null
+		val normalized = id?.trim()?.lowercase() ?: return null
 		return normalized.takeIf { it in builtInIds }
 	}
 }
