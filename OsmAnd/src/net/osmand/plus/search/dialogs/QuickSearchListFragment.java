@@ -138,6 +138,9 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 							|| sr.objectType == GPX_TRACK) {
 
 						showResult(sr);
+					} else if (isCityResultWithMenu(sr)) {
+						app.getSearchHistoryHelper().selectSearchResult(sr);
+						showResult(sr);
 					} else if (sr.objectType == INDEX_ITEM) {
 						processIndexItemClick((IndexItem) sr.relatedObject);
 					} else {
@@ -150,6 +153,14 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 				}
 			}
 		}
+	}
+
+	// Outside the Address tab a city opens its context menu in both v1 and spatial search
+	private boolean isCityResultWithMenu(@NonNull SearchResult sr) {
+		return (sr.objectType == CITY || sr.objectType == VILLAGE
+				|| sr.objectType == BOUNDARY || sr.objectType == POSTCODE)
+				&& sr.location != null
+				&& getType() != SearchListFragmentType.ADDRESS;
 	}
 
 	private void onSpatialCategorySearchResultClick(@NonNull SearchResult searchResult) {

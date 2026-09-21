@@ -171,22 +171,9 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 				"%d iterations, %.2f ms".format(iteration, hctx.stats.routingTime - firstIterationTime)
 			}
 		}
-		if (hctx.requireConfig().CALC_ALTERNATIVES) {
-			progress.hhIteration(HHIteration.ALTERNATIVES)
-			printf(sl > 0) { " Alternative routes..." }
-			val time = nanoTime()
-			// detailed geometry of the alternatives is retrieved inside - it is needed to reject
-			// candidates that turn out to run on the very same roads as the main route
-			HHAlternativeRoutes(this, hctx).calcAlternativeRoute(route, start, end, progress)
-			if (progress.isCancelled) {
-				return cancelledStatus(hctx, stPoints, endPoints)
-			}
-			hctx.stats.altRoutingTime += (nanoTime() - time) / 1e6
-			hctx.stats.routingTime += hctx.stats.altRoutingTime
-			printf(sl > 0) { "%d %.2f ms".format(route.altRoutes.size, hctx.stats.altRoutingTime) }
-		}
+		// no alternatives step: java's plateau method is a draft for testing and is not ported here
 		val time = nanoTime()
-		printf(sl > 0) { " Prepare results (turns, alt routes)..." }
+		printf(sl > 0) { " Prepare results (turns)..." }
 
 		if (hctx.requireConfig().USE_GC_MORE_OFTEN) {
 			hctx.unloadAllConnections()
@@ -348,8 +335,6 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 			hctx.boundaries.add(calcRPId(endP, endP.getSegmentEnd().toInt(), endP.getSegmentStart().toInt()))
 			hctx.boundaries.add(calcRPId(endP, endP.getSegmentStart().toInt(), endP.getSegmentEnd().toInt()))
 			progress.hhIterationProgress(0.50) // %
-			hctx.startSegment = startP
-			hctx.endSegment = endP
 			initStart(hctx, startP, false, stPoints)
 			rctx.config.initialDirection = prev
 			if (stPoints.isEmpty()) {
@@ -821,13 +806,6 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 	private fun runRoutingWithInitQueue(hctx: HHRoutingContext): NetworkDBPoint? {
 		val config = hctx.requireConfig()
 		var dirConfig = config.DIJKSTRA_DIRECTION
-		// Alternatives are extracted from the two search trees, so the search must not stop at the first
-		// meeting point: it keeps settling until the queue leaves the (1 + ALT_STRETCH) * opt horizon.
-		// The point returned is still the cheapest meeting point, i.e. the optimal route is unchanged.
-		val collectAlt = config.CALC_ALTERNATIVES
-		var bestFinal: NetworkDBPoint? = null
-		var optCost = 0.0
-		var altBound = Double.MAX_VALUE
 		val rctx = hctx.rctx
 		val progress = rctx?.calculationProgress
 		val straightStartEndCost = squareRootDist31(hctx.startX, hctx.startY, hctx.endX, hctx.endY) /
@@ -866,21 +844,7 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 			val rev = pointCost.rev
 			hctx.stats.pollQueueTime += (nanoTime() - tm) / 1e6
 			hctx.stats.visitedVertices++
-			if (collectAlt && pointCost.cost > altBound) {
-				break
-			}
-			if (collectAlt && point.rt(!rev).rtVisited) {
-				if (hctx.stats.firstRouteVisitedVertices == 0) {
-					hctx.stats.firstRouteVisitedVertices = hctx.stats.visitedVertices
-				}
-				val rcost = point.rt(true).rtDistanceFromStart + point.rt(false).rtDistanceFromStart
-				if (bestFinal == null || rcost < optCost) {
-					bestFinal = point
-					optCost = rcost
-					altBound = optCost * (1 + config.ALT_STRETCH)
-				}
-				// no early return: fall through to settle & expand, both trees must keep growing
-			} else if (point.rt(!rev).rtVisited) {
+			if (point.rt(!rev).rtVisited) {
 				if (hctx.stats.firstRouteVisitedVertices == 0) {
 					hctx.stats.firstRouteVisitedVertices = hctx.stats.visitedVertices
 					if (dirConfig == 0f && config.HEURISTIC_COEFFICIENT != 0f) {
@@ -932,7 +896,7 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 				addConnectedToQueue(hctx, queue, point, rev)
 			}
 		}
-		return if (collectAlt) bestFinal else null
+		return null
 	}
 
 	private fun scanFinalPoint(finalPointArg: NetworkDBPoint, lt: List<NetworkDBPoint>): NetworkDBPoint {
@@ -988,7 +952,7 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 				}
 				val smallestSegmentCost = smallestSegmentCost(hctx, point, nextPoint)
 				LOG.warn("Incorrect distance %s -> %s: db = %.2f > fastest %.2f".format(point, nextPoint, connected.dist, smallestSegmentCost))
-				connected.dist = smallestSegmentCost
+				connected.editDist(smallestSegmentCost)
 			}
 			val cost = point.rt(reverse).rtDistanceFromStart + connected.dist + hctx.distanceToEnd(reverse, nextPoint)
 			if (ASSERT_COST_INCREASING && point.rt(reverse).rtCost - cost > 1) {
@@ -1003,6 +967,7 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 				addPointToQueue(hctx, queue, reverse, nextPoint, point, connected.dist, cost)
 			}
 		}
+		hctx.unloadExpandedSegments(point)
 	}
 
 	private fun touchesStartOrEnd(point: NetworkDBPoint, nextPoint: NetworkDBPoint, reverse: Boolean): Boolean {
@@ -1103,21 +1068,8 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 		return f
 	}
 
-	internal fun retrieveSegmentsGeometry(
+	private fun retrieveSegmentsGeometry(
 		hctx: HHRoutingContext, route: HHNetworkRouteRes, routeSegments: Boolean, progress: RouteCalculationProgress?
-	): Boolean {
-		return retrieveSegmentsGeometry(hctx, route, routeSegments, progress, false)
-	}
-
-	/**
-	 * @param acceptCostIncrease keep the detailed geometry when a shortcut turns out to cost more
-	 * than the hub graph promised, instead of aborting for a recalculation. The main route needs the
-	 * recalculation to stay optimal; an alternative only needs its true cost, which the caller then
-	 * re-checks against the stretch limit.
-	 */
-	internal fun retrieveSegmentsGeometry(
-		hctx: HHRoutingContext, route: HHNetworkRouteRes, routeSegments: Boolean,
-		progress: RouteCalculationProgress?, acceptCostIncrease: Boolean
 	): Boolean {
 		val rctx = hctx.requireContext()
 		val config = hctx.requireConfig()
@@ -1151,7 +1103,7 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 					if (full) {
 						recalculateNetworkCluster(hctx, segment.start)
 					}
-					segment.dist = -1.0
+					segment.editDist(-1.0)
 					return true
 				}
 				val maxIncCostCoefficient = if (incorrectCostAtStartEnd) config.MAX_INC_COST_CF_VIGILANT else config.MAX_INC_COST_CF
@@ -1160,19 +1112,15 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 				) {
 					if (DEBUG_VERBOSE_LEVEL > 0) {
 						LOG.info(
-							"Route cost increased (%.2f > %.2f) between %s -> %s: %s".format(
-								f.distanceFromStart, segment.dist, segment.start, segment.end,
-								if (acceptCostIncrease) "keep detailed geometry" else "recalculate route"
+							"Route cost increased (%.2f > %.2f) between %s -> %s: recalculate route".format(
+								f.distanceFromStart, segment.dist, segment.start, segment.end
 							)
 						)
 					}
-					segment.dist = f.distanceFromStart.toDouble()
-					if (!acceptCostIncrease) {
-						// correct every underestimated shortcut of this route before recalculating it
-						costIncreased = true
-						continue
-					}
-					s.rtTimeHHSegments = f.distanceFromStart.toDouble()
+					segment.editDist(f.distanceFromStart.toDouble())
+					// correct every underestimated shortcut of this route before recalculating it
+					costIncreased = true
+					continue
 				}
 				s.rtTimeDetailed = f.distanceFromStart.toDouble()
 				s.list = RouteResultPreparation.convertFinalSegmentToResults(rctx, f)
@@ -1229,35 +1177,41 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 					p.endY = o.getEndPointY()
 					val routeTime = (o.getDistanceFromStart()
 							+ plan.calcRoutingSegmentTimeOnlyDist(rctx.getRouter(), o) / 2 + 1).toDouble()
+					hctx.loadNetworkSegmentPoint(start, false)
+					hctx.loadNetworkSegmentPoint(p, true)
+					start.edgesEdited = true // new edges could be added
+					p.edgesEdited = true
 					val c = start.getSegment(p, true)
 					if (c != null) {
 						// System.out.printf("Corrected dist %.2f -> %.2f\n", c.dist, routeTime);
-						c.dist = routeTime
+						c.editDist(routeTime)
 					} else {
 						start.connected!!.add(NetworkDBSegment(start, p, routeTime, true, false))
 					}
 					val co = p.getSegment(start, false)
 					if (co != null) {
-						co.dist = routeTime
+						co.editDist(routeTime)
 					} else {
 						p.connectedReverse?.add(NetworkDBSegment(start, p, routeTime, false, false))
 					}
 				}
 			}
 		}
+		hctx.loadNetworkSegmentPoint(start, false)
 		for (c in start.connected!!) {
 			if (!resUnique.containsKey(c.end.getGeoPntId())) {
 //				System.out.printf("Remove connection %s -> %s\n", start, c.end); // to debug later if all correct
-				c.dist = -1.0 // disable as not found
+				c.editDist(-1.0) // disable as not found
+				hctx.loadNetworkSegmentPoint(c.end, true)
 				val co = c.end.getSegment(start, false)
 				if (co != null) {
-					co.dist = -1.0
+					co.editDist(-1.0)
 				}
 			}
 		}
 	}
 
-	internal fun prepareRouteResults(hctx: HHRoutingContext, route: HHNetworkRouteRes, start: KLatLon, end: KLatLon): HHNetworkRouteRes {
+	private fun prepareRouteResults(hctx: HHRoutingContext, route: HHNetworkRouteRes, start: KLatLon, end: KLatLon): HHNetworkRouteRes {
 		val rctx = hctx.requireContext()
 		rctx.routingTime = 0f
 		route.stats = hctx.stats
@@ -1317,13 +1271,14 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 		return route
 	}
 
-	internal fun createRouteSegmentFromFinalPoint(hctx: HHRoutingContext, pnt: NetworkDBPoint?): HHNetworkRouteRes {
+	private fun createRouteSegmentFromFinalPoint(hctx: HHRoutingContext, pnt: NetworkDBPoint?): HHNetworkRouteRes {
 		val rctx = hctx.requireContext()
 		val route = HHNetworkRouteRes()
 		if (pnt != null) {
 			var itPnt: NetworkDBPoint = pnt
 			while (itPnt.rt(true).rtRouteToPoint != null) {
 				val nextPnt = itPnt.rt(true).rtRouteToPoint!!
+				hctx.loadNetworkSegmentPoint(nextPnt, true)
 				val segment = nextPnt.getSegment(itPnt, false)!!
 				val res = HHNetworkSegmentRes(segment)
 				route.segments.add(res)
@@ -1343,6 +1298,7 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 			itPnt = pnt
 			while (itPnt.rt(false).rtRouteToPoint != null) {
 				val nextPnt = itPnt.rt(false).rtRouteToPoint!!
+				hctx.loadNetworkSegmentPoint(nextPnt, false)
 				val segment = nextPnt.getSegment(itPnt, true)!!
 				val res = HHNetworkSegmentRes(segment)
 				route.segments.add(res)
@@ -1408,7 +1364,6 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 //			c.preloadSegments();
 				c.ROUTE_LAST_MILE = true
 				c.calcDetailed(2)
-//			c.calcAlternative();
 //			c.gc();
 				DEBUG_VERBOSE_LEVEL = 0
 //			c.INITIAL_DIRECTION = 30 / 180.0 * Math.PI;

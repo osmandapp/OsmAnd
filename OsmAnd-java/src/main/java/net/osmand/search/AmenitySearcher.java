@@ -114,7 +114,7 @@ public class AmenitySearcher {
     private LinkedBlockingQueue<Runnable> taskQueue;
 
     public static final int AMENITY_SEARCH_RADIUS = 50;
-    private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
+    public static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
     private final MapPoiTypes mapPoiTypes; // nullable
 
     public AmenitySearcher(MapPoiTypes mapPoiTypes) {

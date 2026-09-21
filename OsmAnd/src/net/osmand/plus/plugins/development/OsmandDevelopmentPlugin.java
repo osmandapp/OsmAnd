@@ -112,7 +112,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
 		pluginPreferences.add(settings.SAFE_MODE);
-		pluginPreferences.add(settings.BATTERY_SAVING_MODE);
 		pluginPreferences.add(settings.SIMULATE_OBD_DATA);
 		pluginPreferences.add(settings.DEBUG_RENDERING_INFO);
 		pluginPreferences.add(settings.SHOULD_SHOW_FREE_VERSION_BANNER);

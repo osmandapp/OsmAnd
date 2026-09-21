@@ -1997,10 +1997,6 @@ public class BinaryMapIndexReader {
 			this.bottom = bottom;
 		}
 
-		public boolean isSkippedDuplication() {
-			return resultMatcher != null && resultMatcher.isSkippedDuplication();
-		}
-		
 		public boolean publish(T obj) {
 			if (resultMatcher == null || resultMatcher.publish(obj)) {
 				if (priorityQueue != null && obj != null) {

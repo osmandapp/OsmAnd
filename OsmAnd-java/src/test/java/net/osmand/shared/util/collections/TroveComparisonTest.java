@@ -11,6 +11,7 @@ import java.util.Random;
 import org.junit.Test;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
@@ -89,6 +90,48 @@ public class TroveComparisonTest {
 		assertArrayEquals(troveKeys, sharedKeys);
 		for (int key : troveKeys) {
 			assertEquals(trove.get(key), shared.get(key));
+		}
+	}
+
+	@Test
+	public void testIntLongMapMatchesTrove() {
+		KTIntLongMap shared = new KTIntLongMap();
+		TIntLongHashMap trove = new TIntLongHashMap();
+		Random random = new Random(20260909L);
+
+		for (int step = 0; step < OPERATIONS; step++) {
+			int key = random.nextInt(4000) - 2000;
+			int op = random.nextInt(10);
+			if (op <= 5) {
+				assertEquals("put(" + key + ")", trove.put(key, step), shared.put(key, step));
+			} else if (op <= 7) {
+				assertEquals("remove(" + key + ")", trove.remove(key), shared.remove(key));
+			} else if (op == 8) {
+				// a missing key reads as 0 on both sides, the trove no entry value
+				assertEquals("get(" + key + ")", trove.get(key), shared.get(key));
+			} else {
+				assertEquals("containsKey(" + key + ")", trove.containsKey(key), shared.containsKey(key));
+			}
+			assertEquals(trove.size(), shared.getSize());
+		}
+
+		int[] troveKeys = trove.keys();
+		int[] sharedKeys = shared.keys();
+		Arrays.sort(troveKeys);
+		Arrays.sort(sharedKeys);
+		assertArrayEquals(troveKeys, sharedKeys);
+		for (int key : troveKeys) {
+			assertEquals(trove.get(key), shared.get(key));
+		}
+
+		// putAll, which the poi name index uses to merge the offsets of several query tokens
+		KTIntLongMap sharedCopy = new KTIntLongMap();
+		TIntLongHashMap troveCopy = new TIntLongHashMap();
+		sharedCopy.putAll(shared);
+		troveCopy.putAll(trove);
+		assertEquals(troveCopy.size(), sharedCopy.getSize());
+		for (int key : troveKeys) {
+			assertEquals(troveCopy.get(key), sharedCopy.get(key));
 		}
 	}
 

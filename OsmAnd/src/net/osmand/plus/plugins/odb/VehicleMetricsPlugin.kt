@@ -96,6 +96,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	private var currentReconnectAttempt = 0
 
 	private var connectionState = OBDConnectionState.DISCONNECTED
+	private var explicitBleDisconnectDeviceId: String? = null
+	private var bleConnectingAddress: String? = null
+
 	val OBD_DEVICES_SETTINGS_PREF_ID: String = "obd_devices_settings"
 
 	val USED_OBD_DEVICES =
@@ -361,6 +364,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		LOG.info("VMPlugin disconnect {$forgetCurrentDeviceConnected}")
 		obdDispatcher?.stopReading()
 		val lastConnectedDeviceInfo = connectedDeviceInfo
+		if (lastConnectedDeviceInfo?.isBLE == true) {
+			explicitBleDisconnectDeviceId = lastConnectedDeviceInfo.address
+		}
 		connectedDeviceInfo = null
 		if (forgetCurrentDeviceConnected) {
 			setLastConnectedDevice(null)
@@ -414,11 +420,16 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		saveDeviceToUsedOBDDevicesList(deviceInfo)
 		LOG.debug("connectToObd $deviceInfo reconnectCount left $currentReconnectAttempt")
 		if (deviceInfo.isBLE) {
+			if (bleConnectingAddress == deviceInfo.address) {
+				LOG.debug("connectToObd $deviceInfo already connecting, skip duplicate attempt")
+				return
+			}
 			val bleDevice = getBLEOBDDeviceById(deviceInfo.address)
 			if (bleDevice != null) {
 				if (!devicesHelper.isDevicePaired(bleDevice)) {
 					devicesHelper.setDevicePaired(bleDevice, true)
 				}
+				bleConnectingAddress = deviceInfo.address
 				connectDevice(activity, bleDevice, deviceInfo)
 			}
 			return
@@ -1256,12 +1267,28 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 				device: AbstractDevice<*>,
 				result: DeviceConnectionResult,
 				error: String?) {
+				if (bleConnectingAddress == deviceInfo.address) {
+					bleConnectingAddress = null
+				}
 				onDeviceConnected(deviceInfo)
 			}
 
 			override fun onDeviceDisconnect(device: AbstractDevice<*>) {
+				val wasExplicitDisconnect = explicitBleDisconnectDeviceId == device.deviceId
+				if (wasExplicitDisconnect) {
+					explicitBleDisconnectDeviceId = null
+				}
+				if (bleConnectingAddress == deviceInfo.address) {
+					bleConnectingAddress = null
+				}
 				onDisconnected(deviceInfo)
 				device.removeListener(this)
+				if (!wasExplicitDisconnect) {
+					LOG.debug("Unexpected OBD BLE disconnect from ${deviceInfo.name}, scheduling reconnect")
+					handler.postDelayed({
+						connectToLastConnectedDevice(RECONNECT_ATTEMPTS_COUNT)
+					}, RECONNECT_DELAY)
+				}
 			}
 
 			override fun onSensorData(sensor: AbstractSensor, data: SensorData) {
@@ -1270,6 +1297,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			override fun onDeviceConnectionFailed(device: AbstractDevice<*>) {
 				super.onDeviceConnectionFailed(device)
 				LOG.debug("Device ${deviceInfo.name} connection failed. Reconnection attempts left $currentReconnectAttempt")
+				if (bleConnectingAddress == deviceInfo.address) {
+					bleConnectingAddress = null
+				}
 				device.removeListener(this)
 				activity?.let {
 					connectToLastConnectedDevice(it, currentReconnectAttempt)

@@ -2199,7 +2199,7 @@
     <string name="poi_animal_training">Výcvik zvierat</string>
     <string name="poi_animal_training_dog">Pes</string>
     <string name="poi_animal_training_horse">Kôň</string>
-    <string name="poi_horse_yes">Kone povolené</string>
+    <string name="poi_horse_yes">Áno</string>
     <string name="poi_horse_no">Kone nepovolené</string>
     <string name="poi_animal_yes">Zvieratá povolené</string>
     <string name="poi_animal_no">Zvieratá nepovolené</string>
@@ -3414,7 +3414,7 @@
     <string name="poi_tourist_bus_no">Prístup turistických autobusov: nie</string>
     <string name="poi_coach_yes">Prístup diaľkových autobusov: áno</string>
     <string name="poi_coach_no">Prístup diaľkových autobusov: nie</string>
-    <string name="poi_ski_yes">Prístup lyžiarov: áno</string>
+    <string name="poi_ski_yes">Áno</string>
     <string name="poi_ski_no">Prístup lyžiarov: nie</string>
     <string name="poi_snowmobile_private">Prístup snežných skútrov: len so súhlasom vlastníka</string>
     <string name="poi_snowmobile_no">Prístup snežných skútrov: nie</string>

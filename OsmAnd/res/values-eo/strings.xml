@@ -5350,4 +5350,7 @@
     <string name="quick_action_tracks_select_descr">Aldoni unu aŭ pli spurojn por montri/kaŝi ilin sur la mapo per unu frapeto.</string>
     <string name="quick_action_tracks_always_ask_descr">Frapeti tiun ĉi agon montros la liston de spuroj, el kiu vi povos elekti unu aŭ pli spurojn por montri aŭ kaŝi.</string>
     <string name="quick_action_all_tracks">Ĉiuj spuroj</string>
+    <string name="battery_saving_mode_descr">Limigi bildigon de mapo al 20 kadroj en sekundo por malpliigi uzadon de baterio kaj varmiĝon de la aparato. Movado de mapo iĝos malpli flua.</string>
+    <string name="crash_report_sent">Sendis raporton. Dankon!</string>
+    <string name="crash_report_send_failed">Ne povis sendi raporton. Reprovu poste.</string>
 </resources>
