@@ -92,9 +92,6 @@ public class GeneralRouter implements VehicleRouter {
 	private float maxVehicleSpeed;
 
 	private TLongHashSet impassableRoads;
-	// ferry crossing (seconds), see FerryRoutingHelper
-	private int ferryBoardingTime;
-	private int ferryTerminalTime;
 	
 	private GeneralRouterProfile profile;
 	
@@ -554,8 +551,7 @@ public class GeneralRouter implements VehicleRouter {
 			definedSpd = limitSpeed(road, spd, maxSpeed);
 			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, definedSpd, dir);
 		}
-		// not cached: the cache is shared by roads with the same tags, the speed depends on the road length
-		return isFerryPassenger() ? FerryRoutingHelper.getRoutingSpeed(road, definedSpd) : definedSpd;
+		return definedSpd;
 	}
 	
 	// ferry moves with its own speed, whatever vehicle is on board
@@ -738,34 +734,6 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		
 		return totalPenalty;
-	}
-
-	@Override
-	public double calculateRoadChangeTime(RouteSegment from, RouteSegment to) {
-		return isFerryPassenger() ? FerryRoutingHelper.getTransitionTime(ferryBoardingTime, ferryTerminalTime,
-				from.getRoad(), to.getRoad()) : 0;
-	}
-
-	@Override
-	public double calculateStopTime(RouteSegment segment) {
-		return isFerryPassenger() ? FerryRoutingHelper.getStopTime(ferryTerminalTime, segment) : 0;
-	}
-
-	@Override
-	public void updateSegmentTimes(List<RouteSegmentResult> result) {
-		if (isFerryPassenger()) {
-			FerryRoutingHelper.updateSegmentTimes(this, ferryBoardingTime, ferryTerminalTime, result);
-		}
-	}
-
-	public void setFerryTimes(int boardingTime, int terminalTime) {
-		ferryBoardingTime = boardingTime;
-		ferryTerminalTime = terminalTime;
-	}
-
-	// a boat sails along a ferry line by itself, other vehicles are carried by the ferry
-	private boolean isFerryPassenger() {
-		return profile != GeneralRouterProfile.BOAT;
 	}
 
 	@Override

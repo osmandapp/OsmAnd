@@ -5,6 +5,7 @@ import java.util.List;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.TransportRoute;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.MapUtils;
 
 /**
@@ -13,7 +14,6 @@ import net.osmand.util.MapUtils;
  * sailing (a part of the duration tag, otherwise with the ferry speed and ferryTerminalTime at each terminal
  * on the way) and getting off it (half of ferryTerminalTime). Getting on and off is paid only for a whole crossing:
  * a route starting or ending on a ferry (at its terminal or on board) only sails.
- * The routers apply it to their passengers (see GeneralRouter), the planners don't use it directly.
  */
 public class FerryRoutingHelper {
 
@@ -47,36 +47,39 @@ public class FerryRoutingHelper {
 		return speed >= MIN_DURATION_SPEED && speed <= MAX_DURATION_SPEED ? seconds : 0;
 	}
 
-	// a ferry with a duration tag moves with the speed from it
-	public static float getRoutingSpeed(RouteDataObject road, float speed) {
-		double durationSpeed = speed > 0 && isFerry(road) ? getDurationSpeed(road) : 0;
+	// route search: a ferry with a duration tag moves with the speed from it
+	public static float getRoutingSpeed(VehicleRouter router, RouteDataObject road, float speed) {
+		double durationSpeed = speed > 0 && isPassenger(router) && isFerry(road) ? getDurationSpeed(road) : 0;
 		return durationSpeed > 0 ? (float) durationSpeed : speed;
 	}
 
-	// getting on or off a ferry when the route goes from one road to another
-	public static double getTransitionTime(int ferryBoardingTime, int ferryTerminalTime,
-	                                       RouteDataObject from, RouteDataObject to) {
-		boolean toFerry = isFerry(to);
-		if (isFerry(from) == toFerry) {
+	// route search: getting on or off a ferry at a turn from one road to another
+	public static double getTransitionTime(RoutingContext ctx, RouteSegment from, RouteSegment to) {
+		boolean toFerry = isFerry(to.getRoad());
+		if (isFerry(from.getRoad()) == toFerry || !isPassenger(ctx.getRouter())) {
 			return 0;
 		}
-		return toFerry ? getBoardingTime(ferryBoardingTime, ferryTerminalTime, getInterval(to))
-				: getAlightingTime(ferryTerminalTime);
+		RoutingConfiguration config = ctx.config;
+		return toFerry ? getBoardingTime(config.ferryBoardingTime, config.ferryTerminalTime, getInterval(to.getRoad()))
+				: getAlightingTime(config.ferryTerminalTime);
 	}
 
-	// the ferry stops at the point between the segment and its parent (both directions of search)
-	public static double getStopTime(int ferryTerminalTime, RouteSegment segment) {
+	// route search: the ferry stops at the point between the segment and its parent (both directions of search)
+	public static double getStopTime(RoutingContext ctx, RouteSegment segment) {
 		RouteSegment parent = segment.getParentRoute();
-		if (parent == null || !isFerry(segment.getRoad()) || !isFerry(parent.getRoad())) {
+		if (parent == null || !isFerry(segment.getRoad()) || !isFerry(parent.getRoad()) || !isPassenger(ctx.getRouter())) {
 			return 0;
 		}
-		return getStopTime(ferryTerminalTime, segment.getRoad(), segment.getSegmentStart(),
+		return getStopTime(ctx.config.ferryTerminalTime, segment.getRoad(), segment.getSegmentStart(),
 				parent.getRoad(), parent.getSegmentEnd());
 	}
 
 	// estimated time of the ferry segments, calculated again for the whole segment
-	public static void updateSegmentTimes(VehicleRouter router, int ferryBoardingTime, int ferryTerminalTime,
-	                                      List<RouteSegmentResult> result) {
+	public static void updateSegmentTimes(RoutingContext ctx, List<RouteSegmentResult> result) {
+		if (!isPassenger(ctx.getRouter())) {
+			return;
+		}
+		RoutingConfiguration config = ctx.config;
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
@@ -85,27 +88,27 @@ public class FerryRoutingHelper {
 			}
 			double speed = getDurationSpeed(road);
 			if (speed <= 0) {
-				speed = router.defineVehicleSpeed(road, rr.isForwardDirection());
+				speed = ctx.getRouter().defineVehicleSpeed(road, rr.isForwardDirection());
 			}
 			if (speed <= 0) {
-				speed = router.getDefaultSpeed();
+				speed = ctx.getRouter().getDefaultSpeed();
 			}
 			double time = rr.getDistance() / speed;
 			int start = Math.min(rr.getStartPointIndex(), rr.getEndPointIndex());
 			int end = Math.max(rr.getStartPointIndex(), rr.getEndPointIndex());
 			for (int point = start + 1; point < end; point++) {
-				time += getStopTime(ferryTerminalTime, road, point, road, point);
+				time += getStopTime(config.ferryTerminalTime, road, point, road, point);
 			}
 			boolean crossing = isCrossing(result, i);
 			if (crossing && !isFerry(result.get(i - 1).getObject())) {
-				time += getBoardingTime(ferryBoardingTime, ferryTerminalTime, getInterval(road));
+				time += getBoardingTime(config.ferryBoardingTime, config.ferryTerminalTime, getInterval(road));
 			}
 			RouteSegmentResult next = i + 1 < result.size() ? result.get(i + 1) : null;
 			if (next != null && isFerry(next.getObject())) {
-				time += getStopTime(ferryTerminalTime, road, rr.getEndPointIndex(),
+				time += getStopTime(config.ferryTerminalTime, road, rr.getEndPointIndex(),
 						next.getObject(), next.getStartPointIndex());
 			} else if (crossing) {
-				time += getAlightingTime(ferryTerminalTime);
+				time += getAlightingTime(config.ferryTerminalTime);
 			}
 			if (time > 0) {
 				rr.setSegmentTime((float) time);
@@ -122,6 +125,11 @@ public class FerryRoutingHelper {
 			}
 		}
 		return false;
+	}
+
+	// a boat sails along a ferry line by itself
+	private static boolean isPassenger(VehicleRouter router) {
+		return router.getProfile() != GeneralRouterProfile.BOAT;
 	}
 
 	// the ferry segments around this one have roads before and after them
