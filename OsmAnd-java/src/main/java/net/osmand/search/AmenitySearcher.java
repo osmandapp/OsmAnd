@@ -80,9 +80,8 @@ public class AmenitySearcher {
                 names.add(stop.getName());
             } else if (mapObject instanceof City || mapObject instanceof Street
                     || mapObject instanceof Building) {
-                // matching by name alone picks up an unrelated POI, e.g. a stop named after the city
                 latLon = mapObject.getLocation();
-                wikidata = null;
+                wikidata = mapObject.getWikidata();
                 names = Collections.emptyList();
             } else {
                 latLon = mapObject.getLocation();
