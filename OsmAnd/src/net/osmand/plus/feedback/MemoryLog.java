@@ -429,11 +429,21 @@ public class MemoryLog {
 		return name;
 	}
 
+	// a thread name is at most 16 bytes; a BufferedReader over a FileReader would allocate 24 KB of
+	// buffers for each of the few hundred threads
 	@Nullable
 	private static String readFirstLine(@NonNull File file) {
-		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-			String line = reader.readLine();
-			return line != null ? line.trim() : null;
+		byte[] buffer = new byte[64];
+		try (FileInputStream in = new FileInputStream(file)) {
+			int length = in.read(buffer);
+			if (length <= 0) {
+				return null;
+			}
+			int end = 0;
+			while (end < length && buffer[end] != '\n') {
+				end++;
+			}
+			return new String(buffer, 0, end, StandardCharsets.UTF_8).trim();
 		} catch (IOException | RuntimeException e) {
 			return null;
 		}
