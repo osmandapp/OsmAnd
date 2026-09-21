@@ -17,6 +17,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
@@ -37,6 +38,23 @@ import net.osmand.plus.utils.UiUtilities;
 public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
+
+	private final StateChangedListener<Boolean> voiceMuteListener = change -> app.runInUIThread(() -> {
+		updateToolbarSwitch();
+		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
+	});
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		settings.VOICE_MUTE.addListener(voiceMuteListener);
+	}
+
+	@Override
+	public void onStop() {
+		settings.VOICE_MUTE.removeListener(voiceMuteListener);
+		super.onStop();
+	}
 
 	@Override
 	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
