@@ -16,7 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Looper;
+import android.os.HandlerThread;
 import android.os.PowerManager;
 
 import androidx.annotation.NonNull;
@@ -277,8 +277,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		super.init(app, activity);
-		avgStatsEnabled = true;
-		avgStatsCollector();
+		startAvgStatsCollecting();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			startThermalStatusListening();
 		}
@@ -332,7 +331,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			osmPlugin.OSM_USE_DEV_URL.set(false);
 			app.getOsmOAuthHelper().resetAuthorization();
 		}
-		avgStatsEnabled = false;
+		stopAvgStatsCollecting();
 		super.disable(app);
 	}
 
@@ -384,8 +383,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private boolean avgStatsEnabled = false;
 	private final int AVG_STATS_INTERVAL_SECONDS = 10;
 	private final int AVG_STATS_LIFETIME_MINUTES = 15;
-	private Handler avgStatsHandler = new Handler(Looper.getMainLooper());
-	private List<AvgStatsEntry> avgStats = new ArrayList<>();
+	private HandlerThread avgStatsThread;
+	private Handler avgStatsHandler;
+	private volatile List<AvgStatsEntry> avgStats = new ArrayList<>();
 
 	protected class AvgStatsEntry {
 		private long timestamp;
@@ -468,6 +468,28 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		}
 	}
 
+	// An entry reads the battery level and the current over binder, which can take seconds on a loaded
+	// phone, so the samples are collected on their own thread rather than on the UI one.
+	private void startAvgStatsCollecting() {
+		if (avgStatsThread == null) {
+			avgStatsThread = new HandlerThread("OsmAndAvgStats");
+			avgStatsThread.start();
+			avgStatsHandler = new Handler(avgStatsThread.getLooper());
+		}
+		avgStatsEnabled = true;
+		avgStatsHandler.removeCallbacksAndMessages(null);
+		avgStatsHandler.post(this::avgStatsCollector);
+	}
+
+	private void stopAvgStatsCollecting() {
+		avgStatsEnabled = false;
+		if (avgStatsThread != null) {
+			avgStatsThread.quitSafely();
+			avgStatsThread = null;
+			avgStatsHandler = null;
+		}
+	}
+
 	private void avgStatsCollector() {
 		if (avgStatsEnabled) {
 			avgStatsCleanup();
@@ -476,7 +498,10 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			nextAvgStats.add(new AvgStatsEntry(app));
 			avgStats = nextAvgStats;
 
-			avgStatsHandler.postDelayed(this::avgStatsCollector, AVG_STATS_INTERVAL_SECONDS * 1000);
+			Handler handler = avgStatsHandler;
+			if (handler != null) {
+				handler.postDelayed(this::avgStatsCollector, AVG_STATS_INTERVAL_SECONDS * 1000);
+			}
 		}
 	}
 
