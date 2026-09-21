@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.view.GestureDetector;
 
@@ -39,6 +40,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 
 	private static final Log LOG = PlatformUtil.getLog(LockHelper.class);
 	private static final int LOCK_SCREEN_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 8;
+	private static final int KEEP_SCREEN_ON_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 9;
 
 	private static final int SENSOR_SENSITIVITY = 4;
 
@@ -56,6 +58,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 	private CommonPreference<Boolean> turnScreenOnNavigationInstructions;
 
 	private ApplicationMode lastApplicationMode;
+	private long lastInteractionTime;
 	@Nullable
 	private LockUIAdapter lockUIAdapter;
 	private final Runnable lockRunnable;
@@ -67,6 +70,8 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		void lock();
 
 		void unlock();
+
+		void setKeepScreenOn(boolean keepScreenOn);
 	}
 
 	public LockHelper(OsmandApplication app) {
@@ -165,7 +170,52 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		}
 	}
 
-	public void resetLockTimerIfNeeded() {
+	/**
+	 * The map holds the screen on for the "Timeout after wake-up" since the last interaction,
+	 * 0 s ("Keep screen on") means no timeout. The screen is never turned off earlier than the
+	 * system does it on its own - an application can only keep it on for longer.
+	 */
+	public void setKeepScreenOn(boolean keepScreenOn) {
+		uiHandler.removeMessages(KEEP_SCREEN_ON_MESSAGE);
+		if (lockUIAdapter != null) {
+			lockUIAdapter.setKeepScreenOn(keepScreenOn);
+		}
+		int timeout = getKeepScreenOnTimeout();
+		if (keepScreenOn && timeout > 0) {
+			lastInteractionTime = SystemClock.uptimeMillis();
+			sendPostDelayedKeepScreenOnMessage(timeout * 1000L);
+		}
+	}
+
+	public void onUserInteraction() {
+		lastInteractionTime = SystemClock.uptimeMillis();
+		resetLockTimerIfNeeded();
+		if (getKeepScreenOnTimeout() > 0 && !uiHandler.hasMessages(KEEP_SCREEN_ON_MESSAGE)) {
+			setKeepScreenOn(true);
+		}
+	}
+
+	private void releaseKeepScreenOn() {
+		long timeout = getKeepScreenOnTimeout() * 1000L;
+		long idleTime = SystemClock.uptimeMillis() - lastInteractionTime;
+		if (timeout > idleTime) {
+			sendPostDelayedKeepScreenOnMessage(timeout - idleTime);
+		} else if (lockUIAdapter != null) {
+			lockUIAdapter.setKeepScreenOn(false);
+		}
+	}
+
+	private void sendPostDelayedKeepScreenOnMessage(long delayMillis) {
+		Message message = Message.obtain(uiHandler, this::releaseKeepScreenOn);
+		message.what = KEEP_SCREEN_ON_MESSAGE;
+		uiHandler.sendMessageDelayed(message, delayMillis);
+	}
+
+	private int getKeepScreenOnTimeout() {
+		return useSystemScreenTimeout.get() ? 0 : turnScreenOnTime.get();
+	}
+
+	private void resetLockTimerIfNeeded() {
 		if (uiHandler.hasMessages(LOCK_SCREEN_MESSAGE)) {
 			uiHandler.removeCallbacks(lockRunnable);
 			int unlockTime = getUnlockTime();

@@ -930,6 +930,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	@Override
 	public void setKeepScreenOn(boolean keepScreenOn) {
 		if (mapViewWithLayers != null) {
 			mapViewWithLayers.setKeepScreenOn(keepScreenOn);
@@ -1574,7 +1575,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
-			lockHelper.resetLockTimerIfNeeded();
+			lockHelper.onUserInteraction();
 		}
 
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
@@ -1726,7 +1727,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 			}
 		}
-		setKeepScreenOn(forceKeepScreenOn);
+		lockHelper.setKeepScreenOn(forceKeepScreenOn);
 	}
 
 	@Override
