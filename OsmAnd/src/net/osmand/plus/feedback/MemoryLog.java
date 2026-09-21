@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -202,6 +203,18 @@ public class MemoryLog {
 		});
 	}
 
+	// MB/count of what the map renderer keeps in GPU memory by type, e.g. "tex:120/340,slot:0/1200,vbo:10/180,ibo:2/180,mesh:0/180"
+	@Nullable
+	private static String gpuMemory(@NonNull OsmandApplication app) {
+		try {
+			MapRendererView mapRenderer = app.getOsmandMap().getMapView().getMapRenderer();
+			return mapRenderer != null ? mapRenderer.getGpuMemoryStats() : null;
+		} catch (Throwable e) {
+			// the renderer may be released by another thread at any moment
+			return null;
+		}
+	}
+
 	@NonNull
 	private static String buildSample(@NonNull OsmandApplication app, long time, long used, long max) {
 		StringBuilder sb = new StringBuilder();
@@ -219,6 +232,10 @@ public class MemoryLog {
 		appendProcessSummary(sb);
 		appendSmaps(sb);
 		appendThreadNames(sb);
+		String gpu = gpuMemory(app);
+		if (gpu != null) {
+			sb.append(" gpu=").append(gpu);
+		}
 		String held = buildHeld(app);
 		if (held != null) {
 			sb.append(" held=").append(held);
