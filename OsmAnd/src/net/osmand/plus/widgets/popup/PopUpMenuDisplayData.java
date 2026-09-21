@@ -24,9 +24,9 @@ public class PopUpMenuDisplayData {
 	public @ColorInt int bgColor;
 
 	/**
-	 * @deprecated Unused with Compose dropdown menus. Theme is resolved from the context theme.
+	 * Theme of the screen the menu is shown on. Map widgets and buttons pass the map theme,
+	 * which can differ from the application theme.
 	 */
-	@Deprecated
 	public boolean nightMode;
 
 	public PopUpMenuWidthMode widthMode = PopUpMenuWidthMode.AS_ANCHOR_VIEW;

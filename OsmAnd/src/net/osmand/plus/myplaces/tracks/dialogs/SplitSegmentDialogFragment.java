@@ -246,6 +246,7 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 				PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
 				displayData.anchorView = splitIntervalView;
 				displayData.menuItems = items;
+				displayData.nightMode = nightMode;
 				PopUpMenu.show(displayData);
 			});
 			splitIntervalView.setVisibility(View.VISIBLE);

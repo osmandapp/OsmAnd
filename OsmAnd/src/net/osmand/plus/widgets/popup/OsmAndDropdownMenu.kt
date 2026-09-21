@@ -164,13 +164,14 @@ object OsmAndDropdownMenuDefaults {
 
 @Composable
 fun OsmAndDropdownMenuTheme(
+	nightMode: Boolean? = null,
 	content: @Composable () -> Unit
 ) {
 	val context = LocalContext.current
 	val configuration = LocalConfiguration.current
-	val isNight = (context.applicationContext as? OsmandApplication)?.let {
-		!it.settings.isLightContent
-	} ?: ((configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
+	val isNight = nightMode
+		?: (context.applicationContext as? OsmandApplication)?.let { !it.settings.isLightContent }
+		?: ((configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
 
 	val primary = colorResource(if (isNight) R.color.primary_dark else R.color.primary_light)
 	val surfaceContainer = colorResource(if (isNight) R.color.surface_container_dark else R.color.surface_container_light)
@@ -743,7 +744,7 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 	}
 
 	composeView.setContent {
-		OsmAndDropdownMenuTheme {
+		OsmAndDropdownMenuTheme(nightMode = displayData.nightMode) {
 			val colors = OsmAndDropdownMenuDefaults.colors(
 				background = if (displayData.bgColor != 0) {
 					Color(displayData.bgColor)

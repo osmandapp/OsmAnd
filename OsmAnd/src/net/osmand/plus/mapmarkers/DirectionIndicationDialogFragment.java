@@ -109,6 +109,7 @@ public class DirectionIndicationDialogFragment extends BaseFullScreenDialogFragm
 			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
 			displayData.anchorView = menuTv;
 			displayData.menuItems = items;
+			displayData.nightMode = nightMode;
 			PopUpMenu.show(displayData);
 		});
 
