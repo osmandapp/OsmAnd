@@ -92,10 +92,14 @@ public class InAppPurchaseUtils {
 	}
 
 	public static boolean isLiveUpdatesAvailable(@NonNull OsmandApplication app) {
+		return isLiveUpdatesAvailable(app, true);
+	}
+
+	public static boolean isLiveUpdatesAvailable(@NonNull OsmandApplication app, boolean checkDevBuild) {
 		return isLiveUpdatesPurchased(app)
-				|| isOsmAndProAvailable(app)
+				|| isOsmAndProAvailable(app, checkDevBuild)
 				|| isMapperUpdatesSubscribed(app)
-				|| checkDeveloperBuildIfNeeded(app, true)
+				|| checkDeveloperBuildIfNeeded(app, checkDevBuild)
 				|| isBrandPromoAvailable(app);
 	}
 

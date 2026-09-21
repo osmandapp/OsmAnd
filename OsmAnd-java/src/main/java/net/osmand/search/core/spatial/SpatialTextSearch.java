@@ -34,6 +34,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
 
@@ -58,6 +59,7 @@ import net.osmand.util.SearchAlgorithms;
 public class SpatialTextSearch {
 
 	public static class SpatialTextSearchSettings {
+		
 		private SpatialTextSearchSettings() {}
 		
 		///////////// GENERAL SETTINGS //////////
@@ -107,17 +109,31 @@ public class SpatialTextSearch {
 				Map.of(-300_000, 0.2, -100_000, 0.5, -10_000, 1.0, -1_000, 20.0));
 		
 		// Hide results under SHOW MORE
-		public int[] SHOW_MORE_WORDS_COUNT = new int[] {3, 20, 100};
+		// the ladder widens and ends: the last level holds the rest, within the limits of the search itself
+		public int[] SHOW_MORE_WORDS_COUNT = new int[] {3, 10, 30, 100, 300, 1000};
+		// with score ranking a level also ends where the score drops this much below its first row
+		public double SHOW_MORE_SCORE_DROP = 0.5;
+		// ... or holds this many times its minimum: hundreds of rows with one score give no drop to cut at
+		public int SHOW_MORE_MAX_LEVEL_TIMES = 3;
 		
 		// only do incomplete search with 2+ chars
 		public int MIN_CHARACTERS_INCOMPLETE = 2;
 		
+		public boolean SCORE_RANKING = true; // false - old lexicographic ladder
+		// one-word query: POIs found by category only and unrated, read nearest first ("restaurant" finds 180K; 0 - all)
+		public int LIMIT_READ_SINGLE_OBJECTS = 1500;
+
 		public int MIN_ELO_RATING = 1400; // see SearchResult.MIN_ELO_RATING
 		public int WORLD_ELO_RATING = 1500; // from world map by default
 //		public int MAX_ELO_RATING = 4300; // not used now
 		
 		// no need to find 3 street intersection or 3 POI intersection
 		public int LIMIT_ATOMIC_OBJECTS = 2;
+		
+		// share of a common word left unindexed from which it names a kind, not an object.
+		// Address index of the 2026-09 maps: "street", "avenue", "straße" 0.90-1.00, but street names reach
+		// 0.2 too - "john" 0.31, "lange" 0.33, "hohe" 0.26 - and 0.2 sent "707 John Street" below Johnson Street
+		public double KIND_WORD_NONINDEXED_SHARE = 0.5;
 		
 		// Create default bboxes for points POI / Address objects  
 		public int POI_DEFAULT_RADIUS = 50;
@@ -624,20 +640,23 @@ public class SpatialTextSearch {
 		if (res.mainResults.size() > 0) {
 			int[] limits = ctx.settings.SHOW_MORE_WORDS_COUNT.clone();
 			long cKey = SpatialSearchResult.compareKey(res.mainResults.get(0));
+			double levelScore = res.mainResults.get(0).score;
 			int ind = 0, lind = 0;
-			int level = 0; 
+			int level = 0;
 			for (SpatialSearchResult r : res.mainResults) {
 				if (limitPoiCat > 0) {
 					limitPoiCat = printPoiCategory(ctx, limitPoiCat, r);
 				}
 				long nextKey = SpatialSearchResult.compareKey(r);
-				if (cKey != nextKey) {
+				boolean scoreDrop = ctx.ranking != null && !r.isPoiCategory()
+						&& (r.score < levelScore - ctx.settings.SHOW_MORE_SCORE_DROP
+								|| lind < limits.length && ind >= ctx.settings.SHOW_MORE_MAX_LEVEL_TIMES * limits[lind]);
+				if (cKey != nextKey || scoreDrop) {
 					if (lind < limits.length && ind >= limits[lind]) {
 						level++;
+						levelScore = r.score;
 						ind = 0;
-						if (lind < limits.length - 1) {
-							lind++;
-						}
+						lind++;
 					}
 //					System.out.println(nextKey + " " + r);
 					cKey = nextKey;
@@ -683,6 +702,12 @@ public class SpatialTextSearch {
 			SpatialSearchToken token = new SpatialSearchToken(ctx.settings.MIN_CHARACTERS_INCOMPLETE, w,
 					owords.get(ind), tokens.size());
 			tokens.add(token);
+		}
+		for (SpatialSearchToken t : tokens) {
+			for (SpatialSearchToken o : tokens) {
+				t.numberNamedByOther |= t.mainNumber > 0 && o != t && SearchAlgorithms.letters(o.wordNoDot) > 0
+						&& Algorithms.extractFirstIntegerNumber(o.wordNoDot) == t.mainNumber;
+			}
 		}
 		return tokens;
 	}

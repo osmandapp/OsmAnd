@@ -2,10 +2,8 @@ package net.osmand.plus.track.fragments;
 
 import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,18 +51,14 @@ public class SelectRouteActivityFragment extends CustomizableSingleSelectionDial
 		}
 	}
 
-	@NonNull
 	@Override
-	public Dialog createDialog(Bundle savedInstanceState) {
-		Dialog dialog = super.createDialog(savedInstanceState);
-		dialog.setOnKeyListener((d, keyCode, event) -> {
-			if (KeyEvent.KEYCODE_BACK == keyCode && KeyEvent.ACTION_UP == event.getAction()) {
-				onBackPressed();
-				return true;
-			}
-			return false;
-		});
-		return dialog;
+	protected boolean isBackPressedCallbackEnabled() {
+		return true;
+	}
+
+	@Override
+	protected void handleBackPressed() {
+		onBackPressed();
 	}
 
 	@Nullable

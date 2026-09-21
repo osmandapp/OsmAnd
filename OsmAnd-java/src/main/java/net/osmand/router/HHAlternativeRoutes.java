@@ -787,6 +787,7 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 		if (a.rt(true).rtRouteToPoint == b) {
 			return a.rt(true).rtDistanceFromStart - b.rt(true).rtDistanceFromStart;
 		}
+		hctx.ensureSegmentsLoaded(a, false);
 		NetworkDBSegment segment = a.getSegment(b, true);
 		return segment == null ? 0 : segment.dist;
 	}

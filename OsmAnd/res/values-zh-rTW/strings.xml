@@ -842,7 +842,7 @@
     <string name="shared_string_gpx_points">點</string>
     <string name="gps_status">GPS 狀態</string>
     <string name="remove_the_tag">移除標記</string>
-    <string name="shared_string_disabled">已停用</string>
+    <string name="shared_string_disabled">關閉</string>
     <string name="shared_string_enabled">已啟用</string>
     <string name="shared_string_enable">啟用</string>
     <string name="shared_string_disable">停用</string>
@@ -1119,7 +1119,7 @@
     <string name="simulate_initial_startup">模擬應用程式第一次啟動</string>
     <string name="share_geo">地理：</string>
     <string name="share_menu_location">分享位置</string>
-    <string name="shared_string_send">發送</string>
+    <string name="shared_string_send">傳送</string>
     <string name="show_on_start_description">選擇「關閉」以直接啟動地圖。</string>
     <string name="map_downloaded">地圖已下載</string>
     <string name="map_downloaded_descr">%1$s 地圖已準備好可供使用。</string>
@@ -1606,8 +1606,8 @@
     <string name="shared_string_options">選項</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd 將連接標點與已選取設定檔的路徑。</string>
     <string name="choose_navigation_type">選擇導航設定檔</string>
-    <string name="empty_state_favourites">加入我的最愛</string>
-    <string name="empty_state_favourites_desc">您可以匯入收藏項目，或直接在地圖上標記新的最愛地點。</string>
+    <string name="empty_state_favourites">新增到最愛</string>
+    <string name="empty_state_favourites_desc">匯入最後或是新增透過在地圖上標示點來新增。</string>
     <string name="import_track">匯入 GPX 檔案</string>
     <string name="import_track_desc">%1$s 檔案不包含航點，您是否要將其匯入為軌跡？</string>
     <string name="move_point">移動標點</string>
@@ -1637,7 +1637,7 @@
     <string name="my_location">我的位置</string>
     <string name="shared_string_finish">完成</string>
     <string name="plan_route">規劃路徑</string>
-    <string name="shared_string_sort">分類</string>
+    <string name="shared_string_sort">排序</string>
     <string name="coordinate_input">座標輸入</string>
     <string name="marker_save_as_track_descr">將您的標記匯出到下方的 GPX 檔案：</string>
     <string name="move_to_history">移至歷程</string>
@@ -2325,7 +2325,7 @@
     <string name="live_monitoring_time_buffer">緩衝時間</string>
     <string name="live_monitoring_tracking_interval">軌跡間隔</string>
     <string name="live_monitoring_adress">網址</string>
-    <string name="monitoring_notification">通知</string>
+    <string name="monitoring_notification">在「通知」中顯示「記錄」按鈕</string>
     <string name="monitoring_min_speed">最低速度</string>
     <string name="monitoring_min_accuracy">最低精密度</string>
     <string name="monitoring_min_distance">最小偏移</string>
@@ -3152,7 +3152,7 @@
     <string name="gps_filter_precision">GPS 精度</string>
     <string name="gps_filter_smoothing">平滑</string>
     <string name="save_changes_into_file">將變更儲存至檔案</string>
-    <string name="save_as_copy">另存為副本</string>
+    <string name="save_as_copy">儲存為複本</string>
     <string name="gps_filter_actions_description">OsmAnd 將套用變更至軌跡而不更新檔案。您可以手動儲存變更。</string>
     <string name="shared_string_gps_filter">GPS 過濾條件</string>
     <string name="storage_migration_wrong_folder_warning">在選定的資料夾中找不到 OsmAnd 資料。請再試一次。</string>
@@ -3747,7 +3747,7 @@
     <string name="file_already_exists_description">「%1$s」。同名檔案已存在。取代將會覆寫對目前版本的所有變動。</string>
     <string name="file_already_exists">檔案已存在</string>
     <string name="nav_profile_confirm_delete">刪除「%1$s」嗎？</string>
-    <string name="no_search_results">無結果</string>
+    <string name="no_search_results">沒有結果</string>
     <string name="search_track_by_name">透過名稱搜尋軌跡</string>
     <string name="number_of_tracks">%1$s 個軌跡</string>
     <string name="no_poi_for_category">找不到興趣點</string>
@@ -4513,7 +4513,7 @@
     <string name="ais_cpa_warning_distance">最接近之最短距離 (CPA) 的警告距離</string>
     <string name="ais_cpa_warning_distance_description">如果 CPA 小於此值（最接近點）低於定義的臨界值，且 TCPA（到達 CPA 的時間）在「到達 CPA 的警告時間」設定中所設定的警告時間內，則船隻會以紅色突顯。</string>
     <string name="ais_address_settings">IP 位址設定</string>
-    <string name="ais_load_data">從檔案載入 AIS 資料</string>
+    <string name="ais_load_data">模擬船舶交通</string>
     <string name="plugin_ais_tracker_disclaimer">免責聲明\n\n本軟體外掛為業餘開發專案，並未經過專業可靠性與精確度驗證。使用者務必謹慎，切勿在任何情況下（尤其是導航或可能涉及生命安全的場合）完全依賴本軟體。</string>
     <string name="ais_port_nmea_server_description">定義 NMEA 資料來源的 TCP 連接埠編號</string>
     <string name="ais_object_lost_timeout_description">設定 AIS 物件訊號消失後顯示逾時時間： 移除指定時間內未接收訊號的 AIS 物件。</string>
@@ -4554,7 +4554,7 @@
     <string name="show_image_previews">顯示影像預覽</string>
     <string name="layer_coordinates_grid">座標網格</string>
     <string name="quick_action_showhide_coordinates_grid_descr">顯示或關閉檢視地圖上座標網格。</string>
-    <string name="shared_string_manual">手動</string>
+    <string name="shared_string_manual">手冊</string>
     <string name="shared_string_map_center">地圖中心</string>
     <string name="choose_location_on_map">選擇地圖上的位置。</string>
     <string name="prime_meridian">格林威治子午線</string>
@@ -4818,11 +4818,11 @@
     <string name="galactic_line">銀道</string>
     <string name="meridian_line">子午線</string>
     <string name="equator_line">天球赤道</string>
-    <string name="copy_from_portrait_layout">從直式版面複製</string>
-    <string name="copy_from_landscape_layout">從橫式版面複製</string>
-    <string name="panels_layout_compact">精簡</string>
-    <string name="panels_layout_wide">寬</string>
-    <string name="panels_layout">面板佈局</string>
+    <string name="copy_from_portrait_layout">從橫向樣式複製</string>
+    <string name="copy_from_landscape_layout">從直式樣式複製</string>
+    <string name="panels_layout_compact">緊實</string>
+    <string name="panels_layout_wide">寬闊</string>
+    <string name="panels_layout">面板樣式</string>
     <string name="panels_layout_descr">為頂部與底部面板選擇佈局。它們可以是寬版面，橫跨整個螢幕寬度；或是精簡版面，嵌入側邊面板與按鈕之間。</string>
     <string name="single_layout">單一佈局</string>
     <string name="separate_layouts">分離佈局</string>
@@ -4844,10 +4844,10 @@
     <string name="astro_nebulas">星雲</string>
     <string name="astro_solar_system">太陽系</string>
     <string name="delete_groups_confirmation">刪除群組？</string>
-    <string name="add_to_track">新增至軌跡</string>
+    <string name="add_to_track">新增到軌跡</string>
     <string name="unpin_folder">取消釘選資料夾</string>
     <string name="pin_folder">釘選資料夾</string>
-    <string name="favorite_search_empty_state_description">請調整您的搜尋或篩選條件，看看是否有所幫助</string>
+    <string name="favorite_search_empty_state_description">調整你的搜尋或是篩選也許能有幫助</string>
     <string name="favorites_empty_folder_description">此資料夾尚無任何點。</string>
     <string name="building_3d_low_details_content_desc">3D 建築低細節</string>
     <string name="building_3d_high_details_content_desc">3D 建築高</string>
@@ -4998,7 +4998,7 @@
     <string name="obd_simulation_device">模擬裝置</string>
     <string name="favorite_confirm_delete_folder">這將刪除資料夾「%1$s」，包括其中的子資料夾以及 %2$d 個收藏點。</string>
     <string name="favorite_folder_rename_conflict">已經存在一個同名的資料夾。</string>
-    <string name="favorite_folder_invalid_name">資料夾名稱不能包含 / 或 _%_</string>
+    <string name="favorite_folder_invalid_name">資料夾名稱不能包含 / 或 %1$s</string>
     <string name="favorite_folder_duplicate_message">請使用一個尚不存在的資料夾名稱。</string>
     <string name="favorite_folder_name">資料夾名稱</string>
     <string name="edit_folder">編輯資料夾</string>
@@ -5112,7 +5112,7 @@
     <string name="astro_show_eclipse_on_map_loading">正在尋找日食陰影⋯⋯</string>
     <string name="astro_eclipse_map_error">目前無法取得日食陰影的相關資訊。</string>
     <string name="astro_eclipse_safety_warning">目前無法取得日食陰影的相關資訊。</string>
-    <string name="sort_by_nearest_to_current_location">離目前位置最近</string>
+    <string name="sort_by_nearest_to_current_location">最近到目前位置</string>
     <string name="attached_media_delete_confirmation">是否要從此點刪除 %1$d 項媒體內容？由該應用程式儲存且未附加於其他任何位置的媒體內容，也將從裝置中刪除。</string>
     <string name="duplicate_map">重覆的地圖</string>
     <string name="duplicate_map_standard_exists_desc">您已經擁有 %1$s 的標準地圖。若下載僅含道路的地圖，將會導致資料重複，並可能影響效能。\n\n若進行替換，將移除標準地圖中所包含的地址搜尋及 POI 資料。</string>
@@ -5145,7 +5145,7 @@
     <string name="required_maps_calculate_with_existing_maps">使用既有地圖計算</string>
     <string name="attached_media">附加的媒體</string>
     <string name="shared_string_recent">近期</string>
-    <string name="sort_by_nearest_to_map_center">最接近地圖中心</string>
+    <string name="sort_by_nearest_to_map_center">最近到地圖中心</string>
     <string name="last_week">上週</string>
     <string name="history_is_turned_off">歷史紀錄已關閉</string>
     <string name="search_and_navigation_history_disabled_descr">搜尋與導航紀錄已停用。請在設定中啟用這些功能，即可在此查看最近的活動。</string>
@@ -5199,4 +5199,25 @@
     <string name="share_favorites_missing_media_warning">部分附加媒體無法一併納入。</string>
     <string name="search_on_web">在網路上搜尋</string>
     <string name="astro_eclipse_column_below_horizon">地平線以下</string>
+    <string name="quick_action_add_track">新增軌跡</string>
+    <string name="quick_action_tracks_select_descr">透過點一下來在地圖上新增一條或是多條軌跡。</string>
+    <string name="quick_action_tracks_always_ask_descr">點一下來開啟軌跡清單，可以顯示一條或是多修軌跡。</string>
+    <string name="quick_action_all_tracks">所有軌跡</string>
+    <string name="battery_saving_mode_descr">將地圖影格率限制為每秒 20 個影格，以減少電池耗電量及裝置發熱。地圖移動會變得較不流暢。</string>
+    <string name="crash_report_sent">已傳送回報。感謝！</string>
+    <string name="crash_report_send_failed">無法傳送回報。稍後再試。</string>
+    <string name="heap_dump_collect">立即收集並分析</string>
+    <string name="heap_dump_collect_descr">只需幾秒鐘，就會顯示結果。</string>
+    <string name="heap_dump_share">分享報告</string>
+    <string name="heap_dump_share_descr">將最後一份報告傳送至伺服器。</string>
+    <string name="heap_dump_auto">蒐集高用量狀況</string>
+    <string name="heap_dump_auto_descr">當堆疊快滿時，每 30 分鐘執行一次。</string>
+    <string name="visualizing_button_grid_descr">儲存格、槽位、框架與紀錄檔。</string>
+    <string name="java_memory">Java 記憶體</string>
+    <string name="ais_load_data_descr">從已記錄檔案重播 AIS 訊息。</string>
+    <string name="map_rendering">地圖渲染</string>
+    <string name="simulate_ui">模擬第一開始</string>
+    <string name="simulate_ui_descr">首先執行，免費版本橫幅，打折版本。</string>
+    <string name="heap_dump">堆疊轉儲</string>
+    <string name="heap_dump_descr">從 java 轉儲計算物件。</string>
 </resources>

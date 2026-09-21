@@ -3,6 +3,7 @@ package net.osmand.router;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -13,9 +14,11 @@ import java.util.TreeMap;
 
 import com.google.protobuf.CodedInputStream;
 
+import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import net.osmand.binary.BinaryHHRouteReaderAdapter;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -55,6 +58,8 @@ public class HHRouteDataStructure {
 		boolean ROUTE_ALL_SEGMENTS = false;
 		boolean ROUTE_ALL_ALT_SEGMENTS = false;
 		boolean PRELOAD_SEGMENTS = false;
+		// max hub-graph edges kept in memory, oldest expanded points are unloaded first (0 - unlimited)
+		public int MAX_LOADED_EDGES = 250_000;
 		
 		boolean CACHE_CALCULATION_CONTEXT = false;
 		public boolean CALC_ALTERNATIVES = false;
@@ -268,6 +273,8 @@ public class HHRouteDataStructure {
 		HHRoutingConfig config;
 		int startX, startY, endX, endY;
 		// Route runtime vars
+		long loadedEdges;
+		ArrayDeque<T> expandedPoints = new ArrayDeque<>(); // unload order
 		List<T> queueAdded = new ArrayList<>();
 		List<T> visited = new ArrayList<>();
 		List<T> visitedRev = new ArrayList<>();
@@ -358,6 +365,8 @@ public class HHRouteDataStructure {
 			for (NetworkDBPoint p : pointsById.valueCollection()) {
 				p.markSegmentsNotLoaded();
 			}
+			loadedEdges = 0;
+			expandedPoints.clear();
 		}
 
 		public void setStartEnd(LatLon start, LatLon end) {
@@ -399,6 +408,116 @@ public class HHRouteDataStructure {
 			return points;
 		}
 
+		/**
+		 * Copies the points of an initialized context for another routing context over the same file
+		 * (each routing context has its own reader): nothing is parsed or filtered again.
+		 * Segments are not copied, the copy loads them lazily. Returns null if the copy isn't possible.
+		 */
+		public static HHRoutingContext<NetworkDBPoint> copy(HHRoutingContext<NetworkDBPoint> src, RoutingContext rctx) {
+			if (!src.initialized) {
+				return null;
+			}
+			HHRoutingContext<NetworkDBPoint> c = new HHRoutingContext<>();
+			c.rctx = rctx;
+			for (HHRouteRegionPointsCtx<NetworkDBPoint> r : src.regions) {
+				HHRouteRegion fileRegion = null;
+				BinaryMapIndexReader file = null;
+				for (BinaryMapIndexReader reader : rctx.map.keySet()) {
+					for (HHRouteRegion h : reader.getHHRoutingIndexes()) {
+						if (r.file != null && reader.getFile().equals(r.file.getFile())
+								&& h.getFilePointer() == r.fileRegion.getFilePointer()) {
+							fileRegion = h;
+							file = reader;
+						}
+					}
+				}
+				if (fileRegion == null) {
+					return null;
+				}
+				BinaryHHRouteReaderAdapter.copySegmentHeaders(r.fileRegion, fileRegion);
+				c.regions.add(new HHRouteRegionPointsCtx<>(r.id, fileRegion, file, r.routingProfile));
+			}
+			int maxIndex = 0;
+			for (NetworkDBPoint p : src.pointsById.valueCollection()) {
+				if (p.getClass() != NetworkDBPoint.class) {
+					return null;
+				}
+				maxIndex = Math.max(maxIndex, p.index);
+			}
+			// index is a dense global id
+			NetworkDBPoint[] byIndex = new NetworkDBPoint[maxIndex + 1];
+			c.pointsById = new TLongObjectHashMap<>(src.pointsById.size());
+			TLongObjectIterator<NetworkDBPoint> it = src.pointsById.iterator();
+			while (it.hasNext()) {
+				it.advance();
+				NetworkDBPoint s = it.value();
+				NetworkDBPoint p = new NetworkDBPoint();
+				p.tagValues = s.tagValues;
+				p.index = s.index;
+				p.clusterId = s.clusterId;
+				p.fileId = s.fileId;
+				p.mapId = s.mapId;
+				p.incomplete = s.incomplete;
+				p.roadId = s.roadId;
+				p.start = s.start;
+				p.end = s.end;
+				p.startX = s.startX;
+				p.startY = s.startY;
+				p.endX = s.endX;
+				p.endY = s.endY;
+				p.rtExclude = s.rtExclude;
+				p.markSegmentsNotLoaded();
+				byIndex[p.index] = p;
+				c.pointsById.put(it.key(), p);
+			}
+			for (NetworkDBPoint s : src.pointsById.valueCollection()) {
+				if (s.dualPoint != null) {
+					byIndex[s.index].dualPoint = byIndex[s.dualPoint.index];
+				}
+			}
+			c.pointsByGeo = new TLongObjectHashMap<>(src.pointsByGeo.size());
+			c.boundaries = new TLongObjectHashMap<>(src.pointsByGeo.size());
+			it = src.pointsByGeo.iterator();
+			while (it.hasNext()) {
+				it.advance();
+				c.pointsByGeo.put(it.key(), byIndex[it.value().index]);
+				// not copied from src.boundaries: it holds the start and end of a route running there
+				c.boundaries.put(it.key(), null);
+			}
+			c.clusterInPoints = copyClusters(src.clusterInPoints, byIndex);
+			c.clusterOutPoints = copyClusters(src.clusterOutPoints, byIndex);
+			for (NetworkDBPoint p : c.pointsById.valueCollection()) {
+				LatLon latlon = p.getPoint();
+				c.pointsRect.registerObject(latlon.getLatitude(), latlon.getLongitude(), p);
+			}
+			for (int i = 0; i < src.regions.size(); i++) {
+				it = src.regions.get(i).pntsByFileId.iterator();
+				while (it.hasNext()) {
+					it.advance();
+					c.regions.get(i).pntsByFileId.put(it.key(), byIndex[it.value().index]);
+				}
+			}
+			c.filterRoutingParameters = new TreeMap<>(src.filterRoutingParameters);
+			rctx.hhHasUnsupportedParameters = src.rctx.hhHasUnsupportedParameters;
+			c.initialized = true;
+			return c;
+		}
+
+		private static TIntObjectHashMap<List<NetworkDBPoint>> copyClusters(TIntObjectHashMap<List<NetworkDBPoint>> src,
+				NetworkDBPoint[] byIndex) {
+			TIntObjectHashMap<List<NetworkDBPoint>> res = new TIntObjectHashMap<>(src.size());
+			TIntObjectIterator<List<NetworkDBPoint>> it = src.iterator();
+			while (it.hasNext()) {
+				it.advance();
+				List<NetworkDBPoint> l = new ArrayList<>(it.value().size());
+				for (NetworkDBPoint p : it.value()) {
+					l.add(byIndex[p.index]);
+				}
+				res.put(it.key(), l);
+			}
+			return res;
+		}
+
 		public int loadNetworkSegments(Collection<T> valueCollection) throws SQLException {
 			int loaded = 0;
 			for (HHRouteRegionPointsCtx<T> r : regions) {
@@ -428,13 +547,40 @@ public class HHRouteDataStructure {
 		public int loadNetworkSegmentPoint(T point, boolean reverse) throws SQLException, IOException {
 			short mapId = point.mapId;
 			HHRouteRegionPointsCtx<T> r = regions.get(mapId);
+			int loaded;
 			if (r.networkDB != null) {
-				return r.networkDB.loadNetworkSegmentPoint(this, r, point, reverse);
+				loaded = r.networkDB.loadNetworkSegmentPoint(this, r, point, reverse);
+			} else if (r.file != null) {
+				loaded = r.file.loadNetworkSegmentPoint(this, r, point, reverse);
+			} else {
+				throw new UnsupportedOperationException();
 			}
-			if (r.file != null) {
-				return r.file.loadNetworkSegmentPoint(this, r, point, reverse);
+			loadedEdges += loaded;
+			return loaded;
+		}
+
+		// edges could be unloaded, so load before reading outside of main search
+		@SuppressWarnings("unchecked")
+		public void ensureSegmentsLoaded(NetworkDBPoint point, boolean reverse) {
+			try {
+				loadNetworkSegmentPoint((T) point, reverse);
+			} catch (SQLException | IOException e) {
+				throw new IllegalStateException(e);
 			}
-			throw new UnsupportedOperationException();
+		}
+
+		// unload with delay: point could be expanded again soon with a better cost
+		public void unloadExpandedSegments(T point) {
+			expandedPoints.add(point);
+			while (config.MAX_LOADED_EDGES > 0 && loadedEdges > config.MAX_LOADED_EDGES && expandedPoints.size() > 1) {
+				T p = expandedPoints.poll();
+				if (p.edgesEdited) {
+					continue;
+				}
+				loadedEdges -= p.connected == null ? 0 : p.connected.size();
+				loadedEdges -= p.connectedReverse == null ? 0 : p.connectedReverse.size();
+				p.markSegmentsNotLoaded();
+			}
 		}
 
 		public String getRoutingInfo() {
@@ -564,11 +710,15 @@ public class HHRouteDataStructure {
 	}
 	
 	public static <T extends NetworkDBPoint> void setSegments(HHRoutingContext<T> ctx, T point,
-			byte[] in, byte[] out) {
-		point.connectedSet(true, HHRouteDataStructure.parseSegments(in, ctx.pointsById,
-				ctx.getIncomingPoints(point), point, false));
-		point.connectedSet(false, HHRouteDataStructure.parseSegments(out, ctx.pointsById,
-				ctx.getOutgoingPoints(point), point, true));		
+			byte[] in, byte[] out, boolean reverse) {
+		// search expands point in one direction, other direction is loaded on demand
+		if (reverse) {
+			point.connectedSet(true, HHRouteDataStructure.parseSegments(in, ctx.pointsById,
+					ctx.getIncomingPoints(point), point, false));
+		} else {
+			point.connectedSet(false, HHRouteDataStructure.parseSegments(out, ctx.pointsById,
+					ctx.getOutgoingPoints(point), point, true));
+		}
 	}
 	
 	private static List<NetworkDBSegment> parseSegments(byte[] bytes, TLongObjectHashMap<? extends NetworkDBPoint> pntsById,
@@ -618,6 +768,13 @@ public class HHRouteDataStructure {
 			this.dist = dist;
 		}
 		
+		// edited cost can't be restored from file, so edges of both points are never unloaded
+		public void editDist(double dist) {
+			this.dist = dist;
+			start.edgesEdited = true;
+			end.edgesEdited = true;
+		}
+
 		public List<LatLon> getGeometry() {
 			if (geom == null) {
 				geom = new ArrayList<LatLon>();
@@ -688,6 +845,7 @@ public class HHRouteDataStructure {
 		public int endY;
 		
 		boolean rtExclude;
+		boolean edgesEdited; // edges are changed and can't be unloaded
 		NetworkDBPointRouteInfo rtRev;
 		NetworkDBPointRouteInfo rtPos;
 		

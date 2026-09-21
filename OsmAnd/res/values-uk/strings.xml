@@ -5149,7 +5149,7 @@
     <string name="no_media_descr">Ви можете додавати фотографії, відео або аудіонотатки з камери чи бібліотеки.</string>
     <string name="favorite_confirm_delete_folder">Це видалить папку \"%1$s\", включаючи вкладені папки та %2$d точок обраного.</string>
     <string name="favorite_folder_rename_conflict">Папка з такою назвою вже існує.</string>
-    <string name="favorite_folder_invalid_name">Назва папки не може містити / або _%_</string>
+    <string name="favorite_folder_invalid_name">Назва папки не може містити / або %1$s</string>
     <string name="favorite_folder_duplicate_message">Використовуйте ім\'я папки, якого ще не існує.</string>
     <string name="favorite_folder_name">Назва папки</string>
     <string name="edit_folder">Редагувати папку</string>
@@ -5181,10 +5181,10 @@
     <string name="building_3d_near_distance_content_desc">3D будівлі відстань поруч</string>
     <string name="building_3d_far_distance_content_desc">3D будівлі відстань далеко</string>
     <string name="gradient_range_type_relative">Відносний</string>
-    <string name="data_storage">Data storage</string>
+    <string name="data_storage">Сховище даних</string>
     <string name="main_storage">Основне сховище</string>
-    <string name="media_storage">Медіа сховище</string>
-    <string name="camera_folder">Папка камери</string>
+    <string name="media_storage">Сховище медіа</string>
+    <string name="camera_folder">Тека камери</string>
     <string name="media_storage_main_storage_descr">Файли зберігаються в приватній пам’яті програм. Вони приховані від Галереї та інших програм.</string>
     <string name="media_storage_shared_storage_descr">Файли зберігаються у загальнодоступних папках (Зображення, Фільми, Музика). Вони відображаються в Галереї та Google Фото.</string>
     <string name="shared_string_note">Примітка</string>

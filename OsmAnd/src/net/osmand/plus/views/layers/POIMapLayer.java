@@ -557,9 +557,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			if (id == null) {
 				id = RenderingIcons.getIconNameForAmenity(app, amenity);
 			}
-			Integer iconId = id != null ? RenderingIcons.getResId(id) : null;
+			int iconId = RenderingIcons.getPointIconId(getContext(), id, R.drawable.mx_special_marker);
 			PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
-					getContext(), getColor(amenity), true, iconId != null ? iconId : R.drawable.mx_special_marker);
+					getContext(), getColor(amenity), true, iconId);
 			pointImageDrawable.setAlpha(0.8f);
 			Bitmap bitmap = app.getPoiTypes().isOtherCategory(amenity.getType())
 					? pointImageDrawable.getSmallMergedBitmap(getTextScale())
@@ -911,8 +911,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 							id = RenderingIcons.getIconNameForAmenity(app, o);
 						}
 						if (id != null) {
+							int iconId = RenderingIcons.getPointIconId(getContext(), id, R.drawable.mx_special_marker);
 							PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
-									getContext(), getColor(o), true, RenderingIcons.getResId(id));
+									getContext(), getColor(o), true, iconId);
 							pointImageDrawable.setAlpha(0.8f);
 							pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 						}
@@ -1197,6 +1198,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public void updateSelectedTopPlace(@Nullable Pair<BaseDetailsObject, Amenity> selectedPlace) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
+			return;
+		}
+		if (selectedPlace == null && selectedTopPlace == null) {
+			// asked on every redraw while no place is selected: there is no marker to look for
 			return;
 		}
 		if (selectedTopPlaceCollection == null) {

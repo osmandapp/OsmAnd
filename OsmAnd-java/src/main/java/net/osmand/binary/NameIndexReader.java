@@ -39,6 +39,30 @@ import net.osmand.util.SearchAlgorithms;
 public class NameIndexReader {
 
 	public static final String CITY_AS_STREET_COMMON = "cityasstreetcommon";
+	/** an alternative name of a street with another number of words carries the word altnamecommon1..7: the search reads
+	 *  that name as its own object, so its words never take the slots of the main name (alt_name name:zh '1945年5月8日街' vs 'Rue du 8 Mai 1945'). */
+	public static final String ALT_NAME_COMMON_PREFIX = "altnamecommon";
+	public static final int ALT_NAME_VARIANTS = 7;
+
+	public static String altNameMarker(int variant) {
+		return ALT_NAME_COMMON_PREFIX + variant;
+	}
+
+	/** 1..7 for the marker word of an alternative name, 0 for any other word */
+	public static int altNameVariant(String word) {
+		if (word != null && word.length() == ALT_NAME_COMMON_PREFIX.length() + 1 && word.startsWith(ALT_NAME_COMMON_PREFIX)) {
+			char c = word.charAt(ALT_NAME_COMMON_PREFIX.length());
+			if (c >= '1' && c <= '0' + ALT_NAME_VARIANTS) {
+				return c - '0';
+			}
+		}
+		return 0;
+	}
+
+	/** words the generator adds to a name for the search: never keys, never counted as words of the name */
+	public static boolean isIndexMarker(String word) {
+		return CITY_AS_STREET_COMMON.equalsIgnoreCase(word) || altNameVariant(word) > 0;
+	}
 	public static final String POI_CATEGORY_PREFIX = "#^";
 	
 	// read params

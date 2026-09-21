@@ -5784,4 +5784,18 @@
 	<string name="poi_air_conditioning_yes">Yes</string>
 	<string name="poi_air_conditioning_no">No</string>
 
+  <string name="poi_disc_golf_course">Disc golf course</string>
+	<string name="poi_dancing_school">Dancing school</string>
+	<string name="poi_student_accommodation">Student accommodation</string>
+	<string name="poi_healthcare_counselling">Counselling</string>
+	<string name="poi_healthcare_birthing_centre">Birthing centre</string>
+	<string name="poi_craft_cleaning">Cleaning service</string>
+	<string name="poi_craft_printer">Printer</string>
+	<string name="poi_craft_signmaker">Signmaker</string>
+	<string name="poi_funeral_hall">Funeral hall</string>
+	<string name="poi_post_depot">Post depot</string>
+	<string name="poi_indoor_play">Indoor playground</string>
+	<string name="poi_traffic_park">Traffic park</string>
+	<string name="poi_animal_breeding">Animal breeding</string>
+	<string name="poi_stables">Stables</string>
 </resources>

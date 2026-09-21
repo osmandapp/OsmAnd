@@ -533,7 +533,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			SearchResultViewHolder.bindCoordinatesSearchResult(view, listItem);
 			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
 			setupCheckBox(position, view, listItem);
-		} else if (listItem.isLegacyHistoryItem()) {
+		} else if (searchResult != null && searchResult.objectType == ObjectType.POI_TYPE) {
+			view = getConvertView(convertView, R.layout.search_category_list_item);
+			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
+			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
+			setupCheckBox(position, view, listItem);
+		} else if (listItem.isHistoryItem()) {
 			view = getConvertView(convertView, R.layout.search_legacy_history_list_item);
 			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
 			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);

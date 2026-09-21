@@ -377,6 +377,7 @@ public class MapButtonsHelper {
 		// configure map
 		allTypes.add(ShowHideFavoritesAction.TYPE);
 		allTypes.add(ShowHideGpxTracksAction.TYPE);
+		allTypes.add(ShowHideTracksAction.TYPE);
 		allTypes.add(ShowHidePoiAction.TYPE);
 		allTypes.add(MapStyleAction.TYPE);
 		allTypes.add(DayNightModeAction.TYPE);

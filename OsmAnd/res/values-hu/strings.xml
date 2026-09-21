@@ -2586,7 +2586,7 @@
     <string name="live_monitoring_time_buffer">Idő puffer</string>
     <string name="live_monitoring_tracking_interval">Rögzítési időköz</string>
     <string name="live_monitoring_adress">Webcím</string>
-    <string name="monitoring_notification">Értesítés</string>
+    <string name="monitoring_notification">A „Rögzítés” gomb megjelenítése az értesítésekben</string>
     <string name="monitoring_min_speed">Legkisebb sebesség</string>
     <string name="monitoring_min_accuracy">Legkisebb pontosság</string>
     <string name="monitoring_min_distance">Legkisebb elmozdulás</string>
@@ -4583,7 +4583,7 @@
     <string name="map_widget_route_information_desc">Megjeleníti az aktív navigációs útvonal becsült érkezési idejét, a fennmaradó utazási időt és a távolságot.</string>
     <string name="ais_cpa_warning_distance_description">A hajók piros színnel lesznek kiemelve meg, ha a CPA (legközelebbi megközelítési pont) a meghatározott küszöbérték alatt van, és a TCPA (a CPA-ig hátralévő idő) a „Figyelmeztetési idő a legközelebbi megközelítési pont (CPA) előtt” beállításban megadott figyelmeztetés idejébe esik.</string>
     <string name="ais_object_lost_timeout_description">Állítsa be az AIS-objektumok láthatóságának időtúllépését: Ha a megadott időtartamon belül nem érkezik jel, az objektum automatikusan eltávolításra kerül a kijelzőről.</string>
-    <string name="ais_load_data">AIS-adatok betöltése fájlból</string>
+    <string name="ais_load_data">Hajóforgalom szimulálása</string>
     <string name="ais_port_nmea_local_description">Határozza meg azt az UPD-portot, amelyen az OsmAnd NMEA-adatokat fogadhat</string>
     <string name="ais_object_lost_timeout">Láthatósági időtúllépés az elveszett hajóknál</string>
     <string name="ais_ship_lost_timeout_description">Állítsa be a hajó elavult láthatóságának időtúllépését: ezen jelfogadás nélküli idő letelte után a hajó szimbóluma áthúzásra kerül.</string>
@@ -5066,7 +5066,7 @@
     <string name="obd_simulation_device">Szimulációs eszköz</string>
     <string name="favorite_confirm_delete_folder">Ez törli a(z) „%1$s” nevű mappát, beleértve a beágyazott mappákat és %2$d darab kedvenc pontot is.</string>
     <string name="favorite_folder_rename_conflict">Már létezik ilyen nevű mappa.</string>
-    <string name="favorite_folder_invalid_name">A mappanév nem tartalmazhat / vagy _%_ karaktert</string>
+    <string name="favorite_folder_invalid_name">A mappanév nem tartalmazhat / vagy %1$s karaktert</string>
     <string name="favorite_folder_duplicate_message">Használjon olyan mappanevet, amely még nem létezik.</string>
     <string name="favorite_folder_name">Mappa neve</string>
     <string name="edit_folder">Mappa szerkesztése</string>
@@ -5268,4 +5268,25 @@
     <string name="share_favorites_media_preparation_failed">Nem sikerült beilleszteni a csatolt médiafájlokat. Csak pontok megosztása.</string>
     <string name="search_on_web">Keresés a világhálón</string>
     <string name="astro_eclipse_column_below_horizon">Horizont alatt</string>
+    <string name="quick_action_add_track">Nyomvonal hozzáadása</string>
+    <string name="quick_action_tracks_select_descr">Adjon hozzá egy vagy több nyomvonalat, hogy egyetlen koppintással megjeleníthesse vagy elrejthesse őket a térképen.</string>
+    <string name="quick_action_tracks_always_ask_descr">Erre a műveletre koppintva megnyílik a nyomvonalak listája, ahol megjeleníthet vagy elrejthet egyet vagy többet közülük.</string>
+    <string name="quick_action_all_tracks">Összes nyomvonal</string>
+    <string name="crash_report_sent">Jelentés elküldve. Köszönjük!</string>
+    <string name="crash_report_send_failed">Nem sikerült elküldeni a jelentést. Próbálja meg később.</string>
+    <string name="battery_saving_mode_descr">A térképmegjelenítés sebessége 20 fps-re korlátozódik az akkumulátor lemerülésének és az eszköz túlmelegedésének csökkentése érdekében. A térkép mozgása kevésbé lesz egyenletes.</string>
+    <string name="java_memory">Java memória</string>
+    <string name="ais_load_data_descr">AIS-üzenetek visszajátszása rögzített fájlból.</string>
+    <string name="map_rendering">Térképmegjelenítés</string>
+    <string name="simulate_ui">Első indítás szimulálása</string>
+    <string name="simulate_ui_descr">Első futtatás, ingyenes verziós reklámcsík, kedvezményes lap.</string>
+    <string name="heap_dump">Heap-memóriakép</string>
+    <string name="heap_dump_descr">Objektumok megszámlálása a Java-heapben.</string>
+    <string name="heap_dump_collect">Gyűjtés és elemzés most</string>
+    <string name="heap_dump_collect_descr">Néhány másodpercet vesz igénybe, majd megjeleníti az eredményt.</string>
+    <string name="heap_dump_share">Jelentés megosztása</string>
+    <string name="heap_dump_share_descr">Elküldi a legutóbbi jelentést a kiszolgálóra.</string>
+    <string name="heap_dump_auto">Gyűjtés magas használat esetén</string>
+    <string name="visualizing_button_grid_descr">Cellák, rekeszek, keretek és naplók.</string>
+    <string name="heap_dump_auto_descr">Amikor a heap majdnem megtelt, 30 percenként egyszer.</string>
 </resources>

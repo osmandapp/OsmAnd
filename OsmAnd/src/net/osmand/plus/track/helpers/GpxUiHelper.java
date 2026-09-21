@@ -693,8 +693,9 @@ public class GpxUiHelper {
 
 	public static void saveAndShareCurrentGpx(@NonNull OsmandApplication app, @NonNull Activity activity, @NonNull GpxFile gpxFile) {
 		SaveGpxHelper.saveCurrentTrack(app, gpxFile, errorMessage -> {
-			if (errorMessage == null) {
-				shareGpx(app, activity, new File(gpxFile.getPath()));
+			String path = gpxFile.getPath();
+			if (errorMessage == null && !Algorithms.isEmpty(path)) {
+				shareGpx(app, activity, new File(path));
 			}
 		});
 	}

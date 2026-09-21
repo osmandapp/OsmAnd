@@ -17,6 +17,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
@@ -39,6 +40,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 
 	private static final String KNOWN_COLON_KEY = "authentication:phone_call:number";
 	private static final String CUSTOM_KEY = "test:country";
+	private static final String COLLIDING_CUSTOM_KEY = "phone:custom";
 	private static final String CUSTOM_REFERENCE_KEY = "test:reference";
 	private static final String CUSTOM_ROUTE_KEY = "test:route_id";
 	private static final String UNKNOWN_UNPREFIXED_KEY = "unknown_point_field";
@@ -91,8 +93,21 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 			AmenityInfoRow row = rows.get(entry.getKey());
 			assertNotNull(entry.getKey(), row);
 			assertEquals(entry.getValue(), row.text);
+			assertEquals(R.drawable.ic_action_info_dark, row.iconId);
 		}
 		assertEquals("country", rows.get(CUSTOM_KEY).name);
+	}
+
+	@Test
+	public void genericFallbackIconOverridesCollidingPoiRule() {
+		Map<String, String> extensions = Collections.singletonMap(COLLIDING_CUSTOM_KEY, "value");
+
+		Map<String, AmenityInfoRow> rows = buildRows(extensions,
+				AmenityExtensionsHelper.getStoredExtensionFallbackKeys(extensions));
+
+		AmenityInfoRow row = rows.get(COLLIDING_CUSTOM_KEY);
+		assertNotNull(row);
+		assertEquals(R.drawable.ic_action_info_dark, row.iconId);
 	}
 
 	@Test
