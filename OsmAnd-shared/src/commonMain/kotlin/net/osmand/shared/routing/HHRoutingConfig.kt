@@ -64,12 +64,9 @@ class HHRoutingConfig {
 	@JvmField
 	var PRELOAD_SEGMENTS: Boolean = false
 
-	/**
-	 * How many hub-graph edges may stay materialised. Over that, the edges of the points the search
-	 * left behind longest ago are dropped and parsed again if anything reads them; 0 keeps
-	 * everything, which is what the planner did before.
-	 */
-	var MAX_LOADED_EDGES: Int = DEFAULT_MAX_LOADED_EDGES
+	// max hub-graph edges kept in memory, oldest expanded points are unloaded first (0 - unlimited)
+	@JvmField
+	var MAX_LOADED_EDGES: Int = 250_000
 
 	@JvmField
 	var CACHE_CALCULATION_CONTEXT: Boolean = false
@@ -158,9 +155,6 @@ class HHRoutingConfig {
 	}
 
 	companion object {
-		/** What a new config starts with; a caller may raise or lower it per route. */
-		var DEFAULT_MAX_LOADED_EDGES: Int = 250_000
-
 		const val CALCULATE_ALL_DETAILED = 3
 
 		@JvmField

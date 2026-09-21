@@ -58,12 +58,7 @@ public class HHRouteDataStructure {
 		boolean ROUTE_ALL_SEGMENTS = false;
 		boolean ROUTE_ALL_ALT_SEGMENTS = false;
 		boolean PRELOAD_SEGMENTS = false;
-		/**
-		 * How many hub-graph edges may stay materialised. Over that, the edges of the points the
-		 * search left behind longest ago are dropped and parsed again if anything reads them. 0
-		 * keeps everything, which is what the planner did before. Around 52 bytes per edge, so
-		 * 4M edges is roughly 200 MB; a route that needs fewer never drops anything.
-		 */
+		// max hub-graph edges kept in memory, oldest expanded points are unloaded first (0 - unlimited)
 		public int MAX_LOADED_EDGES = 250_000;
 		
 		boolean CACHE_CALCULATION_CONTEXT = false;
@@ -277,49 +272,9 @@ public class HHRouteDataStructure {
 		RoutingStats stats = new RoutingStats();
 		HHRoutingConfig config;
 		int startX, startY, endX, endY;
-		// Edge bookkeeping: what is materialised, and in which order the search finished with it
-		public long loadedEdges;
-		private final ArrayDeque<T> evictPoints = new ArrayDeque<>();
-		private final ArrayDeque<Boolean> evictDirs = new ArrayDeque<>();
-
-		/** The edge list, parsed now if it was never loaded or has since been dropped. */
-		public List<NetworkDBSegment> connectedLoaded(T point, boolean reverse) {
-			if (point.connected(reverse) == null) {
-				try {
-					loadNetworkSegmentPoint(point, reverse);
-				} catch (SQLException | IOException e) {
-					throw new IllegalStateException(e);
-				}
-			}
-			return point.connected(reverse);
-		}
-
-		/**
-		 * The search is done with this point for now. It is not dropped here: a point often comes
-		 * back a few expansions later with a cheaper way in, so eviction lags behind by the whole
-		 * queue and only starts once {@link HHRoutingConfig#MAX_LOADED_EDGES} is passed.
-		 */
-		public void expanded(T point, boolean reverse) {
-			evictPoints.addLast(point);
-			evictDirs.addLast(reverse);
-			while (config.MAX_LOADED_EDGES > 0 && loadedEdges > config.MAX_LOADED_EDGES
-					&& evictPoints.size() > 1) {
-				T p = evictPoints.pollFirst();
-				boolean rev = evictDirs.pollFirst();
-				// edges edited in place (the first and last mile write their own cost into them)
-				// are the one thing that cannot be parsed back from the file
-				if (p.edgesEdited) {
-					continue;
-				}
-				List<NetworkDBSegment> l = p.connected(rev);
-				if (l != null) {
-					loadedEdges -= l.size();
-					p.connectedSet(rev, null);
-				}
-			}
-		}
-
 		// Route runtime vars
+		long loadedEdges;
+		ArrayDeque<T> expandedPoints = new ArrayDeque<>(); // unload order
 		List<T> queueAdded = new ArrayList<>();
 		List<T> visited = new ArrayList<>();
 		List<T> visitedRev = new ArrayList<>();
@@ -410,6 +365,8 @@ public class HHRouteDataStructure {
 			for (NetworkDBPoint p : pointsById.valueCollection()) {
 				p.markSegmentsNotLoaded();
 			}
+			loadedEdges = 0;
+			expandedPoints.clear();
 		}
 
 		public void setStartEnd(LatLon start, LatLon end) {
@@ -590,13 +547,40 @@ public class HHRouteDataStructure {
 		public int loadNetworkSegmentPoint(T point, boolean reverse) throws SQLException, IOException {
 			short mapId = point.mapId;
 			HHRouteRegionPointsCtx<T> r = regions.get(mapId);
+			int loaded;
 			if (r.networkDB != null) {
-				return r.networkDB.loadNetworkSegmentPoint(this, r, point, reverse);
+				loaded = r.networkDB.loadNetworkSegmentPoint(this, r, point, reverse);
+			} else if (r.file != null) {
+				loaded = r.file.loadNetworkSegmentPoint(this, r, point, reverse);
+			} else {
+				throw new UnsupportedOperationException();
 			}
-			if (r.file != null) {
-				return r.file.loadNetworkSegmentPoint(this, r, point, reverse);
+			loadedEdges += loaded;
+			return loaded;
+		}
+
+		// edges could be unloaded, so load before reading outside of main search
+		@SuppressWarnings("unchecked")
+		public void ensureSegmentsLoaded(NetworkDBPoint point, boolean reverse) {
+			try {
+				loadNetworkSegmentPoint((T) point, reverse);
+			} catch (SQLException | IOException e) {
+				throw new IllegalStateException(e);
 			}
-			throw new UnsupportedOperationException();
+		}
+
+		// unload with delay: point could be expanded again soon with a better cost
+		public void unloadExpandedSegments(T point) {
+			expandedPoints.add(point);
+			while (config.MAX_LOADED_EDGES > 0 && loadedEdges > config.MAX_LOADED_EDGES && expandedPoints.size() > 1) {
+				T p = expandedPoints.poll();
+				if (p.edgesEdited) {
+					continue;
+				}
+				loadedEdges -= p.connected == null ? 0 : p.connected.size();
+				loadedEdges -= p.connectedReverse == null ? 0 : p.connectedReverse.size();
+				p.markSegmentsNotLoaded();
+			}
 		}
 
 		public String getRoutingInfo() {
@@ -725,40 +709,15 @@ public class HHRouteDataStructure {
 		}
 	}
 	
-	/**
-	 * The one way an edge's cost is changed after it was read. What the file holds is only an
-	 * estimate: once the detailed route between two hub points is known, its real cost - or -1 for
-	 * "there is no road there after all" - is written back, and the hub search runs again with it.
-	 * Re-reading the edge from the file would hand back the estimate and the search would take the
-	 * same edge again, so both endpoints are pinned and their lists are never dropped.
-	 */
-	public static void editDist(NetworkDBSegment segment, double dist) {
-		segment.dist = dist;
-		segment.start.edgesEdited = true;
-		segment.end.edgesEdited = true;
-	}
-
 	public static <T extends NetworkDBPoint> void setSegments(HHRoutingContext<T> ctx, T point,
-			byte[] in, byte[] out) {
-		setSegments(ctx, point, in, out, null);
-	}
-
-	/**
-	 * A segment block carries both directions of every point it covers, but a search expands a
-	 * point in one direction only. `only` materialises just that side; the other one stays
-	 * unloaded until something asks for it, and is parsed then.
-	 */
-	public static <T extends NetworkDBPoint> void setSegments(HHRoutingContext<T> ctx, T point,
-			byte[] in, byte[] out, Boolean only) {
-		if (only == null || only) {
+			byte[] in, byte[] out, boolean reverse) {
+		// search expands point in one direction, other direction is loaded on demand
+		if (reverse) {
 			point.connectedSet(true, HHRouteDataStructure.parseSegments(in, ctx.pointsById,
 					ctx.getIncomingPoints(point), point, false));
-			ctx.loadedEdges += point.connected(true).size();
-		}
-		if (only == null || !only) {
+		} else {
 			point.connectedSet(false, HHRouteDataStructure.parseSegments(out, ctx.pointsById,
 					ctx.getOutgoingPoints(point), point, true));
-			ctx.loadedEdges += point.connected(false).size();
 		}
 	}
 	
@@ -809,6 +768,13 @@ public class HHRouteDataStructure {
 			this.dist = dist;
 		}
 		
+		// edited cost can't be restored from file, so edges of both points are never unloaded
+		public void editDist(double dist) {
+			this.dist = dist;
+			start.edgesEdited = true;
+			end.edgesEdited = true;
+		}
+
 		public List<LatLon> getGeometry() {
 			if (geom == null) {
 				geom = new ArrayList<LatLon>();
@@ -879,8 +845,7 @@ public class HHRouteDataStructure {
 		public int endY;
 		
 		boolean rtExclude;
-		/** the first/last mile edits this point's edges in place, so they must not be dropped and re-read */
-		public boolean edgesEdited;
+		boolean edgesEdited; // edges are changed and can't be unloaded
 		NetworkDBPointRouteInfo rtRev;
 		NetworkDBPointRouteInfo rtPos;
 		

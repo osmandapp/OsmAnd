@@ -780,7 +780,6 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 		return shared;
 	}
 
-	@SuppressWarnings("unchecked")
 	private double hubEdgeCost(NetworkDBPoint a, NetworkDBPoint b) {
 		if (b.rt(false).rtRouteToPoint == a) {
 			return b.rt(false).rtDistanceFromStart - a.rt(false).rtDistanceFromStart;
@@ -788,7 +787,7 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 		if (a.rt(true).rtRouteToPoint == b) {
 			return a.rt(true).rtDistanceFromStart - b.rt(true).rtDistanceFromStart;
 		}
-		hctx.connectedLoaded((T) a, false); // the edges may have been dropped while the search ran
+		hctx.ensureSegmentsLoaded(a, false);
 		NetworkDBSegment segment = a.getSegment(b, true);
 		return segment == null ? 0 : segment.dist;
 	}
