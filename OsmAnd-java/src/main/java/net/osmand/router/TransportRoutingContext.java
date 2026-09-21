@@ -60,7 +60,7 @@ public class TransportRoutingContext {
 		int y = MapUtils.get31TileNumberY(loc.getLatitude());
 		int x = MapUtils.get31TileNumberX(loc.getLongitude());
 		List<TransportRouteSegment> res = getTransportStops(x, y, false, new ArrayList<TransportRouteSegment>());
-		res.removeIf(s -> cfg.isContinuation(s.road, s.segStart)); // can't be reached on foot
+		res.removeIf(s -> TransportFerryHelper.isJunctionStop(s.road, s.segStart));
 		return res;
 	}
 

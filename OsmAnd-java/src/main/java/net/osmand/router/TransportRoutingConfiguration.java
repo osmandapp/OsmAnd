@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.osmand.data.TransportRoute;
 import net.osmand.router.GeneralRouter.RouteAttributeContext;
 import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
 
@@ -84,66 +83,6 @@ public class TransportRoutingConfiguration {
 			return FerryRoutingHelper.getBoardingTime(ferryBoardingTime, ferryTerminalTime, intervalSeconds);
 		}
 		return intervalSeconds > 0 ? intervalSeconds / 2.0 : getBoardingTime(routeType);
-	}
-
-	// Route timing for TransportRoutePlanner: the planner uses only these methods,
-	// the rules of particular vehicles (ferries, see TransportFerryHelper) are applied here.
-
-	// waiting for the vehicle and getting on it at the stop (nothing if the ride just continues there)
-	public double getBoardingTime(TransportRoute route, int stop) {
-		return isContinuation(route, stop) ? 0 : getBoardingTime(route.getType(), route.calcIntervalInSeconds());
-	}
-
-	// meters per second, 0 if the route isn't used
-	public double getTravelSpeed(TransportRoute route) {
-		float speed = getSpeedByRouteType(route.getType());
-		return speed == 0 ? 0 : TransportFerryHelper.getTravelSpeed(route, speed);
-	}
-
-	// ride from the previous stop to the stop, the vehicle stands at the previous stop before it
-	public double getRideTime(TransportRoute route, double distance, double speed) {
-		int stopTime = TransportFerryHelper.isFerry(route) ? 0 : getStopTime(route.getType());
-		return stopTime + distance / speed;
-	}
-
-	// the vehicle stands at the stop when the ride continues past it (in addition to getRideTime)
-	public double getStandingTime(TransportRoute route, int stop) {
-		return TransportFerryHelper.getStopTime(this, route, stop);
-	}
-
-	// getting off the vehicle at the stop
-	public double getAlightingTime(TransportRoute route, int stop) {
-		return TransportFerryHelper.getAlightingTime(this, route, stop);
-	}
-
-	// the vehicle of the route is carried over water on the way to the stop (a bus on a ferry)
-	public double getCrossingTime(TransportRoute route, int stop) {
-		return TransportFerryHelper.getCrossingTime(this, route, stop);
-	}
-
-	// the whole ride goes over water: walking can't replace it
-	public boolean isOverWater(TransportRoute route) {
-		return TransportFerryHelper.isFerry(route);
-	}
-
-	// the ride continues on the next route at the stop without getting off (it can't be reached on foot)
-	public boolean isContinuation(TransportRoute route, int stop) {
-		return TransportFerryHelper.isJunctionStop(route, stop);
-	}
-
-	// getting off at the stop is possible after boarding at the stop from
-	public boolean canGetOff(TransportRoute route, int from, int stop) {
-		return !TransportFerryHelper.isSameTerminal(route, from, stop);
-	}
-
-	public double getChangeTime(TransportRoute from, int stop, TransportRoute to) {
-		return isContinuation(from, stop) ? 0 : getChangeTime(from.getType(), to.getType());
-	}
-
-	// the route geometry between two stops may go against the stops order
-	// (parallel ways of ferry berths are merged into a way going there and back)
-	public boolean isGeometryReversible(TransportRoute route) {
-		return TransportFerryHelper.isFerry(route);
 	}
 
 	public int getBoardingTime(String routeType) {

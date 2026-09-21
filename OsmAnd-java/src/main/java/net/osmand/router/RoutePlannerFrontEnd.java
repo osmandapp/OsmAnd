@@ -615,7 +615,7 @@ public class RoutePlannerFrontEnd {
 		if (res.detailed.size() > 0) {
 			makeSegmentPointPrecise(ctx, res.detailed.get(0), start, true);
 			makeSegmentPointPrecise(ctx, res.detailed.get(res.detailed.size() - 1), end, false);
-			ctx.getRouter().updateSegmentTimes(res.detailed); // times of the changed segments
+			FerryRoutingHelper.updateSegmentTimes(ctx, res.detailed); // times of the changed segments
 		}
 	}
 

@@ -331,7 +331,7 @@ public class RouteResultPreparation {
 			RouteSegmentResult rr = result.get(i);
 			calculateTimeSpeed(ctx, rr);
 		}
-		ctx.getRouter().updateSegmentTimes(result);
+		FerryRoutingHelper.updateSegmentTimes(ctx, result);
 	}
 
 	public static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr) {

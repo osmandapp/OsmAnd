@@ -244,7 +244,6 @@ public class RoutingConfiguration {
 			i.planRoadDirection = parseSilentInt(getAttribute(i.router, "planRoadDirection"), i.planRoadDirection);
 			i.ferryBoardingTime = parseSilentInt(getAttribute(i.router, FerryRoutingHelper.BOARDING_TIME_ATTRIBUTE), 0);
 			i.ferryTerminalTime = parseSilentInt(getAttribute(i.router, FerryRoutingHelper.TERMINAL_TIME_ATTRIBUTE), 0);
-			i.router.setFerryTimes(i.ferryBoardingTime, i.ferryTerminalTime);
 			if (directionPointsBuilder != null) {
 				QuadRect rect = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 				List<net.osmand.osm.edit.Node> lst = directionPointsBuilder.queryInBox(rect, new ArrayList<Node>());
