@@ -1299,7 +1299,6 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="weekly">毎週</string>
     <string name="morning">朝</string>
     <string name="night">夜</string>
-    <string name="file_name_containes_illegal_char">ファイル名に使用できない文字が含まれています</string>
     <string name="number_of_recipients">受信者数</string>
     <string name="osm_live_subscribe_btn">サブスクリプション契約をする</string>
     <string name="osm_live_ask_for_purchase">最初にOsmAnd Liveのサブスクリプション登録(定期有料契約)をしてください</string>

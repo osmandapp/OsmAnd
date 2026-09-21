@@ -1345,7 +1345,6 @@
     <string name="storage_directory_shared">Memòria cumpartzida</string>
     <string name="full_report">Raportu cumpridu</string>
     <string name="report">Raportu</string>
-    <string name="file_name_containes_illegal_char">Su nùmene de su documentu tenet caràteres non permitidos</string>
     <string name="rendering_value_thin_name">Fine</string>
     <string name="rendering_value_medium_name">Mèdia</string>
     <string name="rendering_value_bold_name">Grussu</string>

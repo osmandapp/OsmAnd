@@ -1006,7 +1006,6 @@
     <string name="rendering_attr_currentTrackColor_description">لون جي بي إكس</string>
     <string name="city_type_district">منطقة</string>
     <string name="city_type_neighbourhood">حي</string>
-    <string name="file_name_containes_illegal_char">حرف غير قانوني في اسم الملف</string>
     <string name="reports_for">تقرير عن</string>
     <string name="world_maps">خرائط العالم</string>
     <string name="access_direction_audio_feedback_descr">إشارة صوتية عند اتجاه نقطة الوصول.</string>

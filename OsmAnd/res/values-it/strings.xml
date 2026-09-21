@@ -1322,7 +1322,6 @@
     <string name="report">Rapporto</string>
     <string name="storage_permission_restart_is_required">L\'applicazione è ora in grado di scrivere sulla memoria esterna, ma deve essere riavviata per farlo.</string>
     <string name="full_report">Rapporto completo</string>
-    <string name="file_name_containes_illegal_char">Carattere non ammesso nel nome del file</string>
     <string name="rendering_value_thin_name">Sottile</string>
     <string name="rendering_value_medium_name">Medio</string>
     <string name="rendering_value_bold_name">Grosso</string>

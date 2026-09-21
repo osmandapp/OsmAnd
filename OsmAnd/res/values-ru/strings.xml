@@ -1516,7 +1516,6 @@
     <string name="lang_en_gb">Английский (Соединённое Королевство)</string>
     <string name="lang_hu_formal">Венгерский (официальный)</string>
     <string name="lang_kn">Каннада</string>
-    <string name="file_name_containes_illegal_char">Имя файла содержит недопустимый символ</string>
     <string name="route_stops_before">%1$s остановок до выбранной</string>
     <string name="coords_search">Поиск по координатам</string>
     <string name="advanced_coords_search">Расширенный поиск по координатам</string>

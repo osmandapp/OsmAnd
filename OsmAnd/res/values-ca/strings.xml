@@ -1320,7 +1320,6 @@
     <string name="active_markers">Marcadors actius</string>
     <string name="map_markers">Marcadors de mapa</string>
     <string name="map_marker">Marcador de mapa</string>
-    <string name="file_name_containes_illegal_char">Caràcter il·legal en el nom del fitxer</string>
     <string name="add_time_span">Afegeix un lapse de temps</string>
     <string name="map_mode">Mode mapa</string>
     <string name="access_hint_enter_name">Introduïu el nom</string>

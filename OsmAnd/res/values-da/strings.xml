@@ -1325,7 +1325,6 @@
     <string name="full_report">Fuldstændig rapport</string>
     <string name="storage_permission_restart_is_required">Appen har nu lov til at skrive til eksternt lager, men en genstart er påkrævet.</string>
     <string name="report">Rapport</string>
-    <string name="file_name_containes_illegal_char">Filnavn indeholder ikke-tilladte tegn</string>
     <string name="rendering_value_thin_name">Tynd</string>
     <string name="rendering_value_medium_name">Mellem</string>
     <string name="rendering_value_bold_name">Fed</string>

@@ -816,7 +816,6 @@
     <string name="number_of_contributors">Fjöldi þátttakenda</string>
     <string name="number_of_edits">Fjöldi breytinga</string>
     <string name="reports_for">Skýrsla fyrir</string>
-    <string name="file_name_containes_illegal_char">Skráarheitið inniheldur ógildan staf</string>
     <string name="rendering_attr_showAccess_name">Sýna aðgangstakmarkanir</string>
     <string name="index_item_world_basemap">Heims-yfirlitskort</string>
     <string name="index_item_world_ski">Heims-skíðakort</string>

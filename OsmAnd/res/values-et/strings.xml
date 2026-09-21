@@ -2235,7 +2235,6 @@
     <string name="number_of_edits">Muudatuste arv</string>
     <string name="reports_for">Kanna ette</string>
     <string name="night">Öö</string>
-    <string name="file_name_containes_illegal_char">Failinimi sisaldab keelatud sümbolit</string>
     <string name="configure_screen_quick_action">Kiirtoiming</string>
     <string name="quick_action_item_action">Tegevus %d</string>
     <string name="quick_action_item_screen">Ekraan %d</string>

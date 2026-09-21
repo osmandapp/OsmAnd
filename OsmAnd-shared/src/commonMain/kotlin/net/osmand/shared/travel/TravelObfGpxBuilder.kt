@@ -649,7 +649,7 @@ class TravelObfGpxBuilder(private val context: TravelObfContext) {
 		)
 
 		/** `FileUtils.ILLEGAL_FILE_NAME_CHARACTERS` in the android app. */
-		private val illegalFileNameCharacters = setOf('?', ':', '"', '*', '|', '/', '<', '>')
+		private val illegalFileNameCharacters = setOf('?', ':', '"', '*', '|', '/', '<', '>', '\\')
 
 		private fun isValidFileName(name: String?): Boolean =
 			name != null && name.none { illegalFileNameCharacters.contains(it) }

@@ -1272,7 +1272,6 @@
     <string name="shared_string_move_down">下移 ↓</string>
     <string name="full_report">完整報告</string>
     <string name="report">報告</string>
-    <string name="file_name_containes_illegal_char">檔案名稱包含不允許的字元</string>
     <string name="storage_permission_restart_is_required">現在應用程式已被允許寫入外部記憶體，但需要重新啟動。</string>
     <string name="rendering_value_medium_name">中等</string>
     <string name="rendering_value_bold_name">粗的</string>

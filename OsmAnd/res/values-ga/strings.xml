@@ -4233,7 +4233,6 @@
     <string name="pref_overlay">Forleagan / underlay</string>
     <string name="follow">Tosaigh treoir</string>
     <string name="save_poi_without_poi_type_message">Sábháil POI gan chineál?</string>
-    <string name="file_name_containes_illegal_char">Carachtar mídhleathach in ainm comhaid</string>
     <string name="quick_action_bug_descr">Tá an teachtaireacht seo san áireamh sa réimse tráchta.</string>
     <string name="quick_action_map_style_action">Cuir stíl léarscáile leis</string>
     <string name="quick_action_verb_navigate">Nascleanúint</string>

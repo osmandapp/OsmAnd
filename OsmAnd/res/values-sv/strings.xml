@@ -1303,7 +1303,6 @@
     <string name="access_no_destination">Tillgänglighetsplugin: Ingen destination inställd</string>
     <string name="map_widget_magnetic_bearing">Magnetisk bäring</string>
     <string name="rec_split_clip_length">Klipplängd</string>
-    <string name="file_name_containes_illegal_char">Ogiltigt tecken i filnamnet</string>
     <string name="current_track">Nuvarande spår</string>
     <string name="map_widget_battery">Batterinivå</string>
     <string name="change_markers_position">Ändra markörens position</string>

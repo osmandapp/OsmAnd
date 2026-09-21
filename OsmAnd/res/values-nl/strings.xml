@@ -1337,7 +1337,6 @@
     <string name="storage_permission_restart_is_required">OsmAnd heeft nu toestemming om de externe opslag te gebruiken. Een handmatige herstart is noodzakelijk.</string>
     <string name="full_report">Volledig Verslag</string>
     <string name="report">Verslag</string>
-    <string name="file_name_containes_illegal_char">Ongeldig teken in bestandsnaam</string>
     <string name="rendering_value_thin_name">Dun</string>
     <string name="rendering_value_medium_name">Gemiddeld</string>
     <string name="rendering_value_bold_name">Vet</string>

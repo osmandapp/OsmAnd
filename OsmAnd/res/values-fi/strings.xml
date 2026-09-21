@@ -666,7 +666,6 @@
     <string name="shared_string_topbar">Yläpalkki</string>
     <string name="full_report">Koko raportti</string>
     <string name="osm_live_ask_for_purchase">Osta ensin OsmAnd Live -tilaus</string>
-    <string name="file_name_containes_illegal_char">Tiedostonimi sisältää virheellisiä merkkejä</string>
     <string name="select_map_marker">Valitse karttamarkkeri</string>
     <string name="upload_anonymously">Lataa anonyymisti</string>
     <string name="show_transparency_seekbar">Näytä läpinäkyvä hakutieto</string>
