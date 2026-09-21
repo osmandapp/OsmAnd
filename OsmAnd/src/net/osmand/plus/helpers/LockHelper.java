@@ -124,14 +124,22 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 
 	public void lock() {
 		releaseWakeLocks();
-		if (lockUIAdapter != null) {
-			boolean useSystemTimeout = useSystemScreenTimeout.get();
-			boolean usePowerButton = useSystemTimeout && turnScreenOnPowerButton.get()
-					|| !useSystemTimeout && turnScreenOnTime.get() == 0 && turnScreenOnPowerButton.get();
-			if (!usePowerButton) {
-				lockUIAdapter.lock();
-			}
+		if (lockUIAdapter != null && !isPowerButtonWakeEnabled()) {
+			lockUIAdapter.lock();
 		}
+	}
+
+	private boolean isPowerButtonWakeEnabled() {
+		boolean keepScreenOn = useSystemScreenTimeout.get() || turnScreenOnTime.get() == 0;
+		return keepScreenOn && turnScreenOnPowerButton.get();
+	}
+
+	/**
+	 * The map stays above the lock screen only while a wake-up event holds the screen on,
+	 * or permanently if the power button option is on.
+	 */
+	public boolean shouldShowWhenLocked() {
+		return wakeLock != null || isPowerButtonWakeEnabled();
 	}
 
 	private void timedUnlock(long millis) {
