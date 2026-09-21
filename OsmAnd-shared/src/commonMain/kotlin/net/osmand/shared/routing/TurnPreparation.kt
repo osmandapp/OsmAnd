@@ -35,7 +35,6 @@ object TurnPreparation {
 
 	private class TimeCalculationState {
 		var currentDistance = 0.0
-		// distance of the first traffic signal of the intersection being passed
 		var lastIntersectionDistance = -1.0
 	}
 
