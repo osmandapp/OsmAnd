@@ -509,10 +509,11 @@ public class SpatialSearchContext {
 			} else if (!settings.SEARCH_ADDR && indx.addressRegion != null) {
 				continue;
 			}
-			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
+			String cacheKey = t.atomsCacheKey();
+			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(cacheKey);
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
-				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats)));
+				matchedPrefixes = b.readFullNameIndex(indx.setQuery(cacheKey, t.getPrefixMatcher(stats)));
 				stats.sub1FileAtomsTime.finish();
 				if (matchedPrefixes == null) {
 					continue;
