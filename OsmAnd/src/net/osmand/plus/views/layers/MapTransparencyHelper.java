@@ -177,7 +177,7 @@ public class MapTransparencyHelper {
 	}
 
 	public void hideParameterBar() {
-		parameterBarLayout.setVisibility(View.GONE);
+		AndroidUiHelper.updateVisibility(parameterBarLayout, false);
 		parameterMinSetting = null;
 		parameterMaxSetting = null;
 		parameterStepSetting = null;

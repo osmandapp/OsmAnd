@@ -14,6 +14,18 @@ class GpxDataItem private constructor(
 	private var analysis: GpxTrackAnalysis? = null
 
 	companion object {
+		private const val MIN_VERTICAL_EXAGGERATION = 1.0
+		private const val MAX_VERTICAL_EXAGGERATION = 3.0
+		private val ANALYSIS_METADATA_PARAMETERS = listOf(
+			GpxParameter.FILE_LAST_MODIFIED_TIME,
+			GpxParameter.FILE_CREATION_TIME,
+			GpxParameter.NEAREST_CITY_NAME,
+			GpxParameter.ACTIVITY_TYPE,
+			GpxParameter.DATA_VERSION
+		)
+		private val ANALYSIS_UPDATE_PARAMETERS =
+			(GpxParameter.entries.filter { it.analysisParameter } + ANALYSIS_METADATA_PARAMETERS).toSet()
+
 		fun isRegularTrack(file: KFile) = file.path().startsWith(PlatformUtil.getOsmAndContext().getGpxDir().path())
 
 		internal fun fromDatabase(file: KFile) = GpxDataItem(file, false)
@@ -43,6 +55,26 @@ class GpxDataItem private constructor(
 			}
 		}
 		setAnalysis(item.analysis)
+	}
+
+	internal fun copyAnalysisData(item: GpxDataItem) {
+		setAnalysis(item.analysis)
+		for (parameter in ANALYSIS_METADATA_PARAMETERS) {
+			setParameter(parameter, item.getParameter(parameter))
+		}
+	}
+
+	internal fun getAnalysisUpdateParameters(): Map<GpxParameter, Any?> =
+		getParameters().filterKeys { it in ANALYSIS_UPDATE_PARAMETERS }
+
+	internal fun normalizeAdditionalExaggeration(): Boolean {
+		val value: Double = requireParameter(GpxParameter.ADDITIONAL_EXAGGERATION)
+		return if (value < MIN_VERTICAL_EXAGGERATION || value > MAX_VERTICAL_EXAGGERATION) {
+			setParameter(GpxParameter.ADDITIONAL_EXAGGERATION, MIN_VERTICAL_EXAGGERATION)
+			true
+		} else {
+			false
+		}
 	}
 
 	private fun updateAnalysisParameters() {

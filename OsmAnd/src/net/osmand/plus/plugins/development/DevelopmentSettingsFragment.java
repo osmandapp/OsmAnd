@@ -6,6 +6,7 @@ import static net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimula
 
 import android.app.Activity;
 import android.content.Intent;
+import android.widget.Toast;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.core.android.MapRendererView;
@@ -21,6 +23,8 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.feedback.HeapDump;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.aistracker.AisLoadTask;
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
@@ -40,11 +44,15 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener {
 
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
+	private static final String JAVA_MEMORY = "java_memory";
+	private static final String SIMULATE_UI = "simulate_ui";
+	private static final String VISUALIZING_BUTTON_GRID = "visualizing_button_grid";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
@@ -75,6 +83,14 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference developmentInfo = findPreference("development_info");
 		developmentInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
+		// every category must clear the icon space, otherwise its title sits indented
+		for (String category : new String[] {"search", "memory"}) {
+			Preference preference = findPreference(category);
+			if (preference != null) {
+				preference.setIconSpaceReserved(false);
+			}
+		}
+
 		Preference heightmapCategoryPref = findPreference("heightmap");
 		heightmapCategoryPref.setIconSpaceReserved(false);
 		setupHeightmapRelatedPrefs();
@@ -91,12 +107,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
 		debuggingAndDevelopment.setIconSpaceReserved(false);
 
-		setupBatterySavingModePref();
 		setupSimulateOBDDataPref();
-		setupSimulateInitialStartupPref();
+		setupHeapDumpPref();
+		setupSimulateUiPref();
 		setupFullscreenMapDrawingModePref();
-		setupShouldShowFreeVersionBannerPref();
-		setupShouldShowDiscountBottomSheetPref();
 		setupTestVoiceCommandsPref();
 		setupLogcatBufferPref();
 		setupPressedKeyInfoPref();
@@ -149,12 +163,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		simulateYourLocation.setSummary(sim.isRouteAnimating() ? R.string.shared_string_in_progress : R.string.simulate_your_location_descr);
 	}
 
-	private void setupBatterySavingModePref() {
-		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.BATTERY_SAVING_MODE.getId());
-		debugRenderingInfo.setDescription(getString(R.string.battery_saving_mode));
-		debugRenderingInfo.setIconSpaceReserved(false);
-	}
-
 	private void setupSimulateOBDDataPref() {
 		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.SIMULATE_OBD_DATA.getId());
 		debugRenderingInfo.setDescription(getString(R.string.simulate_obd));
@@ -162,21 +170,18 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 
-	private void setupSimulateInitialStartupPref() {
-		Preference simulateInitialStartup = findPreference(SIMULATE_INITIAL_STARTUP);
-		simulateInitialStartup.setIconSpaceReserved(false);
+	private void setupSimulateUiPref() {
+		Preference preference = findPreference(SIMULATE_UI);
+		if (preference != null) {
+			preference.setIconSpaceReserved(false);
+		}
 	}
 
-	private void setupShouldShowFreeVersionBannerPref() {
-		SwitchPreferenceEx shouldShowFreeVersionBanner = findPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER.getId());
-		shouldShowFreeVersionBanner.setDescription(getString(R.string.show_free_version_banner_description));
-		shouldShowFreeVersionBanner.setIconSpaceReserved(false);
-	}
-
-	private void setupShouldShowDiscountBottomSheetPref() {
-		SwitchPreferenceEx shouldShowDiscountBottomSheet = findPreference(settings.SHOULD_SHOW_DISCOUNT_BOTTOM_SHEET.getId());
-		shouldShowDiscountBottomSheet.setDescription(getString(R.string.show_discount_bottom_sheet_description));
-		shouldShowDiscountBottomSheet.setIconSpaceReserved(false);
+	private void setupHeapDumpPref() {
+		Preference preference = findPreference(JAVA_MEMORY);
+		if (preference != null) {
+			preference.setIconSpaceReserved(false);
+		}
 	}
 
 	private void setupFullscreenMapDrawingModePref() {
@@ -271,35 +276,20 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	private void setupAisTrackerPrefs() {
+		// the AIS entry lives in the development section now, it has no category of its own
 		AisTrackerPlugin plugin = PluginsHelper.getPlugin(AisTrackerPlugin.class);
-
-		Preference category = findPreference("aistracker");
 		Preference preference = findPreference(AISTRACKER_SIMULATION);
-
-		category.setVisible(plugin != null);
-		preference.setVisible(plugin != null);
-
-		category.setIconSpaceReserved(false);
-		preference.setIconSpaceReserved(false);
+		if (preference != null) {
+			preference.setVisible(plugin != null);
+			preference.setIconSpaceReserved(false);
+		}
 	}
 
 	private void setupGridPrefs() {
-		Preference category = findPreference("visualizing_button_grid");
-		SwitchPreferenceCompat showLogsPref = findPreference(GRID_LAYOUT_SHOW_LOGS);
-		SwitchPreferenceCompat efficientGridPref = findPreference(GRID_LAYOUT_DRAW_CELLS);
-		SwitchPreferenceCompat slotsPref = findPreference(GRID_LAYOUT_DRAW_SLOTS);
-		SwitchPreferenceCompat buttonFramesPref = findPreference(GRID_LAYOUT_DRAW_BUTTON_FRAMES);
-
-		showLogsPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_SHOW_LOGS);
-		efficientGridPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS);
-		slotsPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS);
-		buttonFramesPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES);
-
-		category.setIconSpaceReserved(false);
-		showLogsPref.setIconSpaceReserved(false);
-		efficientGridPref.setIconSpaceReserved(false);
-		slotsPref.setIconSpaceReserved(false);
-		buttonFramesPref.setIconSpaceReserved(false);
+		Preference preference = findPreference(VISUALIZING_BUTTON_GRID);
+		if (preference != null) {
+			preference.setIconSpaceReserved(false);
+		}
 	}
 
 	private void setupChartPrototypePrefs() {
@@ -343,10 +333,13 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		long javaTotal = Runtime.getRuntime().totalMemory() / (1024 * 1024L);
 		long dalvikSize = android.os.Debug.getNativeHeapAllocatedSize() / (1024 * 1024L);
 
-		Preference globalAppAllocatedMemory = findPreference("global_app_allocated_memory");
-		globalAppAllocatedMemory.setSummary(getString(R.string.global_app_allocated_memory_descr,
-				String.valueOf(javaAvailMem), String.valueOf(javaTotal), String.valueOf(dalvikSize)));
-		globalAppAllocatedMemory.setIconSpaceReserved(false);
+		// the numbers are the description of the cell that opens the heap dump sheet
+		Preference javaMemory = findPreference(JAVA_MEMORY);
+		if (javaMemory != null) {
+			javaMemory.setSummary(getString(R.string.global_app_allocated_memory_descr,
+					String.valueOf(javaAvailMem), String.valueOf(javaTotal), String.valueOf(dalvikSize)));
+			javaMemory.setIconSpaceReserved(false);
+		}
 	}
 
 	private void setupNativeAppAllocatedMemoryPref() {
@@ -430,6 +423,24 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				SimulateLocationFragment.showInstance(activity.getSupportFragmentManager(), null, false);
+			}
+			return true;
+		} else if (SIMULATE_UI.equals(prefId)) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				SimulateUiBottomSheet.showInstance(activity.getSupportFragmentManager());
+			}
+			return true;
+		} else if (JAVA_MEMORY.equals(prefId)) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				HeapDumpBottomSheet.showInstance(activity.getSupportFragmentManager());
+			}
+			return true;
+		} else if (VISUALIZING_BUTTON_GRID.equals(prefId)) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				MapButtonGridBottomSheet.showInstance(activity.getSupportFragmentManager());
 			}
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {

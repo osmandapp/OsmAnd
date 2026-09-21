@@ -149,14 +149,20 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		LOG.debug("currentState: " + getCurrentState());
 		if (status == GATT_SUCCESS) {
 			if (newState == BluetoothProfile.STATE_CONNECTED) {
+				// some OEM Bluetooth stacks (observed on Samsung devices) deliver the
+				// STATE_CONNECTED callback more than once for a single physical connection;
+				// re-running discovery/MTU/connect-event handling for a duplicate callback
+				// races a second GATT operation against the first and corrupts the session
+				if (getCurrentState() == DeviceConnectionState.CONNECTED) {
+					LOG.debug("Ignoring duplicate STATE_CONNECTED callback");
+					return;
+				}
 				int bondState = device.getBondState();
 
 				if (bondState == BOND_NONE || bondState == BOND_BONDED) {
-					LOG.debug("Discovering services");
-					boolean result = gatt.discoverServices();
-
-					if (!result) {
-						LOG.error("DiscoverServices failed to start");
+					boolean mtuRequested = gatt.requestMtu(247);
+					if (!mtuRequested) {
+						discoverServicesOnGatt(gatt);
 					}
 				} else if (bondState == BOND_BONDING) {
 					LOG.debug("Waiting for bonding to complete");
@@ -164,6 +170,10 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 				setCurrentState(DeviceConnectionState.CONNECTED);
 				fireDeviceConnectedEvent();
 			} else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+				if (getCurrentState() == DeviceConnectionState.DISCONNECTED) {
+					LOG.debug("Ignoring duplicate STATE_DISCONNECTED callback");
+					return;
+				}
 				fireDeviceDisconnectedEvent();
 				gatt.close();
 				LOG.debug("GATT disconnected (newState == BluetoothProfile.STATE_DISCONNECTED)");
@@ -171,11 +181,22 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 				setCurrentState(DeviceConnectionState.DISCONNECTED);
 			}
 		} else {
+			if (getCurrentState() == DeviceConnectionState.DISCONNECTED) {
+				LOG.debug("Ignoring duplicate disconnect (status != GATT_SUCCESS)");
+				return;
+			}
 			LOG.debug("GATT disconnected (status != GATT_SUCCESS)");
 			fireDeviceDisconnectedEvent();
 			gatt.close();
 			bluetoothGatt = null;
 			setCurrentState(DeviceConnectionState.DISCONNECTED);
+		}
+	}
+
+	@SuppressLint("MissingPermission")
+	private void discoverServicesOnGatt(BluetoothGatt gatt) {
+		if (!gatt.discoverServices()) {
+			LOG.error("DiscoverServices failed to start");
 		}
 	}
 
@@ -269,6 +290,12 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			super.onDescriptorWrite(gatt, descriptor, status);
 			onDescriptorWriteCompleted();
 
+		}
+
+		@Override
+		public void onMtuChanged(BluetoothGatt gatt, int mtu, int status) {
+			super.onMtuChanged(gatt, mtu, status);
+			discoverServicesOnGatt(gatt);
 		}
 	};
 

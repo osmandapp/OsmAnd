@@ -167,7 +167,7 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 		} else if (searchResult != null && searchResult.objectType == ObjectType.POI_TYPE) {
 			view = getView(convertView, R.layout.search_category_list_item);
 			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
-		} else if (listItem.isLegacyHistoryItem()) {
+		} else if (listItem.isHistoryItem()) {
 			view = getView(convertView, R.layout.search_legacy_history_list_item);
 			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
 		} else {
@@ -209,6 +209,10 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 	private void updateDivider(int position, @NonNull View view) {
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
+			ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) divider.getLayoutParams();
+			params.setMarginStart(0);
+			params.setMarginEnd(0);
+			divider.setLayoutParams(params);
 			boolean last = isLastResultInGroup(position);
 			divider.setVisibility(last ? View.GONE : View.VISIBLE);
 		}

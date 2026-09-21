@@ -635,6 +635,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 		}
 
 		mInAddGpxPointMode = false;
+		mapActivity.updateBackPressedCallbackState();
 		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
 				R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel,
@@ -654,6 +655,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 		mapActivity.disableDrawer();
 
 		mInAddGpxPointMode = true;
+		mapActivity.updateBackPressedCallbackState();
 		mAddGpxPointBottomSheetHelper.show(newGpxPoint);
 		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
 				R.id.map_ruler_layout,

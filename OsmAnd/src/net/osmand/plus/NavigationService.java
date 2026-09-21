@@ -151,9 +151,8 @@ public class NavigationService extends Service {
 			try {
 				startForeground(notification);
 			} catch (Exception e) {
-				app.setNavigationService(null);
 				LOG.error("Failed to start NavigationService (usedBy=" + usedBy.get() + ")", e);
-				usedBy.set(0);
+				resetServiceState(app);
 				return START_NOT_STICKY;
 			}
 			try {
@@ -163,6 +162,7 @@ public class NavigationService extends Service {
 			}
 		} else {
 			LOG.error("NavigationService could not be started because the notification is null. usedBy=" + usedBy.get());
+			resetServiceState(app);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 				try {
 					startForeground(notificationHelper.buildFallbackNotification());
@@ -186,6 +186,11 @@ public class NavigationService extends Service {
 		}
 	}
 
+	private void resetServiceState(@NonNull OsmandApplication app) {
+		app.setNavigationService(null);
+		usedBy.set(0);
+	}
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -198,8 +203,7 @@ public class NavigationService extends Service {
 		stopForeground(STOP_FOREGROUND_REMOVE);
 
 		OsmandApplication app = getApp();
-		app.setNavigationService(null);
-		usedBy.set(0);
+		resetServiceState(app);
 		removeLocationUpdates();
 		removeLocationSourceListener();
 

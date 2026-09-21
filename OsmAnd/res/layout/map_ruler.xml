@@ -19,7 +19,7 @@
 			android:layout_gravity="bottom"
 			android:gravity="center_horizontal"
 			android:lineSpacingMultiplier="0.9"
-			android:textSize="@dimen/map_widget_text_size_small"
+			android:textSize="@dimen/map_ruler_text_size"
 			tools:text="100 m" />
 
 		<TextView
@@ -29,7 +29,7 @@
 			android:layout_gravity="bottom"
 			android:gravity="center_horizontal"
 			android:lineSpacingMultiplier="0.9"
-			android:textSize="@dimen/map_widget_text_size_small"
+			android:textSize="@dimen/map_ruler_text_size"
 			tools:text="100 m" />
 
 	</FrameLayout>

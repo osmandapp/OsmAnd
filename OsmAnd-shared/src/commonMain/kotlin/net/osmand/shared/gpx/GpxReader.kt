@@ -12,13 +12,8 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 
 	companion object {
 		private val log = LoggerFactory.getLogger("GpxReader")
-
-		// TODO: Move to GpxAppearanceInfo.kt
-		const val MIN_VERTICAL_EXAGGERATION: Float = 1.0f
-		const val MAX_VERTICAL_EXAGGERATION: Float = 3.0f
 	}
 
-	private val database: GpxDatabase = GpxDbHelper.getGPXDatabase()
 	private var analyser = PlatformUtil.getTrackPointsAnalyser()
 	private var currentFile: KFile? = null
 	private var currentItem: GpxDataItem? = null
@@ -84,6 +79,9 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 		val gpxFile = GpxUtilities.loadGpxFile(file, null, false)
 		val updatedItem = item ?: GpxDataItem(file)
 		if (gpxFile.error == null) {
+			if (item == null) {
+				updatedItem.readGpxParams(gpxFile)
+			}
 			updatedItem.setAnalysis(gpxFile.getAnalysis(file.lastModified(), null, null, analyser,
 				collectPointData = false))
 			if (!updatedItem.isRegularTrack()) {
@@ -101,33 +99,14 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 			updatedItem.setParameter(GpxParameter.ACTIVITY_TYPE, routeActivityId)
 
 			setupNearestCityName(updatedItem)
+			updatedItem.normalizeAdditionalExaggeration()
 
-			val additionalExaggeration: Double =
-				updatedItem.requireParameter(GpxParameter.ADDITIONAL_EXAGGERATION)
-			if (additionalExaggeration < MIN_VERTICAL_EXAGGERATION ||
-				additionalExaggeration > MAX_VERTICAL_EXAGGERATION) {
-				updatedItem.setParameter(GpxParameter.ADDITIONAL_EXAGGERATION,
-					MIN_VERTICAL_EXAGGERATION.toDouble())
-			}
 			updatedItem.setParameter(
 				GpxParameter.DATA_VERSION,
 				GpxDbUtils.createDataVersion(ANALYSIS_VERSION)
 			)
 
-			val conn = database.openConnection(false)
-			if (conn != null) {
-				try {
-					if (database.isDataItemExists(file, conn)) {
-						GpxDbHelper.updateDataItem(updatedItem)
-					} else {
-						GpxDbHelper.insertDataItem(updatedItem, conn)
-					}
-				} catch (e: Exception) {
-					log.error(e.message)
-				} finally {
-					conn.close()
-				}
-			}
+			return GpxDbHelper.persistAnalyzedItem(updatedItem)
 		}
 		return updatedItem
 	}
@@ -149,7 +128,9 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 	fun isReading(file: KFile): Boolean = currentFile == file
 
 	interface GpxReaderAdapter {
-		fun pullNextFileItem(action: ((Pair<KFile, GpxDataItem>?) -> Unit)? = null): Pair<KFile, GpxDataItem>?
+		fun pullNextFileItem(
+			action: ((Pair<KFile, GpxDataItem?>?) -> Unit)? = null
+		): Pair<KFile, GpxDataItem?>?
 
 		fun onGpxDataItemRead(item: GpxDataItem) {}
 		fun onProgressUpdate(vararg dataItems: GpxDataItem) {}

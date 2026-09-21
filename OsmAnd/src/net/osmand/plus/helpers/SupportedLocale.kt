@@ -133,6 +133,7 @@ enum class SupportedLocale(
 				.replace('_', '-')
 				.replace('+', '-')
 			return Locale.forLanguageTag(fallbackTag)
+				.takeIf { it.language.isNotEmpty() }
 		}
 
 		@JvmStatic

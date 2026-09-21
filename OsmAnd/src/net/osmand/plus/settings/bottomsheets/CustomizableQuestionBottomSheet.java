@@ -8,6 +8,7 @@ import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -30,6 +31,16 @@ import java.util.Objects;
 public class CustomizableQuestionBottomSheet extends CustomizableBottomSheet {
 
 	public static final String TAG = CustomizableQuestionBottomSheet.class.getSimpleName();
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		if (displayData == null) {
+			dismissAllowingStateLoss();
+			return null;
+		}
+		return super.onCreateView(inflater, parent, savedInstanceState);
+	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {

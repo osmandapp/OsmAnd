@@ -53,6 +53,9 @@ class ComposeChipDetachFromWindowTest : AndroidTest() {
 	 * Guards the test above from silently becoming vacuous, and doubles as a reminder: as soon as
 	 * this one starts failing, the upstream bug is fixed and
 	 * `OsmandApplication.applyComposeWorkarounds()` can be dropped together with this test.
+	 *
+	 * TODO(#25667): on BOM bump, if compose-ui >= 1.13.0 (b/486235925 fixed), delete this test
+	 * and `OsmandApplication.applyComposeWorkarounds()`.
 	 */
 	@OptIn(ExperimentalComposeUiApi::class)
 	@Test
@@ -65,7 +68,7 @@ class ComposeChipDetachFromWindowTest : AndroidTest() {
 			AndroidComposeUiFlags.isViewBasedSemanticsHandlerEnabled = enabled
 		}
 		assertTrue(
-			"Expected the upstream Compose NPE, got $error. If Compose has fixed b/486998514, "
+			"Expected the upstream Compose NPE, got $error. If Compose has fixed b/486235925, "
 					+ "remove OsmandApplication.applyComposeWorkarounds() and this test.",
 			error is NullPointerException
 		)

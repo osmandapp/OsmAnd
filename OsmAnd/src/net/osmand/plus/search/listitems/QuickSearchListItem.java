@@ -100,8 +100,8 @@ public class QuickSearchListItem {
 		return isDestinationHistory(searchResult);
 	}
 
-	public boolean isLegacyHistoryItem() {
-		return isLegacySearchHistory(searchResult);
+	public boolean isHistoryItem() {
+		return getHistoryEntry() != null;
 	}
 
 	@Nullable
@@ -465,6 +465,22 @@ public class QuickSearchListItem {
 	}
 
 	@Nullable
+	public static String getAddressIconName(@NonNull SearchResult searchResult) {
+		return switch (searchResult.objectType) {
+			case CITY, BOUNDARY -> {
+				boolean town = searchResult.object instanceof City city && city.getType() == CityType.TOWN;
+				yield town ? "mx_place_town" : "ic_action_building2";
+			}
+			case VILLAGE -> "mx_village";
+			case POSTCODE -> "ic_action_postcode";
+			case STREET -> "ic_action_street_name";
+			case HOUSE -> "ic_action_building";
+			case STREET_INTERSECTION -> "ic_action_intersection";
+			default -> null;
+		};
+	}
+
+	@Nullable
 	public static Drawable getIcon(OsmandApplication app, SearchResult searchResult) {
 		if (searchResult == null || searchResult.objectType == null) {
 			return null;
@@ -635,13 +651,6 @@ public class QuickSearchListItem {
 				&& searchResult.objectType == ObjectType.RECENT_OBJ
 				&& searchResult.object instanceof HistoryEntry entry
 				&& isNavigationHistoryEntry(entry);
-	}
-
-	private static boolean isLegacySearchHistory(@Nullable SearchResult searchResult) {
-		return searchResult != null
-				&& searchResult.objectType == ObjectType.RECENT_OBJ
-				&& searchResult.object instanceof HistoryEntry entry
-				&& !isNavigationHistoryEntry(entry);
 	}
 
 	@NonNull
