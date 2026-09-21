@@ -2,6 +2,7 @@ package net.osmand.search.core.spatial;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -386,6 +387,15 @@ public class SpatialPoiSearch {
 		return total;
 	}
 
+	/**
+	 * What a person calls a place against what the map stores it as: "Hoboken city" is the town Hoboken, and the
+	 * query word has to reach the place through its stored subtype or the exact place loses to every POI whose name
+	 * carries the word "city". Only wider to narrower - "village" does not answer for a city.
+	 */
+	private static final Map<String, List<String>> PLACE_TYPE_ALIASES = Map.of(
+			"city", Arrays.asList("town", "borough"),
+			"town", Arrays.asList("village", "borough"));
+
 	public void processPoiCategories(SpatialSearchContext ctx, List<SpatialSearchToken> tokens) {
 		Map<SpatialPoiType, PoiCatSearch> res = new LinkedHashMap<>();
 		for (SpatialSearchToken t : tokens) {
@@ -407,6 +417,12 @@ public class SpatialPoiSearch {
 				}
 				if (match) {
 					addPoiCategoryMatch(ctx, a, t, res);
+					for (String alias : PLACE_TYPE_ALIASES.getOrDefault(a.key, Collections.emptyList())) {
+						SpatialPoiType aliasType = byKey.get(alias);
+						if (aliasType != null && aliasType.isPlace()) {
+							addPoiCategoryMatch(ctx, aliasType, t, res);
+						}
+					}
 					if (a.wikidataId != null) {
 						List<SpatialPoiType> otherTypes = byWikidataKey.get(a.wikidataId);
 						for (SpatialPoiType otherA : otherTypes) {
