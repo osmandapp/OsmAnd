@@ -31,13 +31,6 @@ object TurnPreparation {
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private const val SLOW_DOWN_SPEED = 2.0
 
-	private const val TRAFFIC_SIGNALS_INTERSECTION_SIZE = 60.0
-
-	private class TimeCalculationState {
-		var currentDistance = 0.0
-		var lastIntersectionDistance = -1.0
-	}
-
 	// ---- the manoeuvres ----
 
 	/**
@@ -417,23 +410,13 @@ object TurnPreparation {
 	 */
 	@JvmStatic
 	fun calculateTimeSpeed(request: RoutingRequest, result: List<RouteSegmentResult>) {
-		val state = TimeCalculationState()
 		for (i in result.indices) {
-			if (i > 0) {
-				state.currentDistance += result[i - 1].getDistance().toDouble()
-			}
-			calculateTimeSpeed(request, result[i], state)
+			calculateTimeSpeed(request, result[i])
 		}
 	}
 
 	@JvmStatic
 	fun calculateTimeSpeed(request: RoutingRequest, rr: RouteSegmentResult) {
-		calculateTimeSpeed(request, rr, TimeCalculationState())
-	}
-
-	private fun calculateTimeSpeed(
-		request: RoutingRequest, rr: RouteSegmentResult, state: TimeCalculationState
-	) {
 		// Naismith's/Scarf rules add additional travel time when moving uphill
 		var useNaismithRule = false
 		var scarfSeconds = 0.0 // Additional time as per Naismith/Scarf
@@ -480,16 +463,6 @@ object TurnPreparation {
 			var obstacle = request.getRouter().defineObstacle(road, j, !plus).toDouble()
 			if (obstacle < 0) {
 				obstacle = 0.0
-			} else if (obstacle > 0 && road.hasTrafficLightAt(j)) {
-				// A driver stops once per intersection
-				val signalDistance = state.currentDistance + distance
-				val startsNewIntersection = state.lastIntersectionDistance < 0 ||
-						signalDistance - state.lastIntersectionDistance >= TRAFFIC_SIGNALS_INTERSECTION_SIZE
-				if (startsNewIntersection) {
-					state.lastIntersectionDistance = signalDistance
-				} else {
-					obstacle = 0.0
-				}
 			}
 			distOnRoadToPass += d / speed + obstacle // this is time in seconds
 
