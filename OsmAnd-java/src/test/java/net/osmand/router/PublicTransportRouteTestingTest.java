@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Way;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.MapUtils;
@@ -105,6 +106,28 @@ public class PublicTransportRouteTestingTest {
 	public void testPTFerryGeometryBijela() throws Exception {
 		checkGeometry("ferry_bijela.obf", 42.466581, 18.674241, 42.465587, 18.68559, "Way -1: 10 nodes, 971 m");
 		checkGeometry("ferry_bijela.obf", 42.465587, 18.68559, 42.466581, 18.674241, "Way -1: 10 nodes, 971 m");
+	}
+
+	// stops generated at ferry way ends are hidden on the map: the stop of the stops tree carries the flag
+	// itself, so that the map doesn't have to look through the routes of every stop (TransportStopsLayer)
+	@Test
+	public void testPTFerryHiddenStops() throws Exception {
+		checkHiddenStops("ferry_kungshamn.obf", "58.353142 11.232276", "58.360966 11.248391");
+		checkHiddenStops("ferry_gullmarsleden.obf");
+	}
+
+	private void checkHiddenStops(String obfFileName, String... expected) throws Exception {
+		String fl = "src/test/resources/routing/" + obfFileName;
+		BinaryMapIndexReader reader = new BinaryMapIndexReader(new RandomAccessFile(fl, "r"), new File(fl));
+		List<String> actual = new ArrayList<>();
+		for (TransportStop stop : reader.searchTransportIndex(BinaryMapIndexReader.buildSearchTransportRequest(
+				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, -1, null))) {
+			if (TransportFerryHelper.isSyntheticStop(stop)) {
+				actual.add(String.format(Locale.US, "%.6f %.6f",
+						stop.getLocation().getLatitude(), stop.getLocation().getLongitude()));
+			}
+		}
+		Assert.assertEquals(Arrays.asList(expected), actual);
 	}
 
 	private void checkRoutes(String obfFileName, double startLat, double startLon, double endLat, double endLon,

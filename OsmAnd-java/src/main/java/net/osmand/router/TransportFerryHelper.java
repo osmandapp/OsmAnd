@@ -12,17 +12,20 @@ import net.osmand.util.Algorithms;
 
 /**
  * Public transport ferries: routes built by the map creator from route=ferry ways without a route relation
- * and ferry crossings of other routes. Stop flags are stored as route tags with indexes of the route stops.
+ * and ferry crossings of other routes. Stop flags are stored as route tags with indexes of the route stops,
+ * generated stops are marked by a name tag of their own so that the map can hide them without the routes.
  */
 public class TransportFerryHelper {
 
 	// stops generated at ferry way ends (not present in OSM), "j" marks a junction of ferry ways
 	// in the water (only a change to the next ferry way at the same stop): "0,3:j,5"
-	public static final String FERRY_STOPS_TAG = "osmand:ferry_stops";
+	public static final String FERRY_STOPS_TAG = "osmand_ferry_stops";
 	public static final String JUNCTION_VALUE = "j";
 	// non-ferry route goes over a ferry before these stops:
 	// "stop index:ferry interval:ferry duration:ferry length" (seconds and meters, 0 - unknown)
-	public static final String CROSSINGS_TAG = "osmand:ferry_crossings";
+	public static final String CROSSINGS_TAG = "osmand_ferry_crossings";
+	// the same generated stop in the stops tree, which the map reads without its routes: value "yes"
+	public static final String SYNTHETIC_STOP_TAG = "osmand_ferry_synthetic";
 
 	public static void addStopTag(Map<String, String> tags, String tag, int stop, String value) {
 		tags.merge(tag, value == null ? String.valueOf(stop) : stop + ":" + value, (a, b) -> a + "," + b);
@@ -40,19 +43,9 @@ public class TransportFerryHelper {
 		return JUNCTION_VALUE.equals(getStopValue(route, FERRY_STOPS_TAG, stop));
 	}
 
-	// synthetic stop from the stops tree is marked in the stop lists of its routes
+	// stop of the stops tree: it carries the flag itself, a stop of a route has no name tags
 	public static boolean isSyntheticStop(TransportStop stop) {
-		if (stop.getRoutes() != null) {
-			for (TransportRoute route : stop.getRoutes()) {
-				List<TransportStop> stops = route.getForwardStops();
-				for (int i = 0; i < stops.size(); i++) {
-					if (stops.get(i).getId().longValue() == stop.getId().longValue()) {
-						return isSyntheticStop(route, i);
-					}
-				}
-			}
-		}
-		return false;
+		return stop.getNamesMap(false).containsKey(SYNTHETIC_STOP_TAG);
 	}
 
 	public static List<TransportStop> getVisibleStops(TransportRoute route) {
