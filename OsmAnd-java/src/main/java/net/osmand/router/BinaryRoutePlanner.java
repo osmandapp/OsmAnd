@@ -494,7 +494,7 @@ public class BinaryRoutePlanner {
 		if (heightObstacle < 0) {
 			return -1;
 		}
-		return obstacle + heightObstacle + distTimeOnRoadToPass + FerryRoutingHelper.getStopTime(ctx, segment);
+		return obstacle + heightObstacle + distTimeOnRoadToPass + ctx.getRouter().calculateStopTime(segment);
 
 	}
 
@@ -505,14 +505,16 @@ public class BinaryRoutePlanner {
 		int x = segment.road.getPoint31XTile(segment.getSegmentEnd());
 		int y = segment.road.getPoint31YTile(segment.getSegmentEnd());
 		float priority = router.defineSpeedPriority(segment.road, segment.isPositive());
-		float speed = FerryRoutingHelper.getRoutingSpeed(router, segment.road,
-				router.defineRoutingSpeed(segment.road, segment.isPositive())) * priority;
+		float roadSpeed = router.defineRoutingSpeed(segment.road, segment.isPositive());
+		float speed = (roadSpeed * priority);
 		if (speed == 0) {
 			speed = router.getDefaultSpeed() * priority;
 		}
 		// speed can not exceed max default speed according to A*
-		if (speed > router.getMaxSpeed()) {
-			speed = router.getMaxSpeed();
+		// (unless the router gives the road a higher speed of its own: a vehicle carried by a ferry)
+		float maxSpeed = Math.max(router.getMaxSpeed(), roadSpeed);
+		if (speed > maxSpeed) {
+			speed = maxSpeed;
 		}
 		float distOnRoadToPass = (float) squareRootDist(prevX, prevY, x, y);
 		return distOnRoadToPass / speed;
@@ -952,8 +954,8 @@ public class BinaryRoutePlanner {
 			float obstaclesTime = 0;
 			if (next.road.getId() != segment.road.getId()) {
 				obstaclesTime = (float) ctx.getRouter().calculateTurnTime(next, segment);
-				// getting on or off a ferry, next segment is the previous one for reverse search
-				obstaclesTime += FerryRoutingHelper.getTransitionTime(ctx, reverseWaySearch ? next : segment,
+				// in the direction of travel: next segment is the previous one for reverse search
+				obstaclesTime += ctx.getRouter().calculateRoadChangeTime(reverseWaySearch ? next : segment,
 						reverseWaySearch ? segment : next);
 			}
 			if (obstaclesTime < 0) {

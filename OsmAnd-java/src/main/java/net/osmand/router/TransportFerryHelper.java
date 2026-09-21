@@ -6,14 +6,13 @@ import java.util.Map;
 
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.osm.edit.Way;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.Algorithms;
 
 /**
  * Public transport ferries: routes built by the map creator from route=ferry ways without a route relation
  * and ferry crossings of other routes. Stop flags are stored as route tags with indexes of the route stops,
  * generated stops are marked by a name tag of their own so that the map can hide them without the routes.
+ * The planner doesn't use it directly: TransportRoutingConfiguration applies these rules to ferry routes.
  */
 public class TransportFerryHelper {
 
@@ -126,38 +125,6 @@ public class TransportFerryHelper {
 	private static int getDuration(TransportRoute route) {
 		return isFerry(route) ? FerryRoutingHelper.parseDuration(route.getTags().get(FerryRoutingHelper.DURATION_TAG),
 				route.getDistance()) : 0;
-	}
-
-	// ferry ways joined by a junction stop in the water are one ferry ride
-	public static void mergeJunctionSegments(List<TransportRouteResultSegment> segments) {
-		for (int i = segments.size() - 1; i > 0; i--) {
-			TransportRouteResultSegment s = segments.get(i - 1);
-			if (isJunctionStop(s.route, s.end)) {
-				segments.set(i - 1, merge(s, segments.remove(i)));
-			}
-		}
-	}
-
-	private static TransportRouteResultSegment merge(TransportRouteResultSegment s, TransportRouteResultSegment next) {
-		List<TransportStop> stops = new ArrayList<>(s.getTravelStops().subList(0, s.end - s.start));
-		stops.addAll(next.getTravelStops().subList(1, next.end - next.start + 1));
-		List<Way> ways = new ArrayList<>();
-		for (Way w : s.route.getForwardWays()) {
-			ways.add(new Way(w, w.getId()));
-		}
-		for (Way w : next.route.getForwardWays()) {
-			ways.add(new Way(w, w.getId()));
-		}
-		TransportRouteResultSegment res = new TransportRouteResultSegment();
-		res.route = new TransportRoute(s.route, stops, ways);
-		res.start = 0;
-		res.end = stops.size() - 1;
-		res.walkDist = s.walkDist;
-		res.walkTime = s.walkTime;
-		res.depTime = s.depTime;
-		res.travelTime = s.travelTime + next.travelTime;
-		res.travelDistApproximate = s.travelDistApproximate + next.travelDistApproximate;
-		return res;
 	}
 
 	private static String getStopValue(TransportRoute route, String tag, int stop) {

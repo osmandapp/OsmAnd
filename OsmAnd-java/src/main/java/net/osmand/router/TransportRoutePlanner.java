@@ -98,25 +98,22 @@ public class TransportRoutePlanner {
 			ctx.visitedSegments.put(segIdWithParent, segment);
 			
 			if (segment.distFromStart > finishTime * ctx.cfg.increaseForAlternativesRoutes ||
-					segment.distFromStart - segment.ferryTime > maxTravelTimeCmpToWalk) {
+					segment.distFromStart - segment.overWaterTime > maxTravelTimeCmpToWalk) {
 				break;
 			}
 			TransportRouteSegment finish = null;
 			double minDist = 0;
 			double travelDist = 0;
 
-			// no boarding if the same ferry continues through a junction in the water
-			double travelTime = TransportFerryHelper.isJunctionStop(segment.road, segment.segStart) ? 0
-					: ctx.cfg.getBoardingTime(segment.road.getType(), segment.road.calcIntervalInSeconds());
-			// time on ferries crossed by a route of other type
+			double travelTime = ctx.cfg.getBoardingTime(segment.road, segment.segStart);
+			// time of the vehicle carried over water on the way
 			double crossingsTime = 0;
 
-			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
-			if (routeTravelSpeed == 0) {
+			final double travelSpeed = ctx.cfg.getTravelSpeed(segment.road);
+			if (travelSpeed == 0) {
 				continue;
 			}
-			boolean ferryRoute = TransportFerryHelper.isFerry(segment.road);
-			double travelSpeed = TransportFerryHelper.getTravelSpeed(segment.road, routeTravelSpeed);
+			boolean overWater = ctx.cfg.isOverWater(segment.road);
 			TransportStop prevStop = segment.getStop(segment.segStart);
 			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
 			if (TRACE_ONBOARD_ID != 0) {
@@ -132,7 +129,7 @@ public class TransportRoutePlanner {
 				segIdWithParent ++;
 				ctx.visitedSegments.put(segIdWithParent, segment);
 				TransportStop stop = segment.getStop(ind);
-				boolean junctionStop = TransportFerryHelper.isJunctionStop(segment.road, ind);
+				boolean continuation = ctx.cfg.isContinuation(segment.road, ind);
 				// could be geometry size
 				double segmentDist = MapUtils.getDistance(prevStop.getLocation(), stop.getLocation());
 				travelDist += segmentDist;
@@ -141,22 +138,18 @@ public class TransportRoutePlanner {
 					int interval = sc.avgStopIntervals.get(ind - 1);
 					travelTime += interval * 10;
 				} else {
-					// a ferry stop is counted only when the ride continues past it (end of the loop)
-					int stopTime = ferryRoute ? 0 : ctx.cfg.getStopTime(segment.road.getType());
-					double crossingTime = TransportFerryHelper.getCrossingTime(ctx.cfg, segment.road, ind);
-					travelTime += stopTime + segmentDist / travelSpeed + crossingTime;
+					double crossingTime = ctx.cfg.getCrossingTime(segment.road, ind);
+					travelTime += ctx.cfg.getRideTime(segment.road, segmentDist, travelSpeed) + crossingTime;
 					crossingsTime += crossingTime;
 				}
-				// leaving the vehicle here costs the time to get off a ferry
-				double timeToLeave = travelTime + TransportFerryHelper.getAlightingTime(ctx.cfg, segment.road, ind);
-				double ferryTime = ferryRoute ? timeToLeave : crossingsTime;
-				// the ferry hasn't left the terminal yet: nowhere to get off
-				boolean sameTerminal = TransportFerryHelper.isSameTerminal(segment.road, segment.segStart, ind);
+				double timeToLeave = travelTime + ctx.cfg.getAlightingTime(segment.road, ind);
+				double overWaterTime = overWater ? timeToLeave : crossingsTime;
+				boolean canGetOff = ctx.cfg.canGetOff(segment.road, segment.segStart, ind);
 				if (segment.distFromStart + travelTime > finishTime * ctx.cfg.increaseForAlternativesRoutes) {
 					break;
 				}
 				sgms.clear();
-				if (segment.getDepth() < ctx.cfg.maxNumberOfChanges + 1 && !sameTerminal) {
+				if (segment.getDepth() < ctx.cfg.maxNumberOfChanges + 1 && canGetOff) {
 					sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
 					ctx.visitedStops++;
 					for (TransportRouteSegment sgm : sgms) {
@@ -169,9 +162,9 @@ public class TransportRoutePlanner {
 						if (ctx.visitedSegments.containsKey(segmentWithParentId(sgm, segment))) {
 							continue;
 						}
-						if ((junctionStop || TransportFerryHelper.isJunctionStop(sgm.road, sgm.segStart))
+						if ((continuation || ctx.cfg.isContinuation(sgm.road, sgm.segStart))
 								&& sgm.getStop(sgm.segStart).getId().longValue() != stop.getId().longValue()) {
-							continue; // junction stop in the water can't be reached on foot
+							continue; // continuation stop can't be reached on foot
 						}
 						TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
 						nextSegment.parentRoute = segment;
@@ -179,10 +172,10 @@ public class TransportRoutePlanner {
 						nextSegment.walkDist = MapUtils.getDistance(nextSegment.getLocation(), stop.getLocation());
 						nextSegment.parentTravelTime = timeToLeave;
 						nextSegment.parentTravelDist = travelDist;
-						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + (junctionStop ? 0 :
-								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType()));
+						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed
+								+ ctx.cfg.getChangeTime(segment.road, ind, sgm.road);
 						nextSegment.distFromStart = segment.distFromStart + timeToLeave + walkTime;
-						nextSegment.ferryTime = segment.ferryTime + ferryTime;
+						nextSegment.overWaterTime = segment.overWaterTime + overWaterTime;
 						nextSegment.nonce = nonce++;
 						if (ctx.cfg.useSchedule) {
 							int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
@@ -203,7 +196,7 @@ public class TransportRoutePlanner {
 				}
 				TransportRouteSegment finalSegment = endSegments.get(segment.getId() + ind - segment.segStart);
 				double distToEnd = MapUtils.getDistance(stop.getLocation(), end);
-				if (finalSegment != null && distToEnd < ctx.cfg.walkRadius && !sameTerminal) {
+				if (finalSegment != null && distToEnd < ctx.cfg.walkRadius && canGetOff) {
 					if (finish == null || minDist > distToEnd) {
 						minDist = distToEnd;
 						finish = new TransportRouteSegment(finalSegment);
@@ -214,12 +207,12 @@ public class TransportRoutePlanner {
 						finish.parentTravelDist = travelDist;
 						double walkTime = distToEnd / ctx.cfg.walkSpeed;
 						finish.distFromStart = segment.distFromStart + timeToLeave + walkTime;
-						finish.ferryTime = segment.ferryTime + ferryTime;
+						finish.overWaterTime = segment.overWaterTime + overWaterTime;
 						finish.nonce = nonce++;
 					}
 				}
-				// the ride continues: the ferry stands at the stop
-				travelTime += TransportFerryHelper.getStopTime(ctx.cfg, segment.road, ind);
+				// the ride continues past the stop
+				travelTime += ctx.cfg.getStandingTime(segment.road, ind);
 				prevStop = stop;
 			}
 			if (finish != null) {
@@ -227,7 +220,7 @@ public class TransportRoutePlanner {
 					finishTime = finish.distFromStart;
 				}
 				if (finish.distFromStart < finishTime * ctx.cfg.increaseForAlternativesRoutes && 
-						(finish.distFromStart - finish.ferryTime < maxTravelTimeCmpToWalk || results.size() == 0)) {
+						(finish.distFromStart - finish.overWaterTime < maxTravelTimeCmpToWalk || results.size() == 0)) {
 					results.add(finish);
 					// Stop when results reached range [1000 min, 2500 (for default limit * changes), 5000 max]
 					int optimalLimitOfResults = 25 * ctx.cfg.ptLimitResultsByNumber * ctx.cfg.maxNumberOfChanges;
@@ -310,6 +303,7 @@ public class TransportRoutePlanner {
 					sg.depTime = p.departureTime;
 					sg.travelDistApproximate = p.parentTravelDist;
 					sg.travelTime = p.parentTravelTime;
+					sg.reversibleGeometry = ctx.cfg.isGeometryReversible(sg.route);
 					route.segments.add(0, sg);
 				}
 				p = p.parentRoute;
@@ -361,10 +355,43 @@ public class TransportRoutePlanner {
 				}
 				r.getSegments().get(i).alternatives.addAll(alts.values());
 			}
-			TransportFerryHelper.mergeJunctionSegments(r.getSegments()); // after filtering: changes only presentation
+			mergeContinuations(ctx.cfg, r.getSegments()); // after filtering: changes only presentation
 		}
 
 		return lst;
+	}
+
+	// the ride continuing on the next route at a stop (see TransportRoutingConfiguration.isContinuation) is one segment
+	private static void mergeContinuations(TransportRoutingConfiguration cfg, List<TransportRouteResultSegment> segments) {
+		for (int i = segments.size() - 1; i > 0; i--) {
+			TransportRouteResultSegment s = segments.get(i - 1);
+			if (cfg.isContinuation(s.route, s.end)) {
+				segments.set(i - 1, merge(s, segments.remove(i)));
+			}
+		}
+	}
+
+	private static TransportRouteResultSegment merge(TransportRouteResultSegment s, TransportRouteResultSegment next) {
+		List<TransportStop> stops = new ArrayList<>(s.getTravelStops().subList(0, s.end - s.start));
+		stops.addAll(next.getTravelStops().subList(1, next.end - next.start + 1));
+		List<Way> ways = new ArrayList<>();
+		for (Way w : s.route.getForwardWays()) {
+			ways.add(new Way(w, w.getId()));
+		}
+		for (Way w : next.route.getForwardWays()) {
+			ways.add(new Way(w, w.getId()));
+		}
+		TransportRouteResultSegment res = new TransportRouteResultSegment();
+		res.route = new TransportRoute(s.route, stops, ways);
+		res.start = 0;
+		res.end = stops.size() - 1;
+		res.walkDist = s.walkDist;
+		res.walkTime = s.walkTime;
+		res.depTime = s.depTime;
+		res.travelTime = s.travelTime + next.travelTime;
+		res.travelDistApproximate = s.travelDistApproximate + next.travelDistApproximate;
+		res.reversibleGeometry = s.reversibleGeometry || next.reversibleGeometry;
+		return res;
 	}
 
 	private boolean excludeRoute(TransportRoutingContext ctx, TransportRouteResult fastRoute, TransportRouteResult testRoute) {
@@ -459,6 +486,8 @@ public class TransportRoutePlanner {
 		public int end;
 		public double walkDist ;
 		public int depTime;
+		// geometry between the stops may go against the stops order (see TransportRoutingConfiguration)
+		public boolean reversibleGeometry;
 		
 		public List<TransportRouteResultSegment> alternatives = new ArrayList<>();
 		
@@ -564,9 +593,8 @@ public class TransportRoutePlanner {
 					} 
 				}
 			}
-			// parallel ways of one route (ferry berths) are merged into a way going there and back,
-			// so the part between the stops can be in any direction
-			boolean validOneWay = startInd.way != null && startInd.way == endInd.way;
+			boolean validOneWay = startInd.way != null && startInd.way == endInd.way
+					&& (startInd.ind <= endInd.ind || reversibleGeometry);
 			if (validOneWay) {
 				Way way = new Way(GEOMETRY_WAY_ID);
 				int step = startInd.ind <= endInd.ind ? 1 : -1;
@@ -649,9 +677,9 @@ public class TransportRoutePlanner {
 		double walkDist = 0;
 		// main field accumulated all time spent from beginning of journey
 		double distFromStart = 0;
-		// time on ferries from waiting to getting off, part of distFromStart
+		// time over water from waiting to getting off, part of distFromStart
 		// (it isn't compared with walking: walking can't cross water)
-		double ferryTime = 0;
+		double overWaterTime = 0;
 		
 		public TransportRouteSegment(TransportRoute road, int stopIndex) {
 			this.road = road;
@@ -746,13 +774,13 @@ public class TransportRoutePlanner {
 			trr.setRouteTime(ntrr.routeTime);
 
 			trr.getSegments().addAll(
-					convertToTransportRouteResultSegment(ntrr.segments, convertedRoutesCache, convertedStopsCache));
+					convertToTransportRouteResultSegment(ntrr.segments, cfg, convertedRoutesCache, convertedStopsCache));
 
 			// alternativeRoutes (1-level recursion)
 			if (ntrr.alternativeRoutes != null && ntrr.alternativeRoutes.length > 0) {
 				trr.alternativeRoutes = convertToTransportRoutingResult(ntrr.alternativeRoutes, cfg);
 			}
-			convertedRes.add(trr); // junction segments are already merged by the native prepareResults
+			convertedRes.add(trr); // continuation segments are already merged by the native prepareResults
 		}
 		convertedStopsCache.clear();
 		convertedRoutesCache.clear();
@@ -760,8 +788,8 @@ public class TransportRoutePlanner {
 	}
 
 	private static List<TransportRouteResultSegment> convertToTransportRouteResultSegment(
-			NativeTransportRouteResultSegment[] nativeSegments, TLongObjectHashMap<TransportRoute> convertedRoutesCache,
-			TLongObjectHashMap<TransportStop> convertedStopsCache) {
+			NativeTransportRouteResultSegment[] nativeSegments, TransportRoutingConfiguration cfg,
+			TLongObjectHashMap<TransportRoute> convertedRoutesCache, TLongObjectHashMap<TransportStop> convertedStopsCache) {
 		List<TransportRouteResultSegment> results = new ArrayList<>();
 		if (nativeSegments != null) {
 			for (NativeTransportRouteResultSegment ntrs : nativeSegments) {
@@ -775,10 +803,11 @@ public class TransportRoutePlanner {
 				trs.end = ntrs.end;
 				trs.walkDist = ntrs.walkDist;
 				trs.depTime = ntrs.depTime;
+				trs.reversibleGeometry = cfg.isGeometryReversible(trs.route);
 
 				// alternatives (1-level recursion)
 				if (ntrs.alternatives != null && ntrs.alternatives.length > 0) {
-					trs.alternatives = convertToTransportRouteResultSegment(ntrs.alternatives,
+					trs.alternatives = convertToTransportRouteResultSegment(ntrs.alternatives, cfg,
 							convertedRoutesCache, convertedStopsCache);
 				}
 
