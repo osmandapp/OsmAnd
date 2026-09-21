@@ -517,17 +517,27 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		}
 
 		for (List<QuadPoint> pts : arrays) {
-			Path path = new Path();
-			for (QuadPoint pt : pts) {
-				if (path.isEmpty()) {
-					path.moveTo(pt.x, pt.y);
-				} else {
-					path.lineTo(pt.x, pt.y);
-				}
+			// Separate segments instead of a Path: the UI renderer rasterizes an antialiased stroked
+			// path of this size in software, into a new mask of about 1 MB on every frame
+			float[] lines = new float[Math.max(0, pts.size() - 1) * 4];
+			for (int i = 1; i < pts.size(); i++) {
+				int k = (i - 1) * 4;
+				lines[k] = pts.get(i - 1).x;
+				lines[k + 1] = pts.get(i - 1).y;
+				lines[k + 2] = pts.get(i).x;
+				lines[k + 3] = pts.get(i).y;
 			}
-			canvas.drawPath(path, attrs.shadowPaint);
-			canvas.drawPath(path, attrs.paint);
+			drawLines(canvas, lines, attrs.shadowPaint);
+			drawLines(canvas, lines, attrs.paint);
 		}
+	}
+
+	private void drawLines(@NonNull Canvas canvas, @NonNull float[] lines, @NonNull Paint paint) {
+		// round caps of neighbour segments would overlap and show as dots on a translucent line
+		Paint.Cap cap = paint.getStrokeCap();
+		paint.setStrokeCap(Paint.Cap.BUTT);
+		canvas.drawLines(lines, paint);
+		paint.setStrokeCap(cap);
 	}
 
 	private void drawTextInPosition(@NonNull Canvas canvas, @NonNull String text, @NonNull PointF textPosition,
