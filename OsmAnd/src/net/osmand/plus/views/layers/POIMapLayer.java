@@ -1199,6 +1199,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (mapRenderer == null) {
 			return;
 		}
+		if (selectedPlace == null && selectedTopPlace == null) {
+			// asked on every redraw while no place is selected: there is no marker to look for
+			return;
+		}
 		if (selectedTopPlaceCollection == null) {
 			selectedTopPlaceCollection = new MapMarkersCollection();
 		}
