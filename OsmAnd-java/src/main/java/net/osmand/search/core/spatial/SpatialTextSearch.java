@@ -707,6 +707,32 @@ public class SpatialTextSearch {
 
 	private static final int MAX_OPERATOR_WORDS = 3;
 
+	/**
+	 * "1 Delaware Avenue, Apt 2" says which unit of the house, not which house: read as a house number, "2" finds
+	 * the house 2 of that street and the house the query names is gone.
+	 */
+	private static final Set<String> UNIT_MARKERS = new HashSet<>(Arrays.asList(
+			"apt", "apartment", "suite", "ste", "unit", "unt", "fl", "flr", "floor", "rm", "room",
+			"bsmt", "basement", "appt", "wohnung", "whg"));
+
+	/** drops "<unit marker> <number>" as long as something is left to search for */
+	private void cutUnitOfBuilding(List<SpatialSearchToken> tokens) {
+		for (int i = 0; i + 1 < tokens.size() && tokens.size() > 2; i++) {
+			if (!UNIT_MARKERS.contains(SearchAlgorithms.alignChars(tokens.get(i).word))) {
+				continue;
+			}
+			SpatialSearchToken unit = tokens.get(i + 1);
+			if (unit.getMainNumber() > 0 || SearchAlgorithms.isNumber2Letters(unit.word)) {
+				tokens.subList(i, i + 2).clear();
+				// the words after the unit keep their places in the query
+				for (int k = 0; k < tokens.size(); k++) {
+					tokens.get(k).originalOrder = k;
+				}
+				return;
+			}
+		}
+	}
+
 	/** drops the operator when it closes the query and something is left to search for */
 	private void cutAtThePointOperator(List<SpatialSearchToken> tokens) {
 		for (int len = Math.min(MAX_OPERATOR_WORDS, tokens.size() - 1); len >= 1; len--) {
@@ -739,6 +765,7 @@ public class SpatialTextSearch {
 			tokens.add(token);
 		}
 		cutAtThePointOperator(tokens);
+		cutUnitOfBuilding(tokens);
 		for (SpatialSearchToken t : tokens) {
 			for (SpatialSearchToken o : tokens) {
 				t.numberNamedByOther |= t.mainNumber > 0 && o != t && SearchAlgorithms.letters(o.wordNoDot) > 0
