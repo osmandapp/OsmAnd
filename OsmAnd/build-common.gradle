@@ -133,62 +133,90 @@ clean {
 	])
 }
 
+// Every string of every locale, the source included, must survive the formatting the app applies to it:
+// String.format() with the arguments the source string implies - none when it has none, which is what
+// Resources.getString(id, args) does - and MessageFormat for the patterns with {n}. A translation must
+// also keep the placeholders of its source. Source strings with a literal '%' are marked formatted="false";
+// phrases.xml holds POI names read with getString(id) and is formatted only where the source has placeholders.
 tasks.register('validateTranslations') {
-	println "Validating translations"
-	def taskStartTime = System.currentTimeMillis()
-
-	def pattern = /%(\d+\$)?[sSdD]/
-	def files = ["strings.xml", "phrases.xml"]
-	def defaultPlaceholders = [:]
-	def parser = new XmlParser()
-
-	def normalizePlaceholders = { placeholders -> placeholders.collect { it.toLowerCase() }.toSet() }
-
-	files.each { fileName ->
-		def file = new File(file("res/values"), fileName)
-		if (file.exists()) {
-			parser.parse(file).string.each { node ->
-				def placeholders = (node.text() ?: "").findAll(pattern)
-				defaultPlaceholders[node.@name] = normalizePlaceholders(placeholders)
-			}
-		} else {
-			println "Skipping missing default file: ${file.path}"
+	def resDir = file('res')
+	def marker = layout.buildDirectory.file('validateTranslations.txt')
+	inputs.files(fileTree(resDir) { include 'values*/strings.xml', 'values*/phrases.xml' })
+	outputs.file(marker)
+	doLast {
+		// java.util.Formatter grammar: %[argument_index$][flags][width][.precision][t]conversion
+		def specifier = ~/%(\d+\$)?([-#+ 0,(<]*)?(\d+)?(\.\d+)?([tT])?([a-zA-Z%])/
+		// [argument index, conversion] of every specifier that takes an argument; %s and %1$s both give [1, 's']
+		def placeholders = { String text ->
+			int ordinary = 0, last = 0
+			text.findAll(specifier) { all, index, flags, width, precision, date, conversion ->
+				if (conversion in ['%', 'n']) return null
+				last = index ? index[0..-2] as int : flags?.contains('<') ? last : ++ordinary
+				[last, date ? 't' : conversion.toLowerCase()]
+			}.findAll { it != null }
 		}
-	}
-
-	def issues = []
-	def directories = file("res").listFiles().findAll {
-		it.isDirectory() && it.name.startsWith("values-")
-	}
-
-	directories.each { dir ->
-		files.each { fileName ->
-			def file = new File(dir, fileName)
-			if (file.exists()) {
-				def placeholders = [:]
-				parser.parse(file).string.each { node ->
-					def translationPlaceholders = (node.text() ?: "").findAll(pattern)
-					placeholders[node.@name] = normalizePlaceholders(translationPlaceholders)
+		// a value the conversion accepts
+		def sample = { c -> c == 't' ? new Date(0L) : c in ['d', 'o', 'x'] ? 1 : c in ['e', 'f', 'g', 'a'] ? 1.0d : c == 'c' ? ('x' as char) : 'x' }
+		def show = { Set s -> s ? s.collect { "%${it[0]}\$${it[1]}" }.sort().join(' ') : 'none' }
+		// name -> [file, formatted, texts, other] of the strings, plurals items and string-array items of one values directory
+		def parse = { File dir ->
+			def out = [:]
+			['strings.xml', 'phrases.xml'].each { fileName ->
+				File file = new File(dir, fileName)
+				if (!file.exists()) return
+				new XmlParser().parse(file).children().each { node ->
+					if (!(node instanceof Node)) return
+					def texts = node.name() == 'string' ? [node.text()] : node.name() in ['plurals', 'string-array'] ? node.item*.text() : null
+					if (texts != null) out[node.@name] = [file: fileName, formatted: node.@formatted != 'false', texts: texts,
+							other: node.name() != 'plurals' || node.item.any { it.@quantity == 'other' }]
 				}
+			}
+			out
+		}
 
-				defaultPlaceholders.each { key, defaultValues ->
-					if (placeholders.containsKey(key)) {
-						def translationValues = placeholders[key]
-						if (defaultValues != translationValues) {
-							issues << "Mismatch in ${file.path}: '${key}' -> Default: ${defaultValues}, Translation: ${translationValues}"
-						}
+		def source = parse(new File(resDir, 'values'))
+		def errors = []
+		def check = { String dir, String name, Map src, Map tr ->
+			def expected = src.texts.collectMany { placeholders(it) } as Set
+			boolean formats = src.formatted && (src.file != 'phrases.xml' || expected)
+			boolean messageFormat = src.texts.any { it =~ /\{\s*\p{Nd}+/ }
+			if (!tr.other) errors << "$dir/${src.file} '$name': <plurals> without quantity=\"other\" (Resources.NotFoundException)"
+			Object[] args = new Object[expected ? Math.max(expected*.get(0).max(), 0) : 0]
+			expected.each { if (it[0] > 0) args[it[0] - 1] = sample(it[1]) }
+			tr.texts.each { String text ->
+				String problem = null
+				if (formats) {
+					try {
+						String.format(Locale.ROOT, text, args)
+					} catch (Exception e) {
+						problem = "${e.class.simpleName}: ${e.message}"
+					}
+					Set found = placeholders(text) as Set
+					if (!problem && !(src.texts.size() > 1 ? expected.containsAll(found) : found == expected)) {
+						problem = "placeholders ${show(found)} instead of ${show(expected)}"
 					}
 				}
+				if (!problem && messageFormat) {
+					try {
+						new java.text.MessageFormat(text)
+					} catch (IllegalArgumentException e) {
+						problem = "MessageFormat: ${e.message}"
+					}
+				}
+				if (problem) errors << "$dir/${src.file} '$name': $problem: \"$text\""
 			}
 		}
+		source.each { name, entry -> check('values', name, entry, entry) }
+		resDir.listFiles().findAll { it.isDirectory() && it.name.startsWith('values-') }.sort().each { dir ->
+			parse(dir).each { name, entry -> if (source[name]) check(dir.name, name, source[name], entry) }
+		}
+		if (errors) {
+			errors.each { logger.error("ERROR: $it") }
+			throw new GradleException("Translation validation failed with ${errors.size()} issue(s)")
+		}
+		marker.get().asFile.text = "Translations validated: ${source.size()} source strings\n"
+		logger.lifecycle("Translations validated")
 	}
-
-	if (!issues.isEmpty()) {
-		issues.each { println "ERROR: $it" }
-		throw new GradleException("Translation validation failed with ${issues.size()} issue(s).")
-	}
-	def validationEndTime = System.currentTimeMillis()
-	println "Translations validated in ${(validationEndTime - taskStartTime)} ms"
 }
 
 tasks.register('downloadWorldMiniBasemap', Download) {
