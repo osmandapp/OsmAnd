@@ -1526,7 +1526,7 @@
     <string name="shared_string_others">其它</string>
     <string name="shared_string_release">已发行</string>
     <string name="local_index_items_backuped">已停用 %1$d 项/共 %2$d 项。</string>
-    <string name="local_index_items_deleted">%已删除 %1$d 项/共 %2$d 项。</string>
+    <string name="local_index_items_deleted">已删除 %1$d 项/共 %2$d 项。</string>
     <string name="local_index_items_restored">已启用 %1$d 项/共 %2$d 项。</string>
     <string name="local_index_no_items_to_do">没有项目在 %1$s</string>
     <string name="local_index_action_do">您将要 %1$s %2$s 个项目，要继续吗？</string>
