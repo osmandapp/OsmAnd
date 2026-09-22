@@ -19,6 +19,13 @@
 	<string name="gpx_line_style_dashed">Dashed</string>
 	<string name="gpx_line_style_dotted">Dotted</string>
 	<string name="battery_saving_mode_descr">Limits the map to 20 frames per second to reduce battery drain and device heating. Map movement becomes less smooth.</string>
+	<string name="panoramax">Panoramax</string>
+	<string name="open_panoramax">Open Panoramax</string>
+	<string name="panoramax_image">Panoramax image</string>
+	<string name="panoramax_no_internet_desc">Photos from Panoramax are only available online.</string>
+	<string name="quick_action_showhide_panoramax_descr">A toggle to show or hide the Panoramax layer on the map.</string>
+	<string name="panoramax_menu_filter_description_new">Filter imagery by contributor, date, or type.</string>
+	<string name="plugin_panoramax_descr">Show street-level imagery from Panoramax, a federated and openly licensed photo mapping platform, as a map overlay. Useful for checking existing coverage and planning what still needs to be recorded.</string>
 	<string name="astro_eclipse_column_below_horizon">Below horizon</string>
 	<string name="quick_action_add_track">Add track</string>
 	<string name="quick_action_tracks_select_descr">Add one or more tracks to show or hide them on the map with a single tap.</string>

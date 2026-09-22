@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.mapillary;
+package net.osmand.plus.plugins.panoramax;
 
 
 import android.app.DatePickerDialog;
@@ -43,16 +43,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MapillaryFiltersFragment extends BaseFullScreenFragment {
+public class PanoramaxFiltersFragment extends BaseFullScreenFragment {
 
-    public static final String TAG = MapillaryFiltersFragment.class.getSimpleName();
+    public static final String TAG = PanoramaxFiltersFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         updateNightMode();
         MapActivity mapActivity = (MapActivity) requireActivity();
         ApplicationMode appMode = app.getSettings().getApplicationMode();
-        MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
+        PanoramaxPlugin plugin = PluginsHelper.getPlugin(PanoramaxPlugin.class);
 
         int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
         DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -65,14 +65,11 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
         AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 
         view.findViewById(R.id.filters_linear_layout).setBackgroundColor(backgroundColor);
-        // The layout is shared with Panoramax; only the description carries provider wording.
-        ((TextView) view.findViewById(R.id.filters_description)).setText(R.string.mapillary_menu_filter_description_new);
-        // Filtering by username is not available in the current Mapillary API version.
-        AndroidUiHelper.updateVisibility(view.findViewById(R.id.username_row), false);
-        AndroidUiHelper.updateVisibility(view.findViewById(R.id.username_input_container), false);
+        // The layout is shared with Mapillary; only the description carries provider wording.
+        ((TextView) view.findViewById(R.id.filters_description)).setText(R.string.panoramax_menu_filter_description_new);
 
         View toggleRow = view.findViewById(R.id.toggle_row);
-        boolean selected = plugin.SHOW_MAPILLARY.get();
+        boolean selected = plugin.SHOW_PANORAMAX.get();
         int toggleActionStringId = R.string.street_level_imagery;
         int toggleIconColor;
         int toggleIconId;
@@ -90,7 +87,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
 		toggle.setOnCheckedChangeListener(null);
         toggle.setChecked(selected);
         toggle.setOnCheckedChangeListener((compoundButton, b) -> {
-            plugin.SHOW_MAPILLARY.set(!plugin.SHOW_MAPILLARY.get());
+            plugin.SHOW_PANORAMAX.set(!plugin.SHOW_PANORAMAX.get());
             plugin.updateLayers(mapActivity, mapActivity);
             mapActivity.getDashboard().refreshContent(true);
         });
@@ -100,7 +97,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
         Button reloadTile = view.findViewById(R.id.button_reload_tile);
         reloadTile.setOnClickListener(v -> {
             ResourceManager manager = app.getResourceManager();
-            manager.clearCacheAndTiles(TileSourceManager.getMapillaryVectorSource());
+            manager.clearCacheAndTiles(TileSourceManager.getPanoramaxVectorSource());
             mapActivity.refreshMap();
         });
 
@@ -115,9 +112,9 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
 
         DelayAutoCompleteTextView textView =
                 view.findViewById(R.id.auto_complete_text_view);
-        textView.setAdapter(new MapillaryAutoCompleteAdapter(mapActivity, R.layout.auto_complete_suggestion));
-        String selectedUsername = plugin.MAPILLARY_FILTER_USERNAME.get();
-        if (!selectedUsername.isEmpty() && plugin.USE_MAPILLARY_FILTER.get()) {
+        textView.setAdapter(new PanoramaxAutoCompleteAdapter(mapActivity, R.layout.auto_complete_suggestion));
+        String selectedUsername = plugin.PANORAMAX_FILTER_USERNAME.get();
+        if (!selectedUsername.isEmpty() && plugin.USE_PANORAMAX_FILTER.get()) {
             textView.setText(selectedUsername);
             textView.setSelection(selectedUsername.length());
         }
@@ -152,7 +149,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
             from.set(Calendar.MONTH, monthOfYear);
             from.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             dateFromEt.setText(dateFormat.format(from.getTime()));
-            plugin.MAPILLARY_FILTER_FROM_DATE.set(from.getTimeInMillis());
+            plugin.PANORAMAX_FILTER_FROM_DATE.set(from.getTimeInMillis());
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         };
@@ -173,7 +170,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
             to.set(Calendar.MONTH, monthOfYear);
             to.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             dateToEt.setText(dateFormat.format(to.getTime()));
-            plugin.MAPILLARY_FILTER_TO_DATE.set(to.getTimeInMillis());
+            plugin.PANORAMAX_FILTER_TO_DATE.set(to.getTimeInMillis());
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         };
@@ -186,12 +183,12 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
         });
         dateToEt.setCompoundDrawablesWithIntrinsicBounds(null, null, getContentIcon(R.drawable.ic_action_arrow_drop_down), null);
 
-        if (plugin.USE_MAPILLARY_FILTER.get()) {
-            long to = plugin.MAPILLARY_FILTER_TO_DATE.get();
+        if (plugin.USE_PANORAMAX_FILTER.get()) {
+            long to = plugin.PANORAMAX_FILTER_TO_DATE.get();
             if (to != 0) {
                 dateToEt.setText(dateFormat.format(new Date(to)));
             }
-            long from = plugin.MAPILLARY_FILTER_FROM_DATE.get();
+            long from = plugin.PANORAMAX_FILTER_FROM_DATE.get();
             if (from != 0) {
                 dateFromEt.setText(dateFormat.format(new Date(from)));
             }
@@ -200,9 +197,9 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
         View rowPano = view.findViewById(R.id.pano_row);
         CompoundButton pano = rowPano.findViewById(R.id.pano_row_toggle);
         pano.setOnCheckedChangeListener(null);
-        pano.setChecked(plugin.MAPILLARY_FILTER_PANO.get());
+        pano.setChecked(plugin.PANORAMAX_FILTER_PANO.get());
         pano.setOnCheckedChangeListener((compoundButton, b) -> {
-            plugin.MAPILLARY_FILTER_PANO.set(!plugin.MAPILLARY_FILTER_PANO.get());
+            plugin.PANORAMAX_FILTER_PANO.set(!plugin.PANORAMAX_FILTER_PANO.get());
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         });
@@ -217,16 +214,16 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
             String dateFrom = dateFromEt.getText().toString();
             String dateTo = dateToEt.getText().toString();
 
-            if (!plugin.MAPILLARY_FILTER_USERNAME.get().isEmpty() || !dateFrom.isEmpty() || !dateTo.isEmpty() || plugin.MAPILLARY_FILTER_PANO.get()) {
-                plugin.USE_MAPILLARY_FILTER.set(true);
+            if (!plugin.PANORAMAX_FILTER_USERNAME.get().isEmpty() || !dateFrom.isEmpty() || !dateTo.isEmpty() || plugin.PANORAMAX_FILTER_PANO.get()) {
+                plugin.USE_PANORAMAX_FILTER.set(true);
             }
             if (dateFrom.isEmpty()) {
-                plugin.MAPILLARY_FILTER_FROM_DATE.set(0L);
+                plugin.PANORAMAX_FILTER_FROM_DATE.set(0L);
             }
             if (dateTo.isEmpty()) {
-                plugin.MAPILLARY_FILTER_TO_DATE.set(0L);
+                plugin.PANORAMAX_FILTER_TO_DATE.set(0L);
             }
-            if (!username.isEmpty() && plugin.MAPILLARY_FILTER_USERNAME.get().isEmpty()) {
+            if (!username.isEmpty() && plugin.PANORAMAX_FILTER_USERNAME.get().isEmpty()) {
                 view.findViewById(R.id.warning_linear_layout).setVisibility(View.VISIBLE);
             } else {
                 mapActivity.getDashboard().hideDashboard();
@@ -245,12 +242,12 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
             dateToEt.setText("");
             pano.setChecked(false);
 
-            plugin.USE_MAPILLARY_FILTER.set(false);
-            plugin.MAPILLARY_FILTER_USER_KEY.set("");
-            plugin.MAPILLARY_FILTER_USERNAME.set("");
-            plugin.MAPILLARY_FILTER_FROM_DATE.set(0L);
-            plugin.MAPILLARY_FILTER_TO_DATE.set(0L);
-            plugin.MAPILLARY_FILTER_PANO.set(false);
+            plugin.USE_PANORAMAX_FILTER.set(false);
+            plugin.PANORAMAX_FILTER_USER_KEY.set("");
+            plugin.PANORAMAX_FILTER_USERNAME.set("");
+            plugin.PANORAMAX_FILTER_FROM_DATE.set(0L);
+            plugin.PANORAMAX_FILTER_TO_DATE.set(0L);
+            plugin.PANORAMAX_FILTER_PANO.set(false);
             plugin.updateLayers(mapActivity, mapActivity);
 
             hideKeyboard();
@@ -291,7 +288,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
     public static void showInstance(@NonNull FragmentManager fragmentManager) {
         if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content, new MapillaryFiltersFragment(), TAG)
+                    .replace(R.id.content, new PanoramaxFiltersFragment(), TAG)
                     .commitAllowingStateLoss();
         }
     }
