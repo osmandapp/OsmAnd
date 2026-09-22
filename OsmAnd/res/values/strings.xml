@@ -11,9 +11,6 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
-	<string name="ais_protocol_tcp">TCP</string>
-	<string name="ais_protocol_udp">UDP</string>
-	<string name="ais_connection">Connection</string>
 	<string name="ais_connection_not_set_up">Not set up</string>
 	<string name="ais_connection_not_connected">Not connected</string>
 	<string name="ais_connection_connecting">Connecting…</string>
@@ -62,11 +59,8 @@
 	<string name="ais_enter_mmsi">Enter MMSI</string>
 	<string name="ais_enter_mmsi_desc">Enter 9 digits or leave empty to clear.</string>
 	<string name="ais_error_mmsi_length">Must be 9 digits</string>
-	<string name="ais_nautical_miles_short">%1$s nm</string>
-	<string name="ais_minutes_short">%1$d min</string>
 	<string name="ais_reset_plugin_settings">Reset plugin settings</string>
 	<string name="ais_reset_connection_settings">Reset connection settings</string>
-	<string name="ais_reset_sliders">Reset to default values</string>
 	<string name="astro_eclipse_column_below_horizon">Below horizon</string>
 	<string name="share_favorites_media_preparation_failed">Couldn\'t include attached media. Sharing points only.</string>
 	<plurals name="files_count">

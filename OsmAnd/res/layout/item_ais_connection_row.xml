@@ -59,7 +59,7 @@
 				android:id="@+id/title"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:text="@string/ais_connection"
+				android:text="@string/external_device_details_connection"
 				android:textColor="?attr/colorOnSurface"
 				android:textSize="@dimen/default_list_text_size"
 				app:lineHeight="@dimen/ui_line_height_title" />

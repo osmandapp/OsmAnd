@@ -18,14 +18,16 @@ object AisFormatter {
 
 	@JvmStatic
 	fun formatMinutes(app: OsmandApplication, minutes: Int): String =
-		app.getString(R.string.ais_minutes_short, minutes)
+		app.getString(R.string.ltr_or_rtl_combine_via_space, minutes.toString(),
+			app.getString(R.string.shared_string_minute_lowercase))
 
 	@JvmStatic
 	fun formatNauticalMiles(app: OsmandApplication, miles: Float): String {
 		val metrics = app.settings.METRIC_SYSTEM.get()
 		if (metrics == MetricsConstants.NAUTICAL_MILES_AND_METERS
 			|| metrics == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-			return app.getString(R.string.ais_nautical_miles_short, formatMiles(miles))
+			return app.getString(R.string.ltr_or_rtl_combine_via_space, formatMiles(miles),
+				app.getString(R.string.nm))
 		}
 		return OsmAndFormatter.getFormattedDistance(miles * METERS_IN_NAUTICAL_MILE, app)
 	}

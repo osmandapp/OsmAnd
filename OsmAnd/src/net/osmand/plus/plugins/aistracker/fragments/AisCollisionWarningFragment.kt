@@ -31,7 +31,7 @@ class AisCollisionWarningFragment : AisBaseFragment() {
 		savedInstanceState: Bundle?
 	): View {
 		val view = inflater.inflate(R.layout.fragment_ais_collision_warning, container, false)
-		setupToolbar(view, R.string.ais_collision_warning, R.string.ais_reset_sliders) {
+		setupToolbar(view, R.string.ais_collision_warning, R.string.reset_to_default) {
 			plugin.AIS_CPA_WARNING_TIME.resetToDefault()
 			plugin.AIS_CPA_WARNING_DISTANCE.resetToDefault()
 			tcpaCard.setValue(plugin.AIS_CPA_WARNING_TIME.get())

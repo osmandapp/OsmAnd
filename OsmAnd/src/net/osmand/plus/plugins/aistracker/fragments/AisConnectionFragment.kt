@@ -39,7 +39,7 @@ class AisConnectionFragment : AisBaseFragment() {
 		savedInstanceState: Bundle?
 	): View {
 		val view = inflater.inflate(R.layout.fragment_ais_connection, container, false)
-		setupToolbar(view, R.string.ais_connection, R.string.ais_reset_connection_settings) {
+		setupToolbar(view, R.string.external_device_details_connection, R.string.ais_reset_connection_settings) {
 			resetConnectionSettings()
 		}
 

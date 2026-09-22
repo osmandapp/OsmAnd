@@ -26,7 +26,7 @@
 				android:id="@+id/connection_header"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				app:groupHeaderTitle="@string/ais_connection" />
+				app:groupHeaderTitle="@string/external_device_details_connection" />
 
 			<LinearLayout
 				android:id="@+id/connection_group"

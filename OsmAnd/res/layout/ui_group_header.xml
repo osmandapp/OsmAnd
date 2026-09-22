@@ -19,7 +19,7 @@
 		android:textSize="@dimen/default_list_text_size"
 		app:lineHeight="@dimen/ui_line_height_title"
 		app:typefaceWeight="medium"
-		tools:text="@string/ais_connection" />
+		tools:text="@string/external_device_details_connection" />
 
 	<com.google.android.material.button.MaterialButton
 		android:id="@+id/trailing_action"
