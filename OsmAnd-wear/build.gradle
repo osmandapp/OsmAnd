@@ -1,0 +1,119 @@
+// Watch app. Intentionally has NO dependency on :OsmAnd or :OsmAnd-shared — the only code
+// crossing over is :OsmAnd-wear-api. Everything the watch shows is computed on the phone
+// and sent over the Data Layer.
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
+apply from: rootProject.file("versions.gradle")
+
+android {
+	namespace "net.osmand.wear"
+
+	// Google Play services pairs a phone app with its watch counterpart by applicationId AND
+	// signature. Using a different debug keystore than :OsmAnd would break the Data Layer
+	// link with no error message at all, so both must sign with the same key.
+	signingConfigs {
+		development {
+			storeFile file("../keystores/debug.keystore")
+			storePassword "android"
+			keyAlias "androiddebugkey"
+			keyPassword "android"
+		}
+
+		publishing {
+			storeFile file("/var/lib/jenkins/osmand_key")
+			storePassword System.getenv("OSMAND_APK_PASSWORD")
+			keyAlias "osmand"
+			keyPassword System.getenv("OSMAND_APK_PASSWORD")
+		}
+	}
+	compileSdk osmand_compileSdk
+	buildToolsVersion = osmand_buildToolsVersion
+
+	compileOptions {
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
+	}
+
+	kotlinOptions {
+		jvmTarget = "17"
+	}
+
+	defaultConfig {
+		// Wear OS 3 (Android 11). Older watches need the deprecated embedded-APK
+		// distribution model, which this module does not support.
+		minSdkVersion 30
+		targetSdkVersion osmand_targetSdk
+
+		// Play distinguishes the watch artifact from the phone one by versionCode, so it
+		// must never collide with :OsmAnd's. Offset keeps them in lockstep but distinct.
+		versionCode 5550 + 1
+		versionCode(System.getenv("APK_NUMBER_VERSION")
+				? System.getenv("APK_NUMBER_VERSION").toInteger() + 1 : versionCode)
+		versionName "5.5.0"
+		versionName System.getenv("APK_VERSION") ? System.getenv("APK_VERSION").toString() : versionName
+	}
+
+	sourceSets {
+		main {
+			manifest.srcFile "AndroidManifest.xml"
+			java.srcDirs = ["src/main/kotlin"]
+			res.srcDirs = ["src/main/res"]
+		}
+	}
+
+	buildFeatures {
+		compose true
+	}
+
+	// The applicationId must match the phone app's, otherwise Play cannot deliver this APK
+	// to the watch paired with an OsmAnd install. Hence the flavors are duplicated here.
+	// androidFull (F-Droid) and huawei are left out on purpose: neither has Play delivery
+	// or Google Play services on the watch side.
+	flavorDimensions "version"
+	productFlavors {
+		nightlyFree {
+			dimension "version"
+			applicationId "net.osmand.dev"
+			resValue "string", "app_name", "OsmAnd Nightly"
+		}
+		gplayFree {
+			dimension "version"
+			applicationId "net.osmand"
+			resValue "string", "app_name", "OsmAnd"
+		}
+		gplayFull {
+			dimension "version"
+			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd+"
+		}
+	}
+
+	buildTypes {
+		debug {
+			signingConfig signingConfigs.development
+		}
+		release {
+			signingConfig signingConfigs.publishing
+			minifyEnabled false
+		}
+	}
+}
+
+dependencies {
+	implementation project(':OsmAnd-wear-api')
+
+	implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1"
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1"
+
+	implementation "com.google.android.gms:play-services-wearable:20.0.1"
+
+	implementation "androidx.wear.compose:compose-material3:1.6.2"
+	implementation "androidx.wear.compose:compose-foundation:1.6.2"
+	implementation "androidx.wear.compose:compose-navigation:1.6.2"
+	implementation "androidx.activity:activity-compose:1.10.1"
+	implementation "androidx.lifecycle:lifecycle-runtime-compose:2.9.4"
+	implementation "androidx.compose.ui:ui-tooling-preview:1.9.4"
+	debugImplementation "androidx.compose.ui:ui-tooling:1.9.4"
+}
