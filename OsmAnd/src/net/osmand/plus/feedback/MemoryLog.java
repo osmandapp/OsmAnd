@@ -22,6 +22,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.shared.gpx.GpxDbHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -42,6 +43,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -133,6 +135,9 @@ public class MemoryLog {
 	private static long peakUsed;
 	private static boolean sessionStarted;
 	private static final AtomicBoolean activitiesWatched = new AtomicBoolean();
+	// dumping the heap stops the world for seconds, which is an ANR when somebody is looking at
+	// the screen, so the number of activities that are resumed is kept up to date for it
+	private static final AtomicInteger resumedActivities = new AtomicInteger();
 	private static int sampleCount;
 	private static boolean summaryAffordable = true;
 	private static boolean smapsAffordable = true;
@@ -735,6 +740,12 @@ public class MemoryLog {
 		if (!app.getSettings().AUTO_HEAP_HISTOGRAM.get()) {
 			return null;
 		}
+		// the dump stops every thread for seconds: on screen that is an ANR, and the heap is
+		// highest exactly while the track library is being read, which is when it would hurt most.
+		// Nothing is remembered here, so the next sample takes it once the app is out of the way.
+		if (resumedActivities.get() > 0 || GpxDbHelper.INSTANCE.isReading()) {
+			return "histogram=postponed";
+		}
 		lastHistogramTime = time;
 		try {
 			HeapDump.collect(app);
@@ -798,10 +809,12 @@ public class MemoryLog {
 
 			@Override
 			public void onActivityResumed(@NonNull Activity activity) {
+				resumedActivities.incrementAndGet();
 			}
 
 			@Override
 			public void onActivityPaused(@NonNull Activity activity) {
+				resumedActivities.decrementAndGet();
 			}
 
 			@Override
