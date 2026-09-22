@@ -16,6 +16,8 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
+import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
 import net.osmand.router.HHRouteDataStructure.HHNetworkSegmentRes;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
@@ -23,6 +25,7 @@ import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPointRouteInfo;
 import net.osmand.router.HHRouteDataStructure.NetworkDBSegment;
+import net.osmand.util.MapUtils;
 
 /**
  * Alternative routes by the plateau (via-node) method.
@@ -51,6 +54,19 @@ import net.osmand.router.HHRouteDataStructure.NetworkDBSegment;
  * state of that call.
  */
 public class HHAlternativeRoutes<T extends NetworkDBPoint> {
+
+	/** two points of a route closer than this are the same place (meters) */
+	private static final double PLACE_RADIUS = 60;
+	/** the stretch between two visits of one place is a detour only from this length on (meters) */
+	private static final double PLACE_MIN_DETOUR = 300;
+	/** driving this much more than needed is a detour whatever the route length is (meters) */
+	private static final double PLACE_MIN_WASTE = 500;
+	/** ... and on a long route, this share of it */
+	private static final double PLACE_WASTE_SHARE = 0.02;
+	/** how many revisited places are examined per route */
+	private static final int DETOUR_CANDIDATES = 4;
+	/** how often the via node may be moved past a detour before the candidate is given up */
+	private static final int VIA_MOVES = 3;
 
 	/** attempts to expand one candidate before giving up on it */
 	private static final int ALT_EXPAND_RETRIES = 3;
@@ -297,8 +313,28 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 			if (alt == null) {
 				continue;
 			}
-			Map<Long, Double> geometry = roadSegments(prepare(alt, start, end, rrp));
-			Distinctness d = assess(alt.detailed, geometry, c.cost, "");
+			List<RouteSegmentResult> detailed = prepare(alt, start, end, rrp);
+			if (worstDetour(detailed) != null) {
+				// The expansion of the hub path sends the driver out and back. Rather than splice a
+				// better piece in - which would leave a route no single waypoint asks for again -
+				// the candidate is routed the way a user would reproduce it: start -> its via node
+				// -> end, with the via node moved past the detour until the legs come out clean.
+				List<RouteSegmentResult> legs = routeThroughCleanVia(start, end, c.via.getPoint());
+				if (legs == null || legs.isEmpty()) {
+					dropped(c, "drives out and back, and no via node of its own avoids it");
+					continue;
+				}
+				detailed = legs;
+				alt.detailed = legs;
+				c.cost = segmentsCost(legs);
+				if (c.cost > maxCost) {
+					dropped(c, "+%.1f%% over the limit once the detour is out",
+							100 * (c.cost / optCost - 1));
+					continue;
+				}
+			}
+			Map<Long, Double> geometry = roadSegments(detailed);
+			Distinctness d = assess(detailed, geometry, c.cost, "");
 			if (d == null) {
 				continue;
 			}
@@ -828,6 +864,189 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 			}
 		}
 		return true;
+	}
+
+	/** cost of a prepared route, the way the stretch limit measures it */
+	private static double segmentsCost(List<RouteSegmentResult> segments) {
+		double c = 0;
+		for (RouteSegmentResult r : segments) {
+			c += r.getRoutingTime();
+		}
+		return c;
+	}
+
+	private static double segmentsDistance(List<RouteSegmentResult> segments) {
+		double d = 0;
+		for (RouteSegmentResult r : segments) {
+			d += r.getDistance();
+		}
+		return d;
+	}
+
+	private static class RoutePoint {
+		int seg;
+		int pnt;
+		double lat, lon, dist;
+	}
+
+	/** every point of a route with the segment it belongs to and how far along it is */
+	private static List<RoutePoint> flatten(List<RouteSegmentResult> segments) {
+		List<RoutePoint> pts = new ArrayList<>();
+		double dist = 0;
+		for (int k = 0; k < segments.size(); k++) {
+			RouteSegmentResult r = segments.get(k);
+			RouteDataObject o = r.getObject();
+			int i = r.getStartPointIndex(), end = r.getEndPointIndex();
+			int step = i <= end ? 1 : -1;
+			int n = Math.abs(end - i), c = 0;
+			double segDist = r.getDistance();
+			while (true) {
+				RoutePoint p = new RoutePoint();
+				p.seg = k;
+				p.pnt = i;
+				p.lat = MapUtils.get31LatitudeY(o.getPoint31YTile(i));
+				p.lon = MapUtils.get31LongitudeX(o.getPoint31XTile(i));
+				p.dist = dist + (n == 0 ? 0 : segDist * c / n);
+				pts.add(p);
+				if (i == end) {
+					break;
+				}
+				i += step;
+				c++;
+			}
+			dist += segDist;
+		}
+		return pts;
+	}
+
+	/**
+	 * The route through a via node that does not send the driver out and back. A hub point sits on
+	 * one carriageway of a dual road, and the way to that side can be a kilometre of driving down
+	 * and turning round - the candidate is then "optimal through a silly point": every leg of it is
+	 * a shortest path and it still reads as a bug on the map. Such a route is not repaired in place
+	 * (splicing a better piece in would make it a route no single waypoint asks for again); the via
+	 * node is moved past the detour and the two legs are routed again.
+	 */
+	private List<RouteSegmentResult> routeThroughCleanVia(LatLon start, LatLon end, LatLon via) {
+		for (int attempt = 0; attempt < VIA_MOVES; attempt++) {
+			List<RouteSegmentResult> legs = routeThrough(start, end, via);
+			if (legs == null || legs.isEmpty()) {
+				return null;
+			}
+			RoutePoint[] detour = worstDetour(legs);
+			if (detour == null) {
+				return legs;
+			}
+			via = new LatLon(detour[1].lat, detour[1].lon);
+		}
+		return null;
+	}
+
+	/** the route a user gets from one waypoint: start -> via -> end, each leg routed on its own */
+	private List<RouteSegmentResult> routeThrough(LatLon start, LatLon end, LatLon via) {
+		try {
+			RoutingContext local = new RoutingContext(hctx.rctx);
+			local.calculationProgress = new RouteCalculationProgress();
+			RoutePlannerFrontEnd frontEnd = new RoutePlannerFrontEnd();
+			frontEnd.setUseOnlyHHRouting(true)
+					.setHHRoutingConfig(HHRoutePlanner.prepareDefaultRoutingConfig(null));
+			List<LatLon> inter = new ArrayList<>();
+			inter.add(via);
+			RouteCalcResult res = frontEnd.searchRoute(local, start, end, inter);
+			return res.getError() == null ? res.getList() : null;
+		} catch (Exception | StackOverflowError e) {
+			return null;
+		}
+	}
+
+	/**
+	 * The stretch the route drives to come back to a place it has already been, when the way
+	 * between those two points is much shorter. Decided on the distance driven and never on cost:
+	 * the route carries the costs of one search and the comparison route those of another, and by
+	 * cost a way over the very same roads can look hundreds of seconds cheaper.
+	 */
+	private RoutePoint[] worstDetour(List<RouteSegmentResult> legs) {
+		List<RoutePoint> pts = flatten(legs);
+		double length = segmentsDistance(legs);
+		for (RoutePoint[] pair : worstPerPlace(revisitPairs(pts))) {
+			RouteCalcResult best = routeBetween(legs.get(pair[0].seg), pair[0].pnt,
+					legs.get(pair[1].seg), pair[1].pnt);
+			if (best == null || best.detailed.isEmpty()) {
+				continue;
+			}
+			double driven = pair[1].dist - pair[0].dist;
+			double needed = segmentsDistance(best.detailed);
+			// Two bars, and both have to be cleared. The ratio says the stretch is a detour rather
+			// than the shape of a junction; the share says it is worth doing something about - a
+			// 500 m loop on an 80 km route is a roundabout, not a fault, and rebuilding the whole
+			// candidate around it costs a good alternative (measured on Pisa -> Prato: +12% became
+			// +27% because of one 543 m loop).
+			if (driven >= 2 * needed + PLACE_MIN_DETOUR
+					&& driven - needed > Math.max(PLACE_MIN_WASTE, PLACE_WASTE_SHARE * length)) {
+				return pair;
+			}
+		}
+		return null;
+	}
+
+	/** the pairs of route points that sit in the same place with driving in between */
+	private static List<RoutePoint[]> revisitPairs(List<RoutePoint> pts) {
+		List<RoutePoint[]> found = new ArrayList<>();
+		for (int i = 0; i < pts.size(); i++) {
+			for (int j = i + 1; j < pts.size(); j++) {
+				RoutePoint a = pts.get(i), b = pts.get(j);
+				if (a.seg == b.seg || b.dist - a.dist <= PLACE_MIN_DETOUR) {
+					continue;
+				}
+				if (MapUtils.getDistance(a.lat, a.lon, b.lat, b.lon) < PLACE_RADIUS) {
+					found.add(new RoutePoint[] {a, b});
+				}
+			}
+		}
+		return found;
+	}
+
+	/** the longest detour of each place, worst first - one revisit produces a pair per point */
+	private static List<RoutePoint[]> worstPerPlace(List<RoutePoint[]> found) {
+		found.sort(new Comparator<RoutePoint[]>() {
+			@Override
+			public int compare(RoutePoint[] x, RoutePoint[] y) {
+				return Double.compare(y[1].dist - y[0].dist, x[1].dist - x[0].dist);
+			}
+		});
+		List<RoutePoint[]> distinct = new ArrayList<>();
+		for (RoutePoint[] pair : found) {
+			boolean seen = false;
+			for (RoutePoint[] kept : distinct) {
+				if (MapUtils.getDistance(pair[0].lat, pair[0].lon, kept[0].lat, kept[0].lon) < 300
+						&& MapUtils.getDistance(pair[1].lat, pair[1].lon, kept[1].lat, kept[1].lon) < 300) {
+					seen = true;
+					break;
+				}
+			}
+			if (!seen) {
+				distinct.add(pair);
+			}
+			if (distinct.size() >= DETOUR_CANDIDATES) {
+				break;
+			}
+		}
+		return distinct;
+	}
+
+	/** the best way from one point of a route to another, searched on a copy of the context */
+	private RouteCalcResult routeBetween(RouteSegmentResult a, int ai, RouteSegmentResult b, int bi) {
+		try {
+			RouteSegmentPoint from = new RouteSegmentPoint(a.getObject(),
+					Math.min(ai, a.getObject().getPointsLength() - 2), 0);
+			RouteSegmentPoint to = new RouteSegmentPoint(b.getObject(),
+					Math.min(bi, b.getObject().getPointsLength() - 2), 0);
+			RoutingContext local = new RoutingContext(hctx.rctx);
+			local.calculationProgress = new RouteCalculationProgress();
+			return new RoutePlannerFrontEnd().searchRouteInternalPrepare(local, from, to, null);
+		} catch (Exception | StackOverflowError e) {
+			return null;
+		}
 	}
 
 	/** length of the road pieces that `segments` drives more than once */

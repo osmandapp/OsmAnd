@@ -81,7 +81,7 @@ public class HHRouteDataStructure {
 		// rarely is. On a route long enough for ALT_STRETCH to mean minutes this allowance is nothing.
 		public double ALT_STRETCH_ABS = 180; // seconds allowed on top of ALT_STRETCH
 		public double ALT_MIN_PLATEAU = 0.1; // min share of the route driven as its own optimal road
-		public double ALT_MAX_SHARING = 0.6; // coarse hub-graph pre-filter (stage 1)
+		public double ALT_MAX_SHARING = 0.95; // coarse hub-graph pre-filter (stage 1)
 		public double ALT_MIN_DISTINCT_REL = 0.2; // exact geometry filter (stage 2), share of main length
 		// Only a floor under the relative rule, for routes too short to make it meaningful: a fixed
 		// requirement of a kilometre or two is a third of a 4 km city route and rejects everything
