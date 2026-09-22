@@ -23,6 +23,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.base.BaseMaterialFragment;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -104,6 +105,19 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 					&& fragment instanceof BaseSettingsFragment
 					&& ((BaseSettingsFragment) fragment).getStatusBarColorId() != -1) {
 				return (BaseSettingsFragment) fragment;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public BaseMaterialFragment getVisibleBaseMaterialFragment(int... ids) {
+		for (int id : ids) {
+			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
+			if (fragment != null && fragment.isAdded() && !fragment.isRemoving()
+					&& fragment instanceof BaseMaterialFragment
+					&& ((BaseMaterialFragment) fragment).getStatusBarColorId() != -1) {
+				return (BaseMaterialFragment) fragment;
 			}
 		}
 		return null;

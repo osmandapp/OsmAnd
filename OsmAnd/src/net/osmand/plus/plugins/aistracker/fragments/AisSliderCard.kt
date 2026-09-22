@@ -14,7 +14,7 @@ import net.osmand.plus.widgets.ui.GroupFooterView
  * immediately - there is no Save button on these screens.
  */
 class AisSliderCard<T>(
-	view: View,
+	val view: View,
 	private val footer: GroupFooterView,
 	private val values: List<T>,
 	private val formatValue: (T) -> String,

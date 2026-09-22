@@ -136,6 +136,14 @@ class AisConnectionFragment : AisBaseFragment() {
 		if (validationRequested) {
 			validateHost()
 			validatePort()
+		} else {
+			/* an error shown on blur goes away as soon as the field is valid again */
+			if (hostLayout.error != null && isHostValid()) {
+				hostLayout.error = null
+			}
+			if (portLayout.error != null && isPortValid()) {
+				portLayout.error = null
+			}
 		}
 	}
 

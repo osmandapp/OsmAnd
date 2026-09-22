@@ -86,8 +86,10 @@ object AisMmsiDialog {
 			}
 
 			editText.requestFocus()
-			dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
 		}
+		/* the keyboard has to come up with the dialog - set before show(), on the window the
+		 * dialog already has after create() */
+		dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
 		dialog.show()
 	}
 }

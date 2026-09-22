@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<style name="OsmandMaterialLightTheme" parent="Theme.Material3.Light">
+	<!-- Material 3 Expressive: the same colour system as Material 3 plus the component styles the
+	     Material 3 screens are designed with (connected button groups, sized sliders, expressive
+	     buttons and dialogs). Screens that need the stock M3 switch set its style explicitly. -->
+	<style name="OsmandMaterialLightTheme" parent="Theme.Material3Expressive.Light">
 
 		<item name="colorPrimary">@color/primary_light</item>
 		<item name="colorOnPrimary">@color/on_primary_light</item>

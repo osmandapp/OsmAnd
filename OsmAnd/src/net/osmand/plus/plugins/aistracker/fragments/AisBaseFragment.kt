@@ -34,9 +34,9 @@ abstract class AisBaseFragment : BaseMaterialFragment() {
 		PluginsHelper.requirePlugin(AisTrackerPlugin::class.java)
 	}
 
-	override fun getMaterialThemeRes(nightMode: Boolean): Int =
-		if (nightMode) R.style.OsmandMaterialExpressiveDarkTheme
-		else R.style.OsmandMaterialExpressiveLightTheme
+	/* the screens are full screen on colorSurface, so the status bar takes the same colour */
+	override fun getStatusBarColorId(): Int =
+		if (nightMode) R.color.surface_dark else R.color.surface_light
 
 	/**
 	 * @param resetActionId title of the trailing app bar action, used for its content description.

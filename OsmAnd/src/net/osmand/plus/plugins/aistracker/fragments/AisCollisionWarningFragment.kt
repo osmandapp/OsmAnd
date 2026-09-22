@@ -90,7 +90,13 @@ class AisCollisionWarningFragment : AisBaseFragment() {
 	private fun updateState() {
 		val enabled = plugin.AIS_CPA_ENABLED.get()
 		enabledContent.visibility = if (enabled) View.VISIBLE else View.GONE
-		mmsiBanner.visibility = if (plugin.AIS_OWN_MMSI.get() == 0) View.VISIBLE else View.GONE
+		val bannerShown = plugin.AIS_OWN_MMSI.get() == 0
+		mmsiBanner.visibility = if (bannerShown) View.VISIBLE else View.GONE
+		/* the footer of the main switch already keeps 16dp to the next card; the gap of the
+		 * first card is only needed below the banner */
+		(tcpaCard.view.layoutParams as ViewGroup.MarginLayoutParams).topMargin =
+			if (bannerShown) resources.getDimensionPixelSize(R.dimen.ui_group_gap) else 0
+		tcpaCard.view.requestLayout()
 		updateMainSwitchFooter()
 	}
 
