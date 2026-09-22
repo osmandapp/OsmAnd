@@ -17,13 +17,16 @@ import co.touchlab.sqliter.interop.SQLiteException
 import co.touchlab.sqliter.interop.SQLiteExceptionErrorCode
 import co.touchlab.sqliter.interop.SqliteErrorType
 import net.osmand.shared.api.SQLiteAPI.*
+import net.osmand.shared.util.KLock
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.synchronized
 import okio.Path.Companion.toPath
 
 class SQLiteAPIImpl : SQLiteAPI {
 
 	companion object {
 		private val log = LoggerFactory.getLogger("SQLiteAPIImpl")
+		private val RECREATE_LOCK = KLock()
 	}
 
 	override fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection? {
@@ -31,7 +34,7 @@ class SQLiteAPIImpl : SQLiteAPI {
 			open(name, null)
 		} catch (e: SQLiteException) {
 			if (isDamaged(e)) {
-				recreateDatabase(name, e)
+				recreateDatabase(name)
 			} else {
 				log.error("Failed to get or create database $name", e)
 				null
@@ -62,16 +65,26 @@ class SQLiteAPIImpl : SQLiteAPI {
 	}
 
 	// The file never opens again, so null here would fail every later read and write too
-	private fun recreateDatabase(name: String, cause: SQLiteException): SQLiteConnection? {
-		log.error("Database $name is damaged, recreating it", cause)
-		DatabaseFileContext.deleteDatabase(name)
-		return try {
-			open(name, null)
-		} catch (e: SQLiteException) {
-			log.error("Failed to recreate database $name", e)
-			null
+	private fun recreateDatabase(name: String): SQLiteConnection? =
+		synchronized(RECREATE_LOCK) {
+			try {
+				// Another thread may have recreated the file while this one waited for the lock
+				return@synchronized open(name, null)
+			} catch (e: SQLiteException) {
+				if (!isDamaged(e)) {
+					log.error("Failed to get or create database $name", e)
+					return@synchronized null
+				}
+				log.error("Database $name is damaged, recreating it", e)
+			}
+			DatabaseFileContext.deleteDatabase(name)
+			try {
+				open(name, null)
+			} catch (e: SQLiteException) {
+				log.error("Failed to recreate database $name", e)
+				null
+			}
 		}
-	}
 
 	private fun isDamaged(e: SQLiteException): Boolean {
 		// errorType throws when sqlite reports a code it does not know
