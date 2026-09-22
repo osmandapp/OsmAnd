@@ -821,7 +821,7 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 	}
 
 	/** the junction the two halves of a detailed candidate are joined at */
-	private static LatLon viaPoint(DetailedCandidate c) {
+	private LatLon viaPoint(DetailedCandidate c) {
 		RouteDataObject o = c.fwd.getRoad();
 		int i = c.fwd.getSegmentStart();
 		return new LatLon(MapUtils.get31LatitudeY(o.getPoint31YTile(i)), MapUtils.get31LongitudeX(o.getPoint31XTile(i)));
@@ -927,12 +927,12 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 		}
 	}
 
-	private static long cellKey(int cx, int cy) {
+	private long cellKey(int cx, int cy) {
 		return ((long) cx << 32) ^ (cy & 0xffffffffL);
 	}
 
 	/** every point of the route in order: x31, y31, the segment it belongs to and its index there */
-	private static List<int[]> routePoints(List<RouteSegmentResult> segments) {
+	private List<int[]> routePoints(List<RouteSegmentResult> segments) {
 		List<int[]> pts = new ArrayList<>();
 		for (int k = 0; k < segments.size(); k++) {
 			RouteSegmentResult r = segments.get(k);
