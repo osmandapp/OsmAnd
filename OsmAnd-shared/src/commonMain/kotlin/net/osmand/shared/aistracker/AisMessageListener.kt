@@ -67,12 +67,19 @@ open class AisMessageListener {
         initListeners()
     }
 
+    /* The forms without a connection listener are separate constructors, not default arguments:
+     * Kotlin default values are not exported to Swift, and the iOS app builds this module from
+     * source and calls them. */
+
     // For TCP
+    constructor(dataListener: AisDataListener, serverIp: String, serverPort: Int)
+            : this(dataListener, serverIp, serverPort, null)
+
     constructor(
         dataListener: AisDataListener,
         serverIp: String,
         serverPort: Int,
-        connectionListener: AisConnectionListener? = null
+        connectionListener: AisConnectionListener?
     ) {
         this.aisObjectListener = dataListener
         this.nmeaLocationListener = dataListener
@@ -81,10 +88,12 @@ open class AisMessageListener {
     }
 
     // For UDP
+    constructor(dataListener: AisDataListener, udpPort: Int) : this(dataListener, udpPort, null)
+
     constructor(
         dataListener: AisDataListener,
         udpPort: Int,
-        connectionListener: AisConnectionListener? = null
+        connectionListener: AisConnectionListener?
     ) {
         this.aisObjectListener = dataListener
         this.nmeaLocationListener = dataListener
