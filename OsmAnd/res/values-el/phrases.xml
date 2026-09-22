@@ -486,7 +486,7 @@
     <string name="poi_boat_jetski_rental_yes">Τζετ σκι: ναι</string>
     <string name="poi_boat_jetski_rental_no">Τζετ σκι: όχι</string>
     <string name="poi_power_pole">Ηλεκτρικός στύλος</string>
-    <string name="poi_residential">Περιοχή κατοικιών</string>
+    <string name="poi_residential">Οικιστική περιοχή</string>
     <string name="poi_industrial">Βιομηχανική περιοχή</string>
     <string name="poi_landuse_railway">Σιδηροδρομική περιοχή</string>
     <string name="poi_commercial">Εμπορική χρήση γης</string>
@@ -3175,11 +3175,11 @@
     <string name="poi_government_social_security">Κοινωνική ασφάλιση</string>
     <string name="poi_government_social_services">Κοινωνικές υπηρεσίες</string>
     <string name="poi_government_treasury">Υπουργείο οικονομικών</string>
-    <string name="poi_government_transportation">Υπουργείο μεταφορών</string>
+    <string name="poi_government_transportation">Φορέας μεταφορών</string>
     <string name="poi_government_legislative">Βουλή</string>
     <string name="poi_vhf">Κανάλι VHF</string>
     <string name="poi_gorge">Χαράδρα</string>
-    <string name="poi_couloir">Διάδρομος</string>
+    <string name="poi_couloir">Ορειβατικό λούκι</string>
     <string name="poi_mountain_area">Ορεινή ζώνη</string>
     <string name="poi_surface_clay">Πηλός</string>
     <string name="poi_surface_tartan">Ταρτάν</string>
@@ -4711,4 +4711,6 @@
     <string name="poi_website_menu">Μενού</string>
     <string name="poi_air_conditioning_yes">Ναι</string>
     <string name="poi_air_conditioning_no">Όχι</string>
+    <string name="poi_healthcare_speciality_travel_clinic">Ταξιδιωτική κλινική</string>
+    <string name="poi_mobile_money_agent">Πρακτορείο μεταφοράς χρημάτων</string>
 </resources>
