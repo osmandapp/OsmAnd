@@ -74,6 +74,8 @@ public class AlternativeRoutesTest {
 		int maxAlternatives = Integer.MAX_VALUE;
 		/** the first alternative offered may not cost more than this much over the main route (%) */
 		double maxFirstStretchPercent = Double.MAX_VALUE;
+		/** and no alternative at all may cost more than this much over it (%) */
+		double maxStretchPercent = Double.MAX_VALUE;
 		boolean ignore;
 		/** at least one alternative must pass through each of these */
 		List<ExpectedVia> expectedVia = new ArrayList<>();
@@ -117,6 +119,14 @@ public class AlternativeRoutesTest {
 			Assert.assertTrue("the first alternative offered costs +" + Math.round(stretch)
 					+ "%, more than the +" + Math.round(te.maxFirstStretchPercent) + "% this route has",
 					stretch <= te.maxFirstStretchPercent);
+		}
+		if (te.maxStretchPercent != Double.MAX_VALUE) {
+			for (int i = 1; i < routes.size(); i++) {
+				double stretch = 100 * (routes.get(i).cost / main.cost - 1);
+				Assert.assertTrue("alternative " + i + " costs +" + Math.round(stretch)
+						+ "%, more than the +" + Math.round(te.maxStretchPercent)
+						+ "% this route has to offer", stretch <= te.maxStretchPercent);
+			}
 		}
 		assertSaneAlternatives(routes, main);
 		for (ExpectedVia via : te.expectedVia) {

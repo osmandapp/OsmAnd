@@ -311,5 +311,35 @@
       "longitude": 30.580448
     },
     "minAlternatives": 1
+  },
+  {
+    "testName": "Kyiv, Zhuliany -> Kharkivskyi: two cheap ways across the city",
+    "description": "The city offers two ways east that cost under +7%, and both must be the ones proposed. Ranked on difference alone the second slot goes to a 35 km sweep around the city (+37%) instead, so this route measures ALT_STRETCH_PREFERRED: candidates within it are offered before the merely acceptable ones.",
+    "map": "Ukraine_kyiv-city_europe_2.obf",
+    "startPoint": {
+      "latitude": 50.393081,
+      "longitude": 30.405338
+    },
+    "endPoint": {
+      "latitude": 50.419357,
+      "longitude": 30.614838
+    },
+    "minAlternatives": 2,
+    "maxStretchPercent": 20
+  },
+  {
+    "testName": "Amsterdam, Sloten -> Slotermeer: the via node that has to be moved",
+    "description": "Routing this candidate through its own via node still drives out and back, and only moving the via node past that detour produces the +8% way through the district. Without the move the candidate is dropped and its slot goes to a 3.6 km loop costing +58%.",
+    "map": "Netherlands_noord-holland_europe_2.obf",
+    "startPoint": {
+      "latitude": 52.34791,
+      "longitude": 4.825855
+    },
+    "endPoint": {
+      "latitude": 52.355035,
+      "longitude": 4.849323
+    },
+    "minAlternatives": 2,
+    "maxStretchPercent": 40
   }
 ]
