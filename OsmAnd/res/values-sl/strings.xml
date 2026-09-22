@@ -1343,7 +1343,6 @@
     <string name="report">Poročilo</string>
     <string name="storage_permission_restart_is_required">Sedaj je mogoče program uporabljati tako, da zapisuje podatke na zunanji nosilec. Poseg zahteva ponovni zagon programa.</string>
     <string name="full_report">Polno poročilo</string>
-    <string name="file_name_containes_illegal_char">V imenu datoteke je nedovoljen znak</string>
     <string name="rendering_value_thin_name">Tanko</string>
     <string name="rendering_value_medium_name">Srednje</string>
     <string name="rendering_value_bold_name">Krepko</string>

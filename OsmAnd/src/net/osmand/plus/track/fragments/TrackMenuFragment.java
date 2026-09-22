@@ -133,7 +133,6 @@ import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
-import net.osmand.plus.track.helpers.save.SaveGpxListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -937,6 +936,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (menuStateChanged) {
 			menuTypeChanged = false;
 		}
+		mapDisplayPositionManager.updateMapDisplayPosition(true);
 	}
 
 	@Override

@@ -1229,7 +1229,6 @@
     <string name="quick_action_new_action">Amestar una aición</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
     <string name="quick_action_item_action">Action %d</string>
-    <string name="file_name_containes_illegal_char">Illegal character in filename</string>
     <string name="update_time">Momentu del anovamientu</string>
     <string name="dashboard_or_drawer_description">A choice is offered to primarily control the app via the flexible dashboard or a static menu. Your choice can always be changed in the dashboard settings.</string>
     <string name="use_drawer_btn">Use menu</string>

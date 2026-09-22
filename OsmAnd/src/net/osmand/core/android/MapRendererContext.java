@@ -192,8 +192,7 @@ public class MapRendererContext {
 	}
 
 	protected int getRasterTileSize() {
-		OsmandMap osmandMap = app.getOsmandMap();
-		float mapDensity = osmandMap != null ? osmandMap.getMapDensity() : app.getSettings().MAP_DENSITY.get();
+		float mapDensity = OsmandMap.getMapDensitySettings(app);
 		float mapDensityAligned = mapDensity > 2.0f ? 2.0f : Math.min(mapDensity, 1.0f);
 		return (int) (getReferenceTileSize() * mapDensityAligned);
 	}
@@ -246,7 +245,10 @@ public class MapRendererContext {
 			}
 		}
 		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
-		float mapDensity = settings.MAP_DENSITY.get();
+		// must match getRasterTileSize(): the raster tile size and the style scale factor
+		// are two halves of the same magnifier, mixing the phone and the Android Auto values
+		// stretches the rendered tiles
+		float mapDensity = OsmandMap.getMapDensitySettings(app);
 		float textScale = settings.TEXT_SCALE.get();
 		QStringStringHash styleSettings = getMapStyleSettings();
 
@@ -330,10 +332,26 @@ public class MapRendererContext {
 
 	@NonNull
 	protected QStringStringHash getMapStyleSettings() {
-		// Apply map style settings
-		OsmandSettings settings = app.getSettings();
+		QStringStringHash styleSettings = new QStringStringHash();
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (storage == null) {
+			// Neither the selected style nor "default" could be loaded. Keep the core style
+			// defaults instead of failing the caller: initialization and Android Auto call this.
+			Log.e(TAG, "No rendering rules storage, map style settings are not applied");
+		} else {
+			for (Map.Entry<String, String> setting : collectStyleProperties(storage).entrySet()) {
+				styleSettings.set(setting.getKey(), setting.getValue());
+			}
+		}
+		if (nightMode) {
+			styleSettings.set("nightMode", "true");
+		}
+		return styleSettings;
+	}
 
+	@NonNull
+	private Map<String, String> collectStyleProperties(@NonNull RenderingRulesStorage storage) {
+		OsmandSettings settings = app.getSettings();
 		List<RenderingRuleProperty> customRules = storage.PROPS.getCustomRules();
 		Map<String, RenderingClass> renderingClasses = storage.getRenderingClasses();
 		Map<String, String> properties = new LinkedHashMap<>(customRules.size() + renderingClasses.size());
@@ -362,14 +380,7 @@ public class MapRendererContext {
 			properties.put(name, String.valueOf(enabled));
 			parentsStates.put(name, enabled);
 		}
-		QStringStringHash styleSettings = new QStringStringHash();
-		for (Map.Entry<String, String> setting : properties.entrySet()) {
-			styleSettings.set(setting.getKey(), setting.getValue());
-		}
-		if (nightMode) {
-			styleSettings.set("nightMode", "true");
-		}
-		return styleSettings;
+		return properties;
 	}
 
 	public void removeDirectory(String dirPath) {

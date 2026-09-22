@@ -405,7 +405,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 				FavoriteSelection selection = new FavoriteSelection(selectionHelper.getSelectedItems());
 				if (selection.isOnlyPoints()) {
 					menu.showPointsSelectOptionsMenu(view, selection.getPoints(), selectedGroup, nightMode,
-							FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this);
+							FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this);
 				} else if (selection.hasFolders()) {
 					menu.showDeleteSelectionOptionsMenu(view, selection, nightMode, FavoriteFolderFragment.this);
 				}

@@ -1094,7 +1094,7 @@
     <string name="north_abbreviation">Β</string>
     <string name="optional_point_name">Προαιρετικό όνομα σημείου</string>
     <string name="transport_nearby_routes_within">Κοντινές διαδρομές</string>
-    <string name="transport_nearby_routes">Με</string>
+    <string name="transport_nearby_routes">Μέσα σε</string>
     <string name="map_import_error">Σφάλμα εισαγωγής χάρτη</string>
     <string name="map_imported_successfully">Ο χάρτης εισήχθη</string>
     <string name="make_as_start_point">Κάντε αυτό ως το σημείο εκκίνησης</string>
@@ -1170,7 +1170,7 @@
     <string name="shared_string_finish">Τερματισμός</string>
     <string name="plan_route">Σχεδιασμός διαδρομής</string>
     <string name="shared_string_sort">Ταξινόμηση</string>
-    <string name="coordinate_input">Η εισαγωγή συντεταγμένης</string>
+    <string name="coordinate_input">Εισαγωγή συντεταγμένης</string>
     <string name="marker_save_as_track_descr">Εξαγωγή των δεικτών σας στο παρακάτω αρχείο GPX:</string>
     <string name="move_to_history">Μετακίνηση στο ιστορικό</string>
     <string name="group_will_be_removed_after_restart">Η ομάδα θα εξαφανιστεί την επόμενη φορά που θα ξεκινήσετε την εφαρμογή.</string>
@@ -1594,8 +1594,8 @@
     <string name="search_poi_category_hint">Πληκτρολογήστε για αναζήτηση όλων</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Βοηθός χαρτογράφου OSM</string>
     <string name="min_mile">λεπτά/μίλι</string>
-    <string name="min_km">λεπτά/χιλιόμετρο</string>
-    <string name="m_s">μέτρα/δευτερόλεπτο</string>
+    <string name="min_km">λεπτά/χλμ</string>
+    <string name="m_s">μ/δ</string>
     <string name="lang_bpy">Μπισνουπρια</string>
     <string name="osm_changes_added_to_local_edits">Οι αλλαγές του OSM προστέθηκαν στο τοπικό σύνολο αλλαγών</string>
     <string name="action_create">Ενέργεια δημιουργίας</string>
@@ -1632,12 +1632,9 @@
     <string name="settings_privacy">Ιδιωτικότητα</string>
     <string name="rendering_attr_roadStyle_description">Μορφή δρόμου</string>
     <string name="navigate_point_olc">Κωδικός Ανοιχτής Τοποθεσίας</string>
-    <string name="navigate_point_olc_info_invalid">Άκυρο OLC
-\n</string>
-    <string name="navigate_point_olc_info_short">Σύντομος OLC
-\nΠαρακαλούμε, δώστε έναν πλήρη κωδικό</string>
-    <string name="navigate_point_olc_info_area">Έγκυρος πλήρης OLC
-\nΑντιπροσωπεύει την περιοχή: %1$s x %2$s</string>
+    <string name="navigate_point_olc_info_invalid">Άκυρος OLC\n</string>
+    <string name="navigate_point_olc_info_short">Σύντομος OLC\nΠαρακαλούμε, δώστε έναν πλήρη κωδικό</string>
+    <string name="navigate_point_olc_info_area">Έγκυρος πλήρης OLC\nΑντιπροσωπεύει την περιοχή: %1$s x %2$s</string>
     <string name="home_button">Σπίτι</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Διαδρομές αγοραίου</string>
     <string name="search_radius_proximity">Μέσα σε</string>
@@ -1800,7 +1797,6 @@
     <string name="number_of_contributors">Αριθμός συντελεστών</string>
     <string name="number_of_edits">Αριθμός επεξεργασιών</string>
     <string name="reports_for">Αναφορά για</string>
-    <string name="file_name_containes_illegal_char">Ακατάλληλος χαρακτήρας στο όνομα αρχείου</string>
     <string name="configure_screen_quick_action">Γρήγορη ενέργεια</string>
     <string name="quick_action_item_action">Ενέργεια %d</string>
     <string name="quick_action_item_screen">Οθόνη %d</string>
@@ -1870,12 +1866,12 @@
     <string name="daily_map_updates">Ωριαίες ενημερώσεις χαρτών</string>
     <string name="in_app_purchase_desc">Εφάπαξ πληρωμή</string>
     <string name="popular_destinations">Δημοφιλείς προορισμοί</string>
-    <string name="travel_card_update_descr">Νέα δεδομένα βικιταξιδιών είναι διαθέσιμα, ενημερώστε τα για να το απολαύσετε.</string>
-    <string name="travel_card_download_descr">Κατεβάστε τους οδηγούς ταξιδιών των βικιταξιδιών για να προβάλετε τα άρθρα για μέρη σε όλον τον κόσμο χωρίς σύνδεση διαδικτύου.</string>
+    <string name="travel_card_update_descr">Νέα δεδομένα Βικιταξιδιών είναι διαθέσιμα, ενημερώστε τα για να το απολαύσετε.</string>
+    <string name="travel_card_download_descr">Κατεβάστε τους ταξιδιωτικούς οδηγούς των Βικιταξιδιών για να προβάλετε άρθρα για μέρη σε όλον τον κόσμο χωρίς σύνδεση διαδικτύου.</string>
     <string name="update_is_available">Υπάρχει διαθέσιμη ενημέρωση</string>
     <string name="download_file">Λήψη αρχείου</string>
     <string name="start_editing_card_image_text">Ο ελεύθερος παγκόσμιος ταξιδιωτικός οδηγός που οποιοσδήποτε μπορεί να επεξεργαστεί.</string>
-    <string name="welcome_to_open_beta_description">Το OsmAnd Travel βασίζεται, προς το παρόν, στα βικιταξίδια. Ελέγξτε όλα τα χαρακτηριστικά δωρεάν κατά την ανοικτή βήμα δοκιμή.</string>
+    <string name="welcome_to_open_beta_description">Οι Ταξιδιωτικοί οδηγοί βασίζονται, προς το παρόν, στα Βικιταξίδια. Ελέγξτε όλα τα χαρακτηριστικά δωρεάν κατά την ανοικτή δοκιμή beta.</string>
     <string name="start_editing_card_description">Μπορείτε και πρέπει να επεξεργαστείτε οποιοδήποτε άρθρο στο βικιταξίδια, Μοιραστείτε τη γνώση, την εμπειρία, το ταλέντο και την προσοχή σας.</string>
     <string name="start_editing">Έναρξη επεξεργασίας</string>
     <string name="get_unlimited_access">Πάρτε απεριόριστη πρόσβαση</string>
@@ -2162,7 +2158,7 @@
     <string name="base_profile_descr_car">Αυτοκίνητο, φορτηγό, μηχανή</string>
     <string name="base_profile_descr_bicycle">Ποδήλατο βουνού, μοτοποδήλατο, άλογο</string>
     <string name="base_profile_descr_pedestrian">Περπάτημα, πεζοπορία, τρέξιμο</string>
-    <string name="base_profile_descr_public_transport">Όλοι οι δημόσιοι τύποι μεταφοράς</string>
+    <string name="base_profile_descr_public_transport">Μέσα δημόσιας συγκοινωνίας</string>
     <string name="base_profile_descr_boat">Σκάφος, κωπηλασία, ιστιοπλοΐα</string>
     <string name="base_profile_descr_aircraft">Αεροπλάνο, ανεμοπορία</string>
     <string name="routing_profile_geocoding">Γεωκωδικοποίηση</string>
@@ -2857,7 +2853,7 @@
     <string name="help_article_navigation_routing_train_routing_name">Δρομολόγηση με τραίνο</string>
     <string name="poi_categories">Κατηγορίες ΣΕ</string>
     <string name="root_folder">Ριζικός φάκελος</string>
-    <string name="help_article_navigation_routing_public_transport_navigation_name">Δρομολόγηση με δημόσια μεταφορά</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Δρομολόγηση με δημόσια συγκοινωνία</string>
     <string name="sort_date_descending">Παλαιότερη ημερομηνία πρώτη</string>
     <string name="send_logcat_log_descr">Αναλυτικό αρχείο καταγραφής</string>
     <string name="shared_string_cache">Μνήμη cache</string>
@@ -3121,7 +3117,7 @@
     <string name="help_article_purchases_android_name">Αγορές σε Android</string>
     <string name="external_device_details_disconnect">Αποσύνδεση</string>
     <string name="external_device_connected">Συνδέθηκε</string>
-    <string name="download_to_device">Λήψη στην συσκευή</string>
+    <string name="download_to_device">Λήψη στη συσκευή</string>
     <string name="no_search_results">Κανένα αποτέλεσμα</string>
     <string name="telegram_chats_descr">Μπείτε σε μία από τις τοπικές μας συνομιλίες στο Telegram.</string>
     <string name="metric_lbs">λβρ</string>
@@ -3130,7 +3126,7 @@
 \nΑυτή η ενέργεια δεν μπορεί να αναιρεθεί.</string>
     <string name="free_account">Δωρεάν λογαριασμός</string>
     <string name="ant_plus_searching_text_description">Παρακαλούμε κρατήστε την συσκευή κοντά στον αισθητήρα. Πρέπει να έχετε ενεργοποιημένο τον αισθητήρα για να μπορεί να τον βρει το OsmAnd.</string>
-    <string name="report_an_issues">Αναφέρετε ένα ζήτημα</string>
+    <string name="report_an_issues">Αναφέρετε ένα πρόβλημα</string>
     <string name="telegram_chats">Συνομιλίες Telegram</string>
     <string name="routing_attr_hazmat_category_usa_9_name">Διάφορα</string>
     <string name="shared_string_new_track">Νέο ίχνος</string>
@@ -3424,7 +3420,7 @@
     <string name="shared_string_show_icon">Εμφάνιση εικονιδίου</string>
     <string name="shortcut_navigate_to_work">Πλοήγηση σε \'Δουλειά\'</string>
     <string name="shared_string_articles">Άρθρα</string>
-    <string name="shared_string_simulate">Προσομοίωσε</string>
+    <string name="shared_string_simulate">Προσομοίωση</string>
     <string name="shared_string_replace">Αντικατάσταση</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="top">Κορυφή</string>
@@ -3531,7 +3527,7 @@
     <string name="how_to_use">Πως να το χρησιμοποιήσετε:</string>
     <string name="shared_string_offline">Εκτός σύνδεσης</string>
     <string name="weather_wind_kilimeters_per_hour">Χιλιόμετρα ανά ώρα</string>
-    <string name="simulate_obd">Προσομοιώστε δεδομένα obd</string>
+    <string name="simulate_obd">Προσομοίωση δεδομένων obd</string>
     <string name="obd_vehicle_info">Πληροφορίες οχήματος</string>
     <string name="connect_obd_instructions_title">Το OsmAnd υποστηρίζει Bluetooth συνδέσεις προς OBD-II σαρωτές.</string>
     <string name="obd_how_to_connect">Πως να συνδέσετε:</string>
@@ -3567,7 +3563,7 @@
     <string name="quick_action_verb_start_stop">Έναρξη / Διακοπή</string>
     <string name="wind_widget_desc">Εμφανίζει την ταχύτητα του ανέμου του κέντρου του τρέχοντος χάρτη.</string>
     <string name="explore_wikipedia_offline">Εξερευνήστε τη Βικιπαίδεια χωρίς σύνδεση.</string>
-    <string name="quick_action_verb_turn_on_off">Ενεργοποίηση/απενεργοποίηση</string>
+    <string name="quick_action_verb_turn_on_off">Ενεργοποίηση / Απενεργοποίηση</string>
     <string name="map_widget_zoom_level_desc">Δείχνει το επίπεδο εστίασης του τρέχοντος χάρτη.</string>
     <string name="compass_always_visible">Πάντα ορατό</string>
     <string name="altitude_widget_desc">Δείχνει το ύψος πάνω από το επίπεδο της θάλασσας της τρέχουσας τοποθεσίας.</string>
@@ -3657,7 +3653,7 @@
     <string name="obd_nothing_found_text">Δεν βρέθηκαν σαρωτές</string>
     <string name="meridian_180">180ός μεσημβρινός</string>
     <string name="preview_next_turn">Προεπισκόπηση επόμενης στροφής</string>
-    <string name="ais_load_data">Φόρτωση δεδομένων AIS από αρχείο</string>
+    <string name="ais_load_data">Προσομοίωση κυκλοφορίας σκαφών</string>
     <string name="ais_address_settings">Ρυθμίσεις διεύθυνσης IP</string>
     <string name="rendering_attr_showClimbingRoutes_name">Αναρριχητικές διαδρομές</string>
     <string name="rendering_attr_showClimbingRoutes_description">Εμφάνιση αναρριχητικών διαδρομών</string>
@@ -3899,7 +3895,7 @@
     <string name="obd_fuel_type_bifuel_hydrogen">Διπλό καύσιμο που τρέχει Υδρογόνο</string>
     <string name="quick_action_search_view_desc">Διακόπτης για άνοιγμα ή κλείσιμο της αναζήτησης σε όψη.</string>
     <string name="continue_with">Συνέχεια με %1$s</string>
-    <string name="send_logcat_log">Αποστολή καταγραφής logcat</string>
+    <string name="send_logcat_log">Αποστολή αρχείων καταγραφής τρέχουσας συνεδρίας</string>
     <string name="backup_conflicts">Συγκρούσεις</string>
     <string name="set_work">Ορισμός εργασίας</string>
     <string name="obd_air_intake_temp_desc">Δείχνει την θερμοκρασία πολλαπλής εισαγωγής αέρα στον κινητήρα.</string>
@@ -3971,7 +3967,7 @@
     <string name="movies_list">Λίστα ταινιών</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Διαδρομές μηχανής εκτός δρόμου</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Εμφάνιση διαδρομών μηχανής εκτός δρόμου</string>
-    <string name="compass_click_north_is_up">Για να αλλάξετε τη λειτουργία προσανατολισμού, πατήστε και κρατήστε πατημένο</string>
+    <string name="compass_click_north_is_up">Για αλλαγή λειτουργίας προσανατολισμού, πατήστε και κρατήστε πατημένο</string>
     <string name="view_angle">Γωνία θέασης</string>
     <string name="view_angle_description">Εμφανίζει την περιοχή σε σχήμα κώνου όπου κοιτάτε την τρέχουσα στιγμή</string>
     <string name="resting_position">Θέση ακινησίας</string>
@@ -4356,7 +4352,7 @@
     <string name="weather_pressure_hpa">hPa</string>
     <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
-    <string name="weather_wind_ms">μέτρα/δευτερόλεπτο</string>
+    <string name="weather_wind_ms">μ/δ</string>
     <string name="weather_wind_kmh">χλμ/ω</string>
     <string name="weather_wind_mph">μαω</string>
     <string name="weather_wind_kn">κόμβοι</string>
@@ -4404,7 +4400,7 @@
     <string name="empty_screen_weather_temperature_layer">Ενεργοποιήστε για την προβολή του επιπέδου θερμοκρασίας στο χάρτη.</string>
     <string name="empty_screen_view_selected_weather_data">Ενεργοποιήστε για την προβολή επιλεγμένων καιρικών δεδομένων στο χάρτη.</string>
     <string name="distance_by_tap_use_description">Πατήστε στο χάρτη για να δείτε την απόσταση μεταξύ της τρέχουσας τοποθεσίας σας και του πατημένου σημείου.\nΠατήστε με 2 δάχτυλα στο χάρτη για να δείτε την απόσταση μεταξύ των πατημένων σημείων</string>
-    <string name="write_location_provider">Γράψε τον πάροχο τοποθεσίας</string>
+    <string name="write_location_provider">Γράψιμο παρόχου τοποθεσίας</string>
     <string name="write_location_provider_description">Αποθηκεύει τον πάροχο τοποθεσίας σε κάθε σημείο του ίχνους κατά τη διάρκεια της καταγραφής</string>
     <string name="hmd_promo">HMD Promo για %1$s μήνες</string>
     <string name="hmd_promo_years">HMD Promo για %1$s χρόνια</string>
@@ -4642,11 +4638,11 @@
     <string name="send_crash_log_descr">Περιλαμβάνει μόνο πληροφορίες σχετικά με τα κρασαρίσματα</string>
     <string name="rendering_engine_failed">Η απεικόνιση του χάρτη του OsmAnd έχει κρασάρει πρόσφατα.</string>
     <string name="share_crash_log">Κοινοποίηση αρχείου καταγραφής κρασαρίσματος</string>
-    <string name="send_crash_log">Αποστολή αρχείου καταγραφής κρασαρίσματος</string>
+    <string name="send_crash_log">Αποστολή αρχείων καταγραφής κρασαρίσματος εφαρμογής</string>
     <string name="has_vehicle_metrics">Με δεδομένα OBDII</string>
     <string name="lang_mi">Μάορι</string>
     <string name="access_pinch_zoom_magnification">Μεγέθυνση εστίασης με τσίμπημα</string>
-    <string name="access_pinch_zoom_magnification_descr">Χρήση κλιμάκωσης της περιοχής θέασης αντί των διακριτών επιπέδων εστίασης κατά τη διάρκεια των χειρονομιών μεγεθυνσης.</string>
+    <string name="access_pinch_zoom_magnification_descr">Χρήση κλιμάκωσης της περιοχής θέασης (μεγέθυνση) αντί των διακριτών επιπέδων εστίασης κατά τη διάρκεια της χειρονομίας μεγέθυνσης.</string>
     <string name="release_4_7">• Νέο γραφικό στοιχείο \"Ταχύμετρο\" συμβατό με το Android Auto\n\n • Διαμόρφωση της οθόνης χάρτη με προσθήκη πολλαπλών κουμπιών \"Γρήγορη Ενέργεια\"\n\n • Βελτιωμένη αναγνωσιμότητα των δεδομένων σε γραφήματα\n\n • Προσθήκη φίλτρων για δεδομένα αισθητήρων από ίχνη\n\n • Βελτιωμένη εμφάνιση της εξατομίκευσης για ομάδες ιχνών\n\n • Προσθήκη υποστήρθξης για πρόσθετες ετικέτες GPX\n\n • Προσαρμογή για \"Απόσταση κατά την πλοήγηση\": επιλέξτε μεταξύ ακριβών ή στρογγυλοποιημένων προς τα πάνω αριθμών\n\n • Ενοποιημένο UI για επιλογή ιχνών\n\n • Αλλαγή σύνδεσης OpenStreetMap σε OAuth 2.0</string>
     <string name="distance_during_navigation_description">Επιλέξτε πώς θα εμφανίζονται οι πληροφορίες απόστασης στα γραφικά στοιχεία πλοήγησης (απόσταση σε σημείο, επόμενη στροφή, λωρίδες).\n\nΕπιλέξτε “%1$s” για ακριβή αριθμούς, ή “%2$s” για ευκολότερη αναγνωσιμότητα.</string>
     <string name="attach_to_the_roads">Προσκόλληση στους δρόμους</string>
@@ -4748,10 +4744,10 @@
     <string name="set_step_size">Ορισμός μεγέθους βήματος</string>
     <string name="organize_by_summary">Αυτόματα οργανώστε τα ίχνη σας σε ομάδες βάσει επιλεγμένων παραμέτρων όπως δραστηριότητα, ταχύτητα ή τοποθεσία.</string>
     <string name="feature_available_as_part_of_plan">%1$s διαθέσιμο ως μέρος του πλάνου %2$s</string>
-    <string name="write_bearing_description">Αποθήκευση προσανατολισμού σε κάθε σημείο του ίχνους κατά την εγγραφή</string>
-    <string name="write_bearing">Γράψιμο Προσανατολισμού</string>
-    <string name="write_heading_description">Αποθήκευση πορείας σε κάθε σημείο του ίχνους κατά την εγγραφή</string>
-    <string name="write_heading">Γράψιμο Πορείας</string>
+    <string name="write_bearing_description">Αποθηκεύει τον προσανατολισμό σε κάθε σημείο του ίχνους κατά την εγγραφή</string>
+    <string name="write_bearing">Γράψιμο προσανατολισμού</string>
+    <string name="write_heading_description">Αποθηκεύει την πορεία σε κάθε σημείο του ίχνους κατά την εγγραφή</string>
+    <string name="write_heading">Γράψιμο πορείας</string>
     <string name="wheel_circumference">Περιφέρεια τροχού</string>
     <string name="map_marker_interval_dialog_desc">Ορίστε το χρονικό μεσοδιάστημα για το οποίο η μέση ταχύτητα θα μετράται για τον υπολογισμό της εκτιμώμενης ώρας άφιξης.</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Σημεία διαδρομής GPX (%1$d) αντιγράφηκαν στα αγαπημένα.</string>
@@ -4953,7 +4949,7 @@
     <string name="edit_folder">Επεξεργασία φακέλου</string>
     <string name="shared_string_media">Πολυμέσα</string>
     <string name="no_media">Κανένα πολυμέσο</string>
-    <string name="favorite_folder_invalid_name">Το όνομα του φακέλου δεν μπορεί να περιλαμβάνει / ή _%_</string>
+    <string name="favorite_folder_invalid_name">Το όνομα του φακέλου δεν μπορεί να περιλαμβάνει / ή %1$s</string>
     <string name="favorite_folder_duplicate_message">Χρησιμοποιήστε ένα όνομα φακέλου που να μην υπάρχει ήδη.</string>
     <string name="favorite_folder_rename_conflict">Υπάρχει ήδη φάκελος με αυτό το όνομα.</string>
     <string name="favorite_confirm_delete_folder">Αυτό θα διαγράψει τον φάκελο \"%1$s\", συμπεριλαμβανομένου των εμφωλευμένων φακέλων και %2$d αγαπημένου/ων σημείου/ων.</string>
@@ -5099,7 +5095,7 @@
     <string name="always_keep_local_copy_description">Το πολυμέσο μένει πάντα συνημμένο ακόμη κι αν το αρχικό έχει διαγραφεί από τη Συλλογή ή τα αρχεία.</string>
     <string name="use_spatial_text_search">Χρήση αναζήτησης χωρικού κειμένου</string>
     <string name="use_spatial_text_search_description">Αντικαθιστά την τυπική γρήγορη αναζήτηση μέσω API με την πειραματική μηχανή αναζήτησης χωρικού κειμένου.</string>
-    <string name="release_5_4">• Ανανεωμένο UI αναζήτησης: ταξινόμηση, φίλτρα κατηγοριών, πιο καθαρή εμφάνιση\n\n • Επισυνάψτε φωτογραφίες και πολυμέσα στα Αγαπημένα\n\n • Αγαπημένα: υποστήριξη υποομάδων και καρφιτσωμένο φάκελοι\n\n • Συντεταγμένες: η αναζήτηση, το πλέγμα χάρτη και η εμφάνιση ΣΕ τώρα υποστηρίζουν EPSG και σύστημα εντοπισμού Maidenhead\n\n • Επιδιόρθωση διακοπών πλοήγησης: εναλλαγή μεταξύ Τυπικής και Γρήγορης δρομολόγησης\n\n • Ορίστε την κλίμακα χάρτη στο Android Auto χωριστά από το τηλέφωνό σας\n\n• Νέα χωρική αναζήτηση — βρείτε μέρη και αναζητήστε γύρω από ένα μέρος\n\n • Προστέθηκαν εκλείψεις ήλιου και σελήνης στην Αστρονομία</string>
+    <string name="release_5_4">• Ανανεωμένο UI αναζήτησης: ταξινόμηση, φίλτρα κατηγοριών, πιο καθαρή εμφάνιση\n\n • Επισυνάψτε φωτογραφίες και πολυμέσα στα Αγαπημένα\n\n • Αγαπημένα: υποστήριξη υποομάδων και καρφιτσωμένοι φάκελοι\n\n • Συντεταγμένες: η αναζήτηση, το πλέγμα χάρτη και η εμφάνιση ΣΕ τώρα υποστηρίζουν EPSG και σύστημα εντοπισμού Maidenhead\n\n • Επιδιόρθωση διακοπών πλοήγησης: εναλλαγή μεταξύ Τυπικής και Γρήγορης δρομολόγησης\n\n • Ορίστε την κλίμακα χάρτη στο Android Auto χωριστά από το τηλέφωνό σας\n\n• Νέα χωρική αναζήτηση — βρείτε μέρη και αναζητήστε γύρω από ένα μέρος\n\n • Προστέθηκαν εκλείψεις ήλιου και σελήνης στην Αστρονομία</string>
     <string name="astro_lunar_eclipse">Έκλειψη σελήνης</string>
     <string name="astro_lunar_eclipse_subtitle">Εξερευνήστε εκλείψεις σελήνης παγκοσμίως</string>
     <string name="astro_previous_lunar_eclipse">Προηγούμενη έκλειψη σελήνης</string>
@@ -5165,4 +5161,13 @@
     <string name="share_favorites_share_failed">Δεν ήταν δυνατή η κοινοποίηση του αρχείου.</string>
     <string name="share_favorites_missing_media_warning">Δεν ήταν δυνατή η συμπερίληψη μερικών συνημμένων πολυμέσων.</string>
     <string name="search_on_web">Αναζήτηση στον ιστό</string>
+    <string name="astro_eclipse_column_below_horizon">Κάτω από τον ορίζοντα</string>
+    <string name="quick_action_add_track">Προσθήκη ίχνους</string>
+    <string name="quick_action_all_tracks">Όλα τα ίχνη</string>
+    <string name="quick_action_tracks_select_descr">Προσθέστε ένα ή περισσότερα ίχνη για εμφάνιση ή απόκρυψη τους στον χάρτη με ένα πάτημα.</string>
+    <string name="quick_action_tracks_always_ask_descr">Πατώντας αυτή την ενέργεια, ανοίγει τη λίστα των ιχνών όπου μπορείτε να εμφανίσετε ή να αποκρύψετε ένα ή περισσότερα από αυτά.</string>
+    <string name="battery_saving_mode_descr">Περιορίζει τον χάρτη στα 20 καρέ ανά δευτερόλεπτο (FPS) για να μειωθεί η κατανάλωση της μπαταρίας και το ζέσταμα της συσκευής. Η κίνηση του χάρτη γίνεται λιγότερη ομαλή.</string>
+    <string name="crash_report_sent">Η αναφορά στάλθηκε. Ευχαριστούμε!</string>
+    <string name="crash_report_send_failed">Δεν ήταν δυνατή η αποστολή της αναφοράς. Δοκιμάστε ξανά αργότερα.</string>
+    <string name="traffic_warning_red_light_camera">Κάμερα κόκκινου φαναριού</string>
 </resources>

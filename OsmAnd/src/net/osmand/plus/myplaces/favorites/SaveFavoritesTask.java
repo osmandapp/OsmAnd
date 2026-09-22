@@ -181,9 +181,12 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			// Delete external group file if it does not exist in local groups
 			if (!hasLocalGroup) {
 				File file = helper.getExternalFile(fileGroup);
-				if (file.exists() && !file.delete()) {
-					log.warn("Failed to delete orphaned favorites file: " + file.getAbsolutePath());
-					return false;
+				if (file.exists()) {
+					log.info("Deleting orphaned favorites file: " + file.getName());
+					if (!file.delete()) {
+						log.warn("Failed to delete orphaned favorites file: " + file.getAbsolutePath());
+						return false;
+					}
 				}
 			}
 		}

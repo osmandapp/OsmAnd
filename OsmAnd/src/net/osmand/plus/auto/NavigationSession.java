@@ -10,8 +10,10 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.hardware.display.DisplayManager;
 import android.net.Uri;
 import android.util.Log;
+import android.view.Display;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -296,7 +298,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	@NonNull
 	public Screen onCreateScreen(@NonNull Intent intent) {
-		Log.i(TAG, "In onCreateScreen()");
+		Log.i(TAG, "In onCreateScreen(), accumulated CarAppService virtual displays: " + countCarAppVirtualDisplays());
 		navigationCarSurface = new SurfaceRenderer(getCarContext(), getLifecycle());
 		settingsAction = new Action.Builder()
 				.setIcon(new CarIcon.Builder(
@@ -328,6 +330,23 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
 		}
 		return landingScreen;
+	}
+
+	// androidx.car.app never releases the VirtualDisplay it creates in CarContext#attachBaseContext(),
+	// so one accumulates per Android Auto (re)connect for the life of the process (see OsmAnd-Issues#3329).
+	// Logged here to size the leak from user-submitted logs without needing adb access.
+	private int countCarAppVirtualDisplays() {
+		DisplayManager displayManager = getCarContext().getSystemService(DisplayManager.class);
+		if (displayManager == null) {
+			return -1;
+		}
+		int count = 0;
+		for (Display display : displayManager.getDisplays()) {
+			if ("CarAppService".equals(display.getName())) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	public void onPurchaseDone() {

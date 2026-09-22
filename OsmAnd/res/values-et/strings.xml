@@ -2235,7 +2235,6 @@
     <string name="number_of_edits">Muudatuste arv</string>
     <string name="reports_for">Kanna ette</string>
     <string name="night">Öö</string>
-    <string name="file_name_containes_illegal_char">Failinimi sisaldab keelatud sümbolit</string>
     <string name="configure_screen_quick_action">Kiirtoiming</string>
     <string name="quick_action_item_action">Tegevus %d</string>
     <string name="quick_action_item_screen">Ekraan %d</string>
@@ -4466,7 +4465,7 @@
     <string name="backup_deleted_all_data">Andmed on kustutatud.</string>
     <string name="backup_deleting_all_data">Kustutan andmeid…</string>
     <string name="favorite_folder_rename_conflict">Sellise nimega kaust on juba olemas.</string>
-    <string name="favorite_folder_invalid_name">Kausta nimes ei tohi olla tähemärke: / või _%_</string>
+    <string name="favorite_folder_invalid_name">Kausta nimes ei tohi olla tähemärke: / või %1$s</string>
     <string name="favorite_folder_duplicate_message">Pruugi kaustanime, mida veel pole olemas.</string>
     <string name="favorite_folder_name">Kausta nimi</string>
     <string name="edit_folder">Muuda kausta</string>

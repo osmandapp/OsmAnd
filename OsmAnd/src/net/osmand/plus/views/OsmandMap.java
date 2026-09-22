@@ -151,20 +151,20 @@ public class OsmandMap {
 		return app.getSettings().TEXT_SCALE.get();
 	}
 
+	/**
+	 * Map magnifier of the surface the map is currently drawn on: Android Auto keeps its own value
+	 * once it was changed on the head unit, otherwise both displays follow the phone setting.
+	 * Every consumer of the magnifier must use this, so that the phone and the head unit values
+	 * never leak into each other.
+	 */
 	public static float getMapDensitySettings(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
-		float mapDensity = settings.MAP_DENSITY.get();
-		float aaMapDensity = settings.AA_MAP_DENSITY.get();
-		boolean aaMapDensitySet = settings.AA_MAP_DENSITY.isSet();
-		float densityToSet;
-		if (app.getOsmandMap() != null && app.getOsmandMap().mapView != null &&
-				app.getOsmandMap().mapView.isCarView() && aaMapDensitySet) {
-			densityToSet = aaMapDensity;
-		} else {
-			densityToSet = mapDensity;
+		// may be called while OsmandMap is still being constructed
+		OsmandMap osmandMap = app.getOsmandMap();
+		if (osmandMap != null && osmandMap.mapView != null && osmandMap.mapView.isCarView()
+				&& settings.AA_MAP_DENSITY.isSet()) {
+			return settings.AA_MAP_DENSITY.get();
 		}
-		//todo revert when aa scale setting fixed
-//		return densityToSet;
 		return settings.MAP_DENSITY.get();
 	}
 

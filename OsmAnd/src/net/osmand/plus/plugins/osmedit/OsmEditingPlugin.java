@@ -141,17 +141,17 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public OsmEditingPlugin(OsmandApplication app) {
 		super(app);
 
-		OSM_USER_NAME_OR_EMAIL = registerStringPreference("user_name", "").makeGlobal().makeShared();
-		OSM_USER_DISPLAY_NAME = registerStringPreference("user_display_name", "").makeGlobal().makeShared();
+		OSM_USER_NAME_OR_EMAIL = registerStringPreference("user_name", "").makeGlobal();
+		OSM_USER_DISPLAY_NAME = registerStringPreference("user_display_name", "").makeGlobal();
 		OSM_UPLOAD_VISIBILITY = registerEnumStringPreference("upload_visibility", UploadVisibility.getDefaultValue(), UploadVisibility.getAvailableValues(), UploadVisibility.class).makeGlobal().makeShared();
 
 		USER_OSM_BUG_NAME = registerStringPreference("user_osm_bug_name", "NoName/OsmAnd").makeGlobal().makeShared();
-		OSM_USER_PASSWORD = registerStringPreference("user_password", "").makeGlobal().makeShared();
+		OSM_USER_PASSWORD = registerStringPreference("user_password", "").makeGlobal();
 		OSM_USER_ACCESS_TOKEN = registerStringPreference("user_access_token", "").makeGlobal();
 		OSM_USER_ACCESS_TOKEN_SECRET = registerStringPreference("user_access_token_secret", "").makeGlobal();
 
 		OFFLINE_EDITION = registerBooleanPreference("offline_osm_editing", true).makeGlobal().makeShared();
-		OSM_USE_DEV_URL = registerBooleanPreference("use_dev_url", false).makeGlobal().makeShared();
+		OSM_USE_DEV_URL = registerBooleanPreference("use_dev_url", false).makeGlobal();
 
 		SHOW_OSM_BUGS = registerBooleanPreference("show_osm_bugs", false).makeProfile().cache();
 		SHOW_OSM_EDITS = registerBooleanPreference("show_osm_edits", true).makeProfile().cache();
