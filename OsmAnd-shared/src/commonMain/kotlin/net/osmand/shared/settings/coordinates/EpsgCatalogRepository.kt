@@ -67,7 +67,7 @@ class EpsgCatalogRepository {
 					"JOIN conversion c ON c.auth_name = crs.conversion_auth_name AND c.code = crs.conversion_code " +
 					"WHERE crs.auth_name = 'EPSG' AND crs.code = ? AND IFNULL(crs.deprecated, 0) = 0 " +
 					"AND c.method_auth_name = 'EPSG' AND c.method_code IN ($SUPPORTED_PROJECTION_METHODS) " +
-					SUPPORTED_AREA_FILTER,
+					SUPPORTED_AREA_FILTER + METRIC_AXES_FILTER + PARAMETER_UNITS_FILTER,
 				arrayOf(code.toString())
 			)
 			if (cursor == null || !cursor.moveToFirst()) {
@@ -88,11 +88,19 @@ class EpsgCatalogRepository {
 			val transformationCodes = if (usesWgs84) {
 				emptyList()
 			} else {
-				queryTransformationCodes(db, baseCrsAuthName, baseCrsCode)
+				queryTransformationCodes(db, code, baseCrsAuthName, baseCrsCode)
 			}
-			if (!usesWgs84 && transformationCodes.isEmpty()) {
-				unsupportedGridCodes.add(code)
-				return null
+			if (!usesWgs84) {
+				if (transformationCodes.isEmpty()) {
+					unsupportedGridCodes.add(code)
+					return null
+				}
+				val crsArea = queryCrsArea(db, code)
+				val operationAreas = queryTransformationAreas(db, baseCrsAuthName, baseCrsCode)
+				if (crsArea == null || !hasSingleApplicableTransformation(crsArea, operationAreas)) {
+					unsupportedGridCodes.add(code)
+					return null
+				}
 			}
 			return EpsgGridDefinition(
 				epsgCode = code,
@@ -230,16 +238,28 @@ class EpsgCatalogRepository {
 		try {
 			cursor = db.rawQuery(
 				GRID_BASE_SELECT + GRID_SUPPORTED_FILTER + queryFilter +
-					"GROUP BY crs.code, crs.name, crs.deprecated " + orderBy + "LIMIT ?",
+					"GROUP BY crs.code, crs.name, crs.deprecated, " +
+					"crs.geodetic_crs_auth_name, crs.geodetic_crs_code " + orderBy + "LIMIT ?",
 				args.toTypedArray()
 			)
-			val result = mutableListOf<CoordinateFormat>()
+			val rows = mutableListOf<GridFormatRow>()
 			if (cursor != null && cursor.moveToFirst()) {
 				do {
-					result.add(readFormat(cursor))
+					rows.add(GridFormatRow(readFormat(cursor), readBaseKey(cursor), readArea(cursor, 6)))
 				} while (cursor.moveToNext())
 			}
-			return result
+			cursor?.close()
+			cursor = null
+			if (rows.none { it.baseKey != null }) {
+				return rows.map { it.format }
+			}
+			val areasByBase = queryTransformationAreas(db)
+			return rows.filter { row ->
+				val baseKey = row.baseKey ?: return@filter true
+				val crsArea = row.area ?: return@filter false
+				val operationAreas = areasByBase[baseKey] ?: return@filter false
+				hasSingleApplicableTransformation(crsArea, operationAreas)
+			}.map { it.format }
 		} catch (e: Exception) {
 			LOG.error("Failed to read supported Coordinate Grid formats", e)
 			return emptyList()
@@ -251,21 +271,37 @@ class EpsgCatalogRepository {
 
 	private fun queryTransformationCodes(
 		db: SQLiteConnection,
+		crsCode: Int,
 		baseCrsAuthName: String,
 		baseCrsCode: String
 	): List<Int> {
 		var cursor: SQLiteCursor? = null
 		try {
 			cursor = db.rawQuery(
-				"SELECT h.code FROM helmert_transformation h " +
+				CRS_AREA_OF_USE +
+					", candidates AS (" +
+					"SELECT h.code code, h.accuracy accuracy, a.area crs_area, " +
+					"CASE WHEN lower(IFNULL(h.description, '')) LIKE '%replaced by%' " +
+					"THEN 1 ELSE 0 END superseded, " +
+					TRANSFORMATION_INTERSECTS + "intersects, " +
+					TRANSFORMATION_OVERLAP + "overlap " +
+					"FROM helmert_transformation h " +
+					"CROSS JOIN crs_area a " +
+					"LEFT JOIN usage hu ON hu.object_table_name = 'helmert_transformation' " +
+					"AND hu.object_auth_name = h.auth_name AND hu.object_code = h.code " +
+					"LEFT JOIN extent he ON he.auth_name = hu.extent_auth_name " +
+					"AND he.code = hu.extent_code AND IFNULL(he.deprecated, 0) = 0 " +
 					"WHERE h.auth_name = 'EPSG' AND IFNULL(h.deprecated, 0) = 0 " +
 					"AND h.source_crs_auth_name = ? AND h.source_crs_code = ? " +
 					"AND h.target_crs_auth_name = 'EPSG' AND h.target_crs_code = '4326' " +
 					"AND h.method_auth_name = 'EPSG' AND h.method_code IN ($SUPPORTED_HELMERT_METHODS) " +
-					"ORDER BY CASE WHEN lower(IFNULL(h.description, '')) LIKE '%replaced by%' THEN 1 ELSE 0 END, " +
-					"CASE WHEN h.accuracy IS NULL THEN 1 ELSE 0 END, h.accuracy, CAST(h.code AS INTEGER) " +
+					"GROUP BY h.code, h.accuracy, h.description, a.area) " +
+					"SELECT code FROM candidates WHERE intersects = 1 " +
+					"ORDER BY IFNULL(ROUND(overlap / NULLIF(crs_area, 0.0), 1), 0.0) DESC, " +
+					"superseded, CASE WHEN accuracy IS NULL THEN 1 ELSE 0 END, accuracy, " +
+					"CAST(code AS INTEGER) " +
 					"LIMIT $MAX_TRANSFORMATION_CANDIDATES",
-				arrayOf(baseCrsAuthName, baseCrsCode)
+				arrayOf(crsCode.toString(), baseCrsAuthName, baseCrsCode)
 			)
 			val result = mutableListOf<Int>()
 			if (cursor != null && cursor.moveToFirst()) {
@@ -277,6 +313,93 @@ class EpsgCatalogRepository {
 		} finally {
 			cursor?.close()
 		}
+	}
+
+	private fun queryCrsArea(db: SQLiteConnection, crsCode: Int): EpsgArea? {
+		var cursor: SQLiteCursor? = null
+		try {
+			cursor = db.rawQuery(CRS_AREA_SELECT, arrayOf(crsCode.toString()))
+			if (cursor == null || !cursor.moveToFirst()) {
+				return null
+			}
+			return readArea(cursor, 0)
+		} finally {
+			cursor?.close()
+		}
+	}
+
+	private fun queryTransformationAreas(
+		db: SQLiteConnection,
+		baseCrsAuthName: String,
+		baseCrsCode: String
+	): Map<Int, List<EpsgArea>> {
+		var cursor: SQLiteCursor? = null
+		try {
+			cursor = db.rawQuery(
+				TRANSFORMATION_AREA_SELECT +
+					"AND h.source_crs_auth_name = ? AND h.source_crs_code = ?",
+				arrayOf(baseCrsAuthName, baseCrsCode)
+			)
+			val result = mutableMapOf<Int, MutableList<EpsgArea>>()
+			if (cursor != null && cursor.moveToFirst()) {
+				do {
+					val code = cursor.getString(0).toIntOrNull() ?: continue
+					val area = readArea(cursor, 3) ?: continue
+					result.getOrPut(code) { mutableListOf() }.addAll(area.split())
+				} while (cursor.moveToNext())
+			}
+			return result
+		} finally {
+			cursor?.close()
+		}
+	}
+
+	private fun queryTransformationAreas(
+		db: SQLiteConnection
+	): Map<String, Map<Int, List<EpsgArea>>> {
+		var cursor: SQLiteCursor? = null
+		try {
+			cursor = db.rawQuery(TRANSFORMATION_AREA_SELECT, null)
+			val result = mutableMapOf<String, MutableMap<Int, MutableList<EpsgArea>>>()
+			if (cursor != null && cursor.moveToFirst()) {
+				do {
+					val code = cursor.getString(0).toIntOrNull() ?: continue
+					if (cursor.isNull(1) || cursor.isNull(2)) {
+						continue
+					}
+					val baseKey = baseKey(cursor.getString(1), cursor.getString(2))
+					val area = readArea(cursor, 3) ?: continue
+					result.getOrPut(baseKey) { mutableMapOf() }
+						.getOrPut(code) { mutableListOf() }
+						.addAll(area.split())
+				} while (cursor.moveToNext())
+			}
+			return result
+		} finally {
+			cursor?.close()
+		}
+	}
+
+	private fun hasSingleApplicableTransformation(
+		crsArea: EpsgArea,
+		operationAreas: Map<Int, List<EpsgArea>>
+	): Boolean {
+		val inside = mutableMapOf<Int, List<EpsgArea>>()
+		for ((code, areas) in operationAreas) {
+			val clipped = areas.mapNotNull { it.clip(crsArea) }
+			if (clipped.isNotEmpty()) {
+				inside[code] = clipped
+			}
+		}
+		if (inside.isEmpty()) {
+			return false
+		}
+		val covered = EpsgArea.unionArea(inside.values.flatten())
+		if (covered <= 0) {
+			return false
+		}
+		val best = inside.values.maxOf { EpsgArea.unionArea(it) }
+		return best >= covered * SINGLE_TRANSFORMATION_COVERAGE
 	}
 
 	private fun openConnection(): SQLiteConnection? {
@@ -302,6 +425,31 @@ class EpsgCatalogRepository {
 		return CoordinateFormat.epsg(code, name, area, deprecated)
 	}
 
+	private fun readBaseKey(cursor: SQLiteCursor): String? {
+		if (cursor.isNull(4) || cursor.isNull(5)) {
+			return null
+		}
+		val auth = cursor.getString(4)
+		val code = cursor.getString(5)
+		return if (auth == EPSG_AUTH_NAME && code == WGS84_CRS_CODE) null else baseKey(auth, code)
+	}
+
+	private fun baseKey(authName: String, code: String): String = "$authName:$code"
+
+	private fun readArea(cursor: SQLiteCursor, offset: Int): EpsgArea? {
+		for (index in offset until offset + 4) {
+			if (cursor.isNull(index)) {
+				return null
+			}
+		}
+		return EpsgArea(
+			west = cursor.getDouble(offset),
+			south = cursor.getDouble(offset + 1),
+			east = cursor.getDouble(offset + 2),
+			north = cursor.getDouble(offset + 3)
+		)
+	}
+
 	private fun normalizeSearchQuery(query: String?): String {
 		val trimmed = query?.trim() ?: return ""
 		return if (trimmed.lowercase().startsWith(CoordinateFormatIds.EPSG_PREFIX)) {
@@ -312,6 +460,12 @@ class EpsgCatalogRepository {
 	}
 
 	private fun String.isNumeric(): Boolean = isNotEmpty() && all { it.isDigit() }
+
+	private class GridFormatRow(
+		val format: CoordinateFormat,
+		val baseKey: String?,
+		val area: EpsgArea?
+	)
 
 	/**
 	 * Least-recently-used cache, the common-code stand-in for an access-ordered
@@ -348,6 +502,11 @@ class EpsgCatalogRepository {
 		private const val MAX_TRANSFORMATION_CANDIDATES = 16
 		private const val EPSG_AUTH_NAME = "EPSG"
 		private const val WGS84_CRS_CODE = "4326"
+		private const val METRE_UOM_CODE = 9001
+		// Units CoordinateTransformer::getConstants() reads without conversion: metre, degree,
+		// sexagesimal DMS (PROJ decodes it to degrees itself), degree (supplier), unity.
+		private const val SUPPORTED_PARAMETER_UNITS = "9001, 9102, 9110, 9122, 9201"
+		private const val SINGLE_TRANSFORMATION_COVERAGE = 0.99
 		// Projection methods implemented by GridConfiguration: TM, OSTEREO and HOMV2.
 		private const val SUPPORTED_PROJECTION_METHODS = "'9807', '9809', '9815'"
 		// Direct geog2D Helmert methods parsed by CoordinateTransformer.getEllipsoidParameters().
@@ -362,7 +521,9 @@ class EpsgCatalogRepository {
 				"AND IFNULL(e.deprecated, 0) = 0 "
 
 		private const val GRID_BASE_SELECT =
-			"SELECT crs.code, crs.name, group_concat(DISTINCT e.name), crs.deprecated " +
+			"SELECT crs.code, crs.name, group_concat(DISTINCT e.name), crs.deprecated, " +
+				"crs.geodetic_crs_auth_name, crs.geodetic_crs_code, " +
+				"MIN(e.west_lon), MIN(e.south_lat), MAX(e.east_lon), MAX(e.north_lat) " +
 				"FROM projected_crs crs " +
 				"JOIN conversion c ON c.auth_name = crs.conversion_auth_name AND c.code = crs.conversion_code " +
 				"LEFT JOIN usage u ON u.object_table_name = 'projected_crs' " +
@@ -380,17 +541,101 @@ class EpsgCatalogRepository {
 				"AND IFNULL(area_extent.deprecated, 0) = 0 " +
 				"AND area_extent.west_lon > area_extent.east_lon) "
 
-		private const val GRID_SUPPORTED_FILTER =
+		// GridConfiguration receives the linear parameters in kilometres and the angular ones in
+		// radians, so only CRSs whose axes and conversion parameters are already in metres and
+		// degrees can be rendered.
+		private const val METRIC_AXES_FILTER =
+			"AND EXISTS (SELECT 1 FROM axis metric_axis " +
+				"WHERE metric_axis.coordinate_system_auth_name = crs.coordinate_system_auth_name " +
+				"AND metric_axis.coordinate_system_code = crs.coordinate_system_code " +
+				"AND metric_axis.uom_auth_name = 'EPSG' " +
+				"AND CAST(metric_axis.uom_code AS INTEGER) = $METRE_UOM_CODE) " +
+				"AND NOT EXISTS (SELECT 1 FROM axis other_axis " +
+				"WHERE other_axis.coordinate_system_auth_name = crs.coordinate_system_auth_name " +
+				"AND other_axis.coordinate_system_code = crs.coordinate_system_code " +
+				"AND (IFNULL(other_axis.uom_auth_name, '') <> 'EPSG' " +
+				"OR IFNULL(CAST(other_axis.uom_code AS INTEGER), 0) <> $METRE_UOM_CODE)) "
+
+		private val PARAMETER_UNITS_FILTER = (1..7).joinToString(separator = " ", postfix = " ") {
+			"AND CAST(IFNULL(c.param${it}_uom_code, $METRE_UOM_CODE) AS INTEGER) " +
+				"IN ($SUPPORTED_PARAMETER_UNITS)"
+		}
+
+		private val GRID_SUPPORTED_FILTER =
 			"WHERE crs.auth_name = 'EPSG' AND IFNULL(crs.deprecated, 0) = 0 " +
 				"AND c.method_auth_name = 'EPSG' AND c.method_code IN ($SUPPORTED_PROJECTION_METHODS) " +
 				SUPPORTED_AREA_FILTER +
+				METRIC_AXES_FILTER +
+				PARAMETER_UNITS_FILTER +
 				"AND ((crs.geodetic_crs_auth_name = 'EPSG' AND crs.geodetic_crs_code = '4326') " +
 				"OR EXISTS (SELECT 1 FROM helmert_transformation h " +
+				"JOIN usage grid_usage ON grid_usage.object_table_name = 'helmert_transformation' " +
+				"AND grid_usage.object_auth_name = h.auth_name AND grid_usage.object_code = h.code " +
+				"JOIN extent grid_extent ON grid_extent.auth_name = grid_usage.extent_auth_name " +
+				"AND grid_extent.code = grid_usage.extent_code " +
+				"AND IFNULL(grid_extent.deprecated, 0) = 0 " +
 				"WHERE h.auth_name = 'EPSG' AND IFNULL(h.deprecated, 0) = 0 " +
 				"AND h.source_crs_auth_name = crs.geodetic_crs_auth_name " +
 				"AND h.source_crs_code = crs.geodetic_crs_code " +
 				"AND h.target_crs_auth_name = 'EPSG' AND h.target_crs_code = '4326' " +
-				"AND h.method_auth_name = 'EPSG' AND h.method_code IN ($SUPPORTED_HELMERT_METHODS))) "
+				"AND h.method_auth_name = 'EPSG' AND h.method_code IN ($SUPPORTED_HELMERT_METHODS) " +
+				"AND EXISTS (SELECT 1 FROM usage crs_usage " +
+				"JOIN extent crs_extent ON crs_extent.auth_name = crs_usage.extent_auth_name " +
+				"AND crs_extent.code = crs_usage.extent_code " +
+				"AND IFNULL(crs_extent.deprecated, 0) = 0 " +
+				"WHERE crs_usage.object_table_name = 'projected_crs' " +
+				"AND crs_usage.object_auth_name = crs.auth_name AND crs_usage.object_code = crs.code " +
+				"AND grid_extent.south_lat <= crs_extent.north_lat " +
+				"AND grid_extent.north_lat >= crs_extent.south_lat " +
+				"AND (CASE WHEN grid_extent.west_lon <= grid_extent.east_lon " +
+				"THEN grid_extent.west_lon <= crs_extent.east_lon " +
+				"AND grid_extent.east_lon >= crs_extent.west_lon " +
+				"ELSE grid_extent.west_lon <= crs_extent.east_lon " +
+				"OR grid_extent.east_lon >= crs_extent.west_lon END)))) "
+
+		private const val CRS_AREA_OF_USE =
+			"WITH crs_area AS (" +
+				"SELECT MIN(e.south_lat) south, MAX(e.north_lat) north, " +
+				"MIN(e.west_lon) west, MAX(e.east_lon) east, " +
+				"MAX(MAX(e.north_lat) - MIN(e.south_lat), 0.0) " +
+				"* MAX(MAX(e.east_lon) - MIN(e.west_lon), 0.0) area " +
+				"FROM usage u " +
+				"JOIN extent e ON e.auth_name = u.extent_auth_name AND e.code = u.extent_code " +
+				"WHERE u.object_table_name = 'projected_crs' AND u.object_auth_name = 'EPSG' " +
+				"AND u.object_code = ? AND IFNULL(e.deprecated, 0) = 0 AND e.west_lon <= e.east_lon) "
+
+		private const val CRS_AREA_SELECT =
+			"SELECT MIN(e.west_lon), MIN(e.south_lat), MAX(e.east_lon), MAX(e.north_lat) " +
+				"FROM usage u " +
+				"JOIN extent e ON e.auth_name = u.extent_auth_name AND e.code = u.extent_code " +
+				"WHERE u.object_table_name = 'projected_crs' AND u.object_auth_name = 'EPSG' " +
+				"AND u.object_code = ? AND IFNULL(e.deprecated, 0) = 0 AND e.west_lon <= e.east_lon "
+
+		private const val TRANSFORMATION_AREA_SELECT =
+			"SELECT h.code, h.source_crs_auth_name, h.source_crs_code, " +
+				"he.west_lon, he.south_lat, he.east_lon, he.north_lat " +
+				"FROM helmert_transformation h " +
+				"JOIN usage hu ON hu.object_table_name = 'helmert_transformation' " +
+				"AND hu.object_auth_name = h.auth_name AND hu.object_code = h.code " +
+				"JOIN extent he ON he.auth_name = hu.extent_auth_name AND he.code = hu.extent_code " +
+				"AND IFNULL(he.deprecated, 0) = 0 " +
+				"WHERE h.auth_name = 'EPSG' AND IFNULL(h.deprecated, 0) = 0 " +
+				"AND h.target_crs_auth_name = 'EPSG' AND h.target_crs_code = '4326' " +
+				"AND h.method_auth_name = 'EPSG' AND h.method_code IN ($SUPPORTED_HELMERT_METHODS) "
+
+		private const val TRANSFORMATION_INTERSECTS =
+			"MAX(CASE WHEN he.south_lat <= a.north AND he.north_lat >= a.south " +
+				"AND (CASE WHEN he.west_lon <= he.east_lon " +
+				"THEN he.west_lon <= a.east AND he.east_lon >= a.west " +
+				"ELSE he.west_lon <= a.east OR he.east_lon >= a.west END) THEN 1 ELSE 0 END) "
+
+		private const val TRANSFORMATION_OVERLAP =
+			"IFNULL(SUM(" +
+				"MAX(0.0, MIN(he.north_lat, a.north) - MAX(he.south_lat, a.south)) * " +
+				"(CASE WHEN he.west_lon <= he.east_lon " +
+				"THEN MAX(0.0, MIN(he.east_lon, a.east) - MAX(he.west_lon, a.west)) " +
+				"ELSE MAX(0.0, MIN(180.0, a.east) - MAX(he.west_lon, a.west)) " +
+				"+ MAX(0.0, MIN(he.east_lon, a.east) - MAX(-180.0, a.west)) END)), 0.0) "
 	}
 }
 
@@ -400,3 +645,68 @@ data class EpsgGridDefinition(
 	val usesWgs84: Boolean,
 	val transformationCodes: List<Int>
 )
+
+internal data class EpsgArea(
+	val west: Double,
+	val south: Double,
+	val east: Double,
+	val north: Double
+) {
+
+	fun split(): List<EpsgArea> {
+		if (west <= east) {
+			return listOf(this)
+		}
+		return listOf(
+			EpsgArea(west = west, south = south, east = 180.0, north = north),
+			EpsgArea(west = -180.0, south = south, east = east, north = north)
+		)
+	}
+
+	fun clip(other: EpsgArea): EpsgArea? {
+		val clipped = EpsgArea(
+			west = maxOf(west, other.west),
+			south = maxOf(south, other.south),
+			east = minOf(east, other.east),
+			north = minOf(north, other.north)
+		)
+		return if (clipped.east > clipped.west && clipped.north > clipped.south) clipped else null
+	}
+
+	companion object {
+
+		fun unionArea(areas: List<EpsgArea>): Double {
+			val edges = areas.flatMap { listOf(it.west, it.east) }.distinct().sorted()
+			var total = 0.0
+			for (index in 0 until edges.size - 1) {
+				val left = edges[index]
+				val right = edges[index + 1]
+				if (right <= left) {
+					continue
+				}
+				val spans = areas
+					.filter { it.west <= left && it.east >= right }
+					.map { it.south to it.north }
+					.sortedBy { it.first }
+				if (spans.isEmpty()) {
+					continue
+				}
+				var start = spans[0].first
+				var end = spans[0].second
+				var covered = 0.0
+				for (span in spans.drop(1)) {
+					if (span.first > end) {
+						covered += end - start
+						start = span.first
+						end = span.second
+					} else {
+						end = maxOf(end, span.second)
+					}
+				}
+				covered += end - start
+				total += covered * (right - left)
+			}
+			return total
+		}
+	}
+}
