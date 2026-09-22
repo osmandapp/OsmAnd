@@ -1325,7 +1325,6 @@
     <string name="full_report">Fuldstændig rapport</string>
     <string name="storage_permission_restart_is_required">Appen har nu lov til at skrive til eksternt lager, men en genstart er påkrævet.</string>
     <string name="report">Rapport</string>
-    <string name="file_name_containes_illegal_char">Filnavn indeholder ikke-tilladte tegn</string>
     <string name="rendering_value_thin_name">Tynd</string>
     <string name="rendering_value_medium_name">Mellem</string>
     <string name="rendering_value_bold_name">Fed</string>
@@ -5009,11 +5008,11 @@
     <string name="set_step_size">Indstil intervalstørrelse</string>
     <string name="group_altitude_elevation">Altitude og højde</string>
     <string name="organize_by_max_altitude">Maks. højde</string>
-    <string name="copy_from_portrait_layout">Kopiér fra portrætlayout</string>
-    <string name="copy_from_landscape_layout">Kopiér fra landskabslayout</string>
+    <string name="copy_from_portrait_layout">Kopier fra portrætlayout</string>
+    <string name="copy_from_landscape_layout">Kopier fra landskabsformat</string>
     <string name="panels_layout_compact">Kompakt</string>
-    <string name="panels_layout_wide">Bredt</string>
-    <string name="panels_layout">Panellayout</string>
+    <string name="panels_layout_wide">Bred</string>
+    <string name="panels_layout">Layout af paneler</string>
     <string name="panels_layout_descr">Vælg et layout til de øverste og nederste paneler. De kan enten være brede og dække hele skærmens bredde eller kompakte og passe mellem sidepanelerne og knapperne.</string>
     <string name="single_layout">Enkelt layout</string>
     <string name="separate_layouts">Separate layouts</string>
@@ -5194,7 +5193,7 @@
     <string name="obd_simulation_device">Simuleringsenhed</string>
     <string name="favorite_confirm_delete_folder">Dette vil slette mappen \"%1$s\", inklusive undermapper og %2$d favoritpunkt(er).</string>
     <string name="favorite_folder_rename_conflict">Der findes allerede en mappe med dette navn.</string>
-    <string name="favorite_folder_invalid_name">Mappenavnet må ikke indeholde / eller _%_</string>
+    <string name="favorite_folder_invalid_name">Mappenavnet må ikke indeholde / eller %1$s</string>
     <string name="favorite_folder_duplicate_message">Brug et mappenavn, der ikke allerede findes.</string>
     <string name="favorite_folder_name">Mappenavn</string>
     <string name="edit_folder">Rediger mappe</string>
@@ -5415,4 +5414,5 @@
     <string name="heap_dump_share_descr">Sender den seneste rapport til serveren.</string>
     <string name="heap_dump_auto">Indsaml ved højt forbrug</string>
     <string name="heap_dump_auto_descr">Når heapen er næsten fuld, én gang hvert 30. minut.</string>
+    <string name="heap_dump">Heap-dump</string>
 </resources>

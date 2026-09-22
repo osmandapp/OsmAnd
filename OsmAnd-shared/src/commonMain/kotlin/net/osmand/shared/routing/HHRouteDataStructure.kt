@@ -85,9 +85,15 @@ object HHRouteDataStructure {
 	 * point's cluster, each the cost in tenths of a second or zero for no edge.
 	 */
 	@JvmStatic
-	fun setSegments(ctx: HHRoutingContext, point: NetworkDBPoint, inBytes: ByteArray?, outBytes: ByteArray?) {
-		point.connectedSet(true, parseSegments(inBytes, ctx.getIncomingPoints(point), point, false))
-		point.connectedSet(false, parseSegments(outBytes, ctx.getOutgoingPoints(point), point, true))
+	fun setSegments(
+		ctx: HHRoutingContext, point: NetworkDBPoint, inBytes: ByteArray?, outBytes: ByteArray?, reverse: Boolean
+	) {
+		// search expands point in one direction, other direction is loaded on demand
+		if (reverse) {
+			point.connectedSet(true, parseSegments(inBytes, ctx.getIncomingPoints(point), point, false))
+		} else {
+			point.connectedSet(false, parseSegments(outBytes, ctx.getOutgoingPoints(point), point, true))
+		}
 	}
 
 	internal fun parseSegments(

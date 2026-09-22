@@ -3,6 +3,7 @@ package net.osmand.router;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -57,6 +58,8 @@ public class HHRouteDataStructure {
 		boolean ROUTE_ALL_SEGMENTS = false;
 		boolean ROUTE_ALL_ALT_SEGMENTS = false;
 		boolean PRELOAD_SEGMENTS = false;
+		// max hub-graph edges kept in memory, oldest expanded points are unloaded first (0 - unlimited)
+		public int MAX_LOADED_EDGES = 250_000;
 		
 		boolean CACHE_CALCULATION_CONTEXT = false;
 		public boolean CALC_ALTERNATIVES = false;
@@ -270,6 +273,8 @@ public class HHRouteDataStructure {
 		HHRoutingConfig config;
 		int startX, startY, endX, endY;
 		// Route runtime vars
+		long loadedEdges;
+		ArrayDeque<T> expandedPoints = new ArrayDeque<>(); // unload order
 		List<T> queueAdded = new ArrayList<>();
 		List<T> visited = new ArrayList<>();
 		List<T> visitedRev = new ArrayList<>();
@@ -360,6 +365,8 @@ public class HHRouteDataStructure {
 			for (NetworkDBPoint p : pointsById.valueCollection()) {
 				p.markSegmentsNotLoaded();
 			}
+			loadedEdges = 0;
+			expandedPoints.clear();
 		}
 
 		public void setStartEnd(LatLon start, LatLon end) {
@@ -540,13 +547,40 @@ public class HHRouteDataStructure {
 		public int loadNetworkSegmentPoint(T point, boolean reverse) throws SQLException, IOException {
 			short mapId = point.mapId;
 			HHRouteRegionPointsCtx<T> r = regions.get(mapId);
+			int loaded;
 			if (r.networkDB != null) {
-				return r.networkDB.loadNetworkSegmentPoint(this, r, point, reverse);
+				loaded = r.networkDB.loadNetworkSegmentPoint(this, r, point, reverse);
+			} else if (r.file != null) {
+				loaded = r.file.loadNetworkSegmentPoint(this, r, point, reverse);
+			} else {
+				throw new UnsupportedOperationException();
 			}
-			if (r.file != null) {
-				return r.file.loadNetworkSegmentPoint(this, r, point, reverse);
+			loadedEdges += loaded;
+			return loaded;
+		}
+
+		// edges could be unloaded, so load before reading outside of main search
+		@SuppressWarnings("unchecked")
+		public void ensureSegmentsLoaded(NetworkDBPoint point, boolean reverse) {
+			try {
+				loadNetworkSegmentPoint((T) point, reverse);
+			} catch (SQLException | IOException e) {
+				throw new IllegalStateException(e);
 			}
-			throw new UnsupportedOperationException();
+		}
+
+		// unload with delay: point could be expanded again soon with a better cost
+		public void unloadExpandedSegments(T point) {
+			expandedPoints.add(point);
+			while (config.MAX_LOADED_EDGES > 0 && loadedEdges > config.MAX_LOADED_EDGES && expandedPoints.size() > 1) {
+				T p = expandedPoints.poll();
+				if (p.edgesEdited) {
+					continue;
+				}
+				loadedEdges -= p.connected == null ? 0 : p.connected.size();
+				loadedEdges -= p.connectedReverse == null ? 0 : p.connectedReverse.size();
+				p.markSegmentsNotLoaded();
+			}
 		}
 
 		public String getRoutingInfo() {
@@ -676,11 +710,15 @@ public class HHRouteDataStructure {
 	}
 	
 	public static <T extends NetworkDBPoint> void setSegments(HHRoutingContext<T> ctx, T point,
-			byte[] in, byte[] out) {
-		point.connectedSet(true, HHRouteDataStructure.parseSegments(in, ctx.pointsById,
-				ctx.getIncomingPoints(point), point, false));
-		point.connectedSet(false, HHRouteDataStructure.parseSegments(out, ctx.pointsById,
-				ctx.getOutgoingPoints(point), point, true));		
+			byte[] in, byte[] out, boolean reverse) {
+		// search expands point in one direction, other direction is loaded on demand
+		if (reverse) {
+			point.connectedSet(true, HHRouteDataStructure.parseSegments(in, ctx.pointsById,
+					ctx.getIncomingPoints(point), point, false));
+		} else {
+			point.connectedSet(false, HHRouteDataStructure.parseSegments(out, ctx.pointsById,
+					ctx.getOutgoingPoints(point), point, true));
+		}
 	}
 	
 	private static List<NetworkDBSegment> parseSegments(byte[] bytes, TLongObjectHashMap<? extends NetworkDBPoint> pntsById,
@@ -730,6 +768,13 @@ public class HHRouteDataStructure {
 			this.dist = dist;
 		}
 		
+		// edited cost can't be restored from file, so edges of both points are never unloaded
+		public void editDist(double dist) {
+			this.dist = dist;
+			start.edgesEdited = true;
+			end.edgesEdited = true;
+		}
+
 		public List<LatLon> getGeometry() {
 			if (geom == null) {
 				geom = new ArrayList<LatLon>();
@@ -800,6 +845,7 @@ public class HHRouteDataStructure {
 		public int endY;
 		
 		boolean rtExclude;
+		boolean edgesEdited; // edges are changed and can't be unloaded
 		NetworkDBPointRouteInfo rtRev;
 		NetworkDBPointRouteInfo rtPos;
 		

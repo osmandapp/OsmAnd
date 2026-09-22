@@ -543,7 +543,6 @@
     <string name="local_index_action_do">Treba da %1$s %2$s stavku(e). Nastaviti?</string>
     <string name="local_index_items_restored">%1$d of %2$d stavke(i) uključeno.</string>
     <string name="configure_screen_quick_action">Brze radnje</string>
-    <string name="file_name_containes_illegal_char">Nedozvoljen znak u imenu fajla</string>
     <string name="reports_for">Izveštaj za</string>
     <string name="number_of_edits">Broj izmena</string>
     <string name="number_of_contributors">Broj saradnika</string>
@@ -5133,7 +5132,7 @@
     <string name="obd_simulation_device">Uređaj za simulaciju</string>
     <string name="favorite_confirm_delete_folder">Ovim će se obrisati folder „%1$s“, uključujući ugnežđeni folderi i %2$d omiljenih tačaka.</string>
     <string name="favorite_folder_rename_conflict">Folder sa ovim imenom već postoji.</string>
-    <string name="favorite_folder_invalid_name">Ime foldera ne sme da sadrži / ili _%_</string>
+    <string name="favorite_folder_invalid_name">Ime foldera ne sme da sadrži / ili %1$s</string>
     <string name="favorite_folder_duplicate_message">Koristite ime foldera koji već ne postoji.</string>
     <string name="favorite_folder_name">Ime foldera</string>
     <string name="edit_folder">Uredi folder</string>

@@ -1,26 +1,19 @@
-package net.osmand.plus.settings.coordinates
+package net.osmand.shared.settings.coordinates
 
-import net.osmand.PlatformUtil
-import net.osmand.plus.OsmandApplication
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor
-import org.apache.commons.logging.Log
-import java.io.File
-import java.util.LinkedHashMap
-import java.util.Locale
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
+import net.osmand.shared.api.SQLiteAPI.SQLiteCursor
+import net.osmand.shared.io.KFile
+import net.osmand.shared.util.KLock
+import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.PlatformUtil
+import net.osmand.shared.util.synchronized
+import kotlin.jvm.JvmOverloads
 
-class EpsgCatalogRepository(private val app: OsmandApplication) {
+class EpsgCatalogRepository {
 
-	private val epsgCache = object : LinkedHashMap<Int, CoordinateFormat>(MAX_CACHE_SIZE, 0.75f, true) {
-		override fun removeEldestEntry(eldest: MutableMap.MutableEntry<Int, CoordinateFormat>?): Boolean {
-			return size > MAX_CACHE_SIZE
-		}
-	}
-	private val gridDefinitionCache = object : LinkedHashMap<Int, EpsgGridDefinition>(MAX_CACHE_SIZE, 0.75f, true) {
-		override fun removeEldestEntry(eldest: MutableMap.MutableEntry<Int, EpsgGridDefinition>?): Boolean {
-			return size > MAX_CACHE_SIZE
-		}
-	}
+	private val epsgCache = LruCache<Int, CoordinateFormat>(MAX_CACHE_SIZE)
+	private val gridDefinitionCache = LruCache<Int, EpsgGridDefinition>(MAX_CACHE_SIZE)
+	private val gridDefinitionLock = KLock()
 	private val unsupportedGridCodes = mutableSetOf<Int>()
 
 	fun getByCode(code: Int): CoordinateFormat? {
@@ -42,7 +35,7 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 				epsgCache[code] = format
 			}
 			return format
-		} catch (e: RuntimeException) {
+		} catch (e: Exception) {
 			LOG.error("Failed to read EPSG CRS $code", e)
 			return null
 		} finally {
@@ -56,8 +49,11 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 		return getByCode(code) ?: CoordinateFormat.unresolvedEpsg(code)
 	}
 
-	@Synchronized
-	fun getGridDefinition(code: Int): EpsgGridDefinition? {
+	fun getGridDefinition(code: Int): EpsgGridDefinition? = synchronized(gridDefinitionLock) {
+		readGridDefinition(code)
+	}
+
+	private fun readGridDefinition(code: Int): EpsgGridDefinition? {
 		if (code <= 0 || code in unsupportedGridCodes) {
 			return null
 		}
@@ -79,9 +75,9 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 				return null
 			}
 			val methodCode = cursor.getString(0).toIntOrNull()
-			val baseCrsAuthName = cursor.getString(1)
-			val baseCrsCode = cursor.getString(2)
-			if (methodCode == null || baseCrsAuthName.isNullOrEmpty() || baseCrsCode.isNullOrEmpty()) {
+			val baseCrsAuthName = if (cursor.isNull(1)) "" else cursor.getString(1)
+			val baseCrsCode = if (cursor.isNull(2)) "" else cursor.getString(2)
+			if (methodCode == null || baseCrsAuthName.isEmpty() || baseCrsCode.isEmpty()) {
 				unsupportedGridCodes.add(code)
 				return null
 			}
@@ -104,7 +100,7 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 				usesWgs84 = usesWgs84,
 				transformationCodes = transformationCodes
 			).also { gridDefinitionCache[code] = it }
-		} catch (e: RuntimeException) {
+		} catch (e: Exception) {
 			LOG.error("Failed to read grid definition for EPSG:$code", e)
 			return null
 		} finally {
@@ -146,7 +142,7 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 				} while (cursor.moveToNext())
 			}
 			return result
-		} catch (e: RuntimeException) {
+		} catch (e: Exception) {
 			LOG.error("Failed to read EPSG CRS list", e)
 			return emptyList()
 		} finally {
@@ -165,7 +161,7 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 		val numeric = normalizedQuery.isNumeric()
 		val exactCode = if (numeric) normalizedQuery else ""
 		val codePrefix = if (numeric) "$normalizedQuery%" else ""
-		val likeQuery = "%${normalizedQuery.lowercase(Locale.US)}%"
+		val likeQuery = "%${normalizedQuery.lowercase()}%"
 		var cursor: SQLiteCursor? = null
 		try {
 			cursor = db.rawQuery(
@@ -196,7 +192,7 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 				} while (cursor.moveToNext())
 			}
 			return result
-		} catch (e: RuntimeException) {
+		} catch (e: Exception) {
 			LOG.error("Failed to search EPSG CRS by query: $query", e)
 			return emptyList()
 		} finally {
@@ -211,7 +207,7 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 		val numeric = normalizedQuery.isNumeric()
 		val exactCode = if (numeric) normalizedQuery else ""
 		val codePrefix = if (numeric) "$normalizedQuery%" else ""
-		val likeQuery = "%${normalizedQuery.lowercase(Locale.US)}%"
+		val likeQuery = "%${normalizedQuery.lowercase()}%"
 		val queryFilter = if (normalizedQuery.isEmpty()) {
 			""
 		} else {
@@ -244,7 +240,7 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 				} while (cursor.moveToNext())
 			}
 			return result
-		} catch (e: RuntimeException) {
+		} catch (e: Exception) {
 			LOG.error("Failed to read supported Coordinate Grid formats", e)
 			return emptyList()
 		} finally {
@@ -284,22 +280,23 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 	}
 
 	private fun openConnection(): SQLiteConnection? {
-		val projDb: File = app.getAppPath(PROJ_DB_NAME)
-		if (!projDb.exists()) {
-			LOG.warn("EPSG catalog is unavailable: ${projDb.absolutePath}")
-			return null
-		}
 		return try {
-			app.getSQLiteAPI().openByAbsolutePath(projDb.absolutePath, true)
-		} catch (e: RuntimeException) {
-			LOG.error("Failed to open EPSG catalog: ${projDb.absolutePath}", e)
+			// Resolved on every open: the app directory can be moved by the user at runtime.
+			val projDb = KFile(PlatformUtil.getOsmAndContext().getAppDir(), PROJ_DB_NAME)
+			if (!projDb.exists()) {
+				LOG.warn("EPSG catalog is unavailable: ${projDb.absolutePath()}")
+				return null
+			}
+			PlatformUtil.getSQLiteAPI().openByAbsolutePath(projDb.absolutePath(), true)
+		} catch (e: Exception) {
+			LOG.error("Failed to open EPSG catalog", e)
 			null
 		}
 	}
 
 	private fun readFormat(cursor: SQLiteCursor): CoordinateFormat {
 		val code = cursor.getString(0).toIntOrNull() ?: 0
-		val name = cursor.getString(1)
+		val name = if (cursor.isNull(1)) null else cursor.getString(1)
 		val area = if (cursor.isNull(2)) null else cursor.getString(2)
 		val deprecated = !cursor.isNull(3) && cursor.getInt(3) != 0
 		return CoordinateFormat.epsg(code, name, area, deprecated)
@@ -307,7 +304,7 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 
 	private fun normalizeSearchQuery(query: String?): String {
 		val trimmed = query?.trim() ?: return ""
-		return if (trimmed.lowercase(Locale.US).startsWith(CoordinateFormatIds.EPSG_PREFIX)) {
+		return if (trimmed.lowercase().startsWith(CoordinateFormatIds.EPSG_PREFIX)) {
 			trimmed.substring(CoordinateFormatIds.EPSG_PREFIX.length).trim()
 		} else {
 			trimmed
@@ -316,8 +313,34 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 
 	private fun String.isNumeric(): Boolean = isNotEmpty() && all { it.isDigit() }
 
+	/**
+	 * Least-recently-used cache, the common-code stand-in for an access-ordered
+	 * java.util.LinkedHashMap with removeEldestEntry().
+	 */
+	private class LruCache<K, V>(private val maxSize: Int) {
+
+		private val lock = KLock()
+		private val entries = LinkedHashMap<K, V>()
+
+		operator fun get(key: K): V? = synchronized(lock) {
+			val value = entries.remove(key)
+			if (value != null) {
+				entries[key] = value
+			}
+			value
+		}
+
+		operator fun set(key: K, value: V) = synchronized(lock) {
+			entries.remove(key)
+			entries[key] = value
+			if (entries.size > maxSize) {
+				entries.remove(entries.keys.first())
+			}
+		}
+	}
+
 	private companion object {
-		private val LOG: Log = PlatformUtil.getLog(EpsgCatalogRepository::class.java)
+		private val LOG = LoggerFactory.getLogger("EpsgCatalogRepository")
 		private const val PROJ_DB_NAME = "proj.db"
 		private const val DEFAULT_LIST_LIMIT = 1000
 		private const val DEFAULT_SEARCH_LIMIT = 50

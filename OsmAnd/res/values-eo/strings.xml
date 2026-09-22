@@ -1349,7 +1349,6 @@
     <string name="number_of_contributors">Nombro de kontribuintoj</string>
     <string name="number_of_edits">Nombro de redaktoj</string>
     <string name="reports_for">Raportoj por</string>
-    <string name="file_name_containes_illegal_char">Malpermesata signo en dosiernomo</string>
     <string name="coords_format">Formo de koordinatoj</string>
     <string name="shared_string_is_open">Malfermitaj nun</string>
     <string name="shared_string_is_open_24_7">Malfermitaj 24/7</string>
@@ -5144,7 +5143,7 @@
     <string name="astronomy_map">Astronomia mapo</string>
     <string name="favorite_confirm_delete_folder">Tio ĉi forigos la dosierujon “%1$s”, inkluzivante ĝiajn subdosierujojn kaj %2$d ŝatata(j)n ejo(j)n.</string>
     <string name="favorite_folder_rename_conflict">Dosierujo kun tiu ĉi nomo jam ekzistas.</string>
-    <string name="favorite_folder_invalid_name">Nomo de dosierujon ne povas enhavi / aŭ _%_.</string>
+    <string name="favorite_folder_invalid_name">Nomo de dosierujon ne povas enhavi / aŭ %1$s.</string>
     <string name="favorite_folder_duplicate_message">Enigu nomon de dosierujo, kiu ne ekzistas.</string>
     <string name="favorite_folder_name">Nomo de dosierujo</string>
     <string name="edit_folder">Redakti dosierujon</string>

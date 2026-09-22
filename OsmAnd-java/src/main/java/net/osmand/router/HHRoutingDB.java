@@ -235,8 +235,8 @@ public class HHRoutingDB {
 			loadSegmentStart.setInt(2, reg.routingProfile);
 			ResultSet rs = loadSegmentStart.executeQuery();
 			if (rs.next()) {
-				HHRouteDataStructure.setSegments(ctx, point, rs.getBytes(2), rs.getBytes(3));
-				return point.connected(true).size() + point.connected(false).size();
+				HHRouteDataStructure.setSegments(ctx, point, rs.getBytes(2), rs.getBytes(3), reverse);
+				return point.connected(reverse).size();
 			} else {
 				point.connectedSet(true, new ArrayList<NetworkDBSegment>());
 				point.connectedSet(false, new ArrayList<NetworkDBSegment>());

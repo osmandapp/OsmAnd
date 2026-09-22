@@ -1321,7 +1321,6 @@
     <string name="report">Prehľad</string>
     <string name="storage_permission_restart_is_required">Aplikácia teraz má povolenie zapisovať do externého úložiska, ale je potrebný reštart aplikácie.</string>
     <string name="full_report">Podrobný prehľad</string>
-    <string name="file_name_containes_illegal_char">Nepovolený znak v názve súboru</string>
     <string name="rendering_value_thin_name">Tenké</string>
     <string name="rendering_value_medium_name">Stredné</string>
     <string name="rendering_value_bold_name">Tučné</string>
@@ -5157,7 +5156,7 @@
     <string name="obd_simulation_device">Simulačné zariadenie</string>
     <string name="favorite_confirm_delete_folder">Toto vymaže priečinok \"%1$s\", vrátane vnorených priečinkov a %2$d obľúbených bodov.</string>
     <string name="favorite_folder_rename_conflict">Priečinok s týmto názvom už existuje.</string>
-    <string name="favorite_folder_invalid_name">Názov priečinka nesmie obsahovať / alebo _%_</string>
+    <string name="favorite_folder_invalid_name">Názov priečinka nesmie obsahovať / alebo %1$s</string>
     <string name="favorite_folder_duplicate_message">Použite názov priečinka, ktorý ešte neexistuje.</string>
     <string name="favorite_folder_name">Názov priečinka</string>
     <string name="edit_folder">Upraviť priečinok</string>

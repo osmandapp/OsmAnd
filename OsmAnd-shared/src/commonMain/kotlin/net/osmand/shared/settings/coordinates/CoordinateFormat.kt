@@ -1,6 +1,6 @@
-package net.osmand.plus.settings.coordinates
+package net.osmand.shared.settings.coordinates
 
-import net.osmand.plus.OsmandApplication
+import kotlin.jvm.JvmStatic
 
 enum class CoordinateFormatType {
 	BUILT_IN,
@@ -61,12 +61,6 @@ data class CoordinateFormat(
 				title = id,
 				isResolved = false
 			)
-		}
-
-		@JvmStatic
-		fun resolve(app: OsmandApplication, id: String, epsgCatalogRepository: EpsgCatalogRepository): CoordinateFormat {
-			BuiltInCoordinateFormat.resolve(app, id)?.let { return it }
-			return epsgCatalogRepository.resolveFormat(id)
 		}
 	}
 }

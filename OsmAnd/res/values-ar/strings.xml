@@ -1006,7 +1006,6 @@
     <string name="rendering_attr_currentTrackColor_description">لون جي بي إكس</string>
     <string name="city_type_district">منطقة</string>
     <string name="city_type_neighbourhood">حي</string>
-    <string name="file_name_containes_illegal_char">حرف غير قانوني في اسم الملف</string>
     <string name="reports_for">تقرير عن</string>
     <string name="world_maps">خرائط العالم</string>
     <string name="access_direction_audio_feedback_descr">إشارة صوتية عند اتجاه نقطة الوصول.</string>
@@ -5378,7 +5377,7 @@
     <string name="coordinate_format_primary">أساسي</string>
     <string name="favorite_confirm_delete_folder">سيؤدي هذا إلى حذف المجلد \"%1$s\"، بما في ذلك المجلدات المتداخلة و %2$d نقطة (نقاط) المفضلة.</string>
     <string name="favorite_folder_rename_conflict">يوجد مجلد بهذا الاسم بالفعل.</string>
-    <string name="favorite_folder_invalid_name">لا يمكن أن يحتوي اسم المجلد على / أو _%_</string>
+    <string name="favorite_folder_invalid_name">لا يمكن أن يحتوي اسم المجلد على / أو %1$s</string>
     <string name="favorite_folder_duplicate_message">استخدم اسم مجلد غير موجود بالفعل.</string>
     <string name="favorite_folder_name">اسم المجلد</string>
     <string name="edit_folder">مجلد التحرير</string>

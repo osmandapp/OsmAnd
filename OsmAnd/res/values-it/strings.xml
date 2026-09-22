@@ -1322,7 +1322,6 @@
     <string name="report">Rapporto</string>
     <string name="storage_permission_restart_is_required">L\'applicazione è ora in grado di scrivere sulla memoria esterna, ma deve essere riavviata per farlo.</string>
     <string name="full_report">Rapporto completo</string>
-    <string name="file_name_containes_illegal_char">Carattere non ammesso nel nome del file</string>
     <string name="rendering_value_thin_name">Sottile</string>
     <string name="rendering_value_medium_name">Medio</string>
     <string name="rendering_value_bold_name">Grosso</string>
@@ -5049,7 +5048,7 @@
     <string name="astro_filter_visible_now">Visibile ora</string>
     <string name="astro_filter_show_all">Mostra tutto</string>
     <string name="favorite_confirm_delete_folder">Quest\'azione eliminerà la cartella \"%1$s\", incluse le sottocartelle e %2$d punto(i) preferito(i).</string>
-    <string name="favorite_folder_invalid_name">Il nome della cartella non può contenere / o _%_</string>
+    <string name="favorite_folder_invalid_name">Il nome della cartella non può contenere / o %1$s</string>
     <string name="favorite_folder_duplicate_message">Usare un nome per la cartella che non esista già.</string>
     <string name="favorite_folder_name">Nome della cartella</string>
     <string name="edit_folder">Modifica cartella</string>

@@ -1360,7 +1360,6 @@
     <string name="rendering_value_bold_name">Kalın</string>
     <string name="storage_permission_restart_is_required">Uygulamanın şimdi harici depolamaya yazma izni var, ancak bunu yapmak için yeniden başlatılması gerekir.</string>
     <string name="full_report">Tam rapor</string>
-    <string name="file_name_containes_illegal_char">Dosya adında geçersiz karakter</string>
     <string name="shared_string_is_open_24_7">7/24 açık</string>
     <string name="coords_format">Koordinat biçimi</string>
     <string name="app_mode_bus">Otobüs</string>
@@ -4901,7 +4900,7 @@
     <string name="save_and_access_articles_offline">Verileri kaydedin ve makalelere çevrim dışı olarak her yerden erişin</string>
     <string name="app_profile">Uygulama profili</string>
     <string name="favorite_folder_rename_conflict">Bu ada sahip bir dizin zaten var.</string>
-    <string name="favorite_folder_invalid_name">Klasör adı / veya _%_ karakterlerini içeremez</string>
+    <string name="favorite_folder_invalid_name">Klasör adı / veya %1$s karakterlerini içeremez</string>
     <string name="favorite_folder_duplicate_message">Henüz kullanılmayan bir klasör adı kullanın.</string>
     <string name="favorite_folder_name">Klasör adı</string>
     <string name="edit_folder">Klasörü düzenle</string>

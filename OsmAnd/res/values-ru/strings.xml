@@ -1516,7 +1516,6 @@
     <string name="lang_en_gb">Английский (Соединённое Королевство)</string>
     <string name="lang_hu_formal">Венгерский (официальный)</string>
     <string name="lang_kn">Каннада</string>
-    <string name="file_name_containes_illegal_char">Имя файла содержит недопустимый символ</string>
     <string name="route_stops_before">%1$s остановок до выбранной</string>
     <string name="coords_search">Поиск по координатам</string>
     <string name="advanced_coords_search">Расширенный поиск по координатам</string>
@@ -5078,7 +5077,7 @@
     <string name="obd_simulation_device">Устройство для моделирования</string>
     <string name="astronomy_map">Астрономическая карта</string>
     <string name="favorite_folder_rename_conflict">Папка с таким названием уже существует.</string>
-    <string name="favorite_folder_invalid_name">Имя папки не может содержать / или _%_</string>
+    <string name="favorite_folder_invalid_name">Имя папки не может содержать / или %1$s</string>
     <string name="favorite_folder_duplicate_message">Используйте имя папки, которого еще нет в списке.</string>
     <string name="favorite_folder_name">Имя папки</string>
     <string name="edit_folder">Редактировать папку</string>

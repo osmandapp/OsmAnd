@@ -64,6 +64,10 @@ class HHRoutingConfig {
 	@JvmField
 	var PRELOAD_SEGMENTS: Boolean = false
 
+	// max hub-graph edges kept in memory, oldest expanded points are unloaded first (0 - unlimited)
+	@JvmField
+	var MAX_LOADED_EDGES: Int = 250_000
+
 	@JvmField
 	var CACHE_CALCULATION_CONTEXT: Boolean = false
 

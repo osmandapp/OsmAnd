@@ -4233,7 +4233,6 @@
     <string name="pref_overlay">Forleagan / underlay</string>
     <string name="follow">Tosaigh treoir</string>
     <string name="save_poi_without_poi_type_message">Sábháil POI gan chineál?</string>
-    <string name="file_name_containes_illegal_char">Carachtar mídhleathach in ainm comhaid</string>
     <string name="quick_action_bug_descr">Tá an teachtaireacht seo san áireamh sa réimse tráchta.</string>
     <string name="quick_action_map_style_action">Cuir stíl léarscáile leis</string>
     <string name="quick_action_verb_navigate">Nascleanúint</string>
@@ -5005,7 +5004,7 @@
     <string name="obd_simulation_device">Gléas insamhalta</string>
     <string name="favorite_confirm_delete_folder">Scriosfaidh sé seo an fillteán \"%1$s\", lena n-áirítear fillteáin neadaithe agus %2$d pointe(í) is fearr leat.</string>
     <string name="favorite_folder_rename_conflict">Tá fillteán leis an ainm seo ann cheana féin.</string>
-    <string name="favorite_folder_invalid_name">Ní féidir / nó _%_ a bheith in ainm an fhillteáin</string>
+    <string name="favorite_folder_invalid_name">Ní féidir / nó %1$s a bheith in ainm an fhillteáin</string>
     <string name="favorite_folder_duplicate_message">Bain úsáid as ainm fillteáin nach bhfuil ann cheana féin.</string>
     <string name="favorite_folder_name">Ainm fillteáin</string>
     <string name="edit_folder">Cuir fillteán in eagar</string>

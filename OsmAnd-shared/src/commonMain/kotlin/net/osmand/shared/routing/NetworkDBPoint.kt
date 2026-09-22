@@ -99,6 +99,8 @@ open class NetworkDBPoint {
 		}
 	}
 
+	var edgesEdited = false // edges are changed and can't be unloaded
+
 	fun connected(rev: Boolean): MutableList<NetworkDBSegment>? = if (rev) connectedReverse else connected
 
 	fun setDistanceToEnd(rev: Boolean, segmentDist: Double) {
@@ -179,6 +181,13 @@ class NetworkDBSegment(
 ) {
 
 	private var geom: MutableList<KLatLon>? = null
+
+	// edited cost can't be restored from file, so edges of both points are never unloaded
+	fun editDist(dist: Double) {
+		this.dist = dist
+		start.edgesEdited = true
+		end.edgesEdited = true
+	}
 
 	fun getGeometry(): MutableList<KLatLon> {
 		var g = geom

@@ -1289,7 +1289,6 @@
     <string name="avoid_road">Út elkerülése</string>
     <string name="full_report">Részletes jelentés</string>
     <string name="shared_string_undo_all">Összes visszavonása</string>
-    <string name="file_name_containes_illegal_char">Érvénytelen karakter a fájlnévben</string>
     <string name="storage_permission_restart_is_required">Az alkalmazás már tud írni a külső tárolóra, de ehhez egy kézi újraindítás szükséges.</string>
     <string name="rec_split_desc">Klipek újraírása, ha a felhasznált hely túllépi a tárolási méretet.</string>
     <string name="rec_split_clip_length_desc">A rögzített klipek legnagyobb hossza.</string>
@@ -5066,7 +5065,7 @@
     <string name="obd_simulation_device">Szimulációs eszköz</string>
     <string name="favorite_confirm_delete_folder">Ez törli a(z) „%1$s” nevű mappát, beleértve a beágyazott mappákat és %2$d darab kedvenc pontot is.</string>
     <string name="favorite_folder_rename_conflict">Már létezik ilyen nevű mappa.</string>
-    <string name="favorite_folder_invalid_name">A mappanév nem tartalmazhat / vagy _%_ karaktert</string>
+    <string name="favorite_folder_invalid_name">A mappanév nem tartalmazhat / vagy %1$s karaktert</string>
     <string name="favorite_folder_duplicate_message">Használjon olyan mappanevet, amely még nem létezik.</string>
     <string name="favorite_folder_name">Mappa neve</string>
     <string name="edit_folder">Mappa szerkesztése</string>

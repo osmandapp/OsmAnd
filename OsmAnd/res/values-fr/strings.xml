@@ -1289,7 +1289,6 @@
     <string name="active_markers">Marques actives</string>
     <string name="map_markers">Marques</string>
     <string name="map_marker">Marque</string>
-    <string name="file_name_containes_illegal_char">Caractère interdit dans le nom de fichier</string>
     <string name="rendering_value_thin_name">Fin</string>
     <string name="rendering_value_medium_name">Moyen</string>
     <string name="rendering_value_bold_name">Épais</string>
@@ -2351,7 +2350,7 @@
     <string name="permission_is_required">Vous n\'êtes pas autorisés à utiliser cette option.</string>
     <string name="live_monitoring_tracking_interval">Intervalle de suivi</string>
     <string name="live_monitoring_adress">Adresse web</string>
-    <string name="monitoring_notification">Notification</string>
+    <string name="monitoring_notification">Afficher le bouton \'Enregistrer\' dans les Notifications</string>
     <string name="monitoring_min_speed">Vitesse minimale</string>
     <string name="monitoring_min_accuracy">Précision minimale</string>
     <string name="monitoring_min_distance">Déplacement minimal</string>
@@ -4572,7 +4571,7 @@
     <string name="ais_nmea_protocol_description">Choisissez le protocole de réception des données NMEA</string>
     <string name="ais_port_nmea_server">Port TCP de la source de données NMEA</string>
     <string name="ais_port_nmea_server_description">Définir le numéro de port TCP de la source de données NMEA</string>
-    <string name="ais_load_data">Charger les données AIS à partir d\'un fichier</string>
+    <string name="ais_load_data">Simuler les signaux reçues d\'un navire</string>
     <string name="ais_address_nmea_server">Adresse IP de la source de données NMEA</string>
     <string name="ais_address_nmea_server_description">Définir l\'adresse IP de la source de données NMEA (si le protocole TCP est utilisé)</string>
     <string name="ais_port_nmea_local">Port UDP du récepteur de données NMEA local</string>
@@ -5067,7 +5066,7 @@
     <string name="obd_simulation_device">Dispositif de simulation</string>
     <string name="favorite_confirm_delete_folder">Cette opération supprimera le dossier « %1$s », y compris les dossiers qu\'il contient et %2$d favoris.</string>
     <string name="favorite_folder_rename_conflict">Un dossier portant ce nom existe déjà.</string>
-    <string name="favorite_folder_invalid_name">Le nom du dossier ne peut pas contenir de / ou de _%_</string>
+    <string name="favorite_folder_invalid_name">Le nom du dossier ne peut pas contenir de / ou de %1$s</string>
     <string name="favorite_folder_duplicate_message">Renseignez un nom de dossier qui n\'existe pas encore.</string>
     <string name="favorite_folder_name">Nom du dossier</string>
     <string name="edit_folder">Modifier le dossier</string>
@@ -5277,4 +5276,16 @@
     <string name="crash_report_sent">Le rapport a été envoyé. Merci !</string>
     <string name="crash_report_send_failed">Impossible d\'envoyer le rapport. Veuillez réessayer plus tard.</string>
     <string name="battery_saving_mode_descr">Réduit la fréquence d’affichage de la carte à 20 images / seconde pour améliorer l’autonomie de la batterie et limiter l\'échauffement de l\'appareil. Le déplacement de la carte sera moins fluide.</string>
+    <string name="java_memory">Mémoire Java</string>
+    <string name="ais_load_data_descr">Rejouer les messages AIS depuis un fichier.</string>
+    <string name="map_rendering">Rendu de la carte</string>
+    <string name="simulate_ui">Simuler le premier départ</string>
+    <string name="heap_dump">Java heap dump</string>
+    <string name="heap_dump_descr">Compter les objets dans le heap Java.</string>
+    <string name="heap_dump_collect">Collecter et analyser maintenant</string>
+    <string name="heap_dump_collect_descr">Patientez quelques secondes avant de visualiser le résultat.</string>
+    <string name="heap_dump_share">Partager le rapport</string>
+    <string name="heap_dump_share_descr">Envoie le dernier rapport au serveur.</string>
+    <string name="heap_dump_auto">Collecter lors d\'un usage intensif</string>
+    <string name="heap_dump_auto_descr">Lorsque le heap space est presque plein, toutes les 30 min.</string>
 </resources>

@@ -1337,7 +1337,6 @@
     <string name="storage_directory_shared">Споделена памет</string>
     <string name="shared_string_topbar">Горна лента</string>
     <string name="full_report">Пълен доклад</string>
-    <string name="file_name_containes_illegal_char">Името на файла съдържа неправилен символ</string>
     <string name="show_transparency_seekbar">Показване на прозрачна лента</string>
     <string name="search_categories">Категории</string>
     <string name="postcode">Пощенски код</string>

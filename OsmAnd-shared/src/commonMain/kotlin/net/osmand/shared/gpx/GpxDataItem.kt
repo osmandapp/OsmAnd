@@ -135,6 +135,11 @@ class GpxDataItem private constructor(
 					GpxParameter.SHOW_ARROWS,
 					if (gpxFile.isShowArrowsSet()) gpxFile.isShowArrows() else null)
 
+			GpxParameter.LINE_STYLE ->
+				setParameter(
+					GpxParameter.LINE_STYLE,
+					gpxFile.getLineStyleTypeName())
+
 			GpxParameter.SHOW_START_FINISH -> {
 				setParameter(
 					GpxParameter.SHOW_START_FINISH,

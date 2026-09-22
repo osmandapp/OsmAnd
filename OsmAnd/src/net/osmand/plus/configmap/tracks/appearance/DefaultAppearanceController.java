@@ -2,6 +2,7 @@ package net.osmand.plus.configmap.tracks.appearance;
 
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.LINE_STYLE;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 
@@ -19,18 +20,22 @@ import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData.AppearanceChangedListener;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ArrowsCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorCardController;
+import net.osmand.plus.configmap.tracks.appearance.subcontrollers.LineStyleCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.SplitCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.StartFinishCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardController;
 import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.shared.palette.domain.PaletteItem;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 
 import java.util.HashSet;
@@ -50,6 +55,7 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 	private final StartFinishCardController iconsCardController;
 	private final ColorCardController colorCardController;
 	private final WidthCardController widthCardController;
+	private final LineStyleCardController lineStyleCardController;
 	private final SplitCardController splitCardController;
 
 	private final GpxDirItem dirItem;
@@ -75,6 +81,8 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 
 		widthCardController = new WidthCardController(app, data, false);
 		widthCardController.setControlsColorProvider(colorCardController);
+
+		lineStyleCardController = new LineStyleCardController(app, data, false);
 
 		splitCardController = new SplitCardController(app, data, false);
 	}
@@ -163,13 +171,42 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 	}
 
 	@NonNull
+	public LineStyleCardController getLineStyleCardController() {
+		return lineStyleCardController;
+	}
+
+	@NonNull
 	public SplitCardController getSplitCardController() {
 		return splitCardController;
 	}
 
 	@Override
 	public void onAppearanceChanged() {
+		reconcileSolidConstraint();
+		colorCardController.refreshContent();
+		lineStyleCardController.refreshContent();
 		app.getDialogManager().askRefreshDialogCompletely(PROCESS_ID);
+	}
+
+	private void reconcileSolidConstraint() {
+		if (isColorNonSolid()) {
+			lineStyleCardController.forceSolidStyleIfNeeded();
+		}
+		if (isLineStyleNonSolid()) {
+			colorCardController.forceSolidColorIfNeeded();
+		}
+	}
+
+	private boolean isColorNonSolid() {
+		String coloringTypeId = data.getParameter(COLORING_TYPE);
+		return coloringTypeId != null
+				&& !ColoringType.Companion.requireValueOf(ColoringPurpose.TRACK, coloringTypeId).isTrackSolid();
+	}
+
+	private boolean isLineStyleNonSolid() {
+		String lineStyleName = data.getParameter(LINE_STYLE);
+		return lineStyleName != null
+				&& GpxLineStyleType.Companion.getLineStyleType(lineStyleName) != GpxLineStyleType.SOLID;
 	}
 
 	@NonNull

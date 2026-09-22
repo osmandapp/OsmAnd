@@ -1145,7 +1145,6 @@
     <string name="number_of_contributors">מספר תורמים</string>
     <string name="number_of_edits">מספר עריכות</string>
     <string name="reports_for">דיווח עבור</string>
-    <string name="file_name_containes_illegal_char">תווים בלתי תקניים בשם הקובץ</string>
     <string name="configure_screen_quick_action">פעולה מהירה</string>
     <string name="quick_action_item_action">פעולה %d</string>
     <string name="quick_action_item_screen">מסך %d</string>

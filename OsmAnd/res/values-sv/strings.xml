@@ -1303,7 +1303,6 @@
     <string name="access_no_destination">Tillgänglighetsplugin: Ingen destination inställd</string>
     <string name="map_widget_magnetic_bearing">Magnetisk bäring</string>
     <string name="rec_split_clip_length">Klipplängd</string>
-    <string name="file_name_containes_illegal_char">Ogiltigt tecken i filnamnet</string>
     <string name="current_track">Nuvarande spår</string>
     <string name="map_widget_battery">Batterinivå</string>
     <string name="change_markers_position">Ändra markörens position</string>
@@ -5070,7 +5069,7 @@
     <string name="coordinate_format_select_other">Välj annat format</string>
     <string name="favorite_confirm_delete_folder">Detta kommer att radera mappen \"%1$s\", inklusive undermappar och %2$d favoritpunkt(er).</string>
     <string name="favorite_folder_rename_conflict">Det finns redan en mapp med detta namn.</string>
-    <string name="favorite_folder_invalid_name">Mappnamn kan inte innehålla / eller _%_</string>
+    <string name="favorite_folder_invalid_name">Mappnamn kan inte innehålla / eller %1$s</string>
     <string name="favorite_folder_duplicate_message">Använd ett mappnamn som inte redan existerar.</string>
     <string name="favorite_folder_name">Mappnamn</string>
     <string name="edit_folder">Redigera mapp</string>

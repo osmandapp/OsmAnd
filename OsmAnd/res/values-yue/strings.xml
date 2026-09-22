@@ -4502,7 +4502,6 @@
     <string name="number_of_contributors">貢獻者數</string>
     <string name="number_of_edits">編輯次數</string>
     <string name="reports_for">報告</string>
-    <string name="file_name_containes_illegal_char">檔案名稱包含不允許的字元</string>
     <string name="configure_screen_quick_action">快速選項</string>
     <string name="quick_action_item_action">快速動作 %d</string>
     <string name="quick_action_item_screen">螢幕 %d</string>

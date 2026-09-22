@@ -4324,7 +4324,6 @@
     <string name="downloads">பதிவிறக்கங்கள்</string>
     <string name="dashboard_or_drawer_description">நெகிழ்வான டாச்போர்டு அல்லது நிலையான பட்டியல் வழியாக பயன்பாட்டை முதன்மையாக கட்டுப்படுத்த ஒரு தேர்வு வழங்கப்படுகிறது. உங்கள் விருப்பம் எப்போதும் டாச்போர்டு அமைப்புகளில் மாற்றப்படலாம்.</string>
     <string name="number_of_contributors">பங்களிப்பாளர்களின் எண்ணிக்கை</string>
-    <string name="file_name_containes_illegal_char">கோப்பு பெயரில் சட்டவிரோத தன்மை</string>
     <string name="quick_action_item_screen">திரை %d</string>
     <string name="quick_action_take_audio_note_descr">திரையின் நடுவில் ஆடியோ குறிப்பைச் சேர்க்க ஒரு பொத்தான்.</string>
     <string name="quick_action_add_parking_descr">திரையின் நடுவில் பார்க்கிங் இருப்பிடத்தைச் சேர்க்க ஒரு பொத்தான்.</string>

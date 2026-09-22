@@ -14,11 +14,11 @@ import net.osmand.plus.Version;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
 import net.osmand.plus.settings.coordinates.CoordinateGridFormat;
 import net.osmand.plus.settings.coordinates.CoordinateGridFormatProvider;
 import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds;
 
 import java.util.Map;
 import java.util.Objects;

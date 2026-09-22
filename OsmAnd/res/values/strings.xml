@@ -11,6 +11,13 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="gpx_line_style_desc_unavailable_for_color">Dashed and dotted line styles are not available for non-solid track color.</string>
+	<string name="gpx_color_unavailable_for_line_style">This coloring is not available for a non-solid line style.</string>
+	<string name="gpx_color_desc_unavailable_for_style">Only solid track color is available for a dashed or dotted line style.</string>
+	<string name="gpx_line_style">Line style</string>
+	<string name="gpx_line_style_solid">Solid</string>
+	<string name="gpx_line_style_dashed">Dashed</string>
+	<string name="gpx_line_style_dotted">Dotted</string>
 	<string name="battery_saving_mode_descr">Limits the map to 20 frames per second to reduce battery drain and device heating. Map movement becomes less smooth.</string>
 	<string name="astro_eclipse_column_below_horizon">Below horizon</string>
 	<string name="quick_action_add_track">Add track</string>
@@ -238,7 +245,7 @@
 	<string name="coordinate_format_primary">Primary</string>
 	<string name="favorite_confirm_delete_folder">This will delete folder \"%1$s\", including nested folders and %2$d favorite point(s).</string>
 	<string name="favorite_folder_rename_conflict">A folder with this name already exists.</string>
-	<string name="favorite_folder_invalid_name">Folder name can\'t contain / or _%_</string>
+	<string name="favorite_folder_invalid_name">Folder name can\'t contain / or %1$s</string>
 	<string name="favorite_folder_duplicate_message">Use a folder name that doesn\'t already exist.</string>
 	<string name="favorite_folder_name">Folder name</string>
 	<string name="edit_folder">Edit folder</string>
@@ -5691,7 +5698,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="number_of_contributors">Number of contributors</string>
     <string name="number_of_edits">Number of edits</string>
     <string name="reports_for">Report for</string>
-    <string name="file_name_containes_illegal_char">Illegal character in filename</string>
+    <string name="file_name_containes_illegal_char">Name can\'t contain: %1$s</string>
     <string name="configure_screen_quick_action">Quick action</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
