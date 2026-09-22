@@ -1120,25 +1120,22 @@ public class AppVersionUpgradeOnInit {
 	 * The Vessel tracker (AIS) plugin used to express "collision warning off" as a zero warning
 	 * time. It has a master switch now, so a positive warning time the user had set means the
 	 * switch is on, and a zero goes back to the default so the new screen shows a valid value.
-	 * The default safe distance moved from 1 nm to 0.02 nm at the same time, so a user who had
-	 * the warning on keeps the 1 nm it was using unless they had chosen a distance themselves.
 	 * The preferences are registered with the defaults of the plugin: this runs before the plugin
 	 * is created, and the plugin gets these very instances back from the settings.
+	 * <p>
+	 * The default safe distance moved from 1 nm to 0.02 nm with the redesign. The stored distance
+	 * is not touched here, so a user who had the warning on with the default distance follows the
+	 * new default.
 	 */
 	private void migrateAisCpaWarningTimeToSwitch(@NonNull OsmandSettings settings) {
 		CommonPreference<Integer> warningTime = settings.registerIntPreference(
 				AisTrackerPlugin.AIS_CPA_WARNING_TIME_ID, AisTrackerPlugin.AIS_CPA_DEFAULT_WARNING_TIME).makeProfile();
-		CommonPreference<Float> warningDistance = settings.registerFloatPreference(
-				AisTrackerPlugin.AIS_CPA_WARNING_DISTANCE_ID, AisTrackerPlugin.AIS_CPA_WARNING_DEFAULT_DISTANCE).makeProfile();
 		CommonPreference<Boolean> cpaEnabled = settings.registerBooleanPreference(
 				AisTrackerPlugin.AIS_CPA_ENABLED_ID, false).makeProfile();
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			if (warningTime.isSetForMode(mode)) {
 				if (warningTime.getModeValue(mode) > 0) {
 					cpaEnabled.setModeValue(mode, true);
-					if (!warningDistance.isSetForMode(mode)) {
-						warningDistance.setModeValue(mode, 1.0f); // the default before the redesign
-					}
 				} else {
 					warningTime.resetModeToDefault(mode);
 				}
