@@ -6,6 +6,34 @@ apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 apply from: rootProject.file("versions.gradle")
 
+def borrowedIconsDir = layout.buildDirectory.dir("generated/borrowed/res").get().asFile
+
+// The watch reuses a handful of the phone app's drawables. They are copied in at build time so
+// OsmAnd/res stays their single source of truth — a copy checked in here would quietly drift
+// the day someone redraws an icon in the main app.
+tasks.register('copyPhoneIcons', Sync) {
+	from("../OsmAnd/res") {
+		include "drawable/ic_action_track_recordable.xml"
+		include "drawable/ic_action_start_navigation.xml"
+		include "drawable/ic_action_settings.xml"
+		include "drawable/ic_action_rec_stop.xml"
+		// Launcher icon layers, one set per distribution channel.
+		include "drawable/ic_launcher_osmand_monochrome.xml"
+		include "drawable/ic_launcher_osmand_plus_monochrome.xml"
+		include "drawable/ic_launcher_osmand_nightly_background.xml"
+		include "drawable/ic_launcher_osmand_nightly_logo.xml"
+		include "mipmap-hdpi/adaptive_icon_osmand*.png"
+		include "mipmap-xhdpi/adaptive_icon_osmand*.png"
+		include "mipmap-xxhdpi/adaptive_icon_osmand*.png"
+		include "mipmap-xxxhdpi/adaptive_icon_osmand*.png"
+	}
+	into borrowedIconsDir
+}
+
+// Hooked onto preBuild rather than the individual resource tasks: every task in a variant
+// depends on preBuild, so the staged icons are in place before anything reads that directory.
+tasks.matching { it.name == "preBuild" }.configureEach { dependsOn(copyPhoneIcons) }
+
 android {
 	namespace "net.osmand.wear"
 
@@ -58,7 +86,9 @@ android {
 		main {
 			manifest.srcFile "AndroidManifest.xml"
 			java.srcDirs = ["src/main/kotlin"]
-			res.srcDirs = ["src/main/res"]
+			// Icons borrowed from the phone app are staged here by copyPhoneIcons rather than
+			// duplicated into version control.
+			res.srcDirs = ["src/main/res", borrowedIconsDir]
 		}
 	}
 
@@ -70,23 +100,35 @@ android {
 	// to the watch paired with an OsmAnd install. Hence the flavors are duplicated here.
 	// androidFull (F-Droid) and huawei are left out on purpose: neither has Play delivery
 	// or Google Play services on the watch side.
+	// Flavour names carry the "Wear" suffix so a variant is identifiable on its own: the build
+	// variant list and the run configurations show the variant without the module beside it,
+	// and a bare "gplayFullDebug" is indistinguishable from the phone app's own flavours.
 	flavorDimensions "version"
 	productFlavors {
-		nightlyFree {
+		nightlyFreeWear {
 			dimension "version"
 			applicationId "net.osmand.dev"
 			resValue "string", "app_name", "OsmAnd Nightly"
 		}
-		gplayFree {
+		gplayFreeWear {
 			dimension "version"
 			applicationId "net.osmand"
 			resValue "string", "app_name", "OsmAnd"
 		}
-		gplayFull {
+		gplayFullWear {
 			dimension "version"
 			applicationId "net.osmand.plus"
 			resValue "string", "app_name", "OsmAnd+"
 		}
+	}
+
+	applicationVariants.configureEach { variant ->
+		// Otherwise the suffix lands in the file name twice: OsmAnd-wear-gplayFullWear-debug.apk.
+		variant.outputs.configureEach { output ->
+			def channel = variant.flavorName.replaceAll(/Wear$/, "")
+			output.outputFileName = "OsmAnd-wear-${channel}-${variant.buildType.name}.apk"
+		}
+
 	}
 
 	buildTypes {

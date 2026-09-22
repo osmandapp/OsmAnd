@@ -2,6 +2,7 @@ package net.osmand.wear.ui.screens
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -32,24 +33,29 @@ fun HomeScreen(state: PhoneState, onOpen: (String) -> Unit) {
 	val listState = rememberScalingLazyListState()
 
 	ScreenScaffold(scrollState = listState) {
-		ScalingLazyColumn(state = listState) {
+		ScalingLazyColumn(
+			state = listState,
+			// Extra head- and footroom so the first and last entries settle clear of TimeText
+			// and the screen edge instead of resting right against them.
+			contentPadding = PaddingValues(horizontal = 10.dp, vertical = 32.dp)
+		) {
 			item {
 				ListHeader {
 					Text(stringResource(R.string.app_name))
 				}
 			}
 			item {
-				MenuButton(R.string.wear_trip_recording, R.drawable.ic_trip_recording) {
+				MenuButton(R.string.wear_trip_recording, R.drawable.ic_action_track_recordable) {
 					onOpen(Routes.RECORDING)
 				}
 			}
 			item {
-				MenuButton(R.string.wear_navigation, R.drawable.ic_navigation) {
+				MenuButton(R.string.wear_navigation, R.drawable.ic_action_start_navigation) {
 					onOpen(Routes.NAVIGATION)
 				}
 			}
 			item {
-				MenuButton(R.string.wear_settings, R.drawable.ic_settings) {
+				MenuButton(R.string.wear_settings, R.drawable.ic_action_settings) {
 					onOpen(Routes.SETTINGS)
 				}
 			}

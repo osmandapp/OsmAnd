@@ -2,6 +2,7 @@ package net.osmand.wear.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -51,7 +52,10 @@ fun NavigationScreen(
 	val listState = rememberScalingLazyListState()
 
 	ScreenScaffold(scrollState = listState) {
-		ScalingLazyColumn(state = listState) {
+		ScalingLazyColumn(
+			state = listState,
+			contentPadding = PaddingValues(horizontal = 10.dp, vertical = 32.dp)
+		) {
 			item { TripSummary(navigation) }
 
 			items(navigation.maneuvers.size) { index ->
@@ -72,7 +76,7 @@ fun NavigationScreen(
 					),
 					icon = {
 						Icon(
-							painter = painterResource(R.drawable.ic_stop),
+							painter = painterResource(R.drawable.ic_action_rec_stop),
 							contentDescription = null,
 							modifier = Modifier.size(ButtonDefaults.IconSize)
 						)
