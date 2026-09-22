@@ -2554,7 +2554,7 @@
     <string name="map_widget_ant_bicycle_power">Мощност на велосипеда</string>
     <string name="storage_copied_files_size">Обработени са %1$s файла, %2$s</string>
     <string name="dont_move_maps">Без преместване</string>
-    <string name="storage_migration_fragment_close_descr">Копирането е завършено само на %1$s%. Ако го спрете сега, приложението може да не работи.</string>
+    <string name="storage_migration_fragment_close_descr">Копирането е завършено само на %1$s%%. Ако го спрете сега, приложението може да не работи.</string>
     <string name="shared_string_osmand_usage">Използвано от OsmAnd</string>
     <string name="map_widget_rendering_fps">Изчертаване в кадри/сек</string>
     <string name="from_to_with_params">От „%1$s“ в „%2$s“</string>

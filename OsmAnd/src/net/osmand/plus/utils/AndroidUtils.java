@@ -94,10 +94,14 @@ import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AndroidUtils {
+
+	// resource ids do not change within a process
+	private static final Map<String, Integer> DRAWABLE_IDS = new ConcurrentHashMap<>();
 
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
 
@@ -789,10 +793,19 @@ public class AndroidUtils {
 	}
 
 	public static int getDrawableId(@NonNull Context context, String id) {
-		if (!Algorithms.isEmpty(id)) {
-			return context.getResources().getIdentifier(id, "drawable", context.getPackageName());
+		if (Algorithms.isEmpty(id)) {
+			return 0;
 		}
-		return 0;
+		Integer cached = DRAWABLE_IDS.get(id);
+		if (cached != null) {
+			return cached;
+		}
+		// getIdentifier() starts with Integer.parseInt(name) and swallows the NumberFormatException
+		// it throws for every non-numeric name, so it must not run per frame: MapButton.update()
+		// asks for the profile icon name on every map draw.
+		int identifier = context.getResources().getIdentifier(id, "drawable", context.getPackageName());
+		DRAWABLE_IDS.put(id, identifier);
+		return identifier;
 	}
 
 	public static int getStatusBarHeight(@NonNull Context ctx) {

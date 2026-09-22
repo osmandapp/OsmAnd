@@ -766,7 +766,7 @@
     <string name="routing_attr_allow_private_for_truck_description">Cho phép xe tải đi vào những khu vực riêng tư.</string>
     <string name="temperature_layer">Lớp nhiệt độ</string>
     <string name="pressure_layer">Lớp áp suất</string>
-    <string name="storage_migration_fragment_close_descr">Việc sao chép chỉ hoàn thành được %1$s %. Nếu bạn dừng bây giờ, ứng dụng có thể không hoạt động bình thường.</string>
+    <string name="storage_migration_fragment_close_descr">Việc sao chép chỉ hoàn thành được %1$s %%. Nếu bạn dừng bây giờ, ứng dụng có thể không hoạt động bình thường.</string>
     <string name="map_settings_weather_wind">Gió</string>
     <string name="weather_wind_mph">dặm/giờ</string>
     <string name="rendering_engine_failed">Việc kết xuất bản đồ của OsmAnd mới đây đã bị hỏng.</string>
