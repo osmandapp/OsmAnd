@@ -72,6 +72,7 @@ public class HHRouteDataStructure {
 		//   1) stretch    cost(alt) <= (1 + ALT_STRETCH) * cost(opt) + ALT_STRETCH_ABS
 		//   2) plateau    plateau(v) >= ALT_MIN_PLATEAU * cost(alt)          (local optimality)
 		//   3) distinct   own roads >= max(ALT_MIN_DISTINCT_FLOOR, ALT_MIN_DISTINCT_REL * len(opt))
+		//   4) no loop    the leg to v and the leg from v waste <= ALT_MAX_LOOP m coming back to each other
 		// ALT_STRETCH also bounds the search horizon, so it directly trades quality for speed.
 		public int ALT_MAX_COUNT = 2; // how many alternatives to return
 		public double ALT_STRETCH = 0.4; // hard limit of relative cost overhead (and search bound)
@@ -81,7 +82,6 @@ public class HHRouteDataStructure {
 		// rarely is. On a route long enough for ALT_STRETCH to mean minutes this allowance is nothing.
 		public double ALT_STRETCH_ABS = 180; // seconds allowed on top of ALT_STRETCH
 		public double ALT_MIN_PLATEAU = 0.1; // min share of the route driven as its own optimal road
-		public double ALT_MAX_SHARING = 0.6; // coarse hub-graph pre-filter (stage 1)
 		public double ALT_MIN_DISTINCT_REL = 0.2; // exact geometry filter (stage 2), share of main length
 		// Only a floor under the relative rule, for routes too short to make it meaningful: a fixed
 		// requirement of a kilometre or two is a third of a 4 km city route and rejects everything
@@ -90,7 +90,10 @@ public class HHRouteDataStructure {
 		// Max detailed expansions in stage 2 (time guard). Retries of a candidate whose shortcuts
 		// disagree with the detailed roads count against it, so this is not "number of candidates".
 		public int ALT_MAX_EXPAND = 8;
-		public double ALT_MAX_RETRACED = 100; // meters an alternative may drive twice (u-turn tolerance)
+		// Each leg of a candidate is a shortest path; what their concatenation can add is driving out
+		// and back - the same road twice, or down one carriageway of a dual road and up the other.
+		// Measured against the best way between the two ends of the loop, so an interchange passes.
+		public double ALT_MAX_LOOP = 500; // meters the two legs may waste to come back to each other
 		// The detailed graph is searched again when the hub graph offers nothing, and that search grows
 		// with the route: measured 44 ms at 423 s of cost, 197 ms at 645 s, 274 ms at 978 s and 700 ms
 		// on a 140 km route that had no alternative to find anyway. Beyond a city hop it is not worth it.
