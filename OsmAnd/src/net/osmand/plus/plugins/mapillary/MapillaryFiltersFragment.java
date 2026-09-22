@@ -65,7 +65,8 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
         AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 
         view.findViewById(R.id.filters_linear_layout).setBackgroundColor(backgroundColor);
-        applyProviderStrings(view);
+        // The layout is shared with Panoramax; only the description carries provider wording.
+        ((TextView) view.findViewById(R.id.filters_description)).setText(R.string.mapillary_menu_filter_description_new);
         // Filtering by username is not available in the current Mapillary API version.
         AndroidUiHelper.updateVisibility(view.findViewById(R.id.username_row), false);
         AndroidUiHelper.updateVisibility(view.findViewById(R.id.username_input_container), false);
@@ -256,19 +257,6 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
         });
 
         return view;
-    }
-
-    // The layout is shared with Panoramax, so it carries no provider wording of its own.
-    private void applyProviderStrings(@NonNull View view) {
-        ((TextView) view.findViewById(R.id.filters_tile_cache_title)).setText(R.string.mapillary_menu_title_tile_cache);
-        ((TextView) view.findViewById(R.id.filters_tile_cache_descr)).setText(R.string.mapillary_menu_descr_tile_cache);
-        ((TextView) view.findViewById(R.id.filters_description)).setText(R.string.mapillary_menu_filter_description_new);
-        ((TextView) view.findViewById(R.id.filters_username_title)).setText(R.string.mapillary_menu_title_username);
-        ((TextView) view.findViewById(R.id.filters_username_descr)).setText(R.string.mapillary_menu_descr_username);
-        ((TextView) view.findViewById(R.id.filters_dates_descr)).setText(R.string.mapillary_menu_descr_dates);
-        ((TextView) view.findViewById(R.id.pano_row_title)).setText(R.string.mapillary_menu_title_pano);
-        ((TextView) view.findViewById(R.id.auto_complete_text_view)).setHint(R.string.mapillary_menu_edit_text_hint);
-        ((TextView) view.findViewById(R.id.date_from_edit_text)).setHint(R.string.mapillary_menu_date_from);
     }
 
     private void hideKeyboard() {

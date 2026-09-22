@@ -103,21 +103,19 @@
                 android:paddingTop="10dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/filters_tile_cache_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.ListItemTitle"
-                    tools:text="Tile cache" />
+                    android:text="@string/mapillary_menu_title_tile_cache"
+                    android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/filters_tile_cache_descr"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
                     android:maxLines="2"
+                    android:text="@string/mapillary_menu_descr_tile_cache"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_desc_text_size"
-                    tools:text="Reload tiles to see up to date data." />
+                    android:textSize="@dimen/default_desc_text_size" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -200,21 +198,19 @@
                 android:paddingTop="10dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/filters_username_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.ListItemTitle"
-                    tools:text="Username" />
+                    android:text="@string/mapillary_menu_title_username"
+                    android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/filters_username_descr"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
                     android:lines="1"
+                    android:text="@string/mapillary_menu_descr_username"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_desc_text_size"
-                    tools:text="View only images added by" />
+                    android:textSize="@dimen/default_desc_text_size" />
             </LinearLayout>
         </LinearLayout>
 
@@ -233,6 +229,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/content_padding"
                 android:completionThreshold="1"
+                android:hint="@string/mapillary_menu_edit_text_hint"
                 android:inputType="text"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"
@@ -300,14 +297,13 @@
                     android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/filters_dates_descr"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
                     android:lines="1"
+                    android:text="@string/mapillary_menu_descr_dates"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_desc_text_size"
-                    tools:text="Only view added images" />
+                    android:textSize="@dimen/default_desc_text_size" />
             </LinearLayout>
         </LinearLayout>
 
@@ -334,6 +330,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
+                        android:hint="@string/mapillary_menu_date_from"
                         android:textColor="?android:textColorPrimary"
                         android:textSize="@dimen/default_list_text_size"
                         tools:text="From" />
@@ -380,8 +377,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="@dimen/map_button_size"
-                android:textAppearance="@style/TextAppearance.ListItemTitle"
-                tools:text="Display only 360 images" />
+                android:text="@string/mapillary_menu_title_pano"
+                android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/pano_row_toggle"
