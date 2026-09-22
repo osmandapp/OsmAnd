@@ -42,9 +42,14 @@ import net.osmand.util.MapUtils;
  *
  * Selection runs in two stages because hub-graph edges are shortcuts several km long: two different
  * shortcuts may still cover the same streets, so hub-level sharing underestimates the real overlap
- * (measured: 20% by hubs vs 76% by geometry). Stage 1 filters cheaply on the hub graph, stage 2
- * expands candidates one by one and checks the real road segments, stopping as soon as
- * ALT_MAX_COUNT routes are accepted.
+ * (measured: 20% by hubs vs 76% by geometry). Stage 1 keeps one representative per plateau and ranks
+ * them on the hub graph, stage 2 expands candidates one by one and checks the real road segments,
+ * stopping as soon as ALT_MAX_COUNT routes are accepted.
+ *
+ * Both legs of a candidate are shortest paths, so the one defect the concatenation can have is
+ * driving out and back: the same road twice, or down one carriageway of a dual road and up the
+ * other, where the via node sits on the far side and no hub-graph identity check can see it. That
+ * is local optimality, checked at the only place it can fail - see {@link #wastedLoop}.
  *
  * A route short enough that the two last-mile searches meet each other uses no hub-graph edge at all,
  * or so few that none of the above can produce anything. {@link #calcDetailedAlternatives} then
@@ -57,16 +62,6 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 
 	/** two points of a route closer than this are the same place (meters) */
 	private static final double PLACE_RADIUS = 60;
-	/** the stretch between two visits of one place is a detour only from this length on (meters) */
-	private static final double PLACE_MIN_DETOUR = 300;
-	/** driving this much more than needed is a detour whatever the route length is (meters) */
-	private static final double PLACE_MIN_WASTE = 500;
-	/** ... and on a long route, this share of it */
-	private static final double PLACE_WASTE_SHARE = 0.02;
-	/** how many revisited places are examined per route */
-	private static final int DETOUR_CANDIDATES = 4;
-	/** how often the via node may be moved past a detour before the candidate is given up */
-	private static final int VIA_MOVES = 3;
 
 	/** attempts to expand one candidate before giving up on it */
 	private static final int ALT_EXPAND_RETRIES = 3;
@@ -124,12 +119,12 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 		if (hub) {
 			calcHubAlternatives(route, start, end, progress, rrp);
 		}
-		// A route of a kilometre or two can touch the hub graph and still give the method nothing to
+		// A route of a kilometre or two can touch the hub graph and still give the method little to
 		// work with - measured on a 1.7 km route: three hub segments, six hub points settled by both
-		// trees, no candidate. The detailed graph is then the only place left to look, as long as the
-		// route is short enough for that search to be cheap (a route that uses no hub graph at all is
-		// short by construction).
-		if (route.altRoutes.isEmpty() && (!hub || optCost <= cfg.ALT_DETAILED_MAX_COST)) {
+		// trees, no candidate; on a 2.6 km one, a single candidate that survives. The detailed graph
+		// is then the only place left to look, as long as the route is short enough for that search
+		// to be cheap (a route that uses no hub graph at all is short by construction).
+		if (route.altRoutes.size() < cfg.ALT_MAX_COUNT && (!hub || optCost <= cfg.ALT_DETAILED_MAX_COST)) {
 			calcDetailedAlternatives(route, rrp);
 		}
 	}
@@ -221,7 +216,7 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 		return rev ? p.rtRev : p.rtPos;
 	}
 
-	/** stage 1: cheap admissibility on the hub graph */
+	/** stage 1: one candidate per plateau, from the hub graph alone */
 	private List<AltCandidate> selectCandidates(List<T> settled, HHNetworkRouteRes route) {
 		TLongSet optEdges = pathEdges(hubPath(route));
 		List<AltCandidate> candidates = new ArrayList<>();
@@ -245,16 +240,7 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 			return null;
 		}
 		List<NetworkDBPoint> path = pathThrough(via);
-		if (!isSimple(path)) {
-			// sp(s,v) and sp(v,t) are each optimal, but their concatenation is not necessarily a
-			// simple path: when both halves run over the same roads the candidate drives out and
-			// turns back. Cheap check first, the exact one is on the geometry in stage 2.
-			return null;
-		}
 		double sharing = sharedCost(path, optEdges) / cost;
-		if (sharing > cfg.ALT_MAX_SHARING) {
-			return null;
-		}
 		AltCandidate c = new AltCandidate();
 		c.via = via;
 		c.cost = cost;
@@ -314,27 +300,8 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 				continue;
 			}
 			List<RouteSegmentResult> detailed = prepare(alt, start, end, rrp);
-			if (worstDetour(detailed) != null) {
-				// The expansion of the hub path sends the driver out and back. Rather than splice a
-				// better piece in - which would leave a route no single waypoint asks for again -
-				// the candidate is routed the way a user would reproduce it: start -> its via node
-				// -> end, with the via node moved past the detour until the legs come out clean.
-				List<RouteSegmentResult> legs = routeThroughCleanVia(start, end, c.via.getPoint());
-				if (legs == null || legs.isEmpty()) {
-					dropped(c, "drives out and back, and no via node of its own avoids it");
-					continue;
-				}
-				detailed = legs;
-				alt.detailed = legs;
-				c.cost = segmentsCost(legs);
-				if (c.cost > maxCost) {
-					dropped(c, "+%.1f%% over the limit once the detour is out",
-							100 * (c.cost / optCost - 1));
-					continue;
-				}
-			}
 			Map<Long, Double> geometry = roadSegments(detailed);
-			Distinctness d = assess(detailed, geometry, c.cost, "");
+			Distinctness d = assess(detailed, geometry, c.cost, c.via.getPoint(), "");
 			if (d == null) {
 				continue;
 			}
@@ -570,7 +537,7 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 				alt.detailed = rrp.prepareResult(hctx.rctx, alt.detailed).detailed;
 			}
 			Map<Long, Double> geometry = roadSegments(alt.detailed);
-			Distinctness d = assess(alt.detailed, geometry, c.cost, " (detailed)");
+			Distinctness d = assess(alt.detailed, geometry, c.cost, viaPoint(c), " (detailed)");
 			if (d == null) {
 				continue;
 			}
@@ -625,16 +592,14 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 
 	/** how the candidate differs from the routes already on offer, or null when it must not be proposed */
 	private Distinctness assess(List<RouteSegmentResult> detailed, Map<Long, Double> geometry,
-			double cost, String label) {
+			double cost, LatLon via, String label) {
 		if (detailed.isEmpty()) {
 			dropped(cost, label, "no detailed geometry");
 			return null;
 		}
-		double retraced = retracedLength(detailed);
-		if (retraced > cfg.ALT_MAX_RETRACED) {
-			// the hub-level isSimple() check misses this when the two halves overlap inside a single
-			// shortcut: the candidate drives out and turns back, which reads as a bug on the map
-			dropped(cost, label, "drives %.0f m of its own roads twice", retraced);
+		double wasted = wastedLoop(detailed, via);
+		if (wasted > cfg.ALT_MAX_LOOP) {
+			dropped(cost, label, "drives out and back, %.0f m more than needed", wasted);
 			return null;
 		}
 		Distinctness d = distinctness(geometry, accepted);
@@ -855,187 +820,99 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 		return true;
 	}
 
-	/** no hub point is visited twice, i.e. the two halves of the candidate do not overlap */
-	private boolean isSimple(List<NetworkDBPoint> path) {
-		TLongSet seen = new TLongHashSet();
-		for (NetworkDBPoint p : path) {
-			if (!seen.add(p.index)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	/** cost of a prepared route, the way the stretch limit measures it */
-	private static double segmentsCost(List<RouteSegmentResult> segments) {
-		double c = 0;
-		for (RouteSegmentResult r : segments) {
-			c += r.getRoutingTime();
-		}
-		return c;
-	}
-
-	private static double segmentsDistance(List<RouteSegmentResult> segments) {
-		double d = 0;
-		for (RouteSegmentResult r : segments) {
-			d += r.getDistance();
-		}
-		return d;
-	}
-
-	private static class RoutePoint {
-		int seg;
-		int pnt;
-		double lat, lon, dist;
-	}
-
-	/** every point of a route with the segment it belongs to and how far along it is */
-	private static List<RoutePoint> flatten(List<RouteSegmentResult> segments) {
-		List<RoutePoint> pts = new ArrayList<>();
-		double dist = 0;
-		for (int k = 0; k < segments.size(); k++) {
-			RouteSegmentResult r = segments.get(k);
-			RouteDataObject o = r.getObject();
-			int i = r.getStartPointIndex(), end = r.getEndPointIndex();
-			int step = i <= end ? 1 : -1;
-			int n = Math.abs(end - i), c = 0;
-			double segDist = r.getDistance();
-			while (true) {
-				RoutePoint p = new RoutePoint();
-				p.seg = k;
-				p.pnt = i;
-				p.lat = MapUtils.get31LatitudeY(o.getPoint31YTile(i));
-				p.lon = MapUtils.get31LongitudeX(o.getPoint31XTile(i));
-				p.dist = dist + (n == 0 ? 0 : segDist * c / n);
-				pts.add(p);
-				if (i == end) {
-					break;
-				}
-				i += step;
-				c++;
-			}
-			dist += segDist;
-		}
-		return pts;
+	/** the junction the two halves of a detailed candidate are joined at */
+	private static LatLon viaPoint(DetailedCandidate c) {
+		RouteDataObject o = c.fwd.getRoad();
+		int i = c.fwd.getSegmentStart();
+		return new LatLon(MapUtils.get31LatitudeY(o.getPoint31YTile(i)), MapUtils.get31LongitudeX(o.getPoint31XTile(i)));
 	}
 
 	/**
-	 * The route through a via node that does not send the driver out and back. A hub point sits on
-	 * one carriageway of a dual road, and the way to that side can be a kilometre of driving down
-	 * and turning round - the candidate is then "optimal through a silly point": every leg of it is
-	 * a shortest path and it still reads as a bug on the map. Such a route is not repaired in place
-	 * (splicing a better piece in would make it a route no single waypoint asks for again); the via
-	 * node is moved past the detour and the two legs are routed again.
+	 * How much distance the route wastes to come back to a place it has already been - measured
+	 * between the leg to the via node and the leg from it only. Each leg is a shortest path and
+	 * cannot waste distance on its own: a loop inside one leg is the shape of an interchange. What
+	 * the concatenation can add is the two legs running back over each other, and that is one case
+	 * whatever the map calls it: the same road driven twice, or the two carriageways of a dual road,
+	 * where the via node sits on the far side and every hub-graph check sees two different points.
+	 * The longest such loop is compared with the best way between its two ends, so an interchange a
+	 * via node happens to sit in (loop == best way) passes, and a u-turn does not. Decided on
+	 * distance, never on cost: the legs carry the costs of one search and the comparison route those
+	 * of another.
 	 */
-	private List<RouteSegmentResult> routeThroughCleanVia(LatLon start, LatLon end, LatLon via) {
-		for (int attempt = 0; attempt < VIA_MOVES; attempt++) {
-			List<RouteSegmentResult> legs = routeThrough(start, end, via);
-			if (legs == null || legs.isEmpty()) {
-				return null;
-			}
-			RoutePoint[] detour = worstDetour(legs);
-			if (detour == null) {
-				return legs;
-			}
-			via = new LatLon(detour[1].lat, detour[1].lon);
+	private double wastedLoop(List<RouteSegmentResult> segments, LatLon via) {
+		List<int[]> pts = routePoints(segments);
+		int n = pts.size();
+		if (n == 0) {
+			return 0;
 		}
-		return null;
-	}
-
-	/** the route a user gets from one waypoint: start -> via -> end, each leg routed on its own */
-	private List<RouteSegmentResult> routeThrough(LatLon start, LatLon end, LatLon via) {
-		try {
-			RoutingContext local = new RoutingContext(hctx.rctx);
-			local.calculationProgress = new RouteCalculationProgress();
-			RoutePlannerFrontEnd frontEnd = new RoutePlannerFrontEnd();
-			frontEnd.setUseOnlyHHRouting(true)
-					.setHHRoutingConfig(HHRoutePlanner.prepareDefaultRoutingConfig(null));
-			List<LatLon> inter = new ArrayList<>();
-			inter.add(via);
-			RouteCalcResult res = frontEnd.searchRoute(local, start, end, inter);
-			return res.getError() == null ? res.getList() : null;
-		} catch (Exception | StackOverflowError e) {
-			return null;
-		}
-	}
-
-	/**
-	 * The stretch the route drives to come back to a place it has already been, when the way
-	 * between those two points is much shorter. Decided on the distance driven and never on cost:
-	 * the route carries the costs of one search and the comparison route those of another, and by
-	 * cost a way over the very same roads can look hundreds of seconds cheaper.
-	 */
-	private RoutePoint[] worstDetour(List<RouteSegmentResult> legs) {
-		List<RoutePoint> pts = flatten(legs);
-		double length = segmentsDistance(legs);
-		for (RoutePoint[] pair : worstPerPlace(revisitPairs(pts))) {
-			RouteCalcResult best = routeBetween(legs.get(pair[0].seg), pair[0].pnt,
-					legs.get(pair[1].seg), pair[1].pnt);
-			if (best == null || best.detailed.isEmpty()) {
-				continue;
+		int vx = MapUtils.get31TileNumberX(via.getLongitude()), vy = MapUtils.get31TileNumberY(via.getLatitude());
+		double[] along = new double[n];
+		int viaIdx = 0;
+		double viaDist = Double.MAX_VALUE;
+		for (int i = 0; i < n; i++) {
+			int[] p = pts.get(i);
+			if (i > 0) {
+				int[] q = pts.get(i - 1);
+				along[i] = along[i - 1] + HHRoutePlanner.squareRootDist31(q[0], q[1], p[0], p[1]);
 			}
-			double driven = pair[1].dist - pair[0].dist;
-			double needed = segmentsDistance(best.detailed);
-			// Two bars, and both have to be cleared. The ratio says the stretch is a detour rather
-			// than the shape of a junction; the share says it is worth doing something about - a
-			// 500 m loop on an 80 km route is a roundabout, not a fault, and rebuilding the whole
-			// candidate around it costs a good alternative (measured on Pisa -> Prato: +12% became
-			// +27% because of one 543 m loop).
-			if (driven >= 2 * needed + PLACE_MIN_DETOUR
-					&& driven - needed > Math.max(PLACE_MIN_WASTE, PLACE_WASTE_SHARE * length)) {
-				return pair;
+			double d = HHRoutePlanner.squareRootDist31(p[0], p[1], vx, vy);
+			if (d < viaDist) {
+				viaDist = d;
+				viaIdx = i;
 			}
 		}
-		return null;
-	}
-
-	/** the pairs of route points that sit in the same place with driving in between */
-	private static List<RoutePoint[]> revisitPairs(List<RoutePoint> pts) {
-		List<RoutePoint[]> found = new ArrayList<>();
-		for (int i = 0; i < pts.size(); i++) {
-			for (int j = i + 1; j < pts.size(); j++) {
-				RoutePoint a = pts.get(i), b = pts.get(j);
-				if (a.seg == b.seg || b.dist - a.dist <= PLACE_MIN_DETOUR) {
-					continue;
-				}
-				if (MapUtils.getDistance(a.lat, a.lon, b.lat, b.lon) < PLACE_RADIUS) {
-					found.add(new RoutePoint[] {a, b});
+		// the leg from the via node, in cells of PLACE_RADIUS: a point of the leg to it is only
+		// compared with the points of the neighbouring cells
+		int cell = (int) Math.ceil(PLACE_RADIUS / (40075016.686 * Math.cos(Math.toRadians(via.getLatitude())) / (1L << 31)));
+		TLongObjectHashMap<List<Integer>> grid = new TLongObjectHashMap<>();
+		for (int j = viaIdx + 1; j < n; j++) {
+			long key = cellKey(pts.get(j)[0] / cell, pts.get(j)[1] / cell);
+			List<Integer> l = grid.get(key);
+			if (l == null) {
+				grid.put(key, l = new ArrayList<>());
+			}
+			l.add(j);
+		}
+		double loop = cfg.ALT_MAX_LOOP; // a shorter loop cannot waste more than that, whatever it is
+		int from = -1, to = -1;
+		for (int i = 0; i <= viaIdx; i++) {
+			int[] a = pts.get(i);
+			for (int dx = -1; dx <= 1; dx++) {
+				for (int dy = -1; dy <= 1; dy++) {
+					List<Integer> near = grid.get(cellKey(a[0] / cell + dx, a[1] / cell + dy));
+					if (near == null) {
+						continue;
+					}
+					for (int j : near) {
+						int[] b = pts.get(j);
+						if (along[j] - along[i] > loop
+								&& HHRoutePlanner.squareRootDist31(a[0], a[1], b[0], b[1]) < PLACE_RADIUS) {
+							loop = along[j] - along[i];
+							from = i;
+							to = j;
+						}
+					}
 				}
 			}
 		}
-		return found;
-	}
-
-	/** the longest detour of each place, worst first - one revisit produces a pair per point */
-	private static List<RoutePoint[]> worstPerPlace(List<RoutePoint[]> found) {
-		found.sort(new Comparator<RoutePoint[]>() {
-			@Override
-			public int compare(RoutePoint[] x, RoutePoint[] y) {
-				return Double.compare(y[1].dist - y[0].dist, x[1].dist - x[0].dist);
-			}
-		});
-		List<RoutePoint[]> distinct = new ArrayList<>();
-		for (RoutePoint[] pair : found) {
-			boolean seen = false;
-			for (RoutePoint[] kept : distinct) {
-				if (MapUtils.getDistance(pair[0].lat, pair[0].lon, kept[0].lat, kept[0].lon) < 300
-						&& MapUtils.getDistance(pair[1].lat, pair[1].lon, kept[1].lat, kept[1].lon) < 300) {
-					seen = true;
-					break;
-				}
-			}
-			if (!seen) {
-				distinct.add(pair);
-			}
-			if (distinct.size() >= DETOUR_CANDIDATES) {
-				break;
-			}
+		if (from < 0) {
+			return 0;
 		}
-		return distinct;
+		List<RouteSegmentResult> best = routeBetween(segments.get(pts.get(from)[2]), pts.get(from)[3],
+				segments.get(pts.get(to)[2]), pts.get(to)[3]);
+		if (best == null || best.isEmpty()) {
+			return 0; // cannot tell
+		}
+		List<int[]> bp = routePoints(best);
+		double needed = 0;
+		for (int i = 1; i < bp.size(); i++) {
+			needed += HHRoutePlanner.squareRootDist31(bp.get(i - 1)[0], bp.get(i - 1)[1], bp.get(i)[0], bp.get(i)[1]);
+		}
+		return loop - needed;
 	}
 
 	/** the best way from one point of a route to another, searched on a copy of the context */
-	private RouteCalcResult routeBetween(RouteSegmentResult a, int ai, RouteSegmentResult b, int bi) {
+	private List<RouteSegmentResult> routeBetween(RouteSegmentResult a, int ai, RouteSegmentResult b, int bi) {
 		try {
 			RouteSegmentPoint from = new RouteSegmentPoint(a.getObject(),
 					Math.min(ai, a.getObject().getPointsLength() - 2), 0);
@@ -1043,29 +920,34 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 					Math.min(bi, b.getObject().getPointsLength() - 2), 0);
 			RoutingContext local = new RoutingContext(hctx.rctx);
 			local.calculationProgress = new RouteCalculationProgress();
-			return new RoutePlannerFrontEnd().searchRouteInternalPrepare(local, from, to, null);
+			RouteCalcResult res = new RoutePlannerFrontEnd().searchRouteInternalPrepare(local, from, to, null);
+			return res == null ? null : res.detailed;
 		} catch (Exception | StackOverflowError e) {
 			return null;
 		}
 	}
 
-	/** length of the road pieces that `segments` drives more than once */
-	private double retracedLength(List<RouteSegmentResult> segments) {
-		TLongSet seen = new TLongHashSet();
-		double retraced = 0;
-		for (RouteSegmentResult r : segments) {
+	private static long cellKey(int cx, int cy) {
+		return ((long) cx << 32) ^ (cy & 0xffffffffL);
+	}
+
+	/** every point of the route in order: x31, y31, the segment it belongs to and its index there */
+	private static List<int[]> routePoints(List<RouteSegmentResult> segments) {
+		List<int[]> pts = new ArrayList<>();
+		for (int k = 0; k < segments.size(); k++) {
+			RouteSegmentResult r = segments.get(k);
 			RouteDataObject o = r.getObject();
 			int i = r.getStartPointIndex(), end = r.getEndPointIndex();
 			int step = i <= end ? 1 : -1;
-			while (i != end) {
-				int j = i + step;
-				if (!seen.add(roadPieceKey(o, i, j))) {
-					retraced += pieceLength(o, i, j);
+			while (true) {
+				pts.add(new int[] {o.getPoint31XTile(i), o.getPoint31YTile(i), k, i});
+				if (i == end) {
+					break;
 				}
-				i = j;
+				i += step;
 			}
 		}
-		return retraced;
+		return pts;
 	}
 
 	/** every hub-graph segment was expanded into real roads, so nothing will be drawn as a straight line */
