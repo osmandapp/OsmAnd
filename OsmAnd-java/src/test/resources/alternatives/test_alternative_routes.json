@@ -134,5 +134,182 @@
       "longitude": 30.47719
     },
     "minAlternatives": 1
+  },
+  {
+    "testName": "Kyiv, a 2.5 km hop: both ways round offer less than a kilometre of their own",
+    "description": "Two distinct ways round a 2.5 km route, at +13% and +25%. Each offers 0.9-1.2 km of roads the main route does not use, which is above ALT_MIN_DISTINCT_FLOOR (300 m) and far below the 1500 m the constant demanded before #25815: with the old value this route returns nothing.",
+    "map": "Ukraine_kyiv-city_europe_2.obf",
+    "startPoint": {
+      "latitude": 50.508335,
+      "longitude": 30.503397
+    },
+    "endPoint": {
+      "latitude": 50.517447,
+      "longitude": 30.487433
+    },
+    "minAlternatives": 2,
+    "expectedVia": [
+      {
+        "name": "the northern way round",
+        "latitude": 50.52294,
+        "longitude": 30.49942,
+        "toleranceMeters": 300
+      },
+      {
+        "name": "the southern way round",
+        "latitude": 50.50744,
+        "longitude": 30.48486,
+        "toleranceMeters": 300
+      }
+    ]
+  },
+  {
+    "testName": "Kyiv, a 2.9 km hop that only the detailed graph can answer",
+    "description": "Two alternatives at +38% and +45%, both out of reach of the relative stretch limit alone (ALT_STRETCH_ABS carries them) and both found only because the search falls back to the detailed graph when the hub graph returns nothing (#25872). Switching either off leaves the route with no alternatives at all, and so does ALT_MIN_DISTINCT_FLOOR = 1500.",
+    "map": "Ukraine_kyiv-city_europe_2.obf",
+    "startPoint": {
+      "latitude": 50.471035,
+      "longitude": 30.422543
+    },
+    "endPoint": {
+      "latitude": 50.460414,
+      "longitude": 30.415948
+    },
+    "minAlternatives": 2,
+    "expectedVia": [
+      {
+        "name": "the eastern street",
+        "latitude": 50.4672,
+        "longitude": 30.43231,
+        "toleranceMeters": 250
+      },
+      {
+        "name": "the western street",
+        "latitude": 50.46695,
+        "longitude": 30.41685,
+        "toleranceMeters": 250
+      }
+    ]
+  },
+  {
+    "testName": "Amstelveen -> Amsterdam Zuidoost: no U-turn through both carriageways of Beneluxbaan",
+    "description": "The reported case. A candidate used to drive 1.2 km down Beneluxbaan, turn round at Bovenkerkerweg and come back 2.6 km, returning within 56 m of where it left - the two hub points are the two carriageways of the same junction, 25 m apart, which neither the hub-index check nor the road-piece check can see. The best way between the two ends of that loop is 0.1 km.",
+    "map": "Netherlands_noord-holland_europe_2.obf",
+    "startPoint": {
+      "latitude": 52.28168,
+      "longitude": 4.867821
+    },
+    "endPoint": {
+      "latitude": 52.304365,
+      "longitude": 4.946333
+    },
+    "minAlternatives": 2,
+    "expectedVia": [
+      {
+        "name": "the Oranjebaan corridor",
+        "latitude": 52.30059,
+        "longitude": 4.91345,
+        "toleranceMeters": 400
+      }
+    ],
+    "unexpectedVia": [
+      {
+        "name": "the Bovenkerkerweg U-turn",
+        "latitude": 52.2864,
+        "longitude": 4.84204,
+        "toleranceMeters": 300
+      }
+    ]
+  },
+  {
+    "testName": "Kyiv west -> south-east: the cheapest corridor is offered, not its 145 s twin",
+    "description": "Master offered an 18.2 km route with an 8.2 km loop where 1.5 km is enough. Once the candidates are built as two optimal legs the corridor comes out at 10.2 km, but only if the hub-graph sharing filter lets the candidate through: at ALT_MAX_SHARING = 0.6 the same corridor is offered 0.8 km longer and 145 s dearer.",
+    "map": "Ukraine_kyiv-city_europe_2.obf",
+    "startPoint": {
+      "latitude": 50.510076,
+      "longitude": 30.464124
+    },
+    "endPoint": {
+      "latitude": 50.481247,
+      "longitude": 30.548311
+    },
+    "minAlternatives": 2,
+    "maxFirstStretchPercent": 12,
+    "expectedVia": [
+      {
+        "name": "the western corridor",
+        "latitude": 50.49376,
+        "longitude": 30.4673,
+        "toleranceMeters": 400
+      }
+    ],
+    "unexpectedVia": [
+      {
+        "name": "the southern loop of the old candidate",
+        "latitude": 50.46235,
+        "longitude": 30.4462,
+        "toleranceMeters": 600
+      }
+    ]
+  },
+  {
+    "testName": "Badhoevedorp -> Almere: a 4 km loop where 72 m of road connects the two ends",
+    "description": "The worst loop measured: the candidate came back to within 60 m of itself after 4.1 km, while the two ends are 72 m apart by road. With the candidates routed through their via node this route offers two corridors around Amsterdam instead.",
+    "map": "Netherlands_noord-holland_europe_2.obf",
+    "startPoint": {
+      "latitude": 52.30945,
+      "longitude": 4.802452
+    },
+    "endPoint": {
+      "latitude": 52.381727,
+      "longitude": 5.015779
+    },
+    "minAlternatives": 2,
+    "maxFirstStretchPercent": 10,
+    "expectedVia": [
+      {
+        "name": "the northern corridor",
+        "latitude": 52.36436,
+        "longitude": 4.84241,
+        "toleranceMeters": 1000
+      }
+    ],
+    "unexpectedVia": [
+      {
+        "name": "the loop of the old candidate",
+        "latitude": 52.37237,
+        "longitude": 4.93365,
+        "toleranceMeters": 300
+      }
+    ]
+  },
+  {
+    "testName": "Amsterdam north -> east: a 2.1 km detour where 730 m is enough",
+    "description": "A short route whose candidate went 2.1 km out and back while 730 m of road connects the two ends of that loop; the hub chain says nothing here, the detour is inside the expanded geometry. Guarded by the general loop check rather than by a point, because the corridor the faulty candidate looped through is also used by a sound alternative.",
+    "map": "Netherlands_noord-holland_europe_2.obf",
+    "startPoint": {
+      "latitude": 52.339235,
+      "longitude": 4.924122
+    },
+    "endPoint": {
+      "latitude": 52.32656,
+      "longitude": 4.940146
+    },
+    "minAlternatives": 1,
+    "maxAlternatives": 2
+  },
+  {
+    "testName": "Kyiv, Rusanivka -> Osokorky: the candidate that drives its own road twice",
+    "description": "The one route of 105 measured where ALT_MAX_RETRACED still binds: without it a candidate is offered that covers a stretch of its own roads in both directions.",
+    "map": "Ukraine_kyiv-city_europe_2.obf",
+    "startPoint": {
+      "latitude": 50.445856,
+      "longitude": 30.569246
+    },
+    "endPoint": {
+      "latitude": 50.379707,
+      "longitude": 30.580448
+    },
+    "minAlternatives": 1
   }
 ]
