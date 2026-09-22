@@ -2520,7 +2520,7 @@
     <string name="poi_counselling_type_victim_no">Tanácsadás (áldozat) nincs</string>
     <string name="poi_counselling_type_violence_yes">Tanácsadás (erőszak)</string>
     <string name="poi_counselling_type_violence_no">Tanácsadás (erőszak) nincs</string>
-    <string name="poi_counselling_yes">Tanácsadás</string>
+    <string name="poi_counselling_yes">Tanácsadás: igen</string>
     <string name="poi_counselling_no">Tanácsadás nincs</string>
     <string name="poi_home_visit_yes">igen;otthoni beteglátogatás</string>
     <string name="poi_disease_malaria_yes">Malária</string>
@@ -5185,4 +5185,17 @@
     <string name="poi_air_conditioning_yes">Igen</string>
     <string name="poi_air_conditioning_no">Nem</string>
     <string name="poi_disc_golf_course">Discgolf-pálya</string>
+    <string name="poi_dancing_school">Tánciskola</string>
+    <string name="poi_student_accommodation">Diákszállás</string>
+    <string name="poi_healthcare_counselling">Tanácsadás</string>
+    <string name="poi_healthcare_birthing_centre">Szülészeti központ</string>
+    <string name="poi_craft_cleaning">Takarítási szolgáltatás</string>
+    <string name="poi_craft_printer">Nyomtatás</string>
+    <string name="poi_craft_signmaker">Táblakészítés</string>
+    <string name="poi_funeral_hall">Ravatalozó</string>
+    <string name="poi_post_depot">Postai logisztikai terület</string>
+    <string name="poi_indoor_play">Beltéri játszótér</string>
+    <string name="poi_traffic_park">Közlekedési park</string>
+    <string name="poi_animal_breeding">Állattenyésztés</string>
+    <string name="poi_stables">Istállók</string>
 </resources>
