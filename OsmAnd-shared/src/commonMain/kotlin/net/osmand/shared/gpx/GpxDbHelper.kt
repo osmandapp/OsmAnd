@@ -46,7 +46,13 @@ object GpxDbHelper : GpxReaderAdapter {
 		fun onGpxDataItemReady(item: GpxDataItem, lastItem: Boolean)
 	}
 
-	fun loadItemsBlocking() = runBlocking { loadItems() }
+	fun loadItemsBlocking() = runBlocking {
+		try {
+			loadItems()
+		} catch (error: Exception) {
+			log.error("Failed to load GPX database items", error)
+		}
+	}
 	suspend fun loadItems() {
 		loadGpxItems()
 		loadGpxDirItems()

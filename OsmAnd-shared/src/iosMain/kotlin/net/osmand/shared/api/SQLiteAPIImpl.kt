@@ -3,7 +3,7 @@ package net.osmand.shared.api
 import co.touchlab.sqliter.Cursor
 import co.touchlab.sqliter.DatabaseConfiguration
 import co.touchlab.sqliter.DatabaseConnection
-import co.touchlab.sqliter.DatabaseManager
+import co.touchlab.sqliter.DatabaseFileContext
 import co.touchlab.sqliter.NO_VERSION_CHECK
 import co.touchlab.sqliter.Statement
 import co.touchlab.sqliter.createDatabaseManager
@@ -14,34 +14,69 @@ import co.touchlab.sqliter.setVersion
 import co.touchlab.sqliter.stringForQuery
 import co.touchlab.sqliter.withStatement
 import co.touchlab.sqliter.interop.SQLiteException
+import co.touchlab.sqliter.interop.SQLiteExceptionErrorCode
+import co.touchlab.sqliter.interop.SqliteErrorType
 import net.osmand.shared.api.SQLiteAPI.*
+import net.osmand.shared.util.LoggerFactory
 import okio.Path.Companion.toPath
 
 class SQLiteAPIImpl : SQLiteAPI {
 
-	private lateinit var databaseManager: DatabaseManager
+	companion object {
+		private val log = LoggerFactory.getLogger("SQLiteAPIImpl")
+	}
 
-	override fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection {
-		val configuration = DatabaseConfiguration(name = name, version = NO_VERSION_CHECK, create = { _ ->
-		}, upgrade = { _, _, _ -> })
+	override fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection? {
+		return try {
+			open(name, null)
+		} catch (e: SQLiteException) {
+			if (isDamaged(e)) {
+				recreateDatabase(name, e)
+			} else {
+				log.error("Failed to get or create database $name", e)
+				null
+			}
+		}
+	}
 
-		databaseManager = createDatabaseManager(configuration)
-		val ds = databaseManager.createMultiThreadedConnection()
+	override fun openByAbsolutePath(path: String, readOnly: Boolean): SQLiteConnection? {
+		val p = path.toPath()
+		return try {
+			open(p.name, p.parent.toString())
+		} catch (e: SQLiteException) {
+			log.error("Failed to open database by path: $path readOnly=$readOnly", e)
+			null
+		}
+	}
+
+	private fun open(name: String, basePath: String?): SQLiteConnection {
+		val configuration = DatabaseConfiguration(
+			name = name,
+			version = NO_VERSION_CHECK,
+			create = { _ -> },
+			upgrade = { _, _, _ -> },
+			extendedConfig = DatabaseConfiguration.Extended(basePath = basePath)
+		)
+		val ds = createDatabaseManager(configuration).createMultiThreadedConnection()
 		return SQLiteDatabaseWrapper(ds)
 	}
 
-	override fun openByAbsolutePath(path: String, readOnly: Boolean): SQLiteConnection {
-		val p = path.toPath()
-		val configuration = DatabaseConfiguration(
-				name = p.name,
-				version = NO_VERSION_CHECK,
-				create = { _ -> },
-				upgrade = { _, _, _ -> },
-				extendedConfig = DatabaseConfiguration.Extended(basePath = p.parent.toString())
-		)
-		databaseManager = createDatabaseManager(configuration)
-		val ds = databaseManager.createMultiThreadedConnection()
-		return SQLiteDatabaseWrapper(ds)
+	// The file never opens again, so null here would fail every later read and write too
+	private fun recreateDatabase(name: String, cause: SQLiteException): SQLiteConnection? {
+		log.error("Database $name is damaged, recreating it", cause)
+		DatabaseFileContext.deleteDatabase(name)
+		return try {
+			open(name, null)
+		} catch (e: SQLiteException) {
+			log.error("Failed to recreate database $name", e)
+			null
+		}
+	}
+
+	private fun isDamaged(e: SQLiteException): Boolean {
+		// errorType throws when sqlite reports a code it does not know
+		val errorType = (e as? SQLiteExceptionErrorCode)?.let { runCatching { it.errorType }.getOrNull() }
+		return errorType == SqliteErrorType.SQLITE_NOTADB || errorType == SqliteErrorType.SQLITE_CORRUPT
 	}
 
 	class SQLiteDatabaseWrapper(private val ds: DatabaseConnection) : SQLiteConnection {
