@@ -20,7 +20,8 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 
 	private val database: GpxDatabase = GpxDbHelper.getGPXDatabase()
 	private var analyser = PlatformUtil.getTrackPointsAnalyser()
-	private var currentFile: KFile? = null
+	var currentFile: KFile? = null
+		private set
 	private var currentItem: GpxDataItem? = null
 
 	override suspend fun doInBackground(vararg params: Unit) {
@@ -34,7 +35,7 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 		}
 	}
 
-	private fun doReading() {
+	private suspend fun doReading() {
 		var filesCount = 0
 		try {
 			var file: KFile?
@@ -61,8 +62,8 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 		}
 	}
 
-	private fun pullNextFileItem() {
-		adapter.pullNextFileItem {
+	private suspend fun pullNextFileItem() {
+		adapter.pullNextFileItem(this) {
 			currentFile = it?.first
 			currentItem = it?.second
 		}
@@ -149,7 +150,10 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 	fun isReading(file: KFile): Boolean = currentFile == file
 
 	interface GpxReaderAdapter {
-		fun pullNextFileItem(action: ((Pair<KFile, GpxDataItem>?) -> Unit)? = null): Pair<KFile, GpxDataItem>?
+		suspend fun pullNextFileItem(
+			reader: GpxReader,
+			action: ((Pair<KFile, GpxDataItem>?) -> Unit)? = null
+		): Pair<KFile, GpxDataItem>?
 
 		fun onGpxDataItemRead(item: GpxDataItem) {}
 		fun onProgressUpdate(vararg dataItems: GpxDataItem) {}

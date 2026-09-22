@@ -9,6 +9,7 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
 import net.osmand.shared.data.StringIntPair
@@ -32,6 +33,13 @@ object GpxDbHelper : GpxReaderAdapter {
 	private val readingItemsCallbacks = mutableMapOf<KFile, MutableList<GpxDataItemCallback>?>()
 
 	private const val READER_TASKS_LIMIT = 4
+	// a reader holds a whole parsed file and its analysis until it moves on to the next one, and
+	// four of them on a library of large recordings took the Java heap to its limit: 473 of
+	// 512 MB with 12 s spent in GC within a minute on a POCO X3. The size of a file is known
+	// before it is read and grows with the heap its parse takes, so the readers share a budget
+	// of bytes in flight: small tracks still go four at a time, a large recording goes alone
+	private const val READER_BYTES_LIMIT = 16L * 1024 * 1024
+	private const val READER_BUDGET_POLL_MS = 250L
 	private var readers = mutableListOf<GpxReader>()
 	private var readerSync = Synchronizable()
 
@@ -344,12 +352,41 @@ object GpxDbHelper : GpxReaderAdapter {
 
 	fun getGPXDatabase(): GpxDatabase = database
 
-	override fun pullNextFileItem(action: ((Pair<KFile, GpxDataItem>?) -> Unit)?): Pair<KFile, GpxDataItem>? =
-		readerSync.synchronize {
-			val result = readingItemsMap.entries.firstOrNull()?.toPair()?.apply { readingItemsMap.remove(first) }
-			action?.invoke(result)
-			result
+	override suspend fun pullNextFileItem(
+		reader: GpxReader,
+		action: ((Pair<KFile, GpxDataItem>?) -> Unit)?
+	): Pair<KFile, GpxDataItem>? {
+		while (!reader.isCancelled()) {
+			var overBudget = false
+			val result = readerSync.synchronize {
+				val entry = readingItemsMap.entries.firstOrNull()
+				overBudget = entry != null && !fitsReadingBudget(reader, entry.key)
+				val next = if (overBudget) null else entry?.toPair()?.apply { readingItemsMap.remove(first) }
+				// a waiting reader holds nothing: the file it has just finished must not count
+				action?.invoke(next)
+				next
+			}
+			if (!overBudget) {
+				return result
+			}
+			// the head of the queue does not fit next to what the other readers hold: wait for one
+			// of them to finish instead of parsing one more file into an already full heap
+			delay(READER_BUDGET_POLL_MS)
 		}
+		return null
+	}
+
+	// the queue is read in order, so a file that does not fit is not passed over for a smaller
+	// one: the readers wait until it fits, and a file above the whole budget is read alone
+	private fun fitsReadingBudget(reader: GpxReader, file: KFile): Boolean {
+		var inFlight = 0L
+		for (other in readers) {
+			if (other !== reader) {
+				inFlight += other.currentFile?.length() ?: 0L
+			}
+		}
+		return inFlight == 0L || inFlight + file.length() <= READER_BYTES_LIMIT
+	}
 
 	override fun onGpxDataItemRead(item: GpxDataItem) {
 		putGpxDataItemToSmartFolder(item)
