@@ -198,14 +198,38 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 		});
 		for (T v : byDist) {
 			NetworkDBPoint prev = info(v, rev).rtRouteToPoint;
-			double val = 0;
+			double val;
 			if (prev != null && info(prev, !rev) != null && info(prev, !rev).rtRouteToPoint == v) {
 				Double acc = plateau.get(prev);
 				val = (acc == null ? 0 : acc)
 						+ (info(v, rev).rtDistanceFromStart - info(prev, rev).rtDistanceFromStart);
+			} else {
+				val = partialEdge(v, prev, rev);
 			}
 			plateau.put(v, val);
 		}
+	}
+
+	/**
+	 * The part of the edge that leads into v (from the root of this tree) which still belongs to the
+	 * plateau although the trees disagree on its far end. A road point on that edge is reached best
+	 * through v's chain as long as it lies beyond the point where the two ways cost the same - for
+	 * symmetric road costs, halfway in cost between the two. Without it a corridor that is one
+	 * shortcut long has no hub point of its own and no plateau at all, while a dead-end labyrinth of
+	 * small hub points has a long one; the main route's own nodes get exactly its full length.
+	 */
+	private double partialEdge(NetworkDBPoint v, NetworkDBPoint prev, boolean rev) {
+		double here = info(v, rev).rtDistanceFromStart;
+		double other = info(v, !rev).rtDistanceFromStart;
+		double edge, otherAtPrev;
+		if (prev == null || info(prev, !rev) == null) {
+			// reached by the first/last mile: that one is driven by every candidate and is no plateau
+			// of this one in particular (counting it made every tail variant of the route a candidate)
+			return 0;
+		}
+		edge = here - info(prev, rev).rtDistanceFromStart;
+		otherAtPrev = info(prev, !rev).rtDistanceFromStart;
+		return Math.max(0, Math.min(edge, (otherAtPrev + edge - other) / 2));
 	}
 
 	/**

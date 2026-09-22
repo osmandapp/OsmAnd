@@ -223,7 +223,7 @@
   },
   {
     "testName": "Kyiv west -> south-east: the cheapest corridor is offered, not its 145 s twin",
-    "description": "Master offered an 18.2 km route with an 8.2 km loop where 1.5 km is enough. Without the loop rule the candidate is offered as is; with it the corridor comes out at 10.2 km. The hub-graph sharing filter that once existed (ALT_MAX_SHARING = 0.6) offered the same corridor 0.8 km longer and 145 s dearer, so sharing only ranks candidates now.",
+    "description": "Master offered an 18.2 km route with an 8.2 km loop where 1.5 km is enough; the loop rule drops that candidate and the corridor comes out at 10.2 km. The second alternative is the one this route was found by: with the plateau counted in hub-graph hops the Vyshhorodska corridor - a single shortcut with no hub point of its own - had no plateau at all, and its slot went to a +36% zigzag through a district whose small streets are full of hub points. With the plateau extended into the edges the trees disagree on, the second alternative is +10%.",
     "map": "Ukraine_kyiv-city_europe_2.obf",
     "startPoint": {
       "latitude": 50.510076,
@@ -235,6 +235,7 @@
     },
     "minAlternatives": 2,
     "maxFirstStretchPercent": 12,
+    "maxStretchPercent": 20,
     "expectedVia": [
       {
         "name": "the western corridor",
