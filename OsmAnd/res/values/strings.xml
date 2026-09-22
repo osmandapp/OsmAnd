@@ -790,11 +790,11 @@
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Fuel pressure</string>
     <string name="liter">l</string>
-    <string name="percent_hour">%/h</string>
+    <string name="percent_hour" formatted="false">%/h</string>
 
     <string name="obd_fuel_consumption_rate_scanner">Fuel consumption rate (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Fuel consumption rate</string>
-    <string name="obd_fuel_consumption_rate_percent_hour">Fuel consumption rate %/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour" formatted="false">Fuel consumption rate %/h</string>
 
     <string name="route_guidance_desc">Provides real-time route guidance, including distance to the next turn, road name, current street name, and lane information. Widgets are active during navigation.</string>
 	<string name="route_guidance">Route guidance</string>
@@ -958,7 +958,7 @@ You will be able to pair this scanner again at any time.</string>
 
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">Vehicle Metrics</string>
-    <string name="percent_unit">%</string>
+    <string name="percent_unit" formatted="false">%</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_rpm_desc">Shows vehicle tachometer RPM over OBD sensor</string>
     <string name="obd_fuel_type_desc">Shows vehicle fuel type over OBD sensor</string>
