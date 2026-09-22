@@ -33,7 +33,7 @@ object TurnPreparation {
 
 	private const val TRAFFIC_SIGNALS_INTERSECTION_SIZE = 60.0
 
-	private class TimeCalculationState {
+	private class CumulativeIntersectionDistance {
 		var currentDistance = 0.0
 		var lastIntersectionDistance = -1.0
 	}
@@ -417,7 +417,7 @@ object TurnPreparation {
 	 */
 	@JvmStatic
 	fun calculateTimeSpeed(request: RoutingRequest, result: List<RouteSegmentResult>) {
-		val state = TimeCalculationState()
+		val state = CumulativeIntersectionDistance()
 		for (i in result.indices) {
 			if (i > 0) {
 				state.currentDistance += result[i - 1].getDistance().toDouble()
@@ -428,11 +428,11 @@ object TurnPreparation {
 
 	@JvmStatic
 	fun calculateTimeSpeed(request: RoutingRequest, rr: RouteSegmentResult) {
-		calculateTimeSpeed(request, rr, TimeCalculationState())
+		calculateTimeSpeed(request, rr, CumulativeIntersectionDistance())
 	}
 
 	private fun calculateTimeSpeed(
-		request: RoutingRequest, rr: RouteSegmentResult, state: TimeCalculationState
+		request: RoutingRequest, rr: RouteSegmentResult, state: CumulativeIntersectionDistance
 	) {
 		// Naismith's/Scarf rules add additional travel time when moving uphill
 		var useNaismithRule = false

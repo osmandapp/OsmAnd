@@ -328,14 +328,14 @@ public class RouteResultPreparation {
 
 	private static final double TRAFFIC_SIGNALS_INTERSECTION_SIZE = 60;
 
-	private static class TimeCalculationState {
+	private static class CumulativeIntersectionDistance {
 		double currentDistance;
 		// distance of the first traffic signal of the intersection being passed
 		double lastIntersectionDistance = -1;
 	}
 
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
-		TimeCalculationState state = new TimeCalculationState();
+		CumulativeIntersectionDistance state = new CumulativeIntersectionDistance();
 
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
@@ -347,10 +347,10 @@ public class RouteResultPreparation {
 	}
 
 	public static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr) {
-		calculateTimeSpeed(ctx, rr, new TimeCalculationState());
+		calculateTimeSpeed(ctx, rr, new CumulativeIntersectionDistance());
 	}
 
-	private static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr, TimeCalculationState state) {
+	private static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr, CumulativeIntersectionDistance state) {
 		// Naismith's/Scarf rules add additional travel time when moving uphill
 		boolean useNaismithRule = false;
 		double scarfSeconds = 0; // Additional time as per Naismith/Scarf
