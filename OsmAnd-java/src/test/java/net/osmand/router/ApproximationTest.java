@@ -78,15 +78,21 @@ public class ApproximationTest {
 			Objects.requireNonNull(nativeLibrary).initMapFile(new File(obfFilePath).getAbsolutePath(), true);
 		}
 
-		for (String type : entry.types) {
-			for (String profile : entry.profiles) {
-				for (Integer minPointApproximation : entry.minPointApproximation) {
-					testEntry(entry, type, profile, minPointApproximation, binaryMapIndexReaders, nativeLibrary);
+		try {
+			for (String type : entry.types) {
+				for (String profile : entry.profiles) {
+					for (Integer minPointApproximation : entry.minPointApproximation) {
+						testEntry(entry, type, profile, minPointApproximation, binaryMapIndexReaders, nativeLibrary);
+					}
 				}
 			}
+		} finally {
+			// native keeps opened files for the whole JVM, and routing of later tests would read roads from them
+			if (useNative) {
+				nativeLibrary.closeMapFile(new File(obfFilePath).getAbsolutePath());
+			}
+			raf.close();
 		}
-
-		raf.close();
 	}
 
 	private void testEntry(ApproximationEntry entry, String type, String profile, Integer minPointApproximation,

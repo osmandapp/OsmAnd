@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -46,6 +47,8 @@ public class RouteResultPreparationTest {
     private final TestEntry te;
     private static RoutePlannerFrontEnd fe;
     private static RoutingContext ctx;
+    private NativeLibrary nativeLibrary;
+    private String nativeMapFile;
     
 
     protected Log log = PlatformUtil.getLog(RouteResultPreparationTest.class);
@@ -56,6 +59,15 @@ public class RouteResultPreparationTest {
     
     boolean isNative() {
         return false;
+    }
+
+    @After
+    public void closeNativeMapFile() {
+        // native keeps opened files for the whole JVM, and routing of later tests would read roads from them
+        if (nativeMapFile != null) {
+            nativeLibrary.closeMapFile(nativeMapFile);
+            nativeMapFile = null;
+        }
     }
     
     @BeforeClass
@@ -84,7 +96,6 @@ public class RouteResultPreparationTest {
 
     @Test
     public void testLanes() throws Exception {
-        NativeLibrary nativeLibrary = null;
         boolean useNative = isNative() && getNativeLibPath() != null && !te.isIgnoreNative();
         if (useNative) {
             boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
@@ -102,7 +113,8 @@ public class RouteResultPreparationTest {
         fe = new RoutePlannerFrontEnd();
         RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
         if (useNative) {
-            Objects.requireNonNull(nativeLibrary).initMapFile(fl.getAbsolutePath(), true);
+            nativeMapFile = fl.getAbsolutePath();
+            Objects.requireNonNull(nativeLibrary).initMapFile(nativeMapFile, true);
         }
         Map<String, String> params = te.getParams();
         if (params == null) {
