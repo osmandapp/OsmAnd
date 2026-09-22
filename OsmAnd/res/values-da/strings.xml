@@ -5415,4 +5415,12 @@
     <string name="heap_dump_auto">Indsaml ved højt forbrug</string>
     <string name="heap_dump_auto_descr">Når heapen er næsten fuld, én gang hvert 30. minut.</string>
     <string name="heap_dump">Heap-dump</string>
+    <string name="gpx_line_style_desc_unavailable_for_color">Streg- og priklinjestile kan ikke anvendes, hvis sporets farve ikke er helt udfyldt.</string>
+    <string name="gpx_color_unavailable_for_line_style">Denne farveindstilling er ikke tilgængelig for en linjestil, der ikke er en fuldt udfyldt linje.</string>
+    <string name="gpx_color_desc_unavailable_for_style">Der er kun helt dækkende sporfarver til rådighed for streg- eller priklinjestilen.</string>
+    <string name="gpx_line_style">Linjestil</string>
+    <string name="gpx_line_style_solid">Solid</string>
+    <string name="gpx_line_style_dashed">Stiplet</string>
+    <string name="gpx_line_style_dotted">Prikket</string>
+    <string name="file_name_containes_illegal_char">Navnet må ikke indeholde: %1$s</string>
 </resources>
