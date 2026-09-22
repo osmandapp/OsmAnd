@@ -1381,6 +1381,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (progress != null && progress.hhGetCalcCounter() > 0) {
 			progress.hhIterationProgress((double) progress.hhGetCalcCounter() / maxCountReiteration);
 		}
+		boolean costIncreased = false;
 		for (int i = 0; i < route.segments.size(); i++) {
 			if (progress != null && progress.hhGetCalcCounter() == 0) {
 				progress.hhIterationProgress((double) i / route.segments.size()); // DETAILED
@@ -1419,7 +1420,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 								f.distanceFromStart, s.segment.dist, s.segment.start, s.segment.end);
 					}
 					s.segment.dist = f.distanceFromStart;
-					return true;
+					// correct every underestimated shortcut of this route before recalculating it
+					costIncreased = true;
+					continue;
 				}
 				s.rtTimeDetailed = f.distanceFromStart;
 				s.list = rrp.convertFinalSegmentToResults(hctx.rctx, f);
@@ -1432,7 +1435,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 			}
 		}
-		return false;
+		return costIncreased;
 	}
 	
 	private void recalculateNetworkCluster(HHRoutingContext<T> hctx, NetworkDBPoint start) throws InterruptedException, IOException {
