@@ -5359,4 +5359,12 @@
     <string name="heap_dump_auto">Прикупи при високој употреби</string>
     <string name="heap_dump_auto_descr">Када је хип скоро пун, једном на сваких 30 минута.</string>
     <string name="visualizing_button_grid_descr">Ћелије, слотови, оквири и записи.</string>
+    <string name="gpx_line_style_desc_unavailable_for_color">Стилови испрекиданих и тачкастих линија нису доступни када боја путање није пуна.</string>
+    <string name="gpx_color_unavailable_for_line_style">Ово бојење није доступно за стил линије који није пун.</string>
+    <string name="gpx_color_desc_unavailable_for_style">За стил линије са цртицама или тачкама доступна је само пуна боја путање.</string>
+    <string name="gpx_line_style">Стил линије</string>
+    <string name="gpx_line_style_solid">Солидан</string>
+    <string name="gpx_line_style_dashed">Испрекидан</string>
+    <string name="gpx_line_style_dotted">Тачкаст</string>
+    <string name="file_name_containes_illegal_char">Име не сме да садржи: %1$s</string>
 </resources>
