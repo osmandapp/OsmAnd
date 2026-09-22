@@ -64,7 +64,6 @@ class SQLiteAPIImpl : SQLiteAPI {
 		return SQLiteDatabaseWrapper(ds)
 	}
 
-	// The file never opens again, so null here would fail every later read and write too
 	private fun recreateDatabase(name: String): SQLiteConnection? =
 		synchronized(RECREATE_LOCK) {
 			try {
@@ -72,11 +71,12 @@ class SQLiteAPIImpl : SQLiteAPI {
 				return@synchronized open(name, null)
 			} catch (e: SQLiteException) {
 				if (!isDamaged(e)) {
-					log.error("Failed to get or create database $name", e)
+					log.error("Failed to reopen database $name", e)
 					return@synchronized null
 				}
 				log.error("Database $name is damaged, recreating it", e)
 			}
+			// SQLite refuses this file on every open, so dropping it is the only way back
 			DatabaseFileContext.deleteDatabase(name)
 			try {
 				open(name, null)
