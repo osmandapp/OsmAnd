@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- The phone app's launcher icon, carried over so the watch entry is recognisably OsmAnd.
+     gplayFull swaps the foreground and monochrome layers for the "+" variants, nightlyFree
+     replaces this file outright, mirroring icon.xml / icon_free.xml / icon_nightly.xml. -->
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-	<background android:drawable="@color/ic_launcher_background" />
-	<foreground android:drawable="@drawable/ic_launcher_foreground" />
+	<background android:drawable="@mipmap/ic_launcher_background" />
+	<foreground android:drawable="@mipmap/ic_launcher_foreground" />
+	<monochrome android:drawable="@drawable/ic_launcher_monochrome" />
 </adaptive-icon>

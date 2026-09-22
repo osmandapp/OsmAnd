@@ -1,33 +1,29 @@
 package net.osmand.wear.data
 
+import android.util.Log
+
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import net.osmand.wear.api.PhoneState
-import net.osmand.wear.api.WearCodec
 
 /**
  * Single source of truth on the watch side.
  *
- * A process-wide object rather than a ViewModel because [WearDataLayerService] delivers
- * updates outside of any Activity lifecycle — the service may well run while no screen exists.
+ * A process-wide object rather than a ViewModel because [WearDataLayerService] delivers updates
+ * outside of any Activity lifecycle — the service may well run while no screen exists.
  */
 object PhoneStateRepository {
 
 	private val _link = MutableStateFlow<PhoneLink>(PhoneLink.Connecting)
 	val link: StateFlow<PhoneLink> = _link.asStateFlow()
 
-	/** Called with the raw Data Layer payload; decoding failures are surfaced, not swallowed. */
-	fun onStateBytes(bytes: ByteArray?) {
-		if (bytes == null) {
+	fun onSnapshot(snapshot: Snapshot?) {
+		if (snapshot == null) {
+			Log.d(TAG, "Dropping an unreadable snapshot from the phone")
+			_link.value = PhoneLink.ProtocolMismatch
 			return
 		}
-		val state = WearCodec.decodeState(bytes)
-		_link.value = if (state != null) PhoneLink.Connected(state) else PhoneLink.ProtocolMismatch
-	}
-
-	fun onState(state: PhoneState) {
-		_link.value = PhoneLink.Connected(state)
+		_link.value = PhoneLink.Connected(snapshot)
 	}
 
 	fun onPhoneUnreachable() {
@@ -43,4 +39,6 @@ object PhoneStateRepository {
 			_link.value = PhoneLink.Connecting
 		}
 	}
+
+	private const val TAG = "OsmAndWear"
 }

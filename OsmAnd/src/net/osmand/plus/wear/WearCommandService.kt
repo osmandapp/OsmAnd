@@ -33,6 +33,8 @@ class WearCommandService : WearableListenerService() {
 			return
 		}
 		app.runInUIThread {
+			// Any contact from the watch means someone is looking, so start following the route.
+			WearBridge.start(app)
 			handle(command)
 			WearBridge.publish(app)
 		}

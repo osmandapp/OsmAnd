@@ -29,16 +29,38 @@ data class AppModeInfo(
 /** Populated only while a route is being followed; null means "not navigating". */
 @Serializable
 data class NavigationState(
-	val turnType: Int = 0,
-	val distanceToTurnMeters: Int = 0,
-	val distanceToTurnText: String = "",
-	val streetName: String? = null,
 	val leftDistanceText: String = "",
 	val leftTimeText: String = "",
 	val etaText: String = "",
 	val speedText: String? = null,
 	val deviatedFromRoute: Boolean = false,
-	val paused: Boolean = false
+	val paused: Boolean = false,
+	/** Nearest manoeuvres ahead, closest first. Empty while the route is still calculating. */
+	val maneuvers: List<ManeuverInfo> = emptyList()
+)
+
+/**
+ * One upcoming manoeuvre.
+ *
+ * [distanceMeters] is quantised on the phone so that a metre-by-metre drift does not produce a
+ * new payload on every GPS fix; the watch uses it for thresholds, [distanceText] for display.
+ * For the first manoeuvre the distance is measured from the current position, for the rest it
+ * is the leg length from the manoeuvre before it — the same convention OsmAnd's own "then in…"
+ * announcements use.
+ */
+@Serializable
+data class ManeuverInfo(
+	val turnType: Int = 0,
+	/** Roundabout exit number; 0 when the turn is not a roundabout. */
+	val exitOut: Int = 0,
+	/**
+	 * Key of the arrow image carried next to this snapshot as a Data Layer asset. The phone
+	 * draws it with OsmAnd's own turn drawable, so the watch never reimplements the glyphs.
+	 */
+	val iconKey: String? = null,
+	val distanceMeters: Int = 0,
+	val distanceText: String = "",
+	val streetName: String? = null
 )
 
 /** Trip recording status; null means the monitoring plugin is off or unavailable. */

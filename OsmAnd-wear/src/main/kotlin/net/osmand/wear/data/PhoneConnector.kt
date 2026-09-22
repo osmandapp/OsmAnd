@@ -21,6 +21,7 @@ class PhoneConnector(context: Context) {
 	private val capabilityClient = Wearable.getCapabilityClient(context)
 	private val messageClient = Wearable.getMessageClient(context)
 	private val dataClient = Wearable.getDataClient(context)
+	private val reader = SnapshotReader(context)
 
 	/** Node id of a reachable phone running OsmAnd, or null. */
 	suspend fun findPhoneNode(): String? = runCatching {
@@ -31,22 +32,21 @@ class PhoneConnector(context: Context) {
 	}.onFailure { Log.d(TAG, "Capability lookup failed", it) }.getOrNull()
 
 	/**
-	 * Reads whatever snapshot the phone left behind. Data Layer items survive disconnects,
-	 * so this is what fills the screen before the first live update arrives.
+	 * Reads whatever snapshot the phone left behind. Data Layer items survive disconnects, so
+	 * this is what fills the screen before the first live update arrives.
 	 */
-	suspend fun loadLastState(): ByteArray? = runCatching {
+	suspend fun loadLastSnapshot(): Snapshot? = runCatching {
 		val uri = Uri.Builder()
 			.scheme(PutDataRequest.WEAR_URI_SCHEME)
 			.path(WearProtocol.PATH_STATE)
 			.build()
 		val buffer = dataClient.getDataItems(uri).await()
-		try {
-			buffer.firstOrNull()?.let {
-				DataMapItem.fromDataItem(it).dataMap.getByteArray(WearProtocol.KEY_STATE)
-			}
+		val dataMap = try {
+			buffer.firstOrNull()?.let { DataMapItem.fromDataItem(it).dataMap }
 		} finally {
 			buffer.release()
 		}
+		dataMap?.let { reader.read(it) }
 	}.onFailure { Log.d(TAG, "Reading last state failed", it) }.getOrNull()
 
 	/** Returns false when the phone could not be reached, so the UI can roll back optimism. */
@@ -61,10 +61,7 @@ class PhoneConnector(context: Context) {
 	/** Handshake performed whenever a screen becomes visible. */
 	suspend fun refresh() {
 		PhoneStateRepository.onConnecting()
-		val cached = loadLastState()
-		if (cached != null) {
-			PhoneStateRepository.onStateBytes(cached)
-		}
+		loadLastSnapshot()?.let { PhoneStateRepository.onSnapshot(it) }
 		if (findPhoneNode() == null) {
 			PhoneStateRepository.onPhoneUnreachable()
 		} else {

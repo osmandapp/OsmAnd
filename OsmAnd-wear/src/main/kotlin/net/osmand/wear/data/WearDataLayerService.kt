@@ -5,6 +5,12 @@ import com.google.android.gms.wearable.DataEventBuffer
 import com.google.android.gms.wearable.DataMapItem
 import com.google.android.gms.wearable.WearableListenerService
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+
 import net.osmand.wear.api.WearProtocol
 
 /**
@@ -13,17 +19,23 @@ import net.osmand.wear.api.WearProtocol
  */
 class WearDataLayerService : WearableListenerService() {
 
+	private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+	private val reader by lazy { SnapshotReader(applicationContext) }
+
 	override fun onDataChanged(events: DataEventBuffer) {
-		for (event in events) {
-			if (event.type != DataEvent.TYPE_CHANGED) {
-				continue
-			}
-			val item = event.dataItem
-			if (item.uri.path != WearProtocol.PATH_STATE) {
-				continue
-			}
-			val bytes = DataMapItem.fromDataItem(item).dataMap.getByteArray(WearProtocol.KEY_STATE)
-			PhoneStateRepository.onStateBytes(bytes)
+		// The buffer is released as soon as this method returns, so the data maps are copied out
+		// before the arrow assets are fetched on another thread.
+		val maps = events
+			.filter { it.type == DataEvent.TYPE_CHANGED && it.dataItem.uri.path == WearProtocol.PATH_STATE }
+			.map { DataMapItem.fromDataItem(it.dataItem).dataMap }
+
+		for (map in maps) {
+			scope.launch { PhoneStateRepository.onSnapshot(reader.read(map)) }
 		}
+	}
+
+	override fun onDestroy() {
+		scope.cancel()
+		super.onDestroy()
 	}
 }

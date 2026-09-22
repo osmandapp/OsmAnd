@@ -9,4 +9,6 @@
 	<string name="wear_settings">Settings</string>
 	<string name="wear_not_navigating">No active route</string>
 	<string name="wear_protocol_mismatch">Update OsmAnd on your phone</string>
+	<string name="wear_stop">Stop</string>
+	<string name="wear_paused">Paused</string>
 </resources>
