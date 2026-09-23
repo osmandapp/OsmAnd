@@ -395,11 +395,13 @@ class EpsgCatalogRepository {
 			return false
 		}
 		val covered = EpsgArea.unionArea(inside.values.flatten())
-		if (covered <= 0) {
+		val crsSize = crsArea.area()
+		if (covered <= 0 || crsSize <= 0) {
 			return false
 		}
 		val best = inside.values.maxOf { EpsgArea.unionArea(it) }
 		return best >= covered * SINGLE_TRANSFORMATION_COVERAGE
+			&& best >= crsSize * MIN_CRS_AREA_COVERAGE
 	}
 
 	private fun openConnection(): SQLiteConnection? {
@@ -507,6 +509,9 @@ class EpsgCatalogRepository {
 		// sexagesimal DMS (PROJ decodes it to degrees itself), degree (supplier), unity.
 		private const val SUPPORTED_PARAMETER_UNITS = "9001, 9102, 9110, 9122, 9201"
 		private const val SINGLE_TRANSFORMATION_COVERAGE = 0.99
+		// One Helmert shift is applied across the whole CRS, so the operation behind it has to
+		// cover the CRS area itself, not just everything the available operations happen to cover.
+		private const val MIN_CRS_AREA_COVERAGE = 0.9
 		// Projection methods implemented by GridConfiguration: TM, OSTEREO and HOMV2.
 		private const val SUPPORTED_PROJECTION_METHODS = "'9807', '9809', '9815'"
 		// Direct geog2D Helmert methods parsed by CoordinateTransformer.getEllipsoidParameters().
@@ -662,6 +667,8 @@ internal data class EpsgArea(
 			EpsgArea(west = -180.0, south = south, east = east, north = north)
 		)
 	}
+
+	fun area(): Double = maxOf(east - west, 0.0) * maxOf(north - south, 0.0)
 
 	fun clip(other: EpsgArea): EpsgArea? {
 		val clipped = EpsgArea(
