@@ -188,7 +188,9 @@ class WearStateBuilder(private val app: OsmandApplication) {
 
 	private fun buildProfiles(icons: MutableMap<String, ByteArray>): List<ProfileInfo> {
 		val current = app.settings.applicationMode
-		return ApplicationMode.values(app).map { mode ->
+		// The active profile is the last used one, so it leads; the rest keep OsmAnd's own
+		// order, which sortedBy preserves because it is stable.
+		return ApplicationMode.values(app).sortedBy { it != current }.map { mode ->
 			val iconKey = iconRenderer.renderDrawable(mode.iconRes)?.let { png ->
 				WearProtocol.profileIconKey(mode.stringKey).also { icons[it] = png }
 			}
