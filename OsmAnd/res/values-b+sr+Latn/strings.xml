@@ -5356,4 +5356,12 @@
     <string name="heap_dump_auto">Prikupi pri visokoj upotrebi</string>
     <string name="heap_dump_auto_descr">Kada je hip skoro pun, jednom na svakih 30 minuta.</string>
     <string name="visualizing_button_grid_descr">Ćelije, slotovi, okviri i zapisi.</string>
+    <string name="gpx_line_style_desc_unavailable_for_color">Stilovi isprekidanih i tačkastih linija nisu dostupni kada boja putanje nije puna.</string>
+    <string name="gpx_color_unavailable_for_line_style">Ovo bojenje nije dostupno za stil linije koji nije pun.</string>
+    <string name="gpx_color_desc_unavailable_for_style">Za stil linije sa crticama ili tačkama dostupna je samo puna boja putanje.</string>
+    <string name="gpx_line_style">Stil linije</string>
+    <string name="gpx_line_style_solid">Solidan</string>
+    <string name="gpx_line_style_dashed">Isprekidan</string>
+    <string name="gpx_line_style_dotted">Tačkast</string>
+    <string name="file_name_containes_illegal_char">Ime ne sme da sadrži: %1$s</string>
 </resources>

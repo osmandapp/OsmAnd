@@ -5185,4 +5185,17 @@
     <string name="poi_air_conditioning_yes">Da</string>
     <string name="poi_air_conditioning_no">Ne</string>
     <string name="poi_disc_golf_course">Teren za disk-golf</string>
+    <string name="poi_dancing_school">Škola plesa</string>
+    <string name="poi_student_accommodation">Smeštaj za studente</string>
+    <string name="poi_healthcare_counselling">Savetovanje</string>
+    <string name="poi_healthcare_birthing_centre">Centar za porođaj</string>
+    <string name="poi_craft_cleaning">Usluga čišćenja</string>
+    <string name="poi_craft_printer">Štampač</string>
+    <string name="poi_craft_signmaker">Izrađivač znaka</string>
+    <string name="poi_funeral_hall">Sala za pogreb</string>
+    <string name="poi_post_depot">Poštanski depo</string>
+    <string name="poi_indoor_play">Zatvoreno igralište</string>
+    <string name="poi_traffic_park">Saobraćajni poligon</string>
+    <string name="poi_animal_breeding">Uzgoj životinja</string>
+    <string name="poi_stables">Štale</string>
 </resources>
