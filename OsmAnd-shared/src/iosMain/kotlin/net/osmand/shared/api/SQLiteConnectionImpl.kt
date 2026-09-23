@@ -78,12 +78,10 @@ internal class SQLiteConnectionImpl private constructor(
 	}
 
 	override fun execSQL(query: String) {
-		checkWritable()
 		exec(query)
 	}
 
 	override fun execSQL(query: String, objects: Array<Any?>) {
-		checkWritable()
 		val stmt = prepare(query)
 		try {
 			objects.forEachIndexed { index, obj -> bind(stmt, index + 1, obj) }
@@ -97,12 +95,10 @@ internal class SQLiteConnectionImpl private constructor(
 	}
 
 	override fun compileStatement(query: String): SQLiteStatement {
-		checkWritable()
 		return SQLiteStatementImpl(prepare(query))
 	}
 
 	override fun setVersion(newVersion: Int) {
-		checkWritable()
 		val stmt = prepare("PRAGMA user_version = $newVersion")
 		try {
 			executeNonQuery(stmt)
@@ -125,28 +121,19 @@ internal class SQLiteConnectionImpl private constructor(
 	}
 
 	override fun beginTransaction() {
-		checkWritable()
 		transactionSuccessful = false
 		exec("BEGIN IMMEDIATE TRANSACTION;")
 	}
 
 	override fun setTransactionSuccessful() {
-		checkWritable()
 		transactionSuccessful = true
 	}
 
 	override fun endTransaction() {
-		checkWritable()
 		try {
 			exec(if (transactionSuccessful) "COMMIT;" else "ROLLBACK;")
 		} finally {
 			transactionSuccessful = false
-		}
-	}
-
-	private fun checkWritable() {
-		if (readOnly) {
-			throw UnsupportedOperationException("Database is opened read-only")
 		}
 	}
 

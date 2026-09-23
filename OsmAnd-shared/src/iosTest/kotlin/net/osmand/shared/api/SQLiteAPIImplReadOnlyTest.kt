@@ -67,15 +67,51 @@ class SQLiteAPIImplReadOnlyTest {
 	@Test
 	fun readOnlyConnectionRejectsWrites() {
 		val path = createDatabase("writes.db", "DELETE")
+		val before = fs.read(path) { readByteString() }
 		val db = assertNotNull(api.openByAbsolutePath(path.toString(), true))
 		try {
 			assertTrue(db.isReadOnly())
-			assertFailsWith<UnsupportedOperationException> { db.execSQL("DELETE FROM crs") }
-			assertFailsWith<UnsupportedOperationException> { db.setVersion(8) }
+			assertReadOnlyError { db.execSQL("DELETE FROM crs") }
+			assertReadOnlyError { db.execSQL("DELETE FROM crs WHERE code = ?", arrayOf(2056L)) }
+			assertReadOnlyError { db.setVersion(8) }
 		} finally {
 			db.close()
 		}
 		assertTrue(db.isClosed())
+		assertEquals(before, fs.read(path) { readByteString() })
+	}
+
+	@Test
+	fun readOnlyConnectionRunsStatementsThatDoNotWrite() {
+		val path = createDatabase("pragma.db", "DELETE")
+		val db = assertNotNull(api.openByAbsolutePath(path.toString(), true))
+		try {
+			db.execSQL("PRAGMA cache_size = 100")
+		} finally {
+			db.close()
+		}
+	}
+
+	@Test
+	fun readOnlyConnectionRunsCompiledQueries() {
+		val path = createDatabase("compiled.db", "DELETE")
+		val db = assertNotNull(api.openByAbsolutePath(path.toString(), true))
+		try {
+			val count = db.compileStatement("SELECT count(*) FROM crs")
+			assertEquals(2L, count.simpleQueryForLong())
+			count.close()
+
+			val name = db.compileStatement("SELECT name FROM crs WHERE code = ?")
+			name.bindLong(1, 2056)
+			assertEquals("CH1903+ / LV95", name.simpleQueryForString())
+			name.close()
+
+			val delete = db.compileStatement("DELETE FROM crs")
+			assertReadOnlyError { delete.execute() }
+			delete.close()
+		} finally {
+			db.close()
+		}
 	}
 
 	@Test
@@ -121,6 +157,12 @@ class SQLiteAPIImplReadOnlyTest {
 			db.close()
 		}
 		return path
+	}
+
+	// 8 is SQLITE_READONLY
+	private fun assertReadOnlyError(block: () -> Unit) {
+		val e = assertFailsWith<IllegalStateException>(block = block)
+		assertTrue(e.message.orEmpty().contains("(8)"), e.message)
 	}
 
 	// Byte 18 of the SQLite header: 1 for a rollback journal, 2 for WAL.
