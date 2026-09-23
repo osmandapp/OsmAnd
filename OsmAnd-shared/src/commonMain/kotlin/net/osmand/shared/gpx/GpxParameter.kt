@@ -10,6 +10,10 @@ enum class GpxParameter(
 	val columnType: String,
 	val typeClass: KClass<*>,
 	val defaultValue: Any?,
+	// true for a column that holds a value of the track analysis. A DB_VERSION bump alone no longer
+	// re-reads existing tracks, so a new column that GpxReader fills from the file - flagged here
+	// or not, like ACTIVITY_TYPE - also needs GpxTrackAnalysis.ANALYSIS_VERSION bumped, or existing
+	// tracks keep it empty. GpxTrackAnalysisTest pins the flagged columns per ANALYSIS_VERSION
 	val analysisParameter: Boolean
 ) {
 	FILE_NAME("fileName", "TEXT", String::class, null, false),
