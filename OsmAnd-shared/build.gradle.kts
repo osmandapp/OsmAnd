@@ -50,6 +50,14 @@ kotlin {
 			defFile(project.file("src/nativeInterop/cinterop/libxml2.def"))
 			packageName("libxml2")
 		}
+		iosTarget.compilations.getByName("main").cinterops.create("sqlite3") {
+			defFile(project.file("src/nativeInterop/cinterop/sqlite3.def"))
+			packageName("sqlite3")
+		}
+		// sqlite3.def carries no linkerOpts, so the test binaries link sqlite themselves
+		iosTarget.binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.TestExecutable::class.java).configureEach {
+			linkerOpts("-lsqlite3")
+		}
 	}
 
 	// the default test binary is a debug build with LLVM optimisations off, which makes any

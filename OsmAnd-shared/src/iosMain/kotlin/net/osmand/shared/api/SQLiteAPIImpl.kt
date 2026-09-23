@@ -33,6 +33,9 @@ class SQLiteAPIImpl : SQLiteAPI {
 	}
 
 	override fun openByAbsolutePath(path: String, readOnly: Boolean): SQLiteConnection? {
+		if (readOnly) {
+			return ReadOnlySQLiteConnection.open(path)
+		}
 		val p = path.toPath()
 		return try {
 			open(p.name, p.parent.toString())
