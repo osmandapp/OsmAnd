@@ -106,6 +106,22 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 		paintLine.setColor(ContextCompat.getColor(app.getApplicationContext(), R.color.panoramax_color));
 		paintLine.setStrokeWidth(AndroidUtils.dpToPxAuto(app.getApplicationContext(), 2.0f));
 		paintLine.setStrokeCap(Paint.Cap.ROUND);
+		invalidateRasterCacheIfFilterChanged();
+	}
+
+	/**
+	 * Invalidates persistent raster tiles when they were rendered for another filter state.
+	 */
+	private void invalidateRasterCacheIfFilterChanged() {
+		if (plugin == null) {
+			return;
+		}
+		String cacheKey = filterState.getCacheKey();
+		// An empty key means the existing cache predates this metadata.
+		if (!cacheKey.equals(plugin.PANORAMAX_RASTER_CACHE_KEY.get())) {
+			panoramaxBitmapTileCache.clearCache();
+			plugin.PANORAMAX_RASTER_CACHE_KEY.set(cacheKey);
+		}
 	}
 
 	@Override

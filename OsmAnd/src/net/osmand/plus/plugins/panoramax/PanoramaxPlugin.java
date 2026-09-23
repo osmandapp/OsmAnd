@@ -57,6 +57,9 @@ public class PanoramaxPlugin extends OsmandPlugin {
 	public final CommonPreference<Long> PANORAMAX_FILTER_TO_DATE;
 	public final CommonPreference<Boolean> PANORAMAX_FILTER_PANO;
 
+	// Local metadata identifying the filter state used to render the raster cache.
+	public final CommonPreference<String> PANORAMAX_RASTER_CACHE_KEY;
+
 	private MapActivity mapActivity;
 
 	@Nullable
@@ -73,6 +76,8 @@ public class PanoramaxPlugin extends OsmandPlugin {
 		PANORAMAX_FILTER_FROM_DATE = registerLongPreference("panoramax_filter_from_date", 0).makeGlobal().makeShared();
 		PANORAMAX_FILTER_TO_DATE = registerLongPreference("panoramax_filter_to_date", 0).makeGlobal().makeShared();
 		PANORAMAX_FILTER_PANO = registerBooleanPreference("panoramax_filter_pano", false).makeGlobal().makeShared();
+
+		PANORAMAX_RASTER_CACHE_KEY = registerStringPreference("panoramax_raster_cache_key", "").makeGlobal();
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +31,10 @@ public class PanoramaxFilterStateTest {
 	private static final long DEC_31 = 1798675200000L;
 
 	private static final String ACCOUNT = "38676669-edf7-4831-9bc9-f90ec9da63d9";
+
+	// The Etc zones invert the sign, so these are UTC-8 and UTC+3. Neither observes DST.
+	private static final ZoneId WEST = ZoneId.of("Etc/GMT+8");
+	private static final ZoneId EAST = ZoneId.of("Etc/GMT-3");
 
 	private static Map<String, Object> picture(String account, String timestamp, String type) {
 		Map<String, Object> data = new HashMap<>();
@@ -182,5 +187,63 @@ public class PanoramaxFilterStateTest {
 		PanoramaxFilterState other = new PanoramaxFilterState(true, ACCOUNT, JAN_02, DEC_30, true);
 		assertEquals(one, other);
 		assertEquals(one.hashCode(), other.hashCode());
+	}
+
+	@Test
+	public void equalStatesShareACacheKey() {
+		PanoramaxFilterState one = new PanoramaxFilterState(true, ACCOUNT, JAN_02, DEC_30, true);
+		PanoramaxFilterState other = new PanoramaxFilterState(true, ACCOUNT, JAN_02, DEC_30, true);
+		assertEquals(one.getCacheKey(), other.getCacheKey());
+	}
+
+	@Test
+	public void everyRenderedComponentChangesTheCacheKey() {
+		String base = new PanoramaxFilterState(true, ACCOUNT, JAN_02, DEC_30, false).getCacheKey();
+		assertNotEquals(base, new PanoramaxFilterState(false, ACCOUNT, JAN_02, DEC_30, false).getCacheKey());
+		assertNotEquals(base, new PanoramaxFilterState(true, "somebody-else", JAN_02, DEC_30, false).getCacheKey());
+		assertNotEquals(base, new PanoramaxFilterState(true, ACCOUNT, JAN_01, DEC_30, false).getCacheKey());
+		assertNotEquals(base, new PanoramaxFilterState(true, ACCOUNT, JAN_02, DEC_31, false).getCacheKey());
+		assertNotEquals(base, new PanoramaxFilterState(true, ACCOUNT, JAN_02, DEC_30, true).getCacheKey());
+	}
+
+	@Test
+	public void disabledStateIgnoresContributorAndDatesInTheCacheKey() {
+		PanoramaxFilterState one = new PanoramaxFilterState(false, ACCOUNT, JAN_01, DEC_31, false);
+		PanoramaxFilterState other = new PanoramaxFilterState(false, "somebody-else", JAN_02, DEC_30, false);
+		assertEquals(one.getCacheKey(), other.getCacheKey());
+	}
+
+	@Test
+	public void panoOnlyChangesTheCacheKeyEvenWhileDisabled() {
+		PanoramaxFilterState off = new PanoramaxFilterState(false, "", 0, 0, false);
+		PanoramaxFilterState on = new PanoramaxFilterState(false, "", 0, 0, true);
+		assertNotEquals(off.getCacheKey(), on.getCacheKey());
+	}
+
+	// The stored key starts out empty, so an empty key would skip the migration invalidation.
+	@Test
+	public void cacheKeyIsNeverEmpty() {
+		assertFalse(new PanoramaxFilterState(false, "", 0, 0, false).getCacheKey().isEmpty());
+		assertFalse(new PanoramaxFilterState(true, ACCOUNT, JAN_02, DEC_30, true).getCacheKey().isEmpty());
+	}
+
+	// The same instant can resolve to different local dates in different zones.
+	@Test
+	public void renderIdentityFollowsTheLocalDateBoundaries() {
+		PanoramaxFilterState west = new PanoramaxFilterState(true, "", JAN_02, 0, false, WEST);
+		PanoramaxFilterState east = new PanoramaxFilterState(true, "", JAN_02, 0, false, EAST);
+
+		assertNotEquals(west, east);
+		assertNotEquals(west.getCacheKey(), east.getCacheKey());
+	}
+
+	@Test
+	public void sameZoneKeepsTheSameRenderIdentity() {
+		PanoramaxFilterState one = new PanoramaxFilterState(true, ACCOUNT, JAN_02, DEC_30, true, WEST);
+		PanoramaxFilterState other = new PanoramaxFilterState(true, ACCOUNT, JAN_02, DEC_30, true, WEST);
+
+		assertEquals(one, other);
+		assertEquals(one.hashCode(), other.hashCode());
+		assertEquals(one.getCacheKey(), other.getCacheKey());
 	}
 }
