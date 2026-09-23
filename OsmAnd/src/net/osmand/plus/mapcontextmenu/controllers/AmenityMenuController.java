@@ -384,6 +384,13 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
+		boolean isClickableWay = getApplication().getClickableWayHelper().isClickableWayAmenity(amenity);
+		if (isClickableWay || amenity.isRouteTrack()) {
+			Drawable shield = NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, getApplication(), !isLight(), isClickableWay);
+			if (shield != null) {
+				return shield;
+			}
+		}
 		String headerIcon = amenity.getIcon();
 		if (headerIcon != null) {
 			Drawable ic = RenderingIcons.getBigIcon(getMapActivity(), headerIcon);
@@ -395,9 +402,6 @@ public class AmenityMenuController extends MenuController {
 		if (region != null) {
 			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
 		}
-		boolean isClickableWay = getApplication().getClickableWayHelper().isClickableWayAmenity(amenity);
-		return isClickableWay || amenity.isRouteTrack()
-				? NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, getApplication(), !isLight(), isClickableWay)
-				: null;
+		return null;
 	}
 }
