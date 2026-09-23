@@ -3,7 +3,6 @@ package net.osmand.shared.api
 import co.touchlab.sqliter.Cursor
 import co.touchlab.sqliter.DatabaseConfiguration
 import co.touchlab.sqliter.DatabaseConnection
-import co.touchlab.sqliter.DatabaseFileContext
 import co.touchlab.sqliter.NO_VERSION_CHECK
 import co.touchlab.sqliter.Statement
 import co.touchlab.sqliter.createDatabaseManager
@@ -14,31 +13,22 @@ import co.touchlab.sqliter.setVersion
 import co.touchlab.sqliter.stringForQuery
 import co.touchlab.sqliter.withStatement
 import co.touchlab.sqliter.interop.SQLiteException
-import co.touchlab.sqliter.interop.SQLiteExceptionErrorCode
-import co.touchlab.sqliter.interop.SqliteErrorType
 import net.osmand.shared.api.SQLiteAPI.*
-import net.osmand.shared.util.KLock
 import net.osmand.shared.util.LoggerFactory
-import net.osmand.shared.util.synchronized
 import okio.Path.Companion.toPath
 
 class SQLiteAPIImpl : SQLiteAPI {
 
 	companion object {
 		private val log = LoggerFactory.getLogger("SQLiteAPIImpl")
-		private val RECREATE_LOCK = KLock()
 	}
 
 	override fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection? {
 		return try {
 			open(name, null)
 		} catch (e: SQLiteException) {
-			if (isDamaged(e)) {
-				recreateDatabase(name)
-			} else {
-				log.error("Failed to get or create database $name", e)
-				null
-			}
+			log.error("Failed to get or create database $name", e)
+			null
 		}
 	}
 
@@ -62,34 +52,6 @@ class SQLiteAPIImpl : SQLiteAPI {
 		)
 		val ds = createDatabaseManager(configuration).createMultiThreadedConnection()
 		return SQLiteDatabaseWrapper(ds)
-	}
-
-	private fun recreateDatabase(name: String): SQLiteConnection? =
-		synchronized(RECREATE_LOCK) {
-			try {
-				// Another thread may have recreated the file while this one waited for the lock
-				return@synchronized open(name, null)
-			} catch (e: SQLiteException) {
-				if (!isDamaged(e)) {
-					log.error("Failed to reopen database $name", e)
-					return@synchronized null
-				}
-				log.error("Database $name is damaged, recreating it", e)
-			}
-			// SQLite refuses this file on every open, so dropping it is the only way back
-			DatabaseFileContext.deleteDatabase(name)
-			try {
-				open(name, null)
-			} catch (e: SQLiteException) {
-				log.error("Failed to recreate database $name", e)
-				null
-			}
-		}
-
-	private fun isDamaged(e: SQLiteException): Boolean {
-		// errorType throws when sqlite reports a code it does not know
-		val errorType = (e as? SQLiteExceptionErrorCode)?.let { runCatching { it.errorType }.getOrNull() }
-		return errorType == SqliteErrorType.SQLITE_NOTADB || errorType == SqliteErrorType.SQLITE_CORRUPT
 	}
 
 	class SQLiteDatabaseWrapper(private val ds: DatabaseConnection) : SQLiteConnection {
