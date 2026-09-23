@@ -71,11 +71,18 @@ class WearCommandService : WearableListenerService() {
 			is WearCommand.ResumeRecording -> monitoringPlugin()?.takeIf { !it.isRecordingTrack }
 				?.pauseOrResumeRecording()
 
-			is WearCommand.FinishRecording -> monitoringPlugin()?.let { plugin ->
-				plugin.saveCurrentTrack(null, null, true, false)
-			}
+			// Silent saves: the sheet that renames a track belongs to whoever is looking at the
+			// phone, and nobody is — the request came from the wrist.
+			// Saving runs in the background, so the snapshot published right after this command
+			// would still report unsaved data — that is, a paused session. The callback publishes
+			// again once the track is actually written.
+			is WearCommand.FinishRecording -> monitoringPlugin()
+				?.saveCurrentTrack({ WearBridge.publish(app) }, null, true, false, false)
 
-			is WearCommand.SaveAndContinueRecording -> monitoringPlugin()?.saveCurrentTrack()
+			// Keeps writing points, unlike Finish: the no-argument overload would have stopped
+			// the session, which is the opposite of what this button says.
+			is WearCommand.SaveAndContinueRecording -> monitoringPlugin()
+				?.saveCurrentTrack({ WearBridge.publish(app) }, null, false, false, false)
 
 			is WearCommand.SelectProfile -> {
 				val mode = ApplicationMode.valueOfStringKey(command.appModeKey, null)
