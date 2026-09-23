@@ -15,6 +15,7 @@ import net.osmand.plus.backup.BackupListeners.OnGenerateBackupInfoListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 
 import org.apache.commons.logging.Log;
 
@@ -86,7 +87,14 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 				boolean fileChangedLocally = localFile.localModifiedTime > localFile.uploadTime;
 				boolean fileChangedRemotely = remoteFile.getUpdatetimems() > localFile.uploadTime;
 				if (fileChangedRemotely && fileChangedLocally) {
-					info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+					if (isServerMapReference(localFile, remoteFile)) {
+						// Cloud stores only the map name, nothing to merge
+						long syncTime = Math.max(localFile.localModifiedTime, remoteFile.getUpdatetimems());
+						backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), syncTime);
+						localFile.uploadTime = syncTime;
+					} else {
+						info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+					}
 				} else if (fileChangedLocally) {
 					info.filesToUpload.add(localFile);
 				} else if (fileChangedRemotely) {
@@ -168,6 +176,13 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 	private boolean shouldSkip(@NonNull LocalFile localFile) {
 		if (localFile.item instanceof CollectionSettingsItem<?> collectionItem) {
 			return collectionItem.isEmpty();
+		}
+		return false;
+	}
+
+	private boolean isServerMapReference(@NonNull LocalFile localFile, @NonNull RemoteFile remoteFile) {
+		if (!remoteFile.isDeleted() && localFile.item instanceof FileSettingsItem fileItem) {
+			return BackupUtils.isDefaultObfMap(app, fileItem, remoteFile.getName());
 		}
 		return false;
 	}
