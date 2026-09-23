@@ -36,12 +36,21 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEAbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEBatterySensor;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEBikePowerSensor;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEBikeSensor;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEBloodPressureSensor;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLECuffPressureSensor;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEHeartRateSensor;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLERunningSensor;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLETemperatureSensor;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -52,6 +61,15 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor> {
 
 	protected static final Log LOG = PlatformUtil.getLog(BLEAbstractDevice.class);
+
+	// in the order of priority for the main device type
+	public static final List<UUID> SENSOR_SERVICE_UUIDS = Arrays.asList(
+			GattAttributes.UUID_SERVICE_HEART_RATE,
+			GattAttributes.UUID_SERVICE_TEMPERATURE,
+			GattAttributes.UUID_SERVICE_CYCLING_SPEED_AND_CADENCE,
+			GattAttributes.UUID_SERVICE_RUNNING_SPEED_AND_CADENCE,
+			GattAttributes.UUID_SERVICE_BLOOD_PRESSURE,
+			GattAttributes.UUID_SERVICE_CYCLING_POWER);
 
 	protected BluetoothAdapter bluetoothAdapter;
 	protected BluetoothDevice device;
@@ -70,6 +88,24 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		super(deviceId);
 		this.bluetoothAdapter = bluetoothAdapter;
 		sensors.add(new BLEBatterySensor(this));
+	}
+
+	@Nullable
+	public static BLEAbstractDevice createDeviceByUUIDs(@NonNull BluetoothAdapter bluetoothAdapter,
+	                                                    @NonNull List<UUID> uuids, @NonNull String address,
+	                                                    @NonNull String name, int rssi) {
+		// a device may advertise several services (e.g. Garmin HRM 600: running speed and cadence + heart rate),
+		// the main type is chosen by service priority, not by the advertisement order
+		for (UUID serviceUUID : SENSOR_SERVICE_UUIDS) {
+			if (uuids.contains(serviceUUID)) {
+				BLEAbstractDevice device = createDeviceByUUID(bluetoothAdapter, serviceUUID, address, name, rssi);
+				if (device != null) {
+					device.addSensorsForServices(uuids);
+				}
+				return device;
+			}
+		}
+		return null;
 	}
 
 	@Nullable
@@ -95,6 +131,90 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			device.rssi = rssi;
 		}
 		return device;
+	}
+
+	/**
+	 * Adds a sensor for every supported service of the device that has no sensor yet.
+	 *
+	 * @return true if a sensor was added
+	 */
+	public boolean addSensorsForServices(@NonNull Collection<UUID> serviceUUIDs) {
+		List<BLEAbstractSensor> newSensors = new ArrayList<>(sensors);
+		boolean added = false;
+		for (UUID serviceUUID : serviceUUIDs) {
+			if (hasSensorForService(newSensors, serviceUUID)) {
+				continue;
+			}
+			if (GattAttributes.UUID_SERVICE_HEART_RATE.equals(serviceUUID)) {
+				newSensors.add(new BLEHeartRateSensor(this));
+			} else if (GattAttributes.UUID_SERVICE_TEMPERATURE.equals(serviceUUID)) {
+				newSensors.add(new BLETemperatureSensor(this));
+			} else if (GattAttributes.UUID_SERVICE_CYCLING_SPEED_AND_CADENCE.equals(serviceUUID)) {
+				newSensors.add(new BLEBikeSensor(this));
+			} else if (GattAttributes.UUID_SERVICE_RUNNING_SPEED_AND_CADENCE.equals(serviceUUID)) {
+				newSensors.add(new BLERunningSensor(this));
+			} else if (GattAttributes.UUID_SERVICE_BLOOD_PRESSURE.equals(serviceUUID)) {
+				newSensors.add(new BLEBloodPressureSensor(this));
+				newSensors.add(new BLECuffPressureSensor(this));
+			} else if (GattAttributes.UUID_SERVICE_CYCLING_POWER.equals(serviceUUID)) {
+				newSensors.add(new BLEBikePowerSensor(this));
+			} else {
+				continue;
+			}
+			added = true;
+		}
+		if (added) {
+			// sensors are iterated from BLE callbacks, so replace the list instead of modifying it
+			sensors = newSensors;
+		}
+		return added;
+	}
+
+	/**
+	 * @return supported services that have a sensor in this device
+	 */
+	@NonNull
+	public List<UUID> getSensorServiceUUIDs() {
+		List<UUID> result = new ArrayList<>();
+		for (UUID serviceUUID : SENSOR_SERVICE_UUIDS) {
+			if (hasSensorForService(sensors, serviceUUID)) {
+				result.add(serviceUUID);
+			}
+		}
+		return result;
+	}
+
+	private static boolean hasSensorForService(@NonNull List<BLEAbstractSensor> sensors, @NonNull UUID serviceUUID) {
+		for (BLEAbstractSensor sensor : sensors) {
+			if (serviceUUID.equals(getSensorServiceUUID(sensor))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Nullable
+	private static UUID getSensorServiceUUID(@NonNull BLEAbstractSensor sensor) {
+		if (sensor instanceof BLEHeartRateSensor) {
+			return GattAttributes.UUID_SERVICE_HEART_RATE;
+		} else if (sensor instanceof BLETemperatureSensor) {
+			return GattAttributes.UUID_SERVICE_TEMPERATURE;
+		} else if (sensor instanceof BLEBikeSensor) {
+			return GattAttributes.UUID_SERVICE_CYCLING_SPEED_AND_CADENCE;
+		} else if (sensor instanceof BLERunningSensor) {
+			return GattAttributes.UUID_SERVICE_RUNNING_SPEED_AND_CADENCE;
+		} else if (sensor instanceof BLEBloodPressureSensor || sensor instanceof BLECuffPressureSensor) {
+			return GattAttributes.UUID_SERVICE_BLOOD_PRESSURE;
+		} else if (sensor instanceof BLEBikePowerSensor) {
+			return GattAttributes.UUID_SERVICE_CYCLING_POWER;
+		}
+		return null;
+	}
+
+	private void fireDeviceSensorsChanged() {
+		for (DeviceListener listener : listeners) {
+			listener.onDeviceSensorsChanged(this);
+		}
 	}
 
 	@Nullable
@@ -208,6 +328,14 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			LOG.debug(String.format(Locale.US, "discovered %d services for '%s'", services.size(), gatt.getDevice().getName()));
 			if (Algorithms.isEmpty(cachedCharacteristics)) {
 				cachedCharacteristics = getCharacteristics();
+			}
+			List<UUID> serviceUUIDs = new ArrayList<>();
+			for (BluetoothGattService service : services) {
+				serviceUUIDs.add(service.getUuid());
+			}
+			if (addSensorsForServices(serviceUUIDs)) {
+				LOG.debug("added sensors for services of '" + getName() + "': " + getSensorServiceUUIDs());
+				fireDeviceSensorsChanged();
 			}
 			for (BLEAbstractSensor sensor : sensors) {
 				sensor.requestCharacteristic(cachedCharacteristics);
