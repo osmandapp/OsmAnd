@@ -7,6 +7,7 @@ import static net.osmand.plus.plugins.srtm.SRTMPlugin.DEFAULT_HILLSHADE_SUN_AZIM
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -19,6 +20,9 @@ import com.google.android.material.slider.Slider;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer;
@@ -34,6 +38,8 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 	private Slider altitudeSlider;
 
 	private SunParametersController controller;
+	private SRTMPlugin plugin;
+	private View view;
 
 	@Nullable
 	@Override
@@ -46,7 +52,8 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		super.onCreate(savedInstanceState);
 
 		controller = SunParametersController.getExistedInstance(app);
-		if (controller == null) {
+		plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		if (controller == null || plugin == null) {
 			dismiss();
 			return;
 		}
@@ -62,7 +69,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		View view = inflate(R.layout.sun_parameters, container, false);
+		view = inflate(R.layout.sun_parameters, container, false);
 
 		azimuthSlider = view.findViewById(R.id.azimuth_slider);
 		tvAzimuth = view.findViewById(R.id.azimuth_value_tv);
@@ -70,7 +77,20 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		altitudeSlider = view.findViewById(R.id.altitude_slider);
 		tvAltitude = view.findViewById(R.id.altitude_value_tv);
 
+		setupSwitch(view.findViewById(R.id.sun_shadows_row), view.findViewById(R.id.sun_shadows_switch),
+				plugin.BUILDINGS_3D_SUN_SHADOWS.get(), checked -> plugin.BUILDINGS_3D_SUN_SHADOWS.set(checked));
+		setupSwitch(view.findViewById(R.id.sun_time_slider_row), view.findViewById(R.id.sun_time_slider_switch),
+				plugin.BUILDINGS_3D_SUN_TIME_SLIDER.get(), checked -> {
+					if (checked) {
+						// Start from the real time, the slider then moves the sun from here
+						plugin.BUILDINGS_3D_SUN_TIME.set(Buildings3DSunHelper.getCurrentMinuteOfDay());
+					}
+					plugin.BUILDINGS_3D_SUN_TIME_SLIDER.set(checked);
+				});
+		view.findViewById(R.id.sun_current_time_row).setOnClickListener(v -> setSunPositionByTime(true));
+		view.findViewById(R.id.sun_manual_row).setOnClickListener(v -> setSunPositionByTime(false));
 		setupSliders();
+		updateRealisticSunState();
 		container.addView(view);
 		updateApplyButton(controller.hasChanges());
 	}
@@ -91,6 +111,43 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		altitudeSlider.setValueTo(controller.getMaxAltitude());
 		altitudeSlider.setValue(altitude);
 		UiUtilities.setupSlider(altitudeSlider, nightMode, getAppModeColor(nightMode));
+	}
+
+	private interface OnSwitchListener {
+		void onChecked(boolean checked);
+	}
+
+	private void setupSwitch(@NonNull View row, @NonNull CompoundButton compoundButton,
+	                         boolean checked, @NonNull OnSwitchListener listener) {
+		compoundButton.setChecked(checked);
+		UiUtilities.setupCompoundButton(nightMode, getAppModeColor(nightMode), compoundButton);
+		row.setOnClickListener(v -> {
+			boolean newState = !compoundButton.isChecked();
+			compoundButton.setChecked(newState);
+			listener.onChecked(newState);
+			refreshMap();
+		});
+	}
+
+	private void setSunPositionByTime(boolean byTime) {
+		plugin.SUN_POSITION_CURRENT_TIME.set(byTime);
+		updateRealisticSunState();
+		refreshMap();
+	}
+
+	private void updateRealisticSunState() {
+		boolean byTime = plugin.isSunPositionByTime();
+		int profileColor = getAppModeColor(nightMode);
+		CompoundButton currentTimeRadio = view.findViewById(R.id.sun_current_time_radio);
+		CompoundButton manualRadio = view.findViewById(R.id.sun_manual_radio);
+		currentTimeRadio.setChecked(byTime);
+		manualRadio.setChecked(!byTime);
+		UiUtilities.setupCompoundButton(nightMode, profileColor, currentTimeRadio);
+		UiUtilities.setupCompoundButton(nightMode, profileColor, manualRadio);
+
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.sun_time_slider_row), byTime);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.azimuth_container), !byTime);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.altitude_container), !byTime);
 	}
 
 	private final Slider.OnChangeListener azimuthSliderChangeListener = new Slider.OnChangeListener() {
@@ -129,6 +186,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		controller.setAzimuth(DEFAULT_HILLSHADE_SUN_AZIMUTH);
 		controller.setAltitude(DEFAULT_HILLSHADE_SUN_ANGLE);
 		setupSliders();
+		updateRealisticSunState();
 		updateApplyButton(controller.hasChanges());
 		refreshMap();
 	}

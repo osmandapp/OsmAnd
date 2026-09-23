@@ -7,6 +7,184 @@
 	android:orientation="vertical">
 
 	<LinearLayout
+		android:id="@+id/sun_shadows_row"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+		android:orientation="horizontal"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_small">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/buildings_3d_sun_shadows"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size" />
+
+			<TextView
+				android:id="@+id/sun_shadows_description"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/buildings_3d_sun_shadows_descr"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size" />
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.SwitchCompat
+			android:id="@+id/sun_shadows_switch"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:clickable="false"
+			android:focusable="false" />
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/divider_color_basic" />
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small"
+		android:text="@string/map_widget_sun_position"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size"
+		android:textStyle="bold" />
+
+	<LinearLayout
+		android:id="@+id/sun_current_time_row"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+		android:orientation="horizontal"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_small">
+
+		<androidx.appcompat.widget.AppCompatRadioButton
+			android:id="@+id/sun_current_time_radio"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:background="@null"
+			android:clickable="false"
+			android:focusable="false" />
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/map_widget_plain_time"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/sun_time_slider_row"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+		android:orientation="horizontal"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_small">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/buildings_3d_sun_time_slider"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size" />
+
+			<TextView
+				android:id="@+id/sun_time_slider_description"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/buildings_3d_sun_time_slider_descr"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size" />
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.SwitchCompat
+			android:id="@+id/sun_time_slider_switch"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:clickable="false"
+			android:focusable="false" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/sun_manual_row"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+		android:orientation="horizontal"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_small">
+
+		<androidx.appcompat.widget.AppCompatRadioButton
+			android:id="@+id/sun_manual_radio"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:background="@null"
+			android:clickable="false"
+			android:focusable="false" />
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/shared_string_manual"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
 		android:id="@+id/azimuth_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
