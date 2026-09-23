@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
@@ -32,6 +33,7 @@ import java.util.Objects;
 public class LocaleHelper {
 
 	private final static Log log = PlatformUtil.getLog(LocaleHelper.class);
+	private static final String LAST_SYSTEM_LOCALE = "last_system_locale";
 
 	private final OsmandApplication app;
 
@@ -55,6 +57,7 @@ public class LocaleHelper {
 
 	private void onPreferredLocaleChanged() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.getSharedPreferences("locale_helper", Context.MODE_PRIVATE).edit().remove(LAST_SYSTEM_LOCALE).apply();
 			String preferredLocale = app.getSettings().PREFERRED_LOCALE.get();
 
 			if (!Algorithms.isEmpty(preferredLocale)) {
@@ -74,23 +77,28 @@ public class LocaleHelper {
 		String locale = settings.PREFERRED_LOCALE.get();
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			SharedPreferences localeState = app.getSharedPreferences("locale_helper", Context.MODE_PRIVATE);
 			LocaleListCompat appLocales = LocaleManagerCompat.getApplicationLocales(app);
 			String currentLocale = appLocales.isEmpty() ? "" : appLocales.get(0).toLanguageTag();
 			currentLocale = SupportedLocale.normalizeToOsmandLegacy(currentLocale);
 
-			if (!Algorithms.stringsEqual(currentLocale, locale)) {
-				if (Algorithms.isEmpty(currentLocale) && !isLocaleSupportedBySystem(locale)) {
-					// Ignore empty OS response if vendor firmware rejected a rare tag (e.g., "sc").
-				} else {
-					// Sync with OS if user changed the language via Android App Info.
+			if (!Algorithms.isEmpty(currentLocale)) {
+				if (!Algorithms.stringsEqual(currentLocale, locale)) {
 					locale = currentLocale;
 					settings.PREFERRED_LOCALE.set(locale);
 				}
+				localeState.edit().putString(LAST_SYSTEM_LOCALE, currentLocale).apply();
+			} else if (!Algorithms.isEmpty(locale)
+					&& Algorithms.stringsEqual(locale, localeState.getString(LAST_SYSTEM_LOCALE, null))) {
+				locale = "";
+				settings.PREFERRED_LOCALE.set(locale);
 			}
 		}
 
 		boolean useSystemDefault = Algorithms.isEmpty(locale);
-		if (!useSystemDefault) {
+		if (useSystemDefault) {
+			preferredLocale = null;
+		} else {
 			Locale parsed = SupportedLocale.parseLocale(locale);
 			if (parsed != null) {
 				preferredLocale = parsed;
@@ -104,7 +112,6 @@ public class LocaleHelper {
 			selectedLocale = preferredLocale;
 		} else if (useSystemDefault && defaultLocale != null && !Objects.equals(Locale.getDefault(), defaultLocale)) {
 			selectedLocale = defaultLocale;
-			preferredLocale = null;
 		}
 
 		updateTimeFormatting(selectedLocale != null ? selectedLocale : Locale.getDefault());
@@ -121,20 +128,6 @@ public class LocaleHelper {
 
 			localizedConf = new Configuration(newConfig);
 		}
-	}
-
-	private boolean isLocaleSupportedBySystem(@NonNull String localeId) {
-		Locale locale = SupportedLocale.parseLocale(localeId);
-		if (locale == null) {
-			return false;
-		}
-		for (String systemLocaleId : Resources.getSystem().getAssets().getLocales()) {
-			Locale systemLocale = Locale.forLanguageTag(systemLocaleId.replace('_', '-'));
-			if (Objects.equals(locale.getLanguage(), systemLocale.getLanguage())) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public void setLanguage(@NonNull Context context) {
