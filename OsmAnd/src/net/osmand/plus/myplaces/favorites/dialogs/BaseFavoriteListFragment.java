@@ -249,7 +249,7 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 	}
 
 	@Nullable
-	private ActionBar getSupportActionBar() {
+	protected ActionBar getSupportActionBar() {
 		MyPlacesActivity activity = (MyPlacesActivity) requireMyActivity();
 		return activity.getSupportActionBar();
 	}
