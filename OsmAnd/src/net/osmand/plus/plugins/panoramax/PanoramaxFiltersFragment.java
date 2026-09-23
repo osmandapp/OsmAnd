@@ -214,9 +214,19 @@ public class PanoramaxFiltersFragment extends BaseFullScreenFragment {
             String dateFrom = dateFromEt.getText().toString();
             String dateTo = dateToEt.getText().toString();
 
-            if (!plugin.PANORAMAX_FILTER_USERNAME.get().isEmpty() || !dateFrom.isEmpty() || !dateTo.isEmpty() || plugin.PANORAMAX_FILTER_PANO.get()) {
-                plugin.USE_PANORAMAX_FILTER.set(true);
+            // Autocomplete results may lag behind edits, so use a resolved account only
+            // while it still matches the current field value.
+            String storedUser = plugin.PANORAMAX_FILTER_USERNAME.get();
+            String storedUserKey = plugin.PANORAMAX_FILTER_USER_KEY.get();
+            boolean resolvedUser = !storedUser.isEmpty() && !storedUserKey.isEmpty()
+                    && storedUser.equals(username.trim());
+            if (!resolvedUser) {
+                plugin.PANORAMAX_FILTER_USER_KEY.set("");
+                plugin.PANORAMAX_FILTER_USERNAME.set("");
             }
+            boolean filtering = resolvedUser
+                    || !dateFrom.isEmpty() || !dateTo.isEmpty() || plugin.PANORAMAX_FILTER_PANO.get();
+            plugin.USE_PANORAMAX_FILTER.set(filtering);
             if (dateFrom.isEmpty()) {
                 plugin.PANORAMAX_FILTER_FROM_DATE.set(0L);
             }
