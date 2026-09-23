@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReaderStats.SearchStat;
 import net.osmand.data.Amenity;
@@ -45,6 +44,7 @@ import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -61,13 +61,12 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.SearchAlgorithms;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -787,11 +786,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public static class SearchGpxAPI extends SearchBaseAPI {
 
-		private static final long TRACK_FILES_CACHE_TIME_MS = 30_000;
-
 		private final OsmandApplication app;
-		private List<TrackFile> trackFiles;
-		private long trackFilesTime;
 
 		public SearchGpxAPI(OsmandApplication app) {
 			super(ObjectType.GPX_TRACK);
@@ -802,21 +797,21 @@ public class QuickSearchHelper implements ResourceListener {
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			int limit = Math.min(SEARCH_GPX_MAX_RESULTS_PER_TYPE,
 					SEARCH_GPX_MAX_RESULTS - countResults(resultMatcher, ObjectType.WPT));
-			String text = phrase.getFullSearchPhrase().trim();
 			boolean matchAll = phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType();
-			String query = TrackFile.normalize(text);
+			String query = normalizeGpxName(phrase.getFullSearchPhrase().trim());
 			int count = 0;
-			for (TrackFile trackFile : getTrackFiles()) {
+			for (GpxDataItem item : app.getGpxDbHelper().getItems()) {
 				if (count >= limit || resultMatcher.isCancelled()) {
 					break;
 				}
-				if (!matchAll && !trackFile.matches(query)) {
+				String fileName = GpxUiHelper.getGpxFileRelativePath(app, item.getFile().absolutePath());
+				if (!matchAll && !normalizeGpxName(fileName).contains(query)) {
 					continue;
 				}
 				SearchResult searchResult = new SearchResult(phrase);
 				searchResult.objectType = ObjectType.GPX_TRACK;
-				searchResult.localeName = trackFile.fileName;
-				searchResult.relatedObject = new GPXInfo(trackFile.fileName, trackFile.file);
+				searchResult.localeName = fileName;
+				searchResult.relatedObject = new GPXInfo(fileName, SharedUtil.jFile(item.getFile()));
 				searchResult.priority = SEARCH_TRACK_OBJECT_PRIORITY;
 				searchResult.preferredZoom = SearchCoreFactory.PREFERRED_GPX_FILE_ZOOM;
 				resultMatcher.publish(searchResult);
@@ -825,57 +820,10 @@ public class QuickSearchHelper implements ResourceListener {
 			return true;
 		}
 
-		// A keystroke must not touch every track file, so the listing is kept while the user types.
+		// A collator match costs ~0.5 ms per name: seconds for a few thousand tracks on every keystroke
 		@NonNull
-		private synchronized List<TrackFile> getTrackFiles() {
-			long time = System.currentTimeMillis();
-			if (trackFiles == null || time - trackFilesTime > TRACK_FILES_CACHE_TIME_MS) {
-				List<TrackFile> files = new ArrayList<>();
-				listTrackFiles(app.getAppPath(IndexConstants.GPX_INDEX_DIR), "", files);
-				trackFiles = files;
-				trackFilesTime = time;
-			}
-			return trackFiles;
-		}
-
-		private void listTrackFiles(@NonNull File dir, @NonNull String parent, @NonNull List<TrackFile> files) {
-			File[] list = dir.listFiles();
-			if (list != null) {
-				for (File file : list) {
-					String fileName = parent + file.getName();
-					if (GpxUiHelper.isGpxFile(file)) {
-						files.add(new TrackFile(fileName, file));
-					} else if (file.isDirectory()) {
-						listTrackFiles(file, fileName + "/", files);
-					}
-				}
-			}
-		}
-
-		// Names are normalized once: a collator match per file name costs ~0.5 ms,
-		// seconds for a few thousand tracks on every keystroke.
-		private static class TrackFile {
-
-			private final String fileName;
-			private final File file;
-			private final String searchName;
-			private final String searchNameNoDash;
-
-			TrackFile(@NonNull String fileName, @NonNull File file) {
-				this.fileName = fileName;
-				this.file = file;
-				this.searchName = normalize(fileName);
-				this.searchNameNoDash = searchName.indexOf('-') != -1 ? searchName.replace("-", "") : null;
-			}
-
-			boolean matches(@NonNull String query) {
-				return searchName.contains(query) || (searchNameNoDash != null && searchNameNoDash.contains(query));
-			}
-
-			@NonNull
-			static String normalize(@NonNull String text) {
-				return SearchAlgorithms.alignChars(text.toLowerCase(Locale.getDefault()));
-			}
+		private static String normalizeGpxName(@NonNull String name) {
+			return SearchAlgorithms.alignChars(name.toLowerCase(Locale.getDefault()));
 		}
 
 		private static int countResults(@NonNull SearchResultMatcher resultMatcher, @NonNull ObjectType type) {
