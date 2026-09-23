@@ -97,7 +97,6 @@ import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.preferences.*;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
-import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.settings.enums.*;
 import net.osmand.plus.utils.AndroidUtils;
@@ -113,6 +112,7 @@ import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
@@ -1473,6 +1473,16 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_REQUESTS_COUNT = new IntPreference(this, "send_anonymous_data_requests_count", 0).makeGlobal().cache();
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_LAST_REQUEST_NS = new IntPreference(this, "send_anonymous_data_last_request_ns", -1).makeGlobal().cache();
 
+	// a heap histogram is collected by itself when the heap grows past what a healthy session
+	// needs, so that a report from a device in trouble says what the heap was made of
+	public final OsmandPreference<Boolean> AUTO_HEAP_HISTOGRAM = new BooleanPreference(this, "auto_heap_histogram", true).makeGlobal().makeShared().cache();
+
+	// timestamp of the newest system crash (ANR, native) the crash dialog was already shown for
+	public final OsmandPreference<Long> LAST_SHOWN_SYSTEM_CRASH_TIME = new LongPreference(this, "last_shown_system_crash_time", 0).makeGlobal();
+
+	// hash of the release notes the "What's new" dialog was already shown for
+	public final OsmandPreference<String> LAST_SHOWN_RELEASE_NOTES = new StringPreference(this, "last_shown_release_notes", "").makeGlobal();
+
 	public final OsmandPreference<Boolean> SEND_UNIQUE_USER_IDENTIFIER = new BooleanPreference(this, "send_unique_user_identifier", true).makeGlobal().cache();
 
 	public final CommonPreference<LocationSource> LOCATION_SOURCE = new EnumStringPreference<>(this, "location_source",
@@ -1790,6 +1800,7 @@ public class OsmandSettings {
 			"current_track_route_info_attribute", null);
 	public final CommonPreference<String> CURRENT_TRACK_WIDTH = new StringPreference(this, "current_track_width", "").makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference(this, "current_track_show_arrows", false).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_LINE_STYLE = new StringPreference(this, "current_track_line_style", "solid").makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference(this, "current_track_show_start_finish", true).makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_3D_VISUALIZATION_TYPE = new StringPreference(this, "currentTrackVisualization3dByType", "none").makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_3D_WALL_COLORING_TYPE = new StringPreference(this, "currentTrackVisualization3dWallColorType", "none").makeGlobal().makeShared().cache();

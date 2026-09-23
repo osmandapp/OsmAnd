@@ -9,12 +9,12 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.coordinates.CoordinateFormat;
 import net.osmand.plus.settings.coordinates.CoordinateFormatFormatter;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSelectorBottomSheet;
 import net.osmand.plus.settings.fragments.AddCoordinateFormatFragment;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesBaseWidget;
+import net.osmand.shared.settings.coordinates.CoordinateFormat;
 
 public class CoordinatesWidgetInfoFragment extends WidgetInfoBaseFragment {
 

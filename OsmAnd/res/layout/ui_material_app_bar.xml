@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Small app bar for Material 3 screens. Not a collapsing app bar.
+-->
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/appbar"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/colorSurface"
+	app:elevation="0dp"
+	app:liftOnScroll="false">
+
+	<com.google.android.material.appbar.MaterialToolbar
+		android:id="@+id/toolbar"
+		style="?attr/toolbarStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/colorSurface"
+		app:navigationIcon="@drawable/ic_arrow_back"
+		app:navigationIconTint="?attr/colorOnSurfaceVariant"
+		app:titleTextColor="?attr/colorOnSurface" />
+</com.google.android.material.appbar.AppBarLayout>

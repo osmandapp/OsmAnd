@@ -693,8 +693,9 @@ public class GpxUiHelper {
 
 	public static void saveAndShareCurrentGpx(@NonNull OsmandApplication app, @NonNull Activity activity, @NonNull GpxFile gpxFile) {
 		SaveGpxHelper.saveCurrentTrack(app, gpxFile, errorMessage -> {
-			if (errorMessage == null) {
-				shareGpx(app, activity, new File(gpxFile.getPath()));
+			String path = gpxFile.getPath();
+			if (errorMessage == null && !Algorithms.isEmpty(path)) {
+				shareGpx(app, activity, new File(path));
 			}
 		});
 	}
@@ -763,6 +764,7 @@ public class GpxUiHelper {
 	private static void addAppearanceToGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
 		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
 		gpxFile.setShowArrows(helper.requireParameter(item, SHOW_ARROWS));
+		gpxFile.setLineStyleType(helper.requireParameter(item, LINE_STYLE));
 		gpxFile.setShowStartFinish(helper.requireParameter(item, SHOW_START_FINISH));
 		gpxFile.setSplitInterval(helper.requireParameter(item, SPLIT_INTERVAL));
 		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(helper.requireParameter(item, SPLIT_TYPE)).getTypeName());

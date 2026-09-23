@@ -23,8 +23,6 @@ import java.util.List;
 
 public class TransportStopController extends MenuController {
 
-	public static final int SHOW_STOPS_RADIUS_METERS_UI = 150;
-
 	private TransportStop transportStop;
 	private final List<TransportStopRoute> routesNearby = new ArrayList<>();
 	private final List<TransportStopRoute> routesOnTheSameExit = new ArrayList<>();

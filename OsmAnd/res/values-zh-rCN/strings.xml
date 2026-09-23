@@ -1510,7 +1510,7 @@
     <string name="shared_string_others">其它</string>
     <string name="shared_string_release">已发行</string>
     <string name="local_index_items_backuped">已停用 %1$d 项/共 %2$d 项。</string>
-    <string name="local_index_items_deleted">%已删除 %1$d 项/共 %2$d 项。</string>
+    <string name="local_index_items_deleted">已删除 %1$d 项/共 %2$d 项。</string>
     <string name="local_index_items_restored">已启用 %1$d 项/共 %2$d 项。</string>
     <string name="local_index_no_items_to_do">没有项目在 %1$s</string>
     <string name="local_index_action_do">您将要 %1$s %2$s 个项目，要继续吗？</string>
@@ -1613,7 +1613,6 @@
     <string name="number_of_contributors">贡献者人数</string>
     <string name="number_of_edits">编辑次数</string>
     <string name="reports_for">报告</string>
-    <string name="file_name_containes_illegal_char">文件名中出现非法字符</string>
     <string name="quick_action_item_action">操作 %d</string>
     <string name="quick_action_item_screen">屏幕 %d</string>
     <string name="quick_action_map_style_switch">地图风格已变更为 “%s”。</string>
@@ -5201,7 +5200,7 @@
     <string name="coordinate_format_primary">主要</string>
     <string name="favorite_confirm_delete_folder">将删除文件夹“%1$s”，包括其子文件夹和 %2$d 个收藏点。</string>
     <string name="favorite_folder_rename_conflict">已存在同名文件夹。</string>
-    <string name="favorite_folder_invalid_name">文件夹名称不能包含 / 或 _%_</string>
+    <string name="favorite_folder_invalid_name">文件夹名称不能包含 / 或 %1$s</string>
     <string name="favorite_folder_duplicate_message">请使用未被占用的文件夹名称。</string>
     <string name="favorite_folder_name">文件夹名称</string>
     <string name="edit_folder">编辑文件夹</string>

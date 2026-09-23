@@ -1415,7 +1415,6 @@
     <string name="number_of_contributors">Número de colaboradores</string>
     <string name="number_of_edits">Número de edicións</string>
     <string name="reports_for">Informe para</string>
-    <string name="file_name_containes_illegal_char">Caráter ilegal no nome do ficheiro</string>
     <string name="configure_screen_quick_action">Acción rápida</string>
     <string name="quick_action_item_action">Acción %d</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
@@ -3402,7 +3401,7 @@
     <string name="no_media_descr">Podes engadir fotos, vídeos ou notas de audio desde a cámara ou a túa galería.</string>
     <string name="favorite_confirm_delete_folder">Isto eliminará o cartafol \"%1$s\", incluíndo subcartafoles e %2$d punto(s) favorito(s).</string>
     <string name="favorite_folder_rename_conflict">Xa existe un cartafol con este nome.</string>
-    <string name="favorite_folder_invalid_name">O nome do cartafol non pode conter / ou _%_</string>
+    <string name="favorite_folder_invalid_name">O nome do cartafol non pode conter / ou %1$s</string>
     <string name="favorite_folder_duplicate_message">Usa un nome de cartafol que non exista xa.</string>
     <string name="favorite_folder_name">Nome do cartafol</string>
     <string name="edit_folder">Editar cartafol</string>

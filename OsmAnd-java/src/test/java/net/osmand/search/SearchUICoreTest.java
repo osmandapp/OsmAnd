@@ -328,7 +328,7 @@ public class SearchUICoreTest {
 			if (baseLangType != null) {
 				return getTranslation(baseLangType) + " (" + type.getLang().toLowerCase() + ")";
 			}
-			return getTranslation(type.getIconKeyName());
+			return getTranslation(type.getFormattedKeyName());
 		}
 
 		@Override
@@ -349,7 +349,7 @@ public class SearchUICoreTest {
 			if (baseLangType != null) {
 				return getSynonyms(baseLangType);
 			}
-			return getSynonyms(type.getIconKeyName());
+			return getSynonyms(type.getFormattedKeyName());
 		}
 
 
@@ -377,7 +377,7 @@ public class SearchUICoreTest {
 			if (baseLangType != null) {
 				return getEnTranslation(baseLangType) + " (" + type.getLang().toLowerCase() + ")";
 			}
-			return getEnTranslation(type.getIconKeyName());
+			return getEnTranslation(type.getFormattedKeyName());
 		}
 
 		@Override

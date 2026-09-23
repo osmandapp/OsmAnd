@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
@@ -17,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseAlertDialogFragment;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Field;
 
@@ -31,23 +33,9 @@ public class WhatsNewDialogFragment extends BaseAlertDialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		updateNightMode();
-		Class<? extends R.string> cl = R.string.class;
-		String ver = Version.getAppVersion(app);
-		String message = "Release " + Version.getAppVersion(app);
-		if(!ver.isEmpty()) {
-			try {
-				Field f = R.string.class.getField("release_" + ver.charAt(0) + "_" + ver.charAt(2));
-				if (f != null) {
-					Integer in = (Integer) f.get(null);
-					if (in != null) {
-						message = getString(in);
-					}
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		String releaseNotes = getReleaseNotes(app);
 		String appVersion = Version.getAppVersion(app);
+		String message = releaseNotes != null ? releaseNotes : "Release " + appVersion;
 		AlertDialog.Builder builder = createDialogBuilder();
 		builder.setTitle(getString(R.string.whats_new) + " " + appVersion)
 				.setMessage(message)
@@ -87,19 +75,51 @@ public class WhatsNewDialogFragment extends BaseAlertDialogFragment {
 	}
 
 	public static boolean shouldShowDialog(@NonNull OsmandApplication app) {
-		if (app.getAppCustomization().isFeatureEnabled(FRAGMENT_WHATS_NEW_ID)) {
-			return app.getAppInitializer().checkAppVersionChanged() && notShown;
+		if (!app.getAppCustomization().isFeatureEnabled(FRAGMENT_WHATS_NEW_ID)) {
+			return false;
 		}
-		return false;
+		if (!app.getAppInitializer().checkAppVersionChanged() || !notShown) {
+			return false;
+		}
+		// nothing to tell about: no release notes for this version, or the same notes were already shown
+		String releaseNotes = getReleaseNotes(app);
+		return releaseNotes != null
+				&& !Algorithms.stringsEqual(getNotesKey(releaseNotes), app.getSettings().LAST_SHOWN_RELEASE_NOTES.get());
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull OsmandApplication app) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			notShown = false;
+			String releaseNotes = getReleaseNotes(app);
+			if (releaseNotes != null) {
+				app.getSettings().LAST_SHOWN_RELEASE_NOTES.set(getNotesKey(releaseNotes));
+			}
 			WhatsNewDialogFragment fragment = new WhatsNewDialogFragment();
 			fragment.show(fragmentManager, TAG);
 			return true;
 		}
 		return false;
+	}
+
+	@Nullable
+	private static String getReleaseNotes(@NonNull OsmandApplication app) {
+		String version = Version.getAppVersion(app);
+		if (version.length() >= 3) {
+			try {
+				Field field = R.string.class.getField("release_" + version.charAt(0) + "_" + version.charAt(2));
+				Integer id = (Integer) field.get(null);
+				if (id != null) {
+					return app.getString(id);
+				}
+			} catch (Exception e) {
+				// no release notes for this version
+			}
+		}
+		return null;
+	}
+
+	@NonNull
+	private static String getNotesKey(@NonNull String releaseNotes) {
+		return String.valueOf(releaseNotes.hashCode());
 	}
 }

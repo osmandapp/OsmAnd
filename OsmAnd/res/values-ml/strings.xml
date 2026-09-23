@@ -1178,7 +1178,6 @@
     <string name="value_downloaded_of_max">"%1$.1f യുടെ  %2$.1f MB"</string>
     <string name="feedback">പ്രതികരണം</string>
     <string name="hourly">പ്രതിമണിക്കൂര്‍</string>
-    <string name="file_name_containes_illegal_char">ഫയലിന്റെ പേരില്‍ നിയമാനുസൃതമല്ലാത്ത അക്ഷരങ്ങള്‍ ഉണ്ട്</string>
     <string name="shared_string_two">"രണ്ട് "</string>
     <string name="shared_string_one">"ഒന്ന് "</string>
     <string name="show_number_pad">നമ്പര്‍പാഡ് കാണിക്കു</string>

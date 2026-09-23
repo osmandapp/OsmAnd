@@ -1342,7 +1342,6 @@
     <string name="storage_permission_restart_is_required">Die App darf nun auf den externen Speicher schreiben, dazu ist aber ein manueller Neustart nötig.</string>
     <string name="shared_string_move_up">Verschieben ↑</string>
     <string name="shared_string_move_down">Verschieben ↓</string>
-    <string name="file_name_containes_illegal_char">Nicht erlaubte Zeichen im Dateinamen</string>
     <string name="rendering_value_fine_name">Fein</string>
     <string name="rendering_value_thin_name">Dünn</string>
     <string name="rendering_value_medium_name">Mittel</string>
@@ -2422,7 +2421,7 @@
     <string name="live_monitoring_time_buffer">Zeitpuffer</string>
     <string name="live_monitoring_tracking_interval">Aufzeichnungsintervall</string>
     <string name="live_monitoring_adress">Webadresse</string>
-    <string name="monitoring_notification">Benachrichtigung</string>
+    <string name="monitoring_notification">Schaltfläche \'Aufnehmen\' in Benachrichtigungen anzeigen</string>
     <string name="monitoring_min_speed">Mindestgeschwindigkeit</string>
     <string name="monitoring_min_accuracy">Mindestgenauigkeit</string>
     <string name="monitoring_min_distance">Minimale Verschiebung</string>
@@ -5174,7 +5173,7 @@
     <string name="astro_designations">Bezeichnungen</string>
     <string name="obd_simulation_device">Simulationsgerät</string>
     <string name="favorite_folder_rename_conflict">Ein Ordner mit diesem Namen ist bereits vorhanden.</string>
-    <string name="favorite_folder_invalid_name">Der Ordnername darf kein / oder _%_ enthalten</string>
+    <string name="favorite_folder_invalid_name">Der Ordnername darf kein / oder %1$s enthalten</string>
     <string name="favorite_folder_duplicate_message">Verwenden Sie einen Ordnernamen, der noch nicht vorhanden ist.</string>
     <string name="favorite_folder_name">Ordnername</string>
     <string name="edit_folder">Ordner bearbeiten</string>

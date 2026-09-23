@@ -25,7 +25,6 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
-import net.osmand.plus.settings.coordinates.CoordinateFormat;
 import net.osmand.plus.settings.coordinates.CoordinateFormatFormatter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -37,6 +36,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceApplier;
 import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
+import net.osmand.shared.settings.coordinates.CoordinateFormat;
 import net.osmand.util.TextDirectionUtil;
 import net.osmand.util.Algorithms;
 

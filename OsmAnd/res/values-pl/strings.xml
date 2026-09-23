@@ -1359,7 +1359,6 @@
     <string name="osm_user_stat">Edycji %1$s, range %2$s, zmian łącznie %3$s</string>
     <string name="osm_live_active">Aktywny</string>
     <string name="osm_live_ask_for_purchase">Proszę najpierw zakupić subskrypcję OsmAnd Live</string>
-    <string name="file_name_containes_illegal_char">Niedozwolony znak w nazwie pliku</string>
     <string name="access_collapsed_list">Zwinięta lista</string>
     <string name="access_expanded_list">Rozwinięta lista</string>
     <string name="access_shared_string_not_installed">Nie zainstalowano</string>

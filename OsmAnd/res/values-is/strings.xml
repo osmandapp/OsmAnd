@@ -816,7 +816,6 @@
     <string name="number_of_contributors">Fjöldi þátttakenda</string>
     <string name="number_of_edits">Fjöldi breytinga</string>
     <string name="reports_for">Skýrsla fyrir</string>
-    <string name="file_name_containes_illegal_char">Skráarheitið inniheldur ógildan staf</string>
     <string name="rendering_attr_showAccess_name">Sýna aðgangstakmarkanir</string>
     <string name="index_item_world_basemap">Heims-yfirlitskort</string>
     <string name="index_item_world_ski">Heims-skíðakort</string>
@@ -5142,7 +5141,7 @@
     <string name="coordinate_format_discard_changes">Henda breytingum</string>
     <string name="coordinate_format_select_other">Veldu annað snið</string>
     <string name="coordinate_format_primary">Aðal</string>
-    <string name="favorite_folder_invalid_name">Heiti möppu má ekki innihalda / eða _%_</string>
+    <string name="favorite_folder_invalid_name">Heiti möppu má ekki innihalda / eða %1$s</string>
     <string name="favorite_folder_name">Heiti möppu</string>
     <string name="edit_folder">Breyta möppu</string>
     <string name="map_widget_memory_info">Upplýsingar um minni</string>

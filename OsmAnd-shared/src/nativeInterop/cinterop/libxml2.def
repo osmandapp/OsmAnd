@@ -1,0 +1,11 @@
+# libxml2 ships with every Apple SDK (usr/include/libxml2, usr/lib/libxml2.tbd) and the iOS
+# app already links it, so this interop adds no new dependency to the product - only to the
+# shared module's build.
+#
+# Only the xmlTextReader ("pull") half of libxml2 is used: it maps onto the XmlPullParser
+# contract almost one to one, and it is plain C, so calls from Kotlin/Native are direct -
+# no objc_msgSend, no NSString round trips.
+headers = libxml/xmlreader.h libxml/parser.h libxml/xmlerror.h
+package = libxml2
+compilerOpts = -I/usr/include/libxml2
+linkerOpts = -lxml2

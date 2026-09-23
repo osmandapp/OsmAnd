@@ -1320,7 +1320,6 @@
     <string name="map_marker">Mapová značka</string>
     <string name="rendering_attr_showMtbRoutes_name">Trasy pro horská kola</string>
     <string name="storage_permission_restart_is_required">Aplikace nyní smí zapisovat na externí úložiště, ale je potřeba její restart.</string>
-    <string name="file_name_containes_illegal_char">Nepovolený znak v názvu souboru</string>
     <string name="access_no_destination">Modul usnadnění: Cíl není nastaven</string>
     <string name="map_widget_magnetic_bearing">Magnetické směrování</string>
     <string name="map_widget_bearing">Relativní směrování</string>
@@ -5171,7 +5170,7 @@
     <string name="open_from_short">Od</string>
     <string name="favorite_confirm_delete_folder">Tím se smaže složka „%1$s“, včetně všech podsložek a %2$d oblíbených položek.</string>
     <string name="favorite_folder_rename_conflict">Složka s tímto názvem již existuje.</string>
-    <string name="favorite_folder_invalid_name">Název složky nesmí obsahovat znaky / nebo _%_</string>
+    <string name="favorite_folder_invalid_name">Název složky nesmí obsahovat znaky / nebo %1$s</string>
     <string name="favorite_folder_duplicate_message">Zvolte název složky, který ještě neexistuje.</string>
     <string name="favorite_folder_name">Název složky</string>
     <string name="edit_folder">Upravit složku</string>
@@ -5289,4 +5288,6 @@
     <string name="astro_eclipse_phase_penumbral">Penumbrální</string>
     <string name="astro_lunar_eclipse_calculating_state">Výpočet viditelnosti na mapě…</string>
     <string name="astro_eclipse_column_below_horizon">Pod obzorem</string>
+    <string name="crash_report_send_failed">Hlášení se nepodařilo odeslat. Zkuste to znovu později.</string>
+    <string name="crash_report_sent">Hlášení odesláno. Děkujeme!</string>
 </resources>

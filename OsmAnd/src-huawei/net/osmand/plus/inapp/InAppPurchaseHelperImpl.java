@@ -685,6 +685,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
+	protected boolean isLocalBillingUnavailable() {
+		return !purchaseSupported;
+	}
+
+	@Override
 	protected void destroyBillingManager() {
 		// non implemented
 	}

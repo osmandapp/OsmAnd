@@ -1337,7 +1337,6 @@
     <string name="storage_permission_restart_is_required">OsmAnd heeft nu toestemming om de externe opslag te gebruiken. Een handmatige herstart is noodzakelijk.</string>
     <string name="full_report">Volledig Verslag</string>
     <string name="report">Verslag</string>
-    <string name="file_name_containes_illegal_char">Ongeldig teken in bestandsnaam</string>
     <string name="rendering_value_thin_name">Dun</string>
     <string name="rendering_value_medium_name">Gemiddeld</string>
     <string name="rendering_value_bold_name">Vet</string>
@@ -5489,7 +5488,7 @@
     <string name="obd_simulation_device">Simulatie-apparaat</string>
     <string name="favorite_confirm_delete_folder">Dit zal de map \"%1$s\" verwijderen, inclusief submappen en %2$d favoriet(en).</string>
     <string name="favorite_folder_rename_conflict">Een map met deze naam bestaat al.</string>
-    <string name="favorite_folder_invalid_name">De mapnaam mag geen / of _%_ bevatten</string>
+    <string name="favorite_folder_invalid_name">De mapnaam mag geen / of %1$s bevatten</string>
     <string name="favorite_folder_duplicate_message">Gebruik een mapnaam die nog niet bestaat.</string>
     <string name="favorite_folder_name">Mapnaam</string>
     <string name="edit_folder">Bewerk map</string>
