@@ -3,7 +3,6 @@ package net.osmand.shared.api
 import co.touchlab.sqliter.Cursor
 import co.touchlab.sqliter.DatabaseConfiguration
 import co.touchlab.sqliter.DatabaseConnection
-import co.touchlab.sqliter.DatabaseManager
 import co.touchlab.sqliter.NO_VERSION_CHECK
 import co.touchlab.sqliter.Statement
 import co.touchlab.sqliter.createDatabaseManager
@@ -15,32 +14,43 @@ import co.touchlab.sqliter.stringForQuery
 import co.touchlab.sqliter.withStatement
 import co.touchlab.sqliter.interop.SQLiteException
 import net.osmand.shared.api.SQLiteAPI.*
+import net.osmand.shared.util.LoggerFactory
 import okio.Path.Companion.toPath
 
 class SQLiteAPIImpl : SQLiteAPI {
 
-	private lateinit var databaseManager: DatabaseManager
-
-	override fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection {
-		val configuration = DatabaseConfiguration(name = name, version = NO_VERSION_CHECK, create = { _ ->
-		}, upgrade = { _, _, _ -> })
-
-		databaseManager = createDatabaseManager(configuration)
-		val ds = databaseManager.createMultiThreadedConnection()
-		return SQLiteDatabaseWrapper(ds)
+	companion object {
+		private val log = LoggerFactory.getLogger("SQLiteAPIImpl")
 	}
 
-	override fun openByAbsolutePath(path: String, readOnly: Boolean): SQLiteConnection {
+	override fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection? {
+		return try {
+			open(name, null)
+		} catch (e: SQLiteException) {
+			log.error("Failed to get or create database $name", e)
+			null
+		}
+	}
+
+	override fun openByAbsolutePath(path: String, readOnly: Boolean): SQLiteConnection? {
 		val p = path.toPath()
+		return try {
+			open(p.name, p.parent.toString())
+		} catch (e: SQLiteException) {
+			log.error("Failed to open database by path: $path readOnly=$readOnly", e)
+			null
+		}
+	}
+
+	private fun open(name: String, basePath: String?): SQLiteConnection {
 		val configuration = DatabaseConfiguration(
-				name = p.name,
-				version = NO_VERSION_CHECK,
-				create = { _ -> },
-				upgrade = { _, _, _ -> },
-				extendedConfig = DatabaseConfiguration.Extended(basePath = p.parent.toString())
+			name = name,
+			version = NO_VERSION_CHECK,
+			create = { _ -> },
+			upgrade = { _, _, _ -> },
+			extendedConfig = DatabaseConfiguration.Extended(basePath = basePath)
 		)
-		databaseManager = createDatabaseManager(configuration)
-		val ds = databaseManager.createMultiThreadedConnection()
+		val ds = createDatabaseManager(configuration).createMultiThreadedConnection()
 		return SQLiteDatabaseWrapper(ds)
 	}
 

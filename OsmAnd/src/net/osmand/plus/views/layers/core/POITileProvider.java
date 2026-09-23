@@ -103,7 +103,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 					id = RenderingIcons.getIconNameForAmenity(ctx, amenity);
 				}
 				if (id != null) {
-					int iconId = RenderingIcons.getPointIconId(ctx, id, R.drawable.mx_special_marker);
+					int iconId = RenderingIcons.getResIdOrDefault(ctx, id, R.drawable.mx_special_marker);
 					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx, getColor(),
 							true, iconId);
 					pointImageDrawable.setAlpha(0.8f);

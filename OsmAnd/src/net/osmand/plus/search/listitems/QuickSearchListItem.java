@@ -468,8 +468,11 @@ public class QuickSearchListItem {
 	public static String getAddressIconName(@NonNull SearchResult searchResult) {
 		return switch (searchResult.objectType) {
 			case CITY, BOUNDARY -> {
-				boolean town = searchResult.object instanceof City city && city.getType() == CityType.TOWN;
-				yield town ? "mx_place_town" : "ic_action_building2";
+				CityType cityType = searchResult.object instanceof City city ? city.getType() : null;
+				if (cityType == CityType.CITY) {
+					yield "mx_place_city";
+				}
+				yield cityType == CityType.TOWN ? "mx_place_town" : "ic_action_building2";
 			}
 			case VILLAGE -> "mx_village";
 			case POSTCODE -> "ic_action_postcode";
@@ -492,11 +495,10 @@ public class QuickSearchListItem {
 		switch (searchResult.objectType) {
 			case CITY:
 			case BOUNDARY:
-				boolean town = (searchResult.object instanceof City)
-						&& (((City) searchResult.object).getType() == CityType.TOWN);
-				return town
-						? getIcon(app, R.drawable.mx_place_town, defIconColor)
-						: getIcon(app, R.drawable.ic_action_building2, defIconColor);
+				// the same mapping as the map marker of an address result uses
+				int cityIconId = RenderingIcons.getResIdOrDefault(app,
+						getAddressIconName(searchResult), R.drawable.ic_action_building2);
+				return getIcon(app, cityIconId, defIconColor);
 			case VILLAGE:
 				return getIcon(app, R.drawable.mx_village, defIconColor);
 			case POSTCODE:
