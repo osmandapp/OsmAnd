@@ -2391,7 +2391,7 @@
     <string name="live_monitoring_time_buffer">Časový zásobník</string>
     <string name="live_monitoring_tracking_interval">Interval stopovania</string>
     <string name="live_monitoring_adress">Webová adresa</string>
-    <string name="monitoring_notification">Oznámenie</string>
+    <string name="monitoring_notification">Zobraziť tlačidlo \"Nahrať\" v oznámeniach</string>
     <string name="monitoring_min_speed">Minimálna rýchlosť</string>
     <string name="monitoring_min_accuracy">Minimálna presnosť</string>
     <string name="monitoring_min_distance">Minimálny posun</string>
@@ -4670,7 +4670,7 @@
     <string name="ais_object_lost_timeout">Časový limit pre viditeľnosť ak je loď stratená</string>
     <string name="ais_object_lost_timeout_description">Nastavte časový limit pre viditeľnosť objektov AIS: Ak nebude do tejto doby obdržaný žiadny signál, bude objekt odstránený z obrazovky.</string>
     <string name="ais_cpa_warning_time">Výstražná doba pred dosiahnutím najbližšieho bodu priblíženia (CPA)</string>
-    <string name="plugin_ais_tracker_name">Sledovanie plavidiel AIS</string>
+    <string name="plugin_ais_tracker_name">Sledovanie plavidiel (AIS)</string>
     <string name="original_color_description">Každý bod si zachová vlastnú farbu.</string>
     <string name="ais_nmea_protocol">Protokol pre prijímanie údajov NMEA</string>
     <string name="ais_cpa_settings">Nastavenia týkajúce sa CPA</string>
@@ -4705,7 +4705,7 @@
     <string name="choose_location_on_map">Zvoľte polohu na mape.</string>
     <string name="show_image_previews">Zobraziť náhľady obrázkov</string>
     <string name="shared_string_manual">Ručne</string>
-    <string name="ais_load_data">Načítať údaje AIS zo súboru</string>
+    <string name="ais_load_data">Simulovať premávku lodí</string>
     <string name="ais_address_settings_description">Zvoľte protokol NMEA (UDP/TCP) a nastavte príslušné adresy a porty</string>
     <string name="ais_cpa_warning_time_description">Ak TCPA (čas k bodu najbližšieho priblíženia) s iným plavidlom klesne pod definovanú hranicu, bude plavidlo označené červenou farbou.</string>
     <string name="ais_port_nmea_server">Port TCP zdroja údajov NMEA</string>
@@ -5346,4 +5346,8 @@
     <string name="crash_report_sent">Hlásenie odoslané. Ďakujeme!</string>
     <string name="crash_report_send_failed">Nepodarilo sa odoslať hlásenie. Skúste znova neskôr.</string>
     <string name="battery_saving_mode_descr">Obmedzí vykresľovanie mapy na 20 snímok za sekundu pre zníženie spotreby batérie a prehrievania zariadenia. Pohyb mapy bude menej plynulý.</string>
+    <string name="file_name_containes_illegal_char">Názov nesmie obsahovať: %1$s</string>
+    <string name="ais_connection_not_set_up">Nenastavené</string>
+    <string name="ais_connection_not_connected">Nepripojené</string>
+    <string name="ais_connection_connecting">Pripája sa…</string>
 </resources>
