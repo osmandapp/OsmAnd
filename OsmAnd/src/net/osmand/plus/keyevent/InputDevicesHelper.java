@@ -18,7 +18,9 @@ import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -298,7 +300,7 @@ public class InputDevicesHelper {
 
 	@NonNull
 	private InputDevicesCollection reloadInputDevicesCollection(int cacheId, @NonNull ApplicationMode appMode) {
-		InputDevicesCollection collection = new InputDevicesCollection(appMode, loadCustomDevices(appMode));
+		InputDevicesCollection collection = new InputDevicesCollection(appMode, loadCustomDevices());
 		cachedDevicesCollections.put(cacheId, collection);
 		return collection;
 	}
@@ -308,8 +310,16 @@ public class InputDevicesHelper {
 	}
 
 	@NonNull
-	private List<InputDeviceProfile> loadCustomDevices(@NonNull ApplicationMode appMode) {
-		String json = settings.CUSTOM_EXTERNAL_INPUT_DEVICES.getModeValue(appMode);
+	private List<InputDeviceProfile> loadCustomDevices() {
+		List<InputDeviceProfile> devices = readCustomDevices(settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get());
+		if (mergeLegacyCustomDevices(devices)) {
+			saveCustomDevices(devices);
+		}
+		return devices;
+	}
+
+	@NonNull
+	private List<InputDeviceProfile> readCustomDevices(@Nullable String json) {
 		if (!Algorithms.isEmpty(json)) {
 			try {
 				return readFromJson(app, new JSONObject(json));
@@ -320,17 +330,114 @@ public class InputDevicesHelper {
 		return new ArrayList<>();
 	}
 
-	private void syncSettings(@NonNull InputDevicesCollection devicesCollection,
-	                          @NonNull EventType eventType) {
+	private void saveCustomDevices(@NonNull List<InputDeviceProfile> devices) {
 		JSONObject json = new JSONObject();
-		ApplicationMode appMode = devicesCollection.getAppMode();
 		try {
-			writeToJson(app, json, devicesCollection.getCustomDevices());
-			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.setModeValue(appMode, json.toString());
+			writeToJson(app, json, devices);
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(json.toString());
 		} catch (JSONException e) {
 			LOG.debug("Error while writing custom devices to JSON ", e);
 		}
-		notifyListeners(appMode, eventType);
+	}
+
+	/**
+	 * Custom devices were stored per profile before they became shared by all profiles.
+	 * Such per-profile lists still come from the app upgrade, from imported profiles
+	 * and from Cloud data of older clients, so they are merged into the global list.
+	 */
+	private boolean mergeLegacyCustomDevices(@NonNull List<InputDeviceProfile> devices) {
+		CommonPreference<String> legacyPreference = settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES;
+		boolean changed = false;
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			if (!legacyPreference.isSetForMode(appMode)) {
+				continue;
+			}
+			String selectedId = settings.EXTERNAL_INPUT_DEVICE.getModeValue(appMode);
+			for (InputDeviceProfile device : readCustomDevices(legacyPreference.getModeValue(appMode))) {
+				String mergedId = mergeLegacyDevice(devices, device);
+				if (Objects.equals(device.getId(), selectedId) && !Objects.equals(device.getId(), mergedId)) {
+					settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, mergedId);
+				}
+			}
+			legacyPreference.resetModeToDefault(appMode);
+			changed = true;
+		}
+		return changed;
+	}
+
+	/**
+	 * @return id of the device in the global list that now holds this legacy device
+	 */
+	@NonNull
+	private String mergeLegacyDevice(@NonNull List<InputDeviceProfile> devices,
+	                                 @NonNull InputDeviceProfile device) {
+		String content = getDeviceContent(device);
+		for (InputDeviceProfile existing : devices) {
+			if (content != null && content.equals(getDeviceContent(existing))) {
+				return existing.getId();
+			}
+		}
+		boolean idTaken = hasDeviceId(devices, device.getId());
+		String name = device.toHumanString(app);
+		boolean nameTaken = hasDeviceName(devices, name);
+		if (idTaken || nameTaken) {
+			String uniqueName = nameTaken ? Algorithms.makeUniqueName(name, newName -> !hasDeviceName(devices, newName)) : name;
+			device = makeCustomDevice(makeUniqueId(devices), uniqueName, device);
+		}
+		devices.add(device);
+		return device.getId();
+	}
+
+	@Nullable
+	private String getDeviceContent(@NonNull InputDeviceProfile device) {
+		try {
+			JSONObject json = ((CustomInputDeviceProfile) device).toJson(app);
+			json.remove("id");
+			// Quick action ids are generated on every read, so they are not part of the content
+			JSONArray assignments = json.getJSONArray("assignments");
+			for (int i = 0; i < assignments.length(); i++) {
+				JSONArray actions = assignments.getJSONObject(i).optJSONArray("action");
+				for (int j = 0; actions != null && j < actions.length(); j++) {
+					actions.getJSONObject(j).remove("id");
+				}
+			}
+			return json.toString();
+		} catch (JSONException e) {
+			return null;
+		}
+	}
+
+	private boolean hasDeviceName(@NonNull List<InputDeviceProfile> customDevices, @NonNull String name) {
+		for (InputDeviceProfile device : CollectionUtils.asOneList(DefaultInputDevices.values(), customDevices)) {
+			if (Objects.equals(device.toHumanString(app).trim(), name.trim())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@NonNull
+	private String makeUniqueId(@NonNull List<InputDeviceProfile> devices) {
+		long time = System.currentTimeMillis();
+		while (hasDeviceId(devices, CUSTOM_DEVICE_PREFIX + time)) {
+			time++;
+		}
+		return CUSTOM_DEVICE_PREFIX + time;
+	}
+
+	private boolean hasDeviceId(@NonNull List<InputDeviceProfile> devices, @NonNull String id) {
+		for (InputDeviceProfile device : devices) {
+			if (Objects.equals(device.getId(), id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void syncSettings(@NonNull InputDevicesCollection devicesCollection,
+	                          @NonNull EventType eventType) {
+		saveCustomDevices(devicesCollection.getCustomDevices());
+		notifyListeners(devicesCollection.getAppMode(), eventType);
 	}
 
 	private static List<InputDeviceProfile> readFromJson(@NonNull OsmandApplication app,
