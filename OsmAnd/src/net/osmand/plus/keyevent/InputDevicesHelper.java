@@ -392,8 +392,10 @@ public class InputDevicesHelper {
 	private String getDeviceContent(@NonNull InputDeviceProfile device) {
 		try {
 			JSONObject json = ((CustomInputDeviceProfile) device).toJson(app);
+			// A merged copy may get a new id and name, so only the assignments are compared.
+			// Quick action ids are generated on every read, so they are not part of the content either
 			json.remove("id");
-			// Quick action ids are generated on every read, so they are not part of the content
+			json.remove("name");
 			JSONArray assignments = json.getJSONArray("assignments");
 			for (int i = 0; i < assignments.length(); i++) {
 				JSONArray actions = assignments.getJSONObject(i).optJSONArray("action");
