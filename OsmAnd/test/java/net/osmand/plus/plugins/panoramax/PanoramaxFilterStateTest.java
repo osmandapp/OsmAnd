@@ -7,9 +7,12 @@ import static org.junit.Assert.assertTrue;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import net.osmand.plus.utils.OsmAndFormatter;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,6 +95,42 @@ public class PanoramaxFilterStateTest {
 		assertTrue(state.filtered(picture(null, "2026-01-01 12:00:00+00", null)));
 		assertFalse(state.filtered(picture(null, "2026-06-15 12:00:00+00", null)));
 		assertTrue(state.filtered(picture(null, "2026-12-31 12:00:00+00", null)));
+	}
+
+	private static Map<String, Object> sequence(String date) {
+		Map<String, Object> data = new HashMap<>();
+		data.put(PanoramaxImage.IMAGE_ID_KEY, "37009ea3-a511-4322-8898-e39aed958ec3");
+		data.put(PanoramaxImage.DATE_KEY, date);
+		return data;
+	}
+
+	// A sequence is dated by a plain day, so it is compared by date. The boundaries below are
+	// built the way the filter screen builds them, which keeps these cases zone independent.
+
+	@Test
+	public void dateOnlySequenceOnTheFromDayIsKept() {
+		PanoramaxFilterState state = new PanoramaxFilterState(true, "",
+				OsmAndFormatter.getStartOfDay(2026, Calendar.SEPTEMBER, 5), 0, false);
+		assertFalse(state.filtered(sequence("2026-09-05")));
+		assertTrue(state.filtered(sequence("2026-09-04")));
+	}
+
+	@Test
+	public void dateOnlySequenceOnTheToDayIsKept() {
+		PanoramaxFilterState state = new PanoramaxFilterState(true, "", 0,
+				OsmAndFormatter.getEndOfDay(2026, Calendar.SEPTEMBER, 5), false);
+		assertFalse(state.filtered(sequence("2026-09-05")));
+		assertTrue(state.filtered(sequence("2026-09-06")));
+	}
+
+	@Test
+	public void dateOnlySequenceIsKeptBySingleDayRange() {
+		PanoramaxFilterState state = new PanoramaxFilterState(true, "",
+				OsmAndFormatter.getStartOfDay(2026, Calendar.SEPTEMBER, 5),
+				OsmAndFormatter.getEndOfDay(2026, Calendar.SEPTEMBER, 5), false);
+		assertFalse(state.filtered(sequence("2026-09-05")));
+		assertTrue(state.filtered(sequence("2026-09-04")));
+		assertTrue(state.filtered(sequence("2026-09-06")));
 	}
 
 	@Test

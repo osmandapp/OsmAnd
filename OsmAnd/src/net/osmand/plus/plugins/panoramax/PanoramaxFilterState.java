@@ -7,6 +7,9 @@ import static net.osmand.plus.plugins.panoramax.PanoramaxImage.TYPE_KEY;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Map;
 import java.util.Objects;
 
@@ -25,6 +28,8 @@ public final class PanoramaxFilterState {
 	private final long from;
 	private final long to;
 	private final boolean panoOnly;
+	private final LocalDate fromDate;
+	private final LocalDate toDate;
 
 	public PanoramaxFilterState(boolean enabled, @Nullable String userKey, long from, long to, boolean panoOnly) {
 		this.enabled = enabled;
@@ -32,6 +37,15 @@ public final class PanoramaxFilterState {
 		this.from = enabled ? from : 0;
 		this.to = enabled ? to : 0;
 		this.panoOnly = panoOnly;
+		this.fromDate = toLocalDate(this.from);
+		this.toDate = toLocalDate(this.to);
+	}
+
+	// Each boundary is the first or the last millisecond of a local day, so the day it was
+	// picked for reads back exactly and a date only feature can be compared against it.
+	@Nullable
+	private static LocalDate toLocalDate(long time) {
+		return time == 0 ? null : Instant.ofEpochMilli(time).atZone(ZoneId.systemDefault()).toLocalDate();
 	}
 
 	@NonNull
@@ -59,9 +73,17 @@ public final class PanoramaxFilterState {
 				}
 			}
 			if (from != 0 || to != 0) {
-				long capturedAt = PanoramaxImage.parseCaptureTime(userData);
-				if ((from != 0 && capturedAt < from) || (to != 0 && capturedAt > to)) {
-					return true;
+				LocalDate date = PanoramaxImage.parseCaptureDate(userData);
+				if (date != null) {
+					if ((fromDate != null && date.isBefore(fromDate))
+							|| (toDate != null && date.isAfter(toDate))) {
+						return true;
+					}
+				} else {
+					long capturedAt = PanoramaxImage.parseCaptureTime(userData);
+					if ((from != 0 && capturedAt < from) || (to != 0 && capturedAt > to)) {
+						return true;
+					}
 				}
 			}
 		}
