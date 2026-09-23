@@ -31,6 +31,21 @@
 				android:layout_gravity="center"
 				android:layout_marginHorizontal="@dimen/dashPadding" />
 
+			<TextView
+				android:id="@+id/map_transparency_value"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="@dimen/dashPadding"
+				android:background="@drawable/bg_list_card_round"
+				android:paddingHorizontal="@dimen/content_padding_small"
+				android:paddingVertical="@dimen/content_padding_half"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				android:textStyle="bold"
+				android:visibility="gone"
+				tools:text="16:40" />
+
 		</LinearLayout>
 
 		<LinearLayout

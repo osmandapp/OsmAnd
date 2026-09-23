@@ -11,6 +11,10 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="buildings_3d_sun_shadows">Realistic sun shadows</string>
+	<string name="buildings_3d_sun_shadows_descr">3D buildings cast shadows from the sun at its real position for the map location and time</string>
+	<string name="buildings_3d_sun_time_slider">Time of day slider on the map</string>
+	<string name="buildings_3d_sun_time_slider_descr">Change the time of day with a slider on the map to see how the shadows move</string>
 	<string name="ais_connection_not_set_up">Not set up</string>
 	<string name="ais_connection_not_connected">Not connected</string>
 	<string name="ais_connection_connecting">Connecting…</string>

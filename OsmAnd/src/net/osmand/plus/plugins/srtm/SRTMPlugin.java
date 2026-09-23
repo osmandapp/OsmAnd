@@ -35,6 +35,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.building.Building3DDetailLevel;
 import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
+import net.osmand.plus.plugins.srtm.building.Buildings3DSunHelper;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -45,6 +46,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.layers.MapTransparencyHelper;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -100,6 +102,10 @@ public class SRTMPlugin extends OsmandPlugin {
 	public final CommonPreference<Integer> BUILDINGS_3D_COLOR_STYLE;
 	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_NIGHT_COLOR;
 	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_DAY_COLOR;
+	public final CommonPreference<Boolean> BUILDINGS_3D_SUN_SHADOWS;
+	public final CommonPreference<Boolean> BUILDINGS_3D_SUN_TIME_SLIDER;
+	public final CommonPreference<Boolean> SUN_POSITION_CURRENT_TIME;
+	public final CommonPreference<Integer> BUILDINGS_3D_SUN_TIME;
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
 	public final CommonPreference<Integer> HILLSHADE_SUN_ANGLE;
 	public final CommonPreference<Integer> HILLSHADE_SUN_AZIMUTH;
@@ -112,6 +118,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	private final StateChangedListener<Float> verticalExaggerationListener;
 	private final StateChangedListener<MetricsConstants> metricSystemListener;
 	private final StateChangedListener<Boolean> map3DObjectsListener;
+	private final StateChangedListener<Boolean> sunShadowsListener;
+	private final StateChangedListener<Integer> sunTimeListener;
+	private final Runnable sunPositionUpdater = this::updateSunPositionPeriodically;
 
 
 	private TerrainLayer terrainLayer;
@@ -131,6 +140,11 @@ public class SRTMPlugin extends OsmandPlugin {
 		BUILDINGS_3D_COLOR_STYLE = registerIntPreference("buildings_3d_color_style", 1).makeProfile().cache();
 		BUILDINGS_3D_CUSTOM_NIGHT_COLOR = registerIntPreference("buildings_3d_custom_night_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
 		BUILDINGS_3D_CUSTOM_DAY_COLOR = registerIntPreference("buildings_3d_custom_day_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
+
+		BUILDINGS_3D_SUN_SHADOWS = registerBooleanPreference("3d_buildings_sun_shadows", false, false).makeProfile().cache();
+		BUILDINGS_3D_SUN_TIME_SLIDER = registerBooleanPreference("3d_buildings_sun_time_slider", false, false).makeGlobal().cache();
+		SUN_POSITION_CURRENT_TIME = registerBooleanPreference("sun_position_current_time", false, false).makeGlobal().cache();
+		BUILDINGS_3D_SUN_TIME = registerIntPreference("3d_buildings_sun_time", 12 * 60).makeGlobal().cache();
 
 		BUILDINGS_3D_DETAIL_LEVEL = settings.getCustomRenderBooleanProperty("show3DbuildingParts");
 		BUILDINGS_3D_ENABLE_COLORING = settings.getCustomRenderBooleanProperty("useDefaultBuildingColor");
@@ -185,6 +199,77 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		hillshadeSunAzimuthListener = change -> app.runInUIThread(this::updateElevationConfiguration);
 		HILLSHADE_SUN_AZIMUTH.addListener(hillshadeSunAzimuthListener);
+
+		sunShadowsListener = change -> app.runInUIThread(() -> {
+			updateElevationConfiguration();
+			updateSunTimeBar();
+		});
+		BUILDINGS_3D_SUN_SHADOWS.addListener(sunShadowsListener);
+		BUILDINGS_3D_SUN_TIME_SLIDER.addListener(sunShadowsListener);
+		SUN_POSITION_CURRENT_TIME.addListener(sunShadowsListener);
+		ENABLE_3D_MAP_OBJECTS.addListener(sunShadowsListener);
+
+		sunTimeListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		BUILDINGS_3D_SUN_TIME.addListener(sunTimeListener);
+	}
+
+	public boolean isBuildingsSunShadowsEnabled() {
+		return ENABLE_3D_MAP_OBJECTS.get() && BUILDINGS_3D_SUN_SHADOWS.get();
+	}
+
+	// Sun is placed by the date, time and map location instead of the manual azimuth and altitude
+	public boolean isSunPositionByTime() {
+		return SUN_POSITION_CURRENT_TIME.get();
+	}
+
+	public boolean isBuildingsSunTimeSliderEnabled() {
+		return isSunPositionByTime() && BUILDINGS_3D_SUN_TIME_SLIDER.get();
+	}
+
+	/**
+	 * Real sun over the given point: at the time chosen with the map slider, or right now.
+	 */
+	@NonNull
+	public Buildings3DSunHelper.SunPosition getBuildingsSunPosition(double lat, double lon) {
+		long time = isBuildingsSunTimeSliderEnabled()
+				? Buildings3DSunHelper.getTimeOfDayMillis(BUILDINGS_3D_SUN_TIME.get())
+				: System.currentTimeMillis();
+		return Buildings3DSunHelper.getSunPosition(lat, lon, time);
+	}
+
+	private void updateSunTimeBar() {
+		MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
+		if (mapActivity != null) {
+			MapTransparencyHelper helper = mapActivity.getMapLayers().getMapControlsLayer().getMapTransparencyHelper();
+			if (isBuildingsSunTimeSliderEnabled()) {
+				helper.showSunTimeBar(BUILDINGS_3D_SUN_TIME);
+			} else {
+				helper.hideSunTimeBar();
+			}
+		}
+	}
+
+	// The real sun moves slowly, one update per minute keeps the shadows in place
+	private void updateSunPositionPeriodically() {
+		app.getUiHandler().removeCallbacks(sunPositionUpdater);
+		if (isSunPositionByTime()) {
+			if (!BUILDINGS_3D_SUN_TIME_SLIDER.get()) {
+				updateElevationConfiguration();
+			}
+			app.getUiHandler().postDelayed(sunPositionUpdater, 60_000);
+		}
+	}
+
+	@Override
+	public void mapActivityResume(@NonNull MapActivity activity) {
+		super.mapActivityResume(activity);
+		app.getUiHandler().post(sunPositionUpdater);
+	}
+
+	@Override
+	public void mapActivityPause(@NonNull MapActivity activity) {
+		super.mapActivityPause(activity);
+		app.getUiHandler().removeCallbacks(sunPositionUpdater);
 	}
 
 	public void updateElevationConfiguration() {

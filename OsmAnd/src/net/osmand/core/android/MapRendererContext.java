@@ -30,12 +30,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
+import net.osmand.plus.plugins.srtm.building.Buildings3DSunHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -619,12 +621,23 @@ public class MapRendererContext {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}
+		boolean sunShadows = plugin != null && plugin.isBuildingsSunShadowsEnabled();
 		if (plugin != null) {
 			elevationConfiguration.setZScaleFactor(plugin.getVerticalExaggerationScale());
-			elevationConfiguration.setHillshadeSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
-			elevationConfiguration.setHillshadeSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
+			if (plugin.isSunPositionByTime()) {
+				OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+				Buildings3DSunHelper.SunPosition sun =
+						plugin.getBuildingsSunPosition(mapView.getLatitude(), mapView.getLongitude());
+				// Below the horizon the renderer fades the shadows out, so keep the light horizontal
+				elevationConfiguration.setHillshadeSunAngle(Math.max(0f, sun.getAltitude()));
+				elevationConfiguration.setHillshadeSunAzimuth(sun.getAzimuth());
+			} else {
+				elevationConfiguration.setHillshadeSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
+				elevationConfiguration.setHillshadeSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
+			}
 		}
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
+		mapRendererView.set3DBuildingsShadows(sunShadows);
 	}
 
 	public void updateVerticalExaggerationScale() {
