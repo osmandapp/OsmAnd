@@ -1,6 +1,7 @@
 package net.osmand.wear.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,6 +51,15 @@ fun WearApp(connector: PhoneConnector) {
 		// Fire and forget: the phone answers every command with a fresh snapshot, and that echo —
 		// not the call itself — is what moves the screen.
 		val send: (WearCommand) -> Unit = { command -> scope.launch { connector.sendCommand(command) } }
+
+		// Ask the phone again whenever a screen is opened. The phone publishes on its own for
+		// route and recording changes, but plenty of state has no event to hang off — a plugin
+		// being switched on, for one — and resuming the activity is otherwise the only moment
+		// the watch ever re-asks.
+		val destination by navController.currentBackStackEntryFlow.collectAsStateWithLifecycle(null)
+		LaunchedEffect(destination?.destination?.route) {
+			connector.refresh()
+		}
 
 		AppScaffold {
 			SwipeDismissableNavHost(

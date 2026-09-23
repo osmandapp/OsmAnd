@@ -6,6 +6,7 @@ import android.os.SystemClock
 import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.Wearable
 import net.osmand.PlatformUtil
+import net.osmand.StateChangedListener
 import net.osmand.data.ValueHolder
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
@@ -33,6 +34,7 @@ object WearBridge {
 	// from being collected — drop them and updates silently stop arriving.
 	private var routeDataListener: IRoutingDataUpdateListener? = null
 	private var routeInfoListener: IRouteInformationListener? = null
+	private var recordingListener: StateChangedListener<Boolean>? = null
 
 	private var lastPublishAt = 0L
 	private var publishScheduled = false
@@ -58,6 +60,12 @@ object WearBridge {
 		}
 		routeDataListener = dataListener
 		routeInfoListener = infoListener
+
+		// Recording can be switched on from the phone as easily as from the watch, and the
+		// preference is the one place both routes pass through.
+		val recording = StateChangedListener<Boolean> { requestPublish(app) }
+		recordingListener = recording
+		app.settings.SAVE_GLOBAL_TRACK_TO_GPX.addListener(recording)
 
 		val routingHelper = app.routingHelper
 		routingHelper.addRouteDataListener(dataListener)
