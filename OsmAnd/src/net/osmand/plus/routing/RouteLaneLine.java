@@ -188,9 +188,13 @@ public class RouteLaneLine {
 				locationPoints[i] = road.segment.getStartPointIndex() + road.step() * road.passed++;
 			}
 		}
+		List<Road[]> freeJoins = new ArrayList<>();
 		for (int i = 1; i < roads.size(); i++) {
-			resolveJoin(roads.get(i - 1), roads.get(i));
+			if (resolveJoin(roads.get(i - 1), roads.get(i))) {
+				freeJoins.add(new Road[] {roads.get(i - 1), roads.get(i)});
+			}
 		}
+		carryTapers(freeJoins);
 
 		// Maneuvers with lane guidance: the lanes apply to the road before the location of the maneuver
 		List<Integer> guidanceIndexes = new ArrayList<>();
@@ -329,21 +333,21 @@ public class RouteLaneLine {
 	/**
 	 * Lines up the lanes of two consecutive roads of the route at their common node, like the map renderer does.
 	 */
-	private static void resolveJoin(@NonNull Road a, @NonNull Road b) {
+	private static boolean resolveJoin(@NonNull Road a, @NonNull Road b) {
 		RouteDataObject objectA = a.segment.getObject();
 		RouteDataObject objectB = b.segment.getObject();
 		if (objectA.getId() == objectB.getId() || !a.oneway || !b.oneway) {
-			return;
+			return false;
 		}
 		int nodeA = a.segment.getEndPointIndex();
 		int nodeB = b.segment.getStartPointIndex();
 		if (!a.isEnd(nodeA) || !b.isEnd(nodeB)) {
-			return;
+			return false;
 		}
 		double[] dirA = a.directionAt(nodeA, false);
 		double[] dirB = b.directionAt(nodeB, true);
 		if (dot(dirA, dirB) < MAX_JOIN_COS) {
-			return;
+			return false;
 		}
 
 		// Other one-way roads that leave the node nearly straight: the route takes a branch of a split
@@ -377,7 +381,8 @@ public class RouteLaneLine {
 				}
 			}
 			b.setShiftAt(nodeB, a.left(a.ownShift) + blockStart * a.laneWidth + b.width() / 2);
-			return;
+			a.fixAt(nodeA);
+			return false;
 		}
 
 		// Split without the other branches known: the lane guidance of the maneuver, or the side the branch
@@ -391,7 +396,8 @@ public class RouteLaneLine {
 			}
 			if (blockStart >= 0) {
 				b.setShiftAt(nodeB, a.left(a.ownShift) + blockStart * a.laneWidth + b.width() / 2);
-				return;
+				a.fixAt(nodeA);
+				return false;
 			}
 		}
 		// Merge: the branch takes the block on the side it comes from
@@ -399,7 +405,8 @@ public class RouteLaneLine {
 			boolean fromLeft = dot(dirA, new double[] {dirB[1], -dirB[0]}) > 0;
 			int blockStart = fromLeft ? 0 : b.lanes - a.lanes;
 			a.setShiftAt(nodeA, b.left(b.ownShift) + blockStart * b.laneWidth + a.width() / 2);
-			return;
+			b.fixAt(nodeB);
+			return false;
 		}
 
 		// One road continues the other: the edges stay in line on one side
@@ -436,6 +443,39 @@ public class RouteLaneLine {
 					? anchorLeft + follower.width() / 2
 					: anchorLeft + anchor.width() - follower.width() / 2;
 			follower.setShiftAt(follower == a ? nodeA : nodeB, shift);
+			anchor.fixAt(anchor == a ? nodeA : nodeB);
+			return false;
+		}
+		return a.segment.isForwardDirection() && b.segment.isForwardDirection();
+	}
+
+	/**
+	 * Unfinished tapers go on across joins of equal roads, like in the renderer.
+	 */
+	private static void carryTapers(@NonNull List<Road[]> joins) {
+		for (int iteration = 0; iteration < 16; iteration++) {
+			boolean changed = false;
+			for (Road[] join : joins) {
+				Road a = join[0];
+				Road b = join[1];
+				double aStart = a.firstShift - a.ownShift;
+				if (Math.abs(aStart) > 0.01 && !a.lastFixed && !b.firstFixed && a.firstDone + a.length() < SHIFT_TAPER_LENGTH
+						&& Math.abs(b.firstShift - b.ownShift - aStart) > 0.01) {
+					b.firstShift = b.ownShift + aStart;
+					b.firstDone = a.firstDone + a.length();
+					changed = true;
+				}
+				double bEnd = b.lastShift - b.ownShift;
+				if (Math.abs(bEnd) > 0.01 && !b.firstFixed && !a.lastFixed && b.lastDone + b.length() < SHIFT_TAPER_LENGTH
+						&& Math.abs(a.lastShift - a.ownShift - bEnd) > 0.01) {
+					a.lastShift = a.ownShift + bEnd;
+					a.lastDone = b.lastDone + b.length();
+					changed = true;
+				}
+			}
+			if (!changed) {
+				break;
+			}
 		}
 	}
 
@@ -475,6 +515,15 @@ public class RouteLaneLine {
 		Location location = new Location("");
 		location.setLatitude(a.getLatitude() + (b.getLatitude() - a.getLatitude()) * t);
 		location.setLongitude(a.getLongitude() + (b.getLongitude() - a.getLongitude()) * t);
+		// The line is drawn at the height of its points in 3D
+		if (a.hasAltitude() && b.hasAltitude()) {
+			location.setAltitude(a.getAltitude() + (b.getAltitude() - a.getAltitude()) * t);
+		} else if (a.hasAltitude()) {
+			location.setAltitude(a.getAltitude());
+		}
+		if (a.hasSpeed()) {
+			location.setSpeed(a.getSpeed());
+		}
 		return location;
 	}
 
@@ -539,6 +588,11 @@ public class RouteLaneLine {
 		// Shift at the first and the last point of the way, as the renderer resolves them
 		double firstShift;
 		double lastShift;
+		// Part of the taper passed on the roads before, and whether a join rule set or used the end
+		double firstDone;
+		double lastDone;
+		boolean firstFixed;
+		boolean lastFixed;
 		double[] wayDistances;
 		int passed;
 
@@ -622,6 +676,33 @@ public class RouteLaneLine {
 			} else {
 				lastShift = shift;
 			}
+			fixAt(point);
+		}
+
+		void fixAt(int point) {
+			if (point == 0) {
+				firstFixed = true;
+			} else {
+				lastFixed = true;
+			}
+		}
+
+		double length() {
+			return distances()[segment.getObject().getPointsLength() - 1];
+		}
+
+		@NonNull
+		double[] distances() {
+			if (wayDistances == null) {
+				RouteDataObject road = segment.getObject();
+				int n = road.getPointsLength();
+				wayDistances = new double[n];
+				for (int i = 1; i < n; i++) {
+					wayDistances[i] = wayDistances[i - 1] + MapUtils.measuredDist31(road.getPoint31XTile(i - 1),
+							road.getPoint31YTile(i - 1), road.getPoint31XTile(i), road.getPoint31YTile(i));
+				}
+			}
+			return wayDistances;
 		}
 
 		/**
@@ -646,29 +727,24 @@ public class RouteLaneLine {
 		 * Shift at the point of the way: each joined end tapers into the own position, like the renderer.
 		 */
 		double shiftAt(int point) {
-			if (firstShift == ownShift && lastShift == ownShift) {
+			// Same as MapRasterizer_P::interpolateShifts
+			double startDelta = firstShift - ownShift;
+			double endDelta = lastShift - ownShift;
+			if (Math.abs(startDelta) < 0.01 && Math.abs(endDelta) < 0.01) {
 				return ownShift;
 			}
-			if (wayDistances == null) {
-				RouteDataObject road = segment.getObject();
-				int n = road.getPointsLength();
-				wayDistances = new double[n];
-				for (int i = 1; i < n; i++) {
-					wayDistances[i] = wayDistances[i - 1] + MapUtils.measuredDist31(road.getPoint31XTile(i - 1),
-							road.getPoint31YTile(i - 1), road.getPoint31XTile(i), road.getPoint31YTile(i));
-				}
+			double[] distances = distances();
+			point = Math.max(0, Math.min(distances.length - 1, point));
+			double total = distances[distances.length - 1];
+			double d = distances[point];
+			boolean bothShifted = Math.abs(startDelta) >= 0.01 && Math.abs(endDelta) >= 0.01;
+			if (bothShifted && total <= 2 * SHIFT_TAPER_LENGTH) {
+				double startValue = ownShift + startDelta * (1 - smoothstep(firstDone / SHIFT_TAPER_LENGTH));
+				double endValue = ownShift + endDelta * (1 - smoothstep(lastDone / SHIFT_TAPER_LENGTH));
+				return startValue + (endValue - startValue) * smoothstep(total > 0 ? d / total : 0);
 			}
-			point = Math.max(0, Math.min(wayDistances.length - 1, point));
-			double total = wayDistances[wayDistances.length - 1];
-			double distance = wayDistances[point];
-			if (total <= 2 * SHIFT_TAPER_LENGTH) {
-				double t = total > 0 ? distance / total : 0;
-				return firstShift + (lastShift - firstShift) * smoothstep(t);
-			}
-			double fromFirst = Math.min(1, distance / SHIFT_TAPER_LENGTH);
-			double fromLast = Math.min(1, (total - distance) / SHIFT_TAPER_LENGTH);
-			return ownShift + (firstShift - ownShift) * (1 - smoothstep(fromFirst))
-					+ (lastShift - ownShift) * (1 - smoothstep(fromLast));
+			return ownShift + startDelta * (1 - smoothstep((firstDone + d) / SHIFT_TAPER_LENGTH))
+					+ endDelta * (1 - smoothstep((lastDone + total - d) / SHIFT_TAPER_LENGTH));
 		}
 
 		/**
