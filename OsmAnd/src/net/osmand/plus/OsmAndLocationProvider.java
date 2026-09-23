@@ -48,6 +48,8 @@ import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.NavigationInfo;
+import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RouteLaneLine;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -679,6 +681,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			if (location == null || isPointAccurateForRouting(location)) {
 				// Update routing position and get location for sticking mode
 				updatedLocation = routingHelper.setCurrentLocation(location, app.getSettings().SNAP_TO_ROAD.get());
+				RouteCalculationResult route = routingHelper.getRoute();
+				if (updatedLocation != null && updatedLocation != location && route != null) {
+					// Show the snapped position on the lanes of the route line
+					updatedLocation = RouteLaneLine.shiftProjection(app, route, updatedLocation, route.getCurrentRoute());
+				}
 			}
 		} else if (routingHelper.isRoutePlanningMode() && app.getSettings().getPointToStart() == null) {
 			routingHelper.setCurrentLocation(location, false);
