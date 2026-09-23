@@ -20,7 +20,7 @@ object KMapUtils {
 	const val HAVERSINE_EARTH_RADIUS_METERS = 6372800.0
 	const val VECTOR_LINE_EARTH_RADIUS_METERS = 6371000.0
 	private const val EARTH_RADIUS_B = 6356752
-	private const val EARTH_RADIUS_A = 6378137
+	const val EARTH_RADIUS_A = 6378137
 	const val MIN_LATITUDE = -85.0511
 	const val MAX_LATITUDE = 85.0511
 	const val LATITUDE_TURN = 180.0
