@@ -30,18 +30,25 @@ object OsmAndWearColors {
 	val DialogDismiss = Color(0xFF3C3A38)
 }
 
+/**
+ * Built once rather than inside the composable: MaterialTheme hands the scheme down through a
+ * CompositionLocal, and a fresh instance on every recomposition invalidates the whole subtree
+ * below it. The colours are constants, so there is nothing to rebuild.
+ */
+private val OsmAndColorScheme = ColorScheme(
+	primary = OsmAndWearColors.Accent,
+	onPrimary = OsmAndWearColors.Background,
+	background = OsmAndWearColors.Background,
+	onBackground = OsmAndWearColors.ChipContent,
+	surfaceContainer = OsmAndWearColors.ChipContainer,
+	onSurface = OsmAndWearColors.ChipContent,
+	onSurfaceVariant = OsmAndWearColors.HeaderContent
+)
+
 @Composable
 fun OsmAndWearTheme(content: @Composable () -> Unit) {
 	MaterialTheme(
-		colorScheme = ColorScheme(
-			primary = OsmAndWearColors.Accent,
-			onPrimary = OsmAndWearColors.Background,
-			background = OsmAndWearColors.Background,
-			onBackground = OsmAndWearColors.ChipContent,
-			surfaceContainer = OsmAndWearColors.ChipContainer,
-			onSurface = OsmAndWearColors.ChipContent,
-			onSurfaceVariant = OsmAndWearColors.HeaderContent
-		),
+		colorScheme = OsmAndColorScheme,
 		content = content
 	)
 }
