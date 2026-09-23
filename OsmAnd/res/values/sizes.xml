@@ -491,6 +491,9 @@
 	<dimen name="radius_large">9dp</dimen>
 	<dimen name="radius_double_large">18dp</dimen>
 
+	<dimen name="side_widgets_panel_max_width_medium">160dp</dimen>
+	<dimen name="side_widgets_panel_max_width_large">215dp</dimen>
+
 	<dimen name="bottom_space_height">160dp</dimen>
 	<dimen name="external_devices_empty_content_centre_margin">126dp</dimen>
 	<dimen name="map_button_appearance_image_height">130dp</dimen>

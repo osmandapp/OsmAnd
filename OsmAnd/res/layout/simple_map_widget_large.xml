@@ -29,8 +29,8 @@
 
 				<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 					android:id="@+id/widget_text_small"
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
 					android:gravity="end|bottom"
 					android:letterSpacing="0.06"
 					android:lineSpacingExtra="-2sp"
