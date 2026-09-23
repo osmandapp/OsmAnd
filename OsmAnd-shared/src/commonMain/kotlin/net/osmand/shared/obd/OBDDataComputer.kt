@@ -432,7 +432,7 @@ object OBDDataComputer {
 							val distance = getDistanceForTimePeriod(first.timestamp, last.timestamp)
 							if (distance > 0 && difLiter > 0) {
 								val result = distance / difLiter
-								return if (result > M_LITER_CONSUMPTION_LIMIT) {
+								return if (result < M_LITER_CONSUMPTION_LIMIT) {
 									Float.NaN
 								} else {
 									result
@@ -495,6 +495,7 @@ object OBDDataComputer {
 					when (type) {
 						FUEL_LEFT_KM,
 						FUEL_CONSUMPTION_RATE_LITER_KM,
+						FUEL_CONSUMPTION_RATE_M_PER_LITER,
 						FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
 						FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 							val lastLvl =

@@ -32,7 +32,7 @@ class OBDFuelConsumptionWidget(
 
 	init {
 		val typeWidget = getFieldType()
-		widgetComputer = OBDDataComputer.registerWidget(typeWidget, getAverageTime(typeWidget))
+		widgetComputer = OBDDataComputer.registerWidget(typeWidget, typeWidget.defaultAverageTime)
 	}
 
 	private fun getFieldType(): OBDTypeWidget {
@@ -46,14 +46,12 @@ class OBDFuelConsumptionWidget(
 		if (prefsChanged) {
 			if (widgetComputer.type != typeWidget
 				&& widgetComputer.averageTimeSeconds != 0
-				&& (widgetComputer.averageTimeSeconds != typeWidget.defaultAverageTime
-						&& (typeWidget != OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR
-						&& typeWidget != OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR
-						&& typeWidget != OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM))
+				&& widgetComputer.averageTimeSeconds != typeWidget.defaultAverageTime
+				&& typeWidget.defaultAverageTime == 0
 			) {
 				OBDDataComputer.removeWidget(widgetComputer)
 			}
-			widgetComputer = OBDDataComputer.registerWidget(typeWidget, getAverageTime(typeWidget))
+			widgetComputer = OBDDataComputer.registerWidget(typeWidget, typeWidget.defaultAverageTime)
 		}
 
 		updateSimpleWidgetInfo(null)
@@ -66,17 +64,6 @@ class OBDFuelConsumptionWidget(
 	private fun nextMode() {
 		fuelConsumptionMode.set(fuelConsumptionMode.get().next())
 		updatePrefs(true)
-	}
-
-	private fun getAverageTime(typeWidget: OBDTypeWidget): Int {
-		var averageTimeSeconds = 0
-		if (typeWidget == OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR ||
-			typeWidget == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR ||
-			typeWidget == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM
-		) {
-			averageTimeSeconds = 5 * 60
-		}
-		return averageTimeSeconds
 	}
 
 	private fun registerFuelConsumptionPref(customId: String?): OsmandPreference<FuelConsumptionMode> {
