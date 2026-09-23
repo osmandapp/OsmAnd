@@ -559,8 +559,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 			lastRouteProjection = lastProjection;
 			if (!directTo) {
-				// The line starts on the lanes where it is drawn
-				lastProjection = RouteLaneLine.shiftProjection(getApplication(), route, lastProjection, startLocationIndex);
+				// The line starts on the lanes where it is drawn, and has its own points
+				int locationIndex = startLocationIndex;
+				startLocationIndex = RouteLaneLine.toLineIndex(getApplication(), route, lastProjection, locationIndex);
+				lastProjection = RouteLaneLine.shiftProjection(getApplication(), route, lastProjection, locationIndex);
 			}
 			boolean draw = true;
 			if (routeGeometry.hasMapRenderer()) {

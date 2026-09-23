@@ -16,52 +16,108 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Moves the route line from the road axis onto the lanes: the lanes suggested for the next maneuver,
- * otherwise the middle of the carriageway, with smooth lane changes in between.
+ * Draws the route line in one lane of the road: it keeps its lane, and changes lanes only when the lane ends
+ * or the lane guidance of the next maneuver asks for other lanes; every lane change takes LANE_CHANGE_LENGTH.
  * The carriageway position follows the map renderer (MapRasterizer_P "realistic roads"): lane placement,
  * lane blocks of branches at splits and merges, and the taper to the own position of a road.
+ * <p>
+ * The line has more points than the route (lane changes need them): route location indexes are converted
+ * with {@link #toLineIndex}.
  */
 public class RouteLaneLine {
 
 	public static final String REALISTIC_ROADS_ATTR = "realisticRoads";
 
-	// Lane guidance starts to pull the line this far before the maneuver and is fully applied from FULL_DISTANCE
-	private static final double GUIDANCE_DISTANCE = 400;
-	private static final double FULL_DISTANCE = 150;
-	// After a maneuver the line returns to the middle of the carriageway within this distance
-	private static final double RELEASE_DISTANCE = 60;
-	// A lane change takes at least this many meters along the road per meter across it
-	private static final double LANE_CHANGE_SLOPE = 12;
+	// The lanes of a maneuver are taken this far before it
+	private static final double GUIDANCE_DISTANCE = 250;
+	// The first lane of the route is chosen for a maneuver within this distance
+	private static final double START_GUIDANCE_DISTANCE = 2000;
+	private static final double LANE_CHANGE_LENGTH = 50;
+	private static final double LANE_CHANGE_STEP = 5;
+	// Offset changes of the road position are drawn with points this far apart
+	private static final double SHIFT_STEP = 10;
 	// Same as the map renderer: a road reaches its own position this far from a joined end
 	private static final double SHIFT_TAPER_LENGTH = 100;
 	// Same as the map renderer: roads join only when they go on within 40 degrees
 	private static final double MAX_JOIN_COS = 0.766;
 
 	private static RouteCalculationResult cachedRoute;
-	private static List<Location> cachedLocations;
-	private static double[] cachedOffsets;
+	private static LaneLine cachedLine;
+
+	private static class LaneLine {
+		// Line points, the route locations are among them
+		List<Location> locations;
+		double[] distances;
+		double[] offsets;
+		// Line index of every route location
+		int[] lineIndexes;
+		// Route locations moved onto the lanes
+		List<Location> routeLocations;
+	}
 
 	public static boolean isEnabled(@NonNull OsmandApplication app) {
 		return app.getSettings().getCustomRenderBooleanProperty(REALISTIC_ROADS_ATTR).get();
 	}
 
+	@Nullable
+	private static LaneLine getLine(@NonNull OsmandApplication app, @NonNull RouteCalculationResult route) {
+		if (!isEnabled(app)) {
+			return null;
+		}
+		synchronized (RouteLaneLine.class) {
+			if (cachedRoute != route) {
+				cachedLine = buildLine(route.getImmutableAllLocations(), route.getImmutableAllSegments());
+				cachedRoute = route;
+			}
+			return cachedLine;
+		}
+	}
+
 	/**
-	 * Locations of the route line, moved onto the lanes, one per route location.
+	 * Points of the route line on the lanes.
+	 */
+	@NonNull
+	public static List<Location> getLineLocations(@NonNull OsmandApplication app, @NonNull RouteCalculationResult route) {
+		LaneLine line = getLine(app, route);
+		return line != null ? line.locations : route.getImmutableAllLocations();
+	}
+
+	/**
+	 * Route locations moved onto the lanes, one per route location.
 	 */
 	@NonNull
 	public static List<Location> getLocations(@NonNull OsmandApplication app, @NonNull RouteCalculationResult route) {
-		List<Location> locations = route.getImmutableAllLocations();
-		if (!isEnabled(app)) {
-			return locations;
+		LaneLine line = getLine(app, route);
+		return line != null ? line.routeLocations : route.getImmutableAllLocations();
+	}
+
+	/**
+	 * Index in {@link #getLineLocations} of the route location.
+	 */
+	public static int toLineIndex(@NonNull OsmandApplication app, @NonNull RouteCalculationResult route, int locationIndex) {
+		LaneLine line = getLine(app, route);
+		if (line == null || locationIndex < 0 || locationIndex >= line.lineIndexes.length) {
+			return locationIndex;
 		}
-		synchronized (RouteLaneLine.class) {
-			if (cachedRoute != route || cachedLocations == null) {
-				cachedOffsets = calculateOffsets(locations, route.getImmutableAllSegments());
-				cachedLocations = cachedOffsets != null ? shiftLocations(locations, cachedOffsets) : locations;
-				cachedRoute = route;
-			}
-			return cachedLocations;
+		return line.lineIndexes[locationIndex];
+	}
+
+	/**
+	 * Index in {@link #getLineLocations} of the first line point after the projection, which lies on the route
+	 * segment from locationIndex - 1 to locationIndex.
+	 */
+	public static int toLineIndex(@NonNull OsmandApplication app, @NonNull RouteCalculationResult route,
+	                              @Nullable Location projection, int locationIndex) {
+		LaneLine line = getLine(app, route);
+		if (line == null || locationIndex <= 0 || locationIndex >= line.lineIndexes.length) {
+			return toLineIndex(app, route, locationIndex);
 		}
+		double distance = projectionDistance(route, line, projection, locationIndex);
+		int index = line.lineIndexes[locationIndex - 1] + 1;
+		while (index < line.lineIndexes[locationIndex] && line.distances[index] <= distance) {
+			index++;
+		}
+		return index;
 	}
 
 	/**
@@ -70,40 +126,48 @@ public class RouteLaneLine {
 	@Nullable
 	public static Location shiftProjection(@NonNull OsmandApplication app, @NonNull RouteCalculationResult route,
 	                                       @Nullable Location projection, int locationIndex) {
-		if (projection == null || !isEnabled(app)) {
-			return projection;
-		}
-		getLocations(app, route);
-		double[] offsets;
-		synchronized (RouteLaneLine.class) {
-			offsets = cachedRoute == route ? cachedOffsets : null;
-		}
+		LaneLine line = projection != null ? getLine(app, route) : null;
 		List<Location> locations = route.getImmutableAllLocations();
-		if (offsets == null || locationIndex <= 0 || locationIndex >= locations.size()) {
+		if (line == null || locationIndex <= 0 || locationIndex >= locations.size()) {
 			return projection;
 		}
-		Location from = locations.get(locationIndex - 1);
-		Location to = locations.get(locationIndex);
-		double length = MapUtils.getDistance(from.getLatitude(), from.getLongitude(), to.getLatitude(), to.getLongitude());
-		double passed = MapUtils.getDistance(from.getLatitude(), from.getLongitude(), projection.getLatitude(), projection.getLongitude());
-		double t = length > 0 ? Math.min(1, passed / length) : 0;
-		double offset = offsets[locationIndex - 1] * (1 - t) + offsets[locationIndex] * t;
+		double distance = projectionDistance(route, line, projection, locationIndex);
+		int from = line.lineIndexes[locationIndex - 1];
+		int to = line.lineIndexes[locationIndex];
+		double offset = line.offsets[to];
+		for (int i = from; i < to; i++) {
+			if (distance <= line.distances[i + 1]) {
+				double length = line.distances[i + 1] - line.distances[i];
+				double t = length > 0 ? clamp((distance - line.distances[i]) / length, 0, 1) : 0;
+				offset = line.offsets[i] + (line.offsets[i + 1] - line.offsets[i]) * t;
+				break;
+			}
+		}
 		Location shifted = new Location(projection);
-		shift(shifted, from, to, offset);
+		shift(shifted, locations.get(locationIndex - 1), locations.get(locationIndex), offset);
 		return shifted;
 	}
 
+	private static double projectionDistance(@NonNull RouteCalculationResult route, @NonNull LaneLine line,
+	                                         @Nullable Location projection, int locationIndex) {
+		int from = line.lineIndexes[locationIndex - 1];
+		if (projection == null) {
+			return line.distances[from];
+		}
+		Location start = route.getImmutableAllLocations().get(locationIndex - 1);
+		return line.distances[from] + MapUtils.getDistance(start.getLatitude(), start.getLongitude(),
+				projection.getLatitude(), projection.getLongitude());
+	}
+
 	@Nullable
-	private static double[] calculateOffsets(@NonNull List<Location> locations, @NonNull List<RouteSegmentResult> segments) {
+	private static LaneLine buildLine(@NonNull List<Location> locations, @NonNull List<RouteSegmentResult> segments) {
 		int count = locations.size();
 		if (count < 2 || segments.size() != count) {
 			return null;
 		}
 		double[] distances = new double[count];
 		for (int i = 1; i < count; i++) {
-			Location a = locations.get(i - 1);
-			Location b = locations.get(i);
-			distances[i] = distances[i - 1] + MapUtils.getDistance(a.getLatitude(), a.getLongitude(), b.getLatitude(), b.getLongitude());
+			distances[i] = distances[i - 1] + distance(locations.get(i - 1), locations.get(i));
 		}
 
 		// Roads of the route in order, and the road and point index of every location
@@ -121,8 +185,7 @@ public class RouteLaneLine {
 			}
 			locationRoads[i] = road;
 			if (road != null) {
-				int step = road.segment.isForwardDirection() ? 1 : -1;
-				locationPoints[i] = road.segment.getStartPointIndex() + step * road.passed++;
+				locationPoints[i] = road.segment.getStartPointIndex() + road.step() * road.passed++;
 			}
 		}
 		for (int i = 1; i < roads.size(); i++) {
@@ -146,50 +209,121 @@ public class RouteLaneLine {
 			previous = segment;
 		}
 
+		// One lane per location: keep the lane, change it only when it ends or the guidance asks for others
+		int[] laneOf = new int[count];
+		double[] shifts = new double[count];
 		double[] offsets = new double[count];
+		// Lane change completed at a location: how far the line moves across the road there
+		double[] changes = new double[count];
 		int nextGuidance = 0;
-		int lastGuidanceIndex = -1;
 		for (int i = 0; i < count; i++) {
 			while (nextGuidance < guidanceIndexes.size() && guidanceIndexes.get(nextGuidance) < i) {
-				lastGuidanceIndex = guidanceIndexes.get(nextGuidance);
 				nextGuidance++;
 			}
 			Road road = locationRoads[i];
 			if (road == null) {
+				laneOf[i] = i > 0 ? laneOf[i - 1] : 0;
 				offsets[i] = i > 0 ? offsets[i - 1] : 0;
 				continue;
 			}
-			double middle = road.shiftAt(locationPoints[i]);
-			double target = middle;
-			double weight = 0;
+			double shift = road.shiftAt(locationPoints[i]);
+			shifts[i] = shift;
+			int[] block = null;
+			double guidanceDistance = Double.MAX_VALUE;
 			if (nextGuidance < guidanceIndexes.size()) {
-				int index = guidanceIndexes.get(nextGuidance);
-				double before = distances[index] - distances[i];
-				if (before <= GUIDANCE_DISTANCE) {
-					target = road.lanesPosition(middle, guidanceLanes.get(nextGuidance));
-					weight = smoothstep((GUIDANCE_DISTANCE - before) / (GUIDANCE_DISTANCE - FULL_DISTANCE));
-				}
+				guidanceDistance = distances[guidanceIndexes.get(nextGuidance)] - distances[i];
+				block = road.lanesBlock(guidanceLanes.get(nextGuidance));
 			}
-			offsets[i] = middle + (target - middle) * weight;
-			if (lastGuidanceIndex >= 0 && weight == 0) {
-				// Leave the maneuver lane gradually
-				double after = distances[i] - distances[lastGuidanceIndex];
-				if (after < RELEASE_DISTANCE && i > 0) {
-					offsets[i] = offsets[i - 1] + (middle - offsets[i - 1]) * smoothstep(after / RELEASE_DISTANCE);
-				}
+			int lane;
+			if (i == 0 || locationRoads[i - 1] == null) {
+				lane = block != null && guidanceDistance <= START_GUIDANCE_DISTANCE ? block[1] : road.lanes - 1;
+			} else {
+				// The lane at the same place across the road
+				lane = road.laneAt(shift, offsets[i - 1]);
+			}
+			int kept = lane;
+			if (block != null && guidanceDistance <= GUIDANCE_DISTANCE && (lane < block[0] || lane > block[1])) {
+				lane = lane < block[0] ? block[0] : block[1];
+			}
+			laneOf[i] = lane;
+			offsets[i] = road.laneCentre(shift, lane);
+			if (i > 0) {
+				double keptOffset = road.laneCentre(shift, kept);
+				// Lane ended at this node: the previous lane is off this road
+				double previousOffset = offsets[i - 1];
+				boolean laneEnded = Math.abs(keptOffset - previousOffset) > road.laneWidth * 0.75
+						&& locationRoads[i - 1] != road;
+				changes[i] = (offsets[i] - keptOffset) + (laneEnded ? keptOffset - previousOffset : 0);
 			}
 		}
 
-		// Limit the lateral speed, in both directions, so that every lane change is smooth
+		// Line points: route locations plus points where the position changes along a segment
+		List<Location> linePoints = new ArrayList<>();
+		List<Double> lineDistances = new ArrayList<>();
+		List<Double> lineOffsets = new ArrayList<>();
+		int[] lineIndexes = new int[count];
+		for (int i = 0; i < count; i++) {
+			if (i > 0) {
+				double from = distances[i - 1];
+				double length = distances[i] - from;
+				double changeStart = distances[i] - LANE_CHANGE_LENGTH;
+				double start = offsets[i - 1];
+				double end = offsets[i] - changes[i];
+				boolean changing = changes[i] != 0;
+				boolean moving = Math.abs(end - start) > 0.2;
+				double step = changing ? LANE_CHANGE_STEP : SHIFT_STEP;
+				if ((changing || moving) && length > step) {
+					int parts = (int) Math.min(200, Math.ceil(length / step));
+					for (int k = 1; k < parts; k++) {
+						double t = (double) k / parts;
+						double d = from + length * t;
+						double offset = start + (end - start) * t;
+						if (changing && d > changeStart) {
+							offset += changes[i] * smoothstep((d - changeStart) / LANE_CHANGE_LENGTH);
+						}
+						linePoints.add(interpolate(locations.get(i - 1), locations.get(i), t));
+						lineDistances.add(d);
+						lineOffsets.add(offset);
+					}
+				}
+			}
+			lineIndexes[i] = linePoints.size();
+			linePoints.add(new Location(locations.get(i)));
+			lineDistances.add(distances[i]);
+			lineOffsets.add(offsets[i]);
+		}
+		// Lane changes that start before the previous route location
 		for (int i = 1; i < count; i++) {
-			double max = (distances[i] - distances[i - 1]) / LANE_CHANGE_SLOPE;
-			offsets[i] = clamp(offsets[i], offsets[i - 1] - max, offsets[i - 1] + max);
+			if (changes[i] == 0) {
+				continue;
+			}
+			double changeStart = distances[i] - LANE_CHANGE_LENGTH;
+			for (int j = lineIndexes[i - 1]; j >= 0 && lineDistances.get(j) > changeStart; j--) {
+				double d = lineDistances.get(j);
+				lineOffsets.set(j, lineOffsets.get(j) + changes[i] * smoothstep((d - changeStart) / LANE_CHANGE_LENGTH));
+			}
 		}
-		for (int i = count - 2; i >= 0; i--) {
-			double max = (distances[i + 1] - distances[i]) / LANE_CHANGE_SLOPE;
-			offsets[i] = clamp(offsets[i], offsets[i + 1] - max, offsets[i + 1] + max);
+
+		int size = linePoints.size();
+		LaneLine line = new LaneLine();
+		line.distances = new double[size];
+		line.offsets = new double[size];
+		List<Location> shifted = new ArrayList<>(size);
+		for (int i = 0; i < size; i++) {
+			line.distances[i] = lineDistances.get(i);
+			line.offsets[i] = lineOffsets.get(i);
+			Location location = new Location(linePoints.get(i));
+			shift(location, linePoints.get(Math.max(0, i - 1)), linePoints.get(Math.min(size - 1, i + 1)), line.offsets[i]);
+			shifted.add(location);
 		}
-		return offsets;
+		line.locations = Collections.unmodifiableList(shifted);
+		line.lineIndexes = lineIndexes;
+		List<Location> routeLocations = new ArrayList<>(count);
+		for (int i = 0; i < count; i++) {
+			routeLocations.add(shifted.get(lineIndexes[i]));
+		}
+		line.routeLocations = Collections.unmodifiableList(routeLocations);
+		return line;
 	}
 
 	/**
@@ -246,9 +380,25 @@ public class RouteLaneLine {
 			return;
 		}
 
-		// A link that joins a wider road merges from the right: it takes the right lanes
-		if (a.link && !b.link && b.lanes > a.lanes) {
-			a.setShiftAt(nodeA, b.left(b.ownShift) + (b.lanes - a.lanes) * b.laneWidth + a.width() / 2);
+		// Split without the other branches known: the lane guidance of the maneuver, or the side the branch
+		// leaves to, gives the block of the parent lanes the branch takes
+		boolean branch = a.link != b.link || (a.link && b.link);
+		if (a.lanes > b.lanes) {
+			int blockStart = guidanceBlockStart(b.segment.getTurnType(), a.lanes, b.lanes);
+			if (blockStart < 0 && branch) {
+				boolean right = dot(dirB, new double[] {dirA[1], -dirA[0]}) > 0;
+				blockStart = right ? a.lanes - b.lanes : 0;
+			}
+			if (blockStart >= 0) {
+				b.setShiftAt(nodeB, a.left(a.ownShift) + blockStart * a.laneWidth + b.width() / 2);
+				return;
+			}
+		}
+		// Merge: the branch takes the block on the side it comes from
+		if (a.lanes < b.lanes && branch) {
+			boolean fromLeft = dot(dirA, new double[] {dirB[1], -dirB[0]}) > 0;
+			int blockStart = fromLeft ? 0 : b.lanes - a.lanes;
+			a.setShiftAt(nodeA, b.left(b.ownShift) + blockStart * b.laneWidth + a.width() / 2);
 			return;
 		}
 
@@ -289,18 +439,47 @@ public class RouteLaneLine {
 		}
 	}
 
-	@NonNull
-	private static List<Location> shiftLocations(@NonNull List<Location> locations, @NonNull double[] offsets) {
-		int count = locations.size();
-		List<Location> result = new ArrayList<>(count);
-		for (int i = 0; i < count; i++) {
-			Location location = new Location(locations.get(i));
-			Location from = locations.get(Math.max(0, i - 1));
-			Location to = locations.get(Math.min(count - 1, i + 1));
-			shift(location, from, to, offsets[i]);
-			result.add(location);
+	/**
+	 * First parent lane of the branch from the active lanes of the maneuver, -1 when they do not tell.
+	 */
+	private static int guidanceBlockStart(@Nullable TurnType turn, int parentLanes, int branchLanes) {
+		int[] lanes = turn != null ? turn.getLanes() : null;
+		if (lanes == null || lanes.length != parentLanes) {
+			return -1;
 		}
-		return Collections.unmodifiableList(result);
+		int first = -1;
+		int last = -1;
+		for (int i = 0; i < lanes.length; i++) {
+			if (lanes[i] % 2 == 1) {
+				if (first < 0) {
+					first = i;
+				}
+				last = i;
+			}
+		}
+		if (first < 0) {
+			return -1;
+		}
+		if (last - first + 1 == branchLanes) {
+			return first;
+		}
+		if (last == parentLanes - 1) {
+			return parentLanes - branchLanes;
+		}
+		return first == 0 ? 0 : -1;
+	}
+
+	@NonNull
+	private static Location interpolate(@NonNull Location a, @NonNull Location b, double t) {
+		// A plain line point: the first and the last route locations have a provider of their own
+		Location location = new Location("");
+		location.setLatitude(a.getLatitude() + (b.getLatitude() - a.getLatitude()) * t);
+		location.setLongitude(a.getLongitude() + (b.getLongitude() - a.getLongitude()) * t);
+		return location;
+	}
+
+	private static double distance(@NonNull Location a, @NonNull Location b) {
+		return MapUtils.getDistance(a.getLatitude(), a.getLongitude(), b.getLatitude(), b.getLongitude());
 	}
 
 	private static void shift(@NonNull Location location, @NonNull Location from, @NonNull Location to, double offset) {
@@ -405,12 +584,28 @@ public class RouteLaneLine {
 			lastShift = ownShift;
 		}
 
+		int step() {
+			return segment.isForwardDirection() ? 1 : -1;
+		}
+
 		double width() {
 			return lanes * laneWidth;
 		}
 
 		double left(double shift) {
 			return shift - width() / 2;
+		}
+
+		double laneCentre(double shift, int lane) {
+			return left(shift) + (lane + 0.5) * laneWidth;
+		}
+
+		/**
+		 * The lane under the offset, the nearest one when the offset is off the road.
+		 */
+		int laneAt(double shift, double offset) {
+			int lane = (int) Math.floor((offset - left(shift)) / laneWidth);
+			return Math.max(0, Math.min(lanes - 1, lane));
 		}
 
 		boolean isEnd(int point) {
@@ -435,8 +630,7 @@ public class RouteLaneLine {
 		@NonNull
 		double[] directionAt(int point, boolean start) {
 			RouteDataObject road = segment.getObject();
-			int step = segment.isForwardDirection() ? 1 : -1;
-			int other = start ? point + step : point - step;
+			int other = start ? point + step() : point - step();
 			other = Math.max(0, Math.min(road.getPointsLength() - 1, other));
 			int from = start ? point : other;
 			int to = start ? other : point;
@@ -478,10 +672,11 @@ public class RouteLaneLine {
 		}
 
 		/**
-		 * Middle of the active lanes. When the guidance counts other lanes than this road has, the lanes
-		 * keep to the same edge.
+		 * Active lanes of the guidance on this road, first and last from the left. When the guidance counts
+		 * other lanes than this road has, the lanes keep to the same edge.
 		 */
-		double lanesPosition(double shift, @NonNull int[] guidance) {
+		@Nullable
+		int[] lanesBlock(@NonNull int[] guidance) {
 			int first = -1;
 			int last = -1;
 			for (int i = 0; i < guidance.length; i++) {
@@ -493,21 +688,21 @@ public class RouteLaneLine {
 				}
 			}
 			if (first < 0) {
-				return shift;
+				return null;
 			}
-			double centre = (first + last + 1) / 2.0;
-			double lanePosition;
-			if (guidance.length == lanes) {
-				lanePosition = centre;
-			} else if (last == guidance.length - 1) {
-				lanePosition = lanes - (guidance.length - centre);
-			} else if (first == 0) {
-				lanePosition = centre;
-			} else {
-				lanePosition = centre / guidance.length * lanes;
+			if (guidance.length != lanes) {
+				if (last == guidance.length - 1) {
+					int move = lanes - guidance.length;
+					first += move;
+					last += move;
+				} else if (first != 0) {
+					first = (int) Math.floor((double) first / guidance.length * lanes);
+					last = (int) Math.ceil((double) (last + 1) / guidance.length * lanes) - 1;
+				}
 			}
-			lanePosition = clamp(lanePosition, 0.5, Math.max(0.5, lanes - 0.5));
-			return left(shift) + lanePosition * laneWidth;
+			first = Math.max(0, Math.min(lanes - 1, first));
+			last = Math.max(first, Math.min(lanes - 1, last));
+			return new int[] {first, last};
 		}
 	}
 

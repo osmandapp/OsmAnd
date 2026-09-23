@@ -106,7 +106,7 @@ public class RouteGeometryWay extends
 		if (coloringChanged || tb.getMapDensity() != getMapDensity() || this.route != route) {
 			this.route = route;
 			coloringChanged = false;
-			List<Location> locations = RouteLaneLine.getLocations(getContext().getApp(), route);
+			List<Location> locations = RouteLaneLine.getLineLocations(getContext().getApp(), route);
 			if (coloringType.isGradient()) {
 				updateGradientWay(tb, locations);
 			} else if (coloringType.isRouteInfoAttribute()) {
@@ -124,15 +124,19 @@ public class RouteGeometryWay extends
 		if (actionPoints != null) {
 			for (RouteActionPoint actionPoint : actionPoints) {
 				if (actionPoint != null) {
-					indexes.add(actionPoint.index);
+					indexes.add(toLineIndex(actionPoint.index));
 					if (actionPoint.normalizedOffset > 0) {
-						indexes.add(actionPoint.index + 1);
+						indexes.add(toLineIndex(actionPoint.index + 1));
 					}
 				}
 			}
 		}
 		this.forceIncludedIndexes = indexes;
 		this.zooms.clear();
+	}
+
+	private int toLineIndex(int locationIndex) {
+		return route != null ? RouteLaneLine.toLineIndex(getContext().getApp(), route, locationIndex) : locationIndex;
 	}
 
 	@Override
