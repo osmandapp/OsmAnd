@@ -81,4 +81,5 @@ public class QuickActionIds {
 	public static final int SHOW_HIDE_WIND_ANIMATION_LAYER = 81;
 	public static final int SHOW_HIDE_TRACKS_ACTION_ID = 82;
 	public static final int SHOW_HIDE_PANORAMAX_ACTION_ID = 83;
+	public static final int SHOW_ALONG_THE_ROUTE_ACTION = 84;
 }

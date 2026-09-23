@@ -404,6 +404,7 @@ public class MapButtonsHelper {
 		allTypes.add(NavAutoZoomMapAction.TYPE);
 		allTypes.add(NavStartStopAction.TYPE);
 		allTypes.add(NavResumePauseAction.TYPE);
+		allTypes.add(ShowAlongTheRouteAction.TYPE);
 		allTypes.add(SwitchProfileAction.TYPE);
 		allTypes.add(NavRemoveNextDestination.TYPE);
 		// settings
