@@ -53,7 +53,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:paddingHorizontal="@dimen/content_padding"
-			android:text="@string/shared_string_opacity"
+			android:text="@string/shared_string_visibility"
 			android:textColor="?android:textColorSecondary" />
 
 	</LinearLayout>

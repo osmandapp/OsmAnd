@@ -75,7 +75,7 @@
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:layout_gravity="center_vertical"
-								android:text="@string/shared_string_opacity"
+								android:text="@string/shared_string_visibility"
 								android:textColor="?android:textColorSecondary"
 								android:textSize="@dimen/default_list_text_size"
 								android:textStyle="normal" />

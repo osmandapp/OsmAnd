@@ -11,10 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
-	<string name="shared_string_opacity">Opacity</string>
-	<string name="overlay_opacity">Overlay opacity</string>
-	<string name="map_opacity">Base map opacity</string>
-	<string name="show_opacity_seekbar">Show opacity seekbar</string>
+	<string name="shared_string_visibility">Visibility</string>
 	<string name="ais_connection_not_set_up">Not set up</string>
 	<string name="ais_connection_not_connected">Not connected</string>
 	<string name="ais_connection_connecting">Connecting…</string>
@@ -4321,7 +4318,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="osm_live_ask_for_purchase">Please purchase a subscription to OsmAnd Live first</string>
     <string name="select_map_marker">Select map marker</string>
     <string name="upload_anonymously">Upload anonymously</string>
-    <string name="show_transparency_seekbar">Show transparency seekbar</string>
+    <string name="show_transparency_seekbar">Show visibility seekbar</string>
     <string name="download_files_error_not_enough_space">Not enough space!\n
     {3} MB is needed temporarily, {1} MB permanently.\n
     (Only {2} MB available.)</string>
@@ -5444,8 +5441,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="voice_stream_notification">Notification audio</string>
     <string name="voice_stream_music">Media/navigation audio</string>
     <string name="warning_tile_layer_not_downloadable">The app cannot download the map layer %1$s, reinstalling it might help.</string>
-    <string name="overlay_transparency">Overlay transparency</string>
-    <string name="map_transparency">Base map transparency</string>
+    <string name="overlay_transparency">Overlay visibility</string>
+    <string name="map_transparency">Base map visibility</string>
     <string name="layer_underlay">Underlay map…</string>
     <string name="map_underlay">Underlay map</string>
     <string name="layer_overlay">Overlay map…</string>
