@@ -59,6 +59,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.base.NewIntentListener;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.HMDPromoFragment;
 import net.osmand.plus.chooseplan.HugerockPromoFragment;
@@ -563,6 +564,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onNewIntent(intent);
 		setIntent(intent);
 
+		NewIntentListener.notifyFragments(getSupportFragmentManager(), intent);
 		importHelper.setUiActivity(this);
 		if (!intentHelper.parseLaunchIntents()) {
 			intentHelper.parseContentIntent();

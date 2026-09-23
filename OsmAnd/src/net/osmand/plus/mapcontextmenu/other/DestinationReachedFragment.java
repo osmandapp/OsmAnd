@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_DESTINATION_REACHED_ID;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.NewIntentListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
@@ -43,7 +45,7 @@ import net.osmand.plus.utils.InsetTargetsCollection;
  * ⚠️ Do not convert to BottomSheetFragment without carefully evaluating its integration,
  * as it may rely on full-screen behavior and custom navigation handling.
  */
-public class DestinationReachedFragment extends BaseOsmAndFragment implements RouteCalculationProgressListener {
+public class DestinationReachedFragment extends BaseOsmAndFragment implements RouteCalculationProgressListener, NewIntentListener {
 
 	public static final String TAG = DestinationReachedFragment.class.getSimpleName();
 
@@ -196,6 +198,15 @@ public class DestinationReachedFragment extends BaseOsmAndFragment implements Ro
 			// Indicates that the menu could not be closed immediately.
 			// In which case the menu should be closed next time when it will possible.
 			shouldHideMenu = true;
+		}
+	}
+
+	@Override
+	public void onNewIntent(@NonNull Intent intent) {
+		// Finish the reached route, otherwise the menu covers the point or route opened
+		// by another app and dismiss() pops that newer menu instead of this one.
+		if (!intent.hasCategory(Intent.CATEGORY_LAUNCHER)) {
+			finishNavigation();
 		}
 	}
 
