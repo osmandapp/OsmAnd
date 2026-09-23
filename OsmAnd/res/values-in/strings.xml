@@ -2029,7 +2029,7 @@
     <string name="move_point">Pindahkan Titik</string>
     <string name="osm_recipients_label">Penerima OSM</string>
     <string name="total_donations">Donasi total</string>
-    <string name="day_off_label">mati</string>
+    <string name="day_off_label">tutup</string>
     <string name="winter_and_ski_renderer">Musim dingin dan ski</string>
     <string name="pro_features">Fitur pro</string>
     <string name="edit_filter_delete_message">Saringan \'%1$s\' dihapus</string>

@@ -1888,7 +1888,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="lang_lo">Łaoskaja</string>
     <string name="will_open_tomorrow_at">Adčynicca zaŭtra a</string>
     <string name="rendering_attr_hidePOILabels_name">Nazvy POI</string>
-    <string name="day_off_label">vych.</string>
+    <string name="day_off_label">vychadny</string>
     <string name="winter_and_ski_renderer">Zimovy/lyžny</string>
     <string name="touring_view_renderer">Turystyčny vyhliad</string>
     <string name="nautical_renderer">Marski</string>

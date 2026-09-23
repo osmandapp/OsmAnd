@@ -1242,7 +1242,7 @@
     <string name="backup_error_subscription_was_expired">Síntiús in éag</string>
     <string name="rendering_attr_showFunicularRoutes_name">Línte iarnróid cháblaigh</string>
     <string name="send_report">Seol tuairisc</string>
-    <string name="day_off_label">as</string>
+    <string name="day_off_label">dúnta</string>
     <string name="dont_move_maps">Ná bog</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Línte tointeálaí</string>
     <string name="plan_route_trim_before">Gearr roimh</string>

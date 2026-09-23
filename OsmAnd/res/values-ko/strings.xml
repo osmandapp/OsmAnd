@@ -3668,7 +3668,7 @@
     <string name="go_to_marker_location">마커 위치로 이동</string>
     <string name="routing_attr_piste_type_sled_name">썰매</string>
     <string name="av_notes_audio_widget_desc">위젯을 탭하면 오디오 메모를 취할 수 있습니다.</string>
-    <string name="day_off_label">끔</string>
+    <string name="day_off_label">휴무</string>
     <string name="routing_attr_allow_intermediate_name">중간 노선을 허용</string>
     <string name="routing_attr_allow_expert_description">극단적으로 어려운 경로, 위험한 장애물과 주변.</string>
     <string name="subscribe_email_error">오류</string>

@@ -3660,7 +3660,7 @@
     <string name="winter_and_ski_renderer">Zima i skijanje</string>
     <string name="move_point">Pomestete ja tockata</string>
     <string name="osm_recipients_label">Primateli na OSM</string>
-    <string name="day_off_label">isklučen</string>
+    <string name="day_off_label">затворено</string>
     <string name="toast_empty_name_error">Neimenuvana lokacija</string>
     <string name="tunnel_warning">Tunel napred</string>
     <string name="show_tunnels">Tuneli</string>

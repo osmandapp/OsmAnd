@@ -3268,7 +3268,7 @@
     <string name="nautical_renderer">Nautic</string>
     <string name="touring_view_renderer">Vedere turistică</string>
     <string name="winter_and_ski_renderer">Iarnă și schi</string>
-    <string name="day_off_label">oprit</string>
+    <string name="day_off_label">închis</string>
     <string name="osm_recipients_label">Recipiente OSM</string>
     <string name="move_point">Punct de Mișcare</string>
     <string name="import_track_desc">Fișierul %1$s nu conține puncte intermediare, îl importați ca traseu\?</string>

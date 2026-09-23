@@ -1909,7 +1909,7 @@
     <string name="show_closed_notes">Ցույց տալ փակած նշումները</string>
     <string name="switch_osm_notes_visibility_desc">Ցույց տալ/թաքցնել OSM նշումները քարտեզի վրա:</string>
     <string name="lang_lo">Լաոտեան</string>
-    <string name="day_off_label">Ոչ աշխ․ օր</string>
+    <string name="day_off_label">Ոչ աշխատանքային օր</string>
     <string name="winter_and_ski_renderer">Ձմեռային և լեռնադահուկային</string>
     <string name="touring_view_renderer">Զբոսաշրջական տեսք</string>
     <string name="nautical_renderer">Ծովային</string>
