@@ -1509,9 +1509,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		keepEclipseTargetCenteredForMapMove = false
 		starView.removeCallbacks(monitorEclipseMapMoveRunnable)
 		app.osmandMap.mapView.animatedDraggingThread.stopAnimating()
-		if (eclipseMapShown) {
-			pendingEclipseMapFit = true
-		}
 	}
 
 	private fun hideEclipseMap() {
