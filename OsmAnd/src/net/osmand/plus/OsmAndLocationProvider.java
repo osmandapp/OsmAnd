@@ -16,6 +16,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.hardware.display.DisplayManager;
+import android.hardware.display.DisplayManager.DisplayListener;
 import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationManager;
@@ -28,6 +30,7 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Display;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -143,6 +146,21 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	// Current screen orientation
 	private int currentScreenOrientation;
+	// A 180° rotation (e.g. portrait -> reverse portrait) is not a configuration change
+	private final DisplayListener displayListener = new DisplayListener() {
+		@Override
+		public void onDisplayAdded(int displayId) {
+		}
+
+		@Override
+		public void onDisplayRemoved(int displayId) {
+		}
+
+		@Override
+		public void onDisplayChanged(int displayId) {
+			updateScreenOrientation();
+		}
+	};
 
 	private final OsmandApplication app;
 
@@ -261,6 +279,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		currentScreenOrientation = orientation;
 	}
 
+	private void updateScreenOrientation() {
+		Display display = AndroidUtils.getDisplay(app);
+		if (display != null) {
+			updateScreenOrientation(display.getRotation());
+		}
+	}
+
 	public void addLocationListener(@NonNull OsmAndLocationListener listener) {
 		if (!locationListeners.contains(listener)) {
 			locationListeners = CollectionUtils.addToList(locationListeners, listener);
@@ -318,6 +343,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (sensorRegistered && !register) {
 			Log.d(PlatformUtil.TAG, "Disable sensor");
 			((SensorManager) app.getSystemService(Context.SENSOR_SERVICE)).unregisterListener(this);
+			((DisplayManager) app.getSystemService(Context.DISPLAY_SERVICE)).unregisterDisplayListener(displayListener);
 			sensorRegistered = false;
 			heading = null;
 		} else if (!sensorRegistered && register) {
@@ -342,6 +368,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					}
 				}
 			}
+			updateScreenOrientation();
+			((DisplayManager) app.getSystemService(Context.DISPLAY_SERVICE)).registerDisplayListener(displayListener, mainHandler);
 			sensorRegistered = true;
 		}
 	}
