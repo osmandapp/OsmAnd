@@ -55,9 +55,9 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 			if (mode == getAppMode()) {
 				continue;
 			}
-            if (filterAndroidAutoCompatibleModes && !mode.isAndroidAutoCompatible()) {
-                continue;
-            }
+			if (filterAndroidAutoCompatibleModes && !mode.isAndroidAutoCompatible()) {
+				continue;
+			}
 			appModes.add(mode);
 
 		}

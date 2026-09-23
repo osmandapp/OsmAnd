@@ -73,8 +73,13 @@ public class BaseSimpleWidgetInfoFragment extends BaseResizableWidgetSettingFrag
 				simpleWidget.updateWidgetView();
 			}
 			if (iconVisibilityChanged) {
-				app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
-						.getIconModePref(layoutMode).setModeValue(appMode, PanelIconMode.ORIGINAL);
+				if (isAndroidAutoMode) {
+					app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
+							.getIconModePref(null).setModeValue(appMode, PanelIconMode.ORIGINAL);
+				} else {
+					app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
+							.getIconModePref(layoutMode).setModeValue(appMode, PanelIconMode.ORIGINAL);
+				}
 				widgetInfo.widget.markAndroidAutoLayoutNeeded();
 			}
 		}

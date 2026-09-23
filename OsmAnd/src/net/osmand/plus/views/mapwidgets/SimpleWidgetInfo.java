@@ -52,12 +52,6 @@ public class SimpleWidgetInfo extends MapWidgetInfo {
 		return widgetPanel;
 	}
 
-	@NonNull
-	@Override
-	public WidgetsPanel getUpdatedAndroidAutoPanel(@NonNull ApplicationMode appMode) {
-		return super.getUpdatedAndroidAutoPanel(appMode);
-	}
-
 	public void setExternalProviderPackage(@NonNull String externalProviderPackage) {
 		this.externalProviderPackage = externalProviderPackage;
 	}

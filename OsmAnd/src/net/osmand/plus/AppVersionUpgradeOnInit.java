@@ -1100,7 +1100,7 @@ public class AppVersionUpgradeOnInit {
 			for (ScreenLayoutMode layoutMode : layoutModes) {
 				CommonPreference<Boolean> transparentPreference = settings.getTransparentMapThemePreference(layoutMode);
 				if (transparentPreference.isSetForMode(appMode) && transparentPreference.getModeValue(appMode)) {
-					for (WidgetsPanel panel : WidgetsPanel.mapPanels) {
+					for (WidgetsPanel panel : WidgetsPanel.getMapPanels()) {
 						PanelAppearanceSettings appearanceSettings = app.getPanelAppearanceSettingsManager().get(panel);
 						appearanceSettings.getBackgroundModePref(layoutMode).setModeValue(appMode, PanelBackgroundMode.TRANSPARENT);
 					}
@@ -1111,7 +1111,7 @@ public class AppVersionUpgradeOnInit {
 
 	private void migrateWidgetPanelsPages() {
 		OsmandSettings settings = app.getSettings();
-		for (WidgetsPanel panel : WidgetsPanel.mapPanels) {
+		for (WidgetsPanel panel : WidgetsPanel.getMapPanels()) {
 			ListStringPreference originalPreference = panel.getOrderPreference(settings, null);
 			for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 				if (originalPreference.isSetForMode(appMode)) {

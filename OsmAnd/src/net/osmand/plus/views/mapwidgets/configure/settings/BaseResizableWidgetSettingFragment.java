@@ -14,10 +14,8 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.PanelSizeMode;
-import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
@@ -116,7 +114,6 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 				widgetInfo.widget.markAndroidAutoLayoutNeeded();
 			}
 		}
-		app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateControls();
 	}
 
 	private void updateRowWidgets(@NonNull MapWidgetInfo widgetInfo) {
@@ -136,7 +133,7 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 					AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
 		}
 
-        for (Set<MapWidgetInfo> rowMapWidgetsInfo : widgets) {
+		for (Set<MapWidgetInfo> rowMapWidgetsInfo : widgets) {
 			for (MapWidgetInfo info : rowMapWidgetsInfo) {
 				if (info == widgetInfo) {
 					applySizeSettingToWidgetsInRow(rowMapWidgetsInfo);

@@ -1,9 +1,5 @@
 package net.osmand.plus.auto;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -11,6 +7,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Pair;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -32,22 +29,23 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 /**
  * Prototype of a generic widgets panel drawn over the Android Auto map surface.
  * <p>
- * The panel reuses the regular map widgets of the current profile ({@link WidgetsPanel#RIGHT}
- * by default), so any widget - including the OBD II ones of the Vehicle metrics plugin - shows
- * up in the car without a car-specific implementation. Widgets are drawn on the right side of
- * the surface to keep the left part free for the navigation card of the head unit. When more
- * widgets are enabled than fit on the screen, a click on the panel shows the next page.
+ *  Widgets are drawn on the right side of the surface to keep the left part
+ *  free for the navigation card of the head unit. When more widgets are enabled than fit on the screen,
+ *  a click on the panel shows the next page.
  * <p>
  * Widget views are created and laid out by this class only and are never attached to a window,
  * so the phone UI is not affected.
  */
 public class CarWidgetsPanel {
 
-	/** Panel is drawn only when the visible area is at least that wide. */
+	/**
+	 * Panel is drawn only when the visible area is at least that wide.
+	 */
 	private static final float MIN_SURFACE_WIDTH_DP = 400f;
 	private static final float CORNER_RADIUS_DP = 8f;
 	private static final float BORDER_WIDTH_DP = 2f;
@@ -60,30 +58,36 @@ public class CarWidgetsPanel {
 	 * the phone, which keeps them slightly larger than a phone widget in angular size.
 	 */
 	private static final float PANEL_WIDTH_CAR_DP = 200f;
-	/** Safety net for narrow head units (800x480), the panel never takes more than this. */
+	/**
+	 * Safety net for narrow head units (800x480), the panel never takes more than this.
+	 */
 	private static final float MAX_PANEL_WIDTH_RATIO = 0.22f;
-	/** Fraction of the visible area height the panel is allowed to occupy. */
+	/**
+	 * Fraction of the visible area height the panel is allowed to occupy.
+	 */
 	private static final float MAX_PANEL_HEIGHT_RATIO = 0.7f;
 
 	private final CarContext carContext;
 	private final OsmandApplication app;
 	private final WidgetsPanel panel;
 
-	private final List<MapWidgetInfo> widgetInfos = new ArrayList<>();
-	private final Set<String> visibleWidgetIds = new HashSet<>();
-	private final RectF lastPanelBounds = new RectF();
+	private final Object widgetsLock = new Object();
 
 	private int firstVisibleWidget;
 	private int lastVisibleCount;
+	private boolean needsRebake = true;
 
 	private final Paint borderPaint = new Paint();
 	private final Paint backgroundPaint = new Paint();
 	private final Paint dividerPaint = new Paint();
 
-	private WidgetsBuffer widgetsBuffer = null;
-	private final Paint blitPaint = new Paint();
+	private volatile WidgetsBuffer widgetsBuffer = null;
+	private volatile List<MapWidgetInfo> widgetInfos = new ArrayList<>();
+	private volatile Set<String> visibleWidgetIds = new HashSet<>();
 
-	public CarWidgetsPanel(@NonNull OsmandApplication app,  @NonNull CarContext carContext) {
+	private volatile DrawSettings lastDrawSettings;
+
+	public CarWidgetsPanel(@NonNull OsmandApplication app, @NonNull CarContext carContext) {
 		this(app, carContext, WidgetsPanel.ANDROID_AUTO);
 	}
 
@@ -100,86 +104,147 @@ public class CarWidgetsPanel {
 		dividerPaint.setAntiAlias(true);
 		dividerPaint.setStyle(Paint.Style.STROKE);
 
-		dividerPaint.setDither(true);
-		dividerPaint.setAntiAlias(true);
-
-		backgroundPaint.setStyle(Paint.Style.FILL);
+		backgroundPaint.setDither(true);
 		backgroundPaint.setAntiAlias(true);
+		backgroundPaint.setStyle(Paint.Style.FILL);
 	}
 
-	public void reloadWidgets(DrawSettings drawSettings) {
-		clearWidgets();
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		List<MapWidgetInfo> newWidgetInfos = getWidgetInfos(appMode);
-
-		if (Algorithms.isEmpty(newWidgetInfos)) {
-			return;
-		}
-
-		boolean nightMode = drawSettings.isNightMode();
-		float density = app.getResources().getDisplayMetrics().density;
-		ResolvedPanelAppearance appearance = app.getPanelAppearanceSettingsManager()
-				.resolveCommitted(panel, null, nightMode, false, density, true);
-		applyPanelAppearance(appearance);
-
-		ApplicationMode applicationMode = app.getSettings().getApplicationMode();
-		List<String> visibilities = MapWidgetInfo.getAndroidAutoWidgetsVisibility(app, applicationMode);
-		for (MapWidgetInfo info : newWidgetInfos) {
-			MapWidget widget = info.widget;
-			widget.applyPanelAppearanceForAndroidAuto(appearance);
-			widgetInfos.add(info);
-			if (info.isEnabledForAppMode(applicationMode, visibilities)) {
-				visibleWidgetIds.add(info.key);
+	public void applyDrawSettingsAndUpdateWidgets(@NonNull DrawSettings drawSettings) {
+		synchronized (widgetsLock) {
+			boolean shouldUpdateAppearance = drawSettingsDiffer(drawSettings);
+			List<MapWidgetInfo> infos = this.widgetInfos;
+			if (shouldUpdateAppearance) {
+				boolean nightMode = drawSettings.isNightMode();
+				float density = drawSettings.getDensity();
+				ResolvedPanelAppearance appearance = app.getPanelAppearanceSettingsManager()
+						.resolveCommitted(panel, null, nightMode, false, density, true);
+				applyPanelAppearance(appearance);
+				for (MapWidgetInfo info : infos) {
+					info.widget.applyPanelAppearanceForAndroidAuto(appearance);
+				}
+				this.lastDrawSettings = drawSettings;
+				needsRebake = true;
+			}
+			for (MapWidgetInfo info : infos) {
+				info.widget.updateInfo(drawSettings);
 			}
 		}
 	}
 
-	private void recycleWidgetsBufferIfNeeded(int width, int height) {
-		if (widgetsBuffer == null || widgetsBuffer.offscreenBitmap.getWidth() != width
-				|| widgetsBuffer.offscreenBitmap.getHeight() != height) {
-			if (widgetsBuffer != null) {
-				widgetsBuffer.offscreenBitmap.recycle();
+	public void reloadWidgets() {
+		synchronized (widgetsLock) {
+			clearWidgets();
+			List<MapWidgetInfo> newWidgetInfos = getWidgetInfos();
+			Set<String> newVisibleIds =  new HashSet<>();
+			if (!Algorithms.isEmpty(newWidgetInfos)) {
+				ApplicationMode applicationMode = app.getSettings().getApplicationMode();
+				List<String> visibilities = MapWidgetInfo.getAndroidAutoWidgetsVisibility(app, applicationMode);
+				for (MapWidgetInfo info : newWidgetInfos) {
+					if (info.isEnabledForAppMode(applicationMode, visibilities)) {
+						newVisibleIds.add(info.key);
+					}
+				}
 			}
-			widgetsBuffer = new WidgetsBuffer(width, height);
+			widgetInfos = newWidgetInfos;
+			visibleWidgetIds = newVisibleIds;
 		}
 	}
 
-	public boolean hasWidgetsWithDirtyLayout() {
+	private WidgetsBuffer syncWidgetsBufferSize(int width, int height, boolean hasWidgets) {
+		WidgetsBuffer buffer = widgetsBuffer;
+		boolean shouldResetBuffer = !hasWidgets
+				|| buffer == null
+				|| buffer.offscreenBitmap.getWidth() != width
+				|| buffer.offscreenBitmap.getHeight() != height;
+		if (shouldResetBuffer) {
+			if (buffer != null) {
+				buffer.recycle();
+			}
+			if (width > 0 && height > 0 && hasWidgets) {
+				widgetsBuffer = new WidgetsBuffer(width, height);
+			} else {
+				widgetsBuffer = null;
+			}
+		}
+		return widgetsBuffer;
+	}
+
+	private boolean hasWidgetsWithDirtyLayout(@NonNull List<MapWidgetInfo> widgetInfos) {
 		return widgetInfos.stream().anyMatch(w -> w.widget.isAndroidAutoLayoutNeeded());
 	}
 
-	public void bakeWidgets(@NonNull Rect visibleArea,
-	                        @NonNull DrawSettings drawSettings, float carDensity, float topOffset,
-	                        @Nullable Rect hiddenArea) {
-		bakeWidgets(visibleArea, drawSettings, carDensity, topOffset, hiddenArea, false);
+	private boolean isAndroidAutoWidgetPanelEnabled() {
+		return app.getSettings().AA_SHOW_WIDGETS_PANEL.get();
 	}
 
-	public void bakeWidgets(@NonNull Rect visibleArea,
+	public boolean bakeWidgets(@NonNull Rect visibleArea,
 	                        @NonNull DrawSettings drawSettings, float carDensity, float topOffset,
 	                        @Nullable Rect hiddenArea, boolean forceRedraw) {
-		lastPanelBounds.setEmpty();
-		lastVisibleCount = 0;
-		if (!app.getSettings().AA_SHOW_WIDGETS_PANEL.get()
-				|| visibleArea.width() < MIN_SURFACE_WIDTH_DP * carDensity) {
-			return;
+
+		RectF maxPanelRect;
+		List<MapWidgetInfo> infos;
+		Set<String> ids;
+		int lastVisibleWidgetCount, firstWidgetIndex;
+		boolean baked;
+		synchronized (widgetsLock) {
+			if (firstVisibleWidget >= widgetInfos.size()) {
+				firstVisibleWidget = 0;
+			}
+			infos = this.widgetInfos;
+			ids = this.visibleWidgetIds;
+			lastVisibleWidgetCount = lastVisibleCount;
+			firstWidgetIndex = firstVisibleWidget;
+
+			maxPanelRect = calculateAvailablePanelRect(visibleArea, carDensity, topOffset);
+			boolean hasWidgets = Algorithms.isNotEmpty(infos);
+			WidgetsBuffer buffer = syncWidgetsBufferSize((int) maxPanelRect.width(), (int) maxPanelRect.height(), hasWidgets);
+			if (buffer == null) {
+				return false;
+			}
+			Pair<Boolean, Integer> result = doBakeWidgets(
+					buffer,
+					infos, ids,
+					firstWidgetIndex, lastVisibleWidgetCount,
+					maxPanelRect,
+					drawSettings, carDensity, hiddenArea,
+					forceRedraw);
+			baked = result.first;
+			lastVisibleCount = result.second;
 		}
-		if (widgetInfos.isEmpty()) {
-			return;
+		return baked;
+	}
+
+	private boolean drawSettingsDiffer(DrawSettings other) {
+		if (lastDrawSettings == other) {
+			return false;
 		}
-		if (firstVisibleWidget >= widgetInfos.size()) {
-			firstVisibleWidget = 0;
+		if (lastDrawSettings == null) {
+			return true;
+		}
+		return lastDrawSettings.isNightMode() != other.isNightMode()
+				|| lastDrawSettings.getDensity() != other.getDensity();
+	}
+
+	private Pair<Boolean, Integer> doBakeWidgets(
+			@NonNull WidgetsBuffer buffer,
+			@NonNull List<MapWidgetInfo> widgetInfos,
+			@NonNull Set<String> visibleIds,
+			int firstVisibleWidgetIndex, int prevLastVisibleCount,
+			@NonNull RectF maxPanelRect,
+			@NonNull DrawSettings drawSettings, float carDensity,
+			@Nullable Rect hiddenArea, boolean forceRedraw
+	) {
+		boolean willBake = needsRebake
+				|| buffer.maxBoundsSizeDiffer(maxPanelRect)
+				|| hasWidgetsWithDirtyLayout(widgetInfos)
+				|| forceRedraw;
+		needsRebake = false;
+
+		if (!willBake) {
+			return new Pair<>(false, prevLastVisibleCount);
 		}
 
-		RectF maxPanelRect = calculateAvailablePanelRect(visibleArea, carDensity, topOffset);
-		recycleWidgetsBufferIfNeeded((int) maxPanelRect.width(), (int) maxPanelRect.height());
-
-		RectF localDirtyRect = new RectF();
-		if (widgetsBuffer.maxBoundsDiffer(maxPanelRect) || hasWidgetsWithDirtyLayout() || forceRedraw) {
-			localDirtyRect.set(0, 0, maxPanelRect.width(), maxPanelRect.height());
-		}
-
-		if (localDirtyRect.isEmpty()) return;
-
+		int lastVisibleWidgetCount = 0;
 		float panelWidth = maxPanelRect.width();
 
 		float appDensity = app.getResources().getDisplayMetrics().density;
@@ -193,9 +258,6 @@ public class CarWidgetsPanel {
 
 		float scale = panelContentWidth / widgetWidth;
 		boolean isRtl = carContext.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
-
-		float left = maxPanelRect.left;
-		float top = maxPanelRect.top;
 
 		float localLeft = 0;
 		float localTop = 0;
@@ -211,21 +273,25 @@ public class CarWidgetsPanel {
 		List<Float> bottoms = new ArrayList<>();
 		List<MapWidget> drawnWidgets = new ArrayList<>();
 
+		Rect localHiddenArea = null;
+		if (hiddenArea != null) {
+			localHiddenArea = new Rect(hiddenArea);
+			localHiddenArea.offset((int) -maxPanelRect.left, (int) -maxPanelRect.top);
+		}
 		float y = contentTop;
-		for (int i = firstVisibleWidget; i < widgetInfos.size(); i++) {
+		for (int i = firstVisibleWidgetIndex; i < widgetInfos.size(); i++) {
 			MapWidgetInfo widgetInfo = widgetInfos.get(i);
-			if (!shouldDrawWidget(widgetInfo)) {
-				lastVisibleCount++;
+			if (!shouldDrawWidget(widgetInfo, visibleIds)) {
+				lastVisibleWidgetCount++;
 				continue;
 			}
 			MapWidget widget = widgetInfo.widget;
-			widget.updateInfo(drawSettings);
 			if (widget.layoutAAIfNeeded(app, widgetWidth, isRtl)) {
 				widget.updateAndroidAutoBitmap(drawSettings, isRtl);
 			}
 			float measuredHeight = widget.getMeasuredAAHeight();
 			if (measuredHeight <= 0) {
-				lastVisibleCount++;
+				lastVisibleWidgetCount++;
 				continue;
 			}
 			float height = measuredHeight * scale;
@@ -234,9 +300,9 @@ public class CarWidgetsPanel {
 			}
 			// A row is dropped only when the transient widget really covers it, a small overlap
 			// on the edge is not worth losing a whole row for.
-			boolean covered = hiddenArea != null
-					&& Math.min(hiddenArea.bottom, y + height) > Math.max(hiddenArea.top, y)
-					&& Math.min(hiddenArea.right, contentRight) - Math.max(hiddenArea.left, contentLeft)
+			boolean covered = localHiddenArea != null
+					&& Math.min(localHiddenArea.bottom, y + height) > Math.max(localHiddenArea.top, y)
+					&& Math.min(localHiddenArea.right, contentRight) - Math.max(localHiddenArea.left, contentLeft)
 					> panelContentWidth / 2;
 			if (!covered) {
 				drawnWidgets.add(widget);
@@ -245,71 +311,44 @@ public class CarWidgetsPanel {
 			}
 			// The slot is kept even for a hidden widget, the panel must not shift.
 			y += height;
-			lastVisibleCount++;
+			lastVisibleWidgetCount++;
 		}
 
-
-		widgetsBuffer.clearCanvas();
-		Canvas offCanvas = widgetsBuffer.offscreenCanvas;
-		offCanvas.save();
-		//  Rows hidden by the reserved area split the panel into several blocks, each of them gets its own outline.
-		int blockStart = 0;
-		RectF blockRect = new RectF();
-		for (int i = 1; i <= drawnWidgets.size(); i++) {
-			boolean endOfBlock = i == drawnWidgets.size()
-					|| bottoms.get(i - 1) + 1 < tops.get(i);
-			if (endOfBlock) {
-				drawBlock(offCanvas,
-						drawnWidgets.subList(blockStart, i),
-						tops.subList(blockStart, i), bottoms.subList(blockStart, i),
-						contentLeft, contentRight,
-						panelPadding, corner,
-						borderWidth, dividerWidth, scale, blockRect);
-				localDirtyRect.union(blockRect);
-				blockStart = i;
+		RectF localDirtyRect = new RectF();
+		buffer.clearBackCanvas();
+		buffer.drawToBack((offCanvas -> {
+			//  Rows hidden by the reserved area split the panel into several blocks, each of them gets its own outline.
+			int blockStart = 0;
+			RectF blockRect = new RectF();
+			for (int i = 1; i <= drawnWidgets.size(); i++) {
+				boolean endOfBlock = i == drawnWidgets.size()
+						|| bottoms.get(i - 1) + 1 < tops.get(i);
+				if (endOfBlock) {
+					drawBlock(offCanvas,
+							drawnWidgets.subList(blockStart, i),
+							tops.subList(blockStart, i), bottoms.subList(blockStart, i),
+							contentLeft, contentRight,
+							panelPadding, corner,
+							borderWidth, dividerWidth, scale, blockRect);
+					localDirtyRect.union(blockRect);
+					blockStart = i;
+				}
 			}
-		}
-		offCanvas.restore();
+		}));
 
-		RectF frameDirtyRect = new RectF(localDirtyRect);
-		frameDirtyRect.offset(left, top);
-		widgetsBuffer.previousBounds.set(widgetsBuffer.currentBounds);
-		widgetsBuffer.currentBounds.set(frameDirtyRect);
-		widgetsBuffer.lastMaxPanelBounds.set(maxPanelRect);
-		widgetsBuffer.markFrameReady(localDirtyRect);
+		buffer.finalizeBitmap(localDirtyRect, maxPanelRect);
+		return new Pair<>(true, lastVisibleWidgetCount);
 	}
 
-	public void drawWidgets2(@NonNull Canvas canvas) {
-		if (widgetsBuffer == null) {
+	public void drawWidgetsBuffer(@NonNull Canvas canvas) {
+		WidgetsBuffer buffer = this.widgetsBuffer;
+		if (buffer == null) {
 			return;
 		}
-
-		canvas.save();
-		RectF localDirtyRect = new RectF();
-		boolean hasNewFrame = widgetsBuffer.consumeFrame(localDirtyRect);
-		if (hasNewFrame) {
-			RectF absoluteDirtyRect = new RectF(localDirtyRect);
-			absoluteDirtyRect.offset(widgetsBuffer.currentBounds.left, widgetsBuffer.currentBounds.top);
-
-			canvas.clipRect(absoluteDirtyRect);
-			Rect localIntRect = new Rect();
-			localDirtyRect.round(localIntRect);
-
-			canvas.drawBitmap(
-					widgetsBuffer.offscreenBitmap,
-					localIntRect,
-					absoluteDirtyRect,
-					blitPaint
-			);
-		} else {
-			canvas.drawBitmap(
-					widgetsBuffer.offscreenBitmap,
-					widgetsBuffer.currentBounds.left,
-					widgetsBuffer.currentBounds.top,
-					blitPaint
-			);
+		if (!isAndroidAutoWidgetPanelEnabled()) {
+			return;
 		}
-		canvas.restore();
+		buffer.draw(canvas);
 	}
 
 	private void drawBlock(@NonNull Canvas canvas,
@@ -319,11 +358,11 @@ public class CarWidgetsPanel {
 	                       float corner, float borderWidth, float dividerWidth,
 	                       float scale, RectF outBlockRect) {
 		Path backgroundPath = new Path();
-		float blockTop = tops.get(0);
-		float blockBottom = bottoms.get(bottoms.size() - 1);
+		float blockTop = tops.get(0) - borderWidth;
+		float blockBottom = bottoms.get(bottoms.size() - 1) + borderWidth;
 
-		float blockLeft = contentLeft - padding;
-		float blockRight = contentRight + padding;
+		float blockLeft = contentLeft - padding - borderWidth;
+		float blockRight = contentRight + padding + borderWidth;
 
 		outBlockRect.set(blockLeft, blockTop, blockRight, blockBottom);
 
@@ -362,9 +401,9 @@ public class CarWidgetsPanel {
 
 	private void drawWidget(@NonNull Canvas canvas,
 	                        @NonNull MapWidget widget,
-							float contentLeft, float widgetContentTop,
-							float scale) {
-        canvas.save();
+	                        float contentLeft, float widgetContentTop,
+	                        float scale) {
+		canvas.save();
 		canvas.translate(contentLeft, widgetContentTop);
 		canvas.scale(scale, scale);
 		widget.drawAndroidAutoBitmap(canvas);
@@ -374,8 +413,9 @@ public class CarWidgetsPanel {
 	private void drawBackground(@NonNull Canvas canvas, @NonNull Path backgroundPath) {
 		canvas.drawPath(backgroundPath, backgroundPaint);
 	}
+
 	private void drawBorder(@NonNull Canvas canvas, @NonNull Path backgroundPath, float borderWidth) {
-		borderPaint.setStrokeWidth(borderWidth*2);
+		borderPaint.setStrokeWidth(borderWidth * 2);
 		canvas.drawPath(backgroundPath, borderPaint);
 	}
 
@@ -393,53 +433,46 @@ public class CarWidgetsPanel {
 	 * @return true if the click was handled by the panel.
 	 */
 	public boolean onSurfaceClick(float x, float y) {
-		if (lastPanelBounds.isEmpty() || !lastPanelBounds.contains(x, y)) {
+		if (!isAndroidAutoWidgetPanelEnabled()) {
 			return false;
 		}
-		int next = firstVisibleWidget + Math.max(lastVisibleCount, 1);
-		firstVisibleWidget = next < widgetInfos.size() ? next : 0;
+		RectF bounds = new RectF();
+		WidgetsBuffer buffer = widgetsBuffer;
+		if (buffer != null) {
+			buffer.getGlobalBounds(bounds);
+		}
+		if (bounds.isEmpty() || !bounds.contains(x, y)) {
+			return false;
+		}
+		synchronized (widgetsLock) {
+			int next = firstVisibleWidget + Math.max(lastVisibleCount, 1);
+			firstVisibleWidget = next < widgetInfos.size() ? next : 0;
+			needsRebake = true;
+		}
 		return true;
 	}
 
-	private List<MapWidgetInfo> getWidgetInfos(@NonNull ApplicationMode appMode) {
-		int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
+	private List<MapWidgetInfo> getWidgetInfos() {
 		MapWidgetRegistry widgetRegistry = app.getMapWidgetRegistry();
-		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getAndroidAutoWidgetsForPanel(app, appMode, enabledWidgetsFilter, List.of(panel));
+		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getAndroidAutoWidgetsToShowInAA(app, panel);
 		return new ArrayList<>(widgetInfos);
 	}
 
 	public void onWidgetVisibilityChanged(MapWidgetInfo widgetInfo) {
-		boolean isEnabled = widgetInfo.isEnabledForAndroidAutoMode(app.getSettings().getApplicationMode());
-		if (isEnabled) {
-			visibleWidgetIds.add(widgetInfo.key);
-		} else {
-			visibleWidgetIds.remove(widgetInfo.key);
-		}
-	}
-
-	public void onWidgetRegistered(DrawSettings drawSettings, MapWidgetInfo widgetInfo) {
-		List<String> widgetsOrder = panel.getAndroidAutoWidgetsOrder(app.getSettings().getApplicationMode(), app.getSettings());
-		int index = widgetsOrder.indexOf(widgetInfo.key);
-		if (index == -1) {
-			if (widgetInfos.isEmpty()) {
-				index = 0;
+		synchronized (widgetsLock) {
+			Set<String> updatedIds = new HashSet<>(visibleWidgetIds);
+			boolean isEnabled = widgetInfo.isEnabledForAndroidAutoMode(app.getSettings().getApplicationMode());
+			if (isEnabled) {
+				updatedIds.add(widgetInfo.key);
 			} else {
-				index = widgetInfos.size() - 1;
+				updatedIds.remove(widgetInfo.key);
 			}
+			visibleWidgetIds = updatedIds;
 		}
-		widgetInfos.add(index, widgetInfo);
-
-		boolean nightMode = drawSettings.isNightMode();
-		float density = app.getResources().getDisplayMetrics().density;
-		ResolvedPanelAppearance appearance = app.getPanelAppearanceSettingsManager()
-				.resolveCommitted(panel, null, nightMode, false, density, true);
-		applyPanelAppearance(appearance);
-		MapWidget widget = widgetInfo.widget;
-		widget.applyPanelAppearance(appearance);
 	}
 
-	private boolean shouldDrawWidget(MapWidgetInfo widgetInfo) {
-		return widgetInfo.widget.shouldDrawForAndroidAuto() && visibleWidgetIds.contains(widgetInfo.key);
+	private boolean shouldDrawWidget(MapWidgetInfo widgetInfo, Set<String> visibleIds) {
+		return widgetInfo.widget.shouldDrawForAndroidAuto() && visibleIds.contains(widgetInfo.key);
 	}
 
 	private void applyPanelAppearance(@NonNull ResolvedPanelAppearance appearance) {
@@ -453,68 +486,118 @@ public class CarWidgetsPanel {
 
 	private RectF calculateAvailablePanelRect(@NonNull Rect visibleArea,
 	                                          float carDensity, float topOffset) {
-		float panelWidth = Math.min(PANEL_WIDTH_CAR_DP * carDensity,
-				visibleArea.width() * MAX_PANEL_WIDTH_RATIO);
-
 		// The panel is flush with the right edge and keeps a fixed top, so that it does not jump
 		// when the speedometer or the alarm widget appear or change size.
 		float top = visibleArea.top + topOffset;
 		float right = visibleArea.right;
+		if (!isAndroidAutoWidgetPanelEnabled()
+				|| visibleArea.width() < MIN_SURFACE_WIDTH_DP * carDensity) {
+			return new RectF(right, top, right, top);
+		}
+		float panelWidth = Math.min(PANEL_WIDTH_CAR_DP * carDensity,
+				visibleArea.width() * MAX_PANEL_WIDTH_RATIO);
+
 		float left = right - panelWidth;
 		float maxHeight = Math.min(visibleArea.bottom - top, visibleArea.height() * MAX_PANEL_HEIGHT_RATIO);
+		if (maxHeight < 0) {
+			maxHeight = 0;
+		}
 		float bottom = top + maxHeight;
 
 		return new RectF(left, top, right, bottom);
 	}
 
 	public void clearWidgets() {
-		widgetInfos.clear();
-		visibleWidgetIds.clear();
-		lastPanelBounds.setEmpty();
-		lastVisibleCount = 0;
-		firstVisibleWidget = 0;
+		synchronized (widgetsLock) {
+			widgetInfos = new ArrayList<>();
+			visibleWidgetIds = new HashSet<>();
+			lastVisibleCount = 0;
+			firstVisibleWidget = 0;
+			lastDrawSettings = null;
+			if (widgetsBuffer != null) {
+				widgetsBuffer.recycle();
+				widgetsBuffer = null;
+			}
+		}
 	}
 
 	private static class WidgetsBuffer {
-		final Bitmap offscreenBitmap;
-		final Canvas offscreenCanvas;
+		Bitmap offscreenBitmap;
+		Canvas offscreenCanvas;
+		Canvas frontCanvas;
+		Bitmap frontBitmap;
 		final RectF currentBounds = new RectF();
-		final RectF previousBounds = new RectF();
+		final RectF localDirtyRect = new RectF();
 		private final Object renderLock = new Object();
-		private final RectF accumulatedLocalDirtyRect = new RectF();
-		private boolean isFrameReady = false;
 		final RectF lastMaxPanelBounds = new RectF();
 
 		public WidgetsBuffer(int width, int height) {
 			this.offscreenBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 			this.offscreenCanvas = new Canvas(offscreenBitmap);
+			this.frontBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+			this.frontCanvas = new Canvas(frontBitmap);
 		}
 
-		void clearCanvas() {
+		void clearBackCanvas() {
 			offscreenCanvas.drawColor(android.graphics.Color.TRANSPARENT, PorterDuff.Mode.SRC);
 		}
 
-		void markFrameReady(@NonNull RectF newLocalDirtyRect) {
-			synchronized (renderLock) {
-				accumulatedLocalDirtyRect.union(newLocalDirtyRect);
-				isFrameReady = true;
-			}
+		void clearFrontCanvas() {
+			frontCanvas.drawColor(android.graphics.Color.TRANSPARENT, PorterDuff.Mode.SRC);
 		}
 
-		public boolean consumeFrame(@NonNull RectF outLocalDirtyRect) {
+		void draw(@NonNull Canvas canvas) {
 			synchronized (renderLock) {
-				if (!isFrameReady) {
-					return false;
+				RectF panelBounds = new RectF(currentBounds);
+				if (!panelBounds.isEmpty() && frontBitmap != null) {
+					canvas.save();
+					canvas.drawBitmap(frontBitmap, panelBounds.left, panelBounds.top, null);
+					canvas.restore();
 				}
-				outLocalDirtyRect.set(accumulatedLocalDirtyRect);
-				accumulatedLocalDirtyRect.setEmpty();
-				isFrameReady = false;
-				return true;
 			}
 		}
 
-		public boolean maxBoundsDiffer(RectF targetBounds) {
-			return !lastMaxPanelBounds.equals(targetBounds);
+		void drawToBack(@NonNull Consumer<Canvas> drawFunction) {
+			offscreenCanvas.save();
+			drawFunction.accept(offscreenCanvas);
+			offscreenCanvas.restore();
+		}
+
+		void getGlobalBounds(@NonNull RectF outRect) {
+			synchronized (renderLock) {
+				outRect.set(currentBounds);
+			}
+		}
+
+		void finalizeBitmap(@NonNull RectF newLocalDirtyRect, @NonNull RectF maxPanelRect) {
+			synchronized (renderLock) {
+				localDirtyRect.set(newLocalDirtyRect);
+				RectF globalBounds = new RectF(localDirtyRect);
+				globalBounds.offset(maxPanelRect.left, maxPanelRect.top);
+				currentBounds.set(globalBounds);
+				lastMaxPanelBounds.set(maxPanelRect);
+				clearFrontCanvas();
+				frontCanvas.drawBitmap(offscreenBitmap, 0, 0, null);
+			}
+		}
+
+		public void recycle() {
+			synchronized (renderLock) {
+				if (offscreenBitmap != null) {
+					offscreenBitmap.recycle();
+					offscreenBitmap = null;
+				}
+				offscreenCanvas = null;
+				if (frontBitmap != null) {
+					frontBitmap.recycle();
+					frontBitmap = null;
+				}
+				frontCanvas = null;
+			}
+		}
+
+		public boolean maxBoundsSizeDiffer(RectF targetBounds) {
+			return lastMaxPanelBounds.width() != targetBounds.width() || lastMaxPanelBounds.height() != targetBounds.height();
 		}
 	}
 }

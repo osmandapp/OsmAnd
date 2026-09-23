@@ -71,7 +71,7 @@ public class WidgetsSettingsHelper {
 
 	public void resetConfigureScreenSettings() {
 		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode,
-				layoutMode, MATCHING_PANELS_MODE, WidgetsPanel.mapPanels);
+				layoutMode, MATCHING_PANELS_MODE, WidgetsPanel.getMapPanels());
 		for (MapWidgetInfo widgetInfo : allWidgetInfos) {
 			widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, null, layoutMode, false);
 		}
@@ -82,18 +82,20 @@ public class WidgetsSettingsHelper {
 			widgetRegistry.enableDisableAndroidAutoWidgetForMode(appMode, widgetInfo, null);
 		}
 
-
 		settings.getMapInfoControls(layoutMode).resetModeToDefault(appMode);
 		settings.getCustomWidgetsKeys(layoutMode).resetModeToDefault(appMode);
+		settings.AA_WIDGETS_VISIBILITY.resetModeToDefault(appMode);
+		settings.getAndroidAutoCustomWidgetsKeys().resetModeToDefault(appMode);
 
-		for (WidgetsPanel panel : WidgetsPanel.mapPanels) {
+
+		for (WidgetsPanel panel : WidgetsPanel.getMapPanels()) {
 			panel.getOrderPreference(settings, layoutMode).resetModeToDefault(appMode);
 		}
 		WidgetsPanel.ANDROID_AUTO.getOrderPreference(settings, null).resetModeToDefault(appMode);
 
 		settings.getPanelsLayoutMode(mapActivity, layoutMode).resetModeToDefault(appMode);
 		settings.getTransparentMapThemePreference(layoutMode).resetModeToDefault(appMode);
-		for (WidgetsPanel panel : WidgetsPanel.mapPanels) {
+		for (WidgetsPanel panel : WidgetsPanel.getMapPanels()) {
 			appearanceSettingsManager.get(panel).resetToDefault(appMode, layoutMode);
 		}
 		appearanceSettingsManager.get(WidgetsPanel.ANDROID_AUTO).resetToDefault(appMode, null);
@@ -107,17 +109,21 @@ public class WidgetsSettingsHelper {
 	}
 
 	public void copyConfigureScreenSettings(@NonNull ApplicationMode fromAppMode) {
-		for (WidgetsPanel panel : WidgetsPanel.mapPanels) {
+		for (WidgetsPanel panel : WidgetsPanel.getMapPanels()) {
 			copyWidgetsForPanel(fromAppMode, layoutMode, panel);
 		}
-		copyWidgetsForPanel(fromAppMode, null, WidgetsPanel.ANDROID_AUTO);
+		if (fromAppMode.isAndroidAutoCompatible()) {
+			copyWidgetsForPanel(fromAppMode, null, WidgetsPanel.ANDROID_AUTO);
+		}
 
 		copyPrefFromAppMode(settings.getPanelsLayoutMode(mapActivity, layoutMode), fromAppMode);
 		copyPrefFromAppMode(settings.getTransparentMapThemePreference(layoutMode), fromAppMode);
-		for (WidgetsPanel panel : WidgetsPanel.mapPanels) {
+		for (WidgetsPanel panel : WidgetsPanel.getMapPanels()) {
 			appearanceSettingsManager.get(panel).copyFromProfile(fromAppMode, appMode, layoutMode);
 		}
-		appearanceSettingsManager.get(WidgetsPanel.ANDROID_AUTO).copyFromProfile(fromAppMode, appMode, null);
+		if (fromAppMode.isAndroidAutoCompatible()) {
+			appearanceSettingsManager.get(WidgetsPanel.ANDROID_AUTO).copyFromProfile(fromAppMode, appMode, null);
+		}
 
 		copyPrefFromAppMode(mapButtonsHelper.getCompassButtonState().getVisibilityPref(), fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_DISTANCE_RULER, fromAppMode);
@@ -162,27 +168,35 @@ public class WidgetsSettingsHelper {
 	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode,
 	                                @Nullable ScreenLayoutMode fromLayoutMode,
 	                                @NonNull WidgetsPanel panel) {
+		boolean isAndroidAutoPanel = panel.isAndroidAutoPanel();
+		boolean isFromAndroidAutoMode = fromAppMode.isAndroidAutoCompatible();
+		boolean isToAndroidAutoMode = appMode.isAndroidAutoCompatible();
+		boolean copyAndroidAutoWidgets = isAndroidAutoPanel && isFromAndroidAutoMode && isToAndroidAutoMode;
+		boolean copyMapWidgets = !isAndroidAutoPanel;
+		if (!(copyMapWidgets || copyAndroidAutoWidgets)) {
+			return;
+		}
+
 		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
 		Set<MapWidgetInfo> widgetInfosToCopy;
-		boolean isAndroidAutoPanel = panel.isAndroidAutoPanel();
-		if (isAndroidAutoPanel) {
+		if (copyAndroidAutoWidgets) {
 			widgetInfosToCopy = widgetRegistry.getAndroidAutoWidgetsForPanel(app, fromAppMode, filter, panels);
 		} else {
 			widgetInfosToCopy = widgetRegistry.getWidgetsForPanel(mapActivity, fromAppMode, fromLayoutMode, filter, panels);
 		}
 
-        int previousPage = -1;
+		int previousPage = -1;
 		List<List<String>> newPagedOrder = new ArrayList<>();
 		List<MapWidgetInfo> defaultWidgetInfos = getDefaultWidgetInfos(panel);
 		List<String> widgetsVisibility;
-		if (isAndroidAutoPanel) {
-			widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, null);
+		if (copyAndroidAutoWidgets) {
+			widgetsVisibility = MapWidgetInfo.getAndroidAutoWidgetsVisibility(app, appMode);
 		} else {
 			widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 		}
 
-        for (MapWidgetInfo widgetInfoToCopy : widgetInfosToCopy) {
+		for (MapWidgetInfo widgetInfoToCopy : widgetInfosToCopy) {
 			if (!WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfoToCopy.key, appMode)) {
 				continue;
 			}
@@ -202,7 +216,11 @@ public class WidgetsSettingsHelper {
 				boolean canReuseDefault = (duplicateNotPossible || (disabled && !inAnotherPanel)) && !defaultAlreadyUsed;
 
 				if (canReuseDefault) {
-					widgetRegistry.enableDisableWidgetForMode(appMode, defaultWidgetInfo, true, layoutMode, false);
+					if (copyAndroidAutoWidgets) {
+						widgetRegistry.enableDisableAndroidAutoWidgetForMode(appMode, defaultWidgetInfo, true);
+					} else {
+						widgetRegistry.enableDisableWidgetForMode(appMode, defaultWidgetInfo, true, layoutMode, false);
+					}
 					widgetIdToAdd = defaultWidgetInfo.key;
 				} else if (widgetTypeToCopy != null) {
 					MapWidgetInfo duplicateWidgetInfo = createDuplicateWidgetInfo(widgetTypeToCopy, panel);
@@ -233,7 +251,7 @@ public class WidgetsSettingsHelper {
 		} else {
 			widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, fromAppMode, layoutMode, filter, panels);
 		}
-        List<List<MapWidgetInfo>> pagedOrder = new ArrayList<>();
+		List<List<MapWidgetInfo>> pagedOrder = new ArrayList<>();
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
 			String widgetId = widgetInfo.key;
 			if (!Algorithms.isEmpty(widgetId) && WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetId, appMode)) {
@@ -276,7 +294,7 @@ public class WidgetsSettingsHelper {
 		} else {
 			widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, layoutMode, 0, Collections.singletonList(panel));
 		}
-        for (MapWidgetInfo widgetInfo : widgetInfos) {
+		for (MapWidgetInfo widgetInfo : widgetInfos) {
 			if (widgetInfo.getWidgetPanel() == panel) {
 				Boolean visibility = WidgetType.isOriginalWidget(widgetInfo.key) ? false : null;
 				if (isAndroidAutoPanel) {
@@ -294,20 +312,27 @@ public class WidgetsSettingsHelper {
 	private MapWidgetInfo createDuplicateWidgetInfo(@NonNull WidgetType widgetType, @NonNull WidgetsPanel panel) {
 		String duplicateWidgetId = WidgetType.getDuplicateWidgetId(widgetType);
 		MapWidget duplicateWidget;
-		if (panel.isAndroidAutoPanel()) {
+		boolean isAndroidAuto = panel.isAndroidAutoPanel();
+		if (isAndroidAuto) {
 			duplicateWidget = androidAutoWidgetsFactory.createMapWidget(duplicateWidgetId, widgetType, panel);
 		} else {
 			duplicateWidget = widgetsFactory.createMapWidget(duplicateWidgetId, widgetType, panel);
-
 		}
-        if (duplicateWidget != null) {
+		if (duplicateWidget != null) {
 			WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
-			MapWidgetInfo duplicateWidgetInfo = creator.askCreateWidgetInfo(
-					duplicateWidgetId, duplicateWidget, widgetType, panel
-			);
+			MapWidgetInfo duplicateWidgetInfo;
+			if (isAndroidAuto) {
+				duplicateWidgetInfo = creator.askCreateAndroidWidgetInfo(
+						duplicateWidgetId, duplicateWidget, widgetType, panel
+				);
+			} else {
+				duplicateWidgetInfo = creator.askCreateWidgetInfo(
+						duplicateWidgetId, duplicateWidget, widgetType, panel
+				);
+			}
 			if (duplicateWidgetInfo != null) {
-				if (panel.isAndroidAutoPanel()) {
-					settings.getCustomWidgetsKeys(null).addModeValue(appMode, duplicateWidgetId);
+				if (isAndroidAuto) {
+					settings.getAndroidAutoCustomWidgetsKeys().addModeValue(appMode, duplicateWidgetId);
 					widgetRegistry.enableDisableAndroidAutoWidgetForMode(appMode, duplicateWidgetInfo, true);
 				} else {
 					settings.getCustomWidgetsKeys(layoutMode).addModeValue(appMode, duplicateWidgetId);

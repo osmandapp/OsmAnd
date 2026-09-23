@@ -42,8 +42,6 @@ import net.osmand.plus.views.OsmandMapTileView.ElevationListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
-import java.util.function.Function;
-
 /**
  * A very simple implementation of a renderer for the app's background surface.
  */
@@ -222,9 +220,11 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		@Override
 		@RequiresCarApi(5)
 		public void onClick(float x, float y) {
-			SurfaceRendererCallback callback = SurfaceRenderer.this.callback;
-			if (callback != null && callback.onSurfaceClick(x, y)) {
-				renderFrame();
+			synchronized (SurfaceRenderer.this) {
+				SurfaceRendererCallback callback = SurfaceRenderer.this.callback;
+				if (callback != null && callback.onSurfaceClick(x, y)) {
+					renderFrame();
+				}
 			}
 		}
 
@@ -267,7 +267,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		lifecycle.addObserver(this);
 	}
 
-	public void sendRenderFrameMsg() {
+	private void sendRenderFrameMsg() {
 		if (!handler.hasMessages(MAP_RENDER_MESSAGE)) {
 			Message msg = Message.obtain(handler, () -> {
 				handler.removeMessages(MAP_RENDER_MESSAGE);

@@ -44,7 +44,7 @@ public class AndroidAutoWidgetsInitializer {
 		addWidgetInfo(CURRENT_TIME);
 	}
 
-	public void createCustomWidgets() {
+	private void createCustomWidgets() {
 		List<String> widgetKeys = settings.getAndroidAutoCustomWidgetsKeys().getStringsListForProfile(appMode);
 		if (!Algorithms.isEmpty(widgetKeys)) {
 			for (String key : widgetKeys) {

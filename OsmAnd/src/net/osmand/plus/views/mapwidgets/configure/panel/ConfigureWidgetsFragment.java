@@ -68,7 +68,6 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -406,9 +405,9 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				if (isTabLayoutAvailable()) {
 					tabLayout.setAlpha(1f);
 					tabLayout.setTranslationY(0f);
-					shadowView.setVisibility(View.VISIBLE);
 					shadowView.setTranslationY(0f);
 				}
+				AndroidUiHelper.updateVisibility(shadowView, isTabLayoutAvailable());
 				viewPager.setTranslationY(0f);
 				bottomButtons.setVisibility(View.GONE);
 				bottomButtons.setTranslationY(0f);
@@ -550,6 +549,9 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		}
 
 		int position = widgetsTabAdapter.getTabPosition(selectedPanel);
+		if (position == -1) {
+			position = 0;
+		}
 		viewPager.setCurrentItem(position, false);
 
 		if (position == 0) {
@@ -616,7 +618,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				boolean addToNext = args.getBoolean(ADD_TO_NEXT);
 				if (selectedWidget != null) {
 					if (isAndroidAutoMode) {
-						createNewAndroidAutoWidget(app, widgetInfo, widgetPanel, selectedAppMode);
+						createNewAndroidAutoWidget(app, widgetInfo, widgetPanel, selectedAppMode, selectedWidget, addToNext);
 					} else {
 						createNewWidget(requireMapActivity(), widgetInfo, widgetPanel, selectedAppMode,
 								layoutMode, true, selectedWidget, addToNext);
@@ -698,7 +700,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			fragment.reloadWidgets();
 		}
 		if (isAndroidAutoMode) {
-			app.getMapWidgetRegistry().recreateAndroidAutoWidgets();
+			app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
 		} else {
 			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
@@ -724,7 +726,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 		if (isAndroidAutoMode) {
 			if (settings.getApplicationMode().equals(selectedAppMode)) {
-				app.getMapWidgetRegistry().recreateAndroidAutoWidgets();
+				app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
 			}
 		} else {
 			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
@@ -739,29 +741,24 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode, @Nullable Bundle args) {
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			ConfigureWidgetsFragment fragment = new ConfigureWidgetsFragment();
-			fragment.selectedPanel = panel;
-			fragment.selectedAppMode = appMode;
-			if (args != null) {
-				fragment.setArguments(args);
-			}
-			fragmentManager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-		}
+		showInstance(activity, panel, appMode, args, false);
 	}
 
-
 	public static void showInstanceForAndroidAuto(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode, @Nullable Bundle args) {
+		showInstance(activity, panel, appMode, args, true);
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull WidgetsPanel panel,
+	                                @NonNull ApplicationMode appMode,
+	                                @Nullable Bundle args,
+	                                boolean isAndroidAuto) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ConfigureWidgetsFragment fragment = new ConfigureWidgetsFragment();
 			fragment.selectedPanel = panel;
 			fragment.selectedAppMode = appMode;
-			fragment.isAndroidAutoMode = true;
+			fragment.isAndroidAutoMode = isAndroidAuto;
 			if (args != null) {
 				fragment.setArguments(args);
 			}

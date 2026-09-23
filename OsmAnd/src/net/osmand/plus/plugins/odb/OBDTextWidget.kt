@@ -30,6 +30,7 @@ open class OBDTextWidget : SimpleWidget {
 		this.fieldType = fieldType
 		init()
 	}
+
 	constructor(
 		app: OsmandApplication,
 		widgetType: WidgetType,
@@ -65,7 +66,7 @@ open class OBDTextWidget : SimpleWidget {
 		}
 	}
 
-	private fun init(){
+	private fun init() {
 		// 0 - for instant
 		var averageTimeSeconds = 0
 
@@ -135,7 +136,8 @@ open class OBDTextWidget : SimpleWidget {
 					.setTitleId(R.string.reconnect)
 					.setOnClickListener { _: PopUpMenuItem? ->
 						plugin.connectToLastConnectedDevice(
-							VehicleMetricsPlugin.SINGLE_CONNECT_ATTEMPT_COUNT)
+							VehicleMetricsPlugin.SINGLE_CONNECT_ATTEMPT_COUNT
+						)
 					}
 					.create())
 		}
@@ -263,12 +265,13 @@ open class OBDTextWidget : SimpleWidget {
 			else -> false
 		}
 	}
-	protected fun isVisible() : Boolean {
+
+	protected fun isVisible(): Boolean {
 		return widgetType.isPurchased(app)
 	}
 
 	// region android auto
-	override fun shouldDrawForAndroidAuto() : Boolean {
+	override fun shouldDrawForAndroidAuto(): Boolean {
 		return super.shouldDrawForAndroidAuto() && isVisible()
 	}
 

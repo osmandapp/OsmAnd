@@ -87,24 +87,23 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	private final ElementBitmapPlacement alarmPlacement = new ElementBitmapPlacement();
 	private final ElementBitmapPlacement speedometerPlacement= new ElementBitmapPlacement();
-	private int widgetsPanelOffsetY;
+	private volatile int widgetsPanelOffsetY;
 
 	@DrawableRes
 	private int compassResId = R.drawable.ic_compass_niu;
 
 	private boolean panMode;
 
-	/** Compensates the 0.77 factor SpeedometerWidget applies for Android Auto. */
+	/** Draw speedometer bitmap larger on android auto*/
 	private static final float SPEEDOMETER_CAR_SCALE = 2f;
 
 	private static final long WIDGETS_UPDATE_INTERVAL_MS = 500L;
-	private static final int MSG_PERFORM_WIDGETS_LAYOUT_AND_BAKE = 1001;
-	private static final int MSG_WIDGETS_UPDATE_TICK = 1002;
+	private static final int MSG_UPDATE_WIDGETS = 1001;
 
-	private SurfaceRendererSnapshot surfaceRendererSnapshot;
+	private RenderSettingsSnapshot renderSettingsSnapshot;
 	private final Object snapshotLock = new Object();
-	private HandlerThread widgetsUpdateThread;
-	private Handler widgetsUpdateHandler;
+	private volatile HandlerThread widgetsUpdateThread;
+	private volatile Handler widgetsUpdateHandler;
 
 	public NavigationScreen(
 			@NonNull CarContext carContext,
@@ -129,7 +128,8 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	@Override
 	public void onStart(@NonNull LifecycleOwner owner) {
-		getApp().getMapWidgetRegistry().recreateAndroidAutoWidgets();
+		super.onStart(owner);
+		getApp().getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
 	}
 
 	@Override
@@ -174,22 +174,28 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
 		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		if (surfaceRenderer != null) {
-			drawFrame(canvas, visibleArea, surfaceRenderer);
-			scheduleWidgetsUpdate(surfaceRenderer, visibleArea);
+			drawFrame(canvas, surfaceRenderer, visibleArea);
+			updateRenderSettingsSnapshot(surfaceRenderer, visibleArea);
 		}
 	}
 
-	private void bakeWidgets(@NonNull SurfaceRendererSnapshot surfaceRendererSnapshot) {
-		DrawSettings drawSettings = surfaceRendererSnapshot.drawSettings;
-		float density = surfaceRendererSnapshot.density;
-		widgetsPanel.bakeWidgets(surfaceRendererSnapshot.visibleArea, drawSettings, density, widgetsPanelOffsetY, alarmPlacement.getBounds());
+	private boolean bakeWidgets(@NonNull RenderSettingsSnapshot snapshot) {
+		Rect hiddenArea = snapshot.widgetPanelHiddenArea;
+		if (hiddenArea != null && hiddenArea.isEmpty()) {
+			hiddenArea = null;
+		}
+
+		return widgetsPanel.bakeWidgets(snapshot.visibleArea,
+				snapshot.drawSettings,
+				snapshot.density,
+				snapshot.widgetPanelOffsetY,
+				hiddenArea,
+				false);
 	}
 
 	private void bakeTopElements(@NonNull SurfaceRenderer surfaceRenderer, @NonNull Rect visibleArea) {
 		DrawSettings drawSettings = getDrawSettings(surfaceRenderer);
-		// SpeedometerWidget shrinks itself by 0.77 for Android Auto, which leaves it much
-		// smaller than the alarm widget next to it - unlike on the phone, where the two are
-		// about the same size. The alarm widget already has a car sized layout.
+		// Enlarge SpeedometerWidget for android auto. The alarm widget already has a "car-sized" bitmap.
 		DrawSettings speedometerSettings = getDrawSettings(surfaceRenderer, SPEEDOMETER_CAR_SCALE);
 		alarmWidget.updateInfo(drawSettings, true);
 		speedometerWidget.updateInfo(speedometerSettings, drawSettings.isNightMode());
@@ -202,23 +208,22 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		if (speedometerBitmap != null) {
 			bitmapLeft -= (bitmapMargin + speedometerBitmap.getWidth());
 		}
+
 		speedometerPlacement.update(speedometerBitmap, bitmapLeft, bitmapTop);
 		Bitmap alarmBitmap = alarmWidget.getWidgetBitmap();
 		if (alarmBitmap != null) {
 			bitmapLeft -= (bitmapMargin + alarmBitmap.getWidth());
 		}
 		alarmPlacement.update(alarmBitmap, bitmapLeft, bitmapTop);
-		widgetsPanelOffsetY = Math.max(alarmPlacement.getBottom(), speedometerPlacement.getBottom()) + bitmapMargin;
+		widgetsPanelOffsetY = Math.max(speedometerPlacement.getHeight(), alarmPlacement.getHeight()) + 2 * bitmapMargin;
+
 	}
 
-	private void drawFrame(@NonNull Canvas canvas, @NonNull Rect visibleArea, SurfaceRenderer surfaceRenderer) {
+	private void drawFrame(@NonNull Canvas canvas, @NonNull SurfaceRenderer surfaceRenderer, @NonNull Rect visibleArea) {
 		bakeTopElements(surfaceRenderer, visibleArea);
-
-		synchronized (speedometerPlacement) {
-			speedometerPlacement.draw(canvas);
-			alarmPlacement.draw(canvas);
-		}
-		widgetsPanel.drawWidgets2(canvas);
+		speedometerPlacement.draw(canvas);
+		alarmPlacement.draw(canvas);
+		widgetsPanel.drawWidgetsBuffer(canvas);
 	}
 
 	@Override
@@ -242,12 +247,8 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	}
 
 	@Override
-	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
-		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
-		if (surfaceRenderer != null) {
-			DrawSettings drawSettings = getDrawSettings(surfaceRenderer);
-			widgetsPanel.onWidgetRegistered(drawSettings, widgetInfo);
-		}
+	public void onWidgetsChanged() {
+		loadWidgets();
 	}
 
 	@Override
@@ -520,22 +521,14 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		//getScreenManager().pushForResult(new SearchResultsScreen(getCarContext(), settingsAction, surfaceRenderer, "cafe"), (obj) -> { });
 	}
 
-	private void scheduleWidgetsUpdate(@NonNull SurfaceRenderer surfaceRenderer, @NonNull Rect visibleArea) {
-		Handler handler = widgetsUpdateHandler;
-		if (handler == null) {
-			return;
-		}
-		updateSurfaceRendererSnapshot(surfaceRenderer, visibleArea);
-		if (!handler.hasMessages(MSG_PERFORM_WIDGETS_LAYOUT_AND_BAKE)) {
-			handler.sendEmptyMessage(MSG_PERFORM_WIDGETS_LAYOUT_AND_BAKE);
-		}
-	}
-
-	private void updateSurfaceRendererSnapshot(@NonNull SurfaceRenderer surfaceRenderer, @NonNull Rect visibleArea) {
-		SurfaceRendererSnapshot freshSnapshot = new SurfaceRendererSnapshot();
-		freshSnapshot.update(surfaceRenderer, visibleArea, isNightMode());
+	private void updateRenderSettingsSnapshot(@NonNull SurfaceRenderer surfaceRenderer, @NonNull Rect visibleArea) {
+		RenderSettingsSnapshot freshSnapshot = new RenderSettingsSnapshot();
+		freshSnapshot.updateDrawSettings(surfaceRenderer, visibleArea);
+		// NB: with current drawing of alarm next to speedometer horizontally
+		// there's no possible "hidden area' to block. Pass rect of "hidden area" here if this changes.
+		freshSnapshot.updateGeometrySettings(widgetsPanelOffsetY, null);
 		synchronized (snapshotLock) {
-			this.surfaceRendererSnapshot = freshSnapshot;
+			this.renderSettingsSnapshot = freshSnapshot;
 		}
 	}
 
@@ -543,40 +536,45 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		if (widgetsUpdateThread == null) {
 			widgetsUpdateThread = new HandlerThread("OsmAnd-WidgetsBackgroundWorker");
 			widgetsUpdateThread.start();
-			widgetsUpdateHandler = new Handler(widgetsUpdateThread.getLooper(), msg -> {
-				if (msg.what == MSG_PERFORM_WIDGETS_LAYOUT_AND_BAKE) {
-					performWidgetsLayoutAndBake();
-					return true;
-				} else if (msg.what == MSG_WIDGETS_UPDATE_TICK) {
-					performWidgetsLayoutAndBake();
-					Handler handler = widgetsUpdateHandler;
-					if (handler != null) {
-						handler.sendEmptyMessageDelayed(MSG_WIDGETS_UPDATE_TICK, WIDGETS_UPDATE_INTERVAL_MS);
-					}
-					return true;
-
+			Handler newHandler = new Handler(widgetsUpdateThread.getLooper(), msg -> {
+				if (msg.what != MSG_UPDATE_WIDGETS) {
+					return false;
 				}
-				return false;
+				performWidgetsLayoutAndBake();
+				msg.getTarget().sendEmptyMessageDelayed(MSG_UPDATE_WIDGETS, WIDGETS_UPDATE_INTERVAL_MS);
+				return true;
 			});
-			widgetsUpdateHandler.sendEmptyMessage(MSG_WIDGETS_UPDATE_TICK);
+			this.widgetsUpdateHandler = newHandler;
+			newHandler.sendEmptyMessage(MSG_UPDATE_WIDGETS);
 		}
 	}
 
 	private void performWidgetsLayoutAndBake() {
-		SurfaceRendererSnapshot snapshotToProcess;
+		if (widgetsUpdateHandler == null) {
+			return;
+		}
+		RenderSettingsSnapshot currentSnapshot;
 
 		synchronized (snapshotLock) {
-			snapshotToProcess = this.surfaceRendererSnapshot;
-			this.surfaceRendererSnapshot = null;
+			currentSnapshot = this.renderSettingsSnapshot;
 		}
-		if (snapshotToProcess != null) {
-			bakeWidgets(snapshotToProcess);
+		if (currentSnapshot != null) {
+			widgetsPanel.applyDrawSettingsAndUpdateWidgets(currentSnapshot.drawSettings);
+			boolean changed = bakeWidgets(currentSnapshot);
+			if (changed && widgetsUpdateHandler != null) {
+				getApp().runInUIThread(() -> {
+					SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
+					if (surfaceRenderer != null) {
+						surfaceRenderer.renderFrame();
+					}
+				});
+			}
 		}
 	}
 
 	private void stopWidgetsWorker() {
 		if (widgetsUpdateHandler != null) {
-			widgetsUpdateHandler.removeMessages(MSG_PERFORM_WIDGETS_LAYOUT_AND_BAKE);
+			widgetsUpdateHandler.removeMessages(MSG_UPDATE_WIDGETS);
 			widgetsUpdateHandler = null;
 		}
 		if (widgetsUpdateThread != null) {
@@ -584,15 +582,15 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 			widgetsUpdateThread = null;
 		}
 		synchronized (snapshotLock) {
-			surfaceRendererSnapshot = null;
+			renderSettingsSnapshot = null;
 		}
 	}
 
 	private void loadWidgets() {
+		widgetsPanel.reloadWidgets();
 		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		if (surfaceRenderer != null) {
-			DrawSettings drawSettings = getDrawSettings(surfaceRenderer);
-			widgetsPanel.reloadWidgets(drawSettings);
+			widgetsPanel.applyDrawSettingsAndUpdateWidgets(getDrawSettings(surfaceRenderer));
 		}
 	}
 
@@ -641,20 +639,31 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	public void onStopChangingElevation(float angle) {
 	}
 
-	private class SurfaceRendererSnapshot {
+	private class RenderSettingsSnapshot {
 		float density = 0;
-		boolean isNightMode = false;
 		Rect visibleArea = new Rect();
 		DrawSettings drawSettings;
+		int widgetPanelOffsetY;
+		Rect widgetPanelHiddenArea;
 
-		void update(@NonNull SurfaceRenderer renderer, @NonNull Rect visibleArea, boolean isNightMode) {
+		void updateDrawSettings(@NonNull SurfaceRenderer renderer, @NonNull Rect visibleArea) {
 			this.density = renderer.getDensity();
 			this.visibleArea.set(visibleArea);
-			this.isNightMode = isNightMode;
 			this.drawSettings = getDrawSettings(renderer);
 		}
-	}
 
+		@SuppressWarnings("SameParameterValue")
+		// see comment in #updateRenderSettingsSnapshot
+		void updateGeometrySettings(int widgetPanelOffsetY, Rect widgetPanelHiddenArea) {
+			this.widgetPanelOffsetY = widgetPanelOffsetY;
+			if (widgetPanelHiddenArea != null) {
+				this.widgetPanelHiddenArea = new Rect(widgetPanelHiddenArea);
+			} else {
+				this.widgetPanelHiddenArea = null;
+			}
+		}
+
+	}
 	private static class ElementBitmapPlacement {
 		private final Rect bounds = new Rect();
 		private Bitmap lastKnownBitmap = null;
@@ -669,16 +678,12 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 			}
 		}
 
-		Rect getBounds() {
-			return bounds;
-		}
-
-		int getBottom() {
-			return bounds.bottom;
+		int getHeight() {
+			return bounds.height();
 		}
 
 		void draw(@NonNull Canvas canvas) {
-			if (lastKnownBitmap !=null) {
+			if (lastKnownBitmap != null) {
 				canvas.drawBitmap(lastKnownBitmap, bounds.left, bounds.top, paint);
 			}
 		}

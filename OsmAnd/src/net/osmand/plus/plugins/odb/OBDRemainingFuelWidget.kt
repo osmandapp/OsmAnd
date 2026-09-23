@@ -12,21 +12,19 @@ import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.util.Algorithms
 
-class OBDRemainingFuelWidget :
-    OBDTextWidget {
-
-    constructor(
-        mapActivity: MapActivity,
-        widgetType: WidgetType,
-        fieldType: OBDTypeWidget,
-        customId: String?,
-        widgetsPanel: WidgetsPanel?
-    ) : super(mapActivity, widgetType, fieldType, customId, widgetsPanel) {
-        this.remainingFuelMode = registerRemainingFuelPref(customId)
-        val averageTimeSeconds = 0
-        val typeWidget = getFieldType()
-        widgetComputer = OBDDataComputer.registerWidget(typeWidget, averageTimeSeconds)
-    }
+class OBDRemainingFuelWidget : OBDTextWidget {
+	constructor(
+		mapActivity: MapActivity,
+		widgetType: WidgetType,
+		fieldType: OBDTypeWidget,
+		customId: String?,
+		widgetsPanel: WidgetsPanel?
+	) : super(mapActivity, widgetType, fieldType, customId, widgetsPanel) {
+		this.remainingFuelMode = registerRemainingFuelPref(customId)
+		val averageTimeSeconds = 0
+		val typeWidget = getFieldType()
+		widgetComputer = OBDDataComputer.registerWidget(typeWidget, averageTimeSeconds)
+	}
 
 	constructor(
 		app: OsmandApplication,
@@ -34,7 +32,7 @@ class OBDRemainingFuelWidget :
 		fieldType: OBDTypeWidget,
 		customId: String?,
 		widgetsPanel: WidgetsPanel?
-	) : super(app, widgetType, fieldType, customId, widgetsPanel){
+	) : super(app, widgetType, fieldType, customId, widgetsPanel) {
 		this.remainingFuelMode = registerRemainingFuelPref(customId)
 		val averageTimeSeconds = 0
 		val typeWidget = getFieldType()
@@ -44,11 +42,11 @@ class OBDRemainingFuelWidget :
 
 	var remainingFuelMode: OsmandPreference<RemainingFuelMode>
 
-    companion object {
+	companion object {
 		private const val OBD_REMAINING_FUEL_MODE = "obd_remaining_fuel_mode"
 	}
 
-    private fun getFieldType(): OBDTypeWidget {
+	private fun getFieldType(): OBDTypeWidget {
 		return remainingFuelMode.get().fieldType
 	}
 

@@ -295,7 +295,7 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements C
 		if (mapInfoLayer != null) {
 			mapInfoLayer.recreateAllControls(mapActivity);
 		}
-		app.getMapWidgetRegistry().recreateAndroidAutoWidgets();
+		app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
 	}
 
 	@Override

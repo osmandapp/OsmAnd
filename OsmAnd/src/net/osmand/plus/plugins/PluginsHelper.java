@@ -302,7 +302,7 @@ public class PluginsHelper {
 				plugin.updateLayers(mapActivity, mapActivity);
 				MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 				mapLayers.getMapInfoLayer().recreateAllControls(mapActivity);
-				app.getMapWidgetRegistry().recreateAndroidAutoWidgets();
+				app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
 
 				mapActivity.getDashboard().refreshDashboardFragments();
 

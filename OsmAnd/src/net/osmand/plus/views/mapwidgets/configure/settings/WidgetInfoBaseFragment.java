@@ -39,6 +39,7 @@ import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.AndroidAutoWidgetsInitializer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
@@ -178,7 +179,12 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 
 		int filter = ENABLED_MODE | MATCHING_PANELS_MODE;
 		List<WidgetsPanel> panels = Collections.singletonList(widgetPanel);
-		List<MapWidgetInfo> widgetInfos = new ArrayList<>(widgetRegistry.getWidgetsForPanel(mapActivity, appMode, layoutMode, filter, panels));
+		List<MapWidgetInfo> widgetInfos;
+		if (isAndroidAutoMode) {
+			widgetInfos = new ArrayList<>(widgetRegistry.getAndroidAutoWidgetsForPanel(app, appMode, filter, panels));
+		} else {
+			widgetInfos = new ArrayList<>(widgetRegistry.getWidgetsForPanel(mapActivity, appMode, layoutMode, filter, panels));
+		}
 
 		int index = widgetInfos.indexOf(widgetInfo);
 		if (index == -1) {
@@ -187,13 +193,27 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 
 		WidgetType widgetType = getWidget();
 		String duplicateId = WidgetType.getDuplicateWidgetId(widgetType);
-		MapWidget duplicateWidget = new MapWidgetsFactory(mapActivity).createMapWidget(duplicateId, widgetType, widgetPanel);
-		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
-		MapWidgetInfo duplicateWidgetInfo = creator.askCreateWidgetInfo(duplicateId, duplicateWidget, widgetType, widgetPanel);
+		MapWidget duplicateWidget;
+		MapWidgetInfo duplicateWidgetInfo;
+		WidgetInfoCreator creator;
+		if (isAndroidAutoMode) {
+			duplicateWidget = new AndroidAutoWidgetsInitializer.AndroidAutoWidgetsFactory(app)
+					.createMapWidget(duplicateId, widgetType, widgetPanel);
+			creator = new WidgetInfoCreator(app, appMode, null);
+			duplicateWidgetInfo = creator.askCreateAndroidWidgetInfo(duplicateId, duplicateWidget, widgetType, widgetPanel);
+		} else {
+			duplicateWidget = new MapWidgetsFactory(mapActivity).createMapWidget(duplicateId, widgetType, widgetPanel);
+			creator = new WidgetInfoCreator(app, appMode, layoutMode);
+			duplicateWidgetInfo = creator.askCreateWidgetInfo(duplicateId, duplicateWidget, widgetType, widgetPanel);
+		}
 		if (duplicateWidgetInfo == null) {
 			return null;
 		}
-		settings.getCustomWidgetsKeys(layoutMode).addModeValue(appMode, duplicateId);
+		if (isAndroidAutoMode) {
+			settings.getAndroidAutoCustomWidgetsKeys().addModeValue(appMode, duplicateId);
+		} else {
+			settings.getCustomWidgetsKeys(layoutMode).addModeValue(appMode, duplicateId);
+		}
 		WidgetState widgetState = widgetInfo.getWidgetState();
 		if (widgetState != null) {
 			widgetState.copyPrefs(appMode, duplicateId);
@@ -215,11 +235,11 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 			}
 		}
 
-		widgetPanel.setWidgetsOrder(appMode, new ArrayList<>(pagedOrder.values()), settings, layoutMode);
-
 		if (isAndroidAutoMode) {
-			app.getMapWidgetRegistry().recreateAndroidAutoWidgets();
+			widgetPanel.setWidgetsOrder(appMode, new ArrayList<>(pagedOrder.values()), settings, null);
+			app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
 		} else {
+			widgetPanel.setWidgetsOrder(appMode, new ArrayList<>(pagedOrder.values()), settings, layoutMode);
 			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
 				mapInfoLayer.recreateAllControls(mapActivity);
@@ -284,7 +304,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 			}
 		}
 		if (widgetInfo == null) {
-			widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+			widgetInfo = widgetRegistry.getWidgetInfoById(widgetId, isAndroidAutoMode);
 		}
 
 		if (widgetInfo == null) {
@@ -385,14 +405,26 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 
 	}
 
+	protected void recreateControls() {
+		if (isAndroidAutoMode) {
+			app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
+		} else {
+			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateControls();
+			}
+		}
+	}
+
+	protected final void applySettingsAndRecreateControls() {
+		applySettings();
+		recreateControls();
+	}
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		applySettings();
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateControls();
-		}
+		applySettingsAndRecreateControls();
 		Fragment target = getTargetFragment();
 		if (target instanceof WidgetsConfigurationChangeListener) {
 			((WidgetsConfigurationChangeListener) target).onWidgetsConfigurationChanged();

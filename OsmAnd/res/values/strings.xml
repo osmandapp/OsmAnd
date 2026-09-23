@@ -4273,7 +4273,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="map_marker_2nd">Second map marker</string>
     <string name="shared_string_toolbar">Toolbar</string>
     <string name="shared_string_widgets">Widgets</string>
-	<string name="shared_string_add_to_map_markers">Add to map markers</string>
+    <string name="shared_string_add_to_map_markers">Add to map markers</string>
     <string name="select_map_markers">Select map markers</string>
     <string name="shared_string_reverse_order">Reverse order</string>
     <string name="active_markers">Active markers</string>

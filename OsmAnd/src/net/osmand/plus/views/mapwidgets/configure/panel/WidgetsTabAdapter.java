@@ -6,10 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WidgetsTabAdapter extends FragmentStateAdapter {
 	private final List<WidgetsPanel> panels;
@@ -21,7 +18,7 @@ public class WidgetsTabAdapter extends FragmentStateAdapter {
 		if (isAndroidAutoMode) {
 			panels = List.of(WidgetsPanel.ANDROID_AUTO);
 		} else {
-			panels = new ArrayList<>(WidgetsPanel.mapPanels);
+			panels = WidgetsPanel.getMapPanels();
 		}
 	}
 

@@ -94,7 +94,7 @@ public class WidgetUtils {
 	                                                        @NonNull WidgetsPanel widgetsPanel, @NonNull ApplicationMode selectedAppMode,
 	                                                        @NonNull String selectedWidget, boolean addToNext) {
 		OsmandSettings settings = app.getSettings();
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		MapWidgetRegistry widgetRegistry = app.getMapWidgetRegistry();
 		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
 		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getAndroidAutoWidgetsForPanel(app,
 				selectedAppMode, ENABLED_MODE | MATCHING_PANELS_MODE, Collections.singletonList(widgetsPanel));
@@ -112,7 +112,7 @@ public class WidgetUtils {
 		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity,
 				selectedAppMode, layoutMode, ENABLED_MODE | MATCHING_PANELS_MODE, Collections.singletonList(widgetsPanel));
 
-		doAddWidgetToEnd(targetWidget, widgetsPanel, selectedAppMode, widgetRegistry, enabledWidgets, pagedOrder, settings, false);
+		doAddWidgetToEnd(targetWidget, widgetsPanel, selectedAppMode, layoutMode, widgetRegistry, enabledWidgets, pagedOrder, settings, false);
 	}
 
 	private static void addAndroidAutoWidgetToEnd(@NonNull OsmandApplication app, @NonNull MapWidgetInfo targetWidget,
@@ -123,7 +123,7 @@ public class WidgetUtils {
 		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getAndroidAutoWidgetsForPanel(app,
 				selectedAppMode, ENABLED_MODE | MATCHING_PANELS_MODE, Collections.singletonList(widgetsPanel));
 
-		doAddWidgetToEnd(targetWidget, widgetsPanel, selectedAppMode, widgetRegistry, enabledWidgets, pagedOrder, settings, true);
+		doAddWidgetToEnd(targetWidget, widgetsPanel, selectedAppMode, null, widgetRegistry, enabledWidgets, pagedOrder, settings, true);
 	}
 
 	private static void doAddWidgetToSpecificPlace(@NonNull MapWidgetInfo targetWidget,
@@ -176,7 +176,7 @@ public class WidgetUtils {
 
 			for (int i = 0; i < pageToAddWidget.size(); i++) {
 				String widgetId = pageToAddWidget.get(i);
-				MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+				MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId, isAndroidAuto);
 				if (widgetInfo != null) {
 					widgetInfo.pageIndex = insertPage;
 					widgetInfo.priority = i;
@@ -194,6 +194,7 @@ public class WidgetUtils {
 	private static void doAddWidgetToEnd(@NonNull MapWidgetInfo targetWidget,
 	                                     @NonNull WidgetsPanel widgetsPanel,
 	                                     @NonNull ApplicationMode selectedAppMode,
+										 @Nullable ScreenLayoutMode layoutMode,
 	                                     MapWidgetRegistry widgetRegistry,
 	                                     Set<MapWidgetInfo> enabledWidgets,
 	                                     Map<Integer, List<String>> pagedOrder,
@@ -215,7 +216,7 @@ public class WidgetUtils {
 
 			List<List<String>> flatOrder = new ArrayList<>();
 			flatOrder.add(Collections.singletonList(targetWidget.key));
-			widgetsPanel.setWidgetsOrder(selectedAppMode, flatOrder, settings, null);
+			widgetsPanel.setWidgetsOrder(selectedAppMode, flatOrder, settings, layoutMode);
 		} else {
 			List<Integer> pages = new ArrayList<>(pagedOrder.keySet());
 			List<List<String>> orders = new ArrayList<>(pagedOrder.values());
@@ -231,7 +232,7 @@ public class WidgetUtils {
 				lastPageOrder.add(targetWidget.key);
 
 				String previousLastWidgetId = lastPageOrder.get(lastPageOrder.size() - 2);
-				MapWidgetInfo previousLastVisibleWidgetInfo = widgetRegistry.getWidgetInfoById(previousLastWidgetId);
+				MapWidgetInfo previousLastVisibleWidgetInfo = widgetRegistry.getWidgetInfoById(previousLastWidgetId, isAndroidAuto);
 				int lastPage;
 				int lastOrder;
 				if (previousLastVisibleWidgetInfo != null) {
@@ -246,7 +247,7 @@ public class WidgetUtils {
 			}
 
 			widgetRegistry.getWidgetsForPanel(widgetsPanel, isAndroidAuto).add(targetWidget);
-			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings, null);
+			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings, layoutMode);
 		}
 	}
 

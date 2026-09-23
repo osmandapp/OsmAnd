@@ -81,7 +81,11 @@ public class ConfigureWidgetsController implements IDialogController {
 		}
 		if (widget != null) {
 			WidgetInfoCreator creator = new WidgetInfoCreator(app, selectedAppMode, layoutMode);
-			widgetInfo = creator.askCreateWidgetInfo(id, widget, widgetType, selectedPanel);
+			if (isAndroidAutoMode) {
+				widgetInfo = creator.askCreateAndroidWidgetInfo(id, widget, widgetType, selectedPanel);
+			} else {
+				widgetInfo = creator.askCreateWidgetInfo(id, widget, widgetType, selectedPanel);
+			}
 		}
 
 		if (widgetInfo != null) {

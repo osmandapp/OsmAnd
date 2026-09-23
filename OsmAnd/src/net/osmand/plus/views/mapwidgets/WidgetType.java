@@ -378,7 +378,7 @@ public enum WidgetType {
 		}
 		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
 		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
-		for (WidgetsPanel widgetsPanel : WidgetsPanel.mapPanels) {
+		for (WidgetsPanel widgetsPanel : WidgetsPanel.getMapPanels()) {
 			if (widgetsPanel.getOrderPreference(settings, layoutMode).isSetForMode(appMode)) {
 				setPanels.add(widgetsPanel);
 			} else {
@@ -399,8 +399,11 @@ public enum WidgetType {
 	}
 
 	@Nullable
-	public static WidgetsPanel findAndroidAutoWidgetPanel(@NonNull String widgetId, @NonNull OsmandSettings settings,
-			@Nullable ApplicationMode appMode) {
+	public static WidgetsPanel findAndroidAutoWidgetPanel(
+			@NonNull String widgetId,
+			@NonNull OsmandSettings settings,
+			@Nullable ApplicationMode appMode
+	) {
 		if (appMode == null) {
 			appMode = settings.getApplicationMode();
 		}
@@ -408,10 +411,10 @@ public enum WidgetType {
 		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
 		WidgetsPanel widgetsPanel = WidgetsPanel.ANDROID_AUTO;
 
-			if (widgetsPanel.getOrderPreference(settings, null).isSetForMode(appMode)) {
-				setPanels.add(widgetsPanel);
-			} else {
-				unsetPanels.add(widgetsPanel);
+		if (widgetsPanel.getOrderPreference(settings, null).isSetForMode(appMode)) {
+			setPanels.add(widgetsPanel);
+		} else {
+			unsetPanels.add(widgetsPanel);
 
 		}
 		for (WidgetsPanel panel : setPanels) {

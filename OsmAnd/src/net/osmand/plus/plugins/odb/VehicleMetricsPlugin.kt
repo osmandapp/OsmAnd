@@ -162,7 +162,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		val creator = WidgetInfoCreator(app, appMode, layoutMode)
 		for (widgetType in WidgetType.getObdTypes()) {
 			val obdWidget = createMapWidgetForParams(mapActivity, widgetType)
-			val widgetInfo = creator.createAndroidAutoWidgetInfo(obdWidget)
+			val widgetInfo = creator.createWidgetInfo(obdWidget)
 			if (widgetInfo != null) {
 				widgetsInfos.add(widgetInfo)
 			}
@@ -178,7 +178,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		for (widgetType in supportedTypes) {
 			val obdWidget = createAndroidAutoWidgetForParams(widgetType)
 			if (obdWidget != null) {
-				val widgetInfo = creator.createWidgetInfo(obdWidget)
+				val widgetInfo = creator.createAndroidAutoWidgetInfo(obdWidget)
 				if (widgetInfo != null) {
 					widgetInfos.add(widgetInfo)
 				}

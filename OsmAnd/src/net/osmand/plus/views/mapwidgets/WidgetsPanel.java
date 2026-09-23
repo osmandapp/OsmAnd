@@ -40,9 +40,13 @@ public enum WidgetsPanel {
 	private static final List<String> ORIGINAL_BOTTOM_ORDER = new ArrayList<>();
 	private static final List<String> ORIGINAL_ANDROID_AUTO_ORDER = new ArrayList<>();
 
-	public static final List<WidgetsPanel> mapPanels = List.of(
+	private static final List<WidgetsPanel> MAP_PANELS = List.of(
 			LEFT, RIGHT, TOP, BOTTOM
 	);
+
+	public static List<WidgetsPanel> getMapPanels() {
+		return MAP_PANELS;
+	}
 
 	static {
 		for (WidgetType widget : WidgetType.values()) {

@@ -209,7 +209,7 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 	}
 
 	private fun setupTabLayout() {
-		viewPager.adapter = PanelsTabAdapter(this, WidgetsPanel.mapPanels)
+		viewPager.adapter = PanelsTabAdapter(this, WidgetsPanel.getMapPanels())
 		viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
 			override fun onPageSelected(position: Int) {
 				val adapter = viewPager.adapter as PanelsTabAdapter
