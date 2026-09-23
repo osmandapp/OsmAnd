@@ -1,7 +1,7 @@
 package net.osmand.wear.ui.screens
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,6 +13,8 @@ import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
+import androidx.wear.compose.material3.EdgeButton
+import androidx.wear.compose.material3.EdgeButtonSize
 import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.ListHeader
 import androidx.wear.compose.material3.ScreenScaffold
@@ -37,10 +39,36 @@ fun RecordingStartScreen(
 ) {
 	val listState = rememberScalingLazyListState()
 
-	ScreenScaffold(scrollState = listState) {
+	ScreenScaffold(
+		scrollState = listState,
+		// Start lives in the scaffold's own slot rather than as a list item: an EdgeButton hugs
+		// the bottom of the round display and the scaffold hands back the padding the list needs
+		// to clear it.
+		edgeButton = {
+			EdgeButton(
+				onClick = onStart,
+				buttonSize = EdgeButtonSize.Medium,
+				colors = ButtonDefaults.buttonColors(
+					containerColor = OsmAndWearColors.AltAccent,
+					contentColor = OsmAndWearColors.ChipContent,
+					iconColor = OsmAndWearColors.ChipContent
+				)
+			) {
+				Icon(
+					painter = painterResource(R.drawable.ic_action_trip_rec_start),
+					contentDescription = null,
+					modifier = Modifier.size(ButtonDefaults.IconSize)
+				)
+				Text(
+					text = stringResource(R.string.wear_start),
+					modifier = Modifier.padding(start = 6.dp)
+				)
+			}
+		}
+	) { contentPadding ->
 		ScalingLazyColumn(
 			state = listState,
-			contentPadding = PaddingValues(horizontal = 10.dp, vertical = 32.dp)
+			contentPadding = contentPadding
 		) {
 			item {
 				ListHeader { Text(stringResource(R.string.wear_trip_recording)) }
@@ -62,25 +90,6 @@ fun RecordingStartScreen(
 					},
 					label = { Text(profile?.title ?: stringResource(R.string.wear_profile)) },
 					secondaryLabel = { Text(stringResource(R.string.wear_profile)) }
-				)
-			}
-			item {
-				Button(
-					onClick = onStart,
-					modifier = Modifier.fillMaxWidth(),
-					colors = ButtonDefaults.buttonColors(
-						containerColor = OsmAndWearColors.AltAccent,
-						contentColor = OsmAndWearColors.ChipContent,
-						iconColor = OsmAndWearColors.ChipContent
-					),
-					icon = {
-						Icon(
-							painter = painterResource(R.drawable.ic_action_trip_rec_start),
-							contentDescription = null,
-							modifier = Modifier.size(ButtonDefaults.IconSize)
-						)
-					},
-					label = { Text(stringResource(R.string.wear_start)) }
 				)
 			}
 		}
