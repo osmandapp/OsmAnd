@@ -5290,4 +5290,8 @@
     <string name="astro_eclipse_column_below_horizon">Pod obzorem</string>
     <string name="crash_report_send_failed">Hlášení se nepodařilo odeslat. Zkuste to znovu později.</string>
     <string name="crash_report_sent">Hlášení odesláno. Děkujeme!</string>
+    <string name="gpx_line_style_dashed">Čárkovaná</string>
+    <string name="gpx_line_style_solid">Plná</string>
+    <string name="gpx_line_style_dotted">Tečkovaná</string>
+    <string name="gpx_line_style">Styl čáry</string>
 </resources>

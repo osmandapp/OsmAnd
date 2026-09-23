@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	android:orientation="vertical">
+    android:orientation="vertical">
 
-	<include layout="@layout/shadow_on_map" />
+    <include layout="@layout/shadow_on_map" />
 
-	<LinearLayout
-		android:id="@+id/mapillary_filters_linear_layout"
+    <LinearLayout
+        android:id="@+id/filters_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -70,7 +70,7 @@
             android:minHeight="@dimen/dialog_button_ex_height">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/mapillary_filters_tile_cache_icon"
+                android:id="@+id/filters_tile_cache_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_toEndOf="@+id/mapillary_filters_tile_cache_icon"
+                android:layout_toEndOf="@+id/filters_tile_cache_icon"
                 android:layout_toStartOf="@id/button_reload_tile"
                 android:minHeight="@dimen/dialog_button_ex_height"
                 android:orientation="vertical"
@@ -144,8 +144,8 @@
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/content_padding"
                 android:paddingRight="@dimen/content_padding"
-	            android:paddingStart="@dimen/content_padding"
-	            android:paddingEnd="@dimen/content_padding">
+                android:paddingStart="@dimen/content_padding"
+                android:paddingEnd="@dimen/content_padding">
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:layout_width="match_parent"
@@ -157,13 +157,14 @@
                     app:typefaceWeight="medium" />
 
                 <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/filters_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="10dp"
                     android:paddingTop="4dp"
-                    android:text="@string/mapillary_menu_filter_description_new"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size" />
+                    android:textSize="@dimen/default_sub_text_size"
+                    tools:text="Filter images by date or by type. Only active in closeup zoom." />
             </LinearLayout>
 
             <View
@@ -172,19 +173,15 @@
                 android:background="?attr/dashboard_divider" />
         </LinearLayout>
 
-        <!--
-                Hidden and not deleted in case filter by username
-                will be available again in new Mapillary API version
-        -->
         <LinearLayout
+            android:id="@+id/username_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
-            android:minHeight="@dimen/dialog_button_ex_height"
-            android:visibility="gone">
+            android:minHeight="@dimen/dialog_button_ex_height">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/mapillary_filters_user_icon"
+                android:id="@+id/filters_user_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/content_padding"
@@ -218,13 +215,13 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/username_input_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/map_button_size"
             android:animateLayoutChanges="true"
             android:background="?attr/bg_color"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:paddingStart="@dimen/map_button_size">
 
             <net.osmand.plus.views.controls.DelayAutoCompleteTextView
                 android:id="@+id/auto_complete_text_view"
@@ -242,6 +239,7 @@
                 android:id="@+id/warning_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/content_padding"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
@@ -251,8 +249,9 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/content_padding_half"
                     android:text="@string/wrong_user_name"
@@ -275,7 +274,7 @@
             android:minHeight="@dimen/dialog_button_ex_height">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/mapillary_filters_date_icon"
+                android:id="@+id/filters_date_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/content_padding"

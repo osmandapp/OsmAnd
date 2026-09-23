@@ -25,13 +25,14 @@
         app:typefaceWeight="medium"/>
 
     <TextView
+        android:id="@+id/no_internet_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:background="@null"
-        android:text="@string/mappilary_no_internet_desc"
         android:textColor="?android:attr/textColorSecondary"
-        android:textSize="@dimen/default_desc_text_size"/>
+        android:textSize="@dimen/default_desc_text_size"
+        tools:text="Photos are only available online."/>
 
     <net.osmand.plus.widgets.TextViewEx
         android:id="@+id/retry_button"

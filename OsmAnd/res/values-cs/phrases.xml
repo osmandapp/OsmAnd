@@ -5178,4 +5178,13 @@
     <string name="poi_website_menu">Menu</string>
     <string name="poi_air_conditioning">Klimatizace</string>
     <string name="poi_disc_golf_course">Hřiště na disc golf</string>
+    <string name="poi_stables">Stáje</string>
+    <string name="poi_animal_breeding">Chov zvířat</string>
+    <string name="poi_indoor_play">Vnitřní hřiště</string>
+    <string name="poi_post_depot">Poštovní depo</string>
+    <string name="poi_funeral_hall">Pohřební síň</string>
+    <string name="poi_craft_printer">Tiskař</string>
+    <string name="poi_healthcare_birthing_centre">Porodní centrum</string>
+    <string name="poi_student_accommodation">Studentské ubytování</string>
+    <string name="poi_dancing_school">Taneční škola</string>
 </resources>

@@ -4319,4 +4319,11 @@
     <string name="poi_air_conditioning_yes">Ja</string>
     <string name="poi_air_conditioning_no">Nej</string>
     <string name="poi_disc_golf_course">Discgolfbane</string>
+    <string name="poi_dancing_school">Danseskole</string>
+    <string name="poi_student_accommodation">Studiebolig</string>
+    <string name="poi_healthcare_counselling">Rådgivning</string>
+    <string name="poi_healthcare_birthing_centre">Fødselscenter</string>
+    <string name="poi_craft_cleaning">Rengøringsservice</string>
+    <string name="poi_craft_printer">Printer</string>
+    <string name="poi_craft_signmaker">Skiltmager</string>
 </resources>

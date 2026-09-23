@@ -5288,4 +5288,12 @@
     <string name="heap_dump_auto">Gyűjtés magas használat esetén</string>
     <string name="visualizing_button_grid_descr">Cellák, rekeszek, keretek és naplók.</string>
     <string name="heap_dump_auto_descr">Amikor a heap majdnem megtelt, 30 percenként egyszer.</string>
+    <string name="file_name_containes_illegal_char">A név nem tartalmazhatja a következőt: %1$s</string>
+    <string name="gpx_color_unavailable_for_line_style">Ez a színezés nem érhető el nem egyszínű vonalstílus esetén.</string>
+    <string name="gpx_color_desc_unavailable_for_style">Csak az egyszínű nyomvonal érhető el szaggatott vagy pontozott vonalstílusban.</string>
+    <string name="gpx_line_style">Vonalstílus</string>
+    <string name="gpx_line_style_solid">Egyszínű</string>
+    <string name="gpx_line_style_dashed">Szaggatott</string>
+    <string name="gpx_line_style_dotted">Pontozott</string>
+    <string name="gpx_line_style_desc_unavailable_for_color">A szaggatott és pontozott vonalstílusok nem érhetők el a nem egyszínű nyomvonalak esetében.</string>
 </resources>
