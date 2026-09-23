@@ -52,6 +52,9 @@ fun RecordingStartScreen(
 					colors = ButtonDefaults.buttonColors(
 						containerColor = OsmAndWearColors.AltChipContainer,
 						contentColor = OsmAndWearColors.ChipContent,
+						// Without this the supporting line keeps the theme's own secondary
+						// colour, which is meant for a light chip and all but vanishes here.
+						secondaryContentColor = OsmAndWearColors.HeaderContent,
 						iconColor = OsmAndWearColors.AltAccent
 					),
 					icon = {
