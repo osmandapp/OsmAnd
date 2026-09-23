@@ -24,12 +24,14 @@ object AisMmsiDialog {
 	@JvmStatic
 	fun show(fragment: AisBaseFragment, onSaved: () -> Unit) {
 		val plugin = PluginsHelper.requirePlugin(AisTrackerPlugin::class.java)
+		/* the profile the screen was opened for, not necessarily the active one */
+		val appMode = fragment.appMode
 		val context = fragment.materialContext()
 		val view = LayoutInflater.from(context).inflate(R.layout.dialog_ais_mmsi, null)
 		val inputLayout: TextInputLayout = view.findViewById(R.id.mmsi_layout)
 		val editText: TextInputEditText = view.findViewById(R.id.mmsi_edit)
 
-		val savedMmsi = plugin.AIS_OWN_MMSI.get()
+		val savedMmsi = plugin.AIS_OWN_MMSI.getModeValue(appMode)
 		val savedText = if (savedMmsi == 0) "" else AisFormatter.formatMmsi(savedMmsi)
 		editText.setText(savedText)
 		editText.setSelection(savedText.length)
@@ -75,10 +77,10 @@ object AisMmsiDialog {
 					return@setOnClickListener
 				}
 				val value = currentText().toIntOrNull() ?: 0
-				plugin.AIS_OWN_MMSI.set(value)
+				plugin.AIS_OWN_MMSI.setModeValue(appMode, value)
 				if (value == 0) {
 					/* without a MMSI there is nothing to show on the map */
-					plugin.AIS_DISPLAY_OWN_POSITION.set(false)
+					plugin.AIS_DISPLAY_OWN_POSITION.setModeValue(appMode, false)
 				}
 				plugin.layer?.refreshOwnObjectVisibility()
 				onSaved()

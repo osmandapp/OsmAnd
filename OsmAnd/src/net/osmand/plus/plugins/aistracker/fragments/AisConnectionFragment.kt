@@ -51,7 +51,7 @@ class AisConnectionFragment : AisBaseFragment() {
 		portEdit = view.findViewById(R.id.port_edit)
 		saveButton = view.findViewById(R.id.save_button)
 
-		protocol = plugin.AIS_NMEA_PROTOCOL.get()
+		protocol = plugin.AIS_NMEA_PROTOCOL.getModeValue(appMode)
 		toggleGroup.check(if (protocol == AIS_NMEA_PROTOCOL_TCP) R.id.protocol_tcp else R.id.protocol_udp)
 		toggleGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
 			if (isChecked) {
@@ -81,9 +81,9 @@ class AisConnectionFragment : AisBaseFragment() {
 		description.setText(
 			if (tcp) R.string.ais_connection_tcp_desc else R.string.ais_connection_udp_desc)
 		hostLayout.visibility = if (tcp) View.VISIBLE else View.GONE
-		hostEdit.setText(plugin.AIS_NMEA_IP_ADDRESS.get())
+		hostEdit.setText(plugin.AIS_NMEA_IP_ADDRESS.getModeValue(appMode))
 		portEdit.setText(
-			(if (tcp) plugin.AIS_NMEA_TCP_PORT.get() else plugin.AIS_NMEA_UDP_PORT.get()).toString())
+			(if (tcp) plugin.AIS_NMEA_TCP_PORT.getModeValue(appMode) else plugin.AIS_NMEA_UDP_PORT.getModeValue(appMode)).toString())
 		validationRequested = false
 		hostLayout.error = null
 		portLayout.error = null
@@ -115,19 +115,19 @@ class AisConnectionFragment : AisBaseFragment() {
 	}
 
 	private fun hasChanges(): Boolean {
-		if (!plugin.isConnectionConfigured) {
+		if (!plugin.isConnectionConfigured(appMode)) {
 			/* nothing is saved yet - the first Save is what sets the connection up, even when
 			 * the user keeps the default values */
 			return true
 		}
 		val tcp = protocol == AIS_NMEA_PROTOCOL_TCP
-		if (protocol != plugin.AIS_NMEA_PROTOCOL.get()) {
+		if (protocol != plugin.AIS_NMEA_PROTOCOL.getModeValue(appMode)) {
 			return true
 		}
-		if (tcp && currentHost() != plugin.AIS_NMEA_IP_ADDRESS.get()) {
+		if (tcp && currentHost() != plugin.AIS_NMEA_IP_ADDRESS.getModeValue(appMode)) {
 			return true
 		}
-		val savedPort = if (tcp) plugin.AIS_NMEA_TCP_PORT.get() else plugin.AIS_NMEA_UDP_PORT.get()
+		val savedPort = if (tcp) plugin.AIS_NMEA_TCP_PORT.getModeValue(appMode) else plugin.AIS_NMEA_UDP_PORT.getModeValue(appMode)
 		return currentPort() != savedPort.toString()
 	}
 
@@ -155,13 +155,13 @@ class AisConnectionFragment : AisBaseFragment() {
 			return
 		}
 		/* stored together: the plugin reopens an open socket with the new values once */
-		plugin.applyConnectionSettings(protocol, currentHost(), currentPort().toInt())
+		plugin.applyConnectionSettings(appMode, protocol, currentHost(), currentPort().toInt())
 		requireActivity().onBackPressed()
 	}
 
 	private fun resetConnectionSettings() {
-		plugin.resetConnectionSettings()
-		protocol = plugin.AIS_NMEA_PROTOCOL.get()
+		plugin.resetConnectionSettings(appMode)
+		protocol = plugin.AIS_NMEA_PROTOCOL.getModeValue(appMode)
 		toggleGroup.check(if (protocol == AIS_NMEA_PROTOCOL_TCP) R.id.protocol_tcp else R.id.protocol_udp)
 		updateProtocol()
 	}
