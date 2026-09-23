@@ -44,6 +44,8 @@ class OBDFuelConsumptionWidget(
 		val typeWidget = getFieldType()
 
 		if (prefsChanged) {
+			// registerWidget shares one computer per (type, window) between widgets,
+			// so a computer with the fuel-level window is kept when switching modes
 			if (widgetComputer.type != typeWidget
 				&& widgetComputer.averageTimeSeconds != 0
 				&& widgetComputer.averageTimeSeconds != typeWidget.defaultAverageTime
