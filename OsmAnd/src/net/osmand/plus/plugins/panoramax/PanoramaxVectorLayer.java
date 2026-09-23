@@ -354,13 +354,17 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	private void drawLines(Canvas canvas, RotatedTileBox tileBox, List<Geometry> geometries,
 	                       int tileX, int tileY, int tileZoom, PanoramaxFilterState filterState) {
 		for (Geometry geometry : geometries) {
+			// Sequence tiles also contain picture points, so skip non-line geometries before filtering.
+			if (!(geometry instanceof LineString) && !(geometry instanceof MultiLineString)) {
+				continue;
+			}
 			if (geometry.isEmpty() || filterState.filtered(geometry.getUserData())) {
 				continue;
 			}
 
 			if (geometry instanceof MultiLineString) {
 				drawMultiLineString(canvas, tileBox, (MultiLineString) geometry, tileX, tileY, tileZoom);
-			} else if (geometry instanceof LineString) {
+			} else {
 				drawLineString(canvas, tileBox, (LineString) geometry, tileX, tileY, tileZoom);
 			}
 		}

@@ -248,6 +248,10 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 	                       AreaI tileBBox31, AreaI tileBBox31Enlarged, int mult, int zoomShift, int tileSize, double tileSize31) {
 		boolean isDraw = false;
 		for (Geometry geometry : geometries) {
+			// Sequence tiles also contain picture points, so skip non-line geometries before filtering.
+			if (!(geometry instanceof LineString) && !(geometry instanceof MultiLineString)) {
+				continue;
+			}
 			if (geometry.isEmpty() || filterState.filtered(geometry.getUserData())) {
 				continue;
 			}
@@ -256,7 +260,7 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 						tileBBox31, tileBBox31Enlarged, mult, zoomShift, tileSize, tileSize31)) {
 					isDraw = true;
 				}
-			} else if (geometry instanceof LineString) {
+			} else {
 				if (drawLine(canvas, tileId, queryController, (LineString) geometry, paintLine,
 						tileBBox31, tileBBox31Enlarged, mult, zoomShift, tileSize, tileSize31)) {
 					isDraw = true;
