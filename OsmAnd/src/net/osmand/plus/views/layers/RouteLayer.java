@@ -47,6 +47,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -557,6 +558,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				startLocationIndex = route.getCurrentStraightAngleRoute();
 			}
 			lastRouteProjection = lastProjection;
+			if (!directTo) {
+				// The line starts on the lanes where it is drawn
+				lastProjection = RouteLaneLine.shiftProjection(getApplication(), route, lastProjection, startLocationIndex);
+			}
 			boolean draw = true;
 			if (routeGeometry.hasMapRenderer()) {
 				renderState.updateRouteState(lastProjection, startLocationIndex, actualColoringType, routeLineColor,
@@ -575,12 +580,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				if (routeGeometry.hasMapRenderer()) {
 					if (routeUpdated || renderState.shouldUpdateActionPoints || mapActivityInvalidated || mapRendererChanged) {
 						actionPoints = calculateActionPoints(helper.getLastProjection(),
-								route.getRouteLocations(), route.getCurrentRoute(), tileBox.getZoom());
+								getLaneRouteLocations(route), route.getCurrentRoute(), tileBox.getZoom());
 					}
 				} else if (canvas != null) {
 					actionPoints = calculateActionPoints(topLatitude, leftLongitude,
 							bottomLatitude, rightLongitude, helper.getLastProjection(),
-							route.getRouteLocations(), route.getCurrentRoute(), tileBox.getZoom());
+							getLaneRouteLocations(route), route.getCurrentRoute(), tileBox.getZoom());
 				}
 			}
 
@@ -619,6 +624,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				removeProjectedPointCollection();
 			}
 		}
+	}
+
+	@NonNull
+	private List<Location> getLaneRouteLocations(@NonNull RouteCalculationResult route) {
+		List<Location> locations = RouteLaneLine.getLocations(getApplication(), route);
+		int currentRoute = route.getCurrentRoute();
+		return currentRoute < locations.size() ? locations.subList(currentRoute, locations.size()) : Collections.emptyList();
 	}
 
 	private List<RouteActionPoint> calculateActionPoints(Location lastProjection,
