@@ -5,8 +5,8 @@ import android.content.Context;
 import net.osmand.plus.R;
 
 public enum LayerTransparencySeekbarMode {
-	OVERLAY(R.string.overlay_transparency),
-	UNDERLAY(R.string.map_transparency),
+	OVERLAY(R.string.overlay_opacity),
+	UNDERLAY(R.string.map_opacity),
 	OFF(R.string.shared_string_off),
 	UNDEFINED(R.string.shared_string_none);
 

@@ -60,13 +60,13 @@ public class RasterMapMenu {
 			mapTypePreference = settings.MAP_OVERLAY;
 			exMapTypePreference = settings.MAP_OVERLAY_PREVIOUS;
 			mapTypeString = R.string.map_overlay;
-			mapTypeStringTransparency = R.string.overlay_transparency;
+			mapTypeStringTransparency = R.string.overlay_opacity;
 		} else if (type == RasterMapType.UNDERLAY) {
 			mapTransparencyPreference = settings.MAP_TRANSPARENCY;
 			mapTypePreference = settings.MAP_UNDERLAY;
 			exMapTypePreference = settings.MAP_UNDERLAY_PREVIOUS;
 			mapTypeString = R.string.map_underlay;
-			mapTypeStringTransparency = R.string.map_transparency;
+			mapTypeStringTransparency = R.string.map_opacity;
 		} else {
 			throw new RuntimeException("Unexpected raster map type");
 		}
@@ -114,7 +114,7 @@ public class RasterMapMenu {
 				} else if (itemId == R.string.show_polygons) {
 					settings.SHOW_POLYGONS_WHEN_UNDERLAY_IS_ON.set(isChecked);
 					mapActivity.refreshMapComplete();
-				} else if (itemId == R.string.show_transparency_seekbar) {
+				} else if (itemId == R.string.show_opacity_seekbar) {
 					updateTransparencyBarVisibility(isChecked);
 				} else if (itemId == R.string.show_map_symbols) {
 					settings.KEEP_MAP_LABELS_VISIBLE.set(isChecked);
@@ -185,7 +185,7 @@ public class RasterMapMenu {
 			}
 			Boolean transparencySwitchState = isSeekbarVisible(app, type);
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
-					.setTitleId(R.string.show_transparency_seekbar, mapActivity)
+					.setTitleId(R.string.show_opacity_seekbar, mapActivity)
 					.setHideDivider(true)
 					.setListener(l)
 					.setSelected(transparencySwitchState));
