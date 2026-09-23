@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="quick_action_show_along_the_route_desc">Quickly view and manage points along the current route.</string>
 	<string name="ais_connection_not_set_up">Not set up</string>
 	<string name="ais_connection_not_connected">Not connected</string>
 	<string name="ais_connection_connecting">Connecting…</string>
