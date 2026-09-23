@@ -1,7 +1,9 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.view.View;
@@ -66,6 +68,8 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	private boolean isWidgetAALayoutNeeded = true;
 	protected float measuredAAHeight = 0f;
 	protected float measuredAAWidth = 0f;
+	protected Bitmap androidAutoBitmap;
+	protected final Paint androidAutoBitmapPaint = new Paint();
 
 	protected boolean isAndroidAuto;
 
@@ -181,20 +185,51 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		return measuredAAWidth;
 	}
 
+	public void updateAndroidAutoBitmap(@NonNull DrawSettings drawSettings, boolean isRtl) {
+		androidAutoBitmap = createWidgetBitmap(drawSettings, getMeasuredAAWidth(), getMeasuredAAHeight(), isRtl);
+	}
+
+	@Nullable
+	public Bitmap getAndroidAutoBitmap() {
+		return androidAutoBitmap;
+	}
+
+	protected Bitmap createWidgetBitmap(@NonNull DrawSettings drawSettings,
+	                                    float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
+		Bitmap bitmap = Bitmap.createBitmap((int) (widgetWidthPx),
+				(int) (widgetHeightPx), Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmap);
+		drawForAndroidAuto(canvas, drawSettings, widgetWidthPx, widgetHeightPx, isRtl);
+		return bitmap;
+	}
+
 	public void drawForAndroidAuto(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings,
 	                               float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
+
+	}
+
+	public void drawAndroidAutoBitmap(@NonNull Canvas canvas) {
+		Bitmap bitmap = getAndroidAutoBitmap();
+		if (bitmap != null) {
+			canvas.drawBitmap(androidAutoBitmap, 0, 0, androidAutoBitmapPaint);
+		}
 	}
 
 	public final void markAndroidAutoLayoutNeeded() {
 		isWidgetAALayoutNeeded = true;
 	}
 
-	public final void layoutAAIfNeeded(Context context, int desiredWidthPx, boolean isRtl) {
+	public boolean isAndroidAutoLayoutNeeded() {
+		return isWidgetAALayoutNeeded;
+	}
+
+	public final boolean layoutAAIfNeeded(Context context, int desiredWidthPx, boolean isRtl) {
 		if (!isWidgetAALayoutNeeded) {
-			return;
+			return false;
 		}
 		isWidgetAALayoutNeeded = false;
 		doLayoutAAWidget(context, desiredWidthPx, isRtl);
+		return true;
 	}
 
 	protected void doLayoutAAWidget(Context context, int desiredWidthPx, boolean isRtl) {

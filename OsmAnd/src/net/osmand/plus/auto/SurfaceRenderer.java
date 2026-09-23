@@ -267,7 +267,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		lifecycle.addObserver(this);
 	}
 
-	private void sendRenderFrameMsg() {
+	public void sendRenderFrameMsg() {
 		if (!handler.hasMessages(MAP_RENDER_MESSAGE)) {
 			Message msg = Message.obtain(handler, () -> {
 				handler.removeMessages(MAP_RENDER_MESSAGE);
