@@ -391,6 +391,9 @@ public class AppInitializer implements IProgress {
 
 	private void initOpeningHoursParser() {
 		OpeningHoursParser.setAdditionalString("off", app.getString(R.string.day_off_label));
+		OpeningHoursParser.setAdditionalString("public_holiday", app.getString(R.string.opening_hours_public_holiday));
+		OpeningHoursParser.setAdditionalString("school_holiday", app.getString(R.string.opening_hours_school_holiday));
+		OpeningHoursParser.setAdditionalString("easter", app.getString(R.string.opening_hours_easter));
 		OpeningHoursParser.setAdditionalString("is_open", app.getString(R.string.poi_dialog_opening_hours));
 		OpeningHoursParser.setAdditionalString("is_open_24_7", app.getString(R.string.shared_string_is_open_24_7));
 		OpeningHoursParser.setAdditionalString("will_open_at", app.getString(R.string.will_open_at));

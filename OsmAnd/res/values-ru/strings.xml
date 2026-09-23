@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="opening_hours_public_holiday">Праздники</string>
+    <string name="opening_hours_school_holiday">Каникулы</string>
+    <string name="opening_hours_easter">Пасха</string>
     <string name="obd_fuel_type_not_provided">Тип топлива не предоставлен</string>
     <string name="obd_fuel_type_gasoline">Бензин</string>
     <string name="obd_fuel_type_methanol">Метанол</string>
@@ -5072,7 +5075,7 @@
     <string name="shared_string_gpu">Графический процессор</string>
     <string name="shared_string_allocated">Зарезервированная</string>
     <string name="open_till_short">До</string>
-    <string name="open_from_short">C</string>
+    <string name="open_from_short">С</string>
     <string name="astro_designations">Обозначения</string>
     <string name="obd_simulation_device">Устройство для моделирования</string>
     <string name="astronomy_map">Астрономическая карта</string>
