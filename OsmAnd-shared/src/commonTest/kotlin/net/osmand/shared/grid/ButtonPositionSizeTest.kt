@@ -6,6 +6,7 @@ import net.osmand.shared.grid.ButtonPositionSize.Companion.POS_LEFT
 import net.osmand.shared.grid.ButtonPositionSize.Companion.POS_RIGHT
 import net.osmand.shared.grid.ButtonPositionSize.Companion.POS_TOP
 import kotlin.test.Test
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class ButtonPositionSizeTest {
@@ -523,6 +524,57 @@ class ButtonPositionSizeTest {
 		assertTrue(!slider.overlap(ruler), "slider=${slider.bounds}, ruler=${ruler.bounds}")
 	}
 
+	// Landscape 72x28 grid taken from a device log (#26217): the compass sits right above
+	// the speedometer's default slot and there is no room to lift the widget past it.
+	private fun landscapeWithFullLeftColumn(speedometer: ButtonPositionSize): List<ButtonPositionSize> {
+		return listOf(
+			ButtonPositionSize("map.view.layers", 6, true, true),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMargin(7, 0).setMoveHorizontal(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMargin(0, 7).setMoveAny(),
+			ButtonPositionSize("map.view.menu", 7, true, false),
+			ButtonPositionSize("map.view.route_planning", 7, true, false).setMargin(8, 0).setMoveHorizontal(),
+			speedometer,
+		)
+	}
 
+	@Test
+	fun testSpeedometerMovesSidewaysWhenLeftColumnIsFullInLandscape() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val speedometer = ButtonPositionSize("speedometer_widget", 10, true, false)
+			.setSize(10, 11).setMargin(0, 8).setMoveAny()
+		val buttons = landscapeWithFullLeftColumn(speedometer)
+
+		val unresolved = mutableListOf<String>()
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 72, 28, unresolved)
+		assertTrue(computed)
+		assertTrue(unresolved.isEmpty(), "unexpected unresolved overlaps: $unresolved")
+
+		for (other in buttons) {
+			if (other !== speedometer) {
+				assertFalse(speedometer.overlap(other), "speedometer=${speedometer.bounds}, ${other.id}=${other.bounds}")
+			}
+		}
+		assertTrue(speedometer.bounds.bottom > 14.0, "speedometer left the bottom half: ${speedometer.bounds}")
+		assertTrue(speedometer.bounds.left >= 7.0, "speedometer did not move past the button column: ${speedometer.bounds}")
+	}
+
+	@Test
+	fun testSpeedometerReportsUnresolvedOverlapWhenOnlyVerticalMoveIsAllowed() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val speedometer = ButtonPositionSize("speedometer_widget", 10, true, false)
+			.setSize(10, 11).setMargin(0, 8).setMoveVertical()
+		val buttons = landscapeWithFullLeftColumn(speedometer)
+
+		val unresolved = mutableListOf<String>()
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 72, 28, unresolved)
+		assertTrue(computed)
+		assertTrue(
+			unresolved.contains("speedometer_widget/map.view.compass"),
+			"overlap with the compass cannot be resolved vertically and must be reported: $unresolved"
+		)
+
+		val compass = buttons.first { it.id == "map.view.compass" }
+		assertTrue(speedometer.overlap(compass), "speedometer=${speedometer.bounds}, compass=${compass.bounds}")
+	}
 
 }
