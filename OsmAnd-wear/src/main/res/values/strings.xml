@@ -10,5 +10,23 @@
 	<string name="wear_not_navigating">No active route</string>
 	<string name="wear_protocol_mismatch">Update OsmAnd on your phone</string>
 	<string name="wear_stop">Stop</string>
-	<string name="wear_paused">Paused</string>
+	<string name="wear_paused">PAUSED</string>
+	<string name="wear_profile">Profile</string>
+	<string name="wear_start">Start</string>
+	<string name="wear_pause">Pause</string>
+	<string name="wear_resume">Resume</string>
+	<string name="wear_finish">Finish</string>
+	<string name="wear_save_and_continue">Save and continue</string>
+	<string name="wear_rec">REC</string>
+	<string name="wear_distance">Distance</string>
+	<string name="wear_time_span">Time span</string>
+	<string name="wear_speed">Speed</string>
+	<string name="wear_uphill">Uphill</string>
+	<string name="wear_downhill">Downhill</string>
+	<string name="wear_finish_recording">Finish recording?</string>
+	<string name="wear_finish_recording_hint">The track will be saved to your phone.</string>
+	<string name="wear_cancel">Cancel</string>
+	<string name="wear_profile_selected">Selected</string>
+	<string name="wear_recording_off">Trip recording is off</string>
+	<string name="wear_recording_off_hint">Enable the Trip recording plugin in OsmAnd on your phone</string>
 </resources>

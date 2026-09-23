@@ -17,6 +17,12 @@ tasks.register('copyPhoneIcons', Sync) {
 		include "drawable/ic_action_start_navigation.xml"
 		include "drawable/ic_action_settings.xml"
 		include "drawable/ic_action_rec_stop.xml"
+		include "drawable/ic_action_trip_rec_start.xml"
+		include "drawable/ic_action_trip_rec_pause.xml"
+		include "drawable/ic_action_trip_rec_finish.xml"
+		include "drawable/ic_action_trip_rec_save.xml"
+		include "drawable/ic_action_close.xml"
+		include "drawable/ic_action_done.xml"
 		// Launcher icon layers, one set per distribution channel.
 		include "drawable/ic_launcher_osmand_monochrome.xml"
 		include "drawable/ic_launcher_osmand_plus_monochrome.xml"

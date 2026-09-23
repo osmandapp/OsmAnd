@@ -16,7 +16,29 @@ data class PhoneState(
 	val appMode: AppModeInfo? = null,
 	val navigation: NavigationState? = null,
 	val recording: RecordingState? = null,
-	val location: LocationState? = null
+	val location: LocationState? = null,
+	/** Profiles offered by the recording profile picker, in the order the phone lists them. */
+	val profiles: List<ProfileInfo> = emptyList()
+)
+
+/**
+ * A number with its unit kept apart, because the watch lays them out separately: the unit sits
+ * in the small label row ("DISTANCE  KM") and the value below it in display type.
+ */
+@Serializable
+data class Metric(
+	val value: String = "",
+	val unit: String = ""
+)
+
+/** One OsmAnd profile as the watch's picker shows it. */
+@Serializable
+data class ProfileInfo(
+	val key: String,
+	val title: String,
+	/** Key of the profile glyph carried alongside this snapshot as a Data Layer asset. */
+	val iconKey: String? = null,
+	val selected: Boolean = false
 )
 
 /** Currently selected OsmAnd profile. Settings changes apply to it unless stated otherwise. */
@@ -63,13 +85,24 @@ data class ManeuverInfo(
 	val streetName: String? = null
 )
 
-/** Trip recording status; null means the monitoring plugin is off or unavailable. */
+/**
+ * Trip recording status; null means the monitoring plugin is off or unavailable.
+ *
+ * OsmAnd keeps no explicit "paused" flag: recording either writes points or it does not, and a
+ * paused session is one that has stopped writing while still holding unsaved data. Both states
+ * are resolved on the phone so the watch does not have to know that rule.
+ */
 @Serializable
 data class RecordingState(
+	/** A session exists — the watch shows the recording pager rather than the start screen. */
 	val active: Boolean = false,
 	val paused: Boolean = false,
-	val distanceText: String = "",
-	val durationText: String = "",
+	val distance: Metric = Metric(),
+	val timeSpan: String = "",
+	/** Empty while paused: the mockups show a dash instead of a stale speed. */
+	val speed: Metric = Metric(),
+	val uphill: Metric = Metric(),
+	val downhill: Metric = Metric(),
 	val pointCount: Int = 0
 )
 

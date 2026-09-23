@@ -1,5 +1,7 @@
 package net.osmand.plus.wear
 
+import android.util.Log
+
 import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.WearableListenerService
 
@@ -41,6 +43,7 @@ class WearCommandService : WearableListenerService() {
 	}
 
 	private fun handle(command: WearCommand) {
+		Log.d(TAG, "handling $command")
 		when (command) {
 			is WearCommand.RequestState -> {
 				// Nothing to apply: the publish below is the whole point of this command.
@@ -58,14 +61,37 @@ class WearCommandService : WearableListenerService() {
 				}
 			}
 
-			is WearCommand.ToggleRecording -> {
-				val plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin::class.java)
-				plugin?.setRecordingTrack(command.active)
+			is WearCommand.StartRecording -> monitoringPlugin()?.startGPXMonitoring(null)
+
+			// The plugin exposes a single toggle; the watch sends the direction it means, so a
+			// command that arrives twice cannot flip the session the wrong way.
+			is WearCommand.PauseRecording -> monitoringPlugin()?.takeIf { it.isRecordingTrack }
+				?.pauseOrResumeRecording()
+
+			is WearCommand.ResumeRecording -> monitoringPlugin()?.takeIf { !it.isRecordingTrack }
+				?.pauseOrResumeRecording()
+
+			is WearCommand.FinishRecording -> monitoringPlugin()?.let { plugin ->
+				plugin.saveCurrentTrack(null, null, true, false)
+			}
+
+			is WearCommand.SaveAndContinueRecording -> monitoringPlugin()?.saveCurrentTrack()
+
+			is WearCommand.SelectProfile -> {
+				val mode = ApplicationMode.valueOfStringKey(command.appModeKey, null)
+				if (mode != null) {
+					app.settings.setApplicationMode(mode)
+				} else {
+					LOG.warn("Watch asked for an unknown profile: " + command.appModeKey)
+				}
 			}
 
 			is WearCommand.SetPreference -> applyPreference(command)
 		}
 	}
+
+	private fun monitoringPlugin(): OsmandMonitoringPlugin? =
+		PluginsHelper.getActivePlugin(OsmandMonitoringPlugin::class.java)
 
 	private fun applyPreference(command: WearCommand.SetPreference) {
 		// Routed through the very entry point the AIDL API uses, so the watch is just another
@@ -81,6 +107,7 @@ class WearCommandService : WearableListenerService() {
 	}
 
 	companion object {
+		private const val TAG = "OsmAndWear"
 		private val LOG = PlatformUtil.getLog(WearCommandService::class.java)
 	}
 }

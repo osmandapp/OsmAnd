@@ -27,8 +27,31 @@ sealed interface WearCommand {
 	data class PauseNavigation(val paused: Boolean) : WearCommand
 
 	@Serializable
-	@SerialName("toggle_recording")
-	data class ToggleRecording(val active: Boolean) : WearCommand
+	@SerialName("start_recording")
+	data object StartRecording : WearCommand
+
+	@Serializable
+	@SerialName("pause_recording")
+	data object PauseRecording : WearCommand
+
+	@Serializable
+	@SerialName("resume_recording")
+	data object ResumeRecording : WearCommand
+
+	/** Saves the track and ends the session. */
+	@Serializable
+	@SerialName("finish_recording")
+	data object FinishRecording : WearCommand
+
+	/** Writes what has been recorded so far and keeps going. */
+	@Serializable
+	@SerialName("save_and_continue")
+	data object SaveAndContinueRecording : WearCommand
+
+	/** Switches the active OsmAnd profile, which is what the recording will be attributed to. */
+	@Serializable
+	@SerialName("select_profile")
+	data class SelectProfile(val appModeKey: String) : WearCommand
 
 	/**
 	 * Mirrors the existing AIDL contract (see OsmAnd-api PreferenceParams): a preference is

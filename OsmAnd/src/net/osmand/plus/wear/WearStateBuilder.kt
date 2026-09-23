@@ -4,13 +4,18 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin
 import net.osmand.plus.routing.NextDirectionInfo
+import net.osmand.plus.settings.backend.ApplicationMode
+import net.osmand.plus.utils.FormattedValue
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.OsmAndFormatterParams
-import net.osmand.wear.api.AppModeInfo
 import net.osmand.router.TurnType
+import net.osmand.shared.gpx.GpxTrackAnalysis
+import net.osmand.wear.api.AppModeInfo
 import net.osmand.wear.api.ManeuverInfo
+import net.osmand.wear.api.Metric
 import net.osmand.wear.api.NavigationState
 import net.osmand.wear.api.PhoneState
+import net.osmand.wear.api.ProfileInfo
 import net.osmand.wear.api.RecordingState
 import net.osmand.wear.api.WearProtocol
 
@@ -26,7 +31,7 @@ import java.util.Date
  */
 class WearStateBuilder(private val app: OsmandApplication) {
 
-	private val turnIcons = WearTurnIconRenderer(app)
+	private val iconRenderer = WearIconRenderer(app)
 
 	/** A snapshot plus the arrow images its manoeuvres refer to by key. */
 	data class Snapshot(val state: PhoneState, val icons: Map<String, ByteArray>)
@@ -37,7 +42,8 @@ class WearStateBuilder(private val app: OsmandApplication) {
 			updatedAt = System.currentTimeMillis(),
 			appMode = buildAppMode(),
 			navigation = buildNavigation(collectedIcons),
-			recording = buildRecording()
+			recording = buildRecording(),
+			profiles = buildProfiles(collectedIcons)
 		)
 		return Snapshot(state, collectedIcons)
 	}
@@ -111,7 +117,7 @@ class WearStateBuilder(private val app: OsmandApplication) {
 		icons: MutableMap<String, ByteArray>
 	): ManeuverInfo {
 		val iconKey = turnType?.let { type ->
-			turnIcons.render(type)?.let { png ->
+			iconRenderer.renderTurn(type)?.let { png ->
 				WearProtocol.turnIconKey(index).also { icons[it] = png }
 			}
 		}
@@ -135,14 +141,71 @@ class WearStateBuilder(private val app: OsmandApplication) {
 	private fun buildRecording(): RecordingState? {
 		val plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin::class.java) ?: return null
 		val trackHelper = app.savingTrackHelper
+
+		// OsmAnd has no paused flag of its own: a session that has stopped writing points but
+		// still holds unsaved data is what the user thinks of as paused.
+		val writing = plugin.isRecordingTrack
+		val hasData = plugin.hasDataToSave()
+		val paused = !writing && hasData
+
+		val analysis = trackAnalysis()
+		val speed = app.locationProvider?.lastKnownLocation?.takeIf { it.hasSpeed() && writing }?.speed
+
 		return RecordingState(
-			active = plugin.isRecordingTrack,
-			paused = false,
-			distanceText = formatDistance(trackHelper.distance.toInt()),
-			durationText = OsmAndFormatter.getFormattedDuration(trackHelper.duration / 1000, app),
+			active = writing || hasData,
+			paused = paused,
+			distance = metric(OsmAndFormatter.getFormattedDistanceValue(trackHelper.distance, app)),
+			timeSpan = OsmAndFormatter.getFormattedDuration(trackHelper.duration / 1000, app),
+			// The unit travels even when the figure does not: a paused session shows a dash under
+			// an unchanged "SPEED KM/H" label rather than dropping the unit with the value.
+			speed = metric(OsmAndFormatter.getFormattedSpeedValue(speed ?: 0f, app))
+				.let { if (speed == null) it.copy(value = "") else it },
+			uphill = elevationMetric(analysis?.diffElevationUp),
+			downhill = elevationMetric(analysis?.diffElevationDown),
 			pointCount = trackHelper.points
 		)
 	}
+
+	/**
+	 * Track analysis walks every recorded point, so on a long session it is far too expensive to
+	 * redo for each published snapshot. The elevation figures move slowly enough that a few
+	 * seconds of staleness is invisible.
+	 */
+	private fun trackAnalysis(): GpxTrackAnalysis? {
+		val now = System.currentTimeMillis()
+		if (now - lastAnalysisAt < ANALYSIS_INTERVAL_MS && cachedAnalysis != null) {
+			return cachedAnalysis
+		}
+		return try {
+			app.savingTrackHelper.currentTrack.getTrackAnalysis(app).also {
+				cachedAnalysis = it
+				lastAnalysisAt = now
+			}
+		} catch (e: Exception) {
+			cachedAnalysis
+		}
+	}
+
+	private fun buildProfiles(icons: MutableMap<String, ByteArray>): List<ProfileInfo> {
+		val current = app.settings.applicationMode
+		return ApplicationMode.values(app).map { mode ->
+			val iconKey = iconRenderer.renderDrawable(mode.iconRes)?.let { png ->
+				WearProtocol.profileIconKey(mode.stringKey).also { icons[it] = png }
+			}
+			ProfileInfo(
+				key = mode.stringKey,
+				title = mode.toHumanString(),
+				iconKey = iconKey,
+				selected = mode == current
+			)
+		}
+	}
+
+	private fun metric(formatted: FormattedValue): Metric = Metric(formatted.value, formatted.unit)
+
+	private fun elevationMetric(meters: Double?): Metric =
+		if (meters == null || meters.isNaN()) Metric()
+		else metric(OsmAndFormatter.getFormattedAltitudeValue(meters, app, app.settings.ALTITUDE_METRIC.get()))
 
 	private fun formatDistance(meters: Int): String =
 		OsmAndFormatter.getFormattedDistance(meters.toFloat(), app, OsmAndFormatterParams.USE_LOWER_BOUNDS)
@@ -151,7 +214,12 @@ class WearStateBuilder(private val app: OsmandApplication) {
 		SimpleDateFormat.getTimeInstance(DateFormat.SHORT)
 			.format(Date(System.currentTimeMillis() + leftTimeSeconds * 1000L))
 
+	@Volatile
+	private var cachedAnalysis: GpxTrackAnalysis? = null
+	private var lastAnalysisAt = 0L
+
 	companion object {
+		private const val ANALYSIS_INTERVAL_MS = 5000L
 		private const val MAX_MANEUVERS = 3
 		private const val DISTANCE_STEP_METERS = 10
 	}

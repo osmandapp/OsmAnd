@@ -18,9 +18,16 @@ object OsmAndWearColors {
 	val ChipContent = Color(0xFFFFFFFF)
 	val HeaderContent = Color(0xFFDADCE0)
 
-	/** Used by the profile picker and the Stop button in the mockups. */
+	/** Used by the profile picker, trip recording and the Stop button in the mockups. */
 	val AltChipContainer = Color(0xFF12192E)
 	val AltAccent = Color(0xFF237BFF)
+
+	/** Recording status colours: writing points, and holding a paused session. */
+	val RecActive = Color(0xFFE5484D)
+	val RecPaused = Color(0xFFE8A33D)
+
+	/** Neutral button on a confirmation dialog, where the accent belongs to the confirm side. */
+	val DialogDismiss = Color(0xFF3C3A38)
 }
 
 @Composable

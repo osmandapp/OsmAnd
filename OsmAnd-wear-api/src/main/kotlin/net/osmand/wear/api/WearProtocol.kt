@@ -11,10 +11,11 @@ object WearProtocol {
 	/**
 	 * Bumped whenever the meaning of an existing field changes or a field becomes required.
 	 * v2 replaced NavigationState's single-turn fields with a list of upcoming manoeuvres.
+	 * v3 split recording figures into value and unit and added the profile list.
 	 * Purely additive changes (a new nullable field) do not need a bump, because both ends
 	 * decode with `ignoreUnknownKeys`.
 	 */
-	const val VERSION = 2
+	const val VERSION = 3
 
 	/** Advertised by the phone app, looked up by the watch. */
 	const val CAPABILITY_PHONE_APP = "osmand_phone_app"
@@ -30,6 +31,9 @@ object WearProtocol {
 
 	/** Asset key holding the arrow for the manoeuvre at [index] in the published snapshot. */
 	fun turnIconKey(index: Int): String = "turn_$index"
+
+	/** Asset key holding the glyph of the profile identified by [appModeKey]. */
+	fun profileIconKey(appModeKey: String): String = "profile_$appModeKey"
 
 	/** MessageClient path for [WearCommand]s travelling watch -> phone. */
 	const val PATH_COMMAND = "/osmand/command"
