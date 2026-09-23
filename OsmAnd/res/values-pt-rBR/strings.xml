@@ -5731,4 +5731,25 @@
     </plurals>
     <string name="shared_string_archive">Arquivo</string>
     <string name="attached_media_delete_confirmation">Deseja excluir %1$d itens de mídia a partir deste momento? As mídias armazenadas pelo aplicativo e que não estejam anexadas em nenhum outro lugar também serão excluídas do dispositivo.</string>
+    <string name="gpx_line_style_desc_unavailable_for_color">Os estilos de linha tracejada e pontilhada não estão disponíveis para cores de trilha que não sejam sólidas.</string>
+    <string name="gpx_color_unavailable_for_line_style">Essa coloração não está disponível para estilos de linha não contínua.</string>
+    <string name="gpx_color_desc_unavailable_for_style">Para o estilo de linha tracejada ou pontilhada, está disponível apenas a cor sólida do traço.</string>
+    <string name="gpx_line_style">Estilo da linha</string>
+    <string name="gpx_line_style_solid">Sólido</string>
+    <string name="gpx_line_style_dashed">Tracejado</string>
+    <string name="gpx_line_style_dotted">Pontilhado</string>
+    <string name="battery_saving_mode_descr">Limita a exibição do mapa a 20 quadros por segundo para reduzir o consumo da bateria e o aquecimento do aparelho. O movimento no mapa fica menos suave.</string>
+    <string name="java_memory">Memória do Java</string>
+    <string name="map_rendering">Renderização do mapa</string>
+    <string name="simulate_ui">Simular a primeira inicialização</string>
+    <string name="simulate_ui_descr">Primeira execução, banner da versão gratuita, folha de descontos.</string>
+    <string name="heap_dump_descr">Contar os objetos na pilha do Java.</string>
+    <string name="heap_dump_collect">Coletar e analisar agora</string>
+    <string name="heap_dump_collect_descr">Leva alguns segundos e mostra o resultado.</string>
+    <string name="heap_dump_share">Compartilhar relatório</string>
+    <string name="heap_dump_share_descr">Envia o último relatório ao servidor.</string>
+    <string name="heap_dump_auto_descr">Quando a pilha estiver quase cheia, uma vez a cada 30 minutos.</string>
+    <string name="visualizing_button_grid_descr">Células, slots, quadros e registros.</string>
+    <string name="crash_report_sent">Relatório enviado. Obrigado!</string>
+    <string name="crash_report_send_failed">Não foi possível enviar o relatório. Tente novamente mais tarde.</string>
 </resources>
