@@ -9,6 +9,7 @@ import net.osmand.plus.configmap.MultiStateColorPaletteController
 import net.osmand.plus.dashboard.DashboardType.BUILDINGS_3D
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.srtm.SRTMPlugin
+import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.enums.DayNightMode
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.widgets.popup.PopUpMenu
@@ -21,9 +22,11 @@ class Buildings3DColorScreenController(
 	val plugin: SRTMPlugin
 ) : MultiStateColorPaletteController(
 	app,
-	plugin.BUILDINGS_3D_CUSTOM_DAY_COLOR.get() ?: SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR,
-	plugin.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get() ?: SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR
+	app.settings.BUILDINGS_3D_CUSTOM_DAY_COLOR.get() ?: OsmandSettings.BUILDINGS_3D_DEFAULT_COLOR,
+	app.settings.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get() ?: OsmandSettings.BUILDINGS_3D_DEFAULT_COLOR
 ) {
+
+	private val settings = app.settings
 
 	companion object {
 		const val PROCESS_ID = "buildings_3d_color_screen"
@@ -45,7 +48,7 @@ class Buildings3DColorScreenController(
 	}
 
 	var colorType: Buildings3DColorType =
-		Buildings3DColorType.getById(plugin.BUILDINGS_3D_COLOR_STYLE.get() ?: 1)
+		Buildings3DColorType.getById(settings.BUILDINGS_3D_COLOR_STYLE.get() ?: 1)
 	private val initialColorType: Buildings3DColorType = colorType
 	private var applyChanges = false
 
@@ -91,17 +94,17 @@ class Buildings3DColorScreenController(
 		setSavedColors(applyChanges)
 		if (!applyChanges) {
 			if (initialColorType != colorType) {
-				plugin.BUILDINGS_3D_COLOR_STYLE.set(initialColorType.id)
+				settings.BUILDINGS_3D_COLOR_STYLE.set(initialColorType.id)
 			}
-			plugin.apply3DBuildingsColorStyle(Buildings3DColorType.getById(plugin.BUILDINGS_3D_COLOR_STYLE.get()))
+			plugin.apply3DBuildingsColorStyle(Buildings3DColorType.getById(settings.BUILDINGS_3D_COLOR_STYLE.get()))
 
 			val isAppNightMode = app.daynightHelper.isNightMode(app.settings.applicationMode, ThemeUsageContext.APP)
 			val colorToRestore = if (isAppNightMode) {
-				plugin.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get()
+				settings.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get()
 			} else {
-				plugin.BUILDINGS_3D_CUSTOM_DAY_COLOR.get()
+				settings.BUILDINGS_3D_CUSTOM_DAY_COLOR.get()
 			}
-			plugin.apply3DBuildingsCustomColor(isNightMap, colorToRestore ?: SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR)
+			plugin.apply3DBuildingsCustomColor(isNightMap, colorToRestore ?: OsmandSettings.BUILDINGS_3D_DEFAULT_COLOR)
 		}
 		activity.supportFragmentManager.popBackStack()
 		activity.dashboard.setDashboardVisibility(true, BUILDINGS_3D, false)
@@ -109,14 +112,14 @@ class Buildings3DColorScreenController(
 
 	override fun onApplyChanges() {
 		applyChanges = true
-		plugin.BUILDINGS_3D_COLOR_STYLE.set(colorType.id)
+		settings.BUILDINGS_3D_COLOR_STYLE.set(colorType.id)
 		plugin.apply3DBuildingsColorStyle(colorType)
 		loadSavedColors()
 	}
 
 	override fun onResetToDefault() {
-		colorDay = SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR
-		colorNight = SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR
+		colorDay = OsmandSettings.BUILDINGS_3D_DEFAULT_COLOR
+		colorNight = OsmandSettings.BUILDINGS_3D_DEFAULT_COLOR
 		colorType = Buildings3DColorType.MAP_STYLE
 		plugin.apply3DBuildingsColorStyle(colorType)
 		setSavedColors(true)
@@ -138,19 +141,19 @@ class Buildings3DColorScreenController(
 
 	override fun setSavedColor(color: Int, nightMode: Boolean) {
 		if (nightMode) {
-			plugin.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.set(color)
+			settings.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.set(color)
 			colorNight = color
 		} else {
-			plugin.BUILDINGS_3D_CUSTOM_DAY_COLOR.set(color)
+			settings.BUILDINGS_3D_CUSTOM_DAY_COLOR.set(color)
 			colorDay = color
 		}
 	}
 
 	override fun getSavedColor(nightMode: Boolean): Int {
 		return if (nightMode) {
-			plugin.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get() ?: SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR
+			settings.BUILDINGS_3D_CUSTOM_NIGHT_COLOR.get() ?: OsmandSettings.BUILDINGS_3D_DEFAULT_COLOR
 		} else {
-			plugin.BUILDINGS_3D_CUSTOM_DAY_COLOR.get() ?: SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR
+			settings.BUILDINGS_3D_CUSTOM_DAY_COLOR.get() ?: OsmandSettings.BUILDINGS_3D_DEFAULT_COLOR
 		}
 	}
 
