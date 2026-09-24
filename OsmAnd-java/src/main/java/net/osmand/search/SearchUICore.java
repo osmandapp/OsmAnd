@@ -164,12 +164,11 @@ public class SearchUICore {
 				return this;
 			}
 			if (skipSorting) {
-				// spatial search results come already ranked by the engine: keep its order
-				this.searchResults.addAll(sortNotSpatialResultsInPlace(sr));
-				if (removeDuplicates) {
-					if (resortAll) {
-						uniteSearchResultsByOsmIdOrWikidata(this.searchResults);
-					}
+				// spatial search results come sorted and deduplicated by the engine
+				this.searchResults.addAll(sr);
+				if (resortAll && removeDuplicates) {
+					// results added from outside the engine
+					uniteSearchResultsByOsmIdOrWikidata(this.searchResults);
 					filterSearchDuplicateResults();
 				}
 			} else if (resortAll) {
@@ -324,27 +323,6 @@ public class SearchUICore {
 			if (debugMode) {
 				LOG.info("Search results sorted <" + phrase + ">");
 			}
-		}
-
-		// results of other APIs (e.g. poi categories) are sorted among themselves and keep their slots
-		private List<SearchResult> sortNotSpatialResultsInPlace(List<SearchResult> sr) {
-			List<Integer> slots = new ArrayList<>();
-			List<SearchResult> other = new ArrayList<>();
-			for (int i = 0; i < sr.size(); i++) {
-				if (sr.get(i).spatialResult == null) {
-					slots.add(i);
-					other.add(sr.get(i));
-				}
-			}
-			if (other.size() < 2) {
-				return sr;
-			}
-			other.sort(new SearchResultComparator(phrase));
-			List<SearchResult> res = new ArrayList<>(sr);
-			for (int i = 0; i < slots.size(); i++) {
-				res.set(slots.get(i), other.get(i));
-			}
-			return res;
 		}
 
 		public void filterSearchDuplicateResults() {
@@ -676,7 +654,9 @@ public class SearchUICore {
 			apis.add(amenitiesApi); // classic
 		}
 		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi, internetConnectionAvailable));
-		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
+		SearchAmenityTypesAPI searchAmenityTypesAPI = useSpatialSearch
+				? new SpatialAmenityTypesAPI(poiTypes)
+				: new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
 		apis.add(useSpatialSearch
 				? new SpatialCategoryAmenityByTypeAPI(poiTypes)
@@ -740,6 +720,19 @@ public class SearchUICore {
 		@Override
 		public int getSearchPriority(SearchPhrase phrase) {
 			return phrase.isLastWord(ObjectType.STREET) ? super.getSearchPriority(phrase) : -1;
+		}
+	}
+
+	// poi categories come from the spatial engine; used only by shallowSearch (categories list)
+	private static class SpatialAmenityTypesAPI extends SearchAmenityTypesAPI {
+
+		public SpatialAmenityTypesAPI(MapPoiTypes types) {
+			super(types);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase phrase) {
+			return -1;
 		}
 	}
 
