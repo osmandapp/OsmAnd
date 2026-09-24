@@ -1252,16 +1252,36 @@ public class OsmandSettings {
 	public TemperatureUnit getTemperatureUnit(@NonNull ApplicationMode appMode) {
 		TemperatureUnitsMode unitsMode = UNIT_OF_TEMPERATURE.getModeValue(appMode);
 		if (unitsMode == TemperatureUnitsMode.SYSTEM_DEFAULT) {
-			try {
-				String unit = LocalePreferences.getTemperatureUnit();
-				boolean fahrenheit = Algorithms.stringsEqual(unit, LocalePreferences.TemperatureUnit.FAHRENHEIT);
-				return fahrenheit ? TemperatureUnit.FAHRENHEIT : TemperatureUnit.CELSIUS;
-			} catch (IllegalArgumentException e) {
-				LOG.error(e);
-				return TemperatureUnit.CELSIUS;
-			}
+			return getSystemTemperatureUnit();
 		}
 		return unitsMode.getTemperatureUnit();
+	}
+
+	private record SystemTemperatureUnit(@NonNull Locale locale, @NonNull TemperatureUnit unit) {
+	}
+
+	@Nullable
+	private volatile SystemTemperatureUnit systemTemperatureUnit;
+
+	// Asked on every map frame by the weather layers, while the ICU lookup behind it is slow
+	@NonNull
+	private TemperatureUnit getSystemTemperatureUnit() {
+		Locale locale = Locale.getDefault(Locale.Category.FORMAT);
+		SystemTemperatureUnit cached = systemTemperatureUnit;
+		if (cached != null && cached.locale().equals(locale)) {
+			return cached.unit();
+		}
+		TemperatureUnit unit;
+		try {
+			String value = LocalePreferences.getTemperatureUnit();
+			boolean fahrenheit = Algorithms.stringsEqual(value, LocalePreferences.TemperatureUnit.FAHRENHEIT);
+			unit = fahrenheit ? TemperatureUnit.FAHRENHEIT : TemperatureUnit.CELSIUS;
+		} catch (IllegalArgumentException e) {
+			LOG.error(e);
+			unit = TemperatureUnit.CELSIUS;
+		}
+		systemTemperatureUnit = new SystemTemperatureUnit(locale, unit);
+		return unit;
 	}
 
 	// fuel tank capacity stored in litres
