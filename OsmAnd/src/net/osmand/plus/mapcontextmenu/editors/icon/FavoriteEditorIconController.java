@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
@@ -11,6 +13,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.configmap.tracks.appearance.favorite.FavoriteAppearanceController;
+import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -19,7 +22,10 @@ import java.util.List;
 
 public class FavoriteEditorIconController extends EditorIconController {
 
+	@Nullable
 	private final FavoriteAppearanceController favoriteAppearanceController;
+	@Nullable
+	private final String originalIconKey;
 
 	public static final String ORIGINAL_KEY = "original";
 	public static final String PROCESS_ID = "favorite_editor_process_select_icon";
@@ -27,6 +33,13 @@ public class FavoriteEditorIconController extends EditorIconController {
 	public FavoriteEditorIconController(@NonNull OsmandApplication app, @NonNull FavoriteAppearanceController favoriteAppearanceController) {
 		super(app);
 		this.favoriteAppearanceController = favoriteAppearanceController;
+		this.originalIconKey = null;
+	}
+
+	private FavoriteEditorIconController(@NonNull OsmandApplication app, @Nullable String originalIconKey) {
+		super(app);
+		this.favoriteAppearanceController = null;
+		this.originalIconKey = originalIconKey;
 	}
 
 	@Override
@@ -36,23 +49,52 @@ public class FavoriteEditorIconController extends EditorIconController {
 	}
 
 	protected void initOriginalCategory() {
-		List<String> iconKeys = new ArrayList<>();
-		categories.add(new IconsCategory(ORIGINAL_KEY, app.getString(R.string.shared_string_original), iconKeys, true));
+		if (favoriteAppearanceController != null || originalIconKey != null) {
+			List<String> iconKeys = new ArrayList<>();
+			categories.add(new IconsCategory(ORIGINAL_KEY, app.getString(R.string.shared_string_original), iconKeys, true));
+		}
 	}
 
 	@Override
 	public void setSelectedCategory(@NonNull IconsCategory category) {
 		super.setSelectedCategory(category);
 		if (ORIGINAL_KEY.equals(category.getKey())) {
-			if (iconsPaletteListener != null) {
-				iconsPaletteListener.onIconSelectedFromPalette(null);
-			}
+			onIconSelectedFromPalette(originalIconKey, null);
 		} else if (getSelectedIconKey() != null) {
 			onIconSelectedFromPalette(getSelectedIconKey(), null);
-		} else if (getSelectedIconKey() == null) {
-			onIconSelectedFromPalette(favoriteAppearanceController.requireIcon(), null);
+		} else {
+			onIconSelectedFromPalette(getOriginalIconKey(), null);
 			cardController.updateIconsSelection();
 		}
+	}
+
+	@Nullable
+	private String getOriginalIconKey() {
+		return favoriteAppearanceController != null ? favoriteAppearanceController.requireIcon() : originalIconKey;
+	}
+
+	@Override
+	public String getProcessId() {
+		return PROCESS_ID;
+	}
+
+	@NonNull
+	public static FavoriteEditorIconController getInstance(@NonNull OsmandApplication app, @NonNull Fragment targetFragment,
+	                                                       @Nullable String originalIconKey, @Nullable String selectedIconKey) {
+		DialogManager dialogManager = app.getDialogManager();
+		FavoriteEditorIconController controller = (FavoriteEditorIconController) dialogManager.findController(PROCESS_ID);
+		if (controller == null) {
+			controller = new FavoriteEditorIconController(app, originalIconKey);
+			controller.setSelectedIconKey(selectedIconKey);
+			controller.init();
+			dialogManager.register(PROCESS_ID, controller);
+		}
+		controller.setTargetFragment(targetFragment);
+		return controller;
+	}
+
+	public static void onDestroy(@NonNull OsmandApplication app) {
+		app.getDialogManager().unregister(PROCESS_ID);
 	}
 
 	@NonNull
