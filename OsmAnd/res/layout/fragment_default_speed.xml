@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Default speed of a profile. Built from the shared Material 3 components of the AIS screens.
+	Values are committed immediately, there is no Save button.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/colorSurface"
+	android:orientation="vertical">
+
+	<include layout="@layout/ui_material_app_bar" />
+
+	<ScrollView
+		android:id="@+id/scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingBottom="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.ui.ScreenDescriptionView
+				android:id="@+id/screen_description"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:screenDescriptionText="@string/default_speed_screen_descr" />
+
+			<include
+				android:id="@+id/default_speed_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				layout="@layout/ui_slider_card" />
+
+			<LinearLayout
+				android:id="@+id/eta_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/ui_group_gap"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.ui.GroupHeaderView
+					android:id="@+id/eta_header"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:groupHeaderTitle="@string/access_arrival_time" />
+
+				<LinearLayout
+					android:id="@+id/eta_rows"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<include
+						android:id="@+id/average_speed_row"
+						layout="@layout/item_ui_setting_row" />
+
+					<include
+						android:id="@+id/interval_card"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						layout="@layout/ui_slider_card" />
+				</LinearLayout>
+
+				<net.osmand.plus.widgets.ui.GroupFooterView
+					android:id="@+id/eta_footer"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/routing_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.ui.GroupHeaderView
+					android:id="@+id/routing_header"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:groupHeaderTitle="@string/routing_speed_limits" />
+
+				<LinearLayout
+					android:id="@+id/routing_rows"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:visibility="gone">
+
+					<include
+						android:id="@+id/min_speed_card"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						layout="@layout/ui_slider_card" />
+
+					<include
+						android:id="@+id/max_speed_card"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						layout="@layout/ui_slider_card" />
+				</LinearLayout>
+
+				<net.osmand.plus.widgets.ui.GroupFooterView
+					android:id="@+id/routing_footer"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:visibility="gone"
+					app:groupFooterText="@string/routing_speed_limits_descr" />
+			</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

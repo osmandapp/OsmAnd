@@ -11,6 +11,11 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="default_speed_screen_descr">Used to estimate the arrival time where there is no other speed data.</string>
+	<string name="eta_use_average_speed">Use my average speed</string>
+	<string name="eta_use_average_speed_descr">Arrival time follows your average speed over the last %1$s. The default speed is used while you stand still.</string>
+	<string name="routing_speed_limits">Routing limits</string>
+	<string name="routing_speed_limits_descr">Affect which roads the route prefers, not the arrival time.</string>
 	<string name="shared_string_visibility">Visibility</string>
 	<string name="opening_hours_public_holiday">Public holidays</string>
 	<string name="opening_hours_school_holiday">School holidays</string>

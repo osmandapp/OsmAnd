@@ -245,8 +245,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				ApplicationMode mode = getSelectedAppMode();
-				VehicleSpeedHelper speedHelper = new VehicleSpeedHelper(app, mode);
-				speedHelper.showSeekbarSettingsDialog(activity);
+				DefaultSpeedFragment.showInstance(activity, mode);
 			}
 			return true;
 		} else if (settings.FUEL_TANK_CAPACITY.getId().equals(key)) {
