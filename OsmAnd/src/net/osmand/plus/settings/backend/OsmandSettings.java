@@ -1782,6 +1782,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference(this, "calc_gpx_route", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Integer> GPX_SEGMENT_INDEX = new IntPreference(this, "gpx_route_segment", -1).makeGlobal().cache();
 	public final OsmandPreference<Integer> GPX_ROUTE_INDEX = new IntPreference(this, "gpx_route_index", -1).makeGlobal().cache();
+	public final OsmandPreference<Boolean> GPX_ROUTE_REVERSE = new BooleanPreference(this, "gpx_route_reverse", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> GPX_PASS_WHOLE_ROUTE = new BooleanPreference(this, "gpx_pass_whole_route", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<ReverseTrackStrategy> GPX_REVERSE_STRATEGY =
 			new EnumStringPreference<>(this, "gpx_reverse_strategy", ReverseTrackStrategy.RECALCULATE_ALL_ROUTE_POINTS, ReverseTrackStrategy.values()).makeGlobal().makeShared().cache();
