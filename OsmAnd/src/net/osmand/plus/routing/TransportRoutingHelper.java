@@ -22,10 +22,12 @@ import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.router.FerryRoutingHelper;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.TransportRoutePlanner;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
@@ -140,14 +142,14 @@ public class TransportRoutingHelper {
 			for (TransportRouteResultSegment segment : segments) {
 				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(prevSegment, segment);
 				if (walkingRouteSegment != null) {
-					res += walkingRouteSegment.getRoutingTime();
+					res += walkingRouteSegment.getWholeTime();
 				}
 				prevSegment = segment;
 			}
 			if (segments.size() > 0) {
 				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(segments.get(segments.size() - 1), null);
 				if (walkingRouteSegment != null) {
-					res += walkingRouteSegment.getRoutingTime();
+					res += walkingRouteSegment.getWholeTime();
 				}
 			}
 		}
@@ -524,7 +526,7 @@ public class TransportRoutingHelper {
 				params.params.put("profile_" + derivedProfile, String.valueOf(true));
 			}
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
-			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
+			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(config, prouter, params.params);
 
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
 			ctx.calculationProgress = params.calculationProgress;
@@ -653,7 +655,6 @@ public class TransportRoutingHelper {
 			walkingSegmentsCalculated = false;
 			walkingSegmentsToCalculate.clear();
 			walkingRouteSegments.clear();
-			walkingRouteSegmentsCache.clear();
 			if (routes != null && routes.size() > 0) {
 				for (int i = 0; i < routes.size(); i++) {
 					TransportRouteResult r = routes.get(i);
@@ -704,6 +705,23 @@ public class TransportRoutingHelper {
 			}
 		}
 
+		// public transport router walks straight, so a route is wrong if its real walk needs a ferry
+		private boolean hasWalkOverWater(TransportRouteResult route) {
+			TransportRouteResultSegment prev = null;
+			for (TransportRouteResultSegment segment : route.getSegments()) {
+				if (hasFerryCrossing(walkingRouteSegments.get(new Pair<>(prev, segment)))) {
+					return true;
+				}
+				prev = segment;
+			}
+			return hasFerryCrossing(walkingRouteSegments.get(new Pair<>(prev, null)));
+		}
+
+		private boolean hasFerryCrossing(@Nullable RouteCalculationResult walk) {
+			List<RouteSegmentResult> route = walk != null ? walk.getOriginalRoute() : null;
+			return route != null && FerryRoutingHelper.hasCrossing(route);
+		}
+
 		@Override
 		public void run() {
 			List<TransportRouteResult> res = null;
@@ -711,7 +729,9 @@ public class TransportRoutingHelper {
 			try {
 				res = calculateRouteImpl(params, lib);
 				if (res != null && !params.calculationProgress.isCancelled) {
-					calculateWalkingRoutes(res);
+					do {
+						calculateWalkingRoutes(res);
+					} while (!params.calculationProgress.isCancelled && res.removeIf(this::hasWalkOverWater));
 				}
 			} catch (Exception e) {
 				error = e.getMessage();

@@ -51,6 +51,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.TransportStopsTileProvider;
 import net.osmand.plus.views.layers.core.TransportStopsTileProvider.StopsCollectionPoint;
 import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
+import net.osmand.router.TransportFerryHelper;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -131,6 +132,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 									return isInterrupted();
 								}
 							});
+					res.removeIf(TransportFerryHelper::isSyntheticStop);
 					Collections.sort(res, (lhs, rhs) -> lhs.getId() < rhs.getId()
 							? -1 : (lhs.getId().longValue() == rhs.getId().longValue() ? 0 : 1));
 					return new Pair<>(res, res);
@@ -188,6 +190,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	public void setRoute(TransportStopRoute route) {
 		this.stopRoute = route;
+	}
+
+	@NonNull
+	private List<TransportStop> getRouteStops() {
+		return TransportFerryHelper.getVisibleStops(stopRoute.route);
 	}
 
 	private int getRadiusPoi(RotatedTileBox tb){
@@ -263,7 +270,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 		if (tb.getZoom() >= START_ZOOM_SELECTED_TRANSPORT_ROUTE) {
 			if (stopRoute != null) {
-				objects = stopRoute.route.getForwardStops();
+				objects = getRouteStops();
 				int color = stopRoute.getColor(app, nightMode);
 				attrs.paint.setColor(color);
 				attrs.updatePaints(view.getApplication(), settings, tb);
@@ -377,7 +384,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		}
 		RotatedTileBox tileBox = result.getTileBox();
 		if (tileBox.getZoom() >= START_ZOOM_SELECTED_TRANSPORT_ROUTE && stopRoute != null) {
-			collectTransportStopsFromPoint(result, stopRoute.route.getForwardStops());
+			collectTransportStopsFromPoint(result, getRouteStops());
 		} else if (tileBox.getZoom() >= START_ZOOM_ALL_TRANSPORT_STOPS && data.getResults() != null) {
 			collectTransportStopsFromPoint(result, data.getResults());
 		}
@@ -436,7 +443,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 				mapRenderer.addSymbolsProvider(vectorLinesCollection);
 			}
 		}
-		List<TransportStop> transportStops = stopRoute.route.getForwardStops();
+		List<TransportStop> transportStops = getRouteStops();
 		String transportRouteType = stopRoute.route.getType();
 		if (transportStops.size() > 0) {
 			int pointsOrder = getPointsOrder() - 1;
