@@ -47,7 +47,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	private static final Log LOG = PlatformUtil.getLog(SpatialTextSearch.class);
 
 	private static final int SEARCH_PRIORITY = SEARCH_ADDRESS_BY_NAME_PRIORITY;
-	private static final int INCREASED_SEARCH_RADIUS_KM = 500;
+	private static final int[] INCREASED_SEARCH_RADIUS_KM = {500, 700};
 
 	private final MapPoiTypes poiTypes;
 	private final SpatialTextSearch spatialTextSearch = new SpatialTextSearch();
@@ -191,8 +191,9 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 				? SpatialTextSearchSettings.defaultSettings()
 				: SpatialTextSearchSettings.suggestionSettings();
 		settings.LANG_DEDUPLICATE = phrase.getSettings().getLang();
-		if (phrase.getRadiusLevel() > 1) {
-			settings.SUGGESTED_SEARCH_RADIUS_KM = Math.max(settings.SUGGESTED_SEARCH_RADIUS_KM, INCREASED_SEARCH_RADIUS_KM);
+		int increased = getIncreasedRadiusKm(phrase.getRadiusLevel());
+		if (increased > 0) {
+			settings.SUGGESTED_SEARCH_RADIUS_KM = Math.max(settings.SUGGESTED_SEARCH_RADIUS_KM, increased);
 		}
 		return settings;
 	}
@@ -208,7 +209,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
-		return phrase.getRadiusLevel() == 1;
+		return phrase.getRadiusLevel() <= INCREASED_SEARCH_RADIUS_KM.length;
 	}
 
 	@Override
@@ -218,7 +219,13 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public int getNextSearchRadius(SearchPhrase phrase) {
-		return INCREASED_SEARCH_RADIUS_KM * 1000;
+		int increased = getIncreasedRadiusKm(phrase.getRadiusLevel() + 1);
+		return increased > 0 ? increased * 1000 : getMinimalSearchRadius(phrase);
+	}
+
+	private static int getIncreasedRadiusKm(int radiusLevel) {
+		int ind = Math.min(radiusLevel, INCREASED_SEARCH_RADIUS_KM.length + 1) - 2;
+		return ind >= 0 ? INCREASED_SEARCH_RADIUS_KM[ind] : 0;
 	}
 
 	private SearchResult convertResult(SearchPhrase phrase, SpatialSearchContext context, SpatialSearchResult ssr) {
