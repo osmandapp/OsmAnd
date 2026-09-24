@@ -7,6 +7,7 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment.SELECTED_FOLDER_KEY;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -25,6 +26,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,8 +55,10 @@ import net.osmand.plus.importfiles.ui.SelectPointsFragment.PointsSelectionListen
 import net.osmand.plus.importfiles.ui.SelectTrackDirectoryBottomSheet.FolderSelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.MapDrawParams;
+import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
+import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -86,6 +90,8 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 	private String selectedFolder;
 
 	private GpxImportListener importListener;
+	private boolean attached;
+	private boolean activityRecreated;
 
 	private SaveGpxAsyncTask saveAsOneTrackTask;
 	private SaveTracksTask saveTracksTask;
@@ -123,6 +129,14 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 				showExitDialog();
 			}
 		});
+	}
+
+	@Override
+	public void onAttach(@NonNull Context context) {
+		super.onAttach(context);
+		// retained instance: importListener still points to the tracks screen of the destroyed activity
+		activityRecreated |= attached;
+		attached = true;
 	}
 
 	@Override
@@ -483,8 +497,21 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 		}
 		if (!(activity instanceof MyPlacesActivity) && tracksFragment == null) {
 			openTracksTabInMyPlaces();
+		} else if (activity instanceof MyPlacesActivity && activityRecreated) {
+			reloadMyPlacesTracks((MyPlacesActivity) activity);
 		}
 		dismissAllowingStateLoss();
+	}
+
+	private void reloadMyPlacesTracks(@NonNull MyPlacesActivity activity) {
+		for (Fragment fragment : activity.getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof AvailableTracksFragment) {
+				TrackFoldersHelper helper = ((AvailableTracksFragment) fragment).getTrackFoldersHelper();
+				if (helper != null) {
+					helper.reloadTracks();
+				}
+			}
+		}
 	}
 
 	private void openTracksTabInMyPlaces() {
