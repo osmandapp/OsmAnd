@@ -99,10 +99,12 @@ public class MapObjectViewHolder extends RecyclerView.ViewHolder {
 				mapReaderResource = item.getSearchResult().file;
 			}
 			if (mapReaderResource != null) {
-				addressText = FileNameTranslationHelper.getFileNameWithRegion(app, mapReaderResource.getFile().getName());
+				addressText = getRegionName(mapReaderResource);
 			} else if (item.getSearchResult().relatedObject instanceof City relatedCity &&
 					relatedCity.getReferenceFile() instanceof BinaryMapIndexReader relatedMapReaderResource) {
-				addressText = String.format("%s, %s", relatedCity.getName(), FileNameTranslationHelper.getFileNameWithRegion(app, relatedMapReaderResource.getFile().getName()));
+				addressText = String.format("%s, %s", relatedCity.getName(), getRegionName(relatedMapReaderResource));
+			} else if (item.getSearchResult().file != null) {
+				addressText = getRegionName(item.getSearchResult().file);
 			}
 		} else if (mapObject instanceof Street street) {
 			StringBuilder streetAddressBuilder = new StringBuilder();
@@ -157,6 +159,13 @@ public class MapObjectViewHolder extends RecyclerView.ViewHolder {
 			return app.getString(R.string.search_address_building);
 		}
 		return null;
+	}
+
+	@Nullable
+	private String getRegionName(@NonNull BinaryMapIndexReader reader) {
+		// "Italy_campania_europe_2.obf" -> "Campania, Italy": region lookup needs the name without the version
+		String fileName = Algorithms.removeFileVersionSuffix(reader.getFile().getName());
+		return FileNameTranslationHelper.getFileName(app, app.getResourceManager().getOsmandRegions(), fileName, ", ", true, true);
 	}
 
 	private void bindImage(@NonNull QuickSearchListItem item, MapObject mapObject) {
