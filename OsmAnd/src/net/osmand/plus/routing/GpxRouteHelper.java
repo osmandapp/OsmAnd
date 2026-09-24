@@ -24,7 +24,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public class GpxRouteHelper {
     private final RouteProvider provider;
     private static final int ADDITIONAL_DISTANCE_FOR_START_POINT = 300;
-    static final int NEAREST_POINT_EXTRA_SEARCH_DISTANCE = 300;
+    private static final int NEAREST_POINT_EXTRA_SEARCH_DISTANCE = 300;
     private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 
     private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(GpxRouteHelper.class);
@@ -227,7 +227,7 @@ public class GpxRouteHelper {
 
     private int findClosestIntermediate(@NonNull RouteCalculationParams params, @NonNull List<Location> intermediates) {
         return params.gpxRoute.passWholeRoute ? 0
-                : TrackStartPointFinder.findStartIndex(intermediates, params.start, getMaxDistanceToFinish(params));
+                : new TrackStartPointFinder(intermediates).findStartIndex(params.start, getMaxDistanceToFinish(params));
     }
 
     @NonNull
@@ -321,14 +321,18 @@ public class GpxRouteHelper {
     }
 
     // on recalculation only what was left of the previous route can be the start, else a loop restarts or ends early
-    static float getMaxDistanceToFinish(@NonNull RouteCalculationParams routeParams) {
+    float getMaxDistanceToFinish(@NonNull RouteCalculationParams routeParams) {
         return routeParams.recheckRouteNearestPoint()
-                ? routeParams.previousToRecalculate.getRouteDistanceToFinish(0) + NEAREST_POINT_EXTRA_SEARCH_DISTANCE
+                ? getMaxDistanceToFinish(routeParams.previousToRecalculate)
                 : -1;
     }
 
+    float getMaxDistanceToFinish(@NonNull RouteCalculationResult previousRoute) {
+        return previousRoute.getRouteDistanceToFinish(0) + NEAREST_POINT_EXTRA_SEARCH_DISTANCE;
+    }
+
     private int findStartGpxPointIndex(RouteCalculationParams routeParams, List<Location> route, boolean calculateOsmAndRouteParts) {
-        int nearestPointIndex = TrackStartPointFinder.findStartIndex(route, routeParams.start, getMaxDistanceToFinish(routeParams));
+        int nearestPointIndex = new TrackStartPointFinder(route).findStartIndex(routeParams.start, getMaxDistanceToFinish(routeParams));
         if (nearestPointIndex > 0 && calculateOsmAndRouteParts) {
             Location nearestLocation = route.get(nearestPointIndex);
             for (int i = nearestPointIndex + 1; i < route.size(); i++) {

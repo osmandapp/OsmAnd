@@ -20,13 +20,19 @@ public class TrackStartPointFinder {
 	private static final float MIN_SPEED_FOR_BEARING = 1;
 	private static final double MAX_BEARING_DIFF = 90;
 
+	private final List<Location> track;
+
+	public TrackStartPointFinder(List<Location> track) {
+		this.track = track;
+	}
+
 	/**
 	 * @param maxDistanceToFinish only points whose distance along the track to its end is at most this are
 	 *                            considered (on recalculation: what was left of the previous route), or
 	 *                            a negative value for no limit
 	 * @return index of the point to start from, 0 for an empty track or no position
 	 */
-	public static int findStartIndex(List<Location> track, Location position, float maxDistanceToFinish) {
+	public int findStartIndex(Location position, float maxDistanceToFinish) {
 		int size = track.size();
 		if (position == null || size == 0) {
 			return 0;
@@ -51,7 +57,7 @@ public class TrackStartPointFinder {
 		}
 		boolean moving = position.hasBearing() && (!position.hasSpeed() || position.getSpeed() >= MIN_SPEED_FOR_BEARING);
 		// standing at the start of the track means following the whole track, even a loop that never leaves the area
-		boolean atTrackStart = first == 0 && dist[0] <= SAME_PLACE_DISTANCE && (!moving || sameDirection(track, 0, position));
+		boolean atTrackStart = first == 0 && dist[0] <= SAME_PLACE_DISTANCE && (!moving || sameDirection(0, position));
 		float nearDist = minDist + SAME_PLACE_DISTANCE;
 		float leaveDist = nearDist + SAME_PLACE_DISTANCE;
 		int earliest = -1;
@@ -63,7 +69,7 @@ public class TrackStartPointFinder {
 				if (passNearest != -1) {
 					int candidate = passStart == 0 && atTrackStart ? 0 : passNearest;
 					if (dist[candidate] <= nearDist) {
-						if (!moving || sameDirection(track, candidate, position)) {
+						if (!moving || sameDirection(candidate, position)) {
 							return candidate;
 						}
 						if (earliest == -1) {
@@ -85,7 +91,7 @@ public class TrackStartPointFinder {
 		return earliest;
 	}
 
-	private static boolean sameDirection(List<Location> track, int index, Location position) {
+	private boolean sameDirection(int index, Location position) {
 		int from = index < track.size() - 1 ? index : index - 1;
 		if (from < 0) {
 			return true;
