@@ -1850,6 +1850,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		return useMapCenter;
 	}
 
+	public boolean isAddressSearch() {
+		return addressSearch;
+	}
+
 	private void startLocationUpdate() {
 		OsmAndLocationProvider locationProvider = app.getLocationProvider();
 		locationProvider.removeCompassListener(locationProvider.getNavigationInfo());
