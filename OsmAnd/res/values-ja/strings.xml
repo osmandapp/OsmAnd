@@ -1944,7 +1944,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="empty_state_favourites_desc">お気に入りはインポートするか、マップ上でマークした地点を追加できます。</string>
     <string name="move_point">ポイントの移動</string>
     <string name="total_donations">寄付総額</string>
-    <string name="day_off_label">OFF</string>
+    <string name="day_off_label">休み</string>
     <string name="winter_and_ski_renderer">ウィンター＆スキー</string>
     <string name="touring_view_renderer">ツーリングビュー</string>
     <string name="nautical_renderer">船舶</string>

@@ -11,6 +11,9 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="opening_hours_public_holiday">Public holidays</string>
+	<string name="opening_hours_school_holiday">School holidays</string>
+	<string name="opening_hours_easter">Easter</string>
 	<string name="ais_connection_not_set_up">Not set up</string>
 	<string name="ais_connection_not_connected">Not connected</string>
 	<string name="ais_connection_connecting">Connecting…</string>
@@ -5791,7 +5794,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="move_point">Move Point</string>
     <string name="osm_recipients_label">OSM recipients</string>
     <string name="total_donations">Total donations</string>
-    <string name="day_off_label">off</string>
+    <string name="day_off_label">closed</string>
     <string name="winter_and_ski_renderer">Winter and ski</string>
     <string name="touring_view_renderer">Touring view</string>
     <string name="nautical_renderer">Nautical</string>

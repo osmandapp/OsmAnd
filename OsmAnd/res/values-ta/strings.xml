@@ -927,7 +927,7 @@
     <string name="move_point">நகரும் புள்ளி</string>
     <string name="osm_recipients_label">OSM பெறுபவர்கள்</string>
     <string name="total_donations">மொத்த நன்கொடைகள்</string>
-    <string name="day_off_label">தொலைவில் உள்ள</string>
+    <string name="day_off_label">விடுமுறை</string>
     <string name="winter_and_ski_renderer">குளிர்காலம் மற்றும் பற்றுக் கரண்டி</string>
     <string name="touring_view_renderer">சுற்றுப்பயண காட்சி</string>
     <string name="nautical_renderer">கடலோடிகளுக்குரிய</string>

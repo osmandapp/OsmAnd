@@ -1744,7 +1744,7 @@
     <string name="lang_lo">Laó</string>
     <string name="disable_recording_once_app_killed">Hindra sjálfstæða skráningu ferils</string>
     <string name="save_track_interval_descr">Veldu millibil skráninga í leiðarskráningu á meðan leiðsögn stendur</string>
-    <string name="day_off_label">slökkt</string>
+    <string name="day_off_label">lokað</string>
     <string name="winter_and_ski_renderer">Vetur og skíði</string>
     <string name="touring_view_renderer">Ferðakort</string>
     <string name="nautical_renderer">Sjókort</string>
