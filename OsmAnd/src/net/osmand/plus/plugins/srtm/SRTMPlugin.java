@@ -14,6 +14,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
@@ -53,11 +54,14 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.shared.palette.data.PaletteChangeEvent;
+import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -787,6 +791,22 @@ public class SRTMPlugin extends OsmandPlugin {
 				mapRendererContext.removeCachedHeightmapTiles(filePath);
 			} else {
 				mapRendererContext.updateCachedHeightmapTiles();
+			}
+		}
+	}
+
+	public void onPaletteChanged(@NonNull PaletteChangeEvent event) {
+		if (event instanceof PaletteChangeEvent.Updated updated
+				&& updated.getItem() instanceof PaletteItem.Gradient gradient) {
+			// Terrain tiles are cached by palette file name, so an in-place edit must drop them
+			String fileName = gradient.getSource().getFileName();
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				File file = new File(app.getAppPath(IndexConstants.CLR_PALETTE_DIR), fileName);
+				mapRendererContext.removeCachedHeightmapTiles(file.getAbsolutePath());
+			}
+			if (fileName.equals(getTerrainMode().getMainFileName())) {
+				app.runInUIThread(() -> updateLayers(app, null));
 			}
 		}
 	}
