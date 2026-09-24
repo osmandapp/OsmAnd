@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="search_along_the_route">Along the route</string>
+	<string name="search_along_route_distance">%1$s ahead • %2$s from the route</string>
 	<string name="contour_labels">Labels</string>
 	<string name="contour_label_direction_descr">Uphill: the top of each height number faces higher ground, as on paper topographic maps. The short ticks on the lines point downhill.</string>
 	<string name="rendering_attr_contourLabelDirection_name">Label direction</string>
