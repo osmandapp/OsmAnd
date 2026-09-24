@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadItem;
@@ -40,9 +41,6 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.callback.ProgressListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.plus.widgets.popup.PopUpMenu;
-import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -51,8 +49,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ContourLinesMenu {
@@ -146,8 +142,10 @@ public class ContourLinesMenu {
 					plugin.selectPropertyValue(mapActivity, contourDensityProp, densityPref,
 							() -> onPropertyValueSelected(uiAdapter, item, contourDensityProp));
 				} else if (labelDirectionProp != null && itemId == labelDirectionName.hashCode()) {
-					showLabelDirectionMenu(mapActivity, view, labelDirectionProp, labelDirectionPref,
-							() -> onPropertyValueSelected(uiAdapter, item, labelDirectionProp));
+					View anchor = view != null ? view.findViewById(R.id.description) : null;
+					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
+					ConfigureMapDialogs.showRenderingPropertyMenu(mapActivity, anchor, labelDirectionProp,
+							labelDirectionPref, nightMode, () -> onPropertyValueSelected(uiAdapter, item, labelDirectionProp));
 				}
 				return false;
 			}
@@ -273,38 +271,6 @@ public class ContourLinesMenu {
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setLayout(R.layout.card_bottom_divider)
 				);
-	}
-
-	private static void showLabelDirectionMenu(@NonNull MapActivity mapActivity, @Nullable View anchorView,
-	                                           @NonNull RenderingRuleProperty property,
-	                                           @NonNull CommonPreference<String> preference,
-	                                           @NonNull Runnable onSelected) {
-		if (anchorView == null) {
-			return;
-		}
-		OsmandApplication app = mapActivity.getApp();
-		List<String> values = new ArrayList<>();
-		values.add("");
-		values.addAll(Arrays.asList(property.getPossibleValues()));
-		String selected = property.containsValue(preference.get()) ? preference.get() : "";
-
-		List<PopUpMenuItem> items = new ArrayList<>();
-		for (String value : values) {
-			String name = Algorithms.isEmpty(value) ? property.getDefaultValueDescription() : value;
-			items.add(new PopUpMenuItem.Builder(app)
-					.setTitle(AndroidUtils.getRenderingStringPropertyValue(app, name))
-					.setSelected(value.equals(selected))
-					.setOnClickListener(v -> {
-						preference.set(value);
-						onSelected.run();
-					})
-					.create());
-		}
-		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = anchorView;
-		displayData.menuItems = items;
-		displayData.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		PopUpMenu.show(displayData);
 	}
 
 	private static ContextMenuItem createDownloadSrtmMapsItem(MapActivity mapActivity) {
