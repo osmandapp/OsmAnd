@@ -47,6 +47,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	private static final Log LOG = PlatformUtil.getLog(SpatialTextSearch.class);
 
 	private static final int SEARCH_PRIORITY = SEARCH_ADDRESS_BY_NAME_PRIORITY;
+	private static final int INCREASED_SEARCH_RADIUS_KM = 500;
 
 	private final MapPoiTypes poiTypes;
 	private final SpatialTextSearch spatialTextSearch = new SpatialTextSearch();
@@ -190,6 +191,9 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 				? SpatialTextSearchSettings.defaultSettings()
 				: SpatialTextSearchSettings.suggestionSettings();
 		settings.LANG_DEDUPLICATE = phrase.getSettings().getLang();
+		if (phrase.getRadiusLevel() > 1) {
+			settings.SUGGESTED_SEARCH_RADIUS_KM = Math.max(settings.SUGGESTED_SEARCH_RADIUS_KM, INCREASED_SEARCH_RADIUS_KM);
+		}
 		return settings;
 	}
 
@@ -204,7 +208,17 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
-		return false;
+		return phrase.getRadiusLevel() == 1;
+	}
+
+	@Override
+	public int getMinimalSearchRadius(SearchPhrase phrase) {
+		return createSpatialSettings(phrase).SUGGESTED_SEARCH_RADIUS_KM * 1000;
+	}
+
+	@Override
+	public int getNextSearchRadius(SearchPhrase phrase) {
+		return INCREASED_SEARCH_RADIUS_KM * 1000;
 	}
 
 	private SearchResult convertResult(SearchPhrase phrase, SpatialSearchContext context, SpatialSearchResult ssr) {
