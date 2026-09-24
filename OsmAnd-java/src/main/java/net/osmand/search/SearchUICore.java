@@ -163,7 +163,16 @@ public class SearchUICore {
 			if (Algorithms.isEmpty(sr)) {
 				return this;
 			}
-			if (resortAll) {
+			if (skipSorting) {
+				// spatial search results come already ranked by the engine: keep its order
+				this.searchResults.addAll(sortNotSpatialResultsInPlace(sr));
+				if (removeDuplicates) {
+					if (resortAll) {
+						uniteSearchResultsByOsmIdOrWikidata(this.searchResults);
+					}
+					filterSearchDuplicateResults();
+				}
+			} else if (resortAll) {
 				this.searchResults.addAll(sr);
 				if (removeDuplicates) {
 					long start = System.currentTimeMillis(), size = this.searchResults.size();
@@ -315,6 +324,27 @@ public class SearchUICore {
 			if (debugMode) {
 				LOG.info("Search results sorted <" + phrase + ">");
 			}
+		}
+
+		// results of other APIs (e.g. poi categories) are sorted among themselves and keep their slots
+		private List<SearchResult> sortNotSpatialResultsInPlace(List<SearchResult> sr) {
+			List<Integer> slots = new ArrayList<>();
+			List<SearchResult> other = new ArrayList<>();
+			for (int i = 0; i < sr.size(); i++) {
+				if (sr.get(i).spatialResult == null) {
+					slots.add(i);
+					other.add(sr.get(i));
+				}
+			}
+			if (other.size() < 2) {
+				return sr;
+			}
+			other.sort(new SearchResultComparator(phrase));
+			List<SearchResult> res = new ArrayList<>(sr);
+			for (int i = 0; i < slots.size(); i++) {
+				res.set(slots.get(i), other.get(i));
+			}
+			return res;
 		}
 
 		public void filterSearchDuplicateResults() {
