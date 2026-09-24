@@ -1725,7 +1725,7 @@
     <string name="local_map_names">שמות מקומיים</string>
     <string name="index_item_nation_addresses">כתובות בפריסה ארצית</string>
     <string name="local_osm_changes_delete_all_confirm">למחוק %1$d שינויים מ־OSM\?</string>
-    <string name="day_off_label">‏‏כבוי</string>
+    <string name="day_off_label">סגור</string>
     <string name="winter_and_ski_renderer">חורף וסקי</string>
     <string name="tunnel_warning">מנהרה לפניך</string>
     <string name="show_tunnels">מנהרות</string>

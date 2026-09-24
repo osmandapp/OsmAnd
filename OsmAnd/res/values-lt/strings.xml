@@ -1823,7 +1823,7 @@
     <string name="all_data">Visi duomenys</string>
     <string name="osm_notes">OSM pastabos</string>
     <string name="import_track">Importuoti GPX failą</string>
-    <string name="day_off_label">išj.</string>
+    <string name="day_off_label">nedirba</string>
     <string name="toast_empty_name_error">Neįvardinta vieta</string>
     <string name="tunnel_warning">Priekyje tunelis</string>
     <string name="show_tunnels">Tuneliai</string>

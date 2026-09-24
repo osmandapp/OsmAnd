@@ -2592,7 +2592,7 @@
     <string name="wikivoyage_download_pics_descr">صور المقالة يمكن تحملها للاستخدام بدون اتصال.
 \nدائماً متوفرة في \'اكتشف\'←\'خيارات\'.</string>
     <string name="send_report">إرسال التقرير</string>
-    <string name="day_off_label">معطّل</string>
+    <string name="day_off_label">مغلق</string>
     <string name="uninstall_speed_cameras">إلغاء تثبيت كاميرات السرعة</string>
     <string name="map_widget_group_glide_ratio">نسبة الانحدار</string>
     <string name="srtm_purchase_header">قم بشراء وتثبيت الملحق المساعد \"الخرائط الجغرافية\" لإظهار المناطق المرتفعة المتدرجة.</string>

@@ -4688,7 +4688,7 @@
     <string name="ais_cpa_settings">Nastavení týkající se CPA</string>
     <string name="ais_cpa_warning_time">Výstražná doba před dosažením nejbližšího bodu přiblížení (CPA)</string>
     <string name="ais_cpa_warning_distance">Výstražná vzdálenost pro nejbližší bod přiblížení (CPA)</string>
-    <string name="plugin_ais_tracker_name">Sledování AIS plavidel</string>
+    <string name="plugin_ais_tracker_name">Sledování plavidel (AIS)</string>
     <string name="plugin_ais_tracker_disclaimer">UPOZORNĚNÍ\n\nTento plugin je hobby projekt a není určen k použití v kritických aplikacích. Nezaručuje spolehlivost ani přesnost. Nespoléhejte se na tento software při navigaci, v situacích ohrožujících život ani při jakýchkoli jiných zásadních činnostech.</string>
     <string name="ais_address_nmea_server_description">Definujte IP adresu datového zdroje NMEA (v případě použití TCP)</string>
     <string name="ais_cpa_warning_time_description">Pokud TCPA (čas do největšího přiblížení) s jiným plavidlem klesne pod definovanou mez, plavidlo se zvýrazní červeně.</string>

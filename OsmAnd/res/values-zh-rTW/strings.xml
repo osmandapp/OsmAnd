@@ -1728,7 +1728,7 @@
     <string name="shared_string_marker">標記</string>
     <string name="shared_string_without_name">沒有名稱</string>
     <string name="lang_lo">寮語</string>
-    <string name="day_off_label">關閉</string>
+    <string name="day_off_label">休息</string>
     <string name="winter_and_ski_renderer">冬季和滑雪</string>
     <string name="touring_view_renderer">旅遊風景</string>
     <string name="nautical_renderer">航海</string>
@@ -4513,7 +4513,7 @@
     <string name="ais_cpa_warning_distance_description">如果 CPA 小於此值（最接近點）低於定義的臨界值，且 TCPA（到達 CPA 的時間）在「到達 CPA 的警告時間」設定中所設定的警告時間內，則船隻會以紅色突顯。</string>
     <string name="ais_address_settings">IP 位址設定</string>
     <string name="ais_load_data">模擬船舶交通</string>
-    <string name="plugin_ais_tracker_disclaimer">免責聲明\n\n本軟體外掛為業餘開發專案，並未經過專業可靠性與精確度驗證。使用者務必謹慎，切勿在任何情況下（尤其是導航或可能涉及生命安全的場合）完全依賴本軟體。</string>
+    <string name="plugin_ais_tracker_disclaimer">聲明\n\n這個套件屬於業餘專案，並非設定在關鍵應用上，我們不保證可靠性或是準確性。不要僅倚賴這套件用在導航，生命安全或是其他基本操作。</string>
     <string name="ais_port_nmea_server_description">定義 NMEA 資料來源的 TCP 端點數字</string>
     <string name="ais_object_lost_timeout_description">設定 AIS 物件訊號消失後顯示逾時時間： 移除指定時間內未接收訊號的 AIS 物件。</string>
     <string name="ais_nmea_protocol">NMEA 資料接收通訊協定</string>

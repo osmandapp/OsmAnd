@@ -2269,7 +2269,7 @@
     <string name="dd_dddddd_format">度度.度度度度度度°</string>
     <string name="dd_mm_ss_format">度度°分分′秒秒″</string>
     <string name="nautical_renderer">航海</string>
-    <string name="day_off_label">关闭</string>
+    <string name="day_off_label">休息</string>
     <string name="lang_lo">老挝语</string>
     <string name="shared_string_markers">标记</string>
     <string name="shared_string_finish">完成</string>

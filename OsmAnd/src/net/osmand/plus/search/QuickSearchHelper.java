@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReaderStats.SearchStat;
 import net.osmand.data.Amenity;
@@ -45,6 +44,7 @@ import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -61,15 +61,16 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
+import net.osmand.util.SearchAlgorithms;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 
 public class QuickSearchHelper implements ResourceListener {
@@ -82,6 +83,8 @@ public class QuickSearchHelper implements ResourceListener {
 	public static final int SEARCH_WPT_OBJECT_PRIORITY = 152;
 	public static final int SEARCH_TRACK_API_PRIORITY = 150;
 	public static final int SEARCH_TRACK_OBJECT_PRIORITY = 153;
+	public static final int SEARCH_GPX_MAX_RESULTS = 7;
+	public static final int SEARCH_GPX_MAX_RESULTS_PER_TYPE = 4;
 	public static final int SEARCH_INDEX_ITEM_API_PRIORITY = 150;
 	public static final int SEARCH_INDEX_ITEM_PRIORITY = 150;
 	public static final int SEARCH_HISTORY_API_PRIORITY = 150;
@@ -206,6 +209,15 @@ public class QuickSearchHelper implements ResourceListener {
 		return amenitySearch.searchDetailedAmenity(request, settings);
 	}
 
+	@Nullable
+	private static NameStringMatcher createGpxNameMatcher(@NonNull SearchPhrase phrase) {
+		String text = phrase.getFullSearchPhrase();
+		if (text.length() <= 1 && phrase.isNoSelectedType()) {
+			return null;
+		}
+		return new NameStringMatcher(text.trim(), StringMatcherMode.CHECK_CONTAINS);
+	}
+
 	public static class SearchWptAPI extends SearchBaseAPI {
 
 		private final OsmandApplication app;
@@ -226,9 +238,17 @@ public class QuickSearchHelper implements ResourceListener {
 				return false;
 			}
 
+			NameStringMatcher nameMatcher = createGpxNameMatcher(phrase);
+			int count = 0;
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			for (SelectedGpxFile selectedGpx : list) {
 				for (WptPt point : selectedGpx.getGpxFile().getPointsList()) {
+					if (count >= SEARCH_GPX_MAX_RESULTS_PER_TYPE || resultMatcher.isCancelled()) {
+						return true;
+					}
+					if (nameMatcher != null && !nameMatcher.matches(point.getName())) {
+						continue;
+					}
 					SearchResult sr = new SearchResult(phrase);
 					sr.localeName = point.getName();
 					sr.object = point;
@@ -238,15 +258,8 @@ public class QuickSearchHelper implements ResourceListener {
 					//sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
 					sr.relatedObject = selectedGpx.getGpxFile();
 					sr.preferredZoom = SearchCoreFactory.PREFERRED_WPT_ZOOM;
-					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
-						resultMatcher.publish(sr);
-					} else {
-						NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
-								StringMatcherMode.CHECK_CONTAINS);
-						if (matcher.matches(sr.localeName)) {
-							resultMatcher.publish(sr);
-						}
-					}
+					resultMatcher.publish(sr);
+					count++;
 				}
 			}
 			return true;
@@ -782,27 +795,45 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			File tracksDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-			List<GPXInfo> gpxInfoList = new ArrayList<>();
-			GpxUiHelper.readGpxDirectory(tracksDir, gpxInfoList, "", false);
-			for (GPXInfo gpxInfo : gpxInfoList) {
+			int limit = Math.min(SEARCH_GPX_MAX_RESULTS_PER_TYPE,
+					SEARCH_GPX_MAX_RESULTS - countResults(resultMatcher, ObjectType.WPT));
+			boolean matchAll = phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType();
+			String query = normalizeGpxName(phrase.getFullSearchPhrase().trim());
+			int count = 0;
+			for (GpxDataItem item : app.getGpxDbHelper().getItems()) {
+				if (count >= limit || resultMatcher.isCancelled()) {
+					break;
+				}
+				String fileName = GpxUiHelper.getGpxFileRelativePath(app, item.getFile().absolutePath());
+				if (!matchAll && !normalizeGpxName(fileName).contains(query)) {
+					continue;
+				}
 				SearchResult searchResult = new SearchResult(phrase);
 				searchResult.objectType = ObjectType.GPX_TRACK;
-				searchResult.localeName = GpxUiHelper.getGpxFileRelativePath(app, gpxInfo.getFileName());
-				searchResult.relatedObject = gpxInfo;
+				searchResult.localeName = fileName;
+				searchResult.relatedObject = new GPXInfo(fileName, SharedUtil.jFile(item.getFile()));
 				searchResult.priority = SEARCH_TRACK_OBJECT_PRIORITY;
 				searchResult.preferredZoom = SearchCoreFactory.PREFERRED_GPX_FILE_ZOOM;
-				if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
-					resultMatcher.publish(searchResult);
-				} else {
-					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
-							StringMatcherMode.CHECK_CONTAINS);
-					if (matcher.matches(searchResult.localeName)) {
-						resultMatcher.publish(searchResult);
-					}
-				}
+				resultMatcher.publish(searchResult);
+				count++;
 			}
 			return true;
+		}
+
+		// A collator match costs ~0.5 ms per name: seconds for a few thousand tracks on every keystroke
+		@NonNull
+		private static String normalizeGpxName(@NonNull String name) {
+			return SearchAlgorithms.alignChars(name.toLowerCase(Locale.getDefault()));
+		}
+
+		private static int countResults(@NonNull SearchResultMatcher resultMatcher, @NonNull ObjectType type) {
+			int count = 0;
+			for (SearchResult result : resultMatcher.getRequestResults()) {
+				if (result.objectType == type) {
+					count++;
+				}
+			}
+			return count;
 		}
 
 		@Override

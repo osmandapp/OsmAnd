@@ -1919,7 +1919,7 @@
     <string name="read_wikipedia_offline_description">الحصول على اشتراك أوسماند لايف لقراءة مقالات ويكيبيديا و ويكي الرحلات دون اتصال.</string>
     <string name="maps_you_need_descr">استنادا إلى المقالات التي قمتم بحفظها، الخرائط التالية موصى بتحميلها:</string>
     <string name="start_editing_card_image_text">دليل السفر إلى جميع أنحاء العالم مجاناً.</string>
-    <string name="day_off_label">معطّل</string>
+    <string name="day_off_label">مغلق</string>
     <string name="unirs_render_descr">تعديل النمط الافتراضي لزيادة تباين المشاة و طرق الدراجات .يستخدم Legasy Mapnik colors .</string>
     <string name="wikivoyage_travel_guide_descr">أدلةالسفر إلى الأماكن الأكثر إثارة على هذا الكوكب, داخل أوسماند دون اتصال بالإنترنت.</string>
     <string name="in_app_purchase_desc">دفع مرة واحدة</string>

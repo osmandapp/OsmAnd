@@ -506,6 +506,7 @@ public class GpxRouteHelper {
         newParams.ctx = params.ctx;
         newParams.calculationProgress = params.calculationProgress;
         newParams.mode = params.mode;
+        newParams.fast = params.fast;
         newParams.leftSide = params.leftSide;
         RouteCalculationResult newRes = null;
         try {
@@ -519,6 +520,9 @@ public class GpxRouteHelper {
             }
         } catch (IOException | SAXException | ParserConfigurationException e) {
             log.info("FindOfflineRouteSegment error", e);
+        }
+        if (newRes != null && !newRes.isCalculated()) {
+            log.warn("FindOfflineRouteSegment failed: " + newRes.getErrorMessage());
         }
         return newRes;
     }

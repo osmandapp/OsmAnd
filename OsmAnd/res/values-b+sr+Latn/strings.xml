@@ -266,7 +266,7 @@
     <string name="nautical_renderer">Nautika</string>
     <string name="touring_view_renderer">Turistički pregled</string>
     <string name="winter_and_ski_renderer">Zima i skijanje</string>
-    <string name="day_off_label">Isključeno</string>
+    <string name="day_off_label">neradni</string>
     <string name="total_donations">Ukupna donacija</string>
     <string name="osm_recipients_label">OSM primaoci</string>
     <string name="move_point">Pomeri tačku</string>
