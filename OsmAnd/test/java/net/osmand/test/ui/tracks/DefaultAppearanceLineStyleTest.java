@@ -5,7 +5,6 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
-import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
@@ -17,6 +16,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import androidx.compose.ui.test.junit4.ComposeTestRule;
 import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -39,9 +39,9 @@ import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.test.common.AndroidTest;
+import net.osmand.test.common.ComposePopupMenu;
 import net.osmand.test.common.ResourcesImporter;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,7 +55,6 @@ import java.util.Collections;
  * selector), the value that gets persisted, and the value the map renderer
  * would actually use to draw a track that has no line style of its own.
  */
-@Ignore
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class DefaultAppearanceLineStyleTest extends AndroidTest {
@@ -64,6 +63,9 @@ public class DefaultAppearanceLineStyleTest extends AndroidTest {
 
 	@Rule
 	public ActivityScenarioRule<MapActivity> scenarioRule = new ActivityScenarioRule<>(MapActivity.class);
+
+	@Rule
+	public ComposeTestRule composeRule = ComposePopupMenu.rule();
 
 	@Test
 	public void settingFolderDefaultLineStyleUpdatesUiPersistsAndAppliesOnMove() throws Throwable {
@@ -80,9 +82,7 @@ public class DefaultAppearanceLineStyleTest extends AndroidTest {
 		// --- UI: open the Line style card and pick "Dashed" from its popup selector ---
 		onView(allOf(withId(R.id.card_selector), isDescendantOfA(lineStyleCardHeader())))
 				.perform(click());
-		onView(allOf(withId(R.id.title), withText(R.string.gpx_line_style_dashed)))
-				.inRoot(isPlatformPopup())
-				.perform(click());
+		ComposePopupMenu.clickItem(composeRule, app.getString(R.string.gpx_line_style_dashed));
 
 		// the card's own selector row must reflect the new choice immediately
 		onView(allOf(withId(R.id.title), isDescendantOfA(allOf(withId(R.id.card_selector), isDescendantOfA(lineStyleCardHeader())))))
