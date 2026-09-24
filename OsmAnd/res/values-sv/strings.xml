@@ -4962,7 +4962,6 @@
     <string name="share_favorites_preparation_failed">Kunde inte förbereda filer för delning.</string>
     <string name="share_favorites_share_failed">Kunde inte dela filen.</string>
     <string name="share_favorites_missing_media_warning">Några av de bifogade filerna kunde inte inkluderas.</string>
-    <string name="search_on_web">Sök på nätet</string>
     <string name="always_keep_local_copy">Behåll alltid en lokal kopia</string>
     <string name="always_keep_local_copy_description">Media förblir bifogade även efter det att originalet raderas från galleriet eller filerna.</string>
     <string name="astro_lunar_eclipse">Månförmörkelse</string>

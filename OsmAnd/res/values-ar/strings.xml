@@ -5197,7 +5197,6 @@
     <string name="share_favorites_preparation_failed">تعذر إعداد الملفات للمشاركة.</string>
     <string name="share_favorites_share_failed">تعذر مشاركة الملف.</string>
     <string name="share_favorites_missing_media_warning">تعذر تضمين بعض الوسائط المرفقة.</string>
-    <string name="search_on_web">ابحث على الويب</string>
     <string name="release_5_4">• واجهة بحث مُحسّنة: فرز، وفلاتر تصنيف، ومظهر أكثر أناقة\n\n• إرفاق الصور والوسائط بالمفضلة\n\n• المفضلة: دعم المجموعات الفرعية والمجلدات القابلة للتثبيت\n\n• الإحداثيات: البحث، وشبكة الخريطة، وعرض نقاط الاهتمام تدعم الآن نظام الإحداثيات EPSG ومحدد موقع ميدنهيد\n\n• إصلاح انقطاعات التنقل؛ التبديل بين التوجيه القياسي والسريع\n\n• ضبط مقياس خريطة أندرويد أوتو بشكل منفصل عن هاتفك\n\n• بحث مكاني جديد - البحث عن الأماكن والبحث حولها\n\n• إضافة كسوف الشمس وخسوف القمر إلى علم الفلك</string>
     <string name="shared_string_note">ملاحظة</string>
     <string name="media_storage_camera_folder_note_descr">يتم حفظ الصوت في مجلد Music/OsmAnd.</string>

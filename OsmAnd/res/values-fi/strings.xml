@@ -3758,7 +3758,6 @@
     <string name="share_favorites_preparation_failed">Ei voitu valmistella tiedostoa jaettavaksi.</string>
     <string name="share_favorites_share_failed">Tiedostoa ei voitu jakaa.</string>
     <string name="share_favorites_missing_media_warning">Eräitä liitettyjä medioita ei voitu ottaa mukaan.</string>
-    <string name="search_on_web">Etsi verkosta</string>
     <string name="shared_string_note">Huomautus</string>
     <string name="media_storage_camera_folder_note_descr">Audio on tallennettu Music/OsmAnd.</string>
     <string name="always_keep_local_copy">Säilytä aina alkuperäinen kopio</string>
