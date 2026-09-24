@@ -170,7 +170,8 @@ public class IntentHelper {
 			if (GeoActionHelper.isGeoActionUri(uri)) {
 				String action = GeoPointParserUtil.parseGeoAction(uri.toString());
 				if (!Algorithms.isEmpty(action)) {
-					GeoActionHelper.executeAction(app, action, mapActivity);
+					boolean handled = GeoActionHelper.executeAction(app, action, mapActivity);
+					LOG.info("Geo action '" + action + "' handled: " + handled);
 				}
 				clearIntent(intent);
 				return true;

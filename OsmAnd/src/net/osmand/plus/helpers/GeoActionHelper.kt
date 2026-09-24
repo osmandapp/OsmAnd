@@ -8,7 +8,10 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.auto.NavigationSession
+import net.osmand.plus.auto.screens.RequestPermissionScreen
+import net.osmand.plus.auto.screens.RequestPurchaseScreen
 import net.osmand.plus.auto.TripUtils
+import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.base.ContextMenuFragment.MenuState
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment
 import net.osmand.plus.routing.NextDirectionInfo
@@ -73,8 +76,24 @@ object GeoActionHelper {
 		mapActivity: MapActivity? = null,
 		session: NavigationSession? = null
 	): Boolean {
-		if (action.isNullOrEmpty()) return false
+		if (action.isNullOrEmpty()) {
+			return false
+		}
+		if (session != null) {
+			if (!InAppPurchaseUtils.isAndroidAutoAvailable(app) || !session.isLocationPermissionAvailable) {
+				LOG.info("Ignoring geo action '$action': purchase or permission check failed")
+				return false
+			}
+		}
 		return executeActionInternal(app, action, mapActivity, session)
+	}
+
+	private fun getActiveNavSession(app: OsmandApplication, session: NavigationSession?): NavigationSession? {
+		val navSession = session ?: app.carNavigationSession ?: return null
+		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app) || !navSession.isLocationPermissionAvailable) {
+			return null
+		}
+		return navSession
 	}
 
 	private fun executeActionInternal(
@@ -85,7 +104,7 @@ object GeoActionHelper {
 	): Boolean {
 		return when (action) {
 			ACTION_EXIT_NAVIGATION -> {
-				val navSession = session ?: app.carNavigationSession
+				val navSession = getActiveNavSession(app, session)
 				if (navSession != null) {
 					navSession.stopNavigation()
 				} else {
@@ -149,21 +168,25 @@ object GeoActionHelper {
 				true
 			}
 			ACTION_FOLLOW_MODE -> {
-				val navSession = session ?: app.carNavigationSession
+				val navSession = getActiveNavSession(app, session)
 				app.runInUIThread {
 					if (navSession != null) {
 						navSession.navigationCarSurface?.handleRecenter()
 					} else {
-						mapActivity?.mapView?.backToLocation() ?: app.mapViewTrackingUtilities.backToLocationImpl()
+						app.mapViewTrackingUtilities.backToLocationImpl()
 					}
 				}
 				true
 			}
 			ACTION_GO_BACK -> {
-				val navSession = session ?: app.carNavigationSession
+				val navSession = getActiveNavSession(app, session)
 				app.runInUIThread {
 					if (navSession != null) {
 						val screenManager = navSession.carContext.getCarService(ScreenManager::class.java)
+						val topScreen = screenManager.top
+						if (topScreen is RequestPurchaseScreen || topScreen is RequestPermissionScreen) {
+							return@runInUIThread
+						}
 						if (screenManager.screenStack.size > 1) {
 							screenManager.pop()
 						}
