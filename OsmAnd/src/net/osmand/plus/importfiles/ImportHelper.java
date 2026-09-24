@@ -142,7 +142,7 @@ public class ImportHelper {
 	}
 
 	public void importFavoritesFromGpx(GpxFile gpxFile, String fileName) {
-		importFavoritesImpl(gpxFile, fileName, false);
+		importFavoritesImpl(gpxFile, fileName, false, null);
 	}
 
 	public void handleGpxImport(GpxFile result, String name, long fileSize, boolean save, boolean useImportDir, boolean showSnackbar) {
@@ -175,12 +175,23 @@ public class ImportHelper {
 	}
 
 	public void handleFavouritesImport(@NonNull Uri uri) {
+		handleFavouritesImport(uri, null);
+	}
+
+	public void handleFavouritesImport(@NonNull Uri uri, @Nullable String targetFolder) {
 		String scheme = uri.getScheme();
 		boolean isFileIntent = "file".equals(scheme);
 		boolean isOsmandSubdir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(uri.getPath()));
 		boolean saveFile = !isFileIntent || !isOsmandSubdir;
 		String fileName = isFileIntent ? new File(uri.getPath()).getName() : getNameFromContentUri(app, uri);
-		handleGpxOrFavouritesImport(uri, fileName, saveFile, false, true, false, false);
+		CallbackWithObject<Pair<GpxFile, Long>> callback = pair -> {
+			if (pair != null) {
+				importGpxOrFavourites(pair.first, fileName, pair.second, saveFile, false,
+						true, false, false, targetFolder);
+			}
+			return true;
+		};
+		executeImportTask(new GpxImportTask(activity, uri, fileName, callback));
 	}
 
 	public void handleGpxFilesImport(@NonNull List<Uri> filesUri, @NonNull File destinationDir,
@@ -300,8 +311,9 @@ public class ImportHelper {
 		executeImportTask(new GpxImportTask(activity, uri, fileName, callback));
 	}
 
-	private void importFavoritesImpl(GpxFile gpxFile, String fileName, boolean forceImportFavourites) {
-		executeImportTask(new FavoritesImportTask(activity, gpxFile, fileName, forceImportFavourites));
+	private void importFavoritesImpl(GpxFile gpxFile, String fileName, boolean forceImportFavourites,
+	                                 @Nullable String targetFolder) {
+		executeImportTask(new FavoritesImportTask(activity, gpxFile, fileName, forceImportFavourites, targetFolder));
 	}
 
 	public void handleObfImport(Uri obfFile, String name) {
@@ -675,6 +687,14 @@ public class ImportHelper {
 	protected void importGpxOrFavourites(GpxFile gpxFile, String fileName, long fileSize, boolean save,
 	                                     boolean useImportDir, boolean forceImportFavourites,
 	                                     boolean forceImportGpx, boolean showSnackbar) {
+		importGpxOrFavourites(gpxFile, fileName, fileSize, save, useImportDir, forceImportFavourites,
+				forceImportGpx, showSnackbar, null);
+	}
+
+	private void importGpxOrFavourites(GpxFile gpxFile, String fileName, long fileSize, boolean save,
+	                                   boolean useImportDir, boolean forceImportFavourites,
+	                                   boolean forceImportGpx, boolean showSnackbar,
+	                                   @Nullable String targetFolder) {
 		if (gpxFile == null || gpxFile.isPointsEmpty()) {
 			if (forceImportFavourites) {
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
@@ -703,7 +723,7 @@ public class ImportHelper {
 		}
 
 		if (forceImportFavourites) {
-			importFavoritesImpl(gpxFile, fileName, true);
+			importFavoritesImpl(gpxFile, fileName, true, targetFolder);
 		} else if (fileName != null) {
 			if (forceImportGpx || !Algorithms.isEmpty(gpxFile.getTracks())) {
 				handleResult(gpxFile, fileName, fileSize, save, useImportDir, showSnackbar);
