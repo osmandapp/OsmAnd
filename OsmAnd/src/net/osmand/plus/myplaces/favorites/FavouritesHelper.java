@@ -1076,13 +1076,10 @@ public class FavouritesHelper {
 
 	public void updateGroupIconName(@NonNull FavoriteGroup group, @Nullable String iconName,
 	                                @NonNull SaveOption saveOption, boolean saveImmediately) {
-		if (saveOption.shouldUpdatePoints()) {
+		// "Original" (no icon) only clears the folder icon, each point retains its individual icon
+		if (saveOption.shouldUpdatePoints() && !Algorithms.isEmpty(iconName)) {
 			for (FavouritePoint point : group.getPoints()) {
-				if (Algorithms.isEmpty(iconName)) {
-					point.setIconId(getOriginalIconId(point));
-				} else {
-					point.setIconIdFromName(iconName);
-				}
+				point.setIconIdFromName(iconName);
 			}
 		}
 		if (saveOption.shouldUpdateGroup()) {
