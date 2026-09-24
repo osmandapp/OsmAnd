@@ -88,7 +88,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 				int iconId;
 				int backgroundColorRes;
 				if (osmNote.isOpened()) {
-					iconId = R.drawable.mx_special_symbol_remove;
+					iconId = R.drawable.mx_special_symbol_exclamation_mark;
 					backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
 				} else {
 					iconId = R.drawable.mx_special_symbol_check_mark;
