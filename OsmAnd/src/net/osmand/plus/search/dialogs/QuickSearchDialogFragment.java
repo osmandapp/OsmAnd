@@ -90,6 +90,7 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.POIMapLayer.SearchResultAmenity;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -658,20 +659,17 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (location == null) {
 			return null;
 		}
-		Amenity amenity = new Amenity();
+		Amenity amenity = new SearchResultAmenity(searchResult);
+		amenity.setId(mapObject.getId());
 		amenity.setLocation(location);
 		amenity.setName(QuickSearchListItem.getName(app, searchResult));
 		amenity.setType(app.getPoiTypes().getOtherPoiCategory());
 		amenity.setSubType("");
-		amenity.setAdditionalInfo(Amenity.GPX_ICON, getSpatialSearchMapIconName(searchResult));
+		String iconName = QuickSearchListItem.getAddressIconName(searchResult);
+		if (iconName != null) {
+			amenity.setAdditionalInfo(Amenity.GPX_ICON, iconName);
+		}
 		return amenity;
-	}
-
-	@NonNull
-	private String getSpatialSearchMapIconName(@NonNull SearchResult searchResult) {
-		return searchResult.objectType == ObjectType.HOUSE
-				? "ic_action_building"
-				: "ic_action_street_name";
 	}
 
 	private void clearSpatialSearchMapObjects() {

@@ -5157,7 +5157,7 @@
     <string name="obd_simulation_device">Simulačné zariadenie</string>
     <string name="favorite_confirm_delete_folder">Toto vymaže priečinok \"%1$s\", vrátane vnorených priečinkov a %2$d obľúbených bodov.</string>
     <string name="favorite_folder_rename_conflict">Priečinok s týmto názvom už existuje.</string>
-    <string name="favorite_folder_invalid_name">Názov priečinka nesmie obsahovať / alebo _%_</string>
+    <string name="favorite_folder_invalid_name">Názov priečinka nesmie obsahovať / alebo %1$s</string>
     <string name="favorite_folder_duplicate_message">Použite názov priečinka, ktorý ešte neexistuje.</string>
     <string name="favorite_folder_name">Názov priečinka</string>
     <string name="edit_folder">Upraviť priečinok</string>

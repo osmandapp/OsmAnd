@@ -35,6 +35,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.views.layers.POIMapLayer.SearchResultAmenity;
 import net.osmand.plus.views.layers.TransportStopHelper;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
@@ -251,6 +253,13 @@ public class AmenityMenuController extends MenuController {
 
 	public static String getTypeStr(@NonNull OsmandApplication app, @NonNull Amenity amenity) {
 		ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
+		if (amenity instanceof SearchResultAmenity searchResultAmenity) {
+			// the marker of an address result has no poi subtype, it is named as the result list names it
+			String typeName = QuickSearchListItem.getTypeName(app, searchResultAmenity.getSearchResult());
+			if (!Algorithms.isEmpty(typeName)) {
+				return typeName;
+			}
+		}
 		if (amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)) {
 			return getTypeWithDistanceStr(amenity, app);
 		} else if (amenity.getType() != null && amenity.getType().isWiki()) {

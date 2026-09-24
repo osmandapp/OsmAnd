@@ -150,6 +150,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	//OpenGL
 	private int markersCount;
 	private VectorLinesCollection vectorLinesCollection;
+	private VectorLinesCollection clearedVectorLinesCollection;
 	private List<VectorLinePair> lines;
 	private MapMarkersCollection distanceMarkersCollection;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
@@ -976,6 +977,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 
+		clearedVectorLinesCollection = null;
 		mapRenderer.addSymbolsProvider(vectorLinesCollection);
 		mapRenderer.addSymbolsProvider(distanceMarkersCollection);
 
@@ -1024,7 +1026,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	 */
 	protected void clearVectorLinesCollections() {
 		MapRendererView mapRenderer = getMapRenderer();
+		// called on every redraw while the lines are off: do the native work once per collection
+		if (vectorLinesCollection == clearedVectorLinesCollection) {
+			return;
+		}
 		if (mapRenderer != null && vectorLinesCollection != null && distanceMarkersCollection != null) {
+			clearedVectorLinesCollection = vectorLinesCollection;
 			QListVectorLine lines = vectorLinesCollection.getLines();
 			QListMapMarker markers = distanceMarkersCollection.getMarkers();
 			distanceMarkerCaptions.clear();

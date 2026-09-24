@@ -788,6 +788,10 @@ public class ResourceManager {
 		return addressMap.values();
 	}
 
+	public int getFileReadersCount() {
+		return fileReaders.size();
+	}
+
 	public Collection<BinaryMapReaderResource> getFileReaders() {
 		List<String> fileNames = new ArrayList<>(fileReaders.keySet());
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());

@@ -184,17 +184,15 @@ public class TransportRoutingHelper {
 		listeners.add(new WeakReference<>(l));
 	}
 
-	public boolean removeListener(IRouteInformationListener lt) {
+	public void removeListener(IRouteInformationListener lt) {
 		Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
 		while (it.hasNext()) {
 			WeakReference<IRouteInformationListener> ref = it.next();
 			IRouteInformationListener l = ref.get();
 			if (l == null || lt == l) {
 				it.remove();
-				return true;
 			}
 		}
-		return false;
 	}
 
 	public void recalculateRouteDueToSettingsChange() {
