@@ -25,6 +25,17 @@ import kotlin.jvm.JvmStatic
  */
 class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMatcher {
 
+	/**
+	 * A name as [cmatches] reduces it when it is the full name: its key, and the key of the name
+	 * with its hyphens dropped when it has any, which is tried first. [key] is also what [cmatches]
+	 * builds for the same text when it is the part.
+	 */
+	internal class PreparedName(fullName: String) {
+		val key: KCollationKey = KCollationKey.of(fullName)
+		val withoutHyphens: KCollationKey? =
+			if (fullName.indexOf('-') != -1) KCollationKey.of(fullName.replace("-", "")) else null
+	}
+
 	val part: KCollationKey
 	val mode: KStringMatcherMode
 
@@ -81,7 +92,24 @@ class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMa
 				}
 			}
 			val name = if (alignFull) KCollationKey.of(fullName) else KCollationKey.ofAligned(fullName)
-			return when (mode) {
+			return matchesKeys(name, part, mode)
+		}
+
+		/**
+		 * What [cmatches] answers for the name [name] was prepared from, with the name's keys built
+		 * once rather than on every call. For a caller that holds one name against many parts, as
+		 * the walk over the string table of a name index does.
+		 */
+		internal fun cmatchesPrepared(name: PreparedName, part: KCollationKey, mode: KStringMatcherMode): Boolean {
+			val withoutHyphens = name.withoutHyphens
+			if (withoutHyphens != null && matchesKeys(withoutHyphens, part, mode)) {
+				return true
+			}
+			return matchesKeys(name.key, part, mode)
+		}
+
+		private fun matchesKeys(name: KCollationKey, part: KCollationKey, mode: KStringMatcherMode): Boolean =
+			when (mode) {
 				KStringMatcherMode.CHECK_CONTAINS -> ccontains(name, part)
 				KStringMatcherMode.CHECK_EQUALS_FROM_SPACE -> cstartsWith(name, part, true, true, true)
 				KStringMatcherMode.CHECK_STARTS_FROM_SPACE -> cstartsWith(name, part, true, true, false)
@@ -90,7 +118,6 @@ class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMa
 				KStringMatcherMode.CHECK_EQUALS -> cstartsWith(name, part, false, false, true)
 				KStringMatcherMode.MULTISEARCH -> cstartsWith(part, name, true, true, true)
 			}
-		}
 
 		/** Whether [part] is contained in [base]. */
 		fun ccontains(base: KCollationKey, part: KCollationKey): Boolean {

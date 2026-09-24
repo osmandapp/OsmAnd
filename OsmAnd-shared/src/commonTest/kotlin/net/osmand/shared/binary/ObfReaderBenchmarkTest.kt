@@ -48,13 +48,14 @@ import kotlin.time.TimeSource
  * open the files                      4.3 ms       3.7 ms          2.4 ms      26
  * read every map object, all zooms   15.6 ms       9.4 ms         21.5 ms   47393
  * read every amenity                  1.9 ms       2.0 ms          3.6 ms    6285
- * find amenities by name (20)        25.1 ms      15.4 ms         34.0 ms     360
+ * find amenities by name (20)        25.1 ms      15.4 ms         20.5 ms     360
  * ```
  * Kotlin/Native reads a map object in about the time the java reader takes on the jvm, and in
  * about twice the time this same code takes there; an amenity costs it only half again as much.
  * On the name search the copy is half again faster than java on the jvm, which is the collation
- * key of `KCollatorStringMatcher` paying off; Kotlin/Native then pays its usual factor of about
- * two on top, which lands it somewhat above java on the jvm. Opening is not a like for like: java
+ * key of `KCollatorStringMatcher` paying off. On Kotlin/Native it took 34.0 ms, above java on the
+ * jvm, until the walk over the string table of the name index prepared each key once instead of
+ * reducing it on every comparison. Opening is not a like for like: java
  * also reads the transport header, which the copy skips; the address header the copy reads too
  * since the address section was copied, at no cost `AddressReaderBenchmarkTest` could measure.
  */
