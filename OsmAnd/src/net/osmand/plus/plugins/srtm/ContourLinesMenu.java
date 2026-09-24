@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.srtm;
 
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LABELS_UPHILL_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LABEL_DIRECTION_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
@@ -18,7 +18,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
-import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadItem;
@@ -41,6 +40,9 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.callback.ProgressListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -49,6 +51,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ContourLinesMenu {
@@ -100,6 +104,12 @@ public class ContourLinesMenu {
 			densityPref = null;
 		}
 
+		RenderingRuleProperty labelDirectionProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LABEL_DIRECTION_ATTR);
+		String labelDirectionName = labelDirectionProp != null ? AndroidUtils.getRenderingStringPropertyName(app,
+				labelDirectionProp.getAttrName(), labelDirectionProp.getName()) : null;
+		CommonPreference<String> labelDirectionPref = labelDirectionProp != null
+				? settings.getCustomRenderProperty(labelDirectionProp.getAttrName()) : null;
+
 		CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
 		CommonPreference<String> colorPref = settings.getCustomRenderProperty(colorSchemeProp.getAttrName());
 
@@ -135,6 +145,9 @@ public class ContourLinesMenu {
 				} else if (contourDensityProp != null && itemId == contourDensityName.hashCode()) {
 					plugin.selectPropertyValue(mapActivity, contourDensityProp, densityPref,
 							() -> onPropertyValueSelected(uiAdapter, item, contourDensityProp));
+				} else if (labelDirectionProp != null && itemId == labelDirectionName.hashCode()) {
+					showLabelDirectionMenu(mapActivity, view, labelDirectionProp, labelDirectionPref,
+							() -> onPropertyValueSelected(uiAdapter, item, labelDirectionProp));
 				}
 				return false;
 			}
@@ -174,6 +187,10 @@ public class ContourLinesMenu {
 					.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, contourLinesProp))
 					.setListener(l));
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
+					.setCategory(true)
+					.setTitleId(R.string.shared_string_appearance, mapActivity)
+					.setLayout(R.layout.list_group_title_with_descr));
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(colorSchemeStringId, mapActivity)
 					.setLayout(R.layout.list_item_single_line_descrition_narrow)
 					.setIcon(R.drawable.ic_action_appearance)
@@ -195,11 +212,18 @@ public class ContourLinesMenu {
 						.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, contourDensityProp))
 						.setListener(l));
 			}
-			RenderingRuleProperty labelsUphillProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LABELS_UPHILL_ATTR);
-			if (labelsUphillProp != null) {
-				String name = AndroidUtils.getRenderingStringPropertyName(app, CONTOUR_LABELS_UPHILL_ATTR, labelsUphillProp.getName());
-				contextMenuAdapter.addItem(ConfigureMapMenu.createBooleanRenderingProperty(mapActivity, CONTOUR_LABELS_UPHILL_ATTR,
-						name, null, labelsUphillProp, R.drawable.ic_action_altitude, nightMode, null));
+			if (labelDirectionProp != null) {
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
+						.setCategory(true)
+						.setTitleId(R.string.contour_labels, mapActivity)
+						.setDescription(app.getString(R.string.contour_label_direction_descr))
+						.setLayout(R.layout.list_group_title_with_descr));
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
+						.setTitle(labelDirectionName)
+						.setLayout(R.layout.list_item_single_line_descrition_narrow)
+						.setIcon(R.drawable.ic_action_altitude)
+						.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, labelDirectionProp))
+						.setListener(l));
 			}
 		}
 
@@ -249,6 +273,38 @@ public class ContourLinesMenu {
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setLayout(R.layout.card_bottom_divider)
 				);
+	}
+
+	private static void showLabelDirectionMenu(@NonNull MapActivity mapActivity, @Nullable View anchorView,
+	                                           @NonNull RenderingRuleProperty property,
+	                                           @NonNull CommonPreference<String> preference,
+	                                           @NonNull Runnable onSelected) {
+		if (anchorView == null) {
+			return;
+		}
+		OsmandApplication app = mapActivity.getApp();
+		List<String> values = new ArrayList<>();
+		values.add("");
+		values.addAll(Arrays.asList(property.getPossibleValues()));
+		String selected = property.containsValue(preference.get()) ? preference.get() : "";
+
+		List<PopUpMenuItem> items = new ArrayList<>();
+		for (String value : values) {
+			String name = Algorithms.isEmpty(value) ? property.getDefaultValueDescription() : value;
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitle(AndroidUtils.getRenderingStringPropertyValue(app, name))
+					.setSelected(value.equals(selected))
+					.setOnClickListener(v -> {
+						preference.set(value);
+						onSelected.run();
+					})
+					.create());
+		}
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = anchorView;
+		displayData.menuItems = items;
+		displayData.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
+		PopUpMenu.show(displayData);
 	}
 
 	private static ContextMenuItem createDownloadSrtmMapsItem(MapActivity mapActivity) {

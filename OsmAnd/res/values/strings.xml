@@ -11,7 +11,11 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
-	<string name="rendering_attr_contourLabelsUphill_name">Contour labels uphill</string>
+	<string name="contour_labels">Labels</string>
+	<string name="contour_label_direction_descr">Uphill: the top of each height number faces higher ground, as on paper topographic maps. The short ticks on the lines point downhill.</string>
+	<string name="rendering_attr_contourLabelDirection_name">Label direction</string>
+	<string name="rendering_value_upright_name">Upright</string>
+	<string name="rendering_value_uphill_name">Uphill</string>
 	<string name="opening_hours_public_holiday">Public holidays</string>
 	<string name="opening_hours_school_holiday">School holidays</string>
 	<string name="opening_hours_easter">Easter</string>
