@@ -379,9 +379,15 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void processGeoActionIntent(@NonNull Uri uri) {
+		OsmandApplication app = getApp();
+		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app) || !isLocationPermissionAvailable()) {
+			LOG.info("Ignoring geo action intent: purchase or permission check failed");
+			return;
+		}
 		String action = GeoPointParserUtil.parseGeoAction(uri.toString());
 		if (!Algorithms.isEmpty(action)) {
-			GeoActionHelper.executeAction(getApp(), action, null, this);
+			boolean handled = GeoActionHelper.executeAction(app, action, null, this);
+			LOG.info("Geo action '" + action + "' handled: " + handled);
 		}
 	}
 

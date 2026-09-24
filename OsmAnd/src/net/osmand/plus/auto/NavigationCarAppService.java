@@ -19,7 +19,6 @@ import androidx.lifecycle.LifecycleOwner;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.GeoActionHelper;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
 import java.util.Arrays;
@@ -53,12 +52,6 @@ public final class NavigationCarAppService extends CarAppService implements Acti
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		int result = super.onStartCommand(intent, flags, startId);
 		getApp().setNavigationCarAppService(this);
-		if (intent != null && intent.getData() != null) {
-			NavigationSession session = getApp().getCarNavigationSession();
-			if (session != null && GeoActionHelper.isGeoActionUri(intent.getData())) {
-				session.onNewIntent(intent);
-			}
-		}
 		return result;
 	}
 
