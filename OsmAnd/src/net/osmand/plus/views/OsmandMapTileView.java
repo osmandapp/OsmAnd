@@ -1844,12 +1844,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		int tbh = (tileBoxHeightPx > 0 ? tileBoxHeightPx : tb.getPixHeight());
 		if (rtl) {
 			dx = -dx;
-		} else {
-			dx -= (tbw - tb.getPixWidth());
 		}
-//		dy -= (tbh - tb.getPixHeight()) / 2; // this to make margin from top
-		dx += (int) (tbw * (1 - border) / 2);
-		dy += (int) (tbh * (1 - border) / 2);
+
 		tb.setPixelDimensions((int) (tbw * border), (int) (tbh * border));
 		tb.setCenterLocation(0.5f, 0.5f);
 		float zoomStep = ZOOM_STEP_TO_FIT;
@@ -1872,8 +1868,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			zoom.partialChangeZoom(mapRendererView, -zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		float x = currentViewport.getCenterPixelX() - dx;
-		float y = currentViewport.getCenterPixelY() - dy;
+		float x = tb.getCenterPixelX() - dx;
+		float y = tb.getCenterPixelY() - dy;
 		clat = tb.getLatFromPixel(x, y);
 		clon = tb.getLonFromPixel(x, y);
 		if (rotate) {
