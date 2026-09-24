@@ -163,7 +163,10 @@ public class SearchUICore {
 			if (Algorithms.isEmpty(sr)) {
 				return this;
 			}
-			if (resortAll) {
+			if (skipSorting) {
+				// spatial search results come sorted and deduplicated by the engine
+				this.searchResults.addAll(sr);
+			} else if (resortAll) {
 				this.searchResults.addAll(sr);
 				if (removeDuplicates) {
 					long start = System.currentTimeMillis(), size = this.searchResults.size();
@@ -646,7 +649,9 @@ public class SearchUICore {
 			apis.add(amenitiesApi); // classic
 		}
 		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi, internetConnectionAvailable));
-		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
+		SearchAmenityTypesAPI searchAmenityTypesAPI = useSpatialSearch
+				? new SpatialAmenityTypesAPI(poiTypes)
+				: new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
 		apis.add(useSpatialSearch
 				? new SpatialCategoryAmenityByTypeAPI(poiTypes)
@@ -710,6 +715,19 @@ public class SearchUICore {
 		@Override
 		public int getSearchPriority(SearchPhrase phrase) {
 			return phrase.isLastWord(ObjectType.STREET) ? super.getSearchPriority(phrase) : -1;
+		}
+	}
+
+	// poi categories come from the spatial engine; used only by shallowSearch (categories list)
+	private static class SpatialAmenityTypesAPI extends SearchAmenityTypesAPI {
+
+		public SpatialAmenityTypesAPI(MapPoiTypes types) {
+			super(types);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase phrase) {
+			return -1;
 		}
 	}
 
