@@ -117,7 +117,7 @@
 						android:layout_weight="1"
 						android:gravity="start"
 						android:lineSpacingExtra="@dimen/line_spacing_extra_description"
-						android:text="@string/shared_string_transparency"
+						android:text="@string/shared_string_visibility"
 						android:textColor="?android:textColorPrimary"
 						android:textSize="@dimen/default_list_text_size" />
 
