@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.srtm;
 
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LABELS_UPHILL_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
@@ -17,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadItem;
@@ -192,6 +194,12 @@ public class ContourLinesMenu {
 						.setIcon(R.drawable.ic_plugin_srtm)
 						.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, contourDensityProp))
 						.setListener(l));
+			}
+			RenderingRuleProperty labelsUphillProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LABELS_UPHILL_ATTR);
+			if (labelsUphillProp != null) {
+				String name = AndroidUtils.getRenderingStringPropertyName(app, CONTOUR_LABELS_UPHILL_ATTR, labelsUphillProp.getName());
+				contextMenuAdapter.addItem(ConfigureMapMenu.createBooleanRenderingProperty(mapActivity, CONTOUR_LABELS_UPHILL_ATTR,
+						name, null, labelsUphillProp, R.drawable.ic_action_altitude, nightMode, null));
 			}
 		}
 

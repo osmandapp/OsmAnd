@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="rendering_attr_contourLabelsUphill_name">Contour labels uphill</string>
 	<string name="opening_hours_public_holiday">Public holidays</string>
 	<string name="opening_hours_school_holiday">School holidays</string>
 	<string name="opening_hours_easter">Easter</string>
