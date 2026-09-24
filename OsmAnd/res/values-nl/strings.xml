@@ -5633,7 +5633,6 @@
     <string name="share_favorites_preparation_failed">Kon bestanden niet voorbereiden om te delen.</string>
     <string name="share_favorites_share_failed">Kon bestand niet delen.</string>
     <string name="share_favorites_missing_media_warning">Enkele gekoppelde media konden niet worden toegevoegd.</string>
-    <string name="search_on_web">Zoek op het internet</string>
     <string name="release_5_4">• Vernieuwde zoekinterface: sortering, categoriefilters en een overzichtelijker uiterlijk\n\n • Koppel foto\'s en media aan Favorieten\n\n • Favorieten: ondersteuning voor subgroepen en vast te zetten mappen\n\n • Coördinaten: zoeken, kaartraster en weergave van interessepunten (POI) ondersteunen nu EPSG- en Maidenhead-locator\n\n • Navigatieonderbrekingen opgelost; wissel tussen Standaard en Snelle routering\n\n • Stel Android Auto kaartschaal afzonderlijk van die op je telefoon in\n\n • Nieuwe ruimtelijke zoekfunctie — vind plaatsen en zoek rondom een plaats\n\n • Astronomie ondersteuning voor zons- en maansverduisteringen toegevoegd</string>
     <string name="astro_penumbral_lunar_eclipse">Penumbrale maansverduistering</string>
     <string name="astro_eclipse_phase_penumbral">Penumbraal</string>

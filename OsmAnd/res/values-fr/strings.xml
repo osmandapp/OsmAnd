@@ -5267,7 +5267,6 @@
     <string name="share_favorites_preparation_failed">Impossible de préparer les fichiers pour le partage.</string>
     <string name="share_favorites_share_failed">Impossible de partager le fichier.</string>
     <string name="share_favorites_missing_media_warning">Certains fichiers médias n\'ont pu être inclus.</string>
-    <string name="search_on_web">Rechercher sur le Web</string>
     <string name="astro_eclipse_column_below_horizon">Sous l\'horizon</string>
     <string name="quick_action_add_track">Ajouter une trace</string>
     <string name="quick_action_tracks_select_descr">Ajoutez une ou plusieurs traces pour les afficher ou les masquer sur la carte d\'un seul appui.</string>
