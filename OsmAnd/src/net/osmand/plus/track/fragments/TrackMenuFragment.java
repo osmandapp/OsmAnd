@@ -914,6 +914,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		super.updateMainViewLayout(posY);
 		updateStatusBarColor();
 		updateToolbar(posY, true);
+		if (posY == getViewY()) {
+			// the menu has settled at posY (laid out there or at the end of an animation),
+			// so the map center has to move into the part of the map it does not cover
+			mapDisplayPositionManager.updateMapDisplayPosition(true);
+		}
 	}
 
 	@Override
@@ -936,7 +941,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (menuStateChanged) {
 			menuTypeChanged = false;
 		}
-		mapDisplayPositionManager.updateMapDisplayPosition(true);
 	}
 
 	@Override
