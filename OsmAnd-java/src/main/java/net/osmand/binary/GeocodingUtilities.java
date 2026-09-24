@@ -224,10 +224,6 @@ public class GeocodingUtilities {
 		return words; // keep original order ("NC 42" - search by "NC" not by "42")
 	}
 	
-	private boolean matchStreetName(String s1, String s2, boolean matchWithCommonWords) {
-		return new StreetNameMatcher(s1).matches(s2, matchWithCommonWords);
-	}
-
 	/**
 	 * Keeps everything that depends only on the searched street name: the parsed words and the collator.
 	 * It is compared against every street candidate of one request, so parsing it once per request
