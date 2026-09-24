@@ -346,6 +346,7 @@ public class MapLayers {
 		builder.setView(listView)
 				.setTitle(R.string.show_poi_over_map)
 				.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+					mapActivity.getFragmentsHelper().closeQuickSearch();
 					for (int i = 0; i < listAdapter.getCount(); i++) {
 						ContextMenuItem item = listAdapter.getItem(i);
 						PoiUIFilter filter = list.get(i);
@@ -408,6 +409,7 @@ public class MapLayers {
 				if (filter.isStandardFilter()) {
 					filter.removeUnsavedFilterByName();
 				}
+				mapActivity.getFragmentsHelper().closeQuickSearch();
 				poiFilters.clearGeneralSelectedPoiFilters();
 				poiFilters.addSelectedPoiFilter(filter);
 				updateRoutingPoiFiltersIfNeeded();
