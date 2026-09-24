@@ -30,20 +30,27 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.PanelSizeMode;
 import net.osmand.plus.settings.enums.PanelsLayoutMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.VisiblePages;
-import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.widgets.FrameLayoutEx;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
+import java.util.Set;
 
 public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer {
 
@@ -264,7 +271,7 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 	}
 
 	private static boolean hasGeometryChanged(@Nullable ResolvedPanelAppearance previous,
-	                                          @NonNull ResolvedPanelAppearance current) {
+			@NonNull ResolvedPanelAppearance current) {
 		return previous == null
 				|| previous.getSizeMode() != current.getSizeMode()
 				|| previous.getIconMode() != current.getIconMode()
@@ -355,17 +362,29 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 			int measuredWidth = viewToWrap.getMeasuredWidth();
 			int measuredHeight = viewToWrap.getMeasuredHeight();
 
+			Context context = getContext();
+			WidgetSize widgetSize = getPanelWidgetSize();
+			int maxPanelWidth = switch (widgetSize) {
+				case SMALL -> 0;
+				case LARGE -> context.getResources().getDimensionPixelSize(R.dimen.side_widgets_panel_max_width_large);
+				default -> context.getResources().getDimensionPixelSize(R.dimen.side_widgets_panel_max_width_medium);
+			};
+
 			if (screenWidth != -1) {
-				Context context = getContext();
 				ScreenLayoutMode screenLayoutMode = ScreenLayoutMode.getDefault(context);
 				PanelsLayoutMode panelsLayoutMode = settings.getPanelsLayoutMode(context, screenLayoutMode).get();
 
 				float ratio = panelsLayoutMode == PanelsLayoutMode.WIDE ? SIDE_PANEL_WEIGHT_RATIO_WIDE : SIDE_PANEL_WEIGHT_RATIO_COMPACT;
 				int maxAllowedWidth = (int) (screenWidth * ratio);
+				if (maxPanelWidth > 0 && maxAllowedWidth > maxPanelWidth) {
+					maxAllowedWidth = maxPanelWidth;
+				}
 
 				if (measuredWidth > maxAllowedWidth) {
 					measuredWidth = maxAllowedWidth;
 				}
+			} else if (maxPanelWidth > 0 && measuredWidth > maxPanelWidth) {
+				measuredWidth = maxPanelWidth;
 			}
 
 			if (screenHeight != -1) {
@@ -436,5 +455,34 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 		this.insets = insets;
 		setupPaddings();
 		wrapContentAroundPage(null);
+	}
+
+	@NonNull
+	private WidgetSize getPanelWidgetSize() {
+		if (appliedAppearance != null && appliedAppearance.getSizeMode() != PanelSizeMode.ORIGINAL) {
+			WidgetSize widgetSize = appliedAppearance.getSizeMode().getWidgetSize();
+			if (widgetSize != null) {
+				return widgetSize;
+			}
+		}
+		WidgetsPanel panel = rightSide ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(panel);
+		if (!Algorithms.isEmpty(widgetInfos)) {
+			ApplicationMode appMode = settings.getApplicationMode();
+			WidgetSize maxWidgetSize = WidgetSize.SMALL;
+			for (MapWidgetInfo info : widgetInfos) {
+				if (info.widget instanceof ISupportWidgetResizing resizableWidget) {
+					WidgetSize size = resizableWidget.getWidgetSizePref().getModeValue(appMode);
+					if (size == WidgetSize.LARGE) {
+						return WidgetSize.LARGE;
+					} else if (size == WidgetSize.MEDIUM) {
+						maxWidgetSize = WidgetSize.MEDIUM;
+					}
+				}
+			}
+			return maxWidgetSize;
+		}
+		return WidgetSize.MEDIUM;
 	}
 }
