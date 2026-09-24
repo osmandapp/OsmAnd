@@ -8,6 +8,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.TrackStartPointFinder;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -22,9 +23,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class GpxRouteHelper {
     private final RouteProvider provider;
-    private static final int MIN_INTERMEDIATE_DIST = 10;
     private static final int ADDITIONAL_DISTANCE_FOR_START_POINT = 300;
-    private static final int NEAREST_POINT_EXTRA_SEARCH_DISTANCE = 300;
+    static final int NEAREST_POINT_EXTRA_SEARCH_DISTANCE = 300;
     private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 
     private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(GpxRouteHelper.class);
@@ -67,7 +67,7 @@ public class GpxRouteHelper {
             RouteCalculationResult result = new RouteCalculationResult(gpxRouteResult, routeParams, null,
                     gpxParams.wpt, false);
             List<Location> gpxRouteLocations = result.getImmutableAllLocations();
-            int nearestGpxPointInd = calcWholeRoute ? 0 : findNearestGpxPointIndexFromRoute(gpxRouteLocations, routeParams.start, calculateOsmAndRouteParts);
+            int nearestGpxPointInd = calcWholeRoute ? 0 : findStartGpxPointIndex(routeParams, gpxRouteLocations, calculateOsmAndRouteParts);
             Location nearestGpxLocation = null;
             Location gpxLastLocation = !gpxRouteLocations.isEmpty() ? gpxRouteLocations.get(gpxRouteLocations.size() - 1) : null;
             List<RouteSegmentResult> firstSegmentRoute = null;
@@ -85,6 +85,10 @@ public class GpxRouteHelper {
             } else {
                 if (nearestGpxPointInd > 0) {
                     gpxRoute = result.getOriginalRoute(nearestGpxPointInd, false);
+                    if (Algorithms.isEmpty(gpxRoute)) {
+                        // nearest point is on the last segment: keep it, an empty route is reported as an error
+                        gpxRoute = result.getOriginalRoute(nearestGpxPointInd, true);
+                    }
                     if (!Algorithms.isEmpty(gpxRoute)) {
                         LatLon startPoint = gpxRoute.get(0).getStartPoint();
                         nearestGpxLocation = new Location("", startPoint.getLatitude(), startPoint.getLongitude());
@@ -141,7 +145,7 @@ public class GpxRouteHelper {
             gpxRoute = gpxParams.points;
         } else {
             gpxRoute = provider.findStartAndEndLocationsFromRoute(gpxParams.points,
-                    routeParams.start, routeParams.end, startI, endI);
+                    routeParams.start, routeParams.end, getMaxDistanceToFinish(routeParams), startI, endI);
         }
         List<RouteDirectionInfo> inputDirections = gpxParams.directions;
         List<RouteDirectionInfo> gpxDirections = provider.calcDirections(routeParams, startI[0], endI[0], inputDirections);
@@ -222,22 +226,8 @@ public class GpxRouteHelper {
     }
 
     private int findClosestIntermediate(@NonNull RouteCalculationParams params, @NonNull List<Location> intermediates) {
-        int closest = 0;
-        if (!params.gpxRoute.passWholeRoute) {
-            double maxDist = Double.POSITIVE_INFINITY;
-            for (int i = 0; i < intermediates.size(); i++) {
-                Location loc = intermediates.get(i);
-                double dist = MapUtils.getDistance(loc.getLatitude(), loc.getLongitude(),
-                        params.start.getLatitude(), params.start.getLongitude());
-                if (dist <= MIN_INTERMEDIATE_DIST) {
-                    return i;
-                } else if (dist < maxDist) {
-                    closest = i;
-                    maxDist = dist;
-                }
-            }
-        }
-        return closest;
+        return params.gpxRoute.passWholeRoute ? 0
+                : TrackStartPointFinder.findStartIndex(intermediates, params.start, getMaxDistanceToFinish(params));
     }
 
     @NonNull
@@ -291,8 +281,8 @@ public class GpxRouteHelper {
             if (prevSegmentPoint.distanceTo(newSegmentPoint) <= MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
                 continue;
             }
-            int indexNew = findNearestGpxPointIndexFromRoute(gpxRouteLocations, newSegmentPoint, false);
-            int indexPrev = findNearestGpxPointIndexFromRoute(gpxRouteLocations, prevSegmentPoint, false);
+            int indexNew = findNearestGpxPointIndexFromRoute(gpxRouteLocations, newSegmentPoint);
+            int indexPrev = findNearestGpxPointIndexFromRoute(gpxRouteLocations, prevSegmentPoint);
             if (indexPrev != -1 && indexPrev > nearestGpxPointInd && indexNew != -1) {
                 List<RouteSegmentResult> route = result.getOriginalRoute(lastIndex, indexPrev, true);
                 if (!Algorithms.isEmpty(route)) {
@@ -317,18 +307,28 @@ public class GpxRouteHelper {
         return newGpxRoute;
     }
 
-    private int findNearestGpxPointIndexFromRoute(List<Location> route, Location startLoc, boolean calculateOsmAndRouteParts) {
+    private int findNearestGpxPointIndexFromRoute(List<Location> route, Location location) {
         float minDist = Integer.MAX_VALUE;
         int nearestPointIndex = 0;
-        if (startLoc != null) {
-            for (int i = 0; i < route.size(); i++) {
-                float d = route.get(i).distanceTo(startLoc);
-                if (d < minDist) {
-                    nearestPointIndex = i;
-                    minDist = d;
-                }
+        for (int i = 0; i < route.size(); i++) {
+            float d = route.get(i).distanceTo(location);
+            if (d < minDist) {
+                nearestPointIndex = i;
+                minDist = d;
             }
         }
+        return nearestPointIndex;
+    }
+
+    // on recalculation only what was left of the previous route can be the start, else a loop restarts or ends early
+    static float getMaxDistanceToFinish(@NonNull RouteCalculationParams routeParams) {
+        return routeParams.recheckRouteNearestPoint()
+                ? routeParams.previousToRecalculate.getRouteDistanceToFinish(0) + NEAREST_POINT_EXTRA_SEARCH_DISTANCE
+                : -1;
+    }
+
+    private int findStartGpxPointIndex(RouteCalculationParams routeParams, List<Location> route, boolean calculateOsmAndRouteParts) {
+        int nearestPointIndex = TrackStartPointFinder.findStartIndex(route, routeParams.start, getMaxDistanceToFinish(routeParams));
         if (nearestPointIndex > 0 && calculateOsmAndRouteParts) {
             Location nearestLocation = route.get(nearestPointIndex);
             for (int i = nearestPointIndex + 1; i < route.size(); i++) {

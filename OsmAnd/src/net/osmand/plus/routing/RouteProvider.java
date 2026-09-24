@@ -194,7 +194,8 @@ public class RouteProvider {
 		try {
 			int[] startI = {0};
 			int[] endI = {locs.size()};
-			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
+			float maxDistanceToFinish = rcr.getRouteDistanceToFinish(0) + GpxRouteHelper.NEAREST_POINT_EXTRA_SEARCH_DISTANCE;
+			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, maxDistanceToFinish, startI, endI);
 			List<RouteDirectionInfo> directions = calcDirections(params, startI[0], endI[0], rcr.getRouteDirections(params.ctx));
 			gpxRouteHelper.insertInitialSegment(params, locs, directions, true);
 			res = new RouteCalculationResult(locs, directions, params, null, true);
@@ -236,25 +237,14 @@ public class RouteProvider {
 		return directions;
 	}
 
-	protected ArrayList<Location> findStartAndEndLocationsFromRoute(List<Location> route, Location startLoc, LatLon endLoc, int[] startI, int[] endI) {
-		float minDist = Integer.MAX_VALUE;
-		int start = 0;
+	protected ArrayList<Location> findStartAndEndLocationsFromRoute(List<Location> route, Location startLoc, LatLon endLoc,
+	                                                                 float maxDistanceToFinish, int[] startI, int[] endI) {
+		int start = TrackStartPointFinder.findStartIndex(route, startLoc, maxDistanceToFinish);
 		int end = route.size();
-		if (startLoc != null) {
-			for (int i = 0; i < route.size(); i++) {
-				float d = route.get(i).distanceTo(startLoc);
-				if (d < minDist) {
-					start = i;
-					minDist = d;
-				}
-			}
-//		} else {
-//			startLoc = route.get(0); // no more used
-		}
 		Location l = new Location("temp"); //$NON-NLS-1$
 		l.setLatitude(endLoc.getLatitude());
 		l.setLongitude(endLoc.getLongitude());
-		minDist = Integer.MAX_VALUE;
+		float minDist = Integer.MAX_VALUE;
 		// get in reverse order taking into account ways with cycle
 		for (int i = route.size() - 1; i >= start; i--) {
 			float d = route.get(i).distanceTo(l);
@@ -327,7 +317,7 @@ public class RouteProvider {
 		PrecalculatedRouteDirection precalculated = null;
 		if (calcGPXRoute) {
 			ArrayList<Location> sublist = findStartAndEndLocationsFromRoute(params.gpxRoute.points,
-					params.start, params.end, null, null);
+					params.start, params.end, GpxRouteHelper.getMaxDistanceToFinish(params), null, null);
 			LatLon[] latLon = new LatLon[sublist.size()];
 			for (int k = 0; k < latLon.length; k++) {
 				latLon[k] = new LatLon(sublist.get(k).getLatitude(), sublist.get(k).getLongitude());
