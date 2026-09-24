@@ -148,7 +148,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public CustomMapObjects<MapMarker> customObjectsDelegate;
 
 	//OpenGL
-	private int markersHash;
+	private int markersCount;
+	private int markersVersion;
 	private VectorLinesCollection vectorLinesCollection;
 	private VectorLinesCollection clearedVectorLinesCollection;
 	private List<VectorLinePair> lines;
@@ -333,15 +334,16 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		List<MapMarker> activeMapMarkers = (customObjectsDelegate != null) ? customObjectsDelegate.getMapObjects() : markersHelper.getMapMarkers();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			int markersHash = getMarkersHash(activeMapMarkers);
-			if (this.markersHash != markersHash || mapActivityInvalidated) {
+			int markersVersion = markersHelper.getMarkersVersion();
+			if (markersCount != activeMapMarkers.size() || this.markersVersion != markersVersion || mapActivityInvalidated) {
 				clearMapMarkersCollections();
 				clearVectorLinesCollections();
 				cachedPaths.clear();
 				cachedTarget31 = null;
 			}
 			initMarkersCollection();
-			this.markersHash = markersHash;
+			markersCount = activeMapMarkers.size();
+			this.markersVersion = markersVersion;
 			mapActivityInvalidated = false;
 		}
 
@@ -544,16 +546,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	protected Bitmap getScaledBitmap(int drawableId) {
 		return getScaledBitmap(drawableId, textScale);
-	}
-
-	// Markers can change in place without changing their count (e.g. groups sync at app start)
-	private int getMarkersHash(@NonNull List<MapMarker> markers) {
-		int result = markers.size();
-		for (MapMarker marker : markers) {
-			result = 31 * result + marker.hashCode();
-			result = 31 * result + (isSynced(marker) ? 1 : 0);
-		}
-		return result;
 	}
 
 	private boolean isSynced(@NonNull MapMarker marker) {
