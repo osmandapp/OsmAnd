@@ -166,11 +166,6 @@ public class SearchUICore {
 			if (skipSorting) {
 				// spatial search results come sorted and deduplicated by the engine
 				this.searchResults.addAll(sr);
-				if (resortAll && removeDuplicates) {
-					// results added from outside the engine
-					uniteSearchResultsByOsmIdOrWikidata(this.searchResults);
-					filterSearchDuplicateResults();
-				}
 			} else if (resortAll) {
 				this.searchResults.addAll(sr);
 				if (removeDuplicates) {
