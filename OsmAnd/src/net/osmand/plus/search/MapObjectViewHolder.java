@@ -103,6 +103,8 @@ public class MapObjectViewHolder extends RecyclerView.ViewHolder {
 			} else if (item.getSearchResult().relatedObject instanceof City relatedCity &&
 					relatedCity.getReferenceFile() instanceof BinaryMapIndexReader relatedMapReaderResource) {
 				addressText = String.format("%s, %s", relatedCity.getName(), FileNameTranslationHelper.getFileNameWithRegion(app, relatedMapReaderResource.getFile().getName()));
+			} else if (item.getSearchResult().file != null) {
+				addressText = FileNameTranslationHelper.getFileNameWithRegion(app, item.getSearchResult().file.getFile().getName());
 			}
 		} else if (mapObject instanceof Street street) {
 			StringBuilder streetAddressBuilder = new StringBuilder();

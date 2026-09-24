@@ -565,7 +565,9 @@ public class SearchCoreFactory {
 								}
 								City closestCity = null;
 								if (closestCities == null) {
-									closestCities = townCitiesCache.queryCities(villagesBbox);
+									// cities are cached only near the user: look around the village itself, far villages keep the region name
+									closestCities = townCitiesCache.queryCities(MapUtils.calculate31Bbox(object.getLocation().getLatitude(),
+											object.getLocation().getLongitude(), LONG_ADDRESS_BBOX_RADIUS));
 								}
 								double minDist = -1;
 								double pDist = -1;
