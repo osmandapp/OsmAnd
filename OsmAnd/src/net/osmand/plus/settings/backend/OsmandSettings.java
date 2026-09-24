@@ -2271,14 +2271,34 @@ public class OsmandSettings {
 		File tPath = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		File dir = new File(tPath, toInstall.getName());
 		dir.mkdirs();
-		if (dir.exists() && dir.isDirectory()) {
-			try {
-				TileSourceManager.createMetaInfoFile(dir, toInstall, true);
-			} catch (IOException e) {
+		if (!dir.isDirectory()) {
+			// Some SD card file systems reject emoji and other special characters in folder names
+			String safeName = getSafeTileSourceName(toInstall.getName());
+			if (Algorithms.isEmpty(safeName)) {
 				return false;
 			}
+			dir = new File(tPath, safeName);
+			dir.mkdirs();
+			if (!dir.isDirectory()) {
+				return false;
+			}
+			toInstall.setName(safeName);
+		}
+		try {
+			TileSourceManager.createMetaInfoFile(dir, toInstall, true);
+		} catch (IOException e) {
+			return false;
 		}
 		return true;
+	}
+
+	@NonNull
+	private static String getSafeTileSourceName(@NonNull String name) {
+		StringBuilder builder = new StringBuilder();
+		name.codePoints()
+				.filter(c -> c < 0x80 || Character.isLetterOrDigit(c))
+				.forEach(builder::appendCodePoint);
+		return Algorithms.sanitizeFileName(builder.toString()).replaceAll("\\s+", " ").trim();
 	}
 
 	public Map<String, String> getTileSourceEntries() {
