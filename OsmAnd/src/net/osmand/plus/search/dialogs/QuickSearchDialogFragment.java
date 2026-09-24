@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
@@ -68,6 +69,7 @@ import net.osmand.plus.poi.RearrangePoiFiltersFragment;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.search.MapObjectViewHolder;
 import net.osmand.plus.search.QuickSearchHelper;
+import net.osmand.plus.search.SearchAlongRouteHelper;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
 import net.osmand.plus.search.ShareHistoryAsyncTask.OnShareHistoryListener;
@@ -198,6 +200,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private Float heading;
 	private boolean useMapCenter;
 	private boolean useSpatialSearchLocation;
+	private boolean useAlongRoute;
+	private SearchAlongRouteHelper alongRouteHelper;
 	private boolean paused;
 	private boolean cancelPrev;
 	private boolean searching;
@@ -261,7 +265,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private enum SearchAroundOption {
 		MAP_CENTER(R.string.shared_string_map_center, R.drawable.ic_show_on_map_outlined),
 		MY_LOCATION(R.string.search_around_my_location, R.drawable.ic_action_location_marker_outlined),
-		SPATIAL_LOCATION(0, R.drawable.ic_show_on_map_outlined);
+		SPATIAL_LOCATION(0, R.drawable.ic_show_on_map_outlined),
+		ALONG_ROUTE(R.string.search_along_the_route, R.drawable.ic_action_gdirections_dark);
 
 		final int titleId;
 		final int iconId;
@@ -300,6 +305,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		accessibilityAssistant = new AccessibilityAssistant(activity);
 		searchHelper = app.getSearchUICore();
 		searchUICore = searchHelper.getCore();
+		alongRouteHelper = new SearchAlongRouteHelper(app);
+		useAlongRoute = alongRouteHelper.isFollowingRoute();
 	}
 
 	@Override
@@ -1339,7 +1346,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private boolean isSearchAroundChipVisible() {
-		if (spatialSearchLocation != null) {
+		if (spatialSearchLocation != null || alongRouteHelper.isRouteAvailable()) {
 			return true;
 		}
 		return isMapCenterSearchAroundAvailable();
@@ -1358,6 +1365,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private SearchAroundOption getSelectedSearchAroundOption() {
+		if (isAlongRouteSearch()) {
+			return SearchAroundOption.ALONG_ROUTE;
+		}
 		if (useSpatialSearchLocation && spatialSearchLocation != null) {
 			return SearchAroundOption.SPATIAL_LOCATION;
 		}
@@ -1490,6 +1500,15 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private List<ChipsLayout.DropdownItem> getSearchAroundOptions() {
 		List<ChipsLayout.DropdownItem> options = new ArrayList<>();
 		SearchAroundOption selectedOption = getSelectedSearchAroundOption();
+		if (alongRouteHelper.isRouteAvailable()) {
+			options.add(new ChipsLayout.DropdownItem(
+					SearchAroundOption.ALONG_ROUTE.ordinal(),
+					0,
+					getString(SearchAroundOption.ALONG_ROUTE.titleId),
+					getString(R.string.search_radius_proximity) + " "
+							+ OsmAndFormatter.getFormattedDistance(alongRouteHelper.getSearchRadius(), app),
+					selectedOption == SearchAroundOption.ALONG_ROUTE));
+		}
 		if (isMapCenterSearchAroundAvailable()) {
 			options.add(new ChipsLayout.DropdownItem(
 					SearchAroundOption.MAP_CENTER.ordinal(),
@@ -1516,7 +1535,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void onSearchAroundOptionSelected(@NonNull SearchAroundOption option) {
-		if (option == SearchAroundOption.MAP_CENTER) {
+		useAlongRoute = option == SearchAroundOption.ALONG_ROUTE;
+		if (useAlongRoute) {
+			searchAlongRoute();
+		} else if (option == SearchAroundOption.MAP_CENTER) {
 			searchAroundMapCenter();
 		} else if (option == SearchAroundOption.MY_LOCATION) {
 			searchAroundMyLocation();
@@ -1546,6 +1568,19 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			return null;
 		}
 		return mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+	}
+
+	private boolean isAlongRouteSearch() {
+		return useAlongRoute && alongRouteHelper.isRouteAvailable();
+	}
+
+	private void searchAlongRoute() {
+		if (location != null) {
+			searchAroundMyLocation();
+		} else {
+			updateChipsState();
+			rerunCurrentSearchQuery();
+		}
 	}
 
 	private void searchAroundMapCenter() {
@@ -1714,6 +1749,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 		if (useSpatialSearchLocation && spatialSearchLocation != null) {
 			searchLatLon = spatialSearchLocation;
+			useMapCenter = false;
+		}
+		if (isAlongRouteSearch() && location != null) {
+			searchLatLon = new LatLon(location.getLatitude(), location.getLongitude());
 			useMapCenter = false;
 		}
 
@@ -2479,6 +2518,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
 	                                   SearchResultListener resultListener, boolean preserveSelectedPoiTypeNames) {
+		if (isAlongRouteSearch() && !searchMore) {
+			SearchPhrase phrase = searchUICore.resetPhrase(text);
+			PoiUIFilter filter = alongRouteHelper.getPoiFilter(phrase);
+			if (filter != null) {
+				runAlongRouteSearch(filter, phrase, preserveSelectedPoiTypeNames);
+				return;
+			}
+		}
 		searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection;
 			SearchCoreAPI regionResultApi;
@@ -2573,6 +2620,33 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				updateSearchResult(null, false);
 			}
 		}
+	}
+
+	private void runAlongRouteSearch(@NonNull PoiUIFilter filter, @NonNull SearchPhrase phrase,
+	                                 boolean preserveSelectedPoiTypeNames) {
+		setResultCollection(null, preserveSelectedPoiTypeNames);
+		updateSearchResult(null, false);
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, List<SearchResult>>() {
+			@Override
+			protected List<SearchResult> doInBackground(Void... params) {
+				return alongRouteHelper.search(filter, phrase);
+			}
+
+			@Override
+			protected void onPostExecute(List<SearchResult> results) {
+				if (paused || !isAdded() || searchUICore.getPhrase() != phrase) {
+					return;
+				}
+				searching = false;
+				hideProgressBar();
+				// skipSorting keeps the route order and makes "Show on map" draw these results, not the whole category
+				SearchResultCollection collection = new SearchResultCollection(phrase, true)
+						.addSearchResults(results, false, false);
+				setResultCollection(collection);
+				updateSearchResult(collection, false);
+				updateTopFilterChips();
+			}
+		});
 	}
 
 	private void showLocationToolbar() {
@@ -2687,6 +2761,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			spatialSearchScopeName = referenceObject.getName();
 			spatialSearchBBox31 = getSpatialCategoryBBox31(referenceObject);
 			useSpatialSearchLocation = true;
+			useAlongRoute = false;
 			useMapCenter = false;
 			centerLatLon = null;
 			result.location = spatialSearchLocation;
