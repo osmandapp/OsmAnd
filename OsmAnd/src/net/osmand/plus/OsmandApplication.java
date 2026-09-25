@@ -156,17 +156,20 @@ public class OsmandApplication extends MultiDexApplication {
 	DownloadService downloadService;
 	OsmandAidlApi aidlApi;
 	OsmAndDiagnosticThread diagnosticThread;
+	
 
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
 	OnRequestPermissionsResultCallback carAppPermissionListener;
 
+	private final MemoryLog memoryLog = new MemoryLog();
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final UiUtilities iconsCache = new UiUtilities(this);
 	private final LocaleHelper localeHelper = new LocaleHelper(this);
 	private final ToastHelper toastHelper = new ToastHelper(this);
 	private final CoordinateFormatHelper coordinateFormatHelper = new CoordinateFormatHelper(this);
+	
 	PanelAppearanceSettingsManager panelAppearanceSettingsManager;
 
 	// start variables
@@ -337,10 +340,15 @@ public class OsmandApplication extends MultiDexApplication {
 		return externalStorageDirectoryReadOnly;
 	}
 
+	@NonNull
+	public MemoryLog getMemoryLog() {
+		return memoryLog;
+	}
+
 	private synchronized void startDiagnostics() {
 		OsmAndDiagnosticThread diagnosticThread = this.diagnosticThread;
 		if (diagnosticThread == null || !diagnosticThread.isAlive()) {
-			MemoryLog.watchActivities(this);
+			memoryLog.watchActivities(this);
 			diagnosticThread = new OsmAndDiagnosticThread(this);
 			diagnosticThread.start();
 			this.diagnosticThread = diagnosticThread;
@@ -574,7 +582,7 @@ public class OsmandApplication extends MultiDexApplication {
 	@Override
 	public void onTrimMemory(int level) {
 		super.onTrimMemory(level);
-		MemoryLog.onTrimMemory(level);
+		memoryLog.onTrimMemory(level);
 	}
 
 	@Override
