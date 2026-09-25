@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.selectlocation.SelectLocationController;
 import net.osmand.plus.keyevent.listener.EventType;
 import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
@@ -146,8 +147,9 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 		boolean isMapActivityActive = AndroidUtils.isActivityNotDestroyed(mapActivity) && settings.MAP_ACTIVITY_ENABLED;
 		boolean isMapVisible = mapActivity.isMapVisible();
 		boolean isMapRouteMenuVisible = isMapActivityActive && mapActivity.getMapRouteInfoMenu().isVisible();
+		boolean isSelectLocationVisible = SelectLocationController.getExistedInstance(app) != null;
 
-		boolean letterAllowedScreenVisible = isMapVisible || isMapRouteMenuVisible;
+		boolean letterAllowedScreenVisible = isMapVisible || isMapRouteMenuVisible || isSelectLocationVisible;
 		return isLetterKeyCode(keyCode) && !letterAllowedScreenVisible;
 	}
 

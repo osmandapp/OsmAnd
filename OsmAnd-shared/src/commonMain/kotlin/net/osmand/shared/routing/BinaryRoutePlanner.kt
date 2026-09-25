@@ -397,7 +397,7 @@ class BinaryRoutePlanner {
 		if (obstacle < 0) {
 			return -1.0
 		}
-		val heightObstacle = ctx.getRouter().defineHeightObstacle(road, segmentInd, prevSegmentInd)
+		val heightObstacle = ctx.getRouter().defineHeightObstacle(road, prevSegmentInd, segmentInd)
 		if (heightObstacle < 0) {
 			return -1.0
 		}

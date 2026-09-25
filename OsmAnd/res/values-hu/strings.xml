@@ -4813,7 +4813,7 @@
     <string name="visualizing_button_grid">Gombrács megjelenítése a térképen</string>
     <string name="efficient_grid">Hatékony rács</string>
     <string name="deleted_maps_warning">%d elem törlésére készül.\nFolytatja?</string>
-    <string name="deleted_maps_prompt">Ezek a térképek már nem támogatottak, és kisebb régiók váltották fel őket. Távolítsa el őket, és töltse le az új verziókat.</string>
+    <string name="deleted_maps_prompt">Ezek a térképek már nem támogatottak. Távolítsa el őket, és töltse le az új verziókat.</string>
     <string name="unsupported_maps">Nem támogatott térképek</string>
     <string name="routing_attr_weightrating_name">Megengedett össztömeg</string>
     <string name="routing_attr_maxaxleload_name">Megengedett legnagyobb tengelyterhelés</string>
@@ -5265,7 +5265,6 @@
     <string name="share_favorites_share_failed">Nem sikerült megosztani a fájlt.</string>
     <string name="share_favorites_missing_media_warning">Néhány csatolt médiafájl nem volt beilleszthető.</string>
     <string name="share_favorites_media_preparation_failed">Nem sikerült beilleszteni a csatolt médiafájlokat. Csak pontok megosztása.</string>
-    <string name="search_on_web">Keresés a világhálón</string>
     <string name="astro_eclipse_column_below_horizon">Horizont alatt</string>
     <string name="quick_action_add_track">Nyomvonal hozzáadása</string>
     <string name="quick_action_tracks_select_descr">Adjon hozzá egy vagy több nyomvonalat, hogy egyetlen koppintással megjeleníthesse vagy elrejthesse őket a térképen.</string>

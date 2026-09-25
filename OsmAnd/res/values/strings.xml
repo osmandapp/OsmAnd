@@ -11,6 +11,11 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="contour_labels">Labels</string>
+	<string name="contour_label_direction_descr">Uphill: the top of each height number faces higher ground, as on paper topographic maps. The short ticks on the lines point downhill.</string>
+	<string name="rendering_attr_contourLabelDirection_name">Label direction</string>
+	<string name="rendering_value_upright_name">Upright</string>
+	<string name="rendering_value_uphill_name">Uphill</string>
 	<string name="shared_string_visibility">Visibility</string>
 	<string name="opening_hours_public_holiday">Public holidays</string>
 	<string name="opening_hours_school_holiday">School holidays</string>
@@ -114,7 +119,6 @@
 	<string name="share_favorites_preparation_failed">Could not prepare files for sharing.</string>
 	<string name="share_favorites_share_failed">Could not share the file.</string>
 	<string name="share_favorites_missing_media_warning">Some attached media could not be included.</string>
-	<string name="search_on_web">Search on web</string>
     <string name="release_5_4">
         • Refreshed search UI: sorting, category filters, cleaner look\n\n
         • Attach photos and media to Favorites\n\n

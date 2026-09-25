@@ -1,6 +1,5 @@
 package net.osmand.test.ui.tracks;
 
-import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
@@ -12,6 +11,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static net.osmand.test.common.EspressoUtils.onDialogView;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 
 import static org.hamcrest.Matchers.allOf;
@@ -80,10 +80,10 @@ public class DefaultAppearanceColorLineStyleConstraintTest extends AndroidTest {
 		// --- Direction 1: picking a non-solid line style forces color to Solid ---
 		selectFromCardPopup(lineStyleCardHeader(), R.string.gpx_line_style_dashed);
 
-		onView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.gpx_line_style_dashed)));
-		onView(cardSelectorTitle(colorCardHeader())).check(matches(withText(R.string.track_coloring_solid)));
+		onDialogView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.gpx_line_style_dashed)));
+		onDialogView(cardSelectorTitle(colorCardHeader())).check(matches(withText(R.string.track_coloring_solid)));
 
-		onView(allOf(withId(R.id.card_selector), isDescendantOfA(colorCardHeader()))).perform(click());
+		onDialogView(allOf(withId(R.id.card_selector), isDescendantOfA(colorCardHeader()))).perform(click());
 		Espresso.onIdle();
 
 		ComposePopupMenu.assertItemDisplayed(composeRule, app.getString(R.string.track_coloring_solid));
@@ -96,27 +96,27 @@ public class DefaultAppearanceColorLineStyleConstraintTest extends AndroidTest {
 		// reset the line style back to "Original" (instead of closing/reopening the whole
 		// dialog - see the class doc) so color is unrestricted again for Direction 2
 		selectFromCardPopup(lineStyleCardHeader(), R.string.shared_string_original);
-		onView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.shared_string_original)));
+		onDialogView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.shared_string_original)));
 
 		// --- Direction 2: picking a non-solid color forces line style to Solid ---
 		selectFromCardPopup(colorCardHeader(), R.string.shared_string_speed);
 
-		onView(cardSelectorTitle(colorCardHeader())).check(matches(withText(R.string.shared_string_speed)));
-		onView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.gpx_line_style_solid)));
+		onDialogView(cardSelectorTitle(colorCardHeader())).check(matches(withText(R.string.shared_string_speed)));
+		onDialogView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.gpx_line_style_solid)));
 
 		// the inline style toggle must disable both non-solid options and keep "Solid" enabled
-		onView(withContentDescription(app.getString(R.string.gpx_line_style_dashed)))
+		onDialogView(withContentDescription(app.getString(R.string.gpx_line_style_dashed)))
 				.check(matches(allOf(isDescendantOfA(withId(R.id.custom_radio_buttons)), not(isEnabled()))));
-		onView(withContentDescription(app.getString(R.string.gpx_line_style_dotted)))
+		onDialogView(withContentDescription(app.getString(R.string.gpx_line_style_dotted)))
 				.check(matches(allOf(isDescendantOfA(withId(R.id.custom_radio_buttons)), not(isEnabled()))));
-		onView(withContentDescription(app.getString(R.string.gpx_line_style_solid)))
+		onDialogView(withContentDescription(app.getString(R.string.gpx_line_style_solid)))
 				.check(matches(allOf(isDescendantOfA(withId(R.id.custom_radio_buttons)), isEnabled())));
 
 		// the explanation text under the toggle must be shown
-		onView(allOf(withId(R.id.description), hasSibling(withId(R.id.segmented_button))))
+		onDialogView(allOf(withId(R.id.description), hasSibling(withId(R.id.segmented_button))))
 				.check(matches(allOf(isDisplayed(), withText(R.string.gpx_line_style_desc_unavailable_for_color))));
 
-		onView(allOf(withId(R.id.card_selector), isDescendantOfA(lineStyleCardHeader()))).perform(click());
+		onDialogView(allOf(withId(R.id.card_selector), isDescendantOfA(lineStyleCardHeader()))).perform(click());
 		Espresso.onIdle();
 
 		ComposePopupMenu.assertItemDisplayed(composeRule, app.getString(R.string.gpx_line_style_solid));
@@ -131,7 +131,7 @@ public class DefaultAppearanceColorLineStyleConstraintTest extends AndroidTest {
 	}
 
 	private void closeDialog() {
-		onView(withContentDescription(app.getString(R.string.shared_string_close))).perform(click());
+		onDialogView(withContentDescription(app.getString(R.string.shared_string_close))).perform(click());
 		Espresso.onIdle();
 	}
 
@@ -148,7 +148,7 @@ public class DefaultAppearanceColorLineStyleConstraintTest extends AndroidTest {
 	}
 
 	private void selectFromCardPopup(@NonNull Matcher<View> cardHeader, int titleTextId) {
-		onView(allOf(withId(R.id.card_selector), isDescendantOfA(cardHeader))).perform(click());
+		onDialogView(allOf(withId(R.id.card_selector), isDescendantOfA(cardHeader))).perform(click());
 		ComposePopupMenu.clickItem(composeRule, app.getString(titleTextId));
 		Espresso.onIdle();
 	}
