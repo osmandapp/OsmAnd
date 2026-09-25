@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
@@ -86,19 +87,24 @@ fun NavigationScreen(
 @Composable
 private fun TripSummary(navigation: NavigationState) {
 	Column(
-		modifier = Modifier.fillMaxWidth(),
+		modifier = Modifier
+			.fillMaxWidth()
+			.padding(horizontal = 10.percentOfWidth()),
 		horizontalAlignment = Alignment.CenterHorizontally
 	) {
 		Text(
 			text = navigation.leftDistanceText,
-			style = MaterialTheme.typography.displaySmall
+			style = MaterialTheme.typography.displaySmall,
+			maxLines = 1
 		)
 		Text(
 			text = listOfNotNull(navigation.leftTimeText, navigation.etaText)
 				.filter { it.isNotEmpty() }
 				.joinToString("  ·  "),
 			style = MaterialTheme.typography.bodySmall,
-			color = MaterialTheme.colorScheme.onSurfaceVariant
+			color = MaterialTheme.colorScheme.onSurfaceVariant,
+			maxLines = 1,
+			overflow = TextOverflow.Ellipsis
 		)
 		if (navigation.paused) {
 			Text(
@@ -115,7 +121,9 @@ private fun Maneuver(maneuver: ManeuverInfo, icon: ImageBitmap?) {
 	Column(
 		modifier = Modifier
 			.fillMaxWidth()
-			.padding(vertical = 6.dp),
+			// The street name comes from the phone at whatever length OSM gives it, and a
+			// centred line without this margin runs off both sides of a round display.
+			.padding(horizontal = 10.percentOfWidth(), vertical = 6.dp),
 		horizontalAlignment = Alignment.CenterHorizontally
 	) {
 		Row(verticalAlignment = Alignment.CenterVertically) {
@@ -139,6 +147,10 @@ private fun Maneuver(maneuver: ManeuverInfo, icon: ImageBitmap?) {
 				style = MaterialTheme.typography.bodySmall,
 				color = MaterialTheme.colorScheme.onSurfaceVariant,
 				textAlign = TextAlign.Center,
+				// Two lines hold the long "Turn right and go <street>" phrases the phone
+				// sends; beyond that a single manoeuvre would push the next one off screen.
+				maxLines = 2,
+				overflow = TextOverflow.Ellipsis,
 				modifier = Modifier.padding(top = 2.dp)
 			)
 		}
