@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index/>
+    <query>
+        <!-- house number suffix: "12 bis" -->
+        <building key="bis" value="Bis"/>
+
+        <conjunction key="de"/>
+        <conjunction key="la"/>
+        <conjunction key="el"/>
+        <conjunction key="en"/>
+        <conjunction key="y"/>
+    </query>
+</rules>

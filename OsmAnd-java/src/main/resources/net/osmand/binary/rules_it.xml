@@ -16,5 +16,12 @@
         <variant object="street" source="(?iu)\bStrada\s+Regionale\s+(\d+)\b" target="SR$1"/>
     </index>
     <!-- EL1 uses UnglueRule; SA1 needs candidate-stage diagnosis before broad S. expansion. -->
-    <query/>
+    <query>
+        <!-- house number suffixes: "12 bis", "12/ter" -->
+        <building key="bis" value="Bis"/>
+        <building key="ter" value="Ter"/>
+
+        <conjunction key="il"/>
+        <conjunction key="la"/>
+    </query>
 </rules>

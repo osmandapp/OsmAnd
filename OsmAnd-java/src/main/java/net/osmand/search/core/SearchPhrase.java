@@ -174,16 +174,19 @@ public class SearchPhrase {
 				boolean decryptAbbreviations = needDecryptAbbreviations();
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
-						sp.firstUnknownSearchWord = decryptAbbreviations ? Abbreviations.replace(wd, "en") : wd;
+						sp.firstUnknownSearchWord = decryptAbbreviations ? Abbreviations.replace(wd, DECRYPT_ABBREVIATIONS_LOCALE) : wd;
 						first = false;
 					} else {
-						sp.otherUnknownWords.add(decryptAbbreviations ? Abbreviations.replace(wd, "en") : wd);
+						sp.otherUnknownWords.add(decryptAbbreviations ? Abbreviations.replace(wd, DECRYPT_ABBREVIATIONS_LOCALE) : wd);
 					}
 				}
 			}
 		}
 		return sp;
 	}
+
+	// needDecryptAbbreviations() is true only for an English region, so the expansion uses the English rules
+	private static final String DECRYPT_ABBREVIATIONS_LOCALE = "en";
 
 	private boolean needDecryptAbbreviations() {
 		String langs = settings != null ? settings.getRegionLang() : null;

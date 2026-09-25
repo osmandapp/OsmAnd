@@ -8,13 +8,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/** Name variants shared by the OBF writer and spatial search. Locale files override matching rules. */
+/**
+ * Name variants shared by the OBF writer and spatial search.
+ * <p>
+ * Rules are layered from general to specific: {@code rules.xml} (every map), {@code rules_<language>.xml}, then
+ * {@code rules_<language>_<COUNTRY>.xml}. A lower layer adds rules or replaces a rule with the same key (tag and key
+ * for entries, object and source for variants); {@code enabled="false"} removes an inherited rule. So a rule that
+ * holds for a language goes to its language file, and a country where it is wrong switches it off in its own file.
+ * The locale is the locale of the data ({@link SearchLocales#forMap}, {@link SearchLocales#forName}), not the
+ * language of the user interface.
+ */
 public final class SearchVariantRules {
 	private interface Rule {
 	}
@@ -50,9 +58,9 @@ public final class SearchVariantRules {
 		this.queryEntries = Collections.unmodifiableList(queryEntries);
 	}
 
+	/** @param locale rules locale; null, empty or malformed selects only the base rules */
 	public static SearchVariantRules forLocale(String locale) {
-		String normalized = normalizeLocale(locale);
-		return CACHE.computeIfAbsent(normalized, SearchVariantRules::load);
+		return CACHE.computeIfAbsent(SearchLocales.normalize(locale), SearchVariantRules::load);
 	}
 
 	public List<Variant> index() {
@@ -84,31 +92,6 @@ public final class SearchVariantRules {
 			}
 		}
 		return new SearchVariantRules(index, query);
-	}
-
-	private static String normalizeLocale(String locale) {
-		if (locale == null || locale.isEmpty()) {
-			return "";
-		}
-		String[] parts = locale.replace('-', '_').split("_");
-		StringBuilder normalized = new StringBuilder();
-		for (int i = 0; i < parts.length; i++) {
-			if (!parts[i].matches("[A-Za-z0-9]{2,8}")) {
-				throw new IllegalArgumentException("Invalid rules locale: " + locale);
-			}
-			if (i > 0) {
-				normalized.append('_');
-			}
-			if (i == 0) {
-				normalized.append(parts[i].toLowerCase(Locale.ROOT));
-			} else if (parts[i].length() == 4) {
-				normalized.append(parts[i].substring(0, 1).toUpperCase(Locale.ROOT))
-						.append(parts[i].substring(1).toLowerCase(Locale.ROOT));
-			} else {
-				normalized.append(parts[i].toUpperCase(Locale.ROOT));
-			}
-		}
-		return normalized.toString();
 	}
 
 	private static void read(String file, Map<String, Rule> index, Map<String, Rule> query, boolean required) {
@@ -214,6 +197,16 @@ public final class SearchVariantRules {
 			this.all = "All".equals(mode);
 			this.source = Pattern.compile(source);
 			this.target = target;
+		}
+
+		/** regexp of the form that is rewritten */
+		public String source() {
+			return source.pattern();
+		}
+
+		/** replacement of the rewritten form */
+		public String target() {
+			return target;
 		}
 
 		public boolean appliesTo(String owner) {

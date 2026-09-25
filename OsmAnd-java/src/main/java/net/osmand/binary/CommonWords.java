@@ -101,7 +101,8 @@ public class CommonWords {
 	
 	
 	private void addAbbrevationsToCommon() {
-		Map<String, String> abbreviations = Abbreviations.getAbbreviations("");
+		// the predefined vocabulary is English (street, road, drive...), as the address expansion rules
+		Map<String, String> abbreviations = Abbreviations.getAbbreviations("en");
 		Iterator<Entry<String, String>> it = abbreviations.entrySet().iterator();
 		while (it.hasNext()) {
 			Entry<String, String> e = it.next();

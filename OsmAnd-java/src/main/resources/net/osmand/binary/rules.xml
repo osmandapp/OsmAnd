@@ -1,80 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rules version="1">
-    <!-- Load this base, then rules_<language>.xml and rules_<language>_<region>.xml.
-         Locale rules replace matching tag/key or variant object/source within the same section;
-         enabled="false" removes the matching rule.
+    <!-- Load this base, then rules_<language>.xml and rules_<language>_<COUNTRY>.xml (SearchLocales: the locale
+         of the map data, "en_US" for a US map, "de_CH" for name:de of a Swiss map).
+         Put a rule at the most general level where it holds; a lower level replaces matching tag/key or variant
+         object/source within the same section, and enabled="false" removes an inherited rule for its locale.
+         This base holds only rules that are true in every language: today there are none, words and their
+         abbreviations belong to a language file. A map without a locale ("" - World basemap, an unknown map)
+         gets no word rules at all.
+         A pair of forms is matched on one side only: query when one word expands to one word, index otherwise.
          object is the owner of the name: street, locality, boundary, postcode, poi.
          source is a Java regexp and target a Matcher replacement ($1, etc.).
          mode="All" replaces all matches; omitted mode requires exactly one.
          Query variant targets must normalize to one word; phrase expansions belong in index.
          direction and index/search expand names; query/search expands search tokens.
          building recognizes house qualifiers; conjunction marks service words. -->
-    <index>
-        <!-- Legacy address-word expansion; each form also marks key and value as common. -->
-        <direction key="e" value="East"/>
-        <direction key="w" value="West"/>
-        <direction key="s" value="South"/>
-        <direction key="n" value="North"/>
-        <direction key="sw" value="Southwest"/>
-        <direction key="se" value="Southeast"/>
-        <direction key="nw" value="Northwest"/>
-        <direction key="ne" value="Northeast"/>
-
-        <search key="ln" value="Lane"/>
-        <search key="dr" value="Drive"/>
-        <search key="rd" value="Road"/>
-        <search key="av" value="Avenue"/>
-        <search key="st" value="Street"/>
-        <search key="hwy" value="Highway"/>
-        <search key="blvd" value="Boulevard"/>
-    </index>
-    <query>
-        <!-- Search starts with the index entries above; these override or extend it. -->
-        <search key="ave" value="Avenue"/>
-        <search key="st" value="Street Saint"/>
-        <search key="о" value="Остров"/>
-        <search key="остров" value="о."/>
-        <search key="1st" value="First"/>
-        <search key="2nd" value="Second"/>
-        <search key="3rd" value="Third"/>
-        <search key="first" value="1st"/>
-        <search key="second" value="2nd"/>
-        <search key="third" value="3rd"/>
-        <search key="fourth" value="4th"/>
-        <search key="fifth" value="5th"/>
-        <search key="sixth" value="6th"/>
-        <search key="seventh" value="7th"/>
-
-        <!-- A building suffix is recognized as a number part, not a free name synonym. -->
-        <building key="bis" value="Bis"/>
-        <building key="ter" value="Ter"/>
-        <building key="quater" value="Quater"/>
-        <building key="bldg" value="Building"/>
-        <building key="ste" value="Suite"/>
-        <building key="unt" value="Unit"/>
-        <building key="apt" value="Apartment"/>
-        <building key="fl" value="Floor"/>
-        <building key="flr" value="Floor"/>
-        <building key="bsmt" value="Basement"/>
-
-        <!-- Existing stop words are shared by legacy tokenization and spatial ranking. -->
-        <conjunction key="the"/>
-        <conjunction key="de"/>
-        <conjunction key="du"/>
-        <conjunction key="der"/>
-        <conjunction key="den"/>
-        <conjunction key="die"/>
-        <conjunction key="das"/>
-        <conjunction key="la"/>
-        <conjunction key="le"/>
-        <conjunction key="el"/>
-        <conjunction key="il"/>
-        <conjunction key="of"/>
-        <conjunction key="and"/>
-        <conjunction key="und"/>
-        <conjunction key="en"/>
-        <conjunction key="et"/>
-        <conjunction key="y"/>
-        <conjunction key="и"/>
-    </query>
+    <index/>
+    <query/>
 </rules>

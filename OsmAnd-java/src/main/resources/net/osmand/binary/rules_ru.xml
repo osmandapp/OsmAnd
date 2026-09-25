@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index/>
+    <query>
+        <search key="о" value="Остров"/>
+        <search key="остров" value="о."/>
+
+        <conjunction key="и"/>
+    </query>
+</rules>

@@ -21,8 +21,8 @@ import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
-import net.osmand.binary.CommonWordsMultiIndex;
 import net.osmand.binary.NameIndexReader;
+import net.osmand.binary.SearchLocales;
 import net.osmand.binary.NameIndexReader.NameIndexReaderBytes;
 import net.osmand.binary.NameIndexReader.PrefixNameValue;
 import net.osmand.binary.NameIndexReader.ValueFreq;
@@ -491,7 +491,8 @@ public class SpatialSearchContext {
 
 	private void readAtoms(List<SpatialSearchToken> tokens, BinaryMapIndexReader b, NameIndexReader indx, int indxInd)
 			throws IOException {
-		String locale = CommonWordsMultiIndex.getDefaultGroupId(
+		// rules of the data of this map (en_US, de_CH...), whatever the language of the user interface is
+		String locale = SearchLocales.forMap(
 				indx.addressRegion != null ? indx.addressRegion.getName() : indx.poiRegion.getName());
 		// sort to assign tokens to '2nd street 2' first instead '2 2nd street'
 		tokens.sort(new Comparator<SpatialSearchToken>() {
@@ -987,7 +988,7 @@ public class SpatialSearchContext {
 					if (numeric) {
 						numericNotMatch = !t.word.contains(otherName); // "us 15" data, "us-15" token
 					}
-					if (!Abbreviations.isCommonSkipOtherCnt(otherName, locale == null ? "" : locale) &&
+					if (!Abbreviations.isCommonSkipOtherCnt(otherName, locale) &&
 						 !isWordCommonlyUsed(indx, otherName)) { // To choose Tour eiffel or onlyWest / North !
 						other++;
 					}
@@ -1126,7 +1127,7 @@ public class SpatialSearchContext {
 		for (SpatialSearchToken token : allTokens) {
 			// assign building to word token isNumber2Letters (number + 1 char) + possible
 			if (t != token && (otherTokens == null || !otherTokens.contains(token))) {
-				if ((street && token.likelyPartOfBuilding(locale == null ? "" : locale)) || (poi && token.likelyRef())) {
+				if ((street && token.likelyPartOfBuilding(locale)) || (poi && token.likelyRef())) {
 					NameIndexAtom atomB = new NameIndexAtom(atom.name, typeToAdd, atom.id,
 							atom.parentid, atom.object, atom.cityAsStreet, atom.otherWordsCnt, atom.otherFoundCnt,
 							atom.coords, atom.nearbyRadius, t.originalOrder);
