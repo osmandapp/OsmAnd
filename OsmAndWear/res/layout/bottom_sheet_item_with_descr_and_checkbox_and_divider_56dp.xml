@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:gravity="center_vertical"
+	android:orientation="horizontal">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+		tools:src="@drawable/list_destination" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<include layout="@layout/bottom_sheet_item_with_descr_and_checkbox_content_56dp" />
+
+		<include
+			android:id="@+id/divider_bottom"
+			layout="@layout/simple_divider_item" />
+
+	</LinearLayout>
+
+</LinearLayout>

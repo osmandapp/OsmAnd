@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/content"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<com.google.android.material.appbar.AppBarLayout
+			android:id="@+id/app_bar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/appbar_and_list_background_color"
+			android:elevation="5dp">
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/action_bar_height" />
+
+		</com.google.android.material.appbar.AppBarLayout>
+
+		<net.osmand.plus.widgets.OsmandTextFieldBoxes
+			android:id="@+id/query"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/list_content_padding"
+			android:focusable="true"
+			android:focusableInTouchMode="true"
+			app:hasClearButton="true"
+			app:labelText="@string/filter_by_name"
+			app:primaryColor="@color/active_color_primary_dark"
+			app:secondaryColor="?android:textColorSecondary">
+
+			<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+				android:id="@+id/query_et"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="text"
+				android:maxLines="1"
+				android:scrollHorizontally="true" />
+
+		</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/filters_list"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:orientation="vertical">
+
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/progress_bar"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="4dp"
+			android:indeterminate="true"
+			android:visibility="gone"
+			app:mpb_progressStyle="horizontal"
+			app:mpb_setBothDrawables="true"
+			app:mpb_useIntrinsicPadding="false" />
+
+		<include
+			android:id="@+id/top_divider"
+			layout="@layout/simple_divider_item" />
+
+		<LinearLayout
+			android:id="@+id/buttons_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color"
+			android:gravity="center"
+			android:minHeight="@dimen/bottom_sheet_title_height"
+			android:orientation="horizontal"
+			android:padding="@dimen/content_padding_half">
+
+			<View
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1" />
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/show_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:dialogButtonTitle="@string/shared_string_apply"
+				app:dialogButtonType="tertiary"
+				app:dialogButtonUseUppercaseTitle="true" />
+
+		</LinearLayout>
+	</LinearLayout>
+
+</LinearLayout>

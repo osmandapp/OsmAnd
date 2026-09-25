@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
+		android:id="@+id/scroll_view_container"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+
+		<androidx.core.widget.NestedScrollView
+			android:id="@+id/bottom_sheet_scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:behavior_hideable="false"
+			app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+			<LinearLayout
+				android:id="@+id/items_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/bottom_sheet_content_padding_small" />
+
+		</androidx.core.widget.NestedScrollView>
+
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+	<LinearLayout
+		android:id="@+id/bottom_buttons_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/buttons_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="8dp"
+			android:layout_gravity="bottom"
+			android:background="@drawable/shadow"
+			android:visibility="gone" />
+
+		<include layout="@layout/bottom_buttons" />
+
+	</LinearLayout>
+
+</LinearLayout>
