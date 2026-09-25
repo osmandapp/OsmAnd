@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index>
+        <!-- A3: joined street type without a final dot; leave standalone Straße/Platz untouched. -->
+        <variant object="street" mode="All" source="(?iu)\b([\p{L}\p{M}]{2,})straße\b" target="$1str"/>
+        <variant object="street" mode="All" source="(?iu)\b([\p{L}\p{M}]{2,})platz\b" target="$1pl"/>
+    </index>
+    <query/>
+</rules>

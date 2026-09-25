@@ -156,6 +156,11 @@ public class SearchPhrase {
 		sp.unknownSearchPhrase = textToSearch;
 		
 		sp.lastUnknownSearchWordComplete = isTextComplete(fullText) ;
+		String locale = settings == null ? null : settings.getRegionLang();
+		if (Algorithms.isEmpty(locale) && settings != null) {
+			locale = settings.getLang();
+		}
+		locale = Algorithms.isEmpty(locale) ? "" : locale.split(",")[0].trim();
 		if (!reg.matcher(textToSearch).find()) {
 			sp.firstUnknownSearchWord = sp.unknownSearchPhrase.trim();
 		} else {
@@ -164,15 +169,15 @@ public class SearchPhrase {
 			boolean first = true;
 			for (int i = 0; i < ws.length ; i++) {
 				String wd = ws[i].trim();
-				boolean conjunction = Abbreviations.isConjunction(wd.toLowerCase());
+				boolean conjunction = Abbreviations.isConjunction(wd.toLowerCase(), locale);
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
 				boolean decryptAbbreviations = needDecryptAbbreviations();
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
-						sp.firstUnknownSearchWord = decryptAbbreviations ? Abbreviations.replace(wd) : wd;
+						sp.firstUnknownSearchWord = decryptAbbreviations ? Abbreviations.replace(wd, "en") : wd;
 						first = false;
 					} else {
-						sp.otherUnknownWords.add(decryptAbbreviations ? Abbreviations.replace(wd) : wd);
+						sp.otherUnknownWords.add(decryptAbbreviations ? Abbreviations.replace(wd, "en") : wd);
 					}
 				}
 			}

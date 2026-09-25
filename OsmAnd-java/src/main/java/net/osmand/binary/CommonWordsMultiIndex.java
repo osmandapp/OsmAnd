@@ -200,6 +200,30 @@ public class CommonWordsMultiIndex {
 		return g == null ? null : g.id;
 	}
 
+	/** Map language without loading the writer-only word-frequency resource. */
+	public static String getDefaultGroupId(String mapName) {
+		if (mapName == null) {
+			return null;
+		}
+		String name = mapName.toLowerCase(Locale.ROOT);
+		int slash = Math.max(name.lastIndexOf('/'), name.lastIndexOf('\\'));
+		if (slash >= 0) {
+			name = name.substring(slash + 1);
+		}
+		String group = null;
+		int longest = 0;
+		for (String[] entries : DEFAULT_GROUPS) {
+			for (int i = 1; i < entries.length; i++) {
+				String prefix = entries[i];
+				if (prefix.length() > longest && (name.equals(prefix) || name.startsWith(prefix + "_"))) {
+					group = entries[0];
+					longest = prefix.length();
+				}
+			}
+		}
+		return group;
+	}
+
 	private WordsGroup getGroup(String mapName) {
 		if (mapName == null) {
 			return null;

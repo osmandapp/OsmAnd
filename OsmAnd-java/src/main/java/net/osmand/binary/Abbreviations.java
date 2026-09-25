@@ -3,10 +3,15 @@ package net.osmand.binary;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.SearchAlgorithms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class Abbreviations {
@@ -14,110 +19,38 @@ public class Abbreviations {
     private Abbreviations() {
     }
 
-    private static final Map<String, String> abbreviations = new HashMap<>();
-    // 2nd version search abbrevations for spatial search
-    private static final Map<String, String> searchAbbreviations = new HashMap<>();
-    // set of words to check for buidlings
-    private static final Map<String, String> buildingAbbreviations = new HashMap<>();
-	private static final Set<String> conjunctions = new TreeSet<>();
-	
-	private static final Set<String> commonSkipOtherCnt = new TreeSet<>();
+    private static final Map<String, Dictionary> DICTIONARIES = new ConcurrentHashMap<>();
 
-	private static void addDirectionWord(String key, String full) {
-		abbreviations.put(key, full);
-		commonSkipOtherCnt.add(key);
-		commonSkipOtherCnt.add(full.toLowerCase());
+	private static Dictionary dictionary(String locale) {
+		Objects.requireNonNull(locale, "locale");
+		return DICTIONARIES.computeIfAbsent(locale, key -> new Dictionary(SearchVariantRules.forLocale(key)));
 	}
 
-	private static void addStreetStatus(String key, String full) {
-		abbreviations.put(key, full);
-		commonSkipOtherCnt.add(key);
-		commonSkipOtherCnt.add(full.toLowerCase());
-	}
+	private static final class Dictionary {
+		final Map<String, String> abbreviations = new HashMap<>();
+		final Map<String, String> searchAbbreviations = new HashMap<>();
+		final Set<String> buildingAbbreviations = new TreeSet<>();
+		final Set<String> conjunctions = new TreeSet<>();
+		final Set<String> commonSkipOtherCnt = new TreeSet<>();
 
-	private static void addConjunction(String key) {
-		conjunctions.add(key);
-		commonSkipOtherCnt.add(key);
-	}
-
-	static {
-		// articles
-		addConjunction("the");
-		addConjunction("de");
-		addConjunction("du");
-		addConjunction("der");
-		addConjunction("den");
-		addConjunction("die");
-		addConjunction("das");
-		addConjunction("la");
-		addConjunction("le");
-		addConjunction("el");
-		addConjunction("il");
-		addConjunction("of");
-
-		// and
-		addConjunction("and");
-		addConjunction("und");
-		addConjunction("en");
-		addConjunction("et");
-		addConjunction("y");
-		addConjunction("и");
-		
-		
-
-		// direction
-		addDirectionWord("e", "East");
-		addDirectionWord("w", "West");
-		addDirectionWord("s", "South");
-		addDirectionWord("n", "North");
-		addDirectionWord("sw", "Southwest");
-		addDirectionWord("se", "Southeast");
-		addDirectionWord("nw", "Northwest");
-		addDirectionWord("ne", "Northeast");
-
-		// street status
-		addStreetStatus("ln", "Lane");
-		addStreetStatus("dr", "Drive");
-		addStreetStatus("rd", "Road");
-		addStreetStatus("av", "Avenue");
-		addStreetStatus("st", "Street"); // 2 values could be saint
-		addStreetStatus("hwy", "Highway");
-		addStreetStatus("blvd", "Boulevard");
-	}
-
-	static {
-		searchAbbreviations.putAll(abbreviations);
-		searchAbbreviations.put("ave", "Avenue"); // extra
-		searchAbbreviations.put("st", "Street Saint"); // 2 values could be saint
-		// duplicates - synonyms and not abbrevations actually
-		searchAbbreviations.put("о", "Остров");
-		searchAbbreviations.put("остров", "о.");
-		searchAbbreviations.put("1st", "First");
-		searchAbbreviations.put("2nd", "Second");
-		searchAbbreviations.put("3rd", "Third");
-		searchAbbreviations.put("first", "1st");
-		searchAbbreviations.put("second", "2nd");
-		searchAbbreviations.put("third", "3rd");
-		searchAbbreviations.put("fourth", "4th");
-		searchAbbreviations.put("fifth", "5th");
-		searchAbbreviations.put("sixth", "6th");
-		searchAbbreviations.put("seventh", "7th");
-	}
-
-	// common housenumber additions
-	static {
-		// french
-		buildingAbbreviations.put("bis", "Bis");
-		buildingAbbreviations.put("ter", "Ter");
-		buildingAbbreviations.put("quater", "Quater");
-		// american
-		buildingAbbreviations.put("bldg", "Building");
-		buildingAbbreviations.put("ste", "Suite");
-		buildingAbbreviations.put("unt", "Unit");
-		buildingAbbreviations.put("apt", "Apartment");
-		buildingAbbreviations.put("fl", "Floor");
-		buildingAbbreviations.put("flr", "Floor");
-		buildingAbbreviations.put("bsmt", "Basement");
+		Dictionary(SearchVariantRules rules) {
+			for (SearchVariantRules.Entry entry : rules.indexEntries()) {
+				abbreviations.put(entry.key, entry.value);
+				commonSkipOtherCnt.add(entry.key);
+				commonSkipOtherCnt.add(entry.value.toLowerCase(Locale.ROOT));
+			}
+			searchAbbreviations.putAll(abbreviations);
+			for (SearchVariantRules.Entry entry : rules.queryEntries()) {
+				switch (entry.kind) {
+					case "search" -> searchAbbreviations.put(entry.key, entry.value);
+					case "building" -> buildingAbbreviations.add(entry.key);
+					case "conjunction" -> {
+						conjunctions.add(entry.key);
+						commonSkipOtherCnt.add(entry.key);
+					}
+				}
+			}
+		}
 	}
 
 	public static boolean likelyPartOfRef(String word, Set<String> wordSplit) {
@@ -136,16 +69,17 @@ public class Abbreviations {
 	}
 	
 	// search v-2
-	public static boolean likelyPartOfBuilding(String word, Set<String> wordSplit) {
+	public static boolean likelyPartOfBuilding(String word, Set<String> wordSplit, String locale) {
+		Dictionary rules = dictionary(locale);
 		boolean bldNum = (SearchAlgorithms.isNumber2Letters(word) || word.length() == 1
-				|| buildingAbbreviations.containsKey(word));
+				|| rules.buildingAbbreviations.contains(word));
 		if (bldNum) {
 			return true;
 		}
 		if (wordSplit != null) {
 			// recursion for 2bis
 			for (String w : wordSplit) {
-				boolean likely = likelyPartOfBuilding(w, null);
+				boolean likely = likelyPartOfBuilding(w, null, locale);
 				if (!likely) {
 					return false;
 				}
@@ -157,17 +91,37 @@ public class Abbreviations {
     
     
     // search-v2
-    public static Map<String, String> getSearchabbreviations() {
-		return searchAbbreviations;
+    public static Map<String, String> getSearchabbreviations(String locale) {
+		return dictionary(locale).searchAbbreviations;
+	}
+
+	public record QueryForm(SearchVariantRules.Variant rule, String word) {
+	}
+
+	/** Only one-word replacements can be matched against one name-index atom. */
+	public static List<QueryForm> getQueryForms(String word, String locale) {
+		Objects.requireNonNull(locale, "locale");
+		List<QueryForm> forms = new ArrayList<>();
+		for (SearchVariantRules.Variant rule : SearchVariantRules.forLocale(locale).query()) {
+			String replacement = rule.apply(word);
+			if (replacement != null) {
+				List<String> words = SearchAlgorithms.splitAndNormalize(replacement, false);
+				if (words.size() == 1 && !words.get(0).equals(word)) {
+					forms.add(new QueryForm(rule, words.get(0)));
+				}
+			}
+		}
+		return forms;
 	}
     
     // search-v2
- 	public static boolean isCommonSkipOtherCnt(String lowerCase) {
- 		return commonSkipOtherCnt.contains(lowerCase);
- 	}
+	public static boolean isCommonSkipOtherCnt(String lowerCase, String locale) {
+		return dictionary(locale).commonSkipOtherCnt.contains(lowerCase);
+	}
 
     // Indexing data
-    public static String replaceAll(String phrase) {
+    public static String replaceAll(String phrase, String locale) {
+        Map<String, String> abbreviations = dictionary(locale).abbreviations;
         String[] words = phrase.split(SearchPhrase.DELIMITER);
         StringBuilder r = new StringBuilder();
         boolean changed = false;
@@ -175,7 +129,7 @@ public class Abbreviations {
             if (r.length() > 0) {
                 r.append(SearchPhrase.DELIMITER);
             }
-            String abbrRes = abbreviations.get(w.toLowerCase());
+            String abbrRes = abbreviations.get(w.toLowerCase(Locale.ROOT));
             if (abbrRes == null) {
                 r.append(w);
             } else {
@@ -187,19 +141,19 @@ public class Abbreviations {
     }
     
 	// search-v1
-    public static Map<String, String> getAbbreviations() {
-		return abbreviations;
+    public static Map<String, String> getAbbreviations(String locale) {
+		return dictionary(locale).abbreviations;
 	}
 
 	// search v-1
-    public static String replace(String word) {
-        String value = abbreviations.get(word.toLowerCase());
+	public static String replace(String word, String locale) {
+		String value = dictionary(locale).abbreviations.get(word.toLowerCase(Locale.ROOT));
         return value != null ? value : word;
     }
     
     // search-v1
-	public static boolean isConjunction(String lowerCase) {
-		return conjunctions.contains(lowerCase);
+	public static boolean isConjunction(String lowerCase, String locale) {
+		return dictionary(locale).conjunctions.contains(lowerCase);
 	}
 	
     

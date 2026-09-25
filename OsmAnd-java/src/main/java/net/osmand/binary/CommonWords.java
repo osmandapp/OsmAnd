@@ -101,7 +101,7 @@ public class CommonWords {
 	
 	
 	private void addAbbrevationsToCommon() {
-		Map<String, String> abbreviations = Abbreviations.getAbbreviations();
+		Map<String, String> abbreviations = Abbreviations.getAbbreviations("");
 		Iterator<Entry<String, String>> it = abbreviations.entrySet().iterator();
 		while (it.hasNext()) {
 			Entry<String, String> e = it.next();

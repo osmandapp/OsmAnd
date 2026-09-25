@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index>
+        <!-- A1: names of streets/localities, not arbitrary POI names. -->
+        <variant object="street" source="(?iu)\bPlace\b" target="Pl"/>
+        <variant object="street" source="(?iu)\bParkway\b" target="Pkwy"/>
+        <variant object="street" source="(?iu)\bCourt\b" target="Ct"/>
+        <variant object="street" source="(?iu)\bCircle\b" target="Cir"/>
+        <variant object="street" source="(?iu)\bTerrace\b" target="Ter"/>
+        <variant object="locality" source="(?iu)^Mount(?=\s+[\p{L}\p{M}]{3,})" target="Mt"/>
+        <variant object="locality" source="(?iu)^Fort(?=\s+[\p{L}\p{M}]{3,})" target="Ft"/>
+        <!-- A2: only POI names containing a spaced ampersand. -->
+        <variant object="poi" mode="All" source="(?iu)\s+&amp;\s+" target=" and "/>
+    </index>
+    <query>
+        <!-- A1: candidate must be a street/locality; short forms remain ambiguous elsewhere. -->
+        <variant object="street" source="(?iu)\bPl\b\.?" target="Place"/>
+        <variant object="street" source="(?iu)\bPkwy\b\.?" target="Parkway"/>
+        <variant object="street" source="(?iu)^Ct\.?$" target="Court"/>
+        <variant object="street" source="(?iu)^Cir\.?$" target="Circle"/>
+        <variant object="street" source="(?iu)^Ter\.?$" target="Terrace"/>
+        <variant object="locality" source="(?iu)^Mt\.?$" target="Mount"/>
+        <variant object="locality" source="(?iu)^Ft\.?$" target="Fort"/>
+    </query>
+</rules>

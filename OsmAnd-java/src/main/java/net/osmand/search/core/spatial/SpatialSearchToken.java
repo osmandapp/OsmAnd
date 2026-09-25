@@ -20,6 +20,7 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.NameIndexReader.NameIndexReaderMatcher;
 import net.osmand.binary.ObfConstants;
+import net.osmand.binary.SearchVariantRules;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
 import net.osmand.data.Building;
@@ -84,7 +85,11 @@ public class SpatialSearchToken {
 	int mainNumber = -1;
 	/** a bare number whose value another query word already carries: '28' next to '28-ма' */
 	boolean numberNamedByOther;
-	CollatorStringMatcher[] otherMatch;
+	private final Map<String, CollatorStringMatcher[]> otherMatchByLocale = new HashMap<>();
+	private final Map<String, List<QueryMatcher>> queryMatchersByLocale = new HashMap<>();
+
+	private record QueryMatcher(SearchVariantRules.Variant rule, CollatorStringMatcher matcher) {
+	}
 	
 	Map<String, Boolean> fastMatchCheck = new HashMap<String, Boolean>();
 	Map<String, Boolean> fastPrefMatchCheck = new HashMap<String, Boolean>();
@@ -92,7 +97,7 @@ public class SpatialSearchToken {
 	boolean categoryMatchMode = false;
 	TLongHashSet cacheCategoryFilterObjects = new TLongHashSet();
 	
-	public record PartialMatch(NameIndexAtom atom, List<SpatialSearchToken> other, boolean nonNumericMatch) {
+	public record PartialMatch(NameIndexAtom atom, List<SpatialSearchToken> other, boolean nonNumericMatch, String locale) {
 	}
 
 	public SpatialSearchToken(int MIN_CHAR_INCOMPLETE, String ow, String original, int order) {
@@ -124,14 +129,21 @@ public class SpatialSearchToken {
 			// PA-21
 			noHyphenCollatorMain = new CollatorStringMatcher(wordAligned.replace("-", ""), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 		}
-		String abbr = Abbreviations.getSearchabbreviations().get(noDot);
-		if (abbr != null) {
-			List<String> other = SearchAlgorithms.splitAndNormalize(abbr, true);
-			otherMatch = new CollatorStringMatcher[other.size()];
-			for(int i = 0; i < other.size(); i++) {
-				otherMatch[i] = new CollatorStringMatcher(other.get(i), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+	}
+
+	private CollatorStringMatcher[] otherMatch(String locale) {
+		return otherMatchByLocale.computeIfAbsent(locale, key -> {
+			String abbr = Abbreviations.getSearchabbreviations(key).get(wordNoDot);
+			if (abbr == null) {
+				return new CollatorStringMatcher[0];
 			}
-		}
+			List<String> words = SearchAlgorithms.splitAndNormalize(abbr, true);
+			CollatorStringMatcher[] matchers = new CollatorStringMatcher[words.size()];
+			for (int i = 0; i < words.size(); i++) {
+				matchers[i] = new CollatorStringMatcher(words.get(i), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+			}
+			return matchers;
+		});
 	}
 	
 	public int getMainNumber() {
@@ -139,7 +151,11 @@ public class SpatialSearchToken {
 	}
 	
 	public boolean likelyPartOfBuilding() {
-		return Abbreviations.likelyPartOfBuilding(word, bldWordSplit);
+		return likelyPartOfBuilding("");
+	}
+
+	public boolean likelyPartOfBuilding(String locale) {
+		return Abbreviations.likelyPartOfBuilding(word, bldWordSplit, locale);
 	}
 	
 	public boolean likelyRef() {
@@ -161,7 +177,27 @@ public class SpatialSearchToken {
 	}
 	
 	
+	private List<QueryMatcher> queryMatchers(String locale) {
+		return queryMatchersByLocale.computeIfAbsent(locale == null ? "" : locale, key -> {
+			List<QueryMatcher> matches = new ArrayList<>();
+			for (Abbreviations.QueryForm form : Abbreviations.getQueryForms(wordNoDot, key)) {
+				matches.add(new QueryMatcher(form.rule(),
+						new CollatorStringMatcher(form.word(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE)));
+			}
+			return matches;
+		});
+	}
+
 	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats) {
+		return getPrefixMatcher(stats, "", false);
+	}
+
+	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String locale) {
+		return getPrefixMatcher(stats, locale, true);
+	}
+
+	private NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String locale, boolean includeQueryRules) {
+		String rulesLocale = locale == null ? "" : locale;
 		return new NameIndexReaderMatcher(word) {
 			
 			@Override
@@ -179,33 +215,41 @@ public class SpatialSearchToken {
 						}
 					}
 				}
-				Boolean cache = fastPrefMatchCheck.get(key);
-				if (cache != null) {
-					stats.sub1PartMatchTime.finish();
-					return cache;
-				}
-				
 				String alignedKey = SearchAlgorithms.alignChars(key);
-				// could be empty after align so match = true! ("''" -> "")
-				boolean matched = matchAlignedKey(alignedKey);
-				if (!matched && mainNumber > 0) {
-					// 4th - key, "4" token
-					matched = Algorithms.extractFirstIntegerNumber(key) == mainNumber;
+				String cacheKey = rulesLocale + '\0' + key;
+				Boolean cache = fastPrefMatchCheck.get(cacheKey);
+				boolean matched;
+				if (cache != null) {
+					matched = cache;
+				} else {
+					// could be empty after align so match = true! ("''" -> "")
+					matched = matchAlignedKey(alignedKey);
+					if (!matched && mainNumber > 0) {
+						// 4th - key, "4" token
+						matched = Algorithms.extractFirstIntegerNumber(key) == mainNumber;
+					}
+					if (!matched) {
+						for (CollatorStringMatcher o : otherMatch(rulesLocale)) {
+							matched |= CollatorStringMatcher.cmatches(collator, o.getPart(), alignedKey,
+									StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+						}
+					}
+					if (!matched && key.startsWith(wordNoDot)
+							&& SearchAlgorithms.letters(key) == SearchAlgorithms.letters(wordNoDot)) {
+						// query 'pa 21' match 'pa21' key
+						matched = true;
+					}
+					fastPrefMatchCheck.put(cacheKey, matched);
 				}
-				if (!matched && otherMatch != null) {
-					for (CollatorStringMatcher o : otherMatch) {
-						matched |= CollatorStringMatcher.cmatches(collator, o.getPart(), alignedKey,
-								StringMatcherMode.CHECK_ONLY_STARTS_WITH);
-						// o.matches(alignedKey) could be needed for matching data with non-processed abbrevations
-//						System.out.println(alignedKey + " ??? " + matched + " " + o.getPart());
+				if (!matched && includeQueryRules) {
+					for (QueryMatcher variant : queryMatchers(rulesLocale)) {
+						if (CollatorStringMatcher.cmatches(collator, variant.matcher().getPart(), alignedKey,
+								StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+							matched = true;
+							break;
+						}
 					}
 				}
-				if (!matched && key.startsWith(wordNoDot)
-						&& SearchAlgorithms.letters(key) == SearchAlgorithms.letters(wordNoDot)) {
-					// query 'pa 21' match 'pa21' key
-					matched = true;
-				}
-				fastPrefMatchCheck.put(key, matched);
 				stats.sub1PartMatchTime.finish();
 				return matched;
 			}
@@ -303,7 +347,7 @@ public class SpatialSearchToken {
 		return true;
 	}
 
-	boolean matchName(String name, TIntArrayList poiTypes) {
+	private boolean matchName(String name, TIntArrayList poiTypes, String locale) {
 //		System.out.printf("query '%s' matches '%s' %s\n", word, name, collatorMain.matches(name) || 
 //				collatorMain.matches(name.replace(' ', '-')));
 		if (categoryMatchMode) {
@@ -312,7 +356,8 @@ public class SpatialSearchToken {
 		if (name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
 			return poiTypes != null && matchPoiCategoryKeys(poiTypes);
 		}
-		Boolean cache = fastMatchCheck.get(name);
+		String cacheKey = locale + '\0' + name;
+		Boolean cache = fastMatchCheck.get(cacheKey);
 		if (cache != null) {
 			return cache;
 		}
@@ -324,12 +369,10 @@ public class SpatialSearchToken {
 					return res;
 				}
 			}
-			if (otherMatch != null) {
-				for (CollatorStringMatcher o : otherMatch) {
-					if (o.matches(name)) {
-						res = true;
-						return res;
-					}
+			for (CollatorStringMatcher o : otherMatch(locale)) {
+				if (o.matches(name)) {
+					res = true;
+					return res;
 				}
 			}
 			if ((noDotCollatorMain == null ? collatorMain : noDotCollatorMain).matches(name)) {
@@ -341,7 +384,23 @@ public class SpatialSearchToken {
 				return res;
 			}
 		} finally {
-			fastMatchCheck.put(name, res);
+			fastMatchCheck.put(cacheKey, res);
+		}
+		return false;
+	}
+
+	boolean matchName(String name, TIntArrayList poiTypes, String locale, String object) {
+		locale = locale == null ? "" : locale;
+		if (matchName(name, poiTypes, locale)) {
+			return true;
+		}
+		if (categoryMatchMode || name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
+			return false;
+		}
+		for (QueryMatcher variant : queryMatchers(locale)) {
+			if (variant.rule().appliesTo(object) && variant.matcher().matches(name)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -372,12 +431,14 @@ public class SpatialSearchToken {
 		return false;
 	}
 	
-	public void addPartialCommonAtom(NameIndexAtom atom, List<SpatialSearchToken> otherTokens, boolean numericNotMatch) {
-		partialExactMatch.add(new PartialMatch(atom, otherTokens, numericNotMatch));
+	public void addPartialCommonAtom(NameIndexAtom atom, List<SpatialSearchToken> otherTokens, boolean numericNotMatch,
+			String locale) {
+		partialExactMatch.add(new PartialMatch(atom, otherTokens, numericNotMatch, locale));
 	}
 	
-	public void addPartialOtherAtom(NameIndexAtom atom, List<SpatialSearchToken> otherTokens, boolean numericNotMatch) {
-		partialMatch.add(new PartialMatch(atom, otherTokens, numericNotMatch));
+	public void addPartialOtherAtom(NameIndexAtom atom, List<SpatialSearchToken> otherTokens, boolean numericNotMatch,
+			String locale) {
+		partialMatch.add(new PartialMatch(atom, otherTokens, numericNotMatch, locale));
 	}
 	
 	String[] matchSplitName(String name) {
