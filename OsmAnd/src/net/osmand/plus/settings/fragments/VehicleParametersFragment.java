@@ -201,7 +201,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		}
 		Preference defaultSpeedPref = new Preference(ctx);
 		defaultSpeedPref.setKey(DEFAULT_SPEED);
-		defaultSpeedPref.setTitle(R.string.default_speed_setting_title);
+		defaultSpeedPref.setTitle(R.string.travel_speed);
 		defaultSpeedPref.setSummary(R.string.default_speed_setting_descr);
 		defaultSpeedPref.setIcon(getPreferenceIcon(DEFAULT_SPEED));
 		defaultSpeedPref.setLayoutResource(R.layout.preference_with_descr);

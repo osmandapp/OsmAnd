@@ -11,11 +11,13 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
-	<string name="default_speed_screen_descr">Used to estimate the arrival time where there is no other speed data.</string>
-	<string name="eta_use_average_speed">Use my average speed</string>
-	<string name="eta_use_average_speed_descr">Arrival time follows your average speed over the last %1$s. The default speed is used while you stand still.</string>
-	<string name="routing_speed_limits">Routing limits</string>
-	<string name="routing_speed_limits_descr">Affect which roads the route prefers, not the arrival time.</string>
+	<string name="travel_speed">Travel speed</string>
+	<string name="default_speed_descr">Used when there is no speed data for the road, or while you stand still.</string>
+	<string name="speed_range">Speed range</string>
+	<string name="speed_range_descr">Used for both route calculation and arrival time.</string>
+	<string name="eta_adapt_to_my_speed">Adapt to my speed</string>
+	<string name="eta_adapt_to_my_speed_descr">Arrival time is based on your speed over the last %1$s.</string>
+	<string name="eta_adapt_to_my_speed_off_descr">Arrival time is based on the expected speed on each road of the route. Turn on to base it on how fast you actually move.</string>
 	<string name="contour_labels">Labels</string>
 	<string name="contour_label_direction_descr">Uphill: the top of each height number faces higher ground, as on paper topographic maps. The short ticks on the lines point downhill.</string>
 	<string name="rendering_attr_contourLabelDirection_name">Label direction</string>
