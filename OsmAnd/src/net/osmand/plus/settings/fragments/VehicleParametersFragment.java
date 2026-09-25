@@ -201,7 +201,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		}
 		Preference defaultSpeedPref = new Preference(ctx);
 		defaultSpeedPref.setKey(DEFAULT_SPEED);
-		defaultSpeedPref.setTitle(R.string.default_speed_setting_title);
+		defaultSpeedPref.setTitle(R.string.travel_speed);
 		defaultSpeedPref.setSummary(R.string.default_speed_setting_descr);
 		defaultSpeedPref.setIcon(getPreferenceIcon(DEFAULT_SPEED));
 		defaultSpeedPref.setLayoutResource(R.layout.preference_with_descr);
@@ -245,8 +245,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				ApplicationMode mode = getSelectedAppMode();
-				VehicleSpeedHelper speedHelper = new VehicleSpeedHelper(app, mode);
-				speedHelper.showSeekbarSettingsDialog(activity);
+				DefaultSpeedFragment.showInstance(activity, mode);
 			}
 			return true;
 		} else if (settings.FUEL_TANK_CAPACITY.getId().equals(key)) {

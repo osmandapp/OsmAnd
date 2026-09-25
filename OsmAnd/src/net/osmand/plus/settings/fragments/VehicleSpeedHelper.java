@@ -71,6 +71,47 @@ public class VehicleSpeedHelper {
 		showDialog(activity, ratio, minValue, maxValue, min, max, defaultSpeedOnly, decimalPrecision);
 	}
 
+	/** Slider bounds and current values of the profile, in the units the user sees. */
+	public static class SpeedConfig {
+		public float ratio;
+		public int min;
+		public int max;
+		public float defaultSpeed;
+		public float minSpeed;
+		public float maxSpeed;
+		public boolean defaultSpeedOnly;
+		public boolean decimalPrecision;
+		public String units;
+	}
+
+	@NonNull
+	public SpeedConfig createSpeedConfig() {
+		GeneralRouter router = app.getRouter(mode);
+		RouteService routeService = mode.getRouteService();
+		float maxSpeedLimit = VehicleSpeedConfigLimits.getMaxSpeedConfigLimit(app, mode);
+		SpeedConfig config = new SpeedConfig();
+		config.defaultSpeedOnly = routeService == STRAIGHT || routeService == DIRECT_TO || router == null;
+		config.decimalPrecision = !config.defaultSpeedOnly && maxSpeedLimit / 1.5f <= FAST_SPEED_THRESHOLD;
+
+		float[] ratio = getSpeedRatio();
+		float[] minValue = new float[1];
+		float[] maxValue = new float[1];
+		Pair<Integer, Integer> pair = getMinMax(router, ratio, minValue, maxValue, config.defaultSpeedOnly, config.decimalPrecision);
+		config.ratio = ratio[0];
+		config.min = pair.first;
+		config.max = pair.second;
+		config.minSpeed = minValue[0];
+		config.maxSpeed = maxValue[0];
+		config.defaultSpeed = roundSpeed(mode.getDefaultSpeed() * ratio[0], config.decimalPrecision);
+		config.units = getSpeedUnits();
+		return config;
+	}
+
+	@NonNull
+	public String formatSpeed(@NonNull SpeedConfig config, float speed) {
+		return formatSpeed(speed, config.decimalPrecision);
+	}
+
 	private void showDialog(@NonNull Activity activity, float[] ratio,
 	                        float[] minValue, float[] maxValue, int min, int max,
 	                        boolean defaultSpeedOnly, boolean decimalPrecision) {
