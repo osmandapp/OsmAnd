@@ -18,13 +18,13 @@ import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
 import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.ListHeader
+import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.OutlinedButton
 import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
 
 import net.osmand.wear.R
 import net.osmand.wear.api.ProfileInfo
-import net.osmand.wear.ui.theme.OsmAndWearColors
 
 /**
  * Profile picker. Ordering is decided on the phone — the active profile, which is also the last
@@ -49,7 +49,7 @@ fun ProfilePickerScreen(
 			items(profiles.size) { index ->
 				val profile = profiles[index]
 				val glyph: @Composable BoxScope.() -> Unit = {
-					ProfileGlyph(profile.iconKey?.let { icons[it] }, OsmAndWearColors.AltAccent)
+					ProfileGlyph(profile.iconKey?.let { icons[it] }, MaterialTheme.colorScheme.primary)
 				}
 				val label: @Composable RowScope.() -> Unit = {
 					Text(text = profile.title, modifier = Modifier.weight(1f))
@@ -61,11 +61,7 @@ fun ProfilePickerScreen(
 						)
 					}
 				}
-				val colors = ButtonDefaults.buttonColors(
-					containerColor = OsmAndWearColors.AltChipContainer,
-					contentColor = OsmAndWearColors.ChipContent,
-					iconColor = OsmAndWearColors.AltAccent
-				)
+				val colors = ButtonDefaults.filledTonalButtonColors()
 
 				// The selected profile is outlined with a tick rather than labelled, as in the
 				// mockups: the ring reads at a glance on a list of near-identical chips.
@@ -74,7 +70,7 @@ fun ProfilePickerScreen(
 						onClick = { onSelect(profile.key) },
 						modifier = Modifier.fillMaxWidth(),
 						colors = colors,
-						border = BorderStroke(2.dp, OsmAndWearColors.AltAccent),
+						border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
 						icon = glyph,
 						label = label
 					)

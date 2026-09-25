@@ -16,13 +16,13 @@ import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
 import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.ListHeader
+import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
 
 import net.osmand.wear.R
 import net.osmand.wear.api.PhoneState
 import net.osmand.wear.ui.Routes
-import net.osmand.wear.ui.theme.OsmAndWearColors
 
 /**
  * Root menu, laid out after the start screen mockup in OsmAnd-Issues#2821: the app name as a
@@ -72,10 +72,10 @@ private fun MenuButton(
 	Button(
 		onClick = onClick,
 		modifier = Modifier.fillMaxWidth(),
-		colors = ButtonDefaults.buttonColors(
-			containerColor = OsmAndWearColors.ChipContainer,
-			contentColor = OsmAndWearColors.ChipContent,
-			iconColor = OsmAndWearColors.Accent
+		// A tonal chip, but with OsmAnd's brand accent on the glyph rather than the scheme's
+		// primary: orange is what the main menu is drawn in on the phone too.
+		colors = ButtonDefaults.filledTonalButtonColors(
+			iconColor = MaterialTheme.colorScheme.tertiary
 		),
 		icon = {
 			Icon(

@@ -13,7 +13,6 @@ import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
 
-import net.osmand.wear.ui.theme.OsmAndWearColors
 
 /** A terminal screen that explains why there is nothing to show and what to do about it. */
 @Composable
@@ -36,7 +35,7 @@ fun MessageScreen(title: String, hint: String? = null) {
 					text = it,
 					textAlign = TextAlign.Center,
 					style = MaterialTheme.typography.bodySmall,
-					color = OsmAndWearColors.HeaderContent,
+					color = MaterialTheme.colorScheme.onSurfaceVariant,
 					modifier = Modifier.padding(top = 4.dp)
 				)
 			}

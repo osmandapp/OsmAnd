@@ -9,11 +9,9 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material3.AlertDialog
 import androidx.wear.compose.material3.AlertDialogDefaults
 import androidx.wear.compose.material3.Icon
-import androidx.wear.compose.material3.IconButtonDefaults
 import androidx.wear.compose.material3.Text
 
 import net.osmand.wear.R
-import net.osmand.wear.ui.theme.OsmAndWearColors
 
 /** Confirmation before a session is ended and written to the phone. */
 @Composable
@@ -32,13 +30,7 @@ fun FinishRecordingDialog(visible: Boolean, onDismiss: () -> Unit, onConfirm: ()
 		text = { Text(stringResource(R.string.wear_finish_recording_hint)) },
 		confirmButton = {
 			AlertDialogDefaults.ConfirmButton(
-				onClick = onConfirm,
-				// The defaults take the theme's primary, which is the orange of the main menu;
-				// trip recording follows the blue accent of its own mockups.
-				colors = IconButtonDefaults.filledIconButtonColors(
-					containerColor = OsmAndWearColors.AltAccent,
-					contentColor = OsmAndWearColors.ChipContent
-				)
+				onClick = onConfirm
 			) {
 				Icon(
 					painter = painterResource(R.drawable.ic_action_done),
@@ -51,11 +43,7 @@ fun FinishRecordingDialog(visible: Boolean, onDismiss: () -> Unit, onConfirm: ()
 		},
 		dismissButton = {
 			AlertDialogDefaults.DismissButton(
-				onClick = onDismiss,
-				colors = IconButtonDefaults.filledTonalIconButtonColors(
-					containerColor = OsmAndWearColors.DialogDismiss,
-					contentColor = OsmAndWearColors.ChipContent
-				)
+				onClick = onDismiss
 			) {
 				Icon(
 					painter = painterResource(R.drawable.ic_action_close),

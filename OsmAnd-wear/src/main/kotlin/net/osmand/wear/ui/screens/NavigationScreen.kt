@@ -29,7 +29,6 @@ import androidx.wear.compose.material3.Text
 import net.osmand.wear.R
 import net.osmand.wear.api.ManeuverInfo
 import net.osmand.wear.api.NavigationState
-import net.osmand.wear.ui.theme.OsmAndWearColors
 
 /**
  * Active route, laid out after the third mockup in OsmAnd-Issues#2821: the remaining trip on
@@ -69,11 +68,7 @@ fun NavigationScreen(
 					modifier = Modifier
 						.fillMaxWidth()
 						.padding(top = 8.dp),
-					colors = ButtonDefaults.buttonColors(
-						containerColor = OsmAndWearColors.AltChipContainer,
-						contentColor = OsmAndWearColors.ChipContent,
-						iconColor = OsmAndWearColors.AltAccent
-					),
+					colors = ButtonDefaults.filledTonalButtonColors(),
 					icon = {
 						Icon(
 							painter = painterResource(R.drawable.ic_action_rec_stop),
@@ -103,13 +98,13 @@ private fun TripSummary(navigation: NavigationState) {
 				.filter { it.isNotEmpty() }
 				.joinToString("  ·  "),
 			style = MaterialTheme.typography.bodySmall,
-			color = OsmAndWearColors.HeaderContent
+			color = MaterialTheme.colorScheme.onSurfaceVariant
 		)
 		if (navigation.paused) {
 			Text(
 				text = stringResource(R.string.wear_paused),
 				style = MaterialTheme.typography.labelSmall,
-				color = OsmAndWearColors.Accent
+				color = MaterialTheme.colorScheme.tertiary
 			)
 		}
 	}
@@ -142,7 +137,7 @@ private fun Maneuver(maneuver: ManeuverInfo, icon: ImageBitmap?) {
 			Text(
 				text = street,
 				style = MaterialTheme.typography.bodySmall,
-				color = OsmAndWearColors.HeaderContent,
+				color = MaterialTheme.colorScheme.onSurfaceVariant,
 				textAlign = TextAlign.Center,
 				modifier = Modifier.padding(top = 2.dp)
 			)

@@ -190,7 +190,7 @@ private fun FieldLabel(label: String, unit: String) {
 		lineHeight = 12.sp,
 		maxLines = 1,
 		overflow = TextOverflow.Ellipsis,
-		color = OsmAndWearColors.HeaderContent,
+		color = MaterialTheme.colorScheme.onSurfaceVariant,
 		textAlign = TextAlign.Center
 	)
 }
@@ -208,11 +208,7 @@ private fun ControlButton(label: Int, icon: Int, primary: Boolean, onClick: () -
 	Button(
 		onClick = onClick,
 		modifier = Modifier.fillMaxWidth(),
-		colors = ButtonDefaults.buttonColors(
-			containerColor = if (primary) OsmAndWearColors.AltAccent else OsmAndWearColors.AltChipContainer,
-			contentColor = OsmAndWearColors.ChipContent,
-			iconColor = if (primary) OsmAndWearColors.ChipContent else OsmAndWearColors.AltAccent
-		),
+		colors = if (primary) ButtonDefaults.buttonColors() else ButtonDefaults.filledTonalButtonColors(),
 		icon = {
 			Icon(
 				painter = painterResource(icon),

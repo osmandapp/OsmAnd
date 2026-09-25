@@ -17,13 +17,13 @@ import androidx.wear.compose.material3.EdgeButton
 import androidx.wear.compose.material3.EdgeButtonSize
 import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.ListHeader
+import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
 
 import net.osmand.wear.R
 import net.osmand.wear.api.ProfileInfo
 import net.osmand.wear.api.RecordingState
-import net.osmand.wear.ui.theme.OsmAndWearColors
 
 /**
  * Trip recording before a session exists: which profile the track will be attributed to, and the
@@ -47,12 +47,7 @@ fun RecordingStartScreen(
 		edgeButton = {
 			EdgeButton(
 				onClick = onStart,
-				buttonSize = EdgeButtonSize.Medium,
-				colors = ButtonDefaults.buttonColors(
-					containerColor = OsmAndWearColors.AltAccent,
-					contentColor = OsmAndWearColors.ChipContent,
-					iconColor = OsmAndWearColors.ChipContent
-				)
+				buttonSize = EdgeButtonSize.Medium
 			) {
 				Icon(
 					painter = painterResource(R.drawable.ic_action_trip_rec_start),
@@ -77,16 +72,9 @@ fun RecordingStartScreen(
 				Button(
 					onClick = onPickProfile,
 					modifier = Modifier.fillMaxWidth(),
-					colors = ButtonDefaults.buttonColors(
-						containerColor = OsmAndWearColors.AltChipContainer,
-						contentColor = OsmAndWearColors.ChipContent,
-						// Without this the supporting line keeps the theme's own secondary
-						// colour, which is meant for a light chip and all but vanishes here.
-						secondaryContentColor = OsmAndWearColors.HeaderContent,
-						iconColor = OsmAndWearColors.AltAccent
-					),
+					colors = ButtonDefaults.filledTonalButtonColors(),
 					icon = {
-						ProfileGlyph(profileIcon, OsmAndWearColors.AltAccent)
+						ProfileGlyph(profileIcon, MaterialTheme.colorScheme.primary)
 					},
 					label = { Text(profile?.title ?: stringResource(R.string.wear_profile)) },
 					secondaryLabel = { Text(stringResource(R.string.wear_profile)) }
