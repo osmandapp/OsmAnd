@@ -532,8 +532,8 @@
     <string name="layer_overlay">Pomoćna mapa iznad osnovne</string>
     <string name="map_underlay">Mapa ispod</string>
     <string name="layer_underlay">Pomoćna mapa u pozadini</string>
-    <string name="map_transparency">Prozirnost osnovne mape</string>
-    <string name="overlay_transparency">Transparetnost sloja iznad</string>
+    <string name="map_transparency">Vidljivost osnovne mape</string>
+    <string name="overlay_transparency">Vidljivost sloja iznad</string>
     <string name="warning_tile_layer_not_downloadable">Program nije uspeo da preuzme nivo sa mapama %1$s, reinstalacija programa može da pomogne.</string>
     <string name="voice_stream_music">Zvuk multimedije/ navođenja</string>
     <string name="switch_to_vector_map_to_see">Postojeće vektorske mape za ovaj lokaciju. 
@@ -1157,7 +1157,7 @@
     <string name="download_files_error_not_enough_space">Nema dovoljno prostora! 
 \n {3} MB je privremeno potrebno, a {1} MB trajno. 
 \n (dostupno je samo {2} MB.)</string>
-    <string name="show_transparency_seekbar">Prikazati regulator prozirnosti</string>
+    <string name="show_transparency_seekbar">Prikaži klizač vidljivosti</string>
     <string name="upload_anonymously">Otpremi anonimno</string>
     <string name="select_map_marker">Odaberi marker</string>
     <string name="osm_live_ask_for_purchase">Prvo kupi pretplatu na OsmAnd Live</string>
@@ -5420,4 +5420,13 @@
     <string name="quick_action_showhide_panoramax_descr">Prekidač za prikazivanje ili skrivanje Panoramaks sloja na mapi.</string>
     <string name="panoramax_menu_filter_description_new">Filtrirajte snimke prema autoru, datumu ili vrsti.</string>
     <string name="plugin_panoramax_descr">Prikažite snimke sa nivoa ulice sa Panoramaksa, federativne platforme otvorenog tipa za foto-mapiranje, kao sloj preko mape. Ovo je korisno za proveru postojeće pokrivenosti i planiranje snimanja preostalih delova.</string>
+    <string name="contour_labels">Natpisi</string>
+    <string name="contour_label_direction_descr">Uspon: vrh svake brojčane oznake nadmorske visine okrenut je ka višem terenu, kao na papirnim topografskim kartama. Kratke crtice na linijama usmerene su nizbrdo.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Смер натписа</string>
+    <string name="rendering_value_upright_name">Uspravno</string>
+    <string name="rendering_value_uphill_name">Uzbrdo</string>
+    <string name="shared_string_visibility">Vidljivost</string>
+    <string name="opening_hours_public_holiday">Državni praznici</string>
+    <string name="opening_hours_school_holiday">Školski raspusti</string>
+    <string name="opening_hours_easter">Uskrs</string>
 </resources>
