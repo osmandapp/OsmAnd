@@ -186,8 +186,8 @@
     <string name="voice_stream_notification">Upozornění</string>
     <string name="voice_stream_music">Média/zvuky navigace</string>
     <string name="warning_tile_layer_not_downloadable">Data pro mapovou vrstvu %1$s nelze stáhnout, reinstalace může pomoci.</string>
-    <string name="overlay_transparency">Průhlednost překryvu</string>
-    <string name="map_transparency">Průhlednost základní mapy</string>
+    <string name="overlay_transparency">Viditelnost překryvu</string>
+    <string name="map_transparency">Viditelnost základní mapy</string>
     <string name="layer_underlay">Podkladová mapa…</string>
     <string name="map_underlay">Podkresová mapa</string>
     <string name="layer_overlay">Překryvná mapa…</string>
@@ -1284,7 +1284,7 @@
     <string name="shared_string_read_more">Číst více</string>
     <string name="select_map_marker">Vyberte mapovou značku</string>
     <string name="upload_anonymously">Nahrát anonymně</string>
-    <string name="show_transparency_seekbar">Zobrazit posuvník průhlednosti</string>
+    <string name="show_transparency_seekbar">Zobrazit posuvník viditelnosti</string>
     <string name="download_files_error_not_enough_space">Nedostatek místa!
 \nV úložišti je zapotřebí dočasně {3} MB a trvale {1} MB.
 \n(Aktuálně je k dispozici pouze {2} MB.)</string>
