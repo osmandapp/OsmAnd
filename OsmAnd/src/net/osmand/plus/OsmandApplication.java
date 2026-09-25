@@ -156,18 +156,20 @@ public class OsmandApplication extends MultiDexApplication {
 	DownloadService downloadService;
 	OsmandAidlApi aidlApi;
 	OsmAndDiagnosticThread diagnosticThread;
-	private final MemoryLog memoryLog = new MemoryLog();
+	
 
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
 	OnRequestPermissionsResultCallback carAppPermissionListener;
 
+	private final MemoryLog memoryLog = new MemoryLog();
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final UiUtilities iconsCache = new UiUtilities(this);
 	private final LocaleHelper localeHelper = new LocaleHelper(this);
 	private final ToastHelper toastHelper = new ToastHelper(this);
 	private final CoordinateFormatHelper coordinateFormatHelper = new CoordinateFormatHelper(this);
+	
 	PanelAppearanceSettingsManager panelAppearanceSettingsManager;
 
 	// start variables
