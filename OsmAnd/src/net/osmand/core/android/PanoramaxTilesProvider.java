@@ -1,12 +1,13 @@
 package net.osmand.core.android;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
@@ -21,10 +22,14 @@ import net.osmand.core.jni.*;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
+import net.osmand.data.SourceFingerprint;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.panoramax.PanoramaxFilterState;
 import net.osmand.plus.plugins.panoramax.PanoramaxImage;
@@ -41,7 +46,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +60,10 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 	private static final int TILE_LOAD_TIMEOUT = 30000;
 	private static final int MAX_GEOMETRY_SIZE = 32000;
 
+	// Serializes raster writes with invalidation so obsolete providers cannot persist tiles.
+	private static final Object RASTER_CACHE_LOCK = new Object();
+	private static long rasterCacheGeneration;
+
 	private final ITileSource tileSource;
 	private final ResourceManager rm;
 	private final OsmandSettings settings;
@@ -67,11 +76,13 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 	private final Bitmap bitmapPoint;
 	private final float density;
 	private final OsmandApplication app;
+	private final File tilesDir;
 
 	private final ConcurrentHashMap <AreaI, QuadTree<PanoramaxImage>> pointsMap;
 	private final ConcurrentHashMap <AreaI, TileRequest> lazyLoadMap;
 	private final GeometryTilesCache geometryTilesCache;
 	private final PanoramaxBitmapTileCache panoramaxBitmapTileCache;
+	private final long generation;
 	private AreaI storedEnlargedBBox31;
 	public static final int MAX_SEQUENCE_LAYER_ZOOM = PanoramaxVectorLayer.MAX_SEQUENCE_LAYER_ZOOM;
 	public static final int MIN_IMAGE_LAYER_ZOOM = PanoramaxVectorLayer.MIN_IMAGE_LAYER_ZOOM;
@@ -86,6 +97,7 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 		this.rm = app.getResourceManager();
 		this.settings = app.getSettings();
 		this.geometryTilesCache = rm.getMapillaryVectorTilesCache();
+		this.tilesDir = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		this.plugin = PluginsHelper.getPlugin(PanoramaxPlugin.class);
 		this.panoramaxBitmapTileCache = new PanoramaxBitmapTileCache();
 		this.paintPoint = new Paint();
@@ -107,6 +119,9 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 		paintLine.setStrokeWidth(AndroidUtils.dpToPxAuto(app.getApplicationContext(), 2.0f));
 		paintLine.setStrokeCap(Paint.Cap.ROUND);
 		invalidateRasterCacheIfFilterChanged();
+		synchronized (RASTER_CACHE_LOCK) {
+			generation = rasterCacheGeneration;
+		}
 	}
 
 	/**
@@ -165,11 +180,28 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 		int requestZoom = request.getZoom().swigValue();
 		ZoomLevel swigZoom = request.getZoom();
 		TileId swigTileId = request.getTileId();
-		if (panoramaxBitmapTileCache.isTileExist(swigTileId, requestZoom)) {
+
+		int tileZoom = getZoomForRequest(requestZoom);
+		int absZoomShift = requestZoom - tileZoom;
+		TileId shiftedTile = Utilities.getTileIdOverscaledByZoomShift(swigTileId, absZoomShift);
+		int tileX = shiftedTile.getX();
+		int tileY = shiftedTile.getY();
+		String tileId = rm.calculateTileId(tileSource, tileX, tileY, tileZoom);
+		File sourceFile = new File(tilesDir, tileId);
+		String filterKey = filterState.getCacheKey();
+
+		boolean useInternet = (PluginsHelper.isActive(OsmandRasterMapsPlugin.class)
+				|| PluginsHelper.isActive(PanoramaxPlugin.class))
+				&& settings.isInternetConnectionAvailable() && tileSource.couldBeDownloadedFromInternet();
+
+		long expiration = tileSource.getExpirationTimeMillis();
+		SourceFingerprint source = SourceFingerprint.of(sourceFile);
+
+		if (isSourceUsable(source.getLastModified(), expiration, System.currentTimeMillis(), useInternet)) {
 			int x = swigTileId.getX();
 			int y = swigTileId.getY();
 			int z = requestZoom;
-			Bitmap bitmapFromCache = panoramaxBitmapTileCache.getTile(x, y, z);
+			Bitmap bitmapFromCache = getCachedRaster(x, y, z, source, filterKey);
 			if (bitmapFromCache != null) {
 				// Only picture tiles need lazy point loading.
 				if (requestZoom >= MIN_POINTS_ZOOM) {
@@ -186,43 +218,53 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 		Bitmap resultTileBitmap = Bitmap.createBitmap(tileSize, tileSize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(resultTileBitmap);
 
-
-		int absZoomShift = requestZoom - getZoomForRequest(requestZoom);
-		TileId shiftedTile = Utilities.getTileIdOverscaledByZoomShift(swigTileId, absZoomShift);
-		int tileX = shiftedTile.getX();
-		int tileY = shiftedTile.getY();
-		int tileZoom;
-
 		if (requestZoom < MIN_POINTS_ZOOM) {
-			tileZoom = MAX_SEQUENCE_LAYER_ZOOM;
 			geometryTilesCache.useForMapillarySequenceLayer();
 		} else {
-			tileZoom = MIN_IMAGE_LAYER_ZOOM;
 			geometryTilesCache.useForMapillaryImageLayer();
 		}
 
 		GeometryTile tile = null;
-		boolean useInternet = (PluginsHelper.isActive(OsmandRasterMapsPlugin.class)
-				|| PluginsHelper.isActive(PanoramaxPlugin.class))
-				&& settings.isInternetConnectionAvailable() && tileSource.couldBeDownloadedFromInternet();
-		String tileId = rm.calculateTileId(tileSource, tileX, tileY, tileZoom);
+		GeometryTile staleTile = null;
 		boolean imgExist = geometryTilesCache.isTileDownloaded(tileId, tileSource, tileX, tileY, tileZoom);
 		long requestTimestamp = System.currentTimeMillis();
+		boolean awaitRefresh = mustAwaitRefresh(source.getLastModified(), expiration, requestTimestamp, useInternet);
+		boolean requested = false;
 		if (imgExist || useInternet) {
 			do {
 				if (queryController != null && queryController.isAborted()) {
 					return 0;
 				}
-				tile = geometryTilesCache.getTileForMapSync(tileId, tileSource, tileX, tileY,
-						tileZoom, useInternet, requestTimestamp);
-				if (tile != null) {
-					break;
+				boolean sourceMoved = !source.equals(SourceFingerprint.of(sourceFile));
+				// Re-ask only once the file moved on, or every poll re-parses the same tile.
+				if (!requested || !awaitRefresh || sourceMoved) {
+					requested = true;
+					tile = geometryTilesCache.getTileForMapSync(tileId, tileSource, tileX, tileY,
+							tileZoom, useInternet, requestTimestamp);
+					if (tile != null && !matchesSource(tile, sourceFile)) {
+						// Drop stale geometry so the retry reads the replaced file.
+						geometryTilesCache.remove(tileId);
+						tile = null;
+					} else if (tile != null && awaitRefresh && !sourceMoved) {
+						// The expired tile triggered its own refresh; it is kept only as a fallback.
+						staleTile = tile;
+						tile = null;
+					}
+					if (tile != null) {
+						break;
+					}
 				}
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException ignored) {
 				}
 			} while (System.currentTimeMillis() - requestTimestamp < TILE_LOAD_TIMEOUT);
+		}
+		// A source still waiting to be replaced may be drawn so the layer does not go blank,
+		// but its render may not be stored.
+		boolean cacheable = tile != null;
+		if (tile == null) {
+			tile = staleTile;
 		}
 		if (tile != null) {
 			List<Geometry> geometries = tile.getData();
@@ -245,8 +287,9 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 					AreaI enlargedBBox31 = tileBBox31.getEnlargedBy(pointHalfSize31);
 					isDrawPoints = drawPoints(canvas, shiftedTile, queryController, geometries, tileBBox31, enlargedBBox31, mult, zoomShift, tileSize, tileSize31);
 				}
-				if (isDrawLines || isDrawPoints) {
-					panoramaxBitmapTileCache.saveTile(resultTileBitmap, swigTileId, requestZoom);
+				if ((isDrawLines || isDrawPoints) && cacheable && matchesSource(tile, sourceFile)) {
+					panoramaxBitmapTileCache.saveTile(resultTileBitmap, swigTileId, requestZoom,
+							tile.getSourceFingerprint(), filterKey);
 				}
 				byte[] bytes = AndroidUtils.getByteArrayFromBitmap(resultTileBitmap);
 				SwigUtilities.appendToQByteArray(byteArray, bytes);
@@ -345,6 +388,34 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 		lazyLoadMap.keySet().removeIf(tileArea -> !enlargedBbox31.intersects(tileArea));
 
 		storedEnlargedBBox31 = enlargedBbox31;
+	}
+
+	/**
+	 * Uses the expiration of the source handed to GeometryTilesCache, so raster validity and
+	 * vector refresh cannot disagree.
+	 */
+	static boolean isSourceUsable(long modified, long expiration, long now, boolean useInternet) {
+		return modified != 0 && !mustAwaitRefresh(modified, expiration, now, useInternet);
+	}
+
+	/**
+	 * Online expired sources must be refreshed before being served.
+	 * Offline sources remain usable.
+	 */
+	static boolean mustAwaitRefresh(long modified, long expiration, long now, boolean useInternet) {
+		return modified != 0 && useInternet && !isTileFresh(modified, expiration, now);
+	}
+
+	private static boolean matchesSource(@NonNull GeometryTile tile, @NonNull File sourceFile) {
+		return tile.getSourceFingerprint().equals(SourceFingerprint.of(sourceFile));
+	}
+
+	static boolean isTileFresh(long modified, long expiration, long now) {
+		if (modified == 0) {
+			return false;
+		}
+		// Like TilesCache, only -1 means the source never expires.
+		return expiration == -1 || now - modified <= expiration;
 	}
 
 	private int getZoomForRequest(int zoom) {
@@ -596,42 +667,225 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 		panoramaxBitmapTileCache.clearCache();
 	}
 
+	@NonNull
+	private static File getRasterCacheFile(@NonNull OsmandApplication app) {
+		String dbName = TileSourceManager.getPanoramaxCacheSource().getName() + IndexConstants.SQLITE_EXT;
+		return new File(app.getAppPath(IndexConstants.TILES_INDEX_DIR), dbName);
+	}
+
+	@NonNull
+	private static PanoramaxRasterCache openRasterCache(@NonNull OsmandApplication app) {
+		PanoramaxRasterCache source = new PanoramaxRasterCache(app, getRasterCacheFile(app));
+		source.createDataBase();
+		return source;
+	}
+
+	/**
+	 * Narrower than ResourceManager.clearCacheAndTiles(), which would also empty the
+	 * in-memory bitmap cache shared with every other raster layer.
+	 */
+	public static void clearRasterCache(@NonNull OsmandApplication app) {
+		if (!getRasterCacheFile(app).exists()) {
+			return;
+		}
+		PanoramaxRasterCache source = openRasterCache(app);
+		try {
+			synchronized (RASTER_CACHE_LOCK) {
+				rasterCacheGeneration++;
+				source.deleteAllTiles();
+			}
+		} finally {
+			// Only this temporary handle is closed; the provider keeps using its own.
+			source.closeDB();
+		}
+	}
+
+	@Nullable
+	private Bitmap getCachedRaster(int x, int y, int zoom, @NonNull SourceFingerprint source,
+	                               @NonNull String filterKey) {
+		RasterTile cached = panoramaxBitmapTileCache.getTile(x, y, zoom);
+		if (cached == null || !matchesStoredSource(cached.source, cached.filterKey, source, filterKey)) {
+			return null;
+		}
+		return BitmapFactory.decodeByteArray(cached.png, 0, cached.png.length);
+	}
+
+	/** A row without provenance, written before this cache stored any, is a miss. */
+	static boolean matchesStoredSource(@NonNull SourceFingerprint stored,
+	                                   @Nullable String storedFilterKey,
+	                                   @NonNull SourceFingerprint source, @NonNull String filterKey) {
+		return stored.equals(source) && filterKey.equals(storedFilterKey);
+	}
+
+	static class RasterTile {
+		final byte[] png;
+		final SourceFingerprint source;
+		final String filterKey;
+
+		RasterTile(@NonNull byte[] png, @NonNull SourceFingerprint source, @Nullable String filterKey) {
+			this.png = png;
+			this.source = source;
+			this.filterKey = filterKey;
+		}
+	}
+
+	/**
+	 * Keeps the provenance in columns beside the image so tiles.image stays an ordinary PNG and
+	 * a generic consumer still decodes every row instead of deleting it as broken.
+	 */
+	private static class PanoramaxRasterCache extends SQLiteTileSource {
+
+		private static final String SOURCE_TIME = "panoramax_source_time";
+		private static final String SOURCE_LENGTH = "panoramax_source_length";
+		private static final String FILTER_KEY = "panoramax_filter_key";
+
+		private boolean provenanceSupported;
+
+		PanoramaxRasterCache(@NonNull OsmandApplication app, @NonNull File file) {
+			super(app, file, TileSourceManager.getKnownSourceTemplates());
+		}
+
+		@Override
+		public void createDataBase() {
+			super.createDataBase();
+			SQLiteConnection db = getDatabase();
+			if (db == null) {
+				return;
+			}
+			// Concurrent opens can both see a missing column, and SQLite has no
+			// ADD COLUMN IF NOT EXISTS, so the probe and the migration have to be one step.
+			synchronized (RASTER_CACHE_LOCK) {
+				if (!db.isReadOnly()) {
+					addColumn(db, SOURCE_TIME, "long");
+					addColumn(db, SOURCE_LENGTH, "long");
+					addColumn(db, FILTER_KEY, "text");
+				}
+				// A database that could not get the columns keeps working, every row is a miss.
+				provenanceSupported = hasColumn(db, SOURCE_TIME) && hasColumn(db, SOURCE_LENGTH)
+						&& hasColumn(db, FILTER_KEY);
+			}
+		}
+
+		@Nullable
+		RasterTile getTile(int x, int y, int zoom) {
+			SQLiteConnection db = getDatabase();
+			if (db == null) {
+				return null;
+			}
+			String columns = provenanceSupported
+					? "image, " + SOURCE_TIME + ", " + SOURCE_LENGTH + ", " + FILTER_KEY
+					: "image";
+			// One row of one cursor: image and provenance cannot come from different writes.
+			SQLiteCursor cursor = db.rawQuery("SELECT " + columns
+					+ " FROM tiles WHERE x = ? AND y = ? AND z = ?", getTileDbParams(x, y, zoom));
+			if (cursor == null) {
+				return null;
+			}
+			try {
+				byte[] png = cursor.moveToFirst() ? cursor.getBlob(0) : null;
+				if (png == null) {
+					return null;
+				}
+				if (!provenanceSupported || cursor.isNull(1) || cursor.isNull(2) || cursor.isNull(3)) {
+					return new RasterTile(png, SourceFingerprint.EMPTY, null);
+				}
+				return new RasterTile(png, new SourceFingerprint(cursor.getLong(1), cursor.getLong(2)),
+						cursor.getString(3));
+			} finally {
+				cursor.close();
+			}
+		}
+
+		void putTile(int x, int y, int zoom, @NonNull byte[] png, @NonNull SourceFingerprint source,
+		             @NonNull String filterKey) {
+			SQLiteConnection db = getDatabase();
+			if (db == null || db.isReadOnly() || !provenanceSupported) {
+				return;
+			}
+			// One statement, so an image can never be stored with the provenance of another render.
+			SQLiteStatement statement = db.compileStatement("INSERT OR REPLACE INTO tiles(x,y,z,s,image,"
+					+ SOURCE_TIME + "," + SOURCE_LENGTH + "," + FILTER_KEY + ") VALUES(?,?,?,?,?,?,?,?)");
+			if (statement == null) {
+				return;
+			}
+			try {
+				// The same key the reads use, so both sides stay on one zoom convention.
+				String[] key = getTileDbParams(x, y, zoom);
+				statement.bindString(1, key[0]);
+				statement.bindString(2, key[1]);
+				statement.bindString(3, key[2]);
+				statement.bindLong(4, 0);
+				statement.bindBlob(5, png);
+				statement.bindLong(6, source.getLastModified());
+				statement.bindLong(7, source.getLength());
+				statement.bindString(8, filterKey);
+				statement.execute();
+			} finally {
+				statement.close();
+			}
+		}
+
+		void deleteAllTiles() {
+			SQLiteConnection db = getDatabase();
+			if (db == null || db.isReadOnly()) {
+				return;
+			}
+			// Not deleteTiles(): its VACUUM and checkpoint would fight readers on other connections.
+			db.execSQL("DELETE FROM tiles");
+		}
+
+		private static void addColumn(@NonNull SQLiteConnection db, @NonNull String name,
+		                              @NonNull String type) {
+			if (!hasColumn(db, name)) {
+				db.execSQL("ALTER TABLE tiles ADD COLUMN " + name + " " + type);
+			}
+		}
+
+		private static boolean hasColumn(@NonNull SQLiteConnection db, @NonNull String name) {
+			SQLiteCursor cursor = db.rawQuery("SELECT * FROM tiles LIMIT 0", null);
+			if (cursor == null) {
+				return false;
+			}
+			try {
+				return Arrays.asList(cursor.getColumnNames()).contains(name);
+			} finally {
+				cursor.close();
+			}
+		}
+	}
+
 	private class PanoramaxBitmapTileCache {
-		private final SQLiteTileSource sqlTileSource;
+		private final PanoramaxRasterCache sqlTileSource;
 
 		public PanoramaxBitmapTileCache() {
-			String dbName = TileSourceManager.getPanoramaxCacheSource().getName();
-			dbName += IndexConstants.SQLITE_EXT;
-			File tilesDir = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
-			File dbFile = new File(tilesDir, dbName);
-			sqlTileSource = new SQLiteTileSource(app,  dbFile, TileSourceManager.getKnownSourceTemplates());
-			sqlTileSource.createDataBase();
+			sqlTileSource = openRasterCache(app);
 		}
 
 		public void clearCache() {
-			rm.clearCacheAndTiles(sqlTileSource);
+			synchronized (RASTER_CACHE_LOCK) {
+				rasterCacheGeneration++;
+				sqlTileSource.deleteAllTiles();
+			}
 		}
 
-		public boolean isTileExist(TileId tileId, int zoom) {
-			return sqlTileSource.exists(tileId.getX(), tileId.getY(), zoom);
+		@Nullable
+		public RasterTile getTile(int x, int y, int zoom) {
+			return sqlTileSource.getTile(x, y, zoom);
 		}
 
-		public Bitmap getTile(int x, int y, int zoom) {
-			return sqlTileSource.getImage(x, y, zoom, null);
-		}
-
-		public void saveTile(Bitmap bmp, TileId tileId, int zoom) {
+		public void saveTile(Bitmap bmp, TileId tileId, int zoom, SourceFingerprint source,
+		                     String filterKey) {
 			if (bmp == null) {
 				return;
 			}
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			bmp.compress(Bitmap.CompressFormat.PNG, 85, stream);
-			byte[] byteArray = stream.toByteArray();
-
-			try {
-				sqlTileSource.insertImage(tileId.getX(), tileId.getY(), zoom, byteArray);
-			} catch (IOException e) {
-				Log.w("Tile x=" + tileId.getX() + " y=" + tileId.getY() + " z=" + zoom + " couldn't be read", e);
+			byte[] png = stream.toByteArray();
+			synchronized (RASTER_CACHE_LOCK) {
+				if (generation != rasterCacheGeneration) {
+					return;
+				}
+				sqlTileSource.putTile(tileId.getX(), tileId.getY(), zoom, png, source, filterKey);
 			}
 		}
 

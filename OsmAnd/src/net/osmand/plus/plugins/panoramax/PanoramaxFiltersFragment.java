@@ -98,7 +98,9 @@ public class PanoramaxFiltersFragment extends BaseFullScreenFragment {
         Button reloadTile = view.findViewById(R.id.button_reload_tile);
         reloadTile.setOnClickListener(v -> {
             ResourceManager manager = app.getResourceManager();
+            // Clear vectors first so in-flight renders cannot remain valid.
             manager.clearCacheAndTiles(TileSourceManager.getPanoramaxVectorSource());
+            plugin.reload();
             mapActivity.refreshMap();
         });
 

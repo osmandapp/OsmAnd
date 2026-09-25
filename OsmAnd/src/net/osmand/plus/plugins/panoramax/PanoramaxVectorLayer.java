@@ -79,7 +79,8 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	private Map<QuadPointDouble, Map<?, ?>> visiblePoints = new HashMap<>();
 
 	//OpenGL
-	private PanoramaxTilesProvider panoramaxTilesProvider;
+	// Written on the drawing thread and read by the Reload action.
+	private volatile PanoramaxTilesProvider panoramaxTilesProvider;
 	private MapMarkersCollection mapMarkersCollection;
 	// MapMarker cannot hide individual surface icons, so use separate markers with/without heading.
 	private MapMarker markerWithHeading;
@@ -87,7 +88,7 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	Bitmap selectedImageBitmap;
 	Bitmap headingImageBitmap;
 	// The state the current OpenGL provider was built for; a change means its tiles are stale.
-	private PanoramaxFilterState appliedFilterState;
+	private volatile PanoramaxFilterState appliedFilterState;
 
 	PanoramaxVectorLayer(@NonNull Context context) {
 		super(context, false);
@@ -171,6 +172,19 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 				panoramaxTilesProvider.setVisibleBBox31(mapRenderer.getVisibleBBox31(), tileBox.getZoom());
 			}
 		}
+	}
+
+	/**
+	 * Tiles the native core already holds cannot be invalidated one by one, so reloading reuses
+	 * the filter-change lifecycle: with no applied state the next onPrepareBufferImage() clears
+	 * the caches, detaches the native provider and builds a new one.
+	 */
+	public void reload() {
+		if (panoramaxTilesProvider == null) {
+			PanoramaxTilesProvider.clearRasterCache(getApplication());
+		}
+		// Unconditional and last: a check that raced with a new provider still tears it down.
+		appliedFilterState = null;
 	}
 
 	@Override
