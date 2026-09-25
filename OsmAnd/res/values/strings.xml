@@ -4262,6 +4262,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="postcode">Postcode</string>
     <string name="shared_string_from">from</string>
     <string name="city_type_district">District</string>
+    <string name="city_type_boundary">Area</string>
     <string name="city_type_neighbourhood">Neighbourhood</string>
     <string name="map_widget_search">Search</string>
     <string name="shared_string_is_open_24_7">Open 24/7</string>
