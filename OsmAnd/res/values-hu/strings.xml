@@ -148,8 +148,8 @@
     <string name="voice_stream_notification">Értesítési hangcsatorna</string>
     <string name="voice_stream_music">Média/navigáció hangcsatorna</string>
     <string name="warning_tile_layer_not_downloadable">Az alkalmazás nem tudja letölteni a(z) %1$s térképréteget; az újratelepítés segíthet.</string>
-    <string name="overlay_transparency">Fedőréteg átlátszósága</string>
-    <string name="map_transparency">Alaptérkép átlátszósága</string>
+    <string name="overlay_transparency">Fedőréteg láthatósága</string>
+    <string name="map_transparency">Alaptérkép láthatósága</string>
     <string name="layer_underlay">Alátéttérkép…</string>
     <string name="map_underlay">Alátéttérkép</string>
     <string name="layer_overlay">Fedvénytérkép…</string>
@@ -1243,7 +1243,7 @@
     <string name="osm_live_ask_for_purchase">Először vásároljon OsmAnd Live előfizetést</string>
     <string name="select_map_marker">Térképjelölő kiválasztása</string>
     <string name="upload_anonymously">Feltöltés névtelenül</string>
-    <string name="show_transparency_seekbar">Átlátszóságcsúszka megjelenítése</string>
+    <string name="show_transparency_seekbar">Láthatósági csúszka megjelenítése</string>
     <string name="download_files_error_not_enough_space">Nincs elég hely!
 \nA művelethez ideiglenesen {3} MB, véglegesen pedig {1} MB hely szükséges.
 \n(Jelenleg csak {2} MB áll rendelkezésre.)</string>
@@ -5352,4 +5352,13 @@
     <string name="ais_mark_as_outdated_desc">Hajó szimbólumának áthúzása %1$s után, ha nem érkezik jel.</string>
     <string name="ais_hide_after_desc">Hajó szimbólumának eltávolítása %1$s után, ha nem érkezik jel.</string>
     <string name="ais_cpa_warning_time_desc">Hajók piros színnel való kiemelése a legközelebbi megközelítés előtt ennyi idővel: %1$s.</string>
+    <string name="contour_labels">Címkék</string>
+    <string name="contour_label_direction_descr">Emelkedő: az egyes magassági számok teteje a magasabban fekvő terület felé mutatnak, akárcsak a papíralapú domborzati térképeken. A szintvonalakon lévő rövid vonalkák pedig a lejtő irányába mutatnak.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Címkeirány</string>
+    <string name="rendering_value_upright_name">Függőleges</string>
+    <string name="rendering_value_uphill_name">Felfelé</string>
+    <string name="shared_string_visibility">Láthatóság</string>
+    <string name="opening_hours_public_holiday">Munkaszüneti napok</string>
+    <string name="opening_hours_school_holiday">Iskolai szünetek</string>
+    <string name="opening_hours_easter">Húsvét</string>
 </resources>
