@@ -3,6 +3,7 @@ package net.osmand.plus.configmap.tracks;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -17,13 +18,17 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class TrackSortModesHelper {
 
-	private final Map<String, TracksSortMode> cachedSortModes = new ConcurrentHashMap<>();
+	private volatile Map<String, TracksSortMode> cachedSortModes = new ConcurrentHashMap<>();
 	private final ListStringPreference preference;
+	// Held because the preference keeps its listeners weakly.
+	private final StateChangedListener<String> preferenceListener;
 
 	public TrackSortModesHelper(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		preference = settings.TRACKS_TABS_SORT_MODES;
-		loadFromPreference();
+		reloadFromPreference();
+		preferenceListener = change -> reloadFromPreference();
+		preference.addListener(preferenceListener);
 	}
 
 	@NonNull
@@ -97,8 +102,11 @@ public class TrackSortModesHelper {
 				: null;
 	}
 
-	private void loadFromPreference() {
-		cachedSortModes.putAll(TrackSortModeKeyUtils.parseSortModes(preference.getStringsList()));
+	void reloadFromPreference() {
+		Map<String, TracksSortMode> stored = TrackSortModeKeyUtils.parseSortModes(preference.getStringsList());
+		// Import runs on the UI thread while folder moves may mutate the cache in background,
+		// so the map is replaced atomically instead of updated in place.
+		cachedSortModes = new ConcurrentHashMap<>(stored);
 	}
 
 	private void saveToPreference() {
