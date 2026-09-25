@@ -99,8 +99,8 @@
     <string name="voice_stream_notification">Notification audio</string>
     <string name="voice_stream_music">Audio média/navigation</string>
     <string name="warning_tile_layer_not_downloadable">L\'application ne peut télécharger la couche de carte %1$s, veuillez tenter de la réinstaller.</string>
-    <string name="overlay_transparency">Transparence de la surcouche</string>
-    <string name="map_transparency">Transparence de la carte</string>
+    <string name="overlay_transparency">Visibilité de la surcouche</string>
+    <string name="map_transparency">Visibilité de la carte</string>
     <string name="layer_underlay">Sous-couche de carte…</string>
     <string name="map_underlay">Sous-couche de carte</string>
     <string name="layer_overlay">Surcouche de carte…</string>
@@ -1267,7 +1267,7 @@
     <string name="osm_live_subscribe_btn">S\'abonner</string>
     <string name="osm_live_active">Actif</string>
     <string name="osm_live_enter_email">Veuillez saisir une adresse courriel valide</string>
-    <string name="show_transparency_seekbar">Afficher le curseur de transparence</string>
+    <string name="show_transparency_seekbar">Visibilité de la barre de recherche</string>
     <string name="recalculate_route">Recalculer l\'itinéraire</string>
     <string name="storage_directory_shared">Mémoire partagée</string>
     <string name="shared_string_topbar">Barre supérieure</string>
@@ -5347,4 +5347,9 @@
     <string name="plugin_panoramax_descr">Afficher les images de rue Panoramax, une plate-forme de cartographie photo ouverte, comme sur-couche de la carte. Utile pour vérifier la couverture actuelle et planifier ce qui peut encore être ajouté.</string>
     <string name="ais_my_vessel_footer">Paramétrez le MMSI de votre navire pour éviter de fausses alertes de collision et afficher,en option, son marqueur AIS sur la carte.</string>
     <string name="ais_mark_as_outdated_off_desc">Le symbole du navire ne sera pas modifié. Les objets sont toujours retirés après %1$s.</string>
+    <string name="contour_labels">Libellés</string>
+    <string name="rendering_attr_contourLabelDirection_name">Direction des libellés</string>
+    <string name="shared_string_visibility">Visibilité</string>
+    <string name="opening_hours_public_holiday">Jours fériés</string>
+    <string name="opening_hours_school_holiday">Vacances scolaires</string>
 </resources>
