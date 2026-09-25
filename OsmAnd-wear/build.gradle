@@ -8,11 +8,15 @@ apply from: rootProject.file("versions.gradle")
 
 def borrowedIconsDir = layout.buildDirectory.dir("generated/borrowed/res").get().asFile
 
-// The watch reuses a handful of the phone app's drawables. They are copied in at build time so
-// OsmAnd/res stays their single source of truth — a copy checked in here would quietly drift
-// the day someone redraws an icon in the main app.
-tasks.register('copyPhoneIcons', Sync) {
+// The watch reuses a handful of the phone app's drawables and its colour palette. They are copied
+// in at build time so OsmAnd/res stays their single source of truth — a copy checked in here would
+// quietly drift the day someone redraws an icon or retunes a colour in the main app.
+tasks.register('copyPhoneResources', Sync) {
 	from("../OsmAnd/res") {
+		// The whole palette: it is 40 KB of text, self-contained (every @color reference inside
+		// it resolves within the same file), and picking entries out by hand would be one more
+		// list to keep in step.
+		include "values/colors.xml"
 		include "drawable/ic_action_track_recordable.xml"
 		include "drawable/ic_action_start_navigation.xml"
 		include "drawable/ic_action_settings.xml"
@@ -38,7 +42,7 @@ tasks.register('copyPhoneIcons', Sync) {
 
 // Hooked onto preBuild rather than the individual resource tasks: every task in a variant
 // depends on preBuild, so the staged icons are in place before anything reads that directory.
-tasks.matching { it.name == "preBuild" }.configureEach { dependsOn(copyPhoneIcons) }
+tasks.matching { it.name == "preBuild" }.configureEach { dependsOn(copyPhoneResources) }
 
 android {
 	namespace "net.osmand.wear"
@@ -92,7 +96,7 @@ android {
 		main {
 			manifest.srcFile "AndroidManifest.xml"
 			java.srcDirs = ["src/main/kotlin"]
-			// Icons borrowed from the phone app are staged here by copyPhoneIcons rather than
+			// Icons borrowed from the phone app are staged here by copyPhoneResources rather than
 			// duplicated into version control.
 			res.srcDirs = ["src/main/res", borrowedIconsDir]
 		}
