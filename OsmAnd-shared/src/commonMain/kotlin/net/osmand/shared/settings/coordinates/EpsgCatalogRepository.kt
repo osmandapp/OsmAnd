@@ -9,7 +9,12 @@ import net.osmand.shared.util.PlatformUtil
 import net.osmand.shared.util.synchronized
 import kotlin.jvm.JvmOverloads
 
-class EpsgCatalogRepository {
+class EpsgCatalogRepository internal constructor(
+	// Tests supply their own proj.db connection; the app opens the one in its directory.
+	private val connectionFactory: () -> SQLiteConnection?
+) {
+
+	constructor() : this(::openProjDb)
 
 	private val epsgCache = LruCache<Int, CoordinateFormat>(MAX_CACHE_SIZE)
 	private val gridDefinitionCache = LruCache<Int, EpsgGridDefinition>(MAX_CACHE_SIZE)
@@ -67,7 +72,8 @@ class EpsgCatalogRepository {
 					"JOIN conversion c ON c.auth_name = crs.conversion_auth_name AND c.code = crs.conversion_code " +
 					"WHERE crs.auth_name = 'EPSG' AND crs.code = ? AND IFNULL(crs.deprecated, 0) = 0 " +
 					"AND c.method_auth_name = 'EPSG' AND c.method_code IN ($SUPPORTED_PROJECTION_METHODS) " +
-					SUPPORTED_AREA_FILTER,
+					SUPPORTED_AREA_FILTER +
+					METRIC_AXES_FILTER,
 				arrayOf(code.toString())
 			)
 			if (cursor == null || !cursor.moveToFirst()) {
@@ -88,7 +94,7 @@ class EpsgCatalogRepository {
 			val transformationCodes = if (usesWgs84) {
 				emptyList()
 			} else {
-				queryTransformationCodes(db, baseCrsAuthName, baseCrsCode)
+				queryTransformationCodes(db, code, baseCrsAuthName, baseCrsCode)
 			}
 			if (!usesWgs84 && transformationCodes.isEmpty()) {
 				unsupportedGridCodes.add(code)
@@ -249,23 +255,41 @@ class EpsgCatalogRepository {
 		}
 	}
 
+	/**
+	 * Helmert candidates for the base CRS, best first. A transformation is usable only where it
+	 * is valid, so candidates whose area of use misses the CRS's are dropped and the rest are
+	 * ranked by how much of the CRS's area they cover, then by the old accuracy order.
+	 */
 	private fun queryTransformationCodes(
 		db: SQLiteConnection,
+		crsCode: Int,
 		baseCrsAuthName: String,
 		baseCrsCode: String
 	): List<Int> {
 		var cursor: SQLiteCursor? = null
 		try {
 			cursor = db.rawQuery(
-				"SELECT h.code FROM helmert_transformation h " +
+				CRS_AREA_OF_USE +
+					"candidates AS (" +
+					"SELECT h.code code, h.accuracy accuracy, a.area crs_area, " +
+					"CASE WHEN lower(IFNULL(h.description, '')) LIKE '%replaced by%' THEN 1 ELSE 0 END superseded, " +
+					"$TRANSFORMATION_INTERSECTS intersects, $TRANSFORMATION_OVERLAP overlap " +
+					"FROM helmert_transformation h " +
+					"CROSS JOIN crs_area a " +
+					"LEFT JOIN usage hu ON hu.object_table_name = 'helmert_transformation' " +
+					"AND hu.object_auth_name = h.auth_name AND hu.object_code = h.code " +
+					"LEFT JOIN extent he ON he.auth_name = hu.extent_auth_name AND he.code = hu.extent_code " +
+					"AND IFNULL(he.deprecated, 0) = 0 " +
 					"WHERE h.auth_name = 'EPSG' AND IFNULL(h.deprecated, 0) = 0 " +
 					"AND h.source_crs_auth_name = ? AND h.source_crs_code = ? " +
 					"AND h.target_crs_auth_name = 'EPSG' AND h.target_crs_code = '4326' " +
 					"AND h.method_auth_name = 'EPSG' AND h.method_code IN ($SUPPORTED_HELMERT_METHODS) " +
-					"ORDER BY CASE WHEN lower(IFNULL(h.description, '')) LIKE '%replaced by%' THEN 1 ELSE 0 END, " +
-					"CASE WHEN h.accuracy IS NULL THEN 1 ELSE 0 END, h.accuracy, CAST(h.code AS INTEGER) " +
+					"GROUP BY h.code, h.accuracy, h.description, a.area) " +
+					"SELECT code FROM candidates WHERE intersects = 1 " +
+					"ORDER BY IFNULL(ROUND(overlap / NULLIF(crs_area, 0.0), 1), 0.0) DESC, " +
+					"superseded, CASE WHEN accuracy IS NULL THEN 1 ELSE 0 END, accuracy, CAST(code AS INTEGER) " +
 					"LIMIT $MAX_TRANSFORMATION_CANDIDATES",
-				arrayOf(baseCrsAuthName, baseCrsCode)
+				arrayOf(crsCode.toString(), baseCrsAuthName, baseCrsCode)
 			)
 			val result = mutableListOf<Int>()
 			if (cursor != null && cursor.moveToFirst()) {
@@ -279,20 +303,7 @@ class EpsgCatalogRepository {
 		}
 	}
 
-	private fun openConnection(): SQLiteConnection? {
-		return try {
-			// Resolved on every open: the app directory can be moved by the user at runtime.
-			val projDb = KFile(PlatformUtil.getOsmAndContext().getAppDir(), PROJ_DB_NAME)
-			if (!projDb.exists()) {
-				LOG.warn("EPSG catalog is unavailable: ${projDb.absolutePath()}")
-				return null
-			}
-			PlatformUtil.getSQLiteAPI().openByAbsolutePath(projDb.absolutePath(), true)
-		} catch (e: Exception) {
-			LOG.error("Failed to open EPSG catalog", e)
-			null
-		}
-	}
+	private fun openConnection(): SQLiteConnection? = connectionFactory()
 
 	private fun readFormat(cursor: SQLiteCursor): CoordinateFormat {
 		val code = cursor.getString(0).toIntOrNull() ?: 0
@@ -342,12 +353,29 @@ class EpsgCatalogRepository {
 	private companion object {
 		private val LOG = LoggerFactory.getLogger("EpsgCatalogRepository")
 		private const val PROJ_DB_NAME = "proj.db"
+
+		private fun openProjDb(): SQLiteConnection? {
+			return try {
+				// Resolved on every open: the app directory can be moved by the user at runtime.
+				val projDb = KFile(PlatformUtil.getOsmAndContext().getAppDir(), PROJ_DB_NAME)
+				if (!projDb.exists()) {
+					LOG.warn("EPSG catalog is unavailable: ${projDb.absolutePath()}")
+					return null
+				}
+				PlatformUtil.getSQLiteAPI().openByAbsolutePath(projDb.absolutePath(), true)
+			} catch (e: Exception) {
+				LOG.error("Failed to open EPSG catalog", e)
+				null
+			}
+		}
+
 		private const val DEFAULT_LIST_LIMIT = 1000
 		private const val DEFAULT_SEARCH_LIMIT = 50
 		private const val MAX_CACHE_SIZE = 64
 		private const val MAX_TRANSFORMATION_CANDIDATES = 16
 		private const val EPSG_AUTH_NAME = "EPSG"
 		private const val WGS84_CRS_CODE = "4326"
+		private const val METRE_UOM_CODE = 9001
 		// Projection methods implemented by GridConfiguration: TM, OSTEREO and HOMV2.
 		private const val SUPPORTED_PROJECTION_METHODS = "'9807', '9809', '9815'"
 		// Direct geog2D Helmert methods parsed by CoordinateTransformer.getEllipsoidParameters().
@@ -380,17 +408,77 @@ class EpsgCatalogRepository {
 				"AND IFNULL(area_extent.deprecated, 0) = 0 " +
 				"AND area_extent.west_lon > area_extent.east_lon) "
 
+		// CoordinateTransformer.getConstants() takes false easting/northing as metres, so a CRS
+		// whose axes are in feet (or any other unit) would get a wrong grid.
+		private const val METRIC_AXES_FILTER =
+			"AND EXISTS (SELECT 1 FROM axis metric_axis " +
+				"WHERE metric_axis.coordinate_system_auth_name = crs.coordinate_system_auth_name " +
+				"AND metric_axis.coordinate_system_code = crs.coordinate_system_code " +
+				"AND metric_axis.uom_auth_name = 'EPSG' AND CAST(metric_axis.uom_code AS INTEGER) = $METRE_UOM_CODE) " +
+				"AND NOT EXISTS (SELECT 1 FROM axis other_axis " +
+				"WHERE other_axis.coordinate_system_auth_name = crs.coordinate_system_auth_name " +
+				"AND other_axis.coordinate_system_code = crs.coordinate_system_code " +
+				"AND (IFNULL(other_axis.uom_auth_name, '') <> 'EPSG' " +
+				"OR IFNULL(CAST(other_axis.uom_code AS INTEGER), 0) <> $METRE_UOM_CODE)) "
+
+		// A CRS is listed only if at least one Helmert transformation is valid somewhere in its area
+		// of use; the transformation's extent (grid_extent) must intersect the CRS's (crs_extent).
 		private const val GRID_SUPPORTED_FILTER =
 			"WHERE crs.auth_name = 'EPSG' AND IFNULL(crs.deprecated, 0) = 0 " +
 				"AND c.method_auth_name = 'EPSG' AND c.method_code IN ($SUPPORTED_PROJECTION_METHODS) " +
 				SUPPORTED_AREA_FILTER +
+				METRIC_AXES_FILTER +
 				"AND ((crs.geodetic_crs_auth_name = 'EPSG' AND crs.geodetic_crs_code = '4326') " +
 				"OR EXISTS (SELECT 1 FROM helmert_transformation h " +
+				"JOIN usage grid_usage ON grid_usage.object_table_name = 'helmert_transformation' " +
+				"AND grid_usage.object_auth_name = h.auth_name AND grid_usage.object_code = h.code " +
+				"JOIN extent grid_extent ON grid_extent.auth_name = grid_usage.extent_auth_name " +
+				"AND grid_extent.code = grid_usage.extent_code AND IFNULL(grid_extent.deprecated, 0) = 0 " +
 				"WHERE h.auth_name = 'EPSG' AND IFNULL(h.deprecated, 0) = 0 " +
 				"AND h.source_crs_auth_name = crs.geodetic_crs_auth_name " +
 				"AND h.source_crs_code = crs.geodetic_crs_code " +
 				"AND h.target_crs_auth_name = 'EPSG' AND h.target_crs_code = '4326' " +
-				"AND h.method_auth_name = 'EPSG' AND h.method_code IN ($SUPPORTED_HELMERT_METHODS))) "
+				"AND h.method_auth_name = 'EPSG' AND h.method_code IN ($SUPPORTED_HELMERT_METHODS) " +
+				"AND EXISTS (SELECT 1 FROM usage crs_usage " +
+				"JOIN extent crs_extent ON crs_extent.auth_name = crs_usage.extent_auth_name " +
+				"AND crs_extent.code = crs_usage.extent_code AND IFNULL(crs_extent.deprecated, 0) = 0 " +
+				"WHERE crs_usage.object_table_name = 'projected_crs' " +
+				"AND crs_usage.object_auth_name = crs.auth_name AND crs_usage.object_code = crs.code " +
+				"AND grid_extent.south_lat <= crs_extent.north_lat " +
+				"AND grid_extent.north_lat >= crs_extent.south_lat " +
+				"AND (CASE WHEN grid_extent.west_lon <= grid_extent.east_lon " +
+				"THEN grid_extent.west_lon <= crs_extent.east_lon AND grid_extent.east_lon >= crs_extent.west_lon " +
+				"ELSE grid_extent.west_lon <= crs_extent.east_lon " +
+				"OR grid_extent.east_lon >= crs_extent.west_lon END)))) "
+
+		// Bounding box of the CRS's area of use (the union of its extents); antimeridian-crossing
+		// extents are already rejected by SUPPORTED_AREA_FILTER. Bound parameter: the CRS code.
+		private const val CRS_AREA_OF_USE =
+			"WITH crs_area AS (" +
+				"SELECT MIN(e.south_lat) south, MAX(e.north_lat) north, " +
+				"MIN(e.west_lon) west, MAX(e.east_lon) east, " +
+				"MAX(MAX(e.north_lat) - MIN(e.south_lat), 0.0) * MAX(MAX(e.east_lon) - MIN(e.west_lon), 0.0) area " +
+				"FROM usage u " +
+				"JOIN extent e ON e.auth_name = u.extent_auth_name AND e.code = u.extent_code " +
+				"WHERE u.object_table_name = 'projected_crs' AND u.object_auth_name = 'EPSG' AND u.object_code = ? " +
+				"AND IFNULL(e.deprecated, 0) = 0 AND e.west_lon <= e.east_lon), "
+
+		// 1 when the transformation extent (he) touches the CRS bounding box (a); a transformation
+		// extent may cross the antimeridian, in which case it is two longitude ranges.
+		private const val TRANSFORMATION_INTERSECTS =
+			"MAX(CASE WHEN he.south_lat <= a.north AND he.north_lat >= a.south " +
+				"AND (CASE WHEN he.west_lon <= he.east_lon " +
+				"THEN he.west_lon <= a.east AND he.east_lon >= a.west " +
+				"ELSE he.west_lon <= a.east OR he.east_lon >= a.west END) THEN 1 ELSE 0 END)"
+
+		// Area (in square degrees) of the intersection of the transformation extent with the CRS box.
+		private const val TRANSFORMATION_OVERLAP =
+			"IFNULL(SUM(" +
+				"MAX(0.0, MIN(he.north_lat, a.north) - MAX(he.south_lat, a.south)) * " +
+				"(CASE WHEN he.west_lon <= he.east_lon " +
+				"THEN MAX(0.0, MIN(he.east_lon, a.east) - MAX(he.west_lon, a.west)) " +
+				"ELSE MAX(0.0, MIN(180.0, a.east) - MAX(he.west_lon, a.west)) " +
+				"+ MAX(0.0, MIN(he.east_lon, a.east) - MAX(-180.0, a.west)) END)), 0.0)"
 	}
 }
 
