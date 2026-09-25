@@ -89,7 +89,7 @@ Use Gradle to build the project.
 Many resources (icons, fonts, voice files) are not in the main `res` folder but are collected from `../../resources` during the build process via the `collectExternalResources` task.
 
 ## 7. Coding Standards & Best Practices
-- **UI Design:** Follow **Google Material Design** and standard **Android development guidelines** for all new layouts and components.
+- **UI Design:** For new Material 3 UI, follow `OsmAnd/ui-guidelines/README.md`, then Google Material 3 and Android development guidelines.
 - **Logging:** Use `PlatformUtil.getLog(YourClass.class)` for logging. Do not use `android.util.Log` directly in core classes to maintain portability.
 - **Dependency Injection:** The project uses manual dependency injection. Key services and helpers are accessible via `OsmandApplication`.
 - **Theming & Resources:** When creating or modifying UI, ensure consistency by utilizing and updating existing resource files:
