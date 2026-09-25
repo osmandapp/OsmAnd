@@ -75,17 +75,17 @@ object GeoActionHelper {
 		action: String?,
 		mapActivity: MapActivity? = null,
 		session: NavigationSession? = null
-	): Boolean {
+	) {
 		if (action.isNullOrEmpty()) {
-			return false
+			return
 		}
 		if (session != null) {
 			if (!InAppPurchaseUtils.isAndroidAutoAvailable(app) || !session.isLocationPermissionAvailable) {
 				LOG.info("Ignoring geo action '$action': purchase or permission check failed")
-				return false
+				return
 			}
 		}
-		return executeActionInternal(app, action, mapActivity, session)
+		executeActionInternal(app, action, mapActivity, session)
 	}
 
 	private fun getActiveNavSession(app: OsmandApplication, session: NavigationSession?): NavigationSession? {
@@ -101,8 +101,8 @@ object GeoActionHelper {
 		action: String,
 		mapActivity: MapActivity?,
 		session: NavigationSession?
-	): Boolean {
-		return when (action) {
+	) {
+		when (action) {
 			ACTION_EXIT_NAVIGATION -> {
 				val navSession = getActiveNavSession(app, session)
 				if (navSession != null) {
@@ -115,15 +115,12 @@ object GeoActionHelper {
 						app.stopNavigation()
 					}
 				}
-				true
 			}
 			ACTION_MUTE -> {
 				app.settings.VOICE_MUTE.set(true)
-				true
 			}
 			ACTION_UNMUTE -> {
 				app.settings.VOICE_MUTE.set(false)
-				true
 			}
 			ACTION_AVOID_TOLLS -> setAvoidRoutingParameter(app, action, GeneralRouter.AVOID_TOLL, true)
 			ACTION_ALLOW_TOLLS -> setAvoidRoutingParameter(app, action, GeneralRouter.AVOID_TOLL, false)
@@ -135,7 +132,7 @@ object GeoActionHelper {
 			ACTION_SHOW_DIRECTIONS_LIST -> {
 				if (!app.routingHelper.isRouteCalculated) {
 					showFeedback(app, R.string.animate_routing_route_not_calculated)
-					return true
+					return
 				}
 				// TODO: Integrate with alternative routes UI once implemented (#1294).
 				// The core routing engine supports calculating alternatives (HHAlternativeRoutes),
@@ -149,12 +146,11 @@ object GeoActionHelper {
 				} else {
 					showFeedback(app, R.string.download_unsupported_action, action)
 				}
-				true
 			}
 			ACTION_ROUTE_OVERVIEW -> {
 				if (!app.routingHelper.isRouteCalculated) {
 					showFeedback(app, R.string.animate_routing_route_not_calculated)
-					return true
+					return
 				}
 				val activity = mapActivity ?: app.osmandMap?.mapView?.mapActivity
 				if (activity != null) {
@@ -165,7 +161,6 @@ object GeoActionHelper {
 				} else {
 					showFeedback(app, R.string.download_unsupported_action, action)
 				}
-				true
 			}
 			ACTION_FOLLOW_MODE -> {
 				val navSession = getActiveNavSession(app, session)
@@ -176,7 +171,6 @@ object GeoActionHelper {
 						app.mapViewTrackingUtilities.backToLocationImpl()
 					}
 				}
-				true
 			}
 			ACTION_GO_BACK -> {
 				val navSession = getActiveNavSession(app, session)
@@ -194,7 +188,6 @@ object GeoActionHelper {
 						mapActivity?.onBackPressedDispatcher?.onBackPressed()
 					}
 				}
-				true
 			}
 			ACTION_ETA,
 			ACTION_TIME_TO_DESTINATION -> {
@@ -204,7 +197,6 @@ object GeoActionHelper {
 					val eta = OsmAndFormatter.getFormattedTimeShort(app.routingHelper.leftTime.toLong(), true)
 					showFeedback(app, "${app.getString(R.string.shared_string_eta)}: $eta")
 				}
-				true
 			}
 			ACTION_DISTANCE_TO_DESTINATION -> {
 				if (!app.routingHelper.isRouteCalculated) {
@@ -213,7 +205,6 @@ object GeoActionHelper {
 					val distance = OsmAndFormatter.getFormattedDistance(app.routingHelper.leftDistance.toFloat(), app)
 					showFeedback(app, "${app.getString(R.string.distance)}: $distance")
 				}
-				true
 			}
 			ACTION_TIME_TO_NEXT_TURN -> {
 				if (!app.routingHelper.isRouteCalculated) {
@@ -226,7 +217,6 @@ object GeoActionHelper {
 						showFeedback(app, R.string.shared_string_none)
 					}
 				}
-				true
 			}
 			ACTION_DISTANCE_TO_NEXT_TURN -> {
 				if (!app.routingHelper.isRouteCalculated) {
@@ -240,7 +230,6 @@ object GeoActionHelper {
 						showFeedback(app, R.string.shared_string_none)
 					}
 				}
-				true
 			}
 			ACTION_QUERY_NEXT_TURN -> {
 				if (!app.routingHelper.isRouteCalculated) {
@@ -259,7 +248,6 @@ object GeoActionHelper {
 						showFeedback(app, R.string.shared_string_none)
 					}
 				}
-				true
 			}
 			ACTION_QUERY_DESTINATION -> {
 				val point = app.targetPointsHelper.pointToNavigate
@@ -275,7 +263,6 @@ object GeoActionHelper {
 				} else {
 					showFeedback(app, R.string.animate_routing_route_not_calculated)
 				}
-				true
 			}
 			ACTION_QUERY_CURRENT_ROAD -> {
 				val streetName = if (app.routingHelper.isRouteCalculated) {
@@ -295,7 +282,6 @@ object GeoActionHelper {
 				} else {
 					showFeedback(app, R.string.shared_string_none)
 				}
-				true
 			}
 			ACTION_REPORT_CRASH,
 			ACTION_REPORT_HAZARD,
@@ -307,12 +293,10 @@ object GeoActionHelper {
 			ACTION_SHOW_SATELLITE,
 			ACTION_HIDE_SATELLITE -> {
 				showFeedback(app, R.string.download_unsupported_action, action)
-				false
 			}
 			else -> {
 				LOG.warn("Unsupported geo action: $action")
 				showFeedback(app, R.string.download_unsupported_action, action)
-				false
 			}
 		}
 	}
@@ -337,19 +321,18 @@ object GeoActionHelper {
 		action: String,
 		parameterId: String,
 		avoid: Boolean
-	): Boolean {
+	) {
 		val appMode = app.routingHelper.appMode
 		val parameter = app.routingOptionsHelper.getRoutingPrefsForAppModeById(appMode, parameterId)
 		if (parameter == null) {
 			LOG.warn("Routing parameter $parameterId not available for app mode $appMode")
 			showFeedback(app, R.string.download_unsupported_action, action)
-			return false
+			return
 		}
 		val prop = app.settings.getCustomRoutingBooleanProperty(parameter.id, parameter.defaultBoolean)
 		if (prop.getModeValue(appMode) != avoid) {
 			prop.setModeValue(appMode, avoid)
 			app.routingHelper.onSettingsChanged(appMode, true)
 		}
-		return true
 	}
 }

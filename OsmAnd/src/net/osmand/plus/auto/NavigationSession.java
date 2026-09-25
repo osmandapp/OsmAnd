@@ -386,8 +386,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 		String action = GeoPointParserUtil.parseGeoAction(uri.toString());
 		if (!Algorithms.isEmpty(action)) {
-			boolean handled = GeoActionHelper.executeAction(app, action, null, this);
-			LOG.info("Geo action '" + action + "' handled: " + handled);
+			GeoActionHelper.executeAction(app, action, null, this);
 		}
 	}
 
