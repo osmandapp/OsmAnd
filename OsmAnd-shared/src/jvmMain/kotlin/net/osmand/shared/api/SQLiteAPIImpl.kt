@@ -44,49 +44,68 @@ class SQLiteAPIImpl : SQLiteAPI {
 		override fun close() = ds.close()
 
 		override fun rawQuery(sql: String, selectionArgs: Array<String>?): SQLiteCursor? {
-			ds.prepareStatement(sql, selectionArgs).use { statement ->
-				statement.executeQuery().use { cursor ->
-					return object : SQLiteCursor {
-						var colNames: Array<String>? = null
+			val statement = ds.prepareStatement(sql)
+			var cursor = try {
+				selectionArgs?.forEachIndexed { index, arg -> statement.setString(index + 1, arg) }
+				statement.executeQuery()
+			} catch (e: Throwable) {
+				statement.close()
+				throw e
+			}
+			// The rows are read after returning, so the statement and its result set stay open until
+			// the cursor is closed. JDBC numbers columns from 1, SQLiteCursor from 0 as on Android.
+			return object : SQLiteCursor {
+				var colNames: Array<String>? = null
+				var beforeFirst = true
 
-						override fun moveToNext(): Boolean = cursor.next()
-						override fun getColumnNames(): Array<String> {
-							if (colNames != null) {
-								return colNames!!
-							}
-							val metaData = cursor.metaData
-							val columnCount = metaData.columnCount
-							val res = Array(columnCount) { "" }
-							for (i in 1..columnCount) {
-								res[i - 1] = metaData.getColumnName(i)
-							}
-							colNames = res
-							return res
-						}
-
-						override fun moveToFirst(): Boolean = cursor.first()
-						override fun getString(ind: Int): String = cursor.getString(ind)
-						override fun close() = cursor.close()
-						override fun isNull(ind: Int): Boolean {
-							cursor.getObject(ind)
-							return cursor.wasNull()
-						}
-
-						override fun getColumnIndex(columnName: String): Int {
-							val names = getColumnNames()
-							return names.indexOf(columnName)
-						}
-
-						override fun getDouble(ind: Int): Double = cursor.getDouble(ind)
-						override fun getLong(ind: Int): Long = cursor.getLong(ind)
-						override fun getInt(ind: Int): Int = cursor.getInt(ind)
-						override fun getBlob(ind: Int): ByteArray {
-							val blob = cursor.getBlob(ind)
-							val res = blob.getBytes(1, blob.length().toInt())
-							blob.free()
-							return res;
-						}
+				override fun moveToNext(): Boolean {
+					beforeFirst = false
+					return cursor.next()
+				}
+				override fun getColumnNames(): Array<String> {
+					if (colNames != null) {
+						return colNames!!
 					}
+					val metaData = cursor.metaData
+					val columnCount = metaData.columnCount
+					val res = Array(columnCount) { "" }
+					for (i in 1..columnCount) {
+						res[i - 1] = metaData.getColumnName(i)
+					}
+					colNames = res
+					return res
+				}
+
+				override fun moveToFirst(): Boolean {
+					if (!beforeFirst) {
+						// The result set only moves forward: start over by running the query again
+						cursor = statement.executeQuery()
+					}
+					return moveToNext()
+				}
+				override fun getString(ind: Int): String = cursor.getString(ind + 1)
+				override fun close() {
+					cursor.close()
+					statement.close()
+				}
+				override fun isNull(ind: Int): Boolean {
+					cursor.getObject(ind + 1)
+					return cursor.wasNull()
+				}
+
+				override fun getColumnIndex(columnName: String): Int {
+					val names = getColumnNames()
+					return names.indexOf(columnName)
+				}
+
+				override fun getDouble(ind: Int): Double = cursor.getDouble(ind + 1)
+				override fun getLong(ind: Int): Long = cursor.getLong(ind + 1)
+				override fun getInt(ind: Int): Int = cursor.getInt(ind + 1)
+				override fun getBlob(ind: Int): ByteArray {
+					val blob = cursor.getBlob(ind + 1)
+					val res = blob.getBytes(1, blob.length().toInt())
+					blob.free()
+					return res;
 				}
 			}
 		}
