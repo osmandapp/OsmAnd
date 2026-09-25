@@ -16,9 +16,9 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
+import net.osmand.data.TransportStopMatcher;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -35,6 +35,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.views.layers.POIMapLayer.SearchResultAmenity;
 import net.osmand.plus.views.layers.TransportStopHelper;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
@@ -103,22 +105,10 @@ public class AmenityMenuController extends MenuController {
 	@Nullable
 	protected TransportStopController acquireTransportStopController(@NonNull Amenity amenity,
 			@NonNull MapActivity activity, @NonNull PointDescription description) {
-		if (amenity.getType().getKeyName().equals("transportation")) {
-			boolean showTransportStops = false;
-			PoiFilter filter = amenity.getType().getPoiFilterByName("public_transport");
-			if (filter != null) {
-				for (PoiType type : filter.getPoiTypes()) {
-					if (type.getKeyName().equals(amenity.getSubType())) {
-						showTransportStops = true;
-						break;
-					}
-				}
-			}
-			if (showTransportStops) {
-				TransportStop transportStop = TransportStopHelper.findBestTransportStopForAmenity(getApplication(), amenity);
-				if (transportStop != null) {
-					return new TransportStopController(activity, description, transportStop);
-				}
+		if (TransportStopMatcher.isPublicTransportStop(amenity)) {
+			TransportStop transportStop = TransportStopHelper.findBestTransportStopForAmenity(getApplication(), amenity);
+			if (transportStop != null) {
+				return new TransportStopController(activity, description, transportStop);
 			}
 		}
 		return null;
@@ -251,6 +241,13 @@ public class AmenityMenuController extends MenuController {
 
 	public static String getTypeStr(@NonNull OsmandApplication app, @NonNull Amenity amenity) {
 		ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
+		if (amenity instanceof SearchResultAmenity searchResultAmenity) {
+			// the marker of an address result has no poi subtype, it is named as the result list names it
+			String typeName = QuickSearchListItem.getTypeName(app, searchResultAmenity.getSearchResult());
+			if (!Algorithms.isEmpty(typeName)) {
+				return typeName;
+			}
+		}
 		if (amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)) {
 			return getTypeWithDistanceStr(amenity, app);
 		} else if (amenity.getType() != null && amenity.getType().isWiki()) {
@@ -396,6 +393,13 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
+		boolean isClickableWay = getApplication().getClickableWayHelper().isClickableWayAmenity(amenity);
+		if (isClickableWay || amenity.isRouteTrack()) {
+			Drawable shield = NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, getApplication(), !isLight(), isClickableWay);
+			if (shield != null) {
+				return shield;
+			}
+		}
 		String headerIcon = amenity.getIcon();
 		if (headerIcon != null) {
 			Drawable ic = RenderingIcons.getBigIcon(getMapActivity(), headerIcon);
@@ -407,9 +411,6 @@ public class AmenityMenuController extends MenuController {
 		if (region != null) {
 			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
 		}
-		boolean isClickableWay = getApplication().getClickableWayHelper().isClickableWayAmenity(amenity);
-		return isClickableWay || amenity.isRouteTrack()
-				? NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, getApplication(), !isLight(), isClickableWay)
-				: null;
+		return null;
 	}
 }

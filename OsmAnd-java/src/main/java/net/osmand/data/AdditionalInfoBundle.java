@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class AdditionalInfoBundle {
 
@@ -88,10 +89,21 @@ public class AdditionalInfoBundle {
 	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + Amenity.DISH;
 
 	public List<AmenityTagEntry> getVisibleTags(boolean allowNoteTag, List<String> preferredLangs) {
+		return getVisibleTags(allowNoteTag, preferredLangs, Collections.emptySet());
+	}
+
+	/**
+	 * @param genericFallbackKeys keys that must still get a generic row when the category does not
+	 *                            show default tags - stored GPX extensions from an external
+	 *                            namespace, see AmenityExtensionsHelper.getStoredExtensionFallbackKeys().
+	 */
+	public List<AmenityTagEntry> getVisibleTags(boolean allowNoteTag, List<String> preferredLangs,
+	                                            Set<String> genericFallbackKeys) {
 		PoiCategory category = getCategory();
 		Map<String, List<PoiType>> collectedPoiTypes = new LinkedHashMap<>();
 
-		List<AmenityTagEntry> entries = collectPlainRows(allowNoteTag, preferredLangs, category, collectedPoiTypes);
+		List<AmenityTagEntry> entries = collectPlainRows(allowNoteTag, preferredLangs, category,
+				collectedPoiTypes, genericFallbackKeys);
 		entries.addAll(collectCollapsableGroups(category));
 		entries.addAll(collectPoiTypeGroups(category, collectedPoiTypes));
 		return entries;
@@ -99,7 +111,8 @@ public class AdditionalInfoBundle {
 
 	private List<AmenityTagEntry> collectPlainRows(boolean allowNoteTag, List<String> preferredLangs,
 	                                               PoiCategory category,
-	                                               Map<String, List<PoiType>> collectedPoiTypes) {
+	                                               Map<String, List<PoiType>> collectedPoiTypes,
+	                                               Set<String> genericFallbackKeys) {
 		boolean showDefaultTags = isDefaultForCategory();
 		List<AmenityTagEntry> entries = new ArrayList<>();
 		AmenityTagEntry cuisineEntry = null;
@@ -121,7 +134,8 @@ public class AdditionalInfoBundle {
 			if (isFilterOnlyOrGrouped(additionalType)) {
 				continue;
 			}
-			if (additionalType == null && categoryType == null && !showDefaultTags) {
+			if (additionalType == null && categoryType == null && !showDefaultTags
+					&& !genericFallbackKeys.contains(key)) {
 				continue;
 			}
 

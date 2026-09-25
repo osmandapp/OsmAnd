@@ -51,6 +51,9 @@ public class WeatherHelper {
 	private final WeatherSettings weatherSettings;
 	private final OfflineForecastHelper offlineForecastHelper;
 	private final Map<Short, WeatherBand> weatherBands = new LinkedHashMap<>();
+	// WeatherTileResourcesManager.getBandSettings() copies all the settings into a new native object,
+	// too much for the layers that only ask on every redraw whether there are any
+	private volatile boolean hasBandSettings;
 	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
 	private final WeatherTotalCacheSize totalCacheSize;
 	private final ExecutorService cacheExecutor = Executors.newSingleThreadExecutor();
@@ -136,7 +139,9 @@ public class WeatherHelper {
 		);
 		webClient.setDownloadStateListener(this::onDownloadStateChanged);
 		webClient.swigReleaseOwnership();
-		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
+		BandIndexGeoBandSettingsHash bandSettings = getBandSettings(weatherTileResourcesManager);
+		weatherTileResourcesManager.setBandSettings(bandSettings);
+		hasBandSettings = !bandSettings.empty();
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
 		offlineForecastHelper.setWeatherResourcesManager(weatherTileResourcesManager);
 		
@@ -222,11 +227,16 @@ public class WeatherHelper {
 	private boolean updateBandsSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
 		BandIndexGeoBandSettingsHash bandSettings = getBandSettings(weatherResourcesManager);
 		weatherResourcesManager.setBandSettings(bandSettings);
+		hasBandSettings = !bandSettings.empty();
 		bandsSettingsVersion.incrementAndGet();
 		return true;
 	}
 
 	@NonNull
+	public boolean hasBandSettings() {
+		return hasBandSettings;
+	}
+
 	public BandIndexGeoBandSettingsHash getBandSettings(@NonNull WeatherTileResourcesManager resourcesManager) {
 		BandIndexGeoBandSettingsHash bandSettings = new BandIndexGeoBandSettingsHash();
 

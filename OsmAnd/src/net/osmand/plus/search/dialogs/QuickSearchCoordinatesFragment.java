@@ -52,9 +52,7 @@ import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.search.dialogs.SearchCitiesTask.SearchCitiesListener;
 import net.osmand.plus.settings.coordinates.BuiltInCoordinateFormat;
-import net.osmand.plus.settings.coordinates.CoordinateFormat;
 import net.osmand.plus.settings.coordinates.CoordinateFormatFormatter;
-import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSelectorBottomSheet;
 import net.osmand.plus.settings.coordinates.EpsgCoordinateTransformer;
 import net.osmand.plus.settings.coordinates.EpsgPoint;
@@ -68,6 +66,8 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.shared.settings.coordinates.CoordinateFormat;
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -624,7 +624,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 	}
 
 	protected boolean applyFormat(int format, boolean forceApply) {
-		String formatId = CoordinateFormatIds.fromOldFormat(format);
+		String formatId = BuiltInCoordinateFormat.fromOldFormat(format);
 		return formatId != null && applyFormat(formatId, forceApply);
 	}
 
@@ -644,7 +644,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 	private boolean applyLegacyFormat(int format, boolean forceApply) {
 		if (CURRENT_FORMAT != format || forceApply) {
 			int prevFormat = CURRENT_FORMAT;
-			applyFormatId(CoordinateFormatIds.fromOldFormat(format));
+			applyFormatId(BuiltInCoordinateFormat.fromOldFormat(format));
 			updateFormatTitle();
 			EditText latEdit = view.findViewById(R.id.latitudeEditText);
 			EditText lonEdit = view.findViewById(R.id.longitudeEditText);

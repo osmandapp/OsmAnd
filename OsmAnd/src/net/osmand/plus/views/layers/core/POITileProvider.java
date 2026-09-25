@@ -103,8 +103,9 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 					id = RenderingIcons.getIconNameForAmenity(ctx, amenity);
 				}
 				if (id != null) {
+					int iconId = RenderingIcons.getResIdOrDefault(ctx, id, R.drawable.mx_special_marker);
 					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx, getColor(),
-							true, RenderingIcons.getResId(id));
+							true, iconId);
 					pointImageDrawable.setAlpha(0.8f);
 					bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
 				}
@@ -141,12 +142,12 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		this.textScale = textScale;
 		this.density = density;
 		this.offset = new PointI(0, 0);
-		this.swigTakeOwnership();
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
 		if (providerInstance == null) {
-			providerInstance = instantiateProxy();
+			providerInstance = instantiateProxy(true);
+			swigReleaseOwnership();
 		}
 		mapRenderer.addSymbolsProvider(POI_SYMBOL_SECTION, providerInstance);
 	}

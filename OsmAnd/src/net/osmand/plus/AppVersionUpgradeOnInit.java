@@ -53,6 +53,7 @@ import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.srtm.TerrainMode;
 import net.osmand.plus.profiles.LocationIcon;
@@ -66,7 +67,7 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.preferences.*;
-import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
+import net.osmand.plus.settings.coordinates.BuiltInCoordinateFormat;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.GridFormat;
@@ -81,6 +82,7 @@ import net.osmand.plus.views.mapwidgets.WidgetsIdsMapper;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettings;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -175,8 +177,12 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_3_05 = 5305;
 	public static final int VERSION_5_3_06 = 5306;
 	public static final int VERSION_5_4_01 = 5401;
+	// 5402 - 5.4-02 (Migrate the AIS CPA warning time to the CPA master switch)
+	public static final int VERSION_5_4_02 = 5402;
+	// 5403 - 5.4-03 (Keep the AIS connection of existing users on the default values set up)
+	public static final int VERSION_5_4_03 = 5403;
 
-	public static final int LAST_APP_VERSION = VERSION_5_4_01;
+	public static final int LAST_APP_VERSION = VERSION_5_4_03;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -353,6 +359,12 @@ public class AppVersionUpgradeOnInit {
 					app.getAppInitializer().addOnStartListener(
 							init -> migrateTransparentWidgetsToPanelsAppearance()
 					);
+				}
+				if (prevAppVersion < VERSION_5_4_02) {
+					migrateAisCpaWarningTimeToSwitch(settings);
+				}
+				if (prevAppVersion < VERSION_5_4_03) {
+					migrateAisDefaultConnectionToSetUp(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -1109,6 +1121,63 @@ public class AppVersionUpgradeOnInit {
 		}
 	}
 
+	/**
+	 * The Vessel tracker (AIS) plugin used to express "collision warning off" as a zero warning
+	 * time. It has a master switch now, so a positive warning time the user had set means the
+	 * switch is on, and a zero goes back to the default so the new screen shows a valid value.
+	 * The preferences are registered with the defaults of the plugin: this runs before the plugin
+	 * is created, and the plugin gets these very instances back from the settings.
+	 * <p>
+	 * The default safe distance moved from 1 nm to 0.02 nm with the redesign. The stored distance
+	 * is not touched here, so a user who had the warning on with the default distance follows the
+	 * new default.
+	 */
+	private void migrateAisCpaWarningTimeToSwitch(@NonNull OsmandSettings settings) {
+		CommonPreference<Integer> warningTime = settings.registerIntPreference(
+				AisTrackerPlugin.AIS_CPA_WARNING_TIME_ID, AisTrackerPlugin.AIS_CPA_DEFAULT_WARNING_TIME).makeProfile();
+		CommonPreference<Boolean> cpaEnabled = settings.registerBooleanPreference(
+				AisTrackerPlugin.AIS_CPA_ENABLED_ID, false).makeProfile();
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			if (warningTime.isSetForMode(mode)) {
+				if (warningTime.getModeValue(mode) > 0) {
+					cpaEnabled.setModeValue(mode, true);
+				} else {
+					warningTime.resetModeToDefault(mode);
+				}
+			}
+		}
+	}
+
+	/**
+	 * The Vessel tracker (AIS) plugin counts a connection as set up once one of its connection
+	 * preferences is stored. Before the redesign the plugin listened on the default UDP port
+	 * without storing anything, so a user who had the plugin on with those defaults would lose
+	 * the connection after the upgrade. The protocol is stored for them, which keeps it set up.
+	 * <p>
+	 * TCP with the old default host (192.168.200.16) is not carried over: that default pointed at
+	 * a LAN address of somebody else, so such a user sets the host up once.
+	 */
+	private void migrateAisDefaultConnectionToSetUp(@NonNull OsmandSettings settings) {
+		if (!settings.getEnabledPlugins().contains(AisTrackerPlugin.AISTRACKER_ID)) {
+			return;
+		}
+		/* registered with the default of the plugin: this runs before the plugin is created,
+		 * and the plugin gets this very instance back from the settings */
+		CommonPreference<Integer> protocol = settings.registerIntPreference(
+				AisTrackerPlugin.AIS_NMEA_PROTOCOL_ID, AisTrackerPlugin.AIS_NMEA_PROTOCOL_UDP).makeProfile();
+		String[] connectionIds = {AisTrackerPlugin.AIS_NMEA_PROTOCOL_ID, AisTrackerPlugin.AIS_NMEA_IP_ADDRESS_ID,
+				AisTrackerPlugin.AIS_NMEA_TCP_PORT_ID, AisTrackerPlugin.AIS_NMEA_UDP_PORT_ID};
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			boolean stored = false;
+			for (String id : connectionIds) {
+				stored |= settings.isSet(mode, id);
+			}
+			if (!stored) {
+				protocol.setModeValue(mode, AisTrackerPlugin.AIS_NMEA_PROTOCOL_UDP);
+			}
+		}
+	}
+
 	private void migrateWidgetPanelsPages() {
 		OsmandSettings settings = app.getSettings();
 		for (WidgetsPanel panel : WidgetsPanel.values()) {
@@ -1217,7 +1286,7 @@ public class AppVersionUpgradeOnInit {
 	@NonNull
 	public static List<String> getLegacyCoordinateFormatPreferredIds(int legacyFormat) {
 		LinkedHashSet<String> ids = new LinkedHashSet<>();
-		String primaryId = CoordinateFormatIds.fromOldFormat(legacyFormat);
+		String primaryId = BuiltInCoordinateFormat.fromOldFormat(legacyFormat);
 		if (primaryId != null) {
 			ids.add(primaryId);
 		}

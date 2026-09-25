@@ -381,4 +381,24 @@
 		<attr name="secondaryTextColor" format="reference" />
 		<attr name="tertiaryTextColor" format="reference" />
 	</declare-styleable>
+
+	<declare-styleable name="GroupHeaderView">
+		<attr name="groupHeaderTitle" format="string" />
+		<attr name="groupHeaderTrailingIcon" format="reference" />
+		<attr name="groupHeaderTrailingContentDescription" format="string" />
+	</declare-styleable>
+
+	<declare-styleable name="GroupFooterView">
+		<attr name="groupFooterText" format="string" />
+	</declare-styleable>
+
+	<declare-styleable name="ScreenDescriptionView">
+		<attr name="screenDescriptionText" format="string" />
+	</declare-styleable>
+
+	<declare-styleable name="MainSwitchView">
+		<attr name="mainSwitchLabel" format="string" />
+		<attr name="mainSwitchUseStateLabel" format="boolean" />
+		<attr name="mainSwitchChecked" format="boolean" />
+	</declare-styleable>
 </resources>

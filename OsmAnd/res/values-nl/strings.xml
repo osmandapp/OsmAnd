@@ -1337,7 +1337,6 @@
     <string name="storage_permission_restart_is_required">OsmAnd heeft nu toestemming om de externe opslag te gebruiken. Een handmatige herstart is noodzakelijk.</string>
     <string name="full_report">Volledig Verslag</string>
     <string name="report">Verslag</string>
-    <string name="file_name_containes_illegal_char">Ongeldig teken in bestandsnaam</string>
     <string name="rendering_value_thin_name">Dun</string>
     <string name="rendering_value_medium_name">Gemiddeld</string>
     <string name="rendering_value_bold_name">Vet</string>
@@ -5489,7 +5488,7 @@
     <string name="obd_simulation_device">Simulatie-apparaat</string>
     <string name="favorite_confirm_delete_folder">Dit zal de map \"%1$s\" verwijderen, inclusief submappen en %2$d favoriet(en).</string>
     <string name="favorite_folder_rename_conflict">Een map met deze naam bestaat al.</string>
-    <string name="favorite_folder_invalid_name">De mapnaam mag geen / of _%_ bevatten</string>
+    <string name="favorite_folder_invalid_name">De mapnaam mag geen / of %1$s bevatten</string>
     <string name="favorite_folder_duplicate_message">Gebruik een mapnaam die nog niet bestaat.</string>
     <string name="favorite_folder_name">Mapnaam</string>
     <string name="edit_folder">Bewerk map</string>
@@ -5634,7 +5633,6 @@
     <string name="share_favorites_preparation_failed">Kon bestanden niet voorbereiden om te delen.</string>
     <string name="share_favorites_share_failed">Kon bestand niet delen.</string>
     <string name="share_favorites_missing_media_warning">Enkele gekoppelde media konden niet worden toegevoegd.</string>
-    <string name="search_on_web">Zoek op het internet</string>
     <string name="release_5_4">• Vernieuwde zoekinterface: sortering, categoriefilters en een overzichtelijker uiterlijk\n\n • Koppel foto\'s en media aan Favorieten\n\n • Favorieten: ondersteuning voor subgroepen en vast te zetten mappen\n\n • Coördinaten: zoeken, kaartraster en weergave van interessepunten (POI) ondersteunen nu EPSG- en Maidenhead-locator\n\n • Navigatieonderbrekingen opgelost; wissel tussen Standaard en Snelle routering\n\n • Stel Android Auto kaartschaal afzonderlijk van die op je telefoon in\n\n • Nieuwe ruimtelijke zoekfunctie — vind plaatsen en zoek rondom een plaats\n\n • Astronomie ondersteuning voor zons- en maansverduisteringen toegevoegd</string>
     <string name="astro_penumbral_lunar_eclipse">Penumbrale maansverduistering</string>
     <string name="astro_eclipse_phase_penumbral">Penumbraal</string>

@@ -88,7 +88,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 				int iconId;
 				int backgroundColorRes;
 				if (osmNote.isOpened()) {
-					iconId = R.drawable.mx_special_symbol_remove;
+					iconId = R.drawable.mx_special_symbol_exclamation_mark;
 					backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
 				} else {
 					iconId = R.drawable.mx_special_symbol_check_mark;
@@ -130,12 +130,12 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 		this.showClosed = showClosed;
 		this.minZoom = minZoom;
 		this.offset = new PointI(0, -BACKGROUND_TYPE.getOffsetY(context, textScale));
-		this.swigTakeOwnership();
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
 		if (providerInstance == null) {
-			providerInstance = instantiateProxy();
+			providerInstance = instantiateProxy(true);
+			swigReleaseOwnership();
 		}
 
 		mapRenderer.addSymbolsProvider(providerInstance);

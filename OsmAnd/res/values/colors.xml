@@ -74,6 +74,7 @@
 
 	<color name="status_bar_transparent_gradient">#CC000000</color>
 	<color name="status_bar_mapillary">#11ab51</color>
+	<color name="status_bar_panoramax">#3f1d6b</color>
 	<color name="status_bar_dim_light">#8a4e00</color>
 	<color name="status_bar_dim_dark">#13171a</color>
 
@@ -420,9 +421,10 @@
 	<color name="inactive_item_orange">#ffc87f</color>
 
 	<!-- DownloadedRegionsLayer -->
-	<color name="region_uptodate">#5532C832</color>
-	<color name="region_backuped">#55FF8F00</color>
-	<color name="region_selected">#55FFFF00</color>
+	<color name="map_region_downloaded_fill">#66339944</color>
+	<color name="map_region_outdated_fill">#66FF8800</color>
+	<color name="map_region_deactivated_fill">#66858594</color>
+	<color name="map_region_selected_fill">#55FFFF00</color>
 	<color name="region_downloading">#44FF61FF</color>
 
 	<!-- Dialog Live Updates Settings -->
@@ -604,7 +606,10 @@
 	<!-- Extra -->
 	<color name="mapillary_color">#3db878</color>
 	<color name="mapillary_color_pressed">#3a9f73</color>
+	<color name="panoramax_color">#54278f</color>
+	<color name="panoramax_color_pressed">#4a227d</color>
 	<color name="mapillary_action_bar">#14c45d</color>
+	<color name="panoramax_action_bar">#54278f</color>
 	<color name="buy_button_color">#50ae55</color>
 	<color name="buy_button_pressed_color">#b5e5b9</color>
 
@@ -788,11 +793,6 @@
 
     <color name="scrim_light">#52000000</color>
     <color name="scrim_dark">#52000000</color>
-
-	<color name="map_region_downloaded_fill">#66339944</color>
-	<color name="map_region_outdated_fill">#66FF8800</color>
-	<color name="map_region_deactivated_fill">#66858594</color>
-
 	
 
 

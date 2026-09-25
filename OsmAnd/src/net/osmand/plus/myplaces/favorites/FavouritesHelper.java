@@ -38,6 +38,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.shared.favorites.FavoriteFolderPath;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
@@ -68,11 +69,14 @@ public class FavouritesHelper {
 	private final FavouritesFileHelper fileHelper;
 	private final FavoriteSortModesHelper favoriteSortModesHelper;
 
-	private List<FavoriteGroup> favoriteGroups = new ArrayList<>();
-	private Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
-	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<>();
+	// Replaced, never mutated in place - volatile publishes the new instance to other threads.
+	private volatile List<FavoriteGroup> favoriteGroups = new ArrayList<>();
+	private volatile Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
+	private volatile List<FavouritePoint> cachedFavoritePoints = new ArrayList<>();
 	@Nullable
-	private FavoriteFolderSnapshot favoriteFolderSnapshot;
+	private volatile FavoriteFolderSnapshot favoriteFolderSnapshot;
+
+	private final Object bulkUpdateLock = new Object();
 
 	private List<FavoritesListener> listeners = new ArrayList<>();
 	private final Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
@@ -266,6 +270,17 @@ public class FavouritesHelper {
 			return groupColor;
 		}
 		return defaultColor;
+	}
+
+	/**
+	 * Runs a read-modify-write-save sequence over the groups exclusively. Callers that add or
+	 * replace whole groups must use it: favoriteGroups and flatGroups are updated by
+	 * copy-on-write, so concurrent sequences overwrite each other's groups.
+	 */
+	public void runBulkUpdate(@NonNull Runnable action) {
+		synchronized (bulkUpdateLock) {
+			action.run();
+		}
 	}
 
 	public void loadFavorites() {
@@ -1061,13 +1076,10 @@ public class FavouritesHelper {
 
 	public void updateGroupIconName(@NonNull FavoriteGroup group, @Nullable String iconName,
 	                                @NonNull SaveOption saveOption, boolean saveImmediately) {
-		if (saveOption.shouldUpdatePoints()) {
+		// "Original" (no icon) only clears the folder icon, each point retains its individual icon
+		if (saveOption.shouldUpdatePoints() && !Algorithms.isEmpty(iconName)) {
 			for (FavouritePoint point : group.getPoints()) {
-				if (Algorithms.isEmpty(iconName)) {
-					point.setIconId(getOriginalIconId(point));
-				} else {
-					point.setIconIdFromName(iconName);
-				}
+				point.setIconIdFromName(iconName);
 			}
 		}
 		if (saveOption.shouldUpdateGroup()) {

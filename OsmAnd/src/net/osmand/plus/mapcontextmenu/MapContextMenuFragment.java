@@ -43,6 +43,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.TransportStopMatcher;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -57,7 +58,6 @@ import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProv
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MenuObjectUtils;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -1558,7 +1558,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		boolean moreLocalItems = localRoutesMoreTv.getVisibility() == View.VISIBLE;
 		if (maxLocalRows <= 5 && !moreLocalItems && nearbyRoutesSize > 0) {
 			String nearInDistance = getString(R.string.transport_nearby_routes) + " "
-					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS_UI, app) + ":";
+					+ OsmAndFormatter.getFormattedDistance(TransportStopMatcher.SHOW_STOPS_RADIUS_METERS, app) + ":";
 			nearbyRoutesWithinTv.setText(nearInDistance);
 			int minBadgeWidth = getMinBadgeWidth(nearbyTransportStopRoutes);
 			int nearbyColumnsPerRow = getRoutesBadgesColumnsPerRow(nearInDistance, minBadgeWidth);

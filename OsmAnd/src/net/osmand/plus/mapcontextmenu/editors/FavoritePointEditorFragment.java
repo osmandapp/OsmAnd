@@ -151,11 +151,20 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (ctx != null) {
 			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, group.getName());
 			this.group = favouritesHelper.getGroup(groupIdName);
+			String iconName = getIconName();
 			super.setPointsGroup(group, true);
-			setIconName(getIconNameForGroup());
+			// a new favorite made from a POI keeps its icon (or the one picked by the user),
+			// the folder icon is for points without their own one (an empty place on the map)
+			setIconName(isNewPointWithIcon() ? iconName : getIconNameForGroup());
 			selectIconInController();
 			updateContent();
 		}
+	}
+
+	private boolean isNewPointWithIcon() {
+		FavoritePointEditor editor = getFavoritePointEditor();
+		FavouritePoint favorite = getFavorite();
+		return editor != null && editor.isNew() && favorite != null && favorite.getIconId() != 0;
 	}
 
 	@NonNull
@@ -487,15 +496,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@DrawableRes
 	private int getInitialIconId() {
 		FavouritePoint favorite = getFavorite();
-		int iconId = 0;
+		int iconId = favorite != null ? favorite.getIconId() : 0;
 		FavoriteGroup group = getGroup();
-		FavoritePointEditor editor = getFavoritePointEditor();
-		if (editor != null && editor.isNew() && group != null && !Algorithms.isEmpty(group.getIconName())) {
-			iconId = RenderingIcons.getBigIconResourceId(group.getIconName());
-		}
-		if (iconId == 0 && favorite != null) {
-			iconId = favorite.getIconId();
-		}
 		if (iconId == 0 && group != null) {
 			iconId = RenderingIcons.getBigIconResourceId(group.getIconName());
 		}

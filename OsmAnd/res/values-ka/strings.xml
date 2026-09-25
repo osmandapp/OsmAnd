@@ -1020,7 +1020,7 @@
     <string name="shared_string_current">მიმდინარე</string>
     <string name="show_tunnels">გვირაბები</string>
     <string name="nautical_renderer">საზღვაო</string>
-    <string name="day_off_label">დასვ</string>
+    <string name="day_off_label">დასვენება</string>
     <string name="lang_lo">ლაოსური</string>
     <string name="shared_string_more_without_dots">მეტი</string>
     <string name="shared_string_one">ერთი</string>
@@ -1893,7 +1893,6 @@
     <string name="rendering_attr_contourColorScheme_name">კონტურული ხაზების ფერთა გამა</string>
     <string name="update_all_maps_now">განვაახლო ყველა რუკა\?</string>
     <string name="access_map_linked_to_location">მდებარეობასთან დაკავშირებული რუკა</string>
-    <string name="file_name_containes_illegal_char">დაუშვებელი სიმბოლო ფაილის სახელში</string>
     <string name="shared_string_add_to_map_markers">რუკის მარკერებში ჩამატება</string>
     <string name="no_location_permission">მდებარეობაზე წვდომის მინიჭება.</string>
     <string name="only_download_over_wifi">გადმოწერა მხოლოდ W-Fi-ით</string>

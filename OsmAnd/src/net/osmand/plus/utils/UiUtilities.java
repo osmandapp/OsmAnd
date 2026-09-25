@@ -57,6 +57,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.base.BaseMaterialFragment;
 import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.help.HelpArticleUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -797,6 +798,7 @@ public class UiUtilities {
 		MapFragmentsHelper fragmentsHelper = activity.getFragmentsHelper();
 		BaseFullScreenFragment fragmentAboveDashboard = fragmentsHelper.getVisibleBaseFullScreenFragment(R.id.fragmentContainer);
 		BaseSettingsFragment settingsFragmentAboveDashboard = fragmentsHelper.getVisibleBaseSettingsFragment(R.id.fragmentContainer);
+		BaseMaterialFragment materialFragmentAboveDashboard = fragmentsHelper.getVisibleBaseMaterialFragment(R.id.fragmentContainer);
 		BaseFullScreenFragment fragmentBelowDashboard = fragmentsHelper.getVisibleBaseFullScreenFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
 
 		int statusBarColorId = -1;
@@ -810,6 +812,10 @@ public class UiUtilities {
 			statusBarColorId = settingsFragmentAboveDashboard.getStatusBarColorId();
 			navigationBarOwner = settingsFragmentAboveDashboard;
 			nightModeForContent = settingsFragmentAboveDashboard.getContentStatusBarNightMode();
+		} else if (materialFragmentAboveDashboard != null) {
+			statusBarColorId = materialFragmentAboveDashboard.getStatusBarColorId();
+			navigationBarOwner = materialFragmentAboveDashboard;
+			nightModeForContent = materialFragmentAboveDashboard.getContentStatusBarNightMode();
 		} else if (activity.getDashboard().isVisible()) {
 			statusBarColorId = activity.getDashboard().getStatusBarColor();
 		} else if (fragmentBelowDashboard != null) {

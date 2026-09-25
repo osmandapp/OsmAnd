@@ -21,7 +21,6 @@ kotlin {
 	val datetimeVersion = "0.6.0"
 	val okioVersion = "3.9.0"
 	val kxml2Version = "2.3.0"
-	val sqliterVersion = "1.3.1"
 	val sqliteJDBCVersion = "3.34.0"
 	val commonLoggingVersion = "1.2"
 	val ktorVersion = "3.1.3"

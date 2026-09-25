@@ -1713,7 +1713,6 @@
     <string name="osmand_extended_description_part4">Esqui
 \n O complemento de mapas de esqui OsmAnd permite que você veja pistas de esqui com nível de complexidade e algumas informações adicionais, como localização de elevadores e outras facilidades.</string>
     <string name="save_poi_too_many_uppercase">O nome contém muitas letras maiúsculas. Continuar\?</string>
-    <string name="file_name_containes_illegal_char">Caráter ilegal no nome do arquivo</string>
     <string name="configure_screen_quick_action">Ação rápida</string>
     <string name="quick_action_item_action">Ação %d</string>
     <string name="quick_action_item_screen">Tela %d</string>
@@ -5531,7 +5530,7 @@
     <string name="edit_folder">Editar pasta</string>
     <string name="favorite_confirm_delete_folder">Isso excluirá a pasta \"%1$s\", incluindo as pastas aninhadas e %2$d marcadores.</string>
     <string name="favorite_folder_rename_conflict">Já existe uma pasta com esse nome.</string>
-    <string name="favorite_folder_invalid_name">O nome da pasta não pode conter / ou _%_</string>
+    <string name="favorite_folder_invalid_name">O nome da pasta não pode conter / ou %1$s</string>
     <string name="favorite_folder_duplicate_message">Use um nome de pasta que ainda não exista.</string>
     <string name="choose_from_gallery">Escolha na galeria</string>
     <string name="choose_from_files">Escolha entre os arquivos</string>
@@ -5709,4 +5708,47 @@
     <string name="duplicate_map">Mapa duplicado</string>
     <string name="share_favorites_media_preparation_failed">Não foi possível incluir os arquivos anexados. Apenas pontos de compartilhamento.</string>
     <string name="preparing_file">Preparando o arquivo</string>
+    <string name="astro_eclipse_column_below_horizon">Abaixo do horizonte</string>
+    <string name="share_favorites_with_media_description">Os pontos favoritos em %1$s têm mídia anexada. Compartilhe apenas os pontos ou os pontos com mídia como um arquivo.</string>
+    <string name="share_favorites_points_only">Apenas pontos</string>
+    <string name="share_favorites_points_and_media">Pontos e mídia</string>
+    <string name="share_favorites_preparation_failed">Não foi possível preparar os arquivos para compartilhamento.</string>
+    <string name="share_favorites_share_failed">Não foi possível compartilhar o arquivo.</string>
+    <string name="share_favorites_missing_media_warning">Alguns arquivos de mídia anexados não puderam ser incluídos.</string>
+    <string name="astro_eclipse_phase_none">Não ofuscado</string>
+    <string name="astro_fit_lunar_eclipse_visibility">Visibilidade adequada</string>
+    <string name="astro_eclipse_start">Iniciar</string>
+    <string name="astro_eclipse_end">Fim</string>
+    <string name="quick_action_add_track">Adicionar trilha</string>
+    <string name="quick_action_tracks_select_descr">Adicione uma ou mais trilhas para exibi-las ou ocultá-las no mapa com um único toque.</string>
+    <string name="quick_action_tracks_always_ask_descr">Ao tocar nessa ação, abre-se a lista de trilhas, onde você pode exibir ou ocultar uma ou mais delas.</string>
+    <string name="quick_action_all_tracks">Todas as trilhas</string>
+    <plurals name="files_count">
+        <item quantity="one">%d arquivo</item>
+        <item quantity="many">%d arquivos</item>
+        <item quantity="other">%d arquivos</item>
+    </plurals>
+    <string name="shared_string_archive">Arquivo</string>
+    <string name="attached_media_delete_confirmation">Deseja excluir %1$d itens de mídia a partir deste momento? As mídias armazenadas pelo aplicativo e que não estejam anexadas em nenhum outro lugar também serão excluídas do dispositivo.</string>
+    <string name="gpx_line_style_desc_unavailable_for_color">Os estilos de linha tracejada e pontilhada não estão disponíveis para cores de trilha que não sejam sólidas.</string>
+    <string name="gpx_color_unavailable_for_line_style">Essa coloração não está disponível para estilos de linha não contínua.</string>
+    <string name="gpx_color_desc_unavailable_for_style">Para o estilo de linha tracejada ou pontilhada, está disponível apenas a cor sólida do traço.</string>
+    <string name="gpx_line_style">Estilo da linha</string>
+    <string name="gpx_line_style_solid">Sólido</string>
+    <string name="gpx_line_style_dashed">Tracejado</string>
+    <string name="gpx_line_style_dotted">Pontilhado</string>
+    <string name="battery_saving_mode_descr">Limita a exibição do mapa a 20 quadros por segundo para reduzir o consumo da bateria e o aquecimento do aparelho. O movimento no mapa fica menos suave.</string>
+    <string name="java_memory">Memória do Java</string>
+    <string name="map_rendering">Renderização do mapa</string>
+    <string name="simulate_ui">Simular a primeira inicialização</string>
+    <string name="simulate_ui_descr">Primeira execução, banner da versão gratuita, folha de descontos.</string>
+    <string name="heap_dump_descr">Contar os objetos na pilha do Java.</string>
+    <string name="heap_dump_collect">Coletar e analisar agora</string>
+    <string name="heap_dump_collect_descr">Leva alguns segundos e mostra o resultado.</string>
+    <string name="heap_dump_share">Compartilhar relatório</string>
+    <string name="heap_dump_share_descr">Envia o último relatório ao servidor.</string>
+    <string name="heap_dump_auto_descr">Quando a pilha estiver quase cheia, uma vez a cada 30 minutos.</string>
+    <string name="visualizing_button_grid_descr">Células, slots, quadros e registros.</string>
+    <string name="crash_report_sent">Relatório enviado. Obrigado!</string>
+    <string name="crash_report_send_failed">Não foi possível enviar o relatório. Tente novamente mais tarde.</string>
 </resources>

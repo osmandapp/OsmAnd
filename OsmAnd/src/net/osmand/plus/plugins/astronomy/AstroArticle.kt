@@ -13,7 +13,8 @@ data class AstroArticle(
     val description: String,
     val thumbnailUrl: String?,
     val summaryJson: String?,
-    private val mobileHtml: ByteArray?
+    private val mobileHtml: ByteArray?,
+    val wikiContentLocales: Set<String> = emptySet()
 ) {
     companion object {
         private val LOG = PlatformUtil.getLog(AstroArticle::class.java)

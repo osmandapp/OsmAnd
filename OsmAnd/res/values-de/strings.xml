@@ -1342,7 +1342,6 @@
     <string name="storage_permission_restart_is_required">Die App darf nun auf den externen Speicher schreiben, dazu ist aber ein manueller Neustart nötig.</string>
     <string name="shared_string_move_up">Verschieben ↑</string>
     <string name="shared_string_move_down">Verschieben ↓</string>
-    <string name="file_name_containes_illegal_char">Nicht erlaubte Zeichen im Dateinamen</string>
     <string name="rendering_value_fine_name">Fein</string>
     <string name="rendering_value_thin_name">Dünn</string>
     <string name="rendering_value_medium_name">Mittel</string>
@@ -2422,7 +2421,7 @@
     <string name="live_monitoring_time_buffer">Zeitpuffer</string>
     <string name="live_monitoring_tracking_interval">Aufzeichnungsintervall</string>
     <string name="live_monitoring_adress">Webadresse</string>
-    <string name="monitoring_notification">Benachrichtigung</string>
+    <string name="monitoring_notification">Schaltfläche \'Aufnehmen\' in Benachrichtigungen anzeigen</string>
     <string name="monitoring_min_speed">Mindestgeschwindigkeit</string>
     <string name="monitoring_min_accuracy">Mindestgenauigkeit</string>
     <string name="monitoring_min_distance">Minimale Verschiebung</string>
@@ -4889,8 +4888,8 @@
     <string name="us_gallon">US-Gallone</string>
     <string name="kilometers">Kilometer</string>
     <string name="miles">Meilen</string>
-    <string name="access_pinch_zoom_magnification">Zoom mit zwei Fingern</string>
-    <string name="access_pinch_zoom_magnification_descr">Verwenden Sie für Zoom-Gesten die Skalierung des Ansichtsfensters anstelle der separaten Zoomstufen.</string>
+    <string name="access_pinch_zoom_magnification">Pinch-Zoom-Vergrößerung</string>
+    <string name="access_pinch_zoom_magnification_descr">Verwendet während des Hineinzoomens die Viewport-Skalierung (Vergrößerung) anstelle sofort zu zoomen.</string>
     <string name="mpg">MPG</string>
     <string name="show_spherical_map_description">Sphäroidisches Modell der Erde anzeigen</string>
     <string name="shared_string_price">Preis</string>
@@ -5049,7 +5048,7 @@
     <string name="edit_palette">Palette bearbeiten</string>
     <string name="add_palette">Palette hinzufügen</string>
     <string name="delete_palette">Palette löschen</string>
-    <string name="trip_recording_avg_speed_widget_description">Zeigt die Durchschnittsgeschwindigkeit von der aktuellen Strecke oder die Durchschnittsgeschwindigkeit während des letzten Anstiegs- ober Abfahrtsabschnitts.</string>
+    <string name="trip_recording_avg_speed_widget_description">Zeigt die Durchschnittsgeschwindigkeit der aktuellen Strecke oder die Durchschnittsgeschwindigkeit während der letzten Steigung bzw. des letzten Gefälles an.</string>
     <string name="gradient_no_data_point_summary">Farbe, die angewendet wird, wenn Daten fehlen oder nicht definiert sind.</string>
     <string name="gradient_input_value_too_low_warn">Der zulässige Mindestwert ist %1$s.</string>
     <string name="gradient_input_value_too_high_warn">Der zulässige Höchstwert ist %1$s.</string>
@@ -5174,7 +5173,7 @@
     <string name="astro_designations">Bezeichnungen</string>
     <string name="obd_simulation_device">Simulationsgerät</string>
     <string name="favorite_folder_rename_conflict">Ein Ordner mit diesem Namen ist bereits vorhanden.</string>
-    <string name="favorite_folder_invalid_name">Der Ordnername darf kein / oder _%_ enthalten</string>
+    <string name="favorite_folder_invalid_name">Der Ordnername darf kein / oder %1$s enthalten</string>
     <string name="favorite_folder_duplicate_message">Verwenden Sie einen Ordnernamen, der noch nicht vorhanden ist.</string>
     <string name="favorite_folder_name">Ordnername</string>
     <string name="edit_folder">Ordner bearbeiten</string>
@@ -5260,7 +5259,6 @@
     <string name="share_favorites_points_and_media">Punkte und Medien</string>
     <string name="share_favorites_share_failed">Die Datei konnte nicht geteilt werden.</string>
     <string name="share_favorites_missing_media_warning">Einige angehängte Medien konnten nicht beigefügt werden.</string>
-    <string name="search_on_web">Im Internet suchen</string>
     <string name="shared_string_note">Anmerkung</string>
     <string name="media_storage_camera_folder_note_descr">Audio wird unter Music/OsmAnd gespeichert.</string>
     <string name="always_keep_local_copy">Immer eine lokale Kopie behalten</string>
@@ -5293,4 +5291,5 @@
     <string name="astro_eclipse_maximum">Maximum</string>
     <string name="astro_eclipse_phase_partial">Partiell</string>
     <string name="astro_eclipse_phase_total">Total</string>
+    <string name="astro_eclipse_column_below_horizon">Unter dem Horizont</string>
 </resources>

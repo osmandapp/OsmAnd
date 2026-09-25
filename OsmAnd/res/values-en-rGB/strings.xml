@@ -299,7 +299,7 @@
     <string name="search_more">Search more…</string>
     <string name="astro_search_empty_description">Try changing the filters or observation time.</string>
     <string name="astro_search_input_hint">Input text</string>
-    <string name="day_off_label">off</string>
+    <string name="day_off_label">closed</string>
     <string name="astro_explore_my_data">My data</string>
     <string name="astro_explore_schedule_subtitle">Upcoming astronomical events</string>
     <string name="open_from">Open from</string>

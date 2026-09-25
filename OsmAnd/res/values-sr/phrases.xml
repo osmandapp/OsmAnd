@@ -5184,4 +5184,18 @@
     <string name="poi_website_menu">Мени</string>
     <string name="poi_air_conditioning_yes">Да</string>
     <string name="poi_air_conditioning_no">Не</string>
+    <string name="poi_disc_golf_course">Терен за диск-голф</string>
+    <string name="poi_dancing_school">Школа плеса</string>
+    <string name="poi_student_accommodation">Смештај за студенте</string>
+    <string name="poi_healthcare_counselling">Саветовање</string>
+    <string name="poi_healthcare_birthing_centre">Центар за порођај</string>
+    <string name="poi_craft_cleaning">Услуга чишћења</string>
+    <string name="poi_craft_printer">Штампач</string>
+    <string name="poi_craft_signmaker">Израђивач знака</string>
+    <string name="poi_funeral_hall">Сала за погреб</string>
+    <string name="poi_post_depot">Поштански депо</string>
+    <string name="poi_indoor_play">Затворено игралиште</string>
+    <string name="poi_traffic_park">Саобраћајни полигон</string>
+    <string name="poi_animal_breeding">Узгој животиња</string>
+    <string name="poi_stables">Штале</string>
 </resources>

@@ -1349,7 +1349,6 @@
     <string name="number_of_contributors">Nombro de kontribuintoj</string>
     <string name="number_of_edits">Nombro de redaktoj</string>
     <string name="reports_for">Raportoj por</string>
-    <string name="file_name_containes_illegal_char">Malpermesata signo en dosiernomo</string>
     <string name="coords_format">Formo de koordinatoj</string>
     <string name="shared_string_is_open">Malfermitaj nun</string>
     <string name="shared_string_is_open_24_7">Malfermitaj 24/7</string>
@@ -5144,7 +5143,7 @@
     <string name="astronomy_map">Astronomia mapo</string>
     <string name="favorite_confirm_delete_folder">Tio ĉi forigos la dosierujon “%1$s”, inkluzivante ĝiajn subdosierujojn kaj %2$d ŝatata(j)n ejo(j)n.</string>
     <string name="favorite_folder_rename_conflict">Dosierujo kun tiu ĉi nomo jam ekzistas.</string>
-    <string name="favorite_folder_invalid_name">Nomo de dosierujon ne povas enhavi / aŭ _%_.</string>
+    <string name="favorite_folder_invalid_name">Nomo de dosierujon ne povas enhavi / aŭ %1$s.</string>
     <string name="favorite_folder_duplicate_message">Enigu nomon de dosierujo, kiu ne ekzistas.</string>
     <string name="favorite_folder_name">Nomo de dosierujo</string>
     <string name="edit_folder">Redakti dosierujon</string>
@@ -5267,7 +5266,6 @@
     <string name="share_favorites_preparation_failed">Ne povas prepari dosierojn por kunhavigi.</string>
     <string name="share_favorites_share_failed">Ne povas kunhavigi dosieron.</string>
     <string name="share_favorites_missing_media_warning">Ne povas inkluzivi iujn ligitajn aŭdvidaĵojn.</string>
-    <string name="search_on_web">Serĉi en interreto</string>
     <string name="release_5_4">• rekonstruita serĉo: eblo ordigi kaj filtri, pli klara vido\n\n• aldoni fotojn kaj aŭdvidaĵojn al ŝatataj punktoj\n\n• ŝatataj punktoj: subdosierujoj kaj alpingeblaj dosierujoj\n\n• koordinatoj: serĉado, kradoj kaj vidigo de interesejoj nun subtenas EPSG kaj Maidenhead Locator\n\n• riparitaj problemoj pri navigoj, rapide ŝanĝi inter norma kaj rapida kurs-difinadoj\n\n• skali Android Auto sendepende de via telefono\n\n• nova spaca serĉilo – trovi lokojn kaj serĉi ĉirkaŭ lokoj\n\n• Astronomio: kalkuli sunajn kaj lunajn eklipsojn</string>
     <string name="shared_string_note">Rimarko</string>
     <string name="media_storage_camera_folder_note_descr">Sonaj dosieroj konserviĝos en la dosierujo Music/OsmAnd.</string>
@@ -5345,4 +5343,12 @@
     <string name="media_storage_camera_folder_descr">Konservas dosierojn al la dosierujo de fotilo (DCIM/OsmAnd). %1$s</string>
     <string name="rendering_attr_surface_clay_name">Argilo</string>
     <string name="rendering_attr_surface_laterite_name">Laterito</string>
+    <string name="astro_eclipse_column_below_horizon">subhorizonte</string>
+    <string name="quick_action_add_track">Aldoni spuron</string>
+    <string name="quick_action_tracks_select_descr">Aldoni unu aŭ pli spurojn por montri/kaŝi ilin sur la mapo per unu frapeto.</string>
+    <string name="quick_action_tracks_always_ask_descr">Frapeti tiun ĉi agon montros la liston de spuroj, el kiu vi povos elekti unu aŭ pli spurojn por montri aŭ kaŝi.</string>
+    <string name="quick_action_all_tracks">Ĉiuj spuroj</string>
+    <string name="battery_saving_mode_descr">Limigi bildigon de mapo al 20 kadroj en sekundo por malpliigi uzadon de baterio kaj varmiĝon de la aparato. Movado de mapo iĝos malpli flua.</string>
+    <string name="crash_report_sent">Sendis raporton. Dankon!</string>
+    <string name="crash_report_send_failed">Ne povis sendi raporton. Reprovu poste.</string>
 </resources>

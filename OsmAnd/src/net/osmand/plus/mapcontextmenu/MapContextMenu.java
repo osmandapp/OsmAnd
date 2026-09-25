@@ -702,6 +702,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			menuController = null;
 		}
 		this.menuController = menuController;
+		if (mapActivity != null) {
+			mapActivity.updateBackPressedCallbackState();
+		}
 		if (menuController != null && menuController.setActive(true)) {
 			menuController.setMapContextMenu(this);
 			if (menuData != null && (object != menuData.getObject())

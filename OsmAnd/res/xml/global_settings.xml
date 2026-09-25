@@ -24,6 +24,14 @@
 		android:title="@string/map_rendering_engine"
 		tools:icon="@drawable/ic_map" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="battery_saving"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/battery_saving_mode"
+		tools:icon="@drawable/ic_action_battery" />
+
 	<Preference
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />

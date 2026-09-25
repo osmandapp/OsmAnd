@@ -455,9 +455,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private void updateSettings(boolean updateRotationByCompass) {
-		if (isMapLinkedToLocation) {
-			mapDisplayPositionManager.updateMapDisplayPosition();
-		}
+		mapDisplayPositionManager.updateMapDisplayPosition(true);
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);
 		if (mapView != null && updateRotationByCompass) {
 			mapView.initMapRotationByCompassMode();

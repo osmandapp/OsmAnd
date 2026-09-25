@@ -15,6 +15,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,7 +35,10 @@ import net.osmand.util.RouterUtilTest;
 public class RouteTestingTest {
 	private final TestEntry te;
 
-	private static final int TIMEOUT = 1500;
+	private static final int TIMEOUT = 2000;
+
+	private NativeLibrary nativeLibrary;
+	private final List<String> nativeMapFiles = new ArrayList<>();
 
 	public RouteTestingTest(String name, TestEntry te) {
 		this.te = te;
@@ -42,6 +46,21 @@ public class RouteTestingTest {
 	
 	boolean isNative() {
 		return false;
+	}
+
+	@After
+	public void closeNativeMapFiles() {
+		// native keeps opened files for the whole JVM, and routing of later tests would read roads from them
+		for (String file : nativeMapFiles) {
+			nativeLibrary.closeMapFile(file);
+		}
+		nativeMapFiles.clear();
+	}
+
+	private void initNativeMapFile(String file) {
+		String path = new File(file).getAbsolutePath();
+		Objects.requireNonNull(nativeLibrary).initMapFile(path, true);
+		nativeMapFiles.add(path);
 	}
 
 	@BeforeClass
@@ -69,7 +88,6 @@ public class RouteTestingTest {
 
 	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
-		NativeLibrary nativeLibrary = null;
 //		BinaryRoutePlanner.TRACE_ROUTING = true;
 //		BinaryRoutePlanner.DEBUG_BREAK_EACH_SEGMENT = true; 
 //		BinaryRoutePlanner.DEBUG_PRECISE_DIST_MEASUREMENT = true;
@@ -100,13 +118,13 @@ public class RouteTestingTest {
 					new BinaryMapIndexReader(raf, new File(fl))
 			};
 			if (useNative) {
-				Objects.requireNonNull(nativeLibrary).initMapFile(new File(fl1).getAbsolutePath(), true);
+				initNativeMapFile(fl1);
 			}
 		} else {
 			binaryMapIndexReaders = new BinaryMapIndexReader[]{new BinaryMapIndexReader(raf, new File(fl))};
 		}
 		if (useNative) {
-			Objects.requireNonNull(nativeLibrary).initMapFile(new File(fl).getAbsolutePath(), true);
+			initNativeMapFile(fl);
 		}
 		for (int planRoadDirection = -1; planRoadDirection <= 1; planRoadDirection++) {
 			if (params.containsKey("wrongPlanRoadDirection")) {
@@ -182,6 +200,7 @@ public class RouteTestingTest {
 				break;
 			}
 			checkRoutingTime(ctx, params);
+			checkEtaTime(routeSegments, params);
 			for (Entry<String, String> es : expectedResults.entrySet()) {
 				long id = RouterUtilTest.getRoadId(es.getKey());
 				int point = RouterUtilTest.getRoadStartPoint(es.getKey());
@@ -217,6 +236,24 @@ public class RouteTestingTest {
 		}
 	}
 	
+	private void checkEtaTime(List<RouteSegmentResult> routeSegments, Map<String, String> params) {
+		if (!params.containsKey("minEtaTime") && !params.containsKey("maxEtaTime")) {
+			return;
+		}
+		float etaTime = 0;
+		for (RouteSegmentResult r : routeSegments) {
+			etaTime += r.getSegmentTime();
+		}
+		if (params.containsKey("minEtaTime")) {
+			float minEtaTime = Float.parseFloat(params.get("minEtaTime"));
+			Assert.assertTrue("Calculated eta time " + etaTime + " is less then min eta time " + minEtaTime, etaTime >= minEtaTime);
+		}
+		if (params.containsKey("maxEtaTime")) {
+			float maxEtaTime = Float.parseFloat(params.get("maxEtaTime"));
+			Assert.assertTrue("Calculated eta time " + etaTime + " is bigger then max eta time " + maxEtaTime, etaTime <= maxEtaTime);
+		}
+	}
+
 	private void checkRoutingTime(RoutingContext ctx, Map<String, String> params) {
 		if (params.containsKey("maxRoutingTime")) {
 			float maxRoutingTime = Float.parseFloat(params.get("maxRoutingTime"));

@@ -1355,7 +1355,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="number_of_contributors">Kolkaść udzielnіkaŭ</string>
     <string name="number_of_edits">Kolkaść pravak</string>
     <string name="reports_for">Paviedamіć</string>
-    <string name="file_name_containes_illegal_char">Nazva fajłu źmiaščaje niedapuščalny symbal</string>
     <string name="get_it">Vaźmіcie</string>
     <string name="osm_live_banner_desc">Atrymajcie nieabmiežavanyja zahruzki mapaŭ i abnaŭlienni boĺš za adzin raz na miesiac: štotydzień, štodzień ci štohadzinu.</string>
     <string name="si_mi_meters">Mіli/metry</string>
@@ -1889,7 +1888,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="lang_lo">Łaoskaja</string>
     <string name="will_open_tomorrow_at">Adčynicca zaŭtra a</string>
     <string name="rendering_attr_hidePOILabels_name">Nazvy POI</string>
-    <string name="day_off_label">vych.</string>
+    <string name="day_off_label">vychadny</string>
     <string name="winter_and_ski_renderer">Zimovy/lyžny</string>
     <string name="touring_view_renderer">Turystyčny vyhliad</string>
     <string name="nautical_renderer">Marski</string>
