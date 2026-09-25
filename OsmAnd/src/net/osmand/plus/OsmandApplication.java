@@ -156,6 +156,7 @@ public class OsmandApplication extends MultiDexApplication {
 	DownloadService downloadService;
 	OsmandAidlApi aidlApi;
 	OsmAndDiagnosticThread diagnosticThread;
+	private final MemoryLog memoryLog = new MemoryLog();
 
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
@@ -337,10 +338,15 @@ public class OsmandApplication extends MultiDexApplication {
 		return externalStorageDirectoryReadOnly;
 	}
 
+	@NonNull
+	public MemoryLog getMemoryLog() {
+		return memoryLog;
+	}
+
 	private synchronized void startDiagnostics() {
 		OsmAndDiagnosticThread diagnosticThread = this.diagnosticThread;
 		if (diagnosticThread == null || !diagnosticThread.isAlive()) {
-			MemoryLog.watchActivities(this);
+			memoryLog.watchActivities(this);
 			diagnosticThread = new OsmAndDiagnosticThread(this);
 			diagnosticThread.start();
 			this.diagnosticThread = diagnosticThread;
@@ -574,7 +580,7 @@ public class OsmandApplication extends MultiDexApplication {
 	@Override
 	public void onTrimMemory(int level) {
 		super.onTrimMemory(level);
-		MemoryLog.onTrimMemory(level);
+		memoryLog.onTrimMemory(level);
 	}
 
 	@Override
