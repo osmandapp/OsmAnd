@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index/>
+    <query>
+        <!-- Colombian grid addresses: "Cra 101 # 73A-29", "Cl 8a"; OSM names are "Carrera 101", "Calle 8A". -->
+        <variant object="street" source="(?iu)^(Cra|Kra|Cr|Kr)\.?$" target="Carrera"/>
+        <variant object="street" source="(?iu)^(Cl|Cll)\.?$" target="Calle"/>
+    </query>
+</rules>

@@ -21,6 +21,9 @@
 
         <!-- A2: only POI names containing a spaced ampersand. The query cannot do it: "&" is lost by the tokenizer. -->
         <variant object="poi" mode="All" source="(?iu)\s+&amp;\s+" target=" and "/>
+
+        <!-- query.db: "3189 CR 10", "2232 CR 3"; OSM names are "County Road 10", "County Route 100". A phrase, so index. -->
+        <variant object="street" source="(?iu)\bCounty\s+(?:Road|Route)\s+(\d+)\b" target="CR $1"/>
     </index>
     <query>
         <!-- Search starts with the index entries above; these override or extend it. -->
