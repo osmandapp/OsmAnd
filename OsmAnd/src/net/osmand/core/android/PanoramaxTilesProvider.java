@@ -24,6 +24,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.SourceFingerprint;
 import net.osmand.map.ITileSource;
+import net.osmand.map.MapTileDownloader;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -58,6 +59,7 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 	private static final int MAX_ZOOM = TileSourceManager.getPanoramaxVectorSource().getMaximumZoomSupported();
 
 	private static final int TILE_LOAD_TIMEOUT = 30000;
+	static final int REFRESH_IDLE_CONFIRM_MS = 300;
 	private static final int MAX_GEOMETRY_SIZE = 32000;
 
 	// Serializes raster writes with invalidation so obsolete providers cannot persist tiles.
@@ -230,6 +232,7 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 		long requestTimestamp = System.currentTimeMillis();
 		boolean awaitRefresh = mustAwaitRefresh(source.getLastModified(), expiration, requestTimestamp, useInternet);
 		boolean requested = false;
+		RefreshWatch refreshWatch = new RefreshWatch();
 		if (imgExist || useInternet) {
 			do {
 				if (queryController != null && queryController.isAborted()) {
@@ -251,6 +254,14 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 						tile = null;
 					}
 					if (tile != null) {
+						break;
+					}
+				} else {
+					boolean inProgress = isRefreshInProgress(sourceFile);
+					// Read the fingerprint after checking downloader state so a completed download
+					// is observed before an unchanged source is treated as a failed refresh.
+					if (refreshWatch.hasFailed(inProgress, System.currentTimeMillis())
+							&& source.equals(SourceFingerprint.of(sourceFile))) {
 						break;
 					}
 				}
@@ -408,6 +419,36 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 
 	private static boolean matchesSource(@NonNull GeometryTile tile, @NonNull File sourceFile) {
 		return tile.getSourceFingerprint().equals(SourceFingerprint.of(sourceFile));
+	}
+
+	private boolean isRefreshInProgress(@NonNull File sourceFile) {
+		MapTileDownloader downloader = rm.getMapTileDownloader();
+		return downloader.isFileCurrentlyDownloaded(sourceFile)
+				|| downloader.isFilePendingToDownload(sourceFile);
+	}
+
+	/**
+	 * A request is missing from both downloader queues for a moment while it moves from pending
+	 * to downloading, so a refresh counts as failed only once that absence has held. Used by a
+	 * single request thread, so it needs no synchronization.
+	 */
+	static final class RefreshWatch {
+
+		private boolean idle;
+		private long idleSince;
+
+		boolean hasFailed(boolean inProgress, long now) {
+			if (inProgress) {
+				idle = false;
+				return false;
+			}
+			if (!idle) {
+				idle = true;
+				idleSince = now;
+				return false;
+			}
+			return now - idleSince >= REFRESH_IDLE_CONFIRM_MS;
+		}
 	}
 
 	static boolean isTileFresh(long modified, long expiration, long now) {

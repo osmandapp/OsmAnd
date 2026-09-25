@@ -28,6 +28,11 @@ public class PanoramaxTilesProviderTest {
 	private static final boolean ONLINE = true;
 	private static final boolean OFFLINE = false;
 
+	private static final long CONFIRM = PanoramaxTilesProvider.REFRESH_IDLE_CONFIRM_MS;
+
+	private static final boolean IN_PROGRESS = true;
+	private static final boolean IDLE = false;
+
 	@Test
 	public void missingSourceIsNeverFresh() {
 		assertFalse(PanoramaxTilesProvider.isTileFresh(0, DAY, NOW));
@@ -113,5 +118,46 @@ public class PanoramaxTilesProviderTest {
 	@Test
 	public void rowWithoutProvenanceIsAMiss() {
 		assertFalse(PanoramaxTilesProvider.matchesStoredSource(SourceFingerprint.EMPTY, null, SOURCE, FILTER));
+	}
+
+	@Test
+	public void aRefreshInProgressIsNeverFailed() {
+		PanoramaxTilesProvider.RefreshWatch watch = new PanoramaxTilesProvider.RefreshWatch();
+		assertFalse(watch.hasFailed(IN_PROGRESS, NOW));
+		assertFalse(watch.hasFailed(IN_PROGRESS, NOW + 10 * CONFIRM));
+	}
+
+	@Test
+	public void oneIdleSampleIsNotAFailedRefresh() {
+		PanoramaxTilesProvider.RefreshWatch watch = new PanoramaxTilesProvider.RefreshWatch();
+		assertFalse(watch.hasFailed(IDLE, NOW));
+	}
+
+	/** The downloader leaves both queues while a request moves from pending to downloading. */
+	@Test
+	public void theHandoffBetweenPendingAndDownloadingIsNotAFailedRefresh() {
+		PanoramaxTilesProvider.RefreshWatch watch = new PanoramaxTilesProvider.RefreshWatch();
+		assertFalse(watch.hasFailed(IN_PROGRESS, NOW));
+		assertFalse(watch.hasFailed(IDLE, NOW + 50));
+		assertFalse(watch.hasFailed(IN_PROGRESS, NOW + 100));
+		assertFalse(watch.hasFailed(IN_PROGRESS, NOW + 100 + CONFIRM));
+	}
+
+	@Test
+	public void idleHeldLongEnoughIsAFailedRefresh() {
+		PanoramaxTilesProvider.RefreshWatch watch = new PanoramaxTilesProvider.RefreshWatch();
+		assertFalse(watch.hasFailed(IDLE, NOW));
+		assertFalse(watch.hasFailed(IDLE, NOW + CONFIRM - 1));
+		assertTrue(watch.hasFailed(IDLE, NOW + CONFIRM));
+	}
+
+	@Test
+	public void aRequestComingBackRestartsTheConfirmation() {
+		PanoramaxTilesProvider.RefreshWatch watch = new PanoramaxTilesProvider.RefreshWatch();
+		assertFalse(watch.hasFailed(IDLE, NOW));
+		assertFalse(watch.hasFailed(IN_PROGRESS, NOW + CONFIRM));
+		assertFalse(watch.hasFailed(IDLE, NOW + CONFIRM + 1));
+		assertFalse(watch.hasFailed(IDLE, NOW + 2 * CONFIRM));
+		assertTrue(watch.hasFailed(IDLE, NOW + 2 * CONFIRM + 1));
 	}
 }
