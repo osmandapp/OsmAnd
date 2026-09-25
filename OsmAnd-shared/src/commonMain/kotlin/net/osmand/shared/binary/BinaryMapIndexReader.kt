@@ -684,14 +684,27 @@ class BinaryMapIndexReader {
 		var minY = Int.MAX_VALUE
 		var maxY = 0
 		req.numberOfVisitedObjects++
-		while (codedIS.getBytesUntilLimit() > 0) {
-			val x = (codedIS.readSInt32() shl SHIFT_COORDINATES) + px
-			val y = (codedIS.readSInt32() shl SHIFT_COORDINATES) + py
-			req.cacheCoordinates.add(x)
-			req.cacheCoordinates.add(y)
+		val coordinates = req.cacheCoordinates
+		codedIS.readSInt32s(coordinates)
+		if (coordinates.size % 2 == 1) {
+			// the last y of an odd count is read past the end of the field, as java reads it
+			coordinates.add(codedIS.readSInt32())
+		}
+		val data = coordinates.data
+		val left = req.left
+		val right = req.right
+		val top = req.top
+		val bottom = req.bottom
+		var i = 0
+		val n = coordinates.size
+		while (i < n) {
+			val x = (data[i] shl SHIFT_COORDINATES) + px
+			val y = (data[i + 1] shl SHIFT_COORDINATES) + py
+			data[i] = x
+			data[i + 1] = y
 			px = x
 			py = y
-			if (!contains && req.left <= x && req.right >= x && req.top <= y && req.bottom >= y) {
+			if (!contains && left <= x && right >= x && top <= y && bottom >= y) {
 				contains = true
 			}
 			if (!contains) {
@@ -700,6 +713,7 @@ class BinaryMapIndexReader {
 				minY = min(minY, y)
 				maxY = max(maxY, y)
 			}
+			i += 2
 		}
 		if (!contains) {
 			if (maxX >= req.left && minX <= req.right && minY <= req.bottom && maxY >= req.top) {
@@ -738,13 +752,21 @@ class BinaryMapIndexReader {
 					py = tree.top and MASK_TO_READ
 					size = codedIS.readRawVarint32()
 					old = codedIS.pushLimitLong(size.toLong())
-					while (codedIS.getBytesUntilLimit() > 0) {
-						val x = (codedIS.readSInt32() shl SHIFT_COORDINATES) + px
-						val y = (codedIS.readSInt32() shl SHIFT_COORDINATES) + py
-						polygon.add(x)
-						polygon.add(y)
+					codedIS.readSInt32s(polygon)
+					if (polygon.size % 2 == 1) {
+						// the last y of an odd count is read past the end of the field, as java reads it
+						polygon.add(codedIS.readSInt32())
+					}
+					val points = polygon.data
+					var k = 0
+					while (k < polygon.size) {
+						val x = (points[k] shl SHIFT_COORDINATES) + px
+						val y = (points[k + 1] shl SHIFT_COORDINATES) + py
+						points[k] = x
+						points[k + 1] = y
 						px = x
 						py = y
+						k += 2
 					}
 					codedIS.popLimit(old)
 				}

@@ -25,8 +25,9 @@ class KTIntArrayList @JvmOverloads constructor(
 	@PublishedApi
 	internal var data: IntArray = IntArray(if (initialCapacity > 0) initialCapacity else DEFAULT_CAPACITY)
 
+	/** Also set by `CodedInputStream.readSInt32s`, which fills [data] directly. */
 	var size: Int = 0
-		private set
+		internal set
 
 	constructor(values: IntArray) : this(if (values.isEmpty()) DEFAULT_CAPACITY else values.size) {
 		add(values)
