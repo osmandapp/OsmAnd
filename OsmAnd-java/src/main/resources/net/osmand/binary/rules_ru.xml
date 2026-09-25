@@ -5,6 +5,19 @@
         <search key="о" value="Остров"/>
         <search key="остров" value="о."/>
 
+        <!-- query.db: "Ленинградская ул. 53", "Невский пр., 56", "пер. Кронштадский", "Кемеровская обл.";
+             OSM names keep the full word ("Ленинградская улица", "Кемеровская область"). "пр." is also "проезд". -->
+        <variant object="street" source="(?iu)^Ул\.?$" target="Улица"/>
+        <variant object="street" source="(?iu)^Пер\.?$" target="Переулок"/>
+        <variant object="street" source="(?iu)^Просп\.?$" target="Проспект"/>
+        <search key="пр" value="Проспект Проезд"/>
+        <variant object="boundary" source="(?iu)^Обл\.?$" target="Область"/>
+
+        <!-- "д. 223", "кв. 8", "корп. 2": house and flat qualifiers, a number part, not a name synonym. -->
+        <building key="д" value="Дом"/>
+        <building key="кв" value="Квартира"/>
+        <building key="корп" value="Корпус"/>
+
         <conjunction key="и"/>
     </query>
 </rules>

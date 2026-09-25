@@ -11,6 +11,10 @@
         <search key="dr" value="Doktor"/>
     </index>
     <query>
+        <!-- query.db: a standalone "Str." after an adjective or a hyphen ("Kölner Str. 80", "Leopold-Kell-Str. 20");
+             the joined "Hauptstr." is the index variant A3. -->
+        <variant object="street" source="(?iu)^Str\.?$" target="Straße"/>
+
         <conjunction key="der"/>
         <conjunction key="den"/>
         <conjunction key="die"/>

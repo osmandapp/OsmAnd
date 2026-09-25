@@ -6,6 +6,12 @@
         <search key="ste" value="Sainte"/>
     </index>
     <query>
+        <!-- query.db: the street type users shorten ("48 av. Gambetta", "rte de Certines"); OSM names are full. -->
+        <variant object="street" source="(?iu)^Av\.?$" target="Avenue"/>
+        <variant object="street" source="(?iu)^Bd\.?$" target="Boulevard"/>
+        <variant object="street" source="(?iu)^Chem\.?$" target="Chemin"/>
+        <variant object="street" source="(?iu)^Rte\.?$" target="Route"/>
+        <variant object="street" source="(?iu)^Pl\.?$" target="Place"/>
 
         <!-- house number suffixes: "12 bis", "12ter" -->
         <building key="bis" value="Bis"/>

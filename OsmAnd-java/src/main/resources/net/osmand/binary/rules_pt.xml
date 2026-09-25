@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rules version="1">
-    <index/>
+    <index>
+        <!-- Title of names: "Estrada Dr. João Abel de Freitas", "Rua Doutor Almeida"; both forms are common words. -->
+        <search key="dr" value="Doutor"/>
+    </index>
     <query>
+        <!-- query.db: the street type users shorten ("Av. dos Aliados", "R. Lázaro da Costa"); OSM names are full. -->
+        <variant object="street" source="(?iu)^Av\.?$" target="Avenida"/>
+        <variant object="street" source="(?iu)^R\.?$" target="Rua"/>
+        <variant object="street" source="(?iu)^Estr\.?$" target="Estrada"/>
+
         <conjunction key="de"/>
     </query>
 </rules>

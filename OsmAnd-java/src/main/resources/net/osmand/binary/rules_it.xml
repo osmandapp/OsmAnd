@@ -15,8 +15,14 @@
         <variant object="street" source="(?iu)\bStrada\s+Regionale\b" target="SR"/>
         <variant object="street" source="(?iu)\bStrada\s+Regionale\s+(\d+)\b" target="SR$1"/>
     </index>
-    <!-- EL1 uses UnglueRule; SA1 needs candidate-stage diagnosis before broad S. expansion. -->
+    <!-- EL1 uses UnglueRule. -->
     <query>
+        <!-- SA1, query.db: "P.za S. Giovanni Paolo II", "Cappella di S. Andrea"; OSM names spell the saint in full.
+             Candidate for measuring on full OBF: "s" is one letter, AbbreviationMetrics decides whether it stays. -->
+        <search key="s" value="San Santo Santa"/>
+        <!-- "Loc. Due Pozze": OSM street names of hamlets are "Località ...". -->
+        <variant object="street" source="(?iu)^Loc\.?$" target="Località"/>
+
         <!-- house number suffixes: "12 bis", "12/ter" -->
         <building key="bis" value="Bis"/>
         <building key="ter" value="Ter"/>
