@@ -104,11 +104,16 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 				widgetResizing.recreateView();
 			}
 			if (sizeChanged) {
-				app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
-						.getSizeModePref(layoutMode).setModeValue(appMode, PanelSizeMode.ORIGINAL);
+				if (isAndroidAutoMode) {
+					app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
+							.getSizeModePref(null).setModeValue(appMode, PanelSizeMode.ORIGINAL);
+				} else {
+					app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
+							.getSizeModePref(layoutMode).setModeValue(appMode, PanelSizeMode.ORIGINAL);
+				}
+				widgetInfo.widget.markAndroidAutoLayoutNeeded();
 			}
 		}
-		app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateControls();
 	}
 
 	private void updateRowWidgets(@NonNull MapWidgetInfo widgetInfo) {
@@ -116,9 +121,17 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 		if (activity == null) {
 			return;
 		}
-		List<Set<MapWidgetInfo>> widgets = widgetRegistry.getPagedWidgetsForPanel(activity,
-				appMode, layoutMode, widgetInfo.getWidgetPanel(),
-				AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
+		List<Set<MapWidgetInfo>> widgets;
+		if (isAndroidAutoMode) {
+			widgets = widgetRegistry.getPagedAndroidAutoWidgetsForPanel(app,
+					appMode, widgetInfo.getWidgetPanel(),
+					AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
+
+		} else {
+			widgets = widgetRegistry.getPagedWidgetsForPanel(activity,
+					appMode, layoutMode, widgetInfo.getWidgetPanel(),
+					AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
+		}
 
 		for (Set<MapWidgetInfo> rowMapWidgetsInfo : widgets) {
 			for (MapWidgetInfo info : rowMapWidgetsInfo) {
@@ -135,6 +148,7 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 			if (info.widget instanceof ISupportWidgetResizing widgetResizing) {
 				widgetResizing.getWidgetSizePref().set(selectedWidgetSize);
 				widgetResizing.recreateView();
+				info.widget.markAndroidAutoLayoutNeeded();
 			}
 		}
 	}

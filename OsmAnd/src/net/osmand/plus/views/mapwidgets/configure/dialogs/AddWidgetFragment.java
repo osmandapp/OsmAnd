@@ -51,6 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class AddWidgetFragment extends BaseFullScreenFragment {
 
@@ -58,10 +59,13 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 
 	private static final String KEY_SELECTED_WIDGETS_IDS = "selected_widgets_ids";
 	private static final String KEY_ALREADY_SELECTED_WIDGETS_IDS = "already_selected_widgets_ids";
+	private static final String KEY_ANDROID_AUTO_MODE = "android_auto_mode";
 
 	private WidgetDataHolder widgetsDataHolder;
 	private Map<Integer, String> selectedWidgetsIds = new TreeMap<>();
 	private List<String> alreadySelectedWidgetsIds;
+
+	private boolean isAndroidAutoMode;
 
 	private View view;
 
@@ -123,6 +127,9 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 		if (bundle.containsKey(KEY_SELECTED_WIDGETS_IDS)) {
 			selectedWidgetsIds = (Map<Integer, String>) AndroidUtils.getSerializable(bundle, KEY_SELECTED_WIDGETS_IDS, TreeMap.class);
 		}
+		if (bundle.containsKey(KEY_ANDROID_AUTO_MODE)) {
+			isAndroidAutoMode = bundle.getBoolean(KEY_ANDROID_AUTO_MODE, false);
+		}
 	}
 
 	private void setupToolbar() {
@@ -146,15 +153,18 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 		}
 
 		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList(appMode);
+		if (isAndroidAutoMode && widgets != null) {
+			widgets = widgets.stream().filter(w -> w.supportsAndroidAuto).collect(Collectors.toList());
+		}
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
 		List<AidlMapWidgetWrapper> aidlGroupWidgets = widgetsDataHolder.getAidlGroupWidgets();
 		if (widgets != null) {
 			Collator collator = OsmAndCollator.primaryCollator();
 			widgets.sort((indexItem, indexItem2) -> collator.compare(app.getString(indexItem.titleId), app.getString(indexItem2.titleId)));
 			inflateWidgetsList(widgets);
-		} else if (!Algorithms.isEmpty(aidlGroupWidgets)) {
+		} else if (!isAndroidAutoMode && !Algorithms.isEmpty(aidlGroupWidgets)) {
 			inflateAidlWidgets(aidlGroupWidgets);
-		} else if (aidlWidgetData != null) {
+		} else if (!isAndroidAutoMode && aidlWidgetData != null) {
 			inflateAidlWidget(aidlWidgetData);
 		}
 
@@ -297,6 +307,7 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 		super.onSaveInstanceState(outState);
 		outState.putSerializable(KEY_SELECTED_WIDGETS_IDS, (Serializable) selectedWidgetsIds);
 		outState.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
+		outState.putBoolean(KEY_ANDROID_AUTO_MODE, isAndroidAutoMode);
 
 		if (widgetsDataHolder != null) {
 			widgetsDataHolder.saveState(outState);
@@ -308,12 +319,14 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 	                                   @NonNull ApplicationMode appMode,
 	                                   @NonNull WidgetsPanel widgetsPanel,
 	                                   @NonNull WidgetGroup widgetGroup,
-	                                   @Nullable List<String> alreadySelectedWidgetsIds) {
+	                                   @Nullable List<String> alreadySelectedWidgetsIds,
+									   boolean isAndroidAutoMode) {
 		Bundle args = new Bundle();
 		args.putString(APP_MODE_KEY, appMode.getStringKey());
 		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
 		args.putString(KEY_GROUP_NAME, widgetGroup.name());
 		args.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
+		args.putBoolean(KEY_ANDROID_AUTO_MODE, isAndroidAutoMode);
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);
 		fragment.setTargetFragment(target, 0);

@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.odb
 
-import android.view.View
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
@@ -14,22 +13,38 @@ import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.util.Algorithms
 
-class OBDFuelConsumptionWidget(
-	mapActivity: MapActivity,
-	widgetType: WidgetType,
-	fieldType: OBDTypeWidget,
-	customId: String?,
-	widgetsPanel: WidgetsPanel?
-) :
-	OBDTextWidget(mapActivity, widgetType, fieldType, customId, widgetsPanel) {
+class OBDFuelConsumptionWidget : OBDTextWidget {
+	constructor(
+		mapActivity: MapActivity,
+		widgetType: WidgetType,
+		fieldType: OBDTypeWidget,
+		customId: String?,
+		widgetsPanel: WidgetsPanel?
+	) : super(mapActivity, widgetType, fieldType, customId, widgetsPanel) {
+		this.fuelConsumptionMode = registerFuelConsumptionPref(customId)
+		val typeWidget = getFieldType()
+		widgetComputer = OBDDataComputer.registerWidget(typeWidget, getAverageTime(typeWidget))
+	}
 
-	var fuelConsumptionMode: OsmandPreference<FuelConsumptionMode> =
-		registerFuelConsumptionPref(customId)
+	constructor(
+		app: OsmandApplication,
+		widgetType: WidgetType,
+		fieldType: OBDTypeWidget,
+		customId: String?,
+		widgetsPanel: WidgetsPanel?
+	) : super(app, widgetType, fieldType, customId, widgetsPanel) {
+		this.fuelConsumptionMode = registerFuelConsumptionPref(customId)
+		val typeWidget = getFieldType()
+		widgetComputer = OBDDataComputer.registerWidget(typeWidget, getAverageTime(typeWidget))
+	}
+
+
+	var fuelConsumptionMode: OsmandPreference<FuelConsumptionMode>
 
 	companion object {
 		private const val OBD_FUEL_CONSUMPTION_MODE = "obd_fuel_consumption_mode"
 	}
-
+	
 	init {
 		val typeWidget = getFieldType()
 		widgetComputer = OBDDataComputer.registerWidget(typeWidget, typeWidget.defaultAverageTime)

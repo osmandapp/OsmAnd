@@ -4,9 +4,17 @@ import static android.view.View.INVISIBLE;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.text.TextUtils;
+import android.util.SizeF;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -28,6 +37,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -55,9 +65,21 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	@Nullable
 	private WidgetSize renderedWidgetSize;
 
+	@Nullable
+	protected WidgetSize androidAutoRenderedWidgetSize;
+	protected String cachedWidgetName;
+	protected TextPaint widgetNameTextPaint = new TextPaint();
+	protected Rect cachedWidgetNameTextBounds = new Rect();
+	protected StaticLayout cachedWidgetNameTextLayout;
+
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 	                    @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
+		widgetState = new SimpleWidgetState(app, customId, widgetType, getDefaultWidgetSize());
+	}
+
+	public SimpleWidget(@NonNull OsmandApplication app, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(app, widgetType, customId, panel);
 		widgetState = new SimpleWidgetState(app, customId, widgetType, getDefaultWidgetSize());
 	}
 
@@ -150,13 +172,15 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	public void updateWidgetView() {
-		boolean showIcon = shouldShowIcon();
-		AndroidUiHelper.updateVisibility(imageView, showIcon);
 		updateWidgetName();
-		if (isVerticalWidget()) {
-			app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
-		} else {
-			updateValueAlign(false);
+		if (!isAndroidAuto()) {
+			boolean showIcon = shouldShowIcon();
+			AndroidUiHelper.updateVisibility(imageView, showIcon);
+			if (isVerticalWidget()) {
+				app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
+			} else {
+				updateValueAlign(false);
+			}
 		}
 	}
 
@@ -183,9 +207,16 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	public void recreateViewIfNeeded(@NonNull WidgetsPanel panel) {
 		boolean oldWidgetOrientation = isVerticalWidget();
 		setPanel(panel);
-		if (oldWidgetOrientation != isVerticalWidget()) {
+		if (!isAndroidAuto() && oldWidgetOrientation != isVerticalWidget()) {
 			recreateView();
 		}
+	}
+
+	@Override
+	protected void recreateInternalForAndroidAuto() {
+		super.recreateInternalForAndroidAuto();
+		androidAutoRenderedWidgetSize = widgetState.getWidgetSizePref().get();
+		updateWidgetName();
 	}
 
 	@Override
@@ -234,12 +265,23 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		}
 	}
 
+	@Override
+	protected void updateInfoForAndroidAuto(@Nullable DrawSettings drawSettings) {
+		super.updateInfoForAndroidAuto(drawSettings);
+		updateSimpleWidgetInfoForAndroidAuto(drawSettings);
+	}
+
 	protected boolean shouldHide() {
 		return (!(panel == BOTTOM && visibilityHelper.shouldShowBottomWidgets())) && (isVerticalWidget() && visibilityHelper.shouldHideVerticalWidgets() ||
 				panel == BOTTOM && visibilityHelper.shouldHideBottomWidgets());
 	}
 
 	protected void updateSimpleWidgetInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+
+	}
+
+	protected void updateSimpleWidgetInfoForAndroidAuto(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+
 	}
 
 	@Override
@@ -253,6 +295,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	protected void updateWidgetName() {
 		String newWidgetName = getWidgetName();
+
 		if (newWidgetName != null && this.widgetName != null) {
 
 			String additionalName = getAdditionalWidgetName();
@@ -270,6 +313,8 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 				checkForMaxWidgetName();
 			}
 		}
+		cachedWidgetName = newWidgetName;
+		markAndroidAutoLayoutNeeded();
 	}
 
 	private void checkForMaxWidgetName() {
@@ -437,4 +482,346 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	private boolean isSmallSize() {
 		return getWidgetSizePref().get() == WidgetSize.SMALL;
 	}
+
+	// region android auto
+
+	@Override
+	public void drawForAndroidAuto(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings,
+	                               float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			drawSmallSize(canvas, drawSettings);
+		} else {
+			drawBigSize(canvas, drawSettings);
+		}
+	}
+
+	@Override
+	public void onAndroidAutoPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		super.onAndroidAutoPanelAppearanceChanged(appearance);
+		if (androidAutoRenderedWidgetSize != getWidgetSizePref().get()) {
+			recreateInternalForAndroidAuto();
+		}
+		configureAAPaints(appearance);
+		shouldDrawAndroidAutoIcon = shouldShowIcon();
+		markAndroidAutoLayoutNeeded();
+	}
+
+	@Override
+	protected void configureAAPaints(ResolvedPanelAppearance appearance) {
+		super.configureAAPaints(appearance);
+		applyWidgetNameTextAppearance(widgetNameTextPaint, appearance);
+	}
+
+
+	// region text sizes
+	@Override
+	protected float getPrimaryTextSizeAA() {
+		int resId;
+
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			resId = R.dimen.map_widget_text_size;
+		} else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
+			resId = R.dimen.simple_widget_value_large_size;
+		} else {
+			resId = R.dimen.simple_widget_value_medium_size;
+		}
+
+		return app.getResources().getDimension(resId);
+	}
+
+	@Override
+	protected float getSecondaryTextSizeAA() {
+		int resId;
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			resId = R.dimen.map_widget_text_size_small;
+		} else {
+			resId = R.dimen.simple_widget_description_text_size;
+		}
+		return app.getResources().getDimension(resId);
+	}
+
+	protected float getWidgetNameTextSizeAA() {
+		int resId;
+
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			return 0f;
+		}  else {
+			resId = R.dimen.simple_widget_description_text_size;
+		}
+
+		return app.getResources().getDimension(resId);
+	}
+	// endregion
+
+	// region text appearances
+	@Override
+	protected void applyPrimaryTextAppearance(Paint paint, ResolvedPanelAppearance appearance) {
+		super.applyPrimaryTextAppearance(paint, appearance);
+		//noinspection StatementWithEmptyBody
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			// no additional tweaks for now
+		} else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
+			paint.setLetterSpacing(0.04f);
+		} else {
+			paint.setLetterSpacing(0.04f);
+		}
+	}
+
+	@Override
+	protected void applySecondaryTextAppearance(Paint paint, ResolvedPanelAppearance appearance) {
+		super.applySecondaryTextAppearance(paint, appearance);
+		//noinspection StatementWithEmptyBody
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			// no additional tweaks for now
+		} else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
+			paint.setLetterSpacing(0.04f);
+		} else {
+			paint.setLetterSpacing(0.04f);
+		}
+	}
+
+	protected void applyWidgetNameTextAppearance(Paint paint, ResolvedPanelAppearance appearance) {
+		applyTextAppearance(paint, appearance.getSecondaryTextColor(), appearance);
+		paint.setTextSize(getWidgetNameTextSizeAA());
+		//noinspection StatementWithEmptyBody
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			// no additional tweaks for now
+		} else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
+			paint.setLetterSpacing(0.06f);
+		} else {
+			paint.setLetterSpacing(0.06f);
+		}
+	}
+	// endregion
+
+	// region draw
+	protected void drawSmallSize(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings) {
+		if (shouldDrawAndroidAutoIcon) {
+			int iconId = getIconId(drawSettings.isNightMode());
+			if (iconId != 0) {
+				Drawable iconDrawable = iconsCache.getIcon(iconId, 0);
+				if (iconDrawable != null) {
+					drawDrawableToBounds(canvas, iconDrawable, cachedIconBounds);
+				}
+			}
+		}
+
+		drawTextLineInRect(canvas, cachedTextBounds, cachedTextLayout);
+		drawTextLineInRect(canvas, cachedSmallTextBounds, cachedSmallTextLayout);
+	}
+
+	protected void drawDrawableToBounds(@NonNull Canvas canvas,
+	                                    @NonNull Drawable drawable,
+	                                    @NonNull Rect targetBounds) {
+		Rect drawableBounds = drawable.copyBounds();
+		float scaleX = (float) targetBounds.width()/drawableBounds.width();
+		float scaleY = (float) targetBounds.height()/drawableBounds.height();
+		int offsetX = targetBounds.left - drawableBounds.left;
+		int offsetY = targetBounds.top - drawableBounds.top;
+		canvas.save();
+		canvas.translate(offsetX, offsetY);
+		canvas.scale(scaleX, scaleY);
+		drawable.draw(canvas);
+		canvas.restore();
+
+	}
+
+	protected void drawBigSize(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings) {
+		if (shouldDrawAndroidAutoIcon) {
+			int iconId = getIconId(drawSettings.isNightMode());
+			if (iconId != 0) {
+				Drawable iconDrawable = iconsCache.getIcon(iconId, 0);
+				if (iconDrawable != null) {
+					drawDrawableToBounds(canvas, iconDrawable, cachedIconBounds);
+				}
+			}
+		}
+
+		drawTextLineInRect(canvas, cachedTextBounds, cachedTextLayout,
+				Gravity.CENTER_VERTICAL | Gravity.START
+		);
+		drawTextLineInRect(canvas, cachedSmallTextBounds, cachedSmallTextLayout,
+				Gravity.BOTTOM | Gravity.END
+		);
+		drawTextLineInRect(canvas, cachedWidgetNameTextBounds, cachedWidgetNameTextLayout,
+				Gravity.BOTTOM | Gravity.START
+		);
+	}
+	// endregion
+
+	// region layout
+
+
+	@Override
+	protected void doLayoutAAWidget(Context context, int desiredWidthPx, boolean isRtl) {
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			layoutSmallWidgetAA(context, desiredWidthPx, isRtl);
+		} else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
+			layoutLargeWidgetAA(context, desiredWidthPx, isRtl);
+		} else {
+			layoutMediumWidgetAA(context, desiredWidthPx, isRtl);
+		}
+	}
+
+	private void layoutSmallWidgetAA(Context context, float widgetWidthPx, boolean isRtl) {
+		Resources resources = context.getResources();
+		float minBottomLayoutHeight = resources.getDimension(R.dimen.map_widget_height);
+		int iconSize = resources.getDimensionPixelSize(R.dimen.map_widget_icon);
+
+		if (shouldDrawAndroidAutoIcon) {
+			cachedIconBounds.set(0, 0, iconSize, iconSize);
+		} else {
+			cachedIconBounds.set(0, 0, 0, 0);
+		}
+		cachedTextLayout = updateCachedTextBounds(cachedTextBounds, textPaint, cachedText);
+		cachedSmallTextLayout = updateCachedTextBounds(cachedSmallTextBounds, smallTextPaint, cachedSmallText);
+
+		float textBlockHeight = Math.max(cachedTextBounds.height(), cachedSmallTextBounds.height());
+		float contentHeight = Math.max(iconSize, Math.max(textBlockHeight, minBottomLayoutHeight));
+
+		SizeF widgetSize = new SizeF(widgetWidthPx, contentHeight);
+
+		int iconMargin = resources.getDimensionPixelSize(R.dimen.map_widget_icon_margin);
+		float centerVertical = contentHeight / 2f;
+
+		int textBlockMarginStart = AndroidUtils.dpToPx(context, 4);
+		int smallTextMarginStart = AndroidUtils.dpToPx(context, 4);
+		int smallTextPaddingBottom = AndroidUtils.dpToPx(context, 2);
+
+		float iconTop = centerVertical - cachedIconBounds.height() / 2f;
+		float textBottom = centerVertical + textBlockHeight / 2f;
+		float textTop = textBottom - cachedTextBounds.height();
+		float smallTextTop = textBottom - smallTextPaddingBottom - cachedSmallTextBounds.height();
+
+		if (isRtl) {
+			if (shouldDrawAndroidAutoIcon) {
+				cachedIconBounds.offsetTo((int) (widgetWidthPx - iconMargin - iconSize), (int) iconTop);
+				cachedTextBounds.offsetTo(cachedIconBounds.left - iconMargin - textBlockMarginStart - cachedTextBounds.width(), (int) textTop);
+			} else {
+				cachedTextBounds.offsetTo((int) (widgetWidthPx - textBlockMarginStart - cachedTextBounds.width()),(int) textTop);
+			}
+			cachedSmallTextBounds.offsetTo(cachedTextBounds.left - smallTextMarginStart - cachedSmallTextBounds.width(), (int) smallTextTop);
+		} else {
+			if (shouldDrawAndroidAutoIcon) {
+				cachedIconBounds.offsetTo(iconMargin, (int) iconTop);
+				cachedTextBounds.offsetTo(cachedIconBounds.right + iconMargin + textBlockMarginStart, (int) textTop);
+			} else {
+				cachedTextBounds.offsetTo(textBlockMarginStart, (int) textTop);
+			}
+			cachedSmallTextBounds.offsetTo((int) (cachedTextBounds.right + smallTextMarginStart), (int) smallTextTop);
+		}
+
+		measuredAAHeight = widgetSize.getHeight();
+		measuredAAWidth = widgetSize.getWidth();
+	}
+
+	private void layoutMediumWidgetAA(Context context, float widgetWidthPx, boolean isRtl) {
+		float widgetHeightPx = context.getResources().getDimension(R.dimen.simple_widget_medium_height);
+		layoutBigWidgetAA(context, widgetWidthPx, widgetHeightPx, isRtl);
+	}
+
+	private void layoutLargeWidgetAA(Context context, float widgetWidthPx, boolean isRtl) {
+		float widgetHeightPx = context.getResources().getDimension(R.dimen.simple_widget_large_height);
+		layoutBigWidgetAA(context, widgetWidthPx, widgetHeightPx, isRtl);
+	}
+
+	private void layoutBigWidgetAA(Context context, float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
+		Resources resources = context.getResources();
+		int iconSize = resources.getDimensionPixelSize(R.dimen.map_widget_icon);
+
+		SizeF widgetSize = new SizeF(widgetWidthPx, widgetHeightPx);
+
+		int paddingHorizontal = AndroidUtils.dpToPx(context, 16);
+		int paddingTop = AndroidUtils.dpToPx(context, 6);
+		int paddingBottom = AndroidUtils.dpToPx(context, 3);
+		Rect containerRect = new Rect(paddingHorizontal,
+				paddingTop,
+				(int) (widgetWidthPx - paddingHorizontal),
+				(int) (widgetHeightPx - paddingBottom));
+
+		Rect topRowRect = new Rect(containerRect.left,
+				containerRect.top,
+				containerRect.right,
+				containerRect.top + AndroidUtils.dpToPx(context, 17));
+		int topRowTextMargin = AndroidUtils.dpToPx(context, 3);
+
+		float smallTextLineSpacingExtra = -1 * AndroidUtils.spToPx(context, 2);
+		cachedSmallTextLayout = updateCachedTextBounds(cachedSmallTextBounds, smallTextPaint, cachedSmallText, smallTextLineSpacingExtra);
+
+		if (shouldDrawAndroidAutoIcon) {
+			cachedIconBounds.set(0, 0, iconSize, iconSize);
+		} else {
+			cachedIconBounds.set(0, 0, 0, 0);
+		}
+
+		if (isRtl) {
+			cachedSmallTextBounds.offsetTo(topRowRect.left, topRowRect.bottom - cachedSmallTextBounds.height());
+
+			cachedWidgetNameTextBounds.set(
+					cachedSmallTextBounds.right + topRowTextMargin,
+					topRowRect.top,
+					topRowRect.right,
+					topRowRect.bottom
+			);
+		} else {
+			cachedSmallTextBounds.offsetTo(
+					topRowRect.right - cachedSmallTextBounds.width(),
+					topRowRect.bottom - cachedSmallTextBounds.height()
+			);
+			cachedWidgetNameTextBounds.set(
+					topRowRect.left,
+					topRowRect.top,
+					cachedSmallTextBounds.left - topRowTextMargin,
+					topRowRect.bottom
+			);
+		}
+		Rect bottomRowRect = new Rect(paddingHorizontal,
+				topRowRect.bottom,
+				(int) (widgetWidthPx - paddingHorizontal),
+				(int) (widgetHeightPx - paddingBottom));
+		float bottomRowCenterVertical = bottomRowRect.top + bottomRowRect.height() / 2f;
+		float iconTop = bottomRowCenterVertical - cachedIconBounds.height() / 2f;
+		float bottomTextMarginStart = AndroidUtils.dpToPx(context, 12);
+		if (isRtl) {
+			if (shouldDrawAndroidAutoIcon) {
+				cachedIconBounds.offsetTo(bottomRowRect.right - cachedIconBounds.width(), (int) iconTop);
+			}
+			cachedTextBounds.set(
+					bottomRowRect.left,
+					bottomRowRect.top,
+					(int) (cachedIconBounds.left - bottomTextMarginStart),
+					bottomRowRect.bottom);
+		} else {
+			if (shouldDrawAndroidAutoIcon) {
+				cachedIconBounds.offsetTo(bottomRowRect.left, (int) iconTop);
+			}
+			cachedTextBounds.set(
+					(int) (cachedIconBounds.right + bottomTextMarginStart),
+					bottomRowRect.top,
+					bottomRowRect.right,
+					bottomRowRect.bottom
+			);
+		}
+
+		float maxTextSize = getPrimaryTextSizeAA();
+		float minTextSize = resources.getDimension(R.dimen.simple_widget_value_minimum_size);
+		float textSizeStep = AndroidUtils.spToPx(context, 2);
+		String textToDraw = null;
+		if (cachedText != null) {
+			textToDraw = cachedText.toUpperCase(app.getLocaleHelper().getPreferredLocale());
+			float optimalTextSize = findOptimalSingleLineTextSize(textToDraw, textPaint, cachedTextBounds.width(), cachedTextBounds.height(), minTextSize, maxTextSize, textSizeStep);
+			textPaint.setTextSize(optimalTextSize);
+		}
+		cachedTextLayout = buildTextLineStaticLayout(textToDraw, textPaint, cachedTextBounds.width(),
+				Gravity.CENTER_VERTICAL | Gravity.START, null, null);
+
+
+		float widgetNameLineSpacingExtra = -1 * AndroidUtils.spToPx(context, 2);
+		cachedWidgetNameTextLayout = buildTextLineStaticLayout(cachedWidgetName, widgetNameTextPaint, cachedWidgetNameTextBounds.width(),
+				Gravity.BOTTOM | Gravity.START, widgetNameLineSpacingExtra, TextUtils.TruncateAt.END);
+
+		measuredAAHeight = widgetSize.getHeight();
+		measuredAAWidth = widgetSize.getWidth();
+	}
+	// endregion
 }

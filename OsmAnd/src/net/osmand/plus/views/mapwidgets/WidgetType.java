@@ -87,7 +87,7 @@ public enum WidgetType {
 	TRIP_RECORDING_AVG_SPEED("trip_recording_avg_speed", R.string.map_widget_average_speed, R.string.trip_recording_avg_speed_widget_description, R.drawable.widget_track_recording_average_speed_day, R.drawable.widget_track_recording_average_speed_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_MOVING_TIME("trip_recording_moving_time", R.string.trip_recording_moving_time, R.string.trip_recording_moving_time_widget_description, R.drawable.widget_track_recording_moving_time_day, R.drawable.widget_track_recording_moving_time_night, 0, TRIP_RECORDING, RIGHT),
 
-	CURRENT_TIME("plain_time", R.string.map_widget_plain_time, R.string.current_time_widget_desc, R.drawable.widget_time_day, R.drawable.widget_time_night, R.string.docs_widget_current_time, null, RIGHT),
+	CURRENT_TIME("plain_time", R.string.map_widget_plain_time, R.string.current_time_widget_desc, R.drawable.widget_time_day, R.drawable.widget_time_night, R.string.docs_widget_current_time, null, RIGHT, true),
 	BATTERY("battery", R.string.map_widget_battery, R.string.battery_widget_desc, R.drawable.widget_battery_day, R.drawable.widget_battery_night, R.string.docs_widget_battery, null, RIGHT),
 
 	RADIUS_RULER("ruler", R.string.map_widget_ruler_control, R.string.radius_rules_widget_desc, R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night, R.string.docs_widget_radius_ruler, null, RIGHT),
@@ -110,21 +110,21 @@ public enum WidgetType {
 
 	AIDL_WIDGET("aidl_widget", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
 
-	OBD_SPEED("obd_speed", R.string.obd_widget_vehicle_speed, R.string.obd_speed_desc, R.drawable.widget_obd_speed_day, R.drawable.widget_obd_speed_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_RPM("obd_rpm", R.string.obd_widget_engine_speed, R.string.obd_rpm_desc, R.drawable.widget_obd_engine_speed_day, R.drawable.widget_obd_engine_speed_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_ENGINE_RUNTIME("obd_engine_runtime", R.string.obd_engine_runtime, R.string.obd_engine_runtime_desc, R.drawable.widget_obd_engine_runtime_day, R.drawable.widget_obd_engine_runtime_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_FUEL_PRESSURE("obd_fuel_pressure", R.string.obd_fuel_pressure, R.string.obd_fuel_pressure_desc, R.drawable.widget_obd_fuel_pressure_day, R.drawable.widget_obd_fuel_pressure_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_AIR_INTAKE_TEMP("obd_intake_air_temp", R.string.obd_air_intake_temp, R.string.obd_air_intake_temp_desc, R.drawable.widget_obd_temperature_intake_day, R.drawable.widget_obd_temperature_intake_night, 0, VEHICLE_METRICS, RIGHT),
-	ENGINE_OIL_TEMPERATURE("obd_engine_oil_temperature", R.string.obd_engine_oil_temperature, R.string.obd_engine_oil_temperature_desc, R.drawable.widget_obd_temperature_engine_oil_day, R.drawable.widget_obd_temperature_engine_oil_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_AMBIENT_AIR_TEMP("obd_ambient_air_temp", R.string.obd_ambient_air_temp, R.string.obd_ambient_air_temp_desc, R.drawable.widget_obd_temperature_outside_day, R.drawable.widget_obd_temperature_outside_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_BATTERY_VOLTAGE("obd_battery_voltage", R.string.obd_battery_voltage, R.string.obd_battery_voltage_desc, R.drawable.widget_obd_battery_voltage_day, R.drawable.widget_obd_battery_voltage_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_ALT_BATTERY_VOLTAGE("obd_battery_voltage_adapter", R.string.obd_alt_battery_voltage, R.string.obd_alt_battery_voltage_desc, R.drawable.widget_obd_adapter_voltage_day, R.drawable.widget_obd_adapter_voltage_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_ENGINE_COOLANT_TEMP("obd_engine_coolant_temp", R.string.obd_engine_coolant_temp, R.string.obd_engine_coolant_temp_desc, R.drawable.widget_obd_temperature_coolant_day, R.drawable.widget_obd_temperature_coolant_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_REMAINING_FUEL("obd_remaining_fuel", R.string.remaining_fuel, R.string.remaining_fuel_description, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_CALCULATED_ENGINE_LOAD("obd_calculated_engine_load", R.string.obd_calculated_engine_load, R.string.obd_calculated_engine_load_desc, R.drawable.widget_obd_engine_calculated_load_day, R.drawable.widget_obd_engine_calculated_load_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_THROTTLE_POSITION("obd_throttle_position", R.string.obd_throttle_position, R.string.obd_throttle_position_desc, R.drawable.widget_obd_throttle_position_day, R.drawable.widget_obd_throttle_position_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_SPEED("obd_speed", R.string.obd_widget_vehicle_speed, R.string.obd_speed_desc, R.drawable.widget_obd_speed_day, R.drawable.widget_obd_speed_night, 0, VEHICLE_METRICS, RIGHT, true),
+	OBD_RPM("obd_rpm", R.string.obd_widget_engine_speed, R.string.obd_rpm_desc, R.drawable.widget_obd_engine_speed_day, R.drawable.widget_obd_engine_speed_night, 0, VEHICLE_METRICS, RIGHT, true),
+	OBD_ENGINE_RUNTIME("obd_engine_runtime", R.string.obd_engine_runtime, R.string.obd_engine_runtime_desc, R.drawable.widget_obd_engine_runtime_day, R.drawable.widget_obd_engine_runtime_night, 0, VEHICLE_METRICS, RIGHT, true),
+	OBD_FUEL_PRESSURE("obd_fuel_pressure", R.string.obd_fuel_pressure, R.string.obd_fuel_pressure_desc, R.drawable.widget_obd_fuel_pressure_day, R.drawable.widget_obd_fuel_pressure_night, 0, VEHICLE_METRICS, RIGHT, true),
+	OBD_AIR_INTAKE_TEMP("obd_intake_air_temp", R.string.obd_air_intake_temp, R.string.obd_air_intake_temp_desc, R.drawable.widget_obd_temperature_intake_day, R.drawable.widget_obd_temperature_intake_night, 0, VEHICLE_METRICS, RIGHT, true),
+	ENGINE_OIL_TEMPERATURE("obd_engine_oil_temperature", R.string.obd_engine_oil_temperature, R.string.obd_engine_oil_temperature_desc, R.drawable.widget_obd_temperature_engine_oil_day, R.drawable.widget_obd_temperature_engine_oil_night, 0, VEHICLE_METRICS, RIGHT, true),
+	OBD_AMBIENT_AIR_TEMP("obd_ambient_air_temp", R.string.obd_ambient_air_temp, R.string.obd_ambient_air_temp_desc, R.drawable.widget_obd_temperature_outside_day, R.drawable.widget_obd_temperature_outside_night, 0, VEHICLE_METRICS, RIGHT, true),
+	OBD_BATTERY_VOLTAGE("obd_battery_voltage", R.string.obd_battery_voltage, R.string.obd_battery_voltage_desc, R.drawable.widget_obd_battery_voltage_day, R.drawable.widget_obd_battery_voltage_night, 0, VEHICLE_METRICS, RIGHT, true),
+	OBD_ALT_BATTERY_VOLTAGE("obd_battery_voltage_adapter", R.string.obd_alt_battery_voltage, R.string.obd_alt_battery_voltage_desc, R.drawable.widget_obd_adapter_voltage_day, R.drawable.widget_obd_adapter_voltage_night, 0, VEHICLE_METRICS, RIGHT, true),
+	OBD_ENGINE_COOLANT_TEMP("obd_engine_coolant_temp", R.string.obd_engine_coolant_temp, R.string.obd_engine_coolant_temp_desc, R.drawable.widget_obd_temperature_coolant_day, R.drawable.widget_obd_temperature_coolant_night, 0, VEHICLE_METRICS, RIGHT, true),
+	OBD_REMAINING_FUEL("obd_remaining_fuel", R.string.remaining_fuel, R.string.remaining_fuel_description, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT, true),
+	OBD_CALCULATED_ENGINE_LOAD("obd_calculated_engine_load", R.string.obd_calculated_engine_load, R.string.obd_calculated_engine_load_desc, R.drawable.widget_obd_engine_calculated_load_day, R.drawable.widget_obd_engine_calculated_load_night, 0, VEHICLE_METRICS, RIGHT, true),
+	OBD_THROTTLE_POSITION("obd_throttle_position", R.string.obd_throttle_position, R.string.obd_throttle_position_desc, R.drawable.widget_obd_throttle_position_day, R.drawable.widget_obd_throttle_position_night, 0, VEHICLE_METRICS, RIGHT, true),
 
-	OBD_FUEL_CONSUMPTION("obd_fuel_consumption", R.string.obd_fuel_consumption, R.string.obd_fuel_consumption_desc, R.drawable.widget_obd_fuel_consumption_day, R.drawable.widget_obd_fuel_consumption_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_FUEL_CONSUMPTION("obd_fuel_consumption", R.string.obd_fuel_consumption, R.string.obd_fuel_consumption_desc, R.drawable.widget_obd_fuel_consumption_day, R.drawable.widget_obd_fuel_consumption_night, 0, VEHICLE_METRICS, RIGHT, true),
 //	OBD_VIN("obd_vin", R.string.obd_vin, R.string.obd_vin_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 //	OBD_FUEL_TYPE("obd_fuel_type", R.string.obd_fuel_type, R.string.obd_fuel_type_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 
@@ -181,6 +181,8 @@ public enum WidgetType {
 	@NonNull
 	public final WidgetsPanel defaultPanel;
 
+	public final boolean supportsAndroidAuto;
+
 	WidgetType(@NonNull String id,
 			   @StringRes int titleId,
 			   @StringRes int descId,
@@ -193,6 +195,18 @@ public enum WidgetType {
 	}
 
 	WidgetType(@NonNull String id,
+			   @StringRes int titleId,
+			   @StringRes int descId,
+			   @DrawableRes int dayIconId,
+			   @DrawableRes int nightIconId,
+			   @StringRes int docsUrlId,
+			   @Nullable WidgetGroup group,
+			   @NonNull WidgetsPanel defaultPanel,
+				boolean supportsAndroidAuto) {
+		this(id, titleId, descId, dayIconId, nightIconId, docsUrlId, group, null, defaultPanel, supportsAndroidAuto);
+	}
+
+	WidgetType(@NonNull String id,
 	           @StringRes int titleId,
 	           @StringRes int descId,
 	           @DrawableRes int dayIconId,
@@ -201,6 +215,20 @@ public enum WidgetType {
 	           @Nullable WidgetGroup group,
 	           @Nullable WidgetGroup verticalGroup,
 	           @NonNull WidgetsPanel defaultPanel) {
+		this(id, titleId, descId, dayIconId, nightIconId, docsUrlId, group, verticalGroup, defaultPanel, false);
+	}
+
+
+	WidgetType(@NonNull String id,
+	           @StringRes int titleId,
+	           @StringRes int descId,
+	           @DrawableRes int dayIconId,
+	           @DrawableRes int nightIconId,
+	           @StringRes int docsUrlId,
+	           @Nullable WidgetGroup group,
+	           @Nullable WidgetGroup verticalGroup,
+	           @NonNull WidgetsPanel defaultPanel,
+			   boolean supportsAndroidAuto) {
 		this.id = id;
 		this.titleId = titleId;
 		this.descId = descId;
@@ -210,6 +238,7 @@ public enum WidgetType {
 		this.group = group;
 		this.verticalGroup = verticalGroup;
 		this.defaultPanel = defaultPanel;
+		this.supportsAndroidAuto = supportsAndroidAuto;
 	}
 
 	@DrawableRes
@@ -329,6 +358,19 @@ public enum WidgetType {
 	}
 
 	@Nullable
+	public WidgetsPanel getAndroidAutoPanel(@NonNull String widgetId, @NonNull ApplicationMode mode,
+	                                        @NonNull OsmandSettings settings) {
+		if (!this.supportsAndroidAuto) {
+			return null;
+		}
+		WidgetsPanel widgetsPanel = findAndroidAutoWidgetPanel(widgetId, settings, mode);
+		if (widgetsPanel != null) {
+			return widgetsPanel;
+		}
+		return WidgetsPanel.ANDROID_AUTO;
+	}
+
+	@Nullable
 	public static WidgetsPanel findWidgetPanel(@NonNull String widgetId, @NonNull OsmandSettings settings,
 			@Nullable ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		if (appMode == null) {
@@ -336,7 +378,7 @@ public enum WidgetType {
 		}
 		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
 		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
-		for (WidgetsPanel widgetsPanel : WidgetsPanel.values()) {
+		for (WidgetsPanel widgetsPanel : WidgetsPanel.getMapPanels()) {
 			if (widgetsPanel.getOrderPreference(settings, layoutMode).isSetForMode(appMode)) {
 				setPanels.add(widgetsPanel);
 			} else {
@@ -350,6 +392,38 @@ public enum WidgetType {
 		}
 		for (WidgetsPanel panel : unsetPanels) {
 			if (panel.contains(widgetId, settings, appMode, layoutMode)) {
+				return panel;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static WidgetsPanel findAndroidAutoWidgetPanel(
+			@NonNull String widgetId,
+			@NonNull OsmandSettings settings,
+			@Nullable ApplicationMode appMode
+	) {
+		if (appMode == null) {
+			appMode = settings.getApplicationMode();
+		}
+		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
+		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
+		WidgetsPanel widgetsPanel = WidgetsPanel.ANDROID_AUTO;
+
+		if (widgetsPanel.getOrderPreference(settings, null).isSetForMode(appMode)) {
+			setPanels.add(widgetsPanel);
+		} else {
+			unsetPanels.add(widgetsPanel);
+
+		}
+		for (WidgetsPanel panel : setPanels) {
+			if (panel.contains(widgetId, settings, appMode, null)) {
+				return panel;
+			}
+		}
+		for (WidgetsPanel panel : unsetPanels) {
+			if (panel.contains(widgetId, settings, appMode, null)) {
 				return panel;
 			}
 		}

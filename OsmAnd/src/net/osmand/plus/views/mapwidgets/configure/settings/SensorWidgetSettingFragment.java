@@ -51,7 +51,7 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
 		if (widgetInfo == null) {
-			widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+			widgetInfo = widgetRegistry.getWidgetInfoById(widgetId, isAndroidAutoMode);
 		}
 		if (widgetInfo != null) {
 			sensorWidget = ((SensorTextWidget) widgetInfo.widget);

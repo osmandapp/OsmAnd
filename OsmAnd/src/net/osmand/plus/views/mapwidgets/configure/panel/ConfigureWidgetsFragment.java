@@ -4,6 +4,7 @@ import static net.osmand.plus.helpers.AndroidUiHelper.ANIMATION_DURATION;
 import static net.osmand.plus.settings.bottomsheets.WidgetsResetConfirmationBottomSheet.showResetSettingsDialog;
 import static net.osmand.plus.settings.enums.ScreenLayoutMode.LANDSCAPE;
 import static net.osmand.plus.settings.enums.ScreenLayoutMode.PORTRAIT;
+import static net.osmand.plus.utils.WidgetUtils.createNewAndroidAutoWidget;
 import static net.osmand.plus.utils.WidgetUtils.createNewWidget;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment.SCREEN_LAYOUT_MODE;
 
@@ -67,7 +68,6 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -78,6 +78,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 	private static final String APP_MODE_ATTR = "app_mode_key";
 	private static final String SELECTED_GROUP_ATTR = "selected_group_key";
+	private static final String ANDROID_AUTO_MODE_ATTR = "android_auto_mode_key";
 	private static final String CONTEXT_SELECTED_WIDGET = "context_widget_page";
 	private static final String CONTEXT_SELECTED_PANEL = "context_selected_panel";
 	private static final String ADD_TO_NEXT = "widget_order";
@@ -86,6 +87,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	private DialogManager dialogManager;
 	private ConfigureWidgetsController controller;
 
+	private boolean isAndroidAutoMode = false;
 	private WidgetsPanel selectedPanel;
 	private ApplicationMode selectedAppMode;
 	private OnBackPressedCallback onBackPressedCallback;
@@ -130,6 +132,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			String appModeKey = savedInstanceState.getString(APP_MODE_ATTR);
 			selectedAppMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_GROUP_ATTR));
+			isAndroidAutoMode = savedInstanceState.getBoolean(ANDROID_AUTO_MODE_ATTR, false);
 			isEditMode = savedInstanceState.getBoolean(EDIT_MODE_KEY, false);
 			layoutMode = AndroidUtils.getSerializable(savedInstanceState, SCREEN_LAYOUT_MODE, ScreenLayoutMode.class);
 		} else {
@@ -280,7 +283,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 					if (activity != null) {
 						FragmentManager fragmentManager = activity.getSupportFragmentManager();
 						ApplicationMode appMode = settings.getApplicationMode();
-						SelectCopyAppModeBottomSheet.showInstance(fragmentManager, ConfigureWidgetsFragment.this, appMode);
+						SelectCopyAppModeBottomSheet.showInstance(fragmentManager, ConfigureWidgetsFragment.this, appMode, isAndroidAutoMode);
 					}
 				}).create());
 
@@ -360,12 +363,12 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	private void copyFromProfile() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			SelectCopyAppModeBottomSheet.showInstance(activity.getSupportFragmentManager(), this, selectedAppMode);
+			SelectCopyAppModeBottomSheet.showInstance(activity.getSupportFragmentManager(), this, selectedAppMode, isAndroidAutoMode);
 		}
 	}
 
 	public void addNewWidget() {
-		SearchWidgetsFragment.showInstance(requireMapActivity(), selectedPanel, ConfigureWidgetsFragment.this);
+		SearchWidgetsFragment.showInstance(requireMapActivity(), selectedPanel, ConfigureWidgetsFragment.this, isAndroidAutoMode);
 	}
 
 	private void updateScreen(boolean updateWithAnimation) {
@@ -391,17 +394,21 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				bottomButtonsShadow.setTranslationY(0f);
 			}
 		} else {
-			tabLayout.setVisibility(View.VISIBLE);
+			if (isTabLayoutAvailable()) {
+				tabLayout.setVisibility(View.VISIBLE);
+			}
 
 			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
 			tabLayout.setClickable(true);
 			tabLayout.setFocusable(true);
 			if (!updateWithAnimation) {
-				tabLayout.setAlpha(1f);
-				tabLayout.setTranslationY(0f);
+				if (isTabLayoutAvailable()) {
+					tabLayout.setAlpha(1f);
+					tabLayout.setTranslationY(0f);
+					shadowView.setTranslationY(0f);
+				}
+				AndroidUiHelper.updateVisibility(shadowView, isTabLayoutAvailable());
 				viewPager.setTranslationY(0f);
-				shadowView.setVisibility(View.VISIBLE);
-				shadowView.setTranslationY(0f);
 				bottomButtons.setVisibility(View.GONE);
 				bottomButtons.setTranslationY(0f);
 				bottomButtonsShadow.setVisibility(View.GONE);
@@ -424,9 +431,11 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				bottomButtonsShadow.setTranslationY(bottomButtons.getHeight() - bottomButtonsShadow.getHeight());
 				appBar.setElevation(0f);
 
-				animateView(tabLayout, -tabLayout.getHeight(), false, () -> tabLayout.setVisibility(View.INVISIBLE));
-				animateView(viewPager, -tabLayout.getHeight(), null, null);
-				animateView(shadowView, -tabLayout.getHeight(), null, null);
+				if (isTabLayoutAvailable()) {
+					animateView(tabLayout, -tabLayout.getHeight(), false, () -> tabLayout.setVisibility(View.INVISIBLE));
+					animateView(viewPager, -tabLayout.getHeight(), null, null);
+					animateView(shadowView, -tabLayout.getHeight(), null, null);
+				}
 				animateView(bottomButtons, 0, true, () -> bottomButtons.setVisibility(View.VISIBLE));
 				animateView(bottomButtonsShadow, 0, true, () -> bottomButtonsShadow.setVisibility(View.VISIBLE));
 			}
@@ -483,6 +492,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		super.onSaveInstanceState(outState);
 		outState.putString(APP_MODE_ATTR, selectedAppMode.getStringKey());
 		outState.putString(SELECTED_GROUP_ATTR, selectedPanel.name());
+		outState.putBoolean(ANDROID_AUTO_MODE_ATTR, isAndroidAutoMode);
 		outState.putBoolean(EDIT_MODE_KEY, isEditMode);
 
 		if (layoutMode != null) {
@@ -491,13 +501,16 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	}
 
 	private void setupTabLayout() {
-		WidgetsTabAdapter widgetsTabAdapter = new WidgetsTabAdapter(this);
+		WidgetsTabAdapter widgetsTabAdapter = new WidgetsTabAdapter(this, isAndroidAutoMode);
 		viewPager.setAdapter(widgetsTabAdapter);
 		viewPager.registerOnPageChangeCallback(new OnPageChangeCallback() {
 			@Override
 			public void onPageSelected(int position) {
-				selectedPanel = WidgetsPanel.values()[position];
-				updateToolbarName();
+				WidgetsTabAdapter adapter = (WidgetsTabAdapter) viewPager.getAdapter();
+				if (adapter != null) {
+					selectedPanel = adapter.getPanel(position);
+					updateToolbarName();
+				}
 			}
 		});
 
@@ -526,23 +539,37 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 		});
 
-		List<WidgetsPanel> panels = Arrays.asList(WidgetsPanel.values());
 		for (int i = 0; i < tabLayout.getTabCount(); i++) {
 			Tab tab = tabLayout.getTabAt(i);
-			WidgetsPanel panel = panels.get(i);
 			if (tab != null) {
+				WidgetsPanel panel = widgetsTabAdapter.getPanel(i);
 				tab.setTag(panel);
 				tab.setIcon(panel.getIconId(AndroidUtils.isLayoutRtl(app), layoutMode));
 			}
 		}
 
-		int position = panels.indexOf(selectedPanel);
+		int position = widgetsTabAdapter.getTabPosition(selectedPanel);
+		if (position == -1) {
+			position = 0;
+		}
 		viewPager.setCurrentItem(position, false);
 
 		if (position == 0) {
 			Tab tab = tabLayout.getTabAt(position);
 			setupTabIconColor(tab, profileColor);
 		}
+
+		tabLayout.post(() -> {
+			if (isTabLayoutAvailable()) {
+				tabLayout.setVisibility(View.VISIBLE);
+			} else {
+				tabLayout.setVisibility(View.GONE);
+			}
+		});
+	}
+
+	private boolean isTabLayoutAvailable() {
+		return !isAndroidAutoMode;
 	}
 
 	public void setupTabIconColor(@Nullable Tab tab, int color) {
@@ -578,7 +605,11 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 	@Override
 	public void onWidgetSelectedToAdd(@NonNull String widgetsId, @NonNull WidgetsPanel panel, boolean recreateControls) {
-		controller.openAddNewWidgetScreen(requireMapActivity(), panel, widgetsId, selectedAppMode, this);
+		if (isAndroidAutoMode) {
+			controller.openAddNewAAWidgetScreen(requireMapActivity(), panel, widgetsId, selectedAppMode, this);
+		} else {
+			controller.openAddNewWidgetScreen(requireMapActivity(), panel, widgetsId, selectedAppMode, this);
+		}
 	}
 
 	public void createWidgets(@NonNull List<MapWidgetInfo> newWidgetInfos) {
@@ -589,13 +620,21 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				String selectedWidget = args.getString(CONTEXT_SELECTED_WIDGET);
 				boolean addToNext = args.getBoolean(ADD_TO_NEXT);
 				if (selectedWidget != null) {
-					createNewWidget(requireMapActivity(), widgetInfo, widgetPanel, selectedAppMode,
-							layoutMode, true, selectedWidget, addToNext);
+					if (isAndroidAutoMode) {
+						createNewAndroidAutoWidget(app, widgetInfo, widgetPanel, selectedAppMode, selectedWidget, addToNext);
+					} else {
+						createNewWidget(requireMapActivity(), widgetInfo, widgetPanel, selectedAppMode,
+								layoutMode, true, selectedWidget, addToNext);
+					}
 					onWidgetsConfigurationChanged();
 					return;
 				}
 			}
-			createNewWidget(requireMapActivity(), widgetInfo, widgetPanel, selectedAppMode, layoutMode, true);
+			if (isAndroidAutoMode) {
+				createNewAndroidAutoWidget(app, widgetInfo, widgetPanel, selectedAppMode);
+			} else {
+				createNewWidget(requireMapActivity(), widgetInfo, widgetPanel, selectedAppMode, layoutMode, true);
+			}
 			onWidgetsConfigurationChanged();
 		}
 	}
@@ -663,9 +702,13 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		if (fragment != null) {
 			fragment.reloadWidgets();
 		}
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateAllControls(requireMapActivity());
+		if (isAndroidAutoMode) {
+			app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
+		} else {
+			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateAllControls(requireMapActivity());
+			}
 		}
 	}
 
@@ -684,9 +727,15 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		helper.setLayoutMode(layoutMode);
 		helper.copyWidgetsForPanel(fromAppMode, fromLayoutMode, selectedPanel);
 
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (settings.getApplicationMode().equals(selectedAppMode) && mapInfoLayer != null) {
-			mapInfoLayer.recreateAllControls(requireMapActivity());
+		if (isAndroidAutoMode) {
+			if (settings.getApplicationMode().equals(selectedAppMode)) {
+				app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
+			}
+		} else {
+			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+			if (settings.getApplicationMode().equals(selectedAppMode) && mapInfoLayer != null) {
+				mapInfoLayer.recreateAllControls(requireMapActivity());
+			}
 		}
 		WidgetsListFragment fragment = getSelectedFragment();
 		if (fragment != null) {
@@ -695,11 +744,24 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode, @Nullable Bundle args) {
+		showInstance(activity, panel, appMode, args, false);
+	}
+
+	public static void showInstanceForAndroidAuto(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode, @Nullable Bundle args) {
+		showInstance(activity, panel, appMode, args, true);
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull WidgetsPanel panel,
+	                                @NonNull ApplicationMode appMode,
+	                                @Nullable Bundle args,
+	                                boolean isAndroidAuto) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ConfigureWidgetsFragment fragment = new ConfigureWidgetsFragment();
 			fragment.selectedPanel = panel;
 			fragment.selectedAppMode = appMode;
+			fragment.isAndroidAutoMode = isAndroidAuto;
 			if (args != null) {
 				fragment.setArguments(args);
 			}

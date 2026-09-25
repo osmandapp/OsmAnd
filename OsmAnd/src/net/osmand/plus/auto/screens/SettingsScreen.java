@@ -84,6 +84,15 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 		ItemList.Builder configureMapBuilder = new ItemList.Builder();
 		configureMapBuilder.addItem(mapModeRowBuilder.build());
 		configureMapBuilder.addItem(magnifierRowBuilder.build());
+		configureMapBuilder.addItem(new Row.Builder()
+				.setTitle(getApp().getString(R.string.android_auto_show_widgets_panel))
+				.addText(getApp().getString(R.string.android_auto_show_widgets_panel_description))
+				.setToggle(
+						new Toggle.Builder(osmandSettings.AA_SHOW_WIDGETS_PANEL::set)
+								.setChecked(osmandSettings.AA_SHOW_WIDGETS_PANEL.get())
+								.build())
+				.build()
+		);
 
 		templateBuilder.addSectionedList(
 				SectionedItemList.create(

@@ -97,6 +97,7 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 					if (infoLayer != null) {
 						infoLayer.recreateAllControls(activity);
 					}
+					app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
 				}
 				importFinished(succeed, needRestart, items);
 			}

@@ -57,7 +57,7 @@ public class CoordinatesWidgetInfoFragment extends WidgetInfoBaseFragment {
 					@Override
 					public void onFormatSelected(@NonNull String formatId) {
 						selectedFormatId = formatId;
-						applySettings();
+						applySettingsAndRecreateControls();
 						updateSummary();
 						updateWidget();
 					}

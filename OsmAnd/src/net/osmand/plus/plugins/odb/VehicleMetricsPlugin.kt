@@ -59,6 +59,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
@@ -164,6 +165,131 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			if (widgetInfo != null) {
 				widgetsInfos.add(widgetInfo)
 			}
+		}
+	}
+
+	override fun createAndroidAutoWidgets(
+		widgetInfos: MutableList<MapWidgetInfo>,
+		appMode: ApplicationMode,
+	) {
+		val creator = WidgetInfoCreator(app, appMode, null)
+		val supportedTypes = WidgetType.getObdTypes().filter { it.supportsAndroidAuto }
+		for (widgetType in supportedTypes) {
+			val obdWidget = createAndroidAutoWidgetForParams(widgetType)
+			if (obdWidget != null) {
+				val widgetInfo = creator.createAndroidAutoWidgetInfo(obdWidget)
+				if (widgetInfo != null) {
+					widgetInfos.add(widgetInfo)
+				}
+			}
+		}
+	}
+
+	override fun createAndroidAutoWidgetForParams(
+		widgetType: WidgetType,
+		customId: String?,
+		widgetsPanel: WidgetsPanel?
+	): MapWidget? {
+		return when (widgetType) {
+			WidgetType.OBD_SPEED -> OBDTextWidget(
+				app,
+				WidgetType.OBD_SPEED,
+				OBDTypeWidget.SPEED,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_RPM -> OBDTextWidget(
+				app,
+				WidgetType.OBD_RPM,
+				OBDTypeWidget.RPM,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_ENGINE_RUNTIME ->  OBDTextWidget(
+				app,
+				WidgetType.OBD_ENGINE_RUNTIME,
+				OBDTypeWidget.ENGINE_RUNTIME,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_FUEL_PRESSURE -> OBDTextWidget(
+				app,
+				WidgetType.OBD_FUEL_PRESSURE,
+				OBDTypeWidget.FUEL_PRESSURE,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_AIR_INTAKE_TEMP -> OBDTextWidget(
+				app,
+				WidgetType.OBD_AIR_INTAKE_TEMP,
+				OBDTypeWidget.TEMPERATURE_INTAKE,
+				customId,
+				widgetsPanel)
+
+			WidgetType.ENGINE_OIL_TEMPERATURE -> OBDTextWidget(
+				app,
+				WidgetType.ENGINE_OIL_TEMPERATURE,
+				OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_AMBIENT_AIR_TEMP -> OBDTextWidget(
+				app,
+				WidgetType.OBD_AMBIENT_AIR_TEMP,
+				OBDTypeWidget.TEMPERATURE_AMBIENT,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_ALT_BATTERY_VOLTAGE -> OBDTextWidget(
+				app,
+				WidgetType.OBD_ALT_BATTERY_VOLTAGE,
+				OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_BATTERY_VOLTAGE -> OBDTextWidget(
+				app,
+				WidgetType.OBD_BATTERY_VOLTAGE,
+				OBDTypeWidget.BATTERY_VOLTAGE,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_CALCULATED_ENGINE_LOAD -> OBDTextWidget(
+				app,
+				WidgetType.OBD_CALCULATED_ENGINE_LOAD,
+				OBDTypeWidget.CALCULATED_ENGINE_LOAD,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_THROTTLE_POSITION -> OBDTextWidget(
+				app,
+				WidgetType.OBD_THROTTLE_POSITION,
+				OBDTypeWidget.THROTTLE_POSITION,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_FUEL_CONSUMPTION -> OBDFuelConsumptionWidget(
+				app,
+				WidgetType.OBD_FUEL_CONSUMPTION,
+				OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_REMAINING_FUEL -> OBDRemainingFuelWidget(
+				app,
+				WidgetType.OBD_REMAINING_FUEL,
+				OBDTypeWidget.FUEL_LEFT_PERCENT,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_ENGINE_COOLANT_TEMP -> OBDTextWidget(
+				app,
+				WidgetType.OBD_ENGINE_COOLANT_TEMP,
+				OBDTypeWidget.TEMPERATURE_COOLANT,
+				customId,
+				widgetsPanel)
+
+			else -> null
 		}
 	}
 

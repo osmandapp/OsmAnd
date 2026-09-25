@@ -11,6 +11,10 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="android_auto_widget_settings">Android Auto widgets</string>
+	<string name="android_auto_widget_panel">Android Auto widgets panel</string>
+	<string name="android_auto_show_widgets_panel">Show widgets panel</string>
+	<string name="android_auto_show_widgets_panel_description">Draw the selected widgets over the map on the car screen</string>
 	<string name="contour_labels">Labels</string>
 	<string name="contour_label_direction_descr">Uphill: the top of each height number faces higher ground, as on paper topographic maps. The short ticks on the lines point downhill.</string>
 	<string name="rendering_attr_contourLabelDirection_name">Label direction</string>

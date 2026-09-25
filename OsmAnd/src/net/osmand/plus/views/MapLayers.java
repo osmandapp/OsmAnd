@@ -102,7 +102,7 @@ public class MapLayers {
 
 	public MapLayers(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.mapWidgetRegistry = new MapWidgetRegistry(app);
+		this.mapWidgetRegistry = app.getMapWidgetRegistry();
 	}
 
 	@NonNull

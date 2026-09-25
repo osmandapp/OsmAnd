@@ -1,17 +1,27 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.Pair;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -46,10 +56,24 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	private Integer cachedAltitudeMetric;
 	private Integer cachedAngularUnits;
 
+	protected String cachedText, cachedSmallText;
+	protected Rect cachedTextBounds = new Rect();
+	protected Rect cachedSmallTextBounds = new Rect();
+	protected Rect cachedIconBounds = new Rect();
+	protected TextPaint textPaint = new TextPaint();
+	protected TextPaint smallTextPaint = new TextPaint();
+	protected boolean shouldDrawAndroidAutoIcon;
+	protected StaticLayout cachedTextLayout, cachedSmallTextLayout;
+
 
 	public TextInfoWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
-			@Nullable String customId, @Nullable WidgetsPanel panel) {
+	                      @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
+	}
+
+	public TextInfoWidget(@NonNull OsmandApplication app, @NonNull WidgetType widgetType,
+	                      @Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(app, widgetType, customId, panel);
 	}
 
 	@Override
@@ -138,7 +162,9 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	}
 
 	protected void setTextNoUpdateVisibility(String text, String subtext) {
-		getView().setContentDescription(combine(text, subtext));
+		if (!isAndroidAuto()) {
+			getView().setContentDescription(combine(text, subtext));
+		}
 		if (text == null) {
 			setText("");
 		} else {
@@ -149,17 +175,26 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 		} else {
 			setSmallText(subtext);
 		}
+
 	}
 
 	private void setText(String text) {
-		textView.setText(text);
+		cachedText = text;
+		if (textView != null) {
+			textView.setText(text);
+		}
+		markAndroidAutoLayoutNeeded();
 	}
 
 	private void setSmallText(String text) {
-		smallTextView.setText(text);
-		if (smallTextViewShadow != null) {
-			smallTextViewShadow.setText(text);
+		cachedSmallText = text;
+		if (smallTextView != null) {
+			smallTextView.setText(text);
+			if (smallTextViewShadow != null) {
+				smallTextViewShadow.setText(text);
+			}
 		}
+		markAndroidAutoLayoutNeeded();
 	}
 
 	public boolean isUpdateNeeded() {
@@ -210,6 +245,12 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	}
 
 	@Override
+	public void onAndroidAutoPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		super.onAndroidAutoPanelAppearanceChanged(appearance);
+		configureAAPaints(appearance);
+	}
+
+	@Override
 	public boolean isViewVisible() {
 		return getContentView().getVisibility() == View.VISIBLE;
 	}
@@ -249,4 +290,188 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	public int getMapIconId(boolean nightMode) {
 		return getIconId(nightMode);
 	}
+
+	// region android auto
+	protected StaticLayout updateCachedTextBounds(Rect bounds, TextPaint paint, String text) {
+		return updateCachedTextBounds(bounds, paint, text, null);
+	}
+
+	protected StaticLayout updateCachedTextBounds(Rect bounds, TextPaint paint, String text, Float lineSpacingExtra) {
+		StaticLayout staticLayout = null;
+		bounds.setEmpty();
+		if (text != null) {
+			float desiredWidth = (float) Math.ceil(StaticLayout.getDesiredWidth(text, paint));
+			staticLayout = buildTextLineStaticLayout(text, paint, desiredWidth, Gravity.START | Gravity.BOTTOM, lineSpacingExtra, null);
+			if (staticLayout != null) {
+				bounds.set(0, 0, staticLayout.getWidth(), staticLayout.getHeight());
+			}
+		}
+		return staticLayout;
+	}
+
+	protected void configureAAPaints(ResolvedPanelAppearance appearance) {
+		applyPrimaryTextAppearance(textPaint, appearance);
+		applySecondaryTextAppearance(smallTextPaint, appearance);
+	}
+
+	protected float getPrimaryTextSizeAA() {
+		return app.getResources().getDimension(R.dimen.map_widget_text_size);
+	}
+
+	protected float getSecondaryTextSizeAA() {
+		return app.getResources().getDimension(R.dimen.map_widget_text_size_small);
+	}
+
+	protected void applyPrimaryTextAppearance(Paint paint, ResolvedPanelAppearance appearance) {
+		applyTextAppearance(paint, appearance.getPrimaryTextColor(), appearance);
+		paint.setTextSize(getPrimaryTextSizeAA());
+	}
+
+	protected void applySecondaryTextAppearance(Paint paint, ResolvedPanelAppearance appearance) {
+		applyTextAppearance(paint, appearance.getSecondaryTextColor(), appearance);
+		paint.setTextSize(getSecondaryTextSizeAA());
+	}
+
+	protected void applyTextAppearance(
+			Paint textPaint,
+			@ColorInt int color,
+			ResolvedPanelAppearance appearance
+	) {
+		int typefaceStyle = (appearance.getBoldText()) ? Typeface.BOLD : Typeface.NORMAL;
+		textPaint.setColor(color);
+		textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, typefaceStyle));
+	}
+
+	protected float findOptimalSingleLineTextSize(
+			@NonNull CharSequence text, TextPaint paint,
+			int maxWidth, int maxHeight,
+			float minSize, float maxSize, float step
+	) {
+		if (step == 0) {
+			return maxSize;
+		}
+		TextPaint testPaint = new TextPaint(paint);
+		float low = minSize;
+		float high = maxSize;
+		float optimal = minSize;
+
+		while (low <= high) {
+			float mid = Math.round((low + high) / 2);
+			testPaint.setTextSize(mid);
+
+			StaticLayout.Builder layoutBuilder = StaticLayout.Builder
+					.obtain(text, 0, text.length(), testPaint, Integer.MAX_VALUE)
+					.setIncludePad(false);
+			StaticLayout layout = layoutBuilder.build();
+
+			if (layout.getLineWidth(0) <= maxWidth && layout.getHeight() <= maxHeight) {
+				optimal = mid;
+				low = mid + step;
+			} else {
+				high = mid - step;
+			}
+		}
+		return optimal;
+	}
+
+	protected void drawTextLineInRect(
+			@NonNull Canvas canvas,
+			@Nullable Rect targetRect,
+			@Nullable StaticLayout staticLayout) {
+		drawTextLineInRect(canvas,
+				targetRect,
+				staticLayout,
+				Gravity.START | Gravity.BOTTOM
+		);
+	}
+
+	@Nullable
+	protected StaticLayout buildTextLineStaticLayout(
+			CharSequence text,
+			TextPaint textPaint,
+			float targetWidth,
+			int gravity,
+			Float lineSpacingExtra,
+			TextUtils.TruncateAt ellipsizeAt
+	) {
+		if (text == null) {
+			return null;
+		}
+		if (targetWidth <= 0) {
+			return null;
+		}
+
+		Layout.Alignment layoutAlignment;
+		int horizontalGravity = gravity & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK;
+
+		if (horizontalGravity == Gravity.END) {
+			layoutAlignment = Layout.Alignment.ALIGN_OPPOSITE;
+		} else if (horizontalGravity == Gravity.CENTER_HORIZONTAL) {
+			layoutAlignment = Layout.Alignment.ALIGN_CENTER;
+		} else {
+			layoutAlignment = Layout.Alignment.ALIGN_NORMAL;
+		}
+
+		StaticLayout.Builder layoutBuilder = StaticLayout.Builder
+				.obtain(text, 0, text.length(), textPaint, (int) targetWidth)
+				.setAlignment(layoutAlignment).setMaxLines(1)
+				.setIncludePad(false);
+		if (ellipsizeAt != null) {
+			layoutBuilder.setEllipsize(ellipsizeAt);
+		}
+		if (lineSpacingExtra != null) {
+			layoutBuilder.setLineSpacing(lineSpacingExtra, 1f);
+		}
+
+		return layoutBuilder.build();
+	}
+
+	protected void drawTextLineInRect(
+			@NonNull Canvas canvas,
+			@Nullable Rect targetRect,
+			@Nullable StaticLayout staticLayout,
+			int gravity
+	) {
+		if (staticLayout == null) {
+			return;
+		}
+		if (targetRect == null || targetRect.isEmpty()) {
+			return;
+		}
+
+		int rectWidth = targetRect.width();
+		int rectHeight = targetRect.height();
+		if (rectWidth <= 0 || rectHeight <= 0) {
+			return;
+		}
+
+		int layoutWidth = staticLayout.getWidth();
+		int layoutHeight = staticLayout.getHeight();
+
+		int horizontalGravity = gravity & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK;
+		int verticalGravity = gravity & Gravity.VERTICAL_GRAVITY_MASK;
+		float xOffset = 0f;
+		if (horizontalGravity == Gravity.END) {
+			xOffset = (float) (rectWidth - layoutWidth);
+		} else if (horizontalGravity == Gravity.CENTER_HORIZONTAL) {
+			xOffset = (rectWidth - layoutWidth) / 2f;
+		}
+
+		float yOffset = 0f;
+		if (verticalGravity == Gravity.BOTTOM) {
+			yOffset = (float) (rectHeight - layoutHeight);
+		} else if (verticalGravity == Gravity.CENTER_VERTICAL) {
+			yOffset = (rectHeight - layoutHeight) / 2f;
+		}
+
+		float finalX = targetRect.left + xOffset;
+		float finalY = targetRect.top + yOffset;
+
+		canvas.save();
+		canvas.clipRect(targetRect);
+		canvas.translate(finalX, finalY);
+		staticLayout.draw(canvas);
+		canvas.restore();
+	}
+	// endregion
 }

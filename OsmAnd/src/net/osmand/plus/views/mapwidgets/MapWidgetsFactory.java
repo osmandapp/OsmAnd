@@ -19,7 +19,7 @@ import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 
-public class MapWidgetsFactory {
+public class MapWidgetsFactory implements WidgetInfoCreator.WidgetFactory {
 
 	private final OsmandApplication app;
 	private final MapActivity mapActivity;
@@ -29,6 +29,7 @@ public class MapWidgetsFactory {
 		app = mapActivity.getApp();
 	}
 
+	@Override
 	@Nullable
 	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel) {
 		switch (widgetType) {

@@ -19,4 +19,8 @@
 		android:id="@+id/speedometer"
 		layout="@layout/configure_screen_list_item" />
 
+	<include
+		android:id="@+id/aa_widgets"
+		layout="@layout/configure_screen_list_item" />
+
 </LinearLayout>

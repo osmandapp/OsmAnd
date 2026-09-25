@@ -28,8 +28,9 @@ public class WidgetInfoCreator {
 		settings = app.getSettings();
 	}
 
+	// called in WidgetsInitializer#addWidgetInfo
 	@Nullable
-	public MapWidgetInfo createWidgetInfo(@NonNull MapWidgetsFactory factory, @NonNull WidgetType widgetType) {
+	public MapWidgetInfo createWidgetInfo(@NonNull WidgetFactory factory, @NonNull WidgetType widgetType) {
 		MapWidget mapWidget = factory.createMapWidget(null, widgetType, null);
 		if (mapWidget != null) {
 			return createWidgetInfo(mapWidget);
@@ -37,8 +38,9 @@ public class WidgetInfoCreator {
 		return null;
 	}
 
+	// called in WidgetsInitializer#createCustomWidgets
 	@Nullable
-	public MapWidgetInfo createWidgetInfo(@NonNull MapWidgetsFactory factory, @NonNull String key, @NonNull WidgetType widgetType) {
+	public MapWidgetInfo createWidgetInfo(@NonNull WidgetFactory factory, @NonNull String key, @NonNull WidgetType widgetType) {
 		WidgetsPanel panel = widgetType.getPanel(key, appMode, layoutMode, settings);
 		MapWidget widget = factory.createMapWidget(key, widgetType, panel);
 		if (widget != null) {
@@ -47,7 +49,7 @@ public class WidgetInfoCreator {
 		return null;
 	}
 
-
+	// called in WidgetInfoCreator#createWidgetInfo and in widget classes in createWidgets
 	@Nullable
 	public MapWidgetInfo createWidgetInfo(@NonNull MapWidget widget) {
 		WidgetType widgetType = widget.getWidgetType();
@@ -58,6 +60,47 @@ public class WidgetInfoCreator {
 			int order = panel.getWidgetOrder(appMode, layoutMode, widgetId, settings);
 			return createWidgetInfo(widgetId, widget, widgetType.dayIconId, widgetType.nightIconId,
 					widgetType.titleId, null, page, order, panel);
+		}
+		return null;
+	}
+
+	@Nullable
+	public MapWidgetInfo createAndroidAutoWidgetInfo(@NonNull MapWidget widget) {
+		WidgetType widgetType = widget.getWidgetType();
+		if (widgetType != null) {
+			String widgetId = widgetType.id;
+			WidgetsPanel panel = widgetType.getAndroidAutoPanel(widgetId, appMode, settings);
+			if (panel == null) {
+				return null;
+			}
+			int page = panel.getWidgetPage(appMode, layoutMode, widgetId, settings);
+			int order = panel.getWidgetOrder(appMode, layoutMode, widgetId, settings);
+			MapWidgetInfo widgetInfo = createWidgetInfo(widgetId, widget, widgetType.dayIconId, widgetType.nightIconId,
+					widgetType.titleId, null, page, order, panel);
+			widgetInfo.widget.setAndroidAuto(true);
+			return widgetInfo;
+		}
+		return null;
+	}
+
+	@Nullable
+	public MapWidgetInfo createAndroidAutoWidgetInfo(@NonNull WidgetFactory factory, @NonNull WidgetType widgetType) {
+		MapWidget mapWidget = factory.createMapWidget(null, widgetType, null);
+		if (mapWidget != null) {
+			return createAndroidAutoWidgetInfo(mapWidget);
+		}
+		return null;
+	}
+
+	@Nullable
+	public MapWidgetInfo createAndroidAutoWidgetInfo(@NonNull WidgetFactory factory, @NonNull String key, @NonNull WidgetType widgetType) {
+		WidgetsPanel panel = widgetType.getAndroidAutoPanel(key, appMode, settings);
+		if (panel == null) {
+			return null;
+		}
+		MapWidget widget = factory.createMapWidget(key, widgetType, panel);
+		if (widget != null) {
+			return askCreateAndroidWidgetInfo(key, widget, widgetType, panel);
 		}
 		return null;
 	}
@@ -102,6 +145,21 @@ public class WidgetInfoCreator {
 		}
 	}
 
+	@Nullable
+	public MapWidgetInfo askCreateAndroidWidgetInfo(@NonNull String widgetId, @NonNull MapWidget widget,
+	                                         @NonNull WidgetType widgetType, @NonNull WidgetsPanel panel) {
+		MapWidgetInfo info;
+		if (widgetType == WidgetType.AIDL_WIDGET) {
+			info = app.getAidlApi().askCreateExternalWidgetInfo(this, widget, widgetId, panel);
+		} else {
+			info = createCustomWidgetInfo(widgetId, widget, widgetType, panel);
+		}
+		if (info != null) {
+			info.widget.setAndroidAuto(true);
+		}
+		return info;
+	}
+
 	@NonNull
 	private MapWidgetInfo createCustomWidgetInfo(@NonNull String widgetId, @NonNull MapWidget widget,
 	                                             @NonNull WidgetType widgetType, @NonNull WidgetsPanel panel) {
@@ -138,4 +196,7 @@ public class WidgetInfoCreator {
 		}
 	}
 
+	public interface WidgetFactory {
+		MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel);
+	}
 }
