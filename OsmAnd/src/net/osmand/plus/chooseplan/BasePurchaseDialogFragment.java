@@ -29,7 +29,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
-import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -177,7 +176,9 @@ public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFra
 
 	@Override
 	public void onGetItems() {
-		if (isAdded() && InAppPurchaseUtils.isSubscribedToAny(app)) {
+		if (isAdded()) {
+			// Prices arrive with the inventory, so the screen must be redrawn for
+			// everyone, not only for users who already own a purchase.
 			updateContent(false);
 		}
 	}

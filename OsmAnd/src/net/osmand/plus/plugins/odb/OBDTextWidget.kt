@@ -76,10 +76,7 @@ open class OBDTextWidget : SimpleWidget {
 			if (averageModePref!!.get()) {
 				averageTimeSeconds = (measuredIntervalPref!!.get() / 1000).toInt()
 			}
-		} else if (fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR ||
-			fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR ||
-			fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM
-		) {
+		} else {
 			averageTimeSeconds = fieldType.defaultAverageTime
 		}
 

@@ -27,6 +27,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -177,6 +178,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private ExtendedMapActivity extendedMapActivity;
 
 	private LockHelper lockHelper;
+	private boolean keyguardFlagsEnabled;
 	private ImportHelper importHelper;
 	private IntentHelper intentHelper;
 	private MapScrollHelper mapScrollHelper;
@@ -194,6 +196,25 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private DrawerLayout drawerLayout;
 	private boolean drawerDisabled;
 
+	private final OnBackPressedCallback mapBackPressedCallback = new OnBackPressedCallback(false) {
+		@Override
+		public void handleOnBackPressed() {
+			handleMapBackPressed();
+		}
+	};
+	private final FragmentManager.FragmentLifecycleCallbacks fragmentLifecycleCallbacks =
+			new FragmentManager.FragmentLifecycleCallbacks() {
+				@Override
+				public void onFragmentStarted(@NonNull FragmentManager fm, @NonNull Fragment f) {
+					registerMapBackPressedCallback();
+				}
+
+				@Override
+				public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+					registerMapBackPressedCallback();
+				}
+			};
+
 	private boolean mIsDestroyed;
 	private boolean pendingPause;
 	private Timer splashScreenTimer;
@@ -208,9 +229,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	};
 
-	private final StateChangedListener<Boolean> useSystemScreenTimeoutListener = new StateChangedListener<Boolean>() {
+	private final StateChangedListener<Boolean> lockScreenSettingListener = new StateChangedListener<Boolean>() {
 		@Override
 		public void stateChanged(Boolean change) {
+			app.runInUIThread(() -> changeKeyguardFlags());
+		}
+	};
+
+	private final StateChangedListener<Integer> turnScreenOnTimeListener = new StateChangedListener<Integer>() {
+		@Override
+		public void stateChanged(Integer change) {
 			app.runInUIThread(() -> changeKeyguardFlags());
 		}
 	};
@@ -236,6 +264,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
 		super.onCreate(savedInstanceState);
+		registerMapBackPressedCallback();
+		getSupportFragmentManager().registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, true);
+		getSupportFragmentManager().addOnBackStackChangedListener(this::updateBackPressedCallbackState);
 
 		lockHelper = app.getLockHelper();
 		mapScrollHelper = new MapScrollHelper(app);
@@ -260,7 +291,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		InsetsUtils.processInsets(this, findViewById(R.id.drawer_layout), null, false);
 
 		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
-			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager());
+			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager(), app);
 			if (showed) {
 				SecondSplashScreenFragment.SHOW = false;
 			}
@@ -318,6 +349,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapView.refreshMap(true);
 
 		drawerLayout = findViewById(R.id.drawer_layout);
+		drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+			@Override
+			public void onDrawerOpened(@NonNull View drawerView) {
+				updateBackPressedCallbackState();
+			}
+
+			@Override
+			public void onDrawerClosed(@NonNull View drawerView) {
+				updateBackPressedCallbackState();
+			}
+		});
 		mapViewWithLayers = findViewById(R.id.map_view_with_layers);
 
 		checkAppInitialization();
@@ -533,44 +575,102 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.startActivity(intent);
 	}
 
-	@Override
-	public void onBackPressed() {
-		if (dashboardOnMap.onBackPressed()) {
-			return;
+	private void handleMapBackPressed() {
+		try {
+			if (dashboardOnMap.onBackPressed()) {
+				return;
+			}
+			if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
+				closeDrawer();
+				return;
+			}
+			if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
+				quitAddGpxPointMode();
+			}
+			int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+			if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
+				return;
+			}
+			ExplorePlacesFragment explorePlacesFragment = fragmentsHelper.getExplorePlacesFragment();
+			if (explorePlacesFragment != null) {
+				if (!explorePlacesFragment.onBackPress()) {
+					fragmentsHelper.closeExplore();
+					fragmentsHelper.showQuickSearch(CURRENT, false);
+				}
+				return;
+			}
+			QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
+			if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && quickSearchFragment != null
+					&& quickSearchFragment.isSearchHidden()) {
+				fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
+				return;
+			}
+			if (mapContextMenu.isVisible()) {
+				MenuController menuController = mapContextMenu.getMenuController();
+				if (menuController != null && menuController.hasBackAction()) {
+					mapContextMenu.backToolbarAction(menuController);
+					return;
+				}
+			}
+			performDefaultBackNavigation();
+		} finally {
+			updateBackPressedCallbackState();
+		}
+	}
+
+	/**
+	 * Equivalent of super.onBackPressed() in the former override: passes Back on to the fragments,
+	 * the back stack or the system while this callback is disabled, so it cannot handle it twice.
+	 */
+	private void performDefaultBackNavigation() {
+		mapBackPressedCallback.setEnabled(false);
+		getOnBackPressedDispatcher().onBackPressed();
+	}
+
+	/**
+	 * Keeps the map callback above callbacks registered by fragments, so Back is handled in the same
+	 * order as by the former onBackPressed() override: map overlays first, then fragments and the back stack.
+	 */
+	private void registerMapBackPressedCallback() {
+		mapBackPressedCallback.remove();
+		getOnBackPressedDispatcher().addCallback(this, mapBackPressedCallback);
+	}
+
+	/**
+	 * The callback must be enabled before the Back gesture starts, otherwise the system handles it
+	 * with the predictive animation; it is enabled only while handleMapBackPressed() has something to do.
+	 */
+	public void updateBackPressedCallbackState() {
+		mapBackPressedCallback.setEnabled(shouldInterceptMapBack());
+	}
+
+	private boolean shouldInterceptMapBack() {
+		if (dashboardOnMap.isVisible()) {
+			return true;
 		}
 		if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
-			closeDrawer();
-			return;
+			return true;
 		}
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
-			quitAddGpxPointMode();
+			return true;
 		}
 		int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
-		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
-			return;
+		if (backStackEntryCount == 0 && prevActivityIntent != null) {
+			return true;
 		}
-		ExplorePlacesFragment explorePlacesFragment = fragmentsHelper.getExplorePlacesFragment();
-		if (explorePlacesFragment != null) {
-			if (!explorePlacesFragment.onBackPress()) {
-				fragmentsHelper.closeExplore();
-				fragmentsHelper.showQuickSearch(CURRENT, false);
-			}
-			return;
+		if (fragmentsHelper.getExplorePlacesFragment() != null) {
+			return true;
 		}
 		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
 		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && quickSearchFragment != null
 				&& quickSearchFragment.isSearchHidden()) {
-			fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-			return;
+			return true;
 		}
 		if (mapContextMenu.isVisible()) {
 			MenuController menuController = mapContextMenu.getMenuController();
-			if (menuController != null && menuController.hasBackAction()) {
-				mapContextMenu.backToolbarAction(menuController);
-				return;
-			}
+			return menuController != null && menuController.hasBackAction();
 		}
-		super.onBackPressed();
+		return false;
 	}
 
 	public boolean launchPrevActivityIntent() {
@@ -578,6 +678,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			AndroidUtils.startActivityIfSafe(this, prevActivityIntent);
 			prevActivityIntent = null;
+			updateBackPressedCallbackState();
 			return true;
 		}
 		return false;
@@ -605,6 +706,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		RestartActivity.showRestartDialogIfNeeded(this);
+		// Covers state restored before the first gesture, e.g. a drawer reopened by onRestoreInstanceState.
+		updateBackPressedCallbackState();
 
 		importHelper.setUiActivity(this);
 		app.getLocationProvider().ensureLatestLocation();
@@ -629,7 +732,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				RenderInitErrorBottomSheet.showInstance(fragmentManager);
 			} else if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
 				SecondSplashScreenFragment.SHOW = false;
-				CrashBottomSheetDialogFragment.showInstance(fragmentManager);
+				CrashBottomSheetDialogFragment.showInstance(app, fragmentManager);
 			} else if (RateUsHelper.shouldShowRateDialog(app)) {
 				SecondSplashScreenFragment.SHOW = false;
 				RateUsHelper.showRateDialog(this);
@@ -728,7 +831,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
-		app.getAutoBackupHelper().requestAutoBackup();
+		app.getAutoBackupHelper().requestAutoBackupOnResume();
 
 		if (System.currentTimeMillis() - time > 50) {
 			LOG.error("onResume for MapActivity took " + (System.currentTimeMillis() - time) + " ms");
@@ -804,7 +907,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		settings.MAP_SCREEN_ORIENTATION.addListener(mapScreenOrientationSettingListener);
-		settings.USE_SYSTEM_SCREEN_TIMEOUT.addListener(useSystemScreenTimeoutListener);
+		settings.USE_SYSTEM_SCREEN_TIMEOUT.addListener(lockScreenSettingListener);
+		settings.TURN_SCREEN_ON_POWER_BUTTON.addListener(lockScreenSettingListener);
+		settings.TURN_SCREEN_ON_TIME_INT.addListener(turnScreenOnTimeListener);
 		settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.addListener(pinchZoomMagnificationListener);
 
 		extendedMapActivity.onResume(this);
@@ -825,6 +930,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	@Override
 	public void setKeepScreenOn(boolean keepScreenOn) {
 		if (mapViewWithLayers != null) {
 			mapViewWithLayers.setKeepScreenOn(keepScreenOn);
@@ -1115,7 +1221,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private void onPauseActivity() {
 		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
-		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(useSystemScreenTimeoutListener);
+		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(lockScreenSettingListener);
+		settings.TURN_SCREEN_ON_POWER_BUTTON.removeListener(lockScreenSettingListener);
+		settings.TURN_SCREEN_ON_TIME_INT.removeListener(turnScreenOnTimeListener);
 		settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.removeListener(pinchZoomMagnificationListener);
 		if (!app.getRoutingHelper().isRouteWasFinished()) {
 			DestinationReachedFragment.resetShownState();
@@ -1356,6 +1464,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public static void clearPrevActivityIntent() {
 		prevActivityIntent = null;
+		MapActivity mapActivity = mapContextMenu.getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateBackPressedCallbackState();
+		}
 	}
 
 	@Override
@@ -1464,7 +1576,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
-			lockHelper.resetLockTimerIfNeeded();
+			lockHelper.onUserInteraction();
 		}
 
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
@@ -1600,19 +1712,23 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void changeKeyguardFlags() {
-		boolean enabled = settings.TURN_SCREEN_ON_TIME_INT.get() >= 0;
+		// Never request the lock screen flags unconditionally here: onStop() clears them, and as they
+		// decide whether the activity is visible while locked, that makes resume and stop chase each other.
 		boolean keepScreenOn = !settings.USE_SYSTEM_SCREEN_TIMEOUT.get();
-		changeKeyguardFlags(enabled, keepScreenOn);
+		changeKeyguardFlags(lockHelper.shouldShowWhenLocked(), keepScreenOn);
 	}
 
 	private void changeKeyguardFlags(boolean enable, boolean forceKeepScreenOn) {
-		if (enable) {
-			getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
-					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-		} else {
-			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+		if (keyguardFlagsEnabled != enable) {
+			keyguardFlagsEnabled = enable;
+			if (enable) {
+				getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
+						WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+			} else {
+				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+			}
 		}
-		setKeepScreenOn(forceKeepScreenOn);
+		lockHelper.setKeepScreenOn(forceKeepScreenOn);
 	}
 
 	@Override

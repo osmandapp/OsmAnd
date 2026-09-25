@@ -11,9 +11,7 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +31,6 @@ import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.AndroidUtils;
@@ -43,8 +40,6 @@ import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 
@@ -91,12 +86,6 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 				R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
 				R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 
-		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
-				getContext(), nightMode,
-				R.color.icon_color_default_light, R.color.active_color_primary_light,
-				R.color.icon_color_default_light, R.color.active_color_primary_dark
-		);
-
 		readFullArticleButton = mainView.findViewById(R.id.read_full_article);
 		readFullArticleButton.setBackgroundResource(nightMode ? R.drawable.bt_round_long_night : R.drawable.bt_round_long_day);
 		readFullArticleButton.setTextColor(buttonColorStateList);
@@ -106,11 +95,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		int paddingRight = (int) getResources().getDimension(R.dimen.dialog_content_margin);
 		readFullArticleButton.setPadding(paddingLeft, 0, paddingRight, 0);
 
-		selectedLangTv = mainView.findViewById(R.id.select_language_text_view);
-		selectedLangTv.setTextColor(selectedLangColorStateList);
-		selectedLangTv.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
-		selectedLangTv.setBackgroundResource(nightMode
-				? R.drawable.wikipedia_select_lang_bg_dark_n : R.drawable.wikipedia_select_lang_bg_light_n);
+		setupLanguageChanger(mainView.findViewById(R.id.select_language_text_view));
 
 		contentWebView = mainView.findViewById(R.id.content_web_view);
 		contentWebView.setOnTouchListener(new View.OnTouchListener() {
@@ -241,39 +226,23 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 	@Override
 	protected void showPopupLangMenu(View view, String langSelected) {
-		Context context = getContext();
-		if (context != null) {
-			PopupMenu optionsMenu = new PopupMenu(context, view, Gravity.RIGHT);
-			Set<String> namesSet = amenity.getSupportedContentLocales();
-
-			Map<String, String> names = new HashMap<>();
-			for (String n : namesSet) {
-				names.put(n, FileNameTranslationHelper.getVoiceName(context, n));
-			}
-			String selectedLangName = names.get(langSelected);
-			if (selectedLangName != null) {
-				names.remove(langSelected);
-			}
-			Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
-
-			if (selectedLangName != null) {
-				MenuItem item = optionsMenu.getMenu().add(selectedLangName);
-				item.setOnMenuItemClickListener(_item -> {
-					setLanguage(langSelected);
-					populateArticle();
-					return true;
-				});
-			}
-			for (Map.Entry<String, String> e : sortedNames.entrySet()) {
-				MenuItem item = optionsMenu.getMenu().add(e.getValue());
-				item.setOnMenuItemClickListener(_item -> {
-					setLanguage(e.getKey());
-					populateArticle();
-					return true;
-				});
-			}
-			optionsMenu.show();
+		final Set<String> namesSet = amenity.getSupportedContentLocales();
+		if (Algorithms.isEmpty(namesSet)) {
+			return;
 		}
+
+		showPopupLangMenu(view, namesSet);
+	}
+
+	@Override
+	protected String getSelectedLanguage() {
+		return this.langSelected;
+	}
+
+	@Override
+	protected void setSelectedLanguage(final String languageCode) {
+		this.langSelected = languageCode;
+		this.lang = languageCode;
 	}
 
 	@Override

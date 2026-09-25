@@ -1320,7 +1320,6 @@
     <string name="map_marker">Mapová značka</string>
     <string name="rendering_attr_showMtbRoutes_name">Trasy pro horská kola</string>
     <string name="storage_permission_restart_is_required">Aplikace nyní smí zapisovat na externí úložiště, ale je potřeba její restart.</string>
-    <string name="file_name_containes_illegal_char">Nepovolený znak v názvu souboru</string>
     <string name="access_no_destination">Modul usnadnění: Cíl není nastaven</string>
     <string name="map_widget_magnetic_bearing">Magnetické směrování</string>
     <string name="map_widget_bearing">Relativní směrování</string>
@@ -4689,7 +4688,7 @@
     <string name="ais_cpa_settings">Nastavení týkající se CPA</string>
     <string name="ais_cpa_warning_time">Výstražná doba před dosažením nejbližšího bodu přiblížení (CPA)</string>
     <string name="ais_cpa_warning_distance">Výstražná vzdálenost pro nejbližší bod přiblížení (CPA)</string>
-    <string name="plugin_ais_tracker_name">Sledování AIS plavidel</string>
+    <string name="plugin_ais_tracker_name">Sledování plavidel (AIS)</string>
     <string name="plugin_ais_tracker_disclaimer">UPOZORNĚNÍ\n\nTento plugin je hobby projekt a není určen k použití v kritických aplikacích. Nezaručuje spolehlivost ani přesnost. Nespoléhejte se na tento software při navigaci, v situacích ohrožujících život ani při jakýchkoli jiných zásadních činnostech.</string>
     <string name="ais_address_nmea_server_description">Definujte IP adresu datového zdroje NMEA (v případě použití TCP)</string>
     <string name="ais_cpa_warning_time_description">Pokud TCPA (čas do největšího přiblížení) s jiným plavidlem klesne pod definovanou mez, plavidlo se zvýrazní červeně.</string>
@@ -4885,7 +4884,7 @@
     <string name="rendering_attr_watercolor_description">Barva vody</string>
     <string name="show_local_names">Zobrazit místní názvy</string>
     <string name="access_pinch_zoom_magnification">Zvětšení sevřením a roztažením prstů</string>
-    <string name="access_pinch_zoom_magnification_descr">Při gestech přiblížení použít škálování viewportu namísto diskrétních úrovní přiblížení.</string>
+    <string name="access_pinch_zoom_magnification_descr">Při gestu přiblížení použít škálování viewportu (zvětšení) namísto diskrétních úrovní přiblížení.</string>
     <string name="lang_en_barebones">Angličtina (základní)</string>
     <string name="show_spherical_map_description">Zobrazit sférický model Země</string>
     <string name="shared_string_price">Cena</string>
@@ -4918,7 +4917,7 @@
     <string name="button_frames">Rámečky tlačítek</string>
     <string name="visualizing_button_grid">Mřížka tlačítek na mapě</string>
     <string name="deleted_maps_warning">Chystáte se odstranit %d položek\nChcete pokračovat?</string>
-    <string name="deleted_maps_prompt">Tyto mapy již nejsou podporovány a byly nahrazeny menšími oblastmi. Odstraňte je prosím a stáhněte si nové verze.</string>
+    <string name="deleted_maps_prompt">Tyto mapy již nejsou podporovány. Odstraňte je prosím a stáhněte si nové verze.</string>
     <string name="unsupported_maps">Nepodporované mapy</string>
     <string name="routing_attr_weightrating_name">Maximální hmotnost při plném zatížení</string>
     <string name="routing_attr_maxaxleload_name">Maximální zatížení nápravy</string>
@@ -5171,7 +5170,7 @@
     <string name="open_from_short">Od</string>
     <string name="favorite_confirm_delete_folder">Tím se smaže složka „%1$s“, včetně všech podsložek a %2$d oblíbených položek.</string>
     <string name="favorite_folder_rename_conflict">Složka s tímto názvem již existuje.</string>
-    <string name="favorite_folder_invalid_name">Název složky nesmí obsahovat znaky / nebo _%_</string>
+    <string name="favorite_folder_invalid_name">Název složky nesmí obsahovat znaky / nebo %1$s</string>
     <string name="favorite_folder_duplicate_message">Zvolte název složky, který ještě neexistuje.</string>
     <string name="favorite_folder_name">Název složky</string>
     <string name="edit_folder">Upravit složku</string>
@@ -5288,4 +5287,11 @@
     <string name="astro_penumbral_lunar_eclipse">Penumbrální zatmění Měsíce</string>
     <string name="astro_eclipse_phase_penumbral">Penumbrální</string>
     <string name="astro_lunar_eclipse_calculating_state">Výpočet viditelnosti na mapě…</string>
+    <string name="astro_eclipse_column_below_horizon">Pod obzorem</string>
+    <string name="crash_report_send_failed">Hlášení se nepodařilo odeslat. Zkuste to znovu později.</string>
+    <string name="crash_report_sent">Hlášení odesláno. Děkujeme!</string>
+    <string name="gpx_line_style_dashed">Čárkovaná</string>
+    <string name="gpx_line_style_solid">Plná</string>
+    <string name="gpx_line_style_dotted">Tečkovaná</string>
+    <string name="gpx_line_style">Styl čáry</string>
 </resources>

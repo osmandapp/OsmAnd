@@ -7,16 +7,15 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,7 +42,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.*;
-import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -78,7 +76,6 @@ import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
-import net.osmand.plus.search.listitems.QuickSearchSearchOnWebListItem;
 import net.osmand.plus.search.listitems.QuickSearchSimpleButtonListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -90,6 +87,7 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.POIMapLayer.SearchResultAmenity;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -101,7 +99,6 @@ import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.RegionCodeUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -658,20 +655,17 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (location == null) {
 			return null;
 		}
-		Amenity amenity = new Amenity();
+		Amenity amenity = new SearchResultAmenity(searchResult);
+		amenity.setId(mapObject.getId());
 		amenity.setLocation(location);
 		amenity.setName(QuickSearchListItem.getName(app, searchResult));
 		amenity.setType(app.getPoiTypes().getOtherPoiCategory());
 		amenity.setSubType("");
-		amenity.setAdditionalInfo(Amenity.GPX_ICON, getSpatialSearchMapIconName(searchResult));
+		String iconName = QuickSearchListItem.getAddressIconName(searchResult);
+		if (iconName != null) {
+			amenity.setAdditionalInfo(Amenity.GPX_ICON, iconName);
+		}
 		return amenity;
-	}
-
-	@NonNull
-	private String getSpatialSearchMapIconName(@NonNull SearchResult searchResult) {
-		return searchResult.objectType == ObjectType.HOUSE
-				? "ic_action_building"
-				: "ic_action_street_name";
 	}
 
 	private void clearSpatialSearchMapObjects() {
@@ -872,6 +866,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		paused = false;
 		cancelPrev = false;
 		hidden = false;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateBackPressedCallbackState();
+		}
 		refreshSearchContentAfterShow();
 		addressSearchStack.clear();
 		if (interruptedSearch) {
@@ -890,6 +888,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void hide() {
 		paused = true;
 		hidden = true;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateBackPressedCallbackState();
+		}
 		expired = searchType != QuickSearchType.REGULAR;
 		hideTimeMs = System.currentTimeMillis();
 		interruptedSearch = searching;
@@ -988,7 +990,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					}
 				} else if (word.getLocation() != null) {
 					SearchResult searchResult = word.getResult();
-					Object object = searchResult.object;
+					Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(app, searchResult);
+					Object object = pair.second;
 
 					if (word.getType() == ObjectType.CITY || word.getType() == ObjectType.VILLAGE) {
 						Amenity amenity = app.getSearchUICore().findAmenity(searchResult.localeName,
@@ -998,10 +1001,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						}
 					}
 
-					String name = QuickSearchListItem.getName(app, searchResult);
-					String typeName = QuickSearchListItem.getTypeName(app, searchResult);
-					PointDescription pointDescription = new PointDescription(
-							PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+					PointDescription pointDescription = pair.first;
+					if (pointDescription == null) {
+						String name = QuickSearchListItem.getName(app, searchResult);
+						String typeName = QuickSearchListItem.getTypeName(app, searchResult);
+						pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+					}
 					Object historyObject = SearchHistoryHelper.createHistoryObject(object, searchResult);
 					settings.setMapLocationToShow(
 							searchResult.location.getLatitude(), searchResult.location.getLongitude(),
@@ -1812,6 +1817,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			hidden = false;
+			mapActivity.updateBackPressedCallbackState();
 			hideToolbar();
 			mapActivity.updateStatusBarColor();
 			mapActivity.refreshMap();
@@ -2846,7 +2853,6 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		updateTopFilterChips();
 		if (!PluginsHelper.onSearchFinished(this, phrase, isResultEmpty())) {
 			addMoreButton(isSearchMoreAvailable(phrase));
-			addSpatialSearchOnWebButton();
 		}
 	}
 
@@ -2890,88 +2896,6 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 	}
 
-	private void addSpatialSearchOnWebButton() {
-		if (!isSpatialSearch() || paused || cancelPrev || mainSearchFragment == null || isTextEmpty()) {
-			return;
-		}
-		QuickSearchSearchOnWebListItem searchOnWebItem = new QuickSearchSearchOnWebListItem(app,
-				app.getString(R.string.search_on_web), v -> openSpatialSearchOnWeb());
-		mainSearchFragment.addListItem(searchOnWebItem);
-	}
-
-	private void openSpatialSearchOnWeb() {
-		MapActivity mapActivity = getMapActivity();
-		SearchPhrase phrase = getSpatialSearchPhrase();
-		LatLon requestLocation = phrase != null ? phrase.getSettings().getOriginalLocation() : null;
-		if (mapActivity != null && phrase != null && requestLocation != null) {
-			Intent intent = new Intent(Intent.ACTION_VIEW, buildSpatialSearchWebUri(phrase, requestLocation));
-			AndroidUtils.startActivityIfSafe(mapActivity, intent);
-		}
-	}
-
-	@Nullable
-	private SearchPhrase getSpatialSearchPhrase() {
-		SearchResultCollection collection = unfilteredResultCollection != null ? unfilteredResultCollection : getResultCollection();
-		return collection != null ? collection.getPhrase() : searchUICore.getPhrase();
-	}
-
-	private Uri buildSpatialSearchWebUri(@NonNull SearchPhrase phrase, @NonNull LatLon requestLocation) {
-		String fragmentToEncode = String.format(Locale.US, "%1$.6f/%2$.6f",
-				requestLocation.getLatitude(), requestLocation.getLongitude());
-		Uri.Builder builder = new Uri.Builder()
-				.scheme("https")
-				.authority("test.osmand.net")
-				.path("map/search/result")
-				.appendQueryParameter("engine", "spatial")
-				.appendQueryParameter("query", phrase.getFullSearchPhrase());
-		String maps = getSpatialSearchWebMaps(phrase);
-		if (!Algorithms.isEmpty(maps)) {
-			builder.appendQueryParameter("maps", maps);
-		}
-		return builder.encodedFragment(fragmentToEncode).build();
-	}
-
-	private String getSpatialSearchWebMaps(@NonNull SearchPhrase phrase) {
-		SpatialTextSearchAPI api = searchUICore.getApiByClass(SpatialTextSearchAPI.class);
-		if (api == null) {
-			return "";
-		}
-		List<String> selected = new ArrayList<>();
-		for (BinaryMapIndexReader reader : api.getSpatialSearchFiles(phrase)) {
-			String downloadName = getSearchMapDownloadName(reader);
-			if (!Algorithms.isEmpty(downloadName) && !selected.contains(downloadName)) {
-				selected.add(downloadName);
-			}
-		}
-		return RegionCodeUtils.encode(selected, getAllMapDownloadNames());
-	}
-
-	@Nullable
-	private String getSearchMapDownloadName(@Nullable BinaryMapIndexReader reader) {
-		File file = reader != null ? reader.getFile() : null;
-		if (file == null) {
-			return null;
-		}
-		String downloadName = WorldRegion.getRegionDownloadName(file.getName());
-		WorldRegion region = app.getRegions().getRegionDataByDownloadName(downloadName);
-		return region != null && region.isRegionMapDownload() ? region.getRegionDownloadName() : null;
-	}
-
-	private List<String> getAllMapDownloadNames() {
-		List<String> downloadNames = new ArrayList<>();
-		for (WorldRegion region : app.getRegions().getAllRegionData()) {
-			String downloadName = region.getRegionDownloadName();
-			if (region.isRegionMapDownload() && !Algorithms.isEmpty(downloadName)) {
-				downloadNames.add(downloadName);
-			}
-		}
-		return downloadNames;
-	}
-
-	private boolean isSpatialSearch() {
-		return searchUICore != null && searchUICore.isSpatialSearch();
-	}
-
 	public void increaseSearchRadius() {
 		if (showMoreSpatialSearchResults()) {
 			return;
@@ -2994,7 +2918,6 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				: getFilteredResultCollection(collection);
 		renderSearchResult(visibleResults, false);
 		addMoreButton(isSearchMoreAvailable(collection.getPhrase()));
-		addSpatialSearchOnWebButton();
 		return true;
 	}
 

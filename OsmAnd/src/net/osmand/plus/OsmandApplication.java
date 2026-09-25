@@ -63,6 +63,7 @@ import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
+import net.osmand.plus.feedback.MemoryLog;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.gallery.GalleryHelper;
@@ -345,6 +346,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private synchronized void startDiagnostics() {
 		OsmAndDiagnosticThread diagnosticThread = this.diagnosticThread;
 		if (diagnosticThread == null || !diagnosticThread.isAlive()) {
+			MemoryLog.watchActivities(this);
 			diagnosticThread = new OsmAndDiagnosticThread(this);
 			diagnosticThread.start();
 			this.diagnosticThread = diagnosticThread;
@@ -573,6 +575,12 @@ public class OsmandApplication extends MultiDexApplication {
 	public void onLowMemory() {
 		super.onLowMemory();
 		resourceManager.onLowMemory();
+	}
+
+	@Override
+	public void onTrimMemory(int level) {
+		super.onTrimMemory(level);
+		MemoryLog.onTrimMemory(level);
 	}
 
 	@Override
@@ -1174,8 +1182,16 @@ public class OsmandApplication extends MultiDexApplication {
 					LOG.info(">>>> Failed APP startForegroundService = " + usageIntent + " {no location permission}");
 					return;
 				}
+				if (!isAppInForeground()) {
+					// A foreground service started from the background is denied the while-in-use
+					// location capability, so startForeground(.., TYPE_LOCATION) throws and the
+					// platform may kill the process for missing its startForegroundService()
+					// deadline. See #25861.
+					LOG.info(">>>> Failed APP startForegroundService = " + usageIntent + " {app in background}");
+					return;
+				}
 				try {
-					LOG.info(">>>> APP startForegroundService = " + usageIntent + " {foreground " + isAppInForeground() + "}");
+					LOG.info(">>>> APP startForegroundService = " + usageIntent);
 					context.startForegroundService(intent);
 				} catch (Exception e) {
 					// e.g. ForegroundServiceStartNotAllowedException (Android 12+) when the service

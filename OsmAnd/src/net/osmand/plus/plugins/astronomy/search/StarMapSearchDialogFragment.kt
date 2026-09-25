@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.TypedValue
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.ListPopupWindow
+import android.widget.PopupWindow
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -144,8 +143,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private lateinit var catalogsViewAllRow: View
 	private lateinit var catalogsViewAllCount: TextView
 
-	private var sortPopup: ListPopupWindow? = null
-	private var filterPopup: ListPopupWindow? = null
+	private var sortPopup: PopupWindow? = null
+	private var filterPopup: PopupWindow? = null
 	private var filterAndSortJob: Job? = null
 	private var filterAndSortRequestId = 0
 
@@ -1624,7 +1623,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			createPopupDisplayData(
 				anchor = anchor,
 				items = items,
-				alignEnd = false,
 				limitHeight = false,
 				layoutId = R.layout.popup_star_search_sort_menu_item
 			)
@@ -1744,17 +1742,15 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				}
 			)
 		}
-		filterPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items, alignEnd = true, limitHeight = true))
+		filterPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items, limitHeight = true))
 	}
 
 	private fun createPopupDisplayData(
 		anchor: View,
 		items: List<PopUpMenuItem>,
-		alignEnd: Boolean,
 		limitHeight: Boolean,
 		layoutId: Int = R.layout.popup_star_search_menu_item
 	): PopUpMenuDisplayData {
-		val contentPaddingHalf = resources.getDimensionPixelSize(R.dimen.content_padding_half)
 		return PopUpMenuDisplayData().apply {
 			anchorView = anchor
 			this.layoutId = layoutId
@@ -1762,9 +1758,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			widthMode = PopUpMenuWidthMode.STANDARD
 			showCompound = true
 			this.limitHeight = limitHeight
-			dropDownGravity = if (alignEnd) Gravity.END or Gravity.BOTTOM else Gravity.START or Gravity.BOTTOM
-			horizontalOffset = if (alignEnd) -contentPaddingHalf else contentPaddingHalf
-			verticalOffset = -anchor.height + contentPaddingHalf
 			menuItems = items
 		}
 	}

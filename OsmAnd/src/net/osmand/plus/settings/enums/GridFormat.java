@@ -7,7 +7,7 @@ import net.osmand.LocationConvert;
 import net.osmand.core.jni.GridConfiguration.Format;
 import net.osmand.core.jni.GridConfiguration.Projection;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds;
 import net.osmand.util.CollectionUtils;
 
 public enum GridFormat implements EnumWithTitleId {

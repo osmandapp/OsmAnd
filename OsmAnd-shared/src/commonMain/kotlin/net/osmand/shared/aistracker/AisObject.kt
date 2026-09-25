@@ -80,7 +80,8 @@ class AisObject {
     var cpa: AisCpa = AisCpa()
         private set
     var lastUpdate: Long = 0
-        private set
+        // internal so a test can age an object; outside the module it stays read only
+        internal set
 
     constructor(mmsi: Int, msgType: Int, lat: Double, lon: Double) {
         initObj(mmsi, msgType)

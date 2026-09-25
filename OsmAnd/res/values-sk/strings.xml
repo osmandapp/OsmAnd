@@ -1321,7 +1321,6 @@
     <string name="report">Prehľad</string>
     <string name="storage_permission_restart_is_required">Aplikácia teraz má povolenie zapisovať do externého úložiska, ale je potrebný reštart aplikácie.</string>
     <string name="full_report">Podrobný prehľad</string>
-    <string name="file_name_containes_illegal_char">Nepovolený znak v názve súboru</string>
     <string name="rendering_value_thin_name">Tenké</string>
     <string name="rendering_value_medium_name">Stredné</string>
     <string name="rendering_value_bold_name">Tučné</string>
@@ -2392,7 +2391,7 @@
     <string name="live_monitoring_time_buffer">Časový zásobník</string>
     <string name="live_monitoring_tracking_interval">Interval stopovania</string>
     <string name="live_monitoring_adress">Webová adresa</string>
-    <string name="monitoring_notification">Oznámenie</string>
+    <string name="monitoring_notification">Zobraziť tlačidlo \"Nahrať\" v oznámeniach</string>
     <string name="monitoring_min_speed">Minimálna rýchlosť</string>
     <string name="monitoring_min_accuracy">Minimálna presnosť</string>
     <string name="monitoring_min_distance">Minimálny posun</string>
@@ -4332,7 +4331,7 @@
     <string name="map_text">Vykresľovanie mapy</string>
     <string name="routing_attr_avoid_cobblestone_name">Vyhnúť sa okrúhlym kameňom</string>
     <string name="routing_attr_avoid_cobblestone_description">Vyhnúť sa okrúhlym kameňom</string>
-    <string name="steps_per_minute_unit">k/m</string>
+    <string name="steps_per_minute_unit">kr/min</string>
     <string name="disable_map_layers">Vypnúť mapové vrstvy</string>
     <string name="disable_map_layers_descr">Vypnúť všetky vrstvy mapy nad vektorovou mapou (vyžaduje reštart).</string>
     <string name="height_legend_description">Farebné výškové mapy sa používajú na vizualizáciu terénu.</string>
@@ -4671,7 +4670,7 @@
     <string name="ais_object_lost_timeout">Časový limit pre viditeľnosť ak je loď stratená</string>
     <string name="ais_object_lost_timeout_description">Nastavte časový limit pre viditeľnosť objektov AIS: Ak nebude do tejto doby obdržaný žiadny signál, bude objekt odstránený z obrazovky.</string>
     <string name="ais_cpa_warning_time">Výstražná doba pred dosiahnutím najbližšieho bodu priblíženia (CPA)</string>
-    <string name="plugin_ais_tracker_name">Sledovanie plavidiel AIS</string>
+    <string name="plugin_ais_tracker_name">Sledovanie plavidiel (AIS)</string>
     <string name="original_color_description">Každý bod si zachová vlastnú farbu.</string>
     <string name="ais_nmea_protocol">Protokol pre prijímanie údajov NMEA</string>
     <string name="ais_cpa_settings">Nastavenia týkajúce sa CPA</string>
@@ -4706,7 +4705,7 @@
     <string name="choose_location_on_map">Zvoľte polohu na mape.</string>
     <string name="show_image_previews">Zobraziť náhľady obrázkov</string>
     <string name="shared_string_manual">Ručne</string>
-    <string name="ais_load_data">Načítať údaje AIS zo súboru</string>
+    <string name="ais_load_data">Simulovať premávku lodí</string>
     <string name="ais_address_settings_description">Zvoľte protokol NMEA (UDP/TCP) a nastavte príslušné adresy a porty</string>
     <string name="ais_cpa_warning_time_description">Ak TCPA (čas k bodu najbližšieho priblíženia) s iným plavidlom klesne pod definovanú hranicu, bude plavidlo označené červenou farbou.</string>
     <string name="ais_port_nmea_server">Port TCP zdroja údajov NMEA</string>
@@ -5157,7 +5156,7 @@
     <string name="obd_simulation_device">Simulačné zariadenie</string>
     <string name="favorite_confirm_delete_folder">Toto vymaže priečinok \"%1$s\", vrátane vnorených priečinkov a %2$d obľúbených bodov.</string>
     <string name="favorite_folder_rename_conflict">Priečinok s týmto názvom už existuje.</string>
-    <string name="favorite_folder_invalid_name">Názov priečinka nesmie obsahovať / alebo _%_</string>
+    <string name="favorite_folder_invalid_name">Názov priečinka nesmie obsahovať / alebo %1$s</string>
     <string name="favorite_folder_duplicate_message">Použite názov priečinka, ktorý ešte neexistuje.</string>
     <string name="favorite_folder_name">Názov priečinka</string>
     <string name="edit_folder">Upraviť priečinok</string>
@@ -5338,4 +5337,16 @@
     <string name="release_5_4">• Vynovené rozhranie pre vyhľadávanie: triedenie, filtre kategórií, prehľadnejší vzhľad\n\n • Pripájanie fotografií a médií k obľúbeným bodom\n\n • Obľúbené: podskupiny a pripnuteľné priečinky\n\n • Súradnice: vyhľadávanie, mapová mriežka a zobrazenie bodov záujmu podporujú aj lokátory EPSG a Maidenhead\n\n • Opravené výpadky navigácie; prepínanie medzi štandardným a rýchlym výpočtom trasy\n\n • Nastavenie mierky mapy pre Android Auto nezávisle od nastavenia pre telefón\n\n • Nové priestorové vyhľadávanie — nájdite miesta a hľadajte okolo miesta\n\n • Modul Astronómia pridal zatmenia Slnka a Mesiaca</string>
     <string name="astro_lunar_eclipse_calculating_state">Výpočet viditeľnosti v strede mapy…</string>
     <string name="astro_lunar_eclipse_visibility_loading">Výpočet viditeľnosti…</string>
+    <string name="astro_eclipse_column_below_horizon">Pod horizontom</string>
+    <string name="quick_action_add_track">Pridať stopu</string>
+    <string name="quick_action_tracks_select_descr">Pridať jednu alebo viac stôp, ktoré budú zobrazené alebo skryté na mape jedným stlačením.</string>
+    <string name="quick_action_tracks_always_ask_descr">Stlačenie tejto akcie otvorí zoznam stôp, z ktorých jednu alebo viaceré môžete zobraziť alebo skryť.</string>
+    <string name="quick_action_all_tracks">Všetky stopy</string>
+    <string name="crash_report_sent">Hlásenie odoslané. Ďakujeme!</string>
+    <string name="crash_report_send_failed">Nepodarilo sa odoslať hlásenie. Skúste znova neskôr.</string>
+    <string name="battery_saving_mode_descr">Obmedzí vykresľovanie mapy na 20 snímok za sekundu pre zníženie spotreby batérie a prehrievania zariadenia. Pohyb mapy bude menej plynulý.</string>
+    <string name="file_name_containes_illegal_char">Názov nesmie obsahovať: %1$s</string>
+    <string name="ais_connection_not_set_up">Nenastavené</string>
+    <string name="ais_connection_not_connected">Nepripojené</string>
+    <string name="ais_connection_connecting">Pripája sa…</string>
 </resources>

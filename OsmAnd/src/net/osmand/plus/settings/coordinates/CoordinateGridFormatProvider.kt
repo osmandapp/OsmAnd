@@ -8,6 +8,9 @@ import net.osmand.core.jni.GridConfiguration.Projection
 import net.osmand.core.jni.PointD
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.settings.enums.GridFormat
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds
+import net.osmand.shared.settings.coordinates.EpsgCatalogRepository
+import net.osmand.shared.settings.coordinates.EpsgGridDefinition
 import org.apache.commons.logging.Log
 import java.util.concurrent.ConcurrentHashMap
 

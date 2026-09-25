@@ -46,14 +46,15 @@ import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class OsmAndFormatter {
@@ -119,6 +120,18 @@ public class OsmAndFormatter {
 		Locale preferredLocale = localeHelper.getPreferredLocale();
 		return preferredLocale != null ? preferredLocale : localeHelper.getDefaultLocale();
 	}
+
+	/**
+	 * Creating a {@link DecimalFormat} resolves the locale through ICU ({@link DecimalFormatSymbols}
+	 * looks up the currency, which builds a {@code LocaleIDParser}), which is far too expensive for
+	 * code that runs for every visible list row on every compass update: the allocation churn showed
+	 * up as an ANR inside {@code art::gc::Heap::WaitForGcToComplete} during {@code ListView} layout.
+	 *
+	 * <p>The key covers everything that configures the instance, so a cached formatter is never
+	 * reconfigured after creation. {@link DecimalFormat} is mutable and not thread safe, hence one
+	 * cache per thread.
+	 */
+	private static final ThreadLocal<Map<String, DecimalFormat>> DECIMAL_FORMATS = new ThreadLocal<>();
 
 	@NonNull
 	private static DecimalFormat createDecimalFormat(@NonNull String pattern, int minFractionDigits,
@@ -803,22 +816,28 @@ public class OsmAndFormatter {
 		Locale preferredLocale = app.getLocaleHelper().getPreferredLocale();
 		Locale locale = preferredLocale != null ? preferredLocale : Locale.getDefault();
 
-		DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols(locale);
-		decimalFormatSymbols.setGroupingSeparator(' ');
+		boolean groupThousands = Math.abs(value) >= 10_000;
+		Map<String, DecimalFormat> formats = DECIMAL_FORMATS.get();
+		if (formats == null) {
+			formats = new HashMap<>();
+			DECIMAL_FORMATS.set(formats);
+		}
+		String key = pattern + groupThousands + locale;
+		DecimalFormat decimalFormat = formats.get(key);
+		if (decimalFormat == null) {
+			DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+			symbols.setGroupingSeparator(' ');
 
-		DecimalFormat decimalFormat = new DecimalFormat(pattern);
-		decimalFormat.setDecimalFormatSymbols(decimalFormatSymbols);
-
-		boolean fiveOrMoreDigits = Math.abs(value) >= 10_000;
-		if (fiveOrMoreDigits) {
-			decimalFormat.setGroupingUsed(true);
-			decimalFormat.setGroupingSize(3);
+			decimalFormat = new DecimalFormat(pattern);
+			decimalFormat.setDecimalFormatSymbols(symbols);
+			if (groupThousands) {
+				decimalFormat.setGroupingUsed(true);
+				decimalFormat.setGroupingSize(3);
+			}
+			formats.put(key, decimalFormat);
 		}
 
-		MessageFormat messageFormat = new MessageFormat("{0}");
-		messageFormat.setFormatByArgumentIndex(0, decimalFormat);
-		String formattedValue = messageFormat.format(new Object[] {value})
-				.replace('\n', ' ');
+		String formattedValue = decimalFormat.format(value).replace('\n', ' ');
 		return new FormattedValue(value, formattedValue, unit, unitId, true);
 	}
 

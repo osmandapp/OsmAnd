@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks.controller;
 
 import static net.osmand.plus.base.dialog.data.DialogExtra.BACKGROUND_COLOR;
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_PATH_NAME_CHARACTERS;
+import static net.osmand.plus.utils.FileUtils.ILLEGAL_PATH_NAME_CHARS;
 
 import android.content.Context;
 import android.widget.EditText;
@@ -145,7 +146,7 @@ public class TrackFolderOptionsController extends BaseDialogController
 					if (Algorithms.isBlank(newName)) {
 						app.showToastMessage(R.string.empty_filename);
 					} else if (ILLEGAL_PATH_NAME_CHARACTERS.matcher(newName).find()) {
-						app.showToastMessage(R.string.file_name_containes_illegal_char);
+						app.showToastMessage(R.string.file_name_containes_illegal_char, ILLEGAL_PATH_NAME_CHARS);
 					} else {
 						KFile parent = trackFolder.getDirFile().getParentFile();
 						if (parent != null) {

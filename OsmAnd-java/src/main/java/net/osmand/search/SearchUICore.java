@@ -163,7 +163,10 @@ public class SearchUICore {
 			if (Algorithms.isEmpty(sr)) {
 				return this;
 			}
-			if (resortAll) {
+			if (skipSorting) {
+				// spatial search results come sorted and deduplicated by the engine
+				this.searchResults.addAll(sr);
+			} else if (resortAll) {
 				this.searchResults.addAll(sr);
 				if (removeDuplicates) {
 					long start = System.currentTimeMillis(), size = this.searchResults.size();
@@ -637,19 +640,107 @@ public class SearchUICore {
 	}
 
 	public void init() {
+		init(false);
+	}
+
+	public void init(boolean useSpatialSearch) {
 		SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
-		apis.add(amenitiesApi);
+		if (!useSpatialSearch) {
+			apis.add(amenitiesApi); // classic
+		}
 		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi, internetConnectionAvailable));
-		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
+		SearchAmenityTypesAPI searchAmenityTypesAPI = useSpatialSearch
+				? new SpatialAmenityTypesAPI(poiTypes)
+				: new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
-		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
-		SearchBuildingAndIntersectionsByStreetAPI streetsApi = new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
+		apis.add(useSpatialSearch
+				? new SpatialCategoryAmenityByTypeAPI(poiTypes)
+				: new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
+		SearchBuildingAndIntersectionsByStreetAPI streetsApi = useSpatialSearch
+				? new SpatialBuildingAndIntersectionsByStreetAPI()
+				: new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
 		apis.add(streetsApi);
-		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
+		SearchStreetByCityAPI cityApi = useSpatialSearch
+				? new SpatialStreetByCityAPI(streetsApi)
+				: new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
 		apis.add(cityApi);
-		SearchCoreFactory.TownCitiesCache townCitiesCache = new SearchCoreFactory.TownCitiesCache();
-		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache));
-		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache));
+		if (useSpatialSearch) {
+			apis.add(new SpatialNearestCitySearchAPI(streetsApi, cityApi));
+			apis.add(new SpatialTextSearchAPI(poiTypes));
+		} else {
+			SearchCoreFactory.TownCitiesCache townCitiesCache = new SearchCoreFactory.TownCitiesCache();
+			apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache));
+			apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache));
+		}
+	}
+
+	private static class SpatialNearestCitySearchAPI extends SearchAddressByNameAPI {
+
+		public SpatialNearestCitySearchAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi,
+		                                   SearchStreetByCityAPI cityApi) {
+			super(streetsApi, cityApi, false, new SearchCoreFactory.TownCitiesCache());
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase phrase) {
+			return phrase.isEmpty() && phrase.isEmptyQueryAllowed() ? super.getSearchPriority(phrase) : -1;
+		}
+	}
+
+	private static class SpatialStreetByCityAPI extends SearchStreetByCityAPI {
+
+		public SpatialStreetByCityAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi) {
+			super(streetsApi);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase phrase) {
+			return phrase.isUnknownSearchWordPresent() ? -1 : super.getSearchPriority(phrase);
+		}
+	}
+
+	private static class SpatialBuildingAndIntersectionsByStreetAPI
+			extends SearchBuildingAndIntersectionsByStreetAPI {
+
+		@Override
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			SearchResult selectedResult = phrase.getLastSelectedWord().getResult();
+			if (selectedResult.file == null && selectedResult.object instanceof Street street
+					&& street.getBuildings().isEmpty() && street.getIntersectedStreets().isEmpty()) {
+				return true;
+			}
+			return super.search(phrase, resultMatcher);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase phrase) {
+			return phrase.isLastWord(ObjectType.STREET) ? super.getSearchPriority(phrase) : -1;
+		}
+	}
+
+	// poi categories come from the spatial engine; used only by shallowSearch (categories list)
+	private static class SpatialAmenityTypesAPI extends SearchAmenityTypesAPI {
+
+		public SpatialAmenityTypesAPI(MapPoiTypes types) {
+			super(types);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase phrase) {
+			return -1;
+		}
+	}
+
+	private static class SpatialCategoryAmenityByTypeAPI extends SearchAmenityByTypeAPI {
+
+		public SpatialCategoryAmenityByTypeAPI(MapPoiTypes types) {
+			super(types, null);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase phrase) {
+			return phrase.isLastWord(ObjectType.POI_TYPE) ? super.getSearchPriority(phrase) : -1;
+		}
 	}
 
 	public void clearAPIs() {

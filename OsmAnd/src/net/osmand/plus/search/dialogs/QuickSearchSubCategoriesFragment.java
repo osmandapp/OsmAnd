@@ -2,7 +2,6 @@ package net.osmand.plus.search.dialogs;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -179,19 +178,13 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		getDialog().setOnKeyListener((dialog, keyCode, event) -> {
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if (event.getAction() == KeyEvent.ACTION_DOWN) {
-					return true;
-				} else {
-					dismissFragment();
-					return true;
-				}
-			}
-			return false;
-		});
+	protected boolean isBackPressedCallbackEnabled() {
+		return true;
+	}
+
+	@Override
+	protected void handleBackPressed() {
+		dismissFragment();
 	}
 
 	private void updateAddBtnVisibility() {

@@ -424,10 +424,12 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		if (widgetInfo == null) {
+			return;
+		}
 		applySettingsAndRecreateControls();
-		Fragment target = getTargetFragment();
-		if (target instanceof WidgetsConfigurationChangeListener) {
-			((WidgetsConfigurationChangeListener) target).onWidgetsConfigurationChanged();
+		if (getTargetFragment() instanceof WidgetsConfigurationChangeListener listener) {
+			listener.onWidgetsConfigurationChanged();
 		}
 	}
 

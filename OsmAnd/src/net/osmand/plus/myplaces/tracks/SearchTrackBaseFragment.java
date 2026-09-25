@@ -127,7 +127,8 @@ public abstract class SearchTrackBaseFragment extends BaseFullScreenDialogFragme
 		return new SearchTracksAdapter(context, trackItems, nightMode, selectionMode, filter);
 	}
 
-	protected abstract void setupFragment(View view);
+	protected void setupFragment(View view) {
+	}
 
 	@Override
 	public void onResume() {

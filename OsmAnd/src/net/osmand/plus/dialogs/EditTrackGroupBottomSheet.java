@@ -1,6 +1,7 @@
 package net.osmand.plus.dialogs;
 
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
+import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARS;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -64,7 +65,7 @@ public abstract class EditTrackGroupBottomSheet extends MenuBottomSheetDialogFra
 		if (Algorithms.isBlank(name)) {
 			nameTextBox.setError(getString(R.string.empty_filename));
 		} else if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).find()) {
-			nameTextBox.setError(getString(R.string.file_name_containes_illegal_char));
+			nameTextBox.setError(getString(R.string.file_name_containes_illegal_char, ILLEGAL_FILE_NAME_CHARS));
 		} else {
 			groupName = name;
 			nameTextBox.setError(null);

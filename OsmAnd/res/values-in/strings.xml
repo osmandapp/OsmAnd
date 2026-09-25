@@ -1244,7 +1244,6 @@
     <string name="quick_action_new_action">Tambahkan tindakan</string>
     <string name="quick_action_navigation_voice_on">Bisukan Suara</string>
     <string name="quick_action_map_style_switch">Gaya peta diubah menjadi \"%s\".</string>
-    <string name="file_name_containes_illegal_char">Karakter ilegal pada nama berkas</string>
     <string name="reports_for">Laporan untuk</string>
     <string name="number_of_edits">Jumlah suntingan</string>
     <string name="number_of_contributors">Jumlah kontributor</string>
@@ -2030,7 +2029,7 @@
     <string name="move_point">Pindahkan Titik</string>
     <string name="osm_recipients_label">Penerima OSM</string>
     <string name="total_donations">Donasi total</string>
-    <string name="day_off_label">mati</string>
+    <string name="day_off_label">tutup</string>
     <string name="winter_and_ski_renderer">Musim dingin dan ski</string>
     <string name="pro_features">Fitur pro</string>
     <string name="edit_filter_delete_message">Saringan \'%1$s\' dihapus</string>
@@ -5506,7 +5505,7 @@
     <string name="coordinate_format_primary">Utama</string>
     <string name="favorite_confirm_delete_folder">Tindakan ini akan menghapus folder \"%1$s\", termasuk folder di dalamnya dan %2$d titik favorit.</string>
     <string name="favorite_folder_rename_conflict">Folder dengan nama ini sudah ada.</string>
-    <string name="favorite_folder_invalid_name">Nama folder tidak boleh mengandung / atau _%_</string>
+    <string name="favorite_folder_invalid_name">Nama folder tidak boleh mengandung / atau %1$s</string>
     <string name="favorite_folder_duplicate_message">Gunakan nama folder yang belum ada.</string>
     <string name="favorite_folder_name">Nama folder</string>
     <string name="edit_folder">Edit folder</string>
@@ -5740,6 +5739,7 @@
     <string name="share_favorites_preparation_failed">Tidak dapat menyiapkan file untuk dibagikan.</string>
     <string name="share_favorites_share_failed">Tidak dapat membagikan file.</string>
     <string name="share_favorites_missing_media_warning">Beberapa media terlampir tidak dapat disertakan.</string>
-    <string name="search_on_web">Cari di web</string>
     <string name="release_5_4">• Pencarian spasial baru — temukan tempat dan cari di sekitar suatu tempat\n\n • UI pencarian yang diperbarui: pengurutan, filter kategori, tampilan lebih bersih\n\n • Lampirkan foto dan media ke Favorit\n\n • Favorit: dukungan subgrup dan folder yang dapat disematkan\n\n • Koordinat: pencarian, grid peta, dan tampilan POI kini mendukung EPSG dan locator Maidenhead\n\n • Diperbaiki gangguan navigasi; beralih antara rute Standar dan Cepat\n\n • Atur skala peta Android Auto secara terpisah dari ponsel Anda\n\n • Astronomi menambahkan gerhana matahari &amp; bulan</string>
+    <string name="astro_eclipse_column_below_horizon">Di bawah cakrawala</string>
+    <string name="quick_action_add_track">Tambahkan trek</string>
 </resources>

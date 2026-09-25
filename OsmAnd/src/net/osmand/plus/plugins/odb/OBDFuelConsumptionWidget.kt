@@ -44,6 +44,11 @@ class OBDFuelConsumptionWidget : OBDTextWidget {
 	companion object {
 		private const val OBD_FUEL_CONSUMPTION_MODE = "obd_fuel_consumption_mode"
 	}
+	
+	init {
+		val typeWidget = getFieldType()
+		widgetComputer = OBDDataComputer.registerWidget(typeWidget, typeWidget.defaultAverageTime)
+	}
 
 	private fun getFieldType(): OBDTypeWidget {
 		return fuelConsumptionMode.get().fieldType
@@ -54,16 +59,16 @@ class OBDFuelConsumptionWidget : OBDTextWidget {
 		val typeWidget = getFieldType()
 
 		if (prefsChanged) {
+			// registerWidget shares one computer per (type, window) between widgets,
+			// so a computer with the fuel-level window is kept when switching modes
 			if (widgetComputer.type != typeWidget
 				&& widgetComputer.averageTimeSeconds != 0
-				&& (widgetComputer.averageTimeSeconds != typeWidget.defaultAverageTime
-						&& (typeWidget != OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR
-						&& typeWidget != OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR
-						&& typeWidget != OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM))
+				&& widgetComputer.averageTimeSeconds != typeWidget.defaultAverageTime
+				&& typeWidget.defaultAverageTime == 0
 			) {
 				OBDDataComputer.removeWidget(widgetComputer)
 			}
-			widgetComputer = OBDDataComputer.registerWidget(typeWidget, getAverageTime(typeWidget))
+			widgetComputer = OBDDataComputer.registerWidget(typeWidget, typeWidget.defaultAverageTime)
 		}
 
 		updateSimpleWidgetInfo(null)
@@ -76,17 +81,6 @@ class OBDFuelConsumptionWidget : OBDTextWidget {
 	private fun nextMode() {
 		fuelConsumptionMode.set(fuelConsumptionMode.get().next())
 		updatePrefs(true)
-	}
-
-	private fun getAverageTime(typeWidget: OBDTypeWidget): Int {
-		var averageTimeSeconds = 0
-		if (typeWidget == OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR ||
-			typeWidget == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR ||
-			typeWidget == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM
-		) {
-			averageTimeSeconds = 5 * 60
-		}
-		return averageTimeSeconds
 	}
 
 	private fun registerFuelConsumptionPref(customId: String?): OsmandPreference<FuelConsumptionMode> {

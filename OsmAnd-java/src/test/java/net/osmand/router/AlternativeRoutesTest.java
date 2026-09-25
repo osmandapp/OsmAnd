@@ -51,8 +51,10 @@ public class AlternativeRoutesTest {
 	private static final double MAX_RETRACED = 100;
 	/** a larger gap between consecutive points means a shortcut was not expanded into roads */
 	private static final double MAX_POINT_GAP = 4000;
-	/** an alternative must offer, and must avoid, at least this much road */
-	private static final double MIN_DISTINCT = 1500;
+	/** an alternative must offer, and must avoid, at least this share of the main route */
+	private static final double MIN_DISTINCT_REL = 0.2;
+	/** ... and never less than this, however short the route is */
+	private static final double MIN_DISTINCT_FLOOR = 300;
 
 	public static class ExpectedVia {
 		String name;
@@ -70,6 +72,10 @@ public class AlternativeRoutesTest {
 		LatLon endPoint;
 		int minAlternatives = 1;
 		int maxAlternatives = Integer.MAX_VALUE;
+		/** the first alternative offered may not cost more than this much over the main route (%) */
+		double maxFirstStretchPercent = Double.MAX_VALUE;
+		/** and no alternative at all may cost more than this much over it (%) */
+		double maxStretchPercent = Double.MAX_VALUE;
 		boolean ignore;
 		/** at least one alternative must pass through each of these */
 		List<ExpectedVia> expectedVia = new ArrayList<>();
@@ -108,6 +114,20 @@ public class AlternativeRoutesTest {
 				found >= te.minAlternatives);
 		Assert.assertTrue("expected at most " + te.maxAlternatives + " alternative(s), found " + found,
 				found <= te.maxAlternatives);
+		if (te.maxFirstStretchPercent != Double.MAX_VALUE && routes.size() > 1) {
+			double stretch = 100 * (routes.get(1).cost / main.cost - 1);
+			Assert.assertTrue("the first alternative offered costs +" + Math.round(stretch)
+					+ "%, more than the +" + Math.round(te.maxFirstStretchPercent) + "% this route has",
+					stretch <= te.maxFirstStretchPercent);
+		}
+		if (te.maxStretchPercent != Double.MAX_VALUE) {
+			for (int i = 1; i < routes.size(); i++) {
+				double stretch = 100 * (routes.get(i).cost / main.cost - 1);
+				Assert.assertTrue("alternative " + i + " costs +" + Math.round(stretch)
+						+ "%, more than the +" + Math.round(te.maxStretchPercent)
+						+ "% this route has to offer", stretch <= te.maxStretchPercent);
+			}
+		}
 		assertSaneAlternatives(routes, main);
 		for (ExpectedVia via : te.expectedVia) {
 			double d = closestAlternative(routes, via);
@@ -124,7 +144,8 @@ public class AlternativeRoutesTest {
 	private void assertSaneAlternatives(List<Route> routes, Route main) {
 		Map<Long, Double> mainRoads = roads(main);
 		double mainLength = length(mainRoads);
-		double maxCost = main.cost * (1 + new HHRoutingConfig().ALT_STRETCH) + 1;
+		HHRoutingConfig limits = new HHRoutingConfig();
+		double maxCost = main.cost * (1 + limits.ALT_STRETCH) + limits.ALT_STRETCH_ABS + 1;
 		for (int i = 1; i < routes.size(); i++) {
 			Route alt = routes.get(i);
 			String id = "alternative " + i;
@@ -133,13 +154,19 @@ public class AlternativeRoutesTest {
 
 			Assert.assertTrue(id + " costs " + Math.round(100 * (alt.cost / main.cost - 1))
 					+ "% more than the main route", alt.cost <= maxCost);
+			double minDistinct = Math.max(MIN_DISTINCT_FLOOR, MIN_DISTINCT_REL * mainLength);
 			Assert.assertTrue(id + " has only " + Math.round(length(altRoads) - shared)
-					+ " m of roads of its own", length(altRoads) - shared >= MIN_DISTINCT);
+					+ " m of roads of its own", length(altRoads) - shared >= minDistinct);
 			Assert.assertTrue(id + " avoids only " + Math.round(mainLength - shared)
 					+ " m of the main route, so it is the main route with a detour",
-					mainLength - shared >= MIN_DISTINCT);
+					mainLength - shared >= minDistinct / 2);
 			Assert.assertTrue(id + " drives " + Math.round(retraced(alt)) + " m of its own roads twice",
 					retraced(alt) <= MAX_RETRACED);
+			// a U-turn through the two carriageways of a dual road is not retracing - the two sides
+			// are different roads - so the loop is measured against the best way between its ends
+			Assert.assertTrue(id + " drives " + Math.round(alt.loopLength) + " m to come back to a"
+					+ " place it has already been, where " + Math.round(alt.loopOptimal) + " m is enough",
+					alt.loopLength <= 2 * alt.loopOptimal + MIN_DISTINCT_FLOOR);
 			Assert.assertTrue(id + " has a " + Math.round(maxGap(alt))
 					+ " m gap, a shortcut was not expanded into roads", maxGap(alt) <= MAX_POINT_GAP);
 			Assert.assertEquals(id + " does not start where the main route starts", 0,
@@ -194,16 +221,64 @@ public class AlternativeRoutesTest {
 			for (List<RouteSegmentResult> alt : res.getAlternatives()) {
 				routes.add(toRoute(alt));
 			}
+			for (Route r : routes) {
+				measureLoop(r, router, readers);
+			}
 			return routes;
 		} finally {
 			raf.close();
 		}
 	}
 
+	/** finds the worst place the route returns to, and how long the way between those two points is */
+	private void measureLoop(Route r, RoutePlannerFrontEnd router, BinaryMapIndexReader[] readers)
+			throws Exception {
+		double[] cum = new double[r.points.size()];
+		for (int i = 1; i < r.points.size(); i++) {
+			cum[i] = cum[i - 1] + distance(r.points.get(i - 1), r.points.get(i));
+		}
+		int bi = -1, bj = -1;
+		for (int i = 0; i < r.points.size(); i++) {
+			for (int j = i + 2; j < r.points.size(); j++) {
+				if (cum[j] - cum[i] < MIN_DISTINCT_FLOOR || cum[j] - cum[i] <= r.loopLength) {
+					continue;
+				}
+				if (distance(r.points.get(i), r.points.get(j)) < LOOP_RADIUS) {
+					r.loopLength = cum[j] - cum[i];
+					bi = i;
+					bj = j;
+				}
+			}
+		}
+		if (bi < 0) {
+			return;
+		}
+		RoutingConfiguration config = RoutingConfiguration.getDefault().build(te.vehicle,
+				new RoutingMemoryLimits(RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3,
+						RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT),
+				new LinkedHashMap<String, String>());
+		RoutingContext ctx = router.buildRoutingContext(config, null, readers, RouteCalculationMode.NORMAL);
+		ctx.calculationProgress = new RouteCalculationProgress();
+		RouteCalcResult best = router.searchRoute(ctx, point(r.points.get(bi)), point(r.points.get(bj)),
+				new ArrayList<LatLon>());
+		r.loopOptimal = best.getError() != null ? r.loopLength : length(roads(toRoute(best.getList())));
+	}
+
+	private static LatLon point(int[] p) {
+		return new LatLon(MapUtils.get31LatitudeY(p[1]), MapUtils.get31LongitudeX(p[0]));
+	}
+
 	private static class Route {
 		final List<int[]> points = new ArrayList<>(); // x31, y31
 		double cost;
+		/** the longest stretch after which the route is back within LOOP_RADIUS of itself */
+		double loopLength;
+		/** and the length of the best way between the two ends of that stretch */
+		double loopOptimal;
 	}
+
+	/** two points of a route closer than this are the same place */
+	private static final double LOOP_RADIUS = 60;
 
 	private static Route toRoute(List<RouteSegmentResult> segments) {
 		Route r = new Route();

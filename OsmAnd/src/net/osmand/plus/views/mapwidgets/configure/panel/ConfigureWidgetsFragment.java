@@ -583,6 +583,9 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 	@Override
 	public void onWidgetsConfigurationChanged() {
+		if (!isAdded()) {
+			return;
+		}
 		WidgetsListFragment fragment = getSelectedFragment();
 		if (fragment != null && !isEditMode) {
 			fragment.reloadWidgets();

@@ -1776,7 +1776,6 @@
     <string name="number_of_contributors">Ներդրողների թիվը</string>
     <string name="number_of_edits">Խմբագրումների քանակը</string>
     <string name="reports_for">Հաշվետվություն</string>
-    <string name="file_name_containes_illegal_char">Ֆայլի անունը պարունակում է անթույլատրելի խորհրդանիշ</string>
     <string name="configure_screen_quick_action">Արագ գործողություն</string>
     <string name="quick_action_item_action">Գործողություն %d</string>
     <string name="quick_action_item_screen">Էկրան %d</string>
@@ -1910,7 +1909,7 @@
     <string name="show_closed_notes">Ցույց տալ փակած նշումները</string>
     <string name="switch_osm_notes_visibility_desc">Ցույց տալ/թաքցնել OSM նշումները քարտեզի վրա:</string>
     <string name="lang_lo">Լաոտեան</string>
-    <string name="day_off_label">Ոչ աշխ․ օր</string>
+    <string name="day_off_label">Ոչ աշխատանքային օր</string>
     <string name="winter_and_ski_renderer">Ձմեռային և լեռնադահուկային</string>
     <string name="touring_view_renderer">Զբոսաշրջական տեսք</string>
     <string name="nautical_renderer">Ծովային</string>

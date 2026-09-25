@@ -149,7 +149,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	//OpenGL
 	private int markersCount;
+	private int markersVersion;
 	private VectorLinesCollection vectorLinesCollection;
+	private VectorLinesCollection clearedVectorLinesCollection;
 	private List<VectorLinePair> lines;
 	private MapMarkersCollection distanceMarkersCollection;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
@@ -332,7 +334,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		List<MapMarker> activeMapMarkers = (customObjectsDelegate != null) ? customObjectsDelegate.getMapObjects() : markersHelper.getMapMarkers();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			if (markersCount != activeMapMarkers.size() || mapActivityInvalidated) {
+			int markersVersion = markersHelper.getMarkersVersion();
+			if (markersCount != activeMapMarkers.size() || this.markersVersion != markersVersion || mapActivityInvalidated) {
 				clearMapMarkersCollections();
 				clearVectorLinesCollections();
 				cachedPaths.clear();
@@ -340,6 +343,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 			initMarkersCollection();
 			markersCount = activeMapMarkers.size();
+			this.markersVersion = markersVersion;
 			mapActivityInvalidated = false;
 		}
 
@@ -976,6 +980,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 
+		clearedVectorLinesCollection = null;
 		mapRenderer.addSymbolsProvider(vectorLinesCollection);
 		mapRenderer.addSymbolsProvider(distanceMarkersCollection);
 
@@ -1024,7 +1029,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	 */
 	protected void clearVectorLinesCollections() {
 		MapRendererView mapRenderer = getMapRenderer();
+		// called on every redraw while the lines are off: do the native work once per collection
+		if (vectorLinesCollection == clearedVectorLinesCollection) {
+			return;
+		}
 		if (mapRenderer != null && vectorLinesCollection != null && distanceMarkersCollection != null) {
+			clearedVectorLinesCollection = vectorLinesCollection;
 			QListVectorLine lines = vectorLinesCollection.getLines();
 			QListMapMarker markers = distanceMarkersCollection.getMarkers();
 			distanceMarkerCaptions.clear();

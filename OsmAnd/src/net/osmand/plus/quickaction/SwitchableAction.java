@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.util.Pair;
@@ -147,6 +148,16 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	public abstract String getItemIdFromObject(T object);
+
+	@Nullable
+	protected String getItemNameFromParams(@NonNull Context context, @NonNull String itemId) {
+		for (T item : loadListFromParams()) {
+			if (Algorithms.stringsEqual(itemId, getItemIdFromObject(item))) {
+				return getItemName(context, item);
+			}
+		}
+		return null;
+	}
 
 	public abstract List<T> loadListFromParams();
 

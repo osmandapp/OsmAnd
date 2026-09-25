@@ -1354,7 +1354,6 @@
     <string name="osm_user_stat">Правак: %1$s, ранг: %2$s, усяго правак: %3$s</string>
     <string name="osm_editors_ranking">Рэйтынг мапографаў OSM</string>
     <string name="select_map_markers">Абярыце адзнакі</string>
-    <string name="file_name_containes_illegal_char">Назва файла змяшчае недапушчальны сімвал</string>
     <string name="rendering_value_thin_name">Тонкі</string>
     <string name="rendering_value_medium_name">Сярэдні</string>
     <string name="rendering_value_bold_name">Тоўсты</string>
@@ -1919,7 +1918,7 @@
     <string name="shared_string_without_name">Без назвы</string>
     <string name="lang_lo">Лаоская</string>
     <string name="rendering_attr_hidePOILabels_name">Назвы POI</string>
-    <string name="day_off_label">адкл</string>
+    <string name="day_off_label">выхадны</string>
     <string name="winter_and_ski_renderer">Зімовы/лыжны</string>
     <string name="touring_view_renderer">Турыстычны выгляд</string>
     <string name="nautical_renderer">Марскі</string>

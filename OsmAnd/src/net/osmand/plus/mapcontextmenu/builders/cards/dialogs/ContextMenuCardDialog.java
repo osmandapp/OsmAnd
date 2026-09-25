@@ -9,6 +9,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryImageDialog;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.panoramax.PanoramaxImageDialog;
+import net.osmand.plus.plugins.panoramax.PanoramaxPlugin;
 
 import androidx.annotation.NonNull;
 
@@ -28,7 +30,8 @@ public abstract class ContextMenuCardDialog {
 
 	public enum CardDialogType {
 		REGULAR,
-		MAPILLARY
+		MAPILLARY,
+		PANORAMAX
 	}
 
 	protected ContextMenuCardDialog(MapActivity mapActivity, @NonNull CardDialogType type) {
@@ -88,6 +91,9 @@ public abstract class ContextMenuCardDialog {
 				case MAPILLARY:
 					dialog = new MapillaryImageDialog(mapActivity, bundle);
 					break;
+				case PANORAMAX:
+					dialog = new PanoramaxImageDialog(mapActivity, bundle);
+					break;
 				case REGULAR:
 					break;
 			}
@@ -117,6 +123,13 @@ public abstract class ContextMenuCardDialog {
 			case MAPILLARY: {
 				MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 				if (plugin != null && !plugin.SHOW_MAPILLARY.get()) {
+					plugin.updateLayers(mapActivity, mapActivity, activate);
+				}
+				break;
+			}
+			case PANORAMAX: {
+				PanoramaxPlugin plugin = PluginsHelper.getPlugin(PanoramaxPlugin.class);
+				if (plugin != null && !plugin.SHOW_PANORAMAX.get()) {
 					plugin.updateLayers(mapActivity, mapActivity, activate);
 				}
 				break;

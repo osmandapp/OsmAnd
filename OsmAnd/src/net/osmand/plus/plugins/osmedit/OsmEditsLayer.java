@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.osmedit;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.PointDescription.POINT_TYPE_OSM_BUG;
 import static net.osmand.data.PointDescription.POINT_TYPE_OSM_NOTE;
-import static net.osmand.plus.AppInitEvents.POI_TYPES_INITIALIZED;
 import static net.osmand.plus.plugins.osmedit.data.OsmPoint.Group.BUG;
 import static net.osmand.plus.plugins.osmedit.data.OsmPoint.Group.POI;
 
@@ -29,9 +28,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
-import net.osmand.plus.AppInitEvents;
-import net.osmand.plus.AppInitializeListener;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -85,7 +81,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	//OpenGL
 	private boolean nightMode;
 	private float storedTextScale = 1.0f;
-	private boolean poiTypesInitialized;
 
 	public OsmEditsLayer(@NonNull Context context, @NonNull OsmEditingPlugin plugin) {
 		super(context);
@@ -102,7 +97,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
-		addInitPoiTypesListener();
 	}
 
 	@Override
@@ -122,7 +116,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		super.onPrepareBufferImage(canvas, tileBox, settings);
 		MapRendererView mapRenderer = getMapView().getMapRenderer();
 		if (mapRenderer != null) {
-			if (!poiTypesInitialized) {
+			if (!app.getPoiTypes().isInit()) {
 				return;
 			}
 			if (tileBox.getZoom() < START_ZOOM) {
@@ -466,19 +460,4 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		return MapTextLayer.getTextStyle(getContext(), nightMode, getTextScale(), view.getDensity());
 	}
 
-	private void addInitPoiTypesListener() {
-		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializeListener() {
-
-				@Override
-				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
-					if (event == POI_TYPES_INITIALIZED) {
-						poiTypesInitialized = true;
-					}
-				}
-			});
-		} else {
-			poiTypesInitialized = true;
-		}
-	}
 }
