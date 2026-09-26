@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -31,7 +32,9 @@ import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
 
 import net.osmand.wear.R
+import net.osmand.wear.api.LocationState
 import net.osmand.wear.api.MarkerInfo
+import net.osmand.wear.data.rememberWatchHeading
 
 /**
  * Map markers: the active one under an arrow on the first page, the rest as a list on the second.
@@ -39,6 +42,8 @@ import net.osmand.wear.api.MarkerInfo
 @Composable
 fun MarkersPager(
 	markers: List<MarkerInfo>,
+	location: LocationState?,
+	phoneHeading: Float?,
 	onPassed: (String) -> Unit,
 	onMoveToTop: (String) -> Unit,
 	onAddHere: () -> Unit
@@ -50,13 +55,18 @@ fun MarkersPager(
 		return
 	}
 
+	// The watch's own compass when it has one; otherwise the phone's, which is what the arrow
+	// followed before and is still better than pointing at true north and calling it done.
+	val watchHeading by rememberWatchHeading(location)
+	val heading = watchHeading ?: phoneHeading ?: 0f
+
 	val pagerState = rememberPagerState { MARKER_PAGE_COUNT }
 
 	HorizontalPagerScaffold(pagerState = pagerState) {
 		HorizontalPager(state = pagerState) { page ->
 			when (page) {
-				0 -> ActiveMarker(markers.first(), onPassed)
-				else -> MarkerList(markers, onMoveToTop, onAddHere)
+				0 -> ActiveMarker(markers.first(), heading, onPassed)
+				else -> MarkerList(markers, heading, onMoveToTop, onAddHere)
 			}
 		}
 	}
@@ -83,7 +93,7 @@ private fun NoMarkers(onAddHere: () -> Unit) {
 }
 
 @Composable
-private fun ActiveMarker(marker: MarkerInfo, onPassed: (String) -> Unit) {
+private fun ActiveMarker(marker: MarkerInfo, heading: Float, onPassed: (String) -> Unit) {
 	Column(
 		modifier = Modifier
 			.fillMaxSize()
@@ -91,7 +101,7 @@ private fun ActiveMarker(marker: MarkerInfo, onPassed: (String) -> Unit) {
 		horizontalAlignment = Alignment.CenterHorizontally,
 		verticalArrangement = Arrangement.Center
 	) {
-		Bearing(marker, size = 64.dp)
+		Bearing(marker, heading, size = 64.dp)
 		Text(
 			text = marker.distanceText,
 			style = MaterialTheme.typography.displaySmall,
@@ -125,6 +135,7 @@ private fun ActiveMarker(marker: MarkerInfo, onPassed: (String) -> Unit) {
 @Composable
 private fun MarkerList(
 	markers: List<MarkerInfo>,
+	heading: Float,
 	onMoveToTop: (String) -> Unit,
 	onAddHere: () -> Unit
 ) {
@@ -142,7 +153,7 @@ private fun MarkerList(
 					onClick = { onMoveToTop(marker.id) },
 					modifier = Modifier.fillMaxWidth(),
 					colors = ButtonDefaults.filledTonalButtonColors(),
-					icon = { Bearing(marker, size = ButtonDefaults.IconSize) },
+					icon = { Bearing(marker, heading, size = ButtonDefaults.IconSize) },
 					label = {
 						Text(text = marker.name, maxLines = 1, overflow = TextOverflow.Ellipsis)
 					},
@@ -172,14 +183,14 @@ private fun AddHereButton(onAddHere: () -> Unit, modifier: Modifier = Modifier) 
 }
 
 @Composable
-private fun Bearing(marker: MarkerInfo, size: androidx.compose.ui.unit.Dp) {
+private fun Bearing(marker: MarkerInfo, heading: Float, size: androidx.compose.ui.unit.Dp) {
 	Icon(
 		painter = painterResource(R.drawable.ic_action_start_navigation),
 		contentDescription = null,
 		tint = if (marker.colorArgb == 0) MaterialTheme.colorScheme.primary else Color(marker.colorArgb),
 		modifier = Modifier
 			.size(size)
-			.rotate(marker.bearingDegrees)
+			.rotate(marker.bearingDegrees - heading)
 	)
 }
 

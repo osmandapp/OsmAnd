@@ -17,6 +17,11 @@ data class PhoneState(
 	val navigation: NavigationState? = null,
 	val recording: RecordingState? = null,
 	val location: LocationState? = null,
+	/**
+	 * Where the phone is pointing, in degrees from true north. The watch falls back to it for
+	 * bearings when it has no compass of its own.
+	 */
+	val headingDegrees: Float? = null,
 	/** Profiles offered by the recording profile picker, in the order the phone lists them. */
 	val profiles: List<ProfileInfo> = emptyList(),
 	/** Active map markers in OsmAnd's own order, so the first one is the one its widget tracks. */
@@ -26,9 +31,8 @@ data class PhoneState(
 /**
  * One active map marker.
  *
- * [bearingDegrees] is how far to turn an up-pointing arrow so it aims at the marker, already
- * corrected for the phone's heading the same way OsmAnd's marker widget corrects it. The watch
- * has no compass of its own yet, so the arrow is only as fresh as the last snapshot.
+ * [bearingDegrees] is measured from true north, not from wherever either device is pointing, so
+ * whichever compass the watch ends up using turns the same number.
  */
 @Serializable
 data class MarkerInfo(

@@ -134,8 +134,11 @@ fun WearApp(connector: PhoneConnector) {
 					}
 				}
 				composable(Routes.MARKERS) {
+					val state = currentSnapshot()?.state
 					MarkersPager(
-						markers = currentSnapshot()?.state?.markers.orEmpty(),
+						markers = state?.markers.orEmpty(),
+						location = state?.location,
+						phoneHeading = state?.headingDegrees,
 						onPassed = { id -> send(WearCommand.MarkMarkerPassed(id)) },
 						onMoveToTop = { id -> send(WearCommand.MoveMarkerToTop(id)) },
 						onAddHere = { send(WearCommand.AddMarkerHere) }

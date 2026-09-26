@@ -12,10 +12,12 @@ object WearProtocol {
 	 * Bumped whenever the meaning of an existing field changes or a field becomes required.
 	 * v2 replaced NavigationState's single-turn fields with a list of upcoming manoeuvres.
 	 * v3 split recording figures into value and unit and added the profile list.
+	 * v4 made MarkerInfo.bearingDegrees a bearing from true north instead of an angle already
+	 * turned for the phone's heading, so the watch can turn it by its own compass.
 	 * Purely additive changes (a new nullable field) do not need a bump, because both ends
 	 * decode with `ignoreUnknownKeys`.
 	 */
-	const val VERSION = 3
+	const val VERSION = 4
 
 	/** Advertised by the phone app, looked up by the watch. */
 	const val CAPABILITY_PHONE_APP = "osmand_phone_app"

@@ -15,6 +15,7 @@ import net.osmand.router.TurnType
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.wear.api.AppModeInfo
 import net.osmand.wear.api.ManeuverInfo
+import net.osmand.wear.api.LocationState
 import net.osmand.wear.api.MarkerInfo
 import net.osmand.wear.api.Metric
 import net.osmand.wear.api.NavigationState
@@ -48,7 +49,9 @@ class WearStateBuilder(private val app: OsmandApplication) {
 			navigation = buildNavigation(collectedIcons),
 			recording = buildRecording(),
 			profiles = buildProfiles(collectedIcons),
-			markers = buildMarkers()
+			markers = buildMarkers(),
+			location = buildLocation(),
+			headingDegrees = app.mapViewTrackingUtilities.heading
 		)
 		return Snapshot(state, collectedIcons)
 	}
@@ -213,12 +216,10 @@ class WearStateBuilder(private val app: OsmandApplication) {
 		if (markers.isEmpty()) {
 			return emptyList()
 		}
-		val provider = app.locationProvider
-		val from = provider.lastKnownLocation ?: provider.lastStaleKnownLocation
-		val heading = app.mapViewTrackingUtilities.heading
+		val from = currentLocation()
 		return markers.take(MAX_MARKERS).map { marker ->
-			// Distance and bearing exactly as MapMarkersBarWidget computes them: the bearing
-			// comes out of the marker towards us, and adding 180 turns it back around.
+			// distanceBetween reports the bearing out of the marker towards us, the same way
+			// MapMarkersBarWidget reads it, so 180 turns it back around to point at the marker.
 			val result = FloatArray(2)
 			if (from != null) {
 				Location.distanceBetween(
@@ -231,10 +232,20 @@ class WearStateBuilder(private val app: OsmandApplication) {
 				name = marker.getName(app),
 				distanceText = if (from == null) "" else formatDistance(result[0].toInt()),
 				distanceMeters = quantize(result[0].toInt()),
-				bearingDegrees = if (heading == null) 0f else result[1] - heading + 180f,
+				bearingDegrees = result[1] + 180f,
 				colorArgb = app.getColor(MapMarker.getColorId(marker.colorIndex))
 			)
 		}
+	}
+
+	private fun buildLocation(): LocationState? {
+		val location = currentLocation() ?: return null
+		return LocationState(latitude = location.latitude, longitude = location.longitude)
+	}
+
+	private fun currentLocation(): net.osmand.Location? {
+		val provider = app.locationProvider
+		return provider.lastKnownLocation ?: provider.lastStaleKnownLocation
 	}
 
 	private fun metric(formatted: FormattedValue): Metric = Metric(formatted.value, formatted.unit)
