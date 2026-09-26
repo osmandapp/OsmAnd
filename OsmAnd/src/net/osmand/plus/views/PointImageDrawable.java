@@ -17,10 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.core.jni.SingleSkImage;
+import net.osmand.core.jni.SwigUtilities;
 import net.osmand.data.BackgroundType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.PointImageUtils.PointImageInfo;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -212,6 +215,52 @@ public class PointImageDrawable extends Drawable {
 	@Override
 	public void setColorFilter(ColorFilter cf) {
 		paintIcon.setColorFilter(cf);
+	}
+
+	// The tile providers ask for the icon of every point of a tile, and all points of one kind share
+	// this drawable: it is rasterised once per scale, state and alpha instead of once per point, and
+	// the pixels are kept. The SkImage itself cannot be shared - the core moves the sk_sp out of the
+	// SingleSkImage it is handed (its copy constructor releases the source), so it gets a new one.
+	private record MergedIcon(float scale, boolean history, int alpha, int width, int height,
+	                          @NonNull byte[] pixels) {
+
+		private boolean matches(float scale, boolean history, int alpha) {
+			return this.scale == scale && this.history == history && this.alpha == alpha;
+		}
+	}
+
+	private MergedIcon bigIcon;
+	private MergedIcon smallIcon;
+
+	@NonNull
+	public synchronized SingleSkImage getBigMergedSkImage(float textScale, boolean history) {
+		int alpha = paintBackground.getAlpha();
+		if (bigIcon == null || !bigIcon.matches(textScale, history, alpha)) {
+			bigIcon = mergedIcon(textScale, history, alpha, getBigMergedBitmap(textScale, history));
+		}
+		return toSkImage(bigIcon);
+	}
+
+	@NonNull
+	public synchronized SingleSkImage getSmallMergedSkImage(float textScale) {
+		// the small icon is drawn grey or coloured by the history flag of the drawable itself
+		int alpha = paintBackground.getAlpha();
+		if (smallIcon == null || !smallIcon.matches(textScale, history, alpha)) {
+			smallIcon = mergedIcon(textScale, history, alpha, getSmallMergedBitmap(textScale));
+		}
+		return toSkImage(smallIcon);
+	}
+
+	@Nullable
+	private static MergedIcon mergedIcon(float scale, boolean history, int alpha, @Nullable Bitmap bitmap) {
+		return bitmap == null ? null : new MergedIcon(scale, history, alpha, bitmap.getWidth(),
+				bitmap.getHeight(), AndroidUtils.getByteArrayFromBitmap(bitmap));
+	}
+
+	@NonNull
+	private static SingleSkImage toSkImage(@Nullable MergedIcon icon) {
+		return icon == null ? SwigUtilities.nullSkImage()
+				: NativeUtilities.createSkImage(icon.width, icon.height, icon.pixels);
 	}
 
 	@Nullable

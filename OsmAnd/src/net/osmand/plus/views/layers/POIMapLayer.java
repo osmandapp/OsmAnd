@@ -39,6 +39,7 @@ import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListMapMarker;
+import net.osmand.core.jni.SingleSkImage;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.*;
 import net.osmand.plus.OsmandApplication;
@@ -563,15 +564,15 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
 					getContext(), getColor(amenity), true, iconId);
 			pointImageDrawable.setAlpha(0.8f);
-			Bitmap bitmap = app.getPoiTypes().isOtherCategory(amenity.getType())
-					? pointImageDrawable.getSmallMergedBitmap(getTextScale())
-					: pointImageDrawable.getBigMergedBitmap(getTextScale(), false);
+			SingleSkImage image = app.getPoiTypes().isOtherCategory(amenity.getType())
+					? pointImageDrawable.getSmallMergedSkImage(getTextScale())
+					: pointImageDrawable.getBigMergedSkImage(getTextScale(), false);
 
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
 					.setMarkerId(markerId++)
 					.setBaseOrder(getPointsOrder())
-					.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
+					.setPinIcon(image)
 					.setPosition(position)
 					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
 					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
