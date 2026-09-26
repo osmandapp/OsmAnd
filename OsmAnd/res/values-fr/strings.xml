@@ -431,7 +431,7 @@
     <string name="gpxup_trackable">Traçable</string>
     <string name="gpxup_private">Privée</string>
     <string name="osmand_parking_event">Récupérer le véhicule au parking</string>
-    <string name="osmand_parking_warning">Avertissement</string>
+    <string name="osmand_parking_warning">Alerte</string>
     <string name="osmand_parking_warning_text">Un rappel pour récupérer votre véhicule a été ajouté à votre agenda. Vous pouvez modifier ou supprimer ce rappel.</string>
     <string name="osmand_parking_time_limit_title">Indiquer la durée de stationnement autorisée</string>
     <string name="osmand_parking_delete_confirm">Supprimer l\'emplacement de stationnement ?</string>
@@ -837,7 +837,7 @@
     <string name="print_route">Exporter l\'itinéraire</string>
     <string name="fav_point_emoticons_message">Favori renommé en « %1$s » (les émoticônes ne sont pas autorisés).</string>
     <string name="speed_limit_exceed">Marge de tolérance aux limitations de vitesse</string>
-    <string name="speed_limit_exceed_message">Choisir la marge de tolérance à ajouter à la limitation de vitesse pour recevoir une alerte vocale.</string>
+    <string name="speed_limit_exceed_message">Indiquer la marge de tolérance à ajouter à la limitation de vitesse avant de déclencher une alerte vocale.</string>
     <string name="rendering_category_details">Détails</string>
     <string name="rendering_category_transport">Transports en commun</string>
     <string name="rendering_category_others">Autres caractéristiques de la carte</string>
@@ -2584,7 +2584,7 @@
     <string name="vessel_height_limit_description">Définit la hauteur du navire afin d\'éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
     <string name="vessel_width_limit_description">Définir la largeur du navire pour éviter les ponts étroits</string>
     <string name="quick_action_showhide_mapillary_descr">Bouton pour afficher ou masquer la couche Mapillary sur la carte.</string>
-    <string name="speed_cameras_legal_descr">Dans certains pays ou régions, l\'utilisation d\'avertisseurs de radars est interdit par la loi. \n \nVous devez faire un choix en fonction de la loi de votre pays. \n \nSélectionnez %1$s pour recevoir des alertes et des avertissements sur les radars. \n \nSélectionnez %2$s. Toutes les données relatives aux radars (alertes, notifications, POI) seront supprimées pour cette installation de l’application.</string>
+    <string name="speed_cameras_legal_descr">Dans certains pays ou régions, l\'utilisation d\'alertes de radars est interdit par la loi. \n \nVous devez prendre une décision en fonction de la loi applicable au pays. \n \nSélectionnez %1$s pour recevoir des alertes sur les radars. \n \nSélectionnez %2$s. Toutes les données relatives aux radars (alertes, notifications, PI) seront supprimées de l’application.</string>
     <string name="keep_active">Garder actif</string>
     <string name="speed_cameras_restart_descr">Redémarrez l\'application pour supprimer les données radars.</string>
     <string name="uninstall_speed_cameras">Désinstaller les radars</string>
@@ -4141,7 +4141,7 @@
     <string name="shared_string_additional">Additionnel</string>
     <string name="max_sensor_bycicle_power">Puissance du cycle, max</string>
     <string name="avg_sensor_speed">Vitesse du capteur, moyenne</string>
-    <string name="speed_limit_warning">Avertissement de limitation de vitesse</string>
+    <string name="speed_limit_warning">Alerte de limitation de vitesse</string>
     <string name="when_exceeded">En cas de dépassement</string>
     <string name="speedometer_description">Affiche votre vitesse actuelle calculée par GPS</string>
     <string name="shared_string_speedometer">Compteur de vitesse</string>
@@ -5304,7 +5304,7 @@
     <string name="ais_connection_failed">Connexion impossible</string>
     <string name="ais_connection_set_up">Paramétrer la connexion</string>
     <string name="ais_use_nmea_location">Utiliser comme source de positionnement</string>
-    <string name="ais_use_nmea_location_desc">Remplace la position fournie par le téléphone par celle du flux NMEA.</string>
+    <string name="ais_use_nmea_location_desc">Remplace la position du téléphone par celle du flux NMEA.</string>
     <string name="ais_run_in_background">Exécuter en arrière-plan</string>
     <string name="ais_run_in_background_desc">Continue à recevoir lorsque l\'écran est en veille.</string>
     <string name="ais_vessels_on_the_map">Navires sur la carte : %1$d</string>
@@ -5323,7 +5323,7 @@
     <string name="ais_port">Port</string>
     <string name="ais_error_empty_host">Saisissez un nom d\'hôte ou une adresse IP</string>
     <string name="ais_error_empty_port">Saisissez un numéro de port</string>
-    <string name="ais_error_port_range">La valeur du port doit être comprise entre 1 et 65535</string>
+    <string name="ais_error_port_range">Le numéro de port doit être compris entre 1 et 65535</string>
     <string name="ais_mark_as_outdated">Marquer comme obsolète</string>
     <string name="ais_hide_after">Masquer après</string>
     <string name="ais_hide_after_desc">Effacer complètement le navire après %1$s sans réception de signal.</string>
@@ -5332,7 +5332,7 @@
     <string name="ais_cpa_safe_distance">Distance de sécurité (CPA)</string>
     <string name="ais_set_your_mmsi">Paramétrez votre MMSI</string>
     <string name="ais_set_mmsi">Paramétrer le MMSI</string>
-    <string name="ais_enter_mmsi">Saisir le MMSI</string>
+    <string name="ais_enter_mmsi">Saisissez le MMSI</string>
     <string name="ais_enter_mmsi_desc">Saisissez 9 chiffres ou laissez vide pour effacer.</string>
     <string name="ais_error_mmsi_length">Obligatoirement 9 chiffres</string>
     <string name="ais_reset_plugin_settings">Réinitialiser les paramètres du plugin</string>
@@ -5343,13 +5343,24 @@
     <string name="panoramax_no_internet_desc">Les photos Panoramax sont disponibles en ligne uniquement.</string>
     <string name="quick_action_showhide_panoramax_descr">Afficher ou masquer la sur-couche Panoramax sur la carte.</string>
     <string name="panoramax_menu_filter_description_new">Filtrer les images par contributeur, date ou type.</string>
-    <string name="ais_set_your_mmsi_desc">Votre propre navire peut constamment déclencher des avertissements. Paramétrez votre MMSI afin qu\'OsmAnd puisse le différencier des autres bateaux.</string>
+    <string name="ais_set_your_mmsi_desc">Votre propre navire peut constamment déclencher des alertes. Paramétrez votre MMSI afin qu\'OsmAnd puisse le différencier des autres navires.</string>
     <string name="plugin_panoramax_descr">Afficher les images de rue Panoramax, une plate-forme de cartographie photo ouverte, comme sur-couche de la carte. Utile pour vérifier la couverture actuelle et planifier ce qui peut encore être ajouté.</string>
-    <string name="ais_my_vessel_footer">Paramétrez le MMSI de votre navire pour éviter de fausses alertes de collision et afficher,en option, son marqueur AIS sur la carte.</string>
+    <string name="ais_my_vessel_footer">Paramétrez le MMSI de votre navire pour éviter de fausses alertes de collision et afficher, en option, son marqueur AIS sur la carte.</string>
     <string name="ais_mark_as_outdated_off_desc">Le symbole du navire ne sera pas modifié. Les objets sont toujours retirés après %1$s.</string>
     <string name="contour_labels">Libellés</string>
     <string name="rendering_attr_contourLabelDirection_name">Direction des libellés</string>
     <string name="shared_string_visibility">Visibilité</string>
     <string name="opening_hours_public_holiday">Jours fériés</string>
     <string name="opening_hours_school_holiday">Vacances scolaires</string>
+    <string name="opening_hours_easter">Horaires de Pâques</string>
+    <string name="rendering_value_uphill_name">Montée</string>
+    <string name="ais_connection_tcp_desc">Se connecte directement à un appareil NMEA (passerelle ou transpondeur) dont vous connaissez l\'adresse IP.</string>
+    <string name="ais_connection_udp_desc">Reçoit les données diffusées sur le réseau local. Aucune adresse n\'est nécessaire.</string>
+    <string name="ais_mark_as_outdated_desc">Barrer le symbole du navire après %1$s sans réception de signal.</string>
+    <string name="ais_cpa_on_desc">Affiche en rouge les navires dont le passage est prévu dans un rayon de %1$s autour de votre position et dans moins de %2$s.</string>
+    <string name="ais_cpa_warning_time_desc">Affiche en rouge les navires %1$s avant la distance de sécurité.</string>
+    <string name="ais_cpa_safe_distance_desc">Affiche en rouge les navires dont la route est prévue à moins de %1$s de votre position.</string>
+    <string name="contour_label_direction_descr">En montée : l\'altitude, indiquée sur les courbes de niveau, est orientée afin d\'être lue lors de l\'ascension vers le sommet (comme sur les cartes papier). Les petites hachures des barres rocheuses pointent vers le bas de la pente.</string>
+    <string name="rendering_value_upright_name">Droit pour l’œil</string>
+    <string name="ais_objects_visibility_desc">Paramétrer quand les navires sans signal seront barrés puis retirés de la carte.</string>
 </resources>
