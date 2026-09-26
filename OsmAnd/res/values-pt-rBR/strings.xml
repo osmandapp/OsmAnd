@@ -5751,4 +5751,8 @@
     <string name="visualizing_button_grid_descr">Células, slots, quadros e registros.</string>
     <string name="crash_report_sent">Relatório enviado. Obrigado!</string>
     <string name="crash_report_send_failed">Não foi possível enviar o relatório. Tente novamente mais tarde.</string>
+    <string name="contour_labels">Rótulos</string>
+    <string name="contour_label_direction_descr">Subida: o topo de cada número de altitude está voltado para o terreno mais elevado, como nos mapas topográficos em papel. As marcas curtas nas linhas apontam para baixo.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Sentido do rótulo</string>
+    <string name="rendering_value_upright_name">Vertical</string>
 </resources>
