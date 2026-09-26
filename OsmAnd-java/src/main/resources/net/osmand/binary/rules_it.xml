@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index>
+        <!-- IT-ABBR: internal dots need an indexed alternative token. Ambiguous V. is excluded. -->
+        <variant object="street" source="(?iu)^Viale(?=\s)" target="V.le"/>
+        <variant object="street" source="(?iu)^Piazza(?=\s)" target="P.za"/>
+        <variant object="street" source="(?iu)^Corso(?=\s)" target="C.so"/>
+        <variant object="street" source="(?iu)^Largo(?=\s)" target="L.go"/>
+
+        <!-- RF1: the road number belongs to the same name as the full phrase. -->
+        <variant object="street" source="(?iu)\bStrada\s+Statale\b" target="SS"/>
+        <variant object="street" source="(?iu)\bStrada\s+Statale\s+(\d+)\b" target="SS$1"/>
+        <variant object="street" source="(?iu)\bStrada\s+Provinciale\b" target="SP"/>
+        <variant object="street" source="(?iu)\bStrada\s+Provinciale\s+(\d+)\b" target="SP$1"/>
+        <variant object="street" source="(?iu)\bStrada\s+Regionale\b" target="SR"/>
+        <variant object="street" source="(?iu)\bStrada\s+Regionale\s+(\d+)\b" target="SR$1"/>
+    </index>
+    <!-- EL1 uses UnglueRule. -->
+    <query>
+        <!-- SA1, query.db: "P.za S. Giovanni Paolo II", "Cappella di S. Andrea"; OSM names spell the saint in full.
+             Candidate for measuring on full OBF: "s" is one letter, AbbreviationMetrics decides whether it stays. -->
+        <search key="s" value="San Santo Santa"/>
+
+        <!-- house number suffixes: "12 bis", "12/ter" -->
+        <building key="bis" value="Bis"/>
+        <building key="ter" value="Ter"/>
+
+        <conjunction key="il"/>
+        <conjunction key="la"/>
+    </query>
+</rules>

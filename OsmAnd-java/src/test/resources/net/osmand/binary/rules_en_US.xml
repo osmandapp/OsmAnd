@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index>
+        <direction key="e" value="Eastern"/>
+        <variant object="street" source="(?iu)\bPlace\b" target="Pl."/>
+        <variant object="street" source="(?iu)\bParkway\b" enabled="false"/>
+    </index>
+    <query>
+        <search key="ave" value="Esplanade"/>
+        <building key="tower" value="Tower"/>
+        <conjunction key="thee"/>
+    </query>
+</rules>

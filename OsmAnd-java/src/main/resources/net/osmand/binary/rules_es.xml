@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index>
+        <!-- Titles of names: "Calle Dr. Mata", "Av. Gral. Güemes"; both forms are common words of names. -->
+        <search key="dr" value="Doctor"/>
+        <search key="gral" value="General"/>
+        <search key="sta" value="Santa"/>
+        <search key="sto" value="Santo"/>
+    </index>
+    <query>
+        <!-- query.db: the street type users shorten ("av. de la Playa", "c/ Bilbao", "ctra. Alcocer"); OSM names are full. -->
+        <variant object="street" source="(?iu)^Av\.?$" target="Avenida"/>
+        <variant object="street" source="(?iu)^Avda\.?$" target="Avenida"/>
+        <variant object="street" source="(?iu)^C\.?$" target="Calle"/>
+        <variant object="street" source="(?iu)^Ctra\.?$" target="Carretera"/>
+        <variant object="street" source="(?iu)^Carr\.?$" target="Carretera"/>
+        <variant object="street" source="(?iu)^Urb\.?$" target="Urbanización"/>
+
+        <!-- house number suffix: "12 bis" -->
+        <building key="bis" value="Bis"/>
+
+        <conjunction key="de"/>
+        <conjunction key="la"/>
+        <conjunction key="el"/>
+        <conjunction key="en"/>
+        <conjunction key="y"/>
+    </query>
+</rules>

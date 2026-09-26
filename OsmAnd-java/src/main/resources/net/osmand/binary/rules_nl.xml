@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index/>
+    <query>
+        <conjunction key="de"/>
+        <conjunction key="en"/>
+    </query>
+</rules>

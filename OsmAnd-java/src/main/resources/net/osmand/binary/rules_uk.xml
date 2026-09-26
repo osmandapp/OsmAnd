@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index/>
+    <query>
+        <!-- query.db: "вул. Хоткевича, 144", "пров. Харківський 11", "Івано-Франківська обл."; OSM names keep the
+             full word. Users on Ukrainian maps also type the Russian "ул." (as often as "вул."): the name is Ukrainian
+             ("вулиця"), its name:ru is Russian ("улица"). -->
+        <search key="вул" value="Вулиця"/>
+        <search key="ул" value="Вулиця Улица"/>
+        <variant object="street" source="(?iu)^Просп\.?$" target="Проспект"/>
+        <variant object="street" source="(?iu)^Пров\.?$" target="Провулок"/>
+        <variant object="boundary" source="(?iu)^Обл\.?$" target="Область"/>
+
+        <building key="кв" value="Квартира"/>
+    </query>
+</rules>

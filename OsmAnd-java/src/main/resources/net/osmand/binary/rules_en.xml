@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index>
+        <!-- Legacy address-word expansion; each form also marks key and value as common. -->
+        <direction key="e" value="East"/>
+        <direction key="w" value="West"/>
+        <direction key="s" value="South"/>
+        <direction key="n" value="North"/>
+        <direction key="sw" value="Southwest"/>
+        <direction key="se" value="Southeast"/>
+        <direction key="nw" value="Northwest"/>
+        <direction key="ne" value="Northeast"/>
+
+        <search key="ln" value="Lane"/>
+        <search key="dr" value="Drive"/>
+        <search key="rd" value="Road"/>
+        <search key="av" value="Avenue"/>
+        <search key="st" value="Street"/>
+        <search key="hwy" value="Highway"/>
+        <search key="blvd" value="Boulevard"/>
+
+        <!-- A2: only POI names containing a spaced ampersand. The query cannot do it: "&" is lost by the tokenizer. -->
+        <variant object="poi" mode="All" source="(?iu)\s+&amp;\s+" target=" and "/>
+    </index>
+    <query>
+        <!-- Search starts with the index entries above; these override or extend it. -->
+        <search key="ave" value="Avenue"/>
+        <search key="st" value="Street Saint"/>
+        <search key="1st" value="First"/>
+        <search key="2nd" value="Second"/>
+        <search key="3rd" value="Third"/>
+        <search key="first" value="1st"/>
+        <search key="second" value="2nd"/>
+        <search key="third" value="3rd"/>
+        <search key="fourth" value="4th"/>
+        <search key="fifth" value="5th"/>
+        <search key="sixth" value="6th"/>
+        <search key="seventh" value="7th"/>
+
+        <!-- A1: a pair is matched on one side only, here the query; the short form matches only a street/locality. -->
+        <variant object="street" source="(?iu)^Pl\.?$" target="Place"/>
+        <variant object="street" source="(?iu)^Pkwy\.?$" target="Parkway"/>
+        <variant object="street" source="(?iu)^Ct\.?$" target="Court"/>
+        <variant object="street" source="(?iu)^Cir\.?$" target="Circle"/>
+        <variant object="street" source="(?iu)^Ter\.?$" target="Terrace"/>
+        <variant object="locality" source="(?iu)^Mt\.?$" target="Mount"/>
+        <variant object="locality" source="(?iu)^Ft\.?$" target="Fort"/>
+
+        <!-- A unit or floor qualifier is recognized as a number part, not a free name synonym. -->
+        <building key="bldg" value="Building"/>
+        <building key="ste" value="Suite"/>
+        <building key="unt" value="Unit"/>
+        <building key="apt" value="Apartment"/>
+        <building key="fl" value="Floor"/>
+        <building key="flr" value="Floor"/>
+        <building key="bsmt" value="Basement"/>
+
+        <conjunction key="the"/>
+        <conjunction key="of"/>
+        <conjunction key="and"/>
+    </query>
+</rules>

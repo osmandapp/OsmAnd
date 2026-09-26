@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <index/>
+    <query>
+        <!-- Peruvian street type: "Jr. Junín 1203"; OSM names are "Jirón Junín". -->
+        <variant object="street" source="(?iu)^Jr\.?$" target="Jirón"/>
+    </query>
+</rules>

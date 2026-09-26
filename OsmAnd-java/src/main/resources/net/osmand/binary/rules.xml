@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="1">
+    <!-- Load this base, then rules_<language>.xml and rules_<language>_<COUNTRY>.xml (SearchLocales: the locale
+         of the map data, "en_US" for a US map, "de_CH" for name:de of a Swiss map).
+         Put a rule at the most general level where it holds; a lower level replaces matching tag/key or variant
+         object/source within the same section, and enabled="false" removes an inherited rule for its locale.
+         This base holds only rules that are true in every language: today there are none, words and their
+         abbreviations belong to a language file. A map without a locale ("" - World basemap, an unknown map)
+         gets no word rules at all.
+         A pair of forms is matched on one side only: query when one word expands to one word, index otherwise.
+         object is the owner of the name: street, locality, boundary, postcode, poi.
+         source is a Java regexp and target a Matcher replacement ($1, etc.).
+         mode="All" replaces all matches; omitted mode requires exactly one.
+         Query variant targets must normalize to one word; phrase expansions belong in index.
+         direction and index/search expand names; query/search expands search tokens.
+         building recognizes house qualifiers; conjunction marks service words. -->
+    <index/>
+    <query/>
+</rules>
