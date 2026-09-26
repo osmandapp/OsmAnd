@@ -48,7 +48,15 @@ class WearCommandService : WearableListenerService() {
 		Log.d(TAG, "handling $command")
 		when (command) {
 			is WearCommand.RequestState -> {
-				// Nothing to apply: the publish below is the whole point of this command.
+				// SPIKE HOOK, to be removed: runs the renderer probe when a marker file is
+				// present, because the development plugin's own row does not respond to taps.
+				val marker = java.io.File(app.filesDir, "wear_map_probe")
+				if (marker.exists()) {
+					marker.delete()
+					WearMapProbe.run(app, 384, 384, 2.0f) { result ->
+						app.runInUIThread { app.showToastMessage(result) }
+					}
+				}
 			}
 
 			is WearCommand.StopNavigation -> app.stopNavigation()
