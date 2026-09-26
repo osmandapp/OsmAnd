@@ -473,6 +473,23 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		return amenities;
 	}
 
+	// tiles and places held in memory, for the memory log
+	public int getCachedTilesCount() {
+		synchronized (tilesLock) {
+			return tilesCache.size();
+		}
+	}
+
+	public int getCachedPlacesCount() {
+		synchronized (tilesLock) {
+			int count = 0;
+			for (List<Amenity> places : tilesCache.values()) {
+				count += places.size();
+			}
+			return count;
+		}
+	}
+
 	@Override
 	public boolean isLoading() {
 		synchronized (tilesLock) {

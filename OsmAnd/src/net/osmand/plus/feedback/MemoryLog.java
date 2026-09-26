@@ -17,6 +17,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -694,6 +695,13 @@ public class MemoryLog {
 		try {
 			ResourceManager manager = app.getResourceManager();
 			appendCount(sb, "addr", manager.getAddressRepositories().size());
+		} catch (RuntimeException e) {
+		}
+		try {
+			if (app.getExplorePlacesProvider() instanceof ExplorePlacesOnlineProvider provider) {
+				appendCount(sb, "expltile", provider.getCachedTilesCount());
+				appendCount(sb, "expl", provider.getCachedPlacesCount());
+			}
 		} catch (RuntimeException e) {
 		}
 		try {
