@@ -678,11 +678,13 @@ public class SearchPhraseCompatTest {
 			net.osmand.shared.search.core.SearchPhrase.Companion k = net.osmand.shared.search.core.SearchPhrase.Companion;
 			return k.countWords(text) + " " + str(k.splitWords(text, new ArrayList<>(), SearchPhrase.ALLDELIMITERS))
 					+ " " + str(k.splitWords(text, new ArrayList<>(), SearchPhrase.ALLDELIMITERS_WITH_HYPHEN))
+					+ " " + str(k.splitWords(text, new ArrayList<>(), "-"))
 					+ " " + str(k.stripBraces(text)) + " " + str(k.stripBraces(words))
 					+ " " + str(k.selectMainUnknownWordToSearch(words)) + " " + str(words);
 		}
 		return SearchPhrase.countWords(text) + " " + str(SearchPhrase.splitWords(text, new ArrayList<>(), SearchPhrase.ALLDELIMITERS))
 				+ " " + str(SearchPhrase.splitWords(text, new ArrayList<>(), SearchPhrase.ALLDELIMITERS_WITH_HYPHEN))
+				+ " " + str(SearchPhrase.splitWords(text, new ArrayList<>(), "-"))
 				+ " " + str(SearchPhrase.stripBraces(text)) + " " + str(SearchPhrase.stripBraces(words))
 				+ " " + str(SearchPhrase.selectMainUnknownWordToSearch(words)) + " " + str(words);
 	}

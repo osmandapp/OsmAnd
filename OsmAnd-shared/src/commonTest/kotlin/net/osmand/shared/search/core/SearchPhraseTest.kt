@@ -335,6 +335,7 @@ class SearchPhraseTest {
 		return SearchPhrase.countWords(text).toString() + " " +
 				str(SearchPhrase.splitWords(text, ArrayList(), SearchPhrase.ALLDELIMITERS)) + " " +
 				str(SearchPhrase.splitWords(text, ArrayList(), SearchPhrase.ALLDELIMITERS_WITH_HYPHEN)) + " " +
+				str(SearchPhrase.splitWords(text, ArrayList(), "-")) + " " +
 				str(SearchPhrase.stripBraces(text)) + " " + str(SearchPhrase.stripBraces(words as Collection<String>)) + " " +
 				str(SearchPhrase.selectMainUnknownWordToSearch(words)) + " " + str(words)
 	}

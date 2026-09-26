@@ -732,6 +732,7 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 		const val ALLDELIMITERS = "\\s|,"
 		const val ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-"
 		private val reg = Regex(ALLDELIMITERS)
+		private val regWithHyphen = Regex(ALLDELIMITERS_WITH_HYPHEN)
 		private val DIFF_FILE_NAME = Regex("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+\\.obf")
 
 		private val commonWordsComparator: Comparator<String> = object : Comparator<String> {
@@ -765,7 +766,7 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 		@JvmStatic
 		fun splitWords(w: String?, ws: MutableList<String>, delimiters: String): MutableList<String> {
 			if (!KAlgorithms.isEmpty(w)) {
-				val wrs = w!!.split(Regex(delimiters))
+				val wrs = w!!.split(delimitersRegex(delimiters))
 				for (wr in wrs) {
 					val wd = wr.trim { it <= ' ' }
 					if (wd.length > 0) {
@@ -774,6 +775,13 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 				}
 			}
 			return ws
+		}
+
+		// the patterns the search splits names with, compiled once
+		private fun delimitersRegex(delimiters: String): Regex = when (delimiters) {
+			ALLDELIMITERS -> reg
+			ALLDELIMITERS_WITH_HYPHEN -> regWithHyphen
+			else -> Regex(delimiters)
 		}
 
 		@JvmStatic
