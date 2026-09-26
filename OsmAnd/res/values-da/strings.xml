@@ -1823,7 +1823,7 @@
     <string name="lang_lo">Lao</string>
     <string name="day_off_label">lukket</string>
     <string name="winter_and_ski_renderer">Vinter og ski</string>
-    <string name="touring_view_renderer">Touring</string>
+    <string name="touring_view_renderer">Touring-visning</string>
     <string name="nautical_renderer">Nautisk</string>
     <string name="rendering_attr_hidePOILabels_name">IP-etiketter</string>
     <string name="will_open_tomorrow_at">Åbner i morgen kl.</string>
