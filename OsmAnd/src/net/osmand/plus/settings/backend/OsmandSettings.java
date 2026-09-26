@@ -126,6 +126,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class OsmandSettings {
 
@@ -144,6 +146,10 @@ public class OsmandSettings {
 	private static final Map<String, String> PREFERENCES_NAMES_CACHE = new LinkedHashMap<>();
 
 	public static final float SIM_MIN_SPEED = 5 / 3.6f;
+
+	private static Pattern STRIP_EMOJI_PATTERN =
+			Pattern.compile("[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}]");
+
 	/// Settings variables
 	private final OsmandApplication ctx;
 	private SettingsAPI settingsAPI;
@@ -2292,14 +2298,36 @@ public class OsmandSettings {
 		File tPath = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		File dir = new File(tPath, toInstall.getName());
 		dir.mkdirs();
-		if (dir.exists() && dir.isDirectory()) {
-			try {
-				TileSourceManager.createMetaInfoFile(dir, toInstall, true);
-			} catch (IOException e) {
+		if (!dir.isDirectory()) {
+			// Some SD card file systems reject emoji and other special characters in folder names
+			String safeName = getSafeTileSourceName(toInstall.getName());
+			if (Algorithms.isEmpty(safeName)) {
 				return false;
 			}
+			dir = new File(tPath, safeName);
+			dir.mkdirs();
+			if (!dir.isDirectory()) {
+				return false;
+			}
+			toInstall.setName(safeName);
+		}
+		try {
+			TileSourceManager.createMetaInfoFile(dir, toInstall, true);
+		} catch (IOException e) {
+			return false;
 		}
 		return true;
+	}
+
+	@NonNull
+	private static String getSafeTileSourceName(@NonNull String name) {
+		String candidate = stripEmojis(name);
+		return Algorithms.sanitizeFileName(candidate).replaceAll("\\s+", " ").trim();
+	}
+
+	@NonNull
+	private static String stripEmojis(@NonNull String text) {
+		return STRIP_EMOJI_PATTERN.matcher(text).replaceAll("").trim();
 	}
 
 	public Map<String, String> getTileSourceEntries() {
