@@ -816,7 +816,7 @@
     <string name="rendering_category_others">Alte atribute de hartă</string>
     <string name="map_widget_right">Panou dreapta</string>
     <string name="map_widget_left">Panou stânga</string>
-    <string name="shared_string_show">Spectacol</string>
+    <string name="shared_string_show">Afișaj</string>
     <string name="configure_map">Configurare hartă</string>
     <string name="search_radius_proximity">În</string>
     <string name="speed_limit_exceed">Toleranță limită de viteză</string>
@@ -5133,4 +5133,16 @@
     <string name="share_favorites_share_failed">Nu se poate partaja fișierul.</string>
     <string name="share_favorites_missing_media_warning">Unele media atașate nu pot fi incluse.</string>
     <string name="shared_string_note">Notiță</string>
+    <string name="contour_labels">Etichete</string>
+    <string name="contour_label_direction_descr">În sus: partea de sus a numerelor arată către vârf, precum se practică pe hărțile fizice topografice. Marcajele scurte ale curbelor arată către vale.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Direcție etichete</string>
+    <string name="shared_string_visibility">Vizibilitate</string>
+    <string name="opening_hours_public_holiday">Zile libere legale</string>
+    <string name="opening_hours_school_holiday">Vacanță școlară</string>
+    <string name="opening_hours_easter">Paști</string>
+    <string name="ais_connection_not_set_up">Nesetat</string>
+    <string name="ais_connection_not_connected">Neconectat</string>
+    <string name="ais_connection_connecting">Se conectează…</string>
+    <string name="ais_connection_no_data">Nu s-au primit date</string>
+    <string name="ais_connection_failed">Conexiune nereușită</string>
 </resources>

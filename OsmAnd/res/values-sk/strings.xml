@@ -191,8 +191,8 @@
     <string name="voice_stream_notification">Oznámenia</string>
     <string name="voice_stream_music">Médiá/zvuky navigácie</string>
     <string name="warning_tile_layer_not_downloadable">Aplikácia nemôže stiahnuť mapovú vrstvu %1$s, preinštalovanie môže pomôcť.</string>
-    <string name="overlay_transparency">Priehľadnosť prekrývacej mapy</string>
-    <string name="map_transparency">Priehľadnosť základnej mapy</string>
+    <string name="overlay_transparency">Viditeľnosť prekrývacej vrstvy</string>
+    <string name="map_transparency">Viditeľnosť základnej mapy</string>
     <string name="layer_underlay">Podkladová mapa…</string>
     <string name="map_underlay">Podkladová mapa</string>
     <string name="layer_overlay">Prekrývacia mapa…</string>
@@ -1310,7 +1310,7 @@
     <string name="osm_live_active">Aktívne</string>
     <string name="osm_live_enter_email">Prosím zadajte platnú e-mailovú adresu</string>
     <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv predplatné OsmAnd Live</string>
-    <string name="show_transparency_seekbar">Zobraziť panel priesvitnosti</string>
+    <string name="show_transparency_seekbar">Zobraziť posuvník viditeľnosti</string>
     <string name="recalculate_route">Prepočítať trasu</string>
     <string name="shared_string_topbar">Horný panel</string>
     <string name="storage_directory_shared">Zdieľaná pamäť</string>
@@ -4902,7 +4902,7 @@
     <string name="shared_string_price">Cena</string>
     <string name="lang_crh">Krymská tatárčina (latinka)</string>
     <string name="deleted_maps_warning">Chystáte sa vymazať %d položiek\nChcete pokračovať?</string>
-    <string name="deleted_maps_prompt">Tieto mapy už nie sú podporované a boli nahradené menšími regiónmi. Prosím odstráňte ich a stiahnite si nové verzie oblastí.</string>
+    <string name="deleted_maps_prompt">Tieto mapy už nie sú podporované. Prosím odstráňte ich a stiahnite si nové verzie.</string>
     <string name="unsupported_maps">Nepodporované mapy</string>
     <string name="routing_attr_weightrating_name">Maximálna hmotnosť pri plnom zaťažení</string>
     <string name="routing_attr_maxaxleload_name">Maximálne zaťaženie na nápravu</string>

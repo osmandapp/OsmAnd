@@ -335,8 +335,8 @@
     <string name="voice_stream_notification">Meddelelselyd</string>
     <string name="voice_stream_music">Medie-/navigationslyd</string>
     <string name="warning_tile_layer_not_downloadable">Appen kan ikke hente kortlaget %1$s, en geninstallering kan måske hjælpe.</string>
-    <string name="overlay_transparency">Overlejrings-gennemsigtighed</string>
-    <string name="map_transparency">Gennemsigtighed for basiskort</string>
+    <string name="overlay_transparency">Overlejring-synlighed</string>
+    <string name="map_transparency">Synlighed for basiskort</string>
     <string name="layer_underlay">Underlejringskort…</string>
     <string name="map_underlay">Underlejringskort</string>
     <string name="layer_overlay">Overlejringskort…</string>
@@ -1306,7 +1306,7 @@
     <string name="upload_osm_note">Overfør OSM-bemærkning</string>
     <string name="upload_anonymously">Overfør anonymt</string>
     <string name="select_map_marker">Vælg kortmarkør</string>
-    <string name="show_transparency_seekbar">Vis glider for gennemsigtighed</string>
+    <string name="show_transparency_seekbar">Vis skyder for synlighed</string>
     <string name="donations">Donationer</string>
     <string name="number_of_recipients">Antal modtagere</string>
     <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
@@ -3275,7 +3275,7 @@
     <string name="shared_storage">Delt lagerplads</string>
     <string name="rendering_attr_natureReserves_description">Vis naturreservater, beskyttede områder og nationalparker.</string>
     <string name="not_enough_contributions_descr">Der kræves mindst %1$s ændringer i løbet af de sidste to måneder %2$s for at få adgang til ubegrænsede kortopdateringer hver time.</string>
-    <string name="show_parameter_seekbar">Vis parameter-søgefelt</string>
+    <string name="show_parameter_seekbar">Vis parameter-skyder</string>
     <string name="app_profile_type">App-profiltype</string>
     <string name="map_marker_options">Indstillinger for kortmarkør</string>
     <string name="add_to_group">Tilføj til gruppe</string>
@@ -5479,4 +5479,14 @@
     <string name="quick_action_showhide_panoramax_descr">En skifter til at vise eller skjule Panoramax-laget på kortet.</string>
     <string name="panoramax_menu_filter_description_new">Filtrer billeder efter bidragyder, dato eller type.</string>
     <string name="plugin_panoramax_descr">Vis gadeplanbilleder fra Panoramax, en samlet og frit tilgængelig fotokortlægningsplatform, som en kortoverlejring. Nyttigt til at tjekke den eksisterende dækning og planlægge, hvad der stadig mangler at blive kortlagt.</string>
+    <string name="contour_labels">Etiketter</string>
+    <string name="contour_label_direction_descr">Opad: Toppen af hvert højdetal peger mod højere terræn, ligesom på topografiske kort på papir. De korte streger på linjerne peger nedad.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Etiketretning</string>
+    <string name="rendering_value_upright_name">Stående</string>
+    <string name="rendering_value_uphill_name">Opad</string>
+    <string name="shared_string_visibility">Synlighed</string>
+    <string name="opening_hours_public_holiday">Helligdage</string>
+    <string name="opening_hours_school_holiday">Skoleferier</string>
+    <string name="opening_hours_easter">Påske</string>
+    <string name="visualizing_button_grid_descr">Celler, pladser, rammer og logge.</string>
 </resources>
