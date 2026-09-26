@@ -99,6 +99,7 @@ public class MapActions {
 			builder.setSelectedRoute(settings.GPX_ROUTE_INDEX.get());
 			builder.setPassWholeRoute(settings.GPX_PASS_WHOLE_ROUTE.get());
 			builder.setReverseStrategy(settings.GPX_REVERSE_STRATEGY.get());
+			settings.GPX_ROUTE_REVERSE.set(false);
 
 			ApplicationMode appMode = routingHelper.getAppMode();
 			if (!gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
