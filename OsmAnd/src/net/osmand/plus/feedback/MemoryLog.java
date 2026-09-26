@@ -697,12 +697,9 @@ public class MemoryLog {
 			appendCount(sb, "addr", manager.getAddressRepositories().size());
 		} catch (RuntimeException e) {
 		}
-		try {
-			if (app.getExplorePlacesProvider() instanceof ExplorePlacesOnlineProvider provider) {
-				appendCount(sb, "expltile", provider.getCachedTilesCount());
-				appendCount(sb, "expl", provider.getCachedPlacesCount());
-			}
-		} catch (RuntimeException e) {
+		if (app.getExplorePlacesProvider() instanceof ExplorePlacesOnlineProvider provider) {
+			appendCount(sb, "expltile", provider.getCachedTilesCount());
+			appendCount(sb, "expl", provider.getCachedPlacesCount());
 		}
 		try {
 			appendCount(sb, "layer", app.getOsmandMap().getMapView().getLayers().size());
