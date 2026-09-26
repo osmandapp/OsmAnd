@@ -25,6 +25,7 @@ import net.osmand.wear.data.Snapshot
 import net.osmand.wear.ui.screens.ConnectionScreen
 import net.osmand.wear.ui.screens.FinishRecordingDialog
 import net.osmand.wear.ui.screens.HomeScreen
+import net.osmand.wear.ui.screens.MarkersPager
 import net.osmand.wear.ui.screens.MessageScreen
 import net.osmand.wear.ui.screens.NavigationScreen
 import net.osmand.wear.ui.screens.PlaceholderScreen
@@ -38,6 +39,7 @@ object Routes {
 	const val HOME = "home"
 	const val NAVIGATION = "navigation"
 	const val RECORDING = "recording"
+	const val MARKERS = "markers"
 	const val PROFILES = "profiles"
 	const val SETTINGS = "settings"
 }
@@ -130,6 +132,14 @@ fun WearApp(connector: PhoneConnector) {
 							onStart = { send(WearCommand.StartRecording) }
 						)
 					}
+				}
+				composable(Routes.MARKERS) {
+					MarkersPager(
+						markers = currentSnapshot()?.state?.markers.orEmpty(),
+						onPassed = { id -> send(WearCommand.MarkMarkerPassed(id)) },
+						onMoveToTop = { id -> send(WearCommand.MoveMarkerToTop(id)) },
+						onAddHere = { send(WearCommand.AddMarkerHere) }
+					)
 				}
 				composable(Routes.PROFILES) {
 					val snapshot = currentSnapshot()

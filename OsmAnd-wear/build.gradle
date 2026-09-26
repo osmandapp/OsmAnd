@@ -20,6 +20,8 @@ tasks.register('copyPhoneResources', Sync) {
 		include "drawable/ic_action_track_recordable.xml"
 		include "drawable/ic_action_start_navigation.xml"
 		include "drawable/ic_action_settings.xml"
+		include "drawable/ic_action_flag.xml"
+		include "drawable/ic_action_add.xml"
 		include "drawable/ic_action_rec_stop.xml"
 		include "drawable/ic_action_trip_rec_start.xml"
 		include "drawable/ic_action_trip_rec_pause.xml"

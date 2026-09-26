@@ -29,4 +29,8 @@
 	<string name="wear_profile_selected">Selected</string>
 	<string name="wear_recording_off">Trip recording is off</string>
 	<string name="wear_recording_off_hint">Enable the Trip recording plugin in OsmAnd on your phone</string>
+	<string name="wear_markers">Markers</string>
+	<string name="wear_marker_passed">Passed</string>
+	<string name="wear_marker_add_here">Add marker here</string>
+	<string name="wear_no_markers">No markers</string>
 </resources>

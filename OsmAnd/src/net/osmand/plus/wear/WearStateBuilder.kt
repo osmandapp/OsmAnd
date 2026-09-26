@@ -1,6 +1,9 @@
 package net.osmand.plus.wear
 
+import android.location.Location
+
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.mapmarkers.MapMarker
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin
 import net.osmand.plus.routing.NextDirectionInfo
@@ -12,6 +15,7 @@ import net.osmand.router.TurnType
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.wear.api.AppModeInfo
 import net.osmand.wear.api.ManeuverInfo
+import net.osmand.wear.api.MarkerInfo
 import net.osmand.wear.api.Metric
 import net.osmand.wear.api.NavigationState
 import net.osmand.wear.api.PhoneState
@@ -43,7 +47,8 @@ class WearStateBuilder(private val app: OsmandApplication) {
 			appMode = buildAppMode(),
 			navigation = buildNavigation(collectedIcons),
 			recording = buildRecording(),
-			profiles = buildProfiles(collectedIcons)
+			profiles = buildProfiles(collectedIcons),
+			markers = buildMarkers()
 		)
 		return Snapshot(state, collectedIcons)
 	}
@@ -203,6 +208,35 @@ class WearStateBuilder(private val app: OsmandApplication) {
 		}
 	}
 
+	private fun buildMarkers(): List<MarkerInfo> {
+		val markers = app.mapMarkersHelper.mapMarkers
+		if (markers.isEmpty()) {
+			return emptyList()
+		}
+		val provider = app.locationProvider
+		val from = provider.lastKnownLocation ?: provider.lastStaleKnownLocation
+		val heading = app.mapViewTrackingUtilities.heading
+		return markers.take(MAX_MARKERS).map { marker ->
+			// Distance and bearing exactly as MapMarkersBarWidget computes them: the bearing
+			// comes out of the marker towards us, and adding 180 turns it back around.
+			val result = FloatArray(2)
+			if (from != null) {
+				Location.distanceBetween(
+					marker.latitude, marker.longitude,
+					from.latitude, from.longitude, result
+				)
+			}
+			MarkerInfo(
+				id = marker.id,
+				name = marker.getName(app),
+				distanceText = if (from == null) "" else formatDistance(result[0].toInt()),
+				distanceMeters = quantize(result[0].toInt()),
+				bearingDegrees = if (heading == null) 0f else result[1] - heading + 180f,
+				colorArgb = app.getColor(MapMarker.getColorId(marker.colorIndex))
+			)
+		}
+	}
+
 	private fun metric(formatted: FormattedValue): Metric = Metric(formatted.value, formatted.unit)
 
 	private fun elevationMetric(meters: Double?): Metric =
@@ -223,6 +257,7 @@ class WearStateBuilder(private val app: OsmandApplication) {
 	companion object {
 		private const val ANALYSIS_INTERVAL_MS = 5000L
 		private const val MAX_MANEUVERS = 3
+		private const val MAX_MARKERS = 10
 		private const val DISTANCE_STEP_METERS = 10
 	}
 }

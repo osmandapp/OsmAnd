@@ -48,6 +48,21 @@ sealed interface WearCommand {
 	@SerialName("save_and_continue")
 	data object SaveAndContinueRecording : WearCommand
 
+	/** Moves a marker to history, which is what OsmAnd calls marking it visited. */
+	@Serializable
+	@SerialName("mark_marker_passed")
+	data class MarkMarkerPassed(val id: String) : WearCommand
+
+	/** Makes a marker the active one, the one the phone's widget and the arrow screen track. */
+	@Serializable
+	@SerialName("move_marker_to_top")
+	data class MoveMarkerToTop(val id: String) : WearCommand
+
+	/** Drops a marker at the phone's current position; the watch has no fix of its own yet. */
+	@Serializable
+	@SerialName("add_marker_here")
+	data object AddMarkerHere : WearCommand
+
 	/** Switches the active OsmAnd profile, which is what the recording will be attributed to. */
 	@Serializable
 	@SerialName("select_profile")

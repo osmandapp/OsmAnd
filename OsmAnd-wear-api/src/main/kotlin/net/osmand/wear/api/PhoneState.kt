@@ -18,7 +18,27 @@ data class PhoneState(
 	val recording: RecordingState? = null,
 	val location: LocationState? = null,
 	/** Profiles offered by the recording profile picker, in the order the phone lists them. */
-	val profiles: List<ProfileInfo> = emptyList()
+	val profiles: List<ProfileInfo> = emptyList(),
+	/** Active map markers in OsmAnd's own order, so the first one is the one its widget tracks. */
+	val markers: List<MarkerInfo> = emptyList()
+)
+
+/**
+ * One active map marker.
+ *
+ * [bearingDegrees] is how far to turn an up-pointing arrow so it aims at the marker, already
+ * corrected for the phone's heading the same way OsmAnd's marker widget corrects it. The watch
+ * has no compass of its own yet, so the arrow is only as fresh as the last snapshot.
+ */
+@Serializable
+data class MarkerInfo(
+	val id: String,
+	val name: String,
+	val distanceText: String = "",
+	val distanceMeters: Int = 0,
+	val bearingDegrees: Float = 0f,
+	/** Marker colour as OsmAnd assigned it, so the watch does not invent its own palette. */
+	val colorArgb: Int = 0
 )
 
 /**

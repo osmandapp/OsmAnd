@@ -6,6 +6,8 @@ import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.WearableListenerService
 
 import net.osmand.PlatformUtil
+import net.osmand.data.LatLon
+import net.osmand.data.PointDescription
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.plugins.PluginsHelper
@@ -84,6 +86,26 @@ class WearCommandService : WearableListenerService() {
 			is WearCommand.SaveAndContinueRecording -> monitoringPlugin()
 				?.saveCurrentTrack({ WearBridge.publish(app) }, null, false, false, false)
 
+			is WearCommand.MarkMarkerPassed -> {
+				val marker = app.mapMarkersHelper.getMapMarker(command.id)
+				if (marker != null) {
+					app.mapMarkersHelper.moveMapMarkerToHistory(marker)
+				} else {
+					LOG.warn("Watch asked to pass an unknown marker: " + command.id)
+				}
+			}
+
+			is WearCommand.MoveMarkerToTop -> {
+				val marker = app.mapMarkersHelper.getMapMarker(command.id)
+				if (marker != null) {
+					app.mapMarkersHelper.moveMarkerToTop(marker)
+				} else {
+					LOG.warn("Watch asked to raise an unknown marker: " + command.id)
+				}
+			}
+
+			is WearCommand.AddMarkerHere -> addMarkerAtCurrentLocation()
+
 			is WearCommand.SelectProfile -> {
 				val mode = ApplicationMode.valueOfStringKey(command.appModeKey, null)
 				if (mode != null) {
@@ -95,6 +117,22 @@ class WearCommandService : WearableListenerService() {
 
 			is WearCommand.SetPreference -> applyPreference(command)
 		}
+	}
+
+	private fun addMarkerAtCurrentLocation() {
+		// A stale fix still says where the phone was; the map centre, which getDefaultLocation
+		// would fall back to, says only where someone last panned to.
+		val provider = app.locationProvider
+		val location = provider.lastKnownLocation ?: provider.lastStaleKnownLocation
+		if (location == null) {
+			LOG.warn("Watch asked for a marker here, but the phone has no fix")
+			return
+		}
+		app.mapMarkersHelper.addMapMarker(
+			LatLon(location.latitude, location.longitude),
+			PointDescription(PointDescription.POINT_TYPE_LOCATION, ""),
+			null
+		)
 	}
 
 	private fun monitoringPlugin(): OsmandMonitoringPlugin? =

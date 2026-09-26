@@ -55,6 +55,11 @@ fun HomeScreen(state: PhoneState, onOpen: (String) -> Unit) {
 				}
 			}
 			item {
+				MenuButton(R.string.wear_markers, R.drawable.ic_action_flag) {
+					onOpen(Routes.MARKERS)
+				}
+			}
+			item {
 				MenuButton(R.string.wear_settings, R.drawable.ic_action_settings) {
 					onOpen(Routes.SETTINGS)
 				}
