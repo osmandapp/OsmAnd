@@ -856,7 +856,7 @@
     <string name="osm_live_ask_for_purchase">Молимо прво купите чланарину на ОсмАнд уживо</string>
     <string name="select_map_marker">Изаберите ознаку карте</string>
     <string name="upload_anonymously">Отпреми анонимно</string>
-    <string name="show_transparency_seekbar">Приказуј прозирну траку претраге</string>
+    <string name="show_transparency_seekbar">Прикажи клизач видљивости</string>
     <string name="download_files_error_not_enough_space">Нема довољно простора!
 \n {3} MB је привремено потребно, а {1} MB трајно.
 \n (доступно је само {2} MB.)</string>
@@ -1799,7 +1799,7 @@
 \n Већина држава на свету се може преузети!
 \n Добијте поузданог водича у Вашој држави - било да је то Француска, Немачка, Мексико, Велика Британија, Холандија, САД, Русија, Бразил или нека друга.</string>
     <string name="pref_overlay">Слој изнад / испод</string>
-    <string name="overlay_transparency">Прозирност слоја изнад</string>
+    <string name="overlay_transparency">Видљивост слоја изнад</string>
     <string name="layer_overlay">Карта слоја изнад…</string>
     <string name="map_overlay">Карта слоја изнад</string>
     <string name="show_poi_over_map">Прикажи слој са тачкама занимања изнад карте</string>
@@ -1824,7 +1824,7 @@
     <string name="rendering_attr_contourLines_description">Приказ од ког ступња увећања (захтева податке о изохипсама):</string>
     <string name="keep_informing_never">Само ручно (кликом на стрелицу)</string>
     <string name="gpx_option_from_start_point">Постави дуж целог трага</string>
-    <string name="map_transparency">Прозирност основне карте</string>
+    <string name="map_transparency">Видљивост основне карте</string>
     <string name="layer_underlay">Карта слоја испод…</string>
     <string name="map_underlay">Карта испод</string>
     <string name="tile_source_already_installed">Карта већ уграђена, „Подешавања“ ће се освежити.</string>
@@ -4667,7 +4667,7 @@
     <string name="ais_cpa_warning_time_description">Ако ТЦПА (Време до ЦПА) са другим пловилом падне испод дефинисаног прага, пловило је означено црвеном бојом.</string>
     <string name="ais_cpa_warning_distance">Упозорење удаљености за најближу тачку приближавања (ЦПА)</string>
     <string name="ais_cpa_warning_distance_description">Пловила су означена црвеном бојом ако је ЦПА (Најближа тачка приближавања) испод дефинисаног прага и ТЦПА (Време до ЦПА) се налази унутар времена упозорења подешеног у подешавању „Време упозорења за достизање ЦПА“.</string>
-    <string name="plugin_ais_tracker_name">АИС трагач пловила</string>
+    <string name="plugin_ais_tracker_name">Систем за праћење пловила (АИС)</string>
     <string name="plugin_ais_tracker_description">Приказује АИС позиције и информације о оближњим пловилима. АИС подаци се примају преко мреже са спољног АИС пријемника.</string>
     <string name="plugin_ais_tracker_disclaimer">ОДРИЦАЊЕ ОДГОВОРНОСТИ\n\nОвај додатак је хоби пројекат и није намењен за употребу у критичним апликацијама. Не гарантује поузданост или тачност. Не ослањајте се на овај софтвер за навигацију, безбедност живота или било које друге битне операције.</string>
     <string name="ais_ship_lost_timeout">Временско ограничење за испоруку је застарело</string>
@@ -4881,7 +4881,7 @@
     <string name="button_frames">Оквири дугмади</string>
     <string name="visualizing_button_grid">Мрежа дугмади карте</string>
     <string name="deleted_maps_warning">Управо ћете обрисати %d ставке(е)\nНаставити даље?</string>
-    <string name="deleted_maps_prompt">Ове карте више нису подржане и замењене су мањим областима. Молим, уклоните их и преузмите нова издања.</string>
+    <string name="deleted_maps_prompt">Ове карте више нису подржане. Молим, уклоните их и преузмите нова издања.</string>
     <string name="unsupported_maps">Неподржане карте</string>
     <string name="routing_attr_weightrating_name">Највећа тежина при пуном оптерећењу</string>
     <string name="routing_attr_maxaxleload_name">Највеће осовинско оптерећење</string>
@@ -5336,7 +5336,6 @@
     <string name="share_favorites_preparation_failed">Нисам успео припремити датотеке за дељење.</string>
     <string name="share_favorites_share_failed">Нисам успео поделити датотеку.</string>
     <string name="share_favorites_missing_media_warning">Неки приложени медији нису могли бити обухваћени.</string>
-    <string name="search_on_web">Претражи на вебу</string>
     <string name="astro_eclipse_column_below_horizon">Испод хоризонта</string>
     <string name="quick_action_add_track">Додај путању</string>
     <string name="quick_action_tracks_select_descr">Додајте једну или више путања како бисте их приказали или сакрили на мапи једним додиром.</string>
@@ -5367,4 +5366,70 @@
     <string name="gpx_line_style_dashed">Испрекидан</string>
     <string name="gpx_line_style_dotted">Тачкаст</string>
     <string name="file_name_containes_illegal_char">Име не сме да садржи: %1$s</string>
+    <string name="ais_connection_not_set_up">Није подешено</string>
+    <string name="ais_connection_not_connected">Није повезано</string>
+    <string name="ais_connection_connecting">Повезивање…</string>
+    <string name="ais_connection_no_data">Подаци нису примљени</string>
+    <string name="ais_connection_failed">Повезивање није успело</string>
+    <string name="ais_connection_set_up">Успостави везу</string>
+    <string name="ais_use_nmea_location">Користи као извор локације</string>
+    <string name="ais_use_nmea_location_desc">Замењује позицију телефона позицијом из НМЕА тока података.</string>
+    <string name="ais_run_in_background">Покрени у позадини</string>
+    <string name="ais_run_in_background_desc">Наставља да прима податке док је екран искључен.</string>
+    <string name="ais_vessels_on_the_map">Пловила на мапи: %1$d</string>
+    <string name="ais_no_position_data">Нема података о позицији</string>
+    <string name="ais_receiving_position_data">Примање података о позицији</string>
+    <string name="ais_vessels_on_the_map_group">Пловила на мапи</string>
+    <string name="ais_objects_visibility">Видљивост објеката</string>
+    <string name="ais_objects_visibility_summary">Сакриј након %1$s</string>
+    <string name="ais_objects_visibility_desc">Конфигуришите када се пловила без сигнала прецртавају, а када се уклањају са мапе.</string>
+    <string name="ais_collision_warning">Упозорење на судар (КПА)</string>
+    <string name="ais_collision_warning_short">Упозорење на судар</string>
+    <string name="ais_my_vessel">Моје пловило</string>
+    <string name="ais_mmsi">ММСИ</string>
+    <string name="ais_mmsi_not_set">Није подешено</string>
+    <string name="ais_show_on_the_map">Прикажи на мапи</string>
+    <string name="ais_my_vessel_footer">Подесите ММСИ свог пловила како бисте избегли лажна упозорења о судару и, по жељи, приказали његову АИС ознаку на мапи.</string>
+    <string name="ais_connection_tcp_desc">Директно се повезује са НМЕА уређајем (гејтвејем или транспондером) на познатој ИП адреси.</string>
+    <string name="ais_connection_udp_desc">Прима податке емитоване у локалној мрежи. Адреса није потребна.</string>
+    <string name="ais_host_or_ip">Хост или ИП адреса</string>
+    <string name="ais_port">Порт</string>
+    <string name="ais_error_empty_host">Унесите име хоста или ИП адресу</string>
+    <string name="ais_error_empty_port">Унесите број порта</string>
+    <string name="ais_error_port_range">Порт мора бити између 1 и 65535</string>
+    <string name="ais_mark_as_outdated">Означи као застарело</string>
+    <string name="ais_mark_as_outdated_off_desc">Симбол пловила се неће променити. Објекти се и даље уклањају након %1$s.</string>
+    <string name="ais_mark_as_outdated_desc">Прецртајте симбол пловила након %1$s без сигнала.</string>
+    <string name="ais_hide_after">Сакриј након</string>
+    <string name="ais_hide_after_desc">Потпуно уклоните пловило након %1$s без сигнала.</string>
+    <string name="ais_cpa_off_desc">Означава црвеном бојом пловила за која се предвиђа да ће проћи преблизу.</string>
+    <string name="ais_cpa_on_desc">Истиче пловила црвеном бојом када се предвиђа да ће проћи на удаљености мањој од %1$s за мање од %2$s.</string>
+    <string name="ais_cpa_warning_time_title">Време упозорења (ТКПА)</string>
+    <string name="ais_cpa_warning_time_desc">Истиче пловила црвеном бојом %1$s пре најближег приближавања.</string>
+    <string name="ais_cpa_safe_distance">Безбедно растојање (КПА)</string>
+    <string name="ais_cpa_safe_distance_desc">Истиче пловила црвеном бојом када се предвиђа да ће проћи на растојању мањем од %1$s.</string>
+    <string name="ais_set_your_mmsi">Подесите свој ММСИ</string>
+    <string name="ais_set_your_mmsi_desc">Ваше сопствено пловило може да изазива стална упозорења. Подесите свој ММСИ како би га ОсмАнд могао разликовати од других бродова.</string>
+    <string name="ais_set_mmsi">Подеси ММСИ</string>
+    <string name="ais_enter_mmsi">Унесите ММСИ</string>
+    <string name="ais_enter_mmsi_desc">Унесите 9 цифара или оставите празно да бисте обрисали.</string>
+    <string name="ais_error_mmsi_length">Мора имати 9 цифара</string>
+    <string name="ais_reset_plugin_settings">Ресетуј подешавања додатка</string>
+    <string name="ais_reset_connection_settings">Ресетуј подешавања везе</string>
+    <string name="panoramax">Панорамакс</string>
+    <string name="open_panoramax">Отвори Панорамакс</string>
+    <string name="panoramax_image">Panoramax слика</string>
+    <string name="panoramax_no_internet_desc">Фотографије са Панорамакса доступне су само на интернету.</string>
+    <string name="quick_action_showhide_panoramax_descr">Прекидач за приказивање или скривање Панорамакс слоја на мапи.</string>
+    <string name="panoramax_menu_filter_description_new">Филтрирајте снимке према аутору, датуму или врсти.</string>
+    <string name="plugin_panoramax_descr">Прикажите снимке са нивоа улице са Панорамакса, федеративне платформе отвореног типа за фото-мапирање, као слој преко мапе. Ово је корисно за проверу постојеће покривености и планирање снимања преосталих делова.</string>
+    <string name="contour_labels">Натписи</string>
+    <string name="contour_label_direction_descr">Успон: врх сваке бројчане ознаке надморске висине окренут је ка вишем терену, као на папирним топографским картама. Кратке цртице на линијама усмерене су низбрдо.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Smer natpisa</string>
+    <string name="rendering_value_upright_name">Усправно</string>
+    <string name="rendering_value_uphill_name">Узбрдо</string>
+    <string name="shared_string_visibility">Видљивост</string>
+    <string name="opening_hours_public_holiday">Државни празници</string>
+    <string name="opening_hours_school_holiday">Школски распусти</string>
+    <string name="opening_hours_easter">Ускрс</string>
 </resources>

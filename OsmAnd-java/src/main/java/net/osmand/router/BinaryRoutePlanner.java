@@ -490,7 +490,7 @@ public class BinaryRoutePlanner {
 		if (obstacle < 0) {
 			return -1;
 		}
-		double heightObstacle = ctx.getRouter().defineHeightObstacle(road, segmentInd, prevSegmentInd);
+		double heightObstacle = ctx.getRouter().defineHeightObstacle(road, prevSegmentInd, segmentInd);
 		if (heightObstacle < 0) {
 			return -1;
 		}

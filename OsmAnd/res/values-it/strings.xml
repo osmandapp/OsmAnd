@@ -4992,8 +4992,8 @@
     <string name="astro_globular_clusters">Ammassi galattici</string>
     <string name="show_expand_button">Mostra il pulsante espandi</string>
     <string name="start_free_trial">Inizia prova gratuita</string>
-    <string name="open_till_short">Fino</string>
-    <string name="map_widget_memory_info">Informazioni memoria</string>
+    <string name="open_till_short">Fino a</string>
+    <string name="map_widget_memory_info">Informazioni sulla memoria</string>
     <string name="memory_graphics_settings">Memoria grafica</string>
     <string name="shared_string_native">Nativo</string>
     <string name="shared_string_gpu">GPU</string>
@@ -5049,7 +5049,7 @@
     <string name="astro_filter_show_all">Mostra tutto</string>
     <string name="favorite_confirm_delete_folder">Quest\'azione eliminerà la cartella \"%1$s\", incluse le sottocartelle e %2$d punto(i) preferito(i).</string>
     <string name="favorite_folder_invalid_name">Il nome della cartella non può contenere / o %1$s</string>
-    <string name="favorite_folder_duplicate_message">Usare un nome per la cartella che non esista già.</string>
+    <string name="favorite_folder_duplicate_message">Usa un nome della cartella che non esista già.</string>
     <string name="favorite_folder_name">Nome della cartella</string>
     <string name="edit_folder">Modifica cartella</string>
     <string name="memory_used_settings">Heap Java utilizzato</string>
@@ -5340,7 +5340,6 @@
     <string name="share_favorites_preparation_failed">Impossibile preparare i file per la condivisione.</string>
     <string name="share_favorites_share_failed">Impossibile condividere il file.</string>
     <string name="share_favorites_missing_media_warning">Alcuni file multimediali allegati non possono essere inclusi.</string>
-    <string name="search_on_web">Ricerca web</string>
     <string name="astro_lunar_eclipse">Eclissi lunare</string>
     <string name="astro_lunar_eclipse_subtitle">Esplora le eclissi lunari nel mondo</string>
     <string name="astro_previous_lunar_eclipse">Eclissi lunare precedente</string>

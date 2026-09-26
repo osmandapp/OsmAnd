@@ -28,13 +28,18 @@ public class CommonWords {
 		}
 	}
 	private void addFrequent(String string) {
+		addFrequent(string, -1);
+	}
+
+	// rank -1 is the next rank
+	private void addFrequent(String string, int rank) {
 		String aligned = SearchAlgorithms.alignChars(string);
 		if (isCommon(string) || frequentlyUsedWordsDictionary.containsKey(string)) {
 			return;
 		}
-		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
+		frequentlyUsedWordsDictionary.put(string, rank < 0 ? frequentlyUsedWordsDictionary.size() : rank);
 		if (!string.equals(aligned)) {
-			frequentlyUsedWordsDictionary.put(aligned, frequentlyUsedWordsDictionary.size());
+			frequentlyUsedWordsDictionary.put(aligned, rank < 0 ? frequentlyUsedWordsDictionary.size() : rank);
 		}
 	}
 	
@@ -122,11 +127,13 @@ public class CommonWords {
 		if (osmandRegions != null) {
 			Set<String> names = new HashSet<>();
 			parseRegionNames(osmandRegions.getWorldRegion(), names);
+			// one rank for all: the order of the set means nothing
+			int rank = frequentlyUsedWordsDictionary.size();
 			for (String name : names) {
-				addFrequent(name);
+				addFrequent(name, rank);
 //				regionNames.add(name);
 				if (name.contains(".")) {
-					addFrequent(name.replace(".", ""));
+					addFrequent(name.replace(".", ""), rank);
 //					regionNames.add(name.replace(".", ""));
 				}
 			}
