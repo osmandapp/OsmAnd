@@ -1,12 +1,19 @@
 package net.osmand.shared
 
+import net.osmand.shared.gpx.GpxDataItem
+import net.osmand.shared.gpx.GpxDatabase
+import net.osmand.shared.gpx.GpxDbUtils
 import net.osmand.shared.gpx.GpxFile
+import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.GpxTrackAnalysis
+import net.osmand.shared.gpx.GpxTrackAnalysis.Companion.ANALYSIS_VERSION
 import net.osmand.shared.gpx.SplitSegment
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
+import net.osmand.shared.io.KFile
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertSame
 import kotlin.test.assertTrue
@@ -158,6 +165,58 @@ class GpxTrackAnalysisTest {
 		assertTrue(compactAnalysis.pointAttributes.isEmpty())
 		assertEquals(partialEndAttributes.speed,
 			requireNotNull(compactAnalysis.lastUphill).maxSpeed, 0.001f)
+	}
+
+	@Test
+	fun onlyTheAnalysisVersionDecidesWhetherATrackIsReadAgain() {
+		fun dataVersion(dbVersion: Int, analysisVersion: Int) = (dbVersion shl 10) + analysisVersion
+
+		assertFalse(GpxDbUtils.isAnalysisOutdated(GpxDbUtils.createDataVersion(ANALYSIS_VERSION)))
+		// a schema bump alone leaves the analysis current, whatever schema the row was written under
+		assertFalse(GpxDbUtils.isAnalysisOutdated(dataVersion(GpxDatabase.DB_VERSION - 1, ANALYSIS_VERSION)))
+		assertFalse(GpxDbUtils.isAnalysisOutdated(dataVersion(GpxDatabase.DB_VERSION - 5, ANALYSIS_VERSION)))
+		assertFalse(GpxDbUtils.isAnalysisOutdated(dataVersion(GpxDatabase.DB_VERSION + 1, ANALYSIS_VERSION)))
+		// an older analysis is read again whatever the schema, and so is the DATA_VERSION = 0 reset
+		assertTrue(GpxDbUtils.isAnalysisOutdated(dataVersion(GpxDatabase.DB_VERSION, ANALYSIS_VERSION - 1)))
+		assertTrue(GpxDbUtils.isAnalysisOutdated(0))
+	}
+
+	@Test
+	fun addingAnAnalysisColumnBumpsTheAnalysisVersion() {
+		// a DB_VERSION bump alone no longer re-reads the library, so a new analysis column (one
+		// flagged analysisParameter, the values GpxTrackAnalysis computes from the file) stays
+		// empty for existing tracks unless ANALYSIS_VERSION is bumped with it. The count is keyed
+		// by the version so that the bump cannot be skipped by editing the count. When this fails:
+		// bump GpxTrackAnalysis.ANALYSIS_VERSION and add the new count under the new version; never
+		// edit an existing entry. Appearance and metadata columns are not flagged and do not count
+		// here; a metadata column that GpxReader fills from the file, like ACTIVITY_TYPE, needs the
+		// same bump but has no guard
+		val analysisColumnsPerVersion = mapOf(1 to 58)
+
+		val expected = requireNotNull(analysisColumnsPerVersion[ANALYSIS_VERSION]) {
+			"add the analysis column count for ANALYSIS_VERSION $ANALYSIS_VERSION"
+		}
+		assertEquals(expected, GpxParameter.entries.count { it.analysisParameter },
+			"the set of analysis columns changed: bump ANALYSIS_VERSION so that existing tracks are read again, then add the new count under the new version")
+	}
+
+	@Test
+	fun schemaBumpAloneDoesNotMarkAnItemOutdated() {
+		// a root path has no parent, so the item is built without the platform context
+		val item = GpxDataItem(KFile("/")).apply {
+			setAnalysis(GpxTrackAnalysis().apply { wptCategoryNames = "" })
+			setParameter(GpxParameter.FILE_CREATION_TIME, 1L)
+		}
+		val current = GpxDbUtils.createDataVersion(ANALYSIS_VERSION)
+
+		item.setParameter(GpxParameter.DATA_VERSION, current)
+		assertFalse(GpxDbUtils.isAnalyseNeeded(item))
+		// the same row after a schema bump: written under the previous schema, analysis current
+		item.setParameter(GpxParameter.DATA_VERSION, current - (1 shl 10))
+		assertFalse(GpxDbUtils.isAnalyseNeeded(item))
+		// the reset GpxDbHelper uses to force a recalculation
+		item.setParameter(GpxParameter.DATA_VERSION, 0)
+		assertTrue(GpxDbUtils.isAnalyseNeeded(item))
 	}
 
 	private fun createSparseSegment() = TrkSegment().apply {
