@@ -179,6 +179,8 @@ public class AppVersionUpgradeOnInit {
 	public static final int LAST_APP_VERSION = VERSION_5_4_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
+	// Not tied to a version number: must run once on every branch that drops the install-date route widgets
+	private static final String LEGACY_ROUTE_WIDGETS_MIGRATED = "LEGACY_ROUTE_WIDGETS_MIGRATED";
 
 	private final OsmandApplication app;
 
@@ -353,6 +355,10 @@ public class AppVersionUpgradeOnInit {
 					app.getAppInitializer().addOnStartListener(
 							init -> migrateTransparentWidgetsToPanelsAppearance()
 					);
+				}
+				if (!startPrefs.getBoolean(LEGACY_ROUTE_WIDGETS_MIGRATED, false)) {
+					keepLegacyRouteWidgetsForCustomizedProfiles(settings);
+					startPrefs.edit().putBoolean(LEGACY_ROUTE_WIDGETS_MIGRATED, true).commit();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -1162,6 +1168,59 @@ public class AppVersionUpgradeOnInit {
 				settings.ROUTE_RECALCULATION_DISTANCE.setModeValue(mode, DISABLE_MODE);
 			}
 		}
+	}
+
+	private void keepLegacyRouteWidgetsForCustomizedProfiles(@NonNull OsmandSettings settings) {
+		if (!WidgetsAvailabilityHelper.hadLegacyRouteWidgets(app)) {
+			return;
+		}
+		List<String> legacyWidgets = Arrays.asList(INTERMEDIATE_DESTINATION.id, DISTANCE_TO_DESTINATION.id,
+				TIME_TO_INTERMEDIATE.id, TIME_TO_DESTINATION.id);
+		List<ScreenLayoutMode> layoutModes = new ArrayList<>(Arrays.asList(ScreenLayoutMode.values()));
+		layoutModes.add(null);
+
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			for (ScreenLayoutMode layoutMode : layoutModes) {
+				if (!isWidgetsCustomized(settings, appMode, layoutMode)) {
+					continue;
+				}
+				CommonPreference<String> visibilityPref = settings.getMapInfoControls(layoutMode);
+				List<String> visibility = new ArrayList<>(Arrays.asList(visibilityPref.getModeValue(appMode).split(SETTINGS_SEPARATOR)));
+				visibility.remove("");
+				for (String widgetId : legacyWidgets) {
+					if (!isVisibilityDefined(visibility, widgetId)) {
+						visibility.add(widgetId);
+					}
+				}
+				if (!isVisibilityDefined(visibility, ROUTE_INFO.id)) {
+					visibility.add(HIDE_PREFIX + ROUTE_INFO.id);
+				}
+				StringBuilder builder = new StringBuilder();
+				for (String widgetVisibility : visibility) {
+					builder.append(widgetVisibility).append(SETTINGS_SEPARATOR);
+				}
+				visibilityPref.setModeValue(appMode, builder.toString());
+			}
+		}
+	}
+
+	private boolean isWidgetsCustomized(@NonNull OsmandSettings settings, @NonNull ApplicationMode appMode,
+	                                    @Nullable ScreenLayoutMode layoutMode) {
+		if (settings.getMapInfoControls(layoutMode).isSetForMode(appMode)
+				|| settings.getCustomWidgetsKeys(layoutMode).isSetForMode(appMode)) {
+			return true;
+		}
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			if (panel.getOrderPreference(settings, layoutMode).isSetForMode(appMode)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isVisibilityDefined(@NonNull List<String> visibility, @NonNull String widgetId) {
+		return visibility.contains(widgetId) || visibility.contains(COLLAPSED_PREFIX + widgetId)
+				|| visibility.contains(HIDE_PREFIX + widgetId);
 	}
 
 	private void migrateShowNextTurnInfoPrefToWidgetSpecific() {
