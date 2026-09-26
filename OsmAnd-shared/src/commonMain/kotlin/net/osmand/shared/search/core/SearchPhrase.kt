@@ -652,9 +652,6 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 		return r
 	}
 
-	// java's matches takes a null name
-	private fun NameStringMatcher.matchesName(name: String?): Boolean = name != null && matches(name)
-
 	fun getLastUnknownSearchWord(): String {
 		if (otherUnknownWords.size > 0) {
 			return otherUnknownWords[otherUnknownWords.size - 1]

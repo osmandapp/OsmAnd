@@ -256,7 +256,8 @@ class SearchPhraseTest {
 	 * Compares words by the collation keys java's collator gave them, so that a phrase compares
 	 * them here as it did in java whatever the collator of the platform says.
 	 */
-	private class JavaCollator(keys: String) : KCollator {
+	/** java's collator, from the collation keys it gave the words it compared. */
+	internal class JavaCollator(keys: String) : KCollator {
 		private val keys = HashMap<String, String>()
 
 		init {
