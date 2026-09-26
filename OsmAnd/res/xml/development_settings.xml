@@ -156,6 +156,13 @@
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/debugging_and_development" />
 
+	<Preference
+		android:key="refresh_wear_connection"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/refresh_wear_connection_descr"
+		android:title="@string/refresh_wear_connection" />
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="transparent_status_bar"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"

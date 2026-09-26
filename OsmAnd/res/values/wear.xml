@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- Advertised over the Data Layer so the watch app can tell whether a phone running
+	     OsmAnd is reachable. Must stay in sync with WearProtocol.CAPABILITY_PHONE_APP. -->
+	<string-array name="android_wear_capabilities">
+		<item>osmand_phone_app</item>
+	</string-array>
+</resources>

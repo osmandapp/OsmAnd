@@ -1,0 +1,177 @@
+// Watch app. Intentionally has NO dependency on :OsmAnd or :OsmAnd-shared — the only code
+// crossing over is :OsmAnd-wear-api. Everything the watch shows is computed on the phone
+// and sent over the Data Layer.
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
+apply from: rootProject.file("versions.gradle")
+
+def borrowedIconsDir = layout.buildDirectory.dir("generated/borrowed/res").get().asFile
+
+// The watch reuses a handful of the phone app's drawables and its colour palette. They are copied
+// in at build time so OsmAnd/res stays their single source of truth — a copy checked in here would
+// quietly drift the day someone redraws an icon or retunes a colour in the main app.
+tasks.register('copyPhoneResources', Sync) {
+	from("../OsmAnd/res") {
+		// The whole palette: it is 40 KB of text, self-contained (every @color reference inside
+		// it resolves within the same file), and picking entries out by hand would be one more
+		// list to keep in step.
+		include "values/colors.xml"
+		include "drawable/ic_action_track_recordable.xml"
+		include "drawable/ic_action_start_navigation.xml"
+		include "drawable/ic_action_settings.xml"
+		include "drawable/ic_action_flag.xml"
+		include "drawable/ic_action_add.xml"
+		include "drawable/ic_action_rec_stop.xml"
+		include "drawable/ic_action_trip_rec_start.xml"
+		include "drawable/ic_action_trip_rec_pause.xml"
+		include "drawable/ic_action_trip_rec_finish.xml"
+		include "drawable/ic_action_trip_rec_save.xml"
+		include "drawable/ic_action_close.xml"
+		include "drawable/ic_action_done.xml"
+		// Launcher icon layers, one set per distribution channel.
+		include "drawable/ic_launcher_osmand_monochrome.xml"
+		include "drawable/ic_launcher_osmand_plus_monochrome.xml"
+		include "drawable/ic_launcher_osmand_nightly_background.xml"
+		include "drawable/ic_launcher_osmand_nightly_logo.xml"
+		include "mipmap-hdpi/adaptive_icon_osmand*.png"
+		include "mipmap-xhdpi/adaptive_icon_osmand*.png"
+		include "mipmap-xxhdpi/adaptive_icon_osmand*.png"
+		include "mipmap-xxxhdpi/adaptive_icon_osmand*.png"
+	}
+	into borrowedIconsDir
+}
+
+// Hooked onto preBuild rather than the individual resource tasks: every task in a variant
+// depends on preBuild, so the staged icons are in place before anything reads that directory.
+tasks.matching { it.name == "preBuild" }.configureEach { dependsOn(copyPhoneResources) }
+
+android {
+	namespace "net.osmand.wear"
+
+	// Google Play services pairs a phone app with its watch counterpart by applicationId AND
+	// signature. Using a different debug keystore than :OsmAnd would break the Data Layer
+	// link with no error message at all, so both must sign with the same key.
+	signingConfigs {
+		development {
+			storeFile file("../keystores/debug.keystore")
+			storePassword "android"
+			keyAlias "androiddebugkey"
+			keyPassword "android"
+		}
+
+		publishing {
+			storeFile file("/var/lib/jenkins/osmand_key")
+			storePassword System.getenv("OSMAND_APK_PASSWORD")
+			keyAlias "osmand"
+			keyPassword System.getenv("OSMAND_APK_PASSWORD")
+		}
+	}
+	compileSdk osmand_compileSdk
+	buildToolsVersion = osmand_buildToolsVersion
+
+	compileOptions {
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
+	}
+
+	kotlinOptions {
+		jvmTarget = "17"
+	}
+
+	defaultConfig {
+		// Wear OS 3 (Android 11). Older watches need the deprecated embedded-APK
+		// distribution model, which this module does not support.
+		minSdkVersion 30
+		targetSdkVersion osmand_targetSdk
+
+		// Play distinguishes the watch artifact from the phone one by versionCode, so it
+		// must never collide with :OsmAnd's. Offset keeps them in lockstep but distinct.
+		versionCode 5550 + 1
+		versionCode(System.getenv("APK_NUMBER_VERSION")
+				? System.getenv("APK_NUMBER_VERSION").toInteger() + 1 : versionCode)
+		versionName "5.5.0"
+		versionName System.getenv("APK_VERSION") ? System.getenv("APK_VERSION").toString() : versionName
+	}
+
+	sourceSets {
+		main {
+			manifest.srcFile "AndroidManifest.xml"
+			java.srcDirs = ["src/main/kotlin"]
+			// Icons borrowed from the phone app are staged here by copyPhoneResources rather than
+			// duplicated into version control.
+			res.srcDirs = ["src/main/res", borrowedIconsDir]
+		}
+	}
+
+	buildFeatures {
+		compose true
+	}
+
+	// The applicationId must match the phone app's, otherwise Play cannot deliver this APK
+	// to the watch paired with an OsmAnd install. Hence the flavors are duplicated here.
+	// androidFull (F-Droid) and huawei are left out on purpose: neither has Play delivery
+	// or Google Play services on the watch side.
+	// Flavour names carry the "Wear" suffix so a variant is identifiable on its own: the build
+	// variant list and the run configurations show the variant without the module beside it,
+	// and a bare "gplayFullDebug" is indistinguishable from the phone app's own flavours.
+	flavorDimensions "version"
+	productFlavors {
+		nightlyFreeWear {
+			dimension "version"
+			applicationId "net.osmand.dev"
+			resValue "string", "app_name", "OsmAnd Nightly"
+		}
+		gplayFreeWear {
+			dimension "version"
+			applicationId "net.osmand"
+			resValue "string", "app_name", "OsmAnd"
+		}
+		gplayFullWear {
+			dimension "version"
+			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd+"
+		}
+	}
+
+	applicationVariants.configureEach { variant ->
+		// Otherwise the suffix lands in the file name twice: OsmAnd-wear-gplayFullWear-debug.apk.
+		variant.outputs.configureEach { output ->
+			def channel = variant.flavorName.replaceAll(/Wear$/, "")
+			output.outputFileName = "OsmAnd-wear-${channel}-${variant.buildType.name}.apk"
+		}
+
+	}
+
+	buildTypes {
+		debug {
+			signingConfig signingConfigs.development
+		}
+		release {
+			signingConfig signingConfigs.publishing
+			// Measured on a Pixel Watch: R8 takes the release APK from 22.5 MB to 3.6 MB and
+			// halves the janky frames while scrolling, 11.6% to 6.5%. Storage and CPU are both
+			// scarce on a watch, so this is worth more here than it is on the phone.
+			minifyEnabled true
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+		}
+	}
+}
+
+dependencies {
+	implementation project(':OsmAnd-wear-api')
+
+	implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1"
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1"
+
+	implementation "com.google.android.gms:play-services-wearable:20.0.1"
+
+	implementation "androidx.wear.compose:compose-material3:1.6.2"
+	implementation "androidx.wear.compose:compose-foundation:1.6.2"
+	implementation "androidx.wear.compose:compose-navigation:1.6.2"
+	implementation "androidx.activity:activity-compose:1.10.1"
+	implementation "androidx.lifecycle:lifecycle-runtime-compose:2.9.4"
+	implementation "androidx.compose.ui:ui-tooling-preview:1.9.4"
+	debugImplementation "androidx.compose.ui:ui-tooling:1.9.4"
+}

@@ -7,6 +7,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -52,6 +54,7 @@ public abstract class OsmandNotification {
 	private final String groupName;
 
 	private Notification currentNotification;
+	private String lastWearableContent;
 	protected boolean stateChanged;
 
 	private final NotificationManagerCompat notificationManager;
@@ -150,11 +153,34 @@ public abstract class OsmandNotification {
 		Builder wearNotificationBuilder = buildNotification(null, true);
 		if (wearNotificationBuilder != null) {
 			Notification wearNotification = wearNotificationBuilder.build();
+			// Garmin and Samsung watches re-deliver rather than update, so every post buzzes (#16310).
+			String content = getWearableContent(wearNotification);
+			if (!stateChanged && content != null && Algorithms.objectEquals(content, lastWearableContent)) {
+				return;
+			}
+			lastWearableContent = content;
 			if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
 				notificationManager.cancel(getOsmandWearableNotificationId());
 			}
 			notifySafely(notificationManager, wearNotification, getOsmandWearableNotificationId());
 		}
+	}
+
+	@Nullable
+	private static String getWearableContent(@NonNull Notification notification) {
+		Bundle extras = notification.extras;
+		if (extras == null) {
+			return null;
+		}
+		CharSequence title = extras.getCharSequence(Notification.EXTRA_TITLE);
+		CharSequence text = extras.getCharSequence(Notification.EXTRA_BIG_TEXT);
+		if (text == null) {
+			text = extras.getCharSequence(Notification.EXTRA_TEXT);
+		}
+		if (title == null && text == null) {
+			return null;
+		}
+		return title + "\n" + text;
 	}
 
 	public boolean showNotification() {
@@ -222,6 +248,7 @@ public abstract class OsmandNotification {
 
 	public void removeNotification() {
 		currentNotification = null;
+		lastWearableContent = null;
 		notificationManager.cancel(getOsmandNotificationId());
 		notificationManager.cancel(getOsmandWearableNotificationId());
 	}

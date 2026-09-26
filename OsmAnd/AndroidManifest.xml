@@ -1195,6 +1195,16 @@
 				<category android:name="androidx.car.app.category.NAVIGATION"/>
 			</intent-filter>
 		</service>
+
+		<service
+			android:name="net.osmand.plus.wear.WearCommandService"
+			android:exported="true">
+
+			<intent-filter>
+				<action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+				<data android:scheme="wear" android:host="*" android:pathPrefix="/osmand" />
+			</intent-filter>
+		</service>
 	</application>
 
 </manifest> 

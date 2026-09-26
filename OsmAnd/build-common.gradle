@@ -378,6 +378,7 @@ dependencies {
 	implementation project(':OsmAnd-api')
 
 	implementation project(':OsmAnd-shared')
+	implementation project(':OsmAnd-wear-api')
 	implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 	implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 	implementation("androidx.sqlite:sqlite-framework:2.3.1")
@@ -446,6 +447,7 @@ dependencies {
 	implementation "androidx.car.app:app-projected:1.7.0"
 
 	implementation 'com.google.android.gms:play-services-location:21.3.0'
+	implementation 'com.google.android.gms:play-services-wearable:20.0.1'
 
 	//implementation "androidx.tracing:tracing:1.1.0"
 	//debugImplementation 'androidx.test:monitor:1.6.1'
