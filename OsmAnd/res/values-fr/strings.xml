@@ -5348,7 +5348,7 @@
     <string name="ais_my_vessel_footer">Paramétrez le MMSI de votre navire pour éviter de fausses alertes de collision et afficher, en option, son marqueur AIS sur la carte.</string>
     <string name="ais_mark_as_outdated_off_desc">Le symbole du navire ne sera pas modifié. Les objets sont toujours retirés après %1$s.</string>
     <string name="contour_labels">Libellés</string>
-    <string name="rendering_attr_contourLabelDirection_name">Direction des libellés</string>
+    <string name="rendering_attr_contourLabelDirection_name">Orientation des libellés</string>
     <string name="shared_string_visibility">Visibilité</string>
     <string name="opening_hours_public_holiday">Jours fériés</string>
     <string name="opening_hours_school_holiday">Vacances scolaires</string>
