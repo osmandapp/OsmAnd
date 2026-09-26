@@ -37,7 +37,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,11 +51,7 @@ import java.util.regex.Pattern;
  * the names built with their parents. Every object of the file is compared as the regions see it,
  * and so are the region queries at random points of the world and inside the regions, at the points
  * of the search tests and at the centre of every region. Last come the name matching and the
- * helpers that were copied along.
- *
- * {@link OsmandRegions#getAllRegionData} comes out of a {@code HashMap} in java, so its order is
- * java's own, while the copy keeps the order of the file on every platform. Those lists are
- * compared as sets; everything else, in order.
+ * helpers that were copied along. Everything is compared in order.
  *
  * {@link #javaDumpIsWritten} also writes java's answers to {@code build/regions-java.txt}, which
  * {@code OsmandRegionsTest} in OsmAnd-shared holds the copy to on Kotlin/Native.
@@ -116,7 +111,7 @@ public class OsmandRegionsCompatTest {
 		net.osmand.shared.map.OsmandRegions k = (net.osmand.shared.map.OsmandRegions) pair[1];
 		try {
 			compareTree(m, j.getWorldRegion(), k.getWorldRegion());
-			assertEquals(m + " regions", new TreeSet<>(ids(j.getAllRegionData())), new TreeSet<>(ids(k.getAllRegionData())));
+			assertEquals(m + " regions", ids(j.getAllRegionData()), ids(k.getAllRegionData()));
 		} finally {
 			j.close();
 			k.close();
@@ -151,10 +146,9 @@ public class OsmandRegionsCompatTest {
 	/** Every region of the file, looked up by its full name and compared on its own. */
 	@Test
 	public void regionDataIsTheSame() {
-		assertEquals("flattened", new TreeSet<>(java.getFlattenedWorldRegionIds()),
-				new TreeSet<>(copy.getFlattenedWorldRegionIds()));
+		assertEquals("flattened", java.getFlattenedWorldRegionIds(), copy.getFlattenedWorldRegionIds());
 		assertEquals("flattened first", java.getFlattenedWorldRegionIds().get(0), copy.getFlattenedWorldRegionIds().get(0));
-		assertEquals("all", new TreeSet<>(ids(java.getAllRegionData())), new TreeSet<>(ids(copy.getAllRegionData())));
+		assertEquals("all", ids(java.getAllRegionData()), ids(copy.getAllRegionData()));
 		for (WorldRegion j : java.getAllRegionData()) {
 			compareRegion(j.getRegionId(), j, copy.getRegionData(j.getRegionId()));
 		}

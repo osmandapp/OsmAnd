@@ -17,7 +17,6 @@ import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.KSearchAlgorithms
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.collections.KTIntArrayList
-import net.osmand.shared.util.collections.KTroveHashOrder
 import net.osmand.shared.util.primaryCollator
 import net.osmand.shared.util.synchronized
 import okio.IOException
@@ -40,9 +39,6 @@ import kotlin.math.abs
  *   which reads them. Only `main()` calls it, so `query` always searches the file, as it does in
  *   the apps;
  * - `main()` and `testCountry`.
- *
- * The regions keep the order the file lists them in, on every platform: [getAllRegionData] comes
- * out of a `HashMap` in java, whose order is its own, and here it is the file's.
  */
 class OsmandRegions {
 
@@ -53,7 +49,7 @@ class OsmandRegions {
 	private var locale2: String? = null
 
 	private var worldRegion = WorldRegion(WorldRegion.WORLD)
-	private val fullNamesToRegionData = LinkedHashMap<String, WorldRegion>()
+	private val fullNamesToRegionData = HashMap<String, WorldRegion>()
 	private val downloadNamesToFullNames = HashMap<String, String>()
 
 	private val mapIndexFields = MapIndexFields()
@@ -463,9 +459,8 @@ class OsmandRegions {
 	}
 
 	/**
-	 * The names a region can be searched by, lowercased and joined with spaces. A name that is part
-	 * of one already taken is left out, so which names are kept depends on the order they are
-	 * walked in: java walks its trove map of names, and so does this, in the same order.
+	 * The names a region can be searched by, lowercased and joined with spaces, in the order of the
+	 * file. A name that is part of one already taken is left out.
 	 */
 	private fun getSearchIndex(obj: BinaryMapDataObject): String {
 		val mi = obj.getMapIndex()
@@ -475,7 +470,8 @@ class OsmandRegions {
 		if (mi == null || names == null || order == null) {
 			return ind.toString()
 		}
-		for (key in KTroveHashOrder.intObjectMapKeys(order)) {
+		for (i in 0 until order.size()) {
+			val key = order[i]
 			val tag = mi.decodeType(key)?.tag ?: continue
 			val value = names[key] ?: continue
 			if (tag.startsWith("name") || tag == "key_name"
