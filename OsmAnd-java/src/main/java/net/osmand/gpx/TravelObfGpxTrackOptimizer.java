@@ -14,7 +14,12 @@ public class TravelObfGpxTrackOptimizer {
 	private static final double EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE = 10.0;
 	private static final double PRECISION_DUPES = KMapUtils.DEFAULT_LATLON_PRECISION;
 	private static final double PRECISION_EQUAL = KMapUtils.DEFAULT_LATLON_PRECISION; // ~1 meter
-	private static final double PRECISION_CLOSE = KMapUtils.DEFAULT_LATLON_PRECISION * 50; // ~50 meters
+	private static final double CLOSE_DISTANCE = 50.0; // meters
+	// cheap bounds for CLOSE_DISTANCE: a degree of latitude is never shorter than 110574 m, and a
+	// degree of longitude never shorter than 9600 m within the map (|lat| <= 85.05), so neither can
+	// reject a pair that is really within CLOSE_DISTANCE
+	private static final double CLOSE_MAX_LAT_DEGREES = CLOSE_DISTANCE / 110574.0;
+	private static final double CLOSE_MAX_LON_DEGREES = CLOSE_DISTANCE / 9600.0;
 
 	public static Track mergeOverlappedSegmentsAtEdges(Track track) {
 		Set<String> duplicates = new HashSet<>();
@@ -220,8 +225,17 @@ public class TravelObfGpxTrackOptimizer {
 	}
 
 	private static boolean closeWptPts(WptPt p1, WptPt p2) {
-		return KMapUtils.INSTANCE.areLatLonEqual(
-				p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude(), PRECISION_CLOSE);
+		// by distance, not per axis in degrees: a degree of longitude is shorter than a degree of
+		// latitude, so the same tolerance used to accept ~55 m north-south and only ~36 m east-west
+		// at these latitudes, and a gap between two pieces was joined or not depending on its bearing.
+		// The pairs are O(segments^2) and almost all of them are far apart, so reject those by the
+		// bounds above and keep the distance for the few that can pass it
+		if (Math.abs(p1.getLatitude() - p2.getLatitude()) > CLOSE_MAX_LAT_DEGREES
+				|| Math.abs(p1.getLongitude() - p2.getLongitude()) > CLOSE_MAX_LON_DEGREES) {
+			return false;
+		}
+		return KMapUtils.INSTANCE.getDistance(
+				p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()) <= CLOSE_DISTANCE;
 	}
 
 	private static String llKey(WptPt edge) {

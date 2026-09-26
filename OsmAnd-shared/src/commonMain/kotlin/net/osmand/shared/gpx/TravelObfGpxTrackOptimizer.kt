@@ -4,6 +4,7 @@ import net.osmand.shared.gpx.primitives.Track
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.util.KMapUtils
+import kotlin.math.abs
 
 /**
  * Joins the pieces a route was cut into by the files it was written to. A route crossing a region
@@ -21,7 +22,12 @@ object TravelObfGpxTrackOptimizer {
 	private const val EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE = 10.0
 	private const val PRECISION_DUPES = KMapUtils.DEFAULT_LATLON_PRECISION
 	private const val PRECISION_EQUAL = KMapUtils.DEFAULT_LATLON_PRECISION // ~1 meter
-	private const val PRECISION_CLOSE = KMapUtils.DEFAULT_LATLON_PRECISION * 50 // ~50 meters
+	private const val CLOSE_DISTANCE = 50.0 // meters
+	// cheap bounds for CLOSE_DISTANCE: a degree of latitude is never shorter than 110574 m, and a
+	// degree of longitude never shorter than 9600 m within the map (|lat| <= 85.05), so neither can
+	// reject a pair that is really within CLOSE_DISTANCE
+	private const val CLOSE_MAX_LAT_DEGREES = CLOSE_DISTANCE / 110574.0
+	private const val CLOSE_MAX_LON_DEGREES = CLOSE_DISTANCE / 9600.0
 
 	/** The track with its overlapping ends trimmed and the pieces joined end to end. */
 	fun mergeOverlappedSegmentsAtEdges(track: Track): Track {
@@ -245,8 +251,18 @@ object TravelObfGpxTrackOptimizer {
 	private fun equalWptPts(p1: WptPt, p2: WptPt): Boolean =
 		KMapUtils.areLatLonEqual(p1.lat, p1.lon, p2.lat, p2.lon, PRECISION_EQUAL)
 
-	private fun closeWptPts(p1: WptPt, p2: WptPt): Boolean =
-		KMapUtils.areLatLonEqual(p1.lat, p1.lon, p2.lat, p2.lon, PRECISION_CLOSE)
+	private fun closeWptPts(p1: WptPt, p2: WptPt): Boolean {
+		// by distance, not per axis in degrees: a degree of longitude is shorter than a degree of
+		// latitude, so the same tolerance used to accept ~55 m north-south and only ~36 m east-west
+		// at these latitudes, and a gap between two pieces was joined or not depending on its bearing.
+		// The pairs are O(segments^2) and almost all of them are far apart, so reject those by the
+		// bounds above and keep the distance for the few that can pass it
+		if (abs(p1.lat - p2.lat) > CLOSE_MAX_LAT_DEGREES ||
+			abs(p1.lon - p2.lon) > CLOSE_MAX_LON_DEGREES) {
+			return false
+		}
+		return KMapUtils.getDistance(p1.lat, p1.lon, p2.lat, p2.lon) <= CLOSE_DISTANCE
+	}
 
 	/** A point rounded to about a metre, which is how two readings of one place are matched. */
 	private fun llKey(edge: WptPt): String =
