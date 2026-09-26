@@ -35,6 +35,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.DelayAutoCompleteTextView;
 
@@ -147,12 +148,9 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
 
         EditText dateFromEt = view.findViewById(R.id.date_from_edit_text);
         DatePickerDialog.OnDateSetListener dateFromDialog = (v, year, monthOfYear, dayOfMonth) -> {
-            Calendar from = Calendar.getInstance();
-            from.set(Calendar.YEAR, year);
-            from.set(Calendar.MONTH, monthOfYear);
-            from.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            dateFromEt.setText(dateFormat.format(from.getTime()));
-            plugin.MAPILLARY_FILTER_FROM_DATE.set(from.getTimeInMillis());
+            long from = OsmAndFormatter.getStartOfDay(year, monthOfYear, dayOfMonth);
+            dateFromEt.setText(dateFormat.format(new Date(from)));
+            plugin.MAPILLARY_FILTER_FROM_DATE.set(from);
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         };
@@ -168,12 +166,9 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
 
         EditText dateToEt = view.findViewById(R.id.date_to_edit_text);
         DatePickerDialog.OnDateSetListener dateToDialog = (v, year, monthOfYear, dayOfMonth) -> {
-            Calendar to = Calendar.getInstance();
-            to.set(Calendar.YEAR, year);
-            to.set(Calendar.MONTH, monthOfYear);
-            to.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            dateToEt.setText(dateFormat.format(to.getTime()));
-            plugin.MAPILLARY_FILTER_TO_DATE.set(to.getTimeInMillis());
+            long to = OsmAndFormatter.getEndOfDay(year, monthOfYear, dayOfMonth);
+            dateToEt.setText(dateFormat.format(new Date(to)));
+            plugin.MAPILLARY_FILTER_TO_DATE.set(to);
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         };

@@ -15,8 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.PanoramaxTilesProvider;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -57,6 +59,9 @@ public class PanoramaxPlugin extends OsmandPlugin {
 	public final CommonPreference<Long> PANORAMAX_FILTER_TO_DATE;
 	public final CommonPreference<Boolean> PANORAMAX_FILTER_PANO;
 
+	// Local metadata identifying the filter state used to render the raster cache.
+	public final CommonPreference<String> PANORAMAX_RASTER_CACHE_KEY;
+
 	private MapActivity mapActivity;
 
 	@Nullable
@@ -73,6 +78,16 @@ public class PanoramaxPlugin extends OsmandPlugin {
 		PANORAMAX_FILTER_FROM_DATE = registerLongPreference("panoramax_filter_from_date", 0).makeGlobal().makeShared();
 		PANORAMAX_FILTER_TO_DATE = registerLongPreference("panoramax_filter_to_date", 0).makeGlobal().makeShared();
 		PANORAMAX_FILTER_PANO = registerBooleanPreference("panoramax_filter_pano", false).makeGlobal().makeShared();
+
+		PANORAMAX_RASTER_CACHE_KEY = registerStringPreference("panoramax_raster_cache_key", "").makeGlobal();
+	}
+
+	public void reload() {
+		if (vectorLayer != null) {
+			vectorLayer.reload();
+		} else {
+			PanoramaxTilesProvider.clearRasterCache(app);
+		}
 	}
 
 	@Override
@@ -141,6 +156,7 @@ public class PanoramaxPlugin extends OsmandPlugin {
 			ITileSource vectorSource = null;
 			if (SHOW_PANORAMAX.get() || force) {
 				vectorSource = settings.getTileSourceByName(TileSourceManager.getPanoramaxVectorSource().getName(), false);
+				applyCanonicalExpiration(vectorSource);
 			}
 			// zOrder maps to a native layer slot as (int) (zOrder * 100), so it must differ from
 			// Mapillary's 0.62f or the two layers overwrite each other's provider under OpenGL.
@@ -152,6 +168,18 @@ public class PanoramaxPlugin extends OsmandPlugin {
 		app.getResourceManager().getMapillaryVectorTilesCache()
 				.setPanoramaxActive(vectorLayer.getMap() != null);
 		app.getOsmandMap().getMapLayers().updateMapSource(mapView, null);
+	}
+
+	/**
+	 * A source restored without expiration metadata comes back as "never expires", which would
+	 * take Panoramax off the one-day policy. Pinning the canonical value here also keeps
+	 * TilesCache and the raster provider aligned: both read the expiration from this object.
+	 */
+	private static void applyCanonicalExpiration(@Nullable ITileSource source) {
+		if (source instanceof TileSourceTemplate template) {
+			template.setExpirationTimeMillis(
+					TileSourceManager.getPanoramaxVectorSource().getExpirationTimeMillis());
+		}
 	}
 
 	private void updateLayer(OsmandMapTileView mapView, ITileSource panoramaxSource, MapTileLayer layer, float layerOrder) {
