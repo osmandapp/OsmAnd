@@ -5410,4 +5410,15 @@
     <string name="heap_dump_auto">Raccogli in caso di utilizzo elevato</string>
     <string name="heap_dump_auto_descr">Quando la memoria heap è quasi piena, una volta ogni 30 minuti.</string>
     <string name="visualizing_button_grid_descr">Celle, slot, frame e log.</string>
+    <string name="contour_labels">Etichette</string>
+    <string name="contour_label_direction_descr">In salita: la parte superiore di ogni numero indicante l\'altitudine guarda verso il terreno più elevato, come sulle mappe topografiche cartacee. Le brevi spunte sulle linee indicano la discesa.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Direzione dell\'etichetta</string>
+    <string name="rendering_value_upright_name">Verticale</string>
+    <string name="rendering_value_uphill_name">In salita</string>
+    <string name="shared_string_visibility">Visibilità</string>
+    <string name="opening_hours_public_holiday">Giorni festivi</string>
+    <string name="opening_hours_school_holiday">Vacanze scolastiche</string>
+    <string name="opening_hours_easter">Pasqua</string>
+    <string name="ais_connection_not_set_up">Non configurata</string>
+    <string name="ais_connection_not_connected">Non connesso</string>
 </resources>

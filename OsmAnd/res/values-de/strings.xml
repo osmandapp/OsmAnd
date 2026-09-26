@@ -2304,7 +2304,7 @@
     <string name="paste_Osmand_data_folder_path">Einfügen des Pfades zum Ordner mit OsmAnd-Daten</string>
     <string name="change_osmand_data_folder_question">OsmAnd-Datenordner ändern\?</string>
     <string name="move_maps_to_new_destination">Zum neuen Ziel verschieben</string>
-    <string name="change_data_storage_folder">Speicherordner ändern</string>
+    <string name="change_data_storage_folder">Ordner für Daten ändern</string>
     <string name="rendering_attr_piste_type_snow_park_name">Winter-Funpark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Schlitten</string>
     <string name="rendering_attr_piste_type_sled_name">Schlitten</string>
@@ -5199,9 +5199,9 @@
     <string name="shared_string_recent">Kürzlich</string>
     <string name="last_week">Letzte Woche</string>
     <string name="history_is_turned_off">Verlauf ist deaktiviert</string>
-    <string name="data_storage">Datenspeicher</string>
-    <string name="main_storage">Hauptspeicher</string>
-    <string name="media_storage">Medienspeicher</string>
+    <string name="data_storage">Ordner für Daten</string>
+    <string name="main_storage">Ordner für Daten</string>
+    <string name="media_storage">Ordner für Mediendateien</string>
     <string name="camera_folder">Kameraordner</string>
     <string name="route_calculation_method">Routenberechnungsmethode</string>
     <string name="route_calculation_method_standard_only">Nur Standard</string>
@@ -5285,7 +5285,7 @@
     <string name="required_maps_route_overview">Routen-Überblick:</string>
     <string name="free_download_limit_reached_description">Unbegrenzte Karten-Downloads und -Updates freischalten</string>
     <string name="open_history_settings">Einstellungen für den Verlauf öffnen</string>
-    <string name="change_media_storage_question">Medienspeicher ändern?</string>
+    <string name="change_media_storage_question">Ordner für Mediendateien ändern?</string>
     <string name="gallery_stats_size">Größe %1$s.</string>
     <string name="coordinate_format_cancel_changes_title">Nicht gespeicherte Änderungen</string>
     <string name="astro_eclipse_maximum">Maximum</string>
