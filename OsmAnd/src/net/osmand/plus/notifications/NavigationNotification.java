@@ -203,7 +203,8 @@ public class NavigationNotification extends OsmandNotification {
 				notificationText.append(distanceStr)
 						.append(" • ").append(timeStr)
 						.append(" • ").append(etaStr);
-				if (speedStr != null) {
+				// Speed changes on every fix, which would rewrite the bridged text every fix (#16310).
+				if (speedStr != null && !wearable) {
 					notificationText.append(" • ").append(speedStr);
 				}
 			} else {
