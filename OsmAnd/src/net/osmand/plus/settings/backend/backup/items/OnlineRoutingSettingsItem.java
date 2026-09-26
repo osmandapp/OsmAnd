@@ -90,7 +90,10 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 					if (cachedEngine == null) {
 						cachedEngine = helper.getEngineByName(duplicate.getName(app));
 					}
-					if (cachedEngine != null) {
+					// Only a key change needs the old entry removed: saving under the same key
+					// replaces the engine in place and avoids a redundant shared-setting change.
+					if (cachedEngine != null
+							&& !Algorithms.objectEquals(cachedEngine.getStringKey(), duplicate.getStringKey())) {
 						helper.deleteEngine(cachedEngine);
 					}
 				}
