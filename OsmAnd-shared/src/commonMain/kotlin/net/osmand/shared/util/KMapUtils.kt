@@ -694,6 +694,16 @@ object KMapUtils {
 		return abs(lat1 - lat2) < precision && abs(lon1 - lon2) < precision
 	}
 
+	fun calculate31BboxUsingRhumb(radiusMeters: Int, l: KLatLon): KQuadRect {
+		val northWest = rhumbDestinationPoint(l.latitude, l.longitude, radiusMeters.toDouble(), 315.0)
+		val southEast = rhumbDestinationPoint(l.latitude, l.longitude, radiusMeters.toDouble(), 135.0)
+		val top = get31TileNumberY(min(MAX_LATITUDE, northWest.latitude))
+		val left = get31TileNumberX(max(MIN_LONGITUDE, northWest.longitude))
+		val bottom = get31TileNumberY(max(MIN_LATITUDE, southEast.latitude))
+		val right = get31TileNumberX(min(MAX_LONGITUDE, southEast.longitude))
+		return KQuadRect(left.toDouble(), top.toDouble(), right.toDouble(), bottom.toDouble())
+	}
+
 	fun rhumbDestinationPoint(latLon: KLatLon, distance: Double, bearing: Double): KLatLon {
 		return rhumbDestinationPoint(latLon.latitude, latLon.longitude, distance, bearing)
 	}
