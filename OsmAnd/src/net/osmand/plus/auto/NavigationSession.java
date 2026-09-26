@@ -547,6 +547,15 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		return false;
 	}
 
+	private boolean isPrivateAccessScreenPresent() {
+		for (Screen screen : getScreenManager().getScreenStack()) {
+			if (screen instanceof PrivateAccessScreen) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private void showRoutePreview() {
 		if (isPrivateAccessScreenShown()) {
 			return;
@@ -878,7 +887,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onRequestPrivateAccessRouting() {
-		if (routingHelper.isRouteCalculated()) {
+		if (routingHelper.isRouteCalculated() && !isPrivateAccessScreenPresent()) {
 			OsmandSettings settings = getApp().getSettings();
 			ApplicationMode appMode = routingHelper.getAppMode();
 			if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(appMode)) {
