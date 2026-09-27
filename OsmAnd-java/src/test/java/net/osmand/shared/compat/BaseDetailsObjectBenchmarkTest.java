@@ -141,7 +141,7 @@ public class BaseDetailsObjectBenchmarkTest {
 	}
 
 	/** The drawn object {@link BaseDetailsObjectCompatTest#spec} wrote. */
-	private static RenderedObject drawn(String spec) {
+	static RenderedObject drawn(String spec) {
 		String[] f = spec.split(",", -1);
 		RenderedObject d = new RenderedObject();
 		if (!f[3].isEmpty()) {
