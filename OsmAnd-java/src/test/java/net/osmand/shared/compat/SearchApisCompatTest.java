@@ -1148,7 +1148,7 @@ public class SearchApisCompatTest {
 		}
 	}
 
-	private static final class CopyTranslator implements net.osmand.shared.osm.PoiTranslator {
+	static final class CopyTranslator implements net.osmand.shared.osm.PoiTranslator {
 
 		@Override
 		public String getTranslation(net.osmand.shared.osm.AbstractPoiType type) {
