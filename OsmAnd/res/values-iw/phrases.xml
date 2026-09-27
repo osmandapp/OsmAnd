@@ -4306,7 +4306,7 @@
     <string name="poi_generator_type_steam_turbine">סוג המחולל: טורבינת קיטור</string>
     <string name="poi_generator_type_heat_pump">סוג המחולל: משאבת חום</string>
     <string name="poi_generator_type_solar_thermal_collector">סוג המחולל: קולט תרמו־סולארי</string>
-    <string name="poi_generator_type_solar_photovoltaic_panel">סוג המחולל: לוח פוטו־וולטאי</string>
+    <string name="poi_generator_type_solar_photovoltaic_panel">סוג המחולל: לוח סולארי</string>
     <string name="poi_generator_type_steam_generator">סוג המחולל: מחולל קיטור</string>
     <string name="poi_generator_type_boiler">סוג המחולל: דוד</string>
     <string name="poi_generator_type_gas_turbine">סוג המחולל: טורבינת גז</string>
