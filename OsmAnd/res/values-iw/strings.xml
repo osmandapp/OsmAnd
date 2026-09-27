@@ -4070,7 +4070,7 @@
     <string name="unknown_bt_device">התקן לא ידוע</string>
     <string name="shared_string_decrease">הפחתה</string>
     <string name="shared_string_increase">הגדלה</string>
-    <string name="change_zoom_action_descr">שינוי התקריב במפה.</string>
+    <string name="change_zoom_action_descr">שינוי המרחק מהמפה.</string>
     <string name="navigation_action_descr">פתיחת הניווט.</string>
     <string name="battery_saving_mode">מצב חסכון בסוללה</string>
     <string name="obd_vehicle_info">פרטי כלי הרכב</string>
