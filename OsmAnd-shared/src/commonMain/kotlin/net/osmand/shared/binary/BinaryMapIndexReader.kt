@@ -52,6 +52,14 @@ class BinaryMapIndexReader {
 	private val poiAdapter: BinaryMapPoiReaderAdapter
 	private val addressAdapter: BinaryMapAddressReaderAdapter
 
+	/**
+	 * The keys at the top of the indexed string tables searches have read, by where each is in the
+	 * file, prepared for matching once. A name search reads every one of them, five hundred to two
+	 * thousand of a regional map, and the next search the same ones; a subtable only for a key that
+	 * matches. Like [codedIS], for one search at a time.
+	 */
+	private val topIndexedStringKeys = KTLongObjectMap<IndexedStringKey>()
+
 	private var version: Int = 0
 	private var dateCreated: Long = 0
 	private var initCorrectly = false
@@ -1244,9 +1252,9 @@ class BinaryMapIndexReader {
 
 	/**
 	 * The walk behind [readIndexedStringTablePrefixes]. The queries come prepared, and each key is
-	 * prepared once for all of them: a table of a regional map holds tens of thousands of keys, and
-	 * reducing both strings on every comparison was most of the time a name search took on
-	 * Kotlin/Native.
+	 * prepared once for all of them, the keys at the top of a table once for all the searches after,
+	 * [topIndexedStringKeys]: a table of a regional map holds tens of thousands of keys, and reducing
+	 * both strings on every comparison was most of the time a name search took on Kotlin/Native.
 	 */
 	private fun readIndexedStringTablePrefixes(
 		queries: List<KCollatorStringMatcher.PreparedName?>, prefix: String,
@@ -1261,12 +1269,10 @@ class BinaryMapIndexReader {
 			when (CodedInputStream.getTagFieldNumber(t)) {
 				0 -> return
 				IndexedStringTable.KEY_FIELD_NUMBER -> {
-					var read = codedIS.readString()
-					if (prefix.isNotEmpty()) {
-						read = prefix + read
-					}
+					val top = if (prefix.isEmpty()) readTopIndexedStringKey() else null
+					val read = top?.key ?: (prefix + codedIS.readString())
 					key = read
-					shouldWeReadSubtable = matchIndexedStringTablePrefix(queries, read, matched, matchedSubtables)
+					shouldWeReadSubtable = matchIndexedStringTablePrefix(queries, read, top, matched, matchedSubtables)
 				}
 				IndexedStringTable.VAL_FIELD_NUMBER -> {
 					val value = readInt().toInt() // FIXME for 64 bit support
@@ -1306,11 +1312,11 @@ class BinaryMapIndexReader {
 	}
 
 	private fun matchIndexedStringTablePrefix(
-		queries: List<KCollatorStringMatcher.PreparedName?>, key: String, matched: BooleanArray,
-		matchedSubtables: BooleanArray
+		queries: List<KCollatorStringMatcher.PreparedName?>, key: String, top: IndexedStringKey?,
+		matched: BooleanArray, matchedSubtables: BooleanArray
 	): Boolean {
 		var shouldWeReadSubtable = false
-		var preparedKey: KCollatorStringMatcher.PreparedName? = null
+		var preparedKey = top?.prepared
 		for (i in queries.indices) {
 			val query = queries[i]
 			matched[i] = false
@@ -1318,7 +1324,10 @@ class BinaryMapIndexReader {
 			if (query == null) {
 				continue
 			}
-			val keyName = preparedKey ?: KCollatorStringMatcher.PreparedName(key).also { preparedKey = it }
+			val keyName = preparedKey ?: KCollatorStringMatcher.PreparedName(key).also {
+				preparedKey = it
+				top?.prepared = it
+			}
 			val keyStartsWithQuery = KCollatorStringMatcher.cmatchesPrepared(
 				keyName, query.key, KStringMatcherMode.CHECK_ONLY_STARTS_WITH
 			)
@@ -1331,6 +1340,23 @@ class BinaryMapIndexReader {
 			shouldWeReadSubtable = shouldWeReadSubtable || potentialBranchMatch
 		}
 		return shouldWeReadSubtable
+	}
+
+	private fun readTopIndexedStringKey(): IndexedStringKey {
+		val at = codedIS.getTotalBytesRead()
+		val known = topIndexedStringKeys[at]
+		if (known != null) {
+			codedIS.skipRawBytes(codedIS.readRawVarint32().toLong())
+			return known
+		}
+		val read = IndexedStringKey(codedIS.readString())
+		topIndexedStringKeys.put(at, read)
+		return read
+	}
+
+	/** A key at the top of an indexed string table, prepared for matching the first time a query needs it. */
+	private class IndexedStringKey(val key: String) {
+		var prepared: KCollatorStringMatcher.PreparedName? = null
 	}
 
 	fun close() {
