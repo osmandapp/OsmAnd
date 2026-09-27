@@ -26,6 +26,7 @@ import net.osmand.shared.util.primaryCollator
 import net.osmand.shared.util.readJavaDump
 import okio.FileSystem
 import okio.Path.Companion.toPath
+import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -73,6 +74,35 @@ class SearchPhraseTest {
 		assertTrue(set.contains("B"))
 		assertTrue(set.remove("B"))
 		assertEquals(listOf("a"), set.toList())
+	}
+
+	@Test
+	fun splitWordsAsTheRegex() {
+		setUp
+		// java's \s is [ \t\n\x0B\f\r]
+		for (c in 0..0xFFFF) {
+			val between = "a" + c.toChar() + "b"
+			val delimiter = c == ' '.code || c == ','.code || c in 9..13
+			assertEquals(if (delimiter) 2 else 1, SearchPhrase.splitWords(between, ArrayList(), SearchPhrase.ALLDELIMITERS).size, c.toString(16))
+			assertEquals(if (delimiter || c == '-'.code) 2 else 1,
+				SearchPhrase.splitWords(between, ArrayList(), SearchPhrase.ALLDELIMITERS_WITH_HYPHEN).size, c.toString(16))
+		}
+		// what the delimiters and trim take, among letters and spaces they do not take
+		val alphabet = (0..0x20).map { it.toChar() } + listOf(',', '-', 'a', 'b', '\u0451', '1', '\u00A0', '\u2003', '\u0085', '\u007F')
+		// java's regexes with its \s spelled out
+		val regexes = mapOf(
+			SearchPhrase.ALLDELIMITERS to Regex("[ \\t\\n\\u000B\\f\\r,]"),
+			SearchPhrase.ALLDELIMITERS_WITH_HYPHEN to Regex("[ \\t\\n\\u000B\\f\\r,-]")
+		)
+		val random = Random(7)
+		repeat(20000) {
+			val w = CharArray(random.nextInt(12)) { alphabet[random.nextInt(alphabet.size)] }.concatToString()
+			for ((delimiters, regex) in regexes) {
+				val expected = w.split(regex).map { it.trim { c -> c <= ' ' } }.filter { it.isNotEmpty() }
+				assertEquals(expected, SearchPhrase.splitWords(w, ArrayList(), delimiters), "${dumpHex(w)} $delimiters")
+			}
+		}
+		assertEquals(listOf("a", "b c"), SearchPhrase.splitWords(" a| b c ", ArrayList(), "\\|"))
 	}
 
 	@Test
