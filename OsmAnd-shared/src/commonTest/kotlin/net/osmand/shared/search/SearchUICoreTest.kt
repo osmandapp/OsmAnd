@@ -15,9 +15,14 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import net.osmand.shared.binary.BinaryMapIndexReader
+import net.osmand.shared.binary.GeocodingUtilities
+import net.osmand.shared.binary.GeocodingUtilitiesTest
 import net.osmand.shared.binary.ResultMatcher
+import net.osmand.shared.data.Building
 import net.osmand.shared.data.KLatLon
+import net.osmand.shared.data.Street
 import net.osmand.shared.osm.MapPoiTypes
+import net.osmand.shared.routing.RoutingContext
 import net.osmand.shared.routing.RoutingTestFixtures
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.SearchUICore.SearchResultCollection
@@ -74,8 +79,8 @@ import kotlin.test.fail
  *
  * [searchTestCases] runs the cases of `SearchUICoreTest` as it runs them and compares what they
  * expect, with the words compared by the collation keys java gave them; with the collator of the
- * platform, it counts the results that are not the ones expected. The reverse geocoding of the
- * results marked with `@` comes with the geocoding.
+ * platform, it counts the results that are not the ones expected. The results marked with `@` are
+ * geocoded back, and must come back as the building they are.
  */
 class SearchUICoreTest {
 
@@ -291,6 +296,7 @@ class SearchUICoreTest {
 		var cases = 0
 		var compared = 0
 		var orderedOtherwise = 0
+		val geocoded = ArrayList<String>()
 		try {
 			while (true) {
 				val line = source.readUtf8Line() ?: break
@@ -310,9 +316,9 @@ class SearchUICoreTest {
 					val json = Json.parseToJsonElement(dumpUnhex(f[5])).jsonObject
 					val files = if (f[3] == "-") emptyList() else f[3].split(",").map { dumpUnhex(it) }
 					val name = dumpUnhex(f[1])
-					compared += testCase(name, json, files, readers, SearchPhraseTest.JavaCollator(keys.substring(2)), mismatches)
+					compared += testCase(name, json, files, readers, SearchPhraseTest.JavaCollator(keys.substring(2)), mismatches, geocoded)
 					val platform = ArrayList<String>()
-					testCase(name, json, files, readers, null, platform)
+					testCase(name, json, files, readers, null, platform, null)
 					orderedOtherwise += platform.size
 					cases++
 				}
@@ -326,20 +332,22 @@ class SearchUICoreTest {
 		if (mismatches.isNotEmpty()) {
 			fail("${mismatches.size} results not as expected:\n" + mismatches.take(10).joinToString("\n"))
 		}
-		assertTrue(cases > 50 && compared > 500, "$cases cases, $compared results")
+		assertTrue(cases > 50 && compared > 500 && geocoded.size >= 9, "$cases cases, $compared results, ${geocoded.size} geocoded")
 		println(
-			"SearchUICoreTest: $cases cases of SearchUICoreTest as expected on ${testPlatformName()}, $compared results; " +
+			"SearchUICoreTest: $cases cases of SearchUICoreTest as expected on ${testPlatformName()}, $compared results, " +
+					"${geocoded.size} of them geocoded back to themselves; " +
 					"with the collator of the platform, $orderedOtherwise results are not the ones expected"
 		)
 	}
 
 	/**
 	 * `SearchUICoreTest.testSearch` of OsmAnd-java, with the words compared by [collator], or by the
-	 * collator of the platform; the number of results compared.
+	 * collator of the platform; the number of results compared. With [geocoded], the results marked
+	 * with `@` are geocoded back, as `testReverseGeocoding` does, and added to it.
 	 */
 	private fun testCase(
 		name: String, json: JsonObject, files: List<String>, readers: HashMap<String, BinaryMapIndexReader>,
-		collator: KCollator?, mismatches: MutableList<String>
+		collator: KCollator?, mismatches: MutableList<String>, geocoded: MutableList<String>?
 	): Int {
 		val settingsJson = json.getValue("settings").jsonObject
 		if (settingsJson["disabled"]?.jsonPrimitive?.booleanOrNull == true) {
@@ -385,6 +393,7 @@ class SearchUICoreTest {
 				if (expected.indexOf('[') != -1) {
 					expected = expected.substring(0, expected.indexOf('[')).trim { it <= ' ' }
 				}
+				val testGeocoding = expected.startsWith("@")
 				expected = expected.removePrefix("@")
 				val present = if (i >= searchResults.size) "#MISSING ${i + 1}" else
 					SearchUICore.formatSearchResultForTest(true, searchResults[i], phrase)
@@ -392,9 +401,47 @@ class SearchUICoreTest {
 					mismatches.add("$name '$text' ${i + 1}: expected '$expected', found '$present'")
 				}
 				compared++
+				if (testGeocoding && geocoded != null) {
+					val reader = files.firstOrNull()?.let { readers[it] }
+					val wrong = if (reader == null) "no map to geocode on" else {
+						val ctx = GeocodingUtilitiesTest.defaultContext(reader)
+						try {
+							reverseGeocoding(searchResults.getOrNull(i), reader, ctx)
+						} finally {
+							GeocodingUtilitiesTest.close(listOf(ctx))
+						}
+					}
+					if (wrong != null) {
+						mismatches.add("$name '$text' ${i + 1}: $wrong")
+					}
+					geocoded.add(expected)
+				}
 			}
 		}
 		return compared
+	}
+
+	/**
+	 * `SearchUICoreTest.testReverseGeocoding`: what is wrong with the first address [GeocodingUtilities]
+	 * finds at the building [r] found, null when it is that building of that street of that settlement.
+	 */
+	private fun reverseGeocoding(r: SearchResult?, reader: BinaryMapIndexReader, ctx: RoutingContext): String? {
+		val l = r?.location ?: return "no result to geocode"
+		val utils = GeocodingUtilities()
+		val found = utils.sortGeocodingResults(listOf(reader), utils.reverseGeocodingSearch(ctx, l.latitude, l.longitude, false))
+		val b1 = r.`object` as? Building
+		val s1 = r.relatedObject as? Street
+		if (found.isEmpty()) {
+			return "geocoded to nothing"
+		}
+		if (b1 == null || s1 == null) {
+			return "not a building of a street"
+		}
+		val g = found[0]
+		if (s1.getCity() != g.city || s1.getName() != g.street?.getName() || b1.getName() != g.building?.getName()) {
+			return "geocoded to $g, not ${b1.getName()} ${s1.getName()} ${s1.getCity()?.getName()}"
+		}
+		return null
 	}
 
 	private fun parseResults(json: JsonObject, tag: String, results: List<MutableList<String>>) {
