@@ -123,18 +123,20 @@ public class SearchApisCompatTest {
 	private static int ties;
 	private static int otherDuplicates;
 
-	/** A case of {@code SearchUICoreTest}: its settings, obf files and phrases. */
-	private static final class Case {
+	/** A case of {@code SearchUICoreTest}: its settings, obf files and phrases, and its json. */
+	static final class Case {
 		final String name;
 		final String settings;
 		final List<String> files;
 		final List<String> phrases;
+		final String json;
 
-		Case(String name, String settings, List<String> files, List<String> phrases) {
+		Case(String name, String settings, List<String> files, List<String> phrases, String json) {
 			this.name = name;
 			this.settings = settings;
 			this.files = files;
 			this.phrases = phrases;
+			this.json = json;
 		}
 
 		boolean hasPoiTypePhrase() {
@@ -160,6 +162,16 @@ public class SearchApisCompatTest {
 
 	@BeforeClass
 	public static void open() throws Exception {
+		setUpTypes();
+		for (File f : TestObf.searchFiles()) {
+			javaReaders.put(f.getName(), new BinaryMapIndexReader(new RandomAccessFile(f, "r"), f));
+			copyReaders.put(f.getName(), new net.osmand.shared.binary.BinaryMapIndexReader(f.getPath()));
+		}
+		cases.addAll(loadCases(javaReaders.keySet()));
+	}
+
+	/** The regions, the english names of the poi types, and the poi types of both sides with them. */
+	static void setUpTypes() throws Exception {
 		assertTrue(REGIONS + " is missing; :OsmAnd-java:processResources downloads it", REGIONS.exists());
 		PlatformUtil.setOsmandRegions(new OsmandRegions(REGIONS.getPath()));
 		net.osmand.shared.binary.CommonWords.Companion.setOsmandRegions(
@@ -174,11 +186,11 @@ public class SearchApisCompatTest {
 		MapPoiTypes.getDefault().setPoiTranslator(new JavaTranslator());
 		net.osmand.shared.osm.MapPoiTypes.Companion.setDefault(new net.osmand.shared.osm.MapPoiTypes(POI_TYPES));
 		net.osmand.shared.osm.MapPoiTypes.Companion.getDefault().setPoiTranslator(new CopyTranslator());
+	}
 
-		for (File f : TestObf.searchFiles()) {
-			javaReaders.put(f.getName(), new BinaryMapIndexReader(new RandomAccessFile(f, "r"), f));
-			copyReaders.put(f.getName(), new net.osmand.shared.binary.BinaryMapIndexReader(f.getPath()));
-		}
+	/** The cases of {@code SearchUICoreTest}, each with those of its obf files that are in [obfs]. */
+	static List<Case> loadCases(Set<String> obfs) throws IOException {
+		List<Case> cases = new ArrayList<>();
 		File[] files = SEARCH_CASES.listFiles((dir, name) -> name.endsWith(".json"));
 		assertTrue("search cases in " + SEARCH_CASES + "; collectTestResources copies them", files != null && files.length > 50);
 		Arrays.sort(files);
@@ -192,18 +204,19 @@ public class SearchApisCompatTest {
 			for (int i = 0; arr != null && i < arr.length(); i++) {
 				texts.add(arr.getString(i));
 			}
-			List<String> obfs = new ArrayList<>();
+			List<String> names = new ArrayList<>();
 			JSONArray named = json.optJSONArray("files");
 			if (named != null) {
 				for (int i = 0; i < named.length(); i++) {
-					obfs.add(named.getString(i).replace(".gz", ""));
+					names.add(named.getString(i).replace(".gz", ""));
 				}
 			} else {
-				obfs.add(f.getName().replace(".json", ".obf"));
+				names.add(f.getName().replace(".json", ".obf"));
 			}
-			obfs.removeIf(o -> !javaReaders.containsKey(o));
-			cases.add(new Case(f.getName(), json.getJSONObject("settings").toString(), obfs, texts));
+			names.removeIf(o -> !obfs.contains(o));
+			cases.add(new Case(f.getName(), json.getJSONObject("settings").toString(), names, texts, json.toString()));
 		}
+		return cases;
 	}
 
 	@AfterClass
@@ -247,7 +260,7 @@ public class SearchApisCompatTest {
 			if (maps != null && !maps.isEmpty()) {
 				String[] paths = maps.split(":");
 				for (int i = 0; i < paths.length; i++) {
-					runCase(1000 + i, mapCase(paths[i]));
+					runCase(1000 + i, mapCase(paths[i], javaReaders, copyReaders));
 				}
 			}
 			if (only == null) {
@@ -391,13 +404,15 @@ public class SearchApisCompatTest {
 	/**
 	 * A case made of a real map, which the cases of the tests are not: the settlements, villages and
 	 * postcodes of the file, streets of two settlements with and without a house number, pois around
-	 * its centre, the values of its top index and a few types of pois, searched from its centre.
+	 * its centre, the values of its top index and a few types of pois, searched from its centre. The
+	 * readers of the map on both sides go into [javaMaps] and [copyMaps].
 	 */
-	private static Case mapCase(String path) throws IOException {
+	static Case mapCase(String path, Map<String, BinaryMapIndexReader> javaMaps,
+			Map<String, net.osmand.shared.binary.BinaryMapIndexReader> copyMaps) throws IOException {
 		File f = new File(path);
 		BinaryMapIndexReader r = new BinaryMapIndexReader(new RandomAccessFile(f, "r"), f);
-		javaReaders.put(path, r);
-		copyReaders.put(path, new net.osmand.shared.binary.BinaryMapIndexReader(path));
+		javaMaps.put(path, r);
+		copyMaps.put(path, new net.osmand.shared.binary.BinaryMapIndexReader(path));
 		List<net.osmand.data.City> cities = r.getCities(null, net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks.CITY_TOWN_TYPE, null, null);
 		net.osmand.data.LatLon center = r.getRegionCenter();
 		if (center == null && !cities.isEmpty()) {
@@ -453,7 +468,7 @@ public class SearchApisCompatTest {
 		settings.put("lang", "");
 		settings.put("radiusLevel", 1);
 		settings.put("totalLimit", -1);
-		return new Case(f.getName(), settings.toString(), Collections.singletonList(path), phrases);
+		return new Case(f.getName(), settings.toString(), Collections.singletonList(path), phrases, null);
 	}
 
 	/** The step that takes [n] of [size] things, spread over them. */
@@ -786,6 +801,14 @@ public class SearchApisCompatTest {
 
 	/** A result the api published: all of it, with the objects behind it and its parents. */
 	static String resultLine(Object r) {
+		return resultLine(r, true);
+	}
+
+	/**
+	 * A result, with the weight of its match or without it: the result keeps the weight it is first
+	 * asked for, and the core asks for it after it adds the names of the results it unites.
+	 */
+	static String resultLine(Object r, boolean weight) {
 		Object type = field(r, "objectType");
 		StringBuilder sb = new StringBuilder();
 		sb.append(type).append(' ');
@@ -808,7 +831,7 @@ public class SearchApisCompatTest {
 			sb.append(field(r, "firstUnknownWordMatches")).append(' ');
 			Object words = field(r, "otherWordsMatch");
 			sb.append(words == null ? "null" : v(new ArrayList<>((Collection<?>) words))).append(' ');
-			sb.append(bits((Double) call(r, "getUnknownPhraseMatchWeight"))).append(' ');
+			sb.append(weight ? bits((Double) call(r, "getUnknownPhraseMatchWeight")) : "-").append(' ');
 			sb.append(call(r, "hasImpreciseCoordinates")).append(' ');
 			sb.append(v(call(field(r, "requiredSearchPhrase"), "getText", true)));
 		}
@@ -930,7 +953,7 @@ public class SearchApisCompatTest {
 	 * most words that match: more than one, and which it takes depends on the order of java's
 	 * {@code HashMap} of their names. "-" when the api does not choose.
 	 */
-	private static String tie(Object api, SearchPhrase phrase) {
+	static String tie(Object api, SearchPhrase phrase) {
 		if (phrase.isLastWord(ObjectType.POI_TYPE) || !phrase.isNoSelectedType() || phrase.getFirstUnknownSearchWord().length() <= 1) {
 			return "-";
 		}
@@ -998,31 +1021,44 @@ public class SearchApisCompatTest {
 				new net.osmand.shared.search.core.SearchCoreFactory.SearchRegionByNameAPI()));
 	}
 
-	/** The copy's api of locations and links, told there is no internet: a kotlin lambda OsmAnd-java sees only when it runs. */
+	/** The copy's api of locations and links, told there is no internet. */
 	private static Object copyLocationApi(Object amenitiesApi) {
 		try {
-			Class<?> function = Class.forName("kotlin.jvm.functions.Function0");
-			Object offline = Proxy.newProxyInstance(function.getClassLoader(), new Class<?>[] {function},
-					(proxy, method, args) -> {
-						switch (method.getName()) {
-							case "invoke":
-								return Boolean.FALSE;
-							case "hashCode":
-								return System.identityHashCode(proxy);
-							case "equals":
-								return proxy == args[0];
-							default:
-								return "offline";
-						}
-					});
 			return net.osmand.shared.search.core.SearchCoreFactory.SearchLocationAndUrlAPI.class
-					.getConstructor(amenitiesApi.getClass(), function).newInstance(amenitiesApi, offline);
+					.getConstructor(amenitiesApi.getClass(), FUNCTION0).newInstance(amenitiesApi, offline());
 		} catch (ReflectiveOperationException e) {
 			throw new AssertionError(e);
 		}
 	}
 
-	private static net.osmand.shared.search.core.SearchSettings copySettings(String json) {
+	static final Class<?> FUNCTION0 = function0();
+
+	private static Class<?> function0() {
+		try {
+			return Class.forName("kotlin.jvm.functions.Function0");
+		} catch (ClassNotFoundException e) {
+			throw new AssertionError(e);
+		}
+	}
+
+	/** A kotlin lambda that answers there is no internet, which OsmAnd-java sees only when it runs. */
+	static Object offline() {
+		return Proxy.newProxyInstance(FUNCTION0.getClassLoader(), new Class<?>[] {FUNCTION0},
+				(proxy, method, args) -> {
+					switch (method.getName()) {
+						case "invoke":
+							return Boolean.FALSE;
+						case "hashCode":
+							return System.identityHashCode(proxy);
+						case "equals":
+							return proxy == args[0];
+						default:
+							return "offline";
+					}
+				});
+	}
+
+	static net.osmand.shared.search.core.SearchSettings copySettings(String json) {
 		try {
 			Object parser = Class.forName("kotlinx.serialization.json.Json").getField("Default").get(null);
 			Object element = call(parser, "parseToJsonElement", json);
@@ -1037,7 +1073,7 @@ public class SearchApisCompatTest {
 		return net.osmand.shared.search.core.SearchPhrase.Companion.emptyPhrase(s).generateNewPhrase(text, s);
 	}
 
-	private static SearchResultMatcher javaMatcher(List<Object> found, SearchPhrase phrase) {
+	static SearchResultMatcher javaMatcher(List<Object> found, SearchPhrase phrase) {
 		ResultMatcher<SearchResult> recorder = new ResultMatcher<SearchResult>() {
 			@Override
 			public boolean publish(SearchResult object) {
@@ -1053,7 +1089,7 @@ public class SearchApisCompatTest {
 		return new SearchResultMatcher(recorder, phrase, 0, new AtomicInteger(0), -1);
 	}
 
-	private static Object copyMatcher(List<Object> found, Object phrase) {
+	static Object copyMatcher(List<Object> found, Object phrase) {
 		net.osmand.shared.binary.ResultMatcher<net.osmand.shared.search.core.SearchResult> recorder =
 				new net.osmand.shared.binary.ResultMatcher<net.osmand.shared.search.core.SearchResult>() {
 					@Override

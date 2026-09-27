@@ -389,7 +389,7 @@ class SearchCoreFactoryTest {
 		// the same text as SearchApisCompatTest writes
 
 		/** The line without the settlement of the poi, which is the 14th field. */
-		private fun withoutCity(line: String): String {
+		internal fun withoutCity(line: String): String {
 			val f = line.split(' ').toMutableList()
 			if (f.size > 13) {
 				f[13] = "*"
@@ -398,7 +398,7 @@ class SearchCoreFactoryTest {
 		}
 
 		/** `SearchApisCompatTest.withoutSubtypes`, for one line. */
-		private fun withoutSubtype(line: String): String = line.replace(SUBTYPE, "$1*:")
+		internal fun withoutSubtype(line: String): String = line.replace(SUBTYPE, "$1*:")
 
 		private val SUBTYPE = Regex("(A[-0-9a-z]+:[^: ]*:)'[^: ]*:")
 
@@ -458,7 +458,8 @@ class SearchCoreFactoryTest {
 			"threw:" + t::class.simpleName
 		}
 
-		private fun resultLine(r: SearchResult): String {
+		/** `SearchApisCompatTest.resultLine`, with the weight of the match or without it. */
+		internal fun resultLine(r: SearchResult, weight: Boolean = true): String {
 			val type = r.objectType
 			val sb = StringBuilder()
 			sb.append(type).append(' ')
@@ -480,7 +481,7 @@ class SearchCoreFactoryTest {
 				sb.append(r.firstUnknownWordMatches).append(' ')
 				val words = r.otherWordsMatch
 				sb.append(if (words == null) "null" else v(ArrayList(words))).append(' ')
-				sb.append(dumpBits(r.getUnknownPhraseMatchWeight())).append(' ')
+				sb.append(if (weight) dumpBits(r.getUnknownPhraseMatchWeight()) else "-").append(' ')
 				sb.append(r.hasImpreciseCoordinates()).append(' ')
 				sb.append(v(r.requiredSearchPhrase.getText(true)))
 			}
@@ -500,7 +501,7 @@ class SearchCoreFactoryTest {
 			return if (sb.isEmpty()) "-" else sb.toString()
 		}
 
-		private fun describe(o: Any?): String = when (o) {
+		internal fun describe(o: Any?): String = when (o) {
 			null -> "-"
 			is City -> "C" + v(o.getId()) + ":" + v(o.getName()) + ":" + o.getType() + ":" + v(o.getLocation()) + ":" +
 					(o.getBbox31()?.contentToString() ?: "null") + ":" + o.getStreets().size
@@ -529,7 +530,7 @@ class SearchCoreFactoryTest {
 		}
 
 		/** `SearchApisCompatTest.v`: text escaped and quoted, the rest as `SearchPhraseCompatTest.str`. */
-		private fun v(o: Any?): String = when (o) {
+		internal fun v(o: Any?): String = when (o) {
 			null -> "null"
 			is String -> {
 				val sb = StringBuilder("'")
@@ -550,10 +551,10 @@ class SearchCoreFactoryTest {
 			else -> o.toString()
 		}
 
-		private const val SAME = 0
-		private const val IN_ULPS = 1
-		private const val SHIFTED = 2
-		private const val DIFFERENT = 3
+		internal const val SAME = 0
+		internal const val IN_ULPS = 1
+		internal const val SHIFTED = 2
+		internal const val DIFFERENT = 3
 
 		/**
 		 * Whether two lines are equal but for doubles apart in their last digits, by a ten billionth:
@@ -564,7 +565,7 @@ class SearchCoreFactoryTest {
 		 * its latitude and drops the fraction, which loses a unit for one in five, and the platform's
 		 * functions lose it on other ones than java's.
 		 */
-		private fun close(java: String, copy: String): Int {
+		internal fun close(java: String, copy: String): Int {
 			val a = BITS.findAll(java).map { it.value }.toList()
 			val b = BITS.findAll(copy).map { it.value }.toList()
 			if (a.size != b.size || java.replace(BITS, "#") != copy.replace(BITS, "#")) {
