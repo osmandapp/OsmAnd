@@ -376,6 +376,12 @@ object KAlgorithms {
 	fun compareFileVersions(f1: String, f2: String): Int =
 		-simplifyFileName(f1).compareTo(simplifyFileName(f2))
 
+	/** [names] in the order of [compareFileVersions], with the key of each name made once. */
+	fun sortByFileVersions(names: Collection<String>): List<String> =
+		names.map { it to simplifyFileName(it) }
+			.sortedWith { n1, n2 -> -n1.second.compareTo(n2.second) }
+			.map { it.first }
+
 	fun capitalizeFirstLetter(s: String?): String? {
 		return if (!s.isNullOrEmpty()) {
 			s[0].uppercaseChar().toString() + if (s.length > 1) s.substring(1) else ""
