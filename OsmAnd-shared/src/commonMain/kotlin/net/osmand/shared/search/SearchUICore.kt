@@ -1,10 +1,7 @@
 package net.osmand.shared.search
 
 import co.touchlab.stately.concurrency.AtomicInt
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import net.osmand.shared.binary.BinaryMapIndexReader
 import net.osmand.shared.binary.ObfConstants
 import net.osmand.shared.binary.ResultMatcher
@@ -17,7 +14,6 @@ import net.osmand.shared.data.KLatLon
 import net.osmand.shared.data.MapObject
 import net.osmand.shared.data.Street
 import net.osmand.shared.extensions.currentTimeMillis
-import net.osmand.shared.io.DispatcherProvider
 import net.osmand.shared.osm.AbstractPoiType
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.search.core.CustomSearchPoiFilter
@@ -57,19 +53,7 @@ class SearchUICore(
 	private var phrase: SearchPhrase
 	private var currentSearchResult: SearchResultCollection
 
-	private val tasks = Channel<suspend () -> Unit>(Channel.UNLIMITED)
-	private val executor = lazy {
-		val queue = tasks
-		CoroutineScope(DispatcherProvider.singleThread()).launch {
-			for (task in queue) {
-				try {
-					task()
-				} catch (e: Throwable) {
-					// java's executor keeps it in a future nobody reads
-				}
-			}
-		}
-	}
+	private val executor = SerialExecutor()
 	private var onSearchStart: (() -> Unit)? = null
 	private var onResultsComplete: (() -> Unit)? = null
 	private val requestNumber = AtomicInt(0)
@@ -756,10 +740,8 @@ class SearchUICore(
 		}
 	}
 
-	/** Runs [task] after the ones before it, one at a time, as java's executor of one thread. */
 	private fun submit(task: suspend () -> Unit) {
-		executor.value
-		tasks.trySend(task)
+		executor.submit(task)
 	}
 
 	fun isSearchMoreAvailable(phrase: SearchPhrase): Boolean {

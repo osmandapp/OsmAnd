@@ -578,7 +578,7 @@ public class BaseDetailsObjectCompatTest {
 		}
 	}
 
-	private static RenderedObject drawnJava(Amenity a, int i) {
+	static RenderedObject drawnJava(Amenity a, int i) {
 		RenderedObject d = new RenderedObject();
 		PoiType type = MapPoiTypes.getDefault().getPoiTypeByKey(a.getSubType() == null ? "" : a.getSubType());
 		Map<String, String> tags = drawnTags(a.getName(), a.getNamesMap(false), a.getSubType(), a.getWikidata(),
@@ -605,7 +605,7 @@ public class BaseDetailsObjectCompatTest {
 		return d;
 	}
 
-	private static net.osmand.shared.data.RenderedObject drawnCopy(net.osmand.shared.data.Amenity a, int i) {
+	static net.osmand.shared.data.RenderedObject drawnCopy(net.osmand.shared.data.Amenity a, int i) {
 		net.osmand.shared.data.RenderedObject d = new net.osmand.shared.data.RenderedObject();
 		net.osmand.shared.osm.PoiType type = net.osmand.shared.osm.MapPoiTypes.Companion.getDefault().getPoiTypeByKey(
 				a.getSubType() == null ? "" : a.getSubType());
