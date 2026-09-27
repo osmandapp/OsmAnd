@@ -729,7 +729,6 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 		const val ALLDELIMITERS = "\\s|,"
 		const val ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-"
 		private val reg = Regex(ALLDELIMITERS)
-		private val regWithHyphen = Regex(ALLDELIMITERS_WITH_HYPHEN)
 		private val DIFF_FILE_NAME = Regex("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+\\.obf")
 
 		private val commonWordsComparator: Comparator<String> = object : Comparator<String> {
@@ -763,22 +762,46 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 		@JvmStatic
 		fun splitWords(w: String?, ws: MutableList<String>, delimiters: String): MutableList<String> {
 			if (!KAlgorithms.isEmpty(w)) {
-				val wrs = w!!.split(delimitersRegex(delimiters))
-				for (wr in wrs) {
-					val wd = wr.trim { it <= ' ' }
-					if (wd.length > 0) {
-						ws.add(wd)
+				val text = w!!
+				when (delimiters) {
+					ALLDELIMITERS -> splitWords(text, false, ws)
+					ALLDELIMITERS_WITH_HYPHEN -> splitWords(text, true, ws)
+					else -> for (wr in text.split(Regex(delimiters))) {
+						addWord(wr, 0, wr.length, ws)
 					}
 				}
 			}
 			return ws
 		}
 
-		// the patterns the search splits names with, compiled once
-		private fun delimitersRegex(delimiters: String): Regex = when (delimiters) {
-			ALLDELIMITERS -> reg
-			ALLDELIMITERS_WITH_HYPHEN -> regWithHyphen
-			else -> Regex(delimiters)
+		/** [w] split at the characters of [ALLDELIMITERS], and at hyphens with [hyphen]. */
+		private fun splitWords(w: String, hyphen: Boolean, ws: MutableList<String>) {
+			var start = 0
+			for (i in 0..w.length) {
+				if (i == w.length || isDelimiter(w[i], hyphen)) {
+					addWord(w, start, i, ws)
+					start = i + 1
+				}
+			}
+		}
+
+		// `\s` is [ \t\n\x0B\f\r]
+		private fun isDelimiter(c: Char, hyphen: Boolean): Boolean =
+			c == ' ' || c == ',' || c in '\t'..'\r' || (hyphen && c == '-')
+
+		/** The part of [w] from [start] to [end], trimmed as java trims, when anything is left of it. */
+		private fun addWord(w: String, start: Int, end: Int, ws: MutableList<String>) {
+			var s = start
+			var e = end
+			while (s < e && w[s] <= ' ') {
+				s++
+			}
+			while (e > s && w[e - 1] <= ' ') {
+				e--
+			}
+			if (s < e) {
+				ws.add(w.substring(s, e))
+			}
 		}
 
 		@JvmStatic
