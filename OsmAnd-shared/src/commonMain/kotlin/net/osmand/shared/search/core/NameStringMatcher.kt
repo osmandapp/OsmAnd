@@ -37,6 +37,10 @@ class NameStringMatcher(namePart: String, mode: KStringMatcherMode) : KStringMat
 		}
 		return sm.matches(name)
 	}
+
+	/** [matches] for a non-empty name whose keys were built before. */
+	internal fun matchesPrepared(name: KCollatorStringMatcher.PreparedName): Boolean =
+		KCollatorStringMatcher.cmatchesPrepared(name, sm.part, sm.mode)
 }
 
 /** [NameStringMatcher.matches] for a name that may be null, which matches nothing, as in java. */
