@@ -5194,4 +5194,8 @@
     <string name="poi_indoor_play">Aire de jeux intérieure</string>
     <string name="poi_animal_breeding">Élevage d\'animaux</string>
     <string name="poi_student_accommodation">Logement étudiant</string>
+    <string name="poi_healthcare_counselling">Accompagnement psychologique</string>
+    <string name="poi_craft_signmaker">Fabricant d\'enseignes</string>
+    <string name="poi_traffic_park">Parc de circulation</string>
+    <string name="poi_stables">Écuries</string>
 </resources>
