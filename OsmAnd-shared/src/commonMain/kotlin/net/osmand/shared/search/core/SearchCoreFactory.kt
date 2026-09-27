@@ -1028,8 +1028,7 @@ object SearchCoreFactory {
 					}
 					existingResult.pt = f
 				} else {
-					val enTranslation = a.getEnTranslation().lowercase()
-					if ("no" != enTranslation) {
+					if (!"no".equals(a.getEnTranslation(), ignoreCase = true)) {
 						val ptr = checkPoiType(nm, a)
 						if (ptr != null && ptr.pt != null && ptr.pt!!.isTopVisible()) {
 							results[a.getKeyName()] = ptr
