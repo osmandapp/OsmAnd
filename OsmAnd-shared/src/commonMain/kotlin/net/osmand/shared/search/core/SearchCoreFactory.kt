@@ -1,5 +1,6 @@
 package net.osmand.shared.search.core
 
+import co.touchlab.stately.collections.ConcurrentMutableMap
 import co.touchlab.stately.concurrency.AtomicInt
 import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.api.KStringMatcherMode.CHECK_EQUALS
@@ -938,6 +939,8 @@ object SearchCoreFactory {
 		private var categories: List<PoiCategory>? = null
 		private val customPoiFilters: MutableList<CustomSearchPoiFilter> = ArrayList()
 		private val activePoiFilters: MutableMap<String?, Int> = HashMap()
+		// every phrase compares all the names of poi types
+		private val preparedNames = ConcurrentMutableMap<String, KCollatorStringMatcher.PreparedName>()
 		private val poiAdditionalTopIndexCache: MutableMap<BinaryMapIndexReader, MutableSet<String>> = HashMap()
 
 		fun clearCustomFilters() {
@@ -1038,17 +1041,17 @@ object SearchCoreFactory {
 
 		private fun checkPoiType(nm: NameStringMatcher, pf: AbstractPoiType): PoiTypeResult? {
 			var res: PoiTypeResult? = null
-			if (nm.matches(pf.getTranslation())) {
+			if (matches(nm, pf.getTranslation())) {
 				res = addIfMatch(nm, pf.getTranslation(), pf, res)
 			}
-			if (nm.matches(pf.getEnTranslation())) {
+			if (matches(nm, pf.getEnTranslation())) {
 				res = addIfMatch(nm, pf.getEnTranslation(), pf, res)
 			}
-			if (nm.matches(pf.getKeyName())) {
+			if (matches(nm, pf.getKeyName())) {
 				res = addIfMatch(nm, pf.getKeyName().replace('_', ' '), pf, res)
 			}
 
-			if (nm.matches(pf.getSynonyms())) {
+			if (matches(nm, pf.getSynonyms())) {
 				val synonyms = WorldRegion.splitLikeJava(pf.getSynonyms(), ";")
 				for (synonym in synonyms) {
 					res = addIfMatch(nm, synonym, pf, res)
@@ -1059,7 +1062,7 @@ object SearchCoreFactory {
 
 		private fun addIfMatch(nm: NameStringMatcher, s: String, pf: AbstractPoiType, res: PoiTypeResult?): PoiTypeResult? {
 			var res = res
-			if (nm.matches(s)) {
+			if (matches(nm, s)) {
 				if (res == null) {
 					res = PoiTypeResult()
 					res.pt = pf
@@ -1069,6 +1072,9 @@ object SearchCoreFactory {
 			}
 			return res
 		}
+
+		private fun matches(nm: NameStringMatcher, name: String): Boolean =
+			name.isNotEmpty() && nm.matchesPrepared(preparedNames.computeIfAbsent(name) { KCollatorStringMatcher.PreparedName(it) })
 
 		internal fun initPoiTypes() {
 			if (translatedNames.isEmpty()) {
