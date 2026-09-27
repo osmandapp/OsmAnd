@@ -5338,7 +5338,6 @@
     <string name="astro_lunar_eclipse_calculating_state">Výpočet viditeľnosti v strede mapy…</string>
     <string name="astro_lunar_eclipse_visibility_loading">Výpočet viditeľnosti…</string>
     <string name="astro_eclipse_column_below_horizon">Pod horizontom</string>
-    <string name="search_on_web">Hľadať na webe</string>
     <string name="quick_action_add_track">Pridať stopu</string>
     <string name="quick_action_tracks_select_descr">Pridať jednu alebo viac stôp, ktoré budú zobrazené alebo skryté na mape jedným stlačením.</string>
     <string name="quick_action_tracks_always_ask_descr">Stlačenie tejto akcie otvorí zoznam stôp, z ktorých jednu alebo viaceré môžete zobraziť alebo skryť.</string>

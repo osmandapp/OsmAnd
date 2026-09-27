@@ -4525,7 +4525,6 @@
     <string name="shared_string_archive">Arhiveeri</string>
     <string name="share_favorites_share_failed">Faili jagamine ei õnnestunud.</string>
     <string name="share_favorites_missing_media_warning">Mõne manustatud meediumi kaasamine ei õnnestunud.</string>
-    <string name="search_on_web">Otsi veebist</string>
     <string name="shared_string_note">Märge</string>
     <string name="media_storage_camera_folder_note_descr">Helifail salvestub kausta „Music/OsmAnd“.</string>
     <string name="always_keep_local_copy">Säilita alati kohalik koopia</string>

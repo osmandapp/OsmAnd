@@ -5185,4 +5185,13 @@
     <string name="poi_air_conditioning_yes">Oui</string>
     <string name="poi_air_conditioning_no">Non</string>
     <string name="poi_disc_golf_course">Parcours de disc golf</string>
+    <string name="poi_dancing_school">École de danse</string>
+    <string name="poi_healthcare_birthing_centre">Maternité</string>
+    <string name="poi_craft_cleaning">Service de nettoyage</string>
+    <string name="poi_craft_printer">Imprimante</string>
+    <string name="poi_funeral_hall">Salle funéraire</string>
+    <string name="poi_post_depot">Dépôt postal</string>
+    <string name="poi_indoor_play">Aire de jeux intérieure</string>
+    <string name="poi_animal_breeding">Élevage d\'animaux</string>
+    <string name="poi_student_accommodation">Logement étudiant</string>
 </resources>

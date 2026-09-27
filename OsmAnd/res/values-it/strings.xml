@@ -5340,7 +5340,6 @@
     <string name="share_favorites_preparation_failed">Impossibile preparare i file per la condivisione.</string>
     <string name="share_favorites_share_failed">Impossibile condividere il file.</string>
     <string name="share_favorites_missing_media_warning">Alcuni file multimediali allegati non possono essere inclusi.</string>
-    <string name="search_on_web">Ricerca web</string>
     <string name="astro_lunar_eclipse">Eclissi lunare</string>
     <string name="astro_lunar_eclipse_subtitle">Esplora le eclissi lunari nel mondo</string>
     <string name="astro_previous_lunar_eclipse">Eclissi lunare precedente</string>

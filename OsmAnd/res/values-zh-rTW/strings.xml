@@ -4537,7 +4537,7 @@
     <string name="map_widget_route_information">路線資訊</string>
     <string name="map_widget_route_information_desc">顯示啟用的導航航線的預計抵達時間、剩餘行駛時間與距離。</string>
     <string name="shared_string_default_view">預設視圖</string>
-    <string name="ais_address_settings_description">選擇 NMEA 通訊協定 (UDP/TCP)，並指定對應的位址與連接埠</string>
+    <string name="ais_address_settings_description">選取 NMEA 協定 (UDP/TCP)，以及指定對應的位址與端點</string>
     <string name="no_places_available">可見區域中沒有位置</string>
     <string name="no_photo_for_location_desc">此位置尚未上傳使用者照片</string>
     <string name="shared_string_road_exit">出口</string>
@@ -5196,7 +5196,6 @@
     <string name="share_favorites_preparation_failed">無法準備要分享的檔案。</string>
     <string name="share_favorites_share_failed">無法分享檔案。</string>
     <string name="share_favorites_missing_media_warning">部分附加媒體無法一併納入。</string>
-    <string name="search_on_web">在網路上搜尋</string>
     <string name="astro_eclipse_column_below_horizon">地平線以下</string>
     <string name="quick_action_add_track">新增軌跡</string>
     <string name="quick_action_tracks_select_descr">透過點一下來在地圖上新增一條或是多條軌跡。</string>
@@ -5219,4 +5218,5 @@
     <string name="simulate_ui_descr">首先執行，免費版本橫幅，打折版本。</string>
     <string name="heap_dump">堆疊轉儲</string>
     <string name="heap_dump_descr">從 java 轉儲計算物件。</string>
+    <string name="contour_labels">標籤</string>
 </resources>

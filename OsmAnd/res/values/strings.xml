@@ -119,7 +119,6 @@
 	<string name="share_favorites_preparation_failed">Could not prepare files for sharing.</string>
 	<string name="share_favorites_share_failed">Could not share the file.</string>
 	<string name="share_favorites_missing_media_warning">Some attached media could not be included.</string>
-	<string name="search_on_web">Search on web</string>
     <string name="release_5_4">
         • Refreshed search UI: sorting, category filters, cleaner look\n\n
         • Attach photos and media to Favorites\n\n

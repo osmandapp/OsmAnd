@@ -5259,7 +5259,6 @@
     <string name="share_favorites_points_and_media">Punkte und Medien</string>
     <string name="share_favorites_share_failed">Die Datei konnte nicht geteilt werden.</string>
     <string name="share_favorites_missing_media_warning">Einige angehängte Medien konnten nicht beigefügt werden.</string>
-    <string name="search_on_web">Im Internet suchen</string>
     <string name="shared_string_note">Anmerkung</string>
     <string name="media_storage_camera_folder_note_descr">Audio wird unter Music/OsmAnd gespeichert.</string>
     <string name="always_keep_local_copy">Immer eine lokale Kopie behalten</string>

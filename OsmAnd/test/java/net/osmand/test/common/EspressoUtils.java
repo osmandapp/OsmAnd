@@ -2,6 +2,7 @@ package net.osmand.test.common;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 
@@ -25,6 +26,22 @@ public class EspressoUtils {
 			getInstrumentation().getUiAutomation().executeShellCommand(
 					"pm grant " + ctx.getPackageName() + " android.permission.POST_NOTIFICATIONS");
 		}
+	}
+
+	/**
+	 * {@code onView} for a view in a dialog window, such as the one of a {@code DialogFragment}.
+	 * <p>
+	 * The default root matcher accepts a dialog window only once it has window focus, which a new
+	 * dialog gets with a delay (on Android 12+ not before its first frame is on screen). A root
+	 * picked earlier is the activity window: the view is not found there (NoMatchingViewException),
+	 * or, if the activity window has already lost focus, Espresso waits for it to get focus back,
+	 * which does not happen while the dialog is open (RootViewWithoutFocusException after 10 s).
+	 * The same applies when a popup over the dialog closes. {@code isDialog()} picks the dialog
+	 * window with or without focus, and Espresso then waits until it has it.
+	 */
+	@NonNull
+	public static ViewInteraction onDialogView(@NonNull Matcher<View> viewMatcher) {
+		return onView(viewMatcher).inRoot(isDialog());
 	}
 
 	@NonNull

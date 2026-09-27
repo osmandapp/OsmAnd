@@ -5072,7 +5072,6 @@
     <string name="share_favorites_preparation_failed">No se pudieron preparar los archivos para compartirlos.</string>
     <string name="share_favorites_share_failed">No se pudo compartir el archivo.</string>
     <string name="share_favorites_missing_media_warning">No se pudieron incluir algunos archivos multimedia adjuntos.</string>
-    <string name="search_on_web">Buscar en la web</string>
     <string name="release_5_4">• Interfaz de búsqueda renovada: ordenación, filtros de categoría, aspecto más limpio.\n\n • Adjuntar fotos y archivos multimedia a Favoritos\n\n • Favoritos: compatibilidad con subgrupos y carpetas anclables\n\n • Coordenadas: la búsqueda, la grilla del mapa y la visualización de puntos de interés, ahora admiten el localizador EPSG y Maidenhead.\n\n • Se corrigieron las interrupciones de navegación; cambio entre navegación estándar y rápida.\n\n • Configurá la escala del mapa de Android Auto por separado del teléfono.\n\n • Nueva búsqueda espacial: encontrá lugares y buscá en los alrededores de un lugar.\n\n • Astronomía: se añadieron eclipses solares y lunares</string>
     <string name="shared_string_note">Nota</string>
     <string name="media_storage_camera_folder_note_descr">El audio se guardará en «Música/OsmAnd».</string>
