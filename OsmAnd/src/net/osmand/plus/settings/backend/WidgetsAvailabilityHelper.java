@@ -62,6 +62,11 @@ public class WidgetsAvailabilityHelper {
 	private static final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 
+	// Installs before this date got the old route widgets (distance/time to destination and intermediate) by default
+	public static boolean hadLegacyRouteWidgets(@NonNull OsmandApplication app) {
+		return Version.getInstallTime(app) < ROUTE_WIDGETS_V2_INTRO_TIME_MS;
+	}
+
 	public static boolean isWidgetAvailable(@NonNull OsmandApplication app, @NonNull String widgetId, @NonNull ApplicationMode appMode) {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
 			return app.getAppCustomization().isWidgetAvailable(widgetId, appMode);
@@ -90,10 +95,7 @@ public class WidgetsAvailabilityHelper {
 		ApplicationMode[] smallNextTurnSet = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT, TRAIN};
 		ApplicationMode[] secondNextTurnSet = {CAR, BICYCLE, PEDESTRIAN, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE, MOPED};
 
-		boolean enableWidgetsV2 = Version.getInstallTime(app) >= ROUTE_WIDGETS_V2_INTRO_TIME_MS;
-		if (enableWidgetsV2) {
-			regWidgetVisibility(ROUTE_INFO, exceptDefault);
-		}
+		regWidgetVisibility(ROUTE_INFO, exceptDefault);
 
 		regWidgetVisibility(NEXT_TURN, nextTurnSet);
 		regWidgetVisibility(SMALL_NEXT_TURN, smallNextTurnSet);
@@ -102,13 +104,6 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SMALL_NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SECOND_NEXT_TURN, exceptDefault);
-
-		if (!enableWidgetsV2) {
-			regWidgetVisibility(INTERMEDIATE_DESTINATION, all);
-			regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
-			regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
-			regWidgetVisibility(TIME_TO_DESTINATION, all);
-		}
 
 		regWidgetVisibility(CURRENT_SPEED, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, HORSE, TRAIN);
 		regWidgetVisibility(MAX_SPEED, none);
