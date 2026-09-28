@@ -50,11 +50,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.screens.*;
 import net.osmand.plus.auto.screens.RequestPermissionScreen.LocationPermissionCheckCallback;
+import net.osmand.plus.helpers.GeoActionHelper;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.helpers.TargetPoint;
@@ -312,24 +311,30 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			navigationCarSurface.setMapView(mapView);
 		}
 
-		String action = intent.getAction();
-		if (ACTION_NAVIGATE.equals(action)) {
-			String text = "Navigation intent: " + intent.getDataString();
-			getApp().getToastHelper().showCarToast(text, true);
-		}
-
 		landingScreen = new LandingScreen(getCarContext(), settingsAction);
+		Screen screenToReturn = landingScreen;
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
 			getScreenManager().push(landingScreen);
 			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext());
-			return requestPurchaseScreen;
-		}
-		if (!isLocationPermissionAvailable()) {
+			screenToReturn = requestPurchaseScreen;
+		} else if (!isLocationPermissionAvailable()) {
 			getScreenManager().push(landingScreen);
-			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
+			screenToReturn = new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
 		}
-		return landingScreen;
+
+		Uri uri = intent.getData();
+		if (GeoActionHelper.isGeoActionUri(uri)) {
+			app.runInUIThread(() -> processGeoActionIntent(uri));
+		} else {
+			String action = intent.getAction();
+			if (ACTION_NAVIGATE.equals(action)) {
+				String text = "Navigation intent: " + intent.getDataString();
+				getApp().getToastHelper().showCarToast(text, true);
+			}
+		}
+
+		return screenToReturn;
 	}
 
 	// androidx.car.app never releases the VirtualDisplay it creates in CarContext#attachBaseContext(),
@@ -382,11 +387,25 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Log.i(TAG, "In onNewIntent() " + intent);
 		Uri uri = intent.getData();
 		if (uri != null) {
-			if (ACTION_NAVIGATE.equals(intent.getAction())) {
+			if (GeoActionHelper.isGeoActionUri(uri)) {
+				processGeoActionIntent(uri);
+			} else if (ACTION_NAVIGATE.equals(intent.getAction())) {
 				processNavigationIntent(uri);
 			} else {
 				processDeepLinkActions(uri);
 			}
+		}
+	}
+
+	private void processGeoActionIntent(@NonNull Uri uri) {
+		OsmandApplication app = getApp();
+		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app) || !isLocationPermissionAvailable()) {
+			LOG.info("Ignoring geo action intent: purchase or permission check failed");
+			return;
+		}
+		String action = GeoPointParserUtil.parseGeoAction(uri.toString());
+		if (!Algorithms.isEmpty(action)) {
+			GeoActionHelper.executeAction(app, action, null, this);
 		}
 	}
 
