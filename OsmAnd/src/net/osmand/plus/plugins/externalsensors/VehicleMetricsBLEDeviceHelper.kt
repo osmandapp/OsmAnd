@@ -42,7 +42,7 @@ class VehicleMetricsBLEDeviceHelper(
 
 	override fun createBLEDevice(
 		result: ScanResult,
-		uuid: ParcelUuid,
+		uuids: List<ParcelUuid>,
 		address: String,
 		deviceName: String): BLEAbstractDevice {
 		val device = BLEOBDDevice(bluetoothAdapter, address)

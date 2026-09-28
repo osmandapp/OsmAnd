@@ -161,6 +161,7 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 				} else {
 					AbstractDevice<?> device = createDevice(deviceSettings.getDeviceType(), deviceId, deviceSettings);
 					if (device != null) {
+						restoreDeviceSensors(device, deviceSettings);
 						devices.put(deviceId, device);
 						updateDeviceProperties(device);
 					}
@@ -168,6 +169,48 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 			}
 		}
 		updateDevices(activity);
+	}
+
+	private void restoreDeviceSensors(@NonNull AbstractDevice<?> device, @NonNull DeviceSettings deviceSettings) {
+		List<String> serviceUUIDs = deviceSettings.getServiceUUIDs();
+		if (device instanceof BLEAbstractDevice bleDevice && !Algorithms.isEmpty(serviceUUIDs)) {
+			List<UUID> uuids = new ArrayList<>();
+			for (String serviceUUID : serviceUUIDs) {
+				try {
+					uuids.add(UUID.fromString(serviceUUID));
+				} catch (IllegalArgumentException e) {
+					LOG.error("Wrong service UUID " + serviceUUID + " of " + device);
+				}
+			}
+			bleDevice.addSensorsForServices(uuids);
+		}
+	}
+
+	private void saveDeviceSensors(@NonNull BLEAbstractDevice device) {
+		String deviceId = device.getDeviceId();
+		DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(deviceId);
+		if (settings != null) {
+			List<String> serviceUUIDs = new ArrayList<>();
+			for (UUID uuid : device.getSensorServiceUUIDs()) {
+				serviceUUIDs.add(uuid.toString());
+			}
+			settings.setServiceUUIDs(serviceUUIDs);
+			devicesSettingsCollection.setDeviceSettings(deviceId, settings);
+		}
+	}
+
+	@Override
+	public void onDeviceSensorsChanged(@NonNull AbstractDevice<?> device) {
+		app.runInUIThread(() -> {
+			if (device instanceof BLEAbstractDevice bleDevice && isDevicePaired(device)) {
+				saveDeviceSensors(bleDevice);
+				onDevicePaired(device);
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					mapActivity.updateApplicationModeSettings();
+				}
+			}
+		});
 	}
 
 	private void updateDeviceProperties(@NonNull AbstractDevice<?> device) {
@@ -253,14 +296,9 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 				deviceName = settings == null ? result.getDevice().getName() : settings.getParams().get(NAME);
 				List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 				if (uuids != null) {
-					for (ParcelUuid uuid : uuids) {
-						BLEAbstractDevice device = createBLEDevice(result, uuid, address, deviceName);
-						if (device != null) {
-							if (!devices.containsKey(device.getDeviceId())) {
-								addFoundBLEDevice(device);
-							}
-							break;
-						}
+					BLEAbstractDevice device = createBLEDevice(result, uuids, address, deviceName);
+					if (device != null && !devices.containsKey(device.getDeviceId())) {
+						addFoundBLEDevice(device);
 					}
 				}
 			}
@@ -278,9 +316,13 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 	};
 
 	@Nullable
-	protected BLEAbstractDevice createBLEDevice(ScanResult result, ParcelUuid uuid, String address, String deviceName) {
-		return BLEAbstractDevice.createDeviceByUUID(
-				bluetoothAdapter, uuid.getUuid(), address, deviceName, result.getRssi());
+	protected BLEAbstractDevice createBLEDevice(ScanResult result, List<ParcelUuid> uuids, String address, String deviceName) {
+		List<UUID> serviceUUIDs = new ArrayList<>();
+		for (ParcelUuid uuid : uuids) {
+			serviceUUIDs.add(uuid.getUuid());
+		}
+		return BLEAbstractDevice.createDeviceByUUIDs(
+				bluetoothAdapter, serviceUUIDs, address, deviceName, result.getRssi());
 	}
 
 	protected abstract void addFoundBLEDevice(@NonNull BLEAbstractDevice device);
@@ -546,6 +588,9 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 				if (!Algorithms.isEmpty(deviceId)) {
 					settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device, true);
 					devicesSettingsCollection.setDeviceSettings(deviceId, settings);
+					if (device instanceof BLEAbstractDevice bleDevice) {
+						saveDeviceSensors(bleDevice);
+					}
 					updateDeviceProperties(device);
 					onDevicePaired(device);
 				}
