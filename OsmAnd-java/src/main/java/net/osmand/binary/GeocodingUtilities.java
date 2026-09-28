@@ -173,10 +173,16 @@ public class GeocodingUtilities {
 		List<RouteSegmentPoint> listR = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		// we allow duplications to search in both files for boundary regions 
 		// here we use same code as for normal routing, so we take into account current profile and sort by priority & distance
-		rp.findRouteSegment(lat, lon, ctx, listR, false, true);
+		RouteSegmentPoint nearest = rp.findRouteSegment(lat, lon, ctx, listR, false, true);
+		// the nearest segment is returned out of the list, which becomes its others
+		List<RouteSegmentPoint> roads = new ArrayList<>(listR.size() + 1);
+		if (nearest != null) {
+			roads.add(nearest);
+		}
+		roads.addAll(listR);
 		double distSquare = 0;
 		Map<String, List<RouteRegion>> streetNames = new HashMap<>();
-		for (RouteSegmentPoint p : listR) {
+		for (RouteSegmentPoint p : roads) {
 			RouteDataObject road = p.getRoad();
 //			System.out.println(road.toString() +  " " + Math.sqrt(p.distSquare));
 			String name = Algorithms.isEmpty(road.getName()) ? road.getRef("", false, true) : road.getName();
