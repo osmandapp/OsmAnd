@@ -154,17 +154,30 @@ object TurnLanes {
 		// directions of the junction not described by the marked lanes, from left to right
 		val angles = ArrayList(rs.attachedAngles)
 		angles.add(rs.currentDeviation)
-		angles.removeAll { marked[turnOrder(it).sign + 1] }
-		angles.sortWith { c1, c2 -> c2.compareTo(c1) }
 		var through: Double? = null
-		for (angle in angles) {
-			val best = through
-			if (abs(angle) <= TURN_DEGREE_MIN && (best == null || abs(angle) < abs(best))) {
-				through = angle
+		val it = angles.iterator()
+		while (it.hasNext()) {
+			val a = it.next()
+			val order = turnOrder(a)
+			if (marked[order.sign + 1]) {
+				if (order == 0) {
+					through = a
+				}
+				it.remove()
 			}
 		}
-		if (through != null) {
-			angles.remove(through)
+		angles.sortWith { c1, c2 -> c2.compareTo(c1) }
+		if (through == null) {
+			for (angle in angles) {
+				val best = through
+				if (abs(angle) <= TURN_DEGREE_MIN && (best == null || abs(angle) < abs(best))) {
+					through = angle
+				}
+			}
+			val straightest = through
+			if (straightest != null) {
+				angles.remove(straightest)
+			}
 		}
 		// the outermost unmarked lanes take the outermost directions, extra ones are stacked
 		val turns = ArrayList<Int>()
@@ -200,10 +213,31 @@ object TurnLanes {
 				}
 				res.append(append)
 			} else {
+				if (!checkTurnLanesOrder(lanes, i, value)) {
+					return turnLanes
+				}
 				res.append(value).append(if (through != null) ";through" else "")
 			}
 		}
 		return res.toString()
+	}
+
+	private fun checkTurnLanesOrder(lanes: List<String>, i: Int, value: String): Boolean {
+		for (option in splitDroppingTrailingEmpty(value, ";")) {
+			val order = TurnType.orderFromLeftToRight(TurnType.convertType(option))
+			for (j in lanes.indices) {
+				if (isNoneLane(lanes[j])) {
+					continue
+				}
+				for (m in splitDroppingTrailingEmpty(lanes[j], ";")) {
+					val other = TurnType.orderFromLeftToRight(TurnType.convertType(m))
+					if (if (j < i) other > order else other < order) {
+						return false
+					}
+				}
+			}
+		}
+		return true
 	}
 
 	private fun turnOrder(angle: Double): Int {

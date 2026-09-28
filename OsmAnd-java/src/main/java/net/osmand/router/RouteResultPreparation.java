@@ -2630,19 +2630,26 @@ public class RouteResultPreparation {
 		// directions of the junction not described by the marked lanes, from left to right
 		List<Double> angles = new ArrayList<>(rs.attachedAngles);
 		angles.add(rs.currentDeviation);
+		Double through = null;
 		for (Iterator<Double> it = angles.iterator(); it.hasNext(); ) {
-			if (marked[Integer.signum(turnOrder(it.next())) + 1]) {
+			double a = it.next();
+			int order = turnOrder(a);
+			if (marked[Integer.signum(order) + 1]) {
+				if (order == 0) {
+					through = a;
+				}
 				it.remove();
 			}
 		}
 		Collections.sort(angles, Collections.<Double>reverseOrder());
-		Double through = null;
-		for (Double angle : angles) {
-			if (Math.abs(angle) <= TURN_DEGREE_MIN && (through == null || Math.abs(angle) < Math.abs(through))) {
-				through = angle;
+		if (through == null) {
+			for (Double angle : angles) {
+				if (Math.abs(angle) <= TURN_DEGREE_MIN && (through == null || Math.abs(angle) < Math.abs(through))) {
+					through = angle;
+				}
 			}
+			angles.remove(through);
 		}
-		angles.remove(through);
 		// the outermost unmarked lanes take the outermost directions, extra ones are stacked
 		List<Integer> turns = new ArrayList<>();
 		int rightTurns = 0;
@@ -2675,10 +2682,31 @@ public class RouteResultPreparation {
 				res.append(append);
 				k++;
 			} else {
+				if (!checkTurnLanesOrder(lanes, i, noneValues[k])) {
+					return turnLanes;
+				}
 				res.append(noneValues[k++]).append(through != null ? ";through" : "");
 			}
 		}
 		return res.toString();
+	}
+
+	private static boolean checkTurnLanesOrder(String[] lanes, int i, String value) {
+		for (String option : value.split(";")) {
+			int order = TurnType.orderFromLeftToRight(TurnType.convertType(option));
+			for (int j = 0; j < lanes.length; j++) {
+				if (isNoneLane(lanes[j])) {
+					continue;
+				}
+				for (String m : lanes[j].split(";")) {
+					int other = TurnType.orderFromLeftToRight(TurnType.convertType(m));
+					if (j < i ? other > order : other < order) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 	private int turnOrder(double angle) {
