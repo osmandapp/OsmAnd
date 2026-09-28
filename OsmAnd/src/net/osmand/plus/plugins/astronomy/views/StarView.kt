@@ -15,9 +15,9 @@ import android.graphics.Path
 import android.graphics.PointF
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
+import android.graphics.RadialGradient
 import android.graphics.Rect
 import android.graphics.RectF
-import android.graphics.RadialGradient
 import android.graphics.Shader
 import android.graphics.Typeface
 import android.util.AttributeSet
@@ -29,11 +29,12 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.OverScroller
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.withRotation
 import androidx.core.graphics.withTranslation
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.EquatorEpoch
-import io.github.cosinekitty.astronomy.Observer
 import io.github.cosinekitty.astronomy.LunarEclipseState
+import io.github.cosinekitty.astronomy.Observer
 import io.github.cosinekitty.astronomy.Refraction
 import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.Topocentric
@@ -46,6 +47,8 @@ import net.osmand.plus.R
 import net.osmand.plus.plugins.astronomy.AstronomyPluginSettings
 import net.osmand.plus.plugins.astronomy.Constellation
 import net.osmand.plus.plugins.astronomy.SkyObject
+import net.osmand.plus.utils.UiUtilities
+import net.osmand.plus.views.AnimateDraggingMapThread
 import java.util.Calendar
 import java.util.TimeZone
 import kotlin.math.PI
@@ -57,11 +60,11 @@ import kotlin.math.cos
 import kotlin.math.hypot
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sign
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
-import androidx.core.graphics.withRotation
-import net.osmand.plus.utils.UiUtilities
+import kotlin.math.withSign
 
 data class StarViewCameraState(
 	val azimuth: Double,
@@ -87,6 +90,8 @@ class StarView @JvmOverloads constructor(
 		const val LUNAR_ECLIPSE_VIEW_ANGLE = 3.0
 		private const val PHYSICAL_DISC_VIEW_ANGLE = 3.0
 		private const val SYMBOLIC_DISC_VIEW_ANGLE = 8.0
+
+		private const val OVERSCROLL_VELOCITY_LIMIT = 4000f;
 	}
 
 	// --- Graphics ---
@@ -292,7 +297,7 @@ class StarView @JvmOverloads constructor(
 	private var isPanning = false
 	private val scaleGestureDetector = ScaleGestureDetector(context, ScaleListener())
 	private val gestureDetector = GestureDetector(context, StarViewGestureListener())
-	private val inertiaFlingScroller = FlingScroller(context, velocityFactor = 1f/3)
+	private val inertiaFlingScroller = FlingScroller(context, velocityFactor = 1f/2)
 
 	private var onObjectClickListener: ((SkyObject?) -> Unit)? = null
 
@@ -2439,11 +2444,17 @@ class StarView @JvmOverloads constructor(
 			forceFinished()
 			flingLastX = e2.x.toInt()
 			flingLastY = e2.y.toInt()
+			val actualVelocityX = abs(velocityX)
+				.coerceAtMost(OVERSCROLL_VELOCITY_LIMIT)
+				.withSign(velocityX)
+			val actualVelocityY = abs(velocityY)
+				.coerceAtMost(OVERSCROLL_VELOCITY_LIMIT)
+				.withSign(velocityY)
 			scroller.fling(
 				flingLastX,
 				flingLastY,
-				(velocityX * velocityFactor).toInt(),
-				(velocityY * velocityFactor).toInt(),
+				actualVelocityX.toInt(),
+				actualVelocityY.toInt(),
 				Int.MIN_VALUE,
 				Int.MAX_VALUE,
 				Int.MIN_VALUE,
