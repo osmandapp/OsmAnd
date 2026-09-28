@@ -7,7 +7,6 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment.SELECTED_FOLDER_KEY;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -90,8 +89,6 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 	private String selectedFolder;
 
 	private GpxImportListener importListener;
-	private boolean attached;
-	private boolean activityRecreated;
 
 	private SaveGpxAsyncTask saveAsOneTrackTask;
 	private SaveTracksTask saveTracksTask;
@@ -129,14 +126,6 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 				showExitDialog();
 			}
 		});
-	}
-
-	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		// retained instance: importListener still points to the tracks screen of the destroyed activity
-		activityRecreated |= attached;
-		attached = true;
 	}
 
 	@Override
@@ -497,18 +486,20 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 		}
 		if (!(activity instanceof MyPlacesActivity) && tracksFragment == null) {
 			openTracksTabInMyPlaces();
-		} else if (activity instanceof MyPlacesActivity && activityRecreated) {
+		} else if (activity instanceof MyPlacesActivity) {
 			reloadMyPlacesTracks((MyPlacesActivity) activity);
 		}
 		dismissAllowingStateLoss();
 	}
 
 	private void reloadMyPlacesTracks(@NonNull MyPlacesActivity activity) {
+		// this fragment is retained, so importListener can belong to the tracks screen of a destroyed activity:
+		// reload the live tab, unless it is already loading (a running loader must not be restarted)
 		for (Fragment fragment : activity.getSupportFragmentManager().getFragments()) {
 			if (fragment instanceof AvailableTracksFragment) {
 				TrackFoldersHelper helper = ((AvailableTracksFragment) fragment).getTrackFoldersHelper();
-				if (helper != null) {
-					helper.reloadTracks();
+				if (helper != null && !helper.isLoadingTracks()) {
+					helper.reloadTracks(true);
 				}
 			}
 		}
