@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.srtm.building;
 
 import static net.osmand.plus.dashboard.DashboardType.BUILDINGS_3D;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.BUILDINGS_3D_ALPHA_DEF_VALUE;
+import static net.osmand.plus.settings.backend.OsmandSettings.BUILDINGS_3D_ALPHA_DEF_VALUE;
 
 import android.os.Bundle;
 import android.view.View;

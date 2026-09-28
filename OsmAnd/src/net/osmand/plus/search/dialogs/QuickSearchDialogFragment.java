@@ -1847,6 +1847,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		return useMapCenter;
 	}
 
+	public boolean isAddressSearch() {
+		return addressSearch;
+	}
+
 	private void startLocationUpdate() {
 		OsmAndLocationProvider locationProvider = app.getLocationProvider();
 		locationProvider.removeCompassListener(locationProvider.getNavigationInfo());
@@ -3345,6 +3349,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		updateSearchResult(collection, true);
 		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
 		updateTabBarVisibility(false);
+		setButtonToolbarVisible(true);
 		toolbarEdit.setVisibility(View.GONE);
 		searchEditText.setHint(R.string.popular_places);
 		searchEditText.setEnabled(false);

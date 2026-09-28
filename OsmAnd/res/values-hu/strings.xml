@@ -148,8 +148,8 @@
     <string name="voice_stream_notification">Értesítési hangcsatorna</string>
     <string name="voice_stream_music">Média/navigáció hangcsatorna</string>
     <string name="warning_tile_layer_not_downloadable">Az alkalmazás nem tudja letölteni a(z) %1$s térképréteget; az újratelepítés segíthet.</string>
-    <string name="overlay_transparency">Fedőréteg átlátszósága</string>
-    <string name="map_transparency">Alaptérkép átlátszósága</string>
+    <string name="overlay_transparency">Fedőréteg láthatósága</string>
+    <string name="map_transparency">Alaptérkép láthatósága</string>
     <string name="layer_underlay">Alátéttérkép…</string>
     <string name="map_underlay">Alátéttérkép</string>
     <string name="layer_overlay">Fedvénytérkép…</string>
@@ -1243,7 +1243,7 @@
     <string name="osm_live_ask_for_purchase">Először vásároljon OsmAnd Live előfizetést</string>
     <string name="select_map_marker">Térképjelölő kiválasztása</string>
     <string name="upload_anonymously">Feltöltés névtelenül</string>
-    <string name="show_transparency_seekbar">Átlátszóságcsúszka megjelenítése</string>
+    <string name="show_transparency_seekbar">Láthatósági csúszka megjelenítése</string>
     <string name="download_files_error_not_enough_space">Nincs elég hely!
 \nA művelethez ideiglenesen {3} MB, véglegesen pedig {1} MB hely szükséges.
 \n(Jelenleg csak {2} MB áll rendelkezésre.)</string>
@@ -5229,13 +5229,13 @@
     <string name="astro_lunar_eclipse_map_error">A holdfogyatkozás láthatósági területe jelenleg nem érhető el.</string>
     <string name="astro_lunar_eclipse_rendering_note">Térkép színezése: A Hold a horizont felett van. Az árnyékok színei és a fényerő csak sematikus.</string>
     <string name="custom_widget_colors">Egyéni modulszínek</string>
-    <string name="custom_widget_colors_description">Javítsa az olvashatóságot útközben. Oldja fel a teljes testreszabhatóságot, hogy tökéletes modul-láthatóságot biztosítson bármilyen térképháttéren, nappal vagy éjszaka.</string>
+    <string name="custom_widget_colors_description">Javítsa az olvashatóságot útközben. Oldja fel a teljes testreszabási lehetőségeket, hogy a modul bármilyen térképháttér előtt (legyen szó nappalról vagy éjszakáról) tökéletesen látható maradjon.</string>
     <string name="unlock_custom_colors">Egyéni színek feloldása</string>
-    <string name="text_color">Szöveg színe</string>
-    <string name="secondary_text_color">Másodlagos szöveg színe</string>
+    <string name="text_color">Szövegszín</string>
+    <string name="secondary_text_color">Másodlagos szövegszín</string>
     <string name="background_color">Háttérszín</string>
-    <string name="widget_height">Modul magassága</string>
-    <string name="row_height">Sor magassága</string>
+    <string name="widget_height">Modulmagasság</string>
+    <string name="row_height">Sormagasság</string>
     <string name="shared_string_transparent">Átlátszó</string>
     <string name="panel_appearance_original_description">A(z) %1$s megőrzi az egyes modulok egyedi méretét és ikonját.</string>
     <string name="copy_from">Másolás innen</string>
@@ -5247,8 +5247,8 @@
     <string name="duplicate_map_replace_with_road">Csere csak-úttérképre</string>
     <string name="rendering_attr_surface_clay_name">Agyag</string>
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
-    <string name="use_spatial_text_search">Térbeli szövegkeresés használata</string>
-    <string name="use_spatial_text_search_description">Térbeli szövegkeresőmotor (kísérleti) használata a szabványos gyorskeresési API-k helyett.</string>
+    <string name="use_spatial_search">Térbeli szövegkeresés használata</string>
+    <string name="use_spatial_search_description">Térbeli szövegkeresőmotor (kísérleti) használata a szabványos gyorskeresési API-k helyett.</string>
     <string name="always_keep_local_copy">Mindig legyen helyi másolat</string>
     <string name="always_keep_local_copy_description">A médiafájlok akkor is megmaradnak, ha az eredeti fájlt törlik a galériából vagy a fájlok közül.</string>
     <string name="release_5_4">• Megújult keresőfelület: rendezés, kategóriaszűrők, letisztultabb megjelenés\n\n • Fotók és médiafájlok csatolása a kedvencekhez\n\n • Kedvencek: alcsoportok támogatása és kitűzhető mappák\n\n • Koordináták: a keresés, a térképrács és a POI-megjelenítés mostantól támogatja az EPSG által ismert koordináta-formátumokat és a Maidenhead helykódokat\n\n • Navigáció megszakadásainak javítása; váltás a „Szabványos” és a „Gyors” útvonaltervezés között\n\n • Az Android Auto térképméretarányának beállítása a telefontól függetlenül\n\n• Új térbeli keresés: helyek keresése és egy hely környékének átkutatása\n\n • A csillagászati módhoz hozzá lettek adva a nap- és holdfogyatkozások</string>
@@ -5352,4 +5352,13 @@
     <string name="ais_mark_as_outdated_desc">Hajó szimbólumának áthúzása %1$s után, ha nem érkezik jel.</string>
     <string name="ais_hide_after_desc">Hajó szimbólumának eltávolítása %1$s után, ha nem érkezik jel.</string>
     <string name="ais_cpa_warning_time_desc">Hajók piros színnel való kiemelése a legközelebbi megközelítés előtt ennyi idővel: %1$s.</string>
+    <string name="contour_labels">Címkék</string>
+    <string name="contour_label_direction_descr">Emelkedő: az egyes magassági számok teteje a magasabban fekvő terület felé mutatnak, akárcsak a papíralapú domborzati térképeken. A szintvonalakon lévő rövid vonalkák pedig a lejtő irányába mutatnak.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Címkeirány</string>
+    <string name="rendering_value_upright_name">Függőleges</string>
+    <string name="rendering_value_uphill_name">Felfelé</string>
+    <string name="shared_string_visibility">Láthatóság</string>
+    <string name="opening_hours_public_holiday">Munkaszüneti napok</string>
+    <string name="opening_hours_school_holiday">Iskolai szünetek</string>
+    <string name="opening_hours_easter">Húsvét</string>
 </resources>

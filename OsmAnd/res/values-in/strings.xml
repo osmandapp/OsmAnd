@@ -5685,8 +5685,8 @@
     <string name="traffic_warning_red_light_camera">Kamera lampu merah</string>
     <string name="always_keep_local_copy">Selalu simpan salinan lokal</string>
     <string name="always_keep_local_copy_description">Media akan tetap terlampir meskipun file asli dihapus dari galeri atau berkas.</string>
-    <string name="use_spatial_text_search">Gunakan pencarian teks spasial</string>
-    <string name="use_spatial_text_search_description">Ganti API pencarian cepat standar dengan mesin pencarian teks spasial eksperimental.</string>
+    <string name="use_spatial_search">Gunakan pencarian teks spasial</string>
+    <string name="use_spatial_search_description">Ganti API pencarian cepat standar dengan mesin pencarian teks spasial eksperimental.</string>
     <string name="astro_lunar_eclipse">Gerhana bulan</string>
     <string name="astro_lunar_eclipse_subtitle">Jelajahi gerhana bulan di seluruh dunia</string>
     <string name="astro_previous_lunar_eclipse">Gerhana bulan sebelumnya</string>
