@@ -5241,8 +5241,8 @@
     <string name="search_around_my_location">Moja poloha</string>
     <string name="search_around_my_location_description">Hľadať okolo vašej polohy</string>
     <string name="sort_by_relevance">Relevantnosť</string>
-    <string name="use_spatial_text_search">Použiť vyhľadávanie priestorového textu</string>
-    <string name="use_spatial_text_search_description">Nahradiť štandardné rozhranie vyhľadávania experimentálnym vyhľadávaním priestorovým textom.</string>
+    <string name="use_spatial_search">Použiť vyhľadávanie priestorového textu</string>
+    <string name="use_spatial_search_description">Nahradiť štandardné rozhranie vyhľadávania experimentálnym vyhľadávaním priestorovým textom.</string>
     <string name="astro_lunar_eclipse">Zatmenie Mesiaca</string>
     <string name="astro_lunar_eclipse_subtitle">Skúmať celosvetové zatmenia Mesiaca</string>
     <string name="astro_previous_lunar_eclipse">Predchádzajúce zatmenie Mesiaca</string>
