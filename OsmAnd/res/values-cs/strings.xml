@@ -5273,8 +5273,8 @@
     <string name="release_5_4">• Vylepšené uživatelské rozhraní vyhledávání: třídění, filtry podle kategorií, přehlednější vzhled\n\n • Přidávání fotografií a médií do oblíbených\n\n • Oblíbené: podskupiny a složky, které lze připnout\n\n • Souřadnice: vyhledávání, mapová mřížka a zobrazení bodů zájmu (POI) nyní podporují lokátory EPSG a Maidenhead\n\n • Opraveny výpadky navigace; přepínání mezi standardním a rychlým trasováním\n\n • Nastavení měřítka mapy v Android Auto nezávisle na nastavení v telefonu\n\n • Nové prostorové vyhledávání — vyhledávání míst a okolí daného místa\n\n • Do sekce Astronomie přidány sluneční a měsíční zatmění</string>
     <string name="always_keep_local_copy">Vždy držte lokální kopii</string>
     <string name="always_keep_local_copy_description">Media zůstávají připojena i v případě, že je originál odstraněn z galerie nebo souborů.</string>
-    <string name="use_spatial_text_search">Použít prostorové vyhledávání textu</string>
-    <string name="use_spatial_text_search_description">Nahradit standardní rychlé vyhledávací rozhraní API s experimentálním systémem pro vyhledávání textu.</string>
+    <string name="use_spatial_search">Použít prostorové vyhledávání textu</string>
+    <string name="use_spatial_search_description">Nahradit standardní rychlé vyhledávací rozhraní API s experimentálním systémem pro vyhledávání textu.</string>
     <string name="astro_lunar_eclipse">Měsíční zatmění</string>
     <string name="astro_lunar_eclipse_subtitle">Prozkoumejte po celém světě zatmění Měsíce</string>
     <string name="astro_previous_lunar_eclipse">Předchozí zatmění Měsíce</string>
