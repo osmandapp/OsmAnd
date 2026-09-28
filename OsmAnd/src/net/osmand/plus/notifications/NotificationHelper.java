@@ -27,6 +27,7 @@ public class NotificationHelper {
 	public static final Log LOG = PlatformUtil.getLog(NotificationHelper.class);
 
 	public static final String NOTIFICATION_CHANEL_ID = "osmand_background_service";
+	public static final String NOTIFICATION_CHANNEL_NAVIGATION_ID = "osmand_navigation_service";
 	private final OsmandApplication app;
 
 	private NavigationNotification navigationNotification;
@@ -217,11 +218,24 @@ public class NotificationHelper {
 	@TargetApi(26)
 	public void createNotificationChannel() {
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+			NotificationManagerCompat manager = NotificationManagerCompat.from(app);
+
 			NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANEL_ID,
 					app.getString(R.string.osmand_service), NotificationManager.IMPORTANCE_LOW);
 			channel.enableVibration(false);
 			channel.setDescription(app.getString(R.string.osmand_service_descr));
-			NotificationManagerCompat.from(app).createNotificationChannel(channel);
+			manager.createNotificationChannel(channel);
+
+			// A watch bridge asks whether a notification alerts, and on O+ the channel's
+			// importance answers. Under DEFAULT the Wear companion drops it outright:
+			// "filtered for reasons: [SILENT_NOTIFICATION], action: SKIP". Sound and vibration
+			// are separate knobs, so this stays quiet on the phone while passing that filter.
+			NotificationChannel navChannel = new NotificationChannel(NOTIFICATION_CHANNEL_NAVIGATION_ID,
+					app.getString(R.string.shared_string_navigation), NotificationManager.IMPORTANCE_DEFAULT);
+			navChannel.enableVibration(false);
+			navChannel.setSound(null, null);
+			navChannel.setDescription(app.getString(R.string.osmand_service_descr));
+			manager.createNotificationChannel(navChannel);
 		}
 	}
 }

@@ -93,6 +93,12 @@ public class NavigationNotification extends OsmandNotification {
 		AndroidUtils.registerBroadcastReceiver(app, OSMAND_STOP_NAVIGATION_SERVICE_ACTION, stopReceiver, true);
 	}
 
+	@NonNull
+	@Override
+	protected String getChannelId() {
+		return NotificationHelper.NOTIFICATION_CHANNEL_NAVIGATION_ID;
+	}
+
 	@Override
 	public NotificationType getType() {
 		return NotificationType.NAVIGATION;

@@ -98,6 +98,11 @@ public abstract class OsmandNotification {
 		this.top = top;
 	}
 
+	@NonNull
+	protected String getChannelId() {
+		return NOTIFICATION_CHANEL_ID;
+	}
+
 	@SuppressLint("InlinedApi")
 	protected Builder createBuilder(boolean wearable) {
 		Intent contentIntent = getContentIntent();
@@ -106,7 +111,7 @@ public abstract class OsmandNotification {
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 			app.getNotificationHelper().createNotificationChannel();
 		}
-		Builder builder = new Builder(app, NOTIFICATION_CHANEL_ID)
+		Builder builder = new Builder(app, getChannelId())
 				.setVisibility(androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
 //				.setLocalOnly(true) // Probably should be deleted to not limit notifications
