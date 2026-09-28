@@ -409,6 +409,10 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 
 	@Override
 	public void onExitConfirmed() {
+		if (importListener != null && !isSavingTracks()) {
+			// nothing will be saved: finish the import, otherwise the listener keeps waiting for saved tracks
+			importListener.onImportFinished();
+		}
 		dismiss();
 	}
 
