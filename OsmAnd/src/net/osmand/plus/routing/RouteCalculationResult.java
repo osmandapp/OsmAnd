@@ -38,7 +38,6 @@ import java.util.List;
 public class RouteCalculationResult {
 	private static final Log log = PlatformUtil.getLog(RouteCalculationResult.class);
 
-	private static final double DISTANCE_CLOSEST_TO_INTERMEDIATE = 3000;
 	private static final double DISTANCE_THRESHOLD_TO_INTERMEDIATE = 25;
 	private static final double DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS = 15;
 
@@ -227,12 +226,13 @@ public class RouteCalculationResult {
 		return initialCalculation;
 	}
 
-	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
-	                                                 List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
+	static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
+	                                         List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
 		if (intermediates != null && localDirections != null) {
 			int[] interLocations = new int[intermediates.size()];
 			for (int currentIntermediate = 0; currentIntermediate < intermediates.size(); currentIntermediate++) {
-				double setDistance = DISTANCE_CLOSEST_TO_INTERMEDIATE;
+				// match to the closest route location, even if it is far from the intermediate
+				double setDistance = Double.MAX_VALUE;
 				LatLon currentIntermediatePoint = intermediates.get(currentIntermediate);
 				int prevLocation = currentIntermediate == 0 ? 0 : interLocations[currentIntermediate - 1];
 				for (int currentLocation = prevLocation; currentLocation < locations.size();
@@ -247,9 +247,6 @@ public class RouteCalculationResult {
 						break;
 					}
 
-				}
-				if (setDistance == DISTANCE_CLOSEST_TO_INTERMEDIATE) {
-					return;
 				}
 			}
 
@@ -278,6 +275,11 @@ public class RouteCalculationResult {
 					currentIntermediate++;
 				}
 				currentDirection++;
+			}
+			// intermediates located after the last direction
+			while (currentIntermediate < intermediates.size()) {
+				intermediatePoints[currentIntermediate] = Math.max(0, localDirections.size() - 1);
+				currentIntermediate++;
 			}
 		}
 	}
