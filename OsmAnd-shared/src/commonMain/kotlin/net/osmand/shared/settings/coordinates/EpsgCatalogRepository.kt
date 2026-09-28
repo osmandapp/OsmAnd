@@ -9,7 +9,11 @@ import net.osmand.shared.util.PlatformUtil
 import net.osmand.shared.util.synchronized
 import kotlin.jvm.JvmOverloads
 
-class EpsgCatalogRepository {
+/**
+ * @param projDbFile where proj.db is kept, when it is not the app directory: iOS ships it in
+ * Library/Application Support/proj, the directory PROJ itself is pointed at.
+ */
+class EpsgCatalogRepository @JvmOverloads constructor(private val projDbFile: KFile? = null) {
 
 	private val epsgCache = LruCache<Int, CoordinateFormat>(MAX_CACHE_SIZE)
 	private val gridDefinitionCache = LruCache<Int, EpsgGridDefinition>(MAX_CACHE_SIZE)
@@ -282,7 +286,7 @@ class EpsgCatalogRepository {
 	private fun openConnection(): SQLiteConnection? {
 		return try {
 			// Resolved on every open: the app directory can be moved by the user at runtime.
-			val projDb = KFile(PlatformUtil.getOsmAndContext().getAppDir(), PROJ_DB_NAME)
+			val projDb = projDbFile ?: KFile(PlatformUtil.getOsmAndContext().getAppDir(), PROJ_DB_NAME)
 			if (!projDb.exists()) {
 				LOG.warn("EPSG catalog is unavailable: ${projDb.absolutePath()}")
 				return null
