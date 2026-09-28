@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmAndTaskManager;
@@ -519,8 +517,15 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		final Map<String, String> names = new HashMap<>();
-		for (String n : languageCodes) {
-			names.put(n, FileNameTranslationHelper.getVoiceName(context, n));
+		String languageName;
+		for (String code : languageCodes) {
+			languageName = AndroidUtils.getLangTranslation(context, code);
+			if (languageName.equalsIgnoreCase(code)) {
+				// AndroidUtils.getLangTranslation() didn't recognize this language code.
+				// Skip this language as we don't have proper name to display in the language list.
+				continue;
+			}
+			names.put(code, languageName);
 		}
 		final String langSelected = getSelectedLanguage();
 		final String selectedLangName = names.remove(langSelected);
