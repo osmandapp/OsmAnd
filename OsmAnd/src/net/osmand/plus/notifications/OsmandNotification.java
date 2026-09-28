@@ -55,6 +55,11 @@ public abstract class OsmandNotification {
 
 	private Notification currentNotification;
 	private String lastWearableContent;
+	/**
+	 * Set by buildNotification when it builds a wearable copy, to say what that copy should be
+	 * re-posted for. Null falls back to any visible change in its title or text.
+	 */
+	protected String wearableUpdateKey;
 	protected boolean stateChanged;
 
 	private final NotificationManagerCompat notificationManager;
@@ -154,7 +159,9 @@ public abstract class OsmandNotification {
 		if (wearNotificationBuilder != null) {
 			Notification wearNotification = wearNotificationBuilder.build();
 			// Garmin and Samsung watches re-deliver rather than update, so every post buzzes (#16310).
-			String content = getWearableContent(wearNotification);
+			String content = wearableUpdateKey != null
+					? wearableUpdateKey : getWearableContent(wearNotification);
+			android.util.Log.d("Corwin", "notifyWearable: try to notify");
 			if (!stateChanged && content != null && Algorithms.objectEquals(content, lastWearableContent)) {
 				return;
 			}
@@ -162,6 +169,7 @@ public abstract class OsmandNotification {
 			if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
 				notificationManager.cancel(getOsmandWearableNotificationId());
 			}
+			android.util.Log.d("Corwin", "notifyWearable: actually notify");
 			notifySafely(notificationManager, wearNotification, getOsmandWearableNotificationId());
 		}
 	}

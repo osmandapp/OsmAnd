@@ -34,6 +34,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.NextDirectionInfo;
+import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -97,6 +98,34 @@ public class NavigationNotification extends OsmandNotification {
 		return NotificationType.NAVIGATION;
 	}
 
+	/**
+	 * What a watch is woken for. The remaining distance and the eta move all the time and are
+	 * only context, so they are sent but do not by themselves justify another delivery; the
+	 * manoeuvre does. Its distance is reduced to the announcement band OsmAnd already uses for
+	 * voice prompts, so the wrist is nudged as the turn approaches and left alone in between —
+	 * and because those bands are measured in seconds of travel, they widen with speed and
+	 * follow the profile.
+	 */
+	private String buildWearableUpdateKey(@Nullable TurnType turnType,
+			@Nullable RouteDirectionInfo direction, int distanceToTurn) {
+		AnnounceTimeDistances distances = app.getRoutingHelper().getVoiceRouter().getAnnounceTimeDistances();
+		float speed = distances.getSpeed(getLastKnownLocation());
+		int band;
+		if (distances.isTurnStateActive(speed, distanceToTurn, AnnounceTimeDistances.STATE_TURN_NOW)) {
+			band = 0;
+		} else if (distances.isTurnStateActive(speed, distanceToTurn, AnnounceTimeDistances.STATE_TURN_IN)) {
+			band = 1;
+		} else if (distances.isTurnStateActive(speed, distanceToTurn, AnnounceTimeDistances.STATE_PREPARE_TURN)) {
+			band = 2;
+		} else if (distances.isTurnStateActive(speed, distanceToTurn, AnnounceTimeDistances.STATE_LONG_PREPARE_TURN)) {
+			band = 3;
+		} else {
+			band = 4;
+		}
+		String street = direction == null ? "" : direction.getDescriptionRoutePart(app);
+		return band + "|" + (turnType == null ? "" : turnType.toString()) + "|" + street;
+	}
+
 	@Override
 	public int getPriority() {
 		return NotificationCompat.PRIORITY_HIGH;
@@ -126,6 +155,7 @@ public class NavigationNotification extends OsmandNotification {
 		if (!isEnabled(service)) {
 			return null;
 		}
+		wearableUpdateKey = null;
 		String notificationTitle;
 		StringBuilder notificationText = new StringBuilder();
 		color = 0;
@@ -174,6 +204,9 @@ public class NavigationNotification extends OsmandNotification {
 
 				if (turnType != null) {
 					turnBitmap = getTurnBitmap(turnType, turnImminent, deviatedFromRoute);
+				}
+				if (wearable) {
+					wearableUpdateKey = buildWearableUpdateKey(turnType, ri, nextTurnDistance);
 				}
 
 				notificationTitle = OsmAndFormatter.getFormattedDistance(nextTurnDistance, app, OsmAndFormatterParams.USE_LOWER_BOUNDS)
