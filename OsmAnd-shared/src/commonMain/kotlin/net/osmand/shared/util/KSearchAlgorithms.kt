@@ -32,6 +32,11 @@ object KSearchAlgorithms {
 	private val CHARS_TO_NORMALIZE_VALUE = charArrayOf('\'', '\'', ' ', ' ', '\'', '\'', '\'', '\'', '\'')
 	private val APOSTROPHES = charArrayOf('\'', '’', 'ʼ', '´', '`', '′', '‵', 'ʹ')
 
+	/** By char code: the characters of [APOSTROPHES], `ß`, `«` and `»`. */
+	private val REPLACED_CHARS = (APOSTROPHES + charArrayOf('ß', '«', '»')).let { chars ->
+		BooleanArray(chars.maxOf { it.code } + 1).also { table -> chars.forEach { table[it.code] = true } }
+	}
+
 	fun split(name: String): List<String> {
 		var prev = -1
 		val namesToAdd = mutableListOf<String>()
@@ -143,6 +148,10 @@ object KSearchAlgorithms {
 
 	/** Folds a name onto the letters a search can match: no apostrophes, no quotes, no diacritics. */
 	fun alignChars(fullText: String): String {
+		if (!KArabicNormalizer.isSpecialArabic(fullText) && !hasReplacedChars(fullText)) {
+			// every step before the diacritics would return the text as it is
+			return KUnicode.stripDiacritics(fullText)
+		}
 		var result = fullText
 		if (KArabicNormalizer.isSpecialArabic(result)) {
 			result = KArabicNormalizer.normalize(result) ?: result
@@ -152,6 +161,17 @@ object KSearchAlgorithms {
 		result = removeQuotes(result)
 		result = KUnicode.stripDiacritics(result)
 		return result
+	}
+
+	/** Whether [s] holds a character that [removeApostrophes], [replaceGermanSS] or [removeQuotes] replaces. */
+	private fun hasReplacedChars(s: String): Boolean {
+		val replaced = REPLACED_CHARS
+		for (c in s) {
+			if (c.code < replaced.size && replaced[c.code]) {
+				return true
+			}
+		}
+		return false
 	}
 
 	fun removeApostrophes(s: String): String {
