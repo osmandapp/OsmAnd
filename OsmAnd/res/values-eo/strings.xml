@@ -5273,8 +5273,8 @@
     <string name="media_storage_camera_folder_note_descr">Sonaj dosieroj konserviĝos en la dosierujo Music/OsmAnd.</string>
     <string name="always_keep_local_copy">Ĉiam teni lokan kopion</string>
     <string name="always_keep_local_copy_description">Aŭdvidaĵoj ne foriĝos, eĉ kiam la originala dosiero estos forigita el la galerio aŭ dosieroj.</string>
-    <string name="use_spatial_text_search">Uzi spacan serĉilon</string>
-    <string name="use_spatial_text_search_description">Anstataŭigi la norman rapidan serĉilon per la testa spaca serĉilo.</string>
+    <string name="use_spatial_search">Uzi spacan serĉilon</string>
+    <string name="use_spatial_search_description">Anstataŭigi la norman rapidan serĉilon per la testa spaca serĉilo.</string>
     <string name="astro_lunar_eclipse">Luna eklipso</string>
     <string name="astro_lunar_eclipse_subtitle">Esplori lunajn eklipsojn tuttere</string>
     <string name="astro_previous_lunar_eclipse">Antaŭa luna eklipso</string>

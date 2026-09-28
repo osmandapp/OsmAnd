@@ -212,7 +212,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 	private void setupSpatialTextSearchPref() {
 		SwitchPreferenceEx preference = findPreference(app.getSettings().USE_SPATIAL_TEXT_SEARCH.getId());
-		preference.setDescription(R.string.use_spatial_text_search_description);
+		preference.setDescription(R.string.use_spatial_search_description);
 		preference.setIconSpaceReserved(false);
 	}
 
