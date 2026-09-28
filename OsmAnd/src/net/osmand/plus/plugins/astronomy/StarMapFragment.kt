@@ -586,14 +586,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		zoomInButton = view.findViewById(R.id.star_map_zoom_in_button)
 		zoomInButton.setOnClickListener {
 			if (::starView.isInitialized) {
-				starView.zoomIn()
+				starView.zoomIn(true)
 			}
 		}
 
 		zoomOutButton = view.findViewById(R.id.star_map_zoom_out_button)
 		zoomOutButton.setOnClickListener {
 			if (::starView.isInitialized) {
-				starView.zoomOut()
+				starView.zoomOut(true)
 			}
 		}
 

@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorMatrix
@@ -535,35 +534,114 @@ class StarView @JvmOverloads constructor(
 		invalidate()
 	}
 
-	private fun updateViewAngle(newAngle: Double, focusX: Float = width / 2f, focusY: Float = height / 2f) {
+	private fun calculateAngleValues(
+		newAngle: Double,
+		focusX: Float,
+		focusY: Float,
+		valuesAction: (
+			is2D: Boolean,
+			finalAngle: Double,
+			finalPanX: Float,
+			finalPanY: Float,
+			finalAzimuthCenter: Double,
+			finalAltitudeCenter: Double,
+		) -> Unit
+	) {
 		val finalAngle = clampViewAngle(newAngle)
-		if (abs(this.viewAngle - finalAngle) > 0.001) {
-			if (width > 0 && height > 0) {
-				if (is2DMode) {
-					val oldTan = tan(Math.toRadians(viewAngle) / 4.0)
-					val newTan = tan(Math.toRadians(finalAngle) / 4.0)
-					if (oldTan > 0 && newTan > 0) {
-						val ratio = oldTan / newTan
-						val halfWidth = width / 2f
-						val halfHeight = height / 2f
-						panX = (focusX - halfWidth - (focusX - halfWidth - panX) * ratio).toFloat()
-						panY = (focusY - halfHeight - (focusY - halfHeight - panY) * ratio).toFloat()
-					}
-				} else {
-					val oldScale = viewAngle / width
-					val newScale = finalAngle / width
-					val offX = focusX - width / 2f
-					val offY = focusY - height / 2f
-					azimuthCenter += offX * (oldScale - newScale)
-					altitudeCenter -= offY * (oldScale - newScale)
-					altitudeCenter = max(-90.0, min(90.0, altitudeCenter))
-					while (azimuthCenter < 0) azimuthCenter += 360
-					while (azimuthCenter >= 360) azimuthCenter -= 360
+		if (abs(this.viewAngle - finalAngle) <= 0.001) {
+			return
+		}
+		var finalPanX = panX
+		var finalPanY = panY
+		var finalAzimuthCenter = azimuthCenter
+		var finalAltitudeCenter = altitudeCenter
+		if (width > 0 && height > 0) {
+			if (is2DMode) {
+				val oldTan = tan(Math.toRadians(viewAngle) / 4.0)
+				val newTan = tan(Math.toRadians(finalAngle) / 4.0)
+				if (oldTan > 0 && newTan > 0) {
+					val ratio = oldTan / newTan
+					val halfWidth = width / 2f
+					val halfHeight = height / 2f
+					finalPanX = (focusX - halfWidth - (focusX - halfWidth - panX) * ratio).toFloat()
+					finalPanY = (focusY - halfHeight - (focusY - halfHeight - panY) * ratio).toFloat()
 				}
+			} else {
+				val oldScale = viewAngle / width
+				val newScale = finalAngle / width
+				val offX = focusX - width / 2f
+				val offY = focusY - height / 2f
+				finalAzimuthCenter += offX * (oldScale - newScale)
+				finalAltitudeCenter -= offY * (oldScale - newScale)
+				finalAltitudeCenter = max(-90.0, min(90.0, finalAltitudeCenter))
+				while (finalAzimuthCenter < 0) finalAzimuthCenter += 360
+				while (finalAzimuthCenter >= 360) finalAzimuthCenter -= 360
 			}
-			this.viewAngle = finalAngle
-			onViewAngleChangeListener?.invoke(finalAngle)
-			invalidate()
+		}
+		valuesAction.invoke(
+			is2DMode,
+			finalAngle,
+			finalPanX,
+			finalPanY,
+			finalAzimuthCenter,
+			finalAltitudeCenter
+		)
+	}
+
+	private fun updateViewAngle(
+		newAngle: Double,
+		focusX: Float = width / 2f,
+		focusY: Float = height / 2f,
+		animated: Boolean = false,
+		fps: Int? = 30
+	) {
+		calculateAngleValues(newAngle, focusX, focusY) { is2D,
+		                                                 finalAngle,
+		                                                 finalPanX, finalPanY,
+		                                                 finalAzCenter, finalAltCenter ->
+
+			visualAnimator?.cancel()
+			if (animated) {
+				val startAz = azimuthCenter
+				val startAlt = altitudeCenter
+				val startPanX = panX
+				val startPanY = panY
+				val startAngle = viewAngle
+				var lastFrameTime = 0L
+				val frameInterval = if (fps != null && fps > 0) 1000L / fps else 0L
+				visualAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
+					duration = 400
+					interpolator = DecelerateInterpolator()
+					addUpdateListener { animator ->
+						val currentTime = System.currentTimeMillis()
+						val fraction = animator.animatedValue as Float
+						if (frameInterval == 0L || currentTime - lastFrameTime >= frameInterval || fraction == 1f) {
+							if (is2D) {
+								panX = startPanX + (finalPanX - startPanX) * fraction
+								panY = startPanY + (finalPanY - startPanY) * fraction
+							} else {
+								azimuthCenter = interpolateAngle(startAz, finalAzCenter, fraction)
+								altitudeCenter = startAlt + (finalAltCenter - startAlt) * fraction
+							}
+							setViewAngleDirect(startAngle + (finalAngle - startAngle) * fraction)
+							invalidate()
+							lastFrameTime = currentTime
+						}
+					}
+					start()
+				}
+			} else {
+				if (is2D) {
+					panX = finalPanX
+					panY = finalPanY
+				} else {
+					azimuthCenter = finalAzCenter
+					altitudeCenter = finalAltCenter
+				}
+				this.viewAngle = finalAngle
+				onViewAngleChangeListener?.invoke(finalAngle)
+				invalidate()
+			}
 		}
 	}
 
@@ -910,12 +988,12 @@ class StarView @JvmOverloads constructor(
 
 	fun getMaxViewAngle() = if (is2DMode) MAX_VIEW_ANGLE_2D else MAX_VIEW_ANGLE
 
-	fun zoomIn() {
-		updateViewAngle(viewAngle / 1.5)
+	fun zoomIn(animated: Boolean) {
+		updateViewAngle(viewAngle / 1.5, animated = animated)
 	}
 
-	fun zoomOut() {
-		updateViewAngle(viewAngle * 1.5)
+	fun zoomOut(animated: Boolean) {
+		updateViewAngle(viewAngle * 1.5, animated = animated)
 	}
 
 	private fun recalculatePositions(time: Time, updateTargets: Boolean, force: Boolean = false) {
