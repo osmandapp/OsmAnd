@@ -59,9 +59,9 @@ public class SearchVariantRulesTest {
 		// a pair is matched on one side only: Place/Pl by the query, so the English index adds no "Pl"
 		assertFalse(SearchVariantRules.forLocale("en").index().stream()
 				.anyMatch(v -> v.apply("Trinity Place") != null));
-		assertEquals("Stop and Shop", SearchVariantRules.forLocale("en").index().stream()
-				.filter(v -> "Stop and Shop".equals(v.apply("Stop & Shop"))).findFirst().orElseThrow()
-				.apply("Stop & Shop"));
+		// "& -> and" of POI names was removed: ~1.3 MB of POI index for too few queries
+		assertFalse(SearchVariantRules.forLocale("en").index().stream()
+				.anyMatch(v -> v.apply("Stop & Shop") != null));
 
 		SearchVariantRules italian = SearchVariantRules.forLocale("it");
 		assertEquals("SS 42 del Tonale", italian.index().stream()
