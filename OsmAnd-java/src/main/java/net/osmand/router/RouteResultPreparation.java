@@ -2685,7 +2685,14 @@ public class RouteResultPreparation {
 				if (!checkTurnLanesOrder(lanes, i, noneValues[k])) {
 					return turnLanes;
 				}
-				res.append(noneValues[k++]).append(through != null ? ";through" : "");
+				String value = noneValues[k++];
+				if (through == null) {
+					res.append(value);
+				} else if (value.contains("right")) {
+					res.append("through;").append(value);
+				} else {
+					res.append(value).append(";through");
+				}
 			}
 		}
 		return res.toString();

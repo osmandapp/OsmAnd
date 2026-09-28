@@ -216,7 +216,13 @@ object TurnLanes {
 				if (!checkTurnLanesOrder(lanes, i, value)) {
 					return turnLanes
 				}
-				res.append(value).append(if (through != null) ";through" else "")
+				if (through == null) {
+					res.append(value)
+				} else if (value.contains("right")) {
+					res.append("through;").append(value)
+				} else {
+					res.append(value).append(";through")
+				}
 			}
 		}
 		return res.toString()
