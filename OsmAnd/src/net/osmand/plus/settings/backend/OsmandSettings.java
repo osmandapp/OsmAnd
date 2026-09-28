@@ -126,7 +126,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OsmandSettings {
@@ -147,8 +146,8 @@ public class OsmandSettings {
 
 	public static final float SIM_MIN_SPEED = 5 / 3.6f;
 
-	private static Pattern STRIP_EMOJI_PATTERN =
-			Pattern.compile("[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}]");
+	private static final Pattern STRIP_EMOJI_PATTERN =
+			Pattern.compile("[[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}]\\uFE0F\\uFE0E\\u200D]");
 
 	/// Settings variables
 	private final OsmandApplication ctx;
