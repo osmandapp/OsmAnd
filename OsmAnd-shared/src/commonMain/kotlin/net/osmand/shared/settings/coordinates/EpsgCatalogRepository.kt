@@ -557,17 +557,13 @@ class EpsgCatalogRepository {
 		// GridConfiguration receives the linear parameters in kilometres and the angular ones in
 		// radians, so only CRSs whose axes and conversion parameters are already in metres and
 		// degrees can be rendered.
+		// Uncorrelated: axis has no index on the coordinate system, so a per-CRS subquery scans it.
 		private const val METRIC_AXES_FILTER =
-			"AND EXISTS (SELECT 1 FROM axis metric_axis " +
-				"WHERE metric_axis.coordinate_system_auth_name = crs.coordinate_system_auth_name " +
-				"AND metric_axis.coordinate_system_code = crs.coordinate_system_code " +
-				"AND metric_axis.uom_auth_name = 'EPSG' " +
-				"AND CAST(metric_axis.uom_code AS INTEGER) = $METRE_UOM_CODE) " +
-				"AND NOT EXISTS (SELECT 1 FROM axis other_axis " +
-				"WHERE other_axis.coordinate_system_auth_name = crs.coordinate_system_auth_name " +
-				"AND other_axis.coordinate_system_code = crs.coordinate_system_code " +
-				"AND (IFNULL(other_axis.uom_auth_name, '') <> 'EPSG' " +
-				"OR IFNULL(CAST(other_axis.uom_code AS INTEGER), 0) <> $METRE_UOM_CODE)) "
+			"AND crs.coordinate_system_auth_name = 'EPSG' AND crs.coordinate_system_code IN (" +
+				"SELECT coordinate_system_code FROM axis WHERE coordinate_system_auth_name = 'EPSG' " +
+				"GROUP BY coordinate_system_code " +
+				"HAVING MIN(IFNULL(uom_auth_name, '') = 'EPSG' " +
+				"AND IFNULL(CAST(uom_code AS INTEGER), 0) = $METRE_UOM_CODE) = 1) "
 
 		private val PARAMETER_UNITS_FILTER = (1..7).joinToString(separator = " ", postfix = " ") {
 			"AND CAST(IFNULL(c.param${it}_uom_code, $METRE_UOM_CODE) AS INTEGER) " +
