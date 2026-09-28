@@ -192,7 +192,11 @@ class GeocodingUtilities {
 		val listR = ArrayList<RouteSegmentPoint>()
 		// we allow duplications to search in both files for boundary regions
 		// here we use same code as for normal routing, so we take into account current profile and sort by priority & distance
-		rp.findRouteSegment(lat, lon, ctx, listR, false, true)
+		val best = rp.findRouteSegment(lat, lon, ctx, listR, false, true)
+		if (best != null) {
+			best.others = null
+			listR.add(0, best)
+		}
 		var distSquare = 0.0
 		val streetNames = HashMap<String, MutableList<RouteRegion>>()
 		for (p in listR) {

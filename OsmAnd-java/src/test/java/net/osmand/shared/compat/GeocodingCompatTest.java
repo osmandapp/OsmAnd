@@ -377,7 +377,11 @@ public class GeocodingCompatTest {
 	private static String javaAnswerInItsOrder(GeocodingUtilities utils, RoutingContext jctx, List<BinaryMapIndexReader> readers,
 			double lat, double lon, boolean allowEmptyNames) throws IOException {
 		List<RouteSegmentPoint> roads = new ArrayList<>();
-		new RoutePlannerFrontEnd().findRouteSegment(lat, lon, jctx, roads, false, true);
+		RouteSegmentPoint best = new RoutePlannerFrontEnd().findRouteSegment(lat, lon, jctx, roads, false, true);
+		if (best != null) {
+			best.others = null;
+			roads.add(0, best);
+		}
 		return javaAnswer(utils, readers, () -> reverseGeocodingSearch(roads, lat, lon, allowEmptyNames), false);
 	}
 
@@ -413,15 +417,13 @@ public class GeocodingCompatTest {
 		return sb.toString();
 	}
 
-	/**
-	 * The roads java finds at the point, in the order the copy finds them, less the nearest: the
-	 * list {@code findRouteSegment} hands back, which it takes the nearest out of.
-	 */
+	/** The roads java finds at the point, the nearest first, in the order the copy finds them. */
 	private static List<RouteSegmentPoint> inCopyOrder(RoutingContext jctx, net.osmand.shared.routing.RoutingContext kctx,
 			double lat, double lon) throws IOException {
 		List<RouteSegmentPoint> j = new ArrayList<>();
 		RouteSegmentPoint jps = new RoutePlannerFrontEnd().findRouteSegment(lat, lon, jctx, j, false, true);
 		if (jps != null) {
+			jps.others = null;
 			j.add(0, jps);
 		}
 		List<net.osmand.shared.routing.RouteSegmentPoint> k = new ArrayList<>();
@@ -448,9 +450,6 @@ public class GeocodingCompatTest {
 			}
 			assertTrue("road " + key + " found by java", match >= 0);
 			ordered.add(j.remove(match));
-		}
-		if (!ordered.isEmpty()) {
-			ordered.remove(0);
 		}
 		return ordered;
 	}
