@@ -521,6 +521,8 @@ public class SpatialSearchContext {
 				if (matchedPrefixes == null) {
 					continue;
 				}
+			} else {
+				t.addReadLocale(locale);
 			}
 			for (PrefixNameValue prefix : matchedPrefixes) {
 				parseAtomSuffixes(t, indxInd, indx, prefix, tokens, locale);

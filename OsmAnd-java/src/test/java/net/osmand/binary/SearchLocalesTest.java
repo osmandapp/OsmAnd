@@ -31,6 +31,19 @@ public class SearchLocalesTest {
 	}
 
 	@Test
+	public void mapPrefixKeepsSubregionWithItsOwnLocale() {
+		assertEquals("Switzerland_ticino", SearchLocales.mapPrefix("Switzerland_ticino_europe_2.obf"));
+		assertEquals("Belgium_flanders", SearchLocales.mapPrefix("Belgium_flanders_europe_2.obf"));
+		assertEquals("Switzerland", SearchLocales.mapPrefix("Switzerland_zurich_europe_2.obf"));
+		assertEquals("Us", SearchLocales.mapPrefix("Us_new-york_northamerica_2.obf"));
+		assertNull(SearchLocales.mapPrefix("World_basemap_2.obf"));
+		assertNull(SearchLocales.mapPrefix(null));
+		// the region name written by BinaryMerger keeps the locale of the source map
+		assertEquals("it_CH", SearchLocales.forMap(SearchLocales.mapPrefix("Switzerland_ticino_europe_2.obf")));
+		assertEquals("nl_BE", SearchLocales.forMap(SearchLocales.mapPrefix("Belgium_flanders_europe_2.obf")));
+	}
+
+	@Test
 	public void nameLocaleFollowsTheTagAndTheCountryOfTheMap() {
 		assertEquals("it_IT", SearchLocales.forName(null, "it_IT"));
 		assertEquals("it_IT", SearchLocales.forName("alt_name", "it_IT"));

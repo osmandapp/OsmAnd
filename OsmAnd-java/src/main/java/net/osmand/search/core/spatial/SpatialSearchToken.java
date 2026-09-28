@@ -209,9 +209,18 @@ public class SpatialSearchToken {
 
 	/** @param locale rules locale of the map whose name index is read, see {@link net.osmand.binary.SearchLocales} */
 	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String locale) {
+		String rulesLocale = addReadLocale(locale);
+		return getPrefixMatcher(stats, rulesLocale, true);
+	}
+
+	/**
+	 * Remembers the rules locale of a map whose name index gives keys to this token, also when the keys come from the
+	 * cache of an index read for the same word, so {@link #likelyPartOfBuilding()} does not depend on a warm cache.
+	 */
+	String addReadLocale(String locale) {
 		String rulesLocale = locale == null ? "" : locale;
 		readLocales.add(rulesLocale);
-		return getPrefixMatcher(stats, rulesLocale, true);
+		return rulesLocale;
 	}
 
 	private NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String rulesLocale, boolean includeQueryRules) {

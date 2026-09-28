@@ -39,4 +39,17 @@ public class SpatialSearchQueryRulesTest {
 		Assert.assertFalse(ter.likelyPartOfBuilding("en_US"));
 		Assert.assertTrue(ter.likelyPartOfBuilding("fr_FR"));
 	}
+
+	@Test
+	public void buildingSuffixDoesNotDependOnWarmPrefixCache() {
+		SpatialSearchContext.SpatialSearchStats stats = new SpatialSearchContext.SpatialSearchStats();
+		// cold: the name index of a French map is read for the word
+		SpatialSearchToken cold = new SpatialSearchToken(2, "ter", "Ter", 0);
+		cold.getPrefixMatcher(stats, "fr_FR");
+		// warm: the keys of the same word come from the cache of that index, no matcher is built
+		SpatialSearchToken warm = new SpatialSearchToken(2, "ter", "Ter", 1);
+		warm.addReadLocale("fr_FR");
+		Assert.assertTrue(cold.likelyPartOfBuilding());
+		Assert.assertEquals(cold.likelyPartOfBuilding(), warm.likelyPartOfBuilding());
+	}
 }

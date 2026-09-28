@@ -132,22 +132,31 @@ public final class SearchLocales {
 	 * map name; accepts a download name, a file name or a path
 	 */
 	public static String forMap(String mapName) {
+		String prefix = mapPrefix(mapName);
+		return prefix == null ? "" : LOCALE_BY_PREFIX.get(prefix.toLowerCase(Locale.ROOT));
+	}
+
+	/**
+	 * @return the longest prefix of a map name that has a rules locale, in the case of the name
+	 * ("Switzerland_ticino_europe_2.obf" -> "Switzerland_ticino"), null when no prefix covers the map name
+	 */
+	public static String mapPrefix(String mapName) {
 		if (mapName == null) {
-			return "";
+			return null;
 		}
-		String name = mapName.toLowerCase(Locale.ROOT);
+		String name = mapName;
 		int slash = Math.max(name.lastIndexOf('/'), name.lastIndexOf('\\'));
 		if (slash >= 0) {
 			name = name.substring(slash + 1);
 		}
+		String lower = name.toLowerCase(Locale.ROOT);
 		// the longest covering prefix: "switzerland_ticino" before "switzerland"
-		for (int end = name.length(); end > 0; end = name.lastIndexOf('_', end - 1)) {
-			String locale = LOCALE_BY_PREFIX.get(name.substring(0, end));
-			if (locale != null) {
-				return locale;
+		for (int end = lower.length(); end > 0; end = lower.lastIndexOf('_', end - 1)) {
+			if (LOCALE_BY_PREFIX.containsKey(lower.substring(0, end))) {
+				return name.substring(0, end);
 			}
 		}
-		return "";
+		return null;
 	}
 
 	/**
