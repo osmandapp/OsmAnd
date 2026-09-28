@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
@@ -210,7 +211,11 @@ public class LocalIndexHelper {
 	private void loadTilesData(@NonNull File dir, @NonNull List<LocalItem> items,
 	                           boolean shouldUpdate, @Nullable AbstractLoadLocalIndexTask task) {
 		if (dir.canRead()) {
+			OsmandSettings settings = app.getSettings();
 			for (File file : listFilesSorted(dir)) {
+				if (settings.isTileSourceProbeFolder(file)) {
+					continue;
+				}
 				if (file.isFile()) {
 					String fileName = file.getName();
 					boolean tilesData = CollectionUtils.endsWithAny(fileName, SQLiteTileSource.EXT);
