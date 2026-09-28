@@ -774,7 +774,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		setExtraBottomMargin(timeControlCard, eclipseOffset)
 		setExtraBottomMargin(searchButton, eclipseOffset)
 		setExtraBottomMargin(settingsButton, eclipseOffset)
-		setExtraBottomMargin(zoomButtons, eclipseOffset)
 	}
 
 	private fun setExtraBottomMargin(view: View, extraBottom: Int) {
