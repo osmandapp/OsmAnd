@@ -108,6 +108,22 @@ public class MemoryLog {
 	// than mapped into the process, which is what Debug.getMemoryStat("summary.graphics") reads
 	private static final String[] SMAPS_CATEGORIES =
 			{"dalvik", "native", "gpu", "so", "code", "obf", "font", "stack", "anon", "other"};
+	// scudo on 64-bit Android keeps every size class in its own 256 MB region, the batch class
+	// first and then the classes below in this order, so the address of a primary mapping says
+	// which class it belongs to and the mapped part of a region is the high-water mark of the class
+	private static final int SCUDO_REGION_SHIFT = 28;
+	private static final int[] SCUDO_CLASSES = {0, 32, 48, 64, 80, 96, 112, 144, 176, 192, 224, 288,
+			352, 448, 592, 800, 1104, 1648, 2096, 2576, 3120, 4112, 4624, 7120, 8720, 11664, 14224,
+			16400, 18448, 23056, 29456, 33296, 65552};
+	// the classes below this say nothing, and there are 33 of them on every line otherwise
+	private static final long SCUDO_CLASS_MIN_KB = 10 * 1024;
+	// a region grown to this is out of room: the next allocation of that class goes elsewhere
+	private static final long SCUDO_CLASS_FULL_KB = 250 * 1024;
+	// maps is one line per mapping, and the process near the mapping limit is the one this is for:
+	// 63k lines parse in ~30 ms on a desktop, so only a device far slower than that turns it off
+	private static final long MAPS_BUDGET_MS = 1000;
+	private static final byte[] SCUDO_PRIMARY = "[anon:scudo:primary".getBytes(StandardCharsets.US_ASCII);
+	private static final byte[] SCUDO_SECONDARY = "[anon:scudo:secondary".getBytes(StandardCharsets.US_ASCII);
 	// a heap smaller than this explains itself; below it a histogram is not worth seconds of freeze
 	private static final long HISTOGRAM_HEAP_THRESHOLD = 350L * 1024 * 1024;
 	// many devices cap the heap at 256 MB, where the absolute threshold can never be reached,
@@ -137,6 +153,7 @@ public class MemoryLog {
 	private int sampleCount;
 	private boolean summaryAffordable = true;
 	private boolean smapsAffordable = true;
+	private boolean mapsAffordable = true;
 	private int smapsCount;
 	private long smapsRss;
 	private long previousAllocated;
@@ -232,6 +249,7 @@ public class MemoryLog {
 		appendVmCounts(sb);
 		appendProcessSummary(sb);
 		appendSmaps(sb);
+		appendMaps(sb);
 		appendThreadNames(sb);
 		String gpu = gpuMemory(app);
 		if (gpu != null) {
@@ -592,6 +610,156 @@ public class MemoryLog {
 			}
 		}
 		return sb.length() > 0 ? sb.toString() : null;
+	}
+
+	/**
+	 * Native crashes with "Scudo ERROR: internal map failure (Out of memory)" are the process
+	 * running into the mapping limit (~65k) rather than out of memory: once a size class fills its
+	 * region, scudo serves that class from the secondary, one mapping per block, and soon from
+	 * every class. The tombstone shows only the end state, so the mapping count, the secondary
+	 * blocks and the classes that have grown are written here, to see which class goes first.
+	 */
+	private void appendMaps(@NonNull StringBuilder sb) {
+		if (!mapsAffordable) {
+			return;
+		}
+		long start = SystemClock.uptimeMillis();
+		String maps = readMaps();
+		long spent = SystemClock.uptimeMillis() - start;
+		if (maps != null) {
+			sb.append(maps);
+		}
+		if (spent > MAPS_BUDGET_MS && sampleCount > 1) {
+			mapsAffordable = false;
+			sb.append(" mapsOff=").append(spent);
+		}
+	}
+
+	@Nullable
+	private String readMaps() {
+		int count = 0;
+		int secondary = 0;
+		// start, end and writable-primary flag of every primary mapping: the region base is the
+		// lowest of them, which is known only at the end
+		long[] primary = new long[3 * 64];
+		int primaryCount = 0;
+		byte[] buffer = new byte[SMAPS_BUFFER];
+		int filled = 0;
+		try (FileInputStream in = new FileInputStream("/proc/self/maps")) {
+			while (true) {
+				int read = in.read(buffer, filled, buffer.length - filled);
+				if (read > 0) {
+					filled += read;
+				}
+				int lineStart = 0;
+				for (int i = 0; i < filled; i++) {
+					if (buffer[i] != '\n') {
+						continue;
+					}
+					count++;
+					int name = indexOf(buffer, lineStart, i, (byte) '[');
+					if (name >= 0 && startsWith(buffer, name, i, SCUDO_SECONDARY)) {
+						secondary++;
+					} else if (name >= 0 && startsWith(buffer, name, i, SCUDO_PRIMARY)) {
+						if (primaryCount * 3 == primary.length) {
+							long[] grown = new long[primary.length * 2];
+							System.arraycopy(primary, 0, grown, 0, primary.length);
+							primary = grown;
+						}
+						int dash = indexOf(buffer, lineStart, i, (byte) '-');
+						int space = indexOf(buffer, dash + 1, i, (byte) ' ');
+						// primary_reserve is address space only, it counts for the base, not the size
+						boolean used = buffer[space + 2] == 'w' && buffer[name + SCUDO_PRIMARY.length] == ']';
+						primary[primaryCount * 3] = parseHex(buffer, lineStart, dash);
+						primary[primaryCount * 3 + 1] = parseHex(buffer, dash + 1, space);
+						primary[primaryCount * 3 + 2] = used ? 1 : 0;
+						primaryCount++;
+					}
+					lineStart = i + 1;
+				}
+				if (read < 0) {
+					break;
+				}
+				if (lineStart > 0) {
+					System.arraycopy(buffer, lineStart, buffer, 0, filled - lineStart);
+					filled -= lineStart;
+				} else if (filled == buffer.length) {
+					filled = 0;
+				}
+			}
+		} catch (IOException | RuntimeException e) {
+			log.error(e);
+			return null;
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append(" vma=").append(count);
+		sb.append(" sec=").append(secondary);
+		// 32-bit scudo packs its classes differently, and older Android has no scudo at all
+		if (primaryCount == 0 || !is64Bit()) {
+			return sb.toString();
+		}
+		long base = Long.MAX_VALUE;
+		for (int i = 0; i < primaryCount; i++) {
+			base = Math.min(base, primary[i * 3]);
+		}
+		long[] kb = new long[SCUDO_CLASSES.length];
+		for (int i = 0; i < primaryCount; i++) {
+			int region = (int) ((primary[i * 3] - base) >>> SCUDO_REGION_SHIFT);
+			if (primary[i * 3 + 2] == 1 && region < kb.length) {
+				kb[region] += (primary[i * 3 + 1] - primary[i * 3]) / 1024;
+			}
+		}
+		StringBuilder classes = new StringBuilder();
+		int full = 0;
+		for (int i = 0; i < kb.length; i++) {
+			if (i > 0 && kb[i] >= SCUDO_CLASS_FULL_KB) {
+				full++;
+			}
+			if (kb[i] >= SCUDO_CLASS_MIN_KB) {
+				classes.append(classes.length() > 0 ? "," : "")
+						.append(i == 0 ? "batch" : String.valueOf(SCUDO_CLASSES[i]))
+						.append(':').append(kb[i] / 1024);
+			}
+		}
+		if (classes.length() > 0) {
+			sb.append(" scudo=").append(classes);
+		}
+		sb.append(" full=").append(full);
+		return sb.toString();
+	}
+
+	private boolean is64Bit() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && android.os.Process.is64Bit();
+	}
+
+	private int indexOf(@NonNull byte[] b, int from, int to, byte value) {
+		for (int i = from; i < to; i++) {
+			if (b[i] == value) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	private boolean startsWith(@NonNull byte[] b, int from, int to, @NonNull byte[] prefix) {
+		if (to - from < prefix.length) {
+			return false;
+		}
+		for (int i = 0; i < prefix.length; i++) {
+			if (b[from + i] != prefix[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private long parseHex(@NonNull byte[] b, int from, int to) {
+		long value = 0;
+		for (int i = from; i < to; i++) {
+			byte c = b[i];
+			value = value << 4 | (c <= '9' ? c - '0' : (c | 0x20) - 'a' + 10);
+		}
+		return value;
 	}
 
 	private long parseKb(@NonNull byte[] b, int from, int to) {
