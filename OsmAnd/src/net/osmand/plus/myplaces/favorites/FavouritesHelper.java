@@ -520,8 +520,20 @@ public class FavouritesHelper {
 	}
 
 	public boolean deleteFavourite(FavouritePoint p, boolean saveImmediately) {
+		return deleteFavourite(p, saveImmediately, true);
+	}
+
+	/**
+	 * @param journal false when the point is removed only to be replaced by a point with the same key
+	 *                (import, Cloud download). Such a removal must not reach the deletion journal: if the
+	 *                process dies before the save, the next start would delete the old point from disk
+	 *                although its replacement was never saved.
+	 */
+	public boolean deleteFavourite(FavouritePoint p, boolean saveImmediately, boolean journal) {
 		if (p != null) {
-			FavoriteDeletionsJournal.addPoint(app, p);
+			if (journal) {
+				FavoriteDeletionsJournal.addPoint(app, p);
+			}
 
 			FavoriteGroup group = flatGroups.get(p.getCategory());
 			if (group != null) {
