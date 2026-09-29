@@ -138,7 +138,7 @@ object TurnLanes {
 	 * describe: the straightest one goes through, left turns fill them from the left, right turns from
 	 * the right. Example: left, through and right directions with "left|left|" give "left|left|through;right".
 	 */
-	fun convertNoneLanes(turnLanes: String, rs: RoadSplitStructure): String {
+	fun convertNoneLanes(turnLanes: String, rs: RoadSplitStructure, currTurnLanes: String?): String {
 		val lanes = splitKeepingEmpty(turnLanes, "|")
 		var noneLanes = 0
 		val marked = BooleanArray(3) // left, through, right
@@ -154,30 +154,21 @@ object TurnLanes {
 		// directions of the junction not described by the marked lanes, from left to right
 		val angles = ArrayList(rs.attachedAngles)
 		angles.add(rs.currentDeviation)
-		var through: Double? = null
-		val it = angles.iterator()
-		while (it.hasNext()) {
-			val a = it.next()
-			val order = turnOrder(a)
-			if (marked[order.sign + 1]) {
-				if (order == 0) {
-					through = a
-				}
-				it.remove()
-			}
-		}
 		angles.sortWith { c1, c2 -> c2.compareTo(c1) }
+		var through: Double? = null
+		if (turnLanes != currTurnLanes) {
+			through = getThroughByLanes(lanes, angles)
+		}
+		if (through == null && marked[1]) {
+			through = getThroughByOrder(angles)
+		}
+		removeMarkedAngles(marked, angles)
 		if (through == null) {
-			for (angle in angles) {
-				val best = through
-				if (abs(angle) <= TURN_DEGREE_MIN && (best == null || abs(angle) < abs(best))) {
-					through = angle
-				}
-			}
-			val straightest = through
-			if (straightest != null) {
-				angles.remove(straightest)
-			}
+			through = getThroughByMinAngle(angles)
+		}
+		val straight = through
+		if (straight != null) {
+			angles.remove(straight)
 		}
 		// the outermost unmarked lanes take the outermost directions, extra ones are stacked
 		val turns = ArrayList<Int>()
@@ -228,6 +219,58 @@ object TurnLanes {
 		return res.toString()
 	}
 
+	private fun getThroughByOrder(angles: List<Double>): Double? {
+		for (a in angles) {
+			if (turnOrder(a) == 0) {
+				return a
+			}
+		}
+		return null
+	}
+
+	private fun removeMarkedAngles(marked: BooleanArray, angles: MutableList<Double>) {
+		val it = angles.iterator()
+		while (it.hasNext()) {
+			if (marked[turnOrder(it.next()).sign + 1]) {
+				it.remove()
+			}
+		}
+	}
+
+	private fun getThroughByMinAngle(angles: List<Double>): Double? {
+		var through: Double? = null
+		for (angle in angles) {
+			val best = through
+			if (abs(angle) <= TURN_DEGREE_MIN && (best == null || abs(angle) < abs(best))) {
+				through = angle
+			}
+		}
+		return through
+	}
+
+	private fun getThroughByLanes(lanes: List<String>, angles: List<Double>): Double? {
+		val noneLeft = isNoneLane(lanes[0])
+		val noneRight = isNoneLane(lanes[lanes.size - 1])
+		if (!lanes.joinToString("|").contains("through") || noneLeft == noneRight) {
+			return null
+		}
+		val turns = HashSet<Int>()
+		for (lane in lanes) {
+			if (!isNoneLane(lane)) {
+				for (option in splitDroppingTrailingEmpty(lane, ";")) {
+					val order = TurnType.orderFromLeftToRight(TurnType.convertType(option))
+					if (if (noneLeft) order > 0 else order < 0) {
+						turns.add(order)
+					}
+				}
+			}
+		}
+		// from the right when the unmarked lanes are on the left, from the left otherwise
+		val sorted = if (noneLeft) angles.sorted() else angles.sortedDescending()
+		val through = if (turns.size < sorted.size) sorted[turns.size] else null
+		return if (through == null || abs(through) > TURN_DEGREE_MIN) null else through
+	}
+
 	private fun checkTurnLanesOrder(lanes: List<String>, i: Int, value: String): Boolean {
 		for (option in splitDroppingTrailingEmpty(value, ";")) {
 			val order = TurnType.orderFromLeftToRight(TurnType.convertType(option))
@@ -236,6 +279,10 @@ object TurnLanes {
 					continue
 				}
 				for (m in splitDroppingTrailingEmpty(lanes[j], ";")) {
+					if (isMergeLane(m)) {
+						// a lane that ends by merging says nothing about where the other lanes turn
+						continue
+					}
 					val other = TurnType.orderFromLeftToRight(TurnType.convertType(m))
 					if (if (j < i) other > order else other < order) {
 						return false
@@ -252,6 +299,10 @@ object TurnLanes {
 
 	private fun isNoneLane(lane: String): Boolean {
 		return lane.isEmpty() || "none" == lane
+	}
+
+	private fun isMergeLane(lane: String): Boolean {
+		return "merge_to_left" == lane || "merge_to_right" == lane
 	}
 
 	private fun hasNoneLane(turnLanes: String?): Boolean {
@@ -1246,7 +1297,7 @@ object TurnLanes {
 				val rs = calculateRoadSplitStructure(
 					prevSegm, currentSegm, attachedRoutes, converted, prevSegm.getBearingEnd()
 				)
-				converted = convertNoneLanes(converted, rs)
+				converted = convertNoneLanes(converted, rs, getTurnLanesString(currentSegm))
 			}
 			turnLanes = converted
 			lanesArray = calculateRawTurnLanes(converted, mainTurnType)
@@ -1299,7 +1350,7 @@ object TurnLanes {
 
 		val withNone = turnLanesPrevSegm
 		if (withNone != null && hasNoneLane(withNone)) {
-			val converted = convertNoneLanes(withNone, rs)
+			val converted = convertNoneLanes(withNone, rs, getTurnLanesString(currentSegm))
 			if (converted != withNone) {
 				turnLanesPrevSegm = converted
 				rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, converted, prevBearingEnd)
