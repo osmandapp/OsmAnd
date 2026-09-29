@@ -19,6 +19,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
@@ -84,6 +85,7 @@ public class NetworkUtils {
 	}
 
 	private static final String BOUNDARY = "CowMooCowMooCowCowCow"; //$NON-NLS-1$
+	private static final int MAX_ERROR_MESSAGE_LENGTH = 500;
 	public static String uploadFile(String urlText, File fileToUpload, String userNamePassword,
 									OsmOAuthAuthorizationClient client,
 									String formName, boolean gzip, Map<String, String> additionalMapData){
@@ -119,30 +121,14 @@ public class NetworkUtils {
 
 			log.info("Finish uploading file " + fileToUpload.getName());
 			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
-			if (conn.getResponseCode() != 200) {
-				InputStream errorStream = conn.getErrorStream();
-				if (errorStream != null) {
-					try (BufferedReader reader = new BufferedReader(new InputStreamReader(errorStream, StandardCharsets.UTF_8))) {
-						StringBuilder errorMsg = new StringBuilder();
-						String s;
-						boolean first = true;
-						while ((s = reader.readLine()) != null) {
-							if (first) {
-								first = false;
-							} else {
-								errorMsg.append("\n"); //$NON-NLS-1$
-							}
-							errorMsg.append(s);
-						}
-						String err = errorMsg.toString().trim();
-						if (!err.isEmpty()) {
-							return err;
-						}
-					} catch (IOException e) {
-						// ignore and return getResponseMessage()
-					}
+			int responseCode = conn.getResponseCode();
+			if (responseCode != 200) {
+				String err = readPlainTextError(conn);
+				if (err == null) {
+					err = conn.getResponseMessage();
 				}
-				return conn.getResponseMessage();
+				// null result means success, so never return an empty error for a failed upload
+				return Algorithms.isEmpty(err) ? "HTTP " + responseCode : err;
 			}
 			InputStream is = conn.getInputStream();
 			StringBuilder responseBody = new StringBuilder();
@@ -165,7 +151,36 @@ public class NetworkUtils {
 			return null;
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
-			return e.getMessage();
+			return e.getMessage() != null ? e.getMessage() : e.toString();
+		}
+	}
+
+	private static String readPlainTextError(HttpURLConnection conn) {
+		// OSM API reports errors as text/plain; anything else (e.g. proxy HTML pages) is not shown to the user
+		String contentType = conn.getContentType();
+		if (contentType == null || !contentType.toLowerCase(Locale.ROOT).startsWith("text/plain")) {
+			return null;
+		}
+		InputStream errorStream = conn.getErrorStream();
+		if (errorStream == null) {
+			return null;
+		}
+		try (Reader reader = new InputStreamReader(errorStream, StandardCharsets.UTF_8)) {
+			// read at most one char over the limit to detect truncation without buffering the whole body
+			char[] buf = new char[MAX_ERROR_MESSAGE_LENGTH + 1];
+			int len = 0;
+			int n;
+			while (len < buf.length && (n = reader.read(buf, len, buf.length - len)) != -1) {
+				len += n;
+			}
+			boolean truncated = len > MAX_ERROR_MESSAGE_LENGTH;
+			String err = new String(buf, 0, Math.min(len, MAX_ERROR_MESSAGE_LENGTH)).trim();
+			if (err.isEmpty()) {
+				return null;
+			}
+			return truncated ? err + "..." : err;
+		} catch (IOException e) {
+			return null;
 		}
 	}
 

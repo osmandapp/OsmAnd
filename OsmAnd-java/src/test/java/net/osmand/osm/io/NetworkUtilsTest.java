@@ -18,9 +18,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -297,6 +301,7 @@ public class NetworkUtilsTest {
 			@Override
 			public void handle(HttpExchange exchange) throws IOException {
 				byte[] response = "visibility: is not included in the list".getBytes(StandardCharsets.UTF_8);
+				exchange.getResponseHeaders().set("Content-Type", "text/plain; charset=utf-8");
 				exchange.sendResponseHeaders(400, response.length);
 				try (OutputStream os = exchange.getResponseBody()) {
 					os.write(response);
@@ -309,5 +314,104 @@ public class NetworkUtilsTest {
 		Assert.assertNotNull("Upload should return error", result);
 		Assert.assertEquals("visibility: is not included in the list", result);
 	}
-}
 
+	@Test
+	public void testUploadFileHtmlErrorResponseIsNotReturned() throws Exception {
+		server.createContext("/api/0.6/gpx/create_html_error", new HttpHandler() {
+			@Override
+			public void handle(HttpExchange exchange) throws IOException {
+				byte[] response = "<html><body><h1>502 Bad Gateway</h1></body></html>".getBytes(StandardCharsets.UTF_8);
+				exchange.getResponseHeaders().set("Content-Type", "text/html");
+				exchange.sendResponseHeaders(502, response.length);
+				try (OutputStream os = exchange.getResponseBody()) {
+					os.write(response);
+				}
+			}
+		});
+
+		String url = "http://127.0.0.1:" + serverPort + "/api/0.6/gpx/create_html_error";
+		String result = NetworkUtils.uploadFile(url, tempGpxFile, "user:pass", null, "file", false, null);
+		Assert.assertEquals("Bad Gateway", result);
+	}
+
+	@Test
+	public void testUploadFileLongPlainTextErrorIsTruncated() throws Exception {
+		StringBuilder longMessage = new StringBuilder();
+		for (int i = 0; i < 2000; i++) {
+			longMessage.append('x');
+		}
+		server.createContext("/api/0.6/gpx/create_long_error", new HttpHandler() {
+			@Override
+			public void handle(HttpExchange exchange) throws IOException {
+				byte[] response = longMessage.toString().getBytes(StandardCharsets.UTF_8);
+				exchange.getResponseHeaders().set("Content-Type", "text/plain");
+				exchange.sendResponseHeaders(400, response.length);
+				try (OutputStream os = exchange.getResponseBody()) {
+					os.write(response);
+				}
+			}
+		});
+
+		String url = "http://127.0.0.1:" + serverPort + "/api/0.6/gpx/create_long_error";
+		String result = NetworkUtils.uploadFile(url, tempGpxFile, "user:pass", null, "file", false, null);
+		Assert.assertNotNull(result);
+		Assert.assertTrue("Error should be truncated", result.length() <= 503);
+		Assert.assertTrue(result.endsWith("..."));
+	}
+
+	@Test
+	public void testUploadFilePlainTextErrorWithTurkishLocale() throws Exception {
+		server.createContext("/api/0.6/gpx/create_tr_error", new HttpHandler() {
+			@Override
+			public void handle(HttpExchange exchange) throws IOException {
+				byte[] response = "visibility: is not included in the list".getBytes(StandardCharsets.UTF_8);
+				exchange.getResponseHeaders().set("Content-Type", "TEXT/PLAIN");
+				exchange.sendResponseHeaders(400, response.length);
+				try (OutputStream os = exchange.getResponseBody()) {
+					os.write(response);
+				}
+			}
+		});
+
+		Locale defaultLocale = Locale.getDefault();
+		try {
+			Locale.setDefault(new Locale("tr", "TR"));
+			String url = "http://127.0.0.1:" + serverPort + "/api/0.6/gpx/create_tr_error";
+			String result = NetworkUtils.uploadFile(url, tempGpxFile, "user:pass", null, "file", false, null);
+			Assert.assertEquals("visibility: is not included in the list", result);
+		} finally {
+			Locale.setDefault(defaultLocale);
+		}
+	}
+
+	@Test
+	public void testUploadFileErrorWithoutReasonPhraseIsNotSuccess() throws Exception {
+		try (ServerSocket rawServer = new ServerSocket(0, 1, InetAddress.getByName("127.0.0.1"))) {
+			Thread serverThread = new Thread(() -> {
+				try (Socket socket = rawServer.accept()) {
+					InputStream in = socket.getInputStream();
+					ByteArrayOutputStream request = new ByteArrayOutputStream();
+					int b;
+					// consume the whole chunked request before answering
+					while ((b = in.read()) != -1) {
+						request.write(b);
+						if (request.toString("ISO-8859-1").endsWith("\r\n0\r\n\r\n")) {
+							break;
+						}
+					}
+					OutputStream out = socket.getOutputStream();
+					out.write(("HTTP/1.1 502 \r\nContent-Type: text/html\r\nContent-Length: 0\r\n"
+							+ "Connection: close\r\n\r\n").getBytes(StandardCharsets.ISO_8859_1));
+					out.flush();
+				} catch (IOException ignored) {
+				}
+			});
+			serverThread.start();
+
+			String url = "http://127.0.0.1:" + rawServer.getLocalPort() + "/api/0.6/gpx/create";
+			String result = NetworkUtils.uploadFile(url, tempGpxFile, "user:pass", null, "file", false, null);
+			serverThread.join(5000);
+			Assert.assertEquals("HTTP 502", result);
+		}
+	}
+}
