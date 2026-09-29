@@ -57,6 +57,10 @@ public class ClickableWayTags {
 	}
 
 	public static boolean isClickableWayTags(String name, Map<String, String> tags) {
+		return isClickableWayTags(name, tags, true);
+	}
+
+	public static boolean isClickableWayTags(String name, Map<String, String> tags, boolean includeMtbTrails) {
 		for (Map.Entry<String, String> forbidden : FORBIDDEN_TAGS.entrySet()) {
 			if (forbidden.getValue().equals(tags.get(forbidden.getKey()))
 					|| "*".equals(forbidden.getValue()) && tags.containsKey(forbidden.getKey())
@@ -70,6 +74,9 @@ public class ClickableWayTags {
 			boolean isRequiredNameFound = "name".equals(required) && !Algorithms.isEmpty(name);
 			if (tags.containsKey(required) || isRequiredNameFound) {
 				for (String key : tags.keySet()) {
+					if (!includeMtbTrails && "mtb:scale".equals(key)) {
+						continue;
+					}
 					if (CLICKABLE_TAGS.contains(key)) {
 						return true;
 					}

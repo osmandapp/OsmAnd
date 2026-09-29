@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.gpx.clickable.ClickableWayTags.CLICKABLE_TAGS;
 import static net.osmand.gpx.clickable.ClickableWayTags.getGpxColorByTags;
 import static net.osmand.gpx.clickable.ClickableWayTags.isClickableWayTags;
+import static net.osmand.plus.configmap.routes.RouteUtils.HIDE_STANDALONE_MTB_TRAILS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -59,12 +60,17 @@ public class ClickableWayHelper {
 
     public boolean isClickableWay(@NonNull RenderedObject renderedObject) {
         String name = renderedObject.getName();
-        return renderedObject.getX().size() > 1 && isClickableWayTags(name, renderedObject.getTags()); // v1
+        return renderedObject.getX().size() > 1 && isSelectableWayTags(name, renderedObject.getTags()); // v1
     }
 
     public boolean isClickableWay(@NonNull ObfMapObject obfMapObject, @NonNull Map<String, String> tags) {
         String name = obfMapObject.getCaptionInNativeLanguage();
-        return obfMapObject.getPoints31().size() > 1 && isClickableWayTags(name, tags); // v2 with prefetched tags
+        return obfMapObject.getPoints31().size() > 1 && isSelectableWayTags(name, tags); // v2 with prefetched tags
+    }
+
+    private boolean isSelectableWayTags(String name, Map<String, String> tags) {
+        boolean hideMtbTrails = app.getSettings().getCustomRenderBooleanProperty(HIDE_STANDALONE_MTB_TRAILS).get();
+        return isClickableWayTags(name, tags, !hideMtbTrails);
     }
 
     @Nullable

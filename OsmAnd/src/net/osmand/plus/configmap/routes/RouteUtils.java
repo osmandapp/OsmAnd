@@ -32,6 +32,7 @@ public class RouteUtils {
 	public static final String SHOW_MTB_SCALE_IMBA_TRAILS = "showMtbScaleIMBATrails";
 	public static final String SHOW_MTB_SCALE = "showMtbScale";
 	public static final String SHOW_MTB_SCALE_UPHILL = "showMtbScaleUphill";
+	public static final String HIDE_STANDALONE_MTB_TRAILS = "hideStandaloneMtbTrails";
 	public static final String TRAVEL_ROUTES = "travel_routes";
 
 	public static void showRendererSnackbarForAttr(@NonNull MapActivity activity,
@@ -70,6 +71,7 @@ public class RouteUtils {
 					&& !Algorithms.stringsEqual(attrName, CYCLE_NODE_NETWORK_ROUTES_ATTR)
 					&& !Algorithms.stringsEqual(attrName, SHOW_MTB_SCALE)
 					&& !Algorithms.stringsEqual(attrName, SHOW_MTB_SCALE_UPHILL)
+					&& !Algorithms.stringsEqual(attrName, HIDE_STANDALONE_MTB_TRAILS)
 					&& !Algorithms.stringsEqual(attrName, SHOW_MTB_SCALE_IMBA_TRAILS)) {
 				routeAttrNames.add(attrName);
 			}
