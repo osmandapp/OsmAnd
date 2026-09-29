@@ -23,10 +23,18 @@ public class Abbreviations {
     }
 
     private static final Map<String, Dictionary> DICTIONARIES = new ConcurrentHashMap<>();
+	// by the locale as callers pass it: search asks per name word, normalize() is too slow for that
+	private static final Map<String, Dictionary> BY_LOCALE = new ConcurrentHashMap<>();
 
 	private static Dictionary dictionary(String locale) {
-		String key = SearchLocales.normalize(locale);
-		return DICTIONARIES.computeIfAbsent(key, k -> new Dictionary(SearchVariantRules.forLocale(k)));
+		String raw = locale == null ? "" : locale;
+		Dictionary dictionary = BY_LOCALE.get(raw);
+		if (dictionary == null) {
+			dictionary = DICTIONARIES.computeIfAbsent(SearchLocales.normalize(raw),
+					k -> new Dictionary(SearchVariantRules.forLocale(k)));
+			BY_LOCALE.put(raw, dictionary);
+		}
+		return dictionary;
 	}
 
 	private static final class Dictionary {
@@ -89,6 +97,7 @@ public class Abbreviations {
 			previous[0] = value == null ? search.remove(key) : search.put(key, value);
 			return new Dictionary(base, search);
 		});
+		BY_LOCALE.clear();
 		return previous[0];
 	}
 
