@@ -124,6 +124,47 @@ public class NetworkUtilsTest {
 	}
 
 	@Test
+	public void testUploadFileSkipsNullFields() throws Exception {
+		AtomicReference<byte[]> capturedBody = new AtomicReference<>();
+
+		server.createContext("/api/0.6/gpx/create_null", new HttpHandler() {
+			@Override
+			public void handle(HttpExchange exchange) throws IOException {
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				try (InputStream is = exchange.getRequestBody()) {
+					byte[] buf = new byte[4096];
+					int n;
+					while ((n = is.read(buf)) != -1) {
+						baos.write(buf, 0, n);
+					}
+				}
+				capturedBody.set(baos.toByteArray());
+
+				byte[] response = "OK".getBytes(StandardCharsets.UTF_8);
+				exchange.sendResponseHeaders(200, response.length);
+				try (OutputStream os = exchange.getResponseBody()) {
+					os.write(response);
+				}
+			}
+		});
+
+		String url = "http://127.0.0.1:" + serverPort + "/api/0.6/gpx/create_null";
+		Map<String, String> additionalData = new LinkedHashMap<>();
+		additionalData.put("description", null);
+		additionalData.put("tags", "");
+		additionalData.put("visibility", "private");
+
+		String result = NetworkUtils.uploadFile(url, tempGpxFile, "user:pass", null, "file", false, additionalData);
+		Assert.assertNull("Upload should succeed", result);
+
+		String bodyText = new String(capturedBody.get(), StandardCharsets.UTF_8);
+		Assert.assertFalse("Null field should be omitted", bodyText.contains("name=\"description\""));
+		Assert.assertTrue("Empty field should be sent", bodyText.contains("name=\"tags\"\r\n\r\n\r\n"));
+		Assert.assertTrue("Non-null field should be sent",
+				bodyText.contains("name=\"visibility\"") && bodyText.contains("private"));
+	}
+
+	@Test
 	public void testUploadFileGzipBasicAuth() throws Exception {
 		AtomicReference<String> capturedContentType = new AtomicReference<>();
 		AtomicReference<byte[]> capturedBody = new AtomicReference<>();

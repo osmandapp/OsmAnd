@@ -205,11 +205,13 @@ public class NetworkUtils {
 										   Map<String, String> additionalMapData) throws IOException {
 		if (additionalMapData != null) {
 			for (Map.Entry<String, String> entry : additionalMapData.entrySet()) {
+				if (entry.getValue() == null) {
+					// omit field so server applies its default instead of receiving an empty string
+					continue;
+				}
 				ous.write(("--" + BOUNDARY + "\r\n").getBytes(StandardCharsets.UTF_8));
 				ous.write(("Content-Disposition: form-data; name=\"" + entry.getKey() + "\"\r\n\r\n").getBytes(StandardCharsets.UTF_8));
-				if (entry.getValue() != null) {
-					ous.write(entry.getValue().getBytes(StandardCharsets.UTF_8));
-				}
+				ous.write(entry.getValue().getBytes(StandardCharsets.UTF_8));
 				ous.write("\r\n".getBytes(StandardCharsets.UTF_8));
 			}
 		}
