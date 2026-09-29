@@ -279,6 +279,7 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 	override fun getInsetTargets(): InsetTargetsCollection {
 		val collection = InsetTargetsCollection()
 		collection.add(InsetTarget.createRootInset())
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.toolbar))
 		collection.add(InsetTarget.createScrollable(R.id.scroll_view))
 		return collection
 	}
