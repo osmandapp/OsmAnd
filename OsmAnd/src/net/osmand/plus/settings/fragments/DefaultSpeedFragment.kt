@@ -35,7 +35,7 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 	private lateinit var speedHelper: VehicleSpeedHelper
 	private lateinit var config: VehicleSpeedHelper.SpeedConfig
 	private var rangeExpanded = false
-	private var changed = false
+	private var routingChanged = false
 
 	override fun getStatusBarColorId(): Int =
 		if (nightMode) R.color.surface_dark else R.color.surface_light
@@ -77,9 +77,9 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 
 	override fun onDestroyView() {
 		super.onDestroyView()
-		if (changed) {
+		if (routingChanged) {
 			osmandApp.routingHelper.onSettingsChanged(appMode)
-			changed = false
+			routingChanged = false
 		}
 	}
 
@@ -112,7 +112,7 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 			if (fromUser) {
 				config.defaultSpeed = roundSpeed(value).coerceIn(config.minSpeed, config.maxSpeed)
 				appMode.setDefaultSpeed(config.defaultSpeed / config.ratio)
-				changed = true
+				routingChanged = true
 				updateDefaultSpeed(view)
 			}
 		}
@@ -150,16 +150,23 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 			config.maxSpeed.coerceIn(slider.valueFrom, slider.valueTo))
 		slider.addOnChangeListener { s, _, fromUser ->
 			if (fromUser) {
-				config.minSpeed = roundSpeed(s.values[0])
-				config.maxSpeed = roundSpeed(s.values[1])
-				appMode.setMinSpeed(config.minSpeed / config.ratio)
-				appMode.setMaxSpeed(config.maxSpeed / config.ratio)
+				val minSpeed = roundSpeed(s.values[0])
+				val maxSpeed = roundSpeed(s.values[1])
+				if (minSpeed != config.minSpeed) {
+					config.minSpeed = minSpeed
+					appMode.setMinSpeed(minSpeed / config.ratio)
+					routingChanged = true
+				}
+				if (maxSpeed != config.maxSpeed) {
+					config.maxSpeed = maxSpeed
+					appMode.setMaxSpeed(maxSpeed / config.ratio)
+					routingChanged = true
+				}
 				val defaultSpeed = config.defaultSpeed.coerceIn(config.minSpeed, config.maxSpeed)
 				if (defaultSpeed != config.defaultSpeed) {
 					config.defaultSpeed = defaultSpeed
 					appMode.setDefaultSpeed(defaultSpeed / config.ratio)
 				}
-				changed = true
 				updateSpeedRange(view)
 				updateDefaultSpeed(view)
 			}
@@ -196,7 +203,6 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		adaptRow.setOnClickListener {
 			val pref = settings().ETA_USE_AVERAGE_SPEED
 			pref.setModeValue(appMode, !pref.getModeValue(appMode))
-			changed = true
 			updateArrivalTime(view)
 		}
 
@@ -212,7 +218,6 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		slider.addOnChangeListener { _, value, fromUser ->
 			if (fromUser) {
 				settings().ETA_AVERAGE_SPEED_INTERVAL.setModeValue(appMode, MEASURED_INTERVALS[value.toInt()])
-				changed = true
 				updateArrivalTime(view)
 			}
 		}
@@ -221,7 +226,8 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 
 	private fun updateArrivalTime(view: View) {
 		val enabled = settings().ETA_USE_AVERAGE_SPEED.getModeValue(appMode)
-		val intervalMillis = settings().ETA_AVERAGE_SPEED_INTERVAL.getModeValue(appMode)
+		val intervalPref = settings().ETA_AVERAGE_SPEED_INTERVAL
+		val intervalMillis = intervalPref.getModeValue(appMode)
 		val interval = formatInterval(intervalMillis)
 
 		SettingRow(view.findViewById(R.id.adapt_speed_row)).setChecked(enabled)
@@ -249,7 +255,7 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		appMode.setMaxSpeed(0f)
 		settings().ETA_USE_AVERAGE_SPEED.resetModeToDefault(appMode)
 		settings().ETA_AVERAGE_SPEED_INTERVAL.resetModeToDefault(appMode)
-		changed = true
+		routingChanged = true
 		/* the slider bounds depend on the stored speeds, so the screen is built again */
 		val manager = parentFragmentManager
 		if (!manager.isStateSaved) {
