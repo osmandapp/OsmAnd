@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,10 +24,12 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.zip.GZIPInputStream;
 
 public class NetworkUtilsTest {
 
@@ -163,6 +166,22 @@ public class NetworkUtilsTest {
 				bodyText.contains("name=\"description\"") && bodyText.contains("Gzip track"));
 		Assert.assertTrue("Body should contain visibility",
 				bodyText.contains("name=\"visibility\"") && bodyText.contains("trackable"));
+
+		String closingBoundary = "\r\n--CowMooCowMooCowCowCow--\r\n";
+		Assert.assertTrue("Body should end with closing boundary", bodyText.endsWith(closingBoundary));
+		int fileStart = bodyText.indexOf("\r\n\r\n", bodyText.indexOf("filename=")) + 4;
+		int fileEnd = bodyText.length() - closingBoundary.length();
+		byte[] gzipped = Arrays.copyOfRange(capturedBody.get(), fileStart, fileEnd);
+		try (InputStream gis = new GZIPInputStream(new ByteArrayInputStream(gzipped))) {
+			ByteArrayOutputStream unzipped = new ByteArrayOutputStream();
+			byte[] buf = new byte[4096];
+			int n;
+			while ((n = gis.read(buf)) != -1) {
+				unzipped.write(buf, 0, n);
+			}
+			Assert.assertEquals("Gzipped file should be complete", sampleGpxContent,
+					new String(unzipped.toByteArray(), StandardCharsets.UTF_8));
+		}
 	}
 
 	@Test

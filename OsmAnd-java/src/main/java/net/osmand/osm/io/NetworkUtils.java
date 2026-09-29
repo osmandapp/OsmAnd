@@ -184,6 +184,23 @@ public class NetworkUtils {
 		}
 	}
 
+	private static class NonClosingOutputStream extends FilterOutputStream {
+
+		NonClosingOutputStream(OutputStream out) {
+			super(out);
+		}
+
+		@Override
+		public void write(byte[] b, int off, int len) throws IOException {
+			out.write(b, off, len);
+		}
+
+		@Override
+		public void close() throws IOException {
+			flush();
+		}
+	}
+
 	private static void writeMultipartBody(OutputStream ous, File fileToUpload, String formName, boolean gzip,
 										   Map<String, String> additionalMapData) throws IOException {
 		if (additionalMapData != null) {
@@ -207,10 +224,10 @@ public class NetworkUtils {
 		BufferedInputStream bis = new BufferedInputStream(fis, 20 * 1024);
 		try {
 			if (gzip) {
-				GZIPOutputStream gous = new GZIPOutputStream(ous, 1024);
-				Algorithms.streamCopy(bis, gous);
-				gous.flush();
-				gous.finish();
+				// closing gzip stream releases native Deflater memory but must keep connection stream open
+				try (GZIPOutputStream gous = new GZIPOutputStream(new NonClosingOutputStream(ous), 1024)) {
+					Algorithms.streamCopy(bis, gous);
+				}
 			} else {
 				Algorithms.streamCopy(bis, ous);
 			}
