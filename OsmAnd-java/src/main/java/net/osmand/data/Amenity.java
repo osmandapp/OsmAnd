@@ -56,7 +56,6 @@ public class Amenity extends MapObject {
 	public static final String SHORT_DESCRIPTION = "short_description";
 	public static final String ROUTE = "route";
 	public static final String OPENING_HOURS = "opening_hours";
-	public static final String CHECK_DATE = "check_date";
 	public static final String CHECK_DATE_OPENING_HOURS = "check_date_opening_hours";
 	public static final String NOTE = "note";
 	public static final String POPULATION = "population";

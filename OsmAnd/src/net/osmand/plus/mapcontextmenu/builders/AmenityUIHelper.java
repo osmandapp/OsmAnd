@@ -100,10 +100,6 @@ public class AmenityUIHelper extends MenuBuilder {
 				infoEntries.add(amenityEntry);
 			}
 		}
-		AmenityTagEntry checkDateEntry = buildCheckDateEntry();
-		if (checkDateEntry != null) {
-			infoEntries.add(checkDateEntry);
-		}
 
 		AmenityTagEntriesBuilder.sortInfoEntries(infoEntries);
 		for (AmenityTagEntry info : infoEntries) {
@@ -130,25 +126,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		AmenityTagEntry.Builder entryBuilder = getEntryDataBuilder(context, baseEntry.key, baseEntry.value,
 				baseEntry.isDescription, baseEntry.resolvedType);
 		return entryBuilder != null ? entryBuilder.build() : null;
-	}
-
-	@Nullable
-	private AmenityTagEntry buildCheckDateEntry() {
-		String checkDate = additionalInfo.get(CHECK_DATE);
-		if (Algorithms.isEmpty(checkDate)) {
-			return null;
-		}
-		AbstractPoiType poiType = poiTypes.getAnyPoiAdditionalTypeByKey(CHECK_DATE);
-		int order = poiType instanceof PoiType type ? type.getOrder() : PoiType.DEFAULT_ORDER;
-		return new AmenityTagEntry.Builder(CHECK_DATE)
-				.setValue(checkDate)
-				.setIconId(R.drawable.ic_action_calendar_month)
-				.setTextPrefix(app.getString(R.string.check_date))
-				.setText(formatCheckDate(checkDate))
-				.setIsText(true)
-				.setOrder(order)
-				.setName(CHECK_DATE)
-				.build();
 	}
 
 	@NonNull
