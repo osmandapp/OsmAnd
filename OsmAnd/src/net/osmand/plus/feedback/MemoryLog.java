@@ -23,6 +23,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.search.SearchUICore;
 
 import org.apache.commons.logging.Log;
 
@@ -43,6 +44,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -170,6 +172,9 @@ public class MemoryLog {
 	// count share one value so that a sample cannot read one of them from a later trim than the
 	// other: the high half holds the level raised by one, the low half the number of calls.
 	private final AtomicLong trims = new AtomicLong();
+	// route calculations and searches since the previous sample: both load map data in bursts
+	private final AtomicInteger routeCalculations = new AtomicInteger();
+	private int previousSearches;
 
 	// called from a background thread, at most once per SAMPLE_INTERVAL
 	public synchronized void sample(@NonNull OsmandApplication app, @NonNull StackSampler stackSampler) {
@@ -219,6 +224,11 @@ public class MemoryLog {
 			long highest = Math.max(current >>> 32, raised + 1);
 			return (highest << 32) | ((current & 0xffffffffL) + 1);
 		});
+	}
+
+	// called from the routing thread when a calculation ends, cancelled or not
+	public void onRouteCalculated() {
+		routeCalculations.incrementAndGet();
 	}
 
 	// MB/count of what the map renderer keeps in GPU memory by type, e.g. "tex:120/340,slot:0/1200,vbo:10/180,ibo:2/180,mesh:0/180"
@@ -272,6 +282,15 @@ public class MemoryLog {
 		if (busy != null) {
 			sb.append(" busy=").append(busy);
 		}
+		int calculations = routeCalculations.getAndSet(0);
+		if (calculations > 0) {
+			sb.append(" rcalc=").append(calculations);
+		}
+		int searches = SearchUICore.getSearchesRun();
+		if (searches > previousSearches) {
+			sb.append(" srch=").append(searches - previousSearches);
+		}
+		previousSearches = searches;
 		String hot = stackSampler.drain();
 		if (hot != null) {
 			sb.append(hot);

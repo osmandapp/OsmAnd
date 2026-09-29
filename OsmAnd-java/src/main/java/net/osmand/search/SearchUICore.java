@@ -71,6 +71,8 @@ public class SearchUICore {
 	private static final int TIMEOUT_BEFORE_SEARCH = 50;
 	private static final int TIMEOUT_BEFORE_FILTER = 20;
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class);
+	// searches that got past the typing delay, over all instances; read by the memory log
+	private static final AtomicInteger SEARCHES_RUN = new AtomicInteger();
 	private SearchPhrase phrase;
 	private SearchResultCollection currentSearchResult;
 
@@ -867,6 +869,10 @@ public class SearchUICore {
 		return resultCollection;
 	}
 
+	public static int getSearchesRun() {
+		return SEARCHES_RUN.get();
+	}
+
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
 		search(text, delayedExecution, matcher, null);
 	}
@@ -956,6 +962,7 @@ public class SearchUICore {
 						return;
 					}
 					performanceStats.start();
+					SEARCHES_RUN.incrementAndGet();
 					searchInternal(phrase, rm);
 					if (!rm.isCancelled()) {
 						boolean skipResultSorting = shouldSkipResultSorting(phrase);
