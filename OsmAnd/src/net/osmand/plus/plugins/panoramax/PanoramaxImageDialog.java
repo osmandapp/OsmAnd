@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.webkit.WebMessage;
 import android.webkit.WebMessagePort;
 import android.webkit.WebResourceError;
@@ -174,6 +175,8 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 	private double compassAngle = Double.NaN;
 	private final UiUtilities iconsCache;
 
+	// The WebView the live callbacks belong to; one from any other WebView is stale.
+	private WebView webView;
 	private WebMessagePort viewerPort;
 	private String viewerNonce;
 	private long lastHeadingTime;
@@ -282,6 +285,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 	private View getWebView() {
 		View view = getMapActivity().getLayoutInflater().inflate(R.layout.panoramax_web_view, null);
 		WebView webView = view.findViewById(R.id.webView);
+		this.webView = webView;
 		webView.setBackgroundColor(Color.argb(1, 0, 0, 0));
 		View noInternetView = view.findViewById(R.id.panoramaxNoInternetLayout);
 		Drawable icWifiOff = iconsCache.getThemedIcon(R.drawable.ic_action_wifi_off);
@@ -299,16 +303,21 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		webView.setWebViewClient(new WebViewClient() {
 			@Override
 			public void onPageFinished(WebView view, String url) {
+				if (!isCurrentWebView(view)) {
+					return;
+				}
 				releaseViewerPort();
 				if (!BLANK_PAGE_URL.equals(url)) {
-					openViewerChannel(webView);
+					openViewerChannel(view);
 				}
 			}
 
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
 				if (VIEWER_ERROR_URL.equals(request.getUrl().toString())) {
-					showViewerError(webView, noInternetView);
+					if (isCurrentWebView(view)) {
+						showViewerError(view, noInternetView);
+					}
 					return true;
 				}
 				return false;
@@ -318,8 +327,9 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 			public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
 				// The page itself is loaded from memory and never fails, so the bundle is the
 				// only request whose failure leaves the viewer unusable.
-				if (PanoramaxConstants.VIEWER_BUNDLE_URL.equals(request.getUrl().toString())) {
-					showViewerError(webView, noInternetView);
+				if (isCurrentWebView(view)
+						&& PanoramaxConstants.VIEWER_BUNDLE_URL.equals(request.getUrl().toString())) {
+					showViewerError(view, noInternetView);
 				}
 			}
 		});
@@ -330,6 +340,9 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 
 	private void showViewerError(@NonNull WebView webView, @NonNull View noInternetView) {
 		webView.post(() -> {
+			if (!isCurrentWebView(webView)) {
+				return;
+			}
 			webView.loadUrl(BLANK_PAGE_URL);
 			noInternetView.setVisibility(View.VISIBLE);
 		});
@@ -355,7 +368,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		viewerPort.setWebMessageCallback(new WebMessagePort.WebMessageCallback() {
 			@Override
 			public void onMessage(WebMessagePort port, WebMessage message) {
-				onViewerMessage(message.getData());
+				onViewerMessage(port, message.getData());
 			}
 		}, new Handler(Looper.getMainLooper()));
 		webView.postWebMessage(new WebMessage(viewerNonce, new WebMessagePort[] {ports[1]}),
@@ -369,8 +382,31 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		}
 	}
 
-	private void onViewerMessage(@Nullable String data) {
-		if (data == null) {
+	private boolean isCurrentWebView(@Nullable WebView view) {
+		return view != null && view == webView;
+	}
+
+	/** Releases the viewer and invalidates callbacks before destroying the WebView. */
+	@Override
+	public void onDestroyView() {
+		WebView webView = this.webView;
+		if (webView != null) {
+			this.webView = null;
+			releaseViewerPort();
+			webView.stopLoading();
+			webView.setWebViewClient(new WebViewClient());
+			ViewParent parent = webView.getParent();
+			if (parent instanceof ViewGroup) {
+				((ViewGroup) parent).removeView(webView);
+			}
+			webView.destroy();
+		}
+		super.onDestroyView();
+	}
+
+	/** Close() does not drop messages already queued, so a stale port must be ignored here. */
+	private void onViewerMessage(@NonNull WebMessagePort port, @Nullable String data) {
+		if (port != viewerPort || data == null) {
 			return;
 		}
 		JSONObject message;
