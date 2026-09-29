@@ -124,6 +124,13 @@ public class NetworkUtilsTest {
 	}
 
 	@Test
+	public void testEscapeQuotedValue() {
+		Assert.assertEquals("track.gpx", NetworkUtils.escapeQuotedValue("track.gpx"));
+		Assert.assertEquals("my %22best%22 track.gpx", NetworkUtils.escapeQuotedValue("my \"best\" track.gpx"));
+		Assert.assertEquals("a%0D%0Ab", NetworkUtils.escapeQuotedValue("a\r\nb"));
+	}
+
+	@Test
 	public void testUploadFileSkipsNullFields() throws Exception {
 		AtomicReference<byte[]> capturedBody = new AtomicReference<>();
 

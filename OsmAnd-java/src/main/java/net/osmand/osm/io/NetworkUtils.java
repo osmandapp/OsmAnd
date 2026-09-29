@@ -89,9 +89,10 @@ public class NetworkUtils {
 	public static String uploadFile(String urlText, File fileToUpload, String userNamePassword,
 									OsmOAuthAuthorizationClient client,
 									String formName, boolean gzip, Map<String, String> additionalMapData){
+		HttpURLConnection conn = null;
 		try {
 			log.info("Start uploading file to " + urlText + " " +fileToUpload.getName());
-			HttpURLConnection conn = getHttpURLConnection(urlText);
+			conn = getHttpURLConnection(urlText);
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
@@ -152,6 +153,10 @@ public class NetworkUtils {
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 			return e.getMessage() != null ? e.getMessage() : e.toString();
+		} finally {
+			if (conn != null) {
+				conn.disconnect();
+			}
 		}
 	}
 
@@ -184,6 +189,11 @@ public class NetworkUtils {
 		}
 	}
 
+	// same escaping as browsers apply to multipart/form-data names and filenames (HTML spec)
+	static String escapeQuotedValue(String value) {
+		return value.replace("\"", "%22").replace("\r", "%0D").replace("\n", "%0A");
+	}
+
 	private static class NonClosingOutputStream extends FilterOutputStream {
 
 		NonClosingOutputStream(OutputStream out) {
@@ -210,7 +220,7 @@ public class NetworkUtils {
 					continue;
 				}
 				ous.write(("--" + BOUNDARY + "\r\n").getBytes(StandardCharsets.UTF_8));
-				ous.write(("Content-Disposition: form-data; name=\"" + entry.getKey() + "\"\r\n\r\n").getBytes(StandardCharsets.UTF_8));
+				ous.write(("Content-Disposition: form-data; name=\"" + escapeQuotedValue(entry.getKey()) + "\"\r\n\r\n").getBytes(StandardCharsets.UTF_8));
 				ous.write(entry.getValue().getBytes(StandardCharsets.UTF_8));
 				ous.write("\r\n".getBytes(StandardCharsets.UTF_8));
 			}
@@ -220,7 +230,7 @@ public class NetworkUtils {
 			filename += ".gz";
 		}
 		ous.write(("--" + BOUNDARY + "\r\n").getBytes(StandardCharsets.UTF_8));
-		ous.write(("Content-Disposition: form-data; name=\"" + formName + "\"; filename=\"" + filename + "\"\r\n").getBytes(StandardCharsets.UTF_8));
+		ous.write(("Content-Disposition: form-data; name=\"" + escapeQuotedValue(formName) + "\"; filename=\"" + escapeQuotedValue(filename) + "\"\r\n").getBytes(StandardCharsets.UTF_8));
 		ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes(StandardCharsets.UTF_8));
 		InputStream fis = new FileInputStream(fileToUpload);
 		BufferedInputStream bis = new BufferedInputStream(fis, 20 * 1024);
