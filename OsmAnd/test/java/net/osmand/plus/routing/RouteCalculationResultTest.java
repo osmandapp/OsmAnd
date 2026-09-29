@@ -1,7 +1,9 @@
 package net.osmand.plus.routing;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import net.osmand.Location;
@@ -17,8 +19,6 @@ import java.util.List;
 
 /**
  * Route locations lie on a meridian: location i is (50.00 + i * 0.01, 30.00), ~1.1 km apart.
- * Every intermediate is matched exactly to a location that is a direction offset,
- * so no direction is split and a null Context is sufficient.
  */
 @RunWith(AndroidJUnit4.class)
 public class RouteCalculationResultTest {
@@ -59,13 +59,15 @@ public class RouteCalculationResultTest {
 	}
 
 	@Test
-	public void calculateIntermediateIndexesAssignsLastDirectionToIntermediateAfterIt() {
+	public void calculateIntermediateIndexesAddsDirectionForIntermediateAfterLastDirection() {
 		List<RouteDirectionInfo> directions = createDirections(0, 3, 5);
 		List<LatLon> intermediates = Arrays.asList(
 				new LatLon(50.03, 30.00),
 				new LatLon(50.08, 30.00));
 
-		assertArrayEquals(new int[] {1, 2}, calculateIntermediateIndexes(intermediates, directions));
+		assertArrayEquals(new int[] {1, 3}, calculateIntermediateIndexes(intermediates, directions));
+		assertEquals(4, directions.size());
+		assertEquals(8, directions.get(3).routePointOffset);
 	}
 
 	private static int[] calculateIntermediateIndexes(List<LatLon> intermediates, List<RouteDirectionInfo> directions) {
@@ -77,7 +79,7 @@ public class RouteCalculationResultTest {
 			locations.add(location);
 		}
 		int[] intermediatePoints = new int[intermediates.size()];
-		RouteCalculationResult.calculateIntermediateIndexes(null, locations, intermediates, directions, intermediatePoints);
+		RouteCalculationResult.calculateIntermediateIndexes(ApplicationProvider.getApplicationContext(), locations, intermediates, directions, intermediatePoints);
 		return intermediatePoints;
 	}
 
