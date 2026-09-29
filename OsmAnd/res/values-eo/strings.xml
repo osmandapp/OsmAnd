@@ -5351,4 +5351,25 @@
     <string name="battery_saving_mode_descr">Limigi bildigon de mapo al 20 kadroj en sekundo por malpliigi uzadon de baterio kaj varmiĝon de la aparato. Movado de mapo iĝos malpli flua.</string>
     <string name="crash_report_sent">Sendis raporton. Dankon!</string>
     <string name="crash_report_send_failed">Ne povis sendi raporton. Reprovu poste.</string>
+    <string name="contour_labels">Etikedoj</string>
+    <string name="contour_label_direction_descr">Laŭsupre: supro de ĉiu valoro de altitudo direktas al pli alta deklivo, same kiel en paperaj topografiaj mapoj. Malsupro de nombro montras malsupron de deklivo.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Direkto de etikedoj</string>
+    <string name="rendering_value_upright_name">vertikale</string>
+    <string name="rendering_value_uphill_name">laŭsupre</string>
+    <string name="shared_string_visibility">Videblo</string>
+    <string name="opening_hours_public_holiday">ŝtatfestoj</string>
+    <string name="opening_hours_school_holiday">lernej-ferioj</string>
+    <string name="opening_hours_easter">Pasko</string>
+    <string name="ais_connection_not_set_up">Neagordita</string>
+    <string name="ais_connection_not_connected">Nekonektita</string>
+    <string name="ais_connection_connecting">Konektado…</string>
+    <string name="ais_connection_no_data">Ricevis neniujn datumojn</string>
+    <string name="ais_connection_failed">Malsukcesis konekti</string>
+    <string name="ais_connection_set_up">Agordi konekton</string>
+    <string name="ais_use_nmea_location">Uzi kiel fonton de pozicio</string>
+    <string name="ais_use_nmea_location_desc">Anstataŭigi pozicion de la aparato per pozicio de la NMEA-elsendfluo.</string>
+    <string name="ais_run_in_background">Labori fone</string>
+    <string name="ais_run_in_background_desc">Pluigi ricevi datumojn kiam la ekrano estas malŝaltita.</string>
+    <string name="ais_vessels_on_the_map">Ŝipoj sur la mapo: %1$d</string>
+    <string name="ais_no_position_data">Neniuj datumoj de pozicio</string>
 </resources>
