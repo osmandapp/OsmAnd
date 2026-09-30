@@ -48,9 +48,6 @@ public class GeocodingUtilities {
 	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;
 
 	public static final int DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
-	// a common word ("calle", "street") names thousands of streets in a city, so the search by it stays
-	// closer to the road
-	public static final int DISTANCE_STREET_NAME_PROXIMITY_BY_COMMON_WORD = 5000;
 	public static final float DISTANCE_STREET_FROM_CLOSEST_WITH_SAME_NAME = 7500;
 
 	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
@@ -342,8 +339,6 @@ public class GeocodingUtilities {
 					longestWord = s;
 				}
 			}
-			int radius = CommonWords.getInstance().getCommonGeocoding(longestWord) == -1
-					? DISTANCE_STREET_NAME_PROXIMITY_BY_NAME : DISTANCE_STREET_NAME_PROXIMITY_BY_COMMON_WORD;
 			SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(
 					new ResultMatcher<MapObject>() {
 						@Override
@@ -356,12 +351,12 @@ public class GeocodingUtilities {
 							return result != null && result.isCancelled();
 						}
 					}, longestWord, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
-			req.setBBoxRadius(road.getLocation().getLatitude(), road.getLocation().getLongitude(), radius);
+			req.setBBoxRadius(road.getLocation().getLatitude(), road.getLocation().getLongitude(), DISTANCE_STREET_NAME_PROXIMITY_BY_NAME);
 			if (cache == null) {
 				reader.searchAddressDataByName(req);
 			} else {
 				// the same box test the name index does, on the zoom 16 tile of the street
-				for (Street street : cache.getStreets(reader, longestWord, radius, road.searchPoint, result)) {
+				for (Street street : cache.getStreets(reader, longestWord, DISTANCE_STREET_NAME_PROXIMITY_BY_NAME, road.searchPoint, result)) {
 					int x16 = (MapUtils.get31TileNumberX(street.getLocation().getLongitude()) >> 15) << 15;
 					int y16 = (MapUtils.get31TileNumberY(street.getLocation().getLatitude()) >> 15) << 15;
 					if (req.contains(x16, y16, x16, y16)) {
