@@ -2934,7 +2934,7 @@
     <string name="selected_profile">Vald profil</string>
     <string name="rendering_attr_natureReserves_description">Visa naturreservat, skyddade områden och nationalparker.</string>
     <string name="storage_format">Lagringsformat</string>
-    <string name="keep_screen_on">Håll skärmen påslagen</string>
+    <string name="keep_screen_on">Behåll skärmen på</string>
     <string name="profile_appearance">Profilutseende</string>
     <string name="rendering_attr_showBusRoutes_name">Bussrutter</string>
     <string name="choose_icon_color_name">Ikon, färg och namn</string>
@@ -5325,4 +5325,15 @@
     <string name="crash_report_sent">Rapporten har skickats. Tack!</string>
     <string name="crash_report_send_failed">Det gick inte att skicka rapporten. Försök igen senare.</string>
     <string name="battery_saving_mode_descr">Begränsar kartan till 20 bildrutor per sekund för att minska batteriförbrukningen och enhetens uppvärmning. Kartans rörelser blir mindre mjuka.</string>
+    <string name="opening_hours_public_holiday">Allmänna helgdagar</string>
+    <string name="opening_hours_school_holiday">Skollov</string>
+    <string name="opening_hours_easter">Påsk</string>
+    <string name="ais_connection_not_connected">Inte ansluten</string>
+    <string name="ais_connection_connecting">Ansluter…</string>
+    <string name="ais_connection_no_data">Ingen data har mottagits</string>
+    <string name="ais_connection_failed">Anslutningen misslyckades</string>
+    <string name="ais_run_in_background">Kör i bakgrunden</string>
+    <string name="ais_run_in_background_desc">Fortsätter ta emot medan skärmen är avstängd.</string>
+    <string name="ais_no_position_data">Ingen positionsdata</string>
+    <string name="ais_receiving_position_data">Tar emot positionsdata</string>
 </resources>
