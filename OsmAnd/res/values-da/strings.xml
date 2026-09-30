@@ -5489,4 +5489,5 @@
     <string name="opening_hours_school_holiday">Skoleferier</string>
     <string name="opening_hours_easter">Påske</string>
     <string name="visualizing_button_grid_descr">Celler, pladser, rammer og logge.</string>
+    <string name="city_type_boundary">Område</string>
 </resources>
