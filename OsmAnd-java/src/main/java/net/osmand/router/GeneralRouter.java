@@ -3,6 +3,7 @@ package net.osmand.router;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.QuadPointDouble;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
@@ -23,6 +24,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 
 public class GeneralRouter implements VehicleRouter {
@@ -92,6 +95,8 @@ public class GeneralRouter implements VehicleRouter {
 	private float maxVehicleSpeed;
 
 	private TLongHashSet impassableRoads;
+	// road id -> blocked points (x31 << 32 | y31), only the nearest segment of the road is blocked
+	private TLongObjectHashMap<TLongArrayList> impassableRoadPoints;
 	
 	private GeneralRouterProfile profile;
 	
@@ -341,10 +346,48 @@ public class GeneralRouter implements VehicleRouter {
 	}
 
 	public long[] getImpassableRoadIds() {
-		if (impassableRoads == null) {
-			return new long[0];
+		TLongHashSet ids = new TLongHashSet();
+		if (impassableRoads != null) {
+			ids.addAll(impassableRoads);
 		}
-		return impassableRoads.toArray();
+		if (impassableRoadPoints != null) {
+			ids.addAll(impassableRoadPoints.keys());
+		}
+		return ids.toArray();
+	}
+
+	@Override
+	public boolean isImpassableSegment(RouteDataObject road, int segStart, int segEnd) {
+		if (impassableRoadPoints == null || impassableRoadPoints.isEmpty()) {
+			return false;
+		}
+		TLongArrayList points = impassableRoadPoints.get(road.id);
+		if (points == null) {
+			return false;
+		}
+		int segment = Math.min(segStart, segEnd);
+		for (int i = 0; i < points.size(); i++) {
+			long p = points.get(i);
+			if (getNearestSegment(road, (int) (p >>> 32), (int) p) == segment) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static int getNearestSegment(RouteDataObject road, int x31, int y31) {
+		int nearest = -1;
+		double minDist = Double.MAX_VALUE;
+		for (int i = 1; i < road.getPointsLength(); i++) {
+			QuadPointDouble p = MapUtils.getProjectionPoint31(x31, y31, road.getPoint31XTile(i - 1),
+					road.getPoint31YTile(i - 1), road.getPoint31XTile(i), road.getPoint31YTile(i));
+			double dist = MapUtils.squareRootDist31((int) p.x, (int) p.y, x31, y31);
+			if (dist < minDist) {
+				minDist = dist;
+				nearest = i - 1;
+			}
+		}
+		return nearest;
 	}
 	
 	public int registerTagValueAttribute(String tag, String value) {
@@ -1349,6 +1392,21 @@ public class GeneralRouter implements VehicleRouter {
 			this.impassableRoads = new TLongHashSet(impassableRoads);
 		} else if (this.impassableRoads != null) {
 			this.impassableRoads.clear();
+		}
+	}
+
+	public void setImpassableRoadPoints(Map<Long, Set<Long>> impassableRoadPoints) {
+		if (impassableRoadPoints != null && !impassableRoadPoints.isEmpty()) {
+			this.impassableRoadPoints = new TLongObjectHashMap<>();
+			for (Entry<Long, Set<Long>> e : impassableRoadPoints.entrySet()) {
+				TLongArrayList points = new TLongArrayList();
+				for (Long p : e.getValue()) {
+					points.add(p);
+				}
+				this.impassableRoadPoints.put(e.getKey(), points);
+			}
+		} else if (this.impassableRoadPoints != null) {
+			this.impassableRoadPoints.clear();
 		}
 	}
 }
