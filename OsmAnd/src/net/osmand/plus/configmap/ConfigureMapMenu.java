@@ -6,6 +6,7 @@ import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.osm.OsmRouteType.SKI_ROUTES;
 import static net.osmand.plus.configmap.ConfigureMapUtils.getPropertyForAttr;
 import static net.osmand.plus.configmap.routes.RouteUtils.CYCLE_NODE_NETWORK_ROUTES_ATTR;
+import static net.osmand.plus.configmap.routes.RouteUtils.HIDE_STANDALONE_MTB_TRAILS;
 import static net.osmand.plus.configmap.routes.RouteUtils.SHOW_MTB_SCALE;
 import static net.osmand.plus.configmap.routes.RouteUtils.SHOW_MTB_SCALE_IMBA_TRAILS;
 import static net.osmand.plus.configmap.routes.RouteUtils.SHOW_MTB_SCALE_UPHILL;
@@ -537,6 +538,7 @@ public class ConfigureMapMenu {
 				|| SHOW_MTB_SCALE_IMBA_TRAILS.equals(attrName)
 				|| SHOW_MTB_SCALE.equals(attrName)
 				|| SHOW_MTB_SCALE_UPHILL.equals(attrName)
+				|| HIDE_STANDALONE_MTB_TRAILS.equals(attrName)
 				|| RENDERING_CATEGORY_OSM_ASSISTANT.equals(category)
 				|| BUILDINGS_3D.equals(category)
 				|| DEPTH_CONTOUR_WIDTH.equals(attrName)
