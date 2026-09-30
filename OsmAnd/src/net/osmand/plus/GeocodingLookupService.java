@@ -14,6 +14,7 @@ import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.plus.helpers.CurrentPositionHelper.GeocodingRoads;
 import net.osmand.plus.resources.BinaryMapReaderResource;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -154,12 +155,12 @@ public class GeocodingLookupService {
 		loc.setLatitude(latLon.getLatitude());
 		loc.setLongitude(latLon.getLongitude());
 		return app.getLocationProvider()
-				.getGeocodingRoads(loc, new ResultMatcher<List<GeocodingResult>>() {
+				.getGeocodingRoads(loc, new ResultMatcher<GeocodingRoads>() {
 
 					// called on the lookup thread of CurrentPositionHelper, or with null when the lookup
 					// was replaced by a newer one
 					@Override
-					public boolean publish(List<GeocodingResult> roads) {
+					public boolean publish(GeocodingRoads roads) {
 						GeocodingResult address = roads == null ? null : findAddress(roads, latLon);
 						app.runInUIThread(() -> publishAddress(address));
 						return true;
@@ -175,7 +176,7 @@ public class GeocodingLookupService {
 
 	// the street, the house and the city of the roads found near the point; null when cancelled
 	@Nullable
-	private GeocodingResult findAddress(@NonNull List<GeocodingResult> roads, @NonNull LatLon latLon) {
+	private GeocodingResult findAddress(@NonNull GeocodingRoads roads, @NonNull LatLon latLon) {
 		ResultMatcher<GeocodingResult> cancel = new ResultMatcher<GeocodingResult>() {
 			@Override
 			public boolean publish(GeocodingResult object) {
@@ -191,11 +192,11 @@ public class GeocodingLookupService {
 		double minBuildingDistance = 0;
 		try {
 			GeocodingUtilities utilities = new GeocodingUtilities();
-			for (GeocodingResult road : roads) {
+			for (GeocodingResult road : roads.roads) {
 				if (cancel.isCancelled()) {
 					break;
 				}
-				BinaryMapIndexReader reader = findStreetReader(road);
+				BinaryMapIndexReader reader = findStreetReader(road, roads.readers);
 				if (reader == null) {
 					complete.add(road);
 					continue;
@@ -223,10 +224,12 @@ public class GeocodingLookupService {
 		return complete.isEmpty() ? new GeocodingResult() : complete.get(0);
 	}
 
-	// the map whose routing section holds the road, opened for the street lookup
+	// the map whose routing section holds the road, among the maps the roads were read from: their
+	// street lookup readers are open already, other maps must not be opened here
 	@Nullable
-	private BinaryMapIndexReader findStreetReader(@NonNull GeocodingResult road) {
-		for (BinaryMapReaderResource resource : app.getResourceManager().getFileReaders()) {
+	private BinaryMapIndexReader findStreetReader(@NonNull GeocodingResult road,
+	                                              @NonNull List<BinaryMapReaderResource> readers) {
+		for (BinaryMapReaderResource resource : readers) {
 			if (resource.isClosed()) {
 				continue;
 			}

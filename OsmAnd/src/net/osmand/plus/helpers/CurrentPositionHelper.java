@@ -56,8 +56,20 @@ public class CurrentPositionHelper {
 		return scheduleRouteSegmentFind(loc, false, true, cancelPreviousSearch, null, result, appMode);
 	}
 
+	// the roads near a point and the maps they were read from, already opened for the street lookup
+	public static class GeocodingRoads {
+
+		public final List<GeocodingResult> roads;
+		public final List<BinaryMapReaderResource> readers;
+
+		GeocodingRoads(@NonNull List<GeocodingResult> roads, @NonNull List<BinaryMapReaderResource> readers) {
+			this.roads = roads;
+			this.readers = readers;
+		}
+	}
+
 	// the roads near the point with their names, the first step of an address lookup
-	public boolean getGeocodingRoads(Location loc, ResultMatcher<List<GeocodingResult>> result) {
+	public boolean getGeocodingRoads(Location loc, ResultMatcher<GeocodingRoads> result) {
 		return scheduleRouteSegmentFind(loc, false, false, true, result, null, null);
 	}
 	
@@ -94,7 +106,7 @@ public class CurrentPositionHelper {
 	                                         boolean storeFound,
 	                                         boolean allowEmptyNames,
 	                                         boolean cancelPreviousSearch,
-	                                         @Nullable ResultMatcher<List<GeocodingResult>> geoCoding,
+	                                         @Nullable ResultMatcher<GeocodingRoads> geoCoding,
 	                                         @Nullable ResultMatcher<RouteDataObject> result,
 	                                         @Nullable ApplicationMode appMode) {
 		boolean res = false;
@@ -151,7 +163,7 @@ public class CurrentPositionHelper {
 
 	// single synchronized method
 	private synchronized void processGeocoding(@NonNull Location loc,
-											   @Nullable ResultMatcher<List<GeocodingResult>> geoCoding,
+											   @Nullable ResultMatcher<GeocodingRoads> geoCoding,
 											   boolean storeFound,
 											   boolean allowEmptyNames,
 											   @Nullable ResultMatcher<RouteDataObject> result,
@@ -175,7 +187,7 @@ public class CurrentPositionHelper {
 			lastAskedLocation = loc;
 			lastFound = gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad();
 		} else if (geoCoding != null) {
-			geoCoding.publish(gr == null ? new ArrayList<>() : gr);
+			geoCoding.publish(new GeocodingRoads(gr == null ? new ArrayList<>() : gr, usedReaders));
 		} else if (result != null) {
 			app.runInUIThread(() -> result.publish(gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad()));
 		}
