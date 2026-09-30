@@ -41,6 +41,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.shared.favorites.FavoriteFolderPath;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -294,10 +295,12 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 		if (selectionMode) {
 			ab.setBackgroundDrawable(new ColorDrawable(ColorUtilities.getToolbarActiveColor(app, isNightMode())));
 			ab.setTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
+			ab.setSubtitle(null);
 			AndroidUiHelper.setStatusBarColor(activity, ColorUtilities.getColor(app, ColorUtilities.getStatusBarActiveColorId(isNightMode())));
 		} else {
 			ab.setBackgroundDrawable(new ColorDrawable(ColorUtilities.getAppBarColor(app, isNightMode())));
 			ab.setTitle(getSelectedFolderTitle());
+			ab.setSubtitle(getSelectedFolderSubtitle());
 			activity.updateStatusBarColor();
 		}
 	}
@@ -412,6 +415,15 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 			}
 		}
 		return false;
+	}
+
+	@Override
+	protected void changeTitle(@NonNull String title) {
+		super.changeTitle(title);
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setSubtitle(selectionMode ? null : getSelectedFolderSubtitle());
+		}
 	}
 
 	@Override
@@ -548,6 +560,12 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	@NonNull
 	private String getSelectedFolderTitle() {
 		return FavoriteFolderFormatter.getDisplayName(app, selectedFolderPath);
+	}
+
+	@Nullable
+	private String getSelectedFolderSubtitle() {
+		String parentPath = FavoriteFolderPath.parentPath(selectedFolderPath);
+		return Algorithms.isEmpty(parentPath) ? null : FavoriteFolderFormatter.getBreadcrumb(app, parentPath);
 	}
 
 	@NonNull
