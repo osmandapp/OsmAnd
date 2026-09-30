@@ -5429,4 +5429,5 @@
     <string name="opening_hours_public_holiday">Državni praznici</string>
     <string name="opening_hours_school_holiday">Školski raspusti</string>
     <string name="opening_hours_easter">Uskrs</string>
+    <string name="city_type_boundary">Kvart</string>
 </resources>
