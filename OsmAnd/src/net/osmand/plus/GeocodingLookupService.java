@@ -37,6 +37,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Consumer;
 
 public class GeocodingLookupService {
 
@@ -79,11 +80,6 @@ public class GeocodingLookupService {
 			this.allowEmptyNames = allowEmptyNames;
 			this.addressData = addressData;
 		}
-	}
-
-	public interface OnRoadsFound {
-		// called on the lookup thread; roads is null when a newer request of the same kind replaced this one
-		void onRoadsFound(@Nullable List<GeocodingResult> roads);
 	}
 
 	public interface OnAddressLookupProgress {
@@ -241,18 +237,19 @@ public class GeocodingLookupService {
 		return sorted.isEmpty() ? new GeocodingResult() : sorted.get(0);
 	}
 
-	// the roads near the point, nearest first, found on the lookup thread
+	// the roads near the point, nearest first, passed to the callback on the lookup thread; null when a
+	// newer request of the same kind replaced this one
 	public void findRoads(@NonNull Location loc, @NonNull RoadsLookup kind, boolean cancelPreviousSearch,
-	                      @Nullable ApplicationMode appMode, @NonNull OnRoadsFound callback) {
+	                      @Nullable ApplicationMode appMode, @NonNull Consumer<List<GeocodingResult>> callback) {
 		AtomicInteger requestNumber = roadsRequests[kind.ordinal()];
 		int request = requestNumber.incrementAndGet();
 		lookupThread.submit(() -> {
 			if (cancelPreviousSearch && request != requestNumber.get()) {
-				callback.onRoadsFound(null);
+				callback.accept(null);
 				return;
 			}
 			List<GeocodingResult> roads = searchRoads(loc.getLatitude(), loc.getLongitude(), kind, appMode);
-			callback.onRoadsFound(roads == null ? new ArrayList<>() : roads);
+			callback.accept(roads == null ? new ArrayList<>() : roads);
 		});
 	}
 
