@@ -88,7 +88,7 @@ public class GeocodingNearestRoadTest {
 	@Test
 	public void buildingGetsTheNameOfTheNearestRoad() throws IOException {
 		GeocodingUtilities utils = new GeocodingUtilities();
-		List<GeocodingResult> found = utils.sortGeocodingResults(Collections.singletonList(reader),
+		List<GeocodingResult> found = utils.findAddresses(Collections.singletonList(reader),
 				utils.reverseGeocodingSearch(ctx, LAT, LON, false));
 		assertFalse(found.isEmpty());
 		assertEquals(found.toString(), "Newton Road", found.get(0).streetName);
