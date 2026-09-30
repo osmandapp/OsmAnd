@@ -13,6 +13,7 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		private const val KEY_COMMON = "common"
 		private const val KEY_SHOW_REGULAR_MAP = "showRegularMap"
 		private const val KEY_IS_2D_MODE = "is2DMode"
+		private const val KEY_AR_HEADING_OFFSET = "arHeadingOffset"
 
 		private const val KEY_STAR_MAP = "star_map"
 
@@ -96,6 +97,8 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 
 	data class CommonConfig(
 		val showRegularMap: Boolean,
+		/** Manual azimuth correction applied in AR mode, degrees. */
+		val arHeadingOffset: Double = 0.0,
 	)
 
 	data class StarMapConfig(
@@ -206,8 +209,9 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		val settings = root.optJSONObject(KEY_COMMON)
 
 		val showStarMap = settings?.optBoolean(KEY_SHOW_REGULAR_MAP, false) ?: false
+		val arHeadingOffset = settings?.optDouble(KEY_AR_HEADING_OFFSET, 0.0) ?: 0.0
 
-		return CommonConfig(showStarMap)
+		return CommonConfig(showStarMap, arHeadingOffset)
 	}
 
 	@Synchronized
@@ -216,6 +220,7 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		val settings = root.optJSONObject(KEY_COMMON) ?: JSONObject()
 
 		settings.put(KEY_SHOW_REGULAR_MAP, config.showRegularMap)
+		settings.put(KEY_AR_HEADING_OFFSET, config.arHeadingOffset)
 
 		root.put(KEY_COMMON, settings)
 		setSettingsJson(root)
