@@ -438,8 +438,9 @@ public class GeocodingLookupService {
 								e.printStackTrace();
 							}
 						}
-						lookups.incrementAndGet();
+						// time first: a sample between the two sees the time and counts the lookup next time
 						lookupsTimeMs.addAndGet(System.currentTimeMillis() - startTime);
+						lookups.incrementAndGet();
 
 						synchronized (GeocodingLookupService.this) {
 							List<AddressLookupRequest> requests = addressLookupRequestsMap.get(latLon);

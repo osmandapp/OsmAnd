@@ -308,9 +308,9 @@ public class MemoryLog {
 			if (lookups > previousAddressLookups) {
 				sb.append(" geo=").append(lookups - previousAddressLookups);
 				sb.append(" geoms=").append(lookupsTimeMs - previousAddressLookupsTimeMs);
+				previousAddressLookups = lookups;
+				previousAddressLookupsTimeMs = lookupsTimeMs;
 			}
-			previousAddressLookups = lookups;
-			previousAddressLookupsTimeMs = lookupsTimeMs;
 		}
 		String hot = stackSampler.drain();
 		if (hot != null) {
