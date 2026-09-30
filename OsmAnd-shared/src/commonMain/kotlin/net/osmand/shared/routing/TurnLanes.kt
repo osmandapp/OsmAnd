@@ -155,10 +155,10 @@ object TurnLanes {
 		val allAngles = ArrayList(rs.attachedAngles)
 		allAngles.add(rs.currentDeviation)
 		allAngles.sortWith { c1, c2 -> c2.compareTo(c1) }
-		// directions of the junction not described by the marked lanes, from left to right;
-		// the road straight ahead always stays: unmarked lanes next to a through lane go through too
 		val angles = ArrayList<Double>()
 		var through: Double? = null
+
+		// get through by angles (rough)
 		for (angle in allAngles) {
 			val order = turnOrder(angle)
 			if (order != 0 && (if (order < 0) markedLeft else markedRight) > 0) {
@@ -170,12 +170,15 @@ object TurnLanes {
 				through = angle
 			}
 		}
-		val noneLeft = isNoneLane(lanes[0])
-		if (turnLanes != currTurnLanes && turnLanes.contains("through") && noneLeft != isNoneLane(lanes[lanes.size - 1])) {
-			// unmarked lanes on one side only: every turn marked on the other side takes a road, the next road is through
-			val byLanes = allAngles.getOrNull(if (noneLeft) allAngles.size - 1 - markedRight else markedLeft)
-			if (byLanes != null && abs(byLanes) <= TURN_DEGREE_MIN) {
-				through = byLanes
+
+		// get through by marked lanes
+		val isNoneFromLeft = isNoneLane(lanes[0])
+		val isNoneFromRight = isNoneLane(lanes[lanes.size - 1])
+		val isTurnLanesContinuous = turnLanes == currTurnLanes
+		if (turnLanes.contains("through") && isNoneFromLeft != isNoneFromRight && !isTurnLanesContinuous) {
+			val ind = if (isNoneFromLeft) allAngles.size - 1 - markedRight else markedLeft
+			if (ind >= 0 && ind < allAngles.size && abs(allAngles[ind]) <= TURN_DEGREE_MIN) {
+				through = allAngles[ind]
 			}
 		}
 		val straight = through
@@ -219,7 +222,13 @@ object TurnLanes {
 				if (!isLeftToRight(lanes, i, value)) {
 					return turnLanes
 				}
-				res.append(if (straight == null) value else if (value.contains("right")) "through;$value" else "$value;through")
+				if (straight == null) {
+					res.append(value)
+				} else if (value.contains("right")) {
+					res.append("through;").append(value)
+				} else {
+					res.append(value).append(";through")
+				}
 			}
 		}
 		return res.toString()

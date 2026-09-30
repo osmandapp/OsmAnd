@@ -2627,14 +2627,15 @@ public class RouteResultPreparation {
 				marked.add(laneOrder(option));
 			}
 		}
-		Set<Integer> markedLeft = marked.headSet(0), markedRight = marked.tailSet(1);
+		Set<Integer> markedLeft = marked.headSet(0);
+		Set<Integer> markedRight = marked.tailSet(1);
 		List<Double> allAngles = new ArrayList<>(rs.attachedAngles);
 		allAngles.add(rs.currentDeviation);
 		Collections.sort(allAngles, Collections.<Double>reverseOrder());
-		// directions of the junction not described by the marked lanes, from left to right;
-		// the road straight ahead always stays: unmarked lanes next to a through lane go through too
 		List<Double> angles = new ArrayList<>();
 		Double through = null;
+
+		// get through by angles (rough)
 		for (Double angle : allAngles) {
 			int order = turnOrder(angle);
 			if (order != 0 && !(order < 0 ? markedLeft : markedRight).isEmpty()) {
@@ -2645,15 +2646,19 @@ public class RouteResultPreparation {
 				through = angle;
 			}
 		}
-		boolean noneLeft = isNoneLane(lanes[0]);
-		if (!turnLanes.equals(currTurnLanes) && turnLanes.contains("through") && noneLeft != isNoneLane(lanes[lanes.length - 1])) {
-			// unmarked lanes on one side only: every turn marked on the other side takes a road, the next road is through
-			int ind = noneLeft ? allAngles.size() - 1 - markedRight.size() : markedLeft.size();
+
+		// get through by marked lanes
+		boolean isNoneFromLeft = isNoneLane(lanes[0]);
+		boolean isNoneFromRight = isNoneLane(lanes[lanes.length - 1]);
+		boolean isTurnLanesContinuous = turnLanes.equals(currTurnLanes);
+		if (turnLanes.contains("through") && isNoneFromLeft != isNoneFromRight && !isTurnLanesContinuous) {
+			int ind = isNoneFromLeft ? allAngles.size() - 1 - markedRight.size() : markedLeft.size();
 			if (ind >= 0 && ind < allAngles.size() && Math.abs(allAngles.get(ind)) <= TURN_DEGREE_MIN) {
 				through = allAngles.get(ind);
 			}
 		}
 		angles.remove(through);
+
 		// the outermost unmarked lanes take the outermost directions, extra ones are stacked
 		List<Integer> turns = new ArrayList<>();
 		int rightTurns = 0;
@@ -2690,7 +2695,13 @@ public class RouteResultPreparation {
 				if (!isLeftToRight(lanes, i, value)) {
 					return turnLanes;
 				}
-				res.append(through == null ? value : value.contains("right") ? "through;" + value : value + ";through");
+				if (through == null) {
+					res.append(value);
+				} else if (value.contains("right")) {
+					res.append("through;").append(value);
+				} else {
+					res.append(value).append(";through");
+				}
 			}
 		}
 		return res.toString();
