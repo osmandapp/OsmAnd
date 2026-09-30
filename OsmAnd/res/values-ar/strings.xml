@@ -1760,7 +1760,7 @@
     <string name="tap_on_map_to_hide_interface_descr">نقرة على الخريطة ستفعل أزرار التحكم والودجت.</string>
     <string name="tap_on_map_to_hide_interface">شاشة كاملة</string>
     <string name="mark_passed">توجيه مباشر مجتاز</string>
-    <string name="empty_state_osm_edits">إنشاء أو تعديل عناصر OSM</string>
+    <string name="empty_state_osm_edits">إنشاء أو تعديل عناصر خريطة الشارع المفتوح</string>
     <string name="empty_state_osm_edits_descr">قم بإنشاء أو تعديل نقاط الاهتمام OSM ، وفتح ملاحظات OSM أو التعليق عليها ، والمساهمة في ملفات GPX المسجلة.</string>
     <string name="shared_string_deleted">تم الحذف</string>
     <string name="shared_string_edited">مُعدلة</string>
@@ -2003,7 +2003,7 @@
     <string name="shared_string_swap">تبديل</string>
     <string name="show_more">اعرض المزيد</string>
     <string name="tracks_on_map">المسارات المعروضة</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">إظهار أو إخفاء مسارات GPX المحددة على الخريطة.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">زر لإظهار أو إخفاء المسارات المحددة على الخريطة.</string>
     <string name="previous_route">الطريق السابق</string>
     <string name="add_start_and_end_points">إضافة نقاط بداية ونهاية</string>
     <string name="route_add_start_point">إضافة نقطة البدء</string>
@@ -4599,7 +4599,7 @@
     <string name="obd_engine_coolant_temp_desc">يظهر درجة حرارة سائل تبريد المحرك</string>
     <string name="obd_nothing_found_description">يرجى التحقق مما يلي:\n- تأكد من تشغيل البلوتوث\n- تشغيل محرك السيارة\n- تأكد من أن جهازك ضمن نطاق الماسح الضوئي.</string>
     <string name="obd_calculated_engine_load">حمولة المحرك المحسوبة</string>
-    <string name="obd_fuel_consumption_rate_scanner">معدل استهلاك الوقود (OBD)</string>
+    <string name="obd_fuel_consumption_rate_scanner">معدل استهلاك الوقود (obd)</string>
     <string name="obd_air_intake_temp_desc">يعرض درجة حرارة الهواء الداخل إلى مجمع سحب المحرك.</string>
     <string name="dynamic_icon_type_summary">تتغير الأيقونة استنادًا إلى حالة الإجراء.</string>
     <string name="obd_connected_to_device">متصّل بـ %s</string>
@@ -4658,7 +4658,7 @@
     <string name="original_shape_description">تحتفظ كل نقطة بشكلها.</string>
     <string name="apply_to_all_points">تطبيق على كل النقاط</string>
     <string name="hmd_promo">عرض ترويجي ل HMD لمدة %1$s شهر</string>
-    <string name="ais_load_data">تحميل بيانات AIS من ملف</string>
+    <string name="ais_load_data">محاكاة حركة السفن</string>
     <string name="ais_address_settings_description">اختر بروتوكول NMEA (UDP/TCP) وحدد العناوين والمنافذ المقابلة</string>
     <string name="ais_address_nmea_server_description">تحديد عنوان IP لمصدر بيانات NMEA (إذا تم استخدام TCP)</string>
     <string name="ais_port_nmea_server_description">تحديد رقم منفذ TCP لمصدر بيانات NMEA</string>
@@ -5371,7 +5371,7 @@
     <string name="coordinate_format_cancel_changes_title">التغييرات غير المحفوظة</string>
     <string name="coordinate_format_description">التنسيقات المفضلة للوصول السريع من قائمة السياق والبحث.</string>
     <string name="coordinate_format_discard_changes">تجاهل التغييرات</string>
-    <string name="coordinate_format_last_item_warning">يلزم وجود تنسيق إحداثيات واحد على الأقل.</string>
+    <string name="coordinate_format_last_item_warning">يلزم توفير تنسيق إحداثيات واحد على الأقل.</string>
     <string name="coordinate_format_select_other">اختر تنسيقًا آخر</string>
     <string name="coordinate_format_primary">أساسي</string>
     <string name="favorite_confirm_delete_folder">سيؤدي هذا إلى حذف المجلد \"%1$s\"، بما في ذلك المجلدات المتداخلة و %2$d نقطة (نقاط) المفضلة.</string>
@@ -5478,4 +5478,6 @@
     <string name="crash_report_sent">تم إرسال التقرير. شكراً لك!</string>
     <string name="crash_report_send_failed">تعذر إرسال التقرير. حاول مرة أخرى لاحقاً.</string>
     <string name="file_name_containes_illegal_char">لا يمكن أن يحتوي الاسم على: %1$s</string>
+    <string name="use_spatial_search">استخدام البحث النصي المكاني</string>
+    <string name="use_spatial_search_description">استبدل واجهات برمجة تطبيقات البحث السريع القياسية بمحرك البحث النصي المكاني التجريبي.</string>
 </resources>
