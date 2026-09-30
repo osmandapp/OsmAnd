@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
@@ -176,11 +177,9 @@ public class MemoryLog {
 	// load map data in bursts
 	private final AtomicInteger routeCalculations = new AtomicInteger();
 	private int previousSearches;
-	// address requests of GeocodingLookupService and the lookups it ran for them (requests of one
-	// point share a lookup, cancelled ones run none) with their time
-	private final AtomicInteger addressRequests = new AtomicInteger();
-	private final AtomicInteger addressLookups = new AtomicInteger();
-	private final AtomicLong addressLookupMs = new AtomicLong();
+	private int previousAddressRequests;
+	private int previousAddressLookups;
+	private long previousAddressLookupsTimeMs;
 
 	// called from a background thread, at most once per SAMPLE_INTERVAL
 	public synchronized void sample(@NonNull OsmandApplication app, @NonNull StackSampler stackSampler) {
@@ -235,15 +234,6 @@ public class MemoryLog {
 	// called from the routing thread when a calculation ends, cancelled or not
 	public void onRouteCalculated() {
 		routeCalculations.incrementAndGet();
-	}
-
-	public void onAddressRequest() {
-		addressRequests.incrementAndGet();
-	}
-
-	public void onAddressLookup(long timeMs) {
-		addressLookups.incrementAndGet();
-		addressLookupMs.addAndGet(timeMs);
 	}
 
 	// MB/count of what the map renderer keeps in GPU memory by type, e.g. "tex:120/340,slot:0/1200,vbo:10/180,ibo:2/180,mesh:0/180"
@@ -306,14 +296,21 @@ public class MemoryLog {
 			sb.append(" srch=").append(searches - previousSearches);
 		}
 		previousSearches = searches;
-		int requests = addressRequests.getAndSet(0);
-		if (requests > 0) {
-			sb.append(" georeq=").append(requests);
-		}
-		int addresses = addressLookups.getAndSet(0);
-		long addressMs = addressLookupMs.getAndSet(0);
-		if (addresses > 0) {
-			sb.append(" geo=").append(addresses).append(" geoms=").append(addressMs);
+		GeocodingLookupService geocoding = app.getGeocodingLookupService();
+		if (geocoding != null) {
+			int requests = geocoding.getRequests();
+			if (requests > previousAddressRequests) {
+				sb.append(" georeq=").append(requests - previousAddressRequests);
+			}
+			previousAddressRequests = requests;
+			int lookups = geocoding.getLookups();
+			long lookupsTimeMs = geocoding.getLookupsTimeMs();
+			if (lookups > previousAddressLookups) {
+				sb.append(" geo=").append(lookups - previousAddressLookups);
+				sb.append(" geoms=").append(lookupsTimeMs - previousAddressLookupsTimeMs);
+			}
+			previousAddressLookups = lookups;
+			previousAddressLookupsTimeMs = lookupsTimeMs;
 		}
 		String hot = stackSampler.drain();
 		if (hot != null) {

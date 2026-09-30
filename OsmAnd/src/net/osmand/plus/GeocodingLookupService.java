@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class GeocodingLookupService {
 
@@ -21,6 +23,11 @@ public class GeocodingLookupService {
 	private final ConcurrentLinkedQueue<LatLon> lookupLocations = new ConcurrentLinkedQueue<>();
 	private final ConcurrentHashMap<LatLon, List<AddressLookupRequest>> addressLookupRequestsMap = new ConcurrentHashMap<>();
 	private LatLon currentRequestedLocation;
+	// address requests and the lookups run for them (requests of one point share a lookup,
+	// cancelled ones run none) with their time; read by the memory log
+	private final AtomicInteger requests = new AtomicInteger();
+	private final AtomicInteger lookups = new AtomicInteger();
+	private final AtomicLong lookupsTimeMs = new AtomicLong();
 
 	private boolean searchDone;
 	private String lastFoundAddress;
@@ -55,8 +62,20 @@ public class GeocodingLookupService {
 		this.app = app;
 	}
 
+	public int getRequests() {
+		return requests.get();
+	}
+
+	public int getLookups() {
+		return lookups.get();
+	}
+
+	public long getLookupsTimeMs() {
+		return lookupsTimeMs.get();
+	}
+
 	public void lookupAddress(AddressLookupRequest request) {
-		app.getMemoryLog().onAddressRequest();
+		requests.incrementAndGet();
 		synchronized (this) {
 			LatLon requestedLocation = request.latLon;
 			LatLon existingLocation = null;
@@ -237,7 +256,8 @@ public class GeocodingLookupService {
 								e.printStackTrace();
 							}
 						}
-						app.getMemoryLog().onAddressLookup(System.currentTimeMillis() - startTime);
+						lookups.incrementAndGet();
+						lookupsTimeMs.addAndGet(System.currentTimeMillis() - startTime);
 
 						synchronized (GeocodingLookupService.this) {
 							List<AddressLookupRequest> requests = addressLookupRequestsMap.get(latLon);
