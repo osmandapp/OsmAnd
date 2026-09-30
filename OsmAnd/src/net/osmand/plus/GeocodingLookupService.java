@@ -22,8 +22,11 @@ public class GeocodingLookupService {
 	private final ConcurrentHashMap<LatLon, List<AddressLookupRequest>> addressLookupRequestsMap = new ConcurrentHashMap<>();
 	private LatLon currentRequestedLocation;
 
-	private boolean searchDone;
+	private final Object searchLock = new Object();
+	private volatile boolean searchDone;
 	private String lastFoundAddress;
+
+	private static final long PROGRESS_INTERVAL_MS = 500;
 
 	public interface OnAddressLookupProgress {
 		void geocodingInProgress();
@@ -108,6 +111,39 @@ public class GeocodingLookupService {
 		}
 	}
 
+	private void setSearchDone() {
+		synchronized (searchLock) {
+			searchDone = true;
+			searchLock.notifyAll();
+		}
+	}
+
+	private boolean awaitSearchDone(long timeout) {
+		synchronized (searchLock) {
+			if (!searchDone) {
+				try {
+					searchLock.wait(timeout);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
+			}
+			return searchDone;
+		}
+	}
+
+	private void notifyProgress(LatLon latLon) {
+		synchronized (this) {
+			List<AddressLookupRequest> requests = addressLookupRequestsMap.get(latLon);
+			if (requests != null) {
+				for (AddressLookupRequest request : requests) {
+					if (request.uiProgressCallback != null) {
+						app.runInUIThread(request.uiProgressCallback::geocodingInProgress);
+					}
+				}
+			}
+		}
+	}
+
 	private boolean hasAnyRequest(LatLon latLon) {
 		synchronized (this) {
 			List<AddressLookupRequest> requests = addressLookupRequestsMap.get(latLon);
@@ -167,7 +203,7 @@ public class GeocodingLookupService {
 						}
 
 						lastFoundAddress = result;
-						searchDone = true;
+						setSearchDone();
 
 						return true;
 					}
@@ -206,34 +242,13 @@ public class GeocodingLookupService {
 
 						// geocode
 						searchDone = false;
-						while (!geocode(latLon)) {
-							try {
-								Thread.sleep(50);
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
+						if (!geocode(latLon)) {
+							lastFoundAddress = null;
+							setSearchDone();
 						}
 
-						long counter = 0;
-						while (!searchDone) {
-							try {
-								Thread.sleep(50);
-								counter++;
-								// call progress every 500 ms
-								if (counter == 10) {
-									counter = 0;
-									synchronized (GeocodingLookupService.this) {
-										List<AddressLookupRequest> requests = addressLookupRequestsMap.get(latLon);
-										for (AddressLookupRequest request : requests) {
-											if (request.uiProgressCallback != null) {
-												app.runInUIThread(request.uiProgressCallback::geocodingInProgress);
-											}
-										}
-									}
-								}
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
+						while (!awaitSearchDone(PROGRESS_INTERVAL_MS)) {
+							notifyProgress(latLon);
 						}
 
 						synchronized (GeocodingLookupService.this) {
