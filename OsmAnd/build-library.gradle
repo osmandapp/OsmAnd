@@ -3,7 +3,6 @@ apply plugin: 'ivy-publish'
 apply from: 'build-common.gradle'
 apply from: rootProject.file("versions.gradle")
 
-apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 
@@ -24,6 +23,8 @@ android {
 
 	buildFeatures {
 		aidl true
+		buildConfig true
+		resValues true
 		compose true
 	}
 
@@ -42,47 +43,21 @@ android {
 			resValue "string", "app_edition", ""
 		}
 	}
-
-	libraryVariants.configureEach {
-		def variant = it
-		def taskName = variant.name.capitalize()
-		def mergeAssetsTaskName = "merge${taskName}Assets"
-		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
-			println(osmandTask.getName())
-			osmandTask.dependsOn(copyProjDb)
-			osmandTask.dependsOn(collectFonts)
-			osmandTask.dependsOn(copyPoiCategories)
-			osmandTask.dependsOn(copyRouteActivities)
-			osmandTask.dependsOn(copyColorPalettes)
-			osmandTask.dependsOn(copyBundledAssets)
-			osmandTask.dependsOn(copy3DModels)
-			osmandTask.dependsOn(collectVoiceAssets)
-			osmandTask.dependsOn(downloadStarsDb)
-			osmandTask.dependsOn(downloadWorldMiniBasemap)
-		}
-		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
-		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
-			println(osmandTask.getName())
-			osmandTask.dependsOn(copyIcons)
-		}
-		def packageResources= "package${taskName}Resources"
-		tasks.named(packageResources).configure { osmandTask ->
-			println(osmandTask.getName())
-			osmandTask.dependsOn(copyIcons)
-		}
-		def generateResources= "generate${taskName}Resources"
-		tasks.named(generateResources).configure { osmandTask ->
-			println(osmandTask.getName() + " generate resources")
-			osmandTask.dependsOn(copyIcons)
-		}
-	}
 }
 
-afterEvaluate {
-	android.libraryVariants.configureEach { variant ->
-		variant.javaCompileProvider.configure {
-			dependsOn collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore
+androidComponents {
+	onVariants(selector().all()) { variant ->
+		def taskName = variant.name.capitalize()
+		def dependOn = { String name, Object... deps ->
+			tasks.matching { it.name == name }.configureEach { it.dependsOn(deps) }
 		}
+		dependOn("merge${taskName}Assets", copyProjDb, collectFonts, copyPoiCategories, copyRouteActivities, copyColorPalettes,
+				copyBundledAssets, copy3DModels, collectVoiceAssets, downloadStarsDb, downloadWorldMiniBasemap)
+		dependOn("map${taskName}SourceSetPaths", copyIcons)
+		dependOn("process${taskName}NavigationResources", copyIcons)
+		dependOn("package${taskName}Resources", copyIcons)
+		dependOn("generate${taskName}Resources", copyIcons)
+		dependOn("compile${taskName}JavaWithJavac", collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
 	}
 }
 

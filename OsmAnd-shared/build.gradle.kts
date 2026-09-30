@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
 	id("org.jetbrains.kotlin.multiplatform")
 	id("org.jetbrains.kotlin.plugin.serialization")
-	id("com.android.library")
+	id("com.android.kotlin.multiplatform.library")
 	id("maven-publish")
 	id("ivy-publish")
 }
@@ -20,13 +20,15 @@ kotlin {
 		}
 	}
 
-	androidTarget {
+	android {
+		namespace = "net.osmand.shared"
+		compileSdk = 35
+		minSdk = 24
 		@OptIn(ExperimentalKotlinGradlePluginApi::class)
 		compilerOptions {
 			jvmTarget.set(JvmTarget.JVM_17)
 			freeCompilerArgs.add("-Xjvm-default=all")
 		}
-		publishLibraryVariants("release", "debug")
 	}
 
 	listOf(
@@ -123,42 +125,31 @@ kotlin {
 	}
 }
 
-android {
-	namespace = "net.osmand.shared"
-	compileSdk = 35
-	compileOptions {
-		sourceCompatibility = JavaVersion.VERSION_17
-		targetCompatibility = JavaVersion.VERSION_17
-	}
-	defaultConfig {
-		minSdk = 24
-	}
-}
-
 version = System.getenv("OSMAND_SHARED_ANDROID_BINARIES_IVY_REVISION") ?: "master-snapshot"
-publishing {
-	repositories {
-		ivy {
-			url = uri(System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./")
-		}
-	}
-	publications {
-		create<IvyPublication>("ivyOsmAndSharedAndroid") {
-			organisation = "net.osmand.shared"
-			module = "OsmAnd-shared-android"
-			revision = "$version"
-			artifact(file("build/outputs/aar/OsmAnd-shared-debug.aar")) {
-				type = "aar"
-				classifier = "debug"
-			}
-			artifact(file("build/outputs/aar/OsmAnd-shared-release.aar")) {
-				type = "aar"
-				classifier = "release"
+// bundleAndroidMainAar is registered after the build script runs.
+afterEvaluate {
+	publishing {
+		repositories {
+			ivy {
+				url = uri(System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./")
 			}
 		}
+		publications {
+			create<IvyPublication>("ivyOsmAndSharedAndroid") {
+				organisation = "net.osmand.shared"
+				module = "OsmAnd-shared-android"
+				revision = "$version"
+				// The KMP Android library has one variant; it is published under both old classifiers.
+				val aar = tasks.named("bundleAndroidMainAar")
+				artifact(aar) {
+					type = "aar"
+					classifier = "debug"
+				}
+				artifact(aar) {
+					type = "aar"
+					classifier = "release"
+				}
+			}
+		}
 	}
-}
-
-tasks.named("publishIvyOsmAndSharedAndroidPublicationToIvyRepository") {
-	dependsOn("bundleDebugAar", "bundleReleaseAar")
 }
