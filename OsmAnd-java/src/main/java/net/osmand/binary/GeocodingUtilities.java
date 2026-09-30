@@ -89,7 +89,7 @@ public class GeocodingUtilities {
 		public long regionLen;
 		public RouteSegmentPoint point;
 		public String streetName;
-		// justification
+		// 2nd step, findStreetAndBuildings: the street, the building and the city
 		public Building building;
 		public String buildingInterpolation;
 		public Street street;
@@ -478,16 +478,16 @@ public class GeocodingUtilities {
 				}
 			}
 			if (reader != null) {
-				List<GeocodingResult> justified = findStreetAndBuildings(r, reader, minBuildingDistance, cancel);
-				if (!justified.isEmpty()) {
-					double md = justified.get(0).getDistance();
+				List<GeocodingResult> streetAndBuildings = findStreetAndBuildings(r, reader, minBuildingDistance, cancel);
+				if (!streetAndBuildings.isEmpty()) {
+					double md = streetAndBuildings.get(0).getDistance();
 					if (minBuildingDistance == 0) {
 						minBuildingDistance = md;
 					} else {
 						minBuildingDistance = Math.min(md, minBuildingDistance);
 					}
-					justified.get(0).dist = -1;//clear intermediate cached distance
-					complete.addAll(justified);
+					streetAndBuildings.get(0).dist = -1;//clear intermediate cached distance
+					complete.addAll(streetAndBuildings);
 				}
 			} else {
 				complete.add(r);
