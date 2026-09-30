@@ -42,7 +42,6 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.CurrentPositionHelper;
-import net.osmand.plus.helpers.CurrentPositionHelper.GeocodingRoads;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.TargetPoint;
@@ -824,10 +823,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	                               boolean cancelPreviousSearch,
 	                               ResultMatcher<RouteDataObject> result) {
 		return currentPositionHelper.getRouteSegment(loc, appMode, cancelPreviousSearch, result);
-	}
-
-	public boolean getGeocodingRoads(net.osmand.Location loc, ResultMatcher<GeocodingRoads> result) {
-		return currentPositionHelper.getGeocodingRoads(loc, result);
 	}
 
 	@Nullable

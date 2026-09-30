@@ -9,24 +9,32 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.plus.helpers.CurrentPositionHelper.GeocodingRoads;
 import net.osmand.plus.resources.BinaryMapReaderResource;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.router.RoutingContext;
+import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -46,6 +54,37 @@ public class GeocodingLookupService {
 
 	private boolean searchDone;
 	private String lastFoundAddress;
+
+	// roads near a point: one routing context over the maps around the last point asked, used only
+	// from the lookup thread
+	private final ExecutorService lookupThread = Executors.newSingleThreadExecutor();
+	private final AtomicInteger[] roadsRequests = new AtomicInteger[RoadsLookup.values().length];
+	private RoutingContext ctx;
+	private RoutingContext defCtx;
+	private ApplicationMode ctxAppMode;
+	private List<BinaryMapReaderResource> usedReaders = new ArrayList<>();
+
+	public enum RoadsLookup {
+		// the road under the current position, kept by CurrentPositionHelper
+		CURRENT_POSITION(false, false),
+		// a road near a point, also one without a name
+		ROAD(true, false),
+		// the named roads an address is looked up from, in maps with address data
+		ADDRESS(false, true);
+
+		private final boolean allowEmptyNames;
+		private final boolean addressData;
+
+		RoadsLookup(boolean allowEmptyNames, boolean addressData) {
+			this.allowEmptyNames = allowEmptyNames;
+			this.addressData = addressData;
+		}
+	}
+
+	public interface OnRoadsFound {
+		// called on the lookup thread; roads is null when a newer request of the same kind replaced this one
+		void onRoadsFound(@Nullable List<GeocodingResult> roads);
+	}
 
 	public interface OnAddressLookupProgress {
 		void geocodingInProgress();
@@ -75,6 +114,9 @@ public class GeocodingLookupService {
 
 	public GeocodingLookupService(OsmandApplication app) {
 		this.app = app;
+		for (int i = 0; i < roadsRequests.length; i++) {
+			roadsRequests[i] = new AtomicInteger();
+		}
 	}
 
 	public int getRequests() {
@@ -154,29 +196,18 @@ public class GeocodingLookupService {
 		Location loc = new Location("");
 		loc.setLatitude(latLon.getLatitude());
 		loc.setLongitude(latLon.getLongitude());
-		return app.getLocationProvider()
-				.getGeocodingRoads(loc, new ResultMatcher<GeocodingRoads>() {
-
-					// called on the lookup thread of CurrentPositionHelper, or with null when the lookup
-					// was replaced by a newer one
-					@Override
-					public boolean publish(GeocodingRoads roads) {
-						GeocodingResult address = roads == null ? null : findAddress(roads, latLon);
-						app.runInUIThread(() -> publishAddress(address));
-						return true;
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return !hasAnyRequest(latLon);
-					}
-
-				});
+		findRoads(loc, RoadsLookup.ADDRESS, true, null, roads -> {
+			GeocodingResult address = roads == null ? null : findAddress(roads, latLon);
+			app.runInUIThread(() -> publishAddress(address));
+		});
+		return true;
 	}
 
-	// the street, the house and the city of the roads found near the point; null when cancelled
+	// the street, the house and the city of the roads found near the point, nearest first; null when
+	// cancelled. Runs on the lookup thread right after the roads, so usedReaders are the maps they
+	// came from, with their street lookup readers open.
 	@Nullable
-	private GeocodingResult findAddress(@NonNull GeocodingRoads roads, @NonNull LatLon latLon) {
+	private GeocodingResult findAddress(@NonNull List<GeocodingResult> roads, @NonNull LatLon latLon) {
 		ResultMatcher<GeocodingResult> cancel = new ResultMatcher<GeocodingResult>() {
 			@Override
 			public boolean publish(GeocodingResult object) {
@@ -188,61 +219,123 @@ public class GeocodingLookupService {
 				return !hasAnyRequest(latLon);
 			}
 		};
-		List<GeocodingResult> complete = new ArrayList<>();
-		double minBuildingDistance = 0;
-		try {
-			GeocodingUtilities utilities = new GeocodingUtilities();
-			for (GeocodingResult road : roads.roads) {
-				if (cancel.isCancelled()) {
-					break;
-				}
-				BinaryMapIndexReader reader = findStreetReader(road, roads.readers);
-				if (reader == null) {
-					complete.add(road);
-					continue;
-				}
-				List<GeocodingResult> justified = null;
-				try {
-					justified = utilities.justifyReverseGeocodingSearch(road, reader, minBuildingDistance, cancel);
-				} catch (IOException e) {
-					LOG.error("Exception happened during reverse geocoding", e);
-				}
-				if (justified != null && !justified.isEmpty()) {
-					double distance = justified.get(0).getDistance();
-					minBuildingDistance = minBuildingDistance == 0 ? distance : Math.min(distance, minBuildingDistance);
-					complete.addAll(justified);
+		List<BinaryMapIndexReader> readers = new ArrayList<>();
+		for (BinaryMapReaderResource resource : usedReaders) {
+			if (!resource.isClosed()) {
+				BinaryMapIndexReader reader = resource.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
+				if (reader != null) {
+					readers.add(reader);
 				}
 			}
-			utilities.filterDuplicateRegionResults(complete);
-		} catch (RuntimeException e) {
+		}
+		List<GeocodingResult> sorted;
+		try {
+			sorted = new GeocodingUtilities().sortGeocodingResults(readers, roads, cancel);
+		} catch (IOException | RuntimeException e) {
 			LOG.error("Exception happened during reverse geocoding", e);
 			return null;
 		}
 		if (cancel.isCancelled()) {
 			return null;
 		}
-		return complete.isEmpty() ? new GeocodingResult() : complete.get(0);
+		return sorted.isEmpty() ? new GeocodingResult() : sorted.get(0);
 	}
 
-	// the map whose routing section holds the road, among the maps the roads were read from: their
-	// street lookup readers are open already, other maps must not be opened here
-	@Nullable
-	private BinaryMapIndexReader findStreetReader(@NonNull GeocodingResult road,
-	                                              @NonNull List<BinaryMapReaderResource> readers) {
-		for (BinaryMapReaderResource resource : readers) {
-			if (resource.isClosed()) {
-				continue;
+	// the roads near the point, nearest first, found on the lookup thread
+	public void findRoads(@NonNull Location loc, @NonNull RoadsLookup kind, boolean cancelPreviousSearch,
+	                      @Nullable ApplicationMode appMode, @NonNull OnRoadsFound callback) {
+		AtomicInteger requestNumber = roadsRequests[kind.ordinal()];
+		int request = requestNumber.incrementAndGet();
+		lookupThread.submit(() -> {
+			if (cancelPreviousSearch && request != requestNumber.get()) {
+				callback.onRoadsFound(null);
+				return;
 			}
-			BinaryMapIndexReader reader = resource.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
-			if (reader != null) {
-				for (RouteRegion region : reader.getRoutingIndexes()) {
-					if (road.regionFP == region.getFilePointer() && road.regionLen == region.getLength()) {
-						return reader;
+			List<GeocodingResult> roads = searchRoads(loc.getLatitude(), loc.getLongitude(), kind, appMode);
+			callback.onRoadsFound(roads == null ? new ArrayList<>() : roads);
+		});
+	}
+
+	@Nullable
+	private List<GeocodingResult> searchRoads(double lat, double lon, @NonNull RoadsLookup kind,
+	                                          @Nullable ApplicationMode appMode) {
+		List<BinaryMapReaderResource> checkReaders = checkReaders(lat, lon, usedReaders, kind.addressData);
+		if (appMode == null) {
+			appMode = app.getSettings().getApplicationMode();
+		}
+		if (ctx == null || ctxAppMode != appMode || checkReaders != usedReaders) {
+			initCtx(checkReaders, appMode);
+			if (ctx == null) {
+				return null;
+			}
+		}
+		try {
+			return new GeocodingUtilities().reverseGeocodingSearch(kind.addressData ? defCtx : ctx, lat, lon,
+					kind.allowEmptyNames);
+		} catch (Exception e) {
+			LOG.error("Exception happened during searchRoads", e);
+			return null;
+		}
+	}
+
+	private void initCtx(@NonNull List<BinaryMapReaderResource> checkReaders, @NonNull ApplicationMode appMode) {
+		ctxAppMode = appMode;
+		String p;
+		if (appMode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
+			p = GeneralRouterProfile.BICYCLE.name().toLowerCase();
+		} else if (appMode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
+			p = GeneralRouterProfile.PEDESTRIAN.name().toLowerCase();
+		} else if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+			p = GeneralRouterProfile.CAR.name().toLowerCase();
+		} else {
+			p = "geocoding";
+		}
+
+		BinaryMapIndexReader[] rs = new BinaryMapIndexReader[checkReaders.size()];
+		if (rs.length > 0) {
+			int i = 0;
+			for (BinaryMapReaderResource rep : checkReaders) {
+				rs[i++] = rep.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
+			}
+			RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(10, 10);
+			RoutingConfiguration cfg = app.getRoutingConfigForMode(appMode).build(p, memoryLimits,
+					new HashMap<String, String>());
+			cfg.routeCalculationTime = System.currentTimeMillis();
+			ctx = new RoutePlannerFrontEnd().buildRoutingContext(cfg, null, rs);
+			RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build("geocoding", memoryLimits,
+					new HashMap<String, String>());
+			defCtx = new RoutePlannerFrontEnd().buildRoutingContext(defCfg, null, rs);
+		} else {
+			ctx = null;
+			defCtx = null;
+		}
+		usedReaders = checkReaders;
+	}
+
+	private List<BinaryMapReaderResource> checkReaders(double lat, double lon,
+			List<BinaryMapReaderResource> ur, boolean requireAddressData) {
+		List<BinaryMapReaderResource> res = ur;
+		for (BinaryMapReaderResource t : ur) {
+			if (t.isClosed()) {
+				res = new ArrayList<>();
+				break;
+			}
+		}
+		int y31 = MapUtils.get31TileNumberY(lat);
+		int x31 = MapUtils.get31TileNumberX(lon);
+		for (BinaryMapReaderResource r : app.getResourceManager().getFileReaders()) {
+			if (!r.isClosed()) {
+				BinaryMapIndexReader shallowReader = r.getShallowReader();
+				if (shallowReader != null && shallowReader.containsRouteData(x31, y31, x31, y31, 15)
+						&& (!requireAddressData || shallowReader.containsAddressData())) {
+					if (!res.contains(r)) {
+						res = new ArrayList<>(res);
+						res.add(r);
 					}
 				}
 			}
 		}
-		return null;
+		return res;
 	}
 
 	private void publishAddress(@Nullable GeocodingResult object) {

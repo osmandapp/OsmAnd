@@ -447,9 +447,19 @@ public class GeocodingUtilities {
 	}
 
 	public List<GeocodingResult> sortGeocodingResults(List<BinaryMapIndexReader> list, List<GeocodingResult> res) throws IOException {
+		return sortGeocodingResults(list, res, null);
+	}
+
+	// finds the street and the houses of every road, drops duplicates and far houses, nearest first;
+	// stops early when the matcher is cancelled
+	public List<GeocodingResult> sortGeocodingResults(List<BinaryMapIndexReader> list, List<GeocodingResult> res,
+			ResultMatcher<GeocodingResult> cancel) throws IOException {
 		List<GeocodingResult> complete = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		double minBuildingDistance = 0;
 		for (GeocodingResult r : res) {
+			if (cancel != null && cancel.isCancelled()) {
+				break;
+			}
 			BinaryMapIndexReader reader = null;
 			for (BinaryMapIndexReader b : list) {
 				for (RouteRegion rb : b.getRoutingIndexes()) {
@@ -464,7 +474,7 @@ public class GeocodingUtilities {
 				}
 			}
 			if (reader != null) {
-				List<GeocodingResult> justified = justifyReverseGeocodingSearch(r, reader, minBuildingDistance, null);
+				List<GeocodingResult> justified = justifyReverseGeocodingSearch(r, reader, minBuildingDistance, cancel);
 				if (!justified.isEmpty()) {
 					double md = justified.get(0).getDistance();
 					if (minBuildingDistance == 0) {
