@@ -15,12 +15,9 @@ import androidx.annotation.RequiresApi;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.plus.GeocodingLookupService;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
-import net.osmand.plus.helpers.CurrentPositionHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -179,10 +176,11 @@ public class MemoryLog {
 	// load map data in bursts
 	private final AtomicInteger routeCalculations = new AtomicInteger();
 	private int previousSearches;
-	private int previousAddressRequests;
-	private int previousAddressLookups;
-	private long previousAddressLookupMs;
-	private int previousRoadLookups;
+	// address requests of GeocodingLookupService and the lookups it ran for them (requests of one
+	// point share a lookup, cancelled ones run none) with their time
+	private final AtomicInteger addressRequests = new AtomicInteger();
+	private final AtomicInteger addressLookups = new AtomicInteger();
+	private final AtomicLong addressLookupMs = new AtomicLong();
 
 	// called from a background thread, at most once per SAMPLE_INTERVAL
 	public synchronized void sample(@NonNull OsmandApplication app, @NonNull StackSampler stackSampler) {
@@ -239,35 +237,13 @@ public class MemoryLog {
 		routeCalculations.incrementAndGet();
 	}
 
-	// requested addresses, lookups actually run (requests of one point are merged) and their time,
-	// road snaps of the current position; the services are created during app start
-	private void appendAddressLookups(@NonNull StringBuilder sb, @NonNull OsmandApplication app) {
-		GeocodingLookupService lookupService = app.getGeocodingLookupService();
-		if (lookupService != null) {
-			int requests = lookupService.getRequests();
-			if (requests > previousAddressRequests) {
-				sb.append(" georeq=").append(requests - previousAddressRequests);
-			}
-			previousAddressRequests = requests;
-		}
-		OsmAndLocationProvider locationProvider = app.getLocationProvider();
-		if (locationProvider == null) {
-			return;
-		}
-		CurrentPositionHelper positionHelper = locationProvider.getCurrentPositionHelper();
-		int lookups = positionHelper.getAddressLookups();
-		long lookupMs = positionHelper.getAddressLookupMs();
-		if (lookups > previousAddressLookups) {
-			sb.append(" geo=").append(lookups - previousAddressLookups);
-			sb.append(" geoms=").append(lookupMs - previousAddressLookupMs);
-		}
-		previousAddressLookups = lookups;
-		previousAddressLookupMs = lookupMs;
-		int roadLookups = positionHelper.getRoadLookups();
-		if (roadLookups > previousRoadLookups) {
-			sb.append(" georoad=").append(roadLookups - previousRoadLookups);
-		}
-		previousRoadLookups = roadLookups;
+	public void onAddressRequest() {
+		addressRequests.incrementAndGet();
+	}
+
+	public void onAddressLookup(long timeMs) {
+		addressLookups.incrementAndGet();
+		addressLookupMs.addAndGet(timeMs);
 	}
 
 	// MB/count of what the map renderer keeps in GPU memory by type, e.g. "tex:120/340,slot:0/1200,vbo:10/180,ibo:2/180,mesh:0/180"
@@ -330,7 +306,15 @@ public class MemoryLog {
 			sb.append(" srch=").append(searches - previousSearches);
 		}
 		previousSearches = searches;
-		appendAddressLookups(sb, app);
+		int requests = addressRequests.getAndSet(0);
+		if (requests > 0) {
+			sb.append(" georeq=").append(requests);
+		}
+		int addresses = addressLookups.getAndSet(0);
+		long addressMs = addressLookupMs.getAndSet(0);
+		if (addresses > 0) {
+			sb.append(" geo=").append(addresses).append(" geoms=").append(addressMs);
+		}
 		String hot = stackSampler.drain();
 		if (hot != null) {
 			sb.append(hot);
