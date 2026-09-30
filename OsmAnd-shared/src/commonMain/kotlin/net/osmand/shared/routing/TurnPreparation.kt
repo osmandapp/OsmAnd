@@ -420,12 +420,16 @@ object TurnPreparation {
 	private fun twiceRoadPresent(result: List<RouteSegmentResult>, i: Int): Boolean {
 		if (i > 0 && i < result.size - 1) {
 			val prev = result[i - 1]
-			TurnLanes.getTurnLanesString(prev) ?: return false
+			val turnLanes = TurnLanes.getTurnLanesString(prev) ?: return false
 			val curr = result[i]
 			val next = result[i + 1]
 			if (prev.getObject().getId() == curr.getObject().getId()) {
-				// check if turn lanes allowed for next segment
-				return next.getAttachedRoutes(next.getStartPointIndex()).isNotEmpty()
+				val hasAttachedRoads = next.getAttachedRoutes(next.getStartPointIndex()).isNotEmpty() // next junction
+				if (!hasAttachedRoads && i + 2 < result.size) {
+					val nextNext = result[i + 2]
+					return turnLanes == TurnLanes.getTurnLanesString(nextNext) // next after next junction
+				}
+				return hasAttachedRoads
 			} else {
 				for (attach in curr.getAttachedRoutes(curr.getStartPointIndex())) {
 					if (attach.getObject().getId() == prev.getObject().getId()) {

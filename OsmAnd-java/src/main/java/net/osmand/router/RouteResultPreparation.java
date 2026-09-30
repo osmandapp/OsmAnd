@@ -2741,8 +2741,13 @@ public class RouteResultPreparation {
 			RouteSegmentResult next = result.get(i + 1);
 			if (prev.getObject().getId() == curr.getObject().getId()) {
 				List<RouteSegmentResult> attachedRoutes = next.getAttachedRoutes(next.getStartPointIndex());
-				//check if turn lanes allowed for next segment
-				return !Algorithms.isEmpty(attachedRoutes);
+				boolean hasAttachedRoads = !Algorithms.isEmpty(attachedRoutes); // next junction
+				if (!hasAttachedRoads && i + 2 < result.size()) {
+					RouteSegmentResult nextNext = result.get(i + 2);
+					String turnLanesNextNext = getTurnLanesString(nextNext);
+					return turnLanes.equals(turnLanesNextNext); // next after next junction
+				}
+				return hasAttachedRoads;
 			} else {
 				List<RouteSegmentResult> attachedRoutes = curr.getAttachedRoutes(curr.getStartPointIndex());
 				for (RouteSegmentResult attach : attachedRoutes) {
