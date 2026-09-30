@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
 apply from: rootProject.file("versions.gradle")
 
 android {
@@ -12,9 +11,6 @@ android {
 		targetCompatibility = JavaVersion.VERSION_17
 	}
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
 
 	sourceSets {
 		main {
@@ -23,6 +19,7 @@ android {
 			jniLibs.srcDirs = ["libs"]
 			aidl.srcDirs = ["src"]
 			java.srcDirs = ["src"]
+			kotlin.srcDirs = ["src"]
 			resources.srcDirs = ["src"]
 			res.srcDirs = ["res"]
 			assets.srcDirs = ["assets"]
@@ -107,19 +104,6 @@ android {
 		aidl true
 	}
 
-	applicationVariants.configureEach {
-		def variant = it
-		def taskName = variant.name.capitalize()
-		def mergeAssetsTaskName = "merge${taskName}Assets"
-		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
-			println(osmandTask.getName())
-			osmandTask.dependsOn(collectFonts)
-		}
-		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
-		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
-			println(osmandTask.getName())
-		}
-	}
 
 }
 
@@ -157,14 +141,15 @@ tasks.register('collectExternalResources') {
 	dependsOn collectFonts
 }
 
-afterEvaluate {
-	android.applicationVariants.configureEach { variant ->
-		variant.javaCompileProvider.configure { compileTask ->
-			compileTask.dependsOn downloadPrebuiltTelegram, collectExternalResources
+androidComponents {
+	onVariants(selector().all()) { variant ->
+		def taskName = variant.name.capitalize()
+		def dependOn = { String name, Object... deps ->
+			tasks.matching { it.name == name }.configureEach { it.dependsOn(deps) }
 		}
-		variant.preBuildProvider.configure { preBuildTask ->
-			preBuildTask.dependsOn downloadPrebuiltTelegram
-		}
+		dependOn("merge${taskName}Assets", collectFonts)
+		dependOn("compile${taskName}JavaWithJavac", downloadPrebuiltTelegram, collectExternalResources)
+		dependOn("pre${taskName}Build", downloadPrebuiltTelegram)
 	}
 }
 
