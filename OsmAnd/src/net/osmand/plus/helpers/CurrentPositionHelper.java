@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class CurrentPositionHelper {
 	
@@ -45,10 +46,26 @@ public class CurrentPositionHelper {
 	private static final Log log = PlatformUtil.getLog(CurrentPositionHelper.class);
 
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+	// lookups finished and the time the address ones took; read by the memory log
+	private final AtomicInteger addressLookups = new AtomicInteger();
+	private final AtomicLong addressLookupMs = new AtomicLong();
+	private final AtomicInteger roadLookups = new AtomicInteger();
 	private final LongSparseArray<AtomicInteger> requestNumbersMap = new LongSparseArray<>();
 
 	public CurrentPositionHelper(OsmandApplication app) {
 		this.app = app;
+	}
+
+	public int getAddressLookups() {
+		return addressLookups.get();
+	}
+
+	public long getAddressLookupMs() {
+		return addressLookupMs.get();
+	}
+
+	public int getRoadLookups() {
+		return roadLookups.get();
 	}
 
 	public boolean getRouteSegment(Location loc,
@@ -170,8 +187,12 @@ public class CurrentPositionHelper {
 			return;
 		}
 
+		long startTime = System.currentTimeMillis();
 		List<GeocodingResult> gr = runUpdateInThread(loc.getLatitude(), loc.getLongitude(),
 				geoCoding != null, allowEmptyNames, appMode);
+		if (geoCoding == null) {
+			roadLookups.incrementAndGet();
+		}
 		if (storeFound) {
 			lastAskedLocation = loc;
 			lastFound = gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad();
@@ -181,6 +202,8 @@ public class CurrentPositionHelper {
 			} catch (Exception e) {
 				app.runInUIThread(() -> geoCoding.publish(null));
 			}
+			addressLookups.incrementAndGet();
+			addressLookupMs.addAndGet(System.currentTimeMillis() - startTime);
 		} else if (result != null) {
 			app.runInUIThread(() -> result.publish(gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad()));
 		}
