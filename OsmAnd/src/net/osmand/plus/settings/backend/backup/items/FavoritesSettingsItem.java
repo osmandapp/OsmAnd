@@ -200,8 +200,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
 					for (FavouritePoint point : duplicate.getPoints()) {
 						if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
-							plugin.clearParkingPosition();
-							plugin.updateParkingPoint(point);
+							plugin.applyRestoredParkingPoint(point);
 						}
 					}
 				}
