@@ -240,7 +240,6 @@ public class CurrentPositionHelper {
 		List<GeocodingResult> complete = new ArrayList<>();
 		double minBuildingDistance = 0;
 		if (res != null) {
-			List<BinaryMapIndexReader> readers = new ArrayList<>();
 			GeocodingUtilities utilities = new GeocodingUtilities();
 			for (GeocodingResult r : res) {
 				BinaryMapIndexReader foundRepo = null;
@@ -262,7 +261,6 @@ public class CurrentPositionHelper {
 				if (result.isCancelled()) {
 					break;
 				} else if (foundRepo != null) {
-					readers.add(foundRepo);
 					List<GeocodingResult> justified = null;
 					try {
 						justified = utilities.justifyReverseGeocodingSearch(r, foundRepo,
@@ -284,11 +282,6 @@ public class CurrentPositionHelper {
 				}
 			}
 			utilities.filterDuplicateRegionResults(complete);
-			try {
-				utilities.sortGeocodingResults(readers, complete);
-			} catch (IOException e) {
-				log.error("Exception happened during sorting for reverse geocoding", e);
-			}
 		}
 
 		if (result.isCancelled()) {

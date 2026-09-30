@@ -27,7 +27,6 @@ import org.apache.commons.logging.Log;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -236,10 +235,11 @@ public class GeocodingUtilities {
 		String undashed1 = s1.replace("-", " ");
 		String undashed2 = s2.replace("-", " ");
 
+		// the sort only brings both word lists to one order before equals(), plain string order is enough
 		List<String> s1words = prepareStreetName(undashed1, false);
 		List<String> s2words = prepareStreetName(undashed2, false);
-		s1words.sort(Collator.getInstance());
-		s2words.sort(Collator.getInstance());
+		Collections.sort(s1words);
+		Collections.sort(s2words);
 		if (!s1words.isEmpty() && s1words.equals(s2words)) {
 			return true;
 		}
@@ -247,8 +247,8 @@ public class GeocodingUtilities {
 		if (matchWithCommonWords) {
 			s1words = prepareStreetName(undashed1, true);
 			s2words = prepareStreetName(undashed2, true);
-			s1words.sort(Collator.getInstance());
-			s2words.sort(Collator.getInstance());
+			Collections.sort(s1words);
+			Collections.sort(s2words);
 			return !s1words.isEmpty() && s1words.equals(s2words);
 		}
 
