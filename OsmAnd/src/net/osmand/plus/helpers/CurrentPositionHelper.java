@@ -8,7 +8,6 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
@@ -25,7 +24,6 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +56,8 @@ public class CurrentPositionHelper {
 		return scheduleRouteSegmentFind(loc, false, true, cancelPreviousSearch, null, result, appMode);
 	}
 
-	public boolean getGeocodingResult(Location loc, ResultMatcher<GeocodingResult> result) {
+	// the roads near the point with their names, the first step of an address lookup
+	public boolean getGeocodingRoads(Location loc, ResultMatcher<List<GeocodingResult>> result) {
 		return scheduleRouteSegmentFind(loc, false, false, true, result, null, null);
 	}
 	
@@ -95,7 +94,7 @@ public class CurrentPositionHelper {
 	                                         boolean storeFound,
 	                                         boolean allowEmptyNames,
 	                                         boolean cancelPreviousSearch,
-	                                         @Nullable ResultMatcher<GeocodingResult> geoCoding,
+	                                         @Nullable ResultMatcher<List<GeocodingResult>> geoCoding,
 	                                         @Nullable ResultMatcher<RouteDataObject> result,
 	                                         @Nullable ApplicationMode appMode) {
 		boolean res = false;
@@ -152,7 +151,7 @@ public class CurrentPositionHelper {
 
 	// single synchronized method
 	private synchronized void processGeocoding(@NonNull Location loc,
-											   @Nullable ResultMatcher<GeocodingResult> geoCoding,
+											   @Nullable ResultMatcher<List<GeocodingResult>> geoCoding,
 											   boolean storeFound,
 											   boolean allowEmptyNames,
 											   @Nullable ResultMatcher<RouteDataObject> result,
@@ -176,11 +175,7 @@ public class CurrentPositionHelper {
 			lastAskedLocation = loc;
 			lastFound = gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad();
 		} else if (geoCoding != null) {
-			try {
-				justifyResult(gr, geoCoding);
-			} catch (Exception e) {
-				app.runInUIThread(() -> geoCoding.publish(null));
-			}
+			geoCoding.publish(gr == null ? new ArrayList<>() : gr);
 		} else if (result != null) {
 			app.runInUIThread(() -> result.publish(gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad()));
 		}
@@ -234,62 +229,6 @@ public class CurrentPositionHelper {
 			}
 		}
 		return res;
-	}
-
-	private void justifyResult(List<GeocodingResult> res, ResultMatcher<GeocodingResult> result) {
-		List<GeocodingResult> complete = new ArrayList<>();
-		double minBuildingDistance = 0;
-		if (res != null) {
-			GeocodingUtilities utilities = new GeocodingUtilities();
-			for (GeocodingResult r : res) {
-				BinaryMapIndexReader foundRepo = null;
-				List<BinaryMapReaderResource> rts  = usedReaders;
-				for (BinaryMapReaderResource rt : rts) {
-					if(rt.isClosed()) {
-						continue;
-					}
-					BinaryMapIndexReader reader = rt.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
-					if (reader != null) {
-						for (RouteRegion rb : reader.getRoutingIndexes()) {
-							if (r.regionFP == rb.getFilePointer() && r.regionLen == rb.getLength()) {
-								foundRepo = reader;
-								break;
-							}
-						}
-					}
-				}
-				if (result.isCancelled()) {
-					break;
-				} else if (foundRepo != null) {
-					List<GeocodingResult> justified = null;
-					try {
-						justified = utilities.justifyReverseGeocodingSearch(r, foundRepo,
-								minBuildingDistance, result);
-					} catch (IOException e) {
-						log.error("Exception happened during reverse geocoding", e);
-					}
-					if (justified != null && !justified.isEmpty()) {
-						double md = justified.get(0).getDistance();
-						if (minBuildingDistance == 0) {
-							minBuildingDistance = md;
-						} else {
-							minBuildingDistance = Math.min(md, minBuildingDistance);
-						}
-						complete.addAll(justified);
-					}
-				} else {
-					complete.add(r);
-				}
-			}
-			utilities.filterDuplicateRegionResults(complete);
-		}
-
-		if (result.isCancelled()) {
-			app.runInUIThread(() -> result.publish(null));
-			return;
-		}
-		GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();
-		app.runInUIThread(() -> result.publish(rts));
 	}
 
 	public static double getOrthogonalDistance(RouteDataObject r, Location loc){

@@ -2,14 +2,26 @@ package net.osmand.plus;
 
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.plus.resources.BinaryMapReaderResource;
+import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,6 +30,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class GeocodingLookupService {
+
+	private static final Log LOG = PlatformUtil.getLog(GeocodingLookupService.class);
 
 	private final OsmandApplication app;
 	private final ConcurrentLinkedQueue<LatLon> lookupLocations = new ConcurrentLinkedQueue<>();
@@ -140,55 +154,14 @@ public class GeocodingLookupService {
 		loc.setLatitude(latLon.getLatitude());
 		loc.setLongitude(latLon.getLongitude());
 		return app.getLocationProvider()
-				.getGeocodingResult(loc, new ResultMatcher<GeocodingResult>() {
+				.getGeocodingRoads(loc, new ResultMatcher<List<GeocodingResult>>() {
 
+					// called on the lookup thread of CurrentPositionHelper, or with null when the lookup
+					// was replaced by a newer one
 					@Override
-					public boolean publish(GeocodingResult object) {
-						String result = null;
-						if (object != null) {
-							OsmandSettings settings = app.getSettings();
-							String lang = settings.MAP_PREFERRED_LOCALE.get();
-							boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
-							String geocodingResult = "";
-
-							if (object.building != null) {
-								String bldName = object.building.getName(lang, transliterate);
-								if (!Algorithms.isEmpty(object.buildingInterpolation)) {
-									bldName = object.buildingInterpolation;
-								}
-								geocodingResult = object.street.getName(lang, transliterate) + " " + bldName + ", "
-										+ object.city.getName(lang, transliterate);
-							} else if (object.street != null) {
-								geocodingResult = object.street.getName(lang, transliterate) + ", " + object.city.getName(lang, transliterate);
-							} else if (object.city != null) {
-								geocodingResult = object.city.getName(lang, transliterate);
-							} else if (object.point != null) {
-								RouteDataObject rd = object.point.getRoad();
-								String sname = rd.getName(lang, transliterate);
-								if (Algorithms.isEmpty(sname)) {
-									sname = "";
-								}
-								String ref = rd.getRef(lang, transliterate, true);
-								if (!Algorithms.isEmpty(ref)) {
-									if (!Algorithms.isEmpty(sname)) {
-										sname += ", ";
-									}
-									sname += ref;
-								}
-								geocodingResult = sname;
-							}
-
-							result = geocodingResult;
-
-							double relevantDistance = object.getDistance();
-							if (!Algorithms.isEmpty(result) && relevantDistance > 100) {
-								result = app.getString(R.string.shared_string_near) + " " + result;
-							}
-						}
-
-						lastFoundAddress = result;
-						searchDone = true;
-
+					public boolean publish(List<GeocodingResult> roads) {
+						GeocodingResult address = roads == null ? null : findAddress(roads, latLon);
+						app.runInUIThread(() -> publishAddress(address));
 						return true;
 					}
 
@@ -198,6 +171,122 @@ public class GeocodingLookupService {
 					}
 
 				});
+	}
+
+	// the street, the house and the city of the roads found near the point; null when cancelled
+	@Nullable
+	private GeocodingResult findAddress(@NonNull List<GeocodingResult> roads, @NonNull LatLon latLon) {
+		ResultMatcher<GeocodingResult> cancel = new ResultMatcher<GeocodingResult>() {
+			@Override
+			public boolean publish(GeocodingResult object) {
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return !hasAnyRequest(latLon);
+			}
+		};
+		List<GeocodingResult> complete = new ArrayList<>();
+		double minBuildingDistance = 0;
+		try {
+			GeocodingUtilities utilities = new GeocodingUtilities();
+			for (GeocodingResult road : roads) {
+				if (cancel.isCancelled()) {
+					break;
+				}
+				BinaryMapIndexReader reader = findStreetReader(road);
+				if (reader == null) {
+					complete.add(road);
+					continue;
+				}
+				List<GeocodingResult> justified = null;
+				try {
+					justified = utilities.justifyReverseGeocodingSearch(road, reader, minBuildingDistance, cancel);
+				} catch (IOException e) {
+					LOG.error("Exception happened during reverse geocoding", e);
+				}
+				if (justified != null && !justified.isEmpty()) {
+					double distance = justified.get(0).getDistance();
+					minBuildingDistance = minBuildingDistance == 0 ? distance : Math.min(distance, minBuildingDistance);
+					complete.addAll(justified);
+				}
+			}
+			utilities.filterDuplicateRegionResults(complete);
+		} catch (RuntimeException e) {
+			LOG.error("Exception happened during reverse geocoding", e);
+			return null;
+		}
+		if (cancel.isCancelled()) {
+			return null;
+		}
+		return complete.isEmpty() ? new GeocodingResult() : complete.get(0);
+	}
+
+	// the map whose routing section holds the road, opened for the street lookup
+	@Nullable
+	private BinaryMapIndexReader findStreetReader(@NonNull GeocodingResult road) {
+		for (BinaryMapReaderResource resource : app.getResourceManager().getFileReaders()) {
+			if (resource.isClosed()) {
+				continue;
+			}
+			BinaryMapIndexReader reader = resource.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
+			if (reader != null) {
+				for (RouteRegion region : reader.getRoutingIndexes()) {
+					if (road.regionFP == region.getFilePointer() && road.regionLen == region.getLength()) {
+						return reader;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	private void publishAddress(@Nullable GeocodingResult object) {
+		String result = null;
+		if (object != null) {
+			OsmandSettings settings = app.getSettings();
+			String lang = settings.MAP_PREFERRED_LOCALE.get();
+			boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
+			String geocodingResult = "";
+
+			if (object.building != null) {
+				String bldName = object.building.getName(lang, transliterate);
+				if (!Algorithms.isEmpty(object.buildingInterpolation)) {
+					bldName = object.buildingInterpolation;
+				}
+				geocodingResult = object.street.getName(lang, transliterate) + " " + bldName + ", "
+						+ object.city.getName(lang, transliterate);
+			} else if (object.street != null) {
+				geocodingResult = object.street.getName(lang, transliterate) + ", " + object.city.getName(lang, transliterate);
+			} else if (object.city != null) {
+				geocodingResult = object.city.getName(lang, transliterate);
+			} else if (object.point != null) {
+				RouteDataObject rd = object.point.getRoad();
+				String sname = rd.getName(lang, transliterate);
+				if (Algorithms.isEmpty(sname)) {
+					sname = "";
+				}
+				String ref = rd.getRef(lang, transliterate, true);
+				if (!Algorithms.isEmpty(ref)) {
+					if (!Algorithms.isEmpty(sname)) {
+						sname += ", ";
+					}
+					sname += ref;
+				}
+				geocodingResult = sname;
+			}
+
+			result = geocodingResult;
+
+			double relevantDistance = object.getDistance();
+			if (!Algorithms.isEmpty(result) && relevantDistance > 100) {
+				result = app.getString(R.string.shared_string_near) + " " + result;
+			}
+		}
+
+		lastFoundAddress = result;
+		searchDone = true;
 	}
 
 	private class AddressLookupRequestsAsyncTask extends AsyncTask<AddressLookupRequest, AddressLookupRequest, Void> {
