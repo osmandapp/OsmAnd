@@ -182,7 +182,7 @@ public class MemoryLog {
 	private long previousAddressLookupsTimeMs;
 
 	// called from a background thread, at most once per SAMPLE_INTERVAL
-	public synchronized void sample(@NonNull OsmandApplication app, @NonNull StackSampler stackSampler) {
+	public synchronized void sample(@NonNull OsmandApplication app) {
 		long time = SystemClock.elapsedRealtime();
 		Runtime runtime = Runtime.getRuntime();
 		long used = runtime.totalMemory() - runtime.freeMemory();
@@ -207,7 +207,7 @@ public class MemoryLog {
 				sb.append("--- start ").append(Version.getAppVersion(app));
 				sb.append(" sdk=").append(Build.VERSION.SDK_INT).append('\n');
 			}
-			String sample = buildSample(app, stackSampler, time, used, max);
+			String sample = buildSample(app, time, used, max);
 			peakUsed = 0;
 			sb.append(sample).append('\n');
 			append(getFile(app), sb.toString());
@@ -249,7 +249,7 @@ public class MemoryLog {
 	}
 
 	@NonNull
-	private String buildSample(@NonNull OsmandApplication app, @NonNull StackSampler stackSampler, long time, long used, long max) {
+	private String buildSample(@NonNull OsmandApplication app, long time, long used, long max) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("t=").append(time / 1000);
 		sb.append(" heap=").append(mb(used)).append('/').append(mb(max));
@@ -311,10 +311,6 @@ public class MemoryLog {
 				previousAddressLookups = lookups;
 				previousAddressLookupsTimeMs = lookupsTimeMs;
 			}
-		}
-		String hot = stackSampler.drain();
-		if (hot != null) {
-			sb.append(hot);
 		}
 		String histogram = maybeCollectHistogram(app, time, used);
 		if (histogram != null) {
