@@ -10,7 +10,6 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.math.sign
 
 /**
  * Everything about turn lanes: reading `turn:lanes` off a road, working out which of them the driver
@@ -141,30 +140,43 @@ object TurnLanes {
 	fun convertNoneLanes(turnLanes: String, rs: RoadSplitStructure, currTurnLanes: String?): String {
 		val lanes = splitKeepingEmpty(turnLanes, "|")
 		var noneLanes = 0
-		val marked = BooleanArray(3) // left, through, right
+		val marked = HashSet<Int>() // turns of the marked lanes by TurnType.orderFromLeftToRight()
 		for (lane in lanes) {
 			if (isNoneLane(lane)) {
 				noneLanes++
 				continue
 			}
 			for (option in splitDroppingTrailingEmpty(lane, ";")) {
-				marked[TurnType.orderFromLeftToRight(TurnType.convertType(option)).sign + 1] = true
+				marked.add(laneOrder(option))
 			}
 		}
-		// directions of the junction not described by the marked lanes, from left to right
-		val angles = ArrayList(rs.attachedAngles)
-		angles.add(rs.currentDeviation)
-		angles.sortWith { c1, c2 -> c2.compareTo(c1) }
+		val markedLeft = marked.count { it < 0 }
+		val markedRight = marked.count { it > 0 }
+		val allAngles = ArrayList(rs.attachedAngles)
+		allAngles.add(rs.currentDeviation)
+		allAngles.sortWith { c1, c2 -> c2.compareTo(c1) }
+		// directions of the junction not described by the marked lanes, from left to right;
+		// the road straight ahead always stays: unmarked lanes next to a through lane go through too
+		val angles = ArrayList<Double>()
 		var through: Double? = null
-		if (turnLanes != currTurnLanes) {
-			through = getThroughByLanes(lanes, angles)
+		for (angle in allAngles) {
+			val order = turnOrder(angle)
+			if (order != 0 && (if (order < 0) markedLeft else markedRight) > 0) {
+				continue
+			}
+			angles.add(angle)
+			val best = through
+			if (abs(angle) <= TURN_DEGREE_MIN && (best == null || abs(angle) < abs(best))) {
+				through = angle
+			}
 		}
-		if (through == null && marked[1]) {
-			through = getThroughByOrder(angles)
-		}
-		removeMarkedAngles(marked, angles)
-		if (through == null) {
-			through = getThroughByMinAngle(angles)
+		val noneLeft = isNoneLane(lanes[0])
+		if (turnLanes != currTurnLanes && turnLanes.contains("through") && noneLeft != isNoneLane(lanes[lanes.size - 1])) {
+			// unmarked lanes on one side only: every turn marked on the other side takes a road, the next road is through
+			val byLanes = allAngles.getOrNull(if (noneLeft) allAngles.size - 1 - markedRight else markedLeft)
+			if (byLanes != null && abs(byLanes) <= TURN_DEGREE_MIN) {
+				through = byLanes
+			}
 		}
 		val straight = through
 		if (straight != null) {
@@ -204,87 +216,25 @@ object TurnLanes {
 				}
 				res.append(append)
 			} else {
-				if (!checkTurnLanesOrder(lanes, i, value)) {
+				if (!isLeftToRight(lanes, i, value)) {
 					return turnLanes
 				}
-				if (through == null) {
-					res.append(value)
-				} else if (value.contains("right")) {
-					res.append("through;").append(value)
-				} else {
-					res.append(value).append(";through")
-				}
+				res.append(if (straight == null) value else if (value.contains("right")) "through;$value" else "$value;through")
 			}
 		}
 		return res.toString()
 	}
 
-	private fun getThroughByOrder(angles: List<Double>): Double? {
-		for (a in angles) {
-			if (turnOrder(a) == 0) {
-				return a
-			}
-		}
-		return null
-	}
-
-	private fun removeMarkedAngles(marked: BooleanArray, angles: MutableList<Double>) {
-		val it = angles.iterator()
-		while (it.hasNext()) {
-			if (marked[turnOrder(it.next()).sign + 1]) {
-				it.remove()
-			}
-		}
-	}
-
-	private fun getThroughByMinAngle(angles: List<Double>): Double? {
-		var through: Double? = null
-		for (angle in angles) {
-			val best = through
-			if (abs(angle) <= TURN_DEGREE_MIN && (best == null || abs(angle) < abs(best))) {
-				through = angle
-			}
-		}
-		return through
-	}
-
-	private fun getThroughByLanes(lanes: List<String>, angles: List<Double>): Double? {
-		val noneLeft = isNoneLane(lanes[0])
-		val noneRight = isNoneLane(lanes[lanes.size - 1])
-		if (!lanes.joinToString("|").contains("through") || noneLeft == noneRight) {
-			return null
-		}
-		val turns = HashSet<Int>()
-		for (lane in lanes) {
-			if (!isNoneLane(lane)) {
-				for (option in splitDroppingTrailingEmpty(lane, ";")) {
-					val order = TurnType.orderFromLeftToRight(TurnType.convertType(option))
-					if (if (noneLeft) order > 0 else order < 0) {
-						turns.add(order)
-					}
-				}
-			}
-		}
-		// from the right when the unmarked lanes are on the left, from the left otherwise
-		val sorted = if (noneLeft) angles.sorted() else angles.sortedDescending()
-		val through = if (turns.size < sorted.size) sorted[turns.size] else null
-		return if (through == null || abs(through) > TURN_DEGREE_MIN) null else through
-	}
-
-	private fun checkTurnLanesOrder(lanes: List<String>, i: Int, value: String): Boolean {
-		for (option in splitDroppingTrailingEmpty(value, ";")) {
-			val order = TurnType.orderFromLeftToRight(TurnType.convertType(option))
-			for (j in lanes.indices) {
-				if (isNoneLane(lanes[j])) {
+	/** Turns given to the unmarked lane i have to keep the left to right order with the marked lanes. */
+	private fun isLeftToRight(lanes: List<String>, i: Int, value: String): Boolean {
+		for (j in lanes.indices) {
+			for (marked in splitDroppingTrailingEmpty(lanes[j], ";")) {
+				// a lane that ends by merging says nothing about where the other lanes turn
+				if (isNoneLane(lanes[j]) || marked.startsWith("merge_to_")) {
 					continue
 				}
-				for (m in splitDroppingTrailingEmpty(lanes[j], ";")) {
-					if (isMergeLane(m)) {
-						// a lane that ends by merging says nothing about where the other lanes turn
-						continue
-					}
-					val other = TurnType.orderFromLeftToRight(TurnType.convertType(m))
-					if (if (j < i) other > order else other < order) {
+				for (option in splitDroppingTrailingEmpty(value, ";")) {
+					if (if (j < i) laneOrder(marked) > laneOrder(option) else laneOrder(marked) < laneOrder(option)) {
 						return false
 					}
 				}
@@ -293,16 +243,16 @@ object TurnLanes {
 		return true
 	}
 
+	private fun laneOrder(option: String): Int {
+		return TurnType.orderFromLeftToRight(TurnType.convertType(option))
+	}
+
 	private fun turnOrder(angle: Double): Int {
 		return TurnType.orderFromLeftToRight(getTurnByAngle(angle))
 	}
 
 	private fun isNoneLane(lane: String): Boolean {
 		return lane.isEmpty() || "none" == lane
-	}
-
-	private fun isMergeLane(lane: String): Boolean {
-		return "merge_to_left" == lane || "merge_to_right" == lane
 	}
 
 	private fun hasNoneLane(turnLanes: String?): Boolean {

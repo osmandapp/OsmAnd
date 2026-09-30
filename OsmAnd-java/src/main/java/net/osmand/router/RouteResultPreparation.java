@@ -2617,30 +2617,41 @@ public class RouteResultPreparation {
 	protected String convertNoneLanes(String turnLanes, RoadSplitStructure rs, String currTurnLanes) {
 		String[] lanes = turnLanes.split("\\|", -1);
 		int noneLanes = 0;
-		boolean[] marked = new boolean[3]; // left, through, right
+		TreeSet<Integer> marked = new TreeSet<>(); // turns of the marked lanes by TurnType.orderFromLeftToRight()
 		for (String lane : lanes) {
 			if (isNoneLane(lane)) {
 				noneLanes++;
 				continue;
 			}
 			for (String option : lane.split(";")) {
-				marked[Integer.signum(TurnType.orderFromLeftToRight(TurnType.convertType(option))) + 1] = true;
+				marked.add(laneOrder(option));
 			}
 		}
-		// directions of the junction not described by the marked lanes, from left to right
-		List<Double> angles = new ArrayList<>(rs.attachedAngles);
-		angles.add(rs.currentDeviation);
-		Collections.sort(angles, Collections.<Double>reverseOrder());
+		Set<Integer> markedLeft = marked.headSet(0), markedRight = marked.tailSet(1);
+		List<Double> allAngles = new ArrayList<>(rs.attachedAngles);
+		allAngles.add(rs.currentDeviation);
+		Collections.sort(allAngles, Collections.<Double>reverseOrder());
+		// directions of the junction not described by the marked lanes, from left to right;
+		// the road straight ahead always stays: unmarked lanes next to a through lane go through too
+		List<Double> angles = new ArrayList<>();
 		Double through = null;
-		if (!turnLanes.equals(currTurnLanes)) {
-			through = getThroughByLanes(lanes, angles);
+		for (Double angle : allAngles) {
+			int order = turnOrder(angle);
+			if (order != 0 && !(order < 0 ? markedLeft : markedRight).isEmpty()) {
+				continue;
+			}
+			angles.add(angle);
+			if (Math.abs(angle) <= TURN_DEGREE_MIN && (through == null || Math.abs(angle) < Math.abs(through))) {
+				through = angle;
+			}
 		}
-		if (through == null && marked[1]) {
-			through = getThroughByOrder(angles);
-		}
-		removeMarkedAngles(marked, angles);
-		if (through == null) {
-			through = getThroughByMinAngle(angles);
+		boolean noneLeft = isNoneLane(lanes[0]);
+		if (!turnLanes.equals(currTurnLanes) && turnLanes.contains("through") && noneLeft != isNoneLane(lanes[lanes.length - 1])) {
+			// unmarked lanes on one side only: every turn marked on the other side takes a road, the next road is through
+			int ind = noneLeft ? allAngles.size() - 1 - markedRight.size() : markedLeft.size();
+			if (ind >= 0 && ind < allAngles.size() && Math.abs(allAngles.get(ind)) <= TURN_DEGREE_MIN) {
+				through = allAngles.get(ind);
+			}
 		}
 		angles.remove(through);
 		// the outermost unmarked lanes take the outermost directions, extra ones are stacked
@@ -2675,85 +2686,26 @@ public class RouteResultPreparation {
 				res.append(append);
 				k++;
 			} else {
-				if (!checkTurnLanesOrder(lanes, i, noneValues[k])) {
+				String value = noneValues[k++];
+				if (!isLeftToRight(lanes, i, value)) {
 					return turnLanes;
 				}
-				String value = noneValues[k++];
-				if (through == null) {
-					res.append(value);
-				} else if (value.contains("right")) {
-					res.append("through;").append(value);
-				} else {
-					res.append(value).append(";through");
-				}
+				res.append(through == null ? value : value.contains("right") ? "through;" + value : value + ";through");
 			}
 		}
 		return res.toString();
 	}
 
-	private Double getThroughByOrder(List<Double> angles) {
-		for (Double a : angles) {
-			if (turnOrder(a) == 0) {
-				return a;
-			}
-		}
-		return null;
-	}
-
-	private Double getThroughByMinAngle(List<Double> angles) {
-		Double through = null;
-		for (Double angle : angles) {
-			if (Math.abs(angle) <= TURN_DEGREE_MIN && (through == null || Math.abs(angle) < Math.abs(through))) {
-				through = angle;
-			}
-		}
-		return through;
-	}
-
-	private Double getThroughByLanes(String[] lanes, List<Double> angles) {
-		boolean noneLeft = isNoneLane(lanes[0]), noneRight = isNoneLane(lanes[lanes.length - 1]);
-		if (!String.join("|", lanes).contains("through") || noneLeft == noneRight) {
-			return null;
-		}
-		Set<Integer> turns = new TreeSet<>();
-		for (String lane : lanes) {
-			if (!isNoneLane(lane)) {
-				for (String option : lane.split(";")) {
-					int order = TurnType.orderFromLeftToRight(TurnType.convertType(option));
-					if (noneLeft ? order > 0 : order < 0) {
-						turns.add(order);
-					}
-				}
-			}
-		}
-		List<Double> sorted = new ArrayList<>(angles);
-		Collections.sort(sorted, noneLeft ? Comparator.<Double>naturalOrder() : Collections.<Double>reverseOrder());
-		Double through = turns.size() < sorted.size() ? sorted.get(turns.size()) : null;
-		return through == null || Math.abs(through) > TURN_DEGREE_MIN ? null : through;
-	}
-
-	private void removeMarkedAngles(boolean[] marked, List<Double> angles) {
-		for (Iterator<Double> it = angles.iterator(); it.hasNext(); ) {
-			if (marked[Integer.signum(turnOrder(it.next())) + 1]) {
-				it.remove();
-			}
-		}
-	}
-
-	private static boolean checkTurnLanesOrder(String[] lanes, int i, String value) {
-		for (String option : value.split(";")) {
-			int order = TurnType.orderFromLeftToRight(TurnType.convertType(option));
-			for (int j = 0; j < lanes.length; j++) {
-				if (isNoneLane(lanes[j])) {
+	/** Turns given to the unmarked lane i have to keep the left to right order with the marked lanes. */
+	private static boolean isLeftToRight(String[] lanes, int i, String value) {
+		for (int j = 0; j < lanes.length; j++) {
+			for (String marked : lanes[j].split(";")) {
+				// a lane that ends by merging says nothing about where the other lanes turn
+				if (isNoneLane(lanes[j]) || marked.startsWith("merge_to_")) {
 					continue;
 				}
-				for (String m : lanes[j].split(";")) {
-					if (isMergeLane(m)) {
-						// a lane that ends by merging says nothing about where the other lanes turn
-						continue;
-					}
-					int other = TurnType.orderFromLeftToRight(TurnType.convertType(m));
-					if (j < i ? other > order : other < order) {
+				for (String option : value.split(";")) {
+					if (j < i ? laneOrder(marked) > laneOrder(option) : laneOrder(marked) < laneOrder(option)) {
 						return false;
 					}
 				}
@@ -2762,16 +2714,16 @@ public class RouteResultPreparation {
 		return true;
 	}
 
+	private static int laneOrder(String option) {
+		return TurnType.orderFromLeftToRight(TurnType.convertType(option));
+	}
+
 	private int turnOrder(double angle) {
 		return TurnType.orderFromLeftToRight(getTurnByAngle(angle));
 	}
 
 	private static boolean isNoneLane(String lane) {
 		return lane.isEmpty() || "none".equals(lane);
-	}
-
-	private static boolean isMergeLane(String lane) {
-		return "merge_to_left".equals(lane) || "merge_to_right".equals(lane);
 	}
 
 	private static boolean hasNoneLane(String turnLanes) {
