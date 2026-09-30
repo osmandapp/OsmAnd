@@ -124,7 +124,7 @@
     <string name="traffic_warning_pedestrian">Пешачки прелаз</string>
     <string name="show_pedestrian_warnings">Пешачки прелази</string>
     <string name="map_locale">Језик карте</string>
-    <string name="navigate_point_zone">Област</string>
+    <string name="navigate_point_zone">Зона</string>
     <string name="download_tab_updates">Надградње</string>
     <string name="download_tab_local">Местно</string>
     <string name="no_internet_connection">Нема интернет везе</string>
@@ -5432,4 +5432,5 @@
     <string name="opening_hours_school_holiday">Школски распусти</string>
     <string name="opening_hours_easter">Ускрс</string>
     <string name="release_5_4">• Освежен интерфејс за претрагу: сортирање, филтери по категоријама, прегледнији изглед\n\n • Додавање фотографија и медијских садржаја у Омиљене\n\n • Омиљене ставке: подршка за подгрупе и могућност фиксирања фасцикли\n\n • Координате: претрага, мрежа на мапи и приказ ТОИ сада подржава ЕПСГ и Мејденхед локатор\n\n • Исправљени прекиди у навигацији; пребацивање између стандардног и брзог рутирања\n\n • Подешавање размере мапе за Андриод Ауто независно од телефона\n\n • Нова просторна претрага — проналажење места и претрага у околини одређеног места\n\n • Астрономија: додате информације о помрачењима Сунца и Месеца</string>
+    <string name="city_type_boundary">Кварт</string>
 </resources>
