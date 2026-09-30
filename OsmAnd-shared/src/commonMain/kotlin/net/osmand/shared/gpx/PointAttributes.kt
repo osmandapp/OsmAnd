@@ -234,6 +234,7 @@ class PointAttributes(
 	fun hasValidValue(tag: String): Boolean {
 		val value = getAttributeValue(tag)
 		return when (tag) {
+			POINT_SPEED -> value >= 0f
 			SENSOR_TAG_TEMPERATURE,
 			SENSOR_TAG_TEMPERATURE_W,
 			SENSOR_TAG_TEMPERATURE_A,
