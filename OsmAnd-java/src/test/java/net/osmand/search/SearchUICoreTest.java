@@ -251,7 +251,7 @@ public class SearchUICoreTest {
 		List<GeocodingResult> geoResult = geoUtils.reverseGeocodingSearch(
 				geoCtx, searchResult.location.getLatitude(), searchResult.location.getLongitude(), false);
 
-		geoResult = geoUtils.sortGeocodingResults(Collections.singletonList(reader), geoResult);
+		geoResult = geoUtils.findAddresses(Collections.singletonList(reader), geoResult);
 
 		Assert.assertFalse(geoResult.isEmpty());
 

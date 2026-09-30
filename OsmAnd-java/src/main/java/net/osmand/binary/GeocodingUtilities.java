@@ -27,7 +27,6 @@ import org.apache.commons.logging.Log;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -90,7 +89,7 @@ public class GeocodingUtilities {
 		public long regionLen;
 		public RouteSegmentPoint point;
 		public String streetName;
-		// justification
+		// 2nd step, findStreetAndBuildings: the street, the building and the city
 		public Building building;
 		public String buildingInterpolation;
 		public Street street;
@@ -240,10 +239,11 @@ public class GeocodingUtilities {
 		String undashed1 = s1.replace("-", " ");
 		String undashed2 = s2.replace("-", " ");
 
+		// the sort only brings both word lists to one order before equals(), plain string order is enough
 		List<String> s1words = prepareStreetName(undashed1, false);
 		List<String> s2words = prepareStreetName(undashed2, false);
-		s1words.sort(Collator.getInstance());
-		s2words.sort(Collator.getInstance());
+		Collections.sort(s1words);
+		Collections.sort(s2words);
 		if (!s1words.isEmpty() && s1words.equals(s2words)) {
 			return true;
 		}
@@ -251,15 +251,18 @@ public class GeocodingUtilities {
 		if (matchWithCommonWords) {
 			s1words = prepareStreetName(undashed1, true);
 			s2words = prepareStreetName(undashed2, true);
-			s1words.sort(Collator.getInstance());
-			s2words.sort(Collator.getInstance());
+			Collections.sort(s1words);
+			Collections.sort(s2words);
 			return !s1words.isEmpty() && s1words.equals(s2words);
 		}
 
 		return false;
 	}
 
-	public List<GeocodingResult> justifyReverseGeocodingSearch(final GeocodingResult road, BinaryMapIndexReader reader,
+	// the street with the name of the road in the address index and the buildings on it within
+	// DISTANCE_BUILDING_PROXIMITY of the point: buildings first, the street after them, the road
+	// itself when no street matches
+	public List<GeocodingResult> findStreetAndBuildings(final GeocodingResult road, BinaryMapIndexReader reader,
 			double knownMinBuildingDistance, final ResultMatcher<GeocodingResult> result) throws IOException {
 		final List<GeocodingResult> streetsList = new ArrayList<GeocodingResult>();
 
@@ -450,10 +453,21 @@ public class GeocodingUtilities {
 		return ctx;
 	}
 
-	public List<GeocodingResult> sortGeocodingResults(List<BinaryMapIndexReader> list, List<GeocodingResult> res) throws IOException {
+	public List<GeocodingResult> findAddresses(List<BinaryMapIndexReader> list, List<GeocodingResult> res) throws IOException {
+		return findAddresses(list, res, null);
+	}
+
+	// the addresses of the roads found by reverseGeocodingSearch: the street and the buildings of
+	// every road, duplicates from neighbouring maps and buildings far behind the nearest dropped,
+	// nearest first; stops early when the matcher is cancelled
+	public List<GeocodingResult> findAddresses(List<BinaryMapIndexReader> list, List<GeocodingResult> res,
+			ResultMatcher<GeocodingResult> cancel) throws IOException {
 		List<GeocodingResult> complete = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		double minBuildingDistance = 0;
 		for (GeocodingResult r : res) {
+			if (cancel != null && cancel.isCancelled()) {
+				break;
+			}
 			BinaryMapIndexReader reader = null;
 			for (BinaryMapIndexReader b : list) {
 				for (RouteRegion rb : b.getRoutingIndexes()) {
@@ -468,16 +482,16 @@ public class GeocodingUtilities {
 				}
 			}
 			if (reader != null) {
-				List<GeocodingResult> justified = justifyReverseGeocodingSearch(r, reader, minBuildingDistance, null);
-				if (!justified.isEmpty()) {
-					double md = justified.get(0).getDistance();
+				List<GeocodingResult> streetAndBuildings = findStreetAndBuildings(r, reader, minBuildingDistance, cancel);
+				if (!streetAndBuildings.isEmpty()) {
+					double md = streetAndBuildings.get(0).getDistance();
 					if (minBuildingDistance == 0) {
 						minBuildingDistance = md;
 					} else {
 						minBuildingDistance = Math.min(md, minBuildingDistance);
 					}
-					justified.get(0).dist = -1;//clear intermediate cached distance
-					complete.addAll(justified);
+					streetAndBuildings.get(0).dist = -1;//clear intermediate cached distance
+					complete.addAll(streetAndBuildings);
 				}
 			} else {
 				complete.add(r);
