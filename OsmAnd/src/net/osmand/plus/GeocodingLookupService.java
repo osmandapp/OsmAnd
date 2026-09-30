@@ -224,9 +224,9 @@ public class GeocodingLookupService {
 				}
 			}
 		}
-		List<GeocodingResult> sorted;
+		List<GeocodingResult> addresses;
 		try {
-			sorted = new GeocodingUtilities().sortGeocodingResults(readers, roads, cancel);
+			addresses = new GeocodingUtilities().findAddresses(readers, roads, cancel);
 		} catch (IOException | RuntimeException e) {
 			LOG.error("Exception happened during reverse geocoding", e);
 			return null;
@@ -234,7 +234,7 @@ public class GeocodingLookupService {
 		if (cancel.isCancelled()) {
 			return null;
 		}
-		return sorted.isEmpty() ? new GeocodingResult() : sorted.get(0);
+		return addresses.isEmpty() ? new GeocodingResult() : addresses.get(0);
 	}
 
 	// the roads near the point, nearest first, passed to the callback on the lookup thread; null when a

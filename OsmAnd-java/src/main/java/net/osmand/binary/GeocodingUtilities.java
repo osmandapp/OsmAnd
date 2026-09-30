@@ -255,7 +255,10 @@ public class GeocodingUtilities {
 		return false;
 	}
 
-	public List<GeocodingResult> justifyReverseGeocodingSearch(final GeocodingResult road, BinaryMapIndexReader reader,
+	// the street with the name of the road in the address index and the buildings on it within
+	// DISTANCE_BUILDING_PROXIMITY of the point: buildings first, the street after them, the road
+	// itself when no street matches
+	public List<GeocodingResult> findStreetAndBuildings(final GeocodingResult road, BinaryMapIndexReader reader,
 			double knownMinBuildingDistance, final ResultMatcher<GeocodingResult> result) throws IOException {
 		final List<GeocodingResult> streetsList = new ArrayList<GeocodingResult>();
 
@@ -446,13 +449,14 @@ public class GeocodingUtilities {
 		return ctx;
 	}
 
-	public List<GeocodingResult> sortGeocodingResults(List<BinaryMapIndexReader> list, List<GeocodingResult> res) throws IOException {
-		return sortGeocodingResults(list, res, null);
+	public List<GeocodingResult> findAddresses(List<BinaryMapIndexReader> list, List<GeocodingResult> res) throws IOException {
+		return findAddresses(list, res, null);
 	}
 
-	// finds the street and the houses of every road, drops duplicates and far houses, nearest first;
-	// stops early when the matcher is cancelled
-	public List<GeocodingResult> sortGeocodingResults(List<BinaryMapIndexReader> list, List<GeocodingResult> res,
+	// the addresses of the roads found by reverseGeocodingSearch: the street and the buildings of
+	// every road, duplicates from neighbouring maps and buildings far behind the nearest dropped,
+	// nearest first; stops early when the matcher is cancelled
+	public List<GeocodingResult> findAddresses(List<BinaryMapIndexReader> list, List<GeocodingResult> res,
 			ResultMatcher<GeocodingResult> cancel) throws IOException {
 		List<GeocodingResult> complete = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		double minBuildingDistance = 0;
@@ -474,7 +478,7 @@ public class GeocodingUtilities {
 				}
 			}
 			if (reader != null) {
-				List<GeocodingResult> justified = justifyReverseGeocodingSearch(r, reader, minBuildingDistance, cancel);
+				List<GeocodingResult> justified = findStreetAndBuildings(r, reader, minBuildingDistance, cancel);
 				if (!justified.isEmpty()) {
 					double md = justified.get(0).getDistance();
 					if (minBuildingDistance == 0) {
