@@ -5360,7 +5360,7 @@
     <string name="ais_cpa_on_desc">Affiche en rouge les navires dont le passage est prévu dans un rayon de %1$s autour de votre position et dans moins de %2$s.</string>
     <string name="ais_cpa_warning_time_desc">Affiche en rouge les navires %1$s avant la distance de sécurité.</string>
     <string name="ais_cpa_safe_distance_desc">Affiche en rouge les navires dont la route est prévue à moins de %1$s de votre position.</string>
-    <string name="contour_label_direction_descr">En montée : l\'altitude, indiquée sur les courbes de niveau, est orientée afin d\'être lue lors de l\'ascension vers le sommet (comme sur les cartes papier). Les petites hachures des barres rocheuses pointent vers le bas de la pente.</string>
+    <string name="contour_label_direction_descr">En montée : l\'altitude sur les courbes de niveau est orientée dans le sens de lecture vers les sommets (comme sur les cartes papier). Les petites hachures des barres rocheuses pointent vers le bas de la pente.</string>
     <string name="rendering_value_upright_name">Droit pour l’œil</string>
     <string name="ais_objects_visibility_desc">Paramétrer quand les navires sans signal seront barrés puis retirés de la carte.</string>
 </resources>
