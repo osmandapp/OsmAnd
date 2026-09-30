@@ -5361,4 +5361,5 @@
     <string name="opening_hours_public_holiday">Munkaszüneti napok</string>
     <string name="opening_hours_school_holiday">Iskolai szünetek</string>
     <string name="opening_hours_easter">Húsvét</string>
+    <string name="city_type_boundary">Terület</string>
 </resources>
