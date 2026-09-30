@@ -5363,4 +5363,5 @@
     <string name="contour_label_direction_descr">En montée : l\'altitude sur les courbes de niveau est orientée dans le sens de lecture vers les sommets (comme sur les cartes papier). Les petites hachures des barres rocheuses pointent vers le bas de la pente.</string>
     <string name="rendering_value_upright_name">Droit pour l’œil</string>
     <string name="ais_objects_visibility_desc">Paramétrer quand les navires sans signal seront barrés puis retirés de la carte.</string>
+    <string name="city_type_boundary">Zone</string>
 </resources>
