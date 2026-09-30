@@ -53,6 +53,7 @@ import net.osmand.plus.plugins.externalsensors.devices.ble.BLEHeartRateDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLERunningSCDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLETemperatureDevice;
+import net.osmand.plus.plugins.externalsensors.devices.ble.BLETpmsDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
@@ -97,6 +98,7 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 	private boolean installAntPluginAsked;
 	protected BluetoothAdapter bluetoothAdapter;
 	private BluetoothLeScanner bleScanner;
+	private TpmsScanner tpmsScanner;
 
 	protected DevicesHelper(@NonNull OsmandApplication app, @NonNull CommonPreferenceProvider<String> preferenceProvider) {
 		init(app, preferenceProvider);
@@ -105,6 +107,22 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 	private void init(@NonNull OsmandApplication app, @NonNull CommonPreferenceProvider<String> preferenceProvider) {
 		this.app = app;
 		this.devicesSettingsCollection = new DevicesSettingsCollection(preferenceProvider);
+		this.tpmsScanner = new TpmsScanner(app, this::getTpmsDevices);
+	}
+
+	@NonNull
+	private List<BLETpmsDevice> getTpmsDevices() {
+		List<BLETpmsDevice> res = new ArrayList<>();
+		for (AbstractDevice<?> device : devices.values()) {
+			if (device instanceof BLETpmsDevice tpmsDevice) {
+				res.add(tpmsDevice);
+			}
+		}
+		return res;
+	}
+
+	public void setMapVisible(boolean visible) {
+		tpmsScanner.setMapVisible(visible);
 	}
 
 	public void setActivity(@Nullable Activity activity) {
@@ -131,9 +149,11 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 		} else {
 			bleScanner = bluetoothAdapter.getBluetoothLeScanner();
 		}
+		tpmsScanner.setAdapter(bluetoothAdapter);
 	}
 
 	public void deinitBLE() {
+		tpmsScanner.setAdapter(null);
 		try {
 			if (bluetoothAdapter != null) {
 				if (bleScanner != null && bluetoothAdapter.isEnabled()) {
@@ -202,6 +222,8 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 					bluetoothAdapter != null ? new BLEBikePowerDevice(bluetoothAdapter, deviceId) : null;
 			case BLE_RUNNING_SCDS ->
 					bluetoothAdapter != null ? new BLERunningSCDDevice(bluetoothAdapter, deviceId) : null;
+			case BLE_TPMS ->
+					bluetoothAdapter != null ? new BLETpmsDevice(bluetoothAdapter, deviceId) : null;
 			default -> null;
 		};
 	}
@@ -251,17 +273,21 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 				DevicesSettingsCollection.DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(address);
 				String deviceName;
 				deviceName = settings == null ? result.getDevice().getName() : settings.getParams().get(NAME);
+				BLEAbstractDevice device = null;
 				List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 				if (uuids != null) {
 					for (ParcelUuid uuid : uuids) {
-						BLEAbstractDevice device = createBLEDevice(result, uuid, address, deviceName);
+						device = createBLEDevice(result, uuid, address, deviceName);
 						if (device != null) {
-							if (!devices.containsKey(device.getDeviceId())) {
-								addFoundBLEDevice(device);
-							}
 							break;
 						}
 					}
+				}
+				if (device == null && bluetoothAdapter != null) {
+					device = BLETpmsDevice.createDevice(bluetoothAdapter, scanRecord, address, deviceName, result.getRssi());
+				}
+				if (device != null && !devices.containsKey(device.getDeviceId())) {
+					addFoundBLEDevice(device);
 				}
 			}
 		}
@@ -300,6 +326,9 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 	public void connectDevice(@Nullable Activity activity, @NonNull AbstractDevice<?> device) {
 		device.addListener(this);
 		device.connect(app, activity);
+		if (device instanceof BLETpmsDevice) {
+			tpmsScanner.update();
+		}
 	}
 
 	public void disconnectDevice(@NonNull AbstractDevice<?> device) {
@@ -310,6 +339,9 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 		device.removeListener(this);
 		if (device.disconnect() && notify) {
 			onDeviceDisconnect(device);
+		}
+		if (device instanceof BLETpmsDevice) {
+			tpmsScanner.update();
 		}
 	}
 
