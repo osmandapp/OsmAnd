@@ -1,13 +1,15 @@
 package net.osmand.plus.notifications;
 
-import android.annotation.TargetApi;
 import android.app.Notification;
+import android.os.Build;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -215,27 +217,25 @@ public class NotificationHelper {
 		}
 	}
 
-	@TargetApi(26)
+	@RequiresApi(api = Build.VERSION_CODES.O)
 	public void createNotificationChannel() {
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-			NotificationManagerCompat manager = NotificationManagerCompat.from(app);
+		NotificationManagerCompat manager = NotificationManagerCompat.from(app);
 
-			NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANEL_ID,
-					app.getString(R.string.osmand_service), NotificationManager.IMPORTANCE_LOW);
-			channel.enableVibration(false);
-			channel.setDescription(app.getString(R.string.osmand_service_descr));
-			manager.createNotificationChannel(channel);
+		NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANEL_ID,
+				app.getString(R.string.osmand_service), NotificationManager.IMPORTANCE_LOW);
+		channel.enableVibration(false);
+		channel.setDescription(app.getString(R.string.osmand_service_descr));
+		manager.createNotificationChannel(channel);
 
-			// A watch bridge asks whether a notification alerts, and on O+ the channel's
-			// importance answers. Under DEFAULT the Wear companion drops it outright:
-			// "filtered for reasons: [SILENT_NOTIFICATION], action: SKIP". Sound and vibration
-			// are separate knobs, so this stays quiet on the phone while passing that filter.
-			NotificationChannel navChannel = new NotificationChannel(NOTIFICATION_CHANNEL_NAVIGATION_ID,
-					app.getString(R.string.shared_string_navigation), NotificationManager.IMPORTANCE_DEFAULT);
-			navChannel.enableVibration(false);
-			navChannel.setSound(null, null);
-			navChannel.setDescription(app.getString(R.string.osmand_service_descr));
-			manager.createNotificationChannel(navChannel);
-		}
+		// A watch bridge asks whether a notification alerts, and on O+ the channel's
+		// importance answers. Under DEFAULT the Wear companion drops it outright:
+		// "filtered for reasons: [SILENT_NOTIFICATION], action: SKIP". Sound and vibration
+		// are separate knobs, so this stays quiet on the phone while passing that filter.
+		NotificationChannel navChannel = new NotificationChannel(NOTIFICATION_CHANNEL_NAVIGATION_ID,
+				app.getString(R.string.shared_string_navigation), NotificationManager.IMPORTANCE_DEFAULT);
+		navChannel.enableVibration(false);
+		navChannel.setSound(null, null);
+		navChannel.setDescription(app.getString(R.string.osmand_service_descr));
+		manager.createNotificationChannel(navChannel);
 	}
 }

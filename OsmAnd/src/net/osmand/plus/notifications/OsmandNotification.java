@@ -60,6 +60,9 @@ public abstract class OsmandNotification {
 	 * re-posted for. Null falls back to any visible change in its title or text.
 	 */
 	protected String wearableUpdateKey;
+	/** Extra diagnostics for the wearable log line; not part of the update decision. */
+	protected String wearableUpdateDetail;
+	private int wearableSkipped;
 	protected boolean stateChanged;
 
 	private final NotificationManagerCompat notificationManager;
@@ -115,7 +118,11 @@ public abstract class OsmandNotification {
 				.setVisibility(androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
 //				.setLocalOnly(true) // Probably should be deleted to not limit notifications
-				.setOnlyAlertOnce(true) // Many devices still don't treat that flag correct and keep spamming
+				// The phone copy alerts once and then updates quietly. The wearable copy is
+				// allowed to alert again: it is posted only when the manoeuvre band changes, and
+				// a watch that does not re-alert never lights its screen for the new instruction.
+//				.setOnlyAlertOnce(true)
+				.setOnlyAlertOnce(!wearable)
 				.setOngoing(ongoing && !wearable)
 				.setContentIntent(contentPendingIntent)
 				.setDeleteIntent(NotificationDismissReceiver.createIntent(app, getType()))
@@ -168,13 +175,23 @@ public abstract class OsmandNotification {
 					? wearableUpdateKey : getWearableContent(wearNotification);
 			android.util.Log.d("Corwin", "notifyWearable: try to notify");
 			if (!stateChanged && content != null && Algorithms.objectEquals(content, lastWearableContent)) {
+				wearableSkipped++;
 				return;
 			}
+			String previous = lastWearableContent;
+			String reason = previous == null ? "first post"
+					: stateChanged ? "state changed" : "key changed";
 			lastWearableContent = content;
 			if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
 				notificationManager.cancel(getOsmandWearableNotificationId());
 			}
-			android.util.Log.d("Corwin", "notifyWearable: actually notify");
+			android.util.Log.d("Corwin", "notifyWearable: actually notify"
+					+ " | why=" + reason
+					+ " | skipped=" + wearableSkipped
+					+ " | " + wearableUpdateDetail
+					+ "\n  key: " + previous + "  ->  " + content
+					+ "\n  text: " + getWearableContent(wearNotification));
+			wearableSkipped = 0;
 			notifySafely(notificationManager, wearNotification, getOsmandWearableNotificationId());
 		}
 	}

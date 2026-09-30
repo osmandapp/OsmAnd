@@ -129,6 +129,7 @@ public class NavigationNotification extends OsmandNotification {
 			band = 4;
 		}
 		String street = direction == null ? "" : direction.getDescriptionRoutePart(app);
+		wearableUpdateDetail = "dist=" + distanceToTurn + "m speed=" + Math.round(speed * 3.6f) + "km/h band=" + band;
 		return band + "|" + (turnType == null ? "" : turnType.toString()) + "|" + street;
 	}
 
