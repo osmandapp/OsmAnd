@@ -255,6 +255,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float scrollDistanceX;
 	private float scrollDistanceY;
 	private boolean touchActive;
+	private final MapPanDiagnostics panDiagnostics = new MapPanDiagnostics();
+
+	@NonNull
+	public MapPanDiagnostics getPanDiagnostics() {
+		return panDiagnostics;
+	}
 
 	public OsmandMapTileView(@NonNull Context ctx, int width, int height) {
 		this.ctx = ctx;
@@ -2007,6 +2013,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			PointI touchPosition = new PointI((int) touchPointX, (int) touchPointY);
 			PointI touchLocation31 = mapRenderer.getTarget();
 			float height = mapRenderer.getHeightAndLocationFromElevatedPoint(touchPosition, touchLocation31);
+			panDiagnostics.onAnchorResolved(height > NativeUtilities.MIN_ALTITUDE_VALUE);
 			firstTouchLocationX = touchLocation31.getX();
 			firstTouchLocationY = touchLocation31.getY();
 			firstTouchLocationHeight = height > NativeUtilities.MIN_ALTITUDE_VALUE ? height : 0.0f;
@@ -2026,6 +2033,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
+		panDiagnostics.onMapTouch(event, this);
 		if (mapRenderer != null) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				mapRenderer.suspendSymbolsUpdate();
@@ -2049,6 +2057,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 		if (twoFingersTapDetector != null && twoFingersTapDetector.onTouchEvent(event)) {
+			panDiagnostics.onCallback(event, "twoFingerTap");
 			ContextMenuLayer contextMenuLayer = getLayerByClass(ContextMenuLayer.class);
 			if (contextMenuLayer != null) {
 				contextMenuLayer.onTouchEvent(event, getCurrentRotatedTileBox());
@@ -2120,6 +2129,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				layers.get(i).onTouchEvent(event, getCurrentRotatedTileBox());
 			}
 		}
+		panDiagnostics.onDetectorInput(event, gestureDetector != null && doubleTapScaleDetector != null,
+				doubleTapScaleDetector != null && doubleTapScaleDetector.isInZoomMode(),
+				doubleTapScaleDetector != null && doubleTapScaleDetector.isDoubleTapping(),
+				multiTouchSupport != null && multiTouchSupport.isInTiltMode(),
+				multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode());
 		if (doubleTapScaleDetector != null && !doubleTapScaleDetector.isInZoomMode()
 				&& !doubleTapScaleDetector.isDoubleTapping() && gestureDetector != null) {
 			gestureDetector.onTouchEvent(event);
@@ -2632,6 +2646,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private class MapTileViewOnGestureListener extends SimpleOnGestureListener {
 		@Override
 		public boolean onDown(MotionEvent e) {
+			panDiagnostics.onCallback(e, "down");
 			MapRendererView mapRenderer = getMapRenderer();
 			MapAnimator animator = mapRenderer != null ? mapRenderer.getMapAnimator() : null;
 			if (animator != null) {
@@ -2645,6 +2660,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			panDiagnostics.onCallback(e1, "fling");
 			if (e1 != null) {
 				animatedDraggingThread.startDragging(velocityX / 3, velocityY / 3,
 						e1.getX() + scrollDistanceX, e1.getY() + scrollDistanceY,
@@ -2655,6 +2671,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onLongPress(MotionEvent e) {
+			panDiagnostics.onCallback(e, "longPress");
 			if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()
 					|| doubleTapScaleDetector != null && doubleTapScaleDetector.isInZoomMode()
 					|| doubleTapScaleDetector != null && doubleTapScaleDetector.isDoubleTapping()) {
@@ -2682,6 +2699,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onScroll(MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
+			panDiagnostics.onCallback(e1, "scroll");
 			if (multiTouchSupport == null || (!multiTouchSupport.isInTiltMode() && !multiTouchSupport.isInZoomAndRotationMode())) {
 				MeasurementToolLayer layer = getMeasurementToolLayer();
 				MapRendererView mapRenderer = getMapRenderer();
@@ -2698,19 +2716,29 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					scrollDistanceX = distanceX;
 					scrollDistanceY = distanceY;
 					PointI touchPoint = new PointI((int) (e2.getX() + scrollDistanceX), (int) (e2.getY() + scrollDistanceY));
-					mapRenderer.setMapTarget(touchPoint, new PointI(firstTouchLocationX, firstTouchLocationY));
+					boolean accepted = mapRenderer.setMapTarget(touchPoint,
+							new PointI(firstTouchLocationX, firstTouchLocationY));
+					panDiagnostics.onNativePanResult(accepted);
 					LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, currentViewport, targetPixelX, targetPixelY);
 					currentViewport.setLatLonCenter(latLon.getLatitude(), latLon.getLongitude());
 					refreshMap();
 					notifyLocationListeners(getLatitude(), getLongitude());
-				} else
+				} else {
+					panDiagnostics.onCallback(e2, "fallbackPan");
 					dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
+				}
 			}
 			return true;
 		}
 
 		@Override
 		public void onShowPress(MotionEvent e) {
+		}
+
+		@Override
+		public boolean onDoubleTapEvent(MotionEvent e) {
+			panDiagnostics.onCallback(e, "frameworkDoubleTap");
+			return super.onDoubleTapEvent(e);
 		}
 
 		@Override
