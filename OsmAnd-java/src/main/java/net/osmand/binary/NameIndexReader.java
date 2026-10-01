@@ -73,6 +73,7 @@ public class NameIndexReader {
 	private Map<String, TLongHashSet> matchedKeys = new HashMap<String, TLongHashSet>();
 	// cache for prefixes
 	private Map<Long, PrefixNameValue> indexByRef = new HashMap<>();
+	private int cachedAtoms;
 	private long tablePointer;
 	
 	// common words
@@ -144,6 +145,8 @@ public class NameIndexReader {
 		String query;
 		TLongHashSet matchedKeys = new TLongHashSet();
 		NameIndexReaderMatcher matcher;
+		// only the number of atoms is read from the head of each matched block
+		boolean countOnly;
 		
 		public NameIndexReaderQuery(String query, NameIndexReaderMatcher matcher) {
 			this.query = query;
@@ -165,6 +168,8 @@ public class NameIndexReader {
 		public OsmAndPoiNameIndexData poi = null;
 		public AddressNameIndexData addr = null;
 		public long shift;
+		// atoms of the block, known from its head before the block is parsed; -1 - not read yet
+		public int atomsLength = -1;
 		
 		
 		@Override
@@ -326,6 +331,8 @@ public class NameIndexReader {
 		}
 		obj.shift = currentShift;
 		obj.poi = from;
+		obj.atomsLength = from.getAtomsCount();
+		cachedAtoms += from.getAtomsCount();
 		return obj;
 	}
 	
@@ -336,7 +343,7 @@ public class NameIndexReader {
 		while(it.hasNext()) {
 			long l = it.next();
 			PrefixNameValue pv = indexByRef.get(l);
-			if (pv.addr == null && pv.poi == null) {
+			if (query.countOnly ? pv.atomsLength < 0 : pv.addr == null && pv.poi == null) {
 				loffsets.add(l);
 			} else {
 				r.add(pv);
@@ -353,6 +360,8 @@ public class NameIndexReader {
 		}
 		obj.shift = currentShift;
 		obj.addr = from;
+		obj.atomsLength = from.getAtomCount();
+		cachedAtoms += from.getAtomCount();
 		return obj;
 	}
 	
@@ -366,6 +375,38 @@ public class NameIndexReader {
 		return this;
 	}
 	
+	/** The next read only counts: the atoms of each matched block are taken from its head, nothing is parsed. */
+	public NameIndexReader setCountQuery(String qr, NameIndexReaderMatcher matcher) {
+		setQuery(qr, matcher);
+		this.query.countOnly = true;
+		return this;
+	}
+
+	public boolean isCountOnly() {
+		return query != null && query.countOnly;
+	}
+
+	public void setAtomsLength(long shift, int atomsLength) {
+		PrefixNameValue pv = indexByRef.get(shift);
+		if (pv != null) {
+			pv.atomsLength = Math.max(0, atomsLength);
+		}
+	}
+
+	/** atoms under the keys matched by a count query, -1 if the query was not run */
+	public long countAtoms(String qr) {
+		TLongHashSet keys = matchedKeys.get(qr);
+		if (keys == null) {
+			return -1;
+		}
+		long sum = 0;
+		for (long l : keys.toArray()) {
+			PrefixNameValue pv = indexByRef.get(l);
+			sum += pv == null ? 0 : Math.max(0, pv.atomsLength);
+		}
+		return sum;
+	}
+
 	public List<PrefixNameValue> getMatchedPrefixes(String query) {
 		if (!matchedKeys.containsKey(query)) {
 			return null;
@@ -380,11 +421,24 @@ public class NameIndexReader {
 
 	public void gcPrefixes(int limit) {
 		if (limit > 0 && indexByRef.size() > limit) {
-			indexByRef.clear();
-			if (matchedKeys != null) {
-				matchedKeys.clear();
-			}
+			clearPrefixes();
 		}
+	}
+
+	public void clearPrefixes() {
+		indexByRef.clear();
+		cachedAtoms = 0;
+		if (matchedKeys != null) {
+			matchedKeys.clear();
+		}
+	}
+
+	public int getCachedAtoms() {
+		return cachedAtoms;
+	}
+
+	public void clearQuery() {
+		query = null;
 	}
 	
 	public void resetBytesStat() {

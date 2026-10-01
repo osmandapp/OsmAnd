@@ -436,6 +436,10 @@ public class SpatialPoiSearch {
 				SpatialSearchToken token = pc.tokens.get(i);
 				NameIndexAtom atom = pc.atoms.get(i);
 				token.addAtom(atom);
+				if (rowOnly(token, pc)) {
+					token.poiCategoryKeysToAutocomplete.remove(atom.name);
+					token.rowOnlyPoiCategoryIds.add((int) atom.id);
+				}
 			}
 			// Problem "Helipad 32" (doesn't list object because no 32 ref is found"
 			// Categories are not needed if exact result is found (there is always option to go in category and filter later)
@@ -445,6 +449,19 @@ public class SpatialPoiSearch {
 		}
 	}
 	
+	// a broad typed word ("s", "res") only suggests a category; its POIs are read once the word names it
+	private boolean rowOnly(SpatialSearchToken t, PoiCatSearch pc) {
+		if (!t.isBroadWord()) {
+			return false;
+		}
+		for (String n : pc.pt().names) {
+			if (SearchAlgorithms.alignChars(n).equals(t.wordNoDot)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public SpatialPoiType getById(int id) {
 		return byId.get(id);
 	}
