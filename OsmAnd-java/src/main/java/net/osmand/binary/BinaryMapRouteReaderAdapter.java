@@ -387,11 +387,18 @@ public class BinaryMapRouteReaderAdapter {
 		}
 
 		public void initRouteEncodingRule(int id, String tags, String val) {
-			decodingRules = null;
+			boolean append = id >= routeEncodingRules.size();
+			if (!append) {
+				decodingRules = null;
+			}
 			while (routeEncodingRules.size() <= id) {
 				routeEncodingRules.add(null);
 			}
-			routeEncodingRules.set(id, new RouteTypeRule(tags, val));
+			RouteTypeRule rt = new RouteTypeRule(tags, val);
+			routeEncodingRules.set(id, rt);
+			if (append && decodingRules != null && id > 0) {
+				decodingRules.put(rt.getTag() + "#" + (rt.getValue() == null ? "" : rt.getValue()), id);
+			}
 			if (tags.equals("name")) {
 				nameTypeRule = id;
 			} else if (tags.equals("ref")) {
