@@ -56,6 +56,7 @@ public class RouteResultPreparation {
 	private static final float UNMATCHED_TURN_DEGREE_MINIMUM = 45;
 	private static final float SPLIT_TURN_DEGREE_NOT_STRAIGHT = 100;
 	private static final float TURN_SLIGHT_DEGREE = 5;
+	private static final double TWICE_ROAD_LOOKAHEAD_M = 150;
 	
 	protected static final Log LOG = PlatformUtil.getLog(RouteResultPreparation.class);
 	public static final String UNMATCHED_HIGHWAY_TYPE = "unmatched";
@@ -2731,34 +2732,46 @@ public class RouteResultPreparation {
 	}
 
 	private boolean twiceRoadPresent(List<RouteSegmentResult> result, int i) {
-		if (i > 0 && i < result.size() - 1) {
-			RouteSegmentResult prev = result.get(i - 1);
-			String turnLanes = getTurnLanesString(prev);
-			if (turnLanes == null) {
-				return false;
-			}
-			RouteSegmentResult curr = result.get(i);
-			RouteSegmentResult next = result.get(i + 1);
-			if (prev.getObject().getId() == curr.getObject().getId()) {
-				List<RouteSegmentResult> attachedRoutes = next.getAttachedRoutes(next.getStartPointIndex());
-				boolean hasAttachedRoads = !Algorithms.isEmpty(attachedRoutes); // next junction
-				if (!hasAttachedRoads && i + 2 < result.size()) {
-					RouteSegmentResult nextNext = result.get(i + 2);
-					String turnLanesNextNext = getTurnLanesString(nextNext);
-					return turnLanes.equals(turnLanesNextNext); // next after next junction
-				}
-				return hasAttachedRoads;
-			} else {
-				List<RouteSegmentResult> attachedRoutes = curr.getAttachedRoutes(curr.getStartPointIndex());
-				for (RouteSegmentResult attach : attachedRoutes) {
-					if (attach.getObject().getId() == prev.getObject().getId()) {
-						//check if road the continue in attached roads
-						return true;
-					}
-				}
-			}
+		if (i <= 0 || i >= result.size() - 1) {
+			return false;
 		}
-		return false;
+		RouteSegmentResult prev = result.get(i - 1);
+		String turnLanes = getTurnLanesString(prev);
+		if (turnLanes == null) {
+			return false;
+		}
+		RouteSegmentResult curr = result.get(i);
+		long prevId = prev.getObject().getId();
+		if (prevId == curr.getObject().getId()) {
+			// same way, two segments
+			double dist = curr.getDistance();
+			for (int j = i + 1; j < result.size() && dist <= TWICE_ROAD_LOOKAHEAD_M; j++) {
+				RouteSegmentResult next = result.get(j);
+				if (!Algorithms.isEmpty(next.getAttachedRoutes(next.getStartPointIndex()))) {
+					return true;
+				}
+				String lanes = getTurnLanesString(next);
+				if (lanes != null && !lanes.equals(turnLanes)) {
+					return false;
+				}
+				if (turnLanes.equals(lanes)) {
+					return true;
+				}
+				dist += next.getDistance();
+			}
+			return false;
+		}
+		// different ways: prev's road continues as an attached one
+		int attachedPriority = MAX_SPEAK_PRIORITY;
+		for (RouteSegmentResult attach : curr.getAttachedRoutes(curr.getStartPointIndex())) {
+			if (attach.getObject().getId() == prevId) {
+				return true;
+			}
+			attachedPriority = Math.min(attachedPriority, highwaySpeakPriority(attach.getObject().getHighway()));
+		}
+		// same turn:lanes, minor attached roads (3+ classes lower), except none lanes (none can mean different)
+		return turnLanes.equals(getTurnLanesString(curr)) && !hasNoneLane(turnLanes)
+				&& attachedPriority - highwaySpeakPriority(curr.getObject().getHighway()) > 2;
 	}
 
 }

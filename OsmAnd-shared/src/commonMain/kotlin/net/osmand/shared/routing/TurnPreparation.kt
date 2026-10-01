@@ -25,6 +25,8 @@ object TurnPreparation {
 
 	private const val TURN_DEGREE_MIN = 45.0
 
+	private const val TWICE_ROAD_LOOKAHEAD_M = 150.0
+
 	// decrease speed proportionally from 15ms (50kmh)
 	private const val SLOW_DOWN_SPEED_THRESHOLD = 15.0
 
@@ -418,28 +420,45 @@ object TurnPreparation {
 
 	/** Whether the same road appears twice around this segment, which changes what the lanes mean. */
 	private fun twiceRoadPresent(result: List<RouteSegmentResult>, i: Int): Boolean {
-		if (i > 0 && i < result.size - 1) {
-			val prev = result[i - 1]
-			val turnLanes = TurnLanes.getTurnLanesString(prev) ?: return false
-			val curr = result[i]
-			val next = result[i + 1]
-			if (prev.getObject().getId() == curr.getObject().getId()) {
-				val hasAttachedRoads = next.getAttachedRoutes(next.getStartPointIndex()).isNotEmpty() // next junction
-				if (!hasAttachedRoads && i + 2 < result.size) {
-					val nextNext = result[i + 2]
-					return turnLanes == TurnLanes.getTurnLanesString(nextNext) // next after next junction
-				}
-				return hasAttachedRoads
-			} else {
-				for (attach in curr.getAttachedRoutes(curr.getStartPointIndex())) {
-					if (attach.getObject().getId() == prev.getObject().getId()) {
-						// check if road the continue in attached roads
-						return true
-					}
-				}
-			}
+		if (i <= 0 || i >= result.size - 1) {
+			return false
 		}
-		return false
+		val prev = result[i - 1]
+		val turnLanes = TurnLanes.getTurnLanesString(prev) ?: return false
+		val curr = result[i]
+		val prevId = prev.getObject().getId()
+		if (prevId == curr.getObject().getId()) {
+			// same way, two segments
+			var dist = curr.getDistance().toDouble()
+			var j = i + 1
+			while (j < result.size && dist <= TWICE_ROAD_LOOKAHEAD_M) {
+				val next = result[j]
+				if (next.getAttachedRoutes(next.getStartPointIndex()).isNotEmpty()) {
+					return true
+				}
+				val lanes = TurnLanes.getTurnLanesString(next)
+				if (lanes != null && lanes != turnLanes) {
+					return false
+				}
+				if (turnLanes == lanes) {
+					return true
+				}
+				dist += next.getDistance()
+				j++
+			}
+			return false
+		}
+		// different ways: prev's road continues as an attached one
+		var attachedPriority = TurnLanes.MAX_SPEAK_PRIORITY
+		for (attach in curr.getAttachedRoutes(curr.getStartPointIndex())) {
+			if (attach.getObject().getId() == prevId) {
+				return true
+			}
+			attachedPriority = min(attachedPriority, TurnLanes.highwaySpeakPriority(attach.getObject().getHighway()))
+		}
+		// same turn:lanes, minor attached roads (3+ classes lower), except none lanes (none can mean different)
+		return turnLanes == TurnLanes.getTurnLanesString(curr) && !TurnLanes.hasNoneLane(turnLanes)
+				&& attachedPriority - TurnLanes.highwaySpeakPriority(curr.getObject().getHighway()) > 2
 	}
 
 	// ---- how long each segment takes ----
