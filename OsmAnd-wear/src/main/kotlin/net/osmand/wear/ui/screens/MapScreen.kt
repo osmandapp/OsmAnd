@@ -99,6 +99,7 @@ fun MapScreen(
 	// Temporary, alongside WearMapStreamer's frame budget: how long a gesture waits for the
 	// frame that answers it, measured from this side so it covers the whole round trip.
 	var askedAt by remember { mutableLongStateOf(0L) }
+	var lastSeq by remember { mutableIntStateOf(0) }
 	val focus = remember { FocusRequester() }
 
 	// The watch screen going dark stops the frames too, but leaves the renderer standing:
@@ -117,23 +118,43 @@ fun MapScreen(
 	// read as state and reset in an effect, because an effect runs a composition too late and
 	// that one stale composition is a visible jump.
 	//
-	// Frames carry the gesture the phone had applied when it drew them, and a frame older than
-	// the last gesture is not an answer to it. It is shown anyway: dropping it tied the stream's
-	// liveness to every single command arriving, and one lost command - or a stream the phone
-	// restarted, which puts its count back to zero - left the watch discarding every frame for
-	// good. The number is kept for the timing below, and for a bounded wait later.
+	// Frames carry the gesture the phone had applied when they were drawn, so a frame older
+	// than the last gesture is not an answer to it: showing it would put the map back where it
+	// was until the real answer arrived. It is held back - but only for as long as an answer
+	// could plausibly take.
+	//
+	// The wait is bounded because the rule cannot be absolute. Gestures are sent and forgotten,
+	// and the phone starts its count again whenever the stream is rebuilt, so "never show a
+	// frame older than the last gesture" is a rule that one lost message turns into "never show
+	// a frame". Both ways out resynchronise the expectation rather than merely letting one
+	// frame through, so a stream that falls behind recovers instead of limping.
 	LaunchedEffect(Unit) {
 		MapFrames.frame.collect { arrived ->
 			if (arrived == null) {
 				shown = Shown()
-			} else if (!gesturing) {
-				if (askedAt != 0L && arrived.seq >= asked) {
-					Log.i(LATENCY_TAG, "gesture $asked answered in "
-							+ (SystemClock.elapsedRealtime() - askedAt) + " ms")
-					askedAt = 0L
-				}
-				shown = Shown(arrived.image)
+				lastSeq = 0
+				return@collect
 			}
+			if (gesturing) {
+				return@collect
+			}
+			val answers = arrived.seq >= asked
+			val restarted = arrived.seq < lastSeq
+			val waitedLongEnough = askedAt != 0L &&
+					SystemClock.elapsedRealtime() - askedAt > ANSWER_DEADLINE_MS
+			lastSeq = arrived.seq
+			if (!answers && !restarted && !waitedLongEnough) {
+				return@collect
+			}
+			if (askedAt != 0L) {
+				Log.i(LATENCY_TAG, "gesture $asked " + (if (answers) "answered" else "gave up")
+						+ " in " + (SystemClock.elapsedRealtime() - askedAt) + " ms")
+				askedAt = 0L
+			}
+			if (!answers) {
+				asked = arrived.seq
+			}
+			shown = Shown(arrived.image)
 		}
 	}
 
@@ -303,5 +324,11 @@ private val BEZEL_STEP = 2f.pow(0.1f)
 private const val BEZEL_SETTLE_MS = 180L
 
 private const val DOUBLE_TAP_MS = 300L
+
+/**
+ * How long a gesture may hold the map still while waiting for the frame that answers it.
+ * Measured round trips sit at 1.3-1.7 s, so this is a link in trouble rather than a slow one.
+ */
+private const val ANSWER_DEADLINE_MS = 3000L
 
 private const val LATENCY_TAG = "OsmAndWearMap"
