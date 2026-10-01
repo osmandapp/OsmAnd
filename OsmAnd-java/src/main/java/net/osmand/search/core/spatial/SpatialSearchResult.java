@@ -32,6 +32,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	public BaseDetailsObject unitedObject;
 	int biggestCityType = -1;
 	double score; // set by sortResults(), see SpatialSearchRanking
+	LatLon nearestRouteLatLon; // nearest point of the same route merged into this row
 
 	private static final List<String> FILTER_DUPLICATE_POI_SUBTYPE = new ArrayList<String>(
 			Arrays.asList("building", "internet_access_yes", "atm"));
@@ -234,6 +235,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (preciseLatlon != null) {
 			return preciseLatlon;
 		}
+		if (nearestRouteLatLon != null) {
+			return nearestRouteLatLon;
+		}
 		for (SpatialSearchResultRef r : objs) {
 			if (!r.atom.isPoiCategory()) {
 				return r.atom.getResultLocation();
@@ -248,7 +252,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 
 	public List<String> extraDeduplicateKeys(SpatialSearchContext ctx) {
 		List<String> result = null;
-		result = addResult(result, getWikidata(ctx));
+		// sections of one trail and their superroute often share the trail's wikidata - keep them apart
+		if (!isRouteTrack()) {
+			result = addResult(result, getWikidata(ctx));
+		}
 		result = addResult(result, getRouteId());
 		MapObject mapObject = getFirstRefObject(true);		
 		if (mapObject instanceof Amenity amenity) {
@@ -288,6 +295,19 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			result.add(value);
 		}
 		return result;
+	}
+
+	void takeNearerRoutePoint(SpatialSearchResult other, LatLon location) {
+		// a route is split into segments: show the merged row at the segment nearest to the user
+		String routeId = getRouteId();
+		LatLon cur = getLatLon(), oth = other.getLatLon();
+		if (location == null || routeId == null || cur == null || oth == null || preciseLatlon != null
+				|| !other.isRouteTrack() || !routeId.equals(other.getRouteId())) {
+			return;
+		}
+		if (MapUtils.getDistance(oth, location) < MapUtils.getDistance(cur, location)) {
+			nearestRouteLatLon = oth;
+		}
 	}
 
 	public void addExtraResult(SpatialSearchResult other, String lang) {
@@ -702,6 +722,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			}
 		}
 		return null;
+	}
+
+	private boolean isRouteTrack() {
+		return getFirstRefObject(true) instanceof Amenity amenity && (amenity.isRouteTrack() || amenity.isSuperRoute());
 	}
 
 	private String getRouteId() {
