@@ -21,7 +21,6 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.NameIndexReader.NameIndexReaderMatcher;
 import net.osmand.binary.ObfConstants;
-import net.osmand.binary.SearchVariantRules;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
 import net.osmand.data.Building;
@@ -90,27 +89,30 @@ public class SpatialSearchToken {
 	private final Set<String> readLocales = new LinkedHashSet<>();
 	private final Map<String, LocaleMatch> localeMatches = new HashMap<>();
 
-	private record QueryMatcher(SearchVariantRules.Variant rule, CollatorStringMatcher matcher) {
+	private record QueryMatcher(Abbreviations.QueryForm form, CollatorStringMatcher matcher) {
 	}
 
 	/** Everything the token derives from the search rules of one locale; built on first use. */
 	private final class LocaleMatch {
+		// forms of the token for every owner of a name: matched by name only, so the result is cached
 		final CollatorStringMatcher[] otherMatch;
+		// forms of the token for some owners of a name only (street, locality...)
 		final List<QueryMatcher> queryMatchers = new ArrayList<>();
 		final Map<String, Boolean> fastMatchCheck = new HashMap<>();
 		final Map<String, Boolean> fastPrefMatchCheck = new HashMap<>();
 
 		LocaleMatch(String locale) {
-			String abbr = Abbreviations.getSearchabbreviations(locale).get(wordNoDot);
-			List<String> words = abbr == null ? List.of() : SearchAlgorithms.splitAndNormalize(abbr, true);
-			otherMatch = new CollatorStringMatcher[words.size()];
-			for (int i = 0; i < words.size(); i++) {
-				otherMatch[i] = new CollatorStringMatcher(words.get(i), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
-			}
+			List<CollatorStringMatcher> unscoped = new ArrayList<>();
 			for (Abbreviations.QueryForm form : Abbreviations.getQueryForms(wordNoDot, locale)) {
-				queryMatchers.add(new QueryMatcher(form.rule(),
-						new CollatorStringMatcher(form.word(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE)));
+				CollatorStringMatcher matcher = new CollatorStringMatcher(form.word(),
+						StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+				if (form.isUnscoped()) {
+					unscoped.add(matcher);
+				} else {
+					queryMatchers.add(new QueryMatcher(form, matcher));
+				}
 			}
+			otherMatch = unscoped.toArray(new CollatorStringMatcher[0]);
 		}
 	}
 	
@@ -427,7 +429,7 @@ public class SpatialSearchToken {
 			return false;
 		}
 		for (QueryMatcher variant : lm.queryMatchers) {
-			if (variant.rule().appliesTo(object) && variant.matcher().matches(name)) {
+			if (variant.form().appliesTo(object) && variant.matcher().matches(name)) {
 				return true;
 			}
 		}

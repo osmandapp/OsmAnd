@@ -2,8 +2,6 @@ package net.osmand.binary;
 
 import org.junit.Test;
 
-import java.util.Map;
-
 import static org.junit.Assert.*;
 
 public class SearchLocalesTest {
@@ -89,9 +87,8 @@ public class SearchLocalesTest {
 
 	@Test
 	public void dictionariesAreReadOnlyAndOverriddenExplicitly() {
-		Map<String, String> search = Abbreviations.getSearchabbreviations("en_US");
 		try {
-			search.put("st", "Stone");
+			Abbreviations.getAbbreviations("en_US").put("st", "Stone");
 			fail("dictionary must be read-only");
 		} catch (UnsupportedOperationException expected) {
 			// ok
@@ -99,11 +96,17 @@ public class SearchLocalesTest {
 		String previous = Abbreviations.overrideSearchAbbreviation("en_NZ", "zz", "Zigzag");
 		try {
 			assertNull(previous);
-			assertEquals("Zigzag", Abbreviations.getSearchabbreviations("en_NZ").get("zz"));
-			assertNull(Abbreviations.getSearchabbreviations("en_US").get("zz"));
+			assertEquals("zigzag", Abbreviations.getQueryForms("zz", "en_NZ").get(0).word());
+			assertTrue(Abbreviations.getQueryForms("zz", "en_US").isEmpty());
+			// the forms of the rules are replaced, and an empty override removes them
+			assertEquals("street saint", Abbreviations.overrideSearchAbbreviation("en_NZ", "st", ""));
+			assertTrue(Abbreviations.getQueryForms("st", "en_NZ").isEmpty());
+			assertEquals(2, Abbreviations.getQueryForms("st", "en_US").size());
 		} finally {
 			Abbreviations.overrideSearchAbbreviation("en_NZ", "zz", null);
+			Abbreviations.overrideSearchAbbreviation("en_NZ", "st", null);
 		}
-		assertNull(Abbreviations.getSearchabbreviations("en_NZ").get("zz"));
+		assertTrue(Abbreviations.getQueryForms("zz", "en_NZ").isEmpty());
+		assertEquals(2, Abbreviations.getQueryForms("st", "en_NZ").size());
 	}
 }
