@@ -21,9 +21,7 @@ class OBDFuelConsumptionWidget : OBDTextWidget {
 		customId: String?,
 		widgetsPanel: WidgetsPanel?
 	) : super(mapActivity, widgetType, fieldType, customId, widgetsPanel) {
-		this.fuelConsumptionMode = registerFuelConsumptionPref(customId)
-		val typeWidget = getFieldType()
-		widgetComputer = OBDDataComputer.registerWidget(typeWidget, getAverageTime(typeWidget))
+		init(customId)
 	}
 
 	constructor(
@@ -33,9 +31,14 @@ class OBDFuelConsumptionWidget : OBDTextWidget {
 		customId: String?,
 		widgetsPanel: WidgetsPanel?
 	) : super(app, widgetType, fieldType, customId, widgetsPanel) {
+		init(customId)
+	}
+
+	private fun init(customId: String?) {
 		this.fuelConsumptionMode = registerFuelConsumptionPref(customId)
 		val typeWidget = getFieldType()
-		widgetComputer = OBDDataComputer.registerWidget(typeWidget, getAverageTime(typeWidget))
+		widgetComputer = OBDDataComputer.registerWidget(typeWidget, typeWidget.defaultAverageTime)
+
 	}
 
 
