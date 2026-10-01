@@ -85,7 +85,7 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 		if (EditorIconController.ORIGINAL_KEY.equals(centralController.getSelectedCategory().getKey())) {
 			LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
 			inflater.inflate(R.layout.list_item_divider_with_padding_basic, container, true);
-			container.addView(new DescriptionCard(activity, R.string.original_icon_description).build());
+			container.addView(new DescriptionCard(activity, R.string.original_point_icon_description).build());
 			return;
 		}
 		paletteController.setIcons(getSelectedCategoryIconKeys());
