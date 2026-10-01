@@ -241,7 +241,30 @@ tasks.register('copyOsmAndCoreWithJNI') {
 	}
 }
 
+// kxml2 (from OsmAnd-shared) bundles org.xmlpull.v1, which android.jar already defines and the boot
+// class path always serves first; R8 full mode rejects the duplicate, so the app gets kxml2 without it.
+// App only: in build-common.gradle the jar would be bundled into the published library AAR and clash
+// with the kxml2 that AAR consumers (osmand-api-demo) declare themselves.
+configurations {
+	kxml2
+}
+configurations.matching { it.name.endsWith('RuntimeClasspath') }.configureEach {
+	exclude group: 'net.sf.kxml', module: 'kxml2'
+}
+tasks.register('kxml2WithoutXmlPull', Jar) {
+	archiveFileName = 'kxml2-without-xmlpull.jar'
+	destinationDirectory = layout.buildDirectory.dir('kxml2')
+	from({ zipTree(configurations.kxml2.singleFile) }) {
+		exclude 'org/xmlpull/**'
+	}
+}
+
 dependencies {
+	kxml2('net.sf.kxml:kxml2:2.3.0') {
+		transitive = false
+	}
+	runtimeOnly files(tasks.named('kxml2WithoutXmlPull'))
+
 	openglImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar', 'QtAndroidNetwork.jar'], dir: 'libs')
 	opengldebugImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar', 'QtAndroidNetwork.jar'], dir: 'libs')
 
