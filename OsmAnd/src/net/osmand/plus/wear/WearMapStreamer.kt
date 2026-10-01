@@ -385,12 +385,11 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		const val RESTART_TIMEOUT_MS = 2_000L
 		/**
 		 * How much wider than the watch each frame is drawn, to give a drag something to show.
-		 * Half a screen of surplus on each side: a drag stops where the surplus ends, and at 1.5
-		 * that came after a quarter of a screen, which had the hand repeating the gesture
-		 * constantly. Covering a whole screen in one drag would need 3, and nine times the
-		 * pixels of the watch's own screen to encode for every frame.
+		 * A quarter of a screen of surplus on each side. More is wanted - a drag stops where the
+		 * surplus ends - but every bit of it is pixels to encode and send on a link that already
+		 * takes over a second to answer a gesture, so it waits on that latency being understood.
 		 */
-		const val OVERSCAN = 2.0f
+		const val OVERSCAN = 1.5f
 		const val MIN_ZOOM = 3f
 		const val MAX_ZOOM = 21f
 	}

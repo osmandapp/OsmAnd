@@ -117,14 +117,17 @@ fun MapScreen(
 	// read as state and reset in an effect, because an effect runs a composition too late and
 	// that one stale composition is a visible jump.
 	//
-	// A frame drawn before the phone heard the last gesture is dropped: taking the preview away
-	// for it would put the map back where it was until the real answer arrived.
+	// Frames carry the gesture the phone had applied when it drew them, and a frame older than
+	// the last gesture is not an answer to it. It is shown anyway: dropping it tied the stream's
+	// liveness to every single command arriving, and one lost command - or a stream the phone
+	// restarted, which puts its count back to zero - left the watch discarding every frame for
+	// good. The number is kept for the timing below, and for a bounded wait later.
 	LaunchedEffect(Unit) {
 		MapFrames.frame.collect { arrived ->
 			if (arrived == null) {
 				shown = Shown()
-			} else if (!gesturing && arrived.seq >= asked) {
-				if (askedAt != 0L) {
+			} else if (!gesturing) {
+				if (askedAt != 0L && arrived.seq >= asked) {
 					Log.i(LATENCY_TAG, "gesture $asked answered in "
 							+ (SystemClock.elapsedRealtime() - askedAt) + " ms")
 					askedAt = 0L
