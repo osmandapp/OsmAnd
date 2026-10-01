@@ -5480,4 +5480,5 @@
     <string name="file_name_containes_illegal_char">لا يمكن أن يحتوي الاسم على: %1$s</string>
     <string name="use_spatial_search">استخدام البحث النصي المكاني</string>
     <string name="use_spatial_search_description">استبدل واجهات برمجة تطبيقات البحث السريع القياسية بمحرك البحث النصي المكاني التجريبي.</string>
+    <string name="city_type_boundary">منطقة</string>
 </resources>
