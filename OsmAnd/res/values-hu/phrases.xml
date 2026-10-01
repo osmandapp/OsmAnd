@@ -249,7 +249,7 @@
     <string name="poi_service">Szolgáltatás</string>
     <string name="poi_craft">Műhely</string>
     <string name="poi_finance">Pénzügy</string>
-    <string name="poi_natural">Természet</string>
+    <string name="poi_natural">Természetes</string>
     <string name="poi_seamark">Hajózás</string>
     <string name="poi_military">Katonai</string>
     <string name="poi_alcohol">Alkoholüzlet</string>
@@ -675,7 +675,7 @@
     <string name="poi_sewing">Rövidárubolt</string>
     <string name="poi_watches">Órabolt (karóra)</string>
     <string name="poi_swimming_pool_shop">Uszodatechnika-bolt</string>
-    <string name="poi_games">Társasjáték</string>
+    <string name="poi_games">Játékok</string>
     <string name="poi_model">Modellezőbolt</string>
     <string name="poi_trophy">Kupák, kitüntetések</string>
     <string name="poi_video_games">Videojáték</string>
@@ -699,7 +699,7 @@
     <string name="poi_recycling_diapers">Pelenka</string>
     <string name="poi_recycling_car_batteries">Autóakkumulátor</string>
     <string name="poi_recycling_cars">Autó</string>
-    <string name="poi_recycling_bicycles">Kerékpár</string>
+    <string name="poi_recycling_bicycles">Kerékpárok</string>
     <string name="poi_landfill_waste_nuclear">Radioaktívhulladék-lerakó</string>
     <string name="poi_basin">Vízgyűjtő medence</string>
     <string name="poi_monitoring_station">Megfigyelőállomás</string>
@@ -1125,7 +1125,7 @@
     <string name="poi_bathing_no">Fürdési lehetőség nincs</string>
     <string name="poi_cargo_passengers">Utas</string>
     <string name="poi_cargo_vehicle">Jármű</string>
-    <string name="poi_cargo_bicycle">Kerékpár</string>
+    <string name="poi_cargo_bicycle">Kerékpárok</string>
     <string name="poi_cargo_container">Konténer</string>
     <string name="poi_cargo_hgv">Nehéz teherautó</string>
     <string name="poi_internet_access_fee_yes">Internetcsatlakozás: fizetős</string>
@@ -3283,7 +3283,7 @@
     <string name="poi_socket_as3112_current">Konnektor: AS/NZS 3112 – áramerősség (A)</string>
     <string name="poi_socket_as3112_output">Konnektor: AS/NZS 3112 – teljesítmény</string>
     <string name="poi_car_no">Személyautó nem</string>
-    <string name="poi_bicycle_yes">Kerékpár</string>
+    <string name="poi_bicycle_yes">Kerékpár: igen</string>
     <string name="poi_bicycle_no">Kerékpár nem</string>
     <string name="poi_scooter_yes">Roller</string>
     <string name="poi_scooter_no">Roller nem</string>
@@ -4329,7 +4329,7 @@
     <string name="poi_first_aid_kit">Elsősegélykészlet</string>
     <string name="poi_dog_leashed">Kutya: csak pórázon</string>
     <string name="poi_dog_designated">Kifejezetten kutyáknak</string>
-    <string name="poi_dog">Kutya</string>
+    <string name="poi_dog">Kutyák</string>
     <string name="poi_dog_unleashed">Kutya: póráz nélkül is</string>
     <string name="poi_playground_hopscotch">Ugróiskola</string>
     <string name="poi_playground_sledding">Szánkózódomb</string>
@@ -5198,4 +5198,32 @@
     <string name="poi_traffic_park">Közlekedési park</string>
     <string name="poi_animal_breeding">Állattenyésztés</string>
     <string name="poi_stables">Istállók</string>
+    <string name="poi_theme_filter">Téma</string>
+    <string name="poi_theme">Téma</string>
+    <string name="poi_theme_irish">ír</string>
+    <string name="poi_theme_cat">Macska</string>
+    <string name="poi_theme_shakespeare">Shakespeare</string>
+    <string name="poi_theme_rainforest">Esőerdő</string>
+    <string name="poi_theme_bicycle">Kerékpár</string>
+    <string name="poi_theme_dog">Kutya</string>
+    <string name="poi_theme_train">Vonat</string>
+    <string name="poi_theme_nature">Természet</string>
+    <string name="poi_theme_ship">Hajó</string>
+    <string name="poi_theme_animal">Állat</string>
+    <string name="poi_theme_pirate">Kalóz</string>
+    <string name="poi_theme_medieval">Középkori</string>
+    <string name="poi_theme_jazz">Jazz</string>
+    <string name="poi_theme_historic">Történelmi</string>
+    <string name="poi_theme_english">Angol</string>
+    <string name="poi_theme_football">Labdarúgás</string>
+    <string name="poi_theme_aviation">Repülés</string>
+    <string name="poi_theme_board_game">Társasjáték</string>
+    <string name="poi_theme_music">Zene</string>
+    <string name="poi_theme_adventure">Kaland</string>
+    <string name="poi_theme_western">Vadnyugat</string>
+    <string name="poi_theme_steampunk">Steampunk</string>
+    <string name="poi_theme_horror">Horror</string>
+    <string name="poi_theme_tiki">Tiki bár</string>
+    <string name="poi_theme_maid">Maid kávézó</string>
+    <string name="poi_luggage_locker">Csomagmegőrző</string>
 </resources>

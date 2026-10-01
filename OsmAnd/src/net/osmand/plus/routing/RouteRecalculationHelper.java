@@ -433,6 +433,7 @@ class RouteRecalculationHelper {
 			RouteProvider provider = routingHelper.getProvider();
 			OsmandSettings settings = getSettings();
 			RouteCalculationResult res = provider.calculateRouteImpl(params);
+			routingHelper.getApplication().getMemoryLog().onRouteCalculated();
 			if (params.calculationProgress.isCancelled) {
 				return;
 			}

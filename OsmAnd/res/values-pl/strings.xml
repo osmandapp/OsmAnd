@@ -5236,7 +5236,7 @@
     <string name="route_calculation_using_standard_algorithm">Używanie algorytmu wyznaczania tras standardowych (wolniejszych).</string>
     <string name="route_calculation_missing_maps">Brakujące mapy</string>
     <string name="route_calculation_missing_maps_desc">Brakuje niektórych map offline potrzebnych do tej trasy. Pobierz je, aby kontynuować.</string>
-    <string name="use_spatial_text_search">Użyj przestrzennego wyszukiwania tekstowego</string>
+    <string name="use_spatial_search">Użyj przestrzennego wyszukiwania tekstowego</string>
     <string name="astro_lunar_eclipse">Zaćmienie księżyca</string>
     <string name="astro_previous_lunar_eclipse">Poprzednie zaćmienie księżyca</string>
     <string name="astro_next_lunar_eclipse">Następne zaćmienie księżyca</string>

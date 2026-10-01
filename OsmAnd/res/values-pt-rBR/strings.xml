@@ -5682,8 +5682,8 @@
     <string name="rendering_attr_surface_clay_name">Argila</string>
     <string name="rendering_attr_surface_laterite_name">Laterita</string>
     <string name="release_5_4">• Nova pesquisa espacial — encontre locais e pesquise nas proximidades de um local\n\n • Interface de pesquisa renovada: classificação, filtros por categoria e visual mais limpo\n\n • Anexe fotos e arquivos de mídia aos Favoritos\n\n • Favoritos: suporte a subgrupos e pastas que podem ser fixadas\n\n • Coordenadas: a pesquisa, a grade do mapa e a exibição de POIs agora suportam os sistemas de localização EPSG e Maidenhead\n\n • Corrigidas interrupções na navegação; alterne entre os percursos Padrão e Rápido\n\n • Defina a escala do mapa do Android Auto separadamente do seu celular\n\n • Adicionados eclipses solares e lunares à seção de Astronomia</string>
-    <string name="use_spatial_text_search">Usar a pesquisa espacial de texto</string>
-    <string name="use_spatial_text_search_description">Substitua as APIs padrão de pesquisa rápida pelo mecanismo experimental de pesquisa espacial de texto.</string>
+    <string name="use_spatial_search">Usar a pesquisa espacial de texto</string>
+    <string name="use_spatial_search_description">Substitua as APIs padrão de pesquisa rápida pelo mecanismo experimental de pesquisa espacial de texto.</string>
     <string name="astro_close_lunar_eclipse">Fechar o explorador do eclipse lunar</string>
     <string name="astro_loading_lunar_eclipse">Cálculo do eclipse lunar em todo o mundo</string>
     <string name="astro_lunar_eclipse_load_error">Não foi possível calcular este eclipse lunar.</string>
@@ -5751,4 +5751,8 @@
     <string name="visualizing_button_grid_descr">Células, slots, quadros e registros.</string>
     <string name="crash_report_sent">Relatório enviado. Obrigado!</string>
     <string name="crash_report_send_failed">Não foi possível enviar o relatório. Tente novamente mais tarde.</string>
+    <string name="contour_labels">Rótulos</string>
+    <string name="contour_label_direction_descr">Subida: o topo de cada número de altitude está voltado para o terreno mais elevado, como nos mapas topográficos em papel. As marcas curtas nas linhas apontam para baixo.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Sentido do rótulo</string>
+    <string name="rendering_value_upright_name">Vertical</string>
 </resources>

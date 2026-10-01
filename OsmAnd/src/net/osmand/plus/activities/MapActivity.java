@@ -563,6 +563,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onNewIntent(intent);
 		setIntent(intent);
 
+		fragmentsHelper.onNewIntent(intent);
 		importHelper.setUiActivity(this);
 		if (!intentHelper.parseLaunchIntents()) {
 			intentHelper.parseContentIntent();

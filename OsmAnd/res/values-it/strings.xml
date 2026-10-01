@@ -80,8 +80,8 @@
     <string name="voice_stream_notification">Notifiche stream</string>
     <string name="voice_stream_music">Audio media/navigazione</string>
     <string name="warning_tile_layer_not_downloadable">L\'app non riesce a scaricare il livello della mappa %1$s, reinstallarlo potrebbe aiutare.</string>
-    <string name="overlay_transparency">Trasparenza sovrapposizione</string>
-    <string name="map_transparency">Trasparenza mappa di base</string>
+    <string name="overlay_transparency">Visibilità della sovrapposizione</string>
+    <string name="map_transparency">Visibilità della mappa di base</string>
     <string name="layer_underlay">Mappa di sfondo…</string>
     <string name="map_underlay">Mappa di sfondo</string>
     <string name="layer_overlay">Mappa sovrapposta…</string>
@@ -1311,7 +1311,7 @@
     <string name="osm_live_enter_email">Per favore inserisci un indirizzo email valido</string>
     <string name="osm_live_ask_for_purchase">Per favore acquista prima la sottoscrizione a OsmAnd Live</string>
     <string name="upload_anonymously">Carica anonimamente</string>
-    <string name="show_transparency_seekbar">Mostra la barra di ricerca trasparente</string>
+    <string name="show_transparency_seekbar">Mostra la barra di scorrimento della visibilità</string>
     <string name="shared_string_topbar">Barra superiore</string>
     <string name="recalculate_route">Ricalcola il percorso</string>
     <string name="shared_string_move_up">Sposta ↑</string>
@@ -4706,7 +4706,7 @@
     <string name="ais_cpa_warning_time">Tempo di avviso prima del Punto di Avvicinamento più Vicino (PAV)</string>
     <string name="ais_cpa_warning_distance">Distanza di avviso per il Punto di Avvicinamento più Vicino (PAV)</string>
     <string name="ais_cpa_warning_distance_description">Le imbarcazioni sono evidenziate in rosso se il CPA (Punto di minima distanza) è inferiore alla soglia definita e il TCPA (Tempo al CPA) rientra nel tempo di avviso impostato nell\'impostazione \'Tempo di avviso per il raggiungimento del CPA\'.</string>
-    <string name="plugin_ais_tracker_name">Localizzatore di imbarcazioni AIS</string>
+    <string name="plugin_ais_tracker_name">Localizzatore per imbarcazione (AIS)</string>
     <string name="plugin_ais_tracker_description">Visualizza le posizioni AIS e le informazioni sulle imbarcazioni circostanti. I dati AIS vengono ricevuti tramite rete da un ricevitore AIS esterno.</string>
     <string name="plugin_ais_tracker_disclaimer">ESCLUSIONE DI RESPONSABILITÀ\n\nQuesto plugin è un progetto amatoriale e non è progettato per essere affidabile e corretto. NON fare affidamento su questo software in alcun modo, né per la navigazione né per la sicurezza della vita.</string>
     <string name="ais_cpa_warning_time_description">Se il tempo impiegato per raggiungere il PAV con un\'altra imbarcazione è inferiore a questo valore, l\'imbarcazione viene contrassegnata in rosso.</string>
@@ -4880,7 +4880,7 @@
     <string name="backup_delete_data_warning_extended">Questa azione rimuoverà definitivamente tutti i dati selezionati dal cloud. Non sarà possibile ripristinarli più tardi.</string>
     <string name="private_access_routing_req_short">Permetti di usare una strada privata per raggiungere la tua destinazione?</string>
     <string name="deleted_maps_warning">Stai per cancellare %d oggetto/i\nProseguire?</string>
-    <string name="deleted_maps_prompt">Queste mappe non sono più supportate e sono state sostituite da regioni più piccole. Si prega di rimuoverle e scaricare le nuove regioni.</string>
+    <string name="deleted_maps_prompt">Queste mappe non sono più supportate. Per favore rimuovile e scarica le nuove versioni.</string>
     <string name="unsupported_maps">Mappe non supportate</string>
     <string name="trip_recording_downhill_widget_desc">Visualizza la somma di tutte le discese o solo dell\'ultima del percorso registrato corrente.</string>
     <string name="trip_recording_uphill_widget_desc">Visualizza la somma di tutte le salite o solo dell\'ultima del percorso registrato corrente.</string>
@@ -4992,8 +4992,8 @@
     <string name="astro_globular_clusters">Ammassi galattici</string>
     <string name="show_expand_button">Mostra il pulsante espandi</string>
     <string name="start_free_trial">Inizia prova gratuita</string>
-    <string name="open_till_short">Fino</string>
-    <string name="map_widget_memory_info">Informazioni memoria</string>
+    <string name="open_till_short">Fino a</string>
+    <string name="map_widget_memory_info">Informazioni sulla memoria</string>
     <string name="memory_graphics_settings">Memoria grafica</string>
     <string name="shared_string_native">Nativo</string>
     <string name="shared_string_gpu">GPU</string>
@@ -5049,7 +5049,7 @@
     <string name="astro_filter_show_all">Mostra tutto</string>
     <string name="favorite_confirm_delete_folder">Quest\'azione eliminerà la cartella \"%1$s\", incluse le sottocartelle e %2$d punto(i) preferito(i).</string>
     <string name="favorite_folder_invalid_name">Il nome della cartella non può contenere / o %1$s</string>
-    <string name="favorite_folder_duplicate_message">Usare un nome per la cartella che non esista già.</string>
+    <string name="favorite_folder_duplicate_message">Usa un nome della cartella che non esista già.</string>
     <string name="favorite_folder_name">Nome della cartella</string>
     <string name="edit_folder">Modifica cartella</string>
     <string name="memory_used_settings">Heap Java utilizzato</string>
@@ -5331,9 +5331,8 @@
     <string name="traffic_warning_red_light_camera">Telecamera semaforica</string>
     <string name="always_keep_local_copy">Conserva sempre una copia locale</string>
     <string name="always_keep_local_copy_description">Il file multimediale rimane allegato anche se l\'originale viene eliminato dalla galleria o dai file.</string>
-    <string name="use_spatial_text_search">Utilizza la ricerca testuale spaziale</string>
-    <string name="release_5_4">• Interfaccia di ricerca rinnovata: ordinamento, filtri per categoria, aspetto più pulito\n\n• Allega foto e file multimediali ai Preferiti\n\n• Preferiti: supporto per sottogruppi e cartelle bloccabili\n\n• Coordinate: la ricerca, la griglia della mappa e la visualizzazione dei PDI ora supportano EPSG e il localizzatore Maidenhead\n\n• Sistemate le interruzioni di navigazione; passaggio tra calcolo del percorso standard e veloce\n\n• Imposta la scala della mappa di Android Auto separatamente dal tuo telefono\n\n• Nuova ricerca spaziale — trova luoghi e cerca nei dintorni di un luogo\n\n• L\'astronomia ha ricevuto le eclissi solari e lunari</string>
-    <string name="use_spatial_text_search_description">Sostituisci le API di ricerca rapida standard con il motore di ricerca testuale spaziale sperimentale.</string>
+    <string name="use_spatial_search">Utilizza la ricerca testuale spaziale</string>
+    <string name="use_spatial_search_description">Sostituisci le API di ricerca rapida standard con il motore di ricerca testuale spaziale sperimentale.</string>
     <string name="preparing_file">Preparazione del file</string>
     <string name="share_favorites_points_only">Solo punti</string>
     <string name="share_favorites_points_and_media">Punti e file multimediali</string>
@@ -5410,4 +5409,25 @@
     <string name="heap_dump_auto">Raccogli in caso di utilizzo elevato</string>
     <string name="heap_dump_auto_descr">Quando la memoria heap è quasi piena, una volta ogni 30 minuti.</string>
     <string name="visualizing_button_grid_descr">Celle, slot, frame e log.</string>
+    <string name="contour_labels">Etichette</string>
+    <string name="contour_label_direction_descr">In salita: la parte superiore di ogni numero indicante l\'altitudine guarda verso il terreno più elevato, come sulle mappe topografiche cartacee. Le brevi spunte sulle linee indicano la discesa.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Direzione dell\'etichetta</string>
+    <string name="rendering_value_upright_name">Verticale</string>
+    <string name="rendering_value_uphill_name">In salita</string>
+    <string name="shared_string_visibility">Visibilità</string>
+    <string name="opening_hours_public_holiday">Giorni festivi</string>
+    <string name="opening_hours_school_holiday">Vacanze scolastiche</string>
+    <string name="opening_hours_easter">Pasqua</string>
+    <string name="ais_connection_not_set_up">Non configurata</string>
+    <string name="ais_connection_not_connected">Non connesso</string>
+    <string name="ais_connection_connecting">In connessione…</string>
+    <string name="ais_connection_no_data">Nessun dato ricevuto</string>
+    <string name="ais_connection_failed">Connessione fallita</string>
+    <string name="ais_connection_set_up">Configura la connessione</string>
+    <string name="ais_use_nmea_location">Utilizza come fonte di posizione</string>
+    <string name="ais_use_nmea_location_desc">Sostituisce la posizione del telefono con la posizione ricavata dal flusso NMEA.</string>
+    <string name="ais_run_in_background">Esegui in sottofondo</string>
+    <string name="ais_run_in_background_desc">Continua a ricevere con lo schermo spento.</string>
+    <string name="ais_vessels_on_the_map">Imbarcazioni sulla mappa: %1$d</string>
+    <string name="ais_no_position_data">Nessun dato di posizione</string>
 </resources>

@@ -396,7 +396,8 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 	}
 
 	private void performActionWithToken(@NonNull String token, @NonNull CallbackWithObject<Void> callback) {
-		if (!Algorithms.isEmpty(token) && BackupUtils.isTokenValid(token)) {
+		boolean digitsOnly = startingDialogType == DELETE_ACCOUNT;
+		if (!Algorithms.isEmpty(token) && (!digitsOnly || BackupUtils.isTokenValid(token))) {
 			progressBar.setVisibility(View.VISIBLE);
 
 			callback.processResult(null);

@@ -4713,4 +4713,9 @@
     <string name="poi_air_conditioning_no">Όχι</string>
     <string name="poi_healthcare_speciality_travel_clinic">Ταξιδιωτική κλινική</string>
     <string name="poi_mobile_money_agent">Πρακτορείο μεταφοράς χρημάτων</string>
+    <string name="poi_stables">Στάβλοι</string>
+    <string name="poi_traffic_park">Πάρκο κυκλοφοριακής αγωγής</string>
+    <string name="poi_craft_printer">Τυπογραφείο</string>
+    <string name="poi_craft_signmaker">Επιγραφοποιός</string>
+    <string name="poi_dancing_school">Σχολή χορού</string>
 </resources>

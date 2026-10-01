@@ -155,12 +155,14 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 		}
 	}
 
-	// Outside the Address tab a city opens its context menu in both v1 and spatial search
+	// Outside the Address tab a city opens its context menu in both v1 and spatial search.
+	// In the Address tab (its list or the results typed there) a city goes deeper to its streets.
 	private boolean isCityResultWithMenu(@NonNull SearchResult sr) {
 		return (sr.objectType == CITY || sr.objectType == VILLAGE
 				|| sr.objectType == BOUNDARY)
 				&& sr.location != null
-				&& getType() != SearchListFragmentType.ADDRESS;
+				&& getType() != SearchListFragmentType.ADDRESS
+				&& !dialogFragment.isAddressSearch();
 	}
 
 	private void onSpatialCategorySearchResultClick(@NonNull SearchResult searchResult) {

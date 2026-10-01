@@ -3,7 +3,6 @@ package net.osmand.plus;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.feedback.MemoryLog;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
@@ -110,7 +109,7 @@ public class OsmAndDiagnosticThread extends Thread {
 	}
 
 	private void awaitNextCheck() throws InterruptedException {
-		MemoryLog.sample(app);
+		app.getMemoryLog().sample(app);
 		Thread.sleep(POLL_INTERVAL_MS);
 	}
 }

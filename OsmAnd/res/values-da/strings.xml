@@ -335,8 +335,8 @@
     <string name="voice_stream_notification">Meddelelselyd</string>
     <string name="voice_stream_music">Medie-/navigationslyd</string>
     <string name="warning_tile_layer_not_downloadable">Appen kan ikke hente kortlaget %1$s, en geninstallering kan måske hjælpe.</string>
-    <string name="overlay_transparency">Overlejrings-gennemsigtighed</string>
-    <string name="map_transparency">Gennemsigtighed for basiskort</string>
+    <string name="overlay_transparency">Overlejring-synlighed</string>
+    <string name="map_transparency">Synlighed for basiskort</string>
     <string name="layer_underlay">Underlejringskort…</string>
     <string name="map_underlay">Underlejringskort</string>
     <string name="layer_overlay">Overlejringskort…</string>
@@ -1306,7 +1306,7 @@
     <string name="upload_osm_note">Overfør OSM-bemærkning</string>
     <string name="upload_anonymously">Overfør anonymt</string>
     <string name="select_map_marker">Vælg kortmarkør</string>
-    <string name="show_transparency_seekbar">Vis glider for gennemsigtighed</string>
+    <string name="show_transparency_seekbar">Vis skyder for synlighed</string>
     <string name="donations">Donationer</string>
     <string name="number_of_recipients">Antal modtagere</string>
     <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
@@ -1823,7 +1823,7 @@
     <string name="lang_lo">Lao</string>
     <string name="day_off_label">lukket</string>
     <string name="winter_and_ski_renderer">Vinter og ski</string>
-    <string name="touring_view_renderer">Touring</string>
+    <string name="touring_view_renderer">Touring-visning</string>
     <string name="nautical_renderer">Nautisk</string>
     <string name="rendering_attr_hidePOILabels_name">IP-etiketter</string>
     <string name="will_open_tomorrow_at">Åbner i morgen kl.</string>
@@ -3275,7 +3275,7 @@
     <string name="shared_storage">Delt lagerplads</string>
     <string name="rendering_attr_natureReserves_description">Vis naturreservater, beskyttede områder og nationalparker.</string>
     <string name="not_enough_contributions_descr">Der kræves mindst %1$s ændringer i løbet af de sidste to måneder %2$s for at få adgang til ubegrænsede kortopdateringer hver time.</string>
-    <string name="show_parameter_seekbar">Vis parameter-søgefelt</string>
+    <string name="show_parameter_seekbar">Vis parameter-skyder</string>
     <string name="app_profile_type">App-profiltype</string>
     <string name="map_marker_options">Indstillinger for kortmarkør</string>
     <string name="add_to_group">Tilføj til gruppe</string>
@@ -5375,8 +5375,8 @@
     <string name="duplicate_map_replace_with_road">Erstat med Kun vej</string>
     <string name="rendering_attr_surface_clay_name">Ler</string>
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
-    <string name="use_spatial_text_search">Brug rumlig tekstsøgning</string>
-    <string name="use_spatial_text_search_description">Erstat de almindelige API\'er til hurtigsøgning med den eksperimentelle, rumlige tekstsøgningsmotor.</string>
+    <string name="use_spatial_search">Brug rumlig tekstsøgning</string>
+    <string name="use_spatial_search_description">Erstat de almindelige API\'er til hurtigsøgning med den eksperimentelle, rumlige tekstsøgningsmotor.</string>
     <string name="always_keep_local_copy">Behold altid en lokal kopi</string>
     <string name="always_keep_local_copy_description">Medie forbliver tilknyttet, selvom originalen slettes fra galleriet eller filer.</string>
     <string name="release_5_4">• Opdateret søgebrugerflade: sortering, kategorifiltre, mere overskueligt design\n\n • Vedhæft billeder og mediefiler til Favoritter\n\n • Favoritter: understøttelse af undergrupper og mapper, der kan fastgøres\n\n • Koordinater: Søgning, kortgitter og visning af interessepunkter understøtter nu EPSG- og Maidenhead-koordinatsystemer\n\n • Afhjulpet problemer med navigationen; skift mellem standard- og hurtig ruteplanlægning\n\n • Indstil kortskalaen i Android Auto uafhængigt af din telefon\n\n• Ny rumlig søgning — find steder og søg i området omkring et sted\n\n • Astronomi: Sol- og måneformørkelser tilføjet</string>
@@ -5479,4 +5479,15 @@
     <string name="quick_action_showhide_panoramax_descr">En skifter til at vise eller skjule Panoramax-laget på kortet.</string>
     <string name="panoramax_menu_filter_description_new">Filtrer billeder efter bidragyder, dato eller type.</string>
     <string name="plugin_panoramax_descr">Vis gadeplanbilleder fra Panoramax, en samlet og frit tilgængelig fotokortlægningsplatform, som en kortoverlejring. Nyttigt til at tjekke den eksisterende dækning og planlægge, hvad der stadig mangler at blive kortlagt.</string>
+    <string name="contour_labels">Etiketter</string>
+    <string name="contour_label_direction_descr">Opad: Toppen af hvert højdetal peger mod højere terræn, ligesom på topografiske kort på papir. De korte streger på linjerne peger nedad.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Etiketretning</string>
+    <string name="rendering_value_upright_name">Stående</string>
+    <string name="rendering_value_uphill_name">Opad</string>
+    <string name="shared_string_visibility">Synlighed</string>
+    <string name="opening_hours_public_holiday">Helligdage</string>
+    <string name="opening_hours_school_holiday">Skoleferier</string>
+    <string name="opening_hours_easter">Påske</string>
+    <string name="visualizing_button_grid_descr">Celler, pladser, rammer og logge.</string>
+    <string name="city_type_boundary">Område</string>
 </resources>
