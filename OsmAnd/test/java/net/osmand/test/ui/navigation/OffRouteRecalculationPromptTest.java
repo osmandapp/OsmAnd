@@ -31,6 +31,9 @@ import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.util.MapUtils;
 
@@ -56,6 +59,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 /**
  * Rides a bicycle beside the route (#25544) and checks when "Route recalculated" is announced.
@@ -64,6 +68,13 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * Needs Germany_berlin_europe_2.obf in the app folder, and for the BRouter cases
  * the BRouter app with the E10_N50.rd5 segment. Missing data skips the case.
+ * <p>
+ * The GPX cases ride a track instead, one point per second, for example r25544_offset.gpx from #25544:
+ * <p>
+ * adb push r25544_offset.gpx /data/local/tmp/
+ * adb shell am instrument -w -e gpx /data/local/tmp/r25544_offset.gpx
+ * -e class net.osmand.test.ui.navigation.OffRouteRecalculationPromptTest#brouterGpxRide
+ * net.osmand.plus.test/androidx.test.runner.AndroidJUnitRunner
  * <p>
  * Run command to pull the timelines and screenshots to a git-ignored directory:
  * <p>
@@ -80,6 +91,7 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 	private static final String TARGET_DIR = "/data/local/tmp/osmand/screenshots/off_route_prompts";
 	private static final String BERLIN_MAP = "Germany_berlin_europe_2.obf";
 	private static final String BROUTER_PACKAGE = "btools.routingapp";
+	private static final String GPX_ARGUMENT = "gpx";
 
 	private static final ApplicationMode MODE = ApplicationMode.BICYCLE;
 	private static final LatLon START = new LatLon(52.521513, 13.416514);
@@ -126,6 +138,8 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 	private IRouteInformationListener routeListener;
 	private volatile long rideStartTime;
 	private String caseName;
+	private String rideDescription;
+	private Ride ride;
 
 	@Before
 	@Override
@@ -222,22 +236,59 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		ride(RouteService.BROUTER, "brouter_short", SHORT_DEVIATIONS);
 	}
 
+	@Test
+	public void osmandGpxRide() throws Throwable {
+		rideGpx(RouteService.OSMAND, "osmand_gpx");
+	}
+
+	@Test
+	public void brouterGpxRide() throws Throwable {
+		rideGpx(RouteService.BROUTER, "brouter_gpx");
+	}
+
 	private void ride(@NonNull RouteService routeService, @NonNull String caseName, @NonNull int[][] phases) throws Throwable {
+		ride(routeService, caseName, OFFSET + " m beside the route", path -> Ride.generated(path, phases));
+	}
+
+	private void rideGpx(@NonNull RouteService routeService, @NonNull String caseName) throws Throwable {
+		String gpxPath = InstrumentationRegistry.getArguments().getString(GPX_ARGUMENT);
+		Assume.assumeTrue("No -e " + GPX_ARGUMENT + " argument", gpxPath != null);
+		List<LatLon> points = loadGpxPoints(gpxPath);
+		ride(routeService, caseName, new File(gpxPath).getName(), path -> Ride.fromPoints(path, points));
+	}
+
+	private void ride(@NonNull RouteService routeService, @NonNull String caseName, @NonNull String rideDescription,
+	                  @NonNull Function<List<Location>, Ride> rideFactory) throws Throwable {
 		if (routeService == RouteService.BROUTER) {
 			Assume.assumeTrue("BRouter is not installed", isPackageInstalled(BROUTER_PACKAGE));
 		}
 		this.caseName = caseName;
+		this.rideDescription = rideDescription;
 		runShellCommand("rm -f " + TARGET_DIR + "/" + caseName + "_*");
 		MODE.setRouteService(routeService);
 		initVoice();
 		skipAppStartDialogs(app);
 
-		List<Location> path = calculateRoute();
+		ride = rideFactory.apply(calculateRoute());
 		startNavigation();
-		feedLocations(path, phases);
+		feedLocations();
 
-		writeTimeline(phases);
-		checkTimeline(phases);
+		writeTimeline();
+		checkTimeline();
+	}
+
+	@NonNull
+	private List<LatLon> loadGpxPoints(@NonNull String gpxPath) {
+		// the app cannot read /data/local/tmp, the shell copies the track to the app cache
+		File file = new File(app.getExternalCacheDir(), new File(gpxPath).getName());
+		runShellCommand("cp " + gpxPath + " " + file.getAbsolutePath());
+		GpxFile gpxFile = SharedUtil.loadGpxFile(file);
+		List<LatLon> points = new ArrayList<>();
+		for (WptPt point : gpxFile.getAllSegmentsPoints()) {
+			points.add(new LatLon(point.getLat(), point.getLon()));
+		}
+		assertTrue("No track points in " + gpxPath, points.size() > 1);
+		return points;
 	}
 
 	private void initVoice() throws InterruptedException {
@@ -312,20 +363,11 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		assertTrue("Navigation is not started", routingHelper.isFollowingMode());
 	}
 
-	private void feedLocations(@NonNull List<Location> path, @NonNull int[][] phases) {
-		double pathLength = 0;
-		for (int i = 1; i < path.size(); i++) {
-			pathLength += path.get(i - 1).distanceTo(path.get(i));
-		}
-		int seconds = 0;
-		for (int[] phase : phases) {
-			seconds += phase[0];
-		}
-		assertTrue("Route is too short: " + (int) pathLength + " m", pathLength > SPEED * seconds);
-
+	private void feedLocations() {
 		rideStartTime = SystemClock.elapsedRealtime();
-		for (int second = 0; second <= seconds; second++) {
-			Location location = locationAt(path, SPEED * second, offsetAt(phases, second));
+		for (int second = 0; second < ride.locations.size(); second++) {
+			Location location = new Location(ride.locations.get(second));
+			location.setTime(System.currentTimeMillis());
 			app.runInUIThread(() -> app.getLocationProvider().setCustomLocation(location, 10_000));
 			long next = rideStartTime + (second + 1) * 1000L;
 			SystemClock.sleep(Math.max(0, next - SystemClock.elapsedRealtime()));
@@ -352,15 +394,19 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 				}
 			}
 		}
-		recalculations.add(new RecalculationEvent(time, newRoute, backward, announced));
+		// the new route from the rider and the rest of the original route from the rider's position along it
+		int second = (int) Math.min(time / 1000, ride.progress.size() - 1);
+		int originalRemaining = (int) (ride.pathLength - ride.progress.get(second));
+		recalculations.add(new RecalculationEvent(time, newRoute, backward, announced,
+				routingHelper.getRoute().getWholeDistance(), originalRemaining));
 		if (!announced) {
 			showEvent("Silent recalculation" + (backward ? " (backward route)" : ""), "silent_recalc");
 		}
 	}
 
-	private void checkTimeline(@NonNull int[][] phases) {
+	private void checkTimeline() {
 		List<String> errors = new ArrayList<>();
-		for (long[] deviation : getDeviations(phases)) {
+		for (long[] deviation : getDeviations()) {
 			long start = deviation[0];
 			long end = deviation[1] + ANNOUNCEMENT_TAIL_MS;
 			String name = String.format(Locale.US, "Deviation %d-%d s", start / 1000, deviation[1] / 1000);
@@ -407,23 +453,22 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		return result;
 	}
 
-	// time intervals when the target offset is above the recalculation distance
+	// time intervals when the rider is farther from the original route than the recalculation distance
 	@NonNull
-	private static List<long[]> getDeviations(@NonNull int[][] phases) {
+	private List<long[]> getDeviations() {
 		List<long[]> deviations = new ArrayList<>();
-		int seconds = 0;
-		for (int[] phase : phases) {
-			seconds += phase[0];
-		}
 		long start = -1;
-		for (int second = 0; second <= seconds; second++) {
-			boolean deviated = offsetAt(phases, second) > RECALCULATION_DISTANCE;
+		for (int second = 0; second < ride.offsets.size(); second++) {
+			boolean deviated = ride.offsets.get(second) > RECALCULATION_DISTANCE;
 			if (deviated && start < 0) {
 				start = second * 1000L;
 			} else if (!deviated && start >= 0) {
 				deviations.add(new long[] {start, second * 1000L});
 				start = -1;
 			}
+		}
+		if (start >= 0) {
+			deviations.add(new long[] {start, ride.offsets.size() * 1000L});
 		}
 		return deviations;
 	}
@@ -489,11 +534,11 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		});
 	}
 
-	private void writeTimeline(@NonNull int[][] phases) {
+	private void writeTimeline() {
 		StringBuilder text = new StringBuilder();
 		text.append("# ").append(caseName).append(", ").append(MODE.getRouteService())
 				.append(", recalculation distance ").append((int) RECALCULATION_DISTANCE).append(" m")
-				.append(", offset ").append(OFFSET).append(" m\n");
+				.append(", ").append(rideDescription).append("\n");
 		text.append("time_s\tevent\tdetails\n");
 		List<Object[]> rows = new ArrayList<>();
 		synchronized (voiceEvents) {
@@ -505,11 +550,12 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 			for (RecalculationEvent event : recalculations) {
 				String details = (event.newRoute ? "new route" : "recalculation")
 						+ (event.backward ? ", backward" : ", forward")
-						+ (event.announced ? ", announced" : ", silent");
+						+ (event.announced ? ", announced" : ", silent")
+						+ ", length " + event.length + " m, original remaining " + event.originalRemaining + " m";
 				rows.add(new Object[] {event.time, "route", details});
 			}
 		}
-		for (long[] deviation : getDeviations(phases)) {
+		for (long[] deviation : getDeviations()) {
 			rows.add(new Object[] {deviation[0], "deviation", "start, offset > " + (int) RECALCULATION_DISTANCE + " m"});
 			rows.add(new Object[] {deviation[1], "deviation", "end"});
 		}
@@ -582,12 +628,87 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		private final boolean newRoute;
 		private final boolean backward;
 		private final boolean announced;
+		private final int length;
+		private final int originalRemaining;
 
-		RecalculationEvent(long time, boolean newRoute, boolean backward, boolean announced) {
+		RecalculationEvent(long time, boolean newRoute, boolean backward, boolean announced,
+		                   int length, int originalRemaining) {
 			this.time = time;
 			this.newRoute = newRoute;
 			this.backward = backward;
 			this.announced = announced;
+			this.length = length;
+			this.originalRemaining = originalRemaining;
+		}
+	}
+
+	// one location per second, its distance from the original route and the progress along it
+	private static class Ride {
+
+		private final List<Location> locations = new ArrayList<>();
+		private final List<Double> offsets = new ArrayList<>();
+		private final List<Double> progress = new ArrayList<>();
+		private final double pathLength;
+
+		private Ride(@NonNull List<Location> path) {
+			double length = 0;
+			for (int i = 1; i < path.size(); i++) {
+				length += path.get(i - 1).distanceTo(path.get(i));
+			}
+			pathLength = length;
+		}
+
+		private void add(@NonNull Location location, double offset, double distance) {
+			locations.add(location);
+			offsets.add(offset);
+			progress.add(distance);
+		}
+
+		@NonNull
+		static Ride generated(@NonNull List<Location> path, @NonNull int[][] phases) {
+			Ride ride = new Ride(path);
+			int seconds = 0;
+			for (int[] phase : phases) {
+				seconds += phase[0];
+			}
+			assertTrue("Route is too short: " + (int) ride.pathLength + " m", ride.pathLength > SPEED * seconds);
+			for (int second = 0; second <= seconds; second++) {
+				double offset = offsetAt(phases, second);
+				ride.add(locationAt(path, SPEED * second, offset), offset, SPEED * second);
+			}
+			return ride;
+		}
+
+		@NonNull
+		static Ride fromPoints(@NonNull List<Location> path, @NonNull List<LatLon> points) {
+			Ride ride = new Ride(path);
+			for (int i = 0; i < points.size(); i++) {
+				// the direction to the next point, points are one second apart
+				LatLon from = points.get(i == points.size() - 1 ? i - 1 : i);
+				LatLon to = points.get(i == points.size() - 1 ? i : i + 1);
+				Location fromLocation = new Location("", from.getLatitude(), from.getLongitude());
+				Location toLocation = new Location("", to.getLatitude(), to.getLongitude());
+				Location location = createLocation(points.get(i), fromLocation.bearingTo(toLocation), fromLocation.distanceTo(toLocation));
+
+				double offset = Double.MAX_VALUE;
+				double distance = 0;
+				double passed = 0;
+				for (int j = 1; j < path.size(); j++) {
+					Location a = path.get(j - 1);
+					Location b = path.get(j);
+					double d = MapUtils.getOrthogonalDistance(location.getLatitude(), location.getLongitude(),
+							a.getLatitude(), a.getLongitude(), b.getLatitude(), b.getLongitude());
+					double segment = a.distanceTo(b);
+					if (d < offset) {
+						offset = d;
+						distance = passed + segment * MapUtils.getProjectionCoeff(location.getLatitude(), location.getLongitude(),
+								a.getLatitude(), a.getLongitude(), b.getLatitude(), b.getLongitude());
+					}
+					passed += segment;
+				}
+				ride.add(location, offset, distance);
+			}
+			return ride;
 		}
 	}
 
