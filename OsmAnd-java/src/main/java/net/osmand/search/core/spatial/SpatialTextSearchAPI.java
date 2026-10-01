@@ -106,9 +106,15 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		}
 
 
+		boolean suggestionsPublished = results.suggestions.isEmpty();
 		for (SpatialSearchResult spatialResult : results.mainResults) {
 			if (resultMatcher.isCancelled()) {
 				return false;
+			}
+			if (!suggestionsPublished && !spatialResult.isPoiCategory()) {
+				// after the categories, before the objects
+				suggestionsPublished = true;
+				publishSuggestions(phrase, resultMatcher, results.suggestions);
 			}
 			SearchResult searchResult = convertResult(phrase, context, spatialResult);
 			if (searchResult != null) {
@@ -116,6 +122,9 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			} else {
 				LOG.info("searchResult = null");
 			}
+		}
+		if (!suggestionsPublished) {
+			publishSuggestions(phrase, resultMatcher, results.suggestions);
 		}
 		return true;
 	}
@@ -175,6 +184,20 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	private void addFile(List<BinaryMapIndexReader> files, BinaryMapIndexReader reader) {
 		if (reader != null && !files.contains(reader)) {
 			files.add(reader);
+		}
+	}
+
+	private void publishSuggestions(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+			List<SpatialTextSearch.SpatialSuggestion> suggestions) {
+		for (SpatialTextSearch.SpatialSuggestion s : suggestions) {
+			SearchResult result = new SearchResult(phrase);
+			result.objectType = ObjectType.SUGGESTION;
+			result.object = s;
+			// the query to run when the row is tapped: the typed word completed, a space after it
+			String typed = phrase.getFullSearchPhrase();
+			result.localeName = typed.substring(0, typed.lastIndexOf(' ') + 1) + s.word() + " ";
+			result.location = phrase.getSettings().getOriginalLocation();
+			resultMatcher.publish(result);
 		}
 	}
 

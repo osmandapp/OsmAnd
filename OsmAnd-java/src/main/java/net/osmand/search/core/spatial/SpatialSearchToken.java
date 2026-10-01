@@ -49,6 +49,11 @@ public class SpatialSearchToken {
 			NameIndexReader.POI_CATEGORY_PREFIX + MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX;
 
 	int MIN_CHAR_INCOMPLETE;
+	boolean broad;
+	// a typed word: name -> objects met in the index; names that only continue the word
+	Map<String, int[]> nameCounts = new HashMap<>();
+	int continuedNames;
+	private CollatorStringMatcher wholeWordMatcher;
 	
 	int originalOrder = 0;
 	int sortedOrder = 0;
@@ -62,6 +67,11 @@ public class SpatialSearchToken {
 	
 	Set<String> poiCategoryKeysToAutocomplete = new HashSet<>();
 	Set<Integer> poiCategoryIds = new HashSet<>();
+	// categories suggested as a row only, their POIs are not read
+	Set<Integer> rowOnlyPoiCategoryIds = new HashSet<>();
+	// a whole-word match of a word still being typed found too many names: nothing is listed for it
+	boolean suggestOnly;
+	int nameAtoms;
 	List<NameIndexAtom> atoms = new ArrayList<>();
 	TLongObjectHashMap<NameIndexAtom> index = new TLongObjectHashMap<>();
 	HashQuadTree<Integer> quadTree = new HashQuadTree<>(16);
@@ -96,7 +106,13 @@ public class SpatialSearchToken {
 	}
 
 	public SpatialSearchToken(int MIN_CHAR_INCOMPLETE, String ow, String original, int order) {
+		this(MIN_CHAR_INCOMPLETE, false, ow, original, order);
+	}
+
+	/** @param broad too many names continue this word still being typed: it is matched as a whole word */
+	public SpatialSearchToken(int MIN_CHAR_INCOMPLETE, boolean broad, String ow, String original, int order) {
 		this.MIN_CHAR_INCOMPLETE = MIN_CHAR_INCOMPLETE;
+		this.broad = broad;
 		originalWord = original;
 		word = ow;
 		categoryMatchMode = ow.startsWith(NameIndexReader.POI_CATEGORY_PREFIX);
@@ -111,7 +127,7 @@ public class SpatialSearchToken {
 		this.wordNoDot = noDot;
 		// . already in collator w.endsWith(DOT_INCOMPLETE_STRING)
 		collatorMain = new CollatorStringMatcher(wordAligned, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
-		if (incomplete && word.length() <= MIN_CHAR_INCOMPLETE + 1) {
+		if (isOnlyFullMatch()) {
 			noDotCollatorMain = new CollatorStringMatcher(noDot, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 		} else {
 			if (SearchAlgorithms.letters(noDot) == 0) {
@@ -152,7 +168,24 @@ public class SpatialSearchToken {
 	
 	
 	public boolean isOnlyFullMatch() {
-		return incomplete && word.length() <= MIN_CHAR_INCOMPLETE + 1;
+		return incomplete && (word.length() <= MIN_CHAR_INCOMPLETE + 1 || isBroadWord());
+	}
+
+	/**
+	 * A word still being typed that too many names continue ("s", "sch", "haupt"): it is matched as a whole word,
+	 * its categories are rows only and the names that continue it are suggested.
+	 */
+	public boolean isBroadWord() {
+		return incomplete && (broad || word.length() <= MIN_CHAR_INCOMPLETE + 1
+				&& SearchAlgorithms.letters(word) == word.length() - 1);
+	}
+
+	/** the name has the typed letters as a whole word, not only as the beginning of one */
+	boolean matchesWholeWord(String name) {
+		if (wholeWordMatcher == null) {
+			wholeWordMatcher = new CollatorStringMatcher(wordNoDot, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+		}
+		return wholeWordMatcher.matches(name);
 	}
 
 	@Override
@@ -162,7 +195,8 @@ public class SpatialSearchToken {
 	
 	
 	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats) {
-		return new NameIndexReaderMatcher(word) {
+		// a broad typed word is read as a whole word: the keys that only continue it are not read
+		return new NameIndexReaderMatcher(isBroadWord() ? wordNoDot : word) {
 			
 			@Override
 			public boolean matchKey(String key) {
@@ -310,7 +344,7 @@ public class SpatialSearchToken {
 			return name.equals(word);
 		}
 		if (name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
-			return poiTypes != null && matchPoiCategoryKeys(poiTypes);
+			return poiTypes != null && matchListedPoiCategory(poiTypes);
 		}
 		Boolean cache = fastMatchCheck.get(name);
 		if (cache != null) {
@@ -354,6 +388,35 @@ public class SpatialSearchToken {
 		return partialMatch;
 	}
 	
+	private boolean matchListedPoiCategory(TIntArrayList poiTypes) {
+		for (int k = 0; k < poiTypes.size(); k++) {
+			int id = poiTypes.getQuick(k);
+			if (poiCategoryIds.contains(id) && !rowOnlyPoiCategoryIds.contains(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** Drops what was found by name, the category rows stay. */
+	void clearNameAtoms() {
+		List<NameIndexAtom> categories = new ArrayList<>();
+		for (NameIndexAtom a : atoms) {
+			if (a.isPoiCategory()) {
+				categories.add(a);
+			}
+		}
+		atoms = new ArrayList<>();
+		index = new TLongObjectHashMap<>();
+		quadTree = new HashQuadTree<>(16);
+		quadTreeSkip = new HashSkipTileQuadTree<>();
+		indexByOsmIds = new TLongObjectHashMap<>();
+		clearPartialAtoms();
+		for (NameIndexAtom a : categories) {
+			addAtom(a);
+		}
+	}
+
 	public void clearPartialAtoms() {
 		partialExactMatch.clear();
 		partialMatch.clear();

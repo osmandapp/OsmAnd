@@ -1,6 +1,7 @@
 package net.osmand.search.core.spatial;
 
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -79,6 +80,8 @@ public class SpatialSearchContext {
 
 	List<SpatialSearchToken> tokens = null; // non initiatilized
 	Set<String> commonlyUsedWords = new HashSet<String>();
+	// words still being typed that too many names continue, see SpatialSearchToken.isBroadWord()
+	Set<String> broadWords = new HashSet<String>();
 	
 	public static class SpatialSearchStats {
 		public Timer requestTime = new Timer();
@@ -248,7 +251,7 @@ public class SpatialSearchContext {
 	
 	void readAtoms() throws IOException {
 		int indxInd = 0;
-		
+		int cachedAtoms = 0;
 		for (int fileInd = 0; fileInd < files.size(); fileInd++) {
 			SpatialSearchFileCache iCache = internalFile.get(fileInd);
 			BinaryMapIndexReader b = files.get(fileInd);
@@ -256,6 +259,12 @@ public class SpatialSearchContext {
 				indx.resetBytesStat();
 				readAtoms(tokens, b, indx, indxInd);
 				indxInd++;
+				// the matched atoms are in the tokens now, the parsed blocks are only a cache for the next search
+				cachedAtoms += indx.getCachedAtoms();
+				if (cachedAtoms > settings.AUTO_CLEAR_PREFIX_CACHE_ATOMS) {
+					cachedAtoms -= indx.getCachedAtoms();
+					indx.clearPrefixes();
+				}
 				NameIndexReaderBytes bytesStat = indx.getBytesStat();
 				stats.readAtomsBytes += bytesStat.readAtomBytes;
 				stats.skipAtomsBytes += bytesStat.skipAtomBytes;
@@ -509,10 +518,13 @@ public class SpatialSearchContext {
 			} else if (!settings.SEARCH_ADDR && indx.addressRegion != null) {
 				continue;
 			}
-			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
+			// the prefix matcher also follows the '#^' keys of the categories selected for this token in this query
+			String cacheKey = t.poiCategoryKeysToAutocomplete.isEmpty() ? t.word
+					: t.word + "\u0000" + new java.util.TreeSet<>(t.poiCategoryKeysToAutocomplete);
+			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(cacheKey);
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
-				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats)));
+				matchedPrefixes = b.readFullNameIndex(indx.setQuery(cacheKey, t.getPrefixMatcher(stats)));
 				stats.sub1FileAtomsTime.finish();
 				if (matchedPrefixes == null) {
 					continue;
@@ -642,7 +654,120 @@ public class SpatialSearchContext {
 		return indInd;
 	}
 
+	/** the last word of the query when it is still being typed and is a word, not a number */
+	SpatialSearchToken typedWord() {
+		SpatialSearchToken last = null;
+		for (SpatialSearchToken t : tokens) {
+			if (last == null || t.originalOrder > last.originalOrder) {
+				last = t;
+			}
+		}
+		return last != null && last.incomplete && !last.wordNoDot.isEmpty()
+				&& SearchAlgorithms.letters(last.wordNoDot) == last.wordNoDot.length() ? last : null;
+	}
+
+	/**
+	 * How many atoms the index keeps under the keys a typed word matches. The number stands at the head of each
+	 * block, so the blocks are skipped, not parsed.
+	 */
+	long countIndexAtoms(SpatialSearchToken t) throws IOException {
+		long sum = 0;
+		String key = "\u0001" + t.word;
+		for (int fileInd = 0; fileInd < files.size(); fileInd++) {
+			BinaryMapIndexReader b = files.get(fileInd);
+			for (NameIndexReader indx : internalFile.get(fileInd).indexReaders) {
+				if (indx.poiRegion != null ? !settings.SEARCH_POI : !settings.SEARCH_ADDR || settings.SEARCH_POI_BY_CATEGORY_ONLY) {
+					continue;
+				}
+				if (indx.countAtoms(key) < 0) {
+					b.readFullNameIndex(indx.setCountQuery(key, t.getPrefixMatcher(stats)));
+					indx.clearQuery();
+				}
+				sum += Math.max(0, indx.countAtoms(key));
+				if (sum > settings.BROAD_WORD_INDEX_ATOMS) {
+					return sum;
+				}
+			}
+		}
+		return sum;
+	}
+
+	/** The names that continue a typed word, the most frequent first: counted while its atoms were read. */
+	List<SpatialTextSearch.SpatialSuggestion> suggestNames(SpatialSearchToken t, int limit) {
+		Map<String, int[]> counts = new HashMap<>();
+		for (Map.Entry<String, int[]> e : t.nameCounts.entrySet()) {
+			if (!t.matchesWholeWord(e.getKey())) {
+				// without the words the generator adds for the search (altnamecommon1, cityasstreetcommon)
+				StringBuilder name = new StringBuilder();
+				for (String w : e.getKey().split(" ")) {
+					if (!w.isEmpty() && !NameIndexReader.isIndexMarker(w)) {
+						name.append(name.length() == 0 ? "" : " ").append(w);
+					}
+				}
+				counts.computeIfAbsent(name.toString(), k -> new int[1])[0] += e.getValue()[0];
+			}
+		}
+		List<SpatialTextSearch.SpatialSuggestion> res = mostFrequent(counts);
+		t.continuedNames = 0;
+		for (SpatialTextSearch.SpatialSuggestion sg : res) {
+			t.continuedNames += sg.count();
+		}
+		return new ArrayList<>(res.subList(0, Math.min(Math.max(0, limit), res.size())));
+	}
+
+	/**
+	 * The most frequent words that continue a typed word. They come from the word counters at the top of each
+	 * name index (frequent words only): no atom and no object is read for them.
+	 */
+	List<SpatialTextSearch.SpatialSuggestion> suggestWords(SpatialSearchToken t, int limit) {
+		String typed = SearchAlgorithms.alignChars(t.wordNoDot);
+		Map<String, int[]> counts = new HashMap<>();
+		for (SpatialSearchFileCache fc : internalFile) {
+			for (NameIndexReader r : fc.indexReaders) {
+				Map<String, NameIndexReader.ValueFreq> words = r.getCommonWordsStats();
+				if (words == null) {
+					continue;
+				}
+				for (NameIndexReader.ValueFreq vf : words.values()) {
+					if (vf.value.length() > typed.length() && vf.value.startsWith(typed)
+							&& !NameIndexReader.isIndexMarker(vf.value)) {
+						counts.computeIfAbsent(vf.value, k -> new int[1])[0] += vf.freq;
+					}
+				}
+			}
+		}
+		List<SpatialTextSearch.SpatialSuggestion> res = mostFrequent(counts);
+		return new ArrayList<>(res.subList(0, Math.min(Math.max(0, limit), res.size())));
+	}
+
+	// the index has a name in several spellings (schulstraße, schulstrasse): one suggestion, the most frequent one
+	private static List<SpatialTextSearch.SpatialSuggestion> mostFrequent(Map<String, int[]> counts) {
+		Map<String, SpatialTextSearch.SpatialSuggestion> bySpelling = new HashMap<>();
+		for (Map.Entry<String, int[]> e : counts.entrySet()) {
+			String spelling = Normalizer.normalize(e.getKey().replace("ß", "ss"), Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+			bySpelling.merge(spelling, new SpatialTextSearch.SpatialSuggestion(e.getKey(), e.getValue()[0]),
+					(x, y) -> x.count() > y.count() || x.count() == y.count() && x.word().compareTo(y.word()) > 0 ? x : y);
+		}
+		List<SpatialTextSearch.SpatialSuggestion> res = new ArrayList<>(bySpelling.values());
+		res.sort((x, y) -> x.count() != y.count() ? -Integer.compare(x.count(), y.count()) : x.word().compareTo(y.word()));
+		return res;
+	}
+
 	public MapObject readPoiObject(long id, TLongObjectHashMap<MapObject> cache) throws IOException {
+		return readPoiObject(id, cache, null);
+	}
+
+	/** the id of the object an atom reads: the alternative name variant reads the same object */
+	public static long poiObjectId(long id) {
+		return id & ((1L << SHIFT_ALT_NAME) - 1);
+	}
+
+	/**
+	 * @param wanted ids (poiObjectId) that are going to be read: a block is read as a whole and only these
+	 *               objects of it are kept, null - the whole block is kept
+	 */
+	public MapObject readPoiObject(long id, TLongObjectHashMap<MapObject> cache, TLongHashSet wanted)
+			throws IOException {
 		id &= (1L << SHIFT_ALT_NAME) - 1; // the alternative name variant reads the same object
 		if (cache != null) {
 			MapObject mapObject = cache.get(id);
@@ -674,7 +799,10 @@ public class SpatialSearchContext {
 		if (cache != null) {
 			long ofirstid = oid - (poiInd << SHIFT_FILE_IND);
 			for (int i = 0; i < lst.size(); i++) {
-				cache.put(ofirstid + (i << SHIFT_FILE_IND), lst.get(i));
+				long bid = ofirstid + (i << SHIFT_FILE_IND);
+				if (wanted == null || wanted.contains(bid)) {
+					cache.put(bid, lst.get(i));
+				}
 			}
 		}
 		if (poiInd >= lst.size()) {
@@ -997,6 +1125,19 @@ public class SpatialSearchContext {
 		atom.elo = elo;
 		if (settings.SEARCH_POI_BY_CATEGORY_ONLY) {
 			skipFilteredZoomObject(t, atom.coords.x16, atom.coords.y16, atom.elo > 0, true);
+		}
+		if (t.suggestOnly) {
+			return;
+		}
+		if (t.isBroadWord() && settings.SUGGEST_ONLY_MAX_ATOMS > 0
+				&& ++t.nameAtoms > settings.SUGGEST_ONLY_MAX_ATOMS) {
+			t.suggestOnly = true;
+			t.clearNameAtoms();
+			return;
+		}
+		if (t.incomplete && !t.isBroadWord() && !name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
+			// every name is counted: the suggestions tell how many objects carry it
+			t.nameCounts.computeIfAbsent(atom.name, k -> new int[1])[0]++;
 		}
 		// for all common always false, for some frequent could be optimization
 		if (settings.OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS && cmnWord[0]) {

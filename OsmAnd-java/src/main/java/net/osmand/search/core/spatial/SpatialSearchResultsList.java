@@ -148,13 +148,18 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 		TLongArrayList lst = new TLongArrayList(lstMap.keySet());
 		lst.sort(); // sort is not correct for file ind last bits >>> 12 
+		// a POI block is read as a whole: only the objects asked for are kept ("23 s": 88K of 890K)
+		TLongHashSet wanted = new TLongHashSet(lst.size());
+		for (int i = 0; type == SpatialSearchToken.POI_TYPE && i < lst.size(); i++) {
+			wanted.add(SpatialSearchContext.poiObjectId(lst.get(i)));
+		}
 		for(int i = 0; i < lst.size(); i++) {
 			if(ctx.isCancelled()) {
 				return;
 			}
 			long id = lst.get(i);
 			if (type == SpatialSearchToken.POI_TYPE) {
-				cache.put(id, ctx.readPoiObject(id, cache));
+				cache.put(id, ctx.readPoiObject(id, cache, wanted));
 			} else {
 				cache.put(id, ctx.readAddrObject(id, lstMap.get(id), cache));
 			}

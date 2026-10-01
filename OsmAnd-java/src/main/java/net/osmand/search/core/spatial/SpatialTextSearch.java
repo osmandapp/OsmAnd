@@ -87,6 +87,10 @@ public class SpatialTextSearch {
 		
 		// max prefixes for each name reader
 		public int AUTO_CLEAR_PREFIX_CACHE_LIMIT = 1000;
+		// max parsed name index atoms kept in all files during and between searches (~0.8 KB each)
+		public int AUTO_CLEAR_PREFIX_CACHE_ATOMS = 20_000;
+		// the prefix cache speeds up typing of one query, a different query starts with an empty cache
+		public boolean CLEAR_PREFIX_CACHE_ON_NEW_QUERY = true;
 
 		// Deduplicate results in the end by checking osm id of the first object in combination
 		public boolean DEDUPLICATE_RES = true;
@@ -118,6 +122,16 @@ public class SpatialTextSearch {
 		
 		// only do incomplete search with 2+ chars
 		public int MIN_CHARACTERS_INCOMPLETE = 2;
+		// a word still being typed is broad when the index blocks of its keys hold more atoms than this (the number
+		// is at the head of each block, nothing is parsed) ...
+		public int BROAD_WORD_INDEX_ATOMS = 50_000;
+		// ... or when more names than this continue it. A broad word is matched as a whole word, the names that
+		// continue it are offered as suggestions, its POI categories are rows whose POIs are not read
+		public int BROAD_WORD_NAMES = 5000;
+		// a whole word that still finds more names than this lists nothing, it only suggests
+		public int SUGGEST_ONLY_MAX_ATOMS = 5000;
+		// a word still being typed: the most frequent words that continue it (from the word counters of the name index)
+		public int LIMIT_SUGGESTIONS = 10;
 		
 		public boolean SCORE_RANKING = true; // false - old lexicographic ladder
 		// one-word query: POIs found by category only and unrated, read nearest first ("restaurant" finds 180K; 0 - all)
@@ -296,10 +310,31 @@ public class SpatialTextSearch {
 	public static class SpatialSearchGlobalCache {
 
 		public Map<String, SpatialSearchFileCache> filesCache = new HashMap<>();
+		
+		String lastInput;
+
+		// the same query is being typed while one input continues the other (a key added or deleted)
+		void clearPrefixesOnNewQuery(String input) {
+			boolean sameQuery = lastInput == null || input.startsWith(lastInput) || lastInput.startsWith(input);
+			lastInput = input;
+			if (!sameQuery) {
+				for (SpatialSearchFileCache fc : filesCache.values()) {
+					for (NameIndexReader r : fc.indexReaders) {
+						r.clearPrefixes();
+					}
+				}
+			}
+		}
 
 	}
 
+	/** A word that continues the typed letters and how many objects of the maps carry it. */
+	public record SpatialSuggestion(String word, int count) {
+	}
+
 	public static class SpatialSearchResults {
+
+		public List<SpatialSuggestion> suggestions = Collections.emptyList();
 
 		public String input;
 
@@ -564,9 +599,43 @@ public class SpatialTextSearch {
 		ctx.initFiles(cache);
 	}
 
+	private void clearPrefixCacheIfLarge(SpatialSearchContext ctx) {
+		int atoms = 0;
+		for (SpatialSearchFileCache fc : ctx.internalFile) {
+			for (NameIndexReader r : fc.indexReaders) {
+				// the query keeps the tokens with every atom and object read by this search
+				r.clearQuery();
+				atoms += r.getCachedAtoms();
+			}
+		}
+		if (atoms > ctx.settings.AUTO_CLEAR_PREFIX_CACHE_ATOMS) {
+			for (SpatialSearchFileCache fc : ctx.internalFile) {
+				for (NameIndexReader r : fc.indexReaders) {
+					r.clearPrefixes();
+				}
+			}
+		}
+	}
+
 	public SpatialSearchResults searchAPI(String input, SpatialSearchContext ctx) throws IOException {
+		try {
+			return searchAPIInternal(input, ctx);
+		} catch (IOException | RuntimeException | Error e) {
+			for (BinaryMapIndexReader r : ctx.files) {
+				r.resetReadLimits();
+			}
+			throw e;
+		} finally {
+			clearPrefixCacheIfLarge(ctx);
+		}
+	}
+
+	private SpatialSearchResults searchAPIInternal(String input, SpatialSearchContext ctx) throws IOException {
 		ctx.stats.requestTime.start();
 		SpatialSearchResults res = new SpatialSearchResults();
+		if (ctx.settings.CLEAR_PREFIX_CACHE_ON_NEW_QUERY) {
+			cache.clearPrefixesOnNewQuery(input);
+		}
 		if (ctx.settings.SEARCH_SUGGESTION && !input.endsWith(CollatorStringMatcher.INCOMPLETE_DOT + "") && 
 				!input.endsWith(" ")) {
 			input += CollatorStringMatcher.INCOMPLETE_DOT;
@@ -584,8 +653,35 @@ public class SpatialTextSearch {
 		// 2. read atoms & poi categories
 		ctx.stats.step1Atoms.start();
 		ctx.setTokens(res.tokens);
-		ctx.processPoiCategories();
-		ctx.readAtoms();
+		SpatialSearchToken typed = ctx.typedWord();
+		boolean broad = typed != null && (typed.isBroadWord()
+				|| ctx.countIndexAtoms(typed) > ctx.settings.BROAD_WORD_INDEX_ATOMS);
+		for (int pass = 0; pass < 2; pass++) {
+			if (broad) {
+				if (pass == 0) {
+					// counted at the head of the index, no atom is read
+					res.suggestions = ctx.suggestWords(typed, ctx.settings.LIMIT_SUGGESTIONS);
+				}
+				ctx.broadWords.add(typed.word);
+				if (res.tokens.size() > 1 && input.lastIndexOf(' ') > 0) {
+					// several words: the query is searched without the broad word, the suggestions continue it
+					input = input.substring(0, input.lastIndexOf(' ') + 1);
+				}
+				res.tokens = splitWords(ctx, input);
+				ctx.setTokens(res.tokens);
+			}
+			ctx.processPoiCategories();
+			ctx.readAtoms();
+			if (broad || typed == null) {
+				break;
+			}
+			// the names are read and counted: few of them are listed as before, many make the word broad
+			res.suggestions = ctx.suggestNames(typed, ctx.settings.LIMIT_SUGGESTIONS);
+			broad = typed.continuedNames > ctx.settings.BROAD_WORD_NAMES;
+			if (!broad) {
+				break;
+			}
+		}
 		ctx.stats.step1Atoms.finish();
 
 		// 3. sort tokens
@@ -699,7 +795,7 @@ public class SpatialTextSearch {
 			if (w.equals(SpatialSearchToken.DOT_INCOMPLETE_STRING)) {
 				continue;
 			}
-			SpatialSearchToken token = new SpatialSearchToken(ctx.settings.MIN_CHARACTERS_INCOMPLETE, w,
+			SpatialSearchToken token = new SpatialSearchToken(ctx.settings.MIN_CHARACTERS_INCOMPLETE, ctx.broadWords.contains(w), w,
 					owords.get(ind), tokens.size());
 			tokens.add(token);
 		}

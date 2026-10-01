@@ -454,6 +454,15 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				int len = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimitLong((long) len);
+				if (pi.isCountOnly()) {
+					// atomsLength is written first
+					int tg = codedIS.readTag();
+					pi.setAtomsLength(shift, WireFormat.getTagFieldNumber(tg) == OsmAndPoiNameIndexData.ATOMSLENGTH_FIELD_NUMBER
+							? codedIS.readUInt32() : 0);
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					codedIS.popLimit(oldLimit);
+					break;
+				}
 				PrefixNameValue prefix = pi.addData(OsmAndPoiNameIndexData.parseFrom(codedIS), shift);
 				if (res != null) {
 					res.add(prefix);
