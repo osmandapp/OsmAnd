@@ -23,10 +23,13 @@ import net.osmand.data.DataTileManager;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> extends interface_MapTiledCollectionProvider {
 
@@ -41,7 +44,10 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	private final PointI offset;
 
 	private final DataTileManager<T> points;
+	private final Map<Bitmap, IconData> iconsCache = new ConcurrentHashMap<>();
 	private MapTiledCollectionProvider providerInstance;
+
+	private record IconData(int width, int height, byte[] pixels) {}
 
 	public interface ICollectionPoint {
 		double getLatitude();
@@ -62,13 +68,16 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 		private final ICollectionPoint point;
 		private final float textScale;
 		private final float density;
+		private final Map<Bitmap, IconData> iconsCache;
 		private final PointI point31;
 
-		public CollectionPoint(@NonNull Context ctx, @NonNull ICollectionPoint point, float textScale, float density) {
+		public CollectionPoint(@NonNull Context ctx, @NonNull ICollectionPoint point, float textScale, float density,
+		                       @NonNull Map<Bitmap, IconData> iconsCache) {
 			this.ctx = ctx;
 			this.point = point;
 			this.textScale = textScale;
 			this.density = density;
+			this.iconsCache = iconsCache;
 			this.point31 = new PointI(MapUtils.get31TileNumberX(point.getLongitude()),
 					MapUtils.get31TileNumberY(point.getLatitude()));
 		}
@@ -83,7 +92,13 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 			Bitmap bitmap = isFullSize
 					? point.getBigImage(ctx, textScale, density)
 					: point.getSmallImage(ctx, textScale, density);
-			return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
+			if (bitmap == null) {
+				return SwigUtilities.nullSkImage();
+			}
+			// points share their bitmaps: copy the pixels once, but every point still gets its own image
+			IconData icon = iconsCache.computeIfAbsent(bitmap, b ->
+					new IconData(b.getWidth(), b.getHeight(), AndroidUtils.getByteArrayFromBitmap(b)));
+			return NativeUtilities.createSkImage(icon.width, icon.height, icon.pixels);
 		}
 
 		@Override
@@ -177,7 +192,7 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 		}
 		QListMapTiledCollectionPoint res = new QListMapTiledCollectionPoint();
 		for (T point : tilePoints) {
-			CollectionPoint collectionPoint = new CollectionPoint(ctx, point, textScale, density);
+			CollectionPoint collectionPoint = new CollectionPoint(ctx, point, textScale, density, iconsCache);
 			res.add(collectionPoint.instantiateProxy(true));
 			collectionPoint.swigReleaseOwnership();
 		}
