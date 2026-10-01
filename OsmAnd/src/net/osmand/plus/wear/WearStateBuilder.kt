@@ -50,6 +50,7 @@ class WearStateBuilder(private val app: OsmandApplication) {
 			recording = buildRecording(),
 			profiles = buildProfiles(collectedIcons),
 			markers = buildMarkers(),
+			carConnected = app.carNavigationSession != null,
 			location = buildLocation(),
 			headingDegrees = app.mapViewTrackingUtilities.heading
 		)

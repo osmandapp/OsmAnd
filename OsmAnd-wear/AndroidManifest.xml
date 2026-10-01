@@ -40,6 +40,15 @@
 					android:host="*"
 					android:pathPrefix="/osmand" />
 			</intent-filter>
+			<!-- Without this the map frame channel opens on the phone and nothing on the watch
+			     is ever told about it: channel events are delivered separately from data ones. -->
+			<intent-filter>
+				<action android:name="com.google.android.gms.wearable.CHANNEL_EVENT" />
+				<data
+					android:scheme="wear"
+					android:host="*"
+					android:pathPrefix="/osmand" />
+			</intent-filter>
 		</service>
 	</application>
 </manifest>

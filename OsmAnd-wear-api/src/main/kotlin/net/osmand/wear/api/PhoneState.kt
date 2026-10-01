@@ -25,7 +25,12 @@ data class PhoneState(
 	/** Profiles offered by the recording profile picker, in the order the phone lists them. */
 	val profiles: List<ProfileInfo> = emptyList(),
 	/** Active map markers in OsmAnd's own order, so the first one is the one its widget tracks. */
-	val markers: List<MarkerInfo> = emptyList()
+	val markers: List<MarkerInfo> = emptyList(),
+	/**
+	 * Set while the phone is driving a car display. The watch map is refused for as long as it
+	 * holds: one screen in a car is the one the driver should be looking at.
+	 */
+	val carConnected: Boolean = false
 )
 
 /**

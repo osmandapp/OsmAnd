@@ -36,24 +36,28 @@ class WearCommandService : WearableListenerService() {
 			LOG.warn("Dropped an unreadable command from the watch")
 			return
 		}
+		val sourceNodeId = event.sourceNodeId
 		app.runInUIThread {
 			// Any contact from the watch means someone is looking, so start following the route.
 			WearBridge.start(app)
-			handle(command)
+			handle(command, sourceNodeId)
 			WearBridge.publish(app)
 		}
 	}
 
-	private fun handle(command: WearCommand) {
+	private fun handle(command: WearCommand, sourceNodeId: String) {
 		Log.d(TAG, "handling $command")
 		when (command) {
 			is WearCommand.RequestState -> {
 				// SPIKE HOOK, to be removed: runs the renderer probe when a marker file is
 				// present, because the development plugin's own row does not respond to taps.
-				val marker = java.io.File(app.filesDir, "wear_map_probe")
+				val marker = app.getAppPath("wear_map_probe")
 				if (marker.exists()) {
+					// The file's contents, when a number, say how many seconds to hold the
+					// renderer up for — a battery reading needs a steady state to measure.
+					val hold = marker.readText().trim().toIntOrNull() ?: 0
 					marker.delete()
-					WearMapProbe.run(app, 384, 384, 2.0f) { result ->
+					WearMapProbe.run(app, 384, 384, 2.0f, hold) { result ->
 						app.runInUIThread { app.showToastMessage(result) }
 					}
 				}
@@ -114,6 +118,19 @@ class WearCommandService : WearableListenerService() {
 
 			is WearCommand.AddMarkerHere -> addMarkerAtCurrentLocation()
 
+			is WearCommand.StartMapStream ->
+				mapStreamer(app).start(sourceNodeId, command.width, command.height, command.density)
+
+			is WearCommand.StopMapStream -> mapStreamer(app).stop()
+
+			is WearCommand.PauseMapStream -> mapStreamer(app).setPaused(command.paused)
+
+			is WearCommand.ZoomMap -> mapStreamer(app).zoom(command.factor, command.seq)
+
+			is WearCommand.PanMap -> mapStreamer(app).pan(command.dx, command.dy, command.seq)
+
+			is WearCommand.RecenterMap -> mapStreamer(app).recenter(command.seq)
+
 			is WearCommand.SelectProfile -> {
 				val mode = ApplicationMode.valueOfStringKey(command.appModeKey, null)
 				if (mode != null) {
@@ -160,6 +177,17 @@ class WearCommandService : WearableListenerService() {
 	}
 
 	companion object {
+		/**
+		 * One streamer per process: the renderer it owns is expensive enough that a second
+		 * would be a bug, and the service is recreated for every message.
+		 */
+		@Volatile
+		private var streamer: WearMapStreamer? = null
+
+		@Synchronized
+		private fun mapStreamer(app: OsmandApplication): WearMapStreamer =
+			streamer ?: WearMapStreamer(app).also { streamer = it }
+
 		private const val TAG = "OsmAndWear"
 		private val LOG = PlatformUtil.getLog(WearCommandService::class.java)
 	}

@@ -25,6 +25,7 @@ import net.osmand.wear.data.Snapshot
 import net.osmand.wear.ui.screens.ConnectionScreen
 import net.osmand.wear.ui.screens.FinishRecordingDialog
 import net.osmand.wear.ui.screens.HomeScreen
+import net.osmand.wear.ui.screens.MapScreen
 import net.osmand.wear.ui.screens.MarkersPager
 import net.osmand.wear.ui.screens.MessageScreen
 import net.osmand.wear.ui.screens.NavigationScreen
@@ -39,6 +40,7 @@ object Routes {
 	const val HOME = "home"
 	const val NAVIGATION = "navigation"
 	const val RECORDING = "recording"
+	const val MAP = "map"
 	const val MARKERS = "markers"
 	const val PROFILES = "profiles"
 	const val SETTINGS = "settings"
@@ -132,6 +134,17 @@ fun WearApp(connector: PhoneConnector) {
 							onStart = { send(WearCommand.StartRecording) }
 						)
 					}
+				}
+				composable(Routes.MAP) {
+					MapScreen(
+						carConnected = currentSnapshot()?.state?.carConnected == true,
+						onStart = { w, h, d -> send(WearCommand.StartMapStream(w, h, d)) },
+						onStop = { send(WearCommand.StopMapStream) },
+						onPause = { paused -> send(WearCommand.PauseMapStream(paused)) },
+						onZoom = { factor, seq -> send(WearCommand.ZoomMap(factor, seq)) },
+						onPan = { dx, dy, seq -> send(WearCommand.PanMap(dx, dy, seq)) },
+						onRecenter = { seq -> send(WearCommand.RecenterMap(seq)) }
+					)
 				}
 				composable(Routes.MARKERS) {
 					val state = currentSnapshot()?.state

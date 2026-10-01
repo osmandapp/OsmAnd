@@ -63,6 +63,49 @@ sealed interface WearCommand {
 	@SerialName("add_marker_here")
 	data object AddMarkerHere : WearCommand
 
+	/**
+	 * Asks the phone to stand a renderer up at the watch's own size and start sending frames.
+	 * The watch sends its dimensions because they differ across models, and its density because
+	 * a renderer context is built around one.
+	 */
+	@Serializable
+	@SerialName("start_map_stream")
+	data class StartMapStream(val width: Int, val height: Int, val density: Float) : WearCommand
+
+	/** Tears the renderer down. Sent when the map screen closes, not merely when it is hidden. */
+	@Serializable
+	@SerialName("stop_map_stream")
+	data object StopMapStream : WearCommand
+
+	/**
+	 * Stops the frames without tearing the renderer down, for when the watch screen goes dark.
+	 * Rebuilding it would cost the tile load again, which is seconds; holding it costs memory
+	 * that is already spent while the screen is open.
+	 */
+	@Serializable
+	@SerialName("pause_map_stream")
+	data class PauseMapStream(val paused: Boolean) : WearCommand
+
+	/**
+	 * How much bigger the map should get, as a plain scale factor: 2 shows half as much ground.
+	 * A factor rather than zoom levels because the watch shows its own preview of the gesture
+	 * while it waits for a frame, and only a factor lets that preview be exact — what a level
+	 * means in pixels is the renderer's business, and the phone converts it there.
+	 */
+	@Serializable
+	@SerialName("zoom_map")
+	data class ZoomMap(val factor: Float, val seq: Int = 0) : WearCommand
+
+	/** Drag, in watch pixels; the phone turns them into a move of its own viewport. */
+	@Serializable
+	@SerialName("pan_map")
+	data class PanMap(val dx: Float, val dy: Float, val seq: Int = 0) : WearCommand
+
+	/** Puts the map back on the current position. */
+	@Serializable
+	@SerialName("recenter_map")
+	data class RecenterMap(val seq: Int = 0) : WearCommand
+
 	/** Switches the active OsmAnd profile, which is what the recording will be attributed to. */
 	@Serializable
 	@SerialName("select_profile")

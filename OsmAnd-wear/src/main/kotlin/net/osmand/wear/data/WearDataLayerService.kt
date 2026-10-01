@@ -1,5 +1,6 @@
 package net.osmand.wear.data
 
+import com.google.android.gms.wearable.ChannelClient
 import com.google.android.gms.wearable.DataEvent
 import com.google.android.gms.wearable.DataEventBuffer
 import com.google.android.gms.wearable.DataMapItem
@@ -31,6 +32,25 @@ class WearDataLayerService : WearableListenerService() {
 
 		for (map in maps) {
 			scope.launch { PhoneStateRepository.onSnapshot(reader.read(map)) }
+		}
+	}
+
+	override fun onChannelOpened(channel: ChannelClient.Channel) {
+		if (channel.path != WearProtocol.PATH_MAP_STREAM) {
+			return
+		}
+		val client = com.google.android.gms.wearable.Wearable.getChannelClient(applicationContext)
+		scope.launch {
+			runCatching {
+				val input = com.google.android.gms.tasks.Tasks.await(client.getInputStream(channel))
+				input.use { MapFrames.consume(it) }
+			}
+		}
+	}
+
+	override fun onChannelClosed(channel: ChannelClient.Channel, closeReason: Int, appSpecificErrorCode: Int) {
+		if (channel.path == WearProtocol.PATH_MAP_STREAM) {
+			MapFrames.clear()
 		}
 	}
 
