@@ -188,7 +188,7 @@
     <string name="amenity_type_leisure">Szabadidő</string>
     <string name="amenity_type_man_made">Építmény</string>
     <string name="amenity_type_military">Katonai</string>
-    <string name="amenity_type_natural">Természet</string>
+    <string name="amenity_type_natural">Természetes</string>
     <string name="amenity_type_office">Iroda</string>
     <string name="amenity_type_other">Egyéb</string>
     <string name="amenity_type_shop">Üzlet</string>
@@ -557,7 +557,7 @@
     <string name="street_name">Utcanév</string>
     <string name="hno">Házszám</string>
     <string name="monitoring_settings">Utazás rögzítése</string>
-    <string name="choose_osmand_theme">Téma</string>
+    <string name="choose_osmand_theme">Alkalmazás témája</string>
     <string name="accessibility_options">Akadálymentesítési lehetőségek</string>
     <string name="shared_string_more_actions">További műveletek</string>
     <string name="download_using_mobile_internet">Jelenleg nincs Wi-Fi-kapcsolat. Szeretné a jelenlegi internetkapcsolatot használni a letöltéshez?</string>
@@ -2516,7 +2516,7 @@
     <string name="turn_screen_on_power_button_descr">Az eszköz bekapcsológombjának megnyomásával a képernyő bekapcsol, a zárolási képernyő fölött pedig megjelenik az OsmAnd.</string>
     <string name="turn_screen_on_power_button">Bekapcsológomb</string>
     <string name="turn_screen_on_proximity_sensor">Közelségérzékelő</string>
-    <string name="keep_screen_on">Kijelző maradjon bekapcsolva</string>
+    <string name="keep_screen_on">Képernyő bekapcsolva tartása</string>
     <string name="one_image_per_tile">Egy képfájl csempénként</string>
     <string name="pseudo_mercator_projection">Pszeudo-Mercator vetület</string>
     <string name="online_map_url_helper_text">Adja meg vagy illessze be az online forrás webcímét.</string>
@@ -3235,13 +3235,13 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonok sematikus megjelenítése kis nagyításnál</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Vízi alagutak láthatóságának növelése</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Vízi alagutak láthatóságának növelése</string>
-    <string name="navigate_point_format_swiss_grid_plus">Svájci koordináták (CH1903+)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Svájci rácsrendszer (CH1903+)</string>
     <string name="shared_string_not_used">Használaton kívül</string>
     <string name="shared_string_used">Használatban</string>
     <string name="waypoint_template">Útpontsablon</string>
     <string name="files_with_route_restrictions">Útvonal-korlátozásokat tartalmazó fájlok</string>
     <string name="predefined_waypoint_appearance_description">A műveletre koppintva az útpont automatikusan elmentődik az előre megadott paraméterekkel.</string>
-    <string name="navigate_point_format_swiss_grid">Svájci koordináták (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid">Svájci rácsrendszer (CH1903)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Jegyzet címkék</string>
     <string name="track_file">Nyomvonalfájl</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme címkék</string>
@@ -5079,15 +5079,15 @@
     <string name="navigate_point_north_coordinate">Északi koordináta</string>
     <string name="drag_to_reorder_content_description">Húzza az átrendezéshez</string>
     <string name="coordinate_format_add_title">Formátum hozzáadása</string>
-    <string name="coordinate_format_add_empty_body">Keresés több mint 5 000 helyi és országos EPSG-kódból álló adatbázisban ország, név vagy azonosító alapján.</string>
-    <string name="coordinate_format_add_empty_title">Egy bizonyos formátumot keres?</string>
-    <string name="coordinate_format_add_search_hint">EPSG-kód vagy formátumnév keresése</string>
+    <string name="coordinate_format_add_empty_body">Keressen a több mint 5000 helyi és országos EPSG-kódot tartalmazó adatbázisban ország, név vagy azonosító alapján.</string>
+    <string name="coordinate_format_add_empty_title">Valamilyen konkrét formátumot keres?</string>
+    <string name="coordinate_format_add_search_hint">Keresés EPSG-kód vagy formátumnév alapján</string>
     <string name="coordinate_format_cancel_changes_message">Biztosan elveti a koordinátaformátumok módosításait?</string>
     <string name="coordinate_format_cancel_changes_title">Nem mentett módosítások</string>
-    <string name="coordinate_format_description">Előnyben részesített formátumok a gyorseléréshez a helyi menüből és a keresésből.</string>
+    <string name="coordinate_format_description">Előnyben részesített formátumok a helyi menüből és a keresésből való gyors eléréshez.</string>
     <string name="coordinate_format_discard_changes">Módosítások elvetése</string>
-    <string name="coordinate_format_last_item_warning">Legalább egy koordinátaformátum megadása kötelező.</string>
-    <string name="coordinate_format_select_other">Más formátum kiválasztása</string>
+    <string name="coordinate_format_last_item_warning">Legalább egy koordinátaformátum szükséges.</string>
+    <string name="coordinate_format_select_other">Válasszon más formátumot</string>
     <string name="coordinate_format_primary">Elsődleges</string>
     <string name="gallery_media_playback_error">Nem sikerült lejátszani a médiát.</string>
     <string name="gallery_open_in">Megnyitás ezzel:</string>
@@ -5361,4 +5361,5 @@
     <string name="opening_hours_public_holiday">Munkaszüneti napok</string>
     <string name="opening_hours_school_holiday">Iskolai szünetek</string>
     <string name="opening_hours_easter">Húsvét</string>
+    <string name="city_type_boundary">Terület</string>
 </resources>

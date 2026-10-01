@@ -27,14 +27,15 @@ import org.apache.commons.logging.Log;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class GeocodingUtilities {
 
@@ -90,7 +91,7 @@ public class GeocodingUtilities {
 		public long regionLen;
 		public RouteSegmentPoint point;
 		public String streetName;
-		// justification
+		// 2nd step, findStreetAndBuildings: the street, the building and the city
 		public Building building;
 		public String buildingInterpolation;
 		public Street street;
@@ -228,7 +229,7 @@ public class GeocodingUtilities {
 		return words; // keep original order ("NC 42" - search by "NC" not by "42")
 	}
 	
-	private boolean matchStreetName(String s1, String s2, boolean matchWithCommonWords) {
+	private boolean matchStreetName(String s1, String s2, boolean matchWithCommonWords, StreetsCache cache) {
 		if (Algorithms.isEmpty(s1) || Algorithms.isEmpty(s2)) {
 			return false;
 		}
@@ -236,31 +237,86 @@ public class GeocodingUtilities {
 			return true;
 		}
 
-		// Strip dashes before split to match "NC 42" == "NC-42"
-		String undashed1 = s1.replace("-", " ");
-		String undashed2 = s2.replace("-", " ");
-
-		List<String> s1words = prepareStreetName(undashed1, false);
-		List<String> s2words = prepareStreetName(undashed2, false);
-		s1words.sort(Collator.getInstance());
-		s2words.sort(Collator.getInstance());
-		if (!s1words.isEmpty() && s1words.equals(s2words)) {
+		List<String> s1words = sortedWords(s1, false, cache);
+		if (!s1words.isEmpty() && s1words.equals(sortedWords(s2, false, cache))) {
 			return true;
 		}
 
 		if (matchWithCommonWords) {
-			s1words = prepareStreetName(undashed1, true);
-			s2words = prepareStreetName(undashed2, true);
-			s1words.sort(Collator.getInstance());
-			s2words.sort(Collator.getInstance());
-			return !s1words.isEmpty() && s1words.equals(s2words);
+			s1words = sortedWords(s1, true, cache);
+			return !s1words.isEmpty() && s1words.equals(sortedWords(s2, true, cache));
 		}
 
 		return false;
 	}
 
-	public List<GeocodingResult> justifyReverseGeocodingSearch(final GeocodingResult road, BinaryMapIndexReader reader,
+	private List<String> sortedWords(String name, boolean includeCommonWords, StreetsCache cache) {
+		String key = includeCommonWords ? "+" + name : "-" + name;
+		List<String> words = cache == null ? null : cache.words.get(key);
+		if (words == null) {
+			// Strip dashes before split to match "NC 42" == "NC-42"
+			words = prepareStreetName(name.replace("-", " "), includeCommonWords);
+			// the sort only brings both word lists to one order before equals(), plain string order is enough
+			Collections.sort(words);
+			if (cache != null) {
+				cache.words.put(key, words);
+			}
+		}
+		return words;
+	}
+
+	// the street with the name of the road in the address index and the buildings on it within
+	// DISTANCE_BUILDING_PROXIMITY of the point: buildings first, the street after them, the road
+	// itself when no street matches
+	public List<GeocodingResult> findStreetAndBuildings(final GeocodingResult road, BinaryMapIndexReader reader,
 			double knownMinBuildingDistance, final ResultMatcher<GeocodingResult> result) throws IOException {
+		return findStreetAndBuildings(road, reader, knownMinBuildingDistance, result, null);
+	}
+
+	// the roads of one lookup lie within a few hundred metres of the point and many share the query word
+	// ("calle"): the name index is searched once per word around the point, and every street has its
+	// buildings loaded once
+	private static class StreetsCache {
+
+		private static final int MARGIN = 1000;
+
+		private final Map<String, List<Street>> streets = new HashMap<>();
+		private final Set<Street> withBuildings = Collections.newSetFromMap(new IdentityHashMap<>());
+		private final Map<String, List<String>> words = new HashMap<>();
+
+		List<Street> getStreets(BinaryMapIndexReader reader, String word, int radius, LatLon point,
+				ResultMatcher<GeocodingResult> result) throws IOException {
+			String key = System.identityHashCode(reader) + " " + radius + " " + word;
+			List<Street> list = streets.get(key);
+			if (list == null) {
+				List<Street> found = new ArrayList<>();
+				SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(
+						new ResultMatcher<MapObject>() {
+							@Override
+							public boolean publish(MapObject object) {
+								if (object instanceof Street street) {
+									found.add(street);
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return result != null && result.isCancelled();
+							}
+						}, word, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+				req.setBBoxRadius(point.getLatitude(), point.getLongitude(), radius + MARGIN);
+				reader.searchAddressDataByName(req);
+				list = found;
+				streets.put(key, list);
+			}
+			return list;
+		}
+	}
+
+	private List<GeocodingResult> findStreetAndBuildings(final GeocodingResult road, BinaryMapIndexReader reader,
+			double knownMinBuildingDistance, final ResultMatcher<GeocodingResult> result, StreetsCache cache)
+			throws IOException {
 		final List<GeocodingResult> streetsList = new ArrayList<GeocodingResult>();
 
 		List<String> streetNamesUsed = prepareStreetName(road.streetName, false);
@@ -291,24 +347,7 @@ public class GeocodingUtilities {
 					new ResultMatcher<MapObject>() {
 						@Override
 						public boolean publish(MapObject object) {
-							if (object instanceof Street that
-									&& matchStreetName(road.streetName, that.getName(), addCommonWordsFinal)) {
-								double d = MapUtils.getDistance(that.getLocation(), road.searchPoint.getLatitude(),
-										road.searchPoint.getLongitude());
-								// double check to support old format
-								if (d < DISTANCE_STREET_NAME_PROXIMITY_BY_NAME) {
-									GeocodingResult rs = new GeocodingResult(road);
-									rs.street = that;
-									// set connection point to sort
-									rs.connectionPoint = rs.street.getLocation();
-									rs.city = rs.street.getCity();
-									rs.dist = d;
-									streetsList.add(rs);
-									return true;
-								}
-								return false;
-							}
-							return false;
+							return object instanceof Street that && addStreet(road, that, addCommonWordsFinal, streetsList, null);
 						}
 
 						@Override
@@ -317,7 +356,18 @@ public class GeocodingUtilities {
 						}
 					}, longestWord, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 			req.setBBoxRadius(road.getLocation().getLatitude(), road.getLocation().getLongitude(), DISTANCE_STREET_NAME_PROXIMITY_BY_NAME);
-			reader.searchAddressDataByName(req);
+			if (cache == null) {
+				reader.searchAddressDataByName(req);
+			} else {
+				// the same box test the name index does, on the zoom 16 tile of the street
+				for (Street street : cache.getStreets(reader, longestWord, DISTANCE_STREET_NAME_PROXIMITY_BY_NAME, road.searchPoint, result)) {
+					int x16 = (MapUtils.get31TileNumberX(street.getLocation().getLongitude()) >> 15) << 15;
+					int y16 = (MapUtils.get31TileNumberY(street.getLocation().getLatitude()) >> 15) << 15;
+					if (req.contains(x16, y16, x16, y16)) {
+						addStreet(road, street, addCommonWordsFinal, streetsList, cache);
+					}
+				}
+			}
 		}
 
 		final List<GeocodingResult> res = new ArrayList<GeocodingResult>();
@@ -335,7 +385,7 @@ public class GeocodingUtilities {
 				}
 				street.resetDistance();//reset to road projection
 				street.connectionPoint = road.connectionPoint;
-				final List<GeocodingResult> streetBuildings = loadStreetBuildings(road, reader, street);
+				final List<GeocodingResult> streetBuildings = loadStreetBuildings(road, reader, street, cache);
 				Collections.sort(streetBuildings, DISTANCE_COMPARATOR);
 				if (streetBuildings.size() > 0) {
 					Iterator<GeocodingResult> it = streetBuildings.iterator();
@@ -406,9 +456,11 @@ public class GeocodingUtilities {
 	}
 
 	private List<GeocodingResult> loadStreetBuildings(final GeocodingResult road, BinaryMapIndexReader reader,
-			GeocodingResult street) throws IOException {
+			GeocodingResult street, StreetsCache cache) throws IOException {
 		final List<GeocodingResult> streetBuildings = new ArrayList<GeocodingResult>();
-		reader.preloadBuildings(street.street, null, null);
+		if (cache == null || cache.withBuildings.add(street.street)) {
+			reader.preloadBuildings(street.street, null, null);
+		}
 //		log.info("Preload buildings " + street.street.getName() + " " + street.city.getName() + " " + street.street.getId());
 		for (Building b : street.street.getBuildings()) {
 			if (b.getLatLon2() != null) {
@@ -442,6 +494,27 @@ public class GeocodingUtilities {
 		return streetBuildings;
 	}
 	
+	private boolean addStreet(GeocodingResult road, Street street, boolean matchWithCommonWords,
+			List<GeocodingResult> streetsList, StreetsCache cache) {
+		if (!matchStreetName(road.streetName, street.getName(), matchWithCommonWords, cache)) {
+			return false;
+		}
+		double d = MapUtils.getDistance(street.getLocation(), road.searchPoint.getLatitude(),
+				road.searchPoint.getLongitude());
+		// double check to support old format
+		if (d >= DISTANCE_STREET_NAME_PROXIMITY_BY_NAME) {
+			return false;
+		}
+		GeocodingResult rs = new GeocodingResult(road);
+		rs.street = street;
+		// set connection point to sort
+		rs.connectionPoint = rs.street.getLocation();
+		rs.city = rs.street.getCity();
+		rs.dist = d;
+		streetsList.add(rs);
+		return true;
+	}
+
 	public static RoutingContext buildDefaultContextForPOI(BinaryMapIndexReader index) throws FileNotFoundException, IOException {
 		BinaryMapIndexReader geocoding = new BinaryMapIndexReader(new RandomAccessFile(index.getFile(), "r"), index);
 		RoutingMemoryLimits memoryLimit = new RoutingMemoryLimits(GEOCODING_POI_MEMORY, GEOCODING_POI_MEMORY);
@@ -450,10 +523,22 @@ public class GeocodingUtilities {
 		return ctx;
 	}
 
-	public List<GeocodingResult> sortGeocodingResults(List<BinaryMapIndexReader> list, List<GeocodingResult> res) throws IOException {
+	public List<GeocodingResult> findAddresses(List<BinaryMapIndexReader> list, List<GeocodingResult> res) throws IOException {
+		return findAddresses(list, res, null);
+	}
+
+	// the addresses of the roads found by reverseGeocodingSearch: the street and the buildings of
+	// every road, duplicates from neighbouring maps and buildings far behind the nearest dropped,
+	// nearest first; stops early when the matcher is cancelled
+	public List<GeocodingResult> findAddresses(List<BinaryMapIndexReader> list, List<GeocodingResult> res,
+			ResultMatcher<GeocodingResult> cancel) throws IOException {
 		List<GeocodingResult> complete = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		double minBuildingDistance = 0;
+		StreetsCache cache = new StreetsCache();
 		for (GeocodingResult r : res) {
+			if (cancel != null && cancel.isCancelled()) {
+				break;
+			}
 			BinaryMapIndexReader reader = null;
 			for (BinaryMapIndexReader b : list) {
 				for (RouteRegion rb : b.getRoutingIndexes()) {
@@ -468,16 +553,16 @@ public class GeocodingUtilities {
 				}
 			}
 			if (reader != null) {
-				List<GeocodingResult> justified = justifyReverseGeocodingSearch(r, reader, minBuildingDistance, null);
-				if (!justified.isEmpty()) {
-					double md = justified.get(0).getDistance();
+				List<GeocodingResult> streetAndBuildings = findStreetAndBuildings(r, reader, minBuildingDistance, cancel, cache);
+				if (!streetAndBuildings.isEmpty()) {
+					double md = streetAndBuildings.get(0).getDistance();
 					if (minBuildingDistance == 0) {
 						minBuildingDistance = md;
 					} else {
 						minBuildingDistance = Math.min(md, minBuildingDistance);
 					}
-					justified.get(0).dist = -1;//clear intermediate cached distance
-					complete.addAll(justified);
+					streetAndBuildings.get(0).dist = -1;//clear intermediate cached distance
+					complete.addAll(streetAndBuildings);
 				}
 			} else {
 				complete.add(r);

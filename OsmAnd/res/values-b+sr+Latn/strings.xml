@@ -2025,7 +2025,7 @@
     <string name="turn_screen_on_power_button">Dugme za isključivanje</string>
     <string name="turn_screen_on_proximity_sensor">Senzor pokreta</string>
     <string name="turn_screen_on_wake_time_descr">Odaberi vreme isteka ekrana posle buđenja. (\"%1$s\" se odnosi na vreme isteka.)</string>
-    <string name="keep_screen_on">Drži ekran uključenim</string>
+    <string name="keep_screen_on">Drži ekran uključen</string>
     <string name="pseudo_mercator_projection">Pseudo-Merkator projekcija</string>
     <string name="one_image_per_tile">Jedna slika po sličici mape</string>
     <string name="sqlite_db_file">SQLiteDB fajl</string>
@@ -2903,7 +2903,7 @@
     <string name="activity_type_riding_name">Jahanje</string>
     <string name="activity_type_racing_name">Trkanje</string>
     <string name="activity_type_mountainbike_name">Planinski bicikl</string>
-    <string name="activity_type_cycling_name">Bicikl</string>
+    <string name="activity_type_cycling_name">Biciklizam</string>
     <string name="activity_type_hiking_name">Planinarenje</string>
     <string name="activity_type_running_name">Trčanje</string>
     <string name="activity_type_walking_name">Pešačenje</string>
@@ -5141,19 +5141,19 @@
     <string name="shared_string_media">Mediji</string>
     <string name="no_media">Nema medija</string>
     <string name="no_media_descr">Možete dodati fotografije, video zapise ili audio beleške sa kamere ili biblioteke.</string>
-    <string name="navigate_point_format_maidenhead">Mejdenhed</string>
+    <string name="navigate_point_format_maidenhead">Meidenhed</string>
     <string name="navigate_point_east_coordinate">Istočna koordinata</string>
     <string name="navigate_point_north_coordinate">Severna koordinata</string>
     <string name="drag_to_reorder_content_description">Prevucite da biste promenili redosled</string>
     <string name="coordinate_format_add_title">Dodaj format</string>
-    <string name="coordinate_format_add_empty_body">Pretražite bazu podataka sa preko 5.000 lokalnih i nacionalnih EPSG kodova po zemlji, imenu ili ID-u.</string>
+    <string name="coordinate_format_add_empty_body">Pretražite bazu podataka sa više od 5.000 lokalnih i nacionalnih EPSG kodova prema zemlji, nazivu ili identifikatoru.</string>
     <string name="coordinate_format_add_empty_title">Tražite određeni format?</string>
     <string name="coordinate_format_add_search_hint">Pretražite EPSG kod ili naziv formata</string>
     <string name="coordinate_format_cancel_changes_message">Odbaciti izmene formata koordinata?</string>
     <string name="coordinate_format_cancel_changes_title">Nesačuvane izmene</string>
-    <string name="coordinate_format_description">Preferirani formati za brzi pristup iz kontekstnog menija i pretrage.</string>
+    <string name="coordinate_format_description">Željeni formati za brzi pristup iz kontekstnog menija i pretrage.</string>
     <string name="coordinate_format_discard_changes">Odbaci izmene</string>
-    <string name="coordinate_format_last_item_warning">Potreban je barem jedan format koordinata.</string>
+    <string name="coordinate_format_last_item_warning">Potreban je bar jedan format koordinata.</string>
     <string name="coordinate_format_select_other">Izaberite drugi format</string>
     <string name="coordinate_format_primary">Primarni</string>
     <string name="gallery_media_playback_error">Nije moguće reprodukovati medij.</string>
@@ -5429,4 +5429,5 @@
     <string name="opening_hours_public_holiday">Državni praznici</string>
     <string name="opening_hours_school_holiday">Školski raspusti</string>
     <string name="opening_hours_easter">Uskrs</string>
+    <string name="city_type_boundary">Kvart</string>
 </resources>

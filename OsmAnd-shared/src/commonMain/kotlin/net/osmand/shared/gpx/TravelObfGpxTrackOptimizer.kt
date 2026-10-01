@@ -21,7 +21,7 @@ object TravelObfGpxTrackOptimizer {
 	private const val EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE = 10.0
 	private const val PRECISION_DUPES = KMapUtils.DEFAULT_LATLON_PRECISION
 	private const val PRECISION_EQUAL = KMapUtils.DEFAULT_LATLON_PRECISION // ~1 meter
-	private const val PRECISION_CLOSE = KMapUtils.DEFAULT_LATLON_PRECISION * 50 // ~50 meters
+	private const val PRECISION_NEARBY = KMapUtils.DEFAULT_LATLON_PRECISION * 100 // ~72-110 meters
 
 	/** The track with its overlapping ends trimmed and the pieces joined end to end. */
 	fun mergeOverlappedSegmentsAtEdges(track: Track): Track {
@@ -246,7 +246,7 @@ object TravelObfGpxTrackOptimizer {
 		KMapUtils.areLatLonEqual(p1.lat, p1.lon, p2.lat, p2.lon, PRECISION_EQUAL)
 
 	private fun closeWptPts(p1: WptPt, p2: WptPt): Boolean =
-		KMapUtils.areLatLonEqual(p1.lat, p1.lon, p2.lat, p2.lon, PRECISION_CLOSE)
+		KMapUtils.areLatLonEqual(p1.lat, p1.lon, p2.lat, p2.lon, PRECISION_NEARBY)
 
 	/** A point rounded to about a metre, which is how two readings of one place are matched. */
 	private fun llKey(edge: WptPt): String =

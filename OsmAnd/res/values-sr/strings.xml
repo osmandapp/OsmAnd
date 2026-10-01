@@ -124,7 +124,7 @@
     <string name="traffic_warning_pedestrian">Пешачки прелаз</string>
     <string name="show_pedestrian_warnings">Пешачки прелази</string>
     <string name="map_locale">Језик карте</string>
-    <string name="navigate_point_zone">Област</string>
+    <string name="navigate_point_zone">Зона</string>
     <string name="download_tab_updates">Надградње</string>
     <string name="download_tab_local">Местно</string>
     <string name="no_internet_connection">Нема интернет везе</string>
@@ -2513,7 +2513,7 @@
     <string name="turn_screen_on_power_button_descr">Притискањем дугмета за искључивање уређаја ће укључити заслон са ОсмАндом преко закључаног заслона.</string>
     <string name="turn_screen_on_power_button">Дугме за искључивање</string>
     <string name="turn_screen_on_proximity_sensor">Пријемник близине</string>
-    <string name="keep_screen_on">Држи заслон укљученим</string>
+    <string name="keep_screen_on">Држи екран укључен</string>
     <string name="pseudo_mercator_projection">Псеудо-Меркатор пројекција</string>
     <string name="one_image_per_tile">Једна датотека по сличици</string>
     <string name="sqlite_db_file">Датотека SQLiteDB</string>
@@ -5144,21 +5144,21 @@
     <string name="shared_string_media">Медија</string>
     <string name="no_media">Нема медија</string>
     <string name="no_media_descr">Можете додати слике, видеа или звучне белешке из своје камере или књижнице.</string>
-    <string name="navigate_point_format_maidenhead">Мејденхед положај</string>
+    <string name="navigate_point_format_maidenhead">Меиденхед</string>
     <string name="navigate_point_east_coordinate">Источна координата</string>
     <string name="navigate_point_north_coordinate">Северна координата</string>
     <string name="drag_to_reorder_content_description">Превуците ради промене распореда</string>
-    <string name="coordinate_format_add_title">Додај облик</string>
-    <string name="coordinate_format_add_empty_body">Претражите складиште података са преко 5.000 местних и народник кодова ЕПСГ-а по држави, имену или ЛБ-у.</string>
-    <string name="coordinate_format_add_empty_title">Тражите одређени облик?</string>
-    <string name="coordinate_format_add_search_hint">Претражите код ЕПСГ или назив облика</string>
+    <string name="coordinate_format_add_title">Додај формат</string>
+    <string name="coordinate_format_add_empty_body">Претражите базу података са више од 5.000 локалних и националних ЕПСГ кодова према земљи, називу или ИД.</string>
+    <string name="coordinate_format_add_empty_title">Тражите одређени формат?</string>
+    <string name="coordinate_format_add_search_hint">Претражите ЕПСГ код или назив формата</string>
     <string name="coordinate_format_cancel_changes_message">Одбацити измене облика координата?</string>
     <string name="coordinate_format_cancel_changes_title">Несачуване измене</string>
-    <string name="coordinate_format_description">Омиљени облици за брзи приступ из приручног изборника и претраге.</string>
+    <string name="coordinate_format_description">Жељени формати за брзи приступ из контекстног менија и претраге.</string>
     <string name="coordinate_format_discard_changes">Одбаци измене</string>
-    <string name="coordinate_format_last_item_warning">Неопходан је барем један облик координата.</string>
-    <string name="coordinate_format_select_other">Изаберите други облик</string>
-    <string name="coordinate_format_primary">Првенствени</string>
+    <string name="coordinate_format_last_item_warning">Потребан је бар један формат координата.</string>
+    <string name="coordinate_format_select_other">Изаберите други формат</string>
+    <string name="coordinate_format_primary">Примарни</string>
     <string name="gallery_media_playback_error">Нисам успео извести садржај.</string>
     <string name="gallery_open_in">Отвори у</string>
     <string name="gallery_seek_back_seconds">−%1$dс</string>
@@ -5431,4 +5431,6 @@
     <string name="opening_hours_public_holiday">Државни празници</string>
     <string name="opening_hours_school_holiday">Школски распусти</string>
     <string name="opening_hours_easter">Ускрс</string>
+    <string name="release_5_4">• Освежен интерфејс за претрагу: сортирање, филтери по категоријама, прегледнији изглед\n\n • Додавање фотографија и медијских садржаја у Омиљене\n\n • Омиљене ставке: подршка за подгрупе и могућност фиксирања фасцикли\n\n • Координате: претрага, мрежа на мапи и приказ ТОИ сада подржава ЕПСГ и Мејденхед локатор\n\n • Исправљени прекиди у навигацији; пребацивање између стандардног и брзог рутирања\n\n • Подешавање размере мапе за Андриод Ауто независно од телефона\n\n • Нова просторна претрага — проналажење места и претрага у околини одређеног места\n\n • Астрономија: додате информације о помрачењима Сунца и Месеца</string>
+    <string name="city_type_boundary">Кварт</string>
 </resources>
