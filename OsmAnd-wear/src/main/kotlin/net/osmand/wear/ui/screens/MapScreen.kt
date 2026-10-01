@@ -100,6 +100,7 @@ fun MapScreen(
 	// frame that answers it, measured from this side so it covers the whole round trip.
 	var askedAt by remember { mutableLongStateOf(0L) }
 	var lastSeq by remember { mutableIntStateOf(0) }
+	var everShown by remember { mutableStateOf(false) }
 	val focus = remember { FocusRequester() }
 
 	// The watch screen going dark stops the frames too, but leaves the renderer standing:
@@ -143,6 +144,7 @@ fun MapScreen(
 			val waitedLongEnough = askedAt != 0L &&
 					SystemClock.elapsedRealtime() - askedAt > ANSWER_DEADLINE_MS
 			lastSeq = arrived.seq
+			everShown = true
 			if (!answers && !restarted && !waitedLongEnough) {
 				return@collect
 			}
@@ -174,6 +176,29 @@ fun MapScreen(
 			// Cleared however this ends: a gesture flag left standing keeps the phone's
 			// stream paused, and a paused stream is a map that never updates again.
 			gesturing = false
+		}
+	}
+
+	// The phone drops the renderer when it has not heard from the watch for a while, which is
+	// how it notices a watch that was killed without saying so. Looking at the map is not
+	// silence, though: only gestures are sent, so a minute of simply watching had the phone
+	// tear the map down underneath it. Saying so costs one message, and resuming an unpaused
+	// stream is what "still here" means already.
+	//
+	// The same beat reopens a stream that did end, which otherwise left the screen reading
+	// "Loading map" for as long as it stayed open: the request that starts the stream is made
+	// once, when the screen opens, and nothing ever made it again.
+	LaunchedEffect(width, height, density) {
+		while (true) {
+			delay(STREAM_PING_MS)
+			if (gesturing) {
+				continue
+			}
+			if (everShown && shown.frame == null) {
+				onStart(width, height, density)
+			} else {
+				onPause(false)
+			}
 		}
 	}
 
@@ -355,5 +380,8 @@ private const val DOUBLE_TAP_MS = 300L
  * Measured round trips sit at 1.3-1.7 s, so this is a link in trouble rather than a slow one.
  */
 private const val ANSWER_DEADLINE_MS = 3000L
+
+/** Comfortably inside WearMapStreamer's silence timeout, which is a minute. */
+private const val STREAM_PING_MS = 20_000L
 
 private const val LATENCY_TAG = "OsmAndWearMap"
