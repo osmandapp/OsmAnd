@@ -63,9 +63,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 /**
- * Rides a bicycle beside the route (#25544) and checks when "Route recalculated" is announced.
- * The rider keeps the direction of the original route and moves sideways to 45 m,
- * above the 30 m recalculation distance and below the off-route prompt distance.
+ * Rides beside the route (#25544) with a bicycle, on foot, by car and by motorcycle, and checks
+ * when "Route recalculated" is announced. The rider keeps the direction of the original route and
+ * moves sideways to the offset of the profile, above its recalculation distance.
  * <p>
  * Needs Germany_berlin_europe_2.obf in the app folder, and for the BRouter cases
  * the BRouter app with the E10_N50.rd5 segment. Missing data skips the case.
@@ -96,36 +96,41 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 	private static final String BROUTER_PACKAGE = "btools.routingapp";
 	private static final String GPX_ARGUMENT = "gpx";
 
-	private static final ApplicationMode MODE = ApplicationMode.BICYCLE;
-	private static final LatLon START = new LatLon(52.521513, 13.416514);
-	private static final LatLon END = new LatLon(52.515300, 13.453830);
+	private static final Profile BICYCLE = new Profile(ApplicationMode.BICYCLE, "bicycle", 20 / 3.6f, 30, 45,
+			new LatLon(52.521513, 13.416514), new LatLon(52.515300, 13.453830)); // the ride from #25544
+	// between its 15 m recalculation distance and the ~22 m off-route prompt distance,
+	// so the test checks "Route recalculated" and not "off route"
+	private static final Profile PEDESTRIAN = new Profile(ApplicationMode.PEDESTRIAN, "pedestrian", 5 / 3.6f, 15, 20,
+			new LatLon(52.536500, 13.417500), new LatLon(52.543000, 13.402000)); // between houses in Prenzlauer Berg
+	private static final Profile CAR = new Profile(ApplicationMode.CAR, "car", 60 / 3.6f, 50, 75,
+			new LatLon(52.504000, 13.276000), new LatLon(52.473000, 13.403000)); // city and the A100 motorway
+	private static final Profile MOTORCYCLE = new Profile(ApplicationMode.MOTORCYCLE, "motorcycle", 50 / 3.6f, 50, 75,
+			new LatLon(52.548000, 13.428000), new LatLon(52.487000, 13.424000)); // across the city
 
-	private static final float RECALCULATION_DISTANCE = 30;
-	private static final float SPEED = 20 / 3.6f;
-	private static final int OFFSET = 45;
 	// 15 s of suppressed prompts plus one more recalculation
 	private static final long MAX_SILENT_RECALCULATION_MS = 25_000;
 	private static final long ANNOUNCEMENT_TAIL_MS = 5000;
-	private static final long ROUTE_TIMEOUT_MS = 90_000;
-	// the 45 m offset is visible on screenshots
+	// long car routes on slow emulators
+	private static final long ROUTE_TIMEOUT_MS = 180_000;
 	private static final int MAP_ZOOM = 17;
 
 	private static final String ROUTE_RECALC = "route_recalc";
 	private static final String OFF_ROUTE = "off_route";
 	private static final String BACK_ON_ROUTE = "back_on_route";
 
-	// seconds and target offset in meters, the offset changes linearly within a phase
+	// seconds and the share of the profile offset (0 on the route, 1 the full offset),
+	// the offset changes linearly within a phase
 	private static final int[][] LONG_DEVIATION = {
-			{20, 0}, {5, OFFSET}, {60, OFFSET}, {5, 0}, {20, 0}};
+			{20, 0}, {5, 1}, {60, 1}, {5, 0}, {20, 0}};
 	// the ride from the issue: beside the route almost to the destination
 	private static final int[][] WHOLE_ROUTE = {
-			{20, 0}, {5, OFFSET}, {420, OFFSET}, {5, 0}, {20, 0}};
+			{20, 0}, {5, 1}, {420, 1}, {5, 0}, {20, 0}};
 	// deviation, return and a second deviation within 60 s of the last recalculation
 	private static final int[][] TWO_DEVIATIONS = {
-			{20, 0}, {5, OFFSET}, {35, OFFSET}, {5, 0}, {20, 0}, {5, OFFSET}, {35, OFFSET}, {5, 0}, {15, 0}};
+			{20, 0}, {5, 1}, {35, 1}, {5, 0}, {20, 0}, {5, 1}, {35, 1}, {5, 0}, {15, 0}};
 	// short deviation, return and a short deviation with a single recalculation 15-60 s later
 	private static final int[][] SHORT_DEVIATIONS = {
-			{20, 0}, {5, OFFSET}, {8, OFFSET}, {5, 0}, {25, 0}, {5, OFFSET}, {6, OFFSET}, {5, 0}, {15, 0}};
+			{20, 0}, {5, 1}, {8, 1}, {5, 0}, {25, 0}, {5, 1}, {6, 1}, {5, 0}, {15, 0}};
 
 	@Rule
 	public ActivityScenarioRule<MapActivity> scenarioRule = new ActivityScenarioRule<>(MapActivity.class);
@@ -140,9 +145,11 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 	private VoiceMessageListener voiceListener;
 	private IRouteInformationListener routeListener;
 	private volatile long rideStartTime;
+	private final Location[] fedLocations = new Location[3];
 	private String caseName;
 	private String rideDescription;
 	private Ride ride;
+	private Profile profile;
 
 	@Before
 	@Override
@@ -158,17 +165,6 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		if (!app.getResourceManager().getIndexFileNames().containsKey(BERLIN_MAP)) {
 			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<>());
 		}
-
-		previousAppMode = settings.getApplicationMode();
-		saveAndSet(settings.ROUTE_RECALCULATION_DISTANCE, RECALCULATION_DISTANCE);
-		saveAndSet((CommonPreference<Boolean>) settings.SPEAK_ROUTE_RECALCULATION, true);
-		saveAndSet((CommonPreference<Boolean>) settings.SPEAK_ROUTE_DEVIATION, true);
-		saveAndSet((CommonPreference<Boolean>) settings.VOICE_MUTE, false);
-		saveAndSet((CommonPreference<String>) settings.VOICE_PROVIDER, "en-tts");
-		saveAndSet(settings.ROUTE_SERVICE, RouteService.OSMAND);
-		saveAndSet(settings.AUTO_ZOOM_MAP, false);
-		// the speed cameras sheet is shown on the first route planning and covers the map
-		saveAndSet((CommonPreference<Boolean>) settings.SPEED_CAMERAS_ALERT_SHOWED, true);
 	}
 
 	@After
@@ -201,42 +197,102 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 
 	@Test
 	public void osmandLongDeviation() throws Throwable {
-		ride(RouteService.OSMAND, "osmand_long", LONG_DEVIATION);
+		ride(BICYCLE, RouteService.OSMAND, "osmand_long", LONG_DEVIATION);
 	}
 
 	@Test
 	public void osmandWholeRoute() throws Throwable {
-		ride(RouteService.OSMAND, "osmand_whole", WHOLE_ROUTE);
+		ride(BICYCLE, RouteService.OSMAND, "osmand_whole", WHOLE_ROUTE);
 	}
 
 	@Test
 	public void osmandTwoDeviations() throws Throwable {
-		ride(RouteService.OSMAND, "osmand_two", TWO_DEVIATIONS);
+		ride(BICYCLE, RouteService.OSMAND, "osmand_two", TWO_DEVIATIONS);
 	}
 
 	@Test
 	public void osmandShortDeviations() throws Throwable {
-		ride(RouteService.OSMAND, "osmand_short", SHORT_DEVIATIONS);
+		ride(BICYCLE, RouteService.OSMAND, "osmand_short", SHORT_DEVIATIONS);
 	}
 
 	@Test
 	public void brouterLongDeviation() throws Throwable {
-		ride(RouteService.BROUTER, "brouter_long", LONG_DEVIATION);
+		ride(BICYCLE, RouteService.BROUTER, "brouter_long", LONG_DEVIATION);
 	}
 
 	@Test
 	public void brouterWholeRoute() throws Throwable {
-		ride(RouteService.BROUTER, "brouter_whole", WHOLE_ROUTE);
+		ride(BICYCLE, RouteService.BROUTER, "brouter_whole", WHOLE_ROUTE);
 	}
 
 	@Test
 	public void brouterTwoDeviations() throws Throwable {
-		ride(RouteService.BROUTER, "brouter_two", TWO_DEVIATIONS);
+		ride(BICYCLE, RouteService.BROUTER, "brouter_two", TWO_DEVIATIONS);
 	}
 
 	@Test
 	public void brouterShortDeviations() throws Throwable {
-		ride(RouteService.BROUTER, "brouter_short", SHORT_DEVIATIONS);
+		ride(BICYCLE, RouteService.BROUTER, "brouter_short", SHORT_DEVIATIONS);
+	}
+
+	@Test
+	public void osmandPedestrianTwoDeviations() throws Throwable {
+		ride(PEDESTRIAN, RouteService.OSMAND, "osmand_pedestrian_two", TWO_DEVIATIONS);
+	}
+
+	@Test
+	public void brouterPedestrianTwoDeviations() throws Throwable {
+		ride(PEDESTRIAN, RouteService.BROUTER, "brouter_pedestrian_two", TWO_DEVIATIONS);
+	}
+
+	@Test
+	public void osmandPedestrianWholeRoute() throws Throwable {
+		ride(PEDESTRIAN, RouteService.OSMAND, "osmand_pedestrian_whole", WHOLE_ROUTE);
+	}
+
+	@Test
+	public void brouterPedestrianWholeRoute() throws Throwable {
+		ride(PEDESTRIAN, RouteService.BROUTER, "brouter_pedestrian_whole", WHOLE_ROUTE);
+	}
+
+	@Test
+	public void osmandCarTwoDeviations() throws Throwable {
+		ride(CAR, RouteService.OSMAND, "osmand_car_two", TWO_DEVIATIONS);
+	}
+
+	@Test
+	public void brouterCarTwoDeviations() throws Throwable {
+		ride(CAR, RouteService.BROUTER, "brouter_car_two", TWO_DEVIATIONS);
+	}
+
+	@Test
+	public void osmandCarWholeRoute() throws Throwable {
+		ride(CAR, RouteService.OSMAND, "osmand_car_whole", WHOLE_ROUTE);
+	}
+
+	@Test
+	public void brouterCarWholeRoute() throws Throwable {
+		ride(CAR, RouteService.BROUTER, "brouter_car_whole", WHOLE_ROUTE);
+	}
+
+	@Test
+	public void osmandMotorcycleTwoDeviations() throws Throwable {
+		ride(MOTORCYCLE, RouteService.OSMAND, "osmand_motorcycle_two", TWO_DEVIATIONS);
+	}
+
+	@Test
+	public void brouterMotorcycleTwoDeviations() throws Throwable {
+		ride(MOTORCYCLE, RouteService.BROUTER, "brouter_motorcycle_two", TWO_DEVIATIONS);
+	}
+
+	@Test
+	public void osmandMotorcycleWholeRoute() throws Throwable {
+		ride(MOTORCYCLE, RouteService.OSMAND, "osmand_motorcycle_whole", WHOLE_ROUTE);
+	}
+
+	@Test
+	public void brouterMotorcycleWholeRoute() throws Throwable {
+		ride(MOTORCYCLE, RouteService.BROUTER, "brouter_motorcycle_whole", WHOLE_ROUTE);
 	}
 
 	@Test
@@ -249,26 +305,40 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		rideGpx(RouteService.BROUTER, "brouter_gpx");
 	}
 
-	private void ride(@NonNull RouteService routeService, @NonNull String caseName, @NonNull int[][] phases) throws Throwable {
-		ride(routeService, caseName, OFFSET + " m beside the route", path -> Ride.generated(path, phases));
+	private void ride(@NonNull Profile profile, @NonNull RouteService routeService, @NonNull String caseName,
+	                  @NonNull int[][] phases) throws Throwable {
+		ride(profile, routeService, caseName, profile.offset + " m beside the route",
+				path -> Ride.generated(path, phases, profile));
 	}
 
 	private void rideGpx(@NonNull RouteService routeService, @NonNull String caseName) throws Throwable {
 		String gpxPath = InstrumentationRegistry.getArguments().getString(GPX_ARGUMENT);
 		Assume.assumeTrue("No -e " + GPX_ARGUMENT + " argument", gpxPath != null);
 		List<LatLon> points = loadGpxPoints(gpxPath);
-		ride(routeService, caseName, new File(gpxPath).getName(), path -> Ride.fromPoints(path, points));
+		ride(BICYCLE, routeService, caseName, new File(gpxPath).getName(), path -> Ride.fromPoints(path, points));
 	}
 
-	private void ride(@NonNull RouteService routeService, @NonNull String caseName, @NonNull String rideDescription,
-	                  @NonNull Function<List<Location>, Ride> rideFactory) throws Throwable {
+	private void ride(@NonNull Profile profile, @NonNull RouteService routeService, @NonNull String caseName,
+	                  @NonNull String rideDescription, @NonNull Function<List<Location>, Ride> rideFactory) throws Throwable {
 		if (routeService == RouteService.BROUTER) {
 			Assume.assumeTrue("BRouter is not installed", isPackageInstalled(BROUTER_PACKAGE));
 		}
+		this.profile = profile;
 		this.caseName = caseName;
 		this.rideDescription = rideDescription;
 		runShellCommand("rm -f " + TARGET_DIR + "/" + caseName + "_*");
-		MODE.setRouteService(routeService);
+
+		previousAppMode = settings.getApplicationMode();
+		saveAndSet(settings.ROUTE_RECALCULATION_DISTANCE, profile.recalculationDistance);
+		saveAndSet((CommonPreference<Boolean>) settings.SPEAK_ROUTE_RECALCULATION, true);
+		saveAndSet((CommonPreference<Boolean>) settings.SPEAK_ROUTE_DEVIATION, true);
+		saveAndSet((CommonPreference<Boolean>) settings.VOICE_MUTE, false);
+		saveAndSet((CommonPreference<String>) settings.VOICE_PROVIDER, "en-tts");
+		saveAndSet(settings.ROUTE_SERVICE, routeService);
+		saveAndSet(settings.AUTO_ZOOM_MAP, false);
+		// the speed cameras sheet is shown on the first route planning and covers the map
+		saveAndSet((CommonPreference<Boolean>) settings.SPEED_CAMERAS_ALERT_SHOWED, true);
+
 		initVoice();
 		skipAppStartDialogs(app);
 
@@ -298,8 +368,8 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 	private void initVoice() throws InterruptedException {
 		CountDownLatch latch = new CountDownLatch(1);
 		instrumentation.runOnMainSync(() -> {
-			settings.setApplicationMode(MODE);
-			app.initVoiceCommandPlayer(app, MODE, latch::countDown, false, false, true, false);
+			settings.setApplicationMode(profile.mode);
+			app.initVoiceCommandPlayer(app, profile.mode, latch::countDown, false, false, true, false);
 		});
 		assertTrue("Voice player is not initialized", latch.await(30, TimeUnit.SECONDS));
 		assertTrue("Voice player is not initialized", app.getPlayer() != null);
@@ -307,10 +377,10 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 
 	@NonNull
 	private List<Location> calculateRoute() throws Throwable {
-		Location start = createLocation(START, 0, 0);
+		Location start = createLocation(profile.start, 0, 0);
 		instrumentation.runOnMainSync(() -> app.getLocationProvider().setCustomLocation(start, TimeUnit.MINUTES.toMillis(1)));
 		instrumentation.runOnMainSync(() -> {
-			app.getTargetPointsHelper().navigateToPoint(END, false, -1);
+			app.getTargetPointsHelper().navigateToPoint(profile.end, false, -1);
 			app.getOsmandMap().getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, false);
 		});
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -330,7 +400,7 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 			}
 			SystemClock.sleep(500);
 		}
-		assertTrue("The route is calculated for another profile: " + routingHelper.getAppMode(), routingHelper.getAppMode() == MODE);
+		assertTrue("The route is calculated for another profile: " + routingHelper.getAppMode(), routingHelper.getAppMode() == profile.mode);
 		return new ArrayList<>(routingHelper.getRoute().getImmutableAllLocations());
 	}
 
@@ -369,9 +439,19 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 
 	private void feedLocations() {
 		rideStartTime = SystemClock.elapsedRealtime();
+		synchronized (fedLocations) {
+			fedLocations[0] = null;
+			fedLocations[1] = null;
+			fedLocations[2] = null;
+		}
 		for (int second = 0; second < ride.locations.size(); second++) {
 			Location location = new Location(ride.locations.get(second));
 			location.setTime(System.currentTimeMillis());
+			synchronized (fedLocations) {
+				fedLocations[2] = fedLocations[1];
+				fedLocations[1] = fedLocations[0];
+				fedLocations[0] = location;
+			}
 			app.runInUIThread(() -> app.getLocationProvider().setCustomLocation(location, 10_000));
 			long next = rideStartTime + (second + 1) * 1000L;
 			SystemClock.sleep(Math.max(0, next - SystemClock.elapsedRealtime()));
@@ -385,9 +465,21 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		if (location == null || rideStartTime == 0) {
 			return;
 		}
-		// the check RouteRecalculationHelper.setNewRoute uses, but with a location a moment later,
-		// so on slow devices it may rarely differ from the decision of the app
+		Location[] locations;
+		synchronized (fedLocations) {
+			locations = fedLocations.clone();
+		}
+		// the app checks with the location of the moment the calculation ended, which is one of the latest
+		// locations, so the route counts as backward only when all agree
 		boolean backward = RoutingHelperUtils.isRouteAgainstMovement(location, routingHelper.getRoute());
+		if (backward) {
+			for (Location element : locations) {
+				if (element != null && !RoutingHelperUtils.isRouteAgainstMovement(element, routingHelper.getRoute())) {
+					backward = false;
+					break;
+				}
+			}
+		}
 		long time = elapsed();
 		boolean announced;
 		synchronized (voiceEvents) {
@@ -490,7 +582,7 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		List<long[]> deviations = new ArrayList<>();
 		long start = -1;
 		for (int second = 0; second < ride.offsets.size(); second++) {
-			boolean deviated = ride.offsets.get(second) > RECALCULATION_DISTANCE;
+			boolean deviated = ride.offsets.get(second) > profile.recalculationDistance;
 			if (deviated && start < 0) {
 				start = second * 1000L;
 			} else if (!deviated && start >= 0) {
@@ -520,7 +612,7 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 
 	// the point at a distance along the path, shifted to the right of the path
 	@NonNull
-	private static Location locationAt(@NonNull List<Location> path, double distance, double offset) {
+	private static Location locationAt(@NonNull List<Location> path, double distance, double offset, float speed) {
 		double passed = 0;
 		for (int i = 1; i < path.size(); i++) {
 			Location from = path.get(i - 1);
@@ -531,7 +623,7 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 				double along = Math.min(segment, Math.max(0, distance - passed));
 				LatLon onPath = MapUtils.rhumbDestinationPoint(from.getLatitude(), from.getLongitude(), along, bearing);
 				LatLon shifted = MapUtils.rhumbDestinationPoint(onPath, offset, bearing + 90);
-				return createLocation(shifted, bearing, SPEED);
+				return createLocation(shifted, bearing, speed);
 			}
 			passed += segment;
 		}
@@ -574,8 +666,9 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 
 	private void writeTimeline() {
 		StringBuilder text = new StringBuilder();
-		text.append("# ").append(caseName).append(", ").append(MODE.getRouteService())
-				.append(", recalculation distance ").append((int) RECALCULATION_DISTANCE).append(" m")
+		text.append("# ").append(caseName).append(", ").append(profile.mode.getRouteService())
+				.append(", ").append(profile.name).append(" ").append(Math.round(profile.speed * 3.6f)).append(" km/h")
+				.append(", recalculation distance ").append((int) profile.recalculationDistance).append(" m")
 				.append(", ").append(rideDescription).append("\n");
 		text.append("time_s\tevent\tdetails\n");
 		List<Object[]> rows = new ArrayList<>();
@@ -594,7 +687,7 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 			}
 		}
 		for (long[] deviation : getDeviations()) {
-			rows.add(new Object[] {deviation[0], "deviation", "start, offset > " + (int) RECALCULATION_DISTANCE + " m"});
+			rows.add(new Object[] {deviation[0], "deviation", "start, offset > " + (int) profile.recalculationDistance + " m"});
 			long silence = getLongestSilence(deviation[0], deviation[1] + ANNOUNCEMENT_TAIL_MS);
 			rows.add(new Object[] {deviation[1], "deviation", "end, longest silent route change " + silence / 1000 + " s"});
 		}
@@ -624,8 +717,8 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 	}
 
 	private <T> void saveAndSet(@NonNull CommonPreference<T> preference, @Nullable T value) {
-		preferenceStates.add(new PreferenceState<>(preference, MODE));
-		preference.setModeValue(MODE, value);
+		preferenceStates.add(new PreferenceState<>(preference, profile.mode));
+		preference.setModeValue(profile.mode, value);
 	}
 
 	@NonNull
@@ -648,6 +741,28 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 			LOG.error("Failed executing shell command: " + command, e);
 		}
 		return output.toString().trim();
+	}
+
+	private static final class Profile {
+
+		final ApplicationMode mode;
+		final String name;
+		final float speed;
+		final float recalculationDistance;
+		final int offset;
+		final LatLon start;
+		final LatLon end;
+
+		Profile(@NonNull ApplicationMode mode, @NonNull String name, float speed, float recalculationDistance,
+		        int offset, @NonNull LatLon start, @NonNull LatLon end) {
+			this.mode = mode;
+			this.name = name;
+			this.speed = speed;
+			this.recalculationDistance = recalculationDistance;
+			this.offset = offset;
+			this.start = start;
+			this.end = end;
+		}
 	}
 
 	private static class VoiceEvent {
@@ -705,16 +820,16 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		}
 
 		@NonNull
-		static Ride generated(@NonNull List<Location> path, @NonNull int[][] phases) {
+		static Ride generated(@NonNull List<Location> path, @NonNull int[][] phases, @NonNull Profile profile) {
 			Ride ride = new Ride(path);
 			int seconds = 0;
 			for (int[] phase : phases) {
 				seconds += phase[0];
 			}
-			assertTrue("Route is too short: " + (int) ride.pathLength + " m", ride.pathLength > SPEED * seconds);
+			assertTrue("Route is too short: " + (int) ride.pathLength + " m", ride.pathLength > profile.speed * seconds);
 			for (int second = 0; second <= seconds; second++) {
-				double offset = offsetAt(phases, second);
-				ride.add(locationAt(path, SPEED * second, offset), offset, SPEED * second);
+				double offset = offsetAt(phases, second) * profile.offset;
+				ride.add(locationAt(path, profile.speed * second, offset, profile.speed), offset, profile.speed * second);
 			}
 			return ride;
 		}
