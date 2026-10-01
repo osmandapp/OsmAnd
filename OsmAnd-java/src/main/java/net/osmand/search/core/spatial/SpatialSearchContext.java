@@ -697,7 +697,14 @@ public class SpatialSearchContext {
 		Map<String, int[]> counts = new HashMap<>();
 		for (Map.Entry<String, int[]> e : t.nameCounts.entrySet()) {
 			if (!t.matchesWholeWord(e.getKey())) {
-				counts.put(e.getKey(), e.getValue());
+				// without the words the generator adds for the search (altnamecommon1, cityasstreetcommon)
+				StringBuilder name = new StringBuilder();
+				for (String w : e.getKey().split(" ")) {
+					if (!w.isEmpty() && !NameIndexReader.isIndexMarker(w)) {
+						name.append(name.length() == 0 ? "" : " ").append(w);
+					}
+				}
+				counts.computeIfAbsent(name.toString(), k -> new int[1])[0] += e.getValue()[0];
 			}
 		}
 		List<SpatialTextSearch.SpatialSuggestion> res = mostFrequent(counts);
