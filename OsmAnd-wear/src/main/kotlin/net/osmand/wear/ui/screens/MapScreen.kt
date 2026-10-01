@@ -17,6 +17,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -40,6 +41,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.wear.compose.material3.ScreenScaffold
+
+import android.os.SystemClock
+import android.util.Log
 
 import kotlinx.coroutines.delay
 
@@ -92,6 +96,9 @@ fun MapScreen(
 	// Numbers every gesture asked of the phone. Frames carry the last one the phone had
 	// applied, which is what distinguishes an answer from a frame that was already on its way.
 	var asked by remember { mutableIntStateOf(0) }
+	// Temporary, alongside WearMapStreamer's frame budget: how long a gesture waits for the
+	// frame that answers it, measured from this side so it covers the whole round trip.
+	var askedAt by remember { mutableLongStateOf(0L) }
 	val focus = remember { FocusRequester() }
 
 	// The watch screen going dark stops the frames too, but leaves the renderer standing:
@@ -117,6 +124,11 @@ fun MapScreen(
 			if (arrived == null) {
 				shown = Shown()
 			} else if (!gesturing && arrived.seq >= asked) {
+				if (askedAt != 0L) {
+					Log.i(LATENCY_TAG, "gesture $asked answered in "
+							+ (SystemClock.elapsedRealtime() - askedAt) + " ms")
+					askedAt = 0L
+				}
 				shown = Shown(arrived.image)
 			}
 		}
@@ -130,6 +142,7 @@ fun MapScreen(
 		}
 		delay(BEZEL_SETTLE_MS)
 		asked++
+		askedAt = SystemClock.elapsedRealtime()
 		onZoom(pendingZoom, asked)
 		pendingZoom = 1f
 		gesturing = false
@@ -215,6 +228,7 @@ fun MapScreen(
 							} while (event.changes.any { it.pressed })
 
 							if (moved) {
+								askedAt = SystemClock.elapsedRealtime()
 								if (pinch != 1f) {
 									asked++
 									onZoom(pinch, asked)
@@ -286,3 +300,5 @@ private val BEZEL_STEP = 2f.pow(0.1f)
 private const val BEZEL_SETTLE_MS = 180L
 
 private const val DOUBLE_TAP_MS = 300L
+
+private const val LATENCY_TAG = "OsmAndWearMap"
