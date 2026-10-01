@@ -129,6 +129,7 @@ public enum WidgetType {
 //	OBD_FUEL_TYPE("obd_fuel_type", R.string.obd_fuel_type, R.string.obd_fuel_type_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 
 	TEMPERATURE("temperature_sensor", R.string.shared_string_temperature, R.string.sensor_temperature_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, ANT_PLUS, RIGHT),
+	TIRE_PRESSURE("tire_pressure_sensor", R.string.tire_pressure, R.string.tire_pressure_widget_desc, R.drawable.widget_sensor_temperature_day, R.drawable.widget_sensor_temperature_night, 0, ANT_PLUS, RIGHT),
 	HEART_RATE("ant_heart_rate", R.string.map_widget_ant_heart_rate, R.string.map_widget_ant_heart_rate_desc, R.drawable.widget_sensor_heart_rate_day, R.drawable.widget_sensor_heart_rate_night, 0, ANT_PLUS, RIGHT),
 	BICYCLE_POWER("ant_bicycle_power", R.string.map_widget_ant_bicycle_power, R.string.map_widget_ant_bicycle_power_desc, R.drawable.widget_sensor_bicycle_power_day, R.drawable.widget_sensor_bicycle_power_night, 0, ANT_PLUS, RIGHT),
 	BICYCLE_CADENCE("ant_bicycle_cadence", R.string.map_widget_ant_bicycle_cadence, R.string.map_widget_ant_bicycle_cadence_desc, R.drawable.widget_sensor_cadence_day, R.drawable.widget_sensor_cadence_night, 0, ANT_PLUS, RIGHT),
@@ -380,7 +381,8 @@ public enum WidgetType {
 				this == BICYCLE_SPEED ||
 				this == BICYCLE_DISTANCE ||
 				this == RSSI ||
-				this == TEMPERATURE) {
+				this == TEMPERATURE ||
+				this == TIRE_PRESSURE) {
 			return new SensorWidgetSettingFragment();
 		} else if (this == GLIDE_AVERAGE) {
 			return new AverageGlideWidgetInfoFragment();

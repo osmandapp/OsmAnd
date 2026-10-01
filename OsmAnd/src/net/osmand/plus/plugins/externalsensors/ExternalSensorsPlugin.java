@@ -9,6 +9,7 @@ import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidg
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_SPEED;
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.HEART_RATE;
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.TEMPERATURE;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.TIRE_PRESSURE;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -262,6 +263,16 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public void mapActivityResume(@NonNull MapActivity activity) {
+		devicesHelper.setMapVisible(true);
+	}
+
+	@Override
+	public void mapActivityPause(@NonNull MapActivity activity) {
+		devicesHelper.setMapVisible(false);
+	}
+
+	@Override
 	public void mapActivityDestroy(@NonNull MapActivity activity) {
 		devicesHelper.setActivity(null);
 	}
@@ -304,6 +315,9 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 		MapWidget temperatureWidget = new SensorTextWidget(mapActivity, appMode, TEMPERATURE);
 		widgetsInfos.add(creator.createWidgetInfo(temperatureWidget));
+
+		MapWidget tirePressureWidget = new SensorTextWidget(mapActivity, appMode, TIRE_PRESSURE);
+		widgetsInfos.add(creator.createWidgetInfo(tirePressureWidget));
 	}
 
 	@Override
@@ -322,6 +336,8 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 				return new SensorTextWidget(mapActivity, appMode, BIKE_DISTANCE, customId, widgetsPanel);
 			case TEMPERATURE:
 				return new SensorTextWidget(mapActivity, appMode, TEMPERATURE, customId, widgetsPanel);
+			case TIRE_PRESSURE:
+				return new SensorTextWidget(mapActivity, appMode, TIRE_PRESSURE, customId, widgetsPanel);
 		}
 		return null;
 	}
