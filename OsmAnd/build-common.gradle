@@ -373,27 +373,7 @@ tasks.register('appStart', Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
 }
 
-// kxml2 (from OsmAnd-shared) bundles org.xmlpull.v1, which android.jar already defines and the boot
-// class path always serves first; R8 full mode rejects the duplicate, so the app gets kxml2 without it.
-configurations {
-	kxml2
-}
-configurations.matching { it.name.endsWith('RuntimeClasspath') }.configureEach {
-	exclude group: 'net.sf.kxml', module: 'kxml2'
-}
-tasks.register('kxml2WithoutXmlPull', Jar) {
-	archiveFileName = 'kxml2-without-xmlpull.jar'
-	destinationDirectory = layout.buildDirectory.dir('kxml2')
-	from({ zipTree(configurations.kxml2.singleFile) }) {
-		exclude 'org/xmlpull/**'
-	}
-}
-
 dependencies {
-	kxml2('net.sf.kxml:kxml2:2.3.0') {
-		transitive = false
-	}
-	runtimeOnly files(tasks.named('kxml2WithoutXmlPull'))
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
 	implementation project(':OsmAnd-api')
 
