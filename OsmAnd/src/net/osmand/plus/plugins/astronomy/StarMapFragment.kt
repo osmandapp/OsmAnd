@@ -512,8 +512,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 
 		arModeHelper = StarMapARModeHelper(requireContext(), starView) { enabled ->
+			starView.isArMode = enabled
 			updateArModeUI(enabled)
 			if (!enabled) manualAzimuth = true
+		}
+		arModeHelper.userHeadingOffset = astroSettings.getCommonConfig().arHeadingOffset
+		starView.onArCalibrationDragListener = { deltaAzimuth, dragFinished ->
+			arModeHelper.adjustUserHeadingOffset(deltaAzimuth)
+			if (dragFinished) {
+				saveCommonSettings()
+				showHeadingOffsetToast()
+			}
 		}
 
 		cameraHelper = StarMapCameraHelper(this, starView, view.findViewById(R.id.camera_view)) { enabled ->
@@ -522,6 +531,16 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 
 		arModeButton.setOnClickListener { arModeHelper.toggleArMode() }
+		arModeButton.setOnLongClickListener {
+			if (arModeHelper.isArModeEnabled && arModeHelper.userHeadingOffset != 0.0) {
+				arModeHelper.resetUserHeadingOffset()
+				saveCommonSettings()
+				app.showToastMessage(R.string.ar_heading_offset_reset)
+				true
+			} else {
+				false
+			}
+		}
 		cameraButton.setOnClickListener { cameraHelper.toggleCameraOverlay() }
 		resetFovButton.setOnClickListener { cameraHelper.resetFov() }
 
@@ -1141,10 +1160,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun saveCommonSettings() {
+		val arHeadingOffset = if (::arModeHelper.isInitialized) {
+			arModeHelper.userHeadingOffset
+		} else {
+			astroSettings.getCommonConfig().arHeadingOffset
+		}
 		val config = CommonConfig(
 			showRegularMap = regularMapVisible,
+			arHeadingOffset = arHeadingOffset,
 		)
 		astroSettings.setCommonConfig(config)
+	}
+
+	private fun showHeadingOffsetToast() {
+		val offset = arModeHelper.userHeadingOffset
+		val formatted = String.format(Locale.getDefault(), "%+.1f°", offset)
+		app.showToastMessage(R.string.ar_heading_offset, formatted)
 	}
 
 	private fun saveStarMapSettings() {

@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="ar_heading_offset">Compass offset: %1$s</string>
+	<string name="ar_heading_offset_reset">Compass offset reset</string>
 	<string name="contour_labels">Labels</string>
 	<string name="contour_label_direction_descr">Uphill: the top of each height number faces higher ground, as on paper topographic maps. The short ticks on the lines point downhill.</string>
 	<string name="rendering_attr_contourLabelDirection_name">Label direction</string>

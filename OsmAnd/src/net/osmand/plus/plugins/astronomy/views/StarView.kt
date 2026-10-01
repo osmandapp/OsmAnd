@@ -2025,6 +2025,11 @@ class StarView @JvmOverloads constructor(
 
 	var isCameraMode: Boolean = false
 
+	/** When true the view is driven by sensors: drags adjust the AR heading offset instead of panning. */
+	var isArMode: Boolean = false
+	/** Receives azimuth deltas (degrees) from drags in AR mode; [dragFinished] is true once on release. */
+	var onArCalibrationDragListener: ((deltaAzimuth: Double, dragFinished: Boolean) -> Unit)? = null
+
 	var is2DMode: Boolean = false
 		set(value) {
 			field = value
@@ -2135,7 +2140,11 @@ class StarView @JvmOverloads constructor(
 				val dx = event.x - lastTouchX
 				val dy = event.y - lastTouchY
 				val hitThreshold = sqrt(dx * dx + dy * dy) > 10f
-				if (isCameraMode && hitThreshold) {
+				if (isArMode && (isPanning || hitThreshold)) {
+					isPanning = true
+					onArCalibrationDragListener?.invoke(-dx * viewAngle / width, false)
+					lastTouchX = event.x; lastTouchY = event.y
+				} else if (isCameraMode && hitThreshold) {
 					isPanning = true
 				} else if (hitThreshold) {
 					isPanning = true
@@ -2152,6 +2161,9 @@ class StarView @JvmOverloads constructor(
 				lastTouchY = event.getY(pointerIndex)
 			}
 			MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> { 
+				if (isArMode && isPanning) {
+					onArCalibrationDragListener?.invoke(0.0, true)
+				}
 				isPanning = false
 			}
 		}
@@ -2320,7 +2332,7 @@ class StarView @JvmOverloads constructor(
 			if (scaleGestureDetector.isInProgress) {
                 return false
             }
-			if (isCameraMode) {
+			if (isCameraMode || isArMode) {
 				return false
 			}
 			inertiaFlingScroller.fling(e1, e2, velocityX, velocityY)
