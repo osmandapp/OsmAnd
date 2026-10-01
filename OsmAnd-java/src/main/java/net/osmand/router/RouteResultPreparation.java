@@ -1426,7 +1426,7 @@ public class RouteResultPreparation {
 			if (hasNoneLane(turnLanes)) {
 				List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
 				RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanes, prevSegm.getBearingEnd());
-				turnLanes = convertNoneLanes(turnLanes, rs);
+				turnLanes = convertNoneLanes(turnLanes, rs, getTurnLanesString(currentSegm));
 			}
 			lanesArray = calculateRawTurnLanes(turnLanes, mainTurnType);
 		}
@@ -1478,7 +1478,7 @@ public class RouteResultPreparation {
 		}
 
 		if (hasNoneLane(turnLanesPrevSegm)) {
-			String converted = convertNoneLanes(turnLanesPrevSegm, rs);
+			String converted = convertNoneLanes(turnLanesPrevSegm, rs, getTurnLanesString(currentSegm));
 			if (!converted.equals(turnLanesPrevSegm)) {
 				turnLanesPrevSegm = converted;
 				rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevBearingEnd);
@@ -2614,35 +2614,51 @@ public class RouteResultPreparation {
 	 * the straightest one goes through, left turns fill them from the left, right turns from the right.
 	 * Example: left, through and right directions with "left|left|" give "left|left|through;right".
 	 */
-	protected String convertNoneLanes(String turnLanes, RoadSplitStructure rs) {
+	protected String convertNoneLanes(String turnLanes, RoadSplitStructure rs, String currTurnLanes) {
 		String[] lanes = turnLanes.split("\\|", -1);
 		int noneLanes = 0;
-		boolean[] marked = new boolean[3]; // left, through, right
+		TreeSet<Integer> marked = new TreeSet<>(); // turns of the marked lanes by TurnType.orderFromLeftToRight()
 		for (String lane : lanes) {
 			if (isNoneLane(lane)) {
 				noneLanes++;
 				continue;
 			}
 			for (String option : lane.split(";")) {
-				marked[Integer.signum(TurnType.orderFromLeftToRight(TurnType.convertType(option))) + 1] = true;
+				marked.add(laneOrder(option));
 			}
 		}
-		// directions of the junction not described by the marked lanes, from left to right
-		List<Double> angles = new ArrayList<>(rs.attachedAngles);
-		angles.add(rs.currentDeviation);
-		for (Iterator<Double> it = angles.iterator(); it.hasNext(); ) {
-			if (marked[Integer.signum(turnOrder(it.next())) + 1]) {
-				it.remove();
-			}
-		}
-		Collections.sort(angles, Collections.<Double>reverseOrder());
+		Set<Integer> markedLeft = marked.headSet(0);
+		Set<Integer> markedRight = marked.tailSet(1);
+		List<Double> allAngles = new ArrayList<>(rs.attachedAngles);
+		allAngles.add(rs.currentDeviation);
+		Collections.sort(allAngles, Collections.<Double>reverseOrder());
+		List<Double> angles = new ArrayList<>();
 		Double through = null;
-		for (Double angle : angles) {
+
+		// get through by angles (rough)
+		for (Double angle : allAngles) {
+			int order = turnOrder(angle);
+			if (order != 0 && !(order < 0 ? markedLeft : markedRight).isEmpty()) {
+				continue;
+			}
+			angles.add(angle);
 			if (Math.abs(angle) <= TURN_DEGREE_MIN && (through == null || Math.abs(angle) < Math.abs(through))) {
 				through = angle;
 			}
 		}
+
+		// get through by marked lanes
+		boolean isNoneFromLeft = isNoneLane(lanes[0]);
+		boolean isNoneFromRight = isNoneLane(lanes[lanes.length - 1]);
+		boolean isTurnLanesContinuous = turnLanes.equals(currTurnLanes);
+		if (turnLanes.contains("through") && isNoneFromLeft != isNoneFromRight && !isTurnLanesContinuous) {
+			int ind = isNoneFromLeft ? allAngles.size() - 1 - markedRight.size() : markedLeft.size();
+			if (ind >= 0 && ind < allAngles.size() && Math.abs(allAngles.get(ind)) <= TURN_DEGREE_MIN) {
+				through = allAngles.get(ind);
+			}
+		}
 		angles.remove(through);
+
 		// the outermost unmarked lanes take the outermost directions, extra ones are stacked
 		List<Integer> turns = new ArrayList<>();
 		int rightTurns = 0;
@@ -2675,10 +2691,42 @@ public class RouteResultPreparation {
 				res.append(append);
 				k++;
 			} else {
-				res.append(noneValues[k++]).append(through != null ? ";through" : "");
+				String value = noneValues[k++];
+				if (!isLeftToRight(lanes, i, value)) {
+					return turnLanes;
+				}
+				if (through == null) {
+					res.append(value);
+				} else if (value.contains("right")) {
+					res.append("through;").append(value);
+				} else {
+					res.append(value).append(";through");
+				}
 			}
 		}
 		return res.toString();
+	}
+
+	/** Turns given to the unmarked lane i have to keep the left to right order with the marked lanes. */
+	private static boolean isLeftToRight(String[] lanes, int i, String value) {
+		for (int j = 0; j < lanes.length; j++) {
+			for (String marked : lanes[j].split(";")) {
+				// a lane that ends by merging says nothing about where the other lanes turn
+				if (isNoneLane(lanes[j]) || marked.startsWith("merge_to_")) {
+					continue;
+				}
+				for (String option : value.split(";")) {
+					if (j < i ? laneOrder(marked) > laneOrder(option) : laneOrder(marked) < laneOrder(option)) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	private static int laneOrder(String option) {
+		return TurnType.orderFromLeftToRight(TurnType.convertType(option));
 	}
 
 	private int turnOrder(double angle) {
