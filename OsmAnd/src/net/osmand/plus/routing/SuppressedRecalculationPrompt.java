@@ -8,13 +8,32 @@ class SuppressedRecalculationPrompt {
 
 	static final long MAX_SUPPRESSED_TIME = 15000;
 	static final long DEVIATION_END_INTERVAL = 4 * MAX_SUPPRESSED_TIME;
+	static final long DEVIATION_END_FOLLOW_TIME = 15000;
 
 	private long firstSuppressedTime;
 	private long lastSuppressedTime;
 	private boolean announced;
 
+	private long followStartTime;
+
 	synchronized void reset() {
 		firstSuppressedTime = 0;
+	}
+
+	// the rider has followed the current route continuously for a while, so the deviation is over;
+	// a rider beside a route whose start goes back does not follow it, so a long run of backward
+	// routes is still announced after MAX_SUPPRESSED_TIME
+	synchronized void onRouteFollowed(long now) {
+		if (followStartTime == 0) {
+			followStartTime = now;
+		}
+		if (now - followStartTime >= DEVIATION_END_FOLLOW_TIME) {
+			reset();
+		}
+	}
+
+	synchronized void onRouteNotFollowed() {
+		followStartTime = 0;
 	}
 
 	synchronized boolean shouldAnnounce(long now) {

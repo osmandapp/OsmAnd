@@ -200,6 +200,14 @@ class RouteRecalculationHelper {
 		}
 	}
 
+	void onRouteFollowed(long now) {
+		suppressedRecalculationPrompt.onRouteFollowed(now);
+	}
+
+	void onRouteNotFollowed() {
+		suppressedRecalculationPrompt.onRouteNotFollowed();
+	}
+
 	private boolean shouldAnnounceNewRoute(RouteCalculationResult res) {
 		if (res.getAppMode().getRouteService() == RouteService.ONLINE) {
 			OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(res.getAppMode().getRoutingProfile());
