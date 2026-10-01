@@ -35,7 +35,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
-import net.osmand.plus.mapcontextmenu.editors.icon.FavoriteEditorIconController;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -199,16 +198,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@NonNull
 	@Override
 	protected EditorIconController getIconController() {
-		return FavoriteEditorIconController.getInstance(app, this, originalIconName, getIconName());
-	}
-
-	@Override
-	public void onDestroy() {
-		FragmentActivity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
-			FavoriteEditorIconController.onDestroy(app);
-		}
-		super.onDestroy();
+		return EditorIconController.getInstance(app, this, getIconName(), originalIconName);
 	}
 
 	private void selectIconInController() {
