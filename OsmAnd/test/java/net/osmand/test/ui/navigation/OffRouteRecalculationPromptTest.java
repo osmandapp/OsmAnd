@@ -58,6 +58,7 @@ import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
@@ -75,6 +76,8 @@ import java.util.function.Function;
  * adb shell am instrument -w -e gpx /data/local/tmp/r25544_offset.gpx
  * -e class net.osmand.test.ui.navigation.OffRouteRecalculationPromptTest#brouterGpxRide
  * net.osmand.plus.test/androidx.test.runner.AndroidJUnitRunner
+ * <p>
+ * Remove @Ignore before running the cases.
  * <p>
  * Run command to pull the timelines and screenshots to a git-ignored directory:
  * <p>
@@ -170,11 +173,6 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 
 	@After
 	public void tearDown() {
-		screenshotExecutor.shutdown();
-		try {
-			screenshotExecutor.awaitTermination(30, TimeUnit.SECONDS);
-		} catch (InterruptedException ignored) {
-		}
 		instrumentation.runOnMainSync(() -> {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (voiceListener != null) {
@@ -193,6 +191,11 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 				settings.setApplicationMode(previousAppMode);
 			}
 		});
+		screenshotExecutor.shutdown();
+		try {
+			screenshotExecutor.awaitTermination(30, TimeUnit.SECONDS);
+		} catch (InterruptedException ignored) {
+		}
 		super.cleanUp();
 	}
 
@@ -283,6 +286,7 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		File file = new File(app.getExternalCacheDir(), new File(gpxPath).getName());
 		runShellCommand("cp " + gpxPath + " " + file.getAbsolutePath());
 		GpxFile gpxFile = SharedUtil.loadGpxFile(file);
+		file.delete();
 		List<LatLon> points = new ArrayList<>();
 		for (WptPt point : gpxFile.getAllSegmentsPoints()) {
 			points.add(new LatLon(point.getLat(), point.getLon()));
@@ -326,7 +330,7 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 			}
 			SystemClock.sleep(500);
 		}
-		assertTrue("Route is calculated for " + routingHelper.getAppMode(), routingHelper.getAppMode() == MODE);
+		assertTrue("The route is calculated for another profile: " + routingHelper.getAppMode(), routingHelper.getAppMode() == MODE);
 		return new ArrayList<>(routingHelper.getRoute().getImmutableAllLocations());
 	}
 
@@ -381,7 +385,8 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		if (location == null || rideStartTime == 0) {
 			return;
 		}
-		// the check RouteRecalculationHelper.setNewRoute suppresses the prompt with
+		// the check RouteRecalculationHelper.setNewRoute uses, but with a location a moment later,
+		// so on slow devices it may rarely differ from the decision of the app
 		boolean backward = RoutingHelperUtils.isRouteAgainstMovement(location, routingHelper.getRoute());
 		long time = elapsed();
 		boolean announced;
@@ -411,6 +416,9 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 			long end = deviation[1] + ANNOUNCEMENT_TAIL_MS;
 			String name = String.format(Locale.US, "Deviation %d-%d s", start / 1000, deviation[1] / 1000);
 			List<RecalculationEvent> deviationRecalculations = getRecalculations(start, end);
+			if (deviationRecalculations.isEmpty() && deviation[1] - deviation[0] > MAX_SILENT_RECALCULATION_MS) {
+				errors.add(name + ": no recalculation");
+			}
 			if (deviationRecalculations.isEmpty()) {
 				continue;
 			}
@@ -431,13 +439,36 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 	private boolean hasPrompt(long start, long end) {
 		synchronized (voiceEvents) {
 			for (VoiceEvent event : voiceEvents) {
-				if (event.time >= start && event.time <= end
-						&& (event.commands.startsWith(ROUTE_RECALC) || event.commands.startsWith(OFF_ROUTE))) {
+				if (event.time >= start && event.time <= end && isRoutePrompt(event)) {
 					return true;
 				}
 			}
 		}
 		return false;
+	}
+
+	private static boolean isRoutePrompt(@NonNull VoiceEvent event) {
+		return event.commands.startsWith(ROUTE_RECALC) || event.commands.startsWith(OFF_ROUTE);
+	}
+
+	// the longest time from a silent recalculation to the next route_recalc or off_route prompt in a deviation
+	private long getLongestSilence(long start, long end) {
+		long longest = 0;
+		for (RecalculationEvent recalculation : getRecalculations(start, end)) {
+			if (recalculation.announced) {
+				continue;
+			}
+			long next = end;
+			synchronized (voiceEvents) {
+				for (VoiceEvent event : voiceEvents) {
+					if (event.time >= recalculation.time && event.time < next && isRoutePrompt(event)) {
+						next = event.time;
+					}
+				}
+			}
+			longest = Math.max(longest, next - recalculation.time);
+		}
+		return longest;
 	}
 
 	@NonNull
@@ -524,14 +555,21 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 	}
 
 	private void showEvent(@NonNull String message, @NonNull String fileSuffix) {
+		if (screenshotExecutor.isShutdown()) {
+			return;
+		}
 		String fileName = String.format(Locale.US, "%s_%03ds_%s.png", caseName, elapsed() / 1000, fileSuffix);
 		app.showShortToastMessage(message);
-		screenshotExecutor.execute(() -> {
-			// navigation start zooms the map out after a while, so the zoom is set for every screenshot
-			app.runInUIThread(() -> app.getOsmandMap().getMapView().setIntZoom(MAP_ZOOM));
-			SystemClock.sleep(500);
-			runShellCommand("screencap -p " + TARGET_DIR + "/" + fileName);
-		});
+		try {
+			screenshotExecutor.execute(() -> {
+				// navigation start zooms the map out after a while, so the zoom is set for every screenshot
+				app.runInUIThread(() -> app.getOsmandMap().getMapView().setIntZoom(MAP_ZOOM));
+				SystemClock.sleep(500);
+				runShellCommand("screencap -p " + TARGET_DIR + "/" + fileName);
+			});
+		} catch (RejectedExecutionException ignored) {
+			// the executor is stopped in tearDown, the event is not needed then
+		}
 	}
 
 	private void writeTimeline() {
@@ -557,7 +595,8 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		}
 		for (long[] deviation : getDeviations()) {
 			rows.add(new Object[] {deviation[0], "deviation", "start, offset > " + (int) RECALCULATION_DISTANCE + " m"});
-			rows.add(new Object[] {deviation[1], "deviation", "end"});
+			long silence = getLongestSilence(deviation[0], deviation[1] + ANNOUNCEMENT_TAIL_MS);
+			rows.add(new Object[] {deviation[1], "deviation", "end, longest silent route change " + silence / 1000 + " s"});
 		}
 		rows.sort((o1, o2) -> Long.compare((long) o1[0], (long) o2[0]));
 		for (Object[] row : rows) {
@@ -572,6 +611,7 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 			LOG.error("Failed writing timeline", e);
 		}
 		runShellCommand("cp " + file.getAbsolutePath() + " " + TARGET_DIR + "/");
+		file.delete();
 	}
 
 	private boolean isPackageInstalled(@NonNull String packageName) {
