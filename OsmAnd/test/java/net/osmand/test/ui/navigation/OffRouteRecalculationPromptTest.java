@@ -25,7 +25,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
@@ -340,7 +339,8 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		if (location == null || rideStartTime == 0) {
 			return;
 		}
-		boolean backward = startsBackward(routingHelper.getRoute(), location);
+		// the check RouteRecalculationHelper.setNewRoute suppresses the prompt with
+		boolean backward = RoutingHelperUtils.isRouteAgainstMovement(location, routingHelper.getRoute());
 		long time = elapsed();
 		boolean announced;
 		synchronized (voiceEvents) {
@@ -356,29 +356,6 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		if (!announced) {
 			showEvent("Silent recalculation" + (backward ? " (backward route)" : ""), "silent_recalc");
 		}
-	}
-
-	// the same check as in RouteRecalculationHelper.setNewRoute, which suppresses the prompt for such routes
-	private static boolean startsBackward(@NonNull RouteCalculationResult route, @NonNull Location location) {
-		List<Location> routeNodes = route.getImmutableAllLocations();
-		int current = route.getCurrentRoute();
-		int nearest = current;
-		double minDistance = Double.POSITIVE_INFINITY;
-		for (int i = current; i < Math.min(routeNodes.size() - 1, current + 15); i++) {
-			Location from = routeNodes.get(i);
-			Location to = routeNodes.get(i + 1);
-			double distance = MapUtils.getOrthogonalDistance(location.getLatitude(), location.getLongitude(),
-					from.getLatitude(), from.getLongitude(), to.getLatitude(), to.getLongitude());
-			if (distance < minDistance) {
-				minDistance = distance;
-				nearest = i;
-			}
-		}
-		if (nearest + 1 >= routeNodes.size()) {
-			return false;
-		}
-		Location prev = route.getRouteLocationByDistance(-15);
-		return RoutingHelperUtils.checkWrongMovementDirection(location, prev, routeNodes.get(nearest + 1));
 	}
 
 	private void checkTimeline(@NonNull int[][] phases) {

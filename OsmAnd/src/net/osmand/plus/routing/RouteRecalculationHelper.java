@@ -163,23 +163,17 @@ class RouteRecalculationHelper {
 			if (lastFixedLocation != null) {
 				start = lastFixedLocation;
 			}
-			// try remove false route-recalculated prompts by checking direction to second route node
+			// try remove false route-recalculated prompts by checking direction of the route start
 			boolean wrongMovementDirection = false;
 			List<Location> routeNodes = res.getImmutableAllLocations();
-			if (routeNodes != null && !routeNodes.isEmpty()) {
-				int newCurrentRoute = RoutingHelperUtils.lookAheadFindMinOrthogonalDistance(start, routeNodes, res.currentRoute, 15);
-				if (newCurrentRoute + 1 < routeNodes.size()) {
-					// This check is valid for Online/GPX services (offline routing is aware of route direction)
-					Location prev = res.getRouteLocationByDistance(-15);
-					wrongMovementDirection = RoutingHelperUtils.checkWrongMovementDirection(start, prev, routeNodes.get(newCurrentRoute + 1));
-					// set/reset evalWaitInterval only if new route is in forward direction
-					if (wrongMovementDirection) {
-						evalWaitInterval = 3000;
-					} else {
-						evalWaitInterval = Math.max(3000, evalWaitInterval * 3 / 2);
-						evalWaitInterval = Math.min(evalWaitInterval, 120000);
-					}
-
+			if (routeNodes != null && res.currentRoute + 1 < routeNodes.size()) {
+				wrongMovementDirection = RoutingHelperUtils.isRouteAgainstMovement(start, res);
+				// set/reset evalWaitInterval only if new route is in forward direction
+				if (wrongMovementDirection) {
+					evalWaitInterval = 3000;
+				} else {
+					evalWaitInterval = Math.max(3000, evalWaitInterval * 3 / 2);
+					evalWaitInterval = Math.min(evalWaitInterval, 120000);
 				}
 			}
 			// trigger voice prompt only if new route is in forward direction
