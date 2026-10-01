@@ -142,6 +142,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 			openChannel(nodeId)
 			val stream = output ?: return
 			var lastSent = ByteArray(0)
+			var lastSentSeq = -1
 			val budget = FrameBudget()
 			while (running && !Thread.currentThread().isInterrupted) {
 				val frameStartedAt = SystemClock.elapsedRealtime()
@@ -171,9 +172,13 @@ class WearMapStreamer(private val app: OsmandApplication) {
 					val encoded = encode(bitmap)
 					val encodedAt = SystemClock.elapsedRealtime()
 					// An unchanged frame is not worth the radio: a still map at four frames a
-					// second would otherwise spend as much power as a moving one.
-					if (!encoded.contentEquals(lastSent)) {
+					// second would otherwise spend as much power as a moving one. A gesture is
+					// the exception, and must be answered even when it changed nothing on screen:
+					// the watch is holding its own preview of it and waiting to be told the phone
+					// has it, and silence there is a map that never moves again.
+					if (!encoded.contentEquals(lastSent) || appliedSeq != lastSentSeq) {
 						writeFrame(stream, encoded, appliedSeq)
+						lastSentSeq = appliedSeq
 						lastSent = encoded
 						budget.record(encoded.size, encodedAt - grabbedAt,
 							SystemClock.elapsedRealtime() - encodedAt)

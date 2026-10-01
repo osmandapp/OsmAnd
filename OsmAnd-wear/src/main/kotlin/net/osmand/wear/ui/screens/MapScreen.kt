@@ -164,12 +164,34 @@ fun MapScreen(
 		if (pendingZoom == 1f) {
 			return@LaunchedEffect
 		}
-		delay(BEZEL_SETTLE_MS)
-		asked++
-		askedAt = SystemClock.elapsedRealtime()
-		onZoom(pendingZoom, asked)
-		pendingZoom = 1f
-		gesturing = false
+		try {
+			delay(BEZEL_SETTLE_MS)
+			asked++
+			askedAt = SystemClock.elapsedRealtime()
+			onZoom(pendingZoom, asked)
+			pendingZoom = 1f
+		} finally {
+			// Cleared however this ends: a gesture flag left standing keeps the phone's
+			// stream paused, and a paused stream is a map that never updates again.
+			gesturing = false
+		}
+	}
+
+	// Waiting for the answering frame cannot depend on a frame arriving to end the wait. The
+	// phone may have nothing new to show - a gesture that moved the map a little leaves most
+	// of the picture identical - so the deadline runs on its own clock, and when it passes the
+	// watch stops insisting on an answer and makes sure the phone was not left paused.
+	LaunchedEffect(asked) {
+		if (askedAt == 0L) {
+			return@LaunchedEffect
+		}
+		delay(ANSWER_DEADLINE_MS)
+		if (askedAt != 0L) {
+			Log.i(LATENCY_TAG, "gesture $asked unanswered after $ANSWER_DEADLINE_MS ms")
+			askedAt = 0L
+			asked = lastSeq
+			onPause(false)
+		}
 	}
 
 	ScreenScaffold {
@@ -223,53 +245,56 @@ fun MapScreen(
 						awaitEachGesture {
 							awaitFirstDown(requireUnconsumed = false)
 							gesturing = true
-							// Where the shown frame already stood: a gesture that starts before
-							// the previous one's frame has arrived inherits its offset, and only
-							// what this gesture adds may be asked for again. Sending the whole
-							// offset moved the map twice for one movement of the hand.
-							val base = shown.drag
-							var pinch = 1f
-							var moved = false
-							var fingers = 1
-							do {
-								val event = awaitPointerEvent()
-								if (event.changes.any { it.isConsumed }) {
-									break
-								}
-								fingers = maxOf(fingers, event.changes.count { it.pressed })
-								val zoomed = event.calculateZoom()
-								val panned = event.calculatePan()
-								if (zoomed != 1f || panned != Offset.Zero) {
-									pinch *= zoomed
-									shown = shown.movedBy(panned, zoomed, width, height)
-									moved = true
-									event.changes.forEach {
-										if (it.positionChanged()) {
-											it.consume()
+							try {
+								// Where the shown frame already stood: a gesture that starts before
+								// the previous one's frame has arrived inherits its offset, and only
+								// what this gesture adds may be asked for again. Sending the whole
+								// offset moved the map twice for one movement of the hand.
+								val base = shown.drag
+								var pinch = 1f
+								var moved = false
+								var fingers = 1
+								do {
+									val event = awaitPointerEvent()
+									if (event.changes.any { it.isConsumed }) {
+										break
+									}
+									fingers = maxOf(fingers, event.changes.count { it.pressed })
+									val zoomed = event.calculateZoom()
+									val panned = event.calculatePan()
+									if (zoomed != 1f || panned != Offset.Zero) {
+										pinch *= zoomed
+										shown = shown.movedBy(panned, zoomed, width, height)
+										moved = true
+										event.changes.forEach {
+											if (it.positionChanged()) {
+												it.consume()
+											}
 										}
 									}
-								}
-							} while (event.changes.any { it.pressed })
+								} while (event.changes.any { it.pressed })
 
-							if (moved) {
-								askedAt = SystemClock.elapsedRealtime()
-								if (pinch != 1f) {
+								if (moved) {
+									askedAt = SystemClock.elapsedRealtime()
+									if (pinch != 1f) {
+										asked++
+										onZoom(pinch, asked)
+									}
 									asked++
-									onZoom(pinch, asked)
+									onPan(shown.drag.x - base.x, shown.drag.y - base.y, asked)
+								} else if (fingers == 1) {
+									val now = System.currentTimeMillis()
+									if (now - lastTap < DOUBLE_TAP_MS) {
+										asked++
+										onRecenter(asked)
+										lastTap = 0L
+									} else {
+										lastTap = now
+									}
 								}
-								asked++
-								onPan(shown.drag.x - base.x, shown.drag.y - base.y, asked)
-							} else if (fingers == 1) {
-								val now = System.currentTimeMillis()
-								if (now - lastTap < DOUBLE_TAP_MS) {
-									asked++
-									onRecenter(asked)
-									lastTap = 0L
-								} else {
-									lastTap = now
-								}
+							} finally {
+								gesturing = false
 							}
-							gesturing = false
 						}
 					}
 					.focusRequester(focus)
