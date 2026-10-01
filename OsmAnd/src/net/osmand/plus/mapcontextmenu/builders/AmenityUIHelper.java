@@ -56,6 +56,8 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -294,11 +296,41 @@ public class AmenityUIHelper extends MenuBuilder {
 				return getDistanceCollapsableView(texts);
 			}
 			case OPENING_HOURS:
-				return getCollapsableTextView(app, true, data.collapsableEntries.get(0).text);
+				return getOpeningHoursCollapsableView(context, data.collapsableEntries.get(0).text);
 			case NONE:
 			default:
 				return null;
 		}
+	}
+
+	@NonNull
+	private CollapsableView getOpeningHoursCollapsableView(@NonNull Context context, @NonNull String openingHours) {
+		String checkDate = additionalInfo.get(CHECK_DATE_OPENING_HOURS);
+		if (Algorithms.isEmpty(checkDate)) {
+			return getCollapsableTextView(context, true, openingHours);
+		}
+		String text = app.getString(R.string.ltr_or_rtl_combine_via_colon,
+				app.getString(R.string.check_date), formatCheckDate(checkDate));
+		CollapsableView collapsableView = getCollapsableTextView(context, true, text);
+		TextView textView = (TextView) collapsableView.getContentView();
+		textView.setTextSize(14);
+		textView.setTextColor(ColorUtilities.getSecondaryTextColor(app, !isLightContent()));
+		return collapsableView;
+	}
+
+	@NonNull
+	private String formatCheckDate(@NonNull String value) {
+		try {
+			SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+			parser.setLenient(false);
+			Date date = parser.parse(value);
+			if (date != null) {
+				return android.text.format.DateFormat.getDateFormat(app).format(date);
+			}
+		} catch (ParseException e) {
+			// keep partial dates like 2025-07 as they are
+		}
+		return value;
 	}
 
 	@NonNull

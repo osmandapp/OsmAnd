@@ -56,6 +56,7 @@ public class Amenity extends MapObject {
 	public static final String SHORT_DESCRIPTION = "short_description";
 	public static final String ROUTE = "route";
 	public static final String OPENING_HOURS = "opening_hours";
+	public static final String CHECK_DATE_OPENING_HOURS = "check_date_opening_hours";
 	public static final String NOTE = "note";
 	public static final String POPULATION = "population";
 	public static final String WIDTH = "width";
@@ -923,7 +924,7 @@ public class Amenity extends MapObject {
 				}
 			}
 			//save all other values to separate lines
-			if (key.endsWith(OPENING_HOURS)) {
+			if (key.endsWith(OPENING_HOURS) && !CHECK_DATE_OPENING_HOURS.equals(key)) {
 				continue;
 			}
 			if (!HIDING_EXTENSIONS_AMENITY_TAGS.contains(key) && addPrefixes) {
