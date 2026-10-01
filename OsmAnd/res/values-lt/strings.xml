@@ -1405,7 +1405,6 @@
     <string name="lang_kn">Kanadų</string>
     <string name="driving_region_australia">Australija</string>
     <string name="live_update">Tiesioginiai atnaujinimai</string>
-    <string name="file_name_containes_illegal_char">Failo pavadinime yra neleistinas simbolis</string>
     <string name="shared_string_notifications">Pranešimai</string>
     <string name="shared_string_continue">Tęsti</string>
     <string name="shared_string_trip">Kelionė</string>
@@ -1824,7 +1823,7 @@
     <string name="all_data">Visi duomenys</string>
     <string name="osm_notes">OSM pastabos</string>
     <string name="import_track">Importuoti GPX failą</string>
-    <string name="day_off_label">išj.</string>
+    <string name="day_off_label">nedirba</string>
     <string name="toast_empty_name_error">Neįvardinta vieta</string>
     <string name="tunnel_warning">Priekyje tunelis</string>
     <string name="show_tunnels">Tuneliai</string>

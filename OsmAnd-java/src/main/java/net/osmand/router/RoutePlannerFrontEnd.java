@@ -504,8 +504,8 @@ public class RoutePlannerFrontEnd {
 		return res;
 	}
 
-	private void calculateRegionsWithAllRoutePoints(RoutingContext ctx, OsmandRegions osmandRegions,
-	                                                LatLon start, List<LatLon> targets) throws IOException {
+	void calculateRegionsWithAllRoutePoints(RoutingContext ctx, OsmandRegions osmandRegions,
+	                                        LatLon start, List<LatLon> targets) throws IOException {
 		Map<String, Integer> regionCounter = new LinkedHashMap<>();
 
 		getRegionsOfPoint(start, regionCounter, osmandRegions);

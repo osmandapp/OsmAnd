@@ -203,6 +203,7 @@
 	<string name="poi_horse_filter">Suitable for horse riding</string>
 	<string name="poi_winter_hiking_filter">Suitable for winter hiking</string>
 	<string name="poi_air_conditioning">Air conditioning</string>
+	<string name="poi_theme_filter">Theme</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4997,6 +4998,7 @@
 	<string name="poi_avalanche_transceiver_checkpoint">Avalanche transceiver checkpoint</string>
 
 	<string name="poi_parcel_locker">Parcel locker</string>
+	<string name="poi_luggage_locker">Luggage locker</string>
 
 	<string name="poi_tiles">Tiles store</string>
 
@@ -5784,4 +5786,57 @@
 	<string name="poi_air_conditioning_yes">Yes</string>
 	<string name="poi_air_conditioning_no">No</string>
 
+	<string name="poi_disc_golf_course">Disc golf course</string>
+	<string name="poi_dancing_school">Dancing school</string>
+	<string name="poi_student_accommodation">Student accommodation</string>
+	<string name="poi_healthcare_counselling">Counselling</string>
+	<string name="poi_healthcare_birthing_centre">Birthing centre</string>
+	<string name="poi_craft_cleaning">Cleaning service</string>
+	<string name="poi_craft_printer">Printer</string>
+	<string name="poi_craft_signmaker">Signmaker</string>
+	<string name="poi_funeral_hall">Funeral hall</string>
+	<string name="poi_post_depot">Post depot</string>
+	<string name="poi_indoor_play">Indoor playground</string>
+	<string name="poi_traffic_park">Traffic park</string>
+	<string name="poi_animal_breeding">Animal breeding</string>
+	<string name="poi_stables">Stables</string>
+
+	<string name="poi_theme">Theme</string>
+	<string name="poi_theme_irish">Irish</string>
+	<string name="poi_theme_cat">Cat</string>
+	<string name="poi_theme_maid">Maid</string>
+	<string name="poi_theme_tiki">Tiki</string>
+	<string name="poi_theme_shakespeare">Shakespeare</string>
+	<string name="poi_theme_rainforest">Rainforest</string>
+	<string name="poi_theme_bicycle">Bicycle</string>
+	<string name="poi_theme_dog">Dog</string>
+	<string name="poi_theme_train">Train</string>
+	<string name="poi_theme_nature">Nature</string>
+	<string name="poi_theme_ship">Ship</string>
+	<string name="poi_theme_animal">Animal</string>
+	<string name="poi_theme_pirate">Pirate</string>
+	<string name="poi_theme_medieval">Medieval</string>
+	<string name="poi_theme_jazz">Jazz</string>
+	<string name="poi_theme_historic">Historic</string>
+	<string name="poi_theme_english">English</string>
+	<string name="poi_theme_football">Football</string>
+	<string name="poi_theme_aviation">Aviation</string>
+	<string name="poi_theme_board_game">Board game</string>
+	<string name="poi_theme_music">Music</string>
+	<string name="poi_theme_adventure">Adventure</string>
+	<string name="poi_theme_western">Western</string>
+	<string name="poi_theme_steampunk">Steampunk</string>
+	<string name="poi_theme_horror">Horror</string>
+
+	<string name="poi_payment_cash_xlt_bule_yes">La Bulle</string>
+	<string name="poi_payment_cash_xlt_eusk_yes">Eusko</string>
+	<string name="poi_payment_cash_xlt_flor_yes">Florain</string>
+	<string name="poi_payment_cash_xlt_pive_yes">Pive</string>
+	<string name="poi_payment_cash_xlt_roue_yes">Roue</string>
+	<string name="poi_payment_cash_xlt_valh_yes">Valh</string>
+	<string name="poi_payment_cash_xlt_zinn_yes">Zinn</string>
+
+	<string name="poi_payment_contactless_xlt_bule_yes">Contactless La Bulle</string>
+	<string name="poi_payment_contactless_xlt_eusk_yes">Contactless Eusko</string>
+	<string name="poi_payment_contactless_xlt_flor_yes">Contactless Florain</string>
 </resources>

@@ -4,9 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeTrue;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,12 +73,22 @@ import java.util.Set;
  * directory, so the screens can be reviewed without taking screenshots. Run the tests with
  * {@code adb shell am instrument} to keep the file - {@code connectedAndroidTest} uninstalls the
  * app, and the report goes away with it.
+ * <p>
+ * <b>Updating the examples after the world basemap is rebuilt.</b> The cities are the one part of
+ * a screen that is not checked into this repository: {@code World_basemap_mini.obf} is downloaded
+ * from builder.osmand.net by the {@code downloadWorldMiniBasemap} Gradle task, and every rebuild
+ * of it changes the long tail of a broad query - {@link #searchResultsMatchExamples()} then fails
+ * on data rather than on code, with no commit behind it. The failure lists every screen that
+ * moved and writes {@code search_examples.actual.json} next to the HTML report, ready to be
+ * pasted into {@code test/assets/download/search_examples.json}. Read the diff before pasting:
+ * a city appearing is what a bigger basemap does, a city disappearing is not.
  */
 @RunWith(AndroidJUnit4.class)
 public class DownloadSearchUIModelTest extends AndroidTest {
 
 	private static final String EXAMPLES_ASSET = "download/search_examples.json";
 	private static final String REPORT_FILE = "download_search_report.html";
+	private static final String ACTUAL_EXAMPLES_FILE = "search_examples.actual.json";
 	private static final String BASEMAP_FILE =
 			WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
 
@@ -112,6 +124,8 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 		DownloadResources indexes = fullCatalog();
 		JSONArray examples = new JSONObject(readAsset(EXAMPLES_ASSET)).getJSONArray("examples");
 		assertTrue("No examples to check", examples.length() > 0);
+		JSONArray produced = new JSONArray();
+		List<String> mismatches = new ArrayList<>();
 		for (int i = 0; i < examples.length(); i++) {
 			JSONObject example = examples.getJSONObject(i);
 			String name = example.getString("name");
@@ -121,10 +135,55 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 			List<Object> rows = model.search(indexes, query, searchCities(model, query));
 			REPORT.add(new ReportScreen("Examples", query, name, toReportRows(model, rows)));
 
-			assertEquals(name + " (query: \"" + query + "\")",
-					toStringList(example.getJSONArray("screen")), renderAll(model, rows));
+			List<String> expected = toStringList(example.getJSONArray("screen"));
+			List<String> actual = renderAll(model, rows);
+			produced.put(withScreen(example, actual));
+			if (!expected.equals(actual)) {
+				// every screen is checked, so one run is enough to update the examples
+				mismatches.add(name + " (query: \"" + query + "\")"
+						+ "\n  expected: " + expected
+						+ "\n  but was:  " + actual);
+			}
 			assertScreenIsWellFormed(query, rows);
 		}
+		if (!mismatches.isEmpty()) {
+			fail(mismatches.size() + " of " + examples.length() + " screens differ from "
+					+ EXAMPLES_ASSET + ":\n" + TextUtils.join("\n", mismatches)
+					+ "\nWhat this run produced: " + writeActualExamples(produced));
+		}
+	}
+
+	/** The example as it would have to be written down for this run to pass. */
+	@NonNull
+	private JSONObject withScreen(@NonNull JSONObject example, @NonNull List<String> screen)
+			throws JSONException {
+		JSONObject copy = new JSONObject();
+		copy.put("name", example.getString("name"));
+		copy.put("query", example.getString("query"));
+		if (example.has("showGroup")) {
+			copy.put("showGroup", example.getBoolean("showGroup"));
+		}
+		copy.put("screen", new JSONArray(screen));
+		return copy;
+	}
+
+	/**
+	 * Writes the screens this run produced next to the HTML report, in the format of
+	 * {@code search_examples.json}, so that a legitimate change of the shipped data can be
+	 * pasted back instead of being typed out of an assertion message.
+	 */
+	@NonNull
+	private String writeActualExamples(@NonNull JSONArray produced) throws Exception {
+		File dir = app.getExternalFilesDir(null);
+		if (dir == null) {
+			return "nowhere, the app has no external files directory";
+		}
+		File file = new File(dir, ACTUAL_EXAMPLES_FILE);
+		try (FileOutputStream out = new FileOutputStream(file)) {
+			String json = new JSONObject().put("examples", produced).toString(1);
+			out.write(json.getBytes(StandardCharsets.UTF_8));
+		}
+		return file.getAbsolutePath();
 	}
 
 	@Test

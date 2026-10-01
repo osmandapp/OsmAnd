@@ -1299,7 +1299,6 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="weekly">毎週</string>
     <string name="morning">朝</string>
     <string name="night">夜</string>
-    <string name="file_name_containes_illegal_char">ファイル名に使用できない文字が含まれています</string>
     <string name="number_of_recipients">受信者数</string>
     <string name="osm_live_subscribe_btn">サブスクリプション契約をする</string>
     <string name="osm_live_ask_for_purchase">最初にOsmAnd Liveのサブスクリプション登録(定期有料契約)をしてください</string>
@@ -1945,7 +1944,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="empty_state_favourites_desc">お気に入りはインポートするか、マップ上でマークした地点を追加できます。</string>
     <string name="move_point">ポイントの移動</string>
     <string name="total_donations">寄付総額</string>
-    <string name="day_off_label">OFF</string>
+    <string name="day_off_label">休み</string>
     <string name="winter_and_ski_renderer">ウィンター＆スキー</string>
     <string name="touring_view_renderer">ツーリングビュー</string>
     <string name="nautical_renderer">船舶</string>

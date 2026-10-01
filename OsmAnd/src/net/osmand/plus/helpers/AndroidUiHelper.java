@@ -26,6 +26,7 @@ import android.view.*;
 import android.view.View.OnAttachStateChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.*;
@@ -164,6 +165,17 @@ public class AndroidUiHelper {
 				view.setEnabled(enabled);
 			}
 		}
+	}
+
+	@NonNull
+	public static View wrapWithLinearLayout(@NonNull Context context, int orientation, @NonNull View... views) {
+		LinearLayout wrapper = new LinearLayout(context);
+		wrapper.setOrientation(orientation);
+		wrapper.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		for (View view : views) {
+			wrapper.addView(view);
+		}
+		return wrapper;
 	}
 
 	public static boolean isTablet(@NonNull Context context) {

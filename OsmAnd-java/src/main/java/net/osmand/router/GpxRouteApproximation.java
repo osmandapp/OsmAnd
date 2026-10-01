@@ -190,7 +190,9 @@ public class GpxRouteApproximation {
 			if (!gctx.fullRoute.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
 				RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc,
 						gpxPoints.get(gpxPoints.size() - 1).loc, gctx.fullRoute);
-				log.info(gctx);
+				if (RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION) {
+					log.info(gctx);
+				}
 			}
 		}
 		return gctx;
@@ -287,7 +289,9 @@ public class GpxRouteApproximation {
 			if (!gctx.fullRoute.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
 				RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc,
 						gpxPoints.get(gpxPoints.size() - 1).loc, gctx.fullRoute);
-				log.info(gctx);
+				if (RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION) {
+					log.info(gctx);
+				}
 			}
 		}
 		return gctx;
@@ -365,7 +369,7 @@ public class GpxRouteApproximation {
 					addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 					lastStraightLine = null;
 				}
-				if (gctx.distFromLastPoint(startPoint) > 1) {
+				if (gctx.distFromLastPoint(startPoint) > 1 && RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION) {
 					// gctx.routeGapDistance += gctx.distFromLastPoint(startPoint);
 					System.out.println(String.format("?? gap of route point = %f, gap of actual gpxPoint = %f, %s ",
 							gctx.distFromLastPoint(startPoint), gctx.distFromLastPoint(pnt.loc), pnt.loc));

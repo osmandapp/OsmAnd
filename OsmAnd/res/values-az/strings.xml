@@ -1119,7 +1119,6 @@
     <string name="number_of_contributors">İanə ödəyənlərin sayı</string>
     <string name="number_of_edits">Düzəlişlərin sayı</string>
     <string name="reports_for">Hesabat:</string>
-    <string name="file_name_containes_illegal_char">Fayl adında dəstəklənməyən simvol</string>
     <string name="store_tracks_in_monthly_directories">Qeyd edilən izləri aylıq qovluqlarda saxla</string>
     <string name="routing_attr_driving_style_balance_name">Balanslı</string>
     <string name="fav_point_dublicate_message">Təkrarlanmaması üçün Favoritin adı %1$s olaraq dəyişdirildi.</string>

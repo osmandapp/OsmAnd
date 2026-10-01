@@ -58,7 +58,7 @@ public class MaxSpeedWidget extends SimpleWidget {
 			RouteDataObject routeObject = locationProvider.getLastKnownRouteSegment();
 			if (routeObject != null) {
 				boolean direction = routeObject.bearingVsRouteDirection(locationProvider.getLastKnownLocation());
-				return routeObject.getMaximumSpeed(direction);
+				return routeObject.getMaximumSpeed(direction, settings.getApplicationMode().getRouteTypeProfile());
 			}
 		} else {
 			return routingHelper.getCurrentMaxSpeed();

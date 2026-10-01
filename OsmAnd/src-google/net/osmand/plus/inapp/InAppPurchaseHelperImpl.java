@@ -800,6 +800,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
+	protected boolean isLocalBillingUnavailable() {
+		BillingManager manager = getBillingManager();
+		return manager != null
+				&& manager.getBillingClientResponseCode() == BillingClient.BillingResponseCode.BILLING_UNAVAILABLE;
+	}
+
+	@Override
 	protected void destroyBillingManager() {
 		BillingManager billingManager = getBillingManager();
 		if (billingManager != null) {

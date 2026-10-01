@@ -109,6 +109,7 @@ public class OsmAndDiagnosticThread extends Thread {
 	}
 
 	private void awaitNextCheck() throws InterruptedException {
+		app.getMemoryLog().sample(app);
 		Thread.sleep(POLL_INTERVAL_MS);
 	}
 }

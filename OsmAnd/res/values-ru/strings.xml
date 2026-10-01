@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="opening_hours_public_holiday">Праздники</string>
+    <string name="opening_hours_school_holiday">Каникулы</string>
+    <string name="opening_hours_easter">Пасха</string>
     <string name="obd_fuel_type_not_provided">Тип топлива не предоставлен</string>
     <string name="obd_fuel_type_gasoline">Бензин</string>
     <string name="obd_fuel_type_methanol">Метанол</string>
@@ -1516,7 +1519,6 @@
     <string name="lang_en_gb">Английский (Соединённое Королевство)</string>
     <string name="lang_hu_formal">Венгерский (официальный)</string>
     <string name="lang_kn">Каннада</string>
-    <string name="file_name_containes_illegal_char">Имя файла содержит недопустимый символ</string>
     <string name="route_stops_before">%1$s остановок до выбранной</string>
     <string name="coords_search">Поиск по координатам</string>
     <string name="advanced_coords_search">Расширенный поиск по координатам</string>
@@ -1825,7 +1827,7 @@
     <string name="shared_string_marker">Маркер</string>
     <string name="shared_string_without_name">Без имени</string>
     <string name="lang_lo">Лаосский</string>
-    <string name="day_off_label">вых.</string>
+    <string name="day_off_label">выходной</string>
     <string name="winter_and_ski_renderer">Зимний/лыжный</string>
     <string name="touring_view_renderer">Туристический</string>
     <string name="nautical_renderer">Морской</string>
@@ -5073,12 +5075,12 @@
     <string name="shared_string_gpu">Графический процессор</string>
     <string name="shared_string_allocated">Зарезервированная</string>
     <string name="open_till_short">До</string>
-    <string name="open_from_short">C</string>
+    <string name="open_from_short">С</string>
     <string name="astro_designations">Обозначения</string>
     <string name="obd_simulation_device">Устройство для моделирования</string>
     <string name="astronomy_map">Астрономическая карта</string>
     <string name="favorite_folder_rename_conflict">Папка с таким названием уже существует.</string>
-    <string name="favorite_folder_invalid_name">Имя папки не может содержать / или _%_</string>
+    <string name="favorite_folder_invalid_name">Имя папки не может содержать / или %1$s</string>
     <string name="favorite_folder_duplicate_message">Используйте имя папки, которого еще нет в списке.</string>
     <string name="favorite_folder_name">Имя папки</string>
     <string name="edit_folder">Редактировать папку</string>

@@ -460,7 +460,7 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		point.setDescription(wptPt.getDesc());
 		point.setComment(wptPt.getComment());
 		point.setAmenityOriginName(wptPt.getAmenityOriginName());
-		point.setAmenityExtensions(wptPt.getExtensionsToRead());
+		point.setAmenityExtensions(Amenity.removeWikiContentTags(wptPt.getExtensionsToRead(), null));
 		point.setLinks(wptPt.getLinks());
 
 		Map<String, String> extensions = wptPt.getExtensionsToWrite();
@@ -512,7 +512,8 @@ public class FavouritePoint implements LocationPoint, Linkable {
 			point.setCategory(getCategory());
 		}
 		Map<String, String> extensions = point.getExtensionsToWrite();
-		extensions.putAll(getAmenityExtensions());
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		extensions.putAll(Amenity.removeWikiContentTags(getAmenityExtensions(), app.getLanguage()));
 		if (isVisible()) {
 			extensions.remove(HIDDEN);
 		} else {

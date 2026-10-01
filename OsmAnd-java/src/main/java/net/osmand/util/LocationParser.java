@@ -122,8 +122,10 @@ public class LocationParser {
 				if (hemisphere != 0) {
 					// UTMPoint(northing, easting, zoneNumber, zoneLetter) - zoneLetter is N or S
 					UTMPoint uPoint = new UTMPoint(d.get(2), d.get(1), d.get(0).intValue(), hemisphere);
-					LatLonPoint ll = uPoint.toLatLonPoint();
-					return validateAndCreateLatLon(ll.getLatitude(), ll.getLongitude());
+					LatLonPoint ll = uPoint.toLatLonPoint(); // null for a zone out of 0-60
+					if (ll != null) {
+						return validateAndCreateLatLon(ll.getLatitude(), ll.getLongitude());
+					}
 				}
 			}
 		}
@@ -138,7 +140,9 @@ public class LocationParser {
 					UTMPoint upoint = new UTMPoint(Double.parseDouble(north), Double.parseDouble(east), d.get(0)
 							.intValue(), ch);
 					LatLonPoint ll = upoint.toLatLonPoint();
-					return validateAndCreateLatLon(ll.getLatitude(), ll.getLongitude());
+					if (ll != null) {
+						return validateAndCreateLatLon(ll.getLatitude(), ll.getLongitude());
+					}
 				} catch (NumberFormatException e) {
 				}
 			}

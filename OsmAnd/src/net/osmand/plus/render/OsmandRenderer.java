@@ -43,6 +43,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -67,7 +68,7 @@ public class OsmandRenderer {
 	private static final int MAX_V = 10;
 	private static final int MAX_V_AREA = 2000;
 
-	private final Map<float[], PathEffect> dashEffect = new LinkedHashMap<float[], PathEffect>();
+	private final Map<String, PathEffect> dashEffect = new LinkedHashMap<String, PathEffect>();
 	private final Map<String, float[]> parsedDashEffects = new LinkedHashMap<String, float[]>();
 	private final Map<String, Shader> shaders = new LinkedHashMap<String, Shader>();
 
@@ -163,10 +164,13 @@ public class OsmandRenderer {
 		for (int i = 0; i < dashes.length; i++) {
 			dashes[i] = rc.getDensityValue(cachedValues[i * 2]) + cachedValues[i * 2 + 1];
 		}
-		if(!dashEffect.containsKey(dashes)){
-			dashEffect.put(dashes, new OsmandDashPathEffect(dashes, st));
+		String key = Arrays.toString(dashes) + '_' + st;
+		PathEffect effect = dashEffect.get(key);
+		if (effect == null) {
+			effect = new OsmandDashPathEffect(dashes, st);
+			dashEffect.put(key, effect);
 		}
-		return dashEffect.get(dashes);
+		return effect;
 	}
 
 	public Shader getShader(String resId) {

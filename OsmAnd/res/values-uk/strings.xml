@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="opening_hours_public_holiday">Свята</string>
+    <string name="opening_hours_school_holiday">Канікули</string>
+    <string name="opening_hours_easter">Великдень</string>
     <string name="release_5_0">- Відкривайте для себе найпопулярніші POI з новим режимом Дослідження\n\n - Всі маршрути OSM тепер доступні для пошуку! Піші, велосипедні, MTB та багато іншого\n\n - Новий навігаційний віджет поєднує стрілку повороту та інструкції з навігації\n\n - Віджет інформації про поточний маршрут: відображає час прибуття, час проходження та відстань\n\n - Виберіть гірськолижні схили та MTB-траси на карті для отримання детальної інформації\n\n - Можливість вибору розміру віджету для лівої та правої панелей\n\n - Додана координатна сітка з географічними координатами\n\n - Додана можливість налаштування зовнішнього вигляду обраних груп за замовчуванням\n\n - Android Auto: перегляд ETA та відстані до наступної точки маршруту; назви міст тепер з\'являються в результатах пошуку\n - Видатні вершини тепер можна знайти через карту та пошук\n\n - Висота гірських вершин у футах\n\n - Додано: Скелі та місця для скелелазіння на карті\n\n - Покращено пошук адрес у США\n\n - Додано івритську TTS для навігації</string>
     <string name="asap">Швидко</string>
     <string name="route_roundabout">Круговий рух : Прямуйте до %1$d з’їзду та продовжуйте рух</string>
@@ -1342,7 +1345,6 @@
     <string name="osm_editors_ranking">Рейтинг маперів OSM</string>
     <string name="osm_live_ask_for_purchase">Будь ласка, спочатку передплатіть OsmAnd Live</string>
     <string name="upload_osm_note">Надіслати Нотатку OSM</string>
-    <string name="file_name_containes_illegal_char">Неприпустимі символи в назві файлу</string>
     <string name="access_direction_audio_feedback">Озвучувати напрямок</string>
     <string name="access_direction_audio_feedback_descr">Індикація звуком напрямку на цільову точку.</string>
     <string name="access_direction_haptic_feedback">Тактильна індикація напрямку</string>
@@ -1820,7 +1822,7 @@
     <string name="osm_recipient_stat">Редагувань %1$s, сума %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-одержувачі</string>
     <string name="total_donations">Всього внесків</string>
-    <string name="day_off_label">вих.</string>
+    <string name="day_off_label">вихідний</string>
     <string name="winter_and_ski_renderer">Зимовий/лижний</string>
     <string name="touring_view_renderer">Туристичний вигляд</string>
     <string name="nautical_renderer">Морський</string>
@@ -5149,7 +5151,7 @@
     <string name="no_media_descr">Ви можете додавати фотографії, відео або аудіонотатки з камери чи бібліотеки.</string>
     <string name="favorite_confirm_delete_folder">Це видалить папку \"%1$s\", включаючи вкладені папки та %2$d точок обраного.</string>
     <string name="favorite_folder_rename_conflict">Папка з такою назвою вже існує.</string>
-    <string name="favorite_folder_invalid_name">Назва папки не може містити / або _%_</string>
+    <string name="favorite_folder_invalid_name">Назва папки не може містити / або %1$s</string>
     <string name="favorite_folder_duplicate_message">Використовуйте ім\'я папки, якого ще не існує.</string>
     <string name="favorite_folder_name">Назва папки</string>
     <string name="edit_folder">Редагувати папку</string>
@@ -5181,10 +5183,10 @@
     <string name="building_3d_near_distance_content_desc">3D будівлі відстань поруч</string>
     <string name="building_3d_far_distance_content_desc">3D будівлі відстань далеко</string>
     <string name="gradient_range_type_relative">Відносний</string>
-    <string name="data_storage">Data storage</string>
+    <string name="data_storage">Сховище даних</string>
     <string name="main_storage">Основне сховище</string>
-    <string name="media_storage">Медіа сховище</string>
-    <string name="camera_folder">Папка камери</string>
+    <string name="media_storage">Сховище медіа</string>
+    <string name="camera_folder">Тека камери</string>
     <string name="media_storage_main_storage_descr">Файли зберігаються в приватній пам’яті програм. Вони приховані від Галереї та інших програм.</string>
     <string name="media_storage_shared_storage_descr">Файли зберігаються у загальнодоступних папках (Зображення, Фільми, Музика). Вони відображаються в Галереї та Google Фото.</string>
     <string name="shared_string_note">Примітка</string>
@@ -5256,7 +5258,6 @@
     <string name="share_favorites_preparation_failed">Не вдалося підготувати файли для спільного доступу.</string>
     <string name="share_favorites_share_failed">Не вдалося поділитися файлом.</string>
     <string name="share_favorites_missing_media_warning">Деякі додані медіафайли не вдалося додати.</string>
-    <string name="search_on_web">Пошук в Інтернеті</string>
     <string name="release_5_4">• Оновлений інтерфейс пошуку: сортування, фільтри категорій, чистіший вигляд\n\n• Додавання фотографій та медіафайлів до обраного\n\n• Обране: підтримка підгруп та папок, які можна закріплювати\n\n• Координати: пошук, сітка карти та відображення точок інтересу тепер підтримують EPSG та локатор Мейденхеда\n\n• Виправлено переривання навігації; перемикання між стандартною та швидкою маршрутизацією\n\n• Масштаб карти Android Auto можна встановити окремо від телефону\n\n• Новий просторовий пошук — знаходьте місця та шукайте навколо них\n\n• Астрономія додала сонячні та місячні затемнення</string>
     <string name="always_keep_local_copy">Завжди зберігайте локальну копію</string>
     <string name="always_keep_local_copy_description">Медіафайли залишаються прикріпленими, навіть якщо оригінал видалено з галереї або файлів.</string>

@@ -384,6 +384,8 @@ public enum WidgetType {
 			return new SensorWidgetSettingFragment();
 		} else if (this == GLIDE_AVERAGE) {
 			return new AverageGlideWidgetInfoFragment();
+		} else if (this == GLIDE_TARGET) {
+			return new GlideTargetWidgetInfoFragment();
 		} else if (this == DEV_ZOOM_LEVEL) {
 			return new ZoomLevelInfoFragment();
 		} else if (this == DEV_MEMORY) {

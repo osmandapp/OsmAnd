@@ -393,6 +393,13 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 				if (offscreenMapRendererView != null) {
 					MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 					if (mapRendererContext != null && mapRendererContext.getMapRendererView() != offscreenMapRendererView) {
+						// The context doesn't refer to the view anymore: either the phone took its
+						// renderer over, or recreateAndroidAutoRenderer() dropped it. In the latter
+						// case the renderer is still alive and nothing else is going to stop it
+						if (mapView != null && mapView.getMapRenderer() == offscreenMapRendererView) {
+							mapView.detachMapRenderer();
+						}
+						offscreenMapRendererView.stopRenderer();
 						offscreenMapRendererView = null;
 					}
 				}

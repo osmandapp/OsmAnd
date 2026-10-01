@@ -535,6 +535,7 @@ public class DownloadIndexesThread {
 				boolean forceWifi = downloadFileHelper.isWifiConnected();
 				Set<IndexItem> currentDownloads = new HashSet<>();
 				StringBuilder warnings = new StringBuilder();
+				boolean firstFileReindexed = false;
 				try {
 					while (!indexItemDownloading.isEmpty()) {
 						IndexItem item = indexItemDownloading.poll();
@@ -586,16 +587,16 @@ public class DownloadIndexesThread {
 								}
 							}
 							publishProgress(item);
-							String warning = reindexFiles(filesToReindex);
-							if (!Algorithms.isEmpty(warning)) {
-								warnings.append(" ").append(warning);
+							// reindexing checks all maps, so do it for the first file (to use it right away)
+							// and then once the queue is done, not after every downloaded file
+							if (!firstFileReindexed || indexItemDownloading.isEmpty()) {
+								firstFileReindexed = true;
+								reindexDownloadedFiles(filesToReindex, warnings);
 							}
-							filesToReindex.clear();
-							// slow down but let update all button work properly
-							indexes.updateOutdatedFiles();
 						}
 					}
 				} finally {
+					reindexDownloadedFiles(filesToReindex, warnings);
 					if (currentDownloadingItem != null) {
 						clearPendingFilesToDelete(currentDownloadingItem);
 					}
@@ -635,6 +636,19 @@ public class DownloadIndexesThread {
 				publishProgress(DownloadValidationManager.getFreeVersionMessage(app));
 			}
 			return !exceed;
+		}
+
+		private void reindexDownloadedFiles(@NonNull List<File> filesToReindex, @NonNull StringBuilder warnings) {
+			if (filesToReindex.isEmpty()) {
+				return;
+			}
+			String warning = reindexFiles(filesToReindex);
+			if (!Algorithms.isEmpty(warning)) {
+				warnings.append(" ").append(warning);
+			}
+			filesToReindex.clear();
+			// slow down but let update all button work properly
+			indexes.updateOutdatedFiles();
 		}
 
 		private String reindexFiles(List<File> filesToReindex) {

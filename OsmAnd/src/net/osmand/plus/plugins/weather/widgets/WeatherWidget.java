@@ -33,6 +33,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,6 +49,7 @@ public class WeatherWidget extends SimpleWidget {
 	private static final int MAX_METERS_TO_PREVIOUS_FORECAST = 30 * 1000;
 	private static final int HIDE_OLD_DATA_DELAY = 1000;
 
+	private final WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 	private final WeatherHelper weatherHelper;
 	private final IObtainValueAsyncCallback callback;
 	private final WeatherBand weatherBand;
@@ -62,23 +64,39 @@ public class WeatherWidget extends SimpleWidget {
 	private boolean lastObtainingFailed;
 	private PointI lastDisplayedForecastPoint31;
 	private long lastDisplayedForecastTime;
-	private WeatherPlugin plugin;
 	private WeatherSource cachedWeatherSource;
 
-	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel, short band) {
+	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
+			@Nullable String customId, @Nullable WidgetsPanel panel, short band) {
 		super(mapActivity, widgetType, customId, panel);
-		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		this.band = band;
 		this.hideOldDataMessageId = OsmAndConstants.UI_HANDLER_WEATHER_WIDGET + band;
 		this.weatherHelper = app.getWeatherHelper();
 		this.weatherBand = weatherHelper.getWeatherBand(band);
-		this.callback = new IObtainValueAsyncCallback() {
-			@Override
-			public void method(boolean succeeded, PointI point31, long requestedTime, double value, Metric metric) {
-				app.runInUIThread(() -> onValueObtained(succeeded, point31, requestedTime, value));
-			}
-		};
+		this.callback = new ValueCallback(this);
 		this.callback.swigReleaseOwnership();
+	}
+
+	private static final class ValueCallback extends IObtainValueAsyncCallback {
+
+		private final WeakReference<WeatherWidget> widgetRef;
+
+		private ValueCallback(@NonNull WeatherWidget widget) {
+			widgetRef = new WeakReference<>(widget);
+		}
+
+		@Override
+		public void method(boolean succeeded, PointI point31, long requestedTime, double value, Metric metric) {
+			WeatherWidget widget = widgetRef.get();
+			if (widget != null) {
+				widget.app.runInUIThread(() -> {
+					WeatherWidget currentWidget = widgetRef.get();
+					if (currentWidget != null) {
+						currentWidget.onValueObtained(succeeded, point31, requestedTime, value);
+					}
+				});
+			}
+		}
 	}
 
 	@Override

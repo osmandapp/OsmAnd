@@ -354,6 +354,12 @@ public abstract class InAppPurchaseHelper {
 	protected void exec(@NonNull InAppPurchaseTaskType taskType, @NonNull InAppCommand command) {
 		if (isDeveloperVersion || (!Version.isGooglePlayEnabled() && !Version.isHuawei() && !Version.isAmazon())) {
 			notifyDismissProgress(taskType);
+			if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
+				// External purchases are fetched from the server and need no billing service,
+				// so they still have to be applied on a build that never queries the store.
+				applyPurchases();
+				notifyGetItems();
+			}
 			stop(true);
 			return;
 		}
@@ -692,8 +698,18 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	protected void applyPurchases() {
-		boolean externalPurchasesHandled = !ctx.getBackupHelper().isRegistered()
-				|| this.externalPurchasesRequested;
+		applyPurchases(true);
+	}
+
+	/**
+	 * @param verified true if the purchases state was actually confirmed by the billing
+	 *                 service and the server. When false (billing setup or query failure)
+	 *                 the state is unknown, so purchases may only be granted, never revoked
+	 *                 - otherwise an offline user loses paid features they own.
+	 */
+	protected void applyPurchases(boolean verified) {
+		boolean canRevoke = verified && (!ctx.getBackupHelper().isRegistered()
+				|| this.externalPurchasesRequested);
 
 		boolean purchasedFullVersion = isPurchasedLocalFullVersion() || isPurchasedExternalFullVersion();
 		boolean depthContoursPurchased = isPurchasedLocalDeepContours();
@@ -707,22 +723,22 @@ public abstract class InAppPurchaseHelper {
 		boolean subscribedToLiveUpdates = isSubscribedToLocalLiveUpdates();
 		boolean subscribedToMaps = isSubscribedToLocalMaps() || isSubscribedToExternalMaps() || isPurchasedExternalMaps();
 		boolean subscribedToOsmAndPro = isSubscribedToLocalOsmAndPro() || isSubscribedToExternalOsmAndPro() || isPurchasedExternalOsmAndPro();
-		if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get() && externalPurchasesHandled) {
+		if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get() && canRevoke) {
 			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
 		} else if (subscribedToLiveUpdates) {
 			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 		}
-		if (!subscribedToOsmAndPro && ctx.getSettings().OSMAND_PRO_PURCHASED.get() && externalPurchasesHandled) {
+		if (!subscribedToOsmAndPro && ctx.getSettings().OSMAND_PRO_PURCHASED.get() && canRevoke) {
 			ctx.getSettings().OSMAND_PRO_PURCHASED.set(false);
 		} else if (subscribedToOsmAndPro) {
 			ctx.getSettings().OSMAND_PRO_PURCHASED.set(true);
 		}
-		if (!subscribedToMaps && ctx.getSettings().OSMAND_MAPS_PURCHASED.get() && externalPurchasesHandled) {
+		if (!subscribedToMaps && ctx.getSettings().OSMAND_MAPS_PURCHASED.get() && canRevoke) {
 			ctx.getSettings().OSMAND_MAPS_PURCHASED.set(false);
 		} else if (subscribedToMaps) {
 			ctx.getSettings().OSMAND_MAPS_PURCHASED.set(true);
 		}
-		if (!subscribedToLiveUpdates && !subscribedToOsmAndPro && !subscribedToMaps && externalPurchasesHandled) {
+		if (!subscribedToLiveUpdates && !subscribedToOsmAndPro && !subscribedToMaps && canRevoke) {
 			if (!InAppPurchaseUtils.isDepthContoursAvailable(ctx)) {
 				ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
 			}
@@ -794,30 +810,58 @@ public abstract class InAppPurchaseHelper {
 			this.listener = listener;
 		}
 
+		/**
+		 * @return null when the state could not be verified - a request that did not reach
+		 *         the server must not be stored as "there is no subscription".
+		 */
+		@Nullable
 		@Override
 		protected Boolean doInBackground(Void... voids) {
-			boolean subscriptionActive = false;
+			boolean anyActive = false;
+			boolean anyUnverified = false;
 			try {
 				String promocode = ctx.getSettings().BACKUP_PROMOCODE.get();
 				if (!Algorithms.isEmpty(promocode)) {
-					subscriptionActive = checkBackupSubscription(promocode);
+					Boolean activeByPromocode = checkBackupSubscription(promocode);
+					if (activeByPromocode == null) {
+						anyUnverified = true;
+					} else {
+						anyActive = activeByPromocode;
+					}
 				}
-				if (!subscriptionActive) {
+				if (!anyActive) {
 					// Get only PRO subscriptions
 					String orderId = getOrderIdByDeviceIdAndToken();
-					if (!Algorithms.isEmpty(orderId)) {
-						subscriptionActive = checkBackupSubscription(orderId);
+					if (orderId == null) {
+						// Either the request failed or the device is not registered
+						anyUnverified = true;
+					} else if (!Algorithms.isEmpty(orderId)) {
+						Boolean activeByOrderId = checkBackupSubscription(orderId);
+						if (activeByOrderId == null) {
+							anyUnverified = true;
+						} else {
+							anyActive = activeByOrderId;
+						}
 					}
 				}
 			} catch (Exception e) {
 				logError("checkPromoAsync Error", e);
+				return null;
 			}
-			return subscriptionActive;
+			if (anyActive) {
+				return Boolean.TRUE;
+			}
+			// Report inactive only when every check that ran actually got an answer
+			return anyUnverified ? null : Boolean.FALSE;
 		}
 
-		private boolean checkBackupSubscription(@NonNull String orderId) {
+		@Nullable
+		private Boolean checkBackupSubscription(@NonNull String orderId) {
 			Map<String, SubscriptionStateHolder> subscriptionStates = getSubscriptionStatesByOrderId(orderId);
-			if (!Algorithms.isEmpty(subscriptionStates)) {
+			if (subscriptionStates == null) {
+				return null;
+			}
+			if (!subscriptionStates.isEmpty()) {
 				SubscriptionStateHolder stateHolder = subscriptionStates.entrySet().iterator().next().getValue();
 				OsmandSettings settings = ctx.getSettings();
 				settings.BACKUP_PURCHASE_STATE.set(stateHolder.state);
@@ -832,13 +876,17 @@ public abstract class InAppPurchaseHelper {
 		}
 
 		@Override
-		protected void onPostExecute(Boolean active) {
+		protected void onPostExecute(@Nullable Boolean active) {
 			promoRequested = true;
-			lastPromoCheckTime = System.currentTimeMillis();
-			ctx.getSettings().BACKUP_PURCHASE_ACTIVE.set(active);
+			if (active != null) {
+				// Leave both the state and the check time untouched when nothing was
+				// verified, so the next attempt is not postponed by a failed one
+				lastPromoCheckTime = System.currentTimeMillis();
+				ctx.getSettings().BACKUP_PURCHASE_ACTIVE.set(active);
+			}
 			notifyGetItems();
 			if (listener != null) {
-				listener.processResult(active);
+				listener.processResult(Boolean.TRUE.equals(active));
 			}
 		}
 	}
@@ -1055,11 +1103,20 @@ public abstract class InAppPurchaseHelper {
 
 	protected abstract boolean isBillingManagerExists();
 
+	/**
+	 * @return true if the local store is absent on this device rather than temporarily
+	 *         failing. Only then an empty local purchase list is a valid answer that may
+	 *         be used to revoke purchases - a failed query is not an answer at all.
+	 */
+	protected abstract boolean isLocalBillingUnavailable();
+
 	protected abstract void destroyBillingManager();
 
 	protected void stop(boolean taskDone) {
 		logDebug("Destroying helper.");
 		InAppPurchaseTaskType task = activeTask;
+		// Has to be read before the billing manager is destroyed below.
+		boolean localBillingUnavailable = isLocalBillingUnavailable();
 		if (isBillingManagerExists()) {
 			if (taskDone) {
 				processingTask = false;
@@ -1077,7 +1134,10 @@ public abstract class InAppPurchaseHelper {
 			requestInventory(false);
 		} else {
 			if (task == InAppPurchaseTaskType.REQUEST_INVENTORY) {
-				applyPurchases();
+				// Also reached on error paths, where the local purchase flags were never
+				// populated. Their emptiness is only meaningful when the store is missing
+				// from the device - a failed query says nothing about what the user owns.
+				applyPurchases(localBillingUnavailable);
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 package net.osmand.shared.util
 
-import co.touchlab.stately.collections.ConcurrentMutableMap
 import net.osmand.shared.data.KLatLon
+import net.osmand.shared.data.KQuadPointDouble
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.toDegrees
 import net.osmand.shared.extensions.toRadians
@@ -489,6 +489,31 @@ object KMapUtils {
 		return diff
 	}
 
+	/**
+	 * Where a point projects onto the segment between two others, clamped to its ends, in 31 coords.
+	 */
+	fun getProjectionPoint31(px: Int, py: Int, st31x: Int, st31y: Int, end31x: Int, end31y: Int): KQuadPointDouble {
+		// st31x, st31y - A, end31x, end31y - B, px, py - C
+		val tWidth = getTileWidth(py)
+		// Scalar multiplication between (AB, AC)
+		val projection = (end31x - st31x) * tWidth * (px - st31x) * tWidth +
+				(end31y - st31y) * tWidth * (py - st31y) * tWidth
+		val mDist = squareRootDist31(end31x, end31y, st31x, st31y)
+		var pry = end31y.toDouble()
+		var prx = end31x.toDouble()
+		if (projection < 0) {
+			prx = st31x.toDouble()
+			pry = st31y.toDouble()
+		} else if (projection >= mDist * mDist) {
+			prx = end31x.toDouble()
+			pry = end31y.toDouble()
+		} else {
+			prx = st31x + (end31x - st31x) * (projection / (mDist * mDist))
+			pry = st31y + (end31y - st31y) * (projection / (mDist * mDist))
+		}
+		return KQuadPointDouble(prx, pry)
+	}
+
 	fun squareRootDist31(x1: Int, y1: Int, x2: Int, y2: Int): Double {
 		return sqrt(squareDist31TileMetric(x1, y1, x2, y2))
 	}
@@ -533,33 +558,31 @@ object KMapUtils {
 	}
 
 	private const val PRECISION_ZOOM = 14
-	private val DIST_CACHE = ConcurrentMutableMap<Int, Double>()
+
+	/**
+	 * Tile widths in metres per 31-coordinate unit, one per row at [PRECISION_ZOOM], NaN until computed.
+	 * The routing asks for a width on every distance it measures, so this is an array indexed by the
+	 * row rather than a map: no key boxing and no lock. Two threads computing the same row write the
+	 * same value, so the race is harmless; the java original keeps a `TIntObjectHashMap` under a lock.
+	 */
+	private val DIST_CACHE = DoubleArray((1 shl PRECISION_ZOOM) + 2) { Double.NaN }
+
+	private fun tileWidthAtRow(tileY: Int): Double {
+		var d = DIST_CACHE[tileY]
+		if (d.isNaN()) {
+			d = getTileDistanceWidth(get31LatitudeY(tileY shl (31 - PRECISION_ZOOM)), PRECISION_ZOOM.toDouble()) / (1 shl (31 - PRECISION_ZOOM))
+			DIST_CACHE[tileY] = d
+		}
+		return d
+	}
+
 	private fun getTileWidth(y31: Int): Double {
 		val y = y31 / (1.0 * (1 shl (31 - PRECISION_ZOOM)))
-		var tileY = y.toInt()
+		val tileY = y.toInt()
 		val ry = y - tileY
-		var d: Double? = null
-		var dp: Double? = null
-		d = DIST_CACHE[tileY]
-		if (d == null) {
-			val td = getTileDistanceWidth(
-				get31LatitudeY(tileY shl (31 - PRECISION_ZOOM)),
-				PRECISION_ZOOM.toDouble()
-			) / (1 shl (31 - PRECISION_ZOOM))
-			d = td
-			DIST_CACHE[tileY] = td
-		}
-		tileY += 1
-		dp = DIST_CACHE[tileY]
-		if (dp == null) {
-			val tdp = getTileDistanceWidth(
-				get31LatitudeY(tileY shl (31 - PRECISION_ZOOM)),
-				PRECISION_ZOOM.toDouble()
-			) / (1 shl (31 - PRECISION_ZOOM))
-			dp = tdp
-			DIST_CACHE[tileY] = tdp
-		}
-		return ry * dp!! + (1 - ry) * d!!
+		val d = tileWidthAtRow(tileY)
+		val dp = tileWidthAtRow(tileY + 1)
+		return ry * dp + (1 - ry) * d
 	}
 
 	fun rightSide(

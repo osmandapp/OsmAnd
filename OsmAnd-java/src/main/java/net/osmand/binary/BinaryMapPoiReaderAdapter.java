@@ -929,9 +929,8 @@ public class BinaryMapPoiReaderAdapter {
 					}
 					if (matches) {
 						req.collectRawData(am);
-						if (req.publish(am) || req.isSkippedDuplication()) {
-							if (metrics != null) metrics.matchedObjectsLoaded++;
-						}
+						req.publish(am);
+						if (metrics != null) metrics.matchedObjectsLoaded++;
 					}
 					if (metrics != null) metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
 				}

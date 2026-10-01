@@ -1337,7 +1337,6 @@
     <string name="storage_directory_shared">Споделена памет</string>
     <string name="shared_string_topbar">Горна лента</string>
     <string name="full_report">Пълен доклад</string>
-    <string name="file_name_containes_illegal_char">Името на файла съдържа неправилен символ</string>
     <string name="show_transparency_seekbar">Показване на прозрачна лента</string>
     <string name="search_categories">Категории</string>
     <string name="postcode">Пощенски код</string>
@@ -2554,7 +2553,7 @@
     <string name="map_widget_ant_bicycle_power">Мощност на велосипеда</string>
     <string name="storage_copied_files_size">Обработени са %1$s файла, %2$s</string>
     <string name="dont_move_maps">Без преместване</string>
-    <string name="storage_migration_fragment_close_descr">Копирането е завършено само на %1$s%. Ако го спрете сега, приложението може да не работи.</string>
+    <string name="storage_migration_fragment_close_descr">Копирането е завършено само на %1$s%%. Ако го спрете сега, приложението може да не работи.</string>
     <string name="shared_string_osmand_usage">Използвано от OsmAnd</string>
     <string name="map_widget_rendering_fps">Изчертаване в кадри/сек</string>
     <string name="from_to_with_params">От „%1$s“ в „%2$s“</string>

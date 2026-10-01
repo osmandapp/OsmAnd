@@ -6,7 +6,7 @@
     "The first examples are the rules of the screen, the ones after them are the corner cases that broke it.",
     "Every 'screen' entry is one row of the list: '[Header]' for a section header,",
     "'Title' for a row without a second line and 'Title | Subtitle' for a row with the region shown in the second line.",
-    "Update the file when the shipped region data changes - the report the test writes shows the new screens side by side."
+    "Update the file when the shipped data changes: the cities come from World_basemap_mini.obf, which is downloaded at build time and rebuilt on the builder every so often, so a rebuild moves the rows of a broad query with no commit behind it. The test then fails on every screen that moved at once and writes search_examples.actual.json next to its HTML report, in this format - paste the screens from there, and read the diff first: a row appearing is what a bigger basemap does, a row disappearing is not."
   ],
   "examples": [
     {
@@ -107,7 +107,10 @@
         "Nouvelle-Aquitaine | France",
         "Papua New Guinea",
         "[Maps]",
+        "New Castle | Pennsylvania",
         "New Delhi | Delhi",
+        "New Haven | Connecticut",
+        "New Town | West Bengal",
         "Newark | Ohio",
         "Newark | Delaware",
         "Newburgh | Albany and surroundings",
@@ -120,6 +123,7 @@
         "Newport News | Virginia",
         "Newry | Northern Ireland",
         "Невинномысск | Stavropol Krai",
+        "兰州新区 | Gansu Province",
         "新北市 | Taiwan",
         "Geneva | Switzerland",
         "New Brunswick | Canada",
@@ -142,6 +146,7 @@
         "San Francisco | United States",
         "[Maps]",
         "San Francisco | Venezuela",
+        "San Francisco de Macorís | Dominican Republic",
         "Central African Republic",
         "San Francisco | United States"
       ]
@@ -194,7 +199,8 @@
       "query": "santo domingo",
       "screen": [
         "[Maps]",
-        "Santo Domingo | Dominican Republic"
+        "Santo Domingo de los Tsáchilas | Ecuador",
+        "Santo Domingo Oeste | Dominican Republic"
       ]
     },
     {

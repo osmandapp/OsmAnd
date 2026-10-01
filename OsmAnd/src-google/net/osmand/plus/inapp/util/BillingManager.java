@@ -407,7 +407,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 				} else {
 					LOG.error("Got an error response trying to query subscription purchases");
 				}
-				onQueryPurchasesFinished(billingResult, purchaseList);
+				// A failure of either query is a failure of the whole purchases query
+				onQueryPurchasesFinished(billingResult.getResponseCode() == BillingResponseCode.OK
+						? result : billingResult, purchaseList);
 				if (queryPurchasesListener != null) {
 					queryPurchasesListener.onQueryPurchasesFinished();
 				}

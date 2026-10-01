@@ -55,7 +55,8 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GpxFile
 		Map<String, PointsGroup> pointsGroups = gpxFile.getPointsGroups();
 
 		for (FavouritePoint favourite : favourites) {
-			favoritesHelper.deleteFavourite(favourite, false);
+			// Replaced by the imported point below, so not a deletion to journal
+			favoritesHelper.deleteFavourite(favourite, false, false);
 
 			PointsGroup pointsGroup = pointsGroups.get(favourite.getCategory());
 			favoritesHelper.addFavourite(favourite, pointsGroup, new AddFavoriteOptions());

@@ -4502,7 +4502,6 @@
     <string name="number_of_contributors">貢獻者數</string>
     <string name="number_of_edits">編輯次數</string>
     <string name="reports_for">報告</string>
-    <string name="file_name_containes_illegal_char">檔案名稱包含不允許的字元</string>
     <string name="configure_screen_quick_action">快速選項</string>
     <string name="quick_action_item_action">快速動作 %d</string>
     <string name="quick_action_item_screen">螢幕 %d</string>
@@ -4562,7 +4561,7 @@
     <string name="move_point">移動標點</string>
     <string name="osm_recipients_label">OSM 收件人</string>
     <string name="total_donations">捐款總計</string>
-    <string name="day_off_label">關閉</string>
+    <string name="day_off_label">休息</string>
     <string name="winter_and_ski_renderer">冬季和滑雪</string>
     <string name="touring_view_renderer">旅遊風景</string>
     <string name="nautical_renderer">航海</string>

@@ -107,6 +107,11 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		if (controller == null) {
+			// The fragment was re-created without its controller and onCreate() already asked
+			// for the dismiss, which only takes effect after this transition is finished.
+			return null;
+		}
 		updateNightMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
 		OsmandApplication app = mapActivity.getApp();
@@ -269,6 +274,9 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (controller == null) {
+			return;
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapRouteInfoMenu.waypointsVisible = true;
@@ -286,6 +294,9 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 	@Override
 	public void onPause() {
 		super.onPause();
+		if (controller == null) {
+			return;
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapRouteInfoMenu.waypointsVisible = false;
@@ -721,7 +732,7 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 
 	private void onDismiss() {
 		try {
-			if (controller.isUseRouteInfoMenu() && !showWaypointOnMap) {
+			if (controller != null && controller.isUseRouteInfoMenu() && !showWaypointOnMap) {
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
 					mapActivity.getMapActions().showRouteInfoControlDialog();

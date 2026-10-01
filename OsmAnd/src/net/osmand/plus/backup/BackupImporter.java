@@ -169,15 +169,24 @@ class BackupImporter {
 				if (!error) {
 					is = new FileInputStream(tempFile);
 					File file = reader.readFromStream(is, tempFile, remoteFile.getName());
+					boolean applied = true;
 					if (forceReadData) {
 						if (item instanceof CollectionSettingsItem<?>) {
 							((CollectionSettingsItem<?>) item).processDuplicateItems();
 						}
 						item.apply();
+						applied = item.isAppliedLocally();
 					}
-					updateFileM5Digest(remoteFile, item, file);
-					updateFileUploadTime(remoteFile, item);
-					FavoritesBackupMerger.onDownloadSuccess(app, item, remoteFile);
+					if (applied) {
+						updateFileM5Digest(remoteFile, item, file);
+						updateFileUploadTime(remoteFile, item);
+						FavoritesBackupMerger.onDownloadSuccess(app, item, remoteFile);
+					} else {
+						// Leaving the upload time unrecorded makes the next sync download the file
+						// again, instead of reading the missing local file as a local deletion.
+						item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
+						LOG.error("Downloaded item was not applied locally: " + item.getName());
+					}
 					if (PluginsHelper.isDevelopment()) {
 						UploadedFileInfo info = backupHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 						LOG.debug(" importItemFile file info " + info);

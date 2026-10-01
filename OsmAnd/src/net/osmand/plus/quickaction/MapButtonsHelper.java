@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.routes.actions.*;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.ShowHideMapillaryAction;
+import net.osmand.plus.plugins.panoramax.ShowHidePanoramaxAction;
 import net.osmand.plus.quickaction.actions.*;
 import net.osmand.plus.quickaction.actions.special.OpenWunderLINQDatagridAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -377,11 +378,13 @@ public class MapButtonsHelper {
 		// configure map
 		allTypes.add(ShowHideFavoritesAction.TYPE);
 		allTypes.add(ShowHideGpxTracksAction.TYPE);
+		allTypes.add(ShowHideTracksAction.TYPE);
 		allTypes.add(ShowHidePoiAction.TYPE);
 		allTypes.add(MapStyleAction.TYPE);
 		allTypes.add(DayNightModeAction.TYPE);
 		allTypes.add(ShowHideTransportLinesAction.TYPE);
 		allTypes.add(ShowHideMapillaryAction.TYPE);
+		allTypes.add(ShowHidePanoramaxAction.TYPE);
 		allTypes.add(ShowHideCycleRoutesAction.TYPE);
 		allTypes.add(ShowHideMtbRoutesAction.TYPE);
 		allTypes.add(ShowHideHikingRoutesAction.TYPE);

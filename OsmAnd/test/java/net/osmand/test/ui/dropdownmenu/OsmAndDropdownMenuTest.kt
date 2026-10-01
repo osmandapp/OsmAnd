@@ -1,0 +1,805 @@
+package net.osmand.test.ui
+
+import android.graphics.Rect
+import android.graphics.drawable.ColorDrawable
+import android.view.Gravity
+import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.setViewTreeLifecycleOwner
+import androidx.test.platform.app.InstrumentationRegistry
+import net.osmand.plus.R
+import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.widgets.popup.MENU_CONTAINER_VERTICAL_PADDING
+import net.osmand.plus.widgets.popup.MENU_DIVIDER_TOTAL_HEIGHT
+import net.osmand.plus.widgets.popup.MENU_GAP_EXTRA_HEIGHT
+import net.osmand.plus.widgets.popup.MENU_ITEM_HEIGHT
+import net.osmand.plus.widgets.popup.MENU_LABEL_HEIGHT
+import net.osmand.plus.widgets.popup.MENU_SCREEN_MARGIN
+import net.osmand.plus.widgets.popup.MENU_SUPPORTING_TEXT_EXTRA_HEIGHT
+import net.osmand.plus.widgets.popup.AndroidDrawableIcon
+import net.osmand.plus.widgets.popup.MENU_SHADOW_PADDING
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenu
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuColors
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuContainer
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuContent
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuDefaults
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuOption
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuTheme
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
+import net.osmand.plus.widgets.popup.PopUpMenuItem
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
+import net.osmand.plus.widgets.popup.colorAttr
+import net.osmand.plus.widgets.popup.showComposeDropdownMenu
+import net.osmand.plus.widgets.popup.toDropdownOption
+import net.osmand.plus.widgets.popup.toDropdownOptions
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class OsmAndDropdownMenuTest {
+
+	@Test
+	fun testDropdownMenuOptionDefaults() {
+		val option = OsmAndDropdownMenuOption(
+			value = "item_1",
+			title = "Item Title"
+		)
+
+		assertEquals("item_1", option.value)
+		assertEquals("Item Title", option.title)
+		assertNull(option.iconId)
+		assertNull(option.iconDrawable)
+		assertNull(option.iconColor)
+		assertFalse(option.isDestructive)
+		assertNull(option.supportingText)
+		assertFalse(option.selected)
+		assertNull(option.selectedColor)
+		assertFalse(option.isCheckbox)
+		assertTrue(option.enabled)
+		assertFalse(option.showDividerAfter)
+		assertFalse(option.showGapAfter)
+		assertFalse(option.titleBold)
+		assertNull(option.titleColor)
+		assertNull(option.trailingBadgeTitle)
+		assertNull(option.trailingIconId)
+		assertNull(option.trailingIconDrawable)
+		assertNull(option.trailingText)
+		assertNull(option.labelText)
+	}
+
+	@Test
+	fun testDropdownMenuOptionCustomValues() {
+		val option = OsmAndDropdownMenuOption(
+			value = 42,
+			title = "Custom Title",
+			iconId = R.drawable.ic_action_settings,
+			iconColor = Color.Red,
+			isDestructive = true,
+			supportingText = "Custom Description",
+			labelText = "Section Header",
+			selected = true,
+			selectedColor = Color.Blue,
+			isCheckbox = true,
+			enabled = false,
+			showDividerAfter = true,
+			showGapAfter = true,
+			titleBold = true,
+			titleColor = Color.Magenta,
+			trailingBadgeTitle = "Get",
+			trailingBadgeColor = Color.Cyan
+		)
+
+		assertEquals(42, option.value)
+		assertEquals("Custom Title", option.title)
+		assertEquals(R.drawable.ic_action_settings, option.iconId)
+		assertEquals(Color.Red, option.iconColor)
+		assertTrue(option.isDestructive)
+		assertEquals("Custom Description", option.supportingText)
+		assertEquals("Section Header", option.labelText)
+		assertTrue(option.selected)
+		assertEquals(Color.Blue, option.selectedColor)
+		assertTrue(option.isCheckbox)
+		assertFalse(option.enabled)
+		assertTrue(option.showDividerAfter)
+		assertTrue(option.showGapAfter)
+		assertTrue(option.titleBold)
+		assertEquals(Color.Magenta, option.titleColor)
+		assertEquals("Get", option.trailingBadgeTitle)
+		assertEquals(Color.Cyan, option.trailingBadgeColor)
+	}
+
+	@Test
+	fun testDropdownMenuOptionTrailingIconAndText() {
+		val drawable = ColorDrawable(android.graphics.Color.GREEN)
+		val option = OsmAndDropdownMenuOption(
+			value = "trailing",
+			title = "Item",
+			trailingIconId = R.drawable.ic_action_settings,
+			trailingIconDrawable = drawable,
+			trailingText = "⌘X"
+		)
+
+		assertEquals(R.drawable.ic_action_settings, option.trailingIconId)
+		assertEquals(drawable, option.trailingIconDrawable)
+		assertEquals("⌘X", option.trailingText)
+	}
+
+	@Test
+	fun testDropdownMenuDefaultsOffset() {
+		assertEquals(DpOffset(0.dp, 4.dp), OsmAndDropdownMenuDefaults.Offset)
+	}
+
+	@Test
+	fun testDropdownMenuColors() {
+		val colors = OsmAndDropdownMenuColors(
+			background = Color.White,
+			divider = Color.Gray,
+			text = Color.Black,
+			secondaryText = Color.DarkGray,
+			icon = Color.Blue,
+			selected = Color.Green,
+			control = Color.Red,
+			error = Color.Yellow
+		)
+
+		assertEquals(Color.White, colors.background)
+		assertEquals(Color.Gray, colors.divider)
+		assertEquals(Color.Black, colors.text)
+		assertEquals(Color.DarkGray, colors.secondaryText)
+		assertEquals(Color.Blue, colors.icon)
+		assertEquals(Color.Green, colors.selected)
+		assertEquals(Color.Red, colors.control)
+		assertEquals(Color.Yellow, colors.error)
+	}
+
+	@Test
+	fun testPopUpMenuItemMapping() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item1 = PopUpMenuItem.Builder(context)
+			.setTitle("Edit")
+			.setSelected(true)
+			.showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO)
+			.create()
+
+		val item2 = PopUpMenuItem.Builder(context)
+			.setTitle("Delete")
+			.showTopDivider(true)
+			.setTitleBold(true)
+			.setDestructive(true)
+			.setIconColor(android.graphics.Color.RED)
+			.create()
+
+		val options = listOf(item1, item2).toDropdownOptions()
+		assertEquals(2, options.size)
+
+		val option1 = options[0]
+		assertEquals("Edit", option1.title)
+		assertTrue(option1.selected)
+		assertTrue(option1.enabled)
+		assertTrue(option1.showDividerAfter)
+		assertFalse(option1.isDestructive)
+		assertNull(option1.iconColor)
+
+		val option2 = options[1]
+		assertEquals("Delete", option2.title)
+		assertTrue(option2.titleBold)
+		assertTrue(option2.enabled)
+		assertFalse(option2.showDividerAfter)
+		assertTrue(option2.isDestructive)
+		assertEquals(Color(android.graphics.Color.RED), option2.iconColor)
+
+		val disabledItem = PopUpMenuItem.Builder(context)
+			.setTitle("Disabled Item")
+			.setDismissOnClick(false)
+			.create()
+		val disabledOption = disabledItem.toDropdownOption()
+		assertFalse(disabledOption.enabled)
+
+		val clickableItem = PopUpMenuItem.Builder(context)
+			.setTitle("Clickable")
+			.setOnClickListener { }
+			.create()
+		val clickableOptions = listOf(clickableItem).toDropdownOptions()
+		assertTrue(clickableOptions[0].enabled)
+
+		val checkboxItem = PopUpMenuItem.Builder(context)
+			.setTitle("Weather Layer")
+			.showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.CHECKBOX)
+			.create()
+		val checkboxOptions = listOf(checkboxItem).toDropdownOptions()
+		assertTrue(checkboxOptions[0].isCheckbox)
+		assertFalse(checkboxOptions[0].selected)
+		assertNull(checkboxOptions[0].selectedColor)
+
+		val coloredItem = PopUpMenuItem.Builder(context)
+			.setTitle("Car Profile")
+			.setSelected(true)
+			.showCompoundBtn(android.graphics.Color.BLUE, PopUpMenuItem.CompoundButtonType.RADIO)
+			.create()
+		val coloredOptions = listOf(coloredItem).toDropdownOptions()
+		assertEquals(Color(android.graphics.Color.BLUE), coloredOptions[0].selectedColor)
+	}
+
+	@Test
+	fun testPopUpMenuItemTrailingIconMapping() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val drawable = ColorDrawable(android.graphics.Color.RED)
+		val item = PopUpMenuItem.Builder(context)
+			.setTitle("With Trailing")
+			.setTrailingIcon(drawable)
+			.setTrailingText("Ctrl+C")
+			.setOnClickListener { }
+			.create()
+
+		val option = item.toDropdownOption()
+		assertEquals("With Trailing", option.title)
+		assertEquals(drawable, option.trailingIconDrawable)
+		assertNull(option.trailingIconId)
+		assertEquals("Ctrl+C", option.trailingText)
+		assertNull(option.trailingBadgeTitle)
+	}
+
+	@Test
+	fun testPopUpMenuItemTrailingTextOnly() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item = PopUpMenuItem.Builder(context)
+			.setTitle("Shortcut")
+			.setTrailingText("⌘V")
+			.setOnClickListener { }
+			.create()
+
+		val option = item.toDropdownOption()
+		assertEquals("⌘V", option.trailingText)
+		assertNull(option.trailingIconDrawable)
+	}
+
+	@Test
+	fun testPopUpMenuItemSupportingTextAndLabelTextMapping() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item = PopUpMenuItem.Builder(context)
+			.setTitle("Main Action")
+			.setSupportingText("Additional descriptive text")
+			.setLabelText("Group 1")
+			.setOnClickListener { }
+			.create()
+
+		assertEquals("Additional descriptive text", item.supportingText)
+		assertEquals("Group 1", item.labelText)
+
+		val option = item.toDropdownOption()
+		assertEquals("Main Action", option.title)
+		assertEquals("Additional descriptive text", option.supportingText)
+		assertEquals("Group 1", option.labelText)
+	}
+
+	@Test
+	fun testPopUpMenuItemWithDisplayDataListener() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val displayData = PopUpMenuDisplayData()
+		displayData.onItemClickListener = net.osmand.plus.widgets.popup.OnPopUpMenuItemClickListener { }
+
+		val item = PopUpMenuItem.Builder(context)
+			.setTitle("Category")
+			.create()
+
+		val options = listOf(item).toDropdownOptions(displayData)
+		assertEquals(1, options.size)
+		assertTrue(options[0].enabled)
+	}
+
+	@Test
+	fun testShowComposeDropdownMenuNullAnchorView() {
+		val displayData = PopUpMenuDisplayData()
+		displayData.anchorView = null
+		assertNull(showComposeDropdownMenu(displayData))
+	}
+
+	@Test
+	fun testShowComposeDropdownMenuUnattachedAnchorView() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val anchorView = View(context)
+		val displayData = PopUpMenuDisplayData().apply {
+			this.anchorView = anchorView
+			menuItems = emptyList()
+		}
+		assertNull(showComposeDropdownMenu(displayData))
+	}
+
+	@Test
+	fun testShowComposeDropdownMenuWithDisplayDataSettings() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val anchorView = View(context)
+		val displayData = PopUpMenuDisplayData().apply {
+			this.anchorView = anchorView
+			bgColor = Color.DarkGray.toArgb()
+			customDropDown = PopUpMenuDisplayData.CustomDropDown.TOP_DROPDOWN
+		}
+		assertNull(showComposeDropdownMenu(displayData))
+	}
+
+	@Test
+	fun testToDropdownOptionsEmptyList() {
+		val options = emptyList<PopUpMenuItem>().toDropdownOptions()
+		assertTrue(options.isEmpty())
+	}
+
+	@Test
+	fun testToDropdownOptionsNullMenuItems() {
+		val displayData = PopUpMenuDisplayData()
+		displayData.menuItems = null
+		assertNull(displayData.menuItems?.toDropdownOptions(displayData))
+	}
+
+	@Test
+	fun testPopUpMenuItemWithNullTitle() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item = PopUpMenuItem.Builder(context).create()
+		val option = item.toDropdownOption()
+		assertEquals("", option.title)
+	}
+
+	@Test
+	fun testPopUpMenuItemDividersChain() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item1 = PopUpMenuItem.Builder(context).setTitle("First").create()
+		val item2 = PopUpMenuItem.Builder(context).setTitle("Second").showTopDivider(true).create()
+		val item3 = PopUpMenuItem.Builder(context).setTitle("Third").showTopDivider(false).create()
+		val item4 = PopUpMenuItem.Builder(context).setTitle("Fourth").showTopDivider(true).create()
+
+		val options = listOf(item1, item2, item3, item4).toDropdownOptions()
+		assertEquals(4, options.size)
+		assertTrue(options[0].showDividerAfter)
+		assertFalse(options[1].showDividerAfter)
+		assertTrue(options[2].showDividerAfter)
+		assertFalse(options[3].showDividerAfter)
+	}
+
+	@Test
+	fun testPopUpMenuItemSingleItemDivider() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item = PopUpMenuItem.Builder(context).setTitle("Solo").showTopDivider(true).create()
+		val options = listOf(item).toDropdownOptions()
+		assertEquals(1, options.size)
+		assertFalse(options[0].showDividerAfter)
+	}
+
+	@Test
+	fun testPopUpMenuItemTrailingBadge() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item = PopUpMenuItem.Builder(context)
+			.setTitle("Subscription")
+			.setTrailingBadge(null, "PRO", Color.Red.toArgb())
+			.create()
+
+		val option = item.toDropdownOption()
+		assertEquals("PRO", option.trailingBadgeTitle)
+		assertEquals(Color.Red, option.trailingBadgeColor)
+		assertNull(option.trailingBadgeIcon)
+	}
+
+	@Test
+	fun testPopUpMenuItemCheckboxLayoutVariants() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item = PopUpMenuItem.Builder(context).setTitle("Layer").create()
+
+		val dataCheckbox = PopUpMenuDisplayData().apply {
+			layoutId = R.layout.popup_menu_item_checkbox
+		}
+		assertTrue(item.toDropdownOption(dataCheckbox).isCheckbox)
+
+		val dataFullDivider = PopUpMenuDisplayData().apply {
+			layoutId = R.layout.popup_menu_item_full_divider_check_box
+		}
+		assertTrue(item.toDropdownOption(dataFullDivider).isCheckbox)
+	}
+
+	@Test
+	fun testPopUpMenuItemEnabledWithDismissOnClickEvenWithoutListener() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val headerItem = PopUpMenuItem.Builder(context)
+			.setTitle("Sort by")
+			.setTitleBold(true)
+			.create()
+		val option = headerItem.toDropdownOption()
+		assertTrue(option.enabled)
+
+		val disabledItem = PopUpMenuItem.Builder(context)
+			.setTitle("Static Item")
+			.setDismissOnClick(false)
+			.create()
+		val disabledOption = disabledItem.toDropdownOption()
+		assertFalse(disabledOption.enabled)
+	}
+
+	@Test
+	fun testDropdownMenuPositioningGravityRules() {
+		val screenWidth = 1080
+		val anchorWidth = 100
+
+		val leftAnchorLocationX = 100
+		val leftAnchorCenterX = leftAnchorLocationX + anchorWidth / 2
+		val isLeftOnRight = leftAnchorCenterX > screenWidth / 2
+		assertFalse(isLeftOnRight)
+
+		val leftGravityLtr = if (isLeftOnRight) Gravity.END or Gravity.TOP else Gravity.START or Gravity.TOP
+		val leftGravityRtl = if (isLeftOnRight) Gravity.START or Gravity.TOP else Gravity.END or Gravity.TOP
+		assertEquals(Gravity.START or Gravity.TOP, leftGravityLtr)
+		assertEquals(Gravity.END or Gravity.TOP, leftGravityRtl)
+
+		val rightAnchorLocationX = 900
+		val rightAnchorCenterX = rightAnchorLocationX + anchorWidth / 2
+		val isRightOnRight = rightAnchorCenterX > screenWidth / 2
+		assertTrue(isRightOnRight)
+
+		val rightGravityLtr = if (isRightOnRight) Gravity.END or Gravity.TOP else Gravity.START or Gravity.TOP
+		val rightGravityRtl = if (isRightOnRight) Gravity.START or Gravity.TOP else Gravity.END or Gravity.TOP
+		assertEquals(Gravity.END or Gravity.TOP, rightGravityLtr)
+		assertEquals(Gravity.START or Gravity.TOP, rightGravityRtl)
+	}
+
+	@Test
+	fun testDropdownMenuPositioningMarginAndOffsets() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val metrics = context.resources.displayMetrics
+		val screenMarginPx = AndroidUtils.dpToPx(context, MENU_SCREEN_MARGIN.value)
+		val shadowPaddingPx = AndroidUtils.dpToPx(context, MENU_SHADOW_PADDING.value)
+		val screenWidth = metrics.widthPixels
+
+		val leftAnchorX = 10
+		val minHOffset = screenMarginPx - leftAnchorX - shadowPaddingPx
+		val defaultLeftHOffset = -shadowPaddingPx
+		val clampedLeftHOffset = maxOf(defaultLeftHOffset + (-500), minHOffset)
+		assertEquals(minHOffset, clampedLeftHOffset)
+
+		val anchorWidth = 100
+		val rightAnchorX = screenWidth - 120
+		val maxHOffset = screenWidth - screenMarginPx - (rightAnchorX + anchorWidth) + shadowPaddingPx
+		val defaultRightHOffset = shadowPaddingPx
+		val clampedRightHOffset = minOf(defaultRightHOffset + 500, maxHOffset)
+		assertEquals(maxHOffset, clampedRightHOffset)
+	}
+
+	@Test
+	fun testDropdownMenuPositioningHeightEstimationWithDividers() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+
+		var baseHeight = MENU_CONTAINER_VERTICAL_PADDING * 2 + MENU_SCREEN_MARGIN
+		val items = listOf(
+			PopUpMenuItem.Builder(context).setTitle("1").create(),
+			PopUpMenuItem.Builder(context).setTitle("2").showTopDivider(true).create(),
+			PopUpMenuItem.Builder(context).setTitle("3").setSupportingText("Desc").create(),
+			PopUpMenuItem.Builder(context).setTitle("4").setLabelText("Header").showTopGap(true).create()
+		)
+		for (item in items) {
+			baseHeight += MENU_ITEM_HEIGHT
+			if (item.supportingText != null) {
+				baseHeight += MENU_SUPPORTING_TEXT_EXTRA_HEIGHT
+			}
+			if (item.labelText != null) {
+				baseHeight += MENU_LABEL_HEIGHT
+			}
+			if (item.shouldShowTopDivider()) {
+				baseHeight += MENU_DIVIDER_TOTAL_HEIGHT
+			}
+			if (item.shouldShowTopGap()) {
+				baseHeight += MENU_GAP_EXTRA_HEIGHT
+			}
+		}
+		val expectedDp = (MENU_CONTAINER_VERTICAL_PADDING * 2 + MENU_SCREEN_MARGIN) +
+			MENU_ITEM_HEIGHT * 4 +
+			MENU_DIVIDER_TOTAL_HEIGHT +
+			MENU_SUPPORTING_TEXT_EXTRA_HEIGHT +
+			MENU_LABEL_HEIGHT +
+			MENU_GAP_EXTRA_HEIGHT
+		assertEquals(expectedDp, baseHeight)
+
+		val expectedPx = AndroidUtils.dpToPx(context, baseHeight.value)
+		assertTrue(expectedPx > 0)
+	}
+
+	@Test
+	fun testDropdownMenuPositioningVerticalFlippingLogic() {
+		val screenHeight = 1000
+		val anchorY = 800
+		val anchorHeight = 50
+		val approxMenuHeightPx = 300
+
+		val spaceBelow = screenHeight - (anchorY + anchorHeight)
+		val spaceAbove = anchorY
+
+		val shouldFlipAbove = spaceBelow < approxMenuHeightPx && spaceAbove > spaceBelow
+		assertTrue(shouldFlipAbove)
+
+		val forcedTop = PopUpMenuDisplayData.CustomDropDown.TOP_DROPDOWN
+		assertTrue(forcedTop == PopUpMenuDisplayData.CustomDropDown.TOP_DROPDOWN)
+
+		val forcedBottom = PopUpMenuDisplayData.CustomDropDown.BOTTOM_DROPDOWN
+		assertFalse(forcedBottom == PopUpMenuDisplayData.CustomDropDown.TOP_DROPDOWN)
+	}
+
+	@Test
+	fun testComposeDropdownMenuContentRendering() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val options = listOf(
+			OsmAndDropdownMenuOption(value = "opt1", title = "First Option", supportingText = "First Description"),
+			OsmAndDropdownMenuOption(value = "opt2", title = "Second Option", trailingBadgeTitle = "PRO", enabled = false)
+		)
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				OsmAndDropdownMenuTheme {
+					OsmAndDropdownMenuContent(
+						options = options,
+						onOptionSelected = {}
+					)
+				}
+			}
+		}
+	}
+
+	@Test
+	fun testComposeDropdownMenuContentWithTitleHeader() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val options = listOf(
+			OsmAndDropdownMenuOption(value = "item", title = "Choice")
+		)
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				OsmAndDropdownMenuTheme {
+					OsmAndDropdownMenuContent(
+						title = "Header Title",
+						options = options,
+						onOptionSelected = {}
+					)
+				}
+			}
+		}
+	}
+
+	@Test
+	fun testComposeDropdownMenuContentEmptyList() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				OsmAndDropdownMenuTheme {
+					OsmAndDropdownMenuContent(
+						options = emptyList<OsmAndDropdownMenuOption<String>>(),
+						onOptionSelected = {}
+					)
+				}
+			}
+		}
+	}
+
+	@Test
+	fun testComposeAndroidDrawableIcon() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val drawable = ColorDrawable(android.graphics.Color.BLUE)
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				AndroidDrawableIcon(
+					drawable = drawable,
+					modifier = Modifier.size(24.dp),
+					tint = Color.Red
+				)
+			}
+		}
+	}
+
+	@Test
+	fun testComposeColorAttr() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				colorAttr(android.R.attr.textColorPrimary)
+			}
+		}
+	}
+
+	@Test
+	fun testPopUpMenuItemShowTopGapMapping() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item1 = PopUpMenuItem.Builder(context).setTitle("First").create()
+		val item2 = PopUpMenuItem.Builder(context).setTitle("Second").showTopGap(true).create()
+
+		assertTrue(item2.shouldShowTopGap())
+
+		val options = listOf(item1, item2).toDropdownOptions()
+		assertEquals(2, options.size)
+		assertTrue(options[0].showGapAfter)
+		assertFalse(options[0].showDividerAfter)
+		assertFalse(options[1].showGapAfter)
+		assertFalse(options[1].showDividerAfter)
+	}
+
+
+	@Test
+	fun testComposeDropdownMenuWithGap() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val options = listOf(
+			OsmAndDropdownMenuOption(value = "1", title = "One", showGapAfter = true),
+			OsmAndDropdownMenuOption(value = "2", title = "Two")
+		)
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				OsmAndDropdownMenuTheme {
+					OsmAndDropdownMenu(
+						expanded = true,
+						onDismissRequest = {},
+						options = options,
+						onOptionSelected = {}
+					)
+				}
+			}
+		}
+	}
+
+	@Test
+	fun testComposeDropdownMenuWithTrailingIconAndText() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val drawable = ColorDrawable(android.graphics.Color.MAGENTA)
+		val options = listOf(
+			OsmAndDropdownMenuOption(value = "1", title = "Copy", trailingText = "⌘C"),
+			OsmAndDropdownMenuOption(value = "2", title = "Settings", trailingIconId = R.drawable.ic_action_settings),
+			OsmAndDropdownMenuOption(value = "3", title = "Custom", trailingIconDrawable = drawable, trailingText = "Extra")
+		)
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				OsmAndDropdownMenuTheme {
+					OsmAndDropdownMenuContent(
+						options = options,
+						onOptionSelected = {}
+					)
+				}
+			}
+		}
+	}
+
+	@Test
+	fun testDropdownMenuWidthModeDefaultAndAnchorWidthCalculation() {
+		val displayData = PopUpMenuDisplayData()
+		assertEquals(PopUpMenuWidthMode.AS_ANCHOR_VIEW, displayData.widthMode)
+
+		val screenWidthPx = 1080
+		val screenMarginPx = 32
+		val maxAllowedWidthPx = screenWidthPx - 2 * screenMarginPx
+
+		val anchorWidth1 = 300
+		val targetWidth1 = minOf(anchorWidth1, maxAllowedWidthPx)
+		assertEquals(300, targetWidth1)
+
+		val anchorWidthExcessive = 2000
+		val targetWidth2 = minOf(anchorWidthExcessive, maxAllowedWidthPx)
+		assertEquals(maxAllowedWidthPx, targetWidth2)
+	}
+
+	@Test
+	fun testDropdownMenuTitleClickDismiss() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		var dismissed = false
+		val options = listOf(OsmAndDropdownMenuOption(value = "1", title = "Item"))
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				OsmAndDropdownMenuTheme {
+					OsmAndDropdownMenuContent(
+						options = options,
+						onOptionSelected = {},
+						title = "Sort by",
+						onDismissRequest = { dismissed = true }
+					)
+				}
+			}
+		}
+	}
+
+	@Test
+	fun testAndroidDrawableIconDoesNotMutateOriginalDrawable() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val originalDrawable = ContextCompat.getDrawable(context, net.osmand.plus.R.drawable.ic_action_settings)!!
+		val originalBounds = Rect(0, 0, 0, 0)
+		originalDrawable.bounds = originalBounds
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				AndroidDrawableIcon(
+					drawable = originalDrawable,
+					tint = Color.Red
+				)
+			}
+		}
+
+		assertEquals(originalBounds, originalDrawable.bounds)
+	}
+
+	@Test
+	fun testComposeDropdownMenuHeightLimitingAndScrolling() {
+		val screenHeight = 800
+		val anchorY = 500
+		val anchorHeight = 50
+		val screenMarginPx = 16
+		val verticalSpacingPx = 4
+		val shadowPaddingPx = 16
+
+		val approxMenuHeightPx = 1200
+
+		val anchorBottom = anchorY + anchorHeight
+		val spaceBelow = screenHeight - anchorBottom
+		val spaceAbove = anchorY
+
+		val shouldShowAbove = spaceBelow < approxMenuHeightPx && spaceAbove > spaceBelow
+		assertTrue(shouldShowAbove)
+
+		val availableSpacePx = spaceAbove - screenMarginPx - verticalSpacingPx
+		val maxMenuHeightPx = maxOf(availableSpacePx, 96)
+		assertEquals(480, maxMenuHeightPx)
+
+		val effectiveMenuHeightPx = minOf(approxMenuHeightPx, maxMenuHeightPx)
+		assertEquals(480, effectiveMenuHeightPx)
+
+		val vOffset = -anchorHeight - effectiveMenuHeightPx + shadowPaddingPx - verticalSpacingPx
+		assertEquals(-518, vOffset)
+	}
+
+	@Test
+	fun testOsmAndDropdownMenuContainerWithScrollStateRendering() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val options = (1..15).map { index ->
+			OsmAndDropdownMenuOption(value = "opt_$index", title = "Option $index")
+		}
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				OsmAndDropdownMenuTheme {
+					val scrollState = rememberScrollState()
+					OsmAndDropdownMenuContainer(
+						options = options,
+						onOptionSelected = {},
+						modifier = Modifier.heightIn(max = 200.dp),
+						scrollState = scrollState
+					)
+				}
+			}
+		}
+	}
+
+	private fun createTestComposeView(context: android.content.Context): ComposeView {
+		val composeView = ComposeView(context)
+		val lifecycleOwner = object : LifecycleOwner {
+			private val registry = LifecycleRegistry(this).apply {
+				currentState = Lifecycle.State.RESUMED
+			}
+			override val lifecycle: Lifecycle = registry
+		}
+		composeView.setViewTreeLifecycleOwner(lifecycleOwner)
+		return composeView
+	}
+}

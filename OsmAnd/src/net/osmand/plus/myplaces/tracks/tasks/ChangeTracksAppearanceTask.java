@@ -4,6 +4,7 @@ import static net.osmand.shared.gpx.ColoringPurpose.TRACK;
 import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.LINE_STYLE;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
@@ -28,6 +29,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 
 import org.apache.commons.logging.Log;
 
@@ -126,6 +128,10 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 		Boolean showArrows = data.getParameter(SHOW_ARROWS);
 		if (showArrows != null) {
 			settings.CURRENT_TRACK_SHOW_ARROWS.set(showArrows);
+		}
+		String lineStyle = data.getParameter(LINE_STYLE);
+		if (lineStyle != null) {
+			settings.CURRENT_TRACK_LINE_STYLE.set(GpxLineStyleType.Companion.getLineStyleType(lineStyle).getTypeName());
 		}
 		Boolean showStartFinish = data.getParameter(SHOW_START_FINISH);
 		if (showStartFinish != null) {

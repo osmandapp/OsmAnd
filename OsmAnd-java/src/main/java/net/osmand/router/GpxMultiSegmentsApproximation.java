@@ -207,8 +207,10 @@ public class GpxMultiSegmentsApproximation {
 		if (bestRoute != null) {
 			wrapupRoute(gpxPoints, bestRoute);
 		}
-		System.out.printf("Approximation took %.2f seconds (%d route points searched)\n",
+		if (RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION) {
+			System.out.printf("Approximation took %.2f seconds (%d route points searched)\n",
 				(System.nanoTime() - timeToCalculate) / 1.0e9, gctx.routePointsSearched);
+		}
 		return gctx;
 	}
 

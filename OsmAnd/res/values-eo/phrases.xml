@@ -810,7 +810,7 @@
     <string name="poi_lodging">Loĝo</string>
     <string name="poi_harbour">Haveno</string>
     <string name="poi_marina">Jaĥt-haveno</string>
-    <string name="poi_miniature_golf">Minigolfludejo</string>
+    <string name="poi_miniature_golf">Minigolf-ludejo</string>
     <string name="poi_water_park">Akvoparko</string>
     <string name="poi_recreation_ground">Ripoza tereno</string>
     <string name="poi_village_green">Verda tereno</string>
@@ -5180,4 +5180,9 @@
     <string name="poi_winter_hiking_filter">Taŭga por vintra marŝado</string>
     <string name="poi_mtb_yes">jes</string>
     <string name="poi_winter_hiking_yes">jes</string>
+    <string name="poi_air_conditioning">Klimatizo</string>
+    <string name="poi_website_menu">Manĝkarto</string>
+    <string name="poi_air_conditioning_yes">jes</string>
+    <string name="poi_air_conditioning_no">ne</string>
+    <string name="poi_disc_golf_course">Diskgolf-ludejo</string>
 </resources>

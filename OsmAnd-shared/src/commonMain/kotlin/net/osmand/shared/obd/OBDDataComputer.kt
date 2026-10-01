@@ -14,10 +14,15 @@ import net.osmand.shared.util.Localization
 import net.osmand.shared.util.PlatformUtil
 
 
+// Types computed from the difference of two fuel levels. The sensor changes in 1% steps
+// (~0.5 L), so they need a window long enough to see two different levels and to keep
+// the GPS locations driven in between. Widgets use defaultAverageTime, not a list of types.
 private const val FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME = 5 * 60
 
 object OBDDataComputer {
 
+	// Noise limits: more than 100 L/100 km or less than 1 km/L (1000 m/L) is discarded.
+	// The distance-per-volume limit is a lower bound, the volume-per-distance one an upper bound.
 	private const val LITER_KM_CONSUMPTION_LIMIT = 100
 	private const val M_LITER_CONSUMPTION_LIMIT = 1000
 
@@ -432,7 +437,7 @@ object OBDDataComputer {
 							val distance = getDistanceForTimePeriod(first.timestamp, last.timestamp)
 							if (distance > 0 && difLiter > 0) {
 								val result = distance / difLiter
-								return if (result > M_LITER_CONSUMPTION_LIMIT) {
+								return if (result < M_LITER_CONSUMPTION_LIMIT) {
 									Float.NaN
 								} else {
 									result
@@ -493,8 +498,12 @@ object OBDDataComputer {
 					values = mutableListOf(it)
 				} else {
 					when (type) {
+						// fuel-level difference types: store a level only when it changes
+						// and repeats SAME_FUEL_LVL_SEQUENCE_LENGTH times, otherwise the last
+						// two values are equal and the difference is always 0
 						FUEL_LEFT_KM,
 						FUEL_CONSUMPTION_RATE_LITER_KM,
+						FUEL_CONSUMPTION_RATE_M_PER_LITER,
 						FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
 						FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 							val lastLvl =

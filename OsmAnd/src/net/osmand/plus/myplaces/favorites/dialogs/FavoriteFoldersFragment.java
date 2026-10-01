@@ -168,6 +168,9 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 
 	@Override
 	public void updateContent() {
+		if (adapter == null) {
+			return;
+		}
 		List<Object> items = getAdapterItems();
 		setupSelectionHelper();
 		FavoriteListSortMode sortMode = getTracksSortMode();

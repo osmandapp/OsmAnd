@@ -154,6 +154,15 @@ public abstract class SettingsItem {
 		// non implemented
 	}
 
+	/**
+	 * Whether apply() produced the local state this item represents. Backup import must not record
+	 * a download as complete when it did not: the item has no local file, and the next sync would
+	 * read that as a local deletion and remove it from the Cloud.
+	 */
+	public boolean isAppliedLocally() {
+		return true;
+	}
+
 	public void delete() {
 		// non implemented
 	}

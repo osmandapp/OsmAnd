@@ -76,6 +76,40 @@
 					app:srcCompat="@drawable/ic_action_device_camera"
 					app:tint="#5f6e7c" />
 
+
+				<LinearLayout
+					android:id="@+id/star_map_zoom_buttons"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginBottom="@dimen/content_padding"
+					android:orientation="vertical"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintEnd_toEndOf="parent">
+
+					<net.osmand.plus.plugins.astronomy.views.StarMapButton
+						android:id="@+id/star_map_zoom_in_button"
+						android:layout_width="@dimen/map_button_size"
+						android:layout_height="@dimen/map_button_size"
+						android:layout_marginBottom="@dimen/content_padding"
+						android:background="@drawable/btn_circle"
+						android:contentDescription="@string/zoomIn"
+						android:elevation="4dp"
+						app:srcCompat="@drawable/ic_zoom_in"
+						app:tint="#5f6e7c" />
+
+					<net.osmand.plus.plugins.astronomy.views.StarMapButton
+						android:id="@+id/star_map_zoom_out_button"
+						android:layout_width="@dimen/map_button_size"
+						android:layout_height="@dimen/map_button_size"
+						android:background="@drawable/btn_circle"
+						android:contentDescription="@string/zoomOut"
+						android:elevation="4dp"
+						app:srcCompat="@drawable/ic_zoom_out"
+						app:tint="#5f6e7c" />
+				</LinearLayout>
+
+
 				<net.osmand.plus.plugins.astronomy.views.StarMapButton
 					android:id="@+id/settings_button"
 					android:layout_width="@dimen/map_button_size"
@@ -86,7 +120,7 @@
 					android:contentDescription="@string/shared_string_close"
 					android:elevation="4dp"
 					app:layout_constraintBottom_toBottomOf="parent"
-					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintEnd_toStartOf="@id/star_map_zoom_buttons"
 					app:srcCompat="@drawable/ic_layer_top"
 					app:tint="#5f6e7c" />
 

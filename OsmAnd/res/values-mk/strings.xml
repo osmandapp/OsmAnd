@@ -3526,7 +3526,6 @@
     <string name="morning">Utro</string>
     <string name="night">Noc</string>
     <string name="reports_for">Izvestete za</string>
-    <string name="file_name_containes_illegal_char">Nelegalen znak vo imeto na datotekata</string>
     <string name="configure_screen_quick_action">Brzo dejstvie</string>
     <string name="quick_action_item_action">Dejstvie %d</string>
     <string name="quick_action_item_screen">Ekran %d</string>
@@ -3661,7 +3660,7 @@
     <string name="winter_and_ski_renderer">Zima i skijanje</string>
     <string name="move_point">Pomestete ja tockata</string>
     <string name="osm_recipients_label">Primateli na OSM</string>
-    <string name="day_off_label">isklučen</string>
+    <string name="day_off_label">затворено</string>
     <string name="toast_empty_name_error">Neimenuvana lokacija</string>
     <string name="tunnel_warning">Tunel napred</string>
     <string name="show_tunnels">Tuneli</string>

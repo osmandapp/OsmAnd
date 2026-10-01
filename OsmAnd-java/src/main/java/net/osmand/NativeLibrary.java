@@ -405,7 +405,7 @@ public class NativeLibrary {
 	protected static native ByteBuffer getGeotiffTile(
 		String tilePath, String outColorFilename, String midColorFilename, int type, int size, int zoom, int x, int y);
 
-	protected static native byte[] getMapboxVectorTileData(int zoom, int x, int y);
+	protected static native byte[] getMapboxVectorTileData(int zoom, int x, int y, int shift);
 	/**/
 	// Empty native impl
 	/*

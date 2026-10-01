@@ -61,13 +61,13 @@ public class AverageGlideComputer extends AverageValueComputer {
 		glideWidgets.clear();
 		widgetRegistry.collectWidgetsInfo(glideWidgets, appMode, layoutMode, null, GLIDE_AVERAGE, true);
 
-		for (int i = 0; i < glideWidgets.size(); i++) {
-			MapWidgetInfo info = glideWidgets.get(i);
-			if (WidgetsAvailabilityHelper.isWidgetAvailable(app, info.key, appMode)) {
-				return true;
-			}
+		boolean enabled = false;
+		for (int i = 0; i < glideWidgets.size() && !enabled; i++) {
+			enabled = WidgetsAvailabilityHelper.isWidgetAvailable(app, glideWidgets.get(i).key, appMode);
 		}
-		return false;
+		// the widgets hold their activity: keep none of them between two updates
+		glideWidgets.clear();
+		return enabled;
 	}
 
 	@Override

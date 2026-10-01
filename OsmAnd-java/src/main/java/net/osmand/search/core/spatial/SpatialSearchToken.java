@@ -82,6 +82,8 @@ public class SpatialSearchToken {
 	CollatorStringMatcher wordSpaceCollatorSuffix;
 	
 	int mainNumber = -1;
+	/** a bare number whose value another query word already carries: '28' next to '28-ма' */
+	boolean numberNamedByOther;
 	CollatorStringMatcher[] otherMatch;
 	
 	Map<String, Boolean> fastMatchCheck = new HashMap<String, Boolean>();
@@ -260,8 +262,13 @@ public class SpatialSearchToken {
 				int res = Boolean.compare(atom.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX), 
 						existing.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX));
 //				res = 0; // Test a school 
-				// select shortest available version
-				if (res == 0) {
+				// select shortest available version (see number of tests 'Piazza Trento e Trieste', netherlands_amsterdam_eerste_helmersstraat...)
+				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
+					res = Integer.compare(atom.otherWordsCnt, existing.otherWordsCnt);
+					if (res == 0) {
+						res = Integer.compare(atom.otherFoundCnt, existing.otherFoundCnt);
+					}
+				} else if (res == 0) {
 					res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
 							existing.otherWordsCnt + existing.otherFoundCnt);
 				}
@@ -270,6 +277,10 @@ public class SpatialSearchToken {
 					// a school
 					res = Boolean.compare(atom.isBuilding() || atom.isPOIRef(),
 						existing.isBuilding() || existing.isPOIRef());
+				}
+				// 'вулиця 28-ма Лінія 28': '28-ма' names the street, the bare 28 keeps its house
+				if (numberNamedByOther && (existing.isBuilding() || existing.isPOIRef()) && !(atom.isBuilding() || atom.isPOIRef())) {
+					res = 0;
 				}
 				boolean replace = res < 0;
 				if (replace) {
@@ -613,6 +624,8 @@ public class SpatialSearchToken {
 		
 		int otherWordsCnt; // added before intersection
 		int otherFoundCnt;
+		// matched name words that are not common in this map: "Avenue" is, "York" is not
+		int distinctFoundCnt = -1;
 		
 		int indexInToken;
 		final boolean cityAsStreet;
@@ -632,6 +645,7 @@ public class SpatialSearchToken {
 			this(cp.name, cp.type, cp.id, cp.parentid, cp.object, cp.cityAsStreet, cp.otherWordsCnt, cp.otherFoundCnt,
 					cp.coords, cp.nearbyRadius, cp.buildingOrRefInd);
 			this.poiTypes = cp.poiTypes;
+			this.distinctFoundCnt = cp.distinctFoundCnt;
 		}
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,

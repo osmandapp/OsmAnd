@@ -57,6 +57,7 @@ tasks.register('collectTestResources', Copy) {
 		include "*"
 		include "/search/*"
 		include "/routing/*"
+		include "/turn_lanes/*"
 		include "/approximation/*"
 	}
 	from("../../resources/poi") {
@@ -148,3 +149,13 @@ dependencies {
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
 
+
+// The compat tests read the obf files in src/test/resources; OSMAND_OBF_CORPUS in TestObf points
+// them at real maps instead, and holding every object of a regional file from both readers at once
+// needs more heap than the default.
+tasks.withType(Test).configureEach {
+	String heap = System.getenv('OSMAND_TEST_HEAP')
+	if (heap != null && !heap.isEmpty()) {
+		maxHeapSize = heap
+	}
+}

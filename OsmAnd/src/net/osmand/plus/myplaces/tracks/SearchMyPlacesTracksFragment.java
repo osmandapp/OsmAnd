@@ -5,7 +5,6 @@ import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVE
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,14 +74,8 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	}
 
 	@Override
-	protected void setupFragment(View view) {
-		requireDialog().setOnKeyListener((dialog, keyCode, event) -> {
-			if (KeyEvent.KEYCODE_BACK == keyCode && KeyEvent.ACTION_UP == event.getAction()) {
-				dismiss();
-				return true;
-			}
-			return false;
-		});
+	protected boolean isBackPressedCallbackEnabled() {
+		return true;
 	}
 
 	@Nullable

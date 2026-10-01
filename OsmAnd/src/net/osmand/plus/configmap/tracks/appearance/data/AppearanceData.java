@@ -40,8 +40,12 @@ public class AppearanceData {
 
 	public boolean setParameter(@NonNull GpxParameter parameter, @Nullable Object value) {
 		if (isValidValue(parameter, value)) {
+			Pair<Boolean, Object> previous = map.get(parameter);
+			boolean unchanged = previous != null && !previous.first && Algorithms.objectEquals(previous.second, value);
 			map.put(parameter, new Pair<>(false, value));
-			notifyAppearanceModified();
+			if (!unchanged) {
+				notifyAppearanceModified();
+			}
 			return true;
 		}
 		return false;

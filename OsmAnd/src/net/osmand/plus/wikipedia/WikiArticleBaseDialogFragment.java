@@ -2,10 +2,13 @@ package net.osmand.plus.wikipedia;
 
 import static net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColorId;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -14,16 +17,22 @@ import android.widget.TextView;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.PicassoUtils;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.wikivoyage.WikiBaseDialogFragment;
 import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.shared.wiki.WikiCoreHelper;
 import net.osmand.shared.wiki.WikiImage;
+import net.osmand.util.Algorithms;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -33,8 +42,10 @@ import java.lang.ref.WeakReference;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -482,4 +493,77 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 
 	@NonNull
 	protected abstract String createHtmlContent();
+
+
+	protected void setupLanguageChanger(final TextView selectedLangTv) {
+		this.selectedLangTv = selectedLangTv;
+		ColorStateList selectedLangColorStateList = selectedLangColorStateList();
+		selectedLangTv.setTextColor(selectedLangColorStateList);
+		selectedLangTv.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
+		selectedLangTv.setBackgroundResource(nightMode
+				? R.drawable.wikipedia_select_lang_bg_dark_n : R.drawable.wikipedia_select_lang_bg_light_n);
+	}
+
+	protected ColorStateList selectedLangColorStateList() {
+		return AndroidUtils.createPressedColorStateList(
+				getContext(), nightMode,
+				R.color.icon_color_default_light, R.color.active_color_primary_light,
+				R.color.icon_color_default_dark, R.color.active_color_primary_dark
+		);
+	}
+
+	protected boolean showPopupLangMenu(final View anchor, final Set<String> languageCodes) {
+		final Context context = getContext();
+		if (context == null) return false;
+
+		List<PopUpMenuItem> items = new ArrayList<>();
+
+		final Map<String, String> names = new HashMap<>();
+		for (String n : languageCodes) {
+			names.put(n, FileNameTranslationHelper.getVoiceName(context, n));
+		}
+		final String langSelected = getSelectedLanguage();
+		final String selectedLangName = names.remove(langSelected);
+
+		if (Algorithms.isEmpty(names)) {
+			return false;
+		}
+
+		final Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
+
+		if (selectedLangName != null) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitle(selectedLangName)
+					.setOnClickListener(_item -> {
+						final String selectedLanguage = getSelectedLanguage();
+						if (!selectedLanguage.equals(langSelected)) {
+							setSelectedLanguage(langSelected);
+							populateArticle();
+						}
+					}).create());
+		}
+		for (Map.Entry<String, String> e : sortedNames.entrySet()) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitle(e.getValue())
+					.setOnClickListener(_item -> {
+						final String selectedLanguage = getSelectedLanguage();
+						final String itemLanguage = e.getKey();
+						if (!selectedLanguage.equals(itemLanguage)) {
+							setSelectedLanguage(e.getKey());
+							populateArticle();
+						}
+					}).create());
+		}
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = anchor;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
+
+		return true;
+	}
+
+	protected abstract void setSelectedLanguage(final String languageCode);
+	protected abstract String getSelectedLanguage();
 }

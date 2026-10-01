@@ -61,8 +61,13 @@ object GpxUtilities {
 	const val PINNED_EXTENSION = "pinned"
 	const val POINT_TYPE_EXTENSION = "point_type"
 
-	const val GPXTPX_PREFIX = "gpxtpx:"
-	const val OSMAND_EXTENSIONS_PREFIX = "osmand:"
+	private const val GPXTPX_XML_PREFIX = "gpxtpx"
+	private const val OSMAND_XML_PREFIX = "osmand"
+	private const val GPXX_XML_PREFIX = "gpxx"
+	const val GPXTPX_PREFIX = "$GPXTPX_XML_PREFIX:"
+	private const val GPXTPX_TRACK_POINT_EXTENSION = "${GPXTPX_XML_PREFIX}:TrackPointExtension"
+	private const val EXTENSIONS_WRITER_KEY = "extensions"
+	const val OSMAND_EXTENSIONS_PREFIX = "$OSMAND_XML_PREFIX:"
 	const val OSM_PREFIX = "osm_tag_"
 	const val AMENITY_PREFIX = "amenity_"
 	const val ORIGIN_EXTENSION = "origin"
@@ -77,6 +82,7 @@ object GpxUtilities {
 	const val POINT_ELEVATION = "ele"
 	const val POINT_SPEED = "speed"
 	const val POINT_BEARING = "bearing"
+	const val POINT_HEADING = "heading"
 
 	const val MIN_ELEVATION = "min_ele"
 	const val MAX_ELEVATION = "max_ele"
@@ -117,6 +123,13 @@ object GpxUtilities {
 			}
 		}
 	}
+
+	// Extensions from these namespaces keep their local tag names, so that a file binding the
+	// same namespace to another prefix (e.g. "ns3:hr" for TrackPointExtension) stays recognized.
+	private val KNOWN_EXTENSION_HOSTS = setOf("osmand.net", "garmin.com")
+
+	private val KNOWN_EXTENSION_PREFIXES =
+		setOf(OSMAND_XML_PREFIX, GPXTPX_XML_PREFIX, GPXX_XML_PREFIX)
 
 	private val SUPPORTED_EXTENSION_TAGS = mapOf(
 		"heartrate" to PointAttributes.SENSOR_TAG_HEART_RATE,
@@ -785,13 +798,17 @@ object GpxUtilities {
 		if (!p.hdop.isNaN()) {
 			writeNotNullText(serializer, "hdop", formatDecimal(p.hdop.toDouble()))
 		}
+		// speed and heading live in the fields; they are serialized from there instead of being
+		// pushed into the point's own extensions map, which cost a LinkedHashMap per point per save.
+		// The fields still win over a string that stayed in the map, as they did when pushed in
+		val extensions = LinkedHashMap<String, String>()
+		extensions.putAll(p.getExtensionsToRead())
 		if (p.speed > 0) {
-			p.getExtensionsToWrite()[POINT_SPEED] = formatDecimal(p.speed.toDouble())
+			extensions[POINT_SPEED] = formatDecimal(p.speed.toDouble())
 		}
 		if (!p.heading.isNaN()) {
-			p.getExtensionsToWrite()["heading"] = round(p.heading).toString()
+			extensions[POINT_HEADING] = round(p.heading).toString()
 		}
-		val extensions = p.getExtensionsToRead().toMutableMap()
 		if (serializer.getName() != "rtept") {
 			extensions.remove(PROFILE_TYPE_EXTENSION)
 			extensions.remove(TRKPT_INDEX_EXTENSION)
@@ -813,12 +830,28 @@ object GpxUtilities {
 				extensions.remove(BACKGROUND_TYPE_EXTENSION)
 			}
 		}
-		assignExtensionWriter(p, extensions, "extensions")
+		// a writer that was already there belongs to the point (a recording plugin puts the
+		// sensor values in one); the ones created here exist only for this serialization
+		val keepTrackPointExtension = p.getExtensionsWriter(GPXTPX_TRACK_POINT_EXTENSION) != null
+		assignExtensionWriter(p, extensions, EXTENSIONS_WRITER_KEY, false)
 		writeExtensions(serializer, null, p, null)
+		p.removeExtensionsWriter(EXTENSIONS_WRITER_KEY)
+		if (!keepTrackPointExtension) {
+			p.removeExtensionsWriter(GPXTPX_TRACK_POINT_EXTENSION)
+		}
+		if (p.extensionsWriters?.isEmpty() == true) {
+			p.extensionsWriters = null
+		}
 		progress?.progress(1)
 	}
 
-	fun assignExtensionWriter(wptPt: WptPt, extensions: Map<String, String>, regularExtensionsKey: String) {
+	@JvmOverloads
+	fun assignExtensionWriter(
+		wptPt: WptPt,
+		extensions: Map<String, String>,
+		regularExtensionsKey: String,
+		keepDeferred: Boolean = true
+	) {
 		val regularExtensions = HashMap<String, String>()
 		val gpxtpxExtensions = HashMap<String, String>()
 		for ((key, value) in extensions) {
@@ -827,13 +860,17 @@ object GpxUtilities {
 			} else {
 				regularExtensions[key] = value
 			}
-			wptPt.getDeferredExtensionsToWrite()[key] = value
+			// values that reach a point only through a writer (recording plugins) have to stay
+			// readable for the track analysers; on save they are already in the point itself
+			if (keepDeferred) {
+				wptPt.getDeferredExtensionsToWrite()[key] = value
+			}
 		}
 		if (regularExtensions.isNotEmpty()) {
 			wptPt.setExtensionsWriter(regularExtensionsKey, createExtensionsWriter(regularExtensions, true))
 		}
 		if (gpxtpxExtensions.isNotEmpty()) {
-			wptPt.setExtensionsWriter("gpxtpx:TrackPointExtension", createGpxTpxExtensionsWriter(gpxtpxExtensions, false))
+			wptPt.setExtensionsWriter(GPXTPX_TRACK_POINT_EXTENSION, createGpxTpxExtensionsWriter(gpxtpxExtensions, false))
 		}
 	}
 
@@ -1253,6 +1290,9 @@ object GpxUtilities {
 		addGeneralTrack: Boolean
 	): GpxFile {
 		val insideTagDepth = mutableMapOf("trk" to 0)
+		// extension values of a track repeat themselves point after point ("gps", "1.4", "171.6"),
+		// so one instance per distinct value is kept for the whole file instead of one per point
+		val valuePool = HashMap<String, String>()
 		oneOffLogParseTimeErrors = true
 		val gpxFile = GpxFile(null)
 		gpxFile.metadata.time = 0
@@ -1328,7 +1368,7 @@ object GpxUtilities {
 										parser
 									)
 								) {
-									readExtensionsText(parser, tag, parse)
+									readExtensionsText(parser, tag, parse, valuePool)
 								}
 							}
 						}
@@ -1518,7 +1558,9 @@ object GpxUtilities {
 											val value = readText(parser, POINT_SPEED)
 											if (!value.isNullOrEmpty()) {
 												parse.speed = toDouble(value).toFloat()
-												parse.getExtensionsToWrite()[POINT_SPEED] = value
+												if (parse.speed <= 0) {
+													parse.getExtensionsToWrite()[POINT_SPEED] = value
+												}
 											}
 										} catch (_: NumberFormatException) {
 										}
@@ -1690,8 +1732,26 @@ object GpxUtilities {
 		return supportedTag ?: tag.replace(XML_COLON, ":")
 	}
 
+	private fun getQualifiedExtensionTagName(parser: XmlPullParser): String? {
+		val name = parser.getName() ?: return null
+		val prefix = parser.getPrefix()
+		if (prefix.isNullOrEmpty()) {
+			return name
+		}
+		val host = parser.getNamespace()?.lowercase()
+			?.substringAfter("://")?.substringBefore('/') ?: ""
+		val known = KNOWN_EXTENSION_HOSTS.any { host == it || host.endsWith(".$it") }
+				|| KNOWN_EXTENSION_PREFIXES.contains(prefix)
+		return if (known) name else "$prefix:$name"
+	}
+
 	@Throws(XmlParserException::class, IOException::class)
-	private fun readExtensionsText(parser: XmlPullParser, key: String, target: GpxExtensions) {
+	private fun readExtensionsText(
+		parser: XmlPullParser,
+		key: String,
+		target: GpxExtensions,
+		valuePool: MutableMap<String, String>
+	) {
 		var tok: Int
 		var text: StringBuilder? = null
 		while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
@@ -1700,7 +1760,9 @@ object GpxUtilities {
 				if (tag != null && text != null) {
 					val value = text.toString()
 					if (!value.isBlank()) {
-						applyExtensionValue(target, tag, value)
+						applyExtensionValue(
+							target, getQualifiedExtensionTagName(parser) ?: tag,
+							valuePool.getOrPut(value) { value })
 					}
 				}
 				if (tag == key) {
@@ -1720,12 +1782,16 @@ object GpxUtilities {
 
 	private fun applyExtensionValue(target: GpxExtensions, tag: String, value: String) {
 		val normalizedTag = tag.lowercase()
-		target.getExtensionsToWrite()[getExtensionsSupportedTag(normalizedTag)] = value
 		if (target is WptPt) {
 			when (normalizedTag) {
 				POINT_SPEED -> {
 					try {
 						target.speed = toDouble(value).toFloat()
+						// writeWpt() regenerates <speed> from the field, so a second copy in the
+						// extensions map only costs a LinkedHashMap per point of every recording
+						if (target.speed > 0) {
+							return
+						}
 					} catch (_: NumberFormatException) {
 					}
 				}
@@ -1738,6 +1804,7 @@ object GpxUtilities {
 				}
 			}
 		}
+		target.getExtensionsToWrite()[getExtensionsSupportedTag(normalizedTag)] = value
 	}
 
 	private fun parseRouteKeyAttributes(parser: XmlPullParser): Map<String, String> {
