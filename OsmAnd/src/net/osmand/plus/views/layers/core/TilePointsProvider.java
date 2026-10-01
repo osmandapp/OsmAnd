@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
@@ -16,12 +17,11 @@ import net.osmand.core.jni.SingleSkImage;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.TileId;
+import net.osmand.core.jni.Utilities;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionPoint;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
 import net.osmand.data.DataTileManager;
-import net.osmand.data.QuadRect;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.MapUtils;
@@ -169,17 +169,32 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 		if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
 			return new QListMapTiledCollectionPoint();
 		}
-		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
-		QuadRect latLonBounds = tb.getLatLonBounds();
-		List<T> tilePoints = points.getObjects(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right);
+		// The core asks for every tile on the screen and uses only the points of the tile enlarged by a quarter
+		// of its size on each side (MapTiledCollectionProvider::obtainTiledSymbols), so take just those
+		AreaI tileBBox31 = Utilities.tileBoundingBox31(tileId, zoom);
+		long left = tileBBox31.getTopLeft().getX();
+		long top = tileBBox31.getTopLeft().getY();
+		long right = tileBBox31.getBottomRight().getX();
+		long bottom = tileBBox31.getBottomRight().getY();
+		long marginX = (right - left) / 16 * 4;
+		long marginY = (bottom - top) / 16 * 4;
+		left = Math.max(0, left - marginX);
+		top = Math.max(0, top - marginY);
+		right = Math.min(Integer.MAX_VALUE, right + marginX);
+		bottom = Math.min(Integer.MAX_VALUE, bottom + marginY);
+		List<T> tilePoints = points.getObjects((int) left, (int) top, (int) right, (int) bottom);
 		if (tilePoints.isEmpty()) {
 			return new QListMapTiledCollectionPoint();
 		}
 		QListMapTiledCollectionPoint res = new QListMapTiledCollectionPoint();
 		for (T point : tilePoints) {
-			CollectionPoint collectionPoint = new CollectionPoint(ctx, point, textScale, density);
-			res.add(collectionPoint.instantiateProxy(true));
-			collectionPoint.swigReleaseOwnership();
+			int x31 = MapUtils.get31TileNumberX(point.getLongitude());
+			int y31 = MapUtils.get31TileNumberY(point.getLatitude());
+			if (x31 >= left && x31 <= right && y31 >= top && y31 <= bottom) {
+				CollectionPoint collectionPoint = new CollectionPoint(ctx, point, textScale, density);
+				res.add(collectionPoint.instantiateProxy(true));
+				collectionPoint.swigReleaseOwnership();
+			}
 		}
 		return res;
 	}
