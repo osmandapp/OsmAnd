@@ -10,9 +10,16 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import gnu.trove.map.hash.TLongObjectHashMap;
+
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
+import net.osmand.router.BinaryRoutePlanner.MultiFinalRouteSegment;
+import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 
 // Restrictions whose via is a chain of several ways (https://github.com/osmandapp/OsmAnd/issues/12537).
@@ -47,6 +54,15 @@ public class RestrictionViaWaysTest {
 	public void testNoRightTurn11670368() throws Exception {
 		checkRestriction("restriction_via_11670368.obf", new LatLon(50.061568, 18.663572), new LatLon(50.061833, 18.663046), 174513204L,
 				false, 397716818L, 851598848L, 851598851L, 174513204L);
+	}
+
+	// the same route in one-directional Dijkstra, as HH searches from start/end to the cluster boundaries:
+	// the legal route is a full circle that passes both vias twice, first restricted (from Północna), then not
+	@Test
+	public void testNoRightTurn11670368OneDirection() throws Exception {
+		List<Long> ways = calculateRouteWaysOneDirection("restriction_via_11670368.obf", new LatLon(50.061568, 18.663572),
+				new LatLon(50.061833, 18.663046));
+		assertRestriction(ways, 174513204L, false, 397716818L, 851598848L, 851598851L, 174513204L);
 	}
 
 	// no_straight_on 8099562, Rondo Grunwaldzkie, Kraków. https://www.openstreetmap.org/relation/8099562
@@ -98,7 +114,10 @@ public class RestrictionViaWaysTest {
 	// for only_* restrictions and must not follow it to the end for no_* restrictions.
 	private void checkRestriction(String map, LatLon start, LatLon end, long endWay, boolean onlyRestriction,
 			Long... chain) throws Exception {
-		List<Long> ways = calculateRouteWays(map, start, end);
+		assertRestriction(calculateRouteWays(map, start, end), endWay, onlyRestriction, chain);
+	}
+
+	private void assertRestriction(List<Long> ways, long endWay, boolean onlyRestriction, Long... chain) {
 		Assert.assertEquals("route ways " + ways + " must reach the destination road", endWay,
 				(long) ways.get(ways.size() - 1));
 		List<Long> restriction = Arrays.asList(chain);
@@ -120,26 +139,70 @@ public class RestrictionViaWaysTest {
 	}
 
 	private List<Long> calculateRouteWays(String map, LatLon start, LatLon end) throws Exception {
-		File file = new File(MAPS_DIR + map);
-		BinaryMapIndexReader reader = new BinaryMapIndexReader(new RandomAccessFile(file, "r"), file);
+		BinaryMapIndexReader reader = openMap(map);
 		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
 		fe.CALCULATE_MISSING_MAPS = false;
-		RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3,
-				RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT);
-		RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", memoryLimits);
-		RoutingContext ctx = fe.buildRoutingContext(config, null, new BinaryMapIndexReader[] {reader},
-				RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
-		List<RouteSegmentResult> segments = fe.searchRoute(ctx, start, end, null).detailed;
+		List<RouteSegmentResult> segments = fe.searchRoute(buildCarContext(fe, reader), start, end, null).detailed;
 		reader.close();
 		Assert.assertNotNull("no route on " + map, segments);
 		List<Long> ways = new ArrayList<>();
 		for (RouteSegmentResult segment : segments) {
-			long id = ObfConstants.getOsmObjectId(segment.getObject());
-			if (ways.isEmpty() || ways.get(ways.size() - 1) != id) {
-				ways.add(id);
-			}
+			addWay(ways, segment.getObject());
 		}
 		System.out.println(map + ": " + ways);
 		return ways;
+	}
+
+	// forward Dijkstra from start that stops at the end segment, the way HHRoutePlanner.initStart runs it
+	private List<Long> calculateRouteWaysOneDirection(String map, LatLon start, LatLon end) throws Exception {
+		BinaryMapIndexReader reader = openMap(map);
+		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
+		RoutingContext ctx = buildCarContext(fe, reader);
+		ctx.config.heuristicCoefficient = 0;
+		RouteSegmentPoint startPoint = fe.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx, null);
+		RouteSegmentPoint endPoint = fe.findRouteSegment(end.getLatitude(), end.getLongitude(), ctx, null);
+		TLongObjectHashMap<RouteSegment> boundaries = new TLongObjectHashMap<>();
+		boundaries.put(HHRoutePlanner.calcRPId(endPoint, endPoint.getSegmentEnd(), endPoint.getSegmentStart()), null);
+		boundaries.put(HHRoutePlanner.calcRPId(endPoint, endPoint.getSegmentStart(), endPoint.getSegmentEnd()), null);
+		ctx.config.planRoadDirection = 1;
+		ctx.unloadAllData();
+		FinalRouteSegment finalSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, startPoint, null, boundaries);
+		reader.close();
+		Assert.assertNotNull("end is not reached on " + map, finalSegment);
+		// the multi segment itself has no parent route, the reached end segments are in "all"
+		FinalRouteSegment best = null;
+		for (FinalRouteSegment s : ((MultiFinalRouteSegment) finalSegment).all) {
+			if (best == null || s.distanceFromStart < best.distanceFromStart) {
+				best = s;
+			}
+		}
+		List<Long> ways = new ArrayList<>();
+		for (RouteSegment s = best; s != null; s = s.getParentRoute()) {
+			addWay(ways, s.getRoad());
+		}
+		Collections.reverse(ways);
+		System.out.println(map + " one direction: " + ways);
+		return ways;
+	}
+
+	private BinaryMapIndexReader openMap(String map) throws Exception {
+		File file = new File(MAPS_DIR + map);
+		return new BinaryMapIndexReader(new RandomAccessFile(file, "r"), file);
+	}
+
+	private RoutingContext buildCarContext(RoutePlannerFrontEnd fe, BinaryMapIndexReader reader) {
+		RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3,
+				RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT);
+		RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", memoryLimits);
+		return fe.buildRoutingContext(config, null, new BinaryMapIndexReader[] {reader},
+				RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+	}
+
+	// consecutive pieces of one way are merged
+	private void addWay(List<Long> ways, RouteDataObject road) {
+		long id = ObfConstants.getOsmObjectId(road);
+		if (ways.isEmpty() || ways.get(ways.size() - 1) != id) {
+			ways.add(id);
+		}
 	}
 }
