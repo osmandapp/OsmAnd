@@ -987,23 +987,25 @@ public class OsmAndFormatter {
 			}
 		} else if (outputFormat == SWISS_GRID_FORMAT) {
 			double[] swissGrid = SwissGridApproximation.convertWGS84ToLV03(new LatLon(lat, lon));
-			DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
-			formatSymbols.setDecimalSeparator('.');
-			formatSymbols.setGroupingSeparator(' ');
-			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
+			DecimalFormat swissGridFormat = createSwissGridFormat();
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		} else if (outputFormat == SWISS_GRID_PLUS_FORMAT) {
 			double[] swissGrid = SwissGridApproximation.convertWGS84ToLV95(new LatLon(lat, lon));
-			DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
-			formatSymbols.setDecimalSeparator('.');
-			formatSymbols.setGroupingSeparator(' ');
-			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
+			DecimalFormat swissGridFormat = createSwissGridFormat();
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		} else if (outputFormat == MAIDENHEAD_FORMAT) {
 			result.append(MaidenheadPoint.toMaidenhead(lat, lon));
 		}
 		String formattedCoordinates = result.toString();
 		return forceLTR ? TextDirectionUtil.markAsLTR(formattedCoordinates) : formattedCoordinates;
+	}
+
+	@NonNull
+	public static DecimalFormat createSwissGridFormat() {
+		DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
+		formatSymbols.setDecimalSeparator('.');
+		formatSymbols.setGroupingSeparator(' ');
+		return new DecimalFormat("###,###.##", formatSymbols);
 	}
 
 	private static String formatCoordinate(double coordinate, int outputType) {

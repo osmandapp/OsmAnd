@@ -72,9 +72,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.List;
-import java.util.Locale;
 
 public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -719,10 +717,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 					} else {
 						swissGrid = SwissGridApproximation.convertWGS84ToLV95(latLon);
 					}
-					DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
-					formatSymbols.setDecimalSeparator('.');
-					formatSymbols.setGroupingSeparator(' ');
-					DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
+					DecimalFormat swissGridFormat = OsmAndFormatter.createSwissGridFormat();
 					swissGridEastEdit.setText(swissGridFormat.format(swissGrid[0]));
 					swissGridNorthEdit.setText(swissGridFormat.format(swissGrid[1]));
 				} else if (prevFormat == PointDescription.UTM_FORMAT) {
