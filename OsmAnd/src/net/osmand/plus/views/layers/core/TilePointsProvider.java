@@ -23,13 +23,9 @@ import net.osmand.data.DataTileManager;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> extends interface_MapTiledCollectionProvider {
 
@@ -44,10 +40,8 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	private final PointI offset;
 
 	private final DataTileManager<T> points;
-	private final Map<Bitmap, IconData> iconsCache = new ConcurrentHashMap<>();
+	private final IconPixelsCache<Bitmap> iconsCache = new IconPixelsCache<>();
 	private MapTiledCollectionProvider providerInstance;
-
-	private record IconData(int width, int height, byte[] pixels) {}
 
 	public interface ICollectionPoint {
 		double getLatitude();
@@ -68,11 +62,11 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 		private final ICollectionPoint point;
 		private final float textScale;
 		private final float density;
-		private final Map<Bitmap, IconData> iconsCache;
+		private final IconPixelsCache<Bitmap> iconsCache;
 		private final PointI point31;
 
 		public CollectionPoint(@NonNull Context ctx, @NonNull ICollectionPoint point, float textScale, float density,
-		                       @NonNull Map<Bitmap, IconData> iconsCache) {
+		                       @NonNull IconPixelsCache<Bitmap> iconsCache) {
 			this.ctx = ctx;
 			this.point = point;
 			this.textScale = textScale;
@@ -92,13 +86,8 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 			Bitmap bitmap = isFullSize
 					? point.getBigImage(ctx, textScale, density)
 					: point.getSmallImage(ctx, textScale, density);
-			if (bitmap == null) {
-				return SwigUtilities.nullSkImage();
-			}
-			// points share their bitmaps: copy the pixels once, but every point still gets its own image
-			IconData icon = iconsCache.computeIfAbsent(bitmap, b ->
-					new IconData(b.getWidth(), b.getHeight(), AndroidUtils.getByteArrayFromBitmap(b)));
-			return NativeUtilities.createSkImage(icon.width, icon.height, icon.pixels);
+			// points share their bitmaps
+			return bitmap != null ? iconsCache.getImage(bitmap, () -> bitmap) : SwigUtilities.nullSkImage();
 		}
 
 		@Override
