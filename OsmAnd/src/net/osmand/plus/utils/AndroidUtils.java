@@ -657,8 +657,7 @@ public class AndroidUtils {
 		return width;
 	}
 
-	public static void setTruncatedText(OutlinedTextContainer textView, String text) {
-		Paint paint = new Paint();
+	public static void setTruncatedText(OutlinedTextContainer textView, String text, Paint paint) {
 		paint.setTextSize(textView.getTextSize());
 		float textWidth = paint.measureText(text);
 		int viewWidth = textView.getWidth();
