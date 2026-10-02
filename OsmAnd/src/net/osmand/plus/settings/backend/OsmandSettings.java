@@ -2429,7 +2429,7 @@ public class OsmandSettings {
 		enum Failure implements TileSourceNameCheck {INVALID_NAME, CHECK_ERROR}
 	}
 
-	private static boolean checkTileSourceNameAcceptedByFS(@NonNull File parentFolder, @NonNull String fileName) {
+	private boolean checkTileSourceNameAcceptedByFS(@NonNull File parentFolder, @NonNull String fileName) {
 		File probeFolder = new File(parentFolder, TILES_NAME_PROBE_DIRNAME);
 		File test = new File(probeFolder, fileName);
 		boolean result = false;
@@ -2444,19 +2444,19 @@ public class OsmandSettings {
 		return result;
 	}
 
-	private static void cleanupTilesNameProbeFolder(@NonNull File parentFolder) {
+	private void cleanupTilesNameProbeFolder(@NonNull File parentFolder) {
 		File probeFolder = new File(parentFolder, TILES_NAME_PROBE_DIRNAME);
 		Algorithms.removeAllFiles(probeFolder);
 	}
 
 	@NonNull
-	private static String getSanitizedTileSourceName(@NonNull String name) {
+	private String getSanitizedTileSourceName(@NonNull String name) {
 		String stripped = stripEmojis(name);
 		return Algorithms.sanitizeFileName(stripped).replaceAll("[\\s\\p{Z}]+", " ").trim();
 	}
 
 	@NonNull
-	private static String stripEmojis(@NonNull String text) {
+	private String stripEmojis(@NonNull String text) {
 		return STRIP_EMOJI_PATTERN.matcher(text).replaceAll("");
 	}
 

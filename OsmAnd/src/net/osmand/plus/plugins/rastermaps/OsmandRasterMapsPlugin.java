@@ -702,13 +702,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return quickActionTypes;
 	}
 
-	private static class TileSourceTemplateInfo {
-		final TileSourceTemplate template;
-		final TileSourceNameCheck nameCheck;
-
-		public TileSourceTemplateInfo(TileSourceTemplate template, TileSourceNameCheck nameCheck) {
-			this.template = template;
-			this.nameCheck = nameCheck;
-		}
+	private record TileSourceTemplateInfo(TileSourceTemplate template,
+	                                      TileSourceNameCheck nameCheck) {
 	}
 }
