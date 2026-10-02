@@ -441,6 +441,11 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		((TextView) view.findViewById(R.id.shape_name)).setText(backgroundType.getNameId());
 	}
 
+	protected void selectColorInPalette() {
+		SolidPaletteController controller = getColorController();
+		controller.selectPaletteItemSilently(controller.findPaletteItem(color, true));
+	}
+
 	protected void updateSelectedColorText() {
 		SolidPaletteController controller = getColorController();
 		((TextView) view.findViewById(R.id.color_name)).setText(controller.getColorName(color));
