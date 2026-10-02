@@ -51,14 +51,4 @@ public class CurrentTimeWidget extends SimpleWidget {
 			setTimeText(time);
 		}
 	}
-
-	// region android auto
-
-	@Override
-	public void initAndroidAuto() {
-		super.initAndroidAuto();
-		setIcons(widgetType);
-	}
-
-	// endregion
 }

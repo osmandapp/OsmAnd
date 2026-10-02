@@ -173,7 +173,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		appMode: ApplicationMode,
 	) {
 		val creator = WidgetInfoCreator(app, appMode, null)
-		val supportedTypes = WidgetType.getObdTypes().filter { it.supportsAndroidAuto }
+		val supportedTypes = WidgetType.getObdTypes().filter { it.supportsAndroidAuto() }
 		for (widgetType in supportedTypes) {
 			val obdWidget = createAndroidAutoWidgetForParams(widgetType)
 			if (obdWidget != null) {

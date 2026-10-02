@@ -95,7 +95,6 @@ open class OBDTextWidget : SimpleWidget {
 				widgetComputer.averageTimeSeconds = newTimeSeconds
 			}
 			updateWidgetName()
-			markAndroidAutoLayoutNeeded()
 		}
 	}
 
@@ -266,15 +265,4 @@ open class OBDTextWidget : SimpleWidget {
 	protected fun isVisible(): Boolean {
 		return widgetType.isPurchased(app)
 	}
-
-	// region android auto
-	override fun shouldDrawForAndroidAuto(): Boolean {
-		return super.shouldDrawForAndroidAuto() && isVisible()
-	}
-
-	override fun initAndroidAuto() {
-		super.initAndroidAuto()
-		setIcons(widgetType)
-	}
-	// endregion
 }

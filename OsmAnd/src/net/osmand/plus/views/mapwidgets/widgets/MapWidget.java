@@ -1,11 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,15 +59,6 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	@Nullable
 	private ResolvedPanelAppearance panelAppearance;
 
-	@Nullable
-	protected ResolvedPanelAppearance androidAutoPanelAppearance;
-	private volatile boolean isWidgetAALayoutNeeded = true;
-	protected float measuredAAHeight = 0f;
-	protected float measuredAAWidth = 0f;
-	protected Bitmap androidAutoBitmap;
-	protected Canvas androidAutoCanvas;
-	protected final Paint androidAutoBitmapPaint = new Paint();
-
 	protected volatile boolean isAndroidAuto;
 
 	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
@@ -119,32 +106,21 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		}
 	}
 
-	public void initAndroidAuto() {
-
-	}
-
 	@NonNull
 	public View getView() {
 		if (view == null) {
-			view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
+			Context context = mapActivity != null ? mapActivity : app;
+			view = UiUtilities.getInflater(context, nightMode).inflate(getLayoutId(), null);
 			setupView(view);
 		}
 		return view;
 	}
 
 	public final void recreateView() {
-		if (isAndroidAuto()) {
-			recreateInternalForAndroidAuto();
-			ResolvedPanelAppearance appearance = androidAutoPanelAppearance;
-			if (appearance != null && appearance.getPanel() == panel) {
-				onAndroidAutoPanelAppearanceChanged(appearance);
-			}
-		} else {
-			recreateViewInternal();
-			ResolvedPanelAppearance appearance = panelAppearance;
-			if (appearance != null && appearance.getPanel() == panel) {
-				onPanelAppearanceChanged(appearance);
-			}
+		recreateViewInternal();
+		ResolvedPanelAppearance appearance = panelAppearance;
+		if (appearance != null && appearance.getPanel() == panel) {
+			onPanelAppearanceChanged(appearance);
 		}
 	}
 
@@ -152,109 +128,11 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 
 	}
 
-	protected void recreateInternalForAndroidAuto() {
-		initAndroidAuto();
-	}
-
 	protected void setupView(@NonNull View view) {
 
 	}
 
-	// region android auto
-
-	public void applyPanelAppearanceForAndroidAuto(@NonNull ResolvedPanelAppearance appearance) {
-		androidAutoPanelAppearance = appearance;
-		onAndroidAutoPanelAppearanceChanged(appearance);
-		markAndroidAutoLayoutNeeded();
-	}
-
-	public void onAndroidAutoPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
-
-	}
-
-	public boolean shouldDrawForAndroidAuto() {
-		return widgetType.supportsAndroidAuto;
-	}
-
-	public float getMeasuredAAHeight() {
-		return measuredAAHeight;
-	}
-
-	public float getMeasuredAAWidth() {
-		return measuredAAWidth;
-	}
-
-	public void updateAndroidAutoBitmap(@NonNull DrawSettings drawSettings, boolean isRtl) {
-		int height = (int) measuredAAHeight;
-		int width = (int) measuredAAWidth;
-		boolean isValidSize = width > 0 && height > 0;
-		boolean isDifferentSize = androidAutoBitmap == null
-				|| height != androidAutoBitmap.getHeight()
-				|| width != androidAutoBitmap.getWidth();
-		if (isDifferentSize) {
-			if (androidAutoBitmap != null) {
-				androidAutoBitmap.recycle();
-				androidAutoBitmap = null;
-				androidAutoCanvas = null;
-			}
-			if (isValidSize) {
-				androidAutoBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-				androidAutoCanvas = new Canvas(androidAutoBitmap);
-			}
-		} else {
-			clearAndroidAutoBitmap();
-		}
-		if (androidAutoCanvas != null) {
-			drawForAndroidAuto(androidAutoCanvas, drawSettings, width, height, isRtl);
-		}
-	}
-
-	@Nullable
-	public Bitmap getAndroidAutoBitmap() {
-		return androidAutoBitmap;
-	}
-
-	private void clearAndroidAutoBitmap() {
-		if (androidAutoCanvas != null) {
-			androidAutoCanvas.drawColor(android.graphics.Color.TRANSPARENT, PorterDuff.Mode.SRC);
-		}
-	}
-
-	public void drawForAndroidAuto(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings,
-	                               float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
-
-	}
-
-	public void drawAndroidAutoBitmap(@NonNull Canvas canvas) {
-		Bitmap bitmap = getAndroidAutoBitmap();
-		if (bitmap != null) {
-			canvas.drawBitmap(androidAutoBitmap, 0, 0, androidAutoBitmapPaint);
-		}
-	}
-
-	public final void markAndroidAutoLayoutNeeded() {
-		isWidgetAALayoutNeeded = true;
-	}
-
-	public boolean isAndroidAutoLayoutNeeded() {
-		return isWidgetAALayoutNeeded;
-	}
-
-	public final boolean layoutAAIfNeeded(Context context, int desiredWidthPx, boolean isRtl) {
-		if (!isWidgetAALayoutNeeded) {
-			return false;
-		}
-		isWidgetAALayoutNeeded = false;
-		doLayoutAAWidget(context, desiredWidthPx, isRtl);
-		return true;
-	}
-
-	protected void doLayoutAAWidget(Context context, int desiredWidthPx, boolean isRtl) {
-		// layout and set measuredAAHeight and measuredAAWidth in subclasses
-	}
-	// endregion
-
-	// null in case of android auto widge
+	// null in case of android auto widget
 	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
@@ -323,15 +201,11 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 
 	@Override
 	public final void applyPanelAppearance(@NonNull ResolvedPanelAppearance appearance) {
-		if (isAndroidAuto()) {
-			applyPanelAppearanceForAndroidAuto(appearance);
-		} else {
-			panelAppearance = appearance;
-			nightMode = appearance.getNightMode();
-			if (mapActivity != null) {
-				getView();
-				onPanelAppearanceChanged(appearance);
-			}
+		panelAppearance = appearance;
+		nightMode = appearance.getNightMode();
+		if (mapActivity != null) {
+			getView();
+			onPanelAppearanceChanged(appearance);
 		}
 	}
 

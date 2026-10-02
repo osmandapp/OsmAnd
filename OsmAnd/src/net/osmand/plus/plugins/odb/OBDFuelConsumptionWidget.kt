@@ -41,8 +41,7 @@ class OBDFuelConsumptionWidget : OBDTextWidget {
 
 	}
 
-
-	var fuelConsumptionMode: OsmandPreference<FuelConsumptionMode>
+	lateinit var fuelConsumptionMode: OsmandPreference<FuelConsumptionMode>
 
 	companion object {
 		private const val OBD_FUEL_CONSUMPTION_MODE = "obd_fuel_consumption_mode"

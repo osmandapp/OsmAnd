@@ -154,8 +154,15 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 
 		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList(appMode);
 		if (isAndroidAutoMode && widgets != null) {
-			widgets = widgets.stream().filter(w -> w.supportsAndroidAuto).collect(Collectors.toList());
+			List<WidgetType> list = new ArrayList<>();
+			for (WidgetType widget : widgets) {
+				if (widget.supportsAndroidAuto()) {
+					list.add(widget);
+				}
+			}
+			widgets = list;
 		}
+
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
 		List<AidlMapWidgetWrapper> aidlGroupWidgets = widgetsDataHolder.getAidlGroupWidgets();
 		if (widgets != null) {

@@ -18,7 +18,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MapWidgetRegistry {
 
@@ -236,11 +235,8 @@ public class MapWidgetRegistry {
 				widgetsOfPanel = new TreeSet<>();
 				newAllWidgets.put(panel, widgetsOfPanel);
 			}
-			if (isAndroidAuto) {
-				widgetInfo.widget.initAndroidAuto();
-			} else {
-				widgetInfo.widget.initView();
-			}
+			widgetInfo.widget.initView();
+
 			widgetsOfPanel.add(widgetInfo);
 		}
 		return newAllWidgets;
@@ -481,14 +477,17 @@ public class MapWidgetRegistry {
 	                                             @NonNull ApplicationMode appMode,
 	                                             int filterModes,
 	                                             @NonNull List<WidgetsPanel> panels) {
-		List<WidgetsPanel> aaPanels = panels.stream()
-				.filter(WidgetsPanel::isAndroidAutoPanel)
-				.collect(Collectors.toList());
+		List<WidgetsPanel> aaPanels = new ArrayList<>();
+		for (WidgetsPanel panel : panels) {
+			if (panel.isAndroidAutoPanel()) {
+				aaPanels.add(panel);
+			}
+		}
 		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
 		List<String> widgetsVisibility = MapWidgetInfo.getAndroidAutoWidgetsVisibility(app, appMode);
 		for (MapWidgetInfo widget : widgetInfos) {
 			WidgetType widgetType = widget.getWidgetType();
-			boolean panelSupported = widgetType.supportsAndroidAuto;
+			boolean panelSupported = widgetType.supportsAndroidAuto();
 
 			if (panelSupported) {
 				boolean check = matchWidgetToFilter(widget, aaPanels, filterModes, appMode, null, true, widgetsVisibility);
