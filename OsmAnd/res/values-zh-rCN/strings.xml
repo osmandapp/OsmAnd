@@ -5216,4 +5216,12 @@
     <string name="shared_string_archive">归档</string>
     <string name="share_favorites_with_media_description">%1$s 中的收藏点附有媒体。仅分享点，或将带媒体的点作为档案分享。</string>
     <string name="share_favorites_points_only">仅限积分</string>
+    <string name="contour_label_direction_descr">上坡方向：每个高程数值的顶部朝向地势更高的一側，如同纸质地图一般。同理，等高线的短齿线则表示下坡方向。</string>
+    <string name="rendering_attr_contourLabelDirection_name">标注方向</string>
+    <string name="rendering_value_upright_name">正向</string>
+    <string name="rendering_value_uphill_name">上坡</string>
+    <string name="shared_string_visibility">能见性</string>
+    <string name="opening_hours_public_holiday">公共假期</string>
+    <string name="opening_hours_school_holiday">学校假期</string>
+    <string name="opening_hours_easter">复活节</string>
 </resources>
