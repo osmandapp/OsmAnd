@@ -3,121 +3,126 @@ package net.osmand.binary;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.SearchAlgorithms;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
-
+/**
+ * Word dictionaries of {@link SearchVariantRules} by rules locale. Every method takes the locale of the data
+ * ({@link SearchLocales}); null or an unknown locale selects the base rules. Dictionaries are immutable.
+ */
 public class Abbreviations {
 
     private Abbreviations() {
     }
 
-    private static final Map<String, String> abbreviations = new HashMap<>();
-    // 2nd version search abbrevations for spatial search
-    private static final Map<String, String> searchAbbreviations = new HashMap<>();
-    // set of words to check for buidlings
-    private static final Map<String, String> buildingAbbreviations = new HashMap<>();
-	private static final Set<String> conjunctions = new TreeSet<>();
-	
-	private static final Set<String> commonSkipOtherCnt = new TreeSet<>();
+    private static final Map<String, Dictionary> DICTIONARIES = new ConcurrentHashMap<>();
+	// by the locale as callers pass it: search asks per name word, normalize() is too slow for that
+	private static final Map<String, Dictionary> BY_LOCALE = new ConcurrentHashMap<>();
 
-	private static void addDirectionWord(String key, String full) {
-		abbreviations.put(key, full);
-		commonSkipOtherCnt.add(key);
-		commonSkipOtherCnt.add(full.toLowerCase());
+	private static Dictionary dictionary(String locale) {
+		String raw = locale == null ? "" : locale;
+		Dictionary dictionary = BY_LOCALE.get(raw);
+		if (dictionary == null) {
+			dictionary = DICTIONARIES.computeIfAbsent(SearchLocales.normalize(raw),
+					k -> new Dictionary(SearchVariantRules.forLocale(k), Map.of()));
+			BY_LOCALE.put(raw, dictionary);
+		}
+		return dictionary;
 	}
 
-	private static void addStreetStatus(String key, String full) {
-		abbreviations.put(key, full);
-		commonSkipOtherCnt.add(key);
-		commonSkipOtherCnt.add(full.toLowerCase());
+	private static final class Dictionary {
+		// word of a normalized name -> variants of this word, a stored name is rewritten by them
+		final Map<String, List<SearchVariantRules.Rule>> normalizations = new HashMap<>();
+		// rules that give a query word its forms: <query> and the rules outside <index> and <query>
+		final List<SearchVariantRules.Rule> forms = new ArrayList<>();
+		final Set<String> buildingAbbreviations;
+		final Set<String> conjunctions;
+		final Set<String> commonSkipOtherCnt;
+		// experiments: query word -> forms that replace the forms of the rules (empty list: none)
+		final Map<String, List<String>> overrides;
+
+		Dictionary(SearchVariantRules rules, Map<String, List<String>> overrides) {
+			Set<String> commonSkipOtherCnt = new TreeSet<>();
+			Set<String> buildingAbbreviations = new TreeSet<>();
+			Set<String> conjunctions = new TreeSet<>();
+			for (SearchVariantRules.Rule variant : rules.normalizations()) {
+				normalizations.computeIfAbsent(variant.word, k -> new ArrayList<>()).add(variant);
+			}
+			forms.addAll(rules.query());
+			for (SearchVariantRules.Rule variant : rules.buildings()) {
+				buildingAbbreviations.add(variant.word);
+			}
+			for (SearchVariantRules.Rule variant : rules.ignorables()) {
+				conjunctions.add(variant.word);
+				commonSkipOtherCnt.add(variant.word);
+			}
+			addCommon(commonSkipOtherCnt, rules.normalizations());
+			addCommon(commonSkipOtherCnt, rules.index());
+			addCommon(commonSkipOtherCnt, rules.query());
+			this.buildingAbbreviations = Collections.unmodifiableSet(buildingAbbreviations);
+			this.conjunctions = Collections.unmodifiableSet(conjunctions);
+			this.commonSkipOtherCnt = Collections.unmodifiableSet(commonSkipOtherCnt);
+			this.overrides = overrides;
+		}
+
+		private Dictionary(Dictionary base, Map<String, List<String>> overrides) {
+			this.normalizations.putAll(base.normalizations);
+			this.forms.addAll(base.forms);
+			this.buildingAbbreviations = base.buildingAbbreviations;
+			this.conjunctions = base.conjunctions;
+			this.commonSkipOtherCnt = base.commonSkipOtherCnt;
+			this.overrides = overrides;
+		}
+
+		private static void addCommon(Set<String> common, List<SearchVariantRules.Rule> variants) {
+			for (SearchVariantRules.Rule variant : variants) {
+				if (variant.common) {
+					common.add(variant.word);
+					common.add(variant.to().toLowerCase(Locale.ROOT));
+				}
+			}
+		}
 	}
 
-	private static void addConjunction(String key) {
-		conjunctions.add(key);
-		commonSkipOtherCnt.add(key);
-	}
-
-	static {
-		// articles
-		addConjunction("the");
-		addConjunction("de");
-		addConjunction("du");
-		addConjunction("der");
-		addConjunction("den");
-		addConjunction("die");
-		addConjunction("das");
-		addConjunction("la");
-		addConjunction("le");
-		addConjunction("el");
-		addConjunction("il");
-		addConjunction("of");
-
-		// and
-		addConjunction("and");
-		addConjunction("und");
-		addConjunction("en");
-		addConjunction("et");
-		addConjunction("y");
-		addConjunction("и");
-		
-		
-
-		// direction
-		addDirectionWord("e", "East");
-		addDirectionWord("w", "West");
-		addDirectionWord("s", "South");
-		addDirectionWord("n", "North");
-		addDirectionWord("sw", "Southwest");
-		addDirectionWord("se", "Southeast");
-		addDirectionWord("nw", "Northwest");
-		addDirectionWord("ne", "Northeast");
-
-		// street status
-		addStreetStatus("ln", "Lane");
-		addStreetStatus("dr", "Drive");
-		addStreetStatus("rd", "Road");
-		addStreetStatus("av", "Avenue");
-		addStreetStatus("st", "Street"); // 2 values could be saint
-		addStreetStatus("hwy", "Highway");
-		addStreetStatus("blvd", "Boulevard");
-	}
-
-	static {
-		searchAbbreviations.putAll(abbreviations);
-		searchAbbreviations.put("ave", "Avenue"); // extra
-		searchAbbreviations.put("st", "Street Saint"); // 2 values could be saint
-		// duplicates - synonyms and not abbrevations actually
-		searchAbbreviations.put("о", "Остров");
-		searchAbbreviations.put("остров", "о.");
-		searchAbbreviations.put("1st", "First");
-		searchAbbreviations.put("2nd", "Second");
-		searchAbbreviations.put("3rd", "Third");
-		searchAbbreviations.put("first", "1st");
-		searchAbbreviations.put("second", "2nd");
-		searchAbbreviations.put("third", "3rd");
-		searchAbbreviations.put("fourth", "4th");
-		searchAbbreviations.put("fifth", "5th");
-		searchAbbreviations.put("sixth", "6th");
-		searchAbbreviations.put("seventh", "7th");
-	}
-
-	// common housenumber additions
-	static {
-		// french
-		buildingAbbreviations.put("bis", "Bis");
-		buildingAbbreviations.put("ter", "Ter");
-		buildingAbbreviations.put("quater", "Quater");
-		// american
-		buildingAbbreviations.put("bldg", "Building");
-		buildingAbbreviations.put("ste", "Suite");
-		buildingAbbreviations.put("unt", "Unit");
-		buildingAbbreviations.put("apt", "Apartment");
-		buildingAbbreviations.put("fl", "Floor");
-		buildingAbbreviations.put("flr", "Floor");
-		buildingAbbreviations.put("bsmt", "Basement");
+	/**
+	 * Experiments only (AbbreviationMetrics): replaces the forms of one query word of a locale for the next searches
+	 * of this process. A search that has started keeps the dictionary it read.
+	 *
+	 * @param value forms separated by spaces; blank removes the forms of the rules, null returns the rules
+	 * @return the previous forms separated by spaces (of the override, else of the rules), null when there were none
+	 */
+	public static String overrideSearchAbbreviation(String locale, String key, String value) {
+		String normalized = SearchLocales.normalize(locale);
+		String[] previous = new String[1];
+		DICTIONARIES.compute(normalized, (k, current) -> {
+			Dictionary base = current != null ? current : new Dictionary(SearchVariantRules.forLocale(k), Map.of());
+			List<String> old = base.overrides.get(key);
+			if (old == null) {
+				old = new ArrayList<>();
+				for (QueryForm form : queryForms(base, key)) {
+					old.add(form.word());
+				}
+			}
+			previous[0] = old.isEmpty() ? null : String.join(" ", old);
+			Map<String, List<String>> overrides = new HashMap<>(base.overrides);
+			if (value == null) {
+				overrides.remove(key);
+			} else {
+				overrides.put(key, List.copyOf(SearchAlgorithms.splitAndNormalize(value, true)));
+			}
+			return new Dictionary(base, Map.copyOf(overrides));
+		});
+		BY_LOCALE.clear();
+		return previous[0];
 	}
 
 	public static boolean likelyPartOfRef(String word, Set<String> wordSplit) {
@@ -136,16 +141,17 @@ public class Abbreviations {
 	}
 	
 	// search v-2
-	public static boolean likelyPartOfBuilding(String word, Set<String> wordSplit) {
+	public static boolean likelyPartOfBuilding(String word, Set<String> wordSplit, String locale) {
+		Dictionary rules = dictionary(locale);
 		boolean bldNum = (SearchAlgorithms.isNumber2Letters(word) || word.length() == 1
-				|| buildingAbbreviations.containsKey(word));
+				|| rules.buildingAbbreviations.contains(word));
 		if (bldNum) {
 			return true;
 		}
 		if (wordSplit != null) {
 			// recursion for 2bis
 			for (String w : wordSplit) {
-				boolean likely = likelyPartOfBuilding(w, null);
+				boolean likely = likelyPartOfBuilding(w, null, locale);
 				if (!likely) {
 					return false;
 				}
@@ -154,53 +160,107 @@ public class Abbreviations {
 		}
 		return false;
 	}
-    
-    
-    // search-v2
-    public static Map<String, String> getSearchabbreviations() {
-		return searchAbbreviations;
-	}
-    
-    // search-v2
- 	public static boolean isCommonSkipOtherCnt(String lowerCase) {
- 		return commonSkipOtherCnt.contains(lowerCase);
- 	}
 
-    // Indexing data
-    public static String replaceAll(String phrase) {
-        String[] words = phrase.split(SearchPhrase.DELIMITER);
-        StringBuilder r = new StringBuilder();
-        boolean changed = false;
-        for (String w : words) {
-            if (r.length() > 0) {
-                r.append(SearchPhrase.DELIMITER);
-            }
-            String abbrRes = abbreviations.get(w.toLowerCase());
-            if (abbrRes == null) {
-                r.append(w);
-            } else {
-                changed = true;
-                r.append(abbrRes);
-            }
-        }
-        return changed ? r.toString() : phrase;
-    }
-    
-	// search-v1
-    public static Map<String, String> getAbbreviations() {
-		return abbreviations;
+	/** A form of a query word: the word of a name it stands for and the owners of names it applies to. */
+	public record QueryForm(String object, String word) {
+		public boolean appliesTo(String owner) {
+			return SearchVariantRules.appliesTo(object, owner);
+		}
+
+		/** true when the form applies to every owner of a name */
+		public boolean isUnscoped() {
+			return SearchVariantRules.ANY_OBJECT.equals(object);
+		}
+	}
+
+	/** Only one-word forms can be matched against one name-index atom, the rules load only such rules. */
+	public static List<QueryForm> getQueryForms(String word, String locale) {
+		return queryForms(dictionary(locale), word);
+	}
+
+	private static List<QueryForm> queryForms(Dictionary dictionary, String word) {
+		Set<QueryForm> forms = new LinkedHashSet<>();
+		List<String> override = dictionary.overrides.get(word);
+		if (override != null) {
+			for (String form : override) {
+				forms.add(new QueryForm(SearchVariantRules.ANY_OBJECT, form));
+			}
+			return new ArrayList<>(forms);
+		}
+		for (SearchVariantRules.Rule rule : dictionary.forms) {
+			String replacement = rule.apply(word);
+			if (replacement != null) {
+				List<String> words = SearchAlgorithms.splitAndNormalize(replacement, false);
+				if (words.size() == 1 && !words.get(0).equals(word)) {
+					forms.add(new QueryForm(rule.object, words.get(0)));
+				}
+			}
+		}
+		return new ArrayList<>(forms);
+	}
+
+	// search-v2
+	public static boolean isCommonSkipOtherCnt(String lowerCase, String locale) {
+		return dictionary(locale).commonSkipOtherCnt.contains(lowerCase);
+	}
+
+	/**
+	 * Indexing data: rewrites the words of a name of {@code owner} ("street") by the normalizations of the locale.
+	 * A query word gets the same rewrite as one of its forms (the rule is in {@link SearchVariantRules#query()} too).
+	 */
+	public static String replaceAll(String phrase, String locale, String owner) {
+		Map<String, List<SearchVariantRules.Rule>> normalizations = dictionary(locale).normalizations;
+		if (normalizations.isEmpty()) {
+			return phrase;
+		}
+		String[] words = phrase.split(SearchPhrase.DELIMITER);
+		StringBuilder r = new StringBuilder();
+		boolean changed = false;
+		for (String w : words) {
+			if (r.length() > 0) {
+				r.append(SearchPhrase.DELIMITER);
+			}
+			String abbrRes = normalized(normalizations, w, owner);
+			if (abbrRes == null) {
+				r.append(w);
+			} else {
+				changed = true;
+				r.append(abbrRes);
+			}
+		}
+		return changed ? r.toString() : phrase;
+	}
+
+	private static String normalized(Map<String, List<SearchVariantRules.Rule>> normalizations, String word,
+			String owner) {
+		List<SearchVariantRules.Rule> variants = normalizations.get(word.toLowerCase(Locale.ROOT));
+		if (variants != null) {
+			for (SearchVariantRules.Rule variant : variants) {
+				if (owner == null || variant.appliesTo(owner)) {
+					return variant.to();
+				}
+			}
+		}
+		return null;
+	}
+
+	/** @return normalized word -> its rewrite, for every owner of names */
+	public static Map<String, String> getAbbreviations(String locale) {
+		Map<String, String> abbreviations = new LinkedHashMap<>();
+		for (Map.Entry<String, List<SearchVariantRules.Rule>> e : dictionary(locale).normalizations.entrySet()) {
+			abbreviations.put(e.getKey(), e.getValue().get(0).to());
+		}
+		return Collections.unmodifiableMap(abbreviations);
 	}
 
 	// search v-1
-    public static String replace(String word) {
-        String value = abbreviations.get(word.toLowerCase());
-        return value != null ? value : word;
-    }
-    
-    // search-v1
-	public static boolean isConjunction(String lowerCase) {
-		return conjunctions.contains(lowerCase);
+	public static String replace(String word, String locale) {
+		String value = normalized(dictionary(locale).normalizations, word, null);
+		return value != null ? value : word;
 	}
-	
-    
+
+	// search-v1
+	public static boolean isConjunction(String lowerCase, String locale) {
+		return dictionary(locale).conjunctions.contains(lowerCase);
+	}
 }
