@@ -5381,4 +5381,19 @@
     <string name="ais_collision_warning_short">Averto pri kolizio</string>
     <string name="ais_my_vessel">Mia ŝipo</string>
     <string name="ais_mmsi">MMSI</string>
+    <string name="ais_mmsi_not_set">Neagordita</string>
+    <string name="ais_show_on_the_map">Montri sur la mapo</string>
+    <string name="ais_my_vessel_footer">Enigu identigilon MMSI de via ŝipo por eviti falsajn avertojn pri kolizioj kaj (malnepre) vidigi ĝian AIS-markilon sur la mapo.</string>
+    <string name="ais_connection_tcp_desc">Konekti senpere al NMEA-aparato (retpordego aŭ ricev-trans-sendilo) ĉe specifa IP-adreso.</string>
+    <string name="ais_connection_udp_desc">Ricevi datum-elsendojn ĉe la loka reto. Postulas neniun IP-adreson.</string>
+    <string name="ais_host_or_ip">Servilnomo aŭ IP-adreso</string>
+    <string name="ais_port">Pordo</string>
+    <string name="ais_error_empty_host">Enigu servilnomon aŭ IP-adreson</string>
+    <string name="ais_error_empty_port">Enigu numeron de pordo</string>
+    <string name="ais_error_port_range">Numero de pordo estu inter 1 kaj 65535</string>
+    <string name="ais_mark_as_outdated">Marki kiel neaktualajn</string>
+    <string name="ais_mark_as_outdated_off_desc">Simbolo de ŝipo ne ŝanĝiĝos. Ĝi plue estos forigita post %1$s.</string>
+    <string name="ais_mark_as_outdated_desc">Forstrekos simbolon de ŝipo post %1$s sen ricevi ĝian signalon.</string>
+    <string name="ais_hide_after">Kaŝi post</string>
+    <string name="ais_hide_after_desc">Plene forigos ŝipon post %1$s sen ricevi ĝian signalon.</string>
 </resources>
