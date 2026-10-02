@@ -1179,7 +1179,7 @@ class StarView @JvmOverloads constructor(
 
 		if (showDirections) {
 			val cx = width / 2f
-			val cy = height / 2f
+			val cy = visibleHeight() / 2f
 			val density = resources.displayMetrics.density
 			val distToShow = 80f * density
 
@@ -1204,8 +1204,12 @@ class StarView @JvmOverloads constructor(
 	private fun isPointInView(point: PointF): Boolean {
 		val rect = Rect()
 		getDrawingRect(rect)
+		rect.bottom = rect.top + visibleHeight()
 		return rect.contains(point.x.toInt(), point.y.toInt())
 	}
+
+	/** Height of the part of the view not covered by [bottomObstructionHeight]. */
+	private fun visibleHeight(): Int = max(height - bottomObstructionHeight, height / 2)
 
 	private fun drawCelestialPath(canvas: Canvas, obj: SkyObject) {
 		val pathData = getOrUpdatePathData(obj) ?: return
@@ -2024,6 +2028,20 @@ class StarView @JvmOverloads constructor(
 	}
 
 	var isCameraMode: Boolean = false
+
+	/**
+	 * Height in pixels of UI that covers the bottom of the view, such as the object context menu.
+	 * Direction arrows and the "object in view" check use only the part above it, so an arrow is
+	 * never hidden behind the menu.
+	 */
+	var bottomObstructionHeight: Int = 0
+		set(value) {
+			val clamped = max(0, value)
+			if (field != clamped) {
+				field = clamped
+				invalidate()
+			}
+		}
 
 	var is2DMode: Boolean = false
 		set(value) {
