@@ -45,6 +45,9 @@ public class ParkingMapWidget extends SimpleWidget {
 	@Override
 	protected View.OnClickListener getOnClickListener() {
 		return v -> {
+			if (mapActivity == null) {
+				return;
+			}
 			OsmandMapTileView view = mapActivity.getMapView();
 			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
 			LatLon parkingPoint = plugin.getParkingPosition();
@@ -57,6 +60,9 @@ public class ParkingMapWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
+		if (mapActivity == null) {
+			return;
+		}
 		LatLon point = plugin.getParkingPosition();
 		if (point != null && !app.getRoutingHelper().isFollowingMode()) {
 			OsmandMapTileView view = mapActivity.getMapView();

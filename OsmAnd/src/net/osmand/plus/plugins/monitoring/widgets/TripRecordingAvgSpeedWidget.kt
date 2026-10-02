@@ -37,7 +37,9 @@ class TripRecordingAvgSpeedWidget(
 			forceUpdate = true
 			widgetState.changeToNextState()
 			updateInfo(null)
-			mapActivity.refreshMap()
+			if (mapActivity != null) {
+				mapActivity.refreshMap()
+			}
 			updateWidgetName()
 			updateIcon()
 		}
@@ -95,7 +97,11 @@ class TripRecordingAvgSpeedWidget(
 			PopUpMenuItem.Builder(app)
 				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_center_on_track, iconColor))
 				.setTitleId(R.string.show_track_on_map)
-				.setOnClickListener { showOnMap(mapActivity) }
+				.setOnClickListener {
+					if (mapActivity != null) {
+						showOnMap(mapActivity)
+					}
+				}
 				.showTopDivider(true)
 				.create()
 		)

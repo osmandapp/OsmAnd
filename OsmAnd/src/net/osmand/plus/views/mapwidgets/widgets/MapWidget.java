@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import android.content.Context;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 
 	protected final OsmandApplication app;
 	protected final OsmandSettings settings;
+	@Nullable
 	protected final MapActivity mapActivity;
 	protected final UiUtilities iconsCache;
 	protected final OsmAndLocationProvider locationProvider;
@@ -109,8 +111,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	@NonNull
 	public View getView() {
 		if (view == null) {
-			Context context = mapActivity != null ? mapActivity : app;
-			view = UiUtilities.getInflater(context, nightMode).inflate(getLayoutId(), null);
+			view = getInflater().inflate(getLayoutId(), null);
 			setupView(view);
 		}
 		return view;
@@ -122,6 +123,16 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		if (appearance != null && appearance.getPanel() == panel) {
 			onPanelAppearanceChanged(appearance);
 		}
+	}
+
+	@NonNull
+	protected Context getContext() {
+		return mapActivity != null ? mapActivity : app;
+	}
+
+	@NonNull
+	protected LayoutInflater getInflater() {
+		return UiUtilities.getInflater(getContext(), nightMode);
 	}
 
 	protected void recreateViewInternal() {
@@ -187,26 +198,17 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		if (isAndroidAuto()) {
-			updateInfoForAndroidAuto(drawSettings);
-		} else if (mapActivity != null) {
-			updateInfo(getView(), drawSettings);
-		}
+		updateInfo(getView(), drawSettings);
 	}
 
 	protected abstract void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings);
-
-	protected void updateInfoForAndroidAuto(@Nullable DrawSettings drawSettings) {
-	}
 
 	@Override
 	public final void applyPanelAppearance(@NonNull ResolvedPanelAppearance appearance) {
 		panelAppearance = appearance;
 		nightMode = appearance.getNightMode();
-		if (mapActivity != null) {
-			getView();
-			onPanelAppearanceChanged(appearance);
-		}
+		getView();
+		onPanelAppearanceChanged(appearance);
 	}
 
 	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {

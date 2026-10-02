@@ -39,10 +39,12 @@ public class AudioVideoNotesWidget extends SimpleWidget {
 		return v -> {
 			AudioVideoNotesPlugin plugin = getPlugin();
 			if (plugin != null) {
-				if (plugin.isRecording()) {
-					plugin.stopAndSaveRecording(mapActivity);
-				} else {
-					plugin.makeAction(mapActivity, actionId);
+				if (mapActivity != null) {
+					if (plugin.isRecording()) {
+						plugin.stopAndSaveRecording(mapActivity);
+					} else {
+						plugin.makeAction(mapActivity, actionId);
+					}
 				}
 			}
 		};

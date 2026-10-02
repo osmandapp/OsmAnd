@@ -58,13 +58,15 @@ public class RadiusRulerWidget extends SimpleWidget {
 		cachedRadiusRulerMode = radiusRulerMode.next();
 		updateIcons();
 		settings.RADIUS_RULER_MODE.set(cachedRadiusRulerMode);
-		mapActivity.refreshMap();
+		if (mapActivity != null) {
+			mapActivity.refreshMap();
+		}
 	}
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		Location currentLocation = locationProvider.getLastKnownLocation();
-		LatLon centerLocation = mapActivity.getMapLocation();
+		LatLon centerLocation = app.getMapViewTrackingUtilities().getMapLocation();
 
 		RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();
 		boolean modeChanged = radiusRulerMode != cachedRadiusRulerMode;
@@ -82,7 +84,7 @@ public class RadiusRulerWidget extends SimpleWidget {
 			cachedCurrentLocation = currentLocation;
 
 			float distance = -1f;
-			if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+			if (app.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 				distance = 0f;
 			} else if (currentLocation != null && centerLocation != null) {
 				distance = (float) MapUtils.getDistance(centerLocation, currentLocation.getLatitude(), currentLocation.getLongitude());
@@ -115,8 +117,16 @@ public class RadiusRulerWidget extends SimpleWidget {
 	@Override
 	public CommonPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		MapWidgetRegistry mapWidgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> widgetInfos = mapWidgetRegistry.getWidgetsForPanel(mapActivity, appMode,
-				layoutMode, ENABLED_MODE, Collections.singletonList(WidgetsPanel.LEFT));
+		Set<MapWidgetInfo> widgetInfos;
+		if (isAndroidAuto) {
+			widgetInfos = mapWidgetRegistry.getAndroidAutoWidgetsForPanel(app, appMode, ENABLED_MODE, Collections.singletonList(WidgetsPanel.ANDROID_AUTO));
+		} else {
+			if (mapActivity == null) {
+				return null;
+			}
+			widgetInfos = mapWidgetRegistry.getWidgetsForPanel(mapActivity, appMode,
+					layoutMode, ENABLED_MODE, Collections.singletonList(WidgetsPanel.LEFT));
+		}
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
 			MapWidget widget = widgetInfo.widget;
 			boolean anotherRulerWidgetPresent = widget instanceof RadiusRulerWidget && !widget.equals(this);

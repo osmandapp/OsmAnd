@@ -39,7 +39,7 @@ class TripRecordingMovingTimeWidget(
 			forceUpdate = true
 			widgetState.changeToNextState()
 			updateInfo(null)
-			mapActivity.refreshMap()
+			mapActivity?.refreshMap()
 			updateWidgetName()
 			updateIcon()
 		}
@@ -85,7 +85,11 @@ class TripRecordingMovingTimeWidget(
 			PopUpMenuItem.Builder(app)
 				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_center_on_track, iconColor))
 				.setTitleId(R.string.show_track_on_map)
-				.setOnClickListener { showOnMap(mapActivity) }
+				.setOnClickListener {
+					if (mapActivity != null) {
+						showOnMap(mapActivity)
+					}
+				}
 				.showTopDivider(true)
 				.create()
 		)

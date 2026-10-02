@@ -111,7 +111,6 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 					app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
 							.getSizeModePref(layoutMode).setModeValue(appMode, PanelSizeMode.ORIGINAL);
 				}
-				widgetInfo.widget.markAndroidAutoLayoutNeeded();
 			}
 		}
 	}
@@ -148,7 +147,6 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 			if (info.widget instanceof ISupportWidgetResizing widgetResizing) {
 				widgetResizing.getWidgetSizePref().set(selectedWidgetSize);
 				widgetResizing.recreateView();
-				info.widget.markAndroidAutoLayoutNeeded();
 			}
 		}
 	}

@@ -127,12 +127,14 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		renderedWidgetSize = verticalWidget
 				? widgetState.getWidgetSizePref().get()
 				: null;
-		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
+		getInflater().inflate(layoutId, container);
 		findViews();
 		updateWidgetView();
 		container.setOnLongClickListener(v -> {
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
-			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
+			if (mapActivity != null) {
+				ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
+				WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
+			}
 			return true;
 		});
 		container.setOnClickListener(getOnClickListener());
@@ -216,7 +218,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			List<RoadShield> addedShields = new ArrayList<>();
 			for (int i = 0; i < maxShields; i++) {
 				RoadShield shield = shields.get(i);
-				isShieldSet |= setShieldImage(shield, addedShields, mapActivity, shieldImagesContainer, isNightMode());
+				isShieldSet |= setShieldImage(shield, addedShields, getContext(), app, shieldImagesContainer, isNightMode());
 			}
 		}
 		AndroidUiHelper.updateVisibility(shieldImagesContainer, isShieldSet);
@@ -523,7 +525,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 			setupViews();
 
-			turnDrawable = new TurnDrawable(mapActivity, !verticalWidget && horizontalMini);
+			turnDrawable = new TurnDrawable(getContext(), !verticalWidget && horizontalMini);
 			turnDrawable.setTurnType(type);
 			turnDrawable.setTurnImminent(turnImminent, deviatedFromRoute);
 			setVerticalImage(turnDrawable);

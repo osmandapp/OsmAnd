@@ -110,8 +110,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private void setupViews() {
 		LinearLayout container = (LinearLayout) getView();
 		container.removeAllViews();
-		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
-		inflater.inflate(getContentLayoutId(), container);
+		getInflater().inflate(getContentLayoutId(), container);
 		renderedWidgetSize = getWidgetSize();
 		renderedNightMode = nightMode;
 		collectViews();
@@ -119,7 +118,11 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		updateWidgetRowView();
 
 		View buttonTappableArea = container.findViewById(R.id.button_tappable_area);
-		buttonTappableArea.setOnClickListener(v -> mapActivity.getMapActions().doRoute());
+		buttonTappableArea.setOnClickListener(v -> {
+			if (mapActivity != null) {
+				mapActivity.getMapActions().doRoute();
+			}
+		});
 
 		ApplicationMode appMode = settings.getApplicationMode();
 		boolean buttonVisible = isShowExpandButtonEnabled(appMode)
@@ -131,8 +134,10 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 			AndroidUtils.setMargins(params, buttonVisible ? 0 : margin, params.topMargin, params.getMarginEnd(), params.bottomMargin);
 		}
 		container.setOnLongClickListener(v -> {
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
-			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
+			if (mapActivity != null) {
+				ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
+				WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
+			}
 			return true;
 		});
 
@@ -175,6 +180,9 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	@Override
 	public void updateFullRowState(int widgetsCount) {
+		if (mapActivity == null) {
+			return;
+		}
 		if (widgetsCount == 0) return;
 		int screenWidth = AndroidUtils.getScreenWidth(mapActivity);
 		widgetWidth = screenWidth / widgetsCount;

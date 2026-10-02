@@ -88,6 +88,9 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 	}
 
 	private void showMarkerOnMap() {
+		if (mapActivity == null) {
+			return;
+		}
 		MarkersWidgetsHelper.showMarkerOnMap(mapActivity, widgetState.isFirstMarker() ? 0 : 1);
 	}
 

@@ -6,6 +6,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.widgets.NextTurnBaseWidget.SHIELD_HEIGHT_DP;
 import static java.lang.Math.min;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -119,7 +120,9 @@ public class StreetNameWidget extends MapWidget {
 
 		view.setOnLongClickListener(v -> {
 			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
-			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
+			if (mapActivity != null) {
+				WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, null, layoutMode, panel, nightMode, true);
+			}
 			return true;
 		});
 		updateVisibility(false);
@@ -127,6 +130,9 @@ public class StreetNameWidget extends MapWidget {
 
 	@Override
 	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
+		if (mapActivity == null) {
+			return;
+		}
 		ApplicationMode appMode = settings.getApplicationMode();
 		boolean showNextTurn = isShowNextTurnEnabled(appMode);
 
@@ -222,19 +228,25 @@ public class StreetNameWidget extends MapWidget {
 			AndroidUiHelper.updateVisibility(addressTextShadow, false);
 			boolean updated = AndroidUiHelper.updateVisibility(waypointInfoBar, true);
 			// pass top bar to make it clickable
-			WaypointDialogHelper.updatePointInfoView(mapActivity, view, point, true,
-					isNightMode(), false, true);
+			if (mapActivity != null) {
+				WaypointDialogHelper.updatePointInfoView(mapActivity, view, point, true,
+						isNightMode(), false, true);
+			}
 			if (updated || changed) {
 				ImageView moreButton = waypointInfoBar.findViewById(R.id.waypoint_more);
 				ImageView closeButton = waypointInfoBar.findViewById(R.id.waypoint_close);
 				moreButton.setOnClickListener(v -> {
-					mapActivity.hideContextAndRouteInfoMenues();
-					ShowAlongTheRouteBottomSheet.showInstance(
-							mapActivity.getSupportFragmentManager(), null, point.type);
+					if (mapActivity != null) {
+						mapActivity.hideContextAndRouteInfoMenues();
+						ShowAlongTheRouteBottomSheet.showInstance(
+								mapActivity.getSupportFragmentManager(), null, point.type);
+					}
 				});
 				closeButton.setOnClickListener(v -> {
 					waypointHelper.removeVisibleLocationPoint(point);
-					mapActivity.refreshMap();
+					if (mapActivity != null) {
+						mapActivity.refreshMap();
+					}
 				});
 			}
 			return true;
@@ -249,7 +261,7 @@ public class StreetNameWidget extends MapWidget {
 			List<RoadShield> addedShields = new ArrayList<>();
 			for (int i = 0; i < maxShields; i++) {
 				RoadShield shield = shields.get(i);
-				isShieldSet |= setShieldImage(shield, addedShields, mapActivity, shieldImagesContainer, isNightMode());
+				isShieldSet |= setShieldImage(shield, addedShields, getContext(), app, shieldImagesContainer, isNightMode());
 			}
 			return isShieldSet;
 		}
@@ -258,9 +270,9 @@ public class StreetNameWidget extends MapWidget {
 
 	public static boolean setShieldImage(@NonNull RoadShield shield,
 			@NonNull List<RoadShield> addedShields,
-			@NonNull MapActivity mapActivity,
+			@NonNull Context context,
+			@NonNull OsmandApplication app,
 			@NonNull LinearLayout shieldImagesContainer, boolean nightMode) {
-		OsmandApplication app = mapActivity.getApp();
 		RouteDataObject object = shield.getRdo();
 		StringBuilder additional = shield.getAdditional();
 		String shieldValue = shield.getValue();
@@ -307,7 +319,7 @@ public class StreetNameWidget extends MapWidget {
 			return false;
 		}
 
-		Drawable shieldDrawable = AppCompatResources.getDrawable(mapActivity, shieldRes);
+		Drawable shieldDrawable = AppCompatResources.getDrawable(context, shieldRes);
 		if (shieldDrawable == null) {
 			return false;
 		}
@@ -334,7 +346,7 @@ public class StreetNameWidget extends MapWidget {
 		textRenderer.drawShieldIcon(rc, canvas, text, text.getShieldResIcon());
 		textRenderer.drawAutoDownScaleText(canvas, text);
 
-		ImageView imageView = new ImageView(mapActivity);
+		ImageView imageView = new ImageView(context);
 		int viewSize = AndroidUtils.dpToPx(app, SHIELD_HEIGHT_DP);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(viewWidthPx, viewSize);
 		int padding = AndroidUtils.dpToPx(app, 4f);
@@ -409,16 +421,18 @@ public class StreetNameWidget extends MapWidget {
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
 		if (updatedVisibility && isVerticalWidget()) {
-			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
-			if (mapInfoLayer != null) {
-				mapInfoLayer.updateRow(this);
-			}
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getMapActivity());
-			if (widgetType.getPanel(settings, layoutMode) == WidgetsPanel.TOP) {
+			if (mapActivity != null) {
+				MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 				if (mapInfoLayer != null) {
-					mapInfoLayer.updateVerticalPanels();
+					mapInfoLayer.updateRow(this);
 				}
-				mapActivity.updateStatusBarColor();
+				ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+				if (widgetType.getPanel(settings, layoutMode) == WidgetsPanel.TOP) {
+					if (mapInfoLayer != null) {
+						mapInfoLayer.updateVerticalPanels();
+					}
+					mapActivity.updateStatusBarColor();
+				}
 			}
 		}
 		return updatedVisibility;

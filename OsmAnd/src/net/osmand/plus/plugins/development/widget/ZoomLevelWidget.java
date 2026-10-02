@@ -140,7 +140,7 @@ public class ZoomLevelWidget extends SimpleWidget {
 
 	private int calculateMapScale() {
 		DisplayMetrics metrics = new DisplayMetrics();
-		AndroidUtils.getDisplay(mapActivity).getMetrics(metrics);
+		AndroidUtils.getDisplay(getContext()).getMetrics(metrics);
 
 		RotatedTileBox tileBox = mapView.getRotatedTileBox();
 		int pixWidth = tileBox.getPixWidth();

@@ -92,8 +92,16 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		View view = getView();
 		View rowView = view.findViewById(R.id.map_marker_row);
 		View rowView2nd = view.findViewById(R.id.map_marker_row_2nd);
-		rowView.setOnClickListener(v -> MarkersWidgetsHelper.showMarkerOnMap(mapActivity, 0));
-		rowView2nd.setOnClickListener(v -> MarkersWidgetsHelper.showMarkerOnMap(mapActivity, 1));
+		rowView.setOnClickListener(v -> {
+			if (mapActivity != null) {
+				MarkersWidgetsHelper.showMarkerOnMap(mapActivity, 0);
+			}
+		});
+		rowView2nd.setOnClickListener(v -> {
+			if (mapActivity != null) {
+				MarkersWidgetsHelper.showMarkerOnMap(mapActivity, 1);
+			}
+		});
 	}
 
 	private void setupMoreButtons() {
@@ -115,8 +123,10 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	private void showMarkersFragment() {
-		MapActivity.clearPrevActivityIntent();
-		MapMarkersDialogFragment.showInstance(mapActivity);
+		if (mapActivity != null) {
+			MapActivity.clearPrevActivityIntent();
+			MapMarkersDialogFragment.showInstance(mapActivity);
+		}
 	}
 
 	private void setupOkButtons() {
@@ -139,6 +149,9 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 
 	@Override
 	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
+		if (mapActivity == null) {
+			return;
+		}
 		int zoom = mapActivity.getMapView().getZoom();
 		List<MapMarker> markers = markersHelper.getMapMarkers();
 		if (markers.isEmpty() || zoom < 3 || shouldHide()) {
@@ -158,7 +171,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	public void showMarkers(@NonNull List<MapMarker> markers) {
 		LatLon latLon = customLatLon != null ? customLatLon : app.getMapViewTrackingUtilities().getDefaultLocation();
 		boolean defaultLatLon = customLatLon == null;
-		Float heading = mapActivity.getMapViewTrackingUtilities().getHeading();
+		Float heading = app.getMapViewTrackingUtilities().getHeading();
 
 		displayedFirstMarker = markers.get(0);
 		updateFirstMarker(latLon, displayedFirstMarker, heading, !defaultLatLon);
@@ -237,7 +250,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		distText.setText(formattedDist);
 		AndroidUiHelper.updateVisibility(okButton, !customLocation && dist < MIN_METERS_OK_VISIBLE);
 
-		PointDescription pd = marker.getPointDescription(mapActivity);
+		PointDescription pd = marker.getPointDescription(getContext());
 		String descr = Algorithms.isEmpty(pd.getName()) ? pd.getTypeName() : pd.getName();
 		if (!firstMarker && portraitMode) {
 			descr = "  •  " + descr;
@@ -275,9 +288,11 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
-		if (updatedVisibility && widgetType.getPanel(settings, layoutMode) == WidgetsPanel.TOP) {
-			mapActivity.updateStatusBarColor();
+		if (mapActivity != null) {
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+			if (updatedVisibility && widgetType.getPanel(settings, layoutMode) == WidgetsPanel.TOP) {
+				mapActivity.updateStatusBarColor();
+			}
 		}
 		return updatedVisibility;
 	}

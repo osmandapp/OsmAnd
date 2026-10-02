@@ -47,10 +47,16 @@ public class TripRecordingTimeWidget extends SimpleWidget {
 	}
 
 	private void askShowBatteryOptimizationDialog() {
+		if (mapActivity == null) {
+			return;
+		}
 		BatteryOptimizationController.askShowDialog(mapActivity, true, activity -> askShowTrackMenuDialog());
 	}
 
 	private void askShowTrackMenuDialog() {
+		if (mapActivity == null) {
+			return;
+		}
 		if (cachedTimeSpan > 0) {
 			Bundle params = new Bundle();
 			params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());

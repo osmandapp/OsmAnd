@@ -56,6 +56,9 @@ public class SecondNextTurnWidget extends NextTurnBaseWidget {
 
 	@Override
 	public void updateNavigationInfo(@Nullable DrawSettings drawSettings) {
+		if (mapActivity == null) {
+			return;
+		}
 		boolean followingMode = routingHelper.isFollowingMode() || locationProvider.getLocationSimulation().isRouteAnimating();
 		StreetNameWidget.StreetNameWidgetParams params = new StreetNameWidget.StreetNameWidgetParams(mapActivity, true);
 		CurrentStreetName streetName = params.streetName;

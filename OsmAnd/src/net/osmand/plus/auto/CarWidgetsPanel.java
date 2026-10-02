@@ -38,35 +38,18 @@ import java.util.Set;
  * so the phone UI is not affected.
  */
 public class CarWidgetsPanel {
-
-	/**
-	 * Panel is drawn only when the visible area is at least that wide.
-	 */
 	private static final float MIN_SURFACE_WIDTH_DP = 400f;
 	private static final float CORNER_RADIUS_DP = 8f;
 	private static final float BORDER_WIDTH_DP = 2f;
 	private static final float DIVIDER_WIDTH_DP = 1f;
-	private static final float PANEL_PADDING_DP = 4f;
+	private static final float PANEL_PADDING_DP = 0f;
 	private static final float WIDGET_WIDTH_DP = 130f;
-	/**
-	 * Width of the panel in car dp. The car screen is viewed from about twice the distance of a
-	 * phone, so the widgets are drawn ~1.5 times bigger than the {@link #WIDGET_WIDTH_DP} used on
-	 * the phone, which keeps them slightly larger than a phone widget in angular size.
-	 */
 	private static final float PANEL_WIDTH_CAR_DP = 200f;
-	/**
-	 * Safety net for narrow head units (800x480), the panel never takes more than this.
-	 */
 	private static final float MAX_PANEL_WIDTH_RATIO = 0.22f;
-	/**
-	 * Fraction of the visible area height the panel is allowed to occupy.
-	 */
 	private static final float MAX_PANEL_HEIGHT_RATIO = 0.7f;
 
 	private final OsmandApplication app;
 	private final WidgetsPanel panel;
-
-	private final Object widgetsLock = new Object();
 
 	private int firstVisibleWidget;
 	private int lastVisibleCount;
@@ -103,22 +86,20 @@ public class CarWidgetsPanel {
 	}
 
 	public void reloadWidgets() {
-		synchronized (widgetsLock) {
-			clearWidgets();
-			List<MapWidgetInfo> newWidgetInfos = getWidgetInfos();
-			Set<String> newVisibleIds =  new HashSet<>();
-			if (!Algorithms.isEmpty(newWidgetInfos)) {
-				ApplicationMode applicationMode = app.getSettings().getApplicationMode();
-				List<String> visibilities = MapWidgetInfo.getAndroidAutoWidgetsVisibility(app, applicationMode);
-				for (MapWidgetInfo info : newWidgetInfos) {
-					if (info.isEnabledForAppMode(applicationMode, visibilities)) {
-						newVisibleIds.add(info.key);
-					}
+		clearWidgets();
+		List<MapWidgetInfo> newWidgetInfos = getWidgetInfos();
+		Set<String> newVisibleIds = new HashSet<>();
+		if (!Algorithms.isEmpty(newWidgetInfos)) {
+			ApplicationMode applicationMode = app.getSettings().getApplicationMode();
+			List<String> visibilities = MapWidgetInfo.getAndroidAutoWidgetsVisibility(app, applicationMode);
+			for (MapWidgetInfo info : newWidgetInfos) {
+				if (info.isEnabledForAppMode(applicationMode, visibilities)) {
+					newVisibleIds.add(info.key);
 				}
 			}
-			widgetInfos = newWidgetInfos;
-			visibleWidgetIds = newVisibleIds;
 		}
+		widgetInfos = newWidgetInfos;
+		visibleWidgetIds = newVisibleIds;
 	}
 
 	private boolean isAndroidAutoWidgetPanelEnabled() {
@@ -134,26 +115,24 @@ public class CarWidgetsPanel {
 		List<MapWidgetInfo> infos;
 		Set<String> ids;
 		int firstWidgetIndex;
-		synchronized (widgetsLock) {
-			lastPanelBounds.setEmpty();
-			if (firstVisibleWidget >= widgetInfos.size()) {
-				firstVisibleWidget = 0;
-			}
-			infos = this.widgetInfos;
-			boolean hasWidgets = Algorithms.isNotEmpty(infos);
-			if (!hasWidgets){
-				return;
-			}
-			ids = this.visibleWidgetIds;
-			firstWidgetIndex = firstVisibleWidget;
-
-			maxPanelRect = calculateAvailablePanelRect(visibleArea, carDensity, topOffset);
-
-			lastVisibleCount = doDrawWidgets(canvas,infos, ids,
-					firstWidgetIndex,
-					maxPanelRect,
-					drawSettings, carDensity, hiddenArea);
+		lastPanelBounds.setEmpty();
+		if (firstVisibleWidget >= widgetInfos.size()) {
+			firstVisibleWidget = 0;
 		}
+		infos = this.widgetInfos;
+		boolean hasWidgets = Algorithms.isNotEmpty(infos);
+		if (!hasWidgets) {
+			return;
+		}
+		ids = this.visibleWidgetIds;
+		firstWidgetIndex = firstVisibleWidget;
+
+		maxPanelRect = calculateAvailablePanelRect(visibleArea, carDensity, topOffset);
+
+		lastVisibleCount = doDrawWidgets(canvas, infos, ids,
+				firstWidgetIndex,
+				maxPanelRect,
+				drawSettings, carDensity, hiddenArea);
 	}
 
 	private boolean drawSettingsDiffer(DrawSettings other) {
@@ -201,26 +180,21 @@ public class CarWidgetsPanel {
 
 		float scale = panelContentWidth / widgetWidth;
 
-		float localLeft = 0;
-		float localTop = 0;
-		float localRight = maxPanelRect.width();
-		float localMaxBottom = maxPanelRect.height();
+		float panelTop = maxPanelRect.top;
+		float panelLeft = maxPanelRect.left;
+		float panelRight = maxPanelRect.right;
+		float maxPanelBottom = maxPanelRect.bottom;
 
-		float contentRight = localRight - panelPadding - borderWidth;
-		float contentLeft = localLeft + panelPadding + borderWidth;
-		float contentTop = localTop + borderWidth;
-		float maxContentBottom = localMaxBottom - borderWidth;
+		float panelContentRight = panelRight - panelPadding - borderWidth;
+		float panelContentLeft = panelLeft + panelPadding + borderWidth;
+		float panelContentTop = panelTop + borderWidth;
+		float maxPanelContentBottom = maxPanelBottom - borderWidth;
 
 		List<Float> tops = new ArrayList<>();
 		List<Float> bottoms = new ArrayList<>();
 		List<MapWidget> drawnWidgets = new ArrayList<>();
 
-		Rect localHiddenArea = null;
-		if (hiddenArea != null) {
-			localHiddenArea = new Rect(hiddenArea);
-			localHiddenArea.offset((int) -maxPanelRect.left, (int) -maxPanelRect.top);
-		}
-		float y = contentTop;
+		float y = panelContentTop;
 		for (int i = firstVisibleWidgetIndex; i < widgetInfos.size(); i++) {
 			MapWidgetInfo widgetInfo = widgetInfos.get(i);
 			if (!shouldDrawWidget(widgetInfo, visibleIds)) {
@@ -245,14 +219,15 @@ public class CarWidgetsPanel {
 				lastVisibleCount++;
 				continue;
 			}
+			view.layout(0, 0, measuredWidth, measuredHeight);
 			float height = measuredHeight * scale;
-			if (y + height > maxContentBottom) {
+			if (y + height > maxPanelContentBottom) {
 				break;
 			}
 
-			boolean covered = localHiddenArea != null
-					&& Math.min(localHiddenArea.bottom, y + height) > Math.max(localHiddenArea.top, y)
-					&& Math.min(localHiddenArea.right, contentRight) - Math.max(localHiddenArea.left, contentLeft)
+			boolean covered = hiddenArea != null
+					&& Math.min(hiddenArea.bottom, y + height) > Math.max(hiddenArea.top, y)
+					&& Math.min(hiddenArea.right, panelContentRight) - Math.max(hiddenArea.left, panelContentLeft)
 					> panelContentWidth / 2;
 			if (!covered) {
 				drawnWidgets.add(widget);
@@ -274,7 +249,7 @@ public class CarWidgetsPanel {
 				drawBlock(canvas,
 						drawnWidgets.subList(blockStart, i),
 						tops.subList(blockStart, i), bottoms.subList(blockStart, i),
-						contentLeft, contentRight,
+						panelContentLeft, panelContentRight,
 						panelPadding, corner,
 						borderWidth, dividerWidth, scale, blockRect);
 				localDirtyRect.union(blockRect);
@@ -291,6 +266,7 @@ public class CarWidgetsPanel {
 	                       float contentLeft, float contentRight, float padding,
 	                       float corner, float borderWidth, float dividerWidth,
 	                       float scale, RectF outBlockRect) {
+
 		Path backgroundPath = new Path();
 		float blockTop = tops.get(0) - borderWidth;
 		float blockBottom = bottoms.get(bottoms.size() - 1) + borderWidth;
@@ -313,9 +289,7 @@ public class CarWidgetsPanel {
 
 		canvas.save();
 		canvas.clipPath(backgroundPath);
-
 		drawBackground(canvas, backgroundPath);
-		drawBorder(canvas, backgroundPath, borderWidth);
 
 		float widgetContentTop, widgetContentBottom;
 		for (int i = 0; i < widgets.size(); i++) {
@@ -330,6 +304,7 @@ public class CarWidgetsPanel {
 			}
 		}
 
+		drawBorder(canvas, backgroundPath, borderWidth);
 		canvas.restore();
 	}
 
@@ -356,8 +331,8 @@ public class CarWidgetsPanel {
 	private void drawSeparator(@NonNull Canvas canvas, @NonNull Float widgetBottom, float dividerWidth, float blockRight, float blockLeft) {
 		dividerPaint.setStrokeWidth(dividerWidth);
 		canvas.drawLine(
-				blockLeft, widgetBottom + dividerWidth / 2,
-				blockRight, widgetBottom + dividerWidth / 2,
+				blockLeft, widgetBottom - dividerWidth,
+				blockRight, widgetBottom - dividerWidth,
 				dividerPaint
 		);
 	}
@@ -373,10 +348,8 @@ public class CarWidgetsPanel {
 		if (lastPanelBounds.isEmpty() || !lastPanelBounds.contains(x, y)) {
 			return false;
 		}
-		synchronized (widgetsLock) {
-			int next = firstVisibleWidget + Math.max(lastVisibleCount, 1);
-			firstVisibleWidget = next < widgetInfos.size() ? next : 0;
-		}
+		int next = firstVisibleWidget + Math.max(lastVisibleCount, 1);
+		firstVisibleWidget = next < widgetInfos.size() ? next : 0;
 		return true;
 	}
 
@@ -387,16 +360,14 @@ public class CarWidgetsPanel {
 	}
 
 	public void onWidgetVisibilityChanged(MapWidgetInfo widgetInfo) {
-		synchronized (widgetsLock) {
-			Set<String> updatedIds = new HashSet<>(visibleWidgetIds);
-			boolean isEnabled = widgetInfo.isEnabledForAndroidAutoMode(app.getSettings().getApplicationMode());
-			if (isEnabled) {
-				updatedIds.add(widgetInfo.key);
-			} else {
-				updatedIds.remove(widgetInfo.key);
-			}
-			visibleWidgetIds = updatedIds;
+		Set<String> updatedIds = new HashSet<>(visibleWidgetIds);
+		boolean isEnabled = widgetInfo.isEnabledForAndroidAutoMode(app.getSettings().getApplicationMode());
+		if (isEnabled) {
+			updatedIds.add(widgetInfo.key);
+		} else {
+			updatedIds.remove(widgetInfo.key);
 		}
+		visibleWidgetIds = updatedIds;
 	}
 
 	private boolean shouldDrawWidget(MapWidgetInfo widgetInfo, Set<String> visibleIds) {
@@ -436,12 +407,10 @@ public class CarWidgetsPanel {
 	}
 
 	public void clearWidgets() {
-		synchronized (widgetsLock) {
-			widgetInfos = new ArrayList<>();
-			visibleWidgetIds = new HashSet<>();
-			lastVisibleCount = 0;
-			firstVisibleWidget = 0;
-			lastDrawSettings = null;
-		}
+		widgetInfos = new ArrayList<>();
+		visibleWidgetIds = new HashSet<>();
+		lastVisibleCount = 0;
+		firstVisibleWidget = 0;
+		lastDrawSettings = null;
 	}
 }

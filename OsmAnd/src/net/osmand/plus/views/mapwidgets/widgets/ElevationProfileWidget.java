@@ -551,11 +551,13 @@ public class ElevationProfileWidget extends MapWidget {
 			if (location != null) {
 				trackChartPoints.setHighlightedPoint(location);
 			}
-			if (gpxItem.chartPointLayer == ROUTE) {
-				mapActivity.getMapLayers().getRouteLayer().setTrackChartPoints(trackChartPoints);
-			}
-			if (location != null) {
-				mapActivity.refreshMap();
+			if (mapActivity != null) {
+				if (gpxItem.chartPointLayer == ROUTE) {
+					mapActivity.getMapLayers().getRouteLayer().setTrackChartPoints(trackChartPoints);
+				}
+				if (location != null) {
+					mapActivity.refreshMap();
+				}
 			}
 		}
 	}

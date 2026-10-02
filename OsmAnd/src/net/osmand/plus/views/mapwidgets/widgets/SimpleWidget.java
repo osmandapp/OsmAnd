@@ -84,12 +84,14 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 		int layoutId = getContentLayoutId();
 		renderedWidgetSize = widgetState.getWidgetSizePref().get();
-		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
+		getInflater().inflate(layoutId, container);
 		findViews();
 		container.setOnLongClickListener(v -> {
 			List<PopUpMenuItem> actions = getWidgetActions();
 			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
-			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, actions, layoutMode, panel, nightMode, true);
+			if (mapActivity != null) {
+				WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, actions, layoutMode, panel, nightMode, true);
+			}
 			return true;
 		});
 		container.setOnClickListener(getOnClickListener());
@@ -160,10 +162,10 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	public void updateWidgetView() {
 		updateWidgetName();
-		if (!isAndroidAuto()) {
-			boolean showIcon = shouldShowIcon();
-			AndroidUiHelper.updateVisibility(imageView, showIcon);
-			if (isVerticalWidget()) {
+		boolean showIcon = shouldShowIcon();
+		AndroidUiHelper.updateVisibility(imageView, showIcon);
+		if (isVerticalWidget()) {
+			if (!isAndroidAuto()) {
 				app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
 			} else {
 				updateValueAlign(false);
@@ -194,7 +196,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	public void recreateViewIfNeeded(@NonNull WidgetsPanel panel) {
 		boolean oldWidgetOrientation = isVerticalWidget();
 		setPanel(panel);
-		if (!isAndroidAuto() && oldWidgetOrientation != isVerticalWidget()) {
+		if (oldWidgetOrientation != isVerticalWidget()) {
 			recreateView();
 		}
 	}
@@ -243,12 +245,6 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		if (typeAllowed && (!shouldHide || emptyValueTextView)) {
 			updateSimpleWidgetInfo(drawSettings);
 		}
-	}
-
-	@Override
-	protected void updateInfoForAndroidAuto(@Nullable DrawSettings drawSettings) {
-		super.updateInfoForAndroidAuto(drawSettings);
-		updateSimpleWidgetInfoForAndroidAuto(drawSettings);
 	}
 
 	protected boolean shouldHide() {
