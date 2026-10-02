@@ -39,6 +39,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.TileSourceNameCheck;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -60,8 +61,10 @@ import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
@@ -530,25 +533,43 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			app.showToastMessage(R.string.internet_not_available);
 			return;
 		}
-		AsyncTask<Void, Void, List<TileSourceTemplate>> task = new AsyncTask<Void, Void, List<TileSourceTemplate>>() {
+		AsyncTask<Void, Void, List<TileSourceTemplateInfo>> task = new AsyncTask<>() {
 			@Override
-			protected List<TileSourceTemplate> doInBackground(Void... params) {
-				return TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app), true);
+			protected List<TileSourceTemplateInfo> doInBackground(Void... params) {
+				List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app), true);
+				if (Algorithms.isEmpty(downloaded)) {
+					return Collections.emptyList();
+				}
+				return settings.checkTileSourcesNameStatus(downloaded).stream()
+						.map(r -> new TileSourceTemplateInfo(r.first, r.second))
+						.collect(Collectors.toList());
 			}
 
-			protected void onPostExecute(java.util.List<TileSourceTemplate> downloaded) {
+			@Override
+			protected void onPostExecute(List<TileSourceTemplateInfo> allDownloaded) {
 				Activity activity = activityRef.get();
 				if (activity == null || activity.isFinishing()) {
 					return;
 				}
 				OsmandApplication app = (OsmandApplication) activity.getApplication();
-				if (downloaded == null || downloaded.isEmpty()) {
+
+				if (Algorithms.isEmpty(allDownloaded)) {
 					app.showShortToastMessage(R.string.shared_string_io_error);
 					return;
 				}
-				String[] names = new String[downloaded.size()];
-				for (int i = 0; i < names.length; i++) {
-					names[i] = downloaded.get(i).getName();
+
+				List<TileSourceTemplateInfo> downloaded = allDownloaded.stream()
+						.filter(info -> (info.nameCheck instanceof TileSourceNameCheck.ValidName))
+						.collect(Collectors.toList());
+				if (Algorithms.isEmpty(downloaded)) {
+					app.showShortToastMessage(R.string.shared_string_io_error);
+					return;
+				}
+				String[] displayedNames = new String[downloaded.size()];
+				for (int i = 0; i < downloaded.size(); i++) {
+					TileSourceTemplateInfo info = downloaded.get(i);
+					TileSourceNameCheck.ValidName nameCheck = (TileSourceNameCheck.ValidName) info.nameCheck;
+					displayedNames[i] = nameCheck.safeName();
 				}
 				boolean[] selected = new boolean[downloaded.size()];
 				boolean nightMode = isNightMode(activity);
@@ -563,7 +584,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 								List<TileSourceTemplate> toInstall = new ArrayList<>();
 								for (int i = 0; i < selected.length; i++) {
 									if (selected[i]) {
-										toInstall.add(downloaded.get(i));
+										toInstall.add(downloaded.get(i).template);
 									}
 								}
 								for (TileSourceTemplate ts : toInstall) {
@@ -580,14 +601,18 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 							}
 						});
 
-				CustomAlert.showMultiSelection(dialogData, names, selected, v -> {
+				CustomAlert.showMultiSelection(dialogData, displayedNames, selected, v -> {
 					Activity _activity = activityRef.get();
 					if (_activity != null && !_activity.isFinishing()) {
-						Map<String, String> entriesMap = settings.getTileSourceEntries();
 						int which = (int) v.getTag();
 						selected[which] = !selected[which];
-						if (entriesMap.containsKey(downloaded.get(which).getName()) && selected[which]) {
-							app.showShortToastMessage(R.string.tile_source_already_installed);
+						if (selected[which]) {
+							TileSourceTemplateInfo info = downloaded.get(which);
+							TileSourceNameCheck.ValidName nameCheck = (TileSourceNameCheck.ValidName) info.nameCheck;
+							boolean sourceInstalled = settings.isTileSourceInstalled(nameCheck.safeName());
+							if (sourceInstalled) {
+								app.showShortToastMessage(R.string.tile_source_already_installed);
+							}
 						}
 					}
 				});
@@ -675,5 +700,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		quickActionTypes.add(MapOverlayAction.TYPE);
 		quickActionTypes.add(MapUnderlayAction.TYPE);
 		return quickActionTypes;
+	}
+
+	private record TileSourceTemplateInfo(TileSourceTemplate template,
+	                                      TileSourceNameCheck nameCheck) {
 	}
 }

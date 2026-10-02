@@ -40,6 +40,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -126,6 +127,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class OsmandSettings {
 
@@ -144,6 +146,12 @@ public class OsmandSettings {
 	private static final Map<String, String> PREFERENCES_NAMES_CACHE = new LinkedHashMap<>();
 
 	public static final float SIM_MIN_SPEED = 5 / 3.6f;
+
+	public static final String TILES_NAME_PROBE_DIRNAME = ".probe";
+
+	private static final Pattern STRIP_EMOJI_PATTERN =
+			Pattern.compile("[[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}]\\uFE0F\\uFE0E\\u200D]");
+
 	/// Settings variables
 	private final OsmandApplication ctx;
 	private SettingsAPI settingsAPI;
@@ -2292,14 +2300,164 @@ public class OsmandSettings {
 		File tPath = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		File dir = new File(tPath, toInstall.getName());
 		dir.mkdirs();
-		if (dir.exists() && dir.isDirectory()) {
-			try {
-				TileSourceManager.createMetaInfoFile(dir, toInstall, true);
-			} catch (IOException e) {
+		if (!dir.isDirectory()) {
+			// Some SD card file systems reject emoji and other special characters in folder names
+			String safeName = getSanitizedTileSourceName(toInstall.getName());
+			if (Algorithms.isEmpty(safeName)) {
 				return false;
 			}
+			dir = new File(tPath, safeName);
+			dir.mkdirs();
+			if (!dir.isDirectory()) {
+				return false;
+			}
+			toInstall.setName(safeName);
+		}
+		try {
+			TileSourceManager.createMetaInfoFile(dir, toInstall, true);
+		} catch (IOException e) {
+			return false;
 		}
 		return true;
+	}
+
+	public boolean isTileSourceInstalled(@NonNull String tileSourceName) {
+		Map<String, String> installed = getTileSourceEntries();
+		return installed.containsValue(tileSourceName);
+	}
+
+	public boolean isTileSourceProbeFolder(@NonNull File file) {
+		if (!file.getName().equals(TILES_NAME_PROBE_DIRNAME)) {
+			return false;
+		}
+		File parent = file.getParentFile();
+		if (parent == null) {
+			return false;
+		}
+		File tilesFolder = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+		try {
+			return tilesFolder.getCanonicalPath().equals(parent.getCanonicalPath());
+		} catch (IOException e) {
+			return false;
+		}
+	}
+
+	@NonNull
+	public TileSourceNameCheck checkTileSourceNameStatus(@NonNull String name) {
+		File tilesFolder = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+		return checkTileSourceNameStatus(tilesFolder, name);
+	}
+
+	@NonNull
+	public List<Pair<TileSourceTemplate, TileSourceNameCheck>> checkTileSourcesNameStatus(@NonNull List<TileSourceTemplate> templates) {
+		File tilesFolder = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+		List<Pair<TileSourceTemplate, TileSourceNameCheck>> results = new ArrayList<>();
+		boolean checkEncounteredError = false;
+		for (TileSourceTemplate template: templates) {
+			if (checkEncounteredError) {
+				results.add(new Pair<>(template, TileSourceNameCheck.Failure.CHECK_ERROR));
+			} else {
+				TileSourceNameCheck check = runTileSourceNameStatusCheck(tilesFolder, template.getName());
+				results.add(new Pair<>(template, check));
+				if (check == TileSourceNameCheck.Failure.CHECK_ERROR) {
+					checkEncounteredError = true;
+				}
+			}
+		}
+		try {
+			cleanupTilesNameProbeFolder(tilesFolder);
+		} catch (Exception e) {
+			LOG.error("Error while cleaning up tile source names probe folder", e);
+		}
+		return results;
+	}
+
+	@NonNull
+	private TileSourceNameCheck checkTileSourceNameStatus(@NonNull File tilesFolder, @NonNull String name) {
+		TileSourceNameCheck result = runTileSourceNameStatusCheck(tilesFolder, name);
+		try {
+			cleanupTilesNameProbeFolder(tilesFolder);
+		} catch (Exception e) {
+			LOG.error("Error while cleaning up tile source names probe folder", e);
+		}
+		return result;
+	}
+
+	private boolean checkTileSourceFileExist(@NonNull File tilesFolder, @NonNull String name) {
+		File f = new File(tilesFolder, name);
+		if (f.exists()) {
+			return true;
+		}
+		f = new File(tilesFolder, name + SQLITE_EXT);
+		return f.exists();
+	}
+
+	@NonNull
+	private TileSourceNameCheck runTileSourceNameStatusCheck(@NonNull File tilesFolder, @NonNull String aName) {
+		try {
+			String name = Algorithms.sanitizeFileName(aName);
+			if (Algorithms.isEmpty(name)) {
+				return TileSourceNameCheck.Failure.INVALID_NAME;
+			}
+			if (checkTileSourceFileExist(tilesFolder, name)) {
+				return new TileSourceNameCheck.ValidName(name, true);
+			}
+			if (checkTileSourceNameAcceptedByFS(tilesFolder, name)) {
+				return new TileSourceNameCheck.ValidName(name, false);
+			}
+			String sanitized = getSanitizedTileSourceName(name);
+			if (Algorithms.isEmpty(sanitized)) {
+				return TileSourceNameCheck.Failure.INVALID_NAME;
+			}
+			if (checkTileSourceFileExist(tilesFolder, sanitized)) {
+				return new TileSourceNameCheck.ValidName(sanitized, true);
+			}
+			if (checkTileSourceNameAcceptedByFS(tilesFolder, sanitized)) {
+				return new TileSourceNameCheck.ValidName(sanitized, false);
+			} else {
+				return TileSourceNameCheck.Failure.INVALID_NAME;
+			}
+		} catch (SecurityException e) {
+			return TileSourceNameCheck.Failure.CHECK_ERROR;
+		}
+	}
+
+	public sealed interface TileSourceNameCheck {
+		record ValidName(@NonNull String safeName, boolean exists) implements TileSourceNameCheck {
+		}
+
+		enum Failure implements TileSourceNameCheck {INVALID_NAME, CHECK_ERROR}
+	}
+
+	private boolean checkTileSourceNameAcceptedByFS(@NonNull File parentFolder, @NonNull String fileName) {
+		File probeFolder = new File(parentFolder, TILES_NAME_PROBE_DIRNAME);
+		File test = new File(probeFolder, fileName);
+		boolean result = false;
+		if (test.exists()) {
+			result = true;
+		} else {
+			test.mkdirs();
+			if (test.exists()) {
+				result = true;
+			}
+		}
+		return result;
+	}
+
+	private void cleanupTilesNameProbeFolder(@NonNull File parentFolder) {
+		File probeFolder = new File(parentFolder, TILES_NAME_PROBE_DIRNAME);
+		Algorithms.removeAllFiles(probeFolder);
+	}
+
+	@NonNull
+	private String getSanitizedTileSourceName(@NonNull String name) {
+		String stripped = stripEmojis(name);
+		return Algorithms.sanitizeFileName(stripped).replaceAll("[\\s\\p{Z}]+", " ").trim();
+	}
+
+	@NonNull
+	private String stripEmojis(@NonNull String text) {
+		return STRIP_EMOJI_PATTERN.matcher(text).replaceAll("");
 	}
 
 	public Map<String, String> getTileSourceEntries() {

@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="invalid_tile_source_name">Tile source name is not valid.</string>
 	<string name="contour_labels">Labels</string>
 	<string name="contour_label_direction_descr">Uphill: the top of each height number faces higher ground, as on paper topographic maps. The short ticks on the lines point downhill.</string>
 	<string name="rendering_attr_contourLabelDirection_name">Label direction</string>

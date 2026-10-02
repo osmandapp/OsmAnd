@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,6 +48,7 @@ import net.osmand.plus.mapsource.InputZoomLevelsBottomSheet.OnZoomSetListener;
 import net.osmand.plus.mapsource.MercatorProjectionBottomSheet.OnMercatorSelectedListener;
 import net.osmand.plus.mapsource.TileStorageFormatBottomSheet.OnTileStorageFormatSelectedListener;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.settings.backend.OsmandSettings.TileSourceNameCheck;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -189,8 +191,9 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		saveBtnTitle.setTextColor(ContextCompat.getColorStateList(app,
 				nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
 		saveBtn.setOnClickListener(view -> {
-			saveTemplate();
-			dismiss();
+			if (saveTemplate()) {
+				dismiss();
+			}
 		});
 		ScrollView scrollView = root.findViewById(R.id.scroll_view);
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
@@ -321,69 +324,151 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		updateBackPressedCallback();
 	}
 
-	private void saveTemplate() {
+	private boolean saveTemplate() {
 		try {
-			String newName = nameEditText.getText().toString();
+			String nameInputValue = nameEditText.getText().toString();
+			TileSourceNameCheck nameStatus = settings.checkTileSourceNameStatus(nameInputValue);
+			if (nameStatus == TileSourceNameCheck.Failure.INVALID_NAME) {
+				app.showToastMessage(R.string.invalid_tile_source_name);
+				return false;
+			}
+			if (nameStatus == TileSourceNameCheck.Failure.CHECK_ERROR) {
+				app.showToastMessage(R.string.shared_string_unexpected_error);
+				return false;
+			}
+			if (!(nameStatus instanceof TileSourceNameCheck.ValidName validNameStatus)) {
+				app.showToastMessage(R.string.shared_string_unexpected_error);
+				return false;
+			}
+			String newName = validNameStatus.safeName();
+			if (validNameStatus.exists() && !template.getName().equals(newName)) {
+				app.showToastMessage(R.string.file_already_exists);
+				return false;
+			}
 			String urlToLoad = urlEditText.getText().toString();
-			template.setName(newName);
 			template.setUrlToLoad(urlToLoad.isEmpty() ? null : urlToLoad.replace("{$x}", "{1}").replace("{$y}", "{2}").replace("{$z}", "{0}"));
 			template.setMinZoom(minZoom);
 			template.setMaxZoom(maxZoom);
 			template.setEllipticYTile(elliptic);
 			template.setExpirationTimeMinutes(expireTimeMinutes);
-			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + editedLayerName);
-			String ext = null;
-			boolean storageChanged = false;
-			if (f.exists()) {
-				int extIndex = f.getName().lastIndexOf('.');
-				ext = extIndex == -1 ? "" : f.getName().substring(extIndex);
-				String originalName = extIndex == -1 ? f.getName() : f.getName().substring(0, extIndex);
-				if (!Algorithms.objectEquals(newName, originalName)) {
-					if (IndexConstants.SQLITE_EXT.equals(ext)) {
-						f = FileUtils.renameSQLiteFile(app, f, newName + ext, null);
-					} else {
-						f.renameTo(app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName));
-						f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName);
-					}
-				}
-			}
-			if (sqliteDB) {
-				if (IndexConstants.SQLITE_EXT.equals(ext)) {
-					List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
-					SQLiteTileSource sqLiteTileSource = new SQLiteTileSource(app, f, knownTemplates);
-					sqLiteTileSource.couldBeDownloadedFromInternet();
-					sqLiteTileSource.updateFromTileSourceTemplate(template);
-				} else {
-					String rule = "";
-					String refer = "";
-					String randoms = "";
-					String userAgent = "";
-					boolean invertedY = false;
-					boolean inversiveZoom = false;
-					boolean timeSupported = expireTimeMinutes > 0;
-					long expirationTimeMillis = expireTimeMinutes * 60 * 1000L;
+			template.setName(newName);
 
-					SQLiteTileSource sqLiteTileSource = new SQLiteTileSource(
-							app, newName, minZoom, maxZoom, urlToLoad, randoms,
-							elliptic, invertedY, refer, userAgent, timeSupported,
-							expirationTimeMillis, inversiveZoom, rule
-					);
-					sqLiteTileSource.createDataBase();
-					storageChanged = f.exists();
+			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + editedLayerName);
+			boolean isSuccessful = prepareAndInstall(f, newName, (file, ext) -> {
+				if (sqliteDB) {
+					return installAsSqliteDbTemplate(template, ext, file, newName, urlToLoad);
+				} else {
+					return installAsNonSqliteTemplate(template, ext, file);
 				}
-			} else {
-				settings.installTileSource(template);
-				storageChanged = f != null && f.exists() && IndexConstants.SQLITE_EXT.equals(ext);
-			}
-			if (storageChanged) {
-				OsmAndTaskManager.executeTask(new DeleteTilesTask(app), f);
+			});
+			if (!isSuccessful) {
+				app.showToastMessage(R.string.shared_string_unexpected_error);
+				return false;
 			}
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof OnMapSourceUpdateListener) {
 				((OnMapSourceUpdateListener) fragment).onMapSourceUpdated();
 			}
+			return true;
 		} catch (RuntimeException e) {
 			LOG.error("Error on saving template " + e);
+			app.showToastMessage(R.string.shared_string_unexpected_error);
+			return false;
+		}
+	}
+
+	private boolean prepareAndInstall(@NonNull File f, @NonNull String newName, @NonNull OnFilePreparedCallback callback) {
+		String ext = null;
+		String originalName = null;
+		File renamedFile = null;
+		if (f.exists()) {
+			int extIndex = f.getName().lastIndexOf('.');
+			ext = extIndex == -1 ? "" : f.getName().substring(extIndex);
+			originalName = extIndex == -1 ? f.getName() : f.getName().substring(0, extIndex);
+			renamedFile = renameTemplateFile(f, newName, originalName, ext);
+		}
+		Pair<Boolean, Boolean> result = callback.onFilePreparedCallback(renamedFile, ext);
+		boolean isSuccessful = result.first;
+		if (isSuccessful) {
+			boolean storageChanged = result.second;
+			if (storageChanged) {
+				OsmAndTaskManager.executeTask(new DeleteTilesTask(app), renamedFile);
+			}
+		} else {
+			if (renamedFile != null && renamedFile.exists()) {
+				if (renameTemplateFile(renamedFile, originalName, newName, ext) == null) {
+					LOG.error("Failed to roll back rename of " + renamedFile.getAbsolutePath());
+				}
+			}
+		}
+		return isSuccessful;
+	}
+
+	@Nullable
+	private File renameTemplateFile(@NonNull File f,
+	                                @NonNull String newName,
+	                                @NonNull String originalName,
+	                                @Nullable String ext) {
+		File renamed = null;
+		if (!Algorithms.objectEquals(newName, originalName)) {
+			if (IndexConstants.SQLITE_EXT.equals(ext)) {
+				renamed = FileUtils.renameSQLiteFile(app, f, newName + ext, null);
+			} else {
+				if (f.renameTo(app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName))) {
+					renamed = app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName);
+				}
+			}
+		} else {
+			renamed = f;
+		}
+		return renamed;
+	}
+
+	@NonNull
+	private Pair<Boolean, Boolean> installAsNonSqliteTemplate(@NonNull TileSourceTemplate template,
+	                                                          @Nullable String ext,
+	                                                          @Nullable File templateFile) {
+		boolean storageChanged;
+		boolean installed = settings.installTileSource(template);
+		storageChanged = templateFile != null && templateFile.exists() && IndexConstants.SQLITE_EXT.equals(ext);
+		return new Pair<>(installed, storageChanged);
+	}
+
+	@NonNull
+	private Pair<Boolean, Boolean> installAsSqliteDbTemplate(@NonNull TileSourceTemplate template,
+	                                                         @Nullable String ext,
+	                                                         @Nullable File templateFile,
+	                                                         @NonNull String newName,
+	                                                         @NonNull String urlToLoad) {
+		try {
+			boolean storageChanged = false;
+			if (IndexConstants.SQLITE_EXT.equals(ext)) {
+				List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
+				SQLiteTileSource sqLiteTileSource = new SQLiteTileSource(app, templateFile, knownTemplates);
+				sqLiteTileSource.couldBeDownloadedFromInternet();
+				sqLiteTileSource.updateFromTileSourceTemplate(template);
+			} else {
+				String rule = "";
+				String refer = "";
+				String randoms = "";
+				String userAgent = "";
+				boolean invertedY = false;
+				boolean inversiveZoom = false;
+				boolean timeSupported = expireTimeMinutes > 0;
+				long expirationTimeMillis = expireTimeMinutes * 60 * 1000L;
+
+				SQLiteTileSource sqLiteTileSource = new SQLiteTileSource(
+						app, newName, minZoom, maxZoom, urlToLoad, randoms,
+						elliptic, invertedY, refer, userAgent, timeSupported,
+						expirationTimeMillis, inversiveZoom, rule
+				);
+				sqLiteTileSource.createDataBase();
+				storageChanged = (templateFile != null && templateFile.exists());
+			}
+			return new Pair<>(true, storageChanged);
+		} catch (Exception e) {
+			LOG.error("Error on saving template " + e);
+			return new Pair<>(false, false);
 		}
 	}
 
@@ -551,5 +636,10 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 			}
 			return null;
 		}
+	}
+
+	@FunctionalInterface
+	private interface OnFilePreparedCallback {
+		Pair<Boolean, Boolean> onFilePreparedCallback(@Nullable File file, @Nullable String ext);
 	}
 }

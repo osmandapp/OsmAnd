@@ -11,6 +11,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -24,12 +25,13 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> {
 
 	private static final int APPROXIMATE_MAP_SOURCES_SIZE_BYTES = 450;
 
-	private List<String> existingItemsNames;
+	private Map<String, String> existingTileSources;
 
 	public MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull List<ITileSource> items) {
 		super(app, null, items);
@@ -46,7 +48,7 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	@Override
 	protected void init() {
 		super.init();
-		existingItemsNames = new ArrayList<>(app.getSettings().getTileSourceEntries().values());
+		existingTileSources = app.getSettings().getTileSourceEntries();
 	}
 
 	@NonNull
@@ -161,12 +163,11 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	@Override
 	public boolean isDuplicate(@NonNull ITileSource item) {
-		for (String name : existingItemsNames) {
-			if (name.equals(item.getName())) {
-				return true;
-			}
+		OsmandSettings.TileSourceNameCheck nameCheck = app.getSettings().checkTileSourceNameStatus(item.getName());
+		if (!(nameCheck instanceof OsmandSettings.TileSourceNameCheck.ValidName validNameCheck)) {
+			return false;
 		}
-		return false;
+		return existingTileSources.containsValue(validNameCheck.safeName());
 	}
 
 	@NonNull
