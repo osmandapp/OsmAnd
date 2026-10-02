@@ -2671,7 +2671,7 @@
     <string name="developer_plugin">Πρόσθετο ανάπτυξης</string>
     <string name="replace_point_descr">Αντικατάσταση σημείου με αυτό.</string>
     <string name="app_mode_ski_touring">Χιονοδρομικές βόλτες</string>
-    <string name="app_mode_ski_snowmobile">Χιονοόχημα</string>
+    <string name="app_mode_ski_snowmobile">Σνόουμομπιλ</string>
     <string name="custom_osmand_plugin">Προσαρμοσμένο πρόσθετο OsmAnd</string>
     <string name="shared_string_items">Στοιχεία</string>
     <string name="changes_applied_to_profile">Εφαρμόστηκαν αλλαγές στο προφίλ \'%1$s\'.</string>
@@ -5198,4 +5198,12 @@
     <string name="ais_show_on_the_map">Εμφάνιση στον χάρτη</string>
     <string name="ais_port">Θύρα</string>
     <string name="ais_hide_after">Απόκρυψη μετά από</string>
+    <string name="obd_alt_battery_voltage_desc">Εμφανίζει το επίπεδο τάσης στον αντάπτορα OBD</string>
+    <string name="coordinate_format_add_empty_body">Αναζητήστε σε μια βάση δεδομένων με πάνω από 5,000 τοπικούς και εθνικούς κωδικούς EPSG κατά χώρα, όνομα ή ID.</string>
+    <string name="coordinate_format_last_item_warning">Απαιτείται τουλάχιστον μια μορφή συντεταγμένων.</string>
+    <string name="coordinate_format_description">Προτιμώμενες μορφές για γρήγορη πρόσβαση από το μενού περιβάλλοντος και την αναζήτηση.</string>
+    <string name="free_download_limit_reached">Φτάσατε το όριο των δωρεάν λήψεων</string>
+    <string name="free_download_limit_reached_description">Ξεκλειδώστε απεριόριστες λήψεις χαρτών και ενημερώσεων</string>
+    <string name="tracks_backup_promo_title">Αντίγραφο ασφαλείας και συγχρονισμός των ιχνών σας</string>
+    <string name="tracks_backup_promo_description">Συγχρονίστε τα ίχνη σας μεταξύ των συσκευών σας και του Ιστού με το OsmAnd Pro.</string>
 </resources>
