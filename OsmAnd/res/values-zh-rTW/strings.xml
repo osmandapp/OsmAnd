@@ -5043,8 +5043,8 @@
     <string name="free_download_limit_reached">已經到達免費下載的上限了</string>
     <string name="free_download_limit_reached_description">解鎖無限地圖下載與更新功能</string>
     <string name="get_unlimited_downloads">取得無限下載功能</string>
-    <string name="use_spatial_text_search">使用空間文字搜尋</string>
-    <string name="use_spatial_text_search_description">將標準的快速搜尋 API 替換為實驗性的空間文字搜尋引擎。</string>
+    <string name="use_spatial_search">使用空間文字搜尋</string>
+    <string name="use_spatial_search_description">將標準的快速搜尋 API 替換為實驗性的空間文字搜尋引擎。</string>
     <string name="astro_lunar_eclipse">月食</string>
     <string name="astro_lunar_eclipse_subtitle">探索全球各地的月食</string>
     <string name="astro_previous_lunar_eclipse">上一次月食</string>
@@ -5219,4 +5219,12 @@
     <string name="heap_dump">堆疊轉儲</string>
     <string name="heap_dump_descr">從 java 轉儲計算物件。</string>
     <string name="contour_labels">標籤</string>
+    <string name="contour_label_direction_descr">上坡方向：每個高程數值的頂部朝向地勢更高的一側，如同紙質地圖一般。同理，等高線的短齒線則表示下坡方向。</string>
+    <string name="rendering_attr_contourLabelDirection_name">標註方向</string>
+    <string name="rendering_value_upright_name">正向</string>
+    <string name="rendering_value_uphill_name">上坡</string>
+    <string name="shared_string_visibility">可見性</string>
+    <string name="opening_hours_public_holiday">公共假期</string>
+    <string name="opening_hours_school_holiday">學校假期</string>
+    <string name="opening_hours_easter">復活節</string>
 </resources>

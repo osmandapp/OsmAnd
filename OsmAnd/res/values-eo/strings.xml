@@ -345,7 +345,7 @@
     <string name="lang_ja">Japana</string>
     <string name="lang_es">Hispana</string>
     <string name="shared_string_about">Pri</string>
-    <string name="choose_osmand_theme">Etoso</string>
+    <string name="choose_osmand_theme">Haŭto</string>
     <string name="report">Raportoj</string>
     <string name="storage_permission_restart_is_required">Nun la aplikaĵo estas permesita por skribi en ekstera konservejo, sed permana restarto de aplikaĵo nepras.</string>
     <string name="full_report">Plena raporto</string>
@@ -1534,7 +1534,7 @@
     <string name="osmand_extended_description_part1">OsmAnd (OSM Aŭtomata Navigado Direkte al celo) estas mapa kaj naviga aplikaĵo kun aliro al liberaj, tutmondaj kaj altkvalitaj datumoj de OSM.
 \n
 \nĜuu voĉan kaj vidan navigadon, esploradon de interesejoj (punktoj de intereso), kreadon kaj administradon de GPX‑spuroj, montradon de nivelkurboj kaj informojn pri topografio (per kromprogramo), elekton inter aŭta, bicikla kaj piediranta reĝimoj, OSM‑redaktadon kaj pli.</string>
-    <string name="osmand_extended_description_part2">GPS-navigado \n • Elekti inter eksterreta (neniuj retmigradaj kostoj dum estado eksterlande) kaj enreta (pli rapida) reĝimoj \n • Turno-post-turnaj voĉaj anoncoj gvidos vin al la celo (antaŭregistritaj kaj parolsintezitaj voĉoj) \n • Kurso estos rekalkulita kiam vi devojiĝos \n • Informoj pri koridoroj, strat-nomoj kaj proksimuma tempo de alveno helpos al vi dum vojaĝo \n • Por igi vian veturadon pli sekura, taga/nokta etoso ŝanĝiĝas aŭtomate \n • Elekti montri rapid-limojn kaj avertojn kiam vi trorapidas \n • Map-pligrandigo alĝustiĝas al via rapido \n • Serĉi cel-lokojn laŭ adreso, laŭ speco (ekz. parkumejo, restoracio, hotelo, benzinejo, muzeo) aŭ laŭ geografiaj koordinatoj \n • Subteno por interceloj sur via kurso \n • Registri vian propran GPX-spuron kaj sekvi ĝin</string>
+    <string name="osmand_extended_description_part2">GPS-navigado \n • Elekti inter eksterreta (neniuj retmigradaj kostoj dum estado eksterlande) kaj enreta (pli rapida) reĝimoj \n • Turno-post-turnaj voĉaj anoncoj gvidos vin al la celo (antaŭregistritaj kaj parolsintezitaj voĉoj) \n • Kurso estos rekalkulita kiam vi devojiĝos \n • Informoj pri koridoroj, strat-nomoj kaj proksimuma tempo de alveno helpos al vi dum vojaĝo \n • Por igi vian veturadon pli sekura, taga/nokta haŭto ŝanĝiĝas aŭtomate \n • Elekti montri rapid-limojn kaj avertojn kiam vi trorapidas \n • Map-pligrandigo alĝustiĝas al via rapido \n • Serĉi cel-lokojn laŭ adreso, laŭ speco (ekz. parkumejo, restoracio, hotelo, benzinejo, muzeo) aŭ laŭ geografiaj koordinatoj \n • Subteno por interceloj sur via kurso \n • Registri vian propran GPX-spuron kaj sekvi ĝin</string>
     <string name="osmand_extended_description_part3">Mapo \n • Montrado de interesejoj (punktoj de intereso) ĉirkaŭ vi \n • Orientiĝado de mapo laŭ via direkto de movo (aŭ laŭ kompaso) \n • Montrado kie vi estas kaj kien vi rigardas \n • Diskonigi vian pozicion por ke viaj amikoj povu trovi vin \n • Konservi viajn plej gravajn ejojn en listo de “ŝatataj” \n • Ebligas al vi elekti kiel vidigi nomojn sur la mapo: esperante, en loka lingvo aŭ en fonetika transskribo \n • Montras specialajn enretajn kahelojn, satelitan vidon (de Bing), diversajn surtavolojn kiel piediradajn kursojn kaj aldonajn tavolojn kun agordebla diafaneco</string>
     <string name="osmand_extended_description_part4">Skiado 
 \n La kromprogramo de OsmAnd “skiada map-vido” ebligas al vi vidigi skivojojn kun ilia facileco kaj aliajn taŭgajn informojn, kiel lokojn de skiliftoj kaj aliajn ejojn.</string>
@@ -2251,7 +2251,7 @@
     <string name="map_look_descr">Alĝustigi mapon</string>
     <string name="list_of_installed_plugins">Instalitaj kromprogramoj</string>
     <string name="configure_navigation">Alĝustigi navigadon</string>
-    <string name="general_settings_profile_descr">Etoso, unuoj, regiono</string>
+    <string name="general_settings_profile_descr">Haŭto, unuoj, regiono</string>
     <string name="configure_profile">Agordi profilon</string>
     <string name="screen_alerts_descr">Avertoj montrataj maldekstre sube dum navigado.</string>
     <string name="switch_profile">Ŝanĝi profilon</string>
@@ -4345,11 +4345,11 @@
     <string name="shared_string_colors">Koloroj</string>
     <string name="missing_maps_ignore">Uzi elŝutitajn mapojn</string>
     <string name="daynight_mode_sensor_summary">Uzas lum-sentilon de la aparato kaj agordas map-reĝimon laŭ nivelo de media lumo.</string>
-    <string name="daynight_mode_app_theme_summary">La map-reĝimo agordiĝas laŭ etoso de la aplikaĵo – taga reĝimo por hela etoso kaj nokta reĝimo por malhela etoso.</string>
+    <string name="daynight_mode_app_theme_summary">La map-reĝimo agordiĝas laŭ haŭto de la aplikaĵo – taga reĝimo por hela haŭto kaj nokta reĝimo por malhela haŭto.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Aŭtomate baskuligas inter taga kaj nokta map-reĝimoj surbaze de tempoj de sunleviĝo kaj sunsubiro.</string>
     <string name="daynight_mode_night_summary">Ĉiam vidigas la mapon en nokta map-reĝimo, kiu taŭgas por uzi nokte kaj mallume.</string>
     <string name="daynight_mode_day_summary">Ĉiam vidigas mapon en taga map-reĝimo, kiu plej taŭgas por uzi tage.</string>
-    <string name="daynight_mode_app_theme">Etoso de aplikaĵo</string>
+    <string name="daynight_mode_app_theme">Haŭto de aplikaĵo</string>
     <string name="key_event_action_continuous_zoom_out">Seninterrompa malgrandigo</string>
     <string name="remove_key_assignment_summary">Forigi klav-asignon por la elektita ago.</string>
     <string name="map_settings_weather_wind_animation">Vento (movbilda)</string>
@@ -4397,7 +4397,7 @@
     <string name="quick_action_verb_show_hide">Montri / kaŝi</string>
     <string name="quick_action_map_underlay">Subtavolo</string>
     <string name="app_profile">Aplikaĵa profilo</string>
-    <string name="release_4_8">• nova eblo por kolorigi terenon: “Altitudo” \n \n• alĝustigeblaj koloroj por tereno, spuroj kaj kursoj \n \n• 3-dimensiaj bildsimboloj de pozicio \n \n• rapida ago povas esti asignita al ekstera klavaro \n \n• vetero: modernigita fasado, movbilda vento \n \n• spuroj: plibonigoj al 3-dimensia vidigo \n \n• etendita elekto de turismaj kursoj sur la mapo \n \n• eblo agordi aplikaĵan etoson laŭ map-reĝimo \n \n• riparitaj statistikoj pri spuroj, ordigado kaj serĉado \n \n• OSM-redaktilo: forigis simplan (uzantnomo+pasvorto) aŭtentigan metodon \n \n• transiro al la operaciuma koniga folio «System Share Sheet» komence de Android 14</string>
+    <string name="release_4_8">• nova eblo por kolorigi terenon: “Altitudo” \n \n• alĝustigeblaj koloroj por tereno, spuroj kaj kursoj \n \n• 3-dimensiaj bildsimboloj de pozicio \n \n• rapida ago povas esti asignita al ekstera klavaro \n \n• vetero: modernigita fasado, movbilda vento \n \n• spuroj: plibonigoj al 3-dimensia vidigo \n \n• etendita elekto de turismaj kursoj sur la mapo \n \n• eblo agordi aplikaĵan haŭton laŭ map-reĝimo \n \n• riparitaj statistikoj pri spuroj, ordigado kaj serĉado \n \n• OSM-redaktilo: forigis simplan (uzantnomo+pasvorto) aŭtentigan metodon \n \n• transiro al la operaciuma koniga folio «System Share Sheet» komence de Android 14</string>
     <string name="energy_avg_info">Statistiko pri energio (mezume 1 /5 /15 minutoj)</string>
     <string name="energy_avg_info_description">Bateri-nivelo je minuto: %1$s
 \nKonsumo de energio (mAh): %2$s</string>
@@ -5271,8 +5271,8 @@
     <string name="media_storage_camera_folder_note_descr">Sonaj dosieroj konserviĝos en la dosierujo Music/OsmAnd.</string>
     <string name="always_keep_local_copy">Ĉiam teni lokan kopion</string>
     <string name="always_keep_local_copy_description">Aŭdvidaĵoj ne foriĝos, eĉ kiam la originala dosiero estos forigita el la galerio aŭ dosieroj.</string>
-    <string name="use_spatial_text_search">Uzi spacan serĉilon</string>
-    <string name="use_spatial_text_search_description">Anstataŭigi la norman rapidan serĉilon per la testa spaca serĉilo.</string>
+    <string name="use_spatial_search">Uzi spacan serĉilon</string>
+    <string name="use_spatial_search_description">Anstataŭigi la norman rapidan serĉilon per la testa spaca serĉilo.</string>
     <string name="astro_lunar_eclipse">Luna eklipso</string>
     <string name="astro_lunar_eclipse_subtitle">Esplori lunajn eklipsojn tuttere</string>
     <string name="astro_previous_lunar_eclipse">Antaŭa luna eklipso</string>
@@ -5351,4 +5351,34 @@
     <string name="battery_saving_mode_descr">Limigi bildigon de mapo al 20 kadroj en sekundo por malpliigi uzadon de baterio kaj varmiĝon de la aparato. Movado de mapo iĝos malpli flua.</string>
     <string name="crash_report_sent">Sendis raporton. Dankon!</string>
     <string name="crash_report_send_failed">Ne povis sendi raporton. Reprovu poste.</string>
+    <string name="contour_labels">Etikedoj</string>
+    <string name="contour_label_direction_descr">Laŭsupre: supro de ĉiu valoro de altitudo direktas al pli alta deklivo, same kiel en paperaj topografiaj mapoj. Malsupro de nombro montras malsupron de deklivo.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Direkto de etikedoj</string>
+    <string name="rendering_value_upright_name">vertikale</string>
+    <string name="rendering_value_uphill_name">laŭsupre</string>
+    <string name="shared_string_visibility">Videblo</string>
+    <string name="opening_hours_public_holiday">ŝtatfestoj</string>
+    <string name="opening_hours_school_holiday">lernej-ferioj</string>
+    <string name="opening_hours_easter">Pasko</string>
+    <string name="ais_connection_not_set_up">Neagordita</string>
+    <string name="ais_connection_not_connected">Nekonektita</string>
+    <string name="ais_connection_connecting">Konektado…</string>
+    <string name="ais_connection_no_data">Ricevis neniujn datumojn</string>
+    <string name="ais_connection_failed">Malsukcesis konekti</string>
+    <string name="ais_connection_set_up">Agordi konekton</string>
+    <string name="ais_use_nmea_location">Uzi kiel fonton de pozicio</string>
+    <string name="ais_use_nmea_location_desc">Anstataŭigi pozicion de la aparato per pozicio de la NMEA-elsendfluo.</string>
+    <string name="ais_run_in_background">Labori fone</string>
+    <string name="ais_run_in_background_desc">Pluigi ricevi datumojn kiam la ekrano estas malŝaltita.</string>
+    <string name="ais_vessels_on_the_map">Ŝipoj sur la mapo: %1$d</string>
+    <string name="ais_no_position_data">Neniuj datumoj pri pozicio</string>
+    <string name="ais_receiving_position_data">Ricevas datumojn pri pozicio</string>
+    <string name="ais_vessels_on_the_map_group">Ŝipoj sur la mapo</string>
+    <string name="ais_objects_visibility">Videblo de objektoj</string>
+    <string name="ais_objects_visibility_summary">Kaŝi post %1$s</string>
+    <string name="ais_objects_visibility_desc">Agordi kiam ŝipoj sen signalo estos forstrekitaj kaj kiam ili estos forigitaj el la mapo.</string>
+    <string name="ais_collision_warning">Averto pri kolizio (CPA)</string>
+    <string name="ais_collision_warning_short">Averto pri kolizio</string>
+    <string name="ais_my_vessel">Mia ŝipo</string>
+    <string name="ais_mmsi">MMSI</string>
 </resources>

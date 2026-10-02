@@ -5081,8 +5081,8 @@
     <string name="media_storage_camera_folder_note_descr">El audio se guarda en Music/OsmAnd.</string>
     <string name="always_keep_local_copy">Siempre conservar una copia local</string>
     <string name="always_keep_local_copy_description">Los archivos multimedia permanecen adjuntos incluso si el original se elimina de la galería o de los archivos.</string>
-    <string name="use_spatial_text_search">Utilizar la búsqueda de texto espacial</string>
-    <string name="use_spatial_text_search_description">Sustituya las API de búsqueda rápida estándar por el motor de búsqueda de texto espacial experimental.</string>
+    <string name="use_spatial_search">Utilizar la búsqueda de texto espacial</string>
+    <string name="use_spatial_search_description">Sustituya las API de búsqueda rápida estándar por el motor de búsqueda de texto espacial experimental.</string>
     <string name="astro_lunar_eclipse">Eclipse lunar</string>
     <string name="astro_lunar_eclipse_subtitle">Explorar los eclipses lunares en el mundo</string>
     <string name="astro_previous_lunar_eclipse">Eclipse lunar previo</string>

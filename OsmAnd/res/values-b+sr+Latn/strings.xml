@@ -532,8 +532,8 @@
     <string name="layer_overlay">Pomoćna mapa iznad osnovne</string>
     <string name="map_underlay">Mapa ispod</string>
     <string name="layer_underlay">Pomoćna mapa u pozadini</string>
-    <string name="map_transparency">Prozirnost osnovne mape</string>
-    <string name="overlay_transparency">Transparetnost sloja iznad</string>
+    <string name="map_transparency">Vidljivost osnovne mape</string>
+    <string name="overlay_transparency">Vidljivost sloja iznad</string>
     <string name="warning_tile_layer_not_downloadable">Program nije uspeo da preuzme nivo sa mapama %1$s, reinstalacija programa može da pomogne.</string>
     <string name="voice_stream_music">Zvuk multimedije/ navođenja</string>
     <string name="switch_to_vector_map_to_see">Postojeće vektorske mape za ovaj lokaciju. 
@@ -1157,7 +1157,7 @@
     <string name="download_files_error_not_enough_space">Nema dovoljno prostora! 
 \n {3} MB je privremeno potrebno, a {1} MB trajno. 
 \n (dostupno je samo {2} MB.)</string>
-    <string name="show_transparency_seekbar">Prikazati regulator prozirnosti</string>
+    <string name="show_transparency_seekbar">Prikaži klizač vidljivosti</string>
     <string name="upload_anonymously">Otpremi anonimno</string>
     <string name="select_map_marker">Odaberi marker</string>
     <string name="osm_live_ask_for_purchase">Prvo kupi pretplatu na OsmAnd Live</string>
@@ -2025,7 +2025,7 @@
     <string name="turn_screen_on_power_button">Dugme za isključivanje</string>
     <string name="turn_screen_on_proximity_sensor">Senzor pokreta</string>
     <string name="turn_screen_on_wake_time_descr">Odaberi vreme isteka ekrana posle buđenja. (\"%1$s\" se odnosi na vreme isteka.)</string>
-    <string name="keep_screen_on">Drži ekran uključenim</string>
+    <string name="keep_screen_on">Drži ekran uključen</string>
     <string name="pseudo_mercator_projection">Pseudo-Merkator projekcija</string>
     <string name="one_image_per_tile">Jedna slika po sličici mape</string>
     <string name="sqlite_db_file">SQLiteDB fajl</string>
@@ -2903,7 +2903,7 @@
     <string name="activity_type_riding_name">Jahanje</string>
     <string name="activity_type_racing_name">Trkanje</string>
     <string name="activity_type_mountainbike_name">Planinski bicikl</string>
-    <string name="activity_type_cycling_name">Bicikl</string>
+    <string name="activity_type_cycling_name">Biciklizam</string>
     <string name="activity_type_hiking_name">Planinarenje</string>
     <string name="activity_type_running_name">Trčanje</string>
     <string name="activity_type_walking_name">Pešačenje</string>
@@ -5141,19 +5141,19 @@
     <string name="shared_string_media">Mediji</string>
     <string name="no_media">Nema medija</string>
     <string name="no_media_descr">Možete dodati fotografije, video zapise ili audio beleške sa kamere ili biblioteke.</string>
-    <string name="navigate_point_format_maidenhead">Mejdenhed</string>
+    <string name="navigate_point_format_maidenhead">Meidenhed</string>
     <string name="navigate_point_east_coordinate">Istočna koordinata</string>
     <string name="navigate_point_north_coordinate">Severna koordinata</string>
     <string name="drag_to_reorder_content_description">Prevucite da biste promenili redosled</string>
     <string name="coordinate_format_add_title">Dodaj format</string>
-    <string name="coordinate_format_add_empty_body">Pretražite bazu podataka sa preko 5.000 lokalnih i nacionalnih EPSG kodova po zemlji, imenu ili ID-u.</string>
+    <string name="coordinate_format_add_empty_body">Pretražite bazu podataka sa više od 5.000 lokalnih i nacionalnih EPSG kodova prema zemlji, nazivu ili identifikatoru.</string>
     <string name="coordinate_format_add_empty_title">Tražite određeni format?</string>
     <string name="coordinate_format_add_search_hint">Pretražite EPSG kod ili naziv formata</string>
     <string name="coordinate_format_cancel_changes_message">Odbaciti izmene formata koordinata?</string>
     <string name="coordinate_format_cancel_changes_title">Nesačuvane izmene</string>
-    <string name="coordinate_format_description">Preferirani formati za brzi pristup iz kontekstnog menija i pretrage.</string>
+    <string name="coordinate_format_description">Željeni formati za brzi pristup iz kontekstnog menija i pretrage.</string>
     <string name="coordinate_format_discard_changes">Odbaci izmene</string>
-    <string name="coordinate_format_last_item_warning">Potreban je barem jedan format koordinata.</string>
+    <string name="coordinate_format_last_item_warning">Potreban je bar jedan format koordinata.</string>
     <string name="coordinate_format_select_other">Izaberite drugi format</string>
     <string name="coordinate_format_primary">Primarni</string>
     <string name="gallery_media_playback_error">Nije moguće reprodukovati medij.</string>
@@ -5296,17 +5296,17 @@
     <string name="astro_lunar_eclipse_map_error">Region vidljivosti pomračenja Meseca trenutno nije dostupan.</string>
     <string name="astro_lunar_eclipse_rendering_note">Nijansa mape: Mesec iznad horizonta. Boje senki i osvetljenost su šematski.</string>
     <string name="custom_widget_colors">Prilagođene boje vidžeta</string>
-    <string name="custom_widget_colors_description">Poboljšajte čitljivost u pokretu. Otključajte prilagođavanje u punoj boji kako biste osigurali savršenu vidljivost vidžeta na bilo kojoj pozadini mape, danju ili noću.</string>
+    <string name="custom_widget_colors_description">Poboljšajte čitljivost tokom kretanja. Otključajte opcije za potpuno prilagođavanje boja kako biste osigurali savršenu vidljivost vidžeta na bilo kojoj pozadini mape, danju ili noću.</string>
     <string name="unlock_custom_colors">Otključaj prilagođene boje</string>
     <string name="text_color">Boja teksta</string>
     <string name="secondary_text_color">Boja sekundarnog teksta</string>
     <string name="background_color">Boja pozadine</string>
     <string name="widget_height">Visina vidžeta</string>
     <string name="row_height">Visina reda</string>
-    <string name="shared_string_transparent">Transparentno</string>
+    <string name="shared_string_transparent">Providan</string>
     <string name="panel_appearance_original_description">%1$s zadržava pojedinačnu veličinu i ikonu za svaki vidžet.</string>
     <string name="copy_from">Kopiraj iz</string>
-    <string name="another_profile">Još jedan profil</string>
+    <string name="another_profile">Drugi profil</string>
     <string name="duplicate_map">Duplikat mape</string>
     <string name="duplicate_map_standard_exists_desc">Već imate standardnu mapu za %1$s. Preuzimanje mape samo za puteve će duplirati podatke i može smanjiti performanse.\n\nZamena će ukloniti pretragu adresa i podatke o TOI koje su uključene u standardnu mapu.</string>
     <string name="duplicate_map_road_only_exists_desc">Već imate mapu samo za puteve za %1$s. Preuzimanje standardne mape će duplirati podatke i može smanjiti performanse.</string>
@@ -5314,8 +5314,8 @@
     <string name="duplicate_map_replace_with_road">Zameni sa Samo-putevi</string>
     <string name="rendering_attr_surface_clay_name">Glina</string>
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
-    <string name="use_spatial_text_search">Koristite prostornu pretragu teksta</string>
-    <string name="use_spatial_text_search_description">Zamenite standardne API-je za brzu pretragu eksperimentalnom pretragom prostornog teksta.</string>
+    <string name="use_spatial_search">Koristite prostornu pretragu teksta</string>
+    <string name="use_spatial_search_description">Zamenite standardne API-je za brzu pretragu eksperimentalnom pretragom prostornog teksta.</string>
     <string name="always_keep_local_copy">Uvek čuvaj lokalnu kopiju</string>
     <string name="always_keep_local_copy_description">Mediji ostaju pričvršćeni čak i ako se original obriše iz galerije ili fajlova.</string>
     <string name="release_5_4">• Osveženi KI pretrage: sortiranje, filteri kategorija, čistiji izgled\n\n • Priložite fotografije i medije omiljenima\n\n • Omiljeni: podrška za podgrupe i fascikle koje se mogu zakačiti\n\n • Koordinate: pretraga, mreža mape i prikaz TOI sada podržavaju EPSG i lokator Mejdenheda\n\n • Ispravljeni prekidi navigacije; prebacivanje između standardnog i brzog rutiranja\n\n • Podesite razmeru mape za Android Auto odvojeno od telefona\n\n • Nova prostorna pretraga — pronađite mesta i pretražite oko mesta\n\n • Astronomija je dodala pomračenja Sunca i Meseca</string>
@@ -5420,4 +5420,14 @@
     <string name="quick_action_showhide_panoramax_descr">Prekidač za prikazivanje ili skrivanje Panoramaks sloja na mapi.</string>
     <string name="panoramax_menu_filter_description_new">Filtrirajte snimke prema autoru, datumu ili vrsti.</string>
     <string name="plugin_panoramax_descr">Prikažite snimke sa nivoa ulice sa Panoramaksa, federativne platforme otvorenog tipa za foto-mapiranje, kao sloj preko mape. Ovo je korisno za proveru postojeće pokrivenosti i planiranje snimanja preostalih delova.</string>
+    <string name="contour_labels">Natpisi</string>
+    <string name="contour_label_direction_descr">Uspon: vrh svake brojčane oznake nadmorske visine okrenut je ka višem terenu, kao na papirnim topografskim kartama. Kratke crtice na linijama usmerene su nizbrdo.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Смер натписа</string>
+    <string name="rendering_value_upright_name">Uspravno</string>
+    <string name="rendering_value_uphill_name">Uzbrdo</string>
+    <string name="shared_string_visibility">Vidljivost</string>
+    <string name="opening_hours_public_holiday">Državni praznici</string>
+    <string name="opening_hours_school_holiday">Školski raspusti</string>
+    <string name="opening_hours_easter">Uskrs</string>
+    <string name="city_type_boundary">Kvart</string>
 </resources>

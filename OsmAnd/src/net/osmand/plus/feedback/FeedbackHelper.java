@@ -25,6 +25,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,12 +45,18 @@ public class FeedbackHelper {
 	public static final String EXCEPTION_PATH = "exception.log";
 	private static final String STATE_PATH = "state.txt";
 	private static final String EXIT_INFO_PATH = "exit_info.txt";
+	private static final String LOGCAT_PATH = "logcat.txt";
 	private static final String CRASH_REPORT_URL = "https://osmand.net/api/crash-report";
 	private static final int MAX_SYSTEM_CRASH_LOGS_IN_REPORT = 3;
 	// the memory log is kept at this size on disk too, so the whole ring travels; as text it
 	// compresses to a couple of hundred kilobytes
 	private static final long MAX_MEMORY_LOG_IN_REPORT = 4 * 1024 * 1024;
 	private static final long MAX_EXCEPTION_LOG_IN_REPORT = 10 * 1024 * 1024;
+	// the newest lines of this app's logcat: ART writes every GC longer than 100 ms, blocking GC
+	// waits, monitor contention and its own abort message under the app's uid, and the buffer
+	// keeps the lines of the previous process too until it wraps
+	private static final int LOGCAT_LINES_IN_REPORT = 700;
+	private static final long MAX_LOGCAT_IN_REPORT = 256 * 1024;
 
 	private final OsmandApplication app;
 	private final ExceptionHandler exceptionHandler;
@@ -179,7 +186,37 @@ public class FeedbackHelper {
 		for (File file : files.subList(0, Math.min(files.size(), MAX_SYSTEM_CRASH_LOGS_IN_REPORT))) {
 			putZipEntry(zip, file, Long.MAX_VALUE);
 		}
+		byte[] logcat = readLogcat();
+		if (logcat != null && logcat.length > 0) {
+			putZipEntry(zip, LOGCAT_PATH, logcat);
+		}
 		zip.finish();
+	}
+
+	// an app reads only its own uid from logcat, no permission is needed; "-d" returns at once
+	@Nullable
+	private byte[] readLogcat() {
+		String[] command = {"logcat", "-d", "-v", "time", "-t", String.valueOf(LOGCAT_LINES_IN_REPORT)};
+		Process process = null;
+		try {
+			process = Runtime.getRuntime().exec(command);
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			try (InputStream in = process.getInputStream()) {
+				byte[] buffer = new byte[8192];
+				int read;
+				while ((read = in.read(buffer)) != -1 && out.size() < MAX_LOGCAT_IN_REPORT) {
+					out.write(buffer, 0, read);
+				}
+			}
+			return out.toByteArray();
+		} catch (IOException | RuntimeException e) {
+			log.error("Cannot read logcat for the crash report", e);
+			return null;
+		} finally {
+			if (process != null) {
+				process.destroy();
+			}
+		}
 	}
 
 	private static void putZipEntry(@NonNull ZipOutputStream zip, @NonNull String name, @NonNull byte[] content) throws IOException {

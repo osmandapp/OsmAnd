@@ -5185,4 +5185,17 @@
     <string name="poi_air_conditioning_yes">Tá</string>
     <string name="poi_air_conditioning_no">Níl</string>
     <string name="poi_disc_golf_course">Cúrsa gailf diosca</string>
+    <string name="poi_dancing_school">Scoil rince</string>
+    <string name="poi_student_accommodation">Cóiríocht do mhic léinn</string>
+    <string name="poi_healthcare_counselling">Comhairleoireacht</string>
+    <string name="poi_healthcare_birthing_centre">Ionad breithe</string>
+    <string name="poi_craft_cleaning">Seirbhís ghlanacháin</string>
+    <string name="poi_craft_printer">Printéir</string>
+    <string name="poi_craft_signmaker">Déantóir comharthaí</string>
+    <string name="poi_funeral_hall">Halla sochraide</string>
+    <string name="poi_post_depot">Ionad dáileacháin poist</string>
+    <string name="poi_indoor_play">Clós súgartha faoi dhíon</string>
+    <string name="poi_traffic_park">Páirc tráchta</string>
+    <string name="poi_animal_breeding">Pórú ainmhithe</string>
+    <string name="poi_stables">Stáblaí</string>
 </resources>

@@ -186,8 +186,8 @@
     <string name="voice_stream_notification">Upozornění</string>
     <string name="voice_stream_music">Média/zvuky navigace</string>
     <string name="warning_tile_layer_not_downloadable">Data pro mapovou vrstvu %1$s nelze stáhnout, reinstalace může pomoci.</string>
-    <string name="overlay_transparency">Průhlednost překryvu</string>
-    <string name="map_transparency">Průhlednost základní mapy</string>
+    <string name="overlay_transparency">Viditelnost překryvu</string>
+    <string name="map_transparency">Viditelnost základní mapy</string>
     <string name="layer_underlay">Podkladová mapa…</string>
     <string name="map_underlay">Podkresová mapa</string>
     <string name="layer_overlay">Překryvná mapa…</string>
@@ -1284,7 +1284,7 @@
     <string name="shared_string_read_more">Číst více</string>
     <string name="select_map_marker">Vyberte mapovou značku</string>
     <string name="upload_anonymously">Nahrát anonymně</string>
-    <string name="show_transparency_seekbar">Zobrazit posuvník průhlednosti</string>
+    <string name="show_transparency_seekbar">Zobrazit posuvník viditelnosti</string>
     <string name="download_files_error_not_enough_space">Nedostatek místa!
 \nV úložišti je zapotřebí dočasně {3} MB a trvale {1} MB.
 \n(Aktuálně je k dispozici pouze {2} MB.)</string>
@@ -5273,8 +5273,8 @@
     <string name="release_5_4">• Vylepšené uživatelské rozhraní vyhledávání: třídění, filtry podle kategorií, přehlednější vzhled\n\n • Přidávání fotografií a médií do oblíbených\n\n • Oblíbené: podskupiny a složky, které lze připnout\n\n • Souřadnice: vyhledávání, mapová mřížka a zobrazení bodů zájmu (POI) nyní podporují lokátory EPSG a Maidenhead\n\n • Opraveny výpadky navigace; přepínání mezi standardním a rychlým trasováním\n\n • Nastavení měřítka mapy v Android Auto nezávisle na nastavení v telefonu\n\n • Nové prostorové vyhledávání — vyhledávání míst a okolí daného místa\n\n • Do sekce Astronomie přidány sluneční a měsíční zatmění</string>
     <string name="always_keep_local_copy">Vždy držte lokální kopii</string>
     <string name="always_keep_local_copy_description">Media zůstávají připojena i v případě, že je originál odstraněn z galerie nebo souborů.</string>
-    <string name="use_spatial_text_search">Použít prostorové vyhledávání textu</string>
-    <string name="use_spatial_text_search_description">Nahradit standardní rychlé vyhledávací rozhraní API s experimentálním systémem pro vyhledávání textu.</string>
+    <string name="use_spatial_search">Použít prostorové vyhledávání textu</string>
+    <string name="use_spatial_search_description">Nahradit standardní rychlé vyhledávací rozhraní API s experimentálním systémem pro vyhledávání textu.</string>
     <string name="astro_lunar_eclipse">Měsíční zatmění</string>
     <string name="astro_lunar_eclipse_subtitle">Prozkoumejte po celém světě zatmění Měsíce</string>
     <string name="astro_previous_lunar_eclipse">Předchozí zatmění Měsíce</string>
