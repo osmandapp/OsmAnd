@@ -60,6 +60,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	private FavouritePoint favorite;
 	@Nullable
 	private FavoriteGroup group;
+	@Nullable
+	private String originalIconName;
 
 	private boolean saved;
 
@@ -77,6 +79,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			this.favorite = favorite;
 			this.group = favouritesHelper.getGroup(favorite);
 			this.selectedGroup = group != null ? group.toPointsGroup(app) : null;
+			this.originalIconName = getOriginalIconName();
 
 			setColor(getInitialColor());
 			setIcon(getInitialIconId());
@@ -188,8 +191,27 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return getDefaultIconName();
 	}
 
+	@Nullable
+	private String getOriginalIconName() {
+		FavouritePoint favorite = getFavorite();
+		if (favorite != null) {
+			int iconId = favouritesHelper.getOriginalIconId(favorite);
+			String iconName = RenderingIcons.getBigIconName(iconId);
+			if (!Algorithms.isEmpty(iconName)) {
+				return iconName;
+			}
+		}
+		return null;
+	}
+
+	@NonNull
+	@Override
+	protected EditorIconController getIconController() {
+		return EditorIconController.getInstance(app, this, getIconName(), originalIconName);
+	}
+
 	private void selectIconInController() {
-		EditorIconController controller = EditorIconController.getInstance(app, this, getIconName());
+		EditorIconController controller = getIconController();
 		controller.onIconSelectedFromPalette(getIconName(), getIconCategoryKey(controller, getIconName()));
 	}
 

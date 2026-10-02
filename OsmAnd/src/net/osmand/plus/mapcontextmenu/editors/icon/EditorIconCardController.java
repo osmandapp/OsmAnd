@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors.icon;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,10 +11,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
+import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.card.icon.IconsPaletteController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +82,12 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container,
 	                              boolean nightMode, boolean usedOnMap) {
 		container.removeAllViews();
+		if (EditorIconController.ORIGINAL_KEY.equals(centralController.getSelectedCategory().getKey())) {
+			LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
+			inflater.inflate(R.layout.list_item_divider_with_padding_basic, container, true);
+			container.addView(new DescriptionCard(activity, R.string.original_point_icon_description).build());
+			return;
+		}
 		paletteController.setIcons(getSelectedCategoryIconKeys());
 		paletteController.setSelectedIcon(getSelectedIconKey());
 		container.addView(new IconsPaletteCard<>(activity, paletteController, usedOnMap).build());

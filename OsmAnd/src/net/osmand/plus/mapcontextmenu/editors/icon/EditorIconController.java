@@ -45,6 +45,7 @@ public class EditorIconController extends BaseDialogController {
 	private static final int LAST_USED_ICONS_LIMIT = 12;
 
 	private static final String POI_CATEGORIES_FILE = "poi_categories.json";
+	public static final String ORIGINAL_KEY = "original";
 	public static final String LAST_USED_KEY = "last_used_icons";
 	public static final String SPECIAL_KEY = "special";
 	public static final String SYMBOLS_KEY = "symbols";
@@ -55,6 +56,8 @@ public class EditorIconController extends BaseDialogController {
 	protected IconsCategory selectedCategory;
 	protected List<String> lastUsedIcons;
 	private String selectedIconKey;
+	@Nullable
+	private String originalIconKey;
 
 	protected EditorIconCardController cardController;
 	private EditorIconScreenController screenController;
@@ -76,6 +79,9 @@ public class EditorIconController extends BaseDialogController {
 	}
 
 	protected void initIconCategories() {
+		if (originalIconKey != null) {
+			categories.add(new IconsCategory(ORIGINAL_KEY, app.getString(R.string.shared_string_original), new ArrayList<>(), true));
+		}
 		initLastUsedCategory();
 		initAssetsCategories();
 		initActivitiesCategory();
@@ -212,6 +218,9 @@ public class EditorIconController extends BaseDialogController {
 		this.selectedCategory = category;
 		cardController.updateSelectedCardState();
 		screenController.updateSelectedCategory();
+		if (originalIconKey != null && ORIGINAL_KEY.equals(category.getKey())) {
+			onIconSelectedFromPalette(originalIconKey, null);
+		}
 	}
 
 	@NonNull
@@ -353,11 +362,13 @@ public class EditorIconController extends BaseDialogController {
 	}
 
 	@NonNull
-	public static EditorIconController getInstance(@NonNull OsmandApplication app, @NonNull Fragment targetFragment, @Nullable String preselectedIconKey) {
+	public static EditorIconController getInstance(@NonNull OsmandApplication app, @NonNull Fragment targetFragment, @Nullable String preselectedIconKey,
+	                                               @Nullable String originalIconKey) {
 		DialogManager dialogManager = app.getDialogManager();
 		EditorIconController controller = (EditorIconController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
 			controller = new EditorIconController(app);
+			controller.originalIconKey = originalIconKey;
 			controller.setSelectedIconKey(preselectedIconKey);
 			controller.init();
 			dialogManager.register(PROCESS_ID, controller);
