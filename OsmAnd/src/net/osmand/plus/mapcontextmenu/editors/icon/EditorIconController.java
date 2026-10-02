@@ -45,6 +45,7 @@ public class EditorIconController extends BaseDialogController {
 	private static final int LAST_USED_ICONS_LIMIT = 12;
 
 	private static final String POI_CATEGORIES_FILE = "poi_categories.json";
+	public static final String ORIGINAL_KEY = "original";
 	public static final String LAST_USED_KEY = "last_used_icons";
 	public static final String SPECIAL_KEY = "special";
 	public static final String SYMBOLS_KEY = "symbols";
@@ -55,6 +56,7 @@ public class EditorIconController extends BaseDialogController {
 	protected IconsCategory selectedCategory;
 	protected List<String> lastUsedIcons;
 	private String selectedIconKey;
+	private String originalIconKey;
 
 	protected EditorIconCardController cardController;
 	private EditorIconScreenController screenController;
@@ -76,11 +78,18 @@ public class EditorIconController extends BaseDialogController {
 	}
 
 	protected void initIconCategories() {
+		initOriginalCategory();
 		initLastUsedCategory();
 		initAssetsCategories();
 		initActivitiesCategory();
 		initPoiCategories();
 		sortCategories();
+	}
+
+	protected void initOriginalCategory() {
+		if (originalIconKey != null) {
+			categories.add(new IconsCategory(ORIGINAL_KEY, app.getString(R.string.shared_string_original), List.of(originalIconKey), true));
+		}
 	}
 
 	protected void initLastUsedCategory() {
@@ -212,6 +221,14 @@ public class EditorIconController extends BaseDialogController {
 		this.selectedCategory = category;
 		cardController.updateSelectedCardState();
 		screenController.updateSelectedCategory();
+		if (ORIGINAL_KEY.equals(category.getKey())) {
+			onOriginalCategorySelected();
+		}
+	}
+
+	protected void onOriginalCategorySelected() {
+		onIconSelectedFromPalette(originalIconKey, null);
+		cardController.updateIconsSelection();
 	}
 
 	@NonNull
@@ -258,6 +275,15 @@ public class EditorIconController extends BaseDialogController {
 
 	public void setSelectedIconKey(@Nullable String selectedIconKey) {
 		this.selectedIconKey = selectedIconKey;
+	}
+
+	@Nullable
+	public String getOriginalIconKey() {
+		return originalIconKey;
+	}
+
+	public void setOriginalIconKey(@Nullable String originalIconKey) {
+		this.originalIconKey = originalIconKey;
 	}
 
 	@ColorInt
@@ -309,13 +335,21 @@ public class EditorIconController extends BaseDialogController {
 
 	@NonNull
 	protected IconsCategory findInitialIconCategory() {
-		return findIconCategory(getSelectedIconKey());
+		return findIconCategory(getSelectedIconKey(), Set.of(ORIGINAL_KEY));
 	}
 
 	@NonNull
 	protected IconsCategory findIconCategory(@Nullable String iconKey) {
+		return findIconCategory(iconKey, null);
+	}
+
+	@NonNull
+	protected IconsCategory findIconCategory(@Nullable String iconKey, @Nullable Collection<String> categoriesToSkip) {
 		if (iconKey != null) {
 			for (IconsCategory category : categories) {
+				if (categoriesToSkip != null && categoriesToSkip.contains(category.getKey())) {
+					continue;
+				}
 				if (category.containsIcon(iconKey)) {
 					return category;
 				}
@@ -338,7 +372,11 @@ public class EditorIconController extends BaseDialogController {
 
 	@NonNull
 	protected IconsCategory getDefaultCategory() {
-		return categories.get(0);
+		IconsCategory category = categories.get(0);
+		if (category.getKey().equals(ORIGINAL_KEY)) {
+			category = categories.get(1);
+		}
+		return category;
 	}
 
 	@NonNull
@@ -353,12 +391,23 @@ public class EditorIconController extends BaseDialogController {
 	}
 
 	@NonNull
-	public static EditorIconController getInstance(@NonNull OsmandApplication app, @NonNull Fragment targetFragment, @Nullable String preselectedIconKey) {
+	public static EditorIconController getInstance(@NonNull OsmandApplication app,
+	                                               @NonNull Fragment targetFragment,
+	                                               @Nullable String preselectedIconKey) {
+		return getInstance(app, targetFragment, preselectedIconKey, null);
+	}
+
+	@NonNull
+	public static EditorIconController getInstance(@NonNull OsmandApplication app,
+	                                               @NonNull Fragment targetFragment,
+	                                               @Nullable String preselectedIconKey,
+	                                               @Nullable String originalIconKey) {
 		DialogManager dialogManager = app.getDialogManager();
 		EditorIconController controller = (EditorIconController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
 			controller = new EditorIconController(app);
 			controller.setSelectedIconKey(preselectedIconKey);
+			controller.setOriginalIconKey(originalIconKey);
 			controller.init();
 			dialogManager.register(PROCESS_ID, controller);
 		}

@@ -60,6 +60,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	private FavouritePoint favorite;
 	@Nullable
 	private FavoriteGroup group;
+	@Nullable
+	private String originalIconKey;
 
 	private boolean saved;
 
@@ -77,11 +79,25 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			this.favorite = favorite;
 			this.group = favouritesHelper.getGroup(favorite);
 			this.selectedGroup = group != null ? group.toPointsGroup(app) : null;
+			this.originalIconKey = retrieveOriginalIconKey();
 
 			setColor(getInitialColor());
 			setIcon(getInitialIconId());
 			setBackgroundType(getInitialBackgroundType());
 		}
+	}
+
+	@Nullable
+	protected String retrieveOriginalIconKey() {
+		FavouritePoint favorite = getFavorite();
+		if (favorite == null) {
+			return null;
+		}
+		int iconId = favorite.getIconId();
+		if (iconId == 0) {
+			return null;
+		}
+		return RenderingIcons.getBigIconName(iconId);
 	}
 
 	private void setupEditor() {
@@ -112,6 +128,12 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	private void replacePressed() {
 		callActivity(activity -> SelectFavouriteToReplaceBottomSheet.showInstance(activity, this));
+	}
+
+	@NonNull
+	@Override
+	protected EditorIconController getIconController() {
+		return EditorIconController.getInstance(app, this, getIconName(), originalIconKey);
 	}
 
 	@Nullable
@@ -189,13 +211,16 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	private void selectIconInController() {
-		EditorIconController controller = EditorIconController.getInstance(app, this, getIconName());
+		EditorIconController controller = getIconController();
 		controller.onIconSelectedFromPalette(getIconName(), getIconCategoryKey(controller, getIconName()));
 	}
 
 	@Nullable
 	private String getIconCategoryKey(@NonNull EditorIconController controller, @NonNull String iconName) {
 		for (IconsCategory category : controller.getCategories()) {
+			if (category.getKey().equals(EditorIconController.ORIGINAL_KEY)) {
+				continue;
+			}
 			if (category.containsIcon(iconName)) {
 				return category.getKey();
 			}

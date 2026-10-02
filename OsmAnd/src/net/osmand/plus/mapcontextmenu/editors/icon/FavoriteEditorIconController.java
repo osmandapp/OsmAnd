@@ -21,7 +21,6 @@ public class FavoriteEditorIconController extends EditorIconController {
 
 	private final FavoriteAppearanceController favoriteAppearanceController;
 
-	public static final String ORIGINAL_KEY = "original";
 	public static final String PROCESS_ID = "favorite_editor_process_select_icon";
 
 	public FavoriteEditorIconController(@NonNull OsmandApplication app, @NonNull FavoriteAppearanceController favoriteAppearanceController) {
@@ -30,11 +29,6 @@ public class FavoriteEditorIconController extends EditorIconController {
 	}
 
 	@Override
-	protected void initIconCategories() {
-		initOriginalCategory();
-		super.initIconCategories();
-	}
-
 	protected void initOriginalCategory() {
 		List<String> iconKeys = new ArrayList<>();
 		categories.add(new IconsCategory(ORIGINAL_KEY, app.getString(R.string.shared_string_original), iconKeys, true));
@@ -44,14 +38,20 @@ public class FavoriteEditorIconController extends EditorIconController {
 	public void setSelectedCategory(@NonNull IconsCategory category) {
 		super.setSelectedCategory(category);
 		if (ORIGINAL_KEY.equals(category.getKey())) {
-			if (iconsPaletteListener != null) {
-				iconsPaletteListener.onIconSelectedFromPalette(null);
-			}
-		} else if (getSelectedIconKey() != null) {
+			return;
+		}
+		if (getSelectedIconKey() != null) {
 			onIconSelectedFromPalette(getSelectedIconKey(), null);
 		} else if (getSelectedIconKey() == null) {
 			onIconSelectedFromPalette(favoriteAppearanceController.requireIcon(), null);
 			cardController.updateIconsSelection();
+		}
+	}
+
+	@Override
+	protected void onOriginalCategorySelected() {
+		if (iconsPaletteListener != null) {
+			iconsPaletteListener.onIconSelectedFromPalette(null);
 		}
 	}
 
