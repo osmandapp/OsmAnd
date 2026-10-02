@@ -3,7 +3,6 @@ package net.osmand.plus.views.layers.core;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -29,7 +28,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -53,6 +51,8 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	private final PointI offset;
 
 	private final OsmandMapLayer.MapLayerData<List<OsmBugsLayer.OpenStreetNote>> layerData;
+	private final IconPixelsCache<Long> bigIconsCache = new IconPixelsCache<>();
+	private final IconPixelsCache<Integer> smallIconsCache = new IconPixelsCache<>();
 	private MapTiledCollectionProvider providerInstance;
 
 	private static class OsmBugsCollectionPoint extends interface_MapTiledCollectionPoint {
@@ -62,8 +62,12 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 		private final float textScale;
 		private final PointI point31;
 		private final boolean showClosed;
+		private final IconPixelsCache<Long> bigIconsCache;
+		private final IconPixelsCache<Integer> smallIconsCache;
 
-		public OsmBugsCollectionPoint(@NonNull Context ctx, @NonNull OsmBugsLayer.OpenStreetNote osmNote, float textScale, boolean showClosed) {
+		public OsmBugsCollectionPoint(@NonNull Context ctx, @NonNull OsmBugsLayer.OpenStreetNote osmNote, float textScale, boolean showClosed,
+		                              @NonNull IconPixelsCache<Long> bigIconsCache,
+		                              @NonNull IconPixelsCache<Integer> smallIconsCache) {
 			this.ctx = ctx;
 			this.osmNote = osmNote;
 			this.textScale = textScale;
@@ -71,6 +75,8 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 			int y = MapUtils.get31TileNumberY(osmNote.getLatitude());
 			this.point31 = new PointI(x, y);
 			this.showClosed = showClosed;
+			this.bigIconsCache = bigIconsCache;
+			this.smallIconsCache = smallIconsCache;
 		}
 
 		@Override
@@ -80,7 +86,6 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 
 		@Override
 		public SingleSkImage getImageBitmap(boolean isFullSize) {
-			Bitmap bitmap;
 			if (!osmNote.isOpened() && !showClosed) {
 				return SwigUtilities.nullSkImage();
 			}
@@ -94,10 +99,12 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 					iconId = R.drawable.mx_special_symbol_check_mark;
 					backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 				}
-				PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
-						ContextCompat.getColor(ctx, backgroundColorRes), true, false, iconId,
-						BACKGROUND_TYPE);
-				bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
+				int color = ContextCompat.getColor(ctx, backgroundColorRes);
+				return bigIconsCache.getImage(((long) color << 32) | (iconId & 0xFFFFFFFFL), () -> {
+					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
+							color, true, false, iconId, BACKGROUND_TYPE);
+					return pointImageDrawable.getBigMergedBitmap(textScale, false);
+				});
 			} else {
 				int backgroundColorRes;
 				if (osmNote.isOpened()) {
@@ -105,12 +112,13 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 				} else {
 					backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 				}
-				PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
-						ContextCompat.getColor(ctx, backgroundColorRes), true,
-						false, DEFAULT_UI_ICON_ID, BACKGROUND_TYPE);
-				bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
+				int color = ContextCompat.getColor(ctx, backgroundColorRes);
+				return smallIconsCache.getImage(color, () -> {
+					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
+							color, true, false, DEFAULT_UI_ICON_ID, BACKGROUND_TYPE);
+					return pointImageDrawable.getSmallMergedBitmap(textScale);
+				});
 			}
-			return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
 		}
 
 		@Override
@@ -238,7 +246,8 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 		for (OsmBugsLayer.OpenStreetNote osmNote : results) {
 			if (latLonBounds.contains(osmNote.getLongitude(), osmNote.getLatitude(),
 					osmNote.getLongitude(), osmNote.getLatitude())) {
-				OsmBugsCollectionPoint point = new OsmBugsCollectionPoint(ctx, osmNote, textScale, showClosed);
+				OsmBugsCollectionPoint point = new OsmBugsCollectionPoint(ctx, osmNote, textScale, showClosed,
+						bigIconsCache, smallIconsCache);
 				res.add(point.instantiateProxy(true));
 				point.swigReleaseOwnership();
 			}
