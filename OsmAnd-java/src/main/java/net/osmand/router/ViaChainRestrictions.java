@@ -1,168 +1,156 @@
 package net.osmand.router;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 
-// Restrictions whose via is a chain of ways (#12537). The search keeps its position inside such restrictions as a state
-// of the route segment. A segment with a state is a separate node of the search (own visited key), so a path that came
-// from "from" and a path that entered the same via ways from a side road don't merge.
-// Step i of a chain means that the segment is on via i and:
-// - forward search: the path came along from, via1 .. via i;
-// - backward search: the rest of the path is the restricted maneuver (no_*: via i+1 .. viaN, to;
-//   only_*: via i+1 .. and then a road that leaves the chain), so "from" may not precede via1.
-public class ViaChainRestrictions {
+// Restrictions whose via is a chain of ways (#12537), checked against the roads the search path has already passed.
+// The record of the restriction lies on "from":
+// - forward search: "from" is one of the previous roads of the path, the roads after it are compared with the vias;
+// - backward search: "from" is the candidate road itself, the path after it (its parent routes) is compared.
+// The visited segments keep no history, so a path that came from "from" and a path that entered the via ways from a
+// side road merge on the first via segment reached: the route never breaks a restriction, but can take a detour.
+class ViaChainRestrictions {
 
-	public static final ViaChainState FORBIDDEN = new ViaChainState(new long[0], -1);
+	// ponytail: the longest chain checked, a restriction with more via ways is ignored as before
+	private static final int MAX_PATH_ROADS = 8;
 
-	public static class ViaChainState {
-		final long[] steps; // chain index << STEP_BITS | step, sorted
-		final int key; // small unique id of the state, part of the visited key of the segment
-
-		private ViaChainState(long[] steps, int key) {
-			this.steps = steps;
-			this.key = key;
-		}
-	}
-
-	private static class ViaChain {
-		final int index;
-		final long from;
-		final long[] vias;
-		final long to;
-		final boolean onlyRestriction;
-
-		ViaChain(int index, long from, long[] vias, long to, int type) {
-			this.index = index;
-			this.from = from;
-			this.vias = vias;
-			this.to = to;
-			this.onlyRestriction = type >= MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
-		}
-	}
-
-	private static final int STEP_BITS = 6;
-	// ponytail: 9 bits of the visited key, enough for the chains around one route; widen the key if it ever overflows
-	private static final int MAX_STATES = 1 << 9;
-
-	private final List<ViaChain> chains = new ArrayList<>();
-	private final Map<String, ViaChain> chainsById = new HashMap<>(); // "from id:restriction index"
-	private final TLongObjectHashMap<List<ViaChain>> chainsByRoad = new TLongObjectHashMap<>(); // from, vias and to
-	private final Map<String, ViaChainState> states = new HashMap<>();
-
-	public void registerRoad(RouteDataObject road) {
-		for (int k = 0; k < road.getRestrictionLength(); k++) {
-			long[] vias = road.getRestrictionViaWays(k);
-			String id = road.getId() + ":" + k;
-			if (vias != null && !chainsById.containsKey(id)) {
-				ViaChain chain = new ViaChain(chains.size(), road.getId(), vias, road.getRestrictionId(k),
-						road.getRestrictionType(k));
-				chains.add(chain);
-				chainsById.put(id, chain);
-				addChainToRoad(chain.from, chain);
-				for (long via : vias) {
-					addChainToRoad(via, chain);
+	// true if moving from the road of "current" onto "next" at the node of nodeRoads breaks a restriction
+	static boolean isRestricted(RouteSegment current, RouteDataObject next, RouteSegment nodeRoads, boolean reverseWaySearch) {
+		long[] path = pathRoads(current);
+		if (!reverseWaySearch) {
+			// path[0] is the current road, path[d] - the road d steps before it
+			for (int d = 0; d < path.length; d++) {
+				RouteDataObject from = d == 0 ? current.getRoad() : roadAt(current, d);
+				for (int k = 0; from != null && k < from.getRestrictionLength(); k++) {
+					long[] vias = from.getRestrictionViaWays(k);
+					if (vias != null && isRestrictedAfter(from, k, vias, path, d, next.getId(), nodeRoads)) {
+						return true;
+					}
 				}
-				addChainToRoad(chain.to, chain);
+			}
+			return false;
+		}
+		// next is before current in the direction of travel, path is the rest of the route after current
+		for (int k = 0; k < next.getRestrictionLength(); k++) {
+			long[] vias = next.getRestrictionViaWays(k);
+			if (vias == null) {
+				continue;
+			}
+			boolean onlyRestriction = next.getRestrictionType(k) >= MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
+			if (path[0] != vias[0]) {
+				if (onlyRestriction && isAtNode(nodeRoads, vias[0])) {
+					return true;
+				}
+				continue;
+			}
+			for (int j = 1; j <= vias.length; j++) {
+				if (j >= path.length) {
+					break; // the rest of the route is not known yet
+				}
+				long expected = j < vias.length ? vias[j] : next.getRestrictionId(k);
+				if (path[j] != expected) {
+					if (onlyRestriction) {
+						return true;
+					}
+					break;
+				}
+				if (j == vias.length && !onlyRestriction) {
+					return true;
+				}
 			}
 		}
+		return false;
 	}
 
-	public static long getVisitedKey(long pointId, RouteSegment segment) {
-		return segment.viaChainState == null ? pointId : pointId + ((long) segment.viaChainState.key << 54);
-	}
-
-	// state of the segment on "next" reached from "current" at the node of nodeRoads, FORBIDDEN if the turn is restricted
-	ViaChainState nextState(RouteSegment current, RouteDataObject next, RouteSegment nodeRoads, boolean reverseWaySearch) {
-		if (chains.isEmpty()) {
-			return null;
-		}
-		long currentId = current.getRoad().getId();
-		long nextId = next.getId();
-		TLongArrayList steps = new TLongArrayList();
-		long[] currentSteps = current.viaChainState == null ? new long[0] : current.viaChainState.steps;
-		for (long step : currentSteps) {
-			ViaChain chain = chains.get((int) (step >> STEP_BITS));
-			int i = (int) (step & ((1 << STEP_BITS) - 1));
-			if (!reverseWaySearch) {
-				boolean lastVia = i == chain.vias.length - 1;
-				if (!lastVia && nextId == chain.vias[i + 1]) {
-					steps.add(step + 1);
-				} else if (chain.onlyRestriction != (lastVia && nextId == chain.to)) {
-					return FORBIDDEN; // only_* leaves the chain or no_* completes it
-				}
-			} else if (i > 0) {
-				if (nextId == chain.vias[i - 1]) {
-					steps.add(step - 1);
-				}
-			} else if (nextId == chain.from) {
-				return FORBIDDEN;
+	// true if the route joined from the forward and the backward search at their meeting segment breaks a restriction
+	// whose via chain spans the meeting point (each of the searches sees only its own part of the chain)
+	static boolean isRestrictedAtMeeting(RouteSegment forward, RouteSegment backward) {
+		List<RouteDataObject> roads = new ArrayList<>();
+		for (RouteSegment s = forward; s != null && roads.size() < MAX_PATH_ROADS; s = s.getParentRoute()) {
+			if (roads.isEmpty() || roads.get(0).getId() != s.getRoad().getId()) {
+				roads.add(0, s.getRoad());
 			}
 		}
-		List<ViaChain> nextChains = chainsByRoad.get(reverseWaySearch ? nextId : currentId);
-		for (int c = 0; nextChains != null && c < nextChains.size(); c++) {
-			ViaChain chain = nextChains.get(c);
-			if (!reverseWaySearch && chain.from == currentId) {
-				if (nextId == chain.vias[0]) {
-					steps.add(stepOf(chain, 0));
-				} else if (chain.onlyRestriction && isAtNode(nodeRoads, chain.vias[0])) {
-					return FORBIDDEN;
+		int forwardRoads = roads.size();
+		for (RouteSegment s = backward; s != null && roads.size() < forwardRoads + MAX_PATH_ROADS; s = s.getParentRoute()) {
+			if (roads.isEmpty() || roads.get(roads.size() - 1).getId() != s.getRoad().getId()) {
+				roads.add(s.getRoad());
+			}
+		}
+		for (int p = 0; p + 1 < roads.size(); p++) {
+			RouteDataObject from = roads.get(p);
+			for (int k = 0; k < from.getRestrictionLength(); k++) {
+				long[] vias = from.getRestrictionViaWays(k);
+				if (vias == null || roads.get(p + 1).getId() != vias[0]) {
+					continue;
 				}
-			} else if (reverseWaySearch && chain.from == nextId) {
-				if (chain.onlyRestriction && currentId != chain.vias[0] && isAtNode(nodeRoads, chain.vias[0])) {
-					return FORBIDDEN;
-				}
-			} else if (reverseWaySearch) {
-				for (int j = 0; j < chain.vias.length; j++) {
-					boolean lastVia = j == chain.vias.length - 1;
-					boolean followsChain = lastVia ? currentId == chain.to : currentId == chain.vias[j + 1];
-					boolean restrictedRest = chain.onlyRestriction ? !followsChain : lastVia && followsChain;
-					if (nextId == chain.vias[j] && restrictedRest) {
-						steps.add(stepOf(chain, j));
+				boolean onlyRestriction = from.getRestrictionType(k) >= MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
+				for (int j = 1; j <= vias.length && p + 1 + j < roads.size(); j++) {
+					long expected = j < vias.length ? vias[j] : from.getRestrictionId(k);
+					if (roads.get(p + 1 + j).getId() != expected) {
+						if (onlyRestriction) {
+							return true;
+						}
+						break;
+					}
+					if (j == vias.length && !onlyRestriction) {
+						return true;
 					}
 				}
 			}
 		}
-		return getState(steps);
+		return false;
 	}
 
-	static RouteSegment withState(RouteSegment segment, ViaChainState state) {
-		if (segment == null || state == null) {
-			return segment;
+	// a restriction of "from" (d roads before the current one) and the roads passed after it
+	private static boolean isRestrictedAfter(RouteDataObject from, int k, long[] vias, long[] path, int d, long nextId,
+			RouteSegment nodeRoads) {
+		boolean onlyRestriction = from.getRestrictionType(k) >= MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
+		if (d == 0) {
+			return onlyRestriction && nextId != vias[0] && isAtNode(nodeRoads, vias[0]);
 		}
-		RouteSegment copy = new RouteSegment(segment.getRoad(), segment.getSegmentStart(), segment.getSegmentEnd());
-		copy.viaChainState = state;
-		return copy;
-	}
-
-	private ViaChainState getState(TLongArrayList steps) {
-		if (steps.isEmpty()) {
-			return null;
+		if (d > vias.length) {
+			return false;
 		}
-		long[] sorted = steps.toArray();
-		Arrays.sort(sorted);
-		String id = Arrays.toString(sorted);
-		ViaChainState state = states.get(id);
-		if (state == null) {
-			if (states.size() + 1 >= MAX_STATES) {
-				throw new IllegalStateException("Too many via chain states");
+		for (int i = 0; i < d; i++) {
+			if (vias[i] != path[d - 1 - i]) {
+				return false;
 			}
-			state = new ViaChainState(sorted, states.size() + 1);
-			states.put(id, state);
 		}
-		return state;
+		long expected = d < vias.length ? vias[d] : from.getRestrictionId(k);
+		return onlyRestriction ? nextId != expected : d == vias.length && nextId == expected;
 	}
 
-	private static long stepOf(ViaChain chain, int via) {
-		return ((long) chain.index << STEP_BITS) + via;
+	// ids of the different roads along the parent routes, starting with the road of the segment
+	private static long[] pathRoads(RouteSegment segment) {
+		long[] roads = new long[MAX_PATH_ROADS];
+		int size = 0;
+		for (RouteSegment s = segment; s != null && size < roads.length; s = s.getParentRoute()) {
+			if (size == 0 || roads[size - 1] != s.getRoad().getId()) {
+				roads[size++] = s.getRoad().getId();
+			}
+		}
+		long[] result = new long[size];
+		System.arraycopy(roads, 0, result, 0, size);
+		return result;
+	}
+
+	private static RouteDataObject roadAt(RouteSegment segment, int index) {
+		int i = 0;
+		long roadId = segment.getRoad().getId();
+		for (RouteSegment s = segment; s != null; s = s.getParentRoute()) {
+			if (s.getRoad().getId() != roadId) {
+				roadId = s.getRoad().getId();
+				if (++i == index) {
+					return s.getRoad();
+				}
+			}
+		}
+		return null;
 	}
 
 	private static boolean isAtNode(RouteSegment nodeRoads, long roadId) {
@@ -172,12 +160,5 @@ public class ViaChainRestrictions {
 			}
 		}
 		return false;
-	}
-
-	private void addChainToRoad(long roadId, ViaChain chain) {
-		if (!chainsByRoad.containsKey(roadId)) {
-			chainsByRoad.put(roadId, new ArrayList<>());
-		}
-		chainsByRoad.get(roadId).add(chain);
 	}
 }
