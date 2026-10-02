@@ -4,7 +4,6 @@ import static net.osmand.core.android.MapRendererContext.POI_SYMBOL_SECTION;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,7 +34,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.solid.data.DefaultColors;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.MapLayerData;
@@ -50,6 +48,8 @@ import java.util.List;
 public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	private static final Log LOG = PlatformUtil.getLog(POITileProvider.class);
+	// the provider lives as long as the filters, while the map shows more and more POI types
+	private static final int MAX_CACHED_ICONS = 256;
 
 	private final Context ctx;
 	private final int baseOrder;
@@ -60,6 +60,8 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 	private final PointI offset;
 
 	private final MapLayerData<List<Amenity>> layerData;
+	private final IconPixelsCache<PointImageDrawable> bigIconsCache = new IconPixelsCache<>(MAX_CACHED_ICONS);
+	private final IconPixelsCache<PointImageDrawable> smallIconsCache = new IconPixelsCache<>(MAX_CACHED_ICONS);
 	private MapTiledCollectionProvider providerInstance;
 
 	private static class POICollectionPoint extends interface_MapTiledCollectionPoint {
@@ -67,12 +69,18 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		private final Context ctx;
 		private final Amenity amenity;
 		private final float textScale;
+		private final IconPixelsCache<PointImageDrawable> bigIconsCache;
+		private final IconPixelsCache<PointImageDrawable> smallIconsCache;
 		private final PointI point31;
 
-		public POICollectionPoint(@NonNull Context ctx, @NonNull Amenity amenity, float textScale) {
+		public POICollectionPoint(@NonNull Context ctx, @NonNull Amenity amenity, float textScale,
+		                          @NonNull IconPixelsCache<PointImageDrawable> bigIconsCache,
+		                          @NonNull IconPixelsCache<PointImageDrawable> smallIconsCache) {
 			this.ctx = ctx;
 			this.amenity = amenity;
 			this.textScale = textScale;
+			this.bigIconsCache = bigIconsCache;
+			this.smallIconsCache = smallIconsCache;
 			LatLon latLon = amenity.getLocation();
 			this.point31 = new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
 					MapUtils.get31TileNumberY(latLon.getLatitude()));
@@ -96,7 +104,6 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 		@Override
 		public SingleSkImage getImageBitmap(boolean isFullSize) {
-			Bitmap bitmap = null;
 			if (isFullSize) {
 				String id = amenity.getGpxIcon();
 				if (id == null) {
@@ -106,15 +113,19 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 					int iconId = RenderingIcons.getResIdOrDefault(ctx, id, R.drawable.mx_special_marker);
 					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx, getColor(),
 							true, iconId);
-					pointImageDrawable.setAlpha(0.8f);
-					bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
+					return bigIconsCache.getImage(pointImageDrawable, drawable -> {
+						drawable.setAlpha(0.8f);
+						return drawable.getBigMergedBitmap(textScale, false);
+					});
 				}
+				return SwigUtilities.nullSkImage();
 			} else {
 				PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx, getColor(), true);
-				pointImageDrawable.setAlpha(0.8f);
-				bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
+				return smallIconsCache.getImage(pointImageDrawable, drawable -> {
+					drawable.setAlpha(0.8f);
+					return drawable.getSmallMergedBitmap(textScale);
+				});
 			}
-			return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
 		}
 
 		@Override
@@ -251,7 +262,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			LatLon latLon = amenity.getLocation();
 			if (latLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
 					latLon.getLongitude(), latLon.getLatitude())) {
-				POICollectionPoint point = new POICollectionPoint(ctx, amenity, textScale);
+				POICollectionPoint point = new POICollectionPoint(ctx, amenity, textScale, bigIconsCache, smallIconsCache);
 				res.add(point.instantiateProxy(true));
 				point.swigReleaseOwnership();
 			}
