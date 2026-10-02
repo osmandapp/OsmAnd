@@ -1325,6 +1325,12 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> MAX_SPEED = new FloatPreference(this,
 			"max_speed", 0f).makeProfile().cache();
 
+	public final CommonPreference<Boolean> ETA_USE_AVERAGE_SPEED = new BooleanPreference(this,
+			"eta_use_average_speed", false).makeProfile().cache();
+
+	public final CommonPreference<Long> ETA_AVERAGE_SPEED_INTERVAL = new LongPreference(this,
+			"eta_average_speed_interval", 15 * 60 * 1000L).makeProfile().cache();
+
 	public final CommonPreference<String> ICON_RES_NAME = new StringPreference(this, "app_mode_icon_res_name", "ic_world_globe_dark") {
 		@Override
 		public String getModeValue(ApplicationMode mode) {

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Travel speed of a profile. Built from the shared Material 3 components of the AIS screens.
+	Values are committed immediately, there is no Save button.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/colorSurface"
+	android:orientation="vertical">
+
+	<include layout="@layout/ui_material_app_bar" />
+
+	<ScrollView
+		android:id="@+id/scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingTop="@dimen/ui_group_gap"
+			android:paddingBottom="@dimen/content_padding">
+
+			<include
+				android:id="@+id/default_speed_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				layout="@layout/ui_slider_card" />
+
+			<net.osmand.plus.widgets.ui.GroupFooterView
+				android:id="@+id/default_speed_footer"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:groupFooterText="@string/default_speed_descr" />
+
+			<LinearLayout
+				android:id="@+id/speed_range_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<!-- card with a card header: the trailing button expands the slider inside the same card -->
+				<LinearLayout
+					android:id="@+id/speed_range_card"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/bg_ui_card_16"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:id="@+id/speed_range_header"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:background="?attr/selectableItemBackground"
+						android:gravity="center_vertical"
+						android:minHeight="@dimen/ui_group_header_min_height"
+						android:orientation="horizontal"
+						android:paddingStart="@dimen/content_padding"
+						android:paddingTop="@dimen/content_padding_small_half"
+						android:paddingEnd="@dimen/content_padding_half"
+						android:paddingBottom="@dimen/content_padding_small_half">
+
+						<net.osmand.plus.widgets.TextViewEx
+							android:id="@+id/speed_range_title"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/speed_range"
+							android:textColor="?attr/colorOnSurface"
+							android:textSize="@dimen/default_list_text_size"
+							app:typefaceWeight="medium" />
+
+						<TextView
+							android:id="@+id/speed_range_value"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/content_padding"
+							android:textColor="?attr/colorOnSurfaceVariant"
+							android:textSize="@dimen/default_list_text_size" />
+
+						<com.google.android.material.button.MaterialButton
+							android:id="@+id/speed_range_expand"
+							style="?attr/materialIconButtonStyle"
+							android:layout_width="@dimen/ui_touch_target"
+							android:layout_height="@dimen/ui_touch_target"
+							android:layout_marginStart="@dimen/content_padding_half"
+							android:insetTop="0dp"
+							android:insetBottom="0dp"
+							android:minWidth="@dimen/ui_touch_target"
+							android:minHeight="@dimen/ui_touch_target"
+							app:iconGravity="textStart"
+							app:iconPadding="0dp"
+							app:iconSize="@dimen/ui_icon_size"
+							app:iconTint="?attr/colorOnSurfaceVariant" />
+					</LinearLayout>
+
+					<com.google.android.material.slider.RangeSlider
+						android:id="@+id/speed_range_slider"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding_half"
+						android:layout_marginEnd="@dimen/content_padding_half"
+						android:layout_marginBottom="@dimen/content_padding_small"
+						android:visibility="gone"
+						app:labelBehavior="gone"
+						app:tickVisible="false"
+						app:trackColorInactive="?attr/colorSurfaceContainerHighest" />
+				</LinearLayout>
+
+				<net.osmand.plus.widgets.ui.GroupFooterView
+					android:id="@+id/speed_range_footer"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:groupFooterText="@string/speed_range_descr" />
+			</LinearLayout>
+
+			<net.osmand.plus.widgets.ui.GroupHeaderView
+				android:id="@+id/eta_header"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:groupHeaderTitle="@string/side_marker_eta" />
+
+			<LinearLayout
+				android:id="@+id/eta_rows"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<include
+					android:id="@+id/adapt_speed_row"
+					layout="@layout/item_ui_setting_row" />
+
+				<include
+					android:id="@+id/interval_card"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					layout="@layout/ui_slider_card" />
+			</LinearLayout>
+
+			<net.osmand.plus.widgets.ui.GroupFooterView
+				android:id="@+id/eta_footer"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>
