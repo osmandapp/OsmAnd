@@ -89,6 +89,10 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Nullable
 	protected String retrieveOriginalIconKey() {
+		FavoritePointEditor editor = getFavoritePointEditor();
+		if (editor == null || !editor.isNew()) {
+			return null;
+		}
 		FavouritePoint favorite = getFavorite();
 		if (favorite == null) {
 			return null;
