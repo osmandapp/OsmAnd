@@ -37,6 +37,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import gnu.trove.list.array.TByteArrayList;
+import gnu.trove.list.array.TIntArrayList;
 
 public class RouteGeometryWay extends
 		MultiColoringGeometryWay<RouteGeometryWayContext, MultiColoringGeometryWayDrawer<RouteGeometryWayContext>> {
@@ -176,10 +177,14 @@ public class RouteGeometryWay extends
 
 		List<Segment> segments = new ArrayList<>();
 		for (List<DrawPathData31> segmentData : croppedPathData31) {
-
+			// rebuilt on every map frame, so size the lists once (end points shared by paths make this an upper bound)
+			int pointsCount = 0;
+			for (DrawPathData31 path31 : segmentData) {
+				pointsCount += path31.indexes.length;
+			}
 			Segment segment = new Segment();
-			segment.indexes = new ArrayList<>();
-			segment.styles = new ArrayList<>();
+			segment.indexes = new TIntArrayList(pointsCount);
+			segment.styles = new ArrayList<>(pointsCount);
 
 			for (int pathIndex = 0; pathIndex < segmentData.size(); pathIndex++) {
 				DrawPathData31 path31 = segmentData.get(pathIndex);
@@ -211,8 +216,8 @@ public class RouteGeometryWay extends
 
 		// FIXME do we always call on draw?
 		Segment segment = currentCachedSegment != null ? currentCachedSegment : new Segment();
-		segment.indexes = new ArrayList<>();
-		segment.styles = new ArrayList<>();
+		segment.indexes = new TIntArrayList(points.size());
+		segment.styles = new ArrayList<>(points.size());
 		for (GeometryWayPoint p : points) {
 			segment.indexes.add(p.index);
 			segment.styles.add(p.style);
@@ -465,7 +470,7 @@ public class RouteGeometryWay extends
 
 	private static class Segment {
 		public List<Location> initialLocations = new ArrayList<>();
-		public List<Integer> indexes;
+		public TIntArrayList indexes;
 		public List<GeometryWayStyle<?>> styles;
 
 		public boolean isCompleted() {
