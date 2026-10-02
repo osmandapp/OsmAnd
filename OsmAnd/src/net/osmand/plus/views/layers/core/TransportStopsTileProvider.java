@@ -231,10 +231,6 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 		private final IconPixelsCache<PointImageDrawable> bigIconsCache;
 		private final IconPixelsCache<PointImageDrawable> smallIconsCache;
 
-		public StopsCollectionPoint(@NonNull Context ctx, @NonNull TransportStop stop, float textScale, String transportRouteType) {
-			this(ctx, stop, textScale, transportRouteType, new IconPixelsCache<>(), new IconPixelsCache<>());
-		}
-
 		public StopsCollectionPoint(@NonNull Context ctx, @NonNull TransportStop stop, float textScale, String transportRouteType,
 		                            @NonNull IconPixelsCache<PointImageDrawable> bigIconsCache,
 		                            @NonNull IconPixelsCache<PointImageDrawable> smallIconsCache) {
