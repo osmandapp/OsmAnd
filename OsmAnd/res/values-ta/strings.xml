@@ -3890,7 +3890,7 @@
     <string name="daynight_mode_day">நாள்</string>
     <string name="error_reading_gpx">சிபிஎக்ச் தரவைப் படிக்க முடியவில்லை.</string>
     <string name="search_nothing_found">எதுவும் கிடைக்கவில்லை</string>
-    <string name="previous_run_crashed">கடைசியாக ஒச்மண்ட் ரன் செயலிழந்தது. பதிவு கோப்பு {0 at இல் உள்ளது. தயவுசெய்து சிக்கலைப் புகாரளித்து பதிவு கோப்பை இணைக்கவும்.</string>
+    <string name="previous_run_crashed">கடைசியாக ஒச்மண்ட் ரன் செயலிழந்தது. பதிவு கோப்பு {0} இல் உள்ளது. தயவுசெய்து சிக்கலைப் புகாரளித்து பதிவு கோப்பை இணைக்கவும்.</string>
     <string name="poi_create_title">பின்னர் உருவாக்கு</string>
     <string name="poi_action_add">கூட்டு</string>
     <string name="poi_action_change">மாற்றம்</string>
