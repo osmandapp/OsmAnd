@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!-- Marks this APK as the watch artifact; Play uses it to route the install. -->
+	<uses-feature
+		android:name="android.hardware.type.watch"
+		android:required="true" />
+
+	<application
+		android:allowBackup="false"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/app_name"
+		android:supportsRtl="true"
+		android:theme="@android:style/Theme.DeviceDefault">
+
+		<!-- Declares that this app is standalone-capable is deliberately NOT set: the watch
+		     app is useless without the phone, so Play should only offer it alongside one. -->
+		<meta-data
+			android:name="com.google.android.wearable.standalone"
+			android:value="false" />
+
+		<activity
+			android:name=".MainActivity"
+			android:exported="true"
+			android:taskAffinity=""
+			android:theme="@android:style/Theme.DeviceDefault">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+		<service
+			android:name=".data.WearDataLayerService"
+			android:exported="true">
+			<intent-filter>
+				<action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+				<data
+					android:scheme="wear"
+					android:host="*"
+					android:pathPrefix="/osmand" />
+			</intent-filter>
+		</service>
+	</application>
+</manifest>
