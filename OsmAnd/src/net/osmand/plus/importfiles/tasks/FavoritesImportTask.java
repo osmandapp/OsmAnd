@@ -1,7 +1,6 @@
 package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup;
-import static net.osmand.plus.myplaces.favorites.FavoriteGroup.PERSONAL_CATEGORY;
 import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
@@ -35,6 +34,7 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GpxFile
 	private final GpxFile gpxFile;
 	private final String fileName;
 	private final boolean forceImport;
+	@Nullable
 	private final String targetFolder;
 
 	public FavoritesImportTask(@NonNull FragmentActivity activity, @NonNull GpxFile gpxFile,
@@ -53,11 +53,11 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GpxFile
 	}
 
 	private void mergeFavorites() {
-		boolean importIntoFolder = !Algorithms.isEmpty(targetFolder);
-		String defCategory = forceImport && !importIntoFolder ? fileName : "";
+		boolean hasTargetFolder = targetFolder != null;
+		String defCategory = forceImport && !hasTargetFolder ? fileName : "";
 		List<FavouritePoint> favourites = wptAsFavourites(app, gpxFile.getPointsList(), defCategory);
 		Map<String, PointsGroup> pointsGroups = gpxFile.getPointsGroups();
-		if (importIntoFolder) {
+		if (hasTargetFolder) {
 			pointsGroups = moveIntoFolder(favourites, pointsGroups);
 		}
 		checkDuplicateNames(favourites);
@@ -68,7 +68,12 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GpxFile
 		for (FavouritePoint favourite : favourites) {
 			favoritesHelper.deleteFavourite(favourite, false);
 
-			PointsGroup pointsGroup = pointsGroups.get(favourite.getCategory());
+			String category = favourite.getCategory();
+			PointsGroup pointsGroup = pointsGroups.get(category);
+			// Groups that already exist in the chosen folder keep the user's appearance.
+			if (hasTargetFolder && favoritesHelper.getGroup(category) != null) {
+				pointsGroup = null;
+			}
 			favoritesHelper.addFavourite(favourite, pointsGroup, new AddFavoriteOptions());
 
 			if (plugin != null && favourite.getSpecialPointType() == SpecialPointType.PARKING) {
@@ -83,20 +88,32 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GpxFile
 	private Map<String, PointsGroup> moveIntoFolder(@NonNull List<FavouritePoint> favourites,
 	                                                @NonNull Map<String, PointsGroup> pointsGroups) {
 		Map<String, PointsGroup> movedGroups = new HashMap<>();
-		for (Map.Entry<String, PointsGroup> entry : pointsGroups.entrySet()) {
-			movedGroups.put(getPathInFolder(entry.getKey()), entry.getValue());
-		}
 		for (FavouritePoint favourite : favourites) {
-			favourite.setCategory(getPathInFolder(favourite.getCategory()));
+			String sourceCategory = favourite.getCategory();
+			SpecialPointType specialType = favourite.getSpecialPointType();
+			PointsGroup pointsGroup = pointsGroups.get(sourceCategory);
+			String category;
+			if (specialType == null) {
+				category = getPathInFolder(sourceCategory);
+			} else {
+				category = specialType.getCategory();
+				// Home/Work/Parking taken out of another group must not bring that group's appearance along.
+				if (!category.equals(sourceCategory)) {
+					pointsGroup = null;
+				}
+			}
+			if (pointsGroup != null) {
+				movedGroups.put(category, pointsGroup);
+			}
+			favourite.setCategory(category);
+			// setCategory() infers the type from the name in "personal"; point_type is authoritative.
+			favourite.setSpecialPointType(specialType);
 		}
 		return movedGroups;
 	}
 
 	@NonNull
 	private String getPathInFolder(@NonNull String category) {
-		if (PERSONAL_CATEGORY.equals(category)) {
-			return category;
-		}
 		return FavoriteFolderPath.join(Arrays.asList(targetFolder, category));
 	}
 
@@ -130,11 +147,17 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GpxFile
 		FragmentActivity activity = activityRef.get();
 		if (activity != null) {
 			app.showToastMessage(R.string.fav_imported_sucessfully);
-			Intent newIntent = new Intent(activity, app.getAppCustomization().getMyPlacesActivity());
-			newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			newIntent.putExtra(TAB_ID, FAV_TAB);
-			activity.startActivity(newIntent);
+			if (targetFolder == null) {
+				openFavorites(activity);
+			}
 		}
+	}
+
+	private void openFavorites(@NonNull FragmentActivity activity) {
+		Intent newIntent = new Intent(activity, app.getAppCustomization().getMyPlacesActivity());
+		newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		newIntent.putExtra(TAB_ID, FAV_TAB);
+		activity.startActivity(newIntent);
 	}
 
 	public static List<FavouritePoint> wptAsFavourites(@NonNull OsmandApplication app,
