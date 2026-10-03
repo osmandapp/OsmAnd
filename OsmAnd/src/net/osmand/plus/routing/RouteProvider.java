@@ -911,6 +911,9 @@ public class RouteProvider {
 		bundle.putString("trackFormat", "gpx");
 		bundle.putString("turnInstructionFormat", "osmand");
 		bundle.putString("acceptCompressedResult", "true");
+		if (params.start.hasBearing()) {
+			bundle.putString("heading", String.valueOf(Math.round(params.start.getBearing()) % 360));
+		}
 
 		String osmandProfileName = params.mode.getUserProfileName();
 		if (osmandProfileName.indexOf("Brouter") == 0) {
