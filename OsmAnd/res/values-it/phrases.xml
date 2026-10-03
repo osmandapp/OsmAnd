@@ -1215,7 +1215,7 @@
     <string name="poi_religion_scientologist">Scientologismo</string>
     <string name="poi_religion_pagan">Paganesimo</string>
     <string name="poi_religion_zoroastrian">Zoroastrismo</string>
-    <string name="poi_denomination_sunni">Sunni</string>
+    <string name="poi_denomination_sunni">Sunnita</string>
     <string name="poi_denomination_protestant">Protestante</string>
     <string name="poi_denomination_anglican">Anglicana</string>
     <string name="poi_denomination_presbyterian">Presbiteriana</string>
@@ -1225,7 +1225,7 @@
     <string name="poi_denomination_seventh_day_adventist">Avventista del Settimo Giorno</string>
     <string name="poi_denomination_new_apostolic">Nuova Apostolica</string>
     <string name="poi_denomination_episcopal">Episcopale</string>
-    <string name="poi_denomination_shia">Shia</string>
+    <string name="poi_denomination_shia">Sciita</string>
     <string name="poi_denomination_greek_catholic">Greco-Cattolica</string>
     <string name="poi_denomination_church_of_scotland">Chiesa di Scozia</string>
     <string name="poi_denomination_assemblies_of_god">Assemblee di Dio</string>
@@ -2359,7 +2359,7 @@
     <string name="poi_attraction_water_slide">Scivolo acquatico</string>
     <string name="poi_piste_hike">Sentiero escursionistico</string>
     <string name="poi_lean_to">Capannone;Riparo</string>
-    <string name="poi_denomination_quaker">Quaker</string>
+    <string name="poi_denomination_quaker">Quaccheri</string>
     <string name="poi_greenfield">Terreno edificabile</string>
     <string name="poi_bulk_purchase">Acquisto all\'ingrosso</string>
     <string name="poi_substation_type">Tipo</string>
