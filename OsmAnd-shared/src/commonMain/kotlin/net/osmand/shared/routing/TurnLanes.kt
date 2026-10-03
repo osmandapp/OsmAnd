@@ -32,7 +32,7 @@ object TurnLanes {
 
 	private const val TURN_DEGREE_MIN = 45.0
 	private const val TURN_SLIGHT_DEGREE = 5.0
-	private const val MAX_SPEAK_PRIORITY = 5
+	internal const val MAX_SPEAK_PRIORITY = 5
 
 	private const val REVERSE_LANE = "reverse"
 	private const val REVERSE_RIGHT_LANE = "reverse_right"
@@ -264,7 +264,7 @@ object TurnLanes {
 		return lane.isEmpty() || "none" == lane
 	}
 
-	private fun hasNoneLane(turnLanes: String?): Boolean {
+	internal fun hasNoneLane(turnLanes: String?): Boolean {
 		if (turnLanes != null) {
 			for (lane in splitKeepingEmpty(turnLanes, "|")) {
 				if (isNoneLane(lane)) {
