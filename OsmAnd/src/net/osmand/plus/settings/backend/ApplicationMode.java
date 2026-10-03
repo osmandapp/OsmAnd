@@ -831,6 +831,10 @@ public class ApplicationMode {
 		return this == ApplicationMode.CAR || this.isDerivedRoutingFrom(ApplicationMode.CAR);
 	}
 
+	public boolean isAndroidAutoCompatible() {
+		return this.isAppModeDerivedFromCar();
+	}
+
 	@Nullable
 	public static ApplicationMode getFirstCarMode(OsmandApplication app) {
 		for (ApplicationMode mode : ApplicationMode.values(app)) {

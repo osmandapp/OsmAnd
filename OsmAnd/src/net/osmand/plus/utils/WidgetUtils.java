@@ -55,6 +55,29 @@ public class WidgetUtils {
 		}
 	}
 
+	public static void createNewAndroidAutoWidget(@NonNull OsmandApplication app,
+	                                              @NonNull MapWidgetInfo widgetInfo,
+	                                              @NonNull WidgetsPanel panel,
+	                                              @NonNull ApplicationMode appMode) {
+		createNewAndroidAutoWidget(app, widgetInfo, panel, appMode, null, null);
+	}
+
+	public static void createNewAndroidAutoWidget(@NonNull OsmandApplication app,
+	                                              @NonNull MapWidgetInfo widgetInfo,
+	                                              @NonNull WidgetsPanel panel,
+	                                              @NonNull ApplicationMode appMode,
+	                                              @Nullable String selectedWidget, @Nullable Boolean addToNext) {
+		MapWidgetRegistry widgetRegistry = app.getMapWidgetRegistry();
+		app.getSettings().getAndroidAutoCustomWidgetsKeys().addModeValue(appMode, widgetInfo.key);
+		if (addToNext != null && selectedWidget != null && widgetInfo.widget instanceof ISupportMultiRow) {
+			addAndroidAutoWidgetToSpecificPlace(app, widgetInfo, panel, appMode, selectedWidget, addToNext);
+		} else {
+			addAndroidAutoWidgetToEnd(app, widgetInfo, panel, appMode);
+		}
+		widgetRegistry.enableDisableAndroidAutoWidgetForMode(appMode, widgetInfo, true);
+	}
+
+
 	private static void addWidgetToSpecificPlace(@NonNull MapActivity mapActivity, @NonNull MapWidgetInfo targetWidget,
 	                                             @NonNull WidgetsPanel widgetsPanel, @NonNull ApplicationMode selectedAppMode,
 	                                             @Nullable ScreenLayoutMode layoutMode, @NonNull String selectedWidget, boolean addToNext) {
@@ -65,7 +88,56 @@ public class WidgetUtils {
 		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity,
 				selectedAppMode, layoutMode, ENABLED_MODE | MATCHING_PANELS_MODE, Collections.singletonList(widgetsPanel));
 
-		widgetRegistry.getWidgetsForPanel(targetWidget.getWidgetPanel()).remove(targetWidget);
+		doAddWidgetToSpecificPlace(targetWidget, widgetsPanel, selectedAppMode, layoutMode, selectedWidget, addToNext, widgetRegistry, enabledWidgets, pagedOrder, settings, false);
+	}
+	private static void addAndroidAutoWidgetToSpecificPlace(@NonNull OsmandApplication app, @NonNull MapWidgetInfo targetWidget,
+	                                                        @NonNull WidgetsPanel widgetsPanel, @NonNull ApplicationMode selectedAppMode,
+	                                                        @NonNull String selectedWidget, boolean addToNext) {
+		OsmandSettings settings = app.getSettings();
+		MapWidgetRegistry widgetRegistry = app.getMapWidgetRegistry();
+		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getAndroidAutoWidgetsForPanel(app,
+				selectedAppMode, ENABLED_MODE | MATCHING_PANELS_MODE, Collections.singletonList(widgetsPanel));
+
+		doAddWidgetToSpecificPlace(targetWidget, widgetsPanel, selectedAppMode, null, selectedWidget, addToNext, widgetRegistry, enabledWidgets, pagedOrder, settings, true);
+	}
+
+	private static void addWidgetToEnd(@NonNull MapActivity mapActivity, @NonNull MapWidgetInfo targetWidget,
+	                                   @NonNull WidgetsPanel widgetsPanel, @NonNull ApplicationMode selectedAppMode,
+	                                   @Nullable ScreenLayoutMode layoutMode) {
+		OsmandApplication app = mapActivity.getApp();
+		OsmandSettings settings = app.getSettings();
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity,
+				selectedAppMode, layoutMode, ENABLED_MODE | MATCHING_PANELS_MODE, Collections.singletonList(widgetsPanel));
+
+		doAddWidgetToEnd(targetWidget, widgetsPanel, selectedAppMode, layoutMode, widgetRegistry, enabledWidgets, pagedOrder, settings, false);
+	}
+
+	private static void addAndroidAutoWidgetToEnd(@NonNull OsmandApplication app, @NonNull MapWidgetInfo targetWidget,
+	                                              @NonNull WidgetsPanel widgetsPanel, @NonNull ApplicationMode selectedAppMode) {
+		OsmandSettings settings = app.getSettings();
+		MapWidgetRegistry widgetRegistry = app.getMapWidgetRegistry();
+		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getAndroidAutoWidgetsForPanel(app,
+				selectedAppMode, ENABLED_MODE | MATCHING_PANELS_MODE, Collections.singletonList(widgetsPanel));
+
+		doAddWidgetToEnd(targetWidget, widgetsPanel, selectedAppMode, null, widgetRegistry, enabledWidgets, pagedOrder, settings, true);
+	}
+
+	private static void doAddWidgetToSpecificPlace(@NonNull MapWidgetInfo targetWidget,
+	                                               @NonNull WidgetsPanel widgetsPanel,
+	                                               @NonNull ApplicationMode selectedAppMode,
+	                                               @Nullable ScreenLayoutMode layoutMode,
+	                                               @NonNull String selectedWidget,
+	                                               boolean addToNext,
+	                                               MapWidgetRegistry widgetRegistry,
+	                                               Set<MapWidgetInfo> enabledWidgets,
+	                                               Map<Integer, List<String>> pagedOrder,
+	                                               OsmandSettings settings,
+												   boolean isAndroidAuto) {
+		widgetRegistry.getWidgetsForPanel(targetWidget.getWidgetPanel(), isAndroidAuto).remove(targetWidget);
 		targetWidget.setWidgetPanel(widgetsPanel);
 
 		for (MapWidgetInfo widget : enabledWidgets) {
@@ -77,7 +149,7 @@ public class WidgetUtils {
 		if (Algorithms.isEmpty(pagedOrder)) {
 			targetWidget.pageIndex = 0;
 			targetWidget.priority = 0;
-			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
+			widgetRegistry.getWidgetsForPanel(widgetsPanel, isAndroidAuto).add(targetWidget);
 
 			List<List<String>> flatOrder = new ArrayList<>();
 			flatOrder.add(Collections.singletonList(targetWidget.key));
@@ -104,7 +176,7 @@ public class WidgetUtils {
 
 			for (int i = 0; i < pageToAddWidget.size(); i++) {
 				String widgetId = pageToAddWidget.get(i);
-				MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+				MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId, isAndroidAuto);
 				if (widgetInfo != null) {
 					widgetInfo.pageIndex = insertPage;
 					widgetInfo.priority = i;
@@ -114,22 +186,21 @@ public class WidgetUtils {
 				}
 			}
 			orders.add(insertPage, pageToAddWidget);
-			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
+			widgetRegistry.getWidgetsForPanel(widgetsPanel, isAndroidAuto).add(targetWidget);
 			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings, layoutMode);
 		}
 	}
 
-	private static void addWidgetToEnd(@NonNull MapActivity mapActivity, @NonNull MapWidgetInfo targetWidget,
-									   @NonNull WidgetsPanel widgetsPanel, @NonNull ApplicationMode selectedAppMode,
-									   @Nullable ScreenLayoutMode layoutMode) {
-		OsmandApplication app = mapActivity.getApp();
-		OsmandSettings settings = app.getSettings();
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity,
-				selectedAppMode, layoutMode, ENABLED_MODE | MATCHING_PANELS_MODE, Collections.singletonList(widgetsPanel));
-
-		widgetRegistry.getWidgetsForPanel(targetWidget.getWidgetPanel()).remove(targetWidget);
+	private static void doAddWidgetToEnd(@NonNull MapWidgetInfo targetWidget,
+	                                     @NonNull WidgetsPanel widgetsPanel,
+	                                     @NonNull ApplicationMode selectedAppMode,
+										 @Nullable ScreenLayoutMode layoutMode,
+	                                     MapWidgetRegistry widgetRegistry,
+	                                     Set<MapWidgetInfo> enabledWidgets,
+	                                     Map<Integer, List<String>> pagedOrder,
+	                                     OsmandSettings settings,
+										 boolean isAndroidAuto) {
+		widgetRegistry.getWidgetsForPanel(targetWidget.getWidgetPanel(), isAndroidAuto).remove(targetWidget);
 		targetWidget.setWidgetPanel(widgetsPanel);
 
 		for (MapWidgetInfo widget : enabledWidgets) {
@@ -141,7 +212,7 @@ public class WidgetUtils {
 		if (Algorithms.isEmpty(pagedOrder)) {
 			targetWidget.pageIndex = 0;
 			targetWidget.priority = 0;
-			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
+			widgetRegistry.getWidgetsForPanel(widgetsPanel, isAndroidAuto).add(targetWidget);
 
 			List<List<String>> flatOrder = new ArrayList<>();
 			flatOrder.add(Collections.singletonList(targetWidget.key));
@@ -161,7 +232,7 @@ public class WidgetUtils {
 				lastPageOrder.add(targetWidget.key);
 
 				String previousLastWidgetId = lastPageOrder.get(lastPageOrder.size() - 2);
-				MapWidgetInfo previousLastVisibleWidgetInfo = widgetRegistry.getWidgetInfoById(previousLastWidgetId);
+				MapWidgetInfo previousLastVisibleWidgetInfo = widgetRegistry.getWidgetInfoById(previousLastWidgetId, isAndroidAuto);
 				int lastPage;
 				int lastOrder;
 				if (previousLastVisibleWidgetInfo != null) {
@@ -175,7 +246,7 @@ public class WidgetUtils {
 				targetWidget.priority = lastOrder;
 			}
 
-			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
+			widgetRegistry.getWidgetsForPanel(widgetsPanel, isAndroidAuto).add(targetWidget);
 			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings, layoutMode);
 		}
 	}

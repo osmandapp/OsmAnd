@@ -60,7 +60,9 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 		return v -> {
 			widgetState.changeToNextState();
 			updateInfo(null);
-			mapActivity.refreshMap();
+			if (mapActivity != null) {
+				mapActivity.refreshMap();
+			}
 			updateWidgetName();
 		};
 	}

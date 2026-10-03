@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -46,10 +48,16 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	private Integer cachedAltitudeMetric;
 	private Integer cachedAngularUnits;
 
+	protected String cachedText, cachedSmallText;
 
 	public TextInfoWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
-			@Nullable String customId, @Nullable WidgetsPanel panel) {
+	                      @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
+	}
+
+	public TextInfoWidget(@NonNull OsmandApplication app, @NonNull WidgetType widgetType,
+	                      @Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(app, widgetType, customId, panel);
 	}
 
 	@Override
@@ -138,7 +146,9 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	}
 
 	protected void setTextNoUpdateVisibility(String text, String subtext) {
-		getView().setContentDescription(combine(text, subtext));
+		if (!isAndroidAuto()) {
+			getView().setContentDescription(combine(text, subtext));
+		}
 		if (text == null) {
 			setText("");
 		} else {
@@ -149,16 +159,23 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 		} else {
 			setSmallText(subtext);
 		}
+
 	}
 
 	private void setText(String text) {
-		textView.setText(text);
+		cachedText = text;
+		if (textView != null) {
+			textView.setText(text);
+		}
 	}
 
 	private void setSmallText(String text) {
-		smallTextView.setText(text);
-		if (smallTextViewShadow != null) {
-			smallTextViewShadow.setText(text);
+		cachedSmallText = text;
+		if (smallTextView != null) {
+			smallTextView.setText(text);
+			if (smallTextViewShadow != null) {
+				smallTextViewShadow.setText(text);
+			}
 		}
 	}
 

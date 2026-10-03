@@ -50,7 +50,9 @@ public class TripRecordingMaxSpeedWidget extends BaseRecordingWidget {
 			forceUpdate = true;
 			widgetState.changeToNextState();
 			updateInfo(null);
-			mapActivity.refreshMap();
+			if (mapActivity != null) {
+				mapActivity.refreshMap();
+			}
 			updateWidgetName();
 			updateIcon();
 		};
@@ -102,7 +104,11 @@ public class TripRecordingMaxSpeedWidget extends BaseRecordingWidget {
 		actions.add(new PopUpMenuItem.Builder(app)
 				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_center_on_track, iconColor))
 				.setTitleId(R.string.show_track_on_map)
-				.setOnClickListener(item -> showOnMap(mapActivity))
+				.setOnClickListener(item -> {
+					if (mapActivity != null) {
+						showOnMap(mapActivity);
+					}
+				})
 				.showTopDivider(true)
 				.create());
 		return actions;

@@ -166,8 +166,17 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	public abstract WidgetsPanel getUpdatedPanel(@NonNull ApplicationMode appMode,
 	                                             @Nullable ScreenLayoutMode layoutMode);
 
+	@NonNull
+	public WidgetsPanel getUpdatedAndroidAutoPanel(@NonNull ApplicationMode appMode) {
+		return WidgetsPanel.ANDROID_AUTO;
+	}
+
 	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		return isEnabledForAppMode(appMode, getWidgetsVisibility(getApp(), appMode, layoutMode));
+	}
+
+	public boolean isEnabledForAndroidAutoMode(@NonNull ApplicationMode appMode) {
+		return isEnabledForAppMode(appMode, getAndroidAutoWidgetsVisibility(getApp(), appMode));
 	}
 
 	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode, @NonNull List<String> widgetsVisibility) {
@@ -200,6 +209,27 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 			settingsPref.resetModeToDefault(appMode);
 		}
 	}
+	public void enableDisableAndroidAutoForMode(@NonNull ApplicationMode appMode, @Nullable Boolean enabled) {
+		OsmandApplication app = getApp();
+		List<String> widgetsVisibility = new ArrayList<>(getAndroidAutoWidgetsVisibility(app, appMode));
+		widgetsVisibility.remove(key);
+		widgetsVisibility.remove(hiddenKey);
+		widgetsVisibility.remove(collapsedKey);
+
+		if (enabled != null && (!isCustomWidget() || enabled)) {
+			widgetsVisibility.add(enabled ? key : hiddenKey);
+		}
+		StringBuilder newVisibilityString = new StringBuilder();
+		for (String visibility : widgetsVisibility) {
+			newVisibilityString.append(visibility).append(SETTINGS_SEPARATOR);
+		}
+		getAndroidAutoVisibilityPreference(app).setModeValue(appMode, newVisibilityString.toString());
+
+		CommonPreference<?> settingsPref = widget.getWidgetSettingsPrefToReset(appMode, null);
+		if ((enabled == null || !enabled) && settingsPref != null) {
+			settingsPref.resetModeToDefault(appMode);
+		}
+	}
 
 	@NonNull
 	public static List<String> getWidgetsVisibility(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
@@ -209,10 +239,23 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		}
 		return Arrays.asList(widgetsVisibilityString.split(SETTINGS_SEPARATOR));
 	}
+	@NonNull
+	public static List<String> getAndroidAutoWidgetsVisibility(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
+		String widgetsVisibilityString = getAndroidAutoVisibilityPreference(app).getModeValue(appMode);
+		if (Algorithms.isEmpty(widgetsVisibilityString)) {
+			return Collections.emptyList();
+		}
+		return Arrays.asList(widgetsVisibilityString.split(SETTINGS_SEPARATOR));
+	}
 
 	@NonNull
 	private static OsmandPreference<String> getVisibilityPreference(@NonNull OsmandApplication app, @Nullable ScreenLayoutMode layoutMode) {
 		return app.getSettings().getMapInfoControls(layoutMode);
+	}
+
+	@NonNull
+	private static OsmandPreference<String> getAndroidAutoVisibilityPreference(@NonNull OsmandApplication app) {
+		return app.getSettings().AA_WIDGETS_VISIBILITY;
 	}
 
 	@NonNull

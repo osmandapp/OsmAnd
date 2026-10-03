@@ -209,10 +209,11 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 	}
 
 	private fun setupTabLayout() {
-		viewPager.adapter = PanelsTabAdapter(this)
+		viewPager.adapter = PanelsTabAdapter(this, WidgetsPanel.getMapPanels())
 		viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
 			override fun onPageSelected(position: Int) {
-				selectedPanel = WidgetsPanel.entries[position]
+				val adapter = viewPager.adapter as PanelsTabAdapter
+				selectedPanel = adapter.getPanel(position)
 				updateToolbarTitle()
 				updateSheetShadow()
 				if (previewActive) {
@@ -233,7 +234,7 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 			override fun onTabReselected(tab: TabLayout.Tab) = Unit
 		})
 
-		val panels = WidgetsPanel.entries
+		val panels = (viewPager.adapter as PanelsTabAdapter).panels
 		val rtl = AndroidUtils.isLayoutRtl(app)
 		for (i in 0 until tabLayout.tabCount) {
 			tabLayout.getTabAt(i)?.apply {
@@ -273,7 +274,8 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 
 		val rtl = AndroidUtils.isLayoutRtl(app)
 		var first = true
-		for (panel in WidgetsPanel.entries) {
+		val panels = (viewPager.adapter as PanelsTabAdapter).panels
+		for (panel in panels) {
 			if (panel == selectedPanel) continue
 			val fromPanel = panel
 			items.add(PopUpMenuItem.Builder(app)
@@ -363,12 +365,14 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 
 	override fun getContentStatusBarNightMode(): Boolean = nightMode
 
-	private class PanelsTabAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+	private class PanelsTabAdapter(fragment: Fragment, val panels: List<WidgetsPanel>) : FragmentStateAdapter(fragment) {
 
 		override fun createFragment(position: Int): Fragment {
-			return PanelAppearanceFragment.newInstance(WidgetsPanel.entries[position])
+			return PanelAppearanceFragment.newInstance(getPanel(position))
 		}
 
-		override fun getItemCount(): Int = WidgetsPanel.entries.size
+		override fun getItemCount(): Int = panels.size
+
+		fun getPanel(position: Int) = panels[position]
 	}
 }

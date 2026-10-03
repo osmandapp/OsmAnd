@@ -31,7 +31,11 @@ public class GpsInfoWidget extends SimpleWidget {
 
 	@Override
 	protected View.OnClickListener getOnClickListener() {
-		return v -> new StartGPSStatus(mapActivity).run();
+		return v -> {
+			if (mapActivity != null) {
+				new StartGPSStatus(mapActivity).run();
+			}
+		};
 	}
 
 	@Override

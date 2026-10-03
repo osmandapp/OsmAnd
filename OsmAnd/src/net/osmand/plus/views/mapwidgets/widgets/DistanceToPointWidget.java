@@ -98,7 +98,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 
 		@Override
 		public LatLon getPointToNavigate() {
-			TargetPoint targetPoint = mapActivity.getPointToNavigate();
+			TargetPoint targetPoint = app.getTargetPointsHelper().getPointToNavigate();
 			return targetPoint == null ? null : targetPoint.getLatLon();
 		}
 
@@ -121,6 +121,9 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 
 		@Override
 		protected void onClick(OsmandMapTileView view) {
+			if (mapActivity == null) {
+				return;
+			}
 			if (targetPointsHelper.getIntermediatePoints().size() > 1) {
 				mapActivity.getMapActions().openIntermediatePointsDialog();
 			} else {

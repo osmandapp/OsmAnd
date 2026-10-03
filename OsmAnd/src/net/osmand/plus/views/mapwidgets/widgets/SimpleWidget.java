@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -55,9 +56,17 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	@Nullable
 	private WidgetSize renderedWidgetSize;
 
+	@Nullable
+	protected String cachedWidgetName;
+
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 	                    @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
+		widgetState = new SimpleWidgetState(app, customId, widgetType, getDefaultWidgetSize());
+	}
+
+	public SimpleWidget(@NonNull OsmandApplication app, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(app, widgetType, customId, panel);
 		widgetState = new SimpleWidgetState(app, customId, widgetType, getDefaultWidgetSize());
 	}
 
@@ -75,12 +84,14 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 		int layoutId = getContentLayoutId();
 		renderedWidgetSize = widgetState.getWidgetSizePref().get();
-		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
+		getInflater().inflate(layoutId, container);
 		findViews();
 		container.setOnLongClickListener(v -> {
 			List<PopUpMenuItem> actions = getWidgetActions();
 			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
-			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, actions, layoutMode, panel, nightMode, true);
+			if (mapActivity != null) {
+				WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, actions, layoutMode, panel, nightMode, true);
+			}
 			return true;
 		});
 		container.setOnClickListener(getOnClickListener());
@@ -150,13 +161,15 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	public void updateWidgetView() {
+		updateWidgetName();
 		boolean showIcon = shouldShowIcon();
 		AndroidUiHelper.updateVisibility(imageView, showIcon);
-		updateWidgetName();
 		if (isVerticalWidget()) {
-			app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
-		} else {
-			updateValueAlign(false);
+			if (!isAndroidAuto()) {
+				app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
+			} else {
+				updateValueAlign(false);
+			}
 		}
 	}
 
@@ -240,6 +253,11 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	protected void updateSimpleWidgetInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+
+	}
+
+	protected void updateSimpleWidgetInfoForAndroidAuto(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+
 	}
 
 	@Override
@@ -253,6 +271,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	protected void updateWidgetName() {
 		String newWidgetName = getWidgetName();
+
 		if (newWidgetName != null && this.widgetName != null) {
 
 			String additionalName = getAdditionalWidgetName();
@@ -270,6 +289,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 				checkForMaxWidgetName();
 			}
 		}
+		cachedWidgetName = newWidgetName;
 	}
 
 	private void checkForMaxWidgetName() {

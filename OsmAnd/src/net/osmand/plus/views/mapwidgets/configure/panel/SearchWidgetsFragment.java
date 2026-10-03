@@ -61,6 +61,7 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 
 	public static final String KEY_SELECTED_PANEL = "key_selected_panel";
 	public static final String KEY_SEARCH_MODE = "key_search_mode";
+	private static final String KEY_ANDROID_AUTO_MODE = "key_android_auto_mode";
 	public static final int PAYLOAD_SEPARATOR_UPDATE = 1;
 
 	private ApplicationMode selectedAppMode;
@@ -81,6 +82,8 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 	private String searchQuery = "";
 	private OnBackPressedCallback onBackPressedCallback;
 
+	private boolean isAndroidAutoMode = false;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -94,7 +97,9 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 		if (savedInstanceState != null) {
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(KEY_SELECTED_PANEL));
 			searchMode = savedInstanceState.getBoolean(KEY_SEARCH_MODE);
+			isAndroidAutoMode = savedInstanceState.getBoolean(KEY_ANDROID_AUTO_MODE, false);
 		}
+
 
 		onBackPressedCallback = new OnBackPressedCallback(true) {
 			@Override
@@ -273,10 +278,15 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 	private void loadWidgets() {
 		int filter = AVAILABLE_MODE | DEFAULT_MODE;
 
-		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(requireMapActivity(),
-				selectedAppMode, getScreenLayoutMode(), filter, Collections.singletonList(selectedPanel));
+		Set<MapWidgetInfo> availableWidgets;
+		if (isAndroidAutoMode) {
+			availableWidgets = widgetRegistry.getAndroidAutoWidgetsForPanel(app,
+					selectedAppMode, filter, Collections.singletonList(selectedPanel));
+		} else {
+			availableWidgets = widgetRegistry.getWidgetsForPanel(requireMapActivity(),
+					selectedAppMode, getScreenLayoutMode(), filter, Collections.singletonList(selectedPanel));
+		}
 		boolean hasAvailableWidgets = !Algorithms.isEmpty(availableWidgets);
-
 		if (hasAvailableWidgets) {
 			List<WidgetType> allWidgetTypes;
 			List<Object> externalItems;
@@ -494,7 +504,7 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 		if (activity != null && target != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			AddWidgetFragment.showGroupDialog(fragmentManager, target,
-					selectedAppMode, selectedPanel, group, null);
+					selectedAppMode, selectedPanel, group, null, isAndroidAutoMode);
 		}
 	}
 
@@ -516,6 +526,7 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 		super.onSaveInstanceState(outState);
 		outState.putString(KEY_SELECTED_PANEL, selectedPanel.name());
 		outState.putBoolean(KEY_SEARCH_MODE, searchMode);
+		outState.putBoolean(KEY_ANDROID_AUTO_MODE, isAndroidAutoMode);
 	}
 
 	private static class SearchWidgetsDiffCallback extends Callback {
@@ -666,11 +677,12 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel selectedPanel, @NonNull Fragment target) {
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel selectedPanel, @NonNull Fragment target, boolean isAndroidAutoMode) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SearchWidgetsFragment fragment = new SearchWidgetsFragment();
 			fragment.selectedPanel = selectedPanel;
+			fragment.isAndroidAutoMode = isAndroidAutoMode;
 			fragment.setTargetFragment(target, 0);
 			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)

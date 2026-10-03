@@ -88,7 +88,7 @@ public class LanesWidget extends MapWidget {
 		boolean followingMode = routingHelper.isFollowingMode();
 		boolean deviatedFromRoute = routingHelper.isDeviatedFromRoute();
 		boolean notOsmAndGpxRoute = routingHelper.getCurrentGPXRoute() != null && !routingHelper.isCurrentGPXRouteV2();
-		boolean mapLinkedToLocation = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		boolean mapLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
 
 		if (mapLinkedToLocation && (!followingMode || deviatedFromRoute || notOsmAndGpxRoute)) {
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
@@ -193,8 +193,10 @@ public class LanesWidget extends MapWidget {
 		ViewGroup specialContainer = getSpecialContainer();
 		specialPosition = panel == WidgetsPanel.TOP && followingWidgets.isEmpty();
 		if (specialPosition) {
-			specialContainer.removeAllViews();
-			specialContainer.addView(view);
+			if (specialContainer != null) {
+				specialContainer.removeAllViews();
+				specialContainer.addView(view);
+			}
 		} else {
 			container.addView(view);
 		}
@@ -209,11 +211,17 @@ public class LanesWidget extends MapWidget {
 	public void detachView(@NonNull WidgetsPanel widgetsPanel, @NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
 		super.detachView(widgetsPanel, widgets, mode);
 		// Clear in case link to previous view of LanesWidget is lost
-		getSpecialContainer().removeView(getView());
+		ViewGroup container = getSpecialContainer();
+		if (container != null) {
+			container.removeView(getView());
+		}
 	}
 
-	@NonNull
+	@Nullable
 	private ViewGroup getSpecialContainer() {
-		return mapActivity.findViewById(R.id.lanes_widget_special_position);
+		if (mapActivity != null) {
+			return mapActivity.findViewById(R.id.lanes_widget_special_position);
+		}
+		return null;
 	}
 }

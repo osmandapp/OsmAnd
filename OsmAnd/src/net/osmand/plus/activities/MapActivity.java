@@ -1316,6 +1316,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		getMapView().refreshMap(true);
 		applyScreenOrientation();
 		app.getAppCustomization().updateMapMargins(this);
+		app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
 		dashboardOnMap.onAppModeChanged();
 	}
 

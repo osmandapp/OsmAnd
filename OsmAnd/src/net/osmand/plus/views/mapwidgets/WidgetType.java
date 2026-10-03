@@ -44,6 +44,7 @@ import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public enum WidgetType {
 
@@ -161,6 +162,23 @@ public enum WidgetType {
 	public static final String INTERMEDIATE_TIME_TO_GO_LEGACY = "intermediate_time_time_to_go";
 	public static final String ARRIVAL_TIME_LEGACY = "arrival_time";
 	public static final String TIME_TO_GO_LEGACY = "time_to_go";
+
+	public static final Set<WidgetType> ANDROID_AUTO_TYPES = Set.of(
+			CURRENT_TIME,
+			OBD_SPEED,
+			OBD_RPM,
+			OBD_ENGINE_RUNTIME,
+			OBD_FUEL_PRESSURE,
+			OBD_AIR_INTAKE_TEMP,
+			ENGINE_OIL_TEMPERATURE,
+			OBD_AMBIENT_AIR_TEMP,
+			OBD_BATTERY_VOLTAGE,
+			OBD_ALT_BATTERY_VOLTAGE,
+			OBD_ENGINE_COOLANT_TEMP,
+			OBD_REMAINING_FUEL,
+			OBD_CALCULATED_ENGINE_LOAD,
+			OBD_THROTTLE_POSITION
+	);
 
 	@NonNull
 	public final String id;
@@ -328,6 +346,23 @@ public enum WidgetType {
 		return defaultPanel;
 	}
 
+	public boolean supportsAndroidAuto() {
+		return ANDROID_AUTO_TYPES.contains(this);
+	}
+
+	@Nullable
+	public WidgetsPanel getAndroidAutoPanel(@NonNull String widgetId, @NonNull ApplicationMode mode,
+	                                        @NonNull OsmandSettings settings) {
+		if (!this.supportsAndroidAuto()) {
+			return null;
+		}
+		WidgetsPanel widgetsPanel = findAndroidAutoWidgetPanel(widgetId, settings, mode);
+		if (widgetsPanel != null) {
+			return widgetsPanel;
+		}
+		return WidgetsPanel.ANDROID_AUTO;
+	}
+
 	@Nullable
 	public static WidgetsPanel findWidgetPanel(@NonNull String widgetId, @NonNull OsmandSettings settings,
 			@Nullable ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
@@ -336,7 +371,7 @@ public enum WidgetType {
 		}
 		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
 		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
-		for (WidgetsPanel widgetsPanel : WidgetsPanel.values()) {
+		for (WidgetsPanel widgetsPanel : WidgetsPanel.getMapPanels()) {
 			if (widgetsPanel.getOrderPreference(settings, layoutMode).isSetForMode(appMode)) {
 				setPanels.add(widgetsPanel);
 			} else {
@@ -350,6 +385,38 @@ public enum WidgetType {
 		}
 		for (WidgetsPanel panel : unsetPanels) {
 			if (panel.contains(widgetId, settings, appMode, layoutMode)) {
+				return panel;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static WidgetsPanel findAndroidAutoWidgetPanel(
+			@NonNull String widgetId,
+			@NonNull OsmandSettings settings,
+			@Nullable ApplicationMode appMode
+	) {
+		if (appMode == null) {
+			appMode = settings.getApplicationMode();
+		}
+		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
+		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
+		WidgetsPanel widgetsPanel = WidgetsPanel.ANDROID_AUTO;
+
+		if (widgetsPanel.getOrderPreference(settings, null).isSetForMode(appMode)) {
+			setPanels.add(widgetsPanel);
+		} else {
+			unsetPanels.add(widgetsPanel);
+
+		}
+		for (WidgetsPanel panel : setPanels) {
+			if (panel.contains(widgetId, settings, appMode, null)) {
+				return panel;
+			}
+		}
+		for (WidgetsPanel panel : unsetPanels) {
+			if (panel.contains(widgetId, settings, appMode, null)) {
 				return panel;
 			}
 		}

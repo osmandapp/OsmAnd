@@ -39,6 +39,7 @@ import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.AndroidAutoWidgetsInitializer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
@@ -71,6 +72,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	public static final String KEY_WIDGET_ID = "widget_id";
 	public static final String KEY_ADD_MODE = "add_mode_key";
 	public static final String KEY_SELECTED_PANEL = "selected_panel_key";
+	public static final String KEY_IS_ANDROID_AUTO = "is_android_auto_key";
 
 	protected ConfigureWidgetsController controller;
 	protected ApplicationMode appMode;
@@ -89,6 +91,8 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 
 	private boolean addNewWidgetMode = false;
 	protected boolean isVerticalPanel;
+
+	protected boolean isAndroidAutoMode = false;
 
 	@NonNull
 	public WidgetType getWidget() {
@@ -175,7 +179,12 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 
 		int filter = ENABLED_MODE | MATCHING_PANELS_MODE;
 		List<WidgetsPanel> panels = Collections.singletonList(widgetPanel);
-		List<MapWidgetInfo> widgetInfos = new ArrayList<>(widgetRegistry.getWidgetsForPanel(mapActivity, appMode, layoutMode, filter, panels));
+		List<MapWidgetInfo> widgetInfos;
+		if (isAndroidAutoMode) {
+			widgetInfos = new ArrayList<>(widgetRegistry.getAndroidAutoWidgetsForPanel(app, appMode, filter, panels));
+		} else {
+			widgetInfos = new ArrayList<>(widgetRegistry.getWidgetsForPanel(mapActivity, appMode, layoutMode, filter, panels));
+		}
 
 		int index = widgetInfos.indexOf(widgetInfo);
 		if (index == -1) {
@@ -184,18 +193,36 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 
 		WidgetType widgetType = getWidget();
 		String duplicateId = WidgetType.getDuplicateWidgetId(widgetType);
-		MapWidget duplicateWidget = new MapWidgetsFactory(mapActivity).createMapWidget(duplicateId, widgetType, widgetPanel);
-		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
-		MapWidgetInfo duplicateWidgetInfo = creator.askCreateWidgetInfo(duplicateId, duplicateWidget, widgetType, widgetPanel);
+		MapWidget duplicateWidget;
+		MapWidgetInfo duplicateWidgetInfo;
+		WidgetInfoCreator creator;
+		if (isAndroidAutoMode) {
+			duplicateWidget = new AndroidAutoWidgetsInitializer.AndroidAutoWidgetsFactory(app)
+					.createMapWidget(duplicateId, widgetType, widgetPanel);
+			creator = new WidgetInfoCreator(app, appMode, null);
+			duplicateWidgetInfo = creator.askCreateAndroidWidgetInfo(duplicateId, duplicateWidget, widgetType, widgetPanel);
+		} else {
+			duplicateWidget = new MapWidgetsFactory(mapActivity).createMapWidget(duplicateId, widgetType, widgetPanel);
+			creator = new WidgetInfoCreator(app, appMode, layoutMode);
+			duplicateWidgetInfo = creator.askCreateWidgetInfo(duplicateId, duplicateWidget, widgetType, widgetPanel);
+		}
 		if (duplicateWidgetInfo == null) {
 			return null;
 		}
-		settings.getCustomWidgetsKeys(layoutMode).addModeValue(appMode, duplicateId);
+		if (isAndroidAutoMode) {
+			settings.getAndroidAutoCustomWidgetsKeys().addModeValue(appMode, duplicateId);
+		} else {
+			settings.getCustomWidgetsKeys(layoutMode).addModeValue(appMode, duplicateId);
+		}
 		WidgetState widgetState = widgetInfo.getWidgetState();
 		if (widgetState != null) {
 			widgetState.copyPrefs(appMode, duplicateId);
 		}
-		duplicateWidgetInfo.enableDisableForMode(appMode, true, layoutMode);
+		if (isAndroidAutoMode) {
+			duplicateWidgetInfo.enableDisableAndroidAutoForMode(appMode, true);
+		} else {
+			duplicateWidgetInfo.enableDisableForMode(appMode, true, layoutMode);
+		}
 		widgetInfo.widget.copySettings(appMode, duplicateId);
 
 		Map<Integer, List<String>> pagedOrder = new LinkedHashMap<>();
@@ -208,11 +235,15 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 			}
 		}
 
-		widgetPanel.setWidgetsOrder(appMode, new ArrayList<>(pagedOrder.values()), settings, layoutMode);
-
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateAllControls(mapActivity);
+		if (isAndroidAutoMode) {
+			widgetPanel.setWidgetsOrder(appMode, new ArrayList<>(pagedOrder.values()), settings, null);
+			app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
+		} else {
+			widgetPanel.setWidgetsOrder(appMode, new ArrayList<>(pagedOrder.values()), settings, layoutMode);
+			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateAllControls(mapActivity);
+			}
 		}
 
 		return duplicateId;
@@ -260,6 +291,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		widgetId = bundle.getString(KEY_WIDGET_ID);
 		appMode = ApplicationMode.valueOfStringKey(bundle.getString(KEY_APP_MODE), settings.getApplicationMode());
 		addNewWidgetMode = bundle.getBoolean(KEY_ADD_MODE, false);
+		isAndroidAutoMode = bundle.getBoolean(KEY_IS_ANDROID_AUTO, false);
 		widgetPanel = WidgetsPanel.valueOf(bundle.getString(KEY_SELECTED_PANEL));
 		isVerticalPanel = widgetPanel.isPanelVertical();
 
@@ -272,7 +304,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 			}
 		}
 		if (widgetInfo == null) {
-			widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+			widgetInfo = widgetRegistry.getWidgetInfoById(widgetId, isAndroidAutoMode);
 		}
 
 		if (widgetInfo == null) {
@@ -373,17 +405,29 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 
 	}
 
+	protected void recreateControls() {
+		if (isAndroidAutoMode) {
+			app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
+		} else {
+			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateControls();
+			}
+		}
+	}
+
+	protected final void applySettingsAndRecreateControls() {
+		applySettings();
+		recreateControls();
+	}
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		if (widgetInfo == null) {
 			return;
 		}
-		applySettings();
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateControls();
-		}
+		applySettingsAndRecreateControls();
 		if (getTargetFragment() instanceof WidgetsConfigurationChangeListener listener) {
 			listener.onWidgetsConfigurationChanged();
 		}
@@ -396,6 +440,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		outState.putString(KEY_WIDGET_ID, widgetId);
 		outState.putBoolean(KEY_ADD_MODE, addNewWidgetMode);
 		outState.putString(KEY_SELECTED_PANEL, widgetPanel.name());
+		outState.putBoolean(KEY_IS_ANDROID_AUTO, isAndroidAutoMode);
 
 		if (layoutMode != null) {
 			outState.putSerializable(SCREEN_LAYOUT_MODE, layoutMode);
@@ -421,7 +466,8 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	private static void showInstance(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
 	                                 @Nullable Fragment target, @NonNull ApplicationMode appMode,
 	                                 @NonNull String widgetId, @NonNull WidgetsPanel widgetsPanel,
-	                                 boolean addNewWidgetMode, @Nullable ScreenLayoutMode layoutMode) {
+	                                 boolean addNewWidgetMode, @Nullable ScreenLayoutMode layoutMode,
+									 boolean isAndroidAutoMode) {
 		String tag = fragment.getClass().getSimpleName();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, tag, true)) {
 			Bundle args = new Bundle();
@@ -429,6 +475,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 			args.putString(KEY_APP_MODE, appMode.getStringKey());
 			args.putBoolean(KEY_ADD_MODE, addNewWidgetMode);
 			args.putString(KEY_SELECTED_PANEL, widgetsPanel.name());
+			args.putBoolean(KEY_IS_ANDROID_AUTO, isAndroidAutoMode);
 
 			if (layoutMode != null) {
 				args.putSerializable(SCREEN_LAYOUT_MODE, layoutMode);
@@ -447,12 +494,18 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
 	                                @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId,
 	                                @NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode) {
-		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, false, layoutMode);
+		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, false, layoutMode, false);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
+	                                @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId,
+	                                @NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode, boolean isAndroidAutoMode) {
+		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, false, layoutMode, isAndroidAutoMode);
 	}
 
 	public static void showAddWidgetFragment(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
 	                                @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId,
-	                                @NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode) {
-		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, true, layoutMode);
+	                                @NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode, boolean isAndroidAutoMode) {
+		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, true, layoutMode, isAndroidAutoMode);
 	}
 }

@@ -27,6 +27,10 @@ public class MapillaryMapWidget extends SimpleWidget {
 
 	@Override
 	protected View.OnClickListener getOnClickListener() {
-		return v -> MapillaryPlugin.openMapillary(mapActivity, null);
+		return v -> {
+			if (mapActivity != null) {
+				MapillaryPlugin.openMapillary(mapActivity, null);
+			}
+		};
 	}
 }

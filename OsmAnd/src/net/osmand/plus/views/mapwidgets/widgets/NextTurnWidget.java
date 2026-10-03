@@ -61,6 +61,9 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 
 	@Override
 	public void updateNavigationInfo(@Nullable DrawSettings drawSettings) {
+		if (mapActivity == null) {
+			return;
+		}
 		boolean followingMode = routingHelper.isFollowingMode()
 				|| locationProvider.getLocationSimulation().isRouteAnimating();
 		StreetNameWidget.StreetNameWidgetParams params = new StreetNameWidget.StreetNameWidgetParams(mapActivity, true);

@@ -170,6 +170,9 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	}
 
 	private void calculateAltitude(@Nullable LatLon location, @NonNull OnResultCallback<Double> callback) {
+		if (mapActivity == null) {
+			return;
+		}
 		MapRendererView mapRenderer = mapActivity.getMapView().getMapRenderer();
 		if (mapRenderer == null || location == null) {
 			callback.onResult(null);

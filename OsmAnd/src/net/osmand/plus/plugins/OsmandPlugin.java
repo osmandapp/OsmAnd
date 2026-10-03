@@ -355,6 +355,9 @@ public abstract class OsmandPlugin {
 	                          @NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 	}
 
+	public void createAndroidAutoWidgets(@NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
+	}
+
 	public void mapActivityCreate(@NonNull MapActivity activity) {
 	}
 
@@ -430,8 +433,15 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
+	protected MapWidget createAndroidAutoWidgetForParams(@NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		return null;
+	}
+
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		return createMapWidgetForParams(mapActivity, widgetType, null, null);
+	}
+	protected MapWidget createAndroidAutoWidgetForParams(@NonNull WidgetType widgetType) {
+		return createAndroidAutoWidgetForParams(widgetType, null, null);
 	}
 
 	public List<String> indexingFiles(@Nullable IProgress progress) {

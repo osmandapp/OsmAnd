@@ -157,7 +157,9 @@ public class WeatherWidget extends SimpleWidget {
 		} else {
 			setText(NO_VALUE, null);
 		}
-		mapActivity.getMapLayers().getMapInfoLayer().updateSideWidgets();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getMapInfoLayer().updateSideWidgets();
+		}
 	}
 
 	public void setDateTime(@Nullable Date date) {

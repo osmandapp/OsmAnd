@@ -26,8 +26,11 @@ public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfil
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		initParams(savedInstanceState);
 		getData();
 	}
+
+	protected void initParams(Bundle savedInstanceState) {}
 
 	@Override
 	protected int getDismissButtonTextId() {

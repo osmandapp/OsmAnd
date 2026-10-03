@@ -1,12 +1,20 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import android.content.Context;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.*;
+import androidx.annotation.ColorInt;
+import androidx.annotation.DimenRes;
+import androidx.annotation.Dimension;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -35,6 +43,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 
 	protected final OsmandApplication app;
 	protected final OsmandSettings settings;
+	@Nullable
 	protected final MapActivity mapActivity;
 	protected final UiUtilities iconsCache;
 	protected final OsmAndLocationProvider locationProvider;
@@ -52,8 +61,10 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	@Nullable
 	private ResolvedPanelAppearance panelAppearance;
 
+	protected volatile boolean isAndroidAuto;
+
 	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
-			@Nullable String customId, @Nullable WidgetsPanel panel) {
+	                 @Nullable String customId, @Nullable WidgetsPanel panel) {
 		this.app = mapActivity.getApp();
 		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
@@ -71,6 +82,23 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		setPanel(selectedPanel);
 	}
 
+	public MapWidget(@NonNull OsmandApplication app, @NonNull WidgetType widgetType,
+	                 @Nullable String customId, @Nullable WidgetsPanel panel) {
+		this.app = app;
+		this.settings = app.getSettings();
+		this.customId = customId;
+		this.widgetType = widgetType;
+		this.iconsCache = app.getUIUtilities();
+		this.locationProvider = app.getLocationProvider();
+		this.routingHelper = app.getRoutingHelper();
+		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
+		this.mapActivity = null;
+		this.visibilityHelper = null;
+		String id = customId != null ? customId : widgetType.id;
+		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(id, settings, null);
+		setPanel(selectedPanel);
+	}
+
 	@LayoutRes
 	protected abstract int getLayoutId();
 
@@ -83,7 +111,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	@NonNull
 	public View getView() {
 		if (view == null) {
-			view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
+			view = getInflater().inflate(getLayoutId(), null);
 			setupView(view);
 		}
 		return view;
@@ -97,6 +125,16 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		}
 	}
 
+	@NonNull
+	protected Context getContext() {
+		return mapActivity != null ? mapActivity : app;
+	}
+
+	@NonNull
+	protected LayoutInflater getInflater() {
+		return UiUtilities.getInflater(getContext(), nightMode);
+	}
+
 	protected void recreateViewInternal() {
 
 	}
@@ -105,7 +143,8 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 
 	}
 
-	@NonNull
+	// null in case of android auto widget
+	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
 	}
@@ -126,7 +165,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 
 	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode,
-			@NonNull ApplicationMode appMode, @Nullable String customId) {
+	                                 @NonNull ApplicationMode appMode, @Nullable String customId) {
 	}
 
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, @NonNull List<MapWidget> followingWidgets) {
@@ -206,7 +245,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 
 	public static void updateTextColor(@Nullable TextView text, @Nullable TextView textShadow,
-			@ColorInt int textColor, @ColorInt int textShadowColor, boolean boldText, int shadowRadius) {
+	                                   @ColorInt int textColor, @ColorInt int textShadowColor, boolean boldText, int shadowRadius) {
 		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
 
 		updateTextShadow(textShadow, textShadowColor, shadowRadius, typefaceStyle);
@@ -218,7 +257,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 
 	public static void updateTextColor(@Nullable OutlinedTextContainer text, @Nullable TextView textShadow,
-			@ColorInt int textColor, @ColorInt int textShadowColor, boolean boldText, int shadowRadius) {
+	                                   @ColorInt int textColor, @ColorInt int textShadowColor, boolean boldText, int shadowRadius) {
 		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
 
 		updateTextShadow(textShadow, textShadowColor, shadowRadius, typefaceStyle);
@@ -230,7 +269,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		}
 	}
 
-	private static void updateTextShadow(@Nullable TextView textShadow, @ColorInt int textShadowColor, int shadowRadius, int typefaceStyle){
+	private static void updateTextShadow(@Nullable TextView textShadow, @ColorInt int textShadowColor, int shadowRadius, int typefaceStyle) {
 		if (textShadow != null) {
 			if (shadowRadius > 0) {
 				AndroidUiHelper.updateVisibility(textShadow, true);
@@ -262,5 +301,13 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	@NonNull
 	public OsmandApplication getMyApplication() {
 		return app;
+	}
+
+	public boolean isAndroidAuto() {
+		return isAndroidAuto;
+	}
+
+	public void setAndroidAuto(boolean androidAuto) {
+		isAndroidAuto = androidAuto;
 	}
 }

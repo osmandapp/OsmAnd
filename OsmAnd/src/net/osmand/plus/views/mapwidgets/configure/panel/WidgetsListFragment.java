@@ -54,6 +54,7 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		CopyAppModePrefsListener, WidgetsAdapterListener, AddWidgetFragment.AddWidgetListener {
 
 	private static final String SELECTED_PANEL_KEY = "selected_panel_key";
+	private static final String IS_ANDROID_AUTO_KEY = "is_android_auto_key";
 
 	private MapWidgetRegistry widgetRegistry;
 	private ConfigureWidgetsController controller;
@@ -64,6 +65,8 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 	private RecyclerView recyclerView;
 	private WidgetsListAdapter adapter;
 
+	private boolean isAndroidAutoMode = false;
+
 	@NonNull
 	public WidgetsPanel getSelectedPanel() {
 		return selectedPanel;
@@ -71,6 +74,10 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 
 	public void setSelectedPanel(@NonNull WidgetsPanel panel) {
 		this.selectedPanel = panel;
+	}
+
+	public void setAndroidAutoMode(boolean value) {
+		this.isAndroidAutoMode = value;
 	}
 
 	@NonNull
@@ -92,6 +99,7 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		controller = (ConfigureWidgetsController) dialogManager.findController(ConfigureWidgetsController.PROCESS_ID);
 		if (savedInstanceState != null) {
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_PANEL_KEY));
+			isAndroidAutoMode = savedInstanceState.getBoolean(IS_ANDROID_AUTO_KEY);
 		}
 	}
 
@@ -159,9 +167,16 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		List<List<MapWidgetInfo>> result = new ArrayList<>();
 		ScreenLayoutMode layoutMode = getScreenLayoutMode();
 		int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
-		for (Set<MapWidgetInfo> set : widgetRegistry.getPagedWidgetsForPanel(mapActivity, getAppMode(),
-				layoutMode, selectedPanel, enabledWidgetsFilter)) {
-			result.add(new ArrayList<>(set));
+		if (isAndroidAutoMode) {
+			for (Set<MapWidgetInfo> set : widgetRegistry.getPagedAndroidAutoWidgetsForPanel(app, getAppMode(),
+					selectedPanel, enabledWidgetsFilter)) {
+				result.add(new ArrayList<>(set));
+			}
+		} else {
+			for (Set<MapWidgetInfo> set : widgetRegistry.getPagedWidgetsForPanel(mapActivity, getAppMode(),
+					layoutMode, selectedPanel, enabledWidgetsFilter)) {
+				result.add(new ArrayList<>(set));
+			}
 		}
 		return result;
 	}
@@ -202,7 +217,7 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 
 		for (MapWidgetInfo widgetInfo : getFlatWidgetsList(widgetsData)) {
 			String key = widgetInfo.key;
-			MapWidgetInfo info = widgetRegistry.getWidgetInfoById(key);
+			MapWidgetInfo info = widgetRegistry.getWidgetInfoById(key, isAndroidAutoMode);
 			if (info == null) {
 				newWidgetToCreate.add(widgetInfo);
 			}
@@ -222,9 +237,13 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		applyWidgetsVisibility(enabledWidgetsIds);
 		applyWidgetsOrder(orderList);
 
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateAllControls(requireMapActivity());
+		if (isAndroidAutoMode) {
+			app.getMapWidgetRegistry().recreateAndroidAutoWidgetsForCurrentMode();
+		} else {
+			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateAllControls(requireMapActivity());
+			}
 		}
 	}
 
@@ -238,26 +257,44 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 	private void applyWidgetsVisibility(@NonNull List<String> enabledWidgetsIds) {
 		ApplicationMode appMode = getAppMode();
 		ScreenLayoutMode layoutMode = getScreenLayoutMode();
-		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+		List<String> widgetsVisibility;
 
-		for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(selectedPanel)) {
+		Set<MapWidgetInfo> widgetsForPanel;
+		if (isAndroidAutoMode) {
+			widgetsVisibility = MapWidgetInfo.getAndroidAutoWidgetsVisibility(app, appMode);
+			widgetsForPanel = widgetRegistry.getAndroidAutoWidgetsForPanel(selectedPanel);
+		} else {
+			widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+			widgetsForPanel = widgetRegistry.getWidgetsForPanel(selectedPanel);
+		}
+		for (MapWidgetInfo widget : widgetsForPanel) {
 			boolean enabledFromApply = enabledWidgetsIds.contains(widget.key);
 			if (widget.isEnabledForAppMode(appMode, widgetsVisibility) != enabledFromApply) {
-				widgetRegistry.enableDisableWidgetForMode(appMode, widget, enabledFromApply, layoutMode, false);
+				if (isAndroidAutoMode) {
+					widgetRegistry.enableDisableAndroidAutoWidgetForMode(appMode, widget, enabledFromApply);
+				} else {
+					widgetRegistry.enableDisableWidgetForMode(appMode, widget, enabledFromApply, layoutMode, false);
+				}
 			}
 		}
 	}
 
 	private void applyWidgetsOrder(@NonNull List<List<String>> pagedOrder) {
-		ScreenLayoutMode layoutMode =  getScreenLayoutMode();
-		selectedPanel.setWidgetsOrder(getAppMode(), pagedOrder, settings, layoutMode);
-		widgetRegistry.reorderWidgets(layoutMode);
+		if (isAndroidAutoMode) {
+			selectedPanel.setWidgetsOrder(getAppMode(), pagedOrder, settings, null);
+			widgetRegistry.reorderAndroidAutoWidgets();
+		} else {
+			ScreenLayoutMode layoutMode = getScreenLayoutMode();
+			selectedPanel.setWidgetsOrder(getAppMode(), pagedOrder, settings, layoutMode);
+			widgetRegistry.reorderWidgets(layoutMode);
+		}
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(SELECTED_PANEL_KEY, selectedPanel.name());
+		outState.putBoolean(IS_ANDROID_AUTO_KEY, isAndroidAutoMode);
 		updateReorderList();
 	}
 
@@ -301,7 +338,7 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 			ScreenLayoutMode layoutMode = getScreenLayoutMode();
 			FragmentManager manager = requireMapActivity().getSupportFragmentManager();
 			WidgetInfoBaseFragment.showInstance(manager, settingsBaseFragment, requireParentFragment(),
-					appMode, widgetInfo.key, selectedPanel, layoutMode);
+					appMode, widgetInfo.key, selectedPanel, layoutMode, isAndroidAutoMode);
 		}
 	}
 
@@ -397,7 +434,7 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 
 	@Override
 	public void onWidgetSelectedToAdd(@NonNull String widgetId, @NonNull WidgetsPanel widgetsPanel, boolean recreateControls) {
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId, isAndroidAutoMode);
 		if (widgetInfo != null && widgetsPanel == selectedPanel) {
 			adapter.addWidget(widgetInfo);
 			updateReorderList();

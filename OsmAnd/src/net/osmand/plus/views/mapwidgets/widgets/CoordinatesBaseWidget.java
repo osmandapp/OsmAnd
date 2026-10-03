@@ -144,6 +144,9 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	}
 
 	private void showShareSnackbar(@NonNull String coordinates) {
+		if (mapActivity == null) {
+			return;
+		}
 		String clipboardText = getString(R.string.copied_to_clipboard);
 		String text = getString(R.string.ltr_or_rtl_combine_via_colon, clipboardText, "")
 				+ "\n" + coordinates;
@@ -352,12 +355,14 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		if (updatedVisibility && panel == WidgetsPanel.TOP) {
-			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
-			if (mapInfoLayer != null) {
-				mapInfoLayer.updateVerticalPanels();
+		if (mapActivity != null) {
+			if (updatedVisibility && panel == WidgetsPanel.TOP) {
+				MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+				if (mapInfoLayer != null) {
+					mapInfoLayer.updateVerticalPanels();
+				}
+				mapActivity.updateStatusBarColor();
 			}
-			mapActivity.updateStatusBarColor();
 		}
 		return updatedVisibility;
 	}

@@ -14,6 +14,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.views.mapwidgets.AndroidAutoWidgetsInitializer.AndroidAutoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
@@ -46,19 +47,45 @@ public class ConfigureWidgetsController implements IDialogController {
 	public void openAddNewWidgetScreen(@NonNull MapActivity mapActivity, @NonNull WidgetsPanel selectedPanel,
 	                                   @NonNull String widgetId, @NonNull ApplicationMode selectedAppMode,
 	                                   @NonNull ConfigureWidgetsFragment fragment) {
+		openAddNewWidgetScreen(mapActivity, selectedPanel, widgetId, selectedAppMode, false, fragment);
+	}
+
+	public void openAddNewAAWidgetScreen(@NonNull MapActivity mapActivity, @NonNull WidgetsPanel selectedPanel,
+	                                   @NonNull String widgetId, @NonNull ApplicationMode selectedAppMode,
+	                                   @NonNull ConfigureWidgetsFragment fragment) {
+		openAddNewWidgetScreen(mapActivity, selectedPanel, widgetId, selectedAppMode, true, fragment);
+	}
+
+	public void openAddNewWidgetScreen(@NonNull MapActivity mapActivity, @NonNull WidgetsPanel selectedPanel,
+	                                   @NonNull String widgetId, @NonNull ApplicationMode selectedAppMode,
+									   boolean isAndroidAutoMode,
+	                                   @NonNull ConfigureWidgetsFragment fragment) {
 		WidgetType widgetType = WidgetType.getById(widgetId);
 		OsmandApplication app = mapActivity.getApp();
 		if (widgetType == null) {
 			return;
 		}
+		MapWidget widget;
 		MapWidgetInfo widgetInfo = null;
-		ScreenLayoutMode layoutMode = fragment.getScreenLayoutMode();
 		String id = WidgetType.getDuplicateWidgetId(widgetId);
-		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(mapActivity);
-		MapWidget widget = widgetsFactory.createMapWidget(id, widgetType, selectedPanel);
+		ScreenLayoutMode layoutMode = null;
+		WidgetInfoCreator.WidgetFactory widgetsFactory;
+
+		if (isAndroidAutoMode) {
+			widgetsFactory = new AndroidAutoWidgetsFactory(app);
+			widget = widgetsFactory.createMapWidget(id, widgetType, selectedPanel);
+		} else {
+			layoutMode = fragment.getScreenLayoutMode();
+			widgetsFactory = new MapWidgetsFactory(mapActivity);
+			widget = widgetsFactory.createMapWidget(id, widgetType, selectedPanel);
+		}
 		if (widget != null) {
 			WidgetInfoCreator creator = new WidgetInfoCreator(app, selectedAppMode, layoutMode);
-			widgetInfo = creator.askCreateWidgetInfo(id, widget, widgetType, selectedPanel);
+			if (isAndroidAutoMode) {
+				widgetInfo = creator.askCreateAndroidWidgetInfo(id, widget, widgetType, selectedPanel);
+			} else {
+				widgetInfo = creator.askCreateWidgetInfo(id, widget, widgetType, selectedPanel);
+			}
 		}
 
 		if (widgetInfo != null) {
@@ -70,7 +97,7 @@ public class ConfigureWidgetsController implements IDialogController {
 				args.putString(KEY_APP_MODE, selectedAppMode.getStringKey());
 
 				WidgetInfoBaseFragment.showAddWidgetFragment(mapActivity.getSupportFragmentManager(),
-						settingsBaseFragment, fragment, selectedAppMode, id, selectedPanel, layoutMode);
+						settingsBaseFragment, fragment, selectedAppMode, id, selectedPanel, layoutMode, isAndroidAutoMode);
 			} else {
 				fragment.onWidgetAdded(widgetInfo);
 				mapActivity.getSupportFragmentManager().popBackStack(SearchWidgetsFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);

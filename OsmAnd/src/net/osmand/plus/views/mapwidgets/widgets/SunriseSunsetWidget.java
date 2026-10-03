@@ -74,7 +74,9 @@ public class SunriseSunsetWidget extends SimpleWidget {
 			forceUpdate = true;
 			widgetState.changeToNextState();
 			updateInfo(null);
-			mapActivity.refreshMap();
+			if (mapActivity != null) {
+				mapActivity.refreshMap();
+			}
 			updateWidgetName();
 		};
 	}

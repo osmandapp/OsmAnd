@@ -407,6 +407,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 		setupRulerWidget(rulerWidget);
 		widgetRegistry.registerAllControls(mapActivity);
+		widgetRegistry.recreateAndroidAutoWidgetsForCurrentMode();
 	}
 
 	public void recreateControls() {
