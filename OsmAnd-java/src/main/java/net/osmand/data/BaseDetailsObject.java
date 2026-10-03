@@ -1,6 +1,7 @@
 package net.osmand.data;
 
 import static net.osmand.data.Amenity.DEFAULT_ELO;
+import static net.osmand.data.Amenity.ROUTE_MEMBERS_IDS;
 import static net.osmand.data.Amenity.WIKIDATA;
 
 import net.osmand.NativeLibrary.RenderedObject;
@@ -399,6 +400,12 @@ public class BaseDetailsObject {
 				|| getLangForTravel(amenity).equals(lang); // avoid articles in another language
 		if (isSingleObject || shouldCopyAdditionalInfo) {
 			syntheticAmenity.copyAdditionalInfo(amenity, false);
+			// a super-route merged into an object that already stands for one of its members must
+			// not make that object a super-route: it has the member's geometry and opens as a track
+			if (amenity.isSuperRoute() && !Algorithms.isEmpty(syntheticAmenity.getRouteId())
+					&& !Algorithms.stringsEqual(syntheticAmenity.getRouteId(), amenity.getRouteId())) {
+				syntheticAmenity.removeAdditionalInfo(ROUTE_MEMBERS_IDS);
+			}
 		}
 		processPolygonCoordinates(syntheticAmenity, amenity.getX(), amenity.getY());
 
@@ -467,6 +474,14 @@ public class BaseDetailsObject {
 			int ord2 = getClassOrder(o2);
 			if (ord1 != ord2) {
 				return ord2 > ord1 ? -1 : 1;
+			}
+			// the first object merged decides the identity of the synthetic amenity, because
+			// additional info is copied without overwriting. A super-route united with the route it
+			// contains must not take that identity: the row would show the route's distance and
+			// elevation and still refuse to open its track.
+			if (o1 instanceof Amenity amenity1 && o2 instanceof Amenity amenity2
+					&& amenity1.isSuperRoute() != amenity2.isSuperRoute()) {
+				return amenity1.isSuperRoute() ? 1 : -1;
 			}
 			return 0;
 		});
