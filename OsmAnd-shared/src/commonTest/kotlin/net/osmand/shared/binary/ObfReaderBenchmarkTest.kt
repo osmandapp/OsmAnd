@@ -55,7 +55,8 @@ import kotlin.time.TimeSource
  * On the name search the copy is half again faster than java on the jvm, which is the collation
  * key of `KCollatorStringMatcher` paying off; Kotlin/Native then pays its usual factor of about
  * two on top, which lands it somewhat above java on the jvm. Opening is not a like for like: java
- * also reads the address and transport headers, which the copy skips.
+ * also reads the transport header, which the copy skips; the address header the copy reads too
+ * since the address section was copied, at no cost `AddressReaderBenchmarkTest` could measure.
  */
 class ObfReaderBenchmarkTest {
 

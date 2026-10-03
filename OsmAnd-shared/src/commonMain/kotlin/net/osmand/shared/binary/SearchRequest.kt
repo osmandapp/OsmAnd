@@ -460,6 +460,31 @@ class SearchRequest<T> {
 		}
 
 		@JvmStatic
+		fun <T> buildAddressRequest(resultMatcher: ResultMatcher<T>?): SearchRequest<T> {
+			val request = SearchRequest<T>()
+			request.resultMatcher = resultMatcher
+			return request
+		}
+
+		@JvmStatic
+		fun <T> buildAddressByNameRequest(
+			resultMatcher: ResultMatcher<T>?, nameRequest: String, matcherMode: KStringMatcherMode
+		): SearchRequest<T> = buildAddressByNameRequest(resultMatcher, null, nameRequest, matcherMode)
+
+		@JvmStatic
+		fun <T> buildAddressByNameRequest(
+			resultMatcher: ResultMatcher<T>?, rawDataCollector: ResultMatcher<T>?, nameRequest: String,
+			matcherMode: KStringMatcherMode
+		): SearchRequest<T> {
+			val request = SearchRequest<T>()
+			request.resultMatcher = resultMatcher
+			request.rawDataCollector = rawDataCollector
+			request.nameQuery = nameRequest.trim()
+			request.matcherMode = matcherMode
+			return request
+		}
+
+		@JvmStatic
 		@JvmOverloads
 		fun buildSearchRouteRequest(
 			sleft: Int,
