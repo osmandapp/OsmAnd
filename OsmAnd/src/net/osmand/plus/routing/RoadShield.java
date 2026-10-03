@@ -3,6 +3,7 @@ package net.osmand.plus.routing;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.util.Algorithms;
 
@@ -32,8 +33,14 @@ public class RoadShield {
 		if (rdo != null && rdo.nameIds != null) {
 			StringBuilder additional = new StringBuilder();
 			for (int i = 0; i < rdo.nameIds.length; i++) {
-				String tag = rdo.region.routeEncodingRules.get(rdo.nameIds[i]).getTag();
-				String val = rdo.names.get(rdo.nameIds[i]);
+				int nameId = rdo.nameIds[i];
+				RouteTypeRule rule = nameId >= 0 && nameId < rdo.region.quickGetEncodingRulesSize()
+						? rdo.region.quickGetEncodingRule(nameId) : null;
+				if (rule == null) {
+					continue;
+				}
+				String tag = rule.getTag();
+				String val = rdo.names.get(nameId);
 				if (!tag.endsWith("_ref") && !tag.startsWith("route_road")) {
 					additional.append(tag).append("=").append(val).append(";");
 				} else if (tag.startsWith("route_road") && tag.endsWith("_ref")) {
