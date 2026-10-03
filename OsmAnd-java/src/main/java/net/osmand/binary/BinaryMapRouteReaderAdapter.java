@@ -355,19 +355,19 @@ public class BinaryMapRouteReaderAdapter {
 		}
 		
 		public int searchRouteEncodingRule(String tag, String value) {
-			if (decodingRules == null) {
-				decodingRules = new LinkedHashMap<String, Integer>();
+			Map<String, Integer> rules = decodingRules;
+			if (rules == null) {
+				// publish the map only when it is complete, other threads read it without a lock
+				rules = new LinkedHashMap<String, Integer>();
 				for (int i = 1; i < routeEncodingRules.size(); i++) {
 					RouteTypeRule rt = routeEncodingRules.get(i);
 					String ks = rt.getTag() + "#" + (rt.getValue() == null ? "" : rt.getValue());
-					decodingRules.put(ks, i);
+					rules.put(ks, i);
 				}
+				decodingRules = rules;
 			}
-			String k = tag +"#" + (value == null ? "" : value);
-			if (decodingRules.containsKey(k)) {
-				return decodingRules.get(k).intValue();
-			}
-			return -1;
+			Integer id = rules.get(tag + "#" + (value == null ? "" : value));
+			return id == null ? -1 : id;
 		}
 
 		public int getNameTypeRule() {
@@ -862,9 +862,10 @@ public class BinaryMapRouteReaderAdapter {
 			}
 		}
 	}
-	private void readRouteTreeData(RouteSubregion routeTree,  TLongArrayList idTables,
+	private List<RouteDataObject> readRouteTreeData(RouteSubregion routeTree,  TLongArrayList idTables,
 			TLongObjectHashMap<RestrictionInfo> restrictions) throws IOException {
-		routeTree.dataObjects = new ArrayList<RouteDataObject>();
+		// a local list: the subregion is shared between readers of one file
+		List<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>();
 		idTables.clear();
 		restrictions.clear();
 		List<String> stringTable = null;
@@ -877,7 +878,7 @@ public class BinaryMapRouteReaderAdapter {
 				while (it.hasNext()) {
 					it.advance();
 					int from = (int) it.key();
-					RouteDataObject fromr = routeTree.dataObjects.get(from);
+					RouteDataObject fromr = dataObjects.get(from);
 					fromr.restrictions = new long[it.value().length()];
 					RestrictionInfo val = it.value();
 					for (int k = 0; k < fromr.restrictions.length; k++) {
@@ -892,7 +893,7 @@ public class BinaryMapRouteReaderAdapter {
 					}
 //					fromr.restrictionsVia = new 
 				}
-				for (RouteDataObject o : routeTree.dataObjects) {
+				for (RouteDataObject o : dataObjects) {
 					if (o != null) {
 						if (o.id < idTables.size()) {
 							o.id = idTables.get((int) o.id);
@@ -914,15 +915,15 @@ public class BinaryMapRouteReaderAdapter {
 						}
 					}
 				}
-				return;
+				return dataObjects;
 			case RouteDataBlock.DATAOBJECTS_FIELD_NUMBER:
 				int length = codedIS.readRawVarint32();
 				long oldLimit = codedIS.pushLimitLong((long) length);
 				RouteDataObject obj = readRouteDataObject(routeTree.routeReg, routeTree.left, routeTree.top);
-				while (obj.id >= routeTree.dataObjects.size()) {
-					routeTree.dataObjects.add(null);
+				while (obj.id >= dataObjects.size()) {
+					dataObjects.add(null);
 				}
-				routeTree.dataObjects.set((int) obj.id, obj);
+				dataObjects.set((int) obj.id, obj);
 				codedIS.popLimit(oldLimit);
 				break;
 			case RouteDataBlock.IDTABLE_FIELD_NUMBER:
@@ -1103,11 +1104,15 @@ public class BinaryMapRouteReaderAdapter {
 	}
 
 	public void initRouteRegion(RouteRegion routeReg) throws IOException, InvalidProtocolBufferException {
-		if (routeReg.routeEncodingRules.isEmpty()) {
-			codedIS.seek(routeReg.filePointer);
-			long oldLimit = codedIS.pushLimitLong((long) routeReg.length);
-			readRouteIndex(routeReg);
-			codedIS.popLimit(oldLimit);
+		// readers of one file share their RouteRegion objects: without the lock a second reader sees
+		// a half-read rules list and reads objects whose types and names point past its end
+		synchronized (routeReg) {
+			if (routeReg.routeEncodingRules.isEmpty()) {
+				codedIS.seek(routeReg.filePointer);
+				long oldLimit = codedIS.pushLimitLong((long) routeReg.length);
+				readRouteIndex(routeReg);
+				codedIS.popLimit(oldLimit);
+			}
 		}
 	}
 
@@ -1115,15 +1120,16 @@ public class BinaryMapRouteReaderAdapter {
 	public List<RouteDataObject> loadRouteRegionData(RouteSubregion rs) throws IOException {
 		TLongArrayList idMap = new TLongArrayList();
 		TLongObjectHashMap<RestrictionInfo> restrictionMap = new TLongObjectHashMap<RestrictionInfo>();
-		if (rs.dataObjects == null) {
+		List<RouteDataObject> res = rs.dataObjects;
+		if (res == null) {
 			codedIS.seek(rs.filePointer + rs.shiftToData);
 			int limit = codedIS.readRawVarint32();
 			long oldLimit = codedIS.pushLimitLong((long) limit);
-			readRouteTreeData(rs, idMap, restrictionMap);
+			res = readRouteTreeData(rs, idMap, restrictionMap);
 			codedIS.popLimit(oldLimit);
+		} else {
+			rs.dataObjects = null;
 		}
-		List<RouteDataObject> res = rs.dataObjects;
-		rs.dataObjects = null;
 		return res;
 	}
 	
@@ -1139,14 +1145,18 @@ public class BinaryMapRouteReaderAdapter {
 		TLongArrayList idMap = new TLongArrayList();
 		TLongObjectHashMap<RestrictionInfo> restrictionMap = new TLongObjectHashMap<RestrictionInfo>();
 		for (RouteSubregion rs : toLoad) {
-			if (rs.dataObjects == null) {
+			List<RouteDataObject> dataObjects = rs.dataObjects;
+			if (dataObjects == null) {
 				codedIS.seek(rs.filePointer + rs.shiftToData);
 				int limit = codedIS.readRawVarint32();
 				long oldLimit = codedIS.pushLimitLong((long) limit);
-				readRouteTreeData(rs, idMap, restrictionMap);
+				dataObjects = readRouteTreeData(rs, idMap, restrictionMap);
 				codedIS.popLimit(oldLimit);
+			} else {
+				// objects set in advance are used once
+				rs.dataObjects = null;
 			}
-			for (RouteDataObject ro : rs.dataObjects) {
+			for (RouteDataObject ro : dataObjects) {
 				if (ro != null) {
 					matcher.publish(ro);
 				}
@@ -1154,10 +1164,20 @@ public class BinaryMapRouteReaderAdapter {
 					break;
 				}
 			}
-			// free objects
-			rs.dataObjects = null;
 			if (matcher.isCancelled()) {
 				break;
+			}
+		}
+	}
+
+	private void readRouteTreeIfNeeded(SearchRequest<?> req, RouteSubregion rs) throws IOException {
+		// subregions are shared between the readers of one file, like the rules in initRouteRegion
+		synchronized (rs) {
+			if (rs.subregions == null) {
+				codedIS.seek(rs.filePointer);
+				long old = codedIS.pushLimitLong((long) rs.length);
+				readRouteTree(rs, null, req.contains(rs.left, rs.top, rs.right, rs.bottom) ? -1 : 1, false);
+				codedIS.popLimit(old);
 			}
 		}
 	}
@@ -1166,12 +1186,7 @@ public class BinaryMapRouteReaderAdapter {
 			List<RouteSubregion> toLoad) throws IOException {
 		for (RouteSubregion rs : list) {
 			if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
-				if (rs.subregions == null) {
-					codedIS.seek(rs.filePointer);
-					long old = codedIS.pushLimitLong((long) rs.length);
-					readRouteTree(rs, null, req.contains(rs.left, rs.top, rs.right, rs.bottom) ? -1 : 1, false);
-					codedIS.popLimit(old);
-				}
+				readRouteTreeIfNeeded(req, rs);
 				searchRouteRegionTree(req, rs.subregions, toLoad);
 
 				if (rs.shiftToData != 0) {
@@ -1187,12 +1202,7 @@ public class BinaryMapRouteReaderAdapter {
 			List<RouteSubregion> toLoad) throws IOException {
 		for (RouteSubregion rs : list) {
 			if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
-				if (rs.subregions == null) {
-					codedIS.seek(rs.filePointer);
-					long old = codedIS.pushLimitLong((long) rs.length);
-					readRouteTree(rs, null, req.contains(rs.left, rs.top, rs.right, rs.bottom) ? -1 : 1, false);
-					codedIS.popLimit(old);
-				}
+				readRouteTreeIfNeeded(req, rs);
 				searchRouteRegionTree(req, rs.subregions, toLoad);
 				if (rs.shiftToData != 0) {
 					toLoad.add(rs);

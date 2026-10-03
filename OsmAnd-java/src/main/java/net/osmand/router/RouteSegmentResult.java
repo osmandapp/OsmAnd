@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
@@ -271,15 +270,12 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			int nameTypeRule = region.getNameTypeRule();
 			int refTypeRule = region.getRefTypeRule();
 			object.names = new TIntObjectHashMap<>();
-			// a route from a GPX can reference names beyond its own types list; readers index the rules by these ids
-			TIntArrayList validNameIds = new TIntArrayList(object.nameIds.length);
 			for (int nameId : object.nameIds) {
-				if (nameId < 0 || nameId >= region.quickGetEncodingRulesSize()) {
+				if (nameId >= region.quickGetEncodingRulesSize()) {
 					continue;
 				}
 				RouteTypeRule rule = region.quickGetEncodingRule(nameId);
 				if (rule != null) {
-					validNameIds.add(nameId);
 					if (nameTypeRule != -1 && "name".equals(rule.getTag())) {
 						nameId = nameTypeRule;
 					} else if (refTypeRule != -1 && "ref".equals(rule.getTag())) {
@@ -287,9 +283,6 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 					}
 					object.names.put(nameId, rule.getValue());
 				}
-			}
-			if (validNameIds.size() != object.nameIds.length) {
-				object.nameIds = validNameIds.toArray();
 			}
 		}
 		String[][] pointNames = null;
