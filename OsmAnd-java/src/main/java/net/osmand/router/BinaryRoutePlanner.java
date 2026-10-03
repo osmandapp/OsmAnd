@@ -16,6 +16,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.util.MapUtils;
+import net.osmand.router.ViaChainRestrictions.ViaChainState;
 
 import org.apache.commons.logging.Log;
 
@@ -632,6 +633,9 @@ public class BinaryRoutePlanner {
 		if (from != null && to != null) {
 			long fid = to.getRoad().getId();
 			for (int i = 0; i < from.getRoad().getRestrictionLength(); i++) {
+				if (from.getRoad().getRestrictionViaWays(i) != null) {
+					continue;
+				}
 				long id = from.getRoad().getRestrictionId(i);
 				int tp = from.getRoad().getRestrictionType(i);
 				if (fid == id) {
@@ -718,8 +722,8 @@ public class BinaryRoutePlanner {
 	}
 	
 	private long calculateRoutePointId(RouteSegment segm) {
-		return calculateRoutePointInternalId(segm.getRoad(), segm.getSegmentStart(), 
-				segm.isPositive() ? segm.getSegmentStart() + 1 : segm.getSegmentStart() - 1);
+		return ViaChainRestrictions.getVisitedKey(calculateRoutePointInternalId(segm.getRoad(), segm.getSegmentStart(),
+				segm.isPositive() ? segm.getSegmentStart() + 1 : segm.getSegmentStart() - 1), segm);
 		// return calculateRoutePointInternalId(segm.getRoad(), segm.getSegmentStart(), segm.getSegmentEnd()); 
 	}
 
@@ -753,6 +757,9 @@ public class BinaryRoutePlanner {
 			int type = -1;
 			if (!reverseWay) {
 				for (int i = 0; i < road.getRestrictionLength(); i++) {
+					if (road.getRestrictionViaWays(i) != null) {
+						continue;
+					}
 					int rt = road.getRestrictionType(i);
 					long rv = road.getRestrictionVia(i);
 					if (road.getRestrictionId(i) == next.road.id) {
@@ -768,6 +775,9 @@ public class BinaryRoutePlanner {
 				}
 			} else {
 				for (int i = 0; i < next.road.getRestrictionLength(); i++) {
+					if (next.road.getRestrictionViaWays(i) != null) {
+						continue;
+					}
 					int rt = next.road.getRestrictionType(i);
 					long rv = next.road.getRestrictionVia(i);
 					long restrictedTo = next.road.getRestrictionId(i);
@@ -853,7 +863,8 @@ public class BinaryRoutePlanner {
 		boolean singleRoad = true;
 		while (roadIter != null) {
 			if (currentSegment.getSegmentEnd() == roadIter.getSegmentStart() && roadIter.road.getId() == currentSegment.getRoad().getId() ) {
-				nextCurrentSegment = roadIter.initRouteSegment(currentSegment.isPositive());
+				nextCurrentSegment = ViaChainRestrictions.withState(roadIter.initRouteSegment(currentSegment.isPositive()),
+						currentSegment.viaChainState);
 				if (nextCurrentSegment == null) { 
 					// end of route (-1 or length + 1)
 					directionAllowed = false;
@@ -907,10 +918,14 @@ public class BinaryRoutePlanner {
 					next.getRoad().getId() == currentSegment.getRoad().getId()) {
 				// skip itself
 			} else if (!doNotAddIntersections) {
-				RouteSegment nextPos = next.initRouteSegment(true);
-				processOneRoadIntersection(ctx, reverseWaySearch, graphSegments, visitedSegments, currentSegment, nextPos);
-				RouteSegment nextNeg = next.initRouteSegment(false);
-				processOneRoadIntersection(ctx, reverseWaySearch, graphSegments, visitedSegments, currentSegment, nextNeg);
+				ViaChainState viaChainState = ctx.viaChains.nextState(currentSegment, next.getRoad(), connectedNextSegment,
+						reverseWaySearch);
+				if (viaChainState != ViaChainRestrictions.FORBIDDEN) {
+					RouteSegment nextPos = ViaChainRestrictions.withState(next.initRouteSegment(true), viaChainState);
+					processOneRoadIntersection(ctx, reverseWaySearch, graphSegments, visitedSegments, currentSegment, nextPos);
+					RouteSegment nextNeg = ViaChainRestrictions.withState(next.initRouteSegment(false), viaChainState);
+					processOneRoadIntersection(ctx, reverseWaySearch, graphSegments, visitedSegments, currentSegment, nextNeg);
+				}
 			}
 			// iterate to next road
 			if (nextIterator == null) {
@@ -1092,6 +1107,9 @@ public class BinaryRoutePlanner {
 		// Initially all segments null and startSegment/endSegment.parentRoute = RouteSegment.NULL;
 		// After iteration stores previous segment i.e. how it was reached from startSegment
 		RouteSegment parentRoute = null;
+
+		// position inside restrictions whose via is a chain of ways, a segment with a state is a separate search node
+		ViaChainState viaChainState = null;
 
 		// # A* routing - Distance measured in time (seconds)
 		// There is a small (important!!!) difference how it's calculated for visited (parentRoute != null) and non-visited
