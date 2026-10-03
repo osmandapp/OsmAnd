@@ -2,6 +2,7 @@ package net.osmand.map;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.shared.panoramax.PanoramaxApi;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -48,7 +49,7 @@ public class TileSourceManager {
 			+ MAPILLARY_ACCESS_TOKEN;
 	// Federated Panoramax instance. Read access needs no API key. {0}=zoom {1}=x {2}=y,
 	// matching MessageFormat argument order in buildUrlToLoad().
-	private static final String PANORAMAX_VECTOR_URL = "https://api.panoramax.xyz/api/map/2/{0}/{1}/{2}.mvt";
+	private static final String PANORAMAX_VECTOR_URL = PanoramaxApi.API_URL + "map/2/{0}/{1}/{2}.mvt";
 
 	private static final TileSourceTemplate MAPNIK_SOURCE =
 			new TileSourceTemplate("OsmAnd (online tiles)", MAPNIK_URL, ".png", 19,
