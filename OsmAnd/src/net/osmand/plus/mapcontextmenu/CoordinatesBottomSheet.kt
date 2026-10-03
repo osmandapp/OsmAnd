@@ -48,7 +48,6 @@ class CoordinatesBottomSheet : BaseMaterialBottomSheetWithHeader() {
                 } else {
                     ShareMenu.copyToClipboard(mapActivity, coordinate.text)
                 }
-                dismiss()
             }
             itemsContainer.addView(row.view)
         }
