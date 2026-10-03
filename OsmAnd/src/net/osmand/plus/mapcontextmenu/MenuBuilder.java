@@ -24,10 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.text.util.Linkify;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -697,11 +694,11 @@ public class MenuBuilder {
 		String title = primaryRow != null
 				? primaryRow.getText()
 				: PointDescription.getLocationName(mapActivity, latitude, longitude, true);
-		List<FormattedCoordinate> collapsableRows = PointDescription.getCollapsedLocationData(mapActivity, latitude, longitude, coordinateRows);
-		boolean collapsable = !collapsableRows.isEmpty();
 		buildRow(view, new BuildRowAttrs.Builder().setText(title).setIconId(R.drawable.ic_action_get_my_location)
-				.setTextPrefix(getCoordinatesRowPrefix(primaryRow)).setClipboardText(title).setCollapsable(collapsable)
-				.setCollapsableView(getLocationCollapsableView(collapsableRows))
+				.setTextPrefix(getCoordinatesRowPrefix(primaryRow)).setClipboardText(title)
+				.setButtonText(app.getString(R.string.shared_string_show_all))
+				.setOnClickListener(v -> CoordinatesBottomSheet.showInstance(
+						mapActivity.getSupportFragmentManager(), latitude, longitude))
 				.setTextLinesLimit(1).build());
 	}
 
@@ -1181,32 +1178,6 @@ public class MenuBuilder {
 
 	protected void copyToClipboard(String text, Context ctx) {
 		menuRowBuilder.copyToClipboard(text, ctx);
-	}
-
-	protected CollapsableView getLocationCollapsableView(@NonNull List<FormattedCoordinate> coordinateRows) {
-		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
-		for (FormattedCoordinate coordinate : coordinateRows) {
-			TextViewEx button = buildButtonInCollapsableView(mapActivity, false, false);
-			SpannableStringBuilder ssb = new SpannableStringBuilder();
-			appendCoordinateFormatPrefix(ssb, coordinate);
-			ssb.append(coordinate.getText());
-			button.setText(ssb);
-			button.setOnClickListener(v -> copyToClipboard(coordinate.getText(), mapActivity));
-			llv.addView(button);
-		}
-		return new CollapsableView(llv, this, true);
-	}
-
-	private void appendCoordinateFormatPrefix(@NonNull SpannableStringBuilder ssb,
-	                                          @NonNull FormattedCoordinate coordinate) {
-		Integer epsgCode = coordinate.getFormat().getEpsgCode();
-		String title = epsgCode != null ? "EPSG:" + epsgCode : coordinate.getFormat().getTitle();
-		if (!TextUtils.isEmpty(title)) {
-			int start = ssb.length();
-			ssb.append(title).append(": ");
-			ssb.setSpan(new ForegroundColorSpan(getColor(R.color.text_color_secondary_light)),
-					start, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		}
 	}
 
 	public CollapsableView getDistanceCollapsableView(Set<String> distanceData) {
