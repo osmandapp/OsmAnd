@@ -5396,4 +5396,18 @@
     <string name="ais_mark_as_outdated_desc">Forstrekos simbolon de ŝipo post %1$s sen ricevi ĝian signalon.</string>
     <string name="ais_hide_after">Kaŝi post</string>
     <string name="ais_hide_after_desc">Plene forigos ŝipon post %1$s sen ricevi ĝian signalon.</string>
+    <string name="ais_cpa_off_desc">Ruĝigi ŝipojn, kiuj laŭ kalkuloj pasigos tro proksime.</string>
+    <string name="ais_cpa_on_desc">Emfazas ŝipojn ruĝe, kiuj laŭ kalkuloj pasigos vian ŝipon je %1$s en malpli ol %2$s.</string>
+    <string name="ais_cpa_warning_time_title">Averta tempo (TCPA)</string>
+    <string name="ais_cpa_warning_time_desc">Emfazas ŝipojn ruĝe %1$s antaŭ la plej eta alproksimiĝo.</string>
+    <string name="ais_cpa_safe_distance">Sekura distanco (CPA)</string>
+    <string name="ais_cpa_safe_distance_desc">Emfazas ŝipojn ruĝe, kiuj laŭ kalkuloj pasigos vin pli proksime ol %1$s.</string>
+    <string name="ais_set_your_mmsi">Agordi MMSI</string>
+    <string name="ais_set_your_mmsi_desc">Via propra ŝipo povas senĉese ekigi avertojn. Enigu vian MMSI-identigilon por ke OsmAnd distingu ĝin de aliaj ŝipoj.</string>
+    <string name="ais_set_mmsi">Agordi MMSI</string>
+    <string name="ais_enter_mmsi">Enigu MMSI</string>
+    <string name="ais_enter_mmsi_desc">Enigu 9 ciferojn aŭ nenion por forviŝi la identigilon.</string>
+    <string name="ais_error_mmsi_length">Necesas enigi 9 ciferojn</string>
+    <string name="ais_reset_plugin_settings">Rekomencigi agordojn de profilo</string>
+    <string name="ais_reset_connection_settings">Rekomencigi agordojn pri konekto</string>
 </resources>
