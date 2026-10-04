@@ -46,6 +46,8 @@ import net.osmand.util.MapUtils;
 
 public class Amenity extends MapObject {
 
+	/** Stable prefix for persisted Amenity origins, independent of runtime class names and R8 obfuscation. */
+	public static final String ORIGIN_PREFIX = "Amenity";
 	public static final String WEBSITE = "website";
 	public static final String URL = "url";
 	public static final String PHONE = "phone";
@@ -411,7 +413,7 @@ public class Amenity extends MapObject {
 
 	@Override
 	public String toStringEn() {
-		return super.toStringEn() + ": " + type.getKeyName() + ":" + subType;
+		return ORIGIN_PREFIX + ":" + getEnName(true) + ": " + type.getKeyName() + ":" + subType;
 	}
 
 	@Override

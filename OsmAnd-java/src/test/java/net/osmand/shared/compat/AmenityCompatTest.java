@@ -47,6 +47,54 @@ public class AmenityCompatTest {
 	}
 
 	@Test
+	public void originFormatIsCanonical() {
+		Sample[] inputs = {
+				new Sample("English name", "shop", "bakery", 1L, "Bäckerei", "Bakery", null, null),
+				new Sample("transliterated name", "shop", "bakery", 1L, "Bäckerei", null, null, null),
+				new Sample("colons and subtypes", "shop", "bakery;confectionery", 1L,
+						"Bakery: East:Annex", "Bakery: East:Annex", null, null),
+				new Sample("empty name", "shop", "bakery", 1L, "", null, null, null),
+				new Sample("null subtype", "shop", null, 1L, "Bakery", "Bakery", null, null)
+		};
+		String[] expected = {
+				"Amenity:Bakery: shop:bakery",
+				"Amenity:Backerei: shop:bakery",
+				"Amenity:Bakery: East:Annex: shop:bakery;confectionery",
+				"Amenity:: shop:bakery",
+				"Amenity:Bakery: shop:null"
+		};
+		for (int i = 0; i < inputs.length; i++) {
+			assertEquals(inputs[i].name + " Java origin", expected[i], inputs[i].java().toStringEn());
+			assertEquals(inputs[i].name + " shared origin", expected[i], inputs[i].copy().toStringEn());
+		}
+	}
+
+	@Test
+	public void originDoesNotDependOnJavaRuntimeClass() {
+		Amenity amenity = new RenamedAmenity();
+		amenity.setName("Bakery");
+		amenity.setType(MapPoiTypes.getDefault().getPoiCategoryByName("shop", true));
+		amenity.setSubType("bakery");
+
+		assertEquals("Amenity:Bakery: shop:bakery", amenity.toStringEn());
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void javaOriginStillRequiresCategory() {
+		new Amenity().toStringEn();
+	}
+
+	@Test
+	public void sharedOriginPreservesNullCategory() {
+		net.osmand.shared.data.Amenity amenity = new net.osmand.shared.data.Amenity();
+		amenity.setName("Bakery");
+		assertEquals("Amenity:Bakery: null:null", amenity.toStringEn());
+	}
+
+	private static class RenamedAmenity extends Amenity {
+	}
+
+	@Test
 	public void namesAnswerTheSame() {
 		for (Sample sample : samples()) {
 			String m = sample.name;
