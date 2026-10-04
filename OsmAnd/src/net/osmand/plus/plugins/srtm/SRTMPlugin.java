@@ -39,6 +39,7 @@ import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.KeepListenerReference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
@@ -101,13 +102,21 @@ public class SRTMPlugin extends OsmandPlugin {
 	public final CommonPreference<Integer> HILLSHADE_SUN_ANGLE;
 	public final CommonPreference<Integer> HILLSHADE_SUN_AZIMUTH;
 
+	@KeepListenerReference
 	private final StateChangedListener<Boolean> enable3DMapsListener;
+	@KeepListenerReference
 	private final StateChangedListener<Boolean> terrainListener;
+	@KeepListenerReference
 	private final StateChangedListener<Integer> hillshadeSunAngleListener;
+	@KeepListenerReference
 	private final StateChangedListener<Integer> hillshadeSunAzimuthListener;
+	@KeepListenerReference
 	private final StateChangedListener<String> terrainModeListener;
+	@KeepListenerReference
 	private final StateChangedListener<Float> verticalExaggerationListener;
+	@KeepListenerReference
 	private final StateChangedListener<MetricsConstants> metricSystemListener;
+	@KeepListenerReference
 	private final StateChangedListener<Boolean> map3DObjectsListener;
 
 

@@ -15,6 +15,7 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.plus.settings.backend.preferences.KeepListenerReference;
 
 import org.apache.commons.logging.Log;
 
@@ -33,6 +34,7 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 	private final BackupHelper backupHelper;
 	private final NetworkSettingsHelper settingsHelper;
 
+	@KeepListenerReference
 	private final StateChangedListener<Long> intervalListener;
 
 	public AutoBackupHelper(@NonNull OsmandApplication app) {

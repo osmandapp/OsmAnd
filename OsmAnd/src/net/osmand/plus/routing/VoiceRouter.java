@@ -25,6 +25,7 @@ import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.KeepListenerReference;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.ExitInfo;
@@ -90,6 +91,7 @@ public class VoiceRouter {
 
 	private VoiceCommandPending pendingCommand;
 	private RouteDirectionInfo nextRouteDirection;
+	@KeepListenerReference
 	private StateChangedListener<Boolean> stateChangedListener;
 
 	public interface VoiceMessageListener {
