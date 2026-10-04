@@ -18,7 +18,7 @@
     <string name="shared_string_wikipedia">Vikipedio</string>
     <string name="osmand_parking_hour">h</string>
     <string name="shared_string_minute_lowercase">min</string>
-    <string name="show_transparency_seekbar">Montri ŝovilon de travideblo</string>
+    <string name="show_transparency_seekbar">Montri ŝovilon de videblo</string>
     <string name="download_files_error_not_enough_space">Mankas spaco!
 \nPostulas {3} MB provizore kaj {1} MB daŭre.
 \n(Nur {2} MB disponeblaj.)</string>
@@ -135,7 +135,7 @@
     <string name="map_downloaded_descr">La mapo de %1$s pretas por uzi.</string>
     <string name="go_to_map">Montri mapon</string>
     <string name="simulate_initial_startup_descr">Agordi flagon, kiu indikas unuan starton de aplikaĵo, sed ne ŝanĝas aliajn agordojn.</string>
-    <string name="simulate_initial_startup">Simuli unuan starton de aplikaĵo</string>
+    <string name="simulate_initial_startup">Imiti unuan starton de aplikaĵo</string>
     <string name="favorite_category_name">Kategoria nomo</string>
     <string name="favorite_category_dublicate_message">Bonvolu uzi nomon de kategorio, kiu jam ne ekzistas.</string>
     <string name="favorite_category_add_new_title">Aldoni novan kategorion</string>
@@ -189,8 +189,8 @@
     <string name="min_km">min/km</string>
     <string name="shared_string_trip_recording">Registrado de kurso</string>
     <string name="shared_string_navigation">Navigi</string>
-    <string name="simulate_your_location_stop_descr">Ĉesigi simuladon de pozicio.</string>
-    <string name="simulate_your_location_descr">Simuli vian pozicion uzante komputitan kurson aŭ registritan GPX-spuron.</string>
+    <string name="simulate_your_location_stop_descr">Ĉesigi imitadon de pozicio.</string>
+    <string name="simulate_your_location_descr">Imiti vian pozicion uzante komputitan kurson aŭ registritan GPX-spuron.</string>
     <string name="looking_up_address">Serĉado de adreso</string>
     <string name="av_locations_descr">GPX-dosiero kun lokoj.</string>
     <string name="av_locations">Lokoj</string>
@@ -371,7 +371,7 @@
     <string name="your_edits">Viaj redaktoj</string>
     <string name="waypoint_visit_after">Viziti poste</string>
     <string name="waypoint_visit_before">Viziti antaŭe</string>
-    <string name="simulate_your_location">Simuli pozicion</string>
+    <string name="simulate_your_location">Imiti pozicion</string>
     <string name="drawer">Plata listo</string>
     <string name="short_location_on_map">Lat: %1$s
 \nLon: %2$s</string>
@@ -668,7 +668,7 @@
     <string name="app_mode_aircraft">Aviadilo</string>
     <string name="local_osm_changes_delete_all_confirm">Ĉu forigi %1$d OSM‑redaktojn\?</string>
     <string name="animate_routing_route_not_calculated">Bonvolu antaŭe kalkuli la kurson</string>
-    <string name="animate_routing_gpx">Simuli uzante GPX-kurson</string>
+    <string name="animate_routing_gpx">Imiti uzante GPX-kurson</string>
     <string name="auto_zoom_none">Sen aŭtomata skalado</string>
     <string name="auto_zoom_close">Pliproksime</string>
     <string name="auto_zoom_far">Meza skalado</string>
@@ -848,7 +848,7 @@
     <string name="osmand_parking_hours">Horoj</string>
     <string name="osmand_parking_minutes">Minutoj</string>
     <string name="osmand_parking_position_description_add_time">La aŭto estis parkumita je</string>
-    <string name="select_animate_speedup">Rapido de kurs‑simulado:</string>
+    <string name="select_animate_speedup">Rapido de kurs‑imitado:</string>
     <string name="global_app_allocated_memory_descr">Memorasigno: %1$s MB (limito de Android %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Memorasigno</string>
     <string name="native_app_allocated_memory">Tuta indiĝena memoro</string>
@@ -998,7 +998,7 @@
     <string name="delete_confirmation_msg">Ĉu forigi “%1$s”\?</string>
     <string name="city_type_town">Urbo</string>
     <string name="city_type_city">Urbego</string>
-    <string name="animate_route">Ekigi simuladon</string>
+    <string name="animate_route">Ekigi imitadon</string>
     <string name="file_can_not_be_renamed">Ne povas alinomi dosieron.</string>
     <string name="file_with_name_already_exists">Dosiero kun la sama nomo jam ekzistas.</string>
     <string name="poi_query_by_name_matches_categories">Trovis kelkajn rilatajn kategoriojn de interesejoj.</string>
@@ -1041,8 +1041,8 @@
     <string name="voice_stream_notification">Sciiga aŭd-kanalo</string>
     <string name="voice_stream_music">Aŭdvidaĵa/navigada kanalo</string>
     <string name="warning_tile_layer_not_downloadable">La aplikaĵo ne povas elŝuti la map-tavolon %1$s, reinstali ĝin povas helpi.</string>
-    <string name="overlay_transparency">Travideblo de surtavolo</string>
-    <string name="map_transparency">Travideblo de bazmapo</string>
+    <string name="overlay_transparency">Videblo de surtavolo</string>
+    <string name="map_transparency">Videblo de bazmapo</string>
     <string name="layer_underlay">Subtavola mapo…</string>
     <string name="map_underlay">Subtavola mapo</string>
     <string name="layer_overlay">Surtavola mapo…</string>
@@ -1108,7 +1108,7 @@
 \n
 \nPliaj informoj pri kiel redakti la mapon OSM: %1$s</string>
     <string name="debugging_and_development">OsmAnd-programistilo</string>
-    <string name="osmand_development_plugin_description">Liveras eblojn por testi kaj senerarigi OsmAnd: simuli navigajn kursojn, kontroli map-bildigadon, kontroli rendimenton kaj pli. La kromprogramo ne estas bezona por kutima uzado de la aplikaĵo.</string>
+    <string name="osmand_development_plugin_description">Liveras eblojn por testi kaj senerarigi OsmAnd: imiti navigajn kursojn, kontroli map-bildigadon, kontroli rendimenton kaj pli. La kromprogramo ne estas bezona por kutima uzado de la aplikaĵo.</string>
     <string name="lang_en_gb">Angla (Brita)</string>
     <string name="level_to_switch_vector_raster">Minimuma vektora skal-nivelo</string>
     <string name="search_osm_offline">Serĉi per pozici-trova servo</string>
@@ -1980,7 +1980,7 @@
     <string name="app_mode_public_transport">Publika transporto</string>
     <string name="avoid_roads_descr">Elektu vojon por eviti dum navigado, aŭ sur la mapo aŭ el la jena listo:</string>
     <string name="show_along_the_route">Montri laŭlonge de kurso</string>
-    <string name="simulate_navigation">Simuli navigadon</string>
+    <string name="simulate_navigation">Imiti navigadon</string>
     <string name="voice_announcements">Voĉaj sciigoj</string>
     <string name="intermediate_destinations">Interceloj</string>
     <string name="arrive_at_time">Alveno je %1$s</string>
@@ -2409,7 +2409,7 @@
     <string name="monitoring_min_distance_descr">Tiu ĉi filtrilo ebligas al vi ne preterpasi aldoni datumojn al registrata spuro, kiam preskaŭ neniu movo registriĝas. Tio ĉi ankaŭ plibonigas aspekton de spuro sen aldona pritraktado.</string>
     <string name="monitoring_min_distance_descr_side_effect">Kromefiko: periodoj de ripozoj ne estos registritaj aŭ estos registritaj nur per unuopaj punktoj. Etaj movoj (ekzemple al moviĝo alia vojflanko, kiu estus registrita kiel turniĝo) povos esti forfiltritaj. Rimarku, ke via spur-dosiero enhavos malpliajn datumojn por posttrakti kaj havos la saman ekzaktecon (ĝustecon): mezureraroj kaŭzitaj pro misricevoj aŭ difektoj de GPS-cirkvitaro plue aperos.</string>
     <string name="live_monitoring_adress">Retadreso</string>
-    <string name="monitoring_notification">Sciigo</string>
+    <string name="monitoring_notification">Montri la butonon “Registri” en sciigoj</string>
     <string name="monitoring_min_speed">Minimuma rapido</string>
     <string name="monitoring_min_accuracy">Minimuma precizo</string>
     <string name="monitoring_min_distance">Minimuma delokiĝo</string>
@@ -3162,7 +3162,7 @@
     <string name="add_group_to_markers">Aldoni grupon al la listo de map-markoj</string>
     <string name="remove_group_from_markers">Forigi grupon el la listo de map-markoj</string>
     <string name="start_point">Komenco</string>
-    <string name="mapillary_menu_filter_description_new">Filtri bildojn laŭ dato aŭ laŭ speco; aktiva nur je pligrandigo.</string>
+    <string name="mapillary_menu_filter_description_new">Filtri fotojn laŭ dato aŭ laŭ speco; aktiva nur je pligrandigo.</string>
     <string name="service_is_not_available_please_try_later">Servo ne estas disponebla. Reprovu poste.</string>
     <string name="shared_string_files">Dosieroj</string>
     <string name="sample_wikivoyage">Vikivojaĝo (provaĵo)</string>
@@ -3361,11 +3361,9 @@
     <string name="shared_string_visible_widgets">Videblaj fenestraĵoj</string>
     <string name="top_widgets_panel">Supra panelo</string>
     <string name="bottom_widgets_panel">Malsupra panelo</string>
-    <string name="configure_screen_widgets_descr">Aldoni/forigi kaj aranĝi fenestraĵoj ĉe la elektita flanko de la ekrano.</string>
+    <string name="configure_screen_widgets_descr">Aldoni/forigi kaj aranĝi fenestraĵojn ĉe la elektita flanko de la ekrano.</string>
     <string name="osm_carto_render_descr">Simila al la stilo «osm-carto» (“Norma mapo”) uzata en la retejo OpenStreetMap.org</string>
-    <string name="simulation_real_mode_desc">Sur rektaj fragmentoj de vojoj, rapido estos la maksimuma permesata rapido.
-\nSur vojkruciĝoj la simulado malrapidiĝos.
-\nLa simulado eĉ pli malrapidiĝos ĉe trafiklumoj, trafiksignoj STOP, ktp.</string>
+    <string name="simulation_real_mode_desc">Sur rektaj fragmentoj de vojoj, rapido estos la maksimuma permesata rapido. \nSur vojkruciĝoj la imitado malrapidiĝos. \nLa imitado eĉ pli malrapidiĝos ĉe trafiklumoj, trafiksignoj stop’, ktp.</string>
     <string name="simulation_real_mode_title">Realisma</string>
     <string name="speed_mode">Reĝimo de rapido</string>
     <string name="map_widget_distance_to_destination">Distanco al celo</string>
@@ -3393,9 +3391,9 @@
     <string name="rendering_attr_showBusRoutes_name">Aŭtobusaj kursoj</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Trolebusaj kursoj</string>
     <string name="routeInfo_horse_scale_name">Facilo de ĉevalaj vojoj</string>
-    <string name="simulation_constant_mode_desc">La simulado estos farita kun la konstanta elektita rapido.</string>
+    <string name="simulation_constant_mode_desc">La imitado estos farita kun la konstanta elektita rapido.</string>
     <string name="simulation_constant_mode_title">Konstanta rapido</string>
-    <string name="simulation_preview_mode_desc">Rapido de la simulado estos maksimuma sur rektaj fragmentoj kaj malrapidiĝos nur sur vojkruciĝoj.</string>
+    <string name="simulation_preview_mode_desc">Rapido de la imitado estos maksimuma sur rektaj fragmentoj kaj malrapidiĝos nur sur vojkruciĝoj.</string>
     <string name="simulation_preview_mode_title">Rapida antaŭvido</string>
     <string name="shared_string_symbol">Simbolo</string>
     <string name="no_widgets_descr">Aldonu almenaŭ unu fenestraĵon el la listo de disponeblaj fenestraĵoj.</string>
@@ -3599,9 +3597,9 @@
     <string name="ant_missing_dependency_descr">Ne trovis la postulatan servon “%1$s”. \nVi devas instali aŭ ĝisdatigi ĝin. \nĈu malfermi la vendejon Google Play por instali la servon?</string>
     <string name="ant_read_data">Legi datumojn</string>
     <string name="map_widget_target_distance">Distanco inter fotilo kaj celo</string>
-    <string name="simulate_location_by_gpx">Simuli pozicion per GPX</string>
+    <string name="simulate_location_by_gpx">Imiti pozicion per GPX</string>
     <string name="location_simulation_cutoff">Preterlasi la unuajn metrojn</string>
-    <string name="location_simulation_speedup">Plirapidigi simuladon</string>
+    <string name="location_simulation_speedup">Plirapidigi imitadon</string>
     <string name="send_uuid_preference_desc">Hazarda identigilo UUID estas uzata por elŝuti malkonektajn mapojn el la OsmAnd-serviloj por gardi laŭregulan uzadon de niaj serviloj, antaŭscii uzadon de datumtrafiko kaj generi anonimajn monatajn raportojn pri mapoj.</string>
     <string name="send_uuid_preference">Sendi unikan uzant-identigilon (UUID)</string>
     <string name="shared_string_identifiers">Identigiloj</string>
@@ -3812,7 +3810,7 @@
     <string name="shared_string_original">Origina</string>
     <string name="movement_speed">Movrapido</string>
     <string name="app_mode_moped">Motorbiciklo</string>
-    <string name="simulation_position_description">Elektu dosieron de spuro, kiu estos uzata por simuli movadon.</string>
+    <string name="simulation_position_description">Elektu dosieron de spuro, kiu estos uzata por imiti movadon.</string>
     <string name="release_4_4">• plibonigita menuo “Spuroj” en “Agordi mapon” \n \n• kunteksta menuo montras tradukitajn nomojn por interesejoj \n \n• eblo kunhavigi spuron per ligilo \n \n• eblo elekti marajn mejlojn/futojn por mezurunuo de longo \n \n• nova reĝimo por map-orientiĝo: “Fiksita (permane turnita)” \n \n• plisimpligita komenca ekrano \n \n• fiksita pozicio de loko sur dividita ekrano en Android Auto \n \n• aldonita diagramo “Dekliveco/Rapido” al analizo de spuro \n \n• Android 13: agordo pri lingvo aldonita al operaciumaj agordoj \n \n• riparita problemo pri montrado de veganaj ejoj \n \n• eblo elŝuti enretajn kahelojn por uzi kiel subtavolan aŭ surtavolan mapon \n \n• subteno por imperiaj unuoj por “Parametroj de veturilo” \n \n• nova profilo “Motorbiciklo” \n \n• nova elekto “Aŭtomata” por la agordo “Markilo de nuna pozicio” \n \n• riparitaj map-gestoj por 2,5-dimensia vido, pligrandigi kaj turni</string>
     <string name="enable_3d_maps">Aktivigi 3-dimensiajn mapojn</string>
     <string name="app_mode_climbing">Grimpado</string>
@@ -4373,7 +4371,7 @@
     <string name="quick_action_move_map_down">Mapo malsupren</string>
     <string name="quick_action_new_route">Nova kurso</string>
     <string name="quick_action_previous_app_profile">Aplikaĵa profilo: antaŭa</string>
-    <string name="shared_string_simulate">Simuli</string>
+    <string name="shared_string_simulate">Imiti</string>
     <string name="quick_action_first_intermediate">Unua intercelo</string>
     <string name="quick_action_video_note">Filma noto</string>
     <string name="quick_action_photo_note">Fota noto</string>
@@ -4566,7 +4564,7 @@
     <string name="obd_not_connected_to_device">Malkonektita de %s</string>
     <string name="obd_connecting_to_device">Konektata kun %s</string>
     <string name="bt_start_pair_failed">Ne povas ekigi kupli la aparaton</string>
-    <string name="simulate_obd">Simuli OBD-datumojn</string>
+    <string name="simulate_obd">Imiti OBD-datumojn</string>
     <string name="obd_engine_runtime">Labortempo de motoro</string>
     <string name="obd_engine_runtime_desc">Montras kiel longe la motoro laboris ekde ĝia starto.</string>
     <string name="obd_fuel_pressure">Premo de brulaĵo</string>
@@ -4672,7 +4670,7 @@
     <string name="show_image_previews">Antaŭvidi bildojn</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Butono por montri/kaŝi kradon de koordinatoj sur la mapo.</string>
     <string name="poi_source">Fonto de interesejoj</string>
-    <string name="ais_load_data">Enlegi AIS-datumojn el dosiero</string>
+    <string name="ais_load_data">Imiti martrafikon</string>
     <string name="hmd_promo">Promocio HMD por %1$s monatoj</string>
     <string name="shared_string_road_exit">Elveturejo</string>
     <string name="popular_places">Popularaj lokoj</string>
@@ -4684,7 +4682,7 @@
     <string name="map_widget_route_information_desc">Montras proksimuman tempon de alveno, restan tempon kaj restan distancon por la aktiva kurso.</string>
     <string name="ais_cpa_warning_distance">Averta distanco por la plej proksima punkto de alproksimiĝo (CPA)</string>
     <string name="ais_address_settings">Agordoj pri IP-adresoj</string>
-    <string name="plugin_ais_tracker_name">Spurilo de AIS-ŝipoj</string>
+    <string name="plugin_ais_tracker_name">Spurilo de ŝipoj (AIS)</string>
     <string name="shared_string_default_view">Implicita vido</string>
     <string name="ais_cpa_settings">Agordoj pri CPA</string>
     <string name="ais_object_lost_timeout">Templimo por videblo de perditaj ŝipoj</string>
@@ -4891,7 +4889,7 @@
     <string name="slots">Truoj</string>
     <string name="efficient_grid">Efika krado</string>
     <string name="deleted_maps_warning">%d elemento(j) estos forigita(j).\nĈu vi certas?</string>
-    <string name="deleted_maps_prompt">La jenaj mapoj ne estos plu subtenataj kaj estas anstataŭigitaj per mapoj de malpli grandaj regionoj. Forigu ilin kaj elŝutu la novajn versiojn.</string>
+    <string name="deleted_maps_prompt">La jenaj mapoj ne estos plu subtenataj. Forigu ilin kaj elŝutu la novajn versiojn.</string>
     <string name="unsupported_maps">Nesubtenataj mapoj</string>
     <string name="routing_attr_weightrating_name">Maksimuma maso je plena ŝarĝo</string>
     <string name="routing_attr_maxaxleload_name">Maksimuma pezo sur akso</string>
@@ -5139,7 +5137,7 @@
     <string name="shared_string_allocated">Asignita</string>
     <string name="open_from_short">ekde</string>
     <string name="astro_designations">Nomoj</string>
-    <string name="obd_simulation_device">Simulata aparato</string>
+    <string name="obd_simulation_device">Imitata aparato</string>
     <string name="astronomy_map">Astronomia mapo</string>
     <string name="favorite_confirm_delete_folder">Tio ĉi forigos la dosierujon “%1$s”, inkluzivante ĝiajn subdosierujojn kaj %2$d ŝatata(j)n ejo(j)n.</string>
     <string name="favorite_folder_rename_conflict">Dosierujo kun tiu ĉi nomo jam ekzistas.</string>
@@ -5402,12 +5400,42 @@
     <string name="ais_cpa_warning_time_desc">Emfazas ŝipojn ruĝe %1$s antaŭ la plej eta alproksimiĝo.</string>
     <string name="ais_cpa_safe_distance">Sekura distanco (CPA)</string>
     <string name="ais_cpa_safe_distance_desc">Emfazas ŝipojn ruĝe, kiuj laŭ kalkuloj pasigos vin pli proksime ol %1$s.</string>
-    <string name="ais_set_your_mmsi">Agordi MMSI</string>
+    <string name="ais_set_your_mmsi">Agordu vian MMSI</string>
     <string name="ais_set_your_mmsi_desc">Via propra ŝipo povas senĉese ekigi avertojn. Enigu vian MMSI-identigilon por ke OsmAnd distingu ĝin de aliaj ŝipoj.</string>
     <string name="ais_set_mmsi">Agordi MMSI</string>
     <string name="ais_enter_mmsi">Enigu MMSI</string>
     <string name="ais_enter_mmsi_desc">Enigu 9 ciferojn aŭ nenion por forviŝi la identigilon.</string>
     <string name="ais_error_mmsi_length">Necesas enigi 9 ciferojn</string>
-    <string name="ais_reset_plugin_settings">Rekomencigi agordojn de profilo</string>
+    <string name="ais_reset_plugin_settings">Rekomencigi agordojn de kromprogramo</string>
     <string name="ais_reset_connection_settings">Rekomencigi agordojn pri konekto</string>
+    <string name="gpx_line_style_desc_unavailable_for_color">La stiloj de linioj “streketa” kaj “punkta” estas disponeblaj nur por la “plena” stilo de koloro.</string>
+    <string name="gpx_color_unavailable_for_line_style">Tiu ĉi kolorigo ne estas disponebla por alia stilo de linio ol “kontinua”.</string>
+    <string name="gpx_color_desc_unavailable_for_style">Nur la “plena” kolorigo de spuro estas disponebla por la stiloj de linioj “streketa” kaj “punkta”.</string>
+    <string name="gpx_line_style">Stilo de linio</string>
+    <string name="gpx_line_style_solid">Kontinua</string>
+    <string name="gpx_line_style_dashed">Streketa</string>
+    <string name="gpx_line_style_dotted">Punkta</string>
+    <string name="panoramax">Panoramax</string>
+    <string name="open_panoramax">Malfermi Panoramax</string>
+    <string name="panoramax_image">Bildo el Panoramax</string>
+    <string name="panoramax_no_internet_desc">Bildoj el Panoramax estas disponeblaj nur enrete.</string>
+    <string name="quick_action_showhide_panoramax_descr">Butono por montri/kaŝi tavolon de fotoj el Panoramax sur la mapo.</string>
+    <string name="panoramax_menu_filter_description_new">Filtri fotojn laŭ kontribuinto, dato aŭ speco.</string>
+    <string name="plugin_panoramax_descr">Liveras start-nivelajn fotaron el Panoramax, federita kaj libere publikigata fot-mapiga platformo.Uzebla por kontroli la nunan kovriĝon kaj plani kion devas esti fotita.</string>
+    <string name="java_memory">Memoro de Ĝavo</string>
+    <string name="ais_load_data_descr">Reludi AIS-mesaĝojn el registrita dosiero.</string>
+    <string name="map_rendering">Map-bildigado</string>
+    <string name="simulate_ui">Imiti unuan starton</string>
+    <string name="simulate_ui_descr">Unua starto, reklamo de senpaga versio, tabelo de rabatoj.</string>
+    <string name="heap_dump">Memorŝuto («heap dump»)</string>
+    <string name="heap_dump_descr">Nombri objektojn en la dinamika memorareo de Ĝavo.</string>
+    <string name="heap_dump_collect">Kolekti kaj analizi nun</string>
+    <string name="heap_dump_collect_descr">Post kelkaj sekundoj montros la rezulton.</string>
+    <string name="heap_dump_share">Kunhavigi raporton</string>
+    <string name="heap_dump_share_descr">Sendi la antaŭan raporton al la servilo.</string>
+    <string name="heap_dump_auto">Kolekti dum alta uzo</string>
+    <string name="heap_dump_auto_descr">Kiam la dinamika memorareo estas preskaŭ plena, unufoje je 30 min.</string>
+    <string name="visualizing_button_grid_descr">Ĉeloj, truoj, kadroj kaj protokoloj.</string>
+    <string name="city_type_boundary">Areo</string>
+    <string name="file_name_containes_illegal_char">Nomo ne enhavu: %1$s</string>
 </resources>
