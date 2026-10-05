@@ -1289,7 +1289,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public boolean useOpenGlRenderer() {
-		return NativeCoreContext.isInit() && settings.USE_OPENGL_RENDER.get();
+		return NativeCoreContext.isInit() && settings.isOpenGlRendererEnabled();
 	}
 
 	private void enableStrictMode() {
