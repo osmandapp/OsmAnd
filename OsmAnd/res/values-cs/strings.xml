@@ -5294,4 +5294,10 @@
     <string name="gpx_line_style_solid">Plná</string>
     <string name="gpx_line_style_dotted">Tečkovaná</string>
     <string name="gpx_line_style">Styl čáry</string>
+    <string name="trip_rec_start_from_notification">Začněte upozorněním</string>
+    <string name="trip_rec_start_from_notification_descr">Zobrazuje upozornění s tlačítkem pro zahájení nahrávání výletů. Při nahrávání se vždy zobrazí upozornění.</string>
+    <string name="contour_labels">Popisky</string>
+    <string name="contour_label_direction_descr">Do kopce: horní část každého čísla nadmořské výšky směřuje k vyššímu terénu, stejně jako na papírových topografických mapách. Krátké značky na čarách směřují dolů.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Směr štítku</string>
+    <string name="rendering_value_uphill_name">Stoupání</string>
 </resources>
