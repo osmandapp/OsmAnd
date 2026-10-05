@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
 		/** Groups the assistant asks for: OsmAnd preselects only the safe ones, the user turns on the rest. */
 		private val REQUESTED_GROUPS = arrayOf("map", "search", "location", "navigation", "favorites",
-			"tracks_view", "tracks_edit", "recording")
+			"tracks_view", "tracks_edit", "recording", "screen")
 		private const val CLIENT = "client"
 		private const val ACCESS_STATUS = "access_status"
 	}
