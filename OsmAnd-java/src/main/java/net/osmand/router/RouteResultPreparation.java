@@ -1436,11 +1436,21 @@ public class RouteResultPreparation {
 		int[] act = findActiveIndex(prevSegm, currentSegm, lanesArray, null, turnLanes);
 		int startIndex = act[0];
 		int endIndex = act[1];
+		int activeTurn = act[2];
+		if (!hasAllowedLanes(mainTurnType, new int[] {activeTurn << 1}, 0, 0)) {
+			activeTurn = -1;
+		}
 		if (startIndex != -1 && endIndex != -1) {
 			if (hasAllowedLanes(mainTurnType, lanesArray, startIndex, endIndex)) {
 				for (int k = startIndex; k <= endIndex; k++) {
 					int[] oneActiveLane = {lanesArray[k]};
 					if (hasAllowedLanes(mainTurnType, oneActiveLane, 0, 0)) {
+						if (TurnType.getSecondaryTurn(lanesArray[k]) == activeTurn) {
+							TurnType.setSecondaryToPrimary(lanesArray, k);
+						}
+						if (TurnType.getTertiaryTurn(lanesArray[k]) == activeTurn) {
+							TurnType.setTertiaryToPrimary(lanesArray, k);
+						}
 						lanesArray[k] |= 1;
 					}
 				}
@@ -1458,9 +1468,16 @@ public class RouteResultPreparation {
 		boolean turnSet = false;
 		for (int i = 0; i < lanesArray.length; i++) {
 			if (TurnType.getPrimaryTurn(lanesArray[i]) == mainTurnType) {
-				lanesArray[i] |= 1;
-				turnSet = true;
+				// already primary
+			} else if (TurnType.getSecondaryTurn(lanesArray[i]) == mainTurnType) {
+				TurnType.setSecondaryToPrimary(lanesArray, i);
+			} else if (TurnType.getTertiaryTurn(lanesArray[i]) == mainTurnType) {
+				TurnType.setTertiaryToPrimary(lanesArray, i);
+			} else {
+				continue;
 			}
+			lanesArray[i] |= 1;
+			turnSet = true;
 		}
 		return turnSet;
 	}
@@ -1605,10 +1622,13 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		LinkedHashSet<Integer> currentTurns = new LinkedHashSet<>();
+		LinkedHashSet<Integer> collectedTurns = new LinkedHashSet<>();
 		for (int ln : rawLanes) {
-			TurnType.collectTurnTypes(ln, currentTurns);
+			TurnType.collectTurnTypes(ln, collectedTurns);
 		}
+		List<Integer> sortedTurns = new ArrayList<>(collectedTurns);
+		sortedTurns.sort(Comparator.comparingInt(TurnType::orderFromLeftToRight));
+		LinkedHashSet<Integer> currentTurns = new LinkedHashSet<>(sortedTurns);
 		LinkedList<Integer> analyzedList = new LinkedList<>(currentTurns);
 		if (analyzedList.size() > 1) {
 			if (keepTurnType == TurnType.KL) {
@@ -2085,8 +2105,8 @@ public class RouteResultPreparation {
 					TurnType.setPrimaryTurnAndReset(lanes, i, turn);
 				} else {
                     if (turn == calcTurnType || 
-                    	(TurnType.isRightTurn(calcTurnType) && TurnType.isRightTurn(turn)) || 
-                    	(TurnType.isLeftTurn(calcTurnType) && TurnType.isLeftTurn(turn)) 
+                    	(TurnType.isRightTurn(calcTurnType) && TurnType.isRightTurn(turn) && !TurnType.isRightTurn(primary)) || 
+                    	(TurnType.isLeftTurn(calcTurnType) && TurnType.isLeftTurn(turn) && !TurnType.isLeftTurn(primary)) 
                     	) {
                     	TurnType.setPrimaryTurnShiftOthers(lanes, i, turn);
                     } else if (TurnType.getSecondaryTurn(lanes[i]) == 0) {
@@ -2379,7 +2399,7 @@ public class RouteResultPreparation {
 
 	private int[] findActiveIndex(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, int[] rawLanes,
 	                              RoadSplitStructure rs, String turnLanes) {
-		int[] pair = {-1, -1, 0}; // [activeBeginIndex, activeEndIndex, activeTurn]
+		int[] pair = {-1, -1, -1}; // [activeBeginIndex, activeEndIndex, activeTurn]
 		if (turnLanes == null) {
 			return pair;
 		}
@@ -2416,7 +2436,11 @@ public class RouteResultPreparation {
 			int t = TurnType.getTertiaryTurn(rawLanes[i]);
 			if (p == startDirection || s == startDirection || t == startDirection) {
 				pair[0] = i;
-				pair[2] = startDirection;
+				if (rs.roadsOnRight == 0 && TurnType.isRightTurn(getTurnByAngle(rs.currentDeviation))) {
+					pair[2] = endDirection;
+				} else {
+					pair[2] = startDirection;
+				}				
 				break;
 			}
 		}

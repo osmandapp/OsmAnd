@@ -303,8 +303,8 @@ object TurnLanes {
 					TurnType.setPrimaryTurnAndReset(lanes, i, turn)
 				} else {
 					if (turn == calcTurnType ||
-						(TurnType.isRightTurn(calcTurnType) && TurnType.isRightTurn(turn)) ||
-						(TurnType.isLeftTurn(calcTurnType) && TurnType.isLeftTurn(turn))
+						(TurnType.isRightTurn(calcTurnType) && TurnType.isRightTurn(turn) && !TurnType.isRightTurn(primary)) ||
+						(TurnType.isLeftTurn(calcTurnType) && TurnType.isLeftTurn(turn) && !TurnType.isLeftTurn(primary))
 					) {
 						TurnType.setPrimaryTurnShiftOthers(lanes, i, turn)
 					} else if (TurnType.getSecondaryTurn(lanes[i]) == 0) {
@@ -383,9 +383,16 @@ object TurnLanes {
 		var turnSet = false
 		for (i in lanesArray.indices) {
 			if (TurnType.getPrimaryTurn(lanesArray[i]) == mainTurnType) {
-				lanesArray[i] = lanesArray[i] or 1
-				turnSet = true
+				// already primary
+			} else if (TurnType.getSecondaryTurn(lanesArray[i]) == mainTurnType) {
+				TurnType.setSecondaryToPrimary(lanesArray, i)
+			} else if (TurnType.getTertiaryTurn(lanesArray[i]) == mainTurnType) {
+				TurnType.setTertiaryToPrimary(lanesArray, i)
+			} else {
+				continue
 			}
+			lanesArray[i] = lanesArray[i] or 1
+			turnSet = true
 		}
 		return turnSet
 	}
@@ -872,10 +879,12 @@ object TurnLanes {
 				}
 			}
 		}
-		val currentTurns = LinkedHashSet<Int>()
+		val collectedTurns = LinkedHashSet<Int>()
 		for (ln in rawLanes) {
-			TurnType.collectTurnTypes(ln, currentTurns)
+			TurnType.collectTurnTypes(ln, collectedTurns)
 		}
+		// from left to right: the arrows of one lane are not in that order ("right;through")
+		val currentTurns = LinkedHashSet(collectedTurns.sortedBy { TurnType.orderFromLeftToRight(it) })
 		var analyzedList = ArrayList(currentTurns)
 		if (analyzedList.size > 1) {
 			if (keepTurnType == TurnType.KL) {
@@ -1131,7 +1140,7 @@ object TurnLanes {
 		rs: RoadSplitStructure?,
 		turnLanes: String?
 	): IntArray {
-		val pair = intArrayOf(-1, -1, 0) // [activeBeginIndex, activeEndIndex, activeTurn]
+		val pair = intArrayOf(-1, -1, -1) // [activeBeginIndex, activeEndIndex, activeTurn]
 		if (turnLanes == null) {
 			return pair
 		}
@@ -1221,6 +1230,9 @@ object TurnLanes {
 				break
 			}
 		}
+		if (rs.roadsOnRight == 0 && TurnType.isRightTurn(getTurnByAngle(rs.currentDeviation))) {
+			pair[2] = endDirection
+		}
 	}
 
 	/**
@@ -1266,11 +1278,21 @@ object TurnLanes {
 		val act = findActiveIndex(prevSegm, currentSegm, lanesArray, null, turnLanes)
 		val startIndex = act[0]
 		val endIndex = act[1]
+		var activeTurn = act[2]
+		if (!hasAllowedLanes(mainTurnType, intArrayOf(activeTurn shl 1), 0, 0)) {
+			activeTurn = -1
+		}
 		if (startIndex != -1 && endIndex != -1) {
 			if (hasAllowedLanes(mainTurnType, lanesArray, startIndex, endIndex)) {
 				for (k in startIndex..endIndex) {
 					val oneActiveLane = intArrayOf(lanesArray[k])
 					if (hasAllowedLanes(mainTurnType, oneActiveLane, 0, 0)) {
+						if (TurnType.getSecondaryTurn(lanesArray[k]) == activeTurn) {
+							TurnType.setSecondaryToPrimary(lanesArray, k)
+						}
+						if (TurnType.getTertiaryTurn(lanesArray[k]) == activeTurn) {
+							TurnType.setTertiaryToPrimary(lanesArray, k)
+						}
 						lanesArray[k] = lanesArray[k] or 1
 					}
 				}
