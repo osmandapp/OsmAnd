@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -22,6 +23,7 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
 import net.osmand.aiconnector.ConnectorSettings.Access
+import net.osmand.aiconnector.ConnectorSettings.RunMode
 import org.json.JSONObject
 
 /**
@@ -44,6 +46,8 @@ class MainActivity : AppCompatActivity() {
 	private lateinit var mainSwitch: MaterialSwitch
 	private lateinit var status: TextView
 	private lateinit var addressBanner: MaterialCardView
+	private lateinit var keepScreenBanner: MaterialCardView
+	private lateinit var runModeFooter: TextView
 	private lateinit var addressBannerText: TextView
 	private lateinit var osmandName: TextView
 	private lateinit var accessStatus: TextView
@@ -69,10 +73,27 @@ class MainActivity : AppCompatActivity() {
 			requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
 		}
 		bindViews()
-		if (ConnectorSettings.isEnabled(this)) {
+		if (ConnectorSettings.isEnabled(this) && !isScreenMode()) {
 			ConnectorService.start(this)
 		}
 	}
+
+	override fun onStart() {
+		super.onStart()
+		if (ConnectorSettings.isEnabled(this) && isScreenMode()) {
+			ConnectorService.start(this)
+		}
+	}
+
+	/* screen mode: no foreground service, so the connector stops with the screen */
+	override fun onStop() {
+		super.onStop()
+		if (isScreenMode() && !isChangingConfigurations) {
+			ConnectorService.stop(this)
+		}
+	}
+
+	private fun isScreenMode() = ConnectorSettings.runMode(this) == RunMode.SCREEN
 
 	override fun onResume() {
 		super.onResume()
@@ -94,6 +115,16 @@ class MainActivity : AppCompatActivity() {
 			ConnectorSettings.setEnabled(this, enabled)
 			if (enabled) ConnectorService.start(this) else ConnectorService.stop(this)
 			refreshLater()
+		}
+		keepScreenBanner = findViewById(R.id.keep_screen_banner)
+		runModeFooter = findViewById(R.id.run_mode_footer)
+		val runToggle: MaterialButtonToggleGroup = findViewById(R.id.run_mode_toggle)
+		runToggle.check(if (isScreenMode()) R.id.run_while_open else R.id.run_background)
+		runToggle.addOnButtonCheckedListener { _, id, checked ->
+			if (checked) {
+				ConnectorSettings.setRunMode(this, if (id == R.id.run_while_open) RunMode.SCREEN else RunMode.BACKGROUND)
+				restartServer()
+			}
 		}
 		addressBanner = findViewById(R.id.address_banner)
 		addressBannerText = findViewById(R.id.address_banner_text)
@@ -146,6 +177,15 @@ class MainActivity : AppCompatActivity() {
 			!enabled -> getString(R.string.status_stopped)
 			runningUrl != null -> getString(R.string.status_running, runningUrl.removeSuffix("/mcp").removePrefix("http://"))
 			else -> getString(R.string.status_cannot_start, ConnectorSettings.PORT)
+		}
+
+		val screenMode = isScreenMode()
+		runModeFooter.setText(if (screenMode) R.string.run_screen_footer else R.string.run_background_footer)
+		keepScreenBanner.visibility = if (enabled && screenMode) View.VISIBLE else View.GONE
+		if (enabled && screenMode) {
+			window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+		} else {
+			window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 		}
 
 		val pack = ConnectorSettings.osmandPackage(this)

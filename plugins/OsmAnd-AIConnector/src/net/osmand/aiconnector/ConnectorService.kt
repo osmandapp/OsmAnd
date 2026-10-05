@@ -28,8 +28,16 @@ class ConnectorService : Service() {
 		var tools: OsmAndTools? = null
 			private set
 
+		private const val EXTRA_FOREGROUND = "foreground"
+
+		/**
+		 * BACKGROUND: a foreground service, Doze does not stop it; SCREEN: a plain service the visible activity
+		 * starts and stops, no notification.
+		 */
 		fun start(ctx: Context) {
-			ctx.startForegroundService(Intent(ctx, ConnectorService::class.java))
+			val background = ConnectorSettings.runMode(ctx) == ConnectorSettings.RunMode.BACKGROUND
+			val intent = Intent(ctx, ConnectorService::class.java).putExtra(EXTRA_FOREGROUND, background)
+			if (background) ctx.startForegroundService(intent) else ctx.startService(intent)
 		}
 
 		fun stop(ctx: Context) {
@@ -43,9 +51,17 @@ class ConnectorService : Service() {
 	override fun onBind(intent: Intent?): IBinder? = null
 
 	override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-		startForegroundCompat()
+		val foreground = intent?.getBooleanExtra(EXTRA_FOREGROUND, true) ?: true
+		if (foreground) {
+			startForegroundCompat()
+		} else {
+			stopForeground(STOP_FOREGROUND_REMOVE)
+		}
 		restart()
-		return START_STICKY
+		if (foreground) {
+			updateNotification()
+		}
+		return if (foreground) START_STICKY else START_NOT_STICKY
 	}
 
 	private fun restart() {
@@ -80,19 +96,29 @@ class ConnectorService : Service() {
 		super.onDestroy()
 	}
 
+	private fun updateNotification() {
+		getSystemService(NotificationManager::class.java).notify(1, buildNotification())
+	}
+
+	private fun buildNotification(): Notification {
+		val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java),
+			PendingIntent.FLAG_IMMUTABLE)
+		val address = runningUrl?.removePrefix("http://")?.removeSuffix("/mcp")
+		return Notification.Builder(this, CHANNEL)
+			.setSmallIcon(R.drawable.ic_notification)
+			.setContentTitle(getString(R.string.notification_title))
+			.setContentText(if (address != null) getString(R.string.notification_text, address)
+				else getString(R.string.status_cannot_start, ConnectorSettings.PORT))
+			.setContentIntent(open)
+			.setOngoing(true)
+			.build()
+	}
+
 	private fun startForegroundCompat() {
 		val nm = getSystemService(NotificationManager::class.java)
 		nm.createNotificationChannel(NotificationChannel(CHANNEL, getString(R.string.notification_channel),
 			NotificationManager.IMPORTANCE_LOW))
-		val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java),
-			PendingIntent.FLAG_IMMUTABLE)
-		val notification = Notification.Builder(this, CHANNEL)
-			.setSmallIcon(R.drawable.ic_notification)
-			.setContentTitle(getString(R.string.notification_title))
-			.setContentText(getString(R.string.notification_text))
-			.setContentIntent(open)
-			.setOngoing(true)
-			.build()
+		val notification = buildNotification()
 		if (Build.VERSION.SDK_INT >= 34) {
 			startForeground(1, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
 		} else {

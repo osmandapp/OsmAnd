@@ -20,6 +20,9 @@ object ConnectorSettings {
 
 	enum class Access { WIFI, USB }
 
+	/** BACKGROUND: a foreground service with a notification; SCREEN: only while the app screen is open. */
+	enum class RunMode { BACKGROUND, SCREEN }
+
 	private fun prefs(ctx: Context): SharedPreferences =
 		ctx.getSharedPreferences("connector", Context.MODE_PRIVATE)
 
@@ -46,6 +49,12 @@ object ConnectorSettings {
 		if (prefs(ctx).getBoolean("usb", false)) Access.USB else Access.WIFI
 
 	fun setAccess(ctx: Context, access: Access) = prefs(ctx).edit().putBoolean("usb", access == Access.USB).apply()
+
+	fun runMode(ctx: Context): RunMode =
+		if (prefs(ctx).getBoolean("screen_mode", false)) RunMode.SCREEN else RunMode.BACKGROUND
+
+	fun setRunMode(ctx: Context, mode: RunMode) =
+		prefs(ctx).edit().putBoolean("screen_mode", mode == RunMode.SCREEN).apply()
 
 	fun token(ctx: Context): String =
 		prefs(ctx).getString("token", null) ?: newToken(ctx)

@@ -3,7 +3,7 @@
 	<string name="app_name">OsmAnd AI Connector</string>
 	<string name="notification_channel">AI Connector</string>
 	<string name="notification_title">AI Connector is on</string>
-	<string name="notification_text">Your AI assistant can use OsmAnd on this phone</string>
+	<string name="notification_text">Your AI assistant can use OsmAnd · %1$s</string>
 
 	<string name="screen_description">Lets an AI assistant on your computer (Claude Code, Codex, Cursor…) use OsmAnd on this phone: show places, plan routes, start navigation.</string>
 	<string name="main_switch">Connector</string>
@@ -11,6 +11,11 @@
 	<string name="status_stopped">Off. Assistants cannot reach OsmAnd.</string>
 	<string name="status_cannot_start">Cannot start: port %1$d is busy.</string>
 
+	<string name="run_in_background">In background</string>
+	<string name="run_while_open">Screen on</string>
+	<string name="run_background_footer">Works with the phone locked. A notification shows while the connector is on.</string>
+	<string name="run_screen_footer">No notification. The connector stops when you leave this screen.</string>
+	<string name="keep_screen_open">Keep this screen open: the assistant can use OsmAnd only while it is on.</string>
 	<string name="step_osmand">1. OsmAnd</string>
 	<string name="osmand_app">OsmAnd app</string>
 	<string name="osmand_not_installed">OsmAnd is not installed</string>

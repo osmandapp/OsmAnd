@@ -80,6 +80,59 @@
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
 
+			<!-- how the connector runs: foreground service, or only while this screen is open -->
+			<com.google.android.material.button.MaterialButtonToggleGroup
+				android:id="@+id/run_mode_toggle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="12dp"
+				app:selectionRequired="true"
+				app:singleSelection="true">
+
+				<Button
+					android:id="@+id/run_background"
+					style="?attr/materialButtonOutlinedStyle"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/run_in_background" />
+
+				<Button
+					android:id="@+id/run_while_open"
+					style="?attr/materialButtonOutlinedStyle"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/run_while_open" />
+			</com.google.android.material.button.MaterialButtonToggleGroup>
+
+			<TextView
+				android:id="@+id/run_mode_footer"
+				style="@style/TextAppearance.Material3.BodySmall"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingTop="8dp"
+				android:textColor="?attr/colorOnSurfaceVariant" />
+
+			<!-- screen mode: the connector works only while this screen is visible -->
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/keep_screen_banner"
+				style="@style/Widget.Material3.CardView.Filled"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/gutter"
+				android:visibility="gone"
+				app:cardBackgroundColor="?attr/colorTertiaryContainer">
+
+				<TextView
+					style="@style/TextAppearance.Material3.BodyMedium"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="@dimen/card_padding"
+					android:text="@string/keep_screen_open"
+					android:textColor="?attr/colorOnTertiaryContainer" />
+			</com.google.android.material.card.MaterialCardView>
+
 			<!-- shown when the phone's address differs from the one in the copied settings -->
 			<com.google.android.material.card.MaterialCardView
 				android:id="@+id/address_banner"
