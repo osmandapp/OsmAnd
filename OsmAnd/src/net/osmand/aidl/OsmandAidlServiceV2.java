@@ -57,6 +57,7 @@ import net.osmand.aidlapi.favorite.group.RemoveFavoriteGroupParams;
 import net.osmand.aidlapi.favorite.group.UpdateFavoriteGroupParams;
 import net.osmand.aidlapi.gpx.AGpxBitmap;
 import net.osmand.aidlapi.gpx.AGpxFile;
+import net.osmand.aidlapi.gpx.AGpxRecordingInfo;
 import net.osmand.aidlapi.gpx.ASelectedGpxFile;
 import net.osmand.aidlapi.gpx.CreateGpxBitmapParams;
 import net.osmand.aidlapi.gpx.HideGpxParams;
@@ -678,6 +679,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			} catch (Exception e) {
 				handleException(e);
 				return false;
+			}
+		}
+
+		@Override
+		public AGpxRecordingInfo getGpxRecordingInfo() {
+			try {
+				OsmandAidlApi api = getApi("getGpxRecordingInfo");
+				return api != null ? api.getGpxRecordingInfo() : null;
+			} catch (Exception e) {
+				handleException(e);
+				return null;
 			}
 		}
 

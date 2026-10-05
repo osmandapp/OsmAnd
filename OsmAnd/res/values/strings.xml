@@ -29,8 +29,10 @@
 	<string name="aidl_group_tracks_view_descr">Read your tracks</string>
 	<string name="aidl_group_tracks_edit">Tracks: edit</string>
 	<string name="aidl_group_tracks_edit_descr">Import, show and delete</string>
-	<string name="aidl_group_recording">Recording</string>
-	<string name="aidl_group_recording_descr">Trips, photo, audio, video</string>
+	<string name="aidl_group_recording">Trip recording</string>
+	<string name="aidl_group_recording_descr">Start, stop and view the current track</string>
+	<string name="aidl_group_notes">Notes</string>
+	<string name="aidl_group_notes_descr">Photo, audio and video notes</string>
 	<string name="aidl_group_settings_descr">Change settings and profiles</string>
 	<string name="aidl_group_system">System</string>
 	<string name="aidl_group_system_descr">Files, logs, fake location</string>

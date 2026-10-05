@@ -255,6 +255,12 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			"Trip recording started"
 		},
 		Tool(
+			"osmand_recording_status",
+			"Whether OsmAnd records a track now and the current track so far: distance, duration, points, " +
+					"time of the last point. Also tells whether the Trip recording plugin is on.",
+			schema()
+		) { recordingStatus() },
+		Tool(
 			"osmand_stop_recording",
 			"Stop trip recording. The track is saved to the rec folder.",
 			schema()
@@ -338,7 +344,8 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		o.put("groups", JSONObject()
 			.put(MAP, true)
 			.put(SETTINGS, readPref("application_mode", null) != null)
-			.put(TRACKS_VIEW, api.getActiveGpx(ArrayList())))
+			.put(TRACKS_VIEW, api.getActiveGpx(ArrayList()))
+			.put(RECORDING, api.gpxRecordingInfo != null))
 		o.put("enabled", true)
 			.put("screen_open", api.isFragmentOpen)
 			.put("context_menu_open", api.isMenuOpen)
@@ -354,8 +361,22 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 	}
 
 	// OsmAnd also refuses recording when its Trip recording plugin is off
-	private fun recordingRefused() = refused(RECORDING) +
-			" Recording also needs the Trip recording plugin turned on in OsmAnd > Menu > Plugins."
+	private fun recordingRefused(): String {
+		val info = bridge.get().gpxRecordingInfo
+		if (info != null && !info.isPluginEnabled) {
+			return "The Trip recording plugin is off in ${osmandApp()}: ask the user to turn it on in Menu > Plugins."
+		}
+		return refused(RECORDING) + " Recording also needs the Trip recording plugin turned on in OsmAnd > Menu > Plugins."
+	}
+
+	private fun recordingStatus(): JSONObject {
+		// null when the group is off, or from an OsmAnd without this call
+		val info = bridge.get().gpxRecordingInfo
+			?: throw ToolError(refused(RECORDING) + " An older OsmAnd cannot report recording at all.")
+		return JSONObject().put("recording", info.isRecording).put("plugin_enabled", info.isPluginEnabled)
+			.put("distance_m", info.distance.toInt()).put("duration_s", info.duration / 1000)
+			.put("points", info.points).put("last_point_time", info.lastPointTime)
+	}
 
 	private fun listTracks(a: JSONObject): JSONObject {
 		val files = ArrayList<AGpxFile>()
@@ -450,7 +471,7 @@ private const val NAVIGATION = "Navigation"
 private const val FAVORITES = "Favorites"
 private const val TRACKS_VIEW = "Tracks: view"
 private const val TRACKS_EDIT = "Tracks: edit"
-private const val RECORDING = "Recording"
+private const val RECORDING = "Trip recording"
 private const val SETTINGS = "Settings"
 
 private const val PREF_HINT = "Common ids: application_mode (current profile, global), daynight_mode (DAY, NIGHT, AUTO, SENSOR, APP_THEME), " +

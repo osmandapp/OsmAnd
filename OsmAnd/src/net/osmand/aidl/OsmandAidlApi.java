@@ -91,6 +91,7 @@ import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.development.LogcatAsyncTask;
 import net.osmand.plus.plugins.development.LogcatMessageListener;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
@@ -1729,6 +1730,14 @@ public class OsmandAidlApi {
 			return true;
 		}
 		return false;
+	}
+
+	@NonNull
+	net.osmand.aidlapi.gpx.AGpxRecordingInfo getGpxRecordingInfo() {
+		SavingTrackHelper helper = app.getSavingTrackHelper();
+		boolean pluginEnabled = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
+		return new net.osmand.aidlapi.gpx.AGpxRecordingInfo(helper.getIsRecording(), pluginEnabled,
+				helper.getDistance(), helper.getDuration(), helper.getTrkPoints(), helper.getLastTrackPointTime());
 	}
 
 	boolean takePhotoNote(double latitude, double longitude) {
