@@ -29,10 +29,10 @@ import net.osmand.wear.ui.screens.MapScreen
 import net.osmand.wear.ui.screens.MarkersPager
 import net.osmand.wear.ui.screens.MessageScreen
 import net.osmand.wear.ui.screens.NavigationScreen
-import net.osmand.wear.ui.screens.PlaceholderScreen
 import net.osmand.wear.ui.screens.ProfilePickerScreen
 import net.osmand.wear.ui.screens.RecordingPager
 import net.osmand.wear.ui.screens.RecordingStartScreen
+import net.osmand.wear.ui.screens.SettingsScreen
 import net.osmand.wear.ui.screens.isSessionOpen
 import net.osmand.wear.ui.theme.OsmAndWearTheme
 
@@ -168,7 +168,15 @@ fun WearApp(connector: PhoneConnector) {
 						}
 					)
 				}
-				composable(Routes.SETTINGS) { PlaceholderScreen(Routes.SETTINGS) }
+				composable(Routes.SETTINGS) {
+					val snapshot = currentSnapshot()
+					SettingsScreen(
+						legacyMapRenderer = snapshot?.state?.legacyMapRenderer ?: true,
+						onSelectMapRenderer = { legacy ->
+							send(WearCommand.SetMapRenderer(legacy))
+						}
+					)
+				}
 			}
 		}
 	}

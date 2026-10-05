@@ -30,7 +30,14 @@ data class PhoneState(
 	 * Set while the phone is driving a car display. The watch map is refused for as long as it
 	 * holds: one screen in a car is the one the driver should be looking at.
 	 */
-	val carConnected: Boolean = false
+	val carConnected: Boolean = false,
+
+	/**
+	 * Which of OsmAnd's renderers is drawing the watch's map. Sent so the settings screen can
+	 * show what is in force rather than what this watch last asked for: the phone is where the
+	 * renderer actually lives, and another watch, or a reinstall, can have changed it.
+	 */
+	val legacyMapRenderer: Boolean = true
 )
 
 /**

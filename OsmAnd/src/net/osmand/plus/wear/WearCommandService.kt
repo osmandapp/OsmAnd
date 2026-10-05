@@ -131,6 +131,8 @@ class WearCommandService : WearableListenerService() {
 
 			is WearCommand.RecenterMap -> mapStreamer(app).recenter(command.seq)
 
+			is WearCommand.SetMapRenderer -> mapStreamer(app).setLegacyRenderer(command.legacy)
+
 			is WearCommand.SelectProfile -> {
 				val mode = ApplicationMode.valueOfStringKey(command.appModeKey, null)
 				if (mode != null) {

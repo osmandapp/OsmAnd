@@ -101,6 +101,11 @@ sealed interface WearCommand {
 	@SerialName("pan_map")
 	data class PanMap(val dx: Float, val dy: Float, val seq: Int = 0) : WearCommand
 
+	/** Picks the renderer that draws the watch's map: the legacy one, or OpenGL. */
+	@Serializable
+	@SerialName("set_map_renderer")
+	data class SetMapRenderer(val legacy: Boolean) : WearCommand
+
 	/** Puts the map back on the current position. */
 	@Serializable
 	@SerialName("recenter_map")

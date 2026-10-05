@@ -17,7 +17,7 @@ object WearProtocol {
 	 * Purely additive changes (a new nullable field) do not need a bump, because both ends
 	 * decode with `ignoreUnknownKeys`.
 	 */
-	const val VERSION = 6
+	const val VERSION = 7
 
 	/** Advertised by the phone app, looked up by the watch. */
 	const val CAPABILITY_PHONE_APP = "osmand_phone_app"
