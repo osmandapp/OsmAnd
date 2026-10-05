@@ -1095,6 +1095,17 @@ public class Algorithms {
 		return String.format(Locale.UK, "%02d:%02d", hours, min);
 	}
 
+	public static String formatFileSize(long bytes) {
+		String[] units = {"B", "KB", "MB", "GB", "TB"};
+		double value = bytes;
+		int unit = 0;
+		while (value >= 1024 && unit < units.length - 1) {
+			value /= 1024;
+			unit++;
+		}
+		return unit == 0 ? bytes + " B" : String.format(Locale.US, "%.1f %s", value, units[unit]);
+	}
+
 	public static <T extends Enum<T>> T parseEnumValue(T[] cl, String val, T defaultValue) {
 		for (T aCl : cl) {
 			if (aCl.name().equalsIgnoreCase(val)) {
