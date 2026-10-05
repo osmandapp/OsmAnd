@@ -5608,8 +5608,8 @@
     <string name="astro_eclipse_end">Einde</string>
     <string name="always_keep_local_copy">Behoud altijd een lokale kopie</string>
     <string name="always_keep_local_copy_description">Media blijft gekoppeld zelfs als het origineel wordt verwijderd uit de galerij of bestanden.</string>
-    <string name="use_spatial_text_search">Gebruik ruimtelijk tekst-zoeken</string>
-    <string name="use_spatial_text_search_description">Vervang de standaard snelle zoek-API\'s door de experimentele ruimtelijke tekst-zoekmachine.</string>
+    <string name="use_spatial_search">Gebruik ruimtelijk tekst-zoeken</string>
+    <string name="use_spatial_search_description">Vervang de standaard snelle zoek-API\'s door de experimentele ruimtelijke tekst-zoekmachine.</string>
     <string name="astro_lunar_eclipse">Maansverduistering</string>
     <string name="astro_lunar_eclipse_subtitle">Verken wereldwijde maansverduisteringen</string>
     <string name="astro_previous_lunar_eclipse">Vorige maansverduistering</string>

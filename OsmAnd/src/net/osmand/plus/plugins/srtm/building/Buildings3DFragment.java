@@ -75,7 +75,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 
 		cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
 			cb.setChecked(isChecked);
-			plugin.ENABLE_3D_MAP_OBJECTS.set(isChecked);
+			settings.ENABLE_3D_MAP_OBJECTS.set(isChecked);
 			refreshMap();
 			updateUiMode();
 		});
@@ -107,7 +107,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 	}
 
 	private boolean isEnabled() {
-		return plugin.ENABLE_3D_MAP_OBJECTS.get();
+		return settings.ENABLE_3D_MAP_OBJECTS.get();
 	}
 
 	private void showHideTopShadow() {
@@ -130,13 +130,13 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 
 		TextViewEx title = appearanceContainer.findViewById(R.id.title);
 		title.setText(R.string.shared_string_appearance);
-		float alpha = plugin.BUILDINGS_3D_ALPHA.get();
+		float alpha = settings.BUILDINGS_3D_ALPHA.get();
 		int progress = ProgressHelper.normalizeProgressPercent((int) (alpha * 100));
 
 		TextView visibilityTv = container.findViewById(R.id.opacity_value);
 		visibilityTv.setText(String.format("%s%%", progress));
 		TextView colorStyleTv = container.findViewById(R.id.color_scheme_name);
-		colorStyleTv.setText(Buildings3DColorType.Companion.getById(plugin.BUILDINGS_3D_COLOR_STYLE.get()).getLabelId());
+		colorStyleTv.setText(Buildings3DColorType.Companion.getById(settings.BUILDINGS_3D_COLOR_STYLE.get()).getLabelId());
 
 		View btnColor = container.findViewById(R.id.color_container);
 		btnColor.setOnClickListener((v) -> callMapActivity(mapActivity -> {
@@ -200,7 +200,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 	}
 
 	private void setupViewDistanceToggleButtons(@NonNull View view) {
-		int level = plugin.BUILDINGS_3D_VIEW_DISTANCE.get();
+		int level = settings.BUILDINGS_3D_VIEW_DISTANCE.get();
 		IconToggleButton.IconRadioItem low = new IconToggleButton.IconRadioItem(R.drawable.ic_action_view_distance_low);
 		low.setOnClickListener((radioItem, v) -> {
 			onViewDistanceChanged(low, 1);
@@ -230,7 +230,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 	}
 
 	private void onViewDistanceChanged(@NonNull IconToggleButton.IconRadioItem selectItem, int level) {
-		plugin.BUILDINGS_3D_VIEW_DISTANCE.set(level);
+		settings.BUILDINGS_3D_VIEW_DISTANCE.set(level);
 		plugin.apply3DBuildingsDetalization();
 		refreshMap();
 		viewDistanceToggleButton.setSelectedItem(selectItem);

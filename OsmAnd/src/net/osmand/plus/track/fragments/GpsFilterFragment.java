@@ -312,6 +312,13 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		exitGpsFilterMode();
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		// closeAllFragments() and a finishing activity remove the fragment without dismiss()
+		app.getGpsFilterHelper().removeListener(this);
+	}
+
 	private void enterGpsFilterMode() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {

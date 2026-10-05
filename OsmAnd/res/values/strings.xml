@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="trip_rec_start_from_notification">Start from notification</string>
+	<string name="trip_rec_start_from_notification_descr">Shows a notification with a button to start trip recording. While recording, a notification is always shown.</string>
 	<string name="contour_labels">Labels</string>
 	<string name="contour_label_direction_descr">Uphill: the top of each height number faces higher ground, as on paper topographic maps. The short ticks on the lines point downhill.</string>
 	<string name="rendering_attr_contourLabelDirection_name">Label direction</string>
@@ -133,8 +135,8 @@
 	<string name="media_storage_camera_folder_note_descr">Audio is saved to Music/OsmAnd.</string>
 	<string name="always_keep_local_copy">Always keep a local copy</string>
 	<string name="always_keep_local_copy_description">Media stays attached even if the original is deleted from the gallery or files.</string>
-	<string name="use_spatial_text_search">Use spatial text search</string>
-	<string name="use_spatial_text_search_description">Replace the standard quick search APIs with the experimental spatial text search engine.</string>
+	<string name="use_spatial_search">Use spatial text search</string>
+	<string name="use_spatial_search_description">Replace the standard quick search APIs with the experimental spatial text search engine.</string>
 	<string name="astro_lunar_eclipse">Lunar eclipse</string>
 	<string name="astro_lunar_eclipse_subtitle">Explore worldwide lunar eclipses</string>
 	<string name="astro_previous_lunar_eclipse">Previous lunar eclipse</string>
@@ -4262,6 +4264,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="postcode">Postcode</string>
     <string name="shared_string_from">from</string>
     <string name="city_type_district">District</string>
+    <string name="city_type_boundary">Area</string>
     <string name="city_type_neighbourhood">Neighbourhood</string>
     <string name="map_widget_search">Search</string>
     <string name="shared_string_is_open_24_7">Open 24/7</string>

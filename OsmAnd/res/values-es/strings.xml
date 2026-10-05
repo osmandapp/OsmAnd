@@ -5081,8 +5081,8 @@
     <string name="media_storage_camera_folder_note_descr">El audio se guarda en Music/OsmAnd.</string>
     <string name="always_keep_local_copy">Siempre conservar una copia local</string>
     <string name="always_keep_local_copy_description">Los archivos multimedia permanecen adjuntos incluso si el original se elimina de la galería o de los archivos.</string>
-    <string name="use_spatial_text_search">Utilizar la búsqueda de texto espacial</string>
-    <string name="use_spatial_text_search_description">Sustituya las API de búsqueda rápida estándar por el motor de búsqueda de texto espacial experimental.</string>
+    <string name="use_spatial_search">Utilizar la búsqueda de texto espacial</string>
+    <string name="use_spatial_search_description">Sustituya las API de búsqueda rápida estándar por el motor de búsqueda de texto espacial experimental.</string>
     <string name="astro_lunar_eclipse">Eclipse lunar</string>
     <string name="astro_lunar_eclipse_subtitle">Explorar los eclipses lunares en el mundo</string>
     <string name="astro_previous_lunar_eclipse">Eclipse lunar previo</string>
@@ -5194,4 +5194,14 @@
     <string name="free_download_limit_reached">Se alcanzó el límite de descargas gratuitas</string>
     <string name="sort_by_relevance">Relevancia</string>
     <string name="coordinate_format_cancel_changes_title">Cambios no guardados</string>
+    <string name="contour_labels">Etiquetas</string>
+    <string name="contour_label_direction_descr">Cuesta arriba: la parte superior de cada número de altura está orientada hacia el terreno más elevado, como en los mapas topográficos de papel. Las pequeñas marcas en las líneas apuntan cuesta abajo.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Orientación de la etiqueta</string>
+    <string name="rendering_value_upright_name">Vertical</string>
+    <string name="shared_string_visibility">Visibilidad</string>
+    <string name="opening_hours_public_holiday">Días festivos</string>
+    <string name="opening_hours_school_holiday">School holidays</string>
+    <string name="opening_hours_easter">Pascua</string>
+    <string name="ais_connection_not_set_up">No configurado</string>
+    <string name="ais_connection_not_connected">No conectado</string>
 </resources>

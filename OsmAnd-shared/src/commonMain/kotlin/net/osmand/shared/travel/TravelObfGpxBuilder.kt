@@ -327,8 +327,8 @@ class TravelObfGpxBuilder(private val context: TravelObfContext) {
 			poiTypeFilter = getSearchFilter(travelGpx.getMainFilterString(), travelGpx.getPointFilterString())
 		}
 
-		val geometryMap = HashMap<Long, BinaryMapDataObject>() // live-updates
-		val amenityMap = HashMap<Long, Amenity>() // live-updates
+		val geometryMap = LinkedHashMap<Long, BinaryMapDataObject>() // live-updates
+		val amenityMap = LinkedHashMap<Long, Amenity>() // live-updates
 		val currentAmenities = ArrayList<Amenity>()
 
 		val pointRequest = SearchRequest.buildSearchPoiRequest(
@@ -436,7 +436,7 @@ class TravelObfGpxBuilder(private val context: TravelObfContext) {
 		val right = Int.MAX_VALUE
 		val top = 0
 		val bottom = Int.MAX_VALUE
-		val amenityMap = HashMap<Long, Amenity>()
+		val amenityMap = LinkedHashMap<Long, Amenity>()
 		for (repo in repos) {
 			try {
 				if (isCancelled.isCancelled()) {
