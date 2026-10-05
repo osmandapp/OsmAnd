@@ -24,9 +24,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
@@ -40,6 +44,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
+import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.ScreenScaffold
 
 import android.os.SystemClock
@@ -219,9 +224,19 @@ fun MapScreen(
 		}
 	}
 
+	// Beyond the drawn frame the map is not missing, it is not drawn yet, and a chequerboard
+	// says that where flat black reads as a fault.
+	val board = MaterialTheme.colorScheme.surfaceContainer
+	// Taken from the foreground rather than from a second container shade, which in a dark
+	// scheme sits so close to the first that the squares vanish.
+	val boardAlternate = MaterialTheme.colorScheme.onSurface.copy(alpha = CHEQUER_CONTRAST)
+
 	ScreenScaffold {
 		Box(
-			modifier = Modifier.fillMaxSize().clipToBounds(),
+			modifier = Modifier
+				.fillMaxSize()
+				.clipToBounds()
+				.drawBehind { chequerboard(board, boardAlternate) },
 			contentAlignment = Alignment.Center
 		) {
 			val frame = shown.frame
@@ -350,6 +365,27 @@ private data class Shown(
 
 	fun scaledBy(zoom: Float): Shown = copy(scale = scale * zoom)
 }
+
+/** Fixed to the screen rather than to the map: it stands for nothing having been drawn here. */
+private fun DrawScope.chequerboard(light: Color, dark: Color) {
+	val step = CHEQUER_SIZE_PX
+	drawRect(light)
+	var y = 0f
+	var row = 0
+	while (y < size.height) {
+		var x = if (row % 2 == 0) 0f else step
+		while (x < size.width) {
+			drawRect(dark, topLeft = Offset(x, y), size = Size(step, step))
+			x += step * 2
+		}
+		y += step
+		row++
+	}
+}
+
+private const val CHEQUER_SIZE_PX = 24f
+
+private const val CHEQUER_CONTRAST = 0.12f
 
 /** Matches PagerDefaults.LeftEdgeZoneFraction, so both screens feel the same at the edge. */
 private const val LEFT_EDGE_FRACTION = 0.15f
