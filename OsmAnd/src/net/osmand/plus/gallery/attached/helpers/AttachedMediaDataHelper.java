@@ -16,6 +16,7 @@ import net.osmand.plus.myplaces.favorites.add.AddFavoriteResult;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.gallery.library.MediaLibraryScanner;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.settings.mediastorage.MediaSource;
 import net.osmand.plus.settings.mediastorage.MediaStorageHelper;
@@ -218,6 +219,12 @@ public class AttachedMediaDataHelper {
 			boolean renamed = Boolean.TRUE.equals(saved) && !destination.exists()
 					&& (recording != null ? recording.setName(name) : source.renameTo(destination));
 			if (renamed) {
+				if (recording != null) {
+					AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
+					if (plugin != null) {
+						plugin.getRecordingsFileHelper().updateRecordingFileName(source.getName(), recording);
+					}
+				}
 				mediaStorageHelper.scanMediaFile(source);
 				mediaStorageHelper.scanMediaFile(destination);
 				for (Linkable target : targets) notifyMediaChanged(target);
@@ -397,5 +404,33 @@ public class AttachedMediaDataHelper {
 	@NonNull
 	private String getRecordingHref(@NonNull Recording recording) {
 		return mediaStorageHelper.createMediaFileHref(recording.getFile());
+	}
+
+	/** Drops the favourite links that point at a recording, e.g. when the note is deleted on the map. */
+	public void removeRecordingLinks(@NonNull Recording recording) {
+		String basePath = app.getAppPath().getAbsolutePath();
+		String key = MediaLibraryScanner.keyOf(createRecordingLink(recording), basePath);
+		if (key == null) {
+			return;
+		}
+		Map<Linkable, List<Link>> linksByTarget = new IdentityHashMap<>();
+		for (FavouritePoint point : app.getFavoritesHelper().getFavouritePoints()) {
+			List<Link> links = point.getLinks();
+			if (links == null) {
+				continue;
+			}
+			List<Link> matching = new ArrayList<>();
+			for (Link link : links) {
+				if (key.equals(MediaLibraryScanner.keyOf(link, basePath))) {
+					matching.add(link);
+				}
+			}
+			if (!matching.isEmpty()) {
+				linksByTarget.put(point, matching);
+			}
+		}
+		if (!linksByTarget.isEmpty()) {
+			removeMediaLinks(linksByTarget, false, null);
+		}
 	}
 }

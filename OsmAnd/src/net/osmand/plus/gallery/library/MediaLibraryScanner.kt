@@ -27,7 +27,7 @@ class MediaLibraryScanner(private val app: OsmandApplication, private val plugin
 			}
 		}
 		for (source in storage.listMedia(MediaStorageLocation.fromSettings(app))) {
-			add(Link(source.href).apply { text = source.fileName })
+			add(Link(source.href, source.fileName, source.mimeType))
 		}
 		for (recording in plugin?.allRecordings.orEmpty().toList()) {
 			add(Link(storage.createMediaFileHref(recording.file)).apply { text = recording.file.name }, recording = recording)

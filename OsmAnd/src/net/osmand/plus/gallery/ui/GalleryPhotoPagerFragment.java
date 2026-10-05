@@ -613,6 +613,9 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 	public void onProgressChanged(float progress, float dismissProgress) {
 		if (progress > 0f) {
 			setUiHidden(false);
+			if (sheetController != null) {
+				sheetController.onSheetOpened();
+			}
 		}
 		if (InsetsUtils.isEdgeToEdgeSupported()) {
 			return;

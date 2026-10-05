@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.audionotes.library
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -52,8 +53,7 @@ object MediaItemMenu {
 			})
 			if (entry.mediaItem is MediaItem.Internal) add(item(app, R.string.shared_string_rename,
 				R.drawable.ic_action_edit_outlined, nightMode) { rename(activity, entry, nightMode) })
-			add(item(app, R.string.attach_to_track, R.drawable.ic_action_track_add, nightMode, divider = true, enabled = false) {})
-			add(item(app, R.string.attach_to_favorite, MediaLibraryIcons.ATTACH_TO_FAVORITE, nightMode) {
+			add(item(app, R.string.attach_to_favorite, MediaLibraryIcons.ATTACH_TO_FAVORITE, nightMode, divider = true) {
 				SelectMediaFavoriteBottomSheet.create(entry.href, entry.title)
 					.show(activity.supportFragmentManager, SelectMediaFavoriteBottomSheet.TAG)
 			})
@@ -74,19 +74,19 @@ object MediaItemMenu {
 		nightMode: Boolean, onDone: () -> Unit) {
 		val app = activity.application as OsmandApplication
 		popup(anchor, nightMode, listOf(
-			item(app, R.string.shared_string_share, R.drawable.ic_action_gshare_dark, nightMode, enabled = entries.isNotEmpty()) {
+			item(app, R.string.shared_string_share, R.drawable.ic_action_gshare_dark, nightMode) {
 				MediaShareHelper.share(activity, entries.map { it.mediaItem }); onDone()
 			},
-			item(app, R.string.shared_string_delete, R.drawable.ic_action_delete_outlined, nightMode, enabled = entries.isNotEmpty(), warning = true) {
+			item(app, R.string.shared_string_delete, R.drawable.ic_action_delete_outlined, nightMode, warning = true) {
 				MediaDialogs.delete(activity, entries.size, nightMode) { delete(activity, entries, onDone) }
 			}))
 	}
 
 	private fun item(app: OsmandApplication, title: Int, icon: Int, nightMode: Boolean,
-		divider: Boolean = false, enabled: Boolean = true, warning: Boolean = false, action: () -> Unit): PopUpMenuItem {
+		divider: Boolean = false, warning: Boolean = false, action: () -> Unit): PopUpMenuItem {
 		val color = if (warning) ColorUtilities.getWarningColor(app, nightMode) else ColorUtilities.getDefaultIconColor(app, nightMode)
 		return PopUpMenuItem.Builder(app).setTitleId(title).setIcon(app.uiUtilities.getPaintedIcon(icon, color))
-			.showTopDivider(divider).setEnabled(enabled).apply { if (warning) setTitleColor(color) }
+			.showTopDivider(divider).apply { if (warning) setTitleColor(color) }
 			.setOnClickListener { action() }.create()
 	}
 
@@ -121,7 +121,9 @@ object MediaItemMenu {
 				true
 			}
 		}
-		val currentName = entry.recording?.getDescriptionName(entry.recording.fileName) ?: entry.title.substringBeforeLast('.')
+		val recording = entry.recording
+		val currentName = if (recording != null) recording.getDescriptionName(recording.fileName).orEmpty()
+		else entry.title.substringBeforeLast('.')
 		CustomAlert.showInput(data, activity, currentName, app.getString(R.string.shared_string_name))
 	}
 
@@ -146,9 +148,8 @@ object MediaItemMenu {
 		app.taskManager.runInBackground(object : OsmAndTaskRunnable<Void, Void, List<MediaLibraryEntry>>() {
 			override fun doInBackground(vararg params: Void?): List<MediaLibraryEntry> = entries.filter { entry ->
 				runCatching {
-					val source = storage.resolveMediaSource(location, entry.href, true)
-						?: error("Media source unavailable")
-					source.delete()
+					// A file that no longer exists has nothing to delete, but its links are still dropped below
+					storage.resolveMediaSource(location, entry.href, true)?.delete()
 				}.onFailure { log.warn("Unable to delete media", it) }.isSuccess
 			}
 
@@ -174,8 +175,9 @@ class SelectMediaFavoriteBottomSheet : SelectFavouriteBottomSheet() {
 	override fun onFavouriteSelected(favourite: FavouritePoint) {
 		val href = arguments?.getString(HREF_KEY) ?: return
 		if (favourite.links.orEmpty().none { it.href == href }) {
+			val type = if (LinkMediaFactory.getInternalPath(href) == null) app.contentResolver.getType(Uri.parse(href)) else null
 			AttachedMediaDataHelper(app).addMediaLinks(favourite,
-				listOf(Link(href).apply { text = arguments?.getString(TITLE_KEY) }), null)
+				listOf(Link(href, arguments?.getString(TITLE_KEY), type)), null)
 		}
 		app.galleryHelper.mediaLibraryRepository.refresh()
 		dismiss()

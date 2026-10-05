@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+import android.view.ViewParent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -74,6 +75,13 @@ public class GalleryGridRecyclerView extends RecyclerView {
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent e) {
 		if (e.getPointerCount() > 1) {
+			if (!isScaling) {
+				// Keep a parent pager (My Places tabs) from taking the pinch over as a horizontal swipe
+				ViewParent parent = getParent();
+				if (parent != null) {
+					parent.requestDisallowInterceptTouchEvent(true);
+				}
+			}
 			isScaling = true;
 			stopScroll();
 		}

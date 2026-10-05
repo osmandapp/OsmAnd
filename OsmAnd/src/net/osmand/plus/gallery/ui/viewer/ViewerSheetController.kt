@@ -63,12 +63,16 @@ class ViewerSheetController(
 			if (metadataRepository.getCached(item) == null) {
 				metadataRequest = metadataRepository.request(listOf(item), metadataListener)
 			}
-			if (item !is MediaItem.Remote && !subscribed) {
-				subscribed = true
-				libraryRepository.subscribe(libraryListener)
-			}
 		}
 		rebuild()
+	}
+
+	/** The first library subscriber starts a full scan, so subscribe only once the sheet is actually opened. */
+	fun onSheetOpened() {
+		if (item !is MediaItem.Remote && !subscribed) {
+			subscribed = true
+			libraryRepository.subscribe(libraryListener)
+		}
 	}
 
 	fun release() {
@@ -86,8 +90,9 @@ class ViewerSheetController(
 			adapter.submit(emptyList())
 			return
 		}
-		val entry = if (item is MediaItem.Remote) null else libraryRepository.getEntry(item.id)
-		adapter.submit(builder.build(item, metadataRepository.getCached(item), entry))
+		val attachmentsKnown = libraryRepository.hasSnapshot
+		val entry = if (item is MediaItem.Remote || !attachmentsKnown) null else libraryRepository.getEntry(item.id)
+		adapter.submit(builder.build(item, metadataRepository.getCached(item), entry, attachmentsKnown))
 	}
 
 	override fun onRowAction(action: RowAction) {

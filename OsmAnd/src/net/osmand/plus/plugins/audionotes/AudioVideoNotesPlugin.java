@@ -1152,6 +1152,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void deleteRecording(@NonNull Recording recording, boolean updateUI) {
+		attachedMediaDataHelper.removeRecordingLinks(recording);
 		recordingsFileHelper.deleteRecording(recording);
 
 		if (mapActivity != null && updateUI) {

@@ -56,7 +56,7 @@ sealed class RowAction {
 
 class MediaDetailsContentBuilder(private val app: OsmandApplication) {
 
-	fun build(item: MediaItem, metadata: GalleryMediaMetadata?, entry: MediaLibraryEntry?): List<DetailsItem> {
+	fun build(item: MediaItem, metadata: GalleryMediaMetadata?, entry: MediaLibraryEntry?, attachmentsKnown: Boolean = true): List<DetailsItem> {
 		val items = mutableListOf<DetailsItem>()
 		items += DetailsItem.Header(FILE_CARD, app.getString(R.string.shared_string_file))
 		val details = item.details
@@ -95,7 +95,7 @@ class MediaDetailsContentBuilder(private val app: OsmandApplication) {
 			MediaUriResolver.getDetailsLink(item)?.takeIf { it.isNotBlank() }?.let {
 				items += fileCardRow(R.string.shared_string_link, it, action = RowAction.OpenUrl(it))
 			}
-		} else {
+		} else if (attachmentsKnown) {
 			items += DetailsItem.Header(ATTACHED_CARD, app.getString(R.string.shared_string_attached_to))
 			val attachments = entry?.attachments.orEmpty()
 			if (attachments.isEmpty()) {

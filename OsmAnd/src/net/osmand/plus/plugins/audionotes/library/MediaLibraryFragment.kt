@@ -27,7 +27,6 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
-import net.osmand.plus.widgets.popup.OsmAndDropdownMenuSelectionStyle
 
 class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	private lateinit var controller: MediaLibraryController
@@ -35,6 +34,7 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	private var chips: ChipsLayout? = null
 	private var chipsContainer: View? = null
 	private var toolbarSelectionMode = false
+	private var resumedBefore = false
 	private val toolbarBackground = ColorDrawable()
 	private val toolbarRecolor by lazy { GalleryToolbarRecolor(app) }
 	private val backCallback = object : OnBackPressedCallback(false) {
@@ -73,6 +73,9 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	override fun onResume() {
 		super.onResume()
 		updateToolbar()
+		// Notes can be deleted on the map while this tab stays alive, so rescan when it comes back
+		if (resumedBefore) app.galleryHelper.mediaLibraryRepository.refresh()
+		resumedBefore = true
 	}
 
 	override fun onPause() {
@@ -138,7 +141,6 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		view.updateContent(listOf(
 			ChipsLayout.DropDownChipData(SORT_CHIP, mode.iconId, getString(mode.titleId), false, true, true,
 				ChipsLayout.TextColorStyle.PRIMARY, ChipsLayout.IconColorStyle.ACTIVE,
-				selectionStyle = OsmAndDropdownMenuSelectionStyle.CHECKMARK,
 				dropdownItems = GallerySortMode.entries.mapIndexed { index, item ->
 					ChipsLayout.DropdownItem(index, item.iconId, getString(item.titleId), selected = item == mode,
 						showDividerBelow = GallerySortMode.entries.getOrNull(index + 1)?.let { it.group != item.group } == true)
