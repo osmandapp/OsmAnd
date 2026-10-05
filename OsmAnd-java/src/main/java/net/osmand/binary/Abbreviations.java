@@ -1,6 +1,5 @@
 package net.osmand.binary;
 
-import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.SearchAlgorithms;
 
 import java.util.ArrayList;
@@ -40,10 +39,10 @@ public class Abbreviations {
 	}
 
 	private static final class Dictionary {
-		// word of a normalized name -> variants of this word, a stored name is rewritten by them
-		final Map<String, List<SearchVariantRules.Rule>> normalizations = new HashMap<>();
-		// rules that give a query word its forms: <query> and the rules outside <index> and <query>
-		final List<SearchVariantRules.Rule> forms = new ArrayList<>();
+		// query word -> its forms and reverse forms, in the order of the rules
+		final Map<String, List<QueryForm>> forms = new HashMap<>();
+		// rule word -> its main form, both common words (CommonWords shares the frequency of the pair)
+		final Map<String, String> abbreviations = new LinkedHashMap<>();
 		final Set<String> buildingAbbreviations;
 		final Set<String> conjunctions;
 		final Set<String> commonSkipOtherCnt;
@@ -51,45 +50,35 @@ public class Abbreviations {
 		final Map<String, List<String>> overrides;
 
 		Dictionary(SearchVariantRules rules, Map<String, List<String>> overrides) {
-			Set<String> commonSkipOtherCnt = new TreeSet<>();
-			Set<String> buildingAbbreviations = new TreeSet<>();
-			Set<String> conjunctions = new TreeSet<>();
-			for (SearchVariantRules.Rule variant : rules.normalizations()) {
-				normalizations.computeIfAbsent(variant.word, k -> new ArrayList<>()).add(variant);
+			for (String word : rules.formWords()) {
+				List<QueryForm> list = new ArrayList<>();
+				for (SearchVariantRules.Form form : rules.forms(word)) {
+					list.add(new QueryForm(form.object(), form.word()));
+				}
+				// a token is aligned (ß -> ss, no diacritics): "Straße" asks for "strasse"
+				forms.put(SearchAlgorithms.alignChars(word), List.copyOf(list));
 			}
-			forms.addAll(rules.query());
-			for (SearchVariantRules.Rule variant : rules.buildings()) {
-				buildingAbbreviations.add(variant.word);
+			for (SearchVariantRules.WordRule rule : rules.query()) {
+				SearchVariantRules.Form main = rule.mainForm();
+				if (main != null && rules.common().contains(rule.word()) && rules.common().contains(main.word())) {
+					abbreviations.put(rule.word(), main.word());
+				}
 			}
-			for (SearchVariantRules.Rule variant : rules.ignorables()) {
-				conjunctions.add(variant.word);
-				commonSkipOtherCnt.add(variant.word);
-			}
-			addCommon(commonSkipOtherCnt, rules.normalizations());
-			addCommon(commonSkipOtherCnt, rules.index());
-			addCommon(commonSkipOtherCnt, rules.query());
-			this.buildingAbbreviations = Collections.unmodifiableSet(buildingAbbreviations);
-			this.conjunctions = Collections.unmodifiableSet(conjunctions);
+			Set<String> commonSkipOtherCnt = new TreeSet<>(rules.common());
+			commonSkipOtherCnt.addAll(rules.ignorables());
+			this.buildingAbbreviations = Collections.unmodifiableSet(new TreeSet<>(rules.buildings()));
+			this.conjunctions = Collections.unmodifiableSet(new TreeSet<>(rules.ignorables()));
 			this.commonSkipOtherCnt = Collections.unmodifiableSet(commonSkipOtherCnt);
 			this.overrides = overrides;
 		}
 
 		private Dictionary(Dictionary base, Map<String, List<String>> overrides) {
-			this.normalizations.putAll(base.normalizations);
-			this.forms.addAll(base.forms);
+			this.forms.putAll(base.forms);
+			this.abbreviations.putAll(base.abbreviations);
 			this.buildingAbbreviations = base.buildingAbbreviations;
 			this.conjunctions = base.conjunctions;
 			this.commonSkipOtherCnt = base.commonSkipOtherCnt;
 			this.overrides = overrides;
-		}
-
-		private static void addCommon(Set<String> common, List<SearchVariantRules.Rule> variants) {
-			for (SearchVariantRules.Rule variant : variants) {
-				if (variant.common) {
-					common.add(variant.word);
-					common.add(variant.to().toLowerCase(Locale.ROOT));
-				}
-			}
 		}
 	}
 
@@ -179,24 +168,15 @@ public class Abbreviations {
 	}
 
 	private static List<QueryForm> queryForms(Dictionary dictionary, String word) {
-		Set<QueryForm> forms = new LinkedHashSet<>();
 		List<String> override = dictionary.overrides.get(word);
 		if (override != null) {
+			Set<QueryForm> forms = new LinkedHashSet<>();
 			for (String form : override) {
 				forms.add(new QueryForm(SearchVariantRules.ANY_OBJECT, form));
 			}
 			return new ArrayList<>(forms);
 		}
-		for (SearchVariantRules.Rule rule : dictionary.forms) {
-			String replacement = rule.apply(word);
-			if (replacement != null) {
-				List<String> words = SearchAlgorithms.splitAndNormalize(replacement, false);
-				if (words.size() == 1 && !words.get(0).equals(word)) {
-					forms.add(new QueryForm(rule.object, words.get(0)));
-				}
-			}
-		}
-		return new ArrayList<>(forms);
+		return dictionary.forms.getOrDefault(SearchAlgorithms.alignChars(word.toLowerCase(Locale.ROOT)), List.of());
 	}
 
 	// search-v2
@@ -204,59 +184,9 @@ public class Abbreviations {
 		return dictionary(locale).commonSkipOtherCnt.contains(lowerCase);
 	}
 
-	/**
-	 * Indexing data: rewrites the words of a name of {@code owner} ("street") by the normalizations of the locale.
-	 * A query word gets the same rewrite as one of its forms (the rule is in {@link SearchVariantRules#query()} too).
-	 */
-	public static String replaceAll(String phrase, String locale, String owner) {
-		Map<String, List<SearchVariantRules.Rule>> normalizations = dictionary(locale).normalizations;
-		if (normalizations.isEmpty()) {
-			return phrase;
-		}
-		String[] words = phrase.split(SearchPhrase.DELIMITER);
-		StringBuilder r = new StringBuilder();
-		boolean changed = false;
-		for (String w : words) {
-			if (r.length() > 0) {
-				r.append(SearchPhrase.DELIMITER);
-			}
-			String abbrRes = normalized(normalizations, w, owner);
-			if (abbrRes == null) {
-				r.append(w);
-			} else {
-				changed = true;
-				r.append(abbrRes);
-			}
-		}
-		return changed ? r.toString() : phrase;
-	}
-
-	private static String normalized(Map<String, List<SearchVariantRules.Rule>> normalizations, String word,
-			String owner) {
-		List<SearchVariantRules.Rule> variants = normalizations.get(word.toLowerCase(Locale.ROOT));
-		if (variants != null) {
-			for (SearchVariantRules.Rule variant : variants) {
-				if (owner == null || variant.appliesTo(owner)) {
-					return variant.to();
-				}
-			}
-		}
-		return null;
-	}
-
-	/** @return normalized word -> its rewrite, for every owner of names */
+	/** @return a word of a rule -> its main form, for the rules whose word and main form are common words */
 	public static Map<String, String> getAbbreviations(String locale) {
-		Map<String, String> abbreviations = new LinkedHashMap<>();
-		for (Map.Entry<String, List<SearchVariantRules.Rule>> e : dictionary(locale).normalizations.entrySet()) {
-			abbreviations.put(e.getKey(), e.getValue().get(0).to());
-		}
-		return Collections.unmodifiableMap(abbreviations);
-	}
-
-	// search v-1
-	public static String replace(String word, String locale) {
-		String value = normalized(dictionary(locale).normalizations, word, null);
-		return value != null ? value : word;
+		return Collections.unmodifiableMap(dictionary(locale).abbreviations);
 	}
 
 	// search-v1
