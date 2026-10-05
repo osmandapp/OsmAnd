@@ -84,6 +84,8 @@ import java.util.stream.Collectors;
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	public static final String DOWNLOAD_BUILD_NAME = "osmandToInstall.apk";
+	public static final String DOWNLOAD_BUILD_PART_NAME = DOWNLOAD_BUILD_NAME + ".part";
+	public static final String DOWNLOAD_BUILD_META_NAME = DOWNLOAD_BUILD_PART_NAME + ".properties";
 
 	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
 	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
