@@ -1162,6 +1162,14 @@
 			android:stopWithTask="false">
 		</service>
 
+		<activity android:name="net.osmand.aidl.AidlPermissionRequestActivity" android:exported="true"
+			android:theme="@style/OsmandTranslucentTheme" android:excludeFromRecents="true">
+			<intent-filter>
+				<action android:name="net.osmand.aidl.REQUEST_PERMISSIONS"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+			</intent-filter>
+		</activity>
+
 		<service android:name="net.osmand.aidl.OsmandAidlService" android:exported="true" >
 			<intent-filter>
 				<action android:name="net.osmand.aidl.OsmandAidlService"/>

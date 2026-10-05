@@ -80,8 +80,9 @@ class PluginsListAdapter extends ArrayAdapter<Object> {
 			pluginDescription.setText(R.string.third_party_application);
 			pluginLogo.setImageDrawable(connectedApp.getIcon());
 			pluginLogo.setOnClickListener(v -> pluginsFragment.switchEnabled(connectedApp));
-			pluginOptions.setVisibility(View.GONE);
-			pluginOptions.setOnClickListener(null);
+			pluginOptions.setVisibility(View.VISIBLE);
+			pluginOptions.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_settings));
+			pluginOptions.setOnClickListener(v -> pluginsFragment.showPermissions(connectedApp));
 			view.setTag(connectedApp);
 		} else if (item instanceof OsmandPlugin plugin) {
 			active = plugin.isEnabled();
