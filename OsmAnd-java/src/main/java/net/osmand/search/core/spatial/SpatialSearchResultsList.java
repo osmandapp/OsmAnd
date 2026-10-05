@@ -660,6 +660,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				long uniqueId = s.getIdDeduplication();
 				if (uniqueIdsResults.containsKey(uniqueId)) {
 					SpatialSearchResult unique = uniqueIdsResults.get(uniqueId);
+					unique.takeNearerRoutePoint(s, ctx.location);
 					unique.addExtraResult(s, ctx.settings.LANG_DEDUPLICATE);
 					isUniq = false;
 				} else if (uniqueId != -1) {
@@ -670,6 +671,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					for (String key : extraDuplicateKeys) {
 						if (extraIdsResults.containsKey(key)) {
 							SpatialSearchResult unique = extraIdsResults.get(key);
+							unique.takeNearerRoutePoint(s, ctx.location);
 							unique.addExtraResult(s, ctx.settings.LANG_DEDUPLICATE);
 							isUniq = false;
 						} else {
