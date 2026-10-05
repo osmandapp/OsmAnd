@@ -56,6 +56,13 @@ object ConnectorSettings {
 	fun setRunMode(ctx: Context, mode: RunMode) =
 		prefs(ctx).edit().putBoolean("screen_mode", mode == RunMode.SCREEN).apply()
 
+	/** Over Wi-Fi: the assistant starts the bridge that finds the phone by name, or uses the address directly. */
+	fun useBridge(ctx: Context) = prefs(ctx).getBoolean("bridge", true)
+
+	fun setUseBridge(ctx: Context, bridge: Boolean) = prefs(ctx).edit().putBoolean("bridge", bridge).apply()
+
+	fun usesBridge(ctx: Context) = access(ctx) == Access.WIFI && useBridge(ctx)
+
 	fun token(ctx: Context): String =
 		prefs(ctx).getString("token", null) ?: newToken(ctx)
 
