@@ -55,7 +55,7 @@ fun HomeScreen(state: PhoneState, onOpen: (String) -> Unit) {
 				}
 			}
 			item {
-				MenuButton(R.string.wear_map, R.drawable.ic_action_map_day) {
+				MenuButton(R.string.wear_map, R.drawable.ic_action_map_outlined) {
 					onOpen(Routes.MAP)
 				}
 			}

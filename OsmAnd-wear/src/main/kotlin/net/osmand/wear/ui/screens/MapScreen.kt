@@ -225,7 +225,8 @@ fun MapScreen(
 	}
 
 	// Beyond the drawn frame the map is not missing, it is not drawn yet, and a chequerboard
-	// says that where flat black reads as a fault.
+	// says that where flat black reads as a fault. Only beyond it, though: with no frame at all
+	// there is nothing for it to be beyond, and it is just noise behind the waiting message.
 	val board = MaterialTheme.colorScheme.surfaceContainer
 	// Taken from the foreground rather than from a second container shade, which in a dark
 	// scheme sits so close to the first that the squares vanish.
@@ -236,7 +237,11 @@ fun MapScreen(
 			modifier = Modifier
 				.fillMaxSize()
 				.clipToBounds()
-				.drawBehind { chequerboard(board, boardAlternate) },
+				.drawBehind {
+					if (shown.frame != null) {
+						chequerboard(board, boardAlternate)
+					}
+				},
 			contentAlignment = Alignment.Center
 		) {
 			val frame = shown.frame

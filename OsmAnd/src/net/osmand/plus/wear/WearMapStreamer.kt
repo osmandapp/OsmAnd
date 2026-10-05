@@ -56,6 +56,10 @@ class WearMapStreamer(private val app: OsmandApplication) {
 	 * Renderer frames seen so far, and the count a gesture is waiting for. setZoom and setTarget
 	 * only ask; a frame already being drawn still carries the old view, and sending it would have
 	 * the watch drop its own preview of the gesture and snap back before the real one arrived.
+	 *
+	 * It counts frames of the source it was set against, so it means nothing once that source is
+	 * gone and has to be cleared with it. A count left over from a previous one is a wait that
+	 * never ends: the legacy renderer only draws when the pump asks, and the pump is waiting.
 	 */
 	@Volatile
 	private var awaitFrame = 0
@@ -136,6 +140,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		paused = false
 		following = true
 		appliedSeq = 0
+		awaitFrame = 0
 		pump?.interrupt()
 	}
 
@@ -143,7 +148,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		try {
 			var legacy = legacyRenderer(app).get()
 			var renderer = openSource(legacy, width, height, density) ?: return
-			source = renderer
+			useSource(renderer)
 			openChannel(nodeId)
 			val stream = output ?: return
 			var lastSent = ByteArray(0)
@@ -167,7 +172,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 					renderer.close()
 					legacy = legacyRenderer(app).get()
 					renderer = openSource(legacy, width, height, density) ?: return
-					source = renderer
+					useSource(renderer)
 					lastSent = ByteArray(0)
 				}
 				if (renderer.drawn < awaitFrame) {
@@ -331,6 +336,11 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		running = false
 	}
 
+	private fun useSource(renderer: WearMapSource) {
+		source = renderer
+		awaitFrame = 0
+	}
+
 	private fun openSource(
 		legacy: Boolean, width: Int, height: Int, density: Float
 	): WearMapSource? {
@@ -355,6 +365,10 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		 */
 		fun legacyRenderer(app: OsmandApplication) =
 			app.settings.registerBooleanPreference("wear_legacy_map_renderer", true)
+				// Global, because it is a fact about the watch rather than about how you are
+				// travelling. Left to the default it would be a profile setting, and the choice
+				// would quietly revert whenever the profile changed.
+				.makeGlobal()
 
 		private val LOG = net.osmand.PlatformUtil.getLog(WearMapStreamer::class.java)
 		const val FRAMES_PER_SECOND = 4
