@@ -43,8 +43,10 @@ import net.osmand.util.Algorithms;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ConnectedApp implements Comparable<ConnectedApp> {
@@ -63,6 +65,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 
 	static final String PACK_KEY = "pack";
 	static final String ENABLED_KEY = "enabled";
+	static final String GROUPS_KEY = "groups";
 
 	private final OsmandApplication app;
 
@@ -82,11 +85,13 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	private Drawable icon;
 
 	private boolean enabled;
+	private final Set<AidlPermissionGroup> groups = new LinkedHashSet<>();
 
-	ConnectedApp(OsmandApplication app, String pack, boolean enabled) {
+	ConnectedApp(OsmandApplication app, String pack, boolean enabled, @NonNull Set<AidlPermissionGroup> groups) {
 		this.app = app;
 		this.pack = pack;
 		this.enabled = enabled;
+		this.groups.addAll(groups);
 		layersPref = app.getSettings().registerBooleanPreference(AIDL_LAYERS_PREFIX + pack, true).cache();
 	}
 
@@ -136,6 +141,29 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 
 	void switchEnabled() {
 		enabled = !enabled;
+	}
+
+	void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	@NonNull
+	public Set<AidlPermissionGroup> getGroups() {
+		return new LinkedHashSet<>(groups);
+	}
+
+	public boolean isGroupGranted(@NonNull AidlPermissionGroup group) {
+		return groups.contains(group);
+	}
+
+	void setGroups(@NonNull Set<AidlPermissionGroup> groups) {
+		this.groups.clear();
+		this.groups.addAll(groups);
+	}
+
+	public boolean isMethodAllowed(@NonNull String method) {
+		AidlPermissionGroup group = AidlPermissionGroup.getByMethod(method);
+		return group == null || groups.contains(group);
 	}
 
 	void registerMapLayers(@NonNull Context context) {

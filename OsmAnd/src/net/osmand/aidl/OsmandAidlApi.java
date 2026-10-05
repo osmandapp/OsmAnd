@@ -22,6 +22,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -229,6 +230,9 @@ public class OsmandAidlApi {
 
 	private final OsmandApplication app;
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
+	private static final String CONNECTIONS_PREFS = "aidl_connections";
+	private static final String CONNECTED_APPS_KEY = "connected_apps";
+
 	private final Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
 	private final Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
 	private final Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
@@ -1966,13 +1970,59 @@ public class OsmandAidlApi {
 	}
 
 	public boolean isAppEnabled(@NonNull String pack) {
+		return getOrCreateConnectedApp(pack).isEnabled();
+	}
+
+	/**
+	 * @return true if the app is enabled and the method's permission group is granted to it
+	 */
+	public boolean isMethodAllowed(@NonNull String pack, @NonNull String method) {
+		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
+		return connectedApp.isEnabled() && connectedApp.isMethodAllowed(method);
+	}
+
+	@NonNull
+	public ConnectedApp getOrCreateConnectedApp(@NonNull String pack) {
 		ConnectedApp connectedApp = connectedApps.get(pack);
 		if (connectedApp == null) {
-			connectedApp = new ConnectedApp(app, pack, false);
+			connectedApp = new ConnectedApp(app, pack, false, AidlPermissionGroup.getDefaultGroups());
 			connectedApps.put(pack, connectedApp);
 			saveConnectedApps();
 		}
-		return connectedApp.isEnabled();
+		return connectedApp;
+	}
+
+	public boolean setGroupGranted(@NonNull ConnectedApp connectedApp, @NonNull AidlPermissionGroup group,
+	                               boolean granted) {
+		Set<AidlPermissionGroup> groups = connectedApp.getGroups();
+		if (granted) {
+			groups.add(group);
+		} else {
+			groups.remove(group);
+		}
+		connectedApp.setGroups(groups);
+		return saveConnectedApps();
+	}
+
+	/**
+	 * The user answered a permission request of the app: enable it, the requested groups get the chosen state,
+	 * other groups stay as they were
+	 */
+	public boolean applyRequestedGroups(@NonNull String pack, @NonNull Set<AidlPermissionGroup> requested,
+	                                    @NonNull Set<AidlPermissionGroup> granted) {
+		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
+		Set<AidlPermissionGroup> groups = connectedApp.getGroups();
+		groups.removeAll(requested);
+		groups.addAll(granted);
+		connectedApp.setGroups(groups);
+		connectedApp.setEnabled(true);
+		return saveConnectedApps();
+	}
+
+	// connections are kept in their own preferences file: not in the backups (Android backup agent, Cloud, export)
+	@NonNull
+	private SharedPreferences getConnectionsPreferences() {
+		return app.getSharedPreferences(CONNECTIONS_PREFS, Context.MODE_PRIVATE);
 	}
 
 	private boolean saveConnectedApps() {
@@ -1982,11 +2032,16 @@ public class OsmandAidlApi {
 				JSONObject obj = new JSONObject();
 				obj.put(ConnectedApp.ENABLED_KEY, connectedApp.isEnabled());
 				obj.put(ConnectedApp.PACK_KEY, connectedApp.getPack());
+				JSONArray groups = new JSONArray();
+				for (AidlPermissionGroup group : connectedApp.getGroups()) {
+					groups.put(group.getId());
+				}
+				obj.put(ConnectedApp.GROUPS_KEY, groups);
 				array.put(obj);
 			}
-			return app.getSettings().API_CONNECTED_APPS_JSON.set(array.toString());
+			return getConnectionsPreferences().edit().putString(CONNECTED_APPS_KEY, array.toString()).commit();
 		} catch (JSONException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return false;
 	}
@@ -1994,15 +2049,36 @@ public class OsmandAidlApi {
 	public void loadConnectedApps() {
 		try {
 			connectedApps.clear();
-			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.get());
+			String json = getConnectionsPreferences().getString(CONNECTED_APPS_KEY, null);
+			boolean legacy = json == null;
+			if (legacy) {
+				json = app.getSettings().API_CONNECTED_APPS_JSON.get();
+			}
+			JSONArray array = new JSONArray(json);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj = array.getJSONObject(i);
 				String pack = obj.optString(ConnectedApp.PACK_KEY, "");
 				boolean enabled = obj.optBoolean(ConnectedApp.ENABLED_KEY, true);
-				connectedApps.put(pack, new ConnectedApp(app, pack, enabled));
+				// apps connected before the permission groups keep their full access
+				Set<AidlPermissionGroup> groups = AidlPermissionGroup.getAllGroups();
+				JSONArray groupsJson = obj.optJSONArray(ConnectedApp.GROUPS_KEY);
+				if (groupsJson != null) {
+					groups.clear();
+					for (int j = 0; j < groupsJson.length(); j++) {
+						AidlPermissionGroup group = AidlPermissionGroup.getById(groupsJson.optString(j));
+						if (group != null) {
+							groups.add(group);
+						}
+					}
+				}
+				connectedApps.put(pack, new ConnectedApp(app, pack, enabled, groups));
+			}
+			if (legacy) {
+				saveConnectedApps();
+				app.getSettings().API_CONNECTED_APPS_JSON.resetToDefault();
 			}
 		} catch (JSONException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 	}
 

@@ -100,8 +100,8 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 				if (activity != null) {
 					PluginInfoFragment.showInstance(activity.getSupportFragmentManager(), PluginsFragment.this, (OsmandPlugin) tag);
 				}
-			} else if (tag instanceof ConnectedApp) {
-				switchEnabled((ConnectedApp) tag);
+			} else if (tag instanceof ConnectedApp connectedApp) {
+				showPermissions(connectedApp);
 			}
 		});
 
@@ -150,6 +150,13 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 
 	void installPlugin(OsmandPlugin plugin) {
 		PluginsHelper.installPlugin(getActivity(), plugin, this::dismissImmediate);
+	}
+
+	void showPermissions(@NonNull ConnectedApp connectedApp) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			ConnectedAppPermissionsFragment.showInstance(activity.getSupportFragmentManager(), connectedApp);
+		}
 	}
 
 	void switchEnabled(@NonNull ConnectedApp connectedApp) {
