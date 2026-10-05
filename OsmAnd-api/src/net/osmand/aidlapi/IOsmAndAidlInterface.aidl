@@ -27,6 +27,7 @@ import net.osmand.aidlapi.gpx.ImportGpxParams;
 import net.osmand.aidlapi.gpx.ShowGpxParams;
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams;
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams;
+import net.osmand.aidlapi.gpx.AGpxRecordingInfo;
 import net.osmand.aidlapi.gpx.HideGpxParams;
 import net.osmand.aidlapi.gpx.ASelectedGpxFile;
 
@@ -956,4 +957,12 @@ interface IOsmAndAidlInterface {
      * set RemoveWidgetGroupParams.removeWidgets = true to also remove the widgets.
      */
     boolean removeWidgetGroup(in RemoveWidgetGroupParams params);
+
+    /**
+     * Get the state of trip recording: whether a track is being recorded, the Trip recording plugin
+     * state, distance, duration and points of the current track.
+     *
+     * @return AGpxRecordingInfo, or null if the app has no access
+     */
+    AGpxRecordingInfo getGpxRecordingInfo();
 }
