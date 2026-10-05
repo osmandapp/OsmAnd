@@ -160,12 +160,19 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 	}
 
 	void switchEnabled(@NonNull ConnectedApp connectedApp) {
-		app.getAidlApi().switchEnabled(connectedApp);
+		setAppEnabled(connectedApp, !connectedApp.isEnabled());
+	}
+
+	void setAppEnabled(@NonNull ConnectedApp connectedApp, boolean enabled) {
+		app.getAidlApi().setAppEnabled(getActivity(), connectedApp, enabled);
 		OsmandPlugin plugin = PluginsHelper.getPlugin(connectedApp.getPack());
 		if (plugin != null) {
-			PluginsHelper.enablePlugin(getActivity(), app, plugin, connectedApp.isEnabled());
 			notifyPluginStateListener(plugin);
 		}
+		onConnectedAppChanged();
+	}
+
+	void onConnectedAppChanged() {
 		adapter.notifyDataSetChanged();
 	}
 

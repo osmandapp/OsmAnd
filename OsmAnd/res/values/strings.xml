@@ -17,15 +17,10 @@
 	<string name="aidl_app_disabled_descr">OsmAnd ignores all requests from this app.</string>
 	<string name="aidl_group_system_footer">Lets the app copy files into OsmAnd, replace your location, read logs and change the app look. Turn on only for apps you fully trust.</string>
 	<string name="aidl_permissions_deny">Don\'t allow</string>
-	<string name="aidl_group_map">Map</string>
 	<string name="aidl_group_map_descr">Move the map, show points</string>
-	<string name="aidl_group_search">Search</string>
 	<string name="aidl_group_search_descr">Find places and addresses</string>
-	<string name="aidl_group_location">My location</string>
-	<string name="aidl_group_location_descr">See where you are</string>
-	<string name="aidl_group_navigation">Navigation</string>
+	<string name="aidl_group_location_descr">Your position, destination and route</string>
 	<string name="aidl_group_navigation_descr">Start and stop navigation</string>
-	<string name="aidl_group_favorites">Favorites</string>
 	<string name="aidl_group_favorites_descr">Favorites and map markers</string>
 	<string name="aidl_group_tracks_view">Tracks: view</string>
 	<string name="aidl_group_tracks_view_descr">Read your tracks</string>
@@ -33,7 +28,6 @@
 	<string name="aidl_group_tracks_edit_descr">Import, show and delete</string>
 	<string name="aidl_group_recording">Recording</string>
 	<string name="aidl_group_recording_descr">Trips, photo, audio, video</string>
-	<string name="aidl_group_settings">Settings</string>
 	<string name="aidl_group_settings_descr">Change settings and profiles</string>
 	<string name="aidl_group_system">System</string>
 	<string name="aidl_group_system_descr">Files, logs, fake location</string>

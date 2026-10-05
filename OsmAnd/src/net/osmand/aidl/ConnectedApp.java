@@ -43,6 +43,7 @@ import net.osmand.util.Algorithms;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -84,14 +85,15 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 
 	private Drawable icon;
 
-	private boolean enabled;
-	private final Set<AidlPermissionGroup> groups = new LinkedHashSet<>();
+	private volatile boolean enabled;
+	// read from the binder threads: never changed in place, a new unmodifiable set replaces the reference
+	private volatile Set<AidlPermissionGroup> groups;
 
 	ConnectedApp(OsmandApplication app, String pack, boolean enabled, @NonNull Set<AidlPermissionGroup> groups) {
 		this.app = app;
 		this.pack = pack;
 		this.enabled = enabled;
-		this.groups.addAll(groups);
+		this.groups = Collections.unmodifiableSet(new LinkedHashSet<>(groups));
 		layersPref = app.getSettings().registerBooleanPreference(AIDL_LAYERS_PREFIX + pack, true).cache();
 	}
 
@@ -139,17 +141,13 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 		return mapLayers;
 	}
 
-	void switchEnabled() {
-		enabled = !enabled;
-	}
-
 	void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
 	@NonNull
 	public Set<AidlPermissionGroup> getGroups() {
-		return new LinkedHashSet<>(groups);
+		return groups;
 	}
 
 	public boolean isGroupGranted(@NonNull AidlPermissionGroup group) {
@@ -157,8 +155,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	}
 
 	void setGroups(@NonNull Set<AidlPermissionGroup> groups) {
-		this.groups.clear();
-		this.groups.addAll(groups);
+		this.groups = Collections.unmodifiableSet(new LinkedHashSet<>(groups));
 	}
 
 	public boolean isMethodAllowed(@NonNull String method) {

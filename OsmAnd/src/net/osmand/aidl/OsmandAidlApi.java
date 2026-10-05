@@ -1964,9 +1964,17 @@ public class OsmandAidlApi {
 		return res;
 	}
 
-	public boolean switchEnabled(@NonNull ConnectedApp connectedApp) {
-		connectedApp.switchEnabled();
-		return saveConnectedApps();
+	/**
+	 * Turns the app on or off together with its OsmAnd plugin, if the app has one
+	 */
+	public boolean setAppEnabled(@Nullable Activity activity, @NonNull ConnectedApp connectedApp, boolean enabled) {
+		connectedApp.setEnabled(enabled);
+		boolean saved = saveConnectedApps();
+		OsmandPlugin plugin = PluginsHelper.getPlugin(connectedApp.getPack());
+		if (plugin != null && plugin.isEnabled() != enabled) {
+			PluginsHelper.enablePlugin(activity, app, plugin, enabled);
+		}
+		return saved;
 	}
 
 	public boolean isAppEnabled(@NonNull String pack) {
@@ -1994,7 +2002,7 @@ public class OsmandAidlApi {
 
 	public boolean setGroupGranted(@NonNull ConnectedApp connectedApp, @NonNull AidlPermissionGroup group,
 	                               boolean granted) {
-		Set<AidlPermissionGroup> groups = connectedApp.getGroups();
+		Set<AidlPermissionGroup> groups = new LinkedHashSet<>(connectedApp.getGroups());
 		if (granted) {
 			groups.add(group);
 		} else {
@@ -2005,17 +2013,20 @@ public class OsmandAidlApi {
 	}
 
 	/**
-	 * The user answered a permission request of the app: enable it, the requested groups get the chosen state,
-	 * other groups stay as they were
+	 * The user answered a permission request of the app: the requested groups get the chosen state, other groups
+	 * stay as they were. The app is turned on only if at least one requested group is granted.
 	 */
-	public boolean applyRequestedGroups(@NonNull String pack, @NonNull Set<AidlPermissionGroup> requested,
+	public boolean applyRequestedGroups(@Nullable Activity activity, @NonNull String pack,
+	                                    @NonNull Set<AidlPermissionGroup> requested,
 	                                    @NonNull Set<AidlPermissionGroup> granted) {
 		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
-		Set<AidlPermissionGroup> groups = connectedApp.getGroups();
+		Set<AidlPermissionGroup> groups = new LinkedHashSet<>(connectedApp.getGroups());
 		groups.removeAll(requested);
 		groups.addAll(granted);
 		connectedApp.setGroups(groups);
-		connectedApp.setEnabled(true);
+		if (!granted.isEmpty() && !connectedApp.isEnabled()) {
+			return setAppEnabled(activity, connectedApp, true);
+		}
 		return saveConnectedApps();
 	}
 

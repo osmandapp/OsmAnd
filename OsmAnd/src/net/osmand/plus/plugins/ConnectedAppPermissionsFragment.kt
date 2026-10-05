@@ -46,7 +46,7 @@ class ConnectedAppPermissionsFragment : BaseMaterialFragment() {
 
 		val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
 		toolbar.title = name
-		toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+		toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
 
 		view.findViewById<ScreenDescriptionView>(R.id.description)
 			.setText(getString(R.string.aidl_permissions_descr, name, connectedApp.pack))
@@ -54,8 +54,14 @@ class ConnectedAppPermissionsFragment : BaseMaterialFragment() {
 		mainSwitch = view.findViewById(R.id.main_switch)
 		mainSwitch.setLabel(name, true)
 		mainSwitch.setChecked(connectedApp.isEnabled, false)
-		mainSwitch.setOnCheckedChangeListener {
-			osmandApp.aidlApi.switchEnabled(connectedApp)
+		mainSwitch.setOnCheckedChangeListener { checked ->
+			// through the Plugins screen: it also turns the app's plugin on/off and refreshes its list
+			val pluginsFragment = getPluginsFragment()
+			if (pluginsFragment != null) {
+				pluginsFragment.setAppEnabled(connectedApp, checked)
+			} else {
+				osmandApp.aidlApi.setAppEnabled(activity, connectedApp, checked)
+			}
 			updateContent()
 		}
 		disabledFooter = view.findViewById(R.id.disabled_footer)
@@ -74,6 +80,7 @@ class ConnectedAppPermissionsFragment : BaseMaterialFragment() {
 			row.setSubtitle(getString(group.descriptionId))
 			row.setOnClickListener {
 				osmandApp.aidlApi.setGroupGranted(connectedApp, group, !connectedApp.isGroupGranted(group))
+				getPluginsFragment()?.onConnectedAppChanged()
 				updateContent()
 			}
 			parent.addView(rowView)
@@ -102,6 +109,9 @@ class ConnectedAppPermissionsFragment : BaseMaterialFragment() {
 			row.setChecked(connectedApp.isGroupGranted(group))
 		}
 	}
+
+	private fun getPluginsFragment(): PluginsFragment? =
+		parentFragmentManager.findFragmentByTag(PluginsFragment.TAG) as? PluginsFragment
 
 	override fun getInsetTargets(): InsetTargetsCollection {
 		val collection = InsetTargetsCollection()

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -47,6 +48,9 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 	public static final String EXTRA_GROUPS = "groups";
 	public static final String EXTRA_GRANTED_GROUPS = "granted_groups";
 
+	@Nullable
+	private AlertDialog dialog;
+
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,8 +63,16 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 			finish();
 			return;
 		}
-		if (savedInstanceState == null) {
-			showDialog(app, pack, requested);
+		// also after a recreation (rotation, theme): the old dialog is gone with the old window
+		showDialog(app, pack, requested);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (dialog != null) {
+			dialog.dismiss();
+			dialog = null;
 		}
 	}
 
@@ -87,6 +99,8 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 			}
 		}
 		View view = LayoutInflater.from(context).inflate(R.layout.dialog_aidl_permission_request, null);
+		// no grants through an overlay drawn over the dialog (tapjacking)
+		view.setFilterTouchesWhenObscured(true);
 		TextView description = view.findViewById(R.id.description);
 		description.setText(getString(R.string.aidl_permissions_request_descr, pack));
 		ViewGroup groupsView = view.findViewById(R.id.groups);
@@ -109,17 +123,20 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 		}
 		SegmentedList.apply(groupsView);
 
-		new MaterialAlertDialogBuilder(context)
+		dialog = new MaterialAlertDialogBuilder(context)
 				.setIcon(icon)
 				.setTitle(getString(R.string.aidl_permissions_request_title, appName))
 				.setView(view)
-				.setPositiveButton(R.string.shared_string_allow, (dialog, which) -> {
-					app.getAidlApi().applyRequestedGroups(pack, new LinkedHashSet<>(requested), granted);
+				.setPositiveButton(R.string.shared_string_allow, (d, which) -> {
+					app.getAidlApi().applyRequestedGroups(this, pack, new LinkedHashSet<>(requested), granted);
 					finishWithResult(app, pack);
 				})
-				.setNegativeButton(R.string.aidl_permissions_deny, (dialog, which) -> finishWithResult(app, pack))
-				.setOnCancelListener(dialog -> finishWithResult(app, pack))
-				.show();
+				.setNegativeButton(R.string.aidl_permissions_deny, (d, which) -> finishWithResult(app, pack))
+				.setOnCancelListener(d -> finishWithResult(app, pack))
+				.create();
+		dialog.show();
+		// the buttons are outside the content view
+		dialog.getButton(AlertDialog.BUTTON_POSITIVE).setFilterTouchesWhenObscured(true);
 	}
 
 	private void finishWithResult(OsmandApplication app, String pack) {
