@@ -26,6 +26,7 @@ import net.osmand.plus.views.mapwidgets.configure.dialogs.DistanceByTapFragment;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.SpeedometerSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -51,14 +52,19 @@ public class ConfigureOtherCard extends MapBaseCard {
 		title.setText(R.string.shared_string_other);
 
 		ApplicationMode appMode = settings.getApplicationMode();
-		List<View> rows = Stream.of(
+		View[] rows = {
 				setupDisplayPositionButton(appMode),
 				setupDistanceRulerButton(appMode),
 				setupSpeedometerButton(appMode),
 				setupAndroidAutoWidgetsButton()
-		).filter(Objects::nonNull).collect(Collectors.toList());
-		for (int i = 0; i < rows.size(); i++) {
-			AndroidUiHelper.updateVisibility(rows.get(i).findViewById(R.id.short_divider), i != rows.size() - 1);
+		};
+		boolean isLast = true;
+		for (int i = rows.length - 1; i >= 0; i--) {
+			View row = rows[i];
+			if (row != null) {
+				AndroidUiHelper.updateVisibility(row.findViewById(R.id.short_divider), !isLast);
+				isLast = false;
+			}
 		}
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), false);

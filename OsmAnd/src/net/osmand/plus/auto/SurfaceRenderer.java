@@ -220,11 +220,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		@Override
 		@RequiresCarApi(5)
 		public void onClick(float x, float y) {
-			synchronized (SurfaceRenderer.this) {
-				SurfaceRendererCallback callback = SurfaceRenderer.this.callback;
-				if (callback != null && callback.onSurfaceClick(x, y)) {
-					renderFrame();
-				}
+			SurfaceRendererCallback callback = SurfaceRenderer.this.callback;
+			if (callback != null && callback.onSurfaceClick(x, y)) {
+				renderFrame();
 			}
 		}
 

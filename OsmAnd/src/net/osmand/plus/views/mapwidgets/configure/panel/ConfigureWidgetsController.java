@@ -73,12 +73,11 @@ public class ConfigureWidgetsController implements IDialogController {
 
 		if (isAndroidAutoMode) {
 			widgetsFactory = new AndroidAutoWidgetsFactory(app);
-			widget = widgetsFactory.createMapWidget(id, widgetType, selectedPanel);
 		} else {
 			layoutMode = fragment.getScreenLayoutMode();
 			widgetsFactory = new MapWidgetsFactory(mapActivity);
-			widget = widgetsFactory.createMapWidget(id, widgetType, selectedPanel);
 		}
+		widget = widgetsFactory.createMapWidget(id, widgetType, selectedPanel);
 		if (widget != null) {
 			WidgetInfoCreator creator = new WidgetInfoCreator(app, selectedAppMode, layoutMode);
 			if (isAndroidAutoMode) {

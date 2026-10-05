@@ -374,6 +374,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	private void updateScreen(boolean updateWithAnimation) {
 		AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) collapsingToolbarLayout.getLayoutParams();
 		params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL);
+		boolean tabLayoutAvailable = isTabLayoutAvailable();
 		if (isEditMode) {
 			bottomButtons.setVisibility(View.VISIBLE);
 			bottomButtonsShadow.setVisibility(View.VISIBLE);
@@ -381,12 +382,16 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL);
 			appBar.setExpanded(true, true);
 
-			tabLayout.setClickable(false);
-			tabLayout.setFocusable(false);
+			if (tabLayoutAvailable) {
+				tabLayout.setClickable(false);
+				tabLayout.setFocusable(false);
+			}
 			if (!updateWithAnimation) {
-				tabLayout.setVisibility(View.GONE);
-				tabLayout.setAlpha(1f);
-				tabLayout.setTranslationY(0f);
+				if (tabLayoutAvailable) {
+					tabLayout.setVisibility(View.GONE);
+					tabLayout.setAlpha(1f);
+					tabLayout.setTranslationY(0f);
+				}
 				viewPager.setTranslationY(0f);
 				shadowView.setVisibility(View.GONE);
 				shadowView.setTranslationY(0f);
@@ -394,20 +399,20 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				bottomButtonsShadow.setTranslationY(0f);
 			}
 		} else {
-			if (isTabLayoutAvailable()) {
+			if (tabLayoutAvailable) {
 				tabLayout.setVisibility(View.VISIBLE);
+				tabLayout.setClickable(true);
+				tabLayout.setFocusable(true);
 			}
 
 			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
-			tabLayout.setClickable(true);
-			tabLayout.setFocusable(true);
 			if (!updateWithAnimation) {
-				if (isTabLayoutAvailable()) {
+				if (tabLayoutAvailable) {
 					tabLayout.setAlpha(1f);
 					tabLayout.setTranslationY(0f);
-					shadowView.setTranslationY(0f);
 				}
-				AndroidUiHelper.updateVisibility(shadowView, isTabLayoutAvailable());
+				shadowView.setTranslationY(0f);
+				AndroidUiHelper.updateVisibility(shadowView, tabLayoutAvailable);
 				viewPager.setTranslationY(0f);
 				bottomButtons.setVisibility(View.GONE);
 				bottomButtons.setTranslationY(0f);
@@ -422,6 +427,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	}
 
 	private void animateOnUpdateEditMode() {
+		boolean tabLayoutAvailable = isTabLayoutAvailable();
 		if (isEditMode) {
 			if (isDisableAnimations()) {
 				tabLayout.setVisibility(View.GONE);
@@ -431,7 +437,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				bottomButtonsShadow.setTranslationY(bottomButtons.getHeight() - bottomButtonsShadow.getHeight());
 				appBar.setElevation(0f);
 
-				if (isTabLayoutAvailable()) {
+				if (tabLayoutAvailable) {
 					animateView(tabLayout, -tabLayout.getHeight(), false, () -> tabLayout.setVisibility(View.INVISIBLE));
 					animateView(viewPager, -tabLayout.getHeight(), null, null);
 					animateView(shadowView, -tabLayout.getHeight(), null, null);
@@ -445,9 +451,11 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				bottomButtons.setVisibility(View.GONE);
 				bottomButtonsShadow.setVisibility(View.GONE);
 			} else {
-				animateView(tabLayout, 0, true, () -> appBar.setElevation(view.getResources().getDimension(R.dimen.abp__shadow_height)));
-				animateView(viewPager, 0, null, null);
-				animateView(shadowView, 0, null, null);
+				if (tabLayoutAvailable) {
+					animateView(tabLayout, 0, true, () -> appBar.setElevation(view.getResources().getDimension(R.dimen.abp__shadow_height)));
+					animateView(viewPager, 0, null, null);
+					animateView(shadowView, 0, null, null);
+				}
 				animateView(bottomButtons, bottomButtons.getHeight(), false, () -> bottomButtons.setVisibility(View.INVISIBLE));
 				animateView(bottomButtonsShadow, bottomButtons.getHeight() - bottomButtonsShadow.getHeight(), false, () -> bottomButtonsShadow.setVisibility(View.INVISIBLE));
 			}
@@ -559,13 +567,11 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			setupTabIconColor(tab, profileColor);
 		}
 
-		tabLayout.post(() -> {
-			if (isTabLayoutAvailable()) {
-				tabLayout.setVisibility(View.VISIBLE);
-			} else {
-				tabLayout.setVisibility(View.GONE);
-			}
-		});
+		if (isTabLayoutAvailable()) {
+			tabLayout.setVisibility(View.VISIBLE);
+		} else {
+			tabLayout.setVisibility(View.GONE);
+		}
 	}
 
 	private boolean isTabLayoutAvailable() {
@@ -613,22 +619,24 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	}
 
 	public void createWidgets(@NonNull List<MapWidgetInfo> newWidgetInfos) {
-		for (MapWidgetInfo widgetInfo : newWidgetInfos) {
+		Bundle args = getArguments();
+		String selectedWidget = null;
+		boolean addToNext = false;
+		if (args != null) {
+			selectedWidget = args.getString(CONTEXT_SELECTED_WIDGET);
+			addToNext = args.getBoolean(ADD_TO_NEXT);
+		}
+        for (MapWidgetInfo widgetInfo : newWidgetInfos) {
 			WidgetsPanel widgetPanel = widgetInfo.getWidgetPanel();
-			Bundle args = getArguments();
-			if (args != null) {
-				String selectedWidget = args.getString(CONTEXT_SELECTED_WIDGET);
-				boolean addToNext = args.getBoolean(ADD_TO_NEXT);
-				if (selectedWidget != null) {
-					if (isAndroidAutoMode) {
-						createNewAndroidAutoWidget(app, widgetInfo, widgetPanel, selectedAppMode, selectedWidget, addToNext);
-					} else {
-						createNewWidget(requireMapActivity(), widgetInfo, widgetPanel, selectedAppMode,
-								layoutMode, true, selectedWidget, addToNext);
-					}
-					onWidgetsConfigurationChanged();
-					return;
+			if (selectedWidget != null) {
+				if (isAndroidAutoMode) {
+					createNewAndroidAutoWidget(app, widgetInfo, widgetPanel, selectedAppMode, selectedWidget, addToNext);
+				} else {
+					createNewWidget(requireMapActivity(), widgetInfo, widgetPanel, selectedAppMode,
+							layoutMode, true, selectedWidget, addToNext);
 				}
+				onWidgetsConfigurationChanged();
+				return;
 			}
 			if (isAndroidAutoMode) {
 				createNewAndroidAutoWidget(app, widgetInfo, widgetPanel, selectedAppMode);

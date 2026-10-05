@@ -1530,12 +1530,12 @@ public class OsmandSettings {
 	public final ListStringPreference AA_WIDGETS_ORDER = (ListStringPreference) new ListStringPreference(this,
 															"aa_widgets_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.ANDROID_AUTO.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 	private final ListStringPreference AA_CUSTOM_WIDGET_KEYS = (ListStringPreference) new ListStringPreference(this, "aa_custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
-
 	public ListStringPreference getAndroidAutoCustomWidgetsKeys() {
 		return AA_CUSTOM_WIDGET_KEYS;
 	}
+	public final CommonPreference<String> AA_WIDGETS_VISIBILITY = new StringPreference(this,
+			"aa_widgets_visibility", "").makeProfile();
 
-	public final CommonPreference<String> AA_WIDGETS_VISIBILITY = new StringPreference(this, "aa_widgets_visibility", "").makeProfile();
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference(this, "show_poi_label", false).makeProfile();
 
 	public final OsmandPreference<Boolean> ONLINE_PHOTOS_ROW_COLLAPSED = new BooleanPreference(this, "online_photos_menu_collapsed", true).makeGlobal();

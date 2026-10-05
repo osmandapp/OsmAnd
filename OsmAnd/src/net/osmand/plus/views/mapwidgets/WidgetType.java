@@ -43,6 +43,7 @@ import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -163,7 +164,7 @@ public enum WidgetType {
 	public static final String ARRIVAL_TIME_LEGACY = "arrival_time";
 	public static final String TIME_TO_GO_LEGACY = "time_to_go";
 
-	public static final Set<WidgetType> ANDROID_AUTO_TYPES = Set.of(
+	public static final Set<WidgetType> ANDROID_AUTO_TYPES = EnumSet.of(
 			CURRENT_TIME,
 			OBD_SPEED,
 			OBD_RPM,

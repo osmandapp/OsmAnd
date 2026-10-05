@@ -383,9 +383,7 @@ public class WidgetsSettingsHelper {
 			if (WidgetType.isOriginalWidget(widgetInfo.key) && WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, widgetInfo.key, appMode)) {
 				widgetRegistry.enableDisableAndroidAutoWidgetForMode(appMode, widgetInfo, true);
 			} else {
-				// Disable "false" (not reset "null"), because visible by default widget should be disabled in non-default panel
-				Boolean enabled = isOriginalWidgetOnAnotherPanel(widgetInfo) ? false : null;
-				widgetRegistry.enableDisableAndroidAutoWidgetForMode(appMode, widgetInfo, enabled);
+				widgetRegistry.enableDisableAndroidAutoWidgetForMode(appMode, widgetInfo, null);
 			}
 		}
 		panel.getOrderPreference(settings, null).resetModeToDefault(appMode);

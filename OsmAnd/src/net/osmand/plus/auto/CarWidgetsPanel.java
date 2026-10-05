@@ -27,16 +27,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Prototype of a generic widgets panel drawn over the Android Auto map surface.
- * <p>
- *  Widgets are drawn on the right side of the surface to keep the left part
- *  free for the navigation card of the head unit. When more widgets are enabled than fit on the screen,
- *  a click on the panel shows the next page.
- * <p>
- * Widget views are created and laid out by this class only and are never attached to a window,
- * so the phone UI is not affected.
- */
 public class CarWidgetsPanel {
 	private static final float MIN_SURFACE_WIDTH_DP = 400f;
 	private static final float CORNER_RADIUS_DP = 8f;
