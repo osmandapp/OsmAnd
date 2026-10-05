@@ -5219,4 +5219,12 @@
     <string name="heap_dump">堆疊轉儲</string>
     <string name="heap_dump_descr">從 java 轉儲計算物件。</string>
     <string name="contour_labels">標籤</string>
+    <string name="contour_label_direction_descr">上坡方向：每個高程數值的頂部朝向地勢更高的一側，如同紙質地圖一般。同理，等高線的短齒線則表示下坡方向。</string>
+    <string name="rendering_attr_contourLabelDirection_name">標註方向</string>
+    <string name="rendering_value_upright_name">正向</string>
+    <string name="rendering_value_uphill_name">上坡</string>
+    <string name="shared_string_visibility">可見性</string>
+    <string name="opening_hours_public_holiday">公共假期</string>
+    <string name="opening_hours_school_holiday">學校假期</string>
+    <string name="opening_hours_easter">復活節</string>
 </resources>

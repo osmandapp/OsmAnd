@@ -300,8 +300,8 @@
     <string name="voice_stream_notification">Wie Benachrichtigungen</string>
     <string name="voice_stream_music">Wie Medien/Navigation</string>
     <string name="warning_tile_layer_not_downloadable">Die App kann die Kartenebene %1$s nicht herunterladen, eine Neuinstallation könnte helfen.</string>
-    <string name="overlay_transparency">Overlay-Transparenz</string>
-    <string name="map_transparency">Kartentransparenz</string>
+    <string name="overlay_transparency">Sichtbarkeit von Overlays</string>
+    <string name="map_transparency">Sichtbarkeit der Basiskarte</string>
     <string name="layer_underlay">Underlay-Karte …</string>
     <string name="map_underlay">Underlay-Karte</string>
     <string name="layer_overlay">Overlay-Karte …</string>
@@ -1323,7 +1323,7 @@
     <string name="select_map_marker">Kartenmarkierung auswählen</string>
     <string name="upload_osm_note">OSM-Hinweis hochladen</string>
     <string name="upload_anonymously">Anonym hochladen</string>
-    <string name="show_transparency_seekbar">Transparenz-Schieber anzeigen</string>
+    <string name="show_transparency_seekbar">Sichtbarkeitsschieberegler anzeigen</string>
     <string name="recalculate_route">Route neu berechnen</string>
     <string name="donations">Spenden</string>
     <string name="number_of_recipients">Anzahl der Empfänger</string>
@@ -4663,7 +4663,7 @@
     <string name="obd_engine_oil_temperature">Motoröltemperatur</string>
     <string name="obd_fuel_pressure_desc">Zeigt den Druck im Kraftstoffsystem an</string>
     <string name="obd_engine_oil_temperature_desc">Zeigt die Temperatur des Motoröls an.</string>
-    <string name="obd_engine_runtime_desc">Zeigt an, wie lange der Motor seit dem Starten gelaufen ist.</string>
+    <string name="obd_engine_runtime_desc">Zeigt an, wie lange der Motor seit dem Start läuft.</string>
     <string name="obd_throttle_position">Drosselklappenstellung</string>
     <string name="shared_string_volume">Menge</string>
     <string name="av_audio_sample_rate">Audio-Samplerate</string>
@@ -4692,12 +4692,12 @@
     <string name="map_widget_route_information_desc">Zeigt die voraussichtliche Ankunftszeit, die verbleibende Reisezeit und die Entfernung für die aktive Navigationsroute an.</string>
     <string name="ais_nmea_protocol_description">Protokoll für NMEA-Datenempfang auswählen</string>
     <string name="ais_ship_lost_timeout_description">Zeitlimit für die Sichtbarkeit veralteter Schiffe festlegen: Nach Ablauf dieser Zeit ohne Signalempfang wird das Schiffssymbol durchgestrichen.</string>
-    <string name="plugin_ais_tracker_name">AIS-Schiffstracker</string>
+    <string name="plugin_ais_tracker_name">Schiffsverfolgung (AIS)</string>
     <string name="ais_cpa_warning_time_description">Wenn die TCPA (Zeit bis zum nächsten Annäherungspunkt) zu einem anderen Schiff unter den festgelegten Schwellenwert fällt, wird das Schiff rot markiert.</string>
     <string name="ais_port_nmea_local_description">UDP-Port definieren, an dem OsmAnd NMEA-Daten empfängt</string>
     <string name="ais_object_lost_timeouts">Zeitlimit-Einstellungen für AIS-Signalempfang</string>
     <string name="ais_address_nmea_server_description">IP-Adresse der NMEA-Datenquelle definieren (falls TCP verwendet wird)</string>
-    <string name="ais_load_data">AIS-Daten aus Datei laden</string>
+    <string name="ais_load_data">Schiffsverkehr simulieren</string>
     <string name="ais_address_nmea_server">IP-Adresse der NMEA-Datenquelle</string>
     <string name="ais_port_nmea_local">UDP-Port des lokalen NMEA-Datenempfängers</string>
     <string name="ais_object_lost_timeout">Zeitlimit für die Sichtbarkeit bei Schiffsverlust</string>
@@ -4919,7 +4919,7 @@
     <string name="lang_crh">Krimtatarisch (lateinisch)</string>
     <string name="efficient_grid">Effizientes Gitter</string>
     <string name="unsupported_maps">Nicht mehr verfügbare Karten</string>
-    <string name="deleted_maps_prompt">Diese Karten werden nicht mehr unterstützt und wurden durch regionale Aufteilung ersetzt. Bitte Karten löschen und die neuen Karten herunterladen.</string>
+    <string name="deleted_maps_prompt">Diese Karten werden nicht mehr unterstützt. Bitte löschen Sie sie und laden Sie die neuen Versionen herunter.</string>
     <string name="routing_attr_weightrating_name">Maximales Gewicht bei voller Beladung</string>
     <string name="routing_attr_maxaxleload_name">Maximale Achslast</string>
     <string name="centimeter">cm</string>
@@ -5292,4 +5292,5 @@
     <string name="astro_eclipse_phase_partial">Partiell</string>
     <string name="astro_eclipse_phase_total">Total</string>
     <string name="astro_eclipse_column_below_horizon">Unter dem Horizont</string>
+    <string name="file_name_containes_illegal_char">Name darf Folgendes nicht enthalten: %1$s</string>
 </resources>

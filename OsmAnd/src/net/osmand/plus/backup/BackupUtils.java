@@ -1,6 +1,7 @@
 package net.osmand.plus.backup;
 
 import static net.osmand.IProgress.EMPTY_PROGRESS;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype.GPX;
 import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype.MULTIMEDIA_NOTES;
 import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype.RENDERING_STYLE;
 import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype.ROUTING_CONFIG;
@@ -256,6 +257,7 @@ public class BackupUtils {
 		boolean updateRenderers = false;
 		boolean updatePoiFilters = false;
 		boolean updateMultimedia = false;
+		boolean updateTracks = false;
 
 		for (SettingsItem item : items) {
 			if (item instanceof FileSettingsItem) {
@@ -264,6 +266,7 @@ public class BackupUtils {
 				updateRouting |= ROUTING_CONFIG == subtype;
 				updateRenderers |= RENDERING_STYLE == subtype;
 				updateMultimedia |= MULTIMEDIA_NOTES == subtype;
+				updateTracks |= GPX == subtype;
 			} else if (item instanceof PoiUiFiltersSettingsItem || item instanceof ProfileSettingsItem) {
 				updatePoiFilters = true;
 			}
@@ -285,6 +288,9 @@ public class BackupUtils {
 			if (plugin != null) {
 				plugin.indexingFiles(true, true);
 			}
+		}
+		if (updateTracks) {
+			app.getOsmandMap().refreshMap();
 		}
 	}
 
