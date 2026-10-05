@@ -9,19 +9,8 @@ import com.google.android.gms.tasks.Tasks
 import com.google.android.gms.wearable.ChannelClient
 import com.google.android.gms.wearable.Wearable
 
-import net.osmand.core.android.AtlasMapRendererView
-import net.osmand.core.android.MapRendererContext
-import net.osmand.core.android.MapRendererView
-import net.osmand.core.jni.MapStylesCollection
-import net.osmand.core.jni.PointI
-import net.osmand.core.jni.ZoomLevel
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.views.corenative.NativeCoreContext
 import net.osmand.wear.api.WearProtocol
-
-import kotlin.math.floor
-import kotlin.math.log2
-import kotlin.math.pow
 
 import java.io.ByteArrayOutputStream
 import java.io.OutputStream
@@ -43,8 +32,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 
 	private val channelClient = Wearable.getChannelClient(app)
 
-	private var context: MapRendererContext? = null
-	private var view: AtlasMapRendererView? = null
+	private var source: WearMapSource? = null
 	private var channel: ChannelClient.Channel? = null
 	private var output: OutputStream? = null
 	private var pump: Thread? = null
@@ -66,12 +54,9 @@ class WearMapStreamer(private val app: OsmandApplication) {
 
 	/**
 	 * Renderer frames seen so far, and the count a gesture is waiting for. setZoom and setTarget
-	 * only ask; the frame already in flight still carries the old view, and sending it would have
+	 * only ask; a frame already being drawn still carries the old view, and sending it would have
 	 * the watch drop its own preview of the gesture and snap back before the real one arrived.
 	 */
-	@Volatile
-	private var framesRendered = 0
-
 	@Volatile
 	private var awaitFrame = 0
 
@@ -99,22 +84,17 @@ class WearMapStreamer(private val app: OsmandApplication) {
 			stop()
 			pump?.join(RESTART_TIMEOUT_MS)
 		}
-		if (!NativeCoreContext.isInit()) {
-			LOG.warn("Watch asked for the map, but the OpenGL core is not initialised")
-			return
-		}
 		if (app.carNavigationSession != null) {
 			LOG.info("Watch asked for the map while a car display is connected; refused")
 			return
 		}
 		lastHeardFrom = SystemClock.elapsedRealtime()
-		val collections = NativeCoreContext.getObfsCollections() ?: return
 		running = true
 		// Drawn wider than the watch so that a drag reveals map rather than black: the watch
 		// shows the middle and slides the surplus into view while the finger moves.
 		val frameWidth = (width * OVERSCAN).toInt()
 		val frameHeight = (height * OVERSCAN).toInt()
-		pump = Thread({ pump(nodeId, frameWidth, frameHeight, density, collections) }, "WearMapStreamer").also {
+		pump = Thread({ pump(nodeId, frameWidth, frameHeight, density) }, "WearMapStreamer").also {
 			it.start()
 		}
 	}
@@ -133,12 +113,13 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		pump?.interrupt()
 	}
 
-	private fun pump(
-		nodeId: String, width: Int, height: Int, density: Float,
-		collections: Map<MapRendererContext.ProviderType, net.osmand.core.jni.ObfsCollection>
-	) {
+	private fun pump(nodeId: String, width: Int, height: Int, density: Float) {
 		try {
-			openRenderer(width, height, density, collections)
+			val renderer = if (LEGACY_RENDERER) WearLegacyMapSource(app) else WearGlMapSource(app)
+			if (!renderer.open(width, height, density)) {
+				return
+			}
+			source = renderer
 			openChannel(nodeId)
 			val stream = output ?: return
 			var lastSent = ByteArray(0)
@@ -158,15 +139,14 @@ class WearMapStreamer(private val app: OsmandApplication) {
 					Thread.sleep(FRAME_INTERVAL_MS)
 					continue
 				}
-				if (framesRendered < awaitFrame) {
+				if (renderer.drawn < awaitFrame) {
 					Thread.sleep(RENDER_INTERVAL_MS)
 					continue
 				}
 				if (following) {
-					val box = app.osmandMap.mapView.currentRotatedTileBox
-					view?.setTarget(PointI(box.center31X, box.center31Y))
+					renderer.followPhone()
 				}
-				val bitmap = view?.bitmap
+				val bitmap = renderer.frame()
 				if (bitmap != null) {
 					val grabbedAt = SystemClock.elapsedRealtime()
 					val encoded = encode(bitmap)
@@ -211,90 +191,27 @@ class WearMapStreamer(private val app: OsmandApplication) {
 	fun zoom(factor: Float, seq: Int) {
 		lastHeardFrom = SystemClock.elapsedRealtime()
 		appliedSeq = maxOf(appliedSeq, seq)
-		val renderer = view ?: return
-		if (factor <= 0f) {
-			return
-		}
-		val wanted = log2(scaleOf(renderer.zoom) * factor)
-		val level = floor(wanted)
-		val visual = 2.0.pow(wanted - level).toFloat()
-		renderer.setZoom((level.toFloat() + visual - 1f).coerceIn(MIN_ZOOM, MAX_ZOOM))
-		awaitFrame = framesRendered + FRAMES_IN_FLIGHT
+		val renderer = source ?: return
+		renderer.zoom(factor)
+		awaitFrame = renderer.drawn + renderer.framesInFlight
 	}
 
-	/** How much ground a float zoom shows, in the renderer's own level-plus-visualZoom terms. */
-	private fun scaleOf(zoom: Float): Double {
-		val level = floor(zoom.toDouble())
-		return 2.0.pow(level) * (1.0 + (zoom - level))
-	}
-
-	/**
-	 * A drag on the watch moves the phone's viewport by the same distance on the ground: the
-	 * screen point the finger started from is asked for its location, and the target moves by
-	 * the difference. Doing the arithmetic in 31-coordinates would need the zoom and the
-	 * projection, which the renderer already holds.
-	 */
 	fun pan(dx: Float, dy: Float, seq: Int) {
 		lastHeardFrom = SystemClock.elapsedRealtime()
 		appliedSeq = maxOf(appliedSeq, seq)
 		following = false
-		val renderer = view ?: return
-		val centre = renderer.targetScreenPosition ?: return
-		val from = PointI()
-		val to = PointI()
-		if (renderer.getLocationFromScreenPoint(centre, from)
-				&& renderer.getLocationFromScreenPoint(
-					PointI(centre.x - dx.toInt(), centre.y - dy.toInt()), to)) {
-			val target = renderer.target ?: return
-			renderer.setTarget(PointI(
-				target.x + (to.x - from.x),
-				target.y + (to.y - from.y)))
-			awaitFrame = framesRendered + FRAMES_IN_FLIGHT
-		}
+		val renderer = source ?: return
+		renderer.pan(dx, dy)
+		awaitFrame = renderer.drawn + renderer.framesInFlight
 	}
 
 	fun recenter(seq: Int) {
 		lastHeardFrom = SystemClock.elapsedRealtime()
 		appliedSeq = maxOf(appliedSeq, seq)
 		following = true
-		val renderer = view ?: return
-		val box = app.osmandMap.mapView.currentRotatedTileBox
-		renderer.setTarget(PointI(box.center31X, box.center31Y))
-		awaitFrame = framesRendered + FRAMES_IN_FLIGHT
-	}
-
-	private fun openRenderer(
-		width: Int, height: Int, density: Float,
-		collections: Map<MapRendererContext.ProviderType, net.osmand.core.jni.ObfsCollection>
-	) {
-		val rendererContext = MapRendererContext(app, density)
-		rendererContext.setupObfMap(MapStylesCollection(), collections)
-
-		val mapView = app.osmandMap.mapView
-		val rendererView = AtlasMapRendererView(app)
-		rendererContext.presetMapRendererOptions(rendererView, false)
-		rendererView.setupRenderer(app, width, height, null)
-		rendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.minZoom))
-		rendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.maxZoom))
-		rendererView.setAzimuth(0f)
-		rendererView.setElevationAngle(90f)
-		rendererView.setZoom(mapView.zoom.toFloat())
-		val box = mapView.currentRotatedTileBox
-		rendererView.setTarget(PointI(box.center31X, box.center31Y))
-		// Drawn far more often than it is sent: redrawing is GPU work that the measurements
-		// found cheap, and it is what decides how soon a gesture is answered. Encoding, which
-		// is the expensive half, still happens only FRAMES_PER_SECOND times a second.
-		rendererView.setMaximumFrameRate(RENDER_FRAMES_PER_SECOND)
-		rendererView.addListener(object : MapRendererView.MapRendererViewListener {
-			override fun onUpdateFrame(view: MapRendererView) {}
-			override fun onFrameReady(view: MapRendererView) {
-				framesRendered++
-			}
-		})
-		rendererContext.setMapRendererView(rendererView)
-
-		context = rendererContext
-		view = rendererView
+		val renderer = source ?: return
+		renderer.followPhone()
+		awaitFrame = renderer.drawn + renderer.framesInFlight
 	}
 
 	private fun openChannel(nodeId: String) {
@@ -368,12 +285,10 @@ class WearMapStreamer(private val app: OsmandApplication) {
 	private fun closeAll() {
 		runCatching { output?.close() }
 		runCatching { channel?.let { channelClient.close(it) } }
-		runCatching { context?.releaseMapRendererView(view) }
-		runCatching { view?.stopRenderer() }
+		runCatching { source?.close() }
 		output = null
 		channel = null
-		view = null
-		context = null
+		source = null
 		running = false
 	}
 
@@ -382,10 +297,14 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		const val FRAMES_PER_SECOND = 4
 		const val FRAME_INTERVAL_MS = 1000L / FRAMES_PER_SECOND
 		const val FRAME_QUALITY = 60
-		const val RENDER_FRAMES_PER_SECOND = 15
-		const val RENDER_INTERVAL_MS = 1000L / RENDER_FRAMES_PER_SECOND
-		/** One frame may already be on its way to the GPU when a gesture lands; the next is ours. */
-		const val FRAMES_IN_FLIGHT = 2
+		/** How often the pump looks again while waiting for a gesture to be drawn. */
+		const val RENDER_INTERVAL_MS = 1000L / 15
+		/**
+		 * Which of OsmAnd's two renderers draws the watch's map. The legacy one draws into a
+		 * bitmap of any size on the asking thread, which is the shape this feature needs and
+		 * costs no second core context; the OpenGL one shows exactly what the phone shows.
+		 */
+		const val LEGACY_RENDERER = true
 		const val SILENCE_TIMEOUT_MS = 60_000L
 		const val RESTART_TIMEOUT_MS = 2_000L
 		/**
@@ -395,7 +314,5 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		 * takes over a second to answer a gesture, so it waits on that latency being understood.
 		 */
 		const val OVERSCAN = 1.5f
-		const val MIN_ZOOM = 3f
-		const val MAX_ZOOM = 21f
 	}
 }
