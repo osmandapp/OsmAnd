@@ -738,9 +738,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 					clearSelectedObject()
 				}
 				updateBackPressedCallback()
+				updateStarViewBottomObstruction()
 			}
-			override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+			override fun onSlide(bottomSheet: View, slideOffset: Float) {
+				updateStarViewBottomObstruction()
+			}
 		})
+		bottomSheetContainer.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateStarViewBottomObstruction() }
 		updateMapControlsVisibility()
 		applyRedFilterToViews(starView.showRedFilter, bottomSheetContainer)
 
@@ -2310,6 +2314,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	fun hideBottomSheet() {
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+	}
+
+	/** Keeps the star view aware of how much of its bottom the object context menu covers. */
+	private fun updateStarViewBottomObstruction() {
+		if (!::starView.isInitialized || !::bottomSheetContainer.isInitialized) return
+		val obstruction = if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN) {
+			0
+		} else {
+			val location = IntArray(2)
+			bottomSheetContainer.getLocationInWindow(location)
+			val sheetTop = location[1]
+			starView.getLocationInWindow(location)
+			val starViewBottom = location[1] + starView.height
+			starViewBottom - sheetTop
+		}
+		starView.bottomObstructionHeight = obstruction
 	}
 
 	private fun showObjectInfo(obj: SkyObject) {
