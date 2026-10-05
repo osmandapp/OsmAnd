@@ -293,16 +293,23 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		val o = JSONObject()
 			.put("package", bridge.boundPackage)
 			.put("installed", JSONArray(bridge.installedPackages()))
-		val current = readPref("application_mode", null)
-		if (current == null) {
+		// refreshMap is in the Map group that every connected app gets by default
+		if (!api.refreshMap()) {
 			o.put("enabled", false).put("hint", refused)
 			return o
 		}
-		return o.put("enabled", true)
-			.put("current_profile", current)
-			.put("profiles", profiles())
+		o.put("enabled", true)
 			.put("screen_open", api.isFragmentOpen)
 			.put("context_menu_open", api.isMenuOpen)
+		// profiles are read through settings, which needs the Settings group
+		val current = readPref("application_mode", null)
+		if (current == null) {
+			return o.put("settings_access", false)
+				.put("settings_hint", "Profiles and settings need the Settings group in OsmAnd > Menu > Plugins > OsmAnd AI Connector.")
+		}
+		return o.put("settings_access", true)
+			.put("current_profile", current)
+			.put("profiles", profiles())
 	}
 
 	private fun getPreferences(a: JSONObject): JSONObject {
