@@ -1,5 +1,6 @@
 package net.osmand.aiconnector
 
+import android.util.Base64
 import android.view.KeyEvent
 import net.osmand.aidlapi.IOsmAndAidlCallback
 import net.osmand.aidlapi.contextmenu.AContextMenuButton
@@ -10,12 +11,17 @@ import net.osmand.aidlapi.favorite.AFavorite
 import net.osmand.aidlapi.favorite.AddFavoriteParams
 import net.osmand.aidlapi.gpx.AGpxBitmap
 import net.osmand.aidlapi.gpx.AGpxFile
+import net.osmand.aidlapi.gpx.GpxPointsParams
+import net.osmand.aidlapi.gpx.GpxSearchParams
 import net.osmand.aidlapi.gpx.ASelectedGpxFile
 import net.osmand.aidlapi.gpx.HideGpxParams
 import net.osmand.aidlapi.gpx.ShowGpxParams
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams
 import net.osmand.aidlapi.logcat.OnLogcatMessageParams
+import net.osmand.aidlapi.info.AMapWidgetValue
+import net.osmand.aidlapi.map.MapScreenshotParams
+import net.osmand.aidlapi.map.SetMapCameraParams
 import net.osmand.aidlapi.map.SetMapLocationParams
 import net.osmand.aidlapi.navigation.ADirectionInfo
 import net.osmand.aidlapi.navigation.NavigateParams
@@ -28,10 +34,16 @@ import net.osmand.aidlapi.search.SearchParams
 import net.osmand.aidlapi.search.SearchResult
 import org.json.JSONArray
 import org.json.JSONObject
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 class ToolError(message: String) : Exception(message)
+
+/** A tool result shown to the assistant as a picture. */
+class ToolImage(val jpeg: ByteArray, val caption: String)
 
 /** MCP tool definitions and their implementation on top of OsmAnd's AIDL API v2. */
 class OsmAndTools(private val bridge: OsmAndBridge) {
@@ -101,6 +113,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 				prop("lat", "number", "Latitude"),
 				prop("lon", "number", "Longitude"),
 				prop("zoom", "integer", "Zoom 1-22, 0 keeps the current zoom"),
+				prop("rotation", "number", "Optional map rotation in degrees, 0 is north up"),
 				prop("animated", "boolean", "Animate the move"),
 				required = listOf("lat", "lon")
 			)
@@ -108,12 +121,52 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			check(MAP,
 				bridge.get().setMapLocation(
 					SetMapLocationParams(
-						a.getDouble("lat"), a.getDouble("lon"), a.optInt("zoom", 0), Float.NaN,
+						a.getDouble("lat"), a.getDouble("lon"), a.optInt("zoom", 0), a.optFloat("rotation"),
 						a.optBoolean("animated", true)
 					)
 				)
 			)
 			"Map moved"
+		},
+		Tool(
+			"osmand_set_camera",
+			"Point the map camera: center, fractional zoom, rotation and tilt (3D). Omitted values stay as they are. " +
+					"For a 3D view of mountains set elevation_angle to 30-50 and turn on terrain " +
+					"(osmand_set_preference: terrain / 3D relief settings).",
+			schema(
+				prop("lat", "number", "Latitude of the map center"),
+				prop("lon", "number", "Longitude of the map center"),
+				prop("zoom", "number", "Zoom, may be fractional, e.g. 14.5"),
+				prop("rotation", "number", "Map rotation in degrees: the direction that is up on the screen, 0 is north"),
+				prop("elevation_angle", "number", "Camera angle above the horizon: 90 is a flat map, 30-50 a tilted 3D view"),
+				prop("animated", "boolean", "Animate the move, default false")
+			)
+		) { a ->
+			val hasCenter = a.has("lat") && a.has("lon")
+			check(MAP, bridge.get().setMapCamera(
+				SetMapCameraParams(
+					if (hasCenter) a.getDouble("lat") else Double.NaN, if (hasCenter) a.getDouble("lon") else Double.NaN,
+					a.optFloat("zoom"), a.optFloat("rotation"), a.optFloat("elevation_angle"),
+					a.optBoolean("animated", false)
+				)
+			))
+			"Camera set"
+		},
+		Tool(
+			"osmand_screenshot",
+			"Take a picture of the OsmAnd map screen as the user sees it: map, shown tracks, 3D and widgets. " +
+					"OsmAnd must be open on the phone. Use it to check the view or to make cards and pictures for the user.",
+			schema(
+				prop("map_only", "boolean", "Only the map with tracks and 3D, without widgets and buttons; default false"),
+				prop("max_width", "integer", "Max width in pixels, default 1080"),
+				prop("quality", "integer", "JPEG quality 1-100, default 80")
+			)
+		) { a ->
+			val params = MapScreenshotParams(a.optInt("max_width", 1080), a.optInt("quality", 80))
+			params.isMapOnly = a.optBoolean("map_only", false)
+			val shot = bridge.get().getMapScreenshot(params)
+				?: throw ToolError(refused(SCREEN) + " OsmAnd also needs to be open with the map on the screen.")
+			ToolImage(shot.image, "Map screenshot ${shot.width}x${shot.height}")
 		},
 		Tool(
 			"osmand_search",
@@ -239,13 +292,60 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		},
 		Tool(
 			"osmand_list_tracks",
-			"List track files (GPX) on the phone, newest first: file name relative to the tracks folder " +
-					"(use it with osmand_show_gpx), size, modified time, whether it is shown, distance and points.",
+			"Find track files (GPX) on the phone with their statistics from OsmAnd's track database: activity, " +
+					"start, city, distance, duration, moving time, climb, descent, elevation range, max and average speed. " +
+					"Filters can be combined, e.g. ski days: min_elevation_range_m 200, min_descent_m 500, " +
+					"min_max_speed_kmh 30, max_max_speed_kmh 80, max_avg_speed_kmh 30. The reply lists the activities in use; " +
+					"many recorded tracks have no activity, so filter by the numbers too.",
 			schema(
-				prop("query", "string", "Optional part of the file name, e.g. 2026-09 or rec/"),
-				prop("limit", "integer", "Max tracks, default 50")
+				prop("query", "string", "Part of the file path, e.g. 2026-09 or Bukovel"),
+				prop("folder", "string", "Folder in the tracks folder, e.g. rec or import"),
+				prop("activity", "string", "Activity id from the reply's activities, e.g. skiing"),
+				prop("from", "string", "Start date, YYYY-MM-DD"),
+				prop("to", "string", "End date, YYYY-MM-DD (inclusive)"),
+				prop("min_km", "number", "Min distance, km"),
+				prop("max_km", "number", "Max distance, km"),
+				prop("shown_only", "boolean", "Only tracks shown on the map"),
+				prop("min_descent_m", "number", "Min total descent, m"),
+				prop("min_elevation_range_m", "number", "Min difference between the highest and lowest point, m"),
+				prop("min_max_speed_kmh", "number", "Min of the track's max speed, km/h"),
+				prop("max_max_speed_kmh", "number", "Max of the track's max speed, km/h"),
+				prop("max_avg_speed_kmh", "number", "Upper limit of the average speed over the whole time, km/h"),
+				prop("sort", "string", "newest (default), oldest, longest or name"),
+				prop("offset", "integer", "Skip this many tracks, for paging"),
+				prop("limit", "integer", "Max tracks, default 20, max 100")
 			)
 		) { a -> listTracks(a) },
+		Tool(
+			"osmand_track_stats",
+			"Full statistics of a track file on the phone: activity, city, start point, distance, times, " +
+					"elevation (min, max, average, climb, descent), speed, points, waypoints and sensor data " +
+					"(heart rate, power, cadence, sensor speed, temperature) when recorded.",
+			schema(prop("file", "string", "Track file from osmand_list_tracks"), required = listOf("file"))
+		) { a -> trackStats(a.getString("file")) },
+		Tool(
+			"osmand_track_points",
+			"Track points of a track file on the phone or of the track being recorded (file omitted): " +
+					"lat, lon, elevation (m), time (ms), speed (m/s), in pages. Use it to analyse runs, climbs, stops.",
+			schema(
+				prop("file", "string", "Track file from osmand_list_tracks; omit for the track being recorded"),
+				prop("offset", "integer", "Index of the first point, default 0"),
+				prop("limit", "integer", "Points per page, default 500, max 2000")
+			)
+		) { a -> trackPoints(a) },
+		Tool(
+			"osmand_widgets",
+			"Values of the map widgets enabled in the current profile, as shown on the screen " +
+					"(speed, altitude, distance to destination, time...).",
+			schema()
+		) {
+			val list = ArrayList<AMapWidgetValue>()
+			check(LOCATION, bridge.get().getMapWidgetValues(list))
+			JSONArray(list.map {
+				JSONObject().put("id", it.id).put("title", it.title).put("value", it.value)
+					.put("panel", it.panel).put("visible", it.isVisible)
+			})
+		},
 		Tool(
 			"osmand_start_recording",
 			"Start trip recording (a new GPX track from the phone's location).",
@@ -295,6 +395,12 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		val tool = tools[name] ?: throw IllegalArgumentException("Unknown tool: $name")
 		return try {
 			val out = tool.run(args)
+			if (out is ToolImage) {
+				return JSONObject().put("isError", false).put("content", JSONArray()
+					.put(JSONObject().put("type", "image").put("mimeType", "image/jpeg")
+						.put("data", Base64.encodeToString(out.jpeg, Base64.NO_WRAP)))
+					.put(JSONObject().put("type", "text").put("text", out.caption)))
+			}
 			val text = when (out) {
 				is JSONObject -> out.toString(1)
 				is JSONArray -> out.toString(1)
@@ -345,7 +451,8 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			.put(MAP, true)
 			.put(SETTINGS, readPref("application_mode", null) != null)
 			.put(TRACKS_VIEW, api.getActiveGpx(ArrayList()))
-			.put(RECORDING, api.gpxRecordingInfo != null))
+			.put(RECORDING, api.gpxRecordingInfo != null)
+			.put(LOCATION, api.appInfo != null))
 		o.put("enabled", true)
 			.put("screen_open", api.isFragmentOpen)
 			.put("context_menu_open", api.isMenuOpen)
@@ -379,18 +486,117 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 	}
 
 	private fun listTracks(a: JSONObject): JSONObject {
-		val files = ArrayList<AGpxFile>()
-		check(TRACKS_VIEW, bridge.get().getImportedGpx(files))
-		val query = a.optString("query").lowercase()
-		val found = files.filter { query.isEmpty() || (it.relativePath ?: it.fileName).lowercase().contains(query) }
-			.sortedByDescending { it.modifiedTime }
-		val limit = a.optInt("limit", 50)
-		return JSONObject().put("total", files.size).put("found", found.size).put("tracks", JSONArray(found.take(limit).map {
-			JSONObject().put("file", it.relativePath ?: it.fileName).put("size", it.fileSize)
-				.put("modified", it.modifiedTime).put("shown", it.isActive).apply {
-					it.details?.let { d -> put("distance_m", d.totalDistance.toInt()).put("points", d.points) }
-				}
-		}))
+		val p = GpxSearchParams()
+		p.setQuery(a.optString("query").ifEmpty { null })
+		p.setFolder(a.optString("folder").ifEmpty { null })
+		p.setActivityType(a.optString("activity").ifEmpty { null })
+		p.setTimeRange(dayBound(a.optString("from"), false), dayBound(a.optString("to"), true))
+		p.setDistanceRange(a.optDouble("min_km", 0.0) * 1000, a.optDouble("max_km", 0.0) * 1000)
+		p.setShownOnly(a.optBoolean("shown_only", false))
+		p.setMinDescent(a.optDouble("min_descent_m", 0.0))
+		p.setMinElevationRange(a.optDouble("min_elevation_range_m", 0.0))
+		p.setMaxSpeedRange(kmh(a, "min_max_speed_kmh"), kmh(a, "max_max_speed_kmh"))
+		p.setMaxAvgSpeed(kmh(a, "max_avg_speed_kmh"))
+		p.setSort(a.optString("sort").ifEmpty { GpxSearchParams.SORT_NEWEST })
+		p.setPage(a.optInt("offset", 0), a.optInt("limit", 20).coerceIn(1, 100))
+		val result = bridge.get().searchGpx(p)
+			?: throw ToolError(refused(TRACKS_VIEW) + " An older OsmAnd cannot search tracks.")
+		return JSONObject().put("total", result.total).put("found", result.found)
+			.put("activities", JSONArray(result.activityTypes.orEmpty()))
+			.put("tracks", JSONArray(result.files.orEmpty().map { trackJson(it, false) }))
+	}
+
+	private fun kmh(a: JSONObject, name: String) = (a.optDouble(name, 0.0) / 3.6).toFloat()
+
+	/** Start of the day in the phone's time zone, or its last millisecond for [end]; 0 when empty. */
+	private fun dayBound(date: String, end: Boolean): Long {
+		if (date.isEmpty()) return 0
+		val day = try {
+			LocalDate.parse(date)
+		} catch (e: Exception) {
+			throw ToolError("Dates are YYYY-MM-DD, got '$date'")
+		}
+		val start = day.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+		return if (end) day.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli() - 1 else start
+	}
+
+	// OsmAnd leaves start values (e.g. min elevation 99999) when a track has no times or elevations
+	private fun trackJson(file: AGpxFile, full: Boolean): JSONObject {
+		val o = JSONObject().put("file", file.relativePath ?: file.fileName)
+		file.activityType?.takeIf { it.isNotEmpty() }?.let { o.put("activity", it) }
+		file.nearestCityName?.takeIf { it.isNotEmpty() }?.let { o.put("city", it) }
+		if (full) {
+			o.put("size", file.fileSize).put("modified", file.modifiedTime)
+			if (!file.startLatitude.isNaN()) o.put("start_lat", file.startLatitude).put("start_lon", file.startLongitude)
+		}
+		o.put("shown", file.isActive)
+		val d = file.details ?: return o
+		o.put("distance_km", round1(d.totalDistance / 1000.0))
+		if (d.timeSpan > 0) {
+			o.put("start", Instant.ofEpochMilli(d.startTime).atZone(ZoneId.systemDefault()).toLocalDateTime().toString())
+				.put("duration_min", d.timeSpan / 60000).put("moving_min", d.timeMoving / 60000)
+				.put("speed_max_kmh", round1(d.maxSpeed * 3.6))
+				// over the whole time, stops and lifts included
+				.put("speed_avg_total_kmh", round1(d.totalDistance / (d.timeSpan / 1000.0) * 3.6))
+			if (full) {
+				o.put("end", Instant.ofEpochMilli(d.endTime).atZone(ZoneId.systemDefault()).toLocalDateTime().toString())
+					.put("distance_moving_km", round1(d.totalDistanceMoving / 1000.0))
+					.put("speed_avg_moving_kmh", round1(d.avgSpeed * 3.6))
+			}
+		}
+		if (d.maxElevation >= d.minElevation) {
+			o.put("climb_m", d.diffElevationUp.toInt()).put("descent_m", d.diffElevationDown.toInt())
+				.put("elevation_range_m", (d.maxElevation - d.minElevation).toInt())
+			if (full) {
+				o.put("elevation_min_m", d.minElevation.toInt())
+					.put("elevation_max_m", d.maxElevation.toInt()).put("elevation_avg_m", d.avgElevation.toInt())
+			}
+		}
+		if (full) {
+			o.put("points", d.points).put("segments", d.totalTracks).put("waypoints", d.wptPoints)
+			val sensors = JSONObject()
+			if (d.maxHeartRate > 0) sensors.put("heart_rate_avg", round1(d.avgHeartRate.toDouble()))
+				.put("heart_rate_min", d.minHeartRate).put("heart_rate_max", d.maxHeartRate)
+			if (d.maxSensorSpeed > 0) sensors.put("sensor_speed_avg_kmh", round1(d.avgSensorSpeed * 3.6))
+				.put("sensor_speed_max_kmh", round1(d.maxSensorSpeed * 3.6))
+			if (d.maxPower > 0) sensors.put("power_avg_w", round1(d.avgPower.toDouble())).put("power_max_w", d.maxPower)
+			if (d.maxCadence > 0) sensors.put("cadence_avg", round1(d.avgCadence.toDouble()))
+				.put("cadence_max", round1(d.maxCadence.toDouble()))
+			if (d.maxTemperature != 0) sensors.put("temperature_avg_c", round1(d.avgTemperature.toDouble()))
+				.put("temperature_max_c", d.maxTemperature)
+			if (sensors.length() > 0) o.put("sensors", sensors)
+		}
+		return o
+	}
+
+	private fun trackStats(file: String): JSONObject {
+		val p = GpxSearchParams()
+		p.setQuery(file)
+		p.setPage(0, 100)
+		val result = bridge.get().searchGpx(p)
+			?: throw ToolError(refused(TRACKS_VIEW) + " An older OsmAnd cannot search tracks.")
+		val track = result.files.orEmpty().firstOrNull { it.relativePath == file || it.fileName == file }
+			?: throw ToolError("No track '$file' on the phone; see osmand_list_tracks")
+		return trackJson(track, true)
+	}
+
+	private fun round1(v: Double) = Math.round(v * 10) / 10.0
+
+	private fun trackPoints(a: JSONObject): JSONObject {
+		val file = a.optString("file")
+		val offset = a.optInt("offset", 0)
+		val limit = a.optInt("limit", 500).coerceIn(1, 2000)
+		val page = bridge.get().getGpxPoints(GpxPointsParams(file, offset, limit))
+			?: throw ToolError(if (file.isEmpty()) refused(RECORDING) else
+				refused(TRACKS_VIEW) + " Or there is no track '$file'; see osmand_list_tracks.")
+		// columns keep a page of points small
+		return JSONObject().put("total", page.total).put("offset", offset)
+			.put("columns", JSONArray(listOf("lat", "lon", "ele_m", "time_ms", "speed_ms")))
+			.put("points", JSONArray(page.points.orEmpty().map {
+				JSONArray().put(it.latitude).put(it.longitude)
+					.put(if (it.elevation.isNaN()) JSONObject.NULL else Math.round(it.elevation * 10) / 10.0)
+					.put(it.time).put(Math.round(it.speed * 100) / 100.0)
+			}))
 	}
 
 	private fun getPreferences(a: JSONObject): JSONObject {
@@ -454,6 +660,8 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		})
 	}
 
+	private fun JSONObject.optFloat(name: String): Float = if (has(name)) getDouble(name).toFloat() else Float.NaN
+
 	private fun prop(name: String, type: String, description: String, items: String? = null) =
 		name to JSONObject().put("type", type).put("description", description).apply {
 			if (items != null) put("items", JSONObject().put("type", items))
@@ -466,6 +674,8 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 }
 
 private const val MAP = "Map"
+private const val LOCATION = "My Position"
+private const val SCREEN = "Screenshots"
 private const val SEARCH = "Search"
 private const val NAVIGATION = "Navigation"
 private const val FAVORITES = "Favorites"
