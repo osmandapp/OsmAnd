@@ -25,9 +25,9 @@ class NativeRoutingMemoryGuard {
 	private static final Log log = PlatformUtil.getLog(NativeRoutingMemoryGuard.class);
 
 	private static final long MB = 1 << 20;
-	private static final long MIN_BUDGET = 1024 * MB;
+	private static final long MIN_BUDGET = 1536 * MB;
 	private static final long MAX_BUDGET = 4096 * MB;
-	private static final double BUDGET_RAM_SHARE = 0.3;
+	private static final double BUDGET_RAM_SHARE = 0.5;
 	private static final long CHECK_INTERVAL_MS = 200;
 
 	private final RouteCalculationProgress progress;
