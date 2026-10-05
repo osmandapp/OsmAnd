@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="osmand_api_permission_missing">%1$s: allow \"%2$s\" in Menu › Plugins</string>
+	<string name="osmand_api_unknown_app">Blocked \"%1$s\" from an unknown app</string>
 	<string name="aidl_permissions_descr">What %1$s (%2$s) can do in OsmAnd.</string>
 	<string name="aidl_permissions_request_title">Allow %1$s to use OsmAnd?</string>
 	<string name="aidl_permissions_request_descr">%1$s\nYou can change this later in Plugins.</string>

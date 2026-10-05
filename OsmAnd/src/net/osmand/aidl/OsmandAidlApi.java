@@ -1989,6 +1989,14 @@ public class OsmandAidlApi {
 		return connectedApp.isEnabled() && connectedApp.isMethodAllowed(method);
 	}
 
+	/**
+	 * @return true if the app is enabled and the group is granted to it
+	 */
+	public boolean isGroupAllowed(@NonNull String pack, @NonNull AidlPermissionGroup group) {
+		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
+		return connectedApp.isEnabled() && connectedApp.isGroupGranted(group);
+	}
+
 	@NonNull
 	public ConnectedApp getOrCreateConnectedApp(@NonNull String pack) {
 		ConnectedApp connectedApp = connectedApps.get(pack);
