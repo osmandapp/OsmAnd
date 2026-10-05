@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="route_calculation_out_of_memory">The route is too long to calculate on this device. Add intermediate points or choose a closer destination.</string>
 	<string name="java_memory">Java memory</string>
 	<string name="ais_load_data_descr">Replay AIS messages from a recorded file.</string>
 	<string name="map_rendering">Map rendering</string>
