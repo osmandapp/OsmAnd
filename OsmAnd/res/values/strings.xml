@@ -22,7 +22,7 @@
 	<string name="aidl_permissions_deny">Don\'t allow</string>
 	<string name="aidl_group_map_descr">Move the map, show points</string>
 	<string name="aidl_group_search_descr">Find places and addresses</string>
-	<string name="aidl_group_location_descr">Your position, destination and route</string>
+	<string name="aidl_group_location_descr">Your position, route and widget values</string>
 	<string name="aidl_group_navigation_descr">Start and stop navigation</string>
 	<string name="aidl_group_favorites_descr">Favorites and map markers</string>
 	<string name="aidl_group_tracks_view">Tracks: view</string>
@@ -33,6 +33,8 @@
 	<string name="aidl_group_recording_descr">Start, stop and view the current track</string>
 	<string name="aidl_group_notes">Notes</string>
 	<string name="aidl_group_notes_descr">Photo, audio and video notes</string>
+	<string name="aidl_group_screen">Screenshots</string>
+	<string name="aidl_group_screen_descr">Take pictures of the map screen</string>
 	<string name="aidl_group_settings_descr">Change settings and profiles</string>
 	<string name="aidl_group_system">System</string>
 	<string name="aidl_group_system_descr">Files, logs, fake location</string>
