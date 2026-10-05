@@ -157,11 +157,14 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			"Take a picture of the OsmAnd map screen as the user sees it: map, shown tracks, 3D and widgets. " +
 					"OsmAnd must be open on the phone. Use it to check the view or to make cards and pictures for the user.",
 			schema(
+				prop("map_only", "boolean", "Only the map with tracks and 3D, without widgets and buttons; default false"),
 				prop("max_width", "integer", "Max width in pixels, default 1080"),
 				prop("quality", "integer", "JPEG quality 1-100, default 80")
 			)
 		) { a ->
-			val shot = bridge.get().getMapScreenshot(MapScreenshotParams(a.optInt("max_width", 1080), a.optInt("quality", 80)))
+			val params = MapScreenshotParams(a.optInt("max_width", 1080), a.optInt("quality", 80))
+			params.isMapOnly = a.optBoolean("map_only", false)
+			val shot = bridge.get().getMapScreenshot(params)
 				?: throw ToolError(refused(SCREEN) + " OsmAnd also needs to be open with the map on the screen.")
 			ToolImage(shot.image, "Map screenshot ${shot.width}x${shot.height}")
 		},
@@ -289,9 +292,11 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		},
 		Tool(
 			"osmand_list_tracks",
-			"Find track files (GPX) on the phone with short statistics: activity, start, city, distance, " +
-					"moving time, climb, max speed. Filters can be combined; the reply lists the activities in use. " +
-					"Many recorded tracks have no activity, so check speed and elevation too.",
+			"Find track files (GPX) on the phone with their statistics from OsmAnd's track database: activity, " +
+					"start, city, distance, duration, moving time, climb, descent, elevation range, max and average speed. " +
+					"Filters can be combined, e.g. ski days: min_elevation_range_m 200, min_descent_m 500, " +
+					"min_max_speed_kmh 30, max_max_speed_kmh 80, max_avg_speed_kmh 30. The reply lists the activities in use; " +
+					"many recorded tracks have no activity, so filter by the numbers too.",
 			schema(
 				prop("query", "string", "Part of the file path, e.g. 2026-09 or Bukovel"),
 				prop("folder", "string", "Folder in the tracks folder, e.g. rec or import"),
@@ -301,6 +306,11 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 				prop("min_km", "number", "Min distance, km"),
 				prop("max_km", "number", "Max distance, km"),
 				prop("shown_only", "boolean", "Only tracks shown on the map"),
+				prop("min_descent_m", "number", "Min total descent, m"),
+				prop("min_elevation_range_m", "number", "Min difference between the highest and lowest point, m"),
+				prop("min_max_speed_kmh", "number", "Min of the track's max speed, km/h"),
+				prop("max_max_speed_kmh", "number", "Max of the track's max speed, km/h"),
+				prop("max_avg_speed_kmh", "number", "Upper limit of the average speed over the whole time, km/h"),
 				prop("sort", "string", "newest (default), oldest, longest or name"),
 				prop("offset", "integer", "Skip this many tracks, for paging"),
 				prop("limit", "integer", "Max tracks, default 20, max 100")
@@ -483,6 +493,10 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		p.setTimeRange(dayBound(a.optString("from"), false), dayBound(a.optString("to"), true))
 		p.setDistanceRange(a.optDouble("min_km", 0.0) * 1000, a.optDouble("max_km", 0.0) * 1000)
 		p.setShownOnly(a.optBoolean("shown_only", false))
+		p.setMinDescent(a.optDouble("min_descent_m", 0.0))
+		p.setMinElevationRange(a.optDouble("min_elevation_range_m", 0.0))
+		p.setMaxSpeedRange(kmh(a, "min_max_speed_kmh"), kmh(a, "max_max_speed_kmh"))
+		p.setMaxAvgSpeed(kmh(a, "max_avg_speed_kmh"))
 		p.setSort(a.optString("sort").ifEmpty { GpxSearchParams.SORT_NEWEST })
 		p.setPage(a.optInt("offset", 0), a.optInt("limit", 20).coerceIn(1, 100))
 		val result = bridge.get().searchGpx(p)
@@ -491,6 +505,8 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			.put("activities", JSONArray(result.activityTypes.orEmpty()))
 			.put("tracks", JSONArray(result.files.orEmpty().map { trackJson(it, false) }))
 	}
+
+	private fun kmh(a: JSONObject, name: String) = (a.optDouble(name, 0.0) / 3.6).toFloat()
 
 	/** Start of the day in the phone's time zone, or its last millisecond for [end]; 0 when empty. */
 	private fun dayBound(date: String, end: Boolean): Long {
@@ -518,17 +534,21 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		o.put("distance_km", round1(d.totalDistance / 1000.0))
 		if (d.timeSpan > 0) {
 			o.put("start", Instant.ofEpochMilli(d.startTime).atZone(ZoneId.systemDefault()).toLocalDateTime().toString())
-				.put("moving_min", d.timeMoving / 60000).put("speed_max_kmh", round1(d.maxSpeed * 3.6))
+				.put("duration_min", d.timeSpan / 60000).put("moving_min", d.timeMoving / 60000)
+				.put("speed_max_kmh", round1(d.maxSpeed * 3.6))
+				// over the whole time, stops and lifts included
+				.put("speed_avg_total_kmh", round1(d.totalDistance / (d.timeSpan / 1000.0) * 3.6))
 			if (full) {
 				o.put("end", Instant.ofEpochMilli(d.endTime).atZone(ZoneId.systemDefault()).toLocalDateTime().toString())
-					.put("time_span_min", d.timeSpan / 60000).put("distance_moving_km", round1(d.totalDistanceMoving / 1000.0))
-					.put("speed_avg_kmh", round1(d.avgSpeed * 3.6))
+					.put("distance_moving_km", round1(d.totalDistanceMoving / 1000.0))
+					.put("speed_avg_moving_kmh", round1(d.avgSpeed * 3.6))
 			}
 		}
 		if (d.maxElevation >= d.minElevation) {
-			o.put("climb_m", d.diffElevationUp.toInt())
+			o.put("climb_m", d.diffElevationUp.toInt()).put("descent_m", d.diffElevationDown.toInt())
+				.put("elevation_range_m", (d.maxElevation - d.minElevation).toInt())
 			if (full) {
-				o.put("descent_m", d.diffElevationDown.toInt()).put("elevation_min_m", d.minElevation.toInt())
+				o.put("elevation_min_m", d.minElevation.toInt())
 					.put("elevation_max_m", d.maxElevation.toInt()).put("elevation_avg_m", d.avgElevation.toInt())
 			}
 		}
