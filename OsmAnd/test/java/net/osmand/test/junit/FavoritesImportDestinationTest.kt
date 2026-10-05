@@ -126,7 +126,10 @@ class FavoritesImportDestinationTest {
 	private fun gpx(vararg points: WptPt) = GpxFile("test").apply { addPoints(points.toList()) }
 
 	private fun importNow(gpx: GpxFile, target: String?, fileName: String = "$prefix-file.gpx") {
-		TestImportTask(TestActivity(app), gpx, fileName, target).importNow()
+		// Activity's constructor creates a Handler, which needs a Looper; the test thread has none.
+		lateinit var activity: TestActivity
+		InstrumentationRegistry.getInstrumentation().runOnMainSync { activity = TestActivity(app) }
+		TestImportTask(activity, gpx, fileName, target).importNow()
 	}
 
 	private class TestActivity(private val app: OsmandApplication) : FragmentActivity() {
