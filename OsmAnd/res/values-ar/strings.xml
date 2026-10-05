@@ -5481,4 +5481,6 @@
     <string name="use_spatial_search">استخدام البحث النصي المكاني</string>
     <string name="use_spatial_search_description">استبدل واجهات برمجة تطبيقات البحث السريع القياسية بمحرك البحث النصي المكاني التجريبي.</string>
     <string name="city_type_boundary">منطقة</string>
+    <string name="trip_rec_start_from_notification">ابدأ من الإشعار</string>
+    <string name="trip_rec_start_from_notification_descr">يعرض إشعاراً يتضمن زراً لبدء تسجيل الرحلة. ويظل الإشعار معروضاً طوال فترة التسجيل.</string>
 </resources>
