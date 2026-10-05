@@ -31,6 +31,7 @@ import androidx.lifecycle.LifecycleOwner;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.auto.CarWidgetsPanel;
 import net.osmand.plus.auto.NavigationListener;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
@@ -78,10 +79,14 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	private final AlarmWidget alarmWidget;
 	private final SpeedometerWidget speedometerWidget;
+	private final CarWidgetsPanel widgetsPanel;
 	@DrawableRes
 	private int compassResId = R.drawable.ic_compass_niu;
 
 	private boolean panMode;
+
+	/** Compensates the 0.77 factor SpeedometerWidget applies for Android Auto. */
+	private static final float SPEEDOMETER_CAR_SCALE = 2f;
 
 	public NavigationScreen(
 			@NonNull CarContext carContext,
@@ -94,6 +99,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		OsmandApplication app = getApp();
 		alarmWidget = new AlarmWidget(app, null);
 		speedometerWidget = new SpeedometerWidget(app, ThemeUsageContext.MAP);
+		widgetsPanel = new CarWidgetsPanel(app);
 		updateUse3DButton();
 		getLifecycle().addObserver(this);
 	}
@@ -130,6 +136,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
 		super.onDestroy(owner);
+		widgetsPanel.clearWidgets();
 		adjustMapPosition(false);
 		getApp().getRoutingHelper().removeListener(this);
 		getLifecycle().removeObserver(this);
@@ -139,22 +146,44 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
 		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		if (surfaceRenderer != null) {
-			DrawSettings drawSettings = new DrawSettings(isNightMode(), false, surfaceRenderer.getDensity());
+			float density = surfaceRenderer.getDensity();
+			DrawSettings drawSettings = new DrawSettings(isNightMode(), false, density);
+			// SpeedometerWidget shrinks itself by 0.77 for Android Auto, which leaves it much
+			// smaller than the alarm widget next to it - unlike on the phone, where the two are
+			// about the same size. The alarm widget already has a car sized layout.
+			DrawSettings speedometerSettings = new DrawSettings(drawSettings.isNightMode(), false,
+					density * SPEEDOMETER_CAR_SCALE);
 
 			alarmWidget.updateInfo(drawSettings, true);
-			speedometerWidget.updateInfo(drawSettings, drawSettings.isNightMode());
+			speedometerWidget.updateInfo(speedometerSettings, drawSettings.isNightMode());
 
 			Bitmap alarmBitmap = alarmWidget.getWidgetBitmap();
 			Bitmap speedometerBitmap = speedometerWidget.getWidgetBitmap();
 
+			Rect area = visibleArea;
 			if (speedometerBitmap != null) {
-				canvas.drawBitmap(speedometerBitmap, visibleArea.right - speedometerBitmap.getWidth() - 10, visibleArea.top + 10, new Paint());
+				canvas.drawBitmap(speedometerBitmap, area.right - speedometerBitmap.getWidth() - 10, area.top + 10, new Paint());
 			}
 			if (alarmBitmap != null) {
 				int offset = speedometerBitmap != null ? speedometerBitmap.getWidth() : 0;
-				canvas.drawBitmap(alarmBitmap, visibleArea.right - alarmBitmap.getWidth() - 10 - offset, visibleArea.top + 10, new Paint());
+				canvas.drawBitmap(alarmBitmap, area.right - alarmBitmap.getWidth() - 10 - offset, area.top + 10, new Paint());
 			}
+			// The speedometer is always there while driving, so the panel simply starts below it.
+			// The alarm comes and goes, hiding the rows it covers keeps the panel from jumping.
+			float topOffset = speedometerBitmap != null ? speedometerBitmap.getHeight() + 20 : 10;
+			Rect alarmArea = null;
+			if (alarmBitmap != null) {
+				int offset = speedometerBitmap != null ? speedometerBitmap.getWidth() : 0;
+				alarmArea = new Rect(area.right - alarmBitmap.getWidth() - 10 - offset, area.top,
+						area.right - offset, area.top + alarmBitmap.getHeight() + 20);
+			}
+			widgetsPanel.drawWidgets(canvas, area, drawSettings, density, topOffset, alarmArea);
 		}
+	}
+
+	@Override
+	public boolean onSurfaceClick(float x, float y) {
+		return widgetsPanel.onSurfaceClick(x, y);
 	}
 
 	@Nullable
