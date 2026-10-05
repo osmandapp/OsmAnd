@@ -38,21 +38,18 @@ class MainActivity : AppCompatActivity() {
 		/** Groups the assistant asks for: OsmAnd preselects only the safe ones, the user turns on the rest. */
 		private val REQUESTED_GROUPS = arrayOf("map", "search", "location", "navigation", "favorites",
 			"tracks_view", "tracks_edit", "recording")
-		private const val COPIED_URL = "copied_url"
 		private const val CLIENT = "client"
 		private const val ACCESS_STATUS = "access_status"
 	}
 
 	private lateinit var mainSwitch: MaterialSwitch
 	private lateinit var status: TextView
-	private lateinit var addressBanner: MaterialCardView
 	private lateinit var keepScreenBanner: MaterialCardView
 	private lateinit var runModeFooter: TextView
-	private lateinit var addressBannerText: TextView
 	private lateinit var osmandName: TextView
 	private lateinit var accessStatus: TextView
 	private lateinit var accessFooter: TextView
-	private lateinit var adbCommand: TextView
+	private lateinit var setupCommand: TextView
 	private lateinit var clientWhere: TextView
 	private lateinit var clientConfig: TextView
 	private var client = AssistantClient.CLAUDE_CODE
@@ -126,8 +123,6 @@ class MainActivity : AppCompatActivity() {
 				restartServer()
 			}
 		}
-		addressBanner = findViewById(R.id.address_banner)
-		addressBannerText = findViewById(R.id.address_banner_text)
 
 		osmandName = findViewById(R.id.osmand_name)
 		findViewById<View>(R.id.osmand_row).setOnClickListener { chooseOsmand() }
@@ -137,8 +132,7 @@ class MainActivity : AppCompatActivity() {
 		findViewById<Button>(R.id.check).setOnClickListener { checkConnection() }
 
 		accessFooter = findViewById(R.id.access_footer)
-		adbCommand = findViewById(R.id.adb_command)
-		adbCommand.text = "adb forward tcp:${ConnectorSettings.PORT} tcp:${ConnectorSettings.PORT}"
+		setupCommand = findViewById(R.id.setup_command)
 		val toggle: MaterialButtonToggleGroup = findViewById(R.id.access_toggle)
 		toggle.check(if (ConnectorSettings.access(this) == Access.WIFI) R.id.access_wifi else R.id.access_usb)
 		toggle.addOnButtonCheckedListener { _, id, checked ->
@@ -195,21 +189,18 @@ class MainActivity : AppCompatActivity() {
 			"${ConnectorSettings.OSMAND_PACKAGES[pack]} ($pack)"
 		}
 
-		val usb = ConnectorSettings.access(this) == Access.USB
+		val access = ConnectorSettings.access(this)
+		val usb = access == Access.USB
 		accessFooter.setText(if (usb) R.string.usb_footer else R.string.wifi_footer)
-		adbCommand.visibility = if (usb) View.VISIBLE else View.GONE
-
-		val url = ConnectorSettings.url(this)
-		clientWhere.setText(client.whereId)
-		clientConfig.text = client.config(url, ConnectorSettings.token(this))
-
-		// the copied settings carry the phone's Wi-Fi address; when it changes they stop working
-		val copied = prefs().getString(COPIED_URL, null)
-		val changed = enabled && copied != null && copied != url
-		addressBanner.visibility = if (changed) View.VISIBLE else View.GONE
-		if (changed) {
-			addressBannerText.text = getString(R.string.address_changed, url.removeSuffix("/mcp").removePrefix("http://"))
+		// USB: forward the port; Wi-Fi: download the bridge that finds the phone by name
+		setupCommand.text = if (usb) {
+			"adb forward tcp:${ConnectorSettings.PORT} tcp:${ConnectorSettings.PORT}"
+		} else {
+			ConnectorSettings.bridgeDownload()
 		}
+
+		clientWhere.setText(client.whereId)
+		clientConfig.text = client.config(access, ConnectorSettings.url(this), ConnectorSettings.token(this))
 	}
 
 	private fun refreshLater() {
@@ -276,12 +267,9 @@ class MainActivity : AppCompatActivity() {
 
 	private fun copySettings() {
 		var text = clientConfig.text.toString()
-		if (ConnectorSettings.access(this) == Access.USB) {
-			text = adbCommand.text.toString() + "\n\n" + text
-		}
+		text = setupCommand.text.toString() + "\n\n" + text
 		val clipboard = getSystemService(ClipboardManager::class.java)
 		clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.app_name), text))
-		prefs().edit().putString(COPIED_URL, ConnectorSettings.url(this)).apply()
 		Toast.makeText(this, R.string.copied, Toast.LENGTH_SHORT).show()
 		refresh()
 	}
@@ -293,7 +281,6 @@ class MainActivity : AppCompatActivity() {
 			.setNegativeButton(R.string.cancel, null)
 			.setPositiveButton(R.string.reset) { _, _ ->
 				ConnectorSettings.newToken(this)
-				prefs().edit().remove(COPIED_URL).apply()
 				restartServer()
 			}
 			.show()

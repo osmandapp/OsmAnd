@@ -10,10 +10,12 @@ class McpHttpServer(
 	host: String,
 	port: Int,
 	private val token: String,
-	private val tools: OsmAndTools
+	private val tools: OsmAndTools,
+	private val bridgeScript: String?
 ) : NanoHTTPD(host, port) {
 
 	companion object {
+		const val BRIDGE_FILE = "osmand_mcp_bridge.py"
 		private const val TAG = "OsmAndAiConnector"
 		private val SUPPORTED_VERSIONS = listOf("2025-06-18", "2025-03-26", "2024-11-05")
 		private const val INSTRUCTIONS = "Controls the OsmAnd map app on an Android phone through OsmAnd's AIDL API. " +
@@ -21,6 +23,10 @@ class McpHttpServer(
 	}
 
 	override fun serve(session: IHTTPSession): Response {
+		// the computer downloads the stdio bridge once; it holds no key, so no authorization
+		if (session.uri == "/$BRIDGE_FILE" && session.method == Method.GET && bridgeScript != null) {
+			return newFixedLengthResponse(Response.Status.OK, "text/x-python", bridgeScript)
+		}
 		if (session.uri.trimEnd('/') != "/mcp") return text(Response.Status.NOT_FOUND, "Not found")
 		val origin = session.headers["origin"]
 		if (origin != null && !origin.matches(Regex("https?://(localhost|127\\.0\\.0\\.1)(:\\d+)?"))) {

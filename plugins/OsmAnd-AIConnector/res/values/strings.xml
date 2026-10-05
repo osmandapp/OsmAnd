@@ -33,9 +33,8 @@
 	<string name="step_connection">2. How the computer connects</string>
 	<string name="access_wifi">Wi-Fi</string>
 	<string name="access_usb">USB (adb)</string>
-	<string name="wifi_footer">The computer and the phone are on the same Wi-Fi. If the phone gets a new address, copy the settings again. Tip: reserve the phone\'s address in your router.</string>
+	<string name="wifi_footer">The computer and the phone are on the same Wi-Fi. The computer finds the phone by name, so a new address from the router changes nothing. Run this on the computer once to get the bridge (needs Python 3):</string>
 	<string name="usb_footer">The phone is connected with a USB cable and USB debugging is on. Run this on the computer once per connection:</string>
-	<string name="address_changed">The phone\'s address changed to %1$s. Copy the settings again and replace them in your assistant.</string>
 
 	<string name="step_assistant">3. Add to your AI assistant</string>
 	<string name="client_claude_code">Claude Code</string>

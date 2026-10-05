@@ -47,6 +47,7 @@ class ConnectorService : Service() {
 
 	private var server: McpHttpServer? = null
 	private var bridge: OsmAndBridge? = null
+	private var discovery: ConnectorDiscovery? = null
 
 	override fun onBind(intent: Intent?): IBinder? = null
 
@@ -68,7 +69,7 @@ class ConnectorService : Service() {
 		stopServer()
 		val b = OsmAndBridge(applicationContext, ConnectorSettings.osmandPackage(this))
 		val t = OsmAndTools(b)
-		val s = McpHttpServer(ConnectorSettings.bindHost(this), ConnectorSettings.PORT, ConnectorSettings.token(this), t)
+		val s = McpHttpServer(ConnectorSettings.bindHost(this), ConnectorSettings.PORT, ConnectorSettings.token(this), t, readBridgeScript())
 		try {
 			s.start(60_000, true)
 			bridge = b
@@ -76,13 +77,25 @@ class ConnectorService : Service() {
 			tools = t
 			runningUrl = ConnectorSettings.url(this)
 			Log.i(TAG, "MCP server on $runningUrl")
+			if (ConnectorSettings.access(this) == ConnectorSettings.Access.WIFI) {
+				discovery = ConnectorDiscovery(this).also { it.register(ConnectorSettings.PORT) }
+			}
 		} catch (e: Exception) {
 			runningUrl = null
 			Log.e(TAG, "Cannot start the server", e)
 		}
 	}
 
+	private fun readBridgeScript(): String? = try {
+		assets.open(McpHttpServer.BRIDGE_FILE).bufferedReader().use { it.readText() }
+	} catch (e: Exception) {
+		Log.e(TAG, "No bridge script in assets", e)
+		null
+	}
+
 	private fun stopServer() {
+		discovery?.unregister()
+		discovery = null
 		server?.stop()
 		bridge?.disconnect()
 		server = null

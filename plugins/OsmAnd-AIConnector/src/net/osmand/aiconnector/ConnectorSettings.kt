@@ -71,6 +71,15 @@ object ConnectorSettings {
 		.firstOrNull { it is Inet4Address && it.isSiteLocalAddress }
 		?.hostAddress
 
+	/** Where the computer keeps the stdio bridge that finds the phone on Wi-Fi by its DNS-SD name. */
+	const val BRIDGE_PATH = "~/.osmand/" + McpHttpServer.BRIDGE_FILE
+
+	/** Run once on the computer: downloads the bridge from the phone. */
+	fun bridgeDownload(): String {
+		val host = wifiAddress() ?: "PHONE_IP"
+		return "mkdir -p ~/.osmand && curl -o $BRIDGE_PATH http://$host:$PORT/${McpHttpServer.BRIDGE_FILE}"
+	}
+
 	/** The URL the computer uses: the phone's Wi-Fi address, or localhost through adb forward. */
 	fun url(ctx: Context): String {
 		val host = if (access(ctx) == Access.WIFI) wifiAddress() ?: "PHONE_IP" else "127.0.0.1"

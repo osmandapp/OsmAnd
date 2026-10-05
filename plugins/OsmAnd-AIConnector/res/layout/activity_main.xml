@@ -133,25 +133,6 @@
 					android:textColor="?attr/colorOnTertiaryContainer" />
 			</com.google.android.material.card.MaterialCardView>
 
-			<!-- shown when the phone's address differs from the one in the copied settings -->
-			<com.google.android.material.card.MaterialCardView
-				android:id="@+id/address_banner"
-				style="@style/Widget.Material3.CardView.Filled"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/gutter"
-				android:visibility="gone"
-				app:cardBackgroundColor="?attr/colorErrorContainer">
-
-				<TextView
-					android:id="@+id/address_banner_text"
-					style="@style/TextAppearance.Material3.BodyMedium"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:padding="@dimen/card_padding"
-					android:textColor="?attr/colorOnErrorContainer" />
-			</com.google.android.material.card.MaterialCardView>
-
 			<!-- 1. OsmAnd -->
 			<TextView
 				style="@style/TextAppearance.Material3.TitleSmall"
@@ -284,7 +265,7 @@
 				android:textColor="?attr/colorOnSurfaceVariant" />
 
 			<TextView
-				android:id="@+id/adb_command"
+				android:id="@+id/setup_command"
 				style="@style/CodeBlock"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
