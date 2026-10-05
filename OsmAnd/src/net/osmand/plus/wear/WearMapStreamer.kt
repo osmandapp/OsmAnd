@@ -67,8 +67,6 @@ class WearMapStreamer(private val app: OsmandApplication) {
 	@Volatile
 	private var appliedSeq = 0
 
-	/** What the last start asked for, so a change of renderer can reopen the same stream. */
-	private var openedFor: Opened? = null
 
 	/**
 	 * Woken when a gesture lands, rather than slept through. The pump spends most of its life
@@ -101,7 +99,6 @@ class WearMapStreamer(private val app: OsmandApplication) {
 			return
 		}
 		lastHeardFrom = SystemClock.elapsedRealtime()
-		openedFor = Opened(nodeId, width, height, density)
 		running = true
 		// Drawn wider than the watch so that a drag reveals map rather than black: the watch
 		// shows the middle and slides the surplus into view while the finger moves.
@@ -116,17 +113,15 @@ class WearMapStreamer(private val app: OsmandApplication) {
 	 * Swaps the renderer under a running stream. The choice lives on the phone because the
 	 * renderer does, and the watch only asks; changing it has to take effect now rather than
 	 * the next time the map screen is opened, or the setting cannot be compared.
+	 *
+	 * Only the preference is written here. Reopening the stream from this thread would have it
+	 * wait for the pump to finish while holding the very lock the pump needs to finish on, so
+	 * the pump picks the change up on its own next turn instead.
 	 */
 	fun setLegacyRenderer(legacy: Boolean) {
 		lastHeardFrom = SystemClock.elapsedRealtime()
-		if (legacyRenderer(app).get() == legacy) {
-			return
-		}
 		legacyRenderer(app).set(legacy)
-		val reopen = openedFor ?: return
-		if (running) {
-			start(reopen.nodeId, reopen.width, reopen.height, reopen.density)
-		}
+		nudge()
 	}
 
 	fun setPaused(value: Boolean) {
@@ -146,14 +141,8 @@ class WearMapStreamer(private val app: OsmandApplication) {
 
 	private fun pump(nodeId: String, width: Int, height: Int, density: Float) {
 		try {
-			val renderer = if (legacyRenderer(app).get()) {
-				WearLegacyMapSource(app)
-			} else {
-				WearGlMapSource(app)
-			}
-			if (!renderer.open(width, height, density)) {
-				return
-			}
+			var legacy = legacyRenderer(app).get()
+			var renderer = openSource(legacy, width, height, density) ?: return
 			source = renderer
 			openChannel(nodeId)
 			val stream = output ?: return
@@ -173,6 +162,13 @@ class WearMapStreamer(private val app: OsmandApplication) {
 				if (paused) {
 					idle(FRAME_INTERVAL_MS)
 					continue
+				}
+				if (legacyRenderer(app).get() != legacy) {
+					renderer.close()
+					legacy = legacyRenderer(app).get()
+					renderer = openSource(legacy, width, height, density) ?: return
+					source = renderer
+					lastSent = ByteArray(0)
 				}
 				if (renderer.drawn < awaitFrame) {
 					Thread.sleep(RENDER_INTERVAL_MS)
@@ -335,6 +331,13 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		running = false
 	}
 
+	private fun openSource(
+		legacy: Boolean, width: Int, height: Int, density: Float
+	): WearMapSource? {
+		val opened = if (legacy) WearLegacyMapSource(app) else WearGlMapSource(app)
+		return if (opened.open(width, height, density)) opened else null
+	}
+
 	private fun idle(millis: Long) {
 		synchronized(gestureArrived) { gestureArrived.wait(millis) }
 	}
@@ -342,9 +345,6 @@ class WearMapStreamer(private val app: OsmandApplication) {
 	private fun nudge() {
 		synchronized(gestureArrived) { gestureArrived.notifyAll() }
 	}
-
-	private data class Opened(
-		val nodeId: String, val width: Int, val height: Int, val density: Float)
 
 	companion object {
 

@@ -6,6 +6,11 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -33,6 +38,12 @@ fun SettingsScreen(
 	legacyMapRenderer: Boolean,
 	onSelectMapRenderer: (legacy: Boolean) -> Unit
 ) {
+	// Shown as soon as it is tapped, not when the phone has confirmed it. The phone is a second
+	// or more away, and a setting that sits unchanged that long reads as one that does nothing.
+	// What the phone reports still wins whenever it speaks.
+	var chosen by remember { mutableStateOf(legacyMapRenderer) }
+	LaunchedEffect(legacyMapRenderer) { chosen = legacyMapRenderer }
+
 	val listState = rememberScalingLazyListState()
 
 	ScreenScaffold(scrollState = listState) {
@@ -47,16 +58,22 @@ fun SettingsScreen(
 				RendererChoice(
 					title = stringResource(R.string.wear_map_renderer_legacy),
 					hint = stringResource(R.string.wear_map_renderer_legacy_descr),
-					selected = legacyMapRenderer,
-					onClick = { onSelectMapRenderer(true) }
+					selected = chosen,
+					onClick = {
+						chosen = true
+						onSelectMapRenderer(true)
+					}
 				)
 			}
 			item {
 				RendererChoice(
 					title = stringResource(R.string.wear_map_renderer_opengl),
 					hint = stringResource(R.string.wear_map_renderer_opengl_descr),
-					selected = !legacyMapRenderer,
-					onClick = { onSelectMapRenderer(false) }
+					selected = !chosen,
+					onClick = {
+						chosen = false
+						onSelectMapRenderer(false)
+					}
 				)
 			}
 		}

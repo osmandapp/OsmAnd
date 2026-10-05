@@ -387,8 +387,14 @@ private const val CHEQUER_SIZE_PX = 24f
 
 private const val CHEQUER_CONTRAST = 0.12f
 
-/** Matches PagerDefaults.LeftEdgeZoneFraction, so both screens feel the same at the edge. */
-private const val LEFT_EDGE_FRACTION = 0.15f
+/**
+ * How much of the left edge is left to the swipe that leaves this screen.
+ *
+ * Narrower than the system's own dismiss zone, which is 15%: a map is dragged across its whole
+ * width, and giving a sixth of the screen to leaving it meant a drag started on the left took
+ * you out of the map instead. Dismissing still works, it just wants to start closer to the edge.
+ */
+private const val LEFT_EDGE_FRACTION = 0.08f
 
 /** A tenth of a zoom level per detent: a whole one per click overshoots far past the eye. */
 private val BEZEL_STEP = 2f.pow(0.1f)
