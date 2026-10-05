@@ -1,0 +1,5 @@
+// aprs-driver sources are compiled into :OsmAnd via sourceSets in build-common.gradle.
+// Package: net.osmand.plus.plugins.aprsdriver
+//
+// Depends on aprs-core at runtime (AprsPlugin, ingestAx25Frame). Requires USB host permission
+// and the AprsSdrReplayReceiver entry in OsmAnd/AndroidManifest.xml.
