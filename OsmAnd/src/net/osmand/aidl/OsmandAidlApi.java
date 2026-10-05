@@ -3163,11 +3163,22 @@ public class OsmandAidlApi {
 				a.getTimeSpan(), a.getTimeMoving(), a.getTotalDistanceMoving(), a.getDiffElevationUp(), a.getDiffElevationDown(),
 				a.getAvgElevation(), a.getMinElevation(), a.getMaxElevation(), a.getMinSpeed(), a.getMaxSpeed(), a.getAvgSpeed(),
 				a.getPoints(), a.getWptPoints(), a.getWptCategoryNamesSet());
-		details.setHeartRate(a.getAvgSensorHr(), a.getMinSensorHr(), a.getMaxSensorHr());
-		details.setSensorSpeed(a.getAvgSensorSpeed(), a.getMaxSensorSpeed());
-		details.setPower(a.getAvgSensorPower(), a.getMaxSensorPower());
-		details.setCadence(a.getAvgSensorCadence(), a.getMaxSensorCadence());
-		details.setTemperature(a.getAvgSensorTemperature(), a.getMaxSensorTemperature());
+		// the analysis has -1 averages without a sensor, the API has 0
+		if (a.getMaxSensorHr() > 0) {
+			details.setHeartRate(a.getAvgSensorHr(), a.getMinSensorHr(), a.getMaxSensorHr());
+		}
+		if (a.getMaxSensorSpeed() > 0) {
+			details.setSensorSpeed(a.getAvgSensorSpeed(), a.getMaxSensorSpeed());
+		}
+		if (a.getMaxSensorPower() > 0) {
+			details.setPower(a.getAvgSensorPower(), a.getMaxSensorPower());
+		}
+		if (a.getMaxSensorCadence() > 0) {
+			details.setCadence(a.getAvgSensorCadence(), a.getMaxSensorCadence());
+		}
+		if (a.getMaxSensorTemperature() != 0 || a.getAvgSensorTemperature() != -1) {
+			details.setTemperature(a.getAvgSensorTemperature(), a.getMaxSensorTemperature());
+		}
 		return details;
 	}
 
