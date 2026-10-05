@@ -287,17 +287,41 @@ public class AGpxFileDetails extends AidlParams {
 		bundle.putInt("points", points);
 		bundle.putInt("wptPoints", wptPoints);
 		bundle.putStringArrayList("wptCategoryNames", wptCategoryNames);
-		bundle.putFloat("avgHeartRate", avgHeartRate);
-		bundle.putInt("minHeartRate", minHeartRate);
-		bundle.putInt("maxHeartRate", maxHeartRate);
-		bundle.putFloat("avgSensorSpeed", avgSensorSpeed);
-		bundle.putFloat("maxSensorSpeed", maxSensorSpeed);
-		bundle.putFloat("avgPower", avgPower);
-		bundle.putInt("maxPower", maxPower);
-		bundle.putFloat("avgCadence", avgCadence);
-		bundle.putFloat("maxCadence", maxCadence);
-		bundle.putFloat("avgTemperature", avgTemperature);
-		bundle.putInt("maxTemperature", maxTemperature);
+		// sensor values go only when present: a track list is one binder transaction (~1 MB),
+		// readers default to 0
+		if (avgHeartRate != 0) {
+			bundle.putFloat("avgHeartRate", avgHeartRate);
+		}
+		if (minHeartRate != 0) {
+			bundle.putInt("minHeartRate", minHeartRate);
+		}
+		if (maxHeartRate != 0) {
+			bundle.putInt("maxHeartRate", maxHeartRate);
+		}
+		if (avgSensorSpeed != 0) {
+			bundle.putFloat("avgSensorSpeed", avgSensorSpeed);
+		}
+		if (maxSensorSpeed != 0) {
+			bundle.putFloat("maxSensorSpeed", maxSensorSpeed);
+		}
+		if (avgPower != 0) {
+			bundle.putFloat("avgPower", avgPower);
+		}
+		if (maxPower != 0) {
+			bundle.putInt("maxPower", maxPower);
+		}
+		if (avgCadence != 0) {
+			bundle.putFloat("avgCadence", avgCadence);
+		}
+		if (maxCadence != 0) {
+			bundle.putFloat("maxCadence", maxCadence);
+		}
+		if (avgTemperature != 0) {
+			bundle.putFloat("avgTemperature", avgTemperature);
+		}
+		if (maxTemperature != 0) {
+			bundle.putInt("maxTemperature", maxTemperature);
+		}
 	}
 
 	@Override

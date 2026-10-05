@@ -131,10 +131,17 @@ public class AGpxFile extends AidlParams {
 		bundle.putBoolean("active", active);
 		bundle.putParcelable("details", details);
 		bundle.putString("color", color);
-		bundle.putString("activityType", activityType);
-		bundle.putString("nearestCityName", nearestCityName);
-		bundle.putDouble("startLatitude", startLatitude);
-		bundle.putDouble("startLongitude", startLongitude);
+		// new fields go only when present: a track list is one binder transaction (~1 MB)
+		if (activityType != null && !activityType.isEmpty()) {
+			bundle.putString("activityType", activityType);
+		}
+		if (nearestCityName != null && !nearestCityName.isEmpty()) {
+			bundle.putString("nearestCityName", nearestCityName);
+		}
+		if (!Double.isNaN(startLatitude) && !Double.isNaN(startLongitude)) {
+			bundle.putDouble("startLatitude", startLatitude);
+			bundle.putDouble("startLongitude", startLongitude);
+		}
 	}
 
 	@Override
