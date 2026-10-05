@@ -9,9 +9,12 @@ import net.osmand.aidlapi.customization.SelectProfileParams
 import net.osmand.aidlapi.favorite.AFavorite
 import net.osmand.aidlapi.favorite.AddFavoriteParams
 import net.osmand.aidlapi.gpx.AGpxBitmap
+import net.osmand.aidlapi.gpx.AGpxFile
 import net.osmand.aidlapi.gpx.ASelectedGpxFile
 import net.osmand.aidlapi.gpx.HideGpxParams
 import net.osmand.aidlapi.gpx.ShowGpxParams
+import net.osmand.aidlapi.gpx.StartGpxRecordingParams
+import net.osmand.aidlapi.gpx.StopGpxRecordingParams
 import net.osmand.aidlapi.logcat.OnLogcatMessageParams
 import net.osmand.aidlapi.map.SetMapLocationParams
 import net.osmand.aidlapi.navigation.ADirectionInfo
@@ -40,9 +43,16 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		val run: (JSONObject) -> Any
 	)
 
-	private val refused = "OsmAnd refused the call. Most likely OsmAnd AI Connector has no permission for it: " +
-			"open OsmAnd > Menu > Plugins > OsmAnd AI Connector and turn on the needed group (Navigation, Favorites, " +
-			"Tracks...), or tap Allow access in the AI Connector app. The arguments may also be invalid."
+	/** The OsmAnd app the connector drives, as the user sees it in the launcher. */
+	private fun osmandApp(): String {
+		val pack = bridge.boundPackage ?: bridge.preferredPackage
+		return "${ConnectorSettings.OSMAND_PACKAGES[pack] ?: "OsmAnd"} ($pack)"
+	}
+
+	private fun refused(group: String) = "OsmAnd refused the call. It needs the '$group' permission group for " +
+			"OsmAnd AI Connector in ${osmandApp()}: ask the user to open that app > Menu > Plugins > " +
+			"OsmAnd AI Connector and turn on '$group'. Each OsmAnd app on the phone keeps its own permissions. " +
+			"The arguments may also be invalid."
 
 	private val tools = listOf(
 		Tool(
@@ -60,7 +70,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			"Switch the current OsmAnd profile. Use a key from osmand_get_profiles, e.g. default (Browse map), car, bicycle, pedestrian, public_transport.",
 			schema(prop("profile", "string", "Profile key"), required = listOf("profile"))
 		) { a ->
-			check(bridge.get().selectProfile(SelectProfileParams(a.getString("profile"))))
+			check(SETTINGS, bridge.get().selectProfile(SelectProfileParams(a.getString("profile"))))
 			"Profile switched to ${a.getString("profile")}"
 		},
 		Tool(
@@ -95,7 +105,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 				required = listOf("lat", "lon")
 			)
 		) { a ->
-			check(
+			check(MAP,
 				bridge.get().setMapLocation(
 					SetMapLocationParams(
 						a.getDouble("lat"), a.getDouble("lon"), a.optInt("zoom", 0), Float.NaN,
@@ -131,7 +141,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			)
 		) { a ->
 			val hasStart = a.has("start_lat") && a.has("start_lon")
-			check(
+			check(NAVIGATION,
 				bridge.get().navigate(
 					NavigateParams(
 						if (hasStart) "Start" else null,
@@ -155,7 +165,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 				required = listOf("query", "search_lat", "search_lon")
 			)
 		) { a ->
-			check(
+			check(NAVIGATION,
 				bridge.get().navigateSearch(
 					NavigateSearchParams(
 						null, 0.0, 0.0, a.getString("query"),
@@ -167,7 +177,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			"Navigation search requested"
 		},
 		Tool("osmand_stop_navigation", "Stop the current navigation.", schema()) {
-			check(bridge.get().stopNavigation(StopNavigationParams()))
+			check(NAVIGATION, bridge.get().stopNavigation(StopNavigationParams()))
 			"Navigation stopped"
 		},
 		Tool(
@@ -187,7 +197,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 				a.getDouble("lat"), a.getDouble("lon"), a.getString("name"), a.optString("description", ""),
 				"", a.optString("category", "MCP"), a.optString("color", "red"), true
 			)
-			check(bridge.get().addFavorite(AddFavoriteParams(fav)))
+			check(FAVORITES, bridge.get().addFavorite(AddFavoriteParams(fav)))
 			"Favorite added"
 		},
 		Tool(
@@ -195,7 +205,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			"Redraw the map, e.g. after changing settings that a layer does not pick up by itself.",
 			schema()
 		) {
-			check(bridge.get().refreshMap())
+			check(MAP, bridge.get().refreshMap())
 			"Map refreshed"
 		},
 		Tool(
@@ -204,7 +214,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			schema()
 		) {
 			val list = ArrayList<ASelectedGpxFile>()
-			check(bridge.get().getActiveGpx(list))
+			check(TRACKS_VIEW, bridge.get().getActiveGpx(list))
 			JSONArray(list.map {
 				JSONObject().put("file", it.fileName).put("size", it.fileSize).put("modified", it.modifiedTime)
 			})
@@ -214,7 +224,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			"Show a track on the map. File name relative to the tracks folder, e.g. rec/2026-09-27_13-43_Sun.gpx or a file from tracks/import.",
 			schema(prop("file", "string", "Track file name"), required = listOf("file"))
 		) { a ->
-			check(bridge.get().showGpx(ShowGpxParams(a.getString("file"))))
+			check(TRACKS_EDIT, bridge.get().showGpx(ShowGpxParams(a.getString("file"))))
 			"Track shown"
 		},
 		Tool(
@@ -227,9 +237,34 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			}
 			"Track hidden"
 		},
+		Tool(
+			"osmand_list_tracks",
+			"List track files (GPX) on the phone, newest first: file name relative to the tracks folder " +
+					"(use it with osmand_show_gpx), size, modified time, whether it is shown, distance and points.",
+			schema(
+				prop("query", "string", "Optional part of the file name, e.g. 2026-09 or rec/"),
+				prop("limit", "integer", "Max tracks, default 50")
+			)
+		) { a -> listTracks(a) },
+		Tool(
+			"osmand_start_recording",
+			"Start trip recording (a new GPX track from the phone's location).",
+			schema()
+		) {
+			if (!bridge.get().startGpxRecording(StartGpxRecordingParams())) throw ToolError(recordingRefused())
+			"Trip recording started"
+		},
+		Tool(
+			"osmand_stop_recording",
+			"Stop trip recording. The track is saved to the rec folder.",
+			schema()
+		) {
+			if (!bridge.get().stopGpxRecording(StopGpxRecordingParams())) throw ToolError(recordingRefused())
+			"Trip recording stopped"
+		},
 		Tool("osmand_list_quick_actions", "List configured quick actions with their numbers.", schema()) {
 			val list = ArrayList<QuickActionInfoParams>()
-			check(bridge.get().getQuickActionsInfo(list))
+			check(SETTINGS, bridge.get().getQuickActionsInfo(list))
 			JSONArray(list.mapIndexed { i, q ->
 				JSONObject().put("number", i + 1).put("id", q.actionId).put("name", q.name)
 					.put("type", q.actionType).put("params", q.params)
@@ -240,7 +275,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			"Run a quick action by its number from osmand_list_quick_actions.",
 			schema(prop("number", "integer", "Quick action number"), required = listOf("number"))
 		) { a ->
-			check(bridge.get().executeQuickAction(QuickActionParams(a.getInt("number"))))
+			check(SETTINGS, bridge.get().executeQuickAction(QuickActionParams(a.getInt("number"))))
 			"Quick action executed"
 		}
 	).associateBy { it.name }
@@ -269,8 +304,8 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		.put("content", JSONArray().put(JSONObject().put("type", "text").put("text", text)))
 		.put("isError", isError)
 
-	private fun check(ok: Boolean) {
-		if (!ok) throw ToolError(refused)
+	private fun check(group: String, ok: Boolean) {
+		if (!ok) throw ToolError(refused(group))
 	}
 
 	private fun readPref(id: String, profile: String?): String? {
@@ -281,7 +316,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 
 	private fun profiles(): JSONArray {
 		val list = ArrayList<AProfile>()
-		check(bridge.get().getProfiles(list))
+		check(SETTINGS, bridge.get().getProfiles(list))
 		return JSONArray(list.map {
 			JSONObject().put("key", it.stringKey).put("name", it.userProfileName).put("parent", it.parent)
 				.put("routing_profile", it.routingProfile)
@@ -293,11 +328,17 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		val o = JSONObject()
 			.put("package", bridge.boundPackage)
 			.put("installed", JSONArray(bridge.installedPackages()))
+			.put("osmand_app", osmandApp())
 		// refreshMap is in the Map group that every connected app gets by default
 		if (!api.refreshMap()) {
-			o.put("enabled", false).put("hint", refused)
+			o.put("enabled", false).put("hint", refused(MAP))
 			return o
 		}
+		// groups that have a call without side effects; the others are checked when a tool is called
+		o.put("groups", JSONObject()
+			.put(MAP, true)
+			.put(SETTINGS, readPref("application_mode", null) != null)
+			.put(TRACKS_VIEW, api.getActiveGpx(ArrayList())))
 		o.put("enabled", true)
 			.put("screen_open", api.isFragmentOpen)
 			.put("context_menu_open", api.isMenuOpen)
@@ -305,11 +346,30 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		val current = readPref("application_mode", null)
 		if (current == null) {
 			return o.put("settings_access", false)
-				.put("settings_hint", "Profiles and settings need the Settings group in OsmAnd > Menu > Plugins > OsmAnd AI Connector.")
+				.put("settings_hint", refused(SETTINGS))
 		}
 		return o.put("settings_access", true)
 			.put("current_profile", current)
 			.put("profiles", profiles())
+	}
+
+	// OsmAnd also refuses recording when its Trip recording plugin is off
+	private fun recordingRefused() = refused(RECORDING) +
+			" Recording also needs the Trip recording plugin turned on in OsmAnd > Menu > Plugins."
+
+	private fun listTracks(a: JSONObject): JSONObject {
+		val files = ArrayList<AGpxFile>()
+		check(TRACKS_VIEW, bridge.get().getImportedGpx(files))
+		val query = a.optString("query").lowercase()
+		val found = files.filter { query.isEmpty() || (it.relativePath ?: it.fileName).lowercase().contains(query) }
+			.sortedByDescending { it.modifiedTime }
+		val limit = a.optInt("limit", 50)
+		return JSONObject().put("total", files.size).put("found", found.size).put("tracks", JSONArray(found.take(limit).map {
+			JSONObject().put("file", it.relativePath ?: it.fileName).put("size", it.fileSize)
+				.put("modified", it.modifiedTime).put("shown", it.isActive).apply {
+					it.details?.let { d -> put("distance_m", d.totalDistance.toInt()).put("points", d.points) }
+				}
+		}))
 	}
 
 	private fun getPreferences(a: JSONObject): JSONObject {
@@ -364,7 +424,7 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			override fun onLogcatMessage(params: OnLogcatMessageParams?) {}
 		}
 		val p = SearchParams(a.getString("query"), type, a.getDouble("lat"), a.getDouble("lon"), 1, limit)
-		check(bridge.get().search(p, callback))
+		check(SEARCH, bridge.get().search(p, callback))
 		if (!latch.await(30, TimeUnit.SECONDS)) throw ToolError("Search timed out after 30 s")
 		return JSONArray(results.take(limit).map {
 			JSONObject().put("name", it.localName).put("type", it.localTypeName)
@@ -383,6 +443,15 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			.put("properties", JSONObject().apply { props.forEach { put(it.first, it.second) } })
 			.put("required", JSONArray(required))
 }
+
+private const val MAP = "Map"
+private const val SEARCH = "Search"
+private const val NAVIGATION = "Navigation"
+private const val FAVORITES = "Favorites"
+private const val TRACKS_VIEW = "Tracks: view"
+private const val TRACKS_EDIT = "Tracks: edit"
+private const val RECORDING = "Recording"
+private const val SETTINGS = "Settings"
 
 private const val PREF_HINT = "Common ids: application_mode (current profile, global), daynight_mode (DAY, NIGHT, AUTO, SENSOR, APP_THEME), " +
 		"renderer (map style, e.g. OsmAnd, Touring view (contrast and details), Topo, UniRS, Nautical, Ski map, Winter and ski, Offroad, Desert), " +
