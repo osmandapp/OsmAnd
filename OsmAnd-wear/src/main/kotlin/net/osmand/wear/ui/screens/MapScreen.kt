@@ -257,7 +257,7 @@ fun MapScreen(
 						val detent = if (event.verticalScrollPixels > 0) 1f / BEZEL_STEP else BEZEL_STEP
 						gesturing = true
 						pendingZoom *= detent
-						shown = shown.scaledBy(detent, width, height)
+						shown = shown.scaledBy(detent)
 						true
 					}
 					.pointerInput(Unit) {
@@ -289,7 +289,7 @@ fun MapScreen(
 									val panned = event.calculatePan()
 									if (zoomed != 1f || panned != Offset.Zero) {
 										pinch *= zoomed
-										shown = shown.movedBy(panned, zoomed, width, height)
+										shown = shown.movedBy(panned, zoomed)
 										moved = true
 										event.changes.forEach {
 											if (it.positionChanged()) {
@@ -334,9 +334,11 @@ fun MapScreen(
 /**
  * A frame together with the gesture being shown on top of it while the phone catches up.
  *
- * Sliding further than the frame's surplus reaches, or shrinking past it, would show what the
- * phone never drew, so both stop at its edge. The finger may carry on past that, but what is
- * asked of the phone is what was shown — otherwise the map jumps the rest of the way on release.
+ * The gesture is not held back at the edge of what the phone drew. Stopping there reads as the
+ * map being broken, where empty background says plainly that this part has not been drawn yet;
+ * and what the phone is asked for stays exactly what the eye was shown, so nothing jumps once
+ * the finger lifts. The surplus the phone draws decides how often that background is seen at
+ * all, not how far a drag may go.
  */
 private data class Shown(
 	val frame: ImageBitmap? = null,
@@ -344,25 +346,9 @@ private data class Shown(
 	val scale: Float = 1f
 ) {
 
-	fun movedBy(pan: Offset, zoom: Float, width: Int, height: Int): Shown =
-		withTransform(drag + pan, scale * zoom, width, height)
+	fun movedBy(pan: Offset, zoom: Float): Shown = copy(drag = drag + pan, scale = scale * zoom)
 
-	fun scaledBy(zoom: Float, width: Int, height: Int): Shown =
-		withTransform(drag, scale * zoom, width, height)
-
-	private fun withTransform(wanted: Offset, zoom: Float, width: Int, height: Int): Shown {
-		val held = frame ?: return this
-		val shown = zoom.coerceAtLeast(width / held.width.toFloat())
-		val slackX = ((held.width * shown - width) / 2f).coerceAtLeast(0f)
-		val slackY = ((held.height * shown - height) / 2f).coerceAtLeast(0f)
-		return copy(
-			drag = Offset(
-				wanted.x.coerceIn(-slackX, slackX),
-				wanted.y.coerceIn(-slackY, slackY)
-			),
-			scale = shown
-		)
-	}
+	fun scaledBy(zoom: Float): Shown = copy(scale = scale * zoom)
 }
 
 /** Matches PagerDefaults.LeftEdgeZoneFraction, so both screens feel the same at the edge. */
