@@ -30,6 +30,9 @@ public class SpatialSearchRanking {
 	public double wRatingPlace = 2.0; // a settlement is looked for from anywhere: pref-0127
 	public double wNear = 2.0;
 	public double wExactName = 1.0; // the whole name IS the query: pref-0063, pref-0104
+	/** "4 av" is 4th Avenue: a house whose street the query named by its kind only loses this much, so a
+	 *  house 2 km off falls under the street 6 km off (pref-0136) while the house at the point stays first */
+	public double wKindOnly = 1.0;
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
@@ -53,8 +56,13 @@ public class SpatialSearchRanking {
 	private static final double TYPE_STREET = 0.55; // above a stop, below a village: pref-0106
 	private static final double TYPE_POI = 0.50;
 	private static final double TYPE_POSTCODE = 0.40;
-	private static final double TYPE_STOP = 0.35;
-	private static final double TYPE_INFRASTRUCTURE = 0.10;
+	private static final double TYPE_NAME_ALIKE = 0.35;
+	private static final double TYPE_NAME_ALIKE_PART = 0.10;
+
+	/** distance from which a town or a village, named by a piece of its name, starts to lose its weight */
+	private static final double PLACE_FAR_FROM_KM = 60;
+	/** ... and at which, past that, it keeps half of it */
+	private static final double PLACE_FAR_HALF_KM = 150;
 
 	/** elo above the floor at which fame alone makes an object a landmark: pref-0134 */
 	private static final double LANDMARK_RATING = 1000;
@@ -62,23 +70,27 @@ public class SpatialSearchRanking {
 	 *  the answer to "christian church": pref-0086 */
 	private static final double LANDMARK_NEAR = 0.25;
 
-	/** the parts a stop or a station is stored as - deduplication unites these across 400 m */
-	static final Set<String> SPREAD_SUBTYPES = new HashSet<>(Arrays.asList(
-			"public_transport_platform", "public_transport_stop_position", "subway_entrance",
-			"elevator", "ticket_validator", "entrance", "level_crossing", "motorway_junction"));
+	/**
+	 * Named alike the place they stand at - a stop, a bike dock, a car park called after the street, the square or the
+	 * station. Searched by name, such an object is absorbed by the same-named place within 400 m and its weight keeps
+	 * that place above it; searched by kind ("parking") each one is a row of its own.
+	 */
+	static final Set<String> NAME_ALIKE_SUBTYPES = new HashSet<>(Arrays.asList(
+			"bus_stop", "tram_stop", "railway_halt", "taxi", "bicycle_rental", "parking", "parking_entrance",
+			"bicycle_parking"));
 
-	/** street furniture: subordinate too, but each one is an object of its own: pref-0092 */
-	static final Set<String> FURNITURE_SUBTYPES = new HashSet<>(Arrays.asList(
+	/** pieces of what they are named after: the parts a stop or a station is stored as (a metro platform with wi-fi is
+	 *  stored as internet access too), the parts and the signs of a street, street furniture */
+	static final Set<String> NAME_ALIKE_PART_SUBTYPES = new HashSet<>(Arrays.asList(
+			"public_transport_platform", "public_transport_stop_position", "subway_entrance", "elevator",
+			"ticket_validator", "entrance", "level_crossing", "motorway_junction", "internet_access_yes",
+			"bridge", "tunnel", "viaduct", "ford", "highway_steps", "traffic_signals",
+			"traffic_calming_bump", "traffic_calming_hump", "traffic_calming_cushion", "traffic_calming_chicane",
+			"traffic_calming_rumble_strip", "traffic_calming_table", "traffic_calming_choker", "traffic_calming_island",
+			"hazard_children", "hazard_school_zone", "hazard_animal_crossing", "hazard_pedestrians", "hazard_cyclists",
+			"hazard_curve", "hazard_curves", "hazard_dangerous_junction", "hazard_slippery_road",
 			"boundary_stone", "street_lamp", "waste_basket", "bench", "vending_machine"));
 
-	/** nodes that describe a place rather than being it - a station has a dozen of them */
-	static final Set<String> INFRASTRUCTURE_SUBTYPES = new HashSet<>(SPREAD_SUBTYPES);
-	static {
-		INFRASTRUCTURE_SUBTYPES.addAll(FURNITURE_SUBTYPES);
-	}
-
-	static final Set<String> STOP_SUBTYPES = new HashSet<>(Arrays.asList(
-			"bus_stop", "tram_stop", "railway_halt", "taxi"));
 
 	static final Set<String> ADMIN_SUBTYPES = new HashSet<>(Arrays.asList(
 			"country", "state", "region", "province", "county"));
@@ -101,10 +113,9 @@ public class SpatialSearchRanking {
 			return false;
 		}
 		String subType = a.getSubType();
-		return subType != null
-				&& (INFRASTRUCTURE_SUBTYPES.contains(subType) || STOP_SUBTYPES.contains(subType));
+		return subType != null && (NAME_ALIKE_SUBTYPES.contains(subType) || NAME_ALIKE_PART_SUBTYPES.contains(subType));
 	}
-
+	
 	/** higher is better; only meaningful within one bucket of the structural tiers */
 	public double score(SpatialSearchResult r, LatLon center) {
 		SpatialSearchResultRef head = r.getFirstRef();
@@ -116,11 +127,39 @@ public class SpatialSearchRanking {
 		// undimmed by distance for what is looked for by name from anywhere: pref-0125, pref-0127
 		double exact = name == NAME_EXACT && isNotable(r)
 				? wExactName * (isPlace(head) || isProminent(r) ? 1 : near) : 0;
+		double type = Math.max(typeScore(head), landmarkByRating(r, near));
+		double rating = (isPlace(head) ? wRatingPlace : wRating) * ratingScore(r);
+		double far = farPlaceFactor(r, head, name, center);
 		return wName * name * near
-				+ wType * Math.max(typeScore(head), landmarkByRating(r, near))
-				+ (isPlace(head) ? wRatingPlace : wRating) * ratingScore(r)
+				+ wType * type * far
+				+ rating * far
 				+ wNear * near
-				+ exact;
+				+ exact
+				- (kindOnlyAddress(r) ? wKindOnly : 0);
+	}
+
+	/** a city is looked for by name from anywhere; a town, a village, a hamlet or an area named by a piece
+	 *  of its name is not: "farm" in Amsterdam is not 八五九农场 7900 km away, and neither is an unrated
+	 *  airstrip or park named "... Farm" 230 km off, whatever its landmark type. Within PLACE_FAR_FROM_KM
+	 *  nothing changes - "rifugio" still finds the village 128 km off: pref-0045, pref-0138 */
+	private double farPlaceFactor(SpatialSearchResult r, SpatialSearchResultRef head, double name, LatLon center) {
+		// an exact place name is no evidence when the query is the name of a kind: "farm" is not the town Farm
+		if (center == null || isCity(head) || name >= NAME_EXACT && !queryIsKind(head)) {
+			return 1;
+		}
+		if (!isPlace(head) && (typeScore(head) != TYPE_LANDMARK || isProminent(r))) {
+			return 1;
+		}
+		double km = SpatialSearchResult.getDistance(r, center) / 1000.0;
+		return km <= PLACE_FAR_FROM_KM ? 1 : 1.0 / (1.0 + (km - PLACE_FAR_FROM_KM) / PLACE_FAR_HALF_KM);
+	}
+
+	/** a city by its own place type, however the map stores it - the address index writes towns as cities too */
+	private boolean isCity(SpatialSearchResultRef ref) {
+		if (ref.atom.object instanceof Amenity a) {
+			return "city".equals(a.getSubType());
+		}
+		return ref.atom.object instanceof City c && c.getType() == City.CityType.CITY;
 	}
 
 	/** did the query name this object, or only the word for its kind? */
@@ -158,7 +197,7 @@ public class SpatialSearchRanking {
 		return best;
 	}
 
-	private static double compareToName(String rawName, String queried) {
+	private double compareToName(String rawName, String queried) {
 		String name = normalizeName(rawName);
 		if (name.isEmpty()) {
 			return NAME_OTHER;
@@ -207,11 +246,11 @@ public class SpatialSearchRanking {
 				if (PLACE_SUBTYPES.contains(subType)) {
 					return "city".equals(subType) || "town".equals(subType) ? TYPE_CITY : TYPE_VILLAGE;
 				}
-				if (INFRASTRUCTURE_SUBTYPES.contains(subType)) {
-					return TYPE_INFRASTRUCTURE;
+				if (NAME_ALIKE_PART_SUBTYPES.contains(subType)) {
+					return TYPE_NAME_ALIKE_PART;
 				}
-				if (STOP_SUBTYPES.contains(subType)) {
-					return TYPE_STOP;
+				if (NAME_ALIKE_SUBTYPES.contains(subType)) {
+					return TYPE_NAME_ALIKE;
 				}
 				if (LANDMARK_SUBTYPES.contains(subType)) {
 					return TYPE_LANDMARK;
@@ -238,10 +277,42 @@ public class SpatialSearchRanking {
 				parts = 1;
 			}
 		}
-		if (parts < 2 && isSubordinateNode(r)) {
+		if (parts < 2 && isSubordinateNode(r) && !namedByKind(r.getFirstRef())) {
 			parts = 2;
 		}
 		return parts;
+	}
+
+	/** a query word is the name of a POI category ("farm", "furt", "parkplatz") */
+	private boolean queryIsKind(SpatialSearchResultRef ref) {
+		for (SpatialSearchToken t : ref.tokens) {
+			if (t.hasPoiCategoryKeys()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** the query word is a category of the object: "parkplatz" says what a car park named "Parkplatz Edeka" is */
+	private boolean namedByKind(SpatialSearchResultRef ref) {
+		for (SpatialSearchToken t : ref.tokens) {
+			if (ref.atom.poiTypes != null && t.matchPoiCategoryKeys(ref.atom.poiTypes)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** the query said how many and what kind, but never which street: "4 av" is 4th Avenue, not
+	 *  house 4 on any avenue. Whether a word only says what kind ("avenue", "sokak", "вулиця") comes
+	 *  from the common words of the map that holds the street, not from a list kept here - and that
+	 *  statistic takes frequent street names for kinds too ("centre", "norte"), so this costs a house
+	 *  wKindOnly of its score rather than a tier: the house at the point still comes first.
+	 *  Only a house that is the whole answer: "76 North Street Waverly" names the street by its city. */
+	private boolean kindOnlyAddress(SpatialSearchResult r) {
+		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
+		return r.objs.size() == 1 && head != null && head.atom != null && head.atom.isBuilding()
+				&& head.atom.distinctFoundCnt == 0;
 	}
 
 	/** the query named this object, rather than reaching it through an alias or a category */
@@ -273,7 +344,7 @@ public class SpatialSearchRanking {
 	}
 
 	/** carries a wikipedia article or a travel rating, so the name is its own, not a coincidence */
-	public static boolean isNotable(SpatialSearchResult r) {
+	private boolean isNotable(SpatialSearchResult r) {
 		if (isProminent(r)) {
 			return true;
 		}
@@ -304,7 +375,7 @@ public class SpatialSearchRanking {
 		return 1.0 / (1.0 + km / halfWeightKm);
 	}
 
-	private static String queriedWords(SpatialSearchResultRef ref) {
+	private String queriedWords(SpatialSearchResultRef ref) {
 		List<SpatialSearchToken> tokens = ref.tokens;
 		if (tokens == null || tokens.isEmpty()) {
 			return "";
@@ -322,7 +393,7 @@ public class SpatialSearchRanking {
 	}
 
 	/** drops the "(district)" suffix deduplication adds, so a street still matches its own name */
-	private static String normalizeName(String s) {
+	private String normalizeName(String s) {
 		int bracket = s == null ? -1 : s.lastIndexOf(" (");
 		if (bracket > 0 && s.endsWith(")")) {
 			s = s.substring(0, bracket);

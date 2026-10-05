@@ -2,6 +2,7 @@ package net.osmand.search.core.spatial;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -11,6 +12,8 @@ import java.util.Map;
 import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
+import net.osmand.binary.NameIndexReader;
+import net.osmand.data.LatLon;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
@@ -18,6 +21,7 @@ import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtomXY;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
+import net.osmand.util.MapUtils;
 
 public class SpatialPipelineSearch {
 
@@ -539,15 +543,12 @@ public class SpatialPipelineSearch {
 
 	private SpatialPipelineContext prepareInitialBuckets() {
 		int totalTokens = ctx.tokens.size();
+		// a query repeating words: for every token the tokens with its word
+		long[] copies = copiesOfWords();
 		// combine & merge by tokens
-		Map<String, Integer> dupTokens = new HashMap<>();
 		for (int tokenIdx = 0; tokenIdx < totalTokens; tokenIdx++) {
 			SpatialSearchToken token = ctx.tokens.get(tokenIdx);
-			Integer lastDupToken = dupTokens.get(token.word);
-			dupTokens.put(token.word, tokenIdx);
-			if (lastDupToken == null) {
-				lastDupToken = tokenIdx;
-			}
+			int lastDupToken = previousCopy(copies, tokenIdx);
 //			if (!SearchAlgorithms.isNumber2Letters(token.wordAligned)) {
 				// fixes 'Am Remsufer Remseck am Neckar' but incorrect for '138 138 Scott Avenue Bellefonte' & 'W&W'
 //				token = ctx.tokens.get(lastDupToken); 
@@ -560,7 +561,8 @@ public class SpatialPipelineSearch {
 				SpatialPipelineObjectRes existing = ctx.objectsById.get(atom.id);
 				boolean noPoiType = disallowPoiType(atom, token);
 				if (existing != null) {
-					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType, lastDupToken);
+					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType, lastDupToken, copies,
+							copies == null ? 0 : tokensOf(atom.id));
 				} else {
 					SpatialPipelineObjectRes obj = new SpatialPipelineObjectRes(totalTokens, atom, tokenIdx, noPoiType);
 					ctx.objectsById.put(atom.id, obj);
@@ -591,6 +593,43 @@ public class SpatialPipelineSearch {
 		return ctx;
 	}
 
+	/**
+	 * @return for every token the tokens with the same word, null when the query repeats no word
+	 */
+	private long[] copiesOfWords() {
+		long[] copies = null;
+		for (int i = 0; i < ctx.tokens.size(); i++) {
+			for (int j = 0; j < ctx.tokens.size(); j++) {
+				if (i != j && ctx.tokens.get(i).word.equals(ctx.tokens.get(j).word)) {
+					if (copies == null) {
+						copies = new long[ctx.tokens.size()];
+					}
+					copies[i] |= 1L << j;
+				}
+			}
+		}
+		return copies;
+	}
+
+	// the tokens that found the object
+	private long tokensOf(long objectId) {
+		long tokens = 0;
+		for (int i = 0; i < ctx.tokens.size(); i++) {
+			SpatialSearchToken token = ctx.tokens.get(i);
+			NameIndexAtom atom = token.index.get(objectId);
+			if (atom != null && !token.getDeletedAtoms().contains(atom.indexInToken)) {
+				tokens |= 1L << i;
+			}
+		}
+		return tokens;
+	}
+
+	// the nearest token before with the same word, the token itself when there is none
+	private int previousCopy(long[] copies, int tokenIdx) {
+		long before = copies == null ? 0 : copies[tokenIdx] & ((1L << tokenIdx) - 1);
+		return before == 0 ? tokenIdx : 63 - Long.numberOfLeadingZeros(before);
+	}
+
 	private boolean validateResultsAndFinish(List<SpatialPipelineObjectRes> preResults, int stage,
 			List<SpatialSearchToken> tokens) throws IOException {
 		if (ctx.isCancelled()) {
@@ -601,7 +640,7 @@ public class SpatialPipelineSearch {
 		}
 		long time = System.nanoTime();
 		int nonCategoryRes = 0;
-		SpatialSearchResultsList stageList = createResultList(tokens, preResults);
+		SpatialSearchResultsList stageList = createResultList(tokens, limitSingleObjects(preResults));
 		stageList.loadObjectsAndCalcBuildings(ctx.searchContext);
 		if (ctx.isCancelled()) {
 			return true;
@@ -632,6 +671,46 @@ public class SpatialPipelineSearch {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * A one-word query of a popular category ("restaurant" finds 180K POIs): a POI found by its category only and
+	 * without rating scores by its distance alone, so only the nearest of them are read. Everything else is read:
+	 * a POI named by the word, a rated one, a street, a city.
+	 */
+	private List<SpatialPipelineObjectRes> limitSingleObjects(List<SpatialPipelineObjectRes> preResults) {
+		int limit = ctx.settings.LIMIT_READ_SINGLE_OBJECTS;
+		LatLon l = ctx.searchContext.location;
+		if (limit <= 0 || preResults.size() <= limit || ctx.tokens.size() != 1 || ctx.searchContext.ranking == null
+				|| l == null) {
+			return preResults;
+		}
+		double[] dist = new double[preResults.size()];
+		int byCategory = 0;
+		for (int i = 0; i < preResults.size(); i++) {
+			SpatialPipelineObjectRes r = preResults.get(i);
+			NameIndexAtom a = r.refs1 == null && r.refs2 == null ? r.atoms[0] : null;
+			if (a != null && a.isPOI() && a.elo <= 0 && a.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
+				dist[i] = MapUtils.getDistance(l, MapUtils.get31LatitudeY(a.coords.y16 << 15),
+						MapUtils.get31LongitudeX(a.coords.x16 << 15));
+				byCategory++;
+			} else {
+				dist[i] = -1;
+			}
+		}
+		if (byCategory <= limit) {
+			return preResults;
+		}
+		double[] sorted = dist.clone();
+		Arrays.sort(sorted);
+		double max = sorted[preResults.size() - byCategory + limit - 1];
+		List<SpatialPipelineObjectRes> res = new ArrayList<>();
+		for (int i = 0; i < preResults.size(); i++) {
+			if (dist[i] <= max) {
+				res.add(preResults.get(i));
+			}
+		}
+		return res;
 	}
 
 	private SpatialSearchResultsList createResultList(List<SpatialSearchToken> tokens,

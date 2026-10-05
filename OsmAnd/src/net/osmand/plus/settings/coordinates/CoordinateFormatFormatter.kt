@@ -3,6 +3,8 @@ package net.osmand.plus.settings.coordinates
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.utils.OsmAndFormatter
+import net.osmand.shared.settings.coordinates.CoordinateFormat
+import net.osmand.shared.settings.coordinates.CoordinateFormatType
 import net.osmand.util.TextDirectionUtil
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -15,8 +17,9 @@ class CoordinateFormatFormatter @JvmOverloads constructor(
 
 	@JvmOverloads
 	fun format(format: CoordinateFormat, lat: Double, lon: Double, forceLTR: Boolean = true): String {
-		if (format.type == CoordinateFormatType.BUILT_IN && format.legacyFormat != null) {
-			return OsmAndFormatter.getFormattedCoordinates(lat, lon, format.legacyFormat, forceLTR)
+		val legacyFormat = format.legacyFormat
+		if (format.type == CoordinateFormatType.BUILT_IN && legacyFormat != null) {
+			return OsmAndFormatter.getFormattedCoordinates(lat, lon, legacyFormat, forceLTR)
 		}
 		val epsgCode = format.epsgCode
 		if (epsgCode != null) {

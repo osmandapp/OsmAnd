@@ -51,17 +51,18 @@ public class AverageSpeedComputer extends AverageValueComputer {
 		widgetInfos.clear();
 		widgetRegistry.collectWidgetsInfo(widgetInfos, appMode, layoutMode, null, null, true);
 
-		for (int i = 0; i < widgetInfos.size(); i++) {
+		boolean enabled = false;
+		for (int i = 0; i < widgetInfos.size() && !enabled; i++) {
 			MapWidgetInfo widgetInfo = widgetInfos.get(i);
 			WidgetType type = widgetInfo.getWidgetType();
 
 			if (type == AVERAGE_SPEED || type == SIDE_MARKER_1 || type == SIDE_MARKER_2) {
-				if (WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, appMode)) {
-					return true;
-				}
+				enabled = WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, appMode);
 			}
 		}
-		return false;
+		// the widgets hold their activity: keep none of them between two updates
+		widgetInfos.clear();
+		return enabled;
 	}
 
 	@Override

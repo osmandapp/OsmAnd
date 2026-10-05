@@ -1504,7 +1504,7 @@
     <string name="shared_string_others">其它</string>
     <string name="shared_string_release">已发行</string>
     <string name="local_index_items_backuped">已停用 %1$d 项/共 %2$d 项。</string>
-    <string name="local_index_items_deleted">%已删除 %1$d 项/共 %2$d 项。</string>
+    <string name="local_index_items_deleted">已删除 %1$d 项/共 %2$d 项。</string>
     <string name="local_index_items_restored">已启用 %1$d 项/共 %2$d 项。</string>
     <string name="local_index_no_items_to_do">没有项目在 %1$s</string>
     <string name="local_index_action_do">您将要 %1$s %2$s 个项目，要继续吗？</string>
@@ -1607,7 +1607,6 @@
     <string name="number_of_contributors">贡献者人数</string>
     <string name="number_of_edits">编辑次数</string>
     <string name="reports_for">报告</string>
-    <string name="file_name_containes_illegal_char">文件名中出现非法字符</string>
     <string name="quick_action_item_action">操作 %d</string>
     <string name="quick_action_item_screen">屏幕 %d</string>
     <string name="quick_action_map_style_switch">地图风格已变更为 “%s”。</string>
@@ -2256,7 +2255,7 @@
     <string name="dd_dddddd_format">度度.度度度度度度°</string>
     <string name="dd_mm_ss_format">度度°分分′秒秒″</string>
     <string name="nautical_renderer">航海</string>
-    <string name="day_off_label">关闭</string>
+    <string name="day_off_label">休息</string>
     <string name="lang_lo">老挝语</string>
     <string name="shared_string_markers">标记</string>
     <string name="shared_string_finish">完成</string>
@@ -5187,7 +5186,7 @@
     <string name="coordinate_format_primary">主要</string>
     <string name="favorite_confirm_delete_folder">将删除文件夹“%1$s”，包括其子文件夹和 %2$d 个收藏点。</string>
     <string name="favorite_folder_rename_conflict">已存在同名文件夹。</string>
-    <string name="favorite_folder_invalid_name">文件夹名称不能包含 / 或 _%_</string>
+    <string name="favorite_folder_invalid_name">文件夹名称不能包含 / 或 %1$s</string>
     <string name="favorite_folder_duplicate_message">请使用未被占用的文件夹名称。</string>
     <string name="favorite_folder_name">文件夹名称</string>
     <string name="edit_folder">编辑文件夹</string>
@@ -5203,4 +5202,12 @@
     <string name="shared_string_archive">归档</string>
     <string name="share_favorites_with_media_description">%1$s 中的收藏点附有媒体。仅分享点，或将带媒体的点作为档案分享。</string>
     <string name="share_favorites_points_only">仅限积分</string>
+    <string name="contour_label_direction_descr">上坡方向：每个高程数值的顶部朝向地势更高的一側，如同纸质地图一般。同理，等高线的短齿线则表示下坡方向。</string>
+    <string name="rendering_attr_contourLabelDirection_name">标注方向</string>
+    <string name="rendering_value_upright_name">正向</string>
+    <string name="rendering_value_uphill_name">上坡</string>
+    <string name="shared_string_visibility">能见性</string>
+    <string name="opening_hours_public_holiday">公共假期</string>
+    <string name="opening_hours_school_holiday">学校假期</string>
+    <string name="opening_hours_easter">复活节</string>
 </resources>

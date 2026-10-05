@@ -5,7 +5,6 @@ public enum QuickSearchListItemType {
 	HEADER,
 	BUTTON,
 	SEARCH_MORE,
-	SEARCH_ON_WEB,
 	BANNER,
 	FREE_VERSION_BANNER,
 	SELECT_ALL,

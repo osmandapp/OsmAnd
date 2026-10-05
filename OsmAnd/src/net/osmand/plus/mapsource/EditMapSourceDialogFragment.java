@@ -1,14 +1,12 @@
 package net.osmand.plus.mapsource;
 
 
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -137,6 +135,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 			sqliteDB = savedInstanceState.getBoolean(SQLITE_DB_KEY);
 			fromTemplate = savedInstanceState.getBoolean(FROM_TEMPLATE_KEY);
 		}
+		updateBackPressedCallback();
 		View root = inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
@@ -257,24 +256,13 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		Dialog dialog = getDialog();
-		if (dialog != null) {
-			dialog.setOnKeyListener((_dialog, keyCode, event) -> {
-				if (keyCode == KeyEvent.KEYCODE_BACK) {
-					if (event.getAction() == KeyEvent.ACTION_DOWN) {
-						return true;
-					} else if (wasChanged || fromTemplate) {
-						showExitDialog();
-					} else {
-						dismiss();
-					}
-					return true;
-				}
-				return false;
-			});
-		}
+	protected boolean isBackPressedCallbackEnabled() {
+		return wasChanged || fromTemplate;
+	}
+
+	@Override
+	protected void handleBackPressed() {
+		showExitDialog();
 	}
 
 	@Override
@@ -283,7 +271,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 			minZoom = min;
 			maxZoom = max;
 			updateDescription(ConfigurationItem.ZOOM_LEVELS);
-			wasChanged = true;
+			markChanged();
 		}
 	}
 
@@ -292,7 +280,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		if (isAdded()) {
 			expireTimeMinutes = expireValue;
 			updateDescription(ConfigurationItem.EXPIRE_TIME);
-			wasChanged = true;
+			markChanged();
 		}
 	}
 
@@ -301,7 +289,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		if (isAdded()) {
 			this.elliptic = elliptic;
 			updateDescription(ConfigurationItem.MERCATOR_PROJECTION);
-			wasChanged = true;
+			markChanged();
 		}
 	}
 
@@ -310,7 +298,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		if (isAdded()) {
 			this.sqliteDB = sqliteDb;
 			updateDescription(ConfigurationItem.STORAGE_FORMAT);
-			wasChanged = true;
+			markChanged();
 		}
 	}
 
@@ -324,8 +312,13 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 	private void checkWasChanged() {
 		if (!Algorithms.objectEquals(editedLayerName, nameEditText.getText().toString())
 				|| !Algorithms.objectEquals(urlToLoad, urlEditText.getText().toString())) {
-			wasChanged = true;
+			markChanged();
 		}
+	}
+
+	private void markChanged() {
+		wasChanged = true;
+		updateBackPressedCallback();
 	}
 
 	private void saveTemplate() {

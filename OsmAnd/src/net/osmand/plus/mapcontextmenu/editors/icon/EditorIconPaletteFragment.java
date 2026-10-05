@@ -2,10 +2,8 @@ package net.osmand.plus.mapcontextmenu.editors.icon;
 
 import static net.osmand.plus.card.icon.IIconsPaletteController.ALL_ICONS_PROCESS_ID;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,18 +76,14 @@ public class EditorIconPaletteFragment extends BaseFullScreenDialogFragment impl
 		}
 	}
 
-	@NonNull
 	@Override
-	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
-		Dialog dialog = super.createDialog(savedInstanceState);
-		dialog.setOnKeyListener((d, keyCode, event) -> {
-			if (KeyEvent.KEYCODE_BACK == keyCode && KeyEvent.ACTION_UP == event.getAction()) {
-				onBackPressed();
-				return true;
-			}
-			return false;
-		});
-		return dialog;
+	protected boolean isBackPressedCallbackEnabled() {
+		return true;
+	}
+
+	@Override
+	protected void handleBackPressed() {
+		onBackPressed();
 	}
 
 	@Nullable

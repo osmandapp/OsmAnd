@@ -10,8 +10,10 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.hardware.display.DisplayManager;
 import android.net.Uri;
 import android.util.Log;
+import android.view.Display;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,11 +50,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.screens.*;
 import net.osmand.plus.auto.screens.RequestPermissionScreen.LocationPermissionCheckCallback;
+import net.osmand.plus.helpers.GeoActionHelper;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.helpers.TargetPoint;
@@ -296,7 +297,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	@NonNull
 	public Screen onCreateScreen(@NonNull Intent intent) {
-		Log.i(TAG, "In onCreateScreen()");
+		Log.i(TAG, "In onCreateScreen(), accumulated CarAppService virtual displays: " + countCarAppVirtualDisplays());
 		navigationCarSurface = new SurfaceRenderer(getCarContext(), getLifecycle());
 		settingsAction = new Action.Builder()
 				.setIcon(new CarIcon.Builder(
@@ -310,24 +311,47 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			navigationCarSurface.setMapView(mapView);
 		}
 
-		String action = intent.getAction();
-		if (ACTION_NAVIGATE.equals(action)) {
-			String text = "Navigation intent: " + intent.getDataString();
-			getApp().getToastHelper().showCarToast(text, true);
-		}
-
 		landingScreen = new LandingScreen(getCarContext(), settingsAction);
+		Screen screenToReturn = landingScreen;
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
 			getScreenManager().push(landingScreen);
 			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext());
-			return requestPurchaseScreen;
-		}
-		if (!isLocationPermissionAvailable()) {
+			screenToReturn = requestPurchaseScreen;
+		} else if (!isLocationPermissionAvailable()) {
 			getScreenManager().push(landingScreen);
-			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
+			screenToReturn = new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
 		}
-		return landingScreen;
+
+		Uri uri = intent.getData();
+		if (GeoActionHelper.isGeoActionUri(uri)) {
+			app.runInUIThread(() -> processGeoActionIntent(uri));
+		} else {
+			String action = intent.getAction();
+			if (ACTION_NAVIGATE.equals(action)) {
+				String text = "Navigation intent: " + intent.getDataString();
+				getApp().getToastHelper().showCarToast(text, true);
+			}
+		}
+
+		return screenToReturn;
+	}
+
+	// androidx.car.app never releases the VirtualDisplay it creates in CarContext#attachBaseContext(),
+	// so one accumulates per Android Auto (re)connect for the life of the process (see OsmAnd-Issues#3329).
+	// Logged here to size the leak from user-submitted logs without needing adb access.
+	private int countCarAppVirtualDisplays() {
+		DisplayManager displayManager = getCarContext().getSystemService(DisplayManager.class);
+		if (displayManager == null) {
+			return -1;
+		}
+		int count = 0;
+		for (Display display : displayManager.getDisplays()) {
+			if ("CarAppService".equals(display.getName())) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	public void onPurchaseDone() {
@@ -363,11 +387,25 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Log.i(TAG, "In onNewIntent() " + intent);
 		Uri uri = intent.getData();
 		if (uri != null) {
-			if (ACTION_NAVIGATE.equals(intent.getAction())) {
+			if (GeoActionHelper.isGeoActionUri(uri)) {
+				processGeoActionIntent(uri);
+			} else if (ACTION_NAVIGATE.equals(intent.getAction())) {
 				processNavigationIntent(uri);
 			} else {
 				processDeepLinkActions(uri);
 			}
+		}
+	}
+
+	private void processGeoActionIntent(@NonNull Uri uri) {
+		OsmandApplication app = getApp();
+		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app) || !isLocationPermissionAvailable()) {
+			LOG.info("Ignoring geo action intent: purchase or permission check failed");
+			return;
+		}
+		String action = GeoPointParserUtil.parseGeoAction(uri.toString());
+		if (!Algorithms.isEmpty(action)) {
+			GeoActionHelper.executeAction(app, action, null, this);
 		}
 	}
 
@@ -523,6 +561,15 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		for (Screen screen : displayedScreens) {
 			if (screen instanceof PrivateAccessScreen) {
 				return screen.getLifecycle().getCurrentState() == State.RESUMED;
+			}
+		}
+		return false;
+	}
+
+	private boolean isPrivateAccessScreenPresent() {
+		for (Screen screen : getScreenManager().getScreenStack()) {
+			if (screen instanceof PrivateAccessScreen) {
+				return true;
 			}
 		}
 		return false;
@@ -859,7 +906,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onRequestPrivateAccessRouting() {
-		if (routingHelper.isRouteCalculated()) {
+		if (routingHelper.isRouteCalculated() && !isPrivateAccessScreenPresent()) {
 			OsmandSettings settings = getApp().getSettings();
 			ApplicationMode appMode = routingHelper.getAppMode();
 			if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(appMode)) {

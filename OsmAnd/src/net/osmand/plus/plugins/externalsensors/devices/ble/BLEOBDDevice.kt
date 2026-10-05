@@ -148,7 +148,7 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 						log.debug("lastSensorData == ${lastSensorData.response}")
 					}
 					lastSensorDataList.remove()
-					bufferToRead = lastSensorData.response
+					bufferToRead = (bufferToRead ?: "") + lastSensorData.response
 				} catch (error: Exception) {
 					log.debug("lastSensorData error")
 				}

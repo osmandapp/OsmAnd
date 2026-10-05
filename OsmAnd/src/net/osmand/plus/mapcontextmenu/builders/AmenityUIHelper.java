@@ -203,6 +203,9 @@ public class AmenityUIHelper extends MenuBuilder {
 			String displayValue = useGenericFallback ? value : poiTypes.getPoiTranslation(value);
 			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, fallbackType, key,
 					displayValue, subtype);
+			if (useGenericFallback) {
+				entryBuilder.setIconId(R.drawable.ic_action_info_dark);
+			}
 		}
 		entryBuilder.setMatchWidthDivider(!entryBuilder.isDescription() && entryBuilder.isWiki());
 		return entryBuilder;

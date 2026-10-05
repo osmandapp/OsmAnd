@@ -65,8 +65,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 							ref.otherWordsNotFound--;
 						}
 					}
-					// building-street
-					if (check.atom.type > atom.type) {
+					// building-street, but a house the map does not have stays its street
+					if (check.atom.type > atom.type ? atom.bldObject != null || atom.type != SpatialSearchToken.BUILDING_TYPE
+							: check.atom.type == SpatialSearchToken.BUILDING_TYPE && check.atom.bldObject == null) {
 						// existing street - swap
 						check.atom = atom;
 						break;
@@ -101,11 +102,16 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		});
 	}
 
-	SpatialSearchResultRef getFirstRef() {
+	public SpatialSearchResultRef getFirstRef() {
 		if (objs.size() > 0) {
 			return objs.get(0);
 		}
 		return null;
+	}
+
+	/** atoms of the combination this result stands for, one per query token */
+	public List<NameIndexAtom> getAtoms() {
+		return parent.getRawAtoms(parentInd);
 	}
 	
 	private MapObject getFirstRefObject(boolean useUnited) {
@@ -212,7 +218,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	public boolean isPoiCategory() {
 		return !objs.isEmpty() && objs.get(0).isPoiCategory();
 	}
-	
+
 	public SpatialPoiType getPoiCategory(SpatialPoiSearch poiSearch) {
 		if (!objs.isEmpty() && objs.get(0).isPoiCategory()) {
 			return poiSearch.getById((int) objs.get(0).atom.id);
@@ -265,6 +271,15 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return result;
 	}
 	
+	private static boolean unitesSame(BaseDetailsObject united, MapObject object) {
+		for (Object o : united.getObjects()) {
+			if (o == object) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private List<String> addResult(List<String> result, String value) {
 		if (!Algorithms.isEmpty(value)) {
 			if (result == null) {
@@ -294,7 +309,11 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 				}
 			}
 			return; // nothing to merge
-		} 
+		}
+		if (unitedObject != null && unitesSame(unitedObject, otherObj)) {
+			// the same object found again with other words: every merge combines all united objects once more,
+			return;
+		}
 		if (object instanceof Amenity a && unitedObject == null) {
 			unitedObject = new BaseDetailsObject(a, lang);
 		}

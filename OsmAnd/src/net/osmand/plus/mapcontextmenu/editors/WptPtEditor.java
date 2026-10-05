@@ -147,7 +147,8 @@ public class WptPtEditor extends PointEditor {
 				wpt.setIconName(preselectedIconName);
 			}
 			wpt.setAmenityOriginName(amenity.toStringEn());
-			wpt.getExtensionsToWrite().putAll(amenity.getAmenityExtensions(app.getPoiTypes(), true));
+			wpt.getExtensionsToWrite().putAll(amenity.getAmenityExtensions(app.getPoiTypes(), true, true,
+					app.getLanguage()));
 		} else if (mapObject instanceof RenderedObject renderedObject) {
 			wpt.setAmenityOriginName(renderedObject.toStringEn());
 			if (renderedObject.getIconRes() != null) {

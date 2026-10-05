@@ -106,7 +106,12 @@ public class SpatialPipelineObjectRes {
 		}		
 	}
 	
-	public void mergeSame(int tCount, NameIndexAtom atom, int tokenIdx, boolean noPoiType, int lastDupToken) {
+	/**
+	 * @param copies for every token the tokens with the same word, null when the query repeats no word
+	 * @param objectTokens the tokens that found this object
+	 */
+	public void mergeSame(int tCount, NameIndexAtom atom, int tokenIdx, boolean noPoiType, int lastDupToken, long[] copies,
+			long objectTokens) {
 		// we need to separately process situation duplicate words in object and in query
 		if (mainAtom.isPOIRef() || mainAtom.isBuilding()) {
 			mainAtom = atom;
@@ -136,22 +141,70 @@ public class SpatialPipelineObjectRes {
 
 			}
 		}
+		// a query repeating words ("carrer de sant bartomeu de la quadra costa de sant bartomeu de la quadra"): the name
+		// keeps a repeated word once, so a copy the name did not take is no gap, and a copy the name has twice is no extra word
+		int repeatedSkips = 0;
+		int lastMatched = lastInd;
+		if (copies != null && firstInd < tokenIdx) {
+			for (int ind = firstInd + 1; ind < tokenIdx; ind++) {
+				boolean stepOver = getTokenState(mainMask, ind) == STATE_NO_MATCH && canStepOver(copies, objectTokens, ind);
+				if (stepOver || copyInMask(copies[ind], firstInd, ind)) {
+					repeatedSkips++;
+				}
+			}
+			while (lastInd < tokenIdx - 1 && canStepOver(copies, objectTokens, lastInd + 1)) {
+				lastInd++;
+			}
+		}
 		// test '2nd new street'
 		if (mainAtom.otherFoundCnt + mainAtom.otherWordsCnt < atom.otherFoundCnt + atom.otherWordsCnt) {
 			mainAtom = atom;
 		}
 
 		int otherWrds = mainAtom.otherFoundCnt + mainAtom.otherWordsCnt;
-		boolean joinSymbolsOk = (firstInd + otherWrds >= tokenIdx && (tokenIdx - lastInd) <= 1);
+		boolean joinSymbolsOk = (firstInd + otherWrds + repeatedSkips >= tokenIdx && (tokenIdx - lastInd) <= 1);
 		boolean joinCategoryOk = mainAtom.isPOI() && (fromPoiCategory(mainAtom) || fromPoiCategory(atom));
 		if ((joinCategoryOk || joinSymbolsOk)  && lastDupToken != tokenIdx - 1
 				) {
 			setAtom(atom, tokenIdx);
+			// the name takes the copies it stepped over: "carrer de sant bartomeu de la quadra" has both "de"
+			for (int ind = lastMatched + 1; copies != null && ind < tokenIdx; ind++) {
+				if (getTokenState(mainMask, ind) == STATE_NO_MATCH) {
+					setAtom(atom, ind);
+				}
+			}
 		} else if (otherVariants != null) {
-			otherVariants.mergeSame(tCount, atom, tokenIdx, noPoiType, lastDupToken);
+			otherVariants.mergeSame(tCount, atom, tokenIdx, noPoiType, lastDupToken, copies, objectTokens);
 		} else {
 			otherVariants = new SpatialPipelineObjectRes(tCount, atom, tokenIdx, noPoiType);
+			// a new variant takes the words right before it: the ones the query has once ("costa" before the second name)
+			// and the copies of its name words no token found in it ("de" of "costa de")
+			for (int ind = tokenIdx - 1; copies != null && ind >= 0; ind--) {
+				boolean once = copies[ind] == 0 && atoms[ind] != null;
+				boolean notFoundCopy = (objectTokens >> ind & 1) == 0 && canStepOver(copies, objectTokens, ind);
+				if (!once && !notFoundCopy) {
+					break;
+				}
+				otherVariants.setAtom(once ? atoms[ind] : atom, ind);
+			}
 		}
+	}
+
+	// another copy of the token's word found this object, so its name has the word; copies side by side ("8 8 ave",
+	// "2 2 sokak") are different words
+	private boolean canStepOver(long[] copies, long objectTokens, int ind) {
+		long neighbours = (ind > 0 ? 1L << (ind - 1) : 0) | 1L << (ind + 1);
+		return (copies[ind] & objectTokens) != 0 && (copies[ind] & neighbours) == 0;
+	}
+
+	// a copy of the token's word is already in this variant: the name has the word twice
+	private boolean copyInMask(long copies, int from, int ind) {
+		for (int i = from; i < ind; i++) {
+			if ((copies >> i & 1) != 0 && getTokenState(mainMask, i) == STATE_EXACT_MATCH) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public long maskWithoutRefs() {

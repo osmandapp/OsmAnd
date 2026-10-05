@@ -25,6 +25,7 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 	private static final int MSG_RUN_AUTO_BACKUP = AUTO_BACKUP + 1;
 	private static final int MSG_RUN_PERIODIC_BACKUP = AUTO_BACKUP + 2;
 	private static final long MIN_AUTO_BACKUP_INTERVAL_MS = 60 * 1000; // 1 minute
+	private static final long AUTO_BACKUP_DELAY_ON_RESUME_MS = 20 * 1000; // 20 seconds
 	public static final long DEFAULT_AUTO_BACKUP_INTERVAL_MS = 60 * 60 * 1000; // 60 minutes
 
 	private final OsmandApplication app;
@@ -57,6 +58,12 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 		app.getAppInitializer().addOnFinishListener(initializer -> runAutoBackup());
 	}
 
+	// Collecting the local files walks every tracked file, so on resume it waits for the map to settle
+	// instead of competing with it for memory right when the process comes back to the foreground.
+	public void requestAutoBackupOnResume() {
+		app.getAppInitializer().addOnFinishListener(initializer -> scheduleAutoBackup(AUTO_BACKUP_DELAY_ON_RESUME_MS));
+	}
+
 	private void runAutoBackup() {
 		long currentTime = System.currentTimeMillis();
 		long lastAttemptTime = settings.LAST_AUTO_BACKUP_TIMESTAMP.get();
@@ -65,7 +72,7 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 		if (elapsedMillis >= MIN_AUTO_BACKUP_INTERVAL_MS) {
 			attemptImmediateBackup(currentTime);
 		} else {
-			scheduleDelayedBackup(elapsedMillis);
+			scheduleAutoBackup(MIN_AUTO_BACKUP_INTERVAL_MS - elapsedMillis);
 		}
 	}
 
@@ -95,9 +102,8 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 		}
 	}
 
-	private void scheduleDelayedBackup(long elapsedMillis) {
+	private void scheduleAutoBackup(long delay) {
 		if (isAutoBackupConfigured() && !app.hasMessagesInUiThread(MSG_RUN_AUTO_BACKUP)) {
-			long delay = MIN_AUTO_BACKUP_INTERVAL_MS - elapsedMillis;
 			app.runMessageInUiThread(MSG_RUN_AUTO_BACKUP, delay, this::runAutoBackup);
 		}
 	}

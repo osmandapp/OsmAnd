@@ -225,6 +225,7 @@ public class DayNightHelper implements SensorEventListener {
 			manager.unregisterListener(sensorEventListener, mLight);
 			sensorEventListener = null;
 		}
+		sensorStateListener = null;
 	}
 
 	public void startSensorIfNeeded(@NonNull StateChangedListener<Boolean> sensorStateListener) {
@@ -257,7 +258,9 @@ public class DayNightHelper implements SensorEventListener {
 				if (System.currentTimeMillis() - lastTime > 10000) {
 					lastTime = System.currentTimeMillis();
 					lastNightMode = nightMode;
-					sensorStateListener.stateChanged(nightMode);
+					if (sensorStateListener != null) {
+						sensorStateListener.stateChanged(nightMode);
+					}
 				}
 			}
 		}

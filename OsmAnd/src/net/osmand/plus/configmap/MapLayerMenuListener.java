@@ -80,6 +80,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		}
 		int itemId = item.getTitleId();
 		if (itemId == R.string.layer_poi) {
+			mapActivity.getFragmentsHelper().closeQuickSearch();
 			poiFiltersHelper.clearGeneralSelectedPoiFilters();
 			if (isChecked) {
 				showPoiFilterDialog(uiAdapter, item);

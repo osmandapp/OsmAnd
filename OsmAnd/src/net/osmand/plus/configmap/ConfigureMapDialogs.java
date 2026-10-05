@@ -29,6 +29,10 @@ import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -298,6 +302,36 @@ public class ConfigureMapDialogs {
 				}
 			}
 		});
+	}
+
+	public static void showRenderingPropertyMenu(
+			@NonNull MapActivity activity, @Nullable View anchorView, @NonNull RenderingRuleProperty p,
+			@NonNull CommonPreference<String> pref, boolean nightMode, @NonNull Runnable callback
+	) {
+		OsmandApplication app = activity.getApp();
+		String[] possibleValuesString = ConfigureMapUtils.getRenderingPropertyPossibleValues(app, p);
+		int selectedIndex = AndroidUtils.getRenderPropertySelectedValueIndex(app, p);
+		int controlsColor = ColorUtilities.getAppModeColor(app, nightMode);
+
+		List<PopUpMenuItem> items = new ArrayList<>();
+		for (int i = 0; i < possibleValuesString.length; i++) {
+			String value = i == 0 ? "" : p.getPossibleValues()[i - 1];
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitle(possibleValuesString[i])
+					.setSelected(i == selectedIndex)
+					.showCompoundBtn(controlsColor)
+					.setOnClickListener(item -> {
+						pref.set(value);
+						callback.run();
+					})
+					.create());
+		}
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = anchorView;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+		PopUpMenu.show(displayData);
 	}
 
 	protected static void showPreferencesDialog(

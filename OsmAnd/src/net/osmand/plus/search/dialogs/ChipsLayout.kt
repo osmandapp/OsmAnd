@@ -2,10 +2,8 @@ package net.osmand.plus.search.dialogs
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.TypedValue
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,7 +11,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -52,9 +49,9 @@ import net.osmand.plus.settings.enums.DayNightMode
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenu
-import net.osmand.plus.widgets.popup.OsmAndDropdownMenuColors
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuDefaults
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuOption
-import net.osmand.plus.widgets.popup.OsmAndDropdownMenuSelectionStyle
+import net.osmand.plus.widgets.popup.colorAttr
 
 class ChipsLayout @JvmOverloads constructor(
 	context: Context,
@@ -95,8 +92,7 @@ class ChipsLayout @JvmOverloads constructor(
 		@JvmField var showDropDownIconWhenDisabled: Boolean = false,
 		@JvmField var onClickListener: OnChipClickListener? = null,
 		@JvmField var onDropdownItemClickListener: OnDropdownItemClickListener? = null,
-		@JvmField var contentDescription: String? = null,
-		@JvmField var selectionStyle: OsmAndDropdownMenuSelectionStyle = OsmAndDropdownMenuSelectionStyle.RADIO
+		@JvmField var contentDescription: String? = null
 	) {
 		fun updateContent(chip: ChipData) {
 			iconId = chip.iconId
@@ -113,7 +109,6 @@ class ChipsLayout @JvmOverloads constructor(
 			onClickListener = chip.onClickListener
 			onDropdownItemClickListener = chip.onDropdownItemClickListener
 			contentDescription = chip.contentDescription
-			selectionStyle = chip.selectionStyle
 		}
 	}
 
@@ -130,8 +125,7 @@ class ChipsLayout @JvmOverloads constructor(
 		dropdownItems: List<DropdownItem> = emptyList(),
 		showDropDownIconWhenDisabled: Boolean = false,
 		onDropdownItemClickListener: OnDropdownItemClickListener? = null,
-		contentDescription: String? = null,
-		selectionStyle: OsmAndDropdownMenuSelectionStyle = OsmAndDropdownMenuSelectionStyle.RADIO
+		contentDescription: String? = null
 	) : ChipData(
 		id = id,
 		iconId = iconId,
@@ -146,8 +140,7 @@ class ChipsLayout @JvmOverloads constructor(
 		dropdownItems = dropdownItems,
 		showDropDownIconWhenDisabled = showDropDownIconWhenDisabled,
 		onDropdownItemClickListener = onDropdownItemClickListener,
-		contentDescription = contentDescription,
-		selectionStyle = selectionStyle
+		contentDescription = contentDescription
 	)
 
 	class DropdownItem @JvmOverloads constructor(
@@ -296,8 +289,11 @@ private fun ChipsLayoutContent(
 		colorScheme = lightColorScheme(
 			primary = activeColor,
 			surface = listBackground,
+			surfaceContainer = listBackground,
 			background = activityBackground,
-			onSurface = textColor(ChipsLayout.TextColorStyle.PRIMARY)
+			onSurface = textColor(ChipsLayout.TextColorStyle.PRIMARY),
+			onSurfaceVariant = iconColor(ChipsLayout.IconColorStyle.DEFAULT, nightMode),
+			outlineVariant = dividerColor
 		)
 	) {
 		Row(
@@ -383,7 +379,7 @@ private fun ChipAnchor(
 					value = item.id,
 					title = item.title,
 					iconId = if (item.iconId != 0) item.iconId else null,
-					description = item.description,
+					supportingText = item.description,
 					selected = item.selected,
 					enabled = item.enabled,
 					showDividerAfter = item.showDividerBelow
@@ -402,7 +398,7 @@ private fun ChipAnchor(
 						onDropdownItemClick(chipId, itemId)
 					}
 				},
-				colors = OsmAndDropdownMenuColors(
+				colors = OsmAndDropdownMenuDefaults.colors(
 					background = listBackground,
 					divider = dividerColor,
 					text = textColor(ChipsLayout.TextColorStyle.PRIMARY),
@@ -411,8 +407,7 @@ private fun ChipAnchor(
 					selected = activeColor,
 					control = inActiveColor
 				),
-				title = if (chip.menuTitleId != 0) stringResource(chip.menuTitleId) else null,
-				selectionStyle = chip.selectionStyle
+				title = if (chip.menuTitleId != 0) stringResource(chip.menuTitleId) else null
 			)
 		}
 	}
@@ -556,18 +551,4 @@ private fun iconColor(style: ChipsLayout.IconColorStyle, nightMode: Boolean): Co
 		ChipsLayout.IconColorStyle.WARNING -> ColorUtilities.getWarningColorId(nightMode)
 	}
 	return Color(ContextCompat.getColor(context, colorId))
-}
-
-@Composable
-private fun colorAttr(attrId: Int): Color {
-	val context = LocalContext.current
-	val typedValue = TypedValue()
-	context.theme.resolveAttribute(attrId, typedValue, true)
-	return Color(
-		if (typedValue.resourceId != 0) {
-			ContextCompat.getColor(context, typedValue.resourceId)
-		} else {
-			typedValue.data
-		}
-	)
 }

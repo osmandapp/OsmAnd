@@ -15,6 +15,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 
 public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 
@@ -22,37 +23,55 @@ public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 
 	private static final String KEY_SHOW_WIDGET = "key_show_widget";
 
-	private boolean showWidget = true;
+	private boolean showWidget;
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		if (savedInstanceState != null) {
-			showWidget = savedInstanceState.getBoolean(KEY_SHOW_WIDGET, true);
+		MapActivity activity = getMapActivity();
+		if (savedInstanceState != null && savedInstanceState.containsKey(KEY_SHOW_WIDGET)) {
+			showWidget = savedInstanceState.getBoolean(KEY_SHOW_WIDGET);
+		} else {
+			showWidget = activity != null && isWidgetVisible(activity);
 		}
 
 		View view = inflate(R.layout.mapillary_first_dialog, container, false);
+		int activeColor = settings.getApplicationMode().getProfileColor(nightMode);
+
 		SwitchCompat widgetSwitch = view.findViewById(R.id.widget_switch);
 		widgetSwitch.setChecked(showWidget);
-		widgetSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> showWidget(isChecked));
-		view.findViewById(R.id.actionButton).setOnClickListener(v -> {
-			showWidget(widgetSwitch.isChecked());
+		widgetSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> showWidget = isChecked);
+		UiUtilities.setupCompoundButton(nightMode, activeColor, widgetSwitch);
+
+		View widgetRow = view.findViewById(R.id.widget_row);
+		UiUtilities.setupListItemBackground(view.getContext(), widgetRow, activeColor);
+		widgetRow.setOnClickListener(v -> widgetSwitch.setChecked(!widgetSwitch.isChecked()));
+
+		View actionButton = view.findViewById(R.id.actionButton);
+		UiUtilities.setupListItemBackground(view.getContext(), actionButton, activeColor);
+		actionButton.setOnClickListener(v -> {
+			applyWidgetVisibility();
 			dismiss();
 		});
-		showWidget(showWidget);
 		return view;
 	}
 
-	private void showWidget(boolean show) {
+	private boolean isWidgetVisible(@NonNull MapActivity activity) {
+		MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
+		return plugin != null && plugin.isWidgetVisible(activity);
+	}
+
+	private void applyWidgetVisibility() {
 		MapActivity activity = getMapActivity();
 		MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 		if (activity != null && plugin != null) {
-			plugin.setWidgetVisible(activity, show);
+			plugin.setWidgetVisible(activity, showWidget);
 		}
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
 		outState.putBoolean(KEY_SHOW_WIDGET, showWidget);
 	}
 

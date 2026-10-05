@@ -13,32 +13,73 @@ import static net.osmand.map.TileSourceManager.MAPILLARY_VECTOR_TILE_EXT;
 
 public class GeometryTilesCache extends TilesCache<GeometryTile> {
 
-	private static final int MAPILLARY_SEQUENCE_LAYER_CACHE_SIZE = 16;
+	private static final int SEQUENCE_LAYER_CACHE_SIZE = 16;
+	// Mapillary overscales zoom 14 tiles; Panoramax fetches zoom 17 tiles one per screen tile.
 	private static final int MAPILLARY_IMAGE_LAYER_CACHE_SIZE = 4;
+	private static final int PANORAMAX_IMAGE_LAYER_CACHE_SIZE = 24;
+	private static final int COMBINED_IMAGE_LAYER_CACHE_SIZE = 28;
+
+	private boolean imageLayerMode;
+	private boolean mapillaryActive;
+	private boolean panoramaxActive;
 
 	public GeometryTilesCache(AsyncLoadingThread asyncLoadingThread) {
 		super(asyncLoadingThread);
-		this.maxCacheSize = 4;
+		// Must match imageLayerMode, which starts false: the mode setter is a no-op until it changes.
+		this.maxCacheSize = SEQUENCE_LAYER_CACHE_SIZE;
 	}
 
 	public void useForMapillarySequenceLayer() {
-		changeMapillaryLayerToCache(MAPILLARY_SEQUENCE_LAYER_CACHE_SIZE);
+		setImageLayerMode(false);
 	}
 
 	public void useForMapillaryImageLayer() {
-		changeMapillaryLayerToCache(MAPILLARY_IMAGE_LAYER_CACHE_SIZE);
+		setImageLayerMode(true);
 	}
 
-	private void changeMapillaryLayerToCache(int maxCacheSize) {
-		if (this.maxCacheSize != maxCacheSize) {
-			setMaxCacheSize(maxCacheSize);
+	public synchronized void setMapillaryActive(boolean active) {
+		if (mapillaryActive != active) {
+			mapillaryActive = active;
+			updateMaxCacheSize();
 		}
 	}
 
+	public synchronized void setPanoramaxActive(boolean active) {
+		if (panoramaxActive != active) {
+			panoramaxActive = active;
+			updateMaxCacheSize();
+		}
+	}
+
+	private synchronized void setImageLayerMode(boolean imageLayerMode) {
+		if (this.imageLayerMode != imageLayerMode) {
+			this.imageLayerMode = imageLayerMode;
+			// Sequence and image modes use different source zooms.
+			clearAllTiles();
+			updateMaxCacheSize();
+		}
+	}
+
+	private void updateMaxCacheSize() {
+		setMaxCacheSize(imageLayerMode ? getImageLayerCacheSize() : SEQUENCE_LAYER_CACHE_SIZE);
+	}
+
+	private int getImageLayerCacheSize() {
+		if (mapillaryActive && panoramaxActive) {
+			return COMBINED_IMAGE_LAYER_CACHE_SIZE;
+		} else if (panoramaxActive) {
+			return PANORAMAX_IMAGE_LAYER_CACHE_SIZE;
+		}
+		return MAPILLARY_IMAGE_LAYER_CACHE_SIZE;
+	}
+
 	@Override
-	public void setMaxCacheSize(int maxCacheSize) {
+	public synchronized void setMaxCacheSize(int maxCacheSize) {
 		super.setMaxCacheSize(maxCacheSize);
-		cache.clear();
+		// clearTiles() drops about half, so repeat until the cache is within the new limit.
+		while (cache.size() > maxCacheSize && cache.size() > 1) {
+			clearTiles();
+		}
 	}
 
 	@Override

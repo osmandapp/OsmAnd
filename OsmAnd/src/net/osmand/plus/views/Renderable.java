@@ -22,6 +22,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GradientScaleType;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
@@ -98,6 +99,8 @@ public class Renderable {
 
         protected GpxGeometryWay geometryWay;
         protected boolean drawArrows;
+        @NonNull
+        protected GpxLineStyleType lineStyleType = GpxLineStyleType.SOLID;
         protected Track3DStyle track3DStyle;
 
         public RenderableSegment(List<WptPt> points, double segmentSize) {
@@ -116,6 +119,12 @@ public class Renderable {
             return changed;
         }
 
+        public boolean setLineStyleType(@NonNull GpxLineStyleType lineStyleType) {
+            boolean changed = this.lineStyleType != lineStyleType;
+            this.lineStyleType = lineStyleType;
+            return changed;
+        }
+
         public boolean setTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
             boolean changed = !Algorithms.objectEquals(this.track3DStyle, track3DStyle);
             this.track3DStyle = track3DStyle;
@@ -131,6 +140,8 @@ public class Renderable {
             }
             paint.setColor(p.getColor());
             paint.setStrokeWidth(p.getStrokeWidth());
+            paint.setPathEffect(p.getPathEffect());
+            paint.setStrokeCap(p.getPathEffect() != null ? p.getStrokeCap() : Paint.Cap.ROUND);
             if (coloringType.isGradient()) {
                 paint.setAlpha(0xFF);
             }

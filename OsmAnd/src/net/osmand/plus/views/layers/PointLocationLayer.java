@@ -123,6 +123,7 @@ public class PointLocationLayer extends OsmandMapLayer
 	private Float lastHeadingCached;
 	private MarkerState currentMarkerState = STAY;
 	private LatLon lastMarkerLocation;
+	private boolean markerMoved = true;
 
 	public enum MarkerState {
 		STAY,
@@ -258,7 +259,13 @@ public class PointLocationLayer extends OsmandMapLayer
 		} else if (isMapLinkedToLocation() && !isMovingToMyLocation()) {
 			updateMarker(getPointLocation(), null, 0);
 		}
-		lastMarkerLocation = getCurrentMarkerLocation();
+		// Reading the position back from the native marker creates a PointI (an object with a finalizer)
+		// on every frame, and it changes only while the marker is animated or after it was updated
+		boolean animating = view.getAnimatedMapMarkersThread().isAnimating();
+		if (animating || markerMoved) {
+			markerMoved = animating;
+			lastMarkerLocation = getCurrentMarkerLocation();
+		}
 	}
 
 	private boolean setMarkerState(MarkerState markerState, boolean showHeading, boolean forceUpdate) {
@@ -310,6 +317,7 @@ public class PointLocationLayer extends OsmandMapLayer
 	}
 
 	private void updateMarkerState(boolean showHeading) {
+		markerMoved = true;
 		if (navigationMarker == null || locationMarker == null
 				|| navigationMarkerWithHeading == null || locationMarkerWithHeading == null) {
 			return;
@@ -467,11 +475,12 @@ public class PointLocationLayer extends OsmandMapLayer
 			}
 			AnimateMapMarkersThread animationThread = view.getAnimatedMapMarkersThread();
 			animationThread.cancelCurrentAnimation(locMarker.marker, AnimatedValue.Target);
+			markerMoved = true;
 			if (animationDuration > 0) {
 				animationThread.animatePositionTo(locMarker.marker, target31, animationDuration);
 			} else {
 				locMarker.marker.setPosition(target31);
-				mapRenderer.setMyLocationCirclePosition(locMarker.marker.getPosition());
+				mapRenderer.setMyLocationCirclePosition(target31);
 			}
 			float circleRadius = location.getAccuracy();
 			boolean withCircle = shouldShowLocationRadius(currentMarkerState);
@@ -728,6 +737,12 @@ public class PointLocationLayer extends OsmandMapLayer
 				boolean animatePosition = settings.ANIMATE_MY_LOCATION.get();
 				long animationDuration = userInterruptingMovingToMyLocation ? 0
 						: isAnimateMyLocation() ? movingTime : 0;
+				if (animationDuration > 0 && MapUtils.getDistance(prevLocation, markerLocation)
+						* view.getCurrentRotatedTileBox().getPixDensity() < 1) {
+					// GPS jitter of a device at rest: a move shorter than a pixel needs no animation, and
+					// animating it keeps the map rendering at full frame rate as long as fixes arrive
+					animationDuration = 0;
+				}
 				Integer interpolationPercent = settings.LOCATION_INTERPOLATION_PERCENT.get();
 				if (!userInterruptingMovingToMyLocation
 						&& prevLocation != null && getApplication().getRoutingHelper().isFollowingMode()

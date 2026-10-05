@@ -300,8 +300,8 @@
     <string name="voice_stream_notification">Wie Benachrichtigungen</string>
     <string name="voice_stream_music">Wie Medien/Navigation</string>
     <string name="warning_tile_layer_not_downloadable">Die App kann die Kartenebene %1$s nicht herunterladen, eine Neuinstallation könnte helfen.</string>
-    <string name="overlay_transparency">Overlay-Transparenz</string>
-    <string name="map_transparency">Kartentransparenz</string>
+    <string name="overlay_transparency">Sichtbarkeit von Overlays</string>
+    <string name="map_transparency">Sichtbarkeit der Basiskarte</string>
     <string name="layer_underlay">Underlay-Karte …</string>
     <string name="map_underlay">Underlay-Karte</string>
     <string name="layer_overlay">Overlay-Karte …</string>
@@ -1317,7 +1317,7 @@
     <string name="select_map_marker">Kartenmarkierung auswählen</string>
     <string name="upload_osm_note">OSM-Hinweis hochladen</string>
     <string name="upload_anonymously">Anonym hochladen</string>
-    <string name="show_transparency_seekbar">Transparenz-Schieber anzeigen</string>
+    <string name="show_transparency_seekbar">Sichtbarkeitsschieberegler anzeigen</string>
     <string name="recalculate_route">Route neu berechnen</string>
     <string name="donations">Spenden</string>
     <string name="number_of_recipients">Anzahl der Empfänger</string>
@@ -1336,7 +1336,6 @@
     <string name="storage_permission_restart_is_required">Die App darf nun auf den externen Speicher schreiben, dazu ist aber ein manueller Neustart nötig.</string>
     <string name="shared_string_move_up">Verschieben ↑</string>
     <string name="shared_string_move_down">Verschieben ↓</string>
-    <string name="file_name_containes_illegal_char">Nicht erlaubte Zeichen im Dateinamen</string>
     <string name="rendering_value_fine_name">Fein</string>
     <string name="rendering_value_thin_name">Dünn</string>
     <string name="rendering_value_medium_name">Mittel</string>
@@ -2292,7 +2291,7 @@
     <string name="paste_Osmand_data_folder_path">Einfügen des Pfades zum Ordner mit OsmAnd-Daten</string>
     <string name="change_osmand_data_folder_question">OsmAnd-Datenordner ändern\?</string>
     <string name="move_maps_to_new_destination">Zum neuen Ziel verschieben</string>
-    <string name="change_data_storage_folder">Speicherordner ändern</string>
+    <string name="change_data_storage_folder">Ordner für Daten ändern</string>
     <string name="rendering_attr_piste_type_snow_park_name">Winter-Funpark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Schlitten</string>
     <string name="rendering_attr_piste_type_sled_name">Schlitten</string>
@@ -2408,7 +2407,7 @@
     <string name="live_monitoring_time_buffer">Zeitpuffer</string>
     <string name="live_monitoring_tracking_interval">Aufzeichnungsintervall</string>
     <string name="live_monitoring_adress">Webadresse</string>
-    <string name="monitoring_notification">Benachrichtigung</string>
+    <string name="monitoring_notification">Schaltfläche \'Aufnehmen\' in Benachrichtigungen anzeigen</string>
     <string name="monitoring_min_speed">Mindestgeschwindigkeit</string>
     <string name="monitoring_min_accuracy">Mindestgenauigkeit</string>
     <string name="monitoring_min_distance">Minimale Verschiebung</string>
@@ -4650,7 +4649,7 @@
     <string name="obd_engine_oil_temperature">Motoröltemperatur</string>
     <string name="obd_fuel_pressure_desc">Zeigt den Druck im Kraftstoffsystem an</string>
     <string name="obd_engine_oil_temperature_desc">Zeigt die Temperatur des Motoröls an.</string>
-    <string name="obd_engine_runtime_desc">Zeigt an, wie lange der Motor seit dem Starten gelaufen ist.</string>
+    <string name="obd_engine_runtime_desc">Zeigt an, wie lange der Motor seit dem Start läuft.</string>
     <string name="obd_throttle_position">Drosselklappenstellung</string>
     <string name="shared_string_volume">Menge</string>
     <string name="av_audio_sample_rate">Audio-Samplerate</string>
@@ -4679,12 +4678,12 @@
     <string name="map_widget_route_information_desc">Zeigt die voraussichtliche Ankunftszeit, die verbleibende Reisezeit und die Entfernung für die aktive Navigationsroute an.</string>
     <string name="ais_nmea_protocol_description">Protokoll für NMEA-Datenempfang auswählen</string>
     <string name="ais_ship_lost_timeout_description">Zeitlimit für die Sichtbarkeit veralteter Schiffe festlegen: Nach Ablauf dieser Zeit ohne Signalempfang wird das Schiffssymbol durchgestrichen.</string>
-    <string name="plugin_ais_tracker_name">AIS-Schiffstracker</string>
+    <string name="plugin_ais_tracker_name">Schiffsverfolgung (AIS)</string>
     <string name="ais_cpa_warning_time_description">Wenn die TCPA (Zeit bis zum nächsten Annäherungspunkt) zu einem anderen Schiff unter den festgelegten Schwellenwert fällt, wird das Schiff rot markiert.</string>
     <string name="ais_port_nmea_local_description">UDP-Port definieren, an dem OsmAnd NMEA-Daten empfängt</string>
     <string name="ais_object_lost_timeouts">Zeitlimit-Einstellungen für AIS-Signalempfang</string>
     <string name="ais_address_nmea_server_description">IP-Adresse der NMEA-Datenquelle definieren (falls TCP verwendet wird)</string>
-    <string name="ais_load_data">AIS-Daten aus Datei laden</string>
+    <string name="ais_load_data">Schiffsverkehr simulieren</string>
     <string name="ais_address_nmea_server">IP-Adresse der NMEA-Datenquelle</string>
     <string name="ais_port_nmea_local">UDP-Port des lokalen NMEA-Datenempfängers</string>
     <string name="ais_object_lost_timeout">Zeitlimit für die Sichtbarkeit bei Schiffsverlust</string>
@@ -4906,7 +4905,7 @@
     <string name="lang_crh">Krimtatarisch (lateinisch)</string>
     <string name="efficient_grid">Effizientes Gitter</string>
     <string name="unsupported_maps">Nicht mehr verfügbare Karten</string>
-    <string name="deleted_maps_prompt">Diese Karten werden nicht mehr unterstützt und wurden durch regionale Aufteilung ersetzt. Bitte Karten löschen und die neuen Karten herunterladen.</string>
+    <string name="deleted_maps_prompt">Diese Karten werden nicht mehr unterstützt. Bitte löschen Sie sie und laden Sie die neuen Versionen herunter.</string>
     <string name="routing_attr_weightrating_name">Maximales Gewicht bei voller Beladung</string>
     <string name="routing_attr_maxaxleload_name">Maximale Achslast</string>
     <string name="centimeter">cm</string>
@@ -5160,7 +5159,7 @@
     <string name="astro_designations">Bezeichnungen</string>
     <string name="obd_simulation_device">Simulationsgerät</string>
     <string name="favorite_folder_rename_conflict">Ein Ordner mit diesem Namen ist bereits vorhanden.</string>
-    <string name="favorite_folder_invalid_name">Der Ordnername darf kein / oder _%_ enthalten</string>
+    <string name="favorite_folder_invalid_name">Der Ordnername darf kein / oder %1$s enthalten</string>
     <string name="favorite_folder_duplicate_message">Verwenden Sie einen Ordnernamen, der noch nicht vorhanden ist.</string>
     <string name="favorite_folder_name">Ordnername</string>
     <string name="edit_folder">Ordner bearbeiten</string>
@@ -5186,9 +5185,9 @@
     <string name="shared_string_recent">Kürzlich</string>
     <string name="last_week">Letzte Woche</string>
     <string name="history_is_turned_off">Verlauf ist deaktiviert</string>
-    <string name="data_storage">Datenspeicher</string>
-    <string name="main_storage">Hauptspeicher</string>
-    <string name="media_storage">Medienspeicher</string>
+    <string name="data_storage">Ordner für Daten</string>
+    <string name="main_storage">Ordner für Daten</string>
+    <string name="media_storage">Ordner für Mediendateien</string>
     <string name="camera_folder">Kameraordner</string>
     <string name="route_calculation_method">Routenberechnungsmethode</string>
     <string name="route_calculation_method_standard_only">Nur Standard</string>
@@ -5246,7 +5245,6 @@
     <string name="share_favorites_points_and_media">Punkte und Medien</string>
     <string name="share_favorites_share_failed">Die Datei konnte nicht geteilt werden.</string>
     <string name="share_favorites_missing_media_warning">Einige angehängte Medien konnten nicht beigefügt werden.</string>
-    <string name="search_on_web">Im Internet suchen</string>
     <string name="shared_string_note">Anmerkung</string>
     <string name="media_storage_camera_folder_note_descr">Audio wird unter Music/OsmAnd gespeichert.</string>
     <string name="always_keep_local_copy">Immer eine lokale Kopie behalten</string>
@@ -5273,11 +5271,12 @@
     <string name="required_maps_route_overview">Routen-Überblick:</string>
     <string name="free_download_limit_reached_description">Unbegrenzte Karten-Downloads und -Updates freischalten</string>
     <string name="open_history_settings">Einstellungen für den Verlauf öffnen</string>
-    <string name="change_media_storage_question">Medienspeicher ändern?</string>
+    <string name="change_media_storage_question">Ordner für Mediendateien ändern?</string>
     <string name="gallery_stats_size">Größe %1$s.</string>
     <string name="coordinate_format_cancel_changes_title">Nicht gespeicherte Änderungen</string>
     <string name="astro_eclipse_maximum">Maximum</string>
     <string name="astro_eclipse_phase_partial">Partiell</string>
     <string name="astro_eclipse_phase_total">Total</string>
     <string name="astro_eclipse_column_below_horizon">Unter dem Horizont</string>
+    <string name="file_name_containes_illegal_char">Name darf Folgendes nicht enthalten: %1$s</string>
 </resources>

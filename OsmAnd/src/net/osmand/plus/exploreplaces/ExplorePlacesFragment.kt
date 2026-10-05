@@ -5,7 +5,6 @@ import android.os.AsyncTask.Status.RUNNING
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,8 +22,6 @@ import net.osmand.CallbackWithObject
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.data.Amenity
-import net.osmand.data.MapObject
-import net.osmand.data.PointDescription
 import net.osmand.map.IMapLocationListener
 import net.osmand.plus.AppInitializeListener
 import net.osmand.plus.AppInitializer
@@ -379,27 +376,9 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), ExplorePlacesAdapter.Exp
 		}, LIST_UPDATE_PERIOD.toLong())
 	}
 
-	private fun showPointInContextMenu(searchResult: SearchResult) {
-		mapActivity?.apply {
-			val contextMenuLayer = mapLayers.contextMenuLayer
-			val poiMapLayer = mapLayers.poiMapLayer
-			val objectLocation = (searchResult.`object` as? MapObject)?.location
-			val location = searchResult.location ?: objectLocation ?: return
-			val pointDescriptionObject: Pair<PointDescription, Any> =
-				QuickSearchListItem.getPointDescriptionObject(app, searchResult)
-			val menuObject = pointDescriptionObject.second ?: searchResult.`object`
-			val provider = if (menuObject is Amenity) poiMapLayer else null
-			contextMenuLayer.showContextMenu(
-				location,
-				pointDescriptionObject.first,
-				menuObject,
-				provider)
-		}
-	}
-
 	override fun onExploreItemClicked(searchResult: SearchResult) {
 		mapActivity?.let {
-			showPointInContextMenu(searchResult)
+			it.mapLayers.contextMenuLayer.showContextMenu(searchResult)
 			hideList()
 		}
 	}

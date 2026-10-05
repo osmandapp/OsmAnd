@@ -97,7 +97,6 @@ import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.preferences.*;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
-import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.settings.enums.*;
 import net.osmand.plus.utils.AndroidUtils;
@@ -113,6 +112,7 @@ import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
@@ -1252,16 +1252,36 @@ public class OsmandSettings {
 	public TemperatureUnit getTemperatureUnit(@NonNull ApplicationMode appMode) {
 		TemperatureUnitsMode unitsMode = UNIT_OF_TEMPERATURE.getModeValue(appMode);
 		if (unitsMode == TemperatureUnitsMode.SYSTEM_DEFAULT) {
-			try {
-				String unit = LocalePreferences.getTemperatureUnit();
-				boolean fahrenheit = Algorithms.stringsEqual(unit, LocalePreferences.TemperatureUnit.FAHRENHEIT);
-				return fahrenheit ? TemperatureUnit.FAHRENHEIT : TemperatureUnit.CELSIUS;
-			} catch (IllegalArgumentException e) {
-				LOG.error(e);
-				return TemperatureUnit.CELSIUS;
-			}
+			return getSystemTemperatureUnit();
 		}
 		return unitsMode.getTemperatureUnit();
+	}
+
+	private record SystemTemperatureUnit(@NonNull Locale locale, @NonNull TemperatureUnit unit) {
+	}
+
+	@Nullable
+	private volatile SystemTemperatureUnit systemTemperatureUnit;
+
+	// Asked on every map frame by the weather layers, while the ICU lookup behind it is slow
+	@NonNull
+	private TemperatureUnit getSystemTemperatureUnit() {
+		Locale locale = Locale.getDefault(Locale.Category.FORMAT);
+		SystemTemperatureUnit cached = systemTemperatureUnit;
+		if (cached != null && cached.locale().equals(locale)) {
+			return cached.unit();
+		}
+		TemperatureUnit unit;
+		try {
+			String value = LocalePreferences.getTemperatureUnit();
+			boolean fahrenheit = Algorithms.stringsEqual(value, LocalePreferences.TemperatureUnit.FAHRENHEIT);
+			unit = fahrenheit ? TemperatureUnit.FAHRENHEIT : TemperatureUnit.CELSIUS;
+		} catch (IllegalArgumentException e) {
+			LOG.error(e);
+			unit = TemperatureUnit.CELSIUS;
+		}
+		systemTemperatureUnit = new SystemTemperatureUnit(locale, unit);
+		return unit;
 	}
 
 	// fuel tank capacity stored in litres
@@ -1472,6 +1492,17 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SEND_ANONYMOUS_DATA_REQUEST_PROCESSED = new BooleanPreference(this, "send_anonymous_data_request_processed", false).makeGlobal().cache();
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_REQUESTS_COUNT = new IntPreference(this, "send_anonymous_data_requests_count", 0).makeGlobal().cache();
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_LAST_REQUEST_NS = new IntPreference(this, "send_anonymous_data_last_request_ns", -1).makeGlobal().cache();
+
+	// a heap histogram is collected by itself when the heap grows past what a healthy session
+	// needs, so that a report from a device in trouble says what the heap was made of.
+	// Off by default: the dump stops every thread for 5-7 s and ends in an ANR when the screen is touched
+	public final OsmandPreference<Boolean> AUTO_HEAP_HISTOGRAM = new BooleanPreference(this, "auto_heap_histogram", false).makeGlobal().makeShared().cache();
+
+	// timestamp of the newest system crash (ANR, native) the crash dialog was already shown for
+	public final OsmandPreference<Long> LAST_SHOWN_SYSTEM_CRASH_TIME = new LongPreference(this, "last_shown_system_crash_time", 0).makeGlobal();
+
+	// hash of the release notes the "What's new" dialog was already shown for
+	public final OsmandPreference<String> LAST_SHOWN_RELEASE_NOTES = new StringPreference(this, "last_shown_release_notes", "").makeGlobal();
 
 	public final OsmandPreference<Boolean> SEND_UNIQUE_USER_IDENTIFIER = new BooleanPreference(this, "send_unique_user_identifier", true).makeGlobal().cache();
 
@@ -1771,6 +1802,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference(this, "calc_gpx_route", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Integer> GPX_SEGMENT_INDEX = new IntPreference(this, "gpx_route_segment", -1).makeGlobal().cache();
 	public final OsmandPreference<Integer> GPX_ROUTE_INDEX = new IntPreference(this, "gpx_route_index", -1).makeGlobal().cache();
+	public final OsmandPreference<Boolean> GPX_ROUTE_REVERSE = new BooleanPreference(this, "gpx_route_reverse", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> GPX_PASS_WHOLE_ROUTE = new BooleanPreference(this, "gpx_pass_whole_route", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<ReverseTrackStrategy> GPX_REVERSE_STRATEGY =
 			new EnumStringPreference<>(this, "gpx_reverse_strategy", ReverseTrackStrategy.RECALCULATE_ALL_ROUTE_POINTS, ReverseTrackStrategy.values()).makeGlobal().makeShared().cache();
@@ -1790,6 +1822,7 @@ public class OsmandSettings {
 			"current_track_route_info_attribute", null);
 	public final CommonPreference<String> CURRENT_TRACK_WIDTH = new StringPreference(this, "current_track_width", "").makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference(this, "current_track_show_arrows", false).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_LINE_STYLE = new StringPreference(this, "current_track_line_style", "solid").makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference(this, "current_track_show_start_finish", true).makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_3D_VISUALIZATION_TYPE = new StringPreference(this, "currentTrackVisualization3dByType", "none").makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_3D_WALL_COLORING_TYPE = new StringPreference(this, "currentTrackVisualization3dWallColorType", "none").makeGlobal().makeShared().cache();
@@ -2064,7 +2097,7 @@ public class OsmandSettings {
 
 	public CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference(this, "previous_installed_version", "").makeGlobal();
 
-	public final OsmandPreference<Boolean> USE_SPATIAL_TEXT_SEARCH = new BooleanPreference(this, "use_spatial_text_search", false).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Boolean> USE_SPATIAL_TEXT_SEARCH = new BooleanPreference(this, "use_spatial_search", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference(this, "should_show_free_version_banner", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOULD_SHOW_DISCOUNT_BOTTOM_SHEET = new BooleanPreference(this, "should_show_discount_bottom_sheet", false).makeGlobal().makeShared().cache();
 
@@ -3556,6 +3589,16 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> ENABLE_MSAA = new BooleanPreference(this, "enable_msaa", false).makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> SPHERICAL_MAP = new BooleanPreference(this, "spherical_map", false).makeProfile().cache();
+
+	public static final float BUILDINGS_3D_ALPHA_DEF_VALUE = 0.5f;
+	public static final int BUILDINGS_3D_DEFAULT_COLOR = 0x666666;
+
+	public final CommonPreference<Boolean> ENABLE_3D_MAP_OBJECTS = new BooleanPreference(this, "enable_3d_map_objects", false).makeProfile().cache();
+	public final CommonPreference<Float> BUILDINGS_3D_ALPHA = new FloatPreference(this, "3d_buildings_alpha", BUILDINGS_3D_ALPHA_DEF_VALUE).makeProfile().cache();
+	public final CommonPreference<Integer> BUILDINGS_3D_VIEW_DISTANCE = new IntPreference(this, "3d_buildings_view_distance", 1).makeProfile().cache();
+	public final CommonPreference<Integer> BUILDINGS_3D_COLOR_STYLE = new IntPreference(this, "buildings_3d_color_style", 1).makeProfile().cache();
+	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_NIGHT_COLOR = new IntPreference(this, "buildings_3d_custom_night_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
+	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_DAY_COLOR = new IntPreference(this, "buildings_3d_custom_day_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
 
 	@NonNull
 	public OsmandPreference<Boolean> getAllowPrivatePreference(@NonNull ApplicationMode appMode) {

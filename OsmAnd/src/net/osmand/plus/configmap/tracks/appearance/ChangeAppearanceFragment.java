@@ -128,6 +128,11 @@ public class ChangeAppearanceFragment extends BaseFullScreenDialogFragment imple
 
 		inflate(R.layout.list_item_divider, container, true);
 
+		MultiStateCard lineStyleCard = new MultiStateCard(activity, controller.getLineStyleCardController());
+		container.addView(lineStyleCard.build());
+
+		inflate(R.layout.list_item_divider, container, true);
+
 		MultiStateCard splitCard = new MultiStateCard(activity, controller.getSplitCardController());
 		container.addView(splitCard.build());
 

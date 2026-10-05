@@ -38,8 +38,6 @@ final class FavoritesBackupMerger {
 
 	private static final Log LOG = PlatformUtil.getLog(FavoritesBackupMerger.class);
 	private static final String SNAPSHOT_DIR = "favorites_sync";
-	// Upload callbacks run in parallel, while applying a group mutates shared Favorites state.
-	private static final Object MERGE_FINISH_LOCK = new Object();
 
 	private FavoritesBackupMerger() {
 	}
@@ -92,9 +90,8 @@ final class FavoritesBackupMerger {
 		}
 		try {
 			if (favoritesItem instanceof MergeUploadItem mergeItem) {
-				synchronized (MERGE_FINISH_LOCK) {
-					mergeItem.finishUpload(fileName, uploadTime);
-				}
+				// Upload callbacks run in parallel, while applying a group mutates shared state.
+				app.getFavoritesHelper().runBulkUpdate(() -> mergeItem.finishUpload(fileName, uploadTime));
 			} else if (favoritesItem.getLocalModifiedTime() == favoritesItem.getLastModifiedTime()) {
 				saveSnapshot(app, favoritesItem.getSingleGroup(), fileName, uploadTime);
 			} else {

@@ -153,6 +153,9 @@ public class NavigationService extends Service {
 			} catch (Exception e) {
 				LOG.error("Failed to start NavigationService (usedBy=" + usedBy.get() + ")", e);
 				resetServiceState(app);
+				// The service has to go down right away: a service that never reached the
+				// foreground state is killed with ForegroundServiceDidNotStartInTimeException.
+				stopSelf();
 				return START_NOT_STICKY;
 			}
 			try {

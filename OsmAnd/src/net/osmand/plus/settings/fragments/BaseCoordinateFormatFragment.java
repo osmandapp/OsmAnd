@@ -18,11 +18,11 @@ import com.google.android.material.card.MaterialCardView;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.coordinates.CoordinateFormat;
 import net.osmand.plus.settings.coordinates.CoordinateFormatHelper;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.settings.coordinates.CoordinateFormat;
 
 import java.util.List;
 

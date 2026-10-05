@@ -2,6 +2,9 @@ package net.osmand.shared
 
 object IndexConstants {
 
+	/** The obf format version the app reads; a file name may carry it as a `_2` suffix. */
+	const val BINARY_MAP_VERSION = 2 // starts with 1
+
 	const val SQLITE_EXT = ".sqlitedb"
 
 	const val POI_INDEX_EXT = ".poi.odb"
