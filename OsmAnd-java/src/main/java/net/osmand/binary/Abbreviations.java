@@ -88,6 +88,9 @@ public class Abbreviations {
 	static {
 		searchAbbreviations.putAll(abbreviations);
 		searchAbbreviations.put("ave", "Avenue"); // extra
+		searchAbbreviations.put("pl", "Place");
+		searchAbbreviations.put("pkwy", "Parkway");
+		searchAbbreviations.put("mt", "Mount");
 		searchAbbreviations.put("st", "Street Saint"); // 2 values could be saint
 		// duplicates - synonyms and not abbrevations actually
 		searchAbbreviations.put("о", "Остров");
