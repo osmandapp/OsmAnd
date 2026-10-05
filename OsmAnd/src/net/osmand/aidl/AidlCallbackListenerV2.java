@@ -16,7 +16,9 @@ public interface AidlCallbackListenerV2 {
 	 *                 2 - key for registerForNavigationUpdates(...)
 	 *                 4 - key for onContextMenuButtonClicked(...)
 	 *                 8 - key for... future use
-	 *                 16 - key for... future use
+	 *                 16 - key for registerForKeyEvents(...)
+	 *                 32 - key for registerForLogcatMessages(...)
+	 *                 64 - key for registerForRouteUpdates(...)
 	 * @return long - unique id of callback. Could be used for unregistering callback
 	 */
 	long addAidlCallback(IOsmAndAidlCallback callback, int key);
