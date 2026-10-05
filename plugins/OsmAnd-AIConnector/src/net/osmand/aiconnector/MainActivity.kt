@@ -27,8 +27,8 @@ import net.osmand.aiconnector.ConnectorSettings.RunMode
 import org.json.JSONObject
 
 /**
- * The connector setup in three steps: OsmAnd access, how the computer connects, and the settings to copy
- * into the AI assistant.
+ * The connector setup in four steps: OsmAnd access, how the computer connects, the settings to copy
+ * into the AI assistant, and an example request.
  */
 class MainActivity : AppCompatActivity() {
 
@@ -49,7 +49,10 @@ class MainActivity : AppCompatActivity() {
 	private lateinit var osmandName: TextView
 	private lateinit var accessStatus: TextView
 	private lateinit var accessFooter: TextView
+	private lateinit var bridgeRow: View
+	private lateinit var bridgeSwitch: MaterialSwitch
 	private lateinit var setupCommand: TextView
+	private lateinit var copySetup: Button
 	private lateinit var clientWhere: TextView
 	private lateinit var clientConfig: TextView
 	private var client = AssistantClient.CLAUDE_CODE
@@ -133,6 +136,14 @@ class MainActivity : AppCompatActivity() {
 
 		accessFooter = findViewById(R.id.access_footer)
 		setupCommand = findViewById(R.id.setup_command)
+		copySetup = findViewById(R.id.copy_setup)
+		copySetup.setOnClickListener { copy(setupCommand.text) }
+		bridgeRow = findViewById(R.id.bridge_row)
+		bridgeSwitch = findViewById(R.id.bridge_switch)
+		bridgeRow.setOnClickListener {
+			ConnectorSettings.setUseBridge(this, !ConnectorSettings.useBridge(this))
+			refresh()
+		}
 		val toggle: MaterialButtonToggleGroup = findViewById(R.id.access_toggle)
 		toggle.check(if (ConnectorSettings.access(this) == Access.WIFI) R.id.access_wifi else R.id.access_usb)
 		toggle.addOnButtonCheckedListener { _, id, checked ->
@@ -160,7 +171,8 @@ class MainActivity : AppCompatActivity() {
 			}
 			chips.addView(chip)
 		}
-		findViewById<Button>(R.id.copy).setOnClickListener { copySettings() }
+		findViewById<Button>(R.id.copy).setOnClickListener { copy(clientConfig.text) }
+		findViewById<Button>(R.id.copy_example).setOnClickListener { copy(getString(R.string.try_example)) }
 	}
 
 	private fun refresh() {
@@ -189,18 +201,27 @@ class MainActivity : AppCompatActivity() {
 			"${ConnectorSettings.OSMAND_PACKAGES[pack]} ($pack)"
 		}
 
-		val access = ConnectorSettings.access(this)
-		val usb = access == Access.USB
-		accessFooter.setText(if (usb) R.string.usb_footer else R.string.wifi_footer)
-		// USB: forward the port; Wi-Fi: download the bridge that finds the phone by name
-		setupCommand.text = if (usb) {
-			"adb forward tcp:${ConnectorSettings.PORT} tcp:${ConnectorSettings.PORT}"
-		} else {
-			ConnectorSettings.bridgeDownload()
+		val usb = ConnectorSettings.access(this) == Access.USB
+		val bridge = ConnectorSettings.usesBridge(this)
+		bridgeRow.visibility = if (usb) View.GONE else View.VISIBLE
+		bridgeSwitch.isChecked = ConnectorSettings.useBridge(this)
+		accessFooter.setText(when {
+			usb -> R.string.usb_footer
+			bridge -> R.string.wifi_footer
+			else -> R.string.wifi_direct_footer
+		})
+		// USB: forward the port; Wi-Fi with the bridge: download it; Wi-Fi without: nothing to run
+		val command = when {
+			usb -> "adb forward tcp:${ConnectorSettings.PORT} tcp:${ConnectorSettings.PORT}"
+			bridge -> ConnectorSettings.bridgeDownload()
+			else -> null
 		}
+		setupCommand.text = command
+		setupCommand.visibility = if (command != null) View.VISIBLE else View.GONE
+		copySetup.visibility = setupCommand.visibility
 
 		clientWhere.setText(client.whereId)
-		clientConfig.text = client.config(access, ConnectorSettings.url(this), ConnectorSettings.token(this))
+		clientConfig.text = client.config(bridge, ConnectorSettings.url(this), ConnectorSettings.token(this))
 	}
 
 	private fun refreshLater() {
@@ -265,13 +286,10 @@ class MainActivity : AppCompatActivity() {
 		}.start()
 	}
 
-	private fun copySettings() {
-		var text = clientConfig.text.toString()
-		text = setupCommand.text.toString() + "\n\n" + text
+	private fun copy(text: CharSequence) {
 		val clipboard = getSystemService(ClipboardManager::class.java)
 		clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.app_name), text))
 		Toast.makeText(this, R.string.copied, Toast.LENGTH_SHORT).show()
-		refresh()
 	}
 
 	private fun confirmResetToken() {

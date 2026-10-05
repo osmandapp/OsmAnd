@@ -33,7 +33,10 @@
 	<string name="step_connection">2. How the computer connects</string>
 	<string name="access_wifi">Wi-Fi</string>
 	<string name="access_usb">USB (adb)</string>
-	<string name="wifi_footer">The computer and the phone are on the same Wi-Fi. The computer finds the phone by name, so a new address from the router changes nothing. Run this on the computer once to get the bridge (needs Python 3):</string>
+	<string name="bridge_title">Find the phone automatically</string>
+	<string name="bridge_summary">Keeps working when the router gives the phone a new address. Needs Python 3 on the computer.</string>
+	<string name="wifi_footer">The computer and the phone are on the same Wi-Fi. Run this on the computer once to get the bridge:</string>
+	<string name="wifi_direct_footer">The computer and the phone are on the same Wi-Fi. Nothing to run: the settings in step 3 hold the phone\'s address. If the router gives the phone a new address, copy them again. Tip: reserve the address in your router.</string>
 	<string name="usb_footer">The phone is connected with a USB cable and USB debugging is on. Run this on the computer once per connection:</string>
 
 	<string name="step_assistant">3. Add to your AI assistant</string>
@@ -49,7 +52,9 @@
 	<string name="client_other_where">Any app that supports MCP servers over HTTP:</string>
 	<string name="copy">Copy</string>
 	<string name="copied">Copied</string>
-	<string name="try_asking">Then ask, for example: \"Show the Golden Gate in Kyiv in OsmAnd and build a walking route to Podil.\"</string>
+	<string name="step_try">4. Try it</string>
+	<string name="try_where">Start a new chat in your assistant and ask, for example:</string>
+	<string name="try_example">Show Amsterdam Centraal in OsmAnd and build a cycling route to the Rijksmuseum.</string>
 
 	<string name="reset_token">Reset access key</string>
 	<string name="reset_token_message">Assistants with the old key lose access. Copy the settings again for each of them.</string>

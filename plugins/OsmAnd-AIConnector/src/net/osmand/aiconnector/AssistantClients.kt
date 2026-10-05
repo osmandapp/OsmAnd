@@ -4,8 +4,8 @@ import androidx.annotation.StringRes
 
 /**
  * How to add the connector to an AI assistant. Each client gets where to put it and the exact text to copy.
- * Over Wi-Fi the assistant starts the stdio bridge, which finds the phone by name, so the settings hold
- * no address and survive a new one from the router. Over USB the address is always localhost.
+ * With the bridge (Wi-Fi) the assistant starts a stdio command that finds the phone by name, so the settings
+ * hold no address and survive a new one from the router. Otherwise they hold the URL.
  */
 enum class AssistantClient(@StringRes val titleId: Int, @StringRes val whereId: Int) {
 
@@ -112,6 +112,6 @@ enum class AssistantClient(@StringRes val titleId: Int, @StringRes val whereId: 
 
 	protected abstract fun bridgeConfig(token: String): String
 
-	fun config(access: ConnectorSettings.Access, url: String, token: String) =
-		if (access == ConnectorSettings.Access.WIFI) bridgeConfig(token) else httpConfig(url, token)
+	fun config(bridge: Boolean, url: String, token: String) =
+		if (bridge) bridgeConfig(token) else httpConfig(url, token)
 }

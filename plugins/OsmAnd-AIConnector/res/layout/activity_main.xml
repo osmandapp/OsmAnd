@@ -256,22 +256,83 @@
 					android:text="@string/access_usb" />
 			</com.google.android.material.button.MaterialButtonToggleGroup>
 
-			<TextView
-				android:id="@+id/access_footer"
-				style="@style/TextAppearance.Material3.BodySmall"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:paddingTop="8dp"
-				android:textColor="?attr/colorOnSurfaceVariant" />
-
-			<TextView
-				android:id="@+id/setup_command"
-				style="@style/CodeBlock"
+			<com.google.android.material.card.MaterialCardView
+				style="@style/Widget.Material3.CardView.Filled"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="8dp"
-				android:background="?attr/colorSurfaceContainerHighest"
-				android:padding="12dp" />
+				app:cardBackgroundColor="?attr/colorSurfaceContainerLow">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:padding="@dimen/card_padding">
+
+					<!-- Wi-Fi only: the bridge finds the phone by name, without it the settings hold the address -->
+					<LinearLayout
+						android:id="@+id/bridge_row"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="12dp"
+						android:background="?attr/selectableItemBackground"
+						android:gravity="center_vertical"
+						android:orientation="horizontal">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:orientation="vertical">
+
+							<TextView
+								style="@style/TextAppearance.Material3.BodyLarge"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:text="@string/bridge_title" />
+
+							<TextView
+								style="@style/TextAppearance.Material3.BodyMedium"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:text="@string/bridge_summary"
+								android:textColor="?attr/colorOnSurfaceVariant" />
+						</LinearLayout>
+
+						<com.google.android.material.materialswitch.MaterialSwitch
+							android:id="@+id/bridge_switch"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="16dp"
+							android:clickable="false"
+							android:focusable="false" />
+					</LinearLayout>
+
+					<TextView
+						android:id="@+id/access_footer"
+						style="@style/TextAppearance.Material3.BodyMedium"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content" />
+
+					<TextView
+						android:id="@+id/setup_command"
+						style="@style/CodeBlock"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="8dp"
+						android:background="?attr/colorSurfaceContainerHighest"
+						android:padding="12dp" />
+
+					<Button
+						android:id="@+id/copy_setup"
+						style="@style/Widget.Material3.Button"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="12dp"
+						android:text="@string/copy"
+						app:icon="@drawable/ic_copy" />
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
 
 			<!-- 3. Assistant -->
 			<TextView
@@ -336,13 +397,55 @@
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
 
+			<!-- 4. Example -->
 			<TextView
-				style="@style/TextAppearance.Material3.BodySmall"
+				style="@style/TextAppearance.Material3.TitleSmall"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:paddingTop="8dp"
-				android:text="@string/try_asking"
-				android:textColor="?attr/colorOnSurfaceVariant" />
+				android:paddingTop="@dimen/group_gap"
+				android:paddingBottom="8dp"
+				android:text="@string/step_try"
+				android:textColor="?attr/colorPrimary" />
+
+			<com.google.android.material.card.MaterialCardView
+				style="@style/Widget.Material3.CardView.Filled"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:cardBackgroundColor="?attr/colorSurfaceContainerLow">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:padding="@dimen/card_padding">
+
+					<TextView
+						style="@style/TextAppearance.Material3.BodyMedium"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="@string/try_where" />
+
+					<TextView
+						android:id="@+id/try_example"
+						style="@style/TextAppearance.Material3.BodyLarge"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="8dp"
+						android:background="?attr/colorSurfaceContainerHighest"
+						android:padding="12dp"
+						android:text="@string/try_example"
+						android:textIsSelectable="true" />
+
+					<Button
+						android:id="@+id/copy_example"
+						style="@style/Widget.Material3.Button"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="12dp"
+						android:text="@string/copy"
+						app:icon="@drawable/ic_copy" />
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>
