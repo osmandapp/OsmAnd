@@ -337,7 +337,9 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 				}
 			}
 
-			connectAfterScan(context, deviceId);
+			if (!connectAfterScan(context, deviceId)) {
+				return false;
+			}
 			LOG.debug("Trying to create new connection " + device.getAddress() + ". gatt " + bluetoothGatt);
 			setCurrentState(DeviceConnectionState.CONNECTING);
 			for (DeviceListener listener : listeners) {
@@ -347,10 +349,15 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		return true;
 	}
 
-	public void connectAfterScan(Context ctx, String targetAddress) {
+	public boolean connectAfterScan(Context ctx, String targetAddress) {
 		LOG.debug("scan to connect to " + targetAddress);
 		if (bluetoothAdapter != null && !bluetoothAdapter.isDiscovering()) {
 			BluetoothLeScanner scanner = bluetoothAdapter.getBluetoothLeScanner();
+			if (scanner == null) {
+				// getBluetoothLeScanner() returns null while Bluetooth is turned off
+				LOG.debug("BluetoothLeScanner not available on connect");
+				return false;
+			}
 			ScanSettings settings = new ScanSettings.Builder()
 					.setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
 					.setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE)
@@ -372,6 +379,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 				}
 			});
 		}
+		return true;
 	}
 
 	@SuppressLint("MissingPermission")

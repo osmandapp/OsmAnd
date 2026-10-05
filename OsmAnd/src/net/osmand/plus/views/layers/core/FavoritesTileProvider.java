@@ -3,7 +3,6 @@ package net.osmand.plus.views.layers.core;
 import static net.osmand.core.android.MapRendererContext.FAVORITES_SECTION;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,22 +12,19 @@ import net.osmand.core.jni.*;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class FavoritesTileProvider extends interface_MapTiledCollectionProvider {
 
 	private final QListPointI points31 = new QListPointI();
 	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
-	private final Map<Long, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
-	private final Map<Long, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
+	private final IconPixelsCache<Long> bigIconsCache = new IconPixelsCache<>();
+	private final IconPixelsCache<Long> smallIconsCache = new IconPixelsCache<>();
 	private final Context ctx;
 	private final int baseOrder;
 	private final boolean textVisible;
@@ -108,11 +104,9 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		if (data == null) {
 			return SwigUtilities.nullSkImage();
 		}
-		Bitmap bitmap;
 		long key = data.getKey();
 		if (isFullSize) {
-			bitmap = bigBitmapCache.get(key);
-			if (bitmap == null) {
+			return bigIconsCache.getImage(key, k -> {
 				PointImageDrawable drawable;
 				if (data.hasMarker) {
 					drawable = PointImageUtils.getOrCreate(ctx, data.color, data.withShadow,
@@ -121,19 +115,15 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 					drawable = PointImageUtils.getOrCreate(ctx, data.color,
 							data.withShadow, false, data.overlayIconId, data.backgroundType);
 				}
-				bitmap = drawable.getBigMergedBitmap(data.textScale, false);
-				bigBitmapCache.put(key, bitmap);
-			}
+				return drawable.getBigMergedBitmap(data.textScale, false);
+			});
 		} else {
-			bitmap = smallBitmapCache.get(key);
-			if (bitmap == null) {
+			return smallIconsCache.getImage(key, k -> {
 				PointImageDrawable drawable = PointImageUtils.getOrCreate(ctx, data.color,
 						data.withShadow, false, data.overlayIconId, data.backgroundType);
-				bitmap = drawable.getSmallMergedBitmap(data.textScale);
-				smallBitmapCache.put(key, bitmap);
-			}
+				return drawable.getSmallMergedBitmap(data.textScale);
+			});
 		}
-		return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
 	}
 
 	@Override

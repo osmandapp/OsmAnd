@@ -296,11 +296,16 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FAVOURITES_REQUEST);
 	}
 
+	@Nullable
+	protected String getImportTargetFolder() {
+		return null;
+	}
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null && data.getData() != null) {
-				importHelper.handleFavouritesImport(data.getData());
+				importHelper.handleFavouritesImport(data.getData(), getImportTargetFolder());
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);

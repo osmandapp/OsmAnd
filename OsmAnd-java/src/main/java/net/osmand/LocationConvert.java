@@ -2,7 +2,9 @@ package net.osmand;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class LocationConvert {
@@ -24,6 +26,8 @@ public class LocationConvert {
 	private static final char DELIMITER_MINUTES = '′';
 	private static final char DELIMITER_SECONDS = '″';
 	private static final char DELIMITER_SPACE = ' ';
+	// DecimalFormat is costly to create and not thread safe: one cache per thread, as in OsmAndFormatter
+	private static final ThreadLocal<Map<String, DecimalFormat>> DECIMAL_FORMATS = new ThreadLocal<>();
 
 	
 
@@ -140,7 +144,7 @@ public class LocationConvert {
 			coordinate = -coordinate;
 		}
 
-		DecimalFormat df = new DecimalFormat("##0.00000", new DecimalFormatSymbols(Locale.US)); //$NON-NLS-1$
+		DecimalFormat df = getDecimalFormat("##0.00000"); //$NON-NLS-1$
 		if (outputType == FORMAT_MINUTES || outputType == FORMAT_SECONDS) {
 			coordinate = formatCoordinate(coordinate, sb, DELIM);
 			if (outputType == FORMAT_SECONDS) {
@@ -204,21 +208,30 @@ public class LocationConvert {
 
 	private static String formatDegrees(double coordinate, int outputType, StringBuilder sb) {
 		if (outputType == FORMAT_DEGREES) {
-			sb.append(new DecimalFormat("##0.00000", new DecimalFormatSymbols(Locale.US)).format(coordinate));
+			sb.append(getDecimalFormat("##0.00000").format(coordinate));
 			sb.append(DELIMITER_DEGREES);
 		} else if (outputType == FORMAT_MINUTES) {
 			coordinate = formatCoordinate(coordinate, sb, DELIMITER_DEGREES);
 			sb.append(DELIMITER_SPACE);
-			sb.append(new DecimalFormat("00.000", new DecimalFormatSymbols(Locale.US)).format(coordinate));
+			sb.append(getDecimalFormat("00.000").format(coordinate));
 			sb.append(DELIMITER_MINUTES);
 		} else if (outputType == FORMAT_SECONDS) {
 			coordinate = formatCoordinate(coordinate, sb, DELIMITER_DEGREES);
 			sb.append(DELIMITER_SPACE);
 			coordinate = formatCoordinate(coordinate, sb, DELIMITER_MINUTES);
 			sb.append(DELIMITER_SPACE);
-			sb.append(new DecimalFormat("00.0", new DecimalFormatSymbols(Locale.US)).format(coordinate));
+			sb.append(getDecimalFormat("00.0").format(coordinate));
 			sb.append(DELIMITER_SECONDS);
 		}
 		return sb.toString();
+	}
+
+	private static DecimalFormat getDecimalFormat(String pattern) {
+		Map<String, DecimalFormat> formats = DECIMAL_FORMATS.get();
+		if (formats == null) {
+			formats = new HashMap<>();
+			DECIMAL_FORMATS.set(formats);
+		}
+		return formats.computeIfAbsent(pattern, p -> new DecimalFormat(p, new DecimalFormatSymbols(Locale.US)));
 	}
 }

@@ -5609,4 +5609,7 @@
     <string name="opening_hours_public_holiday">חגים רשמיים</string>
     <string name="opening_hours_school_holiday">חופשות בית ספר</string>
     <string name="opening_hours_easter">פסחא</string>
+    <string name="use_spatial_search">שימוש בחיפוש טקסט מרחבי</string>
+    <string name="use_spatial_search_description">החלפת ממשקי ה־API של החיפוש המהיר הרגילים במנוע הניסיוני לחיפוש טקסט מרחבי.</string>
+    <string name="city_type_boundary">אזור</string>
 </resources>
