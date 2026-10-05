@@ -12,6 +12,7 @@ public class MapScreenshotParams extends AidlParams {
 
 	private int maxWidth = 0;
 	private int quality = 0;
+	private boolean mapOnly;
 
 	public MapScreenshotParams(int maxWidth, int quality) {
 		this.maxWidth = maxWidth;
@@ -48,15 +49,28 @@ public class MapScreenshotParams extends AidlParams {
 		return quality;
 	}
 
+	/**
+	 * @return true for the map alone, without widgets, buttons and other screen controls
+	 */
+	public boolean isMapOnly() {
+		return mapOnly;
+	}
+
+	public void setMapOnly(boolean mapOnly) {
+		this.mapOnly = mapOnly;
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putInt("maxWidth", maxWidth);
 		bundle.putInt("quality", quality);
+		bundle.putBoolean("mapOnly", mapOnly);
 	}
 
 	@Override
 	protected void readFromBundle(Bundle bundle) {
 		maxWidth = bundle.getInt("maxWidth", 0);
 		quality = bundle.getInt("quality", 0);
+		mapOnly = bundle.getBoolean("mapOnly");
 	}
 }

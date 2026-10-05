@@ -1610,6 +1610,9 @@ public class OsmandAidlApi {
 					|| params.getMaxDistance() > 0 && distance > params.getMaxDistance()) {
 				continue;
 			}
+			if (!matchesStats(item, params)) {
+				continue;
+			}
 			net.osmand.aidlapi.gpx.AGpxFile file = createGpxFileV2(item);
 			if (!params.isShownOnly() || file.isActive()) {
 				found.add(file);
@@ -1629,6 +1632,24 @@ public class OsmandAidlApi {
 		int to = Math.min(found.size(), from + Math.max(0, params.getLimit()));
 		return new net.osmand.aidlapi.gpx.AGpxSearchResult(items.size(), found.size(),
 				new ArrayList<>(found.subList(from, to)), new ArrayList<>(activityTypes));
+	}
+
+	private static boolean matchesStats(@NonNull GpxDataItem item, @NonNull net.osmand.aidlapi.gpx.GpxSearchParams params) {
+		double descent = item.getParameter(GpxParameter.DIFF_ELEVATION_DOWN);
+		double minElevation = item.getParameter(GpxParameter.MIN_ELEVATION);
+		double maxElevation = item.getParameter(GpxParameter.MAX_ELEVATION);
+		double maxSpeed = item.getParameter(GpxParameter.MAX_SPEED);
+		long timeSpan = item.getParameter(GpxParameter.TIME_SPAN);
+		double distance = item.getParameter(GpxParameter.TOTAL_DISTANCE);
+		// over the whole time, stops and lifts included
+		double avgSpeed = timeSpan > 0 ? distance / (timeSpan / 1000.0) : 0;
+		// tracks without elevations keep min 99999 and max -100, so their range is negative
+		double elevationRange = maxElevation - minElevation;
+		return (params.getMinDescent() <= 0 || descent >= params.getMinDescent())
+				&& (params.getMinElevationRange() <= 0 || elevationRange >= params.getMinElevationRange())
+				&& (params.getMinMaxSpeed() <= 0 || maxSpeed >= params.getMinMaxSpeed())
+				&& (params.getMaxMaxSpeed() <= 0 || maxSpeed <= params.getMaxMaxSpeed())
+				&& (params.getMaxAvgSpeed() <= 0 || avgSpeed > 0 && avgSpeed < params.getMaxAvgSpeed());
 	}
 
 	private static float getDistance(@NonNull net.osmand.aidlapi.gpx.AGpxFile file) {
@@ -1853,7 +1874,7 @@ public class OsmandAidlApi {
 	}
 
 	@Nullable
-	net.osmand.aidlapi.map.AMapScreenshot getMapScreenshot(int maxWidth, int quality) {
+	net.osmand.aidlapi.map.AMapScreenshot getMapScreenshot(int maxWidth, int quality, boolean mapOnly) {
 		MapActivity mapActivity = this.mapActivity;
 		if (mapActivity == null || Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
 			return null;
@@ -1867,8 +1888,8 @@ public class OsmandAidlApi {
 		}
 		// the window copy has the buttons and widgets but holes where the map surface is
 		// (OpenGL or the legacy renderer), so the surfaces are copied on their own and the window goes over them
-		Bitmap windowBitmap = copyPixels(window, null, width, height);
-		if (windowBitmap == null) {
+		Bitmap windowBitmap = mapOnly ? null : copyPixels(window, null, width, height);
+		if (!mapOnly && windowBitmap == null) {
 			return null;
 		}
 		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -1886,8 +1907,10 @@ public class OsmandAidlApi {
 				}
 			}
 		}
-		canvas.drawBitmap(windowBitmap, 0, 0, null);
-		windowBitmap.recycle();
+		if (windowBitmap != null) {
+			canvas.drawBitmap(windowBitmap, 0, 0, null);
+			windowBitmap.recycle();
+		}
 		if (maxWidth > 0 && maxWidth < width) {
 			Bitmap scaled = Bitmap.createScaledBitmap(bitmap, maxWidth, Math.round((float) height * maxWidth / width), true);
 			bitmap.recycle();

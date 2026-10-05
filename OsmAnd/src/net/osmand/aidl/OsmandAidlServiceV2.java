@@ -706,7 +706,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		public AMapScreenshot getMapScreenshot(MapScreenshotParams params) {
 			try {
 				OsmandAidlApi api = getApi("getMapScreenshot");
-				return api != null && params != null ? api.getMapScreenshot(params.getMaxWidth(), params.getQuality()) : null;
+				return api != null && params != null ? api.getMapScreenshot(params.getMaxWidth(), params.getQuality(), params.isMapOnly()) : null;
 			} catch (Exception e) {
 				handleException(e);
 				return null;

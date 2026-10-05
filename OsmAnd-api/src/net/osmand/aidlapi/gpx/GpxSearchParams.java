@@ -25,6 +25,11 @@ public class GpxSearchParams extends AidlParams {
 	private double minDistance;
 	private double maxDistance;
 	private boolean shownOnly;
+	private double minDescent;
+	private double minElevationRange;
+	private float minMaxSpeed;
+	private float maxMaxSpeed;
+	private float maxAvgSpeed;
 	private String sort = SORT_NEWEST;
 	private int offset;
 	private int limit = 50;
@@ -128,6 +133,55 @@ public class GpxSearchParams extends AidlParams {
 	}
 
 	/**
+	 * Min total descent in meters; 0 for any.
+	 */
+	public void setMinDescent(double minDescent) {
+		this.minDescent = minDescent;
+	}
+
+	public double getMinDescent() {
+		return minDescent;
+	}
+
+	/**
+	 * Min difference between the highest and the lowest point in meters; 0 for any.
+	 */
+	public void setMinElevationRange(double minElevationRange) {
+		this.minElevationRange = minElevationRange;
+	}
+
+	public double getMinElevationRange() {
+		return minElevationRange;
+	}
+
+	/**
+	 * Range of the track's max speed in m/s; 0 leaves the side open.
+	 */
+	public void setMaxSpeedRange(float minMaxSpeed, float maxMaxSpeed) {
+		this.minMaxSpeed = minMaxSpeed;
+		this.maxMaxSpeed = maxMaxSpeed;
+	}
+
+	public float getMinMaxSpeed() {
+		return minMaxSpeed;
+	}
+
+	public float getMaxMaxSpeed() {
+		return maxMaxSpeed;
+	}
+
+	/**
+	 * Upper limit of the average speed over the whole time in m/s; 0 for any.
+	 */
+	public void setMaxAvgSpeed(float maxAvgSpeed) {
+		this.maxAvgSpeed = maxAvgSpeed;
+	}
+
+	public float getMaxAvgSpeed() {
+		return maxAvgSpeed;
+	}
+
+	/**
 	 * One of SORT_NEWEST (default), SORT_OLDEST, SORT_LONGEST, SORT_NAME.
 	 */
 	public void setSort(@Nullable String sort) {
@@ -162,6 +216,11 @@ public class GpxSearchParams extends AidlParams {
 		bundle.putDouble("minDistance", minDistance);
 		bundle.putDouble("maxDistance", maxDistance);
 		bundle.putBoolean("shownOnly", shownOnly);
+		bundle.putDouble("minDescent", minDescent);
+		bundle.putDouble("minElevationRange", minElevationRange);
+		bundle.putFloat("minMaxSpeed", minMaxSpeed);
+		bundle.putFloat("maxMaxSpeed", maxMaxSpeed);
+		bundle.putFloat("maxAvgSpeed", maxAvgSpeed);
 		bundle.putString("sort", sort);
 		bundle.putInt("offset", offset);
 		bundle.putInt("limit", limit);
@@ -177,6 +236,11 @@ public class GpxSearchParams extends AidlParams {
 		minDistance = bundle.getDouble("minDistance");
 		maxDistance = bundle.getDouble("maxDistance");
 		shownOnly = bundle.getBoolean("shownOnly");
+		minDescent = bundle.getDouble("minDescent");
+		minElevationRange = bundle.getDouble("minElevationRange");
+		minMaxSpeed = bundle.getFloat("minMaxSpeed");
+		maxMaxSpeed = bundle.getFloat("maxMaxSpeed");
+		maxAvgSpeed = bundle.getFloat("maxAvgSpeed");
 		sort = bundle.getString("sort", SORT_NEWEST);
 		offset = bundle.getInt("offset");
 		limit = bundle.getInt("limit", 50);
