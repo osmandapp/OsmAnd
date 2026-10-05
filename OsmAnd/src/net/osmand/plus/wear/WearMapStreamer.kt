@@ -71,6 +71,15 @@ class WearMapStreamer(private val app: OsmandApplication) {
 	private var openedFor: Opened? = null
 
 	/**
+	 * Woken when a gesture lands, rather than slept through. The pump spends most of its life
+	 * waiting - for the frame interval, or for the watch to lift its finger - and a gesture
+	 * arriving in the middle of that used to wait the rest of it out. Measured, those waits
+	 * were around two thirds of a second of the second and a half a gesture took to answer,
+	 * against fifty milliseconds to actually draw the map.
+	 */
+	private val gestureArrived = java.lang.Object()
+
+	/**
 	 * When the watch last said anything. A watch that goes flat or is force stopped never sends
 	 * StopMapStream, and the renderer it left behind would hold its memory until OsmAnd dies.
 	 */
@@ -123,6 +132,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 	fun setPaused(value: Boolean) {
 		paused = value
 		lastHeardFrom = SystemClock.elapsedRealtime()
+		nudge()
 	}
 
 	@Synchronized
@@ -161,7 +171,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 					return
 				}
 				if (paused) {
-					Thread.sleep(FRAME_INTERVAL_MS)
+					idle(FRAME_INTERVAL_MS)
 					continue
 				}
 				if (renderer.drawn < awaitFrame) {
@@ -171,6 +181,11 @@ class WearMapStreamer(private val app: OsmandApplication) {
 				if (following) {
 					renderer.followPhone()
 				}
+				// Read before drawing, not after: a gesture landing while the frame is being
+				// drawn is not in it, however early it set the sequence. Stamping with the
+				// later number had the watch take such a frame for the answer, drop its
+				// preview of the gesture, and jump back until the real answer arrived.
+				val seqForFrame = appliedSeq
 				val bitmap = renderer.frame()
 				if (bitmap != null) {
 					val grabbedAt = SystemClock.elapsedRealtime()
@@ -181,9 +196,9 @@ class WearMapStreamer(private val app: OsmandApplication) {
 					// the exception, and must be answered even when it changed nothing on screen:
 					// the watch is holding its own preview of it and waiting to be told the phone
 					// has it, and silence there is a map that never moves again.
-					if (!encoded.contentEquals(lastSent) || appliedSeq != lastSentSeq) {
-						writeFrame(stream, encoded, appliedSeq)
-						lastSentSeq = appliedSeq
+					if (!encoded.contentEquals(lastSent) || seqForFrame != lastSentSeq) {
+						writeFrame(stream, encoded, seqForFrame)
+						lastSentSeq = seqForFrame
 						lastSent = encoded
 						budget.record(encoded.size, encodedAt - grabbedAt,
 							SystemClock.elapsedRealtime() - encodedAt)
@@ -192,7 +207,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 				val elapsed = SystemClock.elapsedRealtime() - frameStartedAt
 				val wait = FRAME_INTERVAL_MS - elapsed
 				if (wait > 0) {
-					Thread.sleep(wait)
+					idle(wait)
 				}
 			}
 		} catch (interrupted: InterruptedException) {
@@ -219,6 +234,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		val renderer = source ?: return
 		renderer.zoom(factor)
 		awaitFrame = renderer.drawn + renderer.framesInFlight
+		nudge()
 	}
 
 	fun pan(dx: Float, dy: Float, seq: Int) {
@@ -228,6 +244,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		val renderer = source ?: return
 		renderer.pan(dx, dy)
 		awaitFrame = renderer.drawn + renderer.framesInFlight
+		nudge()
 	}
 
 	fun recenter(seq: Int) {
@@ -237,6 +254,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		val renderer = source ?: return
 		renderer.followPhone()
 		awaitFrame = renderer.drawn + renderer.framesInFlight
+		nudge()
 	}
 
 	private fun openChannel(nodeId: String) {
@@ -315,6 +333,14 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		channel = null
 		source = null
 		running = false
+	}
+
+	private fun idle(millis: Long) {
+		synchronized(gestureArrived) { gestureArrived.wait(millis) }
+	}
+
+	private fun nudge() {
+		synchronized(gestureArrived) { gestureArrived.notifyAll() }
 	}
 
 	private data class Opened(
