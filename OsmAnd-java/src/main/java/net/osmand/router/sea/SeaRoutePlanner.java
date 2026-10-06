@@ -38,11 +38,12 @@ public class SeaRoutePlanner {
 		/** How many pairs of water points around the endpoints are tried before giving up. */
 		public int maxEndpointAttempts = 16;
 		/**
-		 * Visibility checks one plan may make: a search that fails explores every corner within reach, and a long
-		 * route among thousands of corners would run for minutes. The Netherlands to west of Ireland, 1333 km round
-		 * Cornwall, takes 263 thousand; when they run out the best route found so far is returned, or none.
+		 * Visibility checks one plan may make, a guard against minutes of search: a route that fails explores every
+		 * corner within reach. Long routes are planned in legs ({@link BoatRoutePlanner}), so only a large box with
+		 * thousands of corners comes near it; Vlissingen to Westkapelle, 15 km among the docks, needs more than half a
+		 * million.
 		 */
-		public int maxVisibilityChecks = 500000;
+		public int maxVisibilityChecks = 10000000;
 	}
 
 	public static class SeaRoute {
@@ -80,37 +81,24 @@ public class SeaRoutePlanner {
 
 	/** Returns null when the endpoints cannot be put on water or no path exists within the obstacles. */
 	public SeaRoute plan(SeaObstacles obstacles, LatLon start, LatLon end) {
-		List<LatLon> froms = obstacles.waterCandidates(start, config.minClearance, config.snapRadius);
-		List<LatLon> tos = obstacles.waterCandidates(end, config.minClearance, config.snapRadius);
+		return plan(obstacles, start, end, false, false);
+	}
+
+	/**
+	 * As {@link #plan(SeaObstacles, LatLon, LatLon)}, an end known to be on open water - a point a coarse way chose -
+	 * taken as it is unless a shore near it says land: with no shore near, the land test falls back to the basemap's
+	 * squares, which call water land near a coast (eight kilometres off Otranto).
+	 */
+	public SeaRoute plan(SeaObstacles obstacles, LatLon start, LatLon end, boolean startOnWater, boolean endOnWater) {
+		List<LatLon> froms = startOnWater && clear(obstacles, start) ? java.util.Collections.singletonList(start)
+				: obstacles.waterCandidates(start, config.minClearance, config.snapRadius);
+		List<LatLon> tos = endOnWater && clear(obstacles, end) ? java.util.Collections.singletonList(end)
+				: obstacles.waterCandidates(end, config.minClearance, config.snapRadius);
 		if (froms.isEmpty() || tos.isEmpty()) {
 			return null;
 		}
-		List<Corner> all = corners(obstacles);
-		// the corners along a coarse path over the grid cells, a wider band if that is not enough, all of them last
-		LatLon a = froms.get(0), b = tos.get(0);
-		int[] budget = { config.maxVisibilityChecks };
-		for (int width : new int[] { CORRIDOR_WIDTH, CORRIDOR_WIDTH * 4 }) {
-			java.util.Set<Long> cells = obstacles.corridor(obstacles.x(a.getLongitude()), obstacles.y(a.getLatitude()),
-					obstacles.x(b.getLongitude()), obstacles.y(b.getLatitude()), width);
-			if (cells == null) {
-				break;
-			}
-			List<Corner> corners = new ArrayList<>();
-			for (Corner c : all) {
-				if (cells.contains(obstacles.cellOf(c.x, c.y))) {
-					corners.add(c);
-				}
-			}
-			SeaRoute route = plan(obstacles, start, end, froms, tos, corners, budget);
-			if (route != null) {
-				return route;
-			}
-		}
-		return budget[0] > 0 ? plan(obstacles, start, end, froms, tos, all, budget) : null;
+		return plan(obstacles, start, end, froms, tos, corners(obstacles), new int[] { config.maxVisibilityChecks });
 	}
-
-	/** Cells on each side of the coarse path whose corners the search may use. */
-	private static final int CORRIDOR_WIDTH = 3;
 
 	private SeaRoute plan(SeaObstacles obstacles, LatLon start, LatLon end, List<LatLon> froms, List<LatLon> tos,
 			List<Corner> corners, int[] budget) {
@@ -163,6 +151,13 @@ public class SeaRoutePlanner {
 
 	/** A route this close to the straight line is not worth trying farther water for. */
 	private static final double NEAR_STRAIGHT = 1.1;
+
+	/** Water by a shore near it, or - with no shore near - by the coarse way that chose it; and clear of the shore. */
+	private boolean clear(SeaObstacles obstacles, LatLon p) {
+		double x = obstacles.x(p.getLongitude()), y = obstacles.y(p.getLatitude());
+		return !Boolean.TRUE.equals(obstacles.isLandByShore(p, config.snapRadius))
+				&& obstacles.isClear(x, y, x, y, config.minClearance);
+	}
 
 	private static double distance(SeaObstacles obstacles, LatLon a, LatLon b) {
 		return Math.hypot(obstacles.x(a.getLongitude()) - obstacles.x(b.getLongitude()),
