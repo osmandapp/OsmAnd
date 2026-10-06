@@ -248,7 +248,7 @@ public class SpatialSearchContext {
 	
 	void readAtoms() throws IOException {
 		int indxInd = 0;
-		
+		int cachedAtoms = 0;
 		for (int fileInd = 0; fileInd < files.size(); fileInd++) {
 			SpatialSearchFileCache iCache = internalFile.get(fileInd);
 			BinaryMapIndexReader b = files.get(fileInd);
@@ -256,6 +256,12 @@ public class SpatialSearchContext {
 				indx.resetBytesStat();
 				readAtoms(tokens, b, indx, indxInd);
 				indxInd++;
+				// the matched atoms are in the tokens now, the parsed blocks are only a cache for the next search
+				cachedAtoms += indx.getCachedAtoms();
+				if (cachedAtoms > settings.AUTO_CLEAR_PREFIX_CACHE_ATOMS) {
+					cachedAtoms -= indx.getCachedAtoms();
+					indx.clearPrefixes();
+				}
 				NameIndexReaderBytes bytesStat = indx.getBytesStat();
 				stats.readAtomsBytes += bytesStat.readAtomBytes;
 				stats.skipAtomsBytes += bytesStat.skipAtomBytes;

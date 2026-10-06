@@ -87,6 +87,8 @@ public class SpatialTextSearch {
 		
 		// max prefixes for each name reader
 		public int AUTO_CLEAR_PREFIX_CACHE_LIMIT = 1000;
+		// max parsed name index atoms kept in all files during and between searches (~0.8 KB each)
+		public int AUTO_CLEAR_PREFIX_CACHE_ATOMS = 300_000;
 
 		// Deduplicate results in the end by checking osm id of the first object in combination
 		public boolean DEDUPLICATE_RES = true;
@@ -564,7 +566,38 @@ public class SpatialTextSearch {
 		ctx.initFiles(cache);
 	}
 
+	private void clearPrefixCacheIfLarge(SpatialSearchContext ctx) {
+		int atoms = 0;
+		for (SpatialSearchFileCache fc : ctx.internalFile) {
+			for (NameIndexReader r : fc.indexReaders) {
+				// the query keeps the tokens with every atom and object read by this search
+				r.clearQuery();
+				atoms += r.getCachedAtoms();
+			}
+		}
+		if (atoms > ctx.settings.AUTO_CLEAR_PREFIX_CACHE_ATOMS) {
+			for (SpatialSearchFileCache fc : ctx.internalFile) {
+				for (NameIndexReader r : fc.indexReaders) {
+					r.clearPrefixes();
+				}
+			}
+		}
+	}
+
 	public SpatialSearchResults searchAPI(String input, SpatialSearchContext ctx) throws IOException {
+		try {
+			return searchAPIInternal(input, ctx);
+		} catch (IOException | RuntimeException | Error e) {
+			for (BinaryMapIndexReader r : ctx.files) {
+				r.resetReadLimits();
+			}
+			throw e;
+		} finally {
+			clearPrefixCacheIfLarge(ctx);
+		}
+	}
+
+	private SpatialSearchResults searchAPIInternal(String input, SpatialSearchContext ctx) throws IOException {
 		ctx.stats.requestTime.start();
 		SpatialSearchResults res = new SpatialSearchResults();
 		if (ctx.settings.SEARCH_SUGGESTION && !input.endsWith(CollatorStringMatcher.INCOMPLETE_DOT + "") && 

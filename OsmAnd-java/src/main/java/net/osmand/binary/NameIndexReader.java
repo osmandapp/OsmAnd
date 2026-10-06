@@ -73,6 +73,7 @@ public class NameIndexReader {
 	private Map<String, TLongHashSet> matchedKeys = new HashMap<String, TLongHashSet>();
 	// cache for prefixes
 	private Map<Long, PrefixNameValue> indexByRef = new HashMap<>();
+	private int cachedAtoms;
 	private long tablePointer;
 	
 	// common words
@@ -326,6 +327,7 @@ public class NameIndexReader {
 		}
 		obj.shift = currentShift;
 		obj.poi = from;
+		cachedAtoms += from.getAtomsCount();
 		return obj;
 	}
 	
@@ -353,6 +355,7 @@ public class NameIndexReader {
 		}
 		obj.shift = currentShift;
 		obj.addr = from;
+		cachedAtoms += from.getAtomCount();
 		return obj;
 	}
 	
@@ -380,11 +383,24 @@ public class NameIndexReader {
 
 	public void gcPrefixes(int limit) {
 		if (limit > 0 && indexByRef.size() > limit) {
-			indexByRef.clear();
-			if (matchedKeys != null) {
-				matchedKeys.clear();
-			}
+			clearPrefixes();
 		}
+	}
+
+	public void clearPrefixes() {
+		indexByRef.clear();
+		cachedAtoms = 0;
+		if (matchedKeys != null) {
+			matchedKeys.clear();
+		}
+	}
+
+	public int getCachedAtoms() {
+		return cachedAtoms;
+	}
+
+	public void clearQuery() {
+		query = null;
 	}
 	
 	public void resetBytesStat() {
