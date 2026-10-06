@@ -161,7 +161,6 @@
     <string name="recording_unavailable">ikkje tilgjengeleg</string>
     <string name="recording_context_menu_arecord">Ta lydnotat</string>
     <string name="recording_context_menu_vrecord">Ta videonotat</string>
-    <string name="layer_recordings">Opptakslag</string>
     <string name="recording_context_menu_play">Spel av</string>
     <string name="recording_description">Opptak %1$s %2$s av %3$s</string>
     <string name="recording_default_name">opptak</string>
@@ -170,7 +169,6 @@
     <string name="map_widget_av_notes">Lyd-/video-notat</string>
     <string name="map_widget_audionotes">Lydnotat</string>
     <string name="audionotes_plugin_description">Ta lyd- eller videonotat under turen</string>
-    <string name="audionotes_plugin_name">Lyd-/videonotat</string>
     <string name="download_select_map_types">Andre kart</string>
     <string name="srtm_plugin_name">Høgdekurve-tillegg</string>
     <string name="download_roads_only_item">Berre vegar</string>

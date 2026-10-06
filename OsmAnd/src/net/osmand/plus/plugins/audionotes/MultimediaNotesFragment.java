@@ -10,7 +10,7 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_PHOTO_CAM_SETTING_ID;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_RECORDER_SETTING_ID;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.MEDIA_TAB;
 
 import android.Manifest;
 import android.content.Context;
@@ -486,7 +486,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		String prefId = preference.getKey();
 		if (OPEN_NOTES.equals(prefId)) {
 			Bundle bundle = new Bundle();
-			bundle.putInt(TAB_ID, NOTES_TAB);
+			bundle.putInt(TAB_ID, MEDIA_TAB);
 
 			OsmAndAppCustomization appCustomization = app.getAppCustomization();
 			Intent favorites = new Intent(preference.getContext(), appCustomization.getMyPlacesActivity());

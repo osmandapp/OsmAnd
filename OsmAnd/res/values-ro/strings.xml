@@ -565,14 +565,12 @@
     <string name="srtm_plugin_name">Topografie</string>
     <string name="download_select_map_types">Alte hărți</string>
     <string name="download_srtm_maps">Linii de contur</string>
-    <string name="audionotes_plugin_name">Notițe audio/video</string>
     <string name="audionotes_plugin_description">Luați note audio/foto/video în timpul unei călătorii, utilizând fie un buton de pe hartă, fie meniul contextual al locației.</string>
     <string name="audionotes_location_not_defined">Atingeți \'Folosește locația...\' pentru a adăuga o notă la locație.</string>
     <string name="map_widget_audionotes">Note audio</string>
     <string name="recording_unavailable">indisponibilă</string>
     <string name="recording_context_menu_arecord">Înregistrează notă audio</string>
     <string name="recording_context_menu_vrecord">Înregistrează notă video</string>
-    <string name="layer_recordings">Strat înregistrări</string>
     <string name="recording_description">Înregistrarea %1$s %3$s %2$s</string>
     <string name="recording_default_name">Se înregistrează</string>
     <string name="shared_string_control_stop">Stop</string>
@@ -901,8 +899,6 @@
     <string name="rendering_attr_currentTrackWidth_name">Lățime GPX</string>
     <string name="download_live_updates">Actualizări în timp real</string>
     <string name="rendering_value_boldOutline_name">Bold contur</string>
-    <string name="av_locations">Locații</string>
-    <string name="av_locations_descr">Fișier GPX cu locații.</string>
     <string name="rendering_value_red_name">Roșu</string>
     <string name="rendering_value_translucent_red_name">Roșu translucid</string>
     <string name="rendering_value_translucent_orange_name">Portocaliu translucid</string>
@@ -1090,7 +1086,6 @@
     <string name="welcome_header">Bun venit</string>
     <string name="current_route">Ruta curentă</string>
     <string name="osm_changes_added_to_local_edits">Schimbările OSM adăugate în setul local de schimbări</string>
-    <string name="local_recordings_delete_all_confirm">Ștergeți %1$d note\?</string>
     <string name="donations">Donații</string>
     <string name="number_of_recipients">Număr de destinatari</string>
     <string name="osm_user_stat">Modificări %1$s, grad %2$s, toate modificările %3$s</string>
@@ -1227,8 +1222,6 @@
     <string name="will_open_at">Se deschide la</string>
     <string name="will_open_on">Deschide la</string>
     <string name="additional_actions">Acțiuni adiționale</string>
-    <string name="av_locations_selected_desc">Fișier GPX cu datele și coordonatele notelor selectate.</string>
-    <string name="av_locations_all_desc">Fișier GPX cu datele și coordonatele tuturor notelor.</string>
     <string name="modify_the_search_query">Schimbați-vă căutarea.</string>
     <string name="shared_string_actions">Acțiuni</string>
     <string name="shared_string_marker">Marcaj</string>
@@ -1240,11 +1233,6 @@
     <string name="marker_activated">Marcaj %s activat.</string>
     <string name="one_tap_active_descr">Atinge un marcaj de pe hartă pentru a fi mutat in topul marcajelor active fara a deschide meniul contextual.</string>
     <string name="one_tap_active">Activ la o atingere</string>
-    <string name="empty_state_av_notes">Luați notițe!</string>
-    <string name="empty_state_av_notes_desc">Adăugați note audio, video sau foto la orice punct de pe hartă, utilizând widgeturile sau meniurile contextuale.</string>
-    <string name="notes_by_date">Note A/V după dată</string>
-    <string name="by_date">După dată</string>
-    <string name="by_type">După tip</string>
     <string name="looking_for_tracks_with_waypoints">Se caută trasee cu puncte intermediare</string>
     <string name="shared_string_more_without_dots">Mai mult</string>
     <string name="appearance_on_the_map">Aspect pe hartă</string>
@@ -1497,7 +1485,6 @@
     <string name="rename_failed">Redenumirea a eșuat.</string>
     <string name="back_to_map">Înapoi la hartă</string>
     <string name="share_note">Distribuiți nota</string>
-    <string name="watch">Urmărește</string>
     <string name="notes">Note A/V</string>
     <string name="online_map">Hartă online</string>
     <string name="free">Disponibil %1$s</string>
@@ -2091,7 +2078,6 @@
     <string name="accessibility_prefs_descr">Alegeți iconul, culoarea și numele</string>
     <string name="live_monitoring">Urmărire online</string>
     <string name="save_track_logging_accuracy">Precizie înregistrare</string>
-    <string name="multimedia_notes_view_descr">Notițele dvs. OSM se află în %1$s.</string>
     <string name="video_notes">Note video</string>
     <string name="photo_notes">Note foto</string>
     <string name="accessibility_announce">Anunțare</string>

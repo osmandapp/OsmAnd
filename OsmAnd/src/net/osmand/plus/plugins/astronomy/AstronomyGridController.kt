@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.astronomy
 
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.controller.GalleryGridController
 import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.ui.GalleryGridFragment
@@ -15,7 +16,7 @@ class AstronomyGridController(
 	override fun getProcessId(): String = processId(key)
 
 	override fun getScreenTitle(): String? =
-		title ?: view?.getMapActivity()?.contextMenu?.titleStr
+		title ?: (view?.getActivity() as? MapActivity)?.contextMenu?.titleStr
 
 	companion object {
 		private const val PROCESS_ID = "gallery_grid_astronomy"
