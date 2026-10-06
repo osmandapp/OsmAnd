@@ -185,6 +185,11 @@ public class BoatRoutingTest {
 				use.add(base);
 			}
 			SeaObstacles obstacles = SeaObstacles.readShores(use, minLat, minLon, maxLat, maxLon, offshore ? 9 : 12);
+			if (base != null && !offshore && obstacles.getSegmentsCount() == 0) {
+				// as the server does: no detailed map here, the basemap is better than nothing
+				use.add(base);
+				obstacles = SeaObstacles.readShores(use, minLat, minLon, maxLat, maxLon, 11);
+			}
 			obstacles.setFarFromShore(landTiles);
 			return obstacles;
 		});
