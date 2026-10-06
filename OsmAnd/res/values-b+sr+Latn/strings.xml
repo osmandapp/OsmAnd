@@ -5430,4 +5430,6 @@
     <string name="opening_hours_school_holiday">Školski raspusti</string>
     <string name="opening_hours_easter">Uskrs</string>
     <string name="city_type_boundary">Kvart</string>
+    <string name="trip_rec_start_from_notification">Pokreni iz obaveštenja</string>
+    <string name="trip_rec_start_from_notification_descr">Prikazuje obaveštenje sa dugmetom za pokretanje snimanja putovanja. Tokom snimanja, obaveštenje je uvek prikazano.</string>
 </resources>
