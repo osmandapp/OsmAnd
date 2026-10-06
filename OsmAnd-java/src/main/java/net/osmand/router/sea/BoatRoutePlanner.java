@@ -2,6 +2,7 @@ package net.osmand.router.sea;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -34,6 +35,8 @@ public class BoatRoutePlanner {
 
 	/** A network route that ends this close to a requested point needs no open water to reach it. */
 	public static final double ENDPOINT_TOLERANCE_METERS = 1000;
+	/** A network route that starts or ends farther than this from its point is joined to it by a straight line. */
+	public static final double JOIN_METERS = 20;
 	/** routing.xml boat profile: the priority of water no rule names. */
 	public static final double OPEN_WATER_PRIORITY = 0.7;
 	/** routing.xml boat profile: the priority of a fairway, the highest a boat gets - a lower bound for the network. */
@@ -59,6 +62,12 @@ public class BoatRoutePlanner {
 		public List<RouteSegmentResult> network;
 		/** Open water from the network route to the requested end. */
 		public List<LatLon> endConnector;
+		/**
+		 * Straight from a point near the network (within {@link #ENDPOINT_TOLERANCE_METERS}) to where the network route
+		 * starts, and from where it ends to the end point: what the walk to the road is for a car. It may cross a pier
+		 * or a quay - the point is in a harbour or on land - so it is not checked against the shores.
+		 */
+		public List<LatLon> startJoin, endJoin;
 		/** The whole route over open water, when that was chosen. */
 		public List<LatLon> openWater;
 		public final Decision decision = new Decision();
@@ -72,7 +81,7 @@ public class BoatRoutePlanner {
 		}
 
 		public double getConnectorsDistance() {
-			return length(startConnector) + length(endConnector);
+			return length(startJoin) + length(startConnector) + length(endConnector) + length(endJoin);
 		}
 
 		/** Metres over the network and open water together. */
@@ -230,8 +239,23 @@ public class BoatRoutePlanner {
 				decision.choice = pair[0].line == null && pair[1].line == null ? "network" : "network+connectors";
 			}
 		}
+		if (route.network != null) {
+			// a point near the network is its own entry: the router starts where the point projects onto a way,
+			// which can be hundreds of metres away (the Kiel Fjord seen from the Kiel Canal)
+			List<RouteSegmentResult> network = route.network;
+			if (route.startConnector == null) {
+				route.startJoin = join(start, network.get(0).getStartPoint());
+			}
+			if (route.endConnector == null) {
+				route.endJoin = join(network.get(network.size() - 1).getEndPoint(), end);
+			}
+		}
 		decision.timeMs = System.currentTimeMillis() - started;
 		return route;
+	}
+
+	private static List<LatLon> join(LatLon a, LatLon b) {
+		return MapUtils.getDistance(a, b) <= JOIN_METERS ? null : new ArrayList<>(Arrays.asList(a, b));
 	}
 
 	private static double lowerBound(Entry[] pair, double speed) {

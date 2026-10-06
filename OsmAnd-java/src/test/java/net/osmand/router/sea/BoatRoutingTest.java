@@ -58,6 +58,9 @@ public class BoatRoutingTest {
 		boolean ignore;
 	}
 
+	/** How close the drawn route has to start and end to its points. */
+	private static final double JOINED_METERS = 25;
+
 	private final BoatCase boatCase;
 
 	public BoatRoutingTest(String name, BoatCase boatCase) {
@@ -128,8 +131,19 @@ public class BoatRoutingTest {
 						boatCase.choices.contains(route.decision.choice));
 			}
 			if (Boolean.TRUE.equals(boatCase.joinsPoints)) {
-				Assert.assertTrue("leg " + i + " does not reach both points - " + what, route.isOpenWater()
-						|| "network".equals(route.decision.choice) || "network+connectors".equals(route.decision.choice));
+				Assert.assertTrue("leg " + i + " has no route - " + what, route.isOpenWater() || route.isNetwork());
+				LatLon first = route.isOpenWater() ? route.openWater.get(0)
+						: route.startJoin != null ? route.startJoin.get(0)
+						: route.startConnector != null ? route.startConnector.get(0)
+						: route.network.get(0).getStartPoint();
+				LatLon last = route.isOpenWater() ? route.openWater.get(route.openWater.size() - 1)
+						: route.endJoin != null ? route.endJoin.get(route.endJoin.size() - 1)
+						: route.endConnector != null ? route.endConnector.get(route.endConnector.size() - 1)
+						: route.network.get(route.network.size() - 1).getEndPoint();
+				Assert.assertTrue("leg " + i + " starts " + (int) MapUtils.getDistance(first, start) + " m from its point - "
+						+ what, MapUtils.getDistance(first, start) <= JOINED_METERS);
+				Assert.assertTrue("leg " + i + " ends " + (int) MapUtils.getDistance(last, end) + " m from its point - "
+						+ what, MapUtils.getDistance(last, end) <= JOINED_METERS);
 			}
 			assertStaysOnWater(readers, route.startConnector, start, end);
 			assertStaysOnWater(readers, route.endConnector, start, end);
