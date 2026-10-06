@@ -97,6 +97,10 @@ class WearLegacyMapSource(private val app: OsmandApplication) : WearMapSource {
 	 */
 	override fun fit(bounds: QuadRect) {
 		val current = box ?: return
+		// The phone's heading, read now rather than left at whatever it was when the stream
+		// opened: OsmAnd has four map orientations and keeps the profile's through a route
+		// preview, so this is how the two screens end up showing the route the same way up.
+		current.setRotate(app.osmandMap.mapView.currentRotatedTileBox.rotate)
 		current.setLatLonCenter(
 			(bounds.top + bounds.bottom) / 2, (bounds.left + bounds.right) / 2)
 		for (zoom in MAX_ZOOM downTo MIN_ZOOM) {
