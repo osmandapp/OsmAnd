@@ -727,8 +727,7 @@ public class SpatialPipelineSearch {
 		List<SpatialPipelineObjectRes> res = new ArrayList<>();
 		List<SpatialPipelineObjectRes> single = new ArrayList<>();
 		for (SpatialPipelineObjectRes r : preResults) {
-			if (r.mainAtom.isPoiCategory() || r.refs1 != null || Arrays.asList(r.atoms).contains(null)
-					|| r.distinctObjects() > 1) {
+			if (r.mainAtom.isPoiCategory() || r.refs1 != null || !oneObjectForAllTokens(r)) {
 				res.add(r);
 			} else {
 				single.add(r);
@@ -737,15 +736,16 @@ public class SpatialPipelineSearch {
 		if (single.size() <= limit) {
 			return preResults;
 		}
-		boolean queryIsKind = false;
+		boolean queryIsKind = false, number = false;
 		for (SpatialSearchToken t : ctx.tokens) {
 			queryIsKind |= t.hasPoiCategoryKeys();
+			number |= t.word.chars().anyMatch(Character::isDigit);
 		}
 		double[] score = new double[single.size()];
 		Integer[] order = new Integer[single.size()];
 		for (int i = 0; i < single.size(); i++) {
 			score[i] = ranking.prescore(single.get(i), l, ctx.searchContext.poiSearch, ctx.settings.MIN_ELO_RATING,
-					queryIsKind);
+					queryIsKind, number);
 			order[i] = i;
 		}
 		Arrays.sort(order, (a, b) -> Double.compare(score[b], score[a]));
@@ -753,6 +753,15 @@ public class SpatialPipelineSearch {
 			res.add(single.get(order[i]));
 		}
 		return res;
+	}
+
+	private static boolean oneObjectForAllTokens(SpatialPipelineObjectRes r) {
+		for (NameIndexAtom a : r.atoms) {
+			if (a == null || a.id != r.atoms[0].id) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private SpatialSearchResultsList createResultList(List<SpatialSearchToken> tokens,
