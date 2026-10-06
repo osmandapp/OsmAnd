@@ -48,6 +48,10 @@ public class SeaObstacles {
 	private int segmentsCount;
 
 	private double cellSize = 500;
+	/** Cells of the grid in cell numbers, with a margin around the shores; set by {@link #build()}. */
+	private int gridLeft, gridTop, gridWidth, gridHeight;
+	/** The box the shores were read in, x1, y1, x2, y2; beyond it nothing is known. Null when not read from maps. */
+	private double[] readBox;
 	private final Map<Long, TIntArrayList> grid = new HashMap<>();
 	private int[] segmentStamp = new int[0];
 	private int stamp;
@@ -74,6 +78,7 @@ public class SeaObstacles {
 	public static SeaObstacles readShores(List<BinaryMapIndexReader> readers, double minLat, double minLon,
 			double maxLat, double maxLon, int zoom) throws IOException {
 		SeaObstacles obstacles = new SeaObstacles((minLat + maxLat) / 2);
+		obstacles.readBox = new double[] { obstacles.x(minLon), obstacles.y(minLat), obstacles.x(maxLon), obstacles.y(maxLat) };
 		SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(
 				MapUtils.get31TileNumberX(minLon), MapUtils.get31TileNumberX(maxLon),
 				MapUtils.get31TileNumberY(maxLat), MapUtils.get31TileNumberY(minLat), zoom, SHORE_FILTER);
@@ -286,6 +291,10 @@ public class SeaObstacles {
 		if (segmentsCount > 0) {
 			double span = Math.max(maxX - minX, maxY - minY);
 			cellSize = Math.max(250, Math.min(5000, span / 256));
+			gridLeft = (int) Math.floor(minX / cellSize) - CORRIDOR_MARGIN;
+			gridTop = (int) Math.floor(minY / cellSize) - CORRIDOR_MARGIN;
+			gridWidth = (int) Math.floor(maxX / cellSize) + CORRIDOR_MARGIN - gridLeft + 1;
+			gridHeight = (int) Math.floor(maxY / cellSize) + CORRIDOR_MARGIN - gridTop + 1;
 		}
 		grid.clear();
 		segmentStamp = new int[segmentsCount];
@@ -603,6 +612,129 @@ public class SeaObstacles {
 			}
 		}
 		return true;
+	}
+
+	private static final int CORRIDOR_MARGIN = 4;
+	private static final double SHORE_CELL_COST = 4;
+	private static final byte CELL_SHORE = 1, CELL_WATER = 2, CELL_LAND = 3;
+
+	/** The grid cell of a point, as stored by {@link #corridor}. */
+	public long cellOf(double x, double y) {
+		return cellKey((int) Math.floor(x / cellSize), (int) Math.floor(y / cellSize));
+	}
+
+	/**
+	 * The grid cells a route from one water point to another can use: a coarse search over the cells first, then
+	 * every cell within width of its path. Cells with shores in them may hold a passage; an empty region of cells -
+	 * no shore inside - is all water or all land, so one {@link #isLand} per region decides it (the basemap's
+	 * squares when the region is far from any shore). Lets a long route be planned among the corners along the way
+	 * instead of all corners of the box. Null when there is no grid or the coarse search finds no way.
+	 */
+	public Set<Long> corridor(double x1, double y1, double x2, double y2, int width) {
+		if (gridWidth <= 0 || gridHeight <= 0) {
+			return null;
+		}
+		// the shores' cells and both points, which can lie far out at sea beyond any shore
+		int left = Math.min(gridLeft, Math.min(cell(x1), cell(x2)) - CORRIDOR_MARGIN);
+		int top = Math.min(gridTop, Math.min(cell(y1), cell(y2)) - CORRIDOR_MARGIN);
+		int w = Math.max(gridLeft + gridWidth, Math.max(cell(x1), cell(x2)) + CORRIDOR_MARGIN + 1) - left;
+		int h = Math.max(gridTop + gridHeight, Math.max(cell(y1), cell(y2)) + CORRIDOR_MARGIN + 1) - top;
+		byte[] state = new byte[w * h];
+		for (int i = 0; i < w; i++) {
+			for (int j = 0; j < h; j++) {
+				if (grid.containsKey(cellKey(left + i, top + j))) {
+					state[i + j * w] = CELL_SHORE;
+				}
+			}
+		}
+		// beyond the box the shores were read in nothing is known: a wall, or land and sea would meet around it
+		for (int i = 0; readBox != null && i < w; i++) {
+			for (int j = 0; j < h; j++) {
+				double cx = (left + i + 0.5) * cellSize, cy = (top + j + 0.5) * cellSize;
+				if (state[i + j * w] == 0 && (cx < Math.min(readBox[0], readBox[2]) || cx > Math.max(readBox[0], readBox[2])
+						|| cy < Math.min(readBox[1], readBox[3]) || cy > Math.max(readBox[1], readBox[3]))) {
+					state[i + j * w] = CELL_LAND;
+				}
+			}
+		}
+		int[] queue = new int[w * h];
+		for (int start = 0; start < w * h; start++) {
+			if (state[start] != 0) {
+				continue;
+			}
+			int si = start % w, sj = start / w;
+			byte region = isLand(latLon((left + si + 0.5) * cellSize, (top + sj + 0.5) * cellSize)) ? CELL_LAND
+					: CELL_WATER;
+			int head = 0, tail = 0;
+			queue[tail++] = start;
+			state[start] = region;
+			while (head < tail) {
+				int c = queue[head++], ci = c % w, cj = c / w;
+				for (int k = 0; k < 4; k++) {
+					int ni = ci + (k == 0 ? 1 : k == 1 ? -1 : 0), nj = cj + (k == 2 ? 1 : k == 3 ? -1 : 0);
+					if (ni >= 0 && nj >= 0 && ni < w && nj < h && state[ni + nj * w] == 0) {
+						state[ni + nj * w] = region;
+						queue[tail++] = ni + nj * w;
+					}
+				}
+			}
+		}
+		int from = cell(x1) - left + (cell(y1) - top) * w, to = cell(x2) - left + (cell(y2) - top) * w;
+		state[from] = state[from] == CELL_LAND ? CELL_SHORE : state[from];
+		state[to] = state[to] == CELL_LAND ? CELL_SHORE : state[to];
+		// A* over the cells that are not land, eight neighbours; a cell with shores may be land all through - a chain
+		// of estuaries across Cornwall - so open water is preferred and shores are crossed only where there is no other way
+		double[] g = new double[w * h];
+		int[] parent = new int[w * h];
+		java.util.Arrays.fill(g, Double.POSITIVE_INFINITY);
+		g[from] = 0;
+		parent[from] = -1;
+		int ti = to % w, tj = to / w;
+		java.util.PriorityQueue<double[]> open = new java.util.PriorityQueue<>((a, b) -> Double.compare(a[0], b[0]));
+		open.add(new double[] { Math.hypot(from % w - ti, from / w - tj), from });
+		boolean found = false;
+		while (!open.isEmpty()) {
+			double[] next = open.poll();
+			int c = (int) next[1], ci = c % w, cj = c / w;
+			if (c == to) {
+				found = true;
+				break;
+			}
+			if (next[0] - Math.hypot(ci - ti, cj - tj) > g[c] + 1e-9) {
+				continue;
+			}
+			for (int di = -1; di <= 1; di++) {
+				for (int dj = -1; dj <= 1; dj++) {
+					int ni = ci + di, nj = cj + dj, n = ni + nj * w;
+					if ((di == 0 && dj == 0) || ni < 0 || nj < 0 || ni >= w || nj >= h || state[n] == CELL_LAND) {
+						continue;
+					}
+					double d = g[c] + Math.hypot(di, dj) * (state[n] == CELL_SHORE ? SHORE_CELL_COST : 1);
+					if (d < g[n]) {
+						g[n] = d;
+						parent[n] = c;
+						open.add(new double[] { d + Math.hypot(ni - ti, nj - tj), n });
+					}
+				}
+			}
+		}
+		if (!found) {
+			return null;
+		}
+		Set<Long> cells = new HashSet<>();
+		for (int c = to; c != -1; c = parent[c]) {
+			int ci = c % w, cj = c / w;
+			for (int di = -width; di <= width; di++) {
+				for (int dj = -width; dj <= width; dj++) {
+					cells.add(cellKey(left + ci + di, top + cj + dj));
+				}
+			}
+		}
+		return cells;
+	}
+
+	private int cell(double coordinate) {
+		return (int) Math.floor(coordinate / cellSize);
 	}
 
 	private static long cellKey(int cx, int cy) {
