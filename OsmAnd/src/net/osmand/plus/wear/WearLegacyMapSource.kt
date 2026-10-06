@@ -55,6 +55,9 @@ class WearLegacyMapSource(private val app: OsmandApplication) : WearMapSource {
 		return true
 	}
 
+	// A copy, because the box this returns is read while gestures keep editing the live one.
+	override fun overlayBox(): RotatedTileBox? = box?.let { RotatedTileBox(it) }
+
 	override fun frame(): Bitmap? {
 		val own = repositories ?: return null
 		val current = box ?: return null

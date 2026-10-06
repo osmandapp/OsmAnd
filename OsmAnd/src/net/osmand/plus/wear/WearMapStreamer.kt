@@ -1,6 +1,7 @@
 package net.osmand.plus.wear
 
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.SystemClock
 import android.util.Log
 
@@ -80,6 +81,8 @@ class WearMapStreamer(private val app: OsmandApplication) {
 	 * against fifty milliseconds to actually draw the map.
 	 */
 	private val gestureArrived = java.lang.Object()
+
+	private val overlay by lazy { WearMapOverlay(app) }
 
 	/**
 	 * When the watch last said anything. A watch that goes flat or is force stopped never sends
@@ -189,6 +192,12 @@ class WearMapStreamer(private val app: OsmandApplication) {
 				val seqForFrame = appliedSeq
 				val bitmap = renderer.frame()
 				if (bitmap != null) {
+					// Drawn onto the rendered frame rather than composed on the watch: the
+					// route has to line up with the map to the pixel, and only this side knows
+					// where the camera was when the frame was drawn.
+					val overlayMs = renderer.overlayBox()?.let { box ->
+						overlay.draw(Canvas(bitmap), box, LAYERS)
+					} ?: 0L
 					val grabbedAt = SystemClock.elapsedRealtime()
 					val encoded = encode(bitmap)
 					val encodedAt = SystemClock.elapsedRealtime()
@@ -202,7 +211,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 						lastSentSeq = seqForFrame
 						lastSent = encoded
 						budget.record(encoded.size, encodedAt - grabbedAt,
-							SystemClock.elapsedRealtime() - encodedAt)
+							SystemClock.elapsedRealtime() - encodedAt, overlayMs)
 					}
 				}
 				val elapsed = SystemClock.elapsedRealtime() - frameStartedAt
@@ -290,12 +299,14 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		private var bytes = 0L
 		private var encodeMs = 0L
 		private var writeMs = 0L
+		private var overlayMs = 0L
 
-		fun record(size: Int, encode: Long, write: Long) {
+		fun record(size: Int, encode: Long, write: Long, overlay: Long) {
 			frames++
 			bytes += size
 			encodeMs += encode
 			writeMs += write
+			overlayMs += overlay
 			val elapsed = SystemClock.elapsedRealtime() - since
 			if (elapsed < REPORT_INTERVAL_MS) {
 				return
@@ -303,6 +314,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 			LOG.info("Map stream: $frames frames in ${elapsed}ms"
 					+ ", ${bytes / 1024} KB (${bytes * 1000 / elapsed / 1024} KB/s)"
 					+ ", ${bytes / frames} B/frame"
+					+ ", overlay ${overlayMs / frames}ms/frame"
 					+ ", encode ${encodeMs / frames}ms/frame"
 					+ ", write ${writeMs / frames}ms/frame"
 					+ ", link busy ${writeMs * 100 / elapsed}%")
@@ -311,6 +323,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 			bytes = 0
 			encodeMs = 0
 			writeMs = 0
+			overlayMs = 0
 		}
 
 		private companion object {
@@ -374,6 +387,9 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		const val FRAMES_PER_SECOND = 4
 		const val FRAME_INTERVAL_MS = 1000L / FRAMES_PER_SECOND
 		const val FRAME_QUALITY = 60
+
+		/** Everything for now, so the cost of each can be measured before any is made optional. */
+		val LAYERS = setOf(WearMapLayer.ROUTE, WearMapLayer.MARKERS, WearMapLayer.MY_LOCATION)
 		/** How often the pump looks again while waiting for a gesture to be drawn. */
 		const val RENDER_INTERVAL_MS = 1000L / 15
 		const val SILENCE_TIMEOUT_MS = 60_000L

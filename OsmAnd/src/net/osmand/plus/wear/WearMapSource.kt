@@ -2,6 +2,8 @@ package net.osmand.plus.wear
 
 import android.graphics.Bitmap
 
+import net.osmand.data.RotatedTileBox
+
 /**
  * Where the watch's map frames come from.
  *
@@ -28,6 +30,13 @@ interface WearMapSource {
 	fun open(width: Int, height: Int, density: Float): Boolean
 
 	fun frame(): Bitmap?
+
+	/**
+	 * Where the last frame is looking, for drawing the route and the rest over it. Null when
+	 * this renderer cannot say in terms a canvas understands, and the frame then goes out
+	 * without overlays rather than with wrong ones.
+	 */
+	fun overlayBox(): RotatedTileBox? = null
 
 	/** A scale factor, not zoom levels: the watch previews the gesture and the two must agree. */
 	fun zoom(factor: Float)
