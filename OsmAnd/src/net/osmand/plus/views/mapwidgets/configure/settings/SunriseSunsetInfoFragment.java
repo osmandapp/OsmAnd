@@ -194,4 +194,9 @@ public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 			}
 		}, UPDATE_UI_PERIOD_MS);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "sunrise_sunset_info";
+	}
 }

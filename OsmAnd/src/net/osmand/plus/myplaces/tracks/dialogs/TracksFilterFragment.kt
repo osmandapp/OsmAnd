@@ -366,4 +366,6 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 	override fun onSmartFolderCreated(smartFolder: SmartFolder) {
 		dismiss()
 	}
+
+	override fun getAnalyticsScreen() = "tracks_filter"
 }

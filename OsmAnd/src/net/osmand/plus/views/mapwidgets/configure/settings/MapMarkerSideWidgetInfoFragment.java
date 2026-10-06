@@ -304,4 +304,9 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 		}
 		markerClickBehaviourPref.setModeValue(appMode, selectedMarkerClickBehaviour);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_marker_side_widget_info";
+	}
 }

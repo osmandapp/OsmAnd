@@ -267,4 +267,9 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 			updateAllSettings();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "weather_settings";
+	}
 }

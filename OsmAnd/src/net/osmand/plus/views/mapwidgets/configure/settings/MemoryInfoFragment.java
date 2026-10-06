@@ -93,4 +93,9 @@ public class MemoryInfoFragment extends BaseSimpleWidgetInfoFragment {
 		selectedType.setText(memoryInfoType.titleId);
 		modeIcon.setImageResource(memoryInfoType.getIconId(nightMode));
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "memory_info";
+	}
 }

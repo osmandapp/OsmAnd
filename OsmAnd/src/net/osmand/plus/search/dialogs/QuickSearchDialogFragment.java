@@ -3380,4 +3380,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void saveAddressSearchState() {
 		addressSearchStack.push(searchEditText.getText().toString());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "quick_search";
+	}
 }

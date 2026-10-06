@@ -279,4 +279,9 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 			fragment.show(activity.getSupportFragmentManager(), TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "wikipedia";
+	}
 }

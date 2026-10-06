@@ -273,4 +273,6 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		}
 		updatePairedSensorsList()
 	}
+
+	override fun getAnalyticsScreen() = "obd_devices_list"
 }

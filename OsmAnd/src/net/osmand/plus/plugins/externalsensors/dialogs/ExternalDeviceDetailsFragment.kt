@@ -407,4 +407,6 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
 	override fun onPropertyClicked(property: DeviceChangeableProperty) {
 		EditDevicePropertyDialog.showInstance(requireActivity(), this, device, property)
 	}
+
+	override fun getAnalyticsScreen() = "external_device_details"
 }

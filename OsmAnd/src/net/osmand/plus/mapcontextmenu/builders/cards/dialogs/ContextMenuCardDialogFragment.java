@@ -187,4 +187,9 @@ public class ContextMenuCardDialogFragment extends BaseFullScreenFragment implem
 				? Collections.emptyList()
 				: Collections.singletonList(AndroidUtils.getViewBoundOnScreen(view));
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "context_menu_card";
+	}
 }

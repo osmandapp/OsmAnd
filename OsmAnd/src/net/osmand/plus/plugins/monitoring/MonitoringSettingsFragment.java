@@ -576,4 +576,9 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			updateAllSettings();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "monitoring_settings";
+	}
 }

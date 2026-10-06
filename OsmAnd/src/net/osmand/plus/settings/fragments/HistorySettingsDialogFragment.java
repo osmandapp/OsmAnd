@@ -106,4 +106,9 @@ public class HistorySettingsDialogFragment extends BaseFullScreenDialogFragment 
 			fragment.show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "history_settings";
+	}
 }

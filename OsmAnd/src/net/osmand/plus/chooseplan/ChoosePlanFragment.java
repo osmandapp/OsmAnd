@@ -376,4 +376,9 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
 
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "choose_plan";
+	}
 }

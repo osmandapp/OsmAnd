@@ -230,4 +230,6 @@ class FilterAllVariantsListFragment : BaseFullScreenDialogFragment(), SmartFolde
 
 	override fun onSmartFolderCreated(smartFolder: SmartFolder) {
 	}
+
+	override fun getAnalyticsScreen() = "filter_all_variants_list"
 }

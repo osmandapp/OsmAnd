@@ -2456,4 +2456,5 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			?.applyRedFilter(enabled)
 	}
 
+	override fun getAnalyticsScreen() = "star_map"
 }

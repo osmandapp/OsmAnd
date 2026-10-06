@@ -165,4 +165,9 @@ public class CoordinatesFormatFragment extends BaseCoordinateFormatFragment
 			fragmentManager.popBackStack();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "coordinates_format";
+	}
 }

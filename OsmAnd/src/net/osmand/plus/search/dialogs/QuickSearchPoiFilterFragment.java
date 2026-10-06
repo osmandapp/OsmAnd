@@ -856,4 +856,9 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			this.keyName = keyName;
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "quick_search_poi_filter";
+	}
 }
