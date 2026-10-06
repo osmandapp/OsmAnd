@@ -369,8 +369,8 @@ public class SpatialPoiSearch {
 			return true;
 		}
 		for (String n : a.names) {
-			for (String w : n.split(" ")) {
-				if (SearchAlgorithms.alignChars(w).equalsIgnoreCase(t.wordNoDot)) {
+			for (String w : SearchAlgorithms.splitAndNormalize(n, false)) {
+				if (SearchAlgorithms.alignChars(w).equals(t.wordNoDot)) {
 					return true;
 				}
 			}
