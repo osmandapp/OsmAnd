@@ -2,6 +2,7 @@ package net.osmand.plus.wear
 
 import android.graphics.Bitmap
 
+import net.osmand.data.QuadRect
 import net.osmand.data.RotatedTileBox
 
 /**
@@ -37,6 +38,9 @@ interface WearMapSource {
 	 * without overlays rather than with wrong ones.
 	 */
 	fun overlayBox(): RotatedTileBox? = null
+
+	/** Frames the given ground so all of it is in view. Ignored by renderers that cannot. */
+	fun fit(bounds: QuadRect) {}
 
 	/** A scale factor, not zoom levels: the watch previews the gesture and the two must agree. */
 	fun zoom(factor: Float)

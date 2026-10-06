@@ -133,6 +133,13 @@ class WearCommandService : WearableListenerService() {
 
 			is WearCommand.SetMapRenderer -> mapStreamer(app).setLegacyRenderer(command.legacy)
 
+			is WearCommand.PreviewRoute -> previewRoute(command)
+
+			is WearCommand.StartNavigation -> app.osmandMap.mapActions.startNavigation()
+
+			is WearCommand.CancelRoutePreview ->
+				app.osmandMap.mapActions.stopNavigationWithoutConfirm()
+
 			is WearCommand.SelectProfile -> {
 				val mode = ApplicationMode.valueOfStringKey(command.appModeKey, null)
 				if (mode != null) {
@@ -144,6 +151,18 @@ class WearCommandService : WearableListenerService() {
 
 			is WearCommand.SetPreference -> applyPreference(command)
 		}
+	}
+
+	/**
+	 * Works the route out and stops there. Planning mode is what OsmAnd calls a route it has
+	 * calculated but is not following, which is exactly a preview; setting off later is then
+	 * the same single call the phone's own button makes.
+	 */
+	private fun previewRoute(command: WearCommand.PreviewRoute) {
+		val target = LatLon(command.latitude, command.longitude)
+		val description = PointDescription(PointDescription.POINT_TYPE_LOCATION, command.name)
+		app.targetPointsHelper.navigateToPoint(target, true, -1, description)
+		app.osmandMap.mapActions.enterRoutePlanningMode(null, null)
 	}
 
 	private fun addMarkerAtCurrentLocation() {

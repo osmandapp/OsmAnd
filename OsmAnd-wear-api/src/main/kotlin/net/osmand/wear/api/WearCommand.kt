@@ -101,6 +101,28 @@ sealed interface WearCommand {
 	@SerialName("pan_map")
 	data class PanMap(val dx: Float, val dy: Float, val seq: Int = 0) : WearCommand
 
+	/**
+	 * Asks the phone to work out a route to this point and hold it for a look, without setting
+	 * off. The watch shows the phone's own drawing of it and decides from there.
+	 */
+	@Serializable
+	@SerialName("preview_route")
+	data class PreviewRoute(
+		val latitude: Double,
+		val longitude: Double,
+		val name: String
+	) : WearCommand
+
+	/** Sets off along the route being previewed. */
+	@Serializable
+	@SerialName("start_navigation")
+	data object StartNavigation : WearCommand
+
+	/** Drops the previewed route without setting off. */
+	@Serializable
+	@SerialName("cancel_route_preview")
+	data object CancelRoutePreview : WearCommand
+
 	/** Picks the renderer that draws the watch's map: the legacy one, or OpenGL. */
 	@Serializable
 	@SerialName("set_map_renderer")

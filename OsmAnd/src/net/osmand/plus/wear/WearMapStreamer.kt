@@ -157,6 +157,7 @@ class WearMapStreamer(private val app: OsmandApplication) {
 			var lastSent = ByteArray(0)
 			var lastSentSeq = -1
 			val budget = FrameBudget()
+			var fitted = false
 			while (running && !Thread.currentThread().isInterrupted) {
 				val frameStartedAt = SystemClock.elapsedRealtime()
 				if (app.carNavigationSession != null) {
@@ -182,8 +183,20 @@ class WearMapStreamer(private val app: OsmandApplication) {
 					Thread.sleep(RENDER_INTERVAL_MS)
 					continue
 				}
-				if (following) {
-					renderer.followPhone()
+				// A route being looked at is framed once, when it appears: doing it every frame
+				// would undo any look around, and the point of a preview is to be looked at.
+				val previewing = app.routingHelper.isRoutePlanningMode &&
+						app.routingHelper.isRouteCalculated
+				if (previewing && !fitted) {
+					routeBounds()?.let {
+						renderer.fit(it)
+						fitted = true
+					}
+				} else if (!previewing) {
+					fitted = false
+					if (following) {
+						renderer.followPhone()
+					}
 				}
 				// Read before drawing, not after: a gesture landing while the frame is being
 				// drawn is not in it, however early it set the sequence. Stamping with the
@@ -354,6 +367,27 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		awaitFrame = 0
 	}
 
+	/** What the route covers, with room at the edges so it does not touch them. */
+	private fun routeBounds(): net.osmand.data.QuadRect? {
+		val points = app.routingHelper.route?.immutableAllLocations ?: return null
+		if (points.isEmpty()) {
+			return null
+		}
+		var left = points[0].longitude
+		var right = left
+		var top = points[0].latitude
+		var bottom = top
+		for (point in points) {
+			left = minOf(left, point.longitude)
+			right = maxOf(right, point.longitude)
+			top = maxOf(top, point.latitude)
+			bottom = minOf(bottom, point.latitude)
+		}
+		val padX = (right - left) * FIT_MARGIN
+		val padY = (top - bottom) * FIT_MARGIN
+		return net.osmand.data.QuadRect(left - padX, top + padY, right + padX, bottom - padY)
+	}
+
 	private fun openSource(
 		legacy: Boolean, width: Int, height: Int, density: Float
 	): WearMapSource? {
@@ -387,6 +421,9 @@ class WearMapStreamer(private val app: OsmandApplication) {
 		const val FRAMES_PER_SECOND = 4
 		const val FRAME_INTERVAL_MS = 1000L / FRAMES_PER_SECOND
 		const val FRAME_QUALITY = 60
+
+		/** Room left around a previewed route, as a share of its own extent. */
+		const val FIT_MARGIN = 0.12
 
 		/** Everything for now, so the cost of each can be measured before any is made optional. */
 		val LAYERS = setOf(WearMapLayer.ROUTE, WearMapLayer.MARKERS, WearMapLayer.MY_LOCATION)

@@ -2,6 +2,7 @@ package net.osmand.plus.wear
 
 import android.graphics.Bitmap
 
+import net.osmand.data.QuadRect
 import net.osmand.data.RotatedTileBox
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.render.MapRenderRepositories
@@ -47,9 +48,7 @@ class WearLegacyMapSource(private val app: OsmandApplication) : WearMapSource {
 			.setZoomFloatPart(phone.zoomFloatPart)
 			.density(density)
 			.setMapDensity(phone.mapDensity)
-			// North up, and left that way: a rotated box costs the renderer more and the watch
-			// has no heading of the phone's to follow yet.
-			.setRotate(0f)
+			.setRotate(phone.rotate)
 			.setPixelDimensions(width, height, 0.5f, 0.5f)
 			.build()
 		return true
@@ -91,10 +90,35 @@ class WearLegacyMapSource(private val app: OsmandApplication) : WearMapSource {
 		current.setLatLonCenter(moved.latitude, moved.longitude)
 	}
 
+	/**
+	 * Zoom is stepped down from the closest until the whole thing is in view rather than
+	 * computed: the projection that decides what fits is the tile box's own, so asking it is
+	 * both shorter and exactly right, and there are only eighteen steps to try.
+	 */
+	override fun fit(bounds: QuadRect) {
+		val current = box ?: return
+		current.setLatLonCenter(
+			(bounds.top + bounds.bottom) / 2, (bounds.left + bounds.right) / 2)
+		for (zoom in MAX_ZOOM downTo MIN_ZOOM) {
+			current.setZoomAndAnimation(zoom, 0.0, 0.0)
+			val shown = current.latLonBounds
+			if (shown.left <= bounds.left && shown.right >= bounds.right &&
+					shown.top >= bounds.top && shown.bottom <= bounds.bottom) {
+				return
+			}
+		}
+	}
+
+	/**
+	 * Takes the phone's heading as well as its position. The two screens show the same ground,
+	 * and showing it turned differently is harder to read than either on its own - the watch is
+	 * glanced at while the phone is in view.
+	 */
 	override fun followPhone() {
 		val current = box ?: return
 		val phone = app.osmandMap.mapView.currentRotatedTileBox
 		current.setLatLonCenter(phone.latitude, phone.longitude)
+		current.setRotate(phone.rotate)
 	}
 
 	override fun close() {

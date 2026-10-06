@@ -8,6 +8,9 @@
 	<string name="wear_trip_recording">Trip recording</string>
 	<string name="wear_settings">Settings</string>
 	<string name="wear_destinations">Destinations</string>
+	<string name="wear_route_calculating">Working out the route…</string>
+	<string name="wear_route_start">Start</string>
+	<string name="wear_route_preview_failed">No route found</string>
 	<string name="wear_destinations_empty">Nothing saved yet</string>
 	<string name="wear_destinations_empty_hint">Favourites and recent destinations from the phone appear here</string>
 	<string name="wear_home">Home</string>

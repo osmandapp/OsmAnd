@@ -47,7 +47,24 @@ data class PhoneState(
 	val openglAvailable: Boolean = false,
 
 	/** Places worth going to, gathered from the phone's own lists. */
-	val destinations: List<DestinationInfo> = emptyList()
+	val destinations: List<DestinationInfo> = emptyList(),
+
+	/** The route being looked at before setting off, if any. */
+	val routePreview: RoutePreviewState? = null
+)
+
+/**
+ * A route worked out but not yet taken.
+ *
+ * [calculating] rather than an absence of figures, because a route over any distance takes long
+ * enough that the difference between "working on it" and "no route" has to be visible.
+ */
+@Serializable
+data class RoutePreviewState(
+	val name: String = "",
+	val calculating: Boolean = false,
+	val distanceText: String = "",
+	val timeText: String = ""
 )
 
 /** Which of the phone's lists a destination came from; the watch groups by it. */

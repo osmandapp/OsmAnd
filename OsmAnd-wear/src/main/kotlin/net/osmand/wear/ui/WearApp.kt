@@ -1,6 +1,7 @@
 package net.osmand.wear.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,6 +34,7 @@ import net.osmand.wear.ui.screens.NavigationScreen
 import net.osmand.wear.ui.screens.ProfilePickerScreen
 import net.osmand.wear.ui.screens.RecordingPager
 import net.osmand.wear.ui.screens.RecordingStartScreen
+import net.osmand.wear.ui.screens.RoutePreviewScreen
 import net.osmand.wear.ui.screens.SettingsScreen
 import net.osmand.wear.ui.screens.isSessionOpen
 import net.osmand.wear.ui.theme.OsmAndWearTheme
@@ -44,6 +46,7 @@ object Routes {
 	const val MAP = "map"
 	const val MARKERS = "markers"
 	const val DESTINATIONS = "destinations"
+	const val ROUTE_PREVIEW = "route_preview"
 	const val PROFILES = "profiles"
 	const val SETTINGS = "settings"
 }
@@ -176,8 +179,28 @@ fun WearApp(connector: PhoneConnector) {
 				composable(Routes.DESTINATIONS) {
 					DestinationsScreen(
 						destinations = currentSnapshot()?.state?.destinations.orEmpty(),
-						// Routing from the watch comes next; until then the list is a list.
-						onSelect = { }
+						onSelect = { destination ->
+							send(WearCommand.PreviewRoute(
+								destination.latitude, destination.longitude, destination.name))
+							navController.navigate(Routes.ROUTE_PREVIEW)
+						}
+					)
+				}
+				composable(Routes.ROUTE_PREVIEW) {
+					// Leaving the screen drops the route rather than keeping it in planning
+					// mode on the phone: the watch asked for it only to look at it.
+					DisposableEffect(Unit) {
+						onDispose { send(WearCommand.CancelRoutePreview) }
+					}
+					RoutePreviewScreen(
+						preview = currentSnapshot()?.state?.routePreview,
+						onStart = {
+							send(WearCommand.StartNavigation)
+							navController.popBackStack(Routes.HOME, false)
+							navController.navigate(Routes.NAVIGATION)
+						},
+						onStartStream = { w, h, d -> send(WearCommand.StartMapStream(w, h, d)) },
+						onStopStream = { send(WearCommand.StopMapStream) }
 					)
 				}
 				composable(Routes.SETTINGS) {

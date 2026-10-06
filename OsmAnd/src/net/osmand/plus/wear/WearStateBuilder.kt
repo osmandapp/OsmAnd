@@ -26,6 +26,7 @@ import net.osmand.wear.api.Metric
 import net.osmand.wear.api.NavigationState
 import net.osmand.wear.api.PhoneState
 import net.osmand.wear.api.ProfileInfo
+import net.osmand.wear.api.RoutePreviewState
 import net.osmand.wear.api.RecordingState
 import net.osmand.wear.api.WearProtocol
 
@@ -59,6 +60,7 @@ class WearStateBuilder(private val app: OsmandApplication) {
 			legacyMapRenderer = WearMapStreamer.legacyRenderer(app).get(),
 			openglAvailable = NativeCoreContext.isInit(),
 			destinations = buildDestinations(),
+			routePreview = buildRoutePreview(),
 			location = buildLocation(),
 			headingDegrees = app.mapViewTrackingUtilities.heading
 		)
@@ -225,6 +227,26 @@ class WearStateBuilder(private val app: OsmandApplication) {
 	 * itself. Favourites are cut by distance and the histories by recency, because both can run
 	 * to thousands of entries and the Data Layer carries the whole snapshot on every change.
 	 */
+	/**
+	 * A route calculated but not being followed: OsmAnd's planning mode, which is what the watch
+	 * is looking at before it decides to set off.
+	 */
+	private fun buildRoutePreview(): RoutePreviewState? {
+		val routing = app.routingHelper
+		if (!routing.isRoutePlanningMode) {
+			return null
+		}
+		val target = app.targetPointsHelper.pointToNavigate
+		val calculating = routing.isRouteBeingCalculated || !routing.isRouteCalculated
+		return RoutePreviewState(
+			name = target?.getOnlyName().orEmpty(),
+			calculating = calculating,
+			distanceText = if (calculating) "" else formatDistance(routing.leftDistance),
+			timeText = if (calculating) "" else
+				OsmAndFormatter.getFormattedDuration(routing.leftTime.toLong(), app)
+		)
+	}
+
 	private fun buildDestinations(): List<DestinationInfo> {
 		val from = currentLocation()
 		val favourites = app.favoritesHelper
