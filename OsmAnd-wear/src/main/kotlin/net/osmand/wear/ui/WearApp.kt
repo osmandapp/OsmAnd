@@ -23,6 +23,7 @@ import net.osmand.wear.data.PhoneLink
 import net.osmand.wear.data.PhoneStateRepository
 import net.osmand.wear.data.Snapshot
 import net.osmand.wear.ui.screens.ConnectionScreen
+import net.osmand.wear.ui.screens.DestinationsScreen
 import net.osmand.wear.ui.screens.FinishRecordingDialog
 import net.osmand.wear.ui.screens.HomeScreen
 import net.osmand.wear.ui.screens.MapScreen
@@ -42,6 +43,7 @@ object Routes {
 	const val RECORDING = "recording"
 	const val MAP = "map"
 	const val MARKERS = "markers"
+	const val DESTINATIONS = "destinations"
 	const val PROFILES = "profiles"
 	const val SETTINGS = "settings"
 }
@@ -169,6 +171,13 @@ fun WearApp(connector: PhoneConnector) {
 							send(WearCommand.SelectProfile(key))
 							navController.popBackStack()
 						}
+					)
+				}
+				composable(Routes.DESTINATIONS) {
+					DestinationsScreen(
+						destinations = currentSnapshot()?.state?.destinations.orEmpty(),
+						// Routing from the watch comes next; until then the list is a list.
+						onSelect = { }
 					)
 				}
 				composable(Routes.SETTINGS) {

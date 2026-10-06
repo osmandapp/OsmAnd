@@ -3,11 +3,13 @@ package net.osmand.plus.wear
 import android.location.Location
 
 import net.osmand.plus.OsmandApplication
+import net.osmand.data.SpecialPointType
 import net.osmand.plus.mapmarkers.MapMarker
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin
 import net.osmand.plus.routing.NextDirectionInfo
 import net.osmand.plus.settings.backend.ApplicationMode
+import net.osmand.plus.settings.enums.HistorySource
 import net.osmand.plus.utils.FormattedValue
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.OsmAndFormatterParams
@@ -17,6 +19,8 @@ import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.wear.api.AppModeInfo
 import net.osmand.wear.api.ManeuverInfo
 import net.osmand.wear.api.LocationState
+import net.osmand.wear.api.DestinationGroup
+import net.osmand.wear.api.DestinationInfo
 import net.osmand.wear.api.MarkerInfo
 import net.osmand.wear.api.Metric
 import net.osmand.wear.api.NavigationState
@@ -54,6 +58,7 @@ class WearStateBuilder(private val app: OsmandApplication) {
 			carConnected = app.carNavigationSession != null,
 			legacyMapRenderer = WearMapStreamer.legacyRenderer(app).get(),
 			openglAvailable = NativeCoreContext.isInit(),
+			destinations = buildDestinations(),
 			location = buildLocation(),
 			headingDegrees = app.mapViewTrackingUtilities.heading
 		)
@@ -215,6 +220,66 @@ class WearStateBuilder(private val app: OsmandApplication) {
 		}
 	}
 
+	/**
+	 * Everywhere the phone knows the watch might want to go, in one list the watch groups by
+	 * itself. Favourites are cut by distance and the histories by recency, because both can run
+	 * to thousands of entries and the Data Layer carries the whole snapshot on every change.
+	 */
+	private fun buildDestinations(): List<DestinationInfo> {
+		val from = currentLocation()
+		val favourites = app.favoritesHelper
+		val special = listOfNotNull(
+			favourites.getSpecialPoint(SpecialPointType.HOME)?.let { it to DestinationGroup.HOME },
+			favourites.getSpecialPoint(SpecialPointType.WORK)?.let { it to DestinationGroup.WORK }
+		).map { (point, group) ->
+			destination(point.getDisplayName(app), point.latitude, point.longitude, group,
+				point.color, from)
+		}
+
+		val ordinary = favourites.favouritePoints
+			.asSequence()
+			.filter { it.specialPointType == null }
+			.map { destination(it.getDisplayName(app), it.latitude, it.longitude,
+				DestinationGroup.FAVOURITE, it.color, from) }
+			.sortedBy { if (from == null) 0 else it.distanceMeters }
+			.take(MAX_FAVOURITES)
+			.toList()
+
+		val history = app.searchHistoryHelper
+		val recent = { source: HistorySource, group: DestinationGroup ->
+			history.getHistoryEntries(source, true)
+				.take(MAX_HISTORY)
+				.map { entry ->
+					destination(entry.name.getSimpleName(app, false), entry.lat, entry.lon, group, 0, from)
+				}
+		}
+
+		return special + recent(HistorySource.NAVIGATION, DestinationGroup.NAVIGATION_HISTORY) +
+				ordinary + recent(HistorySource.SEARCH, DestinationGroup.SEARCH_HISTORY)
+	}
+
+	private fun destination(
+		name: String, latitude: Double, longitude: Double, group: DestinationGroup,
+		colorArgb: Int, from: net.osmand.Location?
+	): DestinationInfo {
+		// distanceBetween reports the bearing out of the target towards us, the way the markers
+		// above read it, so 180 turns it back around to point at the target.
+		val result = FloatArray(2)
+		if (from != null) {
+			Location.distanceBetween(latitude, longitude, from.latitude, from.longitude, result)
+		}
+		return DestinationInfo(
+			latitude = latitude,
+			longitude = longitude,
+			name = name,
+			group = group,
+			distanceText = if (from == null) "" else formatDistance(result[0].toInt()),
+			distanceMeters = quantize(result[0].toInt()),
+			bearingDegrees = result[1] + 180f,
+			colorArgb = colorArgb
+		)
+	}
+
 	private fun buildMarkers(): List<MarkerInfo> {
 		val markers = app.mapMarkersHelper.mapMarkers
 		if (markers.isEmpty()) {
@@ -273,6 +338,8 @@ class WearStateBuilder(private val app: OsmandApplication) {
 		private const val ANALYSIS_INTERVAL_MS = 5000L
 		private const val MAX_MANEUVERS = 3
 		private const val MAX_MARKERS = 10
+		private const val MAX_FAVOURITES = 20
+		private const val MAX_HISTORY = 15
 		private const val DISTANCE_STEP_METERS = 10
 	}
 }

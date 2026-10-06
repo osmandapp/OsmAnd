@@ -44,7 +44,38 @@ data class PhoneState(
 	 * the phone itself is set to the OpenGL engine, so choosing it on the watch while the phone
 	 * is on the legacy one asks for something that cannot happen.
 	 */
-	val openglAvailable: Boolean = false
+	val openglAvailable: Boolean = false,
+
+	/** Places worth going to, gathered from the phone's own lists. */
+	val destinations: List<DestinationInfo> = emptyList()
+)
+
+/** Which of the phone's lists a destination came from; the watch groups by it. */
+@Serializable
+enum class DestinationGroup {
+	HOME,
+	WORK,
+	FAVOURITE,
+	NAVIGATION_HISTORY,
+	SEARCH_HISTORY
+}
+
+/**
+ * Somewhere the watch can ask to be taken.
+ *
+ * Carries its coordinates because that is what a route is asked for by; the phone's own
+ * identifiers differ between favourites and history and mean nothing on the watch.
+ */
+@Serializable
+data class DestinationInfo(
+	val latitude: Double,
+	val longitude: Double,
+	val name: String,
+	val group: DestinationGroup,
+	val distanceText: String = "",
+	val distanceMeters: Int = 0,
+	val bearingDegrees: Float = 0f,
+	val colorArgb: Int = 0
 )
 
 /**
