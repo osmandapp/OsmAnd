@@ -3,6 +3,8 @@ package net.osmand.shared.media.library
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.media.domain.MediaType
 import net.osmand.shared.util.KMapUtils
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
 interface SortableMedia {
 	val id: String
@@ -12,7 +14,13 @@ interface SortableMedia {
 	val lastModifiedMs: Long?
 	val sizeBytes: Long?
 	val durationMs: Long?
+
+	@OptIn(ExperimentalObjCName::class)
+	@ObjCName("mediaLat")
 	val lat: Double?
+
+	@OptIn(ExperimentalObjCName::class)
+	@ObjCName("mediaLon")
 	val lon: Double?
 }
 
@@ -64,6 +72,8 @@ object MediaLibrarySorter {
 
 object MediaLibraryGrouping {
 	data class Group<T>(val type: MediaType, val items: List<T>) {
+		@OptIn(ExperimentalObjCName::class)
+		@ObjCName("itemsCount")
 		val count: Int get() = items.size
 	}
 
