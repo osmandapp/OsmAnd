@@ -73,8 +73,8 @@ class MediaDetailsContentBuilder(private val app: OsmandApplication) {
 		if (item.type == MediaType.VIDEO || item.type == MediaType.AUDIO) {
 			metadata?.durationMs?.let { items += fileCardRow(R.string.duration, MediaFormatting.duration(it)) }
 		}
-		val lat = entry?.lat ?: metadata?.latLon?.latitude
-		val lon = entry?.lon ?: metadata?.latLon?.longitude
+		val lat = entry?.location?.latitude ?: metadata?.latLon?.latitude
+		val lon = entry?.location?.longitude ?: metadata?.latLon?.longitude
 		if (lat != null && lon != null) {
 			items += fileCardRow(R.string.shared_string_location, CoordinateFormatFormatter.formatPrimary(app, lat, lon),
 				iconId = R.drawable.ic_action_location_marker_outlined, action = RowAction.ShowOnMap(lat, lon, item.title))

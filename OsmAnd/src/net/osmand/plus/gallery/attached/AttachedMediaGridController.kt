@@ -169,8 +169,7 @@ class AttachedMediaGridController(
 		override val lastModifiedMs = metadata?.lastModifiedTimeMs
 		override val sizeBytes = metadata?.sizeBytes
 		override val durationMs = metadata?.durationMs
-		override val lat = metadata?.latLon?.latitude
-		override val lon = metadata?.latLon?.longitude
+		override val location = metadata?.latLon?.let { KLatLon(it.latitude, it.longitude) }
 	}
 
 	private fun sortMedia(media: List<MediaItem>): List<MediaItem> {

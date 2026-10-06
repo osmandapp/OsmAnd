@@ -3,6 +3,7 @@ package net.osmand.plus.gallery.library
 import net.osmand.data.LatLon
 import net.osmand.plus.gallery.data.GalleryMediaMetadata
 import net.osmand.plus.plugins.audionotes.Recording
+import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.gpx.primitives.Linkable
 import net.osmand.shared.media.LinkMediaFactory
@@ -24,8 +25,8 @@ data class MediaLibraryEntry(
 	override val lastModifiedMs get() = metadata?.lastModifiedTimeMs
 	override val sizeBytes get() = metadata?.sizeBytes
 	override val durationMs get() = metadata?.durationMs
-	override val lat get() = metadata?.latLon?.latitude ?: recording?.latitude
-	override val lon get() = metadata?.latLon?.longitude ?: recording?.longitude
+	override val location get() = metadata?.latLon?.let { KLatLon(it.latitude, it.longitude) }
+		?: recording?.let { KLatLon(it.latitude, it.longitude) }
 }
 
 data class MediaAttachment(

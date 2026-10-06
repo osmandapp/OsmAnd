@@ -11,10 +11,9 @@ import net.osmand.shared.gpx.primitives.WptPt
 
 object ShowOnMapNavigator {
 	fun show(activity: FragmentActivity, entry: MediaLibraryEntry) {
-		val lat = entry.lat ?: return
-		val lon = entry.lon ?: return
+		val location = entry.location ?: return
 		val target = entry.recording ?: entry.attachments.lastOrNull()?.target
-		show(activity, lat, lon, PointDescription(PointDescription.POINT_TYPE_LOCATION, entry.title), target)
+		show(activity, location.latitude, location.longitude, PointDescription(PointDescription.POINT_TYPE_LOCATION, entry.title), target)
 	}
 
 	fun show(activity: FragmentActivity, attachment: MediaAttachment) {
