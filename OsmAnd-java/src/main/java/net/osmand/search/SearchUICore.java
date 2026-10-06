@@ -1092,9 +1092,6 @@ public class SearchUICore {
 
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
-		if (currentSearchResult != null && currentSearchResult.hasMoreSpatialSearchResults()) {
-			return true;
-		}
 		for (SearchCoreAPI api : apis) {
 			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) >= 0
 					&& api.isSearchMoreAvailable(phrase)) {
