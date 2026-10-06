@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">OsmAnd AI Connector</string>
+	<string name="notification_channel">AI Connector</string>
+	<string name="notification_title">AI Connector is on</string>
+	<string name="notification_text">Your AI assistant can use OsmAnd · %1$s</string>
+
+	<string name="screen_description">Lets an AI assistant on your computer (Claude Code, Codex, Cursor…) use OsmAnd on this phone: show places, plan routes, start navigation.</string>
+	<string name="main_switch">Connector</string>
+	<string name="status_running">Listening on %1$s</string>
+	<string name="status_stopped">Off. Assistants cannot reach OsmAnd.</string>
+	<string name="status_cannot_start">Cannot start: port %1$d is busy.</string>
+
+	<string name="run_in_background">In background</string>
+	<string name="run_while_open">Screen on</string>
+	<string name="run_background_footer">Works with the phone locked. A notification shows while the connector is on.</string>
+	<string name="run_screen_footer">No notification. The connector stops when you leave this screen.</string>
+	<string name="keep_screen_open">Keep this screen open: the assistant can use OsmAnd only while it is on.</string>
+	<string name="step_osmand">1. OsmAnd</string>
+	<string name="osmand_app">OsmAnd app</string>
+	<string name="osmand_not_installed">OsmAnd is not installed</string>
+	<string name="access_title">Access</string>
+	<string name="access_not_checked">Not checked yet</string>
+	<string name="access_granted">Allowed: %1$s</string>
+	<string name="access_denied">Not allowed</string>
+	<string name="access_old_osmand">This OsmAnd version has no permission request. Update OsmAnd.</string>
+	<string name="allow_access">Allow access</string>
+	<string name="check_connection">Check</string>
+	<string name="check_ok">Connected to %1$s</string>
+	<string name="check_failed">No connection: %1$s</string>
+	<string name="osmand_footer">OsmAnd asks what the assistant may do: map, search, navigation, favorites, tracks. You can change it later in OsmAnd › Menu › Plugins.</string>
+
+	<string name="step_connection">2. How the computer connects</string>
+	<string name="access_wifi">Wi-Fi</string>
+	<string name="access_usb">USB (adb)</string>
+	<string name="bridge_title">Find the phone automatically</string>
+	<string name="bridge_summary">Keeps working when the router gives the phone a new address. Needs Python 3 on the computer.</string>
+	<string name="wifi_footer">The computer and the phone are on the same Wi-Fi. Run this on the computer once to get the bridge:</string>
+	<string name="wifi_direct_footer">The computer and the phone are on the same Wi-Fi. Nothing to run: the settings in step 3 hold the phone\'s address. If the router gives the phone a new address, copy them again. Tip: reserve the address in your router.</string>
+	<string name="usb_footer">The phone is connected with a USB cable and USB debugging is on. Run this on the computer once per connection:</string>
+
+	<string name="step_assistant">3. Add to your AI assistant</string>
+	<string name="client_claude_code">Claude Code</string>
+	<string name="client_codex">Codex</string>
+	<string name="client_cursor">Cursor</string>
+	<string name="client_vs_code">VS Code</string>
+	<string name="client_other">Other</string>
+	<string name="client_claude_code_where">Run in a terminal, then start a new Claude Code session:</string>
+	<string name="client_codex_where">Add to ~/.codex/config.toml, then restart Codex:</string>
+	<string name="client_cursor_where">Add to ~/.cursor/mcp.json (Cursor › Settings › MCP):</string>
+	<string name="client_vs_code_where">Add to .vscode/mcp.json in your project (GitHub Copilot agent mode):</string>
+	<string name="client_other_where">Any app that supports MCP servers over HTTP:</string>
+	<string name="copy">Copy</string>
+	<string name="copied">Copied</string>
+	<string name="step_try">4. Try it</string>
+	<string name="try_where">Start a new chat in your assistant and ask, for example:</string>
+	<string name="try_example">Show Amsterdam Centraal in OsmAnd and build a cycling route to the Rijksmuseum.</string>
+
+	<string name="reset_token">Reset access key</string>
+	<string name="reset_token_message">Assistants with the old key lose access. Copy the settings again for each of them.</string>
+	<string name="reset">Reset</string>
+	<string name="cancel">Cancel</string>
+	<string name="choose_osmand">OsmAnd app</string>
+</resources>

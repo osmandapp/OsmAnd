@@ -517,7 +517,6 @@
     <string name="recording_unavailable">მიუწვდომელია</string>
     <string name="recording_context_menu_arecord">ხმოვანი შენიშვნის ჩაწერა</string>
     <string name="recording_context_menu_vrecord">ვიდეო შენიშვნის ჩაწერა</string>
-    <string name="layer_recordings">ჩანაწერების დონე</string>
     <string name="recording_context_menu_play">დაკვრა</string>
     <string name="recording_description">ჩანაწერი %1$s %2$s %3$s-დან</string>
     <string name="recording_default_name">მიმდინარეობს ჩაწერა</string>
@@ -525,7 +524,6 @@
     <string name="audionotes_location_not_defined">გამოიყენეთ \"მდებარეობის გამოყენება…\" შენიშვნის სასურველი მდებარეობისათვის მისანიჭებლად.</string>
     <string name="map_widget_audionotes">ხმოვანი შენიშვნები</string>
     <string name="audionotes_plugin_description">მგზავრობისას ხმოვანი/ვიდეო შენიშვნების ჩაწერა.</string>
-    <string name="audionotes_plugin_name">ხმოვანი/ვიდეო შენიშვნები</string>
     <string name="srtm_plugin_name">ტოპოგრაფია</string>
     <string name="download_select_map_types">სხვა რუკები</string>
     <string name="download_srtm_maps">კოტურული ხაზების მონაცემები</string>
@@ -1134,7 +1132,6 @@
     <string name="favourites">რჩეულები</string>
     <string name="tab_title_advanced">დამატებით</string>
     <string name="tab_title_basic">ძირითადი</string>
-    <string name="av_locations">მდებარეობები</string>
     <string name="next_proceed">შემდეგი</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="shared_string_skip">გამოტოვება</string>
@@ -1175,7 +1172,6 @@
     <string name="shared_string_enable">ჩართვა</string>
     <string name="shared_string_dismiss">მოცილება</string>
     <string name="shared_string_release">გამოშვებულია</string>
-    <string name="watch">ყურება</string>
     <string name="settings_privacy">კონფიდენციალობა</string>
     <string name="rendering_value_default_name">ნაგულისხმევი</string>
     <string name="navigate_point_easting">აღმოსავლეთისკენ</string>
@@ -1415,9 +1411,6 @@
     <string name="will_open_on">იღება</string>
     <string name="will_open_at">იღება</string>
     <string name="total_donations">შემოწირულობები სულ</string>
-    <string name="by_type">ტიპით</string>
-    <string name="by_date">თარიღით</string>
-    <string name="empty_state_av_notes">ჩაინიშნეთ!</string>
     <string name="empty_state_markers_groups">ჯგუფების იმპორტი</string>
     <string name="favourites_group">რჩეულების კატეგორია</string>
     <string name="mark_passed">გავლილად მონიშვნა</string>

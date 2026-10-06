@@ -237,19 +237,12 @@
     <string name="will_close_at">மூடுகிறது</string>
     <string name="will_open_at">திறக்கும்</string>
     <string name="will_open_on">திறக்கும்</string>
-    <string name="av_locations_selected_desc">தேர்ந்தெடுக்கப்பட்ட குறிப்புகளின் ஒருங்கிணைப்புகள் மற்றும் தரவுகளுடன் சிபிஎக்ச் கோப்பு.</string>
-    <string name="av_locations_all_desc">அனைத்து குறிப்புகளின் ஒருங்கிணைப்புகள் மற்றும் தரவுகளுடன் சிபிஎக்ச் கோப்பு.</string>
     <string name="shared_string_marker">குறியீடு</string>
     <string name="empty_state_osm_edits">OpenStreetMap பொருள்களை உருவாக்க அல்லது மாற்றவும்</string>
     <string name="shared_string_deleted">அழிக்கப்பட்டது</string>
     <string name="shared_string_edited">திருத்தப்பட்டது</string>
     <string name="shared_string_added">சேர்க்கப்பட்டது</string>
     <string name="marker_activated">குறியீடு %s செயல்படுத்தப்பட்டது.</string>
-    <string name="empty_state_av_notes">குறிப்புகளை உருவாக்குங்கள்!</string>
-    <string name="empty_state_av_notes_desc">விட்செட்டுகள் அல்லது சூழல் மெனுக்களைப் பயன்படுத்தி வரைபடத்தில் எந்த கட்டத்திலும் ஆடியோ, வீடியோ அல்லது புகைப்படக் குறிப்புகளைச் சேர்க்கவும்.</string>
-    <string name="notes_by_date">A/V குறிப்புகள் தேதி</string>
-    <string name="by_date">தேதியின் மூலம்</string>
-    <string name="by_type">வகையின் மூலம்</string>
     <string name="looking_for_tracks_with_waypoints">வழிகாட்டுதல்களுடன் பாதைகளை தேடுகிறது</string>
     <string name="shared_string_more_without_dots">மேலும்</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / மாதம்</string>
@@ -730,7 +723,6 @@
     <string name="recording_unavailable">கிடைக்கவில்லை</string>
     <string name="recording_context_menu_arecord">ஆடியோ குறிப்பு எடுக்கவும்</string>
     <string name="recording_context_menu_vrecord">வீடியோ குறிப்பு எடுக்கவும்</string>
-    <string name="layer_recordings">பதிவு அடுக்கு</string>
     <string name="recording_context_menu_play">இயக்க</string>
     <string name="recording_description">%1$s %3$s %2$s பதிவுசெய்கிறது</string>
     <string name="recording_default_name">பதிவு</string>
@@ -941,7 +933,6 @@
     <string name="welcome_header">வருக</string>
     <string name="current_route">தற்போதைய பாதை</string>
     <string name="osm_changes_added_to_local_edits">ஓஎஸ்எம் மாற்றங்கள் உள்மாற்ற கூட்டமைப்பில் சேர்க்கபட்டது</string>
-    <string name="local_recordings_delete_all_confirm">%1$d குறிப்புகளை நீக்கவா?</string>
     <string name="delay_to_start_navigation">பின்-மூலம் வழிகாட்டுதலைத் தொடங்குங்கள்…</string>
     <string name="shared_string_go">செல்</string>
     <string name="osmand_parking_overdue">தாமதம்</string>
@@ -1136,7 +1127,6 @@
     <string name="help_article_personal_color_palette_schemes_name">வண்ண திட்டங்கள்</string>
     <string name="obd_plugin_name">வாகன அளவீடுகள்</string>
     <string name="global_settings">உலகளாவிய அமைப்புகள்</string>
-    <string name="audionotes_plugin_name">ஆடியோ/வீடியோ குறிப்புகள்</string>
     <string name="shared_string_accessibility">அணுகல்</string>
     <string name="tracker_item">ஒச்மண்ட் டிராக்கர்</string>
     <string name="settings_preset">இயல்புநிலை சுயவிவரம்</string>
@@ -3412,7 +3402,6 @@
     <string name="shared_string_qr_code">QR குறியீடு</string>
     <string name="share_menu_location">இருப்பிடத்தைப் பகிரவும்</string>
     <string name="shared_string_send">அனுப்பு</string>
-    <string name="av_locations_descr">இருப்பிடங்களுடன் சிபிஎக்ச் கோப்பு.</string>
     <string name="agps_data_last_downloaded">A-GPS தரவு பதிவிறக்கம்: %1$s</string>
     <string name="srtm_plugin_description">நிலப்பரப்பு கோடுகள், இல்சேட், சாய்வு போன்ற நிலப்பரப்பு தகவல்கள், நிலத்தின் இடத்தையும், ஈடு, வழிசெலுத்தல் மற்றும் பலவற்றை பார்வைக்கு மதிப்பிட உதவுகின்றன. வரைபடத்தில் நிலப்பரப்பு தகவல்களை விளிம்பு கோடுகள், நிவாரண நிழல் மற்றும்/அல்லது செங்குத்தான வண்ணம் ஆகியவற்றால் குறிக்கலாம்.\n\n அடிப்படை தரவு SRTM மற்றும் ASTER இலிருந்து உருவாகிறது.\n\n மேலும் வாசிப்பு %1$s.</string>
     <string name="osm_editing_plugin_description">உலகின் விரிவான வரைபடத்தை பராமரிக்கும் உலகளாவிய சமூகமான ஓபன்ச்ட்ரீட்மேப்பிற்கு பங்களிப்புகளைச் செய்யுங்கள் மற்றும் ஒவ்வொரு பயனருக்கும் புதுப்பித்த திறந்த மூல தரவை வழங்குகிறது.\n\n எங்கள் வலைத்தளமான %1$s இல் வரைபடத்தை எவ்வாறு திருத்துவது என்பதற்கான வழிமுறைகளை நீங்கள் காணலாம்.</string>
@@ -4149,7 +4138,6 @@
     <string name="avoid_ferries">படகுகள் இல்லை</string>
     <string name="layer_osm_bugs">OSM குறிப்புகள் (ஆன்லைன்)</string>
     <string name="opening_at">திறக்க</string>
-    <string name="av_locations">இருப்பிடங்கள்</string>
     <string name="share_note">பகிர்வு குறிப்பு</string>
     <string name="battery_optimization_settings">பேட்டரி தேர்வுமுறை அமைப்புகள்</string>
     <string name="shared_string_created">உருவாக்கப்பட்டது</string>
@@ -4237,7 +4225,6 @@
     <string name="monitoring_prefs_descr">வழிசெலுத்தல், பதிவு துல்லியம்</string>
     <string name="accessibility_prefs_descr">படவுரு, வண்ணம் மற்றும் பெயர் தேர்வு செய்யவும்</string>
     <string name="live_monitoring_descr">பயண பதிவைப் பயன்படுத்தி தற்போதைய இருப்பிடத்தைப் பகிர அனுமதிக்கிறது.</string>
-    <string name="multimedia_notes_view_descr">உங்கள் OSM குறிப்புகள் %1$s இல் உள்ளன.</string>
     <string name="track_saved">ட்ராக் சேமிக்கப்பட்டது</string>
     <string name="layer_osm_edits">OSM திருத்தங்கள்</string>
     <string name="change_data_storage_full_description">OSMAND தரவு கோப்புகளை புதிய இலக்குக்கு நகர்த்தவா?\n %1$s&gt; %2$s</string>
@@ -4271,7 +4258,6 @@
     <string name="system_default_theme">கணினி இயல்புநிலை</string>
     <string name="shared_string_max_speed">அதிகபட்சம். விரைவு</string>
     <string name="dark_theme">இருண்ட</string>
-    <string name="watch">வாட்ச்</string>
     <string name="int_min">மணித்துளி.</string>
     <string name="plugins_menu_group">செருகுநிரல்கள்</string>
     <string name="obd_vin">வின்</string>

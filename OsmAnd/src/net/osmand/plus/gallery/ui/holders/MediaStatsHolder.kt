@@ -24,7 +24,8 @@ class MediaStatsHolder(
 		tvStats.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
 
 		val baseMargin = app.resources.getDimensionPixelSize(R.dimen.content_padding)
-		val topPadding = if (gridMode) baseMargin else 0
+		divider.visibility = if (stats.sectionFooter) View.GONE else View.VISIBLE
+		val topPadding = if (gridMode && !stats.sectionFooter) baseMargin else 0
 		itemView.setPaddingRelative(
 			itemView.paddingStart,
 			topPadding,

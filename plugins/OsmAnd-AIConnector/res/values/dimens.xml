@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="gutter">16dp</dimen>
+	<dimen name="group_gap">24dp</dimen>
+	<dimen name="row_gap">2dp</dimen>
+	<dimen name="card_padding">16dp</dimen>
+</resources>

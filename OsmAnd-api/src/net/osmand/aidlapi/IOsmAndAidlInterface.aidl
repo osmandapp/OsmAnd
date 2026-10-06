@@ -27,6 +27,15 @@ import net.osmand.aidlapi.gpx.ImportGpxParams;
 import net.osmand.aidlapi.gpx.ShowGpxParams;
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams;
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams;
+import net.osmand.aidlapi.gpx.AGpxRecordingInfo;
+import net.osmand.aidlapi.gpx.GpxPointsParams;
+import net.osmand.aidlapi.gpx.AGpxPoints;
+import net.osmand.aidlapi.gpx.GpxSearchParams;
+import net.osmand.aidlapi.gpx.AGpxSearchResult;
+import net.osmand.aidlapi.map.SetMapCameraParams;
+import net.osmand.aidlapi.map.MapScreenshotParams;
+import net.osmand.aidlapi.map.AMapScreenshot;
+import net.osmand.aidlapi.info.AMapWidgetValue;
 import net.osmand.aidlapi.gpx.HideGpxParams;
 import net.osmand.aidlapi.gpx.ASelectedGpxFile;
 
@@ -956,4 +965,47 @@ interface IOsmAndAidlInterface {
      * set RemoveWidgetGroupParams.removeWidgets = true to also remove the widgets.
      */
     boolean removeWidgetGroup(in RemoveWidgetGroupParams params);
+
+    /**
+     * Get the state of trip recording: whether a track is being recorded, the Trip recording plugin
+     * state, distance, duration and points of the current track.
+     *
+     * @return AGpxRecordingInfo, or null if the app has no access
+     */
+    AGpxRecordingInfo getGpxRecordingInfo();
+
+    /**
+     * Move the map camera: center, fractional zoom, rotation and elevation angle (tilt, 3D).
+     * NaN values keep the current ones.
+     */
+    boolean setMapCamera(in SetMapCameraParams params);
+
+    /**
+     * Screenshot of the map screen as the user sees it (map, tracks, 3D, widgets), JPEG.
+     * Works only while the map is on the screen.
+     *
+     * @return AMapScreenshot, or null if the map is not shown or the app has no access
+     */
+    AMapScreenshot getMapScreenshot(in MapScreenshotParams params);
+
+    /**
+     * Page of track points (coordinates, elevation, time, speed) of a GPX file
+     * or of the track being recorded.
+     *
+     * @return AGpxPoints, or null if the file is not found or the app has no access
+     */
+    AGpxPoints getGpxPoints(in GpxPointsParams params);
+
+    /**
+     * Values of the map widgets enabled in the current profile, as shown on the screen.
+     */
+    boolean getMapWidgetValues(out List<AMapWidgetValue> widgets);
+
+    /**
+     * Find track files by name, folder, activity, start time, distance or visibility, sorted and paged,
+     * with their statistics. Use it instead of getImportedGpx for big track collections.
+     *
+     * @return AGpxSearchResult, or null if the app has no access
+     */
+    AGpxSearchResult searchGpx(in GpxSearchParams params);
 }

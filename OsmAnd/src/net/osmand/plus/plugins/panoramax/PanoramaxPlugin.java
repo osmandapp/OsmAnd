@@ -35,6 +35,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.shared.panoramax.PanoramaxApi;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -236,8 +237,8 @@ public class PanoramaxPlugin extends OsmandPlugin {
 	public static boolean openPanoramax(@NonNull FragmentActivity activity, @Nullable String imageId) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		String url = imageId != null
-				? PanoramaxConstants.getViewerUrl(imageId)
-				: PanoramaxConstants.INSTANCE_URL;
+				? PanoramaxApi.getViewerUrl(imageId)
+				: PanoramaxApi.INSTANCE_URL;
 		Intent intent = new Intent(ACTION_VIEW, Uri.parse(url))
 				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		return AndroidUtils.startActivityIfSafe(app, intent);
