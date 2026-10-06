@@ -399,7 +399,7 @@ public class SearchUICore {
 					if (osmId != null && osmId < 0) {
 						osmId = null; // do not merge synthetic osmId such as wiki
 					}
-					if (that.isRouteTrack()) {
+					if (that.isRouteTrack() || that.isSuperRoute()) {
 						osmId = null;
 						wikidata = null; // do not merge routes
 					}
