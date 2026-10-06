@@ -118,11 +118,9 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		super(app, DATABASE_NAME, null, DATABASE_VERSION);
 		this.app = app;
 		insertEventScript = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?, ?)";
-		executor.submit(() -> {
-			clearDB(Collections.singletonList(EVENT_TYPE_ROUTING), System.currentTimeMillis());
-			// also submits collected data, lastSubmittedTime is 0 here
-			addEvent("app_start: " + getProfileKey(), EVENT_TYPE_APP_USAGE);
-		});
+		executor.execute(() -> clearDB(Collections.singletonList(EVENT_TYPE_ROUTING), System.currentTimeMillis()));
+		// also submits collected data, lastSubmittedTime is 0 here
+		addEvent("app_start: " + getProfileKey(), EVENT_TYPE_APP_USAGE);
 	}
 
 	@NonNull
@@ -379,11 +377,29 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		return "reason=" + (reason != null ? reason : "unknown") + " storage=" + storage + " space=" + space;
 	}
 
+	public static void logScreenOpen(@NonNull OsmandApplication app, @Nullable String screen) {
+		if (screen != null) {
+			app.logEvent("screen_open: " + screen);
+		}
+	}
+
 	public void addEvent(@NonNull String event, @EventType int type) {
+		long date = System.currentTimeMillis();
+		// events come from the main thread too, keep SQLite off it
+		executor.execute(() -> {
+			try {
+				insertEvent(date, event, type);
+			} catch (Exception e) {
+				LOG.error(e);
+			}
+		});
+	}
+
+	private void insertEvent(long date, @NonNull String event, @EventType int type) {
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null && db.isOpen()) {
 			try {
-				db.execSQL(insertEventScript, new Object[] {System.currentTimeMillis(), type, event});
+				db.execSQL(insertEventScript, new Object[] {date, type, event});
 			} catch (Exception e) {
 				LOG.error(e);
 			} finally {

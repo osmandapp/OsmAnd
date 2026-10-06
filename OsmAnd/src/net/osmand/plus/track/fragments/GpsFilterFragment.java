@@ -522,4 +522,9 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 		void onDismissGpsFilterFragment(boolean savedCopy, @Nullable String savedFilePath);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "gps_filter";
+	}
 }

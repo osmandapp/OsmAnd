@@ -256,4 +256,9 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "gallery_details";
+	}
 }

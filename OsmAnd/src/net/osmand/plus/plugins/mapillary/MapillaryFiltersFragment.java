@@ -289,4 +289,9 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
                     .commitAllowingStateLoss();
         }
     }
+
+    @Override
+    public String getAnalyticsScreen() {
+        return "mapillary_filters";
+    }
 }

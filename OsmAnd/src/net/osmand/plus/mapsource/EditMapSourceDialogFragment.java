@@ -552,4 +552,9 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 			return null;
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "edit_map_source";
+	}
 }

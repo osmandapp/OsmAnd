@@ -158,4 +158,9 @@ public class LocalItemFragment extends LocalBaseFragment
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "local_item";
+	}
 }

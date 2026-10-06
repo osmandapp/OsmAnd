@@ -290,4 +290,9 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 		wrongFormatDialog.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> dismiss());
 		wrongFormatDialog.show();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "ais_tracker_settings";
+	}
 }

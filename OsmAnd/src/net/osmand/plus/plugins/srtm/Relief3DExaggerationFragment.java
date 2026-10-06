@@ -76,4 +76,9 @@ public class Relief3DExaggerationFragment extends MapOptionSliderFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "relief_3d_exaggeration";
+	}
 }

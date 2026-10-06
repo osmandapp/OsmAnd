@@ -782,4 +782,9 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "waypoints";
+	}
 }

@@ -3464,4 +3464,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		SearchResultCollection searchResult = searchHelper.getCore().getCurrentSearchResult();
 		addressSearchStack.push(searchResult.getPhrase());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "quick_search";
+	}
 }

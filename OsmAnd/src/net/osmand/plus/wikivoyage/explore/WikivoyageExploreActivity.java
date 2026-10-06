@@ -414,4 +414,9 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "wikivoyage_explore";
+	}
 }

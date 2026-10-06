@@ -354,4 +354,6 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 			arguments = Bundle().apply { putString(CONTROLLER_ID_KEY, controllerId) }
 		}
 	}
+
+	override fun getAnalyticsScreen() = "gallery_grid"
 }

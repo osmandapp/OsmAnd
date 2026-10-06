@@ -150,4 +150,9 @@ public class HelpArticlesFragment extends BaseFullScreenFragment implements OnIt
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "help_articles";
+	}
 }
