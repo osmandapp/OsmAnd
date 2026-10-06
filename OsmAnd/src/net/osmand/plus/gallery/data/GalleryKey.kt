@@ -3,6 +3,7 @@ package net.osmand.plus.gallery.data
 import net.osmand.data.LatLon
 
 sealed class GalleryKey {
+	data object MediaLibrary : GalleryKey()
 
 	data class Location(
 		val latLon: LatLon,

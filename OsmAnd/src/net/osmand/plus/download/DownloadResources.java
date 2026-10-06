@@ -617,7 +617,8 @@ public class DownloadResources extends DownloadResourceGroup {
 					&& !fileName.startsWith("World_")
 					&& !fileName.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
 					&& !fileName.endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)
-					&& !fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+					&& !fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)
+					&& !fileName.endsWith(IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT)) {
 				BinaryMapIndexReader shallowReader = reader.getShallowReader();
 				if (shallowReader != null && !shallowReader.isBasemap()) {
 					if (routeData && !shallowReader.containsRouteData()) {

@@ -197,6 +197,12 @@ public class TravelObfHelper implements TravelHelper {
 
 		if (!Algorithms.isEmpty(filter.typeFilter)) {
 			for (AmenityIndexRepository repo : getTravelGpxRepositories()) {
+				// searchMapIndex() opens a second file handle for the POI section on its first call,
+				// so without this every installed map is opened when a route is first tapped, even
+				// one on another continent. This runs on the main thread inside the tap handler.
+				if (!repo.isMapSectionIntersects(mapRequest)) {
+					continue;
+				}
 				repo.searchMapIndex(mapRequest);
 			}
 			if (!routeIds.isEmpty()) {

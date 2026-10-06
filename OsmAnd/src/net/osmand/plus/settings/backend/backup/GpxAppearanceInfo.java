@@ -16,6 +16,7 @@ import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GradientScaleType;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.shared.util.KAlgorithms;
@@ -30,6 +31,7 @@ public class GpxAppearanceInfo {
 	public static final String TAG_COLOR = "color";
 	public static final String TAG_WIDTH = "width";
 	public static final String TAG_SHOW_ARROWS = "show_arrows";
+	public static final String TAG_LINE_STYLE = "line_style";
 	public static final String TAG_START_FINISH = "show_start_finish";
 	public static final String TAG_SPLIT_TYPE = "split_type";
 	public static final String TAG_SPLIT_INTERVAL = "split_interval";
@@ -56,6 +58,7 @@ public class GpxAppearanceInfo {
 			TAG_COLOR,
 			TAG_WIDTH,
 			TAG_SHOW_ARROWS,
+			TAG_LINE_STYLE,
 			TAG_START_FINISH,
 			TAG_SPLIT_TYPE,
 			TAG_SPLIT_INTERVAL,
@@ -90,6 +93,7 @@ public class GpxAppearanceInfo {
 	public Integer splitType;
 	public Double splitInterval;
 	public Boolean showArrows;
+	public String lineStyle;
 	public Boolean showStartFinish;
 
 	public Long timeSpan;
@@ -116,6 +120,7 @@ public class GpxAppearanceInfo {
 		color = item.getParameter(COLOR);
 		width = item.getParameter(WIDTH);
 		showArrows = item.getParameter(SHOW_ARROWS);
+		lineStyle = item.getParameter(LINE_STYLE);
 		showStartFinish = item.getParameter(SHOW_START_FINISH);
 		splitType = item.getParameter(SPLIT_TYPE);
 		splitInterval = item.getParameter(SPLIT_INTERVAL);
@@ -150,6 +155,7 @@ public class GpxAppearanceInfo {
 		}
 		writeParam(json, TAG_WIDTH, width);
 		writeParam(json, TAG_SHOW_ARROWS, showArrows);
+		writeParam(json, TAG_LINE_STYLE, lineStyle);
 		writeParam(json, TAG_START_FINISH, showStartFinish);
 		if (splitType != null) {
 			writeParam(json, TAG_SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
@@ -186,6 +192,7 @@ public class GpxAppearanceInfo {
 		dataItem.setParameter(COLOR, color);
 		dataItem.setParameter(WIDTH, width);
 		dataItem.setParameter(SHOW_ARROWS, showArrows);
+		dataItem.setParameter(LINE_STYLE, lineStyle);
 		dataItem.setParameter(SHOW_START_FINISH, showStartFinish);
 		if (splitType != null) {
 			dataItem.setParameter(SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(splitType).getType());
@@ -204,6 +211,9 @@ public class GpxAppearanceInfo {
 		}
 		if (json.has(TAG_SHOW_ARROWS)) {
 			showArrows = json.optBoolean(TAG_SHOW_ARROWS);
+		}
+		if (json.has(TAG_LINE_STYLE)) {
+			lineStyle = GpxLineStyleType.Companion.getLineStyleType(json.optString(TAG_LINE_STYLE)).getTypeName();
 		}
 		if (json.has(TAG_START_FINISH)) {
 			showStartFinish = json.optBoolean(TAG_START_FINISH);

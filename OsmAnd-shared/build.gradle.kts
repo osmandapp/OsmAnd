@@ -37,10 +37,26 @@ kotlin {
 		iosTarget.binaries.framework {
 			baseName = "OsmAndShared"
 			isStatic = true
+			// Kotlin/Native's allocator takes its pages with mmap and keeps them: after a route search
+			// the framework held onto what the search had borrowed, hundreds of megabytes on a long
+			// route, and neither collecting nor waiting gave it back. On malloc the pages go back to
+			// the system allocator, which on Darwin returns the large ones to the OS. Measured inside
+			// the iOS app over Freiburg - Rostock (874 km): the second search peaks at 670 MB instead
+			// of 886 and settles at 583 instead of 743, and nine shorter routes end the session at
+			// 580 MB instead of 823, all of it at the same speed.
+			binaryOption("disableMmap", "true")
 		}
 		iosTarget.compilations.getByName("main").cinterops.create("libxml2") {
 			defFile(project.file("src/nativeInterop/cinterop/libxml2.def"))
 			packageName("libxml2")
+		}
+		iosTarget.compilations.getByName("main").cinterops.create("sqlite3") {
+			defFile(project.file("src/nativeInterop/cinterop/sqlite3.def"))
+			packageName("sqlite3")
+		}
+		// sqlite3.def carries no linkerOpts, so the test binaries link sqlite themselves
+		iosTarget.binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.TestExecutable::class.java).configureEach {
+			linkerOpts("-lsqlite3")
 		}
 	}
 
@@ -55,7 +71,6 @@ kotlin {
 	val datetimeVersion = "0.6.1"
 	val okioVersion = "3.9.0"
 	val kxml2Version = "2.3.0"
-	val sqliterVersion = "1.3.1"
 	val sqliteJDBCVersion = "3.34.0"
 	val commonLoggingVersion = "1.2"
 	val coroutinesVersion = "1.8.1"
@@ -94,7 +109,6 @@ kotlin {
             implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
 		}
 		iosMain.dependencies {
-			implementation("co.touchlab:sqliter-driver:$sqliterVersion")
             implementation("io.ktor:ktor-client-darwin:$ktorVersion")
 		}
 

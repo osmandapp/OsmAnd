@@ -21,12 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.coordinates.CoordinateFormat;
-import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.shared.settings.coordinates.CoordinateFormat;
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

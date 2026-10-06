@@ -64,6 +64,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_TRANSPORT_ROUTE = "transport_route";
 	public static final String POINT_TYPE_TRANSPORT_STOP = "transport_stop";
 	public static final String POINT_TYPE_MAPILLARY_IMAGE = "mapillary_image";
+	public static final String POINT_TYPE_PANORAMAX_IMAGE = "panoramax_image";
 	public static final String POINT_TYPE_POI_TYPE = "poi_type";
 	public static final String POINT_TYPE_CUSTOM_POI_FILTER = "custom_poi_filter";
 

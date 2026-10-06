@@ -31,6 +31,13 @@ object TurnPreparation {
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private const val SLOW_DOWN_SPEED = 2.0
 
+	private const val TRAFFIC_SIGNALS_INTERSECTION_SIZE = 60.0
+
+	private class CumulativeIntersectionDistance {
+		var currentDistance = 0.0
+		var lastIntersectionDistance = -1.0
+	}
+
 	// ---- the manoeuvres ----
 
 	/**
@@ -85,7 +92,7 @@ object TurnPreparation {
 				t = TurnLanes.getActiveTurnType(lanes, leftSide, t)
 				t.lanes = lanes
 			} else if (fromTag != TurnType.C) {
-				t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent)
+				t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist))
 				if (t != null) {
 					val mainTurnType = TurnType.valueOf(fromTag, leftSide)
 					val lanes = t.lanes
@@ -128,7 +135,7 @@ object TurnPreparation {
 			t = TurnLanes.getActiveTurnType(lanes, leftSide, t)
 			t.lanes = lanes
 		} else {
-			t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent)
+			t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist))
 		}
 		if (t != null) {
 			t.turnAngle = (-mpi).toFloat()
@@ -251,18 +258,47 @@ object TurnPreparation {
 				if (ut) {
 					tnext.isSkipToSpeak = true
 					if (tl && TurnType.isLeftTurnNoUTurn(tnext.value)) {
-						val tt = TurnType.valueOf(TurnType.TU, false)
-						tt.lanes = t.lanes
-						return tt
+						return withUTurnLanes(TurnType.valueOf(TurnType.TU, false), result, i, t)
 					} else if (tr && TurnType.isRightTurnNoUTurn(tnext.value)) {
-						val tt = TurnType.valueOf(TurnType.TU, true)
-						tt.lanes = t.lanes
-						return tt
+						return withUTurnLanes(TurnType.valueOf(TurnType.TU, true), result, i, t)
 					}
 				}
 			}
 		}
 		return null
+	}
+
+	/**
+	 * Direction of the road before the junction. A short previous segment gives a noisy bearing,
+	 * so the baseline is extended backwards while the road continues without junctions.
+	 */
+	private fun getBearingEndExtended(result: List<RouteSegmentResult>, i: Int, bearingDist: Float): Float {
+		val prev = result[i - 1]
+		var bearing = prev.getBearingEnd()
+		var length = if (prev.getDistance() > 0) prev.getDistance().toDouble() else bearingDist.toDouble()
+		var k = i - 2
+		while (k >= 0 && length < bearingDist) {
+			val before = result[k]
+			if (before.getDistance() <= 0 || before.getTurnType() != null
+				|| before.getAttachedRoutes(before.getEndPointIndex()).isNotEmpty()) {
+				// a junction in between, the road before it goes in another direction
+				break
+			}
+			bearing = before.getBearingEnd()
+			length += before.getDistance()
+			k--
+		}
+		return bearing
+	}
+
+	private fun withUTurnLanes(uTurn: TurnType, result: List<RouteSegmentResult>, i: Int, t: TurnType): TurnType {
+		val lanes = TurnLanes.getTurnLanesInfo(result[i - 1], result[i], uTurn.value)
+		if (TurnType.hasActiveLane(lanes)) {
+			uTurn.lanes = lanes
+		} else {
+			uTurn.lanes = t.lanes
+		}
+		return uTurn
 	}
 
 	/** The road's name, falling back to the neighbour in the given direction when it has none. */
@@ -410,13 +446,23 @@ object TurnPreparation {
 	 */
 	@JvmStatic
 	fun calculateTimeSpeed(request: RoutingRequest, result: List<RouteSegmentResult>) {
+		val state = CumulativeIntersectionDistance()
 		for (i in result.indices) {
-			calculateTimeSpeed(request, result[i])
+			if (i > 0) {
+				state.currentDistance += result[i - 1].getDistance().toDouble()
+			}
+			calculateTimeSpeed(request, result[i], state)
 		}
 	}
 
 	@JvmStatic
 	fun calculateTimeSpeed(request: RoutingRequest, rr: RouteSegmentResult) {
+		calculateTimeSpeed(request, rr, CumulativeIntersectionDistance())
+	}
+
+	private fun calculateTimeSpeed(
+		request: RoutingRequest, rr: RouteSegmentResult, state: CumulativeIntersectionDistance
+	) {
 		// Naismith's/Scarf rules add additional travel time when moving uphill
 		var useNaismithRule = false
 		var scarfSeconds = 0.0 // Additional time as per Naismith/Scarf
@@ -463,6 +509,16 @@ object TurnPreparation {
 			var obstacle = request.getRouter().defineObstacle(road, j, !plus).toDouble()
 			if (obstacle < 0) {
 				obstacle = 0.0
+			} else if (obstacle > 0 && road.hasTrafficLightAt(j)) {
+				// A driver stops once per intersection
+				val signalDistance = state.currentDistance + distance
+				val startsNewIntersection = state.lastIntersectionDistance < 0 ||
+						signalDistance - state.lastIntersectionDistance >= TRAFFIC_SIGNALS_INTERSECTION_SIZE
+				if (startsNewIntersection) {
+					state.lastIntersectionDistance = signalDistance
+				} else {
+					obstacle = 0.0
+				}
 			}
 			distOnRoadToPass += d / speed + obstacle // this is time in seconds
 

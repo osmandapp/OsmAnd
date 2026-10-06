@@ -6,6 +6,9 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Window;
 
+import androidx.activity.ComponentDialog;
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +19,9 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.ColorUtilities;
 
 public abstract class BaseFullScreenDialogFragment extends BaseOsmAndDialogFragment {
+
+	@Nullable
+	private OnBackPressedCallback backPressedCallback;
 
 	@StyleRes
 	protected int getThemeId() {
@@ -55,11 +61,39 @@ public abstract class BaseFullScreenDialogFragment extends BaseOsmAndDialogFragm
 				AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColorId()));
 			}
 		}
+		registerBackPressedCallback(dialog);
 		return dialog;
 	}
 
 	@NonNull
 	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
-		return new Dialog(requireContext(), getThemeId());
+		return new ComponentDialog(requireContext(), getThemeId());
+	}
+
+	private void registerBackPressedCallback(@NonNull Dialog dialog) {
+		if (dialog instanceof OnBackPressedDispatcherOwner owner) {
+			backPressedCallback = new OnBackPressedCallback(isBackPressedCallbackEnabled()) {
+				@Override
+				public void handleOnBackPressed() {
+					handleBackPressed();
+				}
+			};
+			owner.getOnBackPressedDispatcher().addCallback(owner, backPressedCallback);
+		}
+	}
+
+	/** Override for dialogs that need to intercept Back instead of using default dismissal. */
+	protected boolean isBackPressedCallbackEnabled() {
+		return false;
+	}
+
+	protected final void updateBackPressedCallback() {
+		if (backPressedCallback != null) {
+			backPressedCallback.setEnabled(isBackPressedCallbackEnabled());
+		}
+	}
+
+	protected void handleBackPressed() {
+		dismiss();
 	}
 }

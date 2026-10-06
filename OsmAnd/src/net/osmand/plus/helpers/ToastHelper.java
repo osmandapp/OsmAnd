@@ -12,11 +12,18 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.car.app.CarToast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
+import java.util.IllegalFormatException;
+
 public class ToastHelper {
+
+	private static final Log LOG = PlatformUtil.getLog(ToastHelper.class);
 
 	public interface ToastDisplayHandler {
 		void showSimpleToast(@NonNull String text, boolean isLong);
@@ -89,12 +96,23 @@ public class ToastHelper {
 
 			@Override
 			public void showSimpleToast(int textId, boolean isLong, Object... args) {
-				showSimpleToast(app.getString(textId, args), isLong);
+				showSimpleToast(getString(textId, args), isLong);
 			}
 
 			@Override
 			public void showCarToast(int textId, boolean isLong, Object... args) {
-				showCarToast(app.getString(textId, args), isLong);
+				showCarToast(getString(textId, args), isLong);
+			}
+
+			@NonNull
+			private String getString(@StringRes int textId, Object... args) {
+				try {
+					return args == null || args.length == 0 ? app.getString(textId) : app.getString(textId, args);
+				} catch (IllegalFormatException e) {
+					// a translation with an unescaped '%' must not take the app down with it
+					LOG.error("Malformed format string for resource " + textId, e);
+					return app.getString(textId);
+				}
 			}
 
 			@NonNull

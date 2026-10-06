@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Full width illustration at the top of a screen. The background comes from the waterColor of
+	the selected map style, so the picture stays in sync with the map the user sees - which is
+	why the artwork itself carries no background of its own.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/image_card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bg_ui_card_16">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/image"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:importantForAccessibility="no"
+		android:scaleType="center"
+		tools:src="@drawable/img_ais_cpa_day" />
+</FrameLayout>

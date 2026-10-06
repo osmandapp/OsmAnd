@@ -3,13 +3,11 @@ package net.osmand.plus.search.dialogs;
 import static net.osmand.search.core.ObjectType.SEARCH_FINISHED;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -244,22 +242,16 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 	public void onResume() {
 		super.onResume();
 		saveFilter();
-		Dialog dialog = getDialog();
-		if (dialog != null) {
-			dialog.setOnKeyListener((_dialog, keyCode, event) -> {
-				if (keyCode == KeyEvent.KEYCODE_BACK) {
-					if (event.getAction() != KeyEvent.ACTION_DOWN) {
-						if (wasChanged) {
-							showExitDialog();
-						} else {
-							dismiss();
-						}
-					}
-					return true;
-				}
-				return false;
-			});
-		}
+	}
+
+	@Override
+	protected boolean isBackPressedCallbackEnabled() {
+		return wasChanged;
+	}
+
+	@Override
+	protected void handleBackPressed() {
+		showExitDialog();
 	}
 
 	private void resetSearchTypes() {
@@ -426,7 +418,7 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 		}
 		saveFilter();
 		categoryListAdapter.notifyDataSetChanged();
-		wasChanged = true;
+		markChanged();
 	}
 
 	private class CategoryListAdapter extends ArrayAdapter<PoiCategory> {
@@ -499,7 +491,7 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 
 		private void addRowListener(@NonNull PoiCategory category, @NonNull SwitchCompat check) {
 			check.setOnCheckedChangeListener((buttonView, isChecked) -> {
-				wasChanged = true;
+				markChanged();
 				if (check.isChecked()) {
 					FragmentManager manager = getFragmentManager();
 					if (manager != null) {
@@ -603,7 +595,7 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 	}
 
 	private void updateFilter(@NonNull List<PoiType> selectedPoiCategoryList) {
-		wasChanged = true;
+		markChanged();
 		if (selectedPoiCategoryList.isEmpty()) {
 			return;
 		}
@@ -634,6 +626,11 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 		subCategoriesAdapter.setSelectedItems(new ArrayList<>());
 		clearSearch();
 		saveFilter();
+	}
+
+	private void markChanged() {
+		wasChanged = true;
+		updateBackPressedCallback();
 	}
 
 	private void showSubCategoriesFragment(@NonNull FragmentManager manager, @NonNull PoiCategory category) {

@@ -149,6 +149,9 @@ public class SpeedometerWidget {
 	private boolean lastNightMode;
 	private Integer cachedMetricSystem;
 	private DrivingRegion cachedRegion;
+	// the theme and region the speed limit sign was created for
+	private boolean speedLimitSignNightMode;
+	private DrivingRegion speedLimitSignRegion;
 
 	@Nullable
 	private Bitmap widgetBitmap;
@@ -389,13 +392,11 @@ public class SpeedometerWidget {
 					if (!Algorithms.stringsEqual(speedLimitText, cachedSpeedLimitText)) {
 						cachedSpeedLimitText = speedLimitText;
 						isChanged = true;
+						setSpeedLimitText(speedLimitText);
 					}
 				}
 				if (actualExceededAlarm != null) {
 					cachedWarningSpeedLimit = actualExceededAlarm.getIntValue();
-				}
-				if (alarm != null) {
-					setSpeedLimitText(speedLimitText);
 				}
 				AndroidUiHelper.updateVisibility(view, true);
 				updateSpeedLimitVisibility(alarm != null);
@@ -922,7 +923,11 @@ public class SpeedometerWidget {
 		updateBackgroundColors(nightMode);
 		float progress = drawBitmap ? speedAlertProgress : speedAlertAnimator.getAnimatedFraction();
 		updateTextColor(progress);
-		if (!drawBitmap) {
+		DrivingRegion region = settings.DRIVING_REGION.getModeValue(mode);
+		if (!drawBitmap && (speedLimitSignRegion != region || speedLimitSignNightMode != nightMode)) {
+			// a fresh drawable on every update made the view request a layout and rasterize the sign again
+			speedLimitSignRegion = region;
+			speedLimitSignNightMode = nightMode;
 			speedLimitContainer.setBackground(getSpeedLimitDrawable(nightMode, app.getResources().getDisplayMetrics().density));
 			int limitColor = getSpeedLimitColor(nightMode);
 			speedLimitValueView.setTextColor(limitColor);

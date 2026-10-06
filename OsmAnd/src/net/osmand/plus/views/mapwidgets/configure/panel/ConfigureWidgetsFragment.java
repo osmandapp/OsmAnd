@@ -177,6 +177,10 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		bottomButtons.setVisibility(View.GONE);
 		bottomButtonsShadow.setVisibility(View.GONE);
 
+		if (lifecycleCallbacks != null) {
+			// the view is created again when the fragment comes back from the back stack
+			getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+		}
 		lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
 			@Override
 			public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
@@ -556,6 +560,9 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 	@Override
 	public void onWidgetsConfigurationChanged() {
+		if (!isAdded()) {
+			return;
+		}
 		WidgetsListFragment fragment = getSelectedFragment();
 		if (fragment != null && !isEditMode) {
 			fragment.reloadWidgets();

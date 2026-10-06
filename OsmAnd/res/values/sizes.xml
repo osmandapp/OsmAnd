@@ -491,6 +491,9 @@
 	<dimen name="radius_large">9dp</dimen>
 	<dimen name="radius_double_large">18dp</dimen>
 
+	<dimen name="side_widget_name_max_width_medium">100dp</dimen>
+	<dimen name="side_widget_name_max_width_large">140dp</dimen>
+
 	<dimen name="bottom_space_height">160dp</dimen>
 	<dimen name="external_devices_empty_content_centre_margin">126dp</dimen>
 	<dimen name="map_button_appearance_image_height">130dp</dimen>
@@ -505,4 +508,24 @@
 	<dimen name="nearby_place_image_vertical_size">66dp</dimen>
 
 	<dimen name="banner_main_icon_size">66dp</dimen>
+
+	<!-- Material 3 UI kit -->
+	<dimen name="ui_corner_radius_large">16dp</dimen>
+	<dimen name="ui_corner_radius_small">4dp</dimen>
+	<dimen name="ui_group_gap">16dp</dimen>
+	<dimen name="ui_segment_gap">2dp</dimen>
+	<dimen name="ui_group_header_min_height">48dp</dimen>
+	<dimen name="ui_group_header_padding_vertical">12dp</dimen>
+	<dimen name="ui_group_footer_padding_top">8dp</dimen>
+	<dimen name="ui_touch_target">48dp</dimen>
+	<dimen name="ui_icon_size">24dp</dimen>
+	<dimen name="ui_row_min_height">48dp</dimen>
+	<dimen name="ui_row_icon_gap">32dp</dimen>
+	<dimen name="ui_line_height_title">24dp</dimen>
+	<dimen name="ui_line_height_body">20dp</dimen>
+	<dimen name="ui_text_gap">2dp</dimen>
+	<dimen name="ui_dialog_padding">24dp</dimen>
+	<dimen name="ui_switch_height">32dp</dimen>
+	<dimen name="ui_main_switch_height">56dp</dimen>
+	<dimen name="ui_corner_radius_button">8dp</dimen>
 </resources>

@@ -147,8 +147,6 @@ class RoutePlannerFrontEnd {
 
 	fun isHHRoutingConfigured(): Boolean = this.hhRoutingConfig != null
 
-	fun getHHRoutingConfig(): HHRoutingConfig? = this.hhRoutingConfig
-
 	fun setDefaultHHRoutingConfig() {
 		this.hhRoutingConfig = defaultHHConfig()
 	}
@@ -179,7 +177,16 @@ class RoutePlannerFrontEnd {
 		gctx: GpxRouteApproximation, gpxPoints: List<GpxPoint>, resultMatcher: ResultMatcher<GpxRouteApproximation?>?,
 		useExternalTimestamps: Boolean
 	): GpxRouteApproximation {
-		return gctx.searchGpxRouteInternal(this, gpxPoints, resultMatcher, useExternalTimestamps)
+		try {
+			return gctx.searchGpxRouteInternal(this, gpxPoints, resultMatcher, useExternalTimestamps)
+		} catch (e: RouteCalculationInterruptedException) {
+			resultMatcher?.publish(null)
+			return gctx
+		} catch (e: Exception) {
+			log.error("Gpx approximation failed: " + e.message, e)
+			resultMatcher?.publish(null)
+			return gctx
+		}
 	}
 
 	/**
@@ -250,7 +257,25 @@ class RoutePlannerFrontEnd {
 		return res
 	}
 
+	/**
+	 * The route from [start] to [end] through [intermediates]. A cancelled or failed calculation comes
+	 * back as an error result, never as an exception.
+	 */
 	fun searchRoute(
+		ctx: RoutingContext, start: KLatLon, end: KLatLon, intermediates: List<KLatLon>?,
+		routeDirectionArg: PrecalculatedRouteDirection?
+	): RouteCalcResult {
+		try {
+			return runSearchRoute(ctx, start, end, intermediates, routeDirectionArg)
+		} catch (e: RouteCalculationInterruptedException) {
+			return RouteCalcResult(e.message ?: "Route calculation interrupted")
+		} catch (e: Exception) {
+			log.error("Route calculation failed: " + e.message, e)
+			return RouteCalcResult("Route calculation failed: " + e.message)
+		}
+	}
+
+	private fun runSearchRoute(
 		ctx: RoutingContext, start: KLatLon, end: KLatLon, intermediates: List<KLatLon>?,
 		routeDirectionArg: PrecalculatedRouteDirection?
 	): RouteCalcResult {

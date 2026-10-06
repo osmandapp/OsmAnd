@@ -32,8 +32,6 @@
     <string name="shared_string_control_start">Fillo</string>
     <string name="shared_string_my_places">Vendet e mia</string>
     <string name="shared_string_currently_recording_track">Gjurmët e deritanishme të rregjistruara</string>
-    <string name="audionotes_plugin_name">Shënimet e audio/video</string>
-    <string name="watch">Kujdes</string>
     <string name="rendering_attr_roadStyle_name">Stil i rrugës</string>
     <string name="traffic_warning_pedestrian">Mbikalim për këmbësorë</string>
     <string name="routing_attr_no_new_routing_name">Jo v1.9 rregullat e llogaritjes së rrugëtimit</string>

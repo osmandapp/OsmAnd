@@ -26,7 +26,7 @@ enum class OBDCommand(
 	OBD_ENGINE_COOLANT_TEMP_COMMAND(0x01, 0x05, 1, OBDUtils::parseTempResponse, "vm_ctemp"),
 	OBD_FUEL_CONSUMPTION_RATE_COMMAND(0x01, 0x5E, 2, OBDUtils::parseFuelConsumptionRateResponse, "vm_fcons"),
 	OBD_FUEL_TYPE_COMMAND(0x01, 0x51, 1, OBDUtils::parseFuelTypeResponse, null, isStale = true),
-	OBD_VIN_COMMAND(0x09, 0x02, 1, OBDUtils::parseVINResponse, null,  IDENTIFICATION, true),
+	OBD_VIN_COMMAND(0x09, 0x02, 18, OBDUtils::parseVINResponse, null,  IDENTIFICATION, true),
 	OBD_FUEL_LEVEL_COMMAND(0x01, 0x2F, 1, OBDUtils::parsePercentResponse, "vm_fuel");
 
 	fun parseResponse(response: IntArray): OBDDataField<Any> {

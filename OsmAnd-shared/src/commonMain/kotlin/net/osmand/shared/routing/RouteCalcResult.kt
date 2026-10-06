@@ -30,9 +30,6 @@ open class RouteCalcResult {
 
 	fun getList(): MutableList<RouteSegmentResult> = detailed
 
-	/** routes with the same start / end, empty unless they were requested and found */
-	open fun getAlternatives(): List<List<RouteSegmentResult>> = emptyList()
-
 	fun getError(): String? = error
 
 	fun isCorrect(): Boolean = error == null && detailed.isNotEmpty()

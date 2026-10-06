@@ -56,6 +56,7 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 	protected FavouritesHelper helper;
 	protected ImportHelper importHelper;
 	protected boolean selectionMode = false;
+	private OnBackPressedCallback backCallback;
 
 	protected FavoriteFoldersAdapter adapter;
 	protected FavoriteGroup selectedGroup;
@@ -123,29 +124,16 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		OnBackPressedCallback backCallback = new OnBackPressedCallback(true) {
+		// Enabled only in selection mode, otherwise the system handles Back (predictive back animation).
+		backCallback = new OnBackPressedCallback(selectionMode) {
 			@Override
 			public void handleOnBackPressed() {
-				if (handleBackInsideFragment()) {
-					return;
-				}
-
-				setEnabled(false);
-				requireActivity().onBackPressed();
-				setEnabled(true);
+				exitSelectionMode();
 			}
 		};
 		setSelectionMode(selectionMode);
 
 		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backCallback);
-	}
-
-	private boolean handleBackInsideFragment() {
-		if (selectionMode) {
-			exitSelectionMode();
-			return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -245,6 +233,9 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 
 	protected void setSelectionMode(boolean mode) {
 		selectionMode = mode;
+		if (backCallback != null) {
+			backCallback.setEnabled(mode);
+		}
 		if (!selectionMode) {
 			getSelectionHelper().clearSelectedItems();
 			changeTitle(String.valueOf(getSelectionHelper().getSelectedItems().size()));
@@ -255,15 +246,6 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 
 	protected boolean isInSelectionMode() {
 		return selectionMode;
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		Activity activity = getActivity();
-		if (activity == null || !activity.isChangingConfigurations()) {
-			exitSelectionMode();
-		}
 	}
 
 	@Nullable
@@ -314,11 +296,16 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FAVOURITES_REQUEST);
 	}
 
+	@Nullable
+	protected String getImportTargetFolder() {
+		return null;
+	}
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null && data.getData() != null) {
-				importHelper.handleFavouritesImport(data.getData());
+				importHelper.handleFavouritesImport(data.getData(), getImportTargetFolder());
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);
