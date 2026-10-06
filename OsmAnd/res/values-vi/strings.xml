@@ -4557,4 +4557,9 @@
     <string name="gps_not_available">Vui lòng bật GPS trong phần cài đặt</string>
     <string name="arrived_at_intermediate_point">Đã đến điểm đến trung gian</string>
     <string name="confirm_interrupt_download">Hủy tải xuống?</string>
+    <string name="trip_rec_start_from_notification">Bắt đầu từ thông báo</string>
+    <string name="trip_rec_start_from_notification_descr">Hiện một thông báo cùng một nút để bắt đầu ghi hành trình. Trong khi ghi, thông báo sẽ luôn hiển thị.</string>
+    <string name="contour_label_direction_descr">Lên dốc: phía trên của mỗi con số độ cao hướng về phía địa hình cao hơn, giống như trên bản đồ địa hình giấy. Các vạch ngắn trên đường đồng mức chỉ về phía xuống dốc.</string>
+    <string name="opening_hours_public_holiday">Ngày lễ</string>
+    <string name="contour_labels">Nhãn</string>
 </resources>
