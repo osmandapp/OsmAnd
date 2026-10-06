@@ -221,7 +221,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			if (exportStartTime == 0) {
 				exportStartTime = System.currentTimeMillis();
 			}
-			return "Export_" + DATE_FORMAT.format(new Date(exportStartTime));
+			return "OsmAnd_Export_" + DATE_FORMAT.format(new Date(exportStartTime));
 		} else {
 			return appMode.toHumanString();
 		}
