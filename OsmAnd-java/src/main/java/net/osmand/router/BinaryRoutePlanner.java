@@ -120,6 +120,14 @@ public class BinaryRoutePlanner {
 		PriorityQueue<RouteSegmentCost> graphSegments = forwardSearch ?  graphDirectSegments : graphReverseSegments;
 		float[] minCost = new float[] { Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY};
 		while (!graphSegments.isEmpty()) {
+			if (ctx.nativeLib == null && ctx.config.router instanceof CountryTollAvoidanceRouter
+					&& (ctx.calculationProgress == null || (ctx.calculationProgress.visitedSegments & 255) == 0)) {
+				Runtime runtime = Runtime.getRuntime();
+				if (!CountryTollAvoidanceRouter.hasJavaHeapHeadroom(runtime.maxMemory(),
+						runtime.totalMemory() - runtime.freeMemory())) {
+					ctx.throwNotEnoughMemory();
+				}
+			}
 			RouteSegmentCost cst = graphSegments.poll();
 			RouteSegment segment = cst.segment;
 			int visitedCnt = (start != null ? visitedDirectSegments.size() : 0) + (end != null ? visitedOppositeSegments.size() : 0);

@@ -8,8 +8,11 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class OsmandRegionsTest {
@@ -105,6 +108,73 @@ public class OsmandRegionsTest {
         Assert.assertNotNull("Unknown region " + downloadName, region);
         WorldRegion country = region.getCountryRegion();
         return country != null ? country.getRegionId() : null;
+    }
+
+    @Test
+    public void testGetCountriesForMapFilesWholeCountriesAndRoadMaps() {
+        Assert.assertEquals(Arrays.asList("europe_austria", "europe_slovakia"),
+                countryIdsForMapFiles("Austria_europe.obf", "Slovakia_europe.road.obf"));
+    }
+
+    @Test
+    public void testGetCountriesForMapFilesSubregionsAreGroupedByCountry() {
+        Assert.assertEquals(Arrays.asList("europe_germany", "europe_france", "northamerica_us"),
+                countryIdsForMapFiles("Germany_berlin_europe.obf", "Germany_europe.obf",
+                        "Germany_berlin_europe.road.obf", "France_great-east_meuse_europe.obf",
+                        "Us_pennsylvania_northamerica.obf", "Us_new-hampshire_northamerica.obf"));
+    }
+
+    @Test
+    public void testGetCountriesForMapFilesCountryOutsideContinents() {
+        Assert.assertEquals(Collections.singletonList("russia"),
+                countryIdsForMapFiles("Russia_moscow_asia.obf",
+                        "Russia_north-caucasus-federal-district_asia.road.obf"));
+    }
+
+    @Test
+    public void testGetCountriesForMapFilesIgnoresNonMapResourcesAndUnknownMaps() {
+        Assert.assertTrue(countryIdsForMapFiles(null, "", "World_basemap_mini.obf",
+                "Europe.obf", "Custom_unknown_map.obf", "Austria_europe.wiki.obf",
+                "Austria_europe.srtm.obf", "Austria_europe.heightmap.sqlite",
+                "Austria_europe.zip", "Austria_europe.obf.download", "en-tts.js").isEmpty());
+    }
+
+    @Test
+    public void testGetCountriesForMapFilesEmptyAfterMapsRemoved() {
+        Assert.assertTrue(countryIdsForMapFiles().isEmpty());
+        Assert.assertEquals(Collections.singletonList("europe_austria"),
+                countryIdsForMapFiles("Austria_europe.obf"));
+        Assert.assertTrue(countryIdsForMapFiles().isEmpty());
+    }
+
+    @Test
+    public void testGetCountriesForMapFilesCaseInsensitiveInTurkishLocale() {
+        Locale originalLocale = Locale.getDefault();
+        try {
+            Locale.setDefault(new Locale("tr", "TR"));
+            Assert.assertEquals(Arrays.asList("europe_ukraine", "russia"),
+                    countryIdsForMapFiles("UKRAINE_KYIV-CITY_EUROPE.OBF", "RUSSIA_MOSCOW_ASIA.ROAD.OBF"));
+        } finally {
+            Locale.setDefault(originalLocale);
+        }
+    }
+
+    @Test
+    public void testGetCountriesForMapFilesReturnsIndependentList() {
+        List<WorldRegion> countries = osmandRegions.getCountriesForMapFiles(
+                Collections.singletonList("Austria_europe.obf"));
+        Assert.assertEquals(1, countries.size());
+        countries.clear();
+        Assert.assertEquals(Collections.singletonList("europe_austria"),
+                countryIdsForMapFiles("Austria_europe.obf"));
+    }
+
+    private List<String> countryIdsForMapFiles(String... fileNames) {
+        List<String> ids = new ArrayList<>();
+        for (WorldRegion country : osmandRegions.getCountriesForMapFiles(Arrays.asList(fileNames))) {
+            ids.add(country.getRegionId());
+        }
+        return ids;
     }
 
     @Test

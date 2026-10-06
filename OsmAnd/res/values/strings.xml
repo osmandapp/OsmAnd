@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="avoid_toll_roads_by_country">Avoid toll roads by country</string>
+	<string name="avoid_toll_roads_by_country_descr">Only countries with downloaded maps are shown. Avoid toll roads in the countries enabled below. No toll roads above still applies to all countries. Routes affected by country-specific avoidance may take longer to calculate.</string>
 	<string name="multimedia_notes_view_descr">Your A/V notes are in %1$s.</string>
 	<string name="shared_string_file">File</string>
 	<string name="shared_string_format">Format</string>
