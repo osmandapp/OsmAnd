@@ -5424,4 +5424,6 @@
     <string name="visualizing_button_grid_descr">Ĉeloj, truoj, kadroj kaj protokoloj.</string>
     <string name="city_type_boundary">Areo</string>
     <string name="file_name_containes_illegal_char">Nomo ne enhavu: %1$s</string>
+    <string name="trip_rec_start_from_notification">Starti kun sciigo</string>
+    <string name="trip_rec_start_from_notification_descr">Montri sciigon kun butono por komenci registri kurson. Dum registrado la sciigo ĉiam estas montrata.</string>
 </resources>
