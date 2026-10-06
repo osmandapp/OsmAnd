@@ -35,6 +35,8 @@ public class SeaObstacles {
 	private static final int LAND_ON_RIGHT = -1;
 	/** A barrier - the edge of a tidal flat - blocks a leg but says nothing about which side is land. */
 	private static final int NO_LAND_SIDE = 0;
+	/** Smaller water areas - ponds, docks - are left out: they only add segments far from any route. */
+	private static final double MIN_WATER_AREA = 1000000;
 
 	private final double baseLat;
 	private final double metersPerDegreeLon;
@@ -52,6 +54,9 @@ public class SeaObstacles {
 
 	private double closedRingsArea;
 	private int closedRings;
+
+	/** Water areas as piece indexes, the outer ring first and its islands after it. */
+	private final List<int[]> waterAreas = new ArrayList<>();
 
 	public SeaObstacles(double baseLat) {
 		this.baseLat = baseLat;
@@ -84,6 +89,17 @@ public class SeaObstacles {
 						double[] piece = obstacles.toPiece(o.getPointsLength(), o, null);
 						coastPieces.add(piece);
 						obstacles.accountRing(piece);
+					} else if (o.isArea() && hasTag(o, index, "natural", "water") && !isRiverOrCanal(o, index)) {
+						double[] outer = obstacles.toPiece(o.getPointsLength(), o, null);
+						if (Math.abs(signedArea(outer)) < MIN_WATER_AREA) {
+							continue;
+						}
+						int[][] inner = o.getPolygonInnerCoordinates();
+						double[][] islands = new double[inner == null ? 0 : inner.length][];
+						for (int k = 0; k < islands.length; k++) {
+							islands[k] = obstacles.toPiece(inner[k].length / 2, null, inner[k]);
+						}
+						obstacles.addWaterArea(outer, islands);
 					} else if (hasTag(o, index, "wetland", "tidalflat")) {
 						obstacles.addPiece(obstacles.toPiece(o.getPointsLength(), o, null), NO_LAND_SIDE);
 						int[][] inner = o.getPolygonInnerCoordinates();
@@ -131,12 +147,19 @@ public class SeaObstacles {
 		return false;
 	}
 
+	/** Rivers and canals are the water network's to route along, not open water to cross. */
+	private static boolean isRiverOrCanal(BinaryMapDataObject o, MapIndex index) {
+		return hasTag(o, index, "water", "river") || hasTag(o, index, "water", "canal")
+				|| hasTag(o, index, "waterway", "riverbank") || hasTag(o, index, "waterway", "canal");
+	}
+
 	private static final SearchFilter SHORE_FILTER = new SearchFilter() {
 		@Override
 		public boolean accept(TIntArrayList types, MapIndex index) {
 			for (int i = 0; i < types.size(); i++) {
 				TagValuePair p = index.decodeType(types.get(i));
-				if (p != null && ("natural".equals(p.tag) && ("coastline".equals(p.value) || "wetland".equals(p.value))
+				if (p != null && ("natural".equals(p.tag) && ("coastline".equals(p.value) || "wetland".equals(p.value)
+						|| "water".equals(p.value))
 						|| "wetland".equals(p.tag) && "tidalflat".equals(p.value))) {
 					return true;
 				}
@@ -154,8 +177,47 @@ public class SeaObstacles {
 
 	/** A ring of a water area given as lat, lon, lat, lon…: land is whatever lies outside it. */
 	public void addWaterAreaRing(double... latLon) {
-		double[] piece = toPiece(latLon);
-		addPiece(piece, signedArea(piece) >= 0 ? LAND_ON_RIGHT : LAND_ON_LEFT);
+		addWaterArea(toPiece(latLon));
+	}
+
+	/** A water area: land outside the outer ring and inside every island. */
+	private void addWaterArea(double[] outer, double[]... islands) {
+		int[] area = new int[islands.length + 1];
+		area[0] = pieces.size();
+		addPiece(outer, signedArea(outer) >= 0 ? LAND_ON_RIGHT : LAND_ON_LEFT);
+		for (int k = 0; k < islands.length; k++) {
+			area[k + 1] = pieces.size();
+			addPiece(islands[k], signedArea(islands[k]) >= 0 ? LAND_ON_LEFT : LAND_ON_RIGHT);
+		}
+		waterAreas.add(area);
+	}
+
+	/** Inside a water area and outside its islands, however far the shore. */
+	private boolean inWaterArea(double px, double py) {
+		for (int[] area : waterAreas) {
+			if (area[0] < pieces.size() && pieces.get(area[0]).length >= 6 && inside(pieces.get(area[0]), px, py)) {
+				boolean onIsland = false;
+				for (int k = 1; k < area.length && !onIsland; k++) {
+					onIsland = inside(pieces.get(area[k]), px, py);
+				}
+				if (!onIsland) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private static boolean inside(double[] ring, double px, double py) {
+		boolean in = false;
+		int n = ring.length;
+		for (int i = 0, j = n - 2; i < n; j = i, i += 2) {
+			double xi = ring[i], yi = ring[i + 1], xj = ring[j], yj = ring[j + 1];
+			if ((yi > py) != (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) {
+				in = !in;
+			}
+		}
+		return in;
 	}
 
 	/** A barrier given as lat, lon, lat, lon…: legs may not cross it, and it does not tell land from water. */
@@ -348,6 +410,9 @@ public class SeaObstacles {
 		int segment = nearestSegment(px, py, searchRadius);
 		if (segment >= 0) {
 			return landSide(segment, px, py) > 0;
+		}
+		if (inWaterArea(px, py)) {
+			return false;
 		}
 		return farFromShore != null && farFromShore.isLand(point.getLatitude(), point.getLongitude());
 	}
