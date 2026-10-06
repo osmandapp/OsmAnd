@@ -714,8 +714,9 @@ public class SpatialPipelineSearch {
 	}
 
 	/**
-	 * Only the single objects with the best prescore are read. Categories, combinations of several objects and
-	 * pre-results with a token not matched yet (a house number) are always read: their rank depends on the objects.
+	 * Only the single objects (a street with a house number to check counts as one) with the best prescore are read.
+	 * Categories, combinations of several objects and pre-results with a token matched by nothing are always read:
+	 * their rank depends on the objects.
 	 */
 	private List<SpatialPipelineObjectRes> limitByPrescore(List<SpatialPipelineObjectRes> preResults) {
 		int limit = ctx.settings.LIMIT_READ_OBJECTS;
@@ -727,7 +728,7 @@ public class SpatialPipelineSearch {
 		List<SpatialPipelineObjectRes> res = new ArrayList<>();
 		List<SpatialPipelineObjectRes> single = new ArrayList<>();
 		for (SpatialPipelineObjectRes r : preResults) {
-			if (r.mainAtom.isPoiCategory() || r.refs1 != null || !oneObjectForAllTokens(r)) {
+			if (r.mainAtom.isPoiCategory() || r.refs2 != null || !oneObjectForAllTokens(r)) {
 				res.add(r);
 			} else {
 				single.add(r);
@@ -756,8 +757,10 @@ public class SpatialPipelineSearch {
 	}
 
 	private static boolean oneObjectForAllTokens(SpatialPipelineObjectRes r) {
-		for (NameIndexAtom a : r.atoms) {
-			if (a == null || a.id != r.atoms[0].id) {
+		long id = r.mainAtom.id;
+		for (int i = 0; i < r.atoms.length; i++) {
+			// a token matched by a reference (a house number) is read with the object
+			if (r.atoms[i] == null ? r.refs1 == null || r.refs1[i] == null : r.atoms[i].id != id) {
 				return false;
 			}
 		}
