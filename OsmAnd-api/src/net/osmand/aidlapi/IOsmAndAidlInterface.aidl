@@ -36,6 +36,9 @@ import net.osmand.aidlapi.map.SetMapCameraParams;
 import net.osmand.aidlapi.map.MapScreenshotParams;
 import net.osmand.aidlapi.map.AMapScreenshot;
 import net.osmand.aidlapi.info.AMapWidgetValue;
+import net.osmand.aidlapi.info.AMapWidgetsLayout;
+import net.osmand.aidlapi.info.MapWidgetsLayoutParams;
+import net.osmand.aidlapi.info.SetMapWidgetsPanelParams;
 import net.osmand.aidlapi.gpx.HideGpxParams;
 import net.osmand.aidlapi.gpx.ASelectedGpxFile;
 
@@ -1008,4 +1011,17 @@ interface IOsmAndAidlInterface {
      * @return AGpxSearchResult, or null if the app has no access
      */
     AGpxSearchResult searchGpx(in GpxSearchParams params);
+
+    /**
+     * Map widgets of a profile as in Configure screen: panel, page and order of each widget on the screen,
+     * and the widgets that can be added. Separate portrait/landscape layouts: the current orientation.
+     *
+     * @return AMapWidgetsLayout, or null if the map is not open or the app has no access
+     */
+    AMapWidgetsLayout getMapWidgetsLayout(in MapWidgetsLayoutParams params);
+
+    /**
+     * Replace the widgets of one panel: add, remove, reorder widgets and pages, as Configure screen does.
+     */
+    boolean setMapWidgetsPanel(in SetMapWidgetsPanelParams params);
 }

@@ -63,6 +63,9 @@ import net.osmand.aidlapi.gpx.AGpxSearchResult;
 import net.osmand.aidlapi.gpx.GpxSearchParams;
 import net.osmand.aidlapi.gpx.GpxPointsParams;
 import net.osmand.aidlapi.info.AMapWidgetValue;
+import net.osmand.aidlapi.info.AMapWidgetsLayout;
+import net.osmand.aidlapi.info.MapWidgetsLayoutParams;
+import net.osmand.aidlapi.info.SetMapWidgetsPanelParams;
 import net.osmand.aidlapi.map.AMapScreenshot;
 import net.osmand.aidlapi.map.MapScreenshotParams;
 import net.osmand.aidlapi.map.SetMapCameraParams;
@@ -740,6 +743,29 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				OsmandAidlApi api = getApi("getMapWidgetValues");
 				return api != null && widgets != null && api.getMapWidgetValues(widgets);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public AMapWidgetsLayout getMapWidgetsLayout(MapWidgetsLayoutParams params) {
+			try {
+				OsmandAidlApi api = getApi("getMapWidgetsLayout");
+				return api != null && params != null ? api.getMapWidgetsLayout(params.getAppModeKey()) : null;
+			} catch (Exception e) {
+				handleException(e);
+				return null;
+			}
+		}
+
+		@Override
+		public boolean setMapWidgetsPanel(SetMapWidgetsPanelParams params) {
+			try {
+				OsmandAidlApi api = getApi("setMapWidgetsPanel");
+				return api != null && params != null
+						&& api.setMapWidgetsPanel(params.getAppModeKey(), params.getPanel(), params.getPages());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

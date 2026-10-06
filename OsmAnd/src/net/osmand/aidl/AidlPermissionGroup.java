@@ -47,7 +47,7 @@ public enum AidlPermissionGroup {
 	SCREEN("screen", R.drawable.ic_action_device_camera, R.string.aidl_group_screen, R.string.aidl_group_screen_descr, false,
 			"getMapScreenshot"),
 	SETTINGS("settings", R.drawable.ic_action_settings, R.string.shared_string_settings, R.string.aidl_group_settings_descr, false,
-			"getPreference", "setPreference", "selectProfile", "getProfiles", "importProfile", "exportProfile",
+			"getPreference", "setPreference", "getMapWidgetsLayout", "setMapWidgetsPanel", "selectProfile", "getProfiles", "importProfile", "exportProfile",
 			"changePluginState", "executeQuickAction", "getQuickActionsInfo", "setLockState",
 			"getSqliteDbFiles", "getActiveSqliteDbFiles", "showSqliteDbFile", "hideSqliteDbFile"),
 	SYSTEM("system", R.drawable.ic_action_alert, R.string.aidl_group_system, R.string.aidl_group_system_descr, false,
