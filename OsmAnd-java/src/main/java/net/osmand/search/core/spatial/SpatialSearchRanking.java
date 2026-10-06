@@ -14,6 +14,7 @@ import net.osmand.data.MapObject;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
 
 /**
@@ -152,6 +153,81 @@ public class SpatialSearchRanking {
 		}
 		double km = SpatialSearchResult.getDistance(r, center) / 1000.0;
 		return km <= PLACE_FAR_FROM_KM ? 1 : 1.0 / (1.0 + (km - PLACE_FAR_FROM_KM) / PLACE_FAR_HALF_KM);
+	}
+
+	/**
+	 * The highest score a pre-result can reach once its objects are read, from its index atoms only: the distance
+	 * to its box, the index rating and the POI types. The name counts as exact unless the atom has other words.
+	 */
+	public double prescore(SpatialPipelineObjectRes res, LatLon center, SpatialPoiSearch poiSearch, int minElo,
+			boolean queryIsKind) {
+		double near = 1;
+		double km = 0;
+		if (center != null && res.bbox != null) {
+			int x = MapUtils.get31TileNumberX(center.getLongitude());
+			int y = MapUtils.get31TileNumberY(center.getLatitude());
+			int cx = Math.max(res.bbox[0], Math.min(res.bbox[2], x));
+			int cy = Math.max(res.bbox[1], Math.min(res.bbox[3], y));
+			km = MapUtils.squareRootDist31(x, y, cx, cy) / 1000.0;
+			near = 1.0 / (1.0 + km / halfWeightKm);
+		}
+		double best = 0;
+		for (NameIndexAtom a : res.atoms) {
+			if (a != null) {
+				best = Math.max(best, prescore(a, near, km, poiSearch, minElo, queryIsKind));
+			}
+		}
+		return best;
+	}
+
+	private double prescore(NameIndexAtom a, double near, double km, SpatialPoiSearch poiSearch, int minElo,
+			boolean queryIsKind) {
+		double name = a.name != null && a.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX) ? NAME_KIND_ONLY
+				: a.otherWordsCnt > 0 ? NAME_PREFIX : NAME_EXACT;
+		double type = TYPE_POI;
+		boolean place = a.isCity() || a.isCityVillage();
+		boolean city = a.isCity();
+		if (a.isCity()) {
+			type = TYPE_CITY;
+		} else if (a.isCityVillage()) {
+			type = TYPE_VILLAGE;
+		} else if (a.isBuilding()) {
+			type = TYPE_BUILDING;
+		} else if (a.isStreet()) {
+			type = TYPE_STREET;
+		} else if (a.isBoundary()) {
+			type = TYPE_BOUNDARY;
+		} else if (a.poiTypes != null) {
+			for (int i = 0; i < a.poiTypes.size(); i++) {
+				SpatialPoiSearch.SpatialPoiType pt = poiSearch.getById(a.poiTypes.get(i));
+				String key = pt == null ? null : pt.getKey();
+				if (ADMIN_SUBTYPES.contains(key)) {
+					type = Math.max(type, TYPE_ADMIN);
+					place = true;
+				} else if (PLACE_SUBTYPES.contains(key)) {
+					type = Math.max(type, TYPE_CITY);
+					place = true;
+					city |= "city".equals(key);
+				} else if (LANDMARK_SUBTYPES.contains(key)) {
+					type = Math.max(type, TYPE_LANDMARK);
+				}
+			}
+		}
+		// the index keeps (travel_elo - 1000) / 50
+		int elo = Math.max(a.elo, a.elo > 0 ? 1000 + (a.elo + 1) * 50 : 0);
+		double rating = Math.max(0, Math.min(1, (elo - minElo) / ratingSpan));
+		if (near >= LANDMARK_NEAR && elo >= minElo + LANDMARK_RATING) {
+			type = Math.max(type, TYPE_LANDMARK);
+		}
+		double exact = name == NAME_EXACT ? wExactName * (place || elo > minElo ? 1 : near) : 0;
+		// see farPlaceFactor
+		double far = 1;
+		if (!city && (name < NAME_EXACT || queryIsKind) && km > PLACE_FAR_FROM_KM
+				&& (place || type == TYPE_LANDMARK && elo <= minElo)) {
+			far = 1.0 / (1.0 + (km - PLACE_FAR_FROM_KM) / PLACE_FAR_HALF_KM);
+		}
+		return wName * name * near + wType * type * far + (place ? wRatingPlace : wRating) * rating * far
+				+ wNear * near + exact;
 	}
 
 	/** a city by its own place type, however the map stores it - the address index writes towns as cities too */

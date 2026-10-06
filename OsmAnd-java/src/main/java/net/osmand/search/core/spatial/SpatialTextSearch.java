@@ -124,6 +124,8 @@ public class SpatialTextSearch {
 		public boolean SCORE_RANKING = true; // false - old lexicographic ladder
 		// one-word query: POIs found by category only and unrated, read nearest first ("restaurant" finds 180K; 0 - all)
 		public int LIMIT_READ_SINGLE_OBJECTS = 1500;
+		// objects read for one stage, the best by SpatialSearchRanking.prescore (0 - all)
+		public int LIMIT_READ_OBJECTS = 1000;
 
 		public int MIN_ELO_RATING = 1400; // see SearchResult.MIN_ELO_RATING
 		public int WORLD_ELO_RATING = 1500; // from world map by default
