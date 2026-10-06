@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Assume;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -36,6 +37,7 @@ import net.osmand.util.MapUtils;
  * a local directory and a case is skipped when a map is missing, as in {@link AlternativeRoutesTest}. Point
  * {@code -Dosmand.maps.dir} at the folder holding the OBF files to run these.
  */
+@Ignore("Boat routing cases need country maps and are not ready for CI")
 @RunWith(Parameterized.class)
 public class BoatRoutingTest {
 
