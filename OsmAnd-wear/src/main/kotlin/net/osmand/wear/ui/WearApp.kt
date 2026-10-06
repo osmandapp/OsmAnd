@@ -1,6 +1,7 @@
 package net.osmand.wear.ui
 
 import androidx.compose.runtime.Composable
+import net.osmand.wear.api.DestinationInfo
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -69,6 +70,11 @@ fun WearApp(connector: PhoneConnector) {
 		LaunchedEffect(destination?.destination?.route) {
 			connector.refresh()
 		}
+
+		// Held here rather than passed through the graph: the picker is shared with the
+		// recording screen, which chooses a profile and nothing more, and a destination is not
+		// something the route of a screen should have to carry.
+		var pendingDestination by remember { mutableStateOf<DestinationInfo?>(null) }
 
 		AppScaffold {
 			SwipeDismissableNavHost(
@@ -172,7 +178,19 @@ fun WearApp(connector: PhoneConnector) {
 						icons = snapshot?.icons.orEmpty(),
 						onSelect = { key ->
 							send(WearCommand.SelectProfile(key))
-							navController.popBackStack()
+							val destination = pendingDestination
+							if (destination == null) {
+								navController.popBackStack()
+							} else {
+								// The profile decides how the route is worked out, so it has to
+								// be set before asking for one.
+								pendingDestination = null
+								send(WearCommand.PreviewRoute(
+									destination.latitude, destination.longitude,
+									destination.name))
+								navController.popBackStack()
+								navController.navigate(Routes.ROUTE_PREVIEW)
+							}
 						}
 					)
 				}
@@ -180,27 +198,34 @@ fun WearApp(connector: PhoneConnector) {
 					DestinationsScreen(
 						destinations = currentSnapshot()?.state?.destinations.orEmpty(),
 						onSelect = { destination ->
-							send(WearCommand.PreviewRoute(
-								destination.latitude, destination.longitude, destination.name))
-							navController.navigate(Routes.ROUTE_PREVIEW)
+							pendingDestination = destination
+							navController.navigate(Routes.PROFILES)
 						}
 					)
 				}
 				composable(Routes.ROUTE_PREVIEW) {
 					// Leaving the screen drops the route rather than keeping it in planning
-					// mode on the phone: the watch asked for it only to look at it.
+					// mode on the phone: the watch asked for it only to look at it. Setting
+					// off also leaves the screen, and must not take the route with it.
+					var setOff by remember { mutableStateOf(false) }
 					DisposableEffect(Unit) {
-						onDispose { send(WearCommand.CancelRoutePreview) }
+						onDispose {
+							if (!setOff) {
+								send(WearCommand.CancelRoutePreview)
+							}
+						}
 					}
 					RoutePreviewScreen(
 						preview = currentSnapshot()?.state?.routePreview,
 						onStart = {
+							setOff = true
 							send(WearCommand.StartNavigation)
 							navController.popBackStack(Routes.HOME, false)
 							navController.navigate(Routes.NAVIGATION)
 						},
 						onStartStream = { w, h, d -> send(WearCommand.StartMapStream(w, h, d)) },
-						onStopStream = { send(WearCommand.StopMapStream) }
+						onStopStream = { send(WearCommand.StopMapStream) },
+						onStillWatching = { send(WearCommand.PauseMapStream(false)) }
 					)
 				}
 				composable(Routes.SETTINGS) {

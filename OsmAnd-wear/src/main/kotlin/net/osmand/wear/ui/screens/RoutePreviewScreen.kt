@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +30,8 @@ import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
 
+import kotlinx.coroutines.delay
+
 import net.osmand.wear.R
 import net.osmand.wear.api.RoutePreviewState
 import net.osmand.wear.data.MapFrames
@@ -45,7 +48,8 @@ fun RoutePreviewScreen(
 	preview: RoutePreviewState?,
 	onStart: () -> Unit,
 	onStartStream: (width: Int, height: Int, density: Float) -> Unit,
-	onStopStream: () -> Unit
+	onStopStream: () -> Unit,
+	onStillWatching: () -> Unit
 ) {
 	val configuration = LocalConfiguration.current
 	val density = LocalDensity.current.density
@@ -53,8 +57,20 @@ fun RoutePreviewScreen(
 	val height = with(LocalDensity.current) { configuration.screenHeightDp.dp.roundToPx() }
 
 	DisposableEffect(width, height, density) {
+		// The last frame is held for the whole app, so without this the preview opens on
+		// whatever the map screen was last showing - a working screen that is not this route.
+		MapFrames.clear()
 		onStartStream(width, height, density)
 		onDispose { onStopStream() }
+	}
+
+	// The phone drops the renderer when the watch has been quiet for a minute, and a preview is
+	// looked at for far longer than that.
+	LaunchedEffect(Unit) {
+		while (true) {
+			delay(STREAM_PING_MS)
+			onStillWatching()
+		}
 	}
 
 	val frame by MapFrames.frame.collectAsStateWithLifecycle()
@@ -136,3 +152,6 @@ private fun Summary(preview: RoutePreviewState?) {
 private val SCRIM_CORNER = 12.dp
 
 private const val SCRIM_ALPHA = 0.88f
+
+/** Comfortably inside WearMapStreamer's silence timeout, which is a minute. */
+private const val STREAM_PING_MS = 20_000L
