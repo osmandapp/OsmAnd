@@ -103,6 +103,8 @@ public class NameIndexReader {
 
 		protected String queryAligned;
 		protected String queryIncomplete;
+		// the incomplete query matches only the key of its whole word
+		protected boolean wholeWordKey;
 		protected Collator collator;
 		
 		public NameIndexReaderMatcher(String query) {
@@ -133,7 +135,12 @@ public class NameIndexReader {
 			}
 //			match = query.startsWith(key);
 			// 3. incomplete query match
-			if (!match && queryIncomplete != null) {
+			if (!match && queryIncomplete != null && wholeWordKey) {
+				// the key of the whole word: 'sc' or 'sc.', '2.so' ('2.Sokak'), never 'scha'
+				int l = queryIncomplete.length();
+				match = alignedKey.startsWith(queryIncomplete)
+						&& (alignedKey.length() == l || !Character.isLetterOrDigit(alignedKey.charAt(l)));
+			} else if (!match && queryIncomplete != null) {
 				match = CollatorStringMatcher.cmatches(collator, queryIncomplete, alignedKey, StringMatcherMode.CHECK_ONLY_STARTS_WITH) ||
 						CollatorStringMatcher.cmatches(collator, alignedKey, queryIncomplete, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 //				match = key.startsWith(pr) || pr.startsWith(key);
