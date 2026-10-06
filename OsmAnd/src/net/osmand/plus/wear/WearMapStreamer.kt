@@ -188,7 +188,11 @@ class WearMapStreamer(private val app: OsmandApplication) {
 				val previewing = app.routingHelper.isRoutePlanningMode &&
 						app.routingHelper.isRouteCalculated
 				if (previewing && !fitted) {
-					routeBounds()?.let {
+					val bounds = routeBounds()
+					LOG.info("Preview fit: points="
+							+ (app.routingHelper.route?.immutableAllLocations?.size ?: -1)
+							+ " bounds=" + bounds)
+					bounds?.let {
 						renderer.fit(it)
 						fitted = true
 					}
