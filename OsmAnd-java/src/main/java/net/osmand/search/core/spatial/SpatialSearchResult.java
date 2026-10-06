@@ -599,6 +599,13 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			if (res != 0) {
 				return res;
 			}
+			if (o1.isPoiCategory() && o2.isPoiCategory()) {
+				// the more objects a category has, the higher
+				res = -Integer.compare(o1.getFirstRef().atom.otherFoundCnt, o2.getFirstRef().atom.otherFoundCnt);
+				if (res != 0) {
+					return res;
+				}
+			}
 		} else {
 			res = Integer.compare(o1.objs.size(), o2.objs.size());
 			if (res != 0) {
