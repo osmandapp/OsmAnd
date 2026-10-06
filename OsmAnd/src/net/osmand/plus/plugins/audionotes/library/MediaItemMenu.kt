@@ -46,7 +46,7 @@ object MediaItemMenu {
 			if (!fromViewer) add(item(app, R.string.shared_string_view, MediaLibraryIcons.VIEW, nightMode) {
 				GalleryPagerController.show(activity, GalleryKey.MediaLibrary, entry.id, orderedIds, autoPlay = true)
 			})
-			if (entry.lat != null && entry.lon != null) add(item(app, R.string.shared_string_show_on_map,
+			if (entry.location != null) add(item(app, R.string.shared_string_show_on_map,
 				R.drawable.ic_show_on_map_outlined, nightMode) { ShowOnMapNavigator.show(activity, entry) })
 			add(item(app, R.string.shared_string_details, R.drawable.ic_action_info_outlined, nightMode, divider = true) {
 				GalleryPagerController.getInstance(app, GalleryKey.MediaLibrary).openDetails(activity, entry.mediaItem, orderedIds)
