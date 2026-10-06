@@ -129,10 +129,8 @@ public class NavigationService extends Service {
 		int usageIntent = intent != null ? intent.getIntExtra(USAGE_INTENT, 0) : 0;
 		if (isUsed()) {
 			LOG.info(">>>> NavigationService is used by = " + usedBy.get());
-			addUsageIntent(usageIntent);
-			// Every startForegroundService() call needs its own startForeground(), also for a running
-			// service: after the task is swiped away it may be out of the foreground state, and the
-			// platform kills the app with ForegroundServiceDidNotStartInTimeException.
+			// A running service of a "Restricted" app is taken out of the foreground in the background.
+			// Before addUsageIntent(), so its refresh reposts what buildTopNotification() cancels.
 			OsmandApplication app = getApp();
 			NotificationHelper notificationHelper = app.getNotificationHelper();
 			Notification notification = notificationHelper.buildTopNotification(this, getNotificationType());
@@ -144,6 +142,7 @@ public class NavigationService extends Service {
 				stopSelf();
 				return START_NOT_STICKY;
 			}
+			addUsageIntent(usageIntent);
 			return START_REDELIVER_INTENT;
 		}
 
