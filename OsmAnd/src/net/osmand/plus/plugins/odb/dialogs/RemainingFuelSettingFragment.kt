@@ -131,4 +131,6 @@ class RemainingFuelSettingFragment : BaseSimpleWidgetInfoFragment() {
 		)
 		widget.updatePrefs(prefsChanged)
 	}
+
+	override fun getAnalyticsScreen() = "remaining_fuel_setting"
 }

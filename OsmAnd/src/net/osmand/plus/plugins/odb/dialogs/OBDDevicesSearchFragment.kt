@@ -242,4 +242,6 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 		val obdDevice = BTDeviceInfo(foundDevice.name, foundDevice.deviceId, true)
 		onDeviceFound(obdDevice)
 	}
+
+	override fun getAnalyticsScreen() = "obd_devices_search"
 }

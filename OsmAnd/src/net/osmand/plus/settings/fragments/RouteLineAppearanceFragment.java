@@ -596,4 +596,9 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "route_line_appearance";
+	}
 }

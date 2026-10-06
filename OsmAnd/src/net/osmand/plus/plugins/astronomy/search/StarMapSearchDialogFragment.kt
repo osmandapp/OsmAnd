@@ -1833,4 +1833,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		dismissSortPopup()
 		dismissFilterPopup()
 	}
+
+	override fun getAnalyticsScreen() = "star_map_search"
 }

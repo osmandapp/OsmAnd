@@ -615,4 +615,9 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "backup_authorize";
+	}
 }

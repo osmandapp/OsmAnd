@@ -190,4 +190,9 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "relief_3d";
+	}
 }

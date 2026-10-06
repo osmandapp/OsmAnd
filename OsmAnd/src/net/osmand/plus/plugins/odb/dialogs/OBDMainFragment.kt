@@ -373,4 +373,6 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList(deviceId, isBLE)
 		view?.let { setupUI(it) }
 	}
+
+	override fun getAnalyticsScreen() = "obd_main"
 }

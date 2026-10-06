@@ -163,4 +163,6 @@ class RenameOBDDialog : BaseFullScreenDialogFragment() {
 			}
 		}
 	}
+
+	override fun getAnalyticsScreen() = "rename_obd"
 }

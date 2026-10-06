@@ -94,4 +94,9 @@ public class TripRecordingMaxSpeedWidgetInfoFragment extends BaseSimpleWidgetInf
 		super.onResume();
 		updateModeSetting();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "trip_recording_max_speed_widget_info";
+	}
 }

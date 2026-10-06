@@ -225,4 +225,6 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
     override fun onDeviceClicked(device: AbstractDevice<out AbstractSensor>) {
         ExternalDeviceDetailsFragment.showInstance(requireActivity().supportFragmentManager, device)
     }
+
+    override fun getAnalyticsScreen() = "external_devices_search"
 }

@@ -203,4 +203,6 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 	private fun extractBodyContent(html: String): String {
 		return BODY_CONTENT_REGEX.find(html)?.groups?.get(1)?.value ?: html
 	}
+
+	override fun getAnalyticsScreen() = "astro_article"
 }

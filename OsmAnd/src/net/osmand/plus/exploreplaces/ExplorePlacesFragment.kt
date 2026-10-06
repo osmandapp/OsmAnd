@@ -538,4 +538,6 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), ExplorePlacesAdapter.Exp
 			}
 		}
 	}
+
+	override fun getAnalyticsScreen() = "explore_places"
 }
