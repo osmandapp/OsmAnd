@@ -20,8 +20,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
+import androidx.wear.compose.foundation.pager.HorizontalPager
+import androidx.wear.compose.foundation.pager.rememberPagerState
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
+import androidx.wear.compose.material3.HorizontalPagerScaffold
 import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.ScreenScaffold
@@ -32,8 +35,11 @@ import net.osmand.wear.api.ManeuverInfo
 import net.osmand.wear.api.NavigationState
 
 /**
- * Active route, laid out after the third mockup in OsmAnd-Issues#2821: the remaining trip on
- * top, the nearest manoeuvres below it separated by rules, and Stop at the bottom.
+ * Active route across two pages.
+ *
+ * The first carries the next manoeuvre alone, at the size a glance from the handlebars can take.
+ * Everything else - how far is left, what comes after, how to stop - is a page away, because in
+ * motion a list answers a question nobody is asking yet.
  *
  * Everything shown is already formatted by the phone, so this screen holds no unit or locale
  * logic of its own.
@@ -49,6 +55,85 @@ fun NavigationScreen(
 		return
 	}
 
+	val pagerState = rememberPagerState { PAGE_COUNT }
+
+	// The scaffold is what lets a pager live inside SwipeDismissableNavHost: it reports the
+	// pager's scroll position upwards, so a horizontal drag pages instead of being swallowed by
+	// the host's swipe-to-dismiss, and it supplies the page indicator.
+	HorizontalPagerScaffold(pagerState = pagerState) {
+		HorizontalPager(state = pagerState) { page ->
+			when (page) {
+				0 -> NextManeuver(navigation, icons)
+				else -> RouteDetails(navigation, icons, onStop)
+			}
+		}
+	}
+}
+
+/**
+ * The nearest manoeuvre, and nothing else. The distance is the one figure worth reading while
+ * moving, so it is the largest thing on the screen; the phone's own turn arrow sits above it.
+ */
+@Composable
+private fun NextManeuver(navigation: NavigationState, icons: Map<String, ImageBitmap>) {
+	val maneuver = navigation.maneuvers.firstOrNull()
+	if (maneuver == null) {
+		EmptyState(stringResource(R.string.wear_not_navigating))
+		return
+	}
+
+	ScreenScaffold {
+		Column(
+			modifier = Modifier
+				.fillMaxSize()
+				.padding(horizontal = 10.percentOfWidth()),
+			horizontalAlignment = Alignment.CenterHorizontally,
+			verticalArrangement = Arrangement.Center
+		) {
+			maneuver.iconKey?.let { icons[it] }?.let { arrow ->
+				Image(
+					bitmap = arrow,
+					contentDescription = null,
+					modifier = Modifier.size(64.dp)
+				)
+			}
+			Text(
+				text = maneuver.distanceText,
+				style = MaterialTheme.typography.displayMedium,
+				color = MaterialTheme.colorScheme.tertiary,
+				maxLines = 1,
+				modifier = Modifier.padding(top = 4.dp)
+			)
+			maneuver.streetName?.let { street ->
+				Text(
+					text = street,
+					style = MaterialTheme.typography.bodyMedium,
+					textAlign = TextAlign.Center,
+					// The phone sends the whole phrase - "Turn right and go <street>" - and a
+					// round screen takes three lines of it before the arrow has to give ground.
+					maxLines = 3,
+					overflow = TextOverflow.Ellipsis,
+					modifier = Modifier.padding(top = 6.dp)
+				)
+			}
+			if (navigation.paused) {
+				Text(
+					text = stringResource(R.string.wear_paused),
+					style = MaterialTheme.typography.labelSmall,
+					color = MaterialTheme.colorScheme.tertiary,
+					modifier = Modifier.padding(top = 6.dp)
+				)
+			}
+		}
+	}
+}
+
+@Composable
+private fun RouteDetails(
+	navigation: NavigationState,
+	icons: Map<String, ImageBitmap>,
+	onStop: () -> Unit
+) {
 	val listState = rememberScalingLazyListState()
 
 	ScreenScaffold(scrollState = listState) {
@@ -156,6 +241,8 @@ private fun Maneuver(maneuver: ManeuverInfo, icon: ImageBitmap?) {
 		}
 	}
 }
+
+private const val PAGE_COUNT = 2
 
 @Composable
 private fun EmptyState(message: String) {
