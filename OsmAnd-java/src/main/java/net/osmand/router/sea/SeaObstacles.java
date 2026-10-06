@@ -42,6 +42,11 @@ public class SeaObstacles {
 	private final double metersPerDegreeLon;
 
 	private final List<double[]> pieces = new ArrayList<>();
+	/** Pieces of coastline, as opposed to lakes and tidal flats: the coarse way is planned on these only. */
+	private final java.util.BitSet coastPieces = new java.util.BitSet();
+	/** The basemap's coastline, for the coarse way: one source, with no gaps between maps. */
+	private final List<double[]> coarseCoast = new ArrayList<>();
+	private final Set<Long> coarseCoastCells = new HashSet<>();
 	private final TIntArrayList pieceLandSide = new TIntArrayList();
 	private double[] segments = new double[4096];
 	private int[] segmentPiece = new int[1024];
@@ -94,6 +99,9 @@ public class SeaObstacles {
 						double[] piece = obstacles.toPiece(o.getPointsLength(), o, null);
 						coastPieces.add(piece);
 						obstacles.accountRing(piece);
+						if (reader.isBasemap()) {
+							obstacles.coarseCoast.add(piece);
+						}
 					} else if (o.isArea() && hasTag(o, index, "natural", "water") && !isRiverOrCanal(o, index)) {
 						double[] outer = obstacles.toPiece(o.getPointsLength(), o, null);
 						if (Math.abs(signedArea(outer)) < MIN_WATER_AREA) {
@@ -118,7 +126,7 @@ public class SeaObstacles {
 		// the convention holds per map, so the sign is decided once all rings are known
 		int landSide = obstacles.getCoastlineOrientation();
 		for (double[] piece : coastPieces) {
-			obstacles.addPiece(piece, landSide);
+			obstacles.addCoastPiece(piece, landSide);
 		}
 		obstacles.build();
 		return obstacles;
@@ -177,7 +185,7 @@ public class SeaObstacles {
 	public void addCoastline(double... latLon) {
 		double[] piece = toPiece(latLon);
 		accountRing(piece);
-		addPiece(piece, LAND_ON_LEFT);
+		addCoastPiece(piece, LAND_ON_LEFT);
 	}
 
 	/** A ring of a water area given as lat, lon, lat, lon…: land is whatever lies outside it. */
@@ -247,6 +255,14 @@ public class SeaObstacles {
 		}
 	}
 
+	private void addCoastPiece(double[] piece, int landSide) {
+		int index = pieces.size();
+		addPiece(piece, landSide);
+		if (pieces.size() > index) {
+			coastPieces.set(index);
+		}
+	}
+
 	private void addPiece(double[] piece, int landSide) {
 		if (piece.length < 4) {
 			return;
@@ -290,11 +306,25 @@ public class SeaObstacles {
 		}
 		if (segmentsCount > 0) {
 			double span = Math.max(maxX - minX, maxY - minY);
-			cellSize = Math.max(250, Math.min(5000, span / 256));
-			gridLeft = (int) Math.floor(minX / cellSize) - CORRIDOR_MARGIN;
-			gridTop = (int) Math.floor(minY / cellSize) - CORRIDOR_MARGIN;
-			gridWidth = (int) Math.floor(maxX / cellSize) + CORRIDOR_MARGIN - gridLeft + 1;
-			gridHeight = (int) Math.floor(maxY / cellSize) + CORRIDOR_MARGIN - gridTop + 1;
+			// about 256 cells across: a box of a continent stays a small grid for the coarse way, the shores of a leg
+			// are read in a box of their own
+			cellSize = Math.max(250, span / 256);
+			gridLeft = (int) Math.floor(minX / cellSize) - GRID_MARGIN;
+			gridTop = (int) Math.floor(minY / cellSize) - GRID_MARGIN;
+			gridWidth = (int) Math.floor(maxX / cellSize) + GRID_MARGIN - gridLeft + 1;
+			gridHeight = (int) Math.floor(maxY / cellSize) + GRID_MARGIN - gridTop + 1;
+		}
+		coarseCoastCells.clear();
+		for (double[] piece : coarseCoast) {
+			for (int i = 2; i < piece.length; i += 2) {
+				walkCells(piece[i - 2], piece[i - 1], piece[i], piece[i + 1], 0, new CellVisitor() {
+					@Override
+					public boolean cell(long key) {
+						coarseCoastCells.add(key);
+						return true;
+					}
+				});
+			}
 		}
 		grid.clear();
 		segmentStamp = new int[segmentsCount];
@@ -430,6 +460,13 @@ public class SeaObstacles {
 		return isLand(point, 3000);
 	}
 
+	/** Land or water by the side of a shore within searchRadius; null when there is none that near. */
+	public Boolean isLandByShore(LatLon point, double searchRadius) {
+		double px = x(point.getLongitude()), py = y(point.getLatitude());
+		int segment = nearestSegment(px, py, searchRadius);
+		return segment < 0 ? null : landSide(segment, px, py) > 0;
+	}
+
 	/**
 	 * Moves a point that sits on land - a berth in a marina, a pier - onto open water, keeping the
 	 * nearest water within maxRadius. Returns the point itself when it is already clear of the shore.
@@ -470,6 +507,10 @@ public class SeaObstacles {
 	}
 
 	private int nearestSegment(double px, double py, double searchRadius) {
+		return nearestSegment(px, py, searchRadius, false);
+	}
+
+	private int nearestSegment(double px, double py, double searchRadius, final boolean coastOnly) {
 		final double[] state = { searchRadius, px, py };
 		final int[] best = { -1 };
 		stamp++;
@@ -486,7 +527,8 @@ public class SeaObstacles {
 						continue;
 					}
 					segmentStamp[segment] = stamp;
-					if (pieceLandSide.get(segmentPiece[segment]) == NO_LAND_SIDE) {
+					if (pieceLandSide.get(segmentPiece[segment]) == NO_LAND_SIDE
+							|| (coastOnly && !coastPieces.get(segmentPiece[segment]))) {
 						continue; // a barrier cannot tell land from water
 					}
 					int p = segment * STRIDE;
@@ -614,35 +656,38 @@ public class SeaObstacles {
 		return true;
 	}
 
-	private static final int CORRIDOR_MARGIN = 4;
+	private static final int GRID_MARGIN = 4;
 	private static final double SHORE_CELL_COST = 4;
+	/** Cells of an empty region whose squares vote on land or sea. */
+	private static final int REGION_VOTES = 16;
+	private static final byte CELL_PENDING = 4;
 	private static final byte CELL_SHORE = 1, CELL_WATER = 2, CELL_LAND = 3;
 
-	/** The grid cell of a point, as stored by {@link #corridor}. */
-	public long cellOf(double x, double y) {
-		return cellKey((int) Math.floor(x / cellSize), (int) Math.floor(y / cellSize));
+	/** The size of a grid cell: a coastline generalized at a low zoom is less than this off the true one. */
+	public double getCellSize() {
+		return cellSize;
 	}
 
 	/**
-	 * The grid cells a route from one water point to another can use: a coarse search over the cells first, then
-	 * every cell within width of its path. Cells with shores in them may hold a passage; an empty region of cells -
-	 * no shore inside - is all water or all land, so one {@link #isLand} per region decides it (the basemap's
-	 * squares when the region is far from any shore). Lets a long route be planned among the corners along the way
-	 * instead of all corners of the box. Null when there is no grid or the coarse search finds no way.
+	 * A coarse way from one water point to another over the grid cells, to be refined by the shore geometry. A cell
+	 * with shores in it may hold a passage; an empty region of cells - no shore inside - is all water or all land, so
+	 * one {@link #isLand} per region decides it (the basemap's squares when the region is far from any shore). The
+	 * closed cells count as land: passages the refinement could not get through. Null when there is no grid or no
+	 * way over the cells.
 	 */
-	public Set<Long> corridor(double x1, double y1, double x2, double y2, int width) {
+	public CoarseWay coarseWay(double x1, double y1, double x2, double y2, Set<Long> closed) {
 		if (gridWidth <= 0 || gridHeight <= 0) {
 			return null;
 		}
 		// the shores' cells and both points, which can lie far out at sea beyond any shore
-		int left = Math.min(gridLeft, Math.min(cell(x1), cell(x2)) - CORRIDOR_MARGIN);
-		int top = Math.min(gridTop, Math.min(cell(y1), cell(y2)) - CORRIDOR_MARGIN);
-		int w = Math.max(gridLeft + gridWidth, Math.max(cell(x1), cell(x2)) + CORRIDOR_MARGIN + 1) - left;
-		int h = Math.max(gridTop + gridHeight, Math.max(cell(y1), cell(y2)) + CORRIDOR_MARGIN + 1) - top;
+		int left = Math.min(gridLeft, Math.min(cell(x1), cell(x2)) - GRID_MARGIN);
+		int top = Math.min(gridTop, Math.min(cell(y1), cell(y2)) - GRID_MARGIN);
+		int w = Math.max(gridLeft + gridWidth, Math.max(cell(x1), cell(x2)) + GRID_MARGIN + 1) - left;
+		int h = Math.max(gridTop + gridHeight, Math.max(cell(y1), cell(y2)) + GRID_MARGIN + 1) - top;
 		byte[] state = new byte[w * h];
 		for (int i = 0; i < w; i++) {
 			for (int j = 0; j < h; j++) {
-				if (grid.containsKey(cellKey(left + i, top + j))) {
+				if (hasCoast(cellKey(left + i, top + j))) {
 					state[i + j * w] = CELL_SHORE;
 				}
 			}
@@ -657,26 +702,43 @@ public class SeaObstacles {
 				}
 			}
 		}
+		// an empty region - no coastline inside - is all land or all sea; the basemap's squares of a few cells spread
+		// over it vote, so one square at its edge that is part sea cannot turn northern Germany into sea
 		int[] queue = new int[w * h];
 		for (int start = 0; start < w * h; start++) {
 			if (state[start] != 0) {
 				continue;
 			}
-			int si = start % w, sj = start / w;
-			byte region = isLand(latLon((left + si + 0.5) * cellSize, (top + sj + 0.5) * cellSize)) ? CELL_LAND
-					: CELL_WATER;
 			int head = 0, tail = 0;
 			queue[tail++] = start;
-			state[start] = region;
+			state[start] = CELL_PENDING;
 			while (head < tail) {
 				int c = queue[head++], ci = c % w, cj = c / w;
 				for (int k = 0; k < 4; k++) {
 					int ni = ci + (k == 0 ? 1 : k == 1 ? -1 : 0), nj = cj + (k == 2 ? 1 : k == 3 ? -1 : 0);
 					if (ni >= 0 && nj >= 0 && ni < w && nj < h && state[ni + nj * w] == 0) {
-						state[ni + nj * w] = region;
+						state[ni + nj * w] = CELL_PENDING;
 						queue[tail++] = ni + nj * w;
 					}
 				}
+			}
+			int land = 0, votes = Math.min(REGION_VOTES, tail);
+			for (int v = 0; v < votes; v++) {
+				int c = queue[(int) ((long) tail * v / votes)];
+				LatLon centre = latLon((left + c % w + 0.5) * cellSize, (top + c / w + 0.5) * cellSize);
+				boolean isLand = farFromShore != null ? farFromShore.isLand(centre.getLatitude(), centre.getLongitude())
+						: isLandByCoast(centre);
+				land += isLand ? 1 : 0;
+			}
+			byte region = land * 2 > votes ? CELL_LAND : CELL_WATER;
+			for (int k = 0; k < tail; k++) {
+				state[queue[k]] = region;
+			}
+		}
+		for (long key : closed) {
+			int i = (int) (key >> 32) - left, j = (int) key - top;
+			if (i >= 0 && j >= 0 && i < w && j < h) {
+				state[i + j * w] = CELL_LAND;
 			}
 		}
 		int from = cell(x1) - left + (cell(y1) - top) * w, to = cell(x2) - left + (cell(y2) - top) * w;
@@ -721,16 +783,67 @@ public class SeaObstacles {
 		if (!found) {
 			return null;
 		}
-		Set<Long> cells = new HashSet<>();
+		CoarseWay way = new CoarseWay();
 		for (int c = to; c != -1; c = parent[c]) {
-			int ci = c % w, cj = c / w;
-			for (int di = -width; di <= width; di++) {
-				for (int dj = -width; dj <= width; dj++) {
-					cells.add(cellKey(left + ci + di, top + cj + dj));
+			way.x.add(0, (left + c % w + 0.5) * cellSize);
+			way.y.add(0, (top + c / w + 0.5) * cellSize);
+			way.water.add(0, state[c] == CELL_WATER);
+			way.cells.add(0, cellKey(left + c % w, top + c / w));
+		}
+		return way;
+	}
+
+	private boolean hasCoast(long key) {
+		if (!coarseCoast.isEmpty()) {
+			return coarseCoastCells.contains(key);
+		}
+		TIntArrayList inCell = grid.get(key);
+		for (int i = 0; inCell != null && i < inCell.size(); i++) {
+			if (coastPieces.get(segmentPiece[inCell.get(i)])) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Land or sea by the coastline alone, for the coarse way: a lake is land to it, and a point in one must not make
+	 * the region around it sea.
+	 */
+	private boolean isLandByCoast(LatLon point) {
+		double px = x(point.getLongitude()), py = y(point.getLatitude());
+		int segment = nearestSegment(px, py, 3000, true);
+		if (segment >= 0) {
+			return landSide(segment, px, py) > 0;
+		}
+		return farFromShore != null && farFromShore.isLand(point.getLatitude(), point.getLongitude());
+	}
+
+	/**
+	 * The grid cells with shores in the box of two points: when no route was found between them over water, none of
+	 * these cells has a passage the coarse way may take.
+	 */
+	public Set<Long> shoreCellsBetween(double x1, double y1, double x2, double y2) {
+		Set<Long> cells = new HashSet<>();
+		for (int i = cell(Math.min(x1, x2)); i <= cell(Math.max(x1, x2)); i++) {
+			for (int j = cell(Math.min(y1, y2)); j <= cell(Math.max(y1, y2)); j++) {
+				if (hasCoast(cellKey(i, j))) {
+					cells.add(cellKey(i, j));
 				}
 			}
 		}
 		return cells;
+	}
+
+	/** Cell centres of a coarse way, from its start to its end; open water or with shores. */
+	public static class CoarseWay {
+		public final List<Double> x = new ArrayList<>(), y = new ArrayList<>();
+		public final List<Boolean> water = new ArrayList<>();
+		public final List<Long> cells = new ArrayList<>();
+
+		public int size() {
+			return x.size();
+		}
 	}
 
 	private int cell(double coordinate) {

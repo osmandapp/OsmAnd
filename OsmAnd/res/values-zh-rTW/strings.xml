@@ -5213,4 +5213,18 @@
     <string name="opening_hours_public_holiday">公共假期</string>
     <string name="opening_hours_school_holiday">學校假期</string>
     <string name="opening_hours_easter">復活節</string>
+    <string name="trip_rec_start_from_notification">從通知開始</string>
+    <string name="trip_rec_start_from_notification_descr">當開始記錄旅程時顯示有通知的按鈕。當記錄時都會顯示通知。</string>
+    <string name="ais_connection_not_set_up">還未設定</string>
+    <string name="ais_connection_not_connected">還未連線</string>
+    <string name="ais_connection_connecting">連線中…</string>
+    <string name="ais_connection_no_data">還未取得資料</string>
+    <string name="ais_connection_failed">連線失敗</string>
+    <string name="ais_connection_set_up">設定連線</string>
+    <string name="ais_use_nmea_location">用做位置來源</string>
+    <string name="ais_use_nmea_location_desc">以 NMEA 流來的位置取代手機位置。</string>
+    <string name="ais_run_in_background">背景執行</string>
+    <string name="ais_mmsi">MMSI</string>
+    <string name="ais_mmsi_not_set">還未設定</string>
+    <string name="ais_show_on_the_map">在地圖上顯示</string>
 </resources>

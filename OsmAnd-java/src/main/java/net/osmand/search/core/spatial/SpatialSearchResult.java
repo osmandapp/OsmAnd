@@ -248,9 +248,12 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 
 	public List<String> extraDeduplicateKeys(SpatialSearchContext ctx) {
 		List<String> result = null;
+		MapObject mapObject = getFirstRefObject(true);
+		if (mapObject instanceof Amenity amenity && (amenity.isRouteTrack() || amenity.isSuperRoute())) {
+			return addResult(result, amenity.getRouteId());
+		}
 		result = addResult(result, getWikidata(ctx));
 		result = addResult(result, getRouteId());
-		MapObject mapObject = getFirstRefObject(true);		
 		if (mapObject instanceof Amenity amenity) {
 			if (amenity.getType().getKeyName().equals("natural")) {
 				String name = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(amenity.getName()));
