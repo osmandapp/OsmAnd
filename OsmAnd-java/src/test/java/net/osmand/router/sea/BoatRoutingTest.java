@@ -84,8 +84,8 @@ public class BoatRoutingTest {
 		return cases;
 	}
 
-	/** A case without maxTimeMs. */
-	private static final long DEFAULT_TIME_LIMIT_MS = 180000;
+	/** A case without maxTimeMs: every working case takes a few seconds, a hang shows up in 20. */
+	private static final long DEFAULT_TIME_LIMIT_MS = 20000;
 
 	@Test
 	public void route() throws Exception {
