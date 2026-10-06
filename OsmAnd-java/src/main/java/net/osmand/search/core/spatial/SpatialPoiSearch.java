@@ -363,7 +363,7 @@ public class SpatialPoiSearch {
 		}
 	}
 
-	/** a category named by a word still being typed is a row only: "ca" is not every catholic church */
+	// a category matched by a word still being typed is only a row: "ca" does not list every catholic church
 	private static boolean typedInFull(SpatialSearchToken t, SpatialPoiType a) {
 		if (!t.incomplete) {
 			return true;
