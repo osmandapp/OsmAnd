@@ -12,8 +12,10 @@ import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.shared.SharedUtil;
+import net.osmand.aidl.AidlPermissionGroup;
 import net.osmand.aidl.AidlSearchResultWrapper;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.search.SearchParams;
@@ -106,7 +109,6 @@ public class ExternalApiHelper {
 	public static final String API_CMD_START_GPX_REC = "start_gpx_rec";
 	public static final String API_CMD_STOP_GPX_REC = "stop_gpx_rec";
 	public static final String API_CMD_SAVE_GPX = "save_gpx";
-	public static final String API_CMD_CLEAR_GPX = "clear_gpx";
 
 	public static final String API_CMD_EXECUTE_QUICK_ACTION = "execute_quick_action";
 	public static final String API_CMD_GET_QUICK_ACTION_INFO = "get_quick_action_info";
@@ -181,6 +183,7 @@ public class ExternalApiHelper {
 	public static final int RESULT_CODE_ERROR_EMPTY_SEARCH_QUERY = 1006;
 	public static final int RESULT_CODE_ERROR_SEARCH_LOCATION_UNDEFINED = 1007;
 	public static final int RESULT_CODE_ERROR_QUICK_ACTION_NOT_FOUND = 1008;
+	public static final int RESULT_CODE_ERROR_PERMISSION_DENIED = 1009;
 
 	private final MapActivity mapActivity;
 	private int resultCode;
@@ -206,6 +209,11 @@ public class ExternalApiHelper {
 		try {
 			Uri uri = intent.getData();
 			String cmd = uri.getHost().toLowerCase();
+			AidlPermissionGroup group = getPermissionGroup(cmd, uri);
+			if (group != null && !checkCallerPermission(app, group)) {
+				resultCode = RESULT_CODE_ERROR_PERMISSION_DENIED;
+				return result;
+			}
 			if (API_CMD_SHOW_GPX.equals(cmd) || API_CMD_NAVIGATE_GPX.equals(cmd)) {
 				boolean navigate = API_CMD_NAVIGATE_GPX.equals(cmd);
 				String path = uri.getQueryParameter(PARAM_PATH);
@@ -563,18 +571,6 @@ public class ExternalApiHelper {
 					finish = true;
 				}
 				resultCode = Activity.RESULT_OK;
-			} else if (API_CMD_CLEAR_GPX.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
-				if (plugin == null) {
-					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
-					finish = true;
-				} else {
-					app.getSavingTrackHelper().clearRecordedData(true);
-				}
-				if (uri.getBooleanQueryParameter(PARAM_CLOSE_AFTER_COMMAND, true)) {
-					finish = true;
-				}
-				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_EXECUTE_QUICK_ACTION.equals(cmd)) {
 				int actionNumber = Integer.parseInt(uri.getQueryParameter(PARAM_QUICK_ACTION_NUMBER));
 				List<QuickAction> actionsList = app.getMapButtonsHelper().getFlattenedQuickActions();
@@ -619,6 +615,65 @@ public class ExternalApiHelper {
 		}
 
 		return result;
+	}
+
+	/**
+	 * Commands that read personal data, record or run any action need the same permission group as in the AIDL API.
+	 * Map, navigation, favorites and trip recording commands stay open to any app.
+	 */
+	@Nullable
+	private static AidlPermissionGroup getPermissionGroup(@NonNull String cmd, @NonNull Uri uri) {
+		switch (cmd) {
+			case API_CMD_GET_INFO:
+				return AidlPermissionGroup.LOCATION;
+			case API_CMD_RECORD_AUDIO:
+			case API_CMD_RECORD_VIDEO:
+			case API_CMD_RECORD_PHOTO:
+			case API_CMD_STOP_AV_REC:
+				return AidlPermissionGroup.RECORDING;
+			case API_CMD_EXECUTE_QUICK_ACTION:
+			case API_CMD_GET_QUICK_ACTION_INFO:
+				return AidlPermissionGroup.SETTINGS;
+			case API_CMD_SHOW_GPX:
+			case API_CMD_NAVIGATE_GPX:
+				// a file path is read with OsmAnd's own storage access, a track passed as data or uri is the caller's
+				return uri.getQueryParameter(PARAM_PATH) != null ? AidlPermissionGroup.TRACKS_EDIT : null;
+			default:
+				return null;
+		}
+	}
+
+	/**
+	 * The caller is known only for startActivityForResult. It must be enabled in Plugins with the group granted;
+	 * otherwise the user gets a toast and the caller RESULT_CODE_ERROR_PERMISSION_DENIED.
+	 */
+	private boolean checkCallerPermission(@NonNull OsmandApplication app, @NonNull AidlPermissionGroup group) {
+		ComponentName caller = mapActivity.getCallingActivity();
+		String pack = caller != null ? caller.getPackageName() : null;
+		if (pack != null && (pack.equals(app.getPackageName()) || app.getAidlApi().isGroupAllowed(pack, group))) {
+			return true;
+		}
+		String groupName = app.getString(group.getTitleId());
+		if (pack == null) {
+			app.showToastMessage(app.getString(R.string.osmand_api_unknown_app, groupName));
+		} else {
+			app.showToastMessage(app.getString(R.string.osmand_api_permission_missing,
+					getAppName(app, pack), groupName));
+			// only a started-for-result screen is closed, never the map the user is in
+			finish = true;
+		}
+		LOG.warn("Intent API: " + group.getId() + " is not allowed for " + pack);
+		return false;
+	}
+
+	@NonNull
+	private static CharSequence getAppName(@NonNull OsmandApplication app, @NonNull String pack) {
+		PackageManager pm = app.getPackageManager();
+		try {
+			return pm.getApplicationLabel(pm.getApplicationInfo(pack, 0));
+		} catch (PackageManager.NameNotFoundException e) {
+			return pack;
+		}
 	}
 
 	@Nullable

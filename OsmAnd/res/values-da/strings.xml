@@ -5476,4 +5476,6 @@
     <string name="opening_hours_easter">Påske</string>
     <string name="visualizing_button_grid_descr">Celler, pladser, rammer og logge.</string>
     <string name="city_type_boundary">Område</string>
+    <string name="trip_rec_start_from_notification">Start fra notifikation</string>
+    <string name="trip_rec_start_from_notification_descr">Viser en notifikation med en knap til at starte turoptagelse. En notifikaiton vises altid under optagelse.</string>
 </resources>

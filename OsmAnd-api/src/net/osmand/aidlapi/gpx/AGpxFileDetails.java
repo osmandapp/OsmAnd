@@ -34,6 +34,19 @@ public class AGpxFileDetails extends AidlParams {
 
 	private ArrayList<String> wptCategoryNames = new ArrayList<>();
 
+	// from external sensors, 0 when the track has none
+	private float avgHeartRate;
+	private int minHeartRate;
+	private int maxHeartRate;
+	private float avgSensorSpeed;
+	private float maxSensorSpeed;
+	private float avgPower;
+	private int maxPower;
+	private float avgCadence;
+	private float maxCadence;
+	private float avgTemperature;
+	private int maxTemperature;
+
 	public AGpxFileDetails(float totalDistance, int totalTracks,
 	                       long startTime, long endTime,
 	                       long timeSpan, long timeMoving, float totalDistanceMoving,
@@ -151,6 +164,109 @@ public class AGpxFileDetails extends AidlParams {
 		return wptCategoryNames;
 	}
 
+	/**
+	 * @return average heart rate, bpm, 0 if none
+	 */
+	public float getAvgHeartRate() {
+		return avgHeartRate;
+	}
+
+	/**
+	 * @return min heart rate, bpm, 0 if none
+	 */
+	public int getMinHeartRate() {
+		return minHeartRate;
+	}
+
+	/**
+	 * @return max heart rate, bpm, 0 if none
+	 */
+	public int getMaxHeartRate() {
+		return maxHeartRate;
+	}
+
+	/**
+	 * @return average speed from a speed sensor, m/s, 0 if none
+	 */
+	public float getAvgSensorSpeed() {
+		return avgSensorSpeed;
+	}
+
+	/**
+	 * @return max speed from a speed sensor, m/s, 0 if none
+	 */
+	public float getMaxSensorSpeed() {
+		return maxSensorSpeed;
+	}
+
+	/**
+	 * @return average power, W, 0 if none
+	 */
+	public float getAvgPower() {
+		return avgPower;
+	}
+
+	/**
+	 * @return max power, W, 0 if none
+	 */
+	public int getMaxPower() {
+		return maxPower;
+	}
+
+	/**
+	 * @return average cadence, rpm, 0 if none
+	 */
+	public float getAvgCadence() {
+		return avgCadence;
+	}
+
+	/**
+	 * @return max cadence, rpm, 0 if none
+	 */
+	public float getMaxCadence() {
+		return maxCadence;
+	}
+
+	/**
+	 * @return average temperature, °C, 0 if none
+	 */
+	public float getAvgTemperature() {
+		return avgTemperature;
+	}
+
+	/**
+	 * @return max temperature, °C, 0 if none
+	 */
+	public int getMaxTemperature() {
+		return maxTemperature;
+	}
+
+	public void setHeartRate(float avgHeartRate, int minHeartRate, int maxHeartRate) {
+		this.avgHeartRate = avgHeartRate;
+		this.minHeartRate = minHeartRate;
+		this.maxHeartRate = maxHeartRate;
+	}
+
+	public void setSensorSpeed(float avgSensorSpeed, float maxSensorSpeed) {
+		this.avgSensorSpeed = avgSensorSpeed;
+		this.maxSensorSpeed = maxSensorSpeed;
+	}
+
+	public void setPower(float avgPower, int maxPower) {
+		this.avgPower = avgPower;
+		this.maxPower = maxPower;
+	}
+
+	public void setCadence(float avgCadence, float maxCadence) {
+		this.avgCadence = avgCadence;
+		this.maxCadence = maxCadence;
+	}
+
+	public void setTemperature(float avgTemperature, int maxTemperature) {
+		this.avgTemperature = avgTemperature;
+		this.maxTemperature = maxTemperature;
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putFloat("totalDistance", totalDistance);
@@ -171,6 +287,41 @@ public class AGpxFileDetails extends AidlParams {
 		bundle.putInt("points", points);
 		bundle.putInt("wptPoints", wptPoints);
 		bundle.putStringArrayList("wptCategoryNames", wptCategoryNames);
+		// sensor values go only when present: a track list is one binder transaction (~1 MB),
+		// readers default to 0
+		if (avgHeartRate != 0) {
+			bundle.putFloat("avgHeartRate", avgHeartRate);
+		}
+		if (minHeartRate != 0) {
+			bundle.putInt("minHeartRate", minHeartRate);
+		}
+		if (maxHeartRate != 0) {
+			bundle.putInt("maxHeartRate", maxHeartRate);
+		}
+		if (avgSensorSpeed != 0) {
+			bundle.putFloat("avgSensorSpeed", avgSensorSpeed);
+		}
+		if (maxSensorSpeed != 0) {
+			bundle.putFloat("maxSensorSpeed", maxSensorSpeed);
+		}
+		if (avgPower != 0) {
+			bundle.putFloat("avgPower", avgPower);
+		}
+		if (maxPower != 0) {
+			bundle.putInt("maxPower", maxPower);
+		}
+		if (avgCadence != 0) {
+			bundle.putFloat("avgCadence", avgCadence);
+		}
+		if (maxCadence != 0) {
+			bundle.putFloat("maxCadence", maxCadence);
+		}
+		if (avgTemperature != 0) {
+			bundle.putFloat("avgTemperature", avgTemperature);
+		}
+		if (maxTemperature != 0) {
+			bundle.putInt("maxTemperature", maxTemperature);
+		}
 	}
 
 	@Override
@@ -193,5 +344,16 @@ public class AGpxFileDetails extends AidlParams {
 		points = bundle.getInt("points");
 		wptPoints = bundle.getInt("wptPoints");
 		wptCategoryNames = bundle.getStringArrayList("wptCategoryNames");
+		avgHeartRate = bundle.getFloat("avgHeartRate");
+		minHeartRate = bundle.getInt("minHeartRate");
+		maxHeartRate = bundle.getInt("maxHeartRate");
+		avgSensorSpeed = bundle.getFloat("avgSensorSpeed");
+		maxSensorSpeed = bundle.getFloat("maxSensorSpeed");
+		avgPower = bundle.getFloat("avgPower");
+		maxPower = bundle.getInt("maxPower");
+		avgCadence = bundle.getFloat("avgCadence");
+		maxCadence = bundle.getFloat("maxCadence");
+		avgTemperature = bundle.getFloat("avgTemperature");
+		maxTemperature = bundle.getInt("maxTemperature");
 	}
 }
