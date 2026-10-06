@@ -979,6 +979,15 @@ public class BinaryMapAddressReaderAdapter {
 				}
 				int len = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimitLong((long) len);
+				if (pi.isCountOnly()) {
+					// atomsLength is written first
+					int tg = codedIS.readTag();
+					pi.setAtomsLength(shift, WireFormat.getTagFieldNumber(tg) == AddressNameIndexData.ATOMSLENGTH_FIELD_NUMBER
+							? codedIS.readUInt32() : 0);
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					codedIS.popLimit(oldLimit);
+					break;
+				}
 				pi.readAtomsBytes(len);
 				PrefixNameValue prefix = pi.isCacheRawBlocks() ? pi.addData(codedIS.readRawBytes(len), shift)
 						: pi.addData(AddressNameIndexData.parseFrom(codedIS), shift);

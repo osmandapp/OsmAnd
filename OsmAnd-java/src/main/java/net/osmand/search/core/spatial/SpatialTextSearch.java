@@ -126,6 +126,8 @@ public class SpatialTextSearch {
 		public int LIMIT_READ_SINGLE_OBJECTS = 1500;
 		// objects read for one stage, the best by SpatialSearchRanking.prescore (0 - all)
 		public int LIMIT_READ_OBJECTS = 1000;
+		// a 3-letter word still being typed that more index atoms continue is matched whole ('sch' 400K; 0 - never)
+		public int LIMIT_INCOMPLETE_ATOMS = 200_000;
 
 		public int MIN_ELO_RATING = 1400; // see SearchResult.MIN_ELO_RATING
 		public int WORLD_ELO_RATING = 1500; // from world map by default
@@ -619,6 +621,7 @@ public class SpatialTextSearch {
 		// 2. read atoms & poi categories
 		ctx.stats.step1Atoms.start();
 		ctx.setTokens(res.tokens);
+		ctx.markBroadWords();
 		ctx.processPoiCategories();
 		ctx.readAtoms();
 		ctx.stats.step1Atoms.finish();

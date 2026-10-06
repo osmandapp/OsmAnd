@@ -248,6 +248,30 @@ public class SpatialSearchContext {
 
 	
 	
+	/** a 3-letter word still being typed is matched whole when more index atoms continue it than the limit */
+	void markBroadWords() throws IOException {
+		for (SpatialSearchToken t : tokens) {
+			if (t.incomplete && t.wordNoDot.length() == settings.MIN_CHARACTERS_INCOMPLETE + 1
+					&& settings.LIMIT_INCOMPLETE_ATOMS > 0) {
+				t.broad = countIndexAtoms(t) > settings.LIMIT_INCOMPLETE_ATOMS;
+			}
+		}
+	}
+
+	private long countIndexAtoms(SpatialSearchToken t) throws IOException {
+		long sum = 0;
+		String key = "\u0001" + t.word;
+		for (int fileInd = 0; fileInd < files.size() && sum <= settings.LIMIT_INCOMPLETE_ATOMS; fileInd++) {
+			for (NameIndexReader indx : internalFile.get(fileInd).indexReaders) {
+				if (indx.countAtoms(key) < 0) {
+					files.get(fileInd).readFullNameIndex(indx.setCountQuery(key, t.getPrefixMatcher(stats, false)));
+				}
+				sum += Math.max(0, indx.countAtoms(key));
+			}
+		}
+		return sum;
+	}
+
 	void readAtoms() throws IOException {
 		int indxInd = 0;
 		long cachedBytes = 0;
@@ -520,7 +544,7 @@ public class SpatialSearchContext {
 			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
-				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats)));
+				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats, t.broad)));
 				stats.sub1FileAtomsTime.finish();
 				if (matchedPrefixes == null) {
 					continue;

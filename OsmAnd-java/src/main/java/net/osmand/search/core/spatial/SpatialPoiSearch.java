@@ -410,7 +410,7 @@ public class SpatialPoiSearch {
 			List<SpatialPoiType> poiTypes;
 			try {
 				readLock.lock();
-				poiTypes = poiTypesIndex.match(t.getPrefixMatcher(ctx.stats));
+				poiTypes = poiTypesIndex.match(t.getPrefixMatcher(ctx.stats, false));
 			} finally {
 				readLock.unlock();
 			}

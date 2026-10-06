@@ -49,6 +49,8 @@ public class SpatialSearchToken {
 			NameIndexReader.POI_CATEGORY_PREFIX + MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX;
 
 	int MIN_CHAR_INCOMPLETE;
+	// a word still being typed that too many index atoms continue: matched as a whole word
+	boolean broad;
 	
 	int originalOrder = 0;
 	int sortedOrder = 0;
@@ -152,7 +154,7 @@ public class SpatialSearchToken {
 	
 	
 	public boolean isOnlyFullMatch() {
-		return incomplete && word.length() <= MIN_CHAR_INCOMPLETE + 1;
+		return incomplete && (word.length() <= MIN_CHAR_INCOMPLETE + 1 || broad);
 	}
 
 	@Override
@@ -161,7 +163,7 @@ public class SpatialSearchToken {
 	}
 	
 	
-	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats) {
+	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, boolean wholeWordKeys) {
 		return new NameIndexReaderMatcher(word) {
 			
 			@Override
@@ -179,15 +181,22 @@ public class SpatialSearchToken {
 						}
 					}
 				}
-				Boolean cache = fastPrefMatchCheck.get(key);
+				// the cache holds prefix matches only
+				Boolean cache = wholeWordKeys ? null : fastPrefMatchCheck.get(key);
 				if (cache != null) {
 					stats.sub1PartMatchTime.finish();
 					return cache;
 				}
 				
 				String alignedKey = SearchAlgorithms.alignChars(key);
-				// could be empty after align so match = true! ("''" -> "")
-				boolean matched = matchAlignedKey(alignedKey);
+				boolean matched;
+				if (wholeWordKeys) {
+					// the key of the whole word: 'sch', 'sch-', 's&ch' but not 'scha'
+					matched = alignedKey.replaceAll("[^\\p{L}\\p{N}]", "").equals(wordNoDot);
+				} else {
+					// could be empty after align so match = true! ("''" -> "")
+					matched = matchAlignedKey(alignedKey);
+				}
 				if (!matched && mainNumber > 0) {
 					// 4th - key, "4" token
 					matched = Algorithms.extractFirstIntegerNumber(key) == mainNumber;
@@ -205,7 +214,9 @@ public class SpatialSearchToken {
 					// query 'pa 21' match 'pa21' key
 					matched = true;
 				}
-				fastPrefMatchCheck.put(key, matched);
+				if (!wholeWordKeys) {
+					fastPrefMatchCheck.put(key, matched);
+				}
 				stats.sub1PartMatchTime.finish();
 				return matched;
 			}
