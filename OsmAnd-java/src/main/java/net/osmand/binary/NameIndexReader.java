@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.InvalidProtocolBufferException;
 
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.list.array.TLongArrayList;
@@ -73,8 +74,9 @@ public class NameIndexReader {
 	private Map<String, TLongHashSet> matchedKeys = new HashMap<String, TLongHashSet>();
 	// cache for prefixes
 	private Map<Long, PrefixNameValue> indexByRef = new HashMap<>();
-	private int cachedAtoms;
+	private long cachedBytes;
 	private long tablePointer;
+	private boolean cacheRawBlocks;
 	
 	// common words
 	private CommonIndexedStats commonStats;
@@ -165,7 +167,20 @@ public class NameIndexReader {
 		public String key;
 		public OsmAndPoiNameIndexData poi = null;
 		public AddressNameIndexData addr = null;
+		byte[] data;
 		public long shift;
+
+		public OsmAndPoiNameIndexData getPoi() throws InvalidProtocolBufferException {
+			return poi == null && data != null && poiRegion != null ? OsmAndPoiNameIndexData.parseFrom(data) : poi;
+		}
+
+		public AddressNameIndexData getAddr() throws InvalidProtocolBufferException {
+			return addr == null && data != null && addressRegion != null ? AddressNameIndexData.parseFrom(data) : addr;
+		}
+
+		boolean isLoaded() {
+			return poi != null || addr != null || data != null;
+		}
 		
 		
 		@Override
@@ -327,7 +342,7 @@ public class NameIndexReader {
 		}
 		obj.shift = currentShift;
 		obj.poi = from;
-		cachedAtoms += from.getAtomsCount();
+		cachedBytes += from.getSerializedSize();
 		return obj;
 	}
 	
@@ -338,7 +353,7 @@ public class NameIndexReader {
 		while(it.hasNext()) {
 			long l = it.next();
 			PrefixNameValue pv = indexByRef.get(l);
-			if (pv.addr == null && pv.poi == null) {
+			if (!pv.isLoaded()) {
 				loffsets.add(l);
 			} else {
 				r.add(pv);
@@ -348,6 +363,26 @@ public class NameIndexReader {
 	}
 
 
+	public PrefixNameValue addData(byte[] from, long currentShift) {
+		PrefixNameValue obj = indexByRef.get(currentShift);
+		if (obj.isLoaded()) {
+			throw new IllegalStateException(obj.toString());
+		}
+		obj.shift = currentShift;
+		obj.data = from;
+		cachedBytes += from.length;
+		return obj;
+	}
+
+	public boolean isCacheRawBlocks() {
+		return cacheRawBlocks;
+	}
+
+	public NameIndexReader setCacheRawBlocks(boolean cacheRawBlocks) {
+		this.cacheRawBlocks = cacheRawBlocks;
+		return this;
+	}
+
 	public PrefixNameValue addData(AddressNameIndexData from, long currentShift) {
 		PrefixNameValue obj = indexByRef.get(currentShift);
 		if (obj.addr != null) {
@@ -355,7 +390,7 @@ public class NameIndexReader {
 		}
 		obj.shift = currentShift;
 		obj.addr = from;
-		cachedAtoms += from.getAtomCount();
+		cachedBytes += from.getSerializedSize();
 		return obj;
 	}
 	
@@ -389,14 +424,14 @@ public class NameIndexReader {
 
 	public void clearPrefixes() {
 		indexByRef.clear();
-		cachedAtoms = 0;
+		cachedBytes = 0;
 		if (matchedKeys != null) {
 			matchedKeys.clear();
 		}
 	}
 
-	public int getCachedAtoms() {
-		return cachedAtoms;
+	public long getCachedBytes() {
+		return cachedBytes;
 	}
 
 	public void clearQuery() {

@@ -87,8 +87,8 @@ public class SpatialTextSearch {
 		
 		// max prefixes for each name reader
 		public int AUTO_CLEAR_PREFIX_CACHE_LIMIT = 1000;
-		// max parsed name index atoms kept in all files during and between searches (~0.8 KB each)
-		public int AUTO_CLEAR_PREFIX_CACHE_ATOMS = 300_000;
+		// max bytes of name index blocks kept in all files during and between searches
+		public long AUTO_CLEAR_PREFIX_CACHE_BYTES = 64 << 20;
 
 		// Deduplicate results in the end by checking osm id of the first object in combination
 		public boolean DEDUPLICATE_RES = true;
@@ -282,10 +282,10 @@ public class SpatialTextSearch {
 			length = r.getFile().length();
 			edition = r.getDateCreated();
 			for (AddressRegion a : r.getAddressIndexes()) {
-				indexReaders.add(new NameIndexReader(a));
+				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
 			}
 			for (PoiRegion a : r.getPoiIndexes()) {
-				indexReaders.add(new NameIndexReader(a));
+				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
 			}
 		}
 
@@ -567,15 +567,15 @@ public class SpatialTextSearch {
 	}
 
 	private void clearPrefixCacheIfLarge(SpatialSearchContext ctx) {
-		int atoms = 0;
+		long bytes = 0;
 		for (SpatialSearchFileCache fc : ctx.internalFile) {
 			for (NameIndexReader r : fc.indexReaders) {
 				// the query keeps the tokens with every atom and object read by this search
 				r.clearQuery();
-				atoms += r.getCachedAtoms();
+				bytes += r.getCachedBytes();
 			}
 		}
-		if (atoms > ctx.settings.AUTO_CLEAR_PREFIX_CACHE_ATOMS) {
+		if (bytes > ctx.settings.AUTO_CLEAR_PREFIX_CACHE_BYTES) {
 			for (SpatialSearchFileCache fc : ctx.internalFile) {
 				for (NameIndexReader r : fc.indexReaders) {
 					r.clearPrefixes();

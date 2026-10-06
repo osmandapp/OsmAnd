@@ -26,6 +26,8 @@ import net.osmand.binary.NameIndexReader.NameIndexReaderBytes;
 import net.osmand.binary.NameIndexReader.PrefixNameValue;
 import net.osmand.binary.NameIndexReader.ValueFreq;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
+import net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData;
+import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -248,7 +250,7 @@ public class SpatialSearchContext {
 	
 	void readAtoms() throws IOException {
 		int indxInd = 0;
-		int cachedAtoms = 0;
+		long cachedBytes = 0;
 		for (int fileInd = 0; fileInd < files.size(); fileInd++) {
 			SpatialSearchFileCache iCache = internalFile.get(fileInd);
 			BinaryMapIndexReader b = files.get(fileInd);
@@ -257,9 +259,9 @@ public class SpatialSearchContext {
 				readAtoms(tokens, b, indx, indxInd);
 				indxInd++;
 				// the matched atoms are in the tokens now, the parsed blocks are only a cache for the next search
-				cachedAtoms += indx.getCachedAtoms();
-				if (cachedAtoms > settings.AUTO_CLEAR_PREFIX_CACHE_ATOMS) {
-					cachedAtoms -= indx.getCachedAtoms();
+				cachedBytes += indx.getCachedBytes();
+				if (cachedBytes > settings.AUTO_CLEAR_PREFIX_CACHE_BYTES) {
+					cachedBytes -= indx.getCachedBytes();
 					indx.clearPrefixes();
 				}
 				NameIndexReaderBytes bytesStat = indx.getBytesStat();
@@ -562,17 +564,19 @@ public class SpatialSearchContext {
 		String curSuffix = null;
 		List<String> suffixes = new ArrayList<>();
 		List<String> commonSuffixes = new ArrayList<>();
-		boolean addr = prefix.addr != null;
-		for (String s : addr ? prefix.addr.getSuffixesDictionaryList() : prefix.poi.getSuffixesDictionaryList()) {
+		AddressNameIndexData addrData = prefix.getAddr();
+		OsmAndPoiNameIndexData poiData = addrData == null ? prefix.getPoi() : null;
+		boolean addr = addrData != null;
+		for (String s : addr ? addrData.getSuffixesDictionaryList() : poiData.getSuffixesDictionaryList()) {
 			curSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(curSuffix, s);
 			suffixes.add(prefix.key + curSuffix);
 		}
-		for (Integer i : addr ? prefix.addr.getSuffixesCommonDictionaryList()
-				: prefix.poi.getSuffixesCommonDictionaryList()) {
+		for (Integer i : addr ? addrData.getSuffixesCommonDictionaryList()
+				: poiData.getSuffixesCommonDictionaryList()) {
 			commonSuffixes.add(indx.getCommonIndexed(i));
 		}
 		if (addr && settings.SEARCH_ADDR) {
-			for (AddressNameIndexDataAtom a : prefix.addr.getAtomList()) {
+			for (AddressNameIndexDataAtom a : addrData.getAtomList()) {
 				long lid = makeAddrId(indInd, prefix.shift - a.getShiftToIndex(0));
 				long pid = 0;
 				if (a.getType() == CityBlocks.STREET_TYPE.index) {
@@ -586,7 +590,7 @@ public class SpatialSearchContext {
 				parseSuffixes(t, indx, suffixes, commonSuffixes, a, null, lid, pid, obj, allTokens);
 			}
 		} else if (!addr && settings.SEARCH_POI) {
-			for (OsmAndPoiNameIndexDataAtom a : prefix.poi.getAtomsList()) {
+			for (OsmAndPoiNameIndexDataAtom a : poiData.getAtomsList()) {
 				if (a.getPoiIndInBlockCount() == 0) {
 					// intermediate version ignore
 					continue;
