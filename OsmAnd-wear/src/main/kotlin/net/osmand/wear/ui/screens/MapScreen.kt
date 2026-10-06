@@ -74,7 +74,7 @@ fun MapScreen(
 	onPan: (dx: Float, dy: Float, seq: Int) -> Unit,
 	onRecenter: (seq: Int) -> Unit
 ) {
-	// One screen in a car is the one the driver should be looking at, and it is not this one.
+		// A car has one screen the driver should be looking at, and it is not this one.
 	if (carConnected) {
 		MessageScreen(
 			title = stringResource(R.string.wear_map_car),
@@ -83,8 +83,7 @@ fun MapScreen(
 		return
 	}
 
-	// Asking the phone for a renderer it does not have would simply never produce a frame, and
-	// the screen would sit on "loading" for as long as it stayed open.
+		// Without it no frame ever comes, and the screen would sit on "loading".
 	if (openglMissing) {
 		MessageScreen(
 			title = stringResource(R.string.wear_map_opengl_off),
@@ -98,9 +97,7 @@ fun MapScreen(
 	val width = with(LocalDensity.current) { configuration.screenWidthDp.dp.roundToPx() }
 	val height = with(LocalDensity.current) { configuration.screenHeightDp.dp.roundToPx() }
 
-	// The renderer on the phone lives exactly as long as this screen does: it is the expensive
-	// half of the feature, around 87 MB there, and nothing on the watch needs it once the map
-	// is off screen.
+	// The renderer on the phone, around 87 MB there, lives exactly as long as this screen.
 	DisposableEffect(width, height, density) {
 		onStart(width, height, density)
 		onDispose { onStop() }
@@ -109,42 +106,31 @@ fun MapScreen(
 	var shown by remember { mutableStateOf(Shown()) }
 	var pendingZoom by remember { mutableFloatStateOf(1f) }
 	var gesturing by remember { mutableStateOf(false) }
-	// Numbers every gesture asked of the phone. Frames carry the last one the phone had
-	// applied, which is what distinguishes an answer from a frame that was already on its way.
+	// Frames carry the last gesture the phone applied, which is what tells an answer from a
+	// frame that was already on its way.
 	var asked by remember { mutableIntStateOf(0) }
-	// Temporary, alongside WearMapStreamer's frame budget: how long a gesture waits for the
-	// frame that answers it, measured from this side so it covers the whole round trip.
+	// Temporary, alongside WearMapStreamer's frame budget.
 	var askedAt by remember { mutableLongStateOf(0L) }
 	var lastSeq by remember { mutableIntStateOf(0) }
 	var everShown by remember { mutableStateOf(false) }
 	val focus = remember { FocusRequester() }
 
-	// The watch screen going dark stops the frames too, but leaves the renderer standing:
-	// rebuilding it costs the tile load again, and its memory is spent either way while this
-	// screen is open.
+	// A dark screen stops the frames but leaves the renderer standing: rebuilding it costs
+	// the tile load again, and its memory is spent either way while this screen is open.
 	LifecycleEventEffect(Lifecycle.Event.ON_STOP) { onPause(true) }
 	LifecycleEventEffect(Lifecycle.Event.ON_START) { onPause(false) }
 
-	// Held for as long as the hand is on the watch: the phone has nothing new to show until it
-	// hears the gesture, and every frame that arrives meanwhile costs a webp decode and a
-	// texture upload on this UI thread.
+	// Held while the hand is on the watch: the phone has nothing new to show until it hears
+	// the gesture, and each frame meanwhile costs a decode and a texture upload here.
 	LaunchedEffect(gesturing) { onPause(gesturing) }
 
-	// Frame and gesture are one value, replaced in one write, so a composition can never catch
-	// the new frame still carrying the finished gesture's offset. Collected here rather than
-	// read as state and reset in an effect, because an effect runs a composition too late and
-	// that one stale composition is a visible jump.
+	// Frame and gesture are one value, replaced in one write: an effect resetting them runs a
+	// composition too late, and that one stale composition is a visible jump.
 	//
-	// Frames carry the gesture the phone had applied when they were drawn, so a frame older
-	// than the last gesture is not an answer to it: showing it would put the map back where it
-	// was until the real answer arrived. It is held back - but only for as long as an answer
-	// could plausibly take.
-	//
-	// The wait is bounded because the rule cannot be absolute. Gestures are sent and forgotten,
-	// and the phone starts its count again whenever the stream is rebuilt, so "never show a
-	// frame older than the last gesture" is a rule that one lost message turns into "never show
-	// a frame". Both ways out resynchronise the expectation rather than merely letting one
-	// frame through, so a stream that falls behind recovers instead of limping.
+	// A frame older than the last gesture is not an answer to it and is held back - but only
+	// for a while. Gestures are sent and forgotten and the phone restarts its count with the
+	// stream, so an absolute rule turns one lost message into "never show a frame". Both ways
+	// out resynchronise rather than let a single frame through, so the stream recovers.
 	LaunchedEffect(Unit) {
 		MapFrames.frame.collect { arrived ->
 			if (arrived == null) {
@@ -176,8 +162,7 @@ fun MapScreen(
 		}
 	}
 
-	// Detents are counted up and asked for together: a flick of the bezel is a dozen of them,
-	// and a message with a re-render behind each one lands well after the hand has stopped.
+	// Detents are counted up and asked for together: a flick of the bezel is a dozen of them.
 	LaunchedEffect(pendingZoom) {
 		if (pendingZoom == 1f) {
 			return@LaunchedEffect
@@ -189,21 +174,14 @@ fun MapScreen(
 			onZoom(pendingZoom, asked)
 			pendingZoom = 1f
 		} finally {
-			// Cleared however this ends: a gesture flag left standing keeps the phone's
-			// stream paused, and a paused stream is a map that never updates again.
+			// Cleared however this ends: a flag left standing keeps the phone's stream paused.
 			gesturing = false
 		}
 	}
 
-	// The phone drops the renderer when it has not heard from the watch for a while, which is
-	// how it notices a watch that was killed without saying so. Looking at the map is not
-	// silence, though: only gestures are sent, so a minute of simply watching had the phone
-	// tear the map down underneath it. Saying so costs one message, and resuming an unpaused
-	// stream is what "still here" means already.
-	//
-	// The same beat reopens a stream that did end, which otherwise left the screen reading
-	// "Loading map" for as long as it stayed open: the request that starts the stream is made
-	// once, when the screen opens, and nothing ever made it again.
+	// The phone drops the renderer after a minute of silence, and only gestures are sent, so
+	// simply watching the map counted as silence. The same beat reopens a stream that ended:
+	// the request that starts it is made once, when the screen opens.
 	LaunchedEffect(width, height, density) {
 		while (true) {
 			delay(STREAM_PING_MS)
@@ -218,10 +196,8 @@ fun MapScreen(
 		}
 	}
 
-	// Waiting for the answering frame cannot depend on a frame arriving to end the wait. The
-	// phone may have nothing new to show - a gesture that moved the map a little leaves most
-	// of the picture identical - so the deadline runs on its own clock, and when it passes the
-	// watch stops insisting on an answer and makes sure the phone was not left paused.
+	// The deadline runs on its own clock: the phone may have nothing new to show, so waiting
+	// for a frame to arrive would be waiting for the one event that has stopped happening.
 	LaunchedEffect(asked) {
 		if (askedAt == 0L) {
 			return@LaunchedEffect
@@ -235,12 +211,12 @@ fun MapScreen(
 		}
 	}
 
-	// Beyond the drawn frame the map is not missing, it is not drawn yet, and a chequerboard
-	// says that where flat black reads as a fault. Only beyond it, though: with no frame at all
-	// there is nothing for it to be beyond, and it is just noise behind the waiting message.
+	// Beyond the drawn frame the map is not missing but not drawn yet, which a chequerboard
+	// says and flat black does not. Only beyond it: with no frame there is nothing to be
+	// beyond, and it is noise behind the waiting message.
 	val board = MaterialTheme.colorScheme.surfaceContainer
-	// Taken from the foreground rather than from a second container shade, which in a dark
-	// scheme sits so close to the first that the squares vanish.
+	// From the foreground, not a second container shade: in a dark scheme those sit so close
+	// together that the squares vanish.
 	val boardAlternate = MaterialTheme.colorScheme.onSurface.copy(alpha = CHEQUER_CONTRAST)
 
 	ScreenScaffold {
@@ -257,10 +233,8 @@ fun MapScreen(
 		) {
 			val frame = shown.frame
 			if (frame != null) {
-				// requiredSize, not size: the frame is deliberately wider than the watch, and
-				// size() coerces it back into the parent's constraints, which throws the
-				// surplus away. Laid out larger and centred, the surplus waits off screen for
-				// a drag to bring it in.
+					// requiredSize, not size: size() coerces the frame back into the parent's
+					// constraints and throws the surplus away.
 				Image(
 					bitmap = frame,
 					contentDescription = null,
@@ -277,9 +251,8 @@ fun MapScreen(
 				MessageScreen(title = stringResource(R.string.wear_map_loading))
 			}
 
-			// The gesture surface is inset from the left rather than covering the screen: a
-			// handler there would swallow the edge swipe that leaves this screen, and not
-			// consuming the drag is not enough to give it back.
+				// Inset from the left: a handler there swallows the edge swipe that leaves this
+				// screen, and not consuming the drag is not enough to give it back.
 			Box(
 				modifier = Modifier
 					.fillMaxSize()
@@ -292,20 +265,16 @@ fun MapScreen(
 						true
 					}
 					.pointerInput(Unit) {
-						// One finger drags, two pinch, and the same loop handles both so a
-						// second finger landing mid-drag does not end the gesture. A tap is
-						// recognised here too, rather than by a detector of its own: two
-						// fingers arriving for a pinch read as two taps to one of those, and
-						// the double tap it then reported recentred the map mid-gesture.
+						// One finger drags, two pinch, in one loop so a second finger landing
+						// mid-drag does not end the gesture. A tap is recognised here too: a
+						// separate detector read a pinch as a double tap and recentred the map.
 						var lastTap = 0L
 						awaitEachGesture {
 							awaitFirstDown(requireUnconsumed = false)
 							gesturing = true
 							try {
-								// Where the shown frame already stood: a gesture that starts before
-								// the previous one's frame has arrived inherits its offset, and only
-								// what this gesture adds may be asked for again. Sending the whole
-								// offset moved the map twice for one movement of the hand.
+							// Only what this gesture adds may be asked for again: a gesture
+							// starting before the previous frame arrived inherits its offset.
 								val base = shown.drag
 								var pinch = 1f
 								var moved = false
@@ -363,13 +332,11 @@ fun MapScreen(
 }
 
 /**
- * A frame together with the gesture being shown on top of it while the phone catches up.
+ * A frame together with the gesture shown on top of it while the phone catches up.
  *
- * The gesture is not held back at the edge of what the phone drew. Stopping there reads as the
- * map being broken, where empty background says plainly that this part has not been drawn yet;
- * and what the phone is asked for stays exactly what the eye was shown, so nothing jumps once
- * the finger lifts. The surplus the phone draws decides how often that background is seen at
- * all, not how far a drag may go.
+ * The gesture is not stopped at the edge of what the phone drew: that reads as a broken map,
+ * where background says plainly it is not drawn yet. What the phone is asked for stays what
+ * the eye was shown, so nothing jumps once the finger lifts.
  */
 private data class Shown(
 	val frame: ImageBitmap? = null,
@@ -403,13 +370,7 @@ private const val CHEQUER_SIZE_PX = 24f
 
 private const val CHEQUER_CONTRAST = 0.12f
 
-/**
- * How much of the left edge is left to the swipe that leaves this screen.
- *
- * Narrower than the system's own dismiss zone, which is 15%: a map is dragged across its whole
- * width, and giving a sixth of the screen to leaving it meant a drag started on the left took
- * you out of the map instead. Dismissing still works, it just wants to start closer to the edge.
- */
+/** Narrower than the system's 15% dismiss zone: a map is dragged across its whole width. */
 private const val LEFT_EDGE_FRACTION = 0.08f
 
 /** A tenth of a zoom level per detent: a whole one per click overshoots far past the eye. */

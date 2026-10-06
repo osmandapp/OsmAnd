@@ -23,14 +23,7 @@ import net.osmand.wear.R
 import net.osmand.wear.api.DestinationGroup
 import net.osmand.wear.api.DestinationInfo
 
-/**
- * Places the phone already knows about, in one list.
- *
- * The groups are kept in the order the phone sent them rather than sorted here: home and work
- * first because they are two taps that answer most journeys, then where you were last taken,
- * then the favourites nearest to you, then what you last looked for. Only the phone can judge
- * "nearest" and "last", so only the phone does.
- */
+/** Places the phone already knows about, grouped in the order it sent them. */
 @Composable
 fun DestinationsScreen(
 	destinations: List<DestinationInfo>,

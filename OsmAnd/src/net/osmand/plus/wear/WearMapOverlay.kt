@@ -13,11 +13,8 @@ import net.osmand.plus.OsmandApplication
 /**
  * Draws what the rendered map alone cannot show: the route, where you are, and the markers.
  *
- * The phone's own layers are not reused. They ask the phone's map view for its renderer and
- * behave differently depending on which engine it runs - with OpenGL the route layer feeds
- * geometry to the core instead of painting on a canvas, so handing it ours would draw nothing.
- * These are a few polylines and circles; owning them keeps the watch's map the same whichever
- * engine the phone is on.
+ * The phone's own layers are not reused: they ask its map view for its renderer, and with
+ * OpenGL the route layer feeds geometry to the core rather than painting a canvas.
  */
 class WearMapOverlay(private val app: OsmandApplication) {
 

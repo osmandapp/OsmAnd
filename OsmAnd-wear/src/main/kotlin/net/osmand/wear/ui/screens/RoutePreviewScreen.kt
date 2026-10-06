@@ -37,11 +37,8 @@ import net.osmand.wear.api.RoutePreviewState
 import net.osmand.wear.data.MapFrames
 
 /**
- * The route the phone has worked out, before setting off.
- *
- * The map is the phone's own drawing of it and nothing is done to it here - no panning, no zoom.
- * It is there to be recognised in a glance, not explored, and the gestures that would explore it
- * are the ones that would also take you off the screen.
+ * The route the phone has worked out, before setting off. The map is its own drawing and takes
+ * no gestures: the ones that would explore it are the ones that leave the screen.
  */
 @Composable
 fun RoutePreviewScreen(
@@ -57,15 +54,14 @@ fun RoutePreviewScreen(
 	val height = with(LocalDensity.current) { configuration.screenHeightDp.dp.roundToPx() }
 
 	DisposableEffect(width, height, density) {
-		// The last frame is held for the whole app, so without this the preview opens on
-		// whatever the map screen was last showing - a working screen that is not this route.
+		// The last frame is held for the whole app: without this the preview opens on whatever
+		// the map screen was showing.
 		MapFrames.clear()
 		onStartStream(width, height, density)
 		onDispose { onStopStream() }
 	}
 
-	// The phone drops the renderer when the watch has been quiet for a minute, and a preview is
-	// looked at for far longer than that.
+	// The phone drops the renderer after a minute of quiet, and a preview is looked at longer.
 	LaunchedEffect(Unit) {
 		while (true) {
 			delay(STREAM_PING_MS)
@@ -97,8 +93,7 @@ fun RoutePreviewScreen(
 				if (preview?.calculating == false) {
 					Button(
 						onClick = onStart,
-						// The label slot lays out in a row that starts at the left, and a lone
-						// word there sits off to one side of a round button.
+						// The label slot is a row starting at the left.
 						label = {
 							Text(
 								text = stringResource(R.string.wear_route_start),
@@ -116,8 +111,7 @@ fun RoutePreviewScreen(
 
 @Composable
 private fun Summary(preview: RoutePreviewState?) {
-	// Carried on its own ground: the map underneath is whatever the route happens to cross, and
-	// a label that is legible over a park is not legible over a motorway.
+	// On its own ground: a label legible over a park is not legible over a motorway.
 	Column(
 		horizontalAlignment = Alignment.CenterHorizontally,
 		modifier = Modifier
