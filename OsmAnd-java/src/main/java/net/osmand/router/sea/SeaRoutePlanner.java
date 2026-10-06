@@ -1,4 +1,4 @@
-package net.osmand.router;
+package net.osmand.router.sea;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package net.osmand.router;
+package net.osmand.router.sea;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,9 +13,12 @@ import java.util.Set;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
+import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteResultPreparation.RouteCalcResult;
-import net.osmand.router.SeaRoutePlanner.SeaRoute;
-import net.osmand.router.SeaRoutePlanner.SeaRoutingConfig;
+import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingContext;
+import net.osmand.router.sea.SeaRoutePlanner.SeaRoute;
+import net.osmand.router.sea.SeaRoutePlanner.SeaRoutingConfig;
 import net.osmand.util.MapUtils;
 
 /**
@@ -351,7 +354,7 @@ public class BoatRoutePlanner {
 		List<RouteSegmentResult> result;
 		try {
 			RouteCalcResult calc = fe.searchRoute(ctx, a, b, null);
-			result = calc == null ? null : calc.detailed;
+			result = calc == null ? null : calc.getList();
 		} catch (IllegalArgumentException e) {
 			return null;
 		}

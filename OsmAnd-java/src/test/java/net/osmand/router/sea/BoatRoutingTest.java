@@ -1,4 +1,4 @@
-package net.osmand.router;
+package net.osmand.router.sea;
 
 import java.io.File;
 import java.io.InputStream;
@@ -18,8 +18,12 @@ import com.google.gson.Gson;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
-import net.osmand.router.BoatRoutePlanner.BoatRoute;
+import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingContext;
+import net.osmand.router.sea.BoatRoutePlanner.BoatRoute;
 import net.osmand.util.MapUtils;
 
 /**

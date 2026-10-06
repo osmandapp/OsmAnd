@@ -1,4 +1,4 @@
-package net.osmand.router;
+package net.osmand.router.sea;
 
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -12,8 +12,8 @@ import org.junit.Test;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
-import net.osmand.router.SeaRoutePlanner.SeaRoute;
-import net.osmand.router.SeaRoutePlanner.SeaRoutingConfig;
+import net.osmand.router.sea.SeaRoutePlanner.SeaRoute;
+import net.osmand.router.sea.SeaRoutePlanner.SeaRoutingConfig;
 import net.osmand.util.MapUtils;
 
 /**
@@ -177,25 +177,25 @@ public class SeaRoutePlannerObfTest {
 	}
 
 	/**
-	 * The IJsselmeer carries no coastline at all - it is a natural=water area - so a coastline-only
-	 * load sees open water and would happily route over land. Guards the reason water areas have to be
-	 * loaded as well.
+	 * The IJsselmeer carries no coastline at all - it is a natural=water area - and lies far from any coastline,
+	 * where the basemap land tiles call it land. Its ring is loaded as a shore, so the middle of the lake is water.
 	 */
 	@Test
-	public void lakeHasNoCoastlineAtAll() throws Exception {
+	public void lakeIsWaterWithoutCoastline() throws Exception {
 		List<BinaryMapIndexReader> readers = readers("Netherlands_friesland_europe_2.obf",
 				"Netherlands_noord-holland_europe_2.obf");
 		LatLon enkhuizen = new LatLon(52.7100, 5.3000), stavoren = new LatLon(52.8850, 5.3600);
 
 		SeaObstacles planning = load(readers, enkhuizen, stavoren, PLAN_ZOOM);
 
-		int coastlinePieces = 0;
+		int shorePieces = 0;
 		for (int i = 0; i < planning.getPieces().size(); i++) {
 			if (planning.getPieceLandSide(i) != 0) {
-				coastlinePieces++; // tidal flat edges nearby are barriers, not a shore of the lake
+				shorePieces++;
 			}
 		}
-		Assert.assertEquals("no coastline is expected around the IJsselmeer", 0, coastlinePieces);
+		Assert.assertTrue("the lake ring is expected as a shore", shorePieces > 0);
+		Assert.assertFalse("the middle of the IJsselmeer is water", planning.isLand(new LatLon(52.8000, 5.3000)));
 	}
 
 	@Test

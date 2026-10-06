@@ -1,11 +1,11 @@
-package net.osmand.router;
+package net.osmand.router.sea;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import net.osmand.data.LatLon;
-import net.osmand.router.SeaRoutePlanner.SeaRoute;
-import net.osmand.router.SeaRoutePlanner.SeaRoutingConfig;
+import net.osmand.router.sea.SeaRoutePlanner.SeaRoute;
+import net.osmand.router.sea.SeaRoutePlanner.SeaRoutingConfig;
 
 /**
  * Open water routing on hand-built shores (OsmAnd-Issues #3170, OsmAnd#2586).
