@@ -37,6 +37,12 @@ public class SeaRoutePlanner {
 		public double snapRadius = 3000;
 		/** How many pairs of water points around the endpoints are tried before giving up. */
 		public int maxEndpointAttempts = 16;
+		/**
+		 * Visibility checks one plan may make: a search that fails explores every corner within reach, and a long
+		 * route among thousands of corners would run for minutes. The Netherlands to west of Ireland, 1333 km round
+		 * Cornwall, takes 263 thousand; when they run out the best route found so far is returned, or none.
+		 */
+		public int maxVisibilityChecks = 500000;
 	}
 
 	public static class SeaRoute {
@@ -79,7 +85,35 @@ public class SeaRoutePlanner {
 		if (froms.isEmpty() || tos.isEmpty()) {
 			return null;
 		}
-		List<Corner> corners = corners(obstacles);
+		List<Corner> all = corners(obstacles);
+		// the corners along a coarse path over the grid cells, a wider band if that is not enough, all of them last
+		LatLon a = froms.get(0), b = tos.get(0);
+		int[] budget = { config.maxVisibilityChecks };
+		for (int width : new int[] { CORRIDOR_WIDTH, CORRIDOR_WIDTH * 4 }) {
+			java.util.Set<Long> cells = obstacles.corridor(obstacles.x(a.getLongitude()), obstacles.y(a.getLatitude()),
+					obstacles.x(b.getLongitude()), obstacles.y(b.getLatitude()), width);
+			if (cells == null) {
+				break;
+			}
+			List<Corner> corners = new ArrayList<>();
+			for (Corner c : all) {
+				if (cells.contains(obstacles.cellOf(c.x, c.y))) {
+					corners.add(c);
+				}
+			}
+			SeaRoute route = plan(obstacles, start, end, froms, tos, corners, budget);
+			if (route != null) {
+				return route;
+			}
+		}
+		return budget[0] > 0 ? plan(obstacles, start, end, froms, tos, all, budget) : null;
+	}
+
+	/** Cells on each side of the coarse path whose corners the search may use. */
+	private static final int CORRIDOR_WIDTH = 3;
+
+	private SeaRoute plan(SeaObstacles obstacles, LatLon start, LatLon end, List<LatLon> froms, List<LatLon> tos,
+			List<Corner> corners, int[] budget) {
 		int attempts = 0, expansions = 0, visibilityChecks = 0;
 		double direct = distance(obstacles, start, end);
 		SeaRoute best = null;
@@ -95,12 +129,12 @@ public class SeaRoutePlanner {
 				if (i >= froms.size() || j >= tos.size()) {
 					continue;
 				}
-				if (attempts == config.maxEndpointAttempts) {
+				if (attempts == config.maxEndpointAttempts || budget[0] <= 0) {
 					break search;
 				}
 				attempts++;
 				SeaRoute route = search(obstacles, corners, froms.get(i), tos.get(j),
-						distance(obstacles, froms.get(i), tos.get(j)) * MAX_DETOUR + DETOUR_ALLOWANCE);
+						distance(obstacles, froms.get(i), tos.get(j)) * MAX_DETOUR + DETOUR_ALLOWANCE, budget);
 				expansions += route.expansions;
 				visibilityChecks += route.visibilityChecks;
 				if (route.points.isEmpty()) {
@@ -119,6 +153,7 @@ public class SeaRoutePlanner {
 			}
 		}
 		if (best != null) {
+			best.corners = corners.size();
 			best.expansions = expansions;
 			best.visibilityChecks = visibilityChecks;
 			best.attempts = attempts;
@@ -142,7 +177,8 @@ public class SeaRoutePlanner {
 	private static final double MAX_DETOUR = 3;
 	private static final double DETOUR_ALLOWANCE = 10000;
 
-	private SeaRoute search(SeaObstacles obstacles, List<Corner> corners, LatLon from, LatLon to, double maxDistance) {
+	private SeaRoute search(SeaObstacles obstacles, List<Corner> corners, LatLon from, LatLon to, double maxDistance,
+			int[] budget) {
 		SeaRoute route = new SeaRoute();
 		route.corners = corners.size();
 		int size = corners.size() + 2;
@@ -156,52 +192,77 @@ public class SeaRoutePlanner {
 			y[i + 2] = corners.get(i).y;
 		}
 
-		double[] g = new double[size];
+		// Lazy A*: an edge goes into the queue unchecked and is checked against the shore only when its end is taken
+		// out - most candidate edges never are, while checking every visible corner at every expansion costs
+		// thousands of checks per step on a long route. A blocked edge gives its end the cheapest settled parent it
+		// can see instead; blocked pairs are remembered, so no pair is checked twice.
+		double[] g = new double[size], queued = new double[size];
 		int[] parent = new int[size];
 		boolean[] settled = new boolean[size];
 		Arrays.fill(g, Double.POSITIVE_INFINITY);
+		Arrays.fill(queued, Double.POSITIVE_INFINITY);
 		Arrays.fill(parent, -1);
-		g[0] = 0;
+		List<Integer> settledNodes = new ArrayList<>();
+		java.util.Set<Long> blocked = new java.util.HashSet<>();
+		// entries: estimate, node, parent, distance, 1 when the edge from the parent is checked
 		PriorityQueue<double[]> queue = new PriorityQueue<>(new java.util.Comparator<double[]>() {
 			@Override
 			public int compare(double[] a, double[] b) {
 				return Double.compare(a[0], b[0]);
 			}
 		});
-		queue.add(new double[] { heuristic(x, y, 0), 0 });
+		queued[0] = 0;
+		queue.add(new double[] { heuristic(x, y, 0), 0, -1, 0, 1 });
 		while (!queue.isEmpty()) {
 			double[] top = queue.poll();
 			if (top[0] > maxDistance) {
 				break;
 			}
-			int u = (int) top[1];
-			if (u == 1) {
+			int v = (int) top[1], u = (int) top[2];
+			double distance = top[3];
+			boolean checked = top[4] > 0;
+			if (settled[v] || (!checked && distance > queued[v])) {
+				continue; // settled already, or a cheaper parent was queued since
+			}
+			if (!checked) {
+				int seen = visible(obstacles, x, y, u, v, size, blocked, budget, route);
+				if (seen < 0) {
+					return route; // out of checks: no route rather than minutes of search
+				}
+				if (seen == 0) {
+					double[] other = cheapestVisibleParent(obstacles, corners, x, y, g, settledNodes, v, size, blocked,
+							budget, route);
+					if (budget[0] < 0) {
+						return route;
+					}
+					queued[v] = other == null ? Double.POSITIVE_INFINITY : other[1];
+					if (other != null && other[1] + heuristic(x, y, v) <= maxDistance) {
+						queue.add(new double[] { other[1] + heuristic(x, y, v), v, other[0], other[1], 1 });
+					}
+					continue;
+				}
+			}
+			settled[v] = true;
+			g[v] = distance;
+			parent[v] = u;
+			settledNodes.add(v);
+			route.expansions++;
+			if (v == 1) {
 				break;
 			}
-			if (settled[u]) {
-				continue;
-			}
-			settled[u] = true;
-			route.expansions++;
-			for (int v = 1; v < size; v++) {
-				if (v == u || settled[v]) {
+			for (int w = 1; w < size; w++) {
+				if (w == v || settled[w]) {
 					continue;
 				}
-				double distance = g[u] + Math.hypot(x[v] - x[u], y[v] - y[u]);
-				if (distance >= g[v] || distance + heuristic(x, y, v) >= g[1]) {
+				double d = distance + Math.hypot(x[w] - x[v], y[w] - y[v]);
+				if (d >= queued[w] || d + heuristic(x, y, w) > maxDistance) {
 					continue;
 				}
-				if (v >= 2 && !corners.get(v - 2).isTangentFrom(x[u], y[u])) {
+				if (w >= 2 && !corners.get(w - 2).isTangentFrom(x[v], y[v])) {
 					continue;
 				}
-				route.visibilityChecks++;
-				// every leg keeps the same distance from the shore; the endpoints were moved out to it
-				if (!obstacles.isClear(x[u], y[u], x[v], y[v], config.minClearance)) {
-					continue;
-				}
-				g[v] = distance;
-				parent[v] = u;
-				queue.add(new double[] { distance + heuristic(x, y, v), v });
+				queued[w] = d;
+				queue.add(new double[] { d + heuristic(x, y, w), w, v, d, 0 });
 			}
 		}
 		if (Double.isInfinite(g[1])) {
@@ -212,6 +273,49 @@ public class SeaRoutePlanner {
 			route.points.add(0, obstacles.latLon(x[v], y[v]));
 		}
 		return route;
+	}
+
+	/** 1 when u sees v, 0 when the shore is in the way, -1 when out of checks. */
+	private int visible(SeaObstacles obstacles, double[] x, double[] y, int u, int v, int size, java.util.Set<Long> blocked,
+			int[] budget, SeaRoute route) {
+		long pair = (long) Math.min(u, v) * size + Math.max(u, v);
+		if (blocked.contains(pair)) {
+			return 0;
+		}
+		route.visibilityChecks++;
+		if (--budget[0] < 0) {
+			return -1;
+		}
+		// every leg keeps the same distance from the shore; the endpoints were moved out to it
+		if (obstacles.isClear(x[u], y[u], x[v], y[v], config.minClearance)) {
+			return 1;
+		}
+		blocked.add(pair);
+		return 0;
+	}
+
+	/** {parent, distance}: the settled node with the shortest visible way to v, null when none sees it. */
+	private double[] cheapestVisibleParent(SeaObstacles obstacles, List<Corner> corners, double[] x, double[] y,
+			double[] g, List<Integer> settledNodes, int v, int size, java.util.Set<Long> blocked, int[] budget,
+			SeaRoute route) {
+		List<double[]> candidates = new ArrayList<>();
+		for (int w : settledNodes) {
+			if (v >= 2 && !corners.get(v - 2).isTangentFrom(x[w], y[w])) {
+				continue;
+			}
+			candidates.add(new double[] { g[w] + Math.hypot(x[v] - x[w], y[v] - y[w]), w });
+		}
+		candidates.sort((a, b) -> Double.compare(a[0], b[0]));
+		for (double[] c : candidates) {
+			int seen = visible(obstacles, x, y, (int) c[1], v, size, blocked, budget, route);
+			if (seen < 0) {
+				return null;
+			}
+			if (seen > 0) {
+				return new double[] { c[1], c[0] };
+			}
+		}
+		return null;
 	}
 
 	/**

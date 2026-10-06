@@ -84,7 +84,10 @@ public class BoatRoutingTest {
 		return cases;
 	}
 
-	@Test(timeout = 180000)
+	/** A case without maxTimeMs. */
+	private static final long DEFAULT_TIME_LIMIT_MS = 180000;
+
+	@Test
 	public void route() throws Exception {
 		List<BinaryMapIndexReader> readers = new ArrayList<>();
 		for (String name : boatCase.maps) {
@@ -110,7 +113,23 @@ public class BoatRoutingTest {
 				RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
 
 		long started = System.currentTimeMillis();
-		List<BoatRoute> legs = planner(readers).route(fe, ctx, points);
+		// a hang fails at the case's own limit, not after minutes: the planner cannot be interrupted, so it runs in a
+		// daemon thread that is left behind
+		BoatRoutePlanner planner = planner(readers);
+		java.util.concurrent.ExecutorService executor = java.util.concurrent.Executors.newSingleThreadExecutor(r -> {
+			Thread thread = new Thread(r, "boat-route");
+			thread.setDaemon(true);
+			return thread;
+		});
+		java.util.concurrent.Future<List<BoatRoute>> future = executor.submit(() -> planner.route(fe, ctx, points));
+		executor.shutdown();
+		long limitMs = boatCase.maxTimeMs != null ? boatCase.maxTimeMs : DEFAULT_TIME_LIMIT_MS;
+		List<BoatRoute> legs;
+		try {
+			legs = future.get(limitMs, java.util.concurrent.TimeUnit.MILLISECONDS);
+		} catch (java.util.concurrent.TimeoutException e) {
+			throw new AssertionError("no route after " + limitMs + " ms - " + boatCase.name + ", " + boatCase.url);
+		}
 		long timeMs = System.currentTimeMillis() - started;
 		Assert.assertEquals(points.size() - 1, legs.size());
 		String what = boatCase.name + " [" + boatCase.status + "]: " + legs.stream().map(l -> l.decision.toString())
