@@ -97,19 +97,35 @@ class WearLegacyMapSource(private val app: OsmandApplication) : WearMapSource {
 	 */
 	override fun fit(bounds: QuadRect) {
 		val current = box ?: return
-		// North up, and not only because a route laid out to be read wants it. A turned box
-		// reports the bounds of its turned rectangle, which reach a diagonal beyond what is
-		// actually on screen, and the test below would pass a zoom too close every time.
-		current.setRotate(0f)
 		current.setLatLonCenter(
 			(bounds.top + bounds.bottom) / 2, (bounds.left + bounds.right) / 2)
 		for (zoom in MAX_ZOOM downTo MIN_ZOOM) {
 			current.setZoomAndAnimation(zoom, 0.0, 0.0)
-			val shown = current.latLonBounds
-			if (shown.left <= bounds.left && shown.right >= bounds.right &&
-					shown.top >= bounds.top && shown.bottom <= bounds.bottom) {
+			if (current.holds(bounds)) {
 				return
 			}
+		}
+	}
+
+	/**
+	 * Whether all of [bounds] lands on the screen, asked in screen pixels rather than in degrees.
+	 *
+	 * The map keeps whatever heading the phone is on - OsmAnd has four of them and does not force
+	 * north up for a route preview either - and a turned box reports its bounds in degrees as
+	 * the extent of the turned rectangle, which reaches out to its diagonal. Judged by that, a
+	 * route half as wide again as the screen appears to fit.
+	 *
+	 * The corners are enough: the projection is affine, so the whole rectangle lands inside the
+	 * shape its corners make, and the route lands inside the rectangle.
+	 */
+	private fun RotatedTileBox.holds(bounds: QuadRect): Boolean {
+		val corners = arrayOf(
+			bounds.top to bounds.left, bounds.top to bounds.right,
+			bounds.bottom to bounds.left, bounds.bottom to bounds.right)
+		return corners.all { (latitude, longitude) ->
+			val x = getPixXFromLatLon(latitude, longitude)
+			val y = getPixYFromLatLon(latitude, longitude)
+			x >= 0 && y >= 0 && x <= pixWidth && y <= pixHeight
 		}
 	}
 
