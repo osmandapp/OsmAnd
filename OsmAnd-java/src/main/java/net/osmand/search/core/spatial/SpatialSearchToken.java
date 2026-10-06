@@ -161,7 +161,7 @@ public class SpatialSearchToken {
 	}
 	
 	
-	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, boolean names) {
+	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats) {
 		return new NameIndexReaderMatcher(word) {
 			
 			@Override
@@ -186,16 +186,8 @@ public class SpatialSearchToken {
 				}
 				
 				String alignedKey = SearchAlgorithms.alignChars(key);
-				boolean matched;
-				if (names && incomplete && key.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
-					matched = false; // its objects are read once a word of the category is typed in full
-				} else if (names && isOnlyFullMatch()) {
-					int l = wordNoDot.length(); // keys of the whole word only: 's', 's-ba', '2.so'
-					matched = alignedKey.startsWith(wordNoDot) && (alignedKey.length() == l || !Character.isLetterOrDigit(alignedKey.charAt(l)));
-				} else {
-					// could be empty after align so match = true! ("''" -> "")
-					matched = matchAlignedKey(alignedKey);
-				}
+				// could be empty after align so match = true! ("''" -> "")
+				boolean matched = matchAlignedKey(alignedKey);
 				if (!matched && mainNumber > 0) {
 					// 4th - key, "4" token
 					matched = Algorithms.extractFirstIntegerNumber(key) == mainNumber;
