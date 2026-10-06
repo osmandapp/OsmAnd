@@ -11,7 +11,6 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -163,11 +162,7 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	@Override
 	public boolean isDuplicate(@NonNull ITileSource item) {
-		OsmandSettings.TileSourceNameCheck nameCheck = app.getSettings().checkTileSourceNameStatus(item.getName());
-		if (!(nameCheck instanceof OsmandSettings.TileSourceNameCheck.ValidName validNameCheck)) {
-			return false;
-		}
-		return existingTileSources.containsValue(validNameCheck.safeName());
+		return existingTileSources.containsValue(item.getName());
 	}
 
 	@NonNull

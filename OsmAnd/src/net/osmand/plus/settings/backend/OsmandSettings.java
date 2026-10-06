@@ -127,6 +127,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 
 public class OsmandSettings {
@@ -149,7 +150,7 @@ public class OsmandSettings {
 
 	public static final String TILES_NAME_PROBE_DIRNAME = ".probe";
 
-	private static final Pattern STRIP_EMOJI_PATTERN =
+	private static final Pattern STRIP_EMOJI_AND_SPECIALS_PATTERN =
 			Pattern.compile("[[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}]\\uFE0F\\uFE0E\\u200D]");
 
 	/// Settings variables
@@ -2301,8 +2302,11 @@ public class OsmandSettings {
 		File dir = new File(tPath, toInstall.getName());
 		dir.mkdirs();
 		if (!dir.isDirectory()) {
-			// Some SD card file systems reject emoji and other special characters in folder names
-			String safeName = getSanitizedTileSourceName(toInstall.getName());
+			TileSourceNameCheck nameCheck = checkTileSourceNameStatus(toInstall.getName());
+			if (!(nameCheck instanceof TileSourceNameCheck.ValidName validNameCheck)) {
+				return false;
+			}
+			String safeName = validNameCheck.safeName();
 			if (Algorithms.isEmpty(safeName)) {
 				return false;
 			}
@@ -2351,30 +2355,37 @@ public class OsmandSettings {
 	@NonNull
 	public List<Pair<TileSourceTemplate, TileSourceNameCheck>> checkTileSourcesNameStatus(@NonNull List<TileSourceTemplate> templates) {
 		File tilesFolder = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-		List<Pair<TileSourceTemplate, TileSourceNameCheck>> results = new ArrayList<>();
-		boolean checkEncounteredError = false;
-		for (TileSourceTemplate template: templates) {
-			if (checkEncounteredError) {
-				results.add(new Pair<>(template, TileSourceNameCheck.Failure.CHECK_ERROR));
-			} else {
-				TileSourceNameCheck check = runTileSourceNameStatusCheck(tilesFolder, template.getName());
+
+		return runTileSourceNameCheckWithCleanup(tilesFolder, templates, (folder, data) -> {
+			List<Pair<TileSourceTemplate, TileSourceNameCheck>> results = new ArrayList<>();
+			for (TileSourceTemplate template : data) {
+				TileSourceNameCheck check = runTileSourceNameStatusCheck(folder, template.getName());
 				results.add(new Pair<>(template, check));
-				if (check == TileSourceNameCheck.Failure.CHECK_ERROR) {
-					checkEncounteredError = true;
-				}
 			}
-		}
-		try {
-			cleanupTilesNameProbeFolder(tilesFolder);
-		} catch (Exception e) {
-			LOG.error("Error while cleaning up tile source names probe folder", e);
-		}
-		return results;
+			return results;
+		});
+	}
+
+	@NonNull
+	public List<Pair<String, TileSourceNameCheck>> checkTileSourcesNameStatusByNames(@NonNull List<String> names) {
+		File tilesFolder = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+		return runTileSourceNameCheckWithCleanup(tilesFolder, names, (folder, data) -> {
+			List<Pair<String, TileSourceNameCheck>> results = new ArrayList<>();
+			for (String name : data) {
+				TileSourceNameCheck check = runTileSourceNameStatusCheck(folder, name);
+				results.add(new Pair<>(name, check));
+			}
+			return results;
+		});
 	}
 
 	@NonNull
 	private TileSourceNameCheck checkTileSourceNameStatus(@NonNull File tilesFolder, @NonNull String name) {
-		TileSourceNameCheck result = runTileSourceNameStatusCheck(tilesFolder, name);
+		return runTileSourceNameCheckWithCleanup(tilesFolder, name, this::runTileSourceNameStatusCheck);
+	}
+
+	private <T, U> U runTileSourceNameCheckWithCleanup(@NonNull File tilesFolder, T object, BiFunction<File, T, U> action) {
+		U result = action.apply(tilesFolder, object);
 		try {
 			cleanupTilesNameProbeFolder(tilesFolder);
 		} catch (Exception e) {
@@ -2383,6 +2394,19 @@ public class OsmandSettings {
 		return result;
 	}
 
+
+	private boolean isTileSourceFileNotInFolder(@NonNull File tilesFolder, @NonNull String name) {
+		try {
+			File file = new File(tilesFolder, name).getCanonicalFile();
+			File parent = file.getParentFile();
+			boolean isDirectChild = parent != null
+					&& parent.equals(tilesFolder.getCanonicalFile())
+					&& file.getName().equals(name);
+			return !isDirectChild;
+		} catch (IOException e) {
+			return true;
+		}
+	}
 	private boolean checkTileSourceFileExist(@NonNull File tilesFolder, @NonNull String name) {
 		File f = new File(tilesFolder, name);
 		if (f.exists()) {
@@ -2393,40 +2417,40 @@ public class OsmandSettings {
 	}
 
 	@NonNull
-	private TileSourceNameCheck runTileSourceNameStatusCheck(@NonNull File tilesFolder, @NonNull String aName) {
-		try {
-			String name = Algorithms.sanitizeFileName(aName);
-			if (Algorithms.isEmpty(name)) {
-				return TileSourceNameCheck.Failure.INVALID_NAME;
-			}
-			if (checkTileSourceFileExist(tilesFolder, name)) {
-				return new TileSourceNameCheck.ValidName(name, true);
-			}
-			if (checkTileSourceNameAcceptedByFS(tilesFolder, name)) {
-				return new TileSourceNameCheck.ValidName(name, false);
-			}
-			String sanitized = getSanitizedTileSourceName(name);
-			if (Algorithms.isEmpty(sanitized)) {
-				return TileSourceNameCheck.Failure.INVALID_NAME;
-			}
-			if (checkTileSourceFileExist(tilesFolder, sanitized)) {
-				return new TileSourceNameCheck.ValidName(sanitized, true);
-			}
-			if (checkTileSourceNameAcceptedByFS(tilesFolder, sanitized)) {
-				return new TileSourceNameCheck.ValidName(sanitized, false);
-			} else {
-				return TileSourceNameCheck.Failure.INVALID_NAME;
-			}
-		} catch (SecurityException e) {
-			return TileSourceNameCheck.Failure.CHECK_ERROR;
+	private TileSourceNameCheck runTileSourceNameStatusCheck(@NonNull File tilesFolder, @NonNull String name) {
+		if (Algorithms.isEmpty(name)) {
+			return new TileSourceNameCheck.InvalidName(name);
+		}
+		if (isTileSourceFileNotInFolder(tilesFolder, name)) {
+			return new TileSourceNameCheck.InvalidName(name);
+		}
+		if (checkTileSourceFileExist(tilesFolder, name)) {
+			return new TileSourceNameCheck.ValidName(name, true);
+		}
+		if (checkTileSourceNameAcceptedByFS(tilesFolder, name)) {
+			return new TileSourceNameCheck.ValidName(name, false);
+		}
+		String sanitized = getSanitizedTileSourceName(name);
+		if (Algorithms.isEmpty(sanitized)) {
+			return new TileSourceNameCheck.InvalidName(name);
+		}
+		if (isTileSourceFileNotInFolder(tilesFolder, sanitized)) {
+			return new TileSourceNameCheck.InvalidName(name);
+		}
+		if (checkTileSourceFileExist(tilesFolder, sanitized)) {
+			return new TileSourceNameCheck.ValidName(sanitized, true);
+		}
+		if (checkTileSourceNameAcceptedByFS(tilesFolder, sanitized)) {
+			return new TileSourceNameCheck.ValidName(sanitized, false);
+		} else {
+			return new TileSourceNameCheck.InvalidName(name);
 		}
 	}
 
-	public sealed interface TileSourceNameCheck {
+	public interface TileSourceNameCheck {
 		record ValidName(@NonNull String safeName, boolean exists) implements TileSourceNameCheck {
 		}
-
-		enum Failure implements TileSourceNameCheck {INVALID_NAME, CHECK_ERROR}
+		record InvalidName(@NonNull String invalidName) implements TileSourceNameCheck {}
 	}
 
 	private boolean checkTileSourceNameAcceptedByFS(@NonNull File parentFolder, @NonNull String fileName) {
@@ -2457,7 +2481,7 @@ public class OsmandSettings {
 
 	@NonNull
 	private String stripEmojis(@NonNull String text) {
-		return STRIP_EMOJI_PATTERN.matcher(text).replaceAll("");
+		return STRIP_EMOJI_AND_SPECIALS_PATTERN.matcher(text).replaceAll("");
 	}
 
 	public Map<String, String> getTileSourceEntries() {

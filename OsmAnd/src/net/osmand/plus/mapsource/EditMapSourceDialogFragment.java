@@ -328,12 +328,8 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		try {
 			String nameInputValue = nameEditText.getText().toString();
 			TileSourceNameCheck nameStatus = settings.checkTileSourceNameStatus(nameInputValue);
-			if (nameStatus == TileSourceNameCheck.Failure.INVALID_NAME) {
+			if (nameStatus instanceof TileSourceNameCheck.InvalidName) {
 				app.showToastMessage(R.string.invalid_tile_source_name);
-				return false;
-			}
-			if (nameStatus == TileSourceNameCheck.Failure.CHECK_ERROR) {
-				app.showToastMessage(R.string.shared_string_unexpected_error);
 				return false;
 			}
 			if (!(nameStatus instanceof TileSourceNameCheck.ValidName validNameStatus)) {
@@ -368,6 +364,9 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof OnMapSourceUpdateListener) {
 				((OnMapSourceUpdateListener) fragment).onMapSourceUpdated();
+			}
+			if (!nameInputValue.equals(newName)) {
+				app.showToastMessage(R.string.map_source_saved_as, template.getName());
 			}
 			return true;
 		} catch (RuntimeException e) {

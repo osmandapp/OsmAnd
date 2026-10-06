@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
@@ -540,9 +541,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				if (Algorithms.isEmpty(downloaded)) {
 					return Collections.emptyList();
 				}
-				return settings.checkTileSourcesNameStatus(downloaded).stream()
-						.map(r -> new TileSourceTemplateInfo(r.first, r.second))
-						.collect(Collectors.toList());
+				List<TileSourceTemplateInfo> list = new ArrayList<>();
+				for (Pair<TileSourceTemplate, TileSourceNameCheck> r : settings.checkTileSourcesNameStatus(downloaded)) {
+					TileSourceTemplateInfo tileSourceTemplateInfo = new TileSourceTemplateInfo(r.first, r.second);
+					list.add(tileSourceTemplateInfo);
+				}
+				return list;
 			}
 
 			@Override
@@ -558,9 +562,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					return;
 				}
 
-				List<TileSourceTemplateInfo> downloaded = allDownloaded.stream()
-						.filter(info -> (info.nameCheck instanceof TileSourceNameCheck.ValidName))
-						.collect(Collectors.toList());
+				List<TileSourceTemplateInfo> downloaded = new ArrayList<>();
+				for (TileSourceTemplateInfo tileSourceTemplateInfo : allDownloaded) {
+					if ((tileSourceTemplateInfo.nameCheck instanceof TileSourceNameCheck.ValidName)) {
+						downloaded.add(tileSourceTemplateInfo);
+					}
+				}
 				if (Algorithms.isEmpty(downloaded)) {
 					app.showShortToastMessage(R.string.shared_string_io_error);
 					return;

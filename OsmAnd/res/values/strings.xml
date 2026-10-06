@@ -12,6 +12,7 @@
 	Thx - Hardy
 -->
 	<string name="invalid_tile_source_name">Tile source name is not valid.</string>
+	<string name="map_source_saved_as">Map source saved as \'%s\'.</string>
 	<string name="multimedia_notes_view_descr">Your A/V notes are in %1$s.</string>
 	<string name="shared_string_file">File</string>
 	<string name="shared_string_format">Format</string>
