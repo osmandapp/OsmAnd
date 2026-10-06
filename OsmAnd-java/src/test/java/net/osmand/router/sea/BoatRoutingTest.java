@@ -84,8 +84,8 @@ public class BoatRoutingTest {
 		return cases;
 	}
 
-	/** A case without maxTimeMs. */
-	private static final long DEFAULT_TIME_LIMIT_MS = 180000;
+	/** A case without maxTimeMs: every working case takes a few seconds, a hang shows up in 20. */
+	private static final long DEFAULT_TIME_LIMIT_MS = 20000;
 
 	@Test
 	public void route() throws Exception {
@@ -185,6 +185,11 @@ public class BoatRoutingTest {
 				use.add(base);
 			}
 			SeaObstacles obstacles = SeaObstacles.readShores(use, minLat, minLon, maxLat, maxLon, offshore ? 9 : 12);
+			if (base != null && !offshore && obstacles.getSegmentsCount() == 0) {
+				// as the server does: no detailed map here, the basemap is better than nothing
+				use.add(base);
+				obstacles = SeaObstacles.readShores(use, minLat, minLon, maxLat, maxLon, 11);
+			}
 			obstacles.setFarFromShore(landTiles);
 			return obstacles;
 		});
