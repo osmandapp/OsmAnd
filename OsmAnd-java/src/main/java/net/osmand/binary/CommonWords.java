@@ -105,9 +105,17 @@ public class CommonWords {
 	}
 	
 	
+	// search v1: an English abbreviation shares the rank of its full word (the rules of spatial search do not feed it)
+	private static final String[][] ABBREVIATIONS = {
+			{ "e", "east" }, { "w", "west" }, { "s", "south" }, { "n", "north" }, { "sw", "southwest" },
+			{ "se", "southeast" }, { "nw", "northwest" }, { "ne", "northeast" }, { "ln", "lane" }, { "dr", "drive" },
+			{ "rd", "road" }, { "av", "avenue" }, { "st", "street" }, { "hwy", "highway" }, { "blvd", "boulevard" } };
+
 	private void addAbbrevationsToCommon() {
-		// the predefined vocabulary is English (street, road, drive...), as the address expansion rules
-		Map<String, String> abbreviations = Abbreviations.getAbbreviations("en");
+		Map<String, String> abbreviations = new LinkedHashMap<>();
+		for (String[] pair : ABBREVIATIONS) {
+			abbreviations.put(pair[0], pair[1]);
+		}
 		Iterator<Entry<String, String>> it = abbreviations.entrySet().iterator();
 		while (it.hasNext()) {
 			Entry<String, String> e = it.next();

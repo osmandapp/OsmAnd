@@ -516,7 +516,8 @@ public class SpatialSearchContext {
 			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
-				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats, locale)));
+				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word,
+						t.getPrefixMatcher(stats, locale, indx.poiRegion != null)));
 				stats.sub1FileAtomsTime.finish();
 				if (matchedPrefixes == null) {
 					continue;
@@ -990,7 +991,7 @@ public class SpatialSearchContext {
 					if (numeric) {
 						numericNotMatch = !t.word.contains(otherName); // "us 15" data, "us-15" token
 					}
-					if (!Abbreviations.isCommonSkipOtherCnt(otherName, locale) &&
+					if (!Abbreviations.isCommonSkipOtherCnt(otherName, locale, object) &&
 						 !isWordCommonlyUsed(indx, otherName)) { // To choose Tour eiffel or onlyWest / North !
 						other++;
 					}
@@ -1017,6 +1018,7 @@ public class SpatialSearchContext {
 		}
 		NameIndexAtom atom = new NameIndexAtom(name, type, lid, pid, obj, streetCity, other, otherFound, coords,
 				nearByType, -1);
+		atom.locale = locale == null ? "" : locale;
 		atom.distinctFoundCnt = distinct;
 		atom.poiTypes = poiTypes;
 		atom.elo = elo;
@@ -1134,6 +1136,7 @@ public class SpatialSearchContext {
 							atom.parentid, atom.object, atom.cityAsStreet, atom.otherWordsCnt, atom.otherFoundCnt,
 							atom.coords, atom.nearbyRadius, t.originalOrder);
 					atomB.distinctFoundCnt = atom.distinctFoundCnt; // the house number names no street
+					atomB.locale = atom.locale;
 					token.addAtom(atomB);
 				}
 

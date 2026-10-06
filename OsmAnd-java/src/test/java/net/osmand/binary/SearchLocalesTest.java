@@ -29,6 +29,19 @@ public class SearchLocalesTest {
 	}
 
 	@Test
+	public void groupAndTranslitComeFromTheSameTable() {
+		assertEquals("esl", SearchLocales.groupForMap("Russia_moscow_asia_2.obf"));
+		assertEquals("de", SearchLocales.groupForMap("Switzerland_zurich_europe"));
+		assertEquals("it", SearchLocales.groupForMap("Switzerland_ticino_europe"));
+		assertEquals("mag", SearchLocales.groupForMap("Morocco_africa"));
+		assertEquals("oth", SearchLocales.groupForMap("Antarctica"));
+		assertNull(SearchLocales.groupForMap("World_basemap"));
+		assertEquals("ja", SearchLocales.translitForMap("Japan_kanto_asia"));
+		assertEquals("zh", SearchLocales.translitForMap("China_asia"));
+		assertNull(SearchLocales.translitForMap("Taiwan_asia"));
+	}
+
+	@Test
 	public void mapPrefixKeepsSubregionWithItsOwnLocale() {
 		assertEquals("Switzerland_ticino", SearchLocales.mapPrefix("Switzerland_ticino_europe_2.obf"));
 		assertEquals("Belgium_flanders", SearchLocales.mapPrefix("Belgium_flanders_europe_2.obf"));
@@ -88,7 +101,7 @@ public class SearchLocalesTest {
 	@Test
 	public void dictionariesAreReadOnlyAndOverriddenExplicitly() {
 		try {
-			Abbreviations.getAbbreviations("en_US").put("st", "Stone");
+			SearchVariantRules.forLocale("en_US").skipPenalty().put("st", java.util.List.of("street"));
 			fail("dictionary must be read-only");
 		} catch (UnsupportedOperationException expected) {
 			// ok

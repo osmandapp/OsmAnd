@@ -5,7 +5,6 @@ import net.osmand.util.SearchAlgorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -41,43 +40,50 @@ public class Abbreviations {
 	private static final class Dictionary {
 		// query word -> its forms and reverse forms, in the order of the rules
 		final Map<String, List<QueryForm>> forms = new HashMap<>();
-		// rule word -> its main form, both common words (CommonWords shares the frequency of the pair)
-		final Map<String, String> abbreviations = new LinkedHashMap<>();
 		final Set<String> buildingAbbreviations;
 		final Set<String> conjunctions;
-		final Set<String> commonSkipOtherCnt;
+		// word of a name -> owners whose names it does not penalize (<skipPenalty>, ignorable words, <class1/2>)
+		final Map<String, List<String>> penaltyFree;
 		// experiments: query word -> forms that replace the forms of the rules (empty list: none)
 		final Map<String, List<String>> overrides;
 
 		Dictionary(SearchVariantRules rules, Map<String, List<String>> overrides) {
+			Map<String, SearchVariantRules.WordRule> ruleOfWord = new HashMap<>();
+			for (SearchVariantRules.WordRule rule : rules.query()) {
+				ruleOfWord.put(rule.word(), rule);
+			}
 			for (String word : rules.formWords()) {
 				List<QueryForm> list = new ArrayList<>();
 				for (SearchVariantRules.Form form : rules.forms(word)) {
-					list.add(new QueryForm(form.object(), form.word()));
+					// a reverse form leads to the word of a rule that has this word as its form ("street" -> "st")
+					SearchVariantRules.WordRule other = ruleOfWord.get(form.word());
+					list.add(new QueryForm(form.object(), form.word(), other != null && other.hasForm(word)));
 				}
 				// a token is aligned (ß -> ss, no diacritics): "Straße" asks for "strasse"
 				forms.put(SearchAlgorithms.alignChars(word), List.copyOf(list));
 			}
-			for (SearchVariantRules.WordRule rule : rules.query()) {
-				SearchVariantRules.Form main = rule.mainForm();
-				if (main != null && rules.common().contains(rule.word()) && rules.common().contains(main.word())) {
-					abbreviations.put(rule.word(), main.word());
+			Map<String, List<String>> penaltyFree = new HashMap<>(rules.skipPenalty());
+			List<String> everyOwner = List.of(SearchVariantRules.ANY_OBJECT);
+			for (String word : rules.ignorables()) {
+				penaltyFree.put(word, everyOwner);
+			}
+			for (Map.Entry<String, Integer> e : rules.classes().entrySet()) {
+				if (e.getValue() != SearchVariantRules.CLASS_ALWAYS) {
+					// a service or frequent word only names the kind of an object
+					penaltyFree.put(e.getKey(), everyOwner);
 				}
 			}
-			Set<String> commonSkipOtherCnt = new TreeSet<>(rules.common());
-			commonSkipOtherCnt.addAll(rules.ignorables());
 			this.buildingAbbreviations = Collections.unmodifiableSet(new TreeSet<>(rules.buildings()));
 			this.conjunctions = Collections.unmodifiableSet(new TreeSet<>(rules.ignorables()));
-			this.commonSkipOtherCnt = Collections.unmodifiableSet(commonSkipOtherCnt);
+			this.penaltyFree = Collections.unmodifiableMap(penaltyFree);
 			this.overrides = overrides;
 		}
 
 		private Dictionary(Dictionary base, Map<String, List<String>> overrides) {
 			this.forms.putAll(base.forms);
-			this.abbreviations.putAll(base.abbreviations);
 			this.buildingAbbreviations = base.buildingAbbreviations;
 			this.conjunctions = base.conjunctions;
-			this.commonSkipOtherCnt = base.commonSkipOtherCnt;
+			this.penaltyFree = base.penaltyFree;
 			this.overrides = overrides;
 		}
 	}
@@ -150,8 +156,11 @@ public class Abbreviations {
 		return false;
 	}
 
-	/** A form of a query word: the word of a name it stands for and the owners of names it applies to. */
-	public record QueryForm(String object, String word) {
+	/**
+	 * A form of a query word: the word of a name it stands for and the owners of names it applies to; a reverse form
+	 * leads from a full word to its abbreviation ("street" -> "st").
+	 */
+	public record QueryForm(String object, String word, boolean reverse) {
 		public boolean appliesTo(String owner) {
 			return SearchVariantRules.appliesTo(object, owner);
 		}
@@ -172,21 +181,30 @@ public class Abbreviations {
 		if (override != null) {
 			Set<QueryForm> forms = new LinkedHashSet<>();
 			for (String form : override) {
-				forms.add(new QueryForm(SearchVariantRules.ANY_OBJECT, form));
+				forms.add(new QueryForm(SearchVariantRules.ANY_OBJECT, form, false));
 			}
 			return new ArrayList<>(forms);
 		}
 		return dictionary.forms.getOrDefault(SearchAlgorithms.alignChars(word.toLowerCase(Locale.ROOT)), List.of());
 	}
 
-	// search-v2
-	public static boolean isCommonSkipOtherCnt(String lowerCase, String locale) {
-		return dictionary(locale).commonSkipOtherCnt.contains(lowerCase);
-	}
-
-	/** @return a word of a rule -> its main form, for the rules whose word and main form are common words */
-	public static Map<String, String> getAbbreviations(String locale) {
-		return Collections.unmodifiableMap(dictionary(locale).abbreviations);
+	/**
+	 * search-v2: a word of a name that the query does not have does not penalize the object: {@code <skipPenalty>}
+	 * for the owner, an ignorable word ({@code to=""}) or a word of {@code <class1>}/{@code <class2>} of the locale
+	 *
+	 * @param owner owner of the name: street, locality, boundary, postcode, poi
+	 */
+	public static boolean isCommonSkipOtherCnt(String lowerCase, String locale, String owner) {
+		List<String> owners = dictionary(locale).penaltyFree.get(lowerCase);
+		if (owners == null) {
+			return false;
+		}
+		for (String object : owners) {
+			if (SearchVariantRules.appliesTo(object, owner)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// search-v1

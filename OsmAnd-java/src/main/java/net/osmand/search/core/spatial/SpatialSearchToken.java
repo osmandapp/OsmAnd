@@ -92,10 +92,26 @@ public class SpatialSearchToken {
 	private record QueryMatcher(Abbreviations.QueryForm form, CollatorStringMatcher matcher) {
 	}
 
+	/** How a token matches a real name of an object (rules-spec.md, 5.5): checked after the objects are loaded. */
+	public enum MatchKind {
+		// the word of the name itself (with or without the incomplete dot or the hyphen)
+		EXACT,
+		// the number of the name ("4" of "4th")
+		NUMBER,
+		// a form of <query> of the locale ("pl" of "Place")
+		FORM,
+		// a reverse form of <query> ("street" of "Main St")
+		REVERSE_FORM,
+		// no word of the real names: the object was found by a key of an alternative name of <index>
+		ALT
+	}
+
 	/** Everything the token derives from the search rules of one locale; built on first use. */
 	private final class LocaleMatch {
 		// forms of the token for every owner of a name: matched by name only, so the result is cached
 		final CollatorStringMatcher[] otherMatch;
+		// the forms of otherMatch, in its order
+		final Abbreviations.QueryForm[] otherForms;
 		// forms of the token for some owners of a name only (street, locality...)
 		final List<QueryMatcher> queryMatchers = new ArrayList<>();
 		final Map<String, Boolean> fastMatchCheck = new HashMap<>();
@@ -103,16 +119,19 @@ public class SpatialSearchToken {
 
 		LocaleMatch(String locale) {
 			List<CollatorStringMatcher> unscoped = new ArrayList<>();
+			List<Abbreviations.QueryForm> unscopedForms = new ArrayList<>();
 			for (Abbreviations.QueryForm form : Abbreviations.getQueryForms(wordNoDot, locale)) {
 				CollatorStringMatcher matcher = new CollatorStringMatcher(form.word(),
 						StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 				if (form.isUnscoped()) {
 					unscoped.add(matcher);
+					unscopedForms.add(form);
 				} else {
 					queryMatchers.add(new QueryMatcher(form, matcher));
 				}
 			}
 			otherMatch = unscoped.toArray(new CollatorStringMatcher[0]);
+			otherForms = unscopedForms.toArray(new Abbreviations.QueryForm[0]);
 		}
 	}
 	
@@ -206,13 +225,34 @@ public class SpatialSearchToken {
 	 * phrases, not from a map, so only the base rules apply and no map name variants.
 	 */
 	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats) {
-		return getPrefixMatcher(stats, "", false);
+		return getPrefixMatcher(stats, "", false, null);
 	}
 
 	/** @param locale rules locale of the map whose name index is read, see {@link net.osmand.binary.SearchLocales} */
 	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String locale) {
 		String rulesLocale = addReadLocale(locale);
-		return getPrefixMatcher(stats, rulesLocale, true);
+		return getPrefixMatcher(stats, rulesLocale, true, null);
+	}
+
+	/**
+	 * @param poiIndex true for a POI name index, false for an address one: a form of {@code <query>} is matched with
+	 *                 the keys of an index only when it applies to an owner of that index (rules-spec.md, 5.4); the
+	 *                 exact owner is checked with the name ({@link #matchName(String, TIntArrayList, String, String)})
+	 */
+	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String locale, boolean poiIndex) {
+		String rulesLocale = addReadLocale(locale);
+		return getPrefixMatcher(stats, rulesLocale, true, poiIndex);
+	}
+
+	private static boolean appliesToIndex(Abbreviations.QueryForm form, Boolean poiIndex) {
+		if (poiIndex == null) {
+			return true;
+		}
+		if (poiIndex) {
+			return form.appliesTo("poi");
+		}
+		return form.appliesTo("street") || form.appliesTo("locality") || form.appliesTo("boundary")
+				|| form.appliesTo("postcode");
 	}
 
 	/**
@@ -225,7 +265,8 @@ public class SpatialSearchToken {
 		return rulesLocale;
 	}
 
-	private NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String rulesLocale, boolean includeQueryRules) {
+	private NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String rulesLocale, boolean includeQueryRules,
+			Boolean poiIndex) {
 		LocaleMatch lm = localeMatch(rulesLocale);
 		return new NameIndexReaderMatcher(word) {
 			
@@ -271,7 +312,8 @@ public class SpatialSearchToken {
 				}
 				if (!matched && includeQueryRules) {
 					for (QueryMatcher variant : lm.queryMatchers) {
-						if (CollatorStringMatcher.cmatches(collator, variant.matcher().getPart(), alignedKey,
+						if (appliesToIndex(variant.form(), poiIndex)
+								&& CollatorStringMatcher.cmatches(collator, variant.matcher().getPart(), alignedKey,
 								StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 							matched = true;
 							break;
@@ -436,6 +478,37 @@ public class SpatialSearchToken {
 		return false;
 	}
 	
+	/**
+	 * Kind of the match of this token with a real name of an object (rules-spec.md, 5.5), in the order of
+	 * {@link #matchName(String, TIntArrayList, LocaleMatch)}, the word itself first.
+	 *
+	 * @return null when the token matches no word of the name
+	 */
+	public MatchKind matchKind(String name, String locale, String object) {
+		if (name == null || name.isEmpty() || categoryMatchMode) {
+			return null;
+		}
+		if ((noDotCollatorMain == null ? collatorMain : noDotCollatorMain).matches(name)
+				|| (noHyphenCollatorMain != null && noHyphenCollatorMain.matches(name))) {
+			return MatchKind.EXACT;
+		}
+		if (mainNumber > 0 && mainNumber == Algorithms.extractFirstIntegerNumber(name)) {
+			return MatchKind.NUMBER;
+		}
+		LocaleMatch lm = localeMatch(locale);
+		for (int i = 0; i < lm.otherMatch.length; i++) {
+			if (lm.otherMatch[i].matches(name)) {
+				return lm.otherForms[i].reverse() ? MatchKind.REVERSE_FORM : MatchKind.FORM;
+			}
+		}
+		for (QueryMatcher variant : lm.queryMatchers) {
+			if (variant.form().appliesTo(object) && variant.matcher().matches(name)) {
+				return variant.form().reverse() ? MatchKind.REVERSE_FORM : MatchKind.FORM;
+			}
+		}
+		return null;
+	}
+
 	public List<PartialMatch> getPartialExactMatch() {
 		return partialExactMatch;
 	}
@@ -727,6 +800,8 @@ public class SpatialSearchToken {
 		TIntArrayList poiTypes;
 		int elo;
 		NameIndexAtom sameNameAreaObj;
+		// rules locale of the map of the atom, for the kind of the match of its tokens (SpatialSearchRanking)
+		String locale = "";
 
 		NameIndexAtom(String name, long id, int total) {
 			this(name, SpatialSearchToken.POI_CATEGORY_TYPE, id, 0, null, false, -total, total,
@@ -738,6 +813,21 @@ public class SpatialSearchToken {
 					cp.coords, cp.nearbyRadius, cp.buildingOrRefInd);
 			this.poiTypes = cp.poiTypes;
 			this.distinctFoundCnt = cp.distinctFoundCnt;
+			this.locale = cp.locale;
+		}
+
+		/** owner of the name of the atom for the rules: street, locality, boundary, postcode, poi */
+		String owner() {
+			if (type == STREET_TYPE || type == BUILDING_TYPE) {
+				return "street";
+			} else if (type == POI_TYPE || type == POI_REF_TYPE) {
+				return "poi";
+			} else if (isBoundary()) {
+				return "boundary";
+			} else if (isPostcode()) {
+				return "postcode";
+			}
+			return "locality";
 		}
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,

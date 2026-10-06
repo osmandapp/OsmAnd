@@ -19,48 +19,63 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 /**
- * Name variants shared by the OBF writer and spatial search.
+ * Name variants and word classes shared by the OBF writer and spatial search (schema v5, see
+ * {@code resources/abbr/rules-spec.md}).
  * <p>
- * A stored name keeps the words of OSM: no rule rewrites it. Inside {@code <index>} the OBF writer adds an
- * alternative name to the names of objects: a phrase, a glued or a tokenizer-lost form that a query word cannot
- * produce ({@code Strada Statale 42} -> {@code SS42}, {@code Hauptstraße} -> {@code Hauptstr}); such a rule is a regexp
- * with one form, the attribute {@code to}. Inside {@code <query>} the search gives a query word its forms: a word with
+ * A stored name keeps the words of OSM: no rule rewrites it. {@code <locales>} (only in {@code rules.xml}) is the one
+ * table of map name prefixes, rules locales and statistics groups. Inside {@code <index>} the OBF writer gets the
+ * classes of words ({@code <class0>} always a key, {@code <class1>} a service word, {@code <class2>} a frequent word),
+ * which override {@code common_words_groups.tsv}, and the alternative names of objects: {@code <unglue>} splits glued
+ * words, a {@code <rule>} is a regexp with one form, the attribute {@code to} ({@code Strada Statale 42} ->
+ * {@code SS42}, {@code Hauptstraße} -> {@code Hauptstr}). Inside {@code <query>} the search gives a query word its forms: a word with
  * one meaning has the attributes {@code to} and {@code object} ({@code <rule from="pl" to="Place" object="street"/>}),
  * a word with several meanings lists them as {@code <to>} elements with their own {@code object}, the first is the
- * main one ({@code st}: Street of a street, Saint of any name). Every form gets a reverse form ({@code street} ->
- * {@code st}, {@code saint} -> {@code st}) of the same owner; a reverse form is one step, it never takes the forms of
- * the word it leads to. {@code object="building"} without {@code to} marks the word as a part of a house number,
- * {@code to=""} makes it ignorable (an article, a conjunction). {@code <common>} lists the words that do not count as
- * unmatched words of a name.
+ * main one. Every form gets a reverse form of the same owner; a reverse form is one step. {@code object="building"}
+ * without {@code to} marks the word as a part of a house number, {@code to=""} makes it an ignorable word of every
+ * owner (an optional query token that never penalizes a name). {@code <skipPenalty>} lists the words of names that
+ * do not penalize an object when the query does not have them, optionally for some owners only.
  * <p>
  * Rules are layered from general to specific: {@code rules.xml} (every map), {@code rules_<language>.xml}, then
- * {@code rules_<language>_<COUNTRY>.xml}. The key of a query rule is its word ({@code from}, ignoring case), the key of
- * an index rule is {@code object} and {@code from}: a rule of a lower layer with the key of an upper one replaces it
- * whole, {@code enabled="false"} removes it, and two rules with one key in one file are an error. The locale is the
- * locale of the data ({@link SearchLocales#forMap}, {@link SearchLocales#forName}), not the language of the user
- * interface.
+ * {@code rules_<language>_<COUNTRY>.xml}. A rule of a lower layer with the key of an upper one replaces it whole,
+ * {@code enabled="false"} removes it, and two rules with one key in one file are an error. The locale is the locale of
+ * the data ({@link SearchLocales#forMap}, {@link SearchLocales#forName}), not the language of the user interface.
  */
 public final class SearchVariantRules {
 	public static final String ANY_OBJECT = "*";
 	public static final String BUILDING_OBJECT = "building";
-	public static final String VERSION = "4";
+	public static final String VERSION = "5";
+	public static final String BASE_FILE = "rules.xml";
+	/** classes of words of {@code <index>}, the classes of {@code common_words_groups.tsv} */
+	public static final int CLASS_ALWAYS = 0;
+	public static final int CLASS_SERVICE = 1;
+	public static final int CLASS_FREQUENT = 2;
 
 	private static final Set<String> OWNERS = Set.of("street", "locality", "boundary", "postcode", "poi");
-	private static final Set<String> INDEX_ATTRIBUTES = Set.of("from", "to", "object", "mode", "enabled");
+	private static final Set<String> INDEX_ATTRIBUTES = Set.of("from", "to", "object", "mode", "enabled", "keys");
 	private static final Set<String> QUERY_ATTRIBUTES = Set.of("from", "to", "object", "enabled");
+	private static final Set<String> TRANSLITS = Set.of("ja", "zh");
 	private static final Map<String, SearchVariantRules> CACHE = new ConcurrentHashMap<>();
 	private static final Pattern PLAIN_WORD = Pattern.compile("[\\p{L}\\p{M}\\p{N}]+");
 	private static final Pattern GROUP_REFERENCE = Pattern.compile("\\$(\\d+)");
+	private static final Pattern GROUP_ID = Pattern.compile("[a-z]{2,4}");
+	private static final Pattern LANGUAGE = Pattern.compile("[a-z]{2,3}");
+	private static final Pattern MAP_PREFIX = Pattern.compile("[a-z0-9-]+(_[a-z0-9-]+)*");
+	private static volatile LocaleTable localeTable;
 
 	private final List<Rule> index;
+	private final List<Unglue> unglues;
+	// aligned word -> class of <class0>, <class1>, <class2>
+	private final Map<String, Integer> classes;
 	private final List<WordRule> query;
-	private final Set<String> common;
+	// word -> owners of the <skipPenalty> entries of the word
+	private final Map<String, List<String>> skipPenalty;
 	// word -> its forms and then the reverse forms that lead to it
 	private final Map<String, List<Form>> forms;
 	private final Set<String> buildings;
 	private final Set<String> ignorables;
 
-	private SearchVariantRules(String locale, Map<String, Rule> index, Map<String, WordRule> query, Set<String> common) {
+	private SearchVariantRules(String locale, Map<String, Rule> index, Map<String, Unglue> unglues,
+			Map<String, Integer> classes, Map<String, WordRule> query, Map<String, SkipPenalty> skipPenalty) {
 		String where = " in the rules of locale '" + locale + "'";
 		Set<String> buildings = new LinkedHashSet<>();
 		Set<String> ignorables = new LinkedHashSet<>();
@@ -93,10 +108,23 @@ public final class SearchVariantRules {
 				forms.computeIfAbsent(form.word(), k -> new LinkedHashSet<>()).add(new Form(form.object(), rule.word));
 			}
 		}
-		for (String word : common) {
-			if (buildings.contains(word) || ignorables.contains(word)) {
-				throw new IllegalArgumentException("The common word '" + word
-						+ "' is a house-number qualifier or an ignorable word" + where);
+		Map<String, List<String>> skip = new LinkedHashMap<>();
+		for (SkipPenalty entry : skipPenalty.values()) {
+			if (buildings.contains(entry.word) || ignorables.contains(entry.word)) {
+				throw new IllegalArgumentException("The <skipPenalty> word '" + entry.word + "' is a house-number "
+						+ "qualifier or an ignorable word: an ignorable word never penalizes a name" + where);
+			}
+			Integer wordClass = classes.get(SearchAlgorithms.alignChars(entry.word));
+			if (wordClass != null && wordClass != CLASS_ALWAYS) {
+				throw new IllegalArgumentException("The <skipPenalty> word '" + entry.word + "' is a word of <class"
+						+ wordClass + ">, which never penalizes a name" + where);
+			}
+			skip.computeIfAbsent(entry.word, k -> new ArrayList<>()).add(entry.object);
+		}
+		for (String word : ignorables) {
+			Integer wordClass = classes.get(SearchAlgorithms.alignChars(word));
+			if (wordClass != null && wordClass == CLASS_ALWAYS) {
+				throw new IllegalArgumentException("The ignorable word '" + word + "' is a word of <class0>" + where);
 			}
 		}
 		for (Rule rule : index.values()) {
@@ -114,9 +142,15 @@ public final class SearchVariantRules {
 		for (Map.Entry<String, Set<Form>> e : forms.entrySet()) {
 			lists.put(e.getKey(), List.copyOf(e.getValue()));
 		}
+		Map<String, List<String>> skipLists = new LinkedHashMap<>();
+		for (Map.Entry<String, List<String>> e : skip.entrySet()) {
+			skipLists.put(e.getKey(), List.copyOf(e.getValue()));
+		}
 		this.index = List.copyOf(index.values());
+		this.unglues = List.copyOf(unglues.values());
+		this.classes = Collections.unmodifiableMap(new LinkedHashMap<>(classes));
 		this.query = List.copyOf(query.values());
-		this.common = Collections.unmodifiableSet(new LinkedHashSet<>(common));
+		this.skipPenalty = Collections.unmodifiableMap(skipLists);
 		this.forms = Collections.unmodifiableMap(lists);
 		this.buildings = Collections.unmodifiableSet(buildings);
 		this.ignorables = Collections.unmodifiableSet(ignorables);
@@ -127,9 +161,42 @@ public final class SearchVariantRules {
 		return CACHE.computeIfAbsent(SearchLocales.normalize(locale), SearchVariantRules::load);
 	}
 
+	/** The table of {@code <locales>} of {@code rules.xml}: map name prefixes, rules locales and statistics groups. */
+	public static LocaleTable localeTable() {
+		LocaleTable table = localeTable;
+		if (table == null) {
+			synchronized (SearchVariantRules.class) {
+				table = localeTable;
+				if (table == null) {
+					table = read(BASE_FILE, true).locales;
+					if (table == null) {
+						throw new IllegalStateException("Missing <locales> in " + BASE_FILE);
+					}
+					localeTable = table;
+				}
+			}
+		}
+		return table;
+	}
+
 	/** Rules that add an alternative name of an object to the name index. */
 	public List<Rule> index() {
 		return index;
+	}
+
+	/** Rules that split words glued by a character into an alternative name. */
+	public List<Unglue> unglues() {
+		return unglues;
+	}
+
+	/** Classes of words of {@code <index>}: aligned word -> 0 (always a key), 1 (service), 2 (frequent). */
+	public Map<String, Integer> classes() {
+		return classes;
+	}
+
+	/** @return class of a word of {@code <index>}, null when the rules do not set it */
+	public Integer wordClass(String word) {
+		return classes.get(SearchAlgorithms.alignChars(word.toLowerCase(Locale.ROOT)));
 	}
 
 	/** Rules of query words in the order of the files. */
@@ -152,14 +219,72 @@ public final class SearchVariantRules {
 		return buildings;
 	}
 
-	/** Words with an empty {@code to}: not a part of a name (conjunctions, articles). */
+	/** Words with an empty {@code to}: optional query words that never penalize a name (conjunctions, articles). */
 	public Set<String> ignorables() {
 		return ignorables;
 	}
 
-	/** Words of {@code <common>} in lower case. */
-	public Set<String> common() {
-		return common;
+	/** Words of {@code <skipPenalty>} in lower case -> the owners they apply to. */
+	public Map<String, List<String>> skipPenalty() {
+		return skipPenalty;
+	}
+
+	/**
+	 * @return the alternative name with the glued words of the name split ("L'Atelier d'Anaïs" -> "Atelier Anaïs"),
+	 * null when no word is glued
+	 */
+	public String unglue(String name) {
+		if (unglues.isEmpty() || name == null) {
+			return null;
+		}
+		List<String> words = new ArrayList<>();
+		boolean glued = false;
+		for (String word : SearchAlgorithms.canonicalizePunctuation(name).split(" ")) {
+			if (word.isEmpty()) {
+				continue;
+			}
+			List<String> parts = unglueWord(word);
+			if (parts == null) {
+				words.add(word);
+			} else {
+				words.addAll(parts);
+				glued = true;
+			}
+		}
+		String unglued = String.join(" ", words).trim();
+		return glued && !unglued.isEmpty() ? unglued : null;
+	}
+
+	private List<String> unglueWord(String word) {
+		if (word.chars().anyMatch(Character::isDigit)) {
+			return null;
+		}
+		StringBuilder glue = new StringBuilder();
+		int minPart = Integer.MAX_VALUE;
+		for (Unglue u : unglues) {
+			if (word.indexOf(u.glue()) >= 0 && u.appliesToScript(word)) {
+				glue.append(u.glue());
+				minPart = Math.min(minPart, u.minPart());
+			}
+		}
+		if (glue.length() == 0) {
+			return null;
+		}
+		List<String> parts = new ArrayList<>();
+		boolean letterDropped = false;
+		int start = 0;
+		for (int i = 0; i <= word.length(); i++) {
+			if (i == word.length() || glue.indexOf(String.valueOf(word.charAt(i))) >= 0) {
+				String part = word.substring(start, i);
+				if (part.length() >= minPart) {
+					parts.add(part);
+				} else if (!part.isEmpty()) {
+					letterDropped = true;
+				}
+				start = i + 1;
+			}
+		}
+		return parts.size() > 1 || letterDropped ? parts : null;
 	}
 
 	/** @return true when a rule of {@code object} ("street", "*", "street,poi") applies to the owner of a name */
@@ -187,7 +312,7 @@ public final class SearchVariantRules {
 
 	private static SearchVariantRules load(String locale) {
 		List<Layer> layers = new ArrayList<>();
-		layers.add(read("rules.xml", true));
+		layers.add(read(BASE_FILE, true));
 		if (!locale.isEmpty()) {
 			String[] parts = locale.split("_");
 			StringBuilder suffix = new StringBuilder();
@@ -204,22 +329,23 @@ public final class SearchVariantRules {
 
 	static SearchVariantRules of(String locale, List<Layer> layers) {
 		Map<String, Rule> index = new LinkedHashMap<>();
+		Map<String, Unglue> unglues = new LinkedHashMap<>();
+		Map<String, Integer> classes = new LinkedHashMap<>();
 		Map<String, WordRule> query = new LinkedHashMap<>();
-		Set<String> common = new LinkedHashSet<>();
+		Map<String, SkipPenalty> skipPenalty = new LinkedHashMap<>();
 		for (Layer layer : layers) {
 			disable(index, layer.disabledIndex, layer);
+			disable(unglues, layer.disabledUnglues, layer);
+			disable(classes, layer.disabledClasses, layer);
 			disable(query, layer.disabledQuery, layer);
-			for (String word : layer.uncommon) {
-				if (!common.remove(word)) {
-					throw new IllegalArgumentException("Cannot remove the common word '" + word + "' in " + layer.file
-							+ ": no upper layer lists it");
-				}
-			}
+			disable(skipPenalty, layer.disabledSkipPenalty, layer);
 			index.putAll(layer.index);
+			unglues.putAll(layer.unglues);
+			classes.putAll(layer.classes);
 			query.putAll(layer.query);
-			common.addAll(layer.common);
+			skipPenalty.putAll(layer.skipPenalty);
 		}
-		return new SearchVariantRules(locale, index, query, common);
+		return new SearchVariantRules(locale, index, unglues, classes, query, skipPenalty);
 	}
 
 	private static void disable(Map<String, ?> rules, Map<String, String> disabled, Layer layer) {
@@ -245,16 +371,28 @@ public final class SearchVariantRules {
 		}
 	}
 
+	private record SkipPenalty(String word, String object) {
+		String key() {
+			return word + '\n' + object;
+		}
+	}
+
 	/** The rules of one file. */
 	static final class Layer {
 		final String file;
 		final Map<String, Rule> index = new LinkedHashMap<>();
+		final Map<String, Unglue> unglues = new LinkedHashMap<>();
+		final Map<String, Integer> classes = new LinkedHashMap<>();
 		final Map<String, WordRule> query = new LinkedHashMap<>();
-		final Set<String> common = new LinkedHashSet<>();
-		final Set<String> uncommon = new LinkedHashSet<>();
+		final Map<String, SkipPenalty> skipPenalty = new LinkedHashMap<>();
 		// key -> text of the rule for messages
 		final Map<String, String> disabledIndex = new LinkedHashMap<>();
+		final Map<String, String> disabledUnglues = new LinkedHashMap<>();
+		final Map<String, String> disabledClasses = new LinkedHashMap<>();
 		final Map<String, String> disabledQuery = new LinkedHashMap<>();
+		final Map<String, String> disabledSkipPenalty = new LinkedHashMap<>();
+		// only rules.xml
+		LocaleTable locales;
 
 		Layer(String file) {
 			this.file = file;
@@ -262,6 +400,10 @@ public final class SearchVariantRules {
 
 		void add(Rule rule, boolean enabled) {
 			add(index, disabledIndex, rule.key(), rule, rule.toString(), enabled);
+		}
+
+		void add(Unglue unglue, boolean enabled) {
+			add(unglues, disabledUnglues, String.valueOf(unglue.glue()), unglue, unglue.toString(), enabled);
 		}
 
 		void add(WordRule rule, boolean enabled) {
@@ -280,20 +422,52 @@ public final class SearchVariantRules {
 			}
 		}
 
-		void addCommon(String words, boolean enabled) {
+		void addClass(String tag, int wordClass, String words, boolean enabled) {
+			for (String word : plainWords(words, "<" + tag + ">")) {
+				String w = SearchAlgorithms.alignChars(word);
+				if (classes.containsKey(w) || disabledClasses.containsKey(w)) {
+					throw new IllegalArgumentException("The word '" + w + "' of <" + tag + "> is listed twice in the "
+							+ "classes of " + file);
+				}
+				if (enabled) {
+					classes.put(w, wordClass);
+				} else {
+					disabledClasses.put(w, "the class of '" + w + "'");
+				}
+			}
+		}
+
+		void addSkipPenalty(String object, String words, boolean enabled) {
+			for (String word : plainWords(words, "<skipPenalty>")) {
+				SkipPenalty entry = new SkipPenalty(word, object);
+				for (SkipPenalty other : skipPenalty.values()) {
+					if (other.word.equals(word) && objectsOverlap(other.object, object)) {
+						throw new IllegalArgumentException("The <skipPenalty> word '" + word + "' is listed twice with "
+								+ "overlapping object in " + file);
+					}
+				}
+				add(skipPenalty, disabledSkipPenalty, entry.key(), entry,
+						"<skipPenalty object=\"" + object + "\">" + word + "</skipPenalty>", enabled);
+			}
+		}
+
+		private List<String> plainWords(String words, String what) {
+			List<String> result = new ArrayList<>();
 			for (String word : words.trim().split("\\s+")) {
 				if (word.isEmpty()) {
 					continue;
 				}
 				if (!PLAIN_WORD.matcher(word).matches()) {
-					throw new IllegalArgumentException("A common word is a plain word: '" + word + "' in " + file);
+					throw new IllegalArgumentException("A word of " + what + " is a plain word: '" + word + "' in "
+							+ file);
 				}
 				String w = word.toLowerCase(Locale.ROOT);
-				if (common.contains(w) || uncommon.contains(w)) {
-					throw new IllegalArgumentException("The common word '" + w + "' is listed twice in " + file);
+				if (result.contains(w)) {
+					throw new IllegalArgumentException("The word '" + w + "' of " + what + " is listed twice in " + file);
 				}
-				(enabled ? common : uncommon).add(w);
+				result.add(w);
 			}
+			return result;
 		}
 	}
 
@@ -302,6 +476,7 @@ public final class SearchVariantRules {
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
 		parser.setInput(input, "UTF-8");
 		String section = null;
+		LocaleTable.Builder locales = null;
 		boolean root = false;
 		int event;
 		while ((event = parser.next()) != XmlPullParser.END_DOCUMENT) {
@@ -316,17 +491,37 @@ public final class SearchVariantRules {
 					root = true;
 				} else if (depth == 2 && ("index".equals(tag) || "query".equals(tag))) {
 					section = tag;
+				} else if (depth == 2 && "locales".equals(tag)) {
+					if (!BASE_FILE.equals(file)) {
+						throw new IllegalArgumentException("<locales> belongs to " + BASE_FILE + ", not to " + file);
+					}
+					if (locales != null) {
+						throw new IllegalArgumentException("Duplicate <locales> in " + file);
+					}
+					checkAttributes(parser, Set.of(), "<locales>", " in " + file);
+					locales = new LocaleTable.Builder(file);
+					section = tag;
 				} else if (depth == 2 && "common".equals(tag)) {
-					checkAttributes(parser, Set.of("enabled"), "<common>", file);
-					boolean enabled = booleanAttribute(parser, "enabled", true, " (<common> of " + file + ")");
-					layer.addCommon(parser.nextText(), enabled);
+					throw new IllegalArgumentException("<common> is replaced by <skipPenalty> of <query> in " + file);
 				} else if (depth == 2 && "rule".equals(tag)) {
 					throw new IllegalArgumentException("A rule belongs to <index> or <query> (from=\""
 							+ parser.getAttributeValue(null, "from") + "\" in " + file + ")");
 				} else if (depth == 3 && "rule".equals(tag) && "index".equals(section)) {
 					parseIndexRule(parser, layer, file);
+				} else if (depth == 3 && "unglue".equals(tag) && "index".equals(section)) {
+					parseUnglue(parser, layer, file);
+				} else if (depth == 3 && tag.matches("class[012]") && "index".equals(section)) {
+					checkAttributes(parser, Set.of("enabled"), "<" + tag + ">", " in " + file);
+					boolean enabled = booleanAttribute(parser, "enabled", true, " (<" + tag + "> of " + file + ")");
+					layer.addClass(tag, tag.charAt(5) - '0', parser.nextText(), enabled);
 				} else if (depth == 3 && "rule".equals(tag) && "query".equals(section)) {
 					parseQueryRule(parser, layer, file);
+				} else if (depth == 3 && "skipPenalty".equals(tag) && "query".equals(section)) {
+					parseSkipPenalty(parser, layer, file);
+				} else if (depth == 3 && "group".equals(tag) && "locales".equals(section)) {
+					locales.addGroup(parser);
+				} else if (depth == 3 && "map".equals(tag) && "locales".equals(section)) {
+					locales.addMap(parser);
 				} else {
 					throw new IllegalArgumentException("Unexpected search rule tag " + tag + " in " + file);
 				}
@@ -336,6 +531,9 @@ public final class SearchVariantRules {
 		}
 		if (!root) {
 			throw new IllegalArgumentException("Missing rules root in " + file);
+		}
+		if (locales != null) {
+			layer.locales = locales.build();
 		}
 		return layer;
 	}
@@ -353,6 +551,7 @@ public final class SearchVariantRules {
 		validateObject(object, false, where);
 		String mode = parser.getAttributeValue(null, "mode");
 		String to = parser.getAttributeValue(null, "to");
+		String keys = parser.getAttributeValue(null, "keys");
 		boolean enabled = booleanAttribute(parser, "enabled", true, where);
 		if (PLAIN_WORD.matcher(from).matches()) {
 			throw new IllegalArgumentException("A plain word belongs to <query>: the index adds nothing that its "
@@ -363,10 +562,10 @@ public final class SearchVariantRules {
 					+ "cannot be told apart in the OBF, the meanings belong to <query>" + where);
 		}
 		if (!enabled) {
-			if (to != null || mode != null) {
+			if (to != null || mode != null || keys != null) {
 				throw new IllegalArgumentException("A disabled rule holds only from and object" + where);
 			}
-			layer.add(newRule(object, from, "", "Single", false, where), false);
+			layer.add(newRule(object, from, "", "Single", false, false, where), false);
 			return;
 		}
 		if (to == null) {
@@ -375,7 +574,70 @@ public final class SearchVariantRules {
 		if (to.isEmpty()) {
 			throw new IllegalArgumentException("An empty to (an ignorable word) belongs to <query>" + where);
 		}
-		layer.add(newRule(object, from, to, mode == null ? "Single" : mode, true, where), true);
+		if (keys != null && !Rule.KEYS_STATS.equals(keys) && !Rule.KEYS_ALWAYS.equals(keys)) {
+			throw new IllegalArgumentException("Invalid keys '" + keys + "', expected " + Rule.KEYS_STATS + " or "
+					+ Rule.KEYS_ALWAYS + where);
+		}
+		layer.add(newRule(object, from, to, mode == null ? "Single" : mode, Rule.KEYS_ALWAYS.equals(keys), true,
+				where), true);
+	}
+
+	private static void parseUnglue(XmlPullParser parser, Layer layer, String file) throws Exception {
+		String glue = parser.getAttributeValue(null, "glue");
+		String where = " (<unglue glue=\"" + glue + "\"> of " + file + ")";
+		checkAttributes(parser, Set.of("glue", "script", "minPart", "enabled"), "<unglue>", where);
+		if (glue == null || glue.length() != 1 || Character.isLetterOrDigit(glue.charAt(0))
+				|| Character.isWhitespace(glue.charAt(0))) {
+			throw new IllegalArgumentException("The glue of <unglue> is one character, not a letter, a digit or a "
+					+ "space" + where);
+		}
+		boolean enabled = booleanAttribute(parser, "enabled", true, where);
+		String script = parser.getAttributeValue(null, "script");
+		String minPart = parser.getAttributeValue(null, "minPart");
+		if (parser.nextTag() == XmlPullParser.START_TAG) {
+			throw new IllegalArgumentException("<unglue> has no elements" + where);
+		}
+		if (!enabled) {
+			if (script != null || minPart != null) {
+				throw new IllegalArgumentException("A disabled rule holds only glue" + where);
+			}
+			layer.add(new Unglue(glue.charAt(0), null, 0), false);
+			return;
+		}
+		Character.UnicodeScript unicodeScript = null;
+		if (script != null) {
+			try {
+				unicodeScript = Character.UnicodeScript.forName(script);
+			} catch (IllegalArgumentException e) {
+				throw new IllegalArgumentException("Unknown script '" + script + "'" + where, e);
+			}
+		}
+		int min = 2;
+		if (minPart != null) {
+			try {
+				min = Integer.parseInt(minPart);
+			} catch (NumberFormatException e) {
+				min = 0;
+			}
+			if (min < 1) {
+				throw new IllegalArgumentException("Invalid minPart '" + minPart + "', expected a number >= 1" + where);
+			}
+		}
+		layer.add(new Unglue(glue.charAt(0), unicodeScript, min), true);
+	}
+
+	private static void parseSkipPenalty(XmlPullParser parser, Layer layer, String file) throws Exception {
+		String where = " (<skipPenalty> of " + file + ")";
+		checkAttributes(parser, Set.of("object", "enabled"), "<skipPenalty>", where);
+		String object = parser.getAttributeValue(null, "object");
+		object = object == null || object.isEmpty() ? ANY_OBJECT : object;
+		if (BUILDING_OBJECT.equals(object)) {
+			throw new IllegalArgumentException("A part of a house number is no word of a name: <skipPenalty> takes no "
+					+ "object=\"building\"" + where);
+		}
+		validateObject(object, false, where);
+		boolean enabled = booleanAttribute(parser, "enabled", true, where);
+		layer.addSkipPenalty(object, parser.nextText(), enabled);
 	}
 
 	/**
@@ -455,7 +717,9 @@ public final class SearchVariantRules {
 		}
 		if (text.isEmpty()) {
 			if (!object.equals(ANY_OBJECT)) {
-				throw new IllegalArgumentException("An ignorable word (an empty to) applies to every object" + where);
+				throw new IllegalArgumentException("An ignorable word (an empty to) applies to every object: a word that "
+						+ "only does not penalize names of some owners is <skipPenalty object=\"" + object + "\">"
+						+ where);
 			}
 			return new Form(object, "");
 		}
@@ -503,7 +767,7 @@ public final class SearchVariantRules {
 			throw new IllegalArgumentException("The word is a house-number qualifier and an ignorable word" + where);
 		}
 		if (ignorables > 0 && forms.size() > 1) {
-			// an ignorable word is dropped from names (removeCommonWords): its forms would never match
+			// an ignorable word is an optional query word that never penalizes a name: its forms would mean nothing
 			throw new IllegalArgumentException("An ignorable word has no forms" + where);
 		}
 	}
@@ -517,7 +781,7 @@ public final class SearchVariantRules {
 			throw new IllegalArgumentException("replace is removed: a stored name keeps the words of OSM" + where);
 		}
 		if (parser.getAttributeValue(null, "common") != null) {
-			throw new IllegalArgumentException("Common words are listed in <common>" + where);
+			throw new IllegalArgumentException("Common words are listed in <skipPenalty> of <query>" + where);
 		}
 	}
 
@@ -530,9 +794,10 @@ public final class SearchVariantRules {
 		}
 	}
 
-	private static Rule newRule(String object, String from, String to, String mode, boolean enabled, String where) {
+	private static Rule newRule(String object, String from, String to, String mode, boolean alwaysKeys,
+			boolean enabled, String where) {
 		try {
-			return new Rule(object, from, to, mode, enabled);
+			return new Rule(object, from, to, mode, alwaysKeys, enabled);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(e.getMessage() + where, e);
 		}
@@ -616,20 +881,43 @@ public final class SearchVariantRules {
 		}
 	}
 
+	/** A rule of {@code <unglue>}: words glued by a character, for words of a script only when {@code script} is set. */
+	public record Unglue(char glue, Character.UnicodeScript script, int minPart) {
+		boolean appliesToScript(String word) {
+			return script == null || word.codePoints().filter(Character::isLetter)
+					.allMatch(c -> Character.UnicodeScript.of(c) == script);
+		}
+
+		/** the key of the rule in the statistics of the OBF writer */
+		public String name() {
+			return "unglue " + glue;
+		}
+
+		@Override
+		public String toString() {
+			return "<unglue glue=\"" + glue + "\">";
+		}
+	}
+
 	/** A rule of {@code <index>}: a regexp of names of an owner and the alternative name it adds. */
 	public static final class Rule {
+		static final String KEYS_STATS = "stats";
+		static final String KEYS_ALWAYS = "always";
+
 		public final String object;
 		private final boolean all;
+		private final boolean alwaysKeys;
 		private final Pattern from;
 		private final String fromText;
 		private final String to;
 
-		private Rule(String object, String from, String to, String mode, boolean enabled) {
+		private Rule(String object, String from, String to, String mode, boolean alwaysKeys, boolean enabled) {
 			this.object = object;
 			if (!"All".equals(mode) && !"Single".equals(mode)) {
 				throw new IllegalArgumentException("Invalid mode '" + mode + "' of " + from + ", expected All or Single");
 			}
 			this.all = "All".equals(mode);
+			this.alwaysKeys = alwaysKeys;
 			this.fromText = from;
 			this.to = to;
 			try {
@@ -671,6 +959,16 @@ public final class SearchVariantRules {
 			return to;
 		}
 
+		/** true ({@code keys="always"}): the new words of the alternative name are keys without the statistics */
+		public boolean alwaysKeys() {
+			return alwaysKeys;
+		}
+
+		/** the key of the rule in the statistics of the OBF writer */
+		public String name() {
+			return object + " " + to.trim();
+		}
+
 		public boolean appliesTo(String owner) {
 			return SearchVariantRules.appliesTo(object, owner);
 		}
@@ -692,6 +990,175 @@ public final class SearchVariantRules {
 		@Override
 		public String toString() {
 			return "<rule object=\"" + object + "\" from=\"" + fromText + "\">";
+		}
+	}
+
+	/**
+	 * {@code <locales>} of {@code rules.xml}: map name prefix (lower case) -> rules locale, statistics group of
+	 * {@code common_words_groups.tsv} and transliteration of names.
+	 */
+	public static final class LocaleTable {
+		private final Map<String, String> localeByPrefix;
+		private final Map<String, String> groupByPrefix;
+		private final Map<String, String> translitByPrefix;
+
+		private LocaleTable(Map<String, String> localeByPrefix, Map<String, String> groupByPrefix,
+				Map<String, String> translitByPrefix) {
+			this.localeByPrefix = Collections.unmodifiableMap(localeByPrefix);
+			this.groupByPrefix = Collections.unmodifiableMap(groupByPrefix);
+			this.translitByPrefix = Collections.unmodifiableMap(translitByPrefix);
+		}
+
+		/** @return true when the lower-case prefix of a map name is in the table */
+		public boolean hasPrefix(String prefix) {
+			return localeByPrefix.containsKey(prefix);
+		}
+
+		/** @return rules locale of a lower-case prefix, "" for a map without one, null when the table lacks it */
+		public String locale(String prefix) {
+			return localeByPrefix.get(prefix);
+		}
+
+		/** @return statistics group of a lower-case prefix, null when none covers it */
+		public String group(String prefix) {
+			return groupByPrefix.get(prefix);
+		}
+
+		/** @return transliteration of names ("ja", "zh") of a lower-case prefix, null when none */
+		public String translit(String prefix) {
+			return translitByPrefix.get(prefix);
+		}
+
+		/** map name prefix -> statistics group, for every prefix with a group */
+		public Map<String, String> groups() {
+			return groupByPrefix;
+		}
+
+		/** map name prefix -> transliteration, for every prefix with one */
+		public Map<String, String> translits() {
+			return translitByPrefix;
+		}
+
+		static final class Builder {
+			private final String file;
+			private final Map<String, String> groupByLanguage = new LinkedHashMap<>();
+			private final Map<String, String> groupByLocale = new LinkedHashMap<>();
+			private final Set<String> groups = new LinkedHashSet<>();
+			private final Map<String, String> localeByPrefix = new LinkedHashMap<>();
+			private final Map<String, String> explicitGroup = new LinkedHashMap<>();
+			private final Map<String, String> translitByPrefix = new LinkedHashMap<>();
+
+			Builder(String file) {
+				this.file = file;
+			}
+
+			void addGroup(XmlPullParser parser) throws Exception {
+				String id = parser.getAttributeValue(null, "id");
+				String where = " (<group id=\"" + id + "\"> of " + file + ")";
+				checkAttributes(parser, Set.of("id", "languages", "locales"), "<group>", where);
+				if (id == null || !GROUP_ID.matcher(id).matches()) {
+					throw new IllegalArgumentException("A group id is 2-4 lower-case letters" + where);
+				}
+				if (!groups.add(id)) {
+					throw new IllegalArgumentException("Duplicate group" + where);
+				}
+				for (String language : list(parser.getAttributeValue(null, "languages"))) {
+					if (!LANGUAGE.matcher(language).matches()) {
+						throw new IllegalArgumentException("Invalid language '" + language + "'" + where);
+					}
+					if (groupByLanguage.put(language, id) != null) {
+						throw new IllegalArgumentException("The language '" + language + "' is in two groups" + where);
+					}
+				}
+				for (String locale : list(parser.getAttributeValue(null, "locales"))) {
+					String normalized = SearchLocales.normalize(locale);
+					if (normalized.isEmpty() || SearchLocales.country(normalized).isEmpty()) {
+						throw new IllegalArgumentException("Invalid locale '" + locale + "', expected a language and a "
+								+ "country" + where);
+					}
+					if (groupByLocale.put(normalized, id) != null) {
+						throw new IllegalArgumentException("The locale '" + locale + "' is in two groups" + where);
+					}
+				}
+				endElement(parser, where);
+			}
+
+			void addMap(XmlPullParser parser) throws Exception {
+				String locale = parser.getAttributeValue(null, "locale");
+				String where = " (<map locale=\"" + locale + "\"> of " + file + ")";
+				checkAttributes(parser, Set.of("locale", "prefixes", "group", "translit"), "<map>", where);
+				if (locale == null) {
+					throw new IllegalArgumentException("Missing locale" + where);
+				}
+				String normalized = SearchLocales.normalize(locale);
+				if (!locale.isEmpty() && normalized.isEmpty()) {
+					throw new IllegalArgumentException("Invalid locale '" + locale + "'" + where);
+				}
+				String group = parser.getAttributeValue(null, "group");
+				String translit = parser.getAttributeValue(null, "translit");
+				if (translit != null && !TRANSLITS.contains(translit)) {
+					throw new IllegalArgumentException("Unknown translit '" + translit + "', expected one of " + TRANSLITS
+							+ where);
+				}
+				List<String> prefixes = list(parser.getAttributeValue(null, "prefixes"));
+				if (prefixes.isEmpty()) {
+					throw new IllegalArgumentException("Missing prefixes" + where);
+				}
+				for (String prefix : prefixes) {
+					if (!MAP_PREFIX.matcher(prefix).matches()) {
+						throw new IllegalArgumentException("A map prefix is lower case: '" + prefix + "'" + where);
+					}
+					if (localeByPrefix.put(prefix, normalized) != null) {
+						throw new IllegalArgumentException("Duplicate map prefix '" + prefix + "'" + where);
+					}
+					if (group != null) {
+						explicitGroup.put(prefix, group);
+					}
+					if (translit != null) {
+						translitByPrefix.put(prefix, translit);
+					}
+				}
+				endElement(parser, where);
+			}
+
+			LocaleTable build() {
+				Map<String, String> groupByPrefix = new LinkedHashMap<>();
+				for (Map.Entry<String, String> e : localeByPrefix.entrySet()) {
+					String group = explicitGroup.get(e.getKey());
+					if (group != null && !groups.contains(group)) {
+						throw new IllegalArgumentException("Unknown group '" + group + "' of the map prefix '"
+								+ e.getKey() + "' in " + file);
+					}
+					if (group == null) {
+						group = groupByLocale.get(e.getValue());
+					}
+					if (group == null) {
+						group = groupByLanguage.get(SearchLocales.language(e.getValue()));
+					}
+					if (group != null) {
+						groupByPrefix.put(e.getKey(), group);
+					}
+				}
+				return new LocaleTable(localeByPrefix, groupByPrefix, translitByPrefix);
+			}
+
+			private static List<String> list(String value) {
+				List<String> result = new ArrayList<>();
+				if (value != null) {
+					for (String s : value.trim().split("\\s+")) {
+						if (!s.isEmpty()) {
+							result.add(s);
+						}
+					}
+				}
+				return result;
+			}
+
+			private static void endElement(XmlPullParser parser, String where) throws Exception {
+				if (parser.nextTag() == XmlPullParser.START_TAG) {
+					throw new IllegalArgumentException("Unexpected element " + parser.getName() + where);
+				}
+			}
 		}
 	}
 }
