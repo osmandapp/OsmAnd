@@ -144,7 +144,10 @@ private fun RouteDetails(
 	ScreenScaffold(scrollState = listState) {
 		ScalingLazyColumn(
 			state = listState,
-			contentPadding = PaddingValues(horizontal = 10.dp, vertical = 32.dp)
+			// Tighter than the other lists, and chosen by measurement: at this value the
+			// remaining distance starts on the same row as the arrow on the page before it,
+			// so paging across does not shift the eye.
+			contentPadding = PaddingValues(horizontal = 10.dp, vertical = 18.dp)
 		) {
 			item { TripSummary(navigation) }
 
