@@ -86,7 +86,12 @@ private fun NextManeuver(navigation: NavigationState, icons: Map<String, ImageBi
 		Column(
 			modifier = Modifier
 				.fillMaxSize()
-				.padding(horizontal = 10.percentOfWidth()),
+				// Wider margins than a square screen would need: the corners of a round one eat
+				// into the top and bottom rows, and the watch's clock occupies the first of them.
+				.padding(
+					horizontal = 12.percentOfWidth(),
+					vertical = 15.percentOfHeight()
+				),
 			horizontalAlignment = Alignment.CenterHorizontally,
 			verticalArrangement = Arrangement.Center
 		) {
@@ -94,7 +99,7 @@ private fun NextManeuver(navigation: NavigationState, icons: Map<String, ImageBi
 				Image(
 					bitmap = arrow,
 					contentDescription = null,
-					modifier = Modifier.size(64.dp)
+					modifier = Modifier.size(48.dp)
 				)
 			}
 			Text(
@@ -109,9 +114,9 @@ private fun NextManeuver(navigation: NavigationState, icons: Map<String, ImageBi
 					text = street,
 					style = MaterialTheme.typography.bodyMedium,
 					textAlign = TextAlign.Center,
-					// The phone sends the whole phrase - "Turn right and go <street>" - and a
-					// round screen takes three lines of it before the arrow has to give ground.
-					maxLines = 3,
+					// Two lines is what is left once the arrow and the distance have taken
+					// theirs. The whole phrase is a page away, where there is room to scroll.
+					maxLines = 2,
 					overflow = TextOverflow.Ellipsis,
 					modifier = Modifier.padding(top = 6.dp)
 				)
