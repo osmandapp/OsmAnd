@@ -97,6 +97,10 @@ class WearLegacyMapSource(private val app: OsmandApplication) : WearMapSource {
 	 */
 	override fun fit(bounds: QuadRect) {
 		val current = box ?: return
+		// North up, and not only because a route laid out to be read wants it. A turned box
+		// reports the bounds of its turned rectangle, which reach a diagonal beyond what is
+		// actually on screen, and the test below would pass a zoom too close every time.
+		current.setRotate(0f)
 		current.setLatLonCenter(
 			(bounds.top + bounds.bottom) / 2, (bounds.left + bounds.right) / 2)
 		for (zoom in MAX_ZOOM downTo MIN_ZOOM) {
