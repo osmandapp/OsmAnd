@@ -20,8 +20,12 @@ class McpHttpServer(
 		private val SUPPORTED_VERSIONS = listOf("2025-06-18", "2025-03-26", "2024-11-05")
 		private const val INSTRUCTIONS = "Controls the OsmAnd map app on an Android phone through OsmAnd's AIDL API. " +
 				"Start with osmand_status. Settings are changed with osmand_set_preference; most settings are per profile. " +
+				"Map widgets: osmand_widget_layout, then osmand_set_widgets. " +
 				"For pictures: show a track, point the camera with osmand_set_camera, then osmand_screenshot; " +
-				"track numbers come from osmand_track_stats and osmand_track_points."
+				"track numbers come from osmand_track_stats and osmand_track_points. " +
+				"How something works or is set up in the app: answer from the OsmAnd user guide and give the link, " +
+				"https://osmand.net/docs/user/ (Android and iOS in tabs), e.g. widgets/configure-screen/, " +
+				"map/configure-map-menu/, map/map-styles/, personal/profiles/, personal/tracks/, navigation/, plugins/."
 	}
 
 	override fun serve(session: IHTTPSession): Response {

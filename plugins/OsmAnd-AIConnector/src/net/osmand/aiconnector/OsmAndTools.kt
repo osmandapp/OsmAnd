@@ -20,6 +20,8 @@ import net.osmand.aidlapi.gpx.StartGpxRecordingParams
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams
 import net.osmand.aidlapi.logcat.OnLogcatMessageParams
 import net.osmand.aidlapi.info.AMapWidgetValue
+import net.osmand.aidlapi.info.MapWidgetsLayoutParams
+import net.osmand.aidlapi.info.SetMapWidgetsPanelParams
 import net.osmand.aidlapi.map.MapScreenshotParams
 import net.osmand.aidlapi.map.SetMapCameraParams
 import net.osmand.aidlapi.map.SetMapLocationParams
@@ -347,6 +349,31 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			})
 		},
 		Tool(
+			"osmand_widget_layout",
+			"Map widgets of a profile as in Configure screen: for each panel (left, right, top, bottom) its pages " +
+					"(rows for top and bottom) with widget ids in screen order, and the widget types that can be added. " +
+					"Read it before osmand_set_widgets.",
+			schema(prop("profile", "string", "Optional profile key, default the current profile"))
+		) { a -> widgetLayout(a.optString("profile")) },
+		Tool(
+			"osmand_set_widgets",
+			"Add, remove, move or reorder map widgets: give the new content of one panel as pages of widget ids, " +
+					"e.g. [[\"speed\",\"altitude\"],[\"sunset\"]] for two pages. Start from osmand_widget_layout. " +
+					"Keep an id to keep that widget, leave it out to remove it, put a type from can_add to add a widget " +
+					"(a second widget of a type already on the screen gets a new id). To move a widget to another panel, " +
+					"remove it there and add its type here. Changes the screen right away; never edit the " +
+					"map_info_controls or *_widget_panel_order settings instead.",
+			JSONObject().put("type", "object")
+				.put("properties", JSONObject()
+					.put("panel", JSONObject().put("type", "string").put("enum", JSONArray(WIDGET_PANELS))
+						.put("description", "Panel to change"))
+					.put("pages", JSONObject().put("type", "array")
+						.put("description", "Pages of the panel (rows for top and bottom), each a list of widget ids or types; [] empties the panel")
+						.put("items", JSONObject().put("type", "array").put("items", JSONObject().put("type", "string"))))
+					.put("profile", JSONObject().put("type", "string").put("description", "Optional profile key, default the current profile")))
+				.put("required", JSONArray(listOf("panel", "pages")))
+		) { a -> setWidgets(a) },
+		Tool(
 			"osmand_start_recording",
 			"Start trip recording (a new GPX track from the phone's location).",
 			schema()
@@ -610,6 +637,71 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		return out
 	}
 
+	private fun widgetLayout(profile: String): JSONObject {
+		val layout = bridge.get().getMapWidgetsLayout(MapWidgetsLayoutParams(profile.ifEmpty { null }))
+			?: throw ToolError(refused(SETTINGS) + " The map screen must be open in OsmAnd.")
+		val panels = JSONObject()
+		val canAdd = JSONArray()
+		for (w in layout.widgets) {
+			if (w.isEnabled) {
+				val pages = panels.optJSONArray(w.panel.lowercase()) ?: JSONArray().also { panels.put(w.panel.lowercase(), it) }
+				while (pages.length() <= w.page) pages.put(JSONArray())
+				pages.getJSONArray(w.page).put(JSONObject().put("id", w.id).put("title", w.title))
+			} else {
+				canAdd.put(JSONObject().put("type", w.type).put("title", w.title).put("default_panel", w.panel.lowercase())
+					.apply { if (!w.isPurchased) put("paid", true) })
+			}
+		}
+		WIDGET_PANELS.forEach { if (!panels.has(it)) panels.put(it, JSONArray()) }
+		return JSONObject().put("profile", layout.appModeKey)
+			.apply { if (layout.isSeparateLayouts) put("layout", "separate portrait and landscape layouts; this is the current orientation") }
+			.put("panels", panels).put("can_add", canAdd)
+	}
+
+	private fun setWidgets(a: JSONObject): JSONObject {
+		val panel = a.getString("panel").lowercase()
+		if (panel !in WIDGET_PANELS) throw ToolError("panel must be one of $WIDGET_PANELS")
+		val profile = a.optString("profile")
+		val before = widgetLayout(profile)
+		val known = HashSet<String>()
+		before.getJSONObject("panels").optJSONArray(panel)?.let { pages ->
+			for (i in 0 until pages.length()) for (j in 0 until pages.getJSONArray(i).length())
+				known.add(pages.getJSONArray(i).getJSONObject(j).getString("id"))
+		}
+		val canAdd = before.getJSONArray("can_add")
+		for (i in 0 until canAdd.length()) known.add(canAdd.getJSONObject(i).getString("type"))
+		val pagesArg = a.getJSONArray("pages")
+		val pages = ArrayList<String>()
+		for (i in 0 until pagesArg.length()) {
+			val page = pagesArg.optJSONArray(i) ?: JSONArray(pagesArg.getString(i).split(",").map { it.trim() })
+			val ids = (0 until page.length()).map { page.getString(it).trim() }.filter { it.isNotEmpty() }
+			// a widget of another panel is added here as a new widget of its type
+			val unknown = ids.filter { it !in known && it.substringBefore("__") !in known }
+			if (unknown.isNotEmpty()) {
+				throw ToolError("Unknown widget ids for the $panel panel: $unknown. Use ids of this panel or types from can_add (osmand_widget_layout).")
+			}
+			val type = { id: String -> id.substringBefore("__") }
+			if (panel in listOf("top", "bottom")) {
+				ids.firstOrNull { type(it) == "next_turn_small" }?.let { throw ToolError("$it can only be on the left or right panel.") }
+				if (ids.size > 1) ids.firstOrNull { type(it) in ROW_WIDGETS }?.let {
+					throw ToolError("$it takes a whole row of the $panel panel: put it on a page of its own.")
+				}
+			} else {
+				ids.firstOrNull { type(it) in ROW_WIDGETS || type(it) == "route_info" }?.let {
+					throw ToolError("$it can only be on the top or bottom panel.")
+				}
+			}
+			if (ids.isNotEmpty()) pages.add(ids.joinToString(",") { if (it in known) it else type(it) })
+		}
+		// the layout was just read, so the Settings group is granted: a refusal is about the widgets
+		if (!bridge.get().setMapWidgetsPanel(SetMapWidgetsPanelParams(profile.ifEmpty { null }, panel.uppercase(), pages))) {
+			throw ToolError("OsmAnd rejected the layout of the $panel panel: one of the widgets can't be on this panel, " +
+					"or the map screen is not open. Nothing was changed.")
+		}
+		val after = widgetLayout(profile)
+		return JSONObject().put("panel", panel).put("pages", after.getJSONObject("panels").getJSONArray(panel))
+	}
+
 	private fun setPreference(a: JSONObject): String {
 		val id = a.getString("pref_id")
 		// OsmAnd fails per-profile prefs when no profile is given, so default to the current one
@@ -619,7 +711,10 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		p.value = a.getString("value")
 		if (profile != null) p.appModeKey = profile
 		if (!bridge.get().setPreference(p)) {
-			throw ToolError("OsmAnd rejected '$id' = '${p.value}': unknown or non-exportable id, wrong value, or the app is not enabled.")
+			throw ToolError("OsmAnd rejected '$id' = '${p.value}': unknown or non-exportable id, wrong value, the app is not enabled, " +
+					"or a setting connected apps can only read (plugins, privacy, proxy, histories, shown tracks, map widgets). " +
+					"Use osmand_show_gpx/osmand_hide_gpx for tracks and osmand_set_widgets for widgets; other read-only settings " +
+					"are changed by the user in OsmAnd.")
 		}
 		// layers such as terrain do not redraw on a pref change by themselves
 		bridge.get().refreshMap()
@@ -684,8 +779,15 @@ private const val TRACKS_EDIT = "Tracks: edit"
 private const val RECORDING = "Trip recording"
 private const val SETTINGS = "Settings"
 
+private val WIDGET_PANELS = listOf("left", "right", "top", "bottom")
+
+/** Widgets that fill a whole row of the top or bottom panel and can't be on the side panels. */
+private val ROW_WIDGETS = setOf("coordinates_map_center", "coordinates_current_location", "map_markers_top",
+	"elevation_profile", "street_name", "lanes")
+
 private const val PREF_HINT = "Common ids: application_mode (current profile, global), daynight_mode (DAY, NIGHT, AUTO, SENSOR, APP_THEME), " +
 		"renderer (map style, e.g. OsmAnd, Touring view (contrast and details), Topo, UniRS, Nautical, Ski map, Winter and ski, Offroad, Desert), " +
 		"map_preferred_locale (map labels language, empty = local names), rotate_map (0 none, 1 bearing, 2 compass, 3 manual), " +
 		"auto_zoom_map_on_off, voice_mute, show_routing_alarms, metric_system, driving_region, show_poi_label, map_density, text_scale. " +
-		"Render style properties use the nrenderer_ prefix, e.g. nrenderer_contourLines, nrenderer_showCycleRoutes."
+		"Render style properties use the nrenderer_ prefix, e.g. nrenderer_contourLines, nrenderer_showCycleRoutes. " +
+		"Map widgets are not settings here: use osmand_widget_layout and osmand_set_widgets."
