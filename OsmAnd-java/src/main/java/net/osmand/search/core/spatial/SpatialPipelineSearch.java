@@ -640,7 +640,7 @@ public class SpatialPipelineSearch {
 		}
 		long time = System.nanoTime();
 		int nonCategoryRes = 0;
-		SpatialSearchResultsList stageList = createResultList(tokens, limitSingleObjects(preResults));
+		SpatialSearchResultsList stageList = createResultList(tokens, limitByPrescore(limitSingleObjects(preResults)));
 		stageList.loadObjectsAndCalcBuildings(ctx.searchContext);
 		if (ctx.isCancelled()) {
 			return true;
@@ -711,6 +711,57 @@ public class SpatialPipelineSearch {
 			}
 		}
 		return res;
+	}
+
+	/**
+	 * Only the single objects with the best prescore are read. Categories, combinations of several objects and
+	 * pre-results with a token not matched yet (a house number) are always read: their rank depends on the objects.
+	 */
+	private List<SpatialPipelineObjectRes> limitByPrescore(List<SpatialPipelineObjectRes> preResults) {
+		int limit = ctx.settings.LIMIT_READ_OBJECTS;
+		SpatialSearchRanking ranking = ctx.searchContext.ranking;
+		LatLon l = ctx.searchContext.location;
+		if (limit <= 0 || preResults.size() <= limit || ranking == null || l == null) {
+			return preResults;
+		}
+		List<SpatialPipelineObjectRes> res = new ArrayList<>();
+		List<SpatialPipelineObjectRes> single = new ArrayList<>();
+		for (SpatialPipelineObjectRes r : preResults) {
+			if (r.mainAtom.isPoiCategory() || r.refs1 != null || !oneObjectForAllTokens(r)) {
+				res.add(r);
+			} else {
+				single.add(r);
+			}
+		}
+		if (single.size() <= limit) {
+			return preResults;
+		}
+		boolean queryIsKind = false, number = false;
+		for (SpatialSearchToken t : ctx.tokens) {
+			queryIsKind |= t.hasPoiCategoryKeys();
+			number |= t.word.chars().anyMatch(Character::isDigit);
+		}
+		double[] score = new double[single.size()];
+		Integer[] order = new Integer[single.size()];
+		for (int i = 0; i < single.size(); i++) {
+			score[i] = ranking.prescore(single.get(i), l, ctx.searchContext.poiSearch, ctx.settings.MIN_ELO_RATING,
+					queryIsKind, number);
+			order[i] = i;
+		}
+		Arrays.sort(order, (a, b) -> Double.compare(score[b], score[a]));
+		for (int i = 0; i < limit; i++) {
+			res.add(single.get(order[i]));
+		}
+		return res;
+	}
+
+	private static boolean oneObjectForAllTokens(SpatialPipelineObjectRes r) {
+		for (NameIndexAtom a : r.atoms) {
+			if (a == null || a.id != r.atoms[0].id) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private SpatialSearchResultsList createResultList(List<SpatialSearchToken> tokens,
