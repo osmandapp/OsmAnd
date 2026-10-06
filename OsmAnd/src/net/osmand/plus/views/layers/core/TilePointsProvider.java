@@ -23,7 +23,6 @@ import net.osmand.core.jni.interface_MapTiledCollectionPoint;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
 import net.osmand.data.DataTileManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -41,6 +40,7 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	private final PointI offset;
 
 	private final DataTileManager<T> points;
+	private final IconPixelsCache<Bitmap> iconsCache = new IconPixelsCache<>();
 	private MapTiledCollectionProvider providerInstance;
 
 	public interface ICollectionPoint {
@@ -62,13 +62,16 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 		private final ICollectionPoint point;
 		private final float textScale;
 		private final float density;
+		private final IconPixelsCache<Bitmap> iconsCache;
 		private final PointI point31;
 
-		public CollectionPoint(@NonNull Context ctx, @NonNull ICollectionPoint point, float textScale, float density) {
+		public CollectionPoint(@NonNull Context ctx, @NonNull ICollectionPoint point, float textScale, float density,
+		                       @NonNull IconPixelsCache<Bitmap> iconsCache) {
 			this.ctx = ctx;
 			this.point = point;
 			this.textScale = textScale;
 			this.density = density;
+			this.iconsCache = iconsCache;
 			this.point31 = new PointI(MapUtils.get31TileNumberX(point.getLongitude()),
 					MapUtils.get31TileNumberY(point.getLatitude()));
 		}
@@ -83,7 +86,8 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 			Bitmap bitmap = isFullSize
 					? point.getBigImage(ctx, textScale, density)
 					: point.getSmallImage(ctx, textScale, density);
-			return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
+			// points share their bitmaps
+			return bitmap != null ? iconsCache.getImage(bitmap, b -> b) : SwigUtilities.nullSkImage();
 		}
 
 		@Override
@@ -191,7 +195,7 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 			int x31 = MapUtils.get31TileNumberX(point.getLongitude());
 			int y31 = MapUtils.get31TileNumberY(point.getLatitude());
 			if (x31 >= left && x31 <= right && y31 >= top && y31 <= bottom) {
-				CollectionPoint collectionPoint = new CollectionPoint(ctx, point, textScale, density);
+				CollectionPoint collectionPoint = new CollectionPoint(ctx, point, textScale, density, iconsCache);
 				res.add(collectionPoint.instantiateProxy(true));
 				collectionPoint.swigReleaseOwnership();
 			}
