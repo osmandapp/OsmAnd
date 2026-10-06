@@ -646,15 +646,10 @@ public class SpatialSearchContext {
 		return readPoiObject(id, cache, null);
 	}
 
-	/** the id of the object an atom reads: the alternative name variant reads the same object */
 	public static long poiObjectId(long id) {
 		return id & ((1L << SHIFT_ALT_NAME) - 1);
 	}
 
-	/**
-	 * @param wanted ids (poiObjectId) that are going to be read: a block is read as a whole and only these
-	 *               objects of it are kept, null - the whole block is kept
-	 */
 	public MapObject readPoiObject(long id, TLongObjectHashMap<MapObject> cache, TLongHashSet wanted)
 			throws IOException {
 		id &= (1L << SHIFT_ALT_NAME) - 1; // the alternative name variant reads the same object
