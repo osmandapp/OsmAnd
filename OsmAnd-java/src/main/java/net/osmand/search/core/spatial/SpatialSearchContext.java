@@ -649,6 +649,15 @@ public class SpatialSearchContext {
 	}
 
 	public MapObject readPoiObject(long id, TLongObjectHashMap<MapObject> cache) throws IOException {
+		return readPoiObject(id, cache, null);
+	}
+
+	public static long poiObjectId(long id) {
+		return id & ((1L << SHIFT_ALT_NAME) - 1);
+	}
+
+	public MapObject readPoiObject(long id, TLongObjectHashMap<MapObject> cache, TLongHashSet wanted)
+			throws IOException {
 		id &= (1L << SHIFT_ALT_NAME) - 1; // the alternative name variant reads the same object
 		if (cache != null) {
 			MapObject mapObject = cache.get(id);
@@ -680,7 +689,10 @@ public class SpatialSearchContext {
 		if (cache != null) {
 			long ofirstid = oid - (poiInd << SHIFT_FILE_IND);
 			for (int i = 0; i < lst.size(); i++) {
-				cache.put(ofirstid + (i << SHIFT_FILE_IND), lst.get(i));
+				long bid = ofirstid + (i << SHIFT_FILE_IND);
+				if (wanted == null || wanted.contains(bid)) {
+					cache.put(bid, lst.get(i));
+				}
 			}
 		}
 		if (poiInd >= lst.size()) {
