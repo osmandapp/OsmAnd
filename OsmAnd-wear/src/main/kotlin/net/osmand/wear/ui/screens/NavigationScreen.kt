@@ -12,6 +12,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -96,9 +97,12 @@ private fun NextManeuver(navigation: NavigationState, icons: Map<String, ImageBi
 			verticalArrangement = Arrangement.Center
 		) {
 			maneuver.iconKey?.let { icons[it] }?.let { arrow ->
+				// The phone draws every glyph white so that colour is decided here, by the
+				// watch's own palette. The arrow takes the colour of the figure it belongs to.
 				Image(
 					bitmap = arrow,
 					contentDescription = null,
+					colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.tertiary),
 					modifier = Modifier.size(48.dp)
 				)
 			}
@@ -220,11 +224,13 @@ private fun Maneuver(maneuver: ManeuverInfo, icon: ImageBitmap?) {
 		horizontalAlignment = Alignment.CenterHorizontally
 	) {
 		Row(verticalAlignment = Alignment.CenterVertically) {
-			// Drawn on the phone by OsmAnd's own turn drawable — the watch only places it.
+			// Drawn on the phone by OsmAnd's own turn drawable — the watch only places and
+			// colours it, here to match the distance beside it rather than the page's accent.
 			icon?.let {
 				Image(
 					bitmap = it,
 					contentDescription = null,
+					colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
 					modifier = Modifier.size(30.dp)
 				)
 			}

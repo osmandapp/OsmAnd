@@ -27,8 +27,11 @@ class WearIconRenderer(private val app: OsmandApplication) {
 	private val size: Int
 		get() = (ICON_SIZE_DP * density).toInt()
 
+	private val turnSize: Int
+		get() = (TURN_ICON_SIZE_DP * density).toInt()
+
 	/** PNG bytes of the manoeuvre arrow for [turnType], or null if it could not be drawn. */
-	fun renderTurn(turnType: TurnType): ByteArray? = render { canvas, side ->
+	fun renderTurn(turnType: TurnType): ByteArray? = render(turnSize) { canvas, side ->
 		turnDrawable.setBounds(0, 0, side, side)
 		turnDrawable.setRouteType(turnType)
 		turnDrawable.draw(canvas)
@@ -44,8 +47,7 @@ class WearIconRenderer(private val app: OsmandApplication) {
 		}
 	}
 
-	private inline fun render(draw: (Canvas, Int) -> Unit): ByteArray? = try {
-		val side = size
+	private inline fun render(side: Int = size, draw: (Canvas, Int) -> Unit): ByteArray? = try {
 		val bitmap = Bitmap.createBitmap(side, side, Bitmap.Config.ARGB_8888)
 		val canvas = Canvas(bitmap)
 		canvas.drawColor(0, PorterDuff.Mode.CLEAR)
@@ -61,5 +63,12 @@ class WearIconRenderer(private val app: OsmandApplication) {
 
 	companion object {
 		private const val ICON_SIZE_DP = 36f
+
+		/**
+		 * The manoeuvre arrow is rendered larger than the rest: it is the one glyph the watch
+		 * shows at a glanceable size, filling most of its navigation page, and upscaling a
+		 * 36dp bitmap to that showed on a dense screen.
+		 */
+		private const val TURN_ICON_SIZE_DP = 48f
 	}
 }
