@@ -37,7 +37,14 @@ data class PhoneState(
 	 * show what is in force rather than what this watch last asked for: the phone is where the
 	 * renderer actually lives, and another watch, or a reinstall, can have changed it.
 	 */
-	val legacyMapRenderer: Boolean = true
+	val legacyMapRenderer: Boolean = true,
+
+	/**
+	 * Whether the phone can draw the watch's map with OpenGL at all. Its core only exists when
+	 * the phone itself is set to the OpenGL engine, so choosing it on the watch while the phone
+	 * is on the legacy one asks for something that cannot happen.
+	 */
+	val openglAvailable: Boolean = false
 )
 
 /**

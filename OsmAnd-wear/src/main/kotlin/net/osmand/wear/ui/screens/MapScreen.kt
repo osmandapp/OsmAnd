@@ -66,6 +66,7 @@ import net.osmand.wear.data.MapFrames
 @Composable
 fun MapScreen(
 	carConnected: Boolean,
+	openglMissing: Boolean,
 	onStart: (width: Int, height: Int, density: Float) -> Unit,
 	onStop: () -> Unit,
 	onPause: (paused: Boolean) -> Unit,
@@ -78,6 +79,16 @@ fun MapScreen(
 		MessageScreen(
 			title = stringResource(R.string.wear_map_car),
 			hint = stringResource(R.string.wear_map_car_hint)
+		)
+		return
+	}
+
+	// Asking the phone for a renderer it does not have would simply never produce a frame, and
+	// the screen would sit on "loading" for as long as it stayed open.
+	if (openglMissing) {
+		MessageScreen(
+			title = stringResource(R.string.wear_map_opengl_off),
+			hint = stringResource(R.string.wear_map_opengl_off_hint)
 		)
 		return
 	}

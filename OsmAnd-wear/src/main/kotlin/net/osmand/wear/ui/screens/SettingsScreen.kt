@@ -36,6 +36,7 @@ import net.osmand.wear.R
 @Composable
 fun SettingsScreen(
 	legacyMapRenderer: Boolean,
+	openglAvailable: Boolean,
 	onSelectMapRenderer: (legacy: Boolean) -> Unit
 ) {
 	// Shown as soon as it is tapped, not when the phone has confirmed it. The phone is a second
@@ -66,10 +67,18 @@ fun SettingsScreen(
 				)
 			}
 			item {
+				// Offered but not selectable when the phone is on its own legacy engine: the
+				// OpenGL core only exists there when the phone itself uses it, so choosing it
+				// would ask for a map that never arrives.
 				RendererChoice(
 					title = stringResource(R.string.wear_map_renderer_opengl),
-					hint = stringResource(R.string.wear_map_renderer_opengl_descr),
+					hint = if (openglAvailable) {
+						stringResource(R.string.wear_map_renderer_opengl_descr)
+					} else {
+						stringResource(R.string.wear_map_renderer_opengl_off)
+					},
 					selected = !chosen,
+					enabled = openglAvailable,
 					onClick = {
 						chosen = false
 						onSelectMapRenderer(false)
@@ -85,6 +94,7 @@ private fun RendererChoice(
 	title: String,
 	hint: String,
 	selected: Boolean,
+	enabled: Boolean = true,
 	onClick: () -> Unit
 ) {
 	val label: @Composable RowScope.() -> Unit = {
@@ -103,6 +113,7 @@ private fun RendererChoice(
 	OutlinedButton(
 		onClick = onClick,
 		label = label,
+		enabled = enabled,
 		modifier = Modifier.fillMaxWidth()
 	)
 }

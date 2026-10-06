@@ -136,8 +136,11 @@ fun WearApp(connector: PhoneConnector) {
 					}
 				}
 				composable(Routes.MAP) {
+					val state = currentSnapshot()?.state
 					MapScreen(
-						carConnected = currentSnapshot()?.state?.carConnected == true,
+						carConnected = state?.carConnected == true,
+						openglMissing = state != null
+								&& !state.legacyMapRenderer && !state.openglAvailable,
 						onStart = { w, h, d -> send(WearCommand.StartMapStream(w, h, d)) },
 						onStop = { send(WearCommand.StopMapStream) },
 						onPause = { paused -> send(WearCommand.PauseMapStream(paused)) },
@@ -172,6 +175,7 @@ fun WearApp(connector: PhoneConnector) {
 					val snapshot = currentSnapshot()
 					SettingsScreen(
 						legacyMapRenderer = snapshot?.state?.legacyMapRenderer ?: true,
+						openglAvailable = snapshot?.state?.openglAvailable == true,
 						onSelectMapRenderer = { legacy ->
 							send(WearCommand.SetMapRenderer(legacy))
 						}

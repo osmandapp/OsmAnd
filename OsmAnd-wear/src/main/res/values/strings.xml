@@ -11,7 +11,10 @@
 	<string name="wear_map_renderer_legacy">Legacy</string>
 	<string name="wear_map_renderer_legacy_descr">Lighter on the phone</string>
 	<string name="wear_map_renderer_opengl">OpenGL</string>
-	<string name="wear_map_renderer_opengl_descr">Same map as the phone shows</string>
+	<string name="wear_map_renderer_opengl_descr">Needs OpenGL on the phone</string>
+	<string name="wear_map_renderer_opengl_off">Turn on OpenGL rendering on the phone to use this</string>
+	<string name="wear_map_opengl_off">OpenGL is off on the phone</string>
+	<string name="wear_map_opengl_off_hint">Switch the phone to OpenGL rendering, or pick Legacy in settings</string>
 	<string name="wear_not_navigating">No active route</string>
 	<string name="wear_protocol_mismatch">Update OsmAnd on your phone</string>
 	<string name="wear_stop">Stop</string>

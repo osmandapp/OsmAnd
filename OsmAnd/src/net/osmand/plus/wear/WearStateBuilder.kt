@@ -11,6 +11,7 @@ import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.utils.FormattedValue
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.OsmAndFormatterParams
+import net.osmand.plus.views.corenative.NativeCoreContext
 import net.osmand.router.TurnType
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.wear.api.AppModeInfo
@@ -52,6 +53,7 @@ class WearStateBuilder(private val app: OsmandApplication) {
 			markers = buildMarkers(),
 			carConnected = app.carNavigationSession != null,
 			legacyMapRenderer = WearMapStreamer.legacyRenderer(app).get(),
+			openglAvailable = NativeCoreContext.isInit(),
 			location = buildLocation(),
 			headingDegrees = app.mapViewTrackingUtilities.heading
 		)
