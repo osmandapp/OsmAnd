@@ -3,121 +3,88 @@ package net.osmand.binary;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.SearchAlgorithms;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
-
+/**
+ * Word dictionaries of {@link SearchVariantRules} by rules locale. Every method takes the locale of the data
+ * ({@link SearchLocales}); null or an unknown locale selects the base rules. Dictionaries are immutable.
+ */
 public class Abbreviations {
 
     private Abbreviations() {
     }
 
-    private static final Map<String, String> abbreviations = new HashMap<>();
-    // 2nd version search abbrevations for spatial search
-    private static final Map<String, String> searchAbbreviations = new HashMap<>();
-    // set of words to check for buidlings
-    private static final Map<String, String> buildingAbbreviations = new HashMap<>();
-	private static final Set<String> conjunctions = new TreeSet<>();
-	
-	private static final Set<String> commonSkipOtherCnt = new TreeSet<>();
+    private static final Map<String, Dictionary> DICTIONARIES = new ConcurrentHashMap<>();
+	// by the locale as callers pass it: search asks per name word, normalize() is too slow for that
+	private static final Map<String, Dictionary> BY_LOCALE = new ConcurrentHashMap<>();
 
-	private static void addDirectionWord(String key, String full) {
-		abbreviations.put(key, full);
-		commonSkipOtherCnt.add(key);
-		commonSkipOtherCnt.add(full.toLowerCase());
+	private static Dictionary dictionary(String locale) {
+		String raw = locale == null ? "" : locale;
+		Dictionary dictionary = BY_LOCALE.get(raw);
+		if (dictionary == null) {
+			dictionary = DICTIONARIES.computeIfAbsent(SearchLocales.normalize(raw),
+					k -> new Dictionary(SearchVariantRules.forLocale(k)));
+			BY_LOCALE.put(raw, dictionary);
+		}
+		return dictionary;
 	}
 
-	private static void addStreetStatus(String key, String full) {
-		abbreviations.put(key, full);
-		commonSkipOtherCnt.add(key);
-		commonSkipOtherCnt.add(full.toLowerCase());
-	}
+	private static final class Dictionary {
+		// query word -> its forms and reverse forms, in the order of the rules
+		final Map<String, List<QueryForm>> forms = new HashMap<>();
+		final Set<String> buildingAbbreviations;
+		// aligned ignorable words (to="")
+		final Set<String> ignorables;
+		// aligned word of a name -> owners whose names it does not penalize (<skipPenalty>, ignorable words, <class1/2>)
+		final Map<String, List<String>> penaltyFree;
+		Dictionary(SearchVariantRules rules) {
+			Map<String, SearchVariantRules.WordRule> ruleOfWord = new HashMap<>();
+			for (SearchVariantRules.WordRule rule : rules.query()) {
+				ruleOfWord.put(rule.word(), rule);
+			}
+			for (String word : rules.formWords()) {
+				List<QueryForm> list = new ArrayList<>();
+				for (SearchVariantRules.Form form : rules.forms(word)) {
+					// a reverse form leads to the word of a rule that has this word as its form ("street" -> "st")
+					SearchVariantRules.WordRule other = ruleOfWord.get(form.word());
+					list.add(new QueryForm(form.object(), form.word(), other != null && other.hasForm(word)));
+				}
+				// a token is aligned (ß -> ss, no diacritics): "Straße" asks for "strasse"
+				forms.put(SearchAlgorithms.alignChars(word), List.copyOf(list));
+			}
+			// the words of <skipPenalty> and the classes are aligned by the rules, the ignorable words are query words
+			Map<String, Set<String>> owners = new HashMap<>();
+			rules.skipPenalty().forEach((word, list) -> owners.computeIfAbsent(word, k -> new LinkedHashSet<>())
+					.addAll(list));
+			Set<String> ignorables = new TreeSet<>();
+			for (String word : rules.ignorables()) {
+				String aligned = SearchAlgorithms.alignChars(word);
+				ignorables.add(aligned);
+				owners.computeIfAbsent(aligned, k -> new LinkedHashSet<>()).add(SearchVariantRules.ANY_OBJECT);
+			}
+			for (Map.Entry<String, Integer> e : rules.classes().entrySet()) {
+				if (e.getValue() != SearchVariantRules.CLASS_ALWAYS) {
+					// a service or frequent word only names the kind of an object
+					owners.computeIfAbsent(e.getKey(), k -> new LinkedHashSet<>()).add(SearchVariantRules.ANY_OBJECT);
+				}
+			}
+			Map<String, List<String>> penaltyFree = new HashMap<>();
+			owners.forEach((word, set) -> penaltyFree.put(word, set.contains(SearchVariantRules.ANY_OBJECT)
+					? List.of(SearchVariantRules.ANY_OBJECT) : List.copyOf(set)));
+			this.buildingAbbreviations = Collections.unmodifiableSet(new TreeSet<>(rules.buildings()));
+			this.ignorables = Collections.unmodifiableSet(ignorables);
+			this.penaltyFree = Collections.unmodifiableMap(penaltyFree);
+		}
 
-	private static void addConjunction(String key) {
-		conjunctions.add(key);
-		commonSkipOtherCnt.add(key);
-	}
-
-	static {
-		// articles
-		addConjunction("the");
-		addConjunction("de");
-		addConjunction("du");
-		addConjunction("der");
-		addConjunction("den");
-		addConjunction("die");
-		addConjunction("das");
-		addConjunction("la");
-		addConjunction("le");
-		addConjunction("el");
-		addConjunction("il");
-		addConjunction("of");
-
-		// and
-		addConjunction("and");
-		addConjunction("und");
-		addConjunction("en");
-		addConjunction("et");
-		addConjunction("y");
-		addConjunction("и");
-		
-		
-
-		// direction
-		addDirectionWord("e", "East");
-		addDirectionWord("w", "West");
-		addDirectionWord("s", "South");
-		addDirectionWord("n", "North");
-		addDirectionWord("sw", "Southwest");
-		addDirectionWord("se", "Southeast");
-		addDirectionWord("nw", "Northwest");
-		addDirectionWord("ne", "Northeast");
-
-		// street status
-		addStreetStatus("ln", "Lane");
-		addStreetStatus("dr", "Drive");
-		addStreetStatus("rd", "Road");
-		addStreetStatus("av", "Avenue");
-		addStreetStatus("st", "Street"); // 2 values could be saint
-		addStreetStatus("hwy", "Highway");
-		addStreetStatus("blvd", "Boulevard");
-	}
-
-	static {
-		searchAbbreviations.putAll(abbreviations);
-		searchAbbreviations.put("ave", "Avenue"); // extra
-		searchAbbreviations.put("st", "Street Saint"); // 2 values could be saint
-		// duplicates - synonyms and not abbrevations actually
-		searchAbbreviations.put("о", "Остров");
-		searchAbbreviations.put("остров", "о.");
-		searchAbbreviations.put("1st", "First");
-		searchAbbreviations.put("2nd", "Second");
-		searchAbbreviations.put("3rd", "Third");
-		searchAbbreviations.put("first", "1st");
-		searchAbbreviations.put("second", "2nd");
-		searchAbbreviations.put("third", "3rd");
-		searchAbbreviations.put("fourth", "4th");
-		searchAbbreviations.put("fifth", "5th");
-		searchAbbreviations.put("sixth", "6th");
-		searchAbbreviations.put("seventh", "7th");
-	}
-
-	// common housenumber additions
-	static {
-		// french
-		buildingAbbreviations.put("bis", "Bis");
-		buildingAbbreviations.put("ter", "Ter");
-		buildingAbbreviations.put("quater", "Quater");
-		// american
-		buildingAbbreviations.put("bldg", "Building");
-		buildingAbbreviations.put("ste", "Suite");
-		buildingAbbreviations.put("unt", "Unit");
-		buildingAbbreviations.put("apt", "Apartment");
-		buildingAbbreviations.put("fl", "Floor");
-		buildingAbbreviations.put("flr", "Floor");
-		buildingAbbreviations.put("bsmt", "Basement");
 	}
 
 	public static boolean likelyPartOfRef(String word, Set<String> wordSplit) {
@@ -136,16 +103,17 @@ public class Abbreviations {
 	}
 	
 	// search v-2
-	public static boolean likelyPartOfBuilding(String word, Set<String> wordSplit) {
+	public static boolean likelyPartOfBuilding(String word, Set<String> wordSplit, String locale) {
+		Dictionary rules = dictionary(locale);
 		boolean bldNum = (SearchAlgorithms.isNumber2Letters(word) || word.length() == 1
-				|| buildingAbbreviations.containsKey(word));
+				|| rules.buildingAbbreviations.contains(word));
 		if (bldNum) {
 			return true;
 		}
 		if (wordSplit != null) {
 			// recursion for 2bis
 			for (String w : wordSplit) {
-				boolean likely = likelyPartOfBuilding(w, null);
+				boolean likely = likelyPartOfBuilding(w, null, locale);
 				if (!likely) {
 					return false;
 				}
@@ -154,53 +122,120 @@ public class Abbreviations {
 		}
 		return false;
 	}
-    
-    
-    // search-v2
-    public static Map<String, String> getSearchabbreviations() {
-		return searchAbbreviations;
-	}
-    
-    // search-v2
- 	public static boolean isCommonSkipOtherCnt(String lowerCase) {
- 		return commonSkipOtherCnt.contains(lowerCase);
- 	}
 
-    // Indexing data
-    public static String replaceAll(String phrase) {
-        String[] words = phrase.split(SearchPhrase.DELIMITER);
-        StringBuilder r = new StringBuilder();
-        boolean changed = false;
-        for (String w : words) {
-            if (r.length() > 0) {
-                r.append(SearchPhrase.DELIMITER);
-            }
-            String abbrRes = abbreviations.get(w.toLowerCase());
-            if (abbrRes == null) {
-                r.append(w);
-            } else {
-                changed = true;
-                r.append(abbrRes);
-            }
-        }
-        return changed ? r.toString() : phrase;
-    }
-    
+	/**
+	 * A form of a query word: the word of a name it stands for and the owners of names it applies to; a reverse form
+	 * leads from a full word to its abbreviation ("street" -> "st").
+	 */
+	public record QueryForm(String object, String word, boolean reverse) {
+		public boolean appliesTo(String owner) {
+			return SearchVariantRules.appliesTo(object, owner);
+		}
+
+		/** true when the form applies to every owner of a name */
+		public boolean isUnscoped() {
+			return SearchVariantRules.ANY_OBJECT.equals(object);
+		}
+	}
+
+	/** Only one-word forms can be matched against one name-index atom, the rules load only such rules. */
+	public static List<QueryForm> getQueryForms(String word, String locale) {
+		return queryForms(dictionary(locale), word);
+	}
+
+	private static List<QueryForm> queryForms(Dictionary dictionary, String word) {
+		return dictionary.forms.getOrDefault(SearchAlgorithms.alignChars(word.toLowerCase(Locale.ROOT)), List.of());
+	}
+
+	/**
+	 * search-v2: a word of a name that the query does not have does not penalize the object: {@code <skipPenalty>}
+	 * for the owner, an ignorable word ({@code to=""}) or a word of {@code <class1>}/{@code <class2>} of the locale
+	 *
+	 * @param owner owner of the name: street, locality, boundary, postcode, poi
+	 */
+	public static boolean isCommonSkipOtherCnt(String lowerCase, String locale, String owner) {
+		List<String> owners = dictionary(locale).penaltyFree.get(aligned(lowerCase));
+		if (owners == null) {
+			return false;
+		}
+		for (String object : owners) {
+			if (SearchVariantRules.appliesTo(object, owner)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * search-v2: an ignorable word ({@code to=""}) of the locale of the map. Search v1 does not read the rules, its
+	 * conjunctions are {@link CommonWords#isConjunction}.
+	 */
+	public static boolean isIgnorable(String lowerCase, String locale) {
+		return dictionary(locale).ignorables.contains(aligned(lowerCase));
+	}
+
+	// the dictionaries keep aligned words: "école" is "ecole", "straße" is "strasse"; most words of names need no work
+	private static String aligned(String lowerCase) {
+		for (int i = 0; i < lowerCase.length(); i++) {
+			char c = lowerCase.charAt(i);
+			if (c >= 128 || c == '\'' || c == '`') {
+				return SearchAlgorithms.alignChars(lowerCase);
+			}
+		}
+		return lowerCase;
+	}
+
+	// search v1 and the OBF writer: fixed English tables, the rules of spatial search do not feed them
+	private static final Map<String, String> abbreviations = new HashMap<>();
+	private static final Set<String> conjunctions = new TreeSet<>();
+
+	static {
+		for (String c : new String[] { "the", "de", "du", "der", "den", "die", "das", "la", "le", "el", "il", "of",
+				"and", "und", "en", "et", "y", "и" }) {
+			conjunctions.add(c);
+		}
+		String[][] pairs = { { "e", "East" }, { "w", "West" }, { "s", "South" }, { "n", "North" },
+				{ "sw", "Southwest" }, { "se", "Southeast" }, { "nw", "Northwest" }, { "ne", "Northeast" },
+				{ "ln", "Lane" }, { "dr", "Drive" }, { "rd", "Road" }, { "av", "Avenue" }, { "st", "Street" },
+				{ "hwy", "Highway" }, { "blvd", "Boulevard" } };
+		for (String[] p : pairs) {
+			abbreviations.put(p[0], p[1]);
+		}
+	}
+
+	// Indexing data
+	public static String replaceAll(String phrase) {
+		String[] words = phrase.split(SearchPhrase.DELIMITER);
+		StringBuilder r = new StringBuilder();
+		boolean changed = false;
+		for (String w : words) {
+			if (r.length() > 0) {
+				r.append(SearchPhrase.DELIMITER);
+			}
+			String abbrRes = abbreviations.get(w.toLowerCase());
+			if (abbrRes == null) {
+				r.append(w);
+			} else {
+				changed = true;
+				r.append(abbrRes);
+			}
+		}
+		return changed ? r.toString() : phrase;
+	}
+
 	// search-v1
-    public static Map<String, String> getAbbreviations() {
+	public static Map<String, String> getAbbreviations() {
 		return abbreviations;
 	}
 
 	// search v-1
-    public static String replace(String word) {
-        String value = abbreviations.get(word.toLowerCase());
-        return value != null ? value : word;
-    }
-    
-    // search-v1
+	public static String replace(String word) {
+		String value = abbreviations.get(word.toLowerCase());
+		return value != null ? value : word;
+	}
+
+	// search-v1
 	public static boolean isConjunction(String lowerCase) {
 		return conjunctions.contains(lowerCase);
 	}
-	
-    
 }

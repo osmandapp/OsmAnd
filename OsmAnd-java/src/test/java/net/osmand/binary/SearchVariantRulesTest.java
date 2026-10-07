@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
 
 public class SearchVariantRulesTest {
 	private static List<String> forms(String word, String locale) {
-		return SearchVariantRules.forLocale(locale).forms(word.toLowerCase()).stream()
-				.map(SearchVariantRules.Form::word).collect(Collectors.toList());
+		return Abbreviations.getQueryForms(word, locale).stream().map(Abbreviations.QueryForm::word)
+				.collect(Collectors.toList());
 	}
 
 	private static List<String> forms(SearchVariantRules rules, String word) {
@@ -43,6 +43,11 @@ public class SearchVariantRulesTest {
 		assertEquals(List.of("av", "ave"), forms("avenue", "en"));
 		assertEquals(List.of("1st"), forms("first", "en"));
 		assertEquals(List.of("о"), forms("остров", "ru_RU"));
+		// a token is aligned: the reverse form of a word with ß or a diacritic is found by its aligned spelling
+		assertEquals(List.of("str"), forms("Straße", "de_DE"));
+		assertEquals(List.of("str"), forms("strasse", "de_DE"));
+		assertEquals(List.of("urb"), forms("urbanizacion", "es_ES"));
+		assertEquals(List.of("jr"), forms("Jirón", "es_PE"));
 		assertEquals(List.of("пр"), forms("проезд", "ru_RU"));
 		assertEquals(List.of("просп", "пр"), forms("проспект", "ru_RU"));
 		SearchVariantRules en = SearchVariantRules.forLocale("en");
@@ -52,13 +57,23 @@ public class SearchVariantRulesTest {
 		assertEquals(List.of("street:e"), forms(en, "east"));
 		assertEquals(List.of("street:place"), forms(en, "pl"));
 
-		assertTrue(SearchVariantRules.forLocale("en").buildings().contains("apt"));
-		assertTrue(SearchVariantRules.forLocale("fr_FR").buildings().contains("bis"));
-		assertTrue(SearchVariantRules.forLocale("ru_RU").buildings().contains("д"));
-		assertTrue(SearchVariantRules.forLocale("ru_RU").ignorables().contains("и"));
-		assertFalse(SearchVariantRules.forLocale("uk_UA").ignorables().contains("и"));
-		assertTrue(SearchVariantRules.forLocale("de_AT").ignorables().contains("die"));
-		assertFalse(SearchVariantRules.forLocale("en_US").ignorables().contains("die"));
+		assertTrue(Abbreviations.likelyPartOfBuilding("apt", null, "en"));
+		assertTrue(Abbreviations.likelyPartOfBuilding("bis", null, "fr_FR"));
+		assertTrue(Abbreviations.likelyPartOfBuilding("д", null, "ru_RU"));
+		assertTrue(Abbreviations.isIgnorable("и", "ru_RU"));
+		assertFalse(Abbreviations.isIgnorable("и", "uk_UA"));
+		assertTrue(Abbreviations.isIgnorable("die", "de_AT"));
+		assertFalse(Abbreviations.isIgnorable("die", "en_US"));
+		assertTrue(Abbreviations.isCommonSkipOtherCnt("street", "en_GB", "street"));
+		assertTrue(Abbreviations.isCommonSkipOtherCnt("saint", "en_GB", "poi"));
+		assertFalse(Abbreviations.isCommonSkipOtherCnt("street", "de_DE", "street"));
+		// titles of German names are no unmatched words: "Dr.-Weber-Straße", "Friedenskapelle St. Josef"
+		assertTrue(Abbreviations.isCommonSkipOtherCnt("dr", "de_DE", "street"));
+		assertTrue(Abbreviations.isCommonSkipOtherCnt("sankt", "de_LI", "poi"));
+		assertTrue(Abbreviations.isCommonSkipOtherCnt("sainte", "fr_FR", "locality"));
+		assertTrue(Abbreviations.isCommonSkipOtherCnt("doctor", "es_ES", "street"));
+		// an ignorable word never penalizes a name of any owner
+		assertTrue(Abbreviations.isCommonSkipOtherCnt("the", "en", "poi"));
 
 		assertEquals("en_US", SearchLocales.forMap("Us_new-york_north-america.obf"));
 		assertEquals("de_DE", SearchLocales.forMap("Germany_bayern_europe.obf"));
@@ -92,9 +107,10 @@ public class SearchVariantRulesTest {
 		assertEquals(List.of("highway"), forms("hwy", "en"));
 		assertEquals(List.of("esplanade"), forms("ave", "en_US"));
 		assertEquals(List.of("av"), forms("avenue", "en_US"));
-		assertTrue(SearchVariantRules.forLocale("en_US").buildings().contains("tower"));
-		assertFalse(SearchVariantRules.forLocale("en").buildings().contains("tower"));
-		assertTrue(SearchVariantRules.forLocale("en_US").ignorables().contains("thee"));
+		assertTrue(Abbreviations.likelyPartOfBuilding("tower", null, "en_US"));
+		assertFalse(Abbreviations.likelyPartOfBuilding("tower", null, "en"));
+		assertTrue(Abbreviations.isIgnorable("thee", "en_US"));
+		assertTrue(Abbreviations.isCommonSkipOtherCnt("eastern", "en_US", "street"));
 		assertEquals("CR7", SearchVariantRules.forLocale("en_US").index().get(0).apply("County Road 7"));
 
 		// a lower layer replaces a rule whole: here it changes the order of the meanings
@@ -266,6 +282,8 @@ public class SearchVariantRulesTest {
 		expect("<query><rule from=\"de\" to=\"\" object=\"street\"/></query>", "<skipPenalty object=\"street\">");
 		expect("<common>st</common>", "<common> is replaced by <skipPenalty>");
 
+		assertTrue(Abbreviations.isCommonSkipOtherCnt("st", "en", "poi"));
+		assertFalse(Abbreviations.isCommonSkipOtherCnt("main", "en", "street"));
 	}
 
 	@Test
@@ -496,6 +514,21 @@ public class SearchVariantRulesTest {
 				+ "<query><skipPenalty object=\"street\">straße</skipPenalty>"
 				+ "<skipPenalty object=\"poi\">strasse</skipPenalty></query>")));
 		assertEquals(List.of("street", "poi"), rules.skipPenalty().get("strasse"));
+		java.lang.reflect.Field cache = SearchVariantRules.class.getDeclaredField("CACHE");
+		cache.setAccessible(true);
+		@SuppressWarnings("unchecked")
+		java.util.Map<String, SearchVariantRules> rulesCache = (java.util.Map<String, SearchVariantRules>) cache.get(null);
+		rulesCache.put(locale, rules);
+		try {
+			assertTrue(Abbreviations.isCommonSkipOtherCnt("école", locale, "street"));
+			assertTrue(Abbreviations.isCommonSkipOtherCnt("ecole", locale, "poi"));
+			// the owners of two spellings are merged
+			assertTrue(Abbreviations.isCommonSkipOtherCnt("straße", locale, "street"));
+			assertTrue(Abbreviations.isCommonSkipOtherCnt("strasse", locale, "poi"));
+			assertFalse(Abbreviations.isCommonSkipOtherCnt("straße", locale, "locality"));
+		} finally {
+			rulesCache.remove(locale);
+		}
 		expect("<index><class1>école</class1></index><query><skipPenalty>ecole</skipPenalty></query>",
 				"<class1>");
 	}

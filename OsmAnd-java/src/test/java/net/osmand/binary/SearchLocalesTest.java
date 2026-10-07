@@ -79,23 +79,23 @@ public class SearchLocalesTest {
 		assertEquals("US", SearchLocales.country("en_US"));
 		assertEquals("TW", SearchLocales.country("zh_Hant_TW"));
 		assertEquals("", SearchLocales.country("en"));
-		assertFalse(SearchVariantRules.forLocale("b+hsb").ignorables().contains("and"));
-		assertTrue(SearchVariantRules.forLocale("EN-us").ignorables().contains("and"));
+		assertFalse(Abbreviations.isIgnorable("and", "b+hsb"));
+		assertTrue(Abbreviations.isIgnorable("and", "EN-us"));
 		assertNotNull(SearchVariantRules.forLocale("not a locale"));
 	}
 
 	@Test
 	public void buildingSuffixBelongsToItsLanguages() {
 		// "12ter" is a French or Italian house number; "Oak Ter" is Oak Terrace in English
-		assertFalse(SearchVariantRules.forLocale("").buildings().contains("ter"));
-		assertTrue(SearchVariantRules.forLocale("fr_FR").buildings().contains("ter"));
-		assertTrue(SearchVariantRules.forLocale("it_IT").buildings().contains("ter"));
-		assertFalse(SearchVariantRules.forLocale("en_US").buildings().contains("ter"));
-		assertFalse(SearchVariantRules.forLocale("en_GB").buildings().contains("quater"));
-		assertTrue(SearchVariantRules.forLocale("es_ES").buildings().contains("bis"));
-		assertFalse(SearchVariantRules.forLocale("en_US").buildings().contains("bis"));
-		assertTrue(SearchVariantRules.forLocale("en_US").buildings().contains("apt"));
-		assertFalse(SearchVariantRules.forLocale("de_DE").buildings().contains("apt"));
+		assertFalse(Abbreviations.likelyPartOfBuilding("ter", null, ""));
+		assertTrue(Abbreviations.likelyPartOfBuilding("ter", null, "fr_FR"));
+		assertTrue(Abbreviations.likelyPartOfBuilding("ter", null, "it_IT"));
+		assertFalse(Abbreviations.likelyPartOfBuilding("ter", null, "en_US"));
+		assertFalse(Abbreviations.likelyPartOfBuilding("quater", null, "en_GB"));
+		assertTrue(Abbreviations.likelyPartOfBuilding("bis", null, "es_ES"));
+		assertFalse(Abbreviations.likelyPartOfBuilding("bis", null, "en_US"));
+		assertTrue(Abbreviations.likelyPartOfBuilding("apt", null, "en_US"));
+		assertFalse(Abbreviations.likelyPartOfBuilding("apt", null, "de_DE"));
 	}
 
 	@Test
