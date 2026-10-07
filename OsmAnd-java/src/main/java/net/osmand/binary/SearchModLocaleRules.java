@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 /**
  * Name variants and word classes shared by the OBF writer and spatial search (schema v5, see
@@ -76,18 +75,17 @@ public final class SearchModLocaleRules {
 		Map<String, WordRule> query = new LinkedHashMap<>();
 		Map<String, SkipPenalty> skipPenalty = new LinkedHashMap<>();
 		for (SearchModRulesParser.Layer layer : layers) {
-			disable(index, layer.disabledIndex, layer);
-			disable(unglues, layer.disabledUnglues, layer);
-			disable(classes, layer.disabledClasses, layer);
-			disable(query, layer.disabledQuery, layer);
-			disable(skipPenalty, layer.disabledSkipPenalty, layer);
+			disable(index, layer.disabledIndex);
+			disable(unglues, layer.disabledUnglues);
+			disable(classes, layer.disabledClasses);
+			disable(query, layer.disabledQuery);
+			disable(skipPenalty, layer.disabledSkipPenalty);
 			index.putAll(layer.index);
 			unglues.putAll(layer.unglues);
 			classes.putAll(layer.classes);
 			query.putAll(layer.query);
 			skipPenalty.putAll(layer.skipPenalty);
 		}
-		String where = " in the rules of locale '" + locale + "'";
 		Set<String> buildings = new LinkedHashSet<>();
 		Set<String> ignorables = new LinkedHashSet<>();
 		Map<String, Set<Form>> forms = new LinkedHashMap<>();
@@ -107,44 +105,12 @@ public final class SearchModLocaleRules {
 				if (form.isBuilding() || form.isIgnorable()) {
 					continue;
 				}
-				WordRule other = query.get(form.word());
-				if (other != null && other.hasForm(rule.word)) {
-					throw new IllegalArgumentException("The rule of '" + other.word + "' repeats the reverse form of '"
-							+ rule.word + "' -> '" + form.word() + "': reverse forms are generated" + where);
-				}
-				if (buildings.contains(form.word()) || ignorables.contains(form.word())) {
-					throw new IllegalArgumentException("The form '" + form.word() + "' of '" + rule.word
-							+ "' is a house-number qualifier or an ignorable word" + where);
-				}
 				forms.computeIfAbsent(form.word(), k -> new LinkedHashSet<>()).add(new Form(form.object(), rule.word));
 			}
 		}
-		Set<String> alignedIgnorables = new LinkedHashSet<>();
-		Set<String> alignedBuildings = new LinkedHashSet<>();
-		for (String word : ignorables) {
-			alignedIgnorables.add(SearchAlgorithms.alignChars(word));
-		}
-		for (String word : buildings) {
-			alignedBuildings.add(SearchAlgorithms.alignChars(word));
-		}
 		Map<String, List<String>> skip = new LinkedHashMap<>();
 		for (SkipPenalty entry : skipPenalty.values()) {
-			if (alignedBuildings.contains(entry.word()) || alignedIgnorables.contains(entry.word())) {
-				throw new IllegalArgumentException("The <skipPenalty> word '" + entry.word() + "' is a house-number "
-						+ "qualifier or an ignorable word: an ignorable word never penalizes a name" + where);
-			}
-			Integer wordClass = classes.get(entry.word());
-			if (wordClass != null && wordClass != CLASS_ALWAYS) {
-				throw new IllegalArgumentException("The <skipPenalty> word '" + entry.word() + "' is a word of <class"
-						+ wordClass + ">, which never penalizes a name" + where);
-			}
 			skip.computeIfAbsent(entry.word(), k -> new ArrayList<>()).add(entry.object());
-		}
-		for (String word : ignorables) {
-			Integer wordClass = classes.get(SearchAlgorithms.alignChars(word));
-			if (wordClass != null && wordClass == CLASS_ALWAYS) {
-				throw new IllegalArgumentException("The ignorable word '" + word + "' is a word of <class0>" + where);
-			}
 		}
 		List<Rule> indexRules = new ArrayList<>(index.values());
 		for (WordRule rule : query.values()) {
@@ -152,18 +118,6 @@ public final class SearchModLocaleRules {
 				continue;
 			}
 			Form form = rule.forms.get(0);
-			String mirror = " of the mirror pair '" + rule.word + "' -> '" + form.word() + "' (" + rule.mirror.file + ")";
-			// the word of a mirror means one thing: another rule reaching it would add its meaning to the pair
-			for (WordRule other : query.values()) {
-				if (other != rule && other.hasForm(rule.word)) {
-					throw new IllegalArgumentException("The word '" + rule.word + "'" + mirror + " is a form of "
-							+ other + " too" + where);
-				}
-			}
-			if (query.containsKey(form.word())) {
-				throw new IllegalArgumentException("The form '" + form.word() + "'" + mirror + " has its own rule: a "
-						+ "mirror pair works both ways and is written once" + where);
-			}
 			indexRules.add(new Rule(form.object(), rule.word, rule.mirror.to, rule.mirror.file, true));
 			indexRules.add(new Rule(form.object(), rule.mirror.to, rule.word, rule.mirror.file, false));
 		}
@@ -181,12 +135,9 @@ public final class SearchModLocaleRules {
 		this.ignorables = ignorables;
 	}
 
-	private void disable(Map<String, ?> rules, Map<String, String> disabled, SearchModRulesParser.Layer layer) {
-		for (Map.Entry<String, String> e : disabled.entrySet()) {
-			if (rules.remove(e.getKey()) == null) {
-				throw new IllegalArgumentException("Cannot disable " + e.getValue() + " in " + layer.file
-						+ ": no upper layer defines it");
-			}
+	private void disable(Map<String, ?> rules, Map<String, String> disabled) {
+		for (String key : disabled.keySet()) {
+			rules.remove(key);
 		}
 	}
 
@@ -475,18 +426,11 @@ public final class SearchModLocaleRules {
 			this.object = object;
 			this.file = file;
 			this.idFrom = idFrom;
-			if (!"All".equals(mode) && !"Single".equals(mode)) {
-				throw new IllegalArgumentException("Invalid mode '" + mode + "' of " + from + ", expected All or Single");
-			}
 			this.all = "All".equals(mode);
 			this.alwaysKeys = alwaysKeys;
 			this.fromText = from;
 			this.to = to;
-			try {
-				this.from = Pattern.compile(from);
-			} catch (PatternSyntaxException e) {
-				throw new IllegalArgumentException("Invalid regexp '" + from + "': " + e.getDescription(), e);
-			}
+			this.from = Pattern.compile(from);
 		}
 
 

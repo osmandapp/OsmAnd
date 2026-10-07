@@ -357,9 +357,9 @@ public class SpatialSearchToken {
 
 	/**
 	 * @param locale rules locale of the map of the name
-	 * @param object owner of the name (street, locality, boundary, postcode, poi) for the forms of some owners
+	 * @param type   type of the atom of the name: the forms of some owners apply only to their names
 	 */
-	boolean matchName(String name, TIntArrayList poiTypes, String locale, SearchModRuleOwner object) {
+	boolean matchName(String name, TIntArrayList poiTypes, String locale, int type) {
 		LocaleRules lf = localeRules(locale);
 		if (matchName(name, poiTypes, lf)) {
 			return true;
@@ -368,12 +368,27 @@ public class SpatialSearchToken {
 			return false;
 		}
 		// not cached: the owner differs for one name
+		SearchModRuleOwner owner = ruleOwner(type);
 		for (QueryMatcher q : lf.scopedMatch) {
-			if (q.form().appliesTo(object) && q.matcher().matches(name)) {
+			if (q.form().appliesTo(owner) && q.matcher().matches(name)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	/** the owner of a name of an atom type for the search rules; a building has the name of its street */
+	SearchModRuleOwner ruleOwner(int type) {
+		if (type == CityBlocks.STREET_TYPE.index || type == BUILDING_TYPE) {
+			return SearchModRuleOwner.STREET;
+		} else if (type == POI_TYPE || type == POI_REF_TYPE) {
+			return SearchModRuleOwner.POI;
+		} else if (type == CityBlocks.BOUNDARY_TYPE.index) {
+			return SearchModRuleOwner.BOUNDARY;
+		} else if (type == CityBlocks.POSTCODES_TYPE.index) {
+			return SearchModRuleOwner.POSTCODE;
+		}
+		return SearchModRuleOwner.LOCALITY;
 	}
 
 	private boolean matchName(String name, TIntArrayList poiTypes, LocaleRules lf) {

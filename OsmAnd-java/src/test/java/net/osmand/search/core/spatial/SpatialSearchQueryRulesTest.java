@@ -1,6 +1,6 @@
 package net.osmand.search.core.spatial;
 
-import net.osmand.binary.SearchModRules.SearchModRuleOwner;
+import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 
 import net.osmand.binary.SearchModRules;
 import org.junit.Assert;
@@ -16,13 +16,13 @@ public class SpatialSearchQueryRulesTest {
 	@Test
 	public void placeAbbreviationRequiresEnglishStreet() {
 		SpatialSearchToken pl = token("Pl");
-		Assert.assertTrue(pl.matchName("Place", null, "en", SearchModRuleOwner.STREET));
-		Assert.assertFalse(pl.matchName("Place", null, "en", SearchModRuleOwner.POI));
-		Assert.assertFalse(pl.matchName("Place", null, "de", SearchModRuleOwner.STREET));
-		Assert.assertTrue(pl.matchName("Pl", null, "de", SearchModRuleOwner.POI));
+		Assert.assertTrue(pl.matchName("Place", null, "en", SpatialSearchToken.STREET_TYPE));
+		Assert.assertFalse(pl.matchName("Place", null, "en", SpatialSearchToken.POI_TYPE));
+		Assert.assertFalse(pl.matchName("Place", null, "de", SpatialSearchToken.STREET_TYPE));
+		Assert.assertTrue(pl.matchName("Pl", null, "de", SpatialSearchToken.POI_TYPE));
 		SpatialSearchToken mount = token("Mt");
-		Assert.assertTrue(mount.matchName("Mount", null, "en", SearchModRuleOwner.LOCALITY));
-		Assert.assertFalse(mount.matchName("Mount", null, "en", SearchModRuleOwner.STREET));
+		Assert.assertTrue(mount.matchName("Mount", null, "en", CityBlocks.CITY_TOWN_TYPE.index));
+		Assert.assertFalse(mount.matchName("Mount", null, "en", SpatialSearchToken.STREET_TYPE));
 	}
 
 	@Test
@@ -34,8 +34,8 @@ public class SpatialSearchQueryRulesTest {
 		// the first map does not change the matches of the second one
 		Assert.assertTrue(parkway.getPrefixMatcher(stats, "en").matchKey("parkway"));
 		SpatialSearchToken avenue = token("Ave");
-		Assert.assertTrue(avenue.matchName("Esplanade", null, "en_US", SearchModRuleOwner.STREET));
-		Assert.assertFalse(avenue.matchName("Esplanade", null, "en", SearchModRuleOwner.STREET));
+		Assert.assertTrue(avenue.matchName("Esplanade", null, "en_US", SpatialSearchToken.STREET_TYPE));
+		Assert.assertFalse(avenue.matchName("Esplanade", null, "en", SpatialSearchToken.STREET_TYPE));
 		Assert.assertTrue(avenue.getPrefixMatcher(stats, "en_US").matchKey("esplanade"));
 		Assert.assertFalse(avenue.getPrefixMatcher(stats, "en").matchKey("esplanade"));
 	}
@@ -45,10 +45,10 @@ public class SpatialSearchQueryRulesTest {
 		Assert.assertFalse(token("Ter").likelyPartOfBuilding("en_US"));
 		Assert.assertTrue(token("Ter").likelyPartOfBuilding("fr_FR"));
 		SpatialSearchToken ter = token("Ter");
-		Assert.assertTrue(ter.matchName("Terrace", null, "en_US", SearchModRuleOwner.STREET));
+		Assert.assertTrue(ter.matchName("Terrace", null, "en_US", SpatialSearchToken.STREET_TYPE));
 		// a POI category is of no map: any map the word was matched with
 		Assert.assertFalse(ter.likelyPartOfBuilding());
-		ter.matchName("Ter", null, "fr_FR", SearchModRuleOwner.STREET);
+		ter.matchName("Ter", null, "fr_FR", SpatialSearchToken.STREET_TYPE);
 		Assert.assertTrue(ter.likelyPartOfBuilding());
 	}
 }

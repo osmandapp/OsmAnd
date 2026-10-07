@@ -1,7 +1,6 @@
 package net.osmand.binary;
 
 import static net.osmand.binary.SearchModLocaleRules.ANY_OBJECT;
-import static net.osmand.binary.SearchModLocaleRules.BASE_FILE;
 import static net.osmand.binary.SearchModLocaleRules.BUILDING_OBJECT;
 import static net.osmand.binary.SearchModLocaleRules.VERSION;
 
@@ -9,7 +8,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.SearchModLocaleRules.Form;
 import net.osmand.binary.SearchModLocaleRules.Mirror;
 import net.osmand.binary.SearchModLocaleRules.Rule;
-import net.osmand.binary.SearchModRules.SearchModRuleOwner;
 import net.osmand.binary.SearchModLocaleRules.SkipPenalty;
 import net.osmand.binary.SearchModLocaleRules.Unglue;
 import net.osmand.binary.SearchModLocaleRules.WordRule;
@@ -18,18 +16,16 @@ import org.xmlpull.v1.XmlPullParser;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
-/** Reads one rules file ({@code rules.xml}, {@code rules_<locale>.xml}) into a {@link Layer}, see {@link SearchModLocaleRules}. */
+/**
+ * Reads one rules file ({@code rules.xml}, {@code rules_<locale>.xml}) into a {@link Layer}, see
+ * {@link SearchModLocaleRules}. The files are checked by the unit tests (SearchModRulesValidator), not here.
+ */
 final class SearchModRulesParser {
-
-	private static final Set<String> INDEX_ATTRIBUTES = Set.of("from", "to", "object", "mode", "enabled", "keys");
-	private static final Set<String> QUERY_ATTRIBUTES = Set.of("from", "to", "object", "enabled");
 
 	private final String file;
 	private final Layer layer;
@@ -42,7 +38,7 @@ final class SearchModRulesParser {
 		this.locales = locales;
 	}
 
-	/** The rules of one file. */
+	/** The rules of one file; a disabled rule removes the rule of an upper layer with its key. */
 	static final class Layer {
 		final String file;
 		final Map<String, Rule> index = new LinkedHashMap<>();
@@ -56,6 +52,7 @@ final class SearchModRulesParser {
 		final Map<String, String> disabledClasses = new LinkedHashMap<>();
 		final Map<String, String> disabledQuery = new LinkedHashMap<>();
 		final Map<String, String> disabledSkipPenalty = new LinkedHashMap<>();
+
 		Layer(String file) {
 			this.file = file;
 		}
@@ -74,9 +71,6 @@ final class SearchModRulesParser {
 
 		private <T> void add(Map<String, T> rules, Map<String, String> disabled, String key, T rule, String text,
 				boolean enabled) {
-			if (rules.containsKey(key) || disabled.containsKey(key)) {
-				throw new IllegalArgumentException("Duplicate rule " + text + " in " + file);
-			}
 			if (enabled) {
 				rules.put(key, rule);
 			} else {
@@ -84,13 +78,9 @@ final class SearchModRulesParser {
 			}
 		}
 
-		void addClass(String tag, int wordClass, String words, boolean enabled) {
-			for (String word : plainWords(words, "<" + tag + ">")) {
+		void addClass(int wordClass, List<String> words, boolean enabled) {
+			for (String word : words) {
 				String w = SearchAlgorithms.alignChars(word);
-				if (classes.containsKey(w) || disabledClasses.containsKey(w)) {
-					throw new IllegalArgumentException("The word '" + w + "' of <" + tag + "> is listed twice in the "
-							+ "classes of " + file);
-				}
 				if (enabled) {
 					classes.put(w, wordClass);
 				} else {
@@ -99,35 +89,13 @@ final class SearchModRulesParser {
 			}
 		}
 
-		void addSkipPenalty(String object, String words, boolean enabled) {
-			for (String w : plainWords(words, "<skipPenalty>")) {
+		void addSkipPenalty(String object, List<String> words, boolean enabled) {
+			for (String w : words) {
 				// a word of a name is looked up aligned, as the words of the classes ("straße" is "strasse")
-				String word = SearchAlgorithms.alignChars(w);
-				SkipPenalty entry = new SkipPenalty(word, object);
-				for (SkipPenalty other : skipPenalty.values()) {
-					if (other.word().equals(word) && other.overlaps(entry)) {
-						throw new IllegalArgumentException("The <skipPenalty> word '" + word + "' is listed twice with "
-								+ "overlapping object in " + file);
-					}
-				}
+				SkipPenalty entry = new SkipPenalty(SearchAlgorithms.alignChars(w), object);
 				add(skipPenalty, disabledSkipPenalty, entry.key(), entry,
-						"<skipPenalty object=\"" + object + "\">" + word + "</skipPenalty>", enabled);
+						"<skipPenalty object=\"" + object + "\">" + entry.word() + "</skipPenalty>", enabled);
 			}
-		}
-
-		private List<String> plainWords(String words, String what) {
-			List<String> result = new ArrayList<>();
-			for (String word : words.trim().split("\\s+")) {
-				if (word.isEmpty()) {
-					continue;
-				}
-				String w = word.toLowerCase(Locale.ROOT);
-				if (result.contains(w)) {
-					throw new IllegalArgumentException("The word '" + w + "' of " + what + " is listed twice in " + file);
-				}
-				result.add(w);
-			}
-			return result;
 		}
 	}
 
@@ -136,8 +104,6 @@ final class SearchModRulesParser {
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
 		parser.setInput(input, "UTF-8");
 		String section = null;
-		boolean localesRead = false;
-		boolean root = false;
 		int event;
 		while ((event = parser.next()) != XmlPullParser.END_DOCUMENT) {
 			if (event == XmlPullParser.START_TAG) {
@@ -148,419 +114,137 @@ final class SearchModRulesParser {
 						throw new IllegalArgumentException("Unsupported search rules version in " + file
 								+ ", expected " + VERSION);
 					}
-					root = true;
-				} else if (depth == 2 && ("index".equals(tag) || "query".equals(tag))) {
+				} else if (depth == 2) {
 					section = tag;
-				} else if (depth == 2 && "locales".equals(tag)) {
-					if (!BASE_FILE.equals(file)) {
-						throw new IllegalArgumentException("<locales> belongs to " + BASE_FILE + ", not to " + file);
+					if ("rule".equals(tag)) {
+						parseMirrorRule(parser);
 					}
-					if (localesRead) {
-						throw new IllegalArgumentException("Duplicate <locales> in " + file);
+				} else if (depth == 3 && "index".equals(section)) {
+					if ("rule".equals(tag)) {
+						parseIndexRule(parser);
+					} else if ("unglue".equals(tag)) {
+						parseUnglue(parser);
+					} else if (tag.startsWith("class")) {
+						boolean enabled = enabled(parser);
+						layer.addClass(tag.charAt(5) - '0', words(parser.nextText()), enabled);
 					}
-					checkAttributes(parser, Set.of(), "<locales>", " in " + file);
-					localesRead = true;
-					section = tag;
-				} else if (depth == 2 && "common".equals(tag)) {
-					throw new IllegalArgumentException("<common> is replaced by <skipPenalty> of <query> in " + file);
-				} else if (depth == 2 && "rule".equals(tag)) {
-					parseMirrorRule(parser);
-				} else if (depth == 3 && "rule".equals(tag) && "index".equals(section)) {
-					parseIndexRule(parser);
-				} else if (depth == 3 && "unglue".equals(tag) && "index".equals(section)) {
-					parseUnglue(parser);
-				} else if (depth == 3 && tag.matches("class[012]") && "index".equals(section)) {
-					checkAttributes(parser, Set.of("enabled"), "<" + tag + ">", " in " + file);
-					boolean enabled = booleanAttribute(parser, "enabled", true, " (<" + tag + "> of " + file + ")");
-					layer.addClass(tag, tag.charAt(5) - '0', parser.nextText(), enabled);
-				} else if (depth == 3 && "rule".equals(tag) && "query".equals(section)) {
-					parseQueryRule(parser);
-				} else if (depth == 3 && "skipPenalty".equals(tag) && "query".equals(section)) {
-					parseSkipPenalty(parser);
-				} else if (depth == 3 && "group".equals(tag) && "locales".equals(section)) {
-					parseGroup(parser);
-				} else if (depth == 3 && "map".equals(tag) && "locales".equals(section)) {
-					parseMap(parser);
-				} else {
-					throw new IllegalArgumentException("Unexpected search rule tag " + tag + " in " + file);
+				} else if (depth == 3 && "query".equals(section)) {
+					if ("rule".equals(tag)) {
+						parseQueryRule(parser);
+					} else if ("skipPenalty".equals(tag)) {
+						String object = object(parser.getAttributeValue(null, "object"));
+						boolean enabled = enabled(parser);
+						layer.addSkipPenalty(object, words(parser.nextText()), enabled);
+					}
+				} else if (depth == 3 && "locales".equals(section) && locales != null) {
+					if ("group".equals(tag)) {
+						locales.addGroup(parser.getAttributeValue(null, "id"),
+								words(parser.getAttributeValue(null, "languages")),
+								words(parser.getAttributeValue(null, "locales")));
+					} else if ("map".equals(tag)) {
+						locales.addMap(parser.getAttributeValue(null, "locale"),
+								words(parser.getAttributeValue(null, "prefixes")),
+								parser.getAttributeValue(null, "group"), parser.getAttributeValue(null, "translit"));
+					}
 				}
 			} else if (event == XmlPullParser.END_TAG && parser.getDepth() == 2) {
+				if ("locales".equals(section) && locales != null) {
+					locales.build();
+				}
 				section = null;
 			}
-		}
-		if (!root) {
-			throw new IllegalArgumentException("Missing rules root in " + file);
-		}
-		if (localesRead) {
-			locales.build();
 		}
 		return layer;
 	}
 
-	private void parseIndexRule(XmlPullParser parser) throws Exception {
+	private void parseIndexRule(XmlPullParser parser) {
+		String object = object(parser.getAttributeValue(null, "object"));
 		String from = parser.getAttributeValue(null, "from");
-		String where = where(from, "index", file);
-		checkRemovedAttributes(parser, where);
-		checkAttributes(parser, INDEX_ATTRIBUTES, "an index rule", where);
-		if (from == null || from.isEmpty()) {
-			throw new IllegalArgumentException("Missing from in " + file);
-		}
-		String object = parser.getAttributeValue(null, "object");
-		object = object == null || object.isEmpty() ? ANY_OBJECT : object;
-		validateObject(object, false, where);
-		String mode = parser.getAttributeValue(null, "mode");
-		String to = parser.getAttributeValue(null, "to");
-		String keys = parser.getAttributeValue(null, "keys");
-		boolean enabled = booleanAttribute(parser, "enabled", true, where);
-		if (parser.nextTag() == XmlPullParser.START_TAG) {
-			throw new IllegalArgumentException("An index rule has one form, the attribute to: keys of several meanings "
-					+ "cannot be told apart in the OBF, the meanings belong to <query>" + where);
-		}
-		if (!enabled) {
-			if (to != null || mode != null || keys != null) {
-				throw new IllegalArgumentException("A disabled rule holds only from and object" + where);
-			}
-			layer.add(newRule(object, from, "", "Single", false, false, file, where), false);
+		if (!enabled(parser)) {
+			layer.add(new Rule(object, from, "", "Single", false, false, file), false);
 			return;
 		}
-		if (to == null) {
-			throw new IllegalArgumentException("Missing to" + where);
-		}
-		if (to.isEmpty()) {
-			throw new IllegalArgumentException("An empty to (an ignorable word) belongs to <query>" + where);
-		}
-		if (keys != null && !Rule.KEYS_STATS.equals(keys) && !Rule.KEYS_ALWAYS.equals(keys)) {
-			throw new IllegalArgumentException("Invalid keys '" + keys + "', expected " + Rule.KEYS_STATS + " or "
-					+ Rule.KEYS_ALWAYS + where);
-		}
-		layer.add(newRule(object, from, to, mode == null ? "Single" : mode, Rule.KEYS_ALWAYS.equals(keys), true,
-				file, where), true);
+		String mode = parser.getAttributeValue(null, "mode");
+		layer.add(new Rule(object, from, parser.getAttributeValue(null, "to"), mode == null ? "Single" : mode,
+				Rule.KEYS_ALWAYS.equals(parser.getAttributeValue(null, "keys")), true, file), true);
 	}
 
-	private void parseUnglue(XmlPullParser parser) throws Exception {
-		String glue = parser.getAttributeValue(null, "glue");
-		String where = " (<unglue glue=\"" + glue + "\"> of " + file + ")";
-		checkAttributes(parser, Set.of("glue", "script", "minPart", "enabled"), "<unglue>", where);
-		if (glue == null || glue.length() != 1 || Character.isLetterOrDigit(glue.charAt(0))
-				|| Character.isWhitespace(glue.charAt(0))) {
-			throw new IllegalArgumentException("The glue of <unglue> is one character, not a letter, a digit or a "
-					+ "space" + where);
+	private void parseUnglue(XmlPullParser parser) {
+		char glue = parser.getAttributeValue(null, "glue").charAt(0);
+		if (!enabled(parser)) {
+			layer.add(new Unglue(glue, null, 0, file), false);
+			return;
 		}
-		boolean enabled = booleanAttribute(parser, "enabled", true, where);
 		String script = parser.getAttributeValue(null, "script");
 		String minPart = parser.getAttributeValue(null, "minPart");
-		if (parser.nextTag() == XmlPullParser.START_TAG) {
-			throw new IllegalArgumentException("<unglue> has no elements" + where);
-		}
-		if (!enabled) {
-			if (script != null || minPart != null) {
-				throw new IllegalArgumentException("A disabled rule holds only glue" + where);
-			}
-			layer.add(new Unglue(glue.charAt(0), null, 0, file), false);
-			return;
-		}
-		Character.UnicodeScript unicodeScript = null;
-		if (script != null) {
-			try {
-				unicodeScript = Character.UnicodeScript.forName(script);
-			} catch (IllegalArgumentException e) {
-				throw new IllegalArgumentException("Unknown script '" + script + "'" + where, e);
-			}
-		}
-		int min = 2;
-		if (minPart != null) {
-			try {
-				min = Integer.parseInt(minPart);
-			} catch (NumberFormatException e) {
-				min = 0;
-			}
-			if (min < 1) {
-				throw new IllegalArgumentException("Invalid minPart '" + minPart + "', expected a number >= 1" + where);
-			}
-		}
-		layer.add(new Unglue(glue.charAt(0), unicodeScript, min, file), true);
+		layer.add(new Unglue(glue, script == null ? null : Character.UnicodeScript.forName(script),
+				minPart == null ? 2 : Integer.parseInt(minPart), file), true);
 	}
 
-	private void parseSkipPenalty(XmlPullParser parser) throws Exception {
-		String where = " (<skipPenalty> of " + file + ")";
-		checkAttributes(parser, Set.of("object", "enabled"), "<skipPenalty>", where);
-		String object = parser.getAttributeValue(null, "object");
-		object = object == null || object.isEmpty() ? ANY_OBJECT : object;
-		if (BUILDING_OBJECT.equals(object)) {
-			throw new IllegalArgumentException("A part of a house number is no word of a name: <skipPenalty> takes no "
-					+ "object=\"building\"" + where);
+	/**
+	 * A mirror pair, a {@code <rule>} directly under {@code <rules>} (rules-spec.md, 3.4): one word and its one form,
+	 * a query form both ways and alternative names both ways. It shares the key of a query rule in the layers.
+	 */
+	private void parseMirrorRule(XmlPullParser parser) {
+		String word = parser.getAttributeValue(null, "from").toLowerCase(Locale.ROOT);
+		if (!enabled(parser)) {
+			layer.add(new WordRule(word, List.of(), new Mirror(file, null)), false);
+			return;
 		}
-		validateObject(object, false, where);
-		boolean enabled = booleanAttribute(parser, "enabled", true, where);
-		layer.addSkipPenalty(object, parser.nextText(), enabled);
+		String to = parser.getAttributeValue(null, "to").trim();
+		Form form = form(parser.getAttributeValue(null, "object"), to);
+		layer.add(new WordRule(word, List.of(form), new Mirror(file, to)), true);
 	}
 
 	/**
 	 * One form is the attributes of the rule ({@code to}, {@code object}; {@code object="building"} without {@code to}),
 	 * several forms are {@code <to>} elements with their own {@code object}.
 	 */
-	/**
-	 * A mirror pair, a {@code <rule>} directly under {@code <rules>} (rules-spec.md, 3.4): one word and its one form,
-	 * a query form both ways and alternative names both ways. It shares the key of a query rule in the layers.
-	 */
-	private void parseMirrorRule(XmlPullParser parser) throws Exception {
-		String from = parser.getAttributeValue(null, "from");
-		String where = where(from, "rules", file);
-		checkRemovedAttributes(parser, where);
-		checkAttributes(parser, QUERY_ATTRIBUTES, "a mirror rule", where);
-		if (from == null || from.isEmpty()) {
-			throw new IllegalArgumentException("Missing from in " + file);
-		}
-		String to = parser.getAttributeValue(null, "to");
-		String object = parser.getAttributeValue(null, "object");
-		boolean enabled = booleanAttribute(parser, "enabled", true, where);
-		if (parser.nextTag() == XmlPullParser.START_TAG) {
-			throw new IllegalArgumentException("A mirror rule has one form, the attribute to: through a shared word "
-					+ "the meanings of a word of several would match each other" + where);
-		}
-		String word = from.toLowerCase(Locale.ROOT);
-		if (!enabled) {
-			if (to != null || object != null) {
-				throw new IllegalArgumentException("A disabled rule holds only from" + where);
-			}
-			layer.add(new WordRule(word, List.of(), new Mirror(file, null)), false);
-			return;
-		}
-		if (BUILDING_OBJECT.equals(object)) {
-			throw new IllegalArgumentException("A house-number qualifier belongs to <query>: it has no alternative "
-					+ "name" + where);
-		}
-		if (to == null || to.trim().isEmpty()) {
-			throw new IllegalArgumentException("A mirror rule needs a form, an ignorable word belongs to <query>"
-					+ where);
-		}
-		String text = to.trim();
-		List<Form> forms = List.of(parseForm(word, object, text, where));
-		validateForms(word, forms, where);
-		layer.add(new WordRule(word, forms, new Mirror(file, text)), true);
-	}
-
 	private void parseQueryRule(XmlPullParser parser) throws Exception {
-		String from = parser.getAttributeValue(null, "from");
-		String where = where(from, "query", file);
-		checkRemovedAttributes(parser, where);
-		if (parser.getAttributeValue(null, "mode") != null) {
-			throw new IllegalArgumentException("mode applies to a regexp of <index>" + where);
-		}
-		checkAttributes(parser, QUERY_ATTRIBUTES, "a query rule", where);
-		if (from == null || from.isEmpty()) {
-			throw new IllegalArgumentException("Missing from in " + file);
-		}
+		String word = parser.getAttributeValue(null, "from").toLowerCase(Locale.ROOT);
 		String to = parser.getAttributeValue(null, "to");
 		String object = parser.getAttributeValue(null, "object");
-		boolean enabled = booleanAttribute(parser, "enabled", true, where);
-		String word = from.toLowerCase(Locale.ROOT);
+		boolean enabled = enabled(parser);
 		List<Form> forms = new ArrayList<>();
 		while (parser.nextTag() == XmlPullParser.START_TAG) {
-			if (!"to".equals(parser.getName())) {
-				throw new IllegalArgumentException("Unexpected search rule tag " + parser.getName() + where);
-			}
-			checkAttributes(parser, Set.of("object"), "<to>", where);
-			forms.add(parseForm(word, parser.getAttributeValue(null, "object"), parser.nextText().trim(), where));
+			forms.add(form(parser.getAttributeValue(null, "object"), parser.nextText().trim()));
 		}
 		if (!enabled) {
-			if (to != null || object != null || !forms.isEmpty()) {
-				throw new IllegalArgumentException("A disabled rule holds only from" + where);
-			}
 			layer.add(new WordRule(word, List.of()), false);
 			return;
 		}
-		if (!forms.isEmpty()) {
-			if (to != null) {
-				throw new IllegalArgumentException("A rule has the attribute to or several <to>, not both" + where);
-			}
-			if (object != null) {
-				throw new IllegalArgumentException("The object of a rule with several <to> is an attribute of each "
-						+ "<to>" + where);
-			}
-			if (forms.size() == 1) {
-				throw new IllegalArgumentException("One form is the attribute to (object=\"building\" for a "
-						+ "house-number qualifier), <to> elements are for several" + where);
-			}
-		} else if (to != null) {
-			if (BUILDING_OBJECT.equals(object)) {
-				throw new IllegalArgumentException("A house-number qualifier (object=\"building\") has no form, it "
-						+ "holds no to" + where);
-			}
-			forms.add(parseForm(word, object, to.trim(), where));
-		} else if (BUILDING_OBJECT.equals(object)) {
-			forms.add(new Form(BUILDING_OBJECT, ""));
-		} else {
-			throw new IllegalArgumentException("Missing to" + where);
+		if (forms.isEmpty()) {
+			forms.add(form(object, to == null ? "" : to.trim()));
 		}
-		validateForms(word, forms, where);
 		layer.add(new WordRule(word, forms), true);
 	}
 
-	private Form parseForm(String word, String object, String text, String where) {
-		object = object == null || object.isEmpty() ? ANY_OBJECT : object;
-		validateObject(object, true, where);
-		boolean building = object.equals(BUILDING_OBJECT);
-		if (building) {
-			if (!text.isEmpty()) {
-				throw new IllegalArgumentException("A house-number qualifier (object=\"building\") has no form" + where);
-			}
-			return new Form(object, "");
+	// an empty text is a house-number qualifier (object="building") or an ignorable word
+	private Form form(String object, String text) {
+		String o = object(object);
+		if (o.equals(BUILDING_OBJECT) || text.isEmpty()) {
+			return new Form(o, "");
 		}
-		if (text.isEmpty()) {
-			if (!object.equals(ANY_OBJECT)) {
-				throw new IllegalArgumentException("An ignorable word (an empty to) applies to every object: a word that "
-						+ "only does not penalize names of some owners is <skipPenalty object=\"" + object + "\">"
-						+ where);
-			}
-			return new Form(object, "");
-		}
-		List<String> words = SearchAlgorithms.splitAndNormalize(text, false);
-		if (words.size() != 1) {
-			// a token is matched with one word of a name: several words would mean "or", not a phrase
-			throw new IllegalArgumentException("A query form is one word, a phrase belongs to <index>" + where);
-		}
-		String form = words.get(0);
-		if (form.equals(word)) {
-			throw new IllegalArgumentException("The form '" + text + "' repeats the word" + where);
-		}
-		return new Form(object, form);
+		return new Form(o, SearchAlgorithms.splitAndNormalize(text, false).get(0));
 	}
 
-	private void validateForms(String word, List<Form> forms, String where) {
-		int buildings = 0;
-		int ignorables = 0;
-		for (int i = 0; i < forms.size(); i++) {
-			Form form = forms.get(i);
-			if (form.isBuilding()) {
-				buildings++;
-				continue;
-			}
-			if (form.isIgnorable()) {
-				ignorables++;
-				continue;
-			}
-			// the reverse form of a one-letter word would match that letter in every name
-			if (word.codePointCount(0, word.length()) == 1 && form.object().equals(ANY_OBJECT)) {
-				throw new IllegalArgumentException("A one-letter word needs an object for its form '" + form.word()
-						+ "': the reverse form would match every '" + word + "'" + where);
-			}
-			for (int j = 0; j < i; j++) {
-				Form other = forms.get(j);
-				if (other.word().equals(form.word()) && other.overlaps(form)) {
-					throw new IllegalArgumentException("The form '" + form.word() + "' is listed twice" + where);
-				}
-			}
-		}
-		if (buildings > 1 || ignorables > 1) {
-			throw new IllegalArgumentException("A house-number qualifier or an empty to is listed twice" + where);
-		}
-		if (buildings > 0 && ignorables > 0) {
-			throw new IllegalArgumentException("The word is a house-number qualifier and an ignorable word" + where);
-		}
-		if (ignorables > 0 && forms.size() > 1) {
-			// an ignorable word is an optional query word that never penalizes a name: its forms would mean nothing
-			throw new IllegalArgumentException("An ignorable word has no forms" + where);
-		}
+	private String object(String object) {
+		return object == null || object.isEmpty() ? ANY_OBJECT : object;
 	}
 
-	private String where(String from, String section, String file) {
-		return " (from=\"" + from + "\" in <" + section + "> of " + file + ")";
+	private boolean enabled(XmlPullParser parser) {
+		return !"false".equals(parser.getAttributeValue(null, "enabled"));
 	}
 
-	private void checkRemovedAttributes(XmlPullParser parser, String where) {
-		if (parser.getAttributeValue(null, "replace") != null) {
-			throw new IllegalArgumentException("replace is removed: a stored name keeps the words of OSM" + where);
-		}
-		if (parser.getAttributeValue(null, "common") != null) {
-			throw new IllegalArgumentException("Common words are listed in <skipPenalty> of <query>" + where);
-		}
-	}
-
-	private void checkAttributes(XmlPullParser parser, Set<String> allowed, String what, String where) {
-		for (int i = 0; i < parser.getAttributeCount(); i++) {
-			if (!allowed.contains(parser.getAttributeName(i))) {
-				throw new IllegalArgumentException("Unknown attribute " + parser.getAttributeName(i) + " of " + what
-						+ where);
-			}
-		}
-	}
-
-	private Rule newRule(String object, String from, String to, String mode, boolean alwaysKeys,
-			boolean enabled, String file, String where) {
-		try {
-			return new Rule(object, from, to, mode, alwaysKeys, enabled, file);
-		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException(e.getMessage() + where, e);
-		}
-	}
-
-	private void validateObject(String object, boolean query, String where) {
-		if (object.equals(BUILDING_OBJECT)) {
-			if (!query) {
-				throw new IllegalArgumentException("A house-number qualifier belongs to <query>" + where);
-			}
-			return;
-		}
-		boolean any = false;
-		String[] types = object.split(",");
-		for (String type : types) {
-			String t = type.trim();
-			any |= t.equals(ANY_OBJECT);
-			if (!t.equals(ANY_OBJECT) && Arrays.stream(SearchModRuleOwner.values()).noneMatch(o -> o.tag.equals(t))) {
-				throw new IllegalArgumentException("Unknown object '" + t + "', expected an owner, '*' or "
-						+ "'building'" + where);
-			}
-		}
-		if (any && types.length > 1) {
-			throw new IllegalArgumentException("'*' is every object, it is not listed with others" + where);
-		}
-	}
-
-	private boolean booleanAttribute(XmlPullParser parser, String key, boolean defaultValue, String where) {
-		String value = parser.getAttributeValue(null, key);
-		if (value == null) {
-			return defaultValue;
-		}
-		if ("true".equals(value) || "false".equals(value)) {
-			return "true".equals(value);
-		}
-		throw new IllegalArgumentException("Invalid " + key + " '" + value + "', expected true or false" + where);
-	}
-
-	private void parseGroup(XmlPullParser parser) throws Exception {
-		String id = parser.getAttributeValue(null, "id");
-		String where = " (<group id=\"" + id + "\"> of " + file + ")";
-		checkAttributes(parser, Set.of("id", "languages", "locales"), "<group>", where);
-		locales.addGroup(id, list(parser.getAttributeValue(null, "languages")),
-				list(parser.getAttributeValue(null, "locales")));
-		endElement(parser, where);
-	}
-
-	private void parseMap(XmlPullParser parser) throws Exception {
-		String locale = parser.getAttributeValue(null, "locale");
-		String where = " (<map locale=\"" + locale + "\"> of " + file + ")";
-		checkAttributes(parser, Set.of("locale", "prefixes", "group", "translit"), "<map>", where);
-		locales.addMap(locale, list(parser.getAttributeValue(null, "prefixes")), parser.getAttributeValue(null, "group"),
-				parser.getAttributeValue(null, "translit"));
-		endElement(parser, where);
-	}
-
-	private List<String> list(String value) {
+	private List<String> words(String value) {
 		List<String> result = new ArrayList<>();
 		if (value != null) {
 			for (String s : value.trim().split("\\s+")) {
 				if (!s.isEmpty()) {
-					result.add(s);
+					result.add(s.toLowerCase(Locale.ROOT));
 				}
 			}
 		}
 		return result;
-	}
-
-	private void endElement(XmlPullParser parser, String where) throws Exception {
-		if (parser.nextTag() == XmlPullParser.START_TAG) {
-			throw new IllegalArgumentException("Unexpected element " + parser.getName() + where);
-		}
 	}
 }

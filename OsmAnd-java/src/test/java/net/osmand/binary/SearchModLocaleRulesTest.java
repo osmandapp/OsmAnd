@@ -5,6 +5,11 @@ import net.osmand.binary.SearchModRules.SearchModRuleOwner;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -394,11 +399,22 @@ public class SearchModLocaleRulesTest {
 	}
 
 	@Test
-	public void everyRulesFileLoads() {
+	public void everyRulesFileLoads() throws IOException {
 		// the layers of every locale with a file validate together: mirror pairs, query rules and index rules
 		for (String locale : List.of("bg_BG", "ca_ES", "de_DE", "en_US", "es_ES", "es_CO", "es_PE", "fr_FR", "it_IT",
 				"mk_MK", "nl_NL", "pt_PT", "ru_RU", "sr_RS", "uk_UA")) {
 			assertNotNull(locale, searchRules.rules(locale));
+			Map<String, String> files = new LinkedHashMap<>();
+			files.put(SearchModLocaleRules.BASE_FILE, resource(SearchModLocaleRules.BASE_FILE));
+			String suffix = "";
+			for (String part : locale.split("_")) {
+				suffix += "_" + part;
+				String xml = resource("rules" + suffix + ".xml");
+				if (xml != null) {
+					files.put("rules" + suffix + ".xml", xml);
+				}
+			}
+			validate(locale, files);
 		}
 		// a mirror pair of Colombia shares "Calle" with the pair of Spanish
 		assertEquals(List.of("street:c", "street:cl", "street:cll"), forms(searchRules.rules("es_CO"), "calle"));
@@ -528,7 +544,7 @@ public class SearchModLocaleRulesTest {
 
 	private void expectBase(String body, String message) {
 		try {
-			layer(body, SearchModLocaleRules.BASE_FILE);
+			check(new SearchModRulesValidator(SearchModLocaleRules.BASE_FILE, new SearchModLocales()), xml(body));
 			fail("expected an error: " + message);
 		} catch (IllegalArgumentException expected) {
 			assertTrue(expected.getMessage(), expected.getMessage().contains(message));
@@ -537,10 +553,52 @@ public class SearchModLocaleRulesTest {
 
 	private void expectLayers(List<String> bodies, String message) {
 		try {
-			new SearchModLocaleRules("xx", bodies.stream().map(this::layer).collect(Collectors.toList()));
+			Map<String, String> files = new LinkedHashMap<>();
+			for (String body : bodies) {
+				files.put("test" + files.size() + ".xml", xml(body));
+			}
+			validate("xx", files);
 			fail("expected an error: " + message);
 		} catch (IllegalArgumentException expected) {
 			assertTrue(expected.getMessage(), expected.getMessage().contains(message));
+		}
+	}
+
+	private String xml(String body) {
+		return "<rules version=\"5\">" + body + "</rules>";
+	}
+
+	private void check(SearchModRulesValidator validator, String xml) {
+		try {
+			validator.check(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
+		} catch (RuntimeException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		}
+	}
+
+	/** checks every file (name -> xml) strictly, then the layers and the rules of the locale together */
+	private void validate(String locale, Map<String, String> files) {
+		List<SearchModRulesParser.Layer> layers = new ArrayList<>();
+		for (Map.Entry<String, String> f : files.entrySet()) {
+			SearchModLocales locales = SearchModLocaleRules.BASE_FILE.equals(f.getKey()) ? new SearchModLocales() : null;
+			check(new SearchModRulesValidator(f.getKey(), locales), f.getValue());
+			try {
+				layers.add(new SearchModRulesParser(f.getKey(), locales).parse(
+						new ByteArrayInputStream(f.getValue().getBytes(StandardCharsets.UTF_8))));
+			} catch (Exception e) {
+				throw new IllegalStateException(e);
+			}
+		}
+		SearchModRulesValidator validator = new SearchModRulesValidator("", null);
+		validator.checkLayers(layers);
+		validator.checkConsistency(new SearchModLocaleRules(locale, layers), locale);
+	}
+
+	private String resource(String file) throws IOException {
+		try (InputStream in = SearchModRules.class.getResourceAsStream(file)) {
+			return in == null ? null : new String(in.readAllBytes(), StandardCharsets.UTF_8);
 		}
 	}
 }
