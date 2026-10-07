@@ -28,8 +28,9 @@ public class SearchVariantRulesTest {
 		// one word, several meanings: the first is the main one
 		assertEquals(List.of("street", "saint"), forms("st", "en"));
 		assertEquals(List.of("drive", "doctor"), forms("dr", "en"));
-		assertEquals(List.of("sankt"), forms("st", "de_DE"));
-		assertEquals(List.of("saint"), forms("st", "fr_FR"));
+		// pairs that were not in master are index rules only: no query form
+		assertEquals(List.of(), forms("st", "de_DE"));
+		assertEquals(List.of(), forms("st", "fr_FR"));
 		assertEquals(List.of(), forms("rd", "de_DE"));
 		assertEquals(List.of("avenue"), forms("ave", "en"));
 		assertEquals(List.of("san", "santo", "santa"), forms("s", "it_IT"));
@@ -40,15 +41,12 @@ public class SearchVariantRulesTest {
 		assertEquals(List.of("st"), forms("street", "en"));
 		assertEquals(List.of("st"), forms("saint", "en"));
 		assertEquals(List.of("dr"), forms("doctor", "en"));
-		// "ave" is a mirror pair, written before the query rules
-		assertEquals(List.of("ave", "av"), forms("avenue", "en"));
+		// the pairs of master are mirror pairs
+		assertEquals(List.of("av", "ave"), forms("avenue", "en"));
 		assertEquals(List.of("1st"), forms("first", "en"));
 		assertEquals(List.of("о"), forms("остров", "ru_RU"));
-		// a token is aligned: the reverse form of a word with ß or a diacritic is found by its aligned spelling
-		assertEquals(List.of("str"), forms("Straße", "de_DE"));
-		assertEquals(List.of("str"), forms("strasse", "de_DE"));
-		assertEquals(List.of("urb"), forms("urbanizacion", "es_ES"));
-		assertEquals(List.of("jr"), forms("Jirón", "es_PE"));
+		assertEquals(List.of(), forms("urbanizacion", "es_ES"));
+		assertEquals(List.of(), forms("Jirón", "es_PE"));
 		assertEquals(List.of("пр"), forms("проезд", "ru_RU"));
 		assertEquals(List.of("просп", "пр"), forms("проспект", "ru_RU"));
 		SearchVariantRules en = SearchVariantRules.forLocale("en");
@@ -56,7 +54,7 @@ public class SearchVariantRulesTest {
 		assertEquals(List.of("street:st"), forms(en, "street"));
 		assertEquals(List.of("*:st"), forms(en, "saint"));
 		assertEquals(List.of("street:e"), forms(en, "east"));
-		assertEquals(List.of("street:place"), forms(en, "pl"));
+		assertEquals(List.of(), forms(en, "pl"));
 
 		assertTrue(Abbreviations.likelyPartOfBuilding("apt", null, "en"));
 		assertTrue(Abbreviations.likelyPartOfBuilding("bis", null, "fr_FR"));
@@ -92,12 +90,18 @@ public class SearchVariantRulesTest {
 		SearchVariantRules italian = SearchVariantRules.forLocale("it");
 		assertTrue(italian.index().stream().anyMatch(v -> "SS 42 del Tonale".equals(v.apply("Strada Statale 42 del Tonale"))));
 		assertTrue(italian.index().stream().anyMatch(v -> "SS42 del Tonale".equals(v.apply("Strada Statale 42 del Tonale"))));
-		// English index rules are only the alternative names of mirror pairs, both ways
+		// English index rules: the alternative names of mirror pairs (master) and of index pairs (new), both ways
 		List<SearchVariantRules.Rule> english = SearchVariantRules.forLocale("en").index();
-		assertFalse(english.isEmpty());
-		assertTrue(english.stream().allMatch(v -> v.id().from().contains("→")));
 		assertTrue(english.stream().anyMatch(v -> "2nd Avenue".equals(v.apply("Second Avenue"))));
 		assertTrue(english.stream().anyMatch(v -> "Second Avenue".equals(v.apply("2nd Avenue"))));
+		assertTrue(english.stream().anyMatch(v -> "Oak pl".equals(v.apply("Oak Place"))));
+		assertTrue(english.stream().anyMatch(v -> "Oak Place".equals(v.apply("Oak Pl."))));
+		// a word of a name, not a part of it
+		assertTrue(english.stream().allMatch(v -> v.apply("Placer Way") == null));
+		assertTrue(german.index().stream().anyMatch(v -> "Sankt Johannis".equals(v.apply("St. Johannis"))));
+		assertTrue(german.index().stream().anyMatch(v -> "Kölner str 80".equals(v.apply("Kölner Straße 80"))));
+		assertTrue(SearchVariantRules.forLocale("es_ES").index().stream()
+				.anyMatch(v -> "urb Los Pinos".equals(v.apply("Urbanización Los Pinos"))));
 		SearchVariantRules rules = of("<index><rule object=\"street,poi\" from=\"(?iu)\\bStrada\\s+(\\d+)\\b\" "
 				+ "to=\"S$1\"/></index>");
 		assertEquals("S42", rules.index().get(0).apply("Strada 42"));
@@ -118,7 +122,8 @@ public class SearchVariantRulesTest {
 		assertFalse(Abbreviations.likelyPartOfBuilding("tower", null, "en"));
 		assertTrue(Abbreviations.isIgnorable("thee", "en_US"));
 		assertTrue(Abbreviations.isCommonSkipOtherCnt("eastern", "en_US", "street"));
-		assertEquals("CR7", SearchVariantRules.forLocale("en_US").index().get(0).apply("County Road 7"));
+		assertTrue(SearchVariantRules.forLocale("en_US").index().stream()
+				.anyMatch(v -> "CR7".equals(v.apply("County Road 7"))));
 
 		// a lower layer replaces a rule whole: here it changes the order of the meanings
 		SearchVariantRules replaced = SearchVariantRules.of("xx", List.of(
@@ -425,8 +430,18 @@ public class SearchVariantRulesTest {
 				"mk_MK", "nl_NL", "pt_PT", "ru_RU", "sr_RS", "uk_UA")) {
 			assertNotNull(locale, SearchVariantRules.forLocale(locale));
 		}
-		// a mirror pair of Colombia shares "Calle" with the pair of Spanish
-		assertEquals(List.of("street:c", "street:cl", "street:cll"), forms(SearchVariantRules.forLocale("es_CO"), "calle"));
+		// index pairs of Colombia share "Calle" with the pair of Spanish: "Calle" keeps its one reverse form "c"
+		List<SearchVariantRules.Rule> colombia = SearchVariantRules.forLocale("es_CO").index();
+		assertTrue(colombia.stream().anyMatch(v -> "Calle 8a".equals(v.apply("Cll 8a"))));
+		assertTrue(colombia.stream().anyMatch(v -> "c 8a".equals(v.apply("Calle 8a"))));
+		assertTrue(colombia.stream().anyMatch(v -> "cl 8a".equals(v.apply("Calle 8a"))));
+		// a second reverse form: the word in a group (?:…) is a from of its own
+		List<SearchVariantRules.Rule> spanish = SearchVariantRules.forLocale("es_ES").index();
+		assertTrue(spanish.stream().anyMatch(v -> "av Colón".equals(v.apply("Avenida Colón"))));
+		assertTrue(spanish.stream().anyMatch(v -> "avda Colón".equals(v.apply("Avenida Colón"))));
+		assertTrue(spanish.stream().anyMatch(v -> "ctra Alcocer".equals(v.apply("Carretera Alcocer"))));
+		assertTrue(spanish.stream().anyMatch(v -> "carr Alcocer".equals(v.apply("Carretera Alcocer"))));
+		assertTrue(colombia.stream().anyMatch(v -> "cra 101".equals(v.apply("Carrera 101"))));
 		assertTrue(SearchVariantRules.forLocale("ru_RU").index().stream()
 				.anyMatch(v -> "Остров Пасхи".equals(v.apply("о. Пасхи"))));
 	}
