@@ -9,6 +9,7 @@ import net.osmand.data.FavouritePoint
 import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper
 import net.osmand.plus.gallery.attached.helpers.AttachedMediaUiHelper
 import net.osmand.plus.gallery.contract.IGalleryGridView
@@ -25,6 +26,7 @@ import net.osmand.plus.gallery.model.GallerySortMode
 import net.osmand.plus.gallery.model.GalleryToolbarAction
 import net.osmand.plus.gallery.model.MediaHolder
 import net.osmand.plus.gallery.ui.GalleryGridFragment
+import net.osmand.plus.gallery.library.MediaDialogs
 import net.osmand.plus.myplaces.favorites.FavoriteGroup
 import net.osmand.plus.settings.backend.backup.exporttype.AttachedMediaExportType
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType
@@ -35,11 +37,13 @@ import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
+import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.gpx.primitives.Linkable
 import net.osmand.shared.media.LinkMediaFactory
 import net.osmand.shared.media.domain.MediaItem
-import net.osmand.util.MapUtils
+import net.osmand.shared.media.library.MediaLibrarySorter
+import net.osmand.shared.media.library.SortableMedia
 import java.util.HashMap
 
 class AttachedMediaGridController(
@@ -157,24 +161,22 @@ class AttachedMediaGridController(
 		return items
 	}
 
+	private class SortableAttachedMedia(val item: MediaItem, metadata: GalleryMediaMetadata?) : SortableMedia {
+		override val id = item.id
+		override val title = item.title
+		override val type = item.type
+		override val dateMs = metadata?.creationTimeMs
+		override val lastModifiedMs = metadata?.lastModifiedTimeMs
+		override val sizeBytes = metadata?.sizeBytes
+		override val durationMs = metadata?.durationMs
+		override val location = metadata?.latLon?.let { KLatLon(it.latitude, it.longitude) }
+	}
+
 	private fun sortMedia(media: List<MediaItem>): List<MediaItem> {
-		val byName = compareBy<MediaItem> { it.title.lowercase() }
-		return when (sortMode) {
-			GallerySortMode.NAME_A_Z -> media.sortedWith(byName)
-			GallerySortMode.NAME_Z_A -> media.sortedWith(byName.reversed())
-			GallerySortMode.LAST_MODIFIED,
-			GallerySortMode.NEWEST_FIRST ->
-				media.sortedByDescending { metadataOf(it)?.lastModifiedTimeMs ?: Long.MIN_VALUE }
-			GallerySortMode.OLDEST_FIRST ->
-				media.sortedBy { metadataOf(it)?.lastModifiedTimeMs ?: Long.MAX_VALUE }
-			GallerySortMode.DURATION_LONG_SHORT ->
-				media.sortedByDescending { metadataOf(it)?.durationMs ?: Long.MIN_VALUE }
-			GallerySortMode.DURATION_SHORT_LONG ->
-				media.sortedBy { metadataOf(it)?.durationMs ?: Long.MAX_VALUE }
-			GallerySortMode.NEAREST -> latLon?.let { reference -> media.sortedBy { item ->
-					metadataOf(item)?.latLon?.let { MapUtils.getDistance(reference, it) } ?: Double.MAX_VALUE
-				} } ?: media
-		}
+		val reference = latLon?.let { KLatLon(it.latitude, it.longitude) }
+		return media.map { SortableAttachedMedia(it, metadataOf(it)) }
+			.sortedWith(MediaLibrarySorter.comparator(sortMode.shared, reference))
+			.map { it.item }
 	}
 
 	private fun getAvailableSortModes(): List<GallerySortMode> =
@@ -205,7 +207,7 @@ class AttachedMediaGridController(
 		}
 
 	override fun handleGalleryAction(v: View, action: GalleryAction) {
-		val activity = view?.getMapActivity() ?: return
+		val activity = view?.getActivity() as? MapActivity ?: return
 		when (action) {
 			ADD_ACTION -> AttachedMediaUiHelper(activity).showAddMenu(v, target, latLon) { onMediaChanged() }
 			EDIT_ACTION -> enterSelectionMode(null)
@@ -221,7 +223,7 @@ class AttachedMediaGridController(
 	}
 
 	private fun showDeleteDialog() {
-		val activity = view?.getMapActivity() ?: return
+		val activity = view?.getActivity() ?: return
 		val links = getSelectedLinks()
 		if (links.isEmpty()) {
 			app.showShortToastMessage(R.string.shared_string_nothing_selected)
@@ -249,7 +251,7 @@ class AttachedMediaGridController(
 	}
 
 	private fun exportSelectedMedia() {
-		val activity = view?.getMapActivity() ?: return
+		val activity = view?.getActivity() ?: return
 		val favorite = target as? FavouritePoint ?: return
 
 		val links = getSelectedLinks()
@@ -276,6 +278,26 @@ class AttachedMediaGridController(
 		val nightMode = view?.isNightMode() ?: false
 		val iconColor = ColorUtilities.getDefaultIconColor(app, nightMode)
 		val items = listOf(
+			PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_detach)
+				.setIcon(app.uiUtilities.getPaintedIcon(R.drawable.ic_action_attachment_remove, iconColor))
+				.setOnClickListener {
+					val activity = view?.getActivity()
+					val links = getSelectedLinks()
+					if (activity != null && links.isNotEmpty()) {
+						MediaDialogs.detach(activity, links, nightMode) {
+							AttachedMediaDataHelper(app).removeMediaLinks(target, links, false) { success ->
+								app.runInUIThread {
+									if (!success) app.showShortToastMessage(R.string.media_detach_failed)
+									exitSelectionMode()
+									onMediaChanged()
+									app.galleryHelper.mediaLibraryRepository.refresh()
+								}
+								true
+							}
+						}
+					}
+				}.create(),
 			PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_export)
 				.setIcon(app.uiUtilities.getPaintedIcon(R.drawable.ic_action_export, iconColor))

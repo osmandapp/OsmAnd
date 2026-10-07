@@ -85,7 +85,7 @@ kotlin {
 			implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
 			implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
-			implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
+			api("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
 			implementation("com.squareup.okio:okio:$okioVersion")
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 			implementation("co.touchlab:stately-concurrent-collections:$statelyVersion")

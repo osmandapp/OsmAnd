@@ -29,6 +29,8 @@ import net.osmand.binary.NameIndexReader.NameIndexReaderBytes;
 import net.osmand.binary.NameIndexReader.PrefixNameValue;
 import net.osmand.binary.NameIndexReader.ValueFreq;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
+import net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData;
+import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -249,16 +251,54 @@ public class SpatialSearchContext {
 
 	
 	
+	/** a word still being typed is matched whole when its index blocks are larger than the limit */
+	private void readAndCheckBroadIncompleteWords() throws IOException {
+		for (SpatialSearchToken t : tokens) {
+			if (!t.incomplete || t.isOnlyFullMatch() || settings.LIMIT_INCOMPLETE_BYTES <= 0) {
+				continue;
+			}
+			long bytes = 0;
+			for (int fileInd = 0; fileInd < files.size(); fileInd++) {
+				for (NameIndexReader indx : internalFile.get(fileInd).indexReaders) {
+					List<PrefixNameValue> prefixes = indx.getMatchedPrefixes(t.word);
+					if (prefixes == null) {
+						stats.sub1FileAtomsTime.start();
+						// the matcher of readAtoms: a word that is not broad reuses these prefixes
+						prefixes = files.get(fileInd).readFullNameIndex(indx.setQuery(t.word,
+								t.getPrefixMatcher(stats, rulesLocale(indx), indx.poiRegion != null)));
+						stats.sub1FileAtomsTime.finish();
+					}
+					for (PrefixNameValue p : prefixes == null ? List.<PrefixNameValue>of() : prefixes) {
+						bytes += p.data == null ? 0 : p.data.length;
+					}
+				}
+			}
+			t.broad = bytes > settings.LIMIT_INCOMPLETE_BYTES;
+			t.clearPrefixMatchCache();
+		}
+	}
+
 	void readAtoms() throws IOException {
+		for (SpatialSearchFileCache c : internalFile) {
+			for (NameIndexReader indx : c.indexReaders) {
+				indx.resetBytesStat(); // before readAndCheckBroadIncompleteWords, it reads too
+			}
+		}
+		readAndCheckBroadIncompleteWords();
 		int indxInd = 0;
-		
+		long cachedBytes = 0;
 		for (int fileInd = 0; fileInd < files.size(); fileInd++) {
 			SpatialSearchFileCache iCache = internalFile.get(fileInd);
 			BinaryMapIndexReader b = files.get(fileInd);
 			for (NameIndexReader indx : iCache.indexReaders) {
-				indx.resetBytesStat();
 				readAtoms(tokens, b, indx, indxInd);
 				indxInd++;
+				// the matched atoms are in the tokens now, the parsed blocks are only a cache for the next search
+				cachedBytes += indx.getCachedBytes();
+				if (cachedBytes > settings.AUTO_CLEAR_PREFIX_CACHE_BYTES) {
+					cachedBytes -= indx.getCachedBytes();
+					indx.clearPrefixes();
+				}
 				NameIndexReaderBytes bytesStat = indx.getBytesStat();
 				stats.readAtomsBytes += bytesStat.readAtomBytes;
 				stats.skipAtomsBytes += bytesStat.skipAtomBytes;
@@ -491,11 +531,14 @@ public class SpatialSearchContext {
 		return regroup;
 	}
 
+	/** rules of the data of this map (en_US, de_CH...), whatever the language of the user interface is */
+	private static String rulesLocale(NameIndexReader indx) {
+		return SearchLocales.forMap(indx.addressRegion != null ? indx.addressRegion.getName() : indx.poiRegion.getName());
+	}
+
 	private void readAtoms(List<SpatialSearchToken> tokens, BinaryMapIndexReader b, NameIndexReader indx, int indxInd)
 			throws IOException {
-		// rules of the data of this map (en_US, de_CH...), whatever the language of the user interface is
-		String locale = SearchLocales.forMap(
-				indx.addressRegion != null ? indx.addressRegion.getName() : indx.poiRegion.getName());
+		String locale = rulesLocale(indx);
 		// sort to assign tokens to '2nd street 2' first instead '2 2nd street'
 		tokens.sort(new Comparator<SpatialSearchToken>() {
 			@Override
@@ -515,10 +558,11 @@ public class SpatialSearchContext {
 			} else if (!settings.SEARCH_ADDR && indx.addressRegion != null) {
 				continue;
 			}
-			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
+			String query = t.broad ? t.word + " " : t.word; // a broad word reads other keys
+			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(query);
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
-				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word,
+				matchedPrefixes = b.readFullNameIndex(indx.setQuery(query,
 						t.getPrefixMatcher(stats, locale, indx.poiRegion != null)));
 				stats.sub1FileAtomsTime.finish();
 				if (matchedPrefixes == null) {
@@ -565,17 +609,19 @@ public class SpatialSearchContext {
 		String curSuffix = null;
 		List<String> suffixes = new ArrayList<>();
 		List<String> commonSuffixes = new ArrayList<>();
-		boolean addr = prefix.addr != null;
-		for (String s : addr ? prefix.addr.getSuffixesDictionaryList() : prefix.poi.getSuffixesDictionaryList()) {
+		AddressNameIndexData addrData = prefix.getAddr();
+		OsmAndPoiNameIndexData poiData = addrData == null ? prefix.getPoi() : null;
+		boolean addr = addrData != null;
+		for (String s : addr ? addrData.getSuffixesDictionaryList() : poiData.getSuffixesDictionaryList()) {
 			curSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(curSuffix, s);
 			suffixes.add(prefix.key + curSuffix);
 		}
-		for (Integer i : addr ? prefix.addr.getSuffixesCommonDictionaryList()
-				: prefix.poi.getSuffixesCommonDictionaryList()) {
+		for (Integer i : addr ? addrData.getSuffixesCommonDictionaryList()
+				: poiData.getSuffixesCommonDictionaryList()) {
 			commonSuffixes.add(indx.getCommonIndexed(i));
 		}
 		if (addr && settings.SEARCH_ADDR) {
-			for (AddressNameIndexDataAtom a : prefix.addr.getAtomList()) {
+			for (AddressNameIndexDataAtom a : addrData.getAtomList()) {
 				long lid = makeAddrId(indInd, prefix.shift - a.getShiftToIndex(0));
 				long pid = 0;
 				if (a.getType() == CityBlocks.STREET_TYPE.index) {
@@ -589,7 +635,7 @@ public class SpatialSearchContext {
 				parseSuffixes(t, indx, suffixes, commonSuffixes, a, null, lid, pid, obj, allTokens, locale);
 			}
 		} else if (!addr && settings.SEARCH_POI) {
-			for (OsmAndPoiNameIndexDataAtom a : prefix.poi.getAtomsList()) {
+			for (OsmAndPoiNameIndexDataAtom a : poiData.getAtomsList()) {
 				if (a.getPoiIndInBlockCount() == 0) {
 					// intermediate version ignore
 					continue;
@@ -652,6 +698,15 @@ public class SpatialSearchContext {
 	}
 
 	public MapObject readPoiObject(long id, TLongObjectHashMap<MapObject> cache) throws IOException {
+		return readPoiObject(id, cache, null);
+	}
+
+	public static long poiObjectId(long id) {
+		return id & ((1L << SHIFT_ALT_NAME) - 1);
+	}
+
+	public MapObject readPoiObject(long id, TLongObjectHashMap<MapObject> cache, TLongHashSet wanted)
+			throws IOException {
 		id &= (1L << SHIFT_ALT_NAME) - 1; // the alternative name variant reads the same object
 		if (cache != null) {
 			MapObject mapObject = cache.get(id);
@@ -683,7 +738,10 @@ public class SpatialSearchContext {
 		if (cache != null) {
 			long ofirstid = oid - (poiInd << SHIFT_FILE_IND);
 			for (int i = 0; i < lst.size(); i++) {
-				cache.put(ofirstid + (i << SHIFT_FILE_IND), lst.get(i));
+				long bid = ofirstid + (i << SHIFT_FILE_IND);
+				if (wanted == null || wanted.contains(bid)) {
+					cache.put(bid, lst.get(i));
+				}
 			}
 		}
 		if (poiInd >= lst.size()) {

@@ -150,4 +150,9 @@ public class TelegramChatsFragment extends BaseFullScreenFragment implements OnI
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "telegram_chats";
+	}
 }

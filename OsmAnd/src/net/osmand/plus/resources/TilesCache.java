@@ -233,6 +233,11 @@ public abstract class TilesCache<T> {
 		}
 	}
 
+	protected boolean isDownloadInProgress(@Nullable File fileToSave) {
+		return asyncLoadingThread.isFileCurrentlyDownloaded(fileToSave)
+				|| asyncLoadingThread.isFilePendingToDownload(fileToSave);
+	}
+
 	protected synchronized void clearTiles() {
 		log.info("Cleaning tiles - size = " + cache.size());
 		List<Map.Entry<String, CacheEntry<T>>> list = new ArrayList<>(cache.entrySet());

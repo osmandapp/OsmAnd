@@ -254,4 +254,9 @@ public class CreateEditActionDialog extends BaseFullScreenDialogFragment impleme
 			dialog.show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "create_edit_action";
+	}
 }

@@ -241,4 +241,9 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		}
 		showHideCustomizeRouteLinePref();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "navigation_settings";
+	}
 }

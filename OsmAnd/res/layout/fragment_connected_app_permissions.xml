@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Permissions of an app connected over the AIDL API: on/off and the permission groups it may use.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/colorSurface"
+	android:orientation="vertical">
+
+	<include layout="@layout/ui_material_app_bar" />
+
+	<ScrollView
+		android:id="@+id/scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingBottom="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.ui.ScreenDescriptionView
+				android:id="@+id/description"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+			<net.osmand.plus.widgets.ui.MainSwitchView
+				android:id="@+id/main_switch"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+			<net.osmand.plus.widgets.ui.GroupFooterView
+				android:id="@+id/disabled_footer"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:groupFooterText="@string/aidl_app_disabled_descr" />
+
+			<LinearLayout
+				android:id="@+id/content"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.ui.GroupHeaderView
+					android:id="@+id/groups_header"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:groupHeaderTitle="@string/shared_string_permissions" />
+
+				<LinearLayout
+					android:id="@+id/groups"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" />
+
+				<net.osmand.plus.widgets.ui.GroupHeaderView
+					android:id="@+id/system_header"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/ui_group_gap"
+					app:groupHeaderTitle="@string/aidl_group_system" />
+
+				<LinearLayout
+					android:id="@+id/system_group"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" />
+
+				<net.osmand.plus.widgets.ui.GroupFooterView
+					android:id="@+id/system_footer"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:groupFooterText="@string/aidl_group_system_footer" />
+			</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

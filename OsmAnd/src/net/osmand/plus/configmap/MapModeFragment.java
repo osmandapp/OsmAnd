@@ -171,4 +171,9 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_mode";
+	}
 }

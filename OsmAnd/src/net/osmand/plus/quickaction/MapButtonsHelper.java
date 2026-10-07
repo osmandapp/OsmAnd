@@ -27,9 +27,6 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.mapwidgets.configure.buttons.*;
 import net.osmand.util.Algorithms;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.*;
 
@@ -46,60 +43,46 @@ public class MapButtonsHelper {
 		void onActionsUpdated();
 	}
 
-	@Retention(RetentionPolicy.RUNTIME)
-	public @interface QuickActionCategoryType {
-	}
-
-	@QuickActionCategoryType
 	public static final QuickActionType TYPE_ADD_ITEMS = new QuickActionType(0, "").
 			nameRes(R.string.quick_action_add_create_items).category(CREATE_CATEGORY);
-	@QuickActionCategoryType
 	public static final QuickActionType TYPE_CONFIGURE_MAP = new QuickActionType(0, "").
 			nameRes(R.string.quick_action_add_configure_map).category(QuickActionType.CONFIGURE_MAP).iconRes(R.drawable.ic_layer_top);
-	@QuickActionCategoryType
 	public static final QuickActionType TYPE_NAVIGATION = new QuickActionType(0, "").
 			nameRes(R.string.shared_string_navigation).category(QuickActionType.NAVIGATION).iconRes(R.drawable.ic_action_gdirections_dark);
-	@QuickActionCategoryType
 	public static final QuickActionType TYPE_CONFIGURE_SCREEN = new QuickActionType(0, "").
 			nameRes(R.string.map_widget_config).category(QuickActionType.CONFIGURE_SCREEN);
-	@QuickActionCategoryType
 	public static final QuickActionType TYPE_SETTINGS = new QuickActionType(0, "").
 			nameRes(R.string.shared_string_settings).category(QuickActionType.SETTINGS).iconRes(R.drawable.ic_action_settings);
-	@QuickActionCategoryType
 	public static final QuickActionType TYPE_MAP_INTERACTIONS = new QuickActionType(0, "").
 			nameRes(R.string.key_event_category_map_interactions).category(QuickActionType.MAP_INTERACTIONS).iconRes(R.drawable.ic_action_map_move_up);
-	@QuickActionCategoryType
 	public static final QuickActionType TYPE_MY_PLACES = new QuickActionType(0, "").
 			nameRes(R.string.shared_string_my_places).category(QuickActionType.MY_PLACES).iconRes(R.drawable.ic_action_favorite);
 
-	@QuickActionCategoryType
 	public static final QuickActionType TYPE_INTERFACE = new QuickActionType(0, "").
 			nameRes(R.string.shared_string_interface).category(QuickActionType.INTERFACE).iconRes(R.drawable.ic_action_ui_customization);
 
-	public static List<QuickActionType> collectQuickActionCategoryType(Class<?> typeClass) {
-		List<QuickActionType> annotatedFields = new ArrayList<>();
-		Field[] fields = typeClass.getDeclaredFields();
-
-		for (Field field : fields) {
-			if (field.isAnnotationPresent(QuickActionCategoryType.class)) {
-				try {
-					annotatedFields.add((QuickActionType) field.get(null));
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return annotatedFields;
-	}
-
 	@Nullable
 	public static QuickActionType getCategoryActionTypeFromId(int typeId) {
-		for (QuickActionType type : collectQuickActionCategoryType(MapButtonsHelper.class)) {
-			if (type.getCategory() == typeId) {
-				return type;
-			}
+		switch (typeId) {
+			case CREATE_CATEGORY:
+				return TYPE_ADD_ITEMS;
+			case QuickActionType.CONFIGURE_MAP:
+				return TYPE_CONFIGURE_MAP;
+			case QuickActionType.NAVIGATION:
+				return TYPE_NAVIGATION;
+			case QuickActionType.CONFIGURE_SCREEN:
+				return TYPE_CONFIGURE_SCREEN;
+			case QuickActionType.SETTINGS:
+				return TYPE_SETTINGS;
+			case QuickActionType.MAP_INTERACTIONS:
+				return TYPE_MAP_INTERACTIONS;
+			case QuickActionType.MY_PLACES:
+				return TYPE_MY_PLACES;
+			case QuickActionType.INTERFACE:
+				return TYPE_INTERFACE;
+			default:
+				return null;
 		}
-		return null;
 	}
 
 	private final OsmandApplication app;

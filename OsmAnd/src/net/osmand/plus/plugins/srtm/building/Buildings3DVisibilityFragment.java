@@ -125,4 +125,9 @@ public class Buildings3DVisibilityFragment extends ConfigureMapOptionFragment {
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "buildings_3d_visibility";
+	}
 }

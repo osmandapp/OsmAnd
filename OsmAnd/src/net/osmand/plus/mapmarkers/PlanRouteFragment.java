@@ -867,4 +867,9 @@ public class PlanRouteFragment extends BaseFullScreenFragment implements OsmAndL
 		}
 		return null;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "plan_route";
+	}
 }

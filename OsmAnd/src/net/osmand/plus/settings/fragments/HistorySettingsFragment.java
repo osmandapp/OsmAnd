@@ -227,4 +227,9 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 	public void onPreferenceChanged(@NonNull String prefId) {
 		updateSetting(prefId);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "history_settings_main";
+	}
 }

@@ -261,4 +261,9 @@ public class DetailedTrackGuidanceFragment extends BaseFullScreenFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "detailed_track_guidance";
+	}
 }

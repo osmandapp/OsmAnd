@@ -259,4 +259,9 @@ public class PluginInfoFragment extends BaseFullScreenFragment implements Plugin
 	public void onItemPurchased(String sku, boolean active) {
 		updateState();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "plugin_info";
+	}
 }
