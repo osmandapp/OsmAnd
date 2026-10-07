@@ -435,6 +435,10 @@ public class SearchVariantRulesTest {
 		assertTrue(colombia.stream().anyMatch(v -> "Calle 8a".equals(v.apply("Cll 8a"))));
 		assertTrue(colombia.stream().anyMatch(v -> "c 8a".equals(v.apply("Calle 8a"))));
 		assertTrue(colombia.stream().anyMatch(v -> "cl 8a".equals(v.apply("Calle 8a"))));
+		assertTrue(colombia.stream().anyMatch(v -> "cll 8a".equals(v.apply("Calle 8a"))));
+		for (String abbreviation : List.of("cra", "kra", "cr", "kr")) {
+			assertTrue(abbreviation, colombia.stream().anyMatch(v -> (abbreviation + " 101").equals(v.apply("Carrera 101"))));
+		}
 		// a second reverse form: the word in a group (?:…) is a from of its own
 		List<SearchVariantRules.Rule> spanish = SearchVariantRules.forLocale("es_ES").index();
 		assertTrue(spanish.stream().anyMatch(v -> "av Colón".equals(v.apply("Avenida Colón"))));
