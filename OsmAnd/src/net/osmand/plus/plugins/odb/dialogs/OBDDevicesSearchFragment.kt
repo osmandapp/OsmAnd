@@ -42,6 +42,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = OBDDevicesSearchFragment()
+				@Suppress("DEPRECATION")
 				fragment.retainInstance = true
 				manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
@@ -204,7 +205,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	override fun onDevicePaired(pairedDevice: BTDeviceInfo) {
 		if (pairingDevice?.address == pairedDevice.address) {
 			vehicleMetricsPlugin.connectToObd(requireActivity(), pairedDevice)
-			activity?.onBackPressed()
+			activity?.onBackPressedDispatcher?.onBackPressed()
 		}
 	}
 
@@ -221,7 +222,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 			vehicleMetricsPlugin.let { plugin ->
 				if (plugin.isPaired(it, device) || device.isBLE) {
 					plugin.connectToObd(requireActivity(), device)
-					it.onBackPressed()
+					it.onBackPressedDispatcher.onBackPressed()
 				} else {
 					if (pairingDevice == null) {
 						pairingDevice = device

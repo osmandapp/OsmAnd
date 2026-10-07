@@ -45,6 +45,7 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 	companion object {
 		val TAG: String = TracksFilterFragment::class.java.simpleName
 
+		@Suppress("DEPRECATION") // setTargetFragment and retainInstance, needs migration
 		fun showInstance(
 			app: OsmandApplication,
 			manager: FragmentManager,
@@ -152,9 +153,11 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 			val activity = activity
 			if (activity != null) {
 				val manager = activity.supportFragmentManager
+				@Suppress("DEPRECATION") // targetFragment, needs migration
+				val target = targetFragment
 				SearchMyPlacesTracksFragment.showInstance(
 					manager,
-					targetFragment,
+					target,
 					false,
 					isUsedOnMap,
 					smartFolder,
@@ -218,8 +221,7 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 
 	private fun closeWithoutApply() {
 		if (filterChanged()) {
-			val fragmentManager = fragmentManager
-			fragmentManager?.let {
+			if (isAdded) {
 				val builder = AlertDialog.Builder(requireContext())
 				builder.setTitle(R.string.discard_filter_changes)
 				builder.setMessage(R.string.discard_filter_changes_prompt)
@@ -247,7 +249,7 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 	}
 
 	private fun setupList(view: View) {
-		fragmentManager?.let {
+		parentFragmentManager.let {
 			adapter = FiltersAdapter(app, it, filter, nightMode)
 			val recyclerView = view.findViewById<RecyclerView>(R.id.filters_list)
 			recyclerView.layoutManager = LinearLayoutManager(app)

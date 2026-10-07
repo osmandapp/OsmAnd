@@ -1111,7 +1111,7 @@ class StarView @JvmOverloads constructor(
 		val timeUnchanged = cached != null && abs(currentTime.tt - cached.lastTime) < 0.0000001
 		val locUnchanged = cached != null && observer.latitude == cached.lastLat && observer.longitude == cached.lastLon
 
-		if (timeUnchanged && locUnchanged && cached != null) {
+		if (timeUnchanged && locUnchanged) {
 			return cached
 		}
 

@@ -7,11 +7,11 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.view.Surface
-import android.view.WindowManager
 import android.widget.Toast
 import net.osmand.Location
 import net.osmand.plus.plugins.astronomy.views.StarView
 import net.osmand.plus.R
+import net.osmand.plus.utils.AndroidUtils
 import kotlin.math.abs
 import kotlin.math.asin
 import kotlin.math.atan2
@@ -136,8 +136,7 @@ class StarMapARModeHelper(
 		}
 
 		if (success) {
-			val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-			val rotation = windowManager.defaultDisplay.rotation
+			val rotation = AndroidUtils.getDisplay(context).rotation
 
 			var axisX = SensorManager.AXIS_X
 			var axisY = SensorManager.AXIS_Y

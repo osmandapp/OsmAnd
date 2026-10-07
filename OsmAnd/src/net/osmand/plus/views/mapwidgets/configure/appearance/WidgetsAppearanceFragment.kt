@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.configure.appearance
 
 import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -250,7 +251,7 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 	}
 
 	private fun setupTabIconColor(tab: TabLayout.Tab?, color: Int) {
-		tab?.icon?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+		tab?.icon?.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
 	}
 
 	private fun showCopyMenu(anchorView: View) {
@@ -289,7 +290,6 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 		displayData.anchorView = anchorView
 		displayData.menuItems = items
 		displayData.nightMode = nightMode
-		displayData.layoutId = R.layout.popup_menu_item_full_divider
 		PopUpMenu.show(displayData)
 	}
 

@@ -111,7 +111,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	override fun setupToolbar(view: View) {
 		view.findViewById<ImageButton>(R.id.close_button).apply {
 			setOnClickListener {
-				requireActivity().onBackPressed()
+				requireActivity().onBackPressedDispatcher.onBackPressed()
 			}
 			setImageResource(AndroidUtils.getNavigationIconResId(context))
 		}
@@ -355,6 +355,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 				args.putString(DEVICE_ADDRESS_KEY, device.address)
 				args.putBoolean(DEVICE_IS_BLE_KEY, device.isBLE)
 				fragment.arguments = args
+				@Suppress("DEPRECATION")
 				fragment.retainInstance = true
 				manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
