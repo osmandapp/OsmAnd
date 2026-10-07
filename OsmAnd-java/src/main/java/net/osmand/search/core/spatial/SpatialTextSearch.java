@@ -127,7 +127,7 @@ public class SpatialTextSearch {
 		// objects read for one stage, the best by SpatialSearchRanking.prescore (0 - all)
 		public int LIMIT_READ_OBJECTS = 1000;
 		// a 3-letter word still being typed whose index blocks are larger is matched whole ('sch' 14 MB; 0 - never)
-		public int LIMIT_INCOMPLETE_BYTES = 7 << 20;
+		public int LIMIT_INCOMPLETE_BYTES = 5 << 20;
 
 		public int MIN_ELO_RATING = 1400; // see SearchResult.MIN_ELO_RATING
 		public int WORLD_ELO_RATING = 1500; // from world map by default
@@ -622,7 +622,6 @@ public class SpatialTextSearch {
 		ctx.stats.step1Atoms.start();
 		ctx.setTokens(res.tokens);
 		ctx.processPoiCategories();
-		ctx.markBroadWords();
 		ctx.readAtoms();
 		ctx.stats.step1Atoms.finish();
 

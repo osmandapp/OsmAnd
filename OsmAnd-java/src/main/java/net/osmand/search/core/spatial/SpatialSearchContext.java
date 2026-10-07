@@ -249,7 +249,7 @@ public class SpatialSearchContext {
 	
 	
 	/** a 3-letter word still being typed is matched whole when its index blocks are larger than the limit */
-	void markBroadWords() throws IOException {
+	private void markBroadWords() throws IOException {
 		for (SpatialSearchToken t : tokens) {
 			if (!t.incomplete || t.wordNoDot.length() != settings.MIN_CHARACTERS_INCOMPLETE + 1
 					|| settings.LIMIT_INCOMPLETE_BYTES <= 0) {
@@ -260,7 +260,9 @@ public class SpatialSearchContext {
 				for (NameIndexReader indx : internalFile.get(fileInd).indexReaders) {
 					List<PrefixNameValue> prefixes = indx.getMatchedPrefixes(t.word);
 					if (prefixes == null) {
+						stats.sub1FileAtomsTime.start();
 						prefixes = files.get(fileInd).readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats)));
+						stats.sub1FileAtomsTime.finish();
 					}
 					for (PrefixNameValue p : prefixes == null ? List.<PrefixNameValue>of() : prefixes) {
 						bytes += p.data == null ? 0 : p.data.length;
@@ -273,6 +275,7 @@ public class SpatialSearchContext {
 	}
 
 	void readAtoms() throws IOException {
+		markBroadWords();
 		int indxInd = 0;
 		long cachedBytes = 0;
 		for (int fileInd = 0; fileInd < files.size(); fileInd++) {
