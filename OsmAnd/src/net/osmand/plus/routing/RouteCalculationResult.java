@@ -23,6 +23,7 @@ import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
+import net.osmand.router.SpeedCameraFilter;
 import net.osmand.router.TurnType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
@@ -296,11 +297,13 @@ public class RouteCalculationResult {
 				locations.get(currentLocation).getLatitude(), locations.get(currentLocation).getLongitude());
 	}
 
-	private static void attachAlarmInfo(List<AlarmInfo> alarms, RouteSegmentResult res, int intId, int locInd) {
+	private static void attachAlarmInfo(List<AlarmInfo> alarms, RouteSegmentResult res, int intId, int locInd,
+	                                    SpeedCameraFilter speedCameraFilter) {
 		RouteDataObject rdo = res.getObject();
 		int[] pointTypes = rdo.getPointTypes(intId);
 		if (pointTypes != null) {
 			RouteRegion reg = rdo.region;
+			boolean speedCameraApplicable = speedCameraFilter.visitPoint(rdo, intId);
 			for (int r = 0; r < pointTypes.length; r++) {
 				RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
 				int x31 = rdo.getPoint31XTile(intId);
@@ -310,6 +313,9 @@ public class RouteCalculationResult {
 				loc.setLongitude(MapUtils.get31LongitudeX(x31));
 				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd, loc);
 				if (info != null) {
+					if (info.getType() == AlarmInfoType.SPEED_CAMERA && !speedCameraApplicable) {
+						continue;
+					}
 					// For STOP and TRAFFIC_CALMING first check if it has directional info
 					boolean forward = res.isForwardDirection();
 					boolean directionApplicable = rdo.isDirectionApplicable(forward, intId,
@@ -378,6 +384,7 @@ public class RouteCalculationResult {
 		double lastHeight = HEIGHT_UNDEFINED;
 		List<RouteSegmentResult> segmentsToPopulate = new ArrayList<>();
 		AlarmInfo tunnelAlarm = null;
+		SpeedCameraFilter speedCameraFilter = new SpeedCameraFilter();
 		for (int routeInd = 0; routeInd < list.size(); routeInd++) {
 			RouteSegmentResult s = list.get(routeInd);
 			float[] vls = s.getObject().calculateHeightArray();
@@ -426,7 +433,7 @@ public class RouteCalculationResult {
 					lastHeight = h;
 				}
 				locations.add(n);
-				attachAlarmInfo(alarms, s, i, locations.size());
+				attachAlarmInfo(alarms, s, i, locations.size(), speedCameraFilter);
 				segmentsToPopulate.add(s);
 				if (i == s.getEndPointIndex()) {
 					break;
@@ -510,11 +517,13 @@ public class RouteCalculationResult {
 						info.getRef(), info.getDestinationRefAndName(), ctx.getString(R.string.towards));
 				description = description.trim();
 				String[] pointNames = s.getObject().getPointNames(s.getStartPointIndex());
+				int[] pointNameTypes = s.getObject().getPointNameTypes(s.getStartPointIndex());
 				if (pointNames != null) {
 					for (int t = 0; t < pointNames.length; t++) {
 						String pointName = pointNames[t];
 						if (Algorithms.isEmpty(pointName)
-								|| pointName.equals(currentExitRef) || pointName.equals(currentExitName)) {
+								|| pointName.equals(currentExitRef) || pointName.equals(currentExitName)
+								|| SpeedCameraFilter.isRelationIdType(s.getObject(), pointNameTypes[t])) {
 							continue;
 						}
 						description += " " + pointName;
