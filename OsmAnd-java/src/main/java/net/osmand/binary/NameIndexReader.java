@@ -167,7 +167,7 @@ public class NameIndexReader {
 		public String key;
 		public OsmAndPoiNameIndexData poi = null;
 		public AddressNameIndexData addr = null;
-		byte[] data;
+		public byte[] data;
 		public long shift;
 
 		public OsmAndPoiNameIndexData getPoi() throws InvalidProtocolBufferException {

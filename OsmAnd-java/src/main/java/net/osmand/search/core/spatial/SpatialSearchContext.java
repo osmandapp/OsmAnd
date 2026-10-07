@@ -248,14 +248,44 @@ public class SpatialSearchContext {
 
 	
 	
+	/** a word still being typed is matched whole when its index blocks are larger than the limit */
+	private void readAndCheckBroadIncompleteWords() throws IOException {
+		for (SpatialSearchToken t : tokens) {
+			if (!t.incomplete || t.isOnlyFullMatch() || settings.LIMIT_INCOMPLETE_BYTES <= 0) {
+				continue;
+			}
+			long bytes = 0;
+			for (int fileInd = 0; fileInd < files.size(); fileInd++) {
+				for (NameIndexReader indx : internalFile.get(fileInd).indexReaders) {
+					List<PrefixNameValue> prefixes = indx.getMatchedPrefixes(t.word);
+					if (prefixes == null) {
+						stats.sub1FileAtomsTime.start();
+						prefixes = files.get(fileInd).readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats)));
+						stats.sub1FileAtomsTime.finish();
+					}
+					for (PrefixNameValue p : prefixes == null ? List.<PrefixNameValue>of() : prefixes) {
+						bytes += p.data == null ? 0 : p.data.length;
+					}
+				}
+			}
+			t.broad = bytes > settings.LIMIT_INCOMPLETE_BYTES;
+			t.fastPrefMatchCheck.clear();
+		}
+	}
+
 	void readAtoms() throws IOException {
+		for (SpatialSearchFileCache c : internalFile) {
+			for (NameIndexReader indx : c.indexReaders) {
+				indx.resetBytesStat(); // before readAndCheckBroadIncompleteWords, it reads too
+			}
+		}
+		readAndCheckBroadIncompleteWords();
 		int indxInd = 0;
 		long cachedBytes = 0;
 		for (int fileInd = 0; fileInd < files.size(); fileInd++) {
 			SpatialSearchFileCache iCache = internalFile.get(fileInd);
 			BinaryMapIndexReader b = files.get(fileInd);
 			for (NameIndexReader indx : iCache.indexReaders) {
-				indx.resetBytesStat();
 				readAtoms(tokens, b, indx, indxInd);
 				indxInd++;
 				// the matched atoms are in the tokens now, the parsed blocks are only a cache for the next search
@@ -517,10 +547,11 @@ public class SpatialSearchContext {
 			} else if (!settings.SEARCH_ADDR && indx.addressRegion != null) {
 				continue;
 			}
-			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
+			String query = t.broad ? t.word + " " : t.word; // a broad word reads other keys
+			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(query);
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
-				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats)));
+				matchedPrefixes = b.readFullNameIndex(indx.setQuery(query, t.getPrefixMatcher(stats)));
 				stats.sub1FileAtomsTime.finish();
 				if (matchedPrefixes == null) {
 					continue;
