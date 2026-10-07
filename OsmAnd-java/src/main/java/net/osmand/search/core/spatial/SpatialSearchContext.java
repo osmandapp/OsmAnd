@@ -248,11 +248,10 @@ public class SpatialSearchContext {
 
 	
 	
-	/** a 3-letter word still being typed is matched whole when its index blocks are larger than the limit */
-	private void markBroadWords() throws IOException {
+	/** a word still being typed is matched whole when its index blocks are larger than the limit */
+	private void readAndCheckBroadIncompleteWords() throws IOException {
 		for (SpatialSearchToken t : tokens) {
-			if (!t.incomplete || t.wordNoDot.length() != settings.MIN_CHARACTERS_INCOMPLETE + 1
-					|| settings.LIMIT_INCOMPLETE_BYTES <= 0) {
+			if (!t.incomplete || t.isOnlyFullMatch() || settings.LIMIT_INCOMPLETE_BYTES <= 0) {
 				continue;
 			}
 			long bytes = 0;
@@ -275,14 +274,18 @@ public class SpatialSearchContext {
 	}
 
 	void readAtoms() throws IOException {
-		markBroadWords();
+		for (SpatialSearchFileCache c : internalFile) {
+			for (NameIndexReader indx : c.indexReaders) {
+				indx.resetBytesStat(); // before readAndCheckBroadIncompleteWords, it reads too
+			}
+		}
+		readAndCheckBroadIncompleteWords();
 		int indxInd = 0;
 		long cachedBytes = 0;
 		for (int fileInd = 0; fileInd < files.size(); fileInd++) {
 			SpatialSearchFileCache iCache = internalFile.get(fileInd);
 			BinaryMapIndexReader b = files.get(fileInd);
 			for (NameIndexReader indx : iCache.indexReaders) {
-				indx.resetBytesStat();
 				readAtoms(tokens, b, indx, indxInd);
 				indxInd++;
 				// the matched atoms are in the tokens now, the parsed blocks are only a cache for the next search
