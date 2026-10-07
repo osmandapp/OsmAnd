@@ -1302,8 +1302,8 @@
     <string name="empty_name">Mebla isem</string>
     <string name="shared_string_temperature">Tazɣelt</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="map_2d_mode_action">Askar 2D</string>
     <string name="map_3d_mode_action">Askar 3D</string>
