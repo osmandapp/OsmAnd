@@ -251,25 +251,24 @@ public class SpatialSearchContext {
 	/** a 3-letter word still being typed is matched whole when more index atoms continue it than the limit */
 	void markBroadWords() throws IOException {
 		for (SpatialSearchToken t : tokens) {
-			if (t.incomplete && t.wordNoDot.length() == settings.MIN_CHARACTERS_INCOMPLETE + 1
-					&& settings.LIMIT_INCOMPLETE_ATOMS > 0) {
-				t.broad = countIndexAtoms(t) > settings.LIMIT_INCOMPLETE_ATOMS;
+			if (!t.incomplete || t.wordNoDot.length() != settings.MIN_CHARACTERS_INCOMPLETE + 1
+					|| settings.LIMIT_INCOMPLETE_ATOMS <= 0) {
+				continue;
 			}
-		}
-	}
-
-	private long countIndexAtoms(SpatialSearchToken t) throws IOException {
-		long sum = 0;
-		String key = "\u0001" + t.word;
-		for (int fileInd = 0; fileInd < files.size() && sum <= settings.LIMIT_INCOMPLETE_ATOMS; fileInd++) {
-			for (NameIndexReader indx : internalFile.get(fileInd).indexReaders) {
-				if (indx.countAtoms(key) < 0) {
-					files.get(fileInd).readFullNameIndex(indx.setCountQuery(key, t.getPrefixMatcher(stats, false)));
+			long atoms = 0;
+			for (int fileInd = 0; fileInd < files.size(); fileInd++) {
+				for (NameIndexReader indx : internalFile.get(fileInd).indexReaders) {
+					List<PrefixNameValue> prefixes = indx.getMatchedPrefixes(t.word);
+					if (prefixes == null) {
+						prefixes = files.get(fileInd).readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats, false)));
+					}
+					for (PrefixNameValue p : prefixes == null ? List.<PrefixNameValue>of() : prefixes) {
+						atoms += p.atomsCount();
+					}
 				}
-				sum += Math.max(0, indx.countAtoms(key));
 			}
+			t.broad = atoms > settings.LIMIT_INCOMPLETE_ATOMS;
 		}
-		return sum;
 	}
 
 	void readAtoms() throws IOException {
@@ -541,10 +540,11 @@ public class SpatialSearchContext {
 			} else if (!settings.SEARCH_ADDR && indx.addressRegion != null) {
 				continue;
 			}
-			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
+			String query = t.broad ? t.word + " " : t.word; // a broad word reads other keys
+			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(query);
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
-				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats, t.broad)));
+				matchedPrefixes = b.readFullNameIndex(indx.setQuery(query, t.getPrefixMatcher(stats, t.broad)));
 				stats.sub1FileAtomsTime.finish();
 				if (matchedPrefixes == null) {
 					continue;

@@ -1,5 +1,6 @@
 package net.osmand.binary;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,7 +16,9 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.WireFormat;
 
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.list.array.TLongArrayList;
@@ -147,8 +150,6 @@ public class NameIndexReader {
 		String query;
 		TLongHashSet matchedKeys = new TLongHashSet();
 		NameIndexReaderMatcher matcher;
-		// only the number of atoms is read from the head of each matched block
-		boolean countOnly;
 		
 		public NameIndexReaderQuery(String query, NameIndexReaderMatcher matcher) {
 			this.query = query;
@@ -170,7 +171,6 @@ public class NameIndexReader {
 		public OsmAndPoiNameIndexData poi = null;
 		public AddressNameIndexData addr = null;
 		byte[] data;
-		int atomsLength = -1;
 		public long shift;
 
 		public OsmAndPoiNameIndexData getPoi() throws InvalidProtocolBufferException {
@@ -179,6 +179,17 @@ public class NameIndexReader {
 
 		public AddressNameIndexData getAddr() throws InvalidProtocolBufferException {
 			return addr == null && data != null && addressRegion != null ? AddressNameIndexData.parseFrom(data) : addr;
+		}
+
+		/** atoms of the block from its head (atomsLength is written first), nothing is parsed */
+		public int atomsCount() throws IOException {
+			if (data == null) {
+				return poi != null ? poi.getAtomsCount() : addr != null ? addr.getAtomCount() : 0;
+			}
+			CodedInputStream in = CodedInputStream.newInstance(data);
+			int field = poiRegion != null ? OsmAndPoiNameIndexData.ATOMSLENGTH_FIELD_NUMBER
+					: AddressNameIndexData.ATOMSLENGTH_FIELD_NUMBER;
+			return WireFormat.getTagFieldNumber(in.readTag()) == field ? in.readUInt32() : 0;
 		}
 
 		boolean isLoaded() {
@@ -356,7 +367,7 @@ public class NameIndexReader {
 		while(it.hasNext()) {
 			long l = it.next();
 			PrefixNameValue pv = indexByRef.get(l);
-			if (query.countOnly ? pv.atomsLength < 0 : !pv.isLoaded()) {
+			if (!pv.isLoaded()) {
 				loffsets.add(l);
 			} else {
 				r.add(pv);
@@ -407,34 +418,6 @@ public class NameIndexReader {
 		return this;
 	}
 	
-	/** The next read only counts the atoms at the head of each matched block, nothing is parsed. */
-	public NameIndexReader setCountQuery(String qr, NameIndexReaderMatcher matcher) {
-		setQuery(qr, matcher);
-		this.query.countOnly = true;
-		return this;
-	}
-
-	public boolean isCountOnly() {
-		return query != null && query.countOnly;
-	}
-
-	public void setAtomsLength(long shift, int atomsLength) {
-		indexByRef.get(shift).atomsLength = atomsLength;
-	}
-
-	/** atoms under the keys matched by a count query, -1 if it was not run */
-	public long countAtoms(String qr) {
-		TLongHashSet keys = matchedKeys.get(qr);
-		if (keys == null) {
-			return -1;
-		}
-		long sum = 0;
-		for (long l : keys.toArray()) {
-			sum += Math.max(0, indexByRef.get(l).atomsLength);
-		}
-		return sum;
-	}
-
 	public List<PrefixNameValue> getMatchedPrefixes(String query) {
 		if (!matchedKeys.containsKey(query)) {
 			return null;
