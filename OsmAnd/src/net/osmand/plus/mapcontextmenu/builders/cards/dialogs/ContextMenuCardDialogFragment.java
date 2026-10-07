@@ -115,6 +115,9 @@ public class ContextMenuCardDialogFragment extends BaseFullScreenFragment implem
 
 	@Override
 	public void onDestroyView() {
+		if (dialog != null) {
+			dialog.onDestroyView();
+		}
 		super.onDestroyView();
 		if (contentLayout != null && contentView != null) {
 			contentLayout.removeView(contentView);
