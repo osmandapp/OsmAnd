@@ -65,7 +65,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
@@ -564,7 +563,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 				List<TileSourceTemplateInfo> downloaded = new ArrayList<>();
 				for (TileSourceTemplateInfo tileSourceTemplateInfo : allDownloaded) {
-					if ((tileSourceTemplateInfo.nameCheck instanceof TileSourceNameCheck.ValidName)) {
+					if ((tileSourceTemplateInfo.nameCheck() instanceof TileSourceNameCheck.ValidName)) {
 						downloaded.add(tileSourceTemplateInfo);
 					}
 				}
@@ -575,7 +574,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				String[] displayedNames = new String[downloaded.size()];
 				for (int i = 0; i < downloaded.size(); i++) {
 					TileSourceTemplateInfo info = downloaded.get(i);
-					TileSourceNameCheck.ValidName nameCheck = (TileSourceNameCheck.ValidName) info.nameCheck;
+					TileSourceNameCheck.ValidName nameCheck = (TileSourceNameCheck.ValidName) info.nameCheck();
 					displayedNames[i] = nameCheck.safeName();
 				}
 				boolean[] selected = new boolean[downloaded.size()];
@@ -615,7 +614,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 						selected[which] = !selected[which];
 						if (selected[which]) {
 							TileSourceTemplateInfo info = downloaded.get(which);
-							TileSourceNameCheck.ValidName nameCheck = (TileSourceNameCheck.ValidName) info.nameCheck;
+							TileSourceNameCheck.ValidName nameCheck = (TileSourceNameCheck.ValidName) info.nameCheck();
 							boolean sourceInstalled = settings.isTileSourceInstalled(nameCheck.safeName());
 							if (sourceInstalled) {
 								app.showShortToastMessage(R.string.tile_source_already_installed);
