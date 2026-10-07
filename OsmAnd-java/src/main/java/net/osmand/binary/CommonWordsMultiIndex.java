@@ -226,12 +226,13 @@ public class CommonWordsMultiIndex {
 		}
 		int size = words.size();
 		KeyOutcome[] outcomes = new KeyOutcome[size];
-		if (notable || size < 2) {
+		if (notable) {
 			for (int i = 0; i < size; i++) {
-				outcomes[i] = notable ? KeyOutcome.NOTABLE : KeyOutcome.KEPT;
+				outcomes[i] = KeyOutcome.NOTABLE;
 			}
 			return outcomes;
 		}
+		// one word is always a key and goes the general way too: a word of <class0> is ALWAYS, a number is NUMBER
 		SearchVariantRules rules = SearchVariantRules.forLocale(SearchLocales.forMap(mapName));
 		int[] cls = new int[size];
 		int[] freq = new int[size];

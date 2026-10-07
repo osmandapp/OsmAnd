@@ -324,8 +324,12 @@ public class SearchVariantRulesTest {
 		assertEquals(List.of(), unglue(base, "St.42"));
 		assertEquals(List.of(), unglue(base, "Main Street"));
 		// the statistics of generation tell the rules apart by file, object and from (rules-spec.md, 4.3)
-		assertEquals("rules.xml unglue '", base.unglue("L'Atelier d'Anaïs").get(0).id().toString());
-		assertEquals("rules.xml unglue .", base.unglue("Wijkopenauto's.nl").get(0).id().toString());
+		assertEquals("[rules.xml unglue ']", base.unglue("L'Atelier d'Anaïs").get(0).ids().toString());
+		assertEquals("[rules.xml unglue .]", base.unglue("Wijkopenauto's.nl").get(0).ids().toString());
+		// one name of two rules is one alternative name, counted for each rule
+		SearchVariantRules same = of("<index><unglue glue=\".\" minPart=\"3\"/><unglue glue=\"'\" minPart=\"3\"/></index>");
+		assertEquals(List.of("Hoffmann"), unglue(same, "A.'B Hoffmann"));
+		assertEquals("[test.xml unglue ., test.xml unglue ']", same.unglue("A.'B Hoffmann").get(0).ids().toString());
 		SearchVariantRules noApostrophe = SearchVariantRules.of("xx", List.of(
 				layer("<index><unglue glue=\".\"/><unglue glue=\"'\" script=\"Latin\"/></index>"),
 				layer("<index><unglue glue=\"'\" enabled=\"false\"/></index>")));

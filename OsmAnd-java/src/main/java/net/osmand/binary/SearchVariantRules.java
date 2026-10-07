@@ -244,18 +244,13 @@ public final class SearchVariantRules {
 	 * rules give one name only when it is the same text.
 	 */
 	public record Unglued(String name, List<Unglue> rules) {
-		/** the identity in the statistics of the OBF writer: the rule, or the rules that give the same name */
-		public RuleId id() {
-			if (rules.size() == 1) {
-				return rules.get(0).id();
-			}
-			Set<String> files = new LinkedHashSet<>();
-			StringBuilder glues = new StringBuilder();
+		/** the identities in the statistics of the OBF writer: every rule that gives the name counts it */
+		public List<RuleId> ids() {
+			List<RuleId> ids = new ArrayList<>(rules.size());
 			for (Unglue u : rules) {
-				files.add(u.file());
-				glues.append(u.glue());
+				ids.add(u.id());
 			}
-			return new RuleId(String.join(",", files), UNGLUE_OBJECT, glues.toString());
+			return ids;
 		}
 	}
 
