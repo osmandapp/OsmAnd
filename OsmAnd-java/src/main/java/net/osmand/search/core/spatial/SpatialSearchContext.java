@@ -248,14 +248,14 @@ public class SpatialSearchContext {
 
 	
 	
-	/** a 3-letter word still being typed is matched whole when more index atoms continue it than the limit */
+	/** a 3-letter word still being typed is matched whole when its index blocks are larger than the limit */
 	void markBroadWords() throws IOException {
 		for (SpatialSearchToken t : tokens) {
 			if (!t.incomplete || t.wordNoDot.length() != settings.MIN_CHARACTERS_INCOMPLETE + 1
-					|| settings.LIMIT_INCOMPLETE_ATOMS <= 0) {
+					|| settings.LIMIT_INCOMPLETE_BYTES <= 0) {
 				continue;
 			}
-			long atoms = 0;
+			long bytes = 0;
 			for (int fileInd = 0; fileInd < files.size(); fileInd++) {
 				for (NameIndexReader indx : internalFile.get(fileInd).indexReaders) {
 					List<PrefixNameValue> prefixes = indx.getMatchedPrefixes(t.word);
@@ -263,11 +263,11 @@ public class SpatialSearchContext {
 						prefixes = files.get(fileInd).readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats, false)));
 					}
 					for (PrefixNameValue p : prefixes == null ? List.<PrefixNameValue>of() : prefixes) {
-						atoms += p.atomsCount();
+						bytes += p.data == null ? 0 : p.data.length;
 					}
 				}
 			}
-			t.broad = atoms > settings.LIMIT_INCOMPLETE_ATOMS;
+			t.broad = bytes > settings.LIMIT_INCOMPLETE_BYTES;
 		}
 	}
 

@@ -1,6 +1,5 @@
 package net.osmand.binary;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -16,9 +15,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import com.google.protobuf.GeneratedMessage;
-import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.WireFormat;
 
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.list.array.TLongArrayList;
@@ -170,7 +167,7 @@ public class NameIndexReader {
 		public String key;
 		public OsmAndPoiNameIndexData poi = null;
 		public AddressNameIndexData addr = null;
-		byte[] data;
+		public byte[] data;
 		public long shift;
 
 		public OsmAndPoiNameIndexData getPoi() throws InvalidProtocolBufferException {
@@ -179,17 +176,6 @@ public class NameIndexReader {
 
 		public AddressNameIndexData getAddr() throws InvalidProtocolBufferException {
 			return addr == null && data != null && addressRegion != null ? AddressNameIndexData.parseFrom(data) : addr;
-		}
-
-		/** atoms of the block from its head (atomsLength is written first), nothing is parsed */
-		public int atomsCount() throws IOException {
-			if (data == null) {
-				return poi != null ? poi.getAtomsCount() : addr != null ? addr.getAtomCount() : 0;
-			}
-			CodedInputStream in = CodedInputStream.newInstance(data);
-			int field = poiRegion != null ? OsmAndPoiNameIndexData.ATOMSLENGTH_FIELD_NUMBER
-					: AddressNameIndexData.ATOMSLENGTH_FIELD_NUMBER;
-			return WireFormat.getTagFieldNumber(in.readTag()) == field ? in.readUInt32() : 0;
 		}
 
 		boolean isLoaded() {
