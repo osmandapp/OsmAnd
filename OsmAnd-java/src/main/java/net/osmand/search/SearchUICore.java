@@ -16,6 +16,7 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -655,8 +656,9 @@ public class SearchUICore {
 				? new SpatialAmenityTypesAPI(poiTypes)
 				: new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
+		SpatialTextSearchAPI spatialTextSearchAPI = useSpatialSearch ? new SpatialTextSearchAPI(poiTypes) : null;
 		apis.add(useSpatialSearch
-				? new SpatialCategoryAmenityByTypeAPI(poiTypes)
+				? new SpatialCategoryAmenityByTypeAPI(poiTypes, spatialTextSearchAPI)
 				: new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
 		SearchBuildingAndIntersectionsByStreetAPI streetsApi = useSpatialSearch
 				? new SpatialBuildingAndIntersectionsByStreetAPI()
@@ -668,7 +670,7 @@ public class SearchUICore {
 		apis.add(cityApi);
 		if (useSpatialSearch) {
 			apis.add(new SpatialNearestCitySearchAPI(streetsApi, cityApi));
-			apis.add(new SpatialTextSearchAPI(poiTypes));
+			apis.add(spatialTextSearchAPI);
 		} else {
 			SearchCoreFactory.TownCitiesCache townCitiesCache = new SearchCoreFactory.TownCitiesCache();
 			apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache));
@@ -735,8 +737,22 @@ public class SearchUICore {
 
 	private static class SpatialCategoryAmenityByTypeAPI extends SearchAmenityByTypeAPI {
 
-		public SpatialCategoryAmenityByTypeAPI(MapPoiTypes types) {
+		private final SpatialTextSearchAPI spatialTextSearchAPI;
+
+		public SpatialCategoryAmenityByTypeAPI(MapPoiTypes types, SpatialTextSearchAPI spatialTextSearchAPI) {
 			super(types, null);
+			this.spatialTextSearchAPI = spatialTextSearchAPI;
+		}
+
+		// an attribute (healthcare:speciality, diet) is indexed for all its types,
+		// the type filter reads only the types that declare it (#24941)
+		@Override
+		protected List<Amenity> searchByCategoryIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+		                                              AbstractPoiType poiType, QuadRect bbox31) throws IOException {
+			if (!poiType.isAdditional()) {
+				return null;
+			}
+			return spatialTextSearchAPI.searchPoiByCategory(phrase, resultMatcher, poiType.getKeyName(), bbox31);
 		}
 
 		@Override

@@ -1423,10 +1423,12 @@ public class SearchCoreFactory {
 			String nameFilter = null;
 			int countExtraWords = 0;
 			Set<String> poiAdditionals = new LinkedHashSet<>();
+			AbstractPoiType selectedPoiType = null;
 			if (phrase.isLastWord(ObjectType.POI_TYPE)) {
 				Object obj = phrase.getLastSelectedWord().getResult().object;
 				if (obj instanceof AbstractPoiType) {
-					poiTypeFilter = getPoiTypeFilter((AbstractPoiType) obj, poiAdditionals);
+					selectedPoiType = (AbstractPoiType) obj;
+					poiTypeFilter = getPoiTypeFilter(selectedPoiType, poiAdditionals);
 				} else if (obj instanceof SearchPoiTypeFilter) {
 					poiTypeFilter = (SearchPoiTypeFilter) obj;
 				} else if (obj instanceof SearchPoiAdditionalFilter) {
@@ -1482,8 +1484,21 @@ public class SearchCoreFactory {
 					}
 				}
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(radius);
-				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
 				Set<String> searchedPois = new TreeSet<>();
+				List<Amenity> categoryAmenities = selectedPoiType == null ? null
+						: searchByCategoryIndex(phrase, resultMatcher, selectedPoiType, bbox);
+				if (categoryAmenities != null) {
+					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, null,
+							searchedPois, poiAdditionals, countExtraWords);
+					for (Amenity amenity : categoryAmenities) {
+						if (rm.isCancelled()) {
+							break;
+						}
+						rm.publish(amenity);
+					}
+					return true;
+				}
+				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
 				for (BinaryMapIndexReader r : offlineIndexes) {
 					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, r,
 							searchedPois, poiAdditionals, countExtraWords);
@@ -1500,6 +1515,11 @@ public class SearchCoreFactory {
 			return true;
 		}
 
+		// null - read the poi sections of the maps with the type filter
+		protected List<Amenity> searchByCategoryIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+		                                              AbstractPoiType poiType, QuadRect bbox31) throws IOException {
+			return null;
+		}
 
 		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchPoiTypeFilter poiTypeFilter,
 		                                                final SearchResultMatcher resultMatcher, final String nameFilter,

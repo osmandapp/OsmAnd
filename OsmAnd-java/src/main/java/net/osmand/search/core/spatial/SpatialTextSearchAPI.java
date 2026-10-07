@@ -120,6 +120,21 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return true;
 	}
 
+	public List<Amenity> searchPoiByCategory(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+			String categoryKey, QuadRect bbox31) throws IOException {
+		QuadRect bboxLatLon = new QuadRect(MapUtils.get31LongitudeX((int) bbox31.left),
+				MapUtils.get31LatitudeY((int) bbox31.top), MapUtils.get31LongitudeX((int) bbox31.right),
+				MapUtils.get31LatitudeY((int) bbox31.bottom));
+		// list shows every object: zoom 17+ turns off the per-tile thinning of the map layer
+		SpatialTextSearchSettings settings = SpatialTextSearchSettings.searchPoiByCategorySettings(PREFERRED_POI_ZOOM,
+				bboxLatLon);
+		List<BinaryMapIndexReader> files = new ArrayList<>();
+		addFiles(files, phrase.getOfflineIndexes(bbox31, SearchPhraseDataType.POI));
+		SpatialSearchContext context = createSpatialContext(phrase, resultMatcher, files, poiSearch, settings);
+		return spatialTextSearch.searchPoiByCategory(context, categoryKey, bboxLatLon, PREFERRED_POI_ZOOM,
+				Integer.MAX_VALUE);
+	}
+
 	private SpatialSearchContext createSpatialContext(SearchPhrase phrase, SearchResultMatcher resultMatcher,
 			List<BinaryMapIndexReader> files, SpatialPoiSearch poiSearch, SpatialTextSearchSettings settings) {
 		SpatialSearchContext context = new SpatialSearchContext(settings, files, poiSearch,
