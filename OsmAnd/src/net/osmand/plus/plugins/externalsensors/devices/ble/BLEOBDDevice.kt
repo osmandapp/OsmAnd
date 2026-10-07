@@ -111,7 +111,9 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 						result = sendResult == BluetoothStatusCodes.SUCCESS
 						errorMessage = "Send result code {$sendResult}"
 					} else {
-						result = gatt.writeCharacteristic(it)
+						@Suppress("DEPRECATION")
+						it.value = command.toByteArray()
+						result = @Suppress("DEPRECATION") gatt.writeCharacteristic(it)
 						errorMessage = "writeCharacteristic failed"
 					}
 					val writeDuration = System.currentTimeMillis() - startTime
