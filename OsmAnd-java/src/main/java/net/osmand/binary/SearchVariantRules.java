@@ -50,13 +50,15 @@ public final class SearchVariantRules {
 	public static final int CLASS_SERVICE = 1;
 	public static final int CLASS_FREQUENT = 2;
 
-	private static final Set<String> OWNERS = Set.of("street", "locality", "boundary", "postcode", "poi");
+	private static final Set<String> OWNERS = RuleOwner.ALL;
 	private static final Set<String> INDEX_ATTRIBUTES = Set.of("from", "to", "object", "mode", "enabled", "keys");
 	private static final Set<String> QUERY_ATTRIBUTES = Set.of("from", "to", "object", "enabled");
 	private static final Set<String> TRANSLITS = Set.of("ja", "zh");
 	private static final Map<String, SearchVariantRules> CACHE = new ConcurrentHashMap<>();
 	private static final Pattern PLAIN_WORD = Pattern.compile("[\\p{L}\\p{M}\\p{N}]+");
 	private static final Pattern GROUP_REFERENCE = Pattern.compile("\\$(\\d+)");
+	// the object of the identity of an <unglue> rule: it applies to every name
+	static final String UNGLUE_OBJECT = "unglue";
 	private static final Pattern GROUP_ID = Pattern.compile("[a-z]{2,4}");
 	private static final Pattern LANGUAGE = Pattern.compile("[a-z]{2,3}");
 	private static final Pattern MAP_PREFIX = Pattern.compile("[a-z0-9-]+(_[a-z0-9-]+)*");
@@ -67,7 +69,7 @@ public final class SearchVariantRules {
 	// aligned word -> class of <class0>, <class1>, <class2>
 	private final Map<String, Integer> classes;
 	private final List<WordRule> query;
-	// word -> owners of the <skipPenalty> entries of the word
+	// aligned word -> owners of the <skipPenalty> entries of the word
 	private final Map<String, List<String>> skipPenalty;
 	// word -> its forms and then the reverse forms that lead to it
 	private final Map<String, List<Form>> forms;
@@ -108,13 +110,21 @@ public final class SearchVariantRules {
 				forms.computeIfAbsent(form.word(), k -> new LinkedHashSet<>()).add(new Form(form.object(), rule.word));
 			}
 		}
+		Set<String> alignedIgnorables = new LinkedHashSet<>();
+		Set<String> alignedBuildings = new LinkedHashSet<>();
+		for (String word : ignorables) {
+			alignedIgnorables.add(SearchAlgorithms.alignChars(word));
+		}
+		for (String word : buildings) {
+			alignedBuildings.add(SearchAlgorithms.alignChars(word));
+		}
 		Map<String, List<String>> skip = new LinkedHashMap<>();
 		for (SkipPenalty entry : skipPenalty.values()) {
-			if (buildings.contains(entry.word) || ignorables.contains(entry.word)) {
+			if (alignedBuildings.contains(entry.word) || alignedIgnorables.contains(entry.word)) {
 				throw new IllegalArgumentException("The <skipPenalty> word '" + entry.word + "' is a house-number "
 						+ "qualifier or an ignorable word: an ignorable word never penalizes a name" + where);
 			}
-			Integer wordClass = classes.get(SearchAlgorithms.alignChars(entry.word));
+			Integer wordClass = classes.get(entry.word);
 			if (wordClass != null && wordClass != CLASS_ALWAYS) {
 				throw new IllegalArgumentException("The <skipPenalty> word '" + entry.word + "' is a word of <class"
 						+ wordClass + ">, which never penalizes a name" + where);
@@ -224,59 +234,84 @@ public final class SearchVariantRules {
 		return ignorables;
 	}
 
-	/** Words of {@code <skipPenalty>} in lower case -> the owners they apply to. */
+	/** Words of {@code <skipPenalty>} aligned ({@link SearchAlgorithms#alignChars}) -> the owners they apply to. */
 	public Map<String, List<String>> skipPenalty() {
 		return skipPenalty;
 	}
 
 	/**
-	 * @return the alternative name with the glued words of the name split ("L'Atelier d'Anaïs" -> "Atelier Anaïs"),
-	 * null when no word is glued
+	 * An alternative name with the glued words of a name split by one {@code <unglue>} and the rules that give it: two
+	 * rules give one name only when it is the same text.
 	 */
-	public String unglue(String name) {
-		if (unglues.isEmpty() || name == null) {
-			return null;
+	public record Unglued(String name, List<Unglue> rules) {
+		/** the identity in the statistics of the OBF writer: the rule, or the rules that give the same name */
+		public RuleId id() {
+			if (rules.size() == 1) {
+				return rules.get(0).id();
+			}
+			Set<String> files = new LinkedHashSet<>();
+			StringBuilder glues = new StringBuilder();
+			for (Unglue u : rules) {
+				files.add(u.file());
+				glues.append(u.glue());
+			}
+			return new RuleId(String.join(",", files), UNGLUE_OBJECT, glues.toString());
 		}
-		List<String> words = new ArrayList<>();
+	}
+
+	/**
+	 * Every {@code <unglue>} applies to the name itself with its own glue, script and minPart (rules-spec.md, 3.2):
+	 * "L'Atelier d'Anaïs" -> "Atelier Anaïs"; one rule never lets another split a word its limits keep.
+	 *
+	 * @return the alternative names in the order of the rules, empty when no word is glued
+	 */
+	public List<Unglued> unglue(String name) {
+		if (unglues.isEmpty() || name == null) {
+			return List.of();
+		}
+		String[] words = SearchAlgorithms.canonicalizePunctuation(name).split(" ");
+		Map<String, List<Unglue>> byName = new LinkedHashMap<>();
+		for (Unglue u : unglues) {
+			String unglued = unglue(words, u);
+			if (unglued != null) {
+				byName.computeIfAbsent(unglued, k -> new ArrayList<>()).add(u);
+			}
+		}
+		List<Unglued> result = new ArrayList<>(byName.size());
+		byName.forEach((unglued, rules) -> result.add(new Unglued(unglued, List.copyOf(rules))));
+		return result;
+	}
+
+	private static String unglue(String[] words, Unglue u) {
+		List<String> result = new ArrayList<>();
 		boolean glued = false;
-		for (String word : SearchAlgorithms.canonicalizePunctuation(name).split(" ")) {
+		for (String word : words) {
 			if (word.isEmpty()) {
 				continue;
 			}
-			List<String> parts = unglueWord(word);
+			List<String> parts = unglueWord(word, u);
 			if (parts == null) {
-				words.add(word);
+				result.add(word);
 			} else {
-				words.addAll(parts);
+				result.addAll(parts);
 				glued = true;
 			}
 		}
-		String unglued = String.join(" ", words).trim();
+		String unglued = String.join(" ", result).trim();
 		return glued && !unglued.isEmpty() ? unglued : null;
 	}
 
-	private List<String> unglueWord(String word) {
-		if (word.chars().anyMatch(Character::isDigit)) {
-			return null;
-		}
-		StringBuilder glue = new StringBuilder();
-		int minPart = Integer.MAX_VALUE;
-		for (Unglue u : unglues) {
-			if (word.indexOf(u.glue()) >= 0 && u.appliesToScript(word)) {
-				glue.append(u.glue());
-				minPart = Math.min(minPart, u.minPart());
-			}
-		}
-		if (glue.length() == 0) {
+	private static List<String> unglueWord(String word, Unglue u) {
+		if (word.indexOf(u.glue()) < 0 || word.chars().anyMatch(Character::isDigit) || !u.appliesToScript(word)) {
 			return null;
 		}
 		List<String> parts = new ArrayList<>();
 		boolean letterDropped = false;
 		int start = 0;
 		for (int i = 0; i <= word.length(); i++) {
-			if (i == word.length() || glue.indexOf(String.valueOf(word.charAt(i))) >= 0) {
+			if (i == word.length() || word.charAt(i) == u.glue()) {
 				String part = word.substring(start, i);
-				if (part.length() >= minPart) {
+				if (part.length() >= u.minPart()) {
 					parts.add(part);
 				} else if (!part.isEmpty()) {
 					letterDropped = true;
@@ -438,7 +473,9 @@ public final class SearchVariantRules {
 		}
 
 		void addSkipPenalty(String object, String words, boolean enabled) {
-			for (String word : plainWords(words, "<skipPenalty>")) {
+			for (String w : plainWords(words, "<skipPenalty>")) {
+				// a word of a name is looked up aligned, as the words of the classes ("straße" is "strasse")
+				String word = SearchAlgorithms.alignChars(w);
 				SkipPenalty entry = new SkipPenalty(word, object);
 				for (SkipPenalty other : skipPenalty.values()) {
 					if (other.word.equals(word) && objectsOverlap(other.object, object)) {
@@ -565,7 +602,7 @@ public final class SearchVariantRules {
 			if (to != null || mode != null || keys != null) {
 				throw new IllegalArgumentException("A disabled rule holds only from and object" + where);
 			}
-			layer.add(newRule(object, from, "", "Single", false, false, where), false);
+			layer.add(newRule(object, from, "", "Single", false, false, file, where), false);
 			return;
 		}
 		if (to == null) {
@@ -579,7 +616,7 @@ public final class SearchVariantRules {
 					+ Rule.KEYS_ALWAYS + where);
 		}
 		layer.add(newRule(object, from, to, mode == null ? "Single" : mode, Rule.KEYS_ALWAYS.equals(keys), true,
-				where), true);
+				file, where), true);
 	}
 
 	private static void parseUnglue(XmlPullParser parser, Layer layer, String file) throws Exception {
@@ -601,7 +638,7 @@ public final class SearchVariantRules {
 			if (script != null || minPart != null) {
 				throw new IllegalArgumentException("A disabled rule holds only glue" + where);
 			}
-			layer.add(new Unglue(glue.charAt(0), null, 0), false);
+			layer.add(new Unglue(glue.charAt(0), null, 0, file), false);
 			return;
 		}
 		Character.UnicodeScript unicodeScript = null;
@@ -623,7 +660,7 @@ public final class SearchVariantRules {
 				throw new IllegalArgumentException("Invalid minPart '" + minPart + "', expected a number >= 1" + where);
 			}
 		}
-		layer.add(new Unglue(glue.charAt(0), unicodeScript, min), true);
+		layer.add(new Unglue(glue.charAt(0), unicodeScript, min, file), true);
 	}
 
 	private static void parseSkipPenalty(XmlPullParser parser, Layer layer, String file) throws Exception {
@@ -795,9 +832,9 @@ public final class SearchVariantRules {
 	}
 
 	private static Rule newRule(String object, String from, String to, String mode, boolean alwaysKeys,
-			boolean enabled, String where) {
+			boolean enabled, String file, String where) {
 		try {
-			return new Rule(object, from, to, mode, alwaysKeys, enabled);
+			return new Rule(object, from, to, mode, alwaysKeys, enabled, file);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(e.getMessage() + where, e);
 		}
@@ -882,20 +919,36 @@ public final class SearchVariantRules {
 	}
 
 	/** A rule of {@code <unglue>}: words glued by a character, for words of a script only when {@code script} is set. */
-	public record Unglue(char glue, Character.UnicodeScript script, int minPart) {
+	public record Unglue(char glue, Character.UnicodeScript script, int minPart, String file) {
 		boolean appliesToScript(String word) {
 			return script == null || word.codePoints().filter(Character::isLetter)
 					.allMatch(c -> Character.UnicodeScript.of(c) == script);
 		}
 
-		/** the key of the rule in the statistics of the OBF writer */
-		public String name() {
-			return "unglue " + glue;
+		/** the identity of the rule in the statistics of the OBF writer: file and glue */
+		public RuleId id() {
+			return new RuleId(file, UNGLUE_OBJECT, String.valueOf(glue));
 		}
 
 		@Override
 		public String toString() {
 			return "<unglue glue=\"" + glue + "\">";
+		}
+	}
+
+	/**
+	 * The identity of a rule of {@code <index>} in the statistics of generation (rules-spec.md, 4.3): the file that
+	 * defines it, its object and its from; for {@code <unglue>} the object is {@code unglue} and from is the glue.
+	 */
+	public record RuleId(String file, String object, String from) implements Comparable<RuleId> {
+		@Override
+		public int compareTo(RuleId o) {
+			return toString().compareTo(o.toString());
+		}
+
+		@Override
+		public String toString() {
+			return file + " " + object + " " + from;
 		}
 	}
 
@@ -910,9 +963,12 @@ public final class SearchVariantRules {
 		private final Pattern from;
 		private final String fromText;
 		private final String to;
+		private final String file;
 
-		private Rule(String object, String from, String to, String mode, boolean alwaysKeys, boolean enabled) {
+		private Rule(String object, String from, String to, String mode, boolean alwaysKeys, boolean enabled,
+				String file) {
 			this.object = object;
+			this.file = file;
 			if (!"All".equals(mode) && !"Single".equals(mode)) {
 				throw new IllegalArgumentException("Invalid mode '" + mode + "' of " + from + ", expected All or Single");
 			}
@@ -964,9 +1020,9 @@ public final class SearchVariantRules {
 			return alwaysKeys;
 		}
 
-		/** the key of the rule in the statistics of the OBF writer */
-		public String name() {
-			return object + " " + to.trim();
+		/** the identity of the rule in the statistics of the OBF writer: file, object and from */
+		public RuleId id() {
+			return new RuleId(file, object, fromText);
 		}
 
 		public boolean appliesTo(String owner) {
@@ -1001,12 +1057,19 @@ public final class SearchVariantRules {
 		private final Map<String, String> localeByPrefix;
 		private final Map<String, String> groupByPrefix;
 		private final Map<String, String> translitByPrefix;
+		private final Set<String> groupIds;
 
 		private LocaleTable(Map<String, String> localeByPrefix, Map<String, String> groupByPrefix,
-				Map<String, String> translitByPrefix) {
+				Map<String, String> translitByPrefix, Set<String> groupIds) {
 			this.localeByPrefix = Collections.unmodifiableMap(localeByPrefix);
 			this.groupByPrefix = Collections.unmodifiableMap(groupByPrefix);
 			this.translitByPrefix = Collections.unmodifiableMap(translitByPrefix);
+			this.groupIds = Collections.unmodifiableSet(groupIds);
+		}
+
+		/** every group of {@code <group>}, a map uses it or not */
+		public Set<String> groupIds() {
+			return groupIds;
 		}
 
 		/** @return true when the lower-case prefix of a map name is in the table */
@@ -1139,7 +1202,7 @@ public final class SearchVariantRules {
 						groupByPrefix.put(e.getKey(), group);
 					}
 				}
-				return new LocaleTable(localeByPrefix, groupByPrefix, translitByPrefix);
+				return new LocaleTable(localeByPrefix, groupByPrefix, translitByPrefix, new LinkedHashSet<>(groups));
 			}
 
 			private static List<String> list(String value) {

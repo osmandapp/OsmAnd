@@ -9,7 +9,6 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.CodedInputStream;
 
 import gnu.trove.list.array.TIntArrayList;
-import net.osmand.binary.Abbreviations;
 import net.osmand.binary.CommonWords;
 
 /**
@@ -308,7 +307,7 @@ public class SearchAlgorithms {
         return fullText;
     }
 
-	public static void removeCommonWords(CommonWords cw, List<String> names, String locale) {
+	public static void removeCommonWords(CommonWords cw, List<String> names) {
 		// remove all common words (most common delete first) but leave at least 1
 		int pos = 0;
 		while (names.size() > 1 && pos != -1) {
@@ -317,7 +316,7 @@ public class SearchAlgorithms {
 			for (int k = 0; k < names.size(); k++) {
 				String word = names.get(k);
 				int prio = cw.getCommon(word);
-				if (Abbreviations.isConjunction(word, locale)) {
+				if (CommonWords.isConjunction(word)) {
 					prio = 0;
 				}
 				if (prio != -1 && prio < prioP) {

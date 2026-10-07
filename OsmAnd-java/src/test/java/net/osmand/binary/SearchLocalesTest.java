@@ -79,9 +79,13 @@ public class SearchLocalesTest {
 		assertEquals("US", SearchLocales.country("en_US"));
 		assertEquals("TW", SearchLocales.country("zh_Hant_TW"));
 		assertEquals("", SearchLocales.country("en"));
-		assertFalse(Abbreviations.isConjunction("and", "b+hsb"));
-		assertTrue(Abbreviations.isConjunction("and", "EN-us"));
+		assertFalse(Abbreviations.isIgnorable("and", "b+hsb"));
+		assertTrue(Abbreviations.isIgnorable("and", "EN-us"));
 		assertNotNull(SearchVariantRules.forLocale("not a locale"));
+		// search v1 reads no rules: its conjunctions are fixed in every language
+		assertTrue(CommonWords.isConjunction("die"));
+		assertTrue(CommonWords.isConjunction("и"));
+		assertFalse(CommonWords.isConjunction("thee"));
 	}
 
 	@Test

@@ -41,8 +41,9 @@ public class Abbreviations {
 		// query word -> its forms and reverse forms, in the order of the rules
 		final Map<String, List<QueryForm>> forms = new HashMap<>();
 		final Set<String> buildingAbbreviations;
-		final Set<String> conjunctions;
-		// word of a name -> owners whose names it does not penalize (<skipPenalty>, ignorable words, <class1/2>)
+		// aligned ignorable words (to="")
+		final Set<String> ignorables;
+		// aligned word of a name -> owners whose names it does not penalize (<skipPenalty>, ignorable words, <class1/2>)
 		final Map<String, List<String>> penaltyFree;
 		// experiments: query word -> forms that replace the forms of the rules (empty list: none)
 		final Map<String, List<String>> overrides;
@@ -62,19 +63,27 @@ public class Abbreviations {
 				// a token is aligned (ß -> ss, no diacritics): "Straße" asks for "strasse"
 				forms.put(SearchAlgorithms.alignChars(word), List.copyOf(list));
 			}
-			Map<String, List<String>> penaltyFree = new HashMap<>(rules.skipPenalty());
-			List<String> everyOwner = List.of(SearchVariantRules.ANY_OBJECT);
+			// the words of <skipPenalty> and the classes are aligned by the rules, the ignorable words are query words
+			Map<String, Set<String>> owners = new HashMap<>();
+			rules.skipPenalty().forEach((word, list) -> owners.computeIfAbsent(word, k -> new LinkedHashSet<>())
+					.addAll(list));
+			Set<String> ignorables = new TreeSet<>();
 			for (String word : rules.ignorables()) {
-				penaltyFree.put(word, everyOwner);
+				String aligned = SearchAlgorithms.alignChars(word);
+				ignorables.add(aligned);
+				owners.computeIfAbsent(aligned, k -> new LinkedHashSet<>()).add(SearchVariantRules.ANY_OBJECT);
 			}
 			for (Map.Entry<String, Integer> e : rules.classes().entrySet()) {
 				if (e.getValue() != SearchVariantRules.CLASS_ALWAYS) {
 					// a service or frequent word only names the kind of an object
-					penaltyFree.put(e.getKey(), everyOwner);
+					owners.computeIfAbsent(e.getKey(), k -> new LinkedHashSet<>()).add(SearchVariantRules.ANY_OBJECT);
 				}
 			}
+			Map<String, List<String>> penaltyFree = new HashMap<>();
+			owners.forEach((word, set) -> penaltyFree.put(word, set.contains(SearchVariantRules.ANY_OBJECT)
+					? List.of(SearchVariantRules.ANY_OBJECT) : List.copyOf(set)));
 			this.buildingAbbreviations = Collections.unmodifiableSet(new TreeSet<>(rules.buildings()));
-			this.conjunctions = Collections.unmodifiableSet(new TreeSet<>(rules.ignorables()));
+			this.ignorables = Collections.unmodifiableSet(ignorables);
 			this.penaltyFree = Collections.unmodifiableMap(penaltyFree);
 			this.overrides = overrides;
 		}
@@ -82,7 +91,7 @@ public class Abbreviations {
 		private Dictionary(Dictionary base, Map<String, List<String>> overrides) {
 			this.forms.putAll(base.forms);
 			this.buildingAbbreviations = base.buildingAbbreviations;
-			this.conjunctions = base.conjunctions;
+			this.ignorables = base.ignorables;
 			this.penaltyFree = base.penaltyFree;
 			this.overrides = overrides;
 		}
@@ -195,7 +204,7 @@ public class Abbreviations {
 	 * @param owner owner of the name: street, locality, boundary, postcode, poi
 	 */
 	public static boolean isCommonSkipOtherCnt(String lowerCase, String locale, String owner) {
-		List<String> owners = dictionary(locale).penaltyFree.get(lowerCase);
+		List<String> owners = dictionary(locale).penaltyFree.get(aligned(lowerCase));
 		if (owners == null) {
 			return false;
 		}
@@ -207,8 +216,22 @@ public class Abbreviations {
 		return false;
 	}
 
-	// search-v1
-	public static boolean isConjunction(String lowerCase, String locale) {
-		return dictionary(locale).conjunctions.contains(lowerCase);
+	/**
+	 * search-v2: an ignorable word ({@code to=""}) of the locale of the map. Search v1 does not read the rules, its
+	 * conjunctions are {@link CommonWords#isConjunction}.
+	 */
+	public static boolean isIgnorable(String lowerCase, String locale) {
+		return dictionary(locale).ignorables.contains(aligned(lowerCase));
+	}
+
+	// the dictionaries keep aligned words: "école" is "ecole", "straße" is "strasse"; most words of names need no work
+	private static String aligned(String lowerCase) {
+		for (int i = 0; i < lowerCase.length(); i++) {
+			char c = lowerCase.charAt(i);
+			if (c >= 128 || c == '\'' || c == '`') {
+				return SearchAlgorithms.alignChars(lowerCase);
+			}
+		}
+		return lowerCase;
 	}
 }

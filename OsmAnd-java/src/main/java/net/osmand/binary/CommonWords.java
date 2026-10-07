@@ -105,6 +105,15 @@ public class CommonWords {
 	}
 	
 	
+	// search v1: words a query is not looked up by, in every language (the rules of spatial search do not feed it)
+	private static final Set<String> CONJUNCTIONS = Set.of("the", "de", "du", "der", "den", "die", "das", "la", "le",
+			"el", "il", "of", "and", "und", "en", "et", "y", "и");
+
+	/** search v1: a conjunction or an article that a query is not looked up by */
+	public static boolean isConjunction(String lowerCase) {
+		return CONJUNCTIONS.contains(lowerCase);
+	}
+
 	// search v1: an English abbreviation shares the rank of its full word (the rules of spatial search do not feed it)
 	private static final String[][] ABBREVIATIONS = {
 			{ "e", "east" }, { "w", "west" }, { "s", "south" }, { "n", "north" }, { "sw", "southwest" },

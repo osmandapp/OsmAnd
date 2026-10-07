@@ -62,9 +62,9 @@ public final class SearchLocales {
 		return prefix == null ? null : Holder.TABLE.translit(prefix.toLowerCase(Locale.ROOT));
 	}
 
-	/** @return map name prefix (lower case) -> statistics group, for every prefix with a group */
-	public static Map<String, String> groupsByPrefix() {
-		return Holder.TABLE.groups();
+	/** @return every statistics group of {@code <locales>} */
+	public static Set<String> groupIds() {
+		return Holder.TABLE.groupIds();
 	}
 
 	/** @return map name prefix (lower case) -> transliteration of names, for every prefix with one */

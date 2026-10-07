@@ -5,7 +5,6 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.StringMatcher;
-import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.CommonWords;
 import net.osmand.data.LatLon;
@@ -156,11 +155,6 @@ public class SearchPhrase {
 		sp.unknownSearchPhrase = textToSearch;
 		
 		sp.lastUnknownSearchWordComplete = isTextComplete(fullText) ;
-		String locale = settings == null ? null : settings.getRegionLang();
-		if (Algorithms.isEmpty(locale) && settings != null) {
-			locale = settings.getLang();
-		}
-		locale = Algorithms.isEmpty(locale) ? "" : locale.split(",")[0].trim();
 		if (!reg.matcher(textToSearch).find()) {
 			sp.firstUnknownSearchWord = sp.unknownSearchPhrase.trim();
 		} else {
@@ -169,7 +163,7 @@ public class SearchPhrase {
 			boolean first = true;
 			for (int i = 0; i < ws.length ; i++) {
 				String wd = ws[i].trim();
-				boolean conjunction = Abbreviations.isConjunction(wd.toLowerCase(), locale);
+				boolean conjunction = CommonWords.isConjunction(wd.toLowerCase());
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {

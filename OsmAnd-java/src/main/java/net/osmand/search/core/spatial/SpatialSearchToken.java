@@ -19,6 +19,7 @@ import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.NameIndexReader;
+import net.osmand.binary.RuleOwner;
 import net.osmand.binary.NameIndexReader.NameIndexReaderMatcher;
 import net.osmand.binary.ObfConstants;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
@@ -818,16 +819,7 @@ public class SpatialSearchToken {
 
 		/** owner of the name of the atom for the rules: street, locality, boundary, postcode, poi */
 		String owner() {
-			if (type == STREET_TYPE || type == BUILDING_TYPE) {
-				return "street";
-			} else if (type == POI_TYPE || type == POI_REF_TYPE) {
-				return "poi";
-			} else if (isBoundary()) {
-				return "boundary";
-			} else if (isPostcode()) {
-				return "postcode";
-			}
-			return "locality";
+			return RuleOwner.ofAtomType(type);
 		}
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,

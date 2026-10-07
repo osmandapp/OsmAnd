@@ -60,10 +60,10 @@ public class SearchVariantRulesTest {
 		assertTrue(Abbreviations.likelyPartOfBuilding("apt", null, "en"));
 		assertTrue(Abbreviations.likelyPartOfBuilding("bis", null, "fr_FR"));
 		assertTrue(Abbreviations.likelyPartOfBuilding("д", null, "ru_RU"));
-		assertTrue(Abbreviations.isConjunction("и", "ru_RU"));
-		assertFalse(Abbreviations.isConjunction("и", "uk_UA"));
-		assertTrue(Abbreviations.isConjunction("die", "de_AT"));
-		assertFalse(Abbreviations.isConjunction("die", "en_US"));
+		assertTrue(Abbreviations.isIgnorable("и", "ru_RU"));
+		assertFalse(Abbreviations.isIgnorable("и", "uk_UA"));
+		assertTrue(Abbreviations.isIgnorable("die", "de_AT"));
+		assertFalse(Abbreviations.isIgnorable("die", "en_US"));
 		assertTrue(Abbreviations.isCommonSkipOtherCnt("street", "en_GB", "street"));
 		assertTrue(Abbreviations.isCommonSkipOtherCnt("saint", "en_GB", "poi"));
 		assertFalse(Abbreviations.isCommonSkipOtherCnt("street", "de_DE", "street"));
@@ -111,7 +111,7 @@ public class SearchVariantRulesTest {
 		assertEquals(List.of("av"), forms("avenue", "en_US"));
 		assertTrue(Abbreviations.likelyPartOfBuilding("tower", null, "en_US"));
 		assertFalse(Abbreviations.likelyPartOfBuilding("tower", null, "en"));
-		assertTrue(Abbreviations.isConjunction("thee", "en_US"));
+		assertTrue(Abbreviations.isIgnorable("thee", "en_US"));
 		assertTrue(Abbreviations.isCommonSkipOtherCnt("eastern", "en_US", "street"));
 		assertEquals("CR7", SearchVariantRules.forLocale("en_US").index().get(0).apply("County Road 7"));
 
@@ -314,19 +314,26 @@ public class SearchVariantRulesTest {
 	@Test
 	public void unglueRules() {
 		SearchVariantRules base = SearchVariantRules.forLocale("");
-		assertEquals("Atelier Anaïs", base.unglue("L'Atelier d'Anaïs"));
-		assertEquals("Hoffmann", base.unglue("E.T.A. Hoffmann"));
-		assertEquals("Wijkopenauto nl", base.unglue("Wijkopenauto's.nl"));
+		assertEquals(List.of("Atelier Anaïs"), unglue(base, "L'Atelier d'Anaïs"));
+		assertEquals(List.of("Hoffmann"), unglue(base, "E.T.A. Hoffmann"));
+		// every rule splits the name itself: no alternative of both glues
+		assertEquals(List.of("Wijkopenauto's nl", "Wijkopenauto s.nl"), unglue(base, "Wijkopenauto's.nl"));
 		// an apostrophe glues only Latin words, a dot every word, a word with a digit is never split
-		assertNull(base.unglue("Об'єднання"));
-		assertEquals("Чайковский", base.unglue("П.И.Чайковский"));
-		assertNull(base.unglue("St.42"));
-		assertNull(base.unglue("Main Street"));
+		assertEquals(List.of(), unglue(base, "Об'єднання"));
+		assertEquals(List.of("Чайковский"), unglue(base, "П.И.Чайковский"));
+		assertEquals(List.of(), unglue(base, "St.42"));
+		assertEquals(List.of(), unglue(base, "Main Street"));
+		// the statistics of generation tell the rules apart by file, object and from (rules-spec.md, 4.3)
+		assertEquals("rules.xml unglue '", base.unglue("L'Atelier d'Anaïs").get(0).id().toString());
+		assertEquals("rules.xml unglue .", base.unglue("Wijkopenauto's.nl").get(0).id().toString());
 		SearchVariantRules noApostrophe = SearchVariantRules.of("xx", List.of(
 				layer("<index><unglue glue=\".\"/><unglue glue=\"'\" script=\"Latin\"/></index>"),
 				layer("<index><unglue glue=\"'\" enabled=\"false\"/></index>")));
-		assertNull(noApostrophe.unglue("L'Atelier"));
-		assertEquals("Mak by", noApostrophe.unglue("Mak.by"));
+		assertEquals(List.of(), unglue(noApostrophe, "L'Atelier"));
+		assertEquals(List.of("Mak by"), unglue(noApostrophe, "Mak.by"));
+		// the limits of one rule do not leak into another: "Ab" is too short for the dot
+		SearchVariantRules limits = of("<index><unglue glue=\".\" minPart=\"4\"/><unglue glue=\"'\"/></index>");
+		assertEquals(List.of("Cdef'Gh", "Ab.Cdef Gh"), unglue(limits, "Ab.Cdef'Gh"));
 		expect("<index><unglue glue=\"ab\"/></index>", "one character");
 		expect("<index><unglue glue=\"a\"/></index>", "one character");
 		expect("<index><unglue glue=\".\" script=\"Klingon\"/></index>", "Unknown script");
@@ -399,6 +406,37 @@ public class SearchVariantRulesTest {
 		} catch (Exception expected) {
 			assertTrue(expected.getMessage(), expected.getMessage().contains("Unsupported search rules version"));
 		}
+	}
+
+	private static List<String> unglue(SearchVariantRules rules, String name) {
+		return rules.unglue(name).stream().map(SearchVariantRules.Unglued::name).collect(Collectors.toList());
+	}
+
+	@Test
+	public void penaltyFreeWordsAreAligned() throws Exception {
+		// a word of a name keeps its diacritics: "école" and "ecole" are one word of the dictionaries
+		String locale = "fr_ZZ";
+		SearchVariantRules rules = SearchVariantRules.of(locale, List.of(layer("<index><class1>école</class1></index>"
+				+ "<query><skipPenalty object=\"street\">straße</skipPenalty>"
+				+ "<skipPenalty object=\"poi\">strasse</skipPenalty></query>")));
+		assertEquals(List.of("street", "poi"), rules.skipPenalty().get("strasse"));
+		java.lang.reflect.Field cache = SearchVariantRules.class.getDeclaredField("CACHE");
+		cache.setAccessible(true);
+		@SuppressWarnings("unchecked")
+		java.util.Map<String, SearchVariantRules> rulesCache = (java.util.Map<String, SearchVariantRules>) cache.get(null);
+		rulesCache.put(locale, rules);
+		try {
+			assertTrue(Abbreviations.isCommonSkipOtherCnt("école", locale, "street"));
+			assertTrue(Abbreviations.isCommonSkipOtherCnt("ecole", locale, "poi"));
+			// the owners of two spellings are merged
+			assertTrue(Abbreviations.isCommonSkipOtherCnt("straße", locale, "street"));
+			assertTrue(Abbreviations.isCommonSkipOtherCnt("strasse", locale, "poi"));
+			assertFalse(Abbreviations.isCommonSkipOtherCnt("straße", locale, "locality"));
+		} finally {
+			rulesCache.remove(locale);
+		}
+		expect("<index><class1>école</class1></index><query><skipPenalty>ecole</skipPenalty></query>",
+				"<class1>");
 	}
 
 	private static SearchVariantRules.Layer layer(String body) {

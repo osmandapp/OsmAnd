@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import net.osmand.util.SearchAlgorithms;
 
@@ -29,10 +30,12 @@ import net.osmand.util.SearchAlgorithms;
  * <p>
  * The class of a word is the class of {@code <class0>}/{@code <class1>}/{@code <class2>} of {@code <index>} of the rules
  * of the map locale ({@link SearchVariantRules#wordClass}), else the class of the group; a word of {@code <class0>} is
- * always a key. Groups are {@code <locales>} of {@code rules.xml} ({@link SearchLocales#groupsByPrefix}). Words:
+ * always a key. The group of a map is {@link SearchLocales#groupForMap}: the longest prefix of {@code <locales>}
+ * of {@code rules.xml} decides, a map whose prefix has no group has none, whatever a shorter prefix has. Words:
  * {@code common_words_groups.tsv} next to this class, lines {@code word <group> <class 0|1|2> <names per million>
- * <word>}. A word of class 0 is only a frequency to compare with; a word the file does not have counts as rare. Test
- * data with lines {@code group <id> <prefix,prefix...>} replaces the groups of the rules.
+ * <word>}; every group of the file is a group of {@code <locales>}. A word of class 0 is only a frequency to compare
+ * with; a word the file does not have counts as rare. Test data with lines {@code group <id> <prefix,prefix...>}
+ * replaces the groups of the rules.
  */
 public class CommonWordsMultiIndex {
 
@@ -68,6 +71,7 @@ public class CommonWordsMultiIndex {
 	private static CommonWordsMultiIndex instance;
 
 	private final Map<String, WordsGroup> groupsById = new HashMap<>();
+	// test data only (lines "group"): map name prefix -> group, instead of <locales> of the rules
 	private final Map<String, WordsGroup> groupsByCountry = new HashMap<>();
 
 	private static class WordsGroup {
@@ -121,8 +125,16 @@ public class CommonWordsMultiIndex {
 		}
 		if (index.groupsByCountry.isEmpty()) {
 			// the data names no groups: the groups of <locales> of rules.xml apply
-			for (Map.Entry<String, String> e : SearchLocales.groupsByPrefix().entrySet()) {
-				index.groupsByCountry.put(e.getKey(), index.groupsById.computeIfAbsent(e.getValue(), WordsGroup::new));
+			Set<String> declared = SearchLocales.groupIds();
+			for (String id : index.groupsById.keySet()) {
+				if (!declared.contains(id)) {
+					throw new IllegalStateException("The group '" + id + "' of " + RESOURCE + " is not a <group> of "
+							+ "<locales> of rules.xml");
+				}
+			}
+			for (String id : declared) {
+				// a group without statistics still drops the words of the classes of the rules
+				index.groupsById.computeIfAbsent(id, WordsGroup::new);
 			}
 		}
 		return index;
@@ -140,6 +152,10 @@ public class CommonWordsMultiIndex {
 	private WordsGroup getGroup(String mapName) {
 		if (mapName == null) {
 			return null;
+		}
+		if (groupsByCountry.isEmpty()) {
+			String id = SearchLocales.groupForMap(mapName);
+			return id == null ? null : groupsById.get(id);
 		}
 		String name = mapName.toLowerCase(Locale.ROOT);
 		int slash = Math.max(name.lastIndexOf('/'), name.lastIndexOf('\\'));

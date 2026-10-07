@@ -22,6 +22,7 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.NameIndexReader;
+import net.osmand.binary.RuleOwner;
 import net.osmand.binary.SearchLocales;
 import net.osmand.binary.NameIndexReader.NameIndexReaderBytes;
 import net.osmand.binary.NameIndexReader.PrefixNameValue;
@@ -754,7 +755,7 @@ public class SpatialSearchContext {
 		String name = "";
 		int wordInd = 0;
 		int type = a != null ? a.getType() : SpatialSearchToken.POI_TYPE;
-		String object = ruleObject(type);
+		String object = RuleOwner.ofAtomType(type);
 		TIntArrayList poiTypes = null;
 		int elo = 0;
 		if (b != null) {
@@ -857,19 +858,6 @@ public class SpatialSearchContext {
 			}
 		}
 		return poiTypes;
-	}
-
-	private static String ruleObject(int type) {
-		if (type == CityBlocks.STREET_TYPE.index) {
-			return "street";
-		} else if (type == CityBlocks.BOUNDARY_TYPE.index) {
-			return "boundary";
-		} else if (type == CityBlocks.POSTCODES_TYPE.index) {
-			return "postcode";
-		} else if (type == SpatialSearchToken.POI_TYPE) {
-			return "poi";
-		}
-		return "locality";
 	}
 
 	private boolean matchName(NameIndexReader indx, SpatialSearchToken t, String name,
