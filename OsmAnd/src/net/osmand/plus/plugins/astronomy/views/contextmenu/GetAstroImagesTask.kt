@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION", "OVERRIDE_DEPRECATION") // AsyncTask, needs migration
+
 package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import android.net.TrafficStats

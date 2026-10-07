@@ -197,7 +197,7 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 	override fun connect(context: Context, activity: Activity?): Boolean {
 		if (uuid == null) {
 			currentState = DeviceConnectionState.CONNECTING
-			val deviceFinder = BleDeviceUuidFinder(deviceId, object : DeviceFoundCallback {
+			val deviceFinder = BleDeviceUuidFinder(context, deviceId, object : DeviceFoundCallback {
 				override fun onDeviceFound(uuid: String?) {
 					currentState = DeviceConnectionState.DISCONNECTED
 					if (uuid != null) {

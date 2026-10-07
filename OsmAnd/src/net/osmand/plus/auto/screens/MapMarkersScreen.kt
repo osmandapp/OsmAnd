@@ -14,7 +14,6 @@ import androidx.car.app.model.Metadata
 import androidx.car.app.model.Place
 import androidx.car.app.model.Row
 import androidx.car.app.model.Template
-import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -40,6 +39,7 @@ class MapMarkersScreen(
 
     override fun shouldRestoreMapState() = true
 
+    @Suppress("DEPRECATION") // PlaceListNavigationTemplate, needs migration to MapWithContentTemplate
     override fun getTemplate(): Template {
         val listBuilder = ItemList.Builder()
         val markersSize = app.mapMarkersHelper.mapMarkers.size
@@ -83,7 +83,7 @@ class MapMarkersScreen(
             listBuilder.addItem(rowBuilder.build())
         }
         adjustMapToRect(location, mapRect)
-        return PlaceListNavigationTemplate.Builder()
+        return androidx.car.app.navigation.model.PlaceListNavigationTemplate.Builder()
             .setItemList(listBuilder.build())
             .setTitle(app.getString(R.string.map_markers))
             .setActionStrip(ActionStrip.Builder().addAction(createSearchAction()).build())

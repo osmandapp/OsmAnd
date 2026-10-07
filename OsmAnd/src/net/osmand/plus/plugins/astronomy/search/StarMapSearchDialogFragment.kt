@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.astronomy.search
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -226,13 +225,11 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 	}
 
-	override fun createDialog(savedInstanceState: Bundle?): Dialog {
-		return object : Dialog(requireContext(), theme) {
-			override fun onBackPressed() {
-				if (!handleBackPressedInternal()) {
-					super.onBackPressed()
-				}
-			}
+	override fun isBackPressedCallbackEnabled(): Boolean = true
+
+	override fun handleBackPressed() {
+		if (!handleBackPressedInternal()) {
+			super.handleBackPressed()
 		}
 	}
 
@@ -1619,14 +1616,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			}
 			items
 		}
-		sortPopup = PopUpMenu.showAndGet(
-			createPopupDisplayData(
-				anchor = anchor,
-				items = items,
-				limitHeight = false,
-				layoutId = R.layout.popup_star_search_sort_menu_item
-			)
-		)
+		sortPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items))
 	}
 
 	private fun getMyDataInsertionOrderMap(quickPresetType: StarMapSearchQuickPresetType): Map<String, Int> {
@@ -1742,22 +1732,17 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				}
 			)
 		}
-		filterPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items, limitHeight = true))
+		filterPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items))
 	}
 
 	private fun createPopupDisplayData(
 		anchor: View,
-		items: List<PopUpMenuItem>,
-		limitHeight: Boolean,
-		layoutId: Int = R.layout.popup_star_search_menu_item
+		items: List<PopUpMenuItem>
 	): PopUpMenuDisplayData {
 		return PopUpMenuDisplayData().apply {
 			anchorView = anchor
-			this.layoutId = layoutId
 			nightMode = this@StarMapSearchDialogFragment.nightMode
 			widthMode = PopUpMenuWidthMode.STANDARD
-			showCompound = true
-			this.limitHeight = limitHeight
 			menuItems = items
 		}
 	}

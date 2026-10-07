@@ -22,6 +22,7 @@ class ForgetDeviceDialog : ForgetDeviceBaseDialog() {
                 val args = Bundle()
                 args.putString(DEVICE_ID_KEY, deviceId)
                 fragment.arguments = args
+                @Suppress("DEPRECATION")
                 fragment.setTargetFragment(targetFragment, 0)
                 fragment.show(manager, TAG)
             }
@@ -43,6 +44,7 @@ class ForgetDeviceDialog : ForgetDeviceBaseDialog() {
 		}
 	}
 
+	@Suppress("DEPRECATION")
 	override fun onForgetSensorConfirmed() {
 		(targetFragment as ForgetDeviceListener).onForgetSensorConfirmed(device)
 	}

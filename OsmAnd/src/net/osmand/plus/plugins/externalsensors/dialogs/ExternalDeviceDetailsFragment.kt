@@ -90,7 +90,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
 	override fun setupToolbar(view: View) {
 		view.findViewById<ImageButton>(R.id.close_button).apply {
 			setOnClickListener {
-				requireActivity().onBackPressed()
+				requireActivity().onBackPressedDispatcher.onBackPressed()
 			}
 			setImageResource(AndroidUtils.getNavigationIconResId(context))
 		}

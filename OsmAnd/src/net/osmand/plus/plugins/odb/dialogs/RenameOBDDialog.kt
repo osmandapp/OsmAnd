@@ -127,6 +127,7 @@ class RenameOBDDialog : BaseFullScreenDialogFragment() {
 	}
 
 	private fun onSaveEditedText(newName: String) {
+		@Suppress("DEPRECATION")
 		val target = targetFragment
 		if (target is OnDeviceNameChangedCallback) {
 			plugin?.let {
@@ -158,6 +159,7 @@ class RenameOBDDialog : BaseFullScreenDialogFragment() {
 				args.putString(DEVICE_ADDRESS_KEY, device.address)
 				args.putBoolean(BLE_KEY, device.isBLE)
 				fragment.arguments = args
+				@Suppress("DEPRECATION")
 				fragment.setTargetFragment(target, 0)
 				fragment.show(fragmentManager, TAG)
 			}

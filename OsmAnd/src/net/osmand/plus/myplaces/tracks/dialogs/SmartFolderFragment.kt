@@ -25,6 +25,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	companion object {
 		private val TAG = SmartFolderFragment::class.java.simpleName
 
+		@Suppress("DEPRECATION") // setTargetFragment and retainInstance, needs migration
 		fun showInstance(manager: FragmentManager, folder: SmartFolder,
 		                 organizedTracksGroup: OrganizedTracksGroup?,
 						 track: TrackItem?, target: Fragment) {

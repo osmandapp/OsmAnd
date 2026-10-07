@@ -87,7 +87,6 @@ object AstroUtils {
 			SkyObject.Type.GLOBULAR_CLUSTER -> ctx.getString(R.string.astro_globular_clusters)
 			SkyObject.Type.GALAXY_CLUSTER -> ctx.getString(R.string.astro_galaxy_clusters)
 			SkyObject.Type.CONSTELLATION -> ctx.getString(R.string.astro_constellations)
-			else -> type.name
 		}
 	}
 

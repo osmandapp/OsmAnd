@@ -1,7 +1,6 @@
 package net.osmand.plus.exploreplaces
 
 import android.animation.ValueAnimator
-import android.os.AsyncTask.Status.RUNNING
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -304,8 +303,9 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), ExplorePlacesAdapter.Exp
 		}
 	}
 
+	@Suppress("DEPRECATION") // AsyncTask, needs migration
 	private fun stopConvertAmenitiesTask() {
-		if (convertAmenitiesTask?.status == RUNNING) {
+		if (convertAmenitiesTask?.status == android.os.AsyncTask.Status.RUNNING) {
 			convertAmenitiesTask?.cancel(false)
 		}
 	}
