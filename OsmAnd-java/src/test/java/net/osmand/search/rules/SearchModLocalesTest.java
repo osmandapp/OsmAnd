@@ -1,4 +1,4 @@
-package net.osmand.binary;
+package net.osmand.search.rules;
 
 import org.junit.Test;
 

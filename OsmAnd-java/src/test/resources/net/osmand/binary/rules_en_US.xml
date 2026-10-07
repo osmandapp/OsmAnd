@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules version="5">
+    <index>
+        <rule object="street" from="(?iu)\bCounty\s+Road\s+(\d+)\b" to="CR$1"/>
+    </index>
+    <query>
+        <!-- a lower layer replaces the rule of a word whole -->
+        <rule from="e" to="Eastern" object="street"/>
+        <rule from="hwy" enabled="false"/>
+        <rule from="ave" to="Esplanade"/>
+        <rule from="tower" object="building"/>
+        <rule from="thee" to=""/>
+        <skipPenalty>eastern</skipPenalty>
+    </query>
+</rules>

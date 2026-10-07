@@ -1,4 +1,4 @@
-package net.osmand.binary;
+package net.osmand.search.rules;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -17,7 +17,7 @@ import java.util.Set;
  * wins. A map this table does not cover gets "" and only the base rules. The table gives every map its rules locale,
  * its statistics group and its transliteration of names.
  * <p>
- * This is not the language group of {@link CommonWordsMultiIndex}: a group ("esl", "nor", "cjk") pools the word
+ * This is not the language group of {@link net.osmand.binary.CommonWordsMultiIndex}: a group ("esl", "nor", "cjk") pools the word
  * statistics of several languages, while a rules locale names one language and one country.
  */
 public final class SearchModLocales {

@@ -20,4 +20,4 @@ test-results/
 /build
 
 # Search rules, copied from resources/abbr by collectAbbrResources
-src/main/resources/net/osmand/binary/rules*.xml
+src/main/resources/net/osmand/search/rules/rules*.xml

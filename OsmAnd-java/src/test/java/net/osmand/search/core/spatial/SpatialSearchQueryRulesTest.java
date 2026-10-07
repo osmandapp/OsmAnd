@@ -2,7 +2,7 @@ package net.osmand.search.core.spatial;
 
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 
-import net.osmand.binary.SearchModRules;
+import net.osmand.search.rules.SearchModRules;
 import org.junit.Assert;
 import org.junit.Test;
 

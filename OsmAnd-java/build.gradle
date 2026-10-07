@@ -19,7 +19,7 @@ tasks.register('collectRoutingResources', Sync) {
 
 tasks.register('collectAbbrResources', Sync) {
 	from "../../resources/abbr"
-	into "src/main/resources/net/osmand/binary"
+	into "src/main/resources/net/osmand/search/rules"
 	include "rules*.xml"
 }
 
@@ -75,7 +75,7 @@ tasks.register('collectAbbrTestResources', Copy) {
 	from("../../resources/test-resources/abbr") {
 		include "rules*.xml"
 	}
-	into "src/test/resources/net/osmand/binary"
+	into "src/test/resources/net/osmand/search/rules"
 }
 
 processResources {

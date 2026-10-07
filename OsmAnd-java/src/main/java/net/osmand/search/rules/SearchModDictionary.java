@@ -1,8 +1,8 @@
-package net.osmand.binary;
+package net.osmand.search.rules;
 
-import net.osmand.binary.SearchModRules.SearchModRuleOwner;
-import net.osmand.binary.SearchModLocaleRules.Scope;
-import net.osmand.binary.SearchModLocaleRules.Scoped;
+import net.osmand.search.rules.SearchModRules.SearchModRuleOwner;
+import net.osmand.search.rules.SearchModLocaleRules.Scope;
+import net.osmand.search.rules.SearchModLocaleRules.Scoped;
 import net.osmand.util.SearchAlgorithms;
 
 import java.util.ArrayList;
@@ -127,7 +127,7 @@ public final class SearchModDictionary {
 
 	/**
 	 * search-v2: an ignorable word ({@code to=""}) of the locale of the map. Search v1 does not read the rules, its
-	 * conjunctions are {@link Abbreviations#isConjunction}.
+	 * conjunctions are {@link net.osmand.binary.Abbreviations#isConjunction}.
 	 */
 	public boolean isIgnorable(String lowerCase) {
 		return ignorables.contains(aligned(lowerCase));

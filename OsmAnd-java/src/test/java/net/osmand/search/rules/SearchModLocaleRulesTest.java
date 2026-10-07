@@ -1,6 +1,6 @@
-package net.osmand.binary;
+package net.osmand.search.rules;
 
-import net.osmand.binary.SearchModRules.SearchModRuleOwner;
+import net.osmand.search.rules.SearchModRules.SearchModRuleOwner;
 
 import org.junit.Test;
 

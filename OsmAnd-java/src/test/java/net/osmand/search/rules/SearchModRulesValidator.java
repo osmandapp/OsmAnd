@@ -1,19 +1,19 @@
-package net.osmand.binary;
+package net.osmand.search.rules;
 
-import static net.osmand.binary.SearchModLocaleRules.ANY_OBJECT;
-import static net.osmand.binary.SearchModLocaleRules.BASE_FILE;
-import static net.osmand.binary.SearchModLocaleRules.BUILDING_OBJECT;
-import static net.osmand.binary.SearchModLocaleRules.CLASS_ALWAYS;
-import static net.osmand.binary.SearchModLocaleRules.VERSION;
+import static net.osmand.search.rules.SearchModLocaleRules.ANY_OBJECT;
+import static net.osmand.search.rules.SearchModLocaleRules.BASE_FILE;
+import static net.osmand.search.rules.SearchModLocaleRules.BUILDING_OBJECT;
+import static net.osmand.search.rules.SearchModLocaleRules.CLASS_ALWAYS;
+import static net.osmand.search.rules.SearchModLocaleRules.VERSION;
 
 import net.osmand.PlatformUtil;
-import net.osmand.binary.SearchModLocaleRules.Form;
-import net.osmand.binary.SearchModLocaleRules.Mirror;
-import net.osmand.binary.SearchModLocaleRules.Rule;
-import net.osmand.binary.SearchModRules.SearchModRuleOwner;
-import net.osmand.binary.SearchModLocaleRules.SkipPenalty;
-import net.osmand.binary.SearchModLocaleRules.Unglue;
-import net.osmand.binary.SearchModLocaleRules.WordRule;
+import net.osmand.search.rules.SearchModLocaleRules.Form;
+import net.osmand.search.rules.SearchModLocaleRules.Mirror;
+import net.osmand.search.rules.SearchModLocaleRules.Rule;
+import net.osmand.search.rules.SearchModRules.SearchModRuleOwner;
+import net.osmand.search.rules.SearchModLocaleRules.SkipPenalty;
+import net.osmand.search.rules.SearchModLocaleRules.Unglue;
+import net.osmand.search.rules.SearchModLocaleRules.WordRule;
 import net.osmand.util.SearchAlgorithms;
 import org.xmlpull.v1.XmlPullParser;
 
