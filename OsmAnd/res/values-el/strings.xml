@@ -2919,7 +2919,7 @@
     <string name="delete_map">Διαγραφή χάρτη</string>
     <string name="help_article_start_with_first_steps_name">Πρώτα βήματα</string>
     <string name="help_article_search_search_poi_name">Αναζήτηση ΣΕ</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="standard_maps">Τυπικοί χάρτες</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Σύζευξη αισθητήρα ANT+</string>
     <string name="shared_string_show_less">Δείξε λιγότερα</string>
@@ -2935,7 +2935,7 @@
     <string name="max_altitude">Μέγιστο υψόμετρο</string>
     <string name="external_device_details_connect">Σύνδεση</string>
     <string name="select_data_to_export">Επιλέξτε τα δεδομένα που θα εξαχθούν στο αρχείο.</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="shared_string_foot">Πόδι</string>
     <string name="map_3d_mode_action">Λειτουργία 3D</string>
     <string name="folder">Φάκελος</string>
@@ -3720,7 +3720,6 @@
     <string name="update_all_maps_added">Ενημέρωση όλων των χαρτών που προστέθηκαν στο %1$s;</string>
     <string name="routing_engine_vehicle_type_mtb">Ποδήλατο βουνού</string>
     <string name="routing_engine_vehicle_type_small_truck">Μικρό φορτηγό</string>
-    <string name="ais_cpa_warning_distance">Απόσταση προειδοποίησης για το Πλησιέστερο Σημείο Προσέγγισης (CPA)</string>
     <string name="default_buttons_corners_original_description">Κάθε κουμπί διατηρεί τη δικιά του γωνιακή ακτίνα.</string>
     <string name="routing_attr_motor_type_gas_name">Συμπιεσμένο Φυσικό Αέριο</string>
     <string name="rendering_value_category_name">Κατηγορία</string>
@@ -3751,8 +3750,6 @@
     <string name="routing_engine_vehicle_type_hiking">Πεζοπορία</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Τυπική ποδηλασία</string>
     <string name="routing_engine_vehicle_type_scooter">Σκούτερ</string>
-    <string name="ais_cpa_settings">Ρυθμίσεις σχετικές με το CPA</string>
-    <string name="ais_cpa_warning_time_description">Αν το TCPA (Χρόνος μέχρι το Πλησιέστερο Σημείο Προσέγγισης) με άλλο σκάφος πέσει κάτω από το ορισμένο όριο, το σκάφος επισημαίνεται με κόκκινο χρώμα.</string>
     <string name="shared_string_split_by">Διαχωρισμός κατά</string>
     <string name="routing_attr_avoid_fords_description">Αποφεύγει περάσματα νερού</string>
     <string name="routing_attr_freeride_policy_allow_name">Να επιτρέπεται</string>
@@ -3797,7 +3794,6 @@
     <string name="quick_action_search_view_title">Αναζήτηση σε όψη</string>
     <string name="routing_attr_allow_ferries_description">Να επιτρέπεται η δρομολόγηση μέσω πορθμείων</string>
     <string name="routing_attr_avoid_cobblestone_description">Αποφεύγει λιθόστρωτο</string>
-    <string name="ais_cpa_warning_time">Χρόνος προειδοποίησης πριν το Πλησιέστερο Σημείο Προσέγγισης (CPA)</string>
     <string name="plugin_ais_tracker_description">Εμφανίζει τις θέσεις και τις πληροφορίες του AIS για τα κοντινά σκάφη. Τα δεδομένα του AIS λάμβάνονται μέσω δικτύου από έναν εξωτερικό δέκτη AIS.</string>
     <string name="routing_attr_prefer_horse_routes_description">Να προτιμώνται ιππικές διαδρομές</string>
     <string name="shared_string_external">Εξωτερικά</string>
@@ -3893,17 +3889,12 @@
     <string name="years_3">Τρία έτη</string>
     <string name="help_article_purchases_giveaway_name">Προσφορά</string>
     <string name="av_audio_sample_rate">Ρυθμός δειγματοληψίας ήχου</string>
-    <string name="ais_address_nmea_server_description">Ορίστε την διεύθυνση IP της πηγής δεδομένων NMEA (αν χρησιμοποιείται TCP)</string>
-    <string name="ais_port_nmea_server">Θύρα TCP της πηγής δεδομένων NMEA</string>
     <string name="shared_string_switch">Εναλλαγή</string>
-    <string name="ais_port_nmea_server_description">Ορίστε τον αριθμό θύρας TCP της πηγής δεδομένων NMEA</string>
     <string name="av_audio_sample_rate_descr">Επιλέξτε τον ρυθμό δειγματοληψίας ήχου.</string>
-    <string name="ais_address_nmea_server">Διεύθυνση IP της πηγής δεδομένων NMEA</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
     <string name="remaining_fuel">Απομένον καύσιμο</string>
     <string name="wikidata">Wikidata</string>
     <string name="osm_live_payment_renews_3_years">Ανανεώνεται κάθε τρία έτη</string>
-    <string name="ais_nmea_protocol">Πρωτόκολλο για λήψη δεδομένων NMEA</string>
     <string name="fuel_tank_capacity">Χωρητικότητα ντεπόζιτου</string>
     <string name="deleting">Διαγραφή…</string>
     <string name="osm_live_payment_3_years_title">Κάθε τρία έτη</string>
@@ -3911,11 +3902,8 @@
     <string name="imperial_gallons">Αυτοκρατορικά γαλόνια</string>
     <string name="obd_widget_vehicle_speed">Ταχύτητα οχήματος</string>
     <string name="auto_zoom_3d_angle">Αυτόματο ζουμ γωνίας 3D</string>
-    <string name="ais_nmea_protocol_description">Επιλέξτε πρωτόκολλο για λήψη δεδομένων NMEA</string>
     <string name="ais_address_settings_description">Επιλέξτε το πρωτόκολλο NMEA (UDP/TCP) και ορίστε τις αντίστοιχες διευθύνσεις και θύρες</string>
     <string name="us_gallons_unit">γαλ</string>
-    <string name="ais_port_nmea_local">Θύρα UDP του τοπικού δέκτη δεδομένων NMEA</string>
-    <string name="ais_port_nmea_local_description">Ορίστε την θύρα UDP όπου το OsmAnd λαμβάνει δεδομένα NMEA</string>
     <string name="route_guidance">Καθοδήγηση διαδρομής</string>
     <string name="deleting_history">Διαγραφή ιστορικού…</string>
     <string name="fuel_tank_capacity_description">Εισάγετε την χωρητικότητα του ρεζερβουάρ για επακριβή παρακολούθηση των επιπέδων καυσίμου και κατανάλωσης</string>
@@ -4574,12 +4562,6 @@
     <string name="msg_favorites_skipped_as_existing">Αγαπημένα σημεία (%1$d) έχουν παραλειφθεί καθώς ήδη υπάρχουν.</string>
     <string name="prediction_time_description">Το εικονίδιο θέσης στο OsmAnd κινείται με κάθε ενημέρωση του GPS (μια φορά ανά δευτερόλεππτο). Μια μικρή καθυστέρηση μπορεί να προκύψει, ειδικά σε ξαφνική γρήγορη κίνηση ή όταν το σήμα του GPS είναι ασταθές.</string>
     <string name="hmd_promo_description_years">Δωρεάν πρόσβαση σε λειτουργίες συμπεριλαμβανομένου απεριόριστες λήψεις χαρτών, 3D ανάγλυφο κλπ. για %1$s έτη</string>
-    <string name="ais_object_lost_timeouts">Ρυθμίσεις χρόνου λήξης για τη λήψη σήματος AIS</string>
-    <string name="ais_object_lost_timeout">Χρόνος λήξης για ορατότητα όταν χαθεί το πλοίο</string>
-    <string name="ais_object_lost_timeout_description">Ορίστε χρόνο λήξης για την ορατότητα αντικειμένου AIS. Εάν δεν έχει ληφθεί σήμα εντός της ορισμένης διάρκειας, το αντικείμενο αυτομάτως θα αφαιρεθεί από την προβολή.</string>
-    <string name="ais_ship_lost_timeout">Χρόνος λήξης πλοίου χωρίς ενημέρωση</string>
-    <string name="ais_ship_lost_timeout_description">Ορίστε χρόνο λήξης για την ορατότητα πλοίου χωρίς ενημέρωση: μετά από αυτόν το χρόνο χωρίς λήψη σήματος, το σύμβολο του πλοίου θα είναι με γραμμή διαγραφής.</string>
-    <string name="ais_cpa_warning_distance_description">Τα σκάφη επισημαίνονται με κόκκινο εάν το CPA (Πλησιέστερο Σημείο Προσέγγισης) είναι κάτω από το ορισμένο κατώφλι και το TCPA (Χρόνος μέχρι το CPA) πέφτει εντός του ορισμένου χρόνου προειδοποίησης στη ρύθμιση \'Χρόνος προειδοποίησης μέχρι το CPA\'.</string>
     <string name="shared_string_interpolation">Παρεμβολή</string>
     <string name="location_interpolation_percent">Ποσοστό παρεμβολής τοποθεσίας</string>
     <string name="average_value_slider_description">Επιλέξτε το χρονικό μεσοδιάστημα για μέτρηση της μέσης τιμής.</string>
