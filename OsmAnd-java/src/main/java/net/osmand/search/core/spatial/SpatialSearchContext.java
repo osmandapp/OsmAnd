@@ -22,7 +22,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.RuleOwner;
-import net.osmand.binary.SearchLocales;
 import net.osmand.binary.SearchRulesDictionary;
 import net.osmand.binary.NameIndexReader.NameIndexReaderBytes;
 import net.osmand.binary.NameIndexReader.PrefixNameValue;
@@ -208,7 +207,7 @@ public class SpatialSearchContext {
 		for (BinaryMapIndexReader bir : files) {
 			SpatialSearchFileCache fc = cache.filesCache.get(bir.getFile().getName());
 			if (fc == null || !fc.test(bir)) {
-				fc = new SpatialSearchFileCache(bir);
+				fc = new SpatialSearchFileCache(bir, cache.rules);
 			}
 			cache.filesCache.put(fc.file, fc);
 			fc.indexInd = indexInd;
@@ -262,7 +261,7 @@ public class SpatialSearchContext {
 					List<PrefixNameValue> prefixes = indx.getMatchedPrefixes(t.word);
 					if (prefixes == null) {
 						stats.sub1FileAtomsTime.start();
-						prefixes = files.get(fileInd).readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats, rulesLocale(indx))));
+						prefixes = files.get(fileInd).readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats, internalFile.get(fileInd).rules)));
 						stats.sub1FileAtomsTime.finish();
 					}
 					for (PrefixNameValue p : prefixes == null ? List.<PrefixNameValue>of() : prefixes) {
@@ -288,7 +287,7 @@ public class SpatialSearchContext {
 			SpatialSearchFileCache iCache = internalFile.get(fileInd);
 			BinaryMapIndexReader b = files.get(fileInd);
 			for (NameIndexReader indx : iCache.indexReaders) {
-				readAtoms(tokens, b, indx, indxInd);
+				readAtoms(tokens, b, indx, indxInd, iCache.rules);
 				indxInd++;
 				// the matched atoms are in the tokens now, the parsed blocks are only a cache for the next search
 				cachedBytes += indx.getCachedBytes();
@@ -528,14 +527,27 @@ public class SpatialSearchContext {
 		return regroup;
 	}
 
-	// rules locale of the data of a map (en_US, de_CH...), whatever the language of the user interface is
-	private static String rulesLocale(NameIndexReader indx) {
-		return SearchLocales.forMap(indx.addressRegion != null ? indx.addressRegion.getName() : indx.poiRegion.getName());
+	/**
+	 * @param type type of an atom of the name index: an address block ({@link CityBlocks#index}) or
+	 *             {@link SpatialSearchToken#POI_TYPE}, {@link SpatialSearchToken#POI_REF_TYPE},
+	 *             {@link SpatialSearchToken#BUILDING_TYPE}; a building has the name of its street
+	 * @return the owner of the name for the search rules, see {@link RuleOwner}
+	 */
+	private String ruleOwner(int type) {
+		if (type == CityBlocks.STREET_TYPE.index || type == SpatialSearchToken.BUILDING_TYPE) {
+			return RuleOwner.STREET;
+		} else if (type == SpatialSearchToken.POI_TYPE || type == SpatialSearchToken.POI_REF_TYPE) {
+			return RuleOwner.POI;
+		} else if (type == CityBlocks.BOUNDARY_TYPE.index) {
+			return RuleOwner.BOUNDARY;
+		} else if (type == CityBlocks.POSTCODES_TYPE.index) {
+			return RuleOwner.POSTCODE;
+		}
+		return RuleOwner.LOCALITY;
 	}
 
-	private void readAtoms(List<SpatialSearchToken> tokens, BinaryMapIndexReader b, NameIndexReader indx, int indxInd)
-			throws IOException {
-		String locale = rulesLocale(indx);
+	private void readAtoms(List<SpatialSearchToken> tokens, BinaryMapIndexReader b, NameIndexReader indx, int indxInd,
+			SearchRulesDictionary rules) throws IOException {
 		// sort to assign tokens to '2nd street 2' first instead '2 2nd street'
 		tokens.sort(new Comparator<SpatialSearchToken>() {
 			@Override
@@ -559,14 +571,14 @@ public class SpatialSearchContext {
 			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(query);
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
-				matchedPrefixes = b.readFullNameIndex(indx.setQuery(query, t.getPrefixMatcher(stats, locale)));
+				matchedPrefixes = b.readFullNameIndex(indx.setQuery(query, t.getPrefixMatcher(stats, rules)));
 				stats.sub1FileAtomsTime.finish();
 				if (matchedPrefixes == null) {
 					continue;
 				}
 			}
 			for (PrefixNameValue prefix : matchedPrefixes) {
-				parseAtomSuffixes(t, indxInd, indx, prefix, tokens, locale);
+				parseAtomSuffixes(t, indxInd, indx, prefix, tokens, rules);
 			}
 		}
 	}
@@ -599,7 +611,7 @@ public class SpatialSearchContext {
 	}
 
 	private void parseAtomSuffixes(SpatialSearchToken t, int indInd, NameIndexReader indx, PrefixNameValue prefix,
-			List<SpatialSearchToken> allTokens, String locale) throws IOException {
+			List<SpatialSearchToken> allTokens, SearchRulesDictionary rules) throws IOException {
 		String curSuffix = null;
 		List<String> suffixes = new ArrayList<>();
 		List<String> commonSuffixes = new ArrayList<>();
@@ -626,7 +638,7 @@ public class SpatialSearchContext {
 				}
 				MapObject obj = null;
 //				obj = readAddrObject(lid, pid, null);
-				parseSuffixes(t, indx, suffixes, commonSuffixes, a, null, lid, pid, obj, allTokens, locale);
+				parseSuffixes(t, indx, suffixes, commonSuffixes, a, null, lid, pid, obj, allTokens, rules);
 			}
 		} else if (!addr && settings.SEARCH_POI) {
 			for (OsmAndPoiNameIndexDataAtom a : poiData.getAtomsList()) {
@@ -641,7 +653,7 @@ public class SpatialSearchContext {
 				if (settings.SEARCH_POI_BY_CATEGORY_ONLY && skipFilteredZoomObject(t, a.getX(), a.getY(), a.getEloRatingCount() > 0, false)) {
 					continue;
 				}
-				parseSuffixes(t, indx, suffixes, commonSuffixes, null, a, lid, 0, amenity, allTokens, locale);
+				parseSuffixes(t, indx, suffixes, commonSuffixes, null, a, lid, 0, amenity, allTokens, rules);
 			}
 		}
 	}
@@ -803,12 +815,12 @@ public class SpatialSearchContext {
 
 	private void parseSuffixes(SpatialSearchToken t, NameIndexReader indx, List<String> suffixes,
 			List<String> commonSuffixes, AddressNameIndexDataAtom a, OsmAndPoiNameIndexDataAtom b, long cid, long pid,
-			MapObject obj, List<SpatialSearchToken> allTokens, String locale) {
+			MapObject obj, List<SpatialSearchToken> allTokens, SearchRulesDictionary rules) {
 		int cnt = a != null ? a.getSuffixesBitsetIndexCount() : b.getSuffixesBitsetIndexCount();
 		String name = "";
 		int wordInd = 0;
 		int type = a != null ? a.getType() : SpatialSearchToken.POI_TYPE;
-		String object = RuleOwner.ofAtomType(type);
+		String object = ruleOwner(type);
 		TIntArrayList poiTypes = null;
 		int elo = 0;
 		if (b != null) {
@@ -831,7 +843,7 @@ public class SpatialSearchContext {
 					} else if(b != null && wordInd < b.getExtraSuffixCount()) {
 						name += b.getExtraSuffix(wordInd);
 					}
-					if (matchName(indx, t, name, poiTypes, cmnWord, locale, object) || (name = matchPartName(t, name, allTokens, locale, object)) != null) {
+					if (matchName(indx, t, name, poiTypes, cmnWord, rules, object) || (name = matchPartName(t, name, allTokens, rules, object)) != null) {
 						int other;
 						if (a != null) {
 							other = wordInd < a.getOtherWordsCountCount() ? a.getOtherWordsCount(wordInd) : 0;
@@ -839,7 +851,7 @@ public class SpatialSearchContext {
 							other = wordInd < b.getOtherWordsCountCount() ? b.getOtherWordsCount(wordInd) : 0;
 						}
 						addObject(t, indx, name, type, cid, pid, obj, other, poiTypes, elo,
-								new NameIndexAtomXY(a, b, settings), allTokens, cmnWord, locale);
+								new NameIndexAtomXY(a, b, settings), allTokens, cmnWord, rules);
 					}
 					wordInd++;
 					name = "";
@@ -864,7 +876,7 @@ public class SpatialSearchContext {
 		} else if (b != null && wordInd < b.getExtraSuffixCount()) {
 			name += b.getExtraSuffix(wordInd);
 		}
-		if (name.length() != 0 && (matchName(indx, t, name, poiTypes, cmnWord, locale, object) || (name = matchPartName(t, name, allTokens, locale, object)) != null)) {
+		if (name.length() != 0 && (matchName(indx, t, name, poiTypes, cmnWord, rules, object) || (name = matchPartName(t, name, allTokens, rules, object)) != null)) {
 			int other;
 			if (a != null) {
 				other = wordInd < a.getOtherWordsCountCount() ? a.getOtherWordsCount(wordInd) : 0;
@@ -874,7 +886,7 @@ public class SpatialSearchContext {
 			// object will be added once it's read rare word
 			// disabled for now as it could only have effect for frequent words in index
 			addObject(t, indx, name, type, cid, pid, obj, other, poiTypes, elo, new NameIndexAtomXY(a, b, settings),
-					allTokens, cmnWord, locale);
+					allTokens, cmnWord, rules);
 		}
 	}
 
@@ -912,21 +924,21 @@ public class SpatialSearchContext {
 	}
 
 	private boolean matchName(NameIndexReader indx, SpatialSearchToken t, String name, 
-			TIntArrayList poiTypes, boolean[] commonWord, String locale, String object) {
+			TIntArrayList poiTypes, boolean[] commonWord, SearchRulesDictionary rules, String object) {
 		stats.sub1MatchTime.start();
 		int is = name.indexOf(' ');
 		String mname = is >= 0 ? name.substring(0, is) : name;
-		boolean acceptName = t.matchName(mname, poiTypes, locale, object);
+		boolean acceptName = t.matchName(mname, poiTypes, rules, object);
 		if (!acceptName && is >= 0) {
 			String[] split = name.split(" ");
 			for (int k = 1; k < split.length; k++) {
 				String combiName = mname + split[k];
-				if (t.matchName(combiName, null, locale, object)) {
+				if (t.matchName(combiName, null, rules, object)) {
 					// query 'weberstrasse' matches 'weber straße': works for popular suffixes
 					mname = combiName;
 					acceptName = true;
 					break;
-				} else if (SearchAlgorithms.startsWithDigit(split[k]) && t.matchName(mname + "-" + split[k], null, locale, object)) {
+				} else if (SearchAlgorithms.startsWithDigit(split[k]) && t.matchName(mname + "-" + split[k], null, rules, object)) {
 					// "us 15" match "us-15" (as we don't split before numbers)
 					mname = mname + "-" + split[k];
 					acceptName = true;
@@ -946,13 +958,13 @@ public class SpatialSearchContext {
 	}
 	
 	private String matchPartName(SpatialSearchToken t, String name, List<SpatialSearchToken> allTokens,
-			String locale, String object) {
+			SearchRulesDictionary rules, String object) {
 		stats.sub1MatchTime.start();
 		String[] res = t.matchSplitName(name);
 		String resName = null;
 		if (res != null) {
 			for (SpatialSearchToken st : allTokens) {
-				if (st != t && st.matchName(res[1], null, locale, object)) {
+				if (st != t && st.matchName(res[1], null, rules, object)) {
 //					System.out.printf("%s -> '%s %s'\n", name, res[0], res[1]);
 					resName = res[0] + " " + res[1];
 					break;
@@ -965,8 +977,8 @@ public class SpatialSearchContext {
 
 	private void addObject(SpatialSearchToken t, NameIndexReader indx, String name, int type, long lid, long pid,
 			MapObject obj, int other, TIntArrayList poiTypes, int elo, NameIndexAtomXY coords,
-			List<SpatialSearchToken> allTokens, boolean[] cmnWord, String locale) {
-		String object = RuleOwner.ofAtomType(type);
+			List<SpatialSearchToken> allTokens, boolean[] cmnWord, SearchRulesDictionary rules) {
+		String object = ruleOwner(type);
 		List<SpatialSearchToken> otherTokens = null;
 		boolean streetCity = false;
 		boolean numericNotMatch = false;
@@ -1011,7 +1023,7 @@ public class SpatialSearchContext {
 				}
 				boolean matched = false;
 				for (SpatialSearchToken token : allTokens) {
-					if (t != token && matchName(indx, token, otherName, poiTypes, null, locale, object)
+					if (t != token && matchName(indx, token, otherName, poiTypes, null, rules, object)
 							&& (otherTokens == null || !otherTokens.contains(token))) {
 						if (otherTokens == null) {
 							otherTokens = new ArrayList<>(3);
@@ -1030,7 +1042,7 @@ public class SpatialSearchContext {
 					if (numeric) {
 						numericNotMatch = !t.word.contains(otherName); // "us 15" data, "us-15" token
 					}
-					if (!SearchRulesDictionary.isCommonSkipOtherCnt(otherName, locale, object) && 
+					if (!rules.isCommonSkipOtherCnt(otherName, object) && 
 						 !isWordCommonlyUsed(indx, otherName)) { // To choose Tour eiffel or onlyWest / North !
 						other++;
 					}
@@ -1040,7 +1052,7 @@ public class SpatialSearchContext {
 		// the query word only names this object's category ('hotel' in 'Hotel Sacher') and every other query word is already
 		// explained by the category: the category atom finds the object without the unmatched name words
 		if (other > 0 && nameFound == 0 && (otherTokens == null ? 0 : otherTokens.size()) == allTokens.size() - 1
-				&& poiTypes != null && t.matchPoiCategoryKeys(poiTypes) && (split == null || t.matchName(split.get(0), null, locale, object))) {
+				&& poiTypes != null && t.matchPoiCategoryKeys(poiTypes) && (split == null || t.matchName(split.get(0), null, rules, object))) {
 			return;
 		}
 		int otherFound = otherTokens == null ? 0 : otherTokens.size();
@@ -1056,7 +1068,7 @@ public class SpatialSearchContext {
 		}
 		NameIndexAtom atom = new NameIndexAtom(name, type, lid, pid, obj, streetCity, other, otherFound, coords,
 				nearByType, -1);
-		atom.locale = locale;
+		atom.rules = rules;
 		atom.distinctFoundCnt = distinct;
 		atom.poiTypes = poiTypes;
 		atom.elo = elo;
@@ -1169,12 +1181,12 @@ public class SpatialSearchContext {
 		for (SpatialSearchToken token : allTokens) {
 			// assign building to word token isNumber2Letters (number + 1 char) + possible
 			if (t != token && (otherTokens == null || !otherTokens.contains(token))) {
-				if ((street && token.likelyPartOfBuilding(atom.locale)) || (poi && token.likelyRef())) {
+				if ((street && token.likelyPartOfBuilding(atom.rules)) || (poi && token.likelyRef())) {
 					NameIndexAtom atomB = new NameIndexAtom(atom.name, typeToAdd, atom.id,
 							atom.parentid, atom.object, atom.cityAsStreet, atom.otherWordsCnt, atom.otherFoundCnt,
 							atom.coords, atom.nearbyRadius, t.originalOrder);
 					atomB.distinctFoundCnt = atom.distinctFoundCnt; // the house number names no street
-					atomB.locale = atom.locale;
+					atomB.rules = atom.rules;
 					token.addAtom(atomB);
 				}
 

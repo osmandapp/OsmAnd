@@ -5,103 +5,105 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class SearchLocalesTest {
+	private final SearchRules searchRules = new SearchRules();
+	private final SearchLocales locales = searchRules.locales();
 
 	@Test
 	public void mapLocaleIsLanguageAndCountryOfTheData() {
-		assertEquals("en_US", SearchLocales.forMap("Us_new-york_new-york-city_northamerica_2.obf"));
-		assertEquals("en_GB", SearchLocales.forMap("Gb_england_london_europe"));
-		assertEquals("de_CH", SearchLocales.forMap("Switzerland_zurich_europe"));
-		assertEquals("it_CH", SearchLocales.forMap("Switzerland_ticino_europe"));
-		assertEquals("fr_CH", SearchLocales.forMap("switzerland_lake-geneva_europe"));
-		assertEquals("nl_BE", SearchLocales.forMap("Belgium_flanders_europe"));
-		assertEquals("fr_CA", SearchLocales.forMap("Canada_quebec_northamerica"));
-		assertEquals("en_CA", SearchLocales.forMap("Canada_ontario_northamerica"));
+		assertEquals("en_US", locales.forMap("Us_new-york_new-york-city_northamerica_2.obf"));
+		assertEquals("en_GB", locales.forMap("Gb_england_london_europe"));
+		assertEquals("de_CH", locales.forMap("Switzerland_zurich_europe"));
+		assertEquals("it_CH", locales.forMap("Switzerland_ticino_europe"));
+		assertEquals("fr_CH", locales.forMap("switzerland_lake-geneva_europe"));
+		assertEquals("nl_BE", locales.forMap("Belgium_flanders_europe"));
+		assertEquals("fr_CA", locales.forMap("Canada_quebec_northamerica"));
+		assertEquals("en_CA", locales.forMap("Canada_ontario_northamerica"));
 		// a group of CommonWordsMultiIndex ("esl", "nor") is not a language
-		assertEquals("ru_RU", SearchLocales.forMap("Russia_moscow_asia"));
-		assertEquals("nb_NO", SearchLocales.forMap("Norway_europe"));
-		assertEquals("ka_GE", SearchLocales.forMap("Georgia_asia"));
-		assertEquals("en_US", SearchLocales.forMap("Us_georgia_northamerica"));
-		assertEquals("en_PG", SearchLocales.forMap("Papua-new-guinea_oceania"));
-		assertEquals("fr_GN", SearchLocales.forMap("Guinea_africa"));
-		assertEquals("", SearchLocales.forMap("World_basemap"));
-		assertEquals("", SearchLocales.forMap("usa"));
-		assertEquals("", SearchLocales.forMap(null));
+		assertEquals("ru_RU", locales.forMap("Russia_moscow_asia"));
+		assertEquals("nb_NO", locales.forMap("Norway_europe"));
+		assertEquals("ka_GE", locales.forMap("Georgia_asia"));
+		assertEquals("en_US", locales.forMap("Us_georgia_northamerica"));
+		assertEquals("en_PG", locales.forMap("Papua-new-guinea_oceania"));
+		assertEquals("fr_GN", locales.forMap("Guinea_africa"));
+		assertEquals("", locales.forMap("World_basemap"));
+		assertEquals("", locales.forMap("usa"));
+		assertEquals("", locales.forMap(null));
 	}
 
 	@Test
 	public void groupAndTranslitComeFromTheSameTable() {
-		assertEquals("esl", SearchLocales.groupForMap("Russia_moscow_asia_2.obf"));
-		assertEquals("de", SearchLocales.groupForMap("Switzerland_zurich_europe"));
-		assertEquals("it", SearchLocales.groupForMap("Switzerland_ticino_europe"));
-		assertEquals("mag", SearchLocales.groupForMap("Morocco_africa"));
-		assertEquals("oth", SearchLocales.groupForMap("Antarctica"));
-		assertNull(SearchLocales.groupForMap("World_basemap"));
-		assertEquals("ja", SearchLocales.translitForMap("Japan_kanto_asia"));
-		assertEquals("zh", SearchLocales.translitForMap("China_asia"));
-		assertNull(SearchLocales.translitForMap("Taiwan_asia"));
+		assertEquals("esl", locales.groupForMap("Russia_moscow_asia_2.obf"));
+		assertEquals("de", locales.groupForMap("Switzerland_zurich_europe"));
+		assertEquals("it", locales.groupForMap("Switzerland_ticino_europe"));
+		assertEquals("mag", locales.groupForMap("Morocco_africa"));
+		assertEquals("oth", locales.groupForMap("Antarctica"));
+		assertNull(locales.groupForMap("World_basemap"));
+		assertEquals("ja", locales.translitForMap("Japan_kanto_asia"));
+		assertEquals("zh", locales.translitForMap("China_asia"));
+		assertNull(locales.translitForMap("Taiwan_asia"));
 	}
 
 	@Test
 	public void mapPrefixKeepsSubregionWithItsOwnLocale() {
-		assertEquals("Switzerland_ticino", SearchLocales.mapPrefix("Switzerland_ticino_europe_2.obf"));
-		assertEquals("Belgium_flanders", SearchLocales.mapPrefix("Belgium_flanders_europe_2.obf"));
-		assertEquals("Switzerland", SearchLocales.mapPrefix("Switzerland_zurich_europe_2.obf"));
-		assertEquals("Us", SearchLocales.mapPrefix("Us_new-york_northamerica_2.obf"));
-		assertNull(SearchLocales.mapPrefix("World_basemap_2.obf"));
-		assertNull(SearchLocales.mapPrefix(null));
+		assertEquals("Switzerland_ticino", locales.mapPrefix("Switzerland_ticino_europe_2.obf"));
+		assertEquals("Belgium_flanders", locales.mapPrefix("Belgium_flanders_europe_2.obf"));
+		assertEquals("Switzerland", locales.mapPrefix("Switzerland_zurich_europe_2.obf"));
+		assertEquals("Us", locales.mapPrefix("Us_new-york_northamerica_2.obf"));
+		assertNull(locales.mapPrefix("World_basemap_2.obf"));
+		assertNull(locales.mapPrefix(null));
 		// the region name written by BinaryMerger keeps the locale of the source map
-		assertEquals("it_CH", SearchLocales.forMap(SearchLocales.mapPrefix("Switzerland_ticino_europe_2.obf")));
-		assertEquals("nl_BE", SearchLocales.forMap(SearchLocales.mapPrefix("Belgium_flanders_europe_2.obf")));
+		assertEquals("it_CH", locales.forMap(locales.mapPrefix("Switzerland_ticino_europe_2.obf")));
+		assertEquals("nl_BE", locales.forMap(locales.mapPrefix("Belgium_flanders_europe_2.obf")));
 	}
 
 	@Test
 	public void nameLocaleFollowsTheTagAndTheCountryOfTheMap() {
-		assertEquals("it_IT", SearchLocales.forName(null, "it_IT"));
-		assertEquals("it_IT", SearchLocales.forName("alt_name", "it_IT"));
-		assertEquals("it_IT", SearchLocales.forName("official_name", "it_IT"));
-		assertEquals("it_IT", SearchLocales.forName("name:it", "it_IT"));
-		assertEquals("de_IT", SearchLocales.forName("name:de", "it_IT"));
-		assertEquals("de_IT", SearchLocales.forName("de", "it_IT"));
-		assertEquals("hr_IT", SearchLocales.forName("old_name:hr", "it_IT"));
-		assertEquals("zh_US", SearchLocales.forName("name:zh-Hant", "en_US"));
-		assertEquals("en", SearchLocales.forName("en", ""));
-		assertEquals("", SearchLocales.forName("int_name", "de_DE"));
-		assertEquals("de_DE", SearchLocales.forName("name:etymology", "de_DE"));
+		assertEquals("it_IT", locales.forName(null, "it_IT"));
+		assertEquals("it_IT", locales.forName("alt_name", "it_IT"));
+		assertEquals("it_IT", locales.forName("official_name", "it_IT"));
+		assertEquals("it_IT", locales.forName("name:it", "it_IT"));
+		assertEquals("de_IT", locales.forName("name:de", "it_IT"));
+		assertEquals("de_IT", locales.forName("de", "it_IT"));
+		assertEquals("hr_IT", locales.forName("old_name:hr", "it_IT"));
+		assertEquals("zh_US", locales.forName("name:zh-Hant", "en_US"));
+		assertEquals("en", locales.forName("en", ""));
+		assertEquals("", locales.forName("int_name", "de_DE"));
+		assertEquals("de_DE", locales.forName("name:etymology", "de_DE"));
 	}
 
 	@Test
 	public void malformedLocaleFallsBackToBaseRules() {
-		assertEquals("", SearchLocales.normalize("b+hsb"));
-		assertEquals("", SearchLocales.normalize("esl1"));
-		assertEquals("", SearchLocales.normalize(null));
-		assertEquals("en_US", SearchLocales.normalize("en-us"));
-		assertEquals("zh_Hant_TW", SearchLocales.normalize("zh-hant-tw"));
-		assertEquals("US", SearchLocales.country("en_US"));
-		assertEquals("TW", SearchLocales.country("zh_Hant_TW"));
-		assertEquals("", SearchLocales.country("en"));
-		assertFalse(SearchRulesDictionary.isIgnorable("and", "b+hsb"));
-		assertTrue(SearchRulesDictionary.isIgnorable("and", "EN-us"));
-		assertNotNull(SearchVariantRules.forLocale("not a locale"));
+		assertEquals("", locales.normalize("b+hsb"));
+		assertEquals("", locales.normalize("esl1"));
+		assertEquals("", locales.normalize(null));
+		assertEquals("en_US", locales.normalize("en-us"));
+		assertEquals("zh_Hant_TW", locales.normalize("zh-hant-tw"));
+		assertEquals("US", locales.country("en_US"));
+		assertEquals("TW", locales.country("zh_Hant_TW"));
+		assertEquals("", locales.country("en"));
+		assertFalse(searchRules.dictionary("b+hsb").isIgnorable("and"));
+		assertTrue(searchRules.dictionary("EN-us").isIgnorable("and"));
+		assertNotNull(searchRules.rules("not a locale"));
 	}
 
 	@Test
 	public void buildingSuffixBelongsToItsLanguages() {
 		// "12ter" is a French or Italian house number; "Oak Ter" is Oak Terrace in English
-		assertFalse(SearchRulesDictionary.likelyPartOfBuilding("ter", null, ""));
-		assertTrue(SearchRulesDictionary.likelyPartOfBuilding("ter", null, "fr_FR"));
-		assertTrue(SearchRulesDictionary.likelyPartOfBuilding("ter", null, "it_IT"));
-		assertFalse(SearchRulesDictionary.likelyPartOfBuilding("ter", null, "en_US"));
-		assertFalse(SearchRulesDictionary.likelyPartOfBuilding("quater", null, "en_GB"));
-		assertTrue(SearchRulesDictionary.likelyPartOfBuilding("bis", null, "es_ES"));
-		assertFalse(SearchRulesDictionary.likelyPartOfBuilding("bis", null, "en_US"));
-		assertTrue(SearchRulesDictionary.likelyPartOfBuilding("apt", null, "en_US"));
-		assertFalse(SearchRulesDictionary.likelyPartOfBuilding("apt", null, "de_DE"));
+		assertFalse(searchRules.dictionary("").isBuildingWord("ter"));
+		assertTrue(searchRules.dictionary("fr_FR").isBuildingWord("ter"));
+		assertTrue(searchRules.dictionary("it_IT").isBuildingWord("ter"));
+		assertFalse(searchRules.dictionary("en_US").isBuildingWord("ter"));
+		assertFalse(searchRules.dictionary("en_GB").isBuildingWord("quater"));
+		assertTrue(searchRules.dictionary("es_ES").isBuildingWord("bis"));
+		assertFalse(searchRules.dictionary("en_US").isBuildingWord("bis"));
+		assertTrue(searchRules.dictionary("en_US").isBuildingWord("apt"));
+		assertFalse(searchRules.dictionary("de_DE").isBuildingWord("apt"));
 	}
 
 	@Test
 	public void dictionariesAreReadOnlyAndOverriddenExplicitly() {
 		try {
-			SearchVariantRules.forLocale("en_US").skipPenalty().put("st", java.util.List.of("street"));
+			searchRules.rules("en_US").skipPenalty().put("st", java.util.List.of("street"));
 			fail("dictionary must be read-only");
 		} catch (UnsupportedOperationException expected) {
 			// ok
