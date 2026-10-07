@@ -254,9 +254,12 @@ public class SpatialSearchRanking {
 		double best = NAME_OTHER;
 		if (atom.object != null) {
 			best = Math.max(best, compareToName(atom.object.getName(), queried));
-			// alternative names cost a map per result: worth it only for a rated object
-			Map<String, String> names = best == NAME_EXACT || atom.elo <= 0 ? null
-					: atom.object.getNamesMap(true);
+			// alternative names cost a map per result: worth it only for a rated object. The rating of the atom is the
+			// rating of its map (a basemap raises it), the travel rating is the object's own: the atom of a regular map
+			// can head the result of a rated object ("о. Пасхи" of Isla de Pascua, elo 0 in World, 1824 travel)
+			boolean rated = atom.elo > 0
+					|| atom.object instanceof Amenity a && a.getTravelEloNumber() > Amenity.DEFAULT_ELO;
+			Map<String, String> names = best == NAME_EXACT || !rated ? null : atom.object.getNamesMap(true);
 			if (names != null) {
 				for (String n : names.values()) {
 					best = Math.max(best, compareToName(n, queried));
