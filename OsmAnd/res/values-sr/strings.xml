@@ -5421,4 +5421,7 @@
     <string name="city_type_boundary">Кварт</string>
     <string name="trip_rec_start_from_notification">Покрени из обавештења</string>
     <string name="trip_rec_start_from_notification_descr">Приказује обавештење са дугметом за покретање снимања путовања. Током снимања, обавештење је увек приказано.</string>
+    <string name="multimedia_notes_view_descr">Ваше А/В белешке су у %1$s.</string>
+    <string name="shared_string_file">Фајл</string>
+    <string name="shared_string_format">Формат</string>
 </resources>
