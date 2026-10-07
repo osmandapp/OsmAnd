@@ -89,46 +89,10 @@ public class SpatialSearchToken {
 	/** a bare number whose value another query word already carries: '28' next to '28-ма' */
 	boolean numberNamedByOther;
 	final SearchModRules globalRules;
-	// the word by the rules of the locale of every map it is matched with ("" - base rules)
+	// the word by the rules of the locale of every map it is matched with
 	Map<String, LocaleRules> localeRules = new LinkedHashMap<>();
-
-	private record QueryMatcher(QueryForm form, CollatorStringMatcher matcher) {
-	}
-
-	class LocaleRules {
-		// forms for every owner of a name
-		CollatorStringMatcher[] otherMatch;
-		// forms for some owners only ("pl" -> "Place" of a street)
-		List<QueryMatcher> scopedMatch = new ArrayList<>();
-		// all forms: a key of a name index has no owner
-		CollatorStringMatcher[] prefixMatch;
-		Map<String, Boolean> fastMatchCheck = new HashMap<String, Boolean>();
-		Map<String, Boolean> fastPrefMatchCheck = new HashMap<String, Boolean>();
-
-		final boolean partOfBuilding;
-
-		LocaleRules(String locale) {
-			List<CollatorStringMatcher> other = new ArrayList<>();
-			List<CollatorStringMatcher> prefix = new ArrayList<>();
-			partOfBuilding = globalRules.dictionary(locale).likelyPartOfBuilding(word, bldWordSplit);
-			for (QueryForm form : globalRules.dictionary(locale).getQueryForms(wordNoDot)) {
-				CollatorStringMatcher m = new CollatorStringMatcher(form.word(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
-				if (form.isUnscoped()) {
-					other.add(m);
-				} else {
-					scopedMatch.add(new QueryMatcher(form, m));
-				}
-				prefix.add(m);
-			}
-			otherMatch = other.isEmpty() ? null : other.toArray(new CollatorStringMatcher[0]);
-			prefixMatch = prefix.isEmpty() ? null : prefix.toArray(new CollatorStringMatcher[0]);
-		}
-	}
-
-	LocaleRules localeRules(String locale) {
-		return localeRules.computeIfAbsent(locale, LocaleRules::new);
-	}
-	
+	// the word without the rules of a map: POI categories, a word not matched with a map yet
+	final LocaleRules noRules;
 	boolean categoryMatchMode = false;
 	TLongHashSet cacheCategoryFilterObjects = new TLongHashSet();
 	
@@ -165,6 +129,49 @@ public class SpatialSearchToken {
 			// PA-21
 			noHyphenCollatorMain = new CollatorStringMatcher(wordAligned.replace("-", ""), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 		}
+		noRules = new LocaleRules("");
+	}
+
+	private record QueryMatcher(QueryForm form, CollatorStringMatcher matcher) {
+	}
+
+	class LocaleRules {
+		// forms for every owner of a name
+		CollatorStringMatcher[] otherMatch;
+		// forms for some owners only ("pl" -> "Place" of a street)
+		List<QueryMatcher> scopedMatch = new ArrayList<>();
+		// all forms: a key of a name index has no owner
+		CollatorStringMatcher[] prefixMatch;
+		Map<String, Boolean> fastMatchCheck = new HashMap<String, Boolean>();
+		Map<String, Boolean> fastPrefMatchCheck = new HashMap<String, Boolean>();
+
+		final boolean partOfBuilding;
+
+		LocaleRules(String locale) {
+			List<CollatorStringMatcher> other = new ArrayList<>();
+			List<CollatorStringMatcher> prefix = new ArrayList<>();
+			partOfBuilding = globalRules.dictionary(locale).likelyPartOfBuilding(word, bldWordSplit);
+			for (QueryForm form : globalRules.dictionary(locale).getQueryForms(wordNoDot)) {
+				CollatorStringMatcher m = new CollatorStringMatcher(form.word(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+				if (form.isUnscoped()) {
+					other.add(m);
+				} else {
+					scopedMatch.add(new QueryMatcher(form, m));
+				}
+				prefix.add(m);
+			}
+			otherMatch = other.isEmpty() ? null : other.toArray(new CollatorStringMatcher[0]);
+			prefixMatch = prefix.isEmpty() ? null : prefix.toArray(new CollatorStringMatcher[0]);
+		}
+	}
+
+	LocaleRules localeRules(String locale) {
+		LocaleRules lr = localeRules.get(locale);
+		if (lr == null) {
+			lr = new LocaleRules(locale);
+			localeRules.put(locale, lr);
+		}
+		return lr;
 	}
 	
 	public int getMainNumber() {
@@ -174,7 +181,7 @@ public class SpatialSearchToken {
 	/** not tied to one map (a POI category next to the word): building-like in a locale of any map matched */
 	public boolean likelyPartOfBuilding() {
 		if (localeRules.isEmpty()) {
-			return likelyPartOfBuilding("");
+			return noRules.partOfBuilding;
 		}
 		for (LocaleRules lr : localeRules.values()) {
 			if (lr.partOfBuilding) {
@@ -208,12 +215,15 @@ public class SpatialSearchToken {
 	
 	
 	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats) {
-		return getPrefixMatcher(stats, "");
+		return getPrefixMatcher(stats, noRules);
 	}
 
 	/** @param locale rules locale of the map whose name index is read */
 	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String locale) {
-		LocaleRules lf = localeRules(locale);
+		return getPrefixMatcher(stats, localeRules(locale));
+	}
+
+	private NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, LocaleRules lf) {
 		return new NameIndexReaderMatcher(broad ? wordNoDot : word) {
 			
 			@Override

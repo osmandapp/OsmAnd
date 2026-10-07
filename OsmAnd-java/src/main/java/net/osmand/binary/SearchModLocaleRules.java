@@ -2,13 +2,10 @@ package net.osmand.binary;
 
 import net.osmand.binary.SearchModRules.SearchModRuleOwner;
 
-import net.osmand.PlatformUtil;
 import net.osmand.util.SearchAlgorithms;
-import org.xmlpull.v1.XmlPullParser;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.EnumSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -273,28 +270,34 @@ public final class SearchModLocaleRules {
 	public interface Scoped {
 		String object();
 
-		/** @return true when it applies to the owner of a name */
-		default boolean appliesTo(SearchModRuleOwner owner) {
-			return appliesTo(owner.tag);
+		/** @return the owners of {@link #object()}; a part checked per name keeps them, see {@link Rule} */
+		default Set<SearchModRuleOwner> owners() {
+			return parseOwners();
 		}
 
-		private boolean appliesTo(String owner) {
+		default Set<SearchModRuleOwner> parseOwners() {
+			EnumSet<SearchModRuleOwner> owners = EnumSet.noneOf(SearchModRuleOwner.class);
 			for (String type : object().split(",")) {
 				String t = type.trim();
-				if (t.equals(owner) || t.equals(ANY_OBJECT)) {
-					return true;
+				for (SearchModRuleOwner o : SearchModRuleOwner.values()) {
+					if (t.equals(ANY_OBJECT) || t.equals(o.tag)) {
+						owners.add(o);
+					}
 				}
 			}
-			return false;
+			return owners;
+		}
+
+		/** @return true when it applies to the owner of a name */
+		default boolean appliesTo(SearchModRuleOwner owner) {
+			return owners().contains(owner);
 		}
 
 		/** @return true when both apply to some owner */
 		default boolean overlaps(Scoped other) {
-			if (object().equals(ANY_OBJECT) || other.object().equals(ANY_OBJECT)) {
-				return true;
-			}
-			for (String type : object().split(",")) {
-				if (other.appliesTo(type.trim())) {
+			Set<SearchModRuleOwner> owners = owners();
+			for (SearchModRuleOwner o : other.owners()) {
+				if (owners.contains(o)) {
 					return true;
 				}
 			}
@@ -407,6 +410,8 @@ public final class SearchModLocaleRules {
 		static final String KEYS_ALWAYS = "always";
 
 		public final String object;
+		// parsed object: an index rule is checked for every name of the map
+		private final Set<SearchModRuleOwner> owners;
 		private final boolean all;
 		private final boolean alwaysKeys;
 		private final Pattern from;
@@ -424,6 +429,7 @@ public final class SearchModLocaleRules {
 		private Rule(String object, String from, String to, String mode, boolean alwaysKeys, boolean enabled,
 				String file, String idFrom) {
 			this.object = object;
+			this.owners = parseOwners();
 			this.file = file;
 			this.idFrom = idFrom;
 			this.all = "All".equals(mode);
@@ -474,6 +480,11 @@ public final class SearchModLocaleRules {
 		@Override
 		public String object() {
 			return object;
+		}
+
+		@Override
+		public Set<SearchModRuleOwner> owners() {
+			return owners;
 		}
 
 		/** Returns null when the expression does not apply or does not change the text. */

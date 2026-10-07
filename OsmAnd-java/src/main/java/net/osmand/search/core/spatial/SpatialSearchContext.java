@@ -269,6 +269,7 @@ public class SpatialSearchContext {
 			}
 			t.broad = bytes > settings.LIMIT_INCOMPLETE_BYTES;
 			t.localeRules.clear();
+			t.noRules.fastPrefMatchCheck.clear();
 		}
 	}
 

@@ -6,6 +6,7 @@ import net.osmand.binary.SearchModLocaleRules.Scoped;
 import net.osmand.util.SearchAlgorithms;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -20,8 +21,6 @@ import java.util.TreeSet;
  */
 public final class SearchModDictionary {
 
-	private static final List<Scoped> EVERY_OWNER = List.of(new Scope(SearchModLocaleRules.ANY_OBJECT));
-
 	private final String locale;
 	// query word -> its forms and reverse forms, in the order of the rules
 	private final Map<String, List<QueryForm>> forms = new HashMap<>();
@@ -29,7 +28,7 @@ public final class SearchModDictionary {
 	// aligned ignorable words (to="")
 	private final Set<String> ignorables;
 	// aligned word of a name -> owners whose names it does not penalize (<skipPenalty>, ignorable words, <class1/2>)
-	private final Map<String, List<Scoped>> penaltyFree;
+	private final Map<String, Set<SearchModRuleOwner>> penaltyFree;
 
 	SearchModDictionary(String locale, SearchModLocaleRules rules) {
 		this.locale = locale;
@@ -42,7 +41,7 @@ public final class SearchModDictionary {
 			for (SearchModLocaleRules.Form form : rules.forms(word)) {
 				// a reverse form leads to the word of a rule that has this word as its form ("street" -> "st")
 				SearchModLocaleRules.WordRule other = ruleOfWord.get(form.word());
-				list.add(new QueryForm(form.object(), form.word(), other != null && other.hasForm(word)));
+				list.add(new QueryForm(form.object(), form.word(), other != null && other.hasForm(word), form.parseOwners()));
 			}
 			// a token is aligned (ß -> ss, no diacritics): "Straße" asks for "strasse"
 			forms.put(SearchAlgorithms.alignChars(word), list);
@@ -63,13 +62,13 @@ public final class SearchModDictionary {
 				owners.computeIfAbsent(e.getKey(), k -> new LinkedHashSet<>()).add(SearchModLocaleRules.ANY_OBJECT);
 			}
 		}
-		Map<String, List<Scoped>> penaltyFree = new HashMap<>();
+		Map<String, Set<SearchModRuleOwner>> penaltyFree = new HashMap<>();
 		owners.forEach((word, set) -> {
-			List<Scoped> scopes = new ArrayList<>();
+			EnumSet<SearchModRuleOwner> wordOwners = EnumSet.noneOf(SearchModRuleOwner.class);
 			for (String object : set) {
-				scopes.add(new Scope(object));
+				wordOwners.addAll(new Scope(object).parseOwners());
 			}
-			penaltyFree.put(word, set.contains(SearchModLocaleRules.ANY_OBJECT) ? EVERY_OWNER : scopes);
+			penaltyFree.put(word, wordOwners);
 		});
 		this.buildingWords = rules.buildings();
 		this.ignorables = ignorables;
@@ -85,7 +84,8 @@ public final class SearchModDictionary {
 	 * A form of a query word: the word of a name it stands for and the owners of names it applies to; a reverse form
 	 * leads from a full word to its abbreviation ("street" -> "st").
 	 */
-	public record QueryForm(String object, String word, boolean reverse) implements Scoped {
+	public record QueryForm(String object, String word, boolean reverse, Set<SearchModRuleOwner> owners)
+			implements Scoped {
 		/** true when the form applies to every owner of a name */
 		public boolean isUnscoped() {
 			return SearchModLocaleRules.ANY_OBJECT.equals(object);
@@ -121,16 +121,8 @@ public final class SearchModDictionary {
 	 * @param owner owner of the name: street, locality, boundary, postcode, poi
 	 */
 	public boolean isCommonSkipOtherCnt(String lowerCase, SearchModRuleOwner owner) {
-		List<Scoped> scopes = penaltyFree.get(aligned(lowerCase));
-		if (scopes == null) {
-			return false;
-		}
-		for (Scoped scope : scopes) {
-			if (scope.appliesTo(owner)) {
-				return true;
-			}
-		}
-		return false;
+		Set<SearchModRuleOwner> owners = penaltyFree.get(aligned(lowerCase));
+		return owners != null && owners.contains(owner);
 	}
 
 	/**
