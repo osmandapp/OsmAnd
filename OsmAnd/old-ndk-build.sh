@@ -18,5 +18,10 @@ if [ ! -d "$ANDROID_NDK_ROOT" ]; then
 	exit
 fi
 export BUILD_ONLY_OLD_LIB=1
-"$SCRIPT_LOC/../../core-legacy/externals/configure.sh"
-(cd "$SCRIPT_LOC" && "$ANDROID_NDK_ROOT/ndk-build" -j2)
+# Only the externals the legacy Android core links; gdal, proj and sqlite are desktop-only and need the build repo
+for external in protobuf skia; do
+	"$SCRIPT_LOC/../../core-legacy/externals/$external/configure.sh"
+done
+# NDK_PROJECT_PATH=null: ndk-build must not read AndroidManifest.xml, minSdkVersion lives in Gradle
+(cd "$SCRIPT_LOC" && "$ANDROID_NDK_ROOT/ndk-build" -j2 NDK_PROJECT_PATH=null APP_BUILD_SCRIPT=jni/Android.mk \
+	NDK_APPLICATION_MK=jni/Application.mk NDK_OUT=obj NDK_LIBS_OUT=libs)
