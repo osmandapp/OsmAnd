@@ -214,29 +214,37 @@ public class SpatialSearchRanking {
 			// matched through the poi category key: "farm" -> Podere Colombaio
 			return NAME_KIND_ONLY;
 		}
-		String queried = queriedWords(ref);
+		String queried = queriedWords(ref, false);
 		if (queried.isEmpty()) {
 			return NAME_OTHER;
 		}
+		// the dot that marks the last word incomplete while typing is not a part of the name: "main." is
+		// "... Main"; a dot of the name itself ("о. Пасхи", "2. Sokak") is kept by the first form
+		String noDot = queriedWords(ref, true);
 		// any language the object carries, not only the default one: pref-0125
 		double best = NAME_OTHER;
 		if (atom.object != null) {
-			best = Math.max(best, compareToName(atom.object.getName(), queried));
+			best = Math.max(best, compareToName(atom.object.getName(), queried, noDot));
 			// alternative names cost a map per result: worth it only for a rated object
 			Map<String, String> names = best == NAME_EXACT || atom.elo <= 0 ? null
 					: atom.object.getNamesMap(true);
 			if (names != null) {
 				for (String n : names.values()) {
-					best = Math.max(best, compareToName(n, queried));
+					best = Math.max(best, compareToName(n, queried, noDot));
 					if (best == NAME_EXACT) {
 						return NAME_EXACT;
 					}
 				}
 			}
 		} else {
-			best = Math.max(best, compareToName(atom.name, queried));
+			best = Math.max(best, compareToName(atom.name, queried, noDot));
 		}
 		return best;
+	}
+
+	private double compareToName(String rawName, String queried, String noDot) {
+		double res = compareToName(rawName, queried);
+		return res == NAME_EXACT || noDot.equals(queried) ? res : Math.max(res, compareToName(rawName, noDot));
 	}
 
 	private double compareToName(String rawName, String queried) {
@@ -388,18 +396,21 @@ public class SpatialSearchRanking {
 		return o instanceof Amenity a && !Algorithms.isEmpty(a.getAdditionalInfo(Amenity.WIKIDATA));
 	}
 
-	private String queriedWords(SpatialSearchResultRef ref) {
+	private String queriedWords(SpatialSearchResultRef ref, boolean dropIncompleteDot) {
 		List<SpatialSearchToken> tokens = ref.tokens;
 		if (tokens == null || tokens.isEmpty()) {
 			return "";
 		}
 		StringBuilder sb = new StringBuilder();
 		for (SpatialSearchToken t : tokens) {
-			if (t.word != null && !t.word.isEmpty()) {
+			String w = dropIncompleteDot && t.incomplete && t.word != null
+					&& t.word.endsWith(SpatialSearchToken.DOT_INCOMPLETE_STRING)
+					? t.word.substring(0, t.word.length() - 1) : t.word;
+			if (w != null && !w.isEmpty()) {
 				if (sb.length() > 0) {
 					sb.append(' ');
 				}
-				sb.append(t.word);
+				sb.append(w);
 			}
 		}
 		return normalizeName(sb.toString());
