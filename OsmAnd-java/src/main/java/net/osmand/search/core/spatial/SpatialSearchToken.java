@@ -16,7 +16,7 @@ import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.binary.Abbreviations;
+import net.osmand.binary.SearchRulesDictionary;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.RuleOwner;
@@ -91,7 +91,7 @@ public class SpatialSearchToken {
 	private final Set<String> readLocales = new LinkedHashSet<>();
 	private final Map<String, LocaleMatch> localeMatches = new HashMap<>();
 
-	private record QueryMatcher(Abbreviations.QueryForm form, CollatorStringMatcher matcher) {
+	private record QueryMatcher(SearchRulesDictionary.QueryForm form, CollatorStringMatcher matcher) {
 	}
 
 	/** How a token matches a real name of an object (rules-spec.md, 5.5): checked after the objects are loaded. */
@@ -113,7 +113,7 @@ public class SpatialSearchToken {
 		// forms of the token for every owner of a name: matched by name only, so the result is cached
 		final CollatorStringMatcher[] otherMatch;
 		// the forms of otherMatch, in its order
-		final Abbreviations.QueryForm[] otherForms;
+		final SearchRulesDictionary.QueryForm[] otherForms;
 		// forms of the token for some owners of a name only (street, locality...)
 		final List<QueryMatcher> queryMatchers = new ArrayList<>();
 		final Map<String, Boolean> fastMatchCheck = new HashMap<>();
@@ -121,8 +121,8 @@ public class SpatialSearchToken {
 
 		LocaleMatch(String locale) {
 			List<CollatorStringMatcher> unscoped = new ArrayList<>();
-			List<Abbreviations.QueryForm> unscopedForms = new ArrayList<>();
-			for (Abbreviations.QueryForm form : Abbreviations.getQueryForms(wordNoDot, locale)) {
+			List<SearchRulesDictionary.QueryForm> unscopedForms = new ArrayList<>();
+			for (SearchRulesDictionary.QueryForm form : SearchRulesDictionary.getQueryForms(wordNoDot, locale)) {
 				CollatorStringMatcher matcher = new CollatorStringMatcher(form.word(),
 						StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 				if (form.isUnscoped()) {
@@ -133,7 +133,7 @@ public class SpatialSearchToken {
 				}
 			}
 			otherMatch = unscoped.toArray(new CollatorStringMatcher[0]);
-			otherForms = unscopedForms.toArray(new Abbreviations.QueryForm[0]);
+			otherForms = unscopedForms.toArray(new SearchRulesDictionary.QueryForm[0]);
 		}
 	}
 	
@@ -207,11 +207,11 @@ public class SpatialSearchToken {
 
 	/** @param locale rules locale of the map whose atom the word is assigned to */
 	public boolean likelyPartOfBuilding(String locale) {
-		return Abbreviations.likelyPartOfBuilding(word, bldWordSplit, locale);
+		return SearchRulesDictionary.likelyPartOfBuilding(word, bldWordSplit, locale);
 	}
 	
 	public boolean likelyRef() {
-		return Abbreviations.likelyPartOfRef(word, bldWordSplit);
+		return SearchRulesDictionary.likelyPartOfRef(word, bldWordSplit);
 	}
 
 	public CollatorStringMatcher getMainCollator() {
@@ -253,7 +253,7 @@ public class SpatialSearchToken {
 		return getPrefixMatcher(stats, rulesLocale, true, poiIndex);
 	}
 
-	private static boolean appliesToIndex(Abbreviations.QueryForm form, Boolean poiIndex) {
+	private static boolean appliesToIndex(SearchRulesDictionary.QueryForm form, Boolean poiIndex) {
 		if (poiIndex == null) {
 			return true;
 		}

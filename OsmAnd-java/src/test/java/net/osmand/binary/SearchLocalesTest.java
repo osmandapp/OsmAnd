@@ -79,23 +79,23 @@ public class SearchLocalesTest {
 		assertEquals("US", SearchLocales.country("en_US"));
 		assertEquals("TW", SearchLocales.country("zh_Hant_TW"));
 		assertEquals("", SearchLocales.country("en"));
-		assertFalse(Abbreviations.isIgnorable("and", "b+hsb"));
-		assertTrue(Abbreviations.isIgnorable("and", "EN-us"));
+		assertFalse(SearchRulesDictionary.isIgnorable("and", "b+hsb"));
+		assertTrue(SearchRulesDictionary.isIgnorable("and", "EN-us"));
 		assertNotNull(SearchVariantRules.forLocale("not a locale"));
 	}
 
 	@Test
 	public void buildingSuffixBelongsToItsLanguages() {
 		// "12ter" is a French or Italian house number; "Oak Ter" is Oak Terrace in English
-		assertFalse(Abbreviations.likelyPartOfBuilding("ter", null, ""));
-		assertTrue(Abbreviations.likelyPartOfBuilding("ter", null, "fr_FR"));
-		assertTrue(Abbreviations.likelyPartOfBuilding("ter", null, "it_IT"));
-		assertFalse(Abbreviations.likelyPartOfBuilding("ter", null, "en_US"));
-		assertFalse(Abbreviations.likelyPartOfBuilding("quater", null, "en_GB"));
-		assertTrue(Abbreviations.likelyPartOfBuilding("bis", null, "es_ES"));
-		assertFalse(Abbreviations.likelyPartOfBuilding("bis", null, "en_US"));
-		assertTrue(Abbreviations.likelyPartOfBuilding("apt", null, "en_US"));
-		assertFalse(Abbreviations.likelyPartOfBuilding("apt", null, "de_DE"));
+		assertFalse(SearchRulesDictionary.likelyPartOfBuilding("ter", null, ""));
+		assertTrue(SearchRulesDictionary.likelyPartOfBuilding("ter", null, "fr_FR"));
+		assertTrue(SearchRulesDictionary.likelyPartOfBuilding("ter", null, "it_IT"));
+		assertFalse(SearchRulesDictionary.likelyPartOfBuilding("ter", null, "en_US"));
+		assertFalse(SearchRulesDictionary.likelyPartOfBuilding("quater", null, "en_GB"));
+		assertTrue(SearchRulesDictionary.likelyPartOfBuilding("bis", null, "es_ES"));
+		assertFalse(SearchRulesDictionary.likelyPartOfBuilding("bis", null, "en_US"));
+		assertTrue(SearchRulesDictionary.likelyPartOfBuilding("apt", null, "en_US"));
+		assertFalse(SearchRulesDictionary.likelyPartOfBuilding("apt", null, "de_DE"));
 	}
 
 	@Test
