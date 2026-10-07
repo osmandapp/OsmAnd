@@ -621,8 +621,8 @@ public class SpatialTextSearch {
 		// 2. read atoms & poi categories
 		ctx.stats.step1Atoms.start();
 		ctx.setTokens(res.tokens);
-		ctx.markBroadWords();
 		ctx.processPoiCategories();
+		ctx.markBroadWords();
 		ctx.readAtoms();
 		ctx.stats.step1Atoms.finish();
 

@@ -49,8 +49,7 @@ public class SpatialSearchToken {
 			NameIndexReader.POI_CATEGORY_PREFIX + MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX;
 
 	int MIN_CHAR_INCOMPLETE;
-	// a word still being typed that too many index atoms continue: matched as a whole word
-	boolean broad;
+	boolean broad; // a word still being typed with too many continuations: matched as a whole word
 	
 	int originalOrder = 0;
 	int sortedOrder = 0;
@@ -163,8 +162,8 @@ public class SpatialSearchToken {
 	}
 	
 	
-	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, boolean wholeWordKeys) {
-		return new NameIndexReaderMatcher(word) {
+	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats) {
+		return new NameIndexReaderMatcher(broad ? wordNoDot : word) {
 			
 			@Override
 			public boolean matchKey(String key) {
@@ -181,22 +180,15 @@ public class SpatialSearchToken {
 						}
 					}
 				}
-				// the cache holds prefix matches only
-				Boolean cache = wholeWordKeys ? null : fastPrefMatchCheck.get(key);
+				Boolean cache = fastPrefMatchCheck.get(key);
 				if (cache != null) {
 					stats.sub1PartMatchTime.finish();
 					return cache;
 				}
 				
 				String alignedKey = SearchAlgorithms.alignChars(key);
-				boolean matched;
-				if (wholeWordKeys) {
-					// the key of the whole word: 'sch', 'sch-', 's&ch' but not 'scha'
-					matched = alignedKey.replaceAll("[^\\p{L}\\p{N}]", "").equals(wordNoDot);
-				} else {
-					// could be empty after align so match = true! ("''" -> "")
-					matched = matchAlignedKey(alignedKey);
-				}
+				// could be empty after align so match = true! ("''" -> "")
+				boolean matched = matchAlignedKey(alignedKey);
 				if (!matched && mainNumber > 0) {
 					// 4th - key, "4" token
 					matched = Algorithms.extractFirstIntegerNumber(key) == mainNumber;
@@ -214,9 +206,7 @@ public class SpatialSearchToken {
 					// query 'pa 21' match 'pa21' key
 					matched = true;
 				}
-				if (!wholeWordKeys) {
-					fastPrefMatchCheck.put(key, matched);
-				}
+				fastPrefMatchCheck.put(key, matched);
 				stats.sub1PartMatchTime.finish();
 				return matched;
 			}
