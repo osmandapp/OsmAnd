@@ -40,7 +40,8 @@ public class SearchVariantRulesTest {
 		assertEquals(List.of("st"), forms("street", "en"));
 		assertEquals(List.of("st"), forms("saint", "en"));
 		assertEquals(List.of("dr"), forms("doctor", "en"));
-		assertEquals(List.of("av", "ave"), forms("avenue", "en"));
+		// "ave" is a mirror pair, written before the query rules
+		assertEquals(List.of("ave", "av"), forms("avenue", "en"));
 		assertEquals(List.of("1st"), forms("first", "en"));
 		assertEquals(List.of("о"), forms("остров", "ru_RU"));
 		// a token is aligned: the reverse form of a word with ß or a diacritic is found by its aligned spelling
@@ -91,8 +92,12 @@ public class SearchVariantRulesTest {
 		SearchVariantRules italian = SearchVariantRules.forLocale("it");
 		assertTrue(italian.index().stream().anyMatch(v -> "SS 42 del Tonale".equals(v.apply("Strada Statale 42 del Tonale"))));
 		assertTrue(italian.index().stream().anyMatch(v -> "SS42 del Tonale".equals(v.apply("Strada Statale 42 del Tonale"))));
-		// no English index rule: a pair of plain words belongs to the query
-		assertTrue(SearchVariantRules.forLocale("en").index().isEmpty());
+		// English index rules are only the alternative names of mirror pairs, both ways
+		List<SearchVariantRules.Rule> english = SearchVariantRules.forLocale("en").index();
+		assertFalse(english.isEmpty());
+		assertTrue(english.stream().allMatch(v -> v.id().from().contains("→")));
+		assertTrue(english.stream().anyMatch(v -> "2nd Avenue".equals(v.apply("Second Avenue"))));
+		assertTrue(english.stream().anyMatch(v -> "Second Avenue".equals(v.apply("2nd Avenue"))));
 		SearchVariantRules rules = of("<index><rule object=\"street,poi\" from=\"(?iu)\\bStrada\\s+(\\d+)\\b\" "
 				+ "to=\"S$1\"/></index>");
 		assertEquals("S42", rules.index().get(0).apply("Strada 42"));
@@ -174,7 +179,8 @@ public class SearchVariantRulesTest {
 
 	@Test
 	public void placeOfARule() {
-		expect("<rule from=\"st\" to=\"Street\"/>", "belongs to <index> or <query>");
+		// a rule directly under <rules> is a mirror pair (rules-spec.md, 3.4): a regexp is no pair of words
+		expect("<rule from=\"(?iu)\\bSt\\b\" to=\"Street\"/>", "a regexp belongs to <index>");
 		expect("<index><rule from=\"dr\" to=\"Drive\"/></index>", "plain word belongs to <query>");
 		expect("<query><rule from=\"(?iu)^Cr\\.?$\" to=\"Carrera\"/></query>", "needs a plain word");
 		expect("<query><rule from=\"st.\" to=\"Street\"/></query>", "needs a plain word");
@@ -410,6 +416,99 @@ public class SearchVariantRulesTest {
 		} catch (Exception expected) {
 			assertTrue(expected.getMessage(), expected.getMessage().contains("Unsupported search rules version"));
 		}
+	}
+
+	@Test
+	public void everyRulesFileLoads() {
+		// the layers of every locale with a file validate together: mirror pairs, query rules and index rules
+		for (String locale : List.of("bg_BG", "ca_ES", "de_DE", "en_US", "es_ES", "es_CO", "es_PE", "fr_FR", "it_IT",
+				"mk_MK", "nl_NL", "pt_PT", "ru_RU", "sr_RS", "uk_UA")) {
+			assertNotNull(locale, SearchVariantRules.forLocale(locale));
+		}
+		// a mirror pair of Colombia shares "Calle" with the pair of Spanish
+		assertEquals(List.of("street:c", "street:cl", "street:cll"), forms(SearchVariantRules.forLocale("es_CO"), "calle"));
+		assertTrue(SearchVariantRules.forLocale("ru_RU").index().stream()
+				.anyMatch(v -> "Остров Пасхи".equals(v.apply("о. Пасхи"))));
+	}
+
+	@Test
+	public void mirrorPairWorksOnBothSides() {
+		SearchVariantRules rules = of("<rule object=\"street\" from=\"blvd\" to=\"Boulevard\"/>"
+				+ "<rule from=\"dr\" to=\"Doktor\"/>");
+		// [run]: a form and its reverse form, as a rule of <query>
+		assertEquals(List.of("street:boulevard"), forms(rules, "blvd"));
+		assertEquals(List.of("street:blvd"), forms(rules, "boulevard"));
+		// [gen]: alternative names both ways, the dot of an abbreviation included, only whole words
+		List<SearchVariantRules.Rule> index = rules.index();
+		assertEquals(4, index.size());
+		SearchVariantRules.Rule abbreviation = index.get(0);
+		SearchVariantRules.Rule full = index.get(1);
+		assertEquals("test.xml street blvd→Boulevard", abbreviation.id().toString());
+		assertEquals("test.xml street Boulevard→blvd", full.id().toString());
+		assertEquals("Sunset Boulevard", abbreviation.apply("Sunset Blvd."));
+		assertEquals("Sunset Boulevard", abbreviation.apply("Sunset BLVD"));
+		assertEquals("Sunset blvd", full.apply("Sunset Boulevard"));
+		assertNull(full.apply("Boulevardier Cafe"));
+		assertTrue(abbreviation.appliesTo("street"));
+		assertFalse(abbreviation.appliesTo("poi"));
+		assertEquals("Doktor-Weber-Straße", index.get(2).apply("Dr.-Weber-Straße"));
+		assertEquals("Ludwig dr Allee", index.get(3).apply("Ludwig Doktor Allee"));
+		assertNull(index.get(3).apply("Doktorandenweg"));
+	}
+
+	@Test
+	public void mirrorPairsShareTheirFullWord() {
+		// several abbreviations of one word are synonyms: a chain through the full word stays in its meaning
+		SearchVariantRules rules = of("<rule object=\"street\" from=\"av\" to=\"Avenida\"/>"
+				+ "<rule object=\"street\" from=\"avda\" to=\"Avenida\"/>"
+				+ "<query><rule object=\"street\" from=\"ave\" to=\"Avenida\"/></query>");
+		assertEquals(List.of("street:av", "street:avda", "street:ave"), forms(rules, "avenida"));
+		assertEquals(4, rules.index().size());
+	}
+
+	@Test
+	public void mirrorPairLayers() {
+		String base = "<rule object=\"street\" from=\"blvd\" to=\"Boulevard\"/>";
+		// a lower layer replaces the pair by a rule of <query> of the same word: the alternative names go too
+		SearchVariantRules query = SearchVariantRules.of("xx", List.of(layer(base),
+				layer("<query><rule from=\"blvd\" to=\"Boulevard\" object=\"street\"/></query>")));
+		assertEquals(0, query.index().size());
+		assertEquals(List.of("street:boulevard"), forms(query, "blvd"));
+		SearchVariantRules disabled = SearchVariantRules.of("xx", List.of(layer(base),
+				layer("<rule from=\"blvd\" enabled=\"false\"/>")));
+		assertEquals(0, disabled.index().size());
+		assertEquals(List.of(), forms(disabled, "blvd"));
+		// and back: a lower layer makes a rule of <query> a mirror pair
+		SearchVariantRules mirror = SearchVariantRules.of("xx", List.of(
+				layer("<query><rule from=\"blvd\" to=\"Boulevard\" object=\"street\"/></query>"), layer(base, "low.xml")));
+		assertEquals("low.xml street blvd→Boulevard", mirror.index().get(0).id().toString());
+	}
+
+	@Test
+	public void mirrorPairValidation() {
+		expect("<rule from=\"st\"><to object=\"street\">Street</to><to>Saint</to></rule>", "one form");
+		expect("<rule from=\"the\" to=\"\"/>", "ignorable word belongs to <query>");
+		expect("<rule from=\"apt\" object=\"building\"/>", "house-number qualifier belongs to <query>");
+		expect("<rule from=\"blvd\" to=\"blvd\"/>", "repeats the word");
+		expect("<rule from=\"e\" to=\"East\"/>", "one-letter word needs an object");
+		expect("<rule from=\"blvd\" to=\"Big Boulevard\"/>", "plain words");
+		expect("<rule from=\"bl.vd\" to=\"Boulevard\"/>", "plain words");
+		// the reverse pair, written by hand
+		expect("<rule from=\"blvd\" to=\"Boulevard\"/><rule from=\"boulevard\" to=\"blvd\"/>", "");
+		// one word in one file once, whether a mirror pair or a rule of <query>
+		expect("<rule from=\"blvd\" to=\"Boulevard\"/><query><rule from=\"blvd\" to=\"Bulevar\"/></query>",
+				"Duplicate rule");
+		// the word of a pair means one thing: no other rule may reach it
+		expect("<rule from=\"str\" to=\"Street\"/><query><rule from=\"s\" to=\"str\" object=\"street\"/></query>",
+				"is a form of");
+		// the form of a pair has no rule of its own
+		expect("<rule from=\"blvd\" to=\"Boulevard\"/><query><rule from=\"boulevard\" to=\"Bd\"/></query>",
+				"has its own rule");
+		// a literal of <index> is no word of a mirror pair
+		expect("<rule from=\"blvd\" to=\"Boulevard\"/><index><rule from=\"(?iu)\\bBoul\\b\" to=\"Blvd\"/></index>",
+				"a pair belongs to one side");
+		expect("<rule from=\"apt\" to=\"Apartment\"/><query><rule from=\"apartment\" object=\"building\"/></query>",
+				"");
 	}
 
 	private static List<String> unglue(SearchVariantRules rules, String name) {

@@ -148,6 +148,27 @@ public final class SearchVariantRules {
 				}
 			}
 		}
+		List<Rule> indexRules = new ArrayList<>(index.values());
+		for (WordRule rule : query.values()) {
+			if (rule.mirror == null || rule.forms.isEmpty()) {
+				continue;
+			}
+			Form form = rule.forms.get(0);
+			String mirror = " of the mirror pair '" + rule.word + "' -> '" + form.word() + "' (" + rule.mirror.file + ")";
+			// the word of a mirror means one thing: another rule reaching it would add its meaning to the pair
+			for (WordRule other : query.values()) {
+				if (other != rule && other.hasForm(rule.word)) {
+					throw new IllegalArgumentException("The word '" + rule.word + "'" + mirror + " is a form of "
+							+ other + " too" + where);
+				}
+			}
+			if (query.containsKey(form.word())) {
+				throw new IllegalArgumentException("The form '" + form.word() + "'" + mirror + " has its own rule: a "
+						+ "mirror pair works both ways and is written once" + where);
+			}
+			indexRules.add(Rule.mirror(form.object(), rule.word, rule.mirror.to, rule.mirror.file, true));
+			indexRules.add(Rule.mirror(form.object(), rule.mirror.to, rule.word, rule.mirror.file, false));
+		}
 		Map<String, List<Form>> lists = new LinkedHashMap<>();
 		for (Map.Entry<String, Set<Form>> e : forms.entrySet()) {
 			lists.put(e.getKey(), List.copyOf(e.getValue()));
@@ -156,7 +177,7 @@ public final class SearchVariantRules {
 		for (Map.Entry<String, List<String>> e : skip.entrySet()) {
 			skipLists.put(e.getKey(), List.copyOf(e.getValue()));
 		}
-		this.index = List.copyOf(index.values());
+		this.index = List.copyOf(indexRules);
 		this.unglues = List.copyOf(unglues.values());
 		this.classes = Collections.unmodifiableMap(new LinkedHashMap<>(classes));
 		this.query = List.copyOf(query.values());
@@ -536,8 +557,7 @@ public final class SearchVariantRules {
 				} else if (depth == 2 && "common".equals(tag)) {
 					throw new IllegalArgumentException("<common> is replaced by <skipPenalty> of <query> in " + file);
 				} else if (depth == 2 && "rule".equals(tag)) {
-					throw new IllegalArgumentException("A rule belongs to <index> or <query> (from=\""
-							+ parser.getAttributeValue(null, "from") + "\" in " + file + ")");
+					parseMirrorRule(parser, layer, file);
 				} else if (depth == 3 && "rule".equals(tag) && "index".equals(section)) {
 					parseIndexRule(parser, layer, file);
 				} else if (depth == 3 && "unglue".equals(tag) && "index".equals(section)) {
@@ -676,6 +696,53 @@ public final class SearchVariantRules {
 	 * One form is the attributes of the rule ({@code to}, {@code object}; {@code object="building"} without {@code to}),
 	 * several forms are {@code <to>} elements with their own {@code object}.
 	 */
+	/**
+	 * A mirror pair, a {@code <rule>} directly under {@code <rules>} (rules-spec.md, 3.4): one word and its one form,
+	 * a query form both ways and alternative names both ways. It shares the key of a query rule in the layers.
+	 */
+	private static void parseMirrorRule(XmlPullParser parser, Layer layer, String file) throws Exception {
+		String from = parser.getAttributeValue(null, "from");
+		String where = where(from, "rules", file);
+		checkRemovedAttributes(parser, where);
+		checkAttributes(parser, QUERY_ATTRIBUTES, "a mirror rule", where);
+		if (from == null || from.isEmpty()) {
+			throw new IllegalArgumentException("Missing from in " + file);
+		}
+		if (!PLAIN_WORD.matcher(from).matches()) {
+			throw new IllegalArgumentException("A mirror rule pairs plain words, a regexp belongs to <index>" + where);
+		}
+		String to = parser.getAttributeValue(null, "to");
+		String object = parser.getAttributeValue(null, "object");
+		boolean enabled = booleanAttribute(parser, "enabled", true, where);
+		if (parser.nextTag() == XmlPullParser.START_TAG) {
+			throw new IllegalArgumentException("A mirror rule has one form, the attribute to: through a shared word "
+					+ "the meanings of a word of several would match each other" + where);
+		}
+		String word = from.toLowerCase(Locale.ROOT);
+		if (!enabled) {
+			if (to != null || object != null) {
+				throw new IllegalArgumentException("A disabled rule holds only from" + where);
+			}
+			layer.add(new WordRule(word, List.of(), new Mirror(file, null)), false);
+			return;
+		}
+		if (BUILDING_OBJECT.equals(object)) {
+			throw new IllegalArgumentException("A house-number qualifier belongs to <query>: it has no alternative "
+					+ "name" + where);
+		}
+		if (to == null || to.trim().isEmpty()) {
+			throw new IllegalArgumentException("A mirror rule needs a form, an ignorable word belongs to <query>"
+					+ where);
+		}
+		String text = to.trim();
+		if (!PLAIN_WORD.matcher(text).matches()) {
+			throw new IllegalArgumentException("A mirror rule pairs plain words: '" + text + "'" + where);
+		}
+		List<Form> forms = List.of(parseForm(word, object, text, where));
+		validateForms(word, forms, where);
+		layer.add(new WordRule(word, forms, new Mirror(file, text)), true);
+	}
+
 	private static void parseQueryRule(XmlPullParser parser, Layer layer, String file) throws Exception {
 		String from = parser.getAttributeValue(null, "from");
 		String where = where(from, "query", file);
@@ -886,8 +953,21 @@ public final class SearchVariantRules {
 		}
 	}
 
-	/** The rule of a query word: every meaning of the word, the first is the main one. */
-	public record WordRule(String word, List<Form> forms) {
+	/** The file and the form as written of a mirror pair, for its alternative names (rules-spec.md, 3.4). */
+	public record Mirror(String file, String to) {
+	}
+
+	/**
+	 * The rule of a query word: every meaning of the word, the first is the main one.
+	 *
+	 * @param mirror the pair is a mirror pair, its alternative names are rules of {@code <index>} too; null for a rule
+	 *               of {@code <query>}
+	 */
+	public record WordRule(String word, List<Form> forms, Mirror mirror) {
+		WordRule(String word, List<Form> forms) {
+			this(word, forms, null);
+		}
+
 		boolean hasForm(String form) {
 			for (Form f : forms) {
 				if (f.word().equals(form)) {
@@ -959,11 +1039,19 @@ public final class SearchVariantRules {
 		private final String fromText;
 		private final String to;
 		private final String file;
+		// the from of the identity: the regexp, or "blvd→Boulevard" of a mirror pair
+		private final String idFrom;
 
 		private Rule(String object, String from, String to, String mode, boolean alwaysKeys, boolean enabled,
 				String file) {
+			this(object, from, to, mode, alwaysKeys, enabled, file, from);
+		}
+
+		private Rule(String object, String from, String to, String mode, boolean alwaysKeys, boolean enabled,
+				String file, String idFrom) {
 			this.object = object;
 			this.file = file;
+			this.idFrom = idFrom;
 			if (!"All".equals(mode) && !"Single".equals(mode)) {
 				throw new IllegalArgumentException("Invalid mode '" + mode + "' of " + from + ", expected All or Single");
 			}
@@ -1017,7 +1105,20 @@ public final class SearchVariantRules {
 
 		/** the identity of the rule in the statistics of the OBF writer: file, object and from */
 		public RuleId id() {
-			return new RuleId(file, object, fromText);
+			return new RuleId(file, object, idFrom);
+		}
+
+		/**
+		 * One direction of a mirror pair: the word as a whole word of a name, in any case, an abbreviation with its dot
+		 * ("Blvd." -> "Boulevard"), is replaced by the other word of the pair.
+		 *
+		 * @param abbreviation the word is the abbreviation of the pair (the from of the mirror rule)
+		 */
+		static Rule mirror(String object, String word, String other, String file, boolean abbreviation) {
+			String regexp = "(?iu)(?<![\\p{L}\\p{M}\\p{N}])" + Pattern.quote(word) + "(?![\\p{L}\\p{M}\\p{N}])"
+					+ (abbreviation ? "\\.?" : "");
+			return new Rule(object, regexp, Matcher.quoteReplacement(other), "All", false, true, file,
+					word + "\u2192" + other);
 		}
 
 		public boolean appliesTo(String owner) {
