@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.PointDescription;
@@ -49,6 +50,7 @@ public class SearchHistoryHelper {
 	private final Map<HistoryEntryKey, HistoryEntry> map = new ConcurrentHashMap<>();
 
 	private List<HistoryEntry> loadedEntries;
+	private volatile List<StateChangedListener<Void>> listeners = new ArrayList<>();
 
 	public static class HistoryObject {
 		private final Object object;
@@ -86,6 +88,20 @@ public class SearchHistoryHelper {
 
 	public void setLastModifiedTime(long lastModifiedTime) {
 		dbHelper.setLastModifiedTime(lastModifiedTime);
+	}
+
+	public void addListener(@NonNull StateChangedListener<Void> listener) {
+		listeners = CollectionUtils.addToList(listeners, listener);
+	}
+
+	public void removeListener(@NonNull StateChangedListener<Void> listener) {
+		listeners = CollectionUtils.removeFromList(listeners, listener);
+	}
+
+	private void notifyListeners() {
+		for (StateChangedListener<Void> listener : listeners) {
+			listener.stateChanged(null);
+		}
 	}
 
 	public void addNewItemToHistory(double latitude, double longitude, PointDescription name,
@@ -290,6 +306,7 @@ public class SearchHistoryHelper {
 			}
 			loadedEntries = CollectionUtils.removeFromList(loadedEntries, model);
 			map.remove(key);
+			notifyListeners();
 		}
 	}
 
@@ -299,6 +316,7 @@ public class SearchHistoryHelper {
 			app.getPoiFilters().clearHistory();
 			loadedEntries = new ArrayList<>();
 			map.clear();
+			notifyListeners();
 		}
 	}
 
@@ -333,6 +351,7 @@ public class SearchHistoryHelper {
 				dbHelper.add(model);
 			}
 			updateEntriesList();
+			notifyListeners();
 		}
 	}
 
@@ -341,6 +360,7 @@ public class SearchHistoryHelper {
 			addItemToHistoryWithReplacement(model);
 		}
 		updateEntriesList();
+		notifyListeners();
 	}
 
 	public void updateEntriesList() {

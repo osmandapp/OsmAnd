@@ -460,5 +460,8 @@ dependencies {
 	// the dropdown menus are Compose: Espresso cannot see their items
 	androidTestImplementation platform('androidx.compose:compose-bom:2026.06.00')
 	androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
+	androidTestImplementation ("androidx.car.app:app-testing:1.7.0") {
+		exclude group: "org.robolectric"
+	}
 	implementation 'com.facebook.shimmer:shimmer:0.5.0@aar'
 }

@@ -44,6 +44,7 @@ import net.osmand.data.ValueHolder;
 import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -55,6 +56,7 @@ import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
+import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -71,6 +73,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.router.FastRoutingState;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
@@ -90,6 +93,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		DefaultLifecycleObserver, IRouteInformationListener, RouteCalculationProgressListener {
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(NavigationSession.class);
+
+	private static final int SUGGESTIONS_UPDATE_MSG_ID = OsmAndConstants.UI_HANDLER_CAR_SUGGESTIONS + 1;
+	private static final long SUGGESTIONS_UPDATE_DELAY_MS = 300;
 
 	static final String TAG = NavigationSession.class.getSimpleName();
 	static final String URI_SCHEME = "osmand";
@@ -132,6 +138,24 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private NavigationManager navigationManager;
 	private boolean carNavigationShouldBeActive; // it could set true before init navigationManager
 	private TripHelper tripHelper;
+	private CarSuggestionsHelper suggestionsHelper;
+	private final StateChangedListener<Void> historyListener = change -> scheduleSuggestionsUpdate();
+	private final StateChangedListener<Boolean> navigationHistoryListener = change -> scheduleSuggestionsUpdate();
+	private final IRouteInformationListener suggestionsRouteListener = new IRouteInformationListener() {
+		@Override
+		public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+			updateSuggestions();
+		}
+
+		@Override
+		public void routeWasCancelled() {
+			updateSuggestions();
+		}
+
+		@Override
+		public void routeWasFinished() {
+		}
+	};
 
 	private FastRoutingState.Status lastFastRoutingComplication = null;
 
@@ -161,7 +185,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		return mapView;
 	}
 
-	private final LocationPermissionCheckCallback locationPermissionGrantedCallback = this::requestLocationUpdates;
+	private final LocationPermissionCheckCallback locationPermissionGrantedCallback = () -> {
+		requestLocationUpdates();
+		updateSuggestions();
+	};
 
 	public void setMapView(OsmandMapTileView mapView) {
 		this.mapView = mapView;
@@ -192,6 +219,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		routingHelper = app.getRoutingHelper();
 		locationProvider = app.getLocationProvider();
 		locationServiceHelper = app.createLocationServiceHelper();
+		suggestionsHelper = new CarSuggestionsHelper(app);
+		app.getSearchHistoryHelper().addListener(historyListener);
+		settings.NAVIGATION_HISTORY.addListener(navigationHistoryListener);
+		routingHelper.addListener(suggestionsRouteListener);
 
 		app.setCarNavigationSession(this);
 		app.getLocationProvider().addLocationListener(this);
@@ -227,6 +258,16 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		app.getRoutingHelper().addCalculationProgressListener(this);
 		GPXLayer gpxLayer = app.getOsmandMap().getMapLayers().getGpxLayer();
 		gpxLayer.setInvalidated(true);
+		updateSuggestions();
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onFinish(@NonNull AppInitializer init) {
+					init.removeListener(this);
+					updateSuggestions();
+				}
+			});
+		}
 	}
 
 	@Override
@@ -263,6 +304,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		OsmandApplication app = getApp();
 		removeLocationUpdates();
 		removeLocationSourceListener();
+		app.getSearchHistoryHelper().removeListener(historyListener);
+		settings.NAVIGATION_HISTORY.removeListener(navigationHistoryListener);
+		routingHelper.removeListener(suggestionsRouteListener);
+		app.getUiHandler().removeMessages(SUGGESTIONS_UPDATE_MSG_ID);
 
 		getLifecycle().removeObserver(this);
 		if (settings.simulateNavigationStartedFromAdb) {
@@ -324,7 +369,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 
 		Uri uri = intent.getData();
-		if (GeoActionHelper.isGeoActionUri(uri)) {
+		if (intent.hasExtra(CarSuggestionsHelper.EXTRA_SUGGESTION_POINT)) {
+			app.runInUIThread(() -> processSuggestionIntent(intent));
+		} else if (GeoActionHelper.isGeoActionUri(uri)) {
 			app.runInUIThread(() -> processGeoActionIntent(uri));
 		} else {
 			String action = intent.getAction();
@@ -362,6 +409,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			app.getOsmandMap().getMapView().setupRenderingView();
 
 			app.runInUIThread(this::requestLocationPermission);
+			app.runInUIThread(this::updateSuggestions);
 		}
 	}
 
@@ -386,7 +434,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onNewIntent(@NonNull Intent intent) {
 		Log.i(TAG, "In onNewIntent() " + intent);
 		Uri uri = intent.getData();
-		if (uri != null) {
+		if (intent.hasExtra(CarSuggestionsHelper.EXTRA_SUGGESTION_POINT)) {
+			processSuggestionIntent(intent);
+		} else if (uri != null) {
 			if (GeoActionHelper.isGeoActionUri(uri)) {
 				processGeoActionIntent(uri);
 			} else if (ACTION_NAVIGATE.equals(intent.getAction())) {
@@ -428,20 +478,54 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				} else {
 					result.localeName = label;
 				}
-				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, true), (obj) -> {
-					if (obj != null) {
-						getApp().runInUIThread(() -> {
-							if (hasStarted()) {
-								startNavigationScreen();
-							}
-						});
-					}
-				});
+				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, true), this::onRoutePreviewResult);
 			} else {
 				String text = point.isGeoAddress() ? point.getQuery() : uri.toString();
 				screenManager.pushForResult(new SearchResultsScreen(context, settingsAction, text), (obj) -> {
 				});
 			}
+		}
+	}
+
+	private void processSuggestionIntent(@NonNull Intent intent) {
+		OsmandApplication app = getApp();
+		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app) || !isLocationPermissionAvailable()) {
+			LOG.info("Ignoring suggestion intent: purchase or permission check failed");
+			return;
+		}
+		if (routingHelper.isFollowingMode() || routingHelper.isPauseNavigation()) {
+			LOG.info("Ignoring suggestion intent: navigation is already active");
+			return;
+		}
+		String serializedName = intent.getStringExtra(CarSuggestionsHelper.EXTRA_SUGGESTION_POINT);
+		LatLon latLon = CarSuggestionsHelper.getSuggestionLatLon(intent);
+		if (Algorithms.isEmpty(serializedName) || latLon == null) {
+			LOG.error("Invalid suggestion intent: " + intent);
+			return;
+		}
+		PointDescription pointDescription = PointDescription.deserializeFromString(serializedName, latLon);
+		HistoryEntry entry = app.getSearchHistoryHelper().getEntryByName(pointDescription, HistorySource.NAVIGATION);
+		if (entry == null) {
+			entry = new HistoryEntry(latLon.getLatitude(), latLon.getLongitude(), pointDescription, HistorySource.NAVIGATION);
+		}
+		SearchPhrase phrase = SearchPhrase.emptyPhrase(app.getSearchUICore().getCore().getSearchSettings());
+		SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
+		if (result.location == null) {
+			result.location = latLon;
+		}
+
+		ScreenManager screenManager = getScreenManager();
+		screenManager.popToRoot();
+		screenManager.pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, result, true, true), this::onRoutePreviewResult);
+	}
+
+	private void onRoutePreviewResult(@Nullable Object result) {
+		if (result != null) {
+			getApp().runInUIThread(() -> {
+				if (hasStarted()) {
+					startNavigationScreen();
+				}
+			});
 		}
 	}
 
@@ -544,6 +628,16 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		screenManager.push(new DestinationReachedScreen(carContext));
 	}
 
+	private void updateSuggestions() {
+		if (suggestionsHelper != null && isStateAtLeast(State.CREATED)) {
+			suggestionsHelper.update(getCarContext());
+		}
+	}
+
+	private void scheduleSuggestionsUpdate() {
+		getApp().runInUIThreadAndCancelPrevious(SUGGESTIONS_UPDATE_MSG_ID, this::updateSuggestions, SUGGESTIONS_UPDATE_DELAY_MS);
+	}
+
 	private boolean isRoutePreviewPresent() {
 		ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
 		Collection<Screen> displayedScreens = screenManager.getScreenStack();
@@ -611,15 +705,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			}
 
 			screenManager.popToRoot();
-			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, false), (obj) -> {
-				if (obj != null) {
-					app.runInUIThread(() -> {
-						if (hasStarted()) {
-							startNavigationScreen();
-						}
-					});
-				}
-			});
+			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, false), this::onRoutePreviewResult);
 		}
 	}
 
@@ -748,6 +834,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 		carNavigationShouldBeActive = true;
 		updateCarNavigation(getApp().getLocationProvider().getLastKnownLocation());
+		getApp().runInUIThread(this::updateSuggestions);
 	}
 
 	/**
@@ -766,6 +853,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 						carNavigationShouldBeActive = false;
 						navigationManager.navigationEnded();
 					}
+					updateSuggestions();
 				}
 		);
 	}
