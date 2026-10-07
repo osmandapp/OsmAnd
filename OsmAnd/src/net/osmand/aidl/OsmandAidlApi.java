@@ -130,6 +130,7 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -137,6 +138,8 @@ import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -2039,6 +2042,225 @@ public class OsmandAidlApi {
 		}
 	}
 
+	@Nullable
+	net.osmand.aidlapi.info.AMapWidgetsLayout getMapWidgetsLayout(@Nullable String appModeKey) {
+		MapActivity mapActivity = this.mapActivity;
+		ApplicationMode appMode = getWidgetsAppMode(appModeKey);
+		if (mapActivity == null || appMode == null) {
+			return null;
+		}
+		ArrayList<net.osmand.aidlapi.info.AMapWidgetInfo> widgets = new ArrayList<>();
+		CountDownLatch latch = new CountDownLatch(1);
+		app.runInUIThread(() -> {
+			try {
+				collectWidgetsLayout(mapActivity, appMode, widgets);
+			} catch (Exception e) {
+				LOG.error(e.getMessage(), e);
+				widgets.clear();
+			} finally {
+				latch.countDown();
+			}
+		});
+		try {
+			if (!latch.await(5, TimeUnit.SECONDS)) {
+				return null;
+			}
+		} catch (InterruptedException e) {
+			return null;
+		}
+		return new net.osmand.aidlapi.info.AMapWidgetsLayout(appMode.getStringKey(),
+				app.getSettings().USE_SEPARATE_LAYOUTS.getModeValue(appMode), widgets);
+	}
+
+	private void collectWidgetsLayout(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
+	                                  @NonNull List<net.osmand.aidlapi.info.AMapWidgetInfo> widgets) {
+		ScreenLayoutMode layoutMode = getWidgetsLayoutMode(mapActivity, appMode);
+		MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
+		List<MapWidgetInfo> allWidgets = registry.getWidgets(mapActivity, appMode, layoutMode);
+		int filter = MapWidgetRegistry.ENABLED_MODE | MapWidgetRegistry.AVAILABLE_MODE | MapWidgetRegistry.MATCHING_PANELS_MODE;
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			int page = -1;
+			int lastPageIndex = Integer.MIN_VALUE;
+			int order = 0;
+			for (MapWidgetInfo info : registry.getFilteredWidgets(allWidgets, appMode, layoutMode, filter, Collections.singletonList(panel))) {
+				if (page == -1 || info.pageIndex != lastPageIndex) {
+					page++;
+					lastPageIndex = info.pageIndex;
+					order = 0;
+				}
+				WidgetType type = info.getWidgetType();
+				widgets.add(new net.osmand.aidlapi.info.AMapWidgetInfo(info.key, type.id, info.getTitle(mapActivity),
+						panel.name(), page, order++, true, type.isPurchased(app)));
+			}
+		}
+		for (WidgetType type : WidgetType.values()) {
+			if (isWidgetTypeAddable(type, appMode)) {
+				WidgetsPanel panel = type.getPanel(type.id, appMode, layoutMode, app.getSettings());
+				widgets.add(new net.osmand.aidlapi.info.AMapWidgetInfo(type.id, type.id, app.getString(type.titleId),
+						panel.name(), -1, 0, false, type.isPurchased(app)));
+			}
+		}
+	}
+
+	private boolean isWidgetTypeAddable(@NonNull WidgetType type, @NonNull ApplicationMode appMode) {
+		return type != WidgetType.AIDL_WIDGET && type.titleId != 0 && type.isAllowed()
+				&& WidgetsAvailabilityHelper.isWidgetAvailable(app, type.id, appMode);
+	}
+
+	boolean setMapWidgetsPanel(@Nullable String appModeKey, @Nullable String panelName, @Nullable List<String> pages) {
+		MapActivity mapActivity = this.mapActivity;
+		ApplicationMode appMode = getWidgetsAppMode(appModeKey);
+		WidgetsPanel panel = null;
+		for (WidgetsPanel p : WidgetsPanel.values()) {
+			if (p.name().equalsIgnoreCase(panelName)) {
+				panel = p;
+			}
+		}
+		if (mapActivity == null || appMode == null || panel == null || pages == null) {
+			return false;
+		}
+		WidgetsPanel widgetsPanel = panel;
+		boolean[] result = {false};
+		CountDownLatch latch = new CountDownLatch(1);
+		app.runInUIThread(() -> {
+			try {
+				result[0] = applyWidgetsPanel(mapActivity, appMode, widgetsPanel, pages);
+			} catch (Exception e) {
+				LOG.error(e.getMessage(), e);
+			} finally {
+				latch.countDown();
+			}
+		});
+		try {
+			return latch.await(5, TimeUnit.SECONDS) && result[0];
+		} catch (InterruptedException e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Saves a panel the way Configure screen does: creates the new widgets, sets the visibility of the panel's
+	 * widgets and writes the paged order. Checks every id first, so nothing changes if one of them is wrong.
+	 */
+	private boolean applyWidgetsPanel(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
+	                                  @NonNull WidgetsPanel panel, @NonNull List<String> pages) {
+		OsmandSettings settings = app.getSettings();
+		ScreenLayoutMode layoutMode = getWidgetsLayoutMode(mapActivity, appMode);
+		MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
+		List<WidgetsPanel> panels = Collections.singletonList(panel);
+		List<MapWidgetInfo> allWidgets = registry.getWidgets(mapActivity, appMode, layoutMode);
+		Map<String, MapWidgetInfo> panelWidgets = new LinkedHashMap<>();
+		for (MapWidgetInfo info : registry.getFilteredWidgets(allWidgets, appMode, layoutMode,
+				MapWidgetRegistry.AVAILABLE_MODE | MapWidgetRegistry.MATCHING_PANELS_MODE, panels)) {
+			panelWidgets.put(info.key, info);
+		}
+		// pass 1: an id of a widget on this panel keeps it, any other id names the type of a new widget
+		Set<String> usedIds = new HashSet<>();
+		List<List<Object>> resolvedPages = new ArrayList<>();
+		for (String page : pages) {
+			List<Object> resolved = new ArrayList<>();
+			for (String part : page.split(WidgetsPanel.WIDGET_SEPARATOR)) {
+				String id = part.trim();
+				if (id.isEmpty()) {
+					continue;
+				}
+				MapWidgetInfo info = panelWidgets.get(id);
+				if (info == null || usedIds.contains(id)) {
+					WidgetType type = WidgetType.getById(id);
+					if (type == null || !isWidgetTypeAddable(type, appMode) || !type.isPanelsAllowed(panels)) {
+						LOG.error("setMapWidgetsPanel: widget " + id + " can't be on panel " + panel);
+						return false;
+					}
+					MapWidgetInfo original = panelWidgets.get(type.id);
+					info = original != null && !usedIds.contains(type.id) ? original : null;
+					resolved.add(info != null ? info : type);
+				} else {
+					resolved.add(info);
+				}
+				if (info != null) {
+					usedIds.add(info.key);
+				}
+			}
+			if (panel.isPanelVertical() && resolved.size() > 1) {
+				for (Object widget : resolved) {
+					String id = widget instanceof MapWidgetInfo ? ((MapWidgetInfo) widget).key : ((WidgetType) widget).id;
+					if (WidgetType.isComplexWidget(id)) {
+						LOG.error("setMapWidgetsPanel: widget " + id + " takes a whole row");
+						return false;
+					}
+				}
+			}
+			if (!resolved.isEmpty()) {
+				resolvedPages.add(resolved);
+			}
+		}
+		// pass 2: create the new widgets, as ConfigureWidgetsController does for a widget added from the list
+		MapWidgetsFactory factory = new MapWidgetsFactory(mapActivity);
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
+		List<MapWidgetInfo> enabled = new ArrayList<>();
+		List<List<String>> pagedOrder = new ArrayList<>();
+		for (List<Object> resolved : resolvedPages) {
+			List<String> order = new ArrayList<>();
+			for (Object widget : resolved) {
+				MapWidgetInfo info;
+				if (widget instanceof MapWidgetInfo) {
+					info = (MapWidgetInfo) widget;
+				} else {
+					WidgetType type = (WidgetType) widget;
+					// ids are type__time; two new widgets of one type in a call need different times
+					long time = System.currentTimeMillis();
+					String id;
+					do {
+						id = type.id + MapWidgetInfo.DELIMITER + time++;
+					} while (usedIds.contains(id) || registry.getWidgetInfoById(id) != null);
+					MapWidget mapWidget = factory.createMapWidget(id, type, panel);
+					info = mapWidget != null ? creator.askCreateWidgetInfo(id, mapWidget, type, panel) : null;
+					if (info == null || registry.getFilteredWidgets(Collections.singletonList(info), appMode, layoutMode,
+							MapWidgetRegistry.AVAILABLE_MODE, panels).isEmpty()) {
+						LOG.error("setMapWidgetsPanel: widget " + type.id + " can't be created on panel " + panel);
+						return false;
+					}
+					usedIds.add(id);
+					settings.getCustomWidgetsKeys(layoutMode).addModeValue(appMode, id);
+				}
+				enabled.add(info);
+				order.add(info.key);
+			}
+			pagedOrder.add(order);
+		}
+		List<String> visibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+		for (MapWidgetInfo info : panelWidgets.values()) {
+			if (!enabled.contains(info) && info.isEnabledForAppMode(appMode, visibility)) {
+				registry.enableDisableWidgetForMode(appMode, info, false, layoutMode, false);
+			}
+		}
+		for (MapWidgetInfo info : enabled) {
+			if (!info.isEnabledForAppMode(appMode, visibility) || !panelWidgets.containsValue(info)) {
+				registry.enableDisableWidgetForMode(appMode, info, true, layoutMode, false);
+			}
+		}
+		panel.setWidgetsOrder(appMode, pagedOrder, settings, layoutMode);
+		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+		if (mapInfoLayer != null && appMode == settings.getApplicationMode()) {
+			mapInfoLayer.recreateAllControls(mapActivity);
+		}
+		return true;
+	}
+
+	@Nullable
+	private ApplicationMode getWidgetsAppMode(@Nullable String appModeKey) {
+		return Algorithms.isEmpty(appModeKey) ? app.getSettings().getApplicationMode()
+				: ApplicationMode.valueOfStringKey(appModeKey, null);
+	}
+
+	@Nullable
+	private ScreenLayoutMode getWidgetsLayoutMode(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
+		if (app.getSettings().USE_SEPARATE_LAYOUTS.getModeValue(appMode)) {
+			return AndroidUiHelper.isPortrait(mapActivity) ? ScreenLayoutMode.PORTRAIT : ScreenLayoutMode.LANDSCAPE;
+		}
+		return null;
+	}
+
 	@NonNull
 	private String getWidgetText(@NonNull MapWidgetInfo info, @NonNull View view) {
 		// text widgets keep "value unit" in the content description; others show it in their text views
@@ -2958,7 +3180,7 @@ public class OsmandAidlApi {
 		String prefId = params.getPrefId();
 		OsmandSettings settings = app.getSettings();
 		OsmandPreference<?> pref = settings.getPreference(prefId);
-		if (pref != null && settings.isExportAvailableForPref(pref)) {
+		if (pref != null && settings.isExportAvailableForPref(pref) && !isReadOnlyPreference(prefId)) {
 			String value = params.getValue();
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
 
@@ -2980,6 +3202,30 @@ public class OsmandAidlApi {
 			return success;
 		}
 		return false;
+	}
+
+	/**
+	 * Settings connected apps may read but not change: plugins are switched by changePluginState, privacy and
+	 * network choices and purchase banners stay with the user, histories and shown tracks have their own calls,
+	 * map widgets are changed by setMapWidgetsPanel.
+	 */
+	private static final Set<String> READ_ONLY_PREFERENCES = new HashSet<>(Arrays.asList(
+			"enabled_plugins", "send_anonymous_map_downloads_data", "send_anonymous_app_usage_data",
+			"proxy_host", "proxy_port", "online_routing_engines", "is_live_updates_on", "speed_cameras_uninstalled",
+			"should_show_free_version_banner", "should_show_discount_bottom_sheet",
+			"search_history", "navigation_history", "map_markers_history", "selected_gpx",
+			"map_info_controls", "custom_widgets_keys", "left_widget_panel_order", "right_widget_panel_order",
+			"top_widget_panel_order", "bottom_widget_panel_order"));
+
+	private static boolean isReadOnlyPreference(@NonNull String prefId) {
+		// portrait_ and landscape_ copies of the widget layout (ScreenLayoutMode)
+		for (ScreenLayoutMode layoutMode : ScreenLayoutMode.values()) {
+			String prefix = layoutMode.name().toLowerCase() + "_";
+			if (prefId.startsWith(prefix) && READ_ONLY_PREFERENCES.contains(prefId.substring(prefix.length()))) {
+				return true;
+			}
+		}
+		return READ_ONLY_PREFERENCES.contains(prefId);
 	}
 
 	public boolean getPreference(PreferenceParams params) {
