@@ -8,7 +8,9 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -27,8 +29,11 @@ import com.google.gson.GsonBuilder;
 
 import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.ObfConstants;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.util.MapUtils;
 import net.osmand.util.RouterUtilTest;
 
 @RunWith(Parameterized.class)
@@ -201,6 +206,7 @@ public class RouteTestingTest {
 			}
 			checkRoutingTime(ctx, params);
 			checkEtaTime(routeSegments, params);
+			checkSpeedCameras(routeSegments, params);
 			for (Entry<String, String> es : expectedResults.entrySet()) {
 				long id = RouterUtilTest.getRoadId(es.getKey());
 				int point = RouterUtilTest.getRoadStartPoint(es.getKey());
@@ -252,6 +258,39 @@ public class RouteTestingTest {
 			float maxEtaTime = Float.parseFloat(params.get("maxEtaTime"));
 			Assert.assertTrue("Calculated eta time " + etaTime + " is bigger then max eta time " + maxEtaTime, etaTime <= maxEtaTime);
 		}
+	}
+
+	// route points in route order as RouteCalculationResult.convertVectorResult / attachAlarmInfo visit them
+	private void checkSpeedCameras(List<RouteSegmentResult> routeSegments, Map<String, String> params) {
+		if (!params.containsKey("speedCameras")) {
+			return;
+		}
+		SpeedCameraFilter speedCameraFilter = new SpeedCameraFilter();
+		List<String> speedCameras = new ArrayList<>();
+		for (int s = 0; s < routeSegments.size(); s++) {
+			RouteSegmentResult r = routeSegments.get(s);
+			RouteDataObject obj = r.getObject();
+			boolean lastSegment = s + 1 == routeSegments.size();
+			int step = r.getStartPointIndex() < r.getEndPointIndex() ? 1 : -1;
+			for (int point = r.getStartPointIndex(); point != r.getEndPointIndex() + (lastSegment ? step : 0); point += step) {
+				int[] types = obj.getPointTypes(point);
+				if (types == null) {
+					continue;
+				}
+				boolean speedCameraApplicable = speedCameraFilter.visitPoint(obj, point);
+				for (int type : types) {
+					RouteTypeRule rule = obj.region.quickGetEncodingRule(type);
+					if ("highway".equals(rule.getTag()) && "speed_camera".equals(rule.getValue()) && speedCameraApplicable
+							&& obj.isDirectionApplicable(r.isForwardDirection(), point, -1, r.getEndPointIndex())) {
+						speedCameras.add(String.format(Locale.US, "%.5f,%.5f",
+								MapUtils.get31LatitudeY(obj.getPoint31YTile(point)), MapUtils.get31LongitudeX(obj.getPoint31XTile(point))));
+					}
+				}
+			}
+		}
+		List<String> expected = new ArrayList<>(Arrays.asList(params.get("speedCameras").split(";")));
+		expected.remove("");
+		Assert.assertEquals("Speed cameras on the route", expected, speedCameras);
 	}
 
 	private void checkRoutingTime(RoutingContext ctx, Map<String, String> params) {
