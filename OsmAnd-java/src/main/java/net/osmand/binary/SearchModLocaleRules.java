@@ -1,5 +1,7 @@
 package net.osmand.binary;
 
+import net.osmand.binary.SearchModRules.SearchModRuleOwner;
+
 import net.osmand.PlatformUtil;
 import net.osmand.util.SearchAlgorithms;
 import org.xmlpull.v1.XmlPullParser;
@@ -37,9 +39,9 @@ import java.util.regex.PatternSyntaxException;
  * Rules are layered from general to specific: {@code rules.xml} (every map), {@code rules_<language>.xml}, then
  * {@code rules_<language>_<COUNTRY>.xml}. A rule of a lower layer with the key of an upper one replaces it whole,
  * {@code enabled="false"} removes it, and two rules with one key in one file are an error. The locale is the locale of
- * the data ({@link SearchLocales#forMap}, {@link SearchLocales#forName}); {@link SearchRules} loads the rules of a locale, not the language of the user interface.
+ * the data ({@link SearchModLocales#forMap}, {@link SearchModLocales#forName}); {@link SearchModRules} loads the rules of a locale, not the language of the user interface.
  */
-public final class SearchVariantRules {
+public final class SearchModLocaleRules {
 	public static final String ANY_OBJECT = "*";
 	public static final String BUILDING_OBJECT = "building";
 	public static final String VERSION = "5";
@@ -67,13 +69,13 @@ public final class SearchVariantRules {
 	private final Set<String> ignorables;
 
 	/** @param layers rules files from general to specific: a lower layer replaces or disables rules of upper ones */
-	SearchVariantRules(String locale, List<SearchRulesParser.Layer> layers) {
+	SearchModLocaleRules(String locale, List<SearchModRulesParser.Layer> layers) {
 		Map<String, Rule> index = new LinkedHashMap<>();
 		Map<String, Unglue> unglues = new LinkedHashMap<>();
 		Map<String, Integer> classes = new LinkedHashMap<>();
 		Map<String, WordRule> query = new LinkedHashMap<>();
 		Map<String, SkipPenalty> skipPenalty = new LinkedHashMap<>();
-		for (SearchRulesParser.Layer layer : layers) {
+		for (SearchModRulesParser.Layer layer : layers) {
 			disable(index, layer.disabledIndex, layer);
 			disable(unglues, layer.disabledUnglues, layer);
 			disable(classes, layer.disabledClasses, layer);
@@ -179,7 +181,7 @@ public final class SearchVariantRules {
 		this.ignorables = ignorables;
 	}
 
-	private void disable(Map<String, ?> rules, Map<String, String> disabled, SearchRulesParser.Layer layer) {
+	private void disable(Map<String, ?> rules, Map<String, String> disabled, SearchModRulesParser.Layer layer) {
 		for (Map.Entry<String, String> e : disabled.entrySet()) {
 			if (rules.remove(e.getKey()) == null) {
 				throw new IllegalArgumentException("Cannot disable " + e.getValue() + " in " + layer.file
@@ -321,7 +323,11 @@ public final class SearchVariantRules {
 		String object();
 
 		/** @return true when it applies to the owner of a name */
-		default boolean appliesTo(String owner) {
+		default boolean appliesTo(SearchModRuleOwner owner) {
+			return appliesTo(owner.tag);
+		}
+
+		private boolean appliesTo(String owner) {
 			for (String type : object().split(",")) {
 				String t = type.trim();
 				if (t.equals(owner) || t.equals(ANY_OBJECT)) {

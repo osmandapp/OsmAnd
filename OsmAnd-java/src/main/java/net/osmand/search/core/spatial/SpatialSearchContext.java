@@ -21,7 +21,7 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.NameIndexReader;
-import net.osmand.binary.RuleOwner;
+import net.osmand.binary.SearchModRules.SearchModRuleOwner;
 import net.osmand.binary.NameIndexReader.NameIndexReaderBytes;
 import net.osmand.binary.NameIndexReader.PrefixNameValue;
 import net.osmand.binary.NameIndexReader.ValueFreq;
@@ -530,19 +530,19 @@ public class SpatialSearchContext {
 	 * @param type type of an atom of the name index: an address block ({@link CityBlocks#index}) or
 	 *             {@link SpatialSearchToken#POI_TYPE}, {@link SpatialSearchToken#POI_REF_TYPE},
 	 *             {@link SpatialSearchToken#BUILDING_TYPE}; a building has the name of its street
-	 * @return the owner of the name for the search rules, see {@link RuleOwner}
+	 * @return the owner of the name for the search rules, see {@link SearchModRuleOwner}
 	 */
-	private String ruleOwner(int type) {
+	private SearchModRuleOwner ruleOwner(int type) {
 		if (type == CityBlocks.STREET_TYPE.index || type == SpatialSearchToken.BUILDING_TYPE) {
-			return RuleOwner.STREET;
+			return SearchModRuleOwner.STREET;
 		} else if (type == SpatialSearchToken.POI_TYPE || type == SpatialSearchToken.POI_REF_TYPE) {
-			return RuleOwner.POI;
+			return SearchModRuleOwner.POI;
 		} else if (type == CityBlocks.BOUNDARY_TYPE.index) {
-			return RuleOwner.BOUNDARY;
+			return SearchModRuleOwner.BOUNDARY;
 		} else if (type == CityBlocks.POSTCODES_TYPE.index) {
-			return RuleOwner.POSTCODE;
+			return SearchModRuleOwner.POSTCODE;
 		}
-		return RuleOwner.LOCALITY;
+		return SearchModRuleOwner.LOCALITY;
 	}
 
 	private void readAtoms(List<SpatialSearchToken> tokens, BinaryMapIndexReader b, NameIndexReader indx, int indxInd,
@@ -819,7 +819,7 @@ public class SpatialSearchContext {
 		String name = "";
 		int wordInd = 0;
 		int type = a != null ? a.getType() : SpatialSearchToken.POI_TYPE;
-		String object = ruleOwner(type);
+		SearchModRuleOwner object = ruleOwner(type);
 		TIntArrayList poiTypes = null;
 		int elo = 0;
 		if (b != null) {
@@ -923,7 +923,7 @@ public class SpatialSearchContext {
 	}
 
 	private boolean matchName(NameIndexReader indx, SpatialSearchToken t, String name, 
-			TIntArrayList poiTypes, boolean[] commonWord, String locale, String object) {
+			TIntArrayList poiTypes, boolean[] commonWord, String locale, SearchModRuleOwner object) {
 		stats.sub1MatchTime.start();
 		int is = name.indexOf(' ');
 		String mname = is >= 0 ? name.substring(0, is) : name;
@@ -957,7 +957,7 @@ public class SpatialSearchContext {
 	}
 	
 	private String matchPartName(SpatialSearchToken t, String name, List<SpatialSearchToken> allTokens,
-			String locale, String object) {
+			String locale, SearchModRuleOwner object) {
 		stats.sub1MatchTime.start();
 		String[] res = t.matchSplitName(name);
 		String resName = null;
@@ -977,7 +977,7 @@ public class SpatialSearchContext {
 	private void addObject(SpatialSearchToken t, NameIndexReader indx, String name, int type, long lid, long pid,
 			MapObject obj, int other, TIntArrayList poiTypes, int elo, NameIndexAtomXY coords,
 			List<SpatialSearchToken> allTokens, boolean[] cmnWord, String locale) {
-		String object = ruleOwner(type);
+		SearchModRuleOwner object = ruleOwner(type);
 		List<SpatialSearchToken> otherTokens = null;
 		boolean streetCity = false;
 		boolean numericNotMatch = false;

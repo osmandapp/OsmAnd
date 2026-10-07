@@ -26,7 +26,7 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.NameIndexReader;
-import net.osmand.binary.SearchRules;
+import net.osmand.binary.SearchModRules;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -284,7 +284,7 @@ public class SpatialTextSearch {
 		// rules locale of the data of the map (en_US, de_CH...), whatever the language of the user is
 		public final String locale;
 
-		public SpatialSearchFileCache(BinaryMapIndexReader r, SearchRules searchRules) {
+		public SpatialSearchFileCache(BinaryMapIndexReader r, SearchModRules searchRules) {
 			file = r.getFile().getName();
 			length = r.getFile().length();
 			edition = r.getDateCreated();
@@ -312,7 +312,7 @@ public class SpatialTextSearch {
 		public Map<String, SpatialSearchFileCache> filesCache = new HashMap<>();
 
 		// read once: rules.xml and then the rules of a locale on the first map of that locale
-		public final SearchRules searchRules = new SearchRules();
+		public final SearchModRules searchRules = new SearchModRules();
 
 	}
 

@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * Locale of search variant rules ({@code rules_<language>_<COUNTRY>.xml}) for a map and for a name of that map:
- * {@code <locales>} of {@code rules.xml}, read by {@link SearchRules}.
+ * {@code <locales>} of {@code rules.xml}, read by {@link SearchModRules}.
  * <p>
  * The rules follow the data, not the user interface: a map is written in the language of its country, and a name
  * tagged {@code name:xx} is written in language xx in the country of the map. The map locale comes from the download
@@ -20,7 +20,7 @@ import java.util.Set;
  * This is not the language group of {@link CommonWordsMultiIndex}: a group ("esl", "nor", "cjk") pools the word
  * statistics of several languages, while a rules locale names one language and one country.
  */
-public final class SearchLocales {
+public final class SearchModLocales {
 
 	// filled by the parser of rules.xml (addGroup, addMap, build), read only afterwards
 	private final Map<String, String> localeByPrefix = new LinkedHashMap<>();
@@ -32,7 +32,7 @@ public final class SearchLocales {
 	private final Map<String, String> explicitGroup = new LinkedHashMap<>();
 	private boolean built;
 
-	SearchLocales() {
+	SearchModLocales() {
 	}
 
 	/**

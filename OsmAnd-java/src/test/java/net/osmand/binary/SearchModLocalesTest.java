@@ -4,9 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class SearchLocalesTest {
-	private final SearchRules searchRules = new SearchRules();
-	private final SearchLocales locales = searchRules.locales();
+public class SearchModLocalesTest {
+	private final SearchModRules searchRules = new SearchModRules();
+	private final SearchModLocales locales = searchRules.locales();
 
 	@Test
 	public void mapLocaleIsLanguageAndCountryOfTheData() {

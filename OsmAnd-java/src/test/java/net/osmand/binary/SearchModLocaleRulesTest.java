@@ -1,5 +1,7 @@
 package net.osmand.binary;
 
+import net.osmand.binary.SearchModRules.SearchModRuleOwner;
+
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -9,22 +11,22 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
-public class SearchVariantRulesTest {
-	private final SearchRules searchRules = new SearchRules();
+public class SearchModLocaleRulesTest {
+	private final SearchModRules searchRules = new SearchModRules();
 
 	private List<String> forms(String word, String locale) {
-		return searchRules.dictionary(locale).getQueryForms(word).stream().map(SearchRulesDictionary.QueryForm::word)
+		return searchRules.dictionary(locale).getQueryForms(word).stream().map(SearchModDictionary.QueryForm::word)
 				.collect(Collectors.toList());
 	}
 
-	private List<String> forms(SearchVariantRules rules, String word) {
+	private List<String> forms(SearchModLocaleRules rules, String word) {
 		return rules.forms(word).stream().map(f -> f.object() + ":" + f.word()).collect(Collectors.toList());
 	}
 
 	@Test
 	public void localeRules() {
 		// the base holds no word rules: words belong to a language; it holds the rules of glued words of every name
-		SearchVariantRules base = searchRules.rules("");
+		SearchModLocaleRules base = searchRules.rules("");
 		assertEquals(0, base.index().size() + base.query().size() + base.skipPenalty().size() + base.classes().size());
 		assertEquals(2, base.unglues().size());
 		// one word, several meanings: the first is the main one
@@ -52,7 +54,7 @@ public class SearchVariantRulesTest {
 		assertEquals(List.of("jr"), forms("Jirón", "es_PE"));
 		assertEquals(List.of("пр"), forms("проезд", "ru_RU"));
 		assertEquals(List.of("просп", "пр"), forms("проспект", "ru_RU"));
-		SearchVariantRules en = searchRules.rules("en");
+		SearchModLocaleRules en = searchRules.rules("en");
 		assertEquals(List.of("street:street", "*:saint"), forms(en, "st"));
 		assertEquals(List.of("street:st"), forms(en, "street"));
 		assertEquals(List.of("*:st"), forms(en, "saint"));
@@ -66,16 +68,16 @@ public class SearchVariantRulesTest {
 		assertFalse(searchRules.dictionary("uk_UA").isIgnorable("и"));
 		assertTrue(searchRules.dictionary("de_AT").isIgnorable("die"));
 		assertFalse(searchRules.dictionary("en_US").isIgnorable("die"));
-		assertTrue(searchRules.dictionary("en_GB").isCommonSkipOtherCnt("street", "street"));
-		assertTrue(searchRules.dictionary("en_GB").isCommonSkipOtherCnt("saint", "poi"));
-		assertFalse(searchRules.dictionary("de_DE").isCommonSkipOtherCnt("street", "street"));
+		assertTrue(searchRules.dictionary("en_GB").isCommonSkipOtherCnt("street", SearchModRuleOwner.STREET));
+		assertTrue(searchRules.dictionary("en_GB").isCommonSkipOtherCnt("saint", SearchModRuleOwner.POI));
+		assertFalse(searchRules.dictionary("de_DE").isCommonSkipOtherCnt("street", SearchModRuleOwner.STREET));
 		// titles of German names are no unmatched words: "Dr.-Weber-Straße", "Friedenskapelle St. Josef"
-		assertTrue(searchRules.dictionary("de_DE").isCommonSkipOtherCnt("dr", "street"));
-		assertTrue(searchRules.dictionary("de_LI").isCommonSkipOtherCnt("sankt", "poi"));
-		assertTrue(searchRules.dictionary("fr_FR").isCommonSkipOtherCnt("sainte", "locality"));
-		assertTrue(searchRules.dictionary("es_ES").isCommonSkipOtherCnt("doctor", "street"));
+		assertTrue(searchRules.dictionary("de_DE").isCommonSkipOtherCnt("dr", SearchModRuleOwner.STREET));
+		assertTrue(searchRules.dictionary("de_LI").isCommonSkipOtherCnt("sankt", SearchModRuleOwner.POI));
+		assertTrue(searchRules.dictionary("fr_FR").isCommonSkipOtherCnt("sainte", SearchModRuleOwner.LOCALITY));
+		assertTrue(searchRules.dictionary("es_ES").isCommonSkipOtherCnt("doctor", SearchModRuleOwner.STREET));
 		// an ignorable word never penalizes a name of any owner
-		assertTrue(searchRules.dictionary("en").isCommonSkipOtherCnt("the", "poi"));
+		assertTrue(searchRules.dictionary("en").isCommonSkipOtherCnt("the", SearchModRuleOwner.POI));
 
 		assertEquals("en_US", searchRules.locales().forMap("Us_new-york_north-america.obf"));
 		assertEquals("de_DE", searchRules.locales().forMap("Germany_bayern_europe.obf"));
@@ -84,20 +86,20 @@ public class SearchVariantRulesTest {
 
 	@Test
 	public void indexRules() {
-		SearchVariantRules german = searchRules.rules("de");
-		SearchVariantRules.Rule strasse = german.index().stream()
+		SearchModLocaleRules german = searchRules.rules("de");
+		SearchModLocaleRules.Rule strasse = german.index().stream()
 				.filter(v -> "Hallerstr 36".equals(v.apply("Hallerstraße 36"))).findFirst().orElseThrow();
-		assertTrue(strasse.appliesTo("street"));
-		assertFalse(strasse.appliesTo("poi"));
+		assertTrue(strasse.appliesTo(SearchModRuleOwner.STREET));
+		assertFalse(strasse.appliesTo(SearchModRuleOwner.POI));
 		assertNull(strasse.apply("Straße 36"));
-		SearchVariantRules italian = searchRules.rules("it");
+		SearchModLocaleRules italian = searchRules.rules("it");
 		assertTrue(italian.index().stream().anyMatch(v -> "SS 42 del Tonale".equals(v.apply("Strada Statale 42 del Tonale"))));
 		assertTrue(italian.index().stream().anyMatch(v -> "SS42 del Tonale".equals(v.apply("Strada Statale 42 del Tonale"))));
-		SearchVariantRules rules = of("<index><rule object=\"street,poi\" from=\"(?iu)\\bStrada\\s+(\\d+)\\b\" "
+		SearchModLocaleRules rules = of("<index><rule object=\"street,poi\" from=\"(?iu)\\bStrada\\s+(\\d+)\\b\" "
 				+ "to=\"S$1\"/></index>");
 		assertEquals("S42", rules.index().get(0).apply("Strada 42"));
-		assertTrue(rules.index().get(0).appliesTo("poi"));
-		assertFalse(rules.index().get(0).appliesTo("locality"));
+		assertTrue(rules.index().get(0).appliesTo(SearchModRuleOwner.POI));
+		assertFalse(rules.index().get(0).appliesTo(SearchModRuleOwner.LOCALITY));
 	}
 
 	@Test
@@ -112,16 +114,16 @@ public class SearchVariantRulesTest {
 		assertTrue(searchRules.dictionary("en_US").likelyPartOfBuilding("tower", null));
 		assertFalse(searchRules.dictionary("en").likelyPartOfBuilding("tower", null));
 		assertTrue(searchRules.dictionary("en_US").isIgnorable("thee"));
-		assertTrue(searchRules.dictionary("en_US").isCommonSkipOtherCnt("eastern", "street"));
+		assertTrue(searchRules.dictionary("en_US").isCommonSkipOtherCnt("eastern", SearchModRuleOwner.STREET));
 		assertEquals("CR7", searchRules.rules("en_US").index().get(0).apply("County Road 7"));
 
 		// a lower layer replaces a rule whole: here it changes the order of the meanings
-		SearchVariantRules replaced = new SearchVariantRules("xx", List.of(
+		SearchModLocaleRules replaced = new SearchModLocaleRules("xx", List.of(
 				layer("<query><rule from=\"st\"><to object=\"street\">Street</to><to>Saint</to></rule></query>"),
 				layer("<query><rule from=\"st\"><to>Saint</to><to object=\"street\">Street</to></rule></query>")));
 		assertEquals(List.of("*:saint", "street:street"), forms(replaced, "st"));
 		// and one meaning replaces several
-		SearchVariantRules one = new SearchVariantRules("xx", List.of(
+		SearchModLocaleRules one = new SearchModLocaleRules("xx", List.of(
 				layer("<query><rule from=\"st\"><to object=\"street\">Street</to><to>Saint</to></rule></query>"),
 				layer("<query><rule from=\"st\" to=\"Saint\"/></query>")));
 		assertEquals(List.of("*:saint"), forms(one, "st"));
@@ -130,7 +132,7 @@ public class SearchVariantRulesTest {
 				"<query><rule from=\"cc\" enabled=\"false\"/></query>"), "no upper layer defines it");
 		expectLayers(List.of("<query><skipPenalty>aa</skipPenalty></query>",
 				"<query><skipPenalty enabled=\"false\">bb</skipPenalty></query>"), "no upper layer defines it");
-		SearchVariantRules uncommon = new SearchVariantRules("xx", List.of(
+		SearchModLocaleRules uncommon = new SearchModLocaleRules("xx", List.of(
 				layer("<query><skipPenalty>aa bb</skipPenalty></query>"),
 				layer("<query><skipPenalty enabled=\"false\">aa</skipPenalty></query>")));
 		assertEquals(List.of("bb"), List.copyOf(uncommon.skipPenalty().keySet()));
@@ -138,7 +140,7 @@ public class SearchVariantRulesTest {
 
 	@Test
 	public void reverseFormIsOneStep() {
-		SearchVariantRules rules = of("<query><rule from=\"st\"><to object=\"street\">Street</to><to>Saint</to></rule>"
+		SearchModLocaleRules rules = of("<query><rule from=\"st\"><to object=\"street\">Street</to><to>Saint</to></rule>"
 				+ "<rule from=\"saint\" to=\"Sanctus\"/></query>");
 		// "saint" leads to "st" but never to the forms of "st": "Saint Louis" does not become "Louis Street"
 		assertEquals(List.of("*:sanctus", "*:st"), forms(rules, "saint"));
@@ -148,7 +150,7 @@ public class SearchVariantRulesTest {
 
 	@Test
 	public void oneFormIsTheAttributeSeveralAreElements() {
-		SearchVariantRules short1 = of("<query><rule from=\"pl\" to=\"Place\" object=\"street\"/>"
+		SearchModLocaleRules short1 = of("<query><rule from=\"pl\" to=\"Place\" object=\"street\"/>"
 				+ "<rule from=\"apt\" object=\"building\"/><rule from=\"the\" to=\"\"/></query>");
 		assertEquals(List.of("street:place"), forms(short1, "pl"));
 		assertEquals(List.of("apt"), List.copyOf(short1.buildings()));
@@ -221,7 +223,7 @@ public class SearchVariantRulesTest {
 		expect("<query><rule from=\"e\" to=\"East\"/></query>", "one-letter word needs an object");
 		of("<query><rule from=\"e\" to=\"East\" object=\"street\"/></query>");
 		// a house-number qualifier and its form are two meanings of one word ("д. 18", "д. Ивановка")
-		SearchVariantRules d = of("<query><rule from=\"д\"><to object=\"building\"/>"
+		SearchModLocaleRules d = of("<query><rule from=\"д\"><to object=\"building\"/>"
 				+ "<to object=\"locality\">Деревня</to></rule></query>");
 		assertEquals(List.of("д"), List.copyOf(d.buildings()));
 		assertEquals(List.of("locality:деревня"), forms(d, "д"));
@@ -249,7 +251,7 @@ public class SearchVariantRulesTest {
 
 	@Test
 	public void skipPenaltyWords() {
-		SearchVariantRules rules = of("<query><skipPenalty>St street\n  Saint</skipPenalty>"
+		SearchModLocaleRules rules = of("<query><skipPenalty>St street\n  Saint</skipPenalty>"
 				+ "<skipPenalty object=\"street\">de la</skipPenalty><skipPenalty object=\"poi\">de</skipPenalty></query>");
 		assertEquals(List.of("st", "street", "saint", "de", "la"), List.copyOf(rules.skipPenalty().keySet()));
 		assertEquals(List.of("street", "poi"), rules.skipPenalty().get("de"));
@@ -271,13 +273,13 @@ public class SearchVariantRulesTest {
 		expect("<query><rule from=\"de\" to=\"\" object=\"street\"/></query>", "<skipPenalty object=\"street\">");
 		expect("<common>st</common>", "<common> is replaced by <skipPenalty>");
 
-		assertTrue(searchRules.dictionary("en").isCommonSkipOtherCnt("st", "poi"));
-		assertFalse(searchRules.dictionary("en").isCommonSkipOtherCnt("main", "street"));
+		assertTrue(searchRules.dictionary("en").isCommonSkipOtherCnt("st", SearchModRuleOwner.POI));
+		assertFalse(searchRules.dictionary("en").isCommonSkipOtherCnt("main", SearchModRuleOwner.STREET));
 	}
 
 	@Test
 	public void classesOfIndexWords() {
-		SearchVariantRules rules = of("<index><class0>Parkway</class0><class1>улица ул</class1><class2>Straße</class2>"
+		SearchModLocaleRules rules = of("<index><class0>Parkway</class0><class1>улица ул</class1><class2>Straße</class2>"
 				+ "</index>");
 		assertEquals(Integer.valueOf(0), rules.wordClass("parkway"));
 		assertEquals(Integer.valueOf(1), rules.wordClass("Улица"));
@@ -288,10 +290,10 @@ public class SearchVariantRulesTest {
 		expect("<query><class1>rue</class1></query>", "Unexpected search rule tag class1");
 		expect("<index><class0>the</class0></index><query><rule from=\"the\" to=\"\"/></query>", "<class0>");
 		// a lower layer moves a word to its class, enabled="false" returns it to the statistics
-		SearchVariantRules moved = new SearchVariantRules("xx", List.of(layer("<index><class2>rue</class2></index>"),
+		SearchModLocaleRules moved = new SearchModLocaleRules("xx", List.of(layer("<index><class2>rue</class2></index>"),
 				layer("<index><class1>rue</class1></index>")));
 		assertEquals(Integer.valueOf(1), moved.wordClass("rue"));
-		SearchVariantRules removed = new SearchVariantRules("xx", List.of(layer("<index><class2>rue</class2></index>"),
+		SearchModLocaleRules removed = new SearchModLocaleRules("xx", List.of(layer("<index><class2>rue</class2></index>"),
 				layer("<index><class2 enabled=\"false\">rue</class2></index>")));
 		assertNull(removed.wordClass("rue"));
 		expectLayers(List.of("<index><class2>rue</class2></index>",
@@ -300,7 +302,7 @@ public class SearchVariantRulesTest {
 
 	@Test
 	public void unglueRules() {
-		SearchVariantRules base = searchRules.rules("");
+		SearchModLocaleRules base = searchRules.rules("");
 		assertEquals(List.of("Atelier Anaïs"), unglue(base, "L'Atelier d'Anaïs"));
 		assertEquals(List.of("Hoffmann"), unglue(base, "E.T.A. Hoffmann"));
 		// every rule splits the name itself: no alternative of both glues
@@ -314,16 +316,16 @@ public class SearchVariantRulesTest {
 		assertEquals("[rules.xml unglue ']", base.unglue("L'Atelier d'Anaïs").get(0).ids().toString());
 		assertEquals("[rules.xml unglue .]", base.unglue("Wijkopenauto's.nl").get(0).ids().toString());
 		// one name of two rules is one alternative name, counted for each rule
-		SearchVariantRules same = of("<index><unglue glue=\".\" minPart=\"3\"/><unglue glue=\"'\" minPart=\"3\"/></index>");
+		SearchModLocaleRules same = of("<index><unglue glue=\".\" minPart=\"3\"/><unglue glue=\"'\" minPart=\"3\"/></index>");
 		assertEquals(List.of("Hoffmann"), unglue(same, "A.'B Hoffmann"));
 		assertEquals("[test.xml unglue ., test.xml unglue ']", same.unglue("A.'B Hoffmann").get(0).ids().toString());
-		SearchVariantRules noApostrophe = new SearchVariantRules("xx", List.of(
+		SearchModLocaleRules noApostrophe = new SearchModLocaleRules("xx", List.of(
 				layer("<index><unglue glue=\".\"/><unglue glue=\"'\" script=\"Latin\"/></index>"),
 				layer("<index><unglue glue=\"'\" enabled=\"false\"/></index>")));
 		assertEquals(List.of(), unglue(noApostrophe, "L'Atelier"));
 		assertEquals(List.of("Mak by"), unglue(noApostrophe, "Mak.by"));
 		// the limits of one rule do not leak into another: "Ab" is too short for the dot
-		SearchVariantRules limits = of("<index><unglue glue=\".\" minPart=\"4\"/><unglue glue=\"'\"/></index>");
+		SearchModLocaleRules limits = of("<index><unglue glue=\".\" minPart=\"4\"/><unglue glue=\"'\"/></index>");
 		assertEquals(List.of("Cdef'Gh", "Ab.Cdef Gh"), unglue(limits, "Ab.Cdef'Gh"));
 		expect("<index><unglue glue=\"ab\"/></index>", "one character");
 		expect("<index><unglue glue=\"a\"/></index>", "one character");
@@ -334,7 +336,7 @@ public class SearchVariantRulesTest {
 
 	@Test
 	public void keysOfAnIndexRule() {
-		SearchVariantRules rules = of("<index><rule object=\"street\" from=\"(?iu)\\bCounty\\s+Road\\s+(\\d+)\\b\" "
+		SearchModLocaleRules rules = of("<index><rule object=\"street\" from=\"(?iu)\\bCounty\\s+Road\\s+(\\d+)\\b\" "
 				+ "to=\"CR$1\" keys=\"always\"/><rule object=\"street\" from=\"(?iu)\\bStrada\\s+(\\d+)\\b\" "
 				+ "to=\"S$1\"/></index>");
 		assertTrue(rules.index().get(0).alwaysKeys());
@@ -346,7 +348,7 @@ public class SearchVariantRulesTest {
 
 	@Test
 	public void localesBelongToTheBase() {
-		SearchLocales table = searchRules.locales();
+		SearchModLocales table = searchRules.locales();
 		assertEquals("en_US", table.forMap("us"));
 		assertEquals("en", table.groupForMap("us"));
 		assertEquals("esl", table.groupForMap("ukraine"));
@@ -383,7 +385,7 @@ public class SearchVariantRulesTest {
 		expect("<query><rule from=\"aa\"><to>bb</to><rule from=\"cc\"/></rule></query>",
 				"Unexpected search rule tag rule");
 		try {
-			new SearchRulesParser("old.xml", null).parse(new ByteArrayInputStream(
+			new SearchModRulesParser("old.xml", null).parse(new ByteArrayInputStream(
 					"<rules version=\"4\"/>".getBytes(StandardCharsets.UTF_8)));
 			fail("version 4 is not supported");
 		} catch (Exception expected) {
@@ -404,24 +406,24 @@ public class SearchVariantRulesTest {
 
 	@Test
 	public void mirrorPairWorksOnBothSides() {
-		SearchVariantRules rules = of("<rule object=\"street\" from=\"blvd\" to=\"Boulevard\"/>"
+		SearchModLocaleRules rules = of("<rule object=\"street\" from=\"blvd\" to=\"Boulevard\"/>"
 				+ "<rule from=\"dr\" to=\"Doktor\"/>");
 		// [run]: a form and its reverse form, as a rule of <query>
 		assertEquals(List.of("street:boulevard"), forms(rules, "blvd"));
 		assertEquals(List.of("street:blvd"), forms(rules, "boulevard"));
 		// [gen]: alternative names both ways, the dot of an abbreviation included, only whole words
-		List<SearchVariantRules.Rule> index = rules.index();
+		List<SearchModLocaleRules.Rule> index = rules.index();
 		assertEquals(4, index.size());
-		SearchVariantRules.Rule abbreviation = index.get(0);
-		SearchVariantRules.Rule full = index.get(1);
+		SearchModLocaleRules.Rule abbreviation = index.get(0);
+		SearchModLocaleRules.Rule full = index.get(1);
 		assertEquals("test.xml street blvd→Boulevard", abbreviation.id().toString());
 		assertEquals("test.xml street Boulevard→blvd", full.id().toString());
 		assertEquals("Sunset Boulevard", abbreviation.apply("Sunset Blvd."));
 		assertEquals("Sunset Boulevard", abbreviation.apply("Sunset BLVD"));
 		assertEquals("Sunset blvd", full.apply("Sunset Boulevard"));
 		assertNull(full.apply("Boulevardier Cafe"));
-		assertTrue(abbreviation.appliesTo("street"));
-		assertFalse(abbreviation.appliesTo("poi"));
+		assertTrue(abbreviation.appliesTo(SearchModRuleOwner.STREET));
+		assertFalse(abbreviation.appliesTo(SearchModRuleOwner.POI));
 		assertEquals("Doktor-Weber-Straße", index.get(2).apply("Dr.-Weber-Straße"));
 		assertEquals("Ludwig dr Allee", index.get(3).apply("Ludwig Doktor Allee"));
 		assertNull(index.get(3).apply("Doktorandenweg"));
@@ -430,7 +432,7 @@ public class SearchVariantRulesTest {
 	@Test
 	public void mirrorPairsShareTheirFullWord() {
 		// several abbreviations of one word are synonyms: a chain through the full word stays in its meaning
-		SearchVariantRules rules = of("<rule object=\"street\" from=\"av\" to=\"Avenida\"/>"
+		SearchModLocaleRules rules = of("<rule object=\"street\" from=\"av\" to=\"Avenida\"/>"
 				+ "<rule object=\"street\" from=\"avda\" to=\"Avenida\"/>"
 				+ "<query><rule object=\"street\" from=\"ave\" to=\"Avenida\"/></query>");
 		assertEquals(List.of("street:av", "street:avda", "street:ave"), forms(rules, "avenida"));
@@ -441,16 +443,16 @@ public class SearchVariantRulesTest {
 	public void mirrorPairLayers() {
 		String base = "<rule object=\"street\" from=\"blvd\" to=\"Boulevard\"/>";
 		// a lower layer replaces the pair by a rule of <query> of the same word: the alternative names go too
-		SearchVariantRules query = new SearchVariantRules("xx", List.of(layer(base),
+		SearchModLocaleRules query = new SearchModLocaleRules("xx", List.of(layer(base),
 				layer("<query><rule from=\"blvd\" to=\"Boulevard\" object=\"street\"/></query>")));
 		assertEquals(0, query.index().size());
 		assertEquals(List.of("street:boulevard"), forms(query, "blvd"));
-		SearchVariantRules disabled = new SearchVariantRules("xx", List.of(layer(base),
+		SearchModLocaleRules disabled = new SearchModLocaleRules("xx", List.of(layer(base),
 				layer("<rule from=\"blvd\" enabled=\"false\"/>")));
 		assertEquals(0, disabled.index().size());
 		assertEquals(List.of(), forms(disabled, "blvd"));
 		// and back: a lower layer makes a rule of <query> a mirror pair
-		SearchVariantRules mirror = new SearchVariantRules("xx", List.of(
+		SearchModLocaleRules mirror = new SearchModLocaleRules("xx", List.of(
 				layer("<query><rule from=\"blvd\" to=\"Boulevard\" object=\"street\"/></query>"), layer(base, "low.xml")));
 		assertEquals("low.xml street blvd→Boulevard", mirror.index().get(0).id().toString());
 	}
@@ -477,37 +479,37 @@ public class SearchVariantRulesTest {
 				"");
 	}
 
-	private List<String> unglue(SearchVariantRules rules, String name) {
-		return rules.unglue(name).stream().map(SearchVariantRules.Unglued::name).collect(Collectors.toList());
+	private List<String> unglue(SearchModLocaleRules rules, String name) {
+		return rules.unglue(name).stream().map(SearchModLocaleRules.Unglued::name).collect(Collectors.toList());
 	}
 
 	@Test
 	public void penaltyFreeWordsAreAligned() {
 		// a word of a name keeps its diacritics: "école" and "ecole" are one word of the dictionaries
 		String locale = "fr_ZZ";
-		SearchVariantRules rules = new SearchVariantRules(locale, List.of(layer("<index><class1>école</class1></index>"
+		SearchModLocaleRules rules = new SearchModLocaleRules(locale, List.of(layer("<index><class1>école</class1></index>"
 				+ "<query><skipPenalty object=\"street\">straße</skipPenalty>"
 				+ "<skipPenalty object=\"poi\">strasse</skipPenalty></query>")));
 		assertEquals(List.of("street", "poi"), rules.skipPenalty().get("strasse"));
-		SearchRulesDictionary dictionary = new SearchRulesDictionary(locale, rules);
-		assertTrue(dictionary.isCommonSkipOtherCnt("école", "street"));
-		assertTrue(dictionary.isCommonSkipOtherCnt("ecole", "poi"));
+		SearchModDictionary dictionary = new SearchModDictionary(locale, rules);
+		assertTrue(dictionary.isCommonSkipOtherCnt("école", SearchModRuleOwner.STREET));
+		assertTrue(dictionary.isCommonSkipOtherCnt("ecole", SearchModRuleOwner.POI));
 		// the owners of two spellings are merged
-		assertTrue(dictionary.isCommonSkipOtherCnt("straße", "street"));
-		assertTrue(dictionary.isCommonSkipOtherCnt("strasse", "poi"));
-		assertFalse(dictionary.isCommonSkipOtherCnt("straße", "locality"));
+		assertTrue(dictionary.isCommonSkipOtherCnt("straße", SearchModRuleOwner.STREET));
+		assertTrue(dictionary.isCommonSkipOtherCnt("strasse", SearchModRuleOwner.POI));
+		assertFalse(dictionary.isCommonSkipOtherCnt("straße", SearchModRuleOwner.LOCALITY));
 		expect("<index><class1>école</class1></index><query><skipPenalty>ecole</skipPenalty></query>",
 				"<class1>");
 	}
 
-	private SearchRulesParser.Layer layer(String body) {
+	private SearchModRulesParser.Layer layer(String body) {
 		return layer(body, "test.xml");
 	}
 
-	private SearchRulesParser.Layer layer(String body, String file) {
+	private SearchModRulesParser.Layer layer(String body, String file) {
 		try {
-			SearchLocales locales = SearchVariantRules.BASE_FILE.equals(file) ? new SearchLocales() : null;
-			return new SearchRulesParser(file, locales).parse(new ByteArrayInputStream(
+			SearchModLocales locales = SearchModLocaleRules.BASE_FILE.equals(file) ? new SearchModLocales() : null;
+			return new SearchModRulesParser(file, locales).parse(new ByteArrayInputStream(
 					("<rules version=\"5\">" + body + "</rules>").getBytes(StandardCharsets.UTF_8)));
 		} catch (RuntimeException e) {
 			throw e;
@@ -516,8 +518,8 @@ public class SearchVariantRulesTest {
 		}
 	}
 
-	private SearchVariantRules of(String body) {
-		return new SearchVariantRules("xx", List.of(layer(body)));
+	private SearchModLocaleRules of(String body) {
+		return new SearchModLocaleRules("xx", List.of(layer(body)));
 	}
 
 	private void expect(String body, String message) {
@@ -526,7 +528,7 @@ public class SearchVariantRulesTest {
 
 	private void expectBase(String body, String message) {
 		try {
-			layer(body, SearchVariantRules.BASE_FILE);
+			layer(body, SearchModLocaleRules.BASE_FILE);
 			fail("expected an error: " + message);
 		} catch (IllegalArgumentException expected) {
 			assertTrue(expected.getMessage(), expected.getMessage().contains(message));
@@ -535,7 +537,7 @@ public class SearchVariantRulesTest {
 
 	private void expectLayers(List<String> bodies, String message) {
 		try {
-			new SearchVariantRules("xx", bodies.stream().map(this::layer).collect(Collectors.toList()));
+			new SearchModLocaleRules("xx", bodies.stream().map(this::layer).collect(Collectors.toList()));
 			fail("expected an error: " + message);
 		} catch (IllegalArgumentException expected) {
 			assertTrue(expected.getMessage(), expected.getMessage().contains(message));

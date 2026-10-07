@@ -16,8 +16,9 @@ import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.binary.SearchRules;
-import net.osmand.binary.SearchRulesDictionary.QueryForm;
+import net.osmand.binary.SearchModRules;
+import net.osmand.binary.SearchModRules.SearchModRuleOwner;
+import net.osmand.binary.SearchModDictionary.QueryForm;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.NameIndexReader.NameIndexReaderMatcher;
@@ -87,7 +88,7 @@ public class SpatialSearchToken {
 	int mainNumber = -1;
 	/** a bare number whose value another query word already carries: '28' next to '28-ма' */
 	boolean numberNamedByOther;
-	final SearchRules globalRules;
+	final SearchModRules globalRules;
 	// the word by the rules of the locale of every map it is matched with ("" - base rules)
 	Map<String, LocaleRules> localeRules = new LinkedHashMap<>();
 
@@ -134,7 +135,7 @@ public class SpatialSearchToken {
 	public record PartialMatch(NameIndexAtom atom, List<SpatialSearchToken> other, boolean nonNumericMatch) {
 	}
 
-	public SpatialSearchToken(SearchRules globalRules, int MIN_CHAR_INCOMPLETE, String ow, String original, int order) {
+	public SpatialSearchToken(SearchModRules globalRules, int MIN_CHAR_INCOMPLETE, String ow, String original, int order) {
 		this.globalRules = globalRules;
 		this.MIN_CHAR_INCOMPLETE = MIN_CHAR_INCOMPLETE;
 		originalWord = original;
@@ -358,7 +359,7 @@ public class SpatialSearchToken {
 	 * @param locale rules locale of the map of the name
 	 * @param object owner of the name (street, locality, boundary, postcode, poi) for the forms of some owners
 	 */
-	boolean matchName(String name, TIntArrayList poiTypes, String locale, String object) {
+	boolean matchName(String name, TIntArrayList poiTypes, String locale, SearchModRuleOwner object) {
 		LocaleRules lf = localeRules(locale);
 		if (matchName(name, poiTypes, lf)) {
 			return true;

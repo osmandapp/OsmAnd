@@ -1,30 +1,32 @@
 package net.osmand.binary;
 
-import static net.osmand.binary.SearchVariantRules.ANY_OBJECT;
-import static net.osmand.binary.SearchVariantRules.BASE_FILE;
-import static net.osmand.binary.SearchVariantRules.BUILDING_OBJECT;
-import static net.osmand.binary.SearchVariantRules.VERSION;
+import static net.osmand.binary.SearchModLocaleRules.ANY_OBJECT;
+import static net.osmand.binary.SearchModLocaleRules.BASE_FILE;
+import static net.osmand.binary.SearchModLocaleRules.BUILDING_OBJECT;
+import static net.osmand.binary.SearchModLocaleRules.VERSION;
 
 import net.osmand.PlatformUtil;
-import net.osmand.binary.SearchVariantRules.Form;
-import net.osmand.binary.SearchVariantRules.Mirror;
-import net.osmand.binary.SearchVariantRules.Rule;
-import net.osmand.binary.SearchVariantRules.SkipPenalty;
-import net.osmand.binary.SearchVariantRules.Unglue;
-import net.osmand.binary.SearchVariantRules.WordRule;
+import net.osmand.binary.SearchModLocaleRules.Form;
+import net.osmand.binary.SearchModLocaleRules.Mirror;
+import net.osmand.binary.SearchModLocaleRules.Rule;
+import net.osmand.binary.SearchModRules.SearchModRuleOwner;
+import net.osmand.binary.SearchModLocaleRules.SkipPenalty;
+import net.osmand.binary.SearchModLocaleRules.Unglue;
+import net.osmand.binary.SearchModLocaleRules.WordRule;
 import net.osmand.util.SearchAlgorithms;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-/** Reads one rules file ({@code rules.xml}, {@code rules_<locale>.xml}) into a {@link Layer}, see {@link SearchVariantRules}. */
-final class SearchRulesParser {
+/** Reads one rules file ({@code rules.xml}, {@code rules_<locale>.xml}) into a {@link Layer}, see {@link SearchModLocaleRules}. */
+final class SearchModRulesParser {
 
 	private static final Set<String> INDEX_ATTRIBUTES = Set.of("from", "to", "object", "mode", "enabled", "keys");
 	private static final Set<String> QUERY_ATTRIBUTES = Set.of("from", "to", "object", "enabled");
@@ -32,9 +34,9 @@ final class SearchRulesParser {
 	private final String file;
 	private final Layer layer;
 	// the table that <locales> of rules.xml fills, null for a file without it
-	private final SearchLocales locales;
+	private final SearchModLocales locales;
 
-	SearchRulesParser(String file, SearchLocales locales) {
+	SearchModRulesParser(String file, SearchModLocales locales) {
 		this.file = file;
 		this.layer = new Layer(file);
 		this.locales = locales;
@@ -129,7 +131,7 @@ final class SearchRulesParser {
 		}
 	}
 
-	/** @return the rules of the file; {@code <locales>} of rules.xml go to the {@link SearchLocales} of the parser */
+	/** @return the rules of the file; {@code <locales>} of rules.xml go to the {@link SearchModLocales} of the parser */
 	Layer parse(InputStream input) throws Exception {
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
 		parser.setInput(input, "UTF-8");
@@ -505,8 +507,8 @@ final class SearchRulesParser {
 		for (String type : types) {
 			String t = type.trim();
 			any |= t.equals(ANY_OBJECT);
-			if (!t.equals(ANY_OBJECT) && !RuleOwner.ALL.contains(t)) {
-				throw new IllegalArgumentException("Unknown object '" + t + "', expected one of " + RuleOwner.ALL + ", '*' or "
+			if (!t.equals(ANY_OBJECT) && Arrays.stream(SearchModRuleOwner.values()).noneMatch(o -> o.tag.equals(t))) {
+				throw new IllegalArgumentException("Unknown object '" + t + "', expected an owner, '*' or "
 						+ "'building'" + where);
 			}
 		}
