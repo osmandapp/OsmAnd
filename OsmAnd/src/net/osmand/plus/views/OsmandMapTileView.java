@@ -2280,7 +2280,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (isPinchZoomMagnificationEnabled && mapRenderer != null) {
 				mapRenderer.setViewportScale(0.0, false);
 				mapRenderer.setViewportShift(0, 0, false);
-				changeZoomPosition((float) 0, 0);
+				if (completedAnimation) {
+					changeZoomPosition((float) 0, 0);
+				} else if ((startZooming || startRotating) && relativeToStart > 1.0 && multiTouchSupport != null) {
+					// Magnified zoom in only scaled the viewport around the first touch point, apply the same real zoom
+					PointF firstPoint = multiTouchSupport.getFirstPoint();
+					float startZoom = initialViewport.getZoom() + (float) initialViewport.getZoomFloatPart();
+					float deltaZoom = Zoom.fromDistanceRatio(relativeToStart, 1, startZoom) - startZoom;
+					Zoom zoom = new Zoom(initialViewport.getZoom(), (float) initialViewport.getZoomFloatPart(), getMinZoom(), getMaxZoom());
+					zoom.calculateAnimatedZoom(mapRenderer, currentViewport.getZoom(), deltaZoom);
+					setZoomAndAnimationImpl(zoom.getBaseZoom(), zoom.getZoomAnimation(), zoom.getZoomFloatPart(),
+							(int) firstPoint.x, (int) firstPoint.y);
+					finishZoomAndRotationGesture();
+				}
 			}
 		}
 
@@ -2454,6 +2466,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						multiTouchCenterY = (int) initialMultiTouchCenterPoint.y;
                         multiTouchFirstX = (int) x1;
                         multiTouchFirstY = (int) y1;
+					}
+					if (!targetChanged) {
+						targetChanged = true;
+						// Remember last target position before it is changed with map gesture
+						PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
+						targetPixelX = targetPixelPosition.getX();
+						targetPixelY = targetPixelPosition.getY();
 					}
 					// Scale and shift around the pinch center
 					mapRenderer.setViewportScale(relativeToStart, false);
