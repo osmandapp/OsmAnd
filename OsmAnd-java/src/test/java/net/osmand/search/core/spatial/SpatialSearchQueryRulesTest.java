@@ -5,46 +5,46 @@ import org.junit.Test;
 
 public class SpatialSearchQueryRulesTest {
 
-	private static SpatialSearchToken token(String word, String locale) {
-		SpatialSearchToken t = new SpatialSearchToken(2, word.toLowerCase(), word, 0);
-		t.setLocale(locale);
-		return t;
+	private static SpatialSearchToken token(String word) {
+		return new SpatialSearchToken(2, word.toLowerCase(), word, 0);
 	}
 
 	@Test
 	public void placeAbbreviationRequiresEnglishStreet() {
-		SpatialSearchToken pl = token("Pl", "en");
-		Assert.assertTrue(pl.matchName("Place", null, "street"));
-		Assert.assertFalse(pl.matchName("Place", null, "poi"));
-		pl.setLocale("de");
-		Assert.assertFalse(pl.matchName("Place", null, "street"));
-		Assert.assertTrue(pl.matchName("Pl", null, "poi"));
-		SpatialSearchToken mount = token("Mt", "en");
-		Assert.assertTrue(mount.matchName("Mount", null, "locality"));
-		Assert.assertFalse(mount.matchName("Mount", null, "street"));
+		SpatialSearchToken pl = token("Pl");
+		Assert.assertTrue(pl.matchName("Place", null, "en", "street"));
+		Assert.assertFalse(pl.matchName("Place", null, "en", "poi"));
+		Assert.assertFalse(pl.matchName("Place", null, "de", "street"));
+		Assert.assertTrue(pl.matchName("Pl", null, "de", "poi"));
+		SpatialSearchToken mount = token("Mt");
+		Assert.assertTrue(mount.matchName("Mount", null, "en", "locality"));
+		Assert.assertFalse(mount.matchName("Mount", null, "en", "street"));
 	}
 
 	@Test
-	public void prefixMatcherFollowsTheLocale() {
+	public void prefixMatcherFollowsTheLocaleOfTheMap() {
 		SpatialSearchContext.SpatialSearchStats stats = new SpatialSearchContext.SpatialSearchStats();
-		SpatialSearchToken parkway = token("Pkwy", "en");
-		Assert.assertTrue(parkway.getPrefixMatcher(stats).matchKey("parkway"));
-		parkway.setLocale("de");
-		Assert.assertFalse(parkway.getPrefixMatcher(stats).matchKey("parkway"));
-		SpatialSearchToken avenue = token("Ave", "en_US");
-		Assert.assertTrue(avenue.matchName("Esplanade", null, "street"));
-		Assert.assertTrue(avenue.getPrefixMatcher(stats).matchKey("esplanade"));
-		avenue.setLocale("en");
-		Assert.assertFalse(avenue.matchName("Esplanade", null, "street"));
-		Assert.assertFalse(avenue.getPrefixMatcher(stats).matchKey("esplanade"));
+		SpatialSearchToken parkway = token("Pkwy");
+		Assert.assertTrue(parkway.getPrefixMatcher(stats, "en").matchKey("parkway"));
+		Assert.assertFalse(parkway.getPrefixMatcher(stats, "de").matchKey("parkway"));
+		// the first map does not change the matches of the second one
+		Assert.assertTrue(parkway.getPrefixMatcher(stats, "en").matchKey("parkway"));
+		SpatialSearchToken avenue = token("Ave");
+		Assert.assertTrue(avenue.matchName("Esplanade", null, "en_US", "street"));
+		Assert.assertFalse(avenue.matchName("Esplanade", null, "en", "street"));
+		Assert.assertTrue(avenue.getPrefixMatcher(stats, "en_US").matchKey("esplanade"));
+		Assert.assertFalse(avenue.getPrefixMatcher(stats, "en").matchKey("esplanade"));
 	}
 
 	@Test
-	public void buildingSuffixFollowsTheLocale() {
-		SpatialSearchToken ter = token("Ter", "en_US");
+	public void buildingSuffixFollowsTheLocaleOfTheMap() {
+		SpatialSearchToken ter = token("Ter");
+		Assert.assertFalse(ter.likelyPartOfBuilding("en_US"));
+		Assert.assertTrue(ter.likelyPartOfBuilding("fr_FR"));
+		Assert.assertTrue(ter.matchName("Terrace", null, "en_US", "street"));
+		// a POI category is of no map: any map the word was matched with
 		Assert.assertFalse(ter.likelyPartOfBuilding());
-		Assert.assertTrue(ter.matchName("Terrace", null, "street"));
-		ter.setLocale("fr_FR");
+		ter.matchName("Ter", null, "fr_FR", "street");
 		Assert.assertTrue(ter.likelyPartOfBuilding());
 	}
 }
