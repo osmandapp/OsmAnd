@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,6 +21,8 @@ import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.RuleOwner;
+import net.osmand.binary.SearchLocales;
+import net.osmand.binary.SearchVariantRules;
 import net.osmand.binary.NameIndexReader.NameIndexReaderMatcher;
 import net.osmand.binary.ObfConstants;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
@@ -380,7 +383,12 @@ public class SpatialSearchToken {
 				// select shortest available version (see number of tests 'Piazza Trento e Trieste', netherlands_amsterdam_eerste_helmersstraat...)
 				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
 					res = Integer.compare(atom.otherWordsCnt, existing.otherWordsCnt);
-					if (res == 0) {
+					if (res == 0 && atom.otherFoundCnt != existing.otherFoundCnt
+							&& spelledByRule(atom.name, existing.name, atom.locale)) {
+						// one name and its alternative name of a rule ("college avenue east", "college av east"): the
+						// spelling with more words of the query, an unmatched common word ("av") is no shorter name
+						res = Integer.compare(existing.otherFoundCnt, atom.otherFoundCnt);
+					} else if (res == 0) {
 						res = Integer.compare(atom.otherFoundCnt, existing.otherFoundCnt);
 					}
 				} else if (res == 0) {
@@ -393,9 +401,17 @@ public class SpatialSearchToken {
 					res = Boolean.compare(atom.isBuilding() || atom.isPOIRef(),
 						existing.isBuilding() || existing.isPOIRef());
 				}
-				// 'вулиця 28-ма Лінія 28': '28-ма' names the street, the bare 28 keeps its house
-				if (numberNamedByOther && (existing.isBuilding() || existing.isPOIRef()) && !(atom.isBuilding() || atom.isPOIRef())) {
-					res = 0;
+				// 'вулиця 28-ма Лінія 28': '28-ма' names the street, the bare 28 keeps its house whichever came first: the
+				// street read by another of its names ("28-я Линия ул", "28-a Liniia Street") neither replaces the house
+				// nor keeps it out
+				if (numberNamedByOther) {
+					boolean house = atom.isBuilding() || atom.isPOIRef();
+					boolean existingHouse = existing.isBuilding() || existing.isPOIRef();
+					if (existingHouse && !house) {
+						res = 0;
+					} else if (house && !existingHouse) {
+						res = -1;
+					}
 				}
 				boolean replace = res < 0;
 				if (replace) {
@@ -416,6 +432,40 @@ public class SpatialSearchToken {
 			quadTreeSkip.addObject(indx, atom.coords.bbox31, indx);
 		}
 		return true;
+	}
+
+	/**
+	 * Two names of one atom differ in one word that an {@code <index>} rule of the locale turns into the other
+	 * ("avenue" -> "av"): an alternative name of the generator, not another name of the object ("пошта", "почта" of
+	 * name:uk and name:ru).
+	 */
+	static boolean spelledByRule(String name, String otherName, String locale) {
+		Set<String> words = new HashSet<>(List.of(name.split(" ")));
+		Set<String> otherWords = new HashSet<>(List.of(otherName.split(" ")));
+		if (words.size() != otherWords.size()) {
+			return false;
+		}
+		Set<String> onlyHere = new HashSet<>(words);
+		onlyHere.removeAll(otherWords);
+		Set<String> onlyThere = new HashSet<>(otherWords);
+		onlyThere.removeAll(words);
+		if (onlyHere.size() != 1 || onlyThere.size() != 1) {
+			return false;
+		}
+		String a = onlyHere.iterator().next();
+		String b = onlyThere.iterator().next();
+		for (SearchVariantRules.Rule rule : SearchVariantRules.forLocale(SearchLocales.normalize(locale)).index()) {
+			if (spells(rule, a, b) || spells(rule, b, a)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static boolean spells(SearchVariantRules.Rule rule, String from, String to) {
+		String alternative = rule.apply(from);
+		return alternative != null && SearchAlgorithms.alignChars(alternative.toLowerCase(Locale.ROOT)).equals(
+				SearchAlgorithms.alignChars(to));
 	}
 
 	private boolean matchName(String name, TIntArrayList poiTypes, LocaleMatch lm) {

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -888,7 +889,7 @@ public class SpatialSearchContext {
 		if (commonWord != null) {
 			commonWord[0] = isWordCommonlyUsed(indx, mname);
 			if (commonWord.length > 1) {
-				commonWord[1] = isKindWord(indx, mname);
+				commonWord[1] = isKindWord(indx, mname, locale, object);
 			}
 		}
 		stats.sub1MatchTime.finish();
@@ -969,7 +970,7 @@ public class SpatialSearchContext {
 						otherTokens.add(token);
 						matched = true;
 						nameFound++;
-						if (!isKindWord(indx, otherName)) {
+						if (!isKindWord(indx, otherName, locale, object)) {
 							distinct++;
 						}
 						break;
@@ -1070,6 +1071,34 @@ public class SpatialSearchContext {
 	 *  not which one: measured on the map, like the common words, never listed by hand */
 	boolean isKindWord(NameIndexReader indx, String word) {
 		return word != null && (wordFlags(indx, word) & WORD_KIND) != 0;
+	}
+
+	/**
+	 * A word of an alternative name ("av" of "North Av", a mirror pair of rules-spec.md 3.4) is never counted as a
+	 * non-indexed word of the map: it says what kind the object is when the one word it stands for does ("avenue").
+	 * A word of several meanings ("st": Street, Saint) says nothing.
+	 *
+	 * @param owner owner of the name: street, locality, boundary, postcode, poi
+	 */
+	boolean isKindWord(NameIndexReader indx, String word, String locale, String owner) {
+		if (word == null) {
+			return false;
+		}
+		if (isKindWord(indx, word)) {
+			return true;
+		}
+		String single = null;
+		for (Abbreviations.QueryForm form : Abbreviations.getQueryForms(word, locale)) {
+			if (form.reverse() || !form.appliesTo(owner)) {
+				continue;
+			}
+			String w = form.word().toLowerCase(Locale.ROOT);
+			if (single != null && !single.equals(w)) {
+				return false;
+			}
+			single = w;
+		}
+		return single != null && isKindWord(indx, single);
 	}
 
 	private boolean isWordCommonlyUsed(NameIndexReader indx, String mainWord) {
