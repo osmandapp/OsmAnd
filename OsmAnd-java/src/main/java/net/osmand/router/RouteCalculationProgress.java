@@ -46,6 +46,7 @@ public class RouteCalculationProgress implements Serializable {
 	public int loadedTiles = 0;
 	
 	public boolean isCancelled;
+	public boolean memoryLimitExceeded; // set with isCancelled when the memory guard stops the calculation
 	public boolean requestPrivateAccessRouting;
 
 	public long routeCalculationStartTime;
