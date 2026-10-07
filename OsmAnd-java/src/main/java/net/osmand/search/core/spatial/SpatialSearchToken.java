@@ -64,6 +64,8 @@ public class SpatialSearchToken {
 	Set<String> poiCategoryKeysToAutocomplete = new HashSet<>();
 	Set<Integer> poiCategoryIds = new HashSet<>();
 	List<NameIndexAtom> atoms = new ArrayList<>();
+	// words one edit away from a complete word and the number of objects they name, counted while its atoms are read
+	Map<String, int[]> typoNeighbours;
 	TLongObjectHashMap<NameIndexAtom> index = new TLongObjectHashMap<>();
 	HashQuadTree<Integer> quadTree = new HashQuadTree<>(16);
 	HashSkipTileQuadTree<Integer> quadTreeSkip = new HashSkipTileQuadTree<>();

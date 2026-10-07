@@ -1,6 +1,7 @@
 package net.osmand.search.core.spatial;
 
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -560,7 +561,161 @@ public class SpatialSearchContext {
 			for (PrefixNameValue prefix : matchedPrefixes) {
 				parseAtomSuffixes(t, indxInd, indx, prefix, tokens);
 			}
+			if (isTypoCandidate(t)) {
+				for (PrefixNameValue prefix : matchedPrefixes) {
+					countTypoNeighbours(t, prefix);
+				}
+			}
 		}
+	}
+
+	private boolean isTypoCandidate(SpatialSearchToken t) {
+		int min = settings.TYPO_MIN_LETTERS;
+		return min > 0 && !t.broad && t.wordNoDot.length() >= min
+				&& SearchAlgorithms.letters(t.wordNoDot) == t.wordNoDot.length();
+	}
+
+	/**
+	 * The words of a name index block one edit away from the token (a word still being typed: its beginning) and the
+	 * number of objects that carry them. The block is the one the token itself was read from, so only typos after
+	 * its key letters are seen.
+	 */
+	private void countTypoNeighbours(SpatialSearchToken t, PrefixNameValue prefix) throws IOException {
+		AddressNameIndexData addrData = prefix.getAddr();
+		OsmAndPoiNameIndexData poiData = addrData == null ? prefix.getPoi() : null;
+		if (addrData == null && poiData == null) {
+			return;
+		}
+		String typed = typoKey(t.wordNoDot);
+		List<String> names = new ArrayList<>();
+		String curSuffix = null;
+		boolean any = false;
+		for (String s : addrData != null ? addrData.getSuffixesDictionaryList() : poiData.getSuffixesDictionaryList()) {
+			curSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(curSuffix, s);
+			String name = typoKey(prefix.key + curSuffix);
+			boolean near = name.indexOf(' ') == -1
+					&& (isOneEdit(typed, name) || (t.incomplete && isOneEditPrefix(typed, name)));
+			names.add(near ? name : null);
+			any |= near;
+		}
+		if (!any) {
+			return;
+		}
+		Set<String> inAtom = new HashSet<>();
+		if (addrData != null) {
+			for (AddressNameIndexDataAtom a : addrData.getAtomList()) {
+				countTypoNeighbours(t, names, a.getSuffixesBitsetIndexList(), inAtom);
+			}
+		} else {
+			for (OsmAndPoiNameIndexDataAtom a : poiData.getAtomsList()) {
+				if (a.getPoiIndInBlockCount() > 0) {
+					countTypoNeighbours(t, names, a.getSuffixesBitsetIndexList(), inAtom);
+				}
+			}
+		}
+	}
+
+	private void countTypoNeighbours(SpatialSearchToken t, List<String> names, List<Integer> suffixBits, Set<String> inAtom) {
+		inAtom.clear();
+		for (int bit : suffixBits) {
+			int ind = bit / 2 - 1;
+			if (bit != 0 && bit % 2 == 0 && ind < names.size() && names.get(ind) != null && inAtom.add(names.get(ind))) {
+				if (t.typoNeighbours == null) {
+					t.typoNeighbours = new HashMap<>();
+				}
+				t.typoNeighbours.computeIfAbsent(names.get(ind), k -> new int[1])[0]++;
+			}
+		}
+	}
+
+	/**
+	 * The input with its first misspelled word corrected: a complete word that names at most TYPO_MAX_OBJECTS
+	 * objects while a word one edit away names more than TYPO_RATIO times as many (any number when it names none).
+	 */
+	String typoSuggestion(String input, List<SpatialSearchToken> tokens) {
+		List<SpatialSearchToken> ordered = new ArrayList<>(tokens);
+		ordered.sort(Comparator.comparingInt(t -> t.originalOrder));
+		SpatialSearchToken last = ordered.isEmpty() ? null : ordered.get(ordered.size() - 1);
+		for (SpatialSearchToken t : ordered) {
+			if (!isTypoCandidate(t) || t.typoNeighbours == null || t.hasPoiCategoryKeys()) {
+				continue;
+			}
+			if (last != null && last.incomplete && t != last) {
+				// a word is still being typed: only it is corrected, the earlier words once it is finished
+				continue;
+			}
+			int objects = t.atoms.size();
+			if (objects > settings.TYPO_MAX_OBJECTS) {
+				continue;
+			}
+			String best = null;
+			int bestCount = 0;
+			for (Entry<String, int[]> e : t.typoNeighbours.entrySet()) {
+				int c = e.getValue()[0];
+				if (c > bestCount || (c == bestCount && best != null && e.getKey().compareTo(best) < 0)) {
+					best = e.getKey();
+					bestCount = c;
+				}
+			}
+			if (best != null && (objects == 0 || bestCount >= (long) settings.TYPO_RATIO * objects)) {
+				return replaceWord(input, t.originalWord, best);
+			}
+		}
+		return null;
+	}
+
+	private static String replaceWord(String input, String word, String replacement) {
+		String text = stripIncompleteDot(input);
+		word = stripIncompleteDot(word);
+		int i = text.indexOf(word);
+		if (i < 0) {
+			i = text.toLowerCase().indexOf(word.toLowerCase());
+		}
+		return i < 0 ? null : text.substring(0, i) + replacement + text.substring(i + word.length());
+	}
+
+	private static String stripIncompleteDot(String s) {
+		return s.endsWith(SpatialSearchToken.DOT_INCOMPLETE_STRING) ? s.substring(0, s.length() - 1) : s;
+	}
+
+	// letters only, lower case, without accents: the form in which a typo and its correction are compared
+	static String typoKey(String s) {
+		String n = Normalizer.normalize(s.toLowerCase().replace("ß", "ss"), Normalizer.Form.NFD);
+		return n.replaceAll("\\p{M}", "");
+	}
+
+	// a word still being typed: the beginning of the name is one edit away from it
+	static boolean isOneEditPrefix(String typed, String name) {
+		if (name.startsWith(typed)) {
+			return false; // a continuation of the typed letters, not a typo
+		}
+		int n = typed.length();
+		for (int len = n - 1; len <= n + 1; len++) {
+			if (len > 0 && len < name.length() && isOneEdit(typed, name.substring(0, len))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// one insertion, deletion, substitution or swap of two neighbouring letters
+	static boolean isOneEdit(String a, String b) {
+		int la = a.length(), lb = b.length();
+		if (Math.abs(la - lb) > 1 || a.equals(b)) {
+			return false;
+		}
+		int i = 0;
+		while (i < la && i < lb && a.charAt(i) == b.charAt(i)) {
+			i++;
+		}
+		if (la == lb) {
+			if (a.substring(i + 1).equals(b.substring(i + 1))) {
+				return true;
+			}
+			return i + 1 < la && a.charAt(i) == b.charAt(i + 1) && a.charAt(i + 1) == b.charAt(i)
+					&& a.substring(i + 2).equals(b.substring(i + 2));
+		}
+		return la > lb ? a.substring(i + 1).equals(b.substring(i)) : a.substring(i).equals(b.substring(i + 1));
 	}
 	
 	static boolean checkPoiTypeId(int poiTypeId) {

@@ -67,6 +67,13 @@ public class SpatialTextSearch {
 		public boolean SEARCH_SUGGESTION = false; // incomplete to add '.' in the end
 		// not used in search as maps provided (web could multiply by 1.5x or adjust bbox)
 		public int SUGGESTED_SEARCH_RADIUS_KM = 400;  
+
+		// "did you mean": a complete word of at least TYPO_MIN_LETTERS letters that names at most TYPO_MAX_OBJECTS
+		// objects is corrected to a word one edit away that names more than TYPO_RATIO times as many objects
+		// (0 objects: any such word); 0 letters disables it
+		public int TYPO_MIN_LETTERS = 4;
+		public int TYPO_MAX_OBJECTS = 1;
+		public int TYPO_RATIO = 300;
 				
 		// lang to deduplicate results
 		public String LANG_DEDUPLICATE = ""; 
@@ -314,6 +321,9 @@ public class SpatialTextSearch {
 		public List<SpatialSearchResult> mainResults;
 
 		public List<SpatialSearchResultsList> combinations;
+
+		// the input with one misspelled word corrected, null when every word is found
+		public String typoSuggestion;
 
 		public SpatialSearchStats stats;
 		
@@ -623,6 +633,7 @@ public class SpatialTextSearch {
 		ctx.setTokens(res.tokens);
 		ctx.processPoiCategories();
 		ctx.readAtoms();
+		res.typoSuggestion = ctx.typoSuggestion(input, res.tokens);
 		ctx.stats.step1Atoms.finish();
 
 		// 3. sort tokens
