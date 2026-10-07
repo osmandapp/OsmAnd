@@ -74,6 +74,12 @@ public class SpatialTextSearch {
 		public int TYPO_MIN_LETTERS = 4;
 		public int TYPO_MAX_OBJECTS = 1;
 		public int TYPO_RATIO = 300;
+		// a word naming at most TYPO_MAX_OBJECTS objects is also looked up with a typo in its first letters (the index
+		// key): the blocks of those keys are read, larger than TYPO_MAX_BLOCK_BYTES skipped (0 - all); 0 letters disables it
+		public int TYPO_KEY_LETTERS = 4;
+		public int TYPO_MAX_BLOCK_BYTES = 0;
+		// the maps are read nearest first until this time is spent on a word
+		public int TYPO_KEY_TIME_MS = 150;
 				
 		// lang to deduplicate results
 		public String LANG_DEDUPLICATE = ""; 
@@ -285,6 +291,8 @@ public class SpatialTextSearch {
 		public final long length;
 		public final long edition;
 		public final List<NameIndexReader> indexReaders = new ArrayList<NameIndexReader>();
+		// the same indexes read for typo neighbours only, so their blocks never push out the blocks of the query
+		public final List<NameIndexReader> typoReaders = new ArrayList<NameIndexReader>();
 		public Map<String, Integer> poiFrequencies = null;
 		public SpatialPoiSearch poiSearch;
 
@@ -294,9 +302,11 @@ public class SpatialTextSearch {
 			edition = r.getDateCreated();
 			for (AddressRegion a : r.getAddressIndexes()) {
 				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
+				typoReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
 			}
 			for (PoiRegion a : r.getPoiIndexes()) {
 				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
+				typoReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
 			}
 		}
 

@@ -21,9 +21,11 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.NameIndexReader.NameIndexReaderBytes;
+import net.osmand.binary.NameIndexReader.NameIndexReaderMatcher;
 import net.osmand.binary.NameIndexReader.PrefixNameValue;
 import net.osmand.binary.NameIndexReader.ValueFreq;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
@@ -321,6 +323,8 @@ public class SpatialSearchContext {
 			stats.sub1PoiNameBoundaryTime.finish();
 		}
 		
+		// after the partial matches: only a word that still names no object is looked up with a typo in its key
+		readTypoKeyNeighbours();
 	}
 
 	private void addPartialMatch(SpatialSearchToken t, List<PartialMatch> partialAtoms) {
@@ -569,6 +573,104 @@ public class SpatialSearchContext {
 		}
 	}
 
+	/**
+	 * A word that names at most TYPO_MAX_OBJECTS objects is looked up once more with a typo in its first letters: the
+	 * blocks of the index keys those variants fall into are read and their words one edit away are counted.
+	 */
+	private void readTypoKeyNeighbours() throws IOException {
+		if (settings.TYPO_KEY_LETTERS <= 0) {
+			return;
+		}
+		SpatialSearchToken last = null;
+		for (SpatialSearchToken t : tokens) {
+			if (last == null || t.originalOrder > last.originalOrder) {
+				last = t;
+			}
+		}
+		for (SpatialSearchToken t : tokens) {
+			if (!isTypoCandidate(t) || t.atoms.size() > settings.TYPO_MAX_OBJECTS || t.hasPoiCategoryKeys()
+					|| (last.incomplete && t != last)) {
+				continue;
+			}
+			Set<String> variants = typoKeyVariants(typoKey(t.wordNoDot), settings.TYPO_KEY_LETTERS);
+			NameIndexReaderMatcher matcher = new NameIndexReaderMatcher(t.word) {
+				@Override
+				public boolean matchKey(String key) {
+					String k = typoKey(key);
+					for (String v : variants) {
+						if (v.startsWith(k)) {
+							return true;
+						}
+					}
+					return false;
+				}
+			};
+			String query = "typo-key " + t.word;
+			long start = System.currentTimeMillis();
+			for (int fileInd : filesNearestFirst()) {
+				if (System.currentTimeMillis() - start > settings.TYPO_KEY_TIME_MS) {
+					break;
+				}
+				for (NameIndexReader typoReader : internalFile.get(fileInd).typoReaders) {
+					if (typoReader.poiRegion != null ? !settings.SEARCH_POI : !settings.SEARCH_ADDR) {
+						continue;
+					}
+					typoReader.setMaxBlockBytes(settings.TYPO_MAX_BLOCK_BYTES);
+					try {
+						List<PrefixNameValue> prefixes = files.get(fileInd).readFullNameIndex(typoReader.setQuery(query, matcher));
+						if (prefixes != null) {
+							for (PrefixNameValue prefix : prefixes) {
+								countTypoNeighbours(t, prefix);
+							}
+						}
+					} finally {
+						typoReader.clearQuery();
+						typoReader.clearPrefixes();
+					}
+				}
+			}
+		}
+	}
+
+	private List<Integer> filesNearestFirst() {
+		List<Integer> order = new ArrayList<>();
+		long[] dist = new long[files.size()];
+		for (int i = 0; i < files.size(); i++) {
+			order.add(i);
+			dist[i] = Long.MAX_VALUE;
+			if (location != null) {
+				long x = MapUtils.get31TileNumberX(location.getLongitude()), y = MapUtils.get31TileNumberY(location.getLatitude());
+				for (PoiRegion r : files.get(i).getPoiIndexes()) {
+					long dx = Math.max(0, Math.max(r.getLeft31() - x, x - r.getRight31()));
+					long dy = Math.max(0, Math.max(r.getTop31() - y, y - r.getBottom31()));
+					dist[i] = Math.min(dist[i], dx * dx + dy * dy);
+				}
+			}
+		}
+		order.sort(Comparator.comparingLong(i -> dist[i]));
+		return order;
+	}
+
+	// the words one edit away from a word whose edit is in its first letters (the edits after them keep its index key)
+	static Set<String> typoKeyVariants(String w, int keyLetters) {
+		Set<String> res = new HashSet<>();
+		String alphabet = w.chars().anyMatch(c -> c >= 0x400 && c <= 0x4ff)
+				? "абвгдеёжзийклмнопрстуфхцчшщъыьэюяіїєґ" : "abcdefghijklmnopqrstuvwxyz";
+		int n = Math.min(keyLetters, w.length());
+		for (int i = 0; i < n; i++) {
+			res.add(w.substring(0, i) + w.substring(i + 1));
+			if (i + 1 < w.length()) {
+				res.add(w.substring(0, i) + w.charAt(i + 1) + w.charAt(i) + w.substring(i + 2));
+			}
+			for (char c : alphabet.toCharArray()) {
+				res.add(w.substring(0, i) + c + w.substring(i + 1));
+				res.add(w.substring(0, i) + c + w.substring(i));
+			}
+		}
+		res.remove(w);
+		return res;
+	}
+
 	private boolean isTypoCandidate(SpatialSearchToken t) {
 		int min = settings.TYPO_MIN_LETTERS;
 		return min > 0 && !t.broad && t.wordNoDot.length() >= min
@@ -648,13 +750,19 @@ public class SpatialSearchContext {
 			if (objects > settings.TYPO_MAX_OBJECTS) {
 				continue;
 			}
+			// a word one edit away is preferred to a name whose beginning is one edit away (a word still being typed)
+			String typed = typoKey(t.wordNoDot);
 			String best = null;
 			int bestCount = 0;
+			boolean bestWhole = false;
 			for (Entry<String, int[]> e : t.typoNeighbours.entrySet()) {
 				int c = e.getValue()[0];
-				if (c > bestCount || (c == bestCount && best != null && e.getKey().compareTo(best) < 0)) {
+				boolean whole = isOneEdit(typed, e.getKey());
+				if (best == null || (whole && !bestWhole) || (whole == bestWhole
+						&& (c > bestCount || (c == bestCount && e.getKey().compareTo(best) < 0)))) {
 					best = e.getKey();
 					bestCount = c;
+					bestWhole = whole;
 				}
 			}
 			if (best != null && (objects == 0 || bestCount >= (long) settings.TYPO_RATIO * objects)) {

@@ -26,6 +26,16 @@ public class SpatialTypoSuggestionTest {
 	}
 
 	@Test
+	public void testTypoKeyVariants() {
+		// typos inside the first 4 letters (the index key): missing, swapped, replaced, extra letter
+		Assert.assertTrue(SpatialSearchContext.typoKeyVariants("lepzig", 4).contains("leipzig"));
+		Assert.assertTrue(SpatialSearchContext.typoKeyVariants("dersden", 4).contains("dresden"));
+		Assert.assertTrue(SpatialSearchContext.typoKeyVariants("mnuchen", 4).contains("munchen"));
+		Assert.assertTrue(SpatialSearchContext.typoKeyVariants("trrier", 4).contains("trier"));
+		Assert.assertFalse(SpatialSearchContext.typoKeyVariants("freibrug", 4).contains("freiburg")); // edit after the key
+	}
+
+	@Test
 	public void testTypoKey() {
 		Assert.assertEquals("strasse", SpatialSearchContext.typoKey("Straße"));
 		Assert.assertEquals("kossen", SpatialSearchContext.typoKey("Kössen"));

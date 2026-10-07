@@ -453,6 +453,11 @@ public class BinaryMapPoiReaderAdapter {
 					ind++;
 				}
 				int len = codedIS.readRawVarint32();
+				if (pi.getMaxBlockBytes() > 0 && len > pi.getMaxBlockBytes()) {
+					pi.skipAtomsBytes(len);
+					codedIS.skipRawBytes(len);
+					break;
+				}
 				oldLimit = codedIS.pushLimitLong((long) len);
 				PrefixNameValue prefix = pi.isCacheRawBlocks() ? pi.addData(codedIS.readRawBytes(len), shift)
 						: pi.addData(OsmAndPoiNameIndexData.parseFrom(codedIS), shift);
