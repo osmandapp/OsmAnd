@@ -50,7 +50,6 @@ public final class SearchVariantRules {
 	public static final int CLASS_FREQUENT = 2;
 
 
-	private static final Pattern GROUP_REFERENCE = Pattern.compile("\\$(\\d+)");
 	// the object of the identity of an <unglue> rule: it applies to every name
 	static final String UNGLUE_OBJECT = "unglue";
 
@@ -145,17 +144,6 @@ public final class SearchVariantRules {
 				throw new IllegalArgumentException("The ignorable word '" + word + "' is a word of <class0>" + where);
 			}
 		}
-		for (Rule rule : index.values()) {
-			// an index pair repeated by the query would match one name twice: "Saint" -> "st" -> key "st" of "Street"
-			String to = rule.to;
-			if (!to.contains("$") && SearchRulesParser.PLAIN_WORD.matcher(to).matches()) {
-				String word = to.toLowerCase(Locale.ROOT);
-				if (query.containsKey(word) || forms.containsKey(word)) {
-					throw new IllegalArgumentException("The index form '" + to + "' of " + rule
-							+ " is a word of <query> too: a pair belongs to one side" + where);
-				}
-			}
-		}
 		List<Rule> indexRules = new ArrayList<>(index.values());
 		for (WordRule rule : query.values()) {
 			if (rule.mirror == null || rule.forms.isEmpty()) {
@@ -179,20 +167,16 @@ public final class SearchVariantRules {
 		}
 		Map<String, List<Form>> lists = new LinkedHashMap<>();
 		for (Map.Entry<String, Set<Form>> e : forms.entrySet()) {
-			lists.put(e.getKey(), List.copyOf(e.getValue()));
+			lists.put(e.getKey(), new ArrayList<>(e.getValue()));
 		}
-		Map<String, List<String>> skipLists = new LinkedHashMap<>();
-		for (Map.Entry<String, List<String>> e : skip.entrySet()) {
-			skipLists.put(e.getKey(), List.copyOf(e.getValue()));
-		}
-		this.index = List.copyOf(indexRules);
-		this.unglues = List.copyOf(unglues.values());
-		this.classes = Collections.unmodifiableMap(new LinkedHashMap<>(classes));
-		this.query = List.copyOf(query.values());
-		this.skipPenalty = Collections.unmodifiableMap(skipLists);
-		this.forms = Collections.unmodifiableMap(lists);
-		this.buildings = Collections.unmodifiableSet(buildings);
-		this.ignorables = Collections.unmodifiableSet(ignorables);
+		this.index = indexRules;
+		this.unglues = new ArrayList<>(unglues.values());
+		this.classes = classes;
+		this.query = new ArrayList<>(query.values());
+		this.skipPenalty = skip;
+		this.forms = lists;
+		this.buildings = buildings;
+		this.ignorables = ignorables;
 	}
 
 	private void disable(Map<String, ?> rules, Map<String, String> disabled, SearchRulesParser.Layer layer) {
@@ -288,7 +272,7 @@ public final class SearchVariantRules {
 			}
 		}
 		List<Unglued> result = new ArrayList<>(byName.size());
-		byName.forEach((unglued, rules) -> result.add(new Unglued(unglued, List.copyOf(rules))));
+		byName.forEach((unglued, rules) -> result.add(new Unglued(unglued, rules)));
 		return result;
 	}
 
@@ -497,24 +481,8 @@ public final class SearchVariantRules {
 			} catch (PatternSyntaxException e) {
 				throw new IllegalArgumentException("Invalid regexp '" + from + "': " + e.getDescription(), e);
 			}
-			if (enabled) {
-				checkRegexp(from, to);
-			}
 		}
 
-		private void checkRegexp(String from, String to) {
-			Matcher empty = this.from.matcher("");
-			if (empty.find()) {
-				throw new IllegalArgumentException("The regexp '" + from + "' matches an empty text");
-			}
-			Matcher references = GROUP_REFERENCE.matcher(to);
-			while (references.find()) {
-				if (Integer.parseInt(references.group(1)) > empty.groupCount()) {
-					throw new IllegalArgumentException("The target '" + to + "' refers to a group that the regexp '"
-							+ from + "' does not have");
-				}
-			}
-		}
 
 		/** the key of an index rule in the layers: object and from */
 		String key() {

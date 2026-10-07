@@ -27,7 +27,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.SearchRules;
-import net.osmand.binary.SearchRulesDictionary;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -282,8 +281,8 @@ public class SpatialTextSearch {
 		public final List<NameIndexReader> indexReaders = new ArrayList<NameIndexReader>();
 		public Map<String, Integer> poiFrequencies = null;
 		public SpatialPoiSearch poiSearch;
-		// search rules of the locale of the data of the map (en_US, de_CH...), whatever the language of the user is
-		public final SearchRulesDictionary rules;
+		// rules locale of the data of the map (en_US, de_CH...), whatever the language of the user is
+		public final String locale;
 
 		public SpatialSearchFileCache(BinaryMapIndexReader r, SearchRules searchRules) {
 			file = r.getFile().getName();
@@ -299,7 +298,7 @@ public class SpatialTextSearch {
 				region = r.getAddressIndexes().isEmpty() ? a.getName() : region;
 			}
 			// the region name keeps a subregion with its own locale: "Switzerland_ticino"
-			rules = searchRules.dictionaryForMap(region);
+			locale = searchRules.locales().forMap(region);
 		}
 
 		public boolean test(BinaryMapIndexReader r) {
@@ -313,7 +312,7 @@ public class SpatialTextSearch {
 		public Map<String, SpatialSearchFileCache> filesCache = new HashMap<>();
 
 		// read once: rules.xml and then the rules of a locale on the first map of that locale
-		public final SearchRules rules = new SearchRules();
+		public final SearchRules searchRules = new SearchRules();
 
 	}
 
@@ -625,7 +624,7 @@ public class SpatialTextSearch {
 		
 		// 1. prepare tokens
 		if (ctx.settings.SEARCH_POI_BY_CATEGORY_ONLY) {
-			res.tokens = Collections.singletonList(new SpatialSearchToken(0, input, input, 1));
+			res.tokens = Collections.singletonList(new SpatialSearchToken(cache.searchRules, 0, input, input, 1));
 		} else {
 			res.tokens = splitWords(ctx, input);
 		}
@@ -748,7 +747,7 @@ public class SpatialTextSearch {
 			if (w.equals(SpatialSearchToken.DOT_INCOMPLETE_STRING)) {
 				continue;
 			}
-			SpatialSearchToken token = new SpatialSearchToken(ctx.settings.MIN_CHARACTERS_INCOMPLETE, w,
+			SpatialSearchToken token = new SpatialSearchToken(cache.searchRules, ctx.settings.MIN_CHARACTERS_INCOMPLETE, w,
 					owords.get(ind), tokens.size());
 			tokens.add(token);
 		}

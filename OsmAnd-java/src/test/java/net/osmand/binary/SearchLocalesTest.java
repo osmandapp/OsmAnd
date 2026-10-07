@@ -72,16 +72,13 @@ public class SearchLocalesTest {
 	}
 
 	@Test
-	public void malformedLocaleFallsBackToBaseRules() {
-		assertEquals("", locales.normalize("b+hsb"));
-		assertEquals("", locales.normalize("esl1"));
+	public void localeNormalization() {
 		assertEquals("", locales.normalize(null));
 		assertEquals("en_US", locales.normalize("en-us"));
 		assertEquals("zh_Hant_TW", locales.normalize("zh-hant-tw"));
 		assertEquals("US", locales.country("en_US"));
 		assertEquals("TW", locales.country("zh_Hant_TW"));
 		assertEquals("", locales.country("en"));
-		assertFalse(searchRules.dictionary("b+hsb").isIgnorable("and"));
 		assertTrue(searchRules.dictionary("EN-us").isIgnorable("and"));
 		assertNotNull(searchRules.rules("not a locale"));
 	}
@@ -89,24 +86,14 @@ public class SearchLocalesTest {
 	@Test
 	public void buildingSuffixBelongsToItsLanguages() {
 		// "12ter" is a French or Italian house number; "Oak Ter" is Oak Terrace in English
-		assertFalse(searchRules.dictionary("").isBuildingWord("ter"));
-		assertTrue(searchRules.dictionary("fr_FR").isBuildingWord("ter"));
-		assertTrue(searchRules.dictionary("it_IT").isBuildingWord("ter"));
-		assertFalse(searchRules.dictionary("en_US").isBuildingWord("ter"));
-		assertFalse(searchRules.dictionary("en_GB").isBuildingWord("quater"));
-		assertTrue(searchRules.dictionary("es_ES").isBuildingWord("bis"));
-		assertFalse(searchRules.dictionary("en_US").isBuildingWord("bis"));
-		assertTrue(searchRules.dictionary("en_US").isBuildingWord("apt"));
-		assertFalse(searchRules.dictionary("de_DE").isBuildingWord("apt"));
-	}
-
-	@Test
-	public void dictionariesAreReadOnlyAndOverriddenExplicitly() {
-		try {
-			searchRules.rules("en_US").skipPenalty().put("st", java.util.List.of("street"));
-			fail("dictionary must be read-only");
-		} catch (UnsupportedOperationException expected) {
-			// ok
-		}
+		assertFalse(searchRules.dictionary("").likelyPartOfBuilding("ter", null));
+		assertTrue(searchRules.dictionary("fr_FR").likelyPartOfBuilding("ter", null));
+		assertTrue(searchRules.dictionary("it_IT").likelyPartOfBuilding("ter", null));
+		assertFalse(searchRules.dictionary("en_US").likelyPartOfBuilding("ter", null));
+		assertFalse(searchRules.dictionary("en_GB").likelyPartOfBuilding("quater", null));
+		assertTrue(searchRules.dictionary("es_ES").likelyPartOfBuilding("bis", null));
+		assertFalse(searchRules.dictionary("en_US").likelyPartOfBuilding("bis", null));
+		assertTrue(searchRules.dictionary("en_US").likelyPartOfBuilding("apt", null));
+		assertFalse(searchRules.dictionary("de_DE").likelyPartOfBuilding("apt", null));
 	}
 }

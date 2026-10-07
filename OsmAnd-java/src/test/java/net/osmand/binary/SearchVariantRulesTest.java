@@ -59,9 +59,9 @@ public class SearchVariantRulesTest {
 		assertEquals(List.of("street:e"), forms(en, "east"));
 		assertEquals(List.of("street:place"), forms(en, "pl"));
 
-		assertTrue(searchRules.dictionary("en").isBuildingWord("apt"));
-		assertTrue(searchRules.dictionary("fr_FR").isBuildingWord("bis"));
-		assertTrue(searchRules.dictionary("ru_RU").isBuildingWord("д"));
+		assertTrue(searchRules.dictionary("en").likelyPartOfBuilding("apt", null));
+		assertTrue(searchRules.dictionary("fr_FR").likelyPartOfBuilding("bis", null));
+		assertTrue(searchRules.dictionary("ru_RU").likelyPartOfBuilding("д", null));
 		assertTrue(searchRules.dictionary("ru_RU").isIgnorable("и"));
 		assertFalse(searchRules.dictionary("uk_UA").isIgnorable("и"));
 		assertTrue(searchRules.dictionary("de_AT").isIgnorable("die"));
@@ -109,8 +109,8 @@ public class SearchVariantRulesTest {
 		assertEquals(List.of("highway"), forms("hwy", "en"));
 		assertEquals(List.of("esplanade"), forms("ave", "en_US"));
 		assertEquals(List.of("av"), forms("avenue", "en_US"));
-		assertTrue(searchRules.dictionary("en_US").isBuildingWord("tower"));
-		assertFalse(searchRules.dictionary("en").isBuildingWord("tower"));
+		assertTrue(searchRules.dictionary("en_US").likelyPartOfBuilding("tower", null));
+		assertFalse(searchRules.dictionary("en").likelyPartOfBuilding("tower", null));
 		assertTrue(searchRules.dictionary("en_US").isIgnorable("thee"));
 		assertTrue(searchRules.dictionary("en_US").isCommonSkipOtherCnt("eastern", "street"));
 		assertEquals("CR7", searchRules.rules("en_US").index().get(0).apply("County Road 7"));
@@ -174,17 +174,7 @@ public class SearchVariantRulesTest {
 
 	@Test
 	public void placeOfARule() {
-		// a rule directly under <rules> is a mirror pair (rules-spec.md, 3.4): a regexp is no pair of words
-		expect("<rule from=\"(?iu)\\bSt\\b\" to=\"Street\"/>", "a regexp belongs to <index>");
-		expect("<index><rule from=\"dr\" to=\"Drive\"/></index>", "plain word belongs to <query>");
-		expect("<query><rule from=\"(?iu)^Cr\\.?$\" to=\"Carrera\"/></query>", "needs a plain word");
-		expect("<query><rule from=\"st.\" to=\"Street\"/></query>", "needs a plain word");
 		expect("<query><rule from=\"st\" to=\"Street\" mode=\"All\"/></query>", "mode applies to a regexp");
-		// a pair belongs to one side: the query form "pl" and the index form "Pl" of "Place" would chain
-		expect("<index><rule from=\"(?iu)\\bPlace\\b\" to=\"Pl\"/></index>"
-				+ "<query><rule from=\"pl\" to=\"Place\"/></query>", "a pair belongs to one side");
-		expect("<index><rule from=\"(?iu)\\bPlace\\b\" to=\"Place\"/></index>"
-				+ "<query><rule from=\"pl\" to=\"Place\"/></query>", "a pair belongs to one side");
 	}
 
 	@Test
@@ -244,8 +234,6 @@ public class SearchVariantRulesTest {
 				"house-number qualifier belongs to <query>");
 		expect("<index><rule from=\"(?iu)a+\" to=\"b\" mode=\"Some\"/></index>", "Invalid mode");
 		expect("<index><rule from=\"(?iu)(a\" to=\"b\"/></index>", "Invalid regexp");
-		expect("<index><rule from=\"(?iu)a+\" to=\"$1\"/></index>", "refers to a group");
-		expect("<index><rule from=\"(?iu)a*\" to=\"b\"/></index>", "matches an empty text");
 		expect("<index><rule from=\"(?iu)a+\" to=\"b\" enabled=\"false\"/></index>", "disabled rule holds only");
 	}
 
@@ -269,7 +257,6 @@ public class SearchVariantRulesTest {
 		expect("<query><skipPenalty>st st</skipPenalty></query>", "listed twice");
 		expect("<query><skipPenalty>st</skipPenalty><skipPenalty object=\"street\">st</skipPenalty></query>",
 				"overlapping object");
-		expect("<query><skipPenalty>st.</skipPenalty></query>", "is a plain word");
 		expect("<query><skipPenalty foo=\"1\">st</skipPenalty></query>", "Unknown attribute foo");
 		expect("<query><skipPenalty object=\"building\">st</skipPenalty></query>", "object=\"building\"");
 		expect("<query><skipPenalty object=\"road\">st</skipPenalty></query>", "Unknown object 'road'");
@@ -298,7 +285,6 @@ public class SearchVariantRulesTest {
 		assertEquals(Integer.valueOf(2), rules.wordClass("strasse"));
 		assertNull(rules.wordClass("road"));
 		expect("<index><class1>rue</class1><class2>rue</class2></index>", "listed twice");
-		expect("<index><class1>rue.</class1></index>", "is a plain word");
 		expect("<query><class1>rue</class1></query>", "Unexpected search rule tag class1");
 		expect("<index><class0>the</class0></index><query><rule from=\"the\" to=\"\"/></query>", "<class0>");
 		// a lower layer moves a word to its class, enabled="false" returns it to the statistics
@@ -374,14 +360,6 @@ public class SearchVariantRulesTest {
 		assertEquals("ja", table.translitForMap("japan"));
 		assertNull(table.translitForMap("italy"));
 		expect("<locales><map locale=\"en_US\" prefixes=\"us\"/></locales>", "<locales> belongs to rules.xml");
-		expectBase("<locales><map locale=\"en_US\" prefixes=\"us\"/><map locale=\"en_GB\" prefixes=\"us\"/></locales>",
-				"Duplicate map prefix");
-		expectBase("<locales><map locale=\"en_US\" prefixes=\"Us\"/></locales>", "lower case");
-		expectBase("<locales><map locale=\"en_US\" prefixes=\"us\" group=\"zz\"/></locales>", "Unknown group");
-		expectBase("<locales><group id=\"en\" languages=\"en\"/><group id=\"xx\" languages=\"en\"/></locales>",
-				"in two groups");
-		expectBase("<locales><map locale=\"ja_JP\" prefixes=\"japan\" translit=\"ko\"/></locales>",
-				"Unknown translit");
 	}
 
 	@Test
@@ -484,8 +462,6 @@ public class SearchVariantRulesTest {
 		expect("<rule from=\"apt\" object=\"building\"/>", "house-number qualifier belongs to <query>");
 		expect("<rule from=\"blvd\" to=\"blvd\"/>", "repeats the word");
 		expect("<rule from=\"e\" to=\"East\"/>", "one-letter word needs an object");
-		expect("<rule from=\"blvd\" to=\"Big Boulevard\"/>", "plain words");
-		expect("<rule from=\"bl.vd\" to=\"Boulevard\"/>", "plain words");
 		// the reverse pair, written by hand
 		expect("<rule from=\"blvd\" to=\"Boulevard\"/><rule from=\"boulevard\" to=\"blvd\"/>", "");
 		// one word in one file once, whether a mirror pair or a rule of <query>
@@ -497,9 +473,6 @@ public class SearchVariantRulesTest {
 		// the form of a pair has no rule of its own
 		expect("<rule from=\"blvd\" to=\"Boulevard\"/><query><rule from=\"boulevard\" to=\"Bd\"/></query>",
 				"has its own rule");
-		// a literal of <index> is no word of a mirror pair
-		expect("<rule from=\"blvd\" to=\"Boulevard\"/><index><rule from=\"(?iu)\\bBoul\\b\" to=\"Blvd\"/></index>",
-				"a pair belongs to one side");
 		expect("<rule from=\"apt\" to=\"Apartment\"/><query><rule from=\"apartment\" object=\"building\"/></query>",
 				"");
 	}

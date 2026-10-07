@@ -1,9 +1,12 @@
 package net.osmand.binary;
 
+import net.osmand.util.SearchAlgorithms;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
@@ -60,6 +63,22 @@ public final class SearchRules {
 	/** @return the dictionary of the rules locale of a map ("Us_new-york_northamerica" -> en_US) */
 	public SearchRulesDictionary dictionaryForMap(String mapName) {
 		return dictionary(locales.forMap(mapName));
+	}
+
+	/** @return true when a query word is like a part of a POI ref: "A1", "12" */
+	public boolean likelyPartOfRef(String word, Set<String> wordSplit) {
+		int limit = 2;
+		int letters = SearchAlgorithms.letters(word, limit + 1);
+		if (letters < limit || (letters == limit && SearchAlgorithms.startsWithDigit(word))) {
+			return true;
+		}
+		for (String s : wordSplit) {
+			letters = SearchAlgorithms.letters(s, limit + 1);
+			if (!(letters < limit || (letters == limit && SearchAlgorithms.startsWithDigit(s)))) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private SearchVariantRules load(String locale) {

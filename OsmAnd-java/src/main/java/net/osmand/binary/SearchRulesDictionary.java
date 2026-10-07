@@ -5,7 +5,6 @@ import net.osmand.binary.SearchVariantRules.Scoped;
 import net.osmand.util.SearchAlgorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -45,7 +44,7 @@ public final class SearchRulesDictionary {
 				list.add(new QueryForm(form.object(), form.word(), other != null && other.hasForm(word)));
 			}
 			// a token is aligned (ß -> ss, no diacritics): "Straße" asks for "strasse"
-			forms.put(SearchAlgorithms.alignChars(word), List.copyOf(list));
+			forms.put(SearchAlgorithms.alignChars(word), list);
 		}
 		// the words of <skipPenalty> and the classes are aligned by the rules, the ignorable words are query words
 		Map<String, Set<String>> owners = new HashMap<>();
@@ -69,11 +68,11 @@ public final class SearchRulesDictionary {
 			for (String object : set) {
 				scopes.add(new Scope(object));
 			}
-			penaltyFree.put(word, set.contains(SearchVariantRules.ANY_OBJECT) ? EVERY_OWNER : List.copyOf(scopes));
+			penaltyFree.put(word, set.contains(SearchVariantRules.ANY_OBJECT) ? EVERY_OWNER : scopes);
 		});
-		this.buildingWords = Collections.unmodifiableSet(new TreeSet<>(rules.buildings()));
-		this.ignorables = Collections.unmodifiableSet(ignorables);
-		this.penaltyFree = Collections.unmodifiableMap(penaltyFree);
+		this.buildingWords = rules.buildings();
+		this.ignorables = ignorables;
+		this.penaltyFree = penaltyFree;
 	}
 
 	/** rules locale of the dictionary, "" for the base rules */
@@ -97,9 +96,21 @@ public final class SearchRulesDictionary {
 		return forms.getOrDefault(SearchAlgorithms.alignChars(word.toLowerCase(Locale.ROOT)), List.of());
 	}
 
-	/** @return true for a word ({@code object="building"}) that is a part of a house number: "apt", "bis" */
-	public boolean isBuildingWord(String word) {
-		return buildingWords.contains(word);
+	/** @return true when a query word ("12", "2b", "apt", "bis" of the locale) is a part of a house number */
+	public boolean likelyPartOfBuilding(String word, Set<String> wordSplit) {
+		if (SearchAlgorithms.isNumber2Letters(word) || word.length() == 1 || buildingWords.contains(word)) {
+			return true;
+		}
+		if (wordSplit != null) {
+			// recursion for 2bis
+			for (String w : wordSplit) {
+				if (!likelyPartOfBuilding(w, null)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 
 	/**

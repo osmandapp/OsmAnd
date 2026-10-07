@@ -22,12 +22,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 /** Reads one rules file ({@code rules.xml}, {@code rules_<locale>.xml}) into a {@link Layer}, see {@link SearchVariantRules}. */
 final class SearchRulesParser {
 
-	static final Pattern PLAIN_WORD = Pattern.compile("[\\p{L}\\p{M}\\p{N}]+");
 	private static final Set<String> INDEX_ATTRIBUTES = Set.of("from", "to", "object", "mode", "enabled", "keys");
 	private static final Set<String> QUERY_ATTRIBUTES = Set.of("from", "to", "object", "enabled");
 
@@ -121,10 +119,6 @@ final class SearchRulesParser {
 				if (word.isEmpty()) {
 					continue;
 				}
-				if (!PLAIN_WORD.matcher(word).matches()) {
-					throw new IllegalArgumentException("A word of " + what + " is a plain word: '" + word + "' in "
-							+ file);
-				}
 				String w = word.toLowerCase(Locale.ROOT);
 				if (result.contains(w)) {
 					throw new IllegalArgumentException("The word '" + w + "' of " + what + " is listed twice in " + file);
@@ -196,7 +190,7 @@ final class SearchRulesParser {
 			throw new IllegalArgumentException("Missing rules root in " + file);
 		}
 		if (localesRead) {
-			locales.build(file);
+			locales.build();
 		}
 		return layer;
 	}
@@ -216,10 +210,6 @@ final class SearchRulesParser {
 		String to = parser.getAttributeValue(null, "to");
 		String keys = parser.getAttributeValue(null, "keys");
 		boolean enabled = booleanAttribute(parser, "enabled", true, where);
-		if (PLAIN_WORD.matcher(from).matches()) {
-			throw new IllegalArgumentException("A plain word belongs to <query>: the index adds nothing that its "
-					+ "query form does not" + where);
-		}
 		if (parser.nextTag() == XmlPullParser.START_TAG) {
 			throw new IllegalArgumentException("An index rule has one form, the attribute to: keys of several meanings "
 					+ "cannot be told apart in the OBF, the meanings belong to <query>" + where);
@@ -319,9 +309,6 @@ final class SearchRulesParser {
 		if (from == null || from.isEmpty()) {
 			throw new IllegalArgumentException("Missing from in " + file);
 		}
-		if (!PLAIN_WORD.matcher(from).matches()) {
-			throw new IllegalArgumentException("A mirror rule pairs plain words, a regexp belongs to <index>" + where);
-		}
 		String to = parser.getAttributeValue(null, "to");
 		String object = parser.getAttributeValue(null, "object");
 		boolean enabled = booleanAttribute(parser, "enabled", true, where);
@@ -346,9 +333,6 @@ final class SearchRulesParser {
 					+ where);
 		}
 		String text = to.trim();
-		if (!PLAIN_WORD.matcher(text).matches()) {
-			throw new IllegalArgumentException("A mirror rule pairs plain words: '" + text + "'" + where);
-		}
 		List<Form> forms = List.of(parseForm(word, object, text, where));
 		validateForms(word, forms, where);
 		layer.add(new WordRule(word, forms, new Mirror(file, text)), true);
@@ -364,10 +348,6 @@ final class SearchRulesParser {
 		checkAttributes(parser, QUERY_ATTRIBUTES, "a query rule", where);
 		if (from == null || from.isEmpty()) {
 			throw new IllegalArgumentException("Missing from in " + file);
-		}
-		if (!PLAIN_WORD.matcher(from).matches()) {
-			throw new IllegalArgumentException("A query rule needs a plain word without a dot, a regexp belongs to "
-					+ "<index>" + where);
 		}
 		String to = parser.getAttributeValue(null, "to");
 		String object = parser.getAttributeValue(null, "object");
@@ -412,7 +392,7 @@ final class SearchRulesParser {
 			throw new IllegalArgumentException("Missing to" + where);
 		}
 		validateForms(word, forms, where);
-		layer.add(new WordRule(word, List.copyOf(forms)), true);
+		layer.add(new WordRule(word, forms), true);
 	}
 
 	private Form parseForm(String word, String object, String text, String where) {
@@ -551,7 +531,7 @@ final class SearchRulesParser {
 		String where = " (<group id=\"" + id + "\"> of " + file + ")";
 		checkAttributes(parser, Set.of("id", "languages", "locales"), "<group>", where);
 		locales.addGroup(id, list(parser.getAttributeValue(null, "languages")),
-				list(parser.getAttributeValue(null, "locales")), where);
+				list(parser.getAttributeValue(null, "locales")));
 		endElement(parser, where);
 	}
 
@@ -560,7 +540,7 @@ final class SearchRulesParser {
 		String where = " (<map locale=\"" + locale + "\"> of " + file + ")";
 		checkAttributes(parser, Set.of("locale", "prefixes", "group", "translit"), "<map>", where);
 		locales.addMap(locale, list(parser.getAttributeValue(null, "prefixes")), parser.getAttributeValue(null, "group"),
-				parser.getAttributeValue(null, "translit"), where);
+				parser.getAttributeValue(null, "translit"));
 		endElement(parser, where);
 	}
 
