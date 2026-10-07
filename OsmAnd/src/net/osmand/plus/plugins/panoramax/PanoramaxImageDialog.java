@@ -32,6 +32,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDial
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.shared.panoramax.PanoramaxApi;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,6 +48,19 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 	private static final String BLANK_PAGE_URL = "about:blank";
 
 	private static final String VIEWER_ERROR_URL = "osmand-panoramax://viewer-failed";
+
+	/**
+	 * Official photo only viewer bundle, pinned to the panoramax/web-viewer npm package 5.2.0.
+	 * Changing the version means recomputing {@link #VIEWER_BUNDLE_INTEGRITY}, or the script
+	 * is rejected and the viewer never loads.
+	 */
+	private static final String VIEWER_BUNDLE_URL =
+			"https://cdn.jsdelivr.net/npm/@panoramax/web-viewer@5.2.0/build/cjs/index_photoviewer.js";
+
+	/** SRI digest of exactly the file {@link #VIEWER_BUNDLE_URL} points at.
+	 * Update the integrity hash when changing the bundle version. */
+	private static final String VIEWER_BUNDLE_INTEGRITY =
+			"sha384-A/XfT5HrbLfgrhBB5mk3bsNTuq7SqwhcUZqzYzFRko0jGYYIuf8CTk3y2ufVRPox";
 
 	private static final int VIEWER_TIMEOUT_MS = 20000;
 
@@ -327,8 +341,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 			public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
 				// The page itself is loaded from memory and never fails, so the bundle is the
 				// only request whose failure leaves the viewer unusable.
-				if (isCurrentWebView(view)
-						&& PanoramaxConstants.VIEWER_BUNDLE_URL.equals(request.getUrl().toString())) {
+				if (isCurrentWebView(view) && VIEWER_BUNDLE_URL.equals(request.getUrl().toString())) {
 					showViewerError(view, noInternetView);
 				}
 			}
@@ -353,7 +366,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		noInternetView.setVisibility(online ? View.GONE : View.VISIBLE);
 		if (online) {
 			viewerNonce = UUID.randomUUID().toString();
-			webView.loadDataWithBaseURL(PanoramaxConstants.INSTANCE_URL, buildViewerHtml(),
+			webView.loadDataWithBaseURL(PanoramaxApi.INSTANCE_URL, buildViewerHtml(),
 					"text/html", "UTF-8", null);
 		}
 	}
@@ -372,7 +385,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 			}
 		}, new Handler(Looper.getMainLooper()));
 		webView.postWebMessage(new WebMessage(viewerNonce, new WebMessagePort[] {ports[1]}),
-				Uri.parse(PanoramaxConstants.INSTANCE_URL));
+				Uri.parse(PanoramaxApi.INSTANCE_URL));
 	}
 
 	private void releaseViewerPort() {
@@ -500,12 +513,12 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 				// The bundle ends with a CommonJS assignment that throws without this.
 				+ "<script>var exports={};"
 				+ "function pnxFail(){location.href='" + VIEWER_ERROR_URL + "';}</script>"
-				+ "<script src='" + PanoramaxConstants.VIEWER_BUNDLE_URL + "'"
-				+ " integrity='" + PanoramaxConstants.VIEWER_BUNDLE_INTEGRITY + "'"
+				+ "<script src='" + VIEWER_BUNDLE_URL + "'"
+				+ " integrity='" + VIEWER_BUNDLE_INTEGRITY + "'"
 				+ " crossorigin='anonymous' onerror='pnxFail()'></script>"
 				+ "</head><body>"
 				+ "<pnx-photo-viewer id='viewer'"
-				+ " endpoint='" + PanoramaxConstants.API_URL + "'"
+				+ " endpoint='" + PanoramaxApi.API_URL + "'"
 				+ " picture='" + escapeAttribute(imageId) + "'"
 				+ " widgets='false' url-parameters='false' keyboard-shortcuts='false'>"
 				+ "<pnx-widget-player slot='top' size='md'></pnx-widget-player>"

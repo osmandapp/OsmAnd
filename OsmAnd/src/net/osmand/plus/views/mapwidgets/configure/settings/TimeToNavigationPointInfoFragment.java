@@ -122,4 +122,9 @@ public class TimeToNavigationPointInfoFragment extends BaseSimpleWidgetInfoFragm
 
 		void onTimeModeSelected(@NonNull TimeToNavigationPointState state);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "time_to_navigation_point_info";
+	}
 }

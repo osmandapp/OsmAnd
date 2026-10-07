@@ -142,4 +142,9 @@ public class DefaultMapButtonsFragment extends BaseMapButtonsFragment implements
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "default_map_buttons";
+	}
 }

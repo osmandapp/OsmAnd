@@ -199,4 +199,6 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 			}
 		}
 	}
+
+	override fun getAnalyticsScreen() = "smart_folder"
 }

@@ -169,8 +169,6 @@
     <string name="context_menu_read_full_article">Temamiya gotarê bixwîne</string>
     <string name="context_menu_points_of_group">Hemû nuqteyên komê</string>
     <string name="additional_actions">Çalakiyên din</string>
-    <string name="av_locations_selected_desc">Dosyeya GPXê tevî koordînat û daneyên notên bijartî.</string>
-    <string name="av_locations_all_desc">Dosyeya GPXê tevî koordînat û daneyên hemû notan.</string>
     <string name="modify_the_search_query">Pirsa xwe ya lêgerînê biguherîne.</string>
     <string name="shared_string_actions">Çalakî</string>
     <string name="shared_string_marker">Hêmaker</string>
@@ -182,7 +180,6 @@
     <string name="marker_activated">Hêmakera %s hate aktîvkirin.</string>
     <string name="one_tap_active_descr">Bêyî vekirina menûya naverokê, li ser nexşeyê pêl li hêmakerek bike û kaş bike ser hêmakerên aktîv.</string>
     <string name="one_tap_active">Aktîvkirina bi yek pêlkirinê</string>
-    <string name="empty_state_av_notes">Not bigre!</string>
     <string name="shared_string_share">Parve bike</string>
     <string name="shared_string_control_start">Dest pê bike</string>
     <string name="shared_string_control_stop">Bisekine</string>

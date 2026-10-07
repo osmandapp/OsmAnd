@@ -100,8 +100,8 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 				if (activity != null) {
 					PluginInfoFragment.showInstance(activity.getSupportFragmentManager(), PluginsFragment.this, (OsmandPlugin) tag);
 				}
-			} else if (tag instanceof ConnectedApp) {
-				switchEnabled((ConnectedApp) tag);
+			} else if (tag instanceof ConnectedApp connectedApp) {
+				showPermissions(connectedApp);
 			}
 		});
 
@@ -152,13 +152,27 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 		PluginsHelper.installPlugin(getActivity(), plugin, this::dismissImmediate);
 	}
 
+	void showPermissions(@NonNull ConnectedApp connectedApp) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			ConnectedAppPermissionsFragment.showInstance(activity.getSupportFragmentManager(), connectedApp);
+		}
+	}
+
 	void switchEnabled(@NonNull ConnectedApp connectedApp) {
-		app.getAidlApi().switchEnabled(connectedApp);
+		setAppEnabled(connectedApp, !connectedApp.isEnabled());
+	}
+
+	void setAppEnabled(@NonNull ConnectedApp connectedApp, boolean enabled) {
+		app.getAidlApi().setAppEnabled(getActivity(), connectedApp, enabled);
 		OsmandPlugin plugin = PluginsHelper.getPlugin(connectedApp.getPack());
 		if (plugin != null) {
-			PluginsHelper.enablePlugin(getActivity(), app, plugin, connectedApp.isEnabled());
 			notifyPluginStateListener(plugin);
 		}
+		onConnectedAppChanged();
+	}
+
+	void onConnectedAppChanged() {
 		adapter.notifyDataSetChanged();
 	}
 
@@ -271,5 +285,10 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "plugins";
 	}
 }

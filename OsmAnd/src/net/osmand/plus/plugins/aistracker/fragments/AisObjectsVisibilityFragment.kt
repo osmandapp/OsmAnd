@@ -24,10 +24,10 @@ class AisObjectsVisibilityFragment : AisBaseFragment() {
 	): View {
 		val view = inflater.inflate(R.layout.fragment_ais_objects_visibility, container, false)
 		setupToolbar(view, R.string.ais_objects_visibility, R.string.reset_to_default) {
-			plugin.AIS_SHIP_LOST_TIMEOUT.resetToDefault()
-			plugin.AIS_OBJ_LOST_TIMEOUT.resetToDefault()
-			outdatedCard.setValue(plugin.AIS_SHIP_LOST_TIMEOUT.get())
-			hideAfterCard.setValue(plugin.AIS_OBJ_LOST_TIMEOUT.get())
+			plugin.AIS_SHIP_LOST_TIMEOUT.resetModeToDefault(appMode)
+			plugin.AIS_OBJ_LOST_TIMEOUT.resetModeToDefault(appMode)
+			outdatedCard.setValue(plugin.AIS_SHIP_LOST_TIMEOUT.getModeValue(appMode))
+			hideAfterCard.setValue(plugin.AIS_OBJ_LOST_TIMEOUT.getModeValue(appMode))
 		}
 
 		setupHeroImage(view, R.drawable.img_ais_object_visibility_day,
@@ -41,7 +41,7 @@ class AisObjectsVisibilityFragment : AisBaseFragment() {
 			{ AisFormatter.formatMinutes(osmandApp, it) },
 			{ getString(R.string.ais_hide_after_desc, AisFormatter.formatMinutes(osmandApp, it)) },
 			{
-				plugin.AIS_OBJ_LOST_TIMEOUT.set(it)
+				plugin.AIS_OBJ_LOST_TIMEOUT.setModeValue(appMode, it)
 				outdatedCard.refreshFooter()
 			})
 		hideAfterCard.setTitle(R.string.ais_hide_after)
@@ -52,11 +52,11 @@ class AisObjectsVisibilityFragment : AisBaseFragment() {
 			MARK_AS_OUTDATED_VALUES,
 			{ if (it == OUTDATED_OFF) getString(R.string.shared_string_off) else AisFormatter.formatMinutes(osmandApp, it) },
 			{ outdatedFooterText(it) },
-			{ plugin.AIS_SHIP_LOST_TIMEOUT.set(it) })
+			{ plugin.AIS_SHIP_LOST_TIMEOUT.setModeValue(appMode, it) })
 		outdatedCard.setTitle(R.string.ais_mark_as_outdated)
 
-		outdatedCard.setValue(plugin.AIS_SHIP_LOST_TIMEOUT.get())
-		hideAfterCard.setValue(plugin.AIS_OBJ_LOST_TIMEOUT.get())
+		outdatedCard.setValue(plugin.AIS_SHIP_LOST_TIMEOUT.getModeValue(appMode))
+		hideAfterCard.setValue(plugin.AIS_OBJ_LOST_TIMEOUT.getModeValue(appMode))
 		return view
 	}
 
@@ -65,7 +65,7 @@ class AisObjectsVisibilityFragment : AisBaseFragment() {
 	 * only timeout left - the one from the other slider.
 	 */
 	private fun outdatedFooterText(value: Int): CharSequence {
-		val hideAfter = AisFormatter.formatMinutes(osmandApp, plugin.AIS_OBJ_LOST_TIMEOUT.get())
+		val hideAfter = AisFormatter.formatMinutes(osmandApp, plugin.AIS_OBJ_LOST_TIMEOUT.getModeValue(appMode))
 		return if (value == OUTDATED_OFF) {
 			getString(R.string.ais_mark_as_outdated_off_desc, hideAfter)
 		} else {

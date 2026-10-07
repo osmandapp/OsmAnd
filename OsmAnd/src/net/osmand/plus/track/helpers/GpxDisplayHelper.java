@@ -234,7 +234,7 @@ public class GpxDisplayHelper {
 		if (!isSplittingTrack(selectedGpxFile) && item != null) {
 			GpxSplitParams params = getGpxSplitParams(item);
 			List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile, false);
-			SplitTrackListener listener = getSplitTrackListener(selectedGpxFile, groups, callback);
+			SplitTrackListener listener = getSplitTrackListener(selectedGpxFile, groups, params, callback);
 
 			splitTrackAsync(selectedGpxFile, groups, params, listener);
 		} else if (callback != null) {
@@ -311,16 +311,20 @@ public class GpxDisplayHelper {
 	@NonNull
 	private SplitTrackListener getSplitTrackListener(@NonNull SelectedGpxFile selectedGpxFile,
 	                                                 @NonNull List<GpxDisplayGroup> groups,
+	                                                 @NonNull GpxSplitParams params,
 	                                                 @Nullable CallbackWithObject<Boolean> callback) {
 		return new SplitTrackListener() {
 			@Override
 			public void trackSplittingFinished(boolean success) {
-				if (success) {
+				boolean actual = success && params.equals(getGpxSplitParams(selectedGpxFile));
+				if (actual) {
 					selectedGpxFile.setSplitGroups(groups, app);
+				}
+				if (success) {
 					app.getOsmandMap().getMapView().refreshMap();
 				}
 				if (callback != null) {
-					callback.processResult(success);
+					callback.processResult(actual);
 				}
 			}
 		};

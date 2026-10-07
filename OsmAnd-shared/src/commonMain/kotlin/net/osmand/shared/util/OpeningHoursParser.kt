@@ -31,6 +31,9 @@ object OpeningHoursParser {
 
 	private val additionalStrings = mutableMapOf(
 		"off" to "off",
+		"public_holiday" to "PH",
+		"school_holiday" to "SH",
+		"easter" to "Easter",
 		"is_open" to "Open",
 		"is_open_24_7" to "Open 24/7",
 		"is_open_24_7_short" to "24/7",
@@ -887,7 +890,6 @@ object OpeningHoursParser {
 		override fun toRuleString(): String = toRuleString(false)
 
 		private fun toRuleString(useLocalization: Boolean): String {
-			val dayNames = if (useLocalization) localDaysStr else daysStr
 			val monthNames = if (useLocalization) localMothsStr else monthsStr
 			val offStr = if (useLocalization) (additionalStrings["off"] ?: "off") else "off"
 
@@ -1016,7 +1018,7 @@ object OpeningHoursParser {
 				addArray(months, monthNames, b)
 			}
 
-			appendDaysString(b, dayNames)
+			appendDaysString(b, useLocalization)
 
 			if (startTimes.size == 0) {
 				if (isOpened24_7()) {
@@ -1261,10 +1263,14 @@ object OpeningHoursParser {
 		override fun toString(): String = toRuleString()
 
 		fun appendDaysString(builder: StringBuilder) {
-			appendDaysString(builder, daysStr)
+			appendDaysString(builder, false)
 		}
 
-		fun appendDaysString(builder: StringBuilder, daysNames: Array<String>) {
+		fun appendDaysString(builder: StringBuilder, useLocalization: Boolean) {
+			val daysNames = if (useLocalization) localDaysStr else daysStr
+			val publicHolidayStr = if (useLocalization) (additionalStrings["public_holiday"] ?: "PH") else "PH"
+			val schoolHolidayStr = if (useLocalization) (additionalStrings["school_holiday"] ?: "SH") else "SH"
+			val easterStr = if (useLocalization) (additionalStrings["easter"] ?: "Easter") else "Easter"
 			var dash = false
 			var first = true
 			for (i in 0 until 7) {
@@ -1292,21 +1298,21 @@ object OpeningHoursParser {
 				if (!first) {
 					builder.append(", ")
 				}
-				builder.append("PH")
+				builder.append(publicHolidayStr)
 				first = false
 			}
 			if (schoolHoliday) {
 				if (!first) {
 					builder.append(", ")
 				}
-				builder.append("SH")
+				builder.append(schoolHolidayStr)
 				first = false
 			}
 			if (easter) {
 				if (!first) {
 					builder.append(", ")
 				}
-				builder.append("Easter")
+				builder.append(easterStr)
 				first = false
 			}
 			if (!first) {

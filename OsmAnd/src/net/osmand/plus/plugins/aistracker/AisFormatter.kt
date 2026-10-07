@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.aistracker
 
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.shared.settings.enums.MetricsConstants
 import java.util.Locale
@@ -21,15 +22,16 @@ object AisFormatter {
 		app.getString(R.string.ltr_or_rtl_combine_via_space, minutes.toString(),
 			app.getString(R.string.shared_string_minute_lowercase))
 
+	/** @param mode the profile whose units are used - the one the screen was opened for. */
 	@JvmStatic
-	fun formatNauticalMiles(app: OsmandApplication, miles: Float): String {
-		val metrics = app.settings.METRIC_SYSTEM.get()
+	fun formatNauticalMiles(app: OsmandApplication, miles: Float, mode: ApplicationMode): String {
+		val metrics = app.settings.METRIC_SYSTEM.getModeValue(mode)
 		if (metrics == MetricsConstants.NAUTICAL_MILES_AND_METERS
 			|| metrics == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 			return app.getString(R.string.ltr_or_rtl_combine_via_space, formatMiles(miles),
 				app.getString(R.string.nm))
 		}
-		return OsmAndFormatter.getFormattedDistance(miles * METERS_IN_NAUTICAL_MILE, app)
+		return OsmAndFormatter.getFormattedDistance(miles * METERS_IN_NAUTICAL_MILE, app, null, metrics)
 	}
 
 	/**

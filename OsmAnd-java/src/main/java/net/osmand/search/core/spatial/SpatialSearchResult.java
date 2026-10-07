@@ -248,9 +248,12 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 
 	public List<String> extraDeduplicateKeys(SpatialSearchContext ctx) {
 		List<String> result = null;
+		MapObject mapObject = getFirstRefObject(true);
+		if (mapObject instanceof Amenity amenity && (amenity.isRouteTrack() || amenity.isSuperRoute())) {
+			return addResult(result, amenity.getRouteId());
+		}
 		result = addResult(result, getWikidata(ctx));
 		result = addResult(result, getRouteId());
-		MapObject mapObject = getFirstRefObject(true);		
 		if (mapObject instanceof Amenity amenity) {
 			if (amenity.getType().getKeyName().equals("natural")) {
 				String name = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(amenity.getName()));
@@ -595,6 +598,13 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			res = -Double.compare(o1.score, o2.score); // the 7 tiers below, see SpatialSearchRanking
 			if (res != 0) {
 				return res;
+			}
+			if (o1.isPoiCategory() && o2.isPoiCategory()) {
+				// the more objects a category has, the higher
+				res = -Integer.compare(o1.getFirstRef().atom.otherFoundCnt, o2.getFirstRef().atom.otherFoundCnt);
+				if (res != 0) {
+					return res;
+				}
 			}
 		} else {
 			res = Integer.compare(o1.objs.size(), o2.objs.size());

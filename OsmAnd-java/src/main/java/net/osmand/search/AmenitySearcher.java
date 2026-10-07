@@ -17,9 +17,12 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.Building;
+import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
+import net.osmand.data.Street;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -75,6 +78,11 @@ public class AmenitySearcher {
                 names = stop.getOtherNames();
                 wikidata = null;
                 names.add(stop.getName());
+            } else if (mapObject instanceof City || mapObject instanceof Street
+                    || mapObject instanceof Building) {
+                latLon = mapObject.getLocation();
+                wikidata = mapObject.getWikidata();
+                names = Collections.emptyList();
             } else {
                 latLon = mapObject.getLocation();
                 wikidata = null;

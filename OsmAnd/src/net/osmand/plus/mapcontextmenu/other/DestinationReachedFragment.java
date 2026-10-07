@@ -255,4 +255,9 @@ public class DestinationReachedFragment extends BaseOsmAndFragment implements Ro
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "destination_reached";
+	}
 }

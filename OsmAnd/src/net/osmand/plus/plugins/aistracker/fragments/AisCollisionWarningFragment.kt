@@ -32,10 +32,10 @@ class AisCollisionWarningFragment : AisBaseFragment() {
 	): View {
 		val view = inflater.inflate(R.layout.fragment_ais_collision_warning, container, false)
 		setupToolbar(view, R.string.ais_collision_warning, R.string.reset_to_default) {
-			plugin.AIS_CPA_WARNING_TIME.resetToDefault()
-			plugin.AIS_CPA_WARNING_DISTANCE.resetToDefault()
-			tcpaCard.setValue(plugin.AIS_CPA_WARNING_TIME.get())
-			cpaCard.setValue(plugin.AIS_CPA_WARNING_DISTANCE.get())
+			plugin.AIS_CPA_WARNING_TIME.resetModeToDefault(appMode)
+			plugin.AIS_CPA_WARNING_DISTANCE.resetModeToDefault(appMode)
+			tcpaCard.setValue(plugin.AIS_CPA_WARNING_TIME.getModeValue(appMode))
+			cpaCard.setValue(plugin.AIS_CPA_WARNING_DISTANCE.getModeValue(appMode))
 			updateState()
 		}
 
@@ -47,9 +47,9 @@ class AisCollisionWarningFragment : AisBaseFragment() {
 		mmsiBanner = view.findViewById(R.id.mmsi_banner)
 
 		mainSwitch.setLabel(getString(R.string.ais_collision_warning_short), false)
-		mainSwitch.setChecked(plugin.AIS_CPA_ENABLED.get(), false)
+		mainSwitch.setChecked(plugin.AIS_CPA_ENABLED.getModeValue(appMode), false)
 		mainSwitch.setOnCheckedChangeListener { checked ->
-			plugin.AIS_CPA_ENABLED.set(checked)
+			plugin.AIS_CPA_ENABLED.setModeValue(appMode, checked)
 			updateState()
 		}
 
@@ -64,7 +64,7 @@ class AisCollisionWarningFragment : AisBaseFragment() {
 			{ AisFormatter.formatMinutes(osmandApp, it) },
 			{ getString(R.string.ais_cpa_warning_time_desc, AisFormatter.formatMinutes(osmandApp, it)) },
 			{
-				plugin.AIS_CPA_WARNING_TIME.set(it)
+				plugin.AIS_CPA_WARNING_TIME.setModeValue(appMode, it)
 				updateMainSwitchFooter()
 			})
 		tcpaCard.setTitle(R.string.ais_cpa_warning_time_title)
@@ -73,24 +73,24 @@ class AisCollisionWarningFragment : AisBaseFragment() {
 			view.findViewById(R.id.cpa_card),
 			view.findViewById(R.id.cpa_footer),
 			SAFE_DISTANCE_VALUES,
-			{ AisFormatter.formatNauticalMiles(osmandApp, it) },
-			{ getString(R.string.ais_cpa_safe_distance_desc, AisFormatter.formatNauticalMiles(osmandApp, it)) },
+			{ AisFormatter.formatNauticalMiles(osmandApp, it, appMode) },
+			{ getString(R.string.ais_cpa_safe_distance_desc, AisFormatter.formatNauticalMiles(osmandApp, it, appMode)) },
 			{
-				plugin.AIS_CPA_WARNING_DISTANCE.set(it)
+				plugin.AIS_CPA_WARNING_DISTANCE.setModeValue(appMode, it)
 				updateMainSwitchFooter()
 			})
 		cpaCard.setTitle(R.string.ais_cpa_safe_distance)
 
-		tcpaCard.setValue(plugin.AIS_CPA_WARNING_TIME.get())
-		cpaCard.setValue(plugin.AIS_CPA_WARNING_DISTANCE.get())
+		tcpaCard.setValue(plugin.AIS_CPA_WARNING_TIME.getModeValue(appMode))
+		cpaCard.setValue(plugin.AIS_CPA_WARNING_DISTANCE.getModeValue(appMode))
 		updateState()
 		return view
 	}
 
 	private fun updateState() {
-		val enabled = plugin.AIS_CPA_ENABLED.get()
+		val enabled = plugin.AIS_CPA_ENABLED.getModeValue(appMode)
 		enabledContent.visibility = if (enabled) View.VISIBLE else View.GONE
-		val bannerShown = plugin.AIS_OWN_MMSI.get() == 0
+		val bannerShown = plugin.AIS_OWN_MMSI.getModeValue(appMode) == 0
 		mmsiBanner.visibility = if (bannerShown) View.VISIBLE else View.GONE
 		/* the footer of the main switch already keeps 16dp to the next card; the gap of the
 		 * first card is only needed below the banner */
@@ -102,10 +102,10 @@ class AisCollisionWarningFragment : AisBaseFragment() {
 
 	private fun updateMainSwitchFooter() {
 		mainSwitchFooter.setText(
-			if (plugin.AIS_CPA_ENABLED.get()) {
+			if (plugin.AIS_CPA_ENABLED.getModeValue(appMode)) {
 				getString(R.string.ais_cpa_on_desc,
-					AisFormatter.formatNauticalMiles(osmandApp, plugin.AIS_CPA_WARNING_DISTANCE.get()),
-					AisFormatter.formatMinutes(osmandApp, plugin.AIS_CPA_WARNING_TIME.get()))
+					AisFormatter.formatNauticalMiles(osmandApp, plugin.AIS_CPA_WARNING_DISTANCE.getModeValue(appMode), appMode),
+					AisFormatter.formatMinutes(osmandApp, plugin.AIS_CPA_WARNING_TIME.getModeValue(appMode)))
 			} else {
 				getString(R.string.ais_cpa_off_desc)
 			})

@@ -339,4 +339,9 @@ public class SelectKeyCodeFragment extends BaseFullScreenFragment implements Key
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "select_key_code";
+	}
 }

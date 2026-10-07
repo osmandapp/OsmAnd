@@ -264,4 +264,9 @@ public class DefaultButtonsAppearanceFragment extends BaseFullScreenFragment imp
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "default_buttons_appearance";
+	}
 }

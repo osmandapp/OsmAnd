@@ -371,4 +371,6 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 
 		override fun getItemCount(): Int = WidgetsPanel.entries.size
 	}
+
+	override fun getAnalyticsScreen() = "widgets_appearance"
 }

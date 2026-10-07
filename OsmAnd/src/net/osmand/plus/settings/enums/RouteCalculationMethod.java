@@ -56,6 +56,6 @@ public enum RouteCalculationMethod {
 
 	public boolean canProfileUseFastRouting(@Nullable ApplicationMode mode) {
 		return mode != null && mode.getRouteService() == RouteService.OSMAND &&
-				(ApplicationMode.CAR.isDerivedRoutingFrom(mode) || ApplicationMode.BICYCLE.isDerivedRoutingFrom(mode));
+				(mode.isDerivedRoutingFrom(ApplicationMode.CAR) || mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE));
 	}
 }

@@ -1,7 +1,9 @@
 package net.osmand.plus.utils;
 
 import static net.osmand.IndexConstants.*;
+import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_META_NAME;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
+import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_PART_NAME;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 
 import androidx.annotation.NonNull;
@@ -50,6 +52,7 @@ import java.util.regex.Pattern;
 public class FileUtils {
 
 	public static final int APPROXIMATE_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+	private static final long STALE_BUILD_PART_MS = 3 * 24 * 60 * 60 * 1000L;
 
 	public static final String ILLEGAL_FILE_NAME_CHARS = "/ \\ : * ? \" < > |";
 	public static final String ILLEGAL_PATH_NAME_CHARS = "\\ : * ? \" < > |";
@@ -495,9 +498,22 @@ public class FileUtils {
 		return sourceFile.renameTo(targetFile);
 	}
 
+	/**
+	 * A partially downloaded build is kept to be resumed, also after a restart - but not forever:
+	 * nightly builds are replaced every day, so an old part cannot be resumed anyway.
+	 */
+	private static void removeStaleBuildPart(@NonNull OsmandApplication app) {
+		File part = app.getAppPath(DOWNLOAD_BUILD_PART_NAME);
+		if (part.exists() && System.currentTimeMillis() - part.lastModified() > STALE_BUILD_PART_MS) {
+			Algorithms.removeAllFiles(part);
+			Algorithms.removeAllFiles(app.getAppPath(DOWNLOAD_BUILD_META_NAME));
+		}
+	}
+
 	public static void removeUnnecessaryFiles(@NonNull OsmandApplication app) {
 		Algorithms.removeAllFiles(app.getAppPath(TEMP_DIR));
 		Algorithms.removeAllFiles(app.getAppPath(DOWNLOAD_BUILD_NAME));
+		removeStaleBuildPart(app);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(MAPS_PATH), false, DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(ROADS_INDEX_DIR), false, DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(LIVE_INDEX_DIR), false, DOWNLOAD_EXT);

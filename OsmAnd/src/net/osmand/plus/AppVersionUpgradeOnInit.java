@@ -179,8 +179,10 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_4_01 = 5401;
 	// 5402 - 5.4-02 (Migrate the AIS CPA warning time to the CPA master switch)
 	public static final int VERSION_5_4_02 = 5402;
+	// 5403 - 5.4-03 (Keep the AIS connection of existing users on the default values set up)
+	public static final int VERSION_5_4_03 = 5403;
 
-	public static final int LAST_APP_VERSION = VERSION_5_4_02;
+	public static final int LAST_APP_VERSION = VERSION_5_4_03;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -360,6 +362,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_4_02) {
 					migrateAisCpaWarningTimeToSwitch(settings);
+				}
+				if (prevAppVersion < VERSION_5_4_03) {
+					migrateAisDefaultConnectionToSetUp(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -1139,6 +1144,36 @@ public class AppVersionUpgradeOnInit {
 				} else {
 					warningTime.resetModeToDefault(mode);
 				}
+			}
+		}
+	}
+
+	/**
+	 * The Vessel tracker (AIS) plugin counts a connection as set up once one of its connection
+	 * preferences is stored. Before the redesign the plugin listened on the default UDP port
+	 * without storing anything, so a user who had the plugin on with those defaults would lose
+	 * the connection after the upgrade. The protocol is stored for them, which keeps it set up.
+	 * <p>
+	 * TCP with the old default host (192.168.200.16) is not carried over: that default pointed at
+	 * a LAN address of somebody else, so such a user sets the host up once.
+	 */
+	private void migrateAisDefaultConnectionToSetUp(@NonNull OsmandSettings settings) {
+		if (!settings.getEnabledPlugins().contains(AisTrackerPlugin.AISTRACKER_ID)) {
+			return;
+		}
+		/* registered with the default of the plugin: this runs before the plugin is created,
+		 * and the plugin gets this very instance back from the settings */
+		CommonPreference<Integer> protocol = settings.registerIntPreference(
+				AisTrackerPlugin.AIS_NMEA_PROTOCOL_ID, AisTrackerPlugin.AIS_NMEA_PROTOCOL_UDP).makeProfile();
+		String[] connectionIds = {AisTrackerPlugin.AIS_NMEA_PROTOCOL_ID, AisTrackerPlugin.AIS_NMEA_IP_ADDRESS_ID,
+				AisTrackerPlugin.AIS_NMEA_TCP_PORT_ID, AisTrackerPlugin.AIS_NMEA_UDP_PORT_ID};
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			boolean stored = false;
+			for (String id : connectionIds) {
+				stored |= settings.isSet(mode, id);
+			}
+			if (!stored) {
+				protocol.setModeValue(mode, AisTrackerPlugin.AIS_NMEA_PROTOCOL_UDP);
 			}
 		}
 	}

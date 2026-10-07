@@ -38,8 +38,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class OsmandRegions {
 	public static final String REGIONS_OCBF = "regions.ocbf";
@@ -646,15 +646,17 @@ public class OsmandRegions {
 
 	private String getSearchIndex(BinaryMapDataObject object) {
 		MapIndex mi = object.getMapIndex();
-		TIntObjectIterator<String> it = object.getObjectNames().iterator();
+		TIntObjectHashMap<String> names = object.getObjectNames();
+		// in the order of the file: a name contained in one taken before it is left out
+		TIntArrayList order = object.getNamesOrder();
 		StringBuilder ind = new StringBuilder();
-		while (it.hasNext()) {
-			it.advance();
-			TagValuePair tp = mi.decodeType(it.key());
+		for (int i = 0; i < order.size(); i++) {
+			int type = order.get(i);
+			TagValuePair tp = mi.decodeType(type);
 			if (tp.tag.startsWith("name") || tp.tag.equals("key_name")
 					|| tp.tag.startsWith("alt_name") || tp.tag.startsWith("short_name")
 					|| tp.tag.equals("name:abbreviation") || tp.tag.equals("ref")) {
-				String vl = it.value().toLowerCase(Locale.US);
+				String vl = names.get(type).toLowerCase(Locale.US);
 				if (tp.tag.equals("ref") || tp.tag.startsWith("alt_name")) {
 					vl = removeElementsWithNumbers(vl); // see testRegionSearchMatching()
 				}

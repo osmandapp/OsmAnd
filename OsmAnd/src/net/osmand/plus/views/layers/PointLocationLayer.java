@@ -39,6 +39,8 @@ import net.osmand.core.jni.SwigUtilities;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -86,14 +88,16 @@ public class PointLocationLayer extends OsmandMapLayer
 	private String navigationIconName;
 	@Nullable
 	private Model3D navigationModel;
-	private boolean brokenNavigationModel;
+	@Nullable
+	private String brokenNavigationModelName;
 	@Nullable
 	private LayerDrawable navigationIcon;
 
 	private String locationIconName;
 	@Nullable
 	private Model3D locationModel;
-	private boolean brokenLocationModel;
+	@Nullable
+	private String brokenLocationModelName;
 	@Nullable
 	private LayerDrawable locationIcon;
 
@@ -211,6 +215,29 @@ public class PointLocationLayer extends OsmandMapLayer
 		markersInvalidated = true;
 	}
 
+	private void addAppInitializedListener() {
+		OsmandApplication app = getApplication();
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onFinish(@NonNull AppInitializer init) {
+					retryBrokenModels();
+					init.removeListener(this);
+				}
+			});
+		}
+	}
+
+	private void retryBrokenModels() {
+		if (brokenNavigationModelName != null || brokenLocationModelName != null) {
+			brokenNavigationModelName = null;
+			brokenLocationModelName = null;
+			if (view != null) {
+				view.refreshMap();
+			}
+		}
+	}
+
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
@@ -226,6 +253,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		super.onMapRendererChange(currentMapRenderer, newMapRenderer);
 		if (newMapRenderer != null) {
 			initCoreRenderer();
+			retryBrokenModels();
 		}
 	}
 
@@ -234,6 +262,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		super.initLayer(view);
 		initCoreRenderer();
 		initLegacyRenderer();
+		addAppInitializedListener();
 		updateParams(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
 		locationProvider.addLocationListener(this);
 		locationProvider.addCompassListener(this);
@@ -780,12 +809,13 @@ public class PointLocationLayer extends OsmandMapLayer
 	}
 
 	private void setLocationModel() {
-		locationModel = model3dHelper.getModel(locationIconName, model -> {
+		String modelName = locationIconName;
+		locationModel = model3dHelper.getModel(modelName, model -> {
 			locationModel = model;
 			if (locationModel != null) {
 				locationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
 			}
-			brokenLocationModel = model == null;
+			brokenLocationModelName = model == null ? modelName : null;
 			markersInvalidated = true;
 			return true;
 		});
@@ -822,20 +852,13 @@ public class PointLocationLayer extends OsmandMapLayer
 			this.textScale = textScale;
 			this.carView = carView;
 
-			if (navigationIconChanged && brokenNavigationModel) {
-				brokenNavigationModel = false;
-			}
-			if (locationIconChanged && brokenLocationModel) {
-				brokenLocationModel = false;
-			}
-
 			if (LocationIcon.isModel(navigationIconName)) {
 				navigationModel = model3dHelper.getModel(navigationIconName, model -> {
 					navigationModel = model;
 					if (navigationModel != null) {
 						navigationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
 					}
-					brokenNavigationModel = model == null;
+					brokenNavigationModelName = model == null ? navigationIconName : null;
 					markersInvalidated = true;
 					if (LocationIcon.isModel(locationIconName)) {
 						setLocationModel();
@@ -933,8 +956,11 @@ public class PointLocationLayer extends OsmandMapLayer
 		if (hasMapRenderer && LocationIcon.isModelRepresented(locationIconName)) {
 			locationIconName = LocationIcon.fromName(locationIconName).getRepresented3DModelKey();
 		}
+		if (!locationIconName.equals(brokenLocationModelName)) {
+			brokenLocationModelName = null;
+		}
 		boolean forceUseDefault = LocationIcon.isModel(locationIconName)
-				&& (!hasMapRenderer || brokenLocationModel && locationIconName.equals(this.locationIconName));
+				&& (!hasMapRenderer || locationIconName.equals(brokenLocationModelName));
 		return forceUseDefault
 				? getDefaultIcon(locationIconName, LocationIcon.STATIC_DEFAULT.name())
 				: locationIconName;
@@ -947,8 +973,11 @@ public class PointLocationLayer extends OsmandMapLayer
 		if (hasMapRenderer && LocationIcon.isModelRepresented(navigationIconName)) {
 			navigationIconName = LocationIcon.fromName(navigationIconName).getRepresented3DModelKey();
 		}
+		if (!navigationIconName.equals(brokenNavigationModelName)) {
+			brokenNavigationModelName = null;
+		}
 		boolean forceUseDefault = LocationIcon.isModel(navigationIconName)
-				&& (!hasMapRenderer || brokenNavigationModel && navigationIconName.equals(this.navigationIconName));
+				&& (!hasMapRenderer || navigationIconName.equals(brokenNavigationModelName));
 		return forceUseDefault
 				? getDefaultIcon(navigationIconName, LocationIcon.MOVEMENT_DEFAULT.name())
 				: navigationIconName;

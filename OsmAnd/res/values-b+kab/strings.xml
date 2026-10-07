@@ -21,7 +21,6 @@
     <string name="share_menu_location">Bḍu adɣar</string>
     <string name="favorite_category_add_new_title">Rnu taggayt tamaynut</string>
     <string name="favorite_category_add_new">Rnu amaynut</string>
-    <string name="av_locations">Adigen</string>
     <string name="rendering_value_red_name">Azeggaɣ</string>
     <string name="rendering_value_yellow_name">Awraɣ</string>
     <string name="rendering_value_lightgreen_name">Adal afessas</string>
@@ -393,7 +392,6 @@
     <string name="shared_string_audio">Imesli</string>
     <string name="shared_string_video">Ividyuten</string>
     <string name="shared_string_accessibility">Tuffart</string>
-    <string name="watch">Ɛass</string>
     <string name="version_settings">Ileqman n tneflit</string>
     <string name="proxy_pref_title">Apṛuksi</string>
     <string name="settings_privacy">Tabaḍnit</string>
@@ -534,7 +532,6 @@
     <string name="modify_the_search_query">Ẓreg asuter n unadi.</string>
     <string name="shared_string_added">Iţwarna</string>
     <string name="marker_activated">Creḍ %s immed.</string>
-    <string name="empty_state_av_notes">Ṭṭef tizmilin!</string>
     <string name="shared_string_more_without_dots">Ugar</string>
     <string name="favourites_group">Taggayt Ismenyifen</string>
     <string name="add_group">Rnu agraw</string>
@@ -554,8 +551,6 @@
     <string name="will_open_at">Ad yeldi ɣef</string>
     <string name="will_open_on">Ad yeldi ass</string>
     <string name="additional_actions">Tiggawin nniḍen</string>
-    <string name="av_locations_selected_desc">Afaylu GPX igebren adig akked isefka n tezmilin ittwafernen.</string>
-    <string name="av_locations_all_desc">Afaylu igebren adig akked tizmilin.</string>
     <string name="shared_string_actions">Tigawin</string>
     <string name="parked_at">Sers deg</string>
     <string name="without_time_limit">Ulac tilist deg wakud</string>
@@ -869,8 +864,6 @@
     <string name="rendering_attr_hidePOILabels_name">Tibzimin n POI</string>
     <string name="shared_string_marker">Rnu taṛekkizt ɣef tkarḍa</string>
     <string name="osm_recipients_label">Inermisen</string>
-    <string name="by_type">S wanaw</string>
-    <string name="by_date">Azemz d</string>
     <string name="import_file">Kter</string>
     <string name="show_map">Sken-d takarḍa</string>
     <string name="rendering_value_darkyellow_name">Awraɣ</string>
@@ -1005,7 +998,6 @@
     <string name="free">%1$S</string>
     <string name="online_map">Takarḍa ɣef web</string>
     <string name="osmand_parking_plugin_name">Amḍiq n aniɣsur</string>
-    <string name="audionotes_plugin_name">Ameslaw/Tavidyut</string>
     <string name="record_plugin_name">Asekles</string>
     <string name="shared_string_online_maps">Tikarḍiwin web</string>
     <string name="shared_string_my_location">ideg</string>

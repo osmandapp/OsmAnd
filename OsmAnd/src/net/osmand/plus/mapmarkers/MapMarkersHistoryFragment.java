@@ -303,4 +303,9 @@ public class MapMarkersHistoryFragment extends BaseNestedFragment implements Map
 	public void onPreferenceChanged(@NonNull String prefId) {
 		updateAdapter();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_markers_history";
+	}
 }

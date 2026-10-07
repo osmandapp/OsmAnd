@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import net.osmand.plus.R
 import net.osmand.plus.plugins.aistracker.AisConnectionState
@@ -63,7 +64,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 	): View {
 		val view = inflater.inflate(R.layout.fragment_ais_settings, container, false)
 		setupToolbar(view, R.string.plugin_ais_tracker_name, R.string.ais_reset_plugin_settings) {
-			resetPluginSettings()
+			confirmResetPluginSettings()
 		}
 		bindViews(view)
 		return view
@@ -89,7 +90,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		nmeaLocationRow.setTitle(R.string.ais_use_nmea_location)
 		nmeaLocationRow.setSubtitle(getString(R.string.ais_use_nmea_location_desc))
 		nmeaLocationRow.setOnClickListener {
-			plugin.AIS_USE_NMEA_LOCATION.set(!plugin.AIS_USE_NMEA_LOCATION.get())
+			plugin.AIS_USE_NMEA_LOCATION.setModeValue(appMode, !plugin.AIS_USE_NMEA_LOCATION.getModeValue(appMode))
 			updateContent()
 		}
 
@@ -98,7 +99,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		backgroundRow.setTitle(R.string.ais_run_in_background)
 		backgroundRow.setSubtitle(getString(R.string.ais_run_in_background_desc))
 		backgroundRow.setOnClickListener {
-			plugin.AIS_RECEIVE_IN_BACKGROUND.set(!plugin.AIS_RECEIVE_IN_BACKGROUND.get())
+			plugin.AIS_RECEIVE_IN_BACKGROUND.setModeValue(appMode, !plugin.AIS_RECEIVE_IN_BACKGROUND.getModeValue(appMode))
 			updateContent()
 		}
 
@@ -128,7 +129,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		showOnMapRow.setIcon(null)
 		showOnMapRow.setTitle(R.string.ais_show_on_the_map)
 		showOnMapRow.setOnClickListener {
-			plugin.AIS_DISPLAY_OWN_POSITION.set(!plugin.AIS_DISPLAY_OWN_POSITION.get())
+			plugin.AIS_DISPLAY_OWN_POSITION.setModeValue(appMode, !plugin.AIS_DISPLAY_OWN_POSITION.getModeValue(appMode))
 			plugin.layer?.refreshOwnObjectVisibility()
 			updateContent()
 		}
@@ -161,28 +162,28 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 	private fun updateContent() {
 		updateConnectionCard()
 
-		nmeaLocationRow.setChecked(plugin.AIS_USE_NMEA_LOCATION.get())
-		backgroundRow.setChecked(plugin.AIS_RECEIVE_IN_BACKGROUND.get())
+		nmeaLocationRow.setChecked(plugin.AIS_USE_NMEA_LOCATION.getModeValue(appMode))
+		backgroundRow.setChecked(plugin.AIS_RECEIVE_IN_BACKGROUND.getModeValue(appMode))
 
 		objectsVisibilityRow.setSubtitle(
 			getString(R.string.ais_objects_visibility_summary,
-				AisFormatter.formatMinutes(osmandApp, plugin.AIS_OBJ_LOST_TIMEOUT.get())))
+				AisFormatter.formatMinutes(osmandApp, plugin.AIS_OBJ_LOST_TIMEOUT.getModeValue(appMode))))
 
 		collisionWarningRow.setSubtitle(
-			if (plugin.isCpaEnabled) {
+			if (plugin.AIS_CPA_ENABLED.getModeValue(appMode)) {
 				getString(R.string.ltr_or_rtl_combine_via_bold_point,
-					AisFormatter.formatMinutes(osmandApp, plugin.AIS_CPA_WARNING_TIME.get()),
-					AisFormatter.formatNauticalMiles(osmandApp, plugin.AIS_CPA_WARNING_DISTANCE.get()))
+					AisFormatter.formatMinutes(osmandApp, plugin.AIS_CPA_WARNING_TIME.getModeValue(appMode)),
+					AisFormatter.formatNauticalMiles(osmandApp, plugin.AIS_CPA_WARNING_DISTANCE.getModeValue(appMode), appMode))
 			} else {
 				getString(R.string.shared_string_off)
 			})
 
-		val mmsi = plugin.AIS_OWN_MMSI.get()
+		val mmsi = plugin.AIS_OWN_MMSI.getModeValue(appMode)
 		val mmsiSet = mmsi != 0
 		mmsiRow.setSubtitle(
 			if (mmsiSet) AisFormatter.formatMmsi(mmsi) else getString(R.string.ais_mmsi_not_set))
 
-		showOnMapRow.setChecked(mmsiSet && plugin.AIS_DISPLAY_OWN_POSITION.get())
+		showOnMapRow.setChecked(mmsiSet && plugin.AIS_DISPLAY_OWN_POSITION.getModeValue(appMode))
 		showOnMapRow.setRowEnabled(mmsiSet)
 		view?.let {
 			showOnMapRow.setTitleColor(themedColor(it,
@@ -196,7 +197,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 
 	private fun updateConnectionCard() {
 		val context = view?.context ?: return
-		val state = plugin.connectionState
+		val state = plugin.getConnectionState(appMode)
 
 		/* the connection row carries an action button, so it has its own layout and is bound here
 		 * instead of through SettingRow */
@@ -218,6 +219,13 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		connectionAction.setText(state.actionId)
 		applyButtonStyle(connectionAction, state.filledTonalAction)
 		connectionAction.setOnClickListener { onConnectionAction(state) }
+		/* only the active profile has a socket: for another profile there is nothing to connect
+		 * or disconnect, only a connection to set up */
+		val actionShown = plugin.isActiveMode(appMode) || state == AisConnectionState.NOT_SET_UP
+		connectionAction.visibility = if (actionShown) View.VISIBLE else View.GONE
+		/* the bottom padding of the row belongs to the button */
+		connectionRow.setPaddingRelative(connectionRow.paddingStart, connectionRow.paddingTop,
+			connectionRow.paddingEnd, if (actionShown) dp(16) else 0)
 
 		val connected = state == AisConnectionState.CONNECTED
 		connectionFooter.visibility = if (connected) View.VISIBLE else View.GONE
@@ -230,7 +238,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 			val vessels = getString(R.string.ais_vessels_on_the_map, plugin.vesselsCount)
 			/* the position half is only meaningful while the stream is the location source */
 			connectionFooter.setText(
-				if (plugin.AIS_USE_NMEA_LOCATION.get()) {
+				if (plugin.AIS_USE_NMEA_LOCATION.getModeValue(appMode)) {
 					getString(R.string.ltr_or_rtl_combine_via_bold_point, vessels,
 						getString(
 							if (plugin.isReceivingPosition) R.string.ais_receiving_position_data
@@ -244,8 +252,8 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 	private fun onConnectionAction(state: AisConnectionState) {
 		when (state) {
 			AisConnectionState.NOT_SET_UP -> showFragment(AisConnectionFragment())
-			AisConnectionState.CONNECTING, AisConnectionState.CONNECTED -> plugin.disconnect()
-			else -> plugin.connect()
+			AisConnectionState.CONNECTING, AisConnectionState.CONNECTED -> plugin.disconnect(appMode)
+			else -> plugin.connect(appMode)
 		}
 		updateConnectionCard()
 	}
@@ -272,14 +280,28 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 	}
 
 	private fun protocolName(): String = getString(
-		if (plugin.AIS_NMEA_PROTOCOL.get() == AisTrackerPlugin.AIS_NMEA_PROTOCOL_TCP) {
+		if (plugin.AIS_NMEA_PROTOCOL.getModeValue(appMode) == AisTrackerPlugin.AIS_NMEA_PROTOCOL_TCP) {
 			R.string.ais_protocol_tcp
 		} else {
 			R.string.ais_protocol_udp
 		})
 
+	/**
+	 * Resets the host and the port as well, which are not cheap to type again - unlike the
+	 * sliders of the other screens, which reset without asking.
+	 */
+	private fun confirmResetPluginSettings() {
+		MaterialAlertDialogBuilder(materialContext())
+			.setTitle(R.string.ais_reset_plugin_settings)
+			.setMessage(getString(R.string.reset_confirmation_descr,
+				getString(R.string.shared_string_reset)))
+			.setNegativeButton(R.string.shared_string_cancel, null)
+			.setPositiveButton(R.string.shared_string_reset) { _, _ -> resetPluginSettings() }
+			.show()
+	}
+
 	private fun resetPluginSettings() {
-		plugin.resetSettings()
+		plugin.resetSettings(appMode)
 		updateContent()
 	}
 

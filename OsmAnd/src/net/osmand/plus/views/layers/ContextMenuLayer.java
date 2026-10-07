@@ -34,6 +34,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -48,6 +49,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
@@ -58,6 +60,7 @@ import net.osmand.plus.views.layers.geometry.GeometryWayDrawer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.search.core.SearchResult;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -746,6 +749,19 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 			menu.show(latLon, pointDescription, object);
 		}
 		return true;
+	}
+
+	public boolean showContextMenu(@NonNull SearchResult searchResult) {
+		LatLon latLon = searchResult.location;
+		if (latLon == null && searchResult.object instanceof MapObject mapObject) {
+			latLon = mapObject.getLocation();
+		}
+		if (latLon == null) {
+			return false;
+		}
+		Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(getApplication(), searchResult);
+		IContextMenuProvider provider = pair.second instanceof Amenity ? view.getLayerByClass(POIMapLayer.class) : null;
+		return showContextMenu(latLon, pair.first, pair.second, provider);
 	}
 
 	public boolean showContextMenu(PointF point, RotatedTileBox tileBox, boolean showUnknownLocation) {

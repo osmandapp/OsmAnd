@@ -212,4 +212,9 @@ public class MapScreenLayoutFragment extends BaseFullScreenFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_screen_layout";
+	}
 }
