@@ -468,7 +468,7 @@ public class RouteProvider {
 			if (result == null && !memoryGuard.isExceeded()) {
 				result = router.searchRoute(ctx, st, en, inters);
 			}
-			if (memoryGuard.stop() && (result == null || result.getList().isEmpty())) {
+			if (memoryGuard.stop()) {
 				return new RouteCalculationResult(params.ctx.getString(R.string.route_calculation_out_of_memory));
 			}
 
