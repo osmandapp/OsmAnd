@@ -53,6 +53,7 @@ import java.util.Objects;
 public class QuickSearchListItem {
 
 	private static final String STREET_INTERSECTION_DIVIDER = " + ";
+	private static final int TYPES_NAME_LENGTH = 20;
 	protected final OsmandApplication app;
 	private final SearchResult searchResult;
 
@@ -333,7 +334,11 @@ public class QuickSearchListItem {
 			case POI_TYPE:
 				String res = "";
 				if (searchResult.object instanceof AbstractPoiType abstractPoiType) {
-					res = abstractPoiType.getParentTypeName();
+					res = abstractPoiType.isAdditional() ? PoiFilterUtils.getTypesName(
+							PoiFilterUtils.getTypesWithAdditional(app.getPoiTypes(), abstractPoiType), TYPES_NAME_LENGTH) : "";
+					if (Algorithms.isEmpty(res)) {
+						res = abstractPoiType.getParentTypeName();
+					}
 				} else if (searchResult.object instanceof CustomSearchPoiFilter customSearchPoiFilter) {
 					res = customSearchPoiFilter.getName();
 				} else if (searchResult.object instanceof SearchPoiAdditionalFilter searchPoiAdditionalFilter) {
