@@ -459,6 +459,7 @@ public class BinaryMapPoiReaderAdapter {
 					break;
 				}
 				oldLimit = codedIS.pushLimitLong((long) len);
+				pi.readAtomsBytes(len);
 				PrefixNameValue prefix = pi.isCacheRawBlocks() ? pi.addData(codedIS.readRawBytes(len), shift)
 						: pi.addData(OsmAndPoiNameIndexData.parseFrom(codedIS), shift);
 				if (res != null) {

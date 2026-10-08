@@ -606,9 +606,9 @@ public class SpatialSearchContext {
 				}
 			};
 			String query = "typo-key " + t.word;
-			long start = System.currentTimeMillis();
+			long bytes = 0;
 			for (int fileInd : filesNearestFirst()) {
-				if (System.currentTimeMillis() - start > settings.TYPO_KEY_TIME_MS) {
+				if (bytes > settings.TYPO_KEY_MAX_BYTES) {
 					break;
 				}
 				for (NameIndexReader typoReader : internalFile.get(fileInd).typoReaders) {
@@ -616,6 +616,7 @@ public class SpatialSearchContext {
 						continue;
 					}
 					typoReader.setMaxBlockBytes(settings.TYPO_MAX_BLOCK_BYTES);
+					typoReader.resetBytesStat();
 					try {
 						List<PrefixNameValue> prefixes = files.get(fileInd).readFullNameIndex(typoReader.setQuery(query, matcher));
 						if (prefixes != null) {
@@ -624,6 +625,8 @@ public class SpatialSearchContext {
 							}
 						}
 					} finally {
+						NameIndexReaderBytes read = typoReader.getBytesStat();
+						bytes += read.readTableBytes - read.skipTableBytes + read.readAtomBytes;
 						typoReader.clearQuery();
 						typoReader.clearPrefixes();
 					}

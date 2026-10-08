@@ -78,8 +78,8 @@ public class SpatialTextSearch {
 		// key): the blocks of those keys are read, larger than TYPO_MAX_BLOCK_BYTES skipped (0 - all); 0 letters disables it
 		public int TYPO_KEY_LETTERS = 4;
 		public int TYPO_MAX_BLOCK_BYTES = 0;
-		// the maps are read nearest first until this time is spent on a word
-		public int TYPO_KEY_TIME_MS = 150;
+		// the maps are read nearest first until this many bytes of their index are read for a word
+		public int TYPO_KEY_MAX_BYTES = 1024 * 1024;
 				
 		// lang to deduplicate results
 		public String LANG_DEDUPLICATE = ""; 
