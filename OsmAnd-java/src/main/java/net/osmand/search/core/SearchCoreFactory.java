@@ -1423,8 +1423,10 @@ public class SearchCoreFactory {
 			String nameFilter = null;
 			int countExtraWords = 0;
 			Set<String> poiAdditionals = new LinkedHashSet<>();
+			Object selectedType = null;
 			if (phrase.isLastWord(ObjectType.POI_TYPE)) {
 				Object obj = phrase.getLastSelectedWord().getResult().object;
+				selectedType = obj;
 				if (obj instanceof AbstractPoiType) {
 					poiTypeFilter = getPoiTypeFilter((AbstractPoiType) obj, poiAdditionals);
 				} else if (obj instanceof SearchPoiTypeFilter) {
@@ -1482,9 +1484,22 @@ public class SearchCoreFactory {
 					}
 				}
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(radius);
-				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
 				Set<String> searchedPois = new TreeSet<>();
+				List<Amenity> indexed = selectedType == null ? null
+						: searchByNameIndex(phrase, resultMatcher, selectedType, bbox);
+				if (indexed != null) {
+					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, null,
+							searchedPois, poiAdditionals, countExtraWords);
+					if (poiTypeFilter instanceof CustomSearchPoiFilter) {
+						rm = ((CustomSearchPoiFilter) poiTypeFilter).wrapResultMatcher(rm);
+					}
+					indexed.forEach(rm::publish);
+				}
+				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
 				for (BinaryMapIndexReader r : offlineIndexes) {
+					if (indexed != null && isReadByNameIndex(r)) {
+						continue;
+					}
 					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, r,
 							searchedPois, poiAdditionals, countExtraWords);
 					if (poiTypeFilter instanceof CustomSearchPoiFilter) {
@@ -1500,6 +1515,15 @@ public class SearchCoreFactory {
 			return true;
 		}
 
+		// null - read the maps with the type filter
+		protected List<Amenity> searchByNameIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+				Object poiType, QuadRect bbox31) throws IOException {
+			return null;
+		}
+
+		protected boolean isReadByNameIndex(BinaryMapIndexReader reader) {
+			return false;
+		}
 
 		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchPoiTypeFilter poiTypeFilter,
 		                                                final SearchResultMatcher resultMatcher, final String nameFilter,

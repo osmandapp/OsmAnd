@@ -28,9 +28,11 @@ import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
@@ -599,6 +601,36 @@ public class SpatialTextSearch {
 		} finally {
 			clearPrefixCacheIfLarge(ctx);
 		}
+	}
+
+	// ctx is built with SpatialTextSearchSettings.searchPoiByCategorySettings
+	public List<Amenity> searchPoiByCategory(SpatialSearchContext ctx, String categoryKey, QuadRect bboxLatLon,
+			int poiZoom, int limit) throws IOException {
+		SpatialPoiType spatialType = null;
+		if (!categoryKey.startsWith(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX)) {
+			spatialType = ctx.poiSearch.getByKey(categoryKey);
+			if (spatialType == null) {
+				return Collections.emptyList();
+			}
+			categoryKey = spatialType.getKey();
+		}
+		boolean indexed = spatialType == null
+				|| (spatialType.singleType instanceof PoiType poiType && !poiType.isNonIndx());
+		if (!indexed) {
+			return ctx.poiSearch.loadPOIObjects(ctx, spatialType, bboxLatLon, poiZoom, limit);
+		}
+		SpatialSearchResults res = searchAPI(NameIndexReader.POI_CATEGORY_PREFIX + categoryKey, ctx);
+		List<Amenity> amenities = new ArrayList<>();
+		if (res.mainResults != null) {
+			for (SpatialSearchResult r : res.mainResults) {
+				for (MapObject o : r.getObjects()) {
+					if (o instanceof Amenity amenity) {
+						amenities.add(amenity);
+					}
+				}
+			}
+		}
+		return amenities;
 	}
 
 	private SpatialSearchResults searchAPIInternal(String input, SpatialSearchContext ctx) throws IOException {
