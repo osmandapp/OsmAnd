@@ -189,8 +189,9 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		saveBtnTitle.setTextColor(ContextCompat.getColorStateList(app,
 				nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
 		saveBtn.setOnClickListener(view -> {
-			saveTemplate();
-			dismiss();
+			if (saveTemplate()) {
+				dismiss();
+			}
 		});
 		ScrollView scrollView = root.findViewById(R.id.scroll_view);
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
@@ -321,7 +322,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		updateBackPressedCallback();
 	}
 
-	private void saveTemplate() {
+	private boolean saveTemplate() {
 		try {
 			String newName = nameEditText.getText().toString();
 			String urlToLoad = urlEditText.getText().toString();
@@ -342,8 +343,12 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 					if (IndexConstants.SQLITE_EXT.equals(ext)) {
 						f = FileUtils.renameSQLiteFile(app, f, newName + ext, null);
 					} else {
-						f.renameTo(app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName));
-						f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName);
+						File renamed = app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName);
+						if (!f.renameTo(renamed)) {
+							app.showToastMessage(R.string.file_can_not_be_renamed);
+							return false;
+						}
+						f = renamed;
 					}
 				}
 			}
@@ -372,7 +377,10 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 					storageChanged = f.exists();
 				}
 			} else {
-				settings.installTileSource(template);
+				if (!settings.installTileSource(template)) {
+					app.showToastMessage(R.string.map_source_folder_not_created);
+					return false;
+				}
 				storageChanged = f != null && f.exists() && IndexConstants.SQLITE_EXT.equals(ext);
 			}
 			if (storageChanged) {
@@ -382,8 +390,14 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 			if (fragment instanceof OnMapSourceUpdateListener) {
 				((OnMapSourceUpdateListener) fragment).onMapSourceUpdated();
 			}
+			if (!newName.equals(template.getName())) {
+				app.showToastMessage(R.string.map_source_saved_as, template.getName());
+			}
+			return true;
 		} catch (RuntimeException e) {
 			LOG.error("Error on saving template " + e);
+			app.showToastMessage(R.string.shared_string_unexpected_error);
+			return false;
 		}
 	}
 
