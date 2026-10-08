@@ -131,6 +131,32 @@ public class SpatialSearchContextTest {
 		Assert.assertTrue(SpatialSearchToken.spelledByRule("college ave east", "college avenue east", "en"));
 		Assert.assertFalse(SpatialSearchToken.spelledByRule("college avenue east", "college road east", "en"));
 		Assert.assertFalse(SpatialSearchToken.spelledByRule("нова 5 пошта", "нова 5 почта", "uk_UA"));
+		// two alternative names of one name by two rules (Parkway -> pkwy, South -> s): every differing word is paired
+		Assert.assertTrue(SpatialSearchToken.spelledByRule("eastern pkwy south sidewalk", "eastern parkway s sidewalk",
+				"en_US"));
+		Assert.assertFalse(SpatialSearchToken.spelledByRule("eastern pkwy south sidewalk", "eastern parkway s mall",
+				"en_US"));
+	}
+
+	/**
+	 * A word that is no number and a word of a name of the object ("о." of "о. Пасхи") stays that word: a POI ref
+	 * guessed from another name of the object ("Пасхи" unglued from "о. Пасхи", no other words) does not replace it.
+	 */
+	@Test
+	public void testNameWordIsNoRefOfAnotherName() {
+		SpatialSearchToken.NameIndexAtomXY world = new SpatialSearchToken.NameIndexAtomXY(null, null, null);
+		SpatialSearchToken.NameIndexAtom name = new SpatialSearchToken.NameIndexAtom("о.", SpatialSearchToken.POI_TYPE,
+				7, 0, null, false, 1, 0, world, 0, -1);
+		SpatialSearchToken.NameIndexAtom ref = new SpatialSearchToken.NameIndexAtom("пасхи",
+				SpatialSearchToken.POI_REF_TYPE, 7, 0, null, false, 0, 0, world, 0, -1);
+		SpatialSearchToken nameFirst = new SpatialSearchToken(2, "о.", "о.", 0);
+		nameFirst.addAtom(name);
+		nameFirst.addAtom(ref);
+		Assert.assertSame(name, nameFirst.getAtomToken(name));
+		SpatialSearchToken refFirst = new SpatialSearchToken(2, "о.", "о.", 0);
+		refFirst.addAtom(new SpatialSearchToken.NameIndexAtom(ref));
+		refFirst.addAtom(name);
+		Assert.assertSame(name, refFirst.getAtomToken(name));
 	}
 
 	private static NameIndexReader addressIndex(Object... wordFreqNonindexed) {

@@ -403,6 +403,18 @@ public class SpatialSearchToken {
 					res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
 							existing.otherWordsCnt + existing.otherFoundCnt);
 				}
+				if (!SearchAlgorithms.isNumber2Letters(wordAligned) && atom.otherWordsCnt != existing.otherWordsCnt
+						&& !atom.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)
+						&& !existing.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
+					// a word of a name that is no number stays that word: a ref or a house number guessed from another
+					// name of the object counts the other words of that name, not of the one with the word ("о." of
+					// "о. Пасхи" is no ref of "Пасхи" unglued from it, which has no other words)
+					boolean ref = atom.isBuilding() || atom.isPOIRef();
+					boolean existingRef = existing.isBuilding() || existing.isPOIRef();
+					if (ref != existingRef) {
+						res = Boolean.compare(ref, existingRef);
+					}
+				}
 				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
 				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
 					// a school
@@ -443,9 +455,9 @@ public class SpatialSearchToken {
 	}
 
 	/**
-	 * Two names of one atom differ in one word that an {@code <index>} rule of the locale turns into the other
-	 * ("avenue" -> "av"): an alternative name of the generator, not another name of the object ("пошта", "почта" of
-	 * name:uk and name:ru).
+	 * Two names of one atom differ in words that {@code <index>} rules of the locale turn into each other, one word for
+	 * one ("avenue" -> "av"; "Eastern pkwy South Sidewalk" and "Eastern Parkway s Sidewalk" by two rules): alternative
+	 * names of the generator, not another name of the object ("пошта", "почта" of name:uk and name:ru).
 	 */
 	static boolean spelledByRule(String name, String otherName, String locale) {
 		Set<String> words = new HashSet<>(List.of(name.split(" ")));
@@ -453,18 +465,38 @@ public class SpatialSearchToken {
 		if (words.size() != otherWords.size()) {
 			return false;
 		}
-		Set<String> onlyHere = new HashSet<>(words);
+		List<String> onlyHere = new ArrayList<>(words);
 		onlyHere.removeAll(otherWords);
-		Set<String> onlyThere = new HashSet<>(otherWords);
+		List<String> onlyThere = new ArrayList<>(otherWords);
 		onlyThere.removeAll(words);
-		if (onlyHere.size() != 1 || onlyThere.size() != 1) {
+		if (onlyHere.isEmpty() || onlyHere.size() != onlyThere.size()) {
 			return false;
 		}
-		String a = onlyHere.iterator().next();
-		String b = onlyThere.iterator().next();
-		for (SearchVariantRules.Rule rule : SearchVariantRules.forLocale(SearchLocales.normalize(locale)).index()) {
-			if (spells(rule, a, b) || spells(rule, b, a)) {
-				return true;
+		List<SearchVariantRules.Rule> rules = SearchVariantRules.forLocale(SearchLocales.normalize(locale)).index();
+		return pairedByRules(onlyHere, 0, onlyThere, new boolean[onlyThere.size()], rules);
+	}
+
+	// every word of onlyHere from index i on has its own word of onlyThere that a rule turns it into, or back
+	private static boolean pairedByRules(List<String> onlyHere, int i, List<String> onlyThere, boolean[] paired,
+			List<SearchVariantRules.Rule> rules) {
+		if (i == onlyHere.size()) {
+			return true;
+		}
+		String a = onlyHere.get(i);
+		for (int j = 0; j < onlyThere.size(); j++) {
+			if (paired[j]) {
+				continue;
+			}
+			String b = onlyThere.get(j);
+			for (SearchVariantRules.Rule rule : rules) {
+				if (spells(rule, a, b) || spells(rule, b, a)) {
+					paired[j] = true;
+					if (pairedByRules(onlyHere, i + 1, onlyThere, paired, rules)) {
+						return true;
+					}
+					paired[j] = false;
+					break;
+				}
 			}
 		}
 		return false;
