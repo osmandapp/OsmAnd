@@ -632,6 +632,9 @@ public class BinaryRoutePlanner {
 		if (from != null && to != null) {
 			long fid = to.getRoad().getId();
 			for (int i = 0; i < from.getRoad().getRestrictionLength(); i++) {
+				if (from.getRoad().getRestrictionViaWays(i) != null) {
+					continue;
+				}
 				long id = from.getRoad().getRestrictionId(i);
 				int tp = from.getRoad().getRestrictionType(i);
 				if (fid == id) {
@@ -677,7 +680,9 @@ public class BinaryRoutePlanner {
 			RouteSegment oppParent = getParentDiffId(opposite);
 			RouteSegment to = reverseWaySearch ? curParent : oppParent;
 			RouteSegment from = !reverseWaySearch ? curParent : oppParent;
-			if (checkViaRestrictions(from, to)) {
+			RouteSegment forward = reverseWaySearch ? opposite : currentSegment;
+			RouteSegment backward = reverseWaySearch ? currentSegment : opposite;
+			if (checkViaRestrictions(from, to) && !ViaChainRestrictions.isRestrictedAtMeeting(forward, backward)) {
 				FinalRouteSegment frs = new FinalRouteSegment(currentSegment.getRoad(), 
 						currentSegment.getSegmentStart(), currentSegment.getSegmentEnd());
 				frs.setParentRoute(currentSegment.getParentRoute());
@@ -753,6 +758,9 @@ public class BinaryRoutePlanner {
 			int type = -1;
 			if (!reverseWay) {
 				for (int i = 0; i < road.getRestrictionLength(); i++) {
+					if (road.getRestrictionViaWays(i) != null) {
+						continue;
+					}
 					int rt = road.getRestrictionType(i);
 					long rv = road.getRestrictionVia(i);
 					if (road.getRestrictionId(i) == next.road.id) {
@@ -768,6 +776,9 @@ public class BinaryRoutePlanner {
 				}
 			} else {
 				for (int i = 0; i < next.road.getRestrictionLength(); i++) {
+					if (next.road.getRestrictionViaWays(i) != null) {
+						continue;
+					}
 					int rt = next.road.getRestrictionType(i);
 					long rv = next.road.getRestrictionVia(i);
 					long restrictedTo = next.road.getRestrictionId(i);
@@ -906,7 +917,8 @@ public class BinaryRoutePlanner {
 			if (next.getSegmentStart() == currentSegment.getSegmentEnd() && 
 					next.getRoad().getId() == currentSegment.getRoad().getId()) {
 				// skip itself
-			} else if (!doNotAddIntersections) {
+			} else if (!doNotAddIntersections
+					&& !ViaChainRestrictions.isRestricted(currentSegment, next.getRoad(), connectedNextSegment, reverseWaySearch)) {
 				RouteSegment nextPos = next.initRouteSegment(true);
 				processOneRoadIntersection(ctx, reverseWaySearch, graphSegments, visitedSegments, currentSegment, nextPos);
 				RouteSegment nextNeg = next.initRouteSegment(false);
