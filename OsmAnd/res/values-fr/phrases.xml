@@ -5198,4 +5198,22 @@
     <string name="poi_craft_signmaker">Fabricant d\'enseignes</string>
     <string name="poi_traffic_park">Parc de circulation</string>
     <string name="poi_stables">Écuries</string>
+    <string name="poi_theme_filter">Thème</string>
+    <string name="poi_luggage_locker">Consigne à bagages</string>
+    <string name="poi_theme">Thème</string>
+    <string name="poi_theme_irish">Irlandais</string>
+    <string name="poi_theme_cat">Chat</string>
+    <string name="poi_theme_maid">Femme de ménage</string>
+    <string name="poi_theme_tiki">Tiki</string>
+    <string name="poi_theme_shakespeare">Shakespeare</string>
+    <string name="poi_theme_rainforest">Forêt tropicale</string>
+    <string name="poi_theme_bicycle">Vélo</string>
+    <string name="poi_theme_dog">Chien</string>
+    <string name="poi_theme_train">Train</string>
+    <string name="poi_theme_nature">Nature</string>
+    <string name="poi_theme_ship">Navire</string>
+    <string name="poi_theme_animal">Animal</string>
+    <string name="poi_theme_pirate">Pirate</string>
+    <string name="poi_theme_medieval">Médiéval</string>
+    <string name="poi_theme_jazz">Jazz</string>
 </resources>

@@ -888,7 +888,7 @@
     <string name="poi_internet_access_yes">Accesso Internet: sì</string>
     <string name="poi_internet_access_no">Accesso Internet: no</string>
     <string name="poi_club_music">Club musicale</string>
-    <string name="poi_club_nature">Club natura</string>
+    <string name="poi_club_nature">Club naturalistico</string>
     <string name="poi_piste_snow_park">Snowpark</string>
     <string name="poi_community_centre">Centro comunitario</string>
     <string name="poi_gallery">Galleria d\'arte</string>
@@ -1110,8 +1110,8 @@
     <string name="poi_love_hotel">Hotel di amore</string>
     <string name="poi_payment_coins_yes">Monete</string>
     <string name="poi_payment_coins_no">Monete non accettate</string>
-    <string name="poi_payment_coins_0_5">Monete di $0,5</string>
-    <string name="poi_payment_coins_50c12">50c, 1€ e monete da 2€</string>
+    <string name="poi_payment_coins_0_5">Monete da 0,5 $</string>
+    <string name="poi_payment_coins_50c12">Monete da 50 centesimi, 1 € e 2 €</string>
     <string name="poi_payment_telephone_cards_yes">Schede telefoniche</string>
     <string name="poi_payment_telephone_cards_no">Non si accettano schede telefoniche</string>
     <string name="poi_payment_credit_cards_yes">Carte di credito</string>
@@ -1155,7 +1155,7 @@
     <string name="poi_payment_pikepass_designated">PIKEPASS (riservato)</string>
     <string name="poi_payment_visa_debit_yes">Carte Visa Debit</string>
     <string name="poi_payment_visa_debit_no">Non si accettano carte Visa Debit</string>
-    <string name="poi_payment_cryptocurrencies_no">Cryptomonete non accettate</string>
+    <string name="poi_payment_cryptocurrencies_no">Criptovalute non accettate</string>
     <string name="poi_payment_others_yes">Altro</string>
     <string name="poi_payment_others_no">Altri metodi di pagamento non accettati</string>
     <string name="poi_payment_routex_yes">Routex</string>
@@ -1215,7 +1215,7 @@
     <string name="poi_religion_scientologist">Scientologismo</string>
     <string name="poi_religion_pagan">Paganesimo</string>
     <string name="poi_religion_zoroastrian">Zoroastrismo</string>
-    <string name="poi_denomination_sunni">Sunni</string>
+    <string name="poi_denomination_sunni">Sunnita</string>
     <string name="poi_denomination_protestant">Protestante</string>
     <string name="poi_denomination_anglican">Anglicana</string>
     <string name="poi_denomination_presbyterian">Presbiteriana</string>
@@ -1225,7 +1225,7 @@
     <string name="poi_denomination_seventh_day_adventist">Avventista del Settimo Giorno</string>
     <string name="poi_denomination_new_apostolic">Nuova Apostolica</string>
     <string name="poi_denomination_episcopal">Episcopale</string>
-    <string name="poi_denomination_shia">Shia</string>
+    <string name="poi_denomination_shia">Sciita</string>
     <string name="poi_denomination_greek_catholic">Greco-Cattolica</string>
     <string name="poi_denomination_church_of_scotland">Chiesa di Scozia</string>
     <string name="poi_denomination_assemblies_of_god">Assemblee di Dio</string>
@@ -2359,7 +2359,7 @@
     <string name="poi_attraction_water_slide">Scivolo acquatico</string>
     <string name="poi_piste_hike">Sentiero escursionistico</string>
     <string name="poi_lean_to">Capannone;Riparo</string>
-    <string name="poi_denomination_quaker">Quaker</string>
+    <string name="poi_denomination_quaker">Quaccheri</string>
     <string name="poi_greenfield">Terreno edificabile</string>
     <string name="poi_bulk_purchase">Acquisto all\'ingrosso</string>
     <string name="poi_substation_type">Tipo</string>
@@ -4917,7 +4917,7 @@
     <string name="poi_climbing_bolt_abseil">Punto di calata</string>
     <string name="poi_climbing_bolts">Spit di arrampicata</string>
     <string name="poi_trampoline_park">Parco dei trampolini</string>
-    <string name="poi_self_checkout_no">Self checkout: no</string>
+    <string name="poi_self_checkout_no">Cassa automatica: no</string>
     <string name="poi_toy_library">Ludoteca</string>
     <string name="poi_hang_gliding">Deltaplano</string>
     <string name="poi_yoga">Yoga</string>

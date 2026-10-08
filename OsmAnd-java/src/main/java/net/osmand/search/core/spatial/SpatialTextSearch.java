@@ -28,9 +28,11 @@ import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
@@ -87,6 +89,8 @@ public class SpatialTextSearch {
 		
 		// max prefixes for each name reader
 		public int AUTO_CLEAR_PREFIX_CACHE_LIMIT = 1000;
+		// max bytes of name index blocks kept in all files during and between searches
+		public long AUTO_CLEAR_PREFIX_CACHE_BYTES = 64 << 20;
 
 		// Deduplicate results in the end by checking osm id of the first object in combination
 		public boolean DEDUPLICATE_RES = true;
@@ -122,6 +126,10 @@ public class SpatialTextSearch {
 		public boolean SCORE_RANKING = true; // false - old lexicographic ladder
 		// one-word query: POIs found by category only and unrated, read nearest first ("restaurant" finds 180K; 0 - all)
 		public int LIMIT_READ_SINGLE_OBJECTS = 1500;
+		// objects read for one stage, the best by SpatialSearchRanking.prescore (0 - all)
+		public int LIMIT_READ_OBJECTS = 1000;
+		// a word still being typed whose index blocks are larger is matched whole ('sch' 14 MB; 0 - never)
+		public int LIMIT_INCOMPLETE_BYTES = 5 << 20;
 
 		public int MIN_ELO_RATING = 1400; // see SearchResult.MIN_ELO_RATING
 		public int WORLD_ELO_RATING = 1500; // from world map by default
@@ -280,10 +288,10 @@ public class SpatialTextSearch {
 			length = r.getFile().length();
 			edition = r.getDateCreated();
 			for (AddressRegion a : r.getAddressIndexes()) {
-				indexReaders.add(new NameIndexReader(a));
+				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
 			}
 			for (PoiRegion a : r.getPoiIndexes()) {
-				indexReaders.add(new NameIndexReader(a));
+				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
 			}
 		}
 
@@ -564,7 +572,68 @@ public class SpatialTextSearch {
 		ctx.initFiles(cache);
 	}
 
+	private void clearPrefixCacheIfLarge(SpatialSearchContext ctx) {
+		long bytes = 0;
+		for (SpatialSearchFileCache fc : ctx.internalFile) {
+			for (NameIndexReader r : fc.indexReaders) {
+				// the query keeps the tokens with every atom and object read by this search
+				r.clearQuery();
+				bytes += r.getCachedBytes();
+			}
+		}
+		if (bytes > ctx.settings.AUTO_CLEAR_PREFIX_CACHE_BYTES) {
+			for (SpatialSearchFileCache fc : ctx.internalFile) {
+				for (NameIndexReader r : fc.indexReaders) {
+					r.clearPrefixes();
+				}
+			}
+		}
+	}
+
 	public SpatialSearchResults searchAPI(String input, SpatialSearchContext ctx) throws IOException {
+		try {
+			return searchAPIInternal(input, ctx);
+		} catch (IOException | RuntimeException | Error e) {
+			for (BinaryMapIndexReader r : ctx.files) {
+				r.resetReadLimits();
+			}
+			throw e;
+		} finally {
+			clearPrefixCacheIfLarge(ctx);
+		}
+	}
+
+	// ctx is built with SpatialTextSearchSettings.searchPoiByCategorySettings
+	public List<Amenity> searchPoiByCategory(SpatialSearchContext ctx, String categoryKey, QuadRect bboxLatLon,
+			int poiZoom, int limit) throws IOException {
+		SpatialPoiType spatialType = null;
+		if (!categoryKey.startsWith(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX)) {
+			spatialType = ctx.poiSearch.getByKey(categoryKey);
+			if (spatialType == null) {
+				return Collections.emptyList();
+			}
+			categoryKey = spatialType.getKey();
+		}
+		boolean indexed = spatialType == null
+				|| (spatialType.singleType instanceof PoiType poiType && !poiType.isNonIndx());
+		if (!indexed) {
+			return ctx.poiSearch.loadPOIObjects(ctx, spatialType, bboxLatLon, poiZoom, limit);
+		}
+		SpatialSearchResults res = searchAPI(NameIndexReader.POI_CATEGORY_PREFIX + categoryKey, ctx);
+		List<Amenity> amenities = new ArrayList<>();
+		if (res.mainResults != null) {
+			for (SpatialSearchResult r : res.mainResults) {
+				for (MapObject o : r.getObjects()) {
+					if (o instanceof Amenity amenity) {
+						amenities.add(amenity);
+					}
+				}
+			}
+		}
+		return amenities;
+	}
+
+	private SpatialSearchResults searchAPIInternal(String input, SpatialSearchContext ctx) throws IOException {
 		ctx.stats.requestTime.start();
 		SpatialSearchResults res = new SpatialSearchResults();
 		if (ctx.settings.SEARCH_SUGGESTION && !input.endsWith(CollatorStringMatcher.INCOMPLETE_DOT + "") && 

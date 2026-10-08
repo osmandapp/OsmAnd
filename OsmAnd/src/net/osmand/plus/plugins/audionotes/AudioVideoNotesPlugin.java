@@ -50,6 +50,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
+import net.osmand.plus.gallery.controller.GalleryGridController;
+import net.osmand.plus.gallery.model.GalleryDisplayMode;
+import net.osmand.plus.gallery.model.GallerySortMode;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
@@ -60,6 +63,7 @@ import net.osmand.plus.media.MediaCaptureHelper;
 import net.osmand.plus.media.MediaMetadataUtils;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.library.MediaLibraryFragment;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -97,7 +101,7 @@ import java.util.*;
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
 
-	public static final int NOTES_TAB = R.string.notes;
+	public static final int MEDIA_TAB = R.string.shared_string_media;
 	public static final String DEFAULT_ACTION_SETTING_ID = "av_default_action";
 	public static final String EXTERNAL_RECORDER_SETTING_ID = "av_external_recorder";
 	public static final String EXTERNAL_PHOTO_CAM_SETTING_ID = "av_external_cam";
@@ -135,7 +139,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public final OsmandPreference<Boolean> SHOW_RECORDINGS;
 
-	public final CommonPreference<NotesSortByMode> NOTES_SORT_BY_MODE;
+	public final CommonPreference<GallerySortMode> MEDIA_LIBRARY_SORT_MODE;
+	public final CommonPreference<GalleryDisplayMode> MEDIA_LIBRARY_DISPLAY_MODE;
+	public final CommonPreference<Boolean> MEDIA_LIBRARY_GROUPED;
+	public final CommonPreference<Integer> MEDIA_LIBRARY_SPAN_COUNT;
+	public final CommonPreference<Integer> MEDIA_LIBRARY_SPAN_COUNT_LANDSCAPE;
 
 	private AudioNotesLayer audioNotesLayer;
 
@@ -205,7 +213,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		registerPreference(recordingsFileHelper.AV_RS_CLIP_LENGTH);
 		registerPreference(recordingsFileHelper.AV_RS_STORAGE_SIZE);
 
-		NOTES_SORT_BY_MODE = registerEnumStringPreference("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values(), NotesSortByMode.class);
+		MEDIA_LIBRARY_SORT_MODE = registerEnumStringPreference("media_library_sort_mode", GallerySortMode.NAME_A_Z,
+				GallerySortMode.values(), GallerySortMode.class).makeGlobal();
+		MEDIA_LIBRARY_DISPLAY_MODE = registerEnumStringPreference("media_library_display_mode", GalleryDisplayMode.LIST,
+				GalleryDisplayMode.values(), GalleryDisplayMode.class).makeGlobal();
+		MEDIA_LIBRARY_GROUPED = registerBooleanPreference("media_library_grouped", false).makeGlobal();
+		MEDIA_LIBRARY_SPAN_COUNT = registerIntPreference("media_library_span_grid_count", GalleryGridController.DEFAULT_SPAN_COUNT).makeGlobal();
+		MEDIA_LIBRARY_SPAN_COUNT_LANDSCAPE = registerIntPreference("media_library_span_grid_count_landscape", GalleryGridController.DEFAULT_SPAN_COUNT_LANDSCAPE).makeGlobal();
 
 		recordingPlayer = new RecordingPlayer(app, this::updateContextMenu);
 	}
@@ -217,7 +231,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public String getName() {
-		return app.getString(R.string.audionotes_plugin_name);
+		return app.getString(R.string.shared_string_media);
 	}
 
 	@Override
@@ -275,7 +289,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			int itemId = item.getTitleId();
-			if (itemId == R.string.layer_recordings) {
+			if (itemId == R.string.shared_string_media) {
 				SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
 				item.setColor(app, SHOW_RECORDINGS.get() ?
 						R.color.osmand_orange : ContextMenuItem.INVALID_ID);
@@ -285,9 +299,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return true;
 		};
 		adapter.addItem(new ContextMenuItem(RECORDING_LAYER)
-				.setTitleId(R.string.layer_recordings, app)
+				.setTitleId(R.string.shared_string_media, app)
 				.setSelected(SHOW_RECORDINGS.get())
-				.setIcon(R.drawable.ic_action_micro_dark)
+				.setIcon(R.drawable.ic_action_photo_album)
 				.setColor(mapActivity, SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setItemDeleteAction(SHOW_RECORDINGS)
 				.setListener(listener));
@@ -1003,9 +1017,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
-		mTabs.add(myPlacesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
+		mTabs.add(myPlacesActivity.getTabIndicator(MEDIA_TAB, MediaLibraryFragment.class));
 		if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
-			app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
+			app.getSettings().FAVORITES_TAB.set(MEDIA_TAB);
 		}
 	}
 
@@ -1138,6 +1152,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void deleteRecording(@NonNull Recording recording, boolean updateUI) {
+		attachedMediaDataHelper.removeRecordingLinks(recording);
 		recordingsFileHelper.deleteRecording(recording);
 
 		if (mapActivity != null && updateUI) {
@@ -1366,7 +1381,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public int getLogoResourceId() {
-		return R.drawable.ic_action_micro_dark;
+		return R.drawable.ic_action_plugin_media;
 	}
 
 	@Override

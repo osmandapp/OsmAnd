@@ -14,6 +14,7 @@ import net.osmand.data.MapObject;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
 
 /**
@@ -53,6 +54,8 @@ public class SpatialSearchRanking {
 	private static final double TYPE_LANDMARK = 0.80;
 	private static final double TYPE_BUILDING = 0.75;
 	private static final double TYPE_BOUNDARY = 0.60;
+	/** a boundary whose centre is this close to a place's is a district of that place */
+	private static final double DISTRICT_OF_PLACE_KM = 15;
 	private static final double TYPE_STREET = 0.55; // above a stop, below a village: pref-0106
 	private static final double TYPE_POI = 0.50;
 	private static final double TYPE_POSTCODE = 0.40;
@@ -122,44 +125,85 @@ public class SpatialSearchRanking {
 		if (head == null) {
 			return 0;
 		}
-		double near = nearScore(r, center);
-		double name = nameScore(head);
-		// undimmed by distance for what is looked for by name from anywhere: pref-0125, pref-0127
-		double exact = name == NAME_EXACT && isNotable(r)
-				? wExactName * (isPlace(head) || isProminent(r) ? 1 : near) : 0;
-		double type = Math.max(typeScore(head), landmarkByRating(r, near));
-		double rating = (isPlace(head) ? wRatingPlace : wRating) * ratingScore(r);
-		double far = farPlaceFactor(r, head, name, center);
-		return wName * name * near
-				+ wType * type * far
-				+ rating * far
-				+ wNear * near
-				+ exact
-				- (kindOnlyAddress(r) ? wKindOnly : 0);
+		Double km = center == null ? null : SpatialSearchResult.getDistance(r, center) / 1000.0;
+		return score(nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
+				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r));
 	}
 
-	/** a city is looked for by name from anywhere; a town, a village, a hamlet or an area named by a piece
-	 *  of its name is not: "farm" in Amsterdam is not 八五九农场 7900 km away, and neither is an unrated
-	 *  airstrip or park named "... Farm" 230 km off, whatever its landmark type. Within PLACE_FAR_FROM_KM
-	 *  nothing changes - "rifugio" still finds the village 128 km off: pref-0045, pref-0138 */
-	private double farPlaceFactor(SpatialSearchResult r, SpatialSearchResultRef head, double name, LatLon center) {
-		// an exact place name is no evidence when the query is the name of a kind: "farm" is not the town Farm
-		if (center == null || isCity(head) || name >= NAME_EXACT && !queryIsKind(head)) {
-			return 1;
+	/**
+	 * The highest score a pre-result can reach once its objects are read, from its index atoms only: any of the
+	 * atom POI types, the rating the index keeps, the name taken as exact and notable, a street as a house when
+	 * the query has a number.
+	 */
+	public double prescore(SpatialPipelineObjectRes res, LatLon center, SpatialPoiSearch poiSearch, int minElo,
+			boolean queryIsKind, boolean number) {
+		int x = MapUtils.get31TileNumberX(center.getLongitude()), y = MapUtils.get31TileNumberY(center.getLatitude());
+		double km = distKm(x, y, res.bbox[0], res.bbox[1], res.bbox[2], res.bbox[3]);
+		double best = 0;
+		for (NameIndexAtom a : res.atoms) {
+			if (a == null) {
+				continue;
+			}
+			// the object lies anywhere in the z16 tile of the atom
+			km = Math.min(km, distKm(x, y, a.coords.x16 << 15, a.coords.y16 << 15, (a.coords.x16 + 1) << 15,
+					(a.coords.y16 + 1) << 15));
+			// the index keeps (travel_elo - 1000) / 50
+			int rating = Math.max(a.elo, a.elo > 0 ? 1000 + (a.elo + 1) * 50 : 0);
+			double name = a.name != null && a.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX) ? NAME_KIND_ONLY : NAME_EXACT;
+			for (int i = -1; i < (a.poiTypes == null ? 0 : a.poiTypes.size()); i++) {
+				SpatialPoiSearch.SpatialPoiType pt = i < 0 ? null : poiSearch.getById(a.poiTypes.get(i));
+				String subType = pt == null ? null : pt.getKey();
+				double type = number && a.isStreet() ? TYPE_BUILDING : typeScore(a, subType);
+				best = Math.max(best, score(name, type, subType, a, rating, minElo, km, true, queryIsKind, false));
+			}
 		}
-		if (!isPlace(head) && (typeScore(head) != TYPE_LANDMARK || isProminent(r))) {
-			return 1;
+		return best;
+	}
+
+	private static double distKm(int x, int y, int left, int top, int right, int bottom) {
+		return MapUtils.squareRootDist31(x, y, Math.max(left, Math.min(right, x)), Math.max(top, Math.min(bottom, y)))
+				/ 1000.0;
+	}
+
+	private double score(double name, double type, String subType, NameIndexAtom atom, int rating, int minElo,
+			Double km, boolean notable, boolean queryIsKind, boolean kindOnly) {
+		double near = km == null ? 0 : 1.0 / (1.0 + Math.max(0, km) / halfWeightKm);
+		boolean prominent = rating > minElo;
+		boolean place = isPlace(atom, subType);
+		// undimmed by distance for what is looked for by name from anywhere: pref-0125, pref-0127
+		double exact = name == NAME_EXACT && (notable || prominent) ? wExactName * (place || prominent ? 1 : near) : 0;
+		// an object famous enough is a landmark whatever its subtype says: The Plaza is not "a hotel"
+		double landmark = near >= LANDMARK_NEAR && rating >= minElo + LANDMARK_RATING ? TYPE_LANDMARK : 0;
+		// bounded, so a famous place outranks an unknown one but not a much closer one
+		double ratingScore = (place ? wRatingPlace : wRating) * Math.max(0, Math.min(1, (rating - minElo) / ratingSpan));
+		// a city is looked for by name from anywhere; a town, a village, a hamlet or an area named by a piece
+		// of its name is not: "farm" in Amsterdam is not 八五九农场 7900 km away, and neither is an unrated
+		// airstrip or park named "... Farm" 230 km off, whatever its landmark type. Within PLACE_FAR_FROM_KM
+		// nothing changes - "rifugio" still finds the village 128 km off: pref-0045, pref-0138.
+		// An exact place name is no evidence when the query is the name of a kind: "farm" is not the town Farm
+		double far = 1;
+		if (km != null && km > PLACE_FAR_FROM_KM && !isCity(atom, subType) && !(name >= NAME_EXACT && !queryIsKind)
+				&& (place || type == TYPE_LANDMARK && !prominent)) {
+			far = 1.0 / (1.0 + (km - PLACE_FAR_FROM_KM) / PLACE_FAR_HALF_KM);
 		}
-		double km = SpatialSearchResult.getDistance(r, center) / 1000.0;
-		return km <= PLACE_FAR_FROM_KM ? 1 : 1.0 / (1.0 + (km - PLACE_FAR_FROM_KM) / PLACE_FAR_HALF_KM);
+		return wName * name * near
+				+ wType * Math.max(type, landmark) * far
+				+ ratingScore * far
+				+ wNear * near
+				+ exact
+				- (kindOnly ? wKindOnly : 0);
+	}
+
+	private static String subType(NameIndexAtom atom) {
+		return atom.object instanceof Amenity a ? a.getSubType() : null;
 	}
 
 	/** a city by its own place type, however the map stores it - the address index writes towns as cities too */
-	private boolean isCity(SpatialSearchResultRef ref) {
-		if (ref.atom.object instanceof Amenity a) {
-			return "city".equals(a.getSubType());
+	private boolean isCity(NameIndexAtom atom, String subType) {
+		if (subType != null || atom.object instanceof Amenity) {
+			return "city".equals(subType);
 		}
-		return ref.atom.object instanceof City c && c.getType() == City.CityType.CITY;
+		return atom.object == null ? atom.isCity() : atom.object instanceof City c && c.getType() == City.CityType.CITY;
 	}
 
 	/** did the query name this object, or only the word for its kind? */
@@ -172,29 +216,37 @@ public class SpatialSearchRanking {
 			// matched through the poi category key: "farm" -> Podere Colombaio
 			return NAME_KIND_ONLY;
 		}
-		String queried = queriedWords(ref);
+		String queried = queriedWords(ref, false);
 		if (queried.isEmpty()) {
 			return NAME_OTHER;
 		}
+		// the dot that marks the last word incomplete while typing is not a part of the name: "main." is
+		// "... Main"; a dot of the name itself ("о. Пасхи", "2. Sokak") is kept by the first form
+		String noDot = queriedWords(ref, true);
 		// any language the object carries, not only the default one: pref-0125
 		double best = NAME_OTHER;
 		if (atom.object != null) {
-			best = Math.max(best, compareToName(atom.object.getName(), queried));
+			best = Math.max(best, compareToName(atom.object.getName(), queried, noDot));
 			// alternative names cost a map per result: worth it only for a rated object
 			Map<String, String> names = best == NAME_EXACT || atom.elo <= 0 ? null
 					: atom.object.getNamesMap(true);
 			if (names != null) {
 				for (String n : names.values()) {
-					best = Math.max(best, compareToName(n, queried));
+					best = Math.max(best, compareToName(n, queried, noDot));
 					if (best == NAME_EXACT) {
 						return NAME_EXACT;
 					}
 				}
 			}
 		} else {
-			best = Math.max(best, compareToName(atom.name, queried));
+			best = Math.max(best, compareToName(atom.name, queried, noDot));
 		}
 		return best;
+	}
+
+	private double compareToName(String rawName, String queried, String noDot) {
+		double res = compareToName(rawName, queried);
+		return res == NAME_EXACT || noDot.equals(queried) ? res : Math.max(res, compareToName(rawName, noDot));
 	}
 
 	private double compareToName(String rawName, String queried) {
@@ -215,7 +267,10 @@ public class SpatialSearchRanking {
 	}
 
 	public double typeScore(SpatialSearchResultRef ref) {
-		NameIndexAtom atom = ref.atom;
+		return typeScore(ref.atom, subType(ref.atom));
+	}
+
+	private double typeScore(NameIndexAtom atom, String subType) {
 		if (atom.isPoiCategory()) {
 			return TYPE_POI;
 		}
@@ -237,24 +292,21 @@ public class SpatialSearchRanking {
 		if (atom.isBoundary()) {
 			return TYPE_BOUNDARY;
 		}
-		if (atom.object instanceof Amenity a) {
-			String subType = a.getSubType();
-			if (subType != null) {
-				if (ADMIN_SUBTYPES.contains(subType)) {
-					return TYPE_ADMIN;
-				}
-				if (PLACE_SUBTYPES.contains(subType)) {
-					return "city".equals(subType) || "town".equals(subType) ? TYPE_CITY : TYPE_VILLAGE;
-				}
-				if (NAME_ALIKE_PART_SUBTYPES.contains(subType)) {
-					return TYPE_NAME_ALIKE_PART;
-				}
-				if (NAME_ALIKE_SUBTYPES.contains(subType)) {
-					return TYPE_NAME_ALIKE;
-				}
-				if (LANDMARK_SUBTYPES.contains(subType)) {
-					return TYPE_LANDMARK;
-				}
+		if (subType != null) {
+			if (ADMIN_SUBTYPES.contains(subType)) {
+				return TYPE_ADMIN;
+			}
+			if (PLACE_SUBTYPES.contains(subType)) {
+				return "city".equals(subType) || "town".equals(subType) ? TYPE_CITY : TYPE_VILLAGE;
+			}
+			if (NAME_ALIKE_PART_SUBTYPES.contains(subType)) {
+				return TYPE_NAME_ALIKE_PART;
+			}
+			if (NAME_ALIKE_SUBTYPES.contains(subType)) {
+				return TYPE_NAME_ALIKE;
+			}
+			if (LANDMARK_SUBTYPES.contains(subType)) {
+				return TYPE_LANDMARK;
 			}
 		}
 		return TYPE_POI;
@@ -273,7 +325,7 @@ public class SpatialSearchRanking {
 			NameIndexAtom second = ref.atom;
 			// named, not reached through an alias ("apple" finds New York): pref-0121
 			if ((second.isCity() || second.isCityVillage() || second.isBoundary())
-					&& matchesWholeName(ref)) {
+					&& matchesWholeName(ref) && !isDistrictOfPlace(r.objs.get(0).atom, second)) {
 				parts = 1;
 			}
 		}
@@ -281,6 +333,23 @@ public class SpatialSearchRanking {
 			parts = 2;
 		}
 		return parts;
+	}
+
+	/**
+	 * A place in a district that lies inside it adds nothing to the place: "Stuttgart Hauptbahnhof" is the
+	 * station, not the city in its own district "Hauptbahnhof" (pref-0163, pref-0168). A city in its state
+	 * ("Portland Oregon") still reads as one answer: the state is not near the city's centre.
+	 */
+	private boolean isDistrictOfPlace(NameIndexAtom first, NameIndexAtom second) {
+		if (!second.isBoundary() || !(first.isGeoArea() || isPlace(first, subType(first)))) {
+			return false;
+		}
+		LatLon a = first.object == null ? null : first.object.getLocation();
+		LatLon b = second.object == null ? null : second.object.getLocation();
+		double km = a != null && b != null ? MapUtils.getDistance(a, b) / 1000.0
+				: MapUtils.squareRootDist31(first.coords.x16 << 15, first.coords.y16 << 15,
+						second.coords.x16 << 15, second.coords.y16 << 15) / 1000.0;
+		return km <= DISTRICT_OF_PLACE_KM;
 	}
 
 	/** a query word is the name of a POI category ("farm", "furt", "parkplatz") */
@@ -327,15 +396,9 @@ public class SpatialSearchRanking {
 	}
 
 	/** a settlement or an administrative area, however the map happens to store it */
-	private boolean isPlace(SpatialSearchResultRef ref) {
-		NameIndexAtom atom = ref.atom;
-		if (atom.isCity() || atom.isCityVillage()) {
-			return true;
-		}
-		if (atom.object instanceof Amenity a && a.getSubType() != null) {
-			return ADMIN_SUBTYPES.contains(a.getSubType()) || PLACE_SUBTYPES.contains(a.getSubType());
-		}
-		return false;
+	private boolean isPlace(NameIndexAtom atom, String subType) {
+		return atom.isCity() || atom.isCityVillage()
+				|| subType != null && (ADMIN_SUBTYPES.contains(subType) || PLACE_SUBTYPES.contains(subType));
 	}
 
 	/** a travel rating above the floor: known well enough to be a destination, not a detail */
@@ -352,41 +415,21 @@ public class SpatialSearchRanking {
 		return o instanceof Amenity a && !Algorithms.isEmpty(a.getAdditionalInfo(Amenity.WIKIDATA));
 	}
 
-	/** an object famous enough is a landmark whatever its subtype says: The Plaza is not "a hotel" */
-	private double landmarkByRating(SpatialSearchResult r, double near) {
-		return near >= LANDMARK_NEAR && r.getTotalRating() >= r.parent.MIN_ELO_RATING + LANDMARK_RATING
-				? TYPE_LANDMARK : 0;
-	}
-
-	/** bounded, so a famous place outranks an unknown one but not a much closer one */
-	public double ratingScore(SpatialSearchResult r) {
-		double over = r.getTotalRating() - r.parent.MIN_ELO_RATING;
-		return Math.max(0, Math.min(1, over / ratingSpan));
-	}
-
-	public double nearScore(SpatialSearchResult r, LatLon center) {
-		if (center == null) {
-			return 0;
-		}
-		double km = SpatialSearchResult.getDistance(r, center) / 1000.0;
-		if (km < 0) {
-			km = 0;
-		}
-		return 1.0 / (1.0 + km / halfWeightKm);
-	}
-
-	private String queriedWords(SpatialSearchResultRef ref) {
+	private String queriedWords(SpatialSearchResultRef ref, boolean dropIncompleteDot) {
 		List<SpatialSearchToken> tokens = ref.tokens;
 		if (tokens == null || tokens.isEmpty()) {
 			return "";
 		}
 		StringBuilder sb = new StringBuilder();
 		for (SpatialSearchToken t : tokens) {
-			if (t.word != null && !t.word.isEmpty()) {
+			String w = dropIncompleteDot && t.incomplete && t.word != null
+					&& t.word.endsWith(SpatialSearchToken.DOT_INCOMPLETE_STRING)
+					? t.word.substring(0, t.word.length() - 1) : t.word;
+			if (w != null && !w.isEmpty()) {
 				if (sb.length() > 0) {
 					sb.append(' ');
 				}
-				sb.append(t.word);
+				sb.append(w);
 			}
 		}
 		return normalizeName(sb.toString());

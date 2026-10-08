@@ -364,4 +364,9 @@ public class PurchaseItemFragment extends BaseFullScreenDialogFragment implement
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "purchase_item";
+	}
 }

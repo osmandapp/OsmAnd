@@ -228,6 +228,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private QuickSearchType searchType = QuickSearchType.REGULAR;
 
 	private static final double DISTANCE_THRESHOLD = 70000; // 70km
+	private static final double MY_LOCATION_THRESHOLD = 50; // 50m
 	private static final int EXPIRATION_TIME_MIN = 10; // 10 minutes
 
 	private static boolean isDebugMode = SearchUICore.isDebugMode();
@@ -860,12 +861,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (dialog == null) {
 			return;
 		}
-		updateSearchAroundLocationAfterMapReturn();
 		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 		dialog.show();
 		paused = false;
 		cancelPrev = false;
 		hidden = false;
+		updateSearchAroundLocationAfterMapReturn();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.updateBackPressedCallbackState();
@@ -914,20 +915,21 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (mapCenter == null) {
 			return;
 		}
+		useMapCenter = !isMapCenterAtMyLocation(mapCenter);
+		updateSearchAroundLocation(useMapCenter ? mapCenter : new LatLon(location.getLatitude(), location.getLongitude()));
+		updateUseMapCenterUI();
+		updateContent(null);
+	}
+
+	private boolean isMapCenterAtMyLocation(@NonNull LatLon mapCenter) {
 		if (location == null) {
-			useMapCenter = true;
-			updateSearchAroundLocation(mapCenter);
-			updateUseMapCenterUI();
-			updateContent(null);
-			return;
+			return false;
+		}
+		if (app.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+			return true;
 		}
 		double distance = MapUtils.getDistance(mapCenter, location.getLatitude(), location.getLongitude());
-		if (distance >= DISTANCE_THRESHOLD) {
-			useMapCenter = true;
-			updateSearchAroundLocation(mapCenter);
-			updateUseMapCenterUI();
-			updateContent(null);
-		}
+		return distance < MY_LOCATION_THRESHOLD;
 	}
 
 	private void visibilityChanged(boolean visible) {
@@ -1700,8 +1702,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		LatLon searchLatLon;
 		if (centerLatLon == null) {
 			LatLon clt = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-			searchLatLon = clt;
-			useMapCenter = true;
+			useMapCenter = !isMapCenterAtMyLocation(clt);
+			searchLatLon = useMapCenter ? clt : new LatLon(location.getLatitude(), location.getLongitude());
 			searchEditText.setHint(R.string.search_poi_category_hint);
 		} else {
 			searchLatLon = centerLatLon;
@@ -2762,22 +2764,15 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void restoreDefaultSearchLocation() {
 		if (searchUICore == null) {
 			return;
-		}//
+		}
 		LatLon searchLatLon = null;
 		LatLon mapCenter = getCurrentMapCenter();
-		if (location != null) {
-			searchLatLon = new LatLon(location.getLatitude(), location.getLongitude());
-			useMapCenter = false;
-			if (mapCenter != null) {
-				double distance = MapUtils.getDistance(mapCenter, location.getLatitude(), location.getLongitude());
-				if (distance >= DISTANCE_THRESHOLD) {
-					searchLatLon = mapCenter;
-					useMapCenter = true;
-				}
-			}
-		} else if (mapCenter != null) {
+		if (mapCenter != null && !isMapCenterAtMyLocation(mapCenter)) {
 			searchLatLon = mapCenter;
 			useMapCenter = true;
+		} else if (location != null) {
+			searchLatLon = new LatLon(location.getLatitude(), location.getLongitude());
+			useMapCenter = false;
 		}
 		if (searchLatLon != null) {
 			updateSearchAroundLocation(searchLatLon);
@@ -3384,5 +3379,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	// so that back navigation restores exactly the query which is displayed now.
 	public void saveAddressSearchState() {
 		addressSearchStack.push(searchEditText.getText().toString());
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "quick_search";
 	}
 }

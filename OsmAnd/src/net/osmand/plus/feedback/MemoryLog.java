@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
@@ -172,12 +173,16 @@ public class MemoryLog {
 	// count share one value so that a sample cannot read one of them from a later trim than the
 	// other: the high half holds the level raised by one, the low half the number of calls.
 	private final AtomicLong trims = new AtomicLong();
-	// route calculations and searches since the previous sample: both load map data in bursts
+	// route calculations, searches and address lookups since the previous sample: all of them
+	// load map data in bursts
 	private final AtomicInteger routeCalculations = new AtomicInteger();
 	private int previousSearches;
+	private int previousAddressRequests;
+	private int previousAddressLookups;
+	private long previousAddressLookupsTimeMs;
 
 	// called from a background thread, at most once per SAMPLE_INTERVAL
-	public synchronized void sample(@NonNull OsmandApplication app, @NonNull StackSampler stackSampler) {
+	public synchronized void sample(@NonNull OsmandApplication app) {
 		long time = SystemClock.elapsedRealtime();
 		Runtime runtime = Runtime.getRuntime();
 		long used = runtime.totalMemory() - runtime.freeMemory();
@@ -202,7 +207,7 @@ public class MemoryLog {
 				sb.append("--- start ").append(Version.getAppVersion(app));
 				sb.append(" sdk=").append(Build.VERSION.SDK_INT).append('\n');
 			}
-			String sample = buildSample(app, stackSampler, time, used, max);
+			String sample = buildSample(app, time, used, max);
 			peakUsed = 0;
 			sb.append(sample).append('\n');
 			append(getFile(app), sb.toString());
@@ -244,7 +249,7 @@ public class MemoryLog {
 	}
 
 	@NonNull
-	private String buildSample(@NonNull OsmandApplication app, @NonNull StackSampler stackSampler, long time, long used, long max) {
+	private String buildSample(@NonNull OsmandApplication app, long time, long used, long max) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("t=").append(time / 1000);
 		sb.append(" heap=").append(mb(used)).append('/').append(mb(max));
@@ -291,9 +296,21 @@ public class MemoryLog {
 			sb.append(" srch=").append(searches - previousSearches);
 		}
 		previousSearches = searches;
-		String hot = stackSampler.drain();
-		if (hot != null) {
-			sb.append(hot);
+		GeocodingLookupService geocoding = app.getGeocodingLookupService();
+		if (geocoding != null) {
+			int requests = geocoding.getRequests();
+			if (requests > previousAddressRequests) {
+				sb.append(" georeq=").append(requests - previousAddressRequests);
+			}
+			previousAddressRequests = requests;
+			int lookups = geocoding.getLookups();
+			long lookupsTimeMs = geocoding.getLookupsTimeMs();
+			if (lookups > previousAddressLookups) {
+				sb.append(" geo=").append(lookups - previousAddressLookups);
+				sb.append(" geoms=").append(lookupsTimeMs - previousAddressLookupsTimeMs);
+				previousAddressLookups = lookups;
+				previousAddressLookupsTimeMs = lookupsTimeMs;
+			}
 		}
 		String histogram = maybeCollectHistogram(app, time, used);
 		if (histogram != null) {

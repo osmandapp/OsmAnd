@@ -277,4 +277,9 @@ public class OsmEditingFragment extends BaseSettingsFragment implements Validate
 	public void authorizationCompleted() {
 		authorizationFinished();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "osm_editing_settings";
+	}
 }
