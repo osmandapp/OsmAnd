@@ -9,7 +9,7 @@ import java.util.List;
 public class AmenityTagEntry {
 
 	public enum CollapsableEntryType {
-		NONE, PLAIN, POI_TYPE_GROUP, ELEVATION_PILLS, OPENING_HOURS
+		NONE, PLAIN, POI_TYPE_GROUP, TAG_GROUP, ELEVATION_PILLS, OPENING_HOURS
 	}
 
 	public final String key;

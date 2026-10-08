@@ -67,6 +67,49 @@ public class AdditionalInfoBundleTest {
 	}
 
 	@Test
+	public void socketTags_areGroupedIntoOneRowPerSocketType() {
+		AdditionalInfoBundle bundle = bundle(Map.ofEntries(
+				entry("type", "transportation"),
+				entry("subtype", "charging_station"),
+				entry("socket:chademo", "2"),
+				entry("socket:chademo:output", "50 kW"),
+				entry("socket:type2", "4"),
+				entry("socket:type2:output", "22 kW"),
+				entry("socket:type2:voltage", "400 V"),
+				entry("socket:schuko", "no"),
+				entry("capacity", "6")));
+
+		List<AmenityTagEntry> visibleTags = bundle.getVisibleTags(false, List.of());
+
+		assertNull(findByKey(visibleTags, "socket:type2"));
+		assertNull(findByKey(visibleTags, "socket:chademo:output"));
+		AmenityTagEntry group = findByKey(visibleTags, "socket");
+		assertEquals(AmenityTagEntry.CollapsableEntryType.TAG_GROUP, group.collapsableEntryType);
+		assertEquals("socket_type2_yes;socket_chademo_yes", group.value);
+		assertEquals(List.of("socket_type2_yes", "socket_chademo_yes"),
+				group.collapsableEntries.stream().map(e -> e.key).toList());
+		assertEquals(List.of("4 × 22 kW · 400 V", "2 × 50 kW"),
+				group.collapsableEntries.stream().map(e -> e.value).toList());
+		assertEquals("6", findByKey(visibleTags, "capacity").value);
+	}
+
+	@Test
+	public void socketTags_fromMapData_areGroupedByPoiTypeName() {
+		AdditionalInfoBundle bundle = bundle(Map.ofEntries(
+				entry("type", "transportation"),
+				entry("subtype", "charging_station"),
+				entry("osm_tag_socket_type2", "1"),
+				entry("osm_tag_socket_type2_output", "22 kW"),
+				entry("osm_tag_socket_schuko", "3")));
+
+		AmenityTagEntry group = findByKey(bundle.getVisibleTags(false, List.of()), "socket");
+		assertEquals(List.of("socket_type2_yes", "socket_schuko_yes"),
+				group.collapsableEntries.stream().map(e -> e.key).toList());
+		assertEquals(List.of("1 × 22 kW", "3"),
+				group.collapsableEntries.stream().map(e -> e.value).toList());
+	}
+
+	@Test
 	public void visibleTags_canBeSortedByOrder_usingAmenityTagEntriesBuilder() {
 		AdditionalInfoBundle bundle = bundle(Map.ofEntries(
 				entry("type", "sustenance"),

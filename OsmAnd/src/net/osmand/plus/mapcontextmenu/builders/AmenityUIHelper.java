@@ -118,6 +118,9 @@ public class AmenityUIHelper extends MenuBuilder {
 		if (baseEntry.collapsableEntryType == AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP) {
 			return buildPoiTypeGroupEntryData(baseEntry);
 		}
+		if (baseEntry.collapsableEntryType == AmenityTagEntry.CollapsableEntryType.TAG_GROUP) {
+			return buildTagGroupEntryData(baseEntry);
+		}
 		if (!Algorithms.isEmpty(baseEntry.collapsableEntries)) {
 			return buildLocalizedEntryData(context, baseEntry);
 		}
@@ -144,6 +147,34 @@ public class AmenityUIHelper extends MenuBuilder {
 				groupCategory.getKeyName(), groupCategory.getTranslation(), categoryTypes,
 				PoiType.DEFAULT_GROUP_ORDER, 0, List.of(groupCategory.getIconKeyName()), 0,
 				false, baseEntry.collapsableCategory);
+	}
+
+	// e.g. socket: "Type 2 • CHAdeMO", expanded to one row per type ("Type 2", "4 × 22 kW")
+	@NonNull
+	private AmenityTagEntry buildTagGroupEntryData(@NonNull AmenityTagEntry baseEntry) {
+		List<AmenityTagEntry> children = new ArrayList<>();
+		List<String> names = new ArrayList<>();
+		for (AmenityTagEntry child : baseEntry.collapsableEntries) {
+			String name = poiTypes.getPoiTranslation(child.key);
+			names.add(name);
+			children.add(new AmenityTagEntry.Builder(child.key).setTextPrefix(name).setText(child.value).build());
+		}
+		AmenityTagEntry.Builder builder = new AmenityTagEntry.Builder(baseEntry.key)
+				.setValue(baseEntry.value)
+				.setTextPrefix(poiTypes.getPoiTranslation(baseEntry.key))
+				.setIconNameCandidates(List.of("charging_station"))
+				.setFallbackIconId(R.drawable.ic_action_info_dark)
+				.setIsText(true)
+				.setOrder(baseEntry.order);
+		if (children.size() == 1) {
+			AmenityTagEntry child = children.get(0);
+			builder.setText(Algorithms.isEmpty(child.text) ? child.textPrefix : child.textPrefix + ": " + child.text);
+		} else {
+			builder.setText(String.join(" • ", names))
+					.setCollapsableEntries(children)
+					.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.TAG_GROUP);
+		}
+		return builder.build();
 	}
 
 	@Nullable
@@ -282,6 +313,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private CollapsableView resolveCollapsableView(@NonNull Context context, @NonNull AmenityTagEntry data) {
 		switch (data.collapsableEntryType) {
 			case PLAIN:
+			case TAG_GROUP:
 				return buildCollapsableViewFromEntries(context, data.collapsableEntries);
 			case POI_TYPE_GROUP:
 				return getPoiTypeCollapsableView(context, true, data.collapsablePoiTypes,
