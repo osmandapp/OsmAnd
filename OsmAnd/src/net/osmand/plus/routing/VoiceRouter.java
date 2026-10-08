@@ -360,7 +360,8 @@ public class VoiceRouter {
 			if (speakSpeedCamera || speakPedestrian || speakTunnels || speakTrafficWarnings && !speakPrefType) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
-					p.attention(String.valueOf(type));
+					// voice files have no tram phrase
+					p.attention(String.valueOf(type == AlarmInfoType.TRAM ? AlarmInfoType.RAILWAY : type));
 				}
 				play(p);
 				// See Issue 2377: Announce destination again - after some motorway tolls roads split shortly after the toll
