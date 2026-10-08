@@ -40,7 +40,6 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -146,13 +145,6 @@ public class OsmandSettings {
 	private static final Map<String, String> PREFERENCES_NAMES_CACHE = new LinkedHashMap<>();
 
 	public static final float SIM_MIN_SPEED = 5 / 3.6f;
-
-	private static final String TILES_NAME_PROBE_DIRNAME = ".probe";
-	private static final Object TILES_NAME_PROBE_LOCK = new Object();
-
-	private static final Pattern STRIP_EMOJI_AND_SPECIALS_PATTERN =
-			Pattern.compile("[[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}\\p{Sm}\\p{Sc}\\p{Sk}]\\uFE0F\\uFE0E\\u200D]");
-
 	/// Settings variables
 	private final OsmandApplication ctx;
 	private SettingsAPI settingsAPI;
@@ -2297,185 +2289,44 @@ public class OsmandSettings {
 		return null;
 	}
 
+	// code points outside the Basic Multilingual Plane, variation selectors and the zero width joiner
+	private static final Pattern EMOJI_CHARS = Pattern.compile("[\\x{10000}-\\x{10FFFF}\\uFE0E\\uFE0F\\u200D]");
+	private static final Pattern NON_ASCII_CHARS = Pattern.compile("[^\\x20-\\x7E]");
+
 	public boolean installTileSource(TileSourceTemplate toInstall) {
-		File tPath = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		String name = toInstall.getName();
-		TileSourceNameCheck nameCheck = checkTileSourceNameStatus(name);
-		if (!(nameCheck instanceof TileSourceNameCheck.ValidName validNameCheck)) {
-			return false;
-		}
-		String safeName = validNameCheck.safeName();
-		File dir = new File(tPath, safeName);
-		toInstall.setName(safeName);
-		dir.mkdirs();
-		try {
-			TileSourceManager.createMetaInfoFile(dir, toInstall, true);
-		} catch (IOException e) {
-			return false;
-		}
-		return true;
-	}
-
-	public boolean isTileSourceInstalled(@NonNull String tileSourceName) {
-		Map<String, String> installed = getTileSourceEntries();
-		return installed.containsValue(tileSourceName);
-	}
-
-	public boolean isTileSourceProbeFolder(@NonNull File file) {
-		if (!file.getName().equals(TILES_NAME_PROBE_DIRNAME)) {
-			return false;
-		}
-		File parent = file.getParentFile();
-		if (parent == null) {
-			return false;
-		}
-		File tilesFolder = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-		try {
-			return tilesFolder.getCanonicalPath().equals(parent.getCanonicalPath());
-		} catch (IOException e) {
-			return false;
-		}
-	}
-
-	@NonNull
-	public TileSourceNameCheck checkTileSourceNameStatus(@NonNull String name) {
-		File tilesFolder = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-		return checkTileSourceNameStatus(tilesFolder, name);
-	}
-
-	@NonNull
-	public List<Pair<TileSourceTemplate, TileSourceNameCheck>> checkTileSourcesNameStatus(@NonNull List<TileSourceTemplate> templates) {
-		File tilesFolder = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-		List<Pair<TileSourceTemplate, TileSourceNameCheck>> result = new ArrayList<>();
-		synchronized (TILES_NAME_PROBE_LOCK) {
-			for (TileSourceTemplate template : templates) {
-				TileSourceNameCheck check;
-				try {
-					check = runTileSourceNameStatusCheck(tilesFolder, template.getName());
-				} catch (Exception e) {
-					check = new TileSourceNameCheck.InvalidName(template.getName());
-				}
-				result.add(new Pair<>(template, check));
-			}
-			try {
-				cleanupTilesNameProbeFolder(tilesFolder);
-			} catch (Exception e) {
-				LOG.error("Error while cleaning up tile source names probe folder", e);
-			}
-		}
-		return result;
-	}
-
-	@NonNull
-	private TileSourceNameCheck checkTileSourceNameStatus(@NonNull File tilesFolder, @NonNull String name) {
-		TileSourceNameCheck result;
-		synchronized (TILES_NAME_PROBE_LOCK) {
-			try {
-				result = runTileSourceNameStatusCheck(tilesFolder, name);
-			} catch (Exception e) {
-				result = new TileSourceNameCheck.InvalidName(name);
-			} finally {
-				try {
-					cleanupTilesNameProbeFolder(tilesFolder);
-				} catch (Exception e) {
-					LOG.error("Error while cleaning up tile source names probe folder", e);
-				}
-			}
-		}
-		return result;
-	}
-
-	private boolean isTileSourceFileNotInFolder(@NonNull File tilesFolder, @NonNull String name) {
-		try {
-			File file = new File(tilesFolder, name).getCanonicalFile();
-			File parent = file.getParentFile();
-			boolean isDirectChild = parent != null
-					&& parent.equals(tilesFolder.getCanonicalFile())
-					&& file.getName().equals(name);
-			return !isDirectChild;
-		} catch (IOException e) {
-			return true;
-		}
-	}
-
-	private boolean checkTileSourceFileExist(@NonNull File tilesFolder, @NonNull String name) {
-		File f = new File(tilesFolder, name);
-		if (f.exists()) {
-			return true;
-		}
-		f = new File(tilesFolder, name + SQLITE_EXT);
-		return f.exists();
-	}
-
-	@NonNull
-	private TileSourceNameCheck runTileSourceNameStatusCheck(@NonNull File tilesFolder, @NonNull String name) {
 		if (Algorithms.isEmpty(name)) {
-			return new TileSourceNameCheck.InvalidName(name);
+			return false;
 		}
-		boolean canUseAsIs = !(name.startsWith(".") || isTileSourceFileNotInFolder(tilesFolder, name));
-		if (canUseAsIs) {
-			if (checkTileSourceFileExist(tilesFolder, name)) {
-				return new TileSourceNameCheck.ValidName(name, true);
+		File tPath = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+		// FAT/exFAT cards may reject some characters: try the name as is, without emoji, then ASCII only
+		String[] candidates = {name,
+				Algorithms.sanitizeFileName(EMOJI_CHARS.matcher(name).replaceAll("")),
+				Algorithms.sanitizeFileName(NON_ASCII_CHARS.matcher(name).replaceAll(""))};
+		for (String candidate : candidates) {
+			if (!isUsableTileSourceFolderName(candidate)) {
+				continue;
 			}
-			if (checkTileSourceNameAcceptedByFS(tilesFolder, name)) {
-				return new TileSourceNameCheck.ValidName(name, false);
-			}
-		}
-		String sanitized = getSanitizedTileSourceName(name);
-		if (Algorithms.isEmpty(sanitized)) {
-			return new TileSourceNameCheck.InvalidName(name);
-		}
-		if (sanitized.startsWith(".")) {
-			return new TileSourceNameCheck.InvalidName(name);
-		}
-		if (isTileSourceFileNotInFolder(tilesFolder, sanitized)) {
-			return new TileSourceNameCheck.InvalidName(name);
-		}
-		if (checkTileSourceFileExist(tilesFolder, sanitized)) {
-			return new TileSourceNameCheck.ValidName(sanitized, true);
-		}
-		if (checkTileSourceNameAcceptedByFS(tilesFolder, sanitized)) {
-			return new TileSourceNameCheck.ValidName(sanitized, false);
-		} else {
-			return new TileSourceNameCheck.InvalidName(name);
-		}
-	}
-
-	public interface TileSourceNameCheck {
-		record ValidName(@NonNull String safeName, boolean exists) implements TileSourceNameCheck {
-		}
-		record InvalidName(@NonNull String invalidName) implements TileSourceNameCheck {}
-	}
-
-	private boolean checkTileSourceNameAcceptedByFS(@NonNull File parentFolder, @NonNull String fileName) {
-		File probeFolder = new File(parentFolder, TILES_NAME_PROBE_DIRNAME);
-		File test = new File(probeFolder, fileName);
-		boolean result = false;
-		if (test.exists()) {
-			result = true;
-		} else {
-			test.mkdirs();
-			if (test.exists()) {
-				result = true;
+			File dir = new File(tPath, candidate);
+			dir.mkdirs();
+			if (dir.isDirectory()) {
+				toInstall.setName(candidate);
+				try {
+					TileSourceManager.createMetaInfoFile(dir, toInstall, true);
+					return true;
+				} catch (IOException e) {
+					LOG.error("Cannot write tile source metainfo: " + dir, e);
+					return false;
+				}
 			}
 		}
-		return result;
+		LOG.error("Cannot create tile source folder for '" + name + "'");
+		return false;
 	}
 
-	private void cleanupTilesNameProbeFolder(@NonNull File parentFolder) {
-		File probeFolder = new File(parentFolder, TILES_NAME_PROBE_DIRNAME);
-		Algorithms.removeAllFiles(probeFolder);
-	}
-
-	@NonNull
-	private String getSanitizedTileSourceName(@NonNull String name) {
-		String stripped = stripEmojisAndSpecials(name);
-		return Algorithms.sanitizeFileName(stripped).replaceAll("[\\s\\p{Z}]+", " ").trim();
-	}
-
-	@NonNull
-	private String stripEmojisAndSpecials(@NonNull String text) {
-		return STRIP_EMOJI_AND_SPECIALS_PATTERN.matcher(text).replaceAll("");
+	// "." would be the tiles folder itself and "/" would create a nested folder
+	private static boolean isUsableTileSourceFolderName(@NonNull String name) {
+		return !name.isEmpty() && !name.startsWith(".") && !name.contains("/");
 	}
 
 	public Map<String, String> getTileSourceEntries() {

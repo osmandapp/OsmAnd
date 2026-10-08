@@ -185,8 +185,7 @@ public class LocalItemUtils {
 			if (name.endsWith(SQLiteTileSource.EXT)) {
 				return TILES_DATA;
 			}
-			boolean isProbeDir = app.getSettings().isTileSourceProbeFolder(file);
-			if (!isProbeDir && file.isDirectory()) {
+			if (file.isDirectory()) {
 				File parent = file.getParentFile();
 				String parentName = parent != null ? parent.getName() : null;
 

@@ -24,13 +24,12 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> {
 
 	private static final int APPROXIMATE_MAP_SOURCES_SIZE_BYTES = 450;
 
-	private Map<String, String> existingTileSources;
+	private List<String> existingItemsNames;
 
 	public MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull List<ITileSource> items) {
 		super(app, null, items);
@@ -47,7 +46,7 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	@Override
 	protected void init() {
 		super.init();
-		existingTileSources = app.getSettings().getTileSourceEntries();
+		existingItemsNames = new ArrayList<>(app.getSettings().getTileSourceEntries().values());
 	}
 
 	@NonNull
@@ -162,7 +161,12 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	@Override
 	public boolean isDuplicate(@NonNull ITileSource item) {
-		return existingTileSources.containsValue(item.getName());
+		for (String name : existingItemsNames) {
+			if (name.equals(item.getName())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@NonNull
