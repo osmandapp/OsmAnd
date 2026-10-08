@@ -876,9 +876,8 @@ public class RouteDataObject {
 
 	public boolean isDirectionApplicable(boolean direction, int ind, int startPointInd, int endPointInd) {
 		int[] pt = getPointTypes(ind);
-		int sz = pt.length;
-		for (int i = 0; i < sz; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(pt[i]);
+		for (int type : pt) {
+			RouteTypeRule r = region.quickGetEncodingRule(type);
 			// Evaluate direction tag if present
 			if (r.getTag().equals("direction")) {
 				String dv = r.getValue();

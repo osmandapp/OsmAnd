@@ -8,7 +8,9 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -27,8 +29,11 @@ import com.google.gson.GsonBuilder;
 
 import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.ObfConstants;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.util.MapUtils;
 import net.osmand.util.RouterUtilTest;
 
 @RunWith(Parameterized.class)
@@ -201,6 +206,7 @@ public class RouteTestingTest {
 			}
 			checkRoutingTime(ctx, params);
 			checkEtaTime(routeSegments, params);
+			checkSpeedCameras(routeSegments, params);
 			for (Entry<String, String> es : expectedResults.entrySet()) {
 				long id = RouterUtilTest.getRoadId(es.getKey());
 				int point = RouterUtilTest.getRoadStartPoint(es.getKey());
@@ -252,6 +258,31 @@ public class RouteTestingTest {
 			float maxEtaTime = Float.parseFloat(params.get("maxEtaTime"));
 			Assert.assertTrue("Calculated eta time " + etaTime + " is bigger then max eta time " + maxEtaTime, etaTime <= maxEtaTime);
 		}
+	}
+
+	private void checkSpeedCameras(List<RouteSegmentResult> routeSegments, Map<String, String> params) {
+		if (!params.containsKey("speedCameras")) {
+			return;
+		}
+		Set<String> speedCameras = new TreeSet<>();
+		for (RouteSegmentResult r : routeSegments) {
+			RouteDataObject obj = r.getObject();
+			for (int point = Math.min(r.getStartPointIndex(), r.getEndPointIndex());
+			     point <= Math.max(r.getStartPointIndex(), r.getEndPointIndex()); point++) {
+				int[] types = obj.getPointTypes(point);
+				for (int i = 0; types != null && i < types.length; i++) {
+					RouteTypeRule rule = obj.region.quickGetEncodingRule(types[i]);
+					if ("highway".equals(rule.getTag()) && "speed_camera".equals(rule.getValue())
+							&& obj.isDirectionApplicable(r.isForwardDirection(), point, -1, r.getEndPointIndex())) {
+						speedCameras.add(String.format(Locale.US, "%.5f,%.5f",
+								MapUtils.get31LatitudeY(obj.getPoint31YTile(point)), MapUtils.get31LongitudeX(obj.getPoint31XTile(point))));
+					}
+				}
+			}
+		}
+		Set<String> expected = new TreeSet<>(Arrays.asList(params.get("speedCameras").split(";")));
+		expected.remove("");
+		Assert.assertEquals("Speed cameras on the route", expected, speedCameras);
 	}
 
 	private void checkRoutingTime(RoutingContext ctx, Map<String, String> params) {
