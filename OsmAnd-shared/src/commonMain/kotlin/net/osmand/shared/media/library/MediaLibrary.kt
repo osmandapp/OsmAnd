@@ -12,8 +12,9 @@ interface SortableMedia {
 	val lastModifiedMs: Long?
 	val sizeBytes: Long?
 	val durationMs: Long?
-	val lat: Double?
-	val lon: Double?
+	// One nullable KLatLon, not lat/lon: an interface property named like an open class property (TravelArticle.lat/lon)
+	// but bridged differently (Double? vs Double) is renamed in the Objective-C export, which broke the iOS build.
+	val location: KLatLon?
 }
 
 enum class MediaLibrarySortMode(val group: Group) {
@@ -55,10 +56,9 @@ object MediaLibrarySorter {
 	}
 
 	private fun distance(item: SortableMedia, reference: KLatLon?): Double? {
-		val lat = item.lat ?: return null
-		val lon = item.lon ?: return null
-		if (reference == null || !lat.isFinite() || !lon.isFinite()) return null
-		return KMapUtils.getDistance(reference.latitude, reference.longitude, lat, lon)
+		val location = item.location ?: return null
+		if (reference == null || !location.latitude.isFinite() || !location.longitude.isFinite()) return null
+		return KMapUtils.getDistance(reference, location)
 	}
 }
 

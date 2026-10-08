@@ -204,4 +204,9 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "default_appearance";
+	}
 }

@@ -641,4 +641,9 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 	private interface OnFilePreparedCallback {
 		Pair<Boolean, Boolean> onFilePreparedCallback(@Nullable File file, @Nullable String ext);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "edit_map_source";
+	}
 }

@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.astronomy.views
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.os.Build
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -165,12 +166,15 @@ class EclipseTimelineView @JvmOverloads constructor(
 		info.isScrollable = true
 		val durationSeconds = (endMillis - startMillis) / 1000f
 		val currentSeconds = (currentMillis - startMillis) / 1000f
-		info.rangeInfo = AccessibilityNodeInfo.RangeInfo.obtain(
-			AccessibilityNodeInfo.RangeInfo.RANGE_TYPE_FLOAT,
-			0f,
-			durationSeconds.coerceAtLeast(1f),
-			currentSeconds.coerceIn(0f, durationSeconds.coerceAtLeast(1f))
-		)
+		val rangeType = AccessibilityNodeInfo.RangeInfo.RANGE_TYPE_FLOAT
+		val maxSeconds = durationSeconds.coerceAtLeast(1f)
+		val current = currentSeconds.coerceIn(0f, maxSeconds)
+		info.rangeInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			AccessibilityNodeInfo.RangeInfo(rangeType, 0f, maxSeconds, current)
+		} else {
+			@Suppress("DEPRECATION")
+			AccessibilityNodeInfo.RangeInfo.obtain(rangeType, 0f, maxSeconds, current)
+		}
 		info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SCROLL_FORWARD)
 		info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SCROLL_BACKWARD)
 	}

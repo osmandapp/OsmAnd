@@ -199,4 +199,9 @@ public class NauticalDepthContourFragment extends BaseFullScreenFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "nautical_depth_contour";
+	}
 }

@@ -172,9 +172,9 @@ class MediaLibraryController(app: OsmandApplication, private val plugin: AudioVi
 		val sorted = entries.sortedWith(MediaLibrarySorter.comparator(sortMode.shared, reference))
 		val nightMode = view?.isNightMode() ?: false
 		fun toItem(entry: MediaLibraryEntry): GalleryItem.Media {
-			val distance = entry.lat?.let { lat -> entry.lon?.let { lon ->
-				OsmAndFormatter.getFormattedDistance(KMapUtils.getDistance(reference.latitude, reference.longitude, lat, lon).toFloat(), app)
-			} }
+			val distance = entry.location?.let {
+				OsmAndFormatter.getFormattedDistance(KMapUtils.getDistance(reference, it).toFloat(), app)
+			}
 			val attachment = entry.attachments.lastOrNull()?.let {
 				val favorite = it.target as? FavouritePoint
 				val icon = if (favorite != null) PointImageUtils.getFromPoint(app,

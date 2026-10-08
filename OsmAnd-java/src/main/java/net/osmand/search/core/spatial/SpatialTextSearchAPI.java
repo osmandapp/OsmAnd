@@ -47,6 +47,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	private static final Log LOG = PlatformUtil.getLog(SpatialTextSearch.class);
 
 	private static final int SEARCH_PRIORITY = SEARCH_ADDRESS_BY_NAME_PRIORITY;
+	private static final long POI_TYPES_IN_NAME_INDEX_EDITION = 1782864000000L; // 2026-07-01 UTC
 
 	private final MapPoiTypes poiTypes;
 	private final SpatialTextSearch spatialTextSearch = new SpatialTextSearch();
@@ -81,6 +82,15 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		LOG.info("Spatial search start call spatialTextSearch.searchAPI");
 		SpatialSearchResults results = spatialTextSearch.searchAPI(phrase.getFullSearchPhrase(), context);
 		LOG.info("Spatial search after call spatialTextSearch.searchAPI");
+		if (results.typoSuggestion != null && !resultMatcher.isCancelled()) {
+			// "did you mean": the corrected query, searched when the row is tapped
+			SearchResult suggestion = new SearchResult(phrase);
+			suggestion.objectType = ObjectType.SUGGESTION;
+			suggestion.object = results.typoSuggestion;
+			suggestion.localeName = results.typoSuggestion;
+			suggestion.priority = SEARCH_PRIORITY;
+			resultMatcher.publish(suggestion);
+		}
 		if (results.mainResults == null) {
 			return true;
 		}
@@ -118,6 +128,34 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			}
 		}
 		return true;
+	}
+
+	// maps built before 2026-07 have no poi types in the name index
+	public static boolean hasPoiTypesInNameIndex(BinaryMapIndexReader reader) {
+		return reader.getDateCreated() >= POI_TYPES_IN_NAME_INDEX_EDITION;
+	}
+
+	public List<Amenity> searchPoiByCategory(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+			String categoryKey, QuadRect bbox31) throws IOException {
+		QuadRect bboxLatLon = new QuadRect(MapUtils.get31LongitudeX((int) bbox31.left),
+				MapUtils.get31LatitudeY((int) bbox31.top), MapUtils.get31LongitudeX((int) bbox31.right),
+				MapUtils.get31LatitudeY((int) bbox31.bottom));
+		// the list needs every object: at this zoom the per-tile thinning of the map layer is off
+		SpatialTextSearchSettings settings = SpatialTextSearchSettings.searchPoiByCategorySettings(PREFERRED_POI_ZOOM,
+				bboxLatLon);
+		settings.LIMIT_READ_SINGLE_OBJECTS = 0;
+		settings.LIMIT_READ_OBJECTS = 0;
+		List<BinaryMapIndexReader> files = new ArrayList<>();
+		Iterator<BinaryMapIndexReader> it = phrase.getOfflineIndexes(bbox31, SearchPhraseDataType.POI);
+		while (it.hasNext()) {
+			BinaryMapIndexReader reader = it.next();
+			if (hasPoiTypesInNameIndex(reader)) {
+				addFile(files, reader);
+			}
+		}
+		SpatialSearchContext context = createSpatialContext(phrase, resultMatcher, files, poiSearch, settings);
+		return spatialTextSearch.searchPoiByCategory(context, categoryKey, bboxLatLon, PREFERRED_POI_ZOOM,
+				Integer.MAX_VALUE);
 	}
 
 	private SpatialSearchContext createSpatialContext(SearchPhrase phrase, SearchResultMatcher resultMatcher,

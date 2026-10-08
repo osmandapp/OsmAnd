@@ -606,4 +606,9 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 			fragment.show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "download_resource_group";
+	}
 }

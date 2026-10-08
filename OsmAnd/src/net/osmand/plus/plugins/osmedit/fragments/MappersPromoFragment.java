@@ -172,4 +172,9 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 		mainView.findViewById(R.id.header).setAlpha(alpha);
 		mainView.findViewById(R.id.shadowView).setAlpha(inverseAlpha);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "mappers_promo";
+	}
 }

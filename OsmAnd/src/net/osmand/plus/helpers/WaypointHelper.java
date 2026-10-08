@@ -234,7 +234,13 @@ public class WaypointHelper {
 		return found;
 	}
 
+	@Nullable
 	public AlarmInfo getMostImportantAlarm(SpeedConstants sc, boolean showCameras) {
+		RouteCalculationResult route = this.route;
+		if (route == null) {
+			// following mode is on, but setNewRoute() has not delivered the route yet
+			return null;
+		}
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		Location lastProjection = routingHelper == null ? null : routingHelper.getLastProjection();
 		float mxspeed = route.getCurrentMaxSpeed(appMode.getRouteTypeProfile());

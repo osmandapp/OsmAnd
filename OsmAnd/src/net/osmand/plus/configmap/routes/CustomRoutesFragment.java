@@ -77,4 +77,9 @@ public class CustomRoutesFragment extends MapRoutesFragment {
 		super.onSaveInstanceState(outState);
 		outState.putString(ATTR_NAME_KEY, attrName);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "custom_routes";
+	}
 }

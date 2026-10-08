@@ -558,4 +558,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favorite_point_editor";
+	}
 }

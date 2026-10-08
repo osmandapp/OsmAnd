@@ -248,4 +248,9 @@ public class DirectionIndicationDialogFragment extends BaseFullScreenDialogFragm
 			fragment.show(fm, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "direction_indication";
+	}
 }

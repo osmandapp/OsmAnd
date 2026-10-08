@@ -880,4 +880,6 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment(), MediaViewerPage {
 				arguments = Bundle().apply { putInt(SELECTED_POSITION_KEY, position) }
 			}
 	}
+
+	override fun getAnalyticsScreen() = "gallery_media_player"
 }

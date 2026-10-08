@@ -613,4 +613,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "follow_track";
+	}
 }

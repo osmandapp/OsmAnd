@@ -327,4 +327,8 @@ public class ConfigureMapFragment extends BaseFullScreenFragment implements OnDa
 		}
 	}
 
+	@Override
+	public String getAnalyticsScreen() {
+		return "configure_map";
+	}
 }

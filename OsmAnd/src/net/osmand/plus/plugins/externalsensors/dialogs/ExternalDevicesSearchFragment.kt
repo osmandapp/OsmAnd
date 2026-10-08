@@ -50,6 +50,7 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
                     args.putBoolean(ANT_SEARCH_KEY, true)
                 }
                 fragment.arguments = args
+                @Suppress("DEPRECATION")
                 fragment.retainInstance = true
                 manager.beginTransaction()
                     .replace(R.id.fragmentContainer, fragment, TAG)
@@ -225,4 +226,6 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
     override fun onDeviceClicked(device: AbstractDevice<out AbstractSensor>) {
         ExternalDeviceDetailsFragment.showInstance(requireActivity().supportFragmentManager, device)
     }
+
+    override fun getAnalyticsScreen() = "external_devices_search"
 }

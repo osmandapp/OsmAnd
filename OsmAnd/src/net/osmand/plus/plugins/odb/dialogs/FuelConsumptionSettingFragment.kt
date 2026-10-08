@@ -131,4 +131,6 @@ class FuelConsumptionSettingFragment : BaseSimpleWidgetInfoFragment() {
 		)
 		widget.updatePrefs(prefsChanged)
 	}
+
+	override fun getAnalyticsScreen() = "fuel_consumption_setting"
 }

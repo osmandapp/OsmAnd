@@ -558,9 +558,7 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			// 32. StarMapSearchDialogFragment (Sort)
 			RealScreenMenuScenario(32, "StarMapSearch_sort", "StarMapSearchDialogFragment.kt:1622", alignRight = false) { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
-					layoutId = R.layout.popup_star_search_menu_item
 					widthMode = PopUpMenuWidthMode.STANDARD
-					showCompound = true
 					menuItems = listOf(
 						PopUpMenuItem.Builder(ctx).setTitle(ctx.getString(R.string.sort_by)).setTitleBold(true).create(),
 						PopUpMenuItem.Builder(ctx).setTitleId(R.string.sort_name_ascending).setIcon(getThemedIcon(ctx, R.drawable.ic_action_sort_by_name_ascending, night)).showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),
@@ -575,10 +573,7 @@ class OsmAndDropdownMenuVisualTest : AndroidTest() {
 			// 33. StarMapSearchDialogFragment (Filter)
 			RealScreenMenuScenario(33, "StarMapSearch_filter", "StarMapSearchDialogFragment.kt:1745", alignRight = true) { ctx, _, night ->
 				PopUpMenuDisplayData().apply {
-					layoutId = R.layout.popup_star_search_menu_item
 					widthMode = PopUpMenuWidthMode.STANDARD
-					showCompound = true
-					limitHeight = true
 					menuItems = listOf(
 						PopUpMenuItem.Builder(ctx).setTitle("Type").setTitleBold(true).create(),
 						PopUpMenuItem.Builder(ctx).setTitle("Show all").showCompoundBtn(0, PopUpMenuItem.CompoundButtonType.RADIO).setSelected(true).create(),

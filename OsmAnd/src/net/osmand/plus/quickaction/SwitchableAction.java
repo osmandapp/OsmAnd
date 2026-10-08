@@ -25,6 +25,13 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -39,13 +46,22 @@ import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public abstract class SwitchableAction<T> extends QuickAction {
 
+	private static final Log LOG = PlatformUtil.getLog(SwitchableAction.class);
+
 	public static final String KEY_ID = "id";
+
+	private static final String PAIR_FIRST_KEY = "first";
+	private static final String PAIR_SECOND_KEY = "second";
 
 	protected static final String KEY_DIALOG = "dialog";
 
@@ -113,6 +129,9 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		String itemName;
 		if (loadListFromParams().size() == 1) {
 			String mainItem = getItemIdFromObject(loadListFromParams().get(0));
+			if (mainItem == null) {
+				return super.getActionText(app);
+			}
 			boolean selectedMain = Algorithms.stringsEqual(mainItem, selectedItem);
 			// RTL: A  <| MAIN (selected), MAIN <| B (selected)
 			// LTR: A (selected) |> MAIN , MAIN (selected) |>  B
@@ -122,6 +141,9 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			String disabledItem = getDisabledItem(app);
 			String nextItem = getNextSelectedItem(app);
 			String mainItem = Algorithms.stringsEqual(nextItem, disabledItem) ? selectedItem : nextItem;
+			if (mainItem == null) {
+				return super.getActionText(app);
+			}
 			boolean selectedMain = Algorithms.stringsEqual(mainItem, selectedItem);
 			// RTL: A  <| MAIN (selected), MAIN <| B (selected)
 			// LTR: A (selected) |> MAIN , MAIN (selected) |>  B
@@ -210,6 +232,65 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * The list is written with explicit "first" / "second" keys instead of Gson reflection over {@link Pair},
+	 * because R8 renames the fields of Pair and reflection would then use the obfuscated names as JSON keys.
+	 */
+	@NonNull
+	protected static String pairsToJson(@NonNull List<Pair<String, String>> pairs) {
+		JsonArray array = new JsonArray();
+		for (Pair<String, String> pair : pairs) {
+			JsonObject object = new JsonObject();
+			object.addProperty(PAIR_FIRST_KEY, pair.first);
+			object.addProperty(PAIR_SECOND_KEY, pair.second);
+			array.add(object);
+		}
+		return new Gson().toJson(array);
+	}
+
+	/**
+	 * @return pairs that have an id ("first"), entries without it are skipped.
+	 */
+	@NonNull
+	protected static List<Pair<String, String>> pairsFromJson(@Nullable String json) {
+		List<Pair<String, String>> pairs = new ArrayList<>();
+		if (Algorithms.isEmpty(json)) {
+			return pairs;
+		}
+		try {
+			JsonElement root = new Gson().fromJson(json, JsonElement.class);
+			if (root != null && root.isJsonArray()) {
+				for (JsonElement element : root.getAsJsonArray()) {
+					Pair<String, String> pair = element.isJsonObject() ? readPair(element.getAsJsonObject()) : null;
+					if (pair != null) {
+						pairs.add(pair);
+					}
+				}
+			}
+		} catch (JsonParseException e) {
+			LOG.error("Failed to parse switchable action items: " + json, e);
+		}
+		return pairs;
+	}
+
+	@Nullable
+	private static Pair<String, String> readPair(@NonNull JsonObject object) {
+		String first = getStringOrNull(object.get(PAIR_FIRST_KEY));
+		String second = getStringOrNull(object.get(PAIR_SECOND_KEY));
+		if (first == null && second == null && object.size() == 2) {
+			// Saved by a build where R8 renamed the fields of Pair: the keys are obfuscated, the order is kept
+			Iterator<Map.Entry<String, JsonElement>> entries = object.entrySet().iterator();
+			first = getStringOrNull(entries.next().getValue());
+			second = getStringOrNull(entries.next().getValue());
+		}
+		return first != null ? new Pair<>(first, second) : null;
+	}
+
+	@Nullable
+	private static String getStringOrNull(@Nullable JsonElement element) {
+		return element != null && element.isJsonPrimitive() ? element.getAsString() : null;
 	}
 
 	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements OnItemMoveCallback {

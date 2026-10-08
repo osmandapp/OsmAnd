@@ -3454,7 +3454,7 @@
     <string name="poi_glacier_ele_bottom">Χαμηλότερο σημείο</string>
     <string name="poi_glacier_slope">Μέση κλίση</string>
     <string name="poi_checkpoint_hiking">Σημείο ελέγχου πεζοπορίας</string>
-    <string name="poi_checkpoint_type_stamp">Σημείο επισήμανσης</string>
+    <string name="poi_checkpoint_type_stamp">Σημείο σφραγίδας</string>
     <string name="poi_checkpoint_type_code">Κωδικός</string>
     <string name="poi_checkpoint_type_notebook">Σημειωματάριο</string>
     <string name="poi_checkpoint_type_needler">Ένεση</string>

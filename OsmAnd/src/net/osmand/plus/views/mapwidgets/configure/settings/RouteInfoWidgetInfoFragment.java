@@ -222,4 +222,9 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 		widget.setDisplayPriority(appMode, selectedDisplayPriority);
 		widget.setShowExpandButtonEnabled(appMode, showExpandButton);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "route_info_widget_info";
+	}
 }

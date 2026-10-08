@@ -270,4 +270,9 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment implement
 		fragment.setArguments(bundle);
 		return fragment;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "gallery_photo_viewer";
+	}
 }

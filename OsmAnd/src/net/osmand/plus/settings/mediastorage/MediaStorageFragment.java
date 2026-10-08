@@ -400,4 +400,9 @@ public class MediaStorageFragment extends BaseSettingsFragment implements MoveFi
 			LOG.debug(message);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "media_storage";
+	}
 }

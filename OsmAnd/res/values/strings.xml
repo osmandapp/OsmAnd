@@ -149,6 +149,7 @@
 	<string name="quick_action_tracks_select_descr">Add one or more tracks to show or hide them on the map with a single tap.</string>
 	<string name="quick_action_tracks_always_ask_descr">Tapping this action opens the list of tracks, where you can show or hide one or more of them.</string>
 	<string name="quick_action_all_tracks">All tracks</string>
+	<string name="route_calculation_out_of_memory">The route is too long to calculate on this device. Add intermediate points or choose a closer destination.</string>
 	<string name="java_memory">Java memory</string>
 	<string name="ais_load_data_descr">Replay AIS messages from a recorded file.</string>
 	<string name="map_rendering">Map rendering</string>
@@ -1493,8 +1494,8 @@ You will be able to pair this scanner again at any time.</string>
     <string name="with_waypoints">With waypoints</string>
     <string name="shared_string_reset_all">Reset all</string>
     <string name="date_of_creation">Date of creation</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="filter_by_name">Filter by name</string>
     <string name="filter_screen_title">Filter</string>
     <string name="filter_tracks_count">Filter: %d</string>

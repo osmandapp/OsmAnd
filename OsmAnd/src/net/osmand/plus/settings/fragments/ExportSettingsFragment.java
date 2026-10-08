@@ -342,4 +342,9 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "export_settings";
+	}
 }

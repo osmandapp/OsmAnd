@@ -100,4 +100,9 @@ public class MarkersHistorySettingsFragment extends HistoryItemsFragment {
 			fragment.show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "markers_history_settings";
+	}
 }
