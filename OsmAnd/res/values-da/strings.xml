@@ -5509,4 +5509,5 @@
     <string name="aidl_group_system">System</string>
     <string name="aidl_group_system_descr">Filer, logfiler, falsk placering</string>
     <string name="multimedia_notes_view_descr">Dine A/V-noter findes i %1$s.</string>
+    <string name="route_calculation_out_of_memory">Ruten er for lang til at beregne på denne enhed. Tilføj mellemliggende punkter eller vælg en destination tættere på.</string>
 </resources>

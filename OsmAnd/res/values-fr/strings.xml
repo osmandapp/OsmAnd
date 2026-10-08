@@ -5370,4 +5370,18 @@
     <string name="aidl_group_tracks_view">Traces : afficher</string>
     <string name="aidl_group_tracks_edit">Traces : modifier</string>
     <string name="aidl_group_search_descr">Rechercher des lieux et des adresses</string>
+    <string name="route_calculation_out_of_memory">L\'itinéraire est trop long pour être calculé sur cet appareil. Ajoutez des points intermédiaires ou saisissez une destination plus proche.</string>
+    <string name="media_not_attached_descr">Lier ce média à un favori pour l\'afficher sur la carte.</string>
+    <string name="detach_external_media_descr">Le fichier ne sera plus visible dans ce favori néanmoins il restera stocké sur votre appareil.</string>
+    <string name="detach_external_media_descr_plural">Les fichiers ne seront plus visibles dans ce favori néanmoins ils resteront stockés sur votre appareil.</string>
+    <string name="detach_media_descr_plural">Les fichiers ne seront plus visibles dans ce favori néanmoins ils resteront stockés sur votre appareil et dans votre galerie.</string>
+    <string name="detach_media_descr">Le fichier ne sera plus affiché dans ce favori néanmoins il restera stocké sur votre appareil et dans votre galerie.</string>
+    <string name="media_not_attached_title">Média non lié pour l\'instant</string>
+    <string name="media_library_empty_descr">Prenez une photo, une vidéo ou une note audio sur la carte ou liez des fichiers à un favori. Tout ce que vous enregistrez ou liez apparaît ici.</string>
+    <string name="osmand_api_permission_missing">%1$s : autoriser \"%2$s\" dans Menu › Extensions</string>
+    <string name="osmand_api_unknown_app">\"%1$s\" bloqué depuis une application inconnue</string>
+    <string name="aidl_permissions_descr">Ce que %1$s (%2$s) peut faire dans OsmAnd.</string>
+    <string name="aidl_permissions_request_descr">%1$s\nModifiable plus tard depuis les Extensions.</string>
+    <string name="aidl_group_system_footer">Laissez l\'application copier des fichiers dans OsmAnd, remplacer votre position, lire les journaux et modifier l\'apparence d\'OsmAnd. N\'activez que pour les applications auxquelles vous faites entièrement confiance !</string>
+    <string name="aidl_group_location_descr">Valeurs pour votre position, itinéraire et widget</string>
 </resources>
