@@ -112,6 +112,11 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 	private static final long ANNOUNCEMENT_TAIL_MS = 5000;
 	// long car routes on slow emulators
 	private static final long ROUTE_TIMEOUT_MS = 180_000;
+	// Workaround for https://github.com/osmandapp/OsmAnd/issues/26498: the first offline calculation after
+	// the app start may fail and hang, so it is restarted after this time. Once #26498 is fixed, remove
+	// ROUTE_STUCK_MS, ROUTE_RETRIES and the retry in calculateRoute()
+	private static final long ROUTE_STUCK_MS = 30_000;
+	private static final int ROUTE_RETRIES = 2;
 	private static final int MAP_ZOOM = 17;
 
 	private static final String ROUTE_RECALC = "route_recalc";
@@ -385,17 +390,21 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		});
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		long deadline = SystemClock.elapsedRealtime() + ROUTE_TIMEOUT_MS;
-		boolean retried = false;
+		long attemptStart = SystemClock.elapsedRealtime();
+		int retries = 0;
 		while (!routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated()) {
 			if (SystemClock.elapsedRealtime() > deadline) {
 				fail("Route is not calculated: " + routingHelper.getLastRouteCalcError());
 			}
 			String error = routingHelper.getLastRouteCalcError();
-			if (!retried && error != null && !routingHelper.isRouteBeingCalculated()) {
-				// right after the app start reading a map region may fail once
-				// (IndexOutOfBoundsException in BinaryMapRouteReaderAdapter), it is not what this test checks
-				LOG.warn("Route calculation failed, retrying: " + error);
-				retried = true;
+			boolean failed = error != null && !routingHelper.isRouteBeingCalculated();
+			boolean stuck = SystemClock.elapsedRealtime() - attemptStart > ROUTE_STUCK_MS;
+			if (retries < ROUTE_RETRIES && (failed || stuck)) {
+				// workaround for #26498, remove once it is fixed: right after the app start reading a map region
+				// may fail (IndexOutOfBoundsException in BinaryMapRouteReaderAdapter) and the calculation may hang
+				LOG.warn("Route calculation " + (failed ? "failed" : "is stuck") + ", retrying: " + error);
+				retries++;
+				attemptStart = SystemClock.elapsedRealtime();
 				instrumentation.runOnMainSync(() -> app.getTargetPointsHelper().updateRouteAndRefresh(true));
 			}
 			SystemClock.sleep(500);
