@@ -82,22 +82,43 @@ public class AverageGlideComputer extends AverageValueComputer {
 
 	@Nullable
 	public String getFormattedAverageGlideRatio(long measuredInterval) {
-		locationsToUse.clear();
-
-		long now = System.currentTimeMillis();
-		for (Location location : locations) {
-			long locationTime = location.getTime();
-			// Check if the location is within the measured interval and after the start timestamp
-			if (now - locationTime <= measuredInterval) {
-				locationsToUse.add(location);
-			}
-		}
+		collectLocationsToUse(measuredInterval);
 		if (!Algorithms.isEmpty(locationsToUse)) {
 			double distance = calculateTotalDistance(locationsToUse);
 			double difference = calculateAltitudeDifference(locationsToUse);
 			return calculateFormattedRatio(app, distance, difference);
 		}
 		return null;
+	}
+
+	/**
+	 * @return average vertical speed in m/s over the interval, positive when climbing,
+	 * or null when there are not enough points
+	 */
+	@Nullable
+	public Double getAverageVerticalSpeed(long measuredInterval) {
+		collectLocationsToUse(measuredInterval);
+		int size = locationsToUse.size();
+		if (size > 1) {
+			Location start = locationsToUse.get(0);
+			Location end = locationsToUse.get(size - 1);
+			long timeMillis = end.getTime() - start.getTime();
+			if (timeMillis > 0) {
+				return (end.getAltitude() - start.getAltitude()) / (timeMillis / 1000.0);
+			}
+		}
+		return null;
+	}
+
+	private void collectLocationsToUse(long measuredInterval) {
+		locationsToUse.clear();
+		long now = System.currentTimeMillis();
+		for (Location location : locations) {
+			// Check if the location is within the measured interval
+			if (now - location.getTime() <= measuredInterval) {
+				locationsToUse.add(location);
+			}
+		}
 	}
 
 	private double calculateTotalDistance(@NonNull List<Location> locations) {
