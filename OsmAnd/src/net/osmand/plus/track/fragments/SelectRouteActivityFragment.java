@@ -184,4 +184,9 @@ public class SelectRouteActivityFragment extends CustomizableSingleSelectionDial
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "select_route_activity";
+	}
 }

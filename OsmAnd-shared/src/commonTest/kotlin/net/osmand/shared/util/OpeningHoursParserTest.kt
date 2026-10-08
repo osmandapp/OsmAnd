@@ -634,6 +634,7 @@ class OpeningHoursParserTest {
 		testTimeRestrictedOffRules()
 		testMonthRuleOverride()
 		testHolidayWithWeekday()
+		testLocalizedHolidays()
 		testNthWeekdayOfMonth()
 		testOvernightNextOpening()
 		testRealWorldSchedules()
@@ -810,6 +811,23 @@ class OpeningHoursParserTest {
 		hours = OpeningHoursParser.parseOpenedHours("SH Mo-Fr 10:00-14:00")
 		println(hours)
 		testOpened("06.10.2025 11:00", hours, false) // regular Monday
+	}
+
+	private fun testLocalizedHolidays() {
+		OpeningHoursParser.initLocalStrings("en-GB")
+		OpeningHoursParser.setTwelveHourFormattingEnabled(false, "en-GB")
+		OpeningHoursParser.setAdditionalString("public_holiday", "Public holidays")
+		OpeningHoursParser.setAdditionalString("school_holiday", "School holidays")
+		OpeningHoursParser.setAdditionalString("easter", "Easter")
+		val hours = OpeningHoursParser.parseOpenedHours("Mo-Fr 10:00-18:00; Sa-Su, PH, SH, Easter 12:00-16:00")
+		println(hours?.toLocalString())
+		assertEquals(
+			"Mon-Fri 10:00-18:00; Sat, Sun, Public holidays, School holidays, Easter 12:00-16:00",
+			hours?.toLocalString()
+		)
+		testParsedAndAssembledCorrectly("Mo-Fr 10:00-18:00; Sa, Su, PH, SH, Easter 12:00-16:00", hours)
+		OpeningHoursParser.setAdditionalString("public_holiday", "PH")
+		OpeningHoursParser.setAdditionalString("school_holiday", "SH")
 	}
 
 	private fun testNthWeekdayOfMonth() {

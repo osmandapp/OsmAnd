@@ -108,4 +108,9 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetInfoFragm
 		speedWidget.setShouldSkipStops(appMode, !countStops);
 		speedWidget.setMeasuredInterval(appMode, timeIntervalCard.getSelectedIntervalMillis());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "average_speed_widget_setting";
+	}
 }

@@ -190,4 +190,9 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "wikivoyage_search";
+	}
 }

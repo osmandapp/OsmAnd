@@ -126,6 +126,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class OsmandSettings {
 
@@ -1252,16 +1253,36 @@ public class OsmandSettings {
 	public TemperatureUnit getTemperatureUnit(@NonNull ApplicationMode appMode) {
 		TemperatureUnitsMode unitsMode = UNIT_OF_TEMPERATURE.getModeValue(appMode);
 		if (unitsMode == TemperatureUnitsMode.SYSTEM_DEFAULT) {
-			try {
-				String unit = LocalePreferences.getTemperatureUnit();
-				boolean fahrenheit = Algorithms.stringsEqual(unit, LocalePreferences.TemperatureUnit.FAHRENHEIT);
-				return fahrenheit ? TemperatureUnit.FAHRENHEIT : TemperatureUnit.CELSIUS;
-			} catch (IllegalArgumentException e) {
-				LOG.error(e);
-				return TemperatureUnit.CELSIUS;
-			}
+			return getSystemTemperatureUnit();
 		}
 		return unitsMode.getTemperatureUnit();
+	}
+
+	private record SystemTemperatureUnit(@NonNull Locale locale, @NonNull TemperatureUnit unit) {
+	}
+
+	@Nullable
+	private volatile SystemTemperatureUnit systemTemperatureUnit;
+
+	// Asked on every map frame by the weather layers, while the ICU lookup behind it is slow
+	@NonNull
+	private TemperatureUnit getSystemTemperatureUnit() {
+		Locale locale = Locale.getDefault(Locale.Category.FORMAT);
+		SystemTemperatureUnit cached = systemTemperatureUnit;
+		if (cached != null && cached.locale().equals(locale)) {
+			return cached.unit();
+		}
+		TemperatureUnit unit;
+		try {
+			String value = LocalePreferences.getTemperatureUnit();
+			boolean fahrenheit = Algorithms.stringsEqual(value, LocalePreferences.TemperatureUnit.FAHRENHEIT);
+			unit = fahrenheit ? TemperatureUnit.FAHRENHEIT : TemperatureUnit.CELSIUS;
+		} catch (IllegalArgumentException e) {
+			LOG.error(e);
+			unit = TemperatureUnit.CELSIUS;
+		}
+		systemTemperatureUnit = new SystemTemperatureUnit(locale, unit);
+		return unit;
 	}
 
 	// fuel tank capacity stored in litres
@@ -1782,6 +1803,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference(this, "calc_gpx_route", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Integer> GPX_SEGMENT_INDEX = new IntPreference(this, "gpx_route_segment", -1).makeGlobal().cache();
 	public final OsmandPreference<Integer> GPX_ROUTE_INDEX = new IntPreference(this, "gpx_route_index", -1).makeGlobal().cache();
+	public final OsmandPreference<Boolean> GPX_ROUTE_REVERSE = new BooleanPreference(this, "gpx_route_reverse", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> GPX_PASS_WHOLE_ROUTE = new BooleanPreference(this, "gpx_pass_whole_route", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<ReverseTrackStrategy> GPX_REVERSE_STRATEGY =
 			new EnumStringPreference<>(this, "gpx_reverse_strategy", ReverseTrackStrategy.RECALCULATE_ALL_ROUTE_POINTS, ReverseTrackStrategy.values()).makeGlobal().makeShared().cache();
@@ -2076,7 +2098,7 @@ public class OsmandSettings {
 
 	public CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference(this, "previous_installed_version", "").makeGlobal();
 
-	public final OsmandPreference<Boolean> USE_SPATIAL_TEXT_SEARCH = new BooleanPreference(this, "use_spatial_text_search", true).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Boolean> USE_SPATIAL_TEXT_SEARCH = new BooleanPreference(this, "use_spatial_search", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference(this, "should_show_free_version_banner", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOULD_SHOW_DISCOUNT_BOTTOM_SHEET = new BooleanPreference(this, "should_show_discount_bottom_sheet", false).makeGlobal().makeShared().cache();
 
@@ -2267,18 +2289,44 @@ public class OsmandSettings {
 		return null;
 	}
 
+	// code points outside the Basic Multilingual Plane, variation selectors and the zero width joiner
+	private static final Pattern EMOJI_CHARS = Pattern.compile("[\\x{10000}-\\x{10FFFF}\\uFE0E\\uFE0F\\u200D]");
+	private static final Pattern NON_ASCII_CHARS = Pattern.compile("[^\\x20-\\x7E]");
+
 	public boolean installTileSource(TileSourceTemplate toInstall) {
+		String name = toInstall.getName();
+		if (Algorithms.isEmpty(name)) {
+			return false;
+		}
 		File tPath = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-		File dir = new File(tPath, toInstall.getName());
-		dir.mkdirs();
-		if (dir.exists() && dir.isDirectory()) {
-			try {
-				TileSourceManager.createMetaInfoFile(dir, toInstall, true);
-			} catch (IOException e) {
-				return false;
+		// FAT/exFAT cards may reject some characters: try the name as is, without emoji, then ASCII only
+		String[] candidates = {name,
+				Algorithms.sanitizeFileName(EMOJI_CHARS.matcher(name).replaceAll("")),
+				Algorithms.sanitizeFileName(NON_ASCII_CHARS.matcher(name).replaceAll(""))};
+		for (String candidate : candidates) {
+			if (!isUsableTileSourceFolderName(candidate)) {
+				continue;
+			}
+			File dir = new File(tPath, candidate);
+			dir.mkdirs();
+			if (dir.isDirectory()) {
+				toInstall.setName(candidate);
+				try {
+					TileSourceManager.createMetaInfoFile(dir, toInstall, true);
+					return true;
+				} catch (IOException e) {
+					LOG.error("Cannot write tile source metainfo: " + dir, e);
+					return false;
+				}
 			}
 		}
-		return true;
+		LOG.error("Cannot create tile source folder for '" + name + "'");
+		return false;
+	}
+
+	// "." would be the tiles folder itself and "/" would create a nested folder
+	private static boolean isUsableTileSourceFolderName(@NonNull String name) {
+		return !name.isEmpty() && !name.startsWith(".") && !name.contains("/");
 	}
 
 	public Map<String, String> getTileSourceEntries() {
@@ -3568,6 +3616,16 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> ENABLE_MSAA = new BooleanPreference(this, "enable_msaa", false).makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> SPHERICAL_MAP = new BooleanPreference(this, "spherical_map", false).makeProfile().cache();
+
+	public static final float BUILDINGS_3D_ALPHA_DEF_VALUE = 0.5f;
+	public static final int BUILDINGS_3D_DEFAULT_COLOR = 0x666666;
+
+	public final CommonPreference<Boolean> ENABLE_3D_MAP_OBJECTS = new BooleanPreference(this, "enable_3d_map_objects", false).makeProfile().cache();
+	public final CommonPreference<Float> BUILDINGS_3D_ALPHA = new FloatPreference(this, "3d_buildings_alpha", BUILDINGS_3D_ALPHA_DEF_VALUE).makeProfile().cache();
+	public final CommonPreference<Integer> BUILDINGS_3D_VIEW_DISTANCE = new IntPreference(this, "3d_buildings_view_distance", 1).makeProfile().cache();
+	public final CommonPreference<Integer> BUILDINGS_3D_COLOR_STYLE = new IntPreference(this, "buildings_3d_color_style", 1).makeProfile().cache();
+	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_NIGHT_COLOR = new IntPreference(this, "buildings_3d_custom_night_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
+	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_DAY_COLOR = new IntPreference(this, "buildings_3d_custom_day_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
 
 	@NonNull
 	public OsmandPreference<Boolean> getAllowPrivatePreference(@NonNull ApplicationMode appMode) {

@@ -1054,7 +1054,8 @@ public class MenuBuilder {
 		textView.setTypeface(DEFAULT);
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
-		textView.setText(WikiArticleHelper.getPartialContent(description));
+		textView.setText(Algorithms.isHtmlText(description)
+				? WikiArticleHelper.getPartialContent(description) : description.trim());
 
 		if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);

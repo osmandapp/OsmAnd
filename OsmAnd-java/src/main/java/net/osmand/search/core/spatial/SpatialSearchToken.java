@@ -49,6 +49,7 @@ public class SpatialSearchToken {
 			NameIndexReader.POI_CATEGORY_PREFIX + MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX;
 
 	int MIN_CHAR_INCOMPLETE;
+	boolean broad; // a word still being typed with too many continuations: matched as a whole word
 	
 	int originalOrder = 0;
 	int sortedOrder = 0;
@@ -152,7 +153,7 @@ public class SpatialSearchToken {
 	
 	
 	public boolean isOnlyFullMatch() {
-		return incomplete && word.length() <= MIN_CHAR_INCOMPLETE + 1;
+		return incomplete && (word.length() <= MIN_CHAR_INCOMPLETE + 1 || broad);
 	}
 
 	@Override
@@ -162,7 +163,7 @@ public class SpatialSearchToken {
 	
 	
 	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats) {
-		return new NameIndexReaderMatcher(word) {
+		return new NameIndexReaderMatcher(broad ? wordNoDot : word) {
 			
 			@Override
 			public boolean matchKey(String key) {

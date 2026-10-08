@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+import android.view.ViewParent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,7 @@ public class GalleryGridRecyclerView extends RecyclerView {
 		super(context, attrs, defStyleAttr);
 	}
 
-	public void setScaleDetector(ScaleGestureDetector scaleDetector) {
+	public void setScaleDetector(@Nullable ScaleGestureDetector scaleDetector) {
 		this.scaleDetector = scaleDetector;
 	}
 
@@ -37,40 +38,60 @@ public class GalleryGridRecyclerView extends RecyclerView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent e) {
-		scaleDetector.onTouchEvent(e);
-		if (e.getAction() == MotionEvent.ACTION_UP) {
-			isScaling = false;
-		} else if (e.getAction() == MotionEvent.ACTION_MOVE && isScaling) {
-			return true;
+		if (scaleDetector != null) {
+			scaleDetector.onTouchEvent(e);
 		}
-		return super.onTouchEvent(e);
+		if (!isScaling) {
+			return super.onTouchEvent(e);
+		}
+		switch (e.getActionMasked()) {
+			case MotionEvent.ACTION_CANCEL:
+				return super.onTouchEvent(e);
+			case MotionEvent.ACTION_UP:
+				MotionEvent cancel = MotionEvent.obtain(e);
+				cancel.setAction(MotionEvent.ACTION_CANCEL);
+				try {
+					return super.onTouchEvent(cancel);
+				} finally {
+					cancel.recycle();
+				}
+			default:
+				return true;
+		}
 	}
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent e) {
-		scaleDetector.onTouchEvent(e);
-		if (e.getAction() == MotionEvent.ACTION_UP) {
-			isScaling = false;
+		if (scaleDetector != null) {
+			scaleDetector.onTouchEvent(e);
 		}
 		if (isScaling) {
 			stopScroll();
 			return true;
-		} else {
-			return super.onInterceptTouchEvent(e);
 		}
+		return super.onInterceptTouchEvent(e);
 	}
 
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent e) {
 		if (e.getPointerCount() > 1) {
+			if (!isScaling) {
+				// Keep a parent pager (My Places tabs) from taking the pinch over as a horizontal swipe
+				ViewParent parent = getParent();
+				if (parent != null) {
+					parent.requestDisallowInterceptTouchEvent(true);
+				}
+			}
 			isScaling = true;
 			stopScroll();
 		}
 		boolean handled = super.dispatchTouchEvent(e);
 		int action = e.getActionMasked();
-		if ((action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL)
-				&& gestureFinishedListener != null) {
-			gestureFinishedListener.run();
+		if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+			isScaling = false;
+			if (gestureFinishedListener != null) {
+				gestureFinishedListener.run();
+			}
 		}
 		return handled;
 	}

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -30,6 +31,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -129,9 +131,9 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		preferredLocales.add(app.getLanguage());
 		preferredLocales.add(Locale.getDefault().getLanguage());
 
-		isGlobalWikiPoiEnabled = wikiPlugin.isShowAllLanguages();
-		if (wikiPlugin.hasLanguagesFilter()) {
-			List<String> enabledWikiPoiLocales = wikiPlugin.getLanguagesToShow();
+		isGlobalWikiPoiEnabled = wikiPlugin.isShowAllLanguages(appMode);
+		if (wikiPlugin.hasLanguagesFilter(appMode)) {
+			List<String> enabledWikiPoiLocales = wikiPlugin.getLanguagesToShow(appMode);
 			for (String locale : app.getPoiTypes().getAllAvailableWikiLocales()) {
 				boolean checked = enabledWikiPoiLocales.contains(locale);
 				boolean topDefined = preferredLocales.contains(locale) || checked;
@@ -192,10 +194,14 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 				wikiPlugin.setShowAllLanguages(mode, global);
 			}
 		} else {
-			wikiPlugin.setLanguagesToShow(localesForSaving);
-			wikiPlugin.setShowAllLanguages(global);
+			wikiPlugin.setLanguagesToShow(appMode, localesForSaving);
+			wikiPlugin.setShowAllLanguages(appMode, global);
 		}
 		wikiPlugin.updateWikipediaState();
+		Fragment target = getTargetFragment();
+		if (target instanceof OnPreferenceChanged listener) {
+			listener.onPreferenceChanged(wikiPlugin.WIKIPEDIA_POI_ENABLED_LANGUAGES.getId());
+		}
 	}
 
 	protected void applyPreferenceWithSnackBar(List<String> localesForSaving, boolean global) {
@@ -242,6 +248,18 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SelectWikiLanguagesBottomSheet fragment = new SelectWikiLanguagesBottomSheet();
 			fragment.setUsedOnMap(usedOnMap);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	public static void showInstance(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
+	                                @NonNull Fragment target) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SelectWikiLanguagesBottomSheet fragment = new SelectWikiLanguagesBottomSheet();
+			fragment.setUsedOnMap(false);
+			fragment.setAppMode(appMode);
+			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}
 	}

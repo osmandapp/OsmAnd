@@ -226,4 +226,9 @@ public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 		});
 		UiUtilities.setupSlider(slider, isNightMode(), getActiveProfileColor());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "simulation_navigation_setting";
+	}
 }

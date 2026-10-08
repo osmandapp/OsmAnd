@@ -1,0 +1,5 @@
+# No linkerOpts: an -l here is autolinked into the static framework, and the app already links
+# the sqlite built with OsmAnd core. Test binaries get -lsqlite3 in build.gradle.kts.
+headers = sqlite3.h
+headerFilter = sqlite3.h
+package = sqlite3

@@ -90,7 +90,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
 	override fun setupToolbar(view: View) {
 		view.findViewById<ImageButton>(R.id.close_button).apply {
 			setOnClickListener {
-				requireActivity().onBackPressed()
+				requireActivity().onBackPressedDispatcher.onBackPressed()
 			}
 			setImageResource(AndroidUtils.getNavigationIconResId(context))
 		}
@@ -407,4 +407,6 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
 	override fun onPropertyClicked(property: DeviceChangeableProperty) {
 		EditDevicePropertyDialog.showInstance(requireActivity(), this, device, property)
 	}
+
+	override fun getAnalyticsScreen() = "external_device_details"
 }

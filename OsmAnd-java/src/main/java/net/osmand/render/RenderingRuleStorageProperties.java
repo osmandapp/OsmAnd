@@ -79,6 +79,7 @@ public class RenderingRuleStorageProperties {
 	public static final String ICON_VISIBLE_SIZE = "iconVisibleSize";
 	public static final String TEXT_MIN_DISTANCE = "textMinDistance";
 	public static final String TEXT_ON_PATH = "textOnPath";
+	public static final String TEXT_TOP_SIDE = "textTopSide";
 	public static final String ICON = "icon";
 	public static final String LAYER = "layer";
 	public static final String ORDER = "order";
@@ -159,6 +160,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_ICON_ORDER;
 	public RenderingRuleProperty R_TEXT_MIN_DISTANCE;
 	public RenderingRuleProperty R_TEXT_ON_PATH;
+	public RenderingRuleProperty R_TEXT_TOP_SIDE;
 	public RenderingRuleProperty R_ICON_SHIFT_PX;
 	public RenderingRuleProperty R_ICON_SHIFT_PY;
 	public RenderingRuleProperty R_ICON__1;
@@ -261,6 +263,7 @@ public class RenderingRuleStorageProperties {
 		R_TEXT_BOLD = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(TEXT_BOLD));
 		R_TEXT_ITALIC = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(TEXT_ITALIC));
 		R_TEXT_ON_PATH = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(TEXT_ON_PATH));
+		R_TEXT_TOP_SIDE = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(TEXT_TOP_SIDE));
 
 		// point
 		R_ICON_SHIFT_PX = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty("icon_shift_px"));

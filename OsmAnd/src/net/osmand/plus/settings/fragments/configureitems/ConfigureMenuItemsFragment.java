@@ -239,4 +239,9 @@ public class ConfigureMenuItemsFragment extends BaseFullScreenFragment implement
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "configure_menu_items";
+	}
 }

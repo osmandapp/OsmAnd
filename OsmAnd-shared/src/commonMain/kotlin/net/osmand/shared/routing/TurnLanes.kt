@@ -34,6 +34,15 @@ object TurnLanes {
 	private const val TURN_SLIGHT_DEGREE = 5.0
 	private const val MAX_SPEAK_PRIORITY = 5
 
+	private const val REVERSE_LANE = "reverse"
+	private const val REVERSE_RIGHT_LANE = "reverse_right"
+
+	// turn:lanes value by TurnType.orderFromLeftToRight() + 5
+	private val LANE_BY_TURN_ORDER = arrayOf(
+		REVERSE_LANE, "sharp_left", "left", "slight_left", "",
+		"through", "", "slight_right", "right", "sharp_right", REVERSE_RIGHT_LANE
+	)
+
 	// ---- reading the tags off a road ----
 
 	/**
@@ -57,7 +66,7 @@ object TurnLanes {
 		if (turnLanes == null) {
 			return null
 		}
-		return calculateRawTurnLanes(turnLanes, 0)
+		return calculateRawTurnLanes(convertReverseLanes(turnLanes)!!, 0)
 	}
 
 	/**
@@ -100,7 +109,7 @@ object TurnLanes {
 	/** The `turn:lanes` string of [segment], from whichever tag its direction of travel calls for. */
 	@JvmStatic
 	fun getTurnLanesString(segment: RouteSegmentResult): String? {
-		return if (segment.getObject().getOneway() == 0) {
+		val turnLanes = if (segment.getObject().getOneway() == 0) {
 			if (segment.isForwardDirection()) {
 				segment.getObject().getValue("turn:lanes:forward")
 			} else {
@@ -109,6 +118,171 @@ object TurnLanes {
 		} else {
 			segment.getObject().getValue("turn:lanes")
 		}
+		return convertReverseLanes(turnLanes)
+	}
+
+	/**
+	 * turn:lanes=reverse doesn't tell which way the u turn goes: it is made from the outermost lane,
+	 * and the values are ordered from left to right, so only a trailing "reverse" is the right one.
+	 */
+	private fun convertReverseLanes(turnLanes: String?): String? {
+		if (turnLanes == null || turnLanes == REVERSE_LANE || !turnLanes.endsWith(REVERSE_LANE)) {
+			return turnLanes
+		}
+		return turnLanes.substring(0, turnLanes.length - REVERSE_LANE.length) + REVERSE_RIGHT_LANE
+	}
+
+	/**
+	 * Unmarked lanes ("none" or empty) get the directions of the junction that the marked lanes do not
+	 * describe: the straightest one goes through, left turns fill them from the left, right turns from
+	 * the right. Example: left, through and right directions with "left|left|" give "left|left|through;right".
+	 */
+	fun convertNoneLanes(turnLanes: String, rs: RoadSplitStructure, currTurnLanes: String?): String {
+		val lanes = splitKeepingEmpty(turnLanes, "|")
+		var noneLanes = 0
+		val marked = HashSet<Int>() // turns of the marked lanes by TurnType.orderFromLeftToRight()
+		for (lane in lanes) {
+			if (isNoneLane(lane)) {
+				noneLanes++
+				continue
+			}
+			for (option in splitDroppingTrailingEmpty(lane, ";")) {
+				marked.add(laneOrder(option))
+			}
+		}
+		val markedLeft = marked.count { it < 0 }
+		val markedRight = marked.count { it > 0 }
+		val allAngles = ArrayList(rs.attachedAngles)
+		allAngles.add(rs.currentDeviation)
+		allAngles.sortWith { c1, c2 -> c2.compareTo(c1) }
+		val angles = ArrayList<Double>()
+		var through: Double? = null
+
+		// get through by angles (rough)
+		for (angle in allAngles) {
+			val order = turnOrder(angle)
+			if (order != 0 && (if (order < 0) markedLeft else markedRight) > 0) {
+				continue
+			}
+			angles.add(angle)
+			val best = through
+			if (abs(angle) <= TURN_DEGREE_MIN && (best == null || abs(angle) < abs(best))) {
+				through = angle
+			}
+		}
+
+		// get through by marked lanes
+		val isNoneFromLeft = isNoneLane(lanes[0])
+		val isNoneFromRight = isNoneLane(lanes[lanes.size - 1])
+		val isTurnLanesContinuous = turnLanes == currTurnLanes
+		if (turnLanes.contains("through") && isNoneFromLeft != isNoneFromRight && !isTurnLanesContinuous) {
+			val ind = if (isNoneFromLeft) allAngles.size - 1 - markedRight else markedLeft
+			if (ind >= 0 && ind < allAngles.size && abs(allAngles[ind]) <= TURN_DEGREE_MIN) {
+				through = allAngles[ind]
+			}
+		}
+		val straight = through
+		if (straight != null) {
+			angles.remove(straight)
+		}
+		// the outermost unmarked lanes take the outermost directions, extra ones are stacked
+		val turns = ArrayList<Int>()
+		var rightTurns = 0
+		for (angle in angles) {
+			val order = turnOrder(angle)
+			if (order != 0 && !turns.contains(order)) {
+				turns.add(order)
+				rightTurns += if (order > 0) 1 else 0
+			}
+		}
+		val noneValues = arrayOfNulls<String>(noneLanes)
+		var leftInd = 0
+		var rightInd = noneLanes - rightTurns
+		for (order in turns) {
+			val ind = if (order < 0) min(leftInd++, noneLanes - 1) else max(rightInd++, 0)
+			val at = noneValues[ind]
+			noneValues[ind] = (if (at == null) "" else "$at;") + LANE_BY_TURN_ORDER[order + 5]
+		}
+		val res = StringBuilder()
+		var k = 0
+		for (i in lanes.indices) {
+			res.append(if (i > 0) "|" else "")
+			val value = if (isNoneLane(lanes[i])) noneValues[k++] else null
+			if (!isNoneLane(lanes[i])) {
+				res.append(lanes[i])
+			} else if (value == null) {
+				var append = "through"
+				if (i > 0 && TurnType.isRightTurn(TurnType.convertType(lanes[i - 1]))) {
+					append = lanes[i - 1]
+				} else if (i < lanes.size - 1 && TurnType.isLeftTurn(TurnType.convertType(lanes[i + 1]))) {
+					append = lanes[i + 1]
+				}
+				res.append(append)
+			} else {
+				if (!isLeftToRight(lanes, i, value)) {
+					return turnLanes
+				}
+				if (straight == null) {
+					res.append(value)
+				} else if (value.contains("right")) {
+					res.append("through;").append(value)
+				} else {
+					res.append(value).append(";through")
+				}
+			}
+		}
+		return res.toString()
+	}
+
+	/** Turns given to the unmarked lane i have to keep the left to right order with the marked lanes. */
+	private fun isLeftToRight(lanes: List<String>, i: Int, value: String): Boolean {
+		for (j in lanes.indices) {
+			for (marked in splitDroppingTrailingEmpty(lanes[j], ";")) {
+				// a lane that ends by merging says nothing about where the other lanes turn
+				if (isNoneLane(lanes[j]) || marked.startsWith("merge_to_")) {
+					continue
+				}
+				for (option in splitDroppingTrailingEmpty(value, ";")) {
+					if (if (j < i) laneOrder(marked) > laneOrder(option) else laneOrder(marked) < laneOrder(option)) {
+						return false
+					}
+				}
+			}
+		}
+		return true
+	}
+
+	private fun laneOrder(option: String): Int {
+		return TurnType.orderFromLeftToRight(TurnType.convertType(option))
+	}
+
+	private fun turnOrder(angle: Double): Int {
+		return TurnType.orderFromLeftToRight(getTurnByAngle(angle))
+	}
+
+	private fun isNoneLane(lane: String): Boolean {
+		return lane.isEmpty() || "none" == lane
+	}
+
+	private fun hasNoneLane(turnLanes: String?): Boolean {
+		if (turnLanes != null) {
+			for (lane in splitKeepingEmpty(turnLanes, "|")) {
+				if (isNoneLane(lane)) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+
+	/** A road of the same name coming back the other way: the carriageway the route is already on. */
+	private fun isOppositeWay(prevSegm: RouteSegmentResult, attached: RouteSegmentResult, deviation: Double): Boolean {
+		if (prevSegm.getObject().getOneway() == 0 || attached.getObject().getOneway() == 0) {
+			return false
+		}
+		val prevName = prevSegm.getObject().getName()
+		return !prevName.isNullOrEmpty() && prevName == attached.getObject().getName()
+				&& TurnType.isSharpOrReverse(getTurnByAngle(deviation))
 	}
 
 	/**
@@ -146,7 +320,7 @@ object TurnLanes {
 		return lanes
 	}
 
-	/** Every distinct turn the string mentions, in the order it first mentions them. */
+	/** Every distinct turn the string mentions, from left to right. */
 	@JvmStatic
 	fun getUniqTurnTypes(turnLanes: String): IntArray {
 		val turnTypes = LinkedHashSet<Int>()
@@ -157,12 +331,8 @@ object TurnLanes {
 				turnTypes.add(TurnType.convertType(laneOptions[j]))
 			}
 		}
-		val r = IntArray(turnTypes.size)
-		var i = 0
-		for (t in turnTypes) {
-			r[i++] = t
-		}
-		return r
+		// the directions of the junction from left to right, the order of the tag doesn't matter
+		return turnTypes.sortedBy { TurnType.orderFromLeftToRight(it) }.toIntArray()
 	}
 
 	/**
@@ -391,6 +561,12 @@ object TurnLanes {
 				possibleTurns[possibleTurns.size - 1]
 			} else {
 				possibleTurns[1]
+			}
+		} else {
+			// 3+ turns: use the turn of the active lanes if it is the only one there
+			val activeTurns = getPossibleTurns(oLanes, false, true)
+			if (activeTurns.size == 1) {
+				infer = activeTurns[0]
 			}
 		}
 		return infer
@@ -835,9 +1011,11 @@ object TurnLanes {
 		prevSegm: RouteSegmentResult,
 		currentSegm: RouteSegmentResult,
 		attachedRoutes: List<RouteSegmentResult>,
-		turnLanesPrevSegm: String?
+		turnLanesPrevSegm: String?,
+		prevBearingEnd: Float
 	): RoadSplitStructure {
 		val rs = RoadSplitStructure()
+		rs.currentDeviation = KMapUtils.degreesDiff(prevBearingEnd.toDouble(), currentSegm.getBearingBegin().toDouble())
 		val speakPriority = max(
 			highwaySpeakPriority(prevSegm.getObject().getHighway()),
 			highwaySpeakPriority(currentSegm.getObject().getHighway())
@@ -861,7 +1039,10 @@ object TurnLanes {
 				continue
 			}
 			val ex = KMapUtils.degreesDiff(attached.getBearingBegin().toDouble(), currentSegm.getBearingBegin().toDouble())
-			val deviation = KMapUtils.degreesDiff(prevSegm.getBearingEnd().toDouble(), attached.getBearingBegin().toDouble())
+			val deviation = KMapUtils.degreesDiff(prevBearingEnd.toDouble(), attached.getBearingBegin().toDouble())
+			if (isOppositeWay(prevSegm, attached, deviation)) {
+				continue
+			}
 			val mpi = abs(deviation)
 			val lanes = countLanesMinOne(attached)
 			val smallStraightVariation = mpi < TURN_DEGREE_MIN
@@ -873,6 +1054,7 @@ object TurnLanes {
 			ai.attachedAngle = deviation
 			ai.parsedLanes = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * PI / 180)
 			ai.lanes = lanes
+			rs.attachedAngles.add(deviation)
 
 			if (!verySharpTurn || hasSharpOrReverseLane) {
 				val attachedAngle = KMapUtils.normalizeDegrees360(attached.getBearingBegin()).toDouble()
@@ -957,7 +1139,7 @@ object TurnLanes {
 		if (split == null) {
 			val attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex())
 			if (!KAlgorithms.isEmpty(attachedRoutes)) {
-				split = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanes)
+				split = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanes, prevSegm.getBearingEnd())
 			}
 		}
 		if (split == null) {
@@ -1047,7 +1229,7 @@ object TurnLanes {
 	 */
 	@JvmStatic
 	fun getTurnLanesInfo(prevSegm: RouteSegmentResult, currentSegm: RouteSegmentResult, mainTurnType: Int): IntArray? {
-		val turnLanes = getTurnLanesString(prevSegm)
+		var turnLanes = getTurnLanesString(prevSegm)
 		val lanesArray: IntArray
 		if (turnLanes == null) {
 			val prevTurn = prevSegm.getTurnType()
@@ -1068,7 +1250,16 @@ object TurnLanes {
 				return null
 			}
 		} else {
-			lanesArray = calculateRawTurnLanes(turnLanes, mainTurnType)
+			var converted: String = turnLanes
+			if (hasNoneLane(converted)) {
+				val attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex())
+				val rs = calculateRoadSplitStructure(
+					prevSegm, currentSegm, attachedRoutes, converted, prevSegm.getBearingEnd()
+				)
+				converted = convertNoneLanes(converted, rs, getTurnLanesString(currentSegm))
+			}
+			turnLanes = converted
+			lanesArray = calculateRawTurnLanes(converted, mainTurnType)
 		}
 
 		var isSet = false
@@ -1102,17 +1293,27 @@ object TurnLanes {
 		leftSide: Boolean,
 		prevSegm: RouteSegmentResult,
 		currentSegm: RouteSegmentResult,
-		twiceRoadPresent: Boolean
+		twiceRoadPresent: Boolean,
+		prevBearingEnd: Float
 	): TurnType? {
 		val attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex())
 		if (attachedRoutes.isEmpty()) {
 			return null
 		}
-		val turnLanesPrevSegm = if (twiceRoadPresent) null else getTurnLanesString(prevSegm)
+		var turnLanesPrevSegm = if (twiceRoadPresent) null else getTurnLanesString(prevSegm)
 		// keep left/right
-		val rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm)
+		var rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevBearingEnd)
 		if (rs.roadsOnLeft + rs.roadsOnRight == 0) {
 			return null
+		}
+
+		val withNone = turnLanesPrevSegm
+		if (withNone != null && hasNoneLane(withNone)) {
+			val converted = convertNoneLanes(withNone, rs, getTurnLanesString(currentSegm))
+			if (converted != withNone) {
+				turnLanesPrevSegm = converted
+				rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, converted, prevBearingEnd)
+			}
 		}
 
 		// turn lanes exist

@@ -873,4 +873,9 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 			fragment.show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "quick_search_history";
+	}
 }

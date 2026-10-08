@@ -520,4 +520,9 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 		super.onDismiss(dialog);
 		selectedGpxFile.setSplitGroups(oldSplitGroups, app, true);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "split_segment";
+	}
 }

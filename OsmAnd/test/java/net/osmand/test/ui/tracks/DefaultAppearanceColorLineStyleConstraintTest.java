@@ -1,10 +1,7 @@
 package net.osmand.test.ui.tracks;
 
-import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.hasSibling;
 import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
@@ -14,6 +11,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static net.osmand.test.common.EspressoUtils.onDialogView;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 
 import static org.hamcrest.Matchers.allOf;
@@ -22,6 +20,7 @@ import static org.hamcrest.Matchers.not;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.compose.ui.test.junit4.ComposeTestRule;
 import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -34,9 +33,9 @@ import net.osmand.plus.configmap.tracks.appearance.DefaultAppearanceController;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.test.common.AndroidTest;
+import net.osmand.test.common.ComposePopupMenu;
 
 import org.hamcrest.Matcher;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,13 +62,15 @@ import java.io.File;
  * ({@code BaseFullScreenDialogFragment} / {@code DefaultAppearanceFragment.TAG}), not something
  * a single test can work around beyond avoiding the reopen.
  */
-@Ignore
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class DefaultAppearanceColorLineStyleConstraintTest extends AndroidTest {
 
 	@Rule
 	public ActivityScenarioRule<MapActivity> scenarioRule = new ActivityScenarioRule<>(MapActivity.class);
+
+	@Rule
+	public ComposeTestRule composeRule = ComposePopupMenu.rule();
 
 	@Test
 	public void colorAndLineStyleSolidConstraintIsEnforcedInBothDirections() {
@@ -79,78 +80,58 @@ public class DefaultAppearanceColorLineStyleConstraintTest extends AndroidTest {
 		// --- Direction 1: picking a non-solid line style forces color to Solid ---
 		selectFromCardPopup(lineStyleCardHeader(), R.string.gpx_line_style_dashed);
 
-		onView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.gpx_line_style_dashed)));
-		onView(cardSelectorTitle(colorCardHeader())).check(matches(withText(R.string.track_coloring_solid)));
+		onDialogView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.gpx_line_style_dashed)));
+		onDialogView(cardSelectorTitle(colorCardHeader())).check(matches(withText(R.string.track_coloring_solid)));
 
-		onView(allOf(withId(R.id.card_selector), isDescendantOfA(colorCardHeader()))).perform(click());
+		onDialogView(allOf(withId(R.id.card_selector), isDescendantOfA(colorCardHeader()))).perform(click());
 		Espresso.onIdle();
 
-		onView(allOf(withId(R.id.title), withText(R.string.track_coloring_solid)))
-				.inRoot(isPlatformPopup())
-				.check(matches(isDisplayed()));
-		onView(allOf(withId(R.id.title), withText(R.string.shared_string_speed)))
-				.inRoot(isPlatformPopup())
-				.check(doesNotExist());
-		onView(allOf(withId(R.id.title), withText(R.string.shared_string_original)))
-				.inRoot(isPlatformPopup())
-				.check(doesNotExist());
+		ComposePopupMenu.assertItemDisplayed(composeRule, app.getString(R.string.track_coloring_solid));
+		ComposePopupMenu.assertNoItem(composeRule, app.getString(R.string.shared_string_speed));
+		ComposePopupMenu.assertNoItem(composeRule, app.getString(R.string.shared_string_original));
 
 		// close the popup by re-confirming the only remaining option
-		onView(allOf(withId(R.id.title), withText(R.string.track_coloring_solid)))
-				.inRoot(isPlatformPopup())
-				.perform(click());
-		Espresso.onIdle();
+		ComposePopupMenu.clickItem(composeRule, app.getString(R.string.track_coloring_solid));
 
 		// reset the line style back to "Original" (instead of closing/reopening the whole
 		// dialog - see the class doc) so color is unrestricted again for Direction 2
 		selectFromCardPopup(lineStyleCardHeader(), R.string.shared_string_original);
-		onView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.shared_string_original)));
+		onDialogView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.shared_string_original)));
 
 		// --- Direction 2: picking a non-solid color forces line style to Solid ---
 		selectFromCardPopup(colorCardHeader(), R.string.shared_string_speed);
 
-		onView(cardSelectorTitle(colorCardHeader())).check(matches(withText(R.string.shared_string_speed)));
-		onView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.gpx_line_style_solid)));
+		onDialogView(cardSelectorTitle(colorCardHeader())).check(matches(withText(R.string.shared_string_speed)));
+		onDialogView(cardSelectorTitle(lineStyleCardHeader())).check(matches(withText(R.string.gpx_line_style_solid)));
 
 		// the inline style toggle must disable both non-solid options and keep "Solid" enabled
-		onView(withContentDescription(app.getString(R.string.gpx_line_style_dashed)))
+		onDialogView(withContentDescription(app.getString(R.string.gpx_line_style_dashed)))
 				.check(matches(allOf(isDescendantOfA(withId(R.id.custom_radio_buttons)), not(isEnabled()))));
-		onView(withContentDescription(app.getString(R.string.gpx_line_style_dotted)))
+		onDialogView(withContentDescription(app.getString(R.string.gpx_line_style_dotted)))
 				.check(matches(allOf(isDescendantOfA(withId(R.id.custom_radio_buttons)), not(isEnabled()))));
-		onView(withContentDescription(app.getString(R.string.gpx_line_style_solid)))
+		onDialogView(withContentDescription(app.getString(R.string.gpx_line_style_solid)))
 				.check(matches(allOf(isDescendantOfA(withId(R.id.custom_radio_buttons)), isEnabled())));
 
 		// the explanation text under the toggle must be shown
-		onView(allOf(withId(R.id.description), hasSibling(withId(R.id.segmented_button))))
+		onDialogView(allOf(withId(R.id.description), hasSibling(withId(R.id.segmented_button))))
 				.check(matches(allOf(isDisplayed(), withText(R.string.gpx_line_style_desc_unavailable_for_color))));
 
-		onView(allOf(withId(R.id.card_selector), isDescendantOfA(lineStyleCardHeader()))).perform(click());
+		onDialogView(allOf(withId(R.id.card_selector), isDescendantOfA(lineStyleCardHeader()))).perform(click());
 		Espresso.onIdle();
 
-		onView(allOf(withId(R.id.title), withText(R.string.gpx_line_style_solid)))
-				.inRoot(isPlatformPopup())
-				.check(matches(isDisplayed()));
-		onView(allOf(withId(R.id.title), withText(R.string.gpx_line_style_dashed)))
-				.inRoot(isPlatformPopup())
-				.check(doesNotExist());
-		onView(allOf(withId(R.id.title), withText(R.string.gpx_line_style_dotted)))
-				.inRoot(isPlatformPopup())
-				.check(doesNotExist());
-		onView(allOf(withId(R.id.title), withText(R.string.shared_string_original)))
-				.inRoot(isPlatformPopup())
-				.check(doesNotExist());
+		ComposePopupMenu.assertItemDisplayed(composeRule, app.getString(R.string.gpx_line_style_solid));
+		ComposePopupMenu.assertNoItem(composeRule, app.getString(R.string.gpx_line_style_dashed));
+		ComposePopupMenu.assertNoItem(composeRule, app.getString(R.string.gpx_line_style_dotted));
+		ComposePopupMenu.assertNoItem(composeRule, app.getString(R.string.shared_string_original));
 
 		// close the popup by re-confirming the only remaining option
-		onView(allOf(withId(R.id.title), withText(R.string.gpx_line_style_solid)))
-				.inRoot(isPlatformPopup())
-				.perform(click());
-		Espresso.onIdle();
+		ComposePopupMenu.clickItem(composeRule, app.getString(R.string.gpx_line_style_solid));
 
 		closeDialog();
 	}
 
 	private void closeDialog() {
-		onView(withContentDescription(app.getString(R.string.shared_string_close))).perform(click());
+		onDialogView(withContentDescription(app.getString(R.string.shared_string_close))).perform(click());
 		Espresso.onIdle();
 	}
 
@@ -167,10 +148,8 @@ public class DefaultAppearanceColorLineStyleConstraintTest extends AndroidTest {
 	}
 
 	private void selectFromCardPopup(@NonNull Matcher<View> cardHeader, int titleTextId) {
-		onView(allOf(withId(R.id.card_selector), isDescendantOfA(cardHeader))).perform(click());
-		onView(allOf(withId(R.id.title), withText(titleTextId)))
-				.inRoot(isPlatformPopup())
-				.perform(click());
+		onDialogView(allOf(withId(R.id.card_selector), isDescendantOfA(cardHeader))).perform(click());
+		ComposePopupMenu.clickItem(composeRule, app.getString(titleTextId));
 		Espresso.onIdle();
 	}
 

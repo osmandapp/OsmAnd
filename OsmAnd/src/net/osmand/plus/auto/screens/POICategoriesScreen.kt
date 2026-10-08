@@ -4,7 +4,6 @@ import android.os.Handler
 import android.os.Looper
 import androidx.car.app.CarContext
 import androidx.car.app.model.*
-import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -45,8 +44,9 @@ class POICategoriesScreen(
 
     private var selectedCategoryResult: SearchResult? = null
 
+	@Suppress("DEPRECATION") // PlaceListNavigationTemplate, needs migration to MapWithContentTemplate
 	override fun getTemplate(): Template {
-		val templateBuilder = PlaceListNavigationTemplate.Builder()
+		val templateBuilder = androidx.car.app.navigation.model.PlaceListNavigationTemplate.Builder()
 		if (!loading) {
 			val listBuilder = ItemList.Builder()
 			setupPOICategories(listBuilder)
