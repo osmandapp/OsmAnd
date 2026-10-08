@@ -5,13 +5,9 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.slider.RangeSlider
 import net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID
 import net.osmand.plus.R
 import net.osmand.plus.base.AppModeDependentComponent
@@ -28,16 +24,16 @@ import net.osmand.plus.widgets.ui.SliderListItem
 
 /**
  * Travel speed of a profile: the default speed, the speed range it has to stay in, and whether
- * the arrival time follows the measured speed. The speed range starts collapsed.
+ * the arrival time follows the measured speed.
  */
 class DefaultSpeedFragment : BaseMaterialFragment() {
 
 	private lateinit var speedHelper: VehicleSpeedHelper
 	private lateinit var config: VehicleSpeedHelper.SpeedConfig
 	private lateinit var defaultSpeedRow: SliderListItem
+	private lateinit var speedRangeRow: SliderListItem
 	private lateinit var adaptSpeedRow: SettingRow
 	private lateinit var intervalRow: SliderListItem
-	private var rangeExpanded = false
 	private var routingChanged = false
 
 	override fun getStatusBarColorId(): Int =
@@ -45,7 +41,6 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		rangeExpanded = savedInstanceState?.getBoolean(STATE_RANGE_EXPANDED) == true
 		speedHelper = VehicleSpeedHelper(osmandApp, appMode)
 	}
 
@@ -54,18 +49,27 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
-		config = speedHelper.createSpeedConfig()
 		val view = inflater.inflate(R.layout.fragment_default_speed, container, false)
 		setupToolbar(view)
-		setupDefaultSpeed(view)
-		setupSpeedRange(view)
-		setupArrivalTime(view)
-		return view
-	}
 
-	override fun onSaveInstanceState(outState: Bundle) {
-		super.onSaveInstanceState(outState)
-		outState.putBoolean(STATE_RANGE_EXPANDED, rangeExpanded)
+		defaultSpeedRow = SliderListItem(view.findViewById(R.id.default_speed_row))
+		defaultSpeedRow.setTitle(R.string.default_speed_setting_title)
+		speedRangeRow = SliderListItem(view.findViewById(R.id.speed_range_row))
+		speedRangeRow.setTitle(R.string.speed_range)
+
+		adaptSpeedRow = SettingRow(view.findViewById(R.id.adapt_speed_row))
+		adaptSpeedRow.setIcon(null)
+		adaptSpeedRow.setTitle(R.string.eta_adapt_to_my_speed)
+		adaptSpeedRow.setOnClickListener {
+			val pref = settings().ETA_USE_AVERAGE_SPEED
+			pref.setModeValue(appMode, !pref.getModeValue(appMode))
+			updateArrivalTime(view)
+		}
+		intervalRow = SliderListItem(view.findViewById(R.id.interval_row))
+		intervalRow.setTitle(R.string.shared_string_interval)
+
+		bindValues(view)
+		return view
 	}
 
 	override fun onDestroyView() {
@@ -93,11 +97,19 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		}
 	}
 
-	private fun setupDefaultSpeed(view: View) {
-		defaultSpeedRow = SliderListItem(view.findViewById(R.id.default_speed_row))
-		defaultSpeedRow.setTitle(R.string.default_speed_setting_title)
+	/** Puts the stored values on the screen - also after a reset, the slider bounds depend on them. */
+	private fun bindValues(view: View) {
+		config = speedHelper.createSpeedConfig()
 		updateDefaultSpeed()
 		SegmentedList.apply(view.findViewById(R.id.default_speed_rows))
+		bindSpeedRange(view)
+
+		intervalRow.setStops(MEASURED_INTERVALS,
+			settings().ETA_AVERAGE_SPEED_INTERVAL.getModeValue(appMode), ::formatInterval) { interval ->
+			settings().ETA_AVERAGE_SPEED_INTERVAL.setModeValue(appMode, interval)
+			updateArrivalTime(view)
+		}
+		updateArrivalTime(view)
 	}
 
 	/** The default speed can't leave the speed range, so the range is the slider scale. */
@@ -112,88 +124,37 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		}
 	}
 
-	private fun setupSpeedRange(view: View) {
-		val group: View = view.findViewById(R.id.speed_range_group)
-		group.visibility = if (config.defaultSpeedOnly) View.GONE else View.VISIBLE
+	/** Straight line profiles have no router to limit the speed, so the range is hidden. */
+	private fun bindSpeedRange(view: View) {
+		val rows: ViewGroup = view.findViewById(R.id.speed_range_rows)
+		val visibility = if (config.defaultSpeedOnly) View.GONE else View.VISIBLE
+		rows.visibility = visibility
+		view.findViewById<View>(R.id.speed_range_footer).visibility = visibility
 		if (config.defaultSpeedOnly) {
 			return
 		}
-		val slider: RangeSlider = view.findViewById(R.id.speed_range_slider)
-		slider.isSaveEnabled = false
-		slider.valueFrom = config.min.toFloat()
-		slider.valueTo = config.max.toFloat()
-		slider.stepSize = speedStep()
-		slider.setMinSeparationValue(1f)
-		slider.values = listOf(
-			config.minSpeed.coerceIn(slider.valueFrom, slider.valueTo),
-			config.maxSpeed.coerceIn(slider.valueFrom, slider.valueTo))
-		slider.addOnChangeListener { s, _, fromUser ->
-			if (fromUser) {
-				val minSpeed = roundSpeed(s.values[0])
-				val maxSpeed = roundSpeed(s.values[1])
-				if (minSpeed != config.minSpeed) {
-					config.minSpeed = minSpeed
-					appMode.setMinSpeed(minSpeed / config.ratio)
-					routingChanged = true
-				}
-				if (maxSpeed != config.maxSpeed) {
-					config.maxSpeed = maxSpeed
-					appMode.setMaxSpeed(maxSpeed / config.ratio)
-					routingChanged = true
-				}
-				val defaultSpeed = config.defaultSpeed.coerceIn(config.minSpeed, config.maxSpeed)
-				if (defaultSpeed != config.defaultSpeed) {
-					config.defaultSpeed = defaultSpeed
-					appMode.setDefaultSpeed(defaultSpeed / config.ratio)
-				}
-				updateSpeedRange(view)
-				updateDefaultSpeed()
+		speedRangeRow.setRange(config.min.toFloat(), config.max.toFloat(), speedStep(), 1f,
+			config.minSpeed, config.maxSpeed, ::formatSpeedRange) { start, end ->
+			val minSpeed = roundSpeed(start)
+			val maxSpeed = roundSpeed(end)
+			if (minSpeed != config.minSpeed) {
+				config.minSpeed = minSpeed
+				appMode.setMinSpeed(minSpeed / config.ratio)
+				routingChanged = true
 			}
+			if (maxSpeed != config.maxSpeed) {
+				config.maxSpeed = maxSpeed
+				appMode.setMaxSpeed(maxSpeed / config.ratio)
+				routingChanged = true
+			}
+			val defaultSpeed = config.defaultSpeed.coerceIn(config.minSpeed, config.maxSpeed)
+			if (defaultSpeed != config.defaultSpeed) {
+				config.defaultSpeed = defaultSpeed
+				appMode.setDefaultSpeed(defaultSpeed / config.ratio)
+			}
+			updateDefaultSpeed()
 		}
-		view.findViewById<View>(R.id.speed_range_header).setOnClickListener { toggleSpeedRange(view) }
-		view.findViewById<View>(R.id.speed_range_expand).setOnClickListener { toggleSpeedRange(view) }
-		updateSpeedRange(view)
-	}
-
-	private fun toggleSpeedRange(view: View) {
-		rangeExpanded = !rangeExpanded
-		updateSpeedRange(view)
-	}
-
-	private fun updateSpeedRange(view: View) {
-		val text = getString(R.string.ltr_or_rtl_combine_via_space,
-			getString(R.string.ltr_or_rtl_combine_via_dash,
-				speedHelper.formatSpeed(config, config.minSpeed),
-				speedHelper.formatSpeed(config, config.maxSpeed)),
-			config.units)
-		view.findViewById<TextView>(R.id.speed_range_value).text = text
-		val slider: RangeSlider = view.findViewById(R.id.speed_range_slider)
-		slider.visibility = if (rangeExpanded) View.VISIBLE else View.GONE
-		ViewCompat.setStateDescription(slider, text)
-		val expand: MaterialButton = view.findViewById(R.id.speed_range_expand)
-		expand.setIconResource(if (rangeExpanded) R.drawable.ic_action_arrow_up else R.drawable.ic_action_arrow_down)
-		expand.contentDescription = getString(if (rangeExpanded) R.string.shared_string_collapse else R.string.show_more)
-	}
-
-	private fun setupArrivalTime(view: View) {
-		adaptSpeedRow = SettingRow(view.findViewById(R.id.adapt_speed_row))
-		adaptSpeedRow.setIcon(null)
-		adaptSpeedRow.setTitle(R.string.eta_adapt_to_my_speed)
-		adaptSpeedRow.setOnClickListener {
-			val pref = settings().ETA_USE_AVERAGE_SPEED
-			pref.setModeValue(appMode, !pref.getModeValue(appMode))
-			updateArrivalTime(view)
-		}
-
-		/* the same steps as the Average speed widget */
-		intervalRow = SliderListItem(view.findViewById(R.id.interval_row))
-		intervalRow.setTitle(R.string.shared_string_interval)
-		intervalRow.setStops(MEASURED_INTERVALS,
-			settings().ETA_AVERAGE_SPEED_INTERVAL.getModeValue(appMode), ::formatInterval) { interval ->
-			settings().ETA_AVERAGE_SPEED_INTERVAL.setModeValue(appMode, interval)
-			updateArrivalTime(view)
-		}
-		updateArrivalTime(view)
+		SegmentedList.apply(rows)
 	}
 
 	private fun updateArrivalTime(view: View) {
@@ -220,18 +181,20 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		settings().ETA_USE_AVERAGE_SPEED.resetModeToDefault(appMode)
 		settings().ETA_AVERAGE_SPEED_INTERVAL.resetModeToDefault(appMode)
 		routingChanged = true
-		/* the slider bounds depend on the stored speeds, so the screen is built again */
-		val manager = parentFragmentManager
-		if (!manager.isStateSaved) {
-			manager.beginTransaction().detach(this).commitNow()
-			manager.beginTransaction().attach(this).commitNow()
-		}
+		view?.let { bindValues(it) }
 	}
 
 	private fun settings() = osmandSettings
 
 	private fun formatSpeed(speed: Float): String =
 		getString(R.string.ltr_or_rtl_combine_via_space, speedHelper.formatSpeed(config, speed), config.units)
+
+	private fun formatSpeedRange(minSpeed: Float, maxSpeed: Float): String =
+		getString(R.string.ltr_or_rtl_combine_via_space,
+			getString(R.string.ltr_or_rtl_combine_via_dash,
+				speedHelper.formatSpeed(config, minSpeed),
+				speedHelper.formatSpeed(config, maxSpeed)),
+			config.units)
 
 	private fun formatInterval(millis: Long): String =
 		if (millis < 60_000L) {
@@ -249,7 +212,6 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 	}
 
 	companion object {
-		private const val STATE_RANGE_EXPANDED = "range_expanded"
 
 		@JvmStatic
 		fun showInstance(activity: FragmentActivity, appMode: ApplicationMode) {

@@ -20,6 +20,7 @@ import net.osmand.plus.R
  *   text, never the position of the handle.
  * - Stops ([setTickVisible]) only for a discrete scale - a fixed set of values. A continuous scale
  *   has no stops.
+ * - Two handles (`Slider=Two` in Figma) are the native range slider of the same row, see [setRange].
  */
 class SliderListItem(val view: View) {
 
@@ -96,6 +97,28 @@ class SliderListItem(val view: View) {
 		bind(from, to, stepSize, listOf(value),
 			{ values -> formatValue(values[0]) },
 			{ values -> onValueChanged(values[0]) })
+	}
+
+	/**
+	 * Two handles for a lower and an upper bound on a continuous scale. [minSeparation] keeps the
+	 * handles apart, in the units of the scale. The value text names both bounds.
+	 *
+	 * @param onValuesChanged commits the bounds, called when the user moves a handle.
+	 */
+	fun setRange(
+		from: Float,
+		to: Float,
+		stepSize: Float,
+		minSeparation: Float,
+		start: Float,
+		end: Float,
+		formatValues: (Float, Float) -> CharSequence,
+		onValuesChanged: (Float, Float) -> Unit
+	) {
+		slider.setMinSeparationValue(minSeparation)
+		bind(from, to, stepSize, listOf(start, end),
+			{ values -> formatValues(values[0], values[1]) },
+			{ values -> onValuesChanged(values[0], values[1]) })
 	}
 
 	private fun bind(
