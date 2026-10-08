@@ -13,39 +13,44 @@ public class SpeedCameraFilter {
 	private final Set<String> visitedFrom = new HashSet<>();
 	private final Set<String> visitedTo = new HashSet<>();
 
-	// returns false if the speed camera alarm at this point belongs only to opposite directions
-	public boolean visitPoint(RouteDataObject rdo, int pointInd) {
-		String[] names = rdo.getPointNames(pointInd);
-		int[] nameTypes = rdo.getPointNameTypes(pointInd);
-		if (names == null || nameTypes == null) {
-			return true;
-		}
-		for (int i = 0; i < nameTypes.length && i < names.length; i++) {
-			if (isRelationIdType(rdo, nameTypes[i])) {
-				return visitRelations(names[i]);
-			}
-		}
-		return true;
-	}
-
-	public static boolean isRelationIdType(RouteDataObject rdo, int nameType) {
+	public static boolean isSpeedCameraRelationIdTag(RouteDataObject rdo, int nameType) {
 		return RELATION_ID_TAG.equals(rdo.region.quickGetEncodingRule(nameType).getTag());
 	}
 
-	private boolean visitRelations(String relations) {
-		boolean hasFrom = false;
-		boolean alarm = false;
-		for (String relation : relations.split(", ")) {
-			int roleInd = relation.lastIndexOf(':');
-			String id = relation.substring(0, roleInd);
-			if ("from".equals(relation.substring(roleInd + 1))) {
-				hasFrom = true;
-				alarm |= !visitedTo.contains(id);
-				visitedFrom.add(id);
-			} else if (!visitedFrom.contains(id)) {
-				visitedTo.add(id);
+	// returns true if the speed camera alarm at this point belongs only to opposite directions
+	public boolean checkIsHidenSpeedCamera(RouteDataObject rdo, int pointIndex) {
+		String[] names = rdo.getPointNames(pointIndex);
+		int[] nameTypes = rdo.getPointNameTypes(pointIndex);
+		if (names != null && nameTypes != null) {
+			for (int i = 0; i < nameTypes.length && i < names.length; i++) {
+				if (isSpeedCameraRelationIdTag(rdo, nameTypes[i])) {
+					return shouldHideNodeAlarm(names[i]);
+				}
 			}
 		}
-		return !hasFrom || alarm;
+		return false;
+	}
+
+	private boolean shouldHideNodeAlarm(String nodeRelationsTags) {
+		boolean nodeHasFromRole = false;
+		boolean shouldAddAlarm = false;
+		for (String relationTag : nodeRelationsTags.split(", ")) {
+			int separatorIndex = relationTag.lastIndexOf(':');
+			String relationId = relationTag.substring(0, separatorIndex);
+			String role = relationTag.substring(separatorIndex + 1);
+			
+			if (role.equals("from")) {
+				nodeHasFromRole = true;
+				visitedFrom.add(relationId);
+				if (!visitedTo.contains(relationId)) {
+					// moving forward: "from" -> "to". Add speedcam alarm.
+					shouldAddAlarm = true;
+				}
+			} else if (!visitedFrom.contains(relationId)) {
+				// moving backward: "to" -> "from". Dan't add speedcam alarm.
+				visitedTo.add(relationId);
+			}
+		}
+		return nodeHasFromRole && !shouldAddAlarm;
 	}
 }
