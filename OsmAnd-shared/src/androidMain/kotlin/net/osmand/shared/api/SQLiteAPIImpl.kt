@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Context.MODE_ENABLE_WRITE_AHEAD_LOGGING
 import android.content.Context.MODE_PRIVATE
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteDatabase.CREATE_IF_NECESSARY
 import android.database.sqlite.SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING
 import android.database.sqlite.SQLiteDatabase.OPEN_READONLY
@@ -22,16 +23,7 @@ class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
 
 	override fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection? {
 		val db = try {
-			val file = context.getDatabasePath(name)
-			if (readOnly && canOpenReadOnly(file)) {
-				SQLiteDatabase.openDatabase(file.path, null, OPEN_READONLY)
-			} else {
-				// openOrCreateDatabase() always opens read-write. Keep write-ahead logging on for every
-				// such open: a connection opened without it switches the file to a rollback journal,
-				// the next one switches it back, each time under an exclusive lock that starves the
-				// other connections until the busy timeout (OsmAnd-Issues #3331)
-				context.openOrCreateDatabase(name, MODE_PRIVATE or MODE_ENABLE_WRITE_AHEAD_LOGGING, null)
-			}
+			openDatabase(name, readOnly)
 		} catch (e: RuntimeException) {
 			log.error("Failed to get or create database", e)
 			null
@@ -39,12 +31,38 @@ class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
 		return db?.let { SQLiteDatabaseWrapper(it) }
 	}
 
+	private fun openDatabase(name: String, readOnly: Boolean): SQLiteDatabase {
+		if (readOnly) {
+			openReadOnly(context.getDatabasePath(name))?.let { return it }
+		}
+		// openOrCreateDatabase() always opens read-write. Keep write-ahead logging on for every such
+		// open: without it the connection switches the file to a rollback journal and the next one
+		// switches it back, each time under an exclusive lock that starves the other connections
+		// until the busy timeout (OsmAnd-Issues #3331)
+		return context.openOrCreateDatabase(name, MODE_PRIVATE or MODE_ENABLE_WRITE_AHEAD_LOGGING, null)
+	}
+
 	/**
-	 * A read-only connection can neither create the database nor roll back a hot journal left by
-	 * an interrupted rollback-journal transaction; both need a writable open first.
+	 * Opens an existing database read-only, or returns null when reads need a writable connection:
+	 * the file does not exist yet, or a hot journal left by an interrupted rollback-journal
+	 * transaction has to be rolled back first. SQLite reports the latter on the first read, not on
+	 * open, so the connection is probed with one before it is handed out.
 	 */
-	private fun canOpenReadOnly(file: File): Boolean =
-		file.exists() && File(file.path + "-journal").length() == 0L
+	private fun openReadOnly(file: File): SQLiteDatabase? {
+		if (!file.exists()) {
+			return null
+		}
+		var db: SQLiteDatabase? = null
+		try {
+			db = SQLiteDatabase.openDatabase(file.path, null, OPEN_READONLY)
+			db.version
+			return db
+		} catch (e: SQLiteException) {
+			log.warn("Cannot use $file read-only, opening it writable: $e")
+			db?.close()
+			return null
+		}
+	}
 
 	inner class SQLiteDatabaseWrapper(private val ds: SQLiteDatabase) : SQLiteConnection {
 
