@@ -75,6 +75,7 @@ public class RoutingContext {
 	public int targetSegmentInd;
 	public boolean targetTransportStop;
 	public int dijkstraMode;
+	public final ViaChainRestrictions viaChains = new ViaChainRestrictions();
 	public boolean publicTransport;
 	public HashSet<BinaryMapIndexReader> mapIndexReaderFilter = new HashSet<>();
 	public String[] regionsCoveringStartAndTargets = new String[0];
@@ -318,6 +319,7 @@ public class RoutingContext {
 										connectPoint(ts, ro, points);
 									}
 									ts.add(ro);
+									viaChains.registerRoad(ro);
 								}
 							}
 							if (excludeNotAllowed != null && ro.getId() > 0) {
