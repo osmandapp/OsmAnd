@@ -12,6 +12,8 @@ import static net.osmand.data.Amenity.WIKIMEDIA_COMMONS;
 import static net.osmand.data.Amenity.WIKI_PHOTO;
 import static net.osmand.shared.gpx.GpxUtilities.*;
 
+import net.osmand.shared.gpx.GpxUtilities;
+
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,17 +96,17 @@ public class AdditionalInfoBundle {
 	}
 
 	/**
-	 * @param genericFallbackKeys keys that must still get a generic row when the category does not
+	 * @param externalNamespaceKeys keys that must still get a generic row when the category does not
 	 *                            show default tags - stored GPX extensions from an external
-	 *                            namespace, see AmenityExtensionsHelper.getStoredExtensionFallbackKeys().
+	 *                            namespace, see getExternalNamespaceKeys().
 	 */
 	public List<AmenityTagEntry> getVisibleTags(boolean allowNoteTag, List<String> preferredLangs,
-	                                            Set<String> genericFallbackKeys) {
+	                                            Set<String> externalNamespaceKeys) {
 		PoiCategory category = getCategory();
 		Map<String, List<PoiType>> collectedPoiTypes = new LinkedHashMap<>();
 
 		List<AmenityTagEntry> entries = collectPlainRows(allowNoteTag, preferredLangs, category,
-				collectedPoiTypes, genericFallbackKeys);
+				collectedPoiTypes, externalNamespaceKeys);
 		entries.addAll(collectCollapsableGroups(category));
 		entries.addAll(collectPoiTypeGroups(category, collectedPoiTypes));
 		return entries;
@@ -112,7 +115,7 @@ public class AdditionalInfoBundle {
 	private List<AmenityTagEntry> collectPlainRows(boolean allowNoteTag, List<String> preferredLangs,
 	                                               PoiCategory category,
 	                                               Map<String, List<PoiType>> collectedPoiTypes,
-	                                               Set<String> genericFallbackKeys) {
+	                                               Set<String> externalNamespaceKeys) {
 		boolean showDefaultTags = isDefaultForCategory();
 		List<AmenityTagEntry> entries = new ArrayList<>();
 		AmenityTagEntry cuisineEntry = null;
@@ -135,7 +138,7 @@ public class AdditionalInfoBundle {
 				continue;
 			}
 			if (additionalType == null && categoryType == null && !showDefaultTags
-					&& !genericFallbackKeys.contains(key)) {
+					&& !externalNamespaceKeys.contains(key)) {
 				continue;
 			}
 
@@ -160,7 +163,7 @@ public class AdditionalInfoBundle {
 				} else {
 					entries.add(new AmenityTagEntry.Builder(key)
 							.setValue(strValue)
-							.setOrder(PoiType.DEFAULT_ORDER)
+							.setOrder(getGenericOrder(key))
 							.setResolvedType(resolvedType)
 							.setIsDescription(key.contains(Amenity.DESCRIPTION))
 							.build());
@@ -367,6 +370,31 @@ public class AdditionalInfoBundle {
 		this.filteredAdditionalInfo = null;
 		this.localizedAdditionalInfo = null;
 		this.customHiddenExtensions = customHiddenExtensions;
+	}
+
+	/**
+	 * Collects the keys stored on a point that came from an external GPX namespace, for example
+	 * "test:country" or "gpxx:city". Only these may fall back to a generic row when OsmAnd's POI
+	 * logic does not recognize them; an unqualified key is an OsmAnd field ("hidden",
+	 * "visited_date"), and the OsmAnd, Garmin sensor and Amenity namespaces are OsmAnd's own data.
+	 */
+	public static Set<String> getExternalNamespaceKeys(Map<String, String> storedExtensions) {
+		Set<String> fallbackKeys = new HashSet<>();
+		for (String key : storedExtensions.keySet()) {
+			if (key.contains(":") && !key.startsWith(":")
+					&& !key.startsWith(AMENITY_PREFIX) && !key.startsWith(OSM_PREFIX)
+					&& !key.startsWith(OSMAND_EXTENSIONS_PREFIX) && !key.startsWith(GPXTPX_PREFIX)) {
+				fallbackKeys.add(key);
+			}
+		}
+		return fallbackKeys;
+	}
+
+	// a Garmin address reads street, city, state, postal code, country; other generic rows sort by name
+	public static int getGenericOrder(String key) {
+		List<String> addressKeys = GpxUtilities.INSTANCE.getGPXX_ADDRESS_KEYS();
+		int index = addressKeys.indexOf(key);
+		return index < 0 ? PoiType.DEFAULT_ORDER : PoiType.DEFAULT_ORDER - addressKeys.size() + index;
 	}
 
 	public PoiType getPoiAdditionalType(String key, String vl) {
