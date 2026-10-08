@@ -54,6 +54,8 @@ public class SpatialSearchRanking {
 	private static final double TYPE_LANDMARK = 0.80;
 	private static final double TYPE_BUILDING = 0.75;
 	private static final double TYPE_BOUNDARY = 0.60;
+	/** a boundary whose centre is this close to a place's is a district of that place */
+	private static final double DISTRICT_OF_PLACE_KM = 15;
 	private static final double TYPE_STREET = 0.55; // above a stop, below a village: pref-0106
 	private static final double TYPE_POI = 0.50;
 	private static final double TYPE_POSTCODE = 0.40;
@@ -214,29 +216,37 @@ public class SpatialSearchRanking {
 			// matched through the poi category key: "farm" -> Podere Colombaio
 			return NAME_KIND_ONLY;
 		}
-		String queried = queriedWords(ref);
+		String queried = queriedWords(ref, false);
 		if (queried.isEmpty()) {
 			return NAME_OTHER;
 		}
+		// the dot that marks the last word incomplete while typing is not a part of the name: "main." is
+		// "... Main"; a dot of the name itself ("о. Пасхи", "2. Sokak") is kept by the first form
+		String noDot = queriedWords(ref, true);
 		// any language the object carries, not only the default one: pref-0125
 		double best = NAME_OTHER;
 		if (atom.object != null) {
-			best = Math.max(best, compareToName(atom.object.getName(), queried));
+			best = Math.max(best, compareToName(atom.object.getName(), queried, noDot));
 			// alternative names cost a map per result: worth it only for a rated object
 			Map<String, String> names = best == NAME_EXACT || atom.elo <= 0 ? null
 					: atom.object.getNamesMap(true);
 			if (names != null) {
 				for (String n : names.values()) {
-					best = Math.max(best, compareToName(n, queried));
+					best = Math.max(best, compareToName(n, queried, noDot));
 					if (best == NAME_EXACT) {
 						return NAME_EXACT;
 					}
 				}
 			}
 		} else {
-			best = Math.max(best, compareToName(atom.name, queried));
+			best = Math.max(best, compareToName(atom.name, queried, noDot));
 		}
 		return best;
+	}
+
+	private double compareToName(String rawName, String queried, String noDot) {
+		double res = compareToName(rawName, queried);
+		return res == NAME_EXACT || noDot.equals(queried) ? res : Math.max(res, compareToName(rawName, noDot));
 	}
 
 	private double compareToName(String rawName, String queried) {
@@ -315,7 +325,7 @@ public class SpatialSearchRanking {
 			NameIndexAtom second = ref.atom;
 			// named, not reached through an alias ("apple" finds New York): pref-0121
 			if ((second.isCity() || second.isCityVillage() || second.isBoundary())
-					&& matchesWholeName(ref)) {
+					&& matchesWholeName(ref) && !isDistrictOfPlace(r.objs.get(0).atom, second)) {
 				parts = 1;
 			}
 		}
@@ -323,6 +333,23 @@ public class SpatialSearchRanking {
 			parts = 2;
 		}
 		return parts;
+	}
+
+	/**
+	 * A place in a district that lies inside it adds nothing to the place: "Stuttgart Hauptbahnhof" is the
+	 * station, not the city in its own district "Hauptbahnhof" (pref-0163, pref-0168). A city in its state
+	 * ("Portland Oregon") still reads as one answer: the state is not near the city's centre.
+	 */
+	private boolean isDistrictOfPlace(NameIndexAtom first, NameIndexAtom second) {
+		if (!second.isBoundary() || !(first.isGeoArea() || isPlace(first, subType(first)))) {
+			return false;
+		}
+		LatLon a = first.object == null ? null : first.object.getLocation();
+		LatLon b = second.object == null ? null : second.object.getLocation();
+		double km = a != null && b != null ? MapUtils.getDistance(a, b) / 1000.0
+				: MapUtils.squareRootDist31(first.coords.x16 << 15, first.coords.y16 << 15,
+						second.coords.x16 << 15, second.coords.y16 << 15) / 1000.0;
+		return km <= DISTRICT_OF_PLACE_KM;
 	}
 
 	/** a query word is the name of a POI category ("farm", "furt", "parkplatz") */
@@ -388,18 +415,21 @@ public class SpatialSearchRanking {
 		return o instanceof Amenity a && !Algorithms.isEmpty(a.getAdditionalInfo(Amenity.WIKIDATA));
 	}
 
-	private String queriedWords(SpatialSearchResultRef ref) {
+	private String queriedWords(SpatialSearchResultRef ref, boolean dropIncompleteDot) {
 		List<SpatialSearchToken> tokens = ref.tokens;
 		if (tokens == null || tokens.isEmpty()) {
 			return "";
 		}
 		StringBuilder sb = new StringBuilder();
 		for (SpatialSearchToken t : tokens) {
-			if (t.word != null && !t.word.isEmpty()) {
+			String w = dropIncompleteDot && t.incomplete && t.word != null
+					&& t.word.endsWith(SpatialSearchToken.DOT_INCOMPLETE_STRING)
+					? t.word.substring(0, t.word.length() - 1) : t.word;
+			if (w != null && !w.isEmpty()) {
 				if (sb.length() > 0) {
 					sb.append(' ');
 				}
-				sb.append(t.word);
+				sb.append(w);
 			}
 		}
 		return normalizeName(sb.toString());
