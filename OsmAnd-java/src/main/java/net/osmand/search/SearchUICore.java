@@ -656,6 +656,7 @@ public class SearchUICore {
 				? new SpatialAmenityTypesAPI(poiTypes)
 				: new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
+		// one instance for both apis: one poi type index and one name-index cache
 		SpatialTextSearchAPI spatialTextSearchAPI = useSpatialSearch ? new SpatialTextSearchAPI(poiTypes) : null;
 		apis.add(useSpatialSearch
 				? new SpatialCategoryAmenityByTypeAPI(poiTypes, spatialTextSearchAPI)
@@ -744,8 +745,9 @@ public class SearchUICore {
 			this.spatialTextSearchAPI = spatialTextSearchAPI;
 		}
 
-		// an attribute (healthcare:speciality, diet) is indexed for all its types,
-		// the type filter reads only the types that declare it (#24941)
+		// attribute categories (healthcare:speciality, cuisine, diet) come from the name index:
+		// the type filter reads only the types that declare the attribute (#24941).
+		// Plain types keep the type filter, it reads every object.
 		@Override
 		protected List<Amenity> searchByCategoryIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
 		                                              AbstractPoiType poiType, QuadRect bbox31) throws IOException {

@@ -1485,17 +1485,12 @@ public class SearchCoreFactory {
 				}
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(radius);
 				Set<String> searchedPois = new TreeSet<>();
-				List<Amenity> categoryAmenities = selectedPoiType == null ? null
+				List<Amenity> indexed = selectedPoiType == null ? null
 						: searchByCategoryIndex(phrase, resultMatcher, selectedPoiType, bbox);
-				if (categoryAmenities != null) {
+				if (indexed != null) {
 					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, null,
 							searchedPois, poiAdditionals, countExtraWords);
-					for (Amenity amenity : categoryAmenities) {
-						if (rm.isCancelled()) {
-							break;
-						}
-						rm.publish(amenity);
-					}
+					indexed.forEach(rm::publish);
 					return true;
 				}
 				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
@@ -1515,7 +1510,7 @@ public class SearchCoreFactory {
 			return true;
 		}
 
-		// null - read the poi sections of the maps with the type filter
+		// objects of the category from the name index, or null to read the maps with the type filter
 		protected List<Amenity> searchByCategoryIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
 		                                              AbstractPoiType poiType, QuadRect bbox31) throws IOException {
 			return null;

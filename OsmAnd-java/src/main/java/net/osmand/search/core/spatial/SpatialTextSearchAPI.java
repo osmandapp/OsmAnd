@@ -125,7 +125,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		QuadRect bboxLatLon = new QuadRect(MapUtils.get31LongitudeX((int) bbox31.left),
 				MapUtils.get31LatitudeY((int) bbox31.top), MapUtils.get31LongitudeX((int) bbox31.right),
 				MapUtils.get31LatitudeY((int) bbox31.bottom));
-		// list shows every object: zoom 17+ turns off the per-tile thinning of the map layer
+		// the list needs every object: at this zoom the per-tile thinning of the map layer is off
 		SpatialTextSearchSettings settings = SpatialTextSearchSettings.searchPoiByCategorySettings(PREFERRED_POI_ZOOM,
 				bboxLatLon);
 		List<BinaryMapIndexReader> files = new ArrayList<>();
