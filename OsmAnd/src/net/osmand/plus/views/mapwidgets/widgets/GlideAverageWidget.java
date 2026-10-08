@@ -114,7 +114,7 @@ public class GlideAverageWidget extends GlideBaseWidget {
 		}
 		String unit;
 		float speed;
-		if (settings.ALTITUDE_METRIC.get().shouldUseFeet()) {
+		if (settings.SPEED_SYSTEM.get().getImperial()) {
 			speed = (float) (metersPerSecond * OsmAndFormatter.FEET_IN_ONE_METER);
 			unit = getString(R.string.ltr_or_rtl_combine_via_slash, getString(R.string.foot), getString(R.string.shared_string_sec));
 		} else {
