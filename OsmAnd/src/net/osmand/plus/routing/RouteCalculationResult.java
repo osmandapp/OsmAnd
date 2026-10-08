@@ -523,7 +523,7 @@ public class RouteCalculationResult {
 						String pointName = pointNames[t];
 						if (Algorithms.isEmpty(pointName)
 								|| pointName.equals(currentExitRef) || pointName.equals(currentExitName)
-								|| SpeedCameraFilter.isSpeedCameraRelationIdTag(s.getObject(), pointNameTypes[t])) {
+								|| SpeedCameraFilter.isSpeedCameraRelationsInfoTag(s.getObject(), pointNameTypes[t])) {
 							continue;
 						}
 						description += " " + pointName;
