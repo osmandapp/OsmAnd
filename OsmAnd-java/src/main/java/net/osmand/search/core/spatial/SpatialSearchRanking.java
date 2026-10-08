@@ -54,6 +54,8 @@ public class SpatialSearchRanking {
 	private static final double TYPE_LANDMARK = 0.80;
 	private static final double TYPE_BUILDING = 0.75;
 	private static final double TYPE_BOUNDARY = 0.60;
+	/** a boundary whose centre is this close to a place's is a district of that place */
+	private static final double DISTRICT_OF_PLACE_KM = 15;
 	private static final double TYPE_STREET = 0.55; // above a stop, below a village: pref-0106
 	private static final double TYPE_POI = 0.50;
 	private static final double TYPE_POSTCODE = 0.40;
@@ -323,7 +325,7 @@ public class SpatialSearchRanking {
 			NameIndexAtom second = ref.atom;
 			// named, not reached through an alias ("apple" finds New York): pref-0121
 			if ((second.isCity() || second.isCityVillage() || second.isBoundary())
-					&& matchesWholeName(ref)) {
+					&& matchesWholeName(ref) && !isDistrictOfPlace(r.objs.get(0).atom, second)) {
 				parts = 1;
 			}
 		}
@@ -331,6 +333,23 @@ public class SpatialSearchRanking {
 			parts = 2;
 		}
 		return parts;
+	}
+
+	/**
+	 * A place in a district that lies inside it adds nothing to the place: "Stuttgart Hauptbahnhof" is the
+	 * station, not the city in its own district "Hauptbahnhof" (pref-0163, pref-0168). A city in its state
+	 * ("Portland Oregon") still reads as one answer: the state is not near the city's centre.
+	 */
+	private boolean isDistrictOfPlace(NameIndexAtom first, NameIndexAtom second) {
+		if (!second.isBoundary() || !(first.isGeoArea() || isPlace(first, subType(first)))) {
+			return false;
+		}
+		LatLon a = first.object == null ? null : first.object.getLocation();
+		LatLon b = second.object == null ? null : second.object.getLocation();
+		double km = a != null && b != null ? MapUtils.getDistance(a, b) / 1000.0
+				: MapUtils.squareRootDist31(first.coords.x16 << 15, first.coords.y16 << 15,
+						second.coords.x16 << 15, second.coords.y16 << 15) / 1000.0;
+		return km <= DISTRICT_OF_PLACE_KM;
 	}
 
 	/** a query word is the name of a POI category ("farm", "furt", "parkplatz") */
