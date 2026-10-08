@@ -658,6 +658,14 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			uniqueIdsResults.clear();
 			extraIdsResults.clear();
 			List<SpatialSearchResult> result = new ArrayList<>();
+			// the same osm object can come without wikidata from one map and with it from another (Khotiv, #25940)
+			Map<Long, String> wikidataByOsmId = new HashMap<>();
+			for (SpatialSearchResult s : finalResult) {
+				MapObject o = s.getMainObject();
+				if (o != null && !Algorithms.isEmpty(o.getWikidata()) && s.getIdDeduplication() != -1) {
+					wikidataByOsmId.putIfAbsent(s.getIdDeduplication(), o.getWikidata());
+				}
+			}
 
 			for (SpatialSearchResult s : finalResult) {
 				boolean isUniq = true;
@@ -671,6 +679,12 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					uniqueIdsResults.put(uniqueId, s);
 				}
 				List<String> extraDuplicateKeys = s.extraDeduplicateKeys(ctx);
+				MapObject o = s.getMainObject();
+				String wikidata = o == null || !Algorithms.isEmpty(o.getWikidata()) ? null : wikidataByOsmId.get(uniqueId);
+				if (wikidata != null) {
+					extraDuplicateKeys = extraDuplicateKeys == null ? new ArrayList<>() : new ArrayList<>(extraDuplicateKeys);
+					extraDuplicateKeys.add(wikidata);
+				}
 				if (extraDuplicateKeys != null) {
 					for (String key : extraDuplicateKeys) {
 						if (extraIdsResults.containsKey(key)) {
