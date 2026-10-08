@@ -14,6 +14,7 @@ import net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DistanceToDestinationWidget;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DistanceToIntermediateDestinationWidget;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.GlideAverageWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
@@ -103,7 +104,8 @@ public class MapWidgetsFactory {
 				GlideTargetWidgetState glideWidgetState = new GlideTargetWidgetState(app, customId);
 				return new GlideTargetWidget(mapActivity, glideWidgetState, customId, panel);
 			case GLIDE_AVERAGE:
-				return new GlideAverageWidget(mapActivity, customId, panel);
+				GlideAverageWidgetState glideAverageWidgetState = new GlideAverageWidgetState(app, customId);
+				return new GlideAverageWidget(mapActivity, glideAverageWidgetState, customId, panel);
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity, customId, panel);
 			case AIDL_WIDGET:
