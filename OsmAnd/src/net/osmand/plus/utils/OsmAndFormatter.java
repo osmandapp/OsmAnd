@@ -253,11 +253,30 @@ public class OsmAndFormatter {
 	public static long getStartOfDayForTime(long time) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(time);
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
+		return getStartOfDay(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+				calendar.get(Calendar.DAY_OF_MONTH));
+	}
+
+	public static long getStartOfDay(int year, int month, int dayOfMonth) {
+		return dayCalendar(year, month, dayOfMonth).getTimeInMillis();
+	}
+
+	public static long getEndOfDay(int year, int month, int dayOfMonth) {
+		Calendar calendar = dayCalendar(year, month, dayOfMonth);
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 59);
+		calendar.set(Calendar.MILLISECOND, 999);
 		return calendar.getTimeInMillis();
+	}
+
+	// Clear time fields before constructing the local date.
+	@NonNull
+	private static Calendar dayCalendar(int year, int month, int dayOfMonth) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.clear();
+		calendar.set(year, month, dayOfMonth);
+		return calendar;
 	}
 
 	public static Date getTimeForTimeZone(long time, @NonNull String timeZone) {
@@ -987,23 +1006,25 @@ public class OsmAndFormatter {
 			}
 		} else if (outputFormat == SWISS_GRID_FORMAT) {
 			double[] swissGrid = SwissGridApproximation.convertWGS84ToLV03(new LatLon(lat, lon));
-			DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
-			formatSymbols.setDecimalSeparator('.');
-			formatSymbols.setGroupingSeparator(' ');
-			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
+			DecimalFormat swissGridFormat = createSwissGridFormat();
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		} else if (outputFormat == SWISS_GRID_PLUS_FORMAT) {
 			double[] swissGrid = SwissGridApproximation.convertWGS84ToLV95(new LatLon(lat, lon));
-			DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
-			formatSymbols.setDecimalSeparator('.');
-			formatSymbols.setGroupingSeparator(' ');
-			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
+			DecimalFormat swissGridFormat = createSwissGridFormat();
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		} else if (outputFormat == MAIDENHEAD_FORMAT) {
 			result.append(MaidenheadPoint.toMaidenhead(lat, lon));
 		}
 		String formattedCoordinates = result.toString();
 		return forceLTR ? TextDirectionUtil.markAsLTR(formattedCoordinates) : formattedCoordinates;
+	}
+
+	@NonNull
+	public static DecimalFormat createSwissGridFormat() {
+		DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
+		formatSymbols.setDecimalSeparator('.');
+		formatSymbols.setGroupingSeparator(' ');
+		return new DecimalFormat("###,###.##", formatSymbols);
 	}
 
 	private static String formatCoordinate(double coordinate, int outputType) {

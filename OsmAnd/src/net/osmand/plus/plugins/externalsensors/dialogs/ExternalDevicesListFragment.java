@@ -297,4 +297,9 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "external_devices_list";
+	}
 }

@@ -537,4 +537,9 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "import_tracks";
+	}
 }

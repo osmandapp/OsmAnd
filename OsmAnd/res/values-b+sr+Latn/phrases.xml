@@ -5225,4 +5225,17 @@
     <string name="poi_theme_western">Zapadna</string>
     <string name="poi_theme_steampunk">Stimpank</string>
     <string name="poi_theme_horror">Horor</string>
+    <string name="poi_luggage_locker">Ormarić za prtljag</string>
+    <string name="poi_payment_cash_xlt_bule_yes">La Bul</string>
+    <string name="poi_payment_cash_xlt_eusk_yes">Eusko</string>
+    <string name="poi_payment_cash_xlt_flor_yes">Florein</string>
+    <string name="poi_payment_cash_xlt_pive_yes">Pajv</string>
+    <string name="poi_payment_cash_xlt_roue_yes">Rou</string>
+    <string name="poi_payment_cash_xlt_valh_yes">Valh</string>
+    <string name="poi_payment_cash_xlt_zinn_yes">Zin</string>
+    <string name="poi_payment_contactless_xlt_bule_yes">Beskontaktno La Bul</string>
+    <string name="poi_payment_contactless_xlt_eusk_yes">Beskontaktno Eusko</string>
+    <string name="poi_payment_contactless_xlt_flor_yes">Beskontaktno Florein</string>
+    <string name="poi_disaster_help_point">Punkt za pomoć u slučaju katastrofe</string>
+    <string name="poi_hitchhiking_stop">Mesto za stopiranje</string>
 </resources>

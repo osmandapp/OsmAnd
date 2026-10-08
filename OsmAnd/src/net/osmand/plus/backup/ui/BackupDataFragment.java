@@ -104,4 +104,9 @@ public class BackupDataFragment extends BackupTypesFragment {
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull String processId) {
 		showInstance(manager, processId, new BackupDataFragment());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "backup_data";
+	}
 }

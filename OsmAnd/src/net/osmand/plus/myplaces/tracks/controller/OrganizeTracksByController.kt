@@ -22,7 +22,7 @@ import net.osmand.shared.gpx.organization.enums.OrganizeByType
 import net.osmand.util.CollectionUtils
 
 class OrganizeTracksByController(
-	val app: OsmandApplication,
+	app: OsmandApplication,
 	val appMode: ApplicationMode,
 	private val folderId: String
 ) : BaseDialogController(app) {

@@ -177,4 +177,9 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		showCameras.setIcon(getIcon(R.drawable.list_warnings_speed_camera));
 		showCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "screen_alerts";
+	}
 }

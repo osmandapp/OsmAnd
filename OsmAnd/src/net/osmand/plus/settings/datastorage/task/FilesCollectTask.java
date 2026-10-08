@@ -64,6 +64,9 @@ public class FilesCollectTask extends AsyncTask<Void, Void, String> {
 		}
 		if (documentFile.isDirectory()) {
 			File[] files = documentFile.listFiles();
+			if (files == null) {
+				return;
+			}
 			for (File file : files) {
 				if (isCancelled()) {
 					break;

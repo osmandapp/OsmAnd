@@ -150,7 +150,7 @@
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/monitoring_notification"
+		android:title="@string/trip_rec_start_from_notification"
 		tools:icon="@drawable/ic_action_notification" />
 
 	<Preference

@@ -156,7 +156,7 @@ class AisConnectionFragment : AisBaseFragment() {
 		}
 		/* stored together: the plugin reopens an open socket with the new values once */
 		plugin.applyConnectionSettings(appMode, protocol, currentHost(), currentPort().toInt())
-		requireActivity().onBackPressed()
+		requireActivity().onBackPressedDispatcher.onBackPressed()
 	}
 
 	private fun resetConnectionSettings() {

@@ -234,4 +234,9 @@ public class CountrySelectionFragment extends BaseFullScreenDialogFragment {
 			return view;
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "country_selection";
+	}
 }

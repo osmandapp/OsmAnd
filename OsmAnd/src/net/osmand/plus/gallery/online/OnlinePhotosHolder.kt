@@ -13,6 +13,7 @@ class OnlinePhotosHolder(
 
 	override fun getItems(): List<MediaItem> = getItemsByGroups(
 		OnlinePhotosGroup.MAPILLARY_AMENITY,
+		OnlinePhotosGroup.PANORAMAX_AMENITY,
 		OnlinePhotosGroup.WIKIDATA,
 		OnlinePhotosGroup.WIKIMEDIA,
 		OnlinePhotosGroup.OTHER

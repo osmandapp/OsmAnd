@@ -93,4 +93,9 @@ public class LocalTabFragment extends ChangesTabFragment {
 		}
 		return changeItems;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "backup_local_tab";
+	}
 }

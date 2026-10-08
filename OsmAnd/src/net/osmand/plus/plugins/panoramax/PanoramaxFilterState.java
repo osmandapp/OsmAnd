@@ -7,6 +7,9 @@ import static net.osmand.plus.plugins.panoramax.PanoramaxImage.TYPE_KEY;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Map;
 import java.util.Objects;
 
@@ -25,13 +28,31 @@ public final class PanoramaxFilterState {
 	private final long from;
 	private final long to;
 	private final boolean panoOnly;
+	// Derived, but part of the identity below: the same millis land on different days per zone.
+	private final LocalDate fromDate;
+	private final LocalDate toDate;
 
 	public PanoramaxFilterState(boolean enabled, @Nullable String userKey, long from, long to, boolean panoOnly) {
+		this(enabled, userKey, from, to, panoOnly, ZoneId.systemDefault());
+	}
+
+	// The zone only resolves the day boundaries below; it is not part of the state itself.
+	PanoramaxFilterState(boolean enabled, @Nullable String userKey, long from, long to, boolean panoOnly,
+	                     @NonNull ZoneId zoneId) {
 		this.enabled = enabled;
 		this.userKey = enabled && userKey != null ? userKey : "";
 		this.from = enabled ? from : 0;
 		this.to = enabled ? to : 0;
 		this.panoOnly = panoOnly;
+		this.fromDate = toLocalDate(this.from, zoneId);
+		this.toDate = toLocalDate(this.to, zoneId);
+	}
+
+	// Each boundary is the first or the last millisecond of a local day, so the day it was
+	// picked for reads back exactly and a date only feature can be compared against it.
+	@Nullable
+	private static LocalDate toLocalDate(long time, @NonNull ZoneId zoneId) {
+		return time == 0 ? null : Instant.ofEpochMilli(time).atZone(zoneId).toLocalDate();
 	}
 
 	@NonNull
@@ -59,9 +80,17 @@ public final class PanoramaxFilterState {
 				}
 			}
 			if (from != 0 || to != 0) {
-				long capturedAt = PanoramaxImage.parseCaptureTime(userData);
-				if ((from != 0 && capturedAt < from) || (to != 0 && capturedAt > to)) {
-					return true;
+				LocalDate date = PanoramaxImage.parseCaptureDate(userData);
+				if (date != null) {
+					if ((fromDate != null && date.isBefore(fromDate))
+							|| (toDate != null && date.isAfter(toDate))) {
+						return true;
+					}
+				} else {
+					long capturedAt = PanoramaxImage.parseCaptureTime(userData);
+					if ((from != 0 && capturedAt < from) || (to != 0 && capturedAt > to)) {
+						return true;
+					}
 				}
 			}
 		}
@@ -71,6 +100,25 @@ public final class PanoramaxFilterState {
 			return type == null || !TYPE_EQUIRECTANGULAR.equalsIgnoreCase(type.toString());
 		}
 		return false;
+	}
+
+	/**
+	 * Returns a versioned identity of the rendered state for the persistent raster cache.
+	 */
+	@NonNull
+	public String getCacheKey() {
+		return "v1;enabled=" + enabled
+				+ ";pano=" + panoOnly
+				+ ";from=" + from
+				+ ";to=" + to
+				+ ";fromDate=" + date(fromDate)
+				+ ";toDate=" + date(toDate)
+				+ ";user=" + userKey;
+	}
+
+	@NonNull
+	private static String date(@Nullable LocalDate date) {
+		return date == null ? "none" : date.toString();
 	}
 
 	@Override
@@ -85,11 +133,13 @@ public final class PanoramaxFilterState {
 				&& panoOnly == other.panoOnly
 				&& from == other.from
 				&& to == other.to
-				&& userKey.equals(other.userKey);
+				&& userKey.equals(other.userKey)
+				&& Objects.equals(fromDate, other.fromDate)
+				&& Objects.equals(toDate, other.toDate);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(enabled, userKey, from, to, panoOnly);
+		return Objects.hash(enabled, userKey, from, to, panoOnly, fromDate, toDate);
 	}
 }
