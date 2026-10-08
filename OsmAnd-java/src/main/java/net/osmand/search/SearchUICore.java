@@ -745,12 +745,10 @@ public class SearchUICore {
 			this.spatialTextSearchAPI = spatialTextSearchAPI;
 		}
 
-		// attribute categories (healthcare:speciality, cuisine, diet) come from the name index:
-		// the type filter reads only the types that declare the attribute (#24941).
-		// Plain types keep the type filter, it reads every object.
+		// the type filter misses an additional on types that do not declare it (#24941)
 		@Override
-		protected List<Amenity> searchByCategoryIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
-		                                              AbstractPoiType poiType, QuadRect bbox31) throws IOException {
+		protected List<Amenity> searchAdditionalByAllPoiTypesIndex(SearchPhrase phrase,
+				SearchResultMatcher resultMatcher, AbstractPoiType poiType, QuadRect bbox31) throws IOException {
 			if (!poiType.isAdditional()) {
 				return null;
 			}
