@@ -210,9 +210,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	private SearchResult convertResult(SearchPhrase phrase, SpatialSearchContext context, SpatialSearchResult ssr) {
 		SearchResult result = new SearchResult(phrase);
 
-		LatLon spatialLocation = ssr.getLatLon();
-		LatLon phraseLocation = phrase.getSettings().getOriginalLocation();
-		LatLon location = spatialLocation != null ? spatialLocation : phraseLocation; // nullable
+		LatLon location = ssr.getLatLon(); // nullable
 
 		String lang = phrase.getSettings().getLang();
 		boolean transliterate = phrase.getSettings().isTransliterate();

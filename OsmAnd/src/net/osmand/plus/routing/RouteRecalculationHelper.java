@@ -56,6 +56,7 @@ class RouteRecalculationHelper {
 	private String lastRouteCalcErrorShort;
 	private long recalculateCountInInterval;
 	private int evalWaitInterval;
+	private boolean memoryLimitExceeded; // the last navigation calculation was stopped by NativeRoutingMemoryGuard
 
 	private Set<RouteCalculationProgressListener> calculationProgressListeners = new HashSet<>();
 
@@ -97,6 +98,7 @@ class RouteRecalculationHelper {
 
 	void resetEvalWaitInterval() {
 		evalWaitInterval = 0;
+		memoryLimitExceeded = false;
 	}
 
 	void stopCalculationIfParamsNotChanged() {
@@ -232,6 +234,9 @@ class RouteRecalculationHelper {
 	                                         boolean paramsChanged, boolean onlyStartPointChanged) {
 		if (start == null || end == null) {
 			return;
+		}
+		if (memoryLimitExceeded && onlyStartPointChanged) {
+			return; // the same route would be stopped again: wait for the target points or the settings to change
 		}
 		try {
 			if (PlatformUtil.getOsmandRegions() == null || !app.getAppInitializer().isRoutingConfigInitialized()) {
@@ -401,6 +406,7 @@ class RouteRecalculationHelper {
 
 		public void stopCalculation() {
 			params.calculationProgress.isCancelled = true;
+			params.calculationProgress.memoryLimitExceeded = false; // a stop requested here wins over a stop by the memory guard
 		}
 
 		private OsmandSettings getSettings() {
@@ -416,8 +422,8 @@ class RouteRecalculationHelper {
 			OsmandSettings settings = getSettings();
 			RouteCalculationResult res = provider.calculateRouteImpl(params);
 			routingHelper.getApplication().getMemoryLog().onRouteCalculated();
-			if (params.calculationProgress.isCancelled) {
-				return;
+			if (params.calculationProgress.isCancelled && !params.calculationProgress.memoryLimitExceeded) {
+				return; // stopped by stopCalculation() or the caller; a stop by NativeRoutingMemoryGuard is an error to show
 			}
 			boolean onlineSourceWithoutInternet = !res.isCalculated() &&
 					params.mode.getRouteService().isOnline() && !settings.isInternetConnectionAvailable();
@@ -435,6 +441,9 @@ class RouteRecalculationHelper {
 					routingThreadHelper.setNewRoute(prev, res, params.start);
 				}
 			} else {
+				if (params.alternateResultListener == null) { // only the navigation route is recalculated on location updates
+					routingThreadHelper.memoryLimitExceeded = params.calculationProgress.memoryLimitExceeded;
+				}
 				evalWaitInterval = Math.max(3000, routingThreadHelper.evalWaitInterval * 3 / 2); // for Issue #3899
 				evalWaitInterval = Math.min(evalWaitInterval, 120000);
 				if (onlineSourceWithoutInternet) {

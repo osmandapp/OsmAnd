@@ -34,6 +34,7 @@ import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.IndexItem.DownloadEntry;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalOperationHelper;
+import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.ResourceManager;
@@ -719,7 +720,9 @@ public class DownloadIndexesThread {
 					}
 					checkDownload(item, time);
 				} else {
-					app.logMapDownloadEvent("failed", item, time);
+					String details = AnalyticsHelper.getDownloadFailureDetails(app,
+							downloadFileHelper.getFailureReason(), de.targetFile, item.getContentSize());
+					app.logMapDownloadEvent("failed", item, time, details);
 				}
 			}
 			return result;

@@ -111,6 +111,10 @@ public abstract class ContextMenuCardDialog {
 		updateLayers(false);
 	}
 
+	/** Called before the fragment view is torn down, while the view tree is still intact. */
+	public void onDestroyView() {
+	}
+
 	protected boolean isOrientationPortrait() {
 		return AndroidUiHelper.isOrientationPortrait(mapActivity);
 	}

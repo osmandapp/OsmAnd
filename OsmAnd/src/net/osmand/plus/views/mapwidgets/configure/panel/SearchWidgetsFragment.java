@@ -678,5 +678,10 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "search_widgets";
+	}
 }
 

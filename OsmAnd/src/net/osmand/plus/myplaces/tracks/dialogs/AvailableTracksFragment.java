@@ -607,4 +607,9 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	public void onSmartFolderRenamed(@NonNull SmartFolder smartFolder) {
 		adapter.updateItem(smartFolder);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "available_tracks";
+	}
 }

@@ -153,8 +153,6 @@ open class SolidPaletteController(
 		displayData.menuItems = menuItems
 		displayData.nightMode = nightMode
 		displayData.widthMode = PopUpMenuWidthMode.STANDARD
-		displayData.layoutId = R.layout.popup_menu_item_full_divider
-		displayData.showCompound = false
 		PopUpMenu.show(displayData)
 	}
 

@@ -54,9 +54,10 @@ public class FeedbackHelper {
 	private static final long MAX_EXCEPTION_LOG_IN_REPORT = 10 * 1024 * 1024;
 	// the newest lines of this app's logcat: ART writes every GC longer than 100 ms, blocking GC
 	// waits, monitor contention and its own abort message under the app's uid, and the buffer
-	// keeps the lines of the previous process too until it wraps
-	private static final int LOGCAT_LINES_IN_REPORT = 700;
-	private static final long MAX_LOGCAT_IN_REPORT = 256 * 1024;
+	// keeps the lines of the previous process too until it wraps; the report is sent right after
+	// the next start, which alone writes ~700 lines, so the tail must be much longer than that
+	private static final int LOGCAT_LINES_IN_REPORT = 5000;
+	private static final long MAX_LOGCAT_IN_REPORT = 1024 * 1024;
 
 	private final OsmandApplication app;
 	private final ExceptionHandler exceptionHandler;

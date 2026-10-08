@@ -17,6 +17,10 @@ public class AGpxFile extends AidlParams {
 	private boolean active;
 	private String color;
 	private AGpxFileDetails details;
+	private String activityType;
+	private String nearestCityName;
+	private double startLatitude = Double.NaN;
+	private double startLongitude = Double.NaN;
 
 	public AGpxFile(@NonNull String fileName, long modifiedTime, long fileSize, boolean active, String color, @Nullable AGpxFileDetails details) {
 		this.fileName = fileName;
@@ -75,6 +79,49 @@ public class AGpxFile extends AidlParams {
 		return details;
 	}
 
+	/**
+	 * @return activity id set for the track (e.g. "skiing", "hiking"), null if not set
+	 */
+	@Nullable
+	public String getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(@Nullable String activityType) {
+		this.activityType = activityType;
+	}
+
+	/**
+	 * @return name of the city nearest to the track start, null if unknown
+	 */
+	@Nullable
+	public String getNearestCityName() {
+		return nearestCityName;
+	}
+
+	public void setNearestCityName(@Nullable String nearestCityName) {
+		this.nearestCityName = nearestCityName;
+	}
+
+	/**
+	 * @return latitude of the track start, NaN if unknown
+	 */
+	public double getStartLatitude() {
+		return startLatitude;
+	}
+
+	/**
+	 * @return longitude of the track start, NaN if unknown
+	 */
+	public double getStartLongitude() {
+		return startLongitude;
+	}
+
+	public void setStartLocation(double latitude, double longitude) {
+		this.startLatitude = latitude;
+		this.startLongitude = longitude;
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putString("fileName", fileName);
@@ -84,6 +131,17 @@ public class AGpxFile extends AidlParams {
 		bundle.putBoolean("active", active);
 		bundle.putParcelable("details", details);
 		bundle.putString("color", color);
+		// new fields go only when present: a track list is one binder transaction (~1 MB)
+		if (activityType != null && !activityType.isEmpty()) {
+			bundle.putString("activityType", activityType);
+		}
+		if (nearestCityName != null && !nearestCityName.isEmpty()) {
+			bundle.putString("nearestCityName", nearestCityName);
+		}
+		if (!Double.isNaN(startLatitude) && !Double.isNaN(startLongitude)) {
+			bundle.putDouble("startLatitude", startLatitude);
+			bundle.putDouble("startLongitude", startLongitude);
+		}
 	}
 
 	@Override
@@ -96,5 +154,9 @@ public class AGpxFile extends AidlParams {
 		active = bundle.getBoolean("active");
 		details = bundle.getParcelable("details");
 		color = bundle.getString("color");
+		activityType = bundle.getString("activityType");
+		nearestCityName = bundle.getString("nearestCityName");
+		startLatitude = bundle.getDouble("startLatitude", Double.NaN);
+		startLongitude = bundle.getDouble("startLongitude", Double.NaN);
 	}
 }

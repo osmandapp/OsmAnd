@@ -82,9 +82,9 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginEnd="@dimen/content_padding"
-					android:layout_marginBottom="@dimen/content_padding"
+					android:layout_marginBottom="@dimen/content_padding_double"
 					android:orientation="vertical"
-					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintBottom_toTopOf="@id/magnitude_filter_button"
 					app:layout_constraintEnd_toEndOf="parent">
 
 					<net.osmand.plus.plugins.astronomy.views.StarMapButton
@@ -120,7 +120,7 @@
 					android:contentDescription="@string/shared_string_close"
 					android:elevation="4dp"
 					app:layout_constraintBottom_toBottomOf="parent"
-					app:layout_constraintEnd_toStartOf="@id/star_map_zoom_buttons"
+					app:layout_constraintEnd_toEndOf="parent"
 					app:srcCompat="@drawable/ic_layer_top"
 					app:tint="#5f6e7c" />
 
@@ -129,12 +129,13 @@
 					android:layout_width="@dimen/map_button_size"
 					android:layout_height="76dp"
 					android:layout_marginBottom="@dimen/content_padding"
+					android:layout_marginEnd="@dimen/content_padding"
 					app:cardBackgroundColor="@android:color/white"
 					app:cardCornerRadius="26dp"
 					app:cardElevation="4dp"
 					app:strokeWidth="0dp"
 					app:layout_constraintBottom_toTopOf="@id/settings_button"
-					app:layout_constraintEnd_toEndOf="@id/settings_button"
+					app:layout_constraintEnd_toEndOf="parent"
 					app:layout_constraintStart_toStartOf="@id/settings_button">
 
 					<LinearLayout

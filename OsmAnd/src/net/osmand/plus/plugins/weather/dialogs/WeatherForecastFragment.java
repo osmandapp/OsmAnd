@@ -599,4 +599,9 @@ public class WeatherForecastFragment extends BaseFullScreenFragment implements W
 			}
 		}, ANIMATION_START_DELAY);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "weather_forecast";
+	}
 }
