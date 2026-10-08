@@ -313,4 +313,9 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 			default -> null;
 		};
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "vehicle_parameters";
+	}
 }

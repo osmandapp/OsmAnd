@@ -129,7 +129,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		OsmandAidlApi api = app.getAidlApi();
 		String packName = getCallingAppPackName();
 
-		boolean enabled = packName != null && (packName.equals(app.getPackageName()) || api.isAppEnabled(packName));
+		// the app is enabled in Connected apps and the permission group of the method is granted to it
+		boolean enabled = packName != null && (packName.equals(app.getPackageName()) || api.isMethodAllowed(packName, reason));
 		LOG.info("Request AIDL API for " + reason + " from " + packName + " enabled: " + enabled);
 
 		return enabled ? api : null;

@@ -42,6 +42,7 @@ class RouteRecalculationHelper {
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2 * 60 * 1000;
 	private static final long SUGGEST_MAPS_ONLINE_SEARCH_WAITING_TIME = 60000;
+	private static final long MAX_SUPPRESSED_RECALCULATION_PROMPT_TIME = 15000;
 
 	private final OsmandApplication app;
 	private final RoutingHelper routingHelper;
@@ -55,6 +56,10 @@ class RouteRecalculationHelper {
 	private String lastRouteCalcErrorShort;
 	private long recalculateCountInInterval;
 	private int evalWaitInterval;
+	private long firstSuppressedRecalculationPromptTime;
+	private long lastSuppressedRecalculationPromptTime;
+	private boolean suppressedRecalculationPromptAnnounced;
+	private boolean memoryLimitExceeded; // the last navigation calculation was stopped by NativeRoutingMemoryGuard
 
 	private Set<RouteCalculationProgressListener> calculationProgressListeners = new HashSet<>();
 
@@ -96,6 +101,7 @@ class RouteRecalculationHelper {
 
 	void resetEvalWaitInterval() {
 		evalWaitInterval = 0;
+		memoryLimitExceeded = false;
 	}
 
 	void stopCalculationIfParamsNotChanged() {
@@ -183,8 +189,13 @@ class RouteRecalculationHelper {
 			}
 			// trigger voice prompt only if new route is in forward direction
 			// If route is in wrong direction after one more setLocation it will be recalculated
-			if (shouldAnnounceNewRoute(res) && (!wrongMovementDirection || newRoute)) {
-				getVoiceRouter().newRouteIsCalculated(newRoute);
+			if (shouldAnnounceNewRoute(res)) {
+				if (!wrongMovementDirection || newRoute) {
+					firstSuppressedRecalculationPromptTime = 0;
+					getVoiceRouter().newRouteIsCalculated(newRoute);
+				} else if (shouldAnnounceSuppressedRecalculation()) {
+					getVoiceRouter().newRouteIsCalculated(false);
+				}
 			}
 		}
 		app.getWaypointHelper().setNewRoute(res);
@@ -192,6 +203,23 @@ class RouteRecalculationHelper {
 		if (res.initialCalculation) {
 			app.runInUIThread(() -> routingHelper.recalculateRouteDueToSettingsChange(false));
 		}
+	}
+
+	// engines unaware of the movement direction (e.g. BRouter) may keep returning routes that start backwards,
+	// announce such a recalculation once per deviation instead of never (#25544)
+	private boolean shouldAnnounceSuppressedRecalculation() {
+		long now = System.currentTimeMillis();
+		if (firstSuppressedRecalculationPromptTime == 0
+				|| now - lastSuppressedRecalculationPromptTime > 4 * MAX_SUPPRESSED_RECALCULATION_PROMPT_TIME) {
+			firstSuppressedRecalculationPromptTime = now;
+			suppressedRecalculationPromptAnnounced = false;
+		}
+		lastSuppressedRecalculationPromptTime = now;
+		if (!suppressedRecalculationPromptAnnounced && now - firstSuppressedRecalculationPromptTime > MAX_SUPPRESSED_RECALCULATION_PROMPT_TIME) {
+			suppressedRecalculationPromptAnnounced = true;
+			return true;
+		}
+		return false;
 	}
 
 	private boolean shouldAnnounceNewRoute(RouteCalculationResult res) {
@@ -224,6 +252,9 @@ class RouteRecalculationHelper {
 	                                         boolean paramsChanged, boolean onlyStartPointChanged) {
 		if (start == null || end == null) {
 			return;
+		}
+		if (memoryLimitExceeded && onlyStartPointChanged) {
+			return; // the same route would be stopped again: wait for the target points or the settings to change
 		}
 		try {
 			if (PlatformUtil.getOsmandRegions() == null || !app.getAppInitializer().isRoutingConfigInitialized()) {
@@ -393,6 +424,7 @@ class RouteRecalculationHelper {
 
 		public void stopCalculation() {
 			params.calculationProgress.isCancelled = true;
+			params.calculationProgress.memoryLimitExceeded = false; // a stop requested here wins over a stop by the memory guard
 		}
 
 		private OsmandSettings getSettings() {
@@ -407,8 +439,9 @@ class RouteRecalculationHelper {
 			RouteProvider provider = routingHelper.getProvider();
 			OsmandSettings settings = getSettings();
 			RouteCalculationResult res = provider.calculateRouteImpl(params);
-			if (params.calculationProgress.isCancelled) {
-				return;
+			routingHelper.getApplication().getMemoryLog().onRouteCalculated();
+			if (params.calculationProgress.isCancelled && !params.calculationProgress.memoryLimitExceeded) {
+				return; // stopped by stopCalculation() or the caller; a stop by NativeRoutingMemoryGuard is an error to show
 			}
 			boolean onlineSourceWithoutInternet = !res.isCalculated() &&
 					params.mode.getRouteService().isOnline() && !settings.isInternetConnectionAvailable();
@@ -426,6 +459,9 @@ class RouteRecalculationHelper {
 					routingThreadHelper.setNewRoute(prev, res, params.start);
 				}
 			} else {
+				if (params.alternateResultListener == null) { // only the navigation route is recalculated on location updates
+					routingThreadHelper.memoryLimitExceeded = params.calculationProgress.memoryLimitExceeded;
+				}
 				evalWaitInterval = Math.max(3000, routingThreadHelper.evalWaitInterval * 3 / 2); // for Issue #3899
 				evalWaitInterval = Math.min(evalWaitInterval, 120000);
 				if (onlineSourceWithoutInternet) {

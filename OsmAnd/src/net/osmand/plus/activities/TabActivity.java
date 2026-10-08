@@ -18,6 +18,15 @@ public class TabActivity extends ActionBarProgressActivity {
 		return new TabItem(resId, getString(resId), fragment);
 	}
 
+	public static int resolveTabIndex(@NonNull List<TabItem> items, int storedId) {
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i).resId == storedId) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
 	public static class TabItem {
 		public final CharSequence mTitle;
 		public final Class<?> fragment;

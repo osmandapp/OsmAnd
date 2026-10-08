@@ -407,4 +407,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "profile_appearance";
+	}
 }

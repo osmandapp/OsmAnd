@@ -633,8 +633,6 @@
     <string name="simulate_your_location_stop_descr">停止模拟您的位置。</string>
     <string name="simulate_your_location_descr">使用计算得到的路线或者一条 GPX 记录模拟您的位置。</string>
     <string name="looking_up_address">查询地址</string>
-    <string name="av_locations_descr">带位置的 GPX 文件。</string>
-    <string name="av_locations">位置</string>
     <string name="plugin_settings">插件</string>
     <string name="traffic_warning_hazard">危险</string>
     <string name="rendering_value_boldOutline_name">粗边框</string>
@@ -794,7 +792,6 @@
     <string name="dahboard_options_dialog_title">配置仪表板</string>
     <string name="use_dashboard_btn">使用仪表板</string>
     <string name="dashboard_or_drawer_title">仪表板或菜单控制</string>
-    <string name="audionotes_plugin_name">音频/视频注记</string>
     <string name="rendering_value_light_brown_name">浅棕色</string>
     <string name="rendering_value_dark_brown_name">深棕色</string>
     <string name="settings_privacy">隐私</string>
@@ -1112,7 +1109,6 @@
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="specified_directiory_not_writeable">不能在指定目录中创建地图</string>
     <string name="osm_changes_added_to_local_edits">OSM 更改添加到本地的变更集</string>
-    <string name="local_recordings_delete_all_confirm">删除 %1$d 个注记？</string>
     <string name="delay_to_start_navigation">延迟开始转向导航…</string>
     <string name="parking_place_limited">停车限时</string>
     <string name="waypoint_visit_after">访问之后的</string>
@@ -1156,7 +1152,6 @@
     <string name="rename_failed">重命名失败。</string>
     <string name="back_to_map">返回地图</string>
     <string name="share_note">分享注记</string>
-    <string name="watch">查看</string>
     <string name="notes">音视频注记</string>
     <string name="free">%1$s 可用</string>
     <string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>
@@ -1372,7 +1367,6 @@
     <string name="use_magnetic_sensor">使用磁传感器</string>
     <string name="recording_context_menu_arecord">做音频注记</string>
     <string name="recording_context_menu_vrecord">录制视频注记</string>
-    <string name="layer_recordings">记录层</string>
     <string name="recording_description">正在录制 %1$s %3$s %2$s</string>
     <string name="map_widget_av_notes">音频/视频注记</string>
     <string name="audionotes_location_not_defined">轻触\"使用位置 …\"以在此添加注记。</string>
@@ -1708,8 +1702,6 @@
     <string name="will_open_at">开始营业于</string>
     <string name="will_open_on">开始营业于</string>
     <string name="additional_actions">额外的活动</string>
-    <string name="av_locations_selected_desc">GPX文件，包含所选注记的坐标和数据。</string>
-    <string name="av_locations_all_desc">GPX文件，包含所有注释的坐标和数据。</string>
     <string name="modify_the_search_query">更改搜索。</string>
     <string name="shared_string_actions">操作</string>
     <string name="shared_string_marker">标记</string>
@@ -1720,11 +1712,6 @@
     <string name="marker_activated">标记%s 已激活。</string>
     <string name="one_tap_active_descr">点击地图上的标记将其移动到活动标记的顶端, 而不打开上下文菜单。</string>
     <string name="one_tap_active">\'轻触\' 激活</string>
-    <string name="empty_state_av_notes">做注记!</string>
-    <string name="empty_state_av_notes_desc">通过使用小部件或上下文菜单将音频、视频或照片注记添加到地图上的任何点。</string>
-    <string name="notes_by_date">按日期排序的视频或音频注记</string>
-    <string name="by_date">按日期</string>
-    <string name="by_type">按类型</string>
     <string name="looking_for_tracks_with_waypoints">寻找带有路径点的轨迹</string>
     <string name="shared_string_more_without_dots">更多</string>
     <string name="appearance_on_the_map">在地图上的外观</string>
@@ -2101,7 +2088,6 @@
     <string name="plan_a_route">规划路线</string>
     <string name="photo_notes">图片注记</string>
     <string name="video_notes">视频注记</string>
-    <string name="multimedia_notes_view_descr">你的OSM注记在 %1$s。</string>
     <string name="show_closed_notes">显示已关闭的注记</string>
     <string name="osm_edit_closed_note">已关闭的 OSM 注记</string>
     <string name="add_online_source">添加在线资源</string>
@@ -4080,7 +4066,7 @@
     <string name="shared_string_show_icon">显示图标</string>
     <string name="maps_and_resources">地图和资源</string>
     <string name="smart_folder_saved">智能文件夹已保存</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="shared_string_created">已创建</string>
     <string name="app_mode_paragliding">滑翔伞</string>
     <string name="filter_by_name">按名称筛选</string>
@@ -4095,7 +4081,7 @@
     <string name="osmand_cloud_delete_account_confirmation">删除账号？</string>
     <string name="help_article_purchases_ios_name">iOS购买</string>
     <string name="sort_country_name_descending">国家名称：Z - A</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="date_of_creation">创建日期</string>
     <string name="map_is_up_to_date">%1$s 地图已为最新版本。</string>
     <string name="delete_map_description">删除 %1$s 地图吗？</string>
@@ -4562,8 +4548,6 @@
     <string name="connect_obd_instructions_step4">按 “%1$s”，然后从列表中选择您的扫描器。</string>
     <string name="connect_obd_instructions_step3">在您的设备上启用蓝牙</string>
     <string name="ais_address_settings">IP 地址设置</string>
-    <string name="ais_nmea_protocol">NMEA 数据接收协议</string>
-    <string name="ais_nmea_protocol_description">为 NMEA 数据接收选择协议</string>
     <string name="shared_string_avg_speed">最低速度</string>
     <string name="shared_string_default_view">默认视图</string>
     <string name="map_widget_route_information">路线信息</string>
@@ -4572,14 +4556,11 @@
     <string name="shared_string_key">键</string>
     <string name="routing_attr_avoid_cobblestone_description">避免鹅卵石</string>
     <string name="routing_type">路线类型</string>
-    <string name="ais_port_nmea_local_description">指定 OsmAnd 接收数据的 UDP 端口</string>
     <string name="shared_string_increase">增加</string>
     <string name="save_favorite_default_appearance">将更改应用于文件夹中已存在的点，还是仅应用于新的点？</string>
     <string name="ais_address_settings_description">选择 NMEA 协议（UDP/TCP）并定义地址</string>
     <string name="popular_places_nearby">附近的热门地点</string>
     <string name="ais_load_data">从文件载入 AIS 数据</string>
-    <string name="ais_address_nmea_server">NMEA 数据源的 IP 地址</string>
-    <string name="ais_address_nmea_server_description">为 NMEA 数据源指定 IP 地址（若使用 TCP）</string>
     <string name="calculating_indication_message">正在计算…</string>
     <string name="tomorrow">明天</string>
     <string name="calculate_size">计算大小</string>
@@ -4594,7 +4575,6 @@
     <string name="key_name_pattern">按键 “%1$s”</string>
     <string name="required_maps">需要的地图</string>
     <string name="external_device_characteristic_arterial_pressure">动脉血压</string>
-    <string name="ais_port_nmea_local">本地 NMEA 数据接收器的 UDP 端口</string>
     <string name="liter_per_hour">L/h</string>
     <string name="shared_string_decrease">减少</string>
     <string name="wikimedia">维基媒体</string>
@@ -4606,12 +4586,8 @@
     <string name="original_shape_description">每个点保留其单独的形状。</string>
     <string name="apply_to_all_points">应用至所有点</string>
     <string name="shared_string_road_exit">出口</string>
-    <string name="ais_port_nmea_server">NMEA 数据源的 TCP 端口</string>
-    <string name="ais_port_nmea_server_description">为 NMEA 数据源指定端口号</string>
-    <string name="ais_object_lost_timeouts">AIS 信号接收的超时设置</string>
     <string name="shared_string_avg_altitude">平均海拔</string>
     <string name="no_places_available">可见区域内没有地点</string>
-    <string name="ais_cpa_settings">与最近接近点相关的设置</string>
     <string name="no_photo_for_location_desc">此地点尚未添加任何用户的照片</string>
     <string name="map_widget_route_information_desc">显示预计到达时间、剩余旅行时间以及当前导航路线的距离。</string>
     <string name="default_buttons_corners_original_description">每个按钮保留其单独的圆角半径。</string>
@@ -4659,15 +4635,11 @@
     <string name="clear_all_key_shortcuts_summary">将删除所选类型的所有按键分配。</string>
     <string name="shared_string_manual">手动</string>
     <string name="rendering_attr_showClimbingRoutes_name">攀岩路线</string>
-    <string name="ais_object_lost_timeout_description">设置 AIS 对象的可见性超时： 在这段时间内未接收到信号，屏幕上的 AIS 对象将被删除。</string>
     <string name="shared_string_map_center">地图中心</string>
     <string name="show_toast_about_key_pressed">显示关于已按下按键的浮动式消息</string>
     <string name="plugin_ais_tracker_name">AIS 船只追踪器</string>
     <string name="help_article_personal_color_palette_schemes_name">颜色方案</string>
-    <string name="ais_ship_lost_timeout">未收到信号时，船舶的可见性超时时间</string>
     <string name="choose_location_on_map">在地图上选择一个位置。</string>
-    <string name="ais_ship_lost_timeout_description">设置船只可见性超时： 在此时间内没有接收到信号后，屏幕上的船只符号将改变状态： 它会被标记为划掉。</string>
-    <string name="ais_object_lost_timeout">对象丢失时的可见性超时</string>
     <string name="save_to_device_error">保存到设备错误</string>
     <string name="save_to_device">保存到设备</string>
     <string name="route_members">成员</string>
@@ -4729,10 +4701,6 @@
     <string name="rendering_attr_alpineHiking_name">徒步路线难度等级</string>
     <string name="hmd_promo_years">HMD 优惠活动，持续 %1$s 年</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="ais_cpa_warning_time">到达最近接近点 (CPA) 的预警时间</string>
-    <string name="ais_cpa_warning_time_description">如果 TCPA（与其他船只到达 CPA 的时间）小于该值，则该船将被标记为红色。</string>
-    <string name="ais_cpa_warning_distance">最近接近点（CPA）的预警距离</string>
-    <string name="ais_cpa_warning_distance_description">如果最近接近点小于该值，且最近接近点在不久的将来就会达到（请参阅达到 CPA 的警告时间设置），则会用红色标记船舶。</string>
     <string name="plugin_ais_tracker_description">显示 AIS 位置和周围船只的信息。AIS 数据通过网络从外部 AIS 接收器接收。</string>
     <string name="plugin_ais_tracker_disclaimer">免责声明\n\n本插件仅为业余爱好项目，并非为可靠性和正确性而设计。请勿以任何方式依赖本软件，包括导航和/或人身安全。</string>
     <string name="rendering_attr_showClimbingRoutes_description">显示攀岩路线</string>
@@ -5216,4 +5184,12 @@
     <string name="shared_string_archive">归档</string>
     <string name="share_favorites_with_media_description">%1$s 中的收藏点附有媒体。仅分享点，或将带媒体的点作为档案分享。</string>
     <string name="share_favorites_points_only">仅限积分</string>
+    <string name="contour_label_direction_descr">上坡方向：每个高程数值的顶部朝向地势更高的一側，如同纸质地图一般。同理，等高线的短齿线则表示下坡方向。</string>
+    <string name="rendering_attr_contourLabelDirection_name">标注方向</string>
+    <string name="rendering_value_upright_name">正向</string>
+    <string name="rendering_value_uphill_name">上坡</string>
+    <string name="shared_string_visibility">能见性</string>
+    <string name="opening_hours_public_holiday">公共假期</string>
+    <string name="opening_hours_school_holiday">学校假期</string>
+    <string name="opening_hours_easter">复活节</string>
 </resources>

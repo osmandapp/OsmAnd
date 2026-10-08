@@ -71,6 +71,8 @@ public class SearchUICore {
 	private static final int TIMEOUT_BEFORE_SEARCH = 50;
 	private static final int TIMEOUT_BEFORE_FILTER = 20;
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class);
+	// searches that got past the typing delay, over all instances; read by the memory log
+	private static final AtomicInteger SEARCHES_RUN = new AtomicInteger();
 	private SearchPhrase phrase;
 	private SearchResultCollection currentSearchResult;
 
@@ -163,7 +165,10 @@ public class SearchUICore {
 			if (Algorithms.isEmpty(sr)) {
 				return this;
 			}
-			if (resortAll) {
+			if (skipSorting) {
+				// spatial search results come sorted and deduplicated by the engine
+				this.searchResults.addAll(sr);
+			} else if (resortAll) {
 				this.searchResults.addAll(sr);
 				if (removeDuplicates) {
 					long start = System.currentTimeMillis(), size = this.searchResults.size();
@@ -394,7 +399,7 @@ public class SearchUICore {
 					if (osmId != null && osmId < 0) {
 						osmId = null; // do not merge synthetic osmId such as wiki
 					}
-					if (that.isRouteTrack()) {
+					if (that.isRouteTrack() || that.isSuperRoute()) {
 						osmId = null;
 						wikidata = null; // do not merge routes
 					}
@@ -646,7 +651,9 @@ public class SearchUICore {
 			apis.add(amenitiesApi); // classic
 		}
 		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi, internetConnectionAvailable));
-		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
+		SearchAmenityTypesAPI searchAmenityTypesAPI = useSpatialSearch
+				? new SpatialAmenityTypesAPI(poiTypes)
+				: new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
 		apis.add(useSpatialSearch
 				? new SpatialCategoryAmenityByTypeAPI(poiTypes)
@@ -710,6 +717,19 @@ public class SearchUICore {
 		@Override
 		public int getSearchPriority(SearchPhrase phrase) {
 			return phrase.isLastWord(ObjectType.STREET) ? super.getSearchPriority(phrase) : -1;
+		}
+	}
+
+	// poi categories come from the spatial engine; used only by shallowSearch (categories list)
+	private static class SpatialAmenityTypesAPI extends SearchAmenityTypesAPI {
+
+		public SpatialAmenityTypesAPI(MapPoiTypes types) {
+			super(types);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase phrase) {
+			return -1;
 		}
 	}
 
@@ -849,6 +869,10 @@ public class SearchUICore {
 		return resultCollection;
 	}
 
+	public static int getSearchesRun() {
+		return SEARCHES_RUN.get();
+	}
+
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
 		search(text, delayedExecution, matcher, null);
 	}
@@ -938,6 +962,7 @@ public class SearchUICore {
 						return;
 					}
 					performanceStats.start();
+					SEARCHES_RUN.incrementAndGet();
 					searchInternal(phrase, rm);
 					if (!rm.isCancelled()) {
 						boolean skipResultSorting = shouldSkipResultSorting(phrase);
@@ -1067,9 +1092,6 @@ public class SearchUICore {
 
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
-		if (currentSearchResult != null && currentSearchResult.hasMoreSpatialSearchResults()) {
-			return true;
-		}
 		for (SearchCoreAPI api : apis) {
 			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) >= 0
 					&& api.isSearchMoreAvailable(phrase)) {
@@ -1293,10 +1315,6 @@ public class SearchUICore {
 		@Override
 		public boolean publish(SearchResult object) {
 			sampleMemory();
-			// disable boundary for end results
-			if (object.objectType == ObjectType.BOUNDARY) {
-				return false;
-			}
 			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)
 					&& Algorithms.isEmpty(object.alternateName)) {
 				boolean updateName = false;

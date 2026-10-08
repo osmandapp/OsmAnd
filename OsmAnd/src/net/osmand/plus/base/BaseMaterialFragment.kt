@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.dialog.IOsmAndFragment
+import net.osmand.plus.feedback.AnalyticsHelper
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.enums.ThemeUsageContext
@@ -50,6 +51,9 @@ open class BaseMaterialFragment : Fragment(), IOsmAndFragment, ISupportInsets {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		osmandApp = requireActivity().application as OsmandApplication
+		if (savedInstanceState == null) {
+			AnalyticsHelper.logScreenOpen(osmandApp, analyticsScreen)
+		}
 		osmandSettings = osmandApp.settings
 		uiUtilities = osmandApp.uiUtilities
 		currentAppMode = restoreAppMode(osmandApp, null, savedInstanceState, arguments)

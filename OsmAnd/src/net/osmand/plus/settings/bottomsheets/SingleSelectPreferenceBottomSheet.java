@@ -116,6 +116,10 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 
 	@Override
 	protected void onRightBottomButtonClick() {
+		if (listPreference == null) {
+			dismiss();
+			return;
+		}
 		Object[] entryValues = listPreference.getEntryValues();
 		if (entryValues != null && selectedEntryIndex >= 0) {
 			Object value = entryValues[selectedEntryIndex];

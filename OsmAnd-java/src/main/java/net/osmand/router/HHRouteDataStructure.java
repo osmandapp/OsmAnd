@@ -89,7 +89,11 @@ public class HHRouteDataStructure {
 		public double ALT_MIN_DISTINCT_FLOOR = 300; // exact geometry filter (stage 2), meters
 		// Max detailed expansions in stage 2 (time guard). Retries of a candidate whose shortcuts
 		// disagree with the detailed roads count against it, so this is not "number of candidates".
-		public int ALT_MAX_EXPAND = 8;
+		// It only binds where alternatives are scarce: a route finds its two within a few expansions
+		// and stops. Hub sharing cannot see two chains of shortcuts over the same motorway, so on a
+		// motorway route the variants of the last few kilometres rank first and each costs an
+		// expansion (Tours -> Nouatre: the two real corridors rank 19th and 20th, ~55 ms each).
+		public int ALT_MAX_EXPAND = 20;
 		// Each leg of a candidate is a shortest path; what their concatenation can add is driving out
 		// and back - the same road twice, or down one carriageway of a dual road and up the other.
 		// Measured against the best way between the two ends of the loop, so an interchange passes.

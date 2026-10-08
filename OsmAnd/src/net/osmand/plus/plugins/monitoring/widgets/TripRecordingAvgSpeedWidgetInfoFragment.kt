@@ -88,4 +88,6 @@ class TripRecordingAvgSpeedWidgetInfoFragment : BaseSimpleWidgetInfoFragment() {
 		super.onResume()
 		updateModeSetting()
 	}
+
+	override fun getAnalyticsScreen() = "trip_recording_avg_speed_widget_info"
 }

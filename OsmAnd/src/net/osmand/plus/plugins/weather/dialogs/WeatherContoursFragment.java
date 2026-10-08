@@ -258,4 +258,9 @@ public class WeatherContoursFragment extends BaseFullScreenFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "weather_contours";
+	}
 }

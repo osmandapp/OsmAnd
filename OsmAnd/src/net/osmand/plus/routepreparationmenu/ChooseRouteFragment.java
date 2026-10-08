@@ -943,4 +943,9 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 			return Fragment.instantiate(requireContext(), RouteDetailsFragment.class.getName(), args);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "choose_route";
+	}
 }

@@ -650,6 +650,11 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 			fragment.show(childFragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "quick_search_custom_poi";
+	}
 }
 
 interface OnFiltersSelectedListener {

@@ -46,6 +46,7 @@ import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
@@ -114,6 +115,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());
 		super.onCreate(savedInstanceState);
 		currentScreenType = getCurrentScreenType();
+		if (savedInstanceState == null) {
+			AnalyticsHelper.logScreenOpen(app, getAnalyticsScreen());
+		}
 	}
 
 	@Override

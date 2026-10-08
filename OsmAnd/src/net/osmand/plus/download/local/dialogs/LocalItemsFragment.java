@@ -334,4 +334,9 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "local_items";
+	}
 }

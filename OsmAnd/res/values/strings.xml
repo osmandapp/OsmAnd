@@ -18,6 +18,63 @@
 	<string name="eta_adapt_to_my_speed">Adapt to my speed</string>
 	<string name="eta_adapt_to_my_speed_descr">Arrival time is based on your speed over the last %1$s.</string>
 	<string name="eta_adapt_to_my_speed_off_descr">Arrival time is based on the expected speed on each road of the route. Turn on to base it on how fast you actually move.</string>
+	<string name="multimedia_notes_view_descr">Your A/V notes are in %1$s.</string>
+	<string name="shared_string_file">File</string>
+	<string name="shared_string_format">Format</string>
+	<string name="shared_string_resolution">Resolution</string>
+	<string name="shared_string_attached_to">Attached to</string>
+	<string name="media_not_attached_title">Not attached to anything yet</string>
+	<string name="media_not_attached_descr">Attach this media to a favorite to see it on the map.</string>
+	<string name="detach_external_media_descr">The file will no longer be shown in this favorite. It stays on your device.</string>
+	<string name="detach_external_media_descr_plural">The files will no longer be shown in this favorite. They stay on your device.</string>
+	<string name="attach_to_favorite">Attach to favorite</string>
+	<string name="delete_media_title">Delete media?</string>
+	<string name="delete_media_descr">This file will be permanently deleted from your device. It will disappear from all favorites it\'s attached to.</string>
+	<string name="delete_media_title_plural">Delete %1$d media?</string>
+	<string name="delete_media_descr_plural">These files will be permanently deleted from your device. They will disappear from all favorites they\'re attached to.</string>
+	<string name="detach_media_title">Detach media?</string>
+	<string name="detach_media_title_plural">Detach %1$d media?</string>
+	<string name="detach_media_descr">The file will no longer be shown in this favorite. It stays on your device and in Media library.</string>
+	<string name="detach_media_descr_plural">The files will no longer be shown in this favorite. They stay on your device and in Media library.</string>
+	<string name="shared_string_detach">Detach</string>
+	<string name="media_delete_failed">Could not delete media.</string>
+	<string name="media_detach_failed">Could not detach media.</string>
+	<string name="media_library_empty_title">No media yet</string>
+	<string name="media_library_empty_descr">Take a photo, video, or audio note on the map, or attach files to a favorite. Everything you record or attach appears here.</string>
+	<string name="shared_string_grid">Grid</string>
+	<string name="shared_string_group">Group</string>
+	<string name="gallery_sort_size_large_small">Largest size first</string>
+	<string name="gallery_sort_size_small_large">Smallest size first</string>
+	<string name="media_attached_more_count">+%1$d</string>
+	<string name="latest_builds">Latest builds</string>
+	<string name="osmand_api_permission_missing">%1$s: allow \"%2$s\" in Menu › Plugins</string>
+	<string name="osmand_api_unknown_app">Blocked \"%1$s\" from an unknown app</string>
+	<string name="aidl_permissions_descr">What %1$s (%2$s) can do in OsmAnd.</string>
+	<string name="aidl_permissions_request_title">Allow %1$s to use OsmAnd?</string>
+	<string name="aidl_permissions_request_descr">%1$s\nYou can change this later in Plugins.</string>
+	<string name="aidl_app_disabled_descr">OsmAnd ignores all requests from this app.</string>
+	<string name="aidl_group_system_footer">Lets the app copy files into OsmAnd, replace your location, read logs and change the app look. Turn on only for apps you fully trust.</string>
+	<string name="aidl_permissions_deny">Don\'t allow</string>
+	<string name="aidl_group_map_descr">Move the map, show points</string>
+	<string name="aidl_group_search_descr">Find places and addresses</string>
+	<string name="aidl_group_location_descr">Your position, route and widget values</string>
+	<string name="aidl_group_navigation_descr">Start and stop navigation</string>
+	<string name="aidl_group_favorites_descr">Favorites and map markers</string>
+	<string name="aidl_group_tracks_view">Tracks: view</string>
+	<string name="aidl_group_tracks_view_descr">Read your tracks</string>
+	<string name="aidl_group_tracks_edit">Tracks: edit</string>
+	<string name="aidl_group_tracks_edit_descr">Import, show and delete</string>
+	<string name="aidl_group_recording">Trip recording</string>
+	<string name="aidl_group_recording_descr">Start, stop and view the current track</string>
+	<string name="aidl_group_notes">Notes</string>
+	<string name="aidl_group_notes_descr">Photo, audio and video notes</string>
+	<string name="aidl_group_screen">Screenshots</string>
+	<string name="aidl_group_screen_descr">Take pictures of the map screen</string>
+	<string name="aidl_group_settings_descr">Change settings and profiles</string>
+	<string name="aidl_group_system">System</string>
+	<string name="aidl_group_system_descr">Files, logs, fake location</string>
+	<string name="trip_rec_start_from_notification">Start from notification</string>
+	<string name="trip_rec_start_from_notification_descr">Shows a notification with a button to start trip recording. While recording, a notification is always shown.</string>
 	<string name="contour_labels">Labels</string>
 	<string name="contour_label_direction_descr">Uphill: the top of each height number faces higher ground, as on paper topographic maps. The short ticks on the lines point downhill.</string>
 	<string name="rendering_attr_contourLabelDirection_name">Label direction</string>
@@ -97,6 +154,7 @@
 	<string name="quick_action_tracks_select_descr">Add one or more tracks to show or hide them on the map with a single tap.</string>
 	<string name="quick_action_tracks_always_ask_descr">Tapping this action opens the list of tracks, where you can show or hide one or more of them.</string>
 	<string name="quick_action_all_tracks">All tracks</string>
+	<string name="route_calculation_out_of_memory">The route is too long to calculate on this device. Add intermediate points or choose a closer destination.</string>
 	<string name="java_memory">Java memory</string>
 	<string name="ais_load_data_descr">Replay AIS messages from a recorded file.</string>
 	<string name="map_rendering">Map rendering</string>
@@ -126,7 +184,6 @@
 	<string name="share_favorites_preparation_failed">Could not prepare files for sharing.</string>
 	<string name="share_favorites_share_failed">Could not share the file.</string>
 	<string name="share_favorites_missing_media_warning">Some attached media could not be included.</string>
-	<string name="search_on_web">Search on web</string>
     <string name="release_5_4">
         • Refreshed search UI: sorting, category filters, cleaner look\n\n
         • Attach photos and media to Favorites\n\n
@@ -141,8 +198,8 @@
 	<string name="media_storage_camera_folder_note_descr">Audio is saved to Music/OsmAnd.</string>
 	<string name="always_keep_local_copy">Always keep a local copy</string>
 	<string name="always_keep_local_copy_description">Media stays attached even if the original is deleted from the gallery or files.</string>
-	<string name="use_spatial_text_search">Use spatial text search</string>
-	<string name="use_spatial_text_search_description">Replace the standard quick search APIs with the experimental spatial text search engine.</string>
+	<string name="use_spatial_search">Use spatial text search</string>
+	<string name="use_spatial_search_description">Replace the standard quick search APIs with the experimental spatial text search engine.</string>
 	<string name="astro_lunar_eclipse">Lunar eclipse</string>
 	<string name="astro_lunar_eclipse_subtitle">Explore worldwide lunar eclipses</string>
 	<string name="astro_previous_lunar_eclipse">Previous lunar eclipse</string>
@@ -1442,8 +1499,8 @@ You will be able to pair this scanner again at any time.</string>
     <string name="with_waypoints">With waypoints</string>
     <string name="shared_string_reset_all">Reset all</string>
     <string name="date_of_creation">Date of creation</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="filter_by_name">Filter by name</string>
     <string name="filter_screen_title">Filter</string>
     <string name="filter_tracks_count">Filter: %d</string>
@@ -3324,7 +3381,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="live_monitoring">Online tracking</string>
     <string name="save_track_logging_accuracy">Logging accuracy</string>
     <string name="tracks_view_descr">Your recorded tracks are in %1$s, or the OsmAnd folder.</string>
-    <string name="multimedia_notes_view_descr">Your OSM notes are in %1$s.</string>
     <string name="video_notes">Video notes</string>
     <string name="photo_notes">Photo notes</string>
     <string name="accessibility_announce">Announce</string>
@@ -3903,8 +3959,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="will_open_at">Opens at</string>
     <string name="will_open_on">Opens at</string>
     <string name="additional_actions">Additional actions</string>
-    <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
-    <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
     <!-- string name="release_3_0">
 • New: Support for global offline travel guides. Referenced locations are linked to the map. Initial data from Wikivoyage.\n\n
 • Wikipedia: New look, active links, images now supported\n\n
@@ -3923,11 +3977,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="marker_activated">Marker %s activated.</string>
     <string name="one_tap_active_descr">Tap a marker on the map to move it to the top of the active markers without opening the context menu.</string>
     <string name="one_tap_active">\'One tap\' active</string>
-    <string name="empty_state_av_notes">Make notes!</string>
-    <string name="empty_state_av_notes_desc">Add audio, video, or photo notes to any point on the map by using the widgets or context menus.</string>
-    <string name="notes_by_date">A/V notes by date</string>
-    <string name="by_date">By date</string>
-    <string name="by_type">By type</string>
     <string name="looking_for_tracks_with_waypoints">Looking for tracks with waypoints</string>
     <string name="shared_string_more_without_dots">More</string>
     <string name="appearance_on_the_map">Appearance on the map</string>
@@ -4270,6 +4319,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="postcode">Postcode</string>
     <string name="shared_string_from">from</string>
     <string name="city_type_district">District</string>
+    <string name="city_type_boundary">Area</string>
     <string name="city_type_neighbourhood">Neighbourhood</string>
     <string name="map_widget_search">Search</string>
     <string name="shared_string_is_open_24_7">Open 24/7</string>
@@ -4482,8 +4532,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position.</string>
     <string name="simulate_your_location_descr">Simulate your position using a calculated route or a recorded GPX track.</string>
     <string name="looking_up_address">Looking up address</string>
-    <string name="av_locations_descr">GPX file with locations.</string>
-    <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
     <string name="routing_attr_avoid_shuttle_train_name">No shuttle train</string>
     <string name="routing_attr_avoid_shuttle_train_description">Avoids using shuttle trains</string>
@@ -4555,7 +4603,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="welcome_header">Welcome</string>
     <string name="current_route">Current route</string>
     <string name="osm_changes_added_to_local_edits">OSM changes added to local changeset</string>
-    <string name="local_recordings_delete_all_confirm">Delete %1$d notes?</string>
     <string name="delay_to_start_navigation">Start turn-by-turn guidance after…</string>
     <string name="shared_string_go">Go</string>
     <string name="osmand_parking_overdue">overdue</string>
@@ -4673,7 +4720,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="plugin_nautical_descr">Enriches your map with information about sailing routes, navigation lights, nautical danger zones, zones with sailing or docking restrictions, etc. To use, download the respective Nautical maps and enable the \"Nautical map\" style under \"Configure map\". \n\nFurther reading at %1$s.</string>
     <string name="plugin_ski_name">Ski map view</string>
     <string name="plugin_ski_descr">Designed to navigate winter sports areas: See ski pistes and ski lifts, and cross country ski tracks, with colored lines indicating the difficulty ratings. To use, enable this plugin and also go to \"Configure map\" and choose the \"Winter and ski\" map style.</string>
-    <string name="audionotes_plugin_name">Audio/video notes</string>
     <string name="audionotes_plugin_description">Take audio/photo/video notes during a trip, using either a map button or the location context menu.</string>
     <string name="osmand_parking_plugin_name">Parking position</string>
     <string name="osmand_parking_plugin_description">Mark where your car is parked, and notify your calendar when the parking meter will expire. To place the marker, choose a place on the map, go to \"Actions\", and tap \"Add parking\".</string>
@@ -4686,7 +4732,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="rename_failed">Renaming failed.</string>
     <string name="back_to_map">Back to map</string>
     <string name="share_note">Share note</string>
-    <string name="watch">Watch</string>
     <string name="notes">A/V notes</string>
     <string name="online_map">Online map</string>
     <string name="rendering_attr_pisteRoutes_name">Ski slopes and routes</string>
@@ -4984,7 +5029,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="recording_unavailable">unavailable</string>
     <string name="recording_context_menu_arecord">Take an audio note</string>
     <string name="recording_context_menu_vrecord">Take a video note</string>
-    <string name="layer_recordings">Recording layer</string>
     <string name="recording_context_menu_play">Play</string>
     <string name="recording_description">Recording %1$s %3$s %2$s</string>
     <string name="recording_default_name">Recording</string>

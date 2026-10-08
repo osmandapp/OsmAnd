@@ -1,17 +1,15 @@
 package net.osmand.test.ui.poi;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.AssetUtils.copyAssetToFile;
-import static net.osmand.test.common.EspressoUtils.waitForView;
-import static net.osmand.test.common.OsmAndDialogInteractions.checkViewText;
-import static net.osmand.test.common.OsmAndDialogInteractions.clearText;
+import static net.osmand.test.common.EspressoUtils.onDialogView;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
-import static net.osmand.test.common.OsmAndDialogInteractions.writeText;
+import static net.osmand.test.common.SystemDialogInteractions.hasTextEventually;
 import static net.osmand.test.common.SystemDialogInteractions.waitForAnyView;
 import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.assertNotNull;
@@ -85,25 +83,25 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		EditPoiDialogFragment.showAddPoiInstance(mapActivity, latLon.getLatitude(), latLon.getLongitude());
 
 		//check: magasin de v
-		writeText(R.id.poiTypeEditText, "magasin de v");
+		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de v"));
 		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
 //		Thread.sleep(100)
 		onView(withText("Magasin de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.check(ViewAssertions.matches(isDisplayed()));
 		//clear
-		clearText(R.id.poiTypeEditText);
+		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.replaceText(""));
 		//check: magasin de ve
-		writeText(R.id.poiTypeEditText, "magasin de ve");
+		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de ve"));
 		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
 		onView(withText("Magasin de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.check(ViewAssertions.matches(isDisplayed()));
 
 		//clear
-		clearText(R.id.poiTypeEditText);
+		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.replaceText(""));
 		//check: magasin de vé
-		writeText(R.id.poiTypeEditText, "magasin de vel");
+		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de vel"));
 		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
 		onView(withText("Magasin de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
@@ -112,11 +110,11 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		onView(withText("Magasin de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.perform(ViewActions.click());
-		checkViewText(R.id.poiTypeEditText, "Magasin de vélos");
+		onDialogView(withId(R.id.poiTypeEditText)).check(hasTextEventually("Magasin de vélos"));
 
-		closeSoftKeyboard();
+		onDialogView(isRoot()).perform(ViewActions.closeSoftKeyboard());
 
-		waitForView(withId(R.id.saveButton)).perform(ViewActions.click());
+		onDialogView(withId(R.id.saveButton)).perform(ViewActions.click());
 //
 //		waitForAnyView(2000, 50, withId(R.id.context_menu_layout));
 //		assertTrue(isContextMenuOpened());

@@ -194,7 +194,7 @@ public class RouteProvider {
 		try {
 			int[] startI = {0};
 			int[] endI = {locs.size()};
-			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
+			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, rcr.getRouteDistanceToFinish(0), startI, endI);
 			List<RouteDirectionInfo> directions = calcDirections(params, startI[0], endI[0], rcr.getRouteDirections(params.ctx));
 			gpxRouteHelper.insertInitialSegment(params, locs, directions, true);
 			res = new RouteCalculationResult(locs, directions, params, null, true);
@@ -236,25 +236,14 @@ public class RouteProvider {
 		return directions;
 	}
 
-	protected ArrayList<Location> findStartAndEndLocationsFromRoute(List<Location> route, Location startLoc, LatLon endLoc, int[] startI, int[] endI) {
-		float minDist = Integer.MAX_VALUE;
-		int start = 0;
+	protected ArrayList<Location> findStartAndEndLocationsFromRoute(List<Location> route, Location startLoc, LatLon endLoc,
+	                                                                 float previousDistanceToFinish, int[] startI, int[] endI) {
+		int start = new TrackStartPointFinder(route).findStartIndex(startLoc, previousDistanceToFinish);
 		int end = route.size();
-		if (startLoc != null) {
-			for (int i = 0; i < route.size(); i++) {
-				float d = route.get(i).distanceTo(startLoc);
-				if (d < minDist) {
-					start = i;
-					minDist = d;
-				}
-			}
-//		} else {
-//			startLoc = route.get(0); // no more used
-		}
 		Location l = new Location("temp"); //$NON-NLS-1$
 		l.setLatitude(endLoc.getLatitude());
 		l.setLongitude(endLoc.getLongitude());
-		minDist = Integer.MAX_VALUE;
+		float minDist = Integer.MAX_VALUE;
 		// get in reverse order taking into account ways with cycle
 		for (int i = route.size() - 1; i >= start; i--) {
 			float d = route.get(i).distanceTo(l);
@@ -327,7 +316,7 @@ public class RouteProvider {
 		PrecalculatedRouteDirection precalculated = null;
 		if (calcGPXRoute) {
 			ArrayList<Location> sublist = findStartAndEndLocationsFromRoute(params.gpxRoute.points,
-					params.start, params.end, null, null);
+					params.start, params.end, gpxRouteHelper.getPreviousDistanceToFinish(params), null, null);
 			LatLon[] latLon = new LatLon[sublist.size()];
 			for (int k = 0; k < latLon.length; k++) {
 				latLon[k] = new LatLon(sublist.get(k).getLatitude(), sublist.get(k).getLongitude());
@@ -461,6 +450,7 @@ public class RouteProvider {
 	private RouteCalculationResult calcOfflineRouteImpl(RouteCalculationParams params,
 	                                                    RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
 	                                                    List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
+		NativeRoutingMemoryGuard memoryGuard = NativeRoutingMemoryGuard.start(params.ctx, ctx.calculationProgress);
 		try {
 			RouteResultPreparation.RouteCalcResult result = null;
 			if (complexCtx != null) {
@@ -475,8 +465,11 @@ public class RouteProvider {
 					});
 				}
 			}
-			if (result == null) {
+			if (result == null && !memoryGuard.isExceeded()) {
 				result = router.searchRoute(ctx, st, en, inters);
+			}
+			if (memoryGuard.stop()) {
+				return new RouteCalculationResult(params.ctx.getString(R.string.route_calculation_out_of_memory));
 			}
 
 			if (result == null || result.getList().isEmpty()) {
@@ -516,6 +509,8 @@ public class RouteProvider {
 			int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
 			String s = " (" + avl + " MB available of " + max  + ") ";
 			return new RouteCalculationResult("Not enough process memory "+ s);
+		} finally {
+			memoryGuard.stop();
 		}
 	}
 

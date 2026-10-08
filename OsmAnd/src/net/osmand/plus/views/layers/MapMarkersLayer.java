@@ -149,6 +149,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	//OpenGL
 	private int markersCount;
+	private int markersVersion;
 	private VectorLinesCollection vectorLinesCollection;
 	private VectorLinesCollection clearedVectorLinesCollection;
 	private List<VectorLinePair> lines;
@@ -333,7 +334,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		List<MapMarker> activeMapMarkers = (customObjectsDelegate != null) ? customObjectsDelegate.getMapObjects() : markersHelper.getMapMarkers();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			if (markersCount != activeMapMarkers.size() || mapActivityInvalidated) {
+			int markersVersion = markersHelper.getMarkersVersion();
+			if (markersCount != activeMapMarkers.size() || this.markersVersion != markersVersion || mapActivityInvalidated) {
 				clearMapMarkersCollections();
 				clearVectorLinesCollections();
 				cachedPaths.clear();
@@ -341,6 +343,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 			initMarkersCollection();
 			markersCount = activeMapMarkers.size();
+			this.markersVersion = markersVersion;
 			mapActivityInvalidated = false;
 		}
 

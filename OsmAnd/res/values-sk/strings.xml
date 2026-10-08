@@ -191,8 +191,8 @@
     <string name="voice_stream_notification">Oznámenia</string>
     <string name="voice_stream_music">Médiá/zvuky navigácie</string>
     <string name="warning_tile_layer_not_downloadable">Aplikácia nemôže stiahnuť mapovú vrstvu %1$s, preinštalovanie môže pomôcť.</string>
-    <string name="overlay_transparency">Priehľadnosť prekrývacej mapy</string>
-    <string name="map_transparency">Priehľadnosť základnej mapy</string>
+    <string name="overlay_transparency">Viditeľnosť prekrývacej vrstvy</string>
+    <string name="map_transparency">Viditeľnosť základnej mapy</string>
     <string name="layer_underlay">Podkladová mapa…</string>
     <string name="map_underlay">Podkladová mapa</string>
     <string name="layer_overlay">Prekrývacia mapa…</string>
@@ -523,7 +523,6 @@
     <string name="recording_unavailable">nedostupné</string>
     <string name="recording_context_menu_arecord">Zaznamenať zvukovú poznámku</string>
     <string name="recording_context_menu_vrecord">Zaznamenať video poznámku</string>
-    <string name="layer_recordings">Vrstva s poznámkami</string>
     <string name="recording_context_menu_play">Prehrať</string>
     <string name="recording_description">Záznam %1$s %2$s %3$s</string>
     <string name="recording_default_name">Záznam</string>
@@ -531,7 +530,6 @@
     <string name="audionotes_location_not_defined">Stlačte \"Použiť polohu…\" pre pridanie poznámky k polohe.</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytvárajte obrazové/zvukové/video poznámky počas výletu, buď tlačidlom na mape alebo v kontextovom menu polohy na mape.</string>
-    <string name="audionotes_plugin_name">Audio/video poznámky</string>
     <string name="srtm_plugin_description">Poskytuje terén a detailnú topografiu pre vizuálne pochopenie reliéfu krajiny a jej schodnosť, pomocou vrstevníc, tieňovaných svahov, vyfarbením svahov a 3D zobrazenia.\n \nPre zapnutie týchto funkcií na oblasti musíte dodatočne stiahnuť mapu vrstevníc a/alebo terénu (3D), spracovanú z údajov SRTM a ASTER.\n \nĎalšie podrobnosti na %1$s.</string>
     <string name="srtm_plugin_name">Topografia</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
@@ -891,7 +889,6 @@
 \n 
 \nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
     <string name="plugin_touringview_name">Cestovný mapový pohľad</string>
-    <string name="watch">Zobraziť</string>
     <string name="rename_failed">Premenovanie zlyhalo.</string>
     <string name="back_to_map">Späť na mapu</string>
     <string name="track_segments">Úseky stopy</string>
@@ -1026,7 +1023,6 @@
     <string name="shared_string_show_details">Zobraziť detaily</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importovať do OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Vymazať %1$d poznámok\?</string>
     <string name="gps_network_not_enabled">Služba zisťovania pozície je vypnutá. Zapnúť teraz\?</string>
     <string name="disable_recording_once_app_killed">Zakázať samostatné zaznamenávanie</string>
     <string name="lang_es_ar">Španielčina (Argentína)</string>
@@ -1098,8 +1094,6 @@
     <string name="shared_string_undo">Vrátiť späť</string>
     <string name="shared_string_skip">Preskočiť</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="av_locations_descr">GPX súbor s pozíciami.</string>
-    <string name="av_locations">Pozície</string>
     <string name="plugin_settings">Zásuvné moduly</string>
     <string name="routing_attr_avoid_shuttle_train_name">Nepoužiť autovlak</string>
     <string name="routing_attr_avoid_shuttle_train_description">Vyhnúť sa použitiu autovlakov</string>
@@ -1310,7 +1304,7 @@
     <string name="osm_live_active">Aktívne</string>
     <string name="osm_live_enter_email">Prosím zadajte platnú e-mailovú adresu</string>
     <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv predplatné OsmAnd Live</string>
-    <string name="show_transparency_seekbar">Zobraziť panel priesvitnosti</string>
+    <string name="show_transparency_seekbar">Zobraziť posuvník viditeľnosti</string>
     <string name="recalculate_route">Prepočítať trasu</string>
     <string name="shared_string_topbar">Horný panel</string>
     <string name="storage_directory_shared">Zdieľaná pamäť</string>
@@ -1771,11 +1765,6 @@
     <string name="shared_string_added">Pridané</string>
     <string name="marker_activated">Značka %s aktivovaná.</string>
     <string name="one_tap_active_descr">Potlačte značku na mape na jej presunutie na prvé miesto v aktívnych značkách bez otvárania kontextového menu.</string>
-    <string name="empty_state_av_notes">Urobte poznámky!</string>
-    <string name="empty_state_av_notes_desc">Pridajte zvukové, video alebo fotografické poznámky k ľubovoľnému bodu na mape, pomocou nástroja alebo kontextového menu.</string>
-    <string name="notes_by_date">Mediálne poznámky podľa dátumu</string>
-    <string name="by_date">Podľa dátumu</string>
-    <string name="by_type">Podľa typu</string>
     <string name="one_tap_active">\"Jedno stlačenie\" aktívne</string>
     <string name="modify_the_search_query">Zmeňte vyhľadávacie kritériá.</string>
     <string name="what_is_here">Čo je tu:</string>
@@ -1791,8 +1780,6 @@
     <string name="will_open_at">Otvorí o</string>
     <string name="will_open_on">Otvorí o</string>
     <string name="additional_actions">Ďalšie akcie</string>
-    <string name="av_locations_selected_desc">Súbor GPX so súradnicami a údajmi vybraných poznámok.</string>
-    <string name="av_locations_all_desc">Súbor GPX so súradnicami a údajmi všetkých poznámok.</string>
     <string name="shared_string_actions">Akcie</string>
     <string name="shared_string_marker">Značka</string>
     <string name="osm_recipient_stat">Počet úprav %1$s, suma %2$s mBTC</string>
@@ -2375,7 +2362,6 @@
     <string name="live_monitoring">Sledovanie online</string>
     <string name="save_track_logging_accuracy">Presnosť záznamu</string>
     <string name="tracks_view_descr">Všetky vaše zaznamenané stopy sú v %1$s, alebo v priečinku OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Vaše OSM poznámky sú v %1$s.</string>
     <string name="video_notes">Video-poznámky</string>
     <string name="photo_notes">Foto-poznámky</string>
     <string name="accessibility_announce">Oznámenie</string>
@@ -3953,7 +3939,7 @@
     <string name="routing_attr_hazmat_category_usa_4_name">Horľavé pevné látky</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Otvoriť dátovú tabuľku WunderLINQ</string>
     <string name="key_event_action_previous_app_profile">Predchádzajúci profil aplikácie</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="help_article_troubleshooting_maps_data_name">Mapy a údaje</string>
     <string name="shared_string_setup">Nastavenie</string>
     <string name="external_sensor_name_property_description">Názov snímača</string>
@@ -3979,7 +3965,7 @@
     <string name="key_event_action_move_down">Posunúť nadol</string>
     <string name="key_event_action_move_up">Posunúť nahor</string>
     <string name="shared_string_delete_item">Vymazať položku</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="filter_by_name">Filtrovať podľa názvu</string>
     <string name="filter_screen_title">Filter</string>
     <string name="filter_tracks_count">Filter: %d</string>
@@ -4666,16 +4652,9 @@
     <string name="popular_places_nearby">Populárne miesta v okolí</string>
     <string name="display_distance_to_first_intermediate_summary">Zobrazuje čas a vzdialenosť k ďalšej zastávke. Vypnite túto možnosť ak chcete vždy zobrazenie podrobností trasy k cieľu.</string>
     <string name="display_distance_to_first_intermediate">Zobraziť podrobnosti trasy pre ďalšiu zastávku</string>
-    <string name="ais_port_nmea_server_description">Zadajte port TCP zdroja údajov NMEA</string>
-    <string name="ais_object_lost_timeout">Časový limit pre viditeľnosť ak je loď stratená</string>
-    <string name="ais_object_lost_timeout_description">Nastavte časový limit pre viditeľnosť objektov AIS: Ak nebude do tejto doby obdržaný žiadny signál, bude objekt odstránený z obrazovky.</string>
-    <string name="ais_cpa_warning_time">Výstražná doba pred dosiahnutím najbližšieho bodu priblíženia (CPA)</string>
     <string name="plugin_ais_tracker_name">Sledovanie plavidiel (AIS)</string>
     <string name="original_color_description">Každý bod si zachová vlastnú farbu.</string>
-    <string name="ais_nmea_protocol">Protokol pre prijímanie údajov NMEA</string>
-    <string name="ais_cpa_settings">Nastavenia týkajúce sa CPA</string>
     <string name="map_widget_route_information">Informácie o trase</string>
-    <string name="ais_object_lost_timeouts">Časový limit pre príjem signálu AIS</string>
     <string name="no_places_available">Vo viditeľnej oblasti nie sú žiadne miesta</string>
     <string name="shared_string_default_view">Predvolené zobrazenie</string>
     <string name="map_widget_route_information_desc">Zobrazuje odhadovaný čas príjazdu, zostávajúci čas jazdy a vzdialenosť pre aktuálnu navigačnú trasu.</string>
@@ -4690,26 +4669,15 @@
     <string name="original_icon_description">Každý bod si zachová vlastnú ikonu.</string>
     <string name="original_shape_description">Každý bod si zachová vlastný tvar.</string>
     <string name="apply_to_all_points">Použiť na všetky body</string>
-    <string name="ais_nmea_protocol_description">Zvoľte protokol pre prijímanie údajov NMEA</string>
-    <string name="ais_address_nmea_server">IP adresa zdroja údajov NMEA</string>
     <string name="plugin_ais_tracker_description">Zobrazí polohy AIS a informácie o okolitých plavidlách. Údaje AIS sú prijímané pomocou siete z externého prijímača AIS.</string>
     <string name="hmd_promo">HMD Promo na %1$s mesiacov</string>
     <string name="shared_string_road_exit">Výjazd</string>
     <string name="ais_address_settings">Nastavenia IP adresy</string>
-    <string name="ais_port_nmea_local">Port UDP lokálneho prijímača údajov NMEA</string>
-    <string name="ais_cpa_warning_distance">Výstražná vzdialenosť pre najbližší bod priblíženia (CPA)</string>
-    <string name="ais_cpa_warning_distance_description">Plavidlá sú vyznačené červenou farbou ak je CPA (nabližší bod priblíženia) pod definovanou hranicou TCPA (čas do CPA) spadá do času varovania nastaveného v nastavení \"Výstražnej doby pre dosiahnutie CPA\".</string>
-    <string name="ais_address_nmea_server_description">Zadajte IP adresu zdroja údajov NMEA (ak sa používa TCP)</string>
-    <string name="ais_ship_lost_timeout">Časový limit zastaranosti lode</string>
-    <string name="ais_ship_lost_timeout_description">Nastavte časový limit pre viditeľnosť zastaranej lode: po tomto čase bez príjmu signálu bude symbol lode preškrtnutý.</string>
     <string name="choose_location_on_map">Zvoľte polohu na mape.</string>
     <string name="show_image_previews">Zobraziť náhľady obrázkov</string>
     <string name="shared_string_manual">Ručne</string>
     <string name="ais_load_data">Simulovať premávku lodí</string>
     <string name="ais_address_settings_description">Zvoľte protokol NMEA (UDP/TCP) a nastavte príslušné adresy a porty</string>
-    <string name="ais_cpa_warning_time_description">Ak TCPA (čas k bodu najbližšieho priblíženia) s iným plavidlom klesne pod definovanú hranicu, bude plavidlo označené červenou farbou.</string>
-    <string name="ais_port_nmea_server">Port TCP zdroja údajov NMEA</string>
-    <string name="ais_port_nmea_local_description">Zadajte port UDP, kde bude OsmAnd prijímať údaje NMEA</string>
     <string name="no_photo_for_location_desc">K tejto polohe zatiaľ neboli pridané žiadne fotografie používateľov</string>
     <string name="meridian_180">180. poludník</string>
     <string name="prime_meridian">Nultý poludník</string>
@@ -4902,7 +4870,7 @@
     <string name="shared_string_price">Cena</string>
     <string name="lang_crh">Krymská tatárčina (latinka)</string>
     <string name="deleted_maps_warning">Chystáte sa vymazať %d položiek\nChcete pokračovať?</string>
-    <string name="deleted_maps_prompt">Tieto mapy už nie sú podporované a boli nahradené menšími regiónmi. Prosím odstráňte ich a stiahnite si nové verzie oblastí.</string>
+    <string name="deleted_maps_prompt">Tieto mapy už nie sú podporované. Prosím odstráňte ich a stiahnite si nové verzie.</string>
     <string name="unsupported_maps">Nepodporované mapy</string>
     <string name="routing_attr_weightrating_name">Maximálna hmotnosť pri plnom zaťažení</string>
     <string name="routing_attr_maxaxleload_name">Maximálne zaťaženie na nápravu</string>
@@ -5220,13 +5188,7 @@
     <string name="free_download_limit_reached">Bol dosiahnutý limit sťahovania zdarma</string>
     <string name="free_download_limit_reached_description">Odomknite neobmedzené sťahovania máp a aktualizácií</string>
     <string name="get_unlimited_downloads">Získať neobmedzené sťahovania</string>
-    <string name="ais_own_object">Nastavenie pre zobrazenie vlastného objektu AIS</string>
-    <string name="ais_own_mmsi">Vlastné MMSI (Identita námornej mobilnej služby)</string>
-    <string name="ais_own_mmsi_description">Identifikujte MMSI (9-miestne číslo) vlastného objektu AIS.</string>
-    <string name="ais_display_own_position">Určite, či má byť vlastný objekt AIS zobrazený.</string>
-    <string name="ais_display_own_position_description">OsmAnd štandardne zobrazuje vlastnú polohu. Dodatočné zobrazenie aj vlastného objektu AIS môže byť mätúce a je možné ho tu vypnúť.</string>
     <string name="ais_receive_in_background">Prijímať údaje AIS aj keď je OsmAnd pozastavený.</string>
-    <string name="ais_receive_in_background_description">Ak je zapnuté, prijímač správ AIS zostane zapnutý aj ak je OsmAnd pozastavený alebo na pozadí. Ak je vypnuté, OsmAnd na pozadí nebude prijímať žiadne správy.</string>
     <string name="shared_string_recent">Nedávne</string>
     <string name="sort_by_nearest_to_map_center">Najbližšie k stredu mapy</string>
     <string name="last_week">Minulý týždeň</string>
@@ -5240,8 +5202,8 @@
     <string name="search_around_my_location">Moja poloha</string>
     <string name="search_around_my_location_description">Hľadať okolo vašej polohy</string>
     <string name="sort_by_relevance">Relevantnosť</string>
-    <string name="use_spatial_text_search">Použiť vyhľadávanie priestorového textu</string>
-    <string name="use_spatial_text_search_description">Nahradiť štandardné rozhranie vyhľadávania experimentálnym vyhľadávaním priestorovým textom.</string>
+    <string name="use_spatial_search">Použiť vyhľadávanie priestorového textu</string>
+    <string name="use_spatial_search_description">Nahradiť štandardné rozhranie vyhľadávania experimentálnym vyhľadávaním priestorovým textom.</string>
     <string name="astro_lunar_eclipse">Zatmenie Mesiaca</string>
     <string name="astro_lunar_eclipse_subtitle">Skúmať celosvetové zatmenia Mesiaca</string>
     <string name="astro_previous_lunar_eclipse">Predchádzajúce zatmenie Mesiaca</string>
@@ -5338,7 +5300,6 @@
     <string name="astro_lunar_eclipse_calculating_state">Výpočet viditeľnosti v strede mapy…</string>
     <string name="astro_lunar_eclipse_visibility_loading">Výpočet viditeľnosti…</string>
     <string name="astro_eclipse_column_below_horizon">Pod horizontom</string>
-    <string name="search_on_web">Hľadať na webe</string>
     <string name="quick_action_add_track">Pridať stopu</string>
     <string name="quick_action_tracks_select_descr">Pridať jednu alebo viac stôp, ktoré budú zobrazené alebo skryté na mape jedným stlačením.</string>
     <string name="quick_action_tracks_always_ask_descr">Stlačenie tejto akcie otvorí zoznam stôp, z ktorých jednu alebo viaceré môžete zobraziť alebo skryť.</string>

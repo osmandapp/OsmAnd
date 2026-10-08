@@ -515,4 +515,9 @@ public class MapMarkersGroupsFragment extends BaseNestedFragment implements OsmA
 			});
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_markers_groups";
+	}
 }
