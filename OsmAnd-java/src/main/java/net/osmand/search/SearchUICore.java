@@ -33,6 +33,7 @@ import net.osmand.search.core.SearchCoreFactory.SearchBuildingAndIntersectionsBy
 import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
 import net.osmand.search.core.SearchExportSettings;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
@@ -746,16 +747,42 @@ public class SearchUICore {
 			this.spatialTextSearchAPI = spatialTextSearchAPI;
 		}
 
-		// old maps have no poi types in the name index: nothing found - read them with the type filter
 		@Override
 		protected List<Amenity> searchByNameIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
-				AbstractPoiType poiType, QuadRect bbox31) throws IOException {
-			if (!(poiType instanceof PoiType)) {
-				return null; // a category or a filter also takes reference types, the name index has none
+				Object poiType, QuadRect bbox31) throws IOException {
+			List<String> keys = getNameIndexKeys(poiType);
+			if (keys == null) {
+				return null;
 			}
-			List<Amenity> res = spatialTextSearchAPI.searchPoiByCategory(phrase, resultMatcher, poiType.getKeyName(),
-					bbox31);
-			return res.isEmpty() ? null : res;
+			List<Amenity> res = new ArrayList<>();
+			for (String key : keys) {
+				res.addAll(spatialTextSearchAPI.searchPoiByCategory(phrase, resultMatcher, key, bbox31));
+			}
+			return res;
+		}
+
+		@Override
+		protected boolean isReadByNameIndex(BinaryMapIndexReader reader) {
+			return SpatialTextSearchAPI.hasPoiTypesInNameIndex(reader);
+		}
+
+		// a whole category also takes reference types, the name index has none: it is read with the type filter
+		private static List<String> getNameIndexKeys(Object poiType) {
+			if (poiType instanceof PoiType pt) {
+				return Collections.singletonList(pt.getKeyName());
+			} else if (poiType instanceof TopIndexFilter filter) {
+				return Collections.singletonList(filter.getFilterId());
+			} else if (poiType instanceof CustomSearchPoiFilter filter && filter.getAcceptedTypes() != null) {
+				List<String> keys = new ArrayList<>();
+				for (Set<String> types : filter.getAcceptedTypes().values()) {
+					if (types == null) {
+						return null;
+					}
+					keys.addAll(types);
+				}
+				return keys.isEmpty() ? null : keys;
+			}
+			return null;
 		}
 
 		@Override
