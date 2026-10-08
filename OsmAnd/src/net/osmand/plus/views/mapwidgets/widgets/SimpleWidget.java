@@ -77,6 +77,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		renderedWidgetSize = widgetState.getWidgetSizePref().get();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
+		setupWidgetNameMaxWidth();
 		container.setOnLongClickListener(v -> {
 			List<PopUpMenuItem> actions = getWidgetActions();
 			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(v.getContext());
@@ -84,6 +85,16 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 			return true;
 		});
 		container.setOnClickListener(getOnClickListener());
+	}
+
+	private void setupWidgetNameMaxWidth() {
+		// Side panels wrap their content, so a long widget name must not widen the whole panel
+		if (widgetName != null && !isVerticalWidget()) {
+			int maxWidthId = renderedWidgetSize == WidgetSize.LARGE
+					? R.dimen.side_widget_name_max_width_large
+					: R.dimen.side_widget_name_max_width_medium;
+			widgetName.setMaxWidth(app.getResources().getDimensionPixelSize(maxWidthId));
+		}
 	}
 
 	@LayoutRes

@@ -600,7 +600,7 @@
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Tìm đường trực tiếp đến điểm (Tàu thuỷ)</string>
     <string name="shared_string_created">Đã tạo</string>
     <string name="shared_string_reset_all">Đặt lại tất cả</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="date_of_creation">Ngày tạo</string>
     <string name="empty_name">Làm trống tên</string>
     <string name="edit_filter">Chỉnh sửa bộ lọc</string>
@@ -620,7 +620,7 @@
     <string name="help_article_navigation_routing_public_transport_navigation_name">Tìm đường cho phương tiện công cộng</string>
     <string name="shared_string_setup">Thiết lập</string>
     <string name="shared_string_loading">Đang tải</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="filter_by_name">Lọc theo tên</string>
     <string name="app_mode_baby_transport">Vận chuyển trẻ em</string>
     <string name="smart_folder_saved">Thư mục Thông minh đã được lưu</string>
@@ -766,7 +766,7 @@
     <string name="routing_attr_allow_private_for_truck_description">Cho phép xe tải đi vào những khu vực riêng tư.</string>
     <string name="temperature_layer">Lớp nhiệt độ</string>
     <string name="pressure_layer">Lớp áp suất</string>
-    <string name="storage_migration_fragment_close_descr">Việc sao chép chỉ hoàn thành được %1$s %. Nếu bạn dừng bây giờ, ứng dụng có thể không hoạt động bình thường.</string>
+    <string name="storage_migration_fragment_close_descr">Việc sao chép chỉ hoàn thành được %1$s %%. Nếu bạn dừng bây giờ, ứng dụng có thể không hoạt động bình thường.</string>
     <string name="map_settings_weather_wind">Gió</string>
     <string name="weather_wind_mph">dặm/giờ</string>
     <string name="rendering_engine_failed">Việc kết xuất bản đồ của OsmAnd mới đây đã bị hỏng.</string>
@@ -2593,26 +2593,8 @@
     <string name="shared_string_avg_speed">Tốc độ tối thiểu</string>
     <string name="ais_load_data">Tải dữ liệu AIS từ tệp</string>
     <string name="ais_address_settings_description">Chọn giao thức NMEA (UDP/TCP) and chỉ định các địa chỉ và cổng tương ứng</string>
-    <string name="ais_nmea_protocol">Giao thức cho sự tiếp nhận dữ liệu NMEA</string>
     <string name="ais_address_settings">Cài đặt địa chỉ IP</string>
-    <string name="ais_address_nmea_server_description">Chỉ định địa chỉ IP của nguồn dữ liệu NMEA (nếu TCP được sử dụng)</string>
-    <string name="ais_nmea_protocol_description">Chọn giao thức cho sự tiếp nhận dữ liệu NMEA</string>
-    <string name="ais_address_nmea_server">Địa chỉ IP của nguồn dữ liệu NMEA</string>
-    <string name="ais_port_nmea_local">Cổng UDP của máy nhận dữ liệu NMEA địa phương</string>
-    <string name="ais_port_nmea_server">Cổng TCP của nguồn dữ liệu NMEA</string>
-    <string name="ais_port_nmea_server_description">Chỉ định số cổng TCP của nguồn dữ liệu NMEA</string>
-    <string name="ais_port_nmea_local_description">Chỉ định cổng UDP nơi OsmAnd nhận dữ liệu NMEA</string>
-    <string name="ais_object_lost_timeout">Thời gian chờ cho sự hiển thị khi tàu bị mất</string>
-    <string name="ais_object_lost_timeouts">Cài đặt thời gian chờ cho sự tiếp nhận dữ liệu AIS</string>
-    <string name="ais_object_lost_timeout_description">Đặt thời gian chờ cho sự hiển thị của các đối tượng AIS: Sau khoảng thời gian này mà không có tín hiệu nào, đối tượng sẽ tự động bị loại bỏ khỏi màn hình.</string>
-    <string name="ais_ship_lost_timeout">Thời gian chờ cho dữ liệu tàu lỗi thời</string>
-    <string name="ais_ship_lost_timeout_description">Đặt thời gian chờ cho sự hiển thị tàu lỗi thời: Sau khoảng thời gian này mà không có sự tiếp nhận tín hiệu nào, ký hiệu tàu sẽ bị gạch bỏ.</string>
-    <string name="ais_cpa_settings">Các cài đặt liên quan đến CPA</string>
-    <string name="ais_cpa_warning_time">Thời gian cảnh báo trước Điểm tiếp cận gần nhất (CPA)</string>
-    <string name="ais_cpa_warning_time_description">Nếu TCPA (thời gian để đến CPA) với một tàu khác nhỏ hơn ngưỡng đã định, tàu đó được làm nổi bật bằng màu đỏ.</string>
-    <string name="ais_cpa_warning_distance">Khoảng cách cảnh báo cho Điểm tiếp cận gần nhất (CPA)</string>
     <string name="plugin_ais_tracker_name">Theo dõi tàu AIS</string>
-    <string name="ais_cpa_warning_distance_description">Những tàu được làm nổi bật bằng màu đỏ nếu CPA (Điểm tiếp cận gần nhất) nhỏ hơn ngưỡng đã định và TCPA (Thời gian đến CPA) nằm trong khoảng thời gian cảnh báo đã đặt trong phần cài đặt \'Khoảng thời gian cảnh báo để đến CPA\'.</string>
     <string name="plugin_ais_tracker_description">Hiển thị vị trí AIS và thông tin về các tàu ở gần. Dữ liệu AIS được nhận thông qua mạng từ một thiết bị nhận AIS bên ngoài.</string>
     <string name="shared_string_avg_altitude">Độ cao trung bình</string>
     <string name="plugin_ais_tracker_disclaimer">MIỄN TRỪ TRÁCH NHIỆM\n\nPlugin này là một dự án sở thích và không được thiết kế cho các trường hợp khẩn cấp. Nó không đảm bảo tính tin cậy và sự chính xác tuyệt đối. Không dựa vào phần mềm này cho mục đích điều hướng, an toàn tính mạng, hoặc bất cứ hoạt động quan trọng nào khác.</string>
@@ -3187,7 +3169,6 @@
     <string name="keep_both_desc">Các mục được nhập sẽ được thêm với tiền tố</string>
     <string name="select_data_to_import">Chọn dữ liệu sẽ được nhập.</string>
     <string name="live_monitoring_descr">Cho phép chia sẻ vị trí hiện tại bằng việc ghi hành trình.</string>
-    <string name="multimedia_notes_view_descr">Ghi chú OSM của bạn nằm trong %1$s.</string>
     <string name="shared_string_importing">Đang nhập</string>
     <string name="file_does_not_contain_routing_rules">Không có quy tắc chỉ đường nào trong \'%1$s\'. Vui lòng chọn một tệp khác.</string>
     <string name="restore_all_profile_settings">Khôi phục tất cả cài đặt hồ sơ?</string>
@@ -3641,8 +3622,6 @@
     <string name="will_close_at">Đóng lúc</string>
     <string name="will_open_at">Mở lúc</string>
     <string name="will_open_on">Mở lúc</string>
-    <string name="av_locations_selected_desc">Tệp GPX với tọa độ và dữ liệu của các ghi chú đã chọn.</string>
-    <string name="av_locations_all_desc">Tệp GPX với tọa độ và dữ liệu của tất cả ghi chú.</string>
     <string name="modify_the_search_query">Thay đổi tìm kiếm của bạn.</string>
     <string name="shared_string_marker">Điểm đánh dấu</string>
     <string name="empty_state_osm_edits">Tạo hoặc sửa đổi các đối tượng OpenStreetMap</string>
@@ -3650,11 +3629,6 @@
     <string name="marker_activated">Điểm đánh dấu %s đã được kích hoạt.</string>
     <string name="one_tap_active_descr">Chạm một điểm đánh dấu trên bản đồ để chuyển nó đến đầu các điểm đánh dấu đang hoạt động mà không cần mở menu ngữ cảnh.</string>
     <string name="one_tap_active">\'Một chạm\' đang hoạt động</string>
-    <string name="empty_state_av_notes">Tạo ghi chú!</string>
-    <string name="empty_state_av_notes_desc">Thêm ghi chú bằng âm thanh, video hoặc hình ảnh đến bất kì điểm nào trên bản đồ bằng cách sử dụng widget hoặc menu ngữ cảnh.</string>
-    <string name="notes_by_date">Ghi chú A/V theo ngày</string>
-    <string name="by_date">Theo ngày</string>
-    <string name="by_type">Theo loại</string>
     <string name="looking_for_tracks_with_waypoints">Đang tìm những hành trình với điểm dừng</string>
     <string name="shared_string_more_without_dots">Thêm</string>
     <string name="appearance_on_the_map">Cách hiển thị trên bản đồ</string>
@@ -4331,7 +4305,7 @@
     <string name="no_media_descr">Bạn có thể thêm ảnh, video, hoặc ghi chú bằng âm thanh từ máy ảnh hoặc thư viện của bạn.</string>
     <string name="favorite_confirm_delete_folder">Điều này sẽ xóa thư mục \"%1$s\", bao gồm cả các thư mục con và %2$d điểm yêu thích.</string>
     <string name="favorite_folder_rename_conflict">Một thư mục với tên này đã tồn tại.</string>
-    <string name="favorite_folder_invalid_name">Tên thư mục không được chứa ký tự / hoặc _%_</string>
+    <string name="favorite_folder_invalid_name">Tên thư mục không được chứa ký tự / hoặc %1$s</string>
     <string name="favorite_folder_duplicate_message">Dùng tên thư mục mà chưa tồn tại.</string>
     <string name="favorite_folder_name">Tên thư mục</string>
     <string name="edit_folder">Chỉnh sửa thư mục</string>
@@ -4506,8 +4480,6 @@
     <string name="min_km">phút/km</string>
     <string name="m_s">m/s</string>
     <string name="simulate_your_location_descr">Mô phỏng vị trí của bạn bằng cách dùng một tuyến đường đã được tính toán hoặc một hành trình GPX đã ghi.</string>
-    <string name="av_locations_descr">Tệp GPX với vị trí.</string>
-    <string name="av_locations">Vị trí</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Mặc định (màu xanh lục lam mờ)</string>
     <string name="rendering_value_defaultMedium_name">Mặc định (trung bình)</string>
     <string name="rendering_value_darkyellow_name">Màu vàng đậm</string>
@@ -4538,7 +4510,6 @@
     <string name="osm_changes_added_to_local_edits">Các thay đổi OSM đã được thêm vào bộ thay đổi cục bộ</string>
     <string name="osm_edits">Chỉnh sửa OSM</string>
     <string name="shared_string_online_maps">Bản đồ trực tuyến</string>
-    <string name="audionotes_plugin_name">Ghi chú âm thanh/video</string>
     <string name="osmand_parking_plugin_name">Vị trí đỗ xe</string>
     <string name="settings_privacy">Quyền riêng tư</string>
     <string name="avoid_roads_msg">Kích hoạt một tuyến đường khác bằng cách chọn những đường cần tránh</string>
@@ -4568,4 +4539,9 @@
     <string name="gps_not_available">Vui lòng bật GPS trong phần cài đặt</string>
     <string name="arrived_at_intermediate_point">Đã đến điểm đến trung gian</string>
     <string name="confirm_interrupt_download">Hủy tải xuống?</string>
+    <string name="trip_rec_start_from_notification">Bắt đầu từ thông báo</string>
+    <string name="trip_rec_start_from_notification_descr">Hiện một thông báo cùng một nút để bắt đầu ghi hành trình. Trong khi ghi, thông báo sẽ luôn hiển thị.</string>
+    <string name="contour_label_direction_descr">Lên dốc: phía trên của mỗi con số độ cao hướng về phía địa hình cao hơn, giống như trên bản đồ địa hình giấy. Các vạch ngắn trên đường đồng mức chỉ về phía xuống dốc.</string>
+    <string name="opening_hours_public_holiday">Ngày lễ</string>
+    <string name="contour_labels">Nhãn</string>
 </resources>

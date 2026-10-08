@@ -17,15 +17,16 @@ actual object ImportHelper {
 	@Throws(IOException::class)
 	actual fun loadGPXFileFromArchive(source: Source): Pair<GpxFile, Long> {
 		val stream = ZipInputStream(SourceInputStream(source))
-		var entry: ZipEntry
-		while ((stream.nextEntry.also { entry = it }) != null) {
-			if (entry.name.endsWith(IndexConstants.GPX_FILE_EXT)) {
-				val fileSize = entry.size
-				return Pair(loadGpxFile(stream.source()), fileSize)
+		var entry: ZipEntry? = stream.nextEntry
+		while (entry != null) {
+			val name = entry.name.lowercase()
+			if (name.endsWith(IndexConstants.GPX_FILE_EXT)) {
+				return Pair(loadGpxFile(stream.source()), entry.size)
 			}
-			if (entry.name.endsWith(IndexConstants.KML_SUFFIX)) {
+			if (name.endsWith(IndexConstants.KML_SUFFIX)) {
 				return loadGPXFileFromKml(stream.source())
 			}
+			entry = stream.nextEntry
 		}
 		return errorImport("Archive doesn't have GPX/KLM files")
 	}

@@ -104,7 +104,7 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 	protected String getInvalidNameError(@NonNull String trimmedName) {
 		return pointsGroup != null || trimmedName.isEmpty() || FavoriteFolderPath.isValidSegment(trimmedName)
 				? null
-				: getString(R.string.favorite_folder_invalid_name);
+				: getString(R.string.favorite_folder_invalid_name, FavoriteFolderPath.SUBFOLDER_PLACEHOLDER);
 	}
 
 	@NonNull
@@ -148,5 +148,10 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favourite_group_editor";
 	}
 }

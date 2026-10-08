@@ -203,4 +203,9 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 		pendingEnableProxy = false;
 		updateMainToggle();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "proxy_settings";
+	}
 }

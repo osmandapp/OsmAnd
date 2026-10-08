@@ -1527,6 +1527,11 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 	
+	// a read aborted by an error (OutOfMemoryError) leaves its limits on the stream and every next read fails
+	public void resetReadLimits() {
+		codedIS.popLimit(Long.MAX_VALUE);
+	}
+
 	public List<PrefixNameValue> readFullNameIndex(NameIndexReader reader) throws IOException {
 		codedIS.seek(reader.poiRegion != null ? reader.poiRegion.filePointer : reader.addressRegion.filePointer);
 		long old = codedIS.pushLimitLong(reader.poiRegion != null ? reader.poiRegion.length : reader.addressRegion.length);
@@ -1826,10 +1831,10 @@ public class BinaryMapIndexReader {
 				raf.close();
 			}
 			codedIS = null;
-			mapIndexes.clear();
-			addressIndexes.clear();
-			transportIndexes.clear();
-			poiIndexes.clear();
+			mapIndexes = new ArrayList<MapIndex>();
+			addressIndexes = new ArrayList<AddressRegion>();
+			transportIndexes = new ArrayList<TransportIndex>();
+			poiIndexes = new ArrayList<PoiRegion>();
 		}
 	}
 
@@ -1997,10 +2002,6 @@ public class BinaryMapIndexReader {
 			this.bottom = bottom;
 		}
 
-		public boolean isSkippedDuplication() {
-			return resultMatcher != null && resultMatcher.isSkippedDuplication();
-		}
-		
 		public boolean publish(T obj) {
 			if (resultMatcher == null || resultMatcher.publish(obj)) {
 				if (priorityQueue != null && obj != null) {

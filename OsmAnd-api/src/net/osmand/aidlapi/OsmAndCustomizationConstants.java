@@ -55,6 +55,7 @@ public interface OsmAndCustomizationConstants {
 	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";
 	String SHOW_DEPTH_CONTOURS = SHOW_ITEMS_ID_SCHEME + "depth_contours";
 	String MAPILLARY = SHOW_ITEMS_ID_SCHEME + "mapillary";
+	String PANORAMAX = SHOW_ITEMS_ID_SCHEME + "panoramax";
 	String OVERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "overlay_map";
 	String UNDERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "underlay_map";
 	String WEATHER_ID = SHOW_ITEMS_ID_SCHEME + "weather";
@@ -131,6 +132,7 @@ public interface OsmAndCustomizationConstants {
 	//Plug-in's IDs:
 	String PLUGIN_OSMAND_MONITORING = "osmand.monitoring";
 	String PLUGIN_MAPILLARY = "osmand.mapillary";
+	String PLUGIN_PANORAMAX = "osmand.panoramax";
 	String PLUGIN_OSMAND_DEV = "osmand.development";
 	String PLUGIN_AUDIO_VIDEO_NOTES = "osmand.audionotes";
 	String PLUGIN_NAUTICAL = "nauticalPlugin.plugin";

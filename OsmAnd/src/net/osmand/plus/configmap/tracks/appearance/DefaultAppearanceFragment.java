@@ -136,6 +136,11 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 
 		inflate(R.layout.list_item_divider, container, true);
 
+		MultiStateCard lineStyleCard = new MultiStateCard(activity, controller.getLineStyleCardController(), false);
+		container.addView(lineStyleCard.build());
+
+		inflate(R.layout.list_item_divider, container, true);
+
 		MultiStateCard splitCard = new MultiStateCard(activity, controller.getSplitCardController(), false);
 		container.addView(splitCard.build());
 
@@ -198,5 +203,10 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 			DefaultAppearanceFragment fragment = new DefaultAppearanceFragment();
 			fragment.show(manager, TAG);
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "default_appearance";
 	}
 }

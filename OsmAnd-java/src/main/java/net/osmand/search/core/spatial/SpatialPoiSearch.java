@@ -358,7 +358,24 @@ public class SpatialPoiSearch {
 		NameIndexAtom atom = new NameIndexAtom(a.key, a.id, total);
 		cs.atoms.add(atom);
 		cs.tokens.add(t);
-		t.addPoiCategoryMatch(a.id);
+		if (typedInFull(t, a)) {
+			t.addPoiCategoryMatch(a.id);
+		}
+	}
+
+	// a category matched by a word still being typed is only a row: "ca" does not list every catholic church
+	private static boolean typedInFull(SpatialSearchToken t, SpatialPoiType a) {
+		if (!t.incomplete) {
+			return true;
+		}
+		for (String n : a.names) {
+			for (String w : SearchAlgorithms.splitAndNormalize(n, false)) {
+				if (SearchAlgorithms.alignChars(w).equals(t.wordNoDot)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public int getCategoryFrequency(SpatialSearchContext ctx, String categoryKey) {
@@ -421,14 +438,25 @@ public class SpatialPoiSearch {
 		
 		List<PoiCatSearch> finalRes = new ArrayList<>(res.values());
 		Collections.sort(finalRes);
-		if (finalRes.size() > ctx.settings.LIMIT_POI_CATEGORY_BY_FREQ) {
-			finalRes = finalRes.subList(0, ctx.settings.LIMIT_POI_CATEGORY_BY_FREQ);
-		}
+		Set<SpatialSearchToken> uncoveredTokens = new HashSet<>();
 		for (PoiCatSearch pc : finalRes) {
+			uncoveredTokens.addAll(pc.tokens);
+		}
+		int free = ctx.settings.LIMIT_POI_CATEGORY_BY_FREQ;
+		for (PoiCatSearch pc : finalRes) {
+			boolean coversNewToken = uncoveredTokens.removeAll(pc.tokens);
+			if (free == 0 || (!coversNewToken && free <= uncoveredTokens.size())) {
+				continue;
+			}
+			free--;
 			for (int i = 0; i < pc.tokens.size(); i++) {
 				SpatialSearchToken token = pc.tokens.get(i);
 				NameIndexAtom atom = pc.atoms.get(i);
 				token.addAtom(atom);
+				if (!typedInFull(token, pc.pt())) {
+					token.poiCategoryKeysToAutocomplete.remove(atom.name);
+					token.poiCategoryIds.remove((int) atom.id);
+				}
 			}
 			// Problem "Helipad 32" (doesn't list object because no 32 ref is found"
 			// Categories are not needed if exact result is found (there is always option to go in category and filter later)

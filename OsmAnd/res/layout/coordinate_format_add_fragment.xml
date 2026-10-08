@@ -109,6 +109,7 @@
 		android:layout_height="match_parent"
 		android:hint="@string/coordinate_format_add_search_hint"
 		app:autoShowKeyboard="true"
+		app:backHandlingEnabled="false"
 		app:backgroundTint="?attr/activity_background_color"
 		app:hideNavigationIcon="false">
 

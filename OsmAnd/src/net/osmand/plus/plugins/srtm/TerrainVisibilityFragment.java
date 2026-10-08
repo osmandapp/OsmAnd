@@ -129,4 +129,9 @@ public class TerrainVisibilityFragment extends ConfigureMapOptionFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "terrain_visibility";
+	}
 }

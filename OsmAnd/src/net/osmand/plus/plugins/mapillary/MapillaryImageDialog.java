@@ -26,6 +26,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
@@ -216,6 +217,8 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		View noInternetView = view.findViewById(R.id.mapillaryNoInternetLayout);
 		Drawable icWifiOff = iconsCache.getThemedIcon(R.drawable.ic_action_wifi_off);
 		((ImageView) noInternetView.findViewById(R.id.wifiOff)).setImageDrawable(icWifiOff);
+		((TextView) noInternetView.findViewById(R.id.no_internet_description))
+				.setText(R.string.mappilary_no_internet_desc);
 		view.setScrollContainer(false);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.addJavascriptInterface(new MapillaryWebAppInterface(), "Android");
@@ -281,6 +284,8 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		noInternetView = view.findViewById(R.id.mapillaryNoInternetLayout);
 		((ImageView) noInternetView.findViewById(R.id.wifiOff))
 				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_wifi_off));
+		((TextView) noInternetView.findViewById(R.id.no_internet_description))
+				.setText(R.string.mappilary_no_internet_desc);
 		noInternetView.findViewById(R.id.retry_button).setOnClickListener(v -> {
 			DownloadImageTask downloadTask = new DownloadImageTask(staticImageView,
 					downloadRequestNumber.incrementAndGet(), downloadRequestNumber);

@@ -454,7 +454,8 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				int len = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimitLong((long) len);
-				PrefixNameValue prefix = pi.addData(OsmAndPoiNameIndexData.parseFrom(codedIS), shift);
+				PrefixNameValue prefix = pi.isCacheRawBlocks() ? pi.addData(codedIS.readRawBytes(len), shift)
+						: pi.addData(OsmAndPoiNameIndexData.parseFrom(codedIS), shift);
 				if (res != null) {
 					res.add(prefix);
 				}
@@ -929,9 +930,8 @@ public class BinaryMapPoiReaderAdapter {
 					}
 					if (matches) {
 						req.collectRawData(am);
-						if (req.publish(am) || req.isSkippedDuplication()) {
-							if (metrics != null) metrics.matchedObjectsLoaded++;
-						}
+						req.publish(am);
+						if (metrics != null) metrics.matchedObjectsLoaded++;
 					}
 					if (metrics != null) metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
 				}

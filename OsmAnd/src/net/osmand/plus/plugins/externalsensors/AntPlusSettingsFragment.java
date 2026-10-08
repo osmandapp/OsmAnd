@@ -58,4 +58,9 @@ public class AntPlusSettingsFragment extends BaseSettingsFragment {
 			 */
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "ant_plus_settings";
+	}
 }

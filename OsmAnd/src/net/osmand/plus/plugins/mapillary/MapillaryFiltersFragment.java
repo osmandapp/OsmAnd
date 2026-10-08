@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -34,6 +35,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.DelayAutoCompleteTextView;
 
@@ -58,12 +60,17 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
         int currentModeColor = appMode.getProfileColor(nightMode);
 
         View view = UiUtilities.getInflater(mapActivity, nightMode)
-                .inflate(R.layout.fragment_mapillary_filters, container, false);
+                .inflate(R.layout.fragment_street_level_imagery_filters, container, false);
 
         boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
         AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 
-        view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
+        view.findViewById(R.id.filters_linear_layout).setBackgroundColor(backgroundColor);
+        // The layout is shared with Panoramax; only the description carries provider wording.
+        ((TextView) view.findViewById(R.id.filters_description)).setText(R.string.mapillary_menu_filter_description_new);
+        // Filtering by username is not available in the current Mapillary API version.
+        AndroidUiHelper.updateVisibility(view.findViewById(R.id.username_row), false);
+        AndroidUiHelper.updateVisibility(view.findViewById(R.id.username_input_container), false);
 
         View toggleRow = view.findViewById(R.id.toggle_row);
         boolean selected = plugin.SHOW_MAPILLARY.get();
@@ -100,11 +107,11 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
 
 
         int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon))
+        ((AppCompatImageView) view.findViewById(R.id.filters_user_icon))
                 .setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon))
+        ((AppCompatImageView) view.findViewById(R.id.filters_date_icon))
                 .setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon))
+        ((AppCompatImageView) view.findViewById(R.id.filters_tile_cache_icon))
                 .setImageDrawable(getIcon(R.drawable.ic_layer_top, colorRes));
 
         DelayAutoCompleteTextView textView =
@@ -141,12 +148,9 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
 
         EditText dateFromEt = view.findViewById(R.id.date_from_edit_text);
         DatePickerDialog.OnDateSetListener dateFromDialog = (v, year, monthOfYear, dayOfMonth) -> {
-            Calendar from = Calendar.getInstance();
-            from.set(Calendar.YEAR, year);
-            from.set(Calendar.MONTH, monthOfYear);
-            from.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            dateFromEt.setText(dateFormat.format(from.getTime()));
-            plugin.MAPILLARY_FILTER_FROM_DATE.set(from.getTimeInMillis());
+            long from = OsmAndFormatter.getStartOfDay(year, monthOfYear, dayOfMonth);
+            dateFromEt.setText(dateFormat.format(new Date(from)));
+            plugin.MAPILLARY_FILTER_FROM_DATE.set(from);
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         };
@@ -162,12 +166,9 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
 
         EditText dateToEt = view.findViewById(R.id.date_to_edit_text);
         DatePickerDialog.OnDateSetListener dateToDialog = (v, year, monthOfYear, dayOfMonth) -> {
-            Calendar to = Calendar.getInstance();
-            to.set(Calendar.YEAR, year);
-            to.set(Calendar.MONTH, monthOfYear);
-            to.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            dateToEt.setText(dateFormat.format(to.getTime()));
-            plugin.MAPILLARY_FILTER_TO_DATE.set(to.getTimeInMillis());
+            long to = OsmAndFormatter.getEndOfDay(year, monthOfYear, dayOfMonth);
+            dateToEt.setText(dateFormat.format(new Date(to)));
+            plugin.MAPILLARY_FILTER_TO_DATE.set(to);
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         };
@@ -277,7 +278,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
     @Override
     public InsetTargetsCollection getInsetTargets() {
         InsetTargetsCollection collection = super.getInsetTargets();
-        collection.replace(InsetTarget.createBottomContainer(R.id.mapillary_filters_linear_layout).landscapeLeftSided(true));
+        collection.replace(InsetTarget.createBottomContainer(R.id.filters_linear_layout).landscapeLeftSided(true));
         collection.removeType(Type.ROOT_INSET);
         return collection;
     }
@@ -288,5 +289,10 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
                     .replace(R.id.content, new MapillaryFiltersFragment(), TAG)
                     .commitAllowingStateLoss();
         }
+    }
+
+    @Override
+    public String getAnalyticsScreen() {
+        return "mapillary_filters";
     }
 }

@@ -117,4 +117,9 @@ public class SelectTrackFileDialogFragment extends BaseFullScreenDialogFragment 
 			fragment.show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "select_track_file";
+	}
 }

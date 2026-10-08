@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="opening_hours_public_holiday">Праздники</string>
+    <string name="opening_hours_school_holiday">Каникулы</string>
+    <string name="opening_hours_easter">Пасха</string>
     <string name="obd_fuel_type_not_provided">Тип топлива не предоставлен</string>
     <string name="obd_fuel_type_gasoline">Бензин</string>
     <string name="obd_fuel_type_methanol">Метанол</string>
@@ -55,8 +58,6 @@
     <string name="intermediate_waypoint">Промежуточная точка</string>
     <string name="intermediate_destinations">Промежуточные точки</string>
     <string name="arrive_at_time">Прибытие в %1$s</string>
-    <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
-    <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
     <string name="private_access_routing_req">Пункт назначения расположен на частной территории. Разрешить использование частных дорог на маршруте\?</string>
     <string name="restart_search">Искать снова</string>
     <string name="increase_search_radius">Увеличить радиус поиска</string>
@@ -277,7 +278,6 @@
     <string name="recording_unavailable">недоступно</string>
     <string name="recording_context_menu_arecord">Записать аудио</string>
     <string name="recording_context_menu_vrecord">Записать видео</string>
-    <string name="layer_recordings">Слой медиазаписей</string>
     <string name="recording_context_menu_play">Проиграть</string>
     <string name="recording_description">Запись %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запись</string>
@@ -285,7 +285,6 @@
     <string name="audionotes_location_not_defined">Нажмите «Использовать позицию…», чтобы добавить заметку к месту.</string>
     <string name="map_widget_audionotes">Аудиозаметки</string>
     <string name="audionotes_plugin_description">Создавайте в пути аудио-, видео- и фотозаметки, используя виджет или контекстное меню.</string>
-    <string name="audionotes_plugin_name">Аудио/видеозаметки</string>
     <string name="srtm_plugin_name">Ландшафт</string>
     <string name="rendering_attr_noAdminboundaries_name">Границы</string>
     <string name="rendering_attr_noAdminboundaries_description">Скрыть региональные границы (admin levels 5-9).</string>
@@ -1253,7 +1252,6 @@
     <string name="download_wikipedia_maps">Википедия</string>
     <string name="read_full_article">Открыть в Википедии</string>
     <string name="shared_string_import2osmand">Импорт в OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Удалить заметки (%1$d)\?</string>
     <string name="gps_network_not_enabled">Служба определения местоположения выключена. Включить?</string>
     <string name="lang_es_ar">Испанский (аргентинский)</string>
     <string name="lang_nb">Норвежский букмол</string>
@@ -1402,7 +1400,6 @@
     <string name="shared_string_update">Обновить</string>
     <string name="shared_string_upload">Отправить</string>
     <string name="osm_edit_created_poi">Создана OSM POI</string>
-    <string name="av_locations">Места</string>
     <string name="read_more">Подробнее</string>
     <string name="whats_new">Что нового в</string>
     <string name="save_poi_without_poi_type_message">Сохранить POI без указания типа\?</string>
@@ -1493,7 +1490,6 @@
     <string name="finish_navigation">Завершить навигацию</string>
     <string name="avoid_road">Избегать на маршруте</string>
     <string name="dashboard_or_drawer_description">Предлагается выбрать, прежде всего, управление приложением через гибкую панель управления или статическое меню. Ваш выбор всегда может быть изменён в настройках панели управления.</string>
-    <string name="watch">Просмотр</string>
     <string name="shared_string_add_to_map_markers">Добавить к маркерам</string>
     <string name="storage_directory_shared">Общее хранилище</string>
     <string name="access_shared_string_navigate_up">Перейти вверх</string>
@@ -1516,7 +1512,6 @@
     <string name="lang_en_gb">Английский (Соединённое Королевство)</string>
     <string name="lang_hu_formal">Венгерский (официальный)</string>
     <string name="lang_kn">Каннада</string>
-    <string name="file_name_containes_illegal_char">Имя файла содержит недопустимый символ</string>
     <string name="route_stops_before">%1$s остановок до выбранной</string>
     <string name="coords_search">Поиск по координатам</string>
     <string name="advanced_coords_search">Расширенный поиск по координатам</string>
@@ -1554,7 +1549,6 @@
     <string name="get_it">Получить</string>
     <string name="osm_live_banner_desc">Получите неограниченное количество скачиваний карт, а также еженедельные, ежедневные и даже почасовые обновления.</string>
     <string name="select_voice_provider">Голосовое сопровождение</string>
-    <string name="av_locations_descr">GPX-файл с координатами.</string>
     <string name="lang_ast">Астурийский</string>
     <string name="lang_hsb">Верхнелужицкий</string>
     <string name="lang_be_by">Белорусский (латиница)</string>
@@ -1799,11 +1793,6 @@
     <string name="marker_activated">Маркер %s активирован.</string>
     <string name="one_tap_active_descr">Нажатие на маркер на карте переместит его в начало списка активных маркеров, минуя контекстное меню.</string>
     <string name="one_tap_active">Активация одним нажатием</string>
-    <string name="empty_state_av_notes">Делайте заметки!</string>
-    <string name="empty_state_av_notes_desc">Добавьте аудио-, видео- или фотозаметки в любую точку на карте, используя виджет или контекстное меню.</string>
-    <string name="notes_by_date">Заметки по дате</string>
-    <string name="by_date">По дате</string>
-    <string name="by_type">По типу</string>
     <string name="modify_the_search_query">Измените ваш запрос.</string>
     <string name="osm_recipient_stat">Правок %1$s, сумма %2$s mBTC</string>
     <string name="osm_recipients_label">OSM получатели</string>
@@ -1825,7 +1814,7 @@
     <string name="shared_string_marker">Маркер</string>
     <string name="shared_string_without_name">Без имени</string>
     <string name="lang_lo">Лаосский</string>
-    <string name="day_off_label">вых.</string>
+    <string name="day_off_label">выходной</string>
     <string name="winter_and_ski_renderer">Зимний/лыжный</string>
     <string name="touring_view_renderer">Туристический</string>
     <string name="nautical_renderer">Морской</string>
@@ -2417,7 +2406,6 @@
     <string name="live_monitoring">Онлайн-трекинг</string>
     <string name="save_track_logging_accuracy">Точность журналирования</string>
     <string name="tracks_view_descr">Записанные треки находятся в %1$s или папке OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">Ваши OSM-заметки находятся в %1$s.</string>
     <string name="video_notes">Видеозаметки</string>
     <string name="photo_notes">Фотозаметки</string>
     <string name="plugin_global_prefs_info">Эти настройки плагина применяются ко всем профилям</string>
@@ -4022,8 +4010,8 @@
     <string name="open_issue_on_github_descr">Задать вопрос, предложить функционал</string>
     <string name="send_crash_log_descr">Содержит только информацию о сбоях</string>
     <string name="open_issue_on_github">Открыть issue на GitHub</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="with_waypoints">С путевыми точками</string>
     <string name="help_article_widgets_markers_name">Виджеты маркеров</string>
     <string name="help_article_purchases_giveaway_name">Бесплатная раздача</string>
@@ -4591,28 +4579,10 @@
     <string name="plugin_nautical_descr">Плагин дополняет вашу карту информацией о морских маршрутах, навигационных огнях, опасных зонах, зонах с ограничениями на судоходство или швартовку и других навигационных данных. Для использования скачайте соответствующие морские карты и включите стиль «Морской» в разделе меню «Настройка карты».\n\nПодробнее читайте на %1$s.</string>
     <string name="ais_address_settings">Настройки IP-адреса</string>
     <string name="ais_address_settings_description">Выберите протокол NMEA (UDP/TCP) и укажите соответствующие адреса и порты</string>
-    <string name="ais_nmea_protocol">Протокол приема данных NMEA</string>
-    <string name="ais_nmea_protocol_description">Выберите протокол для приема данных NMEA</string>
-    <string name="ais_address_nmea_server">IP-адрес источника данных NMEA</string>
-    <string name="ais_port_nmea_server">TCP-порт источника данных NMEA</string>
-    <string name="ais_address_nmea_server_description">Определить IP-адрес источника данных NMEA (если используется TCP)</string>
-    <string name="ais_port_nmea_server_description">Определить номер порта TCP источника данных NMEA</string>
-    <string name="ais_port_nmea_local">UDP-порт локального приемника данных NMEA</string>
-    <string name="ais_object_lost_timeouts">Настройки тайм-аута для приема сигнала AIS</string>
-    <string name="ais_object_lost_timeout">Время жизни метки при потере судна</string>
-    <string name="ais_ship_lost_timeout">Время жизни метки судна истекло</string>
-    <string name="ais_cpa_warning_time">За какое время предупреждать о CPA</string>
-    <string name="ais_cpa_warning_time_description">Если TCPA (время до ближайшей точки сближения) с другим судном падает ниже установленного порогового значения, судно выделяется красным цветом.</string>
     <string name="plugin_ais_tracker_name">AIS-трекер судов</string>
-    <string name="ais_cpa_warning_distance_description">Суда выделяются красным цветом, если CPA (Ближайшая точка сближения) находится ближе установленного порогового значения, а TCPA (время подхода до точки сближения) станет меньше, чем установлено в настройках \"За какое время предупреждать о CPA\".</string>
-    <string name="ais_ship_lost_timeout_description">Установите время жизни метки судна: по истечении этого времени, при отсутствии приёма сигнала, метка символа судна изменит свой вид – она будет перёчеркнута.</string>
     <string name="plugin_ais_tracker_description">Отображение позиций AIS и информации об окружающих судах. Данные принимаются по сети от внешнего приемника AIS (Automatic Identification System).</string>
     <string name="ais_load_data">Получить данные AIS из файла</string>
-    <string name="ais_object_lost_timeout_description">Установите тайм-аут для видимости объекта AIS: если в течение указанного времени сигнал не будет получен, объект будет автоматически удален с экрана.</string>
-    <string name="ais_cpa_warning_distance">Расстояние предупреждения для точки наибольшего сближения (CPA)</string>
     <string name="plugin_ais_tracker_disclaimer">ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ\n\nЭтот плагин является хобби-проектом и не предназначен для использования в критически важных приложениях. Он не гарантирует надежность или точность. Не полагайтесь на это программное обеспечение для навигации, обеспечения безопасности жизни или любых других важных операций.</string>
-    <string name="ais_port_nmea_local_description">Определить порт UDP, на который OsmAnd будет получать данные NMEA</string>
-    <string name="ais_cpa_settings">Настройки, связанные с CPA</string>
     <string name="display_distance_to_first_intermediate_summary">Показывает время и расстояние до следующей остановки. Отключите опцию, чтобы вместо времени и расстояния показывать подробную информацию о конечном пункте назначения.</string>
     <string name="no_places_available">Нет мест в видимой области</string>
     <string name="no_photo_for_location_desc">Для этого местоположения еще не было добавлено ни одной пользовательской фотографии</string>
@@ -5073,12 +5043,12 @@
     <string name="shared_string_gpu">Графический процессор</string>
     <string name="shared_string_allocated">Зарезервированная</string>
     <string name="open_till_short">До</string>
-    <string name="open_from_short">C</string>
+    <string name="open_from_short">С</string>
     <string name="astro_designations">Обозначения</string>
     <string name="obd_simulation_device">Устройство для моделирования</string>
     <string name="astronomy_map">Астрономическая карта</string>
     <string name="favorite_folder_rename_conflict">Папка с таким названием уже существует.</string>
-    <string name="favorite_folder_invalid_name">Имя папки не может содержать / или _%_</string>
+    <string name="favorite_folder_invalid_name">Имя папки не может содержать / или %1$s</string>
     <string name="favorite_folder_duplicate_message">Используйте имя папки, которого еще нет в списке.</string>
     <string name="favorite_folder_name">Имя папки</string>
     <string name="edit_folder">Редактировать папку</string>
@@ -5114,7 +5084,6 @@
     <string name="history_is_turned_off">История отключена</string>
     <string name="search_and_navigation_history_disabled_descr">История поиска и навигации отключена. Включите её в настройках, чтобы видеть здесь недавние действия.</string>
     <string name="open_history_settings">Открыть настройки истории</string>
-    <string name="ais_own_object">Настройки отображения собственного объекта AIS</string>
     <string name="astro_lunar_eclipse">Лунное затмение</string>
     <string name="astro_lunar_eclipse_subtitle">Исследуйте лунные затмения по всему миру</string>
     <string name="astro_previous_lunar_eclipse">Предыдущее лунное затмение</string>
@@ -5184,12 +5153,7 @@
     <string name="duplicate_map_road_only_exists_desc">У вас уже есть карта только с дорогами для %1$s. Загрузка стандартной карты приведет к дублированию данных и может снизить производительность.</string>
     <string name="duplicate_map_replace_with_standard">Заменить на «Стандарт»</string>
     <string name="duplicate_map_replace_with_road">Заменить на «Только дороги»</string>
-    <string name="ais_own_mmsi">Собственный MMSI (Maritime Mobile Service Identity) - идентификатор морской подвижной службы</string>
-    <string name="ais_own_mmsi_description">Определите MMSI (9-значное числовое значение) своего объекта AIS.</string>
-    <string name="ais_display_own_position">Определите, следует ли отображать собственный объект AIS.</string>
-    <string name="ais_display_own_position_description">Обычно OsmAnd показывает собственное местоположение. Дополнительное отображение собственного объекта AIS может сбивать с толку, поэтому его можно отключить.</string>
     <string name="ais_receive_in_background">Получать данные AIS, даже если OsmAnd приостановлен.</string>
-    <string name="ais_receive_in_background_description">Если этот параметр включен, прослушиватель сообщений AIS продолжает работать, даже если OsmAnd приостановлен или работает в фоновом режиме. Если этот параметр выключен, сообщения не будут приниматься, если OsmAnd работает в фоновом режиме.</string>
     <string name="data_storage">Хранение данных</string>
     <string name="main_storage">Основное хранилище</string>
     <string name="media_storage">Хранение медиа</string>

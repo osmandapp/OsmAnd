@@ -11,8 +11,8 @@
     <string name="m">μ</string>
     <string name="nm">ναυτικό μίλι</string>
     <string name="min_mile">λεπτά/μίλι</string>
-    <string name="min_km">λεπτά/χιλιόμετρο</string>
-    <string name="m_s">μέτρα/δευτερόλεπτο</string>
+    <string name="min_km">λεπτά/χλμ</string>
+    <string name="m_s">μ/δ</string>
     <string name="km_h">χλμ/ω</string>
     <string name="si_kmh">Χιλιόμετρα ανά ώρα</string>
     <string name="si_mph">Μίλια ανά ώρα</string>

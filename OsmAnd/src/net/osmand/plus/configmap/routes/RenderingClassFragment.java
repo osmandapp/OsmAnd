@@ -78,4 +78,9 @@ public class RenderingClassFragment extends MapRoutesFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "rendering_class";
+	}
 }

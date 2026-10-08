@@ -159,4 +159,9 @@ public class IconsPaletteFragment<IconData> extends BaseFullScreenDialogFragment
 			new IconsPaletteFragment<>().show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "icons_palette";
+	}
 }

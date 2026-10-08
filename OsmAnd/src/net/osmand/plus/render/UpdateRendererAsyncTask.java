@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -13,7 +14,11 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRulesStorage;
 
+import org.apache.commons.logging.Log;
+
 public class UpdateRendererAsyncTask extends AsyncTask<Void, Void, Boolean> {
+
+	private static final Log log = PlatformUtil.getLog(UpdateRendererAsyncTask.class);
 
 	private final OsmandApplication app;
 
@@ -36,6 +41,12 @@ public class UpdateRendererAsyncTask extends AsyncTask<Void, Void, Boolean> {
 		RenderingRulesStorage newRenderer = registry.getRenderer(settings.RENDERER.get());
 		if (newRenderer == null) {
 			newRenderer = registry.defaultRender();
+		}
+		if (newRenderer == null) {
+			// Neither the selected style nor "default" could be loaded: keep whatever renderer
+			// is already selected instead of replacing it with null.
+			log.error("Failed to load renderer " + settings.RENDERER.get() + ", keeping the current one");
+			return false;
 		}
 		boolean changed = registry.getCurrentSelectedRenderer() != newRenderer;
 		if (changed) {

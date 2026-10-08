@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.astronomy
 
 import net.osmand.plus.R
+import net.osmand.plus.plugins.astronomy.views.StarViewCameraState
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import org.json.JSONArray
 import org.json.JSONObject
@@ -46,6 +47,15 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		private const val KEY_CELESTIAL_PATHS = "celestialPaths"
 		private const val KEY_ID = "id"
 		private const val KEY_COLOR_INDEX = "colorIndex"
+
+		private const val KEY_LAST_STAR_CAMERA_STATE = "last_star_camera_state"
+		private const val KEY_LAT_STAR_CAMERA_STATE_AZ = "last_star_camera_state_az"
+		private const val KEY_LAT_STAR_CAMERA_STATE_ALT = "last_star_camera_state_alt"
+		private const val KEY_LAT_STAR_CAMERA_STATE_FOV = "last_star_camera_state_fov"
+		private const val KEY_LAT_STAR_CAMERA_STATE_2D = "last_star_camera_state_2d"
+		private const val KEY_LAT_STAR_CAMERA_STATE_PAN_X = "last_star_camera_state_pan_x"
+		private const val KEY_LAT_STAR_CAMERA_STATE_PAN_Y = "last_star_camera_state_pan_y"
+		private const val KEY_LAT_STAR_CAMERA_STATE_ROLL = "last_star_camera_state_roll"
 	}
 
 	enum class DirectionColor(val colorResId: Int) {
@@ -116,7 +126,9 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		val magnitudeFilter: Double?,
 		val favorites: List<FavoriteConfig>,
 		val directions: List<DirectionConfig>,
-		val celestialPaths: List<CelestialPathConfig>
+		val celestialPaths: List<CelestialPathConfig>,
+
+		val lastStarCameraState: StarViewCameraState? = null
 	)
 
 	private fun getSettingsJson(): JSONObject {
@@ -160,6 +172,32 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 			array.put(obj)
 		}
 		return array
+	}
+
+	private fun deserializeCameraState(obj: JSONObject): StarViewCameraState? {
+		return try {
+			val azimuth = obj.getDouble(KEY_LAT_STAR_CAMERA_STATE_AZ)
+			val altitude = obj.getDouble(KEY_LAT_STAR_CAMERA_STATE_ALT)
+			val viewAngle = obj.getDouble(KEY_LAT_STAR_CAMERA_STATE_FOV)
+			val is2DMode = obj.getBoolean(KEY_LAT_STAR_CAMERA_STATE_2D)
+			val panX = obj.getDouble(KEY_LAT_STAR_CAMERA_STATE_PAN_X).toFloat()
+			val panY = obj.getDouble(KEY_LAT_STAR_CAMERA_STATE_PAN_Y).toFloat()
+			val roll = obj.getDouble(KEY_LAT_STAR_CAMERA_STATE_ROLL)
+			StarViewCameraState(azimuth, altitude, viewAngle, is2DMode, panX, panY, roll)
+		} catch (_: Throwable) {
+			null
+		}
+	}
+ 	private fun serializeCameraState(cameraState: StarViewCameraState): JSONObject {
+		val result = JSONObject()
+		result.put(KEY_LAT_STAR_CAMERA_STATE_AZ, cameraState.azimuth)
+		result.put(KEY_LAT_STAR_CAMERA_STATE_ALT, cameraState.altitude)
+		result.put(KEY_LAT_STAR_CAMERA_STATE_FOV, cameraState.viewAngle)
+		result.put(KEY_LAT_STAR_CAMERA_STATE_2D, cameraState.is2DMode)
+		result.put(KEY_LAT_STAR_CAMERA_STATE_PAN_X, cameraState.panX)
+		result.put(KEY_LAT_STAR_CAMERA_STATE_PAN_Y, cameraState.panY)
+		result.put(KEY_LAT_STAR_CAMERA_STATE_ROLL, cameraState.roll)
+		return result
 	}
 
 	@Synchronized
@@ -228,6 +266,7 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 			DirectionConfig(id, obj.optInt(KEY_COLOR_INDEX, nextColor++ % DirectionColor.entries.size))
 		}
 		val celestialPaths = parseItems(mapSettings, KEY_CELESTIAL_PATHS) { _, id -> CelestialPathConfig(id) }
+		val cameraState = mapSettings?.optJSONObject(KEY_LAST_STAR_CAMERA_STATE)?.let { deserializeCameraState(it) }
 
 		return StarMapConfig(
 			showAzimuthalGrid = showAzimuthal,
@@ -256,7 +295,8 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 			magnitudeFilter = magnitudeFilter,
 			favorites = favorites,
 			directions = directions,
-			celestialPaths = celestialPaths
+			celestialPaths = celestialPaths,
+			lastStarCameraState = cameraState
 		)
 	}
 
@@ -327,6 +367,11 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 			mapSettings.remove(KEY_CELESTIAL_PATHS)
 		} else {
 			mapSettings.put(KEY_CELESTIAL_PATHS, serializeItems(config.celestialPaths))
+		}
+		if (config.lastStarCameraState == null) {
+			mapSettings.remove(KEY_LAST_STAR_CAMERA_STATE)
+		} else {
+			mapSettings.put(KEY_LAST_STAR_CAMERA_STATE, serializeCameraState(config.lastStarCameraState))
 		}
 
 		root.put(KEY_STAR_MAP, mapSettings)

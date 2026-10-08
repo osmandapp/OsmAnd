@@ -30,7 +30,6 @@
     <string name="recording_error">ضبط نشد</string>
     <string name="recording_context_menu_arecord">گرفتن یادداشت صوتی</string>
     <string name="recording_context_menu_vrecord">گرفتن یادداشت ویدئویی</string>
-    <string name="layer_recordings">لایهٔ ضبط‌شده‌ها</string>
     <string name="recording_context_menu_play">پخش</string>
     <string name="recording_default_name">در حال ضبط</string>
     <string name="shared_string_control_stop">توقف</string>
@@ -38,7 +37,6 @@
     <string name="map_widget_av_notes">یادداشت‌های صوتی/تصویری</string>
     <string name="map_widget_audionotes">یادداشت‌های صوتی</string>
     <string name="audionotes_plugin_description">امکان افزودن یادداشت‌های صوتی، تصویری و ویدئویی در نقاط نقشه.</string>
-    <string name="audionotes_plugin_name">یادداشت‌های صوتی/تصویری</string>
     <string name="download_select_map_types">نقشه‌های دیگر</string>
     <string name="download_regular_maps">نقشهٔ استاندارد</string>
     <string name="download_roads_only_maps">فقط نقشهٔ جاده‌ها</string>
@@ -814,7 +812,6 @@
     <string name="plugin_touringview_name">نمای گردشگری نقشه</string>
     <string name="shared_string_audio">شنیداری</string>
     <string name="share_note">هم‌رسانی یادداشت</string>
-    <string name="watch">مشاهده</string>
     <string name="notes">یادداشت‌های صوتی/تصویری</string>
     <string name="online_map">نقشهٔ آنلاین</string>
     <string name="device_memory">حافظهٔ دستگاه</string>
@@ -1352,7 +1349,6 @@
     <string name="shared_string_import2osmand">درون‌برد به OsmAnd</string>
     <string name="read_full_article">مقالهٔ کامل را بخوانید (آنلاین)</string>
     <string name="shared_string_wikipedia">ویکی‌پدیا</string>
-    <string name="local_recordings_delete_all_confirm">آیا %1$d یادداشت پاک شود؟</string>
     <string name="osmand_parking_hour">س</string>
     <string name="shared_string_minute_lowercase">min</string>
     <string name="shared_string_collapse">مخفی شود</string>
@@ -1448,7 +1444,6 @@
     <string name="number_of_contributors">تعداد مشارکت‌کنندگان</string>
     <string name="number_of_edits">تعداد ویرایش‌ها</string>
     <string name="reports_for">گزارش برای</string>
-    <string name="file_name_containes_illegal_char">نویسهٔ غیرمجاز در نام پرونده</string>
     <string name="configure_screen_quick_action">کنش فوری</string>
     <string name="quick_action_item_action">کنش %d</string>
     <string name="quick_action_item_screen">صفحهٔ %d</string>
@@ -1591,7 +1586,6 @@
     <string name="lang_mk">مقدونی</string>
     <string name="lang_fy">فریسی غربی</string>
     <string name="lang_als">آلبانیایی (تُسک)</string>
-    <string name="av_locations">مکان‌ها</string>
     <string name="routing_attr_avoid_shuttle_train_name">قطار خطی</string>
     <string name="routing_attr_avoid_shuttle_train_description">از قطار خطی پرهیز می‌کند</string>
     <string name="traffic_warning_hazard">خطر</string>
@@ -1650,7 +1644,6 @@
     <string name="round_trip">سفر رفت‌وبرگشتی</string>
     <string name="plan_route_no_markers_toast">برای استفاده از این قابلیت باید حداقل یک نشانه بیافزایید.</string>
     <string name="shared_string_road">جاده</string>
-    <string name="av_locations_descr">پروندهٔ GPX از موقعیت‌ها.</string>
     <string name="osmand_plus_extended_description_part1">برنامهٔ OsmAnd+‎ (مخفف OSM Automated Navigation Directions به‌معنی راهنمای خودکار ناوبری بر پایهٔ OSM) یک نرم‌افزار نقشه و ناوبری است که به گسترهٔ وسیعی از دادهٔ OSM دسترسی دارد. این دادهٔ رایگان و جهانی با بالاترین کیفیت ارائه می‌شود.
 \n
 \nراهبر دیداری و شنیداری، مشاهدهٔ نقاط توجه (POIها یا Points of interest)، ایجاد و مدیریت ردهای GPX، استفاده از تصویرسازی منحنی‌های میزان و اطلاعات ارتفاع، انتخاب حالت‌های پیاده، دوچرخه، خودرو، امکان ویرایش مکان‌ها و... چیزهایی هستند که تجربهٔ مؤثر و لذت‌بخشی را در کار با نقشه برایتان به ارمغان می‌آورد.
@@ -1721,11 +1714,6 @@
     <string name="marker_activated">نشانهٔ %s فعال شد.</string>
     <string name="one_tap_active_descr">یکی از نشانه‌های روی نقشه را لمس کنید تا بدون نیاز به بازکردن فهرست زمینه، آن را در صدر نشانه‌های فعال قرار دهید.</string>
     <string name="one_tap_active">فعال‌سازی «با یک لمس»</string>
-    <string name="empty_state_av_notes">یادداشت بگذارید!</string>
-    <string name="empty_state_av_notes_desc">با استفاده از ابزارک یا فهرست زمینه، برای هر نقطه‌ای روی نقشه یادداشت صوتی، عکسی یا ویدئویی بگذارید.</string>
-    <string name="notes_by_date">یادداشت‌های صوتی/تصویری بر پایه تاریخ</string>
-    <string name="by_date">بر پایه تاریخ</string>
-    <string name="by_type">بر پایه نوع</string>
     <string name="modify_the_search_query">جستجوی خود را تغییر دهید.</string>
     <string name="what_is_here">چیزهایی که اینجاست:</string>
     <string name="parked_at">ساعت پارک</string>
@@ -1740,8 +1728,6 @@
     <string name="will_open_at">ساعت بازکردن</string>
     <string name="will_open_on">زمان بازشدن</string>
     <string name="additional_actions">کنش‌های بیشتر</string>
-    <string name="av_locations_selected_desc">پروندهٔ GPX از مختصات و مشخصات یادداشت‌های انتخابی.</string>
-    <string name="av_locations_all_desc">پروندهٔ GPX از مختصات و مشخصات همهٔ یادداشت‌ها.</string>
     <string name="shared_string_actions">کنش‌ها</string>
     <string name="shared_string_marker">نشانه</string>
     <string name="osm_recipient_stat">ویرایش‌ها: %1$s، مبلغ: %2$s هزارم بیت‌کوین</string>
@@ -2347,7 +2333,6 @@
     <string name="live_monitoring_adress">نشانی وب</string>
     <string name="live_monitoring_descr">اجازه می‌دهد موقعیت کنونی با استفاده از ضبط سفر هم‌رسانی شود.</string>
     <string name="tracks_view_descr">ردهای ضبط‌شدهٔ شما در %1$s یا در پوشهٔ OsmAnd قرار دارند.</string>
-    <string name="multimedia_notes_view_descr">یادداشت‌های OSMای شما در %1$s قرار دارند.</string>
     <string name="osm_edits_view_descr">همهٔ ویرایش‌ها یا یادداشت‌های OSMای بارگذاری نشدهٔ خود را در %1$s ببینید. تغییرات بارگذاری شده را دیگر نمی‌بینید.</string>
     <string name="logcat_buffer_descr">لاگ‌های باجزئیات برنامه را بررسی و هم‌رسانی کنید</string>
     <string name="osm_authorization_success">احراز هویت موفقیت‌آمیز بود</string>
@@ -3415,24 +3400,6 @@
     <string name="ais_load_data">بارگیری داده‌های AIS از پرونده</string>
     <string name="ais_address_settings">تنظیمات نشانی IP</string>
     <string name="ais_address_settings_description">پروتکل NMEA (UDP/TCP) را انتخاب کنید و نشانی‌ها و درگاه‌های مربوطه را مشخص کنید</string>
-    <string name="ais_nmea_protocol">پروتکل دریافت داده‌های NMEA</string>
-    <string name="ais_nmea_protocol_description">پروتکل دریافت داده‌های NMEA را انتخاب کنید</string>
-    <string name="ais_address_nmea_server">نشانی IP منبع داده NMEA</string>
-    <string name="ais_address_nmea_server_description">نشانی IP منبع داده NMEA را مشخص کنید (اگر TCP استفاده می‌شود)</string>
-    <string name="ais_port_nmea_server">درگاه TCP منبع داده NMEA</string>
-    <string name="ais_port_nmea_server_description">شماره درگاه TCP منبع داده NMEA را مشخص کنید</string>
-    <string name="ais_port_nmea_local">درگاه UDP گیرنده داده NMEA محلی</string>
-    <string name="ais_port_nmea_local_description">درگاه UDP که OsmAnd داده‌های NMEA را دریافت می‌کند مشخص کنید</string>
-    <string name="ais_object_lost_timeouts">تنظیمات زمان‌بندی برای دریافت سیگنال AIS</string>
-    <string name="ais_object_lost_timeout">زمان‌بندی برای نمایش شیء در صورت گم‌شدن</string>
-    <string name="ais_object_lost_timeout_description">زمان‌بندی برای نمایش شیء AIS تنظیم کنید: اگر در مدت مشخص سیگنالی دریافت نشود، شیء به‌طور خودکار از نمایش برداشته می‌شود.</string>
-    <string name="ais_ship_lost_timeout">زمان‌بندی منقضی شدن کشتی</string>
-    <string name="ais_ship_lost_timeout_description">زمان‌بندی برای نمایش منقضی شدن کشتی تنظیم کنید: پس از این مدت بدون دریافت سیگنال، نماد کشتی خط‌خطی می‌شود.</string>
-    <string name="ais_cpa_settings">تنظیمات مربوط به CPA</string>
-    <string name="ais_cpa_warning_time">زمان هشدار قبل از نزدیک‌ترین نقطه تقرب (CPA)</string>
-    <string name="ais_cpa_warning_time_description">اگر TCPA (زمان تا نزدیک‌ترین نقطه تقرب) با کشتی دیگر کمتر از آستانه تعیین‌شده باشد، کشتی به رنگ قرمز برجسته می‌شود.</string>
-    <string name="ais_cpa_warning_distance">فاصله هشدار برای نزدیک‌ترین نقطه تقرب (CPA)</string>
-    <string name="ais_cpa_warning_distance_description">اگر CPA (نزدیک‌ترین نقطه تقرب) کمتر از آستانه تعیین‌شده باشد و TCPA (زمان تا CPA) در محدوده زمان هشدار تنظیم‌شده در «زمان هشدار برای رسیدن به CPA» باشد، کشتی‌ها به رنگ قرمز برجسته می‌شوند.</string>
     <string name="plugin_ais_tracker_name">ردیاب کشتی AIS</string>
     <string name="plugin_ais_tracker_description">موقعیت‌های AIS و اطلاعات کشتی‌های نزدیک را نمایش می‌دهد. داده‌های AIS از طریق شبکه از یک گیرنده AIS خارجی دریافت می‌شود.</string>
     <string name="plugin_ais_tracker_disclaimer">سلب مسئولیت\n\nاین افزونه یک پروژه تفننی است و برای استفاده در برنامه‌های حیاتی طراحی نشده است. قابلیت اطمینان یا دقت را تضمین نمی‌کند. برای ناوبری، ایمنی جانی یا هر عملیات ضروری دیگر به این نرم‌افزار وابسته نباشید.</string>
@@ -4150,8 +4117,8 @@
     <string name="with_waypoints">با نقاط راه</string>
     <string name="shared_string_reset_all">بازنشانی همه</string>
     <string name="date_of_creation">تاریخ ساخت</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
-    <string name="track_filter_range_selected_format">%s - %s، %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s، %3$s</string>
     <string name="filter_by_name">پالایش بر پایه نام</string>
     <string name="filter_screen_title">پالایه</string>
     <string name="filter_tracks_count">پالایه: %d</string>

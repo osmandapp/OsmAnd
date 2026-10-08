@@ -405,4 +405,9 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "tracks_selection";
+	}
 }

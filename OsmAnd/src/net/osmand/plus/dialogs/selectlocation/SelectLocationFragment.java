@@ -163,4 +163,9 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "select_location";
+	}
 }

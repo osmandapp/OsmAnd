@@ -168,6 +168,9 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 
 	@Override
 	public void updateContent() {
+		if (adapter == null) {
+			return;
+		}
 		List<Object> items = getAdapterItems();
 		setupSelectionHelper();
 		FavoriteListSortMode sortMode = getTracksSortMode();
@@ -406,5 +409,10 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 				&& buttonIndex == FavoritesFreeBackupCard.GET_OSMAND_CLOUD_BUTTON_INDEX) {
 			requireMyActivity().showOsmAndCloud(this);
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favorite_folders";
 	}
 }

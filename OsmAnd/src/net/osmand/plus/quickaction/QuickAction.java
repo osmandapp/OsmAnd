@@ -188,7 +188,11 @@ public class QuickAction {
 	}
 
 	public boolean onKeyUp(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
-		onActionSelected(mapActivity, event);
+		// Since Android 16 the system handles a Back key through the OnBackInvokedCallback and then
+		// forwards the cancelled key-up here; running the action again would handle Back twice.
+		if (!event.isCanceled()) {
+			onActionSelected(mapActivity, event);
+		}
 		return true;
 	}
 

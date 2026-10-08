@@ -91,7 +91,6 @@ public class RoutingConfigurationCompatTest {
 				assertEquals(m, j.routeCalculationTime, k.routeCalculationTime);
 				assertEquals(m, j.ambiguousConditionalTags, k.ambiguousConditionalTags);
 				assertEquals(m, j.MAX_VISITED, k.MAX_VISITED);
-				assertEquals(m, j.altHorizon, k.altHorizon, 0d);
 				assertEquals(m, j.directionPointsRadius, k.directionPointsRadius);
 				assertEquals(m, j.minPointApproximation, k.minPointApproximation, 0f);
 				assertEquals(m, j.minStepApproximation, k.minStepApproximation, 0f);

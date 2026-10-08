@@ -57,6 +57,15 @@ import net.osmand.aidlapi.favorite.group.RemoveFavoriteGroupParams;
 import net.osmand.aidlapi.favorite.group.UpdateFavoriteGroupParams;
 import net.osmand.aidlapi.gpx.AGpxBitmap;
 import net.osmand.aidlapi.gpx.AGpxFile;
+import net.osmand.aidlapi.gpx.AGpxPoints;
+import net.osmand.aidlapi.gpx.AGpxRecordingInfo;
+import net.osmand.aidlapi.gpx.AGpxSearchResult;
+import net.osmand.aidlapi.gpx.GpxSearchParams;
+import net.osmand.aidlapi.gpx.GpxPointsParams;
+import net.osmand.aidlapi.info.AMapWidgetValue;
+import net.osmand.aidlapi.map.AMapScreenshot;
+import net.osmand.aidlapi.map.MapScreenshotParams;
+import net.osmand.aidlapi.map.SetMapCameraParams;
 import net.osmand.aidlapi.gpx.ASelectedGpxFile;
 import net.osmand.aidlapi.gpx.CreateGpxBitmapParams;
 import net.osmand.aidlapi.gpx.HideGpxParams;
@@ -150,7 +159,8 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		OsmandAidlApi api = app.getAidlApi();
 		String packName = getCallingAppPackName();
 
-		boolean enabled = packName != null && (packName.equals(app.getPackageName()) || api.isAppEnabled(packName));
+		// the app is enabled in Connected apps and the permission group of the method is granted to it
+		boolean enabled = packName != null && (packName.equals(app.getPackageName()) || api.isMethodAllowed(packName, reason));
 		LOG.info("Request AIDL API V2 for " + reason + " from " + packName + " enabled: " + enabled);
 
 		return enabled ? api : null;
@@ -677,6 +687,73 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			} catch (Exception e) {
 				handleException(e);
 				return false;
+			}
+		}
+
+		@Override
+		public boolean setMapCamera(SetMapCameraParams params) {
+			try {
+				OsmandAidlApi api = getApi("setMapCamera");
+				return api != null && params != null && api.setMapCamera(params.getLatitude(), params.getLongitude(),
+						params.getZoom(), params.getRotation(), params.getElevationAngle(), params.isAnimated());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public AMapScreenshot getMapScreenshot(MapScreenshotParams params) {
+			try {
+				OsmandAidlApi api = getApi("getMapScreenshot");
+				return api != null && params != null ? api.getMapScreenshot(params.getMaxWidth(), params.getQuality(), params.isMapOnly()) : null;
+			} catch (Exception e) {
+				handleException(e);
+				return null;
+			}
+		}
+
+		@Override
+		public AGpxPoints getGpxPoints(GpxPointsParams params) {
+			try {
+				OsmandAidlApi api = getApi("getGpxPoints");
+				return api != null && params != null ? api.getGpxPoints(params.getFileName(), params.getOffset(), params.getLimit()) : null;
+			} catch (Exception e) {
+				handleException(e);
+				return null;
+			}
+		}
+
+		@Override
+		public AGpxSearchResult searchGpx(GpxSearchParams params) {
+			try {
+				OsmandAidlApi api = getApi("searchGpx");
+				return api != null && params != null ? api.searchGpx(params) : null;
+			} catch (Exception e) {
+				handleException(e);
+				return null;
+			}
+		}
+
+		@Override
+		public boolean getMapWidgetValues(List<AMapWidgetValue> widgets) {
+			try {
+				OsmandAidlApi api = getApi("getMapWidgetValues");
+				return api != null && widgets != null && api.getMapWidgetValues(widgets);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public AGpxRecordingInfo getGpxRecordingInfo() {
+			try {
+				OsmandAidlApi api = getApi("getGpxRecordingInfo");
+				return api != null ? api.getGpxRecordingInfo() : null;
+			} catch (Exception e) {
+				handleException(e);
+				return null;
 			}
 		}
 

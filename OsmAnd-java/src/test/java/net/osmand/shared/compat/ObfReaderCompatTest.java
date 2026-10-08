@@ -86,7 +86,7 @@ public class ObfReaderCompatTest {
 	public void testRoads() throws IOException {
 		SearchRequest<BinaryMapDataObject> jreq = BinaryMapIndexReader.buildSearchRequest(
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 16, null);
-		net.osmand.shared.binary.SearchRequest kreq = net.osmand.shared.binary.SearchRequest.buildSearchRouteRequest(
+		net.osmand.shared.binary.SearchRequest<net.osmand.shared.routing.RouteDataObject> kreq = net.osmand.shared.binary.SearchRequest.buildSearchRouteRequest(
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE);
 		for (int r = 0; r < java.getRoutingIndexes().size(); r++) {
 			RouteRegion jregion = java.getRoutingIndexes().get(r);

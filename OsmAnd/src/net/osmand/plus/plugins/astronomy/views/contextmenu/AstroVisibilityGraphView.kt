@@ -70,10 +70,10 @@ class AstroVisibilityGraphView @JvmOverloads constructor(
 	private var cursorReferenceTimeMillis: Long? = null
 	var onCursorTimeChanged: ((Long) -> Unit)? = null
 	private val sunriseDrawable: Drawable? by lazy {
-		ContextCompat.getDrawable(context, R.drawable.ic_action_sunrise_12)
+		ContextCompat.getDrawable(context, R.drawable.ic_action_arrow_triangle_up)
 	}
 	private val sunsetDrawable: Drawable? by lazy {
-		ContextCompat.getDrawable(context, R.drawable.ic_action_sunset_12)
+		ContextCompat.getDrawable(context, R.drawable.ic_action_arrow_triangle_down)
 	}
 
 	private val trajectoryPath = Path()

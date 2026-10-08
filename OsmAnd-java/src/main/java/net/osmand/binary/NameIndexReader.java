@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.InvalidProtocolBufferException;
 
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.list.array.TLongArrayList;
@@ -39,6 +40,30 @@ import net.osmand.util.SearchAlgorithms;
 public class NameIndexReader {
 
 	public static final String CITY_AS_STREET_COMMON = "cityasstreetcommon";
+	/** an alternative name of a street with another number of words carries the word altnamecommon1..7: the search reads
+	 *  that name as its own object, so its words never take the slots of the main name (alt_name name:zh '1945年5月8日街' vs 'Rue du 8 Mai 1945'). */
+	public static final String ALT_NAME_COMMON_PREFIX = "altnamecommon";
+	public static final int ALT_NAME_VARIANTS = 7;
+
+	public static String altNameMarker(int variant) {
+		return ALT_NAME_COMMON_PREFIX + variant;
+	}
+
+	/** 1..7 for the marker word of an alternative name, 0 for any other word */
+	public static int altNameVariant(String word) {
+		if (word != null && word.length() == ALT_NAME_COMMON_PREFIX.length() + 1 && word.startsWith(ALT_NAME_COMMON_PREFIX)) {
+			char c = word.charAt(ALT_NAME_COMMON_PREFIX.length());
+			if (c >= '1' && c <= '0' + ALT_NAME_VARIANTS) {
+				return c - '0';
+			}
+		}
+		return 0;
+	}
+
+	/** words the generator adds to a name for the search: never keys, never counted as words of the name */
+	public static boolean isIndexMarker(String word) {
+		return CITY_AS_STREET_COMMON.equalsIgnoreCase(word) || altNameVariant(word) > 0;
+	}
 	public static final String POI_CATEGORY_PREFIX = "#^";
 	
 	// read params
@@ -49,7 +74,9 @@ public class NameIndexReader {
 	private Map<String, TLongHashSet> matchedKeys = new HashMap<String, TLongHashSet>();
 	// cache for prefixes
 	private Map<Long, PrefixNameValue> indexByRef = new HashMap<>();
+	private long cachedBytes;
 	private long tablePointer;
+	private boolean cacheRawBlocks;
 	
 	// common words
 	private CommonIndexedStats commonStats;
@@ -140,7 +167,20 @@ public class NameIndexReader {
 		public String key;
 		public OsmAndPoiNameIndexData poi = null;
 		public AddressNameIndexData addr = null;
+		public byte[] data;
 		public long shift;
+
+		public OsmAndPoiNameIndexData getPoi() throws InvalidProtocolBufferException {
+			return poi == null && data != null && poiRegion != null ? OsmAndPoiNameIndexData.parseFrom(data) : poi;
+		}
+
+		public AddressNameIndexData getAddr() throws InvalidProtocolBufferException {
+			return addr == null && data != null && addressRegion != null ? AddressNameIndexData.parseFrom(data) : addr;
+		}
+
+		boolean isLoaded() {
+			return poi != null || addr != null || data != null;
+		}
 		
 		
 		@Override
@@ -302,6 +342,7 @@ public class NameIndexReader {
 		}
 		obj.shift = currentShift;
 		obj.poi = from;
+		cachedBytes += from.getSerializedSize();
 		return obj;
 	}
 	
@@ -312,7 +353,7 @@ public class NameIndexReader {
 		while(it.hasNext()) {
 			long l = it.next();
 			PrefixNameValue pv = indexByRef.get(l);
-			if (pv.addr == null && pv.poi == null) {
+			if (!pv.isLoaded()) {
 				loffsets.add(l);
 			} else {
 				r.add(pv);
@@ -322,6 +363,26 @@ public class NameIndexReader {
 	}
 
 
+	public PrefixNameValue addData(byte[] from, long currentShift) {
+		PrefixNameValue obj = indexByRef.get(currentShift);
+		if (obj.isLoaded()) {
+			throw new IllegalStateException(obj.toString());
+		}
+		obj.shift = currentShift;
+		obj.data = from;
+		cachedBytes += from.length;
+		return obj;
+	}
+
+	public boolean isCacheRawBlocks() {
+		return cacheRawBlocks;
+	}
+
+	public NameIndexReader setCacheRawBlocks(boolean cacheRawBlocks) {
+		this.cacheRawBlocks = cacheRawBlocks;
+		return this;
+	}
+
 	public PrefixNameValue addData(AddressNameIndexData from, long currentShift) {
 		PrefixNameValue obj = indexByRef.get(currentShift);
 		if (obj.addr != null) {
@@ -329,6 +390,7 @@ public class NameIndexReader {
 		}
 		obj.shift = currentShift;
 		obj.addr = from;
+		cachedBytes += from.getSerializedSize();
 		return obj;
 	}
 	
@@ -356,11 +418,24 @@ public class NameIndexReader {
 
 	public void gcPrefixes(int limit) {
 		if (limit > 0 && indexByRef.size() > limit) {
-			indexByRef.clear();
-			if (matchedKeys != null) {
-				matchedKeys.clear();
-			}
+			clearPrefixes();
 		}
+	}
+
+	public void clearPrefixes() {
+		indexByRef.clear();
+		cachedBytes = 0;
+		if (matchedKeys != null) {
+			matchedKeys.clear();
+		}
+	}
+
+	public long getCachedBytes() {
+		return cachedBytes;
+	}
+
+	public void clearQuery() {
+		query = null;
 	}
 	
 	public void resetBytesStat() {

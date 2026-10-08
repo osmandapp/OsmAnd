@@ -242,7 +242,7 @@ public class CommonWordsMultiIndex {
 		for (int i = 0; i < size; i++) {
 			String w = words.get(i);
 			// "cityasstreetcommon" marks a street that is a place: a word of the index itself, never a word of the name
-			number[i] = SearchAlgorithms.isNumber2Letters(w) || NameIndexReader.CITY_AS_STREET_COMMON.equalsIgnoreCase(w);
+			number[i] = SearchAlgorithms.isNumber2Letters(w) || NameIndexReader.isIndexMarker(w);
 			int[] v = number[i] ? null : g.words.get(SearchAlgorithms.alignChars(w));
 			cls[i] = v == null ? KEEP : v[0];
 			freq[i] = v == null ? 0 : v[1];

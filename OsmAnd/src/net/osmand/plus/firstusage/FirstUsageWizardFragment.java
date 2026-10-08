@@ -808,6 +808,11 @@ public class FirstUsageWizardFragment extends BaseFullScreenFragment implements 
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "first_usage_wizard";
+	}
 }
 
 interface FirstUsageActionsListener {
