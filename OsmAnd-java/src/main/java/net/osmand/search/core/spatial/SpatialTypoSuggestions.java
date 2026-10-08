@@ -31,12 +31,22 @@ import net.osmand.util.SearchAlgorithms;
  */
 class SpatialTypoSuggestions {
 
+	// a shorter word has too many neighbours
 	static final int MIN_LETTERS = 4;
+	// a word naming more objects is a real name
 	static final int MAX_OBJECTS = 1;
+	// a word naming one object is corrected only to a neighbour naming this many times more
 	static final int RATIO = 300;
-	// such a word is also looked up with a typo in its first letters (the index key): the maps are read nearest first
-	// until KEY_MAX_BYTES of their index are read
+	// Typos after the key letters are seen in the blocks the word was read from. A typo inside the key of the name
+	// index puts the word into another block, so a word naming at most MAX_OBJECTS objects is looked up once more
+	// with every one-edit variant of its first KEY_LETTERS letters. The key holds the first
+	// charsToBuildPoiNameIndex / charsToBuildAddressNameIndex (4) code points of a word, see IndexCreatorSettings
+	// in OsmAnd-tools (java-tools/OsmAndMapCreatorUtilities/src/main/java/net/osmand/obf/preparation/, options
+	// --chars-build-poi-nameindex, --chars-build-addr-nameindex). KEY_LETTERS must be at least the longest key of
+	// the opened maps: typos in the letters between the two lengths are not found; a shorter key only costs variants.
 	static final int KEY_LETTERS = 4;
+	// the maps are read nearest first until this many bytes of their name index are read for a word, so the
+	// suggestion does not depend on the device speed
 	static final int KEY_MAX_BYTES = 1024 * 1024;
 
 	private final SpatialSearchContext ctx;
