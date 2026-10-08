@@ -730,6 +730,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 			if (same != null) {
 //				same.addExtraResult(s, ctx.settings.LANG_DEDUPLICATE); // could be different objects don't mix
+				if (isBetterSameCity(s, same)) {
+					out.set(out.indexOf(same), s);
+				}
 			} else {
 				out.add(s);
 			}
@@ -738,6 +741,11 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 
 	private boolean isSamePlace(SpatialSearchResult a, SpatialSearchResult b) {
+		if (a.getMainObject() instanceof City c1 && b.getMainObject() instanceof City c2 && c1.getType() == c2.getType()
+				&& (insideBbox(c1, c2.getLocation()) || insideBbox(c2, c1.getLocation()))) {
+			// a village cut by a map border: one map has the village node, the other only its boundary (Khotiv, #25940)
+			return true;
+		}
 		double distance = MapUtils.getDistance(a.getLatLon(), b.getLatLon());
 		boolean alikeA = SpatialSearchRanking.isSubordinateNode(a), alikeB = SpatialSearchRanking.isSubordinateNode(b);
 		if (alikeA || alikeB) {
@@ -764,6 +772,21 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return distance <= SAME_PLACE_M;
 	}
 
+
+	private static boolean insideBbox(City c, LatLon l) {
+		int[] bbox = c.getBbox31();
+		if (bbox == null || l == null) {
+			return false;
+		}
+		int x = MapUtils.get31TileNumberX(l.getLongitude()), y = MapUtils.get31TileNumberY(l.getLatitude());
+		return bbox[0] <= x && x <= bbox[2] && bbox[1] <= y && y <= bbox[3];
+	}
+
+	private static boolean isBetterSameCity(SpatialSearchResult r, SpatialSearchResult kept) {
+		// the row of the place node carries its wikidata, the boundary-only row does not
+		return r.getMainObject() instanceof City c && kept.getMainObject() instanceof City k
+				&& !Algorithms.isEmpty(c.getWikidata()) && Algorithms.isEmpty(k.getWikidata());
+	}
 
 	private boolean isMetro(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
