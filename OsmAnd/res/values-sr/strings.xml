@@ -5400,4 +5400,12 @@
     <string name="multimedia_notes_view_descr">Ваше А/В белешке су у %1$s.</string>
     <string name="shared_string_file">Фајл</string>
     <string name="shared_string_format">Формат</string>
+    <string name="shared_string_resolution">Резолуција</string>
+    <string name="shared_string_attached_to">Причвршћен за</string>
+    <string name="media_not_attached_title">Још увек ни за шта није везано</string>
+    <string name="media_not_attached_descr">Додајте овај садржај у омиљене ставке да бисте га видели на мапи.</string>
+    <string name="detach_external_media_descr">Датотека се више неће приказивати у овом омиљеном. Остаје на вашем уређају.</string>
+    <string name="detach_external_media_descr_plural">Датотеке се више неће приказивати у овом омиљеном. Оне остају на вашем уређају.</string>
+    <string name="attach_to_favorite">Прикачи у омиљене</string>
+    <string name="delete_media_title">Избрисати медијски садржај?</string>
 </resources>

@@ -5397,4 +5397,12 @@
     <string name="multimedia_notes_view_descr">Tvoje A/V beleške su u %1$s.</string>
     <string name="shared_string_file">Fajl</string>
     <string name="shared_string_format">Format</string>
+    <string name="shared_string_resolution">Rezolucija</string>
+    <string name="shared_string_attached_to">Pričvršćen za</string>
+    <string name="media_not_attached_title">Još uvek ni za šta nije vezano</string>
+    <string name="media_not_attached_descr">Dodajte ovaj sadržaj u omiljene stavke da biste ga videli na mapi.</string>
+    <string name="detach_external_media_descr">Datoteka se više neće prikazivati u ovom omiljenom. Ostaje na vašem uređaju.</string>
+    <string name="detach_external_media_descr_plural">Datoteke se više neće prikazivati u ovom omiljenom. One ostaju na vašem uređaju.</string>
+    <string name="attach_to_favorite">Prikači u omiljene</string>
+    <string name="delete_media_title">Izbrisati medijski sadržaj?</string>
 </resources>
