@@ -277,10 +277,10 @@ public class RouteTestingTest {
 				if (types == null) {
 					continue;
 				}
-				boolean isHidenSpeedCamera = speedCameraFilter.checkIsHidenSpeedCamera(obj, point);
+				boolean isHiddenSpeedCamera = speedCameraFilter.checkIsHiddenSpeedCamera(obj, point);
 				for (int type : types) {
 					RouteTypeRule rule = obj.region.quickGetEncodingRule(type);
-					if ("highway".equals(rule.getTag()) && "speed_camera".equals(rule.getValue()) && !isHidenSpeedCamera
+					if ("highway".equals(rule.getTag()) && "speed_camera".equals(rule.getValue()) && !isHiddenSpeedCamera
 							&& obj.isDirectionApplicable(r.isForwardDirection(), point, -1, r.getEndPointIndex())) {
 						speedCameras.add(String.format(Locale.US, "%.5f,%.5f",
 								MapUtils.get31LatitudeY(obj.getPoint31YTile(point)), MapUtils.get31LongitudeX(obj.getPoint31XTile(point))));

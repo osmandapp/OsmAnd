@@ -303,7 +303,7 @@ public class RouteCalculationResult {
 		int[] pointTypes = rdo.getPointTypes(intId);
 		if (pointTypes != null) {
 			RouteRegion reg = rdo.region;
-			boolean isHidenSpeedCamera = speedCameraFilter.checkIsHidenSpeedCamera(rdo, intId);
+			boolean isHiddenSpeedCamera = speedCameraFilter.checkIsHiddenSpeedCamera(rdo, intId);
 			for (int r = 0; r < pointTypes.length; r++) {
 				RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
 				int x31 = rdo.getPoint31XTile(intId);
@@ -313,7 +313,7 @@ public class RouteCalculationResult {
 				loc.setLongitude(MapUtils.get31LongitudeX(x31));
 				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd, loc);
 				if (info != null) {
-					if (info.getType() == AlarmInfoType.SPEED_CAMERA && isHidenSpeedCamera) {
+					if (info.getType() == AlarmInfoType.SPEED_CAMERA && isHiddenSpeedCamera) {
 						continue;
 					}
 					// For STOP and TRAFFIC_CALMING first check if it has directional info

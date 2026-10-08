@@ -18,7 +18,7 @@ public class SpeedCameraFilter {
 	}
 
 	// returns true if the speed camera alarm at this point belongs only to opposite directions
-	public boolean checkIsHidenSpeedCamera(RouteDataObject rdo, int pointIndex) {
+	public boolean checkIsHiddenSpeedCamera(RouteDataObject rdo, int pointIndex) {
 		String[] names = rdo.getPointNames(pointIndex);
 		int[] nameTypes = rdo.getPointNameTypes(pointIndex);
 		if (names != null && nameTypes != null) {
@@ -47,7 +47,7 @@ public class SpeedCameraFilter {
 					shouldAddAlarm = true;
 				}
 			} else if (!visitedFrom.contains(relationId)) {
-				// moving backward: "to" -> "from". Dan't add speedcam alarm.
+				// moving backward: "to" -> "from". Don't add speedcam alarm.
 				visitedTo.add(relationId);
 			}
 		}
