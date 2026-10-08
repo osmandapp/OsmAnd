@@ -1486,7 +1486,7 @@ public class SearchCoreFactory {
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(radius);
 				Set<String> searchedPois = new TreeSet<>();
 				List<Amenity> indexed = selectedPoiType == null ? null
-						: searchAdditionalByAllPoiTypesIndex(phrase, resultMatcher, selectedPoiType, bbox);
+						: searchByNameIndex(phrase, resultMatcher, selectedPoiType, bbox);
 				if (indexed != null) {
 					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, null,
 							searchedPois, poiAdditionals, countExtraWords);
@@ -1511,8 +1511,8 @@ public class SearchCoreFactory {
 		}
 
 		// null - read the maps with the type filter
-		protected List<Amenity> searchAdditionalByAllPoiTypesIndex(SearchPhrase phrase,
-				SearchResultMatcher resultMatcher, AbstractPoiType poiType, QuadRect bbox31) throws IOException {
+		protected List<Amenity> searchByNameIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+				AbstractPoiType poiType, QuadRect bbox31) throws IOException {
 			return null;
 		}
 
