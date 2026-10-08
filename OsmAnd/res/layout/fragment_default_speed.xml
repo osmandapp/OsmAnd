@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-	Travel speed of a profile. Built from the shared Material 3 components of the AIS screens.
+	Travel speed of a profile. Built from the shared Material 3 components (net.osmand.plus.widgets.ui).
 	Values are committed immediately, there is no Save button.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,11 +24,16 @@
 			android:paddingTop="@dimen/ui_group_gap"
 			android:paddingBottom="@dimen/content_padding">
 
-			<include
-				android:id="@+id/default_speed_card"
+			<LinearLayout
+				android:id="@+id/default_speed_rows"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				layout="@layout/ui_slider_card" />
+				android:orientation="vertical">
+
+				<include
+					android:id="@+id/default_speed_row"
+					layout="@layout/item_ui_slider_list_item" />
+			</LinearLayout>
 
 			<net.osmand.plus.widgets.ui.GroupFooterView
 				android:id="@+id/default_speed_footer"
@@ -134,10 +139,8 @@
 					layout="@layout/item_ui_setting_row" />
 
 				<include
-					android:id="@+id/interval_card"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					layout="@layout/ui_slider_card" />
+					android:id="@+id/interval_row"
+					layout="@layout/item_ui_slider_list_item" />
 			</LinearLayout>
 
 			<net.osmand.plus.widgets.ui.GroupFooterView

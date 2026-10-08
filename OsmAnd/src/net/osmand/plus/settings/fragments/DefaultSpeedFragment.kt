@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.slider.RangeSlider
-import com.google.android.material.slider.Slider
 import net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID
 import net.osmand.plus.R
 import net.osmand.plus.base.AppModeDependentComponent
@@ -25,6 +24,7 @@ import net.osmand.plus.views.mapwidgets.utils.AverageValueComputer.MEASURED_INTE
 import net.osmand.plus.widgets.ui.GroupFooterView
 import net.osmand.plus.widgets.ui.SegmentedList
 import net.osmand.plus.widgets.ui.SettingRow
+import net.osmand.plus.widgets.ui.SliderListItem
 
 /**
  * Travel speed of a profile: the default speed, the speed range it has to stay in, and whether
@@ -34,6 +34,9 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 
 	private lateinit var speedHelper: VehicleSpeedHelper
 	private lateinit var config: VehicleSpeedHelper.SpeedConfig
+	private lateinit var defaultSpeedRow: SliderListItem
+	private lateinit var adaptSpeedRow: SettingRow
+	private lateinit var intervalRow: SliderListItem
 	private var rangeExpanded = false
 	private var routingChanged = false
 
@@ -65,16 +68,6 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		outState.putBoolean(STATE_RANGE_EXPANDED, rangeExpanded)
 	}
 
-	/* rows and slider cards share child ids, so restored view state lands in the wrong row -
-	 * the screen state is taken from the preferences again after the restore */
-	override fun onViewStateRestored(savedInstanceState: Bundle?) {
-		super.onViewStateRestored(savedInstanceState)
-		val view = view
-		if (view != null) {
-			updateArrivalTime(view)
-		}
-	}
-
 	override fun onDestroyView() {
 		super.onDestroyView()
 		if (routingChanged) {
@@ -86,7 +79,7 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 	private fun setupToolbar(view: View) {
 		val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
 		toolbar.setTitle(R.string.travel_speed)
-		toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+		toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
 		toolbar.menu.clear()
 		toolbar.menu.add(R.string.reset_to_default).apply {
 			val icon = AppCompatResources.getDrawable(view.context, R.drawable.ic_action_reset)?.mutate()
@@ -101,36 +94,22 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 	}
 
 	private fun setupDefaultSpeed(view: View) {
-		val card: View = view.findViewById(R.id.default_speed_card)
-		card.findViewById<TextView>(R.id.title).setText(R.string.default_speed_setting_title)
-		val slider: Slider = card.findViewById(R.id.slider)
-		/* every slider card has the same child ids - restored view state would land in the wrong card */
-		slider.isSaveEnabled = false
-		slider.stepSize = if (config.decimalPrecision) 0f else 1f
-		slider.isTickVisible = false
-		slider.addOnChangeListener { _, value, fromUser ->
-			if (fromUser) {
-				config.defaultSpeed = roundSpeed(value).coerceIn(config.minSpeed, config.maxSpeed)
-				appMode.setDefaultSpeed(config.defaultSpeed / config.ratio)
-				routingChanged = true
-				updateDefaultSpeed(view)
-			}
-		}
-		updateDefaultSpeed(view)
+		defaultSpeedRow = SliderListItem(view.findViewById(R.id.default_speed_row))
+		defaultSpeedRow.setTitle(R.string.default_speed_setting_title)
+		updateDefaultSpeed()
+		SegmentedList.apply(view.findViewById(R.id.default_speed_rows))
 	}
 
 	/** The default speed can't leave the speed range, so the range is the slider scale. */
-	private fun updateDefaultSpeed(view: View) {
-		val card: View = view.findViewById(R.id.default_speed_card)
-		val slider: Slider = card.findViewById(R.id.slider)
+	private fun updateDefaultSpeed() {
 		val from = if (config.defaultSpeedOnly) config.min.toFloat() else config.minSpeed
 		val to = if (config.defaultSpeedOnly) config.max.toFloat() else config.maxSpeed
-		slider.valueFrom = from
-		slider.valueTo = to.coerceAtLeast(from + 1)
-		slider.value = config.defaultSpeed.coerceIn(slider.valueFrom, slider.valueTo)
-		val text = formatSpeed(config.defaultSpeed)
-		card.findViewById<TextView>(R.id.value).text = text
-		ViewCompat.setStateDescription(slider, text)
+		defaultSpeedRow.setContinuous(from, to.coerceAtLeast(from + 1), speedStep(),
+			config.defaultSpeed, ::formatSpeed) { value ->
+			config.defaultSpeed = roundSpeed(value).coerceIn(config.minSpeed, config.maxSpeed)
+			appMode.setDefaultSpeed(config.defaultSpeed / config.ratio)
+			routingChanged = true
+		}
 	}
 
 	private fun setupSpeedRange(view: View) {
@@ -143,7 +122,7 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		slider.isSaveEnabled = false
 		slider.valueFrom = config.min.toFloat()
 		slider.valueTo = config.max.toFloat()
-		slider.stepSize = if (config.decimalPrecision) 0f else 1f
+		slider.stepSize = speedStep()
 		slider.setMinSeparationValue(1f)
 		slider.values = listOf(
 			config.minSpeed.coerceIn(slider.valueFrom, slider.valueTo),
@@ -168,7 +147,7 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 					appMode.setDefaultSpeed(defaultSpeed / config.ratio)
 				}
 				updateSpeedRange(view)
-				updateDefaultSpeed(view)
+				updateDefaultSpeed()
 			}
 		}
 		view.findViewById<View>(R.id.speed_range_header).setOnClickListener { toggleSpeedRange(view) }
@@ -197,54 +176,39 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 	}
 
 	private fun setupArrivalTime(view: View) {
-		val adaptRow = SettingRow(view.findViewById(R.id.adapt_speed_row))
-		adaptRow.setIcon(null)
-		adaptRow.setTitle(R.string.eta_adapt_to_my_speed)
-		adaptRow.setOnClickListener {
+		adaptSpeedRow = SettingRow(view.findViewById(R.id.adapt_speed_row))
+		adaptSpeedRow.setIcon(null)
+		adaptSpeedRow.setTitle(R.string.eta_adapt_to_my_speed)
+		adaptSpeedRow.setOnClickListener {
 			val pref = settings().ETA_USE_AVERAGE_SPEED
 			pref.setModeValue(appMode, !pref.getModeValue(appMode))
 			updateArrivalTime(view)
 		}
 
 		/* the same steps as the Average speed widget */
-		val intervalCard: View = view.findViewById(R.id.interval_card)
-		intervalCard.findViewById<TextView>(R.id.title).setText(R.string.shared_string_interval)
-		val slider: Slider = intervalCard.findViewById(R.id.slider)
-		slider.isSaveEnabled = false
-		slider.valueFrom = 0f
-		slider.valueTo = (MEASURED_INTERVALS.size - 1).toFloat()
-		slider.stepSize = 1f
-		slider.isTickVisible = false
-		slider.addOnChangeListener { _, value, fromUser ->
-			if (fromUser) {
-				settings().ETA_AVERAGE_SPEED_INTERVAL.setModeValue(appMode, MEASURED_INTERVALS[value.toInt()])
-				updateArrivalTime(view)
-			}
+		intervalRow = SliderListItem(view.findViewById(R.id.interval_row))
+		intervalRow.setTitle(R.string.shared_string_interval)
+		intervalRow.setStops(MEASURED_INTERVALS,
+			settings().ETA_AVERAGE_SPEED_INTERVAL.getModeValue(appMode), ::formatInterval) { interval ->
+			settings().ETA_AVERAGE_SPEED_INTERVAL.setModeValue(appMode, interval)
+			updateArrivalTime(view)
 		}
 		updateArrivalTime(view)
 	}
 
 	private fun updateArrivalTime(view: View) {
 		val enabled = settings().ETA_USE_AVERAGE_SPEED.getModeValue(appMode)
-		val intervalPref = settings().ETA_AVERAGE_SPEED_INTERVAL
-		val intervalMillis = intervalPref.getModeValue(appMode)
-		val interval = formatInterval(intervalMillis)
-
-		SettingRow(view.findViewById(R.id.adapt_speed_row)).setChecked(enabled)
-		val intervalCard: View = view.findViewById(R.id.interval_card)
-		intervalCard.visibility = if (enabled) View.VISIBLE else View.GONE
-		intervalCard.findViewById<TextView>(R.id.value).text = interval
-		val slider: Slider = intervalCard.findViewById(R.id.slider)
-		val index = MEASURED_INTERVALS.indexOf(intervalMillis).takeIf { it >= 0 }
-			?: MEASURED_INTERVALS.indexOf(DEFAULT_INTERVAL_MILLIS)
-		slider.value = index.toFloat()
-		ViewCompat.setStateDescription(slider, interval)
+		adaptSpeedRow.setChecked(enabled)
+		intervalRow.view.visibility = if (enabled) View.VISIBLE else View.GONE
 		SegmentedList.apply(view.findViewById(R.id.eta_rows))
 
+		val interval = formatInterval(settings().ETA_AVERAGE_SPEED_INTERVAL.getModeValue(appMode))
 		val footer: GroupFooterView = view.findViewById(R.id.eta_footer)
 		footer.setText(if (enabled) getString(R.string.eta_adapt_to_my_speed_descr, interval)
 			else getString(R.string.eta_adapt_to_my_speed_off_descr))
 	}
+
+	private fun speedStep(): Float = if (config.decimalPrecision) 0f else 1f
 
 	private fun roundSpeed(value: Float): Float =
 		if (config.decimalPrecision) Math.round(value * 10) / 10f else Math.round(value).toFloat()
@@ -286,7 +250,6 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 
 	companion object {
 		private const val STATE_RANGE_EXPANDED = "range_expanded"
-		private const val DEFAULT_INTERVAL_MILLIS = 15 * 60_000L
 
 		@JvmStatic
 		fun showInstance(activity: FragmentActivity, appMode: ApplicationMode) {
