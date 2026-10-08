@@ -69,6 +69,8 @@ public class SpatialTextSearch {
 		public boolean SEARCH_SUGGESTION = false; // incomplete to add '.' in the end
 		// not used in search as maps provided (web could multiply by 1.5x or adjust bbox)
 		public int SUGGESTED_SEARCH_RADIUS_KM = 400;  
+		// "did you mean" the query with a misspelled word corrected (SpatialTypoSuggestions)
+		public boolean TYPO_SUGGESTION = true;
 				
 		// lang to deduplicate results
 		public String LANG_DEDUPLICATE = ""; 
@@ -280,6 +282,8 @@ public class SpatialTextSearch {
 		public final long length;
 		public final long edition;
 		public final List<NameIndexReader> indexReaders = new ArrayList<NameIndexReader>();
+		// the same indexes read for typo neighbours only, so their blocks never push out the blocks of the query
+		public final List<NameIndexReader> typoReaders = new ArrayList<NameIndexReader>();
 		public Map<String, Integer> poiFrequencies = null;
 		public SpatialPoiSearch poiSearch;
 
@@ -289,9 +293,11 @@ public class SpatialTextSearch {
 			edition = r.getDateCreated();
 			for (AddressRegion a : r.getAddressIndexes()) {
 				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
+				typoReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
 			}
 			for (PoiRegion a : r.getPoiIndexes()) {
 				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
+				typoReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
 			}
 		}
 
@@ -316,6 +322,9 @@ public class SpatialTextSearch {
 		public List<SpatialSearchResult> mainResults;
 
 		public List<SpatialSearchResultsList> combinations;
+
+		// the input with one misspelled word corrected, null when every word is found
+		public String typoSuggestion;
 
 		public SpatialSearchStats stats;
 		
@@ -655,6 +664,7 @@ public class SpatialTextSearch {
 		ctx.setTokens(res.tokens);
 		ctx.processPoiCategories();
 		ctx.readAtoms();
+		res.typoSuggestion = ctx.typos.suggestion(input, res.tokens);
 		ctx.stats.step1Atoms.finish();
 
 		// 3. sort tokens

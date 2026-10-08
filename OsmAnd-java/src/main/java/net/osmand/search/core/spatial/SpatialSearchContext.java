@@ -64,6 +64,7 @@ public class SpatialSearchContext {
 	final SpatialPoiSearch poiSearch;
 	final SpatialTextSearchSettings settings;
 	final SpatialSearchStats stats = new SpatialSearchStats();
+	final SpatialTypoSuggestions typos = new SpatialTypoSuggestions(this);
 
 	private static final int WORD_COMMON = 1;
 	private static final int WORD_KIND = 2;
@@ -237,6 +238,7 @@ public class SpatialSearchContext {
 	
 	public void setTokens(List<SpatialSearchToken> tokens) {
 		this.tokens = tokens;
+		typos.clear();
 	}
 
 	
@@ -320,6 +322,8 @@ public class SpatialSearchContext {
 			stats.sub1PoiNameBoundaryTime.finish();
 		}
 		
+		// after the partial matches: only a word that still names no object is looked up with a typo in its key
+		typos.readKeyNeighbours();
 	}
 
 	private void addPartialMatch(SpatialSearchToken t, List<PartialMatch> partialAtoms) {
@@ -560,6 +564,7 @@ public class SpatialSearchContext {
 			for (PrefixNameValue prefix : matchedPrefixes) {
 				parseAtomSuffixes(t, indxInd, indx, prefix, tokens);
 			}
+			typos.countNeighbours(t, matchedPrefixes);
 		}
 	}
 	

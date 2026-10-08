@@ -419,6 +419,8 @@ public class QuickSearchListItem {
 				return "";
 			case UNKNOWN_NAME_FILTER:
 				break;
+			case SUGGESTION:
+				return "";
 		}
 		return searchResult.objectType.name();
 	}
@@ -498,6 +500,9 @@ public class QuickSearchListItem {
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int defIconColor = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 		switch (searchResult.objectType) {
+			case SUGGESTION:
+				return getIcon(app, R.drawable.ic_action_search_dark,
+						nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange);
 			case CITY:
 			case BOUNDARY:
 				// the same mapping as the map marker of an address result uses

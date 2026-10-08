@@ -82,6 +82,15 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		LOG.info("Spatial search start call spatialTextSearch.searchAPI");
 		SpatialSearchResults results = spatialTextSearch.searchAPI(phrase.getFullSearchPhrase(), context);
 		LOG.info("Spatial search after call spatialTextSearch.searchAPI");
+		if (results.typoSuggestion != null && !resultMatcher.isCancelled()) {
+			// "did you mean": the corrected query, searched when the row is tapped
+			SearchResult suggestion = new SearchResult(phrase);
+			suggestion.objectType = ObjectType.SUGGESTION;
+			suggestion.object = results.typoSuggestion;
+			suggestion.localeName = results.typoSuggestion;
+			suggestion.priority = SEARCH_PRIORITY;
+			resultMatcher.publish(suggestion);
+		}
 		if (results.mainResults == null) {
 			return true;
 		}
