@@ -217,17 +217,6 @@ public class NameIndexReader {
 		this.addressRegion = null;
 	}
 
-	// blocks larger than this are left unread by the current query (0 - no limit); a later query still reads them
-	private int maxBlockBytes;
-
-	public int getMaxBlockBytes() {
-		return maxBlockBytes;
-	}
-
-	public void setMaxBlockBytes(int maxBlockBytes) {
-		this.maxBlockBytes = maxBlockBytes;
-	}
-
 	public boolean readAll() {
 		return query == null;
 	}

@@ -67,19 +67,8 @@ public class SpatialTextSearch {
 		public boolean SEARCH_SUGGESTION = false; // incomplete to add '.' in the end
 		// not used in search as maps provided (web could multiply by 1.5x or adjust bbox)
 		public int SUGGESTED_SEARCH_RADIUS_KM = 400;  
-
-		// "did you mean": a complete word of at least TYPO_MIN_LETTERS letters that names at most TYPO_MAX_OBJECTS
-		// objects is corrected to a word one edit away that names more than TYPO_RATIO times as many objects
-		// (0 objects: any such word); 0 letters disables it
-		public int TYPO_MIN_LETTERS = 4;
-		public int TYPO_MAX_OBJECTS = 1;
-		public int TYPO_RATIO = 300;
-		// a word naming at most TYPO_MAX_OBJECTS objects is also looked up with a typo in its first letters (the index
-		// key): the blocks of those keys are read, larger than TYPO_MAX_BLOCK_BYTES skipped (0 - all); 0 letters disables it
-		public int TYPO_KEY_LETTERS = 4;
-		public int TYPO_MAX_BLOCK_BYTES = 0;
-		// the maps are read nearest first until this many bytes of their index are read for a word
-		public int TYPO_KEY_MAX_BYTES = 1024 * 1024;
+		// "did you mean" the query with a misspelled word corrected (SpatialTypoSuggestions)
+		public boolean TYPO_SUGGESTION = true;
 				
 		// lang to deduplicate results
 		public String LANG_DEDUPLICATE = ""; 
@@ -643,7 +632,7 @@ public class SpatialTextSearch {
 		ctx.setTokens(res.tokens);
 		ctx.processPoiCategories();
 		ctx.readAtoms();
-		res.typoSuggestion = ctx.typoSuggestion(input, res.tokens);
+		res.typoSuggestion = ctx.typos.suggestion(input, res.tokens);
 		ctx.stats.step1Atoms.finish();
 
 		// 3. sort tokens

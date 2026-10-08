@@ -1,7 +1,6 @@
 package net.osmand.search.core.spatial;
 
 import java.io.IOException;
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -21,11 +20,9 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.NameIndexReader.NameIndexReaderBytes;
-import net.osmand.binary.NameIndexReader.NameIndexReaderMatcher;
 import net.osmand.binary.NameIndexReader.PrefixNameValue;
 import net.osmand.binary.NameIndexReader.ValueFreq;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
@@ -67,6 +64,7 @@ public class SpatialSearchContext {
 	final SpatialPoiSearch poiSearch;
 	final SpatialTextSearchSettings settings;
 	final SpatialSearchStats stats = new SpatialSearchStats();
+	final SpatialTypoSuggestions typos = new SpatialTypoSuggestions(this);
 
 	private static final int WORD_COMMON = 1;
 	private static final int WORD_KIND = 2;
@@ -240,6 +238,7 @@ public class SpatialSearchContext {
 	
 	public void setTokens(List<SpatialSearchToken> tokens) {
 		this.tokens = tokens;
+		typos.clear();
 	}
 
 	
@@ -324,7 +323,7 @@ public class SpatialSearchContext {
 		}
 		
 		// after the partial matches: only a word that still names no object is looked up with a typo in its key
-		readTypoKeyNeighbours();
+		typos.readKeyNeighbours();
 	}
 
 	private void addPartialMatch(SpatialSearchToken t, List<PartialMatch> partialAtoms) {
@@ -565,284 +564,8 @@ public class SpatialSearchContext {
 			for (PrefixNameValue prefix : matchedPrefixes) {
 				parseAtomSuffixes(t, indxInd, indx, prefix, tokens);
 			}
-			if (isTypoCandidate(t)) {
-				for (PrefixNameValue prefix : matchedPrefixes) {
-					countTypoNeighbours(t, prefix);
-				}
-			}
+			typos.countNeighbours(t, matchedPrefixes);
 		}
-	}
-
-	/**
-	 * A word that names at most TYPO_MAX_OBJECTS objects is looked up once more with a typo in its first letters: the
-	 * blocks of the index keys those variants fall into are read and their words one edit away are counted.
-	 */
-	private void readTypoKeyNeighbours() throws IOException {
-		if (settings.TYPO_KEY_LETTERS <= 0) {
-			return;
-		}
-		SpatialSearchToken last = null;
-		for (SpatialSearchToken t : tokens) {
-			if (last == null || t.originalOrder > last.originalOrder) {
-				last = t;
-			}
-		}
-		for (SpatialSearchToken t : tokens) {
-			if (!isTypoCandidate(t) || t.atoms.size() > settings.TYPO_MAX_OBJECTS || t.hasPoiCategoryKeys()
-					|| (last.incomplete && t != last)) {
-				continue;
-			}
-			// every beginning of every variant: a key of the index table matches when it is one of them
-			Set<String> beginnings = new HashSet<>();
-			for (String v : typoKeyVariants(typoKey(t.wordNoDot), settings.TYPO_KEY_LETTERS)) {
-				for (int i = 1; i <= v.length(); i++) {
-					beginnings.add(v.substring(0, i));
-				}
-			}
-			NameIndexReaderMatcher matcher = new NameIndexReaderMatcher(t.word) {
-				@Override
-				public boolean matchKey(String key) {
-					return beginnings.contains(typoKey(key));
-				}
-			};
-			String query = "typo-key " + t.word;
-			long bytes = 0;
-			for (int fileInd : filesNearestFirst()) {
-				if (bytes > settings.TYPO_KEY_MAX_BYTES) {
-					break;
-				}
-				for (NameIndexReader typoReader : internalFile.get(fileInd).typoReaders) {
-					if (typoReader.poiRegion != null ? !settings.SEARCH_POI : !settings.SEARCH_ADDR) {
-						continue;
-					}
-					typoReader.setMaxBlockBytes(settings.TYPO_MAX_BLOCK_BYTES);
-					typoReader.resetBytesStat();
-					try {
-						List<PrefixNameValue> prefixes = files.get(fileInd).readFullNameIndex(typoReader.setQuery(query, matcher));
-						if (prefixes != null) {
-							for (PrefixNameValue prefix : prefixes) {
-								countTypoNeighbours(t, prefix);
-							}
-						}
-					} finally {
-						NameIndexReaderBytes read = typoReader.getBytesStat();
-						bytes += read.readTableBytes - read.skipTableBytes + read.readAtomBytes;
-						typoReader.clearQuery();
-						typoReader.clearPrefixes();
-					}
-				}
-			}
-		}
-	}
-
-	private List<Integer> filesNearestFirst() {
-		List<Integer> order = new ArrayList<>();
-		long[] dist = new long[files.size()];
-		for (int i = 0; i < files.size(); i++) {
-			order.add(i);
-			dist[i] = Long.MAX_VALUE;
-			if (location != null) {
-				long x = MapUtils.get31TileNumberX(location.getLongitude()), y = MapUtils.get31TileNumberY(location.getLatitude());
-				for (PoiRegion r : files.get(i).getPoiIndexes()) {
-					long dx = Math.max(0, Math.max(r.getLeft31() - x, x - r.getRight31()));
-					long dy = Math.max(0, Math.max(r.getTop31() - y, y - r.getBottom31()));
-					dist[i] = Math.min(dist[i], dx * dx + dy * dy);
-				}
-			}
-		}
-		order.sort(Comparator.comparingLong(i -> dist[i]));
-		return order;
-	}
-
-	// the words one edit away from a word whose edit is in its first letters (the edits after them keep its index key)
-	static Set<String> typoKeyVariants(String w, int keyLetters) {
-		Set<String> res = new HashSet<>();
-		String alphabet = w.chars().anyMatch(c -> c >= 0x400 && c <= 0x4ff)
-				? "абвгдеёжзийклмнопрстуфхцчшщъыьэюяіїєґ" : "abcdefghijklmnopqrstuvwxyz";
-		int n = Math.min(keyLetters, w.length());
-		for (int i = 0; i < n; i++) {
-			res.add(w.substring(0, i) + w.substring(i + 1));
-			if (i + 1 < w.length()) {
-				res.add(w.substring(0, i) + w.charAt(i + 1) + w.charAt(i) + w.substring(i + 2));
-			}
-			for (char c : alphabet.toCharArray()) {
-				res.add(w.substring(0, i) + c + w.substring(i + 1));
-				res.add(w.substring(0, i) + c + w.substring(i));
-			}
-		}
-		res.remove(w);
-		return res;
-	}
-
-	private boolean isTypoCandidate(SpatialSearchToken t) {
-		int min = settings.TYPO_MIN_LETTERS;
-		return min > 0 && !t.broad && t.wordNoDot.length() >= min
-				&& SearchAlgorithms.letters(t.wordNoDot) == t.wordNoDot.length();
-	}
-
-	/**
-	 * The words of a name index block one edit away from the token (a word still being typed: its beginning) and the
-	 * number of objects that carry them. The block is the one the token itself was read from, so only typos after
-	 * its key letters are seen.
-	 */
-	private void countTypoNeighbours(SpatialSearchToken t, PrefixNameValue prefix) throws IOException {
-		AddressNameIndexData addrData = prefix.getAddr();
-		OsmAndPoiNameIndexData poiData = addrData == null ? prefix.getPoi() : null;
-		if (addrData == null && poiData == null) {
-			return;
-		}
-		String typed = typoKey(t.wordNoDot);
-		List<String> names = new ArrayList<>();
-		String curSuffix = null;
-		boolean any = false;
-		for (String s : addrData != null ? addrData.getSuffixesDictionaryList() : poiData.getSuffixesDictionaryList()) {
-			curSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(curSuffix, s);
-			String name = typoKey(prefix.key + curSuffix);
-			boolean near = name.indexOf(' ') == -1
-					&& (isOneEdit(typed, name) || (t.incomplete && isOneEditPrefix(typed, name)));
-			names.add(near ? name : null);
-			any |= near;
-		}
-		if (!any) {
-			return;
-		}
-		Set<String> inAtom = new HashSet<>();
-		if (addrData != null) {
-			for (AddressNameIndexDataAtom a : addrData.getAtomList()) {
-				countTypoNeighbours(t, names, a.getSuffixesBitsetIndexList(), inAtom);
-			}
-		} else {
-			for (OsmAndPoiNameIndexDataAtom a : poiData.getAtomsList()) {
-				if (a.getPoiIndInBlockCount() > 0) {
-					countTypoNeighbours(t, names, a.getSuffixesBitsetIndexList(), inAtom);
-				}
-			}
-		}
-	}
-
-	private void countTypoNeighbours(SpatialSearchToken t, List<String> names, List<Integer> suffixBits, Set<String> inAtom) {
-		inAtom.clear();
-		for (int bit : suffixBits) {
-			int ind = bit / 2 - 1;
-			if (bit != 0 && bit % 2 == 0 && ind < names.size() && names.get(ind) != null && inAtom.add(names.get(ind))) {
-				if (t.typoNeighbours == null) {
-					t.typoNeighbours = new HashMap<>();
-				}
-				t.typoNeighbours.computeIfAbsent(names.get(ind), k -> new int[1])[0]++;
-			}
-		}
-	}
-
-	/**
-	 * The input with its first misspelled word corrected: a complete word that names at most TYPO_MAX_OBJECTS
-	 * objects while a word one edit away names more than TYPO_RATIO times as many (any number when it names none).
-	 */
-	String typoSuggestion(String input, List<SpatialSearchToken> tokens) {
-		List<SpatialSearchToken> ordered = new ArrayList<>(tokens);
-		ordered.sort(Comparator.comparingInt(t -> t.originalOrder));
-		SpatialSearchToken last = ordered.isEmpty() ? null : ordered.get(ordered.size() - 1);
-		for (SpatialSearchToken t : ordered) {
-			if (!isTypoCandidate(t) || t.typoNeighbours == null || t.hasPoiCategoryKeys()) {
-				continue;
-			}
-			if (last != null && last.incomplete && t != last) {
-				// a word is still being typed: only it is corrected, the earlier words once it is finished
-				continue;
-			}
-			int objects = t.atoms.size();
-			if (objects > settings.TYPO_MAX_OBJECTS) {
-				continue;
-			}
-			// a word one edit away is preferred to a name whose beginning is one edit away (a word still being typed)
-			String typed = typoKey(t.wordNoDot);
-			String best = null;
-			int bestCount = 0;
-			boolean bestWhole = false;
-			for (Entry<String, int[]> e : t.typoNeighbours.entrySet()) {
-				int c = e.getValue()[0];
-				boolean whole = isOneEdit(typed, e.getKey());
-				if (best == null || (whole && !bestWhole) || (whole == bestWhole
-						&& (c > bestCount || (c == bestCount && e.getKey().compareTo(best) < 0)))) {
-					best = e.getKey();
-					bestCount = c;
-					bestWhole = whole;
-				}
-			}
-			if (best != null && (objects == 0 || bestCount >= (long) settings.TYPO_RATIO * objects)) {
-				return replaceWord(input, t.originalWord, best);
-			}
-		}
-		return null;
-	}
-
-	private static String replaceWord(String input, String word, String replacement) {
-		String text = stripIncompleteDot(input);
-		word = stripIncompleteDot(word);
-		int i = text.indexOf(word);
-		if (i < 0) {
-			i = text.toLowerCase().indexOf(word.toLowerCase());
-		}
-		return i < 0 ? null : text.substring(0, i) + replacement + text.substring(i + word.length());
-	}
-
-	private static String stripIncompleteDot(String s) {
-		return s.endsWith(SpatialSearchToken.DOT_INCOMPLETE_STRING) ? s.substring(0, s.length() - 1) : s;
-	}
-
-	// letters only, lower case, without accents: the form in which a typo and its correction are compared
-	static String typoKey(String s) {
-		boolean plain = true;
-		for (int i = 0; i < s.length() && plain; i++) {
-			char c = s.charAt(i);
-			plain = (c >= 'a' && c <= 'z') || c == ' ';
-		}
-		if (plain) {
-			return s;
-		}
-		String n = Normalizer.normalize(s.toLowerCase().replace("ß", "ss"), Normalizer.Form.NFD);
-		StringBuilder b = new StringBuilder(n.length());
-		for (int i = 0; i < n.length(); i++) {
-			char c = n.charAt(i);
-			if (Character.getType(c) != Character.NON_SPACING_MARK && Character.getType(c) != Character.ENCLOSING_MARK
-					&& Character.getType(c) != Character.COMBINING_SPACING_MARK) {
-				b.append(c);
-			}
-		}
-		return b.toString();
-	}
-
-	// a word still being typed: the beginning of the name is one edit away from it
-	static boolean isOneEditPrefix(String typed, String name) {
-		if (name.startsWith(typed)) {
-			return false; // a continuation of the typed letters, not a typo
-		}
-		int n = typed.length();
-		for (int len = n - 1; len <= n + 1; len++) {
-			if (len > 0 && len < name.length() && isOneEdit(typed, name.substring(0, len))) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	// one insertion, deletion, substitution or swap of two neighbouring letters
-	static boolean isOneEdit(String a, String b) {
-		int la = a.length(), lb = b.length();
-		if (Math.abs(la - lb) > 1 || a.equals(b)) {
-			return false;
-		}
-		int i = 0;
-		while (i < la && i < lb && a.charAt(i) == b.charAt(i)) {
-			i++;
-		}
-		if (la == lb) {
-			if (a.substring(i + 1).equals(b.substring(i + 1))) {
-				return true;
-			}
-			return i + 1 < la && a.charAt(i) == b.charAt(i + 1) && a.charAt(i + 1) == b.charAt(i)
-					&& a.substring(i + 2).equals(b.substring(i + 2));
-		}
-		return la > lb ? a.substring(i + 1).equals(b.substring(i)) : a.substring(i).equals(b.substring(i + 1));
 	}
 	
 	static boolean checkPoiTypeId(int poiTypeId) {
