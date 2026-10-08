@@ -165,11 +165,11 @@ class RouteRecalculationHelper {
 			if (lastFixedLocation != null) {
 				start = lastFixedLocation;
 			}
-			// try remove false route-recalculated prompts by checking direction of the route start
+			// try remove false route-recalculated prompts by checking direction to second route node
 			boolean wrongMovementDirection = false;
 			List<Location> routeNodes = res.getImmutableAllLocations();
 			if (routeNodes != null && res.currentRoute + 1 < routeNodes.size()) {
-				wrongMovementDirection = RoutingHelperUtils.isRouteAgainstMovement(start, res);
+				wrongMovementDirection = SuppressedRecalculationPrompt.isRouteAgainstMovement(start, res);
 				// set/reset evalWaitInterval only if new route is in forward direction
 				if (wrongMovementDirection) {
 					evalWaitInterval = 3000;
@@ -181,10 +181,10 @@ class RouteRecalculationHelper {
 			// trigger voice prompt only if new route is in forward direction
 			// If route is in wrong direction after one more setLocation it will be recalculated
 			if (shouldAnnounceNewRoute(res)) {
-				if (!wrongMovementDirection || newRoute) {
+				if (newRoute) {
 					suppressedRecalculationPrompt.reset();
-					getVoiceRouter().newRouteIsCalculated(newRoute);
-				} else if (suppressedRecalculationPrompt.shouldAnnounce(System.currentTimeMillis())) {
+					getVoiceRouter().newRouteIsCalculated(true);
+				} else if (suppressedRecalculationPrompt.shouldAnnounce(System.currentTimeMillis(), wrongMovementDirection)) {
 					getVoiceRouter().newRouteIsCalculated(false);
 				}
 			}

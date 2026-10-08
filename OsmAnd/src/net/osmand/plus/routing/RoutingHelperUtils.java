@@ -31,7 +31,6 @@ public class RoutingHelperUtils {
 
 	private static final int CACHE_RADIUS = 100000;
 	public static final int MAX_BEARING_DEVIATION = 45;
-	static final int DIRECTION_CHECK_DISTANCE = 100;
 	private static final Log log = PlatformUtil.getLog(RoutingHelperUtils.class);
 
 	@NonNull
@@ -172,43 +171,6 @@ public class RoutingHelperUtils {
 			iterations--;
 		}
 		return index;
-	}
-
-	/**
-	 * A recalculated route starts against the movement direction when both the next route node
-	 * and the route node DIRECTION_CHECK_DISTANCE ahead go back. From beside the road the route
-	 * starts with a way to the road, so the next node alone is not enough, and the node ahead alone
-	 * may be behind after a sharp turn (#25544).
-	 */
-	public static boolean isRouteAgainstMovement(@NonNull Location start, @NonNull RouteCalculationResult route) {
-		List<Location> routeNodes = route.getImmutableAllLocations();
-		int current = lookAheadFindMinOrthogonalDistance(start, routeNodes, route.currentRoute, 15);
-		if (current + 1 >= routeNodes.size()) {
-			return false;
-		}
-		// This check is valid for Online/GPX services (offline routing is aware of route direction)
-		Location prev = route.getRouteLocationByDistance(-15);
-		return isRouteAgainstMovement(start, prev, routeNodes, current);
-	}
-
-	static boolean isRouteAgainstMovement(@NonNull Location start, @Nullable Location prev,
-	                                      @NonNull List<Location> routeNodes, int current) {
-		Location ahead = getRouteLocationAhead(routeNodes, current, DIRECTION_CHECK_DISTANCE);
-		return checkWrongMovementDirection(start, prev, routeNodes.get(current + 1))
-				&& checkWrongMovementDirection(start, prev, ahead);
-	}
-
-	// the first route node at least the distance along the route after the given one, or the last node
-	@NonNull
-	static Location getRouteLocationAhead(@NonNull List<Location> routeNodes, int index, double distance) {
-		double passed = 0;
-		for (int i = index + 1; i < routeNodes.size(); i++) {
-			passed += routeNodes.get(i - 1).distanceTo(routeNodes.get(i));
-			if (passed >= distance) {
-				return routeNodes.get(i);
-			}
-		}
-		return routeNodes.get(routeNodes.size() - 1);
 	}
 
 	/**

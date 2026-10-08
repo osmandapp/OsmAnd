@@ -27,7 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelperUtils;
+import net.osmand.plus.routing.SuppressedRecalculationPrompt;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -471,10 +471,10 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 		}
 		// the app checks with the location of the moment the calculation ended, which is one of the latest
 		// locations, so the route counts as backward only when all agree
-		boolean backward = RoutingHelperUtils.isRouteAgainstMovement(location, routingHelper.getRoute());
+		boolean backward = SuppressedRecalculationPrompt.isRouteAgainstMovement(location, routingHelper.getRoute());
 		if (backward) {
 			for (Location element : locations) {
-				if (element != null && !RoutingHelperUtils.isRouteAgainstMovement(element, routingHelper.getRoute())) {
+				if (element != null && !SuppressedRecalculationPrompt.isRouteAgainstMovement(element, routingHelper.getRoute())) {
 					backward = false;
 					break;
 				}

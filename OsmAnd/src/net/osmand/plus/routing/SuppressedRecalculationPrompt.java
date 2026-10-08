@@ -1,51 +1,85 @@
 package net.osmand.plus.routing;
 
-// A recalculated route that starts against the movement direction is not announced,
-// the next recalculation is expected to give a forward route.
-// Engines unaware of the movement direction (e.g. BRouter) may keep returning such routes,
-// announce such a recalculation once per deviation instead of never (#25544)
-class SuppressedRecalculationPrompt {
+import androidx.annotation.NonNull;
 
+import net.osmand.Location;
+
+import java.util.List;
+
+public class SuppressedRecalculationPrompt {
+
+	static final int DIRECTION_CHECK_DISTANCE = 100;
 	static final long MAX_SUPPRESSED_TIME = 15000;
 	static final long DEVIATION_END_INTERVAL = 4 * MAX_SUPPRESSED_TIME;
 	static final long DEVIATION_END_FOLLOW_TIME = 15000;
+	static final long FIRST_PROMPT_INTERVAL = 5000;
+	static final long MAX_PROMPT_INTERVAL = 5 * 60 * 1000;
+	static final float PROMPT_INTERVAL_FACTOR = 2.5f;
 
 	private long firstSuppressedTime;
 	private long lastSuppressedTime;
-	private boolean announced;
+	private long lastPromptTime;
+	private long promptInterval;
 
 	private long followStartTime;
+	private volatile boolean deviationEnded;
 
-	synchronized void reset() {
+	void reset() {
+		deviationEnded = false;
 		firstSuppressedTime = 0;
+		promptInterval = 0;
 	}
 
-	// the rider has followed the current route continuously for a while, so the deviation is over;
-	// a rider beside a route whose start goes back does not follow it, so a long run of backward
-	// routes is still announced after MAX_SUPPRESSED_TIME
-	synchronized void onRouteFollowed(long now) {
+	boolean shouldAnnounce(long now, boolean againstMovement) {
+		if (deviationEnded) {
+			reset();
+		}
+		if (againstMovement) {
+			if (firstSuppressedTime == 0 || now - lastSuppressedTime > DEVIATION_END_INTERVAL) {
+				firstSuppressedTime = now;
+			}
+			lastSuppressedTime = now;
+			if (now - firstSuppressedTime <= MAX_SUPPRESSED_TIME) {
+				return false;
+			}
+		} else {
+			firstSuppressedTime = 0;
+		}
+		if (promptInterval > 0 && now - lastPromptTime < promptInterval) {
+			return false;
+		}
+		lastPromptTime = now;
+		promptInterval = promptInterval == 0
+				? FIRST_PROMPT_INTERVAL
+				: Math.min(MAX_PROMPT_INTERVAL, (long) (promptInterval * PROMPT_INTERVAL_FACTOR));
+		return true;
+	}
+
+	void onRouteFollowed(long now) {
 		if (followStartTime == 0) {
 			followStartTime = now;
 		}
 		if (now - followStartTime >= DEVIATION_END_FOLLOW_TIME) {
-			reset();
+			deviationEnded = true;
 		}
 	}
 
-	synchronized void onRouteNotFollowed() {
+	void onRouteNotFollowed() {
 		followStartTime = 0;
 	}
 
-	synchronized boolean shouldAnnounce(long now) {
-		if (firstSuppressedTime == 0 || now - lastSuppressedTime > DEVIATION_END_INTERVAL) {
-			firstSuppressedTime = now;
-			announced = false;
+	public static boolean isRouteAgainstMovement(@NonNull Location start, @NonNull RouteCalculationResult route) {
+		List<Location> routeNodes = route.getImmutableAllLocations();
+		int current = RoutingHelperUtils.lookAheadFindMinOrthogonalDistance(start, routeNodes, route.currentRoute, 15);
+		if (current + 1 >= routeNodes.size()) {
+			return false;
 		}
-		lastSuppressedTime = now;
-		if (!announced && now - firstSuppressedTime > MAX_SUPPRESSED_TIME) {
-			announced = true;
-			return true;
+		Location prev = route.getRouteLocationByDistance(-15);
+		Location ahead = route.getRouteLocationByDistance(DIRECTION_CHECK_DISTANCE);
+		if (ahead == null) {
+			ahead = routeNodes.get(routeNodes.size() - 1);
 		}
-		return false;
+		return RoutingHelperUtils.checkWrongMovementDirection(start, prev, routeNodes.get(current + 1))
+				&& RoutingHelperUtils.checkWrongMovementDirection(start, prev, ahead);
 	}
 }
