@@ -77,7 +77,8 @@ public class SpatialPipelineObjectRes {
 			NameIndexAtom a1 = s1.atoms[i];
 			NameIndexAtom a2 = s2.atoms[i];
 			if (a1 != null && a2 != null) {
-				throw new IllegalStateException();
+				throw new IllegalStateException("Token " + i + " is taken by both: state " + getTokenState(s1.mainMask, i)
+						+ " " + a1 + " / state " + getTokenState(s2.mainMask, i) + " " + a2);
 			}
 			if (a1 != null) {
 				atoms[i] = a1;
@@ -98,7 +99,8 @@ public class SpatialPipelineObjectRes {
 			obj = obj.otherVariants;
 			obj.mainMask |= cat;
 			for (int i = 0; refs1 != null && i < refs1.length; i++) {
-				if (refs1[i] != null) {
+				// a variant that has the token as a name word keeps it: "sp 24" is the name of "SP 24" and a house number
+				if (refs1[i] != null && obj.atoms[i] == null && (obj.refs1 == null || obj.refs1[i] == null)) {
 					obj.setAtom(refs1[i], i);
 				}
 			}

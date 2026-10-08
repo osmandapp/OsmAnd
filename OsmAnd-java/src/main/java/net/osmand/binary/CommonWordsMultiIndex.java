@@ -10,11 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import net.osmand.util.SearchAlgorithms;
 
 /**
- * Which words of a name become keys of the name index, decided by the language group of the map.
+ * Which words of a name become keys of the name index, decided by the statistics group of the map and the classes of
+ * words of the rules of its locale.
  * <p>
  * A group is a list of countries (map name prefixes) and the name statistics of its words:
  * <ul>
@@ -26,108 +28,50 @@ import net.osmand.util.SearchAlgorithms;
  * A name that has words always keeps one: the rarest word outside class 1 has nothing ten times rarer, and when no
  * word outside class 1 is left, the class 1 words stay. Numbers are returned as they are and take no part in the rules.
  * <p>
- * Groups are {@link #DEFAULT_GROUPS}: every map of the download list by language, split where a country speaks
- * several (Belgium, Canada, Switzerland, Finland). Words: {@code common_words_groups.tsv} next to this class, lines
- * {@code word <group> <class 0|1|2> <names per million> <word>}. A word of class 0 is only a frequency to compare with;
- * a word the file does not have counts as rare. Data with lines {@code group <id> <prefix,prefix...>} replaces the
- * default groups.
+ * The class of a word is the class of {@code <class0>}/{@code <class1>}/{@code <class2>} of {@code <index>} of the rules
+ * of the map locale ({@link SearchVariantRules#wordClass}), else the class of the group; a word of {@code <class0>} is
+ * always a key. The group of a map is {@link SearchLocales#groupForMap}: the longest prefix of {@code <locales>}
+ * of {@code rules.xml} decides, a map whose prefix has no group has none, whatever a shorter prefix has. Words:
+ * {@code common_words_groups.tsv} next to this class, lines {@code word <group> <class 0|1|2> <names per million>
+ * <word>}; every group of the file is a group of {@code <locales>}. A word of class 0 is only a frequency to compare
+ * with; a word the file does not have counts as rare. Test data with lines {@code group <id> <prefix,prefix...>}
+ * replaces the groups of the rules.
  */
 public class CommonWordsMultiIndex {
 
 	public static final int RARER_FACTOR = 10;
 	public static final String RESOURCE = "common_words_groups.tsv";
 
-	private static final int KEEP = 0;
-	private static final int SERVICE = 1;
-	private static final int FREQUENT = 2;
+	private static final int KEEP = SearchVariantRules.CLASS_ALWAYS;
+	private static final int SERVICE = SearchVariantRules.CLASS_SERVICE;
+	private static final int FREQUENT = SearchVariantRules.CLASS_FREQUENT;
 
-	// language groups: the group id, then the map name prefixes it covers (the longest prefix of a map name wins)
-	private static final String[][] DEFAULT_GROUPS = {
-		// French
-		{ "fr", "france", "belgium_wallonia", "luxembourg", "monaco", "canada_quebec", "switzerland_lake-geneva",
-			"reunion", "guadeloupe", "martinique", "mayotte", "french-guiana", "saint-barthelemy",
-			"saint-martin", "saint-pierre-and-miquelon", "french-southern-and-antarctic-lands", "haiti",
-			"senegal", "ivory-coast", "mali", "burkina-faso", "niger", "guinea", "benin", "togo", "cameroon",
-			"gabon", "congo-brazzaville", "congo-democratic-republic", "central-african-republic", "chad",
-			"madagascar", "comoros", "djibouti", "burundi", "rwanda", "seychelles", "mauritius" },
-		// English
-		{ "en", "us", "gb", "ireland", "isle-of-man", "channel-islands", "australia-oceania", "new-zealand",
-			"oceania", "canada", "india", "south-africa", "nigeria", "ghana", "kenya", "uganda", "tanzania",
-			"zambia", "zimbabwe", "malawi", "botswana", "namibia", "lesotho", "swaziland", "liberia",
-			"sierra-leone", "gambia", "jamaica", "bahamas", "barbados", "trinidad-and-tobago", "belize",
-			"guyana", "bermuda", "cayman-islands", "virgin-islands-us", "virgin-islands-british",
-			"turks-and-caicos-islands", "anguilla", "antigua-and-barbuda", "dominica", "grenada",
-			"saint-kitts-and-nevis", "saint-lucia", "saint-vincent-and-the-grenadines", "montserrat",
-			"falkland-islands", "saint-helena-ascension-and-tristan-da-cunha", "british-indian-ocean-territory",
-			"south-georgia-and-south-sandwich-islands", "malta", "singapore", "philippines", "papua-new-guinea",
-			"christmas-island", "carribean-archipelago-all", "south-sudan" },
-		// German
-		{ "de", "germany", "austria", "liechtenstein", "switzerland" },
-		// Dutch
-		{ "nl", "netherlands", "belgium_flanders", "netherlands-antilles", "aruba", "suriname" },
-		// Spanish
-		{ "es", "spain", "andorra", "mexico", "peru", "argentina", "chile", "colombia", "venezuela", "ecuador",
-			"bolivia", "paraguay", "uruguay", "cuba", "dominican-republic", "puerto-rico", "guatemala",
-			"honduras", "el-salvador", "nicaragua", "costa-rica", "panama", "equatorial-guinea" },
-		// Portuguese
-		{ "pt", "portugal", "azores", "madeira", "brazil", "angola", "mozambique", "cape-verde", "guinea-bissau",
-			"sao-tome-and-principe", "east-timor" },
-		// Italian
-		{ "it", "italy", "san-marino", "switzerland_ticino" },
-		// East Slavic and Central Asia
-		{ "esl", "ukraine", "belarus", "russia", "transnistria", "kazakhstan", "kyrgyzstan", "tajikistan",
-			"turkmenistan", "uzbekistan", "mongolia" },
-		// West Slavic
-		{ "wsl", "poland", "czech-republic", "slovakia" },
-		// South Slavic
-		{ "ssl", "serbia", "croatia", "bosnia-herzegovina", "montenegro", "slovenia", "macedonia", "bulgaria",
-			"kosovo", "albania" },
-		// Romanian
-		{ "ro", "romania", "moldova" },
-		// Hungarian
-		{ "hu", "hungary" },
-		// Greek
-		{ "el", "greece", "cyprus" },
-		// Baltic
-		{ "bal", "lithuania", "latvia" },
-		// Scandinavian
-		{ "nor", "norway", "sweden", "denmark", "iceland", "faroe-islands", "greenland", "finland_aland" },
-		// Finnish and Estonian
-		{ "fi", "finland", "estonia" },
-		// Turkish
-		{ "tr", "turkey", "azerbaijan" },
-		// Arabic
-		{ "ar", "jordan", "egypt", "saudi-arabia", "iraq", "syria", "lebanon", "palestine", "yemen", "oman",
-			"united-arab-emirates", "qatar", "bahrain", "kuwait", "libya", "sudan", "mauritania", "somalia" },
-		// Maghreb, Arabic and French
-		{ "mag", "algeria", "morocco", "tunisia", "western-sahara" },
-		// Persian
-		{ "fa", "iran", "afghanistan" },
-		// Hebrew
-		{ "he", "israel" },
-		// Chinese and Japanese
-		{ "cjk", "china", "japan", "taiwan", "hong-kong", "macao" },
-		// Korean
-		{ "ko", "south-korea", "north-korea" },
-		// Vietnamese
-		{ "vi", "vietnam" },
-		// Malay and Indonesian
-		{ "ms", "indonesia", "malaysia", "brunei" },
-		// Thai
-		{ "th", "thailand" },
-		// Indochina
-		{ "ind", "laos", "cambodia", "myanmar" },
-		// South Asia
-		{ "sas", "pakistan", "bangladesh", "nepal", "sri-lanka", "bhutan", "maldives" },
-		// Caucasus
-		{ "cau", "georgia", "armenia" },
-		// Others
-		{ "oth", "ethiopia", "eritrea", "spratly-islands", "antarctica" },
-	};
+	/** Why a word of a name is or is not a key of the name index. */
+	public enum KeyOutcome {
+		// a key by the statistics
+		KEPT(true),
+		// a key: the object is notable, the statistics do not apply
+		NOTABLE(true),
+		// a key: <class0> of the rules
+		ALWAYS(true),
+		// a number or a marker of the index: the statistics do not apply, the writer decides
+		NUMBER(true),
+		// not a key: class 1 and the name has a word outside class 1
+		DROPPED_CLASS1(false),
+		// not a key: class 2 and the name has a word at least RARER_FACTOR times rarer
+		DROPPED_CLASS2(false);
+
+		public final boolean key;
+
+		KeyOutcome(boolean key) {
+			this.key = key;
+		}
+	}
 
 	private static CommonWordsMultiIndex instance;
 
 	private final Map<String, WordsGroup> groupsById = new HashMap<>();
+	// test data only (lines "group"): map name prefix -> group, instead of <locales> of the rules
 	private final Map<String, WordsGroup> groupsByCountry = new HashMap<>();
 
 	private static class WordsGroup {
@@ -180,12 +124,17 @@ public class CommonWordsMultiIndex {
 			}
 		}
 		if (index.groupsByCountry.isEmpty()) {
-			// the data names no groups: the language groups of this class apply
-			for (String[] g : DEFAULT_GROUPS) {
-				WordsGroup group = index.groupsById.computeIfAbsent(g[0], WordsGroup::new);
-				for (int i = 1; i < g.length; i++) {
-					index.groupsByCountry.put(g[i], group);
+			// the data names no groups: the groups of <locales> of rules.xml apply
+			Set<String> declared = SearchLocales.groupIds();
+			for (String id : index.groupsById.keySet()) {
+				if (!declared.contains(id)) {
+					throw new IllegalStateException("The group '" + id + "' of " + RESOURCE + " is not a <group> of "
+							+ "<locales> of rules.xml");
 				}
+			}
+			for (String id : declared) {
+				// a group without statistics still drops the words of the classes of the rules
+				index.groupsById.computeIfAbsent(id, WordsGroup::new);
 			}
 		}
 		return index;
@@ -203,6 +152,10 @@ public class CommonWordsMultiIndex {
 	private WordsGroup getGroup(String mapName) {
 		if (mapName == null) {
 			return null;
+		}
+		if (groupsByCountry.isEmpty()) {
+			String id = SearchLocales.groupForMap(mapName);
+			return id == null ? null : groupsById.get(id);
 		}
 		String name = mapName.toLowerCase(Locale.ROOT);
 		int slash = Math.max(name.lastIndexOf('/'), name.lastIndexOf('\\'));
@@ -231,20 +184,69 @@ public class CommonWordsMultiIndex {
 	 * has to find Tongass National Forest, so every word stays a key
 	 */
 	public List<String> getWordsToIndex(String mapName, List<String> words, boolean notable) {
-		WordsGroup g = notable ? null : getGroup(mapName);
-		if (g == null || words.size() < 2) {
+		KeyOutcome[] outcomes = selectKeys(mapName, words, notable);
+		if (outcomes == null) {
 			return words;
 		}
+		List<String> result = new ArrayList<>(words.size());
+		for (int i = 0; i < words.size(); i++) {
+			if (outcomes[i].key) {
+				result.add(words.get(i));
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * @return class and source of a word for the map ("1 tsv", "0 rules"), null when the map has no group or the word
+	 * has no class (a word the statistics do not have is rare)
+	 */
+	public String wordClass(String mapName, String word) {
+		WordsGroup g = getGroup(mapName);
+		if (g == null || SearchAlgorithms.isNumber2Letters(word) || NameIndexReader.isIndexMarker(word)) {
+			return null;
+		}
+		String aligned = SearchAlgorithms.alignChars(word);
+		Integer ruleClass = SearchVariantRules.forLocale(SearchLocales.forMap(mapName)).classes().get(aligned);
+		if (ruleClass != null) {
+			return ruleClass + " rules";
+		}
+		int[] v = g.words.get(aligned);
+		return v == null || v[0] == KEEP ? null : v[0] + " tsv";
+	}
+
+	/**
+	 * @param words normalized words of one name (SearchAlgorithms.splitAndNormalize)
+	 * @return the outcome of every word, in their order; null when the map has no group (every word is a key)
+	 */
+	public KeyOutcome[] selectKeys(String mapName, List<String> words, boolean notable) {
+		WordsGroup g = getGroup(mapName);
+		if (g == null) {
+			return null;
+		}
 		int size = words.size();
+		KeyOutcome[] outcomes = new KeyOutcome[size];
+		if (notable) {
+			for (int i = 0; i < size; i++) {
+				outcomes[i] = KeyOutcome.NOTABLE;
+			}
+			return outcomes;
+		}
+		// one word is always a key and goes the general way too: a word of <class0> is ALWAYS, a number is NUMBER
+		SearchVariantRules rules = SearchVariantRules.forLocale(SearchLocales.forMap(mapName));
 		int[] cls = new int[size];
 		int[] freq = new int[size];
 		boolean[] number = new boolean[size];
+		boolean[] always = new boolean[size];
 		for (int i = 0; i < size; i++) {
 			String w = words.get(i);
 			// "cityasstreetcommon" marks a street that is a place: a word of the index itself, never a word of the name
 			number[i] = SearchAlgorithms.isNumber2Letters(w) || NameIndexReader.isIndexMarker(w);
-			int[] v = number[i] ? null : g.words.get(SearchAlgorithms.alignChars(w));
-			cls[i] = v == null ? KEEP : v[0];
+			String aligned = number[i] ? null : SearchAlgorithms.alignChars(w);
+			int[] v = aligned == null ? null : g.words.get(aligned);
+			Integer ruleClass = aligned == null ? null : rules.classes().get(aligned);
+			cls[i] = ruleClass != null ? ruleClass : v == null ? KEEP : v[0];
+			always[i] = ruleClass != null && ruleClass == KEEP;
 			freq[i] = v == null ? 0 : v[1];
 		}
 		boolean[] drop = new boolean[size];
@@ -264,13 +266,19 @@ public class CommonWordsMultiIndex {
 			}
 			otherThanService |= !drop[i];
 		}
-		List<String> result = new ArrayList<>(size);
 		for (int i = 0; i < size; i++) {
-			boolean dropService = cls[i] == SERVICE && !number[i] && otherThanService;
-			if (!drop[i] && !dropService) {
-				result.add(words.get(i));
+			if (number[i]) {
+				outcomes[i] = KeyOutcome.NUMBER;
+			} else if (always[i]) {
+				outcomes[i] = KeyOutcome.ALWAYS;
+			} else if (drop[i]) {
+				outcomes[i] = KeyOutcome.DROPPED_CLASS2;
+			} else if (cls[i] == SERVICE && otherThanService) {
+				outcomes[i] = KeyOutcome.DROPPED_CLASS1;
+			} else {
+				outcomes[i] = KeyOutcome.KEPT;
 			}
 		}
-		return result;
+		return outcomes;
 	}
 }

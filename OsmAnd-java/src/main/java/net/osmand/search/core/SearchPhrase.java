@@ -5,7 +5,6 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.StringMatcher;
-import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.CommonWords;
 import net.osmand.data.LatLon;
@@ -164,33 +163,19 @@ public class SearchPhrase {
 			boolean first = true;
 			for (int i = 0; i < ws.length ; i++) {
 				String wd = ws[i].trim();
-				boolean conjunction = Abbreviations.isConjunction(wd.toLowerCase());
+				boolean conjunction = CommonWords.isConjunction(wd.toLowerCase());
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
-				boolean decryptAbbreviations = needDecryptAbbreviations();
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
-						sp.firstUnknownSearchWord = decryptAbbreviations ? Abbreviations.replace(wd) : wd;
+						sp.firstUnknownSearchWord = wd;
 						first = false;
 					} else {
-						sp.otherUnknownWords.add(decryptAbbreviations ? Abbreviations.replace(wd) : wd);
+						sp.otherUnknownWords.add(wd);
 					}
 				}
 			}
 		}
 		return sp;
-	}
-
-	private boolean needDecryptAbbreviations() {
-		String langs = settings != null ? settings.getRegionLang() : null;
-		if (langs != null) {
-			String[] langArr = langs.split(",");
-			for (String lang : langArr) {
-				if (lang.equals("en")) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	public static List<String> splitWords(String w, List<String> ws, String delimiters) {

@@ -9,7 +9,6 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.CodedInputStream;
 
 import gnu.trove.list.array.TIntArrayList;
-import net.osmand.binary.Abbreviations;
 import net.osmand.binary.CommonWords;
 
 /**
@@ -317,7 +316,7 @@ public class SearchAlgorithms {
 			for (int k = 0; k < names.size(); k++) {
 				String word = names.get(k);
 				int prio = cw.getCommon(word);
-				if (Abbreviations.isConjunction(word)) {
+				if (CommonWords.isConjunction(word)) {
 					prio = 0;
 				}
 				if (prio != -1 && prio < prioP) {

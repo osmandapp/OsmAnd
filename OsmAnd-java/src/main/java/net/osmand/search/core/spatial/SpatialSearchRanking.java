@@ -1,5 +1,6 @@
 package net.osmand.search.core.spatial;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -34,6 +35,11 @@ public class SpatialSearchRanking {
 	/** "4 av" is 4th Avenue: a house whose street the query named by its kind only loses this much, so a
 	 *  house 2 km off falls under the street 6 km off (pref-0136) while the house at the point stays first */
 	public double wKindOnly = 1.0;
+	/** tie-break by the kind of the match of a query word (rules-spec.md, 5.5): exact before a form before a reverse
+	 *  form, small enough to keep distance and type in charge; a word that is in no real name (ALT) is not penalized,
+	 *  as a category, a brand or a glued word matches the same way */
+	public double wFormMatch = 0.02;
+	public double wReverseFormMatch = 0.04;
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
@@ -125,7 +131,75 @@ public class SpatialSearchRanking {
 		}
 		Double km = center == null ? null : SpatialSearchResult.getDistance(r, center) / 1000.0;
 		return score(nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
-				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r));
+				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r))
+				- matchKindPenalty(head);
+	}
+
+	/**
+	 * Kinds of the match of the query words of a ref with the real names of its object (rules-spec.md, 5.5); null when
+	 * the object is not loaded. Words of a house number or a ref of the ref and category words are left out.
+	 */
+	public List<SpatialSearchToken.MatchKind> matchKinds(SpatialSearchResultRef ref) {
+		NameIndexAtom atom = ref.atom;
+		MapObject object = atom.object;
+		if (object == null || atom.isPoiCategory() || ref.tokens == null) {
+			return null;
+		}
+		List<SpatialSearchToken.MatchKind> kinds = new ArrayList<>(ref.tokens.size());
+		Map<String, String> names = null;
+		String owner = atom.owner();
+		for (SpatialSearchToken t : ref.tokens) {
+			SpatialSearchToken.MatchKind kind = t.matchKind(object.getName(), atom.locale, owner);
+			if (kind == null) {
+				// alternative names cost a map per result: only for a word the main name does not have
+				if (names == null) {
+					names = object.getNamesMap(true);
+				}
+				for (String n : names.values()) {
+					kind = t.matchKind(n, atom.locale, owner);
+					if (kind != null) {
+						break;
+					}
+				}
+			}
+			if (kind == null) {
+				boolean numberPart = atom.isBuilding() || atom.type == SpatialSearchToken.POI_REF_TYPE;
+				if (t.categoryMatchMode || numberPart && (t.likelyPartOfBuilding(atom.locale) || t.likelyRef())) {
+					continue;
+				}
+				kind = SpatialSearchToken.MatchKind.ALT;
+			}
+			kinds.add(kind);
+		}
+		return kinds;
+	}
+
+	private double matchKindPenalty(SpatialSearchResultRef head) {
+		List<SpatialSearchToken.MatchKind> kinds = matchKinds(head);
+		double penalty = 0;
+		if (kinds != null) {
+			for (SpatialSearchToken.MatchKind kind : kinds) {
+				if (kind == SpatialSearchToken.MatchKind.REVERSE_FORM) {
+					penalty += wReverseFormMatch;
+				} else if (kind == SpatialSearchToken.MatchKind.FORM) {
+					penalty += wFormMatch;
+				}
+			}
+		}
+		return penalty;
+	}
+
+	// the name is exact only when no query word matches it through a form of <query>
+	private boolean indirectMatch(SpatialSearchResultRef ref) {
+		List<SpatialSearchToken.MatchKind> kinds = matchKinds(ref);
+		if (kinds != null) {
+			for (SpatialSearchToken.MatchKind kind : kinds) {
+				if (kind == SpatialSearchToken.MatchKind.FORM || kind == SpatialSearchToken.MatchKind.REVERSE_FORM) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -222,9 +296,12 @@ public class SpatialSearchRanking {
 		double best = NAME_OTHER;
 		if (atom.object != null) {
 			best = Math.max(best, compareToName(atom.object.getName(), queried));
-			// alternative names cost a map per result: worth it only for a rated object
-			Map<String, String> names = best == NAME_EXACT || atom.elo <= 0 ? null
-					: atom.object.getNamesMap(true);
+			// alternative names cost a map per result: worth it only for a rated object. The rating of the atom is the
+			// rating of its map (a basemap raises it), the travel rating is the object's own: the atom of a regular map
+			// can head the result of a rated object ("о. Пасхи" of Isla de Pascua, elo 0 in World, 1824 travel)
+			boolean rated = atom.elo > 0
+					|| atom.object instanceof Amenity a && a.getTravelEloNumber() > Amenity.DEFAULT_ELO;
+			Map<String, String> names = best == NAME_EXACT || !rated ? null : atom.object.getNamesMap(true);
 			if (names != null) {
 				for (String n : names.values()) {
 					best = Math.max(best, compareToName(n, queried));
@@ -235,6 +312,9 @@ public class SpatialSearchRanking {
 			}
 		} else {
 			best = Math.max(best, compareToName(atom.name, queried));
+		}
+		if (best > NAME_PREFIX && indirectMatch(ref)) {
+			best = NAME_PREFIX;
 		}
 		return best;
 	}
