@@ -592,17 +592,17 @@ public class SpatialSearchContext {
 					|| (last.incomplete && t != last)) {
 				continue;
 			}
-			Set<String> variants = typoKeyVariants(typoKey(t.wordNoDot), settings.TYPO_KEY_LETTERS);
+			// every beginning of every variant: a key of the index table matches when it is one of them
+			Set<String> beginnings = new HashSet<>();
+			for (String v : typoKeyVariants(typoKey(t.wordNoDot), settings.TYPO_KEY_LETTERS)) {
+				for (int i = 1; i <= v.length(); i++) {
+					beginnings.add(v.substring(0, i));
+				}
+			}
 			NameIndexReaderMatcher matcher = new NameIndexReaderMatcher(t.word) {
 				@Override
 				public boolean matchKey(String key) {
-					String k = typoKey(key);
-					for (String v : variants) {
-						if (v.startsWith(k)) {
-							return true;
-						}
-					}
-					return false;
+					return beginnings.contains(typoKey(key));
 				}
 			};
 			String query = "typo-key " + t.word;
@@ -791,8 +791,24 @@ public class SpatialSearchContext {
 
 	// letters only, lower case, without accents: the form in which a typo and its correction are compared
 	static String typoKey(String s) {
+		boolean plain = true;
+		for (int i = 0; i < s.length() && plain; i++) {
+			char c = s.charAt(i);
+			plain = (c >= 'a' && c <= 'z') || c == ' ';
+		}
+		if (plain) {
+			return s;
+		}
 		String n = Normalizer.normalize(s.toLowerCase().replace("ß", "ss"), Normalizer.Form.NFD);
-		return n.replaceAll("\\p{M}", "");
+		StringBuilder b = new StringBuilder(n.length());
+		for (int i = 0; i < n.length(); i++) {
+			char c = n.charAt(i);
+			if (Character.getType(c) != Character.NON_SPACING_MARK && Character.getType(c) != Character.ENCLOSING_MARK
+					&& Character.getType(c) != Character.COMBINING_SPACING_MARK) {
+				b.append(c);
+			}
+		}
+		return b.toString();
 	}
 
 	// a word still being typed: the beginning of the name is one edit away from it
