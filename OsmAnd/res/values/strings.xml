@@ -11,6 +11,14 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="eta_group_header">Estimated arrival time</string>
+	<string name="travel_speed">Travel speed</string>
+	<string name="default_speed_descr">Used when there is no speed data for the road, or while you stand still.</string>
+	<string name="speed_range">Speed range</string>
+	<string name="speed_range_descr">Used for both route calculation and arrival time.</string>
+	<string name="eta_adapt_to_my_speed">Adapt to my speed</string>
+	<string name="eta_adapt_to_my_speed_descr">Arrival time is based on your speed over the last %1$s.</string>
+	<string name="eta_adapt_to_my_speed_off_descr">Arrival time is based on the expected speed on each road of the route. Turn on to base it on how fast you actually move.</string>
 	<string name="multimedia_notes_view_descr">Your A/V notes are in %1$s.</string>
 	<string name="shared_string_file">File</string>
 	<string name="shared_string_format">Format</string>
