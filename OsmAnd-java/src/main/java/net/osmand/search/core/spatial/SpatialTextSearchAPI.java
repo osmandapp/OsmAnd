@@ -128,6 +128,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		// the list needs every object: at this zoom the per-tile thinning of the map layer is off
 		SpatialTextSearchSettings settings = SpatialTextSearchSettings.searchPoiByCategorySettings(PREFERRED_POI_ZOOM,
 				bboxLatLon);
+		settings.LIMIT_READ_SINGLE_OBJECTS = 0;
+		settings.LIMIT_READ_OBJECTS = 0;
 		List<BinaryMapIndexReader> files = new ArrayList<>();
 		addFiles(files, phrase.getOfflineIndexes(bbox31, SearchPhraseDataType.POI));
 		SpatialSearchContext context = createSpatialContext(phrase, resultMatcher, files, poiSearch, settings);

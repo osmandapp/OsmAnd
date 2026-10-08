@@ -20,6 +20,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
@@ -745,14 +746,16 @@ public class SearchUICore {
 			this.spatialTextSearchAPI = spatialTextSearchAPI;
 		}
 
-		// the type filter misses an additional on types that do not declare it (#24941)
+		// old maps have no poi types in the name index: nothing found - read them with the type filter
 		@Override
-		protected List<Amenity> searchAdditionalByAllPoiTypesIndex(SearchPhrase phrase,
-				SearchResultMatcher resultMatcher, AbstractPoiType poiType, QuadRect bbox31) throws IOException {
-			if (!poiType.isAdditional()) {
-				return null;
+		protected List<Amenity> searchByNameIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+				AbstractPoiType poiType, QuadRect bbox31) throws IOException {
+			if (!(poiType instanceof PoiType)) {
+				return null; // a category or a filter also takes reference types, the name index has none
 			}
-			return spatialTextSearchAPI.searchPoiByCategory(phrase, resultMatcher, poiType.getKeyName(), bbox31);
+			List<Amenity> res = spatialTextSearchAPI.searchPoiByCategory(phrase, resultMatcher, poiType.getKeyName(),
+					bbox31);
+			return res.isEmpty() ? null : res;
 		}
 
 		@Override
