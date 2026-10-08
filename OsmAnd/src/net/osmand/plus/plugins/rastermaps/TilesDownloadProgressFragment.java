@@ -28,6 +28,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.ProgressHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.utils.AndroidUtils;
@@ -58,6 +59,7 @@ public class TilesDownloadProgressFragment extends BaseFullScreenFragment implem
 	private static final String KEY_PROGRESS = "progress";
 	private static final String KEY_DOWNLOADED_SIZE_MB = "downloaded_size_mb";
 	private static final String KEY_DOWNLOADED_TILES_NUMBER = "downloaded_tiles_number";
+	private static final String KEY_FAILED_TILES_NUMBER = "failed_tiles_number";
 
 	private DownloadTilesHelper downloadTilesHelper;
 
@@ -73,6 +75,8 @@ public class TilesDownloadProgressFragment extends BaseFullScreenFragment implem
 	private int progress;
 	private long totalTilesNumber;
 	private long downloadedTilesNumber;
+	private long failedTilesNumber;
+	private boolean waitingForServer;
 	private float approxSizeMb;
 	private float downloadedSizeMb;
 
@@ -106,6 +110,7 @@ public class TilesDownloadProgressFragment extends BaseFullScreenFragment implem
 		progress = savedState.getInt(KEY_PROGRESS);
 		downloadedSizeMb = savedState.getFloat(KEY_DOWNLOADED_SIZE_MB);
 		downloadedTilesNumber = savedState.getLong(KEY_DOWNLOADED_TILES_NUMBER);
+		failedTilesNumber = savedState.getLong(KEY_FAILED_TILES_NUMBER);
 	}
 
 	private void readArgs(@NonNull Bundle args) {
@@ -152,6 +157,7 @@ public class TilesDownloadProgressFragment extends BaseFullScreenFragment implem
 		updateProgress();
 		updateDownloadSize();
 		updateTilesNumber();
+		updateFailedNumber();
 		setupCancelCloseButton(downloadTilesHelper.isDownloadFinished());
 
 		return view;
@@ -177,11 +183,16 @@ public class TilesDownloadProgressFragment extends BaseFullScreenFragment implem
 	private void updateProgress() {
 		MessageFormat format = new MessageFormat("{0}% {1}");
 		String text;
-		if (progress == 100) {
+		boolean finished = downloadTilesHelper.isDownloadFinished();
+		if (finished && failedTilesNumber > 0) {
+			text = getString(R.string.download_complete_with_errors);
+		} else if (progress == 100) {
 			String completeString = getString(R.string.shared_string_complete);
 			text = format.format(new Object[] {progress, completeString});
-		} else if (downloadTilesHelper.isDownloadFinished()) {
+		} else if (finished) {
 			text = getString(R.string.download_complete);
+		} else if (waitingForServer) {
+			text = getString(R.string.tiles_server_not_responding);
 		} else {
 			String downloadedString = getString(R.string.shared_string_download_successful).toLowerCase();
 			text = format.format(new Object[] {progress, downloadedString});
@@ -238,10 +249,41 @@ public class TilesDownloadProgressFragment extends BaseFullScreenFragment implem
 		}
 	}
 
+	private void updateFailedNumber() {
+		TextView tvFailed = view.findViewById(R.id.failed_number);
+		tvFailed.setText(getString(R.string.ltr_or_rtl_combine_via_colon,
+				getString(R.string.tiles_failed), formatNumber(failedTilesNumber, 0)));
+		AndroidUiHelper.updateVisibility(tvFailed, failedTilesNumber > 0);
+	}
+
 	private void setupCancelCloseButton(boolean downloadFinished) {
 		DialogButton cancelButton = view.findViewById(R.id.cancel_button);
 		cancelButton.setOnClickListener(v -> dismiss(true));
 		cancelButton.setTitleId(downloadFinished ? R.string.shared_string_close : R.string.shared_string_cancel);
+
+		DialogButton retryButton = view.findViewById(R.id.retry_button);
+		retryButton.setOnClickListener(v -> retryFailedTiles());
+		AndroidUiHelper.updateVisibility(retryButton, downloadFinished && failedTilesNumber > 0);
+	}
+
+	private void retryFailedTiles() {
+		downloadTilesHelper.clearDownload();
+		downloadType = DownloadType.ONLY_MISSING;
+		approximate = true;
+		totalTilesNumber = failedTilesNumber;
+		approxSizeMb = -1;
+		progress = 0;
+		downloadedTilesNumber = 0;
+		downloadedSizeMb = 0;
+		failedTilesNumber = 0;
+		waitingForServer = false;
+
+		updateProgress();
+		updateDownloadSize();
+		updateTilesNumber();
+		updateFailedNumber();
+		setupCancelCloseButton(false);
+		downloadTilesHelper.downloadTiles(minZoom, maxZoom, latLonRect, tileSource, downloadType);
 	}
 
 	public void dismiss(boolean showWarningIfDownloading) {
@@ -280,6 +322,7 @@ public class TilesDownloadProgressFragment extends BaseFullScreenFragment implem
 		outState.putInt(KEY_PROGRESS, progress);
 		outState.putLong(KEY_DOWNLOADED_TILES_NUMBER, downloadedTilesNumber);
 		outState.putFloat(KEY_DOWNLOADED_SIZE_MB, downloadedSizeMb);
+		outState.putLong(KEY_FAILED_TILES_NUMBER, failedTilesNumber);
 	}
 
 	@Override
@@ -299,11 +342,24 @@ public class TilesDownloadProgressFragment extends BaseFullScreenFragment implem
 	}
 
 	@Override
+	public void onTileFailed(long failedTilesNumber) {
+		this.failedTilesNumber = failedTilesNumber;
+		updateFailedNumber();
+	}
+
+	@Override
+	public void onWaitingForServer(boolean waiting) {
+		waitingForServer = waiting;
+		updateProgress();
+	}
+
+	@Override
 	public void onSuccessfulFinish() {
-		if (progress != 100 || approximate) {
+		if (progress != 100 || approximate || failedTilesNumber > 0) {
 			updateProgress();
 			updateDownloadSize();
 			updateTilesNumber();
+			updateFailedNumber();
 			setupCancelCloseButton(true);
 			app.getOsmandMap().getMapView().refreshMap();
 		}

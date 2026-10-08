@@ -64,6 +64,20 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 	}
 
 	@Override
+	public void onTileFailed(long failedTilesNumber) {
+		if (listener != null) {
+			listener.onTileFailed(failedTilesNumber);
+		}
+	}
+
+	@Override
+	public void onWaitingForServer(boolean waiting) {
+		if (listener != null) {
+			listener.onWaitingForServer(waiting);
+		}
+	}
+
+	@Override
 	public void onSuccessfulFinish() {
 		if (listener != null) {
 			listener.onSuccessfulFinish();
