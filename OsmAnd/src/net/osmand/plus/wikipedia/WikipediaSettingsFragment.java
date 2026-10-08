@@ -16,15 +16,14 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.utils.UiUtilities;
-
-import java.io.IOException;
 
 public class WikipediaSettingsFragment extends BaseSettingsFragment {
 
 	private static final String WIKIPEDIA_LANGUAGES = "wikipedia_languages";
 	private static final String IMAGES_CACHE = "wikipedia_images_cache";
+
+	private String imagesCacheSummary;
 
 	@Override
 	protected void setupPreferences() {
@@ -64,18 +63,23 @@ public class WikipediaSettingsFragment extends BaseSettingsFragment {
 		imagesCache.setKey(IMAGES_CACHE);
 		imagesCache.setLayoutResource(R.layout.preference_with_descr);
 		imagesCache.setTitle(R.string.images_cache);
-		imagesCache.setSummary(AndroidUtils.formatSize(app, getImagesCacheSize()));
+		imagesCache.setSummary(imagesCacheSummary);
 		imagesCache.setIcon(getActiveIcon(R.drawable.ic_action_storage));
 		imagesCache.setPersistent(false);
 		addOnPreferencesScreen(imagesCache);
+		updateImagesCacheSize(false);
 	}
 
-	private long getImagesCacheSize() {
-		try {
-			return PicassoUtils.getPicasso(app).getDiskCacheSizeBytes();
-		} catch (IOException e) {
-			return 0;
-		}
+	// The disk cache reads its journal on first access, so size and clearing stay off the UI thread
+	private void updateImagesCacheSize(boolean clear) {
+		new WikiImagesCacheTask(app, clear, sizeBytes -> {
+			imagesCacheSummary = sizeBytes > 0 ? AndroidUtils.formatSize(app, sizeBytes)
+					: app.getString(R.string.ltr_or_rtl_combine_via_space, "0", "MB");
+			Preference imagesCache = isAdded() ? findPreference(IMAGES_CACHE) : null;
+			if (imagesCache != null) {
+				imagesCache.setSummary(imagesCacheSummary);
+			}
+		}).execute();
 	}
 
 	private void showClearImagesCacheDialog() {
@@ -85,8 +89,7 @@ public class WikipediaSettingsFragment extends BaseSettingsFragment {
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButton(R.string.shared_string_clear, (dialog, which) -> {
 					new WebView(ctx).clearCache(true);
-					PicassoUtils.getPicasso(app).clearAllPicassoCache();
-					updateAllSettings();
+					updateImagesCacheSize(true);
 				})
 				.show();
 	}
@@ -119,5 +122,10 @@ public class WikipediaSettingsFragment extends BaseSettingsFragment {
 	@Override
 	public void onPreferenceChanged(@NonNull String prefId) {
 		updateAllSettings();
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "wikipedia_settings";
 	}
 }
