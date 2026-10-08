@@ -63,7 +63,7 @@
 				android:id="@+id/eta_header"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				app:groupHeaderTitle="@string/side_marker_eta" />
+				app:groupHeaderTitle="@string/eta_group_header" />
 
 			<LinearLayout
 				android:id="@+id/eta_rows"

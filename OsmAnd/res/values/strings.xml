@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="eta_group_header">Estimated arrival time</string>
 	<string name="travel_speed">Travel speed</string>
 	<string name="default_speed_descr">Used when there is no speed data for the road, or while you stand still.</string>
 	<string name="speed_range">Speed range</string>
