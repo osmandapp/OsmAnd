@@ -661,7 +661,7 @@ public class SearchUICore {
 		// one instance for both apis: one poi type index and one name-index cache
 		SpatialTextSearchAPI spatialTextSearchAPI = useSpatialSearch ? new SpatialTextSearchAPI(poiTypes) : null;
 		apis.add(useSpatialSearch
-				? new SpatialCategoryAmenityByTypeAPI(poiTypes, spatialTextSearchAPI)
+				? new SpatialSearchAmenityByTypeAPI(poiTypes, spatialTextSearchAPI)
 				: new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
 		SearchBuildingAndIntersectionsByStreetAPI streetsApi = useSpatialSearch
 				? new SpatialBuildingAndIntersectionsByStreetAPI()
@@ -738,11 +738,11 @@ public class SearchUICore {
 		}
 	}
 
-	private static class SpatialCategoryAmenityByTypeAPI extends SearchAmenityByTypeAPI {
+	private static class SpatialSearchAmenityByTypeAPI extends SearchAmenityByTypeAPI {
 
 		private final SpatialTextSearchAPI spatialTextSearchAPI;
 
-		public SpatialCategoryAmenityByTypeAPI(MapPoiTypes types, SpatialTextSearchAPI spatialTextSearchAPI) {
+		public SpatialSearchAmenityByTypeAPI(MapPoiTypes types, SpatialTextSearchAPI spatialTextSearchAPI) {
 			super(types, null);
 			this.spatialTextSearchAPI = spatialTextSearchAPI;
 		}
@@ -750,7 +750,7 @@ public class SearchUICore {
 		@Override
 		protected List<Amenity> searchByNameIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
 				Object poiType, QuadRect bbox31) throws IOException {
-			List<String> keys = getNameIndexKeys(poiType);
+			List<String> keys = spatialTextSearchAPI.getNameIndexKeys(poiType);
 			if (keys == null) {
 				return null;
 			}
@@ -764,25 +764,6 @@ public class SearchUICore {
 		@Override
 		protected boolean isReadByNameIndex(BinaryMapIndexReader reader) {
 			return SpatialTextSearchAPI.hasPoiTypesInNameIndex(reader);
-		}
-
-		// a whole category also takes reference types, the name index has none: it is read with the type filter
-		private static List<String> getNameIndexKeys(Object poiType) {
-			if (poiType instanceof PoiType pt) {
-				return Collections.singletonList(pt.getKeyName());
-			} else if (poiType instanceof TopIndexFilter filter) {
-				return Collections.singletonList(filter.getFilterId());
-			} else if (poiType instanceof CustomSearchPoiFilter filter && filter.getAcceptedTypes() != null) {
-				List<String> keys = new ArrayList<>();
-				for (Set<String> types : filter.getAcceptedTypes().values()) {
-					if (types == null) {
-						return null;
-					}
-					keys.addAll(types);
-				}
-				return keys.isEmpty() ? null : keys;
-			}
-			return null;
 		}
 
 		@Override

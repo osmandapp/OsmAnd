@@ -22,6 +22,8 @@ import net.osmand.data.Street;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
+import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
@@ -39,14 +41,17 @@ import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	private static final Log LOG = PlatformUtil.getLog(SpatialTextSearch.class);
 
 	private static final int SEARCH_PRIORITY = SEARCH_ADDRESS_BY_NAME_PRIORITY;
+	private static final String STD_FILTER_PREFIX = "std_";
 	private static final long POI_TYPES_IN_NAME_INDEX_EDITION = 1782864000000L; // 2026-07-01 UTC
 
 	private final MapPoiTypes poiTypes;
@@ -124,6 +129,51 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	// maps built before 2026-07 have no poi types in the name index
 	public static boolean hasPoiTypesInNameIndex(BinaryMapIndexReader reader) {
 		return reader.getDateCreated() >= POI_TYPES_IN_NAME_INDEX_EDITION;
+	}
+
+	// a whole category also takes reference types, the name index has none: it is read with the type filter
+	public List<String> getNameIndexKeys(Object poiType) {
+		if (poiType instanceof PoiType pt) {
+			return Collections.singletonList(pt.getKeyName());
+		} else if (poiType instanceof TopIndexFilter filter) {
+			return Collections.singletonList(filter.getFilterId());
+		} else if (poiType instanceof CustomSearchPoiFilter filter && filter.getAcceptedTypes() != null) {
+			// the standard filter of an attribute takes the types declaring it and checks the attribute by name
+			String id = filter.getFilterId();
+			SpatialPoiSearch.SpatialPoiType std = id.startsWith(STD_FILTER_PREFIX)
+					? poiSearch.getByKey(id.substring(STD_FILTER_PREFIX.length())) : null;
+			if (std != null && std.singleType != null && std.singleType.isAdditional()) {
+				return Collections.singletonList(std.getKey());
+			}
+			List<String> keys = new ArrayList<>();
+			for (Set<String> types : filter.getAcceptedTypes().values()) {
+				if (types == null) {
+					return null;
+				}
+				keys.addAll(types);
+			}
+			return keys.isEmpty() ? null : keys;
+		}
+		return null;
+	}
+
+	// map layer: thinned per tile at the map zoom like the web, zoom -1 (a list around a point) reads every object
+	public synchronized List<Amenity> searchPoiByCategory(List<BinaryMapIndexReader> files, List<String> keys,
+			QuadRect bboxLatLon, int zoom) throws IOException {
+		SpatialTextSearchSettings settings = SpatialTextSearchSettings.searchPoiByCategorySettings(
+				zoom < 0 ? PREFERRED_POI_ZOOM : zoom, bboxLatLon);
+		if (zoom < 0) {
+			settings.LIMIT_READ_SINGLE_OBJECTS = 0;
+			settings.LIMIT_READ_OBJECTS = 0;
+		}
+		LatLon center = new LatLon(bboxLatLon.centerY(), bboxLatLon.centerX());
+		List<Amenity> res = new ArrayList<>();
+		for (String key : keys) {
+			SpatialSearchContext context = new SpatialSearchContext(settings, files, poiSearch, center);
+			res.addAll(spatialTextSearch.searchPoiByCategory(context, key, bboxLatLon, settings.SEARCH_POI_BY_CATEGORY_ZOOM,
+					Integer.MAX_VALUE));
+		}
+		return res;
 	}
 
 	public List<Amenity> searchPoiByCategory(SearchPhrase phrase, SearchResultMatcher resultMatcher,

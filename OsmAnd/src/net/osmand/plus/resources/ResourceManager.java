@@ -125,6 +125,7 @@ public class ResourceManager {
 	// Indexes
 	public enum BinaryMapReaderResourceType {
 		POI,
+		POI_NAME_INDEX,
 		REVERSE_GEOCODING,
 		STREET_LOOKUP,
 		TRANSPORT,

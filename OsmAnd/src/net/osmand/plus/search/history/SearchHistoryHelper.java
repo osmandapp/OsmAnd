@@ -420,7 +420,9 @@ public class SearchHistoryHelper {
 			addNewItemToHistory((PoiUIFilter) result.object, SEARCH);
 		}
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
-		if (result.object instanceof PoiType && ((PoiType) result.object).isAdditional()) {
+		// spatial search loads an attribute from the name index of all types, one parent type misses the others (#24941)
+		if (result.object instanceof PoiType && ((PoiType) result.object).isAdditional()
+				&& !app.getSettings().USE_SPATIAL_TEXT_SEARCH.get()) {
 			PoiType additional = (PoiType) result.object;
 			AbstractPoiType parent = additional.getParentType();
 			if (parent != null) {
