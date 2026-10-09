@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -37,6 +36,7 @@ import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.shared.data.AdditionalInfoBundle;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -77,7 +77,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		}
 		genericRowKeys = AdditionalInfoBundle.getGenericRowKeys(storedExtensions);
 		mergedAmenityExtensions = helper.getUpdatedAmenityExtensions(storedExtensions, amenity);
-		mergedAmenityInfoBundle = new AdditionalInfoBundle(app.getPoiTypes(), mergedAmenityExtensions);
+		mergedAmenityInfoBundle = new AdditionalInfoBundle(mergedAmenityExtensions);
 		if (amenity != null) {
 			sourceAmenityExtensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
 			setCustomOnlinePhotosPosition(sourceAmenityExtensions.containsKey(WIKIDATA));
@@ -145,7 +145,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	@Nullable
 	private AmenityDescriptionBuilder createSourceAmenityDescriptionBuilder() {
 		if (amenity != null) {
-			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getPoiTypes(), sourceAmenityExtensions);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(sourceAmenityExtensions);
 			return new AmenityDescriptionBuilder(this, amenity, bundle, isLightContent());
 		}
 		return null;

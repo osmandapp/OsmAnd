@@ -1,9 +1,9 @@
 package net.osmand.plus.mapcontextmenu.builders.rows.behaviour
 
 import android.content.Context
-import net.osmand.osm.PoiType
 import net.osmand.plus.R
 import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper
+import net.osmand.shared.osm.PoiType
 import net.osmand.util.Algorithms
 
 open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
@@ -23,7 +23,7 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
     override fun applyCommonRules(params: PoiRowParams) {
         with(params) {
             var isUrl = rule.isUrl || Algorithms.isUrl(value)
-            if (!builder.hasHiddenUrl() && !isUrl && builder.isNeedLinks) {
+            if (!builder.hasHiddenUrl() && !isUrl && builder.isNeedLinks()) {
                 val hiddenUrl = AmenityUIHelper.getSocialMediaUrl(key, value)
                 if (hiddenUrl != null) {
                     builder.setHiddenUrl(hiddenUrl)
@@ -33,28 +33,28 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
             builder.setIsUrl(isUrl)
 
             if (poiType != null) {
-                builder.setOrder(poiType.order)
-                builder.setName(poiType.keyName)
-                builder.setIsText(poiType.isText)
+                builder.setOrder(poiType.getOrder())
+                builder.setName(poiType.getKeyName())
+                builder.setIsText(poiType.isText())
 
                 // try to fetch appropriate icon, text and textPrefix based on poi additional type
                 // (if this parameters was not predefined)
 
                 if (!builder.hasIcon()) { // if icon wasn't predefined
-                    var iconId = getIconId(context, poiType.iconKeyName)
+                    var iconId = getIconId(context, poiType.getIconKeyName())
                     if (iconId == 0) {
-                        val category = poiType.osmTag.replace(":", "_")
+                        val category = poiType.getOsmTag()?.replace(":", "_") ?: ""
                         if (category.isNotEmpty()) {
                             iconId = getIconId(context, category)
                         }
-                        val parentType = poiType.parentType
+                        val parentType = poiType.getParentType()
                         if (iconId == 0 && parentType is PoiType) {
-                            iconId = getIconId(context, parentType.iconKeyName)
+                            iconId = getIconId(context, parentType.getIconKeyName())
                             if (iconId == 0) {
                                 builder.setIconNameCandidates(
                                     listOf(
-                                        parentType.osmTag + "_" + category + "_" + parentType.osmValue,
-                                        parentType.osmTag + "_" + parentType.osmValue
+                                        parentType.getOsmTag() + "_" + category + "_" + parentType.getOsmValue(),
+                                        parentType.getOsmTag() + "_" + parentType.getOsmValue()
                                     )
                                 )
                             }
@@ -69,8 +69,8 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
 
                 val isTextPredefined = builder.hasTextPrefix() || builder.hasText()
                 if (!builder.hasTextPrefix() || !builder.hasText()) {
-                    val translation = poiType.translation
-                    if (poiType.isText) {
+                    val translation = poiType.getTranslation()
+                    if (poiType.isText()) {
                         builder.setTextPrefixIfNotPresent(translation)
                         builder.setTextIfNotPresent(value)
                     } else if (translation.contains(":")) {
@@ -82,7 +82,7 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
                     }
                 }
 
-                val textPrefix = builder.textPrefix
+                val textPrefix = builder.getTextPrefix() ?: ""
                 if (!isTextPredefined && textPrefix.contains(" (")) {
                     val prefixParts = textPrefix.split(" (")
                     if (prefixParts.size == 2) {

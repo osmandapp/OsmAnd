@@ -2,7 +2,7 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import static net.osmand.data.Amenity.WIKIDATA;
 import static net.osmand.data.Amenity.WIKIPEDIA;
-import static net.osmand.data.AdditionalInfoBundle.LOCALIZATIONS;
+import static net.osmand.shared.data.AdditionalInfoBundle.LOCALIZATIONS;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_POI_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_WIKI_KEY;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.TAG_URL;
@@ -20,7 +20,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.R;
@@ -30,6 +29,7 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.utils.PicassoUtils;
+import net.osmand.shared.data.AdditionalInfoBundle;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -57,7 +57,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public void build(@NonNull ViewGroup view, @Nullable Object object) {
 		extensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
 		setCustomOnlinePhotosPosition(extensions.containsKey(WIKIDATA));
-		infoBundle = new AdditionalInfoBundle(app.getPoiTypes(), extensions);
+		infoBundle = new AdditionalInfoBundle(extensions);
 
 		super.build(view, object);
 	}

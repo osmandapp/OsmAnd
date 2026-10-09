@@ -25,15 +25,8 @@ import androidx.core.util.Pair;
 import androidx.core.util.PatternsCompat;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityTagEntry;
-import net.osmand.data.AmenityTagEntriesBuilder;
 import net.osmand.data.LatLon;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -52,6 +45,13 @@ import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.shared.data.AdditionalInfoBundle;
+import net.osmand.shared.data.AmenityTagEntriesBuilder;
+import net.osmand.shared.data.AmenityTagEntry;
+import net.osmand.shared.osm.AbstractPoiType;
+import net.osmand.shared.osm.MapPoiTypes;
+import net.osmand.shared.osm.PoiCategory;
+import net.osmand.shared.osm.PoiType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -185,14 +185,14 @@ public class AmenityUIHelper extends MenuBuilder {
 	private AmenityTagEntry.Builder getEntryDataBuilder(@NonNull Context context, @NonNull String key,
 	                                                    @NonNull String value, boolean isDescription,
 	                                                    @NonNull AdditionalInfoBundle.ResolvedPoiType resolvedType) {
-		if (resolvedType.additionalType() == null && resolvedType.categoryType() != null) {
+		if (resolvedType.getAdditionalType() == null && resolvedType.getCategoryType() != null) {
 			return null;
 		}
 		AmenityTagEntry.Builder entryBuilder =
 				new AmenityTagEntry.Builder(key).setValue(value).setIsDescription(isDescription);
 		PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
-		if (resolvedType.additionalType() != null) {
-			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.additionalType(),
+		if (resolvedType.getAdditionalType() != null) {
+			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.getAdditionalType(),
 					key, value, subtype);
 		} else {
 			boolean useGenericFallback = genericRowKeys.contains(key);
@@ -238,7 +238,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private void initVariables() {
 		poiCategory = additionalInfo.getCategory();
 		subtype = additionalInfo.get(SUBTYPE);
-		poiTypes = app.getPoiTypes();
+		poiTypes = MapPoiTypes.getDefaultNoInit();
 		osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 		preferredLangCandidates = LocaleHelper.getPreferredLangCandidates(app);
 	}
@@ -616,18 +616,24 @@ public class AmenityUIHelper extends MenuBuilder {
 			PoiCategory category = pt.getCategory() != null ? pt.getCategory() : type;
 
 			button.setOnClickListener(v -> {
-				if (category != null) {
-					PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + category.getKeyName());
+				// the search filters are built on the java registry: take its types by key name
+				net.osmand.osm.PoiCategory filterCategory = category != null
+						? app.getPoiTypes().getPoiCategoryByName(category.getKeyName()) : null;
+				if (filterCategory != null) {
+					PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + filterCategory.getKeyName());
 					if (filter != null) {
 						filter.clearFilter();
 						if (poiAdditional) {
-							filter.setTypeToAccept(category, true);
-							filter.updateTypesToAccept(pt);
+							filter.setTypeToAccept(filterCategory, true);
+							net.osmand.osm.AbstractPoiType filterType = app.getPoiTypes().getAnyPoiAdditionalTypeByKey(pt.getKeyName());
+							if (filterType != null) {
+								filter.updateTypesToAccept(filterType);
+							}
 							filter.setFilterByName(pt.getKeyName().replace('_', ':').toLowerCase());
 						} else {
 							LinkedHashSet<String> accept = new LinkedHashSet<>();
 							accept.add(pt.getKeyName());
-							filter.selectSubTypesToAccept(category, accept);
+							filter.selectSubTypesToAccept(filterCategory, accept);
 						}
 						getMapActivity().getFragmentsHelper().showQuickSearch(filter);
 					}

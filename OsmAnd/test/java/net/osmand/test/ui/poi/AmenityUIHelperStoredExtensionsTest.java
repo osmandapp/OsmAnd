@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
-import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
@@ -22,6 +21,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
 import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
+import net.osmand.shared.data.AdditionalInfoBundle;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.test.common.AndroidTest;
 
@@ -276,7 +276,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 	                                              @NonNull Set<String> genericRowKeys) {
 		Map<String, AmenityInfoRow> rows = new HashMap<>();
 		AmenityUIHelper helper = new AmenityUIHelper(mapActivity,
-				new AdditionalInfoBundle(app.getPoiTypes(), extensions)) {
+				new AdditionalInfoBundle(extensions)) {
 			@Override
 			public void buildAmenityRow(View view, AmenityInfoRow info) {
 				rows.put(info.key, info);
