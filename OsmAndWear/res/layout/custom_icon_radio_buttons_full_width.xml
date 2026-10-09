@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/custom_radio_buttons"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	tools:background="?attr/btn_bg_border_inactive"
+	android:baselineAligned="false"
+	android:minHeight="@dimen/dialog_button_height"
+	android:orientation="horizontal">
+
+	<include
+		layout="@layout/custom_radio_btn_icon_item"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1" />
+
+	<include
+		layout="@layout/custom_radio_btn_icon_item"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1" />
+
+</LinearLayout>

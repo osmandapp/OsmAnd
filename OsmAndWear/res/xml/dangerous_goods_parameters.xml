@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:title="@string/dangerous_goods">
+
+	<Preference
+		android:key="dangerous_goods_description"
+		android:layout="@layout/preference_item_description"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/dangerous_goods_description" />
+
+	<Preference
+		android:key="description_divider"
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+</PreferenceScreen>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/voice_announces">
+
+	<Preference
+		android:key="voice_announces_info"
+		android:layout="@layout/preference_info"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/voice_announces_info"
+		tools:icon="@drawable/ic_action_info_dark" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="voice_provider"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/shared_string_language"
+		tools:icon="@drawable/ic_action_volume_up" />
+
+	<Preference
+		android:key="language_divider"
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="announce_header"
+		android:layout="@layout/preference_category_title"
+		android:title="@string/accessibility_announce" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_street_names"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_street_names" />
+
+	<SwitchPreferenceCompat
+		android:key="exit_number_names"
+		android:layout="@layout/preference_switch"
+		android:title="@string/exit_number" />
+
+	<Preference
+		android:key="exit_number_divider"
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_traffic_warnings"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_traffic_warnings" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_pedestrian"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_pedestrian" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_cameras"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_cameras" />
+
+	<Preference
+		android:key="speed_cameras_uninstalled"
+		android:layout="@layout/preference_permission"
+		android:persistent="false"
+		android:summary="@string/read_more"
+		android:title="@string/speed_cameras_alert"
+		tools:icon="@drawable/ic_action_alert" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_tunnels"
+		android:layout="@layout/preference_switch"
+		android:title="@string/show_tunnels" />
+
+	<Preference
+		android:key="announce_divider"
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="user_points_header"
+		android:layout="@layout/preference_category_title"
+		android:title="@string/user_points" />
+
+	<SwitchPreferenceCompat
+		android:key="announce_wpt"
+		android:layout="@layout/preference_switch"
+		android:title="@string/shared_string_gpx_waypoints" />
+
+	<SwitchPreferenceCompat
+		android:key="announce_nearby_favorites"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_favorites" />
+
+	<SwitchPreferenceCompat
+		android:key="announce_nearby_poi"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_poi" />
+
+	<Preference
+		android:key="user_points_divider"
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="speed_limit_header"
+		android:layout="@layout/preference_category_title"
+		android:title="@string/speak_speed_limit" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_speed_limit"
+		android:layout="@layout/preference_switch"
+		android:title="@string/announce_when_exceeded" />
+
+	<Preference
+		android:key="speed_limit_exceed"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/speed_limit_exceed" />
+
+	<Preference
+		android:key="other_divider"
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="other_header"
+		android:layout="@layout/preference_category_title"
+		android:title="@string/shared_string_other" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_gps_signal_status"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_gps_signal_status" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_route_recalculation"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_route_recalculation" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_route_deviation"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_route_deviation" />
+
+	<Preference
+		android:key="speed_limit_divider"
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="options_header"
+		android:layout="@layout/preference_category_title"
+		android:title="@string/shared_string_options" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="keep_informing"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/keep_informing" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="arrival_distance_factor"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/announcement_time_title" />
+
+	<Preference
+		android:key="options_divider"
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="output_header"
+		android:layout="@layout/preference_category_title"
+		android:title="@string/output" />
+
+</PreferenceScreen>

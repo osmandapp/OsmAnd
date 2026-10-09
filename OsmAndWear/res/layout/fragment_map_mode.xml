@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:minHeight="240dp"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:orientation="horizontal">
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/TitleStyle.Medium"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_weight="1"
+			android:ellipsize="end"
+			android:textColor="?android:textColorPrimary"
+			android:text="@string/map_mode" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/summary"
+			style="@style/TitleStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:ellipsize="end"
+			android:textColor="?android:textColorSecondary"
+			tools:text="@string/daynight_mode_auto" />
+
+	</LinearLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding">
+
+		<include layout="@layout/custom_icon_radio_buttons_full_width" />
+
+	</FrameLayout>
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/description"
+		style="@style/TitleStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:textColor="?android:textColorSecondary"
+		tools:text="@string/daynight_mode_sunrise_sunset_summary" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/secondary_description"
+		style="@style/TitleStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginTop="@dimen/context_menu_subtitle_margin"
+		android:textColor="?android:textColorSecondary"
+		tools:text="Sunrise – 05:22, sunset – 20:28" />
+
+</LinearLayout>

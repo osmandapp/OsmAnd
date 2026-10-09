@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/setting_list_item_large_height"
+	android:background="?attr/bg_color"
+	android:gravity="center_vertical"
+	android:orientation="horizontal">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon_iv"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/content_padding"
+		tools:src="@drawable/ic_action_3d_relief" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:gravity="center_vertical"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title_tv"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			android:textStyle="normal"
+			tools:text="Title" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/state_tv"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_desc_text_size"
+			tools:text="Description" />
+
+	</LinearLayout>
+
+	<androidx.appcompat.widget.SwitchCompat
+		android:id="@+id/switch_compat"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/content_padding" />
+
+</LinearLayout>

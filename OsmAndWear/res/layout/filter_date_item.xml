@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:clipChildren="false"
+	android:gravity="center_vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
+	android:orientation="vertical">
+
+	<include layout="@layout/track_filter_header" />
+
+	<LinearLayout
+		android:id="@+id/range_input_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<net.osmand.plus.widgets.OsmandTextFieldBoxes
+			android:id="@+id/value_from"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding_half"
+			android:layout_marginBottom="@dimen/list_content_padding"
+			android:layout_weight="1"
+			android:focusable="true"
+			android:focusableInTouchMode="true"
+			app:errorColor="@color/color_invalid"
+			app:labelText="@string/route_from"
+			app:primaryColor="@color/active_color_primary_dark"
+			app:secondaryColor="?android:textColorSecondary">
+
+			<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+				android:id="@+id/value_from_et"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="none"
+				android:scrollHorizontally="true" />
+
+		</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+		<net.osmand.plus.widgets.OsmandTextFieldBoxes
+			android:id="@+id/value_to"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding_half"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/list_content_padding"
+			android:layout_weight="1"
+			android:focusable="false"
+			android:focusableInTouchMode="false"
+			app:errorColor="@color/color_invalid"
+			app:hasFocus="false"
+			app:labelText="@string/route_to"
+			app:primaryColor="@color/active_color_primary_dark"
+			app:secondaryColor="?android:textColorSecondary">
+
+			<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+				android:id="@+id/value_to_et"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="none"
+				android:scrollHorizontally="true" />
+
+		</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+	</LinearLayout>
+
+	<include layout="@layout/divider" />
+
+</LinearLayout>

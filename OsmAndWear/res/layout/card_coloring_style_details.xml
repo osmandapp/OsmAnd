@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingHorizontal="@dimen/content_padding">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="start"
+		android:letterSpacing="@dimen/description_letter_spacing"
+		android:paddingBottom="@dimen/content_padding_half"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size"
+		android:textStyle="normal"
+		tools:text="Specify color for map mode: day." />
+
+	<LinearLayout
+		android:id="@+id/speed_altitude_legend"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:visibility="gone"
+		tools:visibility="visible">
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/small_icon_size"
+			android:layout_marginBottom="@dimen/content_padding_half"
+			android:background="@drawable/bg_track_gradient" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/min_value"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:textColor="?attr/main_font_color_basic"
+				android:textSize="@dimen/default_list_text_size"
+				android:textStyle="normal"
+				tools:text="100 m"/>
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/max_value"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="end"
+				android:textColor="?attr/main_font_color_basic"
+				android:textSize="@dimen/default_list_text_size"
+				android:textStyle="normal"
+				tools:text="100 m"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/slope_legend"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:visibility="gone"
+		tools:visibility="visible">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:adjustViewBounds="true"
+			app:srcCompat="@drawable/img_legend_route_slope" />
+
+	</LinearLayout>
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/grey_color_description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/content_padding_half"
+		android:text="@string/grey_color_undefined"
+		android:textColor="?android:attr/textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size"
+		android:textStyle="normal" />
+
+	<View
+		android:id="@+id/bottom_space"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_small" />
+
+</LinearLayout>

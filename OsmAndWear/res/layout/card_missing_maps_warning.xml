@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/warning_card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/list_content_padding"
+		android:layout_marginTop="@dimen/context_menu_padding_margin_large"
+		android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+		android:src="@drawable/ic_action_map_download"
+		android:tint="?attr/route_info_control_icon_color" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/context_menu_padding_margin_large"
+		android:layout_marginEnd="@dimen/route_info_settings_buttons_height"
+		android:orientation="vertical">
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/TitleStyle.Medium"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:textColor="?android:textColorPrimary"
+			android:text="@string/missing_maps_header"/>
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:textColor="@color/text_color_secondary_light"
+			android:text="@string/missing_maps_description" />
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/details_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:dialogButtonType="secondaryActive"
+			app:dialogButtonTitle="@string/shared_string_details"
+			app:dialogButtonTopMargin="@dimen/content_padding" />
+
+	</LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item>
+		<shape
+			android:shape="rectangle">
+			<!-- Transparent fill color -->
+			<solid android:color="@android:color/transparent" />
+			<!-- Border -->
+			<stroke
+				android:width="@dimen/key_event_cursor_width"
+				android:color="@color/deletion_color_warning" />
+			<corners android:radius="@dimen/key_event_cursor_corners_radius"/>
+		</shape>
+	</item>
+</layer-list>
