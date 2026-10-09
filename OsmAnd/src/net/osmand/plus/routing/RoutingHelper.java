@@ -505,6 +505,11 @@ public class RoutingHelper {
 						voiceRouter.interruptRouteCommands();
 						voiceRouterStopped = true; // Prevents excessive execution of stop() code
 					}
+					if (!inRecalc && !wrongMovementDirection && !isDeviatedFromRoute) {
+						routeRecalculationHelper.onRouteFollowed(System.currentTimeMillis());
+					} else {
+						routeRecalculationHelper.onRouteNotFollowed();
+					}
 					voiceRouter.announceOffRoute(distOrth);
 				}
 
