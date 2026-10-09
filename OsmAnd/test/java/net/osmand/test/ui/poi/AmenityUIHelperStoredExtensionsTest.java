@@ -99,6 +99,29 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 	}
 
 	@Test
+	public void garminWaypointAddressGetsRowsWithValues() {
+		Map<String, String> extensions = new HashMap<>();
+		extensions.put("gpxx:street_address", "Schoodic Loop Rd");
+		extensions.put("gpxx:city", "Winter Harbor Twn");
+		extensions.put("gpxx:state", "Maine");
+		extensions.put("gpxx:country", "United States");
+		extensions.put("gpxx:postal_code", "04693");
+		extensions.put("phone", "207-288-1300");
+
+		Map<String, AmenityInfoRow> rows = buildRows(extensions,
+				AdditionalInfoBundle.getExternalNamespaceKeys(extensions));
+
+		for (Map.Entry<String, String> entry : extensions.entrySet()) {
+			AmenityInfoRow row = rows.get(entry.getKey());
+			assertNotNull(entry.getKey(), row);
+			assertEquals(entry.getValue(), row.text);
+		}
+		assertEquals("Street address", rows.get("gpxx:street_address").textPrefix);
+		assertEquals("Postal code", rows.get("gpxx:postal_code").textPrefix);
+		assertTrue(rows.get("phone").isPhoneNumber);
+	}
+
+	@Test
 	public void genericFallbackIconOverridesCollidingPoiRule() {
 		Map<String, String> extensions = Collections.singletonMap(COLLIDING_CUSTOM_KEY, "value");
 

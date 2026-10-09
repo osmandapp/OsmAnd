@@ -68,6 +68,11 @@ object GpxUtilities {
 	private const val GPXTPX_TRACK_POINT_EXTENSION = "${GPXTPX_XML_PREFIX}:TrackPointExtension"
 	private const val EXTENSIONS_WRITER_KEY = "extensions"
 	const val OSMAND_EXTENSIONS_PREFIX = "$OSMAND_XML_PREFIX:"
+	const val GPXX_STREET_ADDRESS = "$GPXX_XML_PREFIX:street_address"
+	const val GPXX_CITY = "$GPXX_XML_PREFIX:city"
+	const val GPXX_STATE = "$GPXX_XML_PREFIX:state"
+	const val GPXX_POSTAL_CODE = "$GPXX_XML_PREFIX:postal_code"
+	const val GPXX_COUNTRY = "$GPXX_XML_PREFIX:country"
 	const val OSM_PREFIX = "osm_tag_"
 	const val AMENITY_PREFIX = "amenity_"
 	const val ORIGIN_EXTENSION = "origin"
@@ -142,7 +147,14 @@ object GpxUtilities {
 		"temp" to PointAttributes.SENSOR_TAG_TEMPERATURE_W,
 		"wtemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_W,
 		"atemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_A,
-		"activity" to ACTIVITY_TYPE
+		"activity" to ACTIVITY_TYPE,
+		// gpxx:WaypointExtension address: the namespace is kept so the point card shows the field
+		"streetaddress" to GPXX_STREET_ADDRESS,
+		"city" to GPXX_CITY,
+		"state" to GPXX_STATE,
+		"country" to GPXX_COUNTRY,
+		"postalcode" to GPXX_POSTAL_CODE,
+		"phonenumber" to "phone"
 	)
 
 	const val RADIUS_DIVIDER = 5000
