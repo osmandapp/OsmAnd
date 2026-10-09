@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The phone app's launcher icon, reused layer for layer so the watch entry is recognisably
+     OsmAnd. Mirrors OsmAnd/res/mipmap-anydpi-v26/icon_free.xml; gplayFullWear and
+     nightlyFreeWear replace this file with their own channel's variant. -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+	<background android:drawable="@mipmap/adaptive_icon_osmand_background" />
+	<foreground android:drawable="@mipmap/adaptive_icon_osmand_logo" />
+	<monochrome android:drawable="@drawable/ic_launcher_osmand_monochrome" />
+</adaptive-icon>

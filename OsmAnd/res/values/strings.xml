@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+
+	<string name="refresh_wear_connection">Refresh watch connection</string>
+	<string name="refresh_wear_connection_descr">Announce this phone to the watch again and send it the current state</string>
+	<string name="wear_refresh_no_watch">No watch found</string>
+	<string name="wear_refresh_found">Watch found: %1$s</string>
+	<string name="wear_refresh_failed">Could not reach the watch</string>
 <!--
 	README:
 	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
