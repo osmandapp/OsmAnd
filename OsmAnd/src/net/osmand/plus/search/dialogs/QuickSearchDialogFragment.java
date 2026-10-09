@@ -619,7 +619,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		List<QuickSearchListItem> items = new ArrayList<>();
 		if (!Algorithms.isEmpty(results)) {
 			for (SearchResult result : results) {
-				if (result.object instanceof MapObject) {
+				if (result.object instanceof MapObject || result.objectType == ObjectType.SUGGESTION) {
 					items.add(new QuickSearchListItem(app, result));
 				}
 			}
@@ -1156,12 +1156,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 		filterChips.updateContent(filterChipItems);
 		searchResultPoiTypesChips.setContentEnabled(!searching);
-		if (!searching) {
+		if (!searching || topChips.isEmpty() || !searchResultPoiTypesChips.hasVisibleChips()) {
 			searchResultPoiTypesChips.updateContent(topChips);
 		}
 		boolean filterChipsVisible = searchVisible && hasVisibleChip(filterChipItems);
 		filterChips.setVisibility(filterChipsVisible ? View.VISIBLE : View.GONE);
-		boolean poiTypesChipsVisible = searchVisible && !topChips.isEmpty();
+		boolean poiTypesChipsVisible = searchVisible && searchResultPoiTypesChips.hasVisibleChips();
 		searchResultPoiTypesChips.setVisibility(poiTypesChipsVisible ? View.VISIBLE : View.GONE);
 		if (filterChipsVisible || poiTypesChipsVisible) {
 			buttonToolbarView.setVisibility(View.VISIBLE);

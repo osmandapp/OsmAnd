@@ -132,7 +132,7 @@ public class InAppPurchaseUtils {
 	}
 
 	public static boolean isBackupAvailable(@NonNull OsmandApplication app) {
-		return isOsmAndProAvailable(app);
+		return isOsmAndProAvailable(app, false);
 	}
 
 	public static boolean isWeatherAvailable(@NonNull OsmandApplication app) {

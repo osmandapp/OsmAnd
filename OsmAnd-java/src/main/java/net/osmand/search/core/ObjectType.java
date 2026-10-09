@@ -21,7 +21,9 @@ public enum ObjectType {
 	SEARCH_FINISHED(false),
 	SEARCH_API_FINISHED(false),
 	SEARCH_API_REGION_FINISHED(false),
-	UNKNOWN_NAME_FILTER(false);
+	UNKNOWN_NAME_FILTER(false),
+	// the whole query with a misspelled word corrected: tapping it searches the corrected query
+	SUGGESTION(false);
 
 	private final boolean hasLocation;
 
@@ -38,7 +40,7 @@ public enum ObjectType {
 	}
 
 	public static boolean isTopVisible(ObjectType t) {
-		return t == POI_TYPE || t == FAVORITE || t == FAVORITE_GROUP || t == WPT || t == GPX_TRACK || t == LOCATION || t == PARTIAL_LOCATION || t == INDEX_ITEM;
+		return t == POI_TYPE || t == SUGGESTION || t == FAVORITE || t == FAVORITE_GROUP || t == WPT || t == GPX_TRACK || t == LOCATION || t == PARTIAL_LOCATION || t == INDEX_ITEM;
 	}
 	
 	public static ObjectType getExclusiveSearchType(ObjectType t) {

@@ -188,7 +188,7 @@ class StarMapCameraOverlayRaceTest {
 		scenarioRule.scenario.onActivity { activity ->
 			val view = textureView!!
 			view.surfaceTextureListener = null
-			helper = StarMapCameraHelper(DetachedFragment(app), StarView(activity), view) {}
+			helper = StarMapCameraHelper(DetachedFragment(app), StarView(activity), view, {}) {}
 		}
 	}
 

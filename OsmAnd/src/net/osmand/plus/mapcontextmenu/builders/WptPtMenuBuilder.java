@@ -45,7 +45,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
 	private Map<String, String> amenityExtensions = new HashMap<>();
-	private Set<String> genericFallbackKeys = Collections.emptySet();
+	private Set<String> externalNamespaceKeys = Collections.emptySet();
 
 	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt,
 			@Nullable PlaceDetailsObject detailsObject) {
@@ -66,7 +66,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 				setAmenity(helper.findAmenity(originName, wpt.getLatitude(), wpt.getLongitude()));
 			}
 		}
-		genericFallbackKeys = AmenityExtensionsHelper.getStoredExtensionFallbackKeys(wpt.getExtensionsToRead());
+		externalNamespaceKeys = AdditionalInfoBundle.getExternalNamespaceKeys(wpt.getExtensionsToRead());
 		amenityExtensions = helper.getUpdatedAmenityExtensions(wpt.getExtensionsToRead(), amenity);
 	}
 
@@ -144,7 +144,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			boolean light = isLightContent();
 			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getPoiTypes(), amenityExtensions);
 			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, bundle);
-			helper.setGenericFallbackKeys(genericFallbackKeys);
+			helper.setExternalNamespaceKeys(externalNamespaceKeys);
 			helper.setLight(light);
 			helper.setLatLon(getLatLon());
 			helper.setCollapseExpandListener(getCollapseExpandListener());

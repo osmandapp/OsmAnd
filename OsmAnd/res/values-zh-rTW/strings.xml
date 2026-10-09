@@ -5203,4 +5203,12 @@
     <string name="ais_mmsi">MMSI</string>
     <string name="ais_mmsi_not_set">還未設定</string>
     <string name="ais_show_on_the_map">在地圖上顯示</string>
+    <string name="multimedia_notes_view_descr">你的 A/V 註解是在 %1$s。</string>
+    <string name="shared_string_file">檔案</string>
+    <string name="shared_string_format">格式</string>
+    <string name="shared_string_resolution">解析度</string>
+    <string name="shared_string_attached_to">附檔於</string>
+    <string name="media_not_attached_title">還沒有在任何的附檔中</string>
+    <string name="media_not_attached_descr">附檔這一媒體到你的最愛來顯示在地圖上。</string>
+    <string name="detach_external_media_descr">這一檔案不再出現在你的最愛，仍會在你的裝置中。</string>
 </resources>

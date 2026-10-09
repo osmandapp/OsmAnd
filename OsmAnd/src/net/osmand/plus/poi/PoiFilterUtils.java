@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
@@ -69,6 +70,40 @@ public class PoiFilterUtils {
 			}
 		}
 		return null;
+	}
+
+	// an attribute is declared by several types, its parent type is only the first of them (#24941)
+	@NonNull
+	public static List<PoiType> getTypesWithAdditional(@NonNull MapPoiTypes poiTypes, @NonNull AbstractPoiType additional) {
+		List<PoiType> types = new ArrayList<>();
+		if (additional instanceof PoiType poiType && poiType.getParentType() instanceof PoiType parent) {
+			types.add(parent);
+		}
+		for (PoiCategory category : poiTypes.getCategories(false)) {
+			for (PoiType type : category.getPoiTypes()) {
+				if (!types.contains(type) && type.getPoiAdditionalByKeyName(additional.getKeyName()) != null) {
+					types.add(type);
+				}
+			}
+		}
+		return types;
+	}
+
+	@NonNull
+	public static String getTypesName(@NonNull List<PoiType> types, int maxChars) {
+		StringBuilder sb = new StringBuilder();
+		for (PoiType type : types) {
+			String name = type.getTranslation();
+			if (sb.length() > 0 && sb.length() + name.length() > maxChars) {
+				sb.append("\u2026");
+				break;
+			}
+			if (sb.length() > 0) {
+				sb.append(", ");
+			}
+			sb.append(name);
+		}
+		return sb.toString();
 	}
 
 	public static void sortByElo(@NonNull List<Amenity> amenities) {

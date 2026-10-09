@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="map_source_saved_as">Map source saved as \'%1$s\'.</string>
+	<string name="map_source_folder_not_created">Could not create a folder for the map source. Try a different name.</string>
 	<string name="multimedia_notes_view_descr">Your A/V notes are in %1$s.</string>
 	<string name="shared_string_file">File</string>
 	<string name="shared_string_format">Format</string>

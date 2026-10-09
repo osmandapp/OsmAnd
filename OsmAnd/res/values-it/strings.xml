@@ -5365,7 +5365,7 @@
     <string name="heap_dump">Istantanea della memoria heap</string>
     <string name="heap_dump_descr">Conta gli oggetti nella memoria heap di Java.</string>
     <string name="heap_dump_collect">Raccogli e analizza ora</string>
-    <string name="heap_dump_collect_descr">Impiega alcuni secondi, mostra il risultato.</string>
+    <string name="heap_dump_collect_descr">Ci vogliono pochi secondi e viene visualizzato il risultato.</string>
     <string name="heap_dump_share">Condividi il rapporto</string>
     <string name="heap_dump_share_descr">Invia l\'ultimo rapporto al server.</string>
     <string name="heap_dump_auto">Raccogli in caso di utilizzo elevato</string>
@@ -5394,4 +5394,14 @@
     <string name="ais_no_position_data">Nessun dato di posizione</string>
     <string name="release_5_4">• Interfaccia di ricerca rinnovata: ordinamento, filtri per categoria, aspetto più pulito\n\n• Allega foto e file multimediali ai Preferiti\n\n• Preferiti: supporto per sottogruppi e cartelle bloccabili\n\n• Coordinate: la ricerca, la griglia della mappa e la visualizzazione dei PDI ora supportano il localizzatore Maidenhead e EPSG\n\n• Sistemate le interruzioni di navigazione; passaggio tra calcolo del percorso standard e veloce\n\n• Imposta la scala della mappa di Android Auto separatamente dal tuo telefono\n\n• Nuova ricerca spaziale — trova luoghi e cerca nei dintorni di un luogo\n\n• L\'astronomia ha ricevuto le eclissi solari e lunari</string>
     <string name="file_name_containes_illegal_char">Il nome non può contenere: %1$s</string>
+    <string name="multimedia_notes_view_descr">Le tue note A/V sono in %1$s.</string>
+    <string name="shared_string_file">File</string>
+    <string name="shared_string_format">Formato</string>
+    <string name="shared_string_resolution">Risoluzione</string>
+    <string name="shared_string_attached_to">Allegato a</string>
+    <string name="media_not_attached_title">Non ancora allegato a qualcosa</string>
+    <string name="media_not_attached_descr">Allega questo contenuto multimediale a un preferito per visualizzarlo sulla mappa.</string>
+    <string name="detach_external_media_descr">Il file non sarà più visualizzato in questo preferito. Rimane sul tuo dispositivo.</string>
+    <string name="detach_external_media_descr_plural">I file non saranno più visualizzati in questo preferito. Rimangono sul tuo dispositivo.</string>
+    <string name="attach_to_favorite">Allega a un preferito</string>
 </resources>
