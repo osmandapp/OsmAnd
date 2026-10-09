@@ -18,7 +18,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MapPoiTypesTranslator implements PoiTranslator, net.osmand.shared.osm.PoiTranslator {
+public class MapPoiTypesTranslator implements PoiTranslator {
 
 	private static final Log LOG = PlatformUtil.getLog(MapPoiTypesTranslator.class);
 
@@ -147,39 +147,6 @@ public class MapPoiTypesTranslator implements PoiTranslator, net.osmand.shared.o
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public String getTranslation(@NonNull net.osmand.shared.osm.AbstractPoiType type) {
-		net.osmand.shared.osm.AbstractPoiType baseLangType = type.getBaseLangType();
-		if (baseLangType != null) {
-			String translation = getTranslation(baseLangType);
-			String langTranslation = " (" + AndroidUtils.getLangTranslation(app, type.getLang()).toLowerCase() + ")";
-			if (translation != null) {
-				return translation + langTranslation;
-			} else {
-				return net.osmand.shared.osm.MapPoiTypes.getDefaultNoInit().getBasePoiName(baseLangType) + langTranslation;
-			}
-		}
-		return getTranslation(type.getFormattedKeyName());
-	}
-
-	@Override
-	public String getSynonyms(@NonNull net.osmand.shared.osm.AbstractPoiType type) {
-		net.osmand.shared.osm.AbstractPoiType baseLangType = type.getBaseLangType();
-		if (baseLangType != null) {
-			return getSynonyms(baseLangType);
-		}
-		return getSynonyms(type.getFormattedKeyName());
-	}
-
-	@Override
-	public String getEnTranslation(@NonNull net.osmand.shared.osm.AbstractPoiType type) {
-		net.osmand.shared.osm.AbstractPoiType baseLangType = type.getBaseLangType();
-		if (baseLangType != null) {
-			return getEnTranslation(baseLangType) + " (" + AndroidUtils.getLangTranslation(app, type.getLang()).toLowerCase() + ")";
-		}
-		return getEnTranslation(type.getFormattedKeyName());
 	}
 
 	private static int getStringId(String keyName) {

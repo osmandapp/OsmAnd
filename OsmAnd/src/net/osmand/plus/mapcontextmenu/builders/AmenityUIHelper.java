@@ -29,6 +29,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.SharedPoiTypes;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -238,7 +239,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private void initVariables() {
 		poiCategory = additionalInfo.getCategory();
 		subtype = additionalInfo.get(SUBTYPE);
-		poiTypes = MapPoiTypes.getDefaultNoInit();
+		poiTypes = SharedPoiTypes.get(app);
 		osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 		preferredLangCandidates = LocaleHelper.getPreferredLangCandidates(app);
 	}

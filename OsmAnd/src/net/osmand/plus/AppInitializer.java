@@ -118,8 +118,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-import okio.Okio;
-
 public class AppInitializer implements IProgress {
 
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS";
@@ -298,6 +296,7 @@ public class AppInitializer implements IProgress {
 	public void reInitPoiTypes() {
 		MapPoiTypes.setDefault(new MapPoiTypes(null));
 		app.poiTypes = MapPoiTypes.getDefaultNoInit();
+		SharedPoiTypes.reset();
 		initPoiTypes();
 	}
 
@@ -308,27 +307,8 @@ public class AppInitializer implements IProgress {
 		} else {
 			app.poiTypes.init();
 		}
-		MapPoiTypesTranslator translator = new MapPoiTypesTranslator(app);
-		app.poiTypes.setPoiTranslator(translator);
-		initSharedPoiTypes(translator);
+		app.poiTypes.setPoiTranslator(new MapPoiTypesTranslator(app));
 		notifyEvent(POI_TYPES_INITIALIZED);
-	}
-
-	// the point card rows (AdditionalInfoBundle) are built in OsmAnd-shared on its copy of the types
-	private void initSharedPoiTypes(@NonNull MapPoiTypesTranslator translator) {
-		net.osmand.shared.osm.MapPoiTypes poiTypes = new net.osmand.shared.osm.MapPoiTypes(null);
-		File customPoiTypes = app.getAppPath(SETTINGS_DIR + "poi_types.xml");
-		if (customPoiTypes.exists()) {
-			poiTypes.init(customPoiTypes.getAbsolutePath());
-		} else {
-			try (InputStream is = MapPoiTypes.class.getResourceAsStream("poi_types.xml")) {
-				poiTypes.initFromSource(Okio.source(is));
-			} catch (IOException e) {
-				LOG.error("Error reading poi_types.xml", e);
-			}
-		}
-		poiTypes.setPoiTranslator(translator);
-		net.osmand.shared.osm.MapPoiTypes.setDefault(poiTypes);
 	}
 
 	public void onCreateApplication() {

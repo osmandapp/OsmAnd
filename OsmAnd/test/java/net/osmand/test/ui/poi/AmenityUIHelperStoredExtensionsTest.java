@@ -17,6 +17,7 @@ import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.R;
+import net.osmand.plus.SharedPoiTypes;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
@@ -276,7 +277,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 	                                              @NonNull Set<String> genericRowKeys) {
 		Map<String, AmenityInfoRow> rows = new HashMap<>();
 		AmenityUIHelper helper = new AmenityUIHelper(mapActivity,
-				new AdditionalInfoBundle(extensions)) {
+				new AdditionalInfoBundle(SharedPoiTypes.get(app), extensions)) {
 			@Override
 			public void buildAmenityRow(View view, AmenityInfoRow info) {
 				rows.put(info.key, info);

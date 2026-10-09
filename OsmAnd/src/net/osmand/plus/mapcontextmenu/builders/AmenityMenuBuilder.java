@@ -23,6 +23,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.SharedPoiTypes;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -57,7 +58,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public void build(@NonNull ViewGroup view, @Nullable Object object) {
 		extensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
 		setCustomOnlinePhotosPosition(extensions.containsKey(WIKIDATA));
-		infoBundle = new AdditionalInfoBundle(extensions);
+		infoBundle = new AdditionalInfoBundle(SharedPoiTypes.get(app), extensions);
 
 		super.build(view, object);
 	}

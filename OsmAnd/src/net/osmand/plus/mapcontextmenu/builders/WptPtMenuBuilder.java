@@ -15,6 +15,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
+import net.osmand.plus.SharedPoiTypes;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
@@ -142,7 +143,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
 			boolean light = isLightContent();
-			AdditionalInfoBundle bundle = new AdditionalInfoBundle(amenityExtensions);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(SharedPoiTypes.get(app), amenityExtensions);
 			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, bundle);
 			helper.setGenericRowKeys(genericRowKeys);
 			helper.setLight(light);
