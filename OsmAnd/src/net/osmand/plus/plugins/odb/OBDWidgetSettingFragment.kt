@@ -270,4 +270,6 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 	}
 
 	inner class ButtonItem(var title: String, var desc: String?, var listener: View.OnClickListener)
+
+	override fun getAnalyticsScreen() = "obd_widget_setting"
 }

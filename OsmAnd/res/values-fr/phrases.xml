@@ -5216,4 +5216,8 @@
     <string name="poi_theme_pirate">Pirate</string>
     <string name="poi_theme_medieval">Médiéval</string>
     <string name="poi_theme_jazz">Jazz</string>
+    <string name="poi_disaster_help_point">Point d\'aide en cas de catastrophe</string>
+    <string name="poi_theme_historic">Historique</string>
+    <string name="poi_theme_english">Anglais</string>
+    <string name="poi_theme_football">Football</string>
 </resources>

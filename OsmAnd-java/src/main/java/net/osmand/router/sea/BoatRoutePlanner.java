@@ -428,15 +428,19 @@ public class BoatRoutePlanner {
 
 	/** Open water from a to b, starting exactly at a and ending exactly at b, or null. */
 	public List<LatLon> openWater(LatLon a, LatLon b) throws IOException {
-		double direct = MapUtils.getDistance(a, b);
-		boolean offshore = direct > OFFSHORE_METERS;
-		double margin = Math.max(0.05, 0.3 * direct / 111000);
-		double lonMargin = margin / Math.cos(Math.toRadians((a.getLatitude() + b.getLatitude()) / 2));
-		SeaObstacles obstacles = shores.load(
-				Math.min(a.getLatitude(), b.getLatitude()) - margin, Math.min(a.getLongitude(), b.getLongitude()) - lonMargin,
-				Math.max(a.getLatitude(), b.getLatitude()) + margin, Math.max(a.getLongitude(), b.getLongitude()) + lonMargin,
-				offshore);
-		SeaRoute sea = new SeaRoutePlanner(config(offshore)).plan(obstacles, a, b);
+		return MapUtils.getDistance(a, b) > LONG_ROUTE_METERS ? openWaterAlongCoarseWay(a, b) : openWaterDirect(a, b);
+	}
+
+	/**
+	 * Longer than this, open water is planned along a coarse way first: all corners of the shores of a box that big
+	 * at once - 120 thousand from the Baltic to the Atlantic - take minutes.
+	 */
+	public static final double LONG_ROUTE_METERS = 100000;
+	/** Legs of a long route: short enough for its detailed shores to load and plan in a moment. */
+	public static final double LEG_METERS = 50000;
+
+	private List<LatLon> openWaterDirect(LatLon a, LatLon b) throws IOException {
+		SeaRoute sea = planLeg(a, b, false, false);
 		if (sea == null) {
 			return null;
 		}
@@ -448,6 +452,121 @@ public class BoatRoutePlanner {
 			line.add(b);
 		}
 		return line;
+	}
+
+	/** Open water on the shores of the box of a and b; its points run from a, or the water a was moved to, to b's. */
+	private SeaRoute planLeg(LatLon a, LatLon b, boolean aOnWater, boolean bOnWater) throws IOException {
+		// a leg of a long route is near shore by definition, however long a strait made it: never the generalized
+		// shores, which leave out the islands south of Singapore
+		boolean offshore = !aOnWater && !bOnWater && MapUtils.getDistance(a, b) > OFFSHORE_METERS;
+		return new SeaRoutePlanner(config(offshore)).plan(load(a, b, offshore), a, b, aOnWater, bOnWater);
+	}
+
+	/**
+	 * A long route: a coarse way over the cells of the generalized coastline of the whole box first, then legs between
+	 * points of open water on it about {@link #LEG_METERS} apart, each planned on the detailed shores of its own box like
+	 * a short route - in open sea that is a straight line, but only the detailed shores know the islets the generalized
+	 * coastline leaves out (east of Belitung). A leg that
+	 * cannot be planned means the coarse way took a passage too narrow for the detailed shores (the Limfjord at
+	 * Thyborøn): the shore cells around it are closed and the coarse way found again.
+	 */
+	private List<LatLon> openWaterAlongCoarseWay(LatLon a, LatLon b) throws IOException {
+		// a wider box when there is no way in this one: round Europe from the Baltic to the Aegean reaches far
+		// beyond the box of its ends
+		for (double margin : BOX_MARGINS) {
+			SeaObstacles coarse = load(a, b, true, margin);
+			if (coarse.getSegmentsCount() == 0) {
+				return new ArrayList<>(Arrays.asList(a, b)); // far out at sea, nothing in the way
+			}
+			boolean[] noWay = new boolean[1];
+			List<LatLon> line = openWaterAlongCoarseWay(coarse, a, b, noWay);
+			if (line != null || !noWay[0]) {
+				return line;
+			}
+		}
+		return null;
+	}
+
+	/** Margins of the box of a long route, in parts of its straight line, tried in turn while there is no way. */
+	private static final double[] BOX_MARGINS = { 0.3, 1, 3 };
+
+	private List<LatLon> openWaterAlongCoarseWay(SeaObstacles coarse, LatLon a, LatLon b, boolean[] noWay)
+			throws IOException {
+		double ax = coarse.x(a.getLongitude()), ay = coarse.y(a.getLatitude());
+		double bx = coarse.x(b.getLongitude()), by = coarse.y(b.getLatitude());
+		Set<Long> closed = new HashSet<>();
+		while (true) {
+			SeaObstacles.CoarseWay way = coarse.coarseWay(ax, ay, bx, by, closed);
+			noWay[0] = way == null && closed.isEmpty();
+			if (way == null) {
+				return null;
+			}
+			List<Integer> stops = new ArrayList<>();
+			stops.add(0);
+			double run = 0;
+			for (int k = 1; k < way.size() - 1; k++) {
+				run += Math.hypot(way.x.get(k) - way.x.get(k - 1), way.y.get(k) - way.y.get(k - 1));
+				if (way.water.get(k) && run >= LEG_METERS) {
+					stops.add(k);
+					run = 0;
+				}
+			}
+			stops.add(way.size() - 1);
+			List<LatLon> line = new ArrayList<>();
+			line.add(a);
+			boolean planned = true;
+			// each leg starts where the one before ended: a point of the coarse way that turned out to be on land
+			// (Singapore at a finer zoom) is moved onto water by its leg and never drawn
+			LatLon p = a;
+			for (int i = 1; i < stops.size() && planned; i++) {
+				boolean first = i == 1, last = i == stops.size() - 1;
+				LatLon q = last ? b : coarse.latLon(way.x.get(stops.get(i)), way.y.get(stops.get(i)));
+				double px = coarse.x(p.getLongitude()), py = coarse.y(p.getLatitude());
+				double qx = coarse.x(q.getLongitude()), qy = coarse.y(q.getLatitude());
+				SeaRoute leg = planLeg(p, q, !first, !last);
+				if (leg != null) {
+					line.addAll(first && leg.snappedStart != null ? leg.points : leg.points.subList(1, leg.points.size()));
+					if (last && leg.snappedEnd != null) {
+						line.add(b);
+					}
+					p = line.get(line.size() - 1);
+					continue;
+				}
+				// the coarse cells cannot see a peninsula the generalized coastline left out (Beara in Ireland):
+				// the ends of the leg in between are closed with the shores around it
+				Set<Long> passage = coarse.shoreCellsBetween(px, py, qx, qy);
+				if (!first) {
+					passage.add(way.cells.get(stops.get(i - 1)));
+				}
+				if (!last) {
+					passage.add(way.cells.get(stops.get(i)));
+				}
+				if (passage.isEmpty() || !closed.addAll(passage)) {
+					return null;
+				}
+				planned = false;
+			}
+			if (planned) {
+				return line;
+			}
+		}
+	}
+
+	/** The shores of the box of two points with a margin for a detour. */
+	private SeaObstacles load(LatLon a, LatLon b, boolean offshore) throws IOException {
+		return load(a, b, offshore, BOX_MARGINS[0]);
+	}
+
+	private SeaObstacles load(LatLon a, LatLon b, boolean offshore, double marginPart) throws IOException {
+		double direct = MapUtils.getDistance(a, b);
+		double margin = Math.min(80, Math.max(0.05, marginPart * direct / 111000));
+		double lonMargin = margin / Math.cos(Math.toRadians((a.getLatitude() + b.getLatitude()) / 2));
+		// within the map's coordinates: a box over the pole reads nothing
+		return shores.load(
+				Math.max(-85, Math.min(a.getLatitude(), b.getLatitude()) - margin),
+				Math.max(-180, Math.min(a.getLongitude(), b.getLongitude()) - lonMargin),
+				Math.min(85, Math.max(a.getLatitude(), b.getLatitude()) + margin),
+				Math.min(180, Math.max(a.getLongitude(), b.getLongitude()) + lonMargin), offshore);
 	}
 
 	public static double length(List<LatLon> line) {

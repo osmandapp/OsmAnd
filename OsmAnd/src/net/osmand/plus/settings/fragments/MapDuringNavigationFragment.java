@@ -123,4 +123,9 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_during_navigation";
+	}
 }

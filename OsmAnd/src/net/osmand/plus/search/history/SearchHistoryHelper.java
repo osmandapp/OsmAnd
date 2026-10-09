@@ -13,8 +13,10 @@ import net.osmand.data.City;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.poi.PoiFilterUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.settings.enums.HistorySource;
@@ -32,6 +34,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -428,11 +431,12 @@ public class SearchHistoryHelper {
 				if (custom != null) {
 					custom.clearFilter();
 					custom.updateTypesToAccept(parent);
+					acceptTypesWithAdditional(custom, additional);
 					custom.setFilterByName(additional.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT));
 
 					SearchPhrase phrase = searchUICore.getPhrase();
 					result = new SearchResult(phrase);
-					result.localeName = custom.getName();
+					result.localeName = additional.getTranslation();
 					result.object = custom;
 					result.priority = SEARCH_AMENITY_TYPE_PRIORITY;
 					result.priorityDistance = 0;
@@ -441,6 +445,25 @@ public class SearchHistoryHelper {
 			}
 		}
 		searchUICore.selectSearchResult(result);
+	}
+
+	// the parent type alone misses the other types declaring the attribute (#24941)
+	private void acceptTypesWithAdditional(@NonNull PoiUIFilter filter, @NonNull PoiType additional) {
+		Map<PoiCategory, LinkedHashSet<String>> accepted = filter.getAcceptedTypes();
+		for (PoiType type : PoiFilterUtils.getTypesWithAdditional(app.getPoiTypes(), additional)) {
+			PoiCategory category = type.getCategory();
+			if (accepted.containsKey(category) && accepted.get(category) == null) {
+				continue; // the whole category is accepted
+			}
+			LinkedHashSet<String> keys = accepted.get(category);
+			if (keys == null) {
+				keys = new LinkedHashSet<>();
+				accepted.put(category, keys);
+			}
+			if (keys.add(type.getKeyName())) {
+				filter.selectSubTypesToAccept(category, keys);
+			}
+		}
 	}
 
 	private void applyObjectMetadata(@NonNull HistoryEntry entry, @NonNull PointDescription name,

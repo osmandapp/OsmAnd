@@ -420,4 +420,9 @@ public class MyPlacesActivity extends TabActivity {
 	public boolean isInAppPurchaseAllowed() {
 		return true;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "my_places";
+	}
 }

@@ -266,7 +266,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 				val app = ctx.applicationContext as OsmandApplication
 				app.settings.PREFERRED_LOCALE.get().takeIf { it.isNotEmpty() }
 					?.substringBefore('-')
-					?: ctx.resources.configuration.locale.language
+					?: ctx.resources.configuration.locales[0].language
 			} else { lang }
 
 			val db = dbHelper.readableDatabase
@@ -345,7 +345,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 	) {
 		val app = ctx.applicationContext as OsmandApplication
 		val lang = app.settings.PREFERRED_LOCALE.get().takeIf { it.isNotEmpty() }?.substringBefore('-')
-			?: ctx.resources.configuration.locale.language
+			?: ctx.resources.configuration.locales[0].language
 
 		val langWiki = "${lang}wiki"
 		val enWiki = "enwiki"

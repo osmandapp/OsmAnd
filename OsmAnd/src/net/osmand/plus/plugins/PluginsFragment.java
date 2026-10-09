@@ -286,4 +286,9 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "plugins";
+	}
 }

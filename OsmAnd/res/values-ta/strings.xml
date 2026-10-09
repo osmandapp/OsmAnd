@@ -2946,7 +2946,7 @@
     <string name="standard_maps">நிலையான வரைபடங்கள்</string>
     <string name="app_mode_baby_transport">குழந்தை போக்குவரத்து</string>
     <string name="release_4_6">And ஆண்ட்ராய்டு Auto: 3D பயன்முறையைச் சேர்க்கப்பட்டது\n\n • தடங்கள்: அறிமுகப்படுத்தப்பட்ட வடிப்பான்கள் மற்றும் அறிவுள்ள கோப்புறைகள், பெரிய கோப்புகளுக்கான உகந்த நினைவகம்\n\n • அனைத்து விட்செட்டுகளுக்கும் இடமளிக்க மேம்பட்ட மேல் மற்றும் கீழ் விட்செட் பேனல்கள்\n\n Local மேம்பட்ட உள்ளக வள மேலாண்மை\n\n Conterge வெளிப்புற கட்டுப்படுத்திகளுக்கான தனிப்பயனாக்கக்கூடிய பொத்தான் மேப்பிங்\n\n • புதிய விட்செட்டுகள்: \"கிளைடு விகிதம்\" மற்றும் \"சூரிய நிலை\"\n\n • OSMand Cloud: இப்போது நீக்கப்பட்ட கோப்புகளை அணுகவும்\n\n St புதிய சமச்சீர் சாய்வுடன் சாய்வு பயன்முறையில் மேம்பட்ட டிராக் வண்ணம்\n\n Fact வெளிப்படையான நிலை பட்டியுடன் தீர்க்கப்பட்ட சிக்கல்கள்\n\n Ant ANT+ வெப்பநிலை விட்செட்டுக்கு உதவி சேர்க்கப்பட்டது\n\n \"கிடைக்கக்கூடிய ரேம்\" விட்செட்டை அறிமுகப்படுத்தியது</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="no_poi_for_category">போய் கண்டுபிடிக்கப்படவில்லை</string>
     <string name="number_of_tracks">%1$s தடங்கள்</string>
     <string name="shared_string_not_checked">சரிபார்க்கப்படவில்லை</string>
@@ -3643,7 +3643,7 @@
     <string name="liter_per_hour">எல்/ம</string>
     <string name="quick_action_btn_tutorial_descr">பொத்தானை நீண்ட நேரம் தட்டுவதும் இழுப்பதும் திரையில் அதன் நிலையை மாற்றுகிறது.</string>
     <string name="quick_action_map_source_switch">வரைபட மூலமானது \"%s\" ஆக மாற்றப்பட்டது.</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="show_track_on_map">வரைபடத்தில் தடத்தைக் காட்டு</string>
     <string name="osm_edits_view_descr">நீங்கள் இன்னும் பதிவேற்றப்படாத திருத்தங்கள் அல்லது OSM பிழைகள் அனைத்தையும் %1$s இல் காண்க. ஏற்கனவே பதிவேற்றிய மாற்றங்கள் இனி காண்பிக்கப்படாது.</string>
     <string name="gpx_monitoring_stop">பயணப் பதிவு இடைநிறுத்தம்</string>
@@ -4464,11 +4464,6 @@
     <string name="ais_load_data">கோப்பிலிருந்து AIS தரவை ஏற்றவும்</string>
     <string name="ais_address_settings">ஐபி முகவரி அமைப்புகள்</string>
     <string name="ais_address_settings_description">NMEA நெறிமுறை (UDP/TCP) ஐத் தேர்ந்தெடுத்து முகவரிகளை வரையறுக்கவும்</string>
-    <string name="ais_nmea_protocol">NMEA தரவு வரவேற்புக்கான நெறிமுறை</string>
-    <string name="ais_nmea_protocol_description">NMEA தரவு வரவேற்புக்கான நெறிமுறையைத் தேர்வுசெய்க</string>
-    <string name="ais_port_nmea_local_description">OSMAND NMEA தரவைப் பெறும் UDP போர்ட்டை வரையறுக்கவும்</string>
-    <string name="ais_object_lost_timeouts">AIS சமிக்ஞை வரவேற்புக்கான காலக்கெடு அமைப்புகள்</string>
-    <string name="ais_cpa_warning_distance">அணுகுமுறையின் மூடு புள்ளிக்கான எச்சரிக்கை தூரம் (சிபிஏ)</string>
     <string name="plugin_ais_tracker_name">AIS வெசெல் டிராக்கர்</string>
     <string name="plugin_ais_tracker_description">AIS நிலைகள் மற்றும் சுற்றியுள்ள கப்பல்களைப் பற்றிய தகவல்களைக் காண்பி. AIS தரவு வெளிப்புற AIS பெறுநரிடமிருந்து பிணையம் வழியாக பெறப்படுகிறது.</string>
     <string name="shared_string_default_view">இயல்புநிலை பார்வை</string>
@@ -4478,7 +4473,6 @@
     <string name="key_is_already_assigned_error">\"%1$s\" விசை ஏற்கனவே செயலுக்கு ஒதுக்கப்பட்டுள்ளது: \"%2$s\"</string>
     <string name="selected_delayed_profile">தேர்ந்தெடுக்கப்பட்ட சுயவிவரம் \"%s\"</string>
     <string name="apply_to_current_profile">\"%1$s\" க்கு மட்டுமே பொருந்தும்</string>
-    <string name="ais_cpa_settings">CPA தொடர்பான அமைப்புகள்</string>
     <string name="no_places_available">இடங்கள் எதுவும் கிடைக்கவில்லை</string>
     <string name="no_photo_for_location_desc">இந்த இடத்தில் பயனர் புகைப்படங்கள் எதுவும் சேர்க்கப்படவில்லை</string>
     <string name="map_widget_route_information_desc">மதிப்பிடப்பட்ட வருகை நேரம், மீதமுள்ள பயண நேரம் மற்றும் தற்போதைய வழிசெலுத்தல் வழிக்கான தூரத்தைக் காட்டுகிறது.</string>
@@ -4486,19 +4480,7 @@
     <string name="location_source_descr">இயல்பாக, கூகிள் பிளேயிலிருந்து நிறுவப்பட்ட OSMAND இருப்பிடத்தை தீர்மானிக்க %1$s ஐப் பயன்படுத்துகிறது.\n\n நீங்கள் தவறான இருப்பிடத் தகவலைப் பெற்றால் அல்லது %2$s இல்லாமல் சாதனத்தைப் பயன்படுத்தினால், \" %3$s\" க்கு மாற முயற்சிக்கவும்</string>
     <string name="application_profile_changed">பயன்பாட்டு சுயவிவரம் \"%s\" ஆக மாற்றப்பட்டது</string>
     <string name="hmd_promo">%1$s மாதங்களுக்கு HMD விளம்பர</string>
-    <string name="ais_address_nmea_server_description">NMEA தரவு மூலத்தின் ஐபி முகவரியை வரையறுக்கவும் (TCP பயன்படுத்தப்பட்டால்)</string>
-    <string name="ais_port_nmea_server">NMEA தரவு மூலத்தின் TCP துறைமுகம்</string>
-    <string name="ais_port_nmea_server_description">NMEA தரவு மூலத்தின் TCP துறைமுகம் எண்ணை வரையறுக்கவும்</string>
-    <string name="ais_port_nmea_local">உள்ளக NMEA தரவு பெறுநரின் யுடிபி துறைமுகம்</string>
     <string name="shared_string_road_exit">வெளியேறு</string>
-    <string name="ais_address_nmea_server">NMEA தரவு மூலத்தின் ஐபி முகவரி</string>
-    <string name="ais_object_lost_timeout">பொருள் தொலைந்து போகும்போது தெரிவுநிலைக்கான நேரம் முடிந்தது</string>
-    <string name="ais_object_lost_timeout_description">AIS பொருள்களின் தெரிவுநிலைக்கு நேரத்தை அமைக்கவும்: சமிக்ஞை வரவேற்பு இல்லாமல் இந்த நேரத்திற்குப் பிறகு, AIS பொருள் திரையில் இருந்து அகற்றப்படும்.</string>
-    <string name="ais_ship_lost_timeout">சமிக்ஞை பெறாதபோது கப்பல் தெரிவுநிலைக்கான நேரம் முடிந்தது</string>
-    <string name="ais_cpa_warning_time">அணுகுமுறையின் மிக நெருக்கமான இடத்தை அடைய எச்சரிக்கை நேரம் (சிபிஏ)</string>
-    <string name="ais_ship_lost_timeout_description">கப்பல் தெரிவுநிலைக்கு நேரத்தை அமைக்கவும்: சமிக்ஞை வரவேற்பு இல்லாமல் இந்த நேரத்திற்குப் பிறகு, கப்பல் அடையாளம் அதன் நிலையை திரையில் மாற்றும்: அது கடக்கப்படும்.</string>
-    <string name="ais_cpa_warning_time_description">TCPA (மற்றொரு கப்பலுடன் CPA ஐ அடைய வேண்டிய நேரம்) இந்த மதிப்பை விட குறைவாக இருந்தால், கப்பல் சிவப்பு நிறத்துடன் குறிக்கப்பட்டுள்ளது.</string>
-    <string name="ais_cpa_warning_distance_description">CPA இந்த மதிப்பை விட குறைவாகவும், எதிர்காலத்தில் CPA ஐ அடைந்தால் கப்பல்கள் சிவப்பு நிறத்துடன் குறிக்கப்பட்டுள்ளன (CPA ஐ அடைய எச்சரிக்கை நேரத்தை அமைப்பதைப் பார்க்கவும்).</string>
     <string name="plugin_ais_tracker_disclaimer">மறுப்பு\n\n இந்த சொருகி ஒரு பொழுதுபோக்கு திட்டம் மற்றும் நம்பகத்தன்மை மற்றும் சரியான தன்மைக்காக வடிவமைக்கப்படவில்லை. வழிசெலுத்தல் மற்றும்/அல்லது வாழ்க்கையின் பாதுகாப்பு உட்பட எந்த வகையிலும் இந்த மென்பொருளை நம்ப வேண்டாம்.</string>
     <string name="map_widget_route_information">பாதை செய்தி</string>
     <string name="map_widget_distance">தூரம்</string>

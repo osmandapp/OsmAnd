@@ -603,4 +603,9 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			updateAllSettings();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "multimedia_notes_settings";
+	}
 }

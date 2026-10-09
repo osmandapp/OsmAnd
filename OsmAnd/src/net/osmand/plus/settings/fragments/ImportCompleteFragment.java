@@ -281,4 +281,9 @@ public class ImportCompleteFragment extends BaseFullScreenFragment {
 	public void setNeedRestart(boolean needRestart) {
 		this.needRestart = needRestart;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "import_complete";
+	}
 }

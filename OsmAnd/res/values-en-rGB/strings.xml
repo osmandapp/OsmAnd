@@ -178,7 +178,6 @@
     <string name="apply_to_all_points">Apply to all points</string>
     <string name="hmd_promo">HMD Promo for %1$s months</string>
     <string name="ais_address_settings">IP address settings</string>
-    <string name="ais_nmea_protocol">Protocol for NMEA data reception</string>
     <string name="obd_simulation_device">Simulation device</string>
     <string name="download_depth_countours">Nautical depth contours</string>
     <string name="astronomy_map">Astronomy Map</string>

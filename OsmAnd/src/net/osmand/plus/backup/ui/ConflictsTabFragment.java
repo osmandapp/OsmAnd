@@ -42,4 +42,9 @@ public class ConflictsTabFragment extends ChangesTabFragment {
 		}
 		return changeItems;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "backup_conflicts_tab";
+	}
 }

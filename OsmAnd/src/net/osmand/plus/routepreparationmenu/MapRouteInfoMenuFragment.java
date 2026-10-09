@@ -544,4 +544,9 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 			menu.downloadHasFinished();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_route_info_menu";
+	}
 }

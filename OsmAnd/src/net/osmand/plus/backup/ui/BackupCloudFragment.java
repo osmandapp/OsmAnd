@@ -345,4 +345,9 @@ public class BackupCloudFragment extends BaseFullScreenFragment implements InApp
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "backup_cloud";
+	}
 }

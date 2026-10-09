@@ -501,7 +501,7 @@
     <string name="delete_target_point">Αφαίρεση προορισμού</string>
     <string name="intermediate_point">Ενδιάμεσος προορισμός %1$s</string>
     <string name="gps_not_available">Παρακαλώ ενεργοποιήστε το GPS στις ρυθμίσεις</string>
-    <string name="enable_plugin_monitoring_services">Ενεργοποιήστε το πρόσθετο \"Καταγραφής ταξιδιού\" για να χρησιμοποιήσετε τις υπηρεσίες καταγραφής θέσης (καταγραφή GPX, ιχνογράφηση με διαδίκτυο)</string>
+    <string name="enable_plugin_monitoring_services">Ενεργοποιήστε το πρόσθετο \"Καταγραφή ταξιδιού\" για να χρησιμοποιήσετε τις υπηρεσίες καταγραφής θέσης (καταγραφή GPX, ιχνογράφηση με διαδίκτυο)</string>
     <string name="rendering_attr_roadColors_description">Επιλέξτε ένα χρωματικό συνδυασμό οδών:</string>
     <string name="rendering_attr_roadColors_name">Χρωματικός συνδυασμός οδών</string>
     <string name="close_changeset">Κλείσιμο συνόλου αλλαγών</string>
@@ -509,7 +509,7 @@
     <string name="safe_mode">Ασφαλής λειτουργία</string>
     <string name="rendering_attr_showRoadMaps_description">Επιλέξτε πότε θα εμφανίζονται μόνο-οδικοί χάρτες:</string>
     <string name="rendering_attr_showRoadMaps_name">Οδικοί-μόνο χάρτες</string>
-    <string name="download_roads_only_item">Δρόμοι μόνο</string>
+    <string name="download_roads_only_item">Μόνο οδικός</string>
     <string name="download_regular_maps">Τυπικός χάρτης</string>
     <string name="download_roads_only_maps">Μόνο οδικός χάρτης</string>
     <string name="incomplete_locale">ημιτελές</string>
@@ -525,16 +525,16 @@
     <string name="audionotes_plugin_description">Πάρτε σημειώσεις ήχου/φωτογραφίας/βίντεο κατά τη διάρκεια του ταξιδιού, χρησιμοποιώντας είτε ένα πλήκτρο στον χάρτη, ή τη θέση στο μενού περιβάλλοντος.</string>
     <string name="recording_unavailable">μη διαθέσιμο</string>
     <string name="recording_context_menu_arecord">Κάντε ηχητική σημείωση</string>
-    <string name="recording_context_menu_vrecord">Κάντε σημείωση video</string>
+    <string name="recording_context_menu_vrecord">Κάντε σημείωση βίντεο</string>
     <string name="recording_context_menu_play">Αναπαραγωγή</string>
     <string name="recording_description">Εγγραφή %1$s %3$s %2$s</string>
     <string name="recording_default_name">Εγγραφή</string>
-    <string name="map_widget_av_notes">Σημειώσεις ήχου/video</string>
-    <string name="av_def_action_video">Εγγραφή video</string>
+    <string name="map_widget_av_notes">Σημειώσεις ήχου/βίντεο</string>
+    <string name="av_def_action_video">Εγγραφή βίντεο</string>
     <string name="av_def_action_audio">Εγγραφή ήχου</string>
     <string name="recording_error">Αποτυχία εγγραφής</string>
     <string name="shared_string_control_stop">Διακοπή</string>
-    <string name="av_video_format">Μορφή εξόδου video</string>
+    <string name="av_video_format">Μορφή εξόδου βίντεο</string>
     <string name="intermediate_points_change_order">Αλλαγή σειράς</string>
     <string name="stop_routing_confirm">Τερματισμός πλοήγησης;</string>
     <string name="recording_context_menu_show">Εμφάνιση</string>
@@ -657,7 +657,7 @@
 \nΊχνος %2$s</string>
     <string name="gpx_file_is_empty">Άδειασμα αρχείου GPX</string>
     <string name="index_item_nation_addresses">διευθύνσεις πανεθνικά</string>
-    <string name="index_item_world_altitude_correction">Παγκόσμια διόρθωση υψομέτρου</string>
+    <string name="index_item_world_altitude_correction">Διόρθωση παγκόσμιου υψομέτρου</string>
     <string name="index_item_world_bitcoin_payments">Παγκόσμιες πληρωμές με bitcoin</string>
     <string name="index_item_world_ski">Παγκόσμιος Χάρτης σκι</string>
     <string name="lang_hr">Κροατικά</string>
@@ -767,7 +767,7 @@
     <string name="way_alarms">Προειδοποιήσεις κυκλοφορίας</string>
     <string name="speak_favorites">Κοντινά αγαπημένα</string>
     <string name="speak_poi">ΣΕ σε κοντινή απόσταση</string>
-    <string name="record_plugin_name">Καταγραφή ταξιδίων</string>
+    <string name="record_plugin_name">Καταγραφή ταξιδιού</string>
     <string name="int_hour">ω</string>
     <string name="duration">Διάρκεια</string>
     <string name="distance">Απόσταση</string>
@@ -869,7 +869,7 @@
     <string name="shared_string_add_to_favorites">Προσθήκη στα \'Αγαπημένα\'</string>
     <string name="shared_string_my_location">Η θέση μου</string>
     <string name="shared_string_my_places">Τα μέρη μου</string>
-    <string name="shared_string_my_favorites">Τα Αγαπημένα</string>
+    <string name="shared_string_my_favorites">Αγαπημένα</string>
     <string name="shared_string_tracks">Ίχνη</string>
     <string name="shared_string_audio">Ήχος</string>
     <string name="shared_string_video">Βίντεο</string>
@@ -882,7 +882,7 @@
     <string name="general_settings_2">Γενικές ρυθμίσεις</string>
     <string name="shared_string_deselect_all">Αποεπιλογή όλων</string>
     <string name="shared_string_collapse">Σύμπτυξη</string>
-    <string name="route_points">Σημεία δρομολογίου</string>
+    <string name="route_points">Σημεία διαδρομής</string>
     <string name="agps_info">Πληροφορίες A-GPS</string>
     <string name="agps_data_last_downloaded">Ληφθέντα δεδομένα A-GPS: %1$s</string>
     <string name="welmode_download_maps">Λήψη χαρτών</string>
@@ -971,8 +971,8 @@
     <string name="shared_string_go">Εκτέλεση</string>
     <string name="short_location_on_map">Γ. Πλ %1$s
 \nΓ. Μηκ %2$s</string>
-    <string name="track_segments">Τμήματα διαδρομής</string>
-    <string name="track_points">Σημεία της διαδρομής</string>
+    <string name="track_segments">Τμήματα ίχνους</string>
+    <string name="track_points">Σημεία ίχνους</string>
     <string name="rendering_value__name">Προεπιλογή</string>
     <string name="print_route">Εκτύπωση διαδρομής</string>
     <string name="osmand_parking_overdue">εκπρόθεσμο</string>
@@ -1277,7 +1277,7 @@
     <string name="rendering_attr_contourWidth_name">Πλάτος ισοϋψών καμπυλών</string>
     <string name="osmand_extended_description_part1">Το OsmAnd (OSM Automated Navigation Directions) είναι χάρτης και εφαρμογή πλοήγησης με πρόσβαση στα ελεύθερα, παγκόσμια και υψηλής ποιότητας δεδομένα του OSM. \n \nΑπολαύστε φωνητική και οπτική πλοήγηση, προβολή ΣΕ (σημείων ενδιαφέροντος), δημιουργία και διαχείριση ιχνών GPX, χρήση οπτικοποίησης ισοϋψών καμπυλών και πληροφοριών τοπογραφίας (μέσω προσθέτου), επιλογή μεταξύ λειτουργιών οδήγησης, ποδηλάτου και πεζοπορίας, επεξεργασίας OSM και πολλών άλλων.</string>
     <string name="osmand_extended_description_part5">Ποδηλασία \n • Βρείτε ποδηλατικές διαδρομές στον χάρτη \n • Πλοήγηση GPS σε κατάσταση ποδηλασίας δημιουργεί τη διαδρομή σας χρησιμοποιώντας ποδηλατικά μονοπάτια \n • Δείτε την ταχύτητά σας και το υψόμετρό σας \n • Η επιλογή καταγραφής GPX σας επιτρέπει να καταγράψετε το ταξίδι σας και να το μοιραστείτε \n • Μέσω ενός επιπλέον προσθέτου μπορείτε να ενεργοποιήσετε ισοϋψείς καμπύλες και σκίαση αναγλύφου</string>
-    <string name="images_cache">Κρυφή μνήμη εικόνας</string>
+    <string name="images_cache">Κρυφή μνήμη εικόνων</string>
     <string name="delete_search_history">Διαγραφή ιστορικού αναζήτησης</string>
     <string name="shared_string_slope">Κλίση</string>
     <string name="add_new_folder">Προσθήκη νέου φακέλου</string>
@@ -1862,7 +1862,7 @@
     <string name="start_editing_card_description">Μπορείτε και πρέπει να επεξεργαστείτε οποιοδήποτε άρθρο στο βικιταξίδια, Μοιραστείτε τη γνώση, την εμπειρία, το ταλέντο και την προσοχή σας.</string>
     <string name="start_editing">Έναρξη επεξεργασίας</string>
     <string name="get_unlimited_access">Πάρτε απεριόριστη πρόσβαση</string>
-    <string name="welcome_to_open_beta">Καλώς ήλθατε, στην ανοικτή βήτα</string>
+    <string name="welcome_to_open_beta">Καλώς ήλθατε στην ανοικτή beta</string>
     <string name="wikivoyage_travel_guide">Ταξιδιωτικοί Οδηγοί</string>
     <string name="wikivoyage_travel_guide_descr">Οδηγοί για τα πιο ενδιαφέροντα μέρη στον πλανήτη, μέσα στο OsmAnd, χωρίς σύνδεση διαδικτύου.</string>
     <string name="download_wikipedia_description">Λήψη των λημμάτων της Βικιπαίδειας για %1$s για να τα διαβάσετε χωρίς σύνδεση.</string>
@@ -2371,7 +2371,7 @@
     <string name="logcat_buffer_descr">Ελέγξτε και μοιραστείτε λεπτομερή αρχεία καταγραφής της εφαρμογής</string>
     <string name="permission_is_required">Απαιτείται άδεια για να χρησιμοποιηθεί αυτή η επιλογή.</string>
     <string name="monitoring_min_speed_descr">Αυτό είναι ένα χαμηλής ταχύτητας φίλτρο αποκοπής για να μην καταγράφονται σημεία κάτω από συγκεκριμένη ταχύτητα. Αυτό μπορεί να κάνει τα καταγραμμένα ίχνη να μοιάζουν πιο ομαλά όταν προβάλλονται στον χάρτη.</string>
-    <string name="monitoring_min_speed_descr_side_effect">Παράπλευρο φαινόμενο: Θα λείπουν από τη διαδρομή σας όλες οι ενότητες όπου δεν καλύπτονται από το κριτήριο της ελάχιστης ταχύτητας (π.χ. όταν σπρώχνετε το μηχανάκι σας σε απότομο λόφο). Επίσης, δεν θα υπάρχουν πληροφορίες για περιόδους ακινησίας, όπως φρένα. Αυτό έχει συνέπειες στην ανάλυση ή την μετεπεξεργασία, όπως όταν προσπαθείτε να καθορίσετε το συνολικό μήκος του ταξιδιού σας, τον χρόνο κίνησης, ή την μέση ταχύτητά σας.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Παράπλευρο φαινόμενο: Θα λείπουν από το ίχνος σας όλες οι ενότητες όπου δεν καλύπτονται από το κριτήριο της ελάχιστης ταχύτητας (π.χ. όταν σπρώχνετε το δίκυκλό σας σε απότομο λόφο). Επίσης, δεν θα υπάρχουν πληροφορίες για περιόδους ακινησίας, όπως στάσεις. Αυτό έχει συνέπειες στην ανάλυση ή την μετεπεξεργασία, όπως όταν προσπαθείτε να καθορίσετε το συνολικό μήκος του ταξιδιού σας, τον χρόνο κίνησης, ή την μέση ταχύτητά σας.</string>
     <string name="monitoring_min_speed_descr_recommendation">Σύσταση: Προσπαθήστε να χρησιμοποιήσετε τον εντοπισμό ταχύτητας μέσω του φίλτρου μετατόπισης ελάχιστης καταγραφής (Β) πρώτα, μπορεί να παράξει καλύτερα αποτελέσματα και θα χάσετε λιγότερα δεδομένα. Εάν οι διαδρομές σας παραμένουν θορυβώδεις σε χαμηλές ταχύτητες, δοκιμάστε μη μηδενικές τιμές εδώ. Σημειώστε ότι κάποιες μετρήσεις μπορεί να μην αναφέρουν καθόλου τιμή ταχύτητας (κάποιες μέθοδοι που βασίζονται σε δίκτυα), οπότε δεν θα μπορέσετε να εγγράψετε τίποτα.</string>
     <string name="monitoring_min_speed_descr_remark">Σημείωση: ταχύτητα &gt; 0 ελέγξτε: Τα περισσότερα κυκλώματα GPS αναφέρουν τιμή ταχύτητας μόνο εάν ο αλγόριθμος καθορίζει ότι κινείστε και καμία όταν δεν κινείστε. Συνεπώς χρησιμοποιώντας τη ρύθμιση &gt; 0 σε αυτό το φίλτρο χρησιμοποιεί τον εντοπισμό κίνησης του κυκλώματος GPS. Αλλά ακόμα κι αν δεν φιλτραριστεί εδώ κατά τον χρόνο εγγραφής, εξακολουθούμε να χρησιμοποιούμε αυτό το γνώρισμα στην ανάλυση GPX για τον καθορισμό της διορθωμένης απόστασης, δηλ. η εμφανιζόμενη τιμή σε αυτό το πεδίο είναι η καταγραφόμενη απόσταση κατά την κίνηση.</string>
     <string name="monitoring_min_accuracy_descr">Αυτό θα καταγράψει μόνο μετρημένα σημεία με ελάχιστη ένδειξη ακρίβειας (σε μέτρα/πόδια, όπως αναφέρεται από το Android για το κύκλωμά σας). Ακρίβεια είναι η εγγύτητα των μετρήσεων με την πραγματική θέση και δεν σχετίζεται άμεσα με τη διακύμανση που είναι η διασπορά των επαναλαμβανόμενων μετρήσεων.</string>
@@ -2380,7 +2380,7 @@
     <string name="monitoring_min_accuracy_descr_remark">Παρατήρηση: Εάν το GPS είχε απενεργοποιηθεί αμέσως πριν μια εγγραφή, το πρώτο μετρούμενο σημείο μπορεί να έχει μειωμένη ακρίβεια, έτσι μπορεί να θέλουμε να περιμένουμε λιγάκι πριν την καταγραφή σημείου (ή να εγγράψουμε τα καλύτερα 3 διαδοχικά σημεία, κλπ.), αλλά αυτό δεν έχει ακόμα υλοποιηθεί.</string>
     <string name="monitoring_min_distance_descr">Η ενεργοποίηση αυτού του φίλτρου σας επιτρέπει να αποφύγεται την εγγραφή πρόσθετων δεδομένων όταν η μετακίνηση σχεδόν δεν ανιχνεύεται. Βελτιώνει επίσης τη χωροταξική εμφάνιση των ιχνών χωρίς να χρειάζεται μετέπειτα επεξεργασία.</string>
     <string name="button_rate">Βαθμολόγηση</string>
-    <string name="monitoring_min_distance_descr_side_effect">Παράπλευρα αποτελέσματα: Περίοδοι σε ακινησία δεν καταγράφονται καθόλου ή μόνο με ένα σημείο καθεμιά. Μικρές κινήσεις (π.χ. στην άκρη του δρόμου για να σημειωθεί μια πιθανή στροφή στο ταξίδι σας) μπορεί να φιλτραριστούν. Σημειώστε ότι το αρχείο σας θα περιέχει λιγότερες πληροφορίες για μετεπεξεργασία, και ταυτόχρονα μπορεί να αποθηκεύσει παράσιτα GPS που προκαλούνται από κακή λήψη ή επιπτώσεις κυκλωμάτων.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Παράπλευρο φαινόμενο: Περίοδοι σε ακινησία δεν καταγράφονται καθόλου ή μόνο με ένα σημείο καθεμιά. Μικρές κινήσεις (π.χ. στην άκρη του δρόμου για να σημειωθεί μια πιθανή στροφή στο ταξίδι σας) μπορεί να φιλτραριστούν. Σημειώστε ότι το αρχείο σας θα περιέχει λιγότερες πληροφορίες για μετεπεξεργασία, και ταυτόχρονα μπορεί να αποθηκεύσει παράσιτα GPS που προκαλούνται από κακή λήψη ή επιπτώσεις κυκλωμάτων.</string>
     <string name="monitoring_min_distance_descr_recommendation">Σύσταση: Ορίστε 5 μέτρα μετατόπισης εάν δεν χρειάζεστε να πιάσετε μικρότερες λεπτομέρειες της διαδρομής σας και δεν χρειάζεστε πρόσθετα δεδομένα σε ακινησία.</string>
     <string name="live_monitoring_time_buffer">Ενδιάμεσος χρόνος</string>
     <string name="live_monitoring_tracking_interval">Χρονικά διαστήματα ιχνηλάτησης</string>
@@ -2676,7 +2676,7 @@
     <string name="shared_string_sunset">Δύση ηλίου</string>
     <string name="shared_string_sunrise">Ανατολή ηλίου</string>
     <string name="routing_engine_vehicle_type_car">Αυτοκίνητο</string>
-    <string name="gpx_monitoring_stop">Παύση καταγραφής διαδρομής</string>
+    <string name="gpx_monitoring_stop">Παύση καταγραφής ταξιδιού</string>
     <string name="shared_string_gpx_files">Ίχνη</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Δρομολόγια τρόλεϊ</string>
     <string name="number_of_tiles">Αριθμός πλακιδίων</string>
@@ -2688,13 +2688,13 @@
     <string name="sort_name_ascending">Όνομα: Α - Ω</string>
     <string name="one_point_error">Παρακαλώ προσθέστε τουλάχιστον δύο σημεία.</string>
     <string name="system_default_theme">Προεπιλογή συστήματος</string>
-    <string name="gpx_monitoring_start">Συνέχιση καταγραφής διαδρομής</string>
+    <string name="gpx_monitoring_start">Συνέχιση καταγραφής ταξιδιού</string>
     <string name="shared_string_file_name">Όνομα αρχείου</string>
     <string name="delete_address">Διαγραφή διεύθυνσης</string>
     <string name="nearest_point">Κοντινότερο σημείο</string>
     <string name="shared_string_add_photo">Προσθήκη φωτογραφίας</string>
     <string name="online_routing_example_hint">Ο σύνδεσμος με όλες τις παραμέτρους θα μοιάζει κάπως έτσι:</string>
-    <string name="map_widget_monitoring">Καταγραφή διαδρομής</string>
+    <string name="map_widget_monitoring">Καταγραφή ταξιδιού</string>
     <string name="shared_string_search_history">Ιστορικό αναζήτησης</string>
     <string name="development">Ανάπτυξη</string>
     <string name="mtb_imba">IMBA</string>
@@ -2816,7 +2816,7 @@
     <string name="rotate_map_manual_opt">Χειροκίνητη περιστροφή</string>
     <string name="lang_de_casual">Γερμανικά (casual)</string>
     <string name="what_is_new">Τί νέο υπάρχει</string>
-    <string name="snowmobile_render_descr">Για οδήγηση με snowmobile με αποκλειστικούς δρόμους και πίστες.</string>
+    <string name="snowmobile_render_descr">Για οδήγηση με σνόουμομπιλ με αποκλειστικούς δρόμους και πίστες.</string>
     <string name="duration_ago">%1$s πριν</string>
     <string name="shared_string_ear_lobe">Λοβός αυτιού</string>
     <string name="cloud_trash_clear_confirmation">Οριστική διαγραφή όλων των αντικειμένων στον κάδο;</string>
@@ -2919,7 +2919,7 @@
     <string name="delete_map">Διαγραφή χάρτη</string>
     <string name="help_article_start_with_first_steps_name">Πρώτα βήματα</string>
     <string name="help_article_search_search_poi_name">Αναζήτηση ΣΕ</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="standard_maps">Τυπικοί χάρτες</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Σύζευξη αισθητήρα ANT+</string>
     <string name="shared_string_show_less">Δείξε λιγότερα</string>
@@ -2930,12 +2930,12 @@
     <string name="shared_string_add_manually">Προσθήκη χειροκίνητα…</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Οι δευτερεύουσες συσκευές θα αποσυνδεθούν από το OsmAnd Cloud και θα χάσουν την πρόσβαση σε λειτουργίες επί πληρωμή.</string>
     <string name="external_device_forget_sensor">Διαγραφή αισθητήρα από την μνήμη</string>
-    <string name="free_versions_descr">Κατεβάστε και εγκαταστήστε την δωρεάν έκδοση του OsmAnd</string>
+    <string name="free_versions_descr">Κατεβάστε και εγκαταστήστε τη δωρεάν έκδοση του OsmAnd</string>
     <string name="shared_string_avoid">Αποφυγή</string>
     <string name="max_altitude">Μέγιστο υψόμετρο</string>
     <string name="external_device_details_connect">Σύνδεση</string>
     <string name="select_data_to_export">Επιλέξτε τα δεδομένα που θα εξαχθούν στο αρχείο.</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="shared_string_foot">Πόδι</string>
     <string name="map_3d_mode_action">Λειτουργία 3D</string>
     <string name="folder">Φάκελος</string>
@@ -3234,7 +3234,7 @@
     <string name="map_settings_weather_wind">Άνεμος</string>
     <string name="purchases_feature_desc_external_sensors">Εμφάνιση και καταγραφή δεδομένων από εξωτερικούς αισθητήρες: ταχύτητα ποδηλάτου, ισχύ ποδηλάτου, ρυθμός, και καρδιακός ρυθμός.</string>
     <string name="external_sensors_support">Υποστήριξη εξωτερικών αισθητήρων</string>
-    <string name="external_sensors_plugin_name">Εξωτερικοί Αισθητήρες</string>
+    <string name="external_sensors_plugin_name">Εξωτερικοί αισθητήρες</string>
     <string name="map_settings_weather_temp">Θερμοκρασία</string>
     <string name="start_point">Έναρξη</string>
     <string name="routing_type">Είδος διαδρομής</string>
@@ -3652,7 +3652,7 @@
     <string name="selected_delayed_profile">Επιλεγμένο προφίλ \"%s\"</string>
     <string name="current_temperature">Τρέχουσα θερμοκρασία</string>
     <string name="shared_string_obd">OBD</string>
-    <string name="obd_plugin_name">Μετρικές Οχήματος</string>
+    <string name="obd_plugin_name">Μετρικές οχήματος</string>
     <string name="popular_places">Δημοφιλή μέρη</string>
     <string name="apply_to_all_points">Εφαρμογή σε όλα τα σημεία</string>
     <string name="shared_string_road_exit">Έξοδος</string>
@@ -3671,7 +3671,7 @@
     <string name="layer_coordinates_grid">Πλέγμα συντεταγμένων</string>
     <string name="poi_source">Πηγή ΣΕ</string>
     <string name="liter">λ</string>
-    <string name="obd_widget_group">Μετρικές Οχήματος</string>
+    <string name="obd_widget_group">Μετρικές οχήματος</string>
     <string name="obd_fuel_type_unknown">Άγνωστο είδος καυσίμου</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="shared_string_avg_altitude">Μέσο υψόμετρο</string>
@@ -3720,7 +3720,6 @@
     <string name="update_all_maps_added">Ενημέρωση όλων των χαρτών που προστέθηκαν στο %1$s;</string>
     <string name="routing_engine_vehicle_type_mtb">Ποδήλατο βουνού</string>
     <string name="routing_engine_vehicle_type_small_truck">Μικρό φορτηγό</string>
-    <string name="ais_cpa_warning_distance">Απόσταση προειδοποίησης για το Πλησιέστερο Σημείο Προσέγγισης (CPA)</string>
     <string name="default_buttons_corners_original_description">Κάθε κουμπί διατηρεί τη δικιά του γωνιακή ακτίνα.</string>
     <string name="routing_attr_motor_type_gas_name">Συμπιεσμένο Φυσικό Αέριο</string>
     <string name="rendering_value_category_name">Κατηγορία</string>
@@ -3751,8 +3750,6 @@
     <string name="routing_engine_vehicle_type_hiking">Πεζοπορία</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Τυπική ποδηλασία</string>
     <string name="routing_engine_vehicle_type_scooter">Σκούτερ</string>
-    <string name="ais_cpa_settings">Ρυθμίσεις σχετικές με το CPA</string>
-    <string name="ais_cpa_warning_time_description">Αν το TCPA (Χρόνος μέχρι το Πλησιέστερο Σημείο Προσέγγισης) με άλλο σκάφος πέσει κάτω από το ορισμένο όριο, το σκάφος επισημαίνεται με κόκκινο χρώμα.</string>
     <string name="shared_string_split_by">Διαχωρισμός κατά</string>
     <string name="routing_attr_avoid_fords_description">Αποφεύγει περάσματα νερού</string>
     <string name="routing_attr_freeride_policy_allow_name">Να επιτρέπεται</string>
@@ -3797,7 +3794,6 @@
     <string name="quick_action_search_view_title">Αναζήτηση σε όψη</string>
     <string name="routing_attr_allow_ferries_description">Να επιτρέπεται η δρομολόγηση μέσω πορθμείων</string>
     <string name="routing_attr_avoid_cobblestone_description">Αποφεύγει λιθόστρωτο</string>
-    <string name="ais_cpa_warning_time">Χρόνος προειδοποίησης πριν το Πλησιέστερο Σημείο Προσέγγισης (CPA)</string>
     <string name="plugin_ais_tracker_description">Εμφανίζει τις θέσεις και τις πληροφορίες του AIS για τα κοντινά σκάφη. Τα δεδομένα του AIS λάμβάνονται μέσω δικτύου από έναν εξωτερικό δέκτη AIS.</string>
     <string name="routing_attr_prefer_horse_routes_description">Να προτιμώνται ιππικές διαδρομές</string>
     <string name="shared_string_external">Εξωτερικά</string>
@@ -3893,17 +3889,12 @@
     <string name="years_3">Τρία έτη</string>
     <string name="help_article_purchases_giveaway_name">Προσφορά</string>
     <string name="av_audio_sample_rate">Ρυθμός δειγματοληψίας ήχου</string>
-    <string name="ais_address_nmea_server_description">Ορίστε την διεύθυνση IP της πηγής δεδομένων NMEA (αν χρησιμοποιείται TCP)</string>
-    <string name="ais_port_nmea_server">Θύρα TCP της πηγής δεδομένων NMEA</string>
     <string name="shared_string_switch">Εναλλαγή</string>
-    <string name="ais_port_nmea_server_description">Ορίστε τον αριθμό θύρας TCP της πηγής δεδομένων NMEA</string>
     <string name="av_audio_sample_rate_descr">Επιλέξτε τον ρυθμό δειγματοληψίας ήχου.</string>
-    <string name="ais_address_nmea_server">Διεύθυνση IP της πηγής δεδομένων NMEA</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
     <string name="remaining_fuel">Απομένον καύσιμο</string>
     <string name="wikidata">Wikidata</string>
     <string name="osm_live_payment_renews_3_years">Ανανεώνεται κάθε τρία έτη</string>
-    <string name="ais_nmea_protocol">Πρωτόκολλο για λήψη δεδομένων NMEA</string>
     <string name="fuel_tank_capacity">Χωρητικότητα ντεπόζιτου</string>
     <string name="deleting">Διαγραφή…</string>
     <string name="osm_live_payment_3_years_title">Κάθε τρία έτη</string>
@@ -3911,11 +3902,8 @@
     <string name="imperial_gallons">Αυτοκρατορικά γαλόνια</string>
     <string name="obd_widget_vehicle_speed">Ταχύτητα οχήματος</string>
     <string name="auto_zoom_3d_angle">Αυτόματο ζουμ γωνίας 3D</string>
-    <string name="ais_nmea_protocol_description">Επιλέξτε πρωτόκολλο για λήψη δεδομένων NMEA</string>
     <string name="ais_address_settings_description">Επιλέξτε το πρωτόκολλο NMEA (UDP/TCP) και ορίστε τις αντίστοιχες διευθύνσεις και θύρες</string>
     <string name="us_gallons_unit">γαλ</string>
-    <string name="ais_port_nmea_local">Θύρα UDP του τοπικού δέκτη δεδομένων NMEA</string>
-    <string name="ais_port_nmea_local_description">Ορίστε την θύρα UDP όπου το OsmAnd λαμβάνει δεδομένα NMEA</string>
     <string name="route_guidance">Καθοδήγηση διαδρομής</string>
     <string name="deleting_history">Διαγραφή ιστορικού…</string>
     <string name="fuel_tank_capacity_description">Εισάγετε την χωρητικότητα του ρεζερβουάρ για επακριβή παρακολούθηση των επιπέδων καυσίμου και κατανάλωσης</string>
@@ -3986,7 +3974,7 @@
     <string name="distance_circles">Κύκλοι απόστασης</string>
     <string name="map_widget_rendering_fps_desc">Δείχνει πόσο γρήγορα ο χάρτης και τα στοιχεία του χάρτη προβάλλονται και ανανεώνονται, εκφρασμένο σε πλαίσια ανά δευτερόλεπτο (FPS).</string>
     <string name="map_widget_target_distance_desc">Δείχνει την απόσταση μεταξύ κάμερας και τοποθεσίας στόχου.</string>
-    <string name="trip_recording_duration_widget_desc">Δείχνει τον χρόνο της τρέχουσας καταγεγραμμένης διαδρομής.</string>
+    <string name="trip_recording_duration_widget_desc">Δείχνει τον χρόνο του τρέχοντος καταγεγραμμένου ταξιδιού.</string>
     <string name="average_speed_skip_stops">Λαμβάνει τις στάσεις υπ\'όψιν</string>
     <string name="map_widget_distance_to_intermediate">Απόσταση μέχρι ενδιάμεση</string>
     <string name="map_widget_time_to_destination">Χρόνος μέχρι προορισμό</string>
@@ -4292,21 +4280,7 @@
     <string name="next_turn_information">Πληροφορίες επόμενης στροφής</string>
     <string name="next_turn_information_desc">Δείχνει την κατεύθυνση και την ονομασία οδού της επικείμενης στροφής.</string>
     <string name="manage_purchases">Διαχείριση αγορών</string>
-    <string name="release_5_2">
-        • Προστέθηκαν λεπτομέρειες οδού και πόλης στα αποτελέσματα αναζήτησης\n\n
-        • Νέα widget Καταγραφής Διαδρομής: Μέγιστη Ταχύτητα, Μέση Κλίση και βελτιωμένη Ανωφέρεια/Κατωφέρεια\n\n
-        • Νέο στυλ ναυτικού χάρτη "Marine" με εκτεταμένες επιλογές προσαρμογής\n\n
-        • Βελτιωμένη ταχύτητα απόδοσης χάρτη\n\n
-        • Βελτιωμένη συνδεσιμότητα με προσαρμογείς OBDII BLE\n\n
-        • Προστέθηκαν μετρήσεις καρδιακού ρυθμού στην "Ανάλυση ανά διάστημα"\n\n
-        • Προστέθηκε εμφάνιση διάρκειας για προγραμματισμένες διαδρομές\n\n
-        • Οι μονάδες υψομέτρου μπορούν πλέον να ρυθμιστούν ξεχωριστά από τις μονάδες απόστασης\n\n
-        • Βελτιώθηκε η Γρήγορη Ενέργεια προσανατολισμού χάρτη με επιλέξιμες λειτουργίες πυξίδας\n\n
-        • Για το Android Auto, προστέθηκαν ειδοποιήσεις πριν από την πλοήγηση για χάρτες που λείπουν και ιδιωτικούς δρόμους\n\n
-        • Επιλύθηκε ένα ζήτημα με λανθασμένες παραμέτρους μεγέθους για το widget Χάρακας Ακτίνας\n\n
-        • Προστέθηκαν ανεστραμμένοι προσανατολισμοί οθόνης\n\n
-        • Βελτιώθηκε η διεπαφή χρήστη για τον καθορισμό μετρήσεων φορτηγού\n\n
-    </string>
+    <string name="release_5_2">• Προστέθηκαν λεπτομέρειες οδού και πόλης στα αποτελέσματα αναζήτησης\n\n • Νέα γραφικά στοιχεία Καταγραφής Ταξιδιού: Μέγιστη Ταχύτητα, Μέση Κλίση και βελτιωμένη Ανωφέρεια/Κατωφέρεια\n\n • Νέο στυλ ναυτικού χάρτη Marine με εκτεταμένες επιλογές προσαρμογής\n\n • Βελτιωμένη ταχύτητα απόδοσης χάρτη\n\n • Βελτιωμένη συνδεσιμότητα με προσαρμογείς OBDII BLE\n\n • Προστέθηκαν μετρήσεις καρδιακού ρυθμού στην Ανάλυση ανά διάστημα\n\n • Προστέθηκε εμφάνιση διάρκειας για προγραμματισμένες διαδρομές\n\n • Οι μονάδες υψομέτρου μπορούν πλέον να ρυθμιστούν ξεχωριστά από τις μονάδες απόστασης\n\n • Βελτιώθηκε η Γρήγορη Ενέργεια προσανατολισμού χάρτη με επιλέξιμες λειτουργίες πυξίδας\n\n • Για το Android Auto, προστέθηκαν ειδοποιήσεις πριν από την πλοήγηση για χάρτες που λείπουν και ιδιωτικούς δρόμους\n\n • Επιλύθηκε ένα ζήτημα με λανθασμένες παραμέτρους μεγέθους για το widget Χάρακας Ακτίνας\n\n • Προστέθηκαν ανεστραμμένοι προσανατολισμοί οθόνης\n\n • Βελτιώθηκε η διεπαφή χρήστη για τον καθορισμό μετρήσεων φορτηγού</string>
     <string name="map_orientation_portrait_inverted">Κατακόρυφο (ανεστραμμένο)</string>
     <string name="map_orientation_landscape_inverted">Οριζόντιο (ανεστραμμένο)</string>
     <string name="description_purchases_fastspring">Μπορείτε να διαχειριστείτε τις αγορές σας μέσω του λογαριασμού της πύλης διαχείρισης FastSpring.</string>
@@ -4323,7 +4297,7 @@
     <string name="quick_action_showhide_osm_edits_descr">Κουμπί για να εμφανίσει ή να κρύψει τις τοπικές επεξεργασίες OSM στο χάρτη.</string>
     <string name="lock_screen_description">Ενεργοποιεί ή απενεργοποιεί την λειτουργία της οθόνης αφής για να αποτρέψει κατά λάθος πατήματα</string>
     <string name="track_does_not_contain_data_to_save">Το ίχνος δεν περιέχει δεδομένα για αποθήκευση.</string>
-    <string name="new_trip_segment">Νέο τμήμα διαδρομής</string>
+    <string name="new_trip_segment">Νέο τμήμα ταξιδιού</string>
     <string name="delete_actions_button">Διαγραφή κουμπιού</string>
     <string name="delete_actions_button_confirmation">Σίγουρα θέλετε να διαγράψετε το \"%1$s\" με όλες τις ενέργειες του;</string>
     <string name="getting_list_of_required_maps">Λαμβάνεται λίστα των απαιτούμενων χαρτών…</string>
@@ -4359,7 +4333,7 @@
     <string name="battery_optimization_banner_content">Η βελτιστοποίηση μπαταρίας του Android μπορεί να προκαλέσει κενά και ανακρίβειες στα καταγεγραμμένα ίχνη.</string>
     <string name="see_all_plans">Δείτε όλα τα πλάνα</string>
     <string name="tripltek_promo">Tripltek Promo για %1$s μήνες</string>
-    <string name="write_data_from_sensor_to_track">Γράψτε δεδομένα από εξωτερικούς αισθητήρες προς το GPX κατά τη διάρκεια της καταγραφής της διαδρομής.</string>
+    <string name="write_data_from_sensor_to_track">Γράψτε δεδομένα από εξωτερικούς αισθητήρες προς το GPX κατά τη διάρκεια της καταγραφής του ταξιδιού.</string>
     <string name="relief_3d_description">Αποκτήστε και παρατηρείστε το μοντέλο κλίμακας της γειτονιάς σας ή ολόκληρης της ηπείρου.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Εξερευνήστε τα Πλάνα του OsmAnd για να βρείτε αυτό που σας ταιριάζει.</string>
     <string name="backup_error_no_valid_subscription">Δεν υπάρχει έγκυρη συνδρομή παρούσα</string>
@@ -4392,11 +4366,11 @@
     <string name="hmd_promo_years">HMD Promo για %1$s χρόνια</string>
     <string name="help_article_widgets_markers_name">Γραφικά στοιχεία δείκτη</string>
     <string name="help_article_widgets_radius_ruler_name">Χάρακας ακτίνων και Χάρακας</string>
-    <string name="quick_action_finish_trip_recording_summary">Κουμπί για αποθήκευση του ίχνους GPX και τερματισμό της καταγραφής της διαδρομής.</string>
-    <string name="start_trip_recording_first_m">Παρακαλούμε ξεκινήστε πρώτα την καταγραφή της διαδρομής.</string>
+    <string name="quick_action_finish_trip_recording_summary">Κουμπί για αποθήκευση του ίχνους GPX και τερματισμό της καταγραφής του ταξιδιού.</string>
+    <string name="start_trip_recording_first_m">Παρακαλούμε ξεκινήστε πρώτα την καταγραφή του ταξιδιού.</string>
     <string name="new_segment_started_m">Ξεκίνησε η καταγραφή νέου τμήματος ίχνους.</string>
-    <string name="quick_action_save_recorded_trip_and_continue_summary">Κουμπί για αποθήκευση της τρέχουσας καταγεγραμμένης διαδρομής ως αρχείο GPX και συνέχιση της καταγραφής νέου ίχνους χωρίς διακοπή.</string>
-    <string name="quick_action_save_recorded_trip_and_continue">Καταγεγραμμένη Διαδρομή &amp; Συνέχιση</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Κουμπί για αποθήκευση του τρέχοντος καταγεγραμμένου ταξιδιού ως αρχείο GPX και συνέχιση της καταγραφής νέου ίχνους χωρίς διακοπή.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Καταγεγραμμένο Ταξίδι &amp; Συνέχιση</string>
     <string name="quick_action_new_trip_segment">Κουμπί για έναρξη νέου τμήματος στο τρέχον καταγεγραμμένο ίχνος GPX.</string>
     <string name="quick_action_start_pause_recording">Κουμπί για έναρξη, παύση ή συνέχιση καταγραφής του ίχνους GPX.</string>
     <string name="corner_radius">Ακτίνα γωνίας</string>
@@ -4531,9 +4505,9 @@
     <string name="shared_string_last_downhill">Τελευταία κατηφόρα</string>
     <string name="shared_string_price">Κόστος</string>
     <string name="average_slope">Μέση κλίση</string>
-    <string name="trip_recording_downhill_widget_desc">Δείχνει το άρθροισμα όλων των καταβάσεων ή την τελευταία κατάβαση στην τρέχουσα καταγεγραμμένη διαδρομή.</string>
-    <string name="trip_recording_uphill_widget_desc">Δείχνει το άρθροισμα όλων των αναβάσεων ή την τελευταία ανάβαση στην τρέχουσα καταγεγραμμένη διαδρομή.</string>
-    <string name="trip_recording_distance_widget_desc">Δείχνει την απόσταση της τρέχουσας καταγεγραμμένης διαδρομής, με λειτουργίες για προβολή της απόστασης της τελευταίας ανάβασης και κατάβασης.</string>
+    <string name="trip_recording_downhill_widget_desc">Δείχνει το άθροισμα όλων των καταβάσεων ή την τελευταία κατάβαση στο τρέχον καταγεγραμμένο ταξίδι.</string>
+    <string name="trip_recording_uphill_widget_desc">Δείχνει το άθροισμα όλων των αναβάσεων ή την τελευταία ανάβαση στο τρέχον καταγεγραμμένο ταξίδι.</string>
+    <string name="trip_recording_distance_widget_desc">Δείχνει την απόσταση του τρέχοντος καταγεγραμμένου ταξιδιού, με λειτουργίες για προβολή της απόστασης της τελευταίας ανάβασης και κατάβασης.</string>
     <string name="help_article_navigation_routing_ski_routing_name">Πίστες και διαδρομές σκι</string>
     <string name="rendering_attr_pisteRoutes_name">Πίστες και διαδρομές σκι</string>
     <string name="download_wikipedia_label">Λήψη Βικιπαίδειας</string>
@@ -4567,19 +4541,13 @@
     <string name="save_and_access_articles_offline">Αποθηκεύστε δεδομένα και δείτε άρθρα εκτός σύνδεσης οπουδήποτε</string>
     <string name="rendering_attr_showSkiSlopes_name">Εμφάνιση πιστών σκι</string>
     <string name="rendering_attr_showSkiSlopes_description">Εμφάνιση απλοποιημένων πιστών σκι</string>
-    <string name="trip_recording_average_slope_widget_description">Δείχνει την μέση κλίση για το τελευταίο τμήμα κατηφόρας ή ανηφόρας της τρέχουσας καταγεγραμμένης διαδρομής.</string>
-    <string name="trip_recording_max_speed_widget_description">Δείχνει τη μέγιστη ταχύτητα για την τρέχουσα καταγεγραμμένη διαδρομή. Πατήστε για εναλλαγή μεταξύ συνολικής μέγιστης ταχύτητας και μέγιστης ταχύτητας από την τελευταία ανηφόρα ή κατηφόρα.</string>
+    <string name="trip_recording_average_slope_widget_description">Δείχνει την μέση κλίση για το τελευταίο τμήμα κατηφόρας ή ανηφόρας του τρέχοντος καταγεγραμμένου ταξιδιού.</string>
+    <string name="trip_recording_max_speed_widget_description">Δείχνει τη μέγιστη ταχύτητα για το τρέχον καταγεγραμμένο ταξίδι. Πατήστε για εναλλαγή μεταξύ συνολικής μέγιστης ταχύτητας και μέγιστης ταχύτητας από την τελευταία ανηφόρα ή κατηφόρα.</string>
     <string name="average_elevation">Μέση ανύψωση</string>
     <string name="shared_string_osm_link">Σύνδεσμος OSM</string>
     <string name="msg_favorites_skipped_as_existing">Αγαπημένα σημεία (%1$d) έχουν παραλειφθεί καθώς ήδη υπάρχουν.</string>
     <string name="prediction_time_description">Το εικονίδιο θέσης στο OsmAnd κινείται με κάθε ενημέρωση του GPS (μια φορά ανά δευτερόλεππτο). Μια μικρή καθυστέρηση μπορεί να προκύψει, ειδικά σε ξαφνική γρήγορη κίνηση ή όταν το σήμα του GPS είναι ασταθές.</string>
     <string name="hmd_promo_description_years">Δωρεάν πρόσβαση σε λειτουργίες συμπεριλαμβανομένου απεριόριστες λήψεις χαρτών, 3D ανάγλυφο κλπ. για %1$s έτη</string>
-    <string name="ais_object_lost_timeouts">Ρυθμίσεις χρόνου λήξης για τη λήψη σήματος AIS</string>
-    <string name="ais_object_lost_timeout">Χρόνος λήξης για ορατότητα όταν χαθεί το πλοίο</string>
-    <string name="ais_object_lost_timeout_description">Ορίστε χρόνο λήξης για την ορατότητα αντικειμένου AIS. Εάν δεν έχει ληφθεί σήμα εντός της ορισμένης διάρκειας, το αντικείμενο αυτομάτως θα αφαιρεθεί από την προβολή.</string>
-    <string name="ais_ship_lost_timeout">Χρόνος λήξης πλοίου χωρίς ενημέρωση</string>
-    <string name="ais_ship_lost_timeout_description">Ορίστε χρόνο λήξης για την ορατότητα πλοίου χωρίς ενημέρωση: μετά από αυτόν το χρόνο χωρίς λήψη σήματος, το σύμβολο του πλοίου θα είναι με γραμμή διαγραφής.</string>
-    <string name="ais_cpa_warning_distance_description">Τα σκάφη επισημαίνονται με κόκκινο εάν το CPA (Πλησιέστερο Σημείο Προσέγγισης) είναι κάτω από το ορισμένο κατώφλι και το TCPA (Χρόνος μέχρι το CPA) πέφτει εντός του ορισμένου χρόνου προειδοποίησης στη ρύθμιση \'Χρόνος προειδοποίησης μέχρι το CPA\'.</string>
     <string name="shared_string_interpolation">Παρεμβολή</string>
     <string name="location_interpolation_percent">Ποσοστό παρεμβολής τοποθεσίας</string>
     <string name="average_value_slider_description">Επιλέξτε το χρονικό μεσοδιάστημα για μέτρηση της μέσης τιμής.</string>
@@ -4862,8 +4830,8 @@
     <string name="delete_colors_palette_dialog_summary">Σίγουρα θέλετε να διαγράψετε την παλέττα %1$s;</string>
     <string name="share_favorite">Κοινοποίηση αγαπημένου</string>
     <string name="copy_list">Αντιγραφή λίστας</string>
-    <string name="shared_string_trip_average">Μέσος όρος διαδρομής</string>
-    <string name="trip_recording_avg_speed_widget_description">Δείχνει την μέση ταχύτητα της τρέχουσας διαδρομής, ή την μέση ταχύτητα κατά το τελευταίο τμήμα ανηφόρας ή κατηφόρας.</string>
+    <string name="shared_string_trip_average">Μέσος όρος ταξιδιού</string>
+    <string name="trip_recording_avg_speed_widget_description">Δείχνει την μέση ταχύτητα του τρέχοντος ταξιδιού, ή την μέση ταχύτητα κατά το τελευταίο τμήμα ανηφόρας ή κατηφόρας.</string>
     <string name="trip_recording_moving_time_widget_description">Δείχνει τον τρέχον κατεγεγραμμένο χρόνο σε κίνηση, ή τον χρόνο της τελευταίας ανηφόρας και κατηφόρας.</string>
     <string name="trip_recording_moving_time">Χρόνος σε κίνηση</string>
     <string name="astro_culmination">Μεσουράνημα</string>
@@ -5119,7 +5087,7 @@
     <string name="duplicate_map_standard_exists_desc">Έχετε ήδη τον τυπικό χάρτη για %1$s Η λήψη ενός χάρτη μόνο δρόμων, θα δημιουργήσει διπλότυπα δεδομένα και ίσως υποβαθμίσει την απόδοση.\n\nΗ αντικατάσταση του θα αφαιρέσει δεδομένα ΣΕ και αναζήτησης διευθύνσεων που συμπεριλαμβάνονται στον τυπικό χάρτη.</string>
     <string name="duplicate_map_road_only_exists_desc">Έχετε ήδη τον χάρτη μόνο δρόμων για %1$s. Η λήψη ενός τυπικού χάρτη, θα δημιουργήσει διπλότυπα δεδομένα και ίσως υποβαθμίσει την απόδοση.</string>
     <string name="duplicate_map_replace_with_standard">Αντικατάσταση με Τυπικό</string>
-    <string name="duplicate_map_replace_with_road">Αντικατάσταση με Μόνο δρόμοι</string>
+    <string name="duplicate_map_replace_with_road">Αντικατάσταση με Μόνο οδικός</string>
     <string name="android_auto_missing_maps_desc">Κατεβάστε ελλιπείς χάρτες για να συνεχιστεί η διαδρομή.</string>
     <string name="android_auto_possible_missing_maps_desc">Πιθανοί ελλιπείς χάρτες. Δοκιμάστε να χρησιμοποιήσετε τους υπάρχοντες χάρτες για να συνεχίσετε.</string>
     <string name="route_calculation_missing_maps">Ελλιπείς χάρτες</string>
@@ -5192,4 +5160,79 @@
     <string name="free_download_limit_reached_description">Ξεκλειδώστε απεριόριστες λήψεις χαρτών και ενημερώσεων</string>
     <string name="tracks_backup_promo_title">Αντίγραφο ασφαλείας και συγχρονισμός των ιχνών σας</string>
     <string name="tracks_backup_promo_description">Συγχρονίστε τα ίχνη σας μεταξύ των συσκευών σας και του Ιστού με το OsmAnd Pro.</string>
+    <string name="multimedia_notes_view_descr">Οι σημειώσεις σας με ήχο/βίντεο βρίσκονται στο %1$s.</string>
+    <string name="shared_string_file">Αρχείο</string>
+    <string name="shared_string_format">Μορφή</string>
+    <string name="shared_string_resolution">Ανάλυση</string>
+    <string name="shared_string_attached_to">Επισυναμμένο σε</string>
+    <string name="media_not_attached_title">Όχι επισυναμμένο κάπου ακόμη</string>
+    <string name="media_not_attached_descr">Επισυνάψτε αυτό το πολυμέσο σε ένα αγαπημένο για να το βλέπετε στον χάρτη.</string>
+    <string name="detach_external_media_descr">Το αρχείο δεν θα εμφανίζεται πια στο αγαπημένο. Παραμένει στη συσκευή σας.</string>
+    <string name="detach_external_media_descr_plural">Τα αρχεία δεν θα εμφανίζονται πια στο αγαπημένο. Παραμένουν στη συσκευή σας.</string>
+    <string name="attach_to_favorite">Επισύναψη σε αγαπημένο</string>
+    <string name="delete_media_title">Διαγραφή πολυμέσου;</string>
+    <string name="delete_media_descr">Αυτό το αρχείο θα διαγραφεί μόνιμα από τη συσκευή σας. Θα εξαφανιστεί από όλα τα αγαπημένα στα οποία είναι επισυναμμένο.</string>
+    <string name="delete_media_title_plural">Διαγραφή %1$d πολυμέσων;</string>
+    <string name="delete_media_descr_plural">Αυτά τα αρχεία θα διαγραφούν μόνιμα από τη συσκευή σας. Θα εξαφανιστούν από όλα τα αγαπημένα στα οποία είναι επισυναμμένα.</string>
+    <string name="detach_media_title">Απόσπαση πολυμέσου;</string>
+    <string name="detach_media_title_plural">Απόσπαση %1$d πολυμέσων;</string>
+    <string name="detach_media_descr">Το αρχείο δεν θα εμφανίζεται πια στο αγαπημένο. Παραμένει στη συσκευή σας και στη Βιβλιοθήκη πολυμέσων.</string>
+    <string name="detach_media_descr_plural">Τα αρχεία δεν θα εμφανίζονται πια στο αγαπημένο. Παραμένουν στη συσκευή σας και στη Βιβλιοθήκη πολυμέσων.</string>
+    <string name="shared_string_detach">Απόσπαση</string>
+    <string name="media_delete_failed">Δεν ήταν δυνατή η διαγραφή των πολυμέσων.</string>
+    <string name="media_detach_failed">Δεν ήταν δυνατή η απόσπαση των πολυμέσων.</string>
+    <string name="media_library_empty_title">Κανένα πολυμέσο ακόμη</string>
+    <string name="shared_string_grid">Πλέγμα</string>
+    <string name="shared_string_group">Ομάδα</string>
+    <string name="gallery_sort_size_large_small">Μεγαλύτερο μέγεθος πρώτα</string>
+    <string name="gallery_sort_size_small_large">Μικρότερο μέγεθος πρώτα</string>
+    <string name="media_attached_more_count">+%1$d</string>
+    <string name="media_library_empty_descr">Δημιουργήστε μια σημείωση με φωτογραφία, βίντεο ή ήχο στον χάρτη, ή επισυνάψτε αρχεία σε ένα αγαπημένο. Οτιδήποτε καταγράφετε ή επισυνάπτετε εμφανίζεται εδώ.</string>
+    <string name="aidl_permissions_deny">Να μην επιτραπεί</string>
+    <string name="aidl_group_notes">Σημειώσεις</string>
+    <string name="aidl_group_notes_descr">Σημειώσεις με φωτογραφία, ήχο και βίντεο</string>
+    <string name="aidl_group_screen">Στιγμιότυπα οθόνης</string>
+    <string name="aidl_group_screen_descr">Τραβήξτε εικόνες της οθόνης χάρτη</string>
+    <string name="aidl_group_system">Σύστημα</string>
+    <string name="aidl_group_system_descr">Αρχεία, καταγραφές εφαρμογής, ψεύτικη τοποθεσία</string>
+    <string name="trip_rec_start_from_notification">Έναρξη από ειδοποίηση</string>
+    <string name="trip_rec_start_from_notification_descr">Εμφανίζει μια ειδοποίηση με κουμπί για έναρξη καταγραφής του ταξιδιού. Καθ\' όλη τη διάρκεια της καταγραφής, μια ειδοποίηση θα εμφανίζεται πάντα.</string>
+    <string name="aidl_group_settings_descr">Αλλάξτε ρυθμίσεις και προφίλ</string>
+    <string name="aidl_group_tracks_view">Ίχνη: προβολή</string>
+    <string name="aidl_group_tracks_view_descr">Ανάγνωση των ιχνών σας</string>
+    <string name="aidl_group_tracks_edit">Ίχνη: επεξεργασία</string>
+    <string name="aidl_group_tracks_edit_descr">Εισαγωγή, εμφάνιση και διαγραφή</string>
+    <string name="aidl_group_recording">Καταγραφή ταξιδιού</string>
+    <string name="aidl_group_recording_descr">Έναρξη, διακοπή και προβολή του τρέχοντος ίχνους</string>
+    <string name="aidl_group_map_descr">Μετακίνηση του χάρτη, εμφάνιση σημείων</string>
+    <string name="aidl_group_search_descr">Εύρεση τοποθεσιών και διευθύνσεων</string>
+    <string name="aidl_group_location_descr">Η τοποθεσία σας, διαδρομή και τιμές γραφικών στοιχείων</string>
+    <string name="aidl_group_navigation_descr">Έναρξη και διακοπή πλοήγησης</string>
+    <string name="aidl_group_favorites_descr">Αγαπημένα και δείκτες χάρτη</string>
+    <string name="osmand_api_permission_missing">%1$s: επιτρέψτε το \"%2$s\" στο Μενού › Πρόσθετα</string>
+    <string name="osmand_api_unknown_app">Αποκλείστηκε το \"%1$s\" από μια άγνωστη εφαρμογή</string>
+    <string name="aidl_permissions_descr">Τι μπορεί να κάνει το %1$s (%2$s) στο OsmAnd.</string>
+    <string name="aidl_permissions_request_title">Να επιτραπεί στο %1$s να χρησιμοποιήσει το OsmAnd;</string>
+    <string name="aidl_permissions_request_descr">%1$s\nΜπορείτε να το αλλάξετε αυτό αργότερα στα Πρόσθετα.</string>
+    <string name="aidl_app_disabled_descr">Το OsmAnd αγνοεί όλα τα αιτήματα από αυτήν την εφαρμογή.</string>
+    <string name="aidl_group_system_footer">Επιτρέπει στην εφαρμογή να αντιγράφει αρχεία προς το OsmAnd, να αντικαθιστά την τοποθεσία σας, να διαβάζει τις καταγραφές της εφαρμογής και να αλλάζει την εμφάνιση της εφαρμογής. Ενεργοποιήστε το μόνο για εφαρμογές που εμπιστεύεστε πλήρως.</string>
+    <string name="ais_use_nmea_location_desc">Αντικαθιστά την τοποθεσία του κινητού με την τοποθεσία από τη ροή NMEA.</string>
+    <string name="ais_set_mmsi">Ορισμός MMSI</string>
+    <string name="ais_enter_mmsi">Εισαγωγή MMSI</string>
+    <string name="panoramax">Panoramax</string>
+    <string name="open_panoramax">Άνοιγμα Panoramax</string>
+    <string name="panoramax_image">Εικόνα στο Panoramax</string>
+    <string name="panoramax_no_internet_desc">Οι φωτογραφίες από το Panoramax είναι διαθέσιμες μόνο διαδικτυακά.</string>
+    <string name="quick_action_showhide_panoramax_descr">Διακόπτης για εμφάνιση ή απόκρυψη του επιπέδου Panoramax στον χάρτη.</string>
+    <string name="panoramax_menu_filter_description_new">Φιλτράτισμα εικόνων κατά συνεισφέροντα, ημερομηνία ή τύπο.</string>
+    <string name="heap_dump_share">Κοινοποίηση αναφοράς</string>
+    <string name="heap_dump_share_descr">Αποστέλλει την τελευταία αναφορά στον διακομιστή.</string>
+    <string name="ais_receive_in_background">Λήψη δεδομένων AIS ακόμη κι αν το OsmAnd είναι σε παύση.</string>
+    <string name="heap_dump_collect">Συλλογή &amp; ανάλυση τώρα</string>
+    <string name="heap_dump_collect_descr">Παίρνει μερικά δευτερόλεπτα, εμφανίζει το αποτέλεσμα.</string>
+    <string name="map_rendering">Απεικόνιση χάρτη</string>
+    <string name="simulate_ui">Προσομοίωση πρώτης εκκίνησης</string>
+    <string name="simulate_ui_descr">Πρώτη εκτέλεση, μπάνερ δωρεάν έκδοσης, φυλλάδιο έκπτωσης.</string>
+    <string name="ais_set_your_mmsi">Ορίστε το MMSI σας</string>
+    <string name="latest_builds">Τελευταία build</string>
 </resources>

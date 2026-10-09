@@ -384,4 +384,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "test_voice";
+	}
 }

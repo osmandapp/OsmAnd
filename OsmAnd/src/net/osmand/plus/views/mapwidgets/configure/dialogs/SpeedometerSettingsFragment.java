@@ -230,4 +230,9 @@ public class SpeedometerSettingsFragment extends BaseFullScreenFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "speedometer_settings";
+	}
 }

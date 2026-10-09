@@ -148,13 +148,17 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 		TLongArrayList lst = new TLongArrayList(lstMap.keySet());
 		lst.sort(); // sort is not correct for file ind last bits >>> 12 
+		TLongHashSet wanted = new TLongHashSet(lst.size());
+		for (int i = 0; type == SpatialSearchToken.POI_TYPE && i < lst.size(); i++) {
+			wanted.add(SpatialSearchContext.poiObjectId(lst.get(i)));
+		}
 		for(int i = 0; i < lst.size(); i++) {
 			if(ctx.isCancelled()) {
 				return;
 			}
 			long id = lst.get(i);
 			if (type == SpatialSearchToken.POI_TYPE) {
-				cache.put(id, ctx.readPoiObject(id, cache));
+				cache.put(id, ctx.readPoiObject(id, cache, wanted));
 			} else {
 				cache.put(id, ctx.readAddrObject(id, lstMap.get(id), cache));
 			}
@@ -654,6 +658,14 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			uniqueIdsResults.clear();
 			extraIdsResults.clear();
 			List<SpatialSearchResult> result = new ArrayList<>();
+			// the same osm object can come without wikidata from one map and with it from another (Khotiv, #25940)
+			Map<Long, String> wikidataByOsmId = new HashMap<>();
+			for (SpatialSearchResult s : finalResult) {
+				MapObject o = s.getMainObject();
+				if (o != null && !Algorithms.isEmpty(o.getWikidata()) && s.getIdDeduplication() != -1) {
+					wikidataByOsmId.putIfAbsent(s.getIdDeduplication(), o.getWikidata());
+				}
+			}
 
 			for (SpatialSearchResult s : finalResult) {
 				boolean isUniq = true;
@@ -661,16 +673,24 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				if (uniqueIdsResults.containsKey(uniqueId)) {
 					SpatialSearchResult unique = uniqueIdsResults.get(uniqueId);
 					unique.addExtraResult(s, ctx.settings.LANG_DEDUPLICATE);
+					unique.moveToNearestRouteSegment(ctx.location);
 					isUniq = false;
 				} else if (uniqueId != -1) {
 					uniqueIdsResults.put(uniqueId, s);
 				}
 				List<String> extraDuplicateKeys = s.extraDeduplicateKeys(ctx);
+				MapObject o = s.getMainObject();
+				String wikidata = o == null || !Algorithms.isEmpty(o.getWikidata()) ? null : wikidataByOsmId.get(uniqueId);
+				if (wikidata != null) {
+					extraDuplicateKeys = extraDuplicateKeys == null ? new ArrayList<>() : new ArrayList<>(extraDuplicateKeys);
+					extraDuplicateKeys.add(wikidata);
+				}
 				if (extraDuplicateKeys != null) {
 					for (String key : extraDuplicateKeys) {
 						if (extraIdsResults.containsKey(key)) {
 							SpatialSearchResult unique = extraIdsResults.get(key);
 							unique.addExtraResult(s, ctx.settings.LANG_DEDUPLICATE);
+							unique.moveToNearestRouteSegment(ctx.location);
 							isUniq = false;
 						} else {
 							extraIdsResults.put(key, s);

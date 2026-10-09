@@ -243,4 +243,6 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 	override fun setSelectedLanguage(languageCode: String?) {
 		this.selectedLang = languageCode
 	}
+
+	override fun getAnalyticsScreen() = "astro_article"
 }

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.util.Algorithms;
 
 public class FavoriteStatsViewHolder extends RecyclerView.ViewHolder {
 
@@ -31,16 +30,17 @@ public class FavoriteStatsViewHolder extends RecyclerView.ViewHolder {
 		StringBuilder builder = new StringBuilder();
 
 		if (analysis.getFoldersCount() > 0) {
-			appendField(builder, app.getString(R.string.folder), String.valueOf(analysis.getFoldersCount()), false);
+			appendField(builder, app.getString(R.string.folder), String.valueOf(analysis.getFoldersCount()));
 		}
-		appendField(builder, app.getString(R.string.shared_string_gpx_points), String.valueOf(analysis.getPointsCount()), false);
-		appendField(builder, app.getString(R.string.shared_string_size), AndroidUtils.formatSize(app, analysis.getFileSize()), true);
-		return Algorithms.capitalizeFirstLetter(builder.toString());
-
+		appendField(builder, app.getString(R.string.shared_string_gpx_points), String.valueOf(analysis.getPointsCount()));
+		appendField(builder, app.getString(R.string.shared_string_size), AndroidUtils.formatSize(app, analysis.getFileSize()));
+		return builder.toString();
 	}
 
-	private void appendField(@NonNull StringBuilder builder, @NonNull String field, @NonNull String value, boolean lastItem) {
-		builder.append(field.toLowerCase()).append(" ").append(value);
-		builder.append(lastItem ? "." : ", ");
+	private void appendField(@NonNull StringBuilder builder, @NonNull String field, @NonNull String value) {
+		if (builder.length() > 0) {
+			builder.append(" · ");
+		}
+		builder.append(app.getString(R.string.ltr_or_rtl_combine_via_colon, field, value));
 	}
 }

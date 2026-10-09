@@ -824,4 +824,9 @@ public class RearrangePoiFiltersFragment extends BaseFullScreenDialogFragment im
 
 		void onCustomFiltersDeleted();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "rearrange_poi_filters";
+	}
 }
