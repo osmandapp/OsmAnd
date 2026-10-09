@@ -1040,8 +1040,13 @@ public class RouteResultPreparation {
 			RouteSegmentResult currentSegment = result.get(i);
 			TurnType currentTurn = currentSegment.getTurnType();
 			dist += currentSegment.getDistance();
-			if (currentTurn == null || currentTurn.getLanes() == null) {
+			if (currentTurn == null) {
 				// skip
+			} else if (currentTurn.getLanes() == null) {
+				if (!TurnType.isSlightTurn(currentTurn.getValue())) {
+					// all turns except: C, KL, KR, TSLL, TSLR
+					nextSegment = null;
+				}
 			} else {
 				boolean merged = false;
 				if (nextSegment != null) {
@@ -1438,6 +1443,9 @@ public class RouteResultPreparation {
 		int endIndex = act[1];
 		int activeTurn = act[2];
 		if (!hasAllowedLanes(mainTurnType, new int[] {activeTurn << 1}, 0, 0)) {
+			activeTurn = -1;
+		}
+		if (activeTurn == TurnType.TU) {
 			activeTurn = -1;
 		}
 		if (startIndex != -1 && endIndex != -1) {
@@ -2105,8 +2113,8 @@ public class RouteResultPreparation {
 					TurnType.setPrimaryTurnAndReset(lanes, i, turn);
 				} else {
                     if (turn == calcTurnType || 
-                    	(TurnType.isRightTurn(calcTurnType) && TurnType.isRightTurn(turn) && !TurnType.isRightTurn(primary)) || 
-                    	(TurnType.isLeftTurn(calcTurnType) && TurnType.isLeftTurn(turn) && !TurnType.isLeftTurn(primary)) 
+                    	(TurnType.isRightTurn(calcTurnType) && TurnType.isRightTurn(turn) && !TurnType.isRightTurnNoUTurn(primary)) || 
+                    	(TurnType.isLeftTurn(calcTurnType) && TurnType.isLeftTurn(turn) && !TurnType.isLeftTurnNoUTurn(primary)) 
                     	) {
                     	TurnType.setPrimaryTurnShiftOthers(lanes, i, turn);
                     } else if (TurnType.getSecondaryTurn(lanes[i]) == 0) {
@@ -2467,6 +2475,10 @@ public class RouteResultPreparation {
 				pair[0] = 0;
 				pair[1] = curCntLanes.length - 1;
 				pair[2] = directions[0];
+				int secondary = TurnType.getSecondaryTurn(rawLanes[0]);
+				if (pair[2] == TurnType.TU && secondary != 0) {
+					pair[2] = secondary;
+				}
 				return true;
 			} else if (rs.roadsOnLeft > 0 && rs.roadsOnRight == 0) {
 				pair[0] = rawLanes.length - curCntLanes.length;
@@ -2842,8 +2854,8 @@ public class RouteResultPreparation {
 			attachedPriority = Math.min(attachedPriority, highwaySpeakPriority(attach.getObject().getHighway()));
 		}
 		// same turn:lanes, minor attached roads (3+ classes lower), except none lanes (none can mean different)
-		return turnLanes.equals(getTurnLanesString(curr)) && !hasNoneLane(turnLanes)
-				&& attachedPriority - highwaySpeakPriority(curr.getObject().getHighway()) > 2;
+		boolean minorAttachedRoads = attachedPriority == MAX_SPEAK_PRIORITY || attachedPriority - highwaySpeakPriority(curr.getObject().getHighway()) > 2;
+		return turnLanes.equals(getTurnLanesString(curr)) && !hasNoneLane(turnLanes) && minorAttachedRoads;
 	}
 
 }

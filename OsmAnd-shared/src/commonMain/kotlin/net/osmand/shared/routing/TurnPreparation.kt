@@ -159,8 +159,13 @@ object TurnPreparation {
 			val currentSegment = result[i]
 			val currentTurn = currentSegment.getTurnType()
 			dist += currentSegment.getDistance()
-			if (currentTurn == null || currentTurn.lanes == null) {
+			if (currentTurn == null) {
 				// skip
+			} else if (currentTurn.lanes == null) {
+				if (!TurnType.isSlightTurn(currentTurn.value)) {
+					// all turns except: C, KL, KR, TSLL, TSLR
+					nextSegment = null
+				}
 			} else {
 				var merged = false
 				if (nextSegment != null) {
@@ -457,8 +462,9 @@ object TurnPreparation {
 			attachedPriority = min(attachedPriority, TurnLanes.highwaySpeakPriority(attach.getObject().getHighway()))
 		}
 		// same turn:lanes, minor attached roads (3+ classes lower), except none lanes (none can mean different)
-		return turnLanes == TurnLanes.getTurnLanesString(curr) && !TurnLanes.hasNoneLane(turnLanes)
-				&& attachedPriority - TurnLanes.highwaySpeakPriority(curr.getObject().getHighway()) > 2
+		val minorAttachedRoads = attachedPriority == TurnLanes.MAX_SPEAK_PRIORITY
+				|| attachedPriority - TurnLanes.highwaySpeakPriority(curr.getObject().getHighway()) > 2
+		return turnLanes == TurnLanes.getTurnLanesString(curr) && !TurnLanes.hasNoneLane(turnLanes) && minorAttachedRoads
 	}
 
 	// ---- how long each segment takes ----

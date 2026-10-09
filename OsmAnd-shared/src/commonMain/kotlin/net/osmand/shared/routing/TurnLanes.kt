@@ -303,8 +303,8 @@ object TurnLanes {
 					TurnType.setPrimaryTurnAndReset(lanes, i, turn)
 				} else {
 					if (turn == calcTurnType ||
-						(TurnType.isRightTurn(calcTurnType) && TurnType.isRightTurn(turn) && !TurnType.isRightTurn(primary)) ||
-						(TurnType.isLeftTurn(calcTurnType) && TurnType.isLeftTurn(turn) && !TurnType.isLeftTurn(primary))
+						(TurnType.isRightTurn(calcTurnType) && TurnType.isRightTurn(turn) && !TurnType.isRightTurnNoUTurn(primary)) ||
+						(TurnType.isLeftTurn(calcTurnType) && TurnType.isLeftTurn(turn) && !TurnType.isLeftTurnNoUTurn(primary))
 					) {
 						TurnType.setPrimaryTurnShiftOthers(lanes, i, turn)
 					} else if (TurnType.getSecondaryTurn(lanes[i]) == 0) {
@@ -1192,6 +1192,10 @@ object TurnLanes {
 				pair[0] = 0
 				pair[1] = curCntLanes.size - 1
 				pair[2] = directions[0]
+				val secondary = TurnType.getSecondaryTurn(rawLanes[0])
+				if (pair[2] == TurnType.TU && secondary != 0) {
+					pair[2] = secondary
+				}
 				return true
 			} else if (rs.roadsOnLeft > 0 && rs.roadsOnRight == 0) {
 				pair[0] = rawLanes.size - curCntLanes.size
@@ -1280,6 +1284,9 @@ object TurnLanes {
 		val endIndex = act[1]
 		var activeTurn = act[2]
 		if (!hasAllowedLanes(mainTurnType, intArrayOf(activeTurn shl 1), 0, 0)) {
+			activeTurn = -1
+		}
+		if (activeTurn == TurnType.TU) {
 			activeTurn = -1
 		}
 		if (startIndex != -1 && endIndex != -1) {
