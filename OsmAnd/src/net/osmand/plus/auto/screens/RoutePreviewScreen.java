@@ -20,6 +20,7 @@ import androidx.car.app.model.Row;
 import androidx.car.app.model.Template;
 import androidx.car.app.navigation.model.MapWithContentTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.PlatformUtil;
@@ -69,6 +70,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	private boolean calculateRoute;
 	private boolean calculating;
+	private boolean startNavigationOnRouteReady;
 
 	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<>() {
 		@Override
@@ -83,10 +85,17 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	public RoutePreviewScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
 	                          @NonNull SearchResult searchResult, boolean calculateRoute) {
+		this(carContext, settingsAction, searchResult, calculateRoute, false);
+	}
+
+	public RoutePreviewScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
+	                          @NonNull SearchResult searchResult, boolean calculateRoute,
+	                          boolean startNavigationOnRouteReady) {
 		super(carContext);
 		this.settingsAction = settingsAction;
 		this.searchResult = searchResult;
 		this.calculateRoute = calculateRoute;
+		this.startNavigationOnRouteReady = startNavigationOnRouteReady;
 		getLifecycle().addObserver(this);
 		calculating = calculateRoute;
 		setMarker(RoutePreviewScreen.class.getSimpleName());
@@ -155,6 +164,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			this.routeRows = routeRows;
 			calculating = app.getRoutingHelper().isRouteBeingCalculated();
 			invalidate();
+			startNavigationIfReady();
 		} else if (routingHelper.getRoute().hasMissingMaps()) {
 			NavigationSession session = getSession();
 			if (session != null) {
@@ -193,6 +203,18 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	public void onResume(@NonNull LifecycleOwner owner) {
 		if (getApp().getRoutingHelper().isRouteCalculated()) {
 			zoomMapToRoute();
+		}
+		startNavigationIfReady();
+	}
+
+	private void startNavigationIfReady() {
+		if (startNavigationOnRouteReady && !calculating && !Algorithms.isEmpty(routeRows)) {
+			getApp().runInUIThread(() -> {
+				if (startNavigationOnRouteReady && getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+					startNavigationOnRouteReady = false;
+					onNavigate();
+				}
+			});
 		}
 	}
 
