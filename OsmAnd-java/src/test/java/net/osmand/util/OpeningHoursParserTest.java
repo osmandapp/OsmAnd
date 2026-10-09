@@ -316,6 +316,24 @@ public class OpeningHoursParserTest {
 		testOpened("29.03.2019 15:00", hours, true);
 		testOpened("26.04.2019 11:00", hours, false);
 
+		// Partial month range (Jun 15-30) combined with whole months (Jul, Aug) in one selector.
+		// The whole-month entries must match even though dayMonths[] is initialized for June.
+		// Date notes (2026): Jan 1=Thu; Jun 5=Fri, Jun 6=Sat, Jun 20=Sat, Jun 27=Sat;
+		//                    Jul 4=Sat, Jul 5=Sun; Aug 1=Sat, Aug 22=Sat.
+		hours = parseOpenedHours("Mo-Fr 08:00-22:30; Sa-Su,PH 09:00-20:30; Jun 15-30,Jul,Aug Sa-Su,PH 09:00-19:00");
+		System.out.println(hours);
+		testOpened("05.07.2026 19:40", hours, false); // Sunday in July after 19:00 — must be closed
+		testOpened("05.07.2026 11:00", hours, true);  // Sunday in July at 11:00 — open
+		testOpened("22.08.2026 18:00", hours, true);  // Saturday in August at 18:00 — open
+		testOpened("22.08.2026 19:40", hours, false); // Saturday in August after 19:00 — must be closed
+		testOpened("05.06.2026 19:40", hours, true);  // Friday in June (weekday, before Jun 15) — open until 22:30
+		testOpened("06.06.2026 19:40", hours, true);  // Saturday Jun 6 (before Jun 15) — normal 20:30 hours apply
+		testOpened("20.06.2026 18:00", hours, true);  // Saturday Jun 20 (within Jun 15-30) — summer hours apply
+		testOpened("20.06.2026 19:40", hours, false); // Saturday Jun 20 after 19:00 — must be closed
+		testOpened("27.06.2026 18:00", hours, true);  // Saturday Jun 27 (within Jun 15-30) — summer hours apply
+		testOpened("27.06.2026 19:40", hours, false); // Saturday Jun 27 after 19:00 — must be closed
+		testInfo("05.07.2026 11:00", hours, "Open until 19:00");
+
 		hours = parseOpenedHours("Apr 05-24: Fr 08:00-16:00");
 		System.out.println(hours);
 		testOpened("12.10.2018 11:00", hours, false);
