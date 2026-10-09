@@ -16,6 +16,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.shared.gpx.PointAttributes;
 import net.osmand.shared.util.MergeLocalizedTagsAlgorithm;
 import net.osmand.shared.util.PoiAdditionalLangLookup;
 import net.osmand.util.Algorithms;
@@ -37,6 +38,13 @@ public class AdditionalInfoBundle {
 			COLOR_NAME_EXTENSION, ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION,
 			PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION, AMENITY_ORIGIN_EXTENSION,
 			TYPE, SUBTYPE, ORIGIN_EXTENSION, OSM_URL_EXTENSION
+	);
+	// OsmAnd's own point fields that are not in HIDDEN_EXTENSIONS: never a generic row
+	private static final List<String> SERVICE_KEYS = Arrays.asList(
+			HIDDEN_EXTENSION, PINNED_EXTENSION, POINT_TYPE_EXTENSION, LINE_WIDTH_EXTENSION, TRKPT_INDEX_EXTENSION,
+			POINT_ELEVATION, POINT_SPEED, POINT_BEARING, POINT_HEADING, MIN_ELEVATION, MAX_ELEVATION, AVG_ELEVATION,
+			DIFF_ELEVATION_UP, DIFF_ELEVATION_DOWN, PointAttributes.DEV_INTERPOLATION_OFFSET_N,
+			"visited_date", "creation_date", "pickup_date", "calendar_event"
 	);
 	public static final String LOCALIZATIONS = "localizations";
 
@@ -94,17 +102,16 @@ public class AdditionalInfoBundle {
 	}
 
 	/**
-	 * @param externalNamespaceKeys keys that must still get a generic row when the category does not
-	 *                            show default tags - stored GPX extensions from an external
-	 *                            namespace, see getExternalNamespaceKeys().
+	 * @param genericRowKeys keys that must still get a generic row when the category does not
+	 *                       show default tags, see getGenericRowKeys().
 	 */
 	public List<AmenityTagEntry> getVisibleTags(boolean allowNoteTag, List<String> preferredLangs,
-	                                            Set<String> externalNamespaceKeys) {
+	                                            Set<String> genericRowKeys) {
 		PoiCategory category = getCategory();
 		Map<String, List<PoiType>> collectedPoiTypes = new LinkedHashMap<>();
 
 		List<AmenityTagEntry> entries = collectPlainRows(allowNoteTag, preferredLangs, category,
-				collectedPoiTypes, externalNamespaceKeys);
+				collectedPoiTypes, genericRowKeys);
 		entries.addAll(collectCollapsableGroups(category));
 		entries.addAll(collectPoiTypeGroups(category, collectedPoiTypes));
 		return entries;
@@ -113,7 +120,7 @@ public class AdditionalInfoBundle {
 	private List<AmenityTagEntry> collectPlainRows(boolean allowNoteTag, List<String> preferredLangs,
 	                                               PoiCategory category,
 	                                               Map<String, List<PoiType>> collectedPoiTypes,
-	                                               Set<String> externalNamespaceKeys) {
+	                                               Set<String> genericRowKeys) {
 		boolean showDefaultTags = isDefaultForCategory();
 		List<AmenityTagEntry> entries = new ArrayList<>();
 		AmenityTagEntry cuisineEntry = null;
@@ -136,7 +143,7 @@ public class AdditionalInfoBundle {
 				continue;
 			}
 			if (additionalType == null && categoryType == null && !showDefaultTags
-					&& !externalNamespaceKeys.contains(key)) {
+					&& !genericRowKeys.contains(key)) {
 				continue;
 			}
 
@@ -371,21 +378,19 @@ public class AdditionalInfoBundle {
 	}
 
 	/**
-	 * Collects the keys stored on a point that came from an external GPX namespace, for example
-	 * "test:country" or "gpxx:city". Only these may fall back to a generic row when OsmAnd's POI
-	 * logic does not recognize them; an unqualified key is an OsmAnd field ("hidden",
-	 * "visited_date"), and the OsmAnd, Garmin sensor and Amenity namespaces are OsmAnd's own data.
+	 * A point shows all its data: every stored extension the POI logic does not know ("hr", "my_note",
+	 * "test:country") gets a generic row, only OsmAnd's own point fields and namespaces are skipped.
 	 */
-	public static Set<String> getExternalNamespaceKeys(Map<String, String> storedExtensions) {
-		Set<String> fallbackKeys = new HashSet<>();
+	public static Set<String> getGenericRowKeys(Map<String, String> storedExtensions) {
+		Set<String> keys = new HashSet<>();
 		for (String key : storedExtensions.keySet()) {
-			if (key.contains(":") && !key.startsWith(":")
+			if (!HIDDEN_EXTENSIONS.contains(key) && !SERVICE_KEYS.contains(key)
 					&& !key.startsWith(AMENITY_PREFIX) && !key.startsWith(OSM_PREFIX)
 					&& !key.startsWith(OSMAND_EXTENSIONS_PREFIX) && !key.startsWith(GPXTPX_PREFIX)) {
-				fallbackKeys.add(key);
+				keys.add(key);
 			}
 		}
-		return fallbackKeys;
+		return keys;
 	}
 
 	public PoiType getPoiAdditionalType(String key, String vl) {
