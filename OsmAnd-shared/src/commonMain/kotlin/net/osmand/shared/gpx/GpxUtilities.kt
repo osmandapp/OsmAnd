@@ -82,6 +82,7 @@ object GpxUtilities {
 
 	const val GAP_PROFILE_TYPE = "gap"
 	const val TRKPT_INDEX_EXTENSION = "trkpt_idx"
+	const val OFFSET_EXTENSION = "offset"
 	const val DEFAULT_ICON_NAME = "special_star"
 
 	const val POINT_ELEVATION = "ele"
@@ -1365,7 +1366,7 @@ object GpxUtilities {
 							tagName == "routepointextension" -> {
 								routePointExtension = true
 								if (parse is WptPt) {
-									parse.getExtensionsToWrite()["offset"] =
+									parse.getExtensionsToWrite()[OFFSET_EXTENSION] =
 										routeTrackSegment.points.size.toString()
 								}
 							}

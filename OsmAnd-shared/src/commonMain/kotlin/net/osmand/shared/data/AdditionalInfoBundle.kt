@@ -11,7 +11,6 @@ import net.osmand.shared.data.Amenity.Companion.WIKIDATA
 import net.osmand.shared.data.Amenity.Companion.WIKIMEDIA_COMMONS
 import net.osmand.shared.data.Amenity.Companion.WIKI_PHOTO
 import net.osmand.shared.gpx.GpxUtilities
-import net.osmand.shared.gpx.PointAttributes
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.osm.PoiCategory
 import net.osmand.shared.osm.PoiType
@@ -349,7 +348,7 @@ class AdditionalInfoBundle(
 			GpxUtilities.POINT_SPEED, GpxUtilities.POINT_BEARING, GpxUtilities.POINT_HEADING,
 			GpxUtilities.MIN_ELEVATION, GpxUtilities.MAX_ELEVATION, GpxUtilities.AVG_ELEVATION,
 			GpxUtilities.DIFF_ELEVATION_UP, GpxUtilities.DIFF_ELEVATION_DOWN,
-			PointAttributes.DEV_INTERPOLATION_OFFSET_N,
+			GpxUtilities.OFFSET_EXTENSION,
 			"visited_date", "creation_date", "pickup_date", "calendar_event"
 		)
 
