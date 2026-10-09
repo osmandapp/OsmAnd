@@ -26,6 +26,7 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.NameIndexReader;
+import net.osmand.search.rules.SearchModRules;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -286,19 +287,26 @@ public class SpatialTextSearch {
 		public final List<NameIndexReader> typoReaders = new ArrayList<NameIndexReader>();
 		public Map<String, Integer> poiFrequencies = null;
 		public SpatialPoiSearch poiSearch;
+		// rules locale of the data of the map (en_US, de_CH...), whatever the language of the user is
+		public final String locale;
 
-		public SpatialSearchFileCache(BinaryMapIndexReader r) {
+		public SpatialSearchFileCache(BinaryMapIndexReader r, SearchModRules searchRules) {
 			file = r.getFile().getName();
 			length = r.getFile().length();
 			edition = r.getDateCreated();
+			String region = file;
 			for (AddressRegion a : r.getAddressIndexes()) {
 				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
 				typoReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
+				region = a.getName();
 			}
 			for (PoiRegion a : r.getPoiIndexes()) {
 				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
 				typoReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
+				region = r.getAddressIndexes().isEmpty() ? a.getName() : region;
 			}
+			// the region name keeps a subregion with its own locale: "Switzerland_ticino"
+			locale = searchRules.locales().forMap(region);
 		}
 
 		public boolean test(BinaryMapIndexReader r) {
@@ -310,6 +318,9 @@ public class SpatialTextSearch {
 	public static class SpatialSearchGlobalCache {
 
 		public Map<String, SpatialSearchFileCache> filesCache = new HashMap<>();
+
+		// read once: rules.xml and then the rules of a locale on the first map of that locale
+		public final SearchModRules searchRules = new SearchModRules();
 
 	}
 
@@ -654,7 +665,7 @@ public class SpatialTextSearch {
 		
 		// 1. prepare tokens
 		if (ctx.settings.SEARCH_POI_BY_CATEGORY_ONLY) {
-			res.tokens = Collections.singletonList(new SpatialSearchToken(0, input, input, 1));
+			res.tokens = Collections.singletonList(new SpatialSearchToken(cache.searchRules, 0, input, input, 1));
 		} else {
 			res.tokens = splitWords(ctx, input);
 		}
@@ -778,7 +789,7 @@ public class SpatialTextSearch {
 			if (w.equals(SpatialSearchToken.DOT_INCOMPLETE_STRING)) {
 				continue;
 			}
-			SpatialSearchToken token = new SpatialSearchToken(ctx.settings.MIN_CHARACTERS_INCOMPLETE, w,
+			SpatialSearchToken token = new SpatialSearchToken(cache.searchRules, ctx.settings.MIN_CHARACTERS_INCOMPLETE, w,
 					owords.get(ind), tokens.size());
 			tokens.add(token);
 		}

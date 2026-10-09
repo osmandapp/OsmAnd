@@ -17,6 +17,12 @@ tasks.register('collectRoutingResources', Sync) {
 	include "*.xml"
 }
 
+tasks.register('collectAbbrResources', Sync) {
+	from "../../resources/abbr"
+	into "src/main/resources/net/osmand/search/rules"
+	include "rules*.xml"
+}
+
 tasks.register('collectMiscResources', Copy) {
 	into "src/main/resources/net/osmand/osm"
 	from("../../resources/obf_creation") {
@@ -65,23 +71,33 @@ tasks.register('collectTestResources', Copy) {
 	}
 }
 
+tasks.register('collectAbbrTestResources', Copy) {
+	from("../../resources/test-resources/abbr") {
+		include "rules*.xml"
+	}
+	into "src/test/resources/net/osmand/search/rules"
+}
+
 processResources {
 	dependsOn collectRoutingResources,
+		collectAbbrResources,
 		collectRenderingStylesResources,
 		collectRegionsInfoResources,
 		collectMiscResources
 }
 
 processTestResources {
-	dependsOn collectTestResources, collectTestPhrasesResources
+	dependsOn collectTestResources, collectTestPhrasesResources, collectAbbrTestResources
 }
 
 tasks.register('collectExternalResources') {
 	dependsOn collectRoutingResources,
+			collectAbbrResources,
 			collectRenderingStylesResources,
 			collectRegionsInfoResources,
 			collectTestResources,
 			collectTestPhrasesResources,
+			collectAbbrTestResources,
 			collectMiscResources
 }
 
