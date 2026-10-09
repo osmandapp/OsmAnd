@@ -5382,4 +5382,6 @@
     <string name="multimedia_notes_view_descr">Hang- és videójegyzetei a(z) %1$s mappában találhatók.</string>
     <string name="media_attached_more_count">+%1$d</string>
     <string name="route_calculation_out_of_memory">Az útvonal túl hosszú ahhoz, hogy ezen az eszközön kiszámítható legyen. Adjon meg köztes pontokat, vagy válasszon egy közelebbi úti célt.</string>
+    <string name="map_source_saved_as">Térképforrás mentve mint: „%1$s”.</string>
+    <string name="map_source_folder_not_created">Nem sikerült mappát létrehozni a térképforrás számára. Próbálkozzon másik névvel.</string>
 </resources>
