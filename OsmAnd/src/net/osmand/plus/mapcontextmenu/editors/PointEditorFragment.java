@@ -372,6 +372,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 		if (updateAppearance) {
 			setColor(group.getColor());
 			setColorSelected(false);
+			selectColorInPalette();
 			setIconName(group.getIconName());
 			setBackgroundType(group.getBackgroundType());
 			updateContent();
