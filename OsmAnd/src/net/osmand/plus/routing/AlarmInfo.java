@@ -11,6 +11,7 @@ import static net.osmand.plus.routing.AlarmInfoType.SPEED_LIMIT;
 import static net.osmand.plus.routing.AlarmInfoType.STOP;
 import static net.osmand.plus.routing.AlarmInfoType.TOLL_BOOTH;
 import static net.osmand.plus.routing.AlarmInfoType.TRAFFIC_CALMING;
+import static net.osmand.plus.routing.AlarmInfoType.TRAM;
 import static net.osmand.plus.routing.AlarmInfoType.RED_LIGHT_CAMERA;
 
 import android.content.Context;
@@ -126,6 +127,8 @@ public class AlarmInfo implements LocationPoint {
 			alarmInfo = new AlarmInfo(HAZARD, locInd);
 		} else if ("railway".equals(ruleType.getTag()) && "level_crossing".equals(ruleType.getValue())) {
 			alarmInfo = new AlarmInfo(RAILWAY, locInd);
+		} else if ("railway".equals(ruleType.getTag()) && "tram_level_crossing".equals(ruleType.getValue())) {
+			alarmInfo = new AlarmInfo(TRAM, locInd);
 		} else if ("crossing".equals(ruleType.getTag()) && "uncontrolled".equals(ruleType.getValue())) {
 			alarmInfo = new AlarmInfo(PEDESTRIAN, locInd);
 		}

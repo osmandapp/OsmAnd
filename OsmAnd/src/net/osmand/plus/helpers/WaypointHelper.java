@@ -4,6 +4,7 @@ import static net.osmand.plus.routing.AlarmInfoType.PEDESTRIAN;
 import static net.osmand.plus.routing.AlarmInfoType.RAILWAY;
 import static net.osmand.plus.routing.AlarmInfoType.RED_LIGHT_CAMERA;
 import static net.osmand.plus.routing.AlarmInfoType.SPEED_CAMERA;
+import static net.osmand.plus.routing.AlarmInfoType.TRAM;
 import static net.osmand.plus.routing.AlarmInfoType.TUNNEL;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
@@ -722,6 +723,7 @@ public class WaypointHelper {
 		}
 		AlarmInfo prevSpeedCam = null;
 		AlarmInfo prevRailway = null;
+		AlarmInfo prevTram = null;
 		for (AlarmInfo alarmInfo : route.getAlarmInfo()) {
 			AlarmInfoType type = alarmInfo.getType();
 			if (type == SPEED_CAMERA || type == RED_LIGHT_CAMERA) {
@@ -746,6 +748,13 @@ public class WaypointHelper {
 						alarmInfo.getLatitude(), alarmInfo.getLongitude()) >= DISTANCE_IGNORE_DOUBLE_RAILWAYS) {
 					addPointWrapper(alarmInfo, array, settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));
 					prevRailway = alarmInfo;
+				}
+			} else if (type == TRAM) {
+				// one junction often has several tram tracks
+				if (prevTram == null || MapUtils.getDistance(prevTram.getLatitude(), prevTram.getLongitude(),
+						alarmInfo.getLatitude(), alarmInfo.getLongitude()) >= DISTANCE_IGNORE_DOUBLE_RAILWAYS) {
+					addPointWrapper(alarmInfo, array, settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));
+					prevTram = alarmInfo;
 				}
 			} else if (settings.SHOW_TRAFFIC_WARNINGS.getModeValue(mode) || settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode)) {
 				addPointWrapper(alarmInfo, array, settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));

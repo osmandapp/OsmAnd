@@ -19,7 +19,8 @@ public enum AlarmInfoType {
 	HAZARD(9, R.string.traffic_warning_hazard),
 	MAXIMUM(10, R.string.traffic_warning),
 	TUNNEL(11, R.string.tunnel_warning),
-	RED_LIGHT_CAMERA(12, R.string.traffic_warning_red_light_camera);
+	RED_LIGHT_CAMERA(12, R.string.traffic_warning_red_light_camera),
+	TRAM(4, R.string.traffic_warning_tram);
 
 	private final int priority;
 	private final int titleId;

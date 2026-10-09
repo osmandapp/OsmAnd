@@ -306,6 +306,8 @@ public class AlarmWidget {
 			} else {
 				locImgId = R.drawable.warnings_railways;
 			}
+		} else if (alarm.getType() == TRAM) {
+			locImgId = R.drawable.warnings_tram;
 		} else if (alarm.getType() == PEDESTRIAN) {
 			if (americanType) {
 				locImgId = R.drawable.warnings_pedestrian_us;

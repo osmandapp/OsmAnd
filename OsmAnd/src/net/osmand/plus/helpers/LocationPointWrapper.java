@@ -101,6 +101,8 @@ public class LocationPointWrapper {
 				} else {
 					return AppCompatResources.getDrawable(context, R.drawable.list_warnings_railways);
 				}
+			} else if (typeString.equals("TRAM")) {
+				return AppCompatResources.getDrawable(context, R.drawable.list_warnings_tram);
 			} else if (typeString.equals("TRAFFIC_CALMING")) {
 				if (region.isAmericanTypeSigns()) {
 					return AppCompatResources.getDrawable(context, R.drawable.list_warnings_traffic_calming_us);
