@@ -413,23 +413,30 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 		bld.setMessage(sb.toString());
 		bld.setPositiveButton(R.string.shared_string_restart, (dialog, which) -> {
-			confirm(app, activity, newDataStorage, true);
+			confirm(app, activity, newDataStorage);
+			restart(true);
 		});
 		bld.show();
 	}
 
 	private void confirm(OsmandApplication app, OsmandActionBarActivity activity, StorageItem newStorageDirectory, boolean silentRestart) {
-		confirm(app, activity, newStorageDirectory);
-		if (!firstUsage) {
-			RestartActivity.doRestart(activity, silentRestart);
+		if (confirm(app, activity, newStorageDirectory)) {
+			restart(silentRestart);
 		}
 	}
 
-	private void confirm(OsmandApplication app, OsmandActionBarActivity activity, StorageItem newStorageDirectory) {
+	private void restart(boolean silent) {
+		if (!firstUsage) {
+			RestartActivity.doRestart(activity, silent);
+		}
+	}
+
+	private boolean confirm(OsmandApplication app, OsmandActionBarActivity activity, StorageItem newStorageDirectory) {
 		String newDirectory = newStorageDirectory.getDirectory();
 		int type = newStorageDirectory.getType();
 		File newDirectoryFile = new File(newDirectory);
-		boolean wr = FileUtils.isWritable(newDirectoryFile);
+		String error = FileUtils.getWriteError(newDirectoryFile, false);
+		boolean wr = error == null;
 		if (wr) {
 			if (storageMigration) {
 				dismiss();
@@ -442,10 +449,23 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 				((StorageSelectionListener) target).onStorageSelected(newStorageDirectory);
 			}
 		} else {
-			app.showToastMessage(R.string.specified_directiory_not_writeable);
+			showNotWritableDialog(newDirectoryFile, error);
 		}
 		refreshDataInfo();
 		updateAllSettings();
+		return wr;
+	}
+
+	private void showNotWritableDialog(@NonNull File dir, @NonNull String error) {
+		Context ctx = getContext();
+		if (ctx != null) {
+			new AlertDialog.Builder(ctx)
+					.setMessage(getString(R.string.specified_directiory_not_writeable) + "\n\n" + dir + "\n" + error)
+					.setPositiveButton(R.string.shared_string_ok, null)
+					.show();
+		} else {
+			app.showToastMessage(R.string.specified_directiory_not_writeable);
+		}
 	}
 
 	private void refreshDataInfo() {
@@ -454,7 +474,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 
 	@Override
 	public void onRestartSelected() {
-		confirm(app, activity, newDataStorage, true);
+		confirm(app, activity, newDataStorage);
+		restart(true);
 	}
 
 	@Override

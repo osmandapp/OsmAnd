@@ -6,12 +6,16 @@ import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLO
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_PART_NAME;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 
+import android.system.ErrnoException;
+import android.system.Os;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
@@ -39,6 +43,8 @@ import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -50,6 +56,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class FileUtils {
+
+	private static final Log LOG = PlatformUtil.getLog(FileUtils.class);
 
 	public static final int APPROXIMATE_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 	private static final long STALE_BUILD_PART_MS = 3 * 24 * 60 * 60 * 1000L;
@@ -382,30 +390,50 @@ public class FileUtils {
 	}
 
 	public static boolean isWritable(@NonNull File dirToTest, boolean testWrite) {
+		return getWriteError(dirToTest, testWrite) == null;
+	}
+
+	/**
+	 * Checks that a file can be created in the directory (and, with testWrite, written and read back).
+	 *
+	 * @return null when the directory is writable, otherwise the reason why it is not
+	 */
+	@Nullable
+	public static String getWriteError(@NonNull File dirToTest, boolean testWrite) {
 		InputStream in = null;
 		OutputStream out = null;
-		boolean isWriteable;
+		File writeTestFile = null;
 		try {
 			dirToTest.mkdirs();
-			File writeTestFile = File.createTempFile("osmand_", ".tmp", dirToTest);
-			isWriteable = writeTestFile.exists();
-
-			if (isWriteable && testWrite) {
+			if (!dirToTest.isDirectory()) {
+				// File.mkdirs() hides the reason, repeat the last step with Os.mkdir() to get the errno
+				Os.mkdir(dirToTest.getAbsolutePath(), 0777);
+			}
+			writeTestFile = File.createTempFile("osmand_", ".tmp", dirToTest);
+			if (!writeTestFile.exists()) {
+				throw new IOException("test file was not created");
+			}
+			if (testWrite) {
 				out = new FileOutputStream(writeTestFile);
 				Algorithms.writeInt(out, Integer.reverseBytes(XML_FILE_SIGNATURE));
 
 				in = new FileInputStream(writeTestFile);
-				int fileSignature = Algorithms.readInt(in);
-				isWriteable = XML_FILE_SIGNATURE == fileSignature;
+				if (XML_FILE_SIGNATURE != Algorithms.readInt(in)) {
+					throw new IOException("test file content mismatch");
+				}
 			}
-			writeTestFile.delete();
-		} catch (IOException e) {
-			isWriteable = false;
+			return null;
+		} catch (IOException | ErrnoException e) {
+			String reason = Algorithms.isEmpty(e.getMessage()) ? e.toString() : e.getMessage();
+			LOG.warn("Directory is not writable: " + dirToTest + " (" + reason + ")");
+			return reason;
 		} finally {
 			Algorithms.closeStream(in);
 			Algorithms.closeStream(out);
+			if (writeTestFile != null) {
+				writeTestFile.delete();
+			}
 		}
-		return isWriteable;
 	}
 
 	public static boolean isTempFile(@NonNull OsmandApplication app, @Nullable String path) {
