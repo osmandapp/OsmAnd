@@ -897,7 +897,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					} else {
 						float obstacle = hctx.rctx.getRouter().defineRoutingObstacle(
 								o.getRoad(), o.getSegmentStart(), o.getSegmentStart() > o.getSegmentEnd());
-						if (obstacle < 0) {
+						if (obstacle < 0 || hctx.rctx.getRouter().isImpassableSegment(o.getRoad(), o.getSegmentStart(), o.getSegmentEnd())) {
 							continue;
 						}
 						o.distanceFromStart += planner.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2 + obstacle;
