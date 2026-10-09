@@ -76,6 +76,9 @@ public class MapTileDownloader {
 		 * @param request
 		 */
 		void tileDownloaded(DownloadRequest request);
+
+		default void tileDownloadFailed(DownloadRequest request) {
+		}
 	}
 
 	/**
@@ -265,6 +268,8 @@ public class MapTileDownloader {
 				}
 				if (!request.error) {
 					fireLoadCallback(request);
+				} else {
+					fireFailedCallback(request);
 				}
 			}
 		}
@@ -272,6 +277,15 @@ public class MapTileDownloader {
 		@Override
 		public int compareTo(DownloadMapWorker o) {
 			return 0;
+		}
+	}
+
+	private void fireFailedCallback(DownloadRequest request) {
+		for (WeakReference<IMapDownloaderCallback> callback : callbacks) {
+			IMapDownloaderCallback c = callback != null ? callback.get() : null;
+			if (c != null) {
+				c.tileDownloadFailed(request);
+			}
 		}
 	}
 

@@ -19,7 +19,9 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @SuppressWarnings("deprecation")
 class DownloadTilesTask extends AsyncTask<Void, Void, Boolean> {
@@ -46,6 +48,7 @@ class DownloadTilesTask extends AsyncTask<Void, Void, Boolean> {
 	private int activeRequests;
 	private long availableTiles;
 	private long totalTilesBytes;
+	private final Set<String> failedTilesIds = Collections.synchronizedSet(new HashSet<>());
 	private final List<String> recentlyDownloadedTilesIds = Collections.synchronizedList(new ArrayList<>());
 
 	public boolean cancelled;
@@ -67,14 +70,32 @@ class DownloadTilesTask extends AsyncTask<Void, Void, Boolean> {
 
 		resourceManager = app.getResourceManager();
 		tileDownloader = MapTileDownloader.getInstance(Version.getAppVersion(app));
-		tileDownloadCallback = request -> {
-			if (request != null && isTileShouldBeCounted(request)) {
-				recentlyDownloadedTilesIds.add(request.tileId);
-				long tileSize = request.fileToSave.length();
-				totalTilesBytes += tileSize;
-				app.runInUIThread(() -> listener.onTileDownloaded(availableTiles++, totalTilesBytes));
+		tileDownloadCallback = new IMapDownloaderCallback() {
+			@Override
+			public void tileDownloaded(DownloadRequest request) {
+				if (request != null && isTileShouldBeCounted(request)) {
+					if (failedTilesIds.remove(request.tileId)) {
+						notifyTileFailed();
+					}
+					recentlyDownloadedTilesIds.add(request.tileId);
+					long tileSize = request.fileToSave.length();
+					totalTilesBytes += tileSize;
+					app.runInUIThread(() -> listener.onTileDownloaded(availableTiles++, totalTilesBytes));
+				}
+			}
+
+			@Override
+			public void tileDownloadFailed(DownloadRequest request) {
+				if (request != null && isTileShouldBeCounted(request) && failedTilesIds.add(request.tileId)) {
+					notifyTileFailed();
+				}
 			}
 		};
+	}
+
+	private void notifyTileFailed() {
+		long failed = failedTilesIds.size();
+		app.runInUIThread(() -> listener.onTileFailed(failed));
 	}
 
 	public void setCancelled(boolean cancelled) {
@@ -160,8 +181,12 @@ class DownloadTilesTask extends AsyncTask<Void, Void, Boolean> {
 	}
 
 	private void waitOutDownloadErrors() throws InterruptedException {
-		while (!cancelled && tileDownloader.shouldSkipRequests()) {
-			Thread.sleep(HALF_SECOND);
+		if (!cancelled && tileDownloader.shouldSkipRequests()) {
+			app.runInUIThread(() -> listener.onWaitingForServer(true));
+			while (!cancelled && tileDownloader.shouldSkipRequests()) {
+				Thread.sleep(HALF_SECOND);
+			}
+			app.runInUIThread(() -> listener.onWaitingForServer(false));
 		}
 	}
 

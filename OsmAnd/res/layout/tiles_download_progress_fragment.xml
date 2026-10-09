@@ -75,6 +75,18 @@
 			android:textColor="?android:textColorPrimary"
 			tools:text="Tiles: 65 000 (12 700)" />
 
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/failed_number"
+			style="@style/TitleStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingBottom="@dimen/content_padding_small"
+			android:textColor="@color/color_warning"
+			android:visibility="gone"
+			tools:text="Failed: 37"
+			tools:visibility="visible" />
+
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/dialog_button_ex_height"
@@ -84,10 +96,22 @@
 
 			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/cancel_button"
-				android:layout_width="match_parent"
+				android:layout_width="0dp"
 				android:layout_height="wrap_content"
+				android:layout_weight="1"
 				app:dialogButtonType="secondary"
 				tools:dialogButtonTitle="@string/shared_string_cancel" />
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/retry_button"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_marginStart="@dimen/content_padding_small"
+				android:visibility="gone"
+				app:dialogButtonType="primary"
+				app:dialogButtonTitle="@string/retry"
+				tools:visibility="visible" />
 
 		</LinearLayout>
 
