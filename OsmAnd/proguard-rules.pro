@@ -71,6 +71,13 @@
 -keepclassmembers enum net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty { <fields>; }
 -keep class org.openplacereviews.** { *; }
 
+# --- Preference listener lifetime anchors ---
+# PreferenceWithListener stores callbacks weakly.
+# Annotated fields are strong lifetime anchors and must not be optimized away.
+-keepclassmembers,allowobfuscation class * {
+	@net.osmand.plus.settings.backend.preferences.KeepListenerReference <fields>;
+}
+
 # --- Reflection on R: poi_*/translation strings and h_*/mm_* rendering icons are read by field name ---
 -keepclassmembers class net.osmand.plus.R$string { public static <fields>; }
 -keepclassmembers class net.osmand.plus.R$drawable { public static <fields>; }
