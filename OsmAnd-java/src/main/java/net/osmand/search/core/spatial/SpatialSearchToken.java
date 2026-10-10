@@ -327,7 +327,14 @@ public class SpatialSearchToken {
 				// select shortest available version (see number of tests 'Piazza Trento e Trieste', netherlands_amsterdam_eerste_helmersstraat...)
 				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
 					res = Integer.compare(atom.otherWordsCnt, existing.otherWordsCnt);
-					if (res == 0) {
+					if (res == 0 && atom.ruleSpelling != existing.ruleSpelling) {
+						// a name of OSM and its spelling made by a rule ("о. пасхи", "пасхи"): the one with more words of
+						// the query, the name of OSM when they have as many
+						res = Integer.compare(existing.otherFoundCnt, atom.otherFoundCnt);
+						if (res == 0) {
+							res = Boolean.compare(atom.ruleSpelling, existing.ruleSpelling);
+						}
+					} else if (res == 0) {
 						res = Integer.compare(atom.otherFoundCnt, existing.otherFoundCnt);
 					}
 				} else if (res == 0) {
@@ -343,6 +350,12 @@ public class SpatialSearchToken {
 				// 'вулиця 28-ма Лінія 28': '28-ма' names the street, the bare 28 keeps its house
 				if (numberNamedByOther && (existing.isBuilding() || existing.isPOIRef()) && !(atom.isBuilding() || atom.isPOIRef())) {
 					res = 0;
+				}
+				// a ref or a house number guessed from a spelling made by a rule takes no word of a name of OSM: "о." of
+				// "о. Пасхи" is no ref of "Пасхи" unglued from it
+				if (atom.ruleSpelling && !existing.ruleSpelling
+						&& (atom.isBuilding() || atom.isPOIRef()) != (existing.isBuilding() || existing.isPOIRef())) {
+					res = 1;
 				}
 				boolean replace = res < 0;
 				if (replace) {
@@ -735,6 +748,8 @@ public class SpatialSearchToken {
 		NameIndexAtom sameNameAreaObj;
 		// rules locale of the map of the atom
 		String locale = "";
+		// found by a name the OBF writer made by a search rule, not by a name of OSM
+		boolean ruleSpelling;
 
 		NameIndexAtom(String name, long id, int total) {
 			this(name, SpatialSearchToken.POI_CATEGORY_TYPE, id, 0, null, false, -total, total,
@@ -747,6 +762,7 @@ public class SpatialSearchToken {
 			this.poiTypes = cp.poiTypes;
 			this.distinctFoundCnt = cp.distinctFoundCnt;
 			this.locale = cp.locale;
+			this.ruleSpelling = cp.ruleSpelling;
 		}
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,
