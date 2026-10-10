@@ -23,7 +23,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SharedPoiTypes;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
@@ -78,7 +77,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		}
 		genericRowKeys = AdditionalInfoBundle.getGenericRowKeys(storedExtensions);
 		mergedAmenityExtensions = helper.getUpdatedAmenityExtensions(storedExtensions, amenity);
-		mergedAmenityInfoBundle = new AdditionalInfoBundle(SharedPoiTypes.get(app), mergedAmenityExtensions);
+		mergedAmenityInfoBundle = new AdditionalInfoBundle(app.getKPoiTypes(), mergedAmenityExtensions);
 		if (amenity != null) {
 			sourceAmenityExtensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
 			setCustomOnlinePhotosPosition(sourceAmenityExtensions.containsKey(WIKIDATA));
@@ -146,7 +145,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	@Nullable
 	private AmenityDescriptionBuilder createSourceAmenityDescriptionBuilder() {
 		if (amenity != null) {
-			AdditionalInfoBundle bundle = new AdditionalInfoBundle(SharedPoiTypes.get(app), sourceAmenityExtensions);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getKPoiTypes(), sourceAmenityExtensions);
 			return new AmenityDescriptionBuilder(this, amenity, bundle, isLightContent());
 		}
 		return null;

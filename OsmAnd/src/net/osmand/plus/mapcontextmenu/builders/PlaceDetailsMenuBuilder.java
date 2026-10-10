@@ -19,7 +19,6 @@ import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
-import net.osmand.plus.SharedPoiTypes;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -87,7 +86,7 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 	private boolean buildDescription(@NonNull View view, @NonNull Amenity amenity,
 			boolean allowOnlineWiki) {
 		Map<String, String> extensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
-		AdditionalInfoBundle bundle = new AdditionalInfoBundle(SharedPoiTypes.get(app), extensions);
+		AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getKPoiTypes(), extensions);
 		Map<String, Object> filteredInfo = bundle.getFilteredLocalizedInfo();
 
 		if (buildShortWikiDescription(view, filteredInfo, allowOnlineWiki)) {

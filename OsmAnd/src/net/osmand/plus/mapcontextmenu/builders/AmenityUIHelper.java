@@ -29,7 +29,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SharedPoiTypes;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -239,7 +238,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private void initVariables() {
 		poiCategory = additionalInfo.getCategory();
 		subtype = additionalInfo.get(SUBTYPE);
-		poiTypes = SharedPoiTypes.get(app);
+		poiTypes = app.getKPoiTypes();
 		osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 		preferredLangCandidates = LocaleHelper.getPreferredLangCandidates(app);
 	}
@@ -617,27 +616,10 @@ public class AmenityUIHelper extends MenuBuilder {
 			PoiCategory category = pt.getCategory() != null ? pt.getCategory() : type;
 
 			button.setOnClickListener(v -> {
-				// the search filters are built on the java registry: take its types by key name
-				net.osmand.osm.PoiCategory filterCategory = category != null
-						? app.getPoiTypes().getPoiCategoryByName(category.getKeyName()) : null;
-				if (filterCategory != null) {
-					PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + filterCategory.getKeyName());
-					if (filter != null) {
-						filter.clearFilter();
-						if (poiAdditional) {
-							filter.setTypeToAccept(filterCategory, true);
-							net.osmand.osm.AbstractPoiType filterType = app.getPoiTypes().getAnyPoiAdditionalTypeByKey(pt.getKeyName());
-							if (filterType != null) {
-								filter.updateTypesToAccept(filterType);
-							}
-							filter.setFilterByName(pt.getKeyName().replace('_', ':').toLowerCase());
-						} else {
-							LinkedHashSet<String> accept = new LinkedHashSet<>();
-							accept.add(pt.getKeyName());
-							filter.selectSubTypesToAccept(filterCategory, accept);
-						}
-						getMapActivity().getFragmentsHelper().showQuickSearch(filter);
-					}
+				PoiUIFilter filter = category != null
+						? app.getPoiFilters().getPoiTypeFilter(category.getKeyName(), pt.getKeyName(), poiAdditional) : null;
+				if (filter != null) {
+					getMapActivity().getFragmentsHelper().showQuickSearch(filter);
 				}
 			});
 			buttons.add(button);
