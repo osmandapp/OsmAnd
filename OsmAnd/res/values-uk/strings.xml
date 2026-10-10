@@ -5319,4 +5319,9 @@
     <string name="attached_media">Прикріплені медіафайли</string>
     <string name="get_unlimited_downloads">Отримайте необмежену кількість завантажень</string>
     <string name="navigate_point_east_coordinate">Східна координата</string>
+    <string name="map_source_saved_as">Джерело мапи збережено як «%1$s».</string>
+    <string name="map_source_folder_not_created">Не вдалося створити теку для джерела мапи. Спробуйте вказати іншу назву.</string>
+    <string name="shared_string_file">Файл</string>
+    <string name="shared_string_format">Фрмат</string>
+    <string name="delete_media_title">Видалити медіа?</string>
 </resources>
