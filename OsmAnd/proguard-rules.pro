@@ -88,7 +88,6 @@
 -keep,allowshrinking,allowoptimization class net.osmand.osm.MapPoiTypes
 -keep,allowshrinking,allowoptimization class net.osmand.osm.MapRenderingTypes
 -keep,allowshrinking,allowoptimization class net.osmand.map.OsmandRegions
--keep,allowshrinking,allowoptimization class net.osmand.binary.CommonWordsMultiIndex
 # ICU4J (Reshaper: Bidi, ArabicShaping) reads data/icudt49b/*.icu relative to its own classes.
 -keep,allowshrinking,allowoptimization class com.ibm.icu.**
 

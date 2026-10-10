@@ -18,7 +18,7 @@ public class SearchModLocalesTest {
 		assertEquals("nl_BE", locales.forMap("Belgium_flanders_europe"));
 		assertEquals("fr_CA", locales.forMap("Canada_quebec_northamerica"));
 		assertEquals("en_CA", locales.forMap("Canada_ontario_northamerica"));
-		// a group of CommonWordsMultiIndex ("esl", "nor") is not a language
+		// a statistics group ("esl", "nor") is not a language
 		assertEquals("ru_RU", locales.forMap("Russia_moscow_asia"));
 		assertEquals("nb_NO", locales.forMap("Norway_europe"));
 		assertEquals("ka_GE", locales.forMap("Georgia_asia"));

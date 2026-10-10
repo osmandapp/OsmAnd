@@ -17,8 +17,8 @@ import java.util.Set;
  * wins. A map this table does not cover gets "" and only the base rules. The table gives every map its rules locale,
  * its statistics group and its transliteration of names.
  * <p>
- * This is not the language group of {@link net.osmand.binary.CommonWordsMultiIndex}: a group ("esl", "nor", "cjk") pools the word
- * statistics of several languages, while a rules locale names one language and one country.
+ * A statistics group is not a language: a group ("esl", "nor", "cjk") pools the word statistics of several languages
+ * for the OBF writer, while a rules locale names one language and one country.
  */
 public final class SearchModLocales {
 
