@@ -842,7 +842,7 @@ public class SpatialPipelineSearch {
 			enlargeBboxes(currentLevel);
 			depth = runSearch(tokensSize, depth, currentLevel);
 		}
-		if (ctx.overallResults <= MIN_RESULTS_PARTIAL && tokensSize > 1 && !ctx.isCancelled()) {
+		if (ctx.nonCatResults <= MIN_RESULTS_PARTIAL && tokensSize > 1 && !ctx.isCancelled()) {
 			if (ctx.stats.printLogs) {
 				System.out.printf("PIPELINE LOOKUP %d partial results\n", depth);
 			}
