@@ -18,6 +18,52 @@ import java.nio.charset.StandardCharsets;
 public class GpxWriteTest {
 
 	@Test
+	public void testLegacyAmenityCommentRecognition() {
+		for (String origin : new String[] {
+				"Amenity:Bakery: shop:bakery",
+				"Amenity:Bakery:shop:bakery",
+				"Amenity legacy comment"
+		}) {
+			GPXFile gpxFile = loadGpx("<gpx version=\"1.1\" creator=\"test\">"
+					+ "<wpt lat=\"10.0\" lon=\"20.0\"><cmt>" + origin + "</cmt></wpt></gpx>");
+			WptPt point = gpxFile.points.get(0);
+			assertEquals(origin, point.getAmenityOriginName());
+			assertFalse(point.getExtensionsToRead().containsKey(GPXUtilities.AMENITY_ORIGIN_EXTENSION));
+		}
+
+		WptPt point = new WptPt();
+		assertNull(point.getAmenityOriginName());
+		point.comment = "TransportStop:Bakery";
+		assertNull(point.getAmenityOriginName());
+		point.comment = "u6:Bakery: shop:bakery";
+		assertNull(point.getAmenityOriginName());
+	}
+
+	@Test
+	public void testAmenityOriginExtensionTakesPrecedenceWithoutRewriting() {
+		String comment = "Amenity:Comment: shop:bakery";
+		for (String origin : new String[] {"Amenity:Extension: shop:bakery", "u6:Bakery: shop:bakery"}) {
+			GPXFile gpxFile = loadGpx("<gpx version=\"1.1\" creator=\"test\""
+					+ " xmlns:osmand=\"https://osmand.net\"><wpt lat=\"10.0\" lon=\"20.0\">"
+					+ "<cmt>" + comment + "</cmt><extensions><osmand:amenity_origin>"
+					+ origin + "</osmand:amenity_origin></extensions></wpt></gpx>");
+			WptPt point = gpxFile.points.get(0);
+			assertEquals(origin, point.getAmenityOriginName());
+			assertEquals(origin, point.getExtensionsToRead().get(GPXUtilities.AMENITY_ORIGIN_EXTENSION));
+			assertEquals(comment, point.comment);
+
+			WptPt reloaded = loadGpx(writeGpx(gpxFile)).points.get(0);
+			assertEquals(origin, reloaded.getAmenityOriginName());
+			assertEquals(comment, reloaded.comment);
+		}
+
+		WptPt point = new WptPt();
+		point.comment = comment;
+		point.setAmenityOriginName("");
+		assertEquals("", point.getAmenityOriginName());
+	}
+
+	@Test
 	public void testSpeedIsKeptInTheFieldOnly() {
 		GPXFile gpxFile = loadGpx("<gpx version=\"1.1\" creator=\"test\"><trk><trkseg>"
 				+ "<trkpt lat=\"10.0\" lon=\"20.0\">"
