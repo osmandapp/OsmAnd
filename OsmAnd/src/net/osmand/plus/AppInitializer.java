@@ -296,6 +296,7 @@ public class AppInitializer implements IProgress {
 	public void reInitPoiTypes() {
 		MapPoiTypes.setDefault(new MapPoiTypes(null));
 		app.poiTypes = MapPoiTypes.getDefaultNoInit();
+		app.kPoiTypes = KPoiTypes.createEmpty();
 		initPoiTypes();
 	}
 
@@ -306,7 +307,9 @@ public class AppInitializer implements IProgress {
 		} else {
 			app.poiTypes.init();
 		}
-		app.poiTypes.setPoiTranslator(new MapPoiTypesTranslator(app));
+		MapPoiTypesTranslator translator = new MapPoiTypesTranslator(app);
+		app.poiTypes.setPoiTranslator(translator);
+		KPoiTypes.init(app, app.kPoiTypes, translator);
 		notifyEvent(POI_TYPES_INITIALIZED);
 	}
 
@@ -330,6 +333,7 @@ public class AppInitializer implements IProgress {
 		app.panelAppearanceSettingsManager = startupInit(
 				new PanelAppearanceSettingsManager(app, settings), PanelAppearanceSettingsManager.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
+		app.kPoiTypes = KPoiTypes.createEmpty();
 		app.transportRoutingHelper = startupInit(new TransportRoutingHelper(app), TransportRoutingHelper.class);
 		app.routingHelper = startupInit(new RoutingHelper(app), RoutingHelper.class);
 		app.routingOptionsHelper = startupInit(new RoutingOptionsHelper(app), RoutingOptionsHelper.class);

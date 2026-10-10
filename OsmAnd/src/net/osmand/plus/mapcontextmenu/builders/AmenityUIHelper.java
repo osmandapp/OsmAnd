@@ -25,15 +25,8 @@ import androidx.core.util.Pair;
 import androidx.core.util.PatternsCompat;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityTagEntry;
-import net.osmand.data.AmenityTagEntriesBuilder;
 import net.osmand.data.LatLon;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -52,6 +45,13 @@ import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.shared.data.AdditionalInfoBundle;
+import net.osmand.shared.data.AmenityTagEntriesBuilder;
+import net.osmand.shared.data.AmenityTagEntry;
+import net.osmand.shared.osm.AbstractPoiType;
+import net.osmand.shared.osm.MapPoiTypes;
+import net.osmand.shared.osm.PoiCategory;
+import net.osmand.shared.osm.PoiType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -70,7 +70,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private String subtype;
 	private boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 	private List<String> preferredLangCandidates;
-	private Set<String> externalNamespaceKeys = Collections.emptySet();
+	private Set<String> genericRowKeys = Collections.emptySet();
 
 	public AmenityUIHelper(@NonNull MapActivity mapActivity,
 	                       @NonNull AdditionalInfoBundle infoBundle) {
@@ -86,7 +86,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityTagEntry> descriptions = new ArrayList<>();
 
 		List<AmenityTagEntry> visibleTags = additionalInfo.getVisibleTags(osmEditingEnabled,
-				preferredLangCandidates, externalNamespaceKeys);
+				preferredLangCandidates, genericRowKeys);
 		for (AmenityTagEntry baseEntry : visibleTags) {
 			AmenityTagEntry amenityEntry = buildEntryData(context, baseEntry);
 			if (amenityEntry == null) {
@@ -185,17 +185,17 @@ public class AmenityUIHelper extends MenuBuilder {
 	private AmenityTagEntry.Builder getEntryDataBuilder(@NonNull Context context, @NonNull String key,
 	                                                    @NonNull String value, boolean isDescription,
 	                                                    @NonNull AdditionalInfoBundle.ResolvedPoiType resolvedType) {
-		if (resolvedType.additionalType() == null && resolvedType.categoryType() != null) {
+		if (resolvedType.getAdditionalType() == null && resolvedType.getCategoryType() != null) {
 			return null;
 		}
 		AmenityTagEntry.Builder entryBuilder =
 				new AmenityTagEntry.Builder(key).setValue(value).setIsDescription(isDescription);
 		PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
-		if (resolvedType.additionalType() != null) {
-			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.additionalType(),
+		if (resolvedType.getAdditionalType() != null) {
+			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.getAdditionalType(),
 					key, value, subtype);
 		} else {
-			boolean useGenericFallback = externalNamespaceKeys.contains(key);
+			boolean useGenericFallback = genericRowKeys.contains(key);
 			String displayKey = useGenericFallback ? getGenericFallbackDisplayKey(key) : key;
 			PoiType fallbackType = new PoiType(poiTypes, poiCategory, null, displayKey, poiCategory.getIconKeyName());
 			fallbackType.setText(true);
@@ -238,7 +238,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private void initVariables() {
 		poiCategory = additionalInfo.getCategory();
 		subtype = additionalInfo.get(SUBTYPE);
-		poiTypes = app.getPoiTypes();
+		poiTypes = app.getKPoiTypes();
 		osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 		preferredLangCandidates = LocaleHelper.getPreferredLangCandidates(app);
 	}
@@ -616,21 +616,10 @@ public class AmenityUIHelper extends MenuBuilder {
 			PoiCategory category = pt.getCategory() != null ? pt.getCategory() : type;
 
 			button.setOnClickListener(v -> {
-				if (category != null) {
-					PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + category.getKeyName());
-					if (filter != null) {
-						filter.clearFilter();
-						if (poiAdditional) {
-							filter.setTypeToAccept(category, true);
-							filter.updateTypesToAccept(pt);
-							filter.setFilterByName(pt.getKeyName().replace('_', ':').toLowerCase());
-						} else {
-							LinkedHashSet<String> accept = new LinkedHashSet<>();
-							accept.add(pt.getKeyName());
-							filter.selectSubTypesToAccept(category, accept);
-						}
-						getMapActivity().getFragmentsHelper().showQuickSearch(filter);
-					}
+				PoiUIFilter filter = category != null
+						? app.getPoiFilters().getPoiTypeFilter(category.getKeyName(), pt.getKeyName(), poiAdditional) : null;
+				if (filter != null) {
+					getMapActivity().getFragmentsHelper().showQuickSearch(filter);
 				}
 			});
 			buttons.add(button);
@@ -702,8 +691,8 @@ public class AmenityUIHelper extends MenuBuilder {
 		return null;
 	}
 
-	public void setExternalNamespaceKeys(@NonNull Collection<String> externalNamespaceKeys) {
-		this.externalNamespaceKeys = new HashSet<>(externalNamespaceKeys);
+	public void setGenericRowKeys(@NonNull Collection<String> genericRowKeys) {
+		this.genericRowKeys = new HashSet<>(genericRowKeys);
 	}
 
 	@NonNull

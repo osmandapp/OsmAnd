@@ -1,13 +1,13 @@
 package net.osmand.plus.mapcontextmenu.builders.rows
 
 import android.content.Context
-import net.osmand.data.AmenityTagEntry.Builder
-import net.osmand.osm.PoiType
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.mapcontextmenu.MenuBuilder
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.DefaultPoiAdditionalRowBehaviour
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.IPoiAdditionalRowBehavior
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.PoiRowParams
+import net.osmand.shared.data.AmenityTagEntry.Builder
+import net.osmand.shared.osm.PoiType
 
 class PoiAdditionalUiRule(
     val key: String,
