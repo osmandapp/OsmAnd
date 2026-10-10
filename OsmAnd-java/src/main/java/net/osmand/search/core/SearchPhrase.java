@@ -169,15 +169,22 @@ public class SearchPhrase {
 				boolean decryptAbbreviations = needDecryptAbbreviations();
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
-						sp.firstUnknownSearchWord = decryptAbbreviations ? Abbreviations.replace(wd) : wd;
+						sp.firstUnknownSearchWord = decryptAbbreviations ? decryptAbbreviation(wd) : wd;
 						first = false;
 					} else {
-						sp.otherUnknownWords.add(decryptAbbreviations ? Abbreviations.replace(wd) : wd);
+						sp.otherUnknownWords.add(decryptAbbreviations ? decryptAbbreviation(wd) : wd);
 					}
 				}
 			}
 		}
 		return sp;
+	}
+
+	// "ln" -> "Lane", "sw" -> "Southwest"; a word the full form starts with stays as it is: names match it by prefix
+	// anyway ("st" finds "Street"), and "St Mary's Road" is Saint, not "Street Mary's Road"
+	private static String decryptAbbreviation(String word) {
+		String full = Abbreviations.replace(word);
+		return full.toLowerCase().startsWith(word.toLowerCase()) ? word : full;
 	}
 
 	private boolean needDecryptAbbreviations() {
