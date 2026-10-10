@@ -5450,4 +5450,6 @@
     <string name="aidl_group_system">Sistem</string>
     <string name="aidl_group_system_descr">Fajlovi, zapisi, lažna lokacija</string>
     <string name="route_calculation_out_of_memory">Ruta je predugačka za izračunavanje na ovom uređaju. Dodajte međutačke ili izaberite bližu destinaciju.</string>
+    <string name="map_source_saved_as">Izvor mape sačuvan kao \'%1$s\'.</string>
+    <string name="map_source_folder_not_created">Nije bilo moguće kreirati folder za izvor mape. Pokušajte sa drugim imenom.</string>
 </resources>
