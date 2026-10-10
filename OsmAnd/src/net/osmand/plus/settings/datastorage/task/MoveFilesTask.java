@@ -107,7 +107,11 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 	protected Map<String, Pair<String, Long>> doInBackground(Void... params) {
 		File destinationDir = new File(to.getDirectory());
 		Map<String, Pair<String, Long>> errors = new HashMap<>();
-		if (!FileUtils.isWritable(destinationDir, true)) {
+		String writeError = FileUtils.getWriteError(destinationDir, true);
+		if (writeError != null) {
+			for (File file : files) {
+				errors.put(file.getAbsolutePath(), new Pair<>(writeError, file.length()));
+			}
 			return errors;
 		}
 		FileCopyListener fileCopyListener = getCopyFilesListener();
