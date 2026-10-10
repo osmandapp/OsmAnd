@@ -26,7 +26,6 @@ class AdditionalInfoBundle(
 	val additionalInfo: Map<String, String>?
 ) {
 
-	// the default registry, empty until the platform has read poi_types.xml, as the java registry was
 	constructor(additionalInfo: Map<String, String>?) : this(MapPoiTypes.getDefaultNoInit(), additionalInfo)
 
 	data class ResolvedPoiType(val additionalType: PoiType?, val categoryType: PoiType?)
@@ -69,10 +68,6 @@ class AdditionalInfoBundle(
 		return result
 	}
 
-	/**
-	 * @param genericRowKeys keys that must still get a generic row when the category does not
-	 *                       show default tags, see getGenericRowKeys().
-	 */
 	@JvmOverloads
 	fun getVisibleTags(
 		allowNoteTag: Boolean, preferredLangs: List<String>?,
@@ -341,7 +336,6 @@ class AdditionalInfoBundle(
 			TYPE, SUBTYPE, GpxUtilities.ORIGIN_EXTENSION, GpxUtilities.OSM_URL_EXTENSION
 		)
 
-		// OsmAnd's own point fields that are not in HIDDEN_EXTENSIONS: never a generic row
 		private val SERVICE_KEYS = setOf(
 			GpxUtilities.HIDDEN_EXTENSION, GpxUtilities.PINNED_EXTENSION, GpxUtilities.POINT_TYPE_EXTENSION,
 			GpxUtilities.LINE_WIDTH_EXTENSION, GpxUtilities.TRKPT_INDEX_EXTENSION, GpxUtilities.POINT_ELEVATION,
@@ -355,10 +349,6 @@ class AdditionalInfoBundle(
 		private const val CUISINE_INFO_ID = COLLAPSABLE_PREFIX + Amenity.CUISINE
 		private const val DISH_INFO_ID = COLLAPSABLE_PREFIX + Amenity.DISH
 
-		/**
-		 * A point shows all its data: every stored extension the POI logic does not know ("hr", "my_note",
-		 * "test:country") gets a generic row, only OsmAnd's own point fields and namespaces are skipped.
-		 */
 		@JvmStatic
 		fun getGenericRowKeys(storedExtensions: Map<String, String>): Set<String> =
 			storedExtensions.keys.filterTo(HashSet()) { key ->

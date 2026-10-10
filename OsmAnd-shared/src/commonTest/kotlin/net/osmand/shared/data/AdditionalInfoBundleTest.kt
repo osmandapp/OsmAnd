@@ -13,7 +13,6 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlin.test.fail
 
-// The rows of a point card that Android, iOS and the web server build from the tags of a POI or a GPX point.
 class AdditionalInfoBundleTest {
 
 	private var poiTypes: MapPoiTypes? = null
