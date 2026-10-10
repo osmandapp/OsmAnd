@@ -261,7 +261,8 @@ public class SpatialSearchContext {
 					List<PrefixNameValue> prefixes = indx.getMatchedPrefixes(t.word);
 					if (prefixes == null) {
 						stats.sub1FileAtomsTime.start();
-						prefixes = files.get(fileInd).readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats, internalFile.get(fileInd).locale)));
+						prefixes = files.get(fileInd).readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats, internalFile.get(fileInd).locale,
+								indx.poiRegion != null)));
 						stats.sub1FileAtomsTime.finish();
 					}
 					for (PrefixNameValue p : prefixes == null ? List.<PrefixNameValue>of() : prefixes) {
@@ -555,7 +556,7 @@ public class SpatialSearchContext {
 			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(query);
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
-				matchedPrefixes = b.readFullNameIndex(indx.setQuery(query, t.getPrefixMatcher(stats, locale)));
+				matchedPrefixes = b.readFullNameIndex(indx.setQuery(query, t.getPrefixMatcher(stats, locale, indx.poiRegion != null)));
 				stats.sub1FileAtomsTime.finish();
 				if (matchedPrefixes == null) {
 					continue;

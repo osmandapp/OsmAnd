@@ -29,15 +29,28 @@ public class SpatialSearchQueryRulesTest {
 	public void prefixMatcherFollowsTheLocaleOfTheMap() {
 		SpatialSearchContext.SpatialSearchStats stats = new SpatialSearchContext.SpatialSearchStats();
 		SpatialSearchToken parkway = token("Pkwy");
-		Assert.assertTrue(parkway.getPrefixMatcher(stats, "en").matchKey("parkway"));
-		Assert.assertFalse(parkway.getPrefixMatcher(stats, "de").matchKey("parkway"));
+		Assert.assertTrue(parkway.getPrefixMatcher(stats, "en", false).matchKey("parkway"));
+		Assert.assertFalse(parkway.getPrefixMatcher(stats, "de", false).matchKey("parkway"));
 		// the first map does not change the matches of the second one
-		Assert.assertTrue(parkway.getPrefixMatcher(stats, "en").matchKey("parkway"));
+		Assert.assertTrue(parkway.getPrefixMatcher(stats, "en", false).matchKey("parkway"));
 		SpatialSearchToken avenue = token("Ave");
 		Assert.assertTrue(avenue.matchName("Esplanade", null, "en_US", SpatialSearchToken.STREET_TYPE));
 		Assert.assertFalse(avenue.matchName("Esplanade", null, "en", SpatialSearchToken.STREET_TYPE));
-		Assert.assertTrue(avenue.getPrefixMatcher(stats, "en_US").matchKey("esplanade"));
-		Assert.assertFalse(avenue.getPrefixMatcher(stats, "en").matchKey("esplanade"));
+		Assert.assertTrue(avenue.getPrefixMatcher(stats, "en_US", false).matchKey("esplanade"));
+		Assert.assertFalse(avenue.getPrefixMatcher(stats, "en", false).matchKey("esplanade"));
+	}
+
+	@Test
+	public void prefixMatcherFollowsTheKindOfTheIndex() {
+		SpatialSearchContext.SpatialSearchStats stats = new SpatialSearchContext.SpatialSearchStats();
+		// "pl" -> "Place" names streets: keys of an address index, not of a POI one
+		SpatialSearchToken pl = token("Pl");
+		Assert.assertTrue(pl.getPrefixMatcher(stats, "en", false).matchKey("place"));
+		Assert.assertFalse(pl.getPrefixMatcher(stats, "en", true).matchKey("place"));
+		// a form of every owner reads both
+		SpatialSearchToken sw = token("Sw");
+		Assert.assertTrue(sw.getPrefixMatcher(stats, "en", false).matchKey("southwest"));
+		Assert.assertTrue(sw.getPrefixMatcher(stats, "en", true).matchKey("southwest"));
 	}
 
 	@Test

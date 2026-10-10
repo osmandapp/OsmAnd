@@ -140,16 +140,20 @@ public class SpatialSearchToken {
 		CollatorStringMatcher[] otherMatch;
 		// forms for some owners only ("pl" -> "Place" of a street)
 		List<QueryMatcher> scopedMatch = new ArrayList<>();
-		// all forms: a key of a name index has no owner
-		CollatorStringMatcher[] prefixMatch;
+		// forms for the keys of an address and of a POI name index: a key has no owner, the kind of its index tells
+		// which owners it can have ("pl" -> "Place" of a street does not read POI keys "place...")
+		CollatorStringMatcher[] addressPrefixMatch;
+		CollatorStringMatcher[] poiPrefixMatch;
 		Map<String, Boolean> fastMatchCheck = new HashMap<String, Boolean>();
 		Map<String, Boolean> fastPrefMatchCheck = new HashMap<String, Boolean>();
+		Map<String, Boolean> fastPoiPrefMatchCheck = new HashMap<String, Boolean>();
 
 		final boolean partOfBuilding;
 
 		LocaleRules(String locale) {
 			List<CollatorStringMatcher> other = new ArrayList<>();
-			List<CollatorStringMatcher> prefix = new ArrayList<>();
+			List<CollatorStringMatcher> addressPrefix = new ArrayList<>();
+			List<CollatorStringMatcher> poiPrefix = new ArrayList<>();
 			partOfBuilding = globalRules.dictionary(locale).likelyPartOfBuilding(word, bldWordSplit);
 			for (QueryForm form : globalRules.dictionary(locale).getQueryForms(wordNoDot)) {
 				CollatorStringMatcher m = new CollatorStringMatcher(form.word(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
@@ -158,10 +162,16 @@ public class SpatialSearchToken {
 				} else {
 					scopedMatch.add(new QueryMatcher(form, m));
 				}
-				prefix.add(m);
+				if (form.owners().contains(SearchModRuleOwner.POI)) {
+					poiPrefix.add(m);
+				}
+				if (!Set.of(SearchModRuleOwner.POI).containsAll(form.owners())) {
+					addressPrefix.add(m);
+				}
 			}
 			otherMatch = other.isEmpty() ? null : other.toArray(new CollatorStringMatcher[0]);
-			prefixMatch = prefix.isEmpty() ? null : prefix.toArray(new CollatorStringMatcher[0]);
+			addressPrefixMatch = addressPrefix.isEmpty() ? null : addressPrefix.toArray(new CollatorStringMatcher[0]);
+			poiPrefixMatch = poiPrefix.isEmpty() ? null : poiPrefix.toArray(new CollatorStringMatcher[0]);
 		}
 	}
 
@@ -215,15 +225,21 @@ public class SpatialSearchToken {
 	
 	
 	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats) {
-		return getPrefixMatcher(stats, noRules);
+		return getPrefixMatcher(stats, noRules, false);
 	}
 
-	/** @param locale rules locale of the map whose name index is read */
-	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String locale) {
-		return getPrefixMatcher(stats, localeRules(locale));
+	/**
+	 * @param locale   rules locale of the map whose name index is read
+	 * @param poiIndex the name index of POIs, else of an address: only the forms of the owners of that index match its
+	 *                 keys
+	 */
+	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String locale, boolean poiIndex) {
+		return getPrefixMatcher(stats, localeRules(locale), poiIndex);
 	}
 
-	private NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, LocaleRules lf) {
+	private NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, LocaleRules lf, boolean poiIndex) {
+		CollatorStringMatcher[] prefixMatch = poiIndex ? lf.poiPrefixMatch : lf.addressPrefixMatch;
+		Map<String, Boolean> fastPrefMatchCheck = poiIndex ? lf.fastPoiPrefMatchCheck : lf.fastPrefMatchCheck;
 		return new NameIndexReaderMatcher(broad ? wordNoDot : word) {
 			
 			@Override
@@ -241,7 +257,7 @@ public class SpatialSearchToken {
 						}
 					}
 				}
-				Boolean cache = lf.fastPrefMatchCheck.get(key);
+				Boolean cache = fastPrefMatchCheck.get(key);
 				if (cache != null) {
 					stats.sub1PartMatchTime.finish();
 					return cache;
@@ -254,8 +270,8 @@ public class SpatialSearchToken {
 					// 4th - key, "4" token
 					matched = Algorithms.extractFirstIntegerNumber(key) == mainNumber;
 				}
-				if (!matched && lf.prefixMatch != null) {
-					for (CollatorStringMatcher o : lf.prefixMatch) {
+				if (!matched && prefixMatch != null) {
+					for (CollatorStringMatcher o : prefixMatch) {
 						matched |= CollatorStringMatcher.cmatches(collator, o.getPart(), alignedKey,
 								StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 						// o.matches(alignedKey) could be needed for matching data with non-processed abbrevations
@@ -267,7 +283,7 @@ public class SpatialSearchToken {
 					// query 'pa 21' match 'pa21' key
 					matched = true;
 				}
-				lf.fastPrefMatchCheck.put(key, matched);
+				fastPrefMatchCheck.put(key, matched);
 				stats.sub1PartMatchTime.finish();
 				return matched;
 			}
