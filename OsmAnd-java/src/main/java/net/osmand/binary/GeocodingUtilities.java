@@ -44,7 +44,8 @@ public class GeocodingUtilities {
 	// Location to test parameters https://www.openstreetmap.org/#map=18/53.896473/27.540071 (hno 44)
 	// BUG https://www.openstreetmap.org/#map=19/50.9356/13.35348 (hno 26) street is 
 	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 5;
-	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 250;
+	// a house deep inside a block can be far from its street: 90/4 вуліца Суворава, Brest, 369 m (#25258)
+	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 400;
 	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;
 
 	public static final int DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
