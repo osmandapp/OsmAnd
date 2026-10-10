@@ -406,6 +406,81 @@ public class RoutePlannerFrontEnd {
 
 	public RouteCalcResult searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates,
 	                                   PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
+		if (ctx.config.router instanceof CountryTollAvoidanceRouter
+				&& ctx.calculationMode != RouteCalculationMode.BASE && routeDirection == null
+				&& (ctx.nativeLib != null || hhRoutingConfig != null)) {
+			return searchRouteWithCountryTollAvoidance(ctx, start, end, intermediates);
+		}
+		return searchRouteWithConfiguredRouter(ctx, start, end, intermediates, routeDirection);
+	}
+
+	private RouteCalcResult searchRouteWithCountryTollAvoidance(RoutingContext ctx, LatLon start, LatLon end,
+	                                                         List<LatLon> intermediates) throws IOException, InterruptedException {
+		CountryTollAvoidanceRouter countryRouter = (CountryTollAvoidanceRouter) ctx.config.router;
+		RouteCalcResult candidate;
+		ctx.setRouter(countryRouter.withoutCountryAvoidance());
+		try {
+			// Keep the user's normal native/HH engine. An irrelevant country must not force a Java search.
+			candidate = searchRouteWithConfiguredRouter(ctx, start, end, intermediates, null);
+		} finally {
+			ctx.setRouter(countryRouter);
+		}
+		if (ctx.calculationProgress.isCancelled || candidate == null || !candidate.isCorrect()) {
+			return candidate;
+		}
+		if (!countryRouter.affectsRoute(candidate.getList())) {
+			log.info("Country toll avoidance: candidate unaffected; keeping the configured routing engine");
+			return candidate;
+		}
+		log.info("Country toll avoidance: selected tolls affect the candidate; recalculating with country penalties");
+		boolean nativeCountrySearch = ctx.nativeLib != null && countryRouter.getNativeCountryPolygons() != null
+				&& ctx.nativeLib.supportsCountryTollAvoidance();
+		boolean nativeCountryHH = nativeCountrySearch && hhRoutingConfig != null && hhRoutingType == HHRoutingType.CPP
+				&& ctx.nativeLib.supportsCountryTollHHRouting();
+
+		// Do not return a candidate containing affected tolls, or reuse it as a fixed corridor:
+		// the country-aware search must be free to find alternatives outside that corridor.
+		NativeLibrary nativeLibrary = ctx.nativeLib;
+		HHRoutingConfig hhConfig = hhRoutingConfig;
+		boolean onlyHH = useOnlyHHRouting;
+		ctx.unloadAllData();
+		ctx.previouslyCalculatedRoute = null;
+		ctx.precalculatedRouteDirection = null;
+		ctx.calculationProgressFirstPhase = null;
+		ctx.finalRouteSegment = null;
+		ctx.routingTime = 0;
+		// Only libraries with detailed shortcut validation may retain HH for country-dependent costs.
+		ctx.nativeLib = nativeCountrySearch ? nativeLibrary : null;
+		candidate = null;
+		ctx.calculationProgress.hhIteration(HHIteration.HH_NOT_STARTED);
+		ctx.calculationProgress.hhTargetsProgress(0, 0);
+		ctx.calculationProgress.failFastRoutingStatus(true);
+		ctx.calculationProgress.distanceFromBegin = 0;
+		ctx.calculationProgress.distanceFromEnd = 0;
+		ctx.calculationProgress.totalEstimatedDistance = 0;
+		ctx.calculationProgress.totalIterations = 1;
+		ctx.calculationProgress.iteration = -1;
+		hhRoutingConfig = nativeCountryHH ? hhConfig : null;
+		useOnlyHHRouting = false;
+		long memoryLimit = ctx.config.memoryLimitation;
+		try {
+			if (!nativeCountrySearch) {
+				ctx.config.memoryLimitation = countryRouter.getJavaFallbackMemoryLimit(memoryLimit);
+			}
+			log.info("Country toll avoidance: using " + (nativeCountryHH ? "native HH" : nativeCountrySearch ? "native" : "memory-limited Java")
+					+ " country-aware routing");
+			return searchRouteWithConfiguredRouter(ctx, start, end, intermediates, null);
+		} finally {
+			ctx.config.memoryLimitation = memoryLimit;
+			ctx.nativeLib = nativeLibrary;
+			hhRoutingConfig = hhConfig;
+			useOnlyHHRouting = onlyHH;
+		}
+	}
+
+	private RouteCalcResult searchRouteWithConfiguredRouter(final RoutingContext ctx, LatLon start, LatLon end,
+	                                                      List<LatLon> intermediates, PrecalculatedRouteDirection routeDirection)
+			throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
 		if (ctx.calculationProgress == null) {
 			ctx.calculationProgress = new RouteCalculationProgress();

@@ -34,6 +34,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.CountryTollAvoidanceRouter;
 import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.HHRoutePlanner;
@@ -257,9 +258,41 @@ public class NativeLibrary {
 			setHHNativeFilterAndParameters(c);
 		}
 		final float CPP_NO_DIRECTION = -2 * (float) Math.PI;
-		return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ?
-				CPP_NO_DIRECTION : c.config.initialDirection.floatValue(),
-				regions, basemap, c.requestNativePrepareResult);
+		float direction = c.config.initialDirection == null ? CPP_NO_DIRECTION : c.config.initialDirection.floatValue();
+		if (c.config.router instanceof CountryTollAvoidanceRouter) {
+			CountryTollAvoidanceRouter router = (CountryTollAvoidanceRouter) c.config.router;
+			int[][] polygons = router.getNativeCountryPolygons();
+			if (polygons == null || !supportsCountryTollAvoidance()) {
+				throw new IllegalStateException("Native library cannot apply this country-specific toll configuration");
+			}
+			if (hhRoutingConfig != null) {
+				if (!supportsCountryTollHHRouting()) {
+					throw new IllegalStateException("Native library cannot validate country-specific HH shortcut costs");
+				}
+				return nativeRoutingWithCountryTollsHH(c, hhRoutingConfig, direction, regions, basemap,
+						c.requestNativePrepareResult, polygons, router.getNativeTollRouter());
+			}
+			return nativeRoutingWithCountryTolls(c, direction, regions, basemap, c.requestNativePrepareResult,
+					polygons, router.getNativeTollRouter());
+		}
+		return nativeRouting(c, hhRoutingConfig, direction, regions, basemap, c.requestNativePrepareResult);
+	}
+
+	/** Older published libraries must never silently calculate without country penalties. */
+	public boolean supportsCountryTollAvoidance() {
+		try {
+			return nativeSupportsCountryTollAvoidance();
+		} catch (UnsatisfiedLinkError unsupportedLibrary) {
+			return false;
+		}
+	}
+
+	public boolean supportsCountryTollHHRouting() {
+		try {
+			return nativeSupportsCountryTollHHRouting();
+		} catch (UnsatisfiedLinkError unsupportedLibrary) {
+			return false;
+		}
 	}
 
 	private void setHHNativeFilterAndParameters(RoutingContext ctx) {
@@ -362,6 +395,19 @@ public class NativeLibrary {
 	protected static native RouteSegmentResult[] nativeRouting(RoutingContext c, HHRoutingConfig hhRoutingConfig,
 	                                                           float initDirection, RouteRegion[] regions,
 	                                                           boolean basemap, boolean requestNativePrepareResult);
+
+	private static native boolean nativeSupportsCountryTollAvoidance();
+	private static native boolean nativeSupportsCountryTollHHRouting();
+
+	private static native RouteSegmentResult[] nativeRoutingWithCountryTollsHH(RoutingContext c, HHRoutingConfig hhConfig,
+	                                                                        float initDirection, RouteRegion[] regions,
+	                                                                        boolean basemap, boolean requestNativePrepareResult,
+	                                                                        int[][] countryPolygons, GeneralRouter tollRouter);
+
+	private static native RouteSegmentResult[] nativeRoutingWithCountryTolls(RoutingContext c, float initDirection,
+	                                                                      RouteRegion[] regions, boolean basemap,
+	                                                                      boolean requestNativePrepareResult,
+	                                                                      int[][] countryPolygons, GeneralRouter tollRouter);
 
 	protected static native NativeTransportRoutingResult[] nativeTransportRouting(int[] coordinates, TransportRoutingConfiguration cfg,
 																				  RouteCalculationProgress progress);

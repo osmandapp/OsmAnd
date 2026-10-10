@@ -1809,6 +1809,8 @@ public class OsmandSettings {
 			new EnumStringPreference<>(this, "gpx_reverse_strategy", ReverseTrackStrategy.RECALCULATE_ALL_ROUTE_POINTS, ReverseTrackStrategy.values()).makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<Boolean> AVOID_TOLL_ROADS = new BooleanPreference(this, "avoid_toll_roads", false).makeProfile().cache();
+	public final ListStringPreference AVOID_TOLL_ROADS_COUNTRIES = (ListStringPreference) new ListStringPreference(this,
+			"avoid_toll_roads_countries", null, ",").makeProfile();
 	public final OsmandPreference<Boolean> AVOID_MOTORWAY = new BooleanPreference(this, "avoid_motorway", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> AVOID_UNPAVED_ROADS = new BooleanPreference(this, "avoid_unpaved_roads", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> AVOID_FERRIES = new BooleanPreference(this, "avoid_ferries", false).makeProfile().cache();

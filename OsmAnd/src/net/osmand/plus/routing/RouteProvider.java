@@ -313,6 +313,14 @@ public class RouteProvider {
 		if (cf == null) {
 			return null;
 		}
+		boolean directCountryTollSearch = cf.router instanceof CountryTollAvoidanceRouter
+				&& (calcGPXRoute || skipComplex);
+		if (directCountryTollSearch) {
+			// GPX approximation/following cannot use the ordinary-route candidate check.
+			router.setUseOnlyHHRouting(false);
+			router.setHHRoutingConfig(null);
+			router.setUseNativeApproximation(false);
+		}
 		PrecalculatedRouteDirection precalculated = null;
 		if (calcGPXRoute) {
 			ArrayList<Location> sublist = findStartAndEndLocationsFromRoute(params.gpxRoute.points,
@@ -347,6 +355,9 @@ public class RouteProvider {
 		topY = Math.min(MapUtils.get31TileNumberY(l.getLatitude()), topY);
 
 		params.ctx.getResourceManager().getRenderer().checkInitialized(15, lib, leftX, rightX, bottomY, topY);
+		if (directCountryTollSearch) {
+			lib = null;
+		}
 
 		RoutingContext ctx = router.buildRoutingContext(cf, lib, files, RouteCalculationMode.NORMAL);
 		ctx.leftSideNavigation = params.leftSide;
@@ -361,6 +372,8 @@ public class RouteProvider {
 				ctx.previouslyCalculatedRoute = originalRoute.subList(currentRoute, originalRoute.size());
 			}
 		}
+		// Ordinary routes first retain native/HH routing; the frontend checks the completed route
+		// and runs country-aware native routing (or a guarded Java fallback) only if selected tolls change its cost.
 		boolean complex = !skipComplex && params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)
 				// Setting using RoutingType A_STAR_CLASSIC/A_STAR_2_PHASE is deprecated
 				&& precalculated == null && router.getRecalculationEnd(ctx) == null;
@@ -439,6 +452,11 @@ public class RouteProvider {
 		Double direction = params.start.hasBearing() ? params.start.getBearing() / 180d * Math.PI : null;
 
 		RoutingConfiguration configuration = builder.build(routingProfile, direction, memoryLimits, paramsR);
+		List<String> countryIds = settings.AVOID_TOLL_ROADS_COUNTRIES.getStringsListForProfile(params.mode);
+		if (!Algorithms.isEmpty(countryIds) && !paramsR.containsKey(GeneralRouter.AVOID_TOLL)
+				&& RoutingHelperUtils.getParameterForDerivedProfile(GeneralRouter.AVOID_TOLL, params.mode, generalRouter) != null) {
+			configuration.router = new CountryTollAvoidanceRouter(configuration.router, params.ctx.getRegions(), countryIds);
+		}
 		if (settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
 			configuration.routeCalculationTime = System.currentTimeMillis();
 		}
