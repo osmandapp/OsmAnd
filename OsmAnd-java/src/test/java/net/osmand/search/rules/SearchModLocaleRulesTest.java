@@ -310,28 +310,31 @@ public class SearchModLocaleRulesTest {
 		SearchModLocaleRules base = searchRules.rules("");
 		assertEquals(List.of("Atelier Anaïs"), unglue(base, "L'Atelier d'Anaïs"));
 		assertEquals(List.of("Hoffmann"), unglue(base, "E.T.A. Hoffmann"));
-		// every rule splits the name itself: no alternative of both glues
-		assertEquals(List.of("Wijkopenauto's nl", "Wijkopenauto s.nl"), unglue(base, "Wijkopenauto's.nl"));
+		// the rules split a word of two glues in one pass
+		assertEquals(List.of("Wijkopenauto nl"), unglue(base, "Wijkopenauto's.nl"));
+		assertEquals(List.of("Atelier"), unglue(base, "L'Atelier..."));
+		assertEquals(List.of("Résidence de ambassadeur rice Australie"), unglue(base, "Résidence de l'ambassadeur.rice d'Australie"));
 		// an apostrophe glues only Latin words, a dot every word, a word with a digit is never split
 		assertEquals(List.of(), unglue(base, "Об'єднання"));
 		assertEquals(List.of("Чайковский"), unglue(base, "П.И.Чайковский"));
 		assertEquals(List.of(), unglue(base, "St.42"));
 		assertEquals(List.of(), unglue(base, "Main Street"));
 		// the statistics of generation tell the rules apart by file, object and from (rules-spec.md, 4.3)
-		assertEquals("[rules.xml unglue ']", base.unglue("L'Atelier d'Anaïs").get(0).ids().toString());
-		assertEquals("[rules.xml unglue .]", base.unglue("Wijkopenauto's.nl").get(0).ids().toString());
+		assertEquals("[rules.xml unglue ']", base.unglue("L'Atelier d'Anaïs").ids().toString());
+		assertEquals("[rules.xml unglue ., rules.xml unglue ']", base.unglue("Wijkopenauto's.nl").ids().toString());
 		// one name of two rules is one alternative name, counted for each rule
 		SearchModLocaleRules same = of("<index><unglue glue=\".\" minPart=\"3\"/><unglue glue=\"'\" minPart=\"3\"/></index>");
 		assertEquals(List.of("Hoffmann"), unglue(same, "A.'B Hoffmann"));
-		assertEquals("[test.xml unglue ., test.xml unglue ']", same.unglue("A.'B Hoffmann").get(0).ids().toString());
+		assertEquals("[test.xml unglue ., test.xml unglue ']", same.unglue("A.'B Hoffmann").ids().toString());
 		SearchModLocaleRules noApostrophe = new SearchModLocaleRules("xx", List.of(
 				layer("<index><unglue glue=\".\"/><unglue glue=\"'\" script=\"Latin\"/></index>"),
 				layer("<index><unglue glue=\"'\" enabled=\"false\"/></index>")));
 		assertEquals(List.of(), unglue(noApostrophe, "L'Atelier"));
 		assertEquals(List.of("Mak by"), unglue(noApostrophe, "Mak.by"));
-		// the limits of one rule do not leak into another: "Ab" is too short for the dot
+		// a part takes the minPart of the glues around it: "Ab" is too short for the dot
 		SearchModLocaleRules limits = of("<index><unglue glue=\".\" minPart=\"4\"/><unglue glue=\"'\"/></index>");
-		assertEquals(List.of("Cdef'Gh", "Ab.Cdef Gh"), unglue(limits, "Ab.Cdef'Gh"));
+		assertEquals(List.of("Cdef Gh"), unglue(limits, "Ab.Cdef'Gh"));
+		assertEquals(List.of("Abcd Gh"), unglue(limits, "Abcd'Gh"));
 		expect("<index><unglue glue=\"ab\"/></index>", "one character");
 		expect("<index><unglue glue=\"a\"/></index>", "one character");
 		expect("<index><unglue glue=\".\" script=\"Klingon\"/></index>", "Unknown script");
@@ -498,7 +501,8 @@ public class SearchModLocaleRulesTest {
 	}
 
 	private List<String> unglue(SearchModLocaleRules rules, String name) {
-		return rules.unglue(name).stream().map(SearchModLocaleRules.Unglued::name).collect(Collectors.toList());
+		SearchModLocaleRules.Unglued unglued = rules.unglue(name);
+		return unglued == null ? List.of() : List.of(unglued.name());
 	}
 
 	@Test

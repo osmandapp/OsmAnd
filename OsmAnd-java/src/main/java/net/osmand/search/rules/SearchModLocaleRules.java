@@ -189,11 +189,10 @@ public final class SearchModLocaleRules {
 	}
 
 	/**
-	 * An alternative name with the glued words of a name split by one {@code <unglue>} and the rules that give it: two
-	 * rules give one name only when it is the same text.
+	 * An alternative name with the glued words of a name split by {@code <unglue>} and the rules that split a word of it.
 	 */
 	public record Unglued(String name, List<Unglue> rules) {
-		/** the identities in the statistics of the OBF writer: every rule that gives the name counts it */
+		/** the identities in the statistics of the OBF writer: every rule that splits a word counts the name */
 		public List<RuleId> ids() {
 			List<RuleId> ids = new ArrayList<>(rules.size());
 			for (Unglue u : rules) {
@@ -204,66 +203,71 @@ public final class SearchModLocaleRules {
 	}
 
 	/**
-	 * Every {@code <unglue>} applies to the name itself with its own glue, script and minPart (rules-spec.md, 3.2):
-	 * "L'Atelier d'Anaïs" -> "Atelier Anaïs"; one rule never lets another split a word its limits keep.
+	 * Every {@code <unglue>} of a word splits it in one pass, so a word of two glues gives one alternative name
+	 * (rules-spec.md, 3.2): "L'Atelier d'Anaïs" -> "Atelier Anaïs", "Wijkopenauto's.nl" -> "Wijkopenauto nl". A rule
+	 * splits only words of its script without digits; a part is kept when it is as long as the minPart of the glues
+	 * around it.
 	 *
-	 * @return the alternative names in the order of the rules, empty when no word is glued
+	 * @return the alternative name, null when no word is glued
 	 */
-	public List<Unglued> unglue(String name) {
+	public Unglued unglue(String name) {
 		if (unglues.isEmpty() || name == null) {
-			return List.of();
+			return null;
 		}
-		String[] words = SearchAlgorithms.canonicalizePunctuation(name).split(" ");
-		Map<String, List<Unglue>> byName = new LinkedHashMap<>();
-		for (Unglue u : unglues) {
-			String unglued = unglue(words, u);
-			if (unglued != null) {
-				byName.computeIfAbsent(unglued, k -> new ArrayList<>()).add(u);
-			}
-		}
-		List<Unglued> result = new ArrayList<>(byName.size());
-		byName.forEach((unglued, rules) -> result.add(new Unglued(unglued, rules)));
-		return result;
-	}
-
-	private String unglue(String[] words, Unglue u) {
 		List<String> result = new ArrayList<>();
-		boolean glued = false;
-		for (String word : words) {
+		Set<Unglue> applied = new LinkedHashSet<>();
+		for (String word : SearchAlgorithms.canonicalizePunctuation(name).split(" ")) {
 			if (word.isEmpty()) {
 				continue;
 			}
-			List<String> parts = unglueWord(word, u);
+			List<String> parts = unglueWord(word, applied);
 			if (parts == null) {
 				result.add(word);
 			} else {
 				result.addAll(parts);
-				glued = true;
 			}
 		}
 		String unglued = String.join(" ", result).trim();
-		return glued && !unglued.isEmpty() ? unglued : null;
+		return applied.isEmpty() || unglued.isEmpty() ? null : new Unglued(unglued, new ArrayList<>(applied));
 	}
 
-	private List<String> unglueWord(String word, Unglue u) {
-		if (word.indexOf(u.glue()) < 0 || word.chars().anyMatch(Character::isDigit) || !u.appliesToScript(word)) {
+	// the parts of a glued word, null when no rule splits it; the rules that split it go to applied
+	private List<String> unglueWord(String word, Set<Unglue> applied) {
+		if (word.chars().anyMatch(Character::isDigit)) {
+			return null;
+		}
+		Map<Character, Unglue> glues = new LinkedHashMap<>();
+		for (Unglue u : unglues) {
+			if (word.indexOf(u.glue()) >= 0 && u.appliesToScript(word)) {
+				glues.put(u.glue(), u);
+			}
+		}
+		if (glues.isEmpty()) {
 			return null;
 		}
 		List<String> parts = new ArrayList<>();
 		boolean letterDropped = false;
 		int start = 0;
+		Unglue before = null;
 		for (int i = 0; i <= word.length(); i++) {
-			if (i == word.length() || word.charAt(i) == u.glue()) {
+			Unglue after = i == word.length() ? null : glues.get(word.charAt(i));
+			if (i == word.length() || after != null) {
 				String part = word.substring(start, i);
-				if (part.length() >= u.minPart()) {
+				int minPart = Math.max(before == null ? 0 : before.minPart(), after == null ? 0 : after.minPart());
+				if (part.length() >= Math.max(minPart, 1)) {
 					parts.add(part);
 				} else if (!part.isEmpty()) {
 					letterDropped = true;
 				}
 				start = i + 1;
+				before = after;
 			}
 		}
-		return parts.size() > 1 || letterDropped ? parts : null;
+		if (parts.size() <= 1 && !letterDropped) {
+			return null;
+		}
+		applied.addAll(glues.values());
+		return parts;
 	}
 
 	/** A rule part with an {@code object}: the owners of names it applies to ("street", "*", "street,poi"). */
