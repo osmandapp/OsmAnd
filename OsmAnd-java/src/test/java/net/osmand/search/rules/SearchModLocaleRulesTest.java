@@ -416,8 +416,10 @@ public class SearchModLocaleRulesTest {
 			}
 			validate(locale, files);
 		}
-		// a mirror pair of Colombia shares "Calle" with the pair of Spanish
-		assertEquals(List.of("street:c", "street:cl", "street:cll"), forms(searchRules.rules("es_CO"), "calle"));
+		// a mirror pair of Colombia shares "Calle" with the pair of Spanish; the one-letter "c" of Spanish is disabled
+		// (it took the house letter of "86 C Calle de Velázquez")
+		assertEquals(List.of("street:cl", "street:cll"), forms(searchRules.rules("es_CO"), "calle"));
+		assertEquals(List.of(), forms(searchRules.rules("es_ES"), "c"));
 	}
 
 	@Test
