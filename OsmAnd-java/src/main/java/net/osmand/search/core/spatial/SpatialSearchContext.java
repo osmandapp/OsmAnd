@@ -1005,20 +1005,24 @@ public class SpatialSearchContext {
 					continue;
 				}
 				boolean matched = false;
-				for (SpatialSearchToken token : allTokens) {
-					if (t != token && matchName(indx, token, otherName, poiTypes, null, locale, type)
-							&& (otherTokens == null || !otherTokens.contains(token))) {
-						if (otherTokens == null) {
-							otherTokens = new ArrayList<>(3);
+				// the word itself first, then a rule form: in "86 c calle de velázquez" "calle" is the street, "c" the house
+				for (int pass = 0; pass < 2 && !matched; pass++) {
+					for (SpatialSearchToken token : allTokens) {
+						if (t != token && (pass == 1 || token.getMainCollator().matches(otherName))
+								&& matchName(indx, token, otherName, poiTypes, null, locale, type)
+								&& (otherTokens == null || !otherTokens.contains(token))) {
+							if (otherTokens == null) {
+								otherTokens = new ArrayList<>(3);
+							}
+							token = nearestCopy(allTokens, t, token, otherTokens);
+							otherTokens.add(token);
+							matched = true;
+							nameFound++;
+							if (!isKindWord(indx, otherName)) {
+								distinct++;
+							}
+							break;
 						}
-						token = nearestCopy(allTokens, t, token, otherTokens);
-						otherTokens.add(token);
-						matched = true;
-						nameFound++;
-						if (!isKindWord(indx, otherName)) {
-							distinct++;
-						}
-						break;
 					}
 				}
 				if (!matched) {
