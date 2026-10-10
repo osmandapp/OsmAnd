@@ -2,14 +2,14 @@ package net.osmand.plus.auto.screens
 
 import androidx.car.app.CarContext
 import androidx.car.app.model.Action
-import androidx.car.app.model.ActionStrip
+import androidx.car.app.model.CarIcon
 import androidx.car.app.model.Header
 import androidx.car.app.model.ItemList
 import androidx.car.app.model.ListTemplate
 import androidx.car.app.model.Row
 import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.MapWithContentTemplate
-import androidx.lifecycle.LifecycleOwner
+import androidx.core.graphics.drawable.IconCompat
 import net.osmand.plus.R
 import net.osmand.plus.settings.enums.AndroidAutoMapMode
 
@@ -20,43 +20,29 @@ class MapModeScreen(carContext: CarContext) : BaseAndroidAutoScreen(carContext) 
 	}
 
 	private val mapModes = AndroidAutoMapMode.entries
-	private var initialMapMode = AndroidAutoMapMode.AUTOMATIC
-	private var selectedIndex = initialMapMode.ordinal
-	private var isApplied = false
-
-	override fun onDestroy(owner: LifecycleOwner) {
-		super.onDestroy(owner)
-		if (!isApplied) {
-			app.settings.AA_MAP_NIGHT_MODE.set(initialMapMode)
-			refreshMapMode()
-		}
-	}
+	private var selectedMapMode = AndroidAutoMapMode.AUTOMATIC
+	private var closing = false
 
 	override fun onFirstGetTemplate() {
 		super.onFirstGetTemplate()
-		initialMapMode = app.settings.AA_MAP_NIGHT_MODE.get()
-		selectedIndex = mapModes.indexOf(initialMapMode).takeIf { it >= 0 }
-			?: AndroidAutoMapMode.AUTOMATIC.ordinal
+		selectedMapMode = app.settings.AA_MAP_NIGHT_MODE.get()
 	}
 
 	override fun getTemplate(): Template {
+		// The selection is saved immediately and the screen closes right away: there is
+		// no Apply button, because the host hides the map action strip while navigation
+		// is active and a selectable list cannot contain an extra "Apply" row (#21448).
 		val listBuilder = ItemList.Builder()
 		for (mode in mapModes) {
 			listBuilder.addItem(
 				Row.Builder()
 					.setTitle(app.getString(mode.titleId))
+					.setImage(CarIcon.Builder(IconCompat.createWithResource(carContext, mode.iconId)).build())
 					.build()
 			)
 		}
-
-		listBuilder.setOnSelectedListener { index ->
-			if (index >= 0 && index < mapModes.size) {
-				app.settings.AA_MAP_NIGHT_MODE.set(mapModes[index])
-				selectedIndex = index
-				refreshMapMode()
-			}
-		}
-		listBuilder.setSelectedIndex(selectedIndex)
+		listBuilder.setOnSelectedListener { index -> onMapModeSelected(index) }
+		listBuilder.setSelectedIndex(mapModes.indexOf(selectedMapMode))
 
 		val header = Header.Builder()
 			.setTitle(app.getString(R.string.map_mode))
@@ -68,26 +54,21 @@ class MapModeScreen(carContext: CarContext) : BaseAndroidAutoScreen(carContext) 
 			.setSingleList(listBuilder.build())
 			.build()
 
-		val actionStrip = ActionStrip.Builder()
-			.addAction(
-				Action.Builder()
-					.setTitle(app.getString(R.string.shared_string_apply))
-					.setOnClickListener {
-						isApplied = true
-						finish()
-					}
-					.build()
-			)
-			.build()
-
 		return MapWithContentTemplate.Builder()
 			.setContentTemplate(listTemplate)
-			.setActionStrip(actionStrip)
 			.build()
 	}
 
-	private fun refreshMapMode() {
+	private fun onMapModeSelected(index: Int) {
+		val mode = mapModes.getOrNull(index) ?: return
+		if (mode == selectedMapMode || closing) {
+			return
+		}
+		selectedMapMode = mode
+		app.settings.AA_MAP_NIGHT_MODE.set(mode)
 		app.osmandMap.mapView.refreshMap(true)
 		app.carNavigationSession?.navigationCarSurface?.onCarConfigurationChanged()
+		closing = true
+		finish()
 	}
 }
