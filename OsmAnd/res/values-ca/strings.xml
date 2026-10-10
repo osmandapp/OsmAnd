@@ -5040,4 +5040,9 @@
     <string name="add_to_track">Afegeix al trajecte</string>
     <string name="map_source_saved_as">S\'ha desat la font del mapa com a «%1$s».</string>
     <string name="map_source_folder_not_created">No s\'ha pogut crear una carpeta per a la font del mapa. Proveu un nom diferent.</string>
+    <string name="shared_string_attached_to">Adjuntat a</string>
+    <string name="media_not_attached_title">Encara no s\'ha adjuntat enlloc</string>
+    <string name="media_not_attached_descr">Adjunta aquest arxiu multimèdia a un favorit per situar-lo en el mapa.</string>
+    <string name="detach_external_media_descr">L\'arxiu ja no es mostrarà en aquest favorit però continua al vostre dispositiu.</string>
+    <string name="detach_external_media_descr_plural">L\'arxiu ja no es mostrarà en aquest favorit però continua al vostre dispositiu.</string>
 </resources>
