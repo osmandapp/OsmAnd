@@ -187,7 +187,8 @@ class AdditionalInfoBundleTest {
 			"calendar_event" to "true", "offset" to "1", "pinned" to "true", "width" to "2", "ele" to "1",
 			"speed" to "1", "trkpt_idx" to "1", "point_type" to "p", "color" to "c", "icon" to "i",
 			"background" to "b", "address" to "a", "amenity_origin" to "o", "origin" to "o", "osm_url" to "u",
-			"osmand:activity" to "a", "gpxtpx:hr" to "1", "amenity_type" to "t", "osm_tag_ref" to "1"
+			"osmand:activity" to "a", "gpxtpx:hr" to "1", "amenity_type" to "t", "osm_tag_ref" to "1",
+			"itinerary_id" to "markers:1", "gpx" to "track.gpx", "favourites_group" to "Home"
 		)
 		assertEquals(
 			setOf("my_note", "displaymode", "test:country", "gpxx:city"),

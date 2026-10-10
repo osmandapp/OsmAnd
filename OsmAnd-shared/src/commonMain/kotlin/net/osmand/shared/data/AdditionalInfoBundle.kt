@@ -343,7 +343,8 @@ class AdditionalInfoBundle(
 			GpxUtilities.MIN_ELEVATION, GpxUtilities.MAX_ELEVATION, GpxUtilities.AVG_ELEVATION,
 			GpxUtilities.DIFF_ELEVATION_UP, GpxUtilities.DIFF_ELEVATION_DOWN,
 			GpxUtilities.OFFSET_EXTENSION,
-			"visited_date", "creation_date", "pickup_date", "calendar_event"
+			"visited_date", "creation_date", "pickup_date", "calendar_event",
+			"itinerary_id", "gpx", "favourites_group"
 		)
 
 		private const val CUISINE_INFO_ID = COLLAPSABLE_PREFIX + Amenity.CUISINE
