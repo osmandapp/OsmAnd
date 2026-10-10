@@ -95,6 +95,7 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteRecordingMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -246,10 +247,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private final StateChangedListener<Boolean> pinchZoomMagnificationListener = new StateChangedListener<Boolean>() {
 		@Override
 		public void stateChanged(Boolean enabled) {
-			app.runInUIThread(() -> {
-				OsmandMapTileView mapView = getMapView();
-				mapView.setPinchZoomMagnificationEnabled(enabled);
-			});
+			app.runInUIThread(() -> updatePinchZoomMagnification());
 		}
 	};
 	private KeyEventHelper keyEventHelper;
@@ -1289,7 +1287,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		OsmandMapTileView mapView = getMapView();
 		
-		mapView.setPinchZoomMagnificationEnabled(settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.get());
+		updatePinchZoomMagnification();
 		
 		MapLayers mapLayers = getMapLayers();
 		if (mapLayers.getMapInfoLayer() != null) {
@@ -1317,6 +1315,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		applyScreenOrientation();
 		app.getAppCustomization().updateMapMargins(this);
 		dashboardOnMap.onAppModeChanged();
+	}
+
+	public void updatePinchZoomMagnification() {
+		boolean enabled = PluginsHelper.isActive(AccessibilityPlugin.class)
+				&& settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.get();
+		getMapView().setPinchZoomMagnificationEnabled(enabled);
 	}
 
 	public void updateMapSettings(boolean updateMapRenderer) {
