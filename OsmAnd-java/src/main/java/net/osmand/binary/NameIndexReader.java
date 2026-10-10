@@ -60,9 +60,14 @@ public class NameIndexReader {
 		return 0;
 	}
 
+	/** a name the OBF writer made by a search rule (<unglue>, <index>) carries this word: another spelling of a name
+	 *  of the object, not a name of OSM ("Hauptstr" of "Hauptstraße", "Пасхи" of "о. Пасхи") */
+	public static final String RULE_SPELLING_COMMON = "spellvariantcommon";
+
 	/** words the generator adds to a name for the search: never keys, never counted as words of the name */
 	public static boolean isIndexMarker(String word) {
-		return CITY_AS_STREET_COMMON.equalsIgnoreCase(word) || altNameVariant(word) > 0;
+		return CITY_AS_STREET_COMMON.equalsIgnoreCase(word) || RULE_SPELLING_COMMON.equalsIgnoreCase(word)
+				|| altNameVariant(word) > 0;
 	}
 	public static final String POI_CATEGORY_PREFIX = "#^";
 	

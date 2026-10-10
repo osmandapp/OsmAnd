@@ -964,6 +964,7 @@ public class SpatialSearchContext {
 			List<SpatialSearchToken> allTokens, boolean[] cmnWord, String locale) {
 		List<SpatialSearchToken> otherTokens = null;
 		boolean streetCity = false;
+		boolean ruleSpelling = false;
 		boolean numericNotMatch = false;
 		int altVariant = 0;
 		// the word that found the object: common in this map ("avenue", "rue") names no object
@@ -997,6 +998,10 @@ public class SpatialSearchContext {
 				boolean numeric = SearchAlgorithms.isNumber2Letters(otherName);
 				if (otherName.equalsIgnoreCase(NameIndexReader.CITY_AS_STREET_COMMON)) {
 					streetCity = true;
+					continue;
+				}
+				if (otherName.equalsIgnoreCase(NameIndexReader.RULE_SPELLING_COMMON)) {
+					ruleSpelling = true;
 					continue;
 				}
 				int marker = NameIndexReader.altNameVariant(otherName);
@@ -1052,6 +1057,7 @@ public class SpatialSearchContext {
 		NameIndexAtom atom = new NameIndexAtom(name, type, lid, pid, obj, streetCity, other, otherFound, coords,
 				nearByType, -1);
 		atom.locale = locale;
+		atom.ruleSpelling = ruleSpelling;
 		atom.distinctFoundCnt = distinct;
 		atom.poiTypes = poiTypes;
 		atom.elo = elo;
@@ -1170,6 +1176,7 @@ public class SpatialSearchContext {
 							atom.coords, atom.nearbyRadius, t.originalOrder);
 					atomB.distinctFoundCnt = atom.distinctFoundCnt; // the house number names no street
 					atomB.locale = atom.locale;
+					atomB.ruleSpelling = atom.ruleSpelling;
 					token.addAtom(atomB);
 				}
 
