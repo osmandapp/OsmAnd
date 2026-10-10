@@ -854,6 +854,11 @@ public class RoutingHelper {
 		return new CurrentStreetName(this, n, showNextTurn);
 	}
 
+	@NonNull
+	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n, boolean showNextTurn, boolean prioritizeDestination) {
+		return new CurrentStreetName(this, n, showNextTurn, prioritizeDestination);
+	}
+
 	public RouteSegmentResult getCurrentSegmentResult() {
 		return route.getCurrentSegmentResult();
 	}

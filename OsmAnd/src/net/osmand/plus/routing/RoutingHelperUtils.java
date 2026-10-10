@@ -36,40 +36,61 @@ public class RoutingHelperUtils {
 	@NonNull
 	public static String formatStreetName(@Nullable String name, @Nullable String ref, @Nullable String destination,
 	                                      @NonNull String towards) {
-		return formatStreetName(name, ref, destination, towards, null);
+		return formatStreetName(name, ref, destination, towards, null, false);
 	}
 
 	@NonNull
 	public static String formatStreetName(@Nullable String name, @Nullable String originalRef, @Nullable String destination,
 	                                      @NonNull String towards, @Nullable List<RoadShield> shields) {
+		return formatStreetName(name, originalRef, destination, towards, shields, false);
+	}
+
+	@NonNull
+	public static String formatStreetName(@Nullable String name, @Nullable String originalRef, @Nullable String destination,
+	                                      @NonNull String towards, @Nullable List<RoadShield> shields, boolean prioritizeDestination) {
 		StringBuilder formattedStreetName = new StringBuilder();
-		if (originalRef != null && originalRef.length() > 0) {
+
+		// Add destination first if prioritized
+		if (prioritizeDestination && !Algorithms.isEmpty(destination)) {
+			appendWithSpace(formattedStreetName, formatDestination(destination, towards));
+		}
+
+		// Add refs (excluding those shown as shields)
+		if (!Algorithms.isEmpty(originalRef)) {
 			String[] refs = originalRef.split(";");
 			for (String ref : refs) {
 				if (shields == null || !isRefEqualsShield(shields, ref)) {
-					if (formattedStreetName.length() > 0) {
-						formattedStreetName.append(" ");
-					}
-					formattedStreetName.append(ref);
+					appendWithSpace(formattedStreetName, ref);
 				}
 			}
 		}
-		if (name != null && name.length() > 0) {
-			if (formattedStreetName.length() > 0) {
-				formattedStreetName.append(" ");
-			}
-			formattedStreetName.append(name);
+
+		// Add name
+		if (!Algorithms.isEmpty(name)) {
+			appendWithSpace(formattedStreetName, name);
 		}
-		if (destination != null && destination.length() > 0) {
-			if (formattedStreetName.length() > 0) {
-				formattedStreetName.append(" ");
-			}
-			if (!Algorithms.isEmpty(towards)) {
-				formattedStreetName.append(towards).append(" ");
-			}
-			formattedStreetName.append(destination);
+
+		// Add destination last if not prioritized
+		if (!prioritizeDestination && !Algorithms.isEmpty(destination)) {
+			appendWithSpace(formattedStreetName, formatDestination(destination, towards));
 		}
+
 		return formattedStreetName.toString().replace(";", ", ");
+	}
+
+	private static void appendWithSpace(@NonNull StringBuilder sb, @NonNull String text) {
+		if (sb.length() > 0) {
+			sb.append(" ");
+		}
+		sb.append(text);
+	}
+
+	@NonNull
+	private static String formatDestination(@NonNull String destination, @NonNull String towards) {
+		if (!Algorithms.isEmpty(towards)) {
+			return towards + " " + destination;
+		}
+		return destination;
 	}
 
 	private static boolean isRefEqualsShield(@NonNull List<RoadShield> shields, @NonNull String ref) {

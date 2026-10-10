@@ -129,8 +129,9 @@ public class StreetNameWidget extends MapWidget {
 	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
 		ApplicationMode appMode = settings.getApplicationMode();
 		boolean showNextTurn = isShowNextTurnEnabled(appMode);
+		boolean prioritizeDestination = isPrioritizeDestinationEnabled(appMode);
 
-		StreetNameWidgetParams params = new StreetNameWidgetParams(mapActivity, showNextTurn);
+		StreetNameWidgetParams params = new StreetNameWidgetParams(mapActivity, showNextTurn, prioritizeDestination);
 		CurrentStreetName streetName = params.streetName;
 		int turnArrowColorId = params.turnArrowColorId;
 		boolean showClosestWaypointFirstInAddress = params.showClosestWaypointFirstInAddress;
@@ -449,6 +450,10 @@ public class StreetNameWidget extends MapWidget {
 		widgetState.setShowNextTurnEnabled(appMode, value);
 	}
 
+	public boolean isPrioritizeDestinationEnabled(@NonNull ApplicationMode appMode) {
+		return widgetState.isPrioritizeDestinationEnabled(appMode);
+	}
+
 	static class StreetNameWidgetParams {
 
 		private final OsmandApplication app;
@@ -456,18 +461,20 @@ public class StreetNameWidget extends MapWidget {
 		private final MapActivity mapActivity;
 		private final RoutingHelper routingHelper;
 		private final boolean showNextTurn;
+		private final boolean prioritizeDestination;
 
 		public CurrentStreetName streetName;
 		@ColorRes
 		public int turnArrowColorId;
 		public boolean showClosestWaypointFirstInAddress = true;
 
-		public StreetNameWidgetParams(@NonNull MapActivity mapActivity, boolean showNextTurn) {
+		public StreetNameWidgetParams(@NonNull MapActivity mapActivity, boolean showNextTurn, boolean prioritizeDestination) {
 			this.app = mapActivity.getApp();
 			this.mapActivity = mapActivity;
 			this.settings = app.getSettings();
 			this.routingHelper = app.getRoutingHelper();
 			this.showNextTurn = showNextTurn;
+			this.prioritizeDestination = prioritizeDestination;
 
 			computeParams();
 		}
@@ -494,7 +501,7 @@ public class StreetNameWidget extends MapWidget {
 		private void setupCurrentStreetName(boolean showNextTurn) {
 			NextDirectionInfo nextDirInfo = new NextDirectionInfo();
 			nextDirInfo = routingHelper.getNextRouteDirectionInfo(nextDirInfo, true);
-			streetName = routingHelper.getCurrentName(nextDirInfo, showNextTurn);
+			streetName = routingHelper.getCurrentName(nextDirInfo, showNextTurn, prioritizeDestination);
 		}
 
 		private void setupLastKnownStreetName() {
@@ -511,7 +518,7 @@ public class StreetNameWidget extends MapWidget {
 				String ref = lastKnownSegment.getRef(locale, transliterate, direction);
 				String destination = lastKnownSegment.getDestinationName(locale, transliterate, direction);
 
-				streetName.text = RoutingHelperUtils.formatStreetName(name, ref, destination, "»");
+				streetName.text = RoutingHelperUtils.formatStreetName(name, ref, destination, "»", null, prioritizeDestination);
 				if (!Algorithms.isEmpty(streetName.text)) {
 					double dist = CurrentPositionHelper.getOrthogonalDistance(lastKnownSegment, lastKnownLocation);
 					if (dist < MAX_MARKER_DISTANCE) {
