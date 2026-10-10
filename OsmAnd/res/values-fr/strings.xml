@@ -5384,4 +5384,6 @@
     <string name="aidl_permissions_request_descr">%1$s\nModifiable plus tard depuis les Extensions.</string>
     <string name="aidl_group_system_footer">Laissez l\'application copier des fichiers dans OsmAnd, remplacer votre position, lire les journaux et modifier l\'apparence d\'OsmAnd. N\'activez que pour les applications auxquelles vous faites entièrement confiance !</string>
     <string name="aidl_group_location_descr">Valeurs pour votre position, itinéraire et widget</string>
+    <string name="map_source_saved_as">Source de la carte enregistrée sous \'%1$s\'.</string>
+    <string name="map_source_folder_not_created">Impossible de créer le dossier pour la source de la carte. Essayez avec un autre nom.</string>
 </resources>

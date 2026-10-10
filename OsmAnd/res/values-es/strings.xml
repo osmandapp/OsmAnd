@@ -4909,9 +4909,9 @@
     <string name="trip_recording_moving_time_widget_description">Muestra el tiempo de movimiento registrado actualmente, o el tiempo de la última subida y bajada.</string>
     <string name="trip_recording_moving_time">Tiempo de traslado</string>
     <plurals name="tracks_count">
-        <item quantity="one">%d pista</item>
-        <item quantity="many">%d pistas</item>
-        <item quantity="other">%d pistas</item>
+        <item quantity="one">%d trayecto</item>
+        <item quantity="many">%d de trayectos</item>
+        <item quantity="other">%d trayectos</item>
     </plurals>
     <string name="gradient_no_data_point_summary">Color aplicado cuando hay datos faltantes o no definidos.</string>
     <string name="gradient_input_value_too_low_warn">El valor mínimo permitido es %1$s.</string>
