@@ -1,22 +1,23 @@
 # OsmAnd flyover videos (osmand_flyover)
 
 How to make a map flyover video with the OsmAnd AI Connector. Read this before the first `osmand_flyover` call.
-Each section says whether it already works (**Status: works**) or is planned (**Status: planned**); do not pass
-planned parameters yet, OsmAnd ignores or rejects them.
+Sections and fields are marked **works** or **planned**. Keys this OsmAnd does not know come back in the result
+as `warnings`; nothing is silently dropped.
 
 ## How it renders
 
-OsmAnd takes its OpenGL map renderer off the screen (the same way Android Auto does) and renders the video frame
-by frame into an MP4 file on the phone. The phone's own map pauses meanwhile and comes back afterwards.
+OsmAnd takes its OpenGL map renderer off the screen (as Android Auto does) and renders the video frame by frame
+into an MP4 file on the phone. The phone's map pauses meanwhile and comes back afterwards; the map is unlinked
+from the location for the recording and linked again after it.
 
 - Works with OsmAnd in the background and the screen off. Needs the OpenGL renderer (the default) and the
   Screenshots permission group.
-- Every frame waits until the map data and labels are loaded, and frames get exact timestamps, so the video is
+- Every frame waits until the map data and labels are loaded, and frames get exact timestamps: the video is
   smooth whatever the speed of the phone.
 - Rendering is slower than real time: about 0.3 s per 1280x720 frame on a fast phone with the map data cached
-  (about 19 s per second of video at 60 fps), 0.7-0.8 s per frame the first time an area is drawn. Higher
-  resolutions take longer. Tell the user the expected wait before long videos.
-- Frames are rendered at twice the size and scaled down (smooth lines) while the doubled size fits 3840 px.
+  (about 19 s per second of video at 60 fps, 10 s at 30 fps), 0.7-0.8 s per frame when an area is drawn for the
+  first time. Tell the user the expected wait before long videos.
+- Map frames are rendered at twice the size and scaled down (smooth lines) while the doubled size fits 3840 px.
 - Map labels and icons are laid out again every 2.5 s of video time and fade in and out in 0.4 s.
 
 ### Keep the map slow on the screen
@@ -25,153 +26,153 @@ Sharp map lines strobe when the map moves fast across the screen. The result rep
 keep it at or below about 250 px/s. If a part is too fast, give it more time or a lower zoom (the camera higher).
 At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smooth; one zoom level lower halves it.
 
-## Call: camera key frames — Status: works
+## The call
 
-```json
-{
-  "keyframes": [
-    {"lat": 52.3789, "lon": 4.9006, "zoom": 15, "rotation": 0, "tilt": 90, "time_s": 0},
-    {"lat": 52.3740, "lon": 4.8920, "zoom": 15.5, "rotation": -60, "tilt": 55, "time_s": 5},
-    {"lat": 52.3598, "lon": 4.8856, "zoom": 16.5, "rotation": -180, "tilt": 40, "time_s": 15}
-  ],
-  "width": 1280, "height": 720, "fps": 60, "name": "amsterdam"
-}
-```
-
-| Field | Meaning |
-|---|---|
-| `keyframes[]` | at least 2, `time_s` ascending, last 0 < t <= 600 |
-| `lat`, `lon`, `zoom` | camera center and zoom (fractional zoom is fine) |
-| `rotation` | degrees, the direction that is up on the screen; 0 = north up; defaults to the previous key frame or 0 |
-| `tilt` | camera angle above the horizon: 90 = flat map, 30-50 = 3D view; defaults to the previous key frame or 90 |
-| `width`, `height` | even, 16-3840; default 1280x720 |
-| `fps` | 1-60, default 30; 60 is smoother on fast parts and takes twice as long |
-| `name` | file name; default `flyover_<date-time>.mp4` |
-
-Between key frames the center follows a smooth curve (Catmull-Rom) and zoom, rotation and tilt ease in and out.
+| Field | Status | Meaning |
+|---|---|---|
+| `keyframes[]` | works | camera key frames, see below; or `camera.follow` |
+| `camera` | works | `{"follow": n, "zoom": 15, "tilt": 50, "look_ahead_s": 3}`: fly along track n of `gpx[]` |
+| `duration_s` | works | video length; needed with `camera.follow`, else the last key frame's time |
+| `width`, `height` | works | even, 16-3840; default 1280x720 |
+| `fps` | works | 1-60, default 30; 60 is smoother on fast parts and takes twice as long |
+| `name` | works | file name; default `flyover_<date-time>.mp4` |
+| `ease_in_s`, `ease_out_s` | works | the camera speeds up after the start and slows down before the end; default 1 s each (at most a third of the video) |
+| `scale` | works | `video` (default): map symbols sized for the video; `screen`: the phone's own map scale, so a video can continue a screen recording |
+| `ui_scale` | works | size of everything drawn over the map (OsmAnd elements, panels, callouts); default 1; the frame's long side is 800 dp |
+| `gpx[]` | works, partly | tracks to show, see below |
+| `osmand_widgets` | works | `["profile_icon", "ruler", "compass"]` |
+| `profile` | works | profile key for the profile icon; default the current profile |
+| `attribution` | works | default "OsmAnd · © OpenStreetMap"; it must credit OpenStreetMap |
+| `panels[]` | works | panels of widgets, see below |
+| `data` | works | your own values for panels, see Values |
 
 Result: `file` (path on the phone, in OsmAnd's `flyover` folder), `frames`, `render_s`, `max_screen_speed_px_s`,
-and a `hint` when the map moved too fast.
+`hint` when the map moved too fast, `warnings` for keys this OsmAnd ignored.
 
-Tips: turn on terrain and 3D relief with `osmand_set_preference` before mountain flights; show tracks with
-`osmand_show_gpx` before the call so they are in the video.
+### Key frames — works
 
----
+```json
+{"keyframes": [
+  {"lat": 52.3789, "lon": 4.9006, "zoom": 15, "rotation": 0, "tilt": 90, "time_s": 0},
+  {"lat": 52.3740, "lon": 4.8920, "zoom": 15.5, "rotation": -60, "tilt": 55, "time_s": 5},
+  {"lat": 52.3598, "lon": 4.8856, "zoom": 16.5, "rotation": -180, "tilt": 40, "time_s": 15}
+], "width": 1280, "height": 720, "fps": 60, "name": "amsterdam"}
+```
 
-Everything below is the planned extension of the same call.
+`rotation`: degrees, the direction that is up on the screen (OsmAnd's map rotation, minus the heading); 0 = north
+up. `tilt`: camera angle above the horizon, 90 = flat, 30-50 = 3D. Both default to the previous key frame or 0 / 90.
+The camera passes every key frame at its time without stopping: center, zoom, rotation and tilt follow smooth
+curves through the key frames; it eases only at the very start and end. A key frame for every video frame also
+works (your own path).
 
-## Camera modes — Status: planned
+Tips: turn on terrain and 3D relief with `osmand_set_preference` before mountain flights.
 
-`camera` replaces `keyframes`:
+## Tracks: gpx[]
 
-- `{"keyframes": [...]}` — as above.
-- `{"follow": 1, "zoom": 15, "tilt": 50, "look_ahead_s": 3}` — fly along track number 1 of `gpx[]`, heading
-  from the track ahead, smoothed.
-- Both can be combined in time: key frames first, then follow.
+Route files are GPX too. Numbers in values (`gpx[1]`) count from 1 in this list. The tracks are shown for the
+recording only; the user's own shown tracks are put back afterwards. Track waypoints are drawn by the map.
 
-## Tracks on the map: gpx[] — Status: planned
-
-A list of GPX files to show; route files are GPX too. Numbers in values (`gpx[1]`) count from 1 in this list.
-
-| Field | Values | Meaning |
+| Field | Status | Meaning |
 |---|---|---|
-| `file` | path on the phone | the GPX (see `osmand_list_tracks`) |
-| `from_s` / `to_s` / `fade_s` | seconds | when the track appears and disappears |
-| `draw` | `full` / `progressive` | whole track at once, or growing up to its current point |
-| `time` | `{"mode": "track", "speed_x": 60, "offset_s": 0}` or `{"mode": "duration", "duration_s": 30}` | how track time maps to video time; `duration` spreads the track by distance (routes without times) |
-| `remaining` | `hidden` / `faded` / `thin` | the part not reached yet, with `progressive` |
-| `tail_km` / `tail_s` | number | show only the last part of the drawn track |
-| `head` | `none` / `dot` / `arrow` / `profile_icon` | marker at the current point |
+| `file` | works | path in OsmAnd's tracks folder, e.g. `rec/2026-10-11_ride.gpx` or `import/x.gpx` (see `osmand_list_tracks`) |
+| `time` | works | `{"mode": "duration", "duration_s": 30}` (default: the whole video): spread over the time, by the track's own times when it has them, else by distance; `{"mode": "track", "speed_x": 60, "offset_s": 0}`: the track's own times sped up |
+| `from_s` | works | when the track starts moving (its current point stays at the start before) |
+| style | works | over the file's own: `color`, `width` (`thin`/`medium`/`bold`/number), `coloring_type` (`solid`, `speed`, `altitude`, `slope`, ...), `color_palette`, `show_arrows`, `show_start_finish`, `split_type`, `split_interval`, `visualization_3d`, `wall_coloring`, `line_position_3d`, `vertical_exaggeration`, `elevation_meters`, `show_wpts` |
+| `to_s`, `fade_s` | planned | the track appearing and disappearing in the video; now shown all the time |
+| `draw` | planned | `progressive`: growing up to its current point; now always `full` |
+| `remaining`, `tail_km`, `tail_s`, `head` | planned | with `progressive` |
 
-Style, by default taken from the GPX file's own OsmAnd extensions, can be overridden: `color`, `width`
-(`thin`/`medium`/`bold`/number), `coloring_type` (`solid`, `speed`, `altitude`, `slope`, or a point attribute such
-as `hr`), `color_palette`, `gradient_scale_type`, `show_arrows`, `show_start_finish`, `split_type`,
-`split_interval`, `visualization_3d` (`track_visualization_type`), `wall_coloring`
-(`track_3d_wall_coloring_type`), `line_position_3d` (`track_3d_line_position_type`), `vertical_exaggeration`,
-`elevation_meters`, `join_segments`, `show_wpts` (default true).
+### Waypoint callouts — works
 
-## Waypoints of a track — Status: planned
-
-Standard tags are used as they are: `name`, `desc`, `time`, `ele`, `type`, `link`, `osmand:icon`, `osmand:color`,
-`osmand:background`, `osmand:address`, `osmand:hidden`. The icon is drawn by the map; a label or bubble is drawn
-over the video at the waypoint's place on the screen.
-
-Extensions on `<wpt>` for the flyover:
+A label or bubble over a waypoint, at its place on the screen (with relief and tilt). By default it shows when the
+track's current point reaches the waypoint (within 300 m of the track) for 3 s; a waypoint away from the track
+shows while it is on the screen. Extensions on `<wpt>`:
 
 | Tag | Values | Meaning |
 |---|---|---|
-| `osmand:flyover_show` | `auto` / `always` / `never` | `auto`: when the track's current point reaches the waypoint (`progressive`) or the camera is near it (`full`) |
-| `osmand:flyover_show_s` | seconds | explicit time to appear, overrides `auto` |
+| `osmand:flyover_show` | `auto` / `always` / `never` | when to show |
+| `osmand:flyover_show_s` | seconds | explicit time to appear |
 | `osmand:flyover_duration_s` | seconds, default 3 | how long it stays |
-| `osmand:flyover_fade_s` | seconds, 0 = none | fade in and out |
-| `osmand:flyover_style` | `auto` / `icon` / `label` / `bubble` | `auto`: a short name is a label, a long text or a description is a bubble |
+| `osmand:flyover_fade_s` | seconds, default 0.4; 0 = none | fade in and out |
+| `osmand:flyover_style` | `auto` / `label` / `bubble` | `auto`: a short name is a label; a description or a long name is a bubble |
 | `osmand:flyover_text` | text | shown instead of the name and description |
-| `osmand:flyover_fields` | `name,desc,time,ele,address` | what a bubble shows |
+| `osmand:flyover_fields` | `desc,address,ele,time` | what a bubble shows under the name |
 
-## OsmAnd elements — Status: planned
+## OsmAnd elements — works
 
-`"osmand_widgets": ["profile_icon", "ruler", "compass"]` — the app's own profile icon, ruler and compass, drawn as
-in OsmAnd. The attribution "OsmAnd · © OpenStreetMap" is always drawn in the bottom right corner; `attribution`
-changes its text, but it must still credit OpenStreetMap.
+`"osmand_widgets": ["profile_icon", "ruler", "compass"]`: the profile icon (top left), OsmAnd's ruler (bottom left)
+and compass (top right, turns with the map), drawn as in OsmAnd. The attribution is always drawn bottom right.
+Keep panels clear of these corners with `margin`.
 
-## Panels and widgets — Status: planned
+## Panels — works
 
-Panels are placed like a FrameLayout: `gravity` (`top|left`, `top|center`, `top|right`, `center|left`, `center`,
-`center|right`, `bottom|left`, `bottom|center`, `bottom|right`), `margin` (px of the video), `width`/`height`
-(`wrap` or a fraction of the frame), `orientation` (`vertical`/`horizontal`), `from_s`/`to_s`/`fade_s`.
-Panels look like OsmAnd map widgets (day/night theme).
+Placed like a FrameLayout:
 
-A panel holds widgets of three types:
+| Field | Meaning |
+|---|---|
+| `gravity` | `top|left`, `top|center`, `top|right`, `center|left`, `center`, `center|right`, `bottom|left`, `bottom|center`, `bottom|right` |
+| `margin` | from the frame's edge, video pixels; default 16 |
+| `width` | none: as wide as the widgets; 0-1: a fraction of the frame; above 1: video pixels |
+| `orientation` | `vertical` (default) or `horizontal` |
+| `size` | widget size `small` / `medium` (default) / `large`, as OsmAnd's widget sizes; a widget may set its own |
+| `background` | `default` (the user's widget look), `transparent` (OsmAnd's transparent widgets, outlined text) or 0-1 opacity |
+| `from_s`, `to_s`, `fade_s` | when the panel shows |
+| `widgets[]` | see below |
 
-- `{"type": "attribute", "title": "Distance", "value": "gpx[1].progress_dist", "unit": "auto", "digits": 1}` —
-  a value at the current frame;
-- `{"type": "text", "text": "Morning ride"}` — fixed text;
-- `{"type": "chart", "title": "Elevation", "value": "gpx[1].ele"}` — the same value drawn over the whole track with
-  a cursor at the current point.
+Widgets look like OsmAnd's map widgets (icon, colours, the user's day/night widget look), laid out for video: icon,
+then the title above the value and its unit. Three types:
 
-`template` combines values: `"{gpx[1].progress_dist} / {gpx[1].dist}"`. `unit`: `auto` (the profile's units) or
-`km`, `mi`, `m`, `ft`, `km/h`, `mph`, `min/km`, `min/mi`, `bpm`, `rpm`, `W`, `°C`, `%`, `h:mm:ss`. A value that the
-track does not have is shown as "—".
+- `{"type": "attribute", "title": "Distance", "value": "gpx[1].progress_dist", "unit": "auto", "digits": 1}` — a
+  value at the current frame. `template` instead of `value` combines several: `"{gpx[1].progress_dist} / {gpx[1].dist}"`.
+- `{"type": "text", "title": "Ride", "text": "Morning ride"}` — fixed text.
+- `{"type": "chart", "title": "Heart rate", "value": "gpx[1].hr"}` — the value over the whole track, smoothed, the
+  passed part highlighted and a cursor at the current point; `width_dp` (default 280), `height_dp` (default 56).
+
+`icon`: an OsmAnd drawable name (e.g. `widget_speed`, `widget_sensor_heart_rate`); by default the icon OsmAnd's own
+widget for that value has. `unit`: `auto` (the profile's units) or `km`, `mi`, `m`, `ft`, `km/h`, `mph`, `min/km`,
+`min/mi`, `h:mm:ss`, or any label. A value the track does not have is shown as "—".
 
 ### Values
 
 At the current point (interpolated): `gpx[i].speed`, `.pace`, `.ele`, `.slope`, `.hr`, `.cadence`, `.power`,
-`.sensor_speed`, `.temp_air`, `.temp_water`, `.bike_distance`, `.obd.vehicle_speed`, `.obd.rpm`,
-`.obd.engine_load`, `.obd.throttle`, `.obd.fuel_consumption`, `.obd.fuel_remaining`, `.obd.coolant_temp`,
-`.obd.oil_temp`, `.obd.intake_temp`, `.obd.ambient_temp`, `.obd.battery_voltage`, `.obd.fuel_pressure`, `.time`,
-`.lat`, `.lon`, `.ext.<tag>` (any point tag).
+`.sensor_speed`, `.temp_air`, `.temp_water`, `.bike_distance`, `.time`, `.lat`, `.lon`, `.ext.<tag>` (any point tag).
 
-Progress: `gpx[i].progress_dist`, `.remaining_dist`, `.progress`, `.elapsed`, `.moving_elapsed`,
-`.remaining_time`, `.climb_so_far`, `.descent_so_far`, `.avg_speed_so_far`, `.max_speed_so_far`,
-`.next_wpt.name`, `.next_wpt.dist`.
+Progress: `gpx[i].progress_dist`, `.remaining_dist`, `.progress`, `.elapsed`, `.remaining_time`, `.climb_so_far`,
+`.descent_so_far`, `.avg_speed_so_far`, `.max_speed_so_far`, `.next_wpt.name`, `.next_wpt.dist`.
 
 Whole track: `gpx[i].dist`, `.dist_moving`, `.duration`, `.duration_moving`, `.start_time`, `.end_time`, `.date`,
-`.climb`, `.descent`, `.ele_min`, `.ele_max`, `.ele_avg`, `.speed_avg`, `.speed_max`, `.speed_min`, `.hr_avg`,
-`.hr_max`, `.hr_min`, `.cadence_avg`, `.cadence_max`, `.power_avg`, `.power_max`, `.temp_avg`, `.temp_max`,
-`.points`, `.wpt_count`, `.segments`.
+`.climb`, `.descent`, `.<point value>_min` / `_max` / `_avg` (e.g. `.ele_max`, `.hr_avg`, `.speed_avg`), `.points`,
+`.wpt_count`, `.segments`.
 
-Track description: `gpx[i].name`, `.desc`, `.author`, `.activity`, `.city`, `.file`, `.meta.<tag>`.
+Track description: `gpx[i].name`, `.desc`, `.author`, `.activity`, `.file`, `.meta.<tag>`.
 
 Video and camera: `video.time`, `video.progress`, `camera.zoom`, `camera.lat`, `camera.lon`, `camera.heading`,
-`camera.tilt`, `camera.ele` (terrain under the camera).
+`camera.tilt`.
 
-Your own data: `data.<name>` — a series or constant passed in the call as
-`"data": {"<name>": {"by": "time"|"distance", "gpx": 1, "points": [[x, value], ...]}}` or `{"<name>": 42}`.
+Your own data: `data.<name>`, passed in the call as a constant (`"data": {"goal": 42}` or text) or a series
+`{"by": "time" | "distance", "gpx": 1, "unit": "W", "points": [[x, value], ...]}` (x in video seconds or metres
+along the track).
 
-## Example: trip recap — Status: planned
+Planned: `gpx[i].moving_elapsed`, `.city`, `.obd.*` names, `camera.ele`.
+
+## Example: trip recap
 
 ```json
 {
   "camera": {"follow": 1, "zoom": 15, "tilt": 50},
-  "gpx": [{"file": "rec/2026-10-11_ride.gpx", "draw": "progressive", "time": {"mode": "duration", "duration_s": 30}, "head": "profile_icon"}],
+  "duration_s": 30,
+  "gpx": [{"file": "rec/2026-10-11_ride.gpx", "time": {"mode": "duration", "duration_s": 30}}],
   "osmand_widgets": ["profile_icon", "ruler", "compass"],
   "panels": [
-    {"gravity": "top|left", "margin": 16, "widgets": [
-      {"type": "text", "text": "Morning ride"},
-      {"type": "attribute", "title": "Distance", "template": "{gpx[1].progress_dist} / {gpx[1].dist}", "unit": "km", "digits": 1},
-      {"type": "attribute", "title": "Heart rate", "value": "gpx[1].hr", "unit": "bpm"}
+    {"gravity": "top|left", "margin": 88, "size": "small", "background": 0.85, "widgets": [
+      {"type": "attribute", "title": "Distance", "template": "{gpx[1].progress_dist} / {gpx[1].dist}"},
+      {"type": "attribute", "title": "Heart rate", "value": "gpx[1].hr"},
+      {"type": "attribute", "title": "Time", "value": "gpx[1].elapsed"}
     ]},
-    {"gravity": "bottom|center", "width": 0.9, "widgets": [
+    {"gravity": "top|right", "margin": 88, "size": "large", "background": "transparent", "widgets": [
+      {"type": "attribute", "title": "Speed", "value": "gpx[1].speed"}
+    ]},
+    {"gravity": "bottom|center", "margin": 40, "widgets": [
       {"type": "chart", "title": "Elevation", "value": "gpx[1].ele"}
     ]}
   ],

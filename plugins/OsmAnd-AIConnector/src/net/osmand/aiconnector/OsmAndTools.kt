@@ -422,7 +422,15 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 				prop("duration_s", "number", "Video length when the camera follows a track"),
 				prop("gpx", "array", "Tracks to show: {file, from_s, to_s, time, style...}; see osmand_guide topic flyover", items = "object"),
 				prop("osmand_widgets", "array", "OsmAnd elements: profile_icon, ruler, compass", items = "string"),
-				prop("attribution", "string", "Attribution text, default 'OsmAnd · © OpenStreetMap'")
+				prop("attribution", "string", "Attribution text, default 'OsmAnd · © OpenStreetMap'"),
+				prop("panels", "array", "Panels of widgets (attribute / text / chart) placed like a FrameLayout; " +
+						"see osmand_guide topic flyover", items = "object"),
+				prop("data", "object", "Your own values for panels: constants or series"),
+				prop("ease_in_s", "number", "Seconds the camera speeds up after the start, default 1"),
+				prop("ease_out_s", "number", "Seconds the camera slows down before the end, default 1"),
+				prop("scale", "string", "video (default) or screen: the phone's own map scale"),
+				prop("ui_scale", "number", "Size of everything drawn over the map, default 1"),
+				prop("profile", "string", "Profile key for the profile icon, default the current one")
 			)
 		) { a -> flyover(a) },
 		Tool(
