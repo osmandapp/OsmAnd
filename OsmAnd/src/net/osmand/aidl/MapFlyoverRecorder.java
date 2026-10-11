@@ -520,6 +520,10 @@ class MapFlyoverRecorder {
 			mapView.setZoomWithFloatPart(base, fZoom - base);
 			// the map view puts the target at its ratio of the phone's view; the rendered frame has another size
 			MapRendererView renderer = mapView.getMapRenderer();
+			if (renderer != null) {
+				// the map magnifier (map_density) as on the phone's map
+				renderer.setVisualZoomShift(app.getOsmandMap().getMapDensity() - 1.0f);
+			}
 			if (renderer != null && renderWidth > 0) {
 				PointF ratio = app.getMapViewTrackingUtilities().getMapDisplayPositionManager().getMapRatio();
 				renderer.setMapTarget(new PointI(Math.round(ratio.x * renderWidth), Math.round(ratio.y * renderHeight)),
