@@ -57,6 +57,9 @@ class FlyoverTrack {
 
 	private final double startS;
 	private final double durationS;
+	/** The track's own profile (request or file), null when it uses the current one. */
+	@Nullable
+	final String profileKey;
 	private final double speedX;
 
 	/** A place on the track: between points {@code index} and {@code index + 1}, at {@code fraction}. */
@@ -147,6 +150,7 @@ class FlyoverTrack {
 		// the profile of the track (in the request, in the file, or the current one) gives its map icons
 		String profileKey = spec.optString("profile", gpx.getExtensionsToRead().get("profile"));
 		ApplicationMode profile = Algorithms.isEmpty(profileKey) ? null : ApplicationMode.valueOfStringKey(profileKey, null);
+		this.profileKey = profile != null ? profile.getStringKey() : null;
 		if (profile == null) {
 			profile = app.getSettings().getApplicationMode();
 		}

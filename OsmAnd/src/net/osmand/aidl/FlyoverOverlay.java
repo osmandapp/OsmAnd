@@ -150,7 +150,8 @@ class FlyoverOverlay {
 						Math.round(at.x + size / 2f), Math.round(at.y + size / 2f));
 				canvas.save();
 				if (navigation) {
-					canvas.rotate(angle, at.x, at.y);
+					// OsmAnd's navigation icons point east, PointLocationLayer turns them by bearing - 90
+					canvas.rotate(angle - 90, at.x, at.y);
 				}
 				icon.draw(canvas);
 				canvas.restore();

@@ -83,7 +83,7 @@ recording only; the user's own shown tracks are put back afterwards. Track waypo
 |---|---|---|
 | `file` | works | a saved track: path in OsmAnd's tracks folder, e.g. `rec/2026-10-11_ride.gpx` or `import/x.gpx` (see `osmand_list_tracks`) |
 | `gpx_data` | works | instead of `file`: a GPX passed in the call as text (any track or route); kept with the flyover, not added to the user's tracks |
-| `profile` | works | profile key whose map icons the head uses; default the file's `osmand:profile`, else the current profile |
+| `profile` | works | profile key whose map icons the head uses; default the file's `osmand:profile`, else the current profile; the first track's profile is also the profile icon's when the request has no `profile` |
 | `time` | works | `{"mode": "duration", "duration_s": 30}` (default: the whole video): spread over the time, by the track's own times when it has them, else by distance; `{"mode": "track", "speed_x": 60, "offset_s": 0}`: the track's own times sped up |
 | `from_s` | works | when the track appears and starts moving (its current point stays at the start before) |
 | style | works | over the file's own: `color`, `width` (`thin`/`medium`/`bold`/number), `coloring_type` (`solid`, `speed`, `altitude`, `slope`, ...), `color_palette`, `show_arrows`, `show_start_finish`, `split_type`, `split_interval`, `visualization_3d`, `wall_coloring`, `line_position_3d`, `vertical_exaggeration`, `elevation_meters`, `show_wpts` |

@@ -170,6 +170,10 @@ class MapFlyoverRecorder {
 			view = takeRendererOver(renderWidth, renderHeight, "screen".equals(spec.optString("scale")),
 					(float) spec.optDouble("detail", DEFAULT_DETAIL));
 			encoder = new VideoEncoder(file, params.getWidth(), params.getHeight(), params.getFps());
+			if (!spec.has("profile") && !tracks.isEmpty() && tracks.get(0).profileKey != null) {
+				// the profile icon of the first track's profile, not the phone's current one
+				spec.put("profile", tracks.get(0).profileKey);
+			}
 			FlyoverOverlay overlay = new FlyoverOverlay(app, spec, params.getWidth(), params.getHeight());
 			FlyoverValues values = new FlyoverValues(app, tracks, spec.optJSONObject("data"));
 			values.setTiming(spec.optDouble("smooth_s", 1.5), spec.optDouble("refresh_s", 0.25));
