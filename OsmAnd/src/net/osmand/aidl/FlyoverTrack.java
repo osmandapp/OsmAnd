@@ -59,6 +59,7 @@ class FlyoverTrack {
 	private final double startS;
 	private final double durationS;
 	private static final double HEAD_ROAD_M = 20;
+	private static final double HEAD_ROAD_PX = 30;
 	/** The track's own profile (request or file), null when it uses the current one. */
 	@Nullable
 	final String profileKey;
@@ -405,22 +406,22 @@ class FlyoverTrack {
 
 	/**
 	 * The head marker's place, then two points along its direction (from, to). The direction is the road's here,
-	 * over about 12 px of the screen each way (at least 20 m), averaged over 0.6 s of video: the arrow follows the
+	 * over about 30 px of the screen each way (at least 20 m), averaged over 1 s of video: the arrow follows the
 	 * road, turns smoothly in bends, and seen from far it follows a zigzag's trend instead of spinning with each
 	 * hairpin. Null when there is no head.
 	 */
 	@Nullable
 	WptPt[] headPoints(double t, double metersPerPixel) {
-		double road = Math.max(HEAD_ROAD_M, 12 * metersPerPixel);
+		double road = Math.max(HEAD_ROAD_M, HEAD_ROAD_PX * metersPerPixel);
 		if ("none".equals(head) || !isVisible(t)) {
 			return null;
 		}
 		Position p = at(t);
 		double sin = 0, cos = 0;
-		for (int k = -3; k <= 3; k++) {
+		for (int k = -5; k <= 5; k++) {
 			double d = at(t + k * 0.1).distance;
 			WptPt a = pointAt(Math.max(0, d - road)), b = pointAt(Math.min(getLength(), d + road));
-			double w = 4 - Math.abs(k);
+			double w = 6 - Math.abs(k);
 			double bearing = Math.toRadians(bearing(a.getLat(), a.getLon(), b.getLat(), b.getLon()));
 			sin += w * Math.sin(bearing);
 			cos += w * Math.cos(bearing);
