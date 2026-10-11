@@ -20,6 +20,9 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.views.MapViewWithLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -27,13 +30,18 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -72,7 +80,15 @@ class MapFlyoverRecorder {
 		while (app.isApplicationInitializing() && SystemClock.elapsedRealtime() < initUntil) {
 			SystemClock.sleep(200);
 		}
-		String error = validate(params);
+		JSONObject spec;
+		String error;
+		try {
+			spec = parseSpec(params.getSpec());
+			error = validate(params, spec);
+		} catch (IllegalArgumentException e) {
+			spec = null;
+			error = e.getMessage();
+		}
 		if (error != null) {
 			params.setError(error);
 			return false;
@@ -81,16 +97,31 @@ class MapFlyoverRecorder {
 		File file = getFile(params.getFileName());
 		AtlasMapRendererView view = null;
 		VideoEncoder encoder = null;
+		List<FlyoverTrack> tracks = new ArrayList<>();
+		Map<String, SelectedGpxFile> shownBefore = new HashMap<>();
 		int notIdleFrames = 0;
 		try {
+			double videoS = getVideoDuration(params, spec);
+			JSONArray gpxSpecs = spec.optJSONArray("gpx");
+			for (int k = 0; gpxSpecs != null && k < gpxSpecs.length(); k++) {
+				tracks.add(new FlyoverTrack(app, k + 1, gpxSpecs.getJSONObject(k), videoS));
+			}
+			JSONObject follow = spec.optJSONObject("camera");
+			FlyoverTrack followed = null;
+			if (follow != null && follow.has("follow")) {
+				int number = follow.optInt("follow");
+				if (number < 1 || number > tracks.size()) {
+					throw new IllegalArgumentException("camera.follow is the number of a track in gpx[], 1-" + tracks.size());
+				}
+				followed = tracks.get(number - 1);
+			}
+			showTracks(tracks, shownBefore);
 			// rendered at twice the size and scaled down: thin lines and text edges stop shimmering in motion
 			int scale = params.getWidth() * SUPERSAMPLING <= MAX_SIZE && params.getHeight() * SUPERSAMPLING <= MAX_SIZE ? SUPERSAMPLING : 1;
 			view = takeRendererOver(params.getWidth() * scale, params.getHeight() * scale);
 			encoder = new VideoEncoder(file, params.getWidth(), params.getHeight(), params.getFps());
-			FlyoverOverlay overlay = new FlyoverOverlay(app, parseSpec(params.getSpec()), params.getWidth(), params.getHeight());
-			long[] times = params.getTimesMs();
-			long durationMs = times[times.length - 1];
-			int frames = (int) (durationMs * params.getFps() / 1000) + 1;
+			FlyoverOverlay overlay = new FlyoverOverlay(app, spec, params.getWidth(), params.getHeight());
+			int frames = (int) Math.round(videoS * params.getFps()) + 1;
 			// the map moves across the screen at most this fast: above ~250 px/s sharp lines strobe
 			float pxPerTile = 256 * Math.max(1f, Math.max(params.getWidth(), params.getHeight()) / 640f);
 			double maxSpeed = 0;
@@ -110,7 +141,8 @@ class MapFlyoverRecorder {
 				}
 				// symbols that come and go at a layout fade in and out on the video's clock
 				view.setSymbolsFade(SYMBOLS_FADE_MS, t);
-				double[] camera = setCamera(params, t);
+				double[] camera = followed != null ? followCamera(followed, follow, t / 1000.0) : keyframeCamera(params, t);
+				applyCamera(camera);
 				if (prev != null) {
 					maxSpeed = Math.max(maxSpeed, screenDistance(prev, camera, pxPerTile) * params.getFps());
 				}
@@ -146,6 +178,7 @@ class MapFlyoverRecorder {
 			params.setError(e.getMessage() != null ? e.getMessage() : e.toString());
 			return false;
 		} finally {
+			hideTracks(tracks, shownBefore);
 			if (encoder != null) {
 				encoder.release();
 				file.delete();
@@ -157,8 +190,13 @@ class MapFlyoverRecorder {
 	}
 
 	@Nullable
-	private String validate(@NonNull MapFlyoverParams p) {
+	private String validate(@NonNull MapFlyoverParams p, @NonNull JSONObject spec) {
 		int n = p.getLatitudes().length;
+		JSONObject camera = spec.optJSONObject("camera");
+		if (n == 0 && camera != null && camera.has("follow")) {
+			double d = spec.optDouble("duration_s", 0);
+			return d > 0 && d <= 600 ? checkVideo(p) : "A video that follows a track needs duration_s, 0-600";
+		}
 		if (n == 0 || p.getLongitudes().length != n || p.getZooms().length != n || p.getAzimuths().length != n
 				|| p.getElevationAngles().length != n || p.getTimesMs().length != n) {
 			return "Key frames need the same number of latitudes, longitudes, zooms, azimuths, elevation angles and times";
@@ -172,6 +210,11 @@ class MapFlyoverRecorder {
 		if (times[n - 1] <= 0 || times[n - 1] > 10 * 60_000) {
 			return "The flight lasts from 1 ms to 10 minutes";
 		}
+		return checkVideo(p);
+	}
+
+	@Nullable
+	private String checkVideo(@NonNull MapFlyoverParams p) {
 		if (p.getWidth() < 16 || p.getHeight() < 16 || p.getWidth() > 3840 || p.getHeight() > 3840
 				|| p.getWidth() % 2 != 0 || p.getHeight() % 2 != 0) {
 			return "Width and height are even numbers from 16 to 3840";
@@ -276,9 +319,39 @@ class MapFlyoverRecorder {
 		}
 	}
 
-	/** Camera at time t, set on the map; returns {lat, lon, zoom, rotation}. */
+	private static double getVideoDuration(@NonNull MapFlyoverParams p, @NonNull JSONObject spec) {
+		long[] times = p.getTimesMs();
+		return times.length > 0 ? times[times.length - 1] / 1000.0 : spec.optDouble("duration_s");
+	}
+
+	/**
+	 * Camera that follows a track: the center is the track's point averaged over a short window (GPS noise does
+	 * not shake the video), heading from the track a little behind to a little ahead, also averaged.
+	 * Returns {lat, lon, zoom, rotation, elevation angle}.
+	 */
 	@NonNull
-	private double[] setCamera(@NonNull MapFlyoverParams p, long t) throws InterruptedException {
+	private static double[] followCamera(@NonNull FlyoverTrack track, @NonNull JSONObject camera, double t) {
+		double ahead = camera.optDouble("look_ahead_s", 3);
+		double lat = 0, lon = 0, sin = 0, cos = 0;
+		int samples = 5;
+		for (int k = 0; k < samples; k++) {
+			double tk = t + (k - samples / 2) * 0.15;
+			FlyoverTrack.Position p = track.at(tk);
+			lat += p.lat;
+			lon += p.lon;
+			double b = Math.toRadians(track.bearing(tk, 1, ahead));
+			sin += Math.sin(b);
+			cos += Math.cos(b);
+		}
+		double heading = Math.toDegrees(Math.atan2(sin, cos));
+		// OsmAnd turns the map by minus the heading so that the way ahead is up
+		return new double[] {lat / samples, lon / samples, camera.optDouble("zoom", 15), -heading,
+				camera.optDouble("tilt", 50)};
+	}
+
+	/** Camera at time t from the key frames; returns {lat, lon, zoom, rotation, elevation angle}. */
+	@NonNull
+	private double[] keyframeCamera(@NonNull MapFlyoverParams p, long t) {
 		long[] times = p.getTimesMs();
 		int n = times.length;
 		int i = 0;
@@ -306,8 +379,12 @@ class MapFlyoverRecorder {
 			azimuth = from + (float) MapUtils.unifyRotationDiff(from, p.getAzimuths()[i + 1]) * e;
 			elevation = lerp(p.getElevationAngles()[i], p.getElevationAngles()[i + 1], e);
 		}
-		double fLat = lat, fLon = lon;
-		float fZoom = zoom, fAzimuth = azimuth, fElevation = elevation;
+		return new double[] {lat, lon, zoom, azimuth, elevation};
+	}
+
+	private void applyCamera(@NonNull double[] camera) throws InterruptedException {
+		double fLat = camera[0], fLon = camera[1];
+		float fZoom = (float) camera[2], fAzimuth = (float) camera[3], fElevation = (float) camera[4];
 		runInUiThread(() -> {
 			// immediate setters: the animated ones would run on their own clock, not the video's
 			mapView.getAnimatedDraggingThread().stopAnimating();
@@ -317,7 +394,45 @@ class MapFlyoverRecorder {
 			int base = (int) Math.floor(fZoom);
 			mapView.setZoomWithFloatPart(base, fZoom - base);
 		});
-		return new double[] {lat, lon, zoom, azimuth};
+	}
+
+	/** The tracks are shown for the recording only: the user's selection is put back afterwards. */
+	private void showTracks(@NonNull List<FlyoverTrack> tracks, @NonNull Map<String, SelectedGpxFile> shownBefore)
+			throws InterruptedException {
+		if (tracks.isEmpty()) {
+			return;
+		}
+		runInUiThread(() -> {
+			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			for (FlyoverTrack track : tracks) {
+				SelectedGpxFile before = helper.getSelectedFileByPath(track.file.getAbsolutePath());
+				if (before != null) {
+					shownBefore.put(track.file.getAbsolutePath(), before);
+				}
+				helper.selectGpxFile(track.gpx, GpxSelectionParams.newInstance().showOnMap());
+			}
+		});
+	}
+
+	private void hideTracks(@NonNull List<FlyoverTrack> tracks, @NonNull Map<String, SelectedGpxFile> shownBefore) {
+		if (tracks.isEmpty()) {
+			return;
+		}
+		try {
+			runInUiThread(() -> {
+				GpxSelectionHelper helper = app.getSelectedGpxHelper();
+				for (FlyoverTrack track : tracks) {
+					SelectedGpxFile before = shownBefore.get(track.file.getAbsolutePath());
+					if (before != null) {
+						helper.selectGpxFile(before.getGpxFile(), GpxSelectionParams.newInstance().showOnMap());
+					} else {
+						helper.selectGpxFile(track.gpx, GpxSelectionParams.newInstance().hideFromMap());
+					}
+				}
+			});
+		} catch (InterruptedException e) {
+			LOG.error(e);
+		}
 	}
 
 	/** Pixels the map moves on the screen between two cameras, measured at the higher zoom. */

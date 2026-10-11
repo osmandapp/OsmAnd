@@ -418,7 +418,11 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 				prop("height", "integer", "Video height, even, default 720"),
 				prop("fps", "integer", "Frames per second, default 30"),
 				prop("name", "string", "File name, default flyover_<time>.mp4"),
-				required = listOf("keyframes")
+				prop("camera", "object", "Instead of keyframes: {follow: track number in gpx, zoom, tilt, look_ahead_s}"),
+				prop("duration_s", "number", "Video length when the camera follows a track"),
+				prop("gpx", "array", "Tracks to show: {file, from_s, to_s, time, style...}; see osmand_guide topic flyover", items = "object"),
+				prop("osmand_widgets", "array", "OsmAnd elements: profile_icon, ruler, compass", items = "string"),
+				prop("attribution", "string", "Attribution text, default 'OsmAnd · © OpenStreetMap'")
 			)
 		) { a -> flyover(a) },
 		Tool(
@@ -433,9 +437,12 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 	).associateBy { it.name }
 
 	private fun flyover(a: JSONObject): JSONObject {
-		val frames = a.getJSONArray("keyframes")
+		// a camera that follows a track needs no key frames; OsmAnd checks the rest of the request
+		val frames = a.optJSONArray("keyframes") ?: JSONArray()
 		val n = frames.length()
-		if (n < 1) throw ToolError("Give at least one key frame")
+		if (n < 1 && a.optJSONObject("camera")?.has("follow") != true) {
+			throw ToolError("Give key frames, or camera.follow with duration_s; see osmand_guide topic flyover")
+		}
 		val lat = DoubleArray(n)
 		val lon = DoubleArray(n)
 		val zoom = FloatArray(n)
