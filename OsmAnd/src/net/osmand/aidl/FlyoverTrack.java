@@ -8,6 +8,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.PointAttributes;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -15,6 +17,7 @@ import net.osmand.util.MapUtils;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +37,17 @@ class FlyoverTrack {
 	final double fromS;
 	final double toS;
 	final double fadeS;
+
+	final String draw;
+	final String remaining;
+	final double tailKm;
+	final double tailS;
+	final String head;
+	/** The track as OsmAnd shows it; its display segments are replaced every frame while it grows or fades. */
+	@Nullable
+	SelectedGpxFile selected;
+	@Nullable
+	private List<TrkSegment> original;
 
 	private final double startS;
 	private final double durationS;
@@ -94,6 +108,11 @@ class FlyoverTrack {
 		fromS = spec.optDouble("from_s", 0);
 		toS = spec.optDouble("to_s", videoS);
 		fadeS = spec.optDouble("fade_s", 0);
+		draw = spec.optString("draw", "full");
+		remaining = spec.optString("remaining", "hidden");
+		tailKm = spec.optDouble("tail_km", 0);
+		tailS = spec.optDouble("tail_s", 0);
+		head = spec.optString("head", "progressive".equals(draw) ? "dot" : "none");
 		JSONObject timing = spec.optJSONObject("time");
 		String mode = timing != null ? timing.optString("mode", "duration") : "duration";
 		startS = fromS + (timing != null ? timing.optDouble("offset_s", 0) : 0);
@@ -200,6 +219,110 @@ class FlyoverTrack {
 		double y = Math.sin(dl) * Math.cos(f2);
 		double x = Math.cos(f1) * Math.sin(f2) - Math.sin(f1) * Math.cos(f2) * Math.cos(dl);
 		return (Math.toDegrees(Math.atan2(y, x)) + 360) % 360;
+	}
+
+	/**
+	 * What the map shows of the track at video time t: everything, nothing outside from_s..to_s, faded in and out,
+	 * or with draw: progressive the part passed so far (or its last tail_km / tail_s) and the rest hidden, faded or
+	 * thin. Runs on the UI thread before the map layers draw.
+	 */
+	void updateDisplay(double t, double videoS) {
+		if (selected == null) {
+			return;
+		}
+		List<TrkSegment> display = selected.getPointsToDisplay();
+		if (original == null) {
+			original = new ArrayList<>(display);
+		}
+		float opacity = getOpacity(Math.min(t, videoS));
+		if (!"progressive".equals(draw) && fromS <= 0 && fadeS <= 0 && t <= toS) {
+			if (display.size() != original.size() || (!display.isEmpty() && display.get(0) != original.get(0))) {
+				display.clear();
+				display.addAll(original);
+			}
+			return;
+		}
+		display.clear();
+		if (opacity <= 0 || original.isEmpty()) {
+			return;
+		}
+		TrkSegment style = original.get(0);
+		if (!"progressive".equals(draw)) {
+			for (TrkSegment s : original) {
+				display.add(copy(s, s.getPoints(), opacity));
+			}
+			return;
+		}
+		Position p = at(t);
+		double from = 0;
+		if (tailKm > 0) from = Math.max(from, p.distance - tailKm * 1000);
+		if (tailS > 0) from = Math.max(from, at(t - tailS).distance);
+		List<WptPt> passed = new ArrayList<>();
+		if (from > 0) {
+			passed.add(pointAt(from));
+		}
+		for (int i = 0; i <= p.index; i++) {
+			if (dist[i] > from) passed.add(points.get(i));
+		}
+		WptPt headPoint = pointAt(p.distance);
+		passed.add(headPoint);
+		if (passed.size() >= 2) {
+			display.add(copy(style, passed, opacity));
+		}
+		if (!"hidden".equals(remaining) && p.index + 1 < points.size()) {
+			List<WptPt> rest = new ArrayList<>();
+			rest.add(headPoint);
+			rest.addAll(points.subList(p.index + 1, points.size()));
+			TrkSegment r = copy(style, rest, "faded".equals(remaining) ? opacity * 0.35f : opacity);
+			if ("thin".equals(remaining)) {
+				r.setWidth("thin");
+			}
+			display.add(r);
+		}
+	}
+
+	/** The head marker's place and a point a little ahead, for its direction; null when there is no head. */
+	@Nullable
+	WptPt[] headPoints(double t) {
+		if ("none".equals(head) || !isVisible(t)) {
+			return null;
+		}
+		Position p = at(t);
+		return new WptPt[] {pointAt(p.distance), pointAt(Math.min(getLength(), p.distance + 15))};
+	}
+
+	@Nullable
+	Integer getColor() {
+		List<TrkSegment> segments = original != null ? original : null;
+		return segments != null && !segments.isEmpty() ? segments.get(0).getColor(null) : null;
+	}
+
+	/** A point at a distance along the track, with interpolated elevation (the 3D line stays on the relief). */
+	@NonNull
+	private WptPt pointAt(double distance) {
+		int i = search(dist, distance);
+		double span = dist[i + 1] - dist[i];
+		double f = span > 0 ? Math.max(0, Math.min(1, (distance - dist[i]) / span)) : 0;
+		WptPt a = points.get(i), b = points.get(i + 1);
+		WptPt pt = new WptPt(a.getLat() + (b.getLat() - a.getLat()) * f, a.getLon() + (b.getLon() - a.getLon()) * f);
+		if (!Double.isNaN(a.getEle()) && !Double.isNaN(b.getEle())) {
+			pt.setEle(a.getEle() + (b.getEle() - a.getEle()) * f);
+		}
+		return pt;
+	}
+
+	/** A new segment object, so the map layer builds its line again; colour and width as the original's. */
+	@NonNull
+	private static TrkSegment copy(@NonNull TrkSegment style, @NonNull List<WptPt> points, float opacity) {
+		TrkSegment s = new TrkSegment();
+		s.getPoints().addAll(points);
+		Integer color = style.getColor(null);
+		if (color != null) {
+			int alpha = Math.round(((color >>> 24) & 0xFF) * opacity);
+			s.setColor((alpha << 24) | (color & 0xFFFFFF));
+		}
+		s.setWidth(style.getWidth(null));
+		return s;
 	}
 
 	/** Value of a point attribute (sensor or any extension tag) at a position, interpolated; NaN when absent. */

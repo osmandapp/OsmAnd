@@ -5,6 +5,8 @@ import static net.osmand.plus.utils.OsmAndFormatterParams.NO_TRAILING_ZEROS;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -54,6 +56,8 @@ class FlyoverOverlay {
 	private final Drawable profileIcon;
 	@Nullable
 	private final Drawable rulerImage;
+	@Nullable
+	private final Drawable headIcon;
 
 	FlyoverOverlay(@NonNull OsmandApplication app, @NonNull JSONObject spec, int width, int height) {
 		this.app = app;
@@ -70,6 +74,7 @@ class FlyoverOverlay {
 		ApplicationMode mode = getProfile(spec.optString("profile"));
 		profileIcon = elements.contains(PROFILE_ICON) ? copy(app.getUIUtilities()
 				.getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode))) : null;
+		headIcon = copy(app.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode)));
 		rulerImage = elements.contains(RULER)
 				? ContextCompat.getDrawable(app, nightMode ? R.drawable.ruler_night : R.drawable.ruler) : null;
 	}
@@ -105,6 +110,44 @@ class FlyoverOverlay {
 			drawRuler(canvas, latitude, zoom, margin);
 		}
 		drawAttribution(canvas, margin);
+	}
+
+	/** The marker at a track's current point: a dot, an arrow along the track, or the profile icon. */
+	void drawHead(@NonNull Canvas canvas, @NonNull PointF at, @Nullable PointF ahead, @NonNull String style,
+	              @Nullable Integer color) {
+		int c = color != null ? color | 0xFF000000 : 0xFFFF5A2B;
+		if ("profile_icon".equals(style) && headIcon != null) {
+			float size = dp(36);
+			drawButton(canvas, headIcon, at.x - size / 2, at.y - size / 2, size, 0);
+			return;
+		}
+		paint.setStyle(Paint.Style.FILL);
+		if ("arrow".equals(style) && ahead != null && (ahead.x != at.x || ahead.y != at.y)) {
+			float angle = (float) Math.toDegrees(Math.atan2(ahead.x - at.x, at.y - ahead.y));
+			canvas.save();
+			canvas.rotate(angle, at.x, at.y);
+			Path arrow = new Path();
+			arrow.moveTo(at.x, at.y - dp(13));
+			arrow.lineTo(at.x + dp(10), at.y + dp(10));
+			arrow.lineTo(at.x, at.y + dp(5));
+			arrow.lineTo(at.x - dp(10), at.y + dp(10));
+			arrow.close();
+			paint.setColor(Color.WHITE);
+			paint.setShadowLayer(dp(3), 0, dp(1), 0x60000000);
+			canvas.drawPath(arrow, paint);
+			paint.clearShadowLayer();
+			canvas.scale(0.72f, 0.72f, at.x, at.y + dp(1));
+			paint.setColor(c);
+			canvas.drawPath(arrow, paint);
+			canvas.restore();
+			return;
+		}
+		paint.setColor(Color.WHITE);
+		paint.setShadowLayer(dp(3), 0, dp(1), 0x60000000);
+		canvas.drawCircle(at.x, at.y, dp(9), paint);
+		paint.clearShadowLayer();
+		paint.setColor(c);
+		canvas.drawCircle(at.x, at.y, dp(6), paint);
 	}
 
 	private void drawButton(@NonNull Canvas canvas, @NonNull Drawable icon, float left, float top, float size, float rotation) {

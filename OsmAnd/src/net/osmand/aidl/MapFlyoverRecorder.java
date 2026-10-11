@@ -160,7 +160,11 @@ class MapFlyoverRecorder {
 			view.setSymbolsUpdateInterval(Integer.MAX_VALUE);
 			int symbolsEvery = Math.max(1, (int) (SYMBOLS_UPDATE_MS * params.getFps() / 1000));
 			// the renderer still shows the phone's camera: draw the start once, unrecorded, so frame 0 is right
-			applyCamera(followed != null ? followCamera(followed, follow, 0) : keyframeCamera(params, spec, 0));
+			applyCamera(followed != null ? followCamera(followed, follow, 0) : keyframeCamera(params, spec, 0), () -> {
+				for (FlyoverTrack track : tracks) {
+					track.updateDisplay(0, videoS);
+				}
+			});
 			// load_timeout_s: how long a frame may wait for map data (relief on a slow device loads for long)
 			double loadTimeoutS = spec.optDouble("load_timeout_s", Double.NaN);
 			long firstTimeout = Double.isNaN(loadTimeoutS) ? FIRST_FRAME_TIMEOUT_MS : (long) (loadTimeoutS * 1000);
@@ -178,7 +182,11 @@ class MapFlyoverRecorder {
 				// symbols that come and go at a layout fade in and out on the video's clock
 				view.setSymbolsFade(SYMBOLS_FADE_MS, t);
 				double[] camera = followed != null ? followCamera(followed, follow, t / 1000.0) : keyframeCamera(params, spec, t);
-				applyCamera(camera);
+				applyCamera(camera, () -> {
+					for (FlyoverTrack track : tracks) {
+						track.updateDisplay(t / 1000.0, videoS);
+					}
+				});
 				if (prev != null) {
 					maxSpeed = Math.max(maxSpeed, screenDistance(prev, camera, pxPerTile) * params.getFps());
 				}
@@ -202,6 +210,16 @@ class MapFlyoverRecorder {
 				}
 				Canvas frameCanvas = new Canvas(frame);
 				overlay.draw(frameCanvas, camera[0], (float) camera[2], (float) camera[3]);
+				for (FlyoverTrack track : tracks) {
+					WptPt[] head = track.headPoints(t / 1000.0);
+					if (head != null) {
+						Map<WptPt, PointF> pts = project(Arrays.asList(head), scale, params.getWidth(), params.getHeight());
+						PointF at = pts.get(head[0]);
+						if (at != null) {
+							overlay.drawHead(frameCanvas, at, pts.get(head[1]), track.head, track.getColor());
+						}
+					}
+				}
 				if (!callouts.isEmpty()) {
 					Map<WptPt, PointF> onScreen = project(callouts.visibleAt(t / 1000.0), scale,
 							params.getWidth(), params.getHeight());
@@ -507,7 +525,8 @@ class MapFlyoverRecorder {
 		return total - v * rest * rest / (2 * Math.max(b, 1e-9));
 	}
 
-	private void applyCamera(@NonNull double[] camera) throws InterruptedException {
+	/** Sets the camera and lets the map layers build what changed; {@code beforeLayers} runs just before them. */
+	private void applyCamera(@NonNull double[] camera, @Nullable Runnable beforeLayers) throws InterruptedException {
 		double fLat = camera[0], fLon = camera[1];
 		float fZoom = (float) camera[2], fAzimuth = (float) camera[3], fElevation = (float) camera[4];
 		runInUiThread(() -> {
@@ -528,6 +547,9 @@ class MapFlyoverRecorder {
 				PointF ratio = app.getMapViewTrackingUtilities().getMapDisplayPositionManager().getMapRatio();
 				renderer.setMapTarget(new PointI(Math.round(ratio.x * renderWidth), Math.round(ratio.y * renderHeight)),
 						NativeUtilities.calculateTarget31(renderer, fLat, fLon, false));
+			}
+			if (beforeLayers != null) {
+				beforeLayers.run();
 			}
 			boolean night = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 			mapView.drawOverMap(layersCanvas, mapView.getRotatedTileBox(), new DrawSettings(night, false));
@@ -574,7 +596,7 @@ class MapFlyoverRecorder {
 				if (before != null) {
 					shownBefore.put(track.file.getAbsolutePath(), before);
 				}
-				helper.selectGpxFile(track.gpx, GpxSelectionParams.newInstance().showOnMap());
+				track.selected = helper.selectGpxFile(track.gpx, GpxSelectionParams.newInstance().showOnMap());
 			}
 		});
 	}
