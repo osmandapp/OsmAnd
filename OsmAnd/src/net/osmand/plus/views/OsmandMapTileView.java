@@ -52,7 +52,6 @@ import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
-import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -2060,8 +2059,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
         boolean wasZoomingAndRotating = multiTouchSupport != null && multiTouchSupport.isZoomingAndRotating();
 		boolean isMultiTouch = multiTouchSupport != null && multiTouchSupport.onTouchEvent(event);
 
-		MeasurementToolLayer layer = getMeasurementToolLayer();
-		if (mapRenderer != null && multiTouchSupport != null && (layer == null || !layer.isInMeasurementMode())) {
+		if (mapRenderer != null && multiTouchSupport != null) {
 			int actionCode = event.getActionMasked();
 			if (actionCode != MotionEvent.ACTION_DOWN
 					&& actionCode != MotionEvent.ACTION_UP
@@ -2082,12 +2080,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					// Find map location of second touch for map gestures
 					PointF touchPoint = multiTouchSupport.getSecondPoint();
 					findSecondTouchMapLocation(touchPoint.x, touchPoint.y);
-					if (!targetChanged) {
-						targetChanged = true;
-						// Remember last target position before it is changed with map gesture
-						PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
-						targetPixelX = targetPixelPosition.getX();
-						targetPixelY = targetPixelPosition.getY();
+					if (rememberTargetPosition(mapRenderer)) {
 						touchPoint = multiTouchSupport.getFirstPoint();
 						findFirstTouchMapLocation(touchPoint.x, touchPoint.y);
 					}
@@ -2211,9 +2204,33 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (MapTileViewMultiTouchZoomListener.isPinchZoomMagnificationEnabled
 				&& multiTouchSupport != null
 				&& multiTouchSupport.isInZoomAndRotationMode()) {
-			return (float) multiTouchSupport.getZoomRelative();
+			return (float) limitMagnificationScale(multiTouchSupport.getZoomRelative());
 		}
 		return 1.0f;
+	}
+
+	private double limitMagnificationScale(double scale) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null || scale <= 1.0) {
+			return scale;
+		}
+		float maxScale = 1.0f / Zoom.getDistanceAfterZoom(1.0f, getRendererZoom(mapRenderer), mapRenderer.getMaxZoomLevel());
+		return Math.min(scale, Math.max(1.0f, maxScale));
+	}
+
+	private float getRendererZoom(@NonNull MapRendererView mapRenderer) {
+		return mapRenderer.getZoomLevel().ordinal() + Zoom.visualToFloatPart(mapRenderer.getVisualZoom());
+	}
+
+	private boolean rememberTargetPosition(@NonNull MapRendererView mapRenderer) {
+		if (!targetChanged) {
+			targetChanged = true;
+			PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
+			targetPixelX = targetPixelPosition.getX();
+			targetPixelY = targetPixelPosition.getY();
+			return true;
+		}
+		return false;
 	}
 
 	public void setPinchZoomMagnificationEnabled(boolean enabled) {
@@ -2240,23 +2257,29 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private float y2;
 		private LatLon initialCenterLatLon;
 		private PointI initialFirstLocation;
+		private boolean magnifying;
 		private boolean startRotating;
 		private boolean startZooming;
 		private float initialElevation;
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
-			MeasurementToolLayer layer = getMeasurementToolLayer();
 			MapRendererView mapRenderer = getMapRenderer();
-			boolean completedAnimation = mapRenderer != null && (layer == null || !layer.isInMeasurementMode());
-			int newIntZoom = getZoom();
+			boolean completedAnimation = mapRenderer != null;
+			magnifying = false;
 
 			if (completedAnimation) {
                 setCurrentZoom(0.0);
 				refreshMap();
+				if (isPinchZoomMagnificationEnabled) {
+					mapRenderer.setViewportScale(0.0, false);
+					mapRenderer.setViewportShift(0, 0, false);
+					changeZoomPosition((float) 0, 0);
+				}
 			} else {
 				finishZoomAndRotationGesture();
 			}
+			int newIntZoom = getZoom();
 
 			if (startRotating) {
 				if (!completedAnimation) {
@@ -2274,24 +2297,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					LatLon p2 = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport, x2, y2);
 					app.showToastMessage(OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(
 							p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), app));
-				}
-			}
-
-			if (isPinchZoomMagnificationEnabled && mapRenderer != null) {
-				mapRenderer.setViewportScale(0.0, false);
-				mapRenderer.setViewportShift(0, 0, false);
-				if (completedAnimation) {
-					changeZoomPosition((float) 0, 0);
-				} else if ((startZooming || startRotating) && relativeToStart > 1.0 && multiTouchSupport != null) {
-					// Magnified zoom in only scaled the viewport around the first touch point, apply the same real zoom
-					PointF firstPoint = multiTouchSupport.getFirstPoint();
-					float startZoom = initialViewport.getZoom() + (float) initialViewport.getZoomFloatPart();
-					float deltaZoom = Zoom.fromDistanceRatio(relativeToStart, 1, startZoom) - startZoom;
-					Zoom zoom = new Zoom(initialViewport.getZoom(), (float) initialViewport.getZoomFloatPart(), getMinZoom(), getMaxZoom());
-					zoom.calculateAnimatedZoom(mapRenderer, currentViewport.getZoom(), deltaZoom);
-					setZoomAndAnimationImpl(zoom.getBaseZoom(), zoom.getZoomAnimation(), zoom.getZoomFloatPart(),
-							(int) firstPoint.x, (int) firstPoint.y);
-					finishZoomAndRotationGesture();
 				}
 			}
 		}
@@ -2367,16 +2372,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				initialElevation = elevationAngle;
 
 				MapRendererView mapRenderer = getMapRenderer();
-				MeasurementToolLayer measurementToolLayer = getMeasurementToolLayer();
-				boolean measurementMode = measurementToolLayer != null && measurementToolLayer.isInMeasurementMode();
 
-				if (mapRenderer != null && !measurementMode && multiTouchSupport != null) {
-					if (!targetChanged) {
-						targetChanged = true;
-						// Remember last target position before it is changed with map gesture
-						PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
-						targetPixelX = targetPixelPosition.getX();
-						targetPixelY = targetPixelPosition.getY();
+				if (mapRenderer != null && multiTouchSupport != null) {
+					if (rememberTargetPosition(mapRenderer)) {
 						rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 					}
 
@@ -2414,17 +2412,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			initialMultiTouchCenterPoint = centerPoint;
 			initialViewport = getRotatedTileBox();
 			MapRendererView mapRenderer = getMapRenderer();
-			// Remember the tile31 under the pinch center so we can re-center later
-			if (isPinchZoomMagnificationEnabled && mapRenderer != null) {
-				PointI elevatedLocation = NativeUtilities.get31FromElevatedPixel(mapRenderer, (int) x1,	(int) y1);
-				if (elevatedLocation != null) {
-					initialFirstLocation = elevatedLocation;
-				} else {
-					// Fallback if elevated lookup fails
-                    initialFirstLocation = new PointI();
-					mapRenderer.getLocationFromScreenPoint(new PointI((int) x1,	(int) y1), initialFirstLocation);
-				}
-			}
+			magnifying = false;
 			initialCenterLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport,
 					(int) initialMultiTouchCenterPoint.x, (int) initialMultiTouchCenterPoint.y);
 			startRotating = false;
@@ -2467,15 +2455,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
                         multiTouchFirstX = (int) x1;
                         multiTouchFirstY = (int) y1;
 					}
-					if (!targetChanged) {
-						targetChanged = true;
-						// Remember last target position before it is changed with map gesture
-						PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
-						targetPixelX = targetPixelPosition.getX();
-						targetPixelY = targetPixelPosition.getY();
+					if (!magnifying) {
+						magnifying = true;
+						setZoomAndAnimationImpl(initialViewport.getZoom(), 0, initialViewport.getZoomFloatPart(), multiTouchFirstX, multiTouchFirstY);
+						PointI firstLocation = NativeUtilities.get31FromElevatedPixel(mapRenderer, multiTouchFirstX, multiTouchFirstY);
+						if (firstLocation == null) {
+							firstLocation = new PointI();
+							mapRenderer.getLocationFromScreenPoint(new PointI(multiTouchFirstX, multiTouchFirstY), firstLocation);
+						}
+						initialFirstLocation = firstLocation;
 					}
 					// Scale and shift around the pinch center
-					mapRenderer.setViewportScale(relativeToStart, false);
+					mapRenderer.setViewportScale(limitMagnificationScale(relativeToStart), false);
 					mapRenderer.setViewportShift(multiTouchFirstX, getViewHeight() - multiTouchFirstY,  false);
 					// Re-center so the same initial tile stays under the finger
 					mapRenderer.setMapTarget(new PointI(multiTouchFirstX, multiTouchFirstY), initialFirstLocation);
@@ -2483,6 +2474,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					rotateToAnimate(calcRotate, multiTouchCenterX, multiTouchCenterY);
 					refreshMap();
 				} else {
+					if (magnifying && mapRenderer != null) {
+						magnifying = false;
+						mapRenderer.setViewportScale(0.0, false);
+						mapRenderer.setViewportShift(0, 0, false);
+					}
 					changeZoomPosition((float) deltaZoom, relAngle);
 				}
 			}
@@ -2566,9 +2562,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 			// Keep zoom center fixed or flexible
 			if (mapRenderer != null) {
-				MeasurementToolLayer layer = getMeasurementToolLayer();
-				if ((layer == null || !layer.isInMeasurementMode()) &&
-						(doubleTapScaleDetector == null || !doubleTapScaleDetector.isInZoomMode())) {
+				if (doubleTapScaleDetector == null || !doubleTapScaleDetector.isInZoomMode()) {
 					if (startZooming) {
 						blockTwoFingersTap = true;
 					}
@@ -2698,15 +2692,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public boolean onScroll(MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
 			if (multiTouchSupport == null || (!multiTouchSupport.isInTiltMode() && !multiTouchSupport.isInZoomAndRotationMode())) {
-				MeasurementToolLayer layer = getMeasurementToolLayer();
 				MapRendererView mapRenderer = getMapRenderer();
-				if (mapRenderer != null && e1 != null && (layer == null || !layer.isInMeasurementMode())) {
-					if (!targetChanged) {
-						targetChanged = true;
-						// Remember last target position before it is changed with map gesture
-						PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
-						targetPixelX = targetPixelPosition.getX();
-						targetPixelY = targetPixelPosition.getY();
+				if (mapRenderer != null && e1 != null) {
+					if (rememberTargetPosition(mapRenderer)) {
 						findFirstTouchMapLocation(e1.getX(), e1.getY());
 						rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 					}
@@ -2762,11 +2750,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public boolean isLayoutRtl() {
 		return AndroidUtils.isLayoutRtl(app);
-	}
-
-	@Nullable
-	private MeasurementToolLayer getMeasurementToolLayer() {
-		return app.getOsmandMap().getMapLayers().getMeasurementToolLayer();
 	}
 
 	public void applyMaximumFrameRate(@NonNull MapRendererView mapRenderer) {
