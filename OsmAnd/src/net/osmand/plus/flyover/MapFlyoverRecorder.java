@@ -149,6 +149,7 @@ public class MapFlyoverRecorder {
 				// kept on disk until the end: a crash meanwhile is undone at the next start
 				session[0] = new FlyoverSession(app, mapView);
 				mapView.setTouchesBlocked(true);
+				mapView.setArrowsFixedOnPath(true);
 				banner.show(0);
 				MapViewTrackingUtilities tracking = app.getMapViewTrackingUtilities();
 				tracking.setTrackingPaused(true);
@@ -366,6 +367,7 @@ public class MapFlyoverRecorder {
 			try {
 				runInUiThread(() -> {
 					mapView.setTouchesBlocked(false);
+					mapView.setArrowsFixedOnPath(false);
 					banner.hide();
 					if (session[0] != null) {
 						session[0].finish(app, mapView);
