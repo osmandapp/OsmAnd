@@ -68,7 +68,7 @@ class ConnectorService : Service() {
 	private fun restart() {
 		stopServer()
 		val b = OsmAndBridge(applicationContext, ConnectorSettings.osmandPackage(this))
-		val t = OsmAndTools(b)
+		val t = OsmAndTools(b, assets)
 		val s = McpHttpServer(ConnectorSettings.bindHost(this), ConnectorSettings.PORT, ConnectorSettings.token(this), t, readBridgeScript())
 		try {
 			s.start(60_000, true)

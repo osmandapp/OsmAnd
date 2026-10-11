@@ -1,5 +1,6 @@
 package net.osmand.aiconnector
 
+import android.content.res.AssetManager
 import android.util.Base64
 import android.view.KeyEvent
 import net.osmand.aidlapi.IOsmAndAidlCallback
@@ -49,7 +50,7 @@ class ToolError(message: String) : Exception(message)
 class ToolImage(val jpeg: ByteArray, val caption: String)
 
 /** MCP tool definitions and their implementation on top of OsmAnd's AIDL API v2. */
-class OsmAndTools(private val bridge: OsmAndBridge) {
+class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetManager) {
 
 	private class Tool(
 		val name: String,
@@ -403,7 +404,8 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		) { a -> logs.read(a) },
 		Tool(
 			"osmand_flyover",
-			"Record a smooth camera flight over the map into an MP4 video on the phone. The camera passes the key " +
+			"Record a smooth camera flight over the map into an MP4 video on the phone. Read osmand_guide topic " +
+					"flyover first: speed limits, render time, examples. The camera passes the key " +
 					"frames at their times; between them the center follows a smooth curve and zoom, rotation and tilt " +
 					"ease. OsmAnd renders off the screen frame by frame (OpenGL renderer, 3D and relief included), so the " +
 					"screen may be off; the phone's map pauses meanwhile. Rendering takes longer than the video: " +
@@ -418,7 +420,16 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 				prop("name", "string", "File name, default flyover_<time>.mp4"),
 				required = listOf("keyframes")
 			)
-		) { a -> flyover(a) }
+		) { a -> flyover(a) },
+		Tool(
+			"osmand_guide",
+			"How-to guide for a bigger task, with parameters, limits and examples. Topics: ${GUIDE_TOPICS.joinToString()}.",
+			schema(prop("topic", "string", "Guide topic: ${GUIDE_TOPICS.joinToString()}"), required = listOf("topic"))
+		) { a ->
+			val topic = a.getString("topic").trim().lowercase()
+			if (topic !in GUIDE_TOPICS) throw ToolError("No guide '$topic'; topics: ${GUIDE_TOPICS.joinToString()}")
+			assets.open("guides/$topic.md").bufferedReader().use { it.readText() }
+		}
 	).associateBy { it.name }
 
 	private fun flyover(a: JSONObject): JSONObject {
@@ -829,6 +840,7 @@ private const val SETTINGS = "Settings"
 private const val SYSTEM = "System"
 
 private const val MAX_LOG_LINES = 5000
+private val GUIDE_TOPICS = listOf("flyover")
 private const val SMOOTH_SCREEN_SPEED = 250
 private val LOG_LEVELS = listOf("D", "I", "W", "E")
 
