@@ -68,7 +68,7 @@ Result: `file` (path on the phone, in OsmAnd's `flyover` folder), `frames`, `ren
 own map position, e.g. `[0.5, 0.5]` or lower in navigation); interpolated like the other values, so a video can
 start exactly where a screen recording of the phone ended. `camera.follow` takes `target` too.
 `rotation`: degrees, the direction that is up on the screen (OsmAnd's map rotation, minus the heading); 0 = north
-up. `tilt`: camera angle above the horizon, 90 = flat, 30-50 = 3D. Both default to the previous key frame or 0 / 90.
+up, 272 (= -88) shows an eastbound track going up. `tilt`: camera angle above the horizon, 90 = flat, 30-50 = 3D. Both default to the previous key frame or 0 / 90.
 The camera passes every key frame at its time without stopping: center, zoom, rotation and tilt follow smooth
 curves through the key frames; it eases only at the very start and end. A key frame for every video frame also
 works (your own path).

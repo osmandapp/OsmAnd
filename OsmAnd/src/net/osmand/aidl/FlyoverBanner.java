@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
@@ -59,6 +60,7 @@ final class FlyoverBanner {
 		if (bar == null) {
 			bar = createBar(activity);
 			main.addView(bar);
+			setMapBottomInset(activity, false);
 			ViewCompat.requestApplyInsets(bar);
 		}
 		TextView text = bar.findViewWithTag(TEXT_TAG);
@@ -93,12 +95,41 @@ final class FlyoverBanner {
 		View bar = main != null ? main.findViewWithTag(BAR_TAG) : null;
 		if (bar != null) {
 			main.removeView(bar);
+			setMapBottomInset(activity, true);
 		}
 		ViewGroup mapArea = activity.findViewById(R.id.map_view_with_layers);
 		View preview = mapArea != null ? mapArea.findViewWithTag(PREVIEW_TAG) : null;
 		if (preview != null) {
 			mapArea.removeView(preview);
 		}
+	}
+
+	/**
+	 * The bar takes the place of the system navigation bar under the map: without it the map's buttons would keep
+	 * their gap for that bar and stand too high above ours.
+	 */
+	private static void setMapBottomInset(@NonNull MapActivity activity, boolean keep) {
+		View mapArea = activity.findViewById(R.id.map_view_with_layers);
+		if (mapArea == null || !(mapArea.getParent() instanceof ViewGroup)) {
+			return;
+		}
+		ViewGroup container = (ViewGroup) mapArea.getParent();
+		if (keep) {
+			ViewCompat.setOnApplyWindowInsetsListener(container, null);
+		} else {
+			ViewCompat.setOnApplyWindowInsetsListener(container, (v, insets) -> {
+				int types = WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout();
+				Insets bars = insets.getInsets(types);
+				WindowInsetsCompat changed = new WindowInsetsCompat.Builder(insets)
+						.setInsets(types, Insets.of(bars.left, bars.top, bars.right, 0))
+						.build();
+				for (int i = 0; i < container.getChildCount(); i++) {
+					ViewCompat.dispatchApplyWindowInsets(container.getChildAt(i), changed);
+				}
+				return WindowInsetsCompat.CONSUMED;
+			});
+		}
+		ViewCompat.requestApplyInsets(container);
 	}
 
 	@Nullable

@@ -72,6 +72,8 @@ class MapFlyoverRecorder {
 	private volatile boolean cancelled;
 	@Nullable
 	private volatile double[] appliedCamera;
+	/** Screen offset the relief gives each projected point (a track's head, a waypoint), from its last good frame. */
+	private final Map<Object, PointF> reliefLift = new HashMap<>();
 
 	private static final Log LOG = PlatformUtil.getLog(MapFlyoverRecorder.class);
 
@@ -275,7 +277,9 @@ class MapFlyoverRecorder {
 				for (FlyoverTrack track : tracks) {
 					WptPt[] head = track.headPoints(t / 1000.0);
 					if (head != null) {
-						Map<WptPt, PointF> pts = project(Arrays.asList(head), scale, params.getWidth(), params.getHeight());
+						Map<WptPt, PointF> pts = project(Arrays.asList(head),
+								Arrays.asList(track.number + ":head", track.number + ":from", track.number + ":to"),
+								scale, params.getWidth(), params.getHeight());
 						PointF at = pts.get(head[0]);
 						if (at != null) {
 							PointF behind = pts.get(head[1]), ahead = pts.get(head[2]);
@@ -286,7 +290,7 @@ class MapFlyoverRecorder {
 					}
 				}
 				if (!callouts.isEmpty()) {
-					Map<WptPt, PointF> onScreen = project(callouts.visibleAt(t / 1000.0), scale,
+					Map<WptPt, PointF> onScreen = project(callouts.visibleAt(t / 1000.0), null, scale,
 							params.getWidth(), params.getHeight());
 					callouts.draw(frameCanvas, t / 1000.0, onScreen::get);
 				}
@@ -508,6 +512,7 @@ class MapFlyoverRecorder {
 	// what this OsmAnd understands in a flyover request; anything else is reported back, not silently dropped
 	private static final float DEFAULT_DETAIL = 3f;
 	private static final int PREVIEW_PER_S = 5;
+	private static final float RELIEF_LIFT_SMOOTHING = 0.35f;
 
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
 			"name", "camera", "duration_s", "gpx", "osmand_widgets", "attribution", "profile", "scale",
@@ -760,8 +765,8 @@ class MapFlyoverRecorder {
 
 	/** Where waypoints are on the video frame, with relief and tilt; those off the frame are left out. */
 	@NonNull
-	private Map<WptPt, PointF> project(@NonNull List<WptPt> points, int supersampling, int width, int height)
-			throws InterruptedException {
+	private Map<WptPt, PointF> project(@NonNull List<WptPt> points, @Nullable List<?> keys, int supersampling,
+	                                   int width, int height) throws InterruptedException {
 		Map<WptPt, PointF> result = new HashMap<>();
 		if (points.isEmpty()) {
 			return result;
@@ -771,11 +776,28 @@ class MapFlyoverRecorder {
 			if (renderer == null) {
 				return;
 			}
-			for (WptPt w : points) {
+			for (int k = 0; k < points.size(); k++) {
+				WptPt w = points.get(k);
+				Object key = keys != null ? keys.get(k) : w;
 				PointI out = new PointI();
+				PointI flat = new PointI();
 				PointI location = new PointI(MapUtils.get31TileNumberX(w.getLon()), MapUtils.get31TileNumberY(w.getLat()));
-				if (renderer.getElevatedPointFromLocation(location, out, true)) {
-					float x = out.getX() / (float) supersampling, y = out.getY() / (float) supersampling;
+				if (renderer.getElevatedPointFromLocation(location, out, true)
+						&& renderer.getScreenPointFromLocation(location, flat, true)) {
+					// the relief under a point is sometimes missing for a frame (its tile is being replaced), and the
+					// point falls to sea level: then the offset the relief gave it in the last frames is kept
+					PointF lift = new PointF(out.getX() - flat.getX(), out.getY() - flat.getY());
+					PointF last = reliefLift.get(key);
+					if (Math.abs(lift.x) < 0.5f && Math.abs(lift.y) < 0.5f && last != null
+							&& (Math.abs(last.x) > 2 || Math.abs(last.y) > 2)) {
+						lift = last;
+					} else if (last != null) {
+						// relief of another detail level from frame to frame: averaged, so the point does not shake
+						lift = new PointF(last.x + (lift.x - last.x) * RELIEF_LIFT_SMOOTHING,
+								last.y + (lift.y - last.y) * RELIEF_LIFT_SMOOTHING);
+					}
+					reliefLift.put(key, lift);
+					float x = (flat.getX() + lift.x) / supersampling, y = (flat.getY() + lift.y) / supersampling;
 					if (x >= 0 && y >= 0 && x <= width && y <= height) {
 						result.put(w, new PointF(x, y));
 					}
