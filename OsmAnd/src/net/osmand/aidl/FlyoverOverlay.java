@@ -36,7 +36,8 @@ class FlyoverOverlay {
 	static final String RULER = "ruler";
 	static final String COMPASS = "compass";
 
-	private static final String ATTRIBUTION = "© OpenStreetMap contributors";
+	// short form of the attribution the OSM licence asks for, with the app that drew the map
+	private static final String ATTRIBUTION = "OsmAnd · © OpenStreetMap";
 	private static final float MARGIN_DP = 12;
 	private static final float BUTTON_DP = 44;
 	private static final float RULER_MAX_DP = 120;
@@ -45,6 +46,7 @@ class FlyoverOverlay {
 	private final float density;
 	private final boolean nightMode;
 	private final Set<String> elements = new HashSet<>();
+	private final String attribution;
 	private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	@Nullable
 	private final Drawable compassIcon;
@@ -57,6 +59,8 @@ class FlyoverOverlay {
 		this.app = app;
 		this.density = Math.max(width, height) / 640f;
 		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
+		attribution = spec.optString("attribution", ATTRIBUTION).trim().isEmpty()
+				? ATTRIBUTION : spec.optString("attribution", ATTRIBUTION);
 		JSONArray list = spec.optJSONArray("osmand_widgets");
 		for (int i = 0; list != null && i < list.length(); i++) {
 			elements.add(list.optString(i));
@@ -145,7 +149,7 @@ class FlyoverOverlay {
 		paint.setTypeface(Typeface.DEFAULT);
 		paint.setTextAlign(Paint.Align.RIGHT);
 		float padding = dp(3);
-		float textWidth = paint.measureText(ATTRIBUTION);
+		float textWidth = paint.measureText(attribution);
 		float right = canvas.getWidth() - margin;
 		float bottom = canvas.getHeight() - margin;
 		RectF bg = new RectF(right - textWidth - 2 * padding, bottom - dp(8) - 2 * padding, right, bottom);
@@ -153,7 +157,7 @@ class FlyoverOverlay {
 		paint.setColor(nightMode ? 0x99000000 : 0x99FFFFFF);
 		canvas.drawRoundRect(bg, padding, padding, paint);
 		paint.setColor(nightMode ? 0xFFDDDDDD : 0xFF333333);
-		canvas.drawText(ATTRIBUTION, right - padding, bottom - padding - paint.descent(), paint);
+		canvas.drawText(attribution, right - padding, bottom - padding - paint.descent(), paint);
 	}
 
 	private void drawOutlinedText(@NonNull Canvas canvas, @NonNull String text, float x, float y, int color, int outline) {

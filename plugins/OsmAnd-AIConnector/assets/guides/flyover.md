@@ -111,7 +111,8 @@ Extensions on `<wpt>` for the flyover:
 ## OsmAnd elements — Status: planned
 
 `"osmand_widgets": ["profile_icon", "ruler", "compass"]` — the app's own profile icon, ruler and compass, drawn as
-in OsmAnd. The © OpenStreetMap contributors attribution is always drawn.
+in OsmAnd. The attribution "OsmAnd · © OpenStreetMap" is always drawn in the bottom right corner; `attribution`
+changes its text, but it must still credit OpenStreetMap.
 
 ## Panels and widgets — Status: planned
 
