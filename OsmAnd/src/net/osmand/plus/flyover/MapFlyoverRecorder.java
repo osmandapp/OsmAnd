@@ -798,7 +798,7 @@ public class MapFlyoverRecorder {
 			droneLevel = Math.floor(zoom) + 0.5;
 		}
 		float density = app.getOsmandMap().getMapDensity();
-		double ground = drone.targetGround(camera);
+		double ground = drone.targetGround();
 		double[] fitted = camera.clone();
 		for (int k = 0; k < 4; k++) {
 			double level = Math.min(droneLevel, mapView.getMaxZoom());
