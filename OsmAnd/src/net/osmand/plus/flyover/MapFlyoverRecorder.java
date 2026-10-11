@@ -422,7 +422,7 @@ public class MapFlyoverRecorder {
 	 * {@code detail}: "low", "normal" (default) or "high". The recorder picks the engine's detailed distance and the
 	 * map magnifier from the camera's zoom over the video, the relief of the tracks and the frame's shape: mountains
 	 * seen from far get a finer magnifier (relief shading), streets keep 100% (smaller ones would show the next
-	 * zoom's data), a portrait frame one step coarser. A number as {@code detail} and {@code map_magnifier} still set
+	 * zoom's data). A number as {@code detail} and {@code map_magnifier} still set
 	 * them by hand.
 	 */
 	@NonNull
@@ -472,9 +472,6 @@ public class MapFlyoverRecorder {
 			m = mountains != null ? (step == 1 ? 1 : 0) : (step == 1 ? 2 : 1);
 		} else {
 			m = step == 1 ? 2 : 1;
-		}
-		if (params.getHeight() > params.getWidth() && m < 3) {
-			m++;
 		}
 		float magnifier = manualMagnifier != null ? manualMagnifier : steps[m];
 		String note = String.format(Locale.US, "detail %s: map magnifier %d%%, detailed distance %.0f (camera zoom %.1f, tilt %.0f, %s)",
