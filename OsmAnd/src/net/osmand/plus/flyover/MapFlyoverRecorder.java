@@ -557,6 +557,13 @@ public class MapFlyoverRecorder {
 		double baseZoom = camera.optDouble("zoom", 15);
 		double minZoom = camera.optDouble("min_zoom", 10);
 		double lat = 0, lon = 0, sin = 0, cos = 0, zoom = 0, weights = 0;
+		// still until the first followed track starts moving: averaging over a window would otherwise start the
+		// camera before anything is there to follow
+		double firstStart = Double.MAX_VALUE;
+		for (FlyoverTrack track : tracks) {
+			firstStart = Math.min(firstStart, track.getStartS());
+		}
+		t = Math.max(t, firstStart);
 		// samples every 1/60 s of video: sparse ones beat with a fast-forwarded zigzag and shook the camera
 		int half = Math.max(6, (int) Math.round(window * 30));
 		for (int k = -half; k <= half; k++) {
@@ -684,7 +691,7 @@ public class MapFlyoverRecorder {
 	}
 
 	/** Time warped so that the camera speeds up over easeIn seconds and slows down over easeOut, same total. */
-	private static double easeTime(double t, double total, double easeIn, double easeOut) {
+	static double easeTime(double t, double total, double easeIn, double easeOut) {
 		double a = Math.max(0, easeIn), b = Math.max(0, easeOut);
 		if (a + b > total) {
 			a = b = total / 2;

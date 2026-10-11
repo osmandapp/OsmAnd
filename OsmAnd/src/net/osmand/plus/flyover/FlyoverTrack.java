@@ -57,6 +57,8 @@ class FlyoverTrack {
 	private List<TrkSegment> original;
 
 	private final double startS;
+	private final double easeInS;
+	private final double easeOutS;
 	private final double durationS;
 	private static final double HEAD_ROAD_M = 20;
 	private static final double HEAD_ROAD_PX = 30;
@@ -170,6 +172,11 @@ class FlyoverTrack {
 			speedX = 0;
 			durationS = timing != null ? timing.optDouble("duration_s", toS - startS) : toS - startS;
 		}
+		// spread over a duration, a track would start and stop at full speed: it speeds up and slows down instead
+		// (a track played by its own times has its real accelerations)
+		double ease = speedX > 0 ? 0 : Math.min(1, durationS / 3);
+		easeInS = timing != null ? timing.optDouble("ease_in_s", ease) : ease;
+		easeOutS = timing != null ? timing.optDouble("ease_out_s", ease) : ease;
 	}
 
 	/** Flyover settings stored in the file: osmand:flyover_<key> on the file or its first track. */
@@ -239,6 +246,11 @@ class FlyoverTrack {
 		if (spec.has("show_wpts") && !spec.optBoolean("show_wpts")) gpx.getPointsList().clear();
 	}
 
+	/** Video time when the track starts moving. */
+	double getStartS() {
+		return startS;
+	}
+
 	double getLength() {
 		return dist[dist.length - 1];
 	}
@@ -258,6 +270,9 @@ class FlyoverTrack {
 	@NonNull
 	Position at(double t) {
 		double progress = durationS > 0 ? (t - startS) / durationS : 1;
+		if (durationS > 0 && progress > 0 && progress < 1 && (easeInS > 0 || easeOutS > 0)) {
+			progress = MapFlyoverRecorder.easeTime(t - startS, durationS, easeInS, easeOutS) / durationS;
+		}
 		boolean started = progress >= 0;
 		boolean finished = progress >= 1;
 		progress = Math.max(0, Math.min(1, progress));
