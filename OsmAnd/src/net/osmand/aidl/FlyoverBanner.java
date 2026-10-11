@@ -1,7 +1,14 @@
 package net.osmand.aidl;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
+import android.view.GestureDetector;
 import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -67,9 +74,8 @@ final class FlyoverBanner {
 		}
 		ImageView preview = mapArea.findViewWithTag(PREVIEW_TAG);
 		if (preview == null) {
-			preview = new ImageView(activity);
+			preview = new PreviewView(activity);
 			preview.setTag(PREVIEW_TAG);
-			preview.setScaleType(ImageView.ScaleType.FIT_CENTER);
 			preview.setBackgroundColor(0xFF202124);
 			mapArea.addView(preview, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
 					ViewGroup.LayoutParams.MATCH_PARENT));
@@ -144,5 +150,88 @@ final class FlyoverBanner {
 			return insets;
 		});
 		return bar;
+	}
+
+	/** The recorded frame fitted into the map area; two fingers zoom it in up to 3x, one finger moves it, a double tap fits it again. */
+	private static class PreviewView extends ImageView {
+
+		private final Matrix matrix = new Matrix();
+		private final ScaleGestureDetector scaleDetector;
+		private final GestureDetector gestureDetector;
+		private float scale = 1;
+		private float dx;
+		private float dy;
+
+		PreviewView(@NonNull Context context) {
+			super(context);
+			setScaleType(ScaleType.MATRIX);
+			scaleDetector = new ScaleGestureDetector(context, new ScaleGestureDetector.SimpleOnScaleGestureListener() {
+				@Override
+				public boolean onScale(@NonNull ScaleGestureDetector detector) {
+					float next = Math.max(1, Math.min(3, scale * detector.getScaleFactor()));
+					float f = next / scale;
+					// the point under the fingers stays there
+					dx = detector.getFocusX() - (detector.getFocusX() - dx) * f;
+					dy = detector.getFocusY() - (detector.getFocusY() - dy) * f;
+					scale = next;
+					update();
+					return true;
+				}
+			});
+			gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+				@Override
+				public boolean onScroll(@Nullable MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
+					dx -= distanceX;
+					dy -= distanceY;
+					update();
+					return true;
+				}
+
+				@Override
+				public boolean onDoubleTap(@NonNull MotionEvent e) {
+					scale = 1;
+					dx = dy = 0;
+					update();
+					return true;
+				}
+			});
+		}
+
+		@Override
+		public void setImageBitmap(Bitmap bm) {
+			super.setImageBitmap(bm);
+			update();
+		}
+
+		@Override
+		protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+			super.onSizeChanged(w, h, oldw, oldh);
+			update();
+		}
+
+		@Override
+		@SuppressLint("ClickableViewAccessibility")
+		public boolean onTouchEvent(MotionEvent event) {
+			scaleDetector.onTouchEvent(event);
+			gestureDetector.onTouchEvent(event);
+			return true;
+		}
+
+		private void update() {
+			Drawable d = getDrawable();
+			int w = getWidth(), h = getHeight();
+			if (d == null || w == 0 || h == 0) {
+				return;
+			}
+			float fit = Math.min((float) w / d.getIntrinsicWidth(), (float) h / d.getIntrinsicHeight());
+			float iw = d.getIntrinsicWidth() * fit * scale, ih = d.getIntrinsicHeight() * fit * scale;
+			// centred while smaller than the view, otherwise kept covering it
+			float baseX = (w - iw) / 2, baseY = (h - ih) / 2;
+			dx = iw <= w ? 0 : Math.max(baseX, Math.min(-baseX, dx));
+			dy = ih <= h ? 0 : Math.max(baseY, Math.min(-baseY, dy));
+			matrix.setScale(fit * scale, fit * scale);
+			matrix.postTranslate(baseX + dx, baseY + dy);
+			setImageMatrix(matrix);
+		}
 	}
 }
