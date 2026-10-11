@@ -5123,7 +5123,7 @@
     <string name="choose_from_gallery">Scegli dalla galleria</string>
     <string name="choose_from_files">Scegli tra i file</string>
     <string name="shared_string_media">File multimediali</string>
-    <string name="no_media">Nessun file multimediale</string>
+    <string name="no_media">Nessun contenuto multimediale</string>
     <string name="no_media_descr">Puoi aggiungere foto, video o note audio dalla tua fotocamera o libreria.</string>
     <string name="access_pinch_zoom_magnification">Ingrandimento con due dita</string>
     <string name="ais_receive_in_background">Ricevi i dati AIS anche se OsmAnd è in pausa.</string>
@@ -5292,7 +5292,7 @@
     <string name="access_pinch_zoom_magnification_descr">Usa la scalatura (ingrandimento) della finestra di visualizzazione anziché i livelli di zoom discreti durante l\'ingrandimento con le dita.</string>
     <string name="traffic_warning_red_light_camera">Telecamera semaforica</string>
     <string name="always_keep_local_copy">Conserva sempre una copia locale</string>
-    <string name="always_keep_local_copy_description">Il file multimediale rimane allegato anche se l\'originale viene eliminato dalla galleria o dai file.</string>
+    <string name="always_keep_local_copy_description">Il contenuto multimediale rimane allegato anche se l\'originale viene eliminato dalla galleria o dai file.</string>
     <string name="use_spatial_search">Utilizza la ricerca testuale spaziale</string>
     <string name="use_spatial_search_description">Sostituisci le API di ricerca rapida standard con il motore di ricerca testuale spaziale sperimentale.</string>
     <string name="preparing_file">Preparazione del file</string>
@@ -5404,4 +5404,23 @@
     <string name="detach_external_media_descr">Il file non sarà più visualizzato in questo preferito. Rimane sul tuo dispositivo.</string>
     <string name="detach_external_media_descr_plural">I file non saranno più visualizzati in questo preferito. Rimangono sul tuo dispositivo.</string>
     <string name="attach_to_favorite">Allega a un preferito</string>
+    <string name="map_source_saved_as">Fonte della mappa salvata come \'%1$s\'.</string>
+    <string name="map_source_folder_not_created">Impossibile creare una cartella per la fonte della mappa. Prova un nome diverso.</string>
+    <string name="delete_media_title">Cancello il contenuto multimediale?</string>
+    <string name="delete_media_descr">Questo file sarà eliminato definitivamente dal tuo dispositivo. Scomparirà da tutti i preferiti a cui è associato.</string>
+    <string name="delete_media_title_plural">Cancello %1$d file multimediali?</string>
+    <string name="delete_media_descr_plural">Questi file saranno eliminati definitivamente dal tuo dispositivo. Scompariranno da tutti i preferiti a cui sono associati.</string>
+    <string name="detach_media_title">Scollego i file multimediali?</string>
+    <string name="detach_media_title_plural">Scollego %1$d contenuti multimediali?</string>
+    <string name="detach_media_descr">Il file non sarà più visualizzato in questo preferito. Rimane sul tuo dispositivo e nella libreria multimediale.</string>
+    <string name="detach_media_descr_plural">I file non saranno più visualizzati in questo preferito. Rimangono sul tuo dispositivo e nella libreria multimediale.</string>
+    <string name="shared_string_detach">Scollega</string>
+    <string name="media_delete_failed">Impossibile cancellare il contenuto multimediale.</string>
+    <string name="media_detach_failed">Impossibile scollegare il contenuto multimediale.</string>
+    <string name="media_library_empty_title">Nessun contenuto multimediale ancora disponibile</string>
+    <string name="media_library_empty_descr">Scatta una foto, registra un video o una nota audio sulla mappa, oppure allega file a un preferito. Tutto ciò che registri o alleghi appare qui.</string>
+    <string name="shared_string_grid">Reticolo</string>
+    <string name="shared_string_group">Gruppo</string>
+    <string name="gallery_sort_size_large_small">Prima la dimensione maggiore</string>
+    <string name="gallery_sort_size_small_large">Prima la dimensione minore</string>
 </resources>
