@@ -226,6 +226,11 @@ class MapFlyoverRecorder {
 			long frameTimeout = Double.isNaN(loadTimeoutS) ? FRAME_TIMEOUT_MS : (long) (loadTimeoutS * 1000);
 			String notIdleReason = null;
 			waitForIdleFrame(view, firstTimeout);
+			// once more: settings changed for the video (map magnifier, relief) reach the renderer with a delay,
+			// and the first recorded frame showed the map at the old scale
+			applyCamera(followed != null ? followCamera(followed, follow, 0, frameMin, tilePx) : keyframeCamera(params, spec, 0),
+					() -> updateTracks(tracks, 0, videoS));
+			waitForIdleFrame(view, firstTimeout);
 			for (int i = 0; i < frames; i++) {
 				if (cancelled) {
 					throw new CancellationException("Cancelled on the phone");
