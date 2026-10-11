@@ -1,6 +1,7 @@
 package net.osmand.aidl;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.media.Image;
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
@@ -26,6 +27,8 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.nio.ByteBuffer;
@@ -84,6 +87,7 @@ class MapFlyoverRecorder {
 			int scale = params.getWidth() * SUPERSAMPLING <= MAX_SIZE && params.getHeight() * SUPERSAMPLING <= MAX_SIZE ? SUPERSAMPLING : 1;
 			view = takeRendererOver(params.getWidth() * scale, params.getHeight() * scale);
 			encoder = new VideoEncoder(file, params.getWidth(), params.getHeight(), params.getFps());
+			FlyoverOverlay overlay = new FlyoverOverlay(app, parseSpec(params.getSpec()), params.getWidth(), params.getHeight());
 			long[] times = params.getTimesMs();
 			long durationMs = times[times.length - 1];
 			int frames = (int) (durationMs * params.getFps() / 1000) + 1;
@@ -119,7 +123,14 @@ class MapFlyoverRecorder {
 				if (bitmap == null) {
 					throw new IllegalStateException("The renderer gave no picture for frame " + i);
 				}
-				encoder.encode(bitmap, i * 1_000_000L / params.getFps());
+				// the overlay is drawn at the video's size, so its text stays sharp
+				Bitmap frame = Bitmap.createScaledBitmap(bitmap, params.getWidth(), params.getHeight(), true);
+				if (frame == bitmap) {
+					frame = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+				}
+				overlay.draw(new Canvas(frame), camera[0], (float) camera[2], (float) camera[3]);
+				encoder.encode(frame, i * 1_000_000L / params.getFps());
+				frame.recycle();
 			}
 			encoder.finish();
 			encoder = null;
@@ -256,7 +267,16 @@ class MapFlyoverRecorder {
 		}
 	}
 
-	/** Camera at time t, set on the map; returns {lat, lon, zoom}. */
+	@NonNull
+	private static JSONObject parseSpec(@Nullable String spec) {
+		try {
+			return Algorithms.isEmpty(spec) ? new JSONObject() : new JSONObject(spec);
+		} catch (JSONException e) {
+			throw new IllegalArgumentException("The flyover request is not valid JSON: " + e.getMessage());
+		}
+	}
+
+	/** Camera at time t, set on the map; returns {lat, lon, zoom, rotation}. */
 	@NonNull
 	private double[] setCamera(@NonNull MapFlyoverParams p, long t) throws InterruptedException {
 		long[] times = p.getTimesMs();
@@ -297,7 +317,7 @@ class MapFlyoverRecorder {
 			int base = (int) Math.floor(fZoom);
 			mapView.setZoomWithFloatPart(base, fZoom - base);
 		});
-		return new double[] {lat, lon, zoom};
+		return new double[] {lat, lon, zoom, azimuth};
 	}
 
 	/** Pixels the map moves on the screen between two cameras, measured at the higher zoom. */

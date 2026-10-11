@@ -453,6 +453,7 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 		}
 		val p = MapFlyoverParams(lat, lon, zoom, rotation, tilt, time, a.optInt("width", 1280),
 			a.optInt("height", 720), a.optInt("fps", 30), a.optString("name"))
+		p.spec = a.toString()
 		if (!bridge.get().recordMapFlyover(p)) {
 			throw ToolError(p.error.ifEmpty { refused(SCREEN) + " An older OsmAnd cannot record a flyover." })
 		}
