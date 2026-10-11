@@ -403,13 +403,7 @@ class FlyoverTrack {
 		}
 		// the rest is always there, transparent when hidden: with the passed part alone the layer did not draw it
 		List<WptPt> after = rest.getPoints();
-		if ("hidden".equals(remaining)) {
-			// only a stub at the head, shorter than an arrow step: a hidden rest is transparent but its arrows are
-			// not, and the layer needs a second segment to keep drawing the passed part
-			after.clear();
-			after.add(points.get(p.index));
-			after.add(headPoint);
-		} else if (after.isEmpty()) {
+		if (after.isEmpty()) {
 			// the whole track, under the passed part: the line's arrows are laid out from its start, so a rest that
 			// started near the head made its arrows jump with every track point the head passed; with the same start
 			// as the passed part they stay at the same places and the passed part covers its own
