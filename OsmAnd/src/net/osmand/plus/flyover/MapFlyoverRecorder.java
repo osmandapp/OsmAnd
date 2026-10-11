@@ -100,6 +100,8 @@ public class MapFlyoverRecorder {
 	private AtlasMapRendererView view;
 	private boolean phoneScale;
 	private float detail;
+	@Nullable
+	private String detailNote;
 	// frames the renderer has read out into its bitmap buffer; a frame is taken only after a new one
 	private final AtomicInteger readyFrames = new AtomicInteger();
 	private final MapRendererView.MapRendererViewListener frameListener = new MapRendererView.MapRendererViewListener() {
@@ -196,12 +198,14 @@ public class MapFlyoverRecorder {
 			renderWidth = params.getWidth() * scale;
 			renderHeight = params.getHeight() * scale;
 			phoneScale = "screen".equals(spec.optString("scale"));
-			detail = (float) spec.optDouble("detail", DEFAULT_DETAIL);
+			DetailChoice choice = chooseDetail(params, spec, tracks, followed, follow, frameMin, tilePx);
+			detailNote = choice.note;
+			detail = choice.detailedDistance;
 			takeRendererOver();
-			if (spec.has("map_magnifier")) {
+			if (choice.magnifier != null) {
 				// the map magnifier for this video only, as Configure map > Map magnifier: below 100% the relief
 				// shading and the details get finer; the user's value is put back afterwards
-				float magnifier = (float) Math.max(0.25, Math.min(4, spec.optDouble("map_magnifier")));
+				float magnifier = choice.magnifier;
 				runInUiThread(() -> {
 					magnifierBefore[0] = app.getSettings().MAP_DENSITY.get();
 					app.getSettings().MAP_DENSITY.set(magnifier);
@@ -331,6 +335,9 @@ public class MapFlyoverRecorder {
 			params.setFilePath(file.getAbsolutePath());
 			params.setFrames(frames);
 			String warnings = unknownKeys(spec);
+			if (detailNote != null) {
+				warnings += (warnings.isEmpty() ? "" : "; ") + detailNote;
+			}
 			if (!layoutWarning.isEmpty()) {
 				warnings += (warnings.isEmpty() ? "" : "; ") + layoutWarning;
 			}
@@ -395,6 +402,85 @@ public class MapFlyoverRecorder {
 			}
 			RECORDING.set(false);
 		}
+	}
+
+	private static class DetailChoice {
+		final float detailedDistance;
+		@Nullable
+		final Float magnifier;
+		@Nullable
+		final String note;
+
+		DetailChoice(float detailedDistance, @Nullable Float magnifier, @Nullable String note) {
+			this.detailedDistance = detailedDistance;
+			this.magnifier = magnifier;
+			this.note = note;
+		}
+	}
+
+	/**
+	 * {@code detail}: "low", "normal" (default) or "high". The recorder picks the engine's detailed distance and the
+	 * map magnifier from the camera's zoom over the video, the relief of the tracks and the frame's shape: mountains
+	 * seen from far get a finer magnifier (relief shading), streets keep 100% (smaller ones would show the next
+	 * zoom's data), a portrait frame one step coarser. A number as {@code detail} and {@code map_magnifier} still set
+	 * them by hand.
+	 */
+	@NonNull
+	private DetailChoice chooseDetail(@NonNull MapFlyoverParams params, @NonNull JSONObject spec,
+	                                  @NonNull List<FlyoverTrack> tracks, @Nullable List<FlyoverTrack> followed,
+	                                  @Nullable JSONObject follow, int frameMin, float tilePx) {
+		Float manualMagnifier = spec.has("map_magnifier")
+				? (float) Math.max(0.25, Math.min(4, spec.optDouble("map_magnifier"))) : null;
+		Object value = spec.opt("detail");
+		if (value instanceof Number) {
+			return new DetailChoice(((Number) value).floatValue(), manualMagnifier, null);
+		}
+		String level = value instanceof String ? (String) value : "normal";
+		int step = "low".equals(level) ? 0 : "high".equals(level) ? 2 : 1;
+		// the camera over the video, sampled
+		double zoom = 0, tilt = 0;
+		int samples = 20;
+		double videoS = getVideoDuration(params, spec);
+		for (int k = 0; k < samples; k++) {
+			double t = videoS * (k + 0.5) / samples;
+			double[] camera = followed != null && follow != null ? followCamera(followed, follow, t, frameMin, tilePx)
+					: keyframeCamera(params, spec, (long) (t * 1000));
+			zoom += camera[2] / samples;
+			tilt += camera[4] / samples;
+		}
+		Boolean mountains = null;
+		for (FlyoverTrack track : followed != null ? followed : tracks) {
+			double min = Double.MAX_VALUE, max = -Double.MAX_VALUE;
+			for (WptPt p : track.points) {
+				if (!Double.isNaN(p.getEle())) {
+					min = Math.min(min, p.getEle());
+					max = Math.max(max, p.getEle());
+				}
+			}
+			if (max >= min) {
+				mountains = (mountains != null && mountains) || max - min > MOUNTAIN_RISE_M;
+			}
+		}
+		float detailedDistance = step == 0 ? 1 : step == 1 ? DEFAULT_DETAIL : DEFAULT_DETAIL + 1;
+		// finer to coarser
+		float[] steps = {0.6f, 0.75f, 0.85f, 1f};
+		int m;
+		if (step == 0 || zoom >= STREET_ZOOM) {
+			m = 3;
+		} else if (zoom <= OVERVIEW_ZOOM && (mountains == null || mountains)) {
+			// seen from far: relief unless the tracks say it is flat; tracks without heights count as relief
+			m = mountains != null ? (step == 1 ? 1 : 0) : (step == 1 ? 2 : 1);
+		} else {
+			m = step == 1 ? 2 : 1;
+		}
+		if (params.getHeight() > params.getWidth() && m < 3) {
+			m++;
+		}
+		float magnifier = manualMagnifier != null ? manualMagnifier : steps[m];
+		String note = String.format(Locale.US, "detail %s: map magnifier %d%%, detailed distance %.0f (camera zoom %.1f, tilt %.0f, %s)",
+				level, Math.round(magnifier * 100), detailedDistance, zoom, tilt,
+				mountains == null ? "no heights on the tracks" : mountains ? "mountains" : "flat");
+		return new DetailChoice(detailedDistance, magnifier != 1f ? magnifier : null, note);
 	}
 
 	@Nullable
@@ -580,6 +666,11 @@ public class MapFlyoverRecorder {
 
 	// what this OsmAnd understands in a flyover request; anything else is reported back, not silently dropped
 	private static final float DEFAULT_DETAIL = 3f;
+	// the camera's zoom over the video: up to this the relief fills the frame, from the next one streets do
+	private static final double OVERVIEW_ZOOM = 13.5;
+	private static final double STREET_ZOOM = 15.5;
+	// tracks climbing or descending more than this are in the mountains
+	private static final double MOUNTAIN_RISE_M = 300;
 	private static final int PREVIEW_PER_S = 5;
 	private static final float RELIEF_LIFT_SMOOTHING = 0.35f;
 
