@@ -65,6 +65,7 @@ import net.osmand.aidlapi.gpx.GpxPointsParams;
 import net.osmand.aidlapi.info.AMapWidgetValue;
 import net.osmand.aidlapi.map.AMapScreenshot;
 import net.osmand.aidlapi.map.MapScreenshotParams;
+import net.osmand.aidlapi.map.MapFlyoverParams;
 import net.osmand.aidlapi.map.SetMapCameraParams;
 import net.osmand.aidlapi.gpx.ASelectedGpxFile;
 import net.osmand.aidlapi.gpx.CreateGpxBitmapParams;
@@ -710,6 +711,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			} catch (Exception e) {
 				handleException(e);
 				return null;
+			}
+		}
+
+		@Override
+		public boolean recordMapFlyover(MapFlyoverParams params) {
+			try {
+				OsmandAidlApi api = getApi("recordMapFlyover");
+				return api != null && params != null && api.recordMapFlyover(params);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
 			}
 		}
 

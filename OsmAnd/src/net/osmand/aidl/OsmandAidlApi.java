@@ -1873,6 +1873,10 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+	boolean recordMapFlyover(@NonNull net.osmand.aidlapi.map.MapFlyoverParams params) {
+		return new MapFlyoverRecorder(app).record(params);
+	}
+
 	@Nullable
 	net.osmand.aidlapi.map.AMapScreenshot getMapScreenshot(int maxWidth, int quality, boolean mapOnly) {
 		MapActivity mapActivity = this.mapActivity;
