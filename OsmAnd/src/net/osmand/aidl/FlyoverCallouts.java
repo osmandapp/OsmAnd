@@ -80,7 +80,17 @@ class FlyoverCallouts {
 
 	@Nullable
 	private Callout create(@NonNull FlyoverTrack track, @NonNull WptPt w, double videoS, int fps) {
-		Map<String, String> ext = w.getExtensionsToRead();
+		// settings of a waypoint: "wpt": {"<name>": {...}} in the request, then its osmand:flyover_* tags,
+		// then "wpt_defaults" in the request
+		JSONObject byName = track.spec.optJSONObject("wpt");
+		JSONObject own = byName != null && w.getName() != null ? byName.optJSONObject(w.getName()) : null;
+		JSONObject defaults = track.spec.optJSONObject("wpt_defaults");
+		Map<String, String> ext = new java.util.HashMap<>();
+		if (defaults != null) copyInto(defaults, ext);
+		for (Map.Entry<String, String> e : w.getExtensionsToRead().entrySet()) {
+			ext.put(e.getKey().replaceFirst("^osmand:", ""), e.getValue());
+		}
+		if (own != null) copyInto(own, ext);
 		String show = tag(ext, "show", "auto");
 		if ("never".equals(show)) {
 			return null;
@@ -148,10 +158,16 @@ class FlyoverCallouts {
 		return Double.NaN;
 	}
 
+	private static void copyInto(@NonNull JSONObject json, @NonNull Map<String, String> ext) {
+		for (java.util.Iterator<String> it = json.keys(); it.hasNext(); ) {
+			String key = it.next();
+			ext.put("flyover_" + key, json.optString(key));
+		}
+	}
+
 	@Nullable
 	private static String tag(@NonNull Map<String, String> ext, @NonNull String name, @Nullable String def) {
 		String v = ext.get("flyover_" + name);
-		if (v == null) v = ext.get("osmand:flyover_" + name);
 		return v != null ? v.trim() : def;
 	}
 

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.PointAttributes;
@@ -27,6 +28,9 @@ import java.util.Map;
  */
 class FlyoverTrack {
 
+	// OsmAnd's default track colour, for tracks that have none and still have to fade
+	private static final int DEFAULT_COLOR = 0xFFE8442E;
+
 	final int number;
 	final File file;
 	final GpxFile gpx;
@@ -43,6 +47,8 @@ class FlyoverTrack {
 	final double tailKm;
 	final double tailS;
 	final String head;
+	/** OsmAnd location icon for the head (LocationIcon name or a 3D model name). */
+	final String headIcon;
 	/** The track as OsmAnd shows it; its display segments are replaced every frame while it grows or fades. */
 	@Nullable
 	SelectedGpxFile selected;
@@ -74,17 +80,42 @@ class FlyoverTrack {
 		}
 	}
 
-	FlyoverTrack(@NonNull OsmandApplication app, int number, @NonNull JSONObject spec, double videoS) {
+	/** The track's settings: osmand:flyover_* extensions of the file, overridden by the request's JSON. */
+	final JSONObject spec;
+
+	FlyoverTrack(@NonNull OsmandApplication app, int number, @NonNull JSONObject request, double videoS) {
 		this.number = number;
-		String name = spec.optString("file");
-		file = findFile(app, name);
+		String name = request.optString("file");
+		String data = request.optString("gpx_data");
+		if (!Algorithms.isEmpty(data)) {
+			// a GPX passed in the call: kept with the flyover's files, not among the user's tracks
+			name = "gpx_data " + number;
+			file = new File(app.getAppPath("flyover/gpx"), "track_" + number + ".gpx");
+			file.getParentFile().mkdirs();
+			try (java.io.FileOutputStream out = new java.io.FileOutputStream(file)) {
+				out.write(data.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+			} catch (java.io.IOException e) {
+				throw new IllegalArgumentException("Cannot store gpx_data: " + e.getMessage());
+			}
+		} else {
+			file = findFile(app, name);
+		}
 		if (file == null) {
-			throw new IllegalArgumentException("No track '" + name + "' on the phone; see osmand_list_tracks");
+			throw new IllegalArgumentException("No track '" + name + "' on the phone; see osmand_list_tracks, or pass gpx_data");
 		}
 		gpx = SharedUtil.loadGpxFile(file);
 		if (gpx.getError() != null) {
 			throw new IllegalArgumentException("Cannot read '" + name + "': " + gpx.getError().getMessage());
 		}
+		JSONObject spec = settingsFromFile(gpx);
+		for (java.util.Iterator<String> it = request.keys(); it.hasNext(); ) {
+			String key = it.next();
+			try {
+				spec.put(key, request.get(key));
+			} catch (org.json.JSONException ignored) {
+			}
+		}
+		this.spec = spec;
 		points = gpx.getAllSegmentsPoints();
 		if (points.size() < 2) {
 			throw new IllegalArgumentException("Track '" + name + "' has fewer than 2 points");
@@ -112,7 +143,14 @@ class FlyoverTrack {
 		remaining = spec.optString("remaining", "hidden");
 		tailKm = spec.optDouble("tail_km", 0);
 		tailS = spec.optDouble("tail_s", 0);
-		head = spec.optString("head", "progressive".equals(draw) ? "dot" : "none");
+		head = spec.optString("head", "progressive".equals(draw) ? "navigation" : "none");
+		// the profile of the track (in the request, in the file, or the current one) gives its map icons
+		String profileKey = spec.optString("profile", gpx.getExtensionsToRead().get("profile"));
+		ApplicationMode profile = Algorithms.isEmpty(profileKey) ? null : ApplicationMode.valueOfStringKey(profileKey, null);
+		if (profile == null) {
+			profile = app.getSettings().getApplicationMode();
+		}
+		headIcon = spec.optString("head_icon", "location".equals(head) ? profile.getLocationIcon() : profile.getNavigationIcon());
 		JSONObject timing = spec.optJSONObject("time");
 		String mode = timing != null ? timing.optString("mode", "duration") : "duration";
 		startS = fromS + (timing != null ? timing.optDouble("offset_s", 0) : 0);
@@ -123,6 +161,29 @@ class FlyoverTrack {
 			speedX = 0;
 			durationS = timing != null ? timing.optDouble("duration_s", toS - startS) : toS - startS;
 		}
+	}
+
+	/** Flyover settings stored in the file: osmand:flyover_<key> on the file or its first track. */
+	@NonNull
+	private static JSONObject settingsFromFile(@NonNull GpxFile gpx) {
+		JSONObject spec = new JSONObject();
+		List<Map<String, String>> sources = new ArrayList<>();
+		sources.add(gpx.getExtensionsToRead());
+		if (!gpx.getTracks().isEmpty()) {
+			sources.add(gpx.getTracks().get(0).getExtensionsToRead());
+		}
+		for (Map<String, String> ext : sources) {
+			for (Map.Entry<String, String> e : ext.entrySet()) {
+				String key = e.getKey().replaceFirst("^osmand:", "");
+				if (key.startsWith("flyover_")) {
+					try {
+						spec.put(key.substring("flyover_".length()), e.getValue());
+					} catch (org.json.JSONException ignored) {
+					}
+				}
+			}
+		}
+		return spec;
 	}
 
 	@Nullable
@@ -221,43 +282,74 @@ class FlyoverTrack {
 		return (Math.toDegrees(Math.atan2(y, x)) + 360) % 360;
 	}
 
+	@Nullable
+	private TrkSegment live;
+	@Nullable
+	private TrkSegment rest;
+	@Nullable
+	private List<TrkSegment> faded;
+
 	/**
 	 * What the map shows of the track at video time t: everything, nothing outside from_s..to_s, faded in and out,
 	 * or with draw: progressive the part passed so far (or its last tail_km / tail_s) and the rest hidden, faded or
-	 * thin. Runs on the UI thread before the map layers draw.
+	 * thin. The same segment objects are kept and only their points and colours change, so the map layer updates
+	 * its lines in place (a new segment would be a new symbols provider, loaded too late for the frame).
+	 * Runs on the UI thread before the map layers draw; returns true if the layer has to rebuild the track.
 	 */
-	void updateDisplay(double t, double videoS) {
+	boolean updateDisplay(double t, double videoS) {
 		if (selected == null) {
-			return;
+			return false;
 		}
 		List<TrkSegment> display = selected.getPointsToDisplay();
 		if (original == null) {
 			original = new ArrayList<>(display);
-		}
-		float opacity = getOpacity(Math.min(t, videoS));
-		if (!"progressive".equals(draw) && fromS <= 0 && fadeS <= 0 && t <= toS) {
-			if (display.size() != original.size() || (!display.isEmpty() && display.get(0) != original.get(0))) {
-				display.clear();
-				display.addAll(original);
+			// a colour on the file would win over the segments' colours, which carry the fading
+			Integer fileColor = gpx.getColor(null);
+			if (fileColor != null) {
+				for (TrkSegment s : original) {
+					s.setColor(fileColor);
+				}
+				gpx.setColor((Integer) null);
 			}
-			return;
 		}
+		boolean progressive = "progressive".equals(draw);
+		if (!progressive && fromS <= 0 && fadeS <= 0 && toS >= videoS) {
+			return false;
+		}
+		float opacity = t < fromS || t > toS ? 0 : getOpacity(t);
 		display.clear();
-		if (opacity <= 0 || original.isEmpty()) {
-			return;
+		if (original.isEmpty()) {
+			return true;
 		}
+		// a hidden track keeps its segments, fully transparent: with nothing to show, the layer would decide the
+		// track is out of view and not come back to it
 		TrkSegment style = original.get(0);
-		if (!"progressive".equals(draw)) {
-			for (TrkSegment s : original) {
-				display.add(copy(s, s.getPoints(), opacity));
+		if (!progressive) {
+			if (faded == null) {
+				faded = new ArrayList<>();
+				for (TrkSegment s : original) {
+					faded.add(copy(s, s.getPoints(), 1));
+				}
 			}
-			return;
+			for (int k = 0; k < faded.size(); k++) {
+				setOpacity(faded.get(k), original.get(k), opacity);
+				display.add(faded.get(k));
+			}
+			return true;
+		}
+		if (live == null) {
+			live = copy(style, new ArrayList<>(), 1);
+			rest = copy(style, new ArrayList<>(), 1);
+			if ("thin".equals(remaining)) {
+				rest.setWidth("thin");
+			}
 		}
 		Position p = at(t);
 		double from = 0;
 		if (tailKm > 0) from = Math.max(from, p.distance - tailKm * 1000);
 		if (tailS > 0) from = Math.max(from, at(t - tailS).distance);
-		List<WptPt> passed = new ArrayList<>();
+		List<WptPt> passed = live.getPoints();
+		passed.clear();
 		if (from > 0) {
 			passed.add(pointAt(from));
 		}
@@ -266,19 +358,28 @@ class FlyoverTrack {
 		}
 		WptPt headPoint = pointAt(p.distance);
 		passed.add(headPoint);
+		setOpacity(live, style, opacity);
 		if (passed.size() >= 2) {
-			display.add(copy(style, passed, opacity));
+			display.add(live);
 		}
-		if (!"hidden".equals(remaining) && p.index + 1 < points.size()) {
-			List<WptPt> rest = new ArrayList<>();
-			rest.add(headPoint);
-			rest.addAll(points.subList(p.index + 1, points.size()));
-			TrkSegment r = copy(style, rest, "faded".equals(remaining) ? opacity * 0.35f : opacity);
-			if ("thin".equals(remaining)) {
-				r.setWidth("thin");
-			}
-			display.add(r);
+		// the rest is always there, transparent when hidden: with the passed part alone the layer did not draw it
+		List<WptPt> after = rest.getPoints();
+		after.clear();
+		after.add(headPoint);
+		after.addAll(points.subList(Math.min(p.index + 1, points.size()), points.size()));
+		if (after.size() < 2) {
+			after.add(headPoint);
 		}
+		setOpacity(rest, style, "hidden".equals(remaining) ? 0 : "faded".equals(remaining) ? opacity * 0.45f : opacity);
+		display.add(rest);
+		return true;
+	}
+
+	private static void setOpacity(@NonNull TrkSegment target, @NonNull TrkSegment style, float opacity) {
+		Integer color = style.getColor(null);
+		int c = color != null ? color : DEFAULT_COLOR;
+		int alpha = Math.round(((c >>> 24) & 0xFF) * opacity);
+		target.setColor((alpha << 24) | (c & 0xFFFFFF));
 	}
 
 	/** The head marker's place and a point a little ahead, for its direction; null when there is no head. */
@@ -311,16 +412,12 @@ class FlyoverTrack {
 		return pt;
 	}
 
-	/** A new segment object, so the map layer builds its line again; colour and width as the original's. */
+	/** A segment with the original's colour and width. */
 	@NonNull
 	private static TrkSegment copy(@NonNull TrkSegment style, @NonNull List<WptPt> points, float opacity) {
 		TrkSegment s = new TrkSegment();
 		s.getPoints().addAll(points);
-		Integer color = style.getColor(null);
-		if (color != null) {
-			int alpha = Math.round(((color >>> 24) & 0xFF) * opacity);
-			s.setColor((alpha << 24) | (color & 0xFFFFFF));
-		}
+		setOpacity(s, style, opacity);
 		s.setWidth(style.getWidth(null));
 		return s;
 	}

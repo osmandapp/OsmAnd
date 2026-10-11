@@ -31,7 +31,7 @@ At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smoot
 | Field | Status | Meaning |
 |---|---|---|
 | `keyframes[]` | works | camera key frames, see below; or `camera.follow` |
-| `camera` | works | `{"follow": n, "zoom": 15, "tilt": 50, "look_ahead_s": 3}`: fly along track n of `gpx[]` |
+| `camera` | works | `{"follow": n, "zoom": 15, "tilt": 50, "look_ahead_s": 3}`: fly along track n of `gpx[]`; `"follow": [1, 2]` keeps several tracks in the frame (ghost mode: tracks with `"time": {"mode": "track"}` move by their own times), zooming out down to `min_zoom` (default 10) when they part |
 | `duration_s` | works | video length; needed with `camera.follow`, else the last key frame's time |
 | `width`, `height` | works | even, 16-3840; default 1280x720 |
 | `fps` | works | 1-60, default 30; 60 is smoother on fast parts and takes twice as long |
@@ -75,7 +75,9 @@ recording only; the user's own shown tracks are put back afterwards. Track waypo
 
 | Field | Status | Meaning |
 |---|---|---|
-| `file` | works | path in OsmAnd's tracks folder, e.g. `rec/2026-10-11_ride.gpx` or `import/x.gpx` (see `osmand_list_tracks`) |
+| `file` | works | a saved track: path in OsmAnd's tracks folder, e.g. `rec/2026-10-11_ride.gpx` or `import/x.gpx` (see `osmand_list_tracks`) |
+| `gpx_data` | works | instead of `file`: a GPX passed in the call as text (any track or route); kept with the flyover, not added to the user's tracks |
+| `profile` | works | profile key whose map icons the head uses; default the file's `osmand:profile`, else the current profile |
 | `time` | works | `{"mode": "duration", "duration_s": 30}` (default: the whole video): spread over the time, by the track's own times when it has them, else by distance; `{"mode": "track", "speed_x": 60, "offset_s": 0}`: the track's own times sped up |
 | `from_s` | works | when the track appears and starts moving (its current point stays at the start before) |
 | style | works | over the file's own: `color`, `width` (`thin`/`medium`/`bold`/number), `coloring_type` (`solid`, `speed`, `altitude`, `slope`, ...), `color_palette`, `show_arrows`, `show_start_finish`, `split_type`, `split_interval`, `visualization_3d`, `wall_coloring`, `line_position_3d`, `vertical_exaggeration`, `elevation_meters`, `show_wpts` |
@@ -83,7 +85,12 @@ recording only; the user's own shown tracks are put back afterwards. Track waypo
 | `draw` | works | `full` (default) or `progressive`: the track grows up to its current point |
 | `remaining` | works | with `progressive`, the part not reached yet: `hidden` (default), `faded`, `thin` |
 | `tail_km`, `tail_s` | works | with `progressive`, only the last part of the passed track is drawn (a comet) |
-| `head` | works | marker at the current point: `none`, `dot` (default with `progressive`), `arrow` (along the track), `profile_icon` |
+| `head` | works | marker at the current point: `navigation` (default with `progressive`: the profile's navigation icon, turned along the track), `location` (the profile's location icon), `arrow`, `dot`, `none` |
+| `head_icon` | works | one of OsmAnd's own icons instead of the profile's: `STATIC_DEFAULT`, `STATIC_CAR`, `STATIC_BICYCLE`, `MOVEMENT_DEFAULT`, `MOVEMENT_CAR`, `MOVEMENT_NAUTICAL`, or an installed 3D model name (drawn as its flat preview) |
+
+Every setting of a `gpx[]` entry can also be stored in the GPX file itself as an extension of the file or its first
+track, `<osmand:flyover_draw>progressive</osmand:flyover_draw>`, `<osmand:flyover_head>arrow</osmand:flyover_head>`;
+the request's JSON wins over the file.
 
 ### Waypoint callouts — works
 
@@ -100,6 +107,10 @@ shows while it is on the screen. Extensions on `<wpt>`:
 | `osmand:flyover_style` | `auto` / `label` / `bubble` | `auto`: a short name is a label; a description or a long name is a bubble |
 | `osmand:flyover_text` | text | shown instead of the name and description |
 | `osmand:flyover_fields` | `desc,address,ele,time` | what a bubble shows under the name |
+
+The same settings without the `osmand:flyover_` prefix can come from the request: `"wpt_defaults": {...}` in a
+`gpx[]` entry applies to all its waypoints, `"wpt": {"<waypoint name>": {"style": "bubble", "show_s": 4}}` to one.
+Order: `wpt` in the request, then the waypoint's own tags, then `wpt_defaults`.
 
 ## OsmAnd elements — works
 

@@ -129,14 +129,22 @@ class MapFlyoverRecorder {
 				tracks.add(new FlyoverTrack(app, k + 1, gpxSpecs.getJSONObject(k), videoS));
 			}
 			JSONObject follow = spec.optJSONObject("camera");
-			FlyoverTrack followed = null;
+			// camera.follow: a track number, or several (ghost mode: all of them kept in the frame)
+			List<FlyoverTrack> followed = null;
 			if (follow != null && follow.has("follow")) {
-				int number = follow.optInt("follow");
-				if (number < 1 || number > tracks.size()) {
-					throw new IllegalArgumentException("camera.follow is the number of a track in gpx[], 1-" + tracks.size());
+				followed = new ArrayList<>();
+				JSONArray numbers = follow.optJSONArray("follow");
+				int count = numbers != null ? numbers.length() : 1;
+				for (int k = 0; k < count; k++) {
+					int number = numbers != null ? numbers.optInt(k) : follow.optInt("follow");
+					if (number < 1 || number > tracks.size()) {
+						throw new IllegalArgumentException("camera.follow takes numbers of tracks in gpx[], 1-" + tracks.size());
+					}
+					followed.add(tracks.get(number - 1));
 				}
-				followed = tracks.get(number - 1);
 			}
+			int frameMin = Math.min(params.getWidth(), params.getHeight());
+			float tilePx = 256 * Math.max(1f, Math.max(params.getWidth(), params.getHeight()) / 640f);
 			showTracks(tracks, shownBefore);
 			// rendered at twice the size and scaled down: thin lines and text edges stop shimmering in motion
 			int scale = params.getWidth() * SUPERSAMPLING <= MAX_SIZE && params.getHeight() * SUPERSAMPLING <= MAX_SIZE ? SUPERSAMPLING : 1;
@@ -160,11 +168,8 @@ class MapFlyoverRecorder {
 			view.setSymbolsUpdateInterval(Integer.MAX_VALUE);
 			int symbolsEvery = Math.max(1, (int) (SYMBOLS_UPDATE_MS * params.getFps() / 1000));
 			// the renderer still shows the phone's camera: draw the start once, unrecorded, so frame 0 is right
-			applyCamera(followed != null ? followCamera(followed, follow, 0) : keyframeCamera(params, spec, 0), () -> {
-				for (FlyoverTrack track : tracks) {
-					track.updateDisplay(0, videoS);
-				}
-			});
+			applyCamera(followed != null ? followCamera(followed, follow, 0, frameMin, tilePx) : keyframeCamera(params, spec, 0),
+					() -> updateTracks(tracks, 0, videoS));
 			// load_timeout_s: how long a frame may wait for map data (relief on a slow device loads for long)
 			double loadTimeoutS = spec.optDouble("load_timeout_s", Double.NaN);
 			long firstTimeout = Double.isNaN(loadTimeoutS) ? FIRST_FRAME_TIMEOUT_MS : (long) (loadTimeoutS * 1000);
@@ -181,12 +186,8 @@ class MapFlyoverRecorder {
 				}
 				// symbols that come and go at a layout fade in and out on the video's clock
 				view.setSymbolsFade(SYMBOLS_FADE_MS, t);
-				double[] camera = followed != null ? followCamera(followed, follow, t / 1000.0) : keyframeCamera(params, spec, t);
-				applyCamera(camera, () -> {
-					for (FlyoverTrack track : tracks) {
-						track.updateDisplay(t / 1000.0, videoS);
-					}
-				});
+				double[] camera = followed != null ? followCamera(followed, follow, t / 1000.0, frameMin, tilePx) : keyframeCamera(params, spec, t);
+				applyCamera(camera, () -> updateTracks(tracks, t / 1000.0, videoS));
 				if (prev != null) {
 					maxSpeed = Math.max(maxSpeed, screenDistance(prev, camera, pxPerTile) * params.getFps());
 				}
@@ -216,7 +217,7 @@ class MapFlyoverRecorder {
 						Map<WptPt, PointF> pts = project(Arrays.asList(head), scale, params.getWidth(), params.getHeight());
 						PointF at = pts.get(head[0]);
 						if (at != null) {
-							overlay.drawHead(frameCanvas, at, pts.get(head[1]), track.head, track.getColor());
+							overlay.drawHead(frameCanvas, at, pts.get(head[1]), track.head, track.getColor(), track.headIcon);
 						}
 					}
 				}
@@ -430,23 +431,43 @@ class MapFlyoverRecorder {
 	 * Returns {lat, lon, zoom, rotation, elevation angle}.
 	 */
 	@NonNull
-	private static double[] followCamera(@NonNull FlyoverTrack track, @NonNull JSONObject camera, double t) {
+	private static double[] followCamera(@NonNull List<FlyoverTrack> tracks, @NonNull JSONObject camera, double t,
+	                                     int frameMin, float tilePx) {
 		double ahead = camera.optDouble("look_ahead_s", 3);
-		double lat = 0, lon = 0, sin = 0, cos = 0;
+		double lat = 0, lon = 0, sin = 0, cos = 0, spread = 0;
 		int samples = 5;
 		for (int k = 0; k < samples; k++) {
 			double tk = t + (k - samples / 2) * 0.15;
-			FlyoverTrack.Position p = track.at(tk);
-			lat += p.lat;
-			lon += p.lon;
-			double b = Math.toRadians(track.bearing(tk, 1, ahead));
-			sin += Math.sin(b);
-			cos += Math.cos(b);
+			double kLat = 0, kLon = 0;
+			List<FlyoverTrack.Position> here = new ArrayList<>();
+			for (FlyoverTrack track : tracks) {
+				FlyoverTrack.Position p = track.at(tk);
+				here.add(p);
+				kLat += p.lat;
+				kLon += p.lon;
+				double b = Math.toRadians(track.bearing(tk, 1, ahead));
+				sin += Math.sin(b);
+				cos += Math.cos(b);
+			}
+			kLat /= tracks.size();
+			kLon /= tracks.size();
+			for (FlyoverTrack.Position p : here) {
+				spread = Math.max(spread, MapUtils.getDistance(kLat, kLon, p.lat, p.lon));
+			}
+			lat += kLat;
+			lon += kLon;
 		}
+		lat /= samples;
+		lon /= samples;
 		double heading = Math.toDegrees(Math.atan2(sin, cos));
+		double zoom = camera.optDouble("zoom", 15);
+		if (tracks.size() > 1 && spread > 1) {
+			// every followed track stays within about a third of the frame from its center
+			double fit = Math.log(0.35 * frameMin * 40075016 * Math.cos(Math.toRadians(lat)) / (tilePx * spread)) / Math.log(2);
+			zoom = Math.max(camera.optDouble("min_zoom", 10), Math.min(zoom, fit));
+		}
 		// OsmAnd turns the map by minus the heading so that the way ahead is up
-		return new double[] {lat / samples, lon / samples, camera.optDouble("zoom", 15), -heading,
-				camera.optDouble("tilt", 50)};
+		return new double[] {lat, lon, zoom, -heading, camera.optDouble("tilt", 50)};
 	}
 
 	/**
@@ -554,6 +575,18 @@ class MapFlyoverRecorder {
 			boolean night = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 			mapView.drawOverMap(layersCanvas, mapView.getRotatedTileBox(), new DrawSettings(night, false));
 		});
+	}
+
+	/** Tracks that grow or fade change their lines; the GPX layer then rebuilds them in place for this frame. */
+	private void updateTracks(@NonNull List<FlyoverTrack> tracks, double t, double videoS) {
+		boolean changed = false;
+		for (FlyoverTrack track : tracks) {
+			changed |= track.updateDisplay(t, videoS);
+		}
+		if (changed) {
+			// the layer resets the flag itself after it has drawn
+			app.getOsmandMap().getMapLayers().getGpxLayer().setInvalidated(true);
+		}
 	}
 
 	/** Where waypoints are on the video frame, with relief and tilt; those off the frame are left out. */

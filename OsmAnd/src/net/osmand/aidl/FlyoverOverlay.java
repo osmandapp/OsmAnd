@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
@@ -25,7 +26,9 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -43,6 +46,7 @@ class FlyoverOverlay {
 	private static final float MARGIN_DP = 12;
 	private static final float BUTTON_DP = 44;
 	private static final float RULER_MAX_DP = 120;
+	private static final float HEAD_ICON_DP = 44;
 
 	private final OsmandApplication app;
 	private final float density;
@@ -56,8 +60,7 @@ class FlyoverOverlay {
 	private final Drawable profileIcon;
 	@Nullable
 	private final Drawable rulerImage;
-	@Nullable
-	private final Drawable headIcon;
+	private final Map<String, Drawable> headIcons = new HashMap<>();
 
 	FlyoverOverlay(@NonNull OsmandApplication app, @NonNull JSONObject spec, int width, int height) {
 		this.app = app;
@@ -74,7 +77,6 @@ class FlyoverOverlay {
 		ApplicationMode mode = getProfile(spec.optString("profile"));
 		profileIcon = elements.contains(PROFILE_ICON) ? copy(app.getUIUtilities()
 				.getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode))) : null;
-		headIcon = copy(app.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode)));
 		rulerImage = elements.contains(RULER)
 				? ContextCompat.getDrawable(app, nightMode ? R.drawable.ruler_night : R.drawable.ruler) : null;
 	}
@@ -112,25 +114,44 @@ class FlyoverOverlay {
 		drawAttribution(canvas, margin);
 	}
 
-	/** The marker at a track's current point: a dot, an arrow along the track, or the profile icon. */
+	/**
+	 * The marker at a track's current point: OsmAnd's navigation icon turned along the track, its location icon,
+	 * an arrow, or a dot.
+	 */
 	void drawHead(@NonNull Canvas canvas, @NonNull PointF at, @Nullable PointF ahead, @NonNull String style,
-	              @Nullable Integer color) {
+	              @Nullable Integer color, @NonNull String iconName) {
 		int c = color != null ? color | 0xFF000000 : 0xFFFF5A2B;
-		if ("profile_icon".equals(style) && headIcon != null) {
-			float size = dp(36);
-			drawButton(canvas, headIcon, at.x - size / 2, at.y - size / 2, size, 0);
-			return;
+		float angle = ahead != null && (ahead.x != at.x || ahead.y != at.y)
+				? (float) Math.toDegrees(Math.atan2(ahead.x - at.x, at.y - ahead.y)) : 0;
+		if ("navigation".equals(style) || "location".equals(style)) {
+			boolean navigation = "navigation".equals(style);
+			Drawable icon = headIcons.get(style + iconName);
+			if (icon == null) {
+				icon = LocationIcon.getDrawable(app, iconName, !navigation);
+				headIcons.put(style + iconName, icon);
+			}
+			if (icon != null) {
+				int size = Math.round(dp(HEAD_ICON_DP));
+				icon.setBounds(Math.round(at.x - size / 2f), Math.round(at.y - size / 2f),
+						Math.round(at.x + size / 2f), Math.round(at.y + size / 2f));
+				canvas.save();
+				if (navigation) {
+					canvas.rotate(angle, at.x, at.y);
+				}
+				icon.draw(canvas);
+				canvas.restore();
+				return;
+			}
 		}
 		paint.setStyle(Paint.Style.FILL);
 		if ("arrow".equals(style) && ahead != null && (ahead.x != at.x || ahead.y != at.y)) {
-			float angle = (float) Math.toDegrees(Math.atan2(ahead.x - at.x, at.y - ahead.y));
 			canvas.save();
 			canvas.rotate(angle, at.x, at.y);
 			Path arrow = new Path();
-			arrow.moveTo(at.x, at.y - dp(13));
-			arrow.lineTo(at.x + dp(10), at.y + dp(10));
-			arrow.lineTo(at.x, at.y + dp(5));
-			arrow.lineTo(at.x - dp(10), at.y + dp(10));
+			arrow.moveTo(at.x, at.y - dp(18));
+			arrow.lineTo(at.x + dp(14), at.y + dp(14));
+			arrow.lineTo(at.x, at.y + dp(7));
+			arrow.lineTo(at.x - dp(14), at.y + dp(14));
 			arrow.close();
 			paint.setColor(Color.WHITE);
 			paint.setShadowLayer(dp(3), 0, dp(1), 0x60000000);
