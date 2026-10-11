@@ -373,6 +373,8 @@ public class OsmandAidlApi {
 						if (!Float.isNaN(rotation)) {
 							mapView.setRotate(rotation, false);
 						}
+						// as a pan by hand: a map linked to my location would go back to it at the next fix
+						app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 						if (animated) {
 							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, zoomFloatPart);
 						} else {
@@ -1854,6 +1856,8 @@ public class OsmandAidlApi {
 				mapView.setElevationAngle(elevationAngle);
 			}
 			if (!Double.isNaN(latitude) && !Double.isNaN(longitude)) {
+				// as a pan by hand: a map linked to my location would go back to it at the next fix
+				app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 				int baseZoom = mapView.getZoom();
 				float zoomFloatPart = mapView.getZoomFloatPart();
 				if (!Float.isNaN(zoom) && zoom > 0) {

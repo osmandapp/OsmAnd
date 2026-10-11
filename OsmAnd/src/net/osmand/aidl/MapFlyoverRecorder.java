@@ -56,6 +56,7 @@ import java.util.Map;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Renders a camera flight off the screen, frame by frame, into an MP4 video. It takes the OpenGL renderer over
@@ -81,6 +82,18 @@ class MapFlyoverRecorder {
 	private final OsmandMapTileView mapView;
 	private int renderWidth;
 	private int renderHeight;
+	// frames the renderer has read out into its bitmap buffer; a frame is taken only after a new one
+	private final AtomicInteger readyFrames = new AtomicInteger();
+	private final MapRendererView.MapRendererViewListener frameListener = new MapRendererView.MapRendererViewListener() {
+		@Override
+		public void onUpdateFrame(MapRendererView mapRenderer) {
+		}
+
+		@Override
+		public void onFrameReady(MapRendererView mapRenderer) {
+			readyFrames.incrementAndGet();
+		}
+	};
 	// map layers (tracks, markers, favourites) build their OpenGL objects while they draw on a canvas, as on
 	// Android Auto; nothing visible is drawn there, so a 1 px canvas does
 	private final Canvas layersCanvas = new Canvas(Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888));
@@ -367,6 +380,7 @@ class MapFlyoverRecorder {
 			mapView.setMapRenderer(view, false);
 			app.getOsmandMap().getMapLayers().updateMapSource(mapView, null);
 			PluginsHelper.refreshLayers(app, null);
+			view.addListener(frameListener);
 			result[0] = view;
 		});
 		if (result[0] == null) {
@@ -376,6 +390,7 @@ class MapFlyoverRecorder {
 	}
 
 	private void giveRendererBack(@NonNull AtlasMapRendererView view) {
+		view.removeListener(frameListener);
 		// the suspension and the interval live in the renderer, which goes back to the phone's map
 		while (view.isSymbolsUpdateSuspended()) {
 			view.resumeSymbolsUpdate();
@@ -472,7 +487,9 @@ class MapFlyoverRecorder {
 			zoom = Math.max(camera.optDouble("min_zoom", 10), Math.min(zoom, fit));
 		}
 		// OsmAnd turns the map by minus the heading so that the way ahead is up
-		return new double[] {lat, lon, zoom, -heading, camera.optDouble("tilt", 50)};
+		JSONArray target = camera.optJSONArray("target");
+		return new double[] {lat, lon, zoom, -heading, camera.optDouble("tilt", 50),
+				target != null ? target.optDouble(0) : Double.NaN, target != null ? target.optDouble(1) : Double.NaN};
 	}
 
 	/**
@@ -502,9 +519,35 @@ class MapFlyoverRecorder {
 			zoom[k] = p.getZooms()[k];
 			tilt[k] = p.getElevationAngles()[k];
 		}
+		// "target": [x, y], where the camera's point is on the frame (fractions); NaN = OsmAnd's own map ratio
+		JSONArray frames = spec.optJSONArray("keyframes");
+		double[] targetX = new double[n], targetY = new double[n];
+		boolean hasTarget = false;
+		for (int k = 0; k < n; k++) {
+			JSONArray target = frames != null && frames.optJSONObject(k) != null
+					? frames.optJSONObject(k).optJSONArray("target") : null;
+			if (target != null && target.length() == 2) {
+				targetX[k] = target.optDouble(0);
+				targetY[k] = target.optDouble(1);
+				hasTarget = true;
+			} else {
+				targetX[k] = k > 0 ? targetX[k - 1] : Double.NaN;
+				targetY[k] = k > 0 ? targetY[k - 1] : Double.NaN;
+			}
+		}
+		if (hasTarget) {
+			// a key frame before the first target uses that target
+			for (int k = n - 2; k >= 0; k--) {
+				if (Double.isNaN(targetX[k])) {
+					targetX[k] = targetX[k + 1];
+					targetY[k] = targetY[k + 1];
+				}
+			}
+		}
 		return new double[] {hermite(ts, lat, t), hermite(ts, lon, t),
 				Math.max(1, Math.min(22, hermite(ts, zoom, t))), hermite(ts, rotation, t),
-				Math.max(10, Math.min(90, hermite(ts, tilt, t)))};
+				Math.max(10, Math.min(90, hermite(ts, tilt, t))),
+				hasTarget ? hermite(ts, targetX, t) : Double.NaN, hasTarget ? hermite(ts, targetY, t) : Double.NaN};
 	}
 
 	/** Cubic Hermite through (ts, values) with Catmull-Rom tangents per second: smooth speed across key frames. */
@@ -554,6 +597,7 @@ class MapFlyoverRecorder {
 	/** Sets the camera and lets the map layers build what changed; {@code beforeLayers} runs just before them. */
 	private void applyCamera(@NonNull double[] camera, @Nullable Runnable beforeLayers) throws InterruptedException {
 		double fLat = camera[0], fLon = camera[1];
+		double targetX = camera.length > 6 ? camera[5] : Double.NaN, targetY = camera.length > 6 ? camera[6] : Double.NaN;
 		float fZoom = (float) camera[2], fAzimuth = (float) camera[3], fElevation = (float) camera[4];
 		runInUiThread(() -> {
 			// immediate setters: the animated ones would run on their own clock, not the video's
@@ -570,7 +614,8 @@ class MapFlyoverRecorder {
 				renderer.setVisualZoomShift(app.getOsmandMap().getMapDensity() - 1.0f);
 			}
 			if (renderer != null && renderWidth > 0) {
-				PointF ratio = app.getMapViewTrackingUtilities().getMapDisplayPositionManager().getMapRatio();
+				PointF ratio = !Double.isNaN(targetX) && !Double.isNaN(targetY) ? new PointF((float) targetX, (float) targetY)
+						: app.getMapViewTrackingUtilities().getMapDisplayPositionManager().getMapRatio();
 				renderer.setMapTarget(new PointI(Math.round(ratio.x * renderWidth), Math.round(ratio.y * renderHeight)),
 						NativeUtilities.calculateTarget31(renderer, fLat, fLon, false));
 			}
@@ -675,6 +720,7 @@ class MapFlyoverRecorder {
 		long until = SystemClock.elapsedRealtime() + timeoutMs;
 		int startFrame = view.getFrameId();
 		int idleFrame = -1;
+		int idleReady = 0;
 		while (SystemClock.elapsedRealtime() < until) {
 			view.requestRender();
 			Thread.sleep(10);
@@ -685,7 +731,9 @@ class MapFlyoverRecorder {
 			if (view.isIdle()) {
 				if (idleFrame < 0) {
 					idleFrame = frame;
-				} else if (frame > idleFrame) {
+					idleReady = readyFrames.get();
+				} else if (frame > idleFrame && readyFrames.get() > idleReady) {
+					// a frame rendered while idle has been read out: getBitmap gives this camera, not the last one
 					return true;
 				}
 			} else {
