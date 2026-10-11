@@ -420,7 +420,7 @@ public class MapFlyoverRecorder {
 
 	/**
 	 * {@code detail}: "low", "normal" (default) or "high". The recorder picks the engine's detailed distance and the
-	 * map magnifier from the camera's zoom over the video, the relief of the tracks and the frame's shape: mountains
+	 * map magnifier from the camera's zoom over the video, and the relief of the tracks: mountains
 	 * seen from far get a finer magnifier (relief shading), streets keep 100% (smaller ones would show the next
 	 * zoom's data). A number as {@code detail} and {@code map_magnifier} still set
 	 * them by hand.
