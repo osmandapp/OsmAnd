@@ -5636,8 +5636,8 @@
     <string name="aidl_group_system_footer">מאפשר ליישום להעתיק קבצים אל OsmAnd, להחליף את המיקום שלך, לקרוא יומנים ולשנות את מראה היישום. יש להפעיל רק עבור יישומים שאתה סומך עליהם לגמרי.</string>
     <string name="aidl_permissions_deny">לא לאפשר</string>
     <string name="aidl_group_map_descr">הזזת המפה, הצגת נקודות</string>
-    <string name="aidl_group_search_descr">מציאת מקומות וכתובות</string>
-    <string name="aidl_group_location_descr">המיקום, המסלול וערכי הווידג׳טים שלך</string>
+    <string name="aidl_group_search_descr">איתור מקומות וכתובות</string>
+    <string name="aidl_group_location_descr">המקום, המסלול וערכי הווידג׳טים שלך</string>
     <string name="aidl_group_navigation_descr">התחלה והפסקה של ניווט</string>
     <string name="aidl_group_favorites_descr">מועדפים וסמני מפה</string>
     <string name="aidl_group_tracks_view">מסלולים: צפייה</string>
