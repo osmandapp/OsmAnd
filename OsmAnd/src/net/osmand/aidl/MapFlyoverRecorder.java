@@ -161,7 +161,12 @@ class MapFlyoverRecorder {
 			int symbolsEvery = Math.max(1, (int) (SYMBOLS_UPDATE_MS * params.getFps() / 1000));
 			// the renderer still shows the phone's camera: draw the start once, unrecorded, so frame 0 is right
 			applyCamera(followed != null ? followCamera(followed, follow, 0) : keyframeCamera(params, spec, 0));
-			waitForIdleFrame(view, FIRST_FRAME_TIMEOUT_MS);
+			// load_timeout_s: how long a frame may wait for map data (relief on a slow device loads for long)
+			double loadTimeoutS = spec.optDouble("load_timeout_s", Double.NaN);
+			long firstTimeout = Double.isNaN(loadTimeoutS) ? FIRST_FRAME_TIMEOUT_MS : (long) (loadTimeoutS * 1000);
+			long frameTimeout = Double.isNaN(loadTimeoutS) ? FRAME_TIMEOUT_MS : (long) (loadTimeoutS * 1000);
+			String notIdleReason = null;
+			waitForIdleFrame(view, firstTimeout);
 			for (int i = 0; i < frames; i++) {
 				long t = i * 1000L / params.getFps();
 				boolean layoutFrame = i % symbolsEvery == 0;
@@ -178,9 +183,13 @@ class MapFlyoverRecorder {
 					maxSpeed = Math.max(maxSpeed, screenDistance(prev, camera, pxPerTile) * params.getFps());
 				}
 				prev = camera;
-				if (!waitForIdleFrame(view, FRAME_TIMEOUT_MS)) {
+				if (!waitForIdleFrame(view, frameTimeout)) {
 					notIdleFrames++;
-					LOG.warn("Flyover frame " + i + " is not idle: " + view.getNotIdleReason());
+					String reason = view.getNotIdleReason();
+					if (notIdleReason == null) {
+						notIdleReason = reason;
+					}
+					LOG.warn("Flyover frame " + i + " is not idle: " + reason);
 				}
 				Bitmap bitmap = view.getBitmap();
 				if (bitmap == null) {
@@ -206,7 +215,12 @@ class MapFlyoverRecorder {
 			encoder = null;
 			params.setFilePath(file.getAbsolutePath());
 			params.setFrames(frames);
-			params.setWarnings(unknownKeys(spec));
+			String warnings = unknownKeys(spec);
+			if (notIdleFrames > 0) {
+				warnings += (warnings.isEmpty() ? "" : "; ") + notIdleFrames + " frames were recorded before the map " +
+						"finished loading (" + notIdleReason + "); load_timeout_s gives frames more time";
+			}
+			params.setWarnings(warnings);
 			params.setMaxScreenSpeed((float) maxSpeed);
 			params.setRenderTimeMs(SystemClock.elapsedRealtime() - start);
 			LOG.info("Flyover " + file + ": " + frames + " frames in " + params.getRenderTimeMs()
@@ -373,7 +387,7 @@ class MapFlyoverRecorder {
 	// what this OsmAnd understands in a flyover request; anything else is reported back, not silently dropped
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
 			"name", "camera", "duration_s", "gpx", "osmand_widgets", "attribution", "profile", "scale",
-			"ease_in_s", "ease_out_s", "panels", "data", "ui_scale"));
+			"ease_in_s", "ease_out_s", "panels", "data", "ui_scale", "load_timeout_s"));
 
 	@NonNull
 	private static String unknownKeys(@NonNull JSONObject spec) {

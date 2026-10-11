@@ -38,6 +38,7 @@ At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smoot
 | `name` | works | file name; default `flyover_<date-time>.mp4` |
 | `ease_in_s`, `ease_out_s` | works | the camera speeds up after the start and slows down before the end; default 1 s each (at most a third of the video) |
 | `scale` | works | `video` (default): map symbols sized for the video; `screen`: the phone's own map scale, so a video can continue a screen recording |
+| `load_timeout_s` | works | how long a frame may wait for map data, default 30 s for the first frame and 5 s for the others; frames recorded before the map finished loading are counted in `warnings` |
 | `ui_scale` | works | size of everything drawn over the map (OsmAnd elements, panels, callouts); default 1; the frame's long side is 800 dp |
 | `gpx[]` | works, partly | tracks to show, see below |
 | `osmand_widgets` | works | `["profile_icon", "ruler", "compass"]` |
