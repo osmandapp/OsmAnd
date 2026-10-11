@@ -87,7 +87,7 @@ recording only; the user's own shown tracks are put back afterwards. Track waypo
 | Field | Status | Meaning |
 |---|---|---|
 | `file` | works | a saved track: path in OsmAnd's tracks folder, e.g. `rec/2026-10-11_ride.gpx` or `import/x.gpx` (see `osmand_list_tracks`) |
-| `gpx_data` | works | instead of `file`: a GPX passed in the call as text (any track or route); kept with the flyover, not added to the user's tracks |
+| `gpx_data` | works | instead of `file`: a GPX passed in the call as text (any track or route); used for this recording only, not added to the user's tracks. Up to about 300 KB (the whole call travels in one Android Binder transaction); a bigger track goes to the phone as a file first |
 | `profile` | works | profile key whose map icons the head uses; default the file's `osmand:profile`, else the current profile; the first track's profile is also the profile icon's when the request has no `profile` |
 | `time` | works | `{"mode": "duration", "duration_s": 30}` (default: the whole video): spread over the time, by the track's own times when it has them, else by distance; `{"mode": "track", "speed_x": 60, "offset_s": 0}`: the track's own times sped up. With `duration` the track speeds up and slows down over `ease_in_s` / `ease_out_s` (default 1 s each) |
 | `from_s` | works | when the track appears and starts moving (its current point stays at the start before) |

@@ -349,6 +349,8 @@ public class MapFlyoverRecorder {
 			params.setError(e.getMessage() != null ? e.getMessage() : e.toString());
 			return false;
 		} finally {
+			// the request (with gpx_data) is not sent back over Binder: the reply has its own size limit
+			params.setSpec("");
 			hideTracks(tracks, shownBefore);
 			try {
 				runInUiThread(() -> {
