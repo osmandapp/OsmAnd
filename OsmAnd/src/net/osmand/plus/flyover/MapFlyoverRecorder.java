@@ -76,6 +76,11 @@ public class MapFlyoverRecorder {
 	private volatile double[] appliedCamera;
 	/** Screen offset the relief gives each projected point (a track's head, a waypoint), from its last good frame. */
 	private final Map<Object, PointF> reliefLift = new HashMap<>();
+	/** camera.drone / camera.poses: the camera is where a drone is and looks where its camera looks. */
+	@Nullable
+	private FlyoverDroneCamera drone;
+	private float elevationScaleBefore = Float.NaN;
+	private double droneLevel = Double.NaN;
 
 	private static final Log LOG = PlatformUtil.getLog(MapFlyoverRecorder.class);
 
@@ -147,6 +152,9 @@ public class MapFlyoverRecorder {
 			return false;
 		}
 		long start = SystemClock.elapsedRealtime();
+		drone = null;
+		droneLevel = Double.NaN;
+		elevationScaleBefore = Float.NaN;
 		File file = getFile(params.getFileName());
 		VideoEncoder encoder = null;
 		List<FlyoverTrack> tracks = new ArrayList<>();
@@ -189,6 +197,17 @@ public class MapFlyoverRecorder {
 					}
 					followed.add(tracks.get(number - 1));
 				}
+			}
+			if (follow != null && (follow.has("drone") || follow.has("poses"))) {
+				FlyoverTrack droneTrack = null;
+				if (follow.has("drone")) {
+					int number = follow.optInt("drone");
+					if (number < 1 || number > tracks.size()) {
+						throw new IllegalArgumentException("camera.drone takes a number of a track in gpx[], 1-" + tracks.size());
+					}
+					droneTrack = tracks.get(number - 1);
+				}
+				drone = new FlyoverDroneCamera(droneTrack, follow);
 			}
 			int frameMin = Math.min(params.getWidth(), params.getHeight());
 			float tilePx = 256 * Math.max(1f, Math.max(params.getWidth(), params.getHeight()) / 640f);
@@ -236,7 +255,7 @@ public class MapFlyoverRecorder {
 			view.setSymbolsUpdateInterval(Integer.MAX_VALUE);
 			int symbolsEvery = Math.max(1, (int) (SYMBOLS_UPDATE_MS * params.getFps() / 1000));
 			// the renderer still shows the phone's camera: draw the start once, unrecorded, so frame 0 is right
-			applyCamera(followed != null ? followCamera(followed, follow, 0, frameMin, tilePx) : keyframeCamera(params, spec, 0),
+			applyCamera(cameraAt(params, spec, followed, follow, 0, frameMin, tilePx),
 					() -> updateTracks(tracks, 0, videoS));
 			// load_timeout_s: how long a frame may wait for map data (relief on a slow device loads for long)
 			double loadTimeoutS = spec.optDouble("load_timeout_s", Double.NaN);
@@ -244,11 +263,20 @@ public class MapFlyoverRecorder {
 			long frameTimeout = Double.isNaN(loadTimeoutS) ? FRAME_TIMEOUT_MS : (long) (loadTimeoutS * 1000);
 			String notIdleReason = null;
 			waitForIdleFrame(view, firstTimeout);
+			measureDrone(true);
 			// once more: settings changed for the video (map magnifier, relief) reach the renderer with a delay,
 			// and the first recorded frame showed the map at the old scale
-			applyCamera(followed != null ? followCamera(followed, follow, 0, frameMin, tilePx) : keyframeCamera(params, spec, 0),
+			applyCamera(cameraAt(params, spec, followed, follow, 0, frameMin, tilePx),
 					() -> updateTracks(tracks, 0, videoS));
 			waitForIdleFrame(view, firstTimeout);
+			measureDrone(true);
+			for (int k = 0; drone != null && k < DRONE_WARMUP_FRAMES; k++) {
+				// the drone's camera learns how far the engine's camera is at a zoom: frame 0 again until it knows
+				applyCamera(cameraAt(params, spec, followed, follow, 0, frameMin, tilePx),
+						() -> updateTracks(tracks, 0, videoS));
+				waitForIdleFrame(view, firstTimeout);
+				measureDrone(true);
+			}
 			for (int i = 0; i < frames; i++) {
 				if (cancelled) {
 					throw new CancellationException("Cancelled on the phone");
@@ -268,7 +296,7 @@ public class MapFlyoverRecorder {
 				}
 				// symbols that come and go at a layout fade in and out on the video's clock
 				view.setSymbolsFade(SYMBOLS_FADE_MS, t);
-				double[] camera = followed != null ? followCamera(followed, follow, t / 1000.0, frameMin, tilePx) : keyframeCamera(params, spec, t);
+				double[] camera = cameraAt(params, spec, followed, follow, t, frameMin, tilePx);
 				applyCamera(camera, () -> updateTracks(tracks, t / 1000.0, videoS));
 				if (prev != null) {
 					maxSpeed = Math.max(maxSpeed, screenDistance(prev, camera, pxPerTile) * params.getFps());
@@ -280,6 +308,16 @@ public class MapFlyoverRecorder {
 					applyCamera(camera, () -> updateTracks(tracks, t / 1000.0, videoS));
 					idle = waitForIdleFrame(view, frameTimeout);
 				}
+				for (int retry = 0; retry < DRONE_CORRECTIONS; retry++) {
+					// the drone's camera at the height the engine has under its target: this frame once more
+					double[] fixed = droneCorrection();
+					if (fixed == null) {
+						break;
+					}
+					applyCamera(fixed, () -> updateTracks(tracks, t / 1000.0, videoS));
+					idle = waitForIdleFrame(view, frameTimeout);
+				}
+				measureDrone(false);
 				if (!idle) {
 					notIdleFrames++;
 					String reason = view.getNotIdleReason();
@@ -337,6 +375,10 @@ public class MapFlyoverRecorder {
 			String warnings = unknownKeys(spec);
 			if (detailNote != null) {
 				warnings += (warnings.isEmpty() ? "" : "; ") + detailNote;
+			}
+			String droneNote = drone != null ? drone.report() : null;
+			if (droneNote != null) {
+				warnings += (warnings.isEmpty() ? "" : "; ") + droneNote;
 			}
 			if (!layoutWarning.isEmpty()) {
 				warnings += (warnings.isEmpty() ? "" : "; ") + layoutWarning;
@@ -443,13 +485,16 @@ public class MapFlyoverRecorder {
 		double videoS = getVideoDuration(params, spec);
 		for (int k = 0; k < samples; k++) {
 			double t = videoS * (k + 0.5) / samples;
-			double[] camera = followed != null && follow != null ? followCamera(followed, follow, t, frameMin, tilePx)
+			double[] camera = drone != null ? drone.roughCamera(t)
+					: followed != null && follow != null ? followCamera(followed, follow, t, frameMin, tilePx)
 					: keyframeCamera(params, spec, (long) (t * 1000));
 			zoom += camera[2] / samples;
 			tilt += camera[4] / samples;
 		}
 		Boolean mountains = null;
-		for (FlyoverTrack track : followed != null ? followed : tracks) {
+		List<FlyoverTrack> heightTracks = drone != null
+				? (drone.track != null ? Arrays.asList(drone.track) : new ArrayList<>()) : followed != null ? followed : tracks;
+		for (FlyoverTrack track : heightTracks) {
 			double min = Double.MAX_VALUE, max = -Double.MAX_VALUE;
 			for (WptPt p : track.points) {
 				if (!Double.isNaN(p.getEle())) {
@@ -484,12 +529,13 @@ public class MapFlyoverRecorder {
 	private String validate(@NonNull MapFlyoverParams p, @NonNull JSONObject spec) {
 		int n = p.getLatitudes().length;
 		JSONObject camera = spec.optJSONObject("camera");
-		if (n == 0 && camera != null && camera.has("follow")) {
-			double d = spec.optDouble("duration_s", 0);
-			return d > 0 && d <= 600 ? checkVideo(p) : "A video that follows a track needs duration_s, 0-600";
+		if (n == 0 && camera != null && (camera.has("follow") || camera.has("drone") || camera.has("poses"))) {
+			double d = getVideoDuration(p, spec);
+			return d > 0 && d <= 600 ? checkVideo(p)
+					: "A video that follows a track or a drone needs duration_s (or the last pose's time_s), 0-600";
 		}
 		if (n == 0) {
-			return "Give key frames, or camera.follow with duration_s";
+			return "Give key frames, camera.follow or camera.drone with duration_s, or camera.poses";
 		}
 		if (p.getLongitudes().length != n || p.getZooms().length != n || p.getAzimuths().length != n
 				|| p.getElevationAngles().length != n || p.getTimesMs().length != n) {
@@ -635,6 +681,12 @@ public class MapFlyoverRecorder {
 		}
 		view.setSymbolsUpdateInterval(MapViewWithLayers.SYMBOLS_UPDATE_INTERVAL);
 		view.setSymbolsFade(0, -1);
+		if (drone != null) {
+			view.setFieldOfView(FlyoverDroneCamera.ENGINE_FOV / 2);
+			if (!Float.isNaN(elevationScaleBefore)) {
+				view.setElevationScaleFactor(elevationScaleBefore);
+			}
+		}
 		try {
 			runInUiThread(() -> {
 				if (mapView.getMapRenderer() == view) {
@@ -669,6 +721,8 @@ public class MapFlyoverRecorder {
 	// tracks climbing or descending more than this are in the mountains
 	private static final double MOUNTAIN_RISE_M = 300;
 	private static final int PREVIEW_PER_S = 5;
+	private static final int DRONE_WARMUP_FRAMES = 8;
+	private static final int DRONE_CORRECTIONS = 6;
 	private static final float RELIEF_LIFT_SMOOTHING = 0.35f;
 
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
@@ -689,7 +743,89 @@ public class MapFlyoverRecorder {
 
 	private static double getVideoDuration(@NonNull MapFlyoverParams p, @NonNull JSONObject spec) {
 		long[] times = p.getTimesMs();
-		return times.length > 0 ? times[times.length - 1] / 1000.0 : spec.optDouble("duration_s");
+		if (times.length > 0) {
+			return times[times.length - 1] / 1000.0;
+		}
+		JSONObject camera = spec.optJSONObject("camera");
+		JSONArray poses = camera != null ? camera.optJSONArray("poses") : null;
+		if (!spec.has("duration_s") && poses != null && poses.length() > 0 && poses.optJSONObject(poses.length() - 1) != null) {
+			return poses.optJSONObject(poses.length() - 1).optDouble("time_s", poses.length() - 1);
+		}
+		return spec.optDouble("duration_s");
+	}
+
+	/** The camera of the frame at video time tMs: drone, track following or key frames. */
+	@NonNull
+	private double[] cameraAt(@NonNull MapFlyoverParams params, @NonNull JSONObject spec,
+	                          @Nullable List<FlyoverTrack> followed, @Nullable JSONObject follow, long tMs,
+	                          int frameMin, float tilePx) {
+		if (drone != null) {
+			return droneZoomBand(drone.camera(tMs / 1000.0));
+		}
+		return followed != null && follow != null ? followCamera(followed, follow, tMs / 1000.0, frameMin, tilePx)
+				: keyframeCamera(params, spec, tMs);
+	}
+
+	@Nullable
+	private double[] droneCorrection() throws InterruptedException {
+		FlyoverDroneCamera drone = this.drone;
+		if (drone == null) {
+			return null;
+		}
+		double[][] result = new double[1][];
+		runInUiThread(() -> {
+			MapRendererView renderer = mapView.getMapRenderer();
+			if (renderer != null) {
+				result[0] = drone.correction(renderer);
+			}
+		});
+		return result[0];
+	}
+
+	/**
+	 * The engine changes the map's detail, and moves a camera over the relief by a step, where the zoom passes a whole
+	 * level. A drone camera keeps a level (its middle, n.5) and gets the rest of its distance from the scale of the
+	 * frame; the level changes only when that scale leaves 2^-band..2^band.
+	 */
+	@NonNull
+	private double[] droneZoomBand(@NonNull double[] camera) {
+		FlyoverDroneCamera drone = this.drone;
+		if (drone == null) {
+			return camera;
+		}
+		double zoom = camera[2];
+		if (Double.isNaN(droneLevel)) {
+			droneLevel = Math.floor(zoom) + 0.5;
+		}
+		float density = app.getOsmandMap().getMapDensity();
+		double ground = drone.targetGround(camera);
+		double[] fitted = camera.clone();
+		for (int k = 0; k < 4; k++) {
+			double level = Math.min(droneLevel, mapView.getMaxZoom());
+			fitted = camera.clone();
+			drone.fit(fitted, level, density, ground, true);
+			// far from 1 the engine answers the scale unevenly: then the next level, which needs about twice less
+			double steps = Math.log(fitted[7]) / Math.log(2);
+			if (Math.abs(steps) <= FlyoverDroneCamera.SCALE_BAND || (steps < 0 && level >= mapView.getMaxZoom())) {
+				break;
+			}
+			droneLevel += Math.round(steps);
+		}
+		return fitted;
+	}
+
+	/** After a drone frame: how high the engine's camera really is; the first frames teach the zoom to distance. */
+	private void measureDrone(boolean learn) throws InterruptedException {
+		FlyoverDroneCamera drone = this.drone;
+		if (drone == null) {
+			return;
+		}
+		runInUiThread(() -> {
+			MapRendererView renderer = mapView.getMapRenderer();
+			if (renderer != null) {
+				drone.measure(renderer, learn);
+			}
+		});
 	}
 
 	/**
@@ -816,7 +952,7 @@ public class MapFlyoverRecorder {
 	}
 
 	/** Cubic Hermite through (ts, values) with Catmull-Rom tangents per second: smooth speed across key frames. */
-	private static double hermite(@NonNull double[] ts, @NonNull double[] values, double t) {
+	static double hermite(@NonNull double[] ts, @NonNull double[] values, double t) {
 		int n = ts.length;
 		if (n == 1) {
 			return values[0];
@@ -864,6 +1000,9 @@ public class MapFlyoverRecorder {
 		double fLat = camera[0], fLon = camera[1];
 		double targetX = camera.length > 6 ? camera[5] : Double.NaN, targetY = camera.length > 6 ? camera[6] : Double.NaN;
 		float fZoom = (float) camera[2], fAzimuth = (float) camera[3], fElevation = (float) camera[4];
+		// a drone camera: the scale of the frame, its field of view
+		float extraScale = camera.length > 7 ? (float) camera[7] : 1f;
+		float fov = camera.length > 8 ? (float) camera[8] : Float.NaN;
 		runInUiThread(() -> {
 			// immediate setters: the animated ones would run on their own clock, not the video's
 			mapView.getAnimatedDraggingThread().stopAnimating();
@@ -876,7 +1015,17 @@ public class MapFlyoverRecorder {
 			MapRendererView renderer = mapView.getMapRenderer();
 			if (renderer != null) {
 				// the map magnifier (map_density) as on the phone's map
-				renderer.setVisualZoomShift(app.getOsmandMap().getMapDensity() - 1.0f);
+				renderer.setVisualZoomShift(app.getOsmandMap().getMapDensity() * extraScale - 1.0f);
+				// the map view keeps whole degrees of tilt: the renderer gets the exact one
+				renderer.setElevationAngle(fElevation);
+				if (!Float.isNaN(fov)) {
+					renderer.setFieldOfView(fov / 2);
+					// heights to scale: an exaggerated relief would rise into the drone's way
+					if (Float.isNaN(elevationScaleBefore)) {
+						elevationScaleBefore = renderer.getElevationScaleFactor();
+					}
+					renderer.setElevationScaleFactor(1f);
+				}
 			}
 			if (renderer != null && renderWidth > 0) {
 				PointF ratio = !Double.isNaN(targetX) && !Double.isNaN(targetY) ? new PointF((float) targetX, (float) targetY)
