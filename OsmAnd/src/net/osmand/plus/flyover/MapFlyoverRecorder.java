@@ -664,7 +664,7 @@ public class MapFlyoverRecorder {
 	// what this OsmAnd understands in a flyover request; anything else is reported back, not silently dropped
 	private static final float DEFAULT_DETAIL = 3f;
 	// the camera's zoom over the video: up to this the relief fills the frame, from the next one streets do
-	private static final double OVERVIEW_ZOOM = 13.5;
+	private static final double OVERVIEW_ZOOM = 14.5;
 	private static final double STREET_ZOOM = 15.5;
 	// tracks climbing or descending more than this are in the mountains
 	private static final double MOUNTAIN_RISE_M = 300;
