@@ -440,7 +440,7 @@ class MapFlyoverRecorder {
 	}
 
 	// what this OsmAnd understands in a flyover request; anything else is reported back, not silently dropped
-	private static final float DEFAULT_DETAIL = 1.5f;
+	private static final float DEFAULT_DETAIL = 3f;
 
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
 			"name", "camera", "duration_s", "gpx", "osmand_widgets", "attribution", "profile", "scale",

@@ -41,7 +41,7 @@ At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smoot
 | `load_timeout_s` | works | how long a frame may wait for map data, default 30 s for the first frame and 5 s for the others; frames recorded before the map finished loading are counted in `warnings` |
 | `smooth_s` | works | point values in widgets (speed, heart rate, altitude...) are averaged over this much video time, default 1.5; 0 shows raw values |
 | `refresh_s` | works | numbers in widgets change at most this often, default 0.25 (as a bike computer); 0 changes them every frame |
-| `detail` | works | how far into a tilted map tiles keep full detail, default 1.5 (the phone uses 0.5); higher is sharper in the distance and slower |
+| `detail` | works | how far into a tilted map tiles keep full detail, default 3 (the phone uses 0.5); higher is sharper in the distance and slower |
 | `ui_scale` | works | size of everything drawn over the map (OsmAnd elements, panels, callouts); default 1; the frame's long side is 800 dp |
 | `gpx[]` | works | tracks to show, see below |
 | `osmand_widgets` | works | `["profile_icon", "ruler", "compass"]` |
