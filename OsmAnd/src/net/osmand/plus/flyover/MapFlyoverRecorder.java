@@ -24,6 +24,7 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -896,6 +897,11 @@ public class MapFlyoverRecorder {
 						helper.selectGpxFile(before.getGpxFile(), GpxSelectionParams.newInstance().showOnMap());
 					} else {
 						helper.selectGpxFile(track.gpx, GpxSelectionParams.newInstance().hideFromMap());
+					}
+					if (track.temporary) {
+						// a GPX passed in the call: not kept on the phone, nor in the track database
+						app.getGpxDbHelper().remove(SharedUtil.kFile(track.file));
+						track.file.delete();
 					}
 				}
 			});
