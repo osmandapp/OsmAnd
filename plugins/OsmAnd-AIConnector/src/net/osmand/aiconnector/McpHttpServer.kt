@@ -11,7 +11,8 @@ class McpHttpServer(
 	port: Int,
 	private val token: String,
 	private val tools: OsmAndTools,
-	private val bridgeScript: String?
+	private val bridgeScript: String?,
+	private val onActivity: () -> Unit = {}
 ) : NanoHTTPD(host, port) {
 
 	companion object {
@@ -78,7 +79,13 @@ class McpHttpServer(
 				"tools/call" -> {
 					val name = params.getString("name")
 					Log.i(TAG, "tools/call $name")
-					rpcResult(id, tools.call(name, params.optJSONObject("arguments") ?: JSONObject()))
+					onActivity()
+					try {
+						rpcResult(id, tools.call(name, params.optJSONObject("arguments") ?: JSONObject()))
+					} finally {
+						// a long call (a flyover) counts from its end
+						onActivity()
+					}
 				}
 				else -> rpcError(id, -32601, "Method not found: $method")
 			}
