@@ -439,9 +439,27 @@ public class MapFlyoverRecorder {
 		return null;
 	}
 
+	/** Where the videos are kept, under OsmAnd's own folder. */
+	@NonNull
+	public static File getFolder(@NonNull OsmandApplication app) {
+		return app.getAppPath(FOLDER);
+	}
+
+	/** The recorded videos on the phone, newest first. */
+	@NonNull
+	public static List<File> listVideos(@NonNull OsmandApplication app) {
+		File[] files = getFolder(app).listFiles((dir, name) -> name.toLowerCase(Locale.US).endsWith(".mp4"));
+		List<File> videos = new ArrayList<>();
+		if (files != null) {
+			videos.addAll(Arrays.asList(files));
+			videos.sort((a, b) -> Long.compare(b.lastModified(), a.lastModified()));
+		}
+		return videos;
+	}
+
 	@NonNull
 	private File getFile(@Nullable String name) {
-		File dir = app.getAppPath(FOLDER);
+		File dir = getFolder(app);
 		dir.mkdirs();
 		if (Algorithms.isEmpty(name)) {
 			name = "flyover_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US).format(new Date());
