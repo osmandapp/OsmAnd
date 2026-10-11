@@ -82,6 +82,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.card.color.palette.solid.data.DefaultColors;
+import net.osmand.plus.flyover.FlyoverSession;
+import net.osmand.plus.flyover.MapFlyoverRecorder;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.NavigateGpxHelper;
@@ -265,6 +267,8 @@ public class OsmandAidlApi {
 
 	public OsmandAidlApi(@NonNull OsmandApplication app) {
 		this.app = app;
+		// before the tracks are loaded: settings a crashed flyover recording left behind
+		FlyoverSession.recover(app);
 		loadConnectedApps();
 	}
 
@@ -373,6 +377,8 @@ public class OsmandAidlApi {
 						if (!Float.isNaN(rotation)) {
 							mapView.setRotate(rotation, false);
 						}
+						// as a pan by hand: a map linked to my location would go back to it at the next fix
+						app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 						if (animated) {
 							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, zoomFloatPart);
 						} else {
@@ -1854,6 +1860,8 @@ public class OsmandAidlApi {
 				mapView.setElevationAngle(elevationAngle);
 			}
 			if (!Double.isNaN(latitude) && !Double.isNaN(longitude)) {
+				// as a pan by hand: a map linked to my location would go back to it at the next fix
+				app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 				int baseZoom = mapView.getZoom();
 				float zoomFloatPart = mapView.getZoomFloatPart();
 				if (!Float.isNaN(zoom) && zoom > 0) {

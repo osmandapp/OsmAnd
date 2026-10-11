@@ -56,6 +56,11 @@ object ConnectorSettings {
 	fun setRunMode(ctx: Context, mode: RunMode) =
 		prefs(ctx).edit().putBoolean("screen_mode", mode == RunMode.SCREEN).apply()
 
+	/** While the assistant calls tools, the screen stays on, so the phone does not lock under it. */
+	fun keepScreenOn(ctx: Context) = prefs(ctx).getBoolean("keep_screen_on", true)
+
+	fun setKeepScreenOn(ctx: Context, on: Boolean) = prefs(ctx).edit().putBoolean("keep_screen_on", on).apply()
+
 	/** Over Wi-Fi: the assistant starts the bridge that finds the phone by name, or uses the address directly. */
 	fun useBridge(ctx: Context) = prefs(ctx).getBoolean("bridge", true)
 

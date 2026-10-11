@@ -1,5 +1,6 @@
 package net.osmand.aiconnector
 
+import android.content.res.AssetManager
 import android.util.Base64
 import android.view.KeyEvent
 import net.osmand.aidlapi.IOsmAndAidlCallback
@@ -49,7 +50,7 @@ class ToolError(message: String) : Exception(message)
 class ToolImage(val jpeg: ByteArray, val caption: String)
 
 /** MCP tool definitions and their implementation on top of OsmAnd's AIDL API v2. */
-class OsmAndTools(private val bridge: OsmAndBridge) {
+class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetManager) {
 
 	private class Tool(
 		val name: String,
@@ -403,7 +404,8 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		) { a -> logs.read(a) },
 		Tool(
 			"osmand_flyover",
-			"Record a smooth camera flight over the map into an MP4 video on the phone. The camera passes the key " +
+			"Record a smooth camera flight over the map into an MP4 video on the phone. Read osmand_guide topic " +
+					"flyover first: speed limits, render time, examples. The camera passes the key " +
 					"frames at their times; between them the center follows a smooth curve and zoom, rotation and tilt " +
 					"ease. OsmAnd renders off the screen frame by frame (OpenGL renderer, 3D and relief included), so the " +
 					"screen may be off; the phone's map pauses meanwhile. Rendering takes longer than the video: " +
@@ -416,15 +418,39 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 				prop("height", "integer", "Video height, even, default 720"),
 				prop("fps", "integer", "Frames per second, default 30"),
 				prop("name", "string", "File name, default flyover_<time>.mp4"),
-				required = listOf("keyframes")
+				prop("camera", "object", "Instead of keyframes: {follow: track number in gpx, zoom, tilt, look_ahead_s}"),
+				prop("duration_s", "number", "Video length when the camera follows a track"),
+				prop("gpx", "array", "Tracks to show: {file, from_s, to_s, time, style...}; see osmand_guide topic flyover", items = "object"),
+				prop("osmand_widgets", "array", "OsmAnd elements: profile_icon, ruler, compass", items = "string"),
+				prop("attribution", "string", "Attribution text, default 'OsmAnd · © OpenStreetMap'"),
+				prop("panels", "array", "Panels of widgets (attribute / text / chart) placed like a FrameLayout; " +
+						"see osmand_guide topic flyover", items = "object"),
+				prop("data", "object", "Your own values for panels: constants or series"),
+				prop("ease_in_s", "number", "Seconds the camera speeds up after the start, default 1"),
+				prop("ease_out_s", "number", "Seconds the camera slows down before the end, default 1"),
+				prop("scale", "string", "video (default) or screen: the phone's own map scale"),
+				prop("ui_scale", "number", "Size of everything drawn over the map, default 1"),
+				prop("profile", "string", "Profile key for the profile icon, default the current one")
 			)
-		) { a -> flyover(a) }
+		) { a -> flyover(a) },
+		Tool(
+			"osmand_guide",
+			"How-to guide for a bigger task, with parameters, limits and examples. Topics: ${GUIDE_TOPICS.joinToString()}.",
+			schema(prop("topic", "string", "Guide topic: ${GUIDE_TOPICS.joinToString()}"), required = listOf("topic"))
+		) { a ->
+			val topic = a.getString("topic").trim().lowercase()
+			if (topic !in GUIDE_TOPICS) throw ToolError("No guide '$topic'; topics: ${GUIDE_TOPICS.joinToString()}")
+			assets.open("guides/$topic.md").bufferedReader().use { it.readText() }
+		}
 	).associateBy { it.name }
 
 	private fun flyover(a: JSONObject): JSONObject {
-		val frames = a.getJSONArray("keyframes")
+		// a camera that follows a track needs no key frames; OsmAnd checks the rest of the request
+		val frames = a.optJSONArray("keyframes") ?: JSONArray()
 		val n = frames.length()
-		if (n < 1) throw ToolError("Give at least one key frame")
+		if (n < 1 && a.optJSONObject("camera")?.has("follow") != true) {
+			throw ToolError("Give key frames, or camera.follow with duration_s; see osmand_guide topic flyover")
+		}
 		val lat = DoubleArray(n)
 		val lon = DoubleArray(n)
 		val zoom = FloatArray(n)
@@ -442,12 +468,14 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		}
 		val p = MapFlyoverParams(lat, lon, zoom, rotation, tilt, time, a.optInt("width", 1280),
 			a.optInt("height", 720), a.optInt("fps", 30), a.optString("name"))
+		p.spec = a.toString()
 		if (!bridge.get().recordMapFlyover(p)) {
 			throw ToolError(p.error.ifEmpty { refused(SCREEN) + " An older OsmAnd cannot record a flyover." })
 		}
 		val o = JSONObject().put("file", p.filePath).put("frames", p.frames)
 			.put("render_s", Math.round(p.renderTimeMs / 100.0) / 10.0)
 			.put("max_screen_speed_px_s", p.maxScreenSpeed.toInt())
+		p.warnings?.takeIf { it.isNotEmpty() }?.let { o.put("warnings", it) }
 		if (p.maxScreenSpeed > SMOOTH_SCREEN_SPEED) {
 			o.put("hint", "The map moves up to ${p.maxScreenSpeed.toInt()} px/s on the screen; above $SMOOTH_SCREEN_SPEED " +
 					"sharp lines strobe. Give that part more time or a lower zoom (the camera higher).")
@@ -829,6 +857,7 @@ private const val SETTINGS = "Settings"
 private const val SYSTEM = "System"
 
 private const val MAX_LOG_LINES = 5000
+private val GUIDE_TOPICS = listOf("flyover")
 private const val SMOOTH_SCREEN_SPEED = 250
 private val LOG_LEVELS = listOf("D", "I", "W", "E")
 

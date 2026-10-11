@@ -11,7 +11,8 @@ class McpHttpServer(
 	port: Int,
 	private val token: String,
 	private val tools: OsmAndTools,
-	private val bridgeScript: String?
+	private val bridgeScript: String?,
+	private val onActivity: () -> Unit = {}
 ) : NanoHTTPD(host, port) {
 
 	companion object {
@@ -21,7 +22,8 @@ class McpHttpServer(
 		private const val INSTRUCTIONS = "Controls the OsmAnd map app on an Android phone through OsmAnd's AIDL API. " +
 				"Start with osmand_status. Settings are changed with osmand_set_preference; most settings are per profile. " +
 				"For pictures: show a track, point the camera with osmand_set_camera, then osmand_screenshot; " +
-				"track numbers come from osmand_track_stats and osmand_track_points."
+				"track numbers come from osmand_track_stats and osmand_track_points. " +
+				"Before bigger tasks read the guide: osmand_guide topic flyover before a flyover video."
 	}
 
 	override fun serve(session: IHTTPSession): Response {
@@ -77,7 +79,13 @@ class McpHttpServer(
 				"tools/call" -> {
 					val name = params.getString("name")
 					Log.i(TAG, "tools/call $name")
-					rpcResult(id, tools.call(name, params.optJSONObject("arguments") ?: JSONObject()))
+					onActivity()
+					try {
+						rpcResult(id, tools.call(name, params.optJSONObject("arguments") ?: JSONObject()))
+					} finally {
+						// a long call (a flyover) counts from its end
+						onActivity()
+					}
 				}
 				else -> rpcError(id, -32601, "Method not found: $method")
 			}
