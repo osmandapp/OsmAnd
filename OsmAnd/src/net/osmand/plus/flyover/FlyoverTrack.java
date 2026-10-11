@@ -393,7 +393,9 @@ class FlyoverTrack {
 			passed.add(pointAt(from));
 		}
 		for (int i = 0; i <= p.index; i++) {
-			if (dist[i] > from) passed.add(points.get(i));
+			// from the track's first point when nothing is cut: the rest starts there too, and the arrows of both
+			// lines, laid out from their start, must fall on the same places
+			if (dist[i] > from || (from <= 0 && i == 0)) passed.add(points.get(i));
 		}
 		WptPt headPoint = pointAt(p.distance);
 		passed.add(headPoint);
