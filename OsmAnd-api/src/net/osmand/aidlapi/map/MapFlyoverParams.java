@@ -23,6 +23,7 @@ public class MapFlyoverParams extends AidlParams {
 	private int fps = 30;
 	private String fileName = "";
 	private String spec = "";
+	private String warnings = "";
 
 	private String filePath = "";
 	private String error = "";
@@ -173,6 +174,17 @@ public class MapFlyoverParams extends AidlParams {
 		this.spec = spec;
 	}
 
+	/**
+	 * @return what OsmAnd did not understand in the request and ignored, empty when all was used
+	 */
+	public String getWarnings() {
+		return warnings;
+	}
+
+	public void setWarnings(String warnings) {
+		this.warnings = warnings;
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putDoubleArray("latitudes", latitudes);
@@ -186,6 +198,7 @@ public class MapFlyoverParams extends AidlParams {
 		bundle.putInt("fps", fps);
 		bundle.putString("fileName", fileName);
 		bundle.putString("spec", spec);
+		bundle.putString("warnings", warnings);
 		bundle.putString("filePath", filePath);
 		bundle.putString("error", error);
 		bundle.putInt("frames", frames);
@@ -206,6 +219,7 @@ public class MapFlyoverParams extends AidlParams {
 		fps = bundle.getInt("fps", 30);
 		fileName = bundle.getString("fileName", "");
 		spec = bundle.getString("spec", "");
+		warnings = bundle.getString("warnings", "");
 		filePath = bundle.getString("filePath", "");
 		error = bundle.getString("error", "");
 		frames = bundle.getInt("frames");

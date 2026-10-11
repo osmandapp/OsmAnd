@@ -2,12 +2,14 @@ package net.osmand.aidl;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.PointF;
 import android.media.Image;
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
 import android.media.MediaFormat;
 import android.media.MediaMuxer;
 import android.os.SystemClock;
+import android.util.DisplayMetrics;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +19,7 @@ import net.osmand.aidlapi.map.MapFlyoverParams;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -25,6 +28,9 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.views.MapViewWithLayers;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -38,6 +44,10 @@ import java.io.File;
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -68,6 +78,11 @@ class MapFlyoverRecorder {
 
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
+	private int renderWidth;
+	private int renderHeight;
+	// map layers (tracks, markers, favourites) build their OpenGL objects while they draw on a canvas, as on
+	// Android Auto; nothing visible is drawn there, so a 1 px canvas does
+	private final Canvas layersCanvas = new Canvas(Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888));
 
 	MapFlyoverRecorder(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -99,8 +114,14 @@ class MapFlyoverRecorder {
 		VideoEncoder encoder = null;
 		List<FlyoverTrack> tracks = new ArrayList<>();
 		Map<String, SelectedGpxFile> shownBefore = new HashMap<>();
+		boolean[] linkedToLocation = new boolean[1];
 		int notIdleFrames = 0;
 		try {
+			// a map linked to my location goes back to it at every fix and draws my marker at its center
+			runInUiThread(() -> {
+				linkedToLocation[0] = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
+				app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+			});
 			double videoS = getVideoDuration(params, spec);
 			JSONArray gpxSpecs = spec.optJSONArray("gpx");
 			for (int k = 0; gpxSpecs != null && k < gpxSpecs.length(); k++) {
@@ -118,7 +139,9 @@ class MapFlyoverRecorder {
 			showTracks(tracks, shownBefore);
 			// rendered at twice the size and scaled down: thin lines and text edges stop shimmering in motion
 			int scale = params.getWidth() * SUPERSAMPLING <= MAX_SIZE && params.getHeight() * SUPERSAMPLING <= MAX_SIZE ? SUPERSAMPLING : 1;
-			view = takeRendererOver(params.getWidth() * scale, params.getHeight() * scale);
+			renderWidth = params.getWidth() * scale;
+			renderHeight = params.getHeight() * scale;
+			view = takeRendererOver(renderWidth, renderHeight, "screen".equals(spec.optString("scale")));
 			encoder = new VideoEncoder(file, params.getWidth(), params.getHeight(), params.getFps());
 			FlyoverOverlay overlay = new FlyoverOverlay(app, spec, params.getWidth(), params.getHeight());
 			int frames = (int) Math.round(videoS * params.getFps()) + 1;
@@ -131,6 +154,9 @@ class MapFlyoverRecorder {
 			// is a few frames here, so that timer is switched off while the symbols are suspended.
 			view.setSymbolsUpdateInterval(Integer.MAX_VALUE);
 			int symbolsEvery = Math.max(1, (int) (SYMBOLS_UPDATE_MS * params.getFps() / 1000));
+			// the renderer still shows the phone's camera: draw the start once, unrecorded, so frame 0 is right
+			applyCamera(followed != null ? followCamera(followed, follow, 0) : keyframeCamera(params, spec, 0));
+			waitForIdleFrame(view, FIRST_FRAME_TIMEOUT_MS);
 			for (int i = 0; i < frames; i++) {
 				long t = i * 1000L / params.getFps();
 				boolean layoutFrame = i % symbolsEvery == 0;
@@ -141,13 +167,13 @@ class MapFlyoverRecorder {
 				}
 				// symbols that come and go at a layout fade in and out on the video's clock
 				view.setSymbolsFade(SYMBOLS_FADE_MS, t);
-				double[] camera = followed != null ? followCamera(followed, follow, t / 1000.0) : keyframeCamera(params, t);
+				double[] camera = followed != null ? followCamera(followed, follow, t / 1000.0) : keyframeCamera(params, spec, t);
 				applyCamera(camera);
 				if (prev != null) {
 					maxSpeed = Math.max(maxSpeed, screenDistance(prev, camera, pxPerTile) * params.getFps());
 				}
 				prev = camera;
-				if (!waitForIdleFrame(view, i == 0 ? FIRST_FRAME_TIMEOUT_MS : FRAME_TIMEOUT_MS)) {
+				if (!waitForIdleFrame(view, FRAME_TIMEOUT_MS)) {
 					notIdleFrames++;
 					LOG.warn("Flyover frame " + i + " is not idle: " + view.getNotIdleReason());
 				}
@@ -168,6 +194,7 @@ class MapFlyoverRecorder {
 			encoder = null;
 			params.setFilePath(file.getAbsolutePath());
 			params.setFrames(frames);
+			params.setWarnings(unknownKeys(spec));
 			params.setMaxScreenSpeed((float) maxSpeed);
 			params.setRenderTimeMs(SystemClock.elapsedRealtime() - start);
 			LOG.info("Flyover " + file + ": " + frames + " frames in " + params.getRenderTimeMs()
@@ -179,6 +206,13 @@ class MapFlyoverRecorder {
 			return false;
 		} finally {
 			hideTracks(tracks, shownBefore);
+			if (linkedToLocation[0]) {
+				try {
+					runInUiThread(() -> app.getMapViewTrackingUtilities().setMapLinkedToLocation(true));
+				} catch (InterruptedException e) {
+					LOG.error(e);
+				}
+			}
 			if (encoder != null) {
 				encoder.release();
 				file.delete();
@@ -244,7 +278,7 @@ class MapFlyoverRecorder {
 	 * from the view that has it now, and the map layers are attached to it.
 	 */
 	@NonNull
-	private AtlasMapRendererView takeRendererOver(int width, int height) throws InterruptedException {
+	private AtlasMapRendererView takeRendererOver(int width, int height, boolean phoneScale) throws InterruptedException {
 		AtlasMapRendererView[] result = new AtlasMapRendererView[1];
 		runInUiThread(() -> {
 			MapRendererContext context = NativeCoreContext.getMapRendererContext();
@@ -259,8 +293,12 @@ class MapFlyoverRecorder {
 				current = context.getMapRendererView();
 				context.setMapRendererView(null);
 			}
-			// the symbols are sized for a frame about 640 dp wide
-			NativeCoreContext.setMapRendererContext(app, Math.max(1f, Math.max(width, height) / 640f));
+			// by default the symbols are sized for a frame about 640 dp wide; "scale": "screen" keeps the phone's
+			// map scale, so the video matches screenshots of the phone (as wide as its short side)
+			DisplayMetrics dm = app.getResources().getDisplayMetrics();
+			float density = phoneScale ? dm.density * width / Math.min(dm.widthPixels, dm.heightPixels)
+					: Math.max(1f, Math.max(width, height) / 640f);
+			NativeCoreContext.setMapRendererContext(app, density);
 			context = NativeCoreContext.getMapRendererContext();
 			if (context == null) {
 				return;
@@ -319,6 +357,23 @@ class MapFlyoverRecorder {
 		}
 	}
 
+	// what this OsmAnd understands in a flyover request; anything else is reported back, not silently dropped
+	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
+			"name", "camera", "duration_s", "gpx", "osmand_widgets", "attribution", "profile", "scale",
+			"ease_in_s", "ease_out_s"));
+
+	@NonNull
+	private static String unknownKeys(@NonNull JSONObject spec) {
+		List<String> unknown = new ArrayList<>();
+		for (Iterator<String> it = spec.keys(); it.hasNext(); ) {
+			String key = it.next();
+			if (!KNOWN_KEYS.contains(key)) {
+				unknown.add(key);
+			}
+		}
+		return unknown.isEmpty() ? "" : "This OsmAnd does not support yet and ignored: " + String.join(", ", unknown);
+	}
+
 	private static double getVideoDuration(@NonNull MapFlyoverParams p, @NonNull JSONObject spec) {
 		long[] times = p.getTimesMs();
 		return times.length > 0 ? times[times.length - 1] / 1000.0 : spec.optDouble("duration_s");
@@ -349,37 +404,80 @@ class MapFlyoverRecorder {
 				camera.optDouble("tilt", 50)};
 	}
 
-	/** Camera at time t from the key frames; returns {lat, lon, zoom, rotation, elevation angle}. */
+	/**
+	 * Camera at time t from the key frames; returns {lat, lon, zoom, rotation, elevation angle}. Every channel follows
+	 * a curve through the key frames with tangents in time units, so the camera passes key frames without stopping;
+	 * it only speeds up after the start and slows down before the end (ease_in_s / ease_out_s).
+	 */
 	@NonNull
-	private double[] keyframeCamera(@NonNull MapFlyoverParams p, long t) {
+	private double[] keyframeCamera(@NonNull MapFlyoverParams p, @NonNull JSONObject spec, long tMs) {
 		long[] times = p.getTimesMs();
 		int n = times.length;
+		double total = times[n - 1] / 1000.0;
+		double t = easeTime(tMs / 1000.0, total, spec.optDouble("ease_in_s", Math.min(1, total / 3)),
+				spec.optDouble("ease_out_s", Math.min(1, total / 3)));
+		double[] ts = new double[n];
+		double[] rotation = new double[n];
+		for (int k = 0; k < n; k++) {
+			ts[k] = times[k] / 1000.0;
+			// unwrapped, so that 170 -> -170 turns 20 degrees, not 340
+			rotation[k] = k == 0 ? p.getAzimuths()[0]
+					: rotation[k - 1] + MapUtils.unifyRotationDiff((float) rotation[k - 1], p.getAzimuths()[k]);
+		}
+		double[] zoom = new double[n], tilt = new double[n], lat = new double[n], lon = new double[n];
+		for (int k = 0; k < n; k++) {
+			lat[k] = p.getLatitudes()[k];
+			lon[k] = p.getLongitudes()[k];
+			zoom[k] = p.getZooms()[k];
+			tilt[k] = p.getElevationAngles()[k];
+		}
+		return new double[] {hermite(ts, lat, t), hermite(ts, lon, t),
+				Math.max(1, Math.min(22, hermite(ts, zoom, t))), hermite(ts, rotation, t),
+				Math.max(10, Math.min(90, hermite(ts, tilt, t)))};
+	}
+
+	/** Cubic Hermite through (ts, values) with Catmull-Rom tangents per second: smooth speed across key frames. */
+	private static double hermite(@NonNull double[] ts, @NonNull double[] values, double t) {
+		int n = ts.length;
+		if (n == 1) {
+			return values[0];
+		}
 		int i = 0;
-		while (i < n - 2 && t > times[i + 1]) {
+		while (i < n - 2 && t > ts[i + 1]) {
 			i++;
 		}
-		double lat, lon;
-		float zoom, azimuth, elevation;
-		if (n == 1) {
-			lat = p.getLatitudes()[0];
-			lon = p.getLongitudes()[0];
-			zoom = p.getZooms()[0];
-			azimuth = p.getAzimuths()[0];
-			elevation = p.getElevationAngles()[0];
-		} else {
-			float s = Math.max(0f, Math.min(1f, (float) (t - times[i]) / (times[i + 1] - times[i])));
-			int i0 = Math.max(i - 1, 0);
-			int i3 = Math.min(i + 2, n - 1);
-			// the position follows a Catmull-Rom curve through the key frames, so it does not turn sharply at them
-			lat = catmullRom(p.getLatitudes()[i0], p.getLatitudes()[i], p.getLatitudes()[i + 1], p.getLatitudes()[i3], s);
-			lon = catmullRom(p.getLongitudes()[i0], p.getLongitudes()[i], p.getLongitudes()[i + 1], p.getLongitudes()[i3], s);
-			float e = smoothStep(s);
-			zoom = lerp(p.getZooms()[i], p.getZooms()[i + 1], e);
-			float from = p.getAzimuths()[i];
-			azimuth = from + (float) MapUtils.unifyRotationDiff(from, p.getAzimuths()[i + 1]) * e;
-			elevation = lerp(p.getElevationAngles()[i], p.getElevationAngles()[i + 1], e);
+		double h = ts[i + 1] - ts[i];
+		double s = Math.max(0, Math.min(1, (t - ts[i]) / h));
+		double m0 = tangent(ts, values, i);
+		double m1 = tangent(ts, values, i + 1);
+		double s2 = s * s, s3 = s2 * s;
+		return (2 * s3 - 3 * s2 + 1) * values[i] + (s3 - 2 * s2 + s) * h * m0
+				+ (-2 * s3 + 3 * s2) * values[i + 1] + (s3 - s2) * h * m1;
+	}
+
+	private static double tangent(@NonNull double[] ts, @NonNull double[] values, int k) {
+		int a = Math.max(0, k - 1);
+		int b = Math.min(ts.length - 1, k + 1);
+		return (values[b] - values[a]) / (ts[b] - ts[a]);
+	}
+
+	/** Time warped so that the camera speeds up over easeIn seconds and slows down over easeOut, same total. */
+	private static double easeTime(double t, double total, double easeIn, double easeOut) {
+		double a = Math.max(0, easeIn), b = Math.max(0, easeOut);
+		if (a + b > total) {
+			a = b = total / 2;
 		}
-		return new double[] {lat, lon, zoom, azimuth, elevation};
+		if (a + b <= 0) {
+			return t;
+		}
+		double v = total / (total - (a + b) / 2);
+		if (t < a) {
+			return v * t * t / (2 * a);
+		} else if (t <= total - b) {
+			return v * (t - a / 2);
+		}
+		double rest = Math.max(0, total - t);
+		return total - v * rest * rest / (2 * Math.max(b, 1e-9));
 	}
 
 	private void applyCamera(@NonNull double[] camera) throws InterruptedException {
@@ -393,6 +491,15 @@ class MapFlyoverRecorder {
 			mapView.setLatLon(fLat, fLon);
 			int base = (int) Math.floor(fZoom);
 			mapView.setZoomWithFloatPart(base, fZoom - base);
+			// the map view puts the target at its ratio of the phone's view; the rendered frame has another size
+			MapRendererView renderer = mapView.getMapRenderer();
+			if (renderer != null && renderWidth > 0) {
+				PointF ratio = app.getMapViewTrackingUtilities().getMapDisplayPositionManager().getMapRatio();
+				renderer.setMapTarget(new PointI(Math.round(ratio.x * renderWidth), Math.round(ratio.y * renderHeight)),
+						NativeUtilities.calculateTarget31(renderer, fLat, fLon, false));
+			}
+			boolean night = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
+			mapView.drawOverMap(layersCanvas, mapView.getRotatedTileBox(), new DrawSettings(night, false));
 		});
 	}
 
@@ -490,19 +597,8 @@ class MapFlyoverRecorder {
 		}
 	}
 
-	private static double catmullRom(double p0, double p1, double p2, double p3, double t) {
-		double t2 = t * t;
-		double t3 = t2 * t;
-		return 0.5 * (2 * p1 + (p2 - p0) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 + (3 * p1 - p0 - 3 * p2 + p3) * t3);
-	}
 
-	private static float smoothStep(float t) {
-		return t * t * (3 - 2 * t);
-	}
 
-	private static float lerp(float a, float b, float t) {
-		return a + (b - a) * t;
-	}
 
 	/** H.264 in MP4 from bitmaps; frames are fed as YUV with exact presentation times. */
 	private static class VideoEncoder {

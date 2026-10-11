@@ -467,6 +467,7 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 		val o = JSONObject().put("file", p.filePath).put("frames", p.frames)
 			.put("render_s", Math.round(p.renderTimeMs / 100.0) / 10.0)
 			.put("max_screen_speed_px_s", p.maxScreenSpeed.toInt())
+		p.warnings?.takeIf { it.isNotEmpty() }?.let { o.put("warnings", it) }
 		if (p.maxScreenSpeed > SMOOTH_SCREEN_SPEED) {
 			o.put("hint", "The map moves up to ${p.maxScreenSpeed.toInt()} px/s on the screen; above $SMOOTH_SCREEN_SPEED " +
 					"sharp lines strobe. Give that part more time or a lower zoom (the camera higher).")
