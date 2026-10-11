@@ -60,9 +60,9 @@ final class FlyoverBanner {
 		if (bar == null) {
 			bar = createBar(activity);
 			main.addView(bar);
-			setMapBottomInset(activity, false);
-			ViewCompat.requestApplyInsets(bar);
 		}
+		// again with every update: MapActivity hands the window's insets to the map whenever they change
+		setMapBottomInset(activity, false);
 		TextView text = bar.findViewWithTag(TEXT_TAG);
 		text.setText(app.getString(R.string.flyover_recording, percent + "%"));
 	}
@@ -105,31 +105,25 @@ final class FlyoverBanner {
 	}
 
 	/**
-	 * The bar takes the place of the system navigation bar under the map: without it the map's buttons would keep
-	 * their gap for that bar and stand too high above ours.
+	 * The bar takes the place of the system navigation bar under the map: the map's buttons get the window insets
+	 * without its bottom part, else they keep a gap for it above our bar. The real insets come back with hide().
 	 */
 	private static void setMapBottomInset(@NonNull MapActivity activity, boolean keep) {
-		View mapArea = activity.findViewById(R.id.map_view_with_layers);
-		if (mapArea == null || !(mapArea.getParent() instanceof ViewGroup)) {
+		View root = activity.findViewById(R.id.drawer_layout);
+		WindowInsetsCompat insets = root != null ? ViewCompat.getRootWindowInsets(root) : null;
+		if (insets == null) {
 			return;
 		}
-		ViewGroup container = (ViewGroup) mapArea.getParent();
 		if (keep) {
-			ViewCompat.setOnApplyWindowInsetsListener(container, null);
-		} else {
-			ViewCompat.setOnApplyWindowInsetsListener(container, (v, insets) -> {
-				int types = WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout();
-				Insets bars = insets.getInsets(types);
-				WindowInsetsCompat changed = new WindowInsetsCompat.Builder(insets)
-						.setInsets(types, Insets.of(bars.left, bars.top, bars.right, 0))
-						.build();
-				for (int i = 0; i < container.getChildCount(); i++) {
-					ViewCompat.dispatchApplyWindowInsets(container.getChildAt(i), changed);
-				}
-				return WindowInsetsCompat.CONSUMED;
-			});
+			// MapActivity hands the window's own insets to the map again
+			ViewCompat.requestApplyInsets(root);
+			return;
 		}
-		ViewCompat.requestApplyInsets(container);
+		int types = WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout();
+		Insets bars = insets.getInsets(types);
+		activity.getMapLayers().setWindowInsets(new WindowInsetsCompat.Builder(insets)
+				.setInsets(types, Insets.of(bars.left, bars.top, bars.right, 0))
+				.build());
 	}
 
 	@Nullable
@@ -174,12 +168,12 @@ final class FlyoverBanner {
 		bar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.WRAP_CONTENT));
 		// the map is drawn edge to edge: the bar stays above the system navigation bar
-		int top = bar.getPaddingTop(), bottom = bar.getPaddingBottom();
-		ViewCompat.setOnApplyWindowInsetsListener(bar, (v, insets) -> {
+		View root = activity.findViewById(R.id.drawer_layout);
+		WindowInsetsCompat insets = root != null ? ViewCompat.getRootWindowInsets(root) : null;
+		if (insets != null) {
 			int inset = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout()).bottom;
-			v.setPadding(v.getPaddingLeft(), top, v.getPaddingRight(), bottom + inset);
-			return insets;
-		});
+			bar.setPadding(bar.getPaddingLeft(), bar.getPaddingTop(), bar.getPaddingRight(), bar.getPaddingBottom() + inset);
+		}
 		return bar;
 	}
 

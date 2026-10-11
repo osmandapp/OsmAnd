@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 
@@ -145,15 +147,22 @@ class FlyoverOverlay {
 				headIcons.put(style + iconName, icon);
 			}
 			if (icon != null) {
-				int size = Math.round(dp(HEAD_ICON_DP));
-				icon.setBounds(Math.round(at.x - size / 2f), Math.round(at.y - size / 2f),
-						Math.round(at.x + size / 2f), Math.round(at.y + size / 2f));
 				canvas.save();
 				if (navigation) {
 					// OsmAnd's navigation icons point east, PointLocationLayer turns them by bearing - 90
 					canvas.rotate(angle - 90, at.x, at.y);
 				}
-				icon.draw(canvas);
+				// drawn as PointLocationLayer draws it: the layers of the icon centred on the point (a square around
+				// it put the car at the bottom of the square, beside the road once turned)
+				int largest = Math.max(icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
+				float scale = largest > 0 ? dp(HEAD_ICON_DP) / largest : 1;
+				if (icon instanceof LayerDrawable) {
+					AndroidUtils.drawScaledLayerDrawable(canvas, (LayerDrawable) icon, Math.round(at.x), Math.round(at.y), scale);
+				} else {
+					float w = icon.getIntrinsicWidth() * scale / 2, h = icon.getIntrinsicHeight() * scale / 2;
+					icon.setBounds(Math.round(at.x - w), Math.round(at.y - h), Math.round(at.x + w), Math.round(at.y + h));
+					icon.draw(canvas);
+				}
 				canvas.restore();
 				return;
 			}
