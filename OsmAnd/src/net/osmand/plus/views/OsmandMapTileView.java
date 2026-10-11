@@ -89,6 +89,7 @@ import java.util.concurrent.Executors;
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private volatile boolean touchesBlocked;
+	private volatile boolean arrowsFixedOnPath;
 
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
 	public static final float MIN_ALLOWED_ELEVATION_ANGLE = 10;
@@ -1965,6 +1966,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void fitLocationToMap(double clat, double clon, int zoom,
 	                             int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, boolean animated) {
 		fitLocationToMap(clat, clon, zoom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, 0, animated);
+	}
+
+	/** Arrows on lines counted from their start and stepped by powers of two (a flyover recording). */
+	public boolean isArrowsFixedOnPath() {
+		return arrowsFixedOnPath;
+	}
+
+	public void setArrowsFixedOnPath(boolean fixed) {
+		arrowsFixedOnPath = fixed;
 	}
 
 	/** While a flyover video is recorded the map takes no touches: its camera belongs to the recorder. */
