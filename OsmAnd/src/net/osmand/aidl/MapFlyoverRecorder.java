@@ -47,6 +47,7 @@ import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.CancellationException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -66,6 +67,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * however long a frame takes to render.
  */
 class MapFlyoverRecorder {
+
+	/** Set by the banner's cancel button; the recording stops before its next frame. */
+	private volatile boolean cancelled;
 
 	private static final Log LOG = PlatformUtil.getLog(MapFlyoverRecorder.class);
 
@@ -130,11 +134,17 @@ class MapFlyoverRecorder {
 		List<FlyoverTrack> tracks = new ArrayList<>();
 		Map<String, SelectedGpxFile> shownBefore = new HashMap<>();
 		boolean[] linkedToLocation = new boolean[1];
+		Float[] magnifierBefore = new Float[1];
+		FlyoverSession[] session = new FlyoverSession[1];
+		FlyoverBanner banner = new FlyoverBanner(app, () -> cancelled = true);
 		int notIdleFrames = 0;
 		try {
 			// a map linked to my location goes back to it at every fix and draws my marker at its center;
 			// navigation, compass and auto-follow would also move, zoom and tilt it between frames
 			runInUiThread(() -> {
+				// kept on disk until the end: a crash meanwhile is undone at the next start
+				session[0] = new FlyoverSession(app, mapView);
+				banner.show(0);
 				MapViewTrackingUtilities tracking = app.getMapViewTrackingUtilities();
 				tracking.setTrackingPaused(true);
 				linkedToLocation[0] = tracking.isMapLinkedToLocation();
@@ -169,6 +179,16 @@ class MapFlyoverRecorder {
 			renderHeight = params.getHeight() * scale;
 			view = takeRendererOver(renderWidth, renderHeight, "screen".equals(spec.optString("scale")),
 					(float) spec.optDouble("detail", DEFAULT_DETAIL));
+			if (spec.has("map_magnifier")) {
+				// the map magnifier for this video only, as Configure map > Map magnifier: below 100% the relief
+				// shading and the details get finer; the user's value is put back afterwards
+				float magnifier = (float) Math.max(0.25, Math.min(4, spec.optDouble("map_magnifier")));
+				runInUiThread(() -> {
+					magnifierBefore[0] = app.getSettings().MAP_DENSITY.get();
+					app.getSettings().MAP_DENSITY.set(magnifier);
+					mapView.applyDisplayScaleSettings();
+				});
+			}
 			encoder = new VideoEncoder(file, params.getWidth(), params.getHeight(), params.getFps());
 			if (!spec.has("profile") && !tracks.isEmpty() && tracks.get(0).profileKey != null) {
 				// the profile icon of the first track's profile, not the phone's current one
@@ -202,6 +222,13 @@ class MapFlyoverRecorder {
 			String notIdleReason = null;
 			waitForIdleFrame(view, firstTimeout);
 			for (int i = 0; i < frames; i++) {
+				if (cancelled) {
+					throw new CancellationException("Cancelled on the phone");
+				}
+				if (i % params.getFps() == 0) {
+					int percent = 100 * i / frames;
+					app.runInUIThread(() -> banner.show(percent));
+				}
 				long t = i * 1000L / params.getFps();
 				boolean layoutFrame = i % symbolsEvery == 0;
 				if (layoutFrame && view.isSymbolsUpdateSuspended()) {
@@ -300,6 +327,26 @@ class MapFlyoverRecorder {
 			}
 			if (view != null) {
 				giveRendererBack(view);
+			}
+			if (magnifierBefore[0] != null) {
+				try {
+					runInUiThread(() -> {
+						app.getSettings().MAP_DENSITY.set(magnifierBefore[0]);
+						mapView.applyDisplayScaleSettings();
+					});
+				} catch (InterruptedException e) {
+					LOG.error(e);
+				}
+			}
+			try {
+				runInUiThread(() -> {
+					banner.hide();
+					if (session[0] != null) {
+						session[0].finish(app, mapView);
+					}
+				});
+			} catch (InterruptedException e) {
+				LOG.error(e);
 			}
 		}
 	}
@@ -448,7 +495,7 @@ class MapFlyoverRecorder {
 
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
 			"name", "camera", "duration_s", "gpx", "osmand_widgets", "attribution", "profile", "scale",
-			"ease_in_s", "ease_out_s", "panels", "data", "ui_scale", "load_timeout_s", "smooth_s", "refresh_s", "detail"));
+			"ease_in_s", "ease_out_s", "panels", "data", "ui_scale", "load_timeout_s", "smooth_s", "refresh_s", "detail", "map_magnifier"));
 
 	@NonNull
 	private static String unknownKeys(@NonNull JSONObject spec) {

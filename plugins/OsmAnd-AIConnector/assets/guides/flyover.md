@@ -42,6 +42,7 @@ At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smoot
 | `smooth_s` | works | point values in widgets (speed, heart rate, altitude...) are averaged over this much video time, default 1.5; 0 shows raw values |
 | `refresh_s` | works | numbers in widgets change at most this often, default 0.25 (as a bike computer); 0 changes them every frame |
 | `detail` | works | how far into a tilted map tiles keep full detail, default 3 (the phone uses 0.5); higher is sharper in the distance and slower |
+| `map_magnifier` | works | OsmAnd's map magnifier for this video only, 0.25-4 (e.g. 0.75 or 0.5 with a high `detail`: finer relief shading and details); the user's value is put back |
 | `ui_scale` | works | size of everything drawn over the map (OsmAnd elements, panels, callouts); default 1; the frame's long side is 800 dp |
 | `gpx[]` | works | tracks to show, see below |
 | `osmand_widgets` | works | `["profile_icon", "ruler", "compass"]` |
@@ -73,6 +74,10 @@ curves through the key frames; it eases only at the very start and end. A key fr
 works (your own path).
 
 Tips: turn on terrain and 3D relief with `osmand_set_preference` before mountain flights.
+
+While a video is recorded the map on the phone is busy: a banner shows the progress with a Cancel button and the map
+takes no touches (a cancelled recording returns an error). Afterwards the camera, the shown tracks, the link to the
+location and the magnifier are as before; if OsmAnd crashes meanwhile, they are put back at its next start.
 
 ## Tracks: gpx[]
 

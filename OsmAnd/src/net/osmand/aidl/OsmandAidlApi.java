@@ -265,6 +265,8 @@ public class OsmandAidlApi {
 
 	public OsmandAidlApi(@NonNull OsmandApplication app) {
 		this.app = app;
+		// before the tracks are loaded: settings a crashed flyover recording left behind
+		FlyoverSession.recover(app);
 		loadConnectedApps();
 	}
 
