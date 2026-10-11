@@ -93,8 +93,12 @@
 
 # --- Class names used as strings ---
 -keep class net.osmand.plus.base.EnableStrictMode { <init>(); }
-# app:fragment in res/xml preference screens (aapt does not generate rules for them).
+# app:fragment in res/xml preference screens is a literal class name, and the fragment is
+# instantiated by that name, so the class must not be renamed or removed (aapt adds no rules).
+# PreferenceFragmentCompat subclasses are covered here; any other app:fragment target must be listed.
 -keep class * extends androidx.preference.PreferenceFragmentCompat { <init>(); }
+-keep class net.osmand.plus.profiles.EditProfilesFragment { <init>(); }
+-keep class net.osmand.plus.settings.fragments.CoordinatesFormatFragment { <init>(); }
 # app:layout_behavior in layouts.
 -keep class * extends androidx.coordinatorlayout.widget.CoordinatorLayout$Behavior {
 	<init>(android.content.Context, android.util.AttributeSet);
