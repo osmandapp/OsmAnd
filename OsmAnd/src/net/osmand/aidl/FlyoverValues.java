@@ -84,11 +84,26 @@ class FlyoverValues {
 	@Nullable
 	private final JSONObject data;
 	private final Map<String, double[]> series = new HashMap<>();
+	// point values (speed, heart rate...) are averaged over this much video time, so digits do not jump
+	private double smoothS = 1.5;
+	// numbers in widgets change at most this often, as on a bike computer; charts and the camera stay continuous
+	private double refreshS = 0.25;
 
 	FlyoverValues(@NonNull OsmandApplication app, @NonNull List<FlyoverTrack> tracks, @Nullable JSONObject data) {
 		this.app = app;
 		this.tracks = tracks;
 		this.data = data;
+	}
+
+	void setTiming(double smoothS, double refreshS) {
+		this.smoothS = Math.max(0, smoothS);
+		this.refreshS = Math.max(0, refreshS);
+	}
+
+	/** The frame whose time is held for refresh_s, for the numbers in widgets. */
+	@NonNull
+	Frame textFrame(@NonNull Frame frame) {
+		return refreshS > 0 ? new Frame(Math.floor(frame.t / refreshS) * refreshS, frame.videoS, frame.camera) : frame;
 	}
 
 	/** The expression at the current frame. */
@@ -153,7 +168,7 @@ class FlyoverValues {
 	@NonNull
 	private Value trackValue(@NonNull FlyoverTrack track, @NonNull String name, @NonNull Frame frame) {
 		FlyoverTrack.Position p = track.at(frame.t);
-		double here = interpolate(track, name, p);
+		double here = isSmoothed(name) ? smoothedAt(track, name, frame.t) : interpolate(track, name, p);
 		if (!Double.isNaN(here) || isPointValue(name)) {
 			return new Value(here, kindOf(name), unitOf(name));
 		}
@@ -228,6 +243,27 @@ class FlyoverValues {
 				return true;
 		}
 		return name.startsWith("ext.") || name.startsWith("obd.");
+	}
+
+	private static boolean isSmoothed(@NonNull String name) {
+		return isPointValue(name) && !name.equals("lat") && !name.equals("lon") && !name.equals("time");
+	}
+
+	/** A point value averaged over smooth_s of video time around t, with triangular weights. */
+	private double smoothedAt(@NonNull FlyoverTrack track, @NonNull String name, double t) {
+		if (smoothS <= 0) {
+			return interpolate(track, name, track.at(t));
+		}
+		double sum = 0, weights = 0;
+		for (int k = -4; k <= 4; k++) {
+			double v = interpolate(track, name, track.at(t + k * smoothS / 8));
+			if (!Double.isNaN(v)) {
+				double w = 5 - Math.abs(k);
+				sum += v * w;
+				weights += w;
+			}
+		}
+		return weights > 0 ? sum / weights : Double.NaN;
 	}
 
 	private double interpolate(@NonNull FlyoverTrack track, @NonNull String name, @NonNull FlyoverTrack.Position p) {

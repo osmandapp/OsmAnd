@@ -382,14 +382,19 @@ class FlyoverTrack {
 		target.setColor((alpha << 24) | (c & 0xFFFFFF));
 	}
 
-	/** The head marker's place and a point a little ahead, for its direction; null when there is no head. */
+	/**
+	 * The head marker's place, then points behind and ahead of it for its direction: about half a second of video
+	 * each way, so the arrow turns smoothly through corners and GPS noise; null when there is no head.
+	 */
 	@Nullable
 	WptPt[] headPoints(double t) {
 		if ("none".equals(head) || !isVisible(t)) {
 			return null;
 		}
 		Position p = at(t);
-		return new WptPt[] {pointAt(p.distance), pointAt(Math.min(getLength(), p.distance + 15))};
+		double around = Math.max(15, durationS > 0 ? getLength() / durationS * 0.5 : 15);
+		return new WptPt[] {pointAt(p.distance), pointAt(Math.max(0, p.distance - around)),
+				pointAt(Math.min(getLength(), p.distance + around))};
 	}
 
 	@Nullable

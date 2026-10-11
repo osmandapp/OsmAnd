@@ -31,7 +31,7 @@ At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smoot
 | Field | Status | Meaning |
 |---|---|---|
 | `keyframes[]` | works | camera key frames, see below; or `camera.follow` |
-| `camera` | works | `{"follow": n, "zoom": 15, "tilt": 50, "look_ahead_s": 3}`: fly along track n of `gpx[]`; `"follow": [1, 2]` keeps several tracks in the frame (ghost mode: tracks with `"time": {"mode": "track"}` move by their own times), zooming out down to `min_zoom` (default 10) when they part |
+| `camera` | works | `{"follow": n, "zoom": 15, "tilt": 50, "look_ahead_s": 3}`: fly along track n of `gpx[]`; `"follow": [1, 2]` keeps several tracks in the frame (ghost mode: tracks with `"time": {"mode": "track"}` move by their own times), zooming out down to `min_zoom` (default 10) when they part; center, heading and zoom are averaged over `smooth_s` of video (default 2) |
 | `duration_s` | works | video length; needed with `camera.follow`, else the last key frame's time |
 | `width`, `height` | works | even, 16-3840; default 1280x720 |
 | `fps` | works | 1-60, default 30; 60 is smoother on fast parts and takes twice as long |
@@ -39,6 +39,9 @@ At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smoot
 | `ease_in_s`, `ease_out_s` | works | the camera speeds up after the start and slows down before the end; default 1 s each (at most a third of the video) |
 | `scale` | works | `video` (default): map symbols sized for the video; `screen`: the phone's own map scale, so a video can continue a screen recording |
 | `load_timeout_s` | works | how long a frame may wait for map data, default 30 s for the first frame and 5 s for the others; frames recorded before the map finished loading are counted in `warnings` |
+| `smooth_s` | works | point values in widgets (speed, heart rate, altitude...) are averaged over this much video time, default 1.5; 0 shows raw values |
+| `refresh_s` | works | numbers in widgets change at most this often, default 0.25 (as a bike computer); 0 changes them every frame |
+| `detail` | works | how far into a tilted map tiles keep full detail, default 1.5 (the phone uses 0.5); higher is sharper in the distance and slower |
 | `ui_scale` | works | size of everything drawn over the map (OsmAnd elements, panels, callouts); default 1; the frame's long side is 800 dp |
 | `gpx[]` | works | tracks to show, see below |
 | `osmand_widgets` | works | `["profile_icon", "ruler", "compass"]` |
@@ -150,6 +153,8 @@ then the title above the value and its unit. Three types:
 - `{"type": "text", "title": "Ride", "text": "Morning ride"}` — fixed text.
 - `{"type": "chart", "title": "Heart rate", "value": "gpx[1].hr"}` — the value over the whole track, smoothed, the
   passed part highlighted and a cursor at the current point; `width_dp` (default 280), `height_dp` (default 56).
+  `value2` adds a second value as a line on its own scale (e.g. `"value": "gpx[1].ele", "value2": "gpx[1].speed"`),
+  in `color2` (default orange); put both names in the title, e.g. "Altitude · speed".
 
 `icon`: an OsmAnd drawable name (e.g. `widget_speed`, `widget_sensor_heart_rate`); by default the icon OsmAnd's own
 widget for that value has. `unit`: `auto` (the profile's units) or `km`, `mi`, `m`, `ft`, `km/h`, `mph`, `min/km`,

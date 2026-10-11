@@ -209,6 +209,7 @@ class FlyoverPanels {
 
 		@Override
 		void update(@NonNull FlyoverValues.Frame frame) {
+			frame = values.textFrame(frame);
 			String type = spec.optString("type", "attribute");
 			String unitSpec = spec.optString("unit", "auto");
 			int digits = spec.has("digits") ? spec.optInt("digits") : -1;
@@ -354,6 +355,13 @@ class FlyoverPanels {
 			String expr = spec.optString("value");
 			FlyoverTrack track = values.trackOf(expr);
 			chart = new ChartView(context, track, smooth(track, values.seriesOf(expr)), appearance);
+			// a second value as a line over the first one's area, on its own scale (altitude and speed in one chart)
+			String expr2 = spec.optString("value2");
+			if (!Algorithms.isEmpty(expr2)) {
+				chart.track2 = values.trackOf(expr2);
+				chart.series2 = smooth(chart.track2, values.seriesOf(expr2));
+				chart.color2 = parseColor(spec.optString("color2"), 0xFFFF8800);
+			}
 			// a panel without a width is as wide as its widgets; a chart has no width of its own
 			chart.setMinimumWidth(AndroidUtils.dpToPx(context, (float) spec.optDouble("width_dp", 280)));
 			box.addView(chart, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -364,6 +372,15 @@ class FlyoverPanels {
 		@Override
 		void update(@NonNull FlyoverValues.Frame frame) {
 			chart.cursor = chart.track != null ? chart.track.at(frame.t).distance : Double.NaN;
+			chart.cursor2 = chart.track2 != null ? chart.track2.at(frame.t).distance : Double.NaN;
+		}
+	}
+
+	private static int parseColor(@Nullable String color, int defaultColor) {
+		try {
+			return Algorithms.isEmpty(color) ? defaultColor : Algorithms.parseColor(color);
+		} catch (IllegalArgumentException e) {
+			return defaultColor;
 		}
 	}
 
@@ -399,6 +416,12 @@ class FlyoverPanels {
 		final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		final Path path = new Path();
 		double cursor = Double.NaN;
+		@Nullable
+		FlyoverTrack track2;
+		@Nullable
+		double[] series2;
+		int color2;
+		double cursor2 = Double.NaN;
 
 		ChartView(@NonNull Context context, @Nullable FlyoverTrack track, @Nullable double[] series,
 		          @NonNull ResolvedPanelAppearance appearance) {
@@ -410,8 +433,50 @@ class FlyoverPanels {
 
 		@Override
 		protected void onDraw(@NonNull Canvas canvas) {
+			float w = getWidth(), h = getHeight();
+			int primary = appearance.getPrimaryTextColor();
+			int active = ColorUtilities.getActiveColor(app, appearance.getNightMode());
+			if (buildPath(track, series, w, h, true)) {
+				paint.setStyle(Paint.Style.FILL);
+				paint.setColor(primary);
+				paint.setAlpha(40);
+				canvas.drawPath(path, paint);
+				if (!Double.isNaN(cursor)) {
+					float cx = (float) (cursor / track.getLength() * w);
+					canvas.save();
+					canvas.clipRect(0, 0, cx, h);
+					paint.setColor(active);
+					paint.setAlpha(120);
+					canvas.drawPath(path, paint);
+					canvas.restore();
+					paint.setAlpha(255);
+					paint.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 2));
+					canvas.drawLine(cx, 0, cx, h, paint);
+				}
+			}
+			if (buildPath(track2, series2, w, h, false)) {
+				paint.setStyle(Paint.Style.STROKE);
+				paint.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 2));
+				paint.setColor(color2);
+				paint.setAlpha(110);
+				canvas.drawPath(path, paint);
+				if (!Double.isNaN(cursor2)) {
+					float cx = (float) (cursor2 / track2.getLength() * w);
+					canvas.save();
+					canvas.clipRect(0, 0, cx, h);
+					paint.setAlpha(255);
+					canvas.drawPath(path, paint);
+					canvas.restore();
+				}
+				paint.setStyle(Paint.Style.FILL);
+			}
+		}
+
+		/** The series as a smooth line, or as an area down to the bottom; false if there is nothing to draw. */
+		private boolean buildPath(@Nullable FlyoverTrack track, @Nullable double[] series, float w, float h, boolean area) {
+			path.reset();
 			if (track == null || series == null) {
-				return;
+				return false;
 			}
 			double min = Double.MAX_VALUE, max = -Double.MAX_VALUE;
 			for (double v : series) {
@@ -420,16 +485,12 @@ class FlyoverPanels {
 				max = Math.max(max, v);
 			}
 			if (min > max) {
-				return;
+				return false;
 			}
 			if (max - min < 1e-6) {
 				max = min + 1;
 			}
-			float w = getWidth(), h = getHeight();
 			double length = track.getLength();
-			int primary = appearance.getPrimaryTextColor();
-			int active = ColorUtilities.getActiveColor(app, appearance.getNightMode());
-			path.reset();
 			float px = 0, py = 0;
 			boolean started = false;
 			for (int i = 0; i < series.length; i++) {
@@ -437,8 +498,12 @@ class FlyoverPanels {
 				float x = (float) (track.dist[i] / length * w);
 				float y = (float) (h - (series[i] - min) / (max - min) * (h * 0.9));
 				if (!started) {
-					path.moveTo(x, h);
-					path.lineTo(x, y);
+					if (area) {
+						path.moveTo(x, h);
+						path.lineTo(x, y);
+					} else {
+						path.moveTo(x, y);
+					}
 					started = true;
 				} else {
 					// through the midpoints: a smooth line instead of a polyline
@@ -448,24 +513,11 @@ class FlyoverPanels {
 				py = y;
 			}
 			path.lineTo(px, py);
-			path.lineTo(w, h);
-			path.close();
-			paint.setStyle(Paint.Style.FILL);
-			paint.setColor(primary);
-			paint.setAlpha(40);
-			canvas.drawPath(path, paint);
-			if (!Double.isNaN(cursor)) {
-				float cx = (float) (cursor / length * w);
-				canvas.save();
-				canvas.clipRect(0, 0, cx, h);
-				paint.setColor(active);
-				paint.setAlpha(120);
-				canvas.drawPath(path, paint);
-				canvas.restore();
-				paint.setAlpha(255);
-				paint.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 2));
-				canvas.drawLine(cx, 0, cx, h, paint);
+			if (area) {
+				path.lineTo(w, h);
+				path.close();
 			}
+			return true;
 		}
 	}
 

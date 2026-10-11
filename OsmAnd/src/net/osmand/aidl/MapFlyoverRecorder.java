@@ -22,6 +22,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -131,10 +132,13 @@ class MapFlyoverRecorder {
 		boolean[] linkedToLocation = new boolean[1];
 		int notIdleFrames = 0;
 		try {
-			// a map linked to my location goes back to it at every fix and draws my marker at its center
+			// a map linked to my location goes back to it at every fix and draws my marker at its center;
+			// navigation, compass and auto-follow would also move, zoom and tilt it between frames
 			runInUiThread(() -> {
-				linkedToLocation[0] = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
-				app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+				MapViewTrackingUtilities tracking = app.getMapViewTrackingUtilities();
+				tracking.setTrackingPaused(true);
+				linkedToLocation[0] = tracking.isMapLinkedToLocation();
+				tracking.setMapLinkedToLocation(false);
 			});
 			double videoS = getVideoDuration(params, spec);
 			JSONArray gpxSpecs = spec.optJSONArray("gpx");
@@ -163,10 +167,12 @@ class MapFlyoverRecorder {
 			int scale = params.getWidth() * SUPERSAMPLING <= MAX_SIZE && params.getHeight() * SUPERSAMPLING <= MAX_SIZE ? SUPERSAMPLING : 1;
 			renderWidth = params.getWidth() * scale;
 			renderHeight = params.getHeight() * scale;
-			view = takeRendererOver(renderWidth, renderHeight, "screen".equals(spec.optString("scale")));
+			view = takeRendererOver(renderWidth, renderHeight, "screen".equals(spec.optString("scale")),
+					(float) spec.optDouble("detail", DEFAULT_DETAIL));
 			encoder = new VideoEncoder(file, params.getWidth(), params.getHeight(), params.getFps());
 			FlyoverOverlay overlay = new FlyoverOverlay(app, spec, params.getWidth(), params.getHeight());
 			FlyoverValues values = new FlyoverValues(app, tracks, spec.optJSONObject("data"));
+			values.setTiming(spec.optDouble("smooth_s", 1.5), spec.optDouble("refresh_s", 0.25));
 			FlyoverPanels panels = new FlyoverPanels(app, values, spec, params.getWidth(), params.getHeight());
 			panels.prepare(videoS);
 			String layoutWarning = panels.overlaps(overlay.takenAreas(params.getWidth(), params.getHeight()));
@@ -232,7 +238,10 @@ class MapFlyoverRecorder {
 						Map<WptPt, PointF> pts = project(Arrays.asList(head), scale, params.getWidth(), params.getHeight());
 						PointF at = pts.get(head[0]);
 						if (at != null) {
-							overlay.drawHead(frameCanvas, at, pts.get(head[1]), track.head, track.getColor(), track.headIcon);
+							PointF behind = pts.get(head[1]), ahead = pts.get(head[2]);
+							PointF direction = behind != null && ahead != null
+									? new PointF(at.x + ahead.x - behind.x, at.y + ahead.y - behind.y) : ahead;
+							overlay.drawHead(frameCanvas, at, direction, track.head, track.getColor(), track.headIcon);
 						}
 					}
 				}
@@ -270,12 +279,16 @@ class MapFlyoverRecorder {
 			return false;
 		} finally {
 			hideTracks(tracks, shownBefore);
-			if (linkedToLocation[0]) {
-				try {
-					runInUiThread(() -> app.getMapViewTrackingUtilities().setMapLinkedToLocation(true));
-				} catch (InterruptedException e) {
-					LOG.error(e);
-				}
+			try {
+				runInUiThread(() -> {
+					MapViewTrackingUtilities tracking = app.getMapViewTrackingUtilities();
+					tracking.setTrackingPaused(false);
+					if (linkedToLocation[0]) {
+						tracking.setMapLinkedToLocation(true);
+					}
+				});
+			} catch (InterruptedException e) {
+				LOG.error(e);
 			}
 			if (encoder != null) {
 				encoder.release();
@@ -342,7 +355,7 @@ class MapFlyoverRecorder {
 	 * from the view that has it now, and the map layers are attached to it.
 	 */
 	@NonNull
-	private AtlasMapRendererView takeRendererOver(int width, int height, boolean phoneScale) throws InterruptedException {
+	private AtlasMapRendererView takeRendererOver(int width, int height, boolean phoneScale, float detail) throws InterruptedException {
 		AtlasMapRendererView[] result = new AtlasMapRendererView[1];
 		runInUiThread(() -> {
 			MapRendererContext context = NativeCoreContext.getMapRendererContext();
@@ -373,6 +386,9 @@ class MapFlyoverRecorder {
 			view.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
 			view.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
 			view.setAzimuth(0);
+			// how far from the camera a tilted map keeps tiles of full detail; the phone's 0.5 blurs the middle
+			// of a 3D video, where the eye looks
+			view.setDetailedDistance(detail);
 			view.setFlatEarth(!app.getSettings().SPHERICAL_MAP.get());
 			view.removeAllSymbolsProviders();
 			view.resumeSymbolsUpdate();
@@ -424,9 +440,11 @@ class MapFlyoverRecorder {
 	}
 
 	// what this OsmAnd understands in a flyover request; anything else is reported back, not silently dropped
+	private static final float DEFAULT_DETAIL = 1.5f;
+
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
 			"name", "camera", "duration_s", "gpx", "osmand_widgets", "attribution", "profile", "scale",
-			"ease_in_s", "ease_out_s", "panels", "data", "ui_scale", "load_timeout_s"));
+			"ease_in_s", "ease_out_s", "panels", "data", "ui_scale", "load_timeout_s", "smooth_s", "refresh_s", "detail"));
 
 	@NonNull
 	private static String unknownKeys(@NonNull JSONObject spec) {
@@ -454,10 +472,16 @@ class MapFlyoverRecorder {
 	private static double[] followCamera(@NonNull List<FlyoverTrack> tracks, @NonNull JSONObject camera, double t,
 	                                     int frameMin, float tilePx) {
 		double ahead = camera.optDouble("look_ahead_s", 3);
-		double lat = 0, lon = 0, sin = 0, cos = 0, spread = 0;
-		int samples = 5;
-		for (int k = 0; k < samples; k++) {
-			double tk = t + (k - samples / 2) * 0.15;
+		// averaged over smooth_s of video time with triangular weights: corners of the track and GPS noise
+		// do not jerk the center, the heading or the zoom
+		double window = camera.optDouble("smooth_s", 2);
+		double baseZoom = camera.optDouble("zoom", 15);
+		double minZoom = camera.optDouble("min_zoom", 10);
+		double lat = 0, lon = 0, sin = 0, cos = 0, zoom = 0, weights = 0;
+		int half = 6;
+		for (int k = -half; k <= half; k++) {
+			double tk = t + k * window / (2 * half);
+			double w = half + 1 - Math.abs(k);
 			double kLat = 0, kLon = 0;
 			List<FlyoverTrack.Position> here = new ArrayList<>();
 			for (FlyoverTrack track : tracks) {
@@ -466,26 +490,30 @@ class MapFlyoverRecorder {
 				kLat += p.lat;
 				kLon += p.lon;
 				double b = Math.toRadians(track.bearing(tk, 1, ahead));
-				sin += Math.sin(b);
-				cos += Math.cos(b);
+				sin += w * Math.sin(b);
+				cos += w * Math.cos(b);
 			}
 			kLat /= tracks.size();
 			kLon /= tracks.size();
+			double spread = 0;
 			for (FlyoverTrack.Position p : here) {
 				spread = Math.max(spread, MapUtils.getDistance(kLat, kLon, p.lat, p.lon));
 			}
-			lat += kLat;
-			lon += kLon;
+			double kZoom = baseZoom;
+			if (tracks.size() > 1 && spread > 1) {
+				// every followed track stays within about a third of the frame from its center
+				double fit = Math.log(0.35 * frameMin * 40075016 * Math.cos(Math.toRadians(kLat)) / (tilePx * spread)) / Math.log(2);
+				kZoom = Math.max(minZoom, Math.min(baseZoom, fit));
+			}
+			lat += w * kLat;
+			lon += w * kLon;
+			zoom += w * kZoom;
+			weights += w;
 		}
-		lat /= samples;
-		lon /= samples;
+		lat /= weights;
+		lon /= weights;
+		zoom /= weights;
 		double heading = Math.toDegrees(Math.atan2(sin, cos));
-		double zoom = camera.optDouble("zoom", 15);
-		if (tracks.size() > 1 && spread > 1) {
-			// every followed track stays within about a third of the frame from its center
-			double fit = Math.log(0.35 * frameMin * 40075016 * Math.cos(Math.toRadians(lat)) / (tilePx * spread)) / Math.log(2);
-			zoom = Math.max(camera.optDouble("min_zoom", 10), Math.min(zoom, fit));
-		}
 		// OsmAnd turns the map by minus the heading so that the way ahead is up
 		JSONArray target = camera.optJSONArray("target");
 		return new double[] {lat, lon, zoom, -heading, camera.optDouble("tilt", 50),
