@@ -58,6 +58,7 @@ import java.util.Map;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -86,11 +87,18 @@ public class MapFlyoverRecorder {
 	private static final long SYMBOLS_UPDATE_MS = 2500;
 	private static final float SYMBOLS_FADE_MS = 400;
 	private static final int MAX_SIZE = 3840;
+	/** One recording at a time: a second call (an MCP client retrying a long call) would take the renderer over. */
+	private static final AtomicBoolean RECORDING = new AtomicBoolean();
 
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
 	private int renderWidth;
 	private int renderHeight;
+	/** The offscreen view of this recording; replaced when the phone's map took the renderer back meanwhile. */
+	@Nullable
+	private AtlasMapRendererView view;
+	private boolean phoneScale;
+	private float detail;
 	// frames the renderer has read out into its bitmap buffer; a frame is taken only after a new one
 	private final AtomicInteger readyFrames = new AtomicInteger();
 	private final MapRendererView.MapRendererViewListener frameListener = new MapRendererView.MapRendererViewListener() {
@@ -131,9 +139,12 @@ public class MapFlyoverRecorder {
 			params.setError(error);
 			return false;
 		}
+		if (!RECORDING.compareAndSet(false, true)) {
+			params.setError("A flyover is already being recorded; wait for it to finish");
+			return false;
+		}
 		long start = SystemClock.elapsedRealtime();
 		File file = getFile(params.getFileName());
-		AtlasMapRendererView view = null;
 		VideoEncoder encoder = null;
 		List<FlyoverTrack> tracks = new ArrayList<>();
 		Map<String, SelectedGpxFile> shownBefore = new HashMap<>();
@@ -183,8 +194,9 @@ public class MapFlyoverRecorder {
 			int scale = params.getWidth() * SUPERSAMPLING <= MAX_SIZE && params.getHeight() * SUPERSAMPLING <= MAX_SIZE ? SUPERSAMPLING : 1;
 			renderWidth = params.getWidth() * scale;
 			renderHeight = params.getHeight() * scale;
-			view = takeRendererOver(renderWidth, renderHeight, "screen".equals(spec.optString("scale")),
-					(float) spec.optDouble("detail", DEFAULT_DETAIL));
+			phoneScale = "screen".equals(spec.optString("scale"));
+			detail = (float) spec.optDouble("detail", DEFAULT_DETAIL);
+			takeRendererOver();
 			if (spec.has("map_magnifier")) {
 				// the map magnifier for this video only, as Configure map > Map magnifier: below 100% the relief
 				// shading and the details get finer; the user's value is put back afterwards
@@ -236,6 +248,8 @@ public class MapFlyoverRecorder {
 				if (cancelled) {
 					throw new CancellationException("Cancelled on the phone");
 				}
+				// a recreated MapActivity (rotation, theme change) takes the renderer for its own map: take it back
+				boolean retaken = ensureRenderer();
 				if (i % params.getFps() == 0) {
 					int percent = 100 * i / frames;
 					app.runInUIThread(() -> banner.show(percent));
@@ -255,7 +269,7 @@ public class MapFlyoverRecorder {
 					maxSpeed = Math.max(maxSpeed, screenDistance(prev, camera, pxPerTile) * params.getFps());
 				}
 				prev = camera;
-				boolean idle = waitForIdleFrame(view, frameTimeout);
+				boolean idle = waitForIdleFrame(view, retaken ? firstTimeout : frameTimeout);
 				for (int retry = 0; retry < 3 && cameraMoved(); retry++) {
 					// the app moved the map meanwhile: this frame's camera again, then its picture
 					applyCamera(camera, () -> updateTracks(tracks, t / 1000.0, videoS));
@@ -376,6 +390,7 @@ public class MapFlyoverRecorder {
 			} catch (InterruptedException e) {
 				LOG.error(e);
 			}
+			RECORDING.set(false);
 		}
 	}
 
@@ -433,8 +448,8 @@ public class MapFlyoverRecorder {
 	 * Same steps as SurfaceRenderer.setupOffscreenRenderer(): the new offscreen view takes the renderer over
 	 * from the view that has it now, and the map layers are attached to it.
 	 */
-	@NonNull
-	private AtlasMapRendererView takeRendererOver(int width, int height, boolean phoneScale, float detail) throws InterruptedException {
+	private void takeRendererOver() throws InterruptedException {
+		int width = renderWidth, height = renderHeight;
 		AtlasMapRendererView[] result = new AtlasMapRendererView[1];
 		runInUiThread(() -> {
 			MapRendererContext context = NativeCoreContext.getMapRendererContext();
@@ -481,7 +496,28 @@ public class MapFlyoverRecorder {
 		if (result[0] == null) {
 			throw new IllegalStateException("The OpenGL renderer is not ready");
 		}
-		return result[0];
+		view = result[0];
+	}
+
+	/**
+	 * A MapActivity created during the recording (the phone turned, the theme changed) takes the renderer for its
+	 * map, as it does after Android Auto; our view then renders nothing. The recording takes it back, with the
+	 * video's size and density, and keeps its symbol settings; the phone's map gets it again at the end.
+	 */
+	private boolean ensureRenderer() throws InterruptedException {
+		AtlasMapRendererView current = view;
+		if (current == null || mapView.getMapRenderer() == current) {
+			return false;
+		}
+		LOG.info("Flyover: the app took the renderer over, taking it back");
+		current.removeListener(frameListener);
+		takeRendererOver();
+		AtlasMapRendererView next = view;
+		if (next != null) {
+			next.setSymbolsUpdateInterval(Integer.MAX_VALUE);
+		}
+		appliedCamera = null;
+		return true;
 	}
 
 	private void giveRendererBack(@NonNull AtlasMapRendererView view) {
