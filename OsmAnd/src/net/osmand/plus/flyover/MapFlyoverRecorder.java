@@ -871,11 +871,14 @@ public class MapFlyoverRecorder {
 		}
 		runInUiThread(() -> {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			// the user's selection first: a file given twice would otherwise record our own selection as his
 			for (FlyoverTrack track : tracks) {
 				SelectedGpxFile before = helper.getSelectedFileByPath(track.file.getAbsolutePath());
 				if (before != null) {
 					shownBefore.put(track.file.getAbsolutePath(), before);
 				}
+			}
+			for (FlyoverTrack track : tracks) {
 				track.selected = helper.selectGpxFile(track.gpx, GpxSelectionParams.newInstance().showOnMap());
 			}
 		});
