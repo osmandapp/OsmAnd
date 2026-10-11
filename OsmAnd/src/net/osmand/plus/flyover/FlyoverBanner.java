@@ -1,4 +1,4 @@
-package net.osmand.aidl;
+package net.osmand.plus.flyover;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

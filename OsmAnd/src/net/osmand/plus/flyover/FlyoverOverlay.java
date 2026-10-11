@@ -1,4 +1,4 @@
-package net.osmand.aidl;
+package net.osmand.plus.flyover;
 
 import static net.osmand.plus.utils.OsmAndFormatterParams.NO_TRAILING_ZEROS;
 

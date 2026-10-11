@@ -1,4 +1,4 @@
-package net.osmand.aidl;
+package net.osmand.plus.flyover;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -1,4 +1,4 @@
-package net.osmand.aidl;
+package net.osmand.plus.flyover;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

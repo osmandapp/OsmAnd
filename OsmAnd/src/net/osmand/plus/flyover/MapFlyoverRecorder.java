@@ -1,4 +1,4 @@
-package net.osmand.aidl;
+package net.osmand.plus.flyover;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -66,7 +66,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * renderer is idle (map data and symbols loaded), and frames get exact timestamps, so the video is smooth
  * however long a frame takes to render.
  */
-class MapFlyoverRecorder {
+public class MapFlyoverRecorder {
 
 	/** Set by the banner's cancel button; the recording stops before its next frame. */
 	private volatile boolean cancelled;
@@ -107,12 +107,12 @@ class MapFlyoverRecorder {
 	// Android Auto; nothing visible is drawn there, so a 1 px canvas does
 	private final Canvas layersCanvas = new Canvas(Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888));
 
-	MapFlyoverRecorder(@NonNull OsmandApplication app) {
+	public MapFlyoverRecorder(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.mapView = app.getOsmandMap().getMapView();
 	}
 
-	boolean record(@NonNull MapFlyoverParams params) {
+	public boolean record(@NonNull MapFlyoverParams params) {
 		// a call can start OsmAnd's process; OpenGL is ready only when the app has started
 		long initUntil = SystemClock.elapsedRealtime() + APP_INIT_TIMEOUT_MS;
 		while (app.isApplicationInitializing() && SystemClock.elapsedRealtime() < initUntil) {

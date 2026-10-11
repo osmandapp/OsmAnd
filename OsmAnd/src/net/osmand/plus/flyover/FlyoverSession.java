@@ -1,4 +1,4 @@
-package net.osmand.aidl;
+package net.osmand.plus.flyover;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,7 +21,7 @@ import org.json.JSONObject;
  * magnifier. Kept on disk while the recording runs, so that after a crash the next start of OsmAnd puts them back and
  * nobody lands on a map with the video's settings.
  */
-final class FlyoverSession {
+public final class FlyoverSession {
 
 	private static final Log LOG = PlatformUtil.getLog(FlyoverSession.class);
 	private static final String PREFS = "flyover_session";
@@ -62,7 +62,7 @@ final class FlyoverSession {
 	 * At startup, before the tracks are loaded: a recording that did not finish (OsmAnd crashed or was killed) left the
 	 * video's settings; they are put back as they were before it.
 	 */
-	static void recover(@NonNull OsmandApplication app) {
+	public static void recover(@NonNull OsmandApplication app) {
 		SharedPreferences prefs = prefs(app);
 		String saved = prefs.getString(KEY, null);
 		if (saved == null) {

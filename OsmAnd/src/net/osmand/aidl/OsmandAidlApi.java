@@ -82,6 +82,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.card.color.palette.solid.data.DefaultColors;
+import net.osmand.plus.flyover.FlyoverSession;
+import net.osmand.plus.flyover.MapFlyoverRecorder;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.NavigateGpxHelper;
