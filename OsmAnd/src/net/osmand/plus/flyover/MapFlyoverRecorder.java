@@ -405,7 +405,10 @@ public class MapFlyoverRecorder {
 			double d = spec.optDouble("duration_s", 0);
 			return d > 0 && d <= 600 ? checkVideo(p) : "A video that follows a track needs duration_s, 0-600";
 		}
-		if (n == 0 || p.getLongitudes().length != n || p.getZooms().length != n || p.getAzimuths().length != n
+		if (n == 0) {
+			return "Give key frames, or camera.follow with duration_s";
+		}
+		if (p.getLongitudes().length != n || p.getZooms().length != n || p.getAzimuths().length != n
 				|| p.getElevationAngles().length != n || p.getTimesMs().length != n) {
 			return "Key frames need the same number of latitudes, longitudes, zooms, azimuths, elevation angles and times";
 		}
@@ -930,6 +933,9 @@ public class MapFlyoverRecorder {
 		int idleFrame = -1;
 		int idleReady = 0;
 		while (SystemClock.elapsedRealtime() < until) {
+			if (cancelled) {
+				throw new CancellationException("Cancelled on the phone");
+			}
 			view.requestRender();
 			Thread.sleep(10);
 			int frame = view.getFrameId();
