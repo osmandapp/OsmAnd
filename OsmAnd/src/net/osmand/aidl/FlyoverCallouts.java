@@ -35,12 +35,12 @@ class FlyoverCallouts {
 	private static final double DEFAULT_FADE_S = 0.4;
 	private static final int LABEL_MAX_CHARS = 24;
 	// a waypoint further than this from its track is not reached by the track's current point
-	private static final double ON_TRACK_M = 150;
+	private static final double ON_TRACK_M = 300;
 
 	interface Projection {
-		/** Screen point of a place in the video's pixels, null when it is not on the screen. */
+		/** Screen point of a waypoint in the video's pixels, null when it is not on the screen. */
 		@Nullable
-		PointF toScreen(double lat, double lon);
+		PointF toScreen(@NonNull WptPt point);
 	}
 
 	private static class Callout {
@@ -112,7 +112,10 @@ class FlyoverCallouts {
 		} else {
 			double reachedS = reachedAt(track, w, videoS, fps);
 			if (Double.isNaN(reachedS)) {
-				return null;
+				// away from the track: shown while it is on the screen
+				c.fromS = 0;
+				c.toS = videoS;
+				return c;
 			}
 			c.fromS = reachedS - c.fadeS;
 			c.toS = reachedS + duration;
@@ -201,7 +204,7 @@ class FlyoverCallouts {
 		for (Callout c : callouts) {
 			if (t < c.fromS || t > c.toS) continue;
 			float opacity = c.fadeS <= 0 ? 1 : (float) Math.min(1, Math.min((t - c.fromS) / c.fadeS, (c.toS - t) / c.fadeS));
-			PointF at = projection.toScreen(c.point.getLat(), c.point.getLon());
+			PointF at = projection.toScreen(c.point);
 			if (at == null || opacity <= 0) continue;
 			int save = canvas.saveLayerAlpha(null, Math.round(opacity * 255));
 			if (c.bubble) {

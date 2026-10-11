@@ -1,17 +1,15 @@
 package net.osmand.aidl;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,9 +22,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.settings.enums.PanelBackgroundMode;
 import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceApplier;
+import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceResolver;
+import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceState;
 import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.plus.views.mapwidgets.appearance.WidgetBackgroundShape;
 import net.osmand.util.Algorithms;
@@ -44,13 +44,13 @@ import java.util.List;
  */
 class FlyoverPanels {
 
-	private static final float DEFAULT_WIDTH_DP = 180;
 	private static final float CHART_HEIGHT_DP = 56;
 
 	private final OsmandApplication app;
 	private final FlyoverValues values;
 	private final Context context;
-	private final ResolvedPanelAppearance appearance;
+	private final boolean nightMode;
+	private final float density;
 	private final float scale;
 	private final int frameWidth;
 	private final int frameHeight;
@@ -59,6 +59,7 @@ class FlyoverPanels {
 	private class Panel {
 		final JSONObject spec;
 		final LinearLayout root;
+		final ResolvedPanelAppearance appearance;
 		final List<Item> items = new ArrayList<>();
 
 		Panel(@NonNull JSONObject spec) {
@@ -66,7 +67,18 @@ class FlyoverPanels {
 			root = new LinearLayout(context);
 			boolean horizontal = "horizontal".equals(spec.optString("orientation"));
 			root.setOrientation(horizontal ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
-			PanelAppearanceApplier.applyBackground(root, appearance, WidgetBackgroundShape.ROUND);
+			// "background": default (the user's widget look), transparent (OsmAnd's transparent widgets) or 0..1
+			Object background = spec.opt("background");
+			appearance = resolveAppearance("transparent".equals(background));
+			if (!"transparent".equals(background)) {
+				PanelAppearanceApplier.applyBackground(root, appearance, WidgetBackgroundShape.ROUND);
+				if (background instanceof Number && root.getBackground() != null) {
+					float alpha = Math.max(0, Math.min(1, ((Number) background).floatValue()));
+					root.setBackground(root.getBackground().mutate());
+					root.getBackground().setAlpha(Math.round(alpha * 255));
+				}
+			}
+			String panelSize = spec.optString("size", "medium");
 			JSONArray widgets = spec.optJSONArray("widgets");
 			for (int i = 0; widgets != null && i < widgets.length(); i++) {
 				JSONObject w = widgets.optJSONObject(i);
@@ -78,10 +90,11 @@ class FlyoverPanels {
 					root.addView(divider, horizontal ? new LinearLayout.LayoutParams(px, ViewGroup.LayoutParams.MATCH_PARENT)
 							: new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, px));
 				}
-				Item item = "chart".equals(w.optString("type")) ? new ChartItem(w) : new WidgetItem(w);
+				Item item = "chart".equals(w.optString("type")) ? new ChartItem(w, appearance)
+						: new WidgetItem(w, appearance, w.optString("size", panelSize));
 				items.add(item);
 				root.addView(item.view, horizontal
-						? new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1)
+						? new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1)
 						: new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 			}
 		}
@@ -105,10 +118,9 @@ class FlyoverPanels {
 			// sizes in phone pixels; the frame is frameWidth / scale of them wide
 			float frameW = frameWidth / scale, frameH = frameHeight / scale;
 			double w = spec.optDouble("width", 0);
-			int width = Math.round(w > 1 ? (float) w / scale : w > 0 ? (float) w * frameW : AndroidUtils.dpToPx(context, DEFAULT_WIDTH_DP));
-			root.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
-					View.MeasureSpec.makeMeasureSpec((int) frameH, View.MeasureSpec.AT_MOST));
-			root.layout(0, 0, root.getMeasuredWidth(), root.getMeasuredHeight());
+			int width = Math.round(w > 1 ? (float) w / scale : w > 0 ? (float) w * frameW : 0);
+			measure(width, frameH);
+
 
 			float margin = (float) spec.optDouble("margin", 16) / scale;
 			int gravity = parseGravity(spec.optString("gravity", "top|left"));
@@ -126,37 +138,36 @@ class FlyoverPanels {
 			root.draw(canvas);
 			canvas.restoreToCount(save);
 		}
+
+		private void measure(int width, float frameH) {
+			// no width given: as wide as the widgets need
+			root.measure(width > 0 ? View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY)
+							: View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+					View.MeasureSpec.makeMeasureSpec((int) frameH, View.MeasureSpec.AT_MOST));
+			root.layout(0, 0, root.getMeasuredWidth(), root.getMeasuredHeight());
+		}
 	}
 
 	private abstract static class Item {
 		View view;
 
 		abstract void update(@NonNull FlyoverValues.Frame frame);
+
 	}
 
-	/** An attribute or a text in OsmAnd's simple widget layout: title, value, unit and icon. */
+	/**
+	 * An attribute or a text, drawn with OsmAnd's widget look (icon, colours, outline of transparent widgets) in a
+	 * layout made for video: icon, then the title above the value and its unit. Sized by its content, so nothing is
+	 * cut or overlaps at any panel width; a value too wide for a fixed panel width gets a smaller font.
+	 */
 	private class WidgetItem extends Item {
 		final JSONObject spec;
-		final OutlinedTextContainer title;
-		final OutlinedTextContainer value;
-		final OutlinedTextContainer unit;
+		final WidgetView widget;
 
-		@SuppressLint("InflateParams")
-		WidgetItem(@NonNull JSONObject spec) {
+		WidgetItem(@NonNull JSONObject spec, @NonNull ResolvedPanelAppearance appearance, @NonNull String size) {
 			this.spec = spec;
-			view = LayoutInflater.from(context).inflate(R.layout.simple_map_widget_medium, null);
-			view.findViewById(R.id.widget_bg).setBackground(null);
-			title = view.findViewById(R.id.widget_name);
-			value = view.findViewById(R.id.widget_text);
-			unit = view.findViewById(R.id.widget_text_small);
-			PanelAppearanceApplier.applyPrimaryText(value, appearance);
-			PanelAppearanceApplier.applySecondaryText(title, appearance);
-			PanelAppearanceApplier.applySecondaryText(unit, appearance);
-			title.setText(spec.optString("title"));
-			ImageView icon = view.findViewById(R.id.widget_icon);
-			Drawable drawable = getIcon(spec);
-			icon.setImageDrawable(drawable);
-			icon.setVisibility(drawable != null ? View.VISIBLE : View.GONE);
+			widget = new WidgetView(context, appearance, size, getIcon(spec), spec.optString("title"));
+			view = widget;
 		}
 
 		@Override
@@ -165,16 +176,124 @@ class FlyoverPanels {
 			String unitSpec = spec.optString("unit", "auto");
 			int digits = spec.has("digits") ? spec.optInt("digits") : -1;
 			if ("text".equals(type)) {
-				value.setText(spec.optString("text"));
-				unit.setText("");
+				widget.set(spec.optString("text"), "");
 			} else if (spec.has("template")) {
-				value.setText(values.template(spec.optString("template"), unitSpec, digits, frame));
-				unit.setText("");
+				widget.set(values.template(spec.optString("template"), unitSpec, digits, frame), "");
 			} else {
 				String[] f = values.format(values.resolve(spec.optString("value"), frame), unitSpec, digits);
-				value.setText(f[0]);
-				unit.setText(f[1]);
+				widget.set(f[0], f[1]);
 			}
+		}
+	}
+
+	private static class WidgetView extends View {
+		// dp: icon, value text, title text, padding horizontal and vertical; per size small / medium / large
+		private static final float[][] SIZES = {{20, 20, 10, 10, 6}, {24, 28, 11, 12, 8}, {32, 44, 12, 14, 10}};
+
+		final ResolvedPanelAppearance appearance;
+		@Nullable
+		final Drawable icon;
+		final String title;
+		final float[] size;
+		final float density;
+		final Paint valuePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		final Paint smallPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		String value = "";
+		String unit = "";
+		float valueScale = 1;
+
+		WidgetView(@NonNull Context context, @NonNull ResolvedPanelAppearance appearance, @NonNull String sizeName,
+		           @Nullable Drawable icon, @NonNull String title) {
+			super(context);
+			this.appearance = appearance;
+			this.icon = icon;
+			this.title = title.toUpperCase();
+			this.size = SIZES["small".equals(sizeName) ? 0 : "large".equals(sizeName) ? 2 : 1];
+			this.density = context.getResources().getDisplayMetrics().density;
+			valuePaint.setTypeface(Typeface.create("sans-serif-medium", appearance.getBoldText() ? Typeface.BOLD : Typeface.NORMAL));
+			smallPaint.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+			smallPaint.setLetterSpacing(0.06f);
+		}
+
+		void set(@NonNull String value, @NonNull String unit) {
+			this.value = value;
+			this.unit = unit;
+			valueScale = 1;
+			requestLayout();
+		}
+
+		private float dp(float v) {
+			return v * density;
+		}
+
+		private float textStart() {
+			return dp(size[3]) + (icon != null ? dp(size[0]) + dp(8) : 0);
+		}
+
+		private float valueWidth(float scale) {
+			valuePaint.setTextSize(dp(size[1]) * scale);
+			smallPaint.setTextSize(dp(size[2]));
+			float w = valuePaint.measureText(value);
+			if (!unit.isEmpty()) {
+				w += dp(4) + smallPaint.measureText(unit);
+			}
+			return w;
+		}
+
+		@Override
+		protected void onMeasure(int widthSpec, int heightSpec) {
+			smallPaint.setTextSize(dp(size[2]));
+			float content = Math.max(valueWidth(1), smallPaint.measureText(title));
+			int wanted = Math.round(textStart() + content + dp(size[3]));
+			int width = MeasureSpec.getMode(widthSpec) == MeasureSpec.UNSPECIFIED ? wanted
+					: MeasureSpec.getMode(widthSpec) == MeasureSpec.EXACTLY ? MeasureSpec.getSize(widthSpec)
+					: Math.min(wanted, MeasureSpec.getSize(widthSpec));
+			float available = width - textStart() - dp(size[3]);
+			float full = valueWidth(1);
+			valueScale = full > available && full > 0 ? Math.max(0.45f, available / full) : 1;
+			float height = 2 * dp(size[4]) + (title.isEmpty() ? 0 : dp(size[2]) * 1.4f) + dp(size[1]) * valueScale * 1.15f;
+			setMeasuredDimension(width, Math.round(Math.max(height, dp(size[0]) + 2 * dp(size[4]))));
+		}
+
+		@Override
+		protected void onDraw(@NonNull Canvas canvas) {
+			boolean outline = appearance.getBackground().getMode() == PanelBackgroundMode.TRANSPARENT;
+			float pad = dp(size[4]);
+			if (icon != null) {
+				int s = Math.round(dp(size[0]));
+				int top = Math.round((getHeight() - s) / 2f);
+				int left = Math.round(dp(size[3]));
+				icon.setBounds(left, top, left + s, top + s);
+				icon.draw(canvas);
+			}
+			float x = textStart();
+			float y = pad;
+			smallPaint.setTextSize(dp(size[2]));
+			if (!title.isEmpty()) {
+				y += dp(size[2]);
+				drawText(canvas, title, x, y, smallPaint, appearance.getSecondaryTextColor(), outline);
+				y += dp(size[2]) * 0.4f;
+			}
+			valuePaint.setTextSize(dp(size[1]) * valueScale);
+			y += dp(size[1]) * valueScale * 0.95f;
+			drawText(canvas, value, x, y, valuePaint, appearance.getPrimaryTextColor(), outline);
+			if (!unit.isEmpty()) {
+				float ux = x + valuePaint.measureText(value) + dp(4);
+				drawText(canvas, unit, ux, y, smallPaint, appearance.getSecondaryTextColor(), outline);
+			}
+		}
+
+		private void drawText(@NonNull Canvas canvas, @NonNull String text, float x, float y, @NonNull Paint paint,
+		                      int color, boolean outline) {
+			if (outline) {
+				paint.setStyle(Paint.Style.STROKE);
+				paint.setStrokeWidth(Math.max(dp(3), appearance.getTextShadowRadius()));
+				paint.setColor(appearance.getTextShadowColor());
+				canvas.drawText(text, x, y, paint);
+				paint.setStyle(Paint.Style.FILL);
+			}
+			paint.setColor(color);
+			canvas.drawText(text, x, y, paint);
 		}
 	}
 
@@ -183,7 +302,7 @@ class FlyoverPanels {
 		final JSONObject spec;
 		final ChartView chart;
 
-		ChartItem(@NonNull JSONObject spec) {
+		ChartItem(@NonNull JSONObject spec, @NonNull ResolvedPanelAppearance appearance) {
 			this.spec = spec;
 			LinearLayout box = new LinearLayout(context);
 			box.setOrientation(LinearLayout.VERTICAL);
@@ -197,7 +316,9 @@ class FlyoverPanels {
 			box.addView(title);
 			String expr = spec.optString("value");
 			FlyoverTrack track = values.trackOf(expr);
-			chart = new ChartView(context, track, values.seriesOf(expr));
+			chart = new ChartView(context, track, smooth(track, values.seriesOf(expr)), appearance);
+			// a panel without a width is as wide as its widgets; a chart has no width of its own
+			chart.setMinimumWidth(AndroidUtils.dpToPx(context, (float) spec.optDouble("width_dp", 280)));
 			box.addView(chart, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
 					AndroidUtils.dpToPx(context, (float) spec.optDouble("height_dp", CHART_HEIGHT_DP))));
 			view = box;
@@ -209,17 +330,45 @@ class FlyoverPanels {
 		}
 	}
 
+	/** Moving average over 2% of the track: whole-number values (heart rate) would draw as steps. */
+	@Nullable
+	private static double[] smooth(@Nullable FlyoverTrack track, @Nullable double[] series) {
+		if (track == null || series == null) {
+			return series;
+		}
+		double window = track.getLength() * 0.01;
+		double[] out = new double[series.length];
+		int a = 0, b = 0;
+		double sum = 0;
+		int count = 0;
+		for (int i = 0; i < series.length; i++) {
+			while (b < series.length && track.dist[b] - track.dist[i] <= window) {
+				if (!Double.isNaN(series[b])) { sum += series[b]; count++; }
+				b++;
+			}
+			while (track.dist[i] - track.dist[a] > window) {
+				if (!Double.isNaN(series[a])) { sum -= series[a]; count--; }
+				a++;
+			}
+			out[i] = count > 0 && !Double.isNaN(series[i]) ? sum / count : Double.NaN;
+		}
+		return out;
+	}
+
 	private class ChartView extends View {
 		final FlyoverTrack track;
 		final double[] series;
+		final ResolvedPanelAppearance appearance;
 		final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		final Path path = new Path();
 		double cursor = Double.NaN;
 
-		ChartView(@NonNull Context context, @Nullable FlyoverTrack track, @Nullable double[] series) {
+		ChartView(@NonNull Context context, @Nullable FlyoverTrack track, @Nullable double[] series,
+		          @NonNull ResolvedPanelAppearance appearance) {
 			super(context);
 			this.track = track;
 			this.series = series;
+			this.appearance = appearance;
 		}
 
 		@Override
@@ -244,6 +393,7 @@ class FlyoverPanels {
 			int primary = appearance.getPrimaryTextColor();
 			int active = ColorUtilities.getActiveColor(app, appearance.getNightMode());
 			path.reset();
+			float px = 0, py = 0;
 			boolean started = false;
 			for (int i = 0; i < series.length; i++) {
 				if (Double.isNaN(series[i])) continue;
@@ -254,9 +404,13 @@ class FlyoverPanels {
 					path.lineTo(x, y);
 					started = true;
 				} else {
-					path.lineTo(x, y);
+					// through the midpoints: a smooth line instead of a polyline
+					path.quadTo(px, py, (px + x) / 2, (py + y) / 2);
 				}
+				px = x;
+				py = y;
 			}
+			path.lineTo(px, py);
 			path.lineTo(w, h);
 			path.close();
 			paint.setStyle(Paint.Style.FILL);
@@ -284,11 +438,9 @@ class FlyoverPanels {
 		this.values = values;
 		this.frameWidth = frameWidth;
 		this.frameHeight = frameHeight;
-		boolean night = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
-		context = new ContextThemeWrapper(app, night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
-		float density = app.getResources().getDisplayMetrics().density;
-		appearance = app.getPanelAppearanceSettingsManager()
-				.resolveCommitted(WidgetsPanel.LEFT, null, night, false, density, true);
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
+		context = new ContextThemeWrapper(app, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
+		density = app.getResources().getDisplayMetrics().density;
 		scale = FlyoverOverlay.uiDensity(spec, frameWidth, frameHeight) / density;
 		JSONArray list = spec.optJSONArray("panels");
 		for (int i = 0; list != null && i < list.length(); i++) {
@@ -297,6 +449,21 @@ class FlyoverPanels {
 				panels.add(new Panel(p));
 			}
 		}
+	}
+
+	/** The user's widget look; transparent is OsmAnd's own transparent widget mode with outlined text. */
+	@NonNull
+	private ResolvedPanelAppearance resolveAppearance(boolean transparent) {
+		if (!transparent) {
+			return app.getPanelAppearanceSettingsManager()
+					.resolveCommitted(WidgetsPanel.LEFT, null, nightMode, false, density, true);
+		}
+		PanelAppearanceState s = app.getPanelAppearanceSettingsManager().get(WidgetsPanel.LEFT)
+				.readState(app.getSettings().getApplicationMode(), null);
+		PanelAppearanceState t = new PanelAppearanceState(s.getSizeMode(), s.getIconMode(), s.getTextColorMode(),
+				s.getSecondaryTextColorMode(), PanelBackgroundMode.TRANSPARENT, s.getTextColorDay(), s.getTextColorNight(),
+				s.getSecondaryTextColorDay(), s.getSecondaryTextColorNight(), s.getBackgroundColorDay(), s.getBackgroundColorNight());
+		return PanelAppearanceResolver.resolve(app, t, WidgetsPanel.LEFT, nightMode, false, density, true);
 	}
 
 	boolean isEmpty() {
@@ -311,7 +478,7 @@ class FlyoverPanels {
 
 	@Nullable
 	private Drawable getIcon(@NonNull JSONObject spec) {
-		boolean night = appearance.getNightMode();
+		boolean night = nightMode;
 		String name = spec.optString("icon");
 		if (Algorithms.isEmpty(name)) {
 			name = defaultIcon(spec.optString("value"));

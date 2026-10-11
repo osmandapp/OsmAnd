@@ -32,6 +32,7 @@ import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -146,6 +147,8 @@ class MapFlyoverRecorder {
 			FlyoverOverlay overlay = new FlyoverOverlay(app, spec, params.getWidth(), params.getHeight());
 			FlyoverValues values = new FlyoverValues(app, tracks, spec.optJSONObject("data"));
 			FlyoverPanels panels = new FlyoverPanels(app, values, spec, params.getWidth(), params.getHeight());
+			FlyoverCallouts callouts = new FlyoverCallouts(app, tracks, spec, params.getWidth(), params.getHeight(),
+					videoS, params.getFps());
 			int frames = (int) Math.round(videoS * params.getFps()) + 1;
 			// the map moves across the screen at most this fast: above ~250 px/s sharp lines strobe
 			float pxPerTile = 256 * Math.max(1f, Math.max(params.getWidth(), params.getHeight()) / 640f);
@@ -190,6 +193,11 @@ class MapFlyoverRecorder {
 				}
 				Canvas frameCanvas = new Canvas(frame);
 				overlay.draw(frameCanvas, camera[0], (float) camera[2], (float) camera[3]);
+				if (!callouts.isEmpty()) {
+					Map<WptPt, PointF> onScreen = project(callouts.visibleAt(t / 1000.0), scale,
+							params.getWidth(), params.getHeight());
+					callouts.draw(frameCanvas, t / 1000.0, onScreen::get);
+				}
 				panels.draw(frameCanvas, new FlyoverValues.Frame(t / 1000.0, videoS, camera));
 				encoder.encode(frame, i * 1_000_000L / params.getFps());
 				frame.recycle();
@@ -506,6 +514,33 @@ class MapFlyoverRecorder {
 			boolean night = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 			mapView.drawOverMap(layersCanvas, mapView.getRotatedTileBox(), new DrawSettings(night, false));
 		});
+	}
+
+	/** Where waypoints are on the video frame, with relief and tilt; those off the frame are left out. */
+	@NonNull
+	private Map<WptPt, PointF> project(@NonNull List<WptPt> points, int supersampling, int width, int height)
+			throws InterruptedException {
+		Map<WptPt, PointF> result = new HashMap<>();
+		if (points.isEmpty()) {
+			return result;
+		}
+		runInUiThread(() -> {
+			MapRendererView renderer = mapView.getMapRenderer();
+			if (renderer == null) {
+				return;
+			}
+			for (WptPt w : points) {
+				PointI out = new PointI();
+				PointI location = new PointI(MapUtils.get31TileNumberX(w.getLon()), MapUtils.get31TileNumberY(w.getLat()));
+				if (renderer.getElevatedPointFromLocation(location, out, true)) {
+					float x = out.getX() / (float) supersampling, y = out.getY() / (float) supersampling;
+					if (x >= 0 && y >= 0 && x <= width && y <= height) {
+						result.put(w, new PointF(x, y));
+					}
+				}
+			}
+		});
+		return result;
 	}
 
 	/** The tracks are shown for the recording only: the user's selection is put back afterwards. */

@@ -487,7 +487,11 @@ class FlyoverValues {
 			case CLOCK: return new String[] {new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date((long) x)), ""};
 			case DATE: return new String[] {new SimpleDateFormat("d MMM yyyy", Locale.getDefault()).format(new Date((long) x)), ""};
 			case PERCENT: return new String[] {number(x, digits < 0 ? 0 : digits), "%"};
-			default: return new String[] {number(x, digits), v.unit != null ? v.unit : ""};
+			default: {
+				// counts per minute and watts are whole numbers in OsmAnd's widgets
+				boolean whole = "bpm".equals(v.unit) || "rpm".equals(v.unit) || "W".equals(v.unit);
+				return new String[] {number(x, digits < 0 && whole ? 0 : digits), v.unit != null ? v.unit : ""};
+			}
 		}
 	}
 
