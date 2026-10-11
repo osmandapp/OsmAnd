@@ -34,6 +34,8 @@ class FlyoverTrack {
 
 	final int number;
 	final File file;
+	/** A GPX passed in the call (gpx_data): written next to the videos for the recording and deleted after it. */
+	final boolean temporary;
 	final GpxFile gpx;
 	final List<WptPt> points;
 	final double[] dist;
@@ -97,7 +99,8 @@ class FlyoverTrack {
 		this.number = number;
 		String name = request.optString("file");
 		String data = request.optString("gpx_data");
-		if (!Algorithms.isEmpty(data)) {
+		temporary = !Algorithms.isEmpty(data);
+		if (temporary) {
 			// a GPX passed in the call: kept with the flyover's files, not among the user's tracks
 			name = "gpx_data " + number;
 			file = new File(app.getAppPath("flyover/gpx"), "track_" + number + ".gpx");

@@ -420,7 +420,7 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 				prop("name", "string", "File name, default flyover_<time>.mp4"),
 				prop("camera", "object", "Instead of keyframes: {follow: track number in gpx, zoom, tilt, look_ahead_s}"),
 				prop("duration_s", "number", "Video length when the camera follows a track"),
-				prop("gpx", "array", "Tracks to show: {file, from_s, to_s, time, style...}; see osmand_guide topic flyover", items = "object"),
+				prop("gpx", "array", "Tracks to show: {file, from_s, to_s, time, style...} or gpx_data (a GPX as text, up to ~300 KB); see osmand_guide topic flyover", items = "object"),
 				prop("osmand_widgets", "array", "OsmAnd elements: profile_icon, ruler, compass", items = "string"),
 				prop("attribution", "string", "Attribution text, default 'OsmAnd · © OpenStreetMap'"),
 				prop("panels", "array", "Panels of widgets (attribute / text / chart) placed like a FrameLayout; " +

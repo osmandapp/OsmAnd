@@ -31,7 +31,9 @@ import java.util.Map;
  */
 class FlyoverCallouts {
 
-	private static final double DEFAULT_DURATION_S = 3;
+	// a reached waypoint shows from 2 s before the track gets there, 5 s in all
+	private static final double DEFAULT_DURATION_S = 5;
+	private static final double DEFAULT_LEAD_S = 2;
 	private static final double DEFAULT_FADE_S = 0.4;
 	private static final int LABEL_MAX_CHARS = 24;
 	// a waypoint further than this from its track is not reached by the track's current point
@@ -127,8 +129,9 @@ class FlyoverCallouts {
 				c.toS = videoS;
 				return c;
 			}
-			c.fromS = reachedS - c.fadeS;
-			c.toS = reachedS + duration;
+			double lead = Math.min(number(ext, "lead_s", DEFAULT_LEAD_S), duration);
+			c.fromS = Math.max(0, reachedS - lead);
+			c.toS = c.fromS + duration;
 		}
 		return c;
 	}

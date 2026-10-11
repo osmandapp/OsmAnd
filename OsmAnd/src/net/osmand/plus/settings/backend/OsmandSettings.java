@@ -3477,6 +3477,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> FAVORITES_TAB =
 			new IntPreference(this, "FAVORITES_TAB", 0).makeGlobal().cache();
+	public final CommonPreference<String> FLYOVERS_SORT_MODE =
+			new StringPreference(this, "flyovers_sort_mode", "DATE_NEWEST").makeGlobal().cache();
 
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;

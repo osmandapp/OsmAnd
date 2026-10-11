@@ -24,6 +24,7 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -58,6 +59,7 @@ import java.util.Map;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -86,11 +88,18 @@ public class MapFlyoverRecorder {
 	private static final long SYMBOLS_UPDATE_MS = 2500;
 	private static final float SYMBOLS_FADE_MS = 400;
 	private static final int MAX_SIZE = 3840;
+	/** One recording at a time: a second call (an MCP client retrying a long call) would take the renderer over. */
+	private static final AtomicBoolean RECORDING = new AtomicBoolean();
 
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
 	private int renderWidth;
 	private int renderHeight;
+	/** The offscreen view of this recording; replaced when the phone's map took the renderer back meanwhile. */
+	@Nullable
+	private AtlasMapRendererView view;
+	private boolean phoneScale;
+	private float detail;
 	// frames the renderer has read out into its bitmap buffer; a frame is taken only after a new one
 	private final AtomicInteger readyFrames = new AtomicInteger();
 	private final MapRendererView.MapRendererViewListener frameListener = new MapRendererView.MapRendererViewListener() {
@@ -131,9 +140,12 @@ public class MapFlyoverRecorder {
 			params.setError(error);
 			return false;
 		}
+		if (!RECORDING.compareAndSet(false, true)) {
+			params.setError("A flyover is already being recorded; wait for it to finish");
+			return false;
+		}
 		long start = SystemClock.elapsedRealtime();
 		File file = getFile(params.getFileName());
-		AtlasMapRendererView view = null;
 		VideoEncoder encoder = null;
 		List<FlyoverTrack> tracks = new ArrayList<>();
 		Map<String, SelectedGpxFile> shownBefore = new HashMap<>();
@@ -183,8 +195,9 @@ public class MapFlyoverRecorder {
 			int scale = params.getWidth() * SUPERSAMPLING <= MAX_SIZE && params.getHeight() * SUPERSAMPLING <= MAX_SIZE ? SUPERSAMPLING : 1;
 			renderWidth = params.getWidth() * scale;
 			renderHeight = params.getHeight() * scale;
-			view = takeRendererOver(renderWidth, renderHeight, "screen".equals(spec.optString("scale")),
-					(float) spec.optDouble("detail", DEFAULT_DETAIL));
+			phoneScale = "screen".equals(spec.optString("scale"));
+			detail = (float) spec.optDouble("detail", DEFAULT_DETAIL);
+			takeRendererOver();
 			if (spec.has("map_magnifier")) {
 				// the map magnifier for this video only, as Configure map > Map magnifier: below 100% the relief
 				// shading and the details get finer; the user's value is put back afterwards
@@ -236,6 +249,8 @@ public class MapFlyoverRecorder {
 				if (cancelled) {
 					throw new CancellationException("Cancelled on the phone");
 				}
+				// a recreated MapActivity (rotation, theme change) takes the renderer for its own map: take it back
+				boolean retaken = ensureRenderer();
 				if (i % params.getFps() == 0) {
 					int percent = 100 * i / frames;
 					app.runInUIThread(() -> banner.show(percent));
@@ -255,7 +270,7 @@ public class MapFlyoverRecorder {
 					maxSpeed = Math.max(maxSpeed, screenDistance(prev, camera, pxPerTile) * params.getFps());
 				}
 				prev = camera;
-				boolean idle = waitForIdleFrame(view, frameTimeout);
+				boolean idle = waitForIdleFrame(view, retaken ? firstTimeout : frameTimeout);
 				for (int retry = 0; retry < 3 && cameraMoved(); retry++) {
 					// the app moved the map meanwhile: this frame's camera again, then its picture
 					applyCamera(camera, () -> updateTracks(tracks, t / 1000.0, videoS));
@@ -335,6 +350,8 @@ public class MapFlyoverRecorder {
 			params.setError(e.getMessage() != null ? e.getMessage() : e.toString());
 			return false;
 		} finally {
+			// the request (with gpx_data) is not sent back over Binder: the reply has its own size limit
+			params.setSpec("");
 			hideTracks(tracks, shownBefore);
 			try {
 				runInUiThread(() -> {
@@ -376,6 +393,7 @@ public class MapFlyoverRecorder {
 			} catch (InterruptedException e) {
 				LOG.error(e);
 			}
+			RECORDING.set(false);
 		}
 	}
 
@@ -387,7 +405,10 @@ public class MapFlyoverRecorder {
 			double d = spec.optDouble("duration_s", 0);
 			return d > 0 && d <= 600 ? checkVideo(p) : "A video that follows a track needs duration_s, 0-600";
 		}
-		if (n == 0 || p.getLongitudes().length != n || p.getZooms().length != n || p.getAzimuths().length != n
+		if (n == 0) {
+			return "Give key frames, or camera.follow with duration_s";
+		}
+		if (p.getLongitudes().length != n || p.getZooms().length != n || p.getAzimuths().length != n
 				|| p.getElevationAngles().length != n || p.getTimesMs().length != n) {
 			return "Key frames need the same number of latitudes, longitudes, zooms, azimuths, elevation angles and times";
 		}
@@ -418,9 +439,27 @@ public class MapFlyoverRecorder {
 		return null;
 	}
 
+	/** Where the videos are kept, under OsmAnd's own folder. */
+	@NonNull
+	public static File getFolder(@NonNull OsmandApplication app) {
+		return app.getAppPath(FOLDER);
+	}
+
+	/** The recorded videos on the phone, newest first. */
+	@NonNull
+	public static List<File> listVideos(@NonNull OsmandApplication app) {
+		File[] files = getFolder(app).listFiles((dir, name) -> name.toLowerCase(Locale.US).endsWith(".mp4"));
+		List<File> videos = new ArrayList<>();
+		if (files != null) {
+			videos.addAll(Arrays.asList(files));
+			videos.sort((a, b) -> Long.compare(b.lastModified(), a.lastModified()));
+		}
+		return videos;
+	}
+
 	@NonNull
 	private File getFile(@Nullable String name) {
-		File dir = app.getAppPath(FOLDER);
+		File dir = getFolder(app);
 		dir.mkdirs();
 		if (Algorithms.isEmpty(name)) {
 			name = "flyover_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US).format(new Date());
@@ -433,8 +472,8 @@ public class MapFlyoverRecorder {
 	 * Same steps as SurfaceRenderer.setupOffscreenRenderer(): the new offscreen view takes the renderer over
 	 * from the view that has it now, and the map layers are attached to it.
 	 */
-	@NonNull
-	private AtlasMapRendererView takeRendererOver(int width, int height, boolean phoneScale, float detail) throws InterruptedException {
+	private void takeRendererOver() throws InterruptedException {
+		int width = renderWidth, height = renderHeight;
 		AtlasMapRendererView[] result = new AtlasMapRendererView[1];
 		runInUiThread(() -> {
 			MapRendererContext context = NativeCoreContext.getMapRendererContext();
@@ -481,7 +520,28 @@ public class MapFlyoverRecorder {
 		if (result[0] == null) {
 			throw new IllegalStateException("The OpenGL renderer is not ready");
 		}
-		return result[0];
+		view = result[0];
+	}
+
+	/**
+	 * A MapActivity created during the recording (the phone turned, the theme changed) takes the renderer for its
+	 * map, as it does after Android Auto; our view then renders nothing. The recording takes it back, with the
+	 * video's size and density, and keeps its symbol settings; the phone's map gets it again at the end.
+	 */
+	private boolean ensureRenderer() throws InterruptedException {
+		AtlasMapRendererView current = view;
+		if (current == null || mapView.getMapRenderer() == current) {
+			return false;
+		}
+		LOG.info("Flyover: the app took the renderer over, taking it back");
+		current.removeListener(frameListener);
+		takeRendererOver();
+		AtlasMapRendererView next = view;
+		if (next != null) {
+			next.setSymbolsUpdateInterval(Integer.MAX_VALUE);
+		}
+		appliedCamera = null;
+		return true;
 	}
 
 	private void giveRendererBack(@NonNull AtlasMapRendererView view) {
@@ -832,11 +892,14 @@ public class MapFlyoverRecorder {
 		}
 		runInUiThread(() -> {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			// the user's selection first: a file given twice would otherwise record our own selection as his
 			for (FlyoverTrack track : tracks) {
 				SelectedGpxFile before = helper.getSelectedFileByPath(track.file.getAbsolutePath());
 				if (before != null) {
 					shownBefore.put(track.file.getAbsolutePath(), before);
 				}
+			}
+			for (FlyoverTrack track : tracks) {
 				track.selected = helper.selectGpxFile(track.gpx, GpxSelectionParams.newInstance().showOnMap());
 			}
 		});
@@ -858,6 +921,11 @@ public class MapFlyoverRecorder {
 						helper.selectGpxFile(before.getGpxFile(), GpxSelectionParams.newInstance().showOnMap());
 					} else {
 						helper.selectGpxFile(track.gpx, GpxSelectionParams.newInstance().hideFromMap());
+					}
+					if (track.temporary) {
+						// a GPX passed in the call: not kept on the phone, nor in the track database
+						app.getGpxDbHelper().remove(SharedUtil.kFile(track.file));
+						track.file.delete();
 					}
 				}
 			});
@@ -883,6 +951,9 @@ public class MapFlyoverRecorder {
 		int idleFrame = -1;
 		int idleReady = 0;
 		while (SystemClock.elapsedRealtime() < until) {
+			if (cancelled) {
+				throw new CancellationException("Cancelled on the phone");
+			}
 			view.requestRender();
 			Thread.sleep(10);
 			int frame = view.getFrameId();
