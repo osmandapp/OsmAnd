@@ -30,9 +30,9 @@ At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smoot
 
 | Field | Status | Meaning |
 |---|---|---|
-| `keyframes[]` | works | camera key frames, see below; or `camera.follow` |
+| `keyframes[]` | works | camera key frames, see below; or `camera.follow`, `camera.drone`, `camera.poses` |
 | `camera` | works | `{"follow": n, "zoom": 15, "tilt": 50, "look_ahead_s": 3}`: fly along track n of `gpx[]`; `"follow": [1, 2]` keeps several tracks in the frame (ghost mode: tracks with `"time": {"mode": "track"}` move by their own times), zooming out down to `min_zoom` (default 10) when they part; center, heading and zoom are averaged over `smooth_s` of video (default 2) |
-| `duration_s` | works | video length; needed with `camera.follow`, else the last key frame's time |
+| `duration_s` | works | video length; needed with `camera.follow` and `camera.drone`, else the last key frame's or pose's time |
 | `width`, `height` | works | even, 16-3840; default 1280x720 |
 | `fps` | works | 1-60, default 30; 60 is smoother on fast parts and takes twice as long |
 | `name` | works | file name; default `flyover_<date-time>.mp4` |
@@ -74,6 +74,29 @@ curves through the key frames; it eases only at the very start and end. A key fr
 works (your own path).
 
 Tips: turn on terrain and 3D relief with `osmand_set_preference` before mountain flights.
+
+### Drone camera — works
+
+The camera is where a drone is and looks where its camera looks; OsmAnd finds the point on the relief it looks at.
+Give the poses either as key frames or as a track:
+
+```json
+{"camera": {"poses": [
+  {"time_s": 0, "lat": 46.035, "lon": 7.775, "alt_m": 4000, "heading": 235, "pitch": -30},
+  {"time_s": 3, "lat": 46.035, "lon": 7.775, "alt_m": 4000, "heading": 325, "pitch": -30}
+]}, "width": 720, "height": 1280, "fps": 30}
+```
+
+`alt_m`: height above the sea (`"alt_ref": "ground"` on a pose or on `camera`: above the relief). `heading`: where
+the camera looks, 0 north. `pitch`: below 0 looks down, -90 straight down; the view cannot be flatter than 10° down.
+`fov`: vertical field of view, default 33°. Poses follow smooth curves; one pose per video frame also works.
+`"camera": {"drone": n}` takes the poses from track n of `gpx[]`: lat/lon/ele (`"altitude": "msl"` default,
+`"takeoff"` adds the ground at the first point, `"agl"` the ground under each point) and point tags `yaw`/`heading`,
+`pitch`, `fov` (without `yaw` it looks along the track, without `pitch` it takes `camera.pitch`, default -30);
+averaged over `smooth_s` (default 1). The camera never goes lower than `min_agl_m` (default 5) above the relief.
+The map's detail level stays the same while the camera keeps about the same distance and changes as it nears or
+leaves. `warnings` tell how far the camera's height was off (usually a few meters; flights low over high mountains
+are less exact). Needs the terrain maps of the area.
 
 While a video is recorded the map on the phone is busy: a banner shows the progress with a Cancel button and the map
 takes no touches (a cancelled recording returns an error). Afterwards the camera, the shown tracks, the link to the

@@ -418,7 +418,10 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 				prop("height", "integer", "Video height, even, default 720"),
 				prop("fps", "integer", "Frames per second, default 30"),
 				prop("name", "string", "File name, default flyover_<time>.mp4"),
-				prop("camera", "object", "Instead of keyframes: {follow: track number in gpx, zoom, tilt, look_ahead_s}"),
+				prop("camera", "object", "Instead of keyframes: {follow: track number in gpx, zoom, tilt, look_ahead_s}; " +
+						"or a drone: {drone: track number in gpx (ele = height, point tags yaw/pitch/fov)} or " +
+						"{poses: [{time_s, lat, lon, alt_m, alt_ref: sea|ground, heading, pitch (below 0 = down), fov}]}; " +
+						"see osmand_guide topic flyover"),
 				prop("duration_s", "number", "Video length when the camera follows a track"),
 				prop("gpx", "array", "Tracks to show: {file, from_s, to_s, time, style...} or gpx_data (a GPX as text, up to ~300 KB); see osmand_guide topic flyover", items = "object"),
 				prop("osmand_widgets", "array", "OsmAnd elements: profile_icon, ruler, compass", items = "string"),
@@ -445,11 +448,13 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 	).associateBy { it.name }
 
 	private fun flyover(a: JSONObject): JSONObject {
-		// a camera that follows a track needs no key frames; OsmAnd checks the rest of the request
+		// a camera that follows a track or a drone needs no key frames; OsmAnd checks the rest of the request
 		val frames = a.optJSONArray("keyframes") ?: JSONArray()
 		val n = frames.length()
-		if (n < 1 && a.optJSONObject("camera")?.has("follow") != true) {
-			throw ToolError("Give key frames, or camera.follow with duration_s; see osmand_guide topic flyover")
+		val camera = a.optJSONObject("camera")
+		if (n < 1 && camera?.has("follow") != true && camera?.has("drone") != true && camera?.has("poses") != true) {
+			throw ToolError("Give key frames, camera.follow or camera.drone with duration_s, or camera.poses; " +
+					"see osmand_guide topic flyover")
 		}
 		val lat = DoubleArray(n)
 		val lon = DoubleArray(n)
