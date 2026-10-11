@@ -557,7 +557,8 @@ class MapFlyoverRecorder {
 		double baseZoom = camera.optDouble("zoom", 15);
 		double minZoom = camera.optDouble("min_zoom", 10);
 		double lat = 0, lon = 0, sin = 0, cos = 0, zoom = 0, weights = 0;
-		int half = 6;
+		// samples every 1/60 s of video: sparse ones beat with a fast-forwarded zigzag and shook the camera
+		int half = Math.max(6, (int) Math.round(window * 30));
 		for (int k = -half; k <= half; k++) {
 			double tk = t + k * window / (2 * half);
 			double w = half + 1 - Math.abs(k);
