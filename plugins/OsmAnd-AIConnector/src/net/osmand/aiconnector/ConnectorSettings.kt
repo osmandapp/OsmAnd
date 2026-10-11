@@ -9,7 +9,7 @@ import java.util.UUID
 /** Settings of the connector; kept on this phone only (the app has no backup). */
 object ConnectorSettings {
 
-	const val PORT = 8765
+	const val PORT = BuildConfig.MCP_PORT
 
 	/** OsmAnd apps the connector can drive, in the order they are offered. */
 	val OSMAND_PACKAGES = linkedMapOf(

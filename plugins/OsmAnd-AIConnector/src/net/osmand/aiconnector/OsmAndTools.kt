@@ -3,6 +3,7 @@ package net.osmand.aiconnector
 import android.util.Base64
 import android.view.KeyEvent
 import net.osmand.aidlapi.IOsmAndAidlCallback
+import net.osmand.aidlapi.IOsmAndAidlInterface
 import net.osmand.aidlapi.contextmenu.AContextMenuButton
 import net.osmand.aidlapi.customization.AProfile
 import net.osmand.aidlapi.customization.PreferenceParams
@@ -18,8 +19,10 @@ import net.osmand.aidlapi.gpx.HideGpxParams
 import net.osmand.aidlapi.gpx.ShowGpxParams
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams
+import net.osmand.aidlapi.logcat.ALogcatListenerParams
 import net.osmand.aidlapi.logcat.OnLogcatMessageParams
 import net.osmand.aidlapi.info.AMapWidgetValue
+import net.osmand.aidlapi.map.MapFlyoverParams
 import net.osmand.aidlapi.map.MapScreenshotParams
 import net.osmand.aidlapi.map.SetMapCameraParams
 import net.osmand.aidlapi.map.SetMapLocationParams
@@ -165,7 +168,9 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			val params = MapScreenshotParams(a.optInt("max_width", 1080), a.optInt("quality", 80))
 			params.isMapOnly = a.optBoolean("map_only", false)
 			val shot = bridge.get().getMapScreenshot(params)
-				?: throw ToolError(refused(SCREEN) + " OsmAnd also needs to be open with the map on the screen.")
+				// usually another app is in front; OsmAnd does not tell this apart from a refused permission
+				?: throw ToolError("OsmAnd returned no picture. Most often OsmAnd is not in front: ask the user " +
+						"to open ${osmandApp()} with the map on the screen. Otherwise: " + refused(SCREEN))
 			ToolImage(shot.image, "Map screenshot ${shot.width}x${shot.height}")
 		},
 		Tool(
@@ -383,8 +388,74 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		) { a ->
 			check(SETTINGS, bridge.get().executeQuickAction(QuickActionParams(a.getInt("number"))))
 			"Quick action executed"
-		}
+		},
+		Tool(
+			"osmand_logs",
+			"OsmAnd's own log (logcat of the OsmAnd process), newest lines last. Use it to find out why a call " +
+					"was refused or failed: OsmAnd logs each API call with its permission check, e.g. " +
+					"'Request AIDL API V2 for getMapScreenshot from net.osmand.aiconnector enabled: false'. " +
+					"Needs the System group. The first call collects up to 10000 earlier lines and takes a few seconds.",
+			schema(
+				prop("filter", "string", "Only lines containing this text, case-insensitive, e.g. getMapScreenshot or Exception"),
+				prop("level", "string", "Lowest level: D (debug), I (info, default), W (warn) or E (error)"),
+				prop("lines", "integer", "Max lines, default 200, max 1000")
+			)
+		) { a -> logs.read(a) },
+		Tool(
+			"osmand_flyover",
+			"Record a smooth camera flight over the map into an MP4 video on the phone. The camera passes the key " +
+					"frames at their times; between them the center follows a smooth curve and zoom, rotation and tilt " +
+					"ease. OsmAnd renders off the screen frame by frame (OpenGL renderer, 3D and relief included), so the " +
+					"screen may be off; the phone's map pauses meanwhile. Rendering takes longer than the video: " +
+					"about 0.1-1 s per frame. Returns the file path on the phone.",
+			schema(
+				prop("keyframes", "array", "Key frames: {lat, lon, zoom, rotation (degrees, direction up on the screen, " +
+						"0 north), tilt (camera angle above the horizon, 90 flat, 30-50 3D), time_s (from the start)}; " +
+						"rotation and tilt default to the previous key frame or 0 / 90", items = "object"),
+				prop("width", "integer", "Video width, even, default 1280"),
+				prop("height", "integer", "Video height, even, default 720"),
+				prop("fps", "integer", "Frames per second, default 30"),
+				prop("name", "string", "File name, default flyover_<time>.mp4"),
+				required = listOf("keyframes")
+			)
+		) { a -> flyover(a) }
 	).associateBy { it.name }
+
+	private fun flyover(a: JSONObject): JSONObject {
+		val frames = a.getJSONArray("keyframes")
+		val n = frames.length()
+		if (n < 1) throw ToolError("Give at least one key frame")
+		val lat = DoubleArray(n)
+		val lon = DoubleArray(n)
+		val zoom = FloatArray(n)
+		val rotation = FloatArray(n)
+		val tilt = FloatArray(n)
+		val time = LongArray(n)
+		for (i in 0 until n) {
+			val f = frames.getJSONObject(i)
+			lat[i] = f.getDouble("lat")
+			lon[i] = f.getDouble("lon")
+			zoom[i] = f.getDouble("zoom").toFloat()
+			rotation[i] = f.optDouble("rotation", if (i > 0) rotation[i - 1].toDouble() else 0.0).toFloat()
+			tilt[i] = f.optDouble("tilt", if (i > 0) tilt[i - 1].toDouble() else 90.0).toFloat()
+			time[i] = (f.getDouble("time_s") * 1000).toLong()
+		}
+		val p = MapFlyoverParams(lat, lon, zoom, rotation, tilt, time, a.optInt("width", 1280),
+			a.optInt("height", 720), a.optInt("fps", 30), a.optString("name"))
+		if (!bridge.get().recordMapFlyover(p)) {
+			throw ToolError(p.error.ifEmpty { refused(SCREEN) + " An older OsmAnd cannot record a flyover." })
+		}
+		val o = JSONObject().put("file", p.filePath).put("frames", p.frames)
+			.put("render_s", Math.round(p.renderTimeMs / 100.0) / 10.0)
+			.put("max_screen_speed_px_s", p.maxScreenSpeed.toInt())
+		if (p.maxScreenSpeed > SMOOTH_SCREEN_SPEED) {
+			o.put("hint", "The map moves up to ${p.maxScreenSpeed.toInt()} px/s on the screen; above $SMOOTH_SCREEN_SPEED " +
+					"sharp lines strobe. Give that part more time or a lower zoom (the camera higher).")
+		}
+		return o
+	}
+
+	private val logs = LogBuffer()
 
 	fun list(): JSONArray = JSONArray(tools.values.map {
 		JSONObject().put("name", it.name).put("description", it.description).put("inputSchema", it.schema)
@@ -441,6 +512,9 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			.put("package", bridge.boundPackage)
 			.put("installed", JSONArray(bridge.installedPackages()))
 			.put("osmand_app", osmandApp())
+			// an older OsmAnd lacks newer calls and refuses them like a missing permission
+			.put("osmand_version", bridge.versionName(bridge.boundPackage ?: bridge.preferredPackage))
+			.put("connector_version", BuildConfig.VERSION_NAME)
 		// refreshMap is in the Map group that every connected app gets by default
 		if (!api.refreshMap()) {
 			o.put("enabled", false).put("hint", refused(MAP))
@@ -635,20 +709,11 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		val limit = a.optInt("limit", 10)
 		val latch = CountDownLatch(1)
 		var results: List<SearchResult> = emptyList()
-		val callback = object : IOsmAndAidlCallback.Stub() {
+		val callback = object : EmptyCallback() {
 			override fun onSearchComplete(resultSet: MutableList<SearchResult>?) {
 				results = resultSet ?: emptyList()
 				latch.countDown()
 			}
-
-			override fun onUpdate() {}
-			override fun onAppInitialized() {}
-			override fun onGpxBitmapCreated(bitmap: AGpxBitmap?) {}
-			override fun updateNavigationInfo(directionInfo: ADirectionInfo?) {}
-			override fun onContextMenuButtonClicked(buttonId: Int, pointId: String?, layerId: String?) {}
-			override fun onVoiceRouterNotify(params: OnVoiceNavigationParams?) {}
-			override fun onKeyEvent(params: KeyEvent?) {}
-			override fun onLogcatMessage(params: OnLogcatMessageParams?) {}
 		}
 		val p = SearchParams(a.getString("query"), type, a.getDouble("lat"), a.getDouble("lon"), 1, limit)
 		check(SEARCH, bridge.get().search(p, callback))
@@ -658,6 +723,84 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 				.put("lat", it.latitude).put("lon", it.longitude)
 				.apply { if (!it.alternateName.isNullOrEmpty()) put("alt_name", it.alternateName) }
 		})
+	}
+
+	/** OsmAnd's logcat lines, collected from the first osmand_logs call while the connection lasts. */
+	private inner class LogBuffer {
+		private val lines = ArrayDeque<String>()
+		private var api: IOsmAndAidlInterface? = null
+		private var level = ""
+		private var callbackId = -1L
+
+		@Volatile
+		private var lastLineTime = 0L
+
+		private val callback = object : EmptyCallback() {
+			override fun onLogcatMessage(params: OnLogcatMessageParams?) {
+				val logs = params?.logs ?: return
+				synchronized(lines) {
+					logs.forEach { lines.addLast(it) }
+					while (lines.size > MAX_LOG_LINES) lines.removeFirst()
+				}
+				lastLineTime = System.currentTimeMillis()
+			}
+		}
+
+		@Synchronized
+		fun read(a: JSONObject): String {
+			val level = a.optString("level", "I").uppercase().ifEmpty { "I" }
+			if (level !in LOG_LEVELS) throw ToolError("level is one of ${LOG_LEVELS.joinToString()}, got '$level'")
+			val filter = a.optString("filter")
+			val max = a.optInt("lines", 200).coerceIn(1, 1000)
+			val current = bridge.get()
+			if (current !== api || level != this.level) {
+				subscribe(current, level)
+				// OsmAnd first sends the earlier lines, one call per line
+				waitQuiet(1000, 10000)
+			} else {
+				// the lines of a call made just before arrive a moment later
+				waitQuiet(300, 2000)
+			}
+			val (kept, found) = synchronized(lines) {
+				lines.size to lines.filter { filter.isEmpty() || it.contains(filter, ignoreCase = true) }
+			}
+			val shown = found.takeLast(max)
+			return "${shown.size} of ${found.size} matching lines ($kept kept, level $level and above)\n" +
+					shown.joinToString("\n")
+		}
+
+		private fun subscribe(current: IOsmAndAidlInterface, level: String) {
+			unsubscribe()
+			synchronized(lines) { lines.clear() }
+			val p = ALogcatListenerParams()
+			p.filterLevel = "*:$level"
+			lastLineTime = System.currentTimeMillis()
+			val id = current.registerForLogcatMessages(p, callback)
+			if (id < 0) throw ToolError(refused(SYSTEM))
+			api = current
+			this.level = level
+			callbackId = id
+		}
+
+		private fun unsubscribe() {
+			val old = api ?: return
+			api = null
+			val p = ALogcatListenerParams()
+			p.setSubscribeToUpdates(false)
+			p.callbackId = callbackId
+			try {
+				old.registerForLogcatMessages(p, callback)
+			} catch (_: Exception) {
+				// the old connection is gone together with its subscription
+			}
+		}
+
+		private fun waitQuiet(quietMs: Long, maxMs: Long) {
+			val start = System.currentTimeMillis()
+			while (System.currentTimeMillis() - lastLineTime < quietMs && System.currentTimeMillis() - start < maxMs) {
+				Thread.sleep(100)
+			}
+		}
 	}
 
 	private fun JSONObject.optFloat(name: String): Float = if (has(name)) getDouble(name).toFloat() else Float.NaN
@@ -683,6 +826,24 @@ private const val TRACKS_VIEW = "Tracks: view"
 private const val TRACKS_EDIT = "Tracks: edit"
 private const val RECORDING = "Trip recording"
 private const val SETTINGS = "Settings"
+private const val SYSTEM = "System"
+
+private const val MAX_LOG_LINES = 5000
+private const val SMOOTH_SCREEN_SPEED = 250
+private val LOG_LEVELS = listOf("D", "I", "W", "E")
+
+/** A callback that ignores everything; subclasses override the event they wait for. */
+private open class EmptyCallback : IOsmAndAidlCallback.Stub() {
+	override fun onSearchComplete(resultSet: MutableList<SearchResult>?) {}
+	override fun onUpdate() {}
+	override fun onAppInitialized() {}
+	override fun onGpxBitmapCreated(bitmap: AGpxBitmap?) {}
+	override fun updateNavigationInfo(directionInfo: ADirectionInfo?) {}
+	override fun onContextMenuButtonClicked(buttonId: Int, pointId: String?, layerId: String?) {}
+	override fun onVoiceRouterNotify(params: OnVoiceNavigationParams?) {}
+	override fun onKeyEvent(params: KeyEvent?) {}
+	override fun onLogcatMessage(params: OnLogcatMessageParams?) {}
+}
 
 private const val PREF_HINT = "Common ids: application_mode (current profile, global), daynight_mode (DAY, NIGHT, AUTO, SENSOR, APP_THEME), " +
 		"renderer (map style, e.g. OsmAnd, Touring view (contrast and details), Topo, UniRS, Nautical, Ski map, Winter and ski, Offroad, Desert), " +
