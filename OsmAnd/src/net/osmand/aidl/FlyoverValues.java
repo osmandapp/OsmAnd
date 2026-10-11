@@ -72,7 +72,7 @@ class FlyoverValues {
 	}
 
 	private static final Pattern GPX = Pattern.compile("gpx\\[(\\d+)]\\.(.+)");
-	private static final Pattern TEMPLATE = Pattern.compile("\\{([^}]+)}");
+	private static final Pattern TEMPLATE = Pattern.compile("\\{([^}]+)\\}");
 	private static final String MISSING = "—";
 	private static final double MOVING_SPEED = 0.5;
 

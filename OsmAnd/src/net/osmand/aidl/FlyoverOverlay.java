@@ -28,7 +28,7 @@ import java.util.Set;
 
 /**
  * What a flyover video shows over the map: the OsmAnd elements asked for in the spec (profile icon, ruler, compass)
- * and the OpenStreetMap attribution. Drawn at the video's size; sizes are in dp of a frame 640 dp wide.
+ * and the OpenStreetMap attribution. Drawn at the video's size; sizes are in dp, see {@link #uiDensity}.
  */
 class FlyoverOverlay {
 
@@ -57,7 +57,7 @@ class FlyoverOverlay {
 
 	FlyoverOverlay(@NonNull OsmandApplication app, @NonNull JSONObject spec, int width, int height) {
 		this.app = app;
-		this.density = Math.max(width, height) / 640f;
+		this.density = uiDensity(spec, width, height);
 		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		attribution = spec.optString("attribution", ATTRIBUTION).trim().isEmpty()
 				? ATTRIBUTION : spec.optString("attribution", ATTRIBUTION);
@@ -168,6 +168,11 @@ class FlyoverOverlay {
 		paint.setStyle(Paint.Style.FILL);
 		paint.setColor(color);
 		canvas.drawText(text, x, y, paint);
+	}
+
+	/** Video pixels per dp of the overlay: the frame's long side is 800 dp, like a tablet; ui_scale makes it all bigger. */
+	static float uiDensity(@NonNull JSONObject spec, int width, int height) {
+		return Math.max(width, height) / 800f * (float) spec.optDouble("ui_scale", 1);
 	}
 
 	private float dp(float value) {

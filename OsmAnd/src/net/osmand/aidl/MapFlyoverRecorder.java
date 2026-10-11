@@ -144,6 +144,8 @@ class MapFlyoverRecorder {
 			view = takeRendererOver(renderWidth, renderHeight, "screen".equals(spec.optString("scale")));
 			encoder = new VideoEncoder(file, params.getWidth(), params.getHeight(), params.getFps());
 			FlyoverOverlay overlay = new FlyoverOverlay(app, spec, params.getWidth(), params.getHeight());
+			FlyoverValues values = new FlyoverValues(app, tracks, spec.optJSONObject("data"));
+			FlyoverPanels panels = new FlyoverPanels(app, values, spec, params.getWidth(), params.getHeight());
 			int frames = (int) Math.round(videoS * params.getFps()) + 1;
 			// the map moves across the screen at most this fast: above ~250 px/s sharp lines strobe
 			float pxPerTile = 256 * Math.max(1f, Math.max(params.getWidth(), params.getHeight()) / 640f);
@@ -186,7 +188,9 @@ class MapFlyoverRecorder {
 				if (frame == bitmap) {
 					frame = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 				}
-				overlay.draw(new Canvas(frame), camera[0], (float) camera[2], (float) camera[3]);
+				Canvas frameCanvas = new Canvas(frame);
+				overlay.draw(frameCanvas, camera[0], (float) camera[2], (float) camera[3]);
+				panels.draw(frameCanvas, new FlyoverValues.Frame(t / 1000.0, videoS, camera));
 				encoder.encode(frame, i * 1_000_000L / params.getFps());
 				frame.recycle();
 			}
@@ -200,7 +204,8 @@ class MapFlyoverRecorder {
 			LOG.info("Flyover " + file + ": " + frames + " frames in " + params.getRenderTimeMs()
 					+ " ms, not idle " + notIdleFrames);
 			return true;
-		} catch (Exception e) {
+		} catch (Exception | LinkageError e) {
+			// a broken request or a bug must not take OsmAnd down with it: report it, give the renderer back
 			LOG.error("Flyover failed", e);
 			params.setError(e.getMessage() != null ? e.getMessage() : e.toString());
 			return false;
@@ -360,7 +365,7 @@ class MapFlyoverRecorder {
 	// what this OsmAnd understands in a flyover request; anything else is reported back, not silently dropped
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
 			"name", "camera", "duration_s", "gpx", "osmand_widgets", "attribution", "profile", "scale",
-			"ease_in_s", "ease_out_s"));
+			"ease_in_s", "ease_out_s", "panels", "data", "ui_scale"));
 
 	@NonNull
 	private static String unknownKeys(@NonNull JSONObject spec) {
