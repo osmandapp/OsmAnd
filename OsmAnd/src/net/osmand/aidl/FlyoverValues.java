@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -159,6 +162,17 @@ class FlyoverValues {
 			case "remaining_dist": return new Value(track.getLength() - p.distance, Kind.DISTANCE, null);
 			case "progress": return new Value(100 * p.distance / track.getLength(), Kind.PERCENT, null);
 			case "elapsed": return new Value(elapsed(track, p), Kind.DURATION, null);
+			case "moving_elapsed": {
+				double[] moving = cumulative(track, "moving_time");
+				return new Value(moving != null && track.timed
+						? moving[p.index] + (moving[p.index + 1] - moving[p.index]) * p.fraction : Double.NaN, Kind.DURATION, null);
+			}
+			case "city": {
+				// the nearest city OsmAnd's track list shows, from its track database
+				GpxDataItem item = app.getGpxDbHelper().getItem(SharedUtil.kFile(track.file));
+				Object city = item != null ? item.getParameter(GpxParameter.NEAREST_CITY_NAME) : null;
+				return new Value(city != null ? city.toString() : null);
+			}
 			case "remaining_time": return new Value(track.timed ? (track.time[track.time.length - 1] - timeAt(track, p)) / 1000.0
 					: Double.NaN, Kind.DURATION, null);
 			case "next_wpt.name": {

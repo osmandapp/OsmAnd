@@ -40,7 +40,7 @@ At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smoot
 | `scale` | works | `video` (default): map symbols sized for the video; `screen`: the phone's own map scale, so a video can continue a screen recording |
 | `load_timeout_s` | works | how long a frame may wait for map data, default 30 s for the first frame and 5 s for the others; frames recorded before the map finished loading are counted in `warnings` |
 | `ui_scale` | works | size of everything drawn over the map (OsmAnd elements, panels, callouts); default 1; the frame's long side is 800 dp |
-| `gpx[]` | works, partly | tracks to show, see below |
+| `gpx[]` | works | tracks to show, see below |
 | `osmand_widgets` | works | `["profile_icon", "ruler", "compass"]` |
 | `profile` | works | profile key for the profile icon; default the current profile |
 | `attribution` | works | default "OsmAnd · © OpenStreetMap"; it must credit OpenStreetMap |
@@ -77,11 +77,13 @@ recording only; the user's own shown tracks are put back afterwards. Track waypo
 |---|---|---|
 | `file` | works | path in OsmAnd's tracks folder, e.g. `rec/2026-10-11_ride.gpx` or `import/x.gpx` (see `osmand_list_tracks`) |
 | `time` | works | `{"mode": "duration", "duration_s": 30}` (default: the whole video): spread over the time, by the track's own times when it has them, else by distance; `{"mode": "track", "speed_x": 60, "offset_s": 0}`: the track's own times sped up |
-| `from_s` | works | when the track starts moving (its current point stays at the start before) |
+| `from_s` | works | when the track appears and starts moving (its current point stays at the start before) |
 | style | works | over the file's own: `color`, `width` (`thin`/`medium`/`bold`/number), `coloring_type` (`solid`, `speed`, `altitude`, `slope`, ...), `color_palette`, `show_arrows`, `show_start_finish`, `split_type`, `split_interval`, `visualization_3d`, `wall_coloring`, `line_position_3d`, `vertical_exaggeration`, `elevation_meters`, `show_wpts` |
-| `to_s`, `fade_s` | planned | the track appearing and disappearing in the video; now shown all the time |
-| `draw` | planned | `progressive`: growing up to its current point; now always `full` |
-| `remaining`, `tail_km`, `tail_s`, `head` | planned | with `progressive` |
+| `to_s`, `fade_s` | works | when the track disappears; it fades in after `from_s` and out before `to_s` |
+| `draw` | works | `full` (default) or `progressive`: the track grows up to its current point |
+| `remaining` | works | with `progressive`, the part not reached yet: `hidden` (default), `faded`, `thin` |
+| `tail_km`, `tail_s` | works | with `progressive`, only the last part of the passed track is drawn (a comet) |
+| `head` | works | marker at the current point: `none`, `dot` (default with `progressive`), `arrow` (along the track), `profile_icon` |
 
 ### Waypoint callouts — works
 
@@ -138,14 +140,15 @@ widget for that value has. `unit`: `auto` (the profile's units) or `km`, `mi`, `
 At the current point (interpolated): `gpx[i].speed`, `.pace`, `.ele`, `.slope`, `.hr`, `.cadence`, `.power`,
 `.sensor_speed`, `.temp_air`, `.temp_water`, `.bike_distance`, `.time`, `.lat`, `.lon`, `.ext.<tag>` (any point tag).
 
-Progress: `gpx[i].progress_dist`, `.remaining_dist`, `.progress`, `.elapsed`, `.remaining_time`, `.climb_so_far`,
+Progress: `gpx[i].progress_dist`, `.remaining_dist`, `.progress`, `.elapsed`, `.moving_elapsed`, `.remaining_time`, `.climb_so_far`,
 `.descent_so_far`, `.avg_speed_so_far`, `.max_speed_so_far`, `.next_wpt.name`, `.next_wpt.dist`.
 
 Whole track: `gpx[i].dist`, `.dist_moving`, `.duration`, `.duration_moving`, `.start_time`, `.end_time`, `.date`,
 `.climb`, `.descent`, `.<point value>_min` / `_max` / `_avg` (e.g. `.ele_max`, `.hr_avg`, `.speed_avg`), `.points`,
 `.wpt_count`, `.segments`.
 
-Track description: `gpx[i].name`, `.desc`, `.author`, `.activity`, `.file`, `.meta.<tag>`.
+Track description: `gpx[i].name`, `.desc`, `.author`, `.activity`, `.city` (nearest city, from OsmAnd's track
+list), `.file`, `.meta.<tag>`.
 
 Video and camera: `video.time`, `video.progress`, `camera.zoom`, `camera.lat`, `camera.lon`, `camera.heading`,
 `camera.tilt`.
@@ -154,7 +157,7 @@ Your own data: `data.<name>`, passed in the call as a constant (`"data": {"goal"
 `{"by": "time" | "distance", "gpx": 1, "unit": "W", "points": [[x, value], ...]}` (x in video seconds or metres
 along the track).
 
-Planned: `gpx[i].moving_elapsed`, `.city`, `.obd.*` names, `camera.ele`.
+Vehicle (OBD) values are read as point tags: `gpx[i].ext.<tag>`. Planned: `camera.ele` (terrain under the camera).
 
 ## Example: trip recap
 
