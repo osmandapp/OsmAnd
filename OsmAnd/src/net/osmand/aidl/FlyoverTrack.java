@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.shared.SharedUtil;
@@ -57,6 +58,7 @@ class FlyoverTrack {
 
 	private final double startS;
 	private final double durationS;
+	private static final double HEAD_ROAD_M = 20;
 	/** The track's own profile (request or file), null when it uses the current one. */
 	@Nullable
 	final String profileKey;
@@ -401,8 +403,9 @@ class FlyoverTrack {
 	}
 
 	/**
-	 * The head marker's place, then points behind and ahead of it for its direction: about half a second of video
-	 * each way, so the arrow turns smoothly through corners and GPS noise; null when there is no head.
+	 * The head marker's place, then two points along its direction (from, to). The direction is the road's right
+	 * here (about 20 m each way), averaged over 0.6 s of video: the arrow follows the road, turns smoothly in bends
+	 * and does not cut across hairpins of a fast-forwarded track. Null when there is no head.
 	 */
 	@Nullable
 	WptPt[] headPoints(double t) {
@@ -410,9 +413,21 @@ class FlyoverTrack {
 			return null;
 		}
 		Position p = at(t);
-		double around = Math.max(15, durationS > 0 ? getLength() / durationS * 0.5 : 15);
-		return new WptPt[] {pointAt(p.distance), pointAt(Math.max(0, p.distance - around)),
-				pointAt(Math.min(getLength(), p.distance + around))};
+		double sin = 0, cos = 0;
+		for (int k = -3; k <= 3; k++) {
+			double d = at(t + k * 0.1).distance;
+			WptPt a = pointAt(Math.max(0, d - HEAD_ROAD_M)), b = pointAt(Math.min(getLength(), d + HEAD_ROAD_M));
+			double w = 4 - Math.abs(k);
+			double bearing = Math.toRadians(bearing(a.getLat(), a.getLon(), b.getLat(), b.getLon()));
+			sin += w * Math.sin(bearing);
+			cos += w * Math.cos(bearing);
+		}
+		WptPt here = pointAt(p.distance);
+		LatLon ahead = MapUtils.rhumbDestinationPoint(here.getLat(), here.getLon(), HEAD_ROAD_M,
+				Math.toDegrees(Math.atan2(sin, cos)));
+		WptPt to = new WptPt(ahead.getLatitude(), ahead.getLongitude());
+		to.setEle(here.getEle());
+		return new WptPt[] {here, here, to};
 	}
 
 	@Nullable

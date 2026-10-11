@@ -70,6 +70,8 @@ class MapFlyoverRecorder {
 
 	/** Set by the banner's cancel button; the recording stops before its next frame. */
 	private volatile boolean cancelled;
+	@Nullable
+	private volatile double[] appliedCamera;
 
 	private static final Log LOG = PlatformUtil.getLog(MapFlyoverRecorder.class);
 
@@ -144,6 +146,7 @@ class MapFlyoverRecorder {
 			runInUiThread(() -> {
 				// kept on disk until the end: a crash meanwhile is undone at the next start
 				session[0] = new FlyoverSession(app, mapView);
+				mapView.setTouchesBlocked(true);
 				banner.show(0);
 				MapViewTrackingUtilities tracking = app.getMapViewTrackingUtilities();
 				tracking.setTrackingPaused(true);
@@ -244,7 +247,13 @@ class MapFlyoverRecorder {
 					maxSpeed = Math.max(maxSpeed, screenDistance(prev, camera, pxPerTile) * params.getFps());
 				}
 				prev = camera;
-				if (!waitForIdleFrame(view, frameTimeout)) {
+				boolean idle = waitForIdleFrame(view, frameTimeout);
+				for (int retry = 0; retry < 3 && cameraMoved(); retry++) {
+					// the app moved the map meanwhile: this frame's camera again, then its picture
+					applyCamera(camera, () -> updateTracks(tracks, t / 1000.0, videoS));
+					idle = waitForIdleFrame(view, frameTimeout);
+				}
+				if (!idle) {
 					notIdleFrames++;
 					String reason = view.getNotIdleReason();
 					if (notIdleReason == null) {
@@ -283,6 +292,11 @@ class MapFlyoverRecorder {
 				}
 				panels.draw(frameCanvas, new FlyoverValues.Frame(t / 1000.0, videoS, camera));
 				encoder.encode(frame, i * 1_000_000L / params.getFps());
+				if (i % Math.max(1, params.getFps() / PREVIEW_PER_S) == 0) {
+					// the map area of the app shows what is recorded, a few times a second
+					Bitmap preview = Bitmap.createScaledBitmap(frame, frame.getWidth() / 2, frame.getHeight() / 2, true);
+					app.runInUIThread(() -> banner.showFrame(preview));
+				}
 				frame.recycle();
 			}
 			encoder.finish();
@@ -340,6 +354,7 @@ class MapFlyoverRecorder {
 			}
 			try {
 				runInUiThread(() -> {
+					mapView.setTouchesBlocked(false);
 					banner.hide();
 					if (session[0] != null) {
 						session[0].finish(app, mapView);
@@ -492,6 +507,7 @@ class MapFlyoverRecorder {
 
 	// what this OsmAnd understands in a flyover request; anything else is reported back, not silently dropped
 	private static final float DEFAULT_DETAIL = 3f;
+	private static final int PREVIEW_PER_S = 5;
 
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
 			"name", "camera", "duration_s", "gpx", "osmand_widgets", "attribution", "profile", "scale",
@@ -703,7 +719,31 @@ class MapFlyoverRecorder {
 			}
 			boolean night = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 			mapView.drawOverMap(layersCanvas, mapView.getRotatedTileBox(), new DrawSettings(night, false));
+			appliedCamera = cameraState();
 		});
+	}
+
+	/** The map view's camera as it is now: center, zoom, rotation, tilt. On the UI thread. */
+	@NonNull
+	private double[] cameraState() {
+		return new double[] {mapView.getLatitude(), mapView.getLongitude(), mapView.getZoom() + mapView.getZoomFloatPart(),
+				mapView.getRotate(), mapView.getElevationAngle()};
+	}
+
+	/**
+	 * Whether something else moved the map since applyCamera, e.g. a button or a menu of the app (the user may use the
+	 * app while a video is recorded, only the map itself takes no touches).
+	 */
+	private boolean cameraMoved() throws InterruptedException {
+		boolean[] moved = new boolean[1];
+		runInUiThread(() -> {
+			double[] now = cameraState();
+			double[] was = appliedCamera;
+			moved[0] = was != null && (Math.abs(now[0] - was[0]) > 1e-7 || Math.abs(now[1] - was[1]) > 1e-7
+					|| Math.abs(now[2] - was[2]) > 1e-4 || Math.abs(MapUtils.unifyRotationDiff((float) now[3], (float) was[3])) > 0.01
+					|| Math.abs(now[4] - was[4]) > 0.01);
+		});
+		return moved[0];
 	}
 
 	/** Tracks that grow or fade change their lines; the GPX layer then rebuilds them in place for this frame. */

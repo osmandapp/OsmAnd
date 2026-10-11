@@ -88,6 +88,8 @@ import java.util.concurrent.Executors;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
+	private volatile boolean touchesBlocked;
+
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
 	public static final float MIN_ALLOWED_ELEVATION_ANGLE = 10;
 	public static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
@@ -1965,7 +1967,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		fitLocationToMap(clat, clon, zoom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, 0, animated);
 	}
 
+	/** While a flyover video is recorded the map takes no touches: its camera belongs to the recorder. */
+	public void setTouchesBlocked(boolean blocked) {
+		touchesBlocked = blocked;
+	}
+
 	public boolean onGenericMotionEvent(MotionEvent event) {
+		if (touchesBlocked) {
+			return true;
+		}
 		if ((event.getSource() & InputDevice.SOURCE_CLASS_POINTER) != 0 &&
 				event.getAction() == MotionEvent.ACTION_SCROLL &&
 				event.getAxisValue(MotionEvent.AXIS_VSCROLL) != 0) {
@@ -2022,6 +2032,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
+		if (touchesBlocked) {
+			return true;
+		}
 		if (mapRenderer != null) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				mapRenderer.suspendSymbolsUpdate();

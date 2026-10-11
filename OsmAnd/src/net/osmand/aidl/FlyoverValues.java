@@ -245,6 +245,10 @@ class FlyoverValues {
 		return name.startsWith("ext.") || name.startsWith("obd.");
 	}
 
+	private static boolean isMotion(@NonNull String name) {
+		return name.equals("speed") || name.equals("sensor_speed") || name.equals("cadence") || name.equals("power");
+	}
+
 	private static boolean isSmoothed(@NonNull String name) {
 		return isPointValue(name) && !name.equals("lat") && !name.equals("lon") && !name.equals("time");
 	}
@@ -252,11 +256,14 @@ class FlyoverValues {
 	/** A point value averaged over smooth_s of video time around t, with triangular weights. */
 	private double smoothedAt(@NonNull FlyoverTrack track, @NonNull String name, double t) {
 		if (smoothS <= 0) {
-			return interpolate(track, name, track.at(t));
+			FlyoverTrack.Position p = track.at(t);
+			return isMotion(name) && (!p.started || p.finished) ? 0 : interpolate(track, name, p);
 		}
 		double sum = 0, weights = 0;
 		for (int k = -4; k <= 4; k++) {
-			double v = interpolate(track, name, track.at(t + k * smoothS / 8));
+			FlyoverTrack.Position p = track.at(t + k * smoothS / 8);
+			// waiting at the start or arrived: not moving
+			double v = isMotion(name) && (!p.started || p.finished) ? 0 : interpolate(track, name, p);
 			if (!Double.isNaN(v)) {
 				double w = 5 - Math.abs(k);
 				sum += v * w;
