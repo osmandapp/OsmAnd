@@ -94,6 +94,20 @@ class FlyoverOverlay {
 		return mode != null ? mode : app.getSettings().getApplicationMode();
 	}
 
+	/** The corners taken by the OsmAnd elements and the attribution, in video pixels. */
+	@NonNull
+	Map<String, RectF> takenAreas(int width, int height) {
+		Map<String, RectF> taken = new java.util.LinkedHashMap<>();
+		float margin = dp(MARGIN_DP), button = dp(BUTTON_DP);
+		if (profileIcon != null) taken.put("profile icon", new RectF(margin, margin, margin + button, margin + button));
+		if (compassIcon != null) taken.put("compass", new RectF(width - margin - button, margin, width - margin, margin + button));
+		if (rulerImage != null) taken.put("ruler", new RectF(margin, height - margin - dp(30), margin + dp(RULER_MAX_DP), height - margin));
+		paint.setTextSize(dp(8));
+		float attribution = paint.measureText(this.attribution) + dp(6);
+		taken.put("attribution", new RectF(width - margin - attribution, height - margin - dp(14), width - margin, height - margin));
+		return taken;
+	}
+
 	/**
 	 * @param zoom   camera zoom, for the ruler
 	 * @param latitude camera latitude, for the ruler

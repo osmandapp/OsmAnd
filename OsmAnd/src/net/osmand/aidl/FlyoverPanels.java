@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.ContextThemeWrapper;
@@ -36,6 +38,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Panels of a flyover video, placed like a FrameLayout and drawn like OsmAnd's map widgets: the real widget
@@ -107,6 +110,50 @@ class FlyoverPanels {
 			return fade <= 0 ? 1 : (float) Math.min(1, Math.min((t - from) / fade, (to - t) / fade));
 		}
 
+		// the widest the panel gets over the whole video: a panel as wide as each frame's text would jump
+		int stableWidth;
+		int stableHeight;
+
+		private int requestedWidth() {
+			double w = spec.optDouble("width", 0);
+			return Math.round(w > 1 ? (float) w / scale : w > 0 ? (float) w * frameWidth / scale : 0);
+		}
+
+		void prepare(double videoS) {
+			int width = requestedWidth();
+			int samples = 60;
+			for (int k = 0; k <= samples; k++) {
+				FlyoverValues.Frame frame = new FlyoverValues.Frame(videoS * k / samples, videoS, new double[5]);
+				for (Item item : items) {
+					item.update(frame);
+				}
+				measure(width, frameHeight / scale);
+				stableWidth = Math.max(stableWidth, root.getMeasuredWidth());
+				stableHeight = Math.max(stableHeight, root.getMeasuredHeight());
+			}
+		}
+
+		/** Where the panel is on the video frame, in video pixels. */
+		@NonNull
+		RectF bounds() {
+			PointF p = position(stableWidth, stableHeight);
+			return new RectF(p.x * scale, p.y * scale, (p.x + stableWidth) * scale, (p.y + stableHeight) * scale);
+		}
+
+		@NonNull
+		private PointF position(int width, int height) {
+			float frameW = frameWidth / scale, frameH = frameHeight / scale;
+			float margin = (float) spec.optDouble("margin", 16) / scale;
+			int gravity = parseGravity(spec.optString("gravity", "top|left"));
+			int horizontal = gravity & Gravity.HORIZONTAL_GRAVITY_MASK;
+			int vertical = gravity & Gravity.VERTICAL_GRAVITY_MASK;
+			float x = horizontal == Gravity.RIGHT ? frameW - margin - width
+					: horizontal == Gravity.CENTER_HORIZONTAL ? (frameW - width) / 2 : margin;
+			float y = vertical == Gravity.BOTTOM ? frameH - margin - height
+					: vertical == Gravity.CENTER_VERTICAL ? (frameH - height) / 2 : margin;
+			return new PointF(x, y);
+		}
+
 		void draw(@NonNull Canvas canvas, @NonNull FlyoverValues.Frame frame) {
 			float opacity = opacity(frame.t);
 			if (opacity <= 0) {
@@ -116,21 +163,11 @@ class FlyoverPanels {
 				item.update(frame);
 			}
 			// sizes in phone pixels; the frame is frameWidth / scale of them wide
-			float frameW = frameWidth / scale, frameH = frameHeight / scale;
-			double w = spec.optDouble("width", 0);
-			int width = Math.round(w > 1 ? (float) w / scale : w > 0 ? (float) w * frameW : 0);
-			measure(width, frameH);
+			float frameH = frameHeight / scale;
+			measure(Math.max(stableWidth, requestedWidth()), frameH);
 
-
-			float margin = (float) spec.optDouble("margin", 16) / scale;
-			int gravity = parseGravity(spec.optString("gravity", "top|left"));
-			float x, y;
-			int horizontal = gravity & Gravity.HORIZONTAL_GRAVITY_MASK;
-			int vertical = gravity & Gravity.VERTICAL_GRAVITY_MASK;
-			x = horizontal == Gravity.RIGHT ? frameW - margin - root.getWidth()
-					: horizontal == Gravity.CENTER_HORIZONTAL ? (frameW - root.getWidth()) / 2 : margin;
-			y = vertical == Gravity.BOTTOM ? frameH - margin - root.getHeight()
-					: vertical == Gravity.CENTER_VERTICAL ? (frameH - root.getHeight()) / 2 : margin;
+			PointF at = position(root.getWidth(), Math.max(stableHeight, root.getHeight()));
+			float x = at.x, y = at.y;
 
 			int save = opacity < 1 ? canvas.saveLayerAlpha(null, Math.round(opacity * 255)) : canvas.save();
 			canvas.scale(scale, scale);
@@ -474,6 +511,34 @@ class FlyoverPanels {
 		for (Panel panel : panels) {
 			panel.draw(canvas, frame);
 		}
+	}
+
+	/** Fixes every panel's size to its widest over the video, so panels do not jump as their values change. */
+	void prepare(double videoS) {
+		for (Panel panel : panels) {
+			panel.prepare(videoS);
+		}
+	}
+
+	/** Panels that cover each other or one of the elements OsmAnd draws, for the request's warnings. */
+	@NonNull
+	String overlaps(@NonNull Map<String, RectF> taken) {
+		List<String> found = new ArrayList<>();
+		for (int i = 0; i < panels.size(); i++) {
+			RectF a = panels.get(i).bounds();
+			for (int j = i + 1; j < panels.size(); j++) {
+				if (RectF.intersects(a, panels.get(j).bounds())) {
+					found.add("panels " + (i + 1) + " and " + (j + 1));
+				}
+			}
+			for (Map.Entry<String, RectF> e : taken.entrySet()) {
+				if (RectF.intersects(a, e.getValue())) {
+					found.add("panel " + (i + 1) + " and the " + e.getKey());
+				}
+			}
+		}
+		return found.isEmpty() ? "" : "Overlapping on the frame: " + String.join(", ", found)
+				+ "; move them with gravity and margin";
 	}
 
 	@Nullable

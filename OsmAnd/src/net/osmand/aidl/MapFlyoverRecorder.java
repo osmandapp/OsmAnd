@@ -155,6 +155,8 @@ class MapFlyoverRecorder {
 			FlyoverOverlay overlay = new FlyoverOverlay(app, spec, params.getWidth(), params.getHeight());
 			FlyoverValues values = new FlyoverValues(app, tracks, spec.optJSONObject("data"));
 			FlyoverPanels panels = new FlyoverPanels(app, values, spec, params.getWidth(), params.getHeight());
+			panels.prepare(videoS);
+			String layoutWarning = panels.overlaps(overlay.takenAreas(params.getWidth(), params.getHeight()));
 			FlyoverCallouts callouts = new FlyoverCallouts(app, tracks, spec, params.getWidth(), params.getHeight(),
 					videoS, params.getFps());
 			int frames = (int) Math.round(videoS * params.getFps()) + 1;
@@ -235,6 +237,9 @@ class MapFlyoverRecorder {
 			params.setFilePath(file.getAbsolutePath());
 			params.setFrames(frames);
 			String warnings = unknownKeys(spec);
+			if (!layoutWarning.isEmpty()) {
+				warnings += (warnings.isEmpty() ? "" : "; ") + layoutWarning;
+			}
 			if (notIdleFrames > 0) {
 				warnings += (warnings.isEmpty() ? "" : "; ") + notIdleFrames + " frames were recorded before the map " +
 						"finished loading (" + notIdleReason + "); load_timeout_s gives frames more time";

@@ -118,6 +118,12 @@ Order: `wpt` in the request, then the waypoint's own tags, then `wpt_defaults`.
 and compass (top right, turns with the map), drawn as in OsmAnd. The attribution is always drawn bottom right.
 Keep panels clear of these corners with `margin`.
 
+Laying out panels: the frame's corners hold the profile icon (top left), compass (top right), ruler (bottom left)
+and attribution (bottom right); a chart usually goes `bottom|center` with the value panels above it or in the top
+corners below the OsmAnd elements (`margin` about 88 at 1280x720). Each panel keeps the size of its widest value over
+the whole video, so it does not jump. Panels covering each other or these elements are listed in `warnings`; fix the
+layout before a long render (a 1 s test video at a low fps is cheap).
+
 ## Panels — works
 
 Placed like a FrameLayout:
