@@ -385,8 +385,9 @@ class FlyoverTrack {
 		// the rest is always there, transparent when hidden: with the passed part alone the layer did not draw it
 		List<WptPt> after = rest.getPoints();
 		after.clear();
-		after.add(headPoint);
-		after.addAll(points.subList(Math.min(p.index + 1, points.size()), points.size()));
+		// from the track's point behind the head, not from the head: the direction arrows of the line are laid out
+		// from its start, and a start moving with the head would make them crawl
+		after.addAll(points.subList(Math.min(p.index, points.size() - 1), points.size()));
 		if (after.size() < 2) {
 			after.add(headPoint);
 		}
@@ -403,12 +404,14 @@ class FlyoverTrack {
 	}
 
 	/**
-	 * The head marker's place, then two points along its direction (from, to). The direction is the road's right
-	 * here (about 20 m each way), averaged over 0.6 s of video: the arrow follows the road, turns smoothly in bends
-	 * and does not cut across hairpins of a fast-forwarded track. Null when there is no head.
+	 * The head marker's place, then two points along its direction (from, to). The direction is the road's here,
+	 * over about 12 px of the screen each way (at least 20 m), averaged over 0.6 s of video: the arrow follows the
+	 * road, turns smoothly in bends, and seen from far it follows a zigzag's trend instead of spinning with each
+	 * hairpin. Null when there is no head.
 	 */
 	@Nullable
-	WptPt[] headPoints(double t) {
+	WptPt[] headPoints(double t, double metersPerPixel) {
+		double road = Math.max(HEAD_ROAD_M, 12 * metersPerPixel);
 		if ("none".equals(head) || !isVisible(t)) {
 			return null;
 		}
@@ -416,14 +419,14 @@ class FlyoverTrack {
 		double sin = 0, cos = 0;
 		for (int k = -3; k <= 3; k++) {
 			double d = at(t + k * 0.1).distance;
-			WptPt a = pointAt(Math.max(0, d - HEAD_ROAD_M)), b = pointAt(Math.min(getLength(), d + HEAD_ROAD_M));
+			WptPt a = pointAt(Math.max(0, d - road)), b = pointAt(Math.min(getLength(), d + road));
 			double w = 4 - Math.abs(k);
 			double bearing = Math.toRadians(bearing(a.getLat(), a.getLon(), b.getLat(), b.getLon()));
 			sin += w * Math.sin(bearing);
 			cos += w * Math.cos(bearing);
 		}
 		WptPt here = pointAt(p.distance);
-		LatLon ahead = MapUtils.rhumbDestinationPoint(here.getLat(), here.getLon(), HEAD_ROAD_M,
+		LatLon ahead = MapUtils.rhumbDestinationPoint(here.getLat(), here.getLon(), road,
 				Math.toDegrees(Math.atan2(sin, cos)));
 		WptPt to = new WptPt(ahead.getLatitude(), ahead.getLongitude());
 		to.setEle(here.getEle());

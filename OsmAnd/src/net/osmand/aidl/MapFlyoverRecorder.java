@@ -275,7 +275,9 @@ class MapFlyoverRecorder {
 				Canvas frameCanvas = new Canvas(frame);
 				overlay.draw(frameCanvas, camera[0], (float) camera[2], (float) camera[3]);
 				for (FlyoverTrack track : tracks) {
-					WptPt[] head = track.headPoints(t / 1000.0);
+					double metersPerPixel = 40075016 * Math.cos(Math.toRadians(camera[0]))
+							/ (tilePx * Math.pow(2, camera[2]));
+					WptPt[] head = track.headPoints(t / 1000.0, metersPerPixel);
 					if (head != null) {
 						Map<WptPt, PointF> pts = project(Arrays.asList(head),
 								Arrays.asList(track.number + ":head", track.number + ":from", track.number + ":to"),
