@@ -724,6 +724,9 @@ class MapFlyoverRecorder {
 			runInUiThread(() -> {
 				GpxSelectionHelper helper = app.getSelectedGpxHelper();
 				for (FlyoverTrack track : tracks) {
+					if (track.selected != null) {
+						track.selected.setStartFinishSegments(null);
+					}
 					SelectedGpxFile before = shownBefore.get(track.file.getAbsolutePath());
 					if (before != null) {
 						helper.selectGpxFile(before.getGpxFile(), GpxSelectionParams.newInstance().showOnMap());

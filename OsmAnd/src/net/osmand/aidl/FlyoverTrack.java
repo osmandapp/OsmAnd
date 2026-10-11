@@ -60,6 +60,8 @@ class FlyoverTrack {
 	/** The track's own profile (request or file), null when it uses the current one. */
 	@Nullable
 	final String profileKey;
+	@Nullable
+	private Integer styleColor;
 	private final double speedX;
 
 	/** A place on the track: between points {@code index} and {@code index + 1}, at {@code fraction}. */
@@ -210,12 +212,20 @@ class FlyoverTrack {
 
 	/** Style from the spec over the file's own; the file on the phone is not changed. */
 	private void applyStyle(@NonNull JSONObject spec) {
-		if (spec.has("color")) gpx.setColor(spec.optString("color"));
+		if (spec.has("color")) {
+			try {
+				// put on the segments in updateDisplay: a colour on the file would win over their fading
+				styleColor = Algorithms.parseColor(spec.optString("color"));
+			} catch (IllegalArgumentException ignored) {
+			}
+		}
 		if (spec.has("width")) gpx.setWidth(spec.optString("width"));
 		if (spec.has("coloring_type")) gpx.setColoringType(spec.optString("coloring_type"));
 		if (spec.has("color_palette")) gpx.setGradientColorPalette(spec.optString("color_palette"));
-		if (spec.has("show_arrows")) gpx.setShowArrows(spec.optBoolean("show_arrows"));
-		if (spec.has("show_start_finish")) gpx.setShowStartFinish(spec.optBoolean("show_start_finish"));
+		// as a route in OsmAnd: direction arrows and start / finish, unless the file or the request says otherwise
+		// (a saved track keeps the look the user gave it in OsmAnd)
+		if (spec.has("show_arrows") || !gpx.isShowArrowsSet()) gpx.setShowArrows(spec.optBoolean("show_arrows", true));
+		if (spec.has("show_start_finish") || !gpx.isShowStartFinishSet()) gpx.setShowStartFinish(spec.optBoolean("show_start_finish", true));
 		if (spec.has("split_type")) gpx.setSplitType(spec.optString("split_type"));
 		if (spec.has("split_interval")) gpx.setSplitInterval(spec.optDouble("split_interval"));
 		if (spec.has("visualization_3d")) gpx.set3DVisualizationType(spec.optString("visualization_3d"));
@@ -308,7 +318,7 @@ class FlyoverTrack {
 		if (original == null) {
 			original = new ArrayList<>(display);
 			// a colour on the file would win over the segments' colours, which carry the fading
-			Integer fileColor = gpx.getColor(null);
+			Integer fileColor = styleColor != null ? styleColor : gpx.getColor(null);
 			if (fileColor != null) {
 				for (TrkSegment s : original) {
 					s.setColor(fileColor);
@@ -317,6 +327,10 @@ class FlyoverTrack {
 			}
 		}
 		boolean progressive = "progressive".equals(draw);
+		if (progressive) {
+			// drawn in pieces, but start and finish are the whole track's
+			selected.setStartFinishSegments(original);
+		}
 		if (!progressive && fromS <= 0 && fadeS <= 0 && toS >= videoS) {
 			return false;
 		}
