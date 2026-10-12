@@ -443,7 +443,8 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 
 	protected void selectColorInPalette() {
 		SolidPaletteController controller = getColorController();
-		controller.selectPaletteItemSilently(controller.findPaletteItem(color, true));
+		// only a colour already in the palette is highlighted, a group colour is never added to it
+		controller.selectPaletteItemSilently(controller.findPaletteItem(color));
 	}
 
 	protected void updateSelectedColorText() {

@@ -80,6 +80,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			this.favorite = favorite;
 			this.group = favouritesHelper.getGroup(favorite);
 			this.selectedGroup = group != null ? group.toPointsGroup(app) : null;
+			// an existing favorite keeps its icon when it is moved to another folder
+			this.iconSelectedByUser = !editor.isNew();
 
 			setColor(getInitialColor());
 			setIcon(getInitialIconId());
@@ -192,16 +194,16 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			return iconName;
 		}
 
+		// the POI icon that the editor set for a new point
 		FavouritePoint favorite = getFavorite();
-		if (favorite != null) {
-			int iconId = favouritesHelper.getOriginalIconId(favorite);
-			if (iconId == 0) {
-				iconId = favorite.getIconId();
-			}
-			iconName = RenderingIcons.getBigIconName(iconId);
-			if (!Algorithms.isEmpty(iconName)) {
-				return iconName;
-			}
+		iconName = favorite != null ? RenderingIcons.getBigIconName(favorite.getIconId()) : null;
+		if (!Algorithms.isEmpty(iconName)) {
+			return iconName;
+		}
+		// a point without its own icon (an empty place on the map) gets the folder icon, as when the editor opens
+		iconName = group != null ? group.getIconName() : null;
+		if (!Algorithms.isEmpty(iconName) && RenderingIcons.getBigIconResourceId(iconName) != 0) {
+			return iconName;
 		}
 		return getDefaultIconName();
 	}
