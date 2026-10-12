@@ -24,7 +24,7 @@ class ConnectorDiscovery(ctx: Context) {
 	fun register(port: Int) {
 		unregister()
 		val info = NsdServiceInfo().apply {
-			serviceName = "OsmAnd on ${Build.MODEL}"
+			serviceName = "OsmAnd on ${Build.MODEL}${BuildConfig.SERVICE_SUFFIX}"
 			serviceType = SERVICE_TYPE
 			setPort(port)
 			setAttribute("path", "/mcp")

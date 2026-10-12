@@ -437,7 +437,9 @@ public class RoutingHelper {
 		}
 		float posTolerance = getPosTolerance(currentLocation.hasAccuracy() ? currentLocation.getAccuracy() : 0);
 		boolean calculateRoute = false;
+		boolean deviationChanged;
 		synchronized (this) {
+			boolean wasDeviatedFromRoute = isDeviatedFromRoute;
 			isDeviatedFromRoute = false;
 			double distOrth = 0;
 
@@ -527,6 +529,10 @@ public class RoutingHelper {
 			if (!route.isEmpty()) {
 				lastGoodRouteLocation = currentLocation;
 			}
+			deviationChanged = wasDeviatedFromRoute != isDeviatedFromRoute;
+		}
+		if (deviationChanged) {
+			fireRoutingDataUpdateEvent();
 		}
 
 		if (calculateRoute) {

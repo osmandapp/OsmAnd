@@ -19,6 +19,10 @@
 	<string name="eta_adapt_to_my_speed">Adapt to my speed</string>
 	<string name="eta_adapt_to_my_speed_descr">Arrival time is based on your speed over the last %1$s.</string>
 	<string name="eta_adapt_to_my_speed_off_descr">Arrival time is based on the expected speed on each road of the route. Turn on to base it on how fast you actually move.</string>
+	<string name="flyover_recording">Recording a map video: %1$s</string>
+	<string name="flyovers">Flyovers</string>
+	<string name="map_source_saved_as">Map source saved as \'%1$s\'.</string>
+	<string name="map_source_folder_not_created">Could not create a folder for the map source. Try a different name.</string>
 	<string name="multimedia_notes_view_descr">Your A/V notes are in %1$s.</string>
 	<string name="shared_string_file">File</string>
 	<string name="shared_string_format">Format</string>

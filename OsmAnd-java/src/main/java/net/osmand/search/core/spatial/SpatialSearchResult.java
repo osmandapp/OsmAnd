@@ -234,6 +234,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (preciseLatlon != null) {
 			return preciseLatlon;
 		}
+		if (unitedObject != null && isRoute()) {
+			return unitedObject.getLocation(); // see moveToNearestRouteSegment()
+		}
 		for (SpatialSearchResultRef r : objs) {
 			if (!r.atom.isPoiCategory()) {
 				return r.atom.getResultLocation();
@@ -291,6 +294,23 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			result.add(value);
 		}
 		return result;
+	}
+
+	void moveToNearestRouteSegment(LatLon location) {
+		// a route is split into segments: show the merged row at the segment nearest to the user
+		if (location == null || unitedObject == null || !isRoute()) {
+			return;
+		}
+		LatLon nearest = null;
+		for (Object o : unitedObject.getObjects()) {
+			LatLon l = o instanceof Amenity a && a.getRouteId() != null ? a.getLocation() : null;
+			if (l != null && (nearest == null || MapUtils.getDistance(l, location) < MapUtils.getDistance(nearest, location))) {
+				nearest = l;
+			}
+		}
+		if (nearest != null) {
+			unitedObject.getSyntheticAmenity().setLocation(nearest);
+		}
 	}
 
 	public void addExtraResult(SpatialSearchResult other, String lang) {
@@ -712,6 +732,11 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			}
 		}
 		return null;
+	}
+
+	private boolean isRoute() {
+		// the first object can be the wiki article of the route (wiki_place with route_id)
+		return preciseLatlon == null && getFirstRefObject(false) instanceof Amenity amenity && amenity.getRouteId() != null;
 	}
 
 	private String getRouteId() {

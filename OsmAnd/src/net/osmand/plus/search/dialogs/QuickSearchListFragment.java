@@ -128,6 +128,9 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 					SearchResult sr = item.getSearchResult();
 					if (item.isSpatialCategorySearchResult()) {
 						onSpatialCategorySearchResultClick(sr);
+					} else if (sr.objectType == SUGGESTION) {
+						// "did you mean": the corrected query is searched as typed
+						dialogFragment.replaceQueryWithText(sr.localeName.trim() + " ");
 					} else if (sr.objectType == POI
 							|| sr.objectType == LOCATION
 							|| sr.objectType == HOUSE

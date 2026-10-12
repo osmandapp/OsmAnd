@@ -5296,4 +5296,24 @@
     <string name="ais_run_in_background_desc">Fortsätter ta emot medan skärmen är avstängd.</string>
     <string name="ais_no_position_data">Ingen positionsdata</string>
     <string name="ais_receiving_position_data">Tar emot positionsdata</string>
+    <string name="multimedia_notes_view_descr">Dina A/V-anteckningar är i %1$s.</string>
+    <string name="shared_string_file">Fil</string>
+    <string name="shared_string_format">Format</string>
+    <string name="shared_string_resolution">Upplösning</string>
+    <string name="detach_external_media_descr">Filen kommer inte längre visas i denna favorit. Den finns dock kvar på din enhet.</string>
+    <string name="detach_external_media_descr_plural">Filerna kommer inte längre visas i denna favorit. De finns dock kvar på din enhet.</string>
+    <string name="media_delete_failed">Kunde inte radera mediafil.</string>
+    <string name="media_library_empty_title">Ingen mediafil ännu</string>
+    <string name="shared_string_grid">Rutnät</string>
+    <string name="shared_string_group">Grupp</string>
+    <string name="gallery_sort_size_large_small">Störst storlek först</string>
+    <string name="aidl_permissions_request_title">Tillåt %1$s att använda OsmAnd?</string>
+    <string name="aidl_app_disabled_descr">OsmAnd ignorerar alla förfrågningar från denna app.</string>
+    <string name="aidl_permissions_deny">Tillåt inte</string>
+    <string name="aidl_group_favorites_descr">Favoriter och kartmarkeringar</string>
+    <string name="aidl_group_tracks_edit_descr">Importera, visa och radera</string>
+    <string name="aidl_group_notes">Anteckningar</string>
+    <string name="aidl_group_notes_descr">Foto-, ljud- och videoanteckningar</string>
+    <string name="aidl_group_screen">Skärmbilder</string>
+    <string name="aidl_group_screen_descr">Ta bilder av kartskärmen</string>
 </resources>

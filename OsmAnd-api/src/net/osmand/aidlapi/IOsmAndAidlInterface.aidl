@@ -34,6 +34,9 @@ import net.osmand.aidlapi.gpx.GpxSearchParams;
 import net.osmand.aidlapi.gpx.AGpxSearchResult;
 import net.osmand.aidlapi.map.SetMapCameraParams;
 import net.osmand.aidlapi.map.MapScreenshotParams;
+import net.osmand.aidlapi.map.MapFlyoverParams;
+import net.osmand.aidlapi.map.AFlyoverFile;
+import net.osmand.aidlapi.map.FlyoverFileParams;
 import net.osmand.aidlapi.map.AMapScreenshot;
 import net.osmand.aidlapi.info.AMapWidgetValue;
 import net.osmand.aidlapi.gpx.HideGpxParams;
@@ -1008,4 +1011,26 @@ interface IOsmAndAidlInterface {
      * @return AGpxSearchResult, or null if the app has no access
      */
     AGpxSearchResult searchGpx(in GpxSearchParams params);
+
+    /**
+     * Fly the map camera through key frames and record the flight into an MP4 video, rendered off the screen
+     * frame by frame, so the video is smooth however slow the device is. The phone's map pauses meanwhile.
+     * Needs the OpenGL renderer. Blocks until the video is written; the result is in params.
+     *
+     * @return true if the video was written; params.getError() says why not
+     */
+    boolean recordMapFlyover(inout MapFlyoverParams params);
+
+    /**
+     * Flyover videos recorded on the phone, newest first.
+     */
+    boolean getFlyoverFiles(out List<AFlyoverFile> files);
+
+    /**
+     * Opens a finished flyover video for reading, to copy it off the phone. The caller closes the descriptor.
+     *
+     * @return read-only file descriptor, or null if there is no such video, it is still being recorded
+     * or the app has no access
+     */
+    ParcelFileDescriptor openFlyoverFile(in FlyoverFileParams params);
 }

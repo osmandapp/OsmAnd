@@ -71,6 +71,15 @@
 -keepclassmembers enum net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty { <fields>; }
 -keep class org.openplacereviews.** { *; }
 
+# --- Listener lifetime anchors ---
+# PreferenceWithListener, MapTileDownloader, VoiceRouter and other registries hold listeners weakly;
+# the owner keeps the only strong reference in a field it never reads, which R8 removes as unused.
+# Matched by field type, so new listener fields are covered without listing their classes.
+-keepclassmembers,allowobfuscation class * {
+	net.osmand.**Listener *;
+	net.osmand.**Callback *;
+}
+
 # --- Reflection on R: poi_*/translation strings and h_*/mm_* rendering icons are read by field name ---
 -keepclassmembers class net.osmand.plus.R$string { public static <fields>; }
 -keepclassmembers class net.osmand.plus.R$drawable { public static <fields>; }
@@ -88,14 +97,17 @@
 -keep,allowshrinking,allowoptimization class net.osmand.osm.MapPoiTypes
 -keep,allowshrinking,allowoptimization class net.osmand.osm.MapRenderingTypes
 -keep,allowshrinking,allowoptimization class net.osmand.map.OsmandRegions
--keep,allowshrinking,allowoptimization class net.osmand.binary.CommonWordsMultiIndex
 # ICU4J (Reshaper: Bidi, ArabicShaping) reads data/icudt49b/*.icu relative to its own classes.
 -keep,allowshrinking,allowoptimization class com.ibm.icu.**
 
 # --- Class names used as strings ---
 -keep class net.osmand.plus.base.EnableStrictMode { <init>(); }
-# app:fragment in res/xml preference screens (aapt does not generate rules for them).
+# app:fragment in res/xml preference screens is a literal class name, and the fragment is
+# instantiated by that name, so the class must not be renamed or removed (aapt adds no rules).
+# PreferenceFragmentCompat subclasses are covered here; any other app:fragment target must be listed.
 -keep class * extends androidx.preference.PreferenceFragmentCompat { <init>(); }
+-keep class net.osmand.plus.profiles.EditProfilesFragment { <init>(); }
+-keep class net.osmand.plus.settings.fragments.CoordinatesFormatFragment { <init>(); }
 # app:layout_behavior in layouts.
 -keep class * extends androidx.coordinatorlayout.widget.CoordinatorLayout$Behavior {
 	<init>(android.content.Context, android.util.AttributeSet);

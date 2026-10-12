@@ -11,7 +11,8 @@ class McpHttpServer(
 	port: Int,
 	private val token: String,
 	private val tools: OsmAndTools,
-	private val bridgeScript: String?
+	private val bridgeScript: String?,
+	private val onActivity: () -> Unit = {}
 ) : NanoHTTPD(host, port) {
 
 	companion object {
@@ -21,7 +22,8 @@ class McpHttpServer(
 		private const val INSTRUCTIONS = "Controls the OsmAnd map app on an Android phone through OsmAnd's AIDL API. " +
 				"Start with osmand_status. Settings are changed with osmand_set_preference; most settings are per profile. " +
 				"For pictures: show a track, point the camera with osmand_set_camera, then osmand_screenshot; " +
-				"track numbers come from osmand_track_stats and osmand_track_points."
+				"track numbers come from osmand_track_stats and osmand_track_points. " +
+				"Before bigger tasks read the guide: osmand_guide topic flyover before a flyover video."
 	}
 
 	override fun serve(session: IHTTPSession): Response {
@@ -29,13 +31,17 @@ class McpHttpServer(
 		if (session.uri == "/$BRIDGE_FILE" && session.method == Method.GET && bridgeScript != null) {
 			return newFixedLengthResponse(Response.Status.OK, "text/x-python", bridgeScript)
 		}
-		if (session.uri.trimEnd('/') != "/mcp") return text(Response.Status.NOT_FOUND, "Not found")
+		val files = session.uri.startsWith(FLYOVER_FILES_PATH)
+		if (session.uri.trimEnd('/') != "/mcp" && !files) return text(Response.Status.NOT_FOUND, "Not found")
 		val origin = session.headers["origin"]
 		if (origin != null && !origin.matches(Regex("https?://(localhost|127\\.0\\.0\\.1)(:\\d+)?"))) {
 			return text(Response.Status.FORBIDDEN, "Forbidden origin")
 		}
 		if (session.headers["authorization"] != "Bearer $token") {
 			return text(Response.Status.UNAUTHORIZED, "Unauthorized")
+		}
+		if (files) {
+			return if (session.method == Method.GET) flyoverFile(session) else text(Response.Status.METHOD_NOT_ALLOWED, "Use GET")
 		}
 		return when (session.method) {
 			Method.POST -> handlePost(session)
@@ -77,7 +83,13 @@ class McpHttpServer(
 				"tools/call" -> {
 					val name = params.getString("name")
 					Log.i(TAG, "tools/call $name")
-					rpcResult(id, tools.call(name, params.optJSONObject("arguments") ?: JSONObject()))
+					onActivity()
+					try {
+						rpcResult(id, tools.call(name, params.optJSONObject("arguments") ?: JSONObject()))
+					} finally {
+						// a long call (a flyover) counts from its end
+						onActivity()
+					}
 				}
 				else -> rpcError(id, -32601, "Method not found: $method")
 			}
@@ -85,6 +97,38 @@ class McpHttpServer(
 			rpcError(id, -32602, e.message ?: e.toString())
 		}
 		return json(response)
+	}
+
+	/** A recorded flyover video, streamed; "Range: bytes=N-" continues a download that broke off. */
+	private fun flyoverFile(session: IHTTPSession): Response {
+		val name = session.uri.removePrefix(FLYOVER_FILES_PATH)
+		onActivity()
+		val opened = try {
+			tools.openFlyover(name)
+		} catch (e: Exception) {
+			return text(Response.Status.INTERNAL_ERROR, e.message ?: e.toString())
+		}
+		val (input, size) = opened ?: return text(Response.Status.NOT_FOUND, "No finished flyover video '$name' " +
+				"(an older OsmAnd cannot hand videos out, or the app lacks the Screenshots group)")
+		val range = Regex("bytes=(\\d+)-(\\d*)").matchEntire(session.headers["range"] ?: "")
+		val from = range?.groupValues?.get(1)?.toLongOrNull() ?: 0L
+		if (from >= size && size > 0) {
+			input.close()
+			return text(Response.Status.RANGE_NOT_SATISFIABLE, "The video has $size bytes")
+		}
+		val to = range?.groupValues?.get(2)?.toLongOrNull()?.coerceAtMost(size - 1) ?: (size - 1)
+		var skipped = 0L
+		while (skipped < from) {
+			val n = input.skip(from - skipped)
+			if (n <= 0) break
+			skipped += n
+		}
+		val status = if (range != null) Response.Status.PARTIAL_CONTENT else Response.Status.OK
+		return newFixedLengthResponse(status, "video/mp4", input, to - from + 1).apply {
+			addHeader("Accept-Ranges", "bytes")
+			addHeader("Content-Disposition", "attachment; filename=\"${name.replace("\"", "")}\"")
+			if (range != null) addHeader("Content-Range", "bytes $from-$to/$size")
+		}
 	}
 
 	private fun rpcResult(id: Any?, result: JSONObject) =

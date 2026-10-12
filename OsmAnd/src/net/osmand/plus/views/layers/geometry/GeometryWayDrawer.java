@@ -77,6 +77,11 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		this.context = context;
 	}
 
+	/** While a flyover video is recorded the arrows stay at their places on a growing line and while zooming. */
+	private boolean isArrowsFixedOnPath() {
+		return getContext().getApp().getOsmandMap().getMapView().isArrowsFixedOnPath();
+	}
+
 	public T getContext() {
 		return context;
 	}
@@ -212,6 +217,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 						hasColorizationMapping, hasOutlineColorizationMapping, color, outlineColor);
 
 				line.setShowArrows(showPathBitmaps);
+				line.setArrowsFixedOnPath(isArrowsFixedOnPath());
 				if (showPathBitmaps && pathBitmap != null) {
 					line.setPathIconStep(bitmapStep);
 					if (specialPathBitmap != null && specialBitmapStep != -1) {
@@ -318,7 +324,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			builder.setFillColor(NativeUtilities.createFColorARGB(color));
 			builder.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor));
 		}
-		builder.buildAndAddToCollection(collection);
+		builder.buildAndAddToCollection(collection).setArrowsFixedOnPath(isArrowsFixedOnPath());
 	}
 
 	protected void updateVectorLine(@NonNull VectorLinesCollection collection,

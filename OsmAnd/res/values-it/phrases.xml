@@ -346,7 +346,7 @@
     <string name="poi_public_transport_platform_trolleybus">Fermata filobus</string>
     <string name="poi_railway_station">Stazione ferroviaria</string>
     <string name="poi_water_well">Pozzo</string>
-    <string name="poi_standpipe">Tubazione montante d\'acqua</string>
+    <string name="poi_standpipe">Colonna montante antincendio</string>
     <string name="poi_water_works">Impianto idrico</string>
     <string name="poi_boatyard">Cantiere navale</string>
     <string name="poi_water_tower">Torre idrica</string>
@@ -647,7 +647,7 @@
     <string name="poi_candles">Negozio di candele</string>
     <string name="poi_leather">Negozio di pelletteria</string>
     <string name="poi_music">Negozio di musica</string>
-    <string name="poi_tyres">Gommista</string>
+    <string name="poi_tyres">Gomme;Gomma;Pneumatico;Negozio di pneumatici;Pneumatici</string>
     <string name="poi_watches">Negozio di orologi</string>
     <string name="poi_games">Giochi</string>
     <string name="poi_model">Negozio di modellistica</string>
@@ -2287,7 +2287,7 @@
     <string name="poi_boat_jetski_rental_no">Jetski: no</string>
     <string name="poi_boat_kayak_rental_yes">Kayak: sì</string>
     <string name="poi_boat_kayak_rental_no">Kayak: no</string>
-    <string name="poi_surface_tartan">Tartan</string>
+    <string name="poi_surface_tartan">Superficie: tartan</string>
     <string name="poi_checkpoint_type">Tipo Checkpoint</string>
     <string name="poi_bowls">Ciotole</string>
     <string name="poi_water_place_access">Accesso al luogo dell\'acqua</string>
@@ -2300,7 +2300,7 @@
     <string name="poi_cuisine_yogurt">Yogurt</string>
     <string name="poi_cuisine_cajun">Cajun</string>
     <string name="poi_motorcycle_type_standard">Standard</string>
-    <string name="poi_surface_clay">Argilla</string>
+    <string name="poi_surface_clay">Superficie: argilla</string>
     <string name="poi_operational_status_needs_maintenance">Necessità di manutenzione</string>
     <string name="poi_water_supply_pump">Pompa</string>
     <string name="poi_socket_schuko">Presa: Schuko</string>
@@ -3314,7 +3314,7 @@
     <string name="poi_printer_ink">Negozio di inchiostro per stampanti</string>
     <string name="poi_club_doityourself">Club DIY</string>
     <string name="poi_club_aviation">Club di aviazione</string>
-    <string name="poi_surface_metal_grid">Griglia metallica</string>
+    <string name="poi_surface_metal_grid">Superficie: griglia metallica</string>
     <string name="poi_location_rooftop">Posizione: terrazza</string>
     <string name="poi_location_overhead">Posizione: sopraelevata</string>
     <string name="poi_location_overground">Posizione: in superficie</string>
@@ -3371,8 +3371,8 @@
     <string name="poi_memorial_jizo">Jizo</string>
     <string name="poi_wetland_reedbed">Canneto</string>
     <string name="poi_wetland_saltmarsh">Palude salata</string>
-    <string name="poi_wetland_string_bog">Palude di liane</string>
-    <string name="poi_resource_dimension_stone">Pietra dimensionale</string>
+    <string name="poi_wetland_string_bog">Torbiera a cordoni</string>
+    <string name="poi_resource_dimension_stone">Pietra da costruzione</string>
     <string name="poi_bridge_movable_swing">Tipo ponte mobile: oscillante</string>
     <string name="poi_hiking_filter">Adatto per l\'escursionismo</string>
     <string name="poi_notice">Avviso, segnale marittimo</string>
@@ -3424,8 +3424,8 @@
     <string name="poi_healthcare_speciality_plastic_surgery">Chirurgia plastica</string>
     <string name="poi_historic_period_stone_bronze_undetermined">Periodo storico: età della pietra/età del bronzo (indeterminato)</string>
     <string name="poi_historic_period_ptolemaic_egypt">Periodo storico: Egitto tolemaico (305 a.C. - 30 a.C.)</string>
-    <string name="poi_wetland_palsa_bog">Palude di palsa</string>
-    <string name="poi_industrial_wellsite">Tipo: pozzo</string>
+    <string name="poi_wetland_palsa_bog">Torbiera a palse</string>
+    <string name="poi_industrial_wellsite">Tipo: sito di perforazione</string>
     <string name="poi_industrial_brickyard">Tipo: fornace</string>
     <string name="poi_quango">Quango</string>
     <string name="poi_castle_type_shiro">Tipo castello: shiro</string>
@@ -3465,7 +3465,7 @@
     <string name="poi_pow_camp">Tipo: campo di prigionia</string>
     <string name="poi_bathing_yes">Bagno: sì</string>
     <string name="poi_boat_storage">Deposito barche</string>
-    <string name="poi_conveying_yes">Trasporto: sì</string>
+    <string name="poi_conveying_yes">Trasmissione: sì</string>
     <string name="poi_fitness_station">Centro fitness</string>
     <string name="poi_hackerspace">Hackerspace</string>
     <string name="poi_fireworks">Negozio di fuochi d\'artificio</string>
@@ -3936,7 +3936,7 @@
     <string name="poi_healthcare_speciality_palliative_medicine">Medicina palliativa</string>
     <string name="poi_squash">Squash</string>
     <string name="poi_fair_trade_only">Solo prodotti del commercio equo e solidale</string>
-    <string name="poi_forestry_allotment">Segnavia: orto forestale</string>
+    <string name="poi_forestry_allotment">Segnavia: appezzamento forestale</string>
     <string name="poi_waste_accepted">Rifiuti accettati</string>
     <string name="poi_vending_machine_fuel_filter">Distributori automatici di carburante;Distributori di carburante</string>
     <string name="poi_cemt">CEMT</string>
@@ -4038,7 +4038,7 @@
     <string name="poi_tower_construction_dish">Costruzione: piatto</string>
     <string name="poi_resort_kids_camp">Campo per bambini</string>
     <string name="poi_government_transportation">Trasporti</string>
-    <string name="poi_surface_artificial_turf">Erba artificiale</string>
+    <string name="poi_surface_artificial_turf">Superficie: erba artificiale</string>
     <string name="poi_socket_typee_output_high">Alto</string>
     <string name="poi_socket_cee_blue_voltage">Presa: CEE blu: tensione</string>
     <string name="poi_socket_cee_red_16a_voltage">Presa: CEE rossa 16A: tensione</string>
@@ -4052,7 +4052,7 @@
     <string name="poi_office_podologist">Studio del podologo</string>
     <string name="poi_tower_construction_concealed">Costruzione: nascosta</string>
     <string name="poi_boat_dinghy_rental_yes">Gommone: sì</string>
-    <string name="poi_surface_decoturf">Erba decorativa</string>
+    <string name="poi_surface_decoturf">Superficie: DecoTurf</string>
     <string name="poi_water_supply_water_trucking">Trasporto di acqua</string>
     <string name="poi_depot">Deposito</string>
     <string name="poi_post_flats">Pianeggiante</string>
@@ -4953,7 +4953,7 @@
     <string name="poi_barrier_chain">Catena</string>
     <string name="poi_barrier_log">Tronco</string>
     <string name="poi_barrier_sliding_gate">Cancello scorrevole</string>
-    <string name="poi_surface_chipseal">Chipseal</string>
+    <string name="poi_surface_chipseal">Superficie: pavimentazione di graniglia e asfalto</string>
     <string name="poi_surface_acrylic">Superficie: acrilico</string>
     <string name="poi_surface_carpet">Superficie: moquette</string>
     <string name="poi_surface_laterite">Superficie: laterite</string>

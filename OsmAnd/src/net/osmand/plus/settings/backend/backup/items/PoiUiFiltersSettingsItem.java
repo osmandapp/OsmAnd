@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -172,7 +173,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 	JSONObject writeItemsToJson(@NonNull JSONObject json) {
 		JSONArray jsonArray = new JSONArray();
 		Gson gson = new Gson();
-		Type type = new TypeToken<HashMap<PoiCategory, LinkedHashSet<String>>>() {
+		Type type = new TypeToken<HashMap<String, LinkedHashSet<String>>>() {
 		}.getType();
 		if (!items.isEmpty()) {
 			try {
@@ -183,6 +184,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 					jsonObject.put("filterByName", filter.getFilterByName());
 
 					Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
+					Map<String, LinkedHashSet<String>> serializedAcceptedTypes = new LinkedHashMap<>();
 					for (PoiCategory category : acceptedTypes.keySet()) {
 						LinkedHashSet<String> poiTypes = acceptedTypes.get(category);
 						if (poiTypes == null) {
@@ -193,9 +195,10 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 							}
 							acceptedTypes.put(category, poiTypes);
 						}
+						serializedAcceptedTypes.put(category.getKeyName(), poiTypes);
 					}
 
-					jsonObject.put("acceptedTypes", gson.toJson(acceptedTypes, type));
+					jsonObject.put("acceptedTypes", gson.toJson(serializedAcceptedTypes, type));
 					jsonArray.put(jsonObject);
 				}
 				json.put("items", jsonArray);

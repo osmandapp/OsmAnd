@@ -55,7 +55,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private AdditionalInfoBundle mergedAmenityInfoBundle;
 	private Map<String, String> mergedAmenityExtensions = new HashMap<>();
 	private Map<String, String> sourceAmenityExtensions = Collections.emptyMap();
-	private Set<String> genericFallbackKeys = Collections.emptySet();
+	private Set<String> externalNamespaceKeys = Collections.emptySet();
 
 	public FavouritePointMenuBuilder(@NonNull MapActivity activity, @NonNull FavouritePoint point, @Nullable Amenity amenity) {
 		super(activity);
@@ -75,7 +75,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		if (amenity == null) {
 			setAmenity(helper.findAmenityByIdentity(originName, lat, lon, storedExtensions));
 		}
-		genericFallbackKeys = AmenityExtensionsHelper.getStoredExtensionFallbackKeys(storedExtensions);
+		externalNamespaceKeys = AdditionalInfoBundle.getExternalNamespaceKeys(storedExtensions);
 		mergedAmenityExtensions = helper.getUpdatedAmenityExtensions(storedExtensions, amenity);
 		mergedAmenityInfoBundle = new AdditionalInfoBundle(app.getPoiTypes(), mergedAmenityExtensions);
 		if (amenity != null) {
@@ -112,7 +112,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 		if (!Algorithms.isEmpty(mergedAmenityExtensions)) {
 			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, mergedAmenityInfoBundle);
-			helper.setGenericFallbackKeys(genericFallbackKeys);
+			helper.setExternalNamespaceKeys(externalNamespaceKeys);
 			helper.setLight(isLightContent());
 			helper.setLatLon(getLatLon());
 			helper.setCollapseExpandListener(getCollapseExpandListener());
