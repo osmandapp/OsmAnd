@@ -40,7 +40,6 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.KeepListenerReference;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
@@ -79,9 +78,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	private MapTileLayer overlayLayer;
 	private MapTileLayer underlayLayer;
-	@KeepListenerReference
 	private StateChangedListener<String> underlayListener;
-	@KeepListenerReference
 	private StateChangedListener<Integer> overlayLayerListener;
 	private CallbackWithObject<Boolean> updateConfigureMapItemCallback;
 

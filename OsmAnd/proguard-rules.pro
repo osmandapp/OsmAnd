@@ -71,11 +71,13 @@
 -keepclassmembers enum net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty { <fields>; }
 -keep class org.openplacereviews.** { *; }
 
-# --- Preference listener lifetime anchors ---
-# PreferenceWithListener stores callbacks weakly.
-# Annotated fields are strong lifetime anchors and must not be optimized away.
+# --- Listener lifetime anchors ---
+# PreferenceWithListener, MapTileDownloader, VoiceRouter and other registries hold listeners weakly;
+# the owner keeps the only strong reference in a field it never reads, which R8 removes as unused.
+# Matched by field type, so new listener fields are covered without listing their classes.
 -keepclassmembers,allowobfuscation class * {
-	@net.osmand.plus.settings.backend.preferences.KeepListenerReference <fields>;
+	net.osmand.**Listener *;
+	net.osmand.**Callback *;
 }
 
 # --- Reflection on R: poi_*/translation strings and h_*/mm_* rendering icons are read by field name ---
