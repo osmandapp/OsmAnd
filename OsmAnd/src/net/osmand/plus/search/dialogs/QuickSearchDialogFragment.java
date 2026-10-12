@@ -2250,6 +2250,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_postcode, getString(R.string.select_postcode), v -> {
 			searchEditText.setHint(R.string.type_postcode);
 			startPostcodeSearch();
+			setResultCollection(null);
 			mainSearchFragment.getAdapter().clear();
 			updateTabBarVisibility(false);
 			openKeyboard();
