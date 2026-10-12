@@ -3798,7 +3798,7 @@
     <string name="poi_city_block">Stadtteil</string>
     <string name="poi_borough">Bezirk</string>
     <string name="poi_elevator">Aufzug</string>
-    <string name="poi_departures_board_timetable">Flugplan;Abflugtafel</string>
+    <string name="poi_departures_board_timetable">Fahrplan;Aushangfahrplan</string>
     <string name="poi_departures_board_realtime">Echtzeit;Abflugtafel</string>
     <string name="poi_departures_board_delay">Verspätung;Abflugtafel</string>
     <string name="poi_departures_board_yes">Ja;Abflugtafel</string>
