@@ -468,4 +468,9 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 	public interface StorageSelectionListener {
 		void onStorageSelected(@NonNull StorageItem storageItem);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "data_storage";
+	}
 }

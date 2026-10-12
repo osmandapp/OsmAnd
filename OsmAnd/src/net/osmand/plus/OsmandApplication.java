@@ -1280,6 +1280,14 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
+	public void logMapDownloadEvent(@NonNull String event, @NonNull IndexItem item, long time, @NonNull String details) {
+		try {
+			analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName() + " in " + time + " msec " + details, AnalyticsHelper.EVENT_TYPE_MAP_DOWNLOAD);
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+	}
+
 	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
 		return mapViewTrackingUtilities;
 	}

@@ -722,4 +722,9 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 		ConfigureWidgetsFragment.showInstance(activity, panel, appMode, args);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "configure_widgets";
+	}
 }

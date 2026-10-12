@@ -567,4 +567,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			OsmAndTaskManager.executeTask(nativeLibraryLoadTask);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "development_settings";
+	}
 }

@@ -932,4 +932,9 @@ public class QuickActionListFragment extends BaseFullScreenFragment implements Q
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "quick_action_list";
+	}
 }

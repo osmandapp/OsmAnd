@@ -363,4 +363,9 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment implemen
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "gpx_approximation";
+	}
 }

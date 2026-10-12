@@ -380,4 +380,9 @@ public class SharedStorageWarningFragment extends BaseFullScreenFragment impleme
 		selectedStorage = storageItem;
 		setupMigrationFolders();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "shared_storage_warning";
+	}
 }

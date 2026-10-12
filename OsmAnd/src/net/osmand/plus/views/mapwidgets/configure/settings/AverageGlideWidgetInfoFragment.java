@@ -57,4 +57,9 @@ public class AverageGlideWidgetInfoFragment extends BaseSimpleWidgetInfoFragment
 		super.applySettings();
 		widget.setMeasuredInterval(appMode, timeIntervalCard.getSelectedIntervalMillis());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "average_glide_widget_info";
+	}
 }

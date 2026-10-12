@@ -5,6 +5,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.shared.panoramax.PanoramaxApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +35,7 @@ class GetPanoramaxUserAsyncTask extends AsyncTask<String, Void, Pair<String, Str
 	protected Pair<String, String> doInBackground(String... params) {
 		try {
 			String query = URLEncoder.encode(params[0], "UTF-8");
-			URL url = new URL(String.format(PanoramaxConstants.USER_SEARCH_URL, query));
+			URL url = new URL(PanoramaxApi.getUserSearchUrl(query));
 			URLConnection conn = NetworkUtils.getHttpURLConnection(url);
 
 			StringBuilder json = new StringBuilder(1024);

@@ -541,4 +541,9 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "tracks_tabs";
+	}
 }

@@ -650,4 +650,9 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 	public interface OnSaveButtonClickListener {
 		void onSaveButtonClick();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "edit_poi";
+	}
 }

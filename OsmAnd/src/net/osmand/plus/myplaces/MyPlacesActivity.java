@@ -43,6 +43,8 @@ import net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.favorites.dialogs.SearchFavoriteFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
+import net.osmand.plus.flyover.FlyoversFragment;
+import net.osmand.plus.flyover.MapFlyoverRecorder;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.InsetTarget;
@@ -65,6 +67,7 @@ public class MyPlacesActivity extends TabActivity {
 
 	public static final int GPX_TAB = R.string.shared_string_tracks;
 	public static final int FAV_TAB = R.string.shared_string_my_favorites;
+	public static final int FLYOVERS_TAB = R.string.flyovers;
 
 	private LockableViewPager viewPager;
 	private PagerSlidingTabStrip mSlidingTabLayout;
@@ -114,13 +117,7 @@ public class MyPlacesActivity extends TabActivity {
 				if (intent.hasExtra(MapActivity.INTENT_PARAMS)) {
 					intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
 					int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
-					int pagerItem = 0;
-					for (int n = 0; n < tabItems.size(); n++) {
-						if (tabItems.get(n).resId == tabId) {
-							pagerItem = n;
-							break;
-						}
-					}
+					int pagerItem = resolveTabIndex(tabItems, tabId);
 					viewPager.setCurrentItem(pagerItem, false);
 				}
 			}
@@ -153,12 +150,7 @@ public class MyPlacesActivity extends TabActivity {
 		appBar.setOutlineProvider(null);
 
 		Integer tabId = settings.FAVORITES_TAB.get();
-		int tab = 0;
-		for (int i = 0; i < tabItems.size(); i++) {
-			if (tabItems.get(i).resId == tabId) {
-				tab = i;
-			}
-		}
+		int tab = resolveTabIndex(tabItems, tabId);
 		tabSize = tabItems.size();
 		setViewPagerAdapter(viewPager, tabItems);
 		mSlidingTabLayout.setViewPager(viewPager);
@@ -278,8 +270,20 @@ public class MyPlacesActivity extends TabActivity {
 		List<TabItem> mTabs = new ArrayList<>();
 		mTabs.add(getTabIndicator(FAV_TAB, FavoriteFoldersFragment.class));
 		mTabs.add(getTabIndicator(GPX_TAB, AvailableTracksFragment.class));
+		if (!MapFlyoverRecorder.listVideos(app).isEmpty()) {
+			// map videos recorded through the API: a tab only while there are some
+			mTabs.add(getTabIndicator(FLYOVERS_TAB, FlyoversFragment.class));
+		}
 		PluginsHelper.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		return mTabs;
+	}
+
+	/** Tabs that come and go with their content (flyover videos): the strip is rebuilt when their number changed. */
+	public void updateTabs() {
+		List<TabItem> tabItems = getTabItems();
+		if (tabItems.size() != tabSize) {
+			setTabs(tabItems);
+		}
 	}
 
 	@Nullable
@@ -430,5 +434,10 @@ public class MyPlacesActivity extends TabActivity {
 
 	public boolean isInAppPurchaseAllowed() {
 		return true;
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "my_places";
 	}
 }

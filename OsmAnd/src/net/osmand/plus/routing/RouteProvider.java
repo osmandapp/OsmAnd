@@ -450,6 +450,7 @@ public class RouteProvider {
 	private RouteCalculationResult calcOfflineRouteImpl(RouteCalculationParams params,
 	                                                    RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
 	                                                    List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
+		NativeRoutingMemoryGuard memoryGuard = NativeRoutingMemoryGuard.start(params.ctx, ctx.calculationProgress);
 		try {
 			RouteResultPreparation.RouteCalcResult result = null;
 			if (complexCtx != null) {
@@ -464,8 +465,11 @@ public class RouteProvider {
 					});
 				}
 			}
-			if (result == null) {
+			if (result == null && !memoryGuard.isExceeded()) {
 				result = router.searchRoute(ctx, st, en, inters);
+			}
+			if (memoryGuard.stop()) {
+				return new RouteCalculationResult(params.ctx.getString(R.string.route_calculation_out_of_memory));
 			}
 
 			if (result == null || result.getList().isEmpty()) {
@@ -505,6 +509,8 @@ public class RouteProvider {
 			int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
 			String s = " (" + avl + " MB available of " + max  + ") ";
 			return new RouteCalculationResult("Not enough process memory "+ s);
+		} finally {
+			memoryGuard.stop();
 		}
 	}
 

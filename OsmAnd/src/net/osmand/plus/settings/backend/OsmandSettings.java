@@ -126,6 +126,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class OsmandSettings {
 
@@ -1325,6 +1326,12 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> MAX_SPEED = new FloatPreference(this,
 			"max_speed", 0f).makeProfile().cache();
 
+	public final CommonPreference<Boolean> ETA_USE_AVERAGE_SPEED = new BooleanPreference(this,
+			"eta_use_average_speed", false).makeProfile().cache();
+
+	public final CommonPreference<Long> ETA_AVERAGE_SPEED_INTERVAL = new LongPreference(this,
+			"eta_average_speed_interval", 15 * 60 * 1000L).makeProfile().cache();
+
 	public final CommonPreference<String> ICON_RES_NAME = new StringPreference(this, "app_mode_icon_res_name", "ic_world_globe_dark") {
 		@Override
 		public String getModeValue(ApplicationMode mode) {
@@ -2097,7 +2104,7 @@ public class OsmandSettings {
 
 	public CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference(this, "previous_installed_version", "").makeGlobal();
 
-	public final OsmandPreference<Boolean> USE_SPATIAL_TEXT_SEARCH = new BooleanPreference(this, "use_spatial_search", false).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Boolean> USE_SPATIAL_TEXT_SEARCH = new BooleanPreference(this, "use_spatial_search", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference(this, "should_show_free_version_banner", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOULD_SHOW_DISCOUNT_BOTTOM_SHEET = new BooleanPreference(this, "should_show_discount_bottom_sheet", false).makeGlobal().makeShared().cache();
 
@@ -2288,18 +2295,44 @@ public class OsmandSettings {
 		return null;
 	}
 
+	// code points outside the Basic Multilingual Plane, variation selectors and the zero width joiner
+	private static final Pattern EMOJI_CHARS = Pattern.compile("[\\x{10000}-\\x{10FFFF}\\uFE0E\\uFE0F\\u200D]");
+	private static final Pattern NON_ASCII_CHARS = Pattern.compile("[^\\x20-\\x7E]");
+
 	public boolean installTileSource(TileSourceTemplate toInstall) {
+		String name = toInstall.getName();
+		if (Algorithms.isEmpty(name)) {
+			return false;
+		}
 		File tPath = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-		File dir = new File(tPath, toInstall.getName());
-		dir.mkdirs();
-		if (dir.exists() && dir.isDirectory()) {
-			try {
-				TileSourceManager.createMetaInfoFile(dir, toInstall, true);
-			} catch (IOException e) {
-				return false;
+		// FAT/exFAT cards may reject some characters: try the name as is, without emoji, then ASCII only
+		String[] candidates = {name,
+				Algorithms.sanitizeFileName(EMOJI_CHARS.matcher(name).replaceAll("")),
+				Algorithms.sanitizeFileName(NON_ASCII_CHARS.matcher(name).replaceAll(""))};
+		for (String candidate : candidates) {
+			if (!isUsableTileSourceFolderName(candidate)) {
+				continue;
+			}
+			File dir = new File(tPath, candidate);
+			dir.mkdirs();
+			if (dir.isDirectory()) {
+				toInstall.setName(candidate);
+				try {
+					TileSourceManager.createMetaInfoFile(dir, toInstall, true);
+					return true;
+				} catch (IOException e) {
+					LOG.error("Cannot write tile source metainfo: " + dir, e);
+					return false;
+				}
 			}
 		}
-		return true;
+		LOG.error("Cannot create tile source folder for '" + name + "'");
+		return false;
+	}
+
+	// "." would be the tiles folder itself and "/" would create a nested folder
+	private static boolean isUsableTileSourceFolderName(@NonNull String name) {
+		return !name.isEmpty() && !name.startsWith(".") && !name.contains("/");
 	}
 
 	public Map<String, String> getTileSourceEntries() {
@@ -3450,6 +3483,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> FAVORITES_TAB =
 			new IntPreference(this, "FAVORITES_TAB", 0).makeGlobal().cache();
+	public final CommonPreference<String> FLYOVERS_SORT_MODE =
+			new StringPreference(this, "flyovers_sort_mode", "DATE_NEWEST").makeGlobal().cache();
 
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;
