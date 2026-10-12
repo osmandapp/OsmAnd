@@ -423,7 +423,7 @@
     <string name="city_type_hamlet">Llogaret</string>
     <string name="city_type_village">Vila</string>
     <string name="favorite_delete_multiple">Vols suprimir %1$d Preferits i %2$d Grups preferits\?</string>
-    <string name="gpx_option_from_start_point">Passa per tota la traça sencera</string>
+    <string name="gpx_option_from_start_point">Passa pel trajecte sencer</string>
     <string name="switch_to_vector_map_to_see">Hi ha un mapa de vectors fora de línia per aquesta localització.
 \n\t\n\tPer activar-lo aneu a «Menú» → «Configuració del mapa» → «Font de mapes…» → «Mapes de vectors fora de línia».</string>
     <string name="overlay_transparency">Opacitat de la capa superposada</string>
@@ -875,7 +875,7 @@
     <string name="shared_string_never">Mai</string>
     <string name="home_button">Inici</string>
     <string name="search_for">Cerca per</string>
-    <string name="shared_string_show_all">MOSTRA\'LS TOTS</string>
+    <string name="shared_string_show_all">Mostra-ho tot</string>
     <string name="coordinates">Coordenades</string>
     <string name="error_avoid_specific_road">No s\'ha trobat cap circumval·lació</string>
     <string name="use_opengl_render">Utilitza la renderització OpenGL</string>
@@ -1055,7 +1055,7 @@
     <string name="lang_ml">Malaiàlam</string>
     <string name="lang_os">Osseta</string>
     <string name="rendering_attr_currentTrackColor_name">Color del GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Amplada traça GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Amplada del GPX</string>
     <string name="rendering_value_red_name">Vermell</string>
     <string name="rendering_value_translucent_red_name">Vermell translúcid</string>
     <string name="rendering_value_translucent_orange_name">Taronja translúcid</string>
@@ -1201,7 +1201,7 @@
     <string name="osn_close_dialog_error">No s\'ha pogut tancar la nota.</string>
     <string name="shared_string_commit">Valida</string>
     <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
-    <string name="rendering_attr_currentTrackWidth_description">Amplada traça GPX</string>
+    <string name="rendering_attr_currentTrackWidth_description">Amplada del GPX</string>
     <string name="rendering_attr_roadStyle_description">Estil de via</string>
     <string name="poi_dialog_reopen">Reobre</string>
     <string name="dashboard_or_drawer_title">Control per tauler o per menú</string>
@@ -2267,7 +2267,7 @@
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="track_storage_directory">Carpeta d\'emmagatzematge de trajectes</string>
-    <string name="track_storage_directory_descrp">Les traces es poden emmagatzemar a la carpeta «rec», a les carpetes mensuals o a les diàries.</string>
+    <string name="track_storage_directory_descrp">Els trajectes es poden emmagatzemar a la carpeta «rec», a les carpetes mensuals o a les diàries.</string>
     <string name="store_tracks_in_rec_directory">Enregistra les traces a la carpeta «rec»</string>
     <string name="store_tracks_in_daily_directories">Enregistra els trajectes en carpetes diàries</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB utilitzats</string>
@@ -2648,7 +2648,7 @@
     <string name="follow_track">Segueix el trajecte</string>
     <string name="follow_track_descr">Seleccioneu el fitxer de la traça a seguir</string>
     <string name="select_another_track">Seleccioneu un altre trajecte</string>
-    <string name="start_of_the_track">Inici de la traça</string>
+    <string name="start_of_the_track">Inici del trajecte</string>
     <string name="nearest_point">El punt més proper</string>
     <string name="attach_to_the_roads">Circumscriu a les carreteres</string>
     <string name="delete_address">Suprimeix l\'adreça</string>
@@ -2771,7 +2771,7 @@
     <string name="copy_poi_name">Copia el nom del PDI</string>
     <string name="quick_action_show_hide_title">Mostra/amaga</string>
     <string name="shared_string_interval">Interval</string>
-    <string name="track_has_no_altitude">La traça no conté dades d\'altitud.</string>
+    <string name="track_has_no_altitude">El trajecte no conté cap dada d\'altitud.</string>
     <string name="track_has_no_speed">La traça no conté dades de velocitat.</string>
     <string name="select_another_colorization">Seleccioneu un altre tipus de coloració.</string>
     <string name="verification_code_missing_description">Pot trigar 10 minuts. Utilitzeu el botó de sota si no està a la carpeta de correu brossa.</string>
@@ -2861,7 +2861,7 @@
     <string name="import_tracks_descr">%1$s, conté %2$s pistes separades. Tria pistes a importar.</string>
     <string name="please_provide_group_name_message">Per favor, anomena el grup.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
-    <string name="files_with_route_restrictions">Arxius amb restriccions de ruta</string>
+    <string name="files_with_route_restrictions">Fitxers amb restriccions de ruta</string>
     <string name="location_source">Sistema d\'ubicació</string>
     <string name="estimated_download_size">Tamany de baixada estimat</string>
     <string name="always_ask_waypoint_appearance_description">Al prémer aquesta acció s’obrirà la pantalla \"Afegir punt de ruta\", en la qual podrà canviar el nom i l’aparença.</string>
@@ -2875,7 +2875,7 @@
     <string name="rendering_value_omit_name">Ometre</string>
     <string name="select_suggested_points">Selecciona punts suggerits</string>
     <string name="selected_waypoints_descr">Els punts de ruta seleccionats s’afegiran a la traça «%1$s»</string>
-    <string name="shared_string_reading_file">Llegit arxiu…</string>
+    <string name="shared_string_reading_file">S\'està llegint el fitxer…</string>
     <string name="elevation_profile_widget_desc">Mostra el perfil d\'elevació i pendent de la ruta actual.</string>
     <string name="parking_widget_desc">Mostra la distància des del centre de pantalla fins a la teva plaça d\'aparcament.</string>
     <string name="compass_on_circles">Brúixola circular</string>
@@ -2954,7 +2954,7 @@
     <string name="ant_missing_dependency">Falta la dependència</string>
     <string name="ant_read_data">Llegir dades</string>
     <string name="ant_write_to_gpx">Escriure dades en la traça</string>
-    <string name="external_sensor_widgets">Ginys d\'ANT+</string>
+    <string name="external_sensor_widgets">Sensors externs</string>
     <string name="map_widget_ant_heart_rate">Ritme cardíac</string>
     <string name="ant_missing_dependency_descr">No s\'ha pogut trobar el servei necessari «%1$s». \nCal que instal·leu o actualitzeu el servei de connectors ANT+. \nVoleu executar la Play Store per a fer-ho?</string>
     <string name="shortcut_start_recording">Comença l\'enregistrament</string>
@@ -4660,7 +4660,7 @@
     <string name="shared_string_api_key">Clau API</string>
     <string name="edit_online_routing_engine">Edita el motor d\'encaminament en línia</string>
     <string name="add_online_routing_engine">Afegeix un motor d\'encaminament en línia</string>
-    <string name="gpx_upload_trackable_visibility_descr">\"Trackable\" significa que la traça no apareix en cap llista pública, però els punts de seguiment processats amb marques horàries (que no es poden associar directament amb vostè) ho fan a través de les baixades de l\'API GPS pública.</string>
+    <string name="gpx_upload_trackable_visibility_descr">«Traçable» significa que el trajecte no apareix en cap llistat públic, però els punts de ruta processats amb marques de temps procedents d\'ell (que no poden associar-se directament amb vós) sí que apareixen a través de les baixades de l\'API de GPS pública.</string>
     <string name="gpx_upload_public_visibility_descr">\"Públic\" significa que la traça es mostra públicament en les vostres traces de GPS i en els llistats públics de traces de GPS, i en la llista pública de traces amb marques de temps en forma crua. Les dades proporcionades a través de l\'API no fan referència a la vostra pàgina de rastreig. Les marques de temps de punts de traça no estan disponibles a través de l\'API pública de GPS, i els punts de traça no estan ordenats cronològicament.</string>
     <string name="enter_text_separated">Introduïu etiquetes separades per comes.</string>
     <string name="send_files_to_openstreetmap">Envia el fitxer GPX a OpenStreetMap</string>
@@ -5044,7 +5044,7 @@
     <string name="media_not_attached_title">Encara no s\'ha adjuntat enlloc</string>
     <string name="media_not_attached_descr">Adjunta aquest arxiu multimèdia a un favorit per situar-lo en el mapa.</string>
     <string name="detach_external_media_descr">L\'arxiu ja no es mostrarà en aquest favorit però continua al vostre dispositiu.</string>
-    <string name="detach_external_media_descr_plural">L\'arxiu ja no es mostrarà en aquest favorit però continua al vostre dispositiu.</string>
+    <string name="detach_external_media_descr_plural">Els fitxers ja no apareixeran en aquest favorit, però romanen al vostre dispositiu.</string>
     <string name="media_attached_more_count">+%1$d</string>
     <string name="shared_string_visibility">Visibilitat</string>
     <string name="ais_run_in_background">Executa en segon pla</string>
@@ -5099,7 +5099,7 @@
     <string name="subscription_free_trial_with_price">%1$s gratuït, després %2$s</string>
     <string name="subscription_then_price">després %1$s</string>
     <string name="astro_search_in_location">En %1$s</string>
-    <string name="astro_search_rises_tomorrow">%1$s %2$s</string>
+    <string name="astro_search_rises_tomorrow">↗ %1$s %2$s</string>
     <string name="astro_search_sets_tomorrow">↘ %1$s %2$s</string>
     <string name="astro_filter_naked_eye">Visible a ull nu</string>
     <string name="astro_filter_visible_now">Visible ara</string>
@@ -5107,7 +5107,7 @@
     <string name="astro_today_visibility">Visibilitat avui</string>
     <string name="astro_locate">Ubica</string>
     <string name="astro_type_nebula">Nebulosa</string>
-    <string name="astro_type_globular_cluster">Clúster globular</string>
+    <string name="astro_type_globular_cluster">Cúmul globular</string>
     <string name="shared_string_maximum">Màxim</string>
     <string name="shared_string_minimum">Mínim</string>
     <string name="shared_string_ratio">divisió</string>
@@ -5121,4 +5121,11 @@
     <string name="routing_attr_motor_type_ethanol_name">Etanol</string>
     <string name="backup_deleted_all_data">Dades suprimides.</string>
     <string name="backup_deleting_all_data">S\'estan suprimint dades…</string>
+    <string name="aidl_permissions_request_title">Voleu permetre que %1$s usi l\'OsmAnd?</string>
+    <string name="ais_objects_visibility">Visibilitat dels objectes</string>
+    <string name="ais_host_or_ip">Amfitrió o adreça IP</string>
+    <string name="astro_eclipse_safety_warning">Mai no mireu directament al Sol sense la protecció adequada per a observar-ne. Les hores dels eclipsis són aproximades.</string>
+    <string name="astro_type_open_cluster">Cúmul obert</string>
+    <string name="astro_type_galaxy_cluster">Cúmul de galàxies</string>
+    <string name="gradient_input_invalid_value_warn">Introduïu un nombre vàlid.</string>
 </resources>
