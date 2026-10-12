@@ -690,6 +690,7 @@ public class MapFlyoverRecorder {
 		view.setSymbolsFade(0, -1);
 		if (drone != null) {
 			view.setFieldOfView(FlyoverDroneCamera.ENGINE_FOV / 2);
+			view.setIgnoreTargetElevation(false);
 			if (!Float.isNaN(elevationScaleBefore)) {
 				view.setElevationScaleFactor(elevationScaleBefore);
 			}
@@ -806,12 +807,11 @@ public class MapFlyoverRecorder {
 			droneLevel = Math.floor(zoom) + 0.5;
 		}
 		float density = app.getOsmandMap().getMapDensity();
-		double ground = drone.targetGround();
 		double[] fitted = camera.clone();
 		for (int k = 0; k < 4; k++) {
 			double level = Math.min(droneLevel, mapView.getMaxZoom());
 			fitted = camera.clone();
-			drone.fit(fitted, level, density, ground, true);
+			drone.fit(fitted, level, density, true);
 			// far from 1 the engine answers the scale unevenly: then the next level, which needs about twice less
 			double steps = Math.log(fitted[7]) / Math.log(2);
 			if (Math.abs(steps) <= FlyoverDroneCamera.SCALE_BAND || (steps < 0 && level >= mapView.getMaxZoom())) {
@@ -1028,6 +1028,7 @@ public class MapFlyoverRecorder {
 				renderer.setElevationAngle(fElevation);
 				if (!Float.isNaN(fov)) {
 					renderer.setFieldOfView(fov / 2);
+					renderer.setIgnoreTargetElevation(true);
 					// heights to scale: an exaggerated relief would rise into the drone's way
 					if (Float.isNaN(elevationScaleBefore)) {
 						elevationScaleBefore = renderer.getElevationScaleFactor();
