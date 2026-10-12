@@ -792,7 +792,7 @@
     <string name="poi_fuel_lh2">Idrogeno liquido</string>
     <string name="poi_fuel_electricity">Energia elettrica</string>
     <string name="poi_public_transport_stop_position">Posizione stop del trasporto pubblico</string>
-    <string name="poi_railway_platform">Piattaforma ferroviaria;Piattaforma del treno</string>
+    <string name="poi_railway_platform">Banchina ferroviaria;Banchina del treno</string>
     <string name="poi_halt">Fermata ferroviaria</string>
     <string name="poi_runway">Pista</string>
     <string name="poi_rest_area">Area di sosta</string>
@@ -1565,7 +1565,7 @@
     <string name="poi_office_forestry">Ufficio forestale</string>
     <string name="poi_fuel_91ul">Carburante 91UL</string>
     <string name="poi_fuel_100ll">Carburante 100LL</string>
-    <string name="poi_fuel_autogas">Autogas</string>
+    <string name="poi_fuel_autogas">Gas auto</string>
     <string name="poi_fuel_jeta1">Carburante Jet A-1</string>
     <string name="poi_fuel_adblue">Diesel liquido esausto</string>
     <string name="poi_escape_lane">Lane di fuga</string>
@@ -5072,7 +5072,7 @@
     <string name="poi_routes_air_sports">Sport aerei</string>
     <string name="poi_routes_other">Altri percorsi</string>
     <string name="poi_route_activity_type_off_road">Fuoristrada</string>
-    <string name="poi_route_activity_type_all_terrain_vehicle">ATV (All-Terrain Vehicle)</string>
+    <string name="poi_route_activity_type_all_terrain_vehicle">ATV (veicoli per tutti i terreni)</string>
     <string name="poi_route_activity_type_truck_hgv">Camion (HGV)</string>
     <string name="poi_route_activity_type_karting">Karting</string>
     <string name="poi_route_activity_type_adventure_motorcycling">Moto adventure</string>
@@ -5082,7 +5082,7 @@
     <string name="poi_route_activity_type_touring_motorcycling">Moto touring</string>
     <string name="poi_route_activity_type_track_racing">Gara in pista</string>
     <string name="poi_route_activity_type_motor_scooter">Scooter</string>
-    <string name="poi_route_activity_type_backpacking">Backpacking</string>
+    <string name="poi_route_activity_type_backpacking">Zaino in spalla</string>
     <string name="poi_route_activity_type_hill_climbing">Salita collinare</string>
     <string name="poi_route_activity_type_road_running">Corsa su strada</string>
     <string name="poi_route_activity_type_trail_running">Trail running</string>
@@ -5092,7 +5092,7 @@
     <string name="poi_route_activity_type_e_biking">E-bike</string>
     <string name="poi_route_activity_type_e_mountain_bike">E-mountain bike</string>
     <string name="poi_route_activity_type_gravel_biking">Gravel bike</string>
-    <string name="poi_route_activity_type_touring">Touring</string>
+    <string name="poi_route_activity_type_touring">Viaggio turistico</string>
     <string name="poi_seventh_day_adventist_church">Chiesa avventista del settimo giorno</string>
     <string name="poi_united_methodist_church">Chiesa metodista unita</string>
     <string name="poi_iglesia_ni_cristo_church">Iglesia ni Cristo</string>
