@@ -238,16 +238,16 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	 * The parking favorite stays on the map while the Parking position plugin is active,
 	 * even if its folder is hidden. Other points follow the visibility of their folder.
 	 */
-	public static boolean isPointVisibleOnMap(@NonNull FavouritePoint point, boolean parkingPluginActive) {
+	private boolean isPointVisibleOnMap(@NonNull FavouritePoint point, boolean parkingPluginActive) {
 		return point.isVisible() || parkingPluginActive && point.getSpecialPointType() == SpecialPointType.PARKING;
 	}
 
-	public static boolean isSyncedPoint(@NonNull FavouritePoint point, boolean synced) {
+	private boolean isSyncedPoint(@NonNull FavouritePoint point, boolean synced) {
 		// A hidden synced folder has no markers, so the parking point shown despite it is drawn as a plain favorite
 		return synced && point.isVisible();
 	}
 
-	private static boolean isParkingPluginActive() {
+	private boolean isParkingPluginActive() {
 		return PluginsHelper.isActive(ParkingPositionPlugin.class);
 	}
 
