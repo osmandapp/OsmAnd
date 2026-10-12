@@ -274,7 +274,8 @@ public class MapFlyoverRecorder {
 				// the drone's camera learns how far the engine's camera is at a zoom: frame 0 again until it knows
 				applyCamera(cameraAt(params, spec, followed, follow, 0, frameMin, tilePx),
 						() -> updateTracks(tracks, 0, videoS));
-				waitForIdleFrame(view, firstTimeout);
+				// only the camera's height is read: the map of a flat view may load for minutes
+				waitForFrames(view, 2, firstTimeout);
 				measureDrone(true);
 			}
 			for (int i = 0; i < frames; i++) {
@@ -308,13 +309,19 @@ public class MapFlyoverRecorder {
 					applyCamera(camera, () -> updateTracks(tracks, t / 1000.0, videoS));
 					idle = waitForIdleFrame(view, frameTimeout);
 				}
-				for (int retry = 0; retry < DRONE_CORRECTIONS; retry++) {
+				boolean corrected = false;
+				for (int retry = 0; retry <= DRONE_CORRECTIONS; retry++) {
 					// the drone's camera at the height the engine has under its target: this frame once more
-					double[] fixed = droneCorrection();
+					double[] fixed = droneCorrection(retry == DRONE_CORRECTIONS);
 					if (fixed == null) {
 						break;
 					}
 					applyCamera(fixed, () -> updateTracks(tracks, t / 1000.0, videoS));
+					// the height is the camera's, not the map's: the tiles are waited for only by the last try
+					waitForFrames(view, 2, frameTimeout);
+					corrected = true;
+				}
+				if (corrected) {
 					idle = waitForIdleFrame(view, frameTimeout);
 				}
 				measureDrone(false);
@@ -723,6 +730,7 @@ public class MapFlyoverRecorder {
 	private static final int PREVIEW_PER_S = 5;
 	private static final int DRONE_WARMUP_FRAMES = 8;
 	private static final int DRONE_CORRECTIONS = 6;
+	private static final long FRAMES_TIMEOUT_MS = 2000;
 	private static final float RELIEF_LIFT_SMOOTHING = 0.35f;
 
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
@@ -767,7 +775,7 @@ public class MapFlyoverRecorder {
 	}
 
 	@Nullable
-	private double[] droneCorrection() throws InterruptedException {
+	private double[] droneCorrection(boolean last) throws InterruptedException {
 		FlyoverDroneCamera drone = this.drone;
 		if (drone == null) {
 			return null;
@@ -776,7 +784,7 @@ public class MapFlyoverRecorder {
 		runInUiThread(() -> {
 			MapRendererView renderer = mapView.getMapRenderer();
 			if (renderer != null) {
-				result[0] = drone.correction(renderer);
+				result[0] = drone.correction(renderer, last);
 			}
 		});
 		return result[0];
@@ -1177,6 +1185,23 @@ public class MapFlyoverRecorder {
 		double dx = MapUtils.getTileNumberX(0, b[1]) - MapUtils.getTileNumberX(0, a[1]);
 		double dy = MapUtils.getTileNumberY(0, b[0]) - MapUtils.getTileNumberY(0, a[0]);
 		return Math.sqrt(dx * dx + dy * dy) * Math.pow(2, zoom) * pxPerTile;
+	}
+
+	/** Frames of the camera just set, the map loaded or not: only the camera is read from them; at most 2 s. */
+	private void waitForFrames(@NonNull MapRendererView view, int count, long timeoutMs) throws InterruptedException {
+		long until = SystemClock.elapsedRealtime() + Math.min(timeoutMs, FRAMES_TIMEOUT_MS);
+		int startFrame = view.getFrameId();
+		int startReady = readyFrames.get();
+		while (SystemClock.elapsedRealtime() < until) {
+			if (cancelled) {
+				throw new CancellationException("Cancelled on the phone");
+			}
+			view.requestRender();
+			Thread.sleep(10);
+			if (view.getFrameId() >= startFrame + count && readyFrames.get() >= startReady + count) {
+				return;
+			}
+		}
 	}
 
 	/**
