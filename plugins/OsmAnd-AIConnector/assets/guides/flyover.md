@@ -54,6 +54,12 @@ At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smoot
 Result: `file` (path on the phone, in OsmAnd's `flyover` folder), `frames`, `render_s`, `max_screen_speed_px_s`,
 `hint` when the map moved too fast, `warnings` for keys this OsmAnd ignored.
 
+Getting the video onto the computer — works: `osmand_download` with the `file` (or a name from
+`osmand_flyover_files`) copies it into `~/Downloads` or `dir` and returns the local path. It is a tool of the stdio
+bridge, so the video never passes through the conversation; a download that broke off continues where it stopped.
+`osmand_flyover_files` lists the videos on the phone; one still being recorded has `recording: true` and cannot be
+downloaded yet. Without the bridge, GET the `download` path from the connector with the access key.
+
 ### Key frames — works
 
 ```json

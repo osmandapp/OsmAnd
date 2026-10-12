@@ -1885,6 +1885,20 @@ public class OsmandAidlApi {
 		return new MapFlyoverRecorder(app).record(params);
 	}
 
+	boolean getFlyoverFiles(@NonNull List<net.osmand.aidlapi.map.AFlyoverFile> files) {
+		for (File file : MapFlyoverRecorder.listVideos(app)) {
+			files.add(new net.osmand.aidlapi.map.AFlyoverFile(file.getName(), file.length(), file.lastModified(),
+					MapFlyoverRecorder.isBeingRecorded(file)));
+		}
+		return true;
+	}
+
+	@Nullable
+	ParcelFileDescriptor openFlyoverFile(@Nullable String fileName) throws FileNotFoundException {
+		File file = Algorithms.isEmpty(fileName) ? null : MapFlyoverRecorder.getVideo(app, fileName);
+		return file != null ? ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY) : null;
+	}
+
 	@Nullable
 	net.osmand.aidlapi.map.AMapScreenshot getMapScreenshot(int maxWidth, int quality, boolean mapOnly) {
 		MapActivity mapActivity = this.mapActivity;

@@ -18,6 +18,7 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
+import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
 import androidx.annotation.NonNull;
@@ -65,6 +66,8 @@ import net.osmand.aidlapi.gpx.GpxPointsParams;
 import net.osmand.aidlapi.info.AMapWidgetValue;
 import net.osmand.aidlapi.map.AMapScreenshot;
 import net.osmand.aidlapi.map.MapScreenshotParams;
+import net.osmand.aidlapi.map.AFlyoverFile;
+import net.osmand.aidlapi.map.FlyoverFileParams;
 import net.osmand.aidlapi.map.MapFlyoverParams;
 import net.osmand.aidlapi.map.SetMapCameraParams;
 import net.osmand.aidlapi.gpx.ASelectedGpxFile;
@@ -722,6 +725,28 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			} catch (Exception e) {
 				handleException(e);
 				return false;
+			}
+		}
+
+		@Override
+		public boolean getFlyoverFiles(List<AFlyoverFile> files) {
+			try {
+				OsmandAidlApi api = getApi("getFlyoverFiles");
+				return api != null && files != null && api.getFlyoverFiles(files);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public ParcelFileDescriptor openFlyoverFile(FlyoverFileParams params) {
+			try {
+				OsmandAidlApi api = getApi("openFlyoverFile");
+				return api != null && params != null ? api.openFlyoverFile(params.getFileName()) : null;
+			} catch (Exception e) {
+				handleException(e);
+				return null;
 			}
 		}
 

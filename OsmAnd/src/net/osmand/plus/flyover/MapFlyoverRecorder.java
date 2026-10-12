@@ -101,6 +101,9 @@ public class MapFlyoverRecorder {
 	 * still reads from it (a native crash in MapRenderer::isIdle).
 	 */
 	private static volatile boolean rendererHeld;
+	/** The video being written; it is not handed out before it is finished. */
+	@Nullable
+	private static volatile File recordingFile;
 
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
@@ -162,6 +165,7 @@ public class MapFlyoverRecorder {
 		droneLevel = Double.NaN;
 		elevationScaleBefore = Float.NaN;
 		File file = getFile(params.getFileName());
+		recordingFile = file;
 		VideoEncoder encoder = null;
 		List<FlyoverTrack> tracks = new ArrayList<>();
 		Map<String, SelectedGpxFile> shownBefore = new HashMap<>();
@@ -434,6 +438,7 @@ public class MapFlyoverRecorder {
 				giveRendererBack(view);
 			}
 			rendererHeld = false;
+			recordingFile = null;
 			if (magnifierBefore[0] != null) {
 				try {
 					runInUiThread(() -> {
@@ -603,6 +608,23 @@ public class MapFlyoverRecorder {
 	/** A recording renders the map meanwhile; the phone's map takes the renderer only when it is given back. */
 	public static boolean isRendererHeld() {
 		return rendererHeld;
+	}
+
+	public static boolean isBeingRecorded(@NonNull File file) {
+		return file.equals(recordingFile);
+	}
+
+	/**
+	 * A finished video by its file name, or by the path a recording returned; only files of the videos folder.
+	 */
+	@Nullable
+	public static File getVideo(@NonNull OsmandApplication app, @NonNull String name) {
+		String fileName = new File(name).getName();
+		if (!fileName.toLowerCase(Locale.US).endsWith(".mp4")) {
+			return null;
+		}
+		File file = new File(getFolder(app), fileName);
+		return file.isFile() && !isBeingRecorded(file) ? file : null;
 	}
 
 	@NonNull
