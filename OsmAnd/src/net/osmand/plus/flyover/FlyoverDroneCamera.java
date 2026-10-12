@@ -22,10 +22,10 @@ import java.util.Map;
 
 /**
  * Camera of a drone: a track or key frame poses give where the drone is (lat, lon, height above the sea) and where
- * its camera looks (yaw, pitch). The engine's camera turns around a point on the ground at a distance set by the
- * zoom, so the drone's view becomes such a point: where the view ray meets the relief. The engine turns a zoom
- * into a distance over the relief by whole levels, with a step at each, so the recorder keeps a level and gets the
- * camera to the drone's height with the scale of the frame, checked against the engine after each frame.
+ * its camera looks (yaw, pitch). The engine's camera turns around a point at a distance set by the zoom; the recorder
+ * has the engine take that point at sea level, not on the relief, so the drone's view becomes the point where the
+ * middle of the frame meets the sea level. The engine turns a zoom into a distance by whole levels, so the recorder
+ * keeps a level and gets the camera to the drone's height with the scale of the frame, checked after each frame.
  */
 class FlyoverDroneCamera {
 
@@ -44,13 +44,6 @@ class FlyoverDroneCamera {
 	private static final double LEARN_GAIN = 0.4;
 	/** The scale of the frame stays within 2^-band..2^band; beyond it the zoom level changes. */
 	static final double SCALE_BAND = 0.75;
-	/**
-	 * A flat view meets the relief far away, where a ridge or a valley moves that place by kilometers from frame to
-	 * frame. Such a view is held by a place lower in the frame, seen this steep at least, at most this far down from
-	 * the middle (a share of the half frame).
-	 */
-	private static final double ANCHOR_DEPRESSION = 35;
-	private static final double ANCHOR_LOWEST = 0.7;
 
 	/** The drone's track, or null when the poses are given as key frames. */
 	@Nullable
@@ -63,7 +56,6 @@ class FlyoverDroneCamera {
 	private final double defaultPitch;
 	private final double defaultFov;
 	private final double smoothS;
-	private final double maxLookM;
 	private final Map<Long, Float> heights = new HashMap<>();
 	private boolean noTerrain;
 	private double takeoffGround = Double.NaN;
@@ -85,22 +77,22 @@ class FlyoverDroneCamera {
 	private int corrected;
 	private double predictedScale;
 	private double scaleMiss;
+	private double scaleMissLevel = Double.NaN;
 	// the previous try of this frame: time, scale and the height it gave
 	private double correctionT = Double.NaN;
 	private double correctionScale = Double.NaN;
 	private double correctionAlt;
 	private double lastT = Double.NaN;
-	private double lastHit = Double.NaN;
-	// height of the place the camera is held by: where its view ray meets the relief
-	private double anchorAlt;
+	// the best try of this frame
+	private double bestT = Double.NaN;
+	private double bestError;
+	private double[] bestCamera;
 
 	private int frames;
 	private int tiltClamped;
 	private int lowered;
 	private double maxHeightError;
 	private double maxPitchShift;
-	private double minLook = Double.MAX_VALUE;
-	private double maxLook;
 
 	FlyoverDroneCamera(@Nullable FlyoverTrack track, @NonNull JSONObject camera) {
 		this.track = track;
@@ -110,7 +102,6 @@ class FlyoverDroneCamera {
 		defaultFov = camera.optDouble("fov", ENGINE_FOV);
 		// a track is a GPS log and is averaged; key frame poses are a smooth curve already
 		smoothS = camera.optDouble("smooth_s", track != null ? 1 : 0);
-		maxLookM = camera.optDouble("max_distance_m", 30_000);
 		if (track == null) {
 			readPoses(camera.optJSONArray("poses"), camera);
 		}
@@ -255,56 +246,32 @@ class FlyoverDroneCamera {
 		return Double.NaN;
 	}
 
-	/**
-	 * Camera for video time t, as {lat, lon, zoom, rotation, tilt, target x, target y, scale of the frame, fov}.
-	 * Called once per frame in order: of several places where the view ray meets the relief, the one nearest to the
-	 * last frame's is kept.
-	 */
+	/** Camera for video time t, as {lat, lon, zoom, rotation, tilt, target x, target y, scale of the frame, fov}. */
 	@NonNull
 	double[] camera(double t) {
-		Pose c = pose(t);
-		double hit = hitDistance(c, anchorDepression(c), lastHit);
-		lastHit = hit;
 		lastT = t;
 		frames++;
-		minLook = Math.min(minLook, hit);
-		maxLook = Math.max(maxLook, hit);
-		return cameraLookingAt(c, hit, true);
+		return cameraLookingAt(pose(t), true);
 	}
 
-	/** Camera for time t without smoothing between frames: for estimates over the whole video. */
+	/** Camera for time t, not checked against the engine: for estimates over the whole video. */
 	@NonNull
 	double[] roughCamera(double t) {
-		Pose c = pose(t);
-		return cameraLookingAt(c, hitDistance(c, anchorDepression(c), Double.NaN), false);
+		return cameraLookingAt(pose(t), false);
 	}
 
 	private static double tilt(@NonNull Pose c) {
 		return Math.max(MIN_TILT, Math.min(MAX_TILT, -c.pitch));
 	}
 
-	/** How steep down the place the camera is held by is seen: the middle of the frame unless the view is flat. */
-	private static double anchorDepression(@NonNull Pose c) {
-		double tilt = tilt(c);
-		double lowest = tilt + Math.toDegrees(Math.atan(ANCHOR_LOWEST * Math.tan(Math.toRadians(c.fov / 2))));
-		return tilt >= ANCHOR_DEPRESSION ? tilt : Math.min(ANCHOR_DEPRESSION, lowest);
-	}
-
 	@NonNull
-	private double[] cameraLookingAt(@NonNull Pose c, double look, boolean record) {
+	private double[] cameraLookingAt(@NonNull Pose c, boolean record) {
 		double tilt = tilt(c);
-		double anchor = anchorDepression(c);
-		double down = Math.toRadians(anchor), yaw = Math.toRadians(c.yaw);
-		double horizontal = look * Math.cos(down);
-		double east = horizontal * Math.sin(yaw), north = horizontal * Math.cos(yaw);
-		double gLat = c.lat + north / METERS_PER_DEGREE;
-		double gLon = c.lon + east / (METERS_PER_DEGREE * Math.cos(Math.toRadians(c.lat)));
-		// the height on the ray itself: the terrain files may have no height right there
-		double gAlt = c.alt - look * Math.sin(down);
-		// the engine puts that place at its pixel and keeps the camera's distance along the middle of the frame
-		// to the level of that place
-		double distance = Math.max(1, (c.alt - gAlt) / Math.sin(Math.toRadians(tilt)));
-		double targetY = 0.5 + 0.5 * Math.tan(Math.toRadians(anchor - tilt)) / Math.tan(Math.toRadians(c.fov / 2));
+		// the middle of the frame down to the sea level
+		double distance = Math.max(1, c.alt) / Math.sin(Math.toRadians(tilt));
+		double horizontal = distance * Math.cos(Math.toRadians(tilt)), yaw = Math.toRadians(c.yaw);
+		double gLat = c.lat + horizontal * Math.cos(yaw) / METERS_PER_DEGREE;
+		double gLon = c.lon + horizontal * Math.sin(yaw) / (METERS_PER_DEGREE * Math.cos(Math.toRadians(c.lat)));
 		if (fovForConstant != c.fov) {
 			// a wider view puts the camera closer for the same zoom
 			zoomConstant = Double.isNaN(zoomConstant) ? ZOOM_CONSTANT_GUESS * Math.tan(Math.toRadians(ENGINE_FOV / 2))
@@ -314,10 +281,9 @@ class FlyoverDroneCamera {
 		}
 		double zoom = Math.log(zoomConstant * Math.cos(Math.toRadians(gLat)) / distance) / Math.log(2);
 		// OsmAnd turns the map by minus the heading; the recorder sets the level and the scale of the frame (fit)
-		double[] camera = {gLat, gLon, zoom, -c.yaw, tilt, 0.5, targetY, 1, c.fov};
+		double[] camera = {gLat, gLon, zoom, -c.yaw, tilt, 0.5, 0.5, 1, c.fov};
 		if (record) {
 			lastCamera = camera;
-			anchorAlt = gAlt;
 			if (tilt != -c.pitch) {
 				tiltClamped++;
 			}
@@ -331,26 +297,22 @@ class FlyoverDroneCamera {
 
 	/**
 	 * Puts the camera at the drone's height for a zoom level chosen by the recorder: the engine takes the distance
-	 * of the level, adds the height of the ground under the target and divides the whole by the magnifier and the
-	 * scale of the frame, so the scale is what makes the height right:
-	 * height = (distance(level) * sin(tilt) + ground) / (magnifier * scale).
+	 * of the level and divides it by the magnifier and the scale of the frame, so the scale is what makes the height
+	 * right: height = distance(level) * sin(tilt) / (magnifier * scale).
+	 * {@code predict}: a new frame; the formula misses the engine by a share that changes slowly, so the last frame's
+	 * miss is taken into the prediction.
 	 */
-	void fit(@NonNull double[] camera, double level, double density, double ground) {
-		fit(camera, level, density, ground, false);
-	}
-
-	/**
-	 * {@code predict}: a new frame, whose ground is the terrain files' one; the formula misses the engine by a share
-	 * that changes slowly (most with a flat view), so the last frame's miss is taken into the prediction.
-	 */
-	void fit(@NonNull double[] camera, double level, double density, double ground, boolean predict) {
+	void fit(@NonNull double[] camera, double level, double density, boolean predict) {
 		double sin = Math.sin(Math.toRadians(camera[4]));
 		Double known = levelConstants.get(level);
 		double levelDistance = (known != null ? known : zoomConstant) * Math.cos(Math.toRadians(camera[0])) / Math.pow(2, level);
-		double scale = (levelDistance * sin + ground) / (density * expectedAlt);
+		double scale = levelDistance * sin / (density * expectedAlt);
 		if (predict) {
 			predictedScale = scale;
-			scale *= Math.exp(scaleMiss);
+			// the miss of another level says nothing about this one
+			if (scaleMissLevel == level) {
+				scale *= Math.exp(scaleMiss);
+			}
 		}
 		camera[2] = level;
 		camera[7] = scale;
@@ -360,30 +322,45 @@ class FlyoverDroneCamera {
 		lastCamera = camera;
 	}
 
-	/** The ground under the target as this camera has it, before the engine says its own. */
-	double targetGround() {
-		return anchorAlt;
-	}
-
 	/**
-	 * After a frame: when the engine's camera is not at the drone's height, the same frame again with the height the
-	 * engine has under the target (its relief tiles differ from the terrain files by tens of meters), or null.
+	 * After a frame: when the engine's camera is not at the drone's height, the same frame again with another scale,
+	 * or null.
+	 * {@code last}: no more tries, only the best one of this frame again when the last one was worse.
 	 */
 	@Nullable
-	double[] correction(@NonNull MapRendererView renderer) {
+	double[] correction(@NonNull MapRendererView renderer, boolean last) {
 		if (lastCamera == null || Double.isNaN(lastLevel)) {
 			return null;
 		}
 		double cameraAlt = renderer.getCameraHeightInMeters();
-		if (Math.abs(cameraAlt - expectedAlt) <= Math.max(1, expectedAlt * 0.0005)) {
+		double error = Math.abs(cameraAlt - expectedAlt);
+		if (bestT != lastT) {
+			bestT = lastT;
+			bestError = Double.MAX_VALUE;
+		}
+		if (error < bestError) {
+			bestError = error;
+			bestCamera = lastCamera.clone();
+			bestCamera[7] = lastScale;
+		}
+		// a thousandth of the height over the ground is under a pixel; each try is a whole render
+		if (error <= Math.max(1.5, expectedAlt * 0.001)) {
 			correctionScale = Double.NaN;
 			return null;
+		}
+		if (last) {
+			if (bestCamera[7] == lastScale) {
+				return null;
+			}
+			lastCamera = bestCamera.clone();
+			lastScale = bestCamera[7];
+			return bestCamera.clone();
 		}
 		double[] camera = lastCamera.clone();
 		double triedScale = lastScale;
 		if (Double.isNaN(correctionScale) || correctionT != lastT || correctionScale == triedScale) {
-			// first try: the engine's own height under the target
-			fit(camera, lastLevel, lastDensity, renderer.getMapTargetHeightInMeters());
+			// first try: the formula without the last frame's miss
+			fit(camera, lastLevel, lastDensity, false);
 		} else {
 			// then the secant through the last two tries: the height goes with 1 / scale
 			double u1 = 1 / correctionScale, u2 = 1 / triedScale;
@@ -404,41 +381,6 @@ class FlyoverDroneCamera {
 	}
 
 	/**
-	 * Distance along a view ray this steep down to where it meets the relief. Of several places (a ridge, then the
-	 * valley behind it) the one nearest to {@code prefer} is taken; when the ray meets nothing, the farthest distance.
-	 */
-	private double hitDistance(@NonNull Pose c, double depression, double prefer) {
-		double pitch = Math.toRadians(-depression), yaw = Math.toRadians(c.yaw);
-		double cosLat = Math.cos(Math.toRadians(c.lat));
-		List<Double> distances = new ArrayList<>();
-		List<LatLon> points = new ArrayList<>();
-		for (double s = 0; s <= maxLookM; s += Math.max(10, s * 0.02)) {
-			double h = s * Math.cos(pitch);
-			distances.add(s);
-			points.add(new LatLon(c.lat + h * Math.cos(yaw) / METERS_PER_DEGREE,
-					c.lon + h * Math.sin(yaw) / (METERS_PER_DEGREE * cosLat)));
-		}
-		double[] ground = grounds(points);
-		double best = Double.NaN;
-		double prevAbove = Double.NaN;
-		for (int i = 0; i < distances.size(); i++) {
-			double s = distances.get(i);
-			// no height there: no crossing through it either
-			double above = c.alt + s * Math.sin(pitch) - ground[i];
-			if (i > 0 && prevAbove > 0 && above <= 0) {
-				double s0 = distances.get(i - 1);
-				double hit = Math.max(1, s0 + (s - s0) * prevAbove / (prevAbove - above));
-				if (Double.isNaN(best) || (!Double.isNaN(prefer)
-						&& Math.abs(Math.log(hit / prefer)) < Math.abs(Math.log(best / prefer)))) {
-					best = hit;
-				}
-			}
-			prevAbove = above;
-		}
-		return Double.isNaN(best) ? maxLookM : best;
-	}
-
-	/**
 	 * Checks the engine's camera after a frame: its height above the sea against the drone's, and learns from it how
 	 * far the camera is at a zoom (it depends on the frame size, the magnifier and the view). The engine's answer can
 	 * lag a frame behind, so each frame moves the constant only part of the way.
@@ -448,15 +390,15 @@ class FlyoverDroneCamera {
 			return;
 		}
 		double cameraAlt = renderer.getCameraHeightInMeters();
-		double targetAlt = renderer.getMapTargetHeightInMeters();
 		double sin = Math.sin(Math.toRadians(lastTilt));
 		if (!learn) {
 			maxHeightError = Math.max(maxHeightError, Math.abs(cameraAlt - expectedAlt));
 			if (predictedScale > 0 && Math.abs(cameraAlt - expectedAlt) < expectedAlt * 0.01) {
 				scaleMiss = Math.log(lastScale / predictedScale);
+				scaleMissLevel = lastLevel;
 			}
 		}
-		double levelDistance = (cameraAlt * lastDensity * lastScale - targetAlt) / sin;
+		double levelDistance = cameraAlt * lastDensity * lastScale / sin;
 		if (levelDistance > 0 && sin > 0.05) {
 			double measured = levelDistance * Math.pow(2, lastLevel) / Math.cos(Math.toRadians(lastLat));
 			Double known = levelConstants.get(lastLevel);
@@ -520,8 +462,8 @@ class FlyoverDroneCamera {
 			return null;
 		}
 		StringBuilder sb = new StringBuilder(String.format(Locale.US,
-				"drone camera: height off by up to %.1f m, looks %.1f° off the drone's pitch at most, ground %.0f-%.0f m ahead",
-				maxHeightError, maxPitchShift, minLook, maxLook));
+				"drone camera: height off by up to %.1f m, looks %.1f° off the drone's pitch at most",
+				maxHeightError, maxPitchShift));
 		if (corrected > 0) {
 			sb.append(String.format(Locale.US, "; %d frames rendered again to put the camera at the drone's height", corrected));
 		}

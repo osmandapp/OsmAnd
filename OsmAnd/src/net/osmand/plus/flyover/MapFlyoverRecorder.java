@@ -274,7 +274,8 @@ public class MapFlyoverRecorder {
 				// the drone's camera learns how far the engine's camera is at a zoom: frame 0 again until it knows
 				applyCamera(cameraAt(params, spec, followed, follow, 0, frameMin, tilePx),
 						() -> updateTracks(tracks, 0, videoS));
-				waitForIdleFrame(view, firstTimeout);
+				// only the camera's height is read: the map of a flat view may load for minutes
+				waitForFrames(view, 2, firstTimeout);
 				measureDrone(true);
 			}
 			for (int i = 0; i < frames; i++) {
@@ -308,13 +309,19 @@ public class MapFlyoverRecorder {
 					applyCamera(camera, () -> updateTracks(tracks, t / 1000.0, videoS));
 					idle = waitForIdleFrame(view, frameTimeout);
 				}
-				for (int retry = 0; retry < DRONE_CORRECTIONS; retry++) {
+				boolean corrected = false;
+				for (int retry = 0; retry <= DRONE_CORRECTIONS; retry++) {
 					// the drone's camera at the height the engine has under its target: this frame once more
-					double[] fixed = droneCorrection();
+					double[] fixed = droneCorrection(retry == DRONE_CORRECTIONS);
 					if (fixed == null) {
 						break;
 					}
 					applyCamera(fixed, () -> updateTracks(tracks, t / 1000.0, videoS));
+					// the height is the camera's, not the map's: the tiles are waited for only by the last try
+					waitForFrames(view, 2, frameTimeout);
+					corrected = true;
+				}
+				if (corrected) {
 					idle = waitForIdleFrame(view, frameTimeout);
 				}
 				measureDrone(false);
@@ -683,6 +690,7 @@ public class MapFlyoverRecorder {
 		view.setSymbolsFade(0, -1);
 		if (drone != null) {
 			view.setFieldOfView(FlyoverDroneCamera.ENGINE_FOV / 2);
+			view.setIgnoreTargetElevation(false);
 			if (!Float.isNaN(elevationScaleBefore)) {
 				view.setElevationScaleFactor(elevationScaleBefore);
 			}
@@ -723,6 +731,7 @@ public class MapFlyoverRecorder {
 	private static final int PREVIEW_PER_S = 5;
 	private static final int DRONE_WARMUP_FRAMES = 8;
 	private static final int DRONE_CORRECTIONS = 6;
+	private static final long FRAMES_TIMEOUT_MS = 2000;
 	private static final float RELIEF_LIFT_SMOOTHING = 0.35f;
 
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
@@ -767,7 +776,7 @@ public class MapFlyoverRecorder {
 	}
 
 	@Nullable
-	private double[] droneCorrection() throws InterruptedException {
+	private double[] droneCorrection(boolean last) throws InterruptedException {
 		FlyoverDroneCamera drone = this.drone;
 		if (drone == null) {
 			return null;
@@ -776,7 +785,7 @@ public class MapFlyoverRecorder {
 		runInUiThread(() -> {
 			MapRendererView renderer = mapView.getMapRenderer();
 			if (renderer != null) {
-				result[0] = drone.correction(renderer);
+				result[0] = drone.correction(renderer, last);
 			}
 		});
 		return result[0];
@@ -798,12 +807,11 @@ public class MapFlyoverRecorder {
 			droneLevel = Math.floor(zoom) + 0.5;
 		}
 		float density = app.getOsmandMap().getMapDensity();
-		double ground = drone.targetGround();
 		double[] fitted = camera.clone();
 		for (int k = 0; k < 4; k++) {
 			double level = Math.min(droneLevel, mapView.getMaxZoom());
 			fitted = camera.clone();
-			drone.fit(fitted, level, density, ground, true);
+			drone.fit(fitted, level, density, true);
 			// far from 1 the engine answers the scale unevenly: then the next level, which needs about twice less
 			double steps = Math.log(fitted[7]) / Math.log(2);
 			if (Math.abs(steps) <= FlyoverDroneCamera.SCALE_BAND || (steps < 0 && level >= mapView.getMaxZoom())) {
@@ -1020,6 +1028,7 @@ public class MapFlyoverRecorder {
 				renderer.setElevationAngle(fElevation);
 				if (!Float.isNaN(fov)) {
 					renderer.setFieldOfView(fov / 2);
+					renderer.setIgnoreTargetElevation(true);
 					// heights to scale: an exaggerated relief would rise into the drone's way
 					if (Float.isNaN(elevationScaleBefore)) {
 						elevationScaleBefore = renderer.getElevationScaleFactor();
@@ -1177,6 +1186,23 @@ public class MapFlyoverRecorder {
 		double dx = MapUtils.getTileNumberX(0, b[1]) - MapUtils.getTileNumberX(0, a[1]);
 		double dy = MapUtils.getTileNumberY(0, b[0]) - MapUtils.getTileNumberY(0, a[0]);
 		return Math.sqrt(dx * dx + dy * dy) * Math.pow(2, zoom) * pxPerTile;
+	}
+
+	/** Frames of the camera just set, the map loaded or not: only the camera is read from them; at most 2 s. */
+	private void waitForFrames(@NonNull MapRendererView view, int count, long timeoutMs) throws InterruptedException {
+		long until = SystemClock.elapsedRealtime() + Math.min(timeoutMs, FRAMES_TIMEOUT_MS);
+		int startFrame = view.getFrameId();
+		int startReady = readyFrames.get();
+		while (SystemClock.elapsedRealtime() < until) {
+			if (cancelled) {
+				throw new CancellationException("Cancelled on the phone");
+			}
+			view.requestRender();
+			Thread.sleep(10);
+			if (view.getFrameId() >= startFrame + count && readyFrames.get() >= startReady + count) {
+				return;
+			}
+		}
 	}
 
 	/**
