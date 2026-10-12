@@ -25,11 +25,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AdditionalInfoBundle {
 
@@ -86,6 +88,9 @@ public class AdditionalInfoBundle {
 		return localizedAdditionalInfo;
 	}
 
+	private static final String SOCKET = "socket";
+	private static final String SOCKET_PREFIX = SOCKET + ":";
+	private static final String SOCKET_TYPE_PREFIX = SOCKET + "_";
 	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + Amenity.CUISINE;
 	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + Amenity.DISH;
 
@@ -117,6 +122,7 @@ public class AdditionalInfoBundle {
 		boolean showDefaultTags = isDefaultForCategory();
 		List<AmenityTagEntry> entries = new ArrayList<>();
 		AmenityTagEntry cuisineEntry = null;
+		Map<String, String> socketTags = new LinkedHashMap<>();
 
 		for (Map.Entry<String, Object> entry : getFilteredLocalizedInfo().entrySet()) {
 			String key = entry.getKey();
@@ -132,6 +138,12 @@ public class AdditionalInfoBundle {
 			ResolvedPoiType resolvedType = resolvePoiType(category, key, strValue);
 			PoiType additionalType = resolvedType.additionalType();
 			PoiType categoryType = resolvedType.categoryType();
+			// map data keeps the poi type name (socket_type2_output), GPX and OSM edits the tag (socket:type2:output)
+			String osmTag = additionalType != null && additionalType.isText() ? additionalType.getOsmTag() : key;
+			if (strValue != null && osmTag != null && osmTag.startsWith(SOCKET_PREFIX)) {
+				socketTags.put(osmTag, strValue);
+				continue;
+			}
 			if (isFilterOnlyOrGrouped(additionalType)) {
 				continue;
 			}
@@ -181,7 +193,86 @@ public class AdditionalInfoBundle {
 		if (cuisineEntry != null && !containsAny(CUISINE_INFO_ID, DISH_INFO_ID)) {
 			entries.add(cuisineEntry);
 		}
+		AmenityTagEntry socketEntry = buildSocketGroup(socketTags);
+		if (socketEntry != null) {
+			entries.add(socketEntry);
+		}
 		return entries;
+	}
+
+	/**
+	 * One row for all socket:<type>[:<attribute>] tags. Its children are the socket types, keyed by the
+	 * short type name (socket_type2_yes = "Type 2"), with count, output, voltage and current as the value.
+	 */
+	private AmenityTagEntry buildSocketGroup(Map<String, String> socketTags) {
+		Map<String, Map<String, String>> attributesByType = new LinkedHashMap<>();
+		for (Map.Entry<String, String> tag : socketTags.entrySet()) {
+			String[] parts = tag.getKey().substring(SOCKET_PREFIX.length()).split(":", 2);
+			String attribute = parts.length > 1 ? parts[1] : "";
+			attributesByType.computeIfAbsent(parts[0], t -> new LinkedHashMap<>()).put(attribute, tag.getValue());
+		}
+		List<PoiType> textTypes = poiTypes.getTextPoiAdditionals();
+		List<String> types = new ArrayList<>(attributesByType.keySet());
+		types.sort(Comparator.comparingInt((String type) -> {
+			int ind = textTypes.indexOf(poiTypes.getTextPoiAdditionalByKey(SOCKET_TYPE_PREFIX + type));
+			return ind < 0 ? Integer.MAX_VALUE : ind;
+		}).thenComparing(type -> type));
+
+		List<AmenityTagEntry> children = new ArrayList<>();
+		int order = PoiType.DEFAULT_ORDER;
+		for (String type : types) {
+			Map<String, String> attributes = attributesByType.get(type);
+			String count = attributes.get("");
+			if ("no".equals(count) || "0".equals(count)) {
+				continue;
+			}
+			PoiType textType = poiTypes.getTextPoiAdditionalByKey(SOCKET_TYPE_PREFIX + type);
+			if (textType != null) {
+				order = Math.min(order, textType.getOrder());
+			}
+			children.add(new AmenityTagEntry.Builder(SOCKET_TYPE_PREFIX + type + "_yes")
+					.setValue(formatSocketAttributes(attributes))
+					.build());
+		}
+		if (children.isEmpty()) {
+			return null;
+		}
+		return new AmenityTagEntry.Builder(SOCKET)
+				.setValue(children.stream().map(c -> c.key).collect(Collectors.joining(Amenity.SEPARATOR)))
+				.setCollapsableEntries(children)
+				.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.TAG_GROUP)
+				.setOrder(order)
+				.build();
+	}
+
+	// "4 × 22 kW · 400 V · 32 A": the values are OSM text, so no units are added or translated
+	private static String formatSocketAttributes(Map<String, String> attributes) {
+		Map<String, String> rest = new LinkedHashMap<>(attributes);
+		String count = rest.remove("");
+		String output = rest.remove("output");
+		StringBuilder sb = new StringBuilder();
+		if (count != null && Algorithms.isInt(count)) {
+			sb.append(count);
+		}
+		if (!Algorithms.isEmpty(output)) {
+			sb.append(sb.length() > 0 ? " × " : "").append(output);
+		}
+		List<String> details = new ArrayList<>();
+		for (String attribute : List.of("voltage", "current")) {
+			String value = rest.remove(attribute);
+			if (!Algorithms.isEmpty(value)) {
+				details.add(value);
+			}
+		}
+		for (String value : rest.values()) {
+			if (!Algorithms.isEmpty(value)) {
+				details.add(value);
+			}
+		}
+		for (String detail : details) {
+			sb.append(sb.length() > 0 ? " · " : "").append(detail);
+		}
+		return sb.toString();
 	}
 
 	private List<AmenityTagEntry> collectCollapsableGroups(PoiCategory category) {
