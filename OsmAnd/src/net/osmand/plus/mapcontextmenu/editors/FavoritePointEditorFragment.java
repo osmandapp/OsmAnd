@@ -145,6 +145,15 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return EditorIconController.getInstance(app, this, getIconName(), originalIconKey);
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		if (originalIconKey != null && activity != null && !activity.isChangingConfigurations()) {
+			EditorIconController.onDestroy(app, originalIconKey);
+		}
+	}
+
 	@Nullable
 	@Override
 	public PointEditor getEditor() {

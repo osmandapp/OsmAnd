@@ -38,20 +38,14 @@ public class FavoriteEditorIconController extends EditorIconController {
 	public void setSelectedCategory(@NonNull IconsCategory category) {
 		super.setSelectedCategory(category);
 		if (ORIGINAL_KEY.equals(category.getKey())) {
-			return;
-		}
-		if (getSelectedIconKey() != null) {
+			if (iconsPaletteListener != null) {
+				iconsPaletteListener.onIconSelectedFromPalette(null);
+			}
+		} else if (getSelectedIconKey() != null) {
 			onIconSelectedFromPalette(getSelectedIconKey(), null);
 		} else if (getSelectedIconKey() == null) {
 			onIconSelectedFromPalette(favoriteAppearanceController.requireIcon(), null);
 			cardController.updateIconsSelection();
-		}
-	}
-
-	@Override
-	protected void onOriginalCategorySelected() {
-		if (iconsPaletteListener != null) {
-			iconsPaletteListener.onIconSelectedFromPalette(null);
 		}
 	}
 
