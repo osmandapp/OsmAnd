@@ -47,7 +47,9 @@ public class SpeedCameraFilter {
 					shouldAddAlarm = true;
 				}
 			} else if (!visitedFromNodes.contains(relationId)) {
-				// moving backward: "to" -> "from". Deny. Don't add speed camera alarm.
+				// don't add alarms for hidden technical points "to" and "device".
+				// moving backward: "to" -> "from". Ignore.
+				// don's add extra alarm for camera points with "device" role. it was already sounded at "from" point.
 				visitedToNodes.add(relationId);
 			}
 		}
