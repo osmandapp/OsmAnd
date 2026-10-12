@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="index_item" type="id"/>
+
+    <item name="item_as_tag" type="id"/>
+
+    <!-- Bearing widget ids-->
+    <item name="bearing_widget_state_relative_bearing" type="id"/>
+    <item name="bearing_widget_state_magnetic_bearing" type="id"/>
+    <!-- Time control widget ids-->
+    <item name="time_control_widget_state_arrival_time" type="id"/>
+    <item name="time_control_widget_state_time_to_go" type="id"/>
+    <!-- Compass control widget ids-->
+    <item name="compass_ruler_control_widget_state_show" type="id"/>
+    <item name="compass_ruler_control_widget_state_hide" type="id"/>
+    <!-- AV notes widget ids-->
+    <item name="av_notes_widget_state_ask" type="id"/>
+    <item name="av_notes_widget_state_audio" type="id"/>
+    <item name="av_notes_widget_state_video" type="id"/>
+    <item name="av_notes_widget_state_photo" type="id"/>
+    <!-- Elevation profile widget ids-->
+    <item name="elevation_widget_show_slopes" type="id"/>
+    <item name="elevation_widget_hide_slopes" type="id"/>
+
+</resources>

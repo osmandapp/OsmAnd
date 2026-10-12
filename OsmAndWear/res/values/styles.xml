@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Dashboard styles -->
+    <style name="DashboardSubHeader">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:paddingBottom">@dimen/subHeaderPadding</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/default_desc_text_size</item>
+        <item name="typefaceWeight">medium</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:layout_marginLeft">@dimen/subHeaderMarginLeft</item>
+        <item name="android:layout_marginStart">@dimen/subHeaderMarginLeft</item>
+    </style>
+
+    <style name="DashboardGeneralButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:layout_height">@dimen/showAllButtonHeight</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/default_sub_text_size</item>
+        <item name="typefaceWeight">medium</item>
+        <item name="android:textColor">?attr/dashboard_general_button_text_color</item>
+        <item name="android:layout_marginRight">@dimen/showAllButtonMarginRight</item>
+        <item name="android:layout_marginEnd">@dimen/showAllButtonMarginRight</item>
+        <item name="android:background">?attr/dashboard_button</item>
+    </style>
+
+    <style name="DialogActionButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/dialog_button_height</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">@color/card_and_list_background_light</item>
+        <item name="android:background">?attr/btn_round</item>
+    </style>
+
+    <style name="SplashScreenBaseTheme" parent="OsmandLightTheme.NoActionbar" />
+
+    <style name="FirstSplashScreenCustom" parent="SplashScreenBaseTheme">
+        <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
+    </style>
+
+    <style name="FirstSplashScreenPlus" parent="SplashScreenBaseTheme">
+        <item name="android:windowBackground">@drawable/first_splash_screen_plus</item>
+    </style>
+
+    <style name="FirstSplashScreenFree" parent="SplashScreenBaseTheme">
+        <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
+    </style>
+
+    <style name="FirstSplashScreenNightlyFree" parent="SplashScreenBaseTheme">
+        <item name="android:windowBackground">@drawable/first_splash_screen_free_dev</item>
+    </style>
+
+    <style name="TextAppearance.App.DarkTextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/active_color_primary_dark</item>
+    </style>
+
+    <!-- Osmand themes styles -->
+    <!--<style name="OsmandLightTheme" parent="Theme.MaterialComponents.Light">
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>-->
+    <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="titleMargin">0dp</item>
+        <item name="contentInsetStartWithNavigation">@dimen/toolbar_inset_start_with_navigation</item>
+    </style>
+
+    <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="srcCompat">@drawable/ic_overflow_menu_white</item>
+        <item name="android:tint">?attr/app_bar_primary_item_color</item>
+    </style>
+
+    <style name="PopupMenuLight" parent="@style/Widget.AppCompat.Light.PopupMenu">
+        <item name="overlapAnchor">true</item>'
+        <item name="android:dropDownVerticalOffset">8dip</item>
+    </style>
+
+    <style name="PopupMenuDark" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="overlapAnchor">true</item>'
+        <item name="android:dropDownVerticalOffset">8dip</item>
+    </style>
+<!--    <style name="OsmandDarkTheme" parent="Theme.MaterialComponents">-->
+<!--        <item name="android:windowSwipeToDismiss">false</item>-->
+<!--    </style>-->
+
+    <style name="FreeVersionBanner" parent="OsmandDarkTheme">
+        <item name="android:textColor">@color/card_and_list_background_light</item>
+    </style>
+
+    <style name="Theme.MaterialComponents.Dialog.Alert.NoAnimation">
+        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleDark</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleDark</item>
+        <item name="buttonBarNeutralButtonStyle">@style/DialogButtonStyleDark</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="Theme.MaterialComponents.Light.Dialog.Alert.NoAnimation">
+        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleLight</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleLight</item>
+        <item name="buttonBarNeutralButtonStyle">@style/DialogButtonStyleLight</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="DialogButtonStyleLight" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/active_color_primary_light</item>
+    </style>
+
+    <style name="DialogButtonStyleDark" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/active_color_primary_dark</item>
+    </style>
+
+    <style name="OsmandPreferenceTheme" parent="@style/PreferenceThemeOverlay">
+        <item name="android:layout">@layout/preferences_screen</item>
+        <item name="iconSpaceReserved">true</item>
+    </style>
+
+    <!-- Standard action bar override -->
+    <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@color/app_bar_main_dark</item>
+        <item name="titleTextStyle">@style/Widget.Styled.DarkActionBarTitle</item>
+
+        <item name="android:background">@color/app_bar_main_dark</item>
+        <item name="android:titleTextStyle">@style/Widget.Styled.DarkActionBarTitle</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="Widget.Styled.ActionBarLight" parent="Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="background">@color/app_bar_main_light</item>
+        <item name="android:background">@color/app_bar_main_light</item>
+        <item name="titleTextStyle">@style/Widget.Styled.LightActionBarTitle</item>
+        <item name="subtitleTextStyle">@style/Widget.Styled.LightActionBarSubtitle</item>
+        <item name="actionBarWidgetTheme">@style/Theme.AppCompat</item>
+
+        <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarTitle</item>
+        <item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarSubtitle</item>
+        <item name="android:actionBarWidgetTheme">@style/Theme.AppCompat</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="CheckboxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:height">@dimen/checkBoxSize</item>
+        <item name="android:width">@dimen/checkBoxSize</item>
+    </style>
+
+    <style name="RadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:height">@dimen/radioButtonSize</item>
+        <item name="android:width">@dimen/radioButtonSize</item>
+    </style>
+
+    <style name="Widget.Styled.LightActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/card_and_list_background_light</item>
+    </style>
+
+    <style name="Widget.Styled.DarkActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/text_color_primary_dark</item>
+    </style>
+
+    <style name="Widget.Styled.LightActionBarSubtitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/white_80_transparent</item>
+    </style>
+
+    <style name="WhiteActionMode" parent="@style/Widget.AppCompat.ActionMode">
+        <item name="titleTextStyle">@style/WhiteActionModeTitleTextStyle</item>
+        <item name="android:titleTextStyle">@style/WhiteActionModeTitleTextStyle</item>
+    </style>
+
+    <style name="WhiteActionModeTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionMode.Title">
+        <item name="android:textColor">@color/card_and_list_background_light</item>
+    </style>
+
+    <!-- Dialog popup -->
+    <style name="Animations"/>
+
+    <style name="Animations.NoAnimation">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+    </style>
+    <!-- PopDownMenu -->
+    <style name="Animations.PopDownMenu"/>
+
+    <style name="Animations.PopDownMenu.Left">
+        <item name="android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
+    </style>
+
+    <style name="Animations.PopDownMenu.Right">
+        <item name="android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
+    </style>
+
+    <style name="Animations.PopDownMenu.Center">
+        <item name="android:windowEnterAnimation">@anim/grow_from_top</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_bottom</item>
+    </style>
+
+    <!-- PopUpMenu -->
+    <style name="Animations.PopUpMenu"/>
+
+    <style name="Animations.PopUpMenu.Fade">
+        <item name="android:windowEnterAnimation">@anim/popup_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_hide</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.Left">
+        <item name="android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.MiddleHeightLeft">
+        <item name="android:windowEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_left</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.Right">
+        <item name="android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.MiddleHeightRight">
+        <item name="android:windowEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.Center">
+        <item name="android:windowEnterAnimation">@anim/grow_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_top</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.Bottom">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+    <style name="Animations.Alpha">
+        <item name="android:windowEnterAnimation">@anim/alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_out</item>
+    </style>
+
+    <style name="create_poi_text_field">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_marginLeft">68dp</item>
+        <item name="android:layout_marginStart">68dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="edit_poi_imageview_style">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="BottomSheet.Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:textColor">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="TextAppearance.ListItemTitle" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">@dimen/default_list_text_size</item>
+    </style>
+
+    <style name="TextAppearance.ListItemCategoryTitle" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="typefaceWeight">medium</item>
+        <item name="android:textSize">@dimen/default_list_text_size</item>
+    </style>
+
+    <style name="TextAppearance.ContextMenuTitle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">@dimen/default_list_text_size_large</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TextAppearance.ContextMenuSubtitle" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textSize">@dimen/default_desc_text_size</item>
+    </style>
+
+    <style name="OsmandLightTheme.LightStatusBar" parent="OsmandLightTheme">
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="OsmandLightTheme.DarkActionbar.LightStatusBar">
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="OsmandLightTheme.NoActionbar.LightStatusBar">
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="XmasDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/xmas_blue</item>
+    </style>
+
+    <style name="Dialog90Light" parent="Base.Theme.AppCompat.Light.Dialog">
+
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+
+        <item name="secondary_icon_color">@color/icon_color_secondary_light</item>
+        <item name="default_icon_color">@color/icon_color_default_light</item>
+        <item name="bg_color">@color/list_background_color_light</item>
+    </style>
+
+    <style name="Dialog90Dark" parent="Base.Theme.AppCompat.Dialog">
+
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+
+        <item name="secondary_icon_color">@color/icon_color_secondary_dark</item>
+        <item name="default_icon_color">@color/icon_color_default_dark</item>
+        <item name="bg_color">@color/list_background_color_dark</item>
+    </style>
+
+    <style name="AppBarControls" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">?attr/app_bar_primary_item_color</item>
+        <item name="colorControlActivated">?attr/app_bar_primary_item_color</item>
+        <item name="colorControlHighlight">?attr/app_bar_primary_item_color</item>
+
+    </style>
+
+    <style name="AppBarTitle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">?attr/app_bar_primary_item_color</item>
+        <item name="android:textSize">@dimen/dialog_header_text_size</item>
+    </style>
+
+
+    <style name="AppBarTitlePrimary" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">@dimen/dialog_header_text_size</item>
+    </style>
+
+    <style name="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:padding">0dp</item>
+        <item name="titleMargin">0dp</item>
+    </style>
+
+    <style name="InputLayoutStyle.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:minHeight">@dimen/favorites_list_item_height</item>
+        <item name="android:textColorHint">?android:textColorSecondary</item>
+        <item name="boxBackgroundColor">@color/input_layout_bg_color</item>
+        <item name="errorEnabled">true</item>
+        <item name="helperTextEnabled">true</item>
+        <item name="helperTextTextColor">?android:textColorSecondary</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="hintTextColor">?android:textColorSecondary</item>
+    </style>
+
+
+    <!--******************************** Basic text styles ********************************-->
+
+    <!--To apply style for a specific TextView, use TextViewEx and tag "style"-->
+    <!--Don't use tag "textAppearance". It loses font family and line height parameters-->
+
+    <!-- Title -->
+    <style name="TitleStyle">
+        <item name="android:textSize">@dimen/default_list_text_size</item>
+        <item name="lineHeight">@dimen/default_title_line_height</item>
+        <item name="android:letterSpacing">@dimen/text_button_letter_spacing</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TitleStyle.Medium">
+        <item name="typefaceWeight">medium</item>
+    </style>
+
+    <!-- Description -->
+    <style name="DescStyle">
+        <item name="android:textSize">@dimen/default_desc_text_size</item>
+        <item name="lineHeight">@dimen/default_desc_line_height</item>
+        <item name="android:letterSpacing">@dimen/description_letter_spacing</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="DescStyle.Medium">
+        <item name="typefaceWeight">medium</item>
+    </style>
+
+    <!-- Small Description -->
+    <style name="SmallDescStyle">
+        <item name="android:textSize">@dimen/default_sub_text_size</item>
+        <item name="lineHeight">@dimen/small_desc_line_height</item>
+        <item name="android:letterSpacing">@dimen/text_button_letter_spacing</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="SmallDescStyle.Medium">
+        <item name="typefaceWeight">medium</item>
+    </style>
+
+    <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">?attr/app_bar_primary_item_color</item>
+        <item name="android:textSize">@dimen/bottom_sheet_title_big</item>
+    </style>
+
+    <style name="CoordinateInputEditText" parent="Widget.AppCompat.EditText">
+        <item name="colorControlActivated">@color/coordinate_input_edit_text_activated</item>
+        <item name="colorControlNormal">?attr/coordinate_input_edit_text_normal</item>
+    </style>
+
+    <style name="TimeSlider" parent="Widget.MaterialComponents.Tooltip">
+        <item name="backgroundTint">?attr/active_color_primary</item>
+        <item name="android:textColor">?attr/slider_label_text_dark</item>
+    </style>
+</resources>

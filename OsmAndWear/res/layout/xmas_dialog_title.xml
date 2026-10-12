@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingLeft="24dp"
+              android:paddingRight="16dp"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
+              android:paddingTop="18dp"
+	android:paddingStart="24dp"
+	android:paddingEnd="16dp">
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/christmas_poi"
+		android:layout_gravity="center"
+		android:gravity="center"
+        android:textColor="@color/card_and_list_background_light"
+        android:textSize="12sp"
+        app:typefaceWeight="medium"/>
+
+</LinearLayout>
