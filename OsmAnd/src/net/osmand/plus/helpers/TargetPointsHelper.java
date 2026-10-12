@@ -414,12 +414,20 @@ public class TargetPointsHelper {
 	}
 
 	public void clearPointToNavigate(boolean updateRoute) {
+		clearPointToNavigate(updateRoute, true);
+	}
+
+	public void clearPointToNavigate(boolean updateRoute, boolean clearIntermediatePoints) {
 		ctx.logRoutingEvent("clearPointToNavigate updateRoute " + updateRoute);
 		cancelTargetPointAddressRequest();
-		cancelAllIntermediatePointsAddressRequests();
+		if (clearIntermediatePoints) {
+			cancelAllIntermediatePointsAddressRequests();
+		}
 		settings.clearPointToNavigate();
-		settings.clearIntermediatePoints();
-		intermediatePoints.clear();
+		if (clearIntermediatePoints) {
+			settings.clearIntermediatePoints();
+			intermediatePoints.clear();
+		}
 		readFromSettings();
 		updateRouteAndRefresh(updateRoute);
 	}
