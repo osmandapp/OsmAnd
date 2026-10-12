@@ -95,6 +95,12 @@ public class MapFlyoverRecorder {
 	private static final int MAX_SIZE = 3840;
 	/** One recording at a time: a second call (an MCP client retrying a long call) would take the renderer over. */
 	private static final AtomicBoolean RECORDING = new AtomicBoolean();
+	/**
+	 * The recording has the renderer: a MapActivity created meanwhile (the phone turned, the theme changed) must not
+	 * take it, as during Android Auto. It would also release it when it is recreated once more, while the recording
+	 * still reads from it (a native crash in MapRenderer::isIdle).
+	 */
+	private static volatile boolean rendererHeld;
 
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
@@ -282,7 +288,7 @@ public class MapFlyoverRecorder {
 				if (cancelled) {
 					throw new CancellationException("Cancelled on the phone");
 				}
-				// a recreated MapActivity (rotation, theme change) takes the renderer for its own map: take it back
+				// another view took the renderer over meanwhile: take it back
 				boolean retaken = ensureRenderer();
 				if (i % params.getFps() == 0) {
 					int percent = 100 * i / frames;
@@ -427,6 +433,7 @@ public class MapFlyoverRecorder {
 			if (view != null) {
 				giveRendererBack(view);
 			}
+			rendererHeld = false;
 			if (magnifierBefore[0] != null) {
 				try {
 					runInUiThread(() -> {
@@ -593,6 +600,11 @@ public class MapFlyoverRecorder {
 		return videos;
 	}
 
+	/** A recording renders the map meanwhile; the phone's map takes the renderer only when it is given back. */
+	public static boolean isRendererHeld() {
+		return rendererHeld;
+	}
+
 	@NonNull
 	private File getFile(@Nullable String name) {
 		File dir = getFolder(app);
@@ -616,6 +628,7 @@ public class MapFlyoverRecorder {
 			if (context == null) {
 				return;
 			}
+			rendererHeld = true;
 			MapRendererView current = null;
 			if (mapView.getMapRenderer() != null) {
 				mapView.detachMapRenderer();
@@ -660,9 +673,9 @@ public class MapFlyoverRecorder {
 	}
 
 	/**
-	 * A MapActivity created during the recording (the phone turned, the theme changed) takes the renderer for its
-	 * map, as it does after Android Auto; our view then renders nothing. The recording takes it back, with the
-	 * video's size and density, and keeps its symbol settings; the phone's map gets it again at the end.
+	 * A view that took the renderer over during the recording leaves our view rendering nothing (a MapActivity
+	 * created meanwhile waits while {@link #isRendererHeld()}). The recording takes it back, with the video's size
+	 * and density, and keeps its symbol settings; the phone's map gets it again at the end.
 	 */
 	private boolean ensureRenderer() throws InterruptedException {
 		AtlasMapRendererView current = view;
@@ -705,6 +718,7 @@ public class MapFlyoverRecorder {
 					context.suspendMapRendererView(view);
 				}
 				// the phone's map takes the renderer over from the paused view, as after Android Auto
+				rendererHeld = false;
 				app.getOsmandMap().setupRenderingView();
 			});
 		} catch (InterruptedException e) {
