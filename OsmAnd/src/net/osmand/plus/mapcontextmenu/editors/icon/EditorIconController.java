@@ -39,6 +39,7 @@ import java.util.*;
 public class EditorIconController extends BaseDialogController {
 
 	public static final String PROCESS_ID = "editor_process_select_icon";
+	private static final String ORIGINAL_ICON_PROCESS_ID = "editor_process_select_icon_with_original";
 
 	private static final Log LOG = PlatformUtil.getLog(EditorIconController.class);
 
@@ -221,14 +222,6 @@ public class EditorIconController extends BaseDialogController {
 		this.selectedCategory = category;
 		cardController.updateSelectedCardState();
 		screenController.updateSelectedCategory();
-		if (ORIGINAL_KEY.equals(category.getKey())) {
-			onOriginalCategorySelected();
-		}
-	}
-
-	protected void onOriginalCategorySelected() {
-		onIconSelectedFromPalette(originalIconKey, null);
-		cardController.updateIconsSelection();
 	}
 
 	@NonNull
@@ -335,7 +328,13 @@ public class EditorIconController extends BaseDialogController {
 
 	@NonNull
 	protected IconsCategory findInitialIconCategory() {
-		return findIconCategory(getSelectedIconKey(), Set.of(ORIGINAL_KEY));
+		String iconKey = getSelectedIconKey();
+		IconsCategory category = findIconCategory(iconKey, Set.of(ORIGINAL_KEY));
+		if (iconKey != null && !category.containsIcon(iconKey)) {
+			// the icon is in no other category, e.g. the original icon of a POI
+			return findIconCategory(iconKey);
+		}
+		return category;
 	}
 
 	@NonNull
@@ -373,7 +372,8 @@ public class EditorIconController extends BaseDialogController {
 	@NonNull
 	protected IconsCategory getDefaultCategory() {
 		IconsCategory category = categories.get(0);
-		if (category.getKey().equals(ORIGINAL_KEY)) {
+		// "original" of the point editor holds a single icon, it is not a default category
+		if (originalIconKey != null && category.getKey().equals(ORIGINAL_KEY) && categories.size() > 1) {
 			category = categories.get(1);
 		}
 		return category;
@@ -382,12 +382,25 @@ public class EditorIconController extends BaseDialogController {
 	@NonNull
 	@Override
 	public String getProcessId() {
-		return PROCESS_ID;
+		return getProcessId(originalIconKey);
+	}
+
+	/**
+	 * A controller with the original icon of a point is registered separately,
+	 * so that a folder editor opened from the point editor does not get the original icon.
+	 */
+	@NonNull
+	private static String getProcessId(@Nullable String originalIconKey) {
+		return originalIconKey != null ? ORIGINAL_ICON_PROCESS_ID : PROCESS_ID;
 	}
 
 	public static void onDestroy(@NonNull OsmandApplication app) {
+		onDestroy(app, null);
+	}
+
+	public static void onDestroy(@NonNull OsmandApplication app, @Nullable String originalIconKey) {
 		DialogManager manager = app.getDialogManager();
-		manager.unregister(PROCESS_ID);
+		manager.unregister(getProcessId(originalIconKey));
 	}
 
 	@NonNull
@@ -403,13 +416,14 @@ public class EditorIconController extends BaseDialogController {
 	                                               @Nullable String preselectedIconKey,
 	                                               @Nullable String originalIconKey) {
 		DialogManager dialogManager = app.getDialogManager();
-		EditorIconController controller = (EditorIconController) dialogManager.findController(PROCESS_ID);
+		String processId = getProcessId(originalIconKey);
+		EditorIconController controller = (EditorIconController) dialogManager.findController(processId);
 		if (controller == null) {
 			controller = new EditorIconController(app);
 			controller.setSelectedIconKey(preselectedIconKey);
 			controller.setOriginalIconKey(originalIconKey);
 			controller.init();
-			dialogManager.register(PROCESS_ID, controller);
+			dialogManager.register(processId, controller);
 		}
 		controller.setTargetFragment(targetFragment);
 		return controller;
