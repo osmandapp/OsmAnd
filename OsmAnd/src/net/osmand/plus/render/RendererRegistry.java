@@ -27,14 +27,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 
 public class RendererRegistry {
@@ -72,7 +69,6 @@ public class RendererRegistry {
 	private final Map<String, String> internalRenderers = new LinkedHashMap<>();
 	private final Map<String, RenderingRulesStorage> loadedRenderers = new LinkedHashMap<>();
 	private final List<RendererEventListener> rendererLoadedListeners = new ArrayList<>();
-	private final Set<String> bundledRenderers = Collections.synchronizedSet(new HashSet<>());
 
 	public interface RendererEventListener {
 		default void onRendererSelected(RenderingRulesStorage storage) {
@@ -130,39 +126,25 @@ public class RendererRegistry {
 			if (warnings != null) warnings.add(message);
 			return null;
 		}
-		while (true) {
-			try {
-				Map<String, String> renderingConstants = new LinkedHashMap<>();
-				Map<String, RenderingRulesStorage> renderers = new LinkedHashMap<>();
-				RenderingRulesStorage renderer = loadRenderer(null, name, renderers, renderingConstants);
-				if (renderer != null) {
-					for (String addonName : getRendererAddons().keySet()) {
-						loadRenderer(renderer, addonName, renderers, renderingConstants);
-					}
-					loadedRenderers.put(name, renderer);
-				} else {
-					String message = "Cannot load renderer " + name;
-					log.warn(message);
-					if (warnings != null) warnings.add(message);
+		try {
+			Map<String, String> renderingConstants = new LinkedHashMap<>();
+			RenderingRulesStorage renderer = loadRenderer(null, name, new LinkedHashMap<>(), renderingConstants);
+			if (renderer != null) {
+				for (String addonName : getRendererAddons().keySet()) {
+					loadRenderer(renderer, addonName, loadedRenderers, renderingConstants);
 				}
-				return renderer;
-			} catch (RendererLoadException e) {
-				String failedName = "default".equalsIgnoreCase(e.rendererName) ? DEFAULT_RENDER : e.rendererName;
-				String internalRender = getInternalRender(failedName);
-				if (internalRender != null && !externalRenderers.containsKey(failedName)
-						&& bundledRenderers.add(internalRender)) {
-					log.error("Failed to load built-in renderer " + failedName + "; retrying bundled resource", e.getCause());
-					copyFileForInternalStyle(failedName);
-					continue;
-				}
-				log.error("Error loading renderer " + failedName, e.getCause());
-				if (warnings != null) warnings.add(e.getCause().getMessage());
-			} catch (Exception e) {
-				log.error("Error loading renderer", e);
-				if (warnings != null) warnings.add(e.getMessage());
+				loadedRenderers.put(name, renderer);
+			} else {
+				String message = "Cannot load renderer " + name;
+				log.warn(message);
+				if (warnings != null) warnings.add(message);
 			}
-			return null;
+			return renderer;
+		} catch (Exception e) {
+			log.error("Error loading renderer", e);
+			if (warnings != null) warnings.add(e.getMessage());
 		}
+		return null;
 	}
 
 	public void updateRenderer(@NonNull RenderingRulesStorage storage) {
@@ -195,58 +177,70 @@ public class RendererRegistry {
 		return null;
 	}
 
-	private static class RendererLoadException extends RuntimeException {
-		private final String rendererName;
-
-		private RendererLoadException(String rendererName, Exception cause) {
-			super(cause);
-			this.rendererName = rendererName;
-		}
-	}
-
 	@Nullable
 	private RenderingRulesStorage loadRenderer(RenderingRulesStorage main, String name, Map<String, RenderingRulesStorage> loadedRenderers,
-	                                           Map<String, String> renderingConstants) {
-		boolean addon = main != null;
-		try {
-			if (!readRenderingConstants(name, renderingConstants)) {
-				return null;
-			}
-			// parse content
-			InputStream is = getInputStream(name);
-			if (is != null) {
-				if (main == null) {
-					// reuse same storage for addons
-					main = new RenderingRulesStorage(name, renderingConstants);
-				}
-				loadedRenderers.put(name, main);
-				try {
-					main.parseRulesFromXmlInputStream(is, (nm, ref) -> {
-						// reload every time to propagate rendering constants
-						if (loadedRenderers.containsKey(nm)) {
-							log.warn("Possible Circular dependencies found " + nm);
-						}
-						RenderingRulesStorage dep = loadRenderer(null, nm, loadedRenderers, renderingConstants);
-						if (dep == null) {
-							log.warn("Dependent renderer not found: " + nm);
-						}
-						return dep;
-					}, addon);
-				} finally {
-					is.close();
-				}
-			}
-		} catch (RendererLoadException e) {
-			throw e;
-		} catch (IOException | XmlPullParserException | RuntimeException e) {
-			throw new RendererLoadException(name, e);
+	                                           Map<String, String> renderingConstants) throws IOException, XmlPullParserException {
+		if (!readOrRestoreRenderingConstants(name, renderingConstants)) {
+			return null;
 		}
-		if (!addon && main != null) {
-			for (RendererEventListener listener : rendererLoadedListeners) {
-				listener.onRendererLoaded(name, main);
+		// parse content
+		InputStream is = getInputStream(name);
+		boolean addon = main != null;
+		if (is != null) {
+			if (main == null) {
+				// reuse same storage for addons
+				main = new RenderingRulesStorage(name, renderingConstants);
+			}
+			loadedRenderers.put(name, main);
+			try {
+				main.parseRulesFromXmlInputStream(is, (nm, ref) -> {
+					// reload every time to propagate rendering constants
+					if (loadedRenderers.containsKey(nm)) {
+						log.warn("Possible Circular dependencies found " + nm);
+					}
+					RenderingRulesStorage dep = null;
+					try {
+						dep = loadRenderer(null, nm, loadedRenderers, renderingConstants);
+					} catch (IOException e) {
+						log.warn("Dependent renderer not found: " + e.getMessage(), e);
+					}
+					if (dep == null) {
+						log.warn("Dependent renderer not found: " + nm);
+					}
+					return dep;
+				}, addon);
+			} finally {
+				is.close();
+			}
+
+			if (!addon) {
+				for (RendererEventListener listener : rendererLoadedListeners) {
+					listener.onRendererLoaded(name, main);
+				}
 			}
 		}
 		return main;
+	}
+
+	private boolean readOrRestoreRenderingConstants(String name, Map<String, String> renderingConstants) throws XmlPullParserException, IOException {
+		try {
+			return readRenderingConstants(name, renderingConstants);
+		} catch (IOException | XmlPullParserException e) {
+			// The cached copy of a built-in style is rewritten only on app update, so restore a damaged one now
+			if (!isInternalStyle(name)) {
+				throw e;
+			}
+			log.error("Rendering style " + name + " is damaged, restoring it from the app", e);
+			copyFileForInternalStyle(name);
+			return readRenderingConstants(name, renderingConstants);
+		}
+	}
+
+	private boolean isInternalStyle(String name) {
+		if ("default".equalsIgnoreCase(name)) {
+			name = DEFAULT_RENDER;
+		}
+		return !externalRenderers.containsKey(name) && getInternalRender(name) != null;
 	}
 
 	private boolean readRenderingConstants(String name, Map<String, String> renderingConstants) throws XmlPullParserException, IOException {
@@ -254,24 +248,38 @@ public class RendererRegistry {
 		if (is == null) {
 			return false;
 		}
+		Map<String, String> constants = new LinkedHashMap<>();
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(is, "UTF-8");
+			boolean styleFound = false;
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String tagName = parser.getName();
+					styleFound |= tagName.equals("renderingStyle");
 					if (tagName.equals("renderingConstant")) {
-						if (!renderingConstants.containsKey(parser.getAttributeValue("", "name"))) {
-							renderingConstants.put(parser.getAttributeValue("", "name"),
+						if (!constants.containsKey(parser.getAttributeValue("", "name"))) {
+							constants.put(parser.getAttributeValue("", "name"),
 									parser.getAttributeValue("", "value"));
 						}
 					}
 				}
 			}
+			// The parser ends an empty file or a file cut off between two tags without an error
+			if (!styleFound || parser.getDepth() > 0) {
+				String message = "Rendering style " + name + " is incomplete";
+				if (isInternalStyle(name)) {
+					throw new XmlPullParserException(message);
+				}
+				log.error(message);
+			}
 		} finally {
 			is.close();
 		}
+		// Only a complete read adds its constants, so a damaged copy leaves no values behind for the retry
+		constants.keySet().removeAll(renderingConstants.keySet());
+		renderingConstants.putAll(constants);
 		return true;
 	}
 
@@ -297,9 +305,7 @@ public class RendererRegistry {
 				}
 
 				File internalFile = getFileForInternalStyle(name);
-				if (bundledRenderers.contains(getInternalRender(name))) {
-					is = RenderingRulesStorage.class.getResourceAsStream(getInternalRender(name));
-				} else if (internalFile.exists() && !IGNORE_CACHED_STYLES) {
+				if (internalFile.exists() && !IGNORE_CACHED_STYLES) {
 					is = new FileInputStream(internalFile);
 				} else {
 					copyFileForInternalStyle(name);
@@ -328,20 +334,18 @@ public class RendererRegistry {
 	}
 
 	public void copyFileForInternalStyle(String name) {
-		String internalRender = getInternalRender(name);
-		if (Algorithms.isEmpty(internalRender)) {
-			return;
-		}
-		try (InputStream input = RenderingRulesStorage.class.getResourceAsStream(internalRender)) {
-			if (input == null) {
-				log.warn("Resource not found in classpath: " + internalRender);
-				return;
+		try {
+			FileOutputStream fout = new FileOutputStream(getFileForInternalStyle(name));
+			String internalRender = getInternalRender(name);
+			if (!Algorithms.isEmpty(internalRender)) {
+				InputStream resourceAsStream = RenderingRulesStorage.class.getResourceAsStream(internalRender);
+				if (resourceAsStream != null) {
+					Algorithms.streamCopy(resourceAsStream, fout);
+				}
 			}
-			try (FileOutputStream output = new FileOutputStream(getFileForInternalStyle(name))) {
-				Algorithms.streamCopy(input, output);
-			}
+			fout.close();
 		} catch (IOException e) {
-			log.error("Failed to copy built-in renderer " + name, e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
