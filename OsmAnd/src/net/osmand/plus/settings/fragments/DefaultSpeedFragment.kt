@@ -21,6 +21,7 @@ import net.osmand.plus.widgets.ui.GroupFooterView
 import net.osmand.plus.widgets.ui.SegmentedList
 import net.osmand.plus.widgets.ui.SettingRow
 import net.osmand.plus.widgets.ui.SliderListItem
+import kotlin.math.abs
 
 /**
  * Travel speed of a profile: the default speed, the speed range it has to stay in, and whether
@@ -104,9 +105,15 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		SegmentedList.apply(view.findViewById(R.id.default_speed_rows))
 		bindSpeedRange(view)
 
-		intervalRow.setStops(MEASURED_INTERVALS,
-			settings().ETA_AVERAGE_SPEED_INTERVAL.getModeValue(appMode), ::formatInterval) { interval ->
-			settings().ETA_AVERAGE_SPEED_INTERVAL.setModeValue(appMode, interval)
+		/* an interval that is not on the scale (imported profile) goes to the nearest stop, not to
+		 * the shortest one */
+		val intervalPref = settings().ETA_AVERAGE_SPEED_INTERVAL
+		val storedInterval = intervalPref.getModeValue(appMode)
+		if (storedInterval !in MEASURED_INTERVALS) {
+			intervalPref.setModeValue(appMode, MEASURED_INTERVALS.minBy { abs(it - storedInterval) })
+		}
+		intervalRow.setStops(MEASURED_INTERVALS, intervalPref.getModeValue(appMode), ::formatInterval) { interval ->
+			intervalPref.setModeValue(appMode, interval)
 			updateArrivalTime(view)
 		}
 		updateArrivalTime(view)
@@ -116,9 +123,11 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 	private fun updateDefaultSpeed() {
 		val from = if (config.defaultSpeedOnly) config.min.toFloat() else config.minSpeed
 		val to = if (config.defaultSpeedOnly) config.max.toFloat() else config.maxSpeed
+		/* a range of zero width (min = max, stored by the old dialog) still gets a scale of 1, so the
+		 * text shows the value that is saved, not the position of the handle */
 		defaultSpeedRow.setContinuous(from, to.coerceAtLeast(from + 1), speedStep(),
-			config.defaultSpeed, ::formatSpeed) { value ->
-			config.defaultSpeed = roundSpeed(value).coerceIn(config.minSpeed, config.maxSpeed)
+			config.defaultSpeed, { formatSpeed(clampDefaultSpeed(it)) }) { value ->
+			config.defaultSpeed = clampDefaultSpeed(value)
 			appMode.setDefaultSpeed(config.defaultSpeed / config.ratio)
 			routingChanged = true
 		}
@@ -168,6 +177,9 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		footer.setText(if (enabled) getString(R.string.eta_adapt_to_my_speed_descr, interval)
 			else getString(R.string.eta_adapt_to_my_speed_off_descr))
 	}
+
+	private fun clampDefaultSpeed(value: Float): Float =
+		roundSpeed(value).coerceIn(config.minSpeed, config.maxSpeed)
 
 	private fun speedStep(): Float = if (config.decimalPrecision) 0f else 1f
 
