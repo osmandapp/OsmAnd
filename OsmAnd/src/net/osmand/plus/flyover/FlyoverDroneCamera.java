@@ -85,12 +85,17 @@ class FlyoverDroneCamera {
 	private int corrected;
 	private double predictedScale;
 	private double scaleMiss;
+	private double scaleMissLevel = Double.NaN;
 	// the previous try of this frame: time, scale and the height it gave
 	private double correctionT = Double.NaN;
 	private double correctionScale = Double.NaN;
 	private double correctionAlt;
 	private double lastT = Double.NaN;
 	private double lastHit = Double.NaN;
+	// the best try of this frame
+	private double bestT = Double.NaN;
+	private double bestError;
+	private double[] bestCamera;
 	// height of the place the camera is held by: where its view ray meets the relief
 	private double anchorAlt;
 
@@ -350,7 +355,10 @@ class FlyoverDroneCamera {
 		double scale = (levelDistance * sin + ground) / (density * expectedAlt);
 		if (predict) {
 			predictedScale = scale;
-			scale *= Math.exp(scaleMiss);
+			// the miss of another level says nothing about this one
+			if (scaleMissLevel == level) {
+				scale *= Math.exp(scaleMiss);
+			}
 		}
 		camera[2] = level;
 		camera[7] = scale;
@@ -368,16 +376,36 @@ class FlyoverDroneCamera {
 	/**
 	 * After a frame: when the engine's camera is not at the drone's height, the same frame again with the height the
 	 * engine has under the target (its relief tiles differ from the terrain files by tens of meters), or null.
+	 * {@code last}: no more tries, only the best one of this frame again when the last one was worse.
 	 */
 	@Nullable
-	double[] correction(@NonNull MapRendererView renderer) {
+	double[] correction(@NonNull MapRendererView renderer, boolean last) {
 		if (lastCamera == null || Double.isNaN(lastLevel)) {
 			return null;
 		}
 		double cameraAlt = renderer.getCameraHeightInMeters();
-		if (Math.abs(cameraAlt - expectedAlt) <= Math.max(1, expectedAlt * 0.0005)) {
+		double error = Math.abs(cameraAlt - expectedAlt);
+		if (bestT != lastT) {
+			bestT = lastT;
+			bestError = Double.MAX_VALUE;
+		}
+		if (error < bestError) {
+			bestError = error;
+			bestCamera = lastCamera.clone();
+			bestCamera[7] = lastScale;
+		}
+		// a thousandth of the height over the ground is under a pixel; each try is a whole render
+		if (error <= Math.max(1.5, (expectedAlt - anchorAlt) * 0.001)) {
 			correctionScale = Double.NaN;
 			return null;
+		}
+		if (last) {
+			if (bestCamera[7] == lastScale) {
+				return null;
+			}
+			lastCamera = bestCamera.clone();
+			lastScale = bestCamera[7];
+			return bestCamera.clone();
 		}
 		double[] camera = lastCamera.clone();
 		double triedScale = lastScale;
@@ -454,6 +482,7 @@ class FlyoverDroneCamera {
 			maxHeightError = Math.max(maxHeightError, Math.abs(cameraAlt - expectedAlt));
 			if (predictedScale > 0 && Math.abs(cameraAlt - expectedAlt) < expectedAlt * 0.01) {
 				scaleMiss = Math.log(lastScale / predictedScale);
+				scaleMissLevel = lastLevel;
 			}
 		}
 		double levelDistance = (cameraAlt * lastDensity * lastScale - targetAlt) / sin;
