@@ -27,21 +27,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.UUID
 
-/**
- * Verifies with androidx.car.app:app-testing that a launcher suggestion card intent built with
- * [CarSuggestionsHelper.createCardIntent] makes [NavigationSession] push a [RoutePreviewScreen] (issue #25977).
- */
 @RunWith(AndroidJUnit4::class)
 @SuppressLint("RestrictedApi")
 class NavigationSessionIntentTest {
 
 	companion object {
-		/** Latitude for Berlin test location (Brandenburg Gate). */
 		private const val BERLIN_LAT = 52.5163
-
-		/** Longitude for Berlin test location (Brandenburg Gate). */
 		private const val BERLIN_LON = 13.3777
-
 	}
 
 	private lateinit var app: OsmandApplication
@@ -54,11 +46,8 @@ class NavigationSessionIntentTest {
 	private val testDestinations = listOf(LatLon(BERLIN_LAT, BERLIN_LON))
 	private var testStartTimeMs = 0L
 	private var savedNavigationHistory: Boolean? = null
-
-	/** Navigation history keys before the test; null if the snapshot was not taken (nothing extra is removed then). */
+	private var savedLastModifiedTime: Long = 0L
 	private var historyBefore: Set<String>? = null
-
-	/** "Previous route" backup before the test; null while the prerequisites are not met (nothing is reset then). */
 	private var targetPointsBackup: CarTestUtils.TargetPointsBackup? = null
 
 	@Before
@@ -66,6 +55,7 @@ class NavigationSessionIntentTest {
 		app = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as OsmandApplication
 
 		savedNavigationHistory = app.settings.NAVIGATION_HISTORY.get()
+		savedLastModifiedTime = app.searchHistoryHelper.lastModifiedTime
 		app.settings.NAVIGATION_HISTORY.set(true)
 
 		CarTestUtils.waitForAppInitialization(app)
@@ -141,6 +131,9 @@ class NavigationSessionIntentTest {
 							CarTestUtils.restoreTargetPointsBackup(app, backup)
 						}
 					} finally {
+						if (::app.isInitialized) {
+							app.searchHistoryHelper.lastModifiedTime = savedLastModifiedTime
+						}
 						savedNavigationHistory?.let { saved ->
 							app.settings.NAVIGATION_HISTORY.set(saved)
 						}
@@ -150,14 +143,10 @@ class NavigationSessionIntentTest {
 		}
 	}
 
-	/**
-	 * Verifies that delivering a suggestion card intent built with [CarSuggestionsHelper.createCardIntent]
-	 * for a test history entry processes the suggestion and pushes a [RoutePreviewScreen].
-	 */
 	@Test
 	fun suggestionCardIntentPushesRoutePreviewScreen() {
 		val testTitle = "${testPrefix}suggestion-card"
-		val pd = PointDescription(PointDescription.POINT_TYPE_LOCATION, testTitle)
+		val pd = PointDescription(PointDescription.POINT_TYPE_ADDRESS, testTitle)
 		createdDescriptions.add(pd)
 		app.searchHistoryHelper.addNewItemToHistory(BERLIN_LAT, BERLIN_LON, pd, HistorySource.NAVIGATION)
 
@@ -170,7 +159,7 @@ class NavigationSessionIntentTest {
 		}
 		assertNotNull("History entry must be present in searchHistoryHelper", entry)
 
-		val cardIntent = CarSuggestionsHelper.createCardIntent(app, entry!!, testTitle)
+		val cardIntent = CarSuggestionsHelper.createCardIntent(app, entry!!)
 
 		InstrumentationRegistry.getInstrumentation().runOnMainSync {
 			session.onNewIntent(cardIntent)

@@ -19,7 +19,6 @@ import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.enums.HistorySource
 import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
@@ -30,40 +29,21 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.UUID
 
-/**
- * Instrumented unit test verifying suggestion cards publishing in [CarSuggestionsHelper]
- * using androidx.car.app:app-testing (issue #25977).
- *
- * This test suite validates the publishing lifecycle of Android Auto launcher suggestion cards:
- * - When host car API level is below [CarAppApiLevels.LEVEL_5], suggestions are not published.
- * - When valid navigation history exists, up to 5 cards are published in descending order of last access time.
- * - Card identifiers, titles, and non-null pending intent actions are populated correctly.
- * - Entries with an address display the address as subtitle; entries without address/type have an empty subtitle (not "null").
- * - Consecutive calls to update without changes are de-duplicated and do not trigger redundant publications.
- * - Adding a new newest navigation entry triggers republication with the new entry positioned first.
- * - Disabling [OsmandSettings.NAVIGATION_HISTORY] filters out navigation history cards upon subsequent update.
- */
 @RunWith(AndroidJUnit4::class)
 @SuppressLint("RestrictedApi")
 class CarSuggestionsHelperPublishTest {
 
 	companion object {
-		/** Maximum number of suggestion cards published by [CarSuggestionsHelper]. */
 		private const val MAX_SUGGESTIONS = 5
 
-		/** Test address used to verify suggestion subtitle publishing. */
 		private const val TEST_ADDRESS = "Unter den Linden 1, Berlin"
 
-		/** Latitude for Berlin test location A (Alexanderplatz). */
 		private const val BERLIN_LAT_A = 52.5200
 
-		/** Longitude for Berlin test location A (Alexanderplatz). */
 		private const val BERLIN_LON_A = 13.4050
 
-		/** Latitude for Berlin test location B (Museum Island). */
 		private const val BERLIN_LAT_B = 52.5186
 
-		/** Longitude for Berlin test location B (Museum Island). */
 		private const val BERLIN_LON_B = 13.4083
 	}
 
@@ -72,6 +52,7 @@ class CarSuggestionsHelperPublishTest {
 	private lateinit var helper: CarSuggestionsHelper
 
 	private var savedNavigationHistory = true
+	private var savedLastModifiedTime: Long = 0L
 	private val testPrefix = "25977-test-" + UUID.randomUUID().toString() + "-"
 	private val createdDescriptions = mutableListOf<PointDescription>()
 
@@ -82,6 +63,7 @@ class CarSuggestionsHelperPublishTest {
 		helper = CarSuggestionsHelper(app)
 
 		savedNavigationHistory = settings.NAVIGATION_HISTORY.get()
+		savedLastModifiedTime = app.searchHistoryHelper.lastModifiedTime
 		settings.NAVIGATION_HISTORY.set(true)
 
 		CarTestUtils.waitForAppInitialization(app)
@@ -96,6 +78,7 @@ class CarSuggestionsHelperPublishTest {
 				createdDescriptions = createdDescriptions
 			)
 		} finally {
+			app.searchHistoryHelper.lastModifiedTime = savedLastModifiedTime
 			settings.NAVIGATION_HISTORY.set(savedNavigationHistory)
 		}
 	}
@@ -127,10 +110,6 @@ class CarSuggestionsHelperPublishTest {
 		}
 	}
 
-	/**
-	 * Verifies that when the host Car App API level is 4 (below LEVEL_5), [CarSuggestionsHelper.update]
-	 * returns immediately without invoking [SuggestionManager.updateSuggestions].
-	 */
 	@Test
 	fun updateDoesNotCallSuggestionManagerWhenApiLevelIsBelow5() {
 		val (carContext, recordingManager) = createTestCarContext(CarAppApiLevels.LEVEL_4)
@@ -146,11 +125,6 @@ class CarSuggestionsHelperPublishTest {
 		)
 	}
 
-	/**
-	 * Verifies that at host API level 5 with two test entries added (A then B), update results in
-	 * exactly one publication with at most 5 cards where the first two cards are B then A, and every
-	 * card has a non-null action and a non-empty title.
-	 */
 	@Test
 	fun updatePublishesNewestNavigationHistoryEntriesUpToLimit() {
 		assumePublishingPrerequisites()
@@ -184,10 +158,6 @@ class CarSuggestionsHelperPublishTest {
 		}
 	}
 
-	/**
-	 * Verifies that a test entry with an address is published with that address as subtitle,
-	 * while an entry without address or type information is published with an empty subtitle rather than "null".
-	 */
 	@Test
 	fun updatePublishesAddressAsSubtitleOrEmptyWhenMissing() {
 		assumePublishingPrerequisites()
@@ -222,10 +192,6 @@ class CarSuggestionsHelperPublishTest {
 		assertNotEquals("null", cardNoAddress.subtitle?.toString())
 	}
 
-	/**
-	 * Verifies that invoking [CarSuggestionsHelper.update] twice without any data changes
-	 * de-duplicates and performs only one publication call to [SuggestionManager].
-	 */
 	@Test
 	fun updateDeduplicatesConsecutiveCallsWithoutChanges() {
 		assumePublishingPrerequisites()
@@ -241,10 +207,6 @@ class CarSuggestionsHelperPublishTest {
 		assertEquals(1, recordingManager.publications.size)
 	}
 
-	/**
-	 * Verifies that adding a new newest navigation history entry after a first publication
-	 * triggers a second publication with the new entry positioned as the first card.
-	 */
 	@Test
 	fun updateRepublishesWhenNewHistoryEntryIsAdded() {
 		assumePublishingPrerequisites()
@@ -268,12 +230,9 @@ class CarSuggestionsHelperPublishTest {
 		assertTrue("Second publication must not be empty", secondPublication.isNotEmpty())
 		assertTrue("Newest entry must occupy the first card slot", secondPublication[0].identifier.contains(pdB.name))
 		assertEquals(pdB.name, secondPublication[0].title.toString())
+		assertEquals(recordingManager.publications[0][0].action, secondPublication[1].action)
 	}
 
-	/**
-	 * Verifies that disabling [OsmandSettings.NAVIGATION_HISTORY] after a first publication triggers
-	 * an update that publishes a list containing none of the test navigation entries.
-	 */
 	@Test
 	fun updateExcludesTestEntriesWhenNavigationHistoryIsDisabled() {
 		assumePublishingPrerequisites()

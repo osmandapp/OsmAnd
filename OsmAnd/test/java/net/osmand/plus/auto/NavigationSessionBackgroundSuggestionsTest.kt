@@ -10,7 +10,6 @@ import androidx.car.app.versioning.CarAppApiLevels
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import net.osmand.plus.OsmAndConstants
 import net.osmand.plus.OsmAndLocationProvider
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.inapp.InAppPurchaseUtils
@@ -23,20 +22,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
 
-/**
- * Verifies that the launcher suggestion cards are refreshed when the route is cancelled while OsmAnd
- * is in the background on the head unit (session CREATED, not STARTED), e.g. navigation is stopped on
- * the phone (issue #25977).
- */
 @RunWith(AndroidJUnit4::class)
 @SuppressLint("RestrictedApi")
 class NavigationSessionBackgroundSuggestionsTest {
 
 	companion object {
-		/** Maximum time in seconds to wait for a suggestions publication. */
 		private const val PUBLICATION_TIMEOUT_SEC = 5L
 
-		/** Polling interval in milliseconds while waiting for a suggestions publication. */
 		private const val POLL_INTERVAL_MS = 100L
 	}
 
@@ -95,7 +87,7 @@ class NavigationSessionBackgroundSuggestionsTest {
 	fun routeCancelledInBackgroundPublishesSuggestions() {
 		CarTestUtils.onMain {
 			assertEquals("Session must stay in the background", Lifecycle.State.CREATED, session.lifecycle.currentState)
-			app.uiHandler.removeMessages(OsmAndConstants.UI_HANDLER_CAR_SUGGESTIONS + 1)
+			app.uiHandler.removeMessages(NavigationSession.SUGGESTIONS_UPDATE_MSG_ID)
 			recordingManager.clear()
 			app.routingHelper.clearCurrentRoute(null, ArrayList())
 		}

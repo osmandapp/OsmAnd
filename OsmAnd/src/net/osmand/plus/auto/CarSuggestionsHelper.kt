@@ -15,6 +15,7 @@ import androidx.car.app.suggestion.SuggestionManager
 import androidx.car.app.suggestion.model.Suggestion
 import androidx.car.app.versioning.CarAppApiLevels
 import androidx.core.graphics.drawable.IconCompat
+import java.math.BigDecimal
 import net.osmand.PlatformUtil
 import net.osmand.data.Amenity
 import net.osmand.data.LatLon
@@ -28,34 +29,43 @@ import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.settings.enums.HistorySource
 import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
+import net.osmand.util.GeoPointParserUtil
 import org.apache.commons.logging.Log
 
 class CarSuggestionsHelper(private val app: OsmandApplication) {
 
 	companion object {
 		const val EXTRA_SUGGESTION_POINT = "net.osmand.plus.auto.EXTRA_SUGGESTION_POINT"
-		const val EXTRA_SUGGESTION_LAT = "net.osmand.plus.auto.EXTRA_SUGGESTION_LAT"
-		const val EXTRA_SUGGESTION_LON = "net.osmand.plus.auto.EXTRA_SUGGESTION_LON"
 		private const val MAX_SUGGESTIONS = 5
 		private val LOG: Log = PlatformUtil.getLog(CarSuggestionsHelper::class.java)
 
 		@JvmStatic
-		fun createCardIntent(context: Context, entry: HistoryEntry, title: String): Intent {
+		fun createCardIntent(context: Context, entry: HistoryEntry): Intent {
 			val serializedName = PointDescription.serializeToString(entry.name)
+			val lat = BigDecimal.valueOf(entry.lat).toPlainString()
+			val lon = BigDecimal.valueOf(entry.lon).toPlainString()
 			return Intent(CarContext.ACTION_NAVIGATE)
 				.setComponent(ComponentName(context, NavigationCarAppService::class.java))
-				.setData(Uri.parse("geo:${entry.lat},${entry.lon}?q=${entry.lat},${entry.lon}(${Uri.encode(title)})"))
+				.setData(Uri.parse("geo:$lat,$lon"))
 				.putExtra(EXTRA_SUGGESTION_POINT, serializedName)
-				.putExtra(EXTRA_SUGGESTION_LAT, entry.lat)
-				.putExtra(EXTRA_SUGGESTION_LON, entry.lon)
 		}
 
 		@JvmStatic
 		fun getSuggestionLatLon(intent: Intent): LatLon? {
-			if (!intent.hasExtra(EXTRA_SUGGESTION_LAT) || !intent.hasExtra(EXTRA_SUGGESTION_LON)) {
+			val dataString = intent.dataString
+			if (dataString == null) {
 				return null
 			}
-			return LatLon(intent.getDoubleExtra(EXTRA_SUGGESTION_LAT, 0.0), intent.getDoubleExtra(EXTRA_SUGGESTION_LON, 0.0))
+			val parsed = try {
+				GeoPointParserUtil.parse(dataString)
+			} catch (e: Exception) {
+				LOG.error("Failed to parse suggestion data: $dataString", e)
+				null
+			}
+			if (parsed == null || !parsed.isGeoPoint) {
+				return null
+			}
+			return LatLon(parsed.latitude, parsed.longitude)
 		}
 	}
 
@@ -115,8 +125,8 @@ class CarSuggestionsHelper(private val app: OsmandApplication) {
 				val iconId = getIconId(entry, searchResult)
 				val icon = CarIcon.Builder(IconCompat.createWithResource(app, iconId)).build()
 				val id = "${entry.lat},${entry.lon},${PointDescription.serializeToString(pointDescription)}"
-				val intent = createCardIntent(app, entry, title)
-				val action = CarPendingIntent.getCarApp(carContext, cards.size, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+				val intent = createCardIntent(app, entry)
+				val action = CarPendingIntent.getCarApp(carContext, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
 				val suggestion = Suggestion.Builder()
 					.setIdentifier(id)
 					.setTitle(title)

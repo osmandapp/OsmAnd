@@ -17,6 +17,7 @@ import android.view.Display;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.car.app.CarContext;
 import androidx.car.app.Screen;
 import androidx.car.app.ScreenManager;
@@ -94,7 +95,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(NavigationSession.class);
 
-	private static final int SUGGESTIONS_UPDATE_MSG_ID = OsmAndConstants.UI_HANDLER_CAR_SUGGESTIONS + 1;
+	@VisibleForTesting
+	static final int SUGGESTIONS_UPDATE_MSG_ID = OsmAndConstants.UI_HANDLER_CAR_SUGGESTIONS + 1;
 	private static final long SUGGESTIONS_UPDATE_DELAY_MS = 300;
 
 	static final String TAG = NavigationSession.class.getSimpleName();
@@ -139,17 +141,28 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private boolean carNavigationShouldBeActive; // it could set true before init navigationManager
 	private TripHelper tripHelper;
 	private CarSuggestionsHelper suggestionsHelper;
-	private final StateChangedListener<Void> historyListener = change -> scheduleSuggestionsUpdate();
+	@Nullable
+	private Intent pendingSuggestionIntent;
+	@Nullable
+	private AppInitializeListener appInitializeListener;
+	private boolean suggestionsNavigationActive;
+	private final StateChangedListener<HistorySource> historyListener = source -> {
+		if (source == HistorySource.NAVIGATION) {
+			scheduleSuggestionsUpdate();
+		}
+	};
 	private final StateChangedListener<Boolean> navigationHistoryListener = change -> scheduleSuggestionsUpdate();
 	private final IRouteInformationListener suggestionsRouteListener = new IRouteInformationListener() {
 		@Override
 		public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-			updateSuggestions();
+			if (isNavigationActive() != suggestionsNavigationActive) {
+				scheduleSuggestionsUpdate();
+			}
 		}
 
 		@Override
 		public void routeWasCancelled() {
-			updateSuggestions();
+			scheduleSuggestionsUpdate();
 		}
 
 		@Override
@@ -188,6 +201,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private final LocationPermissionCheckCallback locationPermissionGrantedCallback = () -> {
 		requestLocationUpdates();
 		updateSuggestions();
+		processPendingSuggestionIntent();
 	};
 
 	public void setMapView(OsmandMapTileView mapView) {
@@ -258,16 +272,18 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		app.getRoutingHelper().addCalculationProgressListener(this);
 		GPXLayer gpxLayer = app.getOsmandMap().getMapLayers().getGpxLayer();
 		gpxLayer.setInvalidated(true);
-		updateSuggestions();
-		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializeListener() {
+		if (app.isApplicationInitializing() && appInitializeListener == null) {
+			appInitializeListener = new AppInitializeListener() {
 				@Override
 				public void onFinish(@NonNull AppInitializer init) {
 					init.removeListener(this);
+					appInitializeListener = null;
 					updateSuggestions();
 				}
-			});
+			};
+			app.getAppInitializer().addListener(appInitializeListener);
 		}
+		updateSuggestions();
 	}
 
 	@Override
@@ -308,6 +324,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		settings.NAVIGATION_HISTORY.removeListener(navigationHistoryListener);
 		routingHelper.removeListener(suggestionsRouteListener);
 		app.getUiHandler().removeMessages(SUGGESTIONS_UPDATE_MSG_ID);
+		if (appInitializeListener != null) {
+			app.getAppInitializer().removeListener(appInitializeListener);
+			appInitializeListener = null;
+		}
+		pendingSuggestionIntent = null;
 
 		getLifecycle().removeObserver(this);
 		if (settings.simulateNavigationStartedFromAdb) {
@@ -408,8 +429,14 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			requestPurchaseScreen = null;
 			app.getOsmandMap().getMapView().setupRenderingView();
 
-			app.runInUIThread(this::requestLocationPermission);
-			app.runInUIThread(this::updateSuggestions);
+			app.runInUIThread(() -> {
+				if (pendingSuggestionIntent != null) {
+					processPendingSuggestionIntent();
+				} else {
+					requestLocationPermission();
+				}
+				updateSuggestions();
+			});
 		}
 	}
 
@@ -436,13 +463,16 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Uri uri = intent.getData();
 		if (intent.hasExtra(CarSuggestionsHelper.EXTRA_SUGGESTION_POINT)) {
 			processSuggestionIntent(intent);
-		} else if (uri != null) {
-			if (GeoActionHelper.isGeoActionUri(uri)) {
-				processGeoActionIntent(uri);
-			} else if (ACTION_NAVIGATE.equals(intent.getAction())) {
-				processNavigationIntent(uri);
-			} else {
-				processDeepLinkActions(uri);
+		} else {
+			pendingSuggestionIntent = null;
+			if (uri != null) {
+				if (GeoActionHelper.isGeoActionUri(uri)) {
+					processGeoActionIntent(uri);
+				} else if (ACTION_NAVIGATE.equals(intent.getAction())) {
+					processNavigationIntent(uri);
+				} else {
+					processDeepLinkActions(uri);
+				}
 			}
 		}
 	}
@@ -488,12 +518,44 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void processSuggestionIntent(@NonNull Intent intent) {
-		OsmandApplication app = getApp();
-		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app) || !isLocationPermissionAvailable()) {
-			LOG.info("Ignoring suggestion intent: purchase or permission check failed");
+		if (!isStateAtLeast(State.CREATED)) {
 			return;
 		}
-		if (routingHelper.isFollowingMode() || routingHelper.isPauseNavigation()) {
+		OsmandApplication app = getApp();
+		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
+			pendingSuggestionIntent = intent;
+			LOG.info("Retaining suggestion intent until purchase is completed");
+			if (requestPurchaseScreen != null) {
+				requestPurchaseScreen.getLifecycle().addObserver(new DefaultLifecycleObserver() {
+					@Override
+					public void onDestroy(@NonNull LifecycleOwner owner) {
+						if (!InAppPurchaseUtils.isAndroidAutoAvailable(getApp())) {
+							pendingSuggestionIntent = null;
+						}
+					}
+				});
+			}
+			return;
+		}
+		if (!isLocationPermissionAvailable()) {
+			pendingSuggestionIntent = intent;
+			LOG.info("Retaining suggestion intent until permission is granted");
+			ScreenManager screenManager = getScreenManager();
+			Screen top = screenManager.getTop();
+			if (!(top instanceof RequestPermissionScreen)) {
+				top = new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
+				screenManager.push(top);
+			}
+			top.getLifecycle().addObserver(new DefaultLifecycleObserver() {
+				@Override
+				public void onDestroy(@NonNull LifecycleOwner owner) {
+					pendingSuggestionIntent = null;
+				}
+			});
+			return;
+		}
+		pendingSuggestionIntent = null;
+		if (isNavigationActive()) {
 			LOG.info("Ignoring suggestion intent: navigation is already active");
 			return;
 		}
@@ -517,6 +579,14 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		ScreenManager screenManager = getScreenManager();
 		screenManager.popToRoot();
 		screenManager.pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, result, true, true), this::onRoutePreviewResult);
+	}
+
+	private void processPendingSuggestionIntent() {
+		if (pendingSuggestionIntent != null) {
+			Intent intent = pendingSuggestionIntent;
+			pendingSuggestionIntent = null;
+			processSuggestionIntent(intent);
+		}
 	}
 
 	private void onRoutePreviewResult(@Nullable Object result) {
@@ -630,8 +700,13 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	private void updateSuggestions() {
 		if (suggestionsHelper != null && isStateAtLeast(State.CREATED)) {
+			suggestionsNavigationActive = isNavigationActive();
 			suggestionsHelper.update(getCarContext());
 		}
+	}
+
+	private boolean isNavigationActive() {
+		return routingHelper.isFollowingMode() || routingHelper.isPauseNavigation();
 	}
 
 	private void scheduleSuggestionsUpdate() {

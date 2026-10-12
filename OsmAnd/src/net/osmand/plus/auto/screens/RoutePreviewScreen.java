@@ -166,10 +166,14 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			invalidate();
 			startNavigationIfReady();
 		} else if (routingHelper.getRoute().hasMissingMaps()) {
-			NavigationSession session = getSession();
-			if (session != null) {
-				session.showMissingMapsScreen();
-			}
+			showMissingMapsScreen();
+		}
+	}
+
+	private void showMissingMapsScreen() {
+		NavigationSession session = getSession();
+		if (session != null) {
+			session.showMissingMapsScreen();
 		}
 	}
 
@@ -212,7 +216,11 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			getApp().runInUIThread(() -> {
 				if (startNavigationOnRouteReady && getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
 					startNavigationOnRouteReady = false;
-					onNavigate();
+					if (getApp().getRoutingHelper().getRoute().hasMissingMaps()) {
+						showMissingMapsScreen();
+					} else {
+						onNavigate();
+					}
 				}
 			});
 		}

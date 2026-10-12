@@ -20,27 +20,17 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.UUID
 
-/**
- * Verifies entry selection and icon resolution in [CarSuggestionsHelper] (issue #25977): entries at 0,0
- * are excluded, a POI icon name resolves to its big icon and an unknown icon name falls back to
- * [PointDescription.getItemIcon].
- */
 @RunWith(AndroidJUnit4::class)
 class CarSuggestionsHelperTest {
 
 	companion object {
-		/** Standard fuel POI icon name supported in OsmAnd big icons without "mx_" prefix. */
 		private const val ICON_AMENITY_FUEL = "amenity_fuel"
 
-		/** Non-existent icon identifier to test the fallback mechanism. */
 		private const val UNKNOWN_ICON_NAME = "no_such_icon_25977"
 
-		/** Latitude for Berlin test location A (Alexanderplatz). */
 		private const val BERLIN_LAT_A = 52.5200
 
-		/** Longitude for Berlin test location A (Alexanderplatz). */
 		private const val BERLIN_LON_A = 13.4050
-
 	}
 
 	private lateinit var app: OsmandApplication
@@ -48,6 +38,7 @@ class CarSuggestionsHelperTest {
 	private lateinit var helper: CarSuggestionsHelper
 
 	private var savedNavigationHistory = true
+	private var savedLastModifiedTime: Long = 0L
 	private val testPrefix = "25977-test-" + UUID.randomUUID().toString() + "-"
 	private val createdDescriptions = mutableListOf<PointDescription>()
 
@@ -58,6 +49,7 @@ class CarSuggestionsHelperTest {
 		helper = CarSuggestionsHelper(app)
 
 		savedNavigationHistory = settings.NAVIGATION_HISTORY.get()
+		savedLastModifiedTime = app.searchHistoryHelper.lastModifiedTime
 		settings.NAVIGATION_HISTORY.set(true)
 
 		CarTestUtils.waitForAppInitialization(app)
@@ -72,13 +64,11 @@ class CarSuggestionsHelperTest {
 				createdDescriptions = createdDescriptions
 			)
 		} finally {
+			app.searchHistoryHelper.lastModifiedTime = savedLastModifiedTime
 			settings.NAVIGATION_HISTORY.set(savedNavigationHistory)
 		}
 	}
 
-	/**
-	 * Verifies that an entry with (0,0) coordinates is excluded from suggestions.
-	 */
 	@Test
 	fun entryAtZeroCoordinatesIsExcludedFromSuggestions() {
 		val pdZero = PointDescription(PointDescription.POINT_TYPE_LOCATION, "${testPrefix}Zero")
@@ -100,9 +90,6 @@ class CarSuggestionsHelperTest {
 		})
 	}
 
-	/**
-	 * Verifies that a POI entry with iconName "amenity_fuel" resolves to RenderingIcons.getBigIconResourceId("amenity_fuel").
-	 */
 	@Test
 	fun poiEntryWithFuelIconResolvesToBigIconResourceId() {
 		val pd = PointDescription(PointDescription.POINT_TYPE_POI, "${testPrefix}Fuel")
@@ -123,9 +110,6 @@ class CarSuggestionsHelperTest {
 		assertEquals(expectedIconId, resolvedIconId)
 	}
 
-	/**
-	 * Verifies that a POI entry with an unknown iconName falls back to entry.name.itemIcon.
-	 */
 	@Test
 	fun poiEntryWithUnknownIconFallsBackToItemIcon() {
 		val pd = PointDescription(PointDescription.POINT_TYPE_POI, "${testPrefix}UnknownIconPoi")
@@ -142,5 +126,4 @@ class CarSuggestionsHelperTest {
 		val resolvedIconId = helper.getIconId(entry, searchResult)
 		assertEquals(entry.name.itemIcon, resolvedIconId)
 	}
-
 }

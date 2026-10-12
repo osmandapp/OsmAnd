@@ -31,12 +31,15 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SearchHistoryHelper {
@@ -50,7 +53,7 @@ public class SearchHistoryHelper {
 	private final Map<HistoryEntryKey, HistoryEntry> map = new ConcurrentHashMap<>();
 
 	private List<HistoryEntry> loadedEntries;
-	private volatile List<StateChangedListener<Void>> listeners = new ArrayList<>();
+	private volatile List<StateChangedListener<HistorySource>> listeners = new ArrayList<>();
 
 	public static class HistoryObject {
 		private final Object object;
@@ -90,17 +93,23 @@ public class SearchHistoryHelper {
 		dbHelper.setLastModifiedTime(lastModifiedTime);
 	}
 
-	public void addListener(@NonNull StateChangedListener<Void> listener) {
+	public void addListener(@NonNull StateChangedListener<HistorySource> listener) {
 		listeners = CollectionUtils.addToList(listeners, listener);
 	}
 
-	public void removeListener(@NonNull StateChangedListener<Void> listener) {
+	public void removeListener(@NonNull StateChangedListener<HistorySource> listener) {
 		listeners = CollectionUtils.removeFromList(listeners, listener);
 	}
 
-	private void notifyListeners() {
-		for (StateChangedListener<Void> listener : listeners) {
-			listener.stateChanged(null);
+	private void notifyListeners(@NonNull HistorySource source) {
+		for (StateChangedListener<HistorySource> listener : listeners) {
+			listener.stateChanged(source);
+		}
+	}
+
+	private void notifyListeners(@NonNull Set<HistorySource> sources) {
+		for (HistorySource source : sources) {
+			notifyListeners(source);
 		}
 	}
 
@@ -227,7 +236,7 @@ public class SearchHistoryHelper {
 		return new PointDescription(PointDescription.POINT_TYPE_GPX_FILE, gpxInfo.getFileName());
 	}
 
-	public void remove(SearchResult searchResult) {
+	private void removeSearchResult(@NonNull SearchResult searchResult, @NonNull Set<HistorySource> removedSources) {
 		HistoryEntry entry = searchResult instanceof SearchHistoryAPI.HistorySearchResult historySearchResult
 				? historySearchResult.getHistoryEntry()
 				: getHistoryEntry(searchResult.object);
@@ -236,7 +245,9 @@ public class SearchHistoryHelper {
 		}
 
 		if (entry != null) {
-			remove(entry);
+			if (removeEntry(entry.getName(), entry.getSource())) {
+				removedSources.add(entry.getSource());
+			}
 			return;
 		}
 
@@ -246,7 +257,7 @@ public class SearchHistoryHelper {
 		}
 
 		if (pd != null) {
-			remove(pd);
+			removeEntries(pd, removedSources);
 		} else {
 			log.error(String.format(
 					"Can't get PointDescription from SearchResult: %s, object: %s (%s), relatedObject: %s (%s), objectType: %s",
@@ -258,6 +269,20 @@ public class SearchHistoryHelper {
 					searchResult.objectType
 			));
 		}
+	}
+
+	public void remove(SearchResult searchResult) {
+		Set<HistorySource> removedSources = EnumSet.noneOf(HistorySource.class);
+		removeSearchResult(searchResult, removedSources);
+		notifyListeners(removedSources);
+	}
+
+	public void remove(@NonNull Collection<SearchResult> results) {
+		Set<HistorySource> removedSources = EnumSet.noneOf(HistorySource.class);
+		for (SearchResult result : results) {
+			removeSearchResult(result, removedSources);
+		}
+		notifyListeners(removedSources);
 	}
 
 	private PointDescription getPointDescription(Object item) {
@@ -279,11 +304,7 @@ public class SearchHistoryHelper {
 		return item instanceof HistoryEntry historyEntry ? historyEntry : null;
 	}
 
-	private void remove(@NonNull HistoryEntry entry) {
-		remove(entry.getName(), entry.getSource());
-	}
-
-	private void remove(PointDescription pd) {
+	private void removeEntries(@NonNull PointDescription pd, @NonNull Set<HistorySource> removedSources) {
 		checkLoadedEntries();
 		List<HistoryEntry> toRemove = new ArrayList<>();
 		for (HistoryEntry entry : loadedEntries) {
@@ -292,11 +313,13 @@ public class SearchHistoryHelper {
 			}
 		}
 		for (HistoryEntry entry : toRemove) {
-			remove(entry);
+			if (removeEntry(entry.getName(), entry.getSource())) {
+				removedSources.add(entry.getSource());
+			}
 		}
 	}
 
-	private void remove(@NonNull PointDescription pd, @NonNull HistorySource source) {
+	private boolean removeEntry(@NonNull PointDescription pd, @NonNull HistorySource source) {
 		checkLoadedEntries();
 		HistoryEntryKey key = new HistoryEntryKey(pd, source);
 		HistoryEntry model = map.get(key);
@@ -306,8 +329,9 @@ public class SearchHistoryHelper {
 			}
 			loadedEntries = CollectionUtils.removeFromList(loadedEntries, model);
 			map.remove(key);
-			notifyListeners();
+			return true;
 		}
+		return false;
 	}
 
 	public void removeAll() {
@@ -316,7 +340,7 @@ public class SearchHistoryHelper {
 			app.getPoiFilters().clearHistory();
 			loadedEntries = new ArrayList<>();
 			map.clear();
-			notifyListeners();
+			notifyListeners(EnumSet.allOf(HistorySource.class));
 		}
 	}
 
@@ -351,7 +375,7 @@ public class SearchHistoryHelper {
 				dbHelper.add(model);
 			}
 			updateEntriesList();
-			notifyListeners();
+			notifyListeners(model.getSource());
 		}
 	}
 
@@ -360,7 +384,11 @@ public class SearchHistoryHelper {
 			addItemToHistoryWithReplacement(model);
 		}
 		updateEntriesList();
-		notifyListeners();
+		Set<HistorySource> sources = EnumSet.noneOf(HistorySource.class);
+		for (HistoryEntry model : entries) {
+			sources.add(model.getSource());
+		}
+		notifyListeners(sources);
 	}
 
 	public void updateEntriesList() {
