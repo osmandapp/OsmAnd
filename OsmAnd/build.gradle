@@ -112,6 +112,7 @@ android {
 	buildFeatures {
 		aidl true
 		compose true
+		buildConfig true
 	}
 
 	flavorDimensions "version", "coreversion", "abi"
@@ -257,6 +258,11 @@ tasks.register('kxml2WithoutXmlPull', Jar) {
 	from({ zipTree(configurations.kxml2.singleFile) }) {
 		exclude 'org/xmlpull/**'
 	}
+}
+
+// The AIDL compiler copies @deprecated javadoc to the generated Stub/Proxy methods without the annotation
+tasks.withType(JavaCompile).configureEach {
+	options.compilerArgs << "-Xlint:-dep-ann"
 }
 
 dependencies {
