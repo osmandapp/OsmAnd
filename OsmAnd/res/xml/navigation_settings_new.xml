@@ -37,6 +37,14 @@
 		app:fragment="net.osmand.plus.settings.fragments.voice.VoiceAnnouncesFragment"
 		tools:icon="@drawable/ic_action_volume_up" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_navigation_notifications"
+		android:layout="@layout/preference_with_descr"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/send_navigation_notifications"
+		tools:icon="@drawable/ic_action_notification" />
+
 	<Preference
 		android:key="vehicle_parameters"
 		android:layout="@layout/preference_with_descr"
