@@ -5303,7 +5303,7 @@
     <string name="gallery_sort_oldest_first">التاريخ الأقدم أولاً</string>
     <string name="gallery_sort_duration_long_short">المدة الأطول أولاً</string>
     <string name="gallery_sort_duration_short_long">أقصر مدة أولاً</string>
-    <string name="navigate_point_format_maidenhead">غشاء</string>
+    <string name="navigate_point_format_maidenhead">ماديينهيد</string>
     <string name="search_around">ابحث في الجوار</string>
     <string name="search_around_map_center_description">%1$s بعيدًا عن موقعك</string>
     <string name="search_around_my_location">موقعي</string>
