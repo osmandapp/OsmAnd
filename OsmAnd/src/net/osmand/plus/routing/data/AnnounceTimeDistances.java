@@ -30,6 +30,7 @@ public class AnnounceTimeDistances {
 	public static final int STATE_LONG_ALARM_ANNOUNCE = 5;
 	public static final int STATE_SHORT_PNT_APPROACH = 6;
 	public static final int STATE_LONG_PNT_APPROACH = 7;
+	public static final int STATE_AT_POINT_ALARM_ANNOUNCE = 8;
 
 	private static final int LANES_MAX_METERS_NOT_SPOKEN_TURN = 800;
 	private static final int LANES_MAX_METERS_SPOKEN_TURN = 1200;
@@ -55,6 +56,7 @@ public class AnnounceTimeDistances {
 	private int SHORT_PNT_ANNOUNCE_RADIUS;
 	private int LONG_ALARM_ANNOUNCE_RADIUS;
 	private int SHORT_ALARM_ANNOUNCE_RADIUS;
+	private int AT_POINT_ALARM_ANNOUNCE_RADIUS;
 	OsmAndLocationProvider locationProvider;
 
 	public AnnounceTimeDistances(ApplicationMode appMode, OsmandApplication app) {
@@ -123,6 +125,7 @@ public class AnnounceTimeDistances {
 		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * (2.0f - arrivalDistanceFactor); // 20 seconds
 
 		// assume for backward compatibility speed - 10 m/s
+		AT_POINT_ALARM_ANNOUNCE_RADIUS = (int) (2 * DEFAULT_SPEED * arrivalDistanceFactor); // 20 m
 		SHORT_ALARM_ANNOUNCE_RADIUS = (int) (7 * DEFAULT_SPEED * arrivalDistanceFactor); // 70 m
 		LONG_ALARM_ANNOUNCE_RADIUS = (int) (12 * DEFAULT_SPEED * arrivalDistanceFactor); // 120 m
 		SHORT_PNT_ANNOUNCE_RADIUS = (int) (15 * DEFAULT_SPEED * arrivalDistanceFactor); // 150 m
@@ -156,6 +159,8 @@ public class AnnounceTimeDistances {
 				return isDistanceLess(currentSpeed, dist, PREPARE_DISTANCE);
 			case STATE_LONG_PREPARE_TURN:
 				return isDistanceLess(currentSpeed, dist, PREPARE_LONG_DISTANCE);
+			case STATE_AT_POINT_ALARM_ANNOUNCE:
+				return isDistanceLess(currentSpeed, dist, AT_POINT_ALARM_ANNOUNCE_RADIUS);
 			case STATE_SHORT_ALARM_ANNOUNCE:
 				return isDistanceLess(currentSpeed, dist, SHORT_ALARM_ANNOUNCE_RADIUS);
 			case STATE_LONG_ALARM_ANNOUNCE:

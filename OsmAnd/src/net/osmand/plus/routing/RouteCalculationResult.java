@@ -313,8 +313,11 @@ public class RouteCalculationResult {
 				loc.setLongitude(MapUtils.get31LongitudeX(x31));
 				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd, loc);
 				if (info != null) {
-					if (info.getType() == AlarmInfoType.SPEED_CAMERA && isHiddenSpeedCamera) {
-						continue;
+					if (info.getType() == AlarmInfoType.SPEED_CAMERA) {
+						if (isHiddenSpeedCamera) {
+							continue;
+						}
+						info.setUseShortAnnounce(SpeedCameraFilter.hasSpeedCameraRelationsInfo(rdo, intId));
 					}
 					// For STOP and TRAFFIC_CALMING first check if it has directional info
 					boolean forward = res.isForwardDirection();

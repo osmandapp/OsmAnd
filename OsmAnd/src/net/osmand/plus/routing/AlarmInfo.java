@@ -32,6 +32,7 @@ public class AlarmInfo implements LocationPoint {
 	private float floatValue;
 	private double latitude;
 	private double longitude;
+	private boolean useShortAnnounce;
 
 	public AlarmInfo(@NonNull AlarmInfoType type, int locationIndex) {
 		this.type = type;
@@ -79,6 +80,14 @@ public class AlarmInfo implements LocationPoint {
 
 	public void setIntValue(int intValue) {
 		this.intValue = intValue;
+	}
+
+	public boolean isUseShortAnnounce() {
+		return useShortAnnounce;
+	}
+
+	public void setUseShortAnnounce(boolean useShortAnnounce) {
+		this.useShortAnnounce = useShortAnnounce;
 	}
 
 	@NonNull
@@ -138,6 +147,9 @@ public class AlarmInfo implements LocationPoint {
 	public int updateDistanceAndGetPriority(float time, float distance) {
 		if (distance > 1500) {
 			return Integer.MAX_VALUE;
+		}
+		if (useShortAnnounce) {
+			return (time < 2 || distance < 20) ? type.getPriority() : Integer.MAX_VALUE;
 		}
 		// 1 level of priorities
 		if (time < 6 || distance < 75 || type == SPEED_LIMIT) {

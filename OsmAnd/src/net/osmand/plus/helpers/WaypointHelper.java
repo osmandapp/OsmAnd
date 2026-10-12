@@ -5,6 +5,7 @@ import static net.osmand.plus.routing.AlarmInfoType.RAILWAY;
 import static net.osmand.plus.routing.AlarmInfoType.RED_LIGHT_CAMERA;
 import static net.osmand.plus.routing.AlarmInfoType.SPEED_CAMERA;
 import static net.osmand.plus.routing.AlarmInfoType.TUNNEL;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_AT_POINT_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
@@ -464,6 +465,9 @@ public class WaypointHelper {
 									default:
 										announceRadius = STATE_LONG_ALARM_ANNOUNCE;
 										break;
+								}
+								if (alarm.isUseShortAnnounce()) {
+									announceRadius = STATE_AT_POINT_ALARM_ANNOUNCE;
 								}
 								boolean proceed = atd.isTurnStateActive(atdSpeed, d1, announceRadius);
 								if (proceed && filterCloseAlarms) {

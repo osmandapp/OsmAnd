@@ -18,23 +18,19 @@ public class SpeedCameraFilter {
 		return RELATIONS_INFO_TAG.equals(rdo.region.quickGetEncodingRule(nameType).getTag());
 	}
 
+	public static boolean hasSpeedCameraRelationsInfo(RouteDataObject rdo, int pointIndex) {
+		return rdo.getValue(pointIndex, RELATIONS_INFO_TAG) != null;
+	}
+
 	// returns "true" if the speed camera alarm at this point belongs only to opposite directions. Should be hidden.
 	public boolean checkIsHiddenSpeedCamera(RouteDataObject rdo, int nodeIndex) {
-		int[] nodeTags = rdo.getPointNameTypes(nodeIndex);
-		String[] nodeValues = rdo.getPointNames(nodeIndex);
-		if (nodeTags != null && nodeValues != null) {
-			for (int i = 0; i < nodeTags.length; i++) {
-				if (isSpeedCameraRelationsInfoTag(rdo, nodeTags[i])) {
-					return !shouldAddSpeedCameraAlarm(nodeValues[i]);
-				}
-			}
-		}
-		return false;
+		String relationsInfo = rdo.getValue(nodeIndex, RELATIONS_INFO_TAG);
+		return relationsInfo != null && !shouldAddSpeedCameraAlarm(relationsInfo);
 	}
 
 
 	// Example: node has "from" role in relation 16276089. and "to" role in relation 16276090.
-	// { "osmand:speed_camera_relation_id"  :  "16276089:from, 16276090:to" }
+	// { "osmand:speed_camera_relations_info"  :  "16276089:from, 16276090:to" }
 	private boolean shouldAddSpeedCameraAlarm(String nodeRelationsInfoValue) {
 		boolean shouldAddAlarm = false;
 
