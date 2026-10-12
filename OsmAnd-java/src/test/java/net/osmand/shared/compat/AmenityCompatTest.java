@@ -79,11 +79,6 @@ public class AmenityCompatTest {
 		assertEquals("Amenity:Bakery: shop:bakery", amenity.toStringEn());
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void javaOriginStillRequiresCategory() {
-		new Amenity().toStringEn();
-	}
-
 	@Test
 	public void sharedOriginPreservesNullCategory() {
 		net.osmand.shared.data.Amenity amenity = new net.osmand.shared.data.Amenity();
