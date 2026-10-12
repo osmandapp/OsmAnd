@@ -1,6 +1,8 @@
 package net.osmand.aiconnector
 
 import android.content.res.AssetManager
+import android.net.Uri
+import android.os.ParcelFileDescriptor
 import android.util.Base64
 import android.view.KeyEvent
 import net.osmand.aidlapi.IOsmAndAidlCallback
@@ -23,6 +25,8 @@ import net.osmand.aidlapi.gpx.StopGpxRecordingParams
 import net.osmand.aidlapi.logcat.ALogcatListenerParams
 import net.osmand.aidlapi.logcat.OnLogcatMessageParams
 import net.osmand.aidlapi.info.AMapWidgetValue
+import net.osmand.aidlapi.map.AFlyoverFile
+import net.osmand.aidlapi.map.FlyoverFileParams
 import net.osmand.aidlapi.map.MapFlyoverParams
 import net.osmand.aidlapi.map.MapScreenshotParams
 import net.osmand.aidlapi.map.SetMapCameraParams
@@ -38,6 +42,7 @@ import net.osmand.aidlapi.search.SearchParams
 import net.osmand.aidlapi.search.SearchResult
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.InputStream
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -409,7 +414,8 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 					"frames at their times; between them the center follows a smooth curve and zoom, rotation and tilt " +
 					"ease. OsmAnd renders off the screen frame by frame (OpenGL renderer, 3D and relief included), so the " +
 					"screen may be off; the phone's map pauses meanwhile. Rendering takes longer than the video: " +
-					"about 0.1-1 s per frame. Returns the file path on the phone.",
+					"about 0.1-1 s per frame. Returns the file path on the phone; osmand_download (the stdio bridge) " +
+					"saves the video on the computer.",
 			schema(
 				prop("keyframes", "array", "Key frames: {lat, lon, zoom, rotation (degrees, direction up on the screen, " +
 						"0 north), tilt (camera angle above the horizon, 90 flat, 30-50 3D), time_s (from the start)}; " +
@@ -436,6 +442,14 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 				prop("profile", "string", "Profile key for the profile icon, default the current one")
 			)
 		) { a -> flyover(a) },
+		Tool(
+			"osmand_flyover_files",
+			"Flyover videos recorded on the phone, newest first: name, size, date, and whether one is still being " +
+					"recorded. To get a video onto the computer call osmand_download with its name (a tool of the stdio " +
+					"bridge); without the bridge GET the 'download' path from the connector with the access key " +
+					"(Authorization: Bearer).",
+			schema(prop("limit", "integer", "Max videos, default 20"))
+		) { a -> flyoverFiles(a.optInt("limit", 20)) },
 		Tool(
 			"osmand_guide",
 			"How-to guide for a bigger task, with parameters, limits and examples. Topics: ${GUIDE_TOPICS.joinToString()}.",
@@ -486,6 +500,27 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 					"sharp lines strobe. Give that part more time or a lower zoom (the camera higher).")
 		}
 		return o
+	}
+
+	private fun flyoverFiles(limit: Int): JSONObject {
+		val files = ArrayList<AFlyoverFile>()
+		if (!bridge.get().getFlyoverFiles(files)) {
+			throw ToolError(refused(SCREEN) + " An older OsmAnd cannot list flyover videos.")
+		}
+		val list = JSONArray()
+		for (f in files.take(limit.coerceAtLeast(1))) {
+			val o = JSONObject().put("name", f.fileName).put("size_mb", Math.round(f.size / 1e5) / 10.0)
+				.put("date", Instant.ofEpochMilli(f.lastModified).atZone(ZoneId.systemDefault()).toLocalDateTime().toString())
+			if (f.isRecording) o.put("recording", true) else o.put("download", FLYOVER_FILES_PATH + Uri.encode(f.fileName))
+			list.put(o)
+		}
+		return JSONObject().put("count", files.size).put("videos", list)
+	}
+
+	/** A finished flyover video for the connector's download address, or null if OsmAnd has none by this name. */
+	fun openFlyover(name: String): Pair<InputStream, Long>? {
+		val fd = bridge.get().openFlyoverFile(FlyoverFileParams(name)) ?: return null
+		return ParcelFileDescriptor.AutoCloseInputStream(fd) to fd.statSize
 	}
 
 	private val logs = LogBuffer()
@@ -863,6 +898,7 @@ private const val SYSTEM = "System"
 
 private const val MAX_LOG_LINES = 5000
 private val GUIDE_TOPICS = listOf("flyover")
+const val FLYOVER_FILES_PATH = "/files/flyover/"
 private const val SMOOTH_SCREEN_SPEED = 250
 private val LOG_LEVELS = listOf("D", "I", "W", "E")
 
