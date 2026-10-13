@@ -316,6 +316,8 @@ public class SearchCoreFactory {
 
 		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 40 * 1000;
 		private static final int LONG_ADDRESS_BBOX_RADIUS = 100 * 1000;
+		// village is shown as "<dist> from <city>" only with a city of its own map not farther than that
+		private static final int MAX_RELATED_CITY_DISTANCE = 100 * 1000;
 		private static final int LIMIT = 10000;
 		private final int MAX_ADRESS_RESULTS_BY_REGIONS = 1000;
 
@@ -385,6 +387,56 @@ public class SearchCoreFactory {
 			return true;
 		}
 
+		private void setRelatedCity(SearchPhrase phrase, SearchResult res) {
+			City city = townCitiesCache.findRelatedCity(res.location, res.file, MAX_RELATED_CITY_DISTANCE);
+			if (city != null) {
+				res.localeRelatedObjectName = city.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+				res.relatedObject = city;
+				res.distRelatedObjectName = MapUtils.getDistance(city.getLocation(), res.location);
+			}
+		}
+
+		private void ensureTownCitiesLoaded(BinaryMapIndexReader r, SearchPhrase phrase, SearchResultMatcher resultMatcher)
+				throws IOException {
+			if (townCitiesCache.contains(r)) {
+				return;
+			}
+			List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
+			townCitiesCache.add(r);
+			for (City c  : l) {
+				if (phrase.getSettings().isExportObjects()) {
+					resultMatcher.exportCity(phrase, c);
+				}
+				c.setReferenceFile(r);
+				LatLon cl = c.getLocation();
+				
+				int y = MapUtils.get31TileNumberY(cl.getLatitude());
+				int x = MapUtils.get31TileNumberX(cl.getLongitude());
+				QuadRect qr = new QuadRect(x, y, x, y);
+				int[] bbox31 = c.getBbox31();
+				if (bbox31 != null) {
+					qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
+				}
+				townCitiesCache.insertCityQR(c, qr);
+			}
+			l = r.getCities(null, CityBlocks.BOUNDARY_TYPE, null, phrase.getSettings().getStat());
+			for (City c  : l) {
+				if (phrase.getSettings().isExportObjects()) {
+					resultMatcher.exportCity(phrase, c);
+				}
+				c.setReferenceFile(r);
+				LatLon cl = c.getLocation();
+				int y = MapUtils.get31TileNumberY(cl.getLatitude());
+				int x = MapUtils.get31TileNumberX(cl.getLongitude());
+				QuadRect qr = new QuadRect(x, y, x, y);
+				int[] bbox31 = c.getBbox31();
+				if (bbox31 != null) {
+					qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
+				}
+				townCitiesCache.insertBoundaryQR(c, qr);
+			}
+		}
+
 		private void initAndSearchCities(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			QuadRect bbox = null;
 			Iterator<BinaryMapIndexReader> offlineIndexes = null;
@@ -398,43 +450,7 @@ public class SearchCoreFactory {
 				offlineIndexes = phrase.getRadiusOfflineIndexes(0, defRadius, SearchPhraseDataType.ADDRESS);
 			}
 			while (offlineIndexes.hasNext()) {
-				BinaryMapIndexReader r = offlineIndexes.next();
-				if (!townCitiesCache.contains(r)) {
-					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
-					townCitiesCache.add(r);
-					for (City c  : l) {
-						if (phrase.getSettings().isExportObjects()) {
-							resultMatcher.exportCity(phrase, c);
-						}
-						c.setReferenceFile(r);
-						LatLon cl = c.getLocation();
-						
-						int y = MapUtils.get31TileNumberY(cl.getLatitude());
-						int x = MapUtils.get31TileNumberX(cl.getLongitude());
-						QuadRect qr = new QuadRect(x, y, x, y);
-						int[] bbox31 = c.getBbox31();
-						if (bbox31 != null) {
-							qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
-						}
-						townCitiesCache.insertCityQR(c, qr);
-					}
-					l = r.getCities(null, CityBlocks.BOUNDARY_TYPE, null, phrase.getSettings().getStat());
-					for (City c  : l) {
-						if (phrase.getSettings().isExportObjects()) {
-							resultMatcher.exportCity(phrase, c);
-						}
-						c.setReferenceFile(r);
-						LatLon cl = c.getLocation();
-						int y = MapUtils.get31TileNumberY(cl.getLatitude());
-						int x = MapUtils.get31TileNumberX(cl.getLongitude());
-						QuadRect qr = new QuadRect(x, y, x, y);
-						int[] bbox31 = c.getBbox31();
-						if (bbox31 != null) {
-							qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
-						}
-						townCitiesCache.insertBoundaryQR(c, qr);
-					}
-				}
+				ensureTownCitiesLoaded(offlineIndexes.next(), phrase, resultMatcher);
 			}
 			if (phrase.isNoSelectedType() && bbox != null
 					&& (phrase.isUnknownSearchWordPresent() || phrase.isEmptyQueryAllowed())
@@ -516,7 +532,6 @@ public class SearchCoreFactory {
 						sr.priority = priority;
 						int y = MapUtils.get31TileNumberY(object.getLocation().getLatitude());
 						int x = MapUtils.get31TileNumberX(object.getLocation().getLongitude());
-						List<City> closestCities = null;
 						if (object instanceof Street) {
 							// remove limitation by location
 							if (  //(locSpecified && !streetBbox.contains(x, y, x, y)) || 
@@ -562,28 +577,6 @@ public class SearchCoreFactory {
 								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
 										|| !phrase.isSearchTypeAllowed(ObjectType.VILLAGE)) {
 									return false;
-								}
-								City closestCity = null;
-								if (closestCities == null) {
-									// cities are loaded only from files near the user: a village from a file beyond that keeps the region name
-									closestCities = townCitiesCache.contains(currentFile[0])
-											? townCitiesCache.queryCities(villagesBbox) : Collections.emptyList();
-								}
-								double minDist = -1;
-								double pDist = -1;
-								for (City city : closestCities) {
-									double ll = MapUtils.getDistance(city.getLocation(), object.getLocation());
-									double pd = city.getType() == CityType.CITY ? ll : ll * 10;
-									if (minDist == -1 || pd < pDist) {
-										closestCity = city;
-										minDist = ll;
-										pDist = pd;
-									}
-								}
-								if (closestCity != null) {
-									sr.localeRelatedObjectName = closestCity.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-									sr.relatedObject = closestCity;
-									sr.distRelatedObjectName = minDist;
 								}
 								sr.objectType = ObjectType.VILLAGE;
 							}
@@ -667,6 +660,13 @@ public class SearchCoreFactory {
 					req.setSearchStat(phrase.getSettings().getStat());
 
 					r.searchAddressDataByName(req);
+					// cities are read after the name search: the file can't be read while it's being searched
+					for (SearchResult res : immediateResults) {
+						if (res.objectType == ObjectType.VILLAGE) {
+							ensureTownCitiesLoaded(r, phrase, resultMatcher);
+							setRelatedCity(phrase, res);
+						}
+					}
 					for (SearchResult res : immediateResults) {
 						if (res.objectType == ObjectType.STREET) {
 							SearchResult newParentSearchResult = null;
@@ -1924,6 +1924,30 @@ public class SearchCoreFactory {
 			List<City> cacheResArray = new ArrayList<>();
 			townCitiesQR.queryInBox(bbox, cacheResArray);
 			return cacheResArray;
+		}
+
+		// closest city or town (a town counts 10 times farther) from the same file around the location
+		public City findRelatedCity(LatLon location, Object file, int maxDistance) {
+			if (location == null) {
+				return null;
+			}
+			City closestCity = null;
+			double pDist = -1;
+			for (City city : queryCities(MapUtils.calculate31BboxUsingRhumb(maxDistance, location))) {
+				if (city.getReferenceFile() != file) {
+					continue;
+				}
+				double dist = MapUtils.getDistance(city.getLocation(), location);
+				if (dist > maxDistance) {
+					continue;
+				}
+				double pd = city.getType() == CityType.CITY ? dist : dist * 10;
+				if (closestCity == null || pd < pDist) {
+					closestCity = city;
+					pDist = pd;
+				}
+			}
+			return closestCity;
 		}
 
 		public List<City> queryBoundaries(QuadRect bbox) {

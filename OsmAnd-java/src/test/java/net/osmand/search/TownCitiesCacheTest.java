@@ -1,7 +1,12 @@
 package net.osmand.search;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.City;
+import net.osmand.data.City.CityType;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.search.core.SearchCoreFactory.TownCitiesCache;
+import net.osmand.util.MapUtils;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -47,6 +52,69 @@ public class TownCitiesCacheTest {
 			second.delete();
 			dir.delete();
 		}
+	}
+
+	private static final int MAX_DIST = 100 * 1000;
+	private static final LatLon SAINT_FERREOL = new LatLon(45.7700, 6.3170); // village near Annecy, France
+
+	// Village found far from the search center (Amsterdam) must not be labeled with a city
+	// near the search center, but with a close city of its own map (issue #25285)
+	@Test
+	public void testRelatedCityIsNearVillageNotNearSearchCenter() {
+		Object netherlands = "netherlands.obf";
+		Object france = "france.obf";
+		TownCitiesCache cache = new TownCitiesCache();
+		insert(cache, CityType.CITY, "Hilversum", new LatLon(52.2292, 5.1669), netherlands);
+		insert(cache, CityType.CITY, "Amsterdam", new LatLon(52.3730, 4.8924), netherlands);
+		insert(cache, CityType.CITY, "Paris", new LatLon(48.8566, 2.3522), france);
+		insert(cache, CityType.TOWN, "Annecy", new LatLon(45.8992, 6.1294), france);
+		insert(cache, CityType.TOWN, "Albertville", new LatLon(45.6755, 6.3925), france);
+
+		City city = cache.findRelatedCity(SAINT_FERREOL, france, MAX_DIST);
+		Assert.assertNotNull(city);
+		Assert.assertEquals("Albertville", city.getName());
+	}
+
+	@Test
+	public void testRelatedCityFromOtherMapIsIgnored() {
+		Object switzerland = "switzerland.obf";
+		Object france = "france.obf";
+		TownCitiesCache cache = new TownCitiesCache();
+		insert(cache, CityType.CITY, "Genève", new LatLon(46.2044, 6.1432), switzerland);
+		insert(cache, CityType.TOWN, "Annecy", new LatLon(45.8992, 6.1294), france);
+
+		City city = cache.findRelatedCity(SAINT_FERREOL, france, MAX_DIST);
+		Assert.assertNotNull(city);
+		Assert.assertEquals("Annecy", city.getName());
+	}
+
+	@Test
+	public void testNoRelatedCityFartherThanMaxDistance() {
+		Object france = "france.obf";
+		TownCitiesCache cache = new TownCitiesCache();
+		insert(cache, CityType.CITY, "Paris", new LatLon(48.8566, 2.3522), france);
+
+		Assert.assertNull(cache.findRelatedCity(SAINT_FERREOL, france, MAX_DIST));
+	}
+
+	@Test
+	public void testCityIsPreferredOverCloserTown() {
+		Object france = "france.obf";
+		TownCitiesCache cache = new TownCitiesCache();
+		insert(cache, CityType.TOWN, "Albertville", new LatLon(45.6755, 6.3925), france); // ~12 km
+		insert(cache, CityType.CITY, "Chambéry", new LatLon(45.5646, 5.9178), france); // ~38 km
+
+		Assert.assertEquals("Chambéry", cache.findRelatedCity(SAINT_FERREOL, france, MAX_DIST).getName());
+	}
+
+	private void insert(TownCitiesCache cache, CityType type, String name, LatLon location, Object file) {
+		City city = new City(type);
+		city.setName(name);
+		city.setLocation(location);
+		city.setReferenceFile(file);
+		int x = MapUtils.get31TileNumberX(location.getLongitude());
+		int y = MapUtils.get31TileNumberY(location.getLatitude());
+		cache.insertCityQR(city, new QuadRect(x, y, x, y));
 	}
 
 	private File copy(File dir, String name) throws IOException {
