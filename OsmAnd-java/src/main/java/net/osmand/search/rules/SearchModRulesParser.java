@@ -178,7 +178,7 @@ final class SearchModRulesParser {
 	}
 
 	/**
-	 * {@code <abbr short="ДК" full="Дом культуры"/>} of {@code <poi>}: a POI name with one form gets the other one as an
+	 * a POI name with one form gets the other one as an
 	 * alternative name, both ways, as the alternative names of a mirror pair (whole words, any case, the dot of the
 	 * abbreviation); the full form may be a phrase.
 	 */
