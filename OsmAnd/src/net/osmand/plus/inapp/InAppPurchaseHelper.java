@@ -981,6 +981,7 @@ public abstract class InAppPurchaseHelper {
 		parameters.put("lang", ctx.getLanguage());
 		parameters.put("nd", String.valueOf(ctx.getAppInitializer().getFirstInstalledDays()));
 		parameters.put("ns", String.valueOf(ctx.getAppInitializer().getNumberOfStarts()));
+		InstallReferrer.addParams(ctx, parameters);
 		if (ctx.isUserAndroidIdAllowed()) {
 			parameters.put("aid", ctx.getUserAndroidId());
 		}
