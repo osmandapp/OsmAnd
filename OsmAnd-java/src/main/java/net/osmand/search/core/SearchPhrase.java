@@ -497,6 +497,20 @@ public class SearchPhrase {
 		return settings.hasCustomSearchType(type);
 	}
 
+	// the address tab: only address objects (and coordinates) are requested
+	public boolean isAddressSearch() {
+		ObjectType[] searchTypes = getSearchTypes();
+		if (searchTypes == null) {
+			return false;
+		}
+		for (ObjectType type : searchTypes) {
+			if (!ObjectType.isAddress(type) && type != ObjectType.LOCATION && type != ObjectType.PARTIAL_LOCATION) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public boolean isSearchTypeAllowed(ObjectType searchType) {
 		return isSearchTypeAllowed(searchType, false);
 	}
