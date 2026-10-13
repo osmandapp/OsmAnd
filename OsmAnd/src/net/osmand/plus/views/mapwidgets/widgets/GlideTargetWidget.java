@@ -84,6 +84,11 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	}
 
 	@Override
+	public GlideTargetWidgetState getWidgetState() {
+		return widgetState;
+	}
+
+	@Override
 	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
 		super.copySettingsFromMode(sourceAppMode, appMode, customId);
 		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
