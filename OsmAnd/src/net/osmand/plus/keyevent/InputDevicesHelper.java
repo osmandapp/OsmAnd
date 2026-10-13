@@ -177,8 +177,9 @@ public class InputDevicesHelper {
 
 	@NonNull
 	private InputDeviceProfile getSelectedDevice(int cacheId, @NonNull ApplicationMode appMode) {
+		InputDevicesCollection collection = getInputDevicesCollection(cacheId, appMode);
 		String id = getSelectedDeviceId(appMode);
-		InputDeviceProfile device = id != null ? getDeviceById(cacheId, appMode, id) : null;
+		InputDeviceProfile device = id != null ? collection.getDeviceById(id) : null;
 		return device != null ? device : KEYBOARD;
 	}
 
@@ -314,6 +315,7 @@ public class InputDevicesHelper {
 		List<InputDeviceProfile> devices = readCustomDevices(settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get());
 		if (mergeLegacyCustomDevices(devices)) {
 			saveCustomDevices(devices);
+			cachedDevicesCollections.clear();
 		}
 		return devices;
 	}
@@ -347,22 +349,22 @@ public class InputDevicesHelper {
 	 */
 	private boolean mergeLegacyCustomDevices(@NonNull List<InputDeviceProfile> devices) {
 		CommonPreference<String> legacyPreference = settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES;
-		boolean changed = false;
+		int initialSize = devices.size();
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 			if (!legacyPreference.isSetForMode(appMode)) {
 				continue;
 			}
 			String selectedId = settings.EXTERNAL_INPUT_DEVICE.getModeValue(appMode);
+			List<InputDeviceProfile> mergeCandidates = new ArrayList<>(devices);
 			for (InputDeviceProfile device : readCustomDevices(legacyPreference.getModeValue(appMode))) {
-				String mergedId = mergeLegacyDevice(devices, device);
+				String mergedId = mergeLegacyDevice(devices, mergeCandidates, device);
 				if (Objects.equals(device.getId(), selectedId) && !Objects.equals(device.getId(), mergedId)) {
 					settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, mergedId);
 				}
 			}
 			legacyPreference.resetModeToDefault(appMode);
-			changed = true;
 		}
-		return changed;
+		return devices.size() > initialSize;
 	}
 
 	/**
@@ -370,12 +372,24 @@ public class InputDevicesHelper {
 	 */
 	@NonNull
 	private String mergeLegacyDevice(@NonNull List<InputDeviceProfile> devices,
+	                                 @NonNull List<InputDeviceProfile> mergeCandidates,
 	                                 @NonNull InputDeviceProfile device) {
 		String content = getDeviceContent(device);
-		for (InputDeviceProfile existing : devices) {
+		InputDeviceProfile sameContentDevice = null;
+		for (InputDeviceProfile existing : mergeCandidates) {
 			if (content != null && content.equals(getDeviceContent(existing))) {
-				return existing.getId();
+				if (Objects.equals(existing.getId(), device.getId())) {
+					sameContentDevice = existing;
+					break;
+				}
+				if (sameContentDevice == null) {
+					sameContentDevice = existing;
+				}
 			}
+		}
+		if (sameContentDevice != null) {
+			mergeCandidates.remove(sameContentDevice);
+			return sameContentDevice.getId();
 		}
 		boolean idTaken = hasDeviceId(devices, device.getId());
 		String name = device.toHumanString(app);
@@ -398,7 +412,9 @@ public class InputDevicesHelper {
 			json.remove("name");
 			JSONArray assignments = json.getJSONArray("assignments");
 			for (int i = 0; i < assignments.length(); i++) {
-				JSONArray actions = assignments.getJSONObject(i).optJSONArray("action");
+				JSONObject assignment = assignments.getJSONObject(i);
+				assignment.remove("id");
+				JSONArray actions = assignment.optJSONArray("action");
 				for (int j = 0; actions != null && j < actions.length(); j++) {
 					actions.getJSONObject(j).remove("id");
 				}
@@ -410,12 +426,8 @@ public class InputDevicesHelper {
 	}
 
 	private boolean hasDeviceName(@NonNull List<InputDeviceProfile> customDevices, @NonNull String name) {
-		for (InputDeviceProfile device : CollectionUtils.asOneList(DefaultInputDevices.values(), customDevices)) {
-			if (Objects.equals(device.toHumanString(app).trim(), name.trim())) {
-				return true;
-			}
-		}
-		return false;
+		List<InputDeviceProfile> allDevices = CollectionUtils.asOneList(DefaultInputDevices.values(), customDevices);
+		return InputDevicesCollection.hasDeviceNameDuplicate(app, allDevices, name);
 	}
 
 	@NonNull
