@@ -1,5 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+<!--
+	poi_* strings: the first word is the name of the POI type, every further ";"-separated word is a SEARCH SYNONYM
+	of that type. A synonym makes every object of the type findable by that word, so the word must mean the whole
+	type ("petrol" for fuel station), not a narrower kind of it ("basilica", "cathedral" for a Christian church,
+	"pizzeria" for a restaurant) and not a word that is often part of place names ("city", "park", "street",
+	"place", "water"). A wrong synonym turns a place name typed by the user into a category: "Basílica de Nuestra
+	Señora del Pilar" became "churches near Plaza del Pilar" when every church was a "basilica". Translate the first
+	word; add synonyms only when they hold for all objects of the type in your language.
+-->
 <!--  poi additional categories -->
 	<string name="poi_fuel_type">Fuel type</string>
 	<string name="poi_fuel_avia_type">Fuel type (avia)</string>
