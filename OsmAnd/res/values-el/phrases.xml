@@ -213,7 +213,7 @@
     <string name="poi_houseware">Κατάστημα οικιακών ειδών</string>
     <string name="poi_hunting">Κυνηγετικός εξοπλισμός</string>
     <string name="poi_interior_decoration">Διακόσμηση εσωτερικών χώρων;Διακοσμήσεις εσωτερικών χώρων</string>
-    <string name="poi_jewelry">Κοσμηματοπωλείο;jewellery</string>
+    <string name="poi_jewelry">Κοσμηματοπωλείο</string>
     <string name="poi_kiosk">Περίπτερο</string>
     <string name="poi_kitchen">Έπιπλα κουζίνας</string>
     <string name="poi_leather">Δερμάτινα είδη</string>
@@ -244,7 +244,7 @@
     <string name="poi_video">Βιντεάδικο;Βίντεο Κλαμπ</string>
     <string name="poi_department_store">Πολυκατάστημα</string>
     <string name="poi_electronics">Κατάστημα ηλεκτρονικών;μαγαζί ηλεκτρονικών</string>
-    <string name="poi_car">Πωλήσεις αυτοκινήτων;motors</string>
+    <string name="poi_car">Πωλήσεις αυτοκινήτων</string>
     <string name="poi_car_parts">Ανταλλακτικά αυτοκινήτων</string>
     <string name="poi_cosmetics">Καλλυντικά</string>
     <string name="poi_marketplace">Αγορά</string>
@@ -345,7 +345,7 @@
     <string name="poi_traffic_calming_table">Πίνακας ταχύτητας</string>
     <string name="poi_traffic_signals">Κόκκινο φανάρι</string>
     <string name="poi_car_repair">Επισκευή οχήματος</string>
-    <string name="poi_taxi">Πιάτσα ταξί;taxi;πιάτσα;Ταξί</string>
+    <string name="poi_taxi">Πιάτσα ταξί;πιάτσα;Ταξί</string>
     <string name="poi_aerodrome">Αεροδρόμιο;Αερολιμένας</string>
     <string name="poi_helipad">Ελικοδρόμιο</string>
     <string name="poi_runway">Αεροδιάδρομος</string>
@@ -702,13 +702,13 @@
     <string name="poi_attraction_train">Σιδηρόδρομος (αξιοθέατο)</string>
     <string name="poi_attraction_water_slide">Νεροτσουλήθρα</string>
     <string name="poi_lodging">Κατάλυμα</string>
-    <string name="poi_hotel">Ξενοδοχείο;apartments;studios</string>
+    <string name="poi_hotel">Ξενοδοχείο</string>
     <string name="poi_guest_house">Ξενώνας</string>
     <string name="poi_hostel">Πανδοχείο</string>
     <string name="poi_motel">Μοτέλ</string>
     <string name="poi_alpine_hut">Ορειβατικό καταφύγιο;Καταφύγιο;Ορεινό καταφύγιο</string>
     <string name="poi_chalet">Σαλέ;Καταφύγιο</string>
-    <string name="poi_apartment">Διαμέρισμα;apartments;studios;διαμέρισμα διακοπών</string>
+    <string name="poi_apartment">Διαμέρισμα;διαμέρισμα διακοπών</string>
     <string name="poi_wilderness_hut">Καταφύγιο άγριας φύσης;Καλύβα άγριας φύσης</string>
     <string name="poi_cabin">Καλύβα;Καταφύγιο</string>
     <string name="poi_lean_to">Υπόστεγο;Στέγαστρο;Καταφύγιο</string>
@@ -872,7 +872,7 @@
     <string name="poi_gallery">Πινακοθήκη</string>
     <string name="poi_dance_floor">Πίστα χορού</string>
     <string name="poi_nightclub">Νυκτερινό κέντρο;Ντίσκο;Νυχτερινό κέντρο διασκέδασης</string>
-    <string name="poi_stripclub">Στριπτιζάδικο;Stripclub</string>
+    <string name="poi_stripclub">Στριπτιζάδικο</string>
     <string name="poi_beach_resort">Παραλιακό θέρετρο</string>
     <string name="poi_dog_park">Πάρκο σκύλων</string>
     <string name="poi_leisure_fishing">Χώρος ψαρέματος</string>
@@ -891,7 +891,7 @@
     <string name="poi_trail_riding_station">Σταθμός ιππικού μονοπατιού</string>
     <string name="poi_cafe">Κυλικείο;μπουγάτσα</string>
     <string name="poi_biergarten">Υπαίθρια μπιραρία</string>
-    <string name="poi_restaurant">Εστιατόριο;taverna;ταβέρνα;tavern;ουζερί</string>
+    <string name="poi_restaurant">Εστιατόριο;ταβέρνα;ουζερί</string>
     <string name="poi_fast_food">Ταχυφαγείο;μπουγάτσα;φαγητό για το σπίτι</string>
     <string name="poi_bar">Μπαρ</string>
     <string name="poi_pub">Παμπ</string>
@@ -948,9 +948,9 @@
     <string name="poi_craft_window_construction">Κατασκευές παραθύρων</string>
     <string name="poi_funeral_directors">Εργολάβοι κηδειών;Γραφεία τελετών</string>
     <string name="poi_craft_computer">Υπολογιστές</string>
-    <string name="poi_beauty">Ινστιτούτο αισθητικής;nail;Σαλόνι αισθητικής</string>
+    <string name="poi_beauty">Ινστιτούτο αισθητικής;Σαλόνι αισθητικής</string>
     <string name="poi_beauty_salon_nails">Μανικιούρ</string>
-    <string name="poi_hairdresser">Κομμωτής;barber;barbershop</string>
+    <string name="poi_hairdresser">Κομμωτής</string>
     <string name="poi_massage">Μαλάξεις</string>
     <string name="poi_tattoo">Τατουάζ</string>
     <string name="poi_dry_cleaning">Στεγνό καθάρισμα</string>
@@ -3876,7 +3876,7 @@
     <string name="poi_area_highway">Περιοχή κινητικότητας</string>
     <string name="poi_area_highway_steps">Περιοχή σκαλοπατιών</string>
     <string name="poi_area_highway_footway">Περιοχή για περπάτημα</string>
-    <string name="poi_travel_agency">Ταξιδιωτικό πρακτορείο;tours;Ταξιδιωτικό γραφείο;Τουριστικός πράκτορας</string>
+    <string name="poi_travel_agency">Ταξιδιωτικό πρακτορείο;Ταξιδιωτικό γραφείο;Τουριστικός πράκτορας</string>
     <string name="poi_access_main_tag">Πρόσβαση</string>
     <string name="poi_aerodrome_type_airfield">Αεροδρόμιο</string>
     <string name="poi_consulate">Προξενείο</string>

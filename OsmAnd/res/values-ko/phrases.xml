@@ -2,7 +2,7 @@
 <resources>
     <string name="poi_palaeontological_site">Palaeontological 사이트</string>
     <string name="poi_bakery">베이커리</string>
-    <string name="poi_alcohol">술집</string>
+    <string name="poi_alcohol">술집;주류샵</string>
     <string name="poi_convenience">편의점</string>
     <string name="poi_mall">쇼핑몰</string>
     <string name="poi_beverages">음료 가게</string>
@@ -62,7 +62,7 @@
     <string name="poi_motorcycle">오토바이 가게</string>
     <string name="poi_musical_instrument">악기</string>
     <string name="poi_newsagent">통신사;신문가판대</string>
-    <string name="poi_optician">검안</string>
+    <string name="poi_optician">검안;안경점</string>
     <string name="poi_organic">유기농 식품</string>
     <string name="poi_outdoor">아웃도어 가게</string>
     <string name="poi_paint">페인트 샵</string>
@@ -72,7 +72,7 @@
     <string name="poi_ship_chandler">배 잡화상</string>
     <string name="poi_sports">스포츠 용품;스포츠가게</string>
     <string name="poi_stationery">문구용품 가게</string>
-    <string name="poi_ticket">티켓 판매소</string>
+    <string name="poi_ticket">티켓 판매소;매표소</string>
     <string name="poi_tobacco">담배 상점</string>
     <string name="poi_toys">장난감 가게</string>
     <string name="poi_trade">무역소</string>
@@ -113,7 +113,7 @@
     <string name="poi_car_repair">자동차 수리</string>
     <string name="poi_vehicle_inspection">차량 검사</string>
     <string name="poi_car_wash">세차장</string>
-    <string name="poi_fuel">LPG 주유소</string>
+    <string name="poi_fuel">LPG 주유소;충전소</string>
     <string name="poi_electricity_combined_charging">충전 스테이션</string>
     <string name="poi_vehicle_ramp">차량 진입로</string>
     <string name="poi_compressed_air">압축 공기</string>
@@ -202,7 +202,7 @@
     <string name="poi_kindergarten">유치원;어린이집</string>
     <string name="poi_college">대학</string>
     <string name="poi_university">대학</string>
-    <string name="poi_social_facility">사회 시설</string>
+    <string name="poi_social_facility">사회 시설;경로당</string>
     <string name="poi_courthouse">법원</string>
     <string name="poi_prison">감옥</string>
     <string name="poi_register_office">민사 레지스트리 사무소</string>
@@ -225,11 +225,11 @@
     <string name="poi_place_allotments">부담금</string>
     <string name="poi_place_farm">농장</string>
     <string name="poi_pharmacy">약국</string>
-    <string name="poi_hospital">병원</string>
-    <string name="poi_doctors">의사</string>
+    <string name="poi_hospital">병원;한의원</string>
+    <string name="poi_doctors">의사;한의원;의원</string>
     <string name="poi_clinic">클리닉</string>
     <string name="poi_first_aid">응급 처치</string>
-    <string name="poi_dentist">치과 의사</string>
+    <string name="poi_dentist">치과 의사;치과</string>
     <string name="poi_nursing_home">요양원</string>
     <string name="poi_baby_hatch">아기 해치</string>
     <string name="poi_veterinary">수의학;동물병원</string>
@@ -263,10 +263,10 @@
     <string name="poi_studio">스튜디오</string>
     <string name="poi_bookmaker">북 마커</string>
     <string name="poi_stadium">경기장</string>
-    <string name="poi_sports_centre">스포츠 센터</string>
-    <string name="poi_golf_course">골프 코스</string>
+    <string name="poi_sports_centre">스포츠 센터;체육관</string>
+    <string name="poi_golf_course">골프 코스;골프장</string>
     <string name="poi_ice_rink">아이스 링크</string>
-    <string name="poi_pitch">피치;테니스장;배드민턴장</string>
+    <string name="poi_pitch">피치;운동장;테니스장;농구장;축구장;배드민턴장;풋살장;족구장;야구장</string>
     <string name="poi_leisure_track">스포츠 트랙</string>
     <string name="poi_running_track">육상 트랙</string>
     <string name="poi_aerialway_station">Aerialway 역</string>
@@ -330,7 +330,7 @@
     <string name="poi_volleyball">배구</string>
     <string name="poi_museum">박물관</string>
     <string name="poi_attraction">관광 명소</string>
-    <string name="poi_memorial">기념관</string>
+    <string name="poi_memorial">기념관;기념비</string>
     <string name="poi_artwork">아트 워크</string>
     <string name="poi_archaeological_site">고고학 사이트</string>
     <string name="poi_battlefield">전장</string>
@@ -338,7 +338,7 @@
     <string name="poi_castle">성</string>
     <string name="poi_city_gate">시티 게이트</string>
     <string name="poi_fort">요새</string>
-    <string name="poi_fountain">분수</string>
+    <string name="poi_fountain">분수;분수대</string>
     <string name="poi_historic_ruins">역사 유적</string>
     <string name="poi_rune_stone">룬 스톤</string>
     <string name="poi_wreck">난파선</string>
@@ -354,7 +354,7 @@
     <string name="poi_alpine_hut">알파인 헛</string>
     <string name="poi_chalet">샬레</string>
     <string name="poi_place_of_worship">예배 장소</string>
-    <string name="poi_religion_christian">예배 장소: 기독교</string>
+    <string name="poi_religion_christian">예배 장소: 기독교;교회;천주교;성당</string>
     <string name="poi_religion_jewish">예배 장소: 유대인;유대교회당;유태교회당</string>
     <string name="poi_religion_muslim">예배 장소: 이슬람</string>
     <string name="poi_religion_sikh">예배 장소: 시크교</string>
@@ -369,7 +369,7 @@
     <string name="poi_clock">시계</string>
     <string name="poi_travel_agent">여행사</string>
     <string name="poi_viewpoint">관점</string>
-    <string name="poi_camp_site">캠프 사이트</string>
+    <string name="poi_camp_site">캠프 사이트;캠핑장</string>
     <string name="poi_caravan_site">캐러밴 사이트</string>
     <string name="poi_disaster_response">SES 역</string>
     <string name="poi_traffic_calming_hump">험프</string>
@@ -410,11 +410,11 @@
     <string name="poi_club_shooting">사격 클럽</string>
     <string name="poi_club_tourism">관광 클럽</string>
     <string name="poi_club_charity">자선 클럽</string>
-    <string name="poi_library">라이브러리;작은도서관</string>
+    <string name="poi_library">라이브러리;도서관;작은도서관</string>
     <string name="poi_arts_centre">예술 센터;예술회관</string>
     <string name="poi_cinema">시네마</string>
     <string name="poi_casino">카지노</string>
-    <string name="poi_community_centre">커뮤니티 센터</string>
+    <string name="poi_community_centre">커뮤니티 센터;경로당;복지관</string>
     <string name="poi_social_centre">사회적인 센터</string>
     <string name="poi_theatre">극장</string>
     <string name="poi_theatre_genre_circus">서커스</string>
@@ -430,15 +430,15 @@
     <string name="poi_playground">놀이터;어린이놀이터</string>
     <string name="poi_swimming_pool">수영장</string>
     <string name="poi_water_park">워터 파크</string>
-    <string name="poi_park">공원;어린이공원;근린공원</string>
-    <string name="poi_cafe">카페</string>
+    <string name="poi_park">공원;어린이공원;근린공원;소공원</string>
+    <string name="poi_cafe">카페;커피</string>
     <string name="poi_biergarten">비어 가든</string>
-    <string name="poi_restaurant">레스토랑;부대찌개</string>
+    <string name="poi_restaurant">레스토랑;순대국;떡볶이;부대찌개;감자탕;비빔밥;돈까스;마라탕;양꼬치;닭갈비</string>
     <string name="poi_fast_food">패스트 푸드</string>
     <string name="poi_bar">바</string>
     <string name="poi_pub">음식점</string>
     <string name="poi_food_court">푸드 코트</string>
-    <string name="poi_drinking_water">식 수</string>
+    <string name="poi_drinking_water">식 수;음수대</string>
     <string name="poi_barbecue">바베큐</string>
     <string name="poi_craft_agricultural_engines">농업 엔진</string>
     <string name="poi_craft_basket_maker">바구니 메이커</string>
@@ -493,9 +493,9 @@
     <string name="poi_craft_window_construction">창문 건설</string>
     <string name="poi_funeral_directors">장례 감독;장례식장</string>
     <string name="poi_craft_computer">컴퓨터 기술</string>
-    <string name="poi_beauty">뷰티 살롱;nail;에스테틱;스킨케어;메이크업</string>
+    <string name="poi_beauty">뷰티 살롱;에스테틱;스킨케어;속눈썹;메이크업</string>
     <string name="poi_beauty_salon_nails">네일 살롱</string>
-    <string name="poi_hairdresser">헤어 드레서;nail;헤어살롱;메이크업</string>
+    <string name="poi_hairdresser">헤어 드레서;미용실;헤어샵;헤어살롱;속눈썹;메이크업</string>
     <string name="poi_massage">마사지 살롱</string>
     <string name="poi_tattoo">문신 살롱;타투가게</string>
     <string name="poi_dry_cleaning">드라이 클리닝</string>

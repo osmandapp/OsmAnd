@@ -1224,7 +1224,7 @@
     <string name="poi_craft_agricultural_engines">מנועים לחקלאות</string>
     <string name="poi_craft_basket_maker">קליעת סלים</string>
     <string name="poi_craft_beekeeper">כוורנות</string>
-    <string name="poi_craft_blacksmith">נפחות</string>
+    <string name="poi_craft_blacksmith">נפחות;נפח</string>
     <string name="poi_craft_brewery">מבשלה</string>
     <string name="poi_craft_boatbuilder">בניית סירות</string>
     <string name="poi_craft_bookbinder">כריכת ספרים</string>
@@ -1318,7 +1318,7 @@
     <string name="poi_geyser">גייזר</string>
     <string name="poi_cemetery">בית עלמין</string>
     <string name="poi_grave_yard">בית קברות</string>
-    <string name="poi_tomb">מצבה</string>
+    <string name="poi_tomb">מצבה;קבר</string>
     <string name="poi_shelter">מקלט</string>
     <string name="poi_funicular">פוניקולר</string>
     <string name="poi_hanami">הנאמי</string>
@@ -1736,7 +1736,7 @@
     <string name="poi_toboggan">מזחלות שלג</string>
     <string name="poi_volleyball">כדורעף</string>
     <string name="poi_museum">מוזיאון</string>
-    <string name="poi_memorial">אתר הנצחה</string>
+    <string name="poi_memorial">אתר הנצחה;פסל</string>
     <string name="poi_artwork">מיצג אומנותי</string>
     <string name="poi_archaeological_site">אתר ארכיאולוגי</string>
     <string name="poi_battlefield">שדה קרב</string>

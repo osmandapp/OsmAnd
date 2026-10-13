@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_palaeontological_site">محوطه دیرینه شناسی</string>
-    <string name="poi_bakery">نانوایی;بربری;سنگک;لواش;سنگکی;لواشی;تافتون;فطیر</string>
+    <string name="poi_bakery">نانوایی;نان;بربری;سنگک;لواش;سنگکی;لواشی;تافتون;فطیر</string>
     <string name="poi_alcohol">فروشگاه نوشیدنی‌های الکلی;مشروب فروشی</string>
     <string name="poi_convenience">سوپرمارکت;مارکت;سوپر</string>
     <string name="poi_mall">مرکز خرید;پاساژ</string>
@@ -25,15 +25,15 @@
     <string name="poi_baby_goods">کالای کودک</string>
     <string name="poi_bag">کیف فروشی</string>
     <string name="poi_bathroom_furnishing">لوازم حمام</string>
-    <string name="poi_bed">مبلمان اتاق خواب</string>
+    <string name="poi_bed">مبلمان اتاق خواب;تشک</string>
     <string name="poi_boutique">بوتیک</string>
-    <string name="poi_carpet">فرش فروشی</string>
+    <string name="poi_carpet">فرش فروشی;فرش</string>
     <string name="poi_chemist">فروشگاه محصولات بهداشتی و آرایشی</string>
     <string name="poi_clothes">فروشگاه پوشاک;پوشاک;مزون;مانتو</string>
     <string name="poi_clothes_children">فروشگاه پوشاک کودک</string>
     <string name="poi_shoes">کفش فروشی</string>
     <string name="poi_computer">فروشگاه کامپیوتر;کامپیوتر</string>
-    <string name="poi_copyshop">فروشگاه چاپ و تکثیر</string>
+    <string name="poi_copyshop">فروشگاه چاپ و تکثیر;چاپ</string>
     <string name="poi_curtain">پرده فروشی;پرده</string>
     <string name="poi_fabric">پارچه فروشی;پارچه</string>
     <string name="poi_dive">تجهیزات غواصی</string>
@@ -42,7 +42,7 @@
     <string name="poi_fishing">لوازم ماهیگیری</string>
     <string name="poi_florist">گلفروشی;گل فروشی</string>
     <string name="poi_frame">قاب سازی</string>
-    <string name="poi_furniture">فروشگاه مبلمان</string>
+    <string name="poi_furniture">فروشگاه مبلمان;مبل</string>
     <string name="poi_garden_centre">مرکز باغبانی;فروشگاه تجهیزات باغبانی</string>
     <string name="poi_gas">فروشگاه کپسول گاز</string>
     <string name="poi_shop_yes">فروشگاه عمومی</string>
@@ -55,7 +55,7 @@
     <string name="poi_houseware">لوازم خانگی خرد;کالاهای خانگی</string>
     <string name="poi_hunting">تجهیزات شکار</string>
     <string name="poi_interior_decoration">فروشگاه دکوراسیون داخلی</string>
-    <string name="poi_jewelry">طلا فروشی;جواهری;جواهر</string>
+    <string name="poi_jewelry">طلا فروشی;طلا;جواهری;جواهر</string>
     <string name="poi_kiosk">دکه</string>
     <string name="poi_kitchen">لوازم و مبلمان آشپزخانه</string>
     <string name="poi_mobile_phone">فروشگاه موبایل;موبایل;موبایل فروشی</string>
@@ -118,7 +118,7 @@
     <string name="poi_car_repair">تعمیر خودرو;تعمیرگاه;صافکاری;باطری;جلوبندی;اتوسرویس</string>
     <string name="poi_vehicle_inspection">معاینه فنی خودرو</string>
     <string name="poi_car_wash">کارواش</string>
-    <string name="poi_fuel">جایگاه سوخت; جایگاه سوخت‌گیری; پمپ بنزین; پمپ گاز;بنزین;جایگاه;سوخت;گازوئیل</string>
+    <string name="poi_fuel">جایگاه سوخت; جایگاه سوخت‌گیری; پمپ بنزین; پمپ گاز;پمپ;بنزین;جایگاه;سوخت;گازوئیل</string>
     <string name="poi_electricity_combined_charging">ایستگاه شارژ; ایستگاه شارژ خودروی برقی</string>
     <string name="poi_vehicle_ramp">سطح شیب دار خودرو</string>
     <string name="poi_compressed_air">هوای فشرده</string>
@@ -343,7 +343,7 @@
     <string name="poi_battlefield">میدان جنگ</string>
     <string name="poi_boundary_stone">سنگ مرز</string>
     <string name="poi_historic_cannon">توپ تاریخی</string>
-    <string name="poi_castle">قلعه</string>
+    <string name="poi_castle">قلعه;کاخ</string>
     <string name="poi_city_gate">دروازه شهر</string>
     <string name="poi_fort">برج و بارو</string>
     <string name="poi_fountain">فواره</string>
@@ -448,7 +448,7 @@
     <string name="poi_park">پارک;بوستان</string>
     <string name="poi_cafe">کافه;قهوه خانه</string>
     <string name="poi_biergarten">آبجو</string>
-    <string name="poi_restaurant">رستوران;تالار;کبابی;غذاخوری;طباخی;حلیم</string>
+    <string name="poi_restaurant">رستوران;تالار;کبابی;سلف;غذاخوری;طباخی;حلیم</string>
     <string name="poi_fast_food">فست فود;سوخاری;ساندویچی</string>
     <string name="poi_bar">بار</string>
     <string name="poi_pub">میخانه</string>
@@ -528,7 +528,7 @@
     <string name="poi_bureau_de_change">صرافی</string>
     <string name="poi_accountant">حسابداری</string>
     <string name="poi_bitcoin_yes">پرداخت بیت‌کوینی</string>
-    <string name="poi_cave_entrance">ورودی غار</string>
+    <string name="poi_cave_entrance">ورودی غار;غار</string>
     <string name="poi_peak">قله کوه</string>
     <string name="poi_saddle">دره</string>
     <string name="poi_volcano">اتشفشان</string>
@@ -791,7 +791,7 @@
     <string name="poi_games">بازی‌ها</string>
     <string name="poi_video_games">بازی‌های ویدیویی</string>
     <string name="poi_weapons">فروشگاه اسلحه</string>
-    <string name="poi_perfumery">عطر فروشی</string>
+    <string name="poi_perfumery">عطر فروشی;عطر</string>
     <string name="poi_spices">عطاری</string>
     <string name="poi_honey">عسل فروشی</string>
     <string name="poi_religion">کالای مذهبی</string>
