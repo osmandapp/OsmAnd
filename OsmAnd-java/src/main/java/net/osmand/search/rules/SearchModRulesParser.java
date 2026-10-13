@@ -34,7 +34,7 @@ final class SearchModRulesParser {
 	// the table that <locales> of rules.xml fills, null for a file without it
 	private final SearchModLocales locales;
 
-	// false: skip what only the OBF writer reads (<index> rules, <unglue>, <poi>); the word classes stay
+	// false: skip what only the OBF writer reads (<index>, <poi>)
 	private final boolean indexRules;
 
 	SearchModRulesParser(String file, SearchModLocales locales) {
@@ -130,15 +130,11 @@ final class SearchModRulesParser {
 					if ("rule".equals(tag)) {
 						parseMirrorRule(parser);
 					}
-				} else if (depth == 3 && "index".equals(section)) {
+				} else if (depth == 3 && "index".equals(section) && indexRules) {
 					if ("rule".equals(tag)) {
-						if (indexRules) {
-							parseIndexRule(parser);
-						}
+						parseIndexRule(parser);
 					} else if ("unglue".equals(tag)) {
-						if (indexRules) {
-							parseUnglue(parser);
-						}
+						parseUnglue(parser);
 					} else if (tag.startsWith("class")) {
 						boolean enabled = enabled(parser);
 						layer.addClass(tag.charAt(5) - '0', words(parser.nextText()), enabled);

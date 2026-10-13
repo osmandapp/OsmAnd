@@ -36,7 +36,7 @@ public final class SearchModRules {
 	}
 
 	private final String resourceDir;
-	// false for the search: <index> rules, <unglue> and <poi> serve only the OBF writer
+	// false for the search: <index> and <poi> serve only the OBF writer
 	private final boolean indexRules;
 	private final SearchModLocales locales;
 	private final SearchModRulesParser.Layer base;
@@ -51,8 +51,8 @@ public final class SearchModRules {
 	}
 
 	/**
-	 * The rules the search needs: query forms, skip penalties, word classes. Alternative names ({@code <index>} rules,
-	 * {@code <unglue>}, the index rules of mirror pairs) and {@code <poi>} are read only by the OBF writer.
+	 * The rules the search needs: {@code <query>} and the query forms of mirror pairs. {@code <index>} (alternative
+	 * names, word classes), the index rules of mirror pairs and {@code <poi>} are read only by the OBF writer.
 	 */
 	public static SearchModRules forSearch() {
 		return new SearchModRules(RESOURCE_DIR, false);

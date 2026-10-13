@@ -278,8 +278,6 @@ public class SearchModLocaleRulesTest {
 				"house-number qualifier or an ignorable word");
 		expect("<query><skipPenalty>bis</skipPenalty><rule from=\"bis\" object=\"building\"/></query>",
 				"house-number qualifier or an ignorable word");
-		// a word of class 1 or 2 never penalizes a name either
-		expect("<index><class1>rue</class1></index><query><skipPenalty>rue</skipPenalty></query>", "<class1>");
 		// to="" is an ignorable word of every owner: the penalty of some owners is <skipPenalty object>
 		expect("<query><rule from=\"de\" to=\"\" object=\"street\"/></query>", "<skipPenalty object=\"street\">");
 		expect("<common>st</common>", "<common> is replaced by <skipPenalty>");
@@ -542,8 +540,8 @@ public class SearchModLocaleRulesTest {
 	public void penaltyFreeWordsAreAligned() {
 		// a word of a name keeps its diacritics: "école" and "ecole" are one word of the dictionaries
 		String locale = "fr_ZZ";
-		SearchModLocaleRules rules = new SearchModLocaleRules(locale, List.of(layer("<index><class1>école</class1></index>"
-				+ "<query><skipPenalty object=\"street\">straße</skipPenalty>"
+		SearchModLocaleRules rules = new SearchModLocaleRules(locale, List.of(layer("<query><skipPenalty>école</skipPenalty>"
+				+ "<skipPenalty object=\"street\">straße</skipPenalty>"
 				+ "<skipPenalty object=\"poi\">strasse</skipPenalty></query>")));
 		assertEquals(List.of("street", "poi"), rules.skipPenalty().get("strasse"));
 		SearchModDictionary dictionary = new SearchModDictionary(locale, rules);
@@ -553,8 +551,6 @@ public class SearchModLocaleRulesTest {
 		assertTrue(dictionary.isCommonSkipOtherCnt("straße", SearchModRuleOwner.STREET));
 		assertTrue(dictionary.isCommonSkipOtherCnt("strasse", SearchModRuleOwner.POI));
 		assertFalse(dictionary.isCommonSkipOtherCnt("straße", SearchModRuleOwner.LOCALITY));
-		expect("<index><class1>école</class1></index><query><skipPenalty>ecole</skipPenalty></query>",
-				"<class1>");
 	}
 
 	private SearchModRulesParser.Layer layer(String body) {

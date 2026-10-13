@@ -711,11 +711,6 @@ final class SearchModRulesValidator {
 				throw new IllegalArgumentException("The <skipPenalty> word '" + word + "' is a house-number "
 						+ "qualifier or an ignorable word: an ignorable word never penalizes a name" + where);
 			}
-			Integer wordClass = rules.classes().get(word);
-			if (wordClass != null && wordClass != CLASS_ALWAYS) {
-				throw new IllegalArgumentException("The <skipPenalty> word '" + word + "' is a word of <class"
-						+ wordClass + ">, which never penalizes a name" + where);
-			}
 		}
 		for (String word : ignorables) {
 			Integer wordClass = rules.classes().get(SearchAlgorithms.alignChars(word));
