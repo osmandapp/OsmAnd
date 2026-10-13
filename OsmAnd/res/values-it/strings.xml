@@ -5408,7 +5408,7 @@
     <string name="map_source_folder_not_created">Impossibile creare una cartella per la fonte della mappa. Prova un nome diverso.</string>
     <string name="delete_media_title">Cancello il contenuto multimediale?</string>
     <string name="delete_media_descr">Questo file sarà eliminato definitivamente dal tuo dispositivo. Scomparirà da tutti i preferiti a cui è associato.</string>
-    <string name="delete_media_title_plural">Cancello %1$d file multimediali?</string>
+    <string name="delete_media_title_plural">Cancello %1$d contenuti multimediali?</string>
     <string name="delete_media_descr_plural">Questi file saranno eliminati definitivamente dal tuo dispositivo. Scompariranno da tutti i preferiti a cui sono associati.</string>
     <string name="detach_media_title">Scollego i file multimediali?</string>
     <string name="detach_media_title_plural">Scollego %1$d contenuti multimediali?</string>
@@ -5423,4 +5423,14 @@
     <string name="shared_string_group">Gruppo</string>
     <string name="gallery_sort_size_large_small">Prima la dimensione maggiore</string>
     <string name="gallery_sort_size_small_large">Prima la dimensione minore</string>
+    <string name="eta_group_header">Orario di arrivo previsto</string>
+    <string name="travel_speed">Velocità di viaggio</string>
+    <string name="default_speed_descr">Usata quando non sono disponibili dati sulla velocità per la strada o quando si è fermi.</string>
+    <string name="speed_range">Intervallo di velocità</string>
+    <string name="speed_range_descr">Utilizzato sia per il calcolo del percorso, sia per l\'orario di arrivo.</string>
+    <string name="eta_adapt_to_my_speed">Adatta alla mia velocità</string>
+    <string name="eta_adapt_to_my_speed_descr">L\'orario di arrivo considera la tua velocità degli ultimi %1$s.</string>
+    <string name="eta_adapt_to_my_speed_off_descr">L\'orario di arrivo è calcolato in funzione della velocità prevista su ogni strada del percorso. Attiva per calcolarlo in base alla tua velocità effettiva.</string>
+    <string name="flyover_recording">Registrazione del video della mappa: %1$s</string>
+    <string name="flyovers">Sorvoli</string>
 </resources>
