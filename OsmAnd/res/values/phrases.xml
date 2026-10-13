@@ -724,7 +724,7 @@
 	<string name="poi_lawyer">Lawyer;solicitors;attorney;lawyers;attorneys;solicitor;barrister</string>
 	<string name="poi_office_telecommunication">Telecommunication office;telecom company</string>
 	<string name="poi_ngo">NGO;non-governmental organization</string>
-	<string name="poi_townhall">Town hall;townhall;city hall;municipal hall;civic centre</string>
+	<string name="poi_townhall">Town hall;townhall;municipal hall;civic centre</string>
 	<string name="poi_employment_agency">Employment office;staffing;recruitment</string>
 	<string name="poi_research">Research office</string>
 	<string name="poi_it">IT office</string>
@@ -865,8 +865,8 @@
 	<string name="poi_lean_to">Lean-to;Shelter</string>
 	<string name="poi_hunting_lodge">Hunting lodge;Shelter</string>
 
-	<string name="poi_place_of_worship">Place of worship;temple;shrine</string>
-	<string name="poi_religion_christian">Christianity;church;chapel;cathedral;basilica</string>
+	<string name="poi_place_of_worship">Place of worship</string>
+	<string name="poi_religion_christian">Christianity;church;chapel;cathedral</string>
 	<string name="poi_religion_jewish">Judaism</string>
 	<string name="poi_religion_muslim">Islam;dargah</string>
 	<string name="poi_religion_sikh">Sikhism;gurudwara;gurdwara</string>
@@ -1207,7 +1207,7 @@
 	<string name="poi_payment_terminal">Payment terminal</string>
 	<string name="poi_money_lender">Money lender</string>
 	<string name="poi_pawnbroker">Pawnbroker;pawn</string>
-	<string name="poi_bureau_de_change">Bureau de change;forex;currency exchange</string>
+	<string name="poi_bureau_de_change">Bureau de change;currency exchange</string>
 	<string name="poi_accountant">Accountant;CPA;accounting;accountancy;bookkeeping</string>
 	<string name="poi_bitcoin_yes">Bitcoin payment</string>
 
@@ -1637,7 +1637,7 @@
 	<string name="poi_water_characteristic_mud">Mud</string>
 	<string name="poi_water_characteristic_sulfuric">Sulfuric</string>
 
-	<string name="poi_water_point">Water point;rv water point;water for campervan;water for caravan;water for rv;water tank refill point</string>
+	<string name="poi_water_point">Water point</string>
 
 	<string name="poi_information_guidepost">Guidepost</string>
 	<string name="poi_information_board">Board;information board</string>
@@ -2758,7 +2758,7 @@
 	<string name="poi_cargo_container">Containers</string>
 	<string name="poi_cargo_hgv">HGV</string>
 
-	<string name="poi_fitness_station">Fitness station;street workout</string>
+	<string name="poi_fitness_station">Fitness station</string>
 
 	<string name="poi_hackerspace">Hackerspace</string>
 
@@ -3315,7 +3315,7 @@
 
 	<string name="poi_fire_operator">Fire operator</string>
 
-	<string name="poi_water_tank">Water tank;cistern</string>
+	<string name="poi_water_tank">Water tank</string>
 
 	<string name="poi_toilets_disposal_flush">Toilets disposal: flush</string>
 	<string name="poi_toilets_disposal_pitlatrine">Toilets disposal: pitlatrine</string>
@@ -5689,7 +5689,7 @@
 	<string name="poi_area_highway">Mobility area</string>
 	<string name="poi_area_highway_steps">Stairway area</string>
 	<string name="poi_area_highway_footway">Walkable area</string>
-	<string name="poi_travel_agency">Travel agency;tours;travels;tour agency;travel bureau</string>
+	<string name="poi_travel_agency">Travel agency;travels;travel bureau</string>
 
 	<string name="poi_mormon_church">Mormon church</string>
 	<string name="poi_seventh_day_adventist_church">Seventh day adventist church</string>
