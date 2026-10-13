@@ -22,14 +22,14 @@ public class SpeedCameraFilter {
 		return rdo.getValue(pointIndex, RELATIONS_INFO_TAG) != null;
 	}
 
-	// returns "true" if the speed camera alarm at this point belongs only to opposite directions. Should be hidden.
+	// returns true if the speed camera alarm at this point belongs only to the opposite direction and should be hidden
 	public boolean checkIsHiddenSpeedCamera(RouteDataObject rdo, int nodeIndex) {
 		String relationsInfo = rdo.getValue(nodeIndex, RELATIONS_INFO_TAG);
 		return relationsInfo != null && !shouldAddSpeedCameraAlarm(relationsInfo);
 	}
 
 
-	// Example: node has "from" role in relation 16276089. and "to" role in relation 16276090.
+	// Example: the node has the "from" role in relation 16276089 and the "to" role in relation 16276090.
 	// { "osmand:speed_camera_relations_info"  :  "16276089:from, 16276090:to" }
 	private boolean shouldAddSpeedCameraAlarm(String nodeRelationsInfoValue) {
 		boolean shouldAddAlarm = false;
@@ -43,13 +43,11 @@ public class SpeedCameraFilter {
 			if (nodeRoleInRelation.equals("from")) {
 				visitedFromNodes.add(relationId);
 				if (!visitedToNodes.contains(relationId)) {
-					// moving forward: "from" -> "to". Allow. Add speed camera alarm.
+					// moving forward "from" -> "to": add the speed camera alarm
 					shouldAddAlarm = true;
 				}
 			} else if (nodeRoleInRelation.equals("to") && !visitedFromNodes.contains(relationId)) {
-				// don't add alarms for hidden technical points "to" and "device".
-				// moving backward: "to" -> "from". Ignore.
-				// don't add extra alarm for camera points with "device" role. it was already sounded at "from" point.
+				// moving backward "to" -> "from": ignore the alarm.
 				visitedToNodes.add(relationId);
 			}
 		}
