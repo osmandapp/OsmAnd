@@ -724,7 +724,7 @@
 	<string name="poi_lawyer">Lawyer;solicitors;attorney;lawyers;attorneys;solicitor;barrister</string>
 	<string name="poi_office_telecommunication">Telecommunication office;telecom company</string>
 	<string name="poi_ngo">NGO;non-governmental organization</string>
-	<string name="poi_townhall">Town hall;townhall;municipal hall;civic centre</string>
+	<string name="poi_townhall">Town hall;townhall;city hall;municipal hall;civic centre</string>
 	<string name="poi_employment_agency">Employment office;staffing;recruitment</string>
 	<string name="poi_research">Research office</string>
 	<string name="poi_it">IT office</string>
@@ -3315,7 +3315,7 @@
 
 	<string name="poi_fire_operator">Fire operator</string>
 
-	<string name="poi_water_tank">Water tank</string>
+	<string name="poi_water_tank">Water tank;cistern</string>
 
 	<string name="poi_toilets_disposal_flush">Toilets disposal: flush</string>
 	<string name="poi_toilets_disposal_pitlatrine">Toilets disposal: pitlatrine</string>

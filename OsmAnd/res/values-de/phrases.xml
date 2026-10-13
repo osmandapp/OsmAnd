@@ -311,7 +311,7 @@
     <string name="poi_mortuary">Leichenhalle</string>
     <string name="poi_motel">Motel</string>
     <string name="poi_sport_motor">Motorsport</string>
-    <string name="poi_motorcycle_parking">Motorradparkplatz</string>
+    <string name="poi_motorcycle_parking">Motorradparkplatz;Motorrad-Parkplatz</string>
     <string name="poi_motorcycle">Motorradgeschäft</string>
     <string name="poi_motorway_junction">Autobahnkreuz</string>
     <string name="poi_mountain_pass">Gebirgspass</string>
