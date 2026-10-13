@@ -4792,4 +4792,6 @@
     <string name="poi_denomination_anabaptist">Anabaptyzm</string>
     <string name="poi_piste_downhill">Zjazd;Stoki narciarskie;Stok narciarski</string>
     <string name="poi_yoga">Joga</string>
+    <string name="poi_indoor_play">Centrum zabaw</string>
+    <string name="poi_luggage_locker">Przechowalnia bagażu;Schowek na bagaż</string>
 </resources>

@@ -3802,4 +3802,12 @@
     <string name="poi_socket_type2_voltage_filter">2 motako konektorearen tentsioa</string>
     <string name="poi_socket_type2_combo_voltage_filter">2 motako konbinazio-konektore-tentsioa</string>
     <string name="poi_barrier_planter">-</string>
+    <string name="poi_arch">Harri-arku</string>
+    <string name="poi_assembly_point">Larrialdietako batzar puntua</string>
+    <string name="poi_conference_centre">Biltzar jauregia</string>
+    <string name="poi_escape_game">Ihes gela</string>
+    <string name="poi_lifeguard">Larrialdietako soroslea</string>
+    <string name="poi_service_vehicle_inspection_yes">Ibilgailuen ikuskapena</string>
+    <string name="poi_telecommunication">Telekomunikazioen denda</string>
+    <string name="poi_travel_agency">Bidai agentzia;bidaia agentzia</string>
 </resources>

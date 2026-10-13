@@ -3749,4 +3749,13 @@
     <string name="poi_cafe_filter">Kafe</string>
     <string name="poi_denomination_ukrainian_greek_catholic">Ukrayna Yunan Katolik</string>
     <string name="poi_denomination_ukrainian_orthodox">Ukrayna Ortodoks</string>
+    <string name="poi_appliance">Beyaz Eşya Mağazası</string>
+    <string name="poi_assembly_point">Acil Toplanma Noktası</string>
+    <string name="poi_childcare">Kreş</string>
+    <string name="poi_escape_game">Kaçış odası</string>
+    <string name="poi_health_food">Sağlıklı Gıda</string>
+    <string name="poi_hookah_lounge">Nargile salonu</string>
+    <string name="poi_lighting">Aydınlatma mağazası</string>
+    <string name="poi_luggage_locker">Emanet dolabı</string>
+    <string name="poi_travel_agency">Tours</string>
 </resources>

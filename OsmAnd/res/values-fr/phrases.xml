@@ -18,7 +18,7 @@
     <string name="poi_ambulance_station">Station d\'ambulances;ambulances</string>
     <string name="poi_archaeological_site">Site archéologique;dolmen;menhir</string>
     <string name="poi_archery">Tir à l\'arc</string>
-    <string name="poi_architect">Cabinet d\'architecte;architectes;Cabinet d\'architecte</string>
+    <string name="poi_architect">Cabinet d\'architecte;architectes</string>
     <string name="poi_arts_centre">Centre artistique</string>
     <string name="poi_artwork">Œuvre d’art;fresque</string>
     <string name="poi_athletics">Athlétisme</string>
@@ -167,7 +167,7 @@
     <string name="poi_grave_yard">Cimetière;cimetiere</string>
     <string name="poi_greengrocer">Marchand de fruits et légumes;Primeur;primeurs</string>
     <string name="poi_grit_bin">Bac à sel</string>
-    <string name="poi_guest_house">Chambre d\'hôtes;gîte;chambre d\'hôtes;Maison d\'hôtes</string>
+    <string name="poi_guest_house">Chambre d\'hôtes;gîte;Maison d\'hôtes</string>
     <string name="poi_gymnastics">Gymnastique</string>
     <string name="poi_hairdresser">Coiffeur;barber;barbier;tresse;tifs;salon de coiffure</string>
     <string name="poi_hamlet">Hameau</string>
@@ -229,7 +229,7 @@
     <string name="poi_motorway_junction">Jonction d\'autoroutes</string>
     <string name="poi_sport_multi">Multisports</string>
     <string name="poi_museum">Musée;musée d\'art</string>
-    <string name="poi_musical_instrument">Magasin d\'instruments de musique;Magasin d\'instruments de musique</string>
+    <string name="poi_musical_instrument">Magasin d\'instruments de musique</string>
     <string name="poi_nature_reserve">Réserve naturelle;réserve</string>
     <string name="poi_military_naval_base">Base navale militaire</string>
     <string name="poi_neighbourhood">Voisinage</string>
@@ -361,14 +361,14 @@
     <string name="poi_waste_disposal">Bac à ordures ménagères</string>
     <string name="poi_wastewater_plant">Station d\'épuration</string>
     <string name="poi_craft_watchmaker">Horloger</string>
-    <string name="poi_lock_gate">Porte d\'écluse;Écluse;porte d\'écluse</string>
+    <string name="poi_lock_gate">Porte d\'écluse;Écluse</string>
     <string name="poi_water_park">Parc aquatique;Centre aquatique</string>
-    <string name="poi_water_tower">Château d\'eau;Château d\'eau</string>
+    <string name="poi_water_tower">Château d\'eau</string>
     <string name="poi_waterway_turning_point">Point de retournement pour bateaux</string>
     <string name="poi_weir">Seuil en rivière</string>
     <string name="poi_water_well">Puits;Puits à eau</string>
     <string name="poi_water_works">Usine d\'eau potable</string>
-    <string name="poi_waterfall">Chute d\'eau;cascade;Chute d\'eau</string>
+    <string name="poi_waterfall">Chute d\'eau;cascade</string>
     <string name="poi_watermill">Moulin à eau</string>
     <string name="poi_wayside_cross">Croix ou calvaire;calvaire;Croix de chemin</string>
     <string name="poi_wayside_shrine">Oratoire</string>
@@ -726,7 +726,7 @@
     <string name="poi_picnic_table">Table de pique-nique</string>
     <string name="poi_wine_cellar">Cave à vin</string>
     <string name="poi_craft_winery">Établissement vinicole;Chai</string>
-    <string name="poi_gallery">Galerie d\'art;Galerie d\'art</string>
+    <string name="poi_gallery">Galerie d\'art</string>
     <string name="poi_hanami">Hanami</string>
     <string name="poi_trail_riding_station">Refuge pour randonnée équestre</string>
     <string name="poi_wiki_place">Wikipédia</string>
@@ -3139,7 +3139,7 @@
     <string name="poi_ruins">Ruines</string>
     <string name="poi_service_car">Service automobile</string>
     <string name="poi_service_vehicle_car_repair_yes">Garagiste;Atelier de réparation automobile;Garage;Réparation de véhicules;Réparation d\'automobiles</string>
-    <string name="poi_appliance">Magasin d\'électroménager;Magasin d\'électroménager</string>
+    <string name="poi_appliance">Magasin d\'électroménager</string>
     <string name="poi_bulk_purchase">Vente en vrac</string>
     <string name="poi_bulk_purchase_yes">Oui;Achat en vrac</string>
     <string name="poi_bulk_purchase_only">Uniquement;Achat en vrac uniquement</string>

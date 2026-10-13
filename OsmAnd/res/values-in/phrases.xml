@@ -230,7 +230,7 @@
     <string name="poi_glacier_type_hanging">Menggantung</string>
     <string name="poi_glacier_type_mountain">Gunung</string>
     <string name="poi_glacier_type_rock">Batu</string>
-    <string name="poi_service_vehicle_tyres_yes">Ban;Ban Luar;Ban;Ban;Tambal ban</string>
+    <string name="poi_service_vehicle_tyres_yes">Ban;Ban Luar;Tambal ban</string>
     <string name="poi_service_vehicle_insurance_yes">Asuransi</string>
     <string name="poi_service_vehicle_truck_repair_yes">Perbaikan truk</string>
     <string name="poi_service_vehicle_glass_yes">Kaca</string>
@@ -496,7 +496,7 @@
     <string name="poi_department_store">Toko serba ada</string>
     <string name="poi_video">Toko video</string>
     <string name="poi_vacuum_cleaner">Toko penyedot debu</string>
-    <string name="poi_tyres">Ban;Ban Luar;Ban;Toko Ban;Ban Luar;tambal</string>
+    <string name="poi_tyres">Ban;Ban Luar;Toko Ban;tambal</string>
     <string name="poi_toys">Toko mainan</string>
     <string name="poi_ticket">Penjualan tiket</string>
     <string name="poi_stationery">Toko alat tulis</string>
@@ -5184,4 +5184,6 @@
     <string name="poi_ski_filter">Cocok untuk ski</string>
     <string name="poi_horse_filter">Cocok untuk berkuda</string>
     <string name="poi_winter_hiking_filter">Cocok untuk hiking musim dingin</string>
+    <string name="poi_indoor_play">Pusat Bermain</string>
+    <string name="poi_luggage_locker">Loker Bagasi</string>
 </resources>

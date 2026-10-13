@@ -786,7 +786,7 @@
     <string name="poi_leather">Marroquinería;Tienda de cueros</string>
     <string name="poi_music">Disquería;Tienda de música;Tienda de discos</string>
     <string name="poi_scuba_diving_shop">Artículos de buceo</string>
-    <string name="poi_tyres">Neumáticos;Neumático;Tienda de neumáticos;Neumáticos;gomería;ponchera;montallantas;llantera;vulcanizadora;gomas;vulcanización;cauchera;Reparación de neumáticos</string>
+    <string name="poi_tyres">Neumáticos;Neumático;Tienda de neumáticos;gomería;ponchera;montallantas;llantera;vulcanizadora;gomas;vulcanización;cauchera;Reparación de neumáticos</string>
     <string name="poi_energy">Equipamiento energético</string>
     <string name="poi_watches">Relojes de pulsera</string>
     <string name="poi_swimming_pool_shop">Artículos de piscina</string>
@@ -5196,4 +5196,7 @@
     <string name="poi_theme_filter">Tema</string>
     <string name="poi_theme_pirate">Pirata</string>
     <string name="poi_theme_rainforest">Selva</string>
+    <string name="poi_animal_breeding">Vaquería</string>
+    <string name="poi_craft_printer">Imprenta</string>
+    <string name="poi_luggage_locker">Consigna de equipajes</string>
 </resources>

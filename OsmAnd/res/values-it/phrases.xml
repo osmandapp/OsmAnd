@@ -20,7 +20,7 @@
     <string name="poi_tea">Negozio di té;Negozio di tè</string>
     <string name="poi_dairy">Latteria;caseificio</string>
     <string name="poi_antiques">Antiquariato;antichità</string>
-    <string name="poi_art">Negozio d\'arte;Negozio d\'arte</string>
+    <string name="poi_art">Negozio d\'arte</string>
     <string name="poi_baby_goods">Articoli per l\'infanzia;Negozio per neonati</string>
     <string name="poi_bag">Negozio borse;Negozio di borse</string>
     <string name="poi_bathroom_furnishing">Arredo bagno</string>
@@ -95,7 +95,7 @@
     <string name="poi_outdoor">Negozio articoli per l\'attività all\'aperto</string>
     <string name="poi_paint">Mesticheria;colorificio</string>
     <string name="poi_pet">Negozio animali domestici;Negozio di animali</string>
-    <string name="poi_second_hand">Negozio dell\'usato;Negozio dell\'usato;Negozio di articoli usati</string>
+    <string name="poi_second_hand">Negozio dell\'usato;Negozio di articoli usati</string>
     <string name="poi_tobacco">Tabaccheria</string>
     <string name="poi_toys">Negozio di giocattoli</string>
     <string name="poi_houseware">Negozio casalinghi;Articoli per la casa</string>
@@ -497,7 +497,7 @@
     <string name="poi_orienteering">Orientamento</string>
     <string name="poi_paddle_tennis">Paddle tennis</string>
     <string name="poi_surfing">Surf</string>
-    <string name="poi_artwork">Opera d\'arte;opera d\'arte;Opere d\'arte</string>
+    <string name="poi_artwork">Opera d\'arte;Opere d\'arte</string>
     <string name="poi_historic_cannon">Cannone storico</string>
     <string name="poi_attraction_big_wheel">Ruota panoramica</string>
     <string name="poi_attraction_carousel">Giostra</string>
@@ -2793,7 +2793,7 @@
     <string name="poi_branch">Filiale</string>
     <string name="poi_resource_aggregate">Aggregato</string>
     <string name="poi_resource_beryl">Berillio</string>
-    <string name="poi_shop_wholesale">Negozio all\'ingrosso;Negozio all\'ingrosso</string>
+    <string name="poi_shop_wholesale">Negozio all\'ingrosso</string>
     <string name="poi_psv_designated">Accesso PSV: riservato</string>
     <string name="poi_historic_civilization_etruscan">Civiltà: etrusca (XII - VI sec. a.C.)</string>
     <string name="poi_historic_civilization_nuragic">Civiltà: nuragica (XVIII sec. a.C. - II sec. d.C.)</string>
@@ -5172,4 +5172,7 @@
     <string name="poi_denomination_kardecista">Kardecista</string>
     <string name="poi_denomination_sephardi">Sefardita</string>
     <string name="poi_denomination_welsh_independent">Indipendente gallese</string>
+    <string name="poi_animal_breeding">Allevamento</string>
+    <string name="poi_indoor_play">Centro giochi</string>
+    <string name="poi_luggage_locker">Armadietto per i bagagli;deposito bagagli</string>
 </resources>

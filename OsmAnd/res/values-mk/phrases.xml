@@ -598,4 +598,27 @@
     <string name="poi_construction">Izgradba</string>
     <string name="poi_greenfield">Sumsko, zemjodelsko zemjiste</string>
     <string name="poi_works">Raboti</string>
+    <string name="poi_bank">Банка</string>
+    <string name="poi_bay">Залив</string>
+    <string name="poi_casino">Казино</string>
+    <string name="poi_castle">Замок</string>
+    <string name="poi_cinema">Кино</string>
+    <string name="poi_clinic">Клиника</string>
+    <string name="poi_hospital">Болница</string>
+    <string name="poi_hostel">Хостел</string>
+    <string name="poi_hotel">Хотел</string>
+    <string name="poi_kindergarten">Градинка</string>
+    <string name="poi_library">Библиотека</string>
+    <string name="poi_museum">Музеј</string>
+    <string name="poi_park">Парк</string>
+    <string name="poi_pharmacy">Аптека</string>
+    <string name="poi_religion_christian">Црква</string>
+    <string name="poi_restaurant">Ресторан</string>
+    <string name="poi_river">Река</string>
+    <string name="poi_spring">Извор</string>
+    <string name="poi_stadium">Стадион</string>
+    <string name="poi_valley">Долина</string>
+    <string name="poi_volcano">Вулкан</string>
+    <string name="poi_water_park">Аквапарк</string>
+    <string name="poi_waterfall">Водопад</string>
 </resources>

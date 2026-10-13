@@ -3936,4 +3936,11 @@
     <string name="poi_denomination_kardecista">唯灵论</string>
     <string name="poi_denomination_sephardi">塞法迪犹太人</string>
     <string name="poi_piste_downhill">下坡滑道；滑雪滑道；滑雪坡</string>
+    <string name="poi_childcare">托儿所</string>
+    <string name="poi_hackerspace">创客空间</string>
+    <string name="poi_indoor_play">游乐中心</string>
+    <string name="poi_laboratory">医学实验室</string>
+    <string name="poi_luggage_locker">行李寄存处;行李寄存柜</string>
+    <string name="poi_memorial_cross">纪念十字架</string>
+    <string name="poi_shop_wholesale">批发店</string>
 </resources>

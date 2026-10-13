@@ -4727,4 +4727,5 @@
     <string name="poi_bicycle_designated">Σημασμένη για ποδήλατα</string>
     <string name="poi_motor_vehicle_designated">Σημασμένη για μηχανοκίνητα οχήματα</string>
     <string name="poi_motorcar_designated">Σημασμένη για αυτοκίνητα</string>
+    <string name="poi_luggage_locker">Θυρίδα αποσκευών</string>
 </resources>
