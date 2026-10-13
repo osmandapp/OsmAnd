@@ -243,6 +243,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float elevationAngle;
 	private double fullZoom;
 	private boolean targetChanged;
+	private boolean magnifying;
 	private int targetPixelX;
 	private int targetPixelY;
 	private int firstTouchLocationX;
@@ -2202,6 +2203,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public float getMagnificationScale() {
 		if (MapTileViewMultiTouchZoomListener.isPinchZoomMagnificationEnabled
+				&& magnifying
 				&& multiTouchSupport != null
 				&& multiTouchSupport.isInZoomAndRotationMode()) {
 			return (float) limitMagnificationScale(multiTouchSupport.getZoomRelative());
@@ -2257,7 +2259,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private float y2;
 		private LatLon initialCenterLatLon;
 		private PointI initialFirstLocation;
-		private boolean magnifying;
 		private boolean startRotating;
 		private boolean startZooming;
 		private float initialElevation;
@@ -2458,12 +2459,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					if (!magnifying) {
 						magnifying = true;
 						setZoomAndAnimationImpl(initialViewport.getZoom(), 0, initialViewport.getZoomFloatPart(), multiTouchFirstX, multiTouchFirstY);
-						PointI firstLocation = NativeUtilities.get31FromElevatedPixel(mapRenderer, multiTouchFirstX, multiTouchFirstY);
-						if (firstLocation == null) {
-							firstLocation = new PointI();
-							mapRenderer.getLocationFromScreenPoint(new PointI(multiTouchFirstX, multiTouchFirstY), firstLocation);
-						}
-						initialFirstLocation = firstLocation;
+						initialFirstLocation = new PointI(firstTouchLocationX, firstTouchLocationY);
 					}
 					// Scale and shift around the pinch center
 					mapRenderer.setViewportScale(limitMagnificationScale(relativeToStart), false);
