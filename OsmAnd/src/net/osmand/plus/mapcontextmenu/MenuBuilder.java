@@ -1095,7 +1095,8 @@ public class MenuBuilder {
 		}
 		ArrayList<String> values = collectMultiValues(text, "[,;]");
 		if (values.size() > 1) {
-			PoiAdditionalMultiValueDialogController.showDialog(mapActivity, title, values, this::openPhoneNumber);
+			PoiAdditionalMultiValueDialogController.showDialog(mapActivity, title, values,
+					MenuBuilder::formatPhoneNumber, this::openPhoneNumber);
 		} else if (values.size() == 1) {
 			openPhoneNumber(view.getContext(), values.get(0));
 		}
