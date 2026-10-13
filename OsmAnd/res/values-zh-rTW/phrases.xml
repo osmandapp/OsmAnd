@@ -464,7 +464,7 @@
     <string name="poi_hotel">飯店</string>
     <string name="poi_guest_house">民宿</string>
     <string name="poi_hostel">青年旅店</string>
-    <string name="poi_motel">汽車旅館</string>
+    <string name="poi_motel">汽車旅館;motel</string>
     <string name="poi_alpine_hut">登山山莊;避難所</string>
     <string name="poi_chalet">木屋;避難所</string>
     <string name="poi_apartment">公寓</string>
@@ -571,11 +571,11 @@
     <string name="poi_recreation_ground">遊憩場地</string>
     <string name="poi_village_green">公共綠地</string>
     <string name="poi_trail_riding_station">野外騎乘站</string>
-    <string name="poi_cafe">咖啡館</string>
+    <string name="poi_cafe">咖啡館;cafe</string>
     <string name="poi_biergarten">屋外酒店</string>
     <string name="poi_restaurant">餐廳</string>
     <string name="poi_fast_food">速食</string>
-    <string name="poi_bar">酒吧</string>
+    <string name="poi_bar">酒吧;PUB</string>
     <string name="poi_pub">酒館</string>
     <string name="poi_food_court">美食街</string>
     <string name="poi_drinking_water">飲用水</string>

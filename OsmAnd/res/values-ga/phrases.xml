@@ -395,7 +395,7 @@
     <string name="poi_tobacco">Siopa tobac</string>
     <string name="poi_toys">Siopa Bréagán</string>
     <string name="poi_window_blind">Siopa dall fuinneoige</string>
-    <string name="poi_car">Déileálaí carranna</string>
+    <string name="poi_car">Déileálaí carranna;motors</string>
     <string name="poi_energy">Siopa fuinnimh</string>
     <string name="poi_car_parts">Páirteanna uathoibríocha</string>
     <string name="poi_atv">Siopa quad</string>
@@ -408,7 +408,7 @@
     <string name="poi_traffic_calming_bump">Cnapán Luais</string>
     <string name="poi_traffic_calming_hump">Hump Luas</string>
     <string name="poi_traffic_calming_island">Oileán tráchta</string>
-    <string name="poi_car_repair">Deisiú carranna</string>
+    <string name="poi_car_repair">Deisiú carranna;motors</string>
     <string name="poi_vehicle_inspection">Cigireacht feithicle</string>
     <string name="poi_car_wash">Nigh carranna</string>
     <string name="poi_fuel">Stáisiún gáis; Stáisiún gásailín; Stáisiún líonta; Stáisiún peitril</string>
@@ -519,9 +519,9 @@
     <string name="poi_place_farm">Feirm</string>
     <string name="poi_pharmacy">Cógaslann</string>
     <string name="poi_hospital">Ospidéal</string>
-    <string name="poi_doctors">Dochtúirí</string>
-    <string name="poi_clinic">Clinic</string>
-    <string name="poi_dentist">Fiaclóir</string>
+    <string name="poi_doctors">Dochtúirí;medical;surgery</string>
+    <string name="poi_clinic">Clinic;medical</string>
+    <string name="poi_dentist">Fiaclóir;surgery</string>
     <string name="poi_nursing_home">Teach altranais</string>
     <string name="poi_baby_hatch">Haiste leanbh</string>
     <string name="poi_veterinary">Tréidliacht</string>
@@ -702,7 +702,7 @@
     <string name="poi_trail_riding_station">Stáisiún marcaíochta cosán</string>
     <string name="poi_cafe">Caifé</string>
     <string name="poi_bar">Barra</string>
-    <string name="poi_pub">Teach tábhairne</string>
+    <string name="poi_pub">Teach tábhairne;tavern</string>
     <string name="poi_craft_boatbuilder">Tógálaí bád</string>
     <string name="poi_craft_caterer">Lónadóir</string>
     <string name="poi_craft_clockmaker">Déantóir clog</string>
@@ -1593,7 +1593,7 @@
     <string name="poi_shoes">Siopa bróg</string>
     <string name="poi_copyshop">Cóipeáil siopa</string>
     <string name="poi_fishing">Dul i ngleic leis an iascaireacht</string>
-    <string name="poi_florist">Siopa bláthanna</string>
+    <string name="poi_florist">Siopa bláthanna;flowers</string>
     <string name="poi_frame">Siopa fráma pictiúr</string>
     <string name="poi_free_flying">Siopa earraí eitilte saor in aisce</string>
     <string name="poi_garden_centre">Ionad gairdín</string>
@@ -1676,7 +1676,7 @@
     <string name="poi_racquet">Raicéad</string>
     <string name="poi_roller_skating">Scátáil sorcóir</string>
     <string name="poi_rowing">Rámhaíocht</string>
-    <string name="poi_archaeological_site">Láithreán seandálaíochta</string>
+    <string name="poi_archaeological_site">Láithreán seandálaíochta;crannog</string>
     <string name="poi_historic_cannon">Gunna stairiúil</string>
     <string name="poi_fort">Dún</string>
     <string name="poi_monument">Séadchomhartha</string>
@@ -2098,7 +2098,7 @@
     <string name="poi_salt_pond">Lochán salainn</string>
     <string name="poi_reservoir">Taiscumar</string>
     <string name="poi_cricket_nets">Líonta cruicéid</string>
-    <string name="poi_school">Scoil</string>
+    <string name="poi_school">Scoil;coláiste;gaelscoil</string>
     <string name="poi_suburb">Bruachbhaile</string>
     <string name="poi_research">Oifig taighde</string>
     <string name="poi_it">Oifig TF</string>
@@ -2916,7 +2916,7 @@
     <string name="poi_water_filter">Uisce; Uisce óil</string>
     <string name="poi_user_defined_other">Sainithe ag an úsáideoir</string>
     <string name="poi_beverages">Siopa dí</string>
-    <string name="poi_butcher">Margadh feola</string>
+    <string name="poi_butcher">Margadh feola;butcher</string>
     <string name="poi_supermarket">Ollmhargadh</string>
     <string name="poi_tea">Siopa tae</string>
     <string name="poi_pasta">Siopa Pasta</string>
@@ -2924,7 +2924,7 @@
     <string name="poi_vending_machine">Meaisín díola</string>
     <string name="poi_bicycle">Siopa rothar</string>
     <string name="poi_anime">Siopa anime</string>
-    <string name="poi_antiques">S.A. 2016 agus</string>
+    <string name="poi_antiques">S.A. 2016 agus;antiques</string>
     <string name="poi_art">Siopa ealaíne</string>
     <string name="poi_bed">Siopa leapachais</string>
     <string name="poi_boutique">Siopa faisin</string>
@@ -2966,7 +2966,7 @@
     <string name="poi_shop_craft">Siopa soláthair ealaíon agus ceardaíochta</string>
     <string name="poi_honey">Siopa meala</string>
     <string name="poi_religion">Earraí reiligiúnacha</string>
-    <string name="poi_police">Póilíní</string>
+    <string name="poi_police">Póilíní;garda</string>
     <string name="poi_fire_hose">Píobán dóiteáin</string>
     <string name="poi_grit_bin">Bosca bruscair greanta</string>
     <string name="poi_gate">Geata</string>
@@ -3035,7 +3035,7 @@
     <string name="poi_sports_centre">Ionad spóirt</string>
     <string name="poi_golf_course">Cúrsa gailf</string>
     <string name="poi_ice_rink">Rinc oighir</string>
-    <string name="poi_pitch">Páirc Imeartha</string>
+    <string name="poi_pitch">Páirc Imeartha;astro</string>
     <string name="poi_boules">BoulesName</string>
     <string name="poi_bowls">Babhlaí</string>
     <string name="poi_ice_stock">Stoc oighir</string>
@@ -3138,9 +3138,9 @@
     <string name="poi_craft_window_construction">Tógáil fuinneoige</string>
     <string name="poi_funeral_directors">Stiúrthóirí sochraide</string>
     <string name="poi_craft_computer">Ceardaíocht ríomhaireachta</string>
-    <string name="poi_beauty">Salon áilleacht</string>
+    <string name="poi_beauty">Salon áilleacht;nail</string>
     <string name="poi_beauty_salon_nails">Lámh</string>
-    <string name="poi_hairdresser">Gruagaire</string>
+    <string name="poi_hairdresser">Gruagaire;barbers</string>
     <string name="poi_dry_cleaning">Glanadh tirim</string>
     <string name="poi_seamark_dyke">Díog Seamark</string>
     <string name="poi_atm">ATM</string>

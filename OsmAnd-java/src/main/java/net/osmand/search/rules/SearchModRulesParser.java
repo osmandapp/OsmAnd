@@ -7,6 +7,7 @@ import static net.osmand.search.rules.SearchModLocaleRules.VERSION;
 import net.osmand.PlatformUtil;
 import net.osmand.search.rules.SearchModLocaleRules.Form;
 import net.osmand.search.rules.SearchModLocaleRules.Mirror;
+import net.osmand.search.rules.SearchModLocaleRules.PoiService;
 import net.osmand.search.rules.SearchModLocaleRules.Rule;
 import net.osmand.search.rules.SearchModLocaleRules.SkipPenalty;
 import net.osmand.search.rules.SearchModLocaleRules.Unglue;
@@ -46,6 +47,7 @@ final class SearchModRulesParser {
 		final Map<String, Integer> classes = new LinkedHashMap<>();
 		final Map<String, WordRule> query = new LinkedHashMap<>();
 		final Map<String, SkipPenalty> skipPenalty = new LinkedHashMap<>();
+		final Map<String, PoiService> services = new LinkedHashMap<>();
 		// key -> text of the rule for messages
 		final Map<String, String> disabledIndex = new LinkedHashMap<>();
 		final Map<String, String> disabledUnglues = new LinkedHashMap<>();
@@ -135,6 +137,13 @@ final class SearchModRulesParser {
 						String object = object(parser.getAttributeValue(null, "object"));
 						boolean enabled = enabled(parser);
 						layer.addSkipPenalty(object, words(parser.nextText()), enabled);
+					}
+				} else if (depth == 3 && "poi".equals(section)) {
+					// <brand> is read by the brand analyzer, not by the search
+					if ("service".equals(tag) && enabled(parser)) {
+						PoiService service = PoiService.of(parser.getAttributeValue(null, "word"),
+								parser.getAttributeValue(null, "tags"), parser.getAttributeValue(null, "name"), file);
+						layer.services.put(service.key(), service);
 					}
 				} else if (depth == 3 && "locales".equals(section) && locales != null) {
 					if ("group".equals(tag)) {

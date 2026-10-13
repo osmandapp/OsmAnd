@@ -5,6 +5,7 @@ import net.osmand.search.rules.SearchModRules.SearchModRuleOwner;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -12,6 +13,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -120,7 +124,9 @@ public class SearchModLocaleRulesTest {
 		assertFalse(searchRules.dictionary("en").likelyPartOfBuilding("tower", null));
 		assertTrue(searchRules.dictionary("en_US").isIgnorable("thee"));
 		assertTrue(searchRules.dictionary("en_US").isCommonSkipOtherCnt("eastern", SearchModRuleOwner.STREET));
-		assertEquals("CR7", searchRules.rules("en_US").index().get(0).apply("County Road 7"));
+		// the index rule of en_US among the rules of the upper layers
+		assertEquals("CR7", searchRules.rules("en_US").index().stream().map(r -> r.apply("County Road 7"))
+				.filter(Objects::nonNull).findFirst().orElse(null));
 
 		// a lower layer replaces a rule whole: here it changes the order of the meanings
 		SearchModLocaleRules replaced = new SearchModLocaleRules("xx", List.of(
@@ -404,8 +410,17 @@ public class SearchModLocaleRulesTest {
 	@Test
 	public void everyRulesFileLoads() throws IOException {
 		// the layers of every locale with a file validate together: mirror pairs, query rules and index rules
-		for (String locale : List.of("bg_BG", "ca_ES", "de_DE", "en_US", "es_ES", "es_CO", "es_PE", "fr_FR", "it_IT",
-				"mk_MK", "nl_NL", "pt_PT", "ru_RU", "sr_RS", "uk_UA")) {
+		// every rules_<locale>.xml next to rules.xml on the class path
+		File dir = new File(SearchModRules.class.getResource(SearchModLocaleRules.BASE_FILE).getPath()).getParentFile();
+		Set<String> all = new TreeSet<>();
+		for (File f : Objects.requireNonNull(dir.listFiles())) {
+			String n = f.getName();
+			if (n.startsWith("rules_") && n.endsWith(".xml")) {
+				all.add(n.substring("rules_".length(), n.length() - ".xml".length()));
+			}
+		}
+		assertTrue(all.toString(), all.contains("en"));
+		for (String locale : all) {
 			assertNotNull(locale, searchRules.rules(locale));
 			Map<String, String> files = new LinkedHashMap<>();
 			files.put(SearchModLocaleRules.BASE_FILE, resource(SearchModLocaleRules.BASE_FILE));

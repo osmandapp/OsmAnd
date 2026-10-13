@@ -216,7 +216,7 @@
     <string name="poi_zoo">Zoo</string>
     <string name="poi_theme_park">Parque temático</string>
     <string name="poi_hotel">Hotel</string>
-    <string name="poi_hostel">Hostal</string>
+    <string name="poi_hostel">Hostal;albergue</string>
     <string name="poi_motel">Motel</string>
     <string name="poi_alpine_hut">Cabana alpina;Abeiro de montaña:Abeiro</string>
     <string name="poi_chalet">Chalé;Abeiro</string>
@@ -234,7 +234,7 @@
     <string name="poi_information">Información</string>
     <string name="poi_clock">Reloxo</string>
     <string name="poi_travel_agent">Axencia de viaxes</string>
-    <string name="poi_camp_site">Cámping</string>
+    <string name="poi_camp_site">Cámping;campamento</string>
     <string name="poi_caravan_site">Lugar para caravanas</string>
     <string name="poi_picnic_site">Área de merendeiro</string>
     <string name="poi_spring">Manancial</string>
@@ -263,9 +263,9 @@
     <string name="poi_club_hunting">Sociedade de caza</string>
     <string name="poi_library">Biblioteca</string>
     <string name="poi_arts_centre">Centro de artes</string>
-    <string name="poi_cinema">Cinema</string>
+    <string name="poi_cinema">Cinema;cine</string>
     <string name="poi_casino">Casino</string>
-    <string name="poi_community_centre">Centro socio-comunitario</string>
+    <string name="poi_community_centre">Centro socio-comunitario;centro comunitario</string>
     <string name="poi_social_centre">Centro social</string>
     <string name="poi_theatre">Teatro</string>
     <string name="poi_theatre_genre_circus">Circo</string>
@@ -329,7 +329,7 @@
     <string name="poi_accountant">Contábel</string>
     <string name="poi_bitcoin_yes">Pagamento con bitcoin</string>
     <string name="poi_cave_entrance">Entrada de cova</string>
-    <string name="poi_peak">Cumio</string>
+    <string name="poi_peak">Cumio;pico</string>
     <string name="poi_volcano">Volcán</string>
     <string name="poi_crater">Cráter</string>
     <string name="poi_glacier">Glaciar</string>
@@ -339,7 +339,7 @@
     <string name="poi_rapids">Rápidos</string>
     <string name="poi_cape">Cabo</string>
     <string name="poi_beach">Praia</string>
-    <string name="poi_bay">Badía</string>
+    <string name="poi_bay">Badía;baía</string>
     <string name="poi_fjord">Fiordo</string>
     <string name="poi_reef">Arrecife</string>
     <string name="poi_nature_reserve">Reserva natural</string>
@@ -783,7 +783,7 @@
     <string name="poi_recycling_hazardous_waste">Residuos perigosos</string>
     <string name="poi_recycling_light_bulbs">Lámpadas eléctricas</string>
     <string name="poi_recycling_polyester">Poliéster</string>
-    <string name="poi_school">Escola</string>
+    <string name="poi_school">Escola;instituto</string>
     <string name="poi_college">Educación superior</string>
     <string name="poi_paediatrics">Pediatría</string>
     <string name="poi_archery">Tiro con arco</string>

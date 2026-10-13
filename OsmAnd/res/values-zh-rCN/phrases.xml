@@ -39,7 +39,7 @@
     <string name="poi_blood_donation">献血</string>
     <string name="poi_denotation_landmark">地标</string>
     <string name="poi_car_rental">车辆租赁</string>
-    <string name="poi_toilets">洗手间; 厕所</string>
+    <string name="poi_toilets">洗手间; 厕所;公共厕所;公共卫生间</string>
     <string name="poi_shower">淋浴</string>
     <string name="poi_smoking_area">吸烟区</string>
     <string name="poi_internet_cafe">网咖</string>
@@ -165,7 +165,7 @@
     <string name="poi_volleyball">排球</string>
     <string name="poi_museum">博物馆</string>
     <string name="poi_hotel">酒店</string>
-    <string name="poi_religion_buddhist">佛教</string>
+    <string name="poi_religion_buddhist">佛教;大雄宝殿</string>
     <string name="poi_club_computer">电脑俱乐部</string>
     <string name="poi_club_sport">运动俱乐部</string>
     <string name="poi_club_game">游戏俱乐部</string>
@@ -821,7 +821,7 @@
     <string name="poi_generator_source_gas">能量来源：天然气</string>
     <string name="poi_military_landuse">军事用地</string>
     <string name="poi_seamark_building">海标建筑</string>
-    <string name="poi_place_of_worship">宗教场所</string>
+    <string name="poi_place_of_worship">宗教场所;土地公廟</string>
     <string name="poi_works">工厂</string>
     <string name="poi_quarry">矿场</string>
     <string name="poi_landfill">垃圾填埋场</string>
@@ -847,7 +847,7 @@
     <string name="poi_salt_pond">盐池</string>
     <string name="poi_vineyard">葡萄园</string>
     <string name="poi_paddle_tennis">板网球</string>
-    <string name="poi_pitch">运动场</string>
+    <string name="poi_pitch">运动场;羽毛球场</string>
     <string name="poi_sports_centre">体育中心</string>
     <string name="poi_leisure_track">运动跑道</string>
     <string name="poi_generator_source_coal">能量来源：煤</string>
@@ -874,7 +874,7 @@
     <string name="poi_fire_hydrant">消防栓</string>
     <string name="poi_fire_water_pond">消防水池</string>
     <string name="poi_vehicle_inspection">车辆检测</string>
-    <string name="poi_bicycle_rental">自行车租赁</string>
+    <string name="poi_bicycle_rental">自行车租赁;自行车租赁点</string>
     <string name="poi_first_aid">急救</string>
     <string name="poi_monastery">修道院</string>
     <string name="poi_embassy">大使馆</string>
@@ -2702,7 +2702,7 @@
     <string name="poi_healthcare_speciality_laboratory">医疗保健专业：实验室</string>
     <string name="poi_live_music">现场音乐</string>
     <string name="poi_rugby_league">橄榄球联赛</string>
-    <string name="poi_religion_taoist">道教</string>
+    <string name="poi_religion_taoist">道教;土地公廟</string>
     <string name="poi_denomination_united_methodist">联合卫理公会</string>
     <string name="poi_denomination_congregational">公理会</string>
     <string name="poi_denomination_new_apostolic">新使徒教派</string>
