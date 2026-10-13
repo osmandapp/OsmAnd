@@ -48,7 +48,7 @@
     <string name="poi_cheese">Peynir dükkanı;Peynirci</string>
     <string name="poi_chocolate">Çikolata dükkanı;Çikolata mağazası</string>
     <string name="poi_coffee">Kahve dükkanı;Kahve mağazası</string>
-    <string name="poi_convenience">Bakkal;büfe;gıda;Market</string>
+    <string name="poi_convenience">Bakkal;gıda;Market</string>
     <string name="poi_mall">AVM;Alışveriş merkezi</string>
     <string name="poi_beverages">İçecek dükkanı</string>
     <string name="poi_butcher">Et pazarı;Kasap;kasabı</string>
@@ -58,14 +58,14 @@
     <string name="poi_seafood">Deniz ürünleri dükkanı;Deniz ürünleri mağazası</string>
     <string name="poi_confectionery">Şekerleme dükkanı</string>
     <string name="poi_ice_cream">Dondurmacı</string>
-    <string name="poi_supermarket">Süpermarket;gıda</string>
+    <string name="poi_supermarket">Süpermarket</string>
     <string name="poi_tea">Çay dükkanı;Çay mağazası</string>
     <string name="poi_pasta">Makarna dükkanı</string>
     <string name="poi_pastry">Pastane</string>
     <string name="poi_dairy">Sütçü dükkanı</string>
     <string name="poi_vending_machine">Satış makinesi</string>
     <string name="poi_wine">Şarap dükkanı</string>
-    <string name="poi_books">Kitabevi;kitap;kitap mağazası</string>
+    <string name="poi_books">Kitabevi;kitap mağazası</string>
     <string name="poi_bicycle">Bisiklet dükkanı;Bisiklet;bisiklet tamircisi</string>
     <string name="poi_anime">Anime dükkanı</string>
     <string name="poi_antiques">Antika mağazası</string>
@@ -79,7 +79,7 @@
     <string name="poi_carpet">Halı mağazası</string>
     <string name="poi_charity">Yardım dükkanı</string>
     <string name="poi_chemist">İlaç mağazası;Temizlik Ürünleri Mağazası</string>
-    <string name="poi_clothes">Giyim mağazası;butik;kumaş;bayan giyim;bebek giyim;Erkek giyim;gelinlik mağazası;Iç çamaşırı;Kadın giyim;Spor giyim;şapka mağazası</string>
+    <string name="poi_clothes">Giyim mağazası;butik;bayan giyim;bebek giyim;Erkek giyim;gelinlik mağazası;Iç çamaşırı;Kadın giyim;Spor giyim;şapka mağazası</string>
     <string name="poi_clothes_children">Çocuk giyim</string>
     <string name="poi_shoes">Ayakkabı mağazası;kundura</string>
     <string name="poi_candles">Mum mağazası</string>
@@ -129,7 +129,7 @@
     <string name="poi_scuba_diving_shop">Tüplü dalış ürünleri mağazası</string>
     <string name="poi_ship_chandler">Gemi bakkalı</string>
     <string name="poi_sports">Spor ürünleri</string>
-    <string name="poi_stationery">Kırtasiye dükkanı;kırtasiye;kitap;Kırtasiye Mağazası</string>
+    <string name="poi_stationery">Kırtasiye dükkanı;kırtasiye;Kırtasiye Mağazası</string>
     <string name="poi_ticket">Bilet satış</string>
     <string name="poi_tobacco">Tütün mağazası;Tütüncü</string>
     <string name="poi_toys">Oyuncak dükkanı;Oyuncak Mağazası</string>
@@ -184,7 +184,7 @@
     <string name="poi_traffic_calming_table">Hız Tablosu</string>
     <string name="poi_traffic_calming_choker">Gerdanlık</string>
     <string name="poi_traffic_signals">Dur ışığı</string>
-    <string name="poi_car_repair">Araba onarımı;otomotiv;kaporta;yedek</string>
+    <string name="poi_car_repair">Araba onarımı;kaporta</string>
     <string name="poi_vehicle_inspection">Araç muayene</string>
     <string name="poi_car_wash">Oto yıkama;Araba Yıkama</string>
     <string name="poi_fuel">Gaz istasyonu;Benzin istasyonu;Dolum istasyonu;Petrol istasyonu;benzin</string>
@@ -742,9 +742,9 @@
     <string name="poi_recreation_ground">Rekreasyon alanı</string>
     <string name="poi_village_green">Yeşil köy</string>
     <string name="poi_trail_riding_station">İz sürme istasyonu</string>
-    <string name="poi_cafe">Kafe;Cafe;kıraathanesi;kahvesi;lounge;künefe</string>
+    <string name="poi_cafe">Kafe;Cafe;kıraathanesi;kahvesi</string>
     <string name="poi_biergarten">Bahçeli birahane</string>
-    <string name="poi_restaurant">Restoran;restaurant;pide;lokantası;köfte;lahmacun;kokoreç;tantuni;ocakbaşı;dürüm;lounge;köftecisi;dönerci;ciğerci;künefe;dürümcü</string>
+    <string name="poi_restaurant">Restoran;restaurant;lokantası</string>
     <string name="poi_bar">Bar</string>
     <string name="poi_pub">Birahane</string>
     <string name="poi_barbecue">Mangal</string>
@@ -1095,7 +1095,7 @@
     <string name="poi_denomination_serbian_orthodox">Sırp Ortodoks</string>
     <string name="poi_spring">Kaynak</string>
     <string name="poi_casino">Kumarhane</string>
-    <string name="poi_fast_food">Fast food;çiğköfte;kokoreç;tantuni;dürüm;dönerci;çiğköfteci;dürümcü;gözleme;pilav</string>
+    <string name="poi_fast_food">Fast food</string>
     <string name="poi_drinking_water">İçme suyu;hayratı</string>
     <string name="poi_craft_basket_maker">Sepet yapıcı</string>
     <string name="poi_craft_beekeeper">Arıcı</string>
@@ -3246,7 +3246,7 @@
     <string name="poi_picnic_table_no">Piknik masası: hayır</string>
     <string name="poi_picnic_table_yes">Piknik masası: evet</string>
     <string name="poi_fuel_propane">Propan</string>
-    <string name="poi_office_diplomatic">Diplomatik ofis;konsolosluğu;büyükelçiliği;başkonsolosluk</string>
+    <string name="poi_office_diplomatic">Diplomatik ofis;konsolosluğu;büyükelçiliği</string>
     <string name="poi_cockfighting">Horoz dövüşü</string>
     <string name="poi_bullfighting">Boğa güreşi</string>
     <string name="poi_water_ski">Su kayağı</string>

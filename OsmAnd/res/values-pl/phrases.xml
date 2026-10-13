@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="poi_bakery">Piekarnia;cukiernia</string>
+    <string name="poi_bakery">Piekarnia</string>
     <string name="poi_alcohol">Sklep monopolowy;alkohole;monopolowy</string>
     <string name="poi_convenience">Sklep ogólnospożywczy;spożywczy;ogólnospożywczy;Sklep spożywczy</string>
     <string name="poi_mall">Centrum handlowe</string>
@@ -227,7 +227,7 @@
     <string name="poi_hamlet">Przysiółek</string>
     <string name="poi_hospital">Szpital</string>
     <string name="poi_doctors">Przychodnia lekarska;przychodnia</string>
-    <string name="poi_clinic">Klinika lekarska;przychodnia;klinika</string>
+    <string name="poi_clinic">Klinika lekarska;klinika</string>
     <string name="poi_dentist">Stomatolog</string>
     <string name="poi_nursing_home">Dom opieki</string>
     <string name="poi_baby_hatch">Okno życia</string>
@@ -341,7 +341,7 @@
     <string name="poi_swimming_pool">Basen;pływalnia</string>
     <string name="poi_water_park">Park wodny</string>
     <string name="poi_park">Park;skwer</string>
-    <string name="poi_restaurant">Restauracja;pizzeria;karczma;smażalnia;pierogarnia;mleczny;gospoda;tawerna</string>
+    <string name="poi_restaurant">Restauracja;karczma;gospoda</string>
     <string name="poi_bar">Drink-bar</string>
     <string name="poi_pub">Pub</string>
     <string name="poi_drinking_water">Woda pitna</string>
@@ -381,7 +381,7 @@
     <string name="poi_hairdresser">Salon fryzjerski;Fryzjer;barber;barbershop;fryzjerstwo</string>
     <string name="poi_massage">Salon masażu</string>
     <string name="poi_tattoo">Salon tatuażu</string>
-    <string name="poi_dry_cleaning">Pralnia chemiczna;pralnia</string>
+    <string name="poi_dry_cleaning">Pralnia chemiczna</string>
     <string name="poi_laundry">Pralnia (zakład);pralnia;Pralnia samoobsługowa</string>
     <string name="poi_car_rental">Wypożyczalnia samochodów;Wynajem samochodów;Wypożyczanie samochodów</string>
     <string name="poi_dock">Dok</string>
@@ -619,7 +619,7 @@
     <string name="poi_glacier">Lodowiec</string>
     <string name="poi_recreation_ground">Teren rekreacyjny</string>
     <string name="poi_cafe">Kawiarnia</string>
-    <string name="poi_fast_food">Bar szybkiej obsługi;smażalnia;pierogarnia;mleczny;Fast food;restauracja szybkiej obsługi</string>
+    <string name="poi_fast_food">Bar szybkiej obsługi;mleczny;Fast food;restauracja szybkiej obsługi</string>
     <string name="poi_craft_handicraft">Rzemiosło</string>
     <string name="poi_paddle_tennis">Tenis wiosłowy (paddle tennis)</string>
     <string name="poi_observation_tower">Wieża widokowa</string>
@@ -668,7 +668,7 @@
     <string name="poi_transport_construction">Roboty drogowe</string>
     <string name="poi_base">Skoki spadochronowe</string>
     <string name="poi_ice_stock">Curling bawarski</string>
-    <string name="poi_artwork">Dzieło sztuki;mural;Rzeźba</string>
+    <string name="poi_artwork">Dzieło sztuki</string>
     <string name="poi_attraction_amusement_ride">Karuzela</string>
     <string name="poi_attraction_animal">Zwierzę (atrakcja)</string>
     <string name="poi_attraction_swing_carousel">Bujana karuzela</string>

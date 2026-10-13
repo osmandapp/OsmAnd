@@ -565,7 +565,7 @@
     <string name="poi_fort">Forti</string>
     <string name="poi_fountain">Strūklaka</string>
     <string name="poi_wreck">Kuğa vraks</string>
-    <string name="poi_monument">Monuments;piemineklis</string>
+    <string name="poi_monument">Monuments</string>
     <string name="poi_zoo">Zoodārzs;zooloģiskais dārzs</string>
     <string name="poi_aquarium">Akvārijs</string>
     <string name="poi_theme_park">Atrakciju parks;tematiskais parks</string>
@@ -591,7 +591,7 @@
     <string name="poi_cabin">Būda</string>
     <string name="poi_lean_to">Nojume</string>
     <string name="poi_hunting_lodge">Mednieku namiņš</string>
-    <string name="poi_place_of_worship">Slavēšanas vieta;baznīca;lūgšanu nams;lūgšanu vieta</string>
+    <string name="poi_place_of_worship">Slavēšanas vieta;lūgšanu nams;lūgšanu vieta</string>
     <string name="poi_religion_jewish">Jūdaisms</string>
     <string name="poi_religion_muslim">Islams</string>
     <string name="poi_religion_buddhist">Budisms</string>

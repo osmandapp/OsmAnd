@@ -48,7 +48,7 @@
     <string name="poi_shop_yes">Крамниця</string>
     <string name="poi_gift">Подарунки та сувеніри;сувеніри;магазин сувенірів</string>
     <string name="poi_glaziery">Вікна, скло</string>
-    <string name="poi_hardware">Будівельний магазин;будматеріали</string>
+    <string name="poi_hardware">Будівельний магазин</string>
     <string name="poi_hearing_aids">Слухові апарати</string>
     <string name="poi_herbalist">Трави;магазин трав</string>
     <string name="poi_hifi">Hi-Fi апаратура</string>
@@ -56,7 +56,7 @@
     <string name="poi_hunting">Мисливське спорядження</string>
     <string name="poi_interior_decoration">Внутрішнє оздоблення</string>
     <string name="poi_jewelry">Ювелірний магазин;ювелірний</string>
-    <string name="poi_kiosk">Кіоск;преса</string>
+    <string name="poi_kiosk">Кіоск</string>
     <string name="poi_kitchen">Кухонні приналежності</string>
     <string name="poi_mobile_phone">Мобільні телефони;салон мобільних телефонів;салон мобільного зв\'язку</string>
     <string name="poi_motorcycle">Мотоцикли;магазин мотоциклів</string>
@@ -224,7 +224,7 @@
     <string name="poi_free_flying">Крамниця для стрибків з парашутом</string>
     <string name="poi_garden_furniture">Крамниця садових меблів</string>
     <string name="poi_fuel_biogas">Біогаз</string>
-    <string name="poi_halt">Залізнична зупинка;Зупинка поїзда; Залізнична станція;Залізничний вокзал;Станція</string>
+    <string name="poi_halt">Залізнична зупинка;Зупинка поїзда; Залізнична станція;Залізничний вокзал</string>
     <string name="poi_subway_entrance">Вхід в метро</string>
     <string name="poi_subway_station">Так;Станція метро</string>
     <string name="poi_taxi">Стоянка таксі</string>
@@ -410,7 +410,7 @@
     <string name="poi_gasometer">Сховище газу</string>
     <string name="poi_silo">Елеватор</string>
     <string name="poi_storage_tank">Цистерна</string>
-    <string name="poi_social_facility">Соціальні обʼєкти;інтернат;соціальна установа</string>
+    <string name="poi_social_facility">Соціальні обʼєкти;соціальна установа</string>
     <string name="poi_courthouse">Суд</string>
     <string name="poi_bailiff">Виконавча служба</string>
     <string name="poi_prosecutor">Прокуратура</string>
@@ -423,8 +423,8 @@
     <string name="poi_locality">Місцевість</string>
     <string name="poi_residential">Житлова зона</string>
     <string name="poi_pharmacy">Аптека</string>
-    <string name="poi_doctors">Лікар;амбулаторія</string>
-    <string name="poi_clinic">Клініка;амбулаторія;поліклініка;диспансер</string>
+    <string name="poi_doctors">Лікар</string>
+    <string name="poi_clinic">Клініка;амбулаторія;поліклініка</string>
     <string name="poi_first_aid">Перша допомога</string>
     <string name="poi_nursing_home">Будинок престарілих</string>
     <string name="poi_veterinary">Ветеринарна лікарня;ветеринар;ветеринарна клініка</string>
@@ -509,8 +509,8 @@
     <string name="poi_beauty">Салон краси</string>
     <string name="poi_craft_shoemaker">Швець</string>
     <string name="poi_cuisine_tea_shop">Чай</string>
-    <string name="poi_cafe">Кафе;піцерія</string>
-    <string name="poi_fast_food">Швидке харчування;піцерія</string>
+    <string name="poi_cafe">Кафе</string>
+    <string name="poi_fast_food">Швидке харчування</string>
     <string name="poi_cuisine_fast_food">Швидке харчування</string>
     <string name="poi_cuisine_bakery">Пекарня</string>
     <string name="poi_fuel_type">Вид палива</string>
@@ -655,7 +655,7 @@
     <string name="poi_skating">Катання на роликах (ковзанах)</string>
     <string name="poi_skiing">Лижний спорт</string>
     <string name="poi_toboggan">Тобогган</string>
-    <string name="poi_artwork">Твір мистецтва;мурал;скульптура;витвір мистецтва</string>
+    <string name="poi_artwork">Твір мистецтва;витвір мистецтва</string>
     <string name="poi_archaeological_site">Археологічні розкопки;городище;пам\'ятка археології</string>
     <string name="poi_battlefield">Поле битви</string>
     <string name="poi_boundary_stone">Межовий камінь;прикордонний камінь</string>
@@ -879,7 +879,7 @@
     <string name="poi_village_green">Громадська територія</string>
     <string name="poi_trail_riding_station">Місце для ночівлі наїзників і коней</string>
     <string name="poi_biergarten">Літнє кафе</string>
-    <string name="poi_restaurant">Ресторан;піцерія</string>
+    <string name="poi_restaurant">Ресторан</string>
     <string name="poi_bar">Бар</string>
     <string name="poi_pub">Паб</string>
     <string name="poi_food_court">Ресторанний дворик</string>
@@ -1376,7 +1376,7 @@
     <string name="poi_theatre_genre_philharmonic">Філармонія</string>
     <string name="poi_water_characteristic_sulfuric">Сірчана</string>
     <string name="poi_theatre_genre_musical">Музичний</string>
-    <string name="poi_water_point">Пункт водопостачання;бювет;заправка водою</string>
+    <string name="poi_water_point">Пункт водопостачання;заправка водою</string>
     <string name="poi_theatre_genre_drama">Драматичний</string>
     <string name="poi_information_guidepost">Вказівний стовп</string>
     <string name="poi_theatre_genre_opera">Оперний</string>

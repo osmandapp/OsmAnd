@@ -236,7 +236,7 @@
     <string name="poi_pharmacy">Аптэка</string>
     <string name="poi_hospital">Лякарня;дыспансер</string>
     <string name="poi_doctors">Лекар;ФАП;амбулаторыя</string>
-    <string name="poi_clinic">Паліклініка, клініка;ФАП;амбулаторыя;дыспансер</string>
+    <string name="poi_clinic">Паліклініка, клініка</string>
     <string name="poi_first_aid">Першая дапамога</string>
     <string name="poi_dentist">Стаматалогія</string>
     <string name="poi_nursing_home">Дом састарэлых</string>
@@ -367,7 +367,7 @@
     <string name="poi_alpine_hut">Горны прытулак;турыстычная хатка</string>
     <string name="poi_chalet">Шале;катэдж для адпачынку</string>
     <string name="poi_place_of_worship">Месца пакланення;царква;храм;капліца;касцёл</string>
-    <string name="poi_religion_christian">Хрысціянства;храм</string>
+    <string name="poi_religion_christian">Хрысціянства</string>
     <string name="poi_religion_jewish">Іудаізм</string>
     <string name="poi_religion_muslim">Іслам</string>
     <string name="poi_religion_sikh">Сікхізм</string>
@@ -442,7 +442,7 @@
     <string name="poi_cafe">Кафэ;буфет</string>
     <string name="poi_biergarten">Летняе кафэ</string>
     <string name="poi_restaurant">Рэстаран</string>
-    <string name="poi_fast_food">Фастфуд (хуткае харчаванне);буфет</string>
+    <string name="poi_fast_food">Фастфуд (хуткае харчаванне)</string>
     <string name="poi_bar">Бар</string>
     <string name="poi_pub">Паб</string>
     <string name="poi_food_court">Рэстаранны панадворак</string>
@@ -1901,7 +1901,7 @@
     <string name="poi_shoes_sport">Спартовы</string>
     <string name="poi_shoes_men">Мужчынскі</string>
     <string name="poi_shoes_orthopedic">Артапедычны</string>
-    <string name="poi_historic_manor">Гістарычны маёнтак;сядзіба</string>
+    <string name="poi_historic_manor">Гістарычны маёнтак</string>
     <string name="poi_castle_type_stately">Тып замка: велічны</string>
     <string name="poi_castle_type_defensive">Тып замка: абарончы</string>
     <string name="poi_castle_type_fortress">Тып замка: крэпасць</string>

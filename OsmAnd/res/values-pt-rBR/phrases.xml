@@ -39,7 +39,7 @@
     <string name="poi_military">Área militar</string>
     <string name="poi_user_defined_other">Definido pelo usuário</string>
     <string name="poi_palaeontological_site">Sítio paleontológico</string>
-    <string name="poi_bakery">Padaria;confeitaria;panificadora</string>
+    <string name="poi_bakery">Padaria;panificadora</string>
     <string name="poi_convenience">Loja de conveniência;mercadinho</string>
     <string name="poi_mall">Centro comercial;shopping center</string>
     <string name="poi_butcher">Açougue</string>
@@ -207,7 +207,7 @@
     <string name="poi_bus_station">Estação rodoviária;rodoviária</string>
     <string name="poi_railway_station">Estação ferroviária; Estação ferroviária; Estação de trem</string>
     <string name="poi_railway_platform">Plataforma ferroviária;Plataforma de trem</string>
-    <string name="poi_halt">Parada ferroviária;Parada de trem;Estação ferroviária;Estação ferroviária;Estação de trem;Estação</string>
+    <string name="poi_halt">Parada ferroviária;Parada de trem;Estação ferroviária;Estação ferroviária;Estação de trem</string>
     <string name="poi_subway_entrance">Entrada do metrô;entrada de estação do metrô</string>
     <string name="poi_subway_station">Sim; estação de metrô;estação do metrô</string>
     <string name="poi_vacuum_cleaner">Loja de aspiradores de pó</string>
@@ -480,7 +480,7 @@
     <string name="poi_cabin">Cabana;Abrigo</string>
     <string name="poi_lean_to">Galpão;Abrigo</string>
     <string name="poi_hunting_lodge">Cabana de caça;Abrigo</string>
-    <string name="poi_place_of_worship">Local de culto;templo;santuário</string>
+    <string name="poi_place_of_worship">Local de culto;templo</string>
     <string name="poi_religion_christian">Cristianismo;catedral;igreja;basílica</string>
     <string name="poi_religion_jewish">Judaísmo</string>
     <string name="poi_religion_muslim">Islamismo</string>
@@ -3410,13 +3410,13 @@
     <string name="poi_service_car">Serviços automotivos</string>
     <string name="poi_amusement_arcade">Fliperama</string>
     <string name="poi_adult_gaming_centre">Centro de jogos para adultos</string>
-    <string name="poi_service_vehicle_car_repair_yes">Reparos automotivos;mecânica;oficina de automóveis</string>
+    <string name="poi_service_vehicle_car_repair_yes">Reparos automotivos;oficina de automóveis</string>
     <string name="poi_service_vehicle_oil_change_yes">Troca de óleo</string>
     <string name="poi_service_vehicle_used_car_sales_yes">Venda de carros usados</string>
     <string name="poi_service_vehicle_brakes_yes">Freios</string>
     <string name="poi_service_vehicle_new_car_sales_yes">Venda de carros novos;loja de carros</string>
     <string name="poi_service_vehicle_diagnostics_yes">Diagnósticos</string>
-    <string name="poi_service_vehicle_car_parts_yes">Peças automotivas;autopeças;peças de carro</string>
+    <string name="poi_service_vehicle_car_parts_yes">Peças automotivas;peças de carro</string>
     <string name="poi_service_vehicle_batteries_yes">Baterias</string>
     <string name="poi_service_vehicle_air_conditioning_yes">Ar condicionado</string>
     <string name="poi_service_vehicle_body_repair_yes">Funilaria</string>
@@ -5152,7 +5152,7 @@
     <string name="poi_historic_spacecraft">Nave espacial histórica</string>
     <string name="poi_barrier_chain">Barreira de corrente</string>
     <string name="poi_barrier_sliding_gate">Porta deslizante</string>
-    <string name="poi_sample_collection">Coleta de amostra;Sangue;Laboratório;Exame</string>
+    <string name="poi_sample_collection">Coleta de amostra;Sangue;Exame</string>
     <string name="poi_sample_collection_yes">Sim</string>
     <string name="poi_sample_collection_covid19">COVID19</string>
     <string name="poi_sample_collection_blood">Sangue</string>
