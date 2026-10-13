@@ -46,6 +46,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.BidiFormatter;
+import androidx.core.text.TextDirectionHeuristicsCompat;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
@@ -110,6 +112,7 @@ import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.shared.gpx.primitives.Linkable;
+import net.osmand.shared.util.PhoneNumberFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -1096,6 +1099,17 @@ public class MenuBuilder {
 		} else if (values.size() == 1) {
 			openPhoneNumber(view.getContext(), values.get(0));
 		}
+	}
+
+	/**
+	 * Display-only: groups the digits and keeps them left-to-right in RTL layouts,
+	 * otherwise the space-separated groups are shown in reverse order.
+	 */
+	@NonNull
+	public static String formatPhoneNumber(@NonNull Context context, @NonNull String text) {
+		String formatted = PhoneNumberFormatter.INSTANCE.format(text);
+		BidiFormatter bidiFormatter = BidiFormatter.getInstance(AndroidUtils.isLayoutRtl(context));
+		return bidiFormatter.unicodeWrap(formatted, TextDirectionHeuristicsCompat.LTR);
 	}
 
 	protected void handleEmailClick(@Nullable String title, @Nullable String text, @NonNull View view) {

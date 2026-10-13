@@ -52,7 +52,6 @@ import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
-import net.osmand.shared.util.PhoneNumberFormatter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -503,7 +502,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			textView.setTextColor(linkTextColor);
 			needLinks = false;
 		}
-		textView.setText(isPhoneNumber ? PhoneNumberFormatter.INSTANCE.format(text) : text);
+		textView.setText(isPhoneNumber && text != null ? formatPhoneNumber(view.getContext(), text) : text);
 		if (needLinks && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);
 			textView.setLinkTextColor(linkTextColor);
