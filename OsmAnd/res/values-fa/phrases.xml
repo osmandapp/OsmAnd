@@ -1570,4 +1570,27 @@
     <string name="poi_surface_tartan">تارتان</string>
     <string name="poi_socket_type2_cable_output_filter">خروجی کابل نوع 2</string>
     <string name="poi_socket_type3a_output_filter">خروجی نوع 3a</string>
+    <string name="poi_appliance">فروشگاه لوازم خانگی</string>
+    <string name="poi_assembly_point">محل تجمع اضطراری</string>
+    <string name="poi_blood_donation">مرکز اهدای خون</string>
+    <string name="poi_boat_rental">اجاره قایق</string>
+    <string name="poi_conference_centre">مرکز کنفرانس</string>
+    <string name="poi_craft_electronics_repair">تعمیرات الکترونیک</string>
+    <string name="poi_defibrillator">دستگاه شوک</string>
+    <string name="poi_escape_game">اتاق فرار</string>
+    <string name="poi_events_venue">تالار</string>
+    <string name="poi_hill">تپه</string>
+    <string name="poi_historic_gallows">چوبه دار</string>
+    <string name="poi_hookah_lounge">قلیان‌سرا</string>
+    <string name="poi_indoor_play">مرکز بازی</string>
+    <string name="poi_laboratory">آزمایشگاه;پاتوبیولوژی</string>
+    <string name="poi_lifeguard">نجات غریق</string>
+    <string name="poi_motorcycle_repair">سیکلت;تعمیر موتور سیکلت</string>
+    <string name="poi_recycling_container">ظرف بازیافت</string>
+    <string name="poi_service_bicycle_repair_yes">تعمیر دوچرخه</string>
+    <string name="poi_service_vehicle_car_parts_yes">لوازم یدکی</string>
+    <string name="poi_service_vehicle_car_repair_yes">تعمیرگاه ماشین</string>
+    <string name="poi_service_vehicle_new_car_sales_yes">فروشگاه خودرو</string>
+    <string name="poi_sports_hall">سالن ورزشی</string>
+    <string name="poi_travel_agency">آژانس مسافرتی</string>
 </resources>

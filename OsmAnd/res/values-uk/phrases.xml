@@ -6,7 +6,7 @@
     <string name="poi_convenience">Міні-маркет;продукти;гастроном;мінімаркет</string>
     <string name="poi_mall">Торговельний центр;ТРЦ;торговий центр</string>
     <string name="poi_beverages">Напої</string>
-    <string name="poi_butcher">М\'ясо;м\'ясо;м\'ясний магазин</string>
+    <string name="poi_butcher">М\'ясо;м\'ясний магазин</string>
     <string name="poi_deli">Делікатеси;делікатесний магазин</string>
     <string name="poi_farm">Фермерські продукти</string>
     <string name="poi_greengrocer">Овочі, фрукти;фрукти;овочі</string>
@@ -156,7 +156,7 @@
     <string name="poi_leather">Крамниця шкіри, галантарея</string>
     <string name="poi_music">Музичний магазин</string>
     <string name="poi_scuba_diving_shop">Крамниця для плавання з масками</string>
-    <string name="poi_tyres">Шини;Шина;Шина;Шинний магазин;Шини;магазин шин</string>
+    <string name="poi_tyres">Шини;Шина;Шинний магазин;магазин шин</string>
     <string name="poi_watches">Крамниця годинників</string>
     <string name="poi_swimming_pool_shop">Крамниця речей для басейну</string>
     <string name="poi_games">Ігри;магазин ігор</string>
@@ -3436,7 +3436,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Ремонт трансмісії</string>
     <string name="poi_service_vehicle_motor_yes">Двигун</string>
     <string name="poi_service_vehicle_insurance_yes">Страхування</string>
-    <string name="poi_service_vehicle_tyres_yes">Шини; Шина; Шини; Шина;шиномонтаж</string>
+    <string name="poi_service_vehicle_tyres_yes">Шини; Шина;шиномонтаж</string>
     <string name="poi_via_ferrata_scale">Складність</string>
     <string name="poi_cable_number">Кількість тросів</string>
     <string name="poi_glacier_type_mountain">Гірський</string>
@@ -5179,4 +5179,6 @@
     <string name="poi_air_conditioning">Кондиціонування повітря</string>
     <string name="poi_theme_filter">Тема</string>
     <string name="poi_disaster_help_point">Пункт допомоги постраждалим від стихійного лиха</string>
+    <string name="poi_indoor_play">Ігровий центр</string>
+    <string name="poi_luggage_locker">Камера схову</string>
 </resources>

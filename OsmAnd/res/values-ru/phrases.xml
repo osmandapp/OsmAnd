@@ -3326,7 +3326,7 @@
     <string name="poi_amusement_arcade">Игровой зал</string>
     <string name="poi_adult_gaming_centre">Игровой зал для взрослых</string>
     <string name="poi_service_car">Автоуслуги</string>
-    <string name="poi_service_vehicle_tyres_yes">Шины;Шина;Шина;Шины;шиномонтаж;шиномонтажная мастерская</string>
+    <string name="poi_service_vehicle_tyres_yes">Шины;Шина;шиномонтаж;шиномонтажная мастерская</string>
     <string name="poi_service_vehicle_car_repair_yes">Ремонт;автомастерская</string>
     <string name="poi_service_vehicle_oil_change_yes">Замена масла</string>
     <string name="poi_service_vehicle_used_car_sales_yes">Продажа подержанных автомобилей</string>
@@ -5171,4 +5171,6 @@
     <string name="poi_rapids_grade_5">5 (эксперт)</string>
     <string name="poi_rapids_grade_6">6 (экстремальный)</string>
     <string name="poi_rapids_grade_x">X (непроходимый)</string>
+    <string name="poi_indoor_play">Игровой центр</string>
+    <string name="poi_luggage_locker">Камера хранения</string>
 </resources>

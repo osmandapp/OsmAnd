@@ -170,7 +170,7 @@
     <string name="poi_ticket">Продаја карата;Prodaja karata</string>
     <string name="poi_tobacco">Продавница дувана</string>
     <string name="poi_toys">Продавница играчака</string>
-    <string name="poi_tyres">Гуме; Гума; Гума; Продавница гума; Гуме;Auto gume;Ауто гуме</string>
+    <string name="poi_tyres">Гуме; Гума; Продавница гума;Auto gume;Ауто гуме</string>
     <string name="poi_vacuum_cleaner">Продавница усисивача</string>
     <string name="poi_video">Видео клуб;Video-klub;Видео-клуб</string>
     <string name="poi_electronics">Продавница електронике</string>
@@ -259,7 +259,7 @@
     <string name="poi_tram_stop">Трамвајска станица</string>
     <string name="poi_public_transport_station">Станица јавног превоза</string>
     <string name="poi_bus_station">Аутобуска станица;Autobuska stanica</string>
-    <string name="poi_railway_station">Железничка станица; Железничка станица; Железничка станица;železnička stanica</string>
+    <string name="poi_railway_station">Железничка станица;železnička stanica</string>
     <string name="poi_subway_entrance">Улаз у подземну</string>
     <string name="poi_subway_station">Да; Станица метроа</string>
     <string name="poi_taxi">Такси станица;taksi</string>

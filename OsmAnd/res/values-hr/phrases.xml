@@ -2306,4 +2306,14 @@
     <string name="poi_consulate">Konzulat</string>
     <string name="poi_bicycle_parking">Parkiralište za bicikle</string>
     <string name="poi_hearing_aids">Prodavaonica slušnih pomagala</string>
+    <string name="poi_brothel">Bordel</string>
+    <string name="poi_bureau_de_change">Mjenjačnica</string>
+    <string name="poi_camp_site">Kamp</string>
+    <string name="poi_florist">Cvjećarnica</string>
+    <string name="poi_fuel">Benzinska</string>
+    <string name="poi_jewelry">Zlatarna</string>
+    <string name="poi_miniature_golf">Minigolf</string>
+    <string name="poi_post_office">Pošta</string>
+    <string name="poi_stationery">Papirnica</string>
+    <string name="poi_viewpoint">Vidikovac</string>
 </resources>

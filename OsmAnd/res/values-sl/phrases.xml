@@ -773,7 +773,7 @@
     <string name="poi_park_ride_metro">Podzemna železnica</string>
     <string name="poi_perfumery">Parfumerija</string>
     <string name="poi_car_parts">Trgovina z avto deli</string>
-    <string name="poi_tyres">Pnevmatike;Pnevmatika;Pnevmatika;Prodajalna pnevmatik; Pnevmatike;vulkanizerstvo</string>
+    <string name="poi_tyres">Pnevmatike;Pnevmatika;Prodajalna pnevmatik;vulkanizerstvo</string>
     <string name="poi_ticket">Prodaja vstopnic;prodajalna vstopnic</string>
     <string name="poi_second_hand">Trgovina z rabljenimi izdelki</string>
     <string name="poi_music">Trgovina z glasbo;Glasbena trgovina</string>
@@ -4883,4 +4883,9 @@
     <string name="poi_us_maps_recreation_area_activity_scenic_overlook">Razgledna točka</string>
     <string name="poi_us_maps_recreation_area_activity_scuba_diving">Potapljanje</string>
     <string name="poi_us_maps_recreation_area_activity_skiing_snowboarding">Smučanje in deskanje na snegu</string>
+    <string name="poi_dancing_school">Plesna šola</string>
+    <string name="poi_indoor_play">Otroška igralnica</string>
+    <string name="poi_sample_collection">Odvzem vzorcev</string>
+    <string name="poi_security">Varnostna služba</string>
+    <string name="poi_travel_agency">Turistična agencija</string>
 </resources>

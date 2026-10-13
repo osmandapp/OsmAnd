@@ -101,7 +101,7 @@
     <string name="poi_garages">Garatges</string>
     <string name="poi_public_transport_platform_bus">Parada d\'autobús</string>
     <string name="poi_public_transport_platform_trolleybus">Parada de troleibús</string>
-    <string name="poi_bus_stop">Parada d\'autobús;parada;Parada d\'autobús</string>
+    <string name="poi_bus_stop">Parada d\'autobús;parada</string>
     <string name="poi_public_transport_platform_tram">Parada de tramvia</string>
     <string name="poi_tram_stop">Parada de tramvia</string>
     <string name="poi_public_transport_station">Estació de transport públic</string>
@@ -573,7 +573,7 @@
     <string name="poi_bar">Pub (bar de copes);taverna</string>
     <string name="poi_pub">Bar</string>
     <string name="poi_food_court">Menjador comú;Zona de restaurants</string>
-    <string name="poi_drinking_water">Font d\'aigua potable;font;Font d\'aigua potable</string>
+    <string name="poi_drinking_water">Font d\'aigua potable;font</string>
     <string name="poi_barbecue">Barbacoa</string>
     <string name="poi_craft_agricultural_engines">Artefactes agrícoles artesans</string>
     <string name="poi_craft_basket_maker">Cisteller</string>
@@ -3140,4 +3140,20 @@
     <string name="poi_mtb_yes">Sí</string>
     <string name="poi_winter_hiking_yes">Sí</string>
     <string name="poi_air_conditioning">Aire condicionat</string>
+    <string name="poi_agrarian">Botiga agrícola</string>
+    <string name="poi_appliance">Botiga d\'electrodomèstics</string>
+    <string name="poi_assembly_point">Punt de reunió d\'emergència</string>
+    <string name="poi_boat_rental">Lloguer de vaixells</string>
+    <string name="poi_cannabis">CBD</string>
+    <string name="poi_collector">Col·leccionables</string>
+    <string name="poi_conference_centre">Centre de conferències</string>
+    <string name="poi_escape_game">Escape room</string>
+    <string name="poi_hookah_lounge">Bar de xixa</string>
+    <string name="poi_money_transfer">Transferència de diners</string>
+    <string name="poi_motorcycle_rental_yes">Lloguer de motos</string>
+    <string name="poi_outpost">Punt de recollida</string>
+    <string name="poi_parcel_locker">Taquiller de paquets</string>
+    <string name="poi_service_vehicle_car_parts_yes">Peces de cotxe</string>
+    <string name="poi_sports_hall">Pavelló esportiu</string>
+    <string name="poi_waste_transfer_station">Estació de transferència de residus</string>
 </resources>
