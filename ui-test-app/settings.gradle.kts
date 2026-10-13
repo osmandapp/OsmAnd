@@ -1,18 +1,18 @@
 pluginManagement {
 	repositories {
-		google()
-		mavenCentral()
 		gradlePluginPortal()
+		mavenCentral()
+		google()
 	}
 }
 dependencyResolutionManagement {
 	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 	repositories {
-		google()
 		mavenCentral()
+		google()
 	}
 }
 
 rootProject.name = "ui-test-app"
 include(":app")
- 
+

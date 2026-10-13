@@ -1,8 +1,8 @@
 buildscript {
     ext.kotlin_version = '2.1.20'
     repositories {
-        google()
         mavenCentral()
+        google()
         maven {
             url 'https://developer.huawei.com/repo/'
             content {
@@ -43,8 +43,8 @@ allprojects {
                 artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
             }
         }
-        google()
         mavenCentral()
+        google()
         maven {
             url "https://jitpack.io"
         }
