@@ -12,7 +12,9 @@ import java.util.Map;
 import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.NameIndexReader;
+import net.osmand.util.SearchAlgorithms;
 import net.osmand.data.LatLon;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTree;
@@ -53,6 +55,10 @@ public class SpatialPipelineSearch {
 		final List<SpatialSearchResultsList> results = new ArrayList<SpatialSearchResultsList>();
 		int overallResults = 0;
 		int nonCatResults = 0;
+		// full results that do not join several objects through a category word
+		int fullWithoutJoinedCategory = 0;
+		// the tokens that full results found by a category word to join objects
+		long categoryJoinTokens = 0;
 
 		public SpatialPipelineContext(List<SpatialSearchToken> tokens, SpatialSearchContext ctx) {
 			this.tokens = new ArrayList<SpatialSearchToken>(tokens);
@@ -655,6 +661,17 @@ public class SpatialPipelineSearch {
 		}
 		long time = System.nanoTime();
 		int nonCategoryRes = 0;
+		if (tokens.size() == ctx.tokens.size()) {
+			for (SpatialPipelineObjectRes r : preResults) {
+				if (!r.mainAtom.isPoiCategory()) {
+					long joinTokens = categoryJoinTokens(r, ctx.tokens);
+					if (joinTokens == 0) {
+						ctx.fullWithoutJoinedCategory++;
+					}
+					ctx.categoryJoinTokens |= joinTokens;
+				}
+			}
+		}
 		SpatialSearchResultsList stageList = createResultList(tokens, limitByPrescore(limitSingleObjects(preResults)));
 		stageList.loadObjectsAndCalcBuildings(ctx.searchContext);
 		if (ctx.isCancelled()) {
@@ -847,8 +864,116 @@ public class SpatialPipelineSearch {
 				System.out.printf("PIPELINE LOOKUP %d partial results\n", depth);
 			}
 			calculatePartialCoverage(depth);
+		} else if (ctx.nonCatResults > 0 && ctx.fullWithoutJoinedCategory == 0 && tokensSize > 2 && !ctx.isCancelled()) {
+			exactNamesWithoutOneWord(depth);
 		}
 		return ctx.results;
+	}
+
+	/**
+	 * The tokens of a full result found by a category word to join objects: "Catedral del Salvador" by its name
+	 * "catedral" and by its type "basílica", a square by "de nuestra señora del pilar". A word that starts no word of
+	 * the name of its object was found by the type of the object. 0 when the result joins nothing by a category.
+	 */
+	private static long categoryJoinTokens(SpatialPipelineObjectRes r, List<SpatialSearchToken> tokens) {
+		long category = 0;
+		TLongHashSet objects = new TLongHashSet();
+		for (int i = 0; i < r.atoms.length; i++) {
+			NameIndexAtom a = r.atoms[i];
+			if (a == null) {
+				continue;
+			}
+			if (a.isPoiCategory() || (i < tokens.size() && !inName(a, tokens.get(i)))) {
+				category |= 1L << i;
+			}
+			if (!a.isPoiCategory()) {
+				objects.add(a.id);
+			}
+		}
+		return objects.size() > 1 ? category : 0;
+	}
+
+	private static boolean inName(NameIndexAtom a, SpatialSearchToken token) {
+		if (a.name == null || token.word == null) {
+			return false;
+		}
+		String word = SearchAlgorithms.alignChars(token.word.toLowerCase());
+		for (String w : SearchAlgorithms.split(a.name)) {
+			if (SearchAlgorithms.alignChars(w.toLowerCase()).startsWith(word)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Every full result joins objects through a category word: an object whose whole name is the query but one word
+	 * and has that category word ("Basílica de Nuestra Señora del Pilar" for "Catedral-Basílica de Nuestra Señora del
+	 * Pilar", where "basílica" was the type of Catedral del Salvador) is read too and ranks first.
+	 */
+	private void exactNamesWithoutOneWord(int depth) throws IOException {
+		int tokensSize = ctx.tokens.size();
+		int targetTokens = tokensSize - 1;
+		List<SpatialPipelineObjectRes> partialRes = new ArrayList<>();
+		for (SpatialObjectsBucket b : ctx.allBuckets) {
+			if (b.hasFullCovered(targetTokens)) {
+				computeGeoCross(b, partialRes, targetTokens);
+			}
+		}
+		TLongObjectHashMap<List<SpatialPipelineObjectRes>> groupByTokens = new TLongObjectHashMap<>();
+		for (SpatialPipelineObjectRes r : partialRes) {
+			// the object's own name has a word that a full result took as a category ("basílica")
+			if (!exactWholeName(r, ctx.tokens) || !coversAny(r, ctx.categoryJoinTokens)) {
+				continue;
+			}
+			long mask = r.maskOnlyByTokens();
+			if (!groupByTokens.contains(mask)) {
+				groupByTokens.put(mask, new ArrayList<>());
+			}
+			groupByTokens.get(mask).add(r);
+		}
+		if (ctx.stats.printLogs) {
+			System.out.printf("PIPELINE %d exact names without one word: %d\n", depth, groupByTokens.size());
+		}
+		TLongObjectIterator<List<SpatialPipelineObjectRes>> it = groupByTokens.iterator();
+		while (it.hasNext()) {
+			it.advance();
+			List<SpatialSearchToken> lst = new ArrayList<>();
+			for (int i = 0; i < tokensSize; i++) {
+				if (SpatialPipelineObjectRes.getTokenState(it.key(), i) != 0) {
+					lst.add(ctx.tokens.get(i));
+				}
+			}
+			int before = ctx.results.size();
+			validateResultsAndFinish(it.value(), depth, lst);
+			for (int i = before; i < ctx.results.size(); i++) {
+				ctx.results.get(i).exactNameOverJoinedCategory = true;
+			}
+		}
+	}
+
+	private static boolean coversAny(SpatialPipelineObjectRes r, long tokensMask) {
+		for (int i = 0; i < r.atoms.length; i++) {
+			if (r.atoms[i] != null && (tokensMask & (1L << i)) != 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// one object found by the words of its name only, no word of the name missing in the query
+	private static boolean exactWholeName(SpatialPipelineObjectRes r, List<SpatialSearchToken> tokens) {
+		NameIndexAtom main = r.mainAtom;
+		if (main == null || main.isPoiCategory() || !main.isPOI() || main.otherWordsCnt > 0) {
+			return false;
+		}
+		for (int i = 0; i < r.atoms.length; i++) {
+			NameIndexAtom a = r.atoms[i];
+			if (a != null && (a.isPoiCategory() || a.id != main.id || i >= tokens.size() || !inName(a, tokens.get(i)))) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private void enlargeBboxes(List<SpatialObjectsBucket> currentLevel) {

@@ -602,6 +602,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (res != 0) {
 			return res;
 		}
+		if (o1.parent.exactNameOverJoinedCategory != o2.parent.exactNameOverJoinedCategory) {
+			// all full results of the query join several objects through a category word: the exact name is first
+			return o1.parent.exactNameOverJoinedCategory ? -1 : 1;
+		}
 		res = -Integer.compare(o1.parent.tCount, o2.parent.tCount);
 		if (res != 0) {
 			return res;

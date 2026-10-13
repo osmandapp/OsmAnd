@@ -40,6 +40,9 @@ import net.osmand.util.SearchAlgorithms;
 public class SpatialSearchResultsList implements Comparable<SpatialSearchResultsList> {
 	final SpatialSearchToken[] tokens; // non modifiable!
 	final int tCount;
+	// one object whose whole name is all the query but one word, read because every full result needed a category
+	// word to join objects ("catedral basílica" + a square for "Catedral-Basílica de Nuestra Señora del Pilar")
+	boolean exactNameOverJoinedCategory;
 	
 	int MIN_ELO_RATING = Amenity.DEFAULT_ELO;
 	SpatialSearchRanking ranking;

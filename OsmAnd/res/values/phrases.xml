@@ -866,7 +866,7 @@
 	<string name="poi_hunting_lodge">Hunting lodge;Shelter</string>
 
 	<string name="poi_place_of_worship">Place of worship;temple;shrine</string>
-	<string name="poi_religion_christian">Christianity;church;chapel;cathedral</string>
+	<string name="poi_religion_christian">Christianity;church;chapel;cathedral;basilica</string>
 	<string name="poi_religion_jewish">Judaism</string>
 	<string name="poi_religion_muslim">Islam;dargah</string>
 	<string name="poi_religion_sikh">Sikhism;gurudwara;gurdwara</string>
