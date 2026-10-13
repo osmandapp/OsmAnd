@@ -5501,4 +5501,14 @@
     <string name="route_calculation_out_of_memory">المسار طويل جداً بحيث يتعذر حسابه على هذا الجهاز. أضف نقاطاً وسيطة أو اختر وجهة أقرب.</string>
     <string name="map_source_saved_as">تم حفظ مصدر الخريطة باسم \'%1$s\'.</string>
     <string name="map_source_folder_not_created">تعذر إنشاء مجلد لمصدر الخريطة. جرب اسماً آخر.</string>
+    <string name="eta_group_header">وقت الوصول المتوقع</string>
+    <string name="travel_speed">سرعة الانتقال</string>
+    <string name="default_speed_descr">يُستخدم عند عدم توفر بيانات السرعة للطريق، أو أثناء التوقف.</string>
+    <string name="speed_range">نطاق السرعة</string>
+    <string name="speed_range_descr">يُستخدم لكل من حساب المسار ووقت الوصول.</string>
+    <string name="eta_adapt_to_my_speed">تكيف مع سرعتي</string>
+    <string name="eta_adapt_to_my_speed_descr">يعتمد وقت الوصول على سرعتك خلال الـ %1$s الماضية.</string>
+    <string name="eta_adapt_to_my_speed_off_descr">يعتمد وقت الوصول على السرعة المتوقعة في كل طريق ضمن المسار؛ قم بتفعيل هذا الخيار ليعتمد الحساب على سرعتك الفعلية أثناء التحرك.</string>
+    <string name="flyover_recording">تسجيل فيديو للخريطة: %1$s</string>
+    <string name="flyovers">الجسور العلوية</string>
 </resources>
