@@ -121,6 +121,8 @@ public class GlideAverageWidget extends GlideBaseWidget {
 			speed = metersPerSecond.floatValue();
 			unit = getString(R.string.m_s);
 		}
+		// round first, so that a slight sink is shown as "0.0" and not as "-0.0"
+		speed = Math.round(speed * 10) / 10f;
 		return OsmAndFormatter.formatValue(speed, unit, true, 1, app);
 	}
 
