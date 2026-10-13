@@ -428,6 +428,16 @@ public class VoiceRouter {
 		int dist = nextInfo.distanceTo;
 		RouteDirectionInfo next = nextInfo.directionInfo;
 
+		if (settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS.get()
+			&& (atd.isTurnStateActive(speed, dist, STATE_TURN_IN)
+				|| (next.routeEndPointOffset > next.routePointOffset
+					&& next.routePointOffset <= router.getRoute().getCurrentRoute()
+					&& router.getRoute().getCurrentRoute() <= next.routeEndPointOffset))) {
+			app.getLockHelper().addKeepScreenAwakeReason("navigation");
+		} else {
+			app.getLockHelper().removeKeepScreenAwakeReason("navigation");
+		}
+
 		// If routing is changed update status to unknown
 		if (next != nextRouteDirection) {
 			nextRouteDirection = next;

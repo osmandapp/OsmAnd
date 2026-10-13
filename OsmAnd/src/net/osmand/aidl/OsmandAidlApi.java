@@ -933,9 +933,9 @@ public class OsmandAidlApi {
 				LockHelper lockHelper = app.getLockHelper();
 				boolean lock = intent.getBooleanExtra(AIDL_LOCK_STATE, false);
 				if (lock) {
-					lockHelper.lock();
+					lockHelper.doLock();
 				} else {
-					lockHelper.unlock();
+					lockHelper.doUnlock();
 				}
 			}
 		};
