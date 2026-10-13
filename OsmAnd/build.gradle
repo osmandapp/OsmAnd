@@ -85,22 +85,22 @@ android {
 			manifest.srcFile "AndroidManifest-debug.xml"
 		}
 		gplayFull {
-			java.srcDirs = ["src-google"]
+			java.srcDirs = ["src-google", "src-gplay"]
 		}
 		gplayFree {
-			java.srcDirs = ["src-google"]
+			java.srcDirs = ["src-google", "src-gplay"]
 			manifest.srcFile "AndroidManifest-gplayFree.xml"
 		}
 		androidFull {
-			java.srcDirs = ["src-google", "src-osmand"]
+			java.srcDirs = ["src-google", "src-osmand", "src-nogplay"]
 			manifest.srcFile "AndroidManifest-androidFull.xml"
 		}
 		nightlyFree {
-			java.srcDirs = ["src-google", "src-osmand"]
+			java.srcDirs = ["src-google", "src-osmand", "src-nogplay"]
 			manifest.srcFile "AndroidManifest-nightlyFree.xml"
 		}
 		huawei {
-			java.srcDirs = ["src-huawei"]
+			java.srcDirs = ["src-huawei", "src-nogplay"]
 			manifest.srcFile "AndroidManifest-huawei.xml"
 		}
 
@@ -271,6 +271,9 @@ dependencies {
 	//huaweiImplementation 'com.huawei.agconnect:agconnect-core:1.8.0.300'
 	huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
 	huaweiImplementation 'com.huawei.hms:appservice:6.8.0.300'
+
+	gplayFreeImplementation 'com.android.installreferrer:installreferrer:2.2'
+	gplayFullImplementation 'com.android.installreferrer:installreferrer:2.2'
 
 	coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.3")
 }
