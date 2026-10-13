@@ -21,11 +21,27 @@ object PhoneNumberFormatter {
 		"7" to intArrayOf(3, 3, 2, 2),
 		"33" to intArrayOf(1, 2, 2, 2, 2))
 
+	// same separators as the dial action uses to split several numbers
+	private val SEPARATORS = charArrayOf(';', ',')
+
 	fun format(value: String): String {
-		if (!value.contains(';')) {
+		val parts = value.split(*SEPARATORS)
+		if (parts.size == 1) {
 			return formatNumber(value)
 		}
-		return value.split(';').joinToString("; ") { formatNumber(it.trim()) }
+		val separators = value.filter { it in SEPARATORS }
+		val result = StringBuilder()
+		for ((index, part) in parts.withIndex()) {
+			val number = part.trim()
+			if (number.isEmpty()) {
+				continue
+			}
+			if (result.isNotEmpty()) {
+				result.append(separators[index - 1]).append(' ')
+			}
+			result.append(formatNumber(number))
+		}
+		return if (result.isEmpty()) value else result.toString()
 	}
 
 	private fun formatNumber(number: String): String {
