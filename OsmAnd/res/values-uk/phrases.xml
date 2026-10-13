@@ -3174,8 +3174,8 @@
     <string name="poi_gorge">Ущелина</string>
     <string name="poi_couloir">Кулуар</string>
     <string name="poi_mountain_area">Гірська місцевість</string>
-    <string name="poi_surface_clay">Глина</string>
-    <string name="poi_surface_tartan">Тартан</string>
+    <string name="poi_surface_clay">Покриття: глина</string>
+    <string name="poi_surface_tartan">Покриття: тартан</string>
     <string name="poi_surface_artificial_turf">Штучна дерновина</string>
     <string name="poi_surface_decoturf">Декораративна дерновина</string>
     <string name="poi_surface_metal_grid">Металева сітка</string>
@@ -5172,4 +5172,11 @@
     <string name="poi_rapids_grade_6">6 (екстремальний)</string>
     <string name="poi_rapids_grade_x">X (не запускається)</string>
     <string name="poi_water_lake">Озеро</string>
+    <string name="poi_mtb_filter">Підходить для гірських велосипедів (MTB)</string>
+    <string name="poi_ski_filter">Підходить для катання на лижах</string>
+    <string name="poi_horse_filter">Підходить для верхової їзди</string>
+    <string name="poi_winter_hiking_filter">Підходить для зимових походів</string>
+    <string name="poi_air_conditioning">Кондиціонування повітря</string>
+    <string name="poi_theme_filter">Тема</string>
+    <string name="poi_disaster_help_point">Пункт допомоги постраждалим від стихійного лиха</string>
 </resources>

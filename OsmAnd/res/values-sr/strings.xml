@@ -5455,4 +5455,6 @@
     <string name="route_calculation_out_of_memory">Рута је предугачка за израчунавање на овом уређају. Додајте међутачке или изаберите ближу дестинацију.</string>
     <string name="map_source_saved_as">Извор мапе сачуван као \'%1$s\'.</string>
     <string name="map_source_folder_not_created">Није било могуће креирати фолдер за извор мапе. Покушајте са другим именом.</string>
+    <string name="flyover_recording">Снимање видеа мапе: %1$s</string>
+    <string name="flyovers">Надвожњаци</string>
 </resources>

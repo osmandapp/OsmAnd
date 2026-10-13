@@ -974,7 +974,7 @@
     <string name="poi_association">Asociación</string>
     <string name="poi_financial">Oficina financiera</string>
     <string name="poi_political_party">Partido político</string>
-    <string name="poi_notary">Escribanía;Escribano;Escribana;Notario</string>
+    <string name="poi_notary">Notaría;Escribanía;Escribano;Escribana;Notario</string>
     <string name="poi_foundation">Fundación</string>
     <string name="poi_tax_advisor">Asesoría fiscal;Asesor fiscal;Asesora fiscal</string>
     <string name="poi_military_office">Oficina militar</string>
@@ -5187,4 +5187,13 @@
     <string name="poi_stables">Establos</string>
     <string name="poi_dancing_school">Escuela de danza</string>
     <string name="poi_craft_cleaning">Servicio de limpieza</string>
+    <string name="poi_theme_aviation">Aviación</string>
+    <string name="poi_theme_music">Música</string>
+    <string name="poi_theme_adventure">Aventura</string>
+    <string name="poi_theme_nature">Naturaleza</string>
+    <string name="poi_theme_bicycle">Bicicleta</string>
+    <string name="poi_theme_shakespeare">Shakespeare</string>
+    <string name="poi_theme_filter">Tema</string>
+    <string name="poi_theme_pirate">Pirata</string>
+    <string name="poi_theme_rainforest">Selva</string>
 </resources>

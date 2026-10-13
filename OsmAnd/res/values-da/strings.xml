@@ -5512,4 +5512,6 @@
     <string name="route_calculation_out_of_memory">Ruten er for lang til at beregne på denne enhed. Tilføj mellemliggende punkter eller vælg en destination tættere på.</string>
     <string name="map_source_saved_as">Kortkilde gemt som \'%1$s\'.</string>
     <string name="map_source_folder_not_created">Kunne ikke oprette en mappe til kortkilden. Prøv et andet navn.</string>
+    <string name="flyovers">Overflyvninger</string>
+    <string name="flyover_recording">Optager en kortvideo: %1$s</string>
 </resources>
