@@ -40,7 +40,7 @@
     <string name="poi_beacon_lateral">Balise latérale</string>
     <string name="poi_beacon_safe_water">Marque d\'eaux saines</string>
     <string name="poi_beacon_special_purpose">Balise à usage spécifique</string>
-    <string name="poi_beauty">Salon de beauté;beauté;ongles;onglerie;ongle;Institut de beauté;soins de beauté</string>
+    <string name="poi_beauty">Salon de beauté;beauté;Institut de beauté;soins de beauté</string>
     <string name="poi_beverages">Magasin de boissons</string>
     <string name="poi_bicycle">Magasin de vélos</string>
     <string name="poi_bicycle_parking">Parking à vélos;Parking à vélo</string>
@@ -79,7 +79,7 @@
     <string name="poi_car_sharing">Autopartage;auto-partage;Station d\'autopartage</string>
     <string name="poi_car_wash">Lavage de voitures;lavage;carwash;Station de lavage</string>
     <string name="poi_caravan_site">Aire de camping-car;RV;Parc caravanier</string>
-    <string name="poi_craft_carpenter">Charpentier;menuiserie;charpente;ébénisterie</string>
+    <string name="poi_craft_carpenter">Charpentier;charpente;ébénisterie</string>
     <string name="poi_casino">Casino</string>
     <string name="poi_castle">Château;forteresse;château fort</string>
     <string name="poi_cave_entrance">Entrée de grotte;Grotte</string>
@@ -91,7 +91,7 @@
     <string name="poi_city_wall">Remparts</string>
     <string name="poi_climbing">Escalade</string>
     <string name="poi_clinic">Clinique;dispensaire</string>
-    <string name="poi_clothes">Magasin de vêtements;Magasin de vetements;lingerie;Vêtements de sport;mode femme;mode homme;robe de mariée;vêtements bébé;Vêtements de mariée;Vêtements enfants;Vêtements femme;Vêtements homme</string>
+    <string name="poi_clothes">Magasin de vêtements;Magasin de vetements;Vêtements de sport;mode femme;mode homme;robe de mariée;vêtements bébé;Vêtements de mariée;Vêtements enfants;Vêtements femme;Vêtements homme</string>
     <string name="poi_club_art">Club d\'art</string>
     <string name="poi_club_charity">Association caritative</string>
     <string name="poi_club_chess">Club d\'échecs</string>
@@ -106,7 +106,7 @@
     <string name="poi_compressed_air">Air comprimé</string>
     <string name="poi_confectionery">Magasin de confiserie;confiserie</string>
     <string name="poi_construction">En construction</string>
-    <string name="poi_convenience">Supérette;épicerie;dépanneur;epicerie;duka;superette;vrac;depanneur</string>
+    <string name="poi_convenience">Supérette;épicerie;dépanneur;epicerie;duka;superette;depanneur</string>
     <string name="poi_copyshop">Service de photocopies et d\'impression;copy;Imprimerie;photocopie;Boutique de photocopies</string>
     <string name="poi_cosmetics">Magasin de cosmétiques;cosmétique;cosmetique;Produits de beauté</string>
     <string name="poi_courthouse">Palais de justice;Tribunal</string>
@@ -140,7 +140,7 @@
     <string name="poi_equestrian">Sport équestre</string>
     <string name="poi_estate_agent">Agence immobilière</string>
     <string name="poi_fabric">Mercerie;Magasin de tissus;Tissus</string>
-    <string name="poi_fast_food">Restauration rapide;friterie;frites;sandwicherie;hotely;braisé</string>
+    <string name="poi_fast_food">Restauration rapide;friterie;sandwicherie;hotely</string>
     <string name="poi_ferry_terminal">Terminal de ferry</string>
     <string name="poi_fire_extinguisher">Extincteur</string>
     <string name="poi_fire_hose">Tuyau d\'incendie</string>
@@ -167,7 +167,7 @@
     <string name="poi_grave_yard">Cimetière;cimetiere</string>
     <string name="poi_greengrocer">Marchand de fruits et légumes;Primeur;primeurs</string>
     <string name="poi_grit_bin">Bac à sel</string>
-    <string name="poi_guest_house">Chambre d\'hôtes;gîte;Maison d\'hôtes</string>
+    <string name="poi_guest_house">Chambre d\'hôtes;Maison d\'hôtes</string>
     <string name="poi_gymnastics">Gymnastique</string>
     <string name="poi_hairdresser">Coiffeur;barber;barbier;tresse;tifs;salon de coiffure</string>
     <string name="poi_hamlet">Hameau</string>
@@ -223,7 +223,7 @@
     <string name="poi_mobile_phone">Magasin de téléphones mobiles;télécentre;portable;GSM;Magasin de téléphonie</string>
     <string name="poi_monastery">Monastère</string>
     <string name="poi_money_lender">Usurier</string>
-    <string name="poi_monument">Mémorial monumental;monument</string>
+    <string name="poi_monument">Mémorial monumental</string>
     <string name="poi_motel">Motel</string>
     <string name="poi_motorcycle_parking">Parking pour motos;Parking moto;parking motos</string>
     <string name="poi_motorway_junction">Jonction d\'autoroutes</string>
@@ -254,7 +254,7 @@
     <string name="poi_craft_photographer">Photographe;studio photographique</string>
     <string name="poi_picnic_site">Aire de pique-nique;Terrain de pique-nique</string>
     <string name="poi_pitch">Terrain de sport;boulodrome;skatepark;fronton;city stade;terrain de jeux</string>
-    <string name="poi_place_of_worship">Lieu de culte;temple;Sanctuaire</string>
+    <string name="poi_place_of_worship">Lieu de culte;temple</string>
     <string name="poi_religion_christian">Christianisme;église;chapelle;eglise;paroisse;abbatiale;basilique;collégiale;église fortifiée</string>
     <string name="poi_religion_jewish">Judaïsme</string>
     <string name="poi_religion_muslim">Islam;mosquee</string>
@@ -280,7 +280,7 @@
     <string name="poi_reef">Récif</string>
     <string name="poi_research">Centre de recherche</string>
     <string name="poi_resort">Station touristique;Complexe touristique</string>
-    <string name="poi_restaurant">Restaurant;resto;crêperie;garbadrome;trattoria;bouchon;garba;hotely;braisé</string>
+    <string name="poi_restaurant">Restaurant;resto;garbadrome;garba;hotely</string>
     <string name="poi_ridge">Crête</string>
     <string name="poi_river">Rivière;fleuve</string>
     <string name="poi_historic_ruins">Ruines historiques</string>
@@ -525,7 +525,7 @@
     <string name="poi_trade">Grossiste</string>
     <string name="poi_window_blind">Magasin de persiennes</string>
     <string name="poi_atv">Magasin de quads</string>
-    <string name="poi_sewing">Magasin de couture;Couture</string>
+    <string name="poi_sewing">Magasin de couture</string>
     <string name="poi_fire_flapper">Pelle à feu</string>
     <string name="poi_fire_water_pond">Bassin d\'eau pour incendie</string>
     <string name="poi_toll_booth">Barrière de péage</string>
@@ -624,7 +624,7 @@
     <string name="poi_military_landuse">Zone militaire</string>
     <string name="poi_wine">Caviste</string>
     <string name="poi_public_transport_stop_position">Arrêt de transports en commun</string>
-    <string name="poi_halt">Arrêt de chemin de fer;Arrêt de train;Gare de chemin de fer;Gare ferroviaire;Gare;Station</string>
+    <string name="poi_halt">Arrêt de chemin de fer;Arrêt de train;Gare de chemin de fer;Gare ferroviaire</string>
     <string name="poi_lodging">Hébergement</string>
     <string name="poi_apartment">Meublé de tourisme;Appart\'hôtel</string>
     <string name="poi_internet_access_wlan">Accès Internet : sans-fil</string>
@@ -5155,7 +5155,7 @@
     <string name="poi_route_activity_type_skiing">Itinéraires de ski</string>
     <string name="poi_sample_collection_filter">Échantillonnage</string>
     <string name="x">X (anciennement Twitter)</string>
-    <string name="poi_sample_collection">Prélèvement d\'échantillon;Sang;Laboratoire;Test</string>
+    <string name="poi_sample_collection">Prélèvement d\'échantillon;Sang;Test</string>
     <string name="poi_sample_collection_yes">Oui</string>
     <string name="poi_sample_collection_covid19">COVID19</string>
     <string name="poi_sample_collection_blood">Sang</string>

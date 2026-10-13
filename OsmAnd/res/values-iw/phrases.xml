@@ -1318,7 +1318,7 @@
     <string name="poi_geyser">גייזר</string>
     <string name="poi_cemetery">בית עלמין</string>
     <string name="poi_grave_yard">בית קברות</string>
-    <string name="poi_tomb">מצבה;קבר</string>
+    <string name="poi_tomb">מצבה</string>
     <string name="poi_shelter">מקלט</string>
     <string name="poi_funicular">פוניקולר</string>
     <string name="poi_hanami">הנאמי</string>
@@ -1736,13 +1736,13 @@
     <string name="poi_toboggan">מזחלות שלג</string>
     <string name="poi_volleyball">כדורעף</string>
     <string name="poi_museum">מוזיאון</string>
-    <string name="poi_memorial">אתר הנצחה;פסל</string>
+    <string name="poi_memorial">אתר הנצחה</string>
     <string name="poi_artwork">מיצג אומנותי</string>
     <string name="poi_archaeological_site">אתר ארכיאולוגי</string>
     <string name="poi_battlefield">שדה קרב</string>
     <string name="poi_boundary_stone">אבן גבול</string>
     <string name="poi_historic_cannon">תותח היסטורי;תותח</string>
-    <string name="poi_castle">טירה;מבצר</string>
+    <string name="poi_castle">טירה</string>
     <string name="poi_city_gate">שער עיר;שער העיר</string>
     <string name="poi_fort">מבצר</string>
     <string name="poi_fountain">מזרקה</string>

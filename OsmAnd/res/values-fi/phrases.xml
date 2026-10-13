@@ -652,13 +652,13 @@
     <string name="poi_swimming_pool">Uima-allas</string>
     <string name="poi_park">Puisto</string>
     <string name="poi_cafe">Kahvila</string>
-    <string name="poi_restaurant">Ravintola;pizzeria;lounasravintola</string>
+    <string name="poi_restaurant">Ravintola;lounasravintola</string>
     <string name="poi_aerialway_bicycle">Polkupyöräkuljetus</string>
     <string name="poi_beach_surface_type">Pinta</string>
     <string name="poi_picnic_table">Piknik-pöytä</string>
     <string name="poi_playground">Leikkikenttä;leikkipaikka;leikkipuisto</string>
     <string name="poi_bench">Penkki</string>
-    <string name="poi_fast_food">Pikaruoka;pizzeria;grilli</string>
+    <string name="poi_fast_food">Pikaruoka;grilli</string>
     <string name="poi_bar">Baari</string>
     <string name="poi_drinking_water">Juomavesi;vesiposti</string>
     <string name="poi_toilets">WC-tilat;käymälä;WC</string>

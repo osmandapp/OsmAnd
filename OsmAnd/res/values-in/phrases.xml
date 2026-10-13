@@ -51,8 +51,8 @@
     <string name="poi_fishing">Alat pancing;Toko Memancing</string>
     <string name="poi_drinking_water">Air minum</string>
     <string name="poi_fast_food">Makanan cepat saji;Cepat saji</string>
-    <string name="poi_restaurant">Restoran;warung;makan;RM;bakso;nasi;kedai;sate;resto;pecel;bakmi;warteg;minang;pempek;geprek;waroeng</string>
-    <string name="poi_cafe">Kafe;warkop;kedai;angkringan</string>
+    <string name="poi_restaurant">Restoran;warung;makan;RM;resto;warteg;waroeng</string>
+    <string name="poi_cafe">Kafe;warkop</string>
     <string name="poi_park">Taman</string>
     <string name="poi_water_park">Taman air</string>
     <string name="poi_swimming_pool">Kolam renang;renang</string>
@@ -190,9 +190,9 @@
     <string name="poi_nursing_home">Panti jompo</string>
     <string name="poi_dentist">Dokter gigi;gigi</string>
     <string name="poi_first_aid">Pertolongan pertama</string>
-    <string name="poi_clinic">Klinik;Puskesmas;posyandu;pustu;poskesdes;polindes;bersalin;poliklinik</string>
+    <string name="poi_clinic">Klinik;Puskesmas;posyandu;pustu;poskesdes;polindes;poliklinik</string>
     <string name="poi_doctors">Dokter;Praktik dokter</string>
-    <string name="poi_hospital">Rumah sakit;RS;bersalin</string>
+    <string name="poi_hospital">Rumah sakit;RS</string>
     <string name="poi_pharmacy">Apotek;apotik</string>
     <string name="poi_place_farm">Pertanian</string>
     <string name="poi_neighbourhood">Lingkungan</string>
@@ -1336,7 +1336,7 @@
     <string name="poi_marketplace">Pasar</string>
     <string name="poi_fuel_lpg">LPG</string>
     <string name="poi_public_transport_stop_position">Posisi berhenti transportasi umum</string>
-    <string name="poi_pitch">Lapangan;GOR;Lapangan olahraga</string>
+    <string name="poi_pitch">Lapangan;Lapangan olahraga</string>
     <string name="poi_faculty_filter">Fakultas</string>
     <string name="poi_microbrewery">Tempat pembuatan bir mikro</string>
     <string name="poi_fuel_avia_type">Jenis bahan bakar (avia)</string>
@@ -1660,7 +1660,7 @@
     <string name="poi_denomination_church_of_england">Gereja Inggris</string>
     <string name="poi_wayside_shrine">Kuil pinggir jalan</string>
     <string name="poi_club_shooting">Klub menembak</string>
-    <string name="poi_food_court">Pujasera;kuliner</string>
+    <string name="poi_food_court">Pujasera</string>
     <string name="poi_craft_glaziery">Kerajinan kaca</string>
     <string name="poi_craft_sculptor">Pemahat</string>
     <string name="poi_socket_type2_cable_output_filter">Keluaran penghubung kabel tipe 2</string>

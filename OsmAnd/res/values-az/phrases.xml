@@ -112,7 +112,7 @@
     <string name="poi_ticket">Bilet satışları</string>
     <string name="poi_video">Video mağazası</string>
     <string name="poi_electronics">Elektronika mağazası</string>
-    <string name="poi_car_parts">Avtomobil hissələri;avtohissələr;avto</string>
+    <string name="poi_car_parts">Avtomobil hissələri;avtohissələr</string>
     <string name="poi_cosmetics">Kosmetika</string>
     <string name="poi_perfumery">Ətir mağazası</string>
     <string name="poi_honey">Bal mağazası</string>
@@ -143,7 +143,7 @@
     <string name="poi_stadium">Stadion</string>
     <string name="poi_sports_centre">İdman mərkəzi</string>
     <string name="poi_golf">Qolf</string>
-    <string name="poi_cafe">Kafe;çayxana;dönər</string>
+    <string name="poi_cafe">Kafe;çayxana</string>
     <string name="poi_internet_cafe">İnternet kafe</string>
     <string name="poi_operational_status_open">Açıq</string>
     <string name="poi_operational_status_closed">Bağlı</string>

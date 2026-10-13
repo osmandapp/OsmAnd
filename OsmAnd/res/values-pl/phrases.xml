@@ -341,7 +341,7 @@
     <string name="poi_swimming_pool">Basen;pływalnia</string>
     <string name="poi_water_park">Park wodny</string>
     <string name="poi_park">Park;skwer</string>
-    <string name="poi_restaurant">Restauracja;pizzeria;karczma;smażalnia;pierogarnia;mleczny;gospoda;tawerna</string>
+    <string name="poi_restaurant">Restauracja;karczma;mleczny;gospoda</string>
     <string name="poi_bar">Drink-bar</string>
     <string name="poi_pub">Pub</string>
     <string name="poi_drinking_water">Woda pitna</string>
@@ -619,7 +619,7 @@
     <string name="poi_glacier">Lodowiec</string>
     <string name="poi_recreation_ground">Teren rekreacyjny</string>
     <string name="poi_cafe">Kawiarnia</string>
-    <string name="poi_fast_food">Bar szybkiej obsługi;smażalnia;pierogarnia;mleczny;Fast food;restauracja szybkiej obsługi</string>
+    <string name="poi_fast_food">Bar szybkiej obsługi;mleczny;Fast food;restauracja szybkiej obsługi</string>
     <string name="poi_craft_handicraft">Rzemiosło</string>
     <string name="poi_paddle_tennis">Tenis wiosłowy (paddle tennis)</string>
     <string name="poi_observation_tower">Wieża widokowa</string>
@@ -668,7 +668,7 @@
     <string name="poi_transport_construction">Roboty drogowe</string>
     <string name="poi_base">Skoki spadochronowe</string>
     <string name="poi_ice_stock">Curling bawarski</string>
-    <string name="poi_artwork">Dzieło sztuki;mural;Rzeźba</string>
+    <string name="poi_artwork">Dzieło sztuki</string>
     <string name="poi_attraction_amusement_ride">Karuzela</string>
     <string name="poi_attraction_animal">Zwierzę (atrakcja)</string>
     <string name="poi_attraction_swing_carousel">Bujana karuzela</string>

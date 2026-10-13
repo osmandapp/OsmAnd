@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="poi_bakery">Булочная;выпечка</string>
+    <string name="poi_bakery">Булочная</string>
     <string name="poi_alcohol">Винно-водочный магазин;Алкоголь;винотека;алкомаркет;винный;алко;вино-водочный;магазин алкоголя</string>
     <string name="poi_convenience">Продукты;гастроном;продуктовый;продуктовый магазин;мини-маркет</string>
     <string name="poi_mall">Торговый центр;ТРЦ;ТРК;молл;торговый комплекс;развлекательный центр</string>
@@ -9,7 +9,7 @@
     <string name="poi_deli">Деликатесы;магазин деликатесов</string>
     <string name="poi_greengrocer">Овощи и фрукты;овощи</string>
     <string name="poi_seafood">Морепродукты;рыбный;рыбная лавка;рыбный магазин</string>
-    <string name="poi_confectionery">Кондитерский магазин;кондитерская;конфеты</string>
+    <string name="poi_confectionery">Кондитерский магазин;конфеты</string>
     <string name="poi_ice_cream">Магазин мороженого</string>
     <string name="poi_supermarket">Супермаркет;Универсам;гипер</string>
     <string name="poi_tea">Чайный магазин</string>
@@ -55,11 +55,11 @@
     <string name="poi_shop_yes">Магазин</string>
     <string name="poi_gift">Подарки, сувениры;сувениры;подарки;магазин сувениров</string>
     <string name="poi_glaziery">Окна, стёкла</string>
-    <string name="poi_hardware">Скобяные изделия и инструмент;хозяйственный;строительный;крепёж;крепеж;строительный магазин;хозяйственный магазин</string>
+    <string name="poi_hardware">Скобяные изделия и инструмент;хозяйственный;строительный;строительный магазин;хозяйственный магазин</string>
     <string name="poi_hearing_aids">Слуховые аппараты</string>
     <string name="poi_herbalist">Травы (народная медицина);магазин трав</string>
     <string name="poi_hifi">Hi-Fi аппаратура</string>
-    <string name="poi_houseware">Хозяйственные товары;Хозтовары;посуда;бытовые товары</string>
+    <string name="poi_houseware">Хозяйственные товары;Хозтовары;бытовые товары</string>
     <string name="poi_hunting">Охотничий магазин</string>
     <string name="poi_interior_decoration">Декор и оформление</string>
     <string name="poi_jewelry">Ювелирный магазин;Ювелирный салон;ювелир;ювелирный</string>
@@ -110,7 +110,7 @@
     <string name="poi_swimming_pool_shop">Оборудование и аксессуары для плавательных бассейнов</string>
     <string name="poi_tyres">Шины;Шина;Шина;Магазин шин;Шины</string>
     <string name="poi_video_games">Магазин видеоигр;Видеоигры;компьютерные игры</string>
-    <string name="poi_watches">Магазин часов;Часы</string>
+    <string name="poi_watches">Магазин часов</string>
     <string name="poi_police">Отделение полиции;Полиция</string>
     <string name="poi_fire_station">Пожарная часть;пожарная;пожарная станция</string>
     <string name="poi_emergency_phone">Экстренный телефон;телефон для экстренных вызовов</string>
@@ -130,7 +130,7 @@
     <string name="poi_city_wall">Городская стена</string>
     <string name="poi_lift_gate">Шлагбаум</string>
     <string name="poi_toll_booth">Пункт оплаты проезда</string>
-    <string name="poi_border_control">Пограничный контроль;КПП</string>
+    <string name="poi_border_control">Пограничный контроль</string>
     <string name="poi_traffic_calming_bump">Искусственная дорожная неровность</string>
     <string name="poi_traffic_calming_hump">Искусственная неровность «лежачий полицейский»</string>
     <string name="poi_traffic_calming_cushion">Искусственная неровность «берлинская подушка»</string>
@@ -306,7 +306,7 @@
     <string name="poi_cricket_nets">Сетка для крикета</string>
     <string name="poi_driving_school">Автошкола;курсы вождения</string>
     <string name="poi_school">Школа;гимназия;лицей;прогимназия</string>
-    <string name="poi_kindergarten">Детский сад;детсад;ясли;прогимназия;садик</string>
+    <string name="poi_kindergarten">Детский сад;детсад;ясли;садик</string>
     <string name="poi_college">Колледж;техникум;училище</string>
     <string name="poi_university">Университет;институт</string>
     <string name="poi_social_facility">Социальное учреждение</string>
@@ -323,8 +323,8 @@
     <string name="poi_customs">Таможенный пункт;Таможня</string>
     <string name="poi_pharmacy">Аптека;госаптека</string>
     <string name="poi_hospital">Больница;диспансер;госпиталь</string>
-    <string name="poi_doctors">Врач;Доктор;МРТ</string>
-    <string name="poi_clinic">Поликлиника;Клиника;диспансер;МРТ;медицинский центр</string>
+    <string name="poi_doctors">Врач</string>
+    <string name="poi_clinic">Поликлиника;Клиника;диспансер;медицинский центр</string>
     <string name="poi_first_aid">Первая помощь</string>
     <string name="poi_dentist">Стоматология;Лечение зубов;Зубной врач;стоматолог;дантист</string>
     <string name="poi_nursing_home">Дом престарелых</string>
@@ -371,7 +371,7 @@
     <string name="poi_sports_centre">Спортивный центр;Спортцентр;спорткомплекс;спортивный комплекс;дворец спорта</string>
     <string name="poi_golf_course">Поле для гольфа;площадка для гольфа</string>
     <string name="poi_ice_rink">Каток</string>
-    <string name="poi_pitch">Спортивная площадка, поле, корт;Спортплощадка;коробка;спортивная площадка</string>
+    <string name="poi_pitch">Спортивная площадка, поле, корт;Спортплощадка;спортивная площадка</string>
     <string name="poi_running_track">Беговая дорожка</string>
     <string name="poi_bicycle_track">Велотрек</string>
     <string name="poi_horse_track">Ипподром</string>
@@ -429,7 +429,7 @@
     <string name="poi_museum">Музей;выставочный зал</string>
     <string name="poi_attraction">Достопримечательность</string>
     <string name="poi_memorial">Памятник, мемориал;памятник;мемориал</string>
-    <string name="poi_artwork">Произведение искусства;скульптура</string>
+    <string name="poi_artwork">Произведение искусства</string>
     <string name="poi_archaeological_site">Археологические раскопки;городище;археологический памятник</string>
     <string name="poi_battlefield">Поле битвы;поле боя</string>
     <string name="poi_boundary_stone">Межевой камень;пограничный камень</string>
@@ -503,7 +503,7 @@
     <string name="poi_club_charity">Благотворительный клуб</string>
     <string name="poi_library">Библиотека</string>
     <string name="poi_arts_centre">Центр искусств</string>
-    <string name="poi_cinema">Кинотеатр;кино</string>
+    <string name="poi_cinema">Кинотеатр</string>
     <string name="poi_casino">Казино</string>
     <string name="poi_community_centre">Общественный центр;дом культуры;культурно-досуговый центр</string>
     <string name="poi_social_centre">Социальный центр, общество, клуб</string>
@@ -522,10 +522,10 @@
     <string name="poi_swimming_pool">Бассейн;плавательный бассейн</string>
     <string name="poi_water_park">Аквапарк</string>
     <string name="poi_park">Парк;сквер</string>
-    <string name="poi_cafe">Кафе;чайхана;хинкальная;хинкали;пельменная;чайхона;пиццерия;чебуречная;хачапури;трапезная;плов;блинная</string>
+    <string name="poi_cafe">Кафе;чайхана;чайхона</string>
     <string name="poi_biergarten">Летнее кафе</string>
-    <string name="poi_restaurant">Ресторан;хинкальная;хинкали;чайхона;пиццерия;хачапури</string>
-    <string name="poi_fast_food">Фастфуд (быстрое питание);шаверма;донер;пиццерия;чебуречная;чебуреки;блинная;быстрое питание</string>
+    <string name="poi_restaurant">Ресторан;чайхона</string>
+    <string name="poi_fast_food">Фастфуд (быстрое питание);быстрое питание</string>
     <string name="poi_bar">Бар;коктейль бар;пивной ресторан</string>
     <string name="poi_pub">Паб</string>
     <string name="poi_food_court">Ресторанный дворик;Фуд-корт</string>
@@ -726,7 +726,7 @@
     <string name="poi_military_landuse">Военная зона</string>
     <string name="poi_entertainment">Досуг</string>
     <string name="poi_wine">Винный магазин</string>
-    <string name="poi_halt">Железнодорожная остановка;ЖД остановка;Железнодорожная станция;ЖД станция;Остановка поезда;Полустанок;Перон;Станция;Платформа</string>
+    <string name="poi_halt">Железнодорожная остановка;ЖД остановка;Железнодорожная станция;ЖД станция;Остановка поезда;Полустанок;Перон</string>
     <string name="poi_emergency">Экстренные службы</string>
     <string name="poi_transportation">Транспорт</string>
     <string name="poi_healthcare">Здоровье</string>

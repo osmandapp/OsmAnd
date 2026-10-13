@@ -224,7 +224,7 @@
     <string name="poi_free_flying">Крамниця для стрибків з парашутом</string>
     <string name="poi_garden_furniture">Крамниця садових меблів</string>
     <string name="poi_fuel_biogas">Біогаз</string>
-    <string name="poi_halt">Залізнична зупинка;Зупинка поїзда; Залізнична станція;Залізничний вокзал;Станція</string>
+    <string name="poi_halt">Залізнична зупинка;Зупинка поїзда; Залізнична станція;Залізничний вокзал</string>
     <string name="poi_subway_entrance">Вхід в метро</string>
     <string name="poi_subway_station">Так;Станція метро</string>
     <string name="poi_taxi">Стоянка таксі</string>
@@ -509,8 +509,8 @@
     <string name="poi_beauty">Салон краси</string>
     <string name="poi_craft_shoemaker">Швець</string>
     <string name="poi_cuisine_tea_shop">Чай</string>
-    <string name="poi_cafe">Кафе;піцерія</string>
-    <string name="poi_fast_food">Швидке харчування;піцерія</string>
+    <string name="poi_cafe">Кафе</string>
+    <string name="poi_fast_food">Швидке харчування</string>
     <string name="poi_cuisine_fast_food">Швидке харчування</string>
     <string name="poi_cuisine_bakery">Пекарня</string>
     <string name="poi_fuel_type">Вид палива</string>
@@ -655,7 +655,7 @@
     <string name="poi_skating">Катання на роликах (ковзанах)</string>
     <string name="poi_skiing">Лижний спорт</string>
     <string name="poi_toboggan">Тобогган</string>
-    <string name="poi_artwork">Твір мистецтва;мурал;скульптура;витвір мистецтва</string>
+    <string name="poi_artwork">Твір мистецтва;витвір мистецтва</string>
     <string name="poi_archaeological_site">Археологічні розкопки;городище;пам\'ятка археології</string>
     <string name="poi_battlefield">Поле битви</string>
     <string name="poi_boundary_stone">Межовий камінь;прикордонний камінь</string>
@@ -879,7 +879,7 @@
     <string name="poi_village_green">Громадська територія</string>
     <string name="poi_trail_riding_station">Місце для ночівлі наїзників і коней</string>
     <string name="poi_biergarten">Літнє кафе</string>
-    <string name="poi_restaurant">Ресторан;піцерія</string>
+    <string name="poi_restaurant">Ресторан</string>
     <string name="poi_bar">Бар</string>
     <string name="poi_pub">Паб</string>
     <string name="poi_food_court">Ресторанний дворик</string>

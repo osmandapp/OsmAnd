@@ -714,7 +714,7 @@
     <string name="poi_lean_to">Υπόστεγο;Στέγαστρο;Καταφύγιο</string>
     <string name="poi_hunting_lodge">Κυνηγετικό καταφύγιο;Καταφύγιο</string>
     <string name="poi_place_of_worship">Τόπος λατρείας;ναός;Χώρος λατρείας</string>
-    <string name="poi_religion_christian">Χριστιανισμός;ναός;μονή;Εκκλησία;εκκλησάκι;παρεκκλήσι;εξωκλήσι;παρεκκλήσιο</string>
+    <string name="poi_religion_christian">Χριστιανισμός;ναός;Εκκλησία;εκκλησάκι;παρεκκλήσι;εξωκλήσι;παρεκκλήσιο</string>
     <string name="poi_religion_jewish">Ιουδαϊσμός</string>
     <string name="poi_religion_muslim">Ισλάμ</string>
     <string name="poi_religion_sikh">Σιχισμός</string>
@@ -889,10 +889,10 @@
     <string name="poi_recreation_ground">Χώρος αναψυχής</string>
     <string name="poi_village_green">Πράσινο του χωριού</string>
     <string name="poi_trail_riding_station">Σταθμός ιππικού μονοπατιού</string>
-    <string name="poi_cafe">Κυλικείο;μπουγάτσα</string>
+    <string name="poi_cafe">Κυλικείο</string>
     <string name="poi_biergarten">Υπαίθρια μπιραρία</string>
-    <string name="poi_restaurant">Εστιατόριο;ταβέρνα;ουζερί</string>
-    <string name="poi_fast_food">Ταχυφαγείο;μπουγάτσα;φαγητό για το σπίτι</string>
+    <string name="poi_restaurant">Εστιατόριο;ταβέρνα</string>
+    <string name="poi_fast_food">Ταχυφαγείο;φαγητό για το σπίτι</string>
     <string name="poi_bar">Μπαρ</string>
     <string name="poi_pub">Παμπ</string>
     <string name="poi_food_court">Χώρος εστίασης</string>

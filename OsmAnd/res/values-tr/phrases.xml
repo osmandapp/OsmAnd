@@ -65,7 +65,7 @@
     <string name="poi_dairy">Sütçü dükkanı</string>
     <string name="poi_vending_machine">Satış makinesi</string>
     <string name="poi_wine">Şarap dükkanı</string>
-    <string name="poi_books">Kitabevi;kitap;kitap mağazası</string>
+    <string name="poi_books">Kitabevi;kitap mağazası</string>
     <string name="poi_bicycle">Bisiklet dükkanı;Bisiklet;bisiklet tamircisi</string>
     <string name="poi_anime">Anime dükkanı</string>
     <string name="poi_antiques">Antika mağazası</string>
@@ -129,7 +129,7 @@
     <string name="poi_scuba_diving_shop">Tüplü dalış ürünleri mağazası</string>
     <string name="poi_ship_chandler">Gemi bakkalı</string>
     <string name="poi_sports">Spor ürünleri</string>
-    <string name="poi_stationery">Kırtasiye dükkanı;kırtasiye;kitap;Kırtasiye Mağazası</string>
+    <string name="poi_stationery">Kırtasiye dükkanı;kırtasiye;Kırtasiye Mağazası</string>
     <string name="poi_ticket">Bilet satış</string>
     <string name="poi_tobacco">Tütün mağazası;Tütüncü</string>
     <string name="poi_toys">Oyuncak dükkanı;Oyuncak Mağazası</string>
@@ -742,9 +742,9 @@
     <string name="poi_recreation_ground">Rekreasyon alanı</string>
     <string name="poi_village_green">Yeşil köy</string>
     <string name="poi_trail_riding_station">İz sürme istasyonu</string>
-    <string name="poi_cafe">Kafe;Cafe;kıraathanesi;kahvesi;lounge;künefe</string>
+    <string name="poi_cafe">Kafe;Cafe;kıraathanesi;kahvesi</string>
     <string name="poi_biergarten">Bahçeli birahane</string>
-    <string name="poi_restaurant">Restoran;restaurant;pide;lokantası;köfte;lahmacun;kokoreç;tantuni;ocakbaşı;dürüm;lounge;köftecisi;dönerci;ciğerci;künefe;dürümcü</string>
+    <string name="poi_restaurant">Restoran;restaurant;lokantası</string>
     <string name="poi_bar">Bar</string>
     <string name="poi_pub">Birahane</string>
     <string name="poi_barbecue">Mangal</string>
@@ -1095,7 +1095,7 @@
     <string name="poi_denomination_serbian_orthodox">Sırp Ortodoks</string>
     <string name="poi_spring">Kaynak</string>
     <string name="poi_casino">Kumarhane</string>
-    <string name="poi_fast_food">Fast food;çiğköfte;kokoreç;tantuni;dürüm;dönerci;çiğköfteci;dürümcü;gözleme;pilav</string>
+    <string name="poi_fast_food">Fast food</string>
     <string name="poi_drinking_water">İçme suyu;hayratı</string>
     <string name="poi_craft_basket_maker">Sepet yapıcı</string>
     <string name="poi_craft_beekeeper">Arıcı</string>
@@ -3246,7 +3246,7 @@
     <string name="poi_picnic_table_no">Piknik masası: hayır</string>
     <string name="poi_picnic_table_yes">Piknik masası: evet</string>
     <string name="poi_fuel_propane">Propan</string>
-    <string name="poi_office_diplomatic">Diplomatik ofis;konsolosluğu;büyükelçiliği;başkonsolosluk</string>
+    <string name="poi_office_diplomatic">Diplomatik ofis;konsolosluğu;büyükelçiliği</string>
     <string name="poi_cockfighting">Horoz dövüşü</string>
     <string name="poi_bullfighting">Boğa güreşi</string>
     <string name="poi_water_ski">Su kayağı</string>

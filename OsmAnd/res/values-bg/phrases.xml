@@ -335,8 +335,8 @@
     <string name="poi_aquarium">Аквариум</string>
     <string name="poi_theme_park">Тематичен парк;увеселителен парк</string>
     <string name="poi_attraction">Туристическа атракция</string>
-    <string name="poi_hotel">Хотел;вила</string>
-    <string name="poi_guest_house">Къща за гости;вила</string>
+    <string name="poi_hotel">Хотел</string>
+    <string name="poi_guest_house">Къща за гости</string>
     <string name="poi_hostel">Хостел</string>
     <string name="poi_motel">Мотел</string>
     <string name="poi_alpine_hut">Планинска хижа;Заслон;Укритие;хижа;туристическа хижа</string>
@@ -796,7 +796,7 @@
     <string name="poi_religion_jewish">Синагога</string>
     <string name="poi_religion_muslim">Джамия</string>
     <string name="poi_resort">Курорт</string>
-    <string name="poi_restaurant">Ресторант;механа;скара</string>
+    <string name="poi_restaurant">Ресторант;механа</string>
     <string name="poi_shop_wholesale">Магазин на едро</string>
     <string name="poi_sports_hall">Спортна зала</string>
     <string name="poi_spring">Извор</string>

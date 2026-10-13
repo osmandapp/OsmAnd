@@ -57,7 +57,7 @@
     <string name="poi_greengrocer">Loja de frutas e verduras;sacolão;hortifruti;frutaria</string>
     <string name="poi_seafood">Peixaria</string>
     <string name="poi_confectionery">Confeitaria;loja de doces</string>
-    <string name="poi_ice_cream">Gelataria;açaí</string>
+    <string name="poi_ice_cream">Gelataria</string>
     <string name="poi_supermarket">Hiper / supermercado;Supermercado;mercadinho;atacarejo;Hipermercado</string>
     <string name="poi_tea">Loja de chás</string>
     <string name="poi_pasta">Loja de massas alimentares</string>
@@ -364,7 +364,7 @@
     <string name="poi_bus_station">Estação rodoviária;rodoviária;Terminal Rodoviário</string>
     <string name="poi_railway_station">Estação ferroviária; Estação de comboios, Estação de caminhos de ferro;Estação de comboios;estação de trem</string>
     <string name="poi_railway_platform">Plataforma ferroviária;Plataforma de comboios;Plataforma de caminho de ferro;Plataforma de estação;Plataforma de apeadeiro</string>
-    <string name="poi_halt">Apeadeiro ferroviário;Apeadeiro de caminho de ferro;Apeadeiro de comboio;Apeadeiro;Estação ferroviária;Estação de caminhos de ferro;Estação rodoviária;Rodoviária;Estação de autocarros;Estação;parada ferroviária</string>
+    <string name="poi_halt">Apeadeiro ferroviário;Apeadeiro de caminho de ferro;Apeadeiro de comboio;Apeadeiro;Estação ferroviária;Estação de caminhos de ferro;Estação rodoviária;Estação de autocarros;parada ferroviária</string>
     <string name="poi_subway_entrance">Entrada de metropolitano</string>
     <string name="poi_subway_station">Sim;Estação de metropolitano</string>
     <string name="poi_railway_buffer_stop">Pára-choques de via férrea</string>
@@ -569,10 +569,10 @@
     <string name="poi_place_farm">Quinta / fazenda;Quinta;fazenda</string>
     <string name="poi_pharmacy">Farmácia;farmácias;drogarias</string>
     <string name="poi_hospital">Hospital</string>
-    <string name="poi_doctors">Consultório médico;consultório;Gabinete médico</string>
+    <string name="poi_doctors">Consultório médico;Gabinete médico</string>
     <string name="poi_clinic">Clínica / centro de saúde / USF;policlínica;Clínica;centro de saúde;posto médico;unidade de saúde familiar</string>
     <string name="poi_first_aid">Primeiros socorros</string>
-    <string name="poi_dentist">Dentista;odonto;consultório</string>
+    <string name="poi_dentist">Dentista;odonto</string>
     <string name="poi_nursing_home">Clínica geriátrica</string>
     <string name="poi_baby_hatch">Roda dos expostos</string>
     <string name="poi_veterinary">Veterinário/a;Veterinário</string>
@@ -614,10 +614,10 @@
     <string name="poi_foundation">Fundação</string>
     <string name="poi_tax_advisor">Conselheiro fiscal</string>
     <string name="poi_stadium">Estádio</string>
-    <string name="poi_sports_centre">Complexo desportivo;ginásio;Centro desportivo</string>
+    <string name="poi_sports_centre">Complexo desportivo;Centro desportivo</string>
     <string name="poi_golf_course">Campo de golfe</string>
     <string name="poi_ice_rink">Pista de patinagem no gelo</string>
-    <string name="poi_pitch">Campo desportivo;campo;quadra;campinho;areninha;polidesportivo;Campo de desporto</string>
+    <string name="poi_pitch">Campo desportivo;quadra;campinho;areninha;polidesportivo;Campo de desporto</string>
     <string name="poi_leisure_track">Pista de desportos;pista de corrida</string>
     <string name="poi_running_track">Pista de atletismo</string>
     <string name="poi_bicycle_track">Pista de ciclismo</string>
@@ -682,7 +682,7 @@
     <string name="poi_volleyball">Voleibol</string>
     <string name="poi_museum">Museu</string>
     <string name="poi_memorial">Memorial</string>
-    <string name="poi_artwork">Obra de arte;mural</string>
+    <string name="poi_artwork">Obra de arte</string>
     <string name="poi_archaeological_site">Sítio arqueológico</string>
     <string name="poi_battlefield">Campo de batalha histórico;Campo de batalha</string>
     <string name="poi_boundary_stone">Marco de fronteira;Marco fronteiriço</string>
@@ -726,7 +726,7 @@
     <string name="poi_lean_to">Galpão;Abrigo</string>
     <string name="poi_hunting_lodge">Cabana de caça;Abrigo</string>
     <string name="poi_place_of_worship">Local de culto; Igreja; Capela; Capelinha;templo</string>
-    <string name="poi_religion_christian">Cristã;paróquia;santuário;catedral;ermida;espírita;basílica</string>
+    <string name="poi_religion_christian">Cristã;paróquia;santuário;catedral;ermida;basílica</string>
     <string name="poi_religion_jewish">Judaica</string>
     <string name="poi_religion_muslim">Islâmica</string>
     <string name="poi_religion_sikh">Siquista</string>
@@ -738,7 +738,7 @@
     <string name="poi_religion_unitarian_universalist">Unitário-universalista</string>
     <string name="poi_religion_multifaith">Multirreligiosa</string>
     <string name="poi_religion_jain">Jainista</string>
-    <string name="poi_religion_spiritualist">Espiritualista;espírita</string>
+    <string name="poi_religion_spiritualist">Espiritualista</string>
     <string name="poi_religion_bahai">Bahaísta</string>
     <string name="poi_religion_scientologist">Cientologista</string>
     <string name="poi_religion_pagan">Paganista</string>
@@ -902,8 +902,8 @@
     <string name="poi_village_green">Village green (GB)</string>
     <string name="poi_cafe">Café;cafeteria</string>
     <string name="poi_biergarten">Jardim da cerveja (biergarten)</string>
-    <string name="poi_restaurant">Restaurante;pizzaria;churrascaria;buffet;espetinho;choperia;galeteria;marmitaria</string>
-    <string name="poi_fast_food">Comida rápida;lanches;lanche;lancheria;hamburgueria;espetinho;açaí;hamburgaria;pronto-a-comer</string>
+    <string name="poi_restaurant">Restaurante;choperia</string>
+    <string name="poi_fast_food">Comida rápida;lanches;lanche;lancheria;pronto-a-comer</string>
     <string name="poi_bar">Bar</string>
     <string name="poi_pub">Taberna / pub / tasca;choperia</string>
     <string name="poi_food_court">Praça de alimentação</string>
@@ -916,7 +916,7 @@
     <string name="poi_craft_brewery">Cervejeiro;cervejaria artesanal</string>
     <string name="poi_craft_boatbuilder">Estaleiro</string>
     <string name="poi_craft_bookbinder">Encadernador</string>
-    <string name="poi_craft_carpenter">Carpinteiro;marcenaria</string>
+    <string name="poi_craft_carpenter">Carpinteiro</string>
     <string name="poi_craft_carpet_layer">Colocador de carpete</string>
     <string name="poi_craft_caterer">Fornecedor de comida (catering);Serviço de catering</string>
     <string name="poi_craft_clockmaker">Relojoeiro (todo o tipo de relógios)</string>
@@ -958,7 +958,7 @@
     <string name="poi_craft_window_construction">Fabricante de janelas</string>
     <string name="poi_funeral_directors">Funerária</string>
     <string name="poi_craft_computer">Montagem de computadores</string>
-    <string name="poi_beauty">Salão de beleza;beleza;cabelos;unhas</string>
+    <string name="poi_beauty">Salão de beleza;beleza;cabelos</string>
     <string name="poi_beauty_salon_nails">Manicura</string>
     <string name="poi_hairdresser">Cabeleireiro/a;barbearia;beleza;cabeleireira;cabeleireiros;cabelos;barbershop;barbeiro</string>
     <string name="poi_massage">Salão de massagens;Centro de massagens</string>
@@ -1637,7 +1637,7 @@
     <string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
     <string name="poi_payment_yandexmoney_no">Não aceita Yandex.Money</string>
     <string name="poi_description_payment">Detalhes de pagamento</string>
-    <string name="poi_events_venue">Salão de eventos;buffet</string>
+    <string name="poi_events_venue">Salão de eventos</string>
     <string name="poi_diet_vegetarian_filter_yes">Pratos vegetarianos: sim</string>
     <string name="poi_diet_vegetarian_few">Pratos vegetarianos: alguns</string>
     <string name="poi_diet_vegetarian_only">Pratos vegetarianos: só destes pratos</string>
@@ -3422,7 +3422,7 @@
     <string name="poi_water_utility">Companhia de água</string>
     <string name="poi_amusement_arcade">Fliperama</string>
     <string name="poi_adult_gaming_centre">Centro de jogos para adultos</string>
-    <string name="poi_service_vehicle_car_repair_yes">Reparação de automóveis;Oficina;Oficina de automóveis;Oficina de reparação de automóveis</string>
+    <string name="poi_service_vehicle_car_repair_yes">Reparação de automóveis;Oficina de automóveis;Oficina de reparação de automóveis</string>
     <string name="poi_service_vehicle_oil_change_yes">Troca de óleo</string>
     <string name="poi_service_vehicle_used_car_sales_yes">Venda de carros usados</string>
     <string name="poi_service_vehicle_brakes_yes">Travões</string>
@@ -4023,7 +4023,7 @@
     <string name="poi_research_institute">Instituto de investigação</string>
     <string name="poi_hampshire_gate">Portão de arame</string>
     <string name="poi_couplings">Engates</string>
-    <string name="poi_sports_hall">Pavilhão de desportos;ginásio;Pavilhão desportivo</string>
+    <string name="poi_sports_hall">Pavilhão de desportos;Pavilhão desportivo</string>
     <string name="poi_butcher_type">Tipo de carne principal</string>
     <string name="poi_coffee_filter">Café</string>
     <string name="poi_ice_cream_filter">Gelado</string>

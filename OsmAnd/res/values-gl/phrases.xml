@@ -1387,7 +1387,7 @@
     <string name="poi_glacier_type">Tipo de glaciar</string>
     <string name="poi_checkpoint_type">Tipo de posto de control</string>
     <string name="poi_convenience">Tenda de barrio</string>
-    <string name="poi_halt">Parada de ferrocarril;Parada de tren; Estación de ferrocarril;Estación ferroviaría;Estación de tren;Estación</string>
+    <string name="poi_halt">Parada de ferrocarril;Parada de tren; Estación de ferrocarril;Estación ferroviaría;Estación de tren</string>
     <string name="poi_railway_buffer_stop">Topeira de ferrocarril;Dispositivo de atenuación de impacto</string>
     <string name="poi_food_court">Estabelecemento de comidas</string>
     <string name="poi_buoy_installation">Boia de instalación</string>

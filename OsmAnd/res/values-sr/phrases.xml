@@ -708,11 +708,11 @@
     <string name="poi_water_park">Аква парк;Akva park;Vodeni park;Водени парк</string>
     <string name="poi_park">Парк;Park</string>
     <string name="poi_recreation_ground">Терен за рекреацију</string>
-    <string name="poi_cafe">Кафић;caffe;lounge;kafana;kafe;Кафе;kafić</string>
+    <string name="poi_cafe">Кафић;caffe;kafana;kafe;Кафе;kafić</string>
     <string name="poi_biergarten">Пивска башта</string>
-    <string name="poi_restaurant">Ресторан;konoba;pizzeria;kafana;restoran</string>
+    <string name="poi_restaurant">Ресторан;konoba;kafana;restoran</string>
     <string name="poi_fast_food">Брза храна;brza hrana</string>
-    <string name="poi_bar">Бар;lounge</string>
+    <string name="poi_bar">Бар</string>
     <string name="poi_pub">Паб</string>
     <string name="poi_drinking_water">Вода за пиће;Voda za piće</string>
     <string name="poi_barbecue">Роштиљ</string>

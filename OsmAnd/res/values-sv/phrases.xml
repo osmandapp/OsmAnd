@@ -579,7 +579,7 @@
     <string name="poi_foundation">Stiftelsekontor</string>
     <string name="poi_tax_advisor">Skatterådgivning</string>
     <string name="poi_stadium">Stadium;Stadion</string>
-    <string name="poi_sports_centre">Sportcenter;idrottsplats;sporthall</string>
+    <string name="poi_sports_centre">Sportcenter;idrottsplats</string>
     <string name="poi_golf_course">Golfbana;golfklubb</string>
     <string name="poi_ice_rink">Ishall</string>
     <string name="poi_pitch">Plan;fotbollsplan;bollplan</string>
@@ -862,8 +862,8 @@
     <string name="poi_trail_riding_station">Turridningsstation</string>
     <string name="poi_cafe">Kafé;Café</string>
     <string name="poi_biergarten">Biergarten</string>
-    <string name="poi_restaurant">Restaurang;pizzeria;krog;burgers</string>
-    <string name="poi_fast_food">Snabbmat;burgers;gatukök</string>
+    <string name="poi_restaurant">Restaurang;pizzeria;krog</string>
+    <string name="poi_fast_food">Snabbmat;gatukök</string>
     <string name="poi_bar">Bar</string>
     <string name="poi_pub">Pub;krog</string>
     <string name="poi_food_court">Restaurangtorg</string>

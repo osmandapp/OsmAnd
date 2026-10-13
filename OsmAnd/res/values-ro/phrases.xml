@@ -145,12 +145,12 @@
     <string name="poi_butcher">Carmangerie;Măcelărie</string>
     <string name="poi_beverages">Magazin de băuturi</string>
     <string name="poi_mall">Mall</string>
-    <string name="poi_convenience">Magazin de cartier;magazin;minimarket;Magazin mixt</string>
+    <string name="poi_convenience">Magazin de cartier;minimarket;Magazin mixt</string>
     <string name="poi_coffee">Magazin de cafea</string>
     <string name="poi_chocolate">Magazin de ciocolată</string>
     <string name="poi_cheese">Magazin de brânzeturi</string>
     <string name="poi_alcohol">Magazine de spirtoase;Băuturi alcoolice</string>
-    <string name="poi_bakery">Brutărie;patiserie</string>
+    <string name="poi_bakery">Brutărie</string>
     <string name="poi_palaeontological_site">Sit paleontologic</string>
     <string name="poi_user_defined_other">Definit de utilizator</string>
     <string name="poi_military">Militar</string>
@@ -442,8 +442,8 @@
     <string name="poi_nursing_home">Azil de bătrâni</string>
     <string name="poi_dentist">Stomatolog;Dentist</string>
     <string name="poi_first_aid">Prim ajutor</string>
-    <string name="poi_clinic">Clinică;medical;policlinica;dispensar</string>
-    <string name="poi_doctors">Doctor;medical;dispensar;Cabinet medical</string>
+    <string name="poi_clinic">Clinică;policlinica;dispensar</string>
+    <string name="poi_doctors">Doctor;dispensar;Cabinet medical</string>
     <string name="poi_hospital">Spital;policlinica</string>
     <string name="poi_pharmacy">Farmacie;pharma</string>
     <string name="poi_place_farm">Fermă</string>
@@ -648,7 +648,7 @@
     <string name="poi_religion_hindu">Hinduism;templu hindus</string>
     <string name="poi_religion_buddhist">Budism;templu budist</string>
     <string name="poi_religion_sikh">Sihism</string>
-    <string name="poi_religion_muslim">Islam;Moschee</string>
+    <string name="poi_religion_muslim">Islam</string>
     <string name="poi_religion_jewish">Iudaism</string>
     <string name="poi_religion_christian">Creștinism;biserică;catedrală;schit</string>
     <string name="poi_place_of_worship">Lăcaș de cult;Loc de cult</string>
@@ -746,7 +746,7 @@
     <string name="poi_subway_entrance">Intrare metrou</string>
     <string name="poi_halt">Stație de cale ferată;Stație de tren;Stație de cale ferată;Stație de cale ferată;Stație de tren;Gară</string>
     <string name="poi_railway_platform">Platformă de cale ferată;Platformă de tren</string>
-    <string name="poi_railway_station">Stație de cale ferată;Stație de tren;Funicular</string>
+    <string name="poi_railway_station">Stație de cale ferată;Stație de tren</string>
     <string name="poi_bus_station">Stație de autobuz;autogară;Gara de autobuz</string>
     <string name="poi_public_transport_station">Stație de transport public</string>
     <string name="poi_tram_stop">Stație de tramvai</string>
@@ -799,7 +799,7 @@
     <string name="poi_fuel">Benzinărie;Stație de benzină;Stație de alimentare;Benzinărie</string>
     <string name="poi_car_wash">Spălătorie auto;spălătorie</string>
     <string name="poi_vehicle_inspection">Inspecție vehicul;ITP</string>
-    <string name="poi_car_repair">Service auto;vulcanizare;motors;ITP</string>
+    <string name="poi_car_repair">Service auto;vulcanizare;motors</string>
     <string name="poi_traffic_signals">Semafor</string>
     <string name="poi_traffic_calming_island">Insulă de trafic</string>
     <string name="poi_traffic_calming_choker">Guler</string>
@@ -1016,9 +1016,9 @@
     <string name="poi_drinking_water">Apă potabilă;potabilă;Apă de băut</string>
     <string name="poi_food_court">Zonă restaurante</string>
     <string name="poi_pub">Pub</string>
-    <string name="poi_bar">Bar;terasa</string>
+    <string name="poi_bar">Bar</string>
     <string name="poi_fast_food">Fast food;shaorma</string>
-    <string name="poi_restaurant">Restaurant;terasa;pizzeria;trattoria;taverna</string>
+    <string name="poi_restaurant">Restaurant</string>
     <string name="poi_biergarten">Berărie</string>
     <string name="poi_cafe">Cafenea;caffe</string>
     <string name="poi_trail_riding_station">Stație de echitație Trail</string>
@@ -3550,7 +3550,7 @@
     <string name="poi_via_ferrata">Via ferrata</string>
     <string name="poi_climbing_adventure">Aventură de cățărare</string>
     <string name="poi_aerialway_zip_line">Tiroliană</string>
-    <string name="poi_service_vehicle_tyres_yes">Anvelope;Anvelopă;Vulcanizare</string>
+    <string name="poi_service_vehicle_tyres_yes">Anvelope;Anvelopă</string>
     <string name="poi_service_vehicle_insurance_yes">Asigurări</string>
     <string name="poi_service_vehicle_motor_yes">Motorul</string>
     <string name="poi_service_vehicle_transmission_repair_yes">Reparare transmisii</string>

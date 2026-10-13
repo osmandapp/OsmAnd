@@ -433,7 +433,7 @@
     <string name="poi_park">공원;어린이공원;근린공원;소공원</string>
     <string name="poi_cafe">카페;커피</string>
     <string name="poi_biergarten">비어 가든</string>
-    <string name="poi_restaurant">레스토랑;순대국;떡볶이;부대찌개;감자탕;비빔밥;돈까스;마라탕;양꼬치;닭갈비</string>
+    <string name="poi_restaurant">레스토랑</string>
     <string name="poi_fast_food">패스트 푸드</string>
     <string name="poi_bar">바</string>
     <string name="poi_pub">음식점</string>
@@ -493,9 +493,9 @@
     <string name="poi_craft_window_construction">창문 건설</string>
     <string name="poi_funeral_directors">장례 감독;장례식장</string>
     <string name="poi_craft_computer">컴퓨터 기술</string>
-    <string name="poi_beauty">뷰티 살롱;에스테틱;스킨케어;속눈썹;메이크업</string>
+    <string name="poi_beauty">뷰티 살롱;스킨케어;메이크업</string>
     <string name="poi_beauty_salon_nails">네일 살롱</string>
-    <string name="poi_hairdresser">헤어 드레서;미용실;헤어샵;헤어살롱;속눈썹;메이크업</string>
+    <string name="poi_hairdresser">헤어 드레서;미용실;헤어샵;헤어살롱;메이크업</string>
     <string name="poi_massage">마사지 살롱</string>
     <string name="poi_tattoo">문신 살롱;타투가게</string>
     <string name="poi_dry_cleaning">드라이 클리닝</string>

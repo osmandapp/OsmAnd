@@ -29,7 +29,7 @@
     <string name="poi_boutique">بوتیک</string>
     <string name="poi_carpet">فرش فروشی;فرش</string>
     <string name="poi_chemist">فروشگاه محصولات بهداشتی و آرایشی</string>
-    <string name="poi_clothes">فروشگاه پوشاک;پوشاک;مزون;مانتو</string>
+    <string name="poi_clothes">فروشگاه پوشاک;پوشاک;مزون</string>
     <string name="poi_clothes_children">فروشگاه پوشاک کودک</string>
     <string name="poi_shoes">کفش فروشی</string>
     <string name="poi_computer">فروشگاه کامپیوتر;کامپیوتر</string>
@@ -83,7 +83,7 @@
     <string name="poi_department_store">فروشگاه چندمنظوره</string>
     <string name="poi_electronics">فروشگاه های لوازم الکترونیکی;فروشگاه تجهیزات الکترونیکی</string>
     <string name="poi_car">فروشگاه ماشین;اتوگالری</string>
-    <string name="poi_car_parts">فروشگاه قطعات خودرو;یدکی;باطری</string>
+    <string name="poi_car_parts">فروشگاه قطعات خودرو;یدکی</string>
     <string name="poi_atv"/>
     <string name="poi_cosmetics">آرایشی و بهداشتی</string>
     <string name="poi_marketplace">بازار</string>
@@ -115,7 +115,7 @@
     <string name="poi_traffic_calming_table">سرعتکاه تخت</string>
     <string name="poi_traffic_calming_choker">نقطهٔ گازانبری</string>
     <string name="poi_traffic_signals">چراغ راهنما</string>
-    <string name="poi_car_repair">تعمیر خودرو;تعمیرگاه;صافکاری;باطری;جلوبندی;اتوسرویس</string>
+    <string name="poi_car_repair">تعمیر خودرو;تعمیرگاه;صافکاری;جلوبندی;اتوسرویس</string>
     <string name="poi_vehicle_inspection">معاینه فنی خودرو</string>
     <string name="poi_car_wash">کارواش</string>
     <string name="poi_fuel">جایگاه سوخت; جایگاه سوخت‌گیری; پمپ بنزین; پمپ گاز;پمپ;بنزین;جایگاه;سوخت;گازوئیل</string>
@@ -236,8 +236,8 @@
     <string name="poi_place_farm">مزرعه</string>
     <string name="poi_pharmacy">داروخانه</string>
     <string name="poi_hospital">بیمارستان</string>
-    <string name="poi_doctors">مطب;دکتر;رادیولوژی;سونوگرافی;مطب دکتر</string>
-    <string name="poi_clinic">درمانگاه;کلینیک;رادیولوژی;سونوگرافی</string>
+    <string name="poi_doctors">مطب;دکتر;مطب دکتر</string>
+    <string name="poi_clinic">درمانگاه;کلینیک</string>
     <string name="poi_first_aid">کمک های اولیه</string>
     <string name="poi_dentist">دندان پزشک;دندانپزشکی;دندانپزشک;دندان پزشکی</string>
     <string name="poi_nursing_home">اسایشگاه پیران</string>
@@ -448,7 +448,7 @@
     <string name="poi_park">پارک;بوستان</string>
     <string name="poi_cafe">کافه;قهوه خانه</string>
     <string name="poi_biergarten">آبجو</string>
-    <string name="poi_restaurant">رستوران;تالار;کبابی;سلف;غذاخوری;طباخی;حلیم</string>
+    <string name="poi_restaurant">رستوران;سلف;غذاخوری</string>
     <string name="poi_fast_food">فست فود;سوخاری;ساندویچی</string>
     <string name="poi_bar">بار</string>
     <string name="poi_pub">میخانه</string>
@@ -505,7 +505,7 @@
     <string name="poi_craft_window_construction">ساخت و ساز پنجره</string>
     <string name="poi_funeral_directors">قبرکن</string>
     <string name="poi_craft_computer">صنایع کامپیوتر</string>
-    <string name="poi_beauty">سالن زیبایی;آرایش;ناخن</string>
+    <string name="poi_beauty">سالن زیبایی;آرایش</string>
     <string name="poi_beauty_salon_nails">کاشت ناخن; مانیکور</string>
     <string name="poi_hairdresser">آرایشگر;پیرایش;آرایش</string>
     <string name="poi_massage">سالن ماساژ</string>

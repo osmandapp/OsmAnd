@@ -2,16 +2,16 @@
 <resources>
     <string name="poi_mall">Centro commerciale</string>
     <string name="poi_seafood">Pescheria</string>
-    <string name="poi_supermarket">Supermercato;supermercati;spesa</string>
+    <string name="poi_supermarket">Supermercato;supermercati</string>
     <string name="poi_bicycle">Negozio biciclette;cicli;bici;Negozio di biciclette</string>
     <string name="poi_vending_machine">Distributore automatico;Distributore automatico di giornali</string>
     <string name="poi_books">Libreria</string>
     <string name="poi_palaeontological_site">Sito paleontologico</string>
     <string name="poi_bakery">Panificio;Panetteria;fornaio;forneria</string>
     <string name="poi_alcohol">Alcolici;Negozio di alcolici;Negozio di liquori</string>
-    <string name="poi_convenience">Drogheria;alimentari;Minimarket;spesa</string>
+    <string name="poi_convenience">Drogheria;alimentari;Minimarket</string>
     <string name="poi_beverages">Negozio di bevande</string>
-    <string name="poi_butcher">Macelleria;equina;polleria</string>
+    <string name="poi_butcher">Macelleria</string>
     <string name="poi_deli">Gastronomia</string>
     <string name="poi_farm">Vendita prodotti di fattoria</string>
     <string name="poi_greengrocer">Fruttivendolo;ortofrutta;frutteria</string>
@@ -27,7 +27,7 @@
     <string name="poi_bed">Negozio biancheria da letto;Negozio di letti</string>
     <string name="poi_carpet">Negozio tappeti;Tappeti</string>
     <string name="poi_chemist">Prodotti per l\'igiene e la pulizia;Negozio di detersivi</string>
-    <string name="poi_clothes">Abbigliamento;Moda;intimo;sposa;Abbigliamento donna;Abbigliamento sportivo;Abbigliamento uomo</string>
+    <string name="poi_clothes">Abbigliamento;Moda;Abbigliamento donna;Abbigliamento sportivo;Abbigliamento uomo</string>
     <string name="poi_clothes_children">Abbigliamento bambini</string>
     <string name="poi_shoes">Negozio calzature;calzature;Negozio di scarpe</string>
     <string name="poi_computer">Negozio di computer;negozio di articoli informatici</string>
@@ -40,7 +40,7 @@
     <string name="poi_fishing">Negozio pesca;Negozio di pesca</string>
     <string name="poi_florist">Fioreria / fiorista;fiori;fioreria;Fiorista;floricoltura;fioraio</string>
     <string name="poi_frame">Cornici</string>
-    <string name="poi_furniture">Negozio mobili;arredamenti;divani;Negozio di mobili</string>
+    <string name="poi_furniture">Negozio mobili;arredamenti;Negozio di mobili</string>
     <string name="poi_garden_centre">Articoli per Giardinaggio;vivai;floricoltura;articoli da giardinaggio</string>
     <string name="poi_gas">Negozio gas;Deposito di gas</string>
     <string name="poi_ford">Guado</string>
@@ -51,7 +51,7 @@
     <string name="poi_traffic_calming_bump">Dosso</string>
     <string name="poi_traffic_calming_chicane">Chicane</string>
     <string name="poi_traffic_calming_rumble_strip">Strisce rallentatrici</string>
-    <string name="poi_car_repair">Autofficina;carrozzeria;autocarrozzeria;elettrauto;autoriparazioni;revisioni;Meccanico</string>
+    <string name="poi_car_repair">Autofficina;carrozzeria;autocarrozzeria;elettrauto;autoriparazioni;Meccanico</string>
     <string name="poi_vehicle_inspection">Centro revisioni</string>
     <string name="poi_car_wash">Autolavaggio;Lavaggio auto</string>
     <string name="poi_fuel">Stazione di servizio;Distributore; Pompa benzina;Stazione di rifornimento</string>
@@ -183,7 +183,7 @@
     <string name="poi_dentist">Dentista;studio odontoiatrico</string>
     <string name="poi_nursing_home">Servizi di assistenza continua</string>
     <string name="poi_baby_hatch">Culla per la vita</string>
-    <string name="poi_veterinary">Veterinario;ambulatorio</string>
+    <string name="poi_veterinary">Veterinario</string>
     <string name="poi_healthcare_alternative">Medicina alternativa</string>
     <string name="poi_audiologist">Audiologo</string>
     <string name="poi_blood_bank">Banca del sangue</string>
@@ -252,7 +252,7 @@
     <string name="poi_sauna">Sauna</string>
     <string name="poi_car_sharing">Car sharing</string>
     <string name="poi_car_rental">Autonoleggio;noleggio automobili;Noleggio di automobili</string>
-    <string name="poi_laundry">Lavanderia;tintoria;lavanderia automatica</string>
+    <string name="poi_laundry">Lavanderia;lavanderia automatica</string>
     <string name="poi_dry_cleaning">Lavasecco;tintoria;Lavaggio a secco</string>
     <string name="poi_tattoo">Tatuatore;Studio tatuaggi</string>
     <string name="poi_massage">Centro massaggi</string>
@@ -276,7 +276,7 @@
     <string name="poi_craft_electrician">Elettricista</string>
     <string name="poi_craft_dressmaker">Sarto</string>
     <string name="poi_religion_christian">Cristianesimo;Chiesa;cappella;oratorio;parrocchia;chiesetta;basilica;cattedrale;duomo;collegiata;confraternita;concattedrale</string>
-    <string name="poi_place_of_worship">Luogo di culto;Santuario</string>
+    <string name="poi_place_of_worship">Luogo di culto</string>
     <string name="poi_chalet">Chalet;Riparo</string>
     <string name="poi_alpine_hut">Rifugio alpino;Riparo;Rifugio;capanna;capanna alpina;capanna di montagna</string>
     <string name="poi_motel">Motel</string>
@@ -298,7 +298,7 @@
     <string name="poi_archaeological_site">Sito archeologico;nuraghe;menhir</string>
     <string name="poi_memorial">Memoriale</string>
     <string name="poi_attraction">Attrazione turistica</string>
-    <string name="poi_museum">Museo;ecomuseo;pinacoteca;antiquarium</string>
+    <string name="poi_museum">Museo;ecomuseo;antiquarium</string>
     <string name="poi_volleyball">Pallavolo</string>
     <string name="poi_toboggan">Toboga</string>
     <string name="poi_tennis">Tennis</string>
@@ -360,7 +360,7 @@
     <string name="poi_educational_institution">Istituto scolastico</string>
     <string name="poi_bookmaker">Scommesse;Centro scommesse</string>
     <string name="poi_stadium">Stadio</string>
-    <string name="poi_sports_centre">Centro sportivo;palestra;palazzetto;bocciodromo;polisportivo</string>
+    <string name="poi_sports_centre">Centro sportivo;palazzetto;bocciodromo;polisportivo</string>
     <string name="poi_ice_rink">Pista pattinaggio sul ghiaccio</string>
     <string name="poi_athletics">Atletica leggera</string>
     <string name="poi_boules">Bocce</string>
@@ -413,19 +413,19 @@
     <string name="poi_swimming_pool">Piscina</string>
     <string name="poi_water_park">Parco acquatico</string>
     <string name="poi_park">Parco;parchetto</string>
-    <string name="poi_cafe">Caffetteria;caffé;caffe;baretto;buffet</string>
-    <string name="poi_restaurant">Ristorante;pizzeria;trattoria;osteria;locanda;taverna;rosticceria;hostaria;braceria;hosteria;tavernetta;buffet;stube;ristorantino;friggitoria</string>
-    <string name="poi_fast_food">Fast food;rosticceria;panineria;friggitoria</string>
+    <string name="poi_cafe">Caffetteria;caffé;caffe;baretto</string>
+    <string name="poi_restaurant">Ristorante;pizzeria;trattoria;osteria;locanda;taverna;hostaria;hosteria;tavernetta;stube;ristorantino</string>
+    <string name="poi_fast_food">Fast food</string>
     <string name="poi_bar">American Bar;baretto</string>
     <string name="poi_pub">Pub</string>
-    <string name="poi_drinking_water">Acqua potabile;Fontanella;fontanile;fontanello;potabile;abbeveratoio</string>
+    <string name="poi_drinking_water">Acqua potabile;Fontanella;fontanello;potabile</string>
     <string name="poi_barbecue">Barbecue;griglia per barbecue</string>
     <string name="poi_craft_beekeeper">Apicoltore</string>
     <string name="poi_craft_blacksmith">Fabbro</string>
     <string name="poi_craft_brewery">Birrificio</string>
     <string name="poi_craft_boatbuilder">Costruzione barche</string>
     <string name="poi_craft_bookbinder">Rilegatore</string>
-    <string name="poi_craft_carpenter">Carpentiere;falegnameria</string>
+    <string name="poi_craft_carpenter">Carpentiere</string>
     <string name="poi_craft_carpet_layer">Posatore di moquette</string>
     <string name="poi_craft_caterer">Servizio di catering</string>
     <string name="poi_craft_clockmaker">Orologiaio</string>
@@ -860,7 +860,7 @@
     <string name="poi_financial">Ufficio finanziario</string>
     <string name="poi_political_party">Ufficio partito politico;partito</string>
     <string name="poi_notary">Notaio</string>
-    <string name="poi_pitch">Campo da gioco;calcetto;campetto;bocciodromo;skatepark;Campo sportivo</string>
+    <string name="poi_pitch">Campo da gioco;calcetto;campetto;bocciodromo;Campo sportivo</string>
     <string name="poi_leisure_track">Pista sportiva;Pista da corsa</string>
     <string name="poi_raceway">Circuito</string>
     <string name="poi_sport_multi">Multi sport</string>
@@ -4395,7 +4395,7 @@
     <string name="poi_tactile_paving_contrasted">Contrastato</string>
     <string name="poi_embassy_high_commission">Commissione alta</string>
     <string name="poi_authentication_short_message_no">Autenticazione tramite messaggio breve: no</string>
-    <string name="poi_sports_hall">Palazzetto dello sport;palestra</string>
+    <string name="poi_sports_hall">Palazzetto dello sport</string>
     <string name="poi_outcrop">Affioramento</string>
     <string name="poi_monastery_type_clerks_regular">Tipo di monastero: chierici regolari</string>
     <string name="poi_embassy_interests_section">Sezione interessi</string>

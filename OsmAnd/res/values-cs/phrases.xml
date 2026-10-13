@@ -129,7 +129,7 @@
     <string name="poi_miniature_golf">Mini golf;minigolf</string>
     <string name="poi_park">Park</string>
     <string name="poi_cafe">Kavárna</string>
-    <string name="poi_restaurant">Restaurace;hostinec;pizzeria;pizzerie;pohostinství;vinárna</string>
+    <string name="poi_restaurant">Restaurace;hostinec;pohostinství;vinárna</string>
     <string name="poi_fast_food">Rychlé občerstvení;bufet;fastfood</string>
     <string name="poi_bar">Bar;vinárna</string>
     <string name="poi_drinking_water">Pitná voda</string>

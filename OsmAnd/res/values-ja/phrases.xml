@@ -13,7 +13,7 @@
     <string name="poi_hotel">ホテル</string>
     <string name="poi_kindergarten">幼稚園・保育園;認定こども園;保育所;保育園;託児所</string>
     <string name="poi_library">図書館</string>
-    <string name="poi_pub">パブ・居酒屋;スナック;やきとり;小料理;パブ</string>
+    <string name="poi_pub">パブ・居酒屋;スナック;小料理;パブ</string>
     <string name="poi_sauna">サウナ</string>
     <string name="poi_school">学校;中学校</string>
     <string name="poi_shop_yes">雑貨店</string>
@@ -561,8 +561,8 @@
     <string name="poi_village_green">共有地</string>
     <string name="poi_cafe">カフェ;カラオケ喫茶;コーヒーハウス</string>
     <string name="poi_biergarten">ビアガーデン</string>
-    <string name="poi_restaurant">レストラン;やきとり;食事処;ステーキハウス;トラットリア;鉄板焼;うなぎ;ピッツェリア;小料理</string>
-    <string name="poi_fast_food">ファーストフード;たこ焼き</string>
+    <string name="poi_restaurant">レストラン;食事処;小料理</string>
+    <string name="poi_fast_food">ファーストフード</string>
     <string name="poi_bar">バー・立ち呑み屋;スナック</string>
     <string name="poi_food_court">フードコート</string>
     <string name="poi_drinking_water">給水所・水飲み場</string>
