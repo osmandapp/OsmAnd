@@ -233,14 +233,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private final StateChangedListener<Boolean> lockScreenSettingListener = new StateChangedListener<Boolean>() {
 		@Override
 		public void stateChanged(Boolean change) {
-			app.runInUIThread(() -> changeKeyguardFlags());
+			app.runInUIThread(() -> lockHelper.restartLockTimeout());
 		}
 	};
 
 	private final StateChangedListener<Integer> turnScreenOnTimeListener = new StateChangedListener<Integer>() {
 		@Override
 		public void stateChanged(Integer change) {
-			app.runInUIThread(() -> changeKeyguardFlags());
+			app.runInUIThread(() -> lockHelper.restartLockTimeout());
 		}
 	};
 
@@ -937,6 +937,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Override
+	public boolean getKeepScreenOn() {
+		if (mapViewWithLayers != null) {
+			return mapViewWithLayers.getKeepScreenOn();
+		} else {
+			return false;
+		}
+	}
+
+	@Override
 	public void updateStatusBarColor() {
 		UiUtilities.updateSystemBarColors(this);
 	}
@@ -1274,7 +1283,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void updateApplicationModeSettings(boolean forceUpdatePoiFilters) {
-		changeKeyguardFlags();
+		lockHelper.restartLockTimeout();
 		updateMapSettings(false);
 		if (forceUpdatePoiFilters) {
 			app.getPoiFilters().loadSelectedPoiFilters();
@@ -1577,8 +1586,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return lockHelper.getLockGestureDetector(this).onTouchEvent(event);
 		}
 
-		if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
-			lockHelper.onUserInteraction();
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			lockHelper.addKeepScreenAwakeReason("user_interaction");
+		} else if (event.getAction() == MotionEvent.ACTION_UP
+				|| event.getAction() == MotionEvent.ACTION_CANCEL) {
+			lockHelper.removeKeepScreenAwakeReason("user_interaction");
 		}
 
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
@@ -1713,23 +1725,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return oldPoint.getLayerId().equals(layerId) && oldPoint.getId().equals(point.getId());
 	}
 
-	public void changeKeyguardFlags() {
-		// Never show the map above the lock screen unconditionally here: onStop() turns it off, and as it
-		// decides whether the activity is visible while locked, that makes resume and stop chase each other.
-		boolean keepScreenOn = !settings.USE_SYSTEM_SCREEN_TIMEOUT.get();
-		changeKeyguardFlags(lockHelper.shouldShowWhenLocked(), keepScreenOn);
-	}
-
-	private void changeKeyguardFlags(boolean enable, boolean forceKeepScreenOn) {
+	public void setKeyguardFlags(boolean enable) {
 		// The system keeps setShowWhenLocked() across a relaunch, so a new activity instance always applies it
-		if (showWhenLocked == null || showWhenLocked != enable) {
-			showWhenLocked = enable;
-			updateShowWhenLocked(enable);
-		}
-		lockHelper.setKeepScreenOn(forceKeepScreenOn);
-	}
-
-	private void updateShowWhenLocked(boolean enable) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
 			// FLAG_DISMISS_KEYGUARD needs no replacement: next to show-when-locked it never dismisses the keyguard
 			setShowWhenLocked(enable);
@@ -1737,16 +1734,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			int flags = WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
 			getWindow().setFlags(enable ? flags : 0, flags);
 		}
-	}
-
-	@Override
-	public void lock() {
-		changeKeyguardFlags(false, false);
-	}
-
-	@Override
-	public void unlock() {
-		changeKeyguardFlags(true, true);
 	}
 
 	@Override
@@ -1806,14 +1793,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void routeWasCancelled() {
-		changeKeyguardFlags();
+		lockHelper.removeKeepScreenAwakeReason("navigation");
 	}
 
 	@Override
 	public void routeWasFinished() {
 		if (!mIsDestroyed) {
 			DestinationReachedFragment.show(this);
-			changeKeyguardFlags();
+			lockHelper.removeKeepScreenAwakeReason("navigation");
 		}
 	}
 
