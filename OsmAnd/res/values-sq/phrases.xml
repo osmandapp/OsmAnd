@@ -44,7 +44,7 @@
 
     <string name="poi_palaeontological_site">Faqe paleontologjike</string>
 
-    <string name="poi_bakery">Furrë buke</string>
+    <string name="poi_bakery">Furrë buke;furra;bukë</string>
 	<string name="poi_alcohol">Pije alkoolike</string>
 	<string name="poi_cheese">Dyqan djathi</string>
 	<string name="poi_chocolate">Dyqan çokollatash</string>
@@ -98,4 +98,21 @@
 	<string name="poi_frame">Dyqan korniza pikture</string>
 	<string name="poi_free_flying">Dyqan shpendësh</string>
     <string name="poi_furniture">Mobileri</string>
-	</resources>
+	    <string name="poi_bar">Lounge</string>
+    <string name="poi_beauty">Sallon</string>
+    <string name="poi_cafe">Lounge</string>
+    <string name="poi_car_wash">Lavazh</string>
+    <string name="poi_courthouse">Gjykata</string>
+    <string name="poi_dentist">Dentare;dent</string>
+    <string name="poi_driving_school">Autoshkolla</string>
+    <string name="poi_fast_food">Qebaptore</string>
+    <string name="poi_hairdresser">Sallon;parukeri;barber;berber</string>
+    <string name="poi_hospital">Spitali</string>
+    <string name="poi_kindergarten">Kopshti</string>
+    <string name="poi_park">Parku</string>
+    <string name="poi_pharmacy">Barnatore</string>
+    <string name="poi_religion_christian">Kisha</string>
+    <string name="poi_religion_muslim">Xhamia</string>
+    <string name="poi_restaurant">Restorant;taverna;qebaptore</string>
+    <string name="poi_school">Shkolla;gjimnazi</string>
+</resources>

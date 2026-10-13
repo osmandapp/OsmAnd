@@ -48,6 +48,7 @@ import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.inapp.InstallReferrerReader;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
@@ -558,6 +559,7 @@ public class AppInitializer implements IProgress {
 			app.searchUICore.initSearchUICore();
 			notifyEvent(SEARCH_UI_CORE_INITIALIZED);
 			checkLiveUpdatesAlerts();
+			InstallReferrerReader.readOnce(app);
 			connectToBRouter();
 			app.helpArticlesHelper.loadArticles();
 			notifyEvent(HELP_ARTICLES_INITIALIZED);

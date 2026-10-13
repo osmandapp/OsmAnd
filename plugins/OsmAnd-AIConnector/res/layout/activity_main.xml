@@ -114,6 +114,45 @@
 				android:paddingTop="8dp"
 				android:textColor="?attr/colorOnSurfaceVariant" />
 
+			<!-- the screen stays on while the assistant works, so the phone does not lock under it -->
+			<LinearLayout
+				android:id="@+id/keep_screen_on_row"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="12dp"
+				android:background="?attr/selectableItemBackground"
+				android:gravity="center_vertical"
+				android:orientation="horizontal">
+
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:orientation="vertical">
+
+					<TextView
+						style="@style/TextAppearance.Material3.BodyLarge"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@string/keep_screen_on_title" />
+
+					<TextView
+						style="@style/TextAppearance.Material3.BodyMedium"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@string/keep_screen_on_summary"
+						android:textColor="?attr/colorOnSurfaceVariant" />
+				</LinearLayout>
+
+				<com.google.android.material.materialswitch.MaterialSwitch
+					android:id="@+id/keep_screen_on_switch"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="16dp"
+					android:clickable="false"
+					android:focusable="false" />
+			</LinearLayout>
+
 			<!-- screen mode: the connector works only while this screen is visible -->
 			<com.google.android.material.card.MaterialCardView
 				android:id="@+id/keep_screen_banner"

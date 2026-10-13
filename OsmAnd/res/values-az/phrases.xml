@@ -64,9 +64,9 @@
     <string name="poi_mall">Ticarət mərkəzi</string>
     <string name="poi_beverages">İçki mağazası</string>
     <string name="poi_shop">Mağaza</string>
-    <string name="poi_greengrocer">Meyvə-tərəvəz</string>
+    <string name="poi_greengrocer">Meyvə-tərəvəz;meyvə;tərəvəz</string>
     <string name="poi_seafood">Dəniz məhsulları</string>
-    <string name="poi_confectionery">Qənnadı</string>
+    <string name="poi_confectionery">Qənnadı;şirniyyat</string>
     <string name="poi_tea">Çay dükanı</string>
     <string name="poi_pasta">Makaron dükanı</string>
     <string name="poi_dairy">Süd dükanı</string>
@@ -87,7 +87,7 @@
     <string name="poi_resource_gravel">Çınqıl</string>
     <string name="poi_resource_gypsum">Gips</string>
     <string name="poi_resource_iron_ore">Dəmir filizi</string>
-    <string name="poi_post_office">Poçt şöbəsi</string>
+    <string name="poi_post_office">Poçt şöbəsi;poçt</string>
     <string name="poi_post_box">Poçt qutusu</string>
     <string name="poi_telephone">Telefon</string>
     <string name="poi_communication_tower">Kommunikasiya qülləsi</string>
@@ -112,7 +112,7 @@
     <string name="poi_ticket">Bilet satışları</string>
     <string name="poi_video">Video mağazası</string>
     <string name="poi_electronics">Elektronika mağazası</string>
-    <string name="poi_car_parts">Avtomobil hissələri</string>
+    <string name="poi_car_parts">Avtomobil hissələri;avtohissələr;avto</string>
     <string name="poi_cosmetics">Kosmetika</string>
     <string name="poi_perfumery">Ətir mağazası</string>
     <string name="poi_honey">Bal mağazası</string>
@@ -143,7 +143,7 @@
     <string name="poi_stadium">Stadion</string>
     <string name="poi_sports_centre">İdman mərkəzi</string>
     <string name="poi_golf">Qolf</string>
-    <string name="poi_cafe">Kafe</string>
+    <string name="poi_cafe">Kafe;çayxana;dönər</string>
     <string name="poi_internet_cafe">İnternet kafe</string>
     <string name="poi_operational_status_open">Açıq</string>
     <string name="poi_operational_status_closed">Bağlı</string>
@@ -188,4 +188,24 @@
     <string name="poi_tennis">Tennis</string>
     <string name="poi_tram_stop">Tramvay dayanacağı</string>
     <string name="poi_takeaway_filter_yes">Bəli</string>
+    <string name="poi_alcohol">Şərab</string>
+    <string name="poi_bakery">Çörək;təndir</string>
+    <string name="poi_camp_site">Yaylaq</string>
+    <string name="poi_car_repair">Avto</string>
+    <string name="poi_car_wash">Avtoyuma</string>
+    <string name="poi_clothes">Geyim</string>
+    <string name="poi_fast_food">Dönər</string>
+    <string name="poi_hairdresser">Bərbərxana</string>
+    <string name="poi_hardware">Xırdavat</string>
+    <string name="poi_hospital">Xəstəxana</string>
+    <string name="poi_kindergarten">Bağça</string>
+    <string name="poi_library">Kitabxana</string>
+    <string name="poi_park">Park</string>
+    <string name="poi_pharmacy">Aptek</string>
+    <string name="poi_religion_muslim">Məscid</string>
+    <string name="poi_restaurant">Şadlıq</string>
+    <string name="poi_swimming_pool">Hovuz</string>
+    <string name="poi_townhall">Bələdiyyə</string>
+    <string name="poi_tyres">Təkər</string>
+    <string name="poi_veterinary">Baytarlıq</string>
 </resources>

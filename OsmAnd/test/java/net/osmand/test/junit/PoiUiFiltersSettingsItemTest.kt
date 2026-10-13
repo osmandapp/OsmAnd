@@ -126,7 +126,7 @@ class PoiUiFiltersSettingsItemTest {
 	}
 
 	private fun read(json: JSONObject): List<PoiUIFilter> {
-		val item = PoiUiFiltersSettingsItem(app, emptyList<PoiUIFilter>())
+		val item = PoiUiFiltersSettingsItem(app, mutableListOf<PoiUIFilter>())
 		ByteArrayInputStream(json.toString().toByteArray(Charsets.UTF_8)).use {
 			item.reader!!.readFromStream(it, null, null)
 		}

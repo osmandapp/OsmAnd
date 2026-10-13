@@ -261,7 +261,7 @@
     <string name="poi_department_store">Stokovna kuca</string>
     <string name="poi_electronics">Prodavnica za elektronika</string>
     <string name="poi_energy">Prodavnica za energija</string>
-    <string name="poi_car">Diler na avtomobili</string>
+    <string name="poi_car">Diler na avtomobili;автосалон</string>
     <string name="poi_car_parts">Avtomobilski delovi</string>
     <string name="poi_atv">prodavnica za povecenamenski vozila</string>
     <string name="poi_sewing">Prodavnica z tekstilna stoka</string>
@@ -299,7 +299,7 @@
     <string name="poi_traffic_calming_choker">Djerdan ili ukrasna lenta od tkaenina koja tesno se vklopuva okolu vratot</string>
     <string name="poi_traffic_calming_island">Soobracajno ostrovo</string>
     <string name="poi_traffic_signals">Stop svetlina</string>
-    <string name="poi_car_repair">Popravka na avtomobil</string>
+    <string name="poi_car_repair">Popravka na avtomobil;автосервис</string>
     <string name="poi_fuel">Bezniska pupma</string>
     <string name="poi_fuel_hgv_diesel">Dizel za teski vozila</string>
     <string name="poi_fuel_biodiesel">Bio dizel</string>
@@ -389,7 +389,7 @@
     <string name="poi_power_generator">Generator na energija</string>
     <string name="poi_power_tower">Elektricen stolb</string>
     <string name="poi_power_pole">Električen stolb</string>
-    <string name="poi_post_office">Pošta</string>
+    <string name="poi_post_office">Pošta;пошта</string>
     <string name="poi_telephone">Telefon</string>
     <string name="poi_communication_tower">Komunikaciska kula</string>
     <string name="poi_observation_tower">Nabljuduvačka kula</string>
@@ -439,7 +439,7 @@
     <string name="poi_cafe_and_restaurant">Kafe i restoran</string>
     <string name="poi_seafood">Prodavnica za morska hrana</string>
     <string name="poi_butcher">Market za meso</string>
-    <string name="poi_supermarket">Super market</string>
+    <string name="poi_supermarket">Super market;супермаркет</string>
     <string name="poi_wine">Vinarna</string>
     <string name="poi_books">Knizarnica</string>
     <string name="poi_bathroom_furnishing">Mebel za banja</string>
@@ -558,7 +558,7 @@
     <string name="poi_farmyard">Farma</string>
     <string name="poi_meadow">Livada</string>
     <string name="poi_basin">Basen</string>
-    <string name="poi_canal">Kanal</string>
+    <string name="poi_canal">Kanal;канал</string>
     <string name="poi_pier">Prostaniste</string>
     <string name="poi_surveillance">Nadzor</string>
     <string name="poi_observatory">Observatorija</string>
@@ -598,4 +598,27 @@
     <string name="poi_construction">Izgradba</string>
     <string name="poi_greenfield">Sumsko, zemjodelsko zemjiste</string>
     <string name="poi_works">Raboti</string>
+    <string name="poi_bank">Банка</string>
+    <string name="poi_bay">Залив</string>
+    <string name="poi_casino">Казино</string>
+    <string name="poi_castle">Замок</string>
+    <string name="poi_cinema">Кино</string>
+    <string name="poi_clinic">Клиника</string>
+    <string name="poi_hospital">Болница</string>
+    <string name="poi_hostel">Хостел</string>
+    <string name="poi_hotel">Хотел</string>
+    <string name="poi_kindergarten">Градинка</string>
+    <string name="poi_library">Библиотека</string>
+    <string name="poi_museum">Музеј</string>
+    <string name="poi_park">Парк</string>
+    <string name="poi_pharmacy">Аптека</string>
+    <string name="poi_religion_christian">Црква</string>
+    <string name="poi_restaurant">Ресторан</string>
+    <string name="poi_river">Река</string>
+    <string name="poi_spring">Извор</string>
+    <string name="poi_stadium">Стадион</string>
+    <string name="poi_valley">Долина</string>
+    <string name="poi_volcano">Вулкан</string>
+    <string name="poi_water_park">Аквапарк</string>
+    <string name="poi_waterfall">Водопад</string>
 </resources>

@@ -51,6 +51,12 @@ class OsmAndBridge(private val ctx: Context, var preferredPackage: String) {
 		}
 	}
 
+	fun versionName(pkg: String): String? = try {
+		ctx.packageManager.getPackageInfo(pkg, 0).versionName
+	} catch (e: PackageManager.NameNotFoundException) {
+		null
+	}
+
 	@Synchronized
 	fun get(): IOsmAndAidlInterface {
 		api?.let { return it }

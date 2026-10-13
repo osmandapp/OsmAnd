@@ -70,7 +70,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private String subtype;
 	private boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 	private List<String> preferredLangCandidates;
-	private Set<String> genericFallbackKeys = Collections.emptySet();
+	private Set<String> externalNamespaceKeys = Collections.emptySet();
 
 	public AmenityUIHelper(@NonNull MapActivity mapActivity,
 	                       @NonNull AdditionalInfoBundle infoBundle) {
@@ -86,7 +86,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityTagEntry> descriptions = new ArrayList<>();
 
 		List<AmenityTagEntry> visibleTags = additionalInfo.getVisibleTags(osmEditingEnabled,
-				preferredLangCandidates, genericFallbackKeys);
+				preferredLangCandidates, externalNamespaceKeys);
 		for (AmenityTagEntry baseEntry : visibleTags) {
 			AmenityTagEntry amenityEntry = buildEntryData(context, baseEntry);
 			if (amenityEntry == null) {
@@ -195,7 +195,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.additionalType(),
 					key, value, subtype);
 		} else {
-			boolean useGenericFallback = genericFallbackKeys.contains(key);
+			boolean useGenericFallback = externalNamespaceKeys.contains(key);
 			String displayKey = useGenericFallback ? getGenericFallbackDisplayKey(key) : key;
 			PoiType fallbackType = new PoiType(poiTypes, poiCategory, null, displayKey, poiCategory.getIconKeyName());
 			fallbackType.setText(true);
@@ -702,8 +702,8 @@ public class AmenityUIHelper extends MenuBuilder {
 		return null;
 	}
 
-	public void setGenericFallbackKeys(@NonNull Collection<String> genericFallbackKeys) {
-		this.genericFallbackKeys = new HashSet<>(genericFallbackKeys);
+	public void setExternalNamespaceKeys(@NonNull Collection<String> externalNamespaceKeys) {
+		this.externalNamespaceKeys = new HashSet<>(externalNamespaceKeys);
 	}
 
 	@NonNull

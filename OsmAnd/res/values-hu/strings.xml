@@ -4312,15 +4312,15 @@
     <string name="energy_avg_info">Energiastatisztika (1/5/15 perces átlagok)</string>
     <string name="choose_map_orientation">Térkép irányának kiválasztása</string>
     <string name="profile_icon">Profil ikon</string>
-    <string name="navigation_position_icon">Navigáció pozíció ikon</string>
+    <string name="navigation_position_icon">Ikon navigálás közben</string>
     <string name="resting_position_icon">Ikon álló helyzetben</string>
     <string name="shared_string_all_icons">Összes ikon</string>
-    <string name="resting_position_icon_summary">Ikon, ami akkor jelenik meg, ha nem mozog.</string>
+    <string name="resting_position_icon_summary">Álló helyzetben megjelenő ikon.</string>
     <string name="navigation_position_icon_summary">Navigálás vagy mozgás közben megjelenő ikon.</string>
     <string name="rendering_value_pale_name">Halvány</string>
     <string name="navigation_position">Navigálás közben</string>
     <string name="location_radius_description">Megjeleníti a kör alakú területet, amely a jelenlegi hely pontosságát jelzi</string>
-    <string name="location_radius">Hely sugár</string>
+    <string name="location_radius">Pontossági kör</string>
     <string name="view_angle_description">Megjeleníti azt a kúp alakú területet, amellyel éppen szemben áll</string>
     <string name="view_angle">Látószög</string>
     <string name="rendering_avg_info_details">FPS (utolsó 1000 képkocka): %1$s
@@ -5382,4 +5382,16 @@
     <string name="multimedia_notes_view_descr">Hang- és videójegyzetei a(z) %1$s mappában találhatók.</string>
     <string name="media_attached_more_count">+%1$d</string>
     <string name="route_calculation_out_of_memory">Az útvonal túl hosszú ahhoz, hogy ezen az eszközön kiszámítható legyen. Adjon meg köztes pontokat, vagy válasszon egy közelebbi úti célt.</string>
+    <string name="map_source_saved_as">Térképforrás mentve mint: „%1$s”.</string>
+    <string name="map_source_folder_not_created">Nem sikerült mappát létrehozni a térképforrás számára. Próbálkozzon másik névvel.</string>
+    <string name="flyover_recording">Térképvideó rögzítése: %1$s</string>
+    <string name="flyovers">Felüljárók</string>
+    <string name="eta_group_header">Becsült érkezési idő</string>
+    <string name="travel_speed">Utazási sebesség</string>
+    <string name="default_speed_descr">Akkor használható, amikor az útszakaszra vonatkozó sebességadatok nem állnak rendelkezésre, vagy amikor a jármű áll.</string>
+    <string name="speed_range">Sebességtartomány</string>
+    <string name="speed_range_descr">Az útvonal kiszámításához és az érkezési idő meghatározásához egyaránt használatos.</string>
+    <string name="eta_adapt_to_my_speed">Alkalmazkodás a sebességhez</string>
+    <string name="eta_adapt_to_my_speed_descr">Az érkezési idő az elmúlt %1$s mért sebességen alapul.</string>
+    <string name="eta_adapt_to_my_speed_off_descr">Az érkezési idő az útvonal egyes szakaszain várható sebesség alapján számítódik. Akkor kapcsolja be ezt a funkciót, ha azt szeretné, hogy a számítás a tényleges haladási sebességet vegye alapul.</string>
 </resources>

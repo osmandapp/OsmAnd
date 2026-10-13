@@ -428,12 +428,15 @@ public class GeocodingUtilities {
 	}
 
 	private int cmpResult(GeocodingResult gr1, GeocodingResult gr2) {
-		boolean eqStreet = Algorithms.stringsEqual(gr1.streetName, gr2.streetName);
+		// the same street, or the same house number on it, from two maps or from two cities of one map;
+		// the street name too (not only the name of the road it was found for), the nearer one on equal cities
+		boolean eqStreet = Algorithms.stringsEqual(gr1.streetName, gr2.streetName) && gr1.street != null
+				&& gr2.street != null && Algorithms.stringsEqual(gr1.street.getName(), gr2.street.getName());
 		if (eqStreet) {
 			boolean sameObj = false;
 			if (gr1.city != null && gr2.city != null) {
 				if (gr1.building != null && gr2.building != null) {
-					if (Algorithms.stringsEqual(gr1.building.getName(), gr2.building.getName())) {
+					if (Algorithms.stringsEqual(gr1.getBuildingString(), gr2.getBuildingString())) {
 						// same building
 						sameObj = true;
 					}
@@ -445,7 +448,7 @@ public class GeocodingUtilities {
 			if (sameObj) {
 				double cityDist1 = MapUtils.getDistance(gr1.searchPoint, gr1.city.getLocation());
 				double cityDist2 = MapUtils.getDistance(gr2.searchPoint, gr2.city.getLocation());
-				if (cityDist1 < cityDist2) {
+				if (cityDist1 <= cityDist2) {
 					return -1;
 				} else {
 					return 1;
@@ -496,6 +499,10 @@ public class GeocodingUtilities {
 	
 	private boolean addStreet(GeocodingResult road, Street street, boolean matchWithCommonWords,
 			List<GeocodingResult> streetsList, StreetsCache cache) {
+		// "<Segré>" holds the houses of a place without a street, it is not a street named after the place
+		if (street.getName().startsWith("<")) {
+			return false;
+		}
 		if (!matchStreetName(road.streetName, street.getName(), matchWithCommonWords, cache)) {
 			return false;
 		}

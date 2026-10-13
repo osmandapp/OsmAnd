@@ -178,7 +178,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private ExtendedMapActivity extendedMapActivity;
 
 	private LockHelper lockHelper;
-	private boolean keyguardFlagsEnabled;
+	@Nullable
+	private Boolean showWhenLocked;
 	private ImportHelper importHelper;
 	private IntentHelper intentHelper;
 	private MapScrollHelper mapScrollHelper;
@@ -1712,23 +1713,29 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void changeKeyguardFlags() {
-		// Never request the lock screen flags unconditionally here: onStop() clears them, and as they
-		// decide whether the activity is visible while locked, that makes resume and stop chase each other.
+		// Never show the map above the lock screen unconditionally here: onStop() turns it off, and as it
+		// decides whether the activity is visible while locked, that makes resume and stop chase each other.
 		boolean keepScreenOn = !settings.USE_SYSTEM_SCREEN_TIMEOUT.get();
 		changeKeyguardFlags(lockHelper.shouldShowWhenLocked(), keepScreenOn);
 	}
 
 	private void changeKeyguardFlags(boolean enable, boolean forceKeepScreenOn) {
-		if (keyguardFlagsEnabled != enable) {
-			keyguardFlagsEnabled = enable;
-			if (enable) {
-				getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
-						WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-			} else {
-				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-			}
+		// The system keeps setShowWhenLocked() across a relaunch, so a new activity instance always applies it
+		if (showWhenLocked == null || showWhenLocked != enable) {
+			showWhenLocked = enable;
+			updateShowWhenLocked(enable);
 		}
 		lockHelper.setKeepScreenOn(forceKeepScreenOn);
+	}
+
+	private void updateShowWhenLocked(boolean enable) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+			// FLAG_DISMISS_KEYGUARD needs no replacement: next to show-when-locked it never dismisses the keyguard
+			setShowWhenLocked(enable);
+		} else {
+			int flags = WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
+			getWindow().setFlags(enable ? flags : 0, flags);
+		}
 	}
 
 	@Override

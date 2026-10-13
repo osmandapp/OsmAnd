@@ -158,7 +158,8 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 		if (ids != null) {
 			for (String id : ids) {
 				AidlPermissionGroup group = AidlPermissionGroup.getById(id);
-				if (group != null && !groups.contains(group)) {
+				// System (files, logs, fake location) is turned on only in the plugin's own screen, never in one tap here
+				if (group != null && group != AidlPermissionGroup.SYSTEM && !groups.contains(group)) {
 					groups.add(group);
 				}
 			}
