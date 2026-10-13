@@ -242,16 +242,19 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				int poiTypeTokens = 0;
 				NameIndexAtom poiType = null;
 				boolean partOnBuilding = false;
+				List<String> categoryWords = new ArrayList<>();
 				for (int i = 0; i < tCount; i++) {
 					NameIndexAtom atom = linearResults.get(indx * tCount + i);
 					if (atom.isPoiCategory()) {
 						partOnBuilding |= tokens[i].likelyPartOfBuilding() || tokens[i].getMainNumber() > 0;
 						poiTypeTokens++;
 						poiType = atom;
+						categoryWords.add(SearchAlgorithms.alignChars(tokens[i].word.toLowerCase()));
 					}
 				}
+				// the category words must cover a name of the type they match, not the shortest name of the type
 				if (poiTypeTokens > 0 && tCount > 1 && 
-						ctx.poiSearch.getById((int) poiType.id).tokensInName > poiTypeTokens) {
+						ctx.poiSearch.getById((int) poiType.id).tokensInMatchedName(categoryWords) > poiTypeTokens) {
 					skipResults.put(indx, true);
 				}  else if(tCount > 1 && poiTypeTokens == 1 && partOnBuilding) {
 					skipResults.put(indx, true);
