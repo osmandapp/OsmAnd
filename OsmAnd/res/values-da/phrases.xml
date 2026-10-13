@@ -2,8 +2,8 @@
 <resources>
     <string name="poi_bakery">Bager;bagerudsalg</string>
     <string name="poi_alcohol">Spiritus</string>
-    <string name="poi_convenience">Nærbutik</string>
-    <string name="poi_mall">Butikscenter</string>
+    <string name="poi_convenience">Nærbutik;minimarked</string>
+    <string name="poi_mall">Butikscenter;indkøbscenter;shoppingcenter</string>
     <string name="poi_beverages">Drikkevarer</string>
     <string name="poi_butcher">Slagter</string>
     <string name="poi_deli">Delikatesse</string>
