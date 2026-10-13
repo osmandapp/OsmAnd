@@ -1471,7 +1471,6 @@
 
 	<string name="poi_operator">Operator</string>
 	<string name="poi_brand">Brand</string>
-	<string name="poi_service_abbreviation">Public service</string>
 	<string name="poi_fee_yes">Yes;Fee</string>
 	<string name="poi_fee_no">No</string>
 	<string name="poi_drinking_water_yes">Yes;Drinking water</string>

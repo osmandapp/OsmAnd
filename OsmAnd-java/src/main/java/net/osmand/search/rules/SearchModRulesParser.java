@@ -8,6 +8,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.search.rules.SearchModLocaleRules.Form;
 import net.osmand.search.rules.SearchModLocaleRules.Mirror;
 import net.osmand.search.rules.SearchModLocaleRules.PoiService;
+import net.osmand.search.rules.SearchModRules.SearchModRuleOwner;
 import net.osmand.search.rules.SearchModLocaleRules.Rule;
 import net.osmand.search.rules.SearchModLocaleRules.SkipPenalty;
 import net.osmand.search.rules.SearchModLocaleRules.Unglue;
@@ -140,7 +141,9 @@ final class SearchModRulesParser {
 					}
 				} else if (depth == 3 && "poi".equals(section)) {
 					// <brand> is read by the brand analyzer, not by the search
-					if ("service".equals(tag) && enabled(parser)) {
+					if ("abbr".equals(tag) && enabled(parser)) {
+						parsePoiAbbreviation(parser);
+					} else if ("service".equals(tag) && enabled(parser)) {
 						PoiService service = PoiService.of(parser.getAttributeValue(null, "word"),
 								parser.getAttributeValue(null, "tags"), parser.getAttributeValue(null, "name"), file);
 						layer.services.put(service.key(), service);
@@ -166,7 +169,19 @@ final class SearchModRulesParser {
 		return layer;
 	}
 
-	private void parseIndexRule(XmlPullParser parser) {
+	/**
+	 * {@code <abbr short="ДК" full="Дом культуры"/>} of {@code <poi>}: a POI name with one form gets the other one as an
+	 * alternative name, both ways, as the alternative names of a mirror pair (whole words, any case, the dot of the
+	 * abbreviation); the full form may be a phrase.
+	 */
+	private void parsePoiAbbreviation(XmlPullParser parser) {
+		String abbreviation = parser.getAttributeValue(null, "short").trim();
+		String full = parser.getAttributeValue(null, "full").trim();
+		layer.add(new Rule(SearchModRuleOwner.POI.tag, abbreviation, full, file, true), true);
+		layer.add(new Rule(SearchModRuleOwner.POI.tag, full, abbreviation, file, false), true);
+	}
+
+		private void parseIndexRule(XmlPullParser parser) {
 		String object = object(parser.getAttributeValue(null, "object"));
 		String from = parser.getAttributeValue(null, "from");
 		if (!enabled(parser)) {

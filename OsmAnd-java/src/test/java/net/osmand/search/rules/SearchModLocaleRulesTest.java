@@ -441,6 +441,24 @@ public class SearchModLocaleRulesTest {
 	}
 
 	@Test
+	public void poiAbbreviationGivesAlternativeNamesBothWays() {
+		// <abbr> of <poi>: the full form may be a phrase; the rules apply to POI names only
+		SearchModLocaleRules rules = of("<poi><abbr short=\"ДК\" full=\"Дом культуры\"/>"
+				+ "<service word=\"ЦНАП\" tags=\"office=government\" name=\"\\bЦНАП\\b\"/></poi>");
+		assertEquals(2, rules.index().size());
+		SearchModLocaleRules.Rule abbreviation = rules.index().get(0);
+		assertEquals("Дом культуры Октябрь", abbreviation.apply("ДК Октябрь"));
+		assertEquals("Дом культуры Октябрь", abbreviation.apply("ДК. Октябрь"));
+		assertEquals("ДК Октябрь", rules.index().get(1).apply("Дом культуры Октябрь"));
+		assertNull(abbreviation.apply("ДКС"));
+		assertTrue(abbreviation.appliesTo(SearchModRuleOwner.POI));
+		assertFalse(abbreviation.appliesTo(SearchModRuleOwner.STREET));
+		assertEquals(1, rules.services().size());
+		assertTrue(rules.services().get(0).matches(Map.of("office", "government"), "ЦНАП Деснянського району"));
+		assertFalse(rules.services().get(0).matches(Map.of("office", "government"), "Податкова"));
+	}
+
+	@Test
 	public void mirrorPairWorksOnBothSides() {
 		SearchModLocaleRules rules = of("<rule object=\"street\" from=\"blvd\" to=\"Boulevard\"/>"
 				+ "<rule from=\"dr\" to=\"Doktor\"/>");

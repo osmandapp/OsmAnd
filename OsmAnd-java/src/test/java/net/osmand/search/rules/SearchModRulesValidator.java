@@ -20,6 +20,7 @@ import org.xmlpull.v1.XmlPullParser;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -43,6 +44,9 @@ final class SearchModRulesValidator {
 	private final Layer layer;
 	// the table that <locales> of rules.xml fills, null for a file without it
 	private final SearchModLocales locales;
+
+	// the abbreviations of <abbr> of the file, one rule per abbreviation
+	private final Set<String> poiAbbreviations = new HashSet<>();
 
 	SearchModRulesValidator(String file, SearchModLocales locales) {
 		this.file = file;
@@ -185,6 +189,8 @@ final class SearchModRulesValidator {
 					parseQueryRule(parser);
 				} else if (depth == 3 && "skipPenalty".equals(tag) && "query".equals(section)) {
 					parseSkipPenalty(parser);
+				} else if (depth == 3 && "abbr".equals(tag) && "poi".equals(section)) {
+					parsePoiAbbreviation(parser);
 				} else if (depth == 3 && "service".equals(tag) && "poi".equals(section)) {
 					parsePoiService(parser);
 				} else if (depth == 3 && "brand".equals(tag) && "poi".equals(section)) {
@@ -214,7 +220,23 @@ final class SearchModRulesValidator {
 		}
 	}
 
-	private void parsePoiService(XmlPullParser parser) throws Exception {
+	private void parsePoiAbbreviation(XmlPullParser parser) throws Exception {
+		String abbreviation = parser.getAttributeValue(null, "short");
+		String full = parser.getAttributeValue(null, "full");
+		String where = " (<abbr short=\"" + abbreviation + "\"> of " + file + ")";
+		checkAttributes(parser, Set.of("short", "full", "enabled"), "<abbr>", where);
+		if (abbreviation == null || abbreviation.isBlank() || full == null || full.isBlank()) {
+			throw new IllegalArgumentException("<abbr> needs short and full" + where);
+		}
+		if (abbreviation.trim().equalsIgnoreCase(full.trim())) {
+			throw new IllegalArgumentException("The full form equals the abbreviation" + where);
+		}
+		if (!poiAbbreviations.add(abbreviation.trim().toLowerCase(Locale.ROOT))) {
+			throw new IllegalArgumentException("Duplicate <abbr>" + where);
+		}
+	}
+
+		private void parsePoiService(XmlPullParser parser) throws Exception {
 		String word = parser.getAttributeValue(null, "word");
 		String where = " (<service word=\"" + word + "\"> of " + file + ")";
 		checkAttributes(parser, Set.of("word", "tags", "name", "enabled"), "<service>", where);
