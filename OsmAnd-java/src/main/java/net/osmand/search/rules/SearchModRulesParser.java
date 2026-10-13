@@ -34,10 +34,18 @@ final class SearchModRulesParser {
 	// the table that <locales> of rules.xml fills, null for a file without it
 	private final SearchModLocales locales;
 
+	// false: skip what only the OBF writer reads (<index> rules, <unglue>, <poi>); the word classes stay
+	private final boolean indexRules;
+
 	SearchModRulesParser(String file, SearchModLocales locales) {
+		this(file, locales, true);
+	}
+
+	SearchModRulesParser(String file, SearchModLocales locales, boolean indexRules) {
 		this.file = file;
 		this.layer = new Layer(file);
 		this.locales = locales;
+		this.indexRules = indexRules;
 	}
 
 	/** The rules of one file; a disabled rule removes the rule of an upper layer with its key. */
@@ -124,9 +132,13 @@ final class SearchModRulesParser {
 					}
 				} else if (depth == 3 && "index".equals(section)) {
 					if ("rule".equals(tag)) {
-						parseIndexRule(parser);
+						if (indexRules) {
+							parseIndexRule(parser);
+						}
 					} else if ("unglue".equals(tag)) {
-						parseUnglue(parser);
+						if (indexRules) {
+							parseUnglue(parser);
+						}
 					} else if (tag.startsWith("class")) {
 						boolean enabled = enabled(parser);
 						layer.addClass(tag.charAt(5) - '0', words(parser.nextText()), enabled);
@@ -139,7 +151,7 @@ final class SearchModRulesParser {
 						boolean enabled = enabled(parser);
 						layer.addSkipPenalty(object, words(parser.nextText()), enabled);
 					}
-				} else if (depth == 3 && "poi".equals(section)) {
+				} else if (depth == 3 && "poi".equals(section) && indexRules) {
 					// <brand> is read by the brand analyzer, not by the search
 					if ("abbr".equals(tag) && enabled(parser)) {
 						parsePoiAbbreviation(parser);

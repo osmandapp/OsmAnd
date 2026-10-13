@@ -320,7 +320,7 @@ public class SpatialTextSearch {
 		public Map<String, SpatialSearchFileCache> filesCache = new HashMap<>();
 
 		// read once: rules.xml and then the rules of a locale on the first map of that locale
-		public final SearchModRules searchRules = new SearchModRules();
+		public final SearchModRules searchRules = SearchModRules.forSearch();
 
 	}
 

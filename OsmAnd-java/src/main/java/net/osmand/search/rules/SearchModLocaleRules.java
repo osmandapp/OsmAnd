@@ -67,6 +67,11 @@ public final class SearchModLocaleRules {
 
 	/** @param layers rules files from general to specific: a lower layer replaces or disables rules of upper ones */
 	SearchModLocaleRules(String locale, List<SearchModRulesParser.Layer> layers) {
+		this(locale, layers, true);
+	}
+
+	/** @param withIndex false: no index rules from the mirror pairs (the search does not need them) */
+	SearchModLocaleRules(String locale, List<SearchModRulesParser.Layer> layers, boolean withIndex) {
 		Map<String, Rule> index = new LinkedHashMap<>();
 		Map<String, Unglue> unglues = new LinkedHashMap<>();
 		Map<String, Integer> classes = new LinkedHashMap<>();
@@ -114,7 +119,7 @@ public final class SearchModLocaleRules {
 		}
 		List<Rule> indexRules = new ArrayList<>(index.values());
 		for (WordRule rule : query.values()) {
-			if (rule.mirror == null || rule.forms.isEmpty()) {
+			if (!withIndex || rule.mirror == null || rule.forms.isEmpty()) {
 				continue;
 			}
 			Form form = rule.forms.get(0);
