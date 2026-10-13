@@ -1637,7 +1637,7 @@
 	<string name="poi_water_characteristic_mud">Mud</string>
 	<string name="poi_water_characteristic_sulfuric">Sulfuric</string>
 
-	<string name="poi_water_point">Water point</string>
+	<string name="poi_water_point">Water point;rv water point;water for campervan;water for caravan;water for rv;water tank refill point</string>
 
 	<string name="poi_information_guidepost">Guidepost</string>
 	<string name="poi_information_board">Board;information board</string>
