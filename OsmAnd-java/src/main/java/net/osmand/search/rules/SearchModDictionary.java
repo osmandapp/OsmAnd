@@ -46,7 +46,8 @@ public final class SearchModDictionary {
 			// a token is aligned (ß -> ss, no diacritics): "Straße" asks for "strasse"
 			forms.put(SearchAlgorithms.alignChars(word), list);
 		}
-		// the words of <skipPenalty> and the classes are aligned by the rules, the ignorable words are query words
+		// the words of <skipPenalty> are aligned by the rules, the ignorable words are query words; the word classes
+		// of <index> belong to the OBF writer
 		Map<String, Set<String>> owners = new HashMap<>();
 		rules.skipPenalty().forEach((word, list) -> owners.computeIfAbsent(word, k -> new LinkedHashSet<>())
 				.addAll(list));
@@ -55,12 +56,6 @@ public final class SearchModDictionary {
 			String aligned = SearchAlgorithms.alignChars(word);
 			ignorables.add(aligned);
 			owners.computeIfAbsent(aligned, k -> new LinkedHashSet<>()).add(SearchModLocaleRules.ANY_OBJECT);
-		}
-		for (Map.Entry<String, Integer> e : rules.classes().entrySet()) {
-			if (e.getValue() != SearchModLocaleRules.CLASS_ALWAYS) {
-				// a service or frequent word only names the kind of an object
-				owners.computeIfAbsent(e.getKey(), k -> new LinkedHashSet<>()).add(SearchModLocaleRules.ANY_OBJECT);
-			}
 		}
 		Map<String, Set<SearchModRuleOwner>> penaltyFree = new HashMap<>();
 		owners.forEach((word, set) -> {

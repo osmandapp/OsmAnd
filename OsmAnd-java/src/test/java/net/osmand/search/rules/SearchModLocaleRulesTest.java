@@ -5,6 +5,7 @@ import net.osmand.search.rules.SearchModRules.SearchModRuleOwner;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -12,6 +13,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -120,7 +124,9 @@ public class SearchModLocaleRulesTest {
 		assertFalse(searchRules.dictionary("en").likelyPartOfBuilding("tower", null));
 		assertTrue(searchRules.dictionary("en_US").isIgnorable("thee"));
 		assertTrue(searchRules.dictionary("en_US").isCommonSkipOtherCnt("eastern", SearchModRuleOwner.STREET));
-		assertEquals("CR7", searchRules.rules("en_US").index().get(0).apply("County Road 7"));
+		// the index rule of en_US among the rules of the upper layers
+		assertEquals("CR7", searchRules.rules("en_US").index().stream().map(r -> r.apply("County Road 7"))
+				.filter(Objects::nonNull).findFirst().orElse(null));
 
 		// a lower layer replaces a rule whole: here it changes the order of the meanings
 		SearchModLocaleRules replaced = new SearchModLocaleRules("xx", List.of(
@@ -272,8 +278,6 @@ public class SearchModLocaleRulesTest {
 				"house-number qualifier or an ignorable word");
 		expect("<query><skipPenalty>bis</skipPenalty><rule from=\"bis\" object=\"building\"/></query>",
 				"house-number qualifier or an ignorable word");
-		// a word of class 1 or 2 never penalizes a name either
-		expect("<index><class1>rue</class1></index><query><skipPenalty>rue</skipPenalty></query>", "<class1>");
 		// to="" is an ignorable word of every owner: the penalty of some owners is <skipPenalty object>
 		expect("<query><rule from=\"de\" to=\"\" object=\"street\"/></query>", "<skipPenalty object=\"street\">");
 		expect("<common>st</common>", "<common> is replaced by <skipPenalty>");
@@ -404,8 +408,17 @@ public class SearchModLocaleRulesTest {
 	@Test
 	public void everyRulesFileLoads() throws IOException {
 		// the layers of every locale with a file validate together: mirror pairs, query rules and index rules
-		for (String locale : List.of("bg_BG", "ca_ES", "de_DE", "en_US", "es_ES", "es_CO", "es_PE", "fr_FR", "it_IT",
-				"mk_MK", "nl_NL", "pt_PT", "ru_RU", "sr_RS", "uk_UA")) {
+		// every rules_<locale>.xml next to rules.xml on the class path
+		File dir = new File(SearchModRules.class.getResource(SearchModLocaleRules.BASE_FILE).getPath()).getParentFile();
+		Set<String> all = new TreeSet<>();
+		for (File f : Objects.requireNonNull(dir.listFiles())) {
+			String n = f.getName();
+			if (n.startsWith("rules_") && n.endsWith(".xml")) {
+				all.add(n.substring("rules_".length(), n.length() - ".xml".length()));
+			}
+		}
+		assertTrue(all.toString(), all.contains("en"));
+		for (String locale : all) {
 			assertNotNull(locale, searchRules.rules(locale));
 			Map<String, String> files = new LinkedHashMap<>();
 			files.put(SearchModLocaleRules.BASE_FILE, resource(SearchModLocaleRules.BASE_FILE));
@@ -423,6 +436,24 @@ public class SearchModLocaleRulesTest {
 		// (it took the house letter of "86 C Calle de Velázquez")
 		assertEquals(List.of("street:cl", "street:cll"), forms(searchRules.rules("es_CO"), "calle"));
 		assertEquals(List.of(), forms(searchRules.rules("es_ES"), "c"));
+	}
+
+	@Test
+	public void poiAbbreviationGivesAlternativeNamesBothWays() {
+		// <abbr> of <poi>: the full form may be a phrase; the rules apply to POI names only
+		SearchModLocaleRules rules = of("<poi><abbr short=\"ДК\" full=\"Дом культуры\"/>"
+				+ "<service word=\"ЦНАП\" tags=\"office=government\" name=\"\\bЦНАП\\b\"/></poi>");
+		assertEquals(2, rules.index().size());
+		SearchModLocaleRules.Rule abbreviation = rules.index().get(0);
+		assertEquals("Дом культуры Октябрь", abbreviation.apply("ДК Октябрь"));
+		assertEquals("Дом культуры Октябрь", abbreviation.apply("ДК. Октябрь"));
+		assertEquals("ДК Октябрь", rules.index().get(1).apply("Дом культуры Октябрь"));
+		assertNull(abbreviation.apply("ДКС"));
+		assertTrue(abbreviation.appliesTo(SearchModRuleOwner.POI));
+		assertFalse(abbreviation.appliesTo(SearchModRuleOwner.STREET));
+		assertEquals(1, rules.services().size());
+		assertTrue(rules.services().get(0).matches(Map.of("office", "government"), "ЦНАП Деснянського району"));
+		assertFalse(rules.services().get(0).matches(Map.of("office", "government"), "Податкова"));
 	}
 
 	@Test
@@ -509,8 +540,8 @@ public class SearchModLocaleRulesTest {
 	public void penaltyFreeWordsAreAligned() {
 		// a word of a name keeps its diacritics: "école" and "ecole" are one word of the dictionaries
 		String locale = "fr_ZZ";
-		SearchModLocaleRules rules = new SearchModLocaleRules(locale, List.of(layer("<index><class1>école</class1></index>"
-				+ "<query><skipPenalty object=\"street\">straße</skipPenalty>"
+		SearchModLocaleRules rules = new SearchModLocaleRules(locale, List.of(layer("<query><skipPenalty>école</skipPenalty>"
+				+ "<skipPenalty object=\"street\">straße</skipPenalty>"
 				+ "<skipPenalty object=\"poi\">strasse</skipPenalty></query>")));
 		assertEquals(List.of("street", "poi"), rules.skipPenalty().get("strasse"));
 		SearchModDictionary dictionary = new SearchModDictionary(locale, rules);
@@ -520,8 +551,6 @@ public class SearchModLocaleRulesTest {
 		assertTrue(dictionary.isCommonSkipOtherCnt("straße", SearchModRuleOwner.STREET));
 		assertTrue(dictionary.isCommonSkipOtherCnt("strasse", SearchModRuleOwner.POI));
 		assertFalse(dictionary.isCommonSkipOtherCnt("straße", SearchModRuleOwner.LOCALITY));
-		expect("<index><class1>école</class1></index><query><skipPenalty>ecole</skipPenalty></query>",
-				"<class1>");
 	}
 
 	private SearchModRulesParser.Layer layer(String body) {
