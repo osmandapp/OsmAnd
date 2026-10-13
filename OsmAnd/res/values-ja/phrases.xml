@@ -13,7 +13,7 @@
     <string name="poi_hotel">ホテル</string>
     <string name="poi_kindergarten">幼稚園・保育園;認定こども園;保育所;保育園;託児所</string>
     <string name="poi_library">図書館</string>
-    <string name="poi_pub">パブ・居酒屋;スナック;パブ</string>
+    <string name="poi_pub">パブ・居酒屋;スナック;小料理;パブ</string>
     <string name="poi_sauna">サウナ</string>
     <string name="poi_school">学校;中学校</string>
     <string name="poi_shop_yes">雑貨店</string>
@@ -70,7 +70,7 @@
     <string name="poi_farm">農作物直売所;農産物直売所</string>
     <string name="poi_greengrocer">青果店</string>
     <string name="poi_seafood">魚屋</string>
-    <string name="poi_confectionery">菓子店</string>
+    <string name="poi_confectionery">菓子店;パティスリー</string>
     <string name="poi_ice_cream">アイスクリーム屋</string>
     <string name="poi_supermarket">スーパーマーケット;スーパー</string>
     <string name="poi_tea">ティーショップ</string>
@@ -331,7 +331,7 @@
     <string name="poi_pharmacy">薬局</string>
     <string name="poi_hospital">病院</string>
     <string name="poi_doctors">診療所・医院;クリニック;医者</string>
-    <string name="poi_clinic">医療施設・健康センター;診療所</string>
+    <string name="poi_clinic">医療施設・健康センター;クリニック;診療所</string>
     <string name="poi_first_aid">応急処置施設</string>
     <string name="poi_nursing_home">老人ホーム</string>
     <string name="poi_baby_hatch">赤ちゃんポスト</string>
@@ -366,7 +366,7 @@
     <string name="poi_studio">テレビ・ラジオ・録音スタジオ</string>
     <string name="poi_bookmaker">ブックメーカー</string>
     <string name="poi_stadium">スタジアム</string>
-    <string name="poi_sports_centre">総合スポーツ場</string>
+    <string name="poi_sports_centre">総合スポーツ場;体育館</string>
     <string name="poi_golf_course">ゴルフ場</string>
     <string name="poi_ice_rink">アイススケート場</string>
     <string name="poi_pitch">運動場;テニスコート;野球場;サッカー場</string>
@@ -556,7 +556,7 @@
     <string name="poi_bench">ベンチ</string>
     <string name="poi_swimming_pool">プール</string>
     <string name="poi_water_park">レジャープール</string>
-    <string name="poi_park">公園;ポケットパーク</string>
+    <string name="poi_park">公園;児童遊園;ポケットパーク</string>
     <string name="poi_recreation_ground">レクリエーション広場</string>
     <string name="poi_village_green">共有地</string>
     <string name="poi_cafe">カフェ;カラオケ喫茶;コーヒーハウス</string>

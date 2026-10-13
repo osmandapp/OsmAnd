@@ -3,7 +3,7 @@
     <string name="poi_palaeontological_site">محوطه دیرینه شناسی</string>
     <string name="poi_bakery">نانوایی;نان;بربری;سنگک;لواش;سنگکی;لواشی;تافتون;فطیر</string>
     <string name="poi_alcohol">فروشگاه نوشیدنی‌های الکلی;مشروب فروشی</string>
-    <string name="poi_convenience">سوپرمارکت</string>
+    <string name="poi_convenience">سوپرمارکت;مارکت;سوپر</string>
     <string name="poi_mall">مرکز خرید;پاساژ</string>
     <string name="poi_beverages">فروشگاه نوشیدنی;نوشیدنی فروشی</string>
     <string name="poi_butcher">فروشگاه گوشت;گوشت;قصابی</string>
@@ -11,7 +11,7 @@
     <string name="poi_farm">فروشگاه محصولات مزرعه</string>
     <string name="poi_greengrocer">میوه و سبزی‌فروشی;میوه;سبزی;سبزیجات;میوه فروشی</string>
     <string name="poi_seafood">فروشگاه غذاهای دریایی;فروشگاه غذای دریایی</string>
-    <string name="poi_confectionery">شیرینی و آب‌نبات فروشی</string>
+    <string name="poi_confectionery">شیرینی و آب‌نبات فروشی;شیرینی</string>
     <string name="poi_ice_cream">بستنی فروشی</string>
     <string name="poi_supermarket">فروشگاه بزرگ;مارکت;سوپر;هایپر;هایپرمارکت;سوپر مارکت</string>
     <string name="poi_tea">فروشگاه چای</string>
@@ -211,7 +211,7 @@
     <string name="poi_school">مدرسه;دبیرستان;دبستان;هنرستان;راهنمایی;ابتدایی</string>
     <string name="poi_kindergarten">کودکستان;مهدکودک</string>
     <string name="poi_college">کالج;دانشکده</string>
-    <string name="poi_university">دانشگاه</string>
+    <string name="poi_university">دانشگاه;دانشکده</string>
     <string name="poi_social_facility">تسهیلات اجتماعی</string>
     <string name="poi_courthouse">دادگاه;دادگستری;دادسرا</string>
     <string name="poi_prison">زندان</string>
@@ -505,7 +505,7 @@
     <string name="poi_craft_window_construction">ساخت و ساز پنجره</string>
     <string name="poi_funeral_directors">قبرکن</string>
     <string name="poi_craft_computer">صنایع کامپیوتر</string>
-    <string name="poi_beauty">سالن زیبایی</string>
+    <string name="poi_beauty">سالن زیبایی;آرایش</string>
     <string name="poi_beauty_salon_nails">کاشت ناخن; مانیکور</string>
     <string name="poi_hairdresser">آرایشگر;پیرایش;آرایش</string>
     <string name="poi_massage">سالن ماساژ</string>

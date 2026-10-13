@@ -42,8 +42,8 @@
     <string name="poi_bakery">مخبز;افران;مخبزة;صمون;مخابز;أفران;متجر معجنات</string>
     <string name="poi_alcohol">محل الخمور;متجر مشروبات روحية;متجر مشروبات كحولية</string>
     <string name="poi_cheese">متجر الجبن;متجر جبن</string>
-    <string name="poi_convenience">بقالة - متجر صغير;بقالة;تموينات;بقال;دكان;بقاله;سوبيرات;متجر صغير</string>
-    <string name="poi_supermarket">سوبر ماركت;اسواق;ماركت;سوبر;أسواق;سوبرماركت;هايبر;ماركيت;بقالية</string>
+    <string name="poi_convenience">بقالة - متجر صغير;بقالة;تموينات;بقال;دكان;بقاله;سوبيرات;بقالية;متجر صغير</string>
+    <string name="poi_supermarket">سوبر ماركت;اسواق;ماركت;سوبر;أسواق;سوبرماركت;تموينات;هايبر;ماركيت;بقالية</string>
     <string name="poi_pasta">متجر المعكرونة;متجر المكرونة</string>
     <string name="poi_antiques">متجر تحف;متجر تحفيات</string>
     <string name="poi_bathroom_furnishing">أثاث الحمام</string>
@@ -116,7 +116,7 @@
     <string name="poi_craft_carpenter">نجار</string>
     <string name="poi_craft_plumber">سباكة</string>
     <string name="poi_car">معرض سيارات</string>
-    <string name="poi_car_repair">ورشة تصليح السيارات</string>
+    <string name="poi_car_repair">ورشة تصليح السيارات;بنشر</string>
     <string name="poi_recycling_printer_cartridges">خراطيش الطابعة</string>
     <string name="poi_recycling_car_batteries">بطاريات سيارات</string>
     <string name="poi_recycling_cars">سيارات</string>
@@ -695,7 +695,7 @@
     <string name="poi_beauty_salon_nails">تجميل الاظافر</string>
     <string name="poi_massage">صالون تدليك;قاعة تدليك</string>
     <string name="poi_tattoo">صالون وشم;قاعة رسم الوشم;محل وشوم</string>
-    <string name="poi_dry_cleaning">مغسلة ملابس;تنظيف جاف;غسيل جاف</string>
+    <string name="poi_dry_cleaning">مغسلة ملابس;مصبغة;تنظيف جاف;غسيل جاف</string>
     <string name="poi_laundry">غسيل الملابس;مغاسل;مصبغة;غسيل ملابس</string>
     <string name="poi_car_rental">تأجير سيارات</string>
     <string name="poi_car_sharing">مشاركة السيارات;تقاسم السيارة;مشاركة السيارة</string>

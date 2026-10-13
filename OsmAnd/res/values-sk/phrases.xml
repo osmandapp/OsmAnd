@@ -325,7 +325,7 @@
     <string name="poi_chalet">Rekreačná chata;Prístrešok;chata</string>
     <string name="poi_apartment">Apartmány</string>
     <string name="poi_place_of_worship">Náboženské miesto;chrám</string>
-    <string name="poi_religion_christian">Kresťanstvo;kostol</string>
+    <string name="poi_religion_christian">Kresťanstvo;kostol;chrám</string>
     <string name="poi_religion_jewish">Judaizmus</string>
     <string name="poi_religion_muslim">Islam</string>
     <string name="poi_religion_sikh">Sikhizmus</string>

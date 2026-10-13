@@ -146,7 +146,7 @@
     <string name="poi_college">Hochschule;volkshochschule</string>
     <string name="poi_communication_tower">Funkmast</string>
     <string name="poi_community_centre">Gemeindezentrum;dorfgemeinschaftshaus;Bürgerhaus;jugendzentrum;pfarrheim;jugendtreff;jugendclub;Stadtteilzentrum;Pfarrsaal;Bürgersaal;Jugendraum;Gemeinschaftszentrum</string>
-    <string name="poi_company">Firma</string>
+    <string name="poi_company">Firma;Spedition</string>
     <string name="poi_compressed_air">Druckluft</string>
     <string name="poi_craft_computer">Computer</string>
     <string name="poi_computer">Computergeschäft</string>
@@ -204,7 +204,7 @@
     <string name="poi_leisure_fishing">Angelplatz</string>
     <string name="poi_fishing">Anglerbedarf</string>
     <string name="poi_fjord">Fjord</string>
-    <string name="poi_florist">Blumenhandlung;Blumen;blumenhaus;floristik;Blumenladen;Blumengeschäft;Blumenstube;Florist</string>
+    <string name="poi_florist">Blumenhandlung;Blumen;Gärtnerei;blumenhaus;floristik;Blumenladen;Blumengeschäft;Blumenstube;Florist</string>
     <string name="poi_food_court">Markthalle</string>
     <string name="poi_ford">Furt</string>
     <string name="poi_fort">Fort</string>
@@ -255,7 +255,7 @@
     <string name="poi_houseware">Haushaltswaren</string>
     <string name="poi_hunting">Jagdausrüstung</string>
     <string name="poi_hunting_stand">Jägerstand/Ansitz;Jägerstand</string>
-    <string name="poi_craft_hvac">Heizung, Lüftung, Klimatisierung;Heizungsbau</string>
+    <string name="poi_craft_hvac">Heizung, Lüftung, Klimatisierung;Sanitär;Haustechnik;Heizungsbau</string>
     <string name="poi_ice_cream">Eisdiele;Eiscafé;Eiscafe;eismanufaktur;Eissalon;Softeis</string>
     <string name="poi_ice_rink">Eislaufbahn;Eislaufplatz</string>
     <string name="poi_ice_skating">Eislaufen</string>
@@ -272,7 +272,7 @@
     <string name="poi_jewelry">Juwelier;goldschmiede;Schmuck;Goldschmied</string>
     <string name="poi_craft_key_cutter">Schlüsselfräser</string>
     <string name="poi_kindergarten">Kindergarten;kindertagesstätte;kinderhaus;familienzentrum;kindertageseinrichtung;Kinderkrippe;waldkindergarten;Hort;kinderladen;waldorfkindergarten;landeskindergarten;Krippe;naturkindergarten;kindergruppe</string>
-    <string name="poi_kiosk">Kiosk;trinkhalle;Büdchen</string>
+    <string name="poi_kiosk">Kiosk;Späti;trinkhalle;Büdchen</string>
     <string name="poi_kitchen">Küchengeräte;Küchenstudio</string>
     <string name="poi_korfball">Korfball</string>
     <string name="poi_landfill">Mülldeponie</string>
@@ -369,7 +369,7 @@
     <string name="poi_religion_taoist">Taoismus</string>
     <string name="poi_craft_plasterer">Stuckateur</string>
     <string name="poi_playground">Spielplatz;kinderspielplatz;waldspielplatz;wasserspielplatz;abenteuerspielplatz;Jugendspielplatz</string>
-    <string name="poi_craft_plumber">Installateur;Sanitär;Haustechnik</string>
+    <string name="poi_craft_plumber">Installateur;Sanitär;Haustechnik;Heizungsbau</string>
     <string name="poi_podiatrist">Podologe</string>
     <string name="poi_police">Polizei;polizeiinspektion;Polizeistation;polizeiposten;polizeirevier;polizeiwache;polizeikommissariat;Bundespolizeirevier</string>
     <string name="poi_post_box">Briefkasten;Briefeinwurf</string>
@@ -488,7 +488,7 @@
     <string name="poi_social_facility">Soziale Einrichtung;seniorenzentrum;seniorenresidenz;sozialstation;pflegezentrum;seniorenwohnanlage;altenpflegeheim;seniorenpflegeheim;seniorenhaus;jugendhilfe;alterszentrum;diakoniestation;Gemeinschaftsunterkunft;Betreuungszentrum</string>
     <string name="poi_speech_therapist">Sprachtherapeut</string>
     <string name="poi_speed_camera">Blitzer</string>
-    <string name="poi_sports_centre">Sportzentrum;bezirkssportanlage;Kletterhalle;Fitness-Center;Fitness-Zentrum</string>
+    <string name="poi_sports_centre">Sportzentrum;Turnhalle;bezirkssportanlage;Schulsporthalle;Kletterhalle;Schulturnhalle;Fitness-Center;Fitness-Zentrum</string>
     <string name="poi_sports">Sportartikel;Sportgeschäft</string>
     <string name="poi_spring">Quelle</string>
     <string name="poi_stadium">Stadion</string>
@@ -505,7 +505,7 @@
     <string name="poi_subway_entrance">U-Bahn-Eingang</string>
     <string name="poi_subway_station">Ja;U-Bahnstation;ubahn;u-Bahn-Station</string>
     <string name="poi_craft_sun_protection">Sonnenschutz</string>
-    <string name="poi_supermarket">Supermarkt</string>
+    <string name="poi_supermarket">Supermarkt;Lebensmittel</string>
     <string name="poi_surveillance">Überwachung</string>
     <string name="poi_survey_point">Vermessungspunkt</string>
     <string name="poi_craft_chimney_sweeper">Kaminkehrer</string>

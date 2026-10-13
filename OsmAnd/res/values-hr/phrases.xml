@@ -147,7 +147,7 @@
     <string name="poi_attraction_maze">Labirint</string>
     <string name="poi_lodging">Odmaralište</string>
     <string name="poi_hotel">Hotel</string>
-    <string name="poi_guest_house">Kuća za goste;pansion</string>
+    <string name="poi_guest_house">Kuća za goste;apartments;pansion</string>
     <string name="poi_religion_buddhist">Budizam</string>
     <string name="poi_denomination_scientist">Znanstvenik</string>
     <string name="poi_club_automobile">Automobilski klub</string>

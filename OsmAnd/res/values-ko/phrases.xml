@@ -225,7 +225,7 @@
     <string name="poi_place_allotments">부담금</string>
     <string name="poi_place_farm">농장</string>
     <string name="poi_pharmacy">약국</string>
-    <string name="poi_hospital">병원</string>
+    <string name="poi_hospital">병원;한의원</string>
     <string name="poi_doctors">의사;한의원;의원</string>
     <string name="poi_clinic">클리닉</string>
     <string name="poi_first_aid">응급 처치</string>
@@ -414,7 +414,7 @@
     <string name="poi_arts_centre">예술 센터;예술회관</string>
     <string name="poi_cinema">시네마</string>
     <string name="poi_casino">카지노</string>
-    <string name="poi_community_centre">커뮤니티 센터;복지관</string>
+    <string name="poi_community_centre">커뮤니티 센터;경로당;복지관</string>
     <string name="poi_social_centre">사회적인 센터</string>
     <string name="poi_theatre">극장</string>
     <string name="poi_theatre_genre_circus">서커스</string>
@@ -493,7 +493,7 @@
     <string name="poi_craft_window_construction">창문 건설</string>
     <string name="poi_funeral_directors">장례 감독;장례식장</string>
     <string name="poi_craft_computer">컴퓨터 기술</string>
-    <string name="poi_beauty">뷰티 살롱;스킨케어</string>
+    <string name="poi_beauty">뷰티 살롱;스킨케어;메이크업</string>
     <string name="poi_beauty_salon_nails">네일 살롱</string>
     <string name="poi_hairdresser">헤어 드레서;미용실;헤어샵;헤어살롱;메이크업</string>
     <string name="poi_massage">마사지 살롱</string>

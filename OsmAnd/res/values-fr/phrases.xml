@@ -90,7 +90,7 @@
     <string name="poi_city">Ville</string>
     <string name="poi_city_wall">Remparts</string>
     <string name="poi_climbing">Escalade</string>
-    <string name="poi_clinic">Clinique</string>
+    <string name="poi_clinic">Clinique;dispensaire</string>
     <string name="poi_clothes">Magasin de vêtements;Magasin de vetements;Vêtements de sport;mode femme;mode homme;robe de mariée;vêtements bébé;Vêtements de mariée;Vêtements enfants;Vêtements femme;Vêtements homme</string>
     <string name="poi_club_art">Club d\'art</string>
     <string name="poi_club_charity">Association caritative</string>
@@ -195,7 +195,7 @@
     <string name="poi_it">Technologies de l\'information et de la communication</string>
     <string name="poi_jewelry">Bijouterie;bijoux;joaillerie</string>
     <string name="poi_craft_key_cutter">Service de reproduction de clefs;Reproduction de clé</string>
-    <string name="poi_kindergarten">Jardin d\'enfants;crèche;garderie;multi-accueil;préscolaire;halte-garderie</string>
+    <string name="poi_kindergarten">Jardin d\'enfants;crèche;garderie;maternelle;multi-accueil;préscolaire;halte-garderie</string>
     <string name="poi_kiosk">Kiosque</string>
     <string name="poi_korfball">Korfball</string>
     <string name="poi_landfill">Décharge</string>
@@ -280,7 +280,7 @@
     <string name="poi_reef">Récif</string>
     <string name="poi_research">Centre de recherche</string>
     <string name="poi_resort">Station touristique;Complexe touristique</string>
-    <string name="poi_restaurant">Restaurant;resto;garbadrome;garba</string>
+    <string name="poi_restaurant">Restaurant;resto;garbadrome;garba;hotely</string>
     <string name="poi_ridge">Crête</string>
     <string name="poi_river">Rivière;fleuve</string>
     <string name="poi_historic_ruins">Ruines historiques</string>
@@ -307,7 +307,7 @@
     <string name="poi_social_facility">Service social;EHPAD;Maison de retraite;Établissement de services sociaux</string>
     <string name="poi_speed_camera">Radar automatique</string>
     <string name="poi_sports">Magasin de sport;Articles de sport</string>
-    <string name="poi_sports_centre">Centre sportif</string>
+    <string name="poi_sports_centre">Centre sportif;gymnase</string>
     <string name="poi_spring">Source</string>
     <string name="poi_stadium">Stade</string>
     <string name="poi_stone">Rocher isolé</string>
@@ -804,7 +804,7 @@
     <string name="poi_block">Bloc</string>
     <string name="poi_abandoned">Abandonné</string>
     <string name="poi_pasta">Magasin de pâtes</string>
-    <string name="poi_pastry">Pâtisserie</string>
+    <string name="poi_pastry">Pâtisserie;pâtissier</string>
     <string name="poi_free_flying">Magasin d\'articles de vol libre</string>
     <string name="poi_leather">Magasin de cuir</string>
     <string name="poi_energy">Magasin de fourniture d\'énergie</string>

@@ -38,7 +38,7 @@
     <string name="poi_doityourself">Negozio per fai-da-te;bricolage</string>
     <string name="poi_erotic">Negozio erotica;Sexy Shop</string>
     <string name="poi_fishing">Negozio pesca;Negozio di pesca</string>
-    <string name="poi_florist">Fioreria / fiorista;fiori;fioreria;Fiorista;fioraio</string>
+    <string name="poi_florist">Fioreria / fiorista;fiori;fioreria;Fiorista;floricoltura;fioraio</string>
     <string name="poi_frame">Cornici</string>
     <string name="poi_furniture">Negozio mobili;arredamenti;Negozio di mobili</string>
     <string name="poi_garden_centre">Articoli per Giardinaggio;vivai;floricoltura;articoli da giardinaggio</string>
@@ -177,7 +177,7 @@
     <string name="poi_locality">Località non popolata</string>
     <string name="poi_pharmacy">Farmacia;parafarmacia;dispensario</string>
     <string name="poi_hospital">Ospedale</string>
-    <string name="poi_doctors">Medico;ambulatorio;Studio medico</string>
+    <string name="poi_doctors">Medico;ambulatorio;poliambulatorio;Studio medico</string>
     <string name="poi_clinic">Clinica;poliambulatorio</string>
     <string name="poi_first_aid">Pronto soccorso</string>
     <string name="poi_dentist">Dentista;studio odontoiatrico</string>
@@ -256,7 +256,7 @@
     <string name="poi_dry_cleaning">Lavasecco;tintoria;Lavaggio a secco</string>
     <string name="poi_tattoo">Tatuatore;Studio tatuaggi</string>
     <string name="poi_massage">Centro massaggi</string>
-    <string name="poi_hairdresser">Parrucchiere;parrucchieri;acconciature;barber;Parrucchiera;barbiere;barberia</string>
+    <string name="poi_hairdresser">Parrucchiere;parrucchieri;acconciature;barber;bellezza;Parrucchiera;barbiere;barberia</string>
     <string name="poi_beauty_salon_nails">Manicure</string>
     <string name="poi_beauty">Salone di bellezza;bellezza;Estetista</string>
     <string name="poi_craft_window_construction">Costruzione finestre</string>
@@ -281,7 +281,7 @@
     <string name="poi_alpine_hut">Rifugio alpino;Riparo;Rifugio;capanna;capanna alpina;capanna di montagna</string>
     <string name="poi_motel">Motel</string>
     <string name="poi_hostel">Ostello</string>
-    <string name="poi_guest_house">Pensione;affittacamere</string>
+    <string name="poi_guest_house">Pensione;garni;affittacamere</string>
     <string name="poi_hotel">Hotel;Albergo;garni</string>
     <string name="poi_theme_park">Parco a tema</string>
     <string name="poi_zoo">Zoo;giardino zoologico</string>
@@ -360,7 +360,7 @@
     <string name="poi_educational_institution">Istituto scolastico</string>
     <string name="poi_bookmaker">Scommesse;Centro scommesse</string>
     <string name="poi_stadium">Stadio</string>
-    <string name="poi_sports_centre">Centro sportivo;palazzetto;polisportivo</string>
+    <string name="poi_sports_centre">Centro sportivo;palazzetto;bocciodromo;polisportivo</string>
     <string name="poi_ice_rink">Pista pattinaggio sul ghiaccio</string>
     <string name="poi_athletics">Atletica leggera</string>
     <string name="poi_boules">Bocce</string>
@@ -402,7 +402,7 @@
     <string name="poi_club_photography">Club fotografico</string>
     <string name="poi_club_hunting">Club caccia</string>
     <string name="poi_library">Biblioteca</string>
-    <string name="poi_theatre">Teatro</string>
+    <string name="poi_theatre">Teatro;cineteatro</string>
     <string name="poi_theatre_genre_circus">Circo</string>
     <string name="poi_dance_floor">Sala da ballo</string>
     <string name="poi_nightclub">Discoteca;Disko;Disco;Club notturno;Night club;locale notturno</string>
@@ -416,7 +416,7 @@
     <string name="poi_cafe">Caffetteria;caffé;caffe;baretto</string>
     <string name="poi_restaurant">Ristorante;pizzeria;trattoria;osteria;locanda;taverna;hostaria;hosteria;tavernetta;stube;ristorantino</string>
     <string name="poi_fast_food">Fast food</string>
-    <string name="poi_bar">American Bar</string>
+    <string name="poi_bar">American Bar;baretto</string>
     <string name="poi_pub">Pub</string>
     <string name="poi_drinking_water">Acqua potabile;Fontanella;fontanello;potabile</string>
     <string name="poi_barbecue">Barbecue;griglia per barbecue</string>
@@ -641,7 +641,7 @@
     <string name="poi_natural">Natura</string>
     <string name="poi_seamark">Nautico</string>
     <string name="poi_user_defined_other">Definito dall\'utente</string>
-    <string name="poi_cheese">Negozio di latticini;Negozio di formaggi</string>
+    <string name="poi_cheese">Negozio di latticini;caseificio;Negozio di formaggi</string>
     <string name="poi_wine">Enoteca</string>
     <string name="poi_camera">Fotocamere e lenti;Negozio di macchine fotografiche</string>
     <string name="poi_candles">Negozio di candele</string>
@@ -4137,7 +4137,7 @@
     <string name="poi_glacier_type_remnant">Residuo</string>
     <string name="poi_checkpoint_type_stamp">Punto di timbratura</string>
     <string name="poi_substation_field_gathering">Raccolta sul campo</string>
-    <string name="poi_childcare">Assistenza all\'infanzia;cura dell\'infanzia</string>
+    <string name="poi_childcare">Assistenza all\'infanzia;nido;cura dell\'infanzia</string>
     <string name="poi_denotation_landmark">Punto di interesse</string>
     <string name="poi_rescue_box">Cassetta di pronto soccorso</string>
     <string name="poi_motor_vehicle_destination">Accesso ai veicoli a motore: destinazione</string>

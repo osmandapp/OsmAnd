@@ -58,7 +58,7 @@
     <string name="poi_seafood">Peixaria</string>
     <string name="poi_confectionery">Confeitaria;loja de doces</string>
     <string name="poi_ice_cream">Gelataria</string>
-    <string name="poi_supermarket">Hiper / supermercado;Supermercado;atacarejo;Hipermercado</string>
+    <string name="poi_supermarket">Hiper / supermercado;Supermercado;mercadinho;atacarejo;Hipermercado</string>
     <string name="poi_tea">Loja de chás</string>
     <string name="poi_pasta">Loja de massas alimentares</string>
     <string name="poi_pastry">Pastelaria</string>
@@ -88,7 +88,7 @@
     <string name="poi_curtain">Loja de cortinas</string>
     <string name="poi_fabric">Loja de tecidos</string>
     <string name="poi_dive">Equipamento de mergulho</string>
-    <string name="poi_doityourself">Loja de bricolagem</string>
+    <string name="poi_doityourself">Loja de bricolagem;ferragem;ferragens</string>
     <string name="poi_doors">Portas</string>
     <string name="poi_erotic">Loja de artigos eróticos / sex shop;Sex Shop;Loja de artigos eróticos</string>
     <string name="poi_fishing">Equipamento de pesca;Loja de pesca</string>
@@ -547,7 +547,7 @@
     <string name="poi_social_facility">Serviço social;asilo;Instituição de serviços sociais</string>
     <string name="poi_courthouse">Tribunal;fórum</string>
     <string name="poi_prison">Prisão;penitenciária;presídio;cadeia</string>
-    <string name="poi_register_office">Cartório de registo civil;cartório</string>
+    <string name="poi_register_office">Cartório de registo civil;cartório;tabelionato</string>
     <string name="poi_embassy">Embaixada</string>
     <string name="poi_government">Governo;órgão público</string>
     <string name="poi_prosecutor">Procurador de justiça</string>
@@ -902,7 +902,7 @@
     <string name="poi_village_green">Village green (GB)</string>
     <string name="poi_cafe">Café;cafeteria</string>
     <string name="poi_biergarten">Jardim da cerveja (biergarten)</string>
-    <string name="poi_restaurant">Restaurante</string>
+    <string name="poi_restaurant">Restaurante;choperia</string>
     <string name="poi_fast_food">Comida rápida;lanches;lanche;lancheria;pronto-a-comer</string>
     <string name="poi_bar">Bar</string>
     <string name="poi_pub">Taberna / pub / tasca;choperia</string>
@@ -958,9 +958,9 @@
     <string name="poi_craft_window_construction">Fabricante de janelas</string>
     <string name="poi_funeral_directors">Funerária</string>
     <string name="poi_craft_computer">Montagem de computadores</string>
-    <string name="poi_beauty">Salão de beleza;beleza</string>
+    <string name="poi_beauty">Salão de beleza;beleza;cabelos</string>
     <string name="poi_beauty_salon_nails">Manicura</string>
-    <string name="poi_hairdresser">Cabeleireiro/a;barbearia;cabeleireira;cabeleireiros;cabelos;barbershop;barbeiro</string>
+    <string name="poi_hairdresser">Cabeleireiro/a;barbearia;beleza;cabeleireira;cabeleireiros;cabelos;barbershop;barbeiro</string>
     <string name="poi_massage">Salão de massagens;Centro de massagens</string>
     <string name="poi_tattoo">Estúdio de tatuagem;Estúdio de tatuagens</string>
     <string name="poi_dry_cleaning">Limpeza de roupa a seco;Lavagem a seco</string>
@@ -1696,7 +1696,7 @@
     <string name="poi_service_repair">Reparação</string>
     <string name="poi_service_repair_no">Sem reparação</string>
     <string name="poi_service_electrical">Reparação de veículos elétricos</string>
-    <string name="poi_motorcycle_repair">Reparação de motos;Oficina de motos</string>
+    <string name="poi_motorcycle_repair">Reparação de motos;motos;Oficina de motos</string>
     <string name="poi_self_service_yes">Sim;Auto-serviço</string>
     <string name="poi_self_service_no">Não;Sem auto-serviço</string>
     <string name="poi_automated_yes">Sim;Automatizado</string>

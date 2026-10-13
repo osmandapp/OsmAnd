@@ -324,7 +324,7 @@
     <string name="poi_pharmacy">Аптека;госаптека</string>
     <string name="poi_hospital">Больница;диспансер;госпиталь</string>
     <string name="poi_doctors">Врач</string>
-    <string name="poi_clinic">Поликлиника;Клиника;медицинский центр</string>
+    <string name="poi_clinic">Поликлиника;Клиника;диспансер;медицинский центр</string>
     <string name="poi_first_aid">Первая помощь</string>
     <string name="poi_dentist">Стоматология;Лечение зубов;Зубной врач;стоматолог;дантист</string>
     <string name="poi_nursing_home">Дом престарелых</string>
@@ -524,7 +524,7 @@
     <string name="poi_park">Парк;сквер</string>
     <string name="poi_cafe">Кафе;чайхана;чайхона</string>
     <string name="poi_biergarten">Летнее кафе</string>
-    <string name="poi_restaurant">Ресторан</string>
+    <string name="poi_restaurant">Ресторан;чайхона</string>
     <string name="poi_fast_food">Фастфуд (быстрое питание);быстрое питание</string>
     <string name="poi_bar">Бар;коктейль бар;пивной ресторан</string>
     <string name="poi_pub">Паб</string>

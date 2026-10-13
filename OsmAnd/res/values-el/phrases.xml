@@ -152,7 +152,7 @@
     <string name="poi_cheese">Κατάστημα τυριών</string>
     <string name="poi_chocolate">Κατάστημα σοκολάτας</string>
     <string name="poi_coffee">Καφενείο</string>
-    <string name="poi_convenience">Παντοπωλείο</string>
+    <string name="poi_convenience">Παντοπωλείο;μάρκετ</string>
     <string name="poi_mall">Εμπορικό κέντρο</string>
     <string name="poi_beverages">Κατάστημα ποτών</string>
     <string name="poi_butcher">Κρεοπωλείο</string>
@@ -603,7 +603,7 @@
     <string name="poi_foundation">Ίδρυμα</string>
     <string name="poi_tax_advisor">Φοροτεχνικό γραφείο</string>
     <string name="poi_stadium">Στάδιο</string>
-    <string name="poi_sports_centre">Αθλητικό κέντρο</string>
+    <string name="poi_sports_centre">Αθλητικό κέντρο;κολυμβητήριο</string>
     <string name="poi_golf_course">Γήπεδο γκολφ</string>
     <string name="poi_ice_rink">Παγοδρόμιο</string>
     <string name="poi_pitch">Γήπεδο;Γήπεδο αθλοπαιδιών</string>
@@ -714,7 +714,7 @@
     <string name="poi_lean_to">Υπόστεγο;Στέγαστρο;Καταφύγιο</string>
     <string name="poi_hunting_lodge">Κυνηγετικό καταφύγιο;Καταφύγιο</string>
     <string name="poi_place_of_worship">Τόπος λατρείας;ναός;Χώρος λατρείας</string>
-    <string name="poi_religion_christian">Χριστιανισμός;Εκκλησία;εκκλησάκι;παρεκκλήσι;εξωκλήσι;παρεκκλήσιο</string>
+    <string name="poi_religion_christian">Χριστιανισμός;ναός;Εκκλησία;εκκλησάκι;παρεκκλήσι;εξωκλήσι;παρεκκλήσιο</string>
     <string name="poi_religion_jewish">Ιουδαϊσμός</string>
     <string name="poi_religion_muslim">Ισλάμ</string>
     <string name="poi_religion_sikh">Σιχισμός</string>

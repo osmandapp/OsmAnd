@@ -408,7 +408,7 @@
     <string name="poi_traffic_calming_bump">Cnapán Luais</string>
     <string name="poi_traffic_calming_hump">Hump Luas</string>
     <string name="poi_traffic_calming_island">Oileán tráchta</string>
-    <string name="poi_car_repair">Deisiú carranna</string>
+    <string name="poi_car_repair">Deisiú carranna;motors</string>
     <string name="poi_vehicle_inspection">Cigireacht feithicle</string>
     <string name="poi_car_wash">Nigh carranna</string>
     <string name="poi_fuel">Stáisiún gáis; Stáisiún gásailín; Stáisiún líonta; Stáisiún peitril</string>
@@ -521,7 +521,7 @@
     <string name="poi_hospital">Ospidéal</string>
     <string name="poi_doctors">Dochtúirí;surgery</string>
     <string name="poi_clinic">Clinic</string>
-    <string name="poi_dentist">Fiaclóir</string>
+    <string name="poi_dentist">Fiaclóir;surgery</string>
     <string name="poi_nursing_home">Teach altranais</string>
     <string name="poi_baby_hatch">Haiste leanbh</string>
     <string name="poi_veterinary">Tréidliacht</string>

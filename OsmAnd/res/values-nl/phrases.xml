@@ -15,7 +15,7 @@
     <string name="poi_confectionery">Banketbakkerij</string>
     <string name="poi_military_nuclear_explosion_site">Kernexplosiesite</string>
     <string name="poi_ice_cream">IJssalon</string>
-    <string name="poi_supermarket">Supermarkt</string>
+    <string name="poi_supermarket">Supermarkt;minimarket</string>
     <string name="poi_tea">Theewinkel</string>
     <string name="poi_dairy">Zuivelwinkel</string>
     <string name="poi_vending_machine">Verkoopautomaat</string>
@@ -158,7 +158,7 @@
     <string name="poi_vineyard">Wijngaard</string>
     <string name="poi_orchard">Boomgaard</string>
     <string name="poi_school">School;basisschool;kindcentrum;lyceum;atheneum;montessorischool;freinetschool;vmbo;middelbare school</string>
-    <string name="poi_kindergarten">Kleuterschool</string>
+    <string name="poi_kindergarten">Kleuterschool;kinderdagverblijf</string>
     <string name="poi_university">Universiteit</string>
     <string name="poi_college">Hogeschool</string>
     <string name="poi_prison">Gevangenis</string>
@@ -286,7 +286,7 @@
     <string name="poi_arts_centre">Kunstcentrum</string>
     <string name="poi_cinema">Bioscoop;cinema</string>
     <string name="poi_casino">Casino</string>
-    <string name="poi_community_centre">Gemeenschapscentrum;dorpshuis;buurthuis;wijkcentrum;ontmoetingscentrum;jeugdhuis;parochiezaal</string>
+    <string name="poi_community_centre">Gemeenschapscentrum;dorpshuis;buurthuis;wijkcentrum;ontmoetingscentrum;jeugdhuis;feestzaal;parochiezaal</string>
     <string name="poi_social_centre">Sociaal centrum</string>
     <string name="poi_theatre">Theater;schouwburg</string>
     <string name="poi_theatre_genre_circus">Circus</string>
@@ -306,7 +306,7 @@
     <string name="poi_park">Park</string>
     <string name="poi_cafe">Café;lunchroom;theetuin;theehuis</string>
     <string name="poi_biergarten">Biergarten</string>
-    <string name="poi_restaurant">Restaurant;eetcafé</string>
+    <string name="poi_restaurant">Restaurant;eetcafé;taverne;lunchroom;grillroom;proeflokaal</string>
     <string name="poi_fast_food">Fastfood;frituur;snackbar;grillroom;friet</string>
     <string name="poi_bar">Bar</string>
     <string name="poi_pub">Kroeg;taverne;proeflokaal</string>
@@ -423,7 +423,7 @@
     <string name="poi_midwife">Vroedvrouw</string>
     <string name="poi_occupational_therapist">Ergotherapeut</string>
     <string name="poi_healthcare_rehabilitation">Revalidatie</string>
-    <string name="poi_sports_centre">Sportcentrum;sportpark;sportcomplex</string>
+    <string name="poi_sports_centre">Sportcentrum;sportpark;sportcomplex;gymzaal;sportzaal</string>
     <string name="poi_golf_course">Golfbaan;golfclub</string>
     <string name="poi_ice_rink">Schaatsbaan;ijsbaan</string>
     <string name="poi_running_track">Looppiste</string>

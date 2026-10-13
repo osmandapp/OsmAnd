@@ -131,7 +131,7 @@
     <string name="poi_cabin">Kabin;Tempat berlindung</string>
     <string name="poi_motel">Motel</string>
     <string name="poi_hostel">Hostel</string>
-    <string name="poi_hotel">Hotel</string>
+    <string name="poi_hotel">Hotel;cottage;bungalow</string>
     <string name="poi_lodging">Penginapan</string>
     <string name="poi_attraction_water_slide">Perosotan air</string>
     <string name="poi_attraction_slide">Perosotan</string>
@@ -206,7 +206,7 @@
     <string name="poi_windmill">Kincir angin</string>
     <string name="poi_courthouse">Gedung pengadilan</string>
     <string name="poi_prison">Penjara;lapas</string>
-    <string name="poi_university">Universitas</string>
+    <string name="poi_university">Universitas;politeknik</string>
     <string name="poi_school">Sekolah;SD;pesantren;madrasah;ponpes;perguruan;ibtidaiyah;dayah;SMP;SMA;SDN</string>
     <string name="poi_kindergarten">Taman kanak-kanak;TK;PAUD;RA;KB</string>
     <string name="poi_driving_school">Sekolah mengemudi</string>
@@ -511,7 +511,7 @@
     <string name="poi_motorcycle">Toko sepeda motor</string>
     <string name="poi_mobile_phone">Toko telepon seluler;Toko telepon</string>
     <string name="poi_kitchen">Perabotan dapur</string>
-    <string name="poi_kiosk">Kios</string>
+    <string name="poi_kiosk">Kios;kelontong</string>
     <string name="poi_jewelry">Toko perhiasan</string>
     <string name="poi_interior_decoration">Toko dekorasi interior;Dekorasi Interior</string>
     <string name="poi_hearing_aids">Alat bantu dengar</string>

@@ -4,7 +4,7 @@
     <string name="poi_bakery">Pékség;pékáru</string>
     <string name="poi_convenience">Kis élelmiszerbolt;élelmiszerbolt;vegyeskereskedés;kisbolt</string>
     <string name="poi_mall">Bevásárlóközpont</string>
-    <string name="poi_beverages">Italbolt</string>
+    <string name="poi_beverages">Italbolt;italdiszkont</string>
     <string name="poi_butcher">Hentes;húsbolt</string>
     <string name="poi_deli">Csemegebolt</string>
     <string name="poi_farm">Termelői bolt</string>
@@ -12,7 +12,7 @@
     <string name="poi_seafood">Halbolt</string>
     <string name="poi_confectionery">Édességbolt</string>
     <string name="poi_ice_cream">Fagylaltozó;fagyizó</string>
-    <string name="poi_supermarket">Szupermarket</string>
+    <string name="poi_supermarket">Szupermarket;Élelmiszerbolt</string>
     <string name="poi_tea">Teabolt</string>
     <string name="poi_dairy">Tejtermékbolt</string>
     <string name="poi_vending_machine">Árusító automata</string>
@@ -25,7 +25,7 @@
     <string name="poi_florist">Virágbolt;virágüzlet</string>
     <string name="poi_garden_centre">Kertészet;kertészeti áruház</string>
     <string name="poi_gift">Ajándékbolt;ajándék</string>
-    <string name="poi_hardware">Vas-műszaki bolt</string>
+    <string name="poi_hardware">Vas-műszaki bolt;barkácsbolt</string>
     <string name="poi_jewelry">Ékszerbolt;ékszer</string>
     <string name="poi_motorcycle">Motorkerékpár-üzlet;motorkerékpár-szaküzlet</string>
     <string name="poi_sports">Sportbolt</string>
@@ -130,7 +130,7 @@
     <string name="poi_zoo">Állatkert</string>
     <string name="poi_theme_park">Vidámpark</string>
     <string name="poi_hotel">Szálloda;hotel</string>
-    <string name="poi_guest_house">Vendégház;panzió</string>
+    <string name="poi_guest_house">Vendégház;panzió;apartmanház</string>
     <string name="poi_motel">Motel</string>
     <string name="poi_alpine_hut">Menedékház (személyzettel);Menedékhely;hegyi menedék</string>
     <string name="poi_place_of_worship">Istentiszteleti hely</string>
@@ -168,12 +168,12 @@
     <string name="poi_marina">Kishajókikötő</string>
     <string name="poi_miniature_golf">Minigolf</string>
     <string name="poi_playground">Játszótér</string>
-    <string name="poi_swimming_pool">Úszómedence;medence;uszoda</string>
+    <string name="poi_swimming_pool">Úszómedence;tanuszoda;medence;uszoda</string>
     <string name="poi_park">Park</string>
-    <string name="poi_cafe">Kávézó;kávéház</string>
+    <string name="poi_cafe">Kávézó;kávéház;eszpresszó</string>
     <string name="poi_biergarten">Sörkert</string>
     <string name="poi_restaurant">Étterem;vendéglő;ételbár;kisvendéglő;étkezde;halászcsárda</string>
-    <string name="poi_fast_food">Gyorsétterem;büfé</string>
+    <string name="poi_fast_food">Gyorsétterem;büfé;ételbár;étkezde</string>
     <string name="poi_bar">Bár</string>
     <string name="poi_pub">Kocsma;söröző;presszó;borozó;eszpresszó</string>
     <string name="poi_drinking_water">Ivóvíz</string>

@@ -140,7 +140,7 @@
     <string name="poi_confectionery">Magazin de produse de cofetărie;Cofetărie</string>
     <string name="poi_seafood">Magazin de fructe de mare</string>
     <string name="poi_greengrocer">Aprozar;legume;fructe</string>
-    <string name="poi_farm">Magazin agricol</string>
+    <string name="poi_farm">Magazin agricol;legume</string>
     <string name="poi_deli">Delicatese</string>
     <string name="poi_butcher">Carmangerie;Măcelărie</string>
     <string name="poi_beverages">Magazin de băuturi</string>
@@ -442,9 +442,9 @@
     <string name="poi_nursing_home">Azil de bătrâni</string>
     <string name="poi_dentist">Stomatolog;Dentist</string>
     <string name="poi_first_aid">Prim ajutor</string>
-    <string name="poi_clinic">Clinică;policlinica</string>
+    <string name="poi_clinic">Clinică;policlinica;dispensar</string>
     <string name="poi_doctors">Doctor;dispensar;Cabinet medical</string>
-    <string name="poi_hospital">Spital</string>
+    <string name="poi_hospital">Spital;policlinica</string>
     <string name="poi_pharmacy">Farmacie;pharma</string>
     <string name="poi_place_farm">Fermă</string>
     <string name="poi_place_allotments">Loturi de teren</string>
@@ -799,7 +799,7 @@
     <string name="poi_fuel">Benzinărie;Stație de benzină;Stație de alimentare;Benzinărie</string>
     <string name="poi_car_wash">Spălătorie auto;spălătorie</string>
     <string name="poi_vehicle_inspection">Inspecție vehicul;ITP</string>
-    <string name="poi_car_repair">Service auto;vulcanizare</string>
+    <string name="poi_car_repair">Service auto;vulcanizare;motors</string>
     <string name="poi_traffic_signals">Semafor</string>
     <string name="poi_traffic_calming_island">Insulă de trafic</string>
     <string name="poi_traffic_calming_choker">Guler</string>
