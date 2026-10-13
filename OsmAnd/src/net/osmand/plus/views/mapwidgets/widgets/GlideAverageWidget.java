@@ -9,6 +9,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -30,6 +31,7 @@ public class GlideAverageWidget extends GlideBaseWidget {
 	private final CommonPreference<Long> measuredIntervalPref;
 
 	private String cachedText = null;
+	private boolean cachedVerticalSpeedMode;
 	private boolean forceUpdate; // becomes 'true' when widget state switched
 
 	public GlideAverageWidget(@NonNull MapActivity mapActivity, @NonNull GlideAverageWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
@@ -42,19 +44,15 @@ public class GlideAverageWidget extends GlideBaseWidget {
 	@Override
 	protected void setupView(@NonNull View view) {
 		super.setupView(view);
-		updateModeIcons();
+		updateModeViews();
 		updateInfo(null);
-		updateWidgetName();
 	}
 
 	@Override
 	protected View.OnClickListener getOnClickListener() {
 		return v -> {
-			forceUpdate = true;
 			widgetState.changeToNextState();
-			updateModeIcons();
 			updateInfo(null);
-			updateWidgetName();
 		};
 	}
 
@@ -83,6 +81,11 @@ public class GlideAverageWidget extends GlideBaseWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
+		// the mode is switched either by tap or from the widget settings
+		if (cachedVerticalSpeedMode != isInVerticalSpeedState()) {
+			forceUpdate = true;
+			updateModeViews();
+		}
 		if (forceUpdate || isTimeToUpdate()) {
 			markUpdated();
 			long measuredInterval = measuredIntervalPref.get();
@@ -126,6 +129,12 @@ public class GlideAverageWidget extends GlideBaseWidget {
 		return OsmAndFormatter.formatValue(speed, unit, true, 1, app);
 	}
 
+	private void updateModeViews() {
+		cachedVerticalSpeedMode = isInVerticalSpeedState();
+		updateModeIcons();
+		updateWidgetName();
+	}
+
 	private void updateModeIcons() {
 		if (isInVerticalSpeedState()) {
 			setIcons(R.drawable.widget_vertical_average_speed_day, R.drawable.widget_vertical_average_speed_night);
@@ -136,6 +145,11 @@ public class GlideAverageWidget extends GlideBaseWidget {
 
 	public boolean isInVerticalSpeedState() {
 		return widgetState.getPreference().get();
+	}
+
+	@NonNull
+	public OsmandPreference<Boolean> getModePreference() {
+		return widgetState.getPreference();
 	}
 
 	@Override
