@@ -2929,7 +2929,7 @@
     <string name="cloud_email_already_registered">Ez az e-mail-cím már regisztrálva van.</string>
     <string name="cloud_email_not_registered">Ez az e-mail-címe nincs regisztrálva az OsmAnd Cloud szolgáltatásban</string>
     <string name="verify_email_address">E-mail-cím ellenőrzése</string>
-    <string name="osmand_cloud_login_descr">Írja be a regisztrációhoz használt e-mail-címet. Egy egyszer használatos jelszót küldünk erre.</string>
+    <string name="osmand_cloud_login_descr">Írja be azt az e-mail címet, amellyel regisztrált. Erre az e-mail-címre kapni fog egy egyszer használható jelszót.</string>
     <string name="osmand_cloud_create_account_descr">Adja meg az e-mail-címét, ahová küldünk egy ellenőrző kódot,\nés minden adatát összekapcsoljuk vele.</string>
     <string name="osmand_cloud_help_descr">Segítségre van szüksége\? Lépjen velünk kapcsolatba itt: %1$s</string>
     <string name="restore_from_file">Visszaállítás fájlból</string>
@@ -5394,4 +5394,5 @@
     <string name="eta_adapt_to_my_speed">Alkalmazkodás a sebességhez</string>
     <string name="eta_adapt_to_my_speed_descr">Az érkezési idő az elmúlt %1$s mért sebességen alapul.</string>
     <string name="eta_adapt_to_my_speed_off_descr">Az érkezési idő az útvonal egyes szakaszain várható sebesség alapján számítódik. Akkor kapcsolja be ezt a funkciót, ha azt szeretné, hogy a számítás a tényleges haladási sebességet vegye alapul.</string>
+    <string name="storage_directory_visible_external">Látható külső tároló</string>
 </resources>
