@@ -20,6 +20,7 @@ import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHARE_IMAGE_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.SIMULATE_POSITION_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
@@ -121,6 +122,8 @@ import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitud
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
 import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
+import net.osmand.plus.track.share.TrackShareImage;
+import net.osmand.plus.track.share.TrackShareImageFormatBottomSheet;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
@@ -166,6 +169,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
+		TrackShareImageFormatBottomSheet.FormatListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister,
 		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback, MapDisplayPositionManager.ICoveredScreenRectProvider, MapDisplayPositionManager.IMapDisplayPositionProvider {
@@ -1245,6 +1249,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 			} else if (buttonIndex == SHARE_BUTTON_INDEX) {
 				GpxUiHelper.saveAndShareGpxWithAppearance(app, mapActivity, gpxFile);
+			} else if (buttonIndex == SHARE_IMAGE_BUTTON_INDEX) {
+				TrackShareImageFormatBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
 			} else if (buttonIndex == UPLOAD_OSM_BUTTON_INDEX) {
 				OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 				if (osmEditingPlugin != null) {
@@ -1725,6 +1731,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private boolean isCurrentRecordingTrack() {
 		return app.getSavingTrackHelper().getCurrentTrack() == selectedGpxFile;
+	}
+
+	@Override
+	public void onFormatSelected(@NonNull TrackShareImage.Format format) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			// the map area shows the picture being rendered; the menu would cover it
+			hide();
+			TrackShareImage.start(mapActivity, selectedGpxFile, format, this::show);
+		}
 	}
 
 	private void hide() {
