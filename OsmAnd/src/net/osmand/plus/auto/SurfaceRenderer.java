@@ -17,6 +17,7 @@ import androidx.car.app.AppManager;
 import androidx.car.app.CarContext;
 import androidx.car.app.HostException;
 import androidx.car.app.SurfaceCallback;
+import androidx.car.app.annotations.RequiresCarApi;
 import androidx.car.app.SurfaceContainer;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
@@ -93,6 +94,13 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	public interface SurfaceRendererCallback {
 		void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea);
 		void onElevationChanging(float angle);
+
+		/**
+		 * @return true if the click was consumed by the content drawn over the map.
+		 */
+		default boolean onSurfaceClick(float x, float y) {
+			return false;
+		}
 	}
 
 	private void setupSurfaceView(@NonNull SurfaceContainer surfaceContainer) {
@@ -206,6 +214,15 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					getDisplayPositionManager().restoreMapRatio();
 					mapView.setupRenderingView();
 				}
+			}
+		}
+
+		@Override
+		@RequiresCarApi(5)
+		public void onClick(float x, float y) {
+			SurfaceRendererCallback callback = SurfaceRenderer.this.callback;
+			if (callback != null && callback.onSurfaceClick(x, y)) {
+				renderFrame();
 			}
 		}
 
