@@ -5,6 +5,7 @@ import net.osmand.aidlapi.map.MapFlyoverParams
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.flyover.FlyoverValues
 import net.osmand.plus.flyover.MapFlyoverRecorder
 import net.osmand.plus.track.helpers.SelectedGpxFile
 import net.osmand.plus.utils.AndroidUtils
@@ -28,7 +29,8 @@ import kotlin.math.tan
 /**
  * "Share as image" of a track: a picture of the track on the map, north up, with the activity and the region at
  * the top left, the OsmAnd logo at the top right, the totals in a column at the right and the elevation and speed
- * chart at the bottom, in one of the [Format]s. The map flyover recorder renders it as a single frame off the
+ * chart at the bottom, in one of the [Format]s; a wide picture has the region alone at the top left with the chart
+ * under it and the activity heading the totals under the logo. The map flyover recorder renders it as a single frame off the
  * screen, shows its progress in the map area and puts the map back afterwards; the picture is then shown for a
  * look before it is shared.
  */
@@ -46,13 +48,44 @@ class TrackShareImage private constructor(
 		SQUARE(1080, 1080, "square"),
 		/** 9:16, as a phone screen. */
 		SCREENSHOT(1080, 1920, "screenshot"),
+		/** 16:9, as a phone screen held sideways: the region at the top left with the chart under it, the logo at
+		 * the top right with the activity and the totals under it. */
+		SCREENSHOT_WIDE(1920, 1080, "screenshot_wide"),
 	}
+
+	/** The picture is wider than high: the sideways layout. */
+	private val wide = format.width > format.height
 
 	/** Picture pixels per dp of the overlay: the recorder lays the frame out as 800 dp on its long side. */
 	private val pxPerDp = max(format.width, format.height) / 800.0
 
 	/** The chart and the title block as far from the sides as the logo is from the top and the left. */
 	private val panelWidth = 1 - 2 * MARGIN_DP * pxPerDp / format.width
+
+	/**
+	 * On a wide picture the region stands alone at the top left, its row in line with the logo, and the chart
+	 * under it: on one line when the name fits up to a pin's width left of the logo, else on two lines with the
+	 * chart lower. Decided in advance with the widget's font.
+	 */
+	private val wideRegionLines: Int by lazy {
+		val region = regionName()
+		val paint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG)
+		paint.typeface = android.graphics.Typeface.create("sans-serif-medium", android.graphics.Typeface.NORMAL)
+		paint.textSize = (28 * pxPerDp).toFloat()
+		val available = format.width - (2 * MARGIN_DP + LOGO_WIDTH_DP + PIN_WIDTH_DP + 24) * pxPerDp
+		if (paint.measureText(region) <= available) 1 else 2
+	}
+
+	/** The chart under the region's one or two lines (48 dp each at the title's top) and a gap. */
+	private val wideChartTopDp get() = TITLE_TOP_DP + 48.0 * wideRegionLines + 8
+
+	/** The region as the recorder will show it, for measuring. */
+	private fun regionName(): String {
+		val points = selected.gpxFile.getAllSegmentsPoints().filter { !it.lat.isNaN() && !it.lon.isNaN() }
+		if (points.isEmpty()) return ""
+		val mid = points[points.size / 2]
+		return FlyoverValues.regionName(app, mid.lat, mid.lon) ?: ""
+	}
 
 	private fun record(): MapFlyoverParams {
 		val gpxFile = selected.gpxFile
@@ -66,8 +99,10 @@ class TrackShareImage private constructor(
 		val magnifier = app.osmandMap.mapDensity.toDouble()
 		val tilePx = 256.0 * max(1.0, max(format.width, format.height) / 640.0) * magnifier
 		// the track fits the whole width between the region block and the chart, under the totals too (they are
-		// drawn on the map itself)
-		val zoom = fitZoom(minLat, maxLat, minLon, maxLon, format.width * TRACK_WIDTH, format.height * TRACK_HEIGHT, tilePx)
+		// drawn on the map itself); on a wide picture the free field under the chart, left of the totals
+		val zoom = fitZoom(minLat, maxLat, minLon, maxLon,
+			format.width * (if (wide) WIDE_TRACK_WIDTH else TRACK_WIDTH),
+			format.height * (if (wide) WIDE_TRACK_HEIGHT else TRACK_HEIGHT), tilePx)
 		val centerLat = (minLat + maxLat) / 2
 		val centerLon = (minLon + maxLon) / 2
 
@@ -78,7 +113,7 @@ class TrackShareImage private constructor(
 			File(gpxFile.path)
 		}
 		val spec = JSONObject()
-		val target = JSONArray().put(0.5).put(TRACK_CENTER_Y)
+		val target = JSONArray().put(if (wide) WIDE_TRACK_CENTER_X else 0.5).put(if (wide) WIDE_TRACK_CENTER_Y else TRACK_CENTER_Y)
 		spec.put("keyframes", JSONArray().put(JSONObject().put("target", target)).put(JSONObject().put("target", target)))
 		spec.put("gpx", JSONArray().put(JSONObject()
 			.put("file", trackFile.absolutePath)
@@ -115,9 +150,12 @@ class TrackShareImage private constructor(
 
 	/** The elevation and speed chart at the bottom, on a translucent card. */
 	private fun chartPanel(): JSONObject = JSONObject()
-		.put("gravity", "bottom|center")
+		.put("gravity", if (wide) "top|left" else "bottom|center")
 		.put("margin", (MARGIN_DP * pxPerDp).roundToInt())
-		.put("width", panelWidth)
+		// above the attribution at the bottom right of a tall picture
+		.put("margin_bottom", (BOTTOM_MARGIN_DP * pxPerDp).roundToInt())
+		.put("margin_top", ((if (wide) wideChartTopDp else MARGIN_DP.toDouble()) * pxPerDp).roundToInt())
+		.put("width", if (wide) WIDE_CHART_WIDTH else panelWidth)
 		.put("background", CHART_BACKGROUND)
 		.put("widgets", JSONArray().put(JSONObject()
 			.put("type", "chart")
@@ -146,7 +184,7 @@ class TrackShareImage private constructor(
 				.put("icon", iconName).put("size", "medium").put("span", "row"))
 		}
 		title.put(JSONObject().put("type", "attribute").put("title", "").put("template", "{gpx[1].region}")
-			.put("size", "medium").put("span", "row").put("lines", REGION_LINES))
+			.put("size", "medium").put("span", "row").put("lines", if (wide) wideRegionLines else REGION_LINES))
 		val totals = JSONArray()
 		totals.put(JSONObject().put("type", "attribute").put("title", app.getString(R.string.distance)).put("value", "gpx[1].dist"))
 		if (analysis.isTimeSpecified()) {
@@ -163,23 +201,35 @@ class TrackShareImage private constructor(
 			totals.put(JSONObject().put("type", "attribute").put("title", app.getString(R.string.map_widget_ant_heart_rate)).put("value", "gpx[1].hr_avg"))
 		}
 		val margin = (MARGIN_DP * pxPerDp).roundToInt()
+		// on a wide picture the region alone at the top left and the activity heading the totals under the logo
+		val block = if (wide) JSONArray().put(title.get(title.length() - 1)) else title
+		val column = JSONArray()
+		if (wide && title.length() > 1) {
+			column.put(JSONObject(title.getJSONObject(0).toString()).put("size", "small"))
+		}
+		for (i in 0 until totals.length()) {
+			column.put(totals.get(i))
+		}
 		return listOf(
 			JSONObject()
 				.put("gravity", "top|left")
 				.put("margin", margin)
+				// the first row centred on the logo at the right
+				.put("margin_top", (TITLE_TOP_DP * pxPerDp).roundToInt())
 				.put("columns", 1)
 				.put("size", "medium")
 				.put("background", "transparent")
 				// clear of the logo: a long region name wraps, a very long one gets a smaller font
-				.put("width", TITLE_WIDTH)
-				.put("widgets", title),
+				.put("width", if (wide) 1 - (2 * MARGIN_DP + LOGO_WIDTH_DP + PIN_WIDTH_DP) * pxPerDp / format.width else TITLE_WIDTH)
+				.put("widgets", block),
 			JSONObject()
 				.put("gravity", "top|right")
 				.put("margin", margin)
-				.put("margin_top", (TOTALS_TOP_DP * pxPerDp).roundToInt())
-				.put("size", "medium")
+				.put("margin_top", ((if (wide) WIDE_TOTALS_TOP_DP else TOTALS_TOP_DP) * pxPerDp).roundToInt())
+				.put("columns", 1)
+				.put("size", if (wide) "small" else "medium")
 				.put("background", "transparent")
-				.put("widgets", totals))
+				.put("widgets", column))
 	}
 
 	private fun fileName(): String {
@@ -199,6 +249,20 @@ class TrackShareImage private constructor(
 		private const val MARGIN_DP = 32
 		/** The activity and the region take this much of the width, clear of the logo. */
 		private const val TITLE_WIDTH = 0.68
+		/** The title block from the top: the first row (48 dp) centred on the logo's pin (37 dp at 32 dp). */
+		private const val TITLE_TOP_DP = 27
+		/** The chart, the totals and the summary end above the attribution at the bottom right. */
+		private const val BOTTOM_MARGIN_DP = 40
+		/** The logo (pin, gap, wordmark) and the pin alone are about this wide, dp. */
+		private const val LOGO_WIDTH_DP = 150
+		private const val PIN_WIDTH_DP = 30
+		/** A wide picture: the chart's width, the totals' column right under the logo, the track's field. */
+		private const val WIDE_CHART_WIDTH = 0.5
+		private const val WIDE_TOTALS_TOP_DP = 72
+		private const val WIDE_TRACK_WIDTH = 0.72
+		private const val WIDE_TRACK_HEIGHT = 0.58
+		private const val WIDE_TRACK_CENTER_X = 0.4
+		private const val WIDE_TRACK_CENTER_Y = 0.66
 		/** A long region name wraps onto this many lines, and the room for them is kept. */
 		private const val REGION_LINES = 3
 		/** The column of totals starts below the activity and three lines of the region. */

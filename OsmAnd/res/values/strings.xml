@@ -6,6 +6,7 @@
 	<string name="share_image_square">Square, 1:1</string>
 	<string name="share_image_square_descr">The same, square for a social feed</string>
 	<string name="share_image_screenshot">Screenshot, 9:16</string>
+	<string name="share_image_screenshot_wide">Screenshot, 16:9</string>
 	<string name="share_image_screenshot_descr">The same, as a phone screen</string>
 	<string name="share_image_elevation_speed">Elevation · speed</string>
 	<string name="share_image_failed">Could not create the image: %1$s</string>

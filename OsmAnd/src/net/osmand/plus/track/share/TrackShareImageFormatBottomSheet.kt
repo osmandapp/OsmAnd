@@ -21,7 +21,11 @@ class TrackShareImageFormatBottomSheet : MenuBottomSheetDialogFragment() {
 		items.add(TitleItem(getString(R.string.share_as_image)))
 		addItem(Format.CARD, R.string.share_image_card, R.string.share_image_card_descr, R.drawable.ic_action_photo_dark)
 		addItem(Format.SQUARE, R.string.share_image_square, R.string.share_image_square_descr, R.drawable.ic_action_picture_size)
-		addItem(Format.SCREENSHOT, R.string.share_image_screenshot, R.string.share_image_screenshot_descr, R.drawable.ic_action_phone)
+		if (resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE) {
+			addItem(Format.SCREENSHOT_WIDE, R.string.share_image_screenshot_wide, R.string.share_image_screenshot_descr, R.drawable.ic_action_phone_landscape_orientation)
+		} else {
+			addItem(Format.SCREENSHOT, R.string.share_image_screenshot, R.string.share_image_screenshot_descr, R.drawable.ic_action_phone)
+		}
 	}
 
 	private fun addItem(format: Format, titleId: Int, descriptionId: Int, iconId: Int) {
