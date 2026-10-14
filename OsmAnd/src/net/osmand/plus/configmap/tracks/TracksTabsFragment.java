@@ -130,9 +130,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	@NonNull
 	@Override
 	protected TrackTabsHelper createTrackTabsHelper(@NonNull OsmandApplication app) {
-		return isSelectTracksMode()
-				? new SelectTracksTabsHelper(app, selectedTrackPaths)
-				: super.createTrackTabsHelper(app);
+		return new TrackTabsHelper(app, selectedTrackPaths);
 	}
 
 	@Override
@@ -412,11 +410,10 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	private void notifyTracksSelected() {
 		FragmentActivity activity = getActivity();
-		if (activity != null && selectionListenerTag != null
-				&& trackTabsHelper instanceof SelectTracksTabsHelper helper) {
+		if (activity != null && selectionListenerTag != null) {
 			FragmentManager manager = activity.getSupportFragmentManager();
 			if (manager.findFragmentByTag(selectionListenerTag) instanceof TracksSelectionListener listener) {
-				listener.onTracksSelected(helper.getSelectedPaths());
+				listener.onTracksSelected(trackTabsHelper.getSelectedPaths());
 			}
 		}
 	}
