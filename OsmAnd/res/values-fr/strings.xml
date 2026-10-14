@@ -2921,7 +2921,7 @@
     <string name="osmand_cloud_authorize_descr">Ne perdez jamais vos données. Sauvegardez et restaurez facilement toutes vos informations.</string>
     <string name="osmand_cloud_create_account_descr">Veuillez saisir votre adresse email, un code de vérification vous sera envoyé à cette adresse,
 \net toutes vos données y seront associées.</string>
-    <string name="osmand_cloud_login_descr">Veuillez saisir l\'adresse email utilisée à l\'inscription. Vous allez recevoir, à cette adresse, un mot de passe à usage unique.</string>
+    <string name="osmand_cloud_login_descr">Veuillez saisir l\'adresse email utilisée pour vous inscrire. Vous recevrez à cette adresse un mot de passe à usage unique.</string>
     <string name="cloud_email_not_registered">Cet email n\'est pas enregistré sur OsmAnd Cloud</string>
     <string name="backup_into_file">Sauvegarder dans un fichier</string>
     <string name="verification_code_missing_description">Le délai d\'envoi du code est de 10 minutes maximum, vérifiez votre dossier spam. Vous pouvez aussi utiliser le bouton ci-dessous.</string>
@@ -5388,4 +5388,13 @@
     <string name="map_source_folder_not_created">Impossible de créer le dossier pour la source de la carte. Essayez avec un autre nom.</string>
     <string name="flyover_recording">Enregistrement du survol de la carte : %1$s</string>
     <string name="flyovers">Vues aériennes</string>
+    <string name="storage_directory_visible_external">Stockage externe visible</string>
+    <string name="eta_group_header">Heure d’arrivée estimée</string>
+    <string name="travel_speed">Vitesse de déplacement</string>
+    <string name="default_speed_descr">Utilisée quand il n\'y a aucune donnée de vitesse pour la route ou lorsque que vous êtes immobile.</string>
+    <string name="speed_range">Plage de vitesse</string>
+    <string name="speed_range_descr">Utilisée à la fois pour calculer la durée de l\'itinéraire et l\'heure d\'arrivée.</string>
+    <string name="eta_adapt_to_my_speed">Prendre en compte ma vitesse</string>
+    <string name="eta_adapt_to_my_speed_descr">L\'heure d\'arrivée estimée est basée sur votre vitesse des dernières %1$s.</string>
+    <string name="eta_adapt_to_my_speed_off_descr">L\'heure d\'arrivée est calculée à partir d\'une vitesse estimée pour chaque route. Activez pour basculer ce calcul sur votre vitesse réelle.</string>
 </resources>
