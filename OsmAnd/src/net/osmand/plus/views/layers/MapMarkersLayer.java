@@ -753,7 +753,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private boolean isMarkerOnFavorite(@NonNull MapMarker marker) {
-		return marker.point != null && getApplication().getFavoritesHelper().getVisibleFavByLatLon(marker.point) != null;
+		FavouritesLayer favouritesLayer = getApplication().getOsmandMap().getMapLayers().getFavouritesLayer();
+		return marker.point != null && favouritesLayer != null && favouritesLayer.hasPointOnMapAt(marker.point);
 	}
 
 	@Nullable

@@ -46,6 +46,7 @@ import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.FavoritesTileProvider;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -69,7 +70,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private OsmandSettings settings;
 	private ContextMenuLayer contextMenuLayer;
 	private boolean showFavorites;
-	private boolean parkingPluginActive;
 	private float textScale = 1f;
 	private boolean textVisible;
 	private boolean nightMode;
@@ -137,22 +137,20 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean showFavorites = this.settings.SHOW_FAVORITES.get() || customObjectsDelegate != null;
 		boolean showFavoritesChanged = !Algorithms.objectEquals(this.showFavorites, showFavorites);
 		this.showFavorites = showFavorites;
-		boolean parkingPluginActive = isParkingPluginActive();
-		boolean parkingPluginChanged = this.parkingPluginActive != parkingPluginActive;
-		this.parkingPluginActive = parkingPluginActive;
 		long favoritesChangedTime = favouritesHelper.getLastModifiedTime();
 		boolean favoritesChanged = this.favoritesChangedTime != favoritesChangedTime;
 		this.favoritesChangedTime = favoritesChangedTime;
 
 		cache.clear();
 		if (hasMapRenderer()) {
-			if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
-					|| parkingPluginChanged || favoritesChanged || textScaleChanged || textVisibleChanged
+			if (mapActivityInvalidated || invalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
+					|| favoritesChanged || textScaleChanged || textVisibleChanged
 					|| (customObjectsDelegate != null && customObjectsDelegate.isChanged())) {
 				showFavorites();
 				if (customObjectsDelegate != null) {
 					customObjectsDelegate.acceptChanges();
 				}
+				invalidated = false;
 				mapRendererChanged = false;
 			}
 		} else {
@@ -166,12 +164,12 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					List<LatLon> fullObjectsLatLon = new ArrayList<>();
 					List<LatLon> smallObjectsLatLon = new ArrayList<>();
 					if (customObjectsDelegate != null) {
-						drawPoints(customObjectsDelegate.getMapObjects(), latLonBounds, false, parkingPluginActive, tileBox,
-								boundIntersections, iconSize, canvas, fullObjectsLatLon, smallObjectsLatLon);
+						drawPoints(customObjectsDelegate.getMapObjects(), latLonBounds, false, tileBox, boundIntersections, iconSize, canvas,
+								fullObjectsLatLon, smallObjectsLatLon);
 					} else {
 						for (FavoriteGroup group : getFavoriteGroups()) {
-							drawPoints(group.getPoints(), latLonBounds, isSynced(group), parkingPluginActive, tileBox,
-									boundIntersections, iconSize, canvas, fullObjectsLatLon, smallObjectsLatLon);
+							drawPoints(group.getPoints(), latLonBounds, isSynced(group), tileBox, boundIntersections, iconSize, canvas,
+									fullObjectsLatLon, smallObjectsLatLon);
 						}
 					}
 					this.fullObjectsLatLon = fullObjectsLatLon;
@@ -185,19 +183,19 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		mapActivityInvalidated = false;
 	}
 
-	private void drawPoints(List<FavouritePoint> pointsToDraw, QuadRect latLonBounds, boolean synced,
-	                        boolean parkingPluginActive, RotatedTileBox tileBox, QuadTree<QuadRect> boundIntersections,
-	                        float iconSize, Canvas canvas, List<LatLon> fullObjectsLatLon, List<LatLon> smallObjectsLatLon) {
+	private void drawPoints(List<FavouritePoint> pointsToDraw, QuadRect latLonBounds, boolean synced, RotatedTileBox tileBox,
+	                        QuadTree<QuadRect> boundIntersections, float iconSize, Canvas canvas,
+	                        List<LatLon> fullObjectsLatLon, List<LatLon> smallObjectsLatLon) {
 		List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
 
 		for (FavouritePoint favoritePoint : pointsToDraw) {
 			double lat = favoritePoint.getLatitude();
 			double lon = favoritePoint.getLongitude();
-			if (isPointVisibleOnMap(favoritePoint, parkingPluginActive) && favoritePoint != contextMenuLayer.getMoveableObject()
+			if (isPointVisibleOnMap(favoritePoint) && favoritePoint != contextMenuLayer.getMoveableObject()
 					&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
 					&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 				MapMarker marker = null;
-				if (isSyncedPoint(favoritePoint, synced)) {
+				if (synced) {
 					marker = mapMarkersHelper.getMapMarker(favoritePoint);
 					if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
 						continue;
@@ -238,22 +236,24 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	 * The parking favorite stays on the map while the Parking position plugin is active,
 	 * even if its folder is hidden. Other points follow the visibility of their folder.
 	 */
-	private boolean isPointVisibleOnMap(@NonNull FavouritePoint point, boolean parkingPluginActive) {
-		return point.isVisible() || parkingPluginActive && point.getSpecialPointType() == SpecialPointType.PARKING;
+	private boolean isPointVisibleOnMap(@NonNull FavouritePoint point) {
+		return point.isVisible() || point.getSpecialPointType() == SpecialPointType.PARKING
+				&& PluginsHelper.isActive(ParkingPositionPlugin.class);
 	}
 
-	private boolean isSyncedPoint(@NonNull FavouritePoint point, boolean synced) {
-		// A hidden synced folder has no markers, so the parking point shown despite it is drawn as a plain favorite
-		return synced && point.isVisible();
-	}
-
-	private boolean isParkingPluginActive() {
-		return PluginsHelper.isActive(ParkingPositionPlugin.class);
+	public boolean hasPointOnMapAt(@NonNull LatLon latLon) {
+		for (FavouritePoint point : favouritesHelper.getFavouritePoints()) {
+			if (isPointVisibleOnMap(point) && MapUtils.areLatLonEqual(latLon, point.getLatitude(), point.getLongitude())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean isSynced(@NonNull FavoriteGroup group) {
+		// A hidden folder has no markers, so the parking point shown despite it is drawn as a plain favorite
 		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(group);
-		return markersGroup != null && !markersGroup.isDisabled();
+		return markersGroup != null && !markersGroup.isDisabled() && group.isVisible();
 	}
 
 	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y,
@@ -317,30 +317,28 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		clearFavorites();
 		float textScale = getTextScale();
-		boolean parkingPluginActive = isParkingPluginActive();
 		favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), getPointsOrder(), isTextVisible(),
 				getTextStyle(textScale), view.getDensity());
 
 		if (customObjectsDelegate != null) {
 			List<FavouritePoint> points = customObjectsDelegate.getMapObjects();
-			showFavoritePoints(textScale, false, parkingPluginActive, points);
+			showFavoritePoints(textScale, false, points);
 			favoritesMapLayerProvider.drawSymbols(mapRenderer);
 		} else if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
 			for (FavoriteGroup group : getFavoriteGroups()) {
 				boolean synced = isSynced(group);
 				List<FavouritePoint> points = new ArrayList<>(group.getPoints());
-				showFavoritePoints(textScale, synced, parkingPluginActive, points);
+				showFavoritePoints(textScale, synced, points);
 			}
 			favoritesMapLayerProvider.drawSymbols(mapRenderer);
 		}
 	}
 
-	private void showFavoritePoints(float textScale, boolean synced, boolean parkingPluginActive,
-	                                List<FavouritePoint> points) {
+	private void showFavoritePoints(float textScale, boolean synced, List<FavouritePoint> points) {
 		for (FavouritePoint favoritePoint : points) {
-			if (isPointVisibleOnMap(favoritePoint, parkingPluginActive) && favoritePoint != contextMenuLayer.getMoveableObject()) {
+			if (isPointVisibleOnMap(favoritePoint) && favoritePoint != contextMenuLayer.getMoveableObject()) {
 				MapMarker marker = null;
-				if (isSyncedPoint(favoritePoint, synced)) {
+				if (synced) {
 					marker = mapMarkersHelper.getMapMarker(favoritePoint);
 					if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
 						continue;
@@ -392,9 +390,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 
-		boolean parkingPluginActive = isParkingPluginActive();
 		for (FavouritePoint favouritePoint : favouritePoints) {
-			if (!isPointVisibleOnMap(favouritePoint, parkingPluginActive)) {
+			if (!isPointVisibleOnMap(favouritePoint)) {
 				continue;
 			}
 
