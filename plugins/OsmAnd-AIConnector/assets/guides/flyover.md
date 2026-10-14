@@ -17,7 +17,8 @@ from the location for the recording and linked again after it.
 - Rendering is slower than real time: about 0.3 s per 1280x720 frame on a fast phone with the map data cached
   (about 19 s per second of video at 60 fps, 10 s at 30 fps), 0.7-0.8 s per frame when an area is drawn for the
   first time. Tell the user the expected wait before long videos.
-- Map frames are rendered at twice the size and scaled down (smooth lines) while the doubled size fits 3840 px.
+- Map frames are rendered at twice the size and scaled down (smooth lines) while the doubled size fits 3840 px;
+  `"render_scale": 1` renders them at the video's size, about twice as fast, with lines that may shimmer.
 - Map labels and icons are laid out again every 2.5 s of video time and fade in and out in 0.4 s.
 - My location marker is not drawn in a video or a picture, and the tracks the user has on the map otherwise are
   taken off it for the recording; `"other_tracks": "keep"` leaves them on.
@@ -199,6 +200,11 @@ then the title above the value and its unit. Three types:
   of each series stand at its side (the first on the left, `value2` on the right), half the track's length and the
   whole under the plot; `"labels": false` leaves them out. `"cursor": false` leaves out the current point and draws
   the whole area and the `value` labels in the highlight colour, as at the end of a video (for a still picture).
+- `{"type": "image", "file": "flyover/photos/1.jpg", "title": "Castle", "subtitle": "Photo: Wikimedia Commons"}` —
+  a photo card: a JPEG or PNG on the phone (an absolute path or a path under OsmAnd's folder), `width_dp` wide
+  (default 280) and at most `max_height_dp` high (default 200), cropped to fill, with a title of up to two lines and a
+  line under it. Put each card in its own panel with `from_s`, `to_s` and `fade_s` to show it when the track passes
+  the place.
 
 `icon`: an OsmAnd drawable name (e.g. `widget_speed`, `widget_sensor_heart_rate`); by default the icon OsmAnd's own
 widget for that value has. `unit`: `auto` (the profile's units) or `km`, `mi`, `m`, `ft`, `km/h`, `mph`, `min/km`,

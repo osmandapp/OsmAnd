@@ -92,6 +92,7 @@ public class MapFlyoverRecorder {
 	private static final long APP_INIT_TIMEOUT_MS = 60_000;
 	private static final long FIRST_FRAME_TIMEOUT_MS = 30_000;
 	private static final long FRAME_TIMEOUT_MS = 5_000;
+	private static final long IDLE_POLL_MS = 4;
 	/** The start is drawn up to this many times for the track lines to reach the renderer. */
 	private static final int TRACK_LINES_TRIES = 5;
 	// a picture's progress: the track's points are there, the map has loaded, the track lines are in the
@@ -242,8 +243,10 @@ public class MapFlyoverRecorder {
 			int frameMin = Math.min(params.getWidth(), params.getHeight());
 			float tilePx = 256 * Math.max(1f, Math.max(params.getWidth(), params.getHeight()) / 640f);
 			showTracks(tracks, shownBefore, "keep".equals(spec.optString("other_tracks")));
-			// rendered at twice the size and scaled down: thin lines and text edges stop shimmering in motion
-			int scale = params.getWidth() * SUPERSAMPLING <= MAX_SIZE && params.getHeight() * SUPERSAMPLING <= MAX_SIZE ? SUPERSAMPLING : 1;
+			// rendered at twice the size and scaled down: thin lines and text edges stop shimmering in motion;
+			// "render_scale": 1 renders at the video's size, faster
+			int requestedScale = Math.max(1, Math.min(SUPERSAMPLING, spec.optInt("render_scale", SUPERSAMPLING)));
+			int scale = params.getWidth() * requestedScale <= MAX_SIZE && params.getHeight() * requestedScale <= MAX_SIZE ? requestedScale : 1;
 			renderWidth = params.getWidth() * scale;
 			renderHeight = params.getHeight() * scale;
 			phoneScale = "screen".equals(spec.optString("scale"));
@@ -322,10 +325,15 @@ public class MapFlyoverRecorder {
 				waitForFrames(view, 2, firstTimeout);
 				measureDrone(true);
 			}
+			// where the time of a frame goes, for the log: the camera and layers, the map's rendering, the read-out,
+			// the overlay, the encoder
+			long[] phases = new long[4];
+			finisher = new FrameFinisher();
 			for (int i = 0; i < frames; i++) {
 				if (cancelled) {
 					throw new CancellationException("Cancelled on the phone");
 				}
+				long phaseStart = SystemClock.elapsedRealtime();
 				// another view took the renderer over meanwhile: take it back
 				boolean retaken = ensureRenderer();
 				if (!image && i % params.getFps() == 0) {
@@ -347,6 +355,7 @@ public class MapFlyoverRecorder {
 					maxSpeed = Math.max(maxSpeed, screenDistance(prev, camera, pxPerTile) * params.getFps());
 				}
 				prev = camera;
+				phaseStart = phase(phases, 0, phaseStart);
 				boolean idle = waitForIdleFrame(view, retaken ? firstTimeout : frameTimeout);
 				for (int retry = 0; retry < 3 && cameraMoved(); retry++) {
 					// the app moved the map meanwhile: this frame's camera again, then its picture
@@ -377,6 +386,7 @@ public class MapFlyoverRecorder {
 					}
 					LOG.warn("Flyover frame " + i + " is not idle: " + reason);
 				}
+				phaseStart = phase(phases, 1, phaseStart);
 				showProgress(banner, image, IMAGE_PROGRESS_FRAME);
 				Bitmap bitmap = view.getBitmap();
 				if (bitmap == null) {
@@ -387,8 +397,8 @@ public class MapFlyoverRecorder {
 				if (frame == bitmap) {
 					frame = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 				}
-				Canvas frameCanvas = new Canvas(frame);
-				overlay.draw(frameCanvas, camera[0], (float) camera[2], (float) camera[3], t / 1000.0);
+				// the screen positions of the points this frame draws come from the renderer as it is now
+				List<HeadDraw> heads = new ArrayList<>();
 				for (FlyoverTrack track : tracks) {
 					double metersPerPixel = 40075016 * Math.cos(Math.toRadians(camera[0]))
 							/ (tilePx * Math.pow(2, camera[2]));
@@ -402,28 +412,44 @@ public class MapFlyoverRecorder {
 							PointF behind = pts.get(head[1]), ahead = pts.get(head[2]);
 							PointF direction = behind != null && ahead != null
 									? new PointF(at.x + ahead.x - behind.x, at.y + ahead.y - behind.y) : ahead;
-							overlay.drawHead(frameCanvas, at, direction, track.head, track.getColor(), track.headIcon);
+							heads.add(new HeadDraw(track, at, direction));
 						}
 					}
 				}
-				if (!callouts.isEmpty()) {
-					Map<WptPt, PointF> onScreen = project(callouts.visibleAt(t / 1000.0), null, scale,
-							params.getWidth(), params.getHeight());
-					callouts.draw(frameCanvas, t / 1000.0, onScreen::get);
-				}
-				panels.draw(frameCanvas, new FlyoverValues.Frame(t / 1000.0, videoS, camera));
-				if (encoder != null) {
-					encoder.encode(frame, i * 1_000_000L / params.getFps());
-				} else if (i == frames - 1) {
-					saveImage(frame, file, spec.optInt("quality", 92));
-				}
-				if (i % Math.max(1, params.getFps() / PREVIEW_PER_S) == 0) {
-					// the map area of the app shows what is recorded, a few times a second
-					Bitmap preview = Bitmap.createScaledBitmap(frame, frame.getWidth() / 2, frame.getHeight() / 2, true);
-					app.runInUIThread(() -> banner.showFrame(preview));
-				}
-				frame.recycle();
+				Map<WptPt, PointF> onScreen = callouts.isEmpty() ? null
+						: project(callouts.visibleAt(t / 1000.0), null, scale, params.getWidth(), params.getHeight());
+				phaseStart = phase(phases, 2, phaseStart);
+				// the overlay, the panels and the encoder work on this frame while the map renders the next one
+				Bitmap frameToDraw = frame;
+				double[] cameraOfFrame = camera;
+				int index = i;
+				VideoEncoder frameEncoder = encoder;
+				int quality = spec.optInt("quality", 92);
+				finisher.submit(() -> {
+					Canvas frameCanvas = new Canvas(frameToDraw);
+					overlay.draw(frameCanvas, cameraOfFrame[0], (float) cameraOfFrame[2], (float) cameraOfFrame[3], t / 1000.0);
+					for (HeadDraw head : heads) {
+						overlay.drawHead(frameCanvas, head.at, head.direction, head.track.head, head.track.getColor(), head.track.headIcon);
+					}
+					if (onScreen != null) {
+						callouts.draw(frameCanvas, t / 1000.0, onScreen::get);
+					}
+					panels.draw(frameCanvas, new FlyoverValues.Frame(t / 1000.0, videoS, cameraOfFrame));
+					if (frameEncoder != null) {
+						frameEncoder.encode(frameToDraw, index * 1_000_000L / params.getFps());
+					} else if (index == frames - 1) {
+						saveImage(frameToDraw, file, quality);
+					}
+					if (index % Math.max(1, params.getFps() / PREVIEW_PER_S) == 0) {
+						// the map area of the app shows what is recorded, a few times a second
+						Bitmap preview = Bitmap.createScaledBitmap(frameToDraw, frameToDraw.getWidth() / 2, frameToDraw.getHeight() / 2, true);
+						app.runInUIThread(() -> banner.showFrame(preview));
+					}
+					frameToDraw.recycle();
+				});
+				phase(phases, 3, phaseStart);
 			}
+			finisher.finish();
 			if (encoder != null) {
 				encoder.finish();
 				encoder = null;
@@ -449,7 +475,10 @@ public class MapFlyoverRecorder {
 			params.setMaxScreenSpeed((float) maxSpeed);
 			params.setRenderTimeMs(SystemClock.elapsedRealtime() - start);
 			LOG.info("Flyover " + file + ": " + frames + " frames in " + params.getRenderTimeMs()
-					+ " ms, not idle " + notIdleFrames);
+					+ " ms, not idle " + notIdleFrames + "; per frame: camera and layers " + phases[0] / frames
+					+ " ms, map " + phases[1] / frames + " ms (" + String.format(Locale.US, "%.1f", waitedFrames / (double) frames)
+					+ " renderer frames), read-out and copy " + phases[2] / frames + " ms, overlay and encoder "
+					+ phases[3] / frames + " ms, render scale " + scale);
 			return true;
 		} catch (Exception | LinkageError e) {
 			// a broken request or a bug must not take OsmAnd down with it: report it, give the renderer back
@@ -459,6 +488,10 @@ public class MapFlyoverRecorder {
 		} finally {
 			// the request (with gpx_data) is not sent back over Binder: the reply has its own size limit
 			params.setSpec("");
+			if (finisher != null) {
+				finisher.shutdown();
+				finisher = null;
+			}
 			hideTracks(tracks, shownBefore);
 			try {
 				runInUiThread(() -> {
@@ -828,7 +861,7 @@ public class MapFlyoverRecorder {
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
 			"name", "camera", "duration_s", "gpx", "osmand_widgets", "attribution", "profile", "scale",
 			"ease_in_s", "ease_out_s", "panels", "data", "ui_scale", "load_timeout_s", "smooth_s", "refresh_s", "detail", "map_magnifier",
-			"logo", "output", "quality", "other_tracks"));
+			"logo", "output", "quality", "render_scale", "other_tracks"));
 
 	@NonNull
 	private static String unknownKeys(@NonNull JSONObject spec) {
@@ -1357,37 +1390,98 @@ public class MapFlyoverRecorder {
 		}
 	}
 
+	/** Adds the time since {@code from} to a phase's total and returns now. */
+	private static long phase(@NonNull long[] phases, int index, long from) {
+		long now = SystemClock.elapsedRealtime();
+		phases[index] += now - from;
+		return now;
+	}
+
 	/**
 	 * Waits for a frame rendered after the renderer became idle, i.e. with all map data and symbols in place.
 	 */
 	private boolean waitForIdleFrame(@NonNull MapRendererView view, long timeoutMs) throws InterruptedException {
 		long until = SystemClock.elapsedRealtime() + timeoutMs;
 		int startFrame = view.getFrameId();
-		int idleFrame = -1;
-		int idleReady = 0;
+		int startReady = readyFrames.get();
 		while (SystemClock.elapsedRealtime() < until) {
 			if (cancelled) {
 				throw new CancellationException("Cancelled on the phone");
 			}
 			view.requestRender();
-			Thread.sleep(10);
-			int frame = view.getFrameId();
-			if (frame <= startFrame) {
-				continue;
-			}
-			if (view.isIdle()) {
-				if (idleFrame < 0) {
-					idleFrame = frame;
-					idleReady = readyFrames.get();
-				} else if (frame > idleFrame && readyFrames.get() > idleReady) {
-					// a frame rendered while idle has been read out: getBitmap gives this camera, not the last one
-					return true;
-				}
-			} else {
-				idleFrame = -1;
+			Thread.sleep(IDLE_POLL_MS);
+			// a frame of this camera has been rendered and read out, and nothing is left to load or redraw:
+			// the engine asks for another frame while a resource arrives, so the renderer is idle only once the
+			// last frame had everything; getBitmap then gives this camera, not the last one
+			if (view.getFrameId() > startFrame && readyFrames.get() > startReady && view.isIdle()) {
+				waitedFrames += view.getFrameId() - startFrame;
+				return true;
 			}
 		}
 		return false;
+	}
+
+	// frames the renderer drew per idle wait, for the log
+	private long waitedFrames;
+
+	@Nullable
+	private FrameFinisher finisher;
+
+	/** A track's current point on the frame: where it is and where it heads. */
+	private static class HeadDraw {
+		final FlyoverTrack track;
+		final PointF at;
+		@Nullable
+		final PointF direction;
+
+		HeadDraw(@NonNull FlyoverTrack track, @NonNull PointF at, @Nullable PointF direction) {
+			this.track = track;
+			this.at = at;
+			this.direction = direction;
+		}
+	}
+
+	/** Runs what is done with a frame once the map has rendered it, one frame at a time, on its own thread. */
+	private static class FrameFinisher {
+
+		interface FrameWork {
+			void run() throws Exception;
+		}
+
+		private final java.util.concurrent.ExecutorService executor =
+				java.util.concurrent.Executors.newSingleThreadExecutor(r -> new Thread(r, "FlyoverFrames"));
+		@Nullable
+		private java.util.concurrent.Future<?> pending;
+
+		/** Waits for the previous frame's work (its failure is thrown here), then starts this frame's. */
+		void submit(@NonNull FrameWork work) throws Exception {
+			awaitPending();
+			pending = executor.submit(() -> {
+				work.run();
+				return null;
+			});
+		}
+
+		void finish() throws Exception {
+			awaitPending();
+		}
+
+		private void awaitPending() throws Exception {
+			java.util.concurrent.Future<?> previous = pending;
+			pending = null;
+			if (previous != null) {
+				try {
+					previous.get();
+				} catch (java.util.concurrent.ExecutionException e) {
+					Throwable cause = e.getCause();
+					throw cause instanceof Exception ? (Exception) cause : e;
+				}
+			}
+		}
+
+		void shutdown() {
+			executor.shutdownNow();
+		}
 	}
 
 	private void runInUiThread(@NonNull Runnable run) throws InterruptedException {
@@ -1424,6 +1518,9 @@ public class MapFlyoverRecorder {
 		private final int width;
 		private final int height;
 		private final int[] argb;
+		private byte[] yLine;
+		private byte[] uLine;
+		private byte[] vLine;
 		private int track = -1;
 		private boolean muxerStarted;
 		private long lastPtsUs;
@@ -1520,6 +1617,11 @@ public class MapFlyoverRecorder {
 		}
 
 		/** BT.601 limited range, the planes laid out as the codec asks. */
+		/**
+		 * Rows are converted into arrays and put into the planes whole: a put per byte costs a bounds check each.
+		 * Chroma planes with a pixel stride of 2 are one interleaved buffer (U at even bytes, V at odd ones, the V
+		 * buffer a byte into the U one): then one row holds both.
+		 */
 		private void toYuv(@NonNull Image image) {
 			Image.Plane[] planes = image.getPlanes();
 			ByteBuffer yBuf = planes[0].getBuffer();
@@ -1529,18 +1631,49 @@ public class MapFlyoverRecorder {
 			ByteBuffer vBuf = planes[2].getBuffer();
 			int uvRow = planes[1].getRowStride();
 			int uvPix = planes[1].getPixelStride();
+			boolean interleaved = uvPix == 2;
+			if (yLine == null || yLine.length != width * yPix) {
+				yLine = new byte[width * yPix];
+				uLine = new byte[width / 2 * uvPix];
+				vLine = new byte[interleaved ? 0 : width / 2 * uvPix];
+			}
 			for (int y = 0; y < height; y++) {
 				int row = y * width;
+				boolean chroma = (y & 1) == 0;
 				for (int x = 0; x < width; x++) {
 					int c = argb[row + x];
 					int r = (c >> 16) & 0xff;
 					int g = (c >> 8) & 0xff;
 					int b = c & 0xff;
-					yBuf.put(y * yRow + x * yPix, (byte) (((66 * r + 129 * g + 25 * b + 128) >> 8) + 16));
-					if ((y & 1) == 0 && (x & 1) == 0) {
-						int uv = (y >> 1) * uvRow + (x >> 1) * uvPix;
-						uBuf.put(uv, (byte) (((-38 * r - 74 * g + 112 * b + 128) >> 8) + 128));
-						vBuf.put(uv, (byte) (((112 * r - 94 * g - 18 * b + 128) >> 8) + 128));
+					yLine[x * yPix] = (byte) (((66 * r + 129 * g + 25 * b + 128) >> 8) + 16);
+					if (chroma && (x & 1) == 0) {
+						int uv = (x >> 1) * uvPix;
+						uLine[uv] = (byte) (((-38 * r - 74 * g + 112 * b + 128) >> 8) + 128);
+						byte v = (byte) (((112 * r - 94 * g - 18 * b + 128) >> 8) + 128);
+						if (interleaved) {
+							uLine[uv + 1] = v;
+						} else {
+							vLine[uv] = v;
+						}
+					}
+				}
+				// a plane may end before the stride of its last row does
+				int yStart = y * yRow;
+				yBuf.position(yStart);
+				yBuf.put(yLine, 0, Math.min(yLine.length, yBuf.limit() - yStart));
+				if (chroma) {
+					int uvStart = (y >> 1) * uvRow;
+					uBuf.position(uvStart);
+					uBuf.put(uLine, 0, Math.min(uLine.length, uBuf.limit() - uvStart));
+					if (interleaved) {
+						// the last V byte of the row lies past the U buffer's end: through the V buffer
+						int last = uvStart + uLine.length - 1;
+						if (last >= uBuf.limit() && last - 1 < vBuf.limit()) {
+							vBuf.put(last - 1, uLine[uLine.length - 1]);
+						}
+					} else {
+						vBuf.position(uvStart);
+						vBuf.put(vLine, 0, Math.min(vLine.length, vBuf.limit() - uvStart));
 					}
 				}
 			}
