@@ -13,6 +13,7 @@ import java.util.Map;
 /**
  * Campaign of the Google Play install (utm_source, utm_medium, utm_campaign).
  * Ad click ids are not kept, only the fact that the install came from an ad click.
+ * Read and sent only while sending the unique user identifier (aid) is allowed.
  */
 public class InstallReferrer {
 
@@ -46,6 +47,9 @@ public class InstallReferrer {
 	}
 
 	public static void addParams(@NonNull OsmandApplication app, @NonNull Map<String, String> params) {
+		if (!app.isUserAndroidIdAllowed()) {
+			return;
+		}
 		String referrer = app.getSettings().INSTALL_REFERRER.get();
 		if (Algorithms.isEmpty(referrer)) {
 			return;
