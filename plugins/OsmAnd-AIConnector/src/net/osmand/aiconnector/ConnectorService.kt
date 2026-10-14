@@ -10,6 +10,7 @@ import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
+import android.os.PowerManager
 import android.util.Log
 
 /** Foreground service that keeps the MCP server and the OsmAnd connection alive. */
@@ -30,6 +31,9 @@ class ConnectorService : Service() {
 
 		private const val EXTRA_FOREGROUND = "foreground"
 
+		/** The screen stays on this long after the assistant's last tool call. */
+		private const val SCREEN_ON_MS = 10 * 60 * 1000L
+
 		/**
 		 * BACKGROUND: a foreground service, Doze does not stop it; SCREEN: a plain service the visible activity
 		 * starts and stops, no notification.
@@ -48,6 +52,7 @@ class ConnectorService : Service() {
 	private var server: McpHttpServer? = null
 	private var bridge: OsmAndBridge? = null
 	private var discovery: ConnectorDiscovery? = null
+	private var screenLock: PowerManager.WakeLock? = null
 
 	override fun onBind(intent: Intent?): IBinder? = null
 
@@ -68,8 +73,8 @@ class ConnectorService : Service() {
 	private fun restart() {
 		stopServer()
 		val b = OsmAndBridge(applicationContext, ConnectorSettings.osmandPackage(this))
-		val t = OsmAndTools(b)
-		val s = McpHttpServer(ConnectorSettings.bindHost(this), ConnectorSettings.PORT, ConnectorSettings.token(this), t, readBridgeScript())
+		val t = OsmAndTools(b, assets)
+		val s = McpHttpServer(ConnectorSettings.bindHost(this), ConnectorSettings.PORT, ConnectorSettings.token(this), t, readBridgeScript()) { keepScreenOn() }
 		try {
 			s.start(60_000, true)
 			bridge = b
@@ -84,6 +89,22 @@ class ConnectorService : Service() {
 			runningUrl = null
 			Log.e(TAG, "Cannot start the server", e)
 		}
+	}
+
+	/**
+	 * Keeps the screen on for a while after each tool call: a phone that locks under the assistant stops
+	 * screenshots and restarts of the connector. Does not wake a screen that is already off.
+	 */
+	@Suppress("DEPRECATION")
+	@Synchronized
+	private fun keepScreenOn() {
+		if (!ConnectorSettings.keepScreenOn(this)) {
+			return
+		}
+		val lock = screenLock ?: getSystemService(PowerManager::class.java)
+			.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "OsmAndAiConnector:assistant")
+			.also { it.setReferenceCounted(false); screenLock = it }
+		lock.acquire(SCREEN_ON_MS)
 	}
 
 	private fun readBridgeScript(): String? = try {
@@ -102,6 +123,7 @@ class ConnectorService : Service() {
 		bridge = null
 		tools = null
 		runningUrl = null
+		screenLock?.takeIf { it.isHeld }?.release()
 	}
 
 	override fun onDestroy() {

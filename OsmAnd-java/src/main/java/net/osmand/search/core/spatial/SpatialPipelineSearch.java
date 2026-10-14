@@ -561,7 +561,9 @@ public class SpatialPipelineSearch {
 				SpatialPipelineObjectRes existing = ctx.objectsById.get(atom.id);
 				boolean noPoiType = disallowPoiType(atom, token);
 				if (existing != null) {
-					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType, lastDupToken, copies,
+					// "Shabu Shabu": the name has the word twice, so the copy side by side is the same name, not "8 8 ave"
+					int dupToken = lastDupToken == tokenIdx - 1 && nameRepeatsWord(atom, token.word) ? tokenIdx : lastDupToken;
+					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType, dupToken, copies,
 							copies == null ? 0 : tokensOf(atom.id));
 				} else {
 					SpatialPipelineObjectRes obj = new SpatialPipelineObjectRes(totalTokens, atom, tokenIdx, noPoiType);
@@ -622,6 +624,19 @@ public class SpatialPipelineSearch {
 			}
 		}
 		return tokens;
+	}
+
+	private boolean nameRepeatsWord(NameIndexAtom atom, String word) {
+		if (atom.name == null) {
+			return false;
+		}
+		int count = 0;
+		for (String w : atom.name.split(" ")) {
+			if (w.equals(word) && ++count > 1) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// the nearest token before with the same word, the token itself when there is none
@@ -827,7 +842,7 @@ public class SpatialPipelineSearch {
 			enlargeBboxes(currentLevel);
 			depth = runSearch(tokensSize, depth, currentLevel);
 		}
-		if (ctx.overallResults <= MIN_RESULTS_PARTIAL && tokensSize > 1 && !ctx.isCancelled()) {
+		if (ctx.nonCatResults <= MIN_RESULTS_PARTIAL && tokensSize > 1 && !ctx.isCancelled()) {
 			if (ctx.stats.printLogs) {
 				System.out.printf("PIPELINE LOOKUP %d partial results\n", depth);
 			}

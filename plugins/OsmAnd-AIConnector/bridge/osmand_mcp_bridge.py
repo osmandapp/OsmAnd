@@ -9,6 +9,9 @@ The bridge answers initialize and tools/list itself when the phone is not reacha
 last successful connect, so the assistant session starts with the OsmAnd tools even while the phone sleeps;
 a tool call then tells the assistant that the phone is not found.
 
+One tool runs in the bridge itself: osmand_download copies a flyover video from the phone into a file on this
+computer (the video does not pass through the assistant).
+
     claude mcp add osmand -- python3 /path/to/osmand_mcp_bridge.py --token <access key>
 
 Needs only Python 3 and dns-sd (macOS) or avahi-browse (Linux).
@@ -27,8 +30,20 @@ import urllib.parse
 SERVICE_TYPE = "_osmand-mcp._tcp"
 BROWSE_SECONDS = 3.0
 CONNECT_SECONDS = 3.0
+FILES_PATH = "/files/flyover/"
 CACHE_FILE = os.path.expanduser("~/.osmand/osmand_mcp_cache.json")
 PROTOCOL_VERSIONS = ["2025-06-18", "2025-03-26", "2024-11-05"]
+DOWNLOAD_TOOL = {
+    "name": "osmand_download",
+    "description": "Copy a flyover video from the phone into a file on this computer and return its path. "
+                   "Takes the name from osmand_flyover_files or the path osmand_flyover returned. A download that "
+                   "broke off continues where it stopped.",
+    "inputSchema": {"type": "object", "properties": {
+        "name": {"type": "string", "description": "Video file name, or the phone path osmand_flyover returned"},
+        "dir": {"type": "string", "description": "Folder on this computer, default ~/Downloads"},
+    }, "required": ["name"]},
+}
+DOWNLOAD_RETRIES = 3
 PHONE_NOT_FOUND = ("The phone with OsmAnd is not reachable: {}. Ask the user to turn on OsmAnd AI Connector "
                    "in Wi-Fi mode on a phone in the same network, then call the tool again.")
 
@@ -190,6 +205,7 @@ class Bridge:
                 if "result" in reply:
                     self.save_cache(tools=reply["result"].get("tools"))
                     self.tools_from_cache = False
+                    reply["result"]["tools"] = with_local_tools(reply["result"].get("tools"))
                 return reply
             except Exception as e:
                 tools = self.cache.get("tools")
@@ -198,7 +214,14 @@ class Bridge:
                                        "connect once with the phone on")
                 log(f"phone not reachable ({e}), {len(tools)} tools from the cache")
                 self.tools_from_cache = True
-                return {"jsonrpc": "2.0", "id": rid, "result": {"tools": tools}}
+                return {"jsonrpc": "2.0", "id": rid, "result": {"tools": with_local_tools(tools)}}
+        if method == "tools/call" and (msg.get("params") or {}).get("name") == DOWNLOAD_TOOL["name"]:
+            try:
+                text, error = json.dumps(self.download((msg["params"].get("arguments") or {})), indent=1), False
+            except Exception as e:
+                text, error = str(e), True
+            return {"jsonrpc": "2.0", "id": rid, "result": {
+                "content": [{"type": "text", "text": text}], "isError": error}}
         if method == "tools/call":
             try:
                 reply = self.call(msg)
@@ -207,6 +230,68 @@ class Bridge:
                     "content": [{"type": "text", "text": PHONE_NOT_FOUND.format(e)}], "isError": True}}
             return reply
         return self.call(msg)
+
+    def download(self, args):
+        """Streams /files/flyover/<name> from the connector into dir/name; continues a broken download."""
+        name = os.path.basename(str(args.get("name") or "").strip())
+        if not name:
+            raise ValueError("give the name of a video from osmand_flyover_files")
+        folder = os.path.expanduser(args.get("dir") or "~/Downloads")
+        os.makedirs(folder, exist_ok=True)
+        path = os.path.join(folder, name)
+        part = path + ".part"
+        last = None
+        for attempt in range(DOWNLOAD_RETRIES):
+            try:
+                total = self.fetch(name, part, rediscover=attempt > 0)
+                os.replace(part, path)
+                return {"file": path, "bytes": total}
+            except Unreachable as e:
+                last = PHONE_NOT_FOUND.format(e)
+            except (OSError, http.client.HTTPException) as e:
+                # Wi-Fi dropped mid-way: the next try asks for the rest
+                last = f"the download broke off: {e}"
+            log(f"{name}: {last}")
+        raise RuntimeError(last)
+
+    def fetch(self, name, part, rediscover):
+        u = urllib.parse.urlsplit(self.endpoint(rediscover=rediscover and not self.args.url))
+        done = os.path.getsize(part) if os.path.exists(part) else 0
+        conn = http.client.HTTPConnection(u.hostname, u.port or 80, timeout=CONNECT_SECONDS)
+        try:
+            try:
+                conn.connect()
+            except OSError as e:
+                raise Unreachable(e)
+            conn.sock.settimeout(self.args.timeout)
+            headers = {"Authorization": f"Bearer {self.args.token}"}
+            if done:
+                headers["Range"] = f"bytes={done}-"
+            conn.request("GET", FILES_PATH + urllib.parse.quote(name), headers=headers)
+            resp = conn.getresponse()
+            if resp.status == 416:
+                # the part already holds the whole video
+                return done
+            if resp.status >= 400:
+                body = resp.read().decode("utf-8", "replace").strip()
+                if resp.status == 404 and body == "Not found":
+                    raise RuntimeError("this connector cannot hand videos out yet; update OsmAnd AI Connector")
+                raise RuntimeError(f"HTTP {resp.status} {body}")
+            if resp.status != 206:
+                done = 0
+            with open(part, "ab" if done else "wb") as f:
+                while True:
+                    chunk = resp.read(1 << 20)
+                    if not chunk:
+                        break
+                    f.write(chunk)
+                    done += len(chunk)
+            expected = resp.getheader("Content-Range", "").rpartition("/")[2] or resp.getheader("Content-Length")
+            if expected and expected.isdigit() and done < int(expected):
+                raise OSError(f"got {done} of {expected} bytes")
+            return done
+        finally:
+            conn.close()
 
     def local_initialize(self, msg):
         asked = (msg.get("params") or {}).get("protocolVersion")
@@ -272,6 +357,11 @@ class Bridge:
                 if msg.get("method") == "tools/call" and "result" in reply and not reply["result"].get("isError"):
                     # the phone answers again: replace tools served from an outdated cache
                     self.check_tools()
+
+
+def with_local_tools(tools):
+    tools = [t for t in (tools or []) if t.get("name") != DOWNLOAD_TOOL["name"]]
+    return tools + [DOWNLOAD_TOOL]
 
 
 def write(msg):

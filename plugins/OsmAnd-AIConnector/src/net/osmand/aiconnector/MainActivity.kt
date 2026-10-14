@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
 		/** Groups the assistant asks for: OsmAnd preselects only the safe ones, the user turns on the rest. */
 		private val REQUESTED_GROUPS = arrayOf("map", "search", "location", "navigation", "favorites",
-			"tracks_view", "tracks_edit", "recording", "screen")
+			"tracks_view", "tracks_edit", "recording", "screen", "settings")
 		private const val CLIENT = "client"
 		private const val ACCESS_STATUS = "access_status"
 	}
@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 	private lateinit var accessFooter: TextView
 	private lateinit var bridgeRow: View
 	private lateinit var bridgeSwitch: MaterialSwitch
+	private lateinit var keepScreenOnSwitch: MaterialSwitch
 	private lateinit var setupCommand: TextView
 	private lateinit var copySetup: Button
 	private lateinit var clientWhere: TextView
@@ -138,6 +139,11 @@ class MainActivity : AppCompatActivity() {
 		setupCommand = findViewById(R.id.setup_command)
 		copySetup = findViewById(R.id.copy_setup)
 		copySetup.setOnClickListener { copy(setupCommand.text) }
+		keepScreenOnSwitch = findViewById(R.id.keep_screen_on_switch)
+		findViewById<View>(R.id.keep_screen_on_row).setOnClickListener {
+			ConnectorSettings.setKeepScreenOn(this, !ConnectorSettings.keepScreenOn(this))
+			refresh()
+		}
 		bridgeRow = findViewById(R.id.bridge_row)
 		bridgeSwitch = findViewById(R.id.bridge_switch)
 		bridgeRow.setOnClickListener {
@@ -205,6 +211,7 @@ class MainActivity : AppCompatActivity() {
 		val bridge = ConnectorSettings.usesBridge(this)
 		bridgeRow.visibility = if (usb) View.GONE else View.VISIBLE
 		bridgeSwitch.isChecked = ConnectorSettings.useBridge(this)
+		keepScreenOnSwitch.isChecked = ConnectorSettings.keepScreenOn(this)
 		accessFooter.setText(when {
 			usb -> R.string.usb_footer
 			bridge -> R.string.wifi_footer

@@ -58,6 +58,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -152,7 +153,9 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 		setupTextWatchers();
 		updateContent();
 		setupSupportButton();
-		setupKeyboardListener();
+		if (!InsetsUtils.isEdgeToEdgeSupported()) {
+			setupKeyboardListener();
+		}
 
 		return view;
 	}

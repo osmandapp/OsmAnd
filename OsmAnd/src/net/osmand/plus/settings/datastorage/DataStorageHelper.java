@@ -29,6 +29,7 @@ public class DataStorageHelper {
 	public static final String EXTERNAL_STORAGE = "external_storage";
 	public static final String SHARED_STORAGE = "shared_storage";
 	public static final String MULTIUSER_STORAGE = "multiuser_storage";
+	public static final String VISIBLE_EXTERNAL_STORAGE = "visible_external_storage";
 	public static final String MANUALLY_SPECIFIED = "manually_specified";
 
 	private final OsmandApplication app;
@@ -97,14 +98,22 @@ public class DataStorageHelper {
 		//external storage
 		File[] externals = app.getExternalFilesDirs(null);
 		if (externals != null) {
-			listExternalOrObbStorages(externals, EXTERNAL_STORAGE, R.string.storage_directory_external,
+			listStorages(externals, EXTERNAL_STORAGE, R.string.storage_directory_external,
 					OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE);
+		}
+
+		//visible external storage, open to file managers and USB
+		@SuppressWarnings("deprecation")
+		File[] mediaDirs = app.getExternalMediaDirs();
+		if (mediaDirs != null) {
+			listStorages(mediaDirs, VISIBLE_EXTERNAL_STORAGE, R.string.storage_directory_visible_external,
+					OsmandSettings.EXTERNAL_STORAGE_TYPE_MEDIA);
 		}
 
 		//multi user storage
 		File[] obbDirs = app.getObbDirs();
 		if (obbDirs != null) {
-			listExternalOrObbStorages(obbDirs, MULTIUSER_STORAGE, R.string.storage_directory_multiuser,
+			listStorages(obbDirs, MULTIUSER_STORAGE, R.string.storage_directory_multiuser,
 					OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB);
 		}
 
@@ -123,7 +132,7 @@ public class DataStorageHelper {
 		}
 	}
 
-	private void listExternalOrObbStorages(File[] dirs, String keyPrefix, int titleRes, int storageType) {
+	private void listStorages(File[] dirs, String keyPrefix, int titleRes, int storageType) {
 		int visibleIndex = 0;
 		for (File dir : dirs) {
 			if (dir != null) {

@@ -34,6 +34,9 @@ public class SpatialSearchRanking {
 	/** "4 av" is 4th Avenue: a house whose street the query named by its kind only loses this much, so a
 	 *  house 2 km off falls under the street 6 km off (pref-0136) while the house at the point stays first */
 	public double wKindOnly = 1.0;
+	/** tie-break: an object found by a spelling the OBF writer made by a rule ("Hauptstr") falls under the same
+	 *  match by a name of OSM */
+	public double wRuleSpelling = 0.02;
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
@@ -127,7 +130,8 @@ public class SpatialSearchRanking {
 		}
 		Double km = center == null ? null : SpatialSearchResult.getDistance(r, center) / 1000.0;
 		return score(nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
-				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r));
+				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r))
+				- (head.atom.ruleSpelling ? wRuleSpelling : 0);
 	}
 
 	/**

@@ -43,6 +43,8 @@ import net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.favorites.dialogs.SearchFavoriteFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
+import net.osmand.plus.flyover.FlyoversFragment;
+import net.osmand.plus.flyover.MapFlyoverRecorder;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.InsetTarget;
@@ -65,6 +67,7 @@ public class MyPlacesActivity extends TabActivity {
 
 	public static final int GPX_TAB = R.string.shared_string_tracks;
 	public static final int FAV_TAB = R.string.shared_string_my_favorites;
+	public static final int FLYOVERS_TAB = R.string.flyovers;
 
 	private LockableViewPager viewPager;
 	private PagerSlidingTabStrip mSlidingTabLayout;
@@ -267,8 +270,20 @@ public class MyPlacesActivity extends TabActivity {
 		List<TabItem> mTabs = new ArrayList<>();
 		mTabs.add(getTabIndicator(FAV_TAB, FavoriteFoldersFragment.class));
 		mTabs.add(getTabIndicator(GPX_TAB, AvailableTracksFragment.class));
+		if (!MapFlyoverRecorder.listVideos(app).isEmpty()) {
+			// map videos recorded through the API: a tab only while there are some
+			mTabs.add(getTabIndicator(FLYOVERS_TAB, FlyoversFragment.class));
+		}
 		PluginsHelper.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		return mTabs;
+	}
+
+	/** Tabs that come and go with their content (flyover videos): the strip is rebuilt when their number changed. */
+	public void updateTabs() {
+		List<TabItem> tabItems = getTabItems();
+		if (tabItems.size() != tabSize) {
+			setTabs(tabItems);
+		}
 	}
 
 	@Nullable

@@ -5324,4 +5324,7 @@
     <string name="trip_rec_start_from_notification_descr">Taispeántar fógra a bhfuil cnaipe ann chun taifeadadh an turais a thosú. Bíonn fógra le feiceáil i gcónaí le linn an taifeadta.</string>
     <string name="route_calculation_out_of_memory">Tá an bealach rófhada le ríomh ar an ngléas seo. Cuir pointí idirmheánacha leis nó roghnaigh ceann scríbe atá níos gaire.</string>
     <string name="city_type_boundary">Limistéar</string>
+    <string name="flyover_recording">Ag taifeadadh físeán léarscáile: %1$s</string>
+    <string name="map_source_saved_as">Foinse léarscáile sábháilte mar \'%1$s\'.</string>
+    <string name="map_source_folder_not_created">Níorbh fhéidir fillteán a chruthú do fhoinse na léarscáile. Bain triail as ainm eile.</string>
 </resources>
