@@ -359,6 +359,7 @@ public class MyPlacesActivity extends TabActivity {
 	protected void onPause() {
 		super.onPause();
 		viewPager.clearOnPageChangeListeners();
+		app.getLocationProvider().pauseAllUpdates();
 	}
 
 	@Override
