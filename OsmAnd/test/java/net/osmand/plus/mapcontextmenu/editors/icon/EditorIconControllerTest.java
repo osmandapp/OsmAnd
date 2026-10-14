@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors.icon;
 
 import static net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController.LAST_USED_KEY;
+import static net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController.TRAVEL_KEY;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.render.RenderingIcons;
@@ -86,6 +88,28 @@ public class EditorIconControllerTest {
 		assertCategoryContains(controller, "man_made", "generator_source_wind");
 		assertCategoryContains(controller, "sport", "special_skiing");
 		assertCategoryContains(controller, "amenity", "vending_drinks");
+	}
+
+	@Test
+	public void poiTravelCategoryJoinsAssetsTravelCategory() throws IOException, JSONException {
+		List<IconsCategory> travelCategories = new ArrayList<>();
+		for (IconsCategory category : createController().getCategories()) {
+			if (TRAVEL_KEY.equals(category.getKey())) {
+				travelCategories.add(category);
+			}
+		}
+		assertEquals("Categories with key " + TRAVEL_KEY, 1, travelCategories.size());
+
+		List<String> travelIcons = travelCategories.get(0).getIconKeys();
+		JSONArray assetsIcons = readPoiCategories().getJSONObject("categories").getJSONObject(TRAVEL_KEY).getJSONArray("icons");
+		for (int i = 0; i < assetsIcons.length(); i++) {
+			assertEquals("Assets travel icon at " + i, assetsIcons.getString(i), travelIcons.get(i));
+		}
+		for (PoiType poiType : app.getPoiTypes().getPoiCategoryByName(TRAVEL_KEY).getPoiTypes()) {
+			EditorIconUtils.retrieveIconKey(poiType, iconKey ->
+					assertTrue(iconKey + " is not in " + TRAVEL_KEY, travelIcons.contains(iconKey)));
+		}
+		assertEquals("Icons listed twice", new HashSet<>(travelIcons).size(), travelIcons.size());
 	}
 
 	@NonNull

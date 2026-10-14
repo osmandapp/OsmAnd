@@ -132,7 +132,16 @@ public class EditorIconController extends BaseDialogController {
 	protected void initPoiCategories(@NonNull Map<String, List<String>> assetGroups) {
 		List<IconsCategory> poiCategories = readOriginalPoiCategories();
 		mergeMissingAssetIcons(poiCategories, assetGroups);
-		categories.addAll(poiCategories);
+		for (IconsCategory poiCategory : poiCategories) {
+			// categories are identified by key, so a POI category with a taken key (like "travel") joins that category
+			IconsCategory category = CollectionUtils.searchElementWithCondition(categories,
+					c -> c.getKey().equals(poiCategory.getKey()));
+			if (category != null) {
+				CollectionUtils.addAllIfNotContains(category.getIconKeys(), poiCategory.getIconKeys());
+			} else {
+				categories.add(poiCategory);
+			}
+		}
 	}
 
 	@NonNull
