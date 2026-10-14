@@ -5454,4 +5454,13 @@
     <string name="map_source_folder_not_created">Nije bilo moguće kreirati folder za izvor mape. Pokušajte sa drugim imenom.</string>
     <string name="flyover_recording">Snimanje videa mape: %1$s</string>
     <string name="flyovers">Nadvožnjaci</string>
+    <string name="storage_directory_visible_external">Vidljiva spoljna memorija</string>
+    <string name="eta_group_header">Procenjeno vreme dolaska</string>
+    <string name="travel_speed">Brzina putovanja</string>
+    <string name="default_speed_descr">Koristi se kada nema podataka o brzini za put ili dok mirujete.</string>
+    <string name="speed_range">Opseg brzine</string>
+    <string name="speed_range_descr">Koristi se kako za izračunavanje rute, tako i za vreme dolaska.</string>
+    <string name="eta_adapt_to_my_speed">Prilagodi mojoj brzini</string>
+    <string name="eta_adapt_to_my_speed_descr">Vreme dolaska se zasniva na vašoj brzini tokom poslednjih %1$s.</string>
+    <string name="eta_adapt_to_my_speed_off_descr">Vreme dolaska se zasniva na očekivanoj brzini na svakoj deonici rute. Uključite ovu opciju kako bi se ono zasnivalo na vašoj stvarnoj brzini kretanja.</string>
 </resources>
