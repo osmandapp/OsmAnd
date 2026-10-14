@@ -32,6 +32,8 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -44,6 +46,7 @@ import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.FavoritesTileProvider;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -140,13 +143,14 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		cache.clear();
 		if (hasMapRenderer()) {
-			if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
+			if (mapActivityInvalidated || invalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
 					|| favoritesChanged || textScaleChanged || textVisibleChanged
 					|| (customObjectsDelegate != null && customObjectsDelegate.isChanged())) {
 				showFavorites();
 				if (customObjectsDelegate != null) {
 					customObjectsDelegate.acceptChanges();
 				}
+				invalidated = false;
 				mapRendererChanged = false;
 			}
 		} else {
@@ -187,7 +191,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		for (FavouritePoint favoritePoint : pointsToDraw) {
 			double lat = favoritePoint.getLatitude();
 			double lon = favoritePoint.getLongitude();
-			if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()
+			if (isPointVisibleOnMap(favoritePoint) && favoritePoint != contextMenuLayer.getMoveableObject()
 					&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
 					&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 				MapMarker marker = null;
@@ -228,9 +232,28 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	}
 
+	/**
+	 * The parking favorite stays on the map while the Parking position plugin is active,
+	 * even if its folder is hidden. Other points follow the visibility of their folder.
+	 */
+	private boolean isPointVisibleOnMap(@NonNull FavouritePoint point) {
+		return point.isVisible() || point.getSpecialPointType() == SpecialPointType.PARKING
+				&& PluginsHelper.isActive(ParkingPositionPlugin.class);
+	}
+
+	public boolean hasPointOnMapAt(@NonNull LatLon latLon) {
+		for (FavouritePoint point : favouritesHelper.getFavouritePoints()) {
+			if (isPointVisibleOnMap(point) && MapUtils.areLatLonEqual(latLon, point.getLatitude(), point.getLongitude())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private boolean isSynced(@NonNull FavoriteGroup group) {
+		// A hidden folder has no markers, so the parking point shown despite it is drawn as a plain favorite
 		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(group);
-		return markersGroup != null && !markersGroup.isDisabled();
+		return markersGroup != null && !markersGroup.isDisabled() && group.isVisible();
 	}
 
 	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y,
@@ -313,7 +336,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private void showFavoritePoints(float textScale, boolean synced, List<FavouritePoint> points) {
 		for (FavouritePoint favoritePoint : points) {
-			if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {
+			if (isPointVisibleOnMap(favoritePoint) && favoritePoint != contextMenuLayer.getMoveableObject()) {
 				MapMarker marker = null;
 				if (synced) {
 					marker = mapMarkersHelper.getMapMarker(favoritePoint);
@@ -368,7 +391,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		for (FavouritePoint favouritePoint : favouritePoints) {
-			if (!favouritePoint.isVisible()) {
+			if (!isPointVisibleOnMap(favouritePoint)) {
 				continue;
 			}
 

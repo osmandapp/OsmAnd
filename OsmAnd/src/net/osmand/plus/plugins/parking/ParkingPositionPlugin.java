@@ -39,6 +39,7 @@ import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.FavouritesLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -203,6 +204,15 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	@Override
 	public String getComponentId1() {
 		return PARKING_PLUGIN_COMPONENT;
+	}
+
+	@Override
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		// The favorites layer shows the parking point from a hidden folder only while the plugin is active
+		FavouritesLayer favouritesLayer = app.getOsmandMap().getMapLayers().getFavouritesLayer();
+		if (favouritesLayer != null) {
+			favouritesLayer.setInvalidated(true);
+		}
 	}
 
 	@Override
