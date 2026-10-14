@@ -113,15 +113,15 @@
     <string name="poi_seamark">Nautika</string>
     <string name="poi_military">Vojska</string>
     <string name="poi_user_defined_other">Korisnički definisano</string>
-    <string name="poi_bakery">Pekara</string>
-    <string name="poi_alcohol">Podrum pića</string>
-    <string name="poi_cheese">Sir</string>
+    <string name="poi_bakery">Pekara;pekare</string>
+    <string name="poi_alcohol">Prodavnica pića;alkohol;alkoholna pića;prodavnica pića;Bez licence</string>
+    <string name="poi_cheese">Prodavnica sireva;sir</string>
     <string name="poi_chocolate">Čokolade</string>
     <string name="poi_coffee">Kafa</string>
-    <string name="poi_mall">Tržni centar</string>
+    <string name="poi_mall">Tržni centar;šoping centar;trgovački centar;trgovačka galerija</string>
     <string name="poi_beverages">Napici</string>
-    <string name="poi_butcher">Mesara</string>
-    <string name="poi_farm">Agro trgovina</string>
+    <string name="poi_butcher">Mesarnica;mesa;mesar;mesari;mesara</string>
+    <string name="poi_farm">Poljoprivredna prodavnica;tezga na gazdinstvu;prodavnica na gazdinstvu</string>
     <string name="poi_seafood">Ribarnica</string>
     <string name="poi_confectionery">Konfekcija</string>
     <string name="poi_supermarket">Supermarket</string>
@@ -1432,8 +1432,8 @@
     <string name="poi_entertainment">Slobodno vreme</string>
     <string name="poi_service">Servisi</string>
     <string name="poi_craft">Radionica</string>
-    <string name="poi_convenience">Mini market</string>
-    <string name="poi_deli">Delikatesi</string>
+    <string name="poi_convenience">Prodavnica mešovite robe;prodavnica mešovite robe;prodavnica mešovite robe;mini-market;mini-mart</string>
+    <string name="poi_deli">Deli;delikatesna radnja</string>
     <string name="poi_greengrocer">Piljara</string>
     <string name="poi_ice_cream">Sladoledžinica</string>
     <string name="poi_pastry">Poslastičarnica</string>
@@ -5238,4 +5238,5 @@
     <string name="poi_payment_contactless_xlt_flor_yes">Beskontaktno Florein</string>
     <string name="poi_disaster_help_point">Punkt za pomoć u slučaju katastrofe</string>
     <string name="poi_hitchhiking_stop">Mesto za stopiranje</string>
+    <string name="poi_service_abbreviation">Javni servis</string>
 </resources>
