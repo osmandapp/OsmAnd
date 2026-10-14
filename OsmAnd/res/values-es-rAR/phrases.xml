@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="poi_shop">Tienda;Almacén</string>
+    <string name="poi_shop">Tienda</string>
     <string name="poi_shop_food">Almacén y supermercado</string>
     <string name="poi_emergency">Emergencia</string>
     <string name="poi_transportation">Transporte</string>
@@ -269,7 +269,7 @@
     <string name="poi_orchard">Huerto</string>
     <string name="poi_allotments">Huertos comunitarios</string>
     <string name="poi_forest">Bosque forestal</string>
-    <string name="poi_farmyard">Granja;Corral</string>
+    <string name="poi_farmyard">Granja</string>
     <string name="poi_meadow">Prado</string>
     <string name="poi_landuse_railway">Área ferroviaria</string>
     <string name="poi_canal">Canal</string>
@@ -293,7 +293,7 @@
     <string name="poi_gasometer">Gasómetro</string>
     <string name="poi_silo">Silo</string>
     <string name="poi_storage_tank">Tanque de almacenamiento</string>
-    <string name="poi_college">Instituto superior;Colegio</string>
+    <string name="poi_college">Instituto superior</string>
     <string name="poi_driving_school">Escuela de conducción;Autoescuela;Escuela de manejo</string>
     <string name="poi_kindergarten">Jardín de infantes;Jardín infantil;Guardería</string>
     <string name="poi_school">Escuela</string>
@@ -313,7 +313,7 @@
     <string name="poi_customs">Aduana</string>
     <string name="poi_city">Ciudad</string>
     <string name="poi_town">Ciudad pequeña</string>
-    <string name="poi_village">Pueblo;Villa</string>
+    <string name="poi_village">Pueblo</string>
     <string name="poi_hamlet">Aldea</string>
     <string name="poi_isolated_dwelling">Vivienda aislada</string>
     <string name="poi_suburb">Barrio;Suburbio</string>
@@ -325,7 +325,7 @@
     <string name="poi_residential">Área residencial</string>
     <string name="poi_pharmacy">Farmacia</string>
     <string name="poi_hospital">Hospital</string>
-    <string name="poi_doctors">Consultorio médico;Doctor;Doctora;Médico;Médica</string>
+    <string name="poi_doctors">Consultorio médico;Doctora;Médico;Médica</string>
     <string name="poi_clinic">Clínica</string>
     <string name="poi_first_aid">Primeros auxilios</string>
     <string name="poi_dentist">Dentista;Odontología</string>
@@ -471,7 +471,7 @@
     <string name="poi_cabin">Cabaña;Refugio</string>
     <string name="poi_lean_to">Cobertizo;Refugio</string>
     <string name="poi_hunting_lodge">Pabellón de caza;Refugio</string>
-    <string name="poi_place_of_worship">Lugar de culto;Basílica;Capilla;Catedral;Convento;Ermita;Iglesia;Mezquita;Monasterio;Parroquia;Santuario;Sinagoga;Templo</string>
+    <string name="poi_place_of_worship">Lugar de culto;Capilla;Ermita;Iglesia;Parroquia;Sinagoga;Templo</string>
     <string name="poi_religion_christian">Cristianismo</string>
     <string name="poi_religion_jewish">Judaísmo</string>
     <string name="poi_religion_muslim">Islamismo</string>
@@ -560,7 +560,7 @@
     <string name="poi_leisure_fishing">Lugar de pesca</string>
     <string name="poi_hunting_stand">Choza de caza</string>
     <string name="poi_harbour">Puerto marítimo</string>
-    <string name="poi_marina">Puerto deportivo;Marina</string>
+    <string name="poi_marina">Puerto deportivo</string>
     <string name="poi_miniature_golf">Minigolf;Golf en miniatura</string>
     <string name="poi_playground">Juegos infantiles</string>
     <string name="poi_bench">Bancos (asientos)</string>
@@ -582,7 +582,7 @@
     <string name="poi_craft_agricultural_engines">Motores agrícolas</string>
     <string name="poi_craft_basket_maker">Mimbrería</string>
     <string name="poi_craft_beekeeper">Apicultor/a;Apicultora</string>
-    <string name="poi_craft_blacksmith">Herrería;Herrero;Herrera</string>
+    <string name="poi_craft_blacksmith">Herrería;Herrero</string>
     <string name="poi_craft_brewery">Cervecería</string>
     <string name="poi_craft_boatbuilder">Fabricante de embarcaciones</string>
     <string name="poi_craft_bookbinder">Encuadernación (oficio);Encuadernador</string>
@@ -601,7 +601,7 @@
     <string name="poi_craft_locksmith">Cerrajería (oficio);Cerrajero</string>
     <string name="poi_craft_key_cutter">Duplicación de llaves</string>
     <string name="poi_craft_metal_construction">Metalistería</string>
-    <string name="poi_craft_optician">Optometrista;Técnico óptico;Oculista;Óptica</string>
+    <string name="poi_craft_optician">Optometrista;Técnico óptico;Oculista</string>
     <string name="poi_craft_painter">Pintor/a;Pintora</string>
     <string name="poi_craft_parquet_layer">Parquetista</string>
     <string name="poi_craft_photographer">Fotógrafo/a;Fotógrafa</string>
@@ -616,7 +616,7 @@
     <string name="poi_craft_sawmill">Aserradero</string>
     <string name="poi_craft_scaffolder">Montador de andamios</string>
     <string name="poi_craft_sculptor">Escultor/a;Escultora</string>
-    <string name="poi_craft_shoemaker">Zapatería (oficio);Calzados;Zapatero</string>
+    <string name="poi_craft_shoemaker">Zapatería (oficio);Zapatero</string>
     <string name="poi_craft_stand_builder">Creador de estand</string>
     <string name="poi_craft_stonemason">Cantería;Albañilería (piedras);Cabuquero;Entallador;Cantero;Picapedrero;Tallista;Labrante</string>
     <string name="poi_craft_sun_protection">Fábrica de toldos</string>
@@ -719,7 +719,7 @@
     <string name="poi_signal_station_warning">Estación de señales de advertencia</string>
     <string name="poi_small_craft_facility">Centro para pequeñas embarcaciones</string>
     <string name="poi_topmark">Tope náutico</string>
-    <string name="poi_seamark_rock">Roca náutica;Bajo</string>
+    <string name="poi_seamark_rock">Roca náutica</string>
     <string name="poi_seamark_wreck">Restos náuticos;Pecio</string>
     <string name="poi_military_landuse">Zona militar</string>
     <string name="poi_military_airfield">Aeródromo militar</string>
@@ -5155,7 +5155,7 @@
     <string name="poi_barrier_sliding_gate">Puerta corrediza</string>
     <string name="poi_sample_collection_filter">Recolección de muestras</string>
     <string name="x">X (antes Twitter)</string>
-    <string name="poi_sample_collection">Recolección de muestras;Sangre;Laboratorio;Prueba;Test</string>
+    <string name="poi_sample_collection">Recolección de muestras;Sangre;Prueba;Test</string>
     <string name="poi_sample_collection_yes">Sí</string>
     <string name="poi_sample_collection_covid19">COVID19</string>
     <string name="poi_sample_collection_blood">Sangre</string>

@@ -1326,6 +1326,12 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> MAX_SPEED = new FloatPreference(this,
 			"max_speed", 0f).makeProfile().cache();
 
+	public final CommonPreference<Boolean> ETA_USE_AVERAGE_SPEED = new BooleanPreference(this,
+			"eta_use_average_speed", false).makeProfile().cache();
+
+	public final CommonPreference<Long> ETA_AVERAGE_SPEED_INTERVAL = new LongPreference(this,
+			"eta_average_speed_interval", 15 * 60 * 1000L).makeProfile().cache();
+
 	public final CommonPreference<String> ICON_RES_NAME = new StringPreference(this, "app_mode_icon_res_name", "ic_world_globe_dark") {
 		@Override
 		public String getModeValue(ApplicationMode mode) {
@@ -1556,6 +1562,8 @@ public class OsmandSettings {
 	public static final String BILLING_USER_DONATION_NONE_PARAMETER = "none";
 
 	public final OsmandPreference<Boolean> INAPPS_READ = new BooleanPreference(this, "inapps_read", false).makeGlobal();
+	public final OsmandPreference<String> INSTALL_REFERRER = new StringPreference(this, "install_referrer", "").makeGlobal();
+	public final OsmandPreference<Boolean> INSTALL_REFERRER_CHECKED = new BooleanPreference(this, "install_referrer_checked", false).makeGlobal();
 
 	public final OsmandPreference<String> BILLING_USER_ID = new StringPreference(this, "billing_user_id", "").makeGlobal();
 	public final OsmandPreference<String> BILLING_USER_TOKEN = new StringPreference(this, "billing_user_token", "").makeGlobal();
@@ -2390,6 +2398,7 @@ public class OsmandSettings {
 	public static final int EXTERNAL_STORAGE_TYPE_INTERNAL_FILE = 2; // ctx.getFilesDir()
 	public static final int EXTERNAL_STORAGE_TYPE_OBB = 3; // ctx.getObbDirs
 	public static final int EXTERNAL_STORAGE_TYPE_SPECIFIED = 4;
+	public static final int EXTERNAL_STORAGE_TYPE_MEDIA = 5; // ctx.getExternalMediaDirs()
 
 	public final OsmandPreference<Long> OSMAND_USAGE_SPACE = new LongPreference(this, "osmand_usage_space", 0).makeGlobal();
 
@@ -3479,6 +3488,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> FAVORITES_TAB =
 			new IntPreference(this, "FAVORITES_TAB", 0).makeGlobal().cache();
+	public final CommonPreference<String> FLYOVERS_SORT_MODE =
+			new StringPreference(this, "flyovers_sort_mode", "DATE_NEWEST").makeGlobal().cache();
 
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;

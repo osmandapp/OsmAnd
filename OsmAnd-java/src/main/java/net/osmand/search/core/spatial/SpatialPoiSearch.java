@@ -2,6 +2,7 @@ package net.osmand.search.core.spatial;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -121,6 +122,29 @@ public class SpatialPoiSearch {
 			}
 			names.add(name);
 			return true;
+		}
+
+		/**
+		 * Fewest words of a name of the type that has a word starting with one of the query words. A one-word synonym
+		 * ("cistern", "temple") must not make a partial match of another name ("water" of "Water tank", "place" of
+		 * "Place of worship") look complete.
+		 */
+		public int tokensInMatchedName(Collection<String> queryWords) {
+			int min = 0;
+			for (String name : names) {
+				List<String> words = SearchAlgorithms.split(name);
+				boolean matched = false;
+				for (String w : words) {
+					String aligned = SearchAlgorithms.alignChars(w.toLowerCase());
+					for (String q : queryWords) {
+						matched |= aligned.startsWith(q);
+					}
+				}
+				if (matched && (min == 0 || words.size() < min)) {
+					min = words.size();
+				}
+			}
+			return min == 0 ? tokensInName : min;
 		}
 		
 		@Override
@@ -268,13 +292,16 @@ public class SpatialPoiSearch {
 				List<String> possibleValues = subType.possibleValues;
 				List<String> wikidataIds = subType.wikidataIds;
 				TIntArrayList possibleValuesFreqs = subType.possibleValuesFreqs;
-//				int allFreq = subType.frequency;
 				for (int k = 0; k < possibleValues.size(); k++) {
 					String topValueName = possibleValues.get(k);
 					String valueKey = TopIndexFilter.getValueKey(topValueName);
 					String fullKey = subType.name + "_" + valueKey;
 					String wikidataId = wikidataIds != null && k < wikidataIds.size() ? wikidataIds.get(k) : "";
 					int freq = possibleValuesFreqs != null && k < possibleValuesFreqs.size() ? possibleValuesFreqs.get(k) : 0;
+					if (possibleValuesFreqs == null && possibleValues.size() == 1) {
+						// the writer stores per-value frequencies only for 2+ values; one value has the subtype total
+						freq = subType.frequency;
+					}
 					SpatialPoiType topValue = byKey.get(fullKey);
 					if (topValue == null) {
 						topValue = new SpatialPoiType(subType, topValueName, fullKey, ids.getAndIncrement());

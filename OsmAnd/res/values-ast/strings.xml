@@ -3402,4 +3402,10 @@
     </plurals>
     <string name="co2_mission">Emisión de CO₂</string>
     <string name="kg">kg</string>
+    <plurals name="files_count">
+        <item quantity="one">%d ficheru</item>
+        <item quantity="other">%d ficheros</item>
+    </plurals>
+    <string name="preparing_file">Preparando\'l ficheru</string>
+    <string name="shared_string_archive">Archivu</string>
 </resources>

@@ -1,8 +1,12 @@
 package net.osmand.aiconnector
 
+import android.content.res.AssetManager
+import android.net.Uri
+import android.os.ParcelFileDescriptor
 import android.util.Base64
 import android.view.KeyEvent
 import net.osmand.aidlapi.IOsmAndAidlCallback
+import net.osmand.aidlapi.IOsmAndAidlInterface
 import net.osmand.aidlapi.contextmenu.AContextMenuButton
 import net.osmand.aidlapi.customization.AProfile
 import net.osmand.aidlapi.customization.PreferenceParams
@@ -18,8 +22,12 @@ import net.osmand.aidlapi.gpx.HideGpxParams
 import net.osmand.aidlapi.gpx.ShowGpxParams
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams
+import net.osmand.aidlapi.logcat.ALogcatListenerParams
 import net.osmand.aidlapi.logcat.OnLogcatMessageParams
 import net.osmand.aidlapi.info.AMapWidgetValue
+import net.osmand.aidlapi.map.AFlyoverFile
+import net.osmand.aidlapi.map.FlyoverFileParams
+import net.osmand.aidlapi.map.MapFlyoverParams
 import net.osmand.aidlapi.map.MapScreenshotParams
 import net.osmand.aidlapi.map.SetMapCameraParams
 import net.osmand.aidlapi.map.SetMapLocationParams
@@ -34,6 +42,7 @@ import net.osmand.aidlapi.search.SearchParams
 import net.osmand.aidlapi.search.SearchResult
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.InputStream
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -46,7 +55,7 @@ class ToolError(message: String) : Exception(message)
 class ToolImage(val jpeg: ByteArray, val caption: String)
 
 /** MCP tool definitions and their implementation on top of OsmAnd's AIDL API v2. */
-class OsmAndTools(private val bridge: OsmAndBridge) {
+class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetManager) {
 
 	private class Tool(
 		val name: String,
@@ -165,7 +174,9 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			val params = MapScreenshotParams(a.optInt("max_width", 1080), a.optInt("quality", 80))
 			params.isMapOnly = a.optBoolean("map_only", false)
 			val shot = bridge.get().getMapScreenshot(params)
-				?: throw ToolError(refused(SCREEN) + " OsmAnd also needs to be open with the map on the screen.")
+				// usually another app is in front; OsmAnd does not tell this apart from a refused permission
+				?: throw ToolError("OsmAnd returned no picture. Most often OsmAnd is not in front: ask the user " +
+						"to open ${osmandApp()} with the map on the screen. Otherwise: " + refused(SCREEN))
 			ToolImage(shot.image, "Map screenshot ${shot.width}x${shot.height}")
 		},
 		Tool(
@@ -383,8 +394,136 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		) { a ->
 			check(SETTINGS, bridge.get().executeQuickAction(QuickActionParams(a.getInt("number"))))
 			"Quick action executed"
+		},
+		Tool(
+			"osmand_logs",
+			"OsmAnd's own log (logcat of the OsmAnd process), newest lines last. Use it to find out why a call " +
+					"was refused or failed: OsmAnd logs each API call with its permission check, e.g. " +
+					"'Request AIDL API V2 for getMapScreenshot from net.osmand.aiconnector enabled: false'. " +
+					"Needs the System group. The first call collects up to 10000 earlier lines and takes a few seconds.",
+			schema(
+				prop("filter", "string", "Only lines containing this text, case-insensitive, e.g. getMapScreenshot or Exception"),
+				prop("level", "string", "Lowest level: D (debug), I (info, default), W (warn) or E (error)"),
+				prop("lines", "integer", "Max lines, default 200, max 1000")
+			)
+		) { a -> logs.read(a) },
+		Tool(
+			"osmand_flyover",
+			"Record a smooth camera flight over the map into an MP4 video on the phone. Read osmand_guide topic " +
+					"flyover first: speed limits, render time, examples. The camera passes the key " +
+					"frames at their times; between them the center follows a smooth curve and zoom, rotation and tilt " +
+					"ease. OsmAnd renders off the screen frame by frame (OpenGL renderer, 3D and relief included), so the " +
+					"screen may be off; the phone's map pauses meanwhile. Rendering takes longer than the video: " +
+					"about 0.1-1 s per frame. Returns the file path on the phone; osmand_download (the stdio bridge) " +
+					"saves the video on the computer.",
+			schema(
+				prop("keyframes", "array", "Key frames: {lat, lon, zoom, rotation (degrees, direction up on the screen, " +
+						"0 north), tilt (camera angle above the horizon, 90 flat, 30-50 3D), time_s (from the start)}; " +
+						"rotation and tilt default to the previous key frame or 0 / 90", items = "object"),
+				prop("width", "integer", "Video width, even, default 1280"),
+				prop("height", "integer", "Video height, even, default 720"),
+				prop("fps", "integer", "Frames per second, default 30"),
+				prop("name", "string", "File name, default flyover_<time>.mp4"),
+				prop("camera", "object", "Instead of keyframes: {follow: track number in gpx, zoom, tilt, look_ahead_s}; " +
+						"or a drone: {drone: track number in gpx (ele = height, point tags yaw/pitch/fov)} or " +
+						"{poses: [{time_s, lat, lon, alt_m, alt_ref: sea|ground, heading, pitch (below 0 = down), fov}]}; " +
+						"see osmand_guide topic flyover"),
+				prop("duration_s", "number", "Video length when the camera follows a track"),
+				prop("gpx", "array", "Tracks to show: {file, from_s, to_s, time, style...} or gpx_data (a GPX as text, up to ~300 KB); see osmand_guide topic flyover", items = "object"),
+				prop("osmand_widgets", "array", "OsmAnd elements: profile_icon, ruler, compass", items = "string"),
+				prop("attribution", "string", "Attribution text, default 'OsmAnd · © OpenStreetMap'"),
+				prop("panels", "array", "Panels of widgets (attribute / text / chart) placed like a FrameLayout; " +
+						"see osmand_guide topic flyover", items = "object"),
+				prop("data", "object", "Your own values for panels: constants or series"),
+				prop("ease_in_s", "number", "Seconds the camera speeds up after the start, default 1"),
+				prop("ease_out_s", "number", "Seconds the camera slows down before the end, default 1"),
+				prop("scale", "string", "video (default) or screen: the phone's own map scale"),
+				prop("ui_scale", "number", "Size of everything drawn over the map, default 1"),
+				prop("profile", "string", "Profile key for the profile icon, default the current one")
+			)
+		) { a -> flyover(a) },
+		Tool(
+			"osmand_flyover_files",
+			"Flyover videos recorded on the phone, newest first: name, size, date, and whether one is still being " +
+					"recorded. To get a video onto the computer call osmand_download with its name (a tool of the stdio " +
+					"bridge); without the bridge GET the 'download' path from the connector with the access key " +
+					"(Authorization: Bearer).",
+			schema(prop("limit", "integer", "Max videos, default 20"))
+		) { a -> flyoverFiles(a.optInt("limit", 20)) },
+		Tool(
+			"osmand_guide",
+			"How-to guide for a bigger task, with parameters, limits and examples. Topics: ${GUIDE_TOPICS.joinToString()}.",
+			schema(prop("topic", "string", "Guide topic: ${GUIDE_TOPICS.joinToString()}"), required = listOf("topic"))
+		) { a ->
+			val topic = a.getString("topic").trim().lowercase()
+			if (topic !in GUIDE_TOPICS) throw ToolError("No guide '$topic'; topics: ${GUIDE_TOPICS.joinToString()}")
+			assets.open("guides/$topic.md").bufferedReader().use { it.readText() }
 		}
 	).associateBy { it.name }
+
+	private fun flyover(a: JSONObject): JSONObject {
+		// a camera that follows a track or a drone needs no key frames; OsmAnd checks the rest of the request
+		val frames = a.optJSONArray("keyframes") ?: JSONArray()
+		val n = frames.length()
+		val camera = a.optJSONObject("camera")
+		if (n < 1 && camera?.has("follow") != true && camera?.has("drone") != true && camera?.has("poses") != true) {
+			throw ToolError("Give key frames, camera.follow or camera.drone with duration_s, or camera.poses; " +
+					"see osmand_guide topic flyover")
+		}
+		val lat = DoubleArray(n)
+		val lon = DoubleArray(n)
+		val zoom = FloatArray(n)
+		val rotation = FloatArray(n)
+		val tilt = FloatArray(n)
+		val time = LongArray(n)
+		for (i in 0 until n) {
+			val f = frames.getJSONObject(i)
+			lat[i] = f.getDouble("lat")
+			lon[i] = f.getDouble("lon")
+			zoom[i] = f.getDouble("zoom").toFloat()
+			rotation[i] = f.optDouble("rotation", if (i > 0) rotation[i - 1].toDouble() else 0.0).toFloat()
+			tilt[i] = f.optDouble("tilt", if (i > 0) tilt[i - 1].toDouble() else 90.0).toFloat()
+			time[i] = (f.getDouble("time_s") * 1000).toLong()
+		}
+		val p = MapFlyoverParams(lat, lon, zoom, rotation, tilt, time, a.optInt("width", 1280),
+			a.optInt("height", 720), a.optInt("fps", 30), a.optString("name"))
+		p.spec = a.toString()
+		if (!bridge.get().recordMapFlyover(p)) {
+			throw ToolError(p.error.ifEmpty { refused(SCREEN) + " An older OsmAnd cannot record a flyover." })
+		}
+		val o = JSONObject().put("file", p.filePath).put("frames", p.frames)
+			.put("render_s", Math.round(p.renderTimeMs / 100.0) / 10.0)
+			.put("max_screen_speed_px_s", p.maxScreenSpeed.toInt())
+		p.warnings?.takeIf { it.isNotEmpty() }?.let { o.put("warnings", it) }
+		if (p.maxScreenSpeed > SMOOTH_SCREEN_SPEED) {
+			o.put("hint", "The map moves up to ${p.maxScreenSpeed.toInt()} px/s on the screen; above $SMOOTH_SCREEN_SPEED " +
+					"sharp lines strobe. Give that part more time or a lower zoom (the camera higher).")
+		}
+		return o
+	}
+
+	private fun flyoverFiles(limit: Int): JSONObject {
+		val files = ArrayList<AFlyoverFile>()
+		if (!bridge.get().getFlyoverFiles(files)) {
+			throw ToolError(refused(SCREEN) + " An older OsmAnd cannot list flyover videos.")
+		}
+		val list = JSONArray()
+		for (f in files.take(limit.coerceAtLeast(1))) {
+			val o = JSONObject().put("name", f.fileName).put("size_mb", Math.round(f.size / 1e5) / 10.0)
+				.put("date", Instant.ofEpochMilli(f.lastModified).atZone(ZoneId.systemDefault()).toLocalDateTime().toString())
+			if (f.isRecording) o.put("recording", true) else o.put("download", FLYOVER_FILES_PATH + Uri.encode(f.fileName))
+			list.put(o)
+		}
+		return JSONObject().put("count", files.size).put("videos", list)
+	}
+
+	/** A finished flyover video for the connector's download address, or null if OsmAnd has none by this name. */
+	fun openFlyover(name: String): Pair<InputStream, Long>? {
+		val fd = bridge.get().openFlyoverFile(FlyoverFileParams(name)) ?: return null
+		return ParcelFileDescriptor.AutoCloseInputStream(fd) to fd.statSize
+	}
+
+	private val logs = LogBuffer()
 
 	fun list(): JSONArray = JSONArray(tools.values.map {
 		JSONObject().put("name", it.name).put("description", it.description).put("inputSchema", it.schema)
@@ -441,6 +580,9 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 			.put("package", bridge.boundPackage)
 			.put("installed", JSONArray(bridge.installedPackages()))
 			.put("osmand_app", osmandApp())
+			// an older OsmAnd lacks newer calls and refuses them like a missing permission
+			.put("osmand_version", bridge.versionName(bridge.boundPackage ?: bridge.preferredPackage))
+			.put("connector_version", BuildConfig.VERSION_NAME)
 		// refreshMap is in the Map group that every connected app gets by default
 		if (!api.refreshMap()) {
 			o.put("enabled", false).put("hint", refused(MAP))
@@ -635,20 +777,11 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 		val limit = a.optInt("limit", 10)
 		val latch = CountDownLatch(1)
 		var results: List<SearchResult> = emptyList()
-		val callback = object : IOsmAndAidlCallback.Stub() {
+		val callback = object : EmptyCallback() {
 			override fun onSearchComplete(resultSet: MutableList<SearchResult>?) {
 				results = resultSet ?: emptyList()
 				latch.countDown()
 			}
-
-			override fun onUpdate() {}
-			override fun onAppInitialized() {}
-			override fun onGpxBitmapCreated(bitmap: AGpxBitmap?) {}
-			override fun updateNavigationInfo(directionInfo: ADirectionInfo?) {}
-			override fun onContextMenuButtonClicked(buttonId: Int, pointId: String?, layerId: String?) {}
-			override fun onVoiceRouterNotify(params: OnVoiceNavigationParams?) {}
-			override fun onKeyEvent(params: KeyEvent?) {}
-			override fun onLogcatMessage(params: OnLogcatMessageParams?) {}
 		}
 		val p = SearchParams(a.getString("query"), type, a.getDouble("lat"), a.getDouble("lon"), 1, limit)
 		check(SEARCH, bridge.get().search(p, callback))
@@ -658,6 +791,84 @@ class OsmAndTools(private val bridge: OsmAndBridge) {
 				.put("lat", it.latitude).put("lon", it.longitude)
 				.apply { if (!it.alternateName.isNullOrEmpty()) put("alt_name", it.alternateName) }
 		})
+	}
+
+	/** OsmAnd's logcat lines, collected from the first osmand_logs call while the connection lasts. */
+	private inner class LogBuffer {
+		private val lines = ArrayDeque<String>()
+		private var api: IOsmAndAidlInterface? = null
+		private var level = ""
+		private var callbackId = -1L
+
+		@Volatile
+		private var lastLineTime = 0L
+
+		private val callback = object : EmptyCallback() {
+			override fun onLogcatMessage(params: OnLogcatMessageParams?) {
+				val logs = params?.logs ?: return
+				synchronized(lines) {
+					logs.forEach { lines.addLast(it) }
+					while (lines.size > MAX_LOG_LINES) lines.removeFirst()
+				}
+				lastLineTime = System.currentTimeMillis()
+			}
+		}
+
+		@Synchronized
+		fun read(a: JSONObject): String {
+			val level = a.optString("level", "I").uppercase().ifEmpty { "I" }
+			if (level !in LOG_LEVELS) throw ToolError("level is one of ${LOG_LEVELS.joinToString()}, got '$level'")
+			val filter = a.optString("filter")
+			val max = a.optInt("lines", 200).coerceIn(1, 1000)
+			val current = bridge.get()
+			if (current !== api || level != this.level) {
+				subscribe(current, level)
+				// OsmAnd first sends the earlier lines, one call per line
+				waitQuiet(1000, 10000)
+			} else {
+				// the lines of a call made just before arrive a moment later
+				waitQuiet(300, 2000)
+			}
+			val (kept, found) = synchronized(lines) {
+				lines.size to lines.filter { filter.isEmpty() || it.contains(filter, ignoreCase = true) }
+			}
+			val shown = found.takeLast(max)
+			return "${shown.size} of ${found.size} matching lines ($kept kept, level $level and above)\n" +
+					shown.joinToString("\n")
+		}
+
+		private fun subscribe(current: IOsmAndAidlInterface, level: String) {
+			unsubscribe()
+			synchronized(lines) { lines.clear() }
+			val p = ALogcatListenerParams()
+			p.filterLevel = "*:$level"
+			lastLineTime = System.currentTimeMillis()
+			val id = current.registerForLogcatMessages(p, callback)
+			if (id < 0) throw ToolError(refused(SYSTEM))
+			api = current
+			this.level = level
+			callbackId = id
+		}
+
+		private fun unsubscribe() {
+			val old = api ?: return
+			api = null
+			val p = ALogcatListenerParams()
+			p.setSubscribeToUpdates(false)
+			p.callbackId = callbackId
+			try {
+				old.registerForLogcatMessages(p, callback)
+			} catch (_: Exception) {
+				// the old connection is gone together with its subscription
+			}
+		}
+
+		private fun waitQuiet(quietMs: Long, maxMs: Long) {
+			val start = System.currentTimeMillis()
+			while (System.currentTimeMillis() - lastLineTime < quietMs && System.currentTimeMillis() - start < maxMs) {
+				Thread.sleep(100)
+			}
+		}
 	}
 
 	private fun JSONObject.optFloat(name: String): Float = if (has(name)) getDouble(name).toFloat() else Float.NaN
@@ -683,6 +894,26 @@ private const val TRACKS_VIEW = "Tracks: view"
 private const val TRACKS_EDIT = "Tracks: edit"
 private const val RECORDING = "Trip recording"
 private const val SETTINGS = "Settings"
+private const val SYSTEM = "System"
+
+private const val MAX_LOG_LINES = 5000
+private val GUIDE_TOPICS = listOf("flyover")
+const val FLYOVER_FILES_PATH = "/files/flyover/"
+private const val SMOOTH_SCREEN_SPEED = 250
+private val LOG_LEVELS = listOf("D", "I", "W", "E")
+
+/** A callback that ignores everything; subclasses override the event they wait for. */
+private open class EmptyCallback : IOsmAndAidlCallback.Stub() {
+	override fun onSearchComplete(resultSet: MutableList<SearchResult>?) {}
+	override fun onUpdate() {}
+	override fun onAppInitialized() {}
+	override fun onGpxBitmapCreated(bitmap: AGpxBitmap?) {}
+	override fun updateNavigationInfo(directionInfo: ADirectionInfo?) {}
+	override fun onContextMenuButtonClicked(buttonId: Int, pointId: String?, layerId: String?) {}
+	override fun onVoiceRouterNotify(params: OnVoiceNavigationParams?) {}
+	override fun onKeyEvent(params: KeyEvent?) {}
+	override fun onLogcatMessage(params: OnLogcatMessageParams?) {}
+}
 
 private const val PREF_HINT = "Common ids: application_mode (current profile, global), daynight_mode (DAY, NIGHT, AUTO, SENSOR, APP_THEME), " +
 		"renderer (map style, e.g. OsmAnd, Touring view (contrast and details), Topo, UniRS, Nautical, Ski map, Winter and ski, Offroad, Desert), " +

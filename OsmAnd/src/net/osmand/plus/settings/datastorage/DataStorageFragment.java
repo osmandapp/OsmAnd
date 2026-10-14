@@ -177,8 +177,10 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 						newDataStorage.setDirectory(directory);
 					}
 					if (moveMaps) {
-						File fromDirectory = new File(currentDataStorage.getDirectory());
-						updateSelectedFolderFiles(fromDirectory);
+						if (checkWritable(new File(newDataStorage.getDirectory()), true)) {
+							File fromDirectory = new File(currentDataStorage.getDirectory());
+							updateSelectedFolderFiles(fromDirectory);
+						}
 					} else {
 						confirm(app, activity, newDataStorage, false);
 					}
@@ -419,17 +421,16 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 	}
 
 	private void confirm(OsmandApplication app, OsmandActionBarActivity activity, StorageItem newStorageDirectory, boolean silentRestart) {
-		confirm(app, activity, newStorageDirectory);
-		if (!firstUsage) {
+		if (confirm(app, activity, newStorageDirectory) && !firstUsage) {
 			RestartActivity.doRestart(activity, silentRestart);
 		}
 	}
 
-	private void confirm(OsmandApplication app, OsmandActionBarActivity activity, StorageItem newStorageDirectory) {
+	private boolean confirm(OsmandApplication app, OsmandActionBarActivity activity, StorageItem newStorageDirectory) {
 		String newDirectory = newStorageDirectory.getDirectory();
 		int type = newStorageDirectory.getType();
 		File newDirectoryFile = new File(newDirectory);
-		boolean wr = FileUtils.isWritable(newDirectoryFile);
+		boolean wr = checkWritable(newDirectoryFile, false);
 		if (wr) {
 			if (storageMigration) {
 				dismiss();
@@ -441,11 +442,26 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 			if (target instanceof StorageSelectionListener) {
 				((StorageSelectionListener) target).onStorageSelected(newStorageDirectory);
 			}
-		} else {
-			app.showToastMessage(R.string.specified_directiory_not_writeable);
 		}
 		refreshDataInfo();
 		updateAllSettings();
+		return wr;
+	}
+
+	private boolean checkWritable(@NonNull File dir, boolean testWrite) {
+		String error = FileUtils.getWriteError(dir, testWrite);
+		if (error != null) {
+			Context ctx = getContext();
+			if (ctx != null) {
+				new AlertDialog.Builder(ctx)
+						.setMessage(getString(R.string.specified_directiory_not_writeable) + "\n\n" + dir + "\n" + error)
+						.setPositiveButton(R.string.shared_string_ok, null)
+						.show();
+			} else {
+				app.showToastMessage(R.string.specified_directiory_not_writeable);
+			}
+		}
+		return error == null;
 	}
 
 	private void refreshDataInfo() {

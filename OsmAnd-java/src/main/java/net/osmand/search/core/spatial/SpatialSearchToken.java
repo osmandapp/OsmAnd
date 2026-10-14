@@ -3,6 +3,7 @@ package net.osmand.search.core.spatial;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +16,9 @@ import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.binary.Abbreviations;
+import net.osmand.search.rules.SearchModRules;
+import net.osmand.search.rules.SearchModRules.SearchModRuleOwner;
+import net.osmand.search.rules.SearchModDictionary.QueryForm;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.NameIndexReader.NameIndexReaderMatcher;
@@ -85,18 +88,19 @@ public class SpatialSearchToken {
 	int mainNumber = -1;
 	/** a bare number whose value another query word already carries: '28' next to '28-ма' */
 	boolean numberNamedByOther;
-	CollatorStringMatcher[] otherMatch;
-	
-	Map<String, Boolean> fastMatchCheck = new HashMap<String, Boolean>();
-	Map<String, Boolean> fastPrefMatchCheck = new HashMap<String, Boolean>();
-	
+	final SearchModRules globalRules;
+	// the word by the rules of the locale of every map it is matched with
+	Map<String, LocaleRules> localeRules = new LinkedHashMap<>();
+	// the word without the rules of a map: POI categories, a word not matched with a map yet
+	final LocaleRules noRules;
 	boolean categoryMatchMode = false;
 	TLongHashSet cacheCategoryFilterObjects = new TLongHashSet();
 	
 	public record PartialMatch(NameIndexAtom atom, List<SpatialSearchToken> other, boolean nonNumericMatch) {
 	}
 
-	public SpatialSearchToken(int MIN_CHAR_INCOMPLETE, String ow, String original, int order) {
+	public SpatialSearchToken(SearchModRules globalRules, int MIN_CHAR_INCOMPLETE, String ow, String original, int order) {
+		this.globalRules = globalRules;
 		this.MIN_CHAR_INCOMPLETE = MIN_CHAR_INCOMPLETE;
 		originalWord = original;
 		word = ow;
@@ -125,26 +129,74 @@ public class SpatialSearchToken {
 			// PA-21
 			noHyphenCollatorMain = new CollatorStringMatcher(wordAligned.replace("-", ""), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 		}
-		String abbr = Abbreviations.getSearchabbreviations().get(noDot);
-		if (abbr != null) {
-			List<String> other = SearchAlgorithms.splitAndNormalize(abbr, true);
-			otherMatch = new CollatorStringMatcher[other.size()];
-			for(int i = 0; i < other.size(); i++) {
-				otherMatch[i] = new CollatorStringMatcher(other.get(i), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+		noRules = new LocaleRules("");
+	}
+
+	private record QueryMatcher(QueryForm form, CollatorStringMatcher matcher) {
+	}
+
+	class LocaleRules {
+		// forms for every owner of a name
+		CollatorStringMatcher[] otherMatch;
+		// forms for some owners only ("pl" -> "Place" of a street)
+		List<QueryMatcher> scopedMatch = new ArrayList<>();
+		// all forms: a key of a name index has no owner
+		CollatorStringMatcher[] prefixMatch;
+		Map<String, Boolean> fastMatchCheck = new HashMap<String, Boolean>();
+		Map<String, Boolean> fastPrefMatchCheck = new HashMap<String, Boolean>();
+
+		final boolean partOfBuilding;
+
+		LocaleRules(String locale) {
+			List<CollatorStringMatcher> other = new ArrayList<>();
+			List<CollatorStringMatcher> prefix = new ArrayList<>();
+			partOfBuilding = globalRules.dictionary(locale).likelyPartOfBuilding(word, bldWordSplit);
+			for (QueryForm form : globalRules.dictionary(locale).getQueryForms(wordNoDot)) {
+				CollatorStringMatcher m = new CollatorStringMatcher(form.word(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+				if (form.isUnscoped()) {
+					other.add(m);
+				} else {
+					scopedMatch.add(new QueryMatcher(form, m));
+				}
+				prefix.add(m);
 			}
+			otherMatch = other.isEmpty() ? null : other.toArray(new CollatorStringMatcher[0]);
+			prefixMatch = prefix.isEmpty() ? null : prefix.toArray(new CollatorStringMatcher[0]);
 		}
+	}
+
+	LocaleRules localeRules(String locale) {
+		LocaleRules lr = localeRules.get(locale);
+		if (lr == null) {
+			lr = new LocaleRules(locale);
+			localeRules.put(locale, lr);
+		}
+		return lr;
 	}
 	
 	public int getMainNumber() {
 		return mainNumber;
 	}
 	
+	/** not tied to one map (a POI category next to the word): building-like in a locale of any map matched */
 	public boolean likelyPartOfBuilding() {
-		return Abbreviations.likelyPartOfBuilding(word, bldWordSplit);
+		if (localeRules.isEmpty()) {
+			return noRules.partOfBuilding;
+		}
+		for (LocaleRules lr : localeRules.values()) {
+			if (lr.partOfBuilding) {
+				return true;
+			}
+		}
+		return false;
 	}
-	
+
+	public boolean likelyPartOfBuilding(String locale) {
+		return localeRules(locale).partOfBuilding;
+	}
+
 	public boolean likelyRef() {
-		return Abbreviations.likelyPartOfRef(word, bldWordSplit);
+		return globalRules.likelyPartOfRef(word, bldWordSplit);
 	}
 
 	public CollatorStringMatcher getMainCollator() {
@@ -163,6 +215,15 @@ public class SpatialSearchToken {
 	
 	
 	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats) {
+		return getPrefixMatcher(stats, noRules);
+	}
+
+	/** @param locale rules locale of the map whose name index is read */
+	NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, String locale) {
+		return getPrefixMatcher(stats, localeRules(locale));
+	}
+
+	private NameIndexReaderMatcher getPrefixMatcher(SpatialSearchStats stats, LocaleRules lf) {
 		return new NameIndexReaderMatcher(broad ? wordNoDot : word) {
 			
 			@Override
@@ -180,7 +241,7 @@ public class SpatialSearchToken {
 						}
 					}
 				}
-				Boolean cache = fastPrefMatchCheck.get(key);
+				Boolean cache = lf.fastPrefMatchCheck.get(key);
 				if (cache != null) {
 					stats.sub1PartMatchTime.finish();
 					return cache;
@@ -193,8 +254,8 @@ public class SpatialSearchToken {
 					// 4th - key, "4" token
 					matched = Algorithms.extractFirstIntegerNumber(key) == mainNumber;
 				}
-				if (!matched && otherMatch != null) {
-					for (CollatorStringMatcher o : otherMatch) {
+				if (!matched && lf.prefixMatch != null) {
+					for (CollatorStringMatcher o : lf.prefixMatch) {
 						matched |= CollatorStringMatcher.cmatches(collator, o.getPart(), alignedKey,
 								StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 						// o.matches(alignedKey) could be needed for matching data with non-processed abbrevations
@@ -206,7 +267,7 @@ public class SpatialSearchToken {
 					// query 'pa 21' match 'pa21' key
 					matched = true;
 				}
-				fastPrefMatchCheck.put(key, matched);
+				lf.fastPrefMatchCheck.put(key, matched);
 				stats.sub1PartMatchTime.finish();
 				return matched;
 			}
@@ -266,7 +327,14 @@ public class SpatialSearchToken {
 				// select shortest available version (see number of tests 'Piazza Trento e Trieste', netherlands_amsterdam_eerste_helmersstraat...)
 				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
 					res = Integer.compare(atom.otherWordsCnt, existing.otherWordsCnt);
-					if (res == 0) {
+					if (res == 0 && atom.ruleSpelling != existing.ruleSpelling) {
+						// a name of OSM and its spelling made by a rule ("weberstraße", "weberstr"): the one with more
+						// words of the query, the name of OSM when they have as many
+						res = Integer.compare(existing.otherFoundCnt, atom.otherFoundCnt);
+						if (res == 0) {
+							res = Boolean.compare(atom.ruleSpelling, existing.ruleSpelling);
+						}
+					} else if (res == 0) {
 						res = Integer.compare(atom.otherFoundCnt, existing.otherFoundCnt);
 					}
 				} else if (res == 0) {
@@ -304,7 +372,43 @@ public class SpatialSearchToken {
 		return true;
 	}
 
-	boolean matchName(String name, TIntArrayList poiTypes) {
+	/**
+	 * @param locale rules locale of the map of the name
+	 * @param type   type of the atom of the name: the forms of some owners apply only to their names
+	 */
+	boolean matchName(String name, TIntArrayList poiTypes, String locale, int type) {
+		LocaleRules lf = localeRules(locale);
+		if (matchName(name, poiTypes, lf)) {
+			return true;
+		}
+		if (categoryMatchMode || name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
+			return false;
+		}
+		// not cached: the owner differs for one name
+		SearchModRuleOwner owner = ruleOwner(type);
+		for (QueryMatcher q : lf.scopedMatch) {
+			if (q.form().appliesTo(owner) && q.matcher().matches(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** the owner of a name of an atom type for the search rules; a building has the name of its street */
+	SearchModRuleOwner ruleOwner(int type) {
+		if (type == CityBlocks.STREET_TYPE.index || type == BUILDING_TYPE) {
+			return SearchModRuleOwner.STREET;
+		} else if (type == POI_TYPE || type == POI_REF_TYPE) {
+			return SearchModRuleOwner.POI;
+		} else if (type == CityBlocks.BOUNDARY_TYPE.index) {
+			return SearchModRuleOwner.BOUNDARY;
+		} else if (type == CityBlocks.POSTCODES_TYPE.index) {
+			return SearchModRuleOwner.POSTCODE;
+		}
+		return SearchModRuleOwner.LOCALITY;
+	}
+
+	private boolean matchName(String name, TIntArrayList poiTypes, LocaleRules lf) {
 //		System.out.printf("query '%s' matches '%s' %s\n", word, name, collatorMain.matches(name) || 
 //				collatorMain.matches(name.replace(' ', '-')));
 		if (categoryMatchMode) {
@@ -313,7 +417,7 @@ public class SpatialSearchToken {
 		if (name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
 			return poiTypes != null && matchPoiCategoryKeys(poiTypes);
 		}
-		Boolean cache = fastMatchCheck.get(name);
+		Boolean cache = lf.fastMatchCheck.get(name);
 		if (cache != null) {
 			return cache;
 		}
@@ -325,8 +429,8 @@ public class SpatialSearchToken {
 					return res;
 				}
 			}
-			if (otherMatch != null) {
-				for (CollatorStringMatcher o : otherMatch) {
+			if (lf.otherMatch != null) {
+				for (CollatorStringMatcher o : lf.otherMatch) {
 					if (o.matches(name)) {
 						res = true;
 						return res;
@@ -342,7 +446,7 @@ public class SpatialSearchToken {
 				return res;
 			}
 		} finally {
-			fastMatchCheck.put(name, res);
+			lf.fastMatchCheck.put(name, res);
 		}
 		return false;
 	}
@@ -636,6 +740,10 @@ public class SpatialSearchToken {
 		TIntArrayList poiTypes;
 		int elo;
 		NameIndexAtom sameNameAreaObj;
+		// rules locale of the map of the atom
+		String locale = "";
+		// found by a name the OBF writer made by a search rule, not by a name of OSM
+		boolean ruleSpelling;
 
 		NameIndexAtom(String name, long id, int total) {
 			this(name, SpatialSearchToken.POI_CATEGORY_TYPE, id, 0, null, false, -total, total,
@@ -647,6 +755,8 @@ public class SpatialSearchToken {
 					cp.coords, cp.nearbyRadius, cp.buildingOrRefInd);
 			this.poiTypes = cp.poiTypes;
 			this.distinctFoundCnt = cp.distinctFoundCnt;
+			this.locale = cp.locale;
+			this.ruleSpelling = cp.ruleSpelling;
 		}
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,

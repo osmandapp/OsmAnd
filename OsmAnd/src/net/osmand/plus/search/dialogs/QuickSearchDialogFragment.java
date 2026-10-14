@@ -1156,12 +1156,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 		filterChips.updateContent(filterChipItems);
 		searchResultPoiTypesChips.setContentEnabled(!searching);
-		if (!searching) {
+		if (!searching || topChips.isEmpty() || !searchResultPoiTypesChips.hasVisibleChips()) {
 			searchResultPoiTypesChips.updateContent(topChips);
 		}
 		boolean filterChipsVisible = searchVisible && hasVisibleChip(filterChipItems);
 		filterChips.setVisibility(filterChipsVisible ? View.VISIBLE : View.GONE);
-		boolean poiTypesChipsVisible = searchVisible && !topChips.isEmpty();
+		boolean poiTypesChipsVisible = searchVisible && searchResultPoiTypesChips.hasVisibleChips();
 		searchResultPoiTypesChips.setVisibility(poiTypesChipsVisible ? View.VISIBLE : View.GONE);
 		if (filterChipsVisible || poiTypesChipsVisible) {
 			buttonToolbarView.setVisibility(View.VISIBLE);
