@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
  * {@code video.*}, {@code camera.*} and {@code data.<name>} passed in the request. Formatted with OsmAnd's own
  * formatters in the profile's units unless a unit is given.
  */
-class FlyoverValues {
+public class FlyoverValues {
 
 	enum Kind {DISTANCE, SPEED, PACE, ALTITUDE, DURATION, CLOCK, DATE, PERCENT, NUMBER, TEXT}
 
@@ -42,8 +42,14 @@ class FlyoverValues {
 	@Nullable
 	private String regionName(@NonNull FlyoverTrack track) {
 		WptPt middle = track.pointAt(track.getLength() / 2);
-		int x31 = MapUtils.get31TileNumberX(middle.getLon());
-		int y31 = MapUtils.get31TileNumberY(middle.getLat());
+		return regionName(app, middle.getLat(), middle.getLon());
+	}
+
+	/** The region of a place as {@code gpx[n].region} gives it, for callers laying a picture out around it. */
+	@Nullable
+	public static String regionName(@NonNull OsmandApplication app, double lat, double lon) {
+		int x31 = MapUtils.get31TileNumberX(lon);
+		int y31 = MapUtils.get31TileNumberY(lat);
 		net.osmand.map.OsmandRegions regions = app.getRegions();
 		net.osmand.map.WorldRegion deepest = null;
 		try {
