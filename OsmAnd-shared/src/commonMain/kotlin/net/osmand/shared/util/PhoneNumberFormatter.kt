@@ -24,6 +24,8 @@ object PhoneNumberFormatter {
 	// same separators as the dial action uses to split several numbers
 	private val SEPARATORS = charArrayOf(';', ',')
 
+	private val NON_DIGITS = Regex("[^0-9]+")
+
 	fun format(value: String): String {
 		val parts = value.split(*SEPARATORS)
 		if (parts.size == 1) {
@@ -88,7 +90,7 @@ object PhoneNumberFormatter {
 
 	// keep grouping written by the mapper: they know where the area code ends, we don't
 	private fun isAlreadyGrouped(value: String): Boolean {
-		return value.contains('(') || value.split(Regex("[^0-9]+")).count { it.isNotEmpty() } > 2
+		return value.contains('(') || value.split(NON_DIGITS).count { it.isNotEmpty() } > 2
 	}
 
 	private fun getGenericGroups(length: Int): IntArray {

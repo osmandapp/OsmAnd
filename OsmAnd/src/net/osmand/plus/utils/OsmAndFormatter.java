@@ -10,6 +10,8 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.core.text.BidiFormatter;
+import androidx.core.text.TextDirectionHeuristicsCompat;
 
 import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
@@ -37,6 +39,7 @@ import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
+import net.osmand.shared.util.PhoneNumberFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.TextDirectionUtil;
 
@@ -1075,6 +1078,17 @@ public class OsmAndFormatter {
 		coordinate -= deg;
 		coordinate *= 60.0;
 		return coordinate;
+	}
+
+	/**
+	 * Display-only: groups the digits and keeps them left-to-right in RTL layouts,
+	 * otherwise the space-separated groups are shown in reverse order.
+	 */
+	@NonNull
+	public static String formatPhoneNumber(@NonNull Context context, @NonNull String text) {
+		String formatted = PhoneNumberFormatter.INSTANCE.format(text);
+		BidiFormatter bidiFormatter = BidiFormatter.getInstance(AndroidUtils.isLayoutRtl(context));
+		return bidiFormatter.unicodeWrap(formatted, TextDirectionHeuristicsCompat.LTR);
 	}
 
 	@NonNull
