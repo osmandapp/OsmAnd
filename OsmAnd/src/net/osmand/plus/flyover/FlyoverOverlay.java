@@ -88,6 +88,8 @@ class FlyoverOverlay {
 	private final int logoGravity;
 	/** Of the logo from the frame's edges, video pixels; NaN for the overlay's own margin. */
 	private final float logoMargin;
+	/** Of the logo from the top, video pixels; NaN for the margin. */
+	private final float logoMarginTop;
 
 	FlyoverOverlay(@NonNull OsmandApplication app, @NonNull JSONObject spec, int width, int height) {
 		this.app = app;
@@ -121,6 +123,7 @@ class FlyoverOverlay {
 		// "gravity": "top|left" and "margin" (video pixels) place the logo like a panel; default bottom centred
 		logoGravity = FlyoverPanels.parseGravity(logoSpec != null ? logoSpec.optString("gravity", "bottom|center") : "bottom|center");
 		logoMargin = logoSpec != null ? (float) logoSpec.optDouble("margin", Double.NaN) : Float.NaN;
+		logoMarginTop = logoSpec != null ? (float) logoSpec.optDouble("margin_top", Double.NaN) : Float.NaN;
 	}
 
 	/** A copy of a drawable painted in one colour, as a halo behind it. */
@@ -208,8 +211,9 @@ class FlyoverOverlay {
 		int vertical = logoGravity & Gravity.VERTICAL_GRAVITY_MASK;
 		float x = horizontal == Gravity.RIGHT ? width - margin - w
 				: horizontal == Gravity.CENTER_HORIZONTAL ? (width - w) / 2 : margin;
+		float top = Float.isNaN(logoMarginTop) ? margin : logoMarginTop;
 		float y = vertical == Gravity.BOTTOM ? height - margin - h
-				: vertical == Gravity.CENTER_VERTICAL ? (height - h) / 2 : margin;
+				: vertical == Gravity.CENTER_VERTICAL ? (height - h) / 2 : top;
 		return new RectF(x, y, x + w, y + h);
 	}
 

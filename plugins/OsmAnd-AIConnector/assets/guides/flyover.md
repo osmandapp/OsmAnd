@@ -51,7 +51,7 @@ At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smoot
 | `profile` | works | profile key for the profile icon; default the current profile |
 | `attribution` | works | default "OsmAnd · © OpenStreetMap"; it must credit OpenStreetMap |
 | `output` | works | `video` (default) or `image`: the last frame alone as a JPEG picture (a map card with the panels), `quality` 1-100 (default 92); the result's `file` ends in `.jpg`. Two equal key frames a millisecond apart give a single frame |
-| `logo` | works | with `"osmand_logo"` in `osmand_widgets`: `{"opacity": 0.6, "full_from_s": 30, "fade_s": 0.4, "gravity": "top|left", "margin": 64}`, the logo is translucent until `full_from_s` and opaque from then on (default opaque), placed like a panel (default `bottom|center` with the overlay's own margin) |
+| `logo` | works | with `"osmand_logo"` in `osmand_widgets`: `{"opacity": 0.6, "full_from_s": 30, "fade_s": 0.4, "gravity": "top|left", "margin": 64, "margin_top": 20}`, the logo is translucent until `full_from_s` and opaque from then on (default opaque), placed like a panel (default `bottom|center` with the overlay's own margin) |
 | `panels[]` | works | panels of widgets, see below |
 | `data` | works | your own values for panels, see Values |
 

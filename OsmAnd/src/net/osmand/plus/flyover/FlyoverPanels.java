@@ -264,6 +264,8 @@ class FlyoverPanels {
 		final ResolvedPanelAppearance appearance;
 		@Nullable
 		final Drawable icon;
+		@Nullable
+		private Drawable iconHalo;
 		final String title;
 		final float[] size;
 		final float density;
@@ -373,6 +375,28 @@ class FlyoverPanels {
 				int s = Math.round(dp(size[0]));
 				int top = Math.round((getHeight() - s) / 2f);
 				int left = Math.round(dp(size[3]));
+				if (outline) {
+					// a halo in the text's outline colour, so the icon reads on the map as the text does
+					if (iconHalo == null) {
+						Drawable.ConstantState state = icon.getConstantState();
+						iconHalo = state != null ? state.newDrawable(getResources()).mutate() : null;
+						if (iconHalo != null) {
+							iconHalo.setColorFilter(new android.graphics.PorterDuffColorFilter(
+									appearance.getTextShadowColor(), android.graphics.PorterDuff.Mode.SRC_IN));
+						}
+					}
+					if (iconHalo != null) {
+						int r = Math.max(1, Math.round(dp(1.5f)));
+						for (int dx = -r; dx <= r; dx += r) {
+							for (int dy = -r; dy <= r; dy += r) {
+								if (dx != 0 || dy != 0) {
+									iconHalo.setBounds(left + dx, top + dy, left + s + dx, top + s + dy);
+									iconHalo.draw(canvas);
+								}
+							}
+						}
+					}
+				}
 				icon.setBounds(left, top, left + s, top + s);
 				icon.draw(canvas);
 			}
