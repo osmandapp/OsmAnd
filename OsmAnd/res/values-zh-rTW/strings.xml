@@ -5217,4 +5217,7 @@
     <string name="speed_range">速限範圍</string>
     <string name="speed_range_descr">路線計算與抵達時間使用。</string>
     <string name="eta_adapt_to_my_speed">套用到我的速度</string>
+    <string name="storage_directory_visible_external">可看到的外部儲存空間</string>
+    <string name="eta_adapt_to_my_speed_descr">抵達時間是視你最後 %1$s 的速度而定。</string>
+    <string name="eta_adapt_to_my_speed_off_descr">抵達時間是依據路線上每條路的預期速度，請開啟來依據實際移動速度來決定。</string>
 </resources>
