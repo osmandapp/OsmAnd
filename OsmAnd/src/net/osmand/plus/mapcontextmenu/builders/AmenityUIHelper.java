@@ -41,6 +41,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
@@ -502,7 +503,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			textView.setTextColor(linkTextColor);
 			needLinks = false;
 		}
-		textView.setText(text);
+		textView.setText(isPhoneNumber && text != null ? OsmAndFormatter.formatPhoneNumber(view.getContext(), text) : text);
 		if (needLinks && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);
 			textView.setLinkTextColor(linkTextColor);
