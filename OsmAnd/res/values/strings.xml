@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="share_as_image">Share as image</string>
+	<string name="share_image_card">Card, 4:5</string>
+	<string name="share_image_card_descr">The map with the elevation chart and the track summary</string>
+	<string name="share_image_square">Square, 1:1</string>
+	<string name="share_image_square_descr">The same, square for a social feed</string>
+	<string name="share_image_screenshot">Screenshot, 9:16</string>
+	<string name="share_image_screenshot_wide">Screenshot, 16:9</string>
+	<string name="share_image_screenshot_descr">The same, as a phone screen</string>
+	<string name="share_image_elevation_speed">Elevation · speed</string>
+	<string name="share_image_failed">Could not create the image: %1$s</string>
+	<string name="share_image_track_too_short">The track has too few points for an image</string>
 	<string name="flyover_generating_image">Generating image: %1$s</string>
 <!--
 	README:
