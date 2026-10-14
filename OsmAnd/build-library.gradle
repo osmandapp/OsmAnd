@@ -32,6 +32,7 @@ android {
 		main {
 			manifest.srcFile "AndroidManifest-library.xml"
 			java.srcDirs = ["src", "src-gms", "src-google", "src-nogplay"]
+			kotlin.srcDirs = ["src", "src-gms", "src-google", "src-nogplay"]
 		}
 	}
 

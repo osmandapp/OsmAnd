@@ -81,21 +81,26 @@ android {
 		}
 		gplayFull {
 			java.srcDirs = ["src-google", "src-gplay"]
+			kotlin.srcDirs = ["src-google", "src-gplay"]
 		}
 		gplayFree {
 			java.srcDirs = ["src-google", "src-gplay"]
+			kotlin.srcDirs = ["src-google", "src-gplay"]
 			manifest.srcFile "AndroidManifest-gplayFree.xml"
 		}
 		androidFull {
 			java.srcDirs = ["src-google", "src-osmand", "src-nogplay"]
+			kotlin.srcDirs = ["src-google", "src-osmand", "src-nogplay"]
 			manifest.srcFile "AndroidManifest-androidFull.xml"
 		}
 		nightlyFree {
 			java.srcDirs = ["src-google", "src-osmand", "src-nogplay"]
+			kotlin.srcDirs = ["src-google", "src-osmand", "src-nogplay"]
 			manifest.srcFile "AndroidManifest-nightlyFree.xml"
 		}
 		huawei {
 			java.srcDirs = ["src-huawei", "src-nogplay"]
+			kotlin.srcDirs = ["src-huawei", "src-nogplay"]
 			manifest.srcFile "AndroidManifest-huawei.xml"
 		}
 

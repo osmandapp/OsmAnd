@@ -16,7 +16,6 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:compose-compiler-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
-        classpath("com.squareup.sqldelight:gradle-plugin:1.5.5")
         if (gradle.startParameter.taskNames.toString().toLowerCase().contains("huawei")) {
             classpath 'com.huawei.agconnect:agcp:1.9.1.303'
         }
