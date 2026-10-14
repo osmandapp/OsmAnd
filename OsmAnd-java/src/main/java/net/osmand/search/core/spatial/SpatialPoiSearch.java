@@ -292,13 +292,16 @@ public class SpatialPoiSearch {
 				List<String> possibleValues = subType.possibleValues;
 				List<String> wikidataIds = subType.wikidataIds;
 				TIntArrayList possibleValuesFreqs = subType.possibleValuesFreqs;
-//				int allFreq = subType.frequency;
 				for (int k = 0; k < possibleValues.size(); k++) {
 					String topValueName = possibleValues.get(k);
 					String valueKey = TopIndexFilter.getValueKey(topValueName);
 					String fullKey = subType.name + "_" + valueKey;
 					String wikidataId = wikidataIds != null && k < wikidataIds.size() ? wikidataIds.get(k) : "";
 					int freq = possibleValuesFreqs != null && k < possibleValuesFreqs.size() ? possibleValuesFreqs.get(k) : 0;
+					if (possibleValuesFreqs == null && possibleValues.size() == 1) {
+						// the writer stores per-value frequencies only for 2+ values; one value has the subtype total
+						freq = subType.frequency;
+					}
 					SpatialPoiType topValue = byKey.get(fullKey);
 					if (topValue == null) {
 						topValue = new SpatialPoiType(subType, topValueName, fullKey, ids.getAndIncrement());
