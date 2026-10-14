@@ -95,6 +95,7 @@ class FlyoverPanels {
 				if (w == null) continue;
 				String type = w.optString("type");
 				Item item = "chart".equals(type) ? new ChartItem(w, appearance)
+						: "image".equals(type) ? new ImageItem(w, appearance)
 						: new WidgetItem(w, appearance, w.optString("size", panelSize));
 				items.add(item);
 				if (columns > 0) {
@@ -485,6 +486,110 @@ class FlyoverPanels {
 		}
 	}
 
+	/**
+	 * A picture with a title and a line under it, as a photo card: {@code file} is a JPEG or PNG on the phone
+	 * (an absolute path, or a path under OsmAnd's folder), scaled to {@code width_dp} (default 280) and at most
+	 * {@code max_height_dp} (default 200) high, cropped to fill. A file that cannot be read shows nothing.
+	 */
+	private class ImageItem extends Item {
+		ImageItem(@NonNull JSONObject spec, @NonNull ResolvedPanelAppearance appearance) {
+			LinearLayout box = new LinearLayout(context);
+			box.setOrientation(LinearLayout.VERTICAL);
+			int pad = AndroidUtils.dpToPx(context, 10);
+			box.setPadding(pad, pad, pad, pad);
+			int width = AndroidUtils.dpToPx(context, (float) spec.optDouble("width_dp", 280));
+			int maxHeight = AndroidUtils.dpToPx(context, (float) spec.optDouble("max_height_dp", 200));
+			android.graphics.Bitmap bitmap = loadImage(spec.optString("file"), width, maxHeight);
+			if (bitmap != null) {
+				int height = Math.min(maxHeight, Math.round((float) width * bitmap.getHeight() / bitmap.getWidth()));
+				box.addView(new ImageCardView(context, bitmap), new LinearLayout.LayoutParams(width, height));
+			}
+			String title = spec.optString("title");
+			if (!title.isEmpty()) {
+				TextView text = new TextView(context);
+				text.setText(title);
+				text.setTextSize(15);
+				text.setMaxLines(2);
+				text.setEllipsize(android.text.TextUtils.TruncateAt.END);
+				text.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+				text.setTextColor(appearance.getPrimaryTextColor());
+				text.setPadding(0, AndroidUtils.dpToPx(context, 6), 0, 0);
+				box.addView(text, new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT));
+			}
+			String subtitle = spec.optString("subtitle");
+			if (!subtitle.isEmpty()) {
+				TextView text = new TextView(context);
+				text.setText(subtitle);
+				text.setTextSize(11);
+				text.setMaxLines(1);
+				text.setEllipsize(android.text.TextUtils.TruncateAt.END);
+				text.setTextColor(appearance.getSecondaryTextColor());
+				box.addView(text, new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT));
+			}
+			view = box;
+		}
+
+		@Override
+		void update(@NonNull FlyoverValues.Frame frame) {
+		}
+
+		@Nullable
+		private android.graphics.Bitmap loadImage(@NonNull String name, int width, int maxHeight) {
+			if (name.isEmpty()) {
+				return null;
+			}
+			java.io.File file = new java.io.File(name);
+			if (!file.isAbsolute()) {
+				file = app.getAppPath(name);
+			}
+			if (!file.isFile()) {
+				return null;
+			}
+			android.graphics.BitmapFactory.Options bounds = new android.graphics.BitmapFactory.Options();
+			bounds.inJustDecodeBounds = true;
+			android.graphics.BitmapFactory.decodeFile(file.getPath(), bounds);
+			android.graphics.BitmapFactory.Options options = new android.graphics.BitmapFactory.Options();
+			options.inSampleSize = 1;
+			// no bigger than needed at the phone's density; the panel is scaled to the video afterwards
+			int wanted = Math.max(width, maxHeight) * 2;
+			while (bounds.outWidth / (options.inSampleSize * 2) >= wanted && bounds.outHeight / (options.inSampleSize * 2) >= wanted) {
+				options.inSampleSize *= 2;
+			}
+			return android.graphics.BitmapFactory.decodeFile(file.getPath(), options);
+		}
+	}
+
+	/** A bitmap filling its view, cropped, with rounded corners; drawn on a software canvas, so clipped by a path. */
+	private static class ImageCardView extends View {
+		private final android.graphics.Bitmap bitmap;
+		private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
+		private final Path clip = new Path();
+		private final RectF bounds = new RectF();
+
+		ImageCardView(@NonNull Context context, @NonNull android.graphics.Bitmap bitmap) {
+			super(context);
+			this.bitmap = bitmap;
+		}
+
+		@Override
+		protected void onDraw(@NonNull Canvas canvas) {
+			float w = getWidth(), h = getHeight();
+			if (w <= 0 || h <= 0) {
+				return;
+			}
+			float radius = AndroidUtils.dpToPx(getContext(), 6);
+			bounds.set(0, 0, w, h);
+			clip.reset();
+			clip.addRoundRect(bounds, radius, radius, Path.Direction.CW);
+			float scale = Math.max(w / bitmap.getWidth(), h / bitmap.getHeight());
+			float dw = bitmap.getWidth() * scale, dh = bitmap.getHeight() * scale;
+			RectF dst = new RectF((w - dw) / 2, (h - dh) / 2, (w + dw) / 2, (h + dh) / 2);
+			canvas.save();
+			canvas.clipPath(clip);
+			canvas.drawBitmap(bitmap, null, dst, paint);
+			canvas.restore();
+		}
+	}
 
 	private static int parseColor(@Nullable String color, int defaultColor) {
 		try {
