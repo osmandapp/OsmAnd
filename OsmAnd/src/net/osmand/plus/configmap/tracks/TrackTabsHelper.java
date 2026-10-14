@@ -194,11 +194,16 @@ public class TrackTabsHelper {
 	}
 
 	@NonNull
+	protected Set<TrackItem> getVisibleTrackItems() {
+		return itemsSelectionHelper.getOriginalSelectedItems();
+	}
+
+	@NonNull
 	private List<Object> getVisibleItems() {
 		List<Object> items = new ArrayList<>();
-		Set<TrackItem> originalSelectedItems = itemsSelectionHelper.getOriginalSelectedItems();
-		if (!Algorithms.isEmpty(originalSelectedItems)) {
-			items.addAll(originalSelectedItems);
+		Set<TrackItem> visibleTrackItems = getVisibleTrackItems();
+		if (!Algorithms.isEmpty(visibleTrackItems)) {
+			items.addAll(visibleTrackItems);
 		} else if (Algorithms.isEmpty(itemsSelectionHelper.getAllItems())) {
 			items.add(TYPE_NO_TRACKS);
 		} else {

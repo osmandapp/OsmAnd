@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="select_tracks">Select tracks</string>
 	<string name="storage_directory_visible_external">Visible external storage</string>
 	<string name="eta_group_header">Estimated arrival time</string>
 	<string name="travel_speed">Travel speed</string>
