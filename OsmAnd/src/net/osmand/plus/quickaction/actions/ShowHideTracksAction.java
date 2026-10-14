@@ -257,7 +257,11 @@ public class ShowHideTracksAction extends QuickAction implements TracksSelection
 			return false;
 		}
 		String previousTitle = getGeneratedTitle(app, paths);
-		paths.set(index, dest);
+		if (paths.contains(dest)) {
+			paths.remove(index);
+		} else {
+			paths.set(index, dest);
+		}
 		saveTracksPaths(paths);
 
 		if (Algorithms.stringsEqual(getRawName(), previousTitle)) {

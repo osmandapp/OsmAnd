@@ -49,6 +49,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -389,6 +390,13 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 			if (!itemsToSelect.isEmpty()) {
 				itemsSelectionHelper.onItemsSelected(itemsToSelect, true);
 			}
+		}
+	}
+
+	@Override
+	public void onGpxSelectionInProgress(@NonNull SelectedGpxFile selectedGpxFile) {
+		if (!isSelectTracksMode()) {
+			super.onGpxSelectionInProgress(selectedGpxFile);
 		}
 	}
 
