@@ -16,14 +16,17 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
 import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.shared.data.AdditionalInfoBundle;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.test.common.AndroidTest;
+import net.osmand.util.Algorithms;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -200,7 +203,9 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 
 	@Test
 	public void genericFallbackShowsStoredValueAsIs() {
-		Map<String, String> extensions = Collections.singletonMap(CUSTOM_REFERENCE_KEY, "abc_def");
+		Map<String, String> extensions = new HashMap<>();
+		extensions.put(CUSTOM_REFERENCE_KEY, "abc_def");
+		extensions.put("test:status", "air_conditioning_yes");
 
 		Map<String, AmenityInfoRow> rows = buildRows(extensions,
 				AdditionalInfoBundle.getGenericRowKeys(extensions));
@@ -208,6 +213,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 		AmenityInfoRow row = rows.get(CUSTOM_REFERENCE_KEY);
 		assertNotNull(row);
 		assertEquals("abc_def", row.text);
+		assertEquals("air_conditioning_yes", rows.get("test:status").text);
 	}
 
 	/**
@@ -269,6 +275,45 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 				AdditionalInfoBundle.getGenericRowKeys(storedExtensions));
 
 		assertFalse(rows.containsKey(NORMALIZED_AMENITY_KEY));
+	}
+
+	@Test
+	public void cuisineRowIsTranslatedAsWithTheJavaTypes() {
+		Map<String, String> extensions = new HashMap<>();
+		extensions.put("type", "sustenance");
+		extensions.put("subtype", "restaurant");
+		extensions.put("cuisine", "pizza;burger");
+
+		AmenityInfoRow row = buildRows(extensions, Collections.emptySet()).get("cuisine");
+
+		assertNotNull(row);
+		assertEquals(app.getPoiTypes().getPoiTranslation("cuisine_pizza") + ", "
+				+ app.getPoiTypes().getPoiTranslation("cuisine_burger").toLowerCase(), row.text);
+	}
+
+	@Test
+	public void usMapsRecreationAreaRowFallsBackToItsKey() {
+		String key = "us_maps_recreation_area";
+		Map<String, String> extensions = Collections.singletonMap(key, "value");
+
+		AmenityInfoRow row = buildRows(extensions, AdditionalInfoBundle.getGenericRowKeys(extensions)).get(key);
+
+		assertNotNull(row);
+		assertEquals(Algorithms.capitalizeFirstLetterAndLowercase(key), row.textPrefix);
+	}
+
+	@Test
+	public void typeOfAGroupOpensTheSearchOfThatType() {
+		PoiCategory sustenance = app.getPoiTypes().getPoiCategoryByName("sustenance");
+
+		PoiUIFilter cuisine = app.getPoiFilters().getPoiTypeFilter("sustenance", "cuisine_pizza", true);
+		assertNotNull(cuisine);
+		assertEquals("cuisine:pizza", cuisine.getFilterByName());
+
+		PoiUIFilter cafe = app.getPoiFilters().getPoiTypeFilter("sustenance", "cafe", false);
+		assertNotNull(cafe);
+		assertTrue(cafe.accept(sustenance, "cafe"));
+		assertFalse(cafe.accept(sustenance, "restaurant"));
 	}
 
 	@NonNull
