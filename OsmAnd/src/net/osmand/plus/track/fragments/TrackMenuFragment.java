@@ -19,6 +19,7 @@ import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SHARE_ANIMATION_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.SHARE_IMAGE_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
@@ -122,6 +123,7 @@ import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitud
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
 import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
+import net.osmand.plus.track.share.TrackShareAnimation;
 import net.osmand.plus.track.share.TrackShareImage;
 import net.osmand.plus.track.share.TrackShareImageFormatBottomSheet;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
@@ -1249,6 +1251,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 			} else if (buttonIndex == SHARE_BUTTON_INDEX) {
 				GpxUiHelper.saveAndShareGpxWithAppearance(app, mapActivity, gpxFile);
+			} else if (buttonIndex == SHARE_ANIMATION_BUTTON_INDEX) {
+				// the map area shows the recording; the menu would cover it
+				hide();
+				TrackShareAnimation.start(mapActivity, selectedGpxFile, this::show);
 			} else if (buttonIndex == SHARE_IMAGE_BUTTON_INDEX) {
 				TrackShareImageFormatBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
 			} else if (buttonIndex == UPLOAD_OSM_BUTTON_INDEX) {

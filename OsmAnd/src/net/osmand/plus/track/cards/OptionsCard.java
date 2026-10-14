@@ -51,7 +51,8 @@ public class OptionsCard extends MapBaseCard {
 	public static final int DELETE_BUTTON_INDEX = 13;
 	public static final int SIMULATE_POSITION_BUTTON_INDEX = 14;
 	public static final int CENTER_MAP_ON_LOCATION_BUTTON_INDEX = 15;
-	public static final int SHARE_IMAGE_BUTTON_INDEX = 16;
+	public static final int SHARE_ANIMATION_BUTTON_INDEX = 16;
+	public static final int SHARE_IMAGE_BUTTON_INDEX = 17;
 
 	private final TrackDisplayHelper displayHelper;
 	private final SelectedGpxFile selectedGpxFile;
@@ -97,6 +98,7 @@ public class OptionsCard extends MapBaseCard {
 		items.add(createDividerItem());
 		items.add(createShareItem());
 		if (gpxFile.hasTrkPt()) {
+			items.add(createShareAnimationItem());
 			items.add(createShareImageItem());
 		}
 
@@ -229,6 +231,16 @@ public class OptionsCard extends MapBaseCard {
 				.setTitle(app.getString(R.string.shared_string_share))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> notifyButtonPressed(SHARE_BUTTON_INDEX))
+				.create();
+	}
+
+	private BaseBottomSheetItem createShareAnimationItem() {
+		Drawable animationIcon = getActiveIcon(R.drawable.ic_action_video_dark);
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(AndroidUtils.getDrawableForDirection(app, animationIcon))
+				.setTitle(app.getString(R.string.share_as_animation))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(v -> notifyButtonPressed(SHARE_ANIMATION_BUTTON_INDEX))
 				.create();
 	}
 

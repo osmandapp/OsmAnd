@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="share_as_animation">Share as animation</string>
+	<string name="share_animation_failed">Could not create the animation: %1$s</string>
+	<string name="share_animation_track_too_short">The track has too few points for an animation</string>
+	<string name="share_animation_photo_attribution">Photo: Wikimedia Commons</string>
 	<string name="share_as_image">Share as image</string>
 	<string name="share_image_card">Card, 4:5</string>
 	<string name="share_image_card_descr">The map with the elevation chart and the track summary</string>
