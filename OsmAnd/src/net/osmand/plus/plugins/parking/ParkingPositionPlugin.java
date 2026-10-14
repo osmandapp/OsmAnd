@@ -211,7 +211,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		// The favorites layer shows the parking point from a hidden folder only while the plugin is active
 		FavouritesLayer favouritesLayer = app.getOsmandMap().getMapLayers().getFavouritesLayer();
 		if (favouritesLayer != null) {
-			favouritesLayer.setInvalidated(true);
+			favouritesLayer.setShowHiddenParking(isActive());
 		}
 	}
 

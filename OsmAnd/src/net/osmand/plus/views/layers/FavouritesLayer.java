@@ -32,8 +32,6 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -70,6 +68,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private OsmandSettings settings;
 	private ContextMenuLayer contextMenuLayer;
 	private boolean showFavorites;
+	private boolean showHiddenParking;
 	private float textScale = 1f;
 	private boolean textVisible;
 	private boolean nightMode;
@@ -195,7 +194,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
 					&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 				MapMarker marker = null;
-				if (synced) {
+				if (isSyncedPoint(favoritePoint, synced)) {
 					marker = mapMarkersHelper.getMapMarker(favoritePoint);
 					if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
 						continue;
@@ -233,12 +232,21 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	/**
+	 * Set by the Parking position plugin from updateLayers(): true while the plugin is active.
+	 */
+	public void setShowHiddenParking(boolean showHiddenParking) {
+		if (this.showHiddenParking != showHiddenParking) {
+			this.showHiddenParking = showHiddenParking;
+			invalidated = true;
+		}
+	}
+
+	/**
 	 * The parking favorite stays on the map while the Parking position plugin is active,
 	 * even if its folder is hidden. Other points follow the visibility of their folder.
 	 */
 	private boolean isPointVisibleOnMap(@NonNull FavouritePoint point) {
-		return point.isVisible() || point.getSpecialPointType() == SpecialPointType.PARKING
-				&& PluginsHelper.isActive(ParkingPositionPlugin.class);
+		return point.isVisible() || showHiddenParking && point.getSpecialPointType() == SpecialPointType.PARKING;
 	}
 
 	public boolean hasPointOnMapAt(@NonNull LatLon latLon) {
@@ -250,10 +258,14 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return false;
 	}
 
+	private boolean isSyncedPoint(@NonNull FavouritePoint point, boolean synced) {
+		// A hidden synced folder has no markers, so the parking point shown despite it is drawn as a plain favorite
+		return synced && point.isVisible();
+	}
+
 	private boolean isSynced(@NonNull FavoriteGroup group) {
-		// A hidden folder has no markers, so the parking point shown despite it is drawn as a plain favorite
 		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(group);
-		return markersGroup != null && !markersGroup.isDisabled() && group.isVisible();
+		return markersGroup != null && !markersGroup.isDisabled();
 	}
 
 	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y,
@@ -338,7 +350,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		for (FavouritePoint favoritePoint : points) {
 			if (isPointVisibleOnMap(favoritePoint) && favoritePoint != contextMenuLayer.getMoveableObject()) {
 				MapMarker marker = null;
-				if (synced) {
+				if (isSyncedPoint(favoritePoint, synced)) {
 					marker = mapMarkersHelper.getMapMarker(favoritePoint);
 					if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
 						continue;
