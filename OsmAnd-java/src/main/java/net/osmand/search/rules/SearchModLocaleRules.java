@@ -351,12 +351,14 @@ public final class SearchModLocaleRules {
 	/**
 	 * A national service or network of {@code <poi>} ({@code <service word="DMV" tags="office=government +
 	 * government=transportation"/>}): its places, the objects with one of the tag sets ({@code |} between the sets,
-	 * {@code +} inside one) and a name matching {@code name} when it is set, get the word as a searchable tag. The file
-	 * of the locale of the map is the country of the service.
+	 * {@code +} inside one) and a name matching {@code name} or an {@code operator} tag matching {@code operator}
+	 * when either is set, get the word as a searchable tag. The file of the locale of the map is the country of the
+	 * service.
 	 */
-	public record PoiService(String word, List<Map<String, String>> tagSets, Pattern name, String file) {
+	public record PoiService(String word, List<Map<String, String>> tagSets, Pattern name, Pattern operator,
+	                         String file) {
 
-		static PoiService of(String word, String tags, String name, String file) {
+		static PoiService of(String word, String tags, String name, String operator, String file) {
 			List<Map<String, String>> sets = new ArrayList<>();
 			for (String set : tags.split("\\|")) {
 				Map<String, String> m = new LinkedHashMap<>();
@@ -370,9 +372,12 @@ public final class SearchModLocaleRules {
 					sets.add(m);
 				}
 			}
-			Pattern p = name == null || name.isEmpty() ? null
-					: Pattern.compile(name, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE | Pattern.UNICODE_CHARACTER_CLASS);
-			return new PoiService(word, sets, p, file);
+			return new PoiService(word, sets, pattern(name), pattern(operator), file);
+		}
+
+		private static Pattern pattern(String regexp) {
+			return regexp == null || regexp.isEmpty() ? null
+					: Pattern.compile(regexp, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE | Pattern.UNICODE_CHARACTER_CLASS);
 		}
 
 		String key() {
@@ -381,9 +386,21 @@ public final class SearchModLocaleRules {
 
 		/** @param tags OSM tags of the object, @param name its name (may be null) */
 		public boolean matches(Map<String, String> tags, String name) {
-			if (this.name != null && (name == null || !this.name.matcher(name).find())) {
+			return matchesByName(tags, name) || (found(operator, tags.get("operator")) && hasTags(tags));
+		}
+
+		/**
+		 * The object is a place of the service without its operator: a name match is stronger than an operator one
+		 * (an SSC dispensary operated by IESS is SSC).
+		 */
+		public boolean matchesByName(Map<String, String> tags, String name) {
+			if ((this.name != null || operator != null) && !found(this.name, name)) {
 				return false;
 			}
+			return hasTags(tags);
+		}
+
+		private boolean hasTags(Map<String, String> tags) {
 			for (Map<String, String> set : tagSets) {
 				boolean all = true;
 				for (Map.Entry<String, String> t : set.entrySet()) {
@@ -397,6 +414,10 @@ public final class SearchModLocaleRules {
 				}
 			}
 			return false;
+		}
+
+		private static boolean found(Pattern p, String value) {
+			return p != null && value != null && p.matcher(value).find();
 		}
 	}
 
