@@ -46,6 +46,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class MapHudLayout extends FrameLayout {
 
@@ -53,6 +55,7 @@ public class MapHudLayout extends FrameLayout {
 	private static final int UI_REFRESH_INTERVAL_MILLIS = 100;
 	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE_PORTRAIT = 0.5f;
 	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE_LANDSCAPE = 0.6f;
+	private static final int MAX_SPEEDOMETER_SHIFT = 24;
 
 	private static final Log LOG = PlatformUtil.getLog(MapHudLayout.class);
 
@@ -339,7 +342,28 @@ public class MapHudLayout extends FrameLayout {
 
 	@NonNull
 	private Map<View, ButtonPositionSize> getButtonPositionSizes() {
+		Map<View, ButtonPositionSize> map = computeButtonPositionSizes(0);
+		if (!portrait && isSpeedometerOverlappingButtons(map)) {
+			// No room for the speedometer in the left button column: place it right after the nearest left side
+			// buttons where it covers no buttons. Layouts where it fits in the column stay as they are (#26217).
+			for (int shift : getSpeedometerShifts(map)) {
+				Map<View, ButtonPositionSize> shifted = computeButtonPositionSizes(shift);
+				if (!isSpeedometerOverlappingButtons(shifted)) {
+					return shifted;
+				}
+			}
+			map = computeButtonPositionSizes(0);
+		}
+		return map;
+	}
+
+	@NonNull
+	private Map<View, ButtonPositionSize> computeButtonPositionSizes(int speedometerShift) {
 		Map<View, ButtonPositionSize> map = collectPositions();
+		ButtonPositionSize speedometerPosition = speedometerWidget != null ? map.get(speedometerWidget) : null;
+		if (speedometerPosition != null && speedometerShift > 0) {
+			speedometerPosition.setMarginX(speedometerShift);
+		}
 		List<ButtonPositionSize> list = new ArrayList<>(map.values());
 
 		int width = Math.round(getContentWidth() / dpToPx / CELL_SIZE_DP);
@@ -361,6 +385,33 @@ public class MapHudLayout extends FrameLayout {
 			LOG.info("--------END--------");
 		}
 		return map;
+	}
+
+	@NonNull
+	private Set<Integer> getSpeedometerShifts(@NonNull Map<View, ButtonPositionSize> map) {
+		Set<Integer> shifts = new TreeSet<>();
+		for (Map.Entry<View, ButtonPositionSize> entry : map.entrySet()) {
+			ButtonPositionSize position = entry.getValue();
+			if (entry.getKey() instanceof MapButton && position.isLeft()) {
+				int shift = position.getMarginX() + position.getWidth() + 1;
+				if (shift <= MAX_SPEEDOMETER_SHIFT) {
+					shifts.add(shift);
+				}
+			}
+		}
+		return shifts;
+	}
+
+	private boolean isSpeedometerOverlappingButtons(@NonNull Map<View, ButtonPositionSize> map) {
+		ButtonPositionSize speedometerPosition = speedometerWidget != null ? map.get(speedometerWidget) : null;
+		if (speedometerPosition != null) {
+			for (Map.Entry<View, ButtonPositionSize> entry : map.entrySet()) {
+				if (entry.getKey() instanceof MapButton && speedometerPosition.overlap(entry.getValue())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@NonNull
