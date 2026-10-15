@@ -61,6 +61,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	private FavouritePoint favorite;
 	@Nullable
 	private FavoriteGroup group;
+	@Nullable
+	private String originalIconKey;
 
 	private boolean saved;
 	private boolean iconSelectedByUser;
@@ -82,11 +84,29 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			this.selectedGroup = group != null ? group.toPointsGroup(app) : null;
 			// an existing favorite keeps its icon when it is moved to another folder
 			this.iconSelectedByUser = !editor.isNew();
+			this.originalIconKey = retrieveOriginalIconKey();
 
 			setColor(getInitialColor());
 			setIcon(getInitialIconId());
 			setBackgroundType(getInitialBackgroundType());
 		}
+	}
+
+	@Nullable
+	protected String retrieveOriginalIconKey() {
+		FavoritePointEditor editor = getFavoritePointEditor();
+		if (editor == null || !editor.isNew()) {
+			return null;
+		}
+		FavouritePoint favorite = getFavorite();
+		if (favorite == null) {
+			return null;
+		}
+		int iconId = favorite.getIconId();
+		if (iconId == 0) {
+			return null;
+		}
+		return RenderingIcons.getBigIconName(iconId);
 	}
 
 	private void setupEditor() {
@@ -117,6 +137,21 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	private void replacePressed() {
 		callActivity(activity -> SelectFavouriteToReplaceBottomSheet.showInstance(activity, this));
+	}
+
+	@NonNull
+	@Override
+	protected EditorIconController getIconController() {
+		return EditorIconController.getInstance(app, this, getIconName(), originalIconKey);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		if (originalIconKey != null && activity != null && !activity.isChangingConfigurations()) {
+			EditorIconController.onDestroy(app, originalIconKey);
+		}
 	}
 
 	@Nullable
@@ -209,7 +244,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	private void selectIconInController() {
-		EditorIconController controller = EditorIconController.getInstance(app, this, getIconName());
+		EditorIconController controller = getIconController();
 		selectingIconForGroup = true;
 		try {
 			controller.onIconSelectedFromPalette(getIconName(), getIconCategoryKey(controller, getIconName()));
@@ -221,6 +256,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Nullable
 	private String getIconCategoryKey(@NonNull EditorIconController controller, @NonNull String iconName) {
 		for (IconsCategory category : controller.getCategories()) {
+			if (category.getKey().equals(EditorIconController.ORIGINAL_KEY)) {
+				continue;
+			}
 			if (category.containsIcon(iconName)) {
 				return category.getKey();
 			}
