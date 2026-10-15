@@ -213,14 +213,19 @@ public class BackupUtils {
 	public static String appendToFileName(@NonNull String path, @NonNull String tail) {
 		int nameStart = path.lastIndexOf('/') + 1;
 		int tailEnd = tail.indexOf('/');
-		String nameTail = tailEnd == -1 ? tail : tail.substring(0, tailEnd);
+		String nameTail = cutToBytes(tailEnd == -1 ? tail : tail.substring(0, tailEnd), MAX_FILE_NAME_BYTES);
+		String tailRest = tailEnd == -1 ? "" : tail.substring(tailEnd);
 		int maxBytes = MAX_FILE_NAME_BYTES - nameTail.getBytes(StandardCharsets.UTF_8).length;
-		String name = path.substring(nameStart);
-		int end = name.length();
-		while (end > 0 && name.substring(0, end).getBytes(StandardCharsets.UTF_8).length > maxBytes) {
-			end = name.offsetByCodePoints(end, -1);
+		return path.substring(0, nameStart) + cutToBytes(path.substring(nameStart), maxBytes) + nameTail + tailRest;
+	}
+
+	@NonNull
+	private static String cutToBytes(@NonNull String str, int maxBytes) {
+		int end = str.length();
+		while (end > 0 && str.substring(0, end).getBytes(StandardCharsets.UTF_8).length > maxBytes) {
+			end = str.offsetByCodePoints(end, -1);
 		}
-		return path.substring(0, nameStart) + name.substring(0, end) + tail;
+		return str.substring(0, end);
 	}
 
 	public static boolean isLimitedFilesCollectionItem(@NonNull FileSettingsItem item) {
