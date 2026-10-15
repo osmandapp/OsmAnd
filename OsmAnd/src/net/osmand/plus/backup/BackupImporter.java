@@ -352,7 +352,7 @@ class BackupImporter {
 				long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
 				if (shouldDownloadOnCollecting(remoteFile, readItems)
 						&& (uploadTime != remoteFile.getUpdatetimems() || delete)) {
-					remoteInfoFilesMap.put(new File(tempDir, fileName), remoteFile);
+					remoteInfoFilesMap.put(getInfoTempFile(tempDir, remoteFile), remoteFile);
 				}
 				String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
 				remoteInfoNames.add(itemFileName);
@@ -361,6 +361,16 @@ class BackupImporter {
 				remoteItemFilesMap.put(fileName, remoteFile);
 			}
 		}
+	}
+
+	// the info is only read from its temp file, so a name too long for the device is replaced by its hash
+	@NonNull
+	private File getInfoTempFile(@NonNull File tempDir, @NonNull RemoteFile remoteFile) {
+		String fileName = remoteFile.getTypeNamePath();
+		if (BackupUtils.isFileNameTooLong(fileName)) {
+			fileName = remoteFile.getType() + "/" + Integer.toHexString(fileName.hashCode()) + INFO_EXT;
+		}
+		return new File(tempDir, fileName);
 	}
 
 	private void collectNoInfoRemoteItemFiles(@NonNull List<RemoteFile> noInfoRemoteItemFiles,

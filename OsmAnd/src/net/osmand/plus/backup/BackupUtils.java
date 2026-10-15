@@ -208,6 +208,21 @@ public class BackupUtils {
 		return false;
 	}
 
+	// the last name of the path is cut, so that together with the tail it still fits the limit
+	@NonNull
+	public static String appendToFileName(@NonNull String path, @NonNull String tail) {
+		int nameStart = path.lastIndexOf('/') + 1;
+		int tailEnd = tail.indexOf('/');
+		String nameTail = tailEnd == -1 ? tail : tail.substring(0, tailEnd);
+		int maxBytes = MAX_FILE_NAME_BYTES - nameTail.getBytes(StandardCharsets.UTF_8).length;
+		String name = path.substring(nameStart);
+		int end = name.length();
+		while (end > 0 && name.substring(0, end).getBytes(StandardCharsets.UTF_8).length > maxBytes) {
+			end = name.offsetByCodePoints(end, -1);
+		}
+		return path.substring(0, nameStart) + name.substring(0, end) + tail;
+	}
+
 	public static boolean isLimitedFilesCollectionItem(@NonNull FileSettingsItem item) {
 		return item.getSubtype() == FileSubtype.VOICE;
 	}
