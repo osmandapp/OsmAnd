@@ -2,6 +2,7 @@ package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -11,7 +12,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.os.SystemClock;
 import android.provider.Settings;
 import android.view.GestureDetector;
 
@@ -34,13 +34,15 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState
 
 import org.apache.commons.logging.Log;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LockHelper implements SensorEventListener, StateChangedListener<ApplicationMode> {
 
 	private static final Log LOG = PlatformUtil.getLog(LockHelper.class);
 	private static final int LOCK_SCREEN_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 8;
-	private static final int KEEP_SCREEN_ON_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 9;
+	private static final int LOCK_TIMEOUT_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 9;
 
 	private static final int SENSOR_SENSITIVITY = 4;
 
@@ -58,20 +60,19 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 	private CommonPreference<Boolean> turnScreenOnNavigationInstructions;
 
 	private ApplicationMode lastApplicationMode;
-	private long lastInteractionTime;
+	private final Set<String> keepScreenAwakeReasons = new HashSet<>();
 	@Nullable
 	private LockUIAdapter lockUIAdapter;
-	private final Runnable lockRunnable;
 	private final VoiceMessageListener voiceMessageListener;
 	private LockGestureDetector gestureDetector;
 
 	public interface LockUIAdapter {
 
-		void lock();
-
-		void unlock();
-
+		// Native function, prevents the display from timing out normally; does not wake it.
 		void setKeepScreenOn(boolean keepScreenOn);
+
+		// Flags to show app on top of the keyguard
+		void setKeyguardFlags(boolean enable);
 	}
 
 	public LockHelper(OsmandApplication app) {
@@ -85,11 +86,10 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 
 		settings.APPLICATION_MODE.addListener(this);
-		lockRunnable = this::lock;
 
 		voiceMessageListener = (listCommands, played) -> {
 			if (turnScreenOnNavigationInstructions.get()) {
-				unlockEvent();
+				doUnlock();
 			}
 		};
 
@@ -105,32 +105,54 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		app.getRoutingHelper().getVoiceRouter().addVoiceMessageListener(voiceMessageListener);
 	}
 
-	private void releaseWakeLocks() {
+	/**
+	 * The map holds the screen on for the "Timeout after wake-up" since the last interaction,
+	 * 0 s ("Keep screen on") means no timeout. When the phone is unlocked (i.e. not displaying
+	 * over the keyguard), the screen cannot be programmatically locked, but will instead lock 
+	 * on its own, once the timeout (which starts to run after the wakelocks have been released)
+	 * has lapsed. When displaying over the keyguard, the screen can programmatically be locked.
+	 */
+
+	@SuppressLint("WakelockTimeout")
+	public void doUnlock() {
+		if (lockUIAdapter != null) {
+			lockUIAdapter.setKeyguardFlags(true);
+		}
+		PowerManager pm = (PowerManager) app.getSystemService(Context.POWER_SERVICE);
+		if (pm != null && wakeLock == null) {
+			wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
+					| PowerManager.ACQUIRE_CAUSES_WAKEUP, "OsmAnd:OnVoiceWakeupTag");
+			wakeLock.acquire();
+		}
+		restartLockTimeout();
+	}
+
+	/**
+	 * When the phone is unlocked, actual locking will be after the system timeout.
+	 * When displaying over keyguard, lock is (near) instant.
+	 */
+	public void doLock() {
+		// run in any case
+		doKeepOn(false);
+
+		// the rest is only run when displaying over keyguard
 		if (wakeLock != null) {
 			if (wakeLock.isHeld()) {
 				wakeLock.release();
 			}
 			wakeLock = null;
 		}
-	}
 
-	@SuppressLint("WakelockTimeout")
-	public void unlock() {
 		if (lockUIAdapter != null) {
-			lockUIAdapter.unlock();
-		}
-		PowerManager pm = (PowerManager) app.getSystemService(Context.POWER_SERVICE);
-		if (pm != null) {
-			wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
-					| PowerManager.ACQUIRE_CAUSES_WAKEUP, "OsmAnd:OnVoiceWakeupTag");
-			wakeLock.acquire();
+			lockUIAdapter.setKeyguardFlags(isPowerButtonWakeEnabled());
 		}
 	}
 
-	public void lock() {
-		releaseWakeLocks();
-		if (lockUIAdapter != null && !isPowerButtonWakeEnabled()) {
-			lockUIAdapter.lock();
+	private void doKeepOn(boolean keepOn) {
+		uiHandler.removeMessages(LOCK_TIMEOUT_MESSAGE);
+
+		if (lockUIAdapter != null) {
+			lockUIAdapter.setKeepScreenOn(keepOn);
 		}
 	}
 
@@ -147,103 +169,69 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		return wakeLock != null || isPowerButtonWakeEnabled();
 	}
 
-	private void timedUnlock(long millis) {
-		uiHandler.removeCallbacks(lockRunnable);
-		if (wakeLock == null) {
-			uiHandler.post(() -> {
-				if (wakeLock == null) {
-					unlock();
-				}
-			});
-		}
-		if (millis > 0) {
-			sendPostDelayedLockMessage(millis);
+	public void addKeepScreenAwakeReason(@NonNull String reason) {
+		if (keepScreenAwakeReasons.add(reason) && keepScreenAwakeReasons.size() == 1) {
+			doKeepOn(true);
 		}
 	}
 
-	private void unlockEvent() {
-		int unlockTime = getUnlockTime();
-		if (unlockTime > 0) {
-			timedUnlock(unlockTime * 1000L);
-		} else {
-			timedUnlock(0);
+	public void removeKeepScreenAwakeReason(@NonNull String reason) {
+		if (keepScreenAwakeReasons.remove(reason) && keepScreenAwakeReasons.isEmpty()) {
+			restartLockTimeout();
 		}
 	}
 
 	/**
-	 * The map holds the screen on for the "Timeout after wake-up" since the last interaction,
-	 * 0 s ("Keep screen on") means no timeout. The screen is never turned off earlier than the
-	 * system does it on its own - an application can only keep it on for longer.
+	 * If timeout = 0, keep on.
+	 * When displaying over the keyguard:
+	 * 		Wait for the relevant timeout.
+	 * When the phone is unlocked:
+	 * 		If using system timeout, call doLock() right away.
+	 * 		If using in-app timeout, if in-app timeout > system timeout, wait for
+	 * 		(in-app timeout) - (system timeout). Otherwise call doLock() right away.
+	 * This function only (directly) calls doLock() when the phone is unlocked.
 	 */
-	public void setKeepScreenOn(boolean keepScreenOn) {
-		uiHandler.removeMessages(KEEP_SCREEN_ON_MESSAGE);
-		if (lockUIAdapter != null) {
-			lockUIAdapter.setKeepScreenOn(keepScreenOn);
+	public void restartLockTimeout() {
+		uiHandler.removeMessages(LOCK_TIMEOUT_MESSAGE);
+
+		if (!keepScreenAwakeReasons.isEmpty()) {
+			doKeepOn(true);
+			return;
 		}
-		int timeout = getKeepScreenOnTimeout();
-		if (keepScreenOn && timeout > 0) {
-			lastInteractionTime = SystemClock.uptimeMillis();
-			sendPostDelayedKeepScreenOnMessage(timeout * 1000L);
+
+		int inAppTimeout = turnScreenOnTime.get();
+		int systemTimeout = -1;
+
+		try {
+			systemTimeout = Settings.System.getInt(app.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0) / 1000;
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
 		}
-	}
 
-	public void onUserInteraction() {
-		lastInteractionTime = SystemClock.uptimeMillis();
-		resetLockTimerIfNeeded();
-		if (getKeepScreenOnTimeout() > 0 && !uiHandler.hasMessages(KEEP_SCREEN_ON_MESSAGE)) {
-			setKeepScreenOn(true);
-		}
-	}
+		int timeout = useSystemScreenTimeout.get() ? systemTimeout : inAppTimeout;
+		KeyguardManager km = (KeyguardManager) app.getSystemService(Context.KEYGUARD_SERVICE);
 
-	private void releaseKeepScreenOn() {
-		long timeout = getKeepScreenOnTimeout() * 1000L;
-		long idleTime = SystemClock.uptimeMillis() - lastInteractionTime;
-		if (timeout > idleTime) {
-			sendPostDelayedKeepScreenOnMessage(timeout - idleTime);
-		} else if (lockUIAdapter != null) {
-			lockUIAdapter.setKeepScreenOn(false);
-		}
-	}
-
-	private void sendPostDelayedKeepScreenOnMessage(long delayMillis) {
-		Message message = Message.obtain(uiHandler, this::releaseKeepScreenOn);
-		message.what = KEEP_SCREEN_ON_MESSAGE;
-		uiHandler.sendMessageDelayed(message, delayMillis);
-	}
-
-	private int getKeepScreenOnTimeout() {
-		return useSystemScreenTimeout.get() ? 0 : turnScreenOnTime.get();
-	}
-
-	private void resetLockTimerIfNeeded() {
-		if (uiHandler.hasMessages(LOCK_SCREEN_MESSAGE)) {
-			uiHandler.removeCallbacks(lockRunnable);
-			int unlockTime = getUnlockTime();
-			if (unlockTime > 0) {
-				sendPostDelayedLockMessage(unlockTime * 1000L);
+		if (timeout == 0) {
+			doKeepOn(true);
+		} else if (wakeLock != null && km.isKeyguardLocked()) { // displaying over keyguard
+			startLockTimeout(timeout);
+		} else if (useSystemScreenTimeout.get()) {
+			doLock();
+		} else {
+			if (systemTimeout != -1 && inAppTimeout > systemTimeout) {
+				startLockTimeout(inAppTimeout - systemTimeout);
+			} else {
+				doLock();
 			}
 		}
 	}
 
-	private void sendPostDelayedLockMessage(long delayMillis){
-		Message message = Message.obtain(uiHandler, lockRunnable);
-		message.what = LOCK_SCREEN_MESSAGE;
-		uiHandler.sendMessageDelayed(message, delayMillis);
-	}
-
-	private int getUnlockTime() {
-		int unlockTime = turnScreenOnTime.get();
-		if (useSystemScreenTimeout.get()) {
-			try {
-				int screenOffTimeout = Settings.System.getInt(app.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
-				if (screenOffTimeout > 0) {
-					unlockTime = screenOffTimeout / 1000;
-				}
-			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
-			}
+	private void startLockTimeout(long delayMillis) {
+		if(delayMillis > 0) {
+			Message message = Message.obtain(uiHandler, this::doLock);
+			message.what = LOCK_TIMEOUT_MESSAGE;
+			uiHandler.sendMessageDelayed(message, delayMillis * 1000L);
 		}
-		return unlockTime;
 	}
 
 	@Override
@@ -255,7 +243,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 	public void onSensorChanged(SensorEvent event) {
 		if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
 			if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
-				unlockEvent();
+				doUnlock();
 			}
 		}
 	}
@@ -276,8 +264,11 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		switchSensor(false);
 	}
 
+	/**
+	 * When changing app
+	 */
 	public void onStop(@NonNull Activity activity) {
-		lock();
+		doLock();
 		if (!activity.isFinishing() && turnScreenOnSensor.get()) {
 			switchSensor(true);
 		}
@@ -289,6 +280,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 
 	/**
 	 * LockScreenAction part
+	 * This feature disables touch input to prevent accidental clicks on the screen.
 	 */
 
 	public void toggleLockScreen() {
