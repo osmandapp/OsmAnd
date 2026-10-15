@@ -99,7 +99,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	static final int SUGGESTIONS_UPDATE_MSG_ID = OsmAndConstants.UI_HANDLER_CAR_SUGGESTIONS + 1;
 	private static final long SUGGESTIONS_UPDATE_DELAY_MS = 300;
 
-	static final String TAG = NavigationSession.class.getSimpleName();
+	static final String TAG = "NavigationSession";
 	static final String URI_SCHEME = "osmand";
 	static final String URI_HOST = "car_navigation";
 
