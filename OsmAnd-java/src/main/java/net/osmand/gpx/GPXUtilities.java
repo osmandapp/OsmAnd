@@ -1254,6 +1254,7 @@ public class GPXUtilities {
 			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1"); //$NON-NLS-1$ //$NON-NLS-2$
 			serializer.attribute(null, "xmlns:osmand", "https://osmand.net");
 			serializer.attribute(null, "xmlns:gpxtpx", "http://www.garmin.com/xmlschemas/TrackPointExtension/v1");
+			serializer.attribute(null, "xmlns:pwr", "http://www.garmin.com/xmlschemas/PowerExtension/v1");
 			serializer.attribute(null, "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			serializer.attribute(null, "xsi:schemaLocation",
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
@@ -1544,6 +1545,7 @@ public class GPXUtilities {
 		writeExtensions(serializer, null, p, null);
 		if (p.extensionsWriters != null) {
 			p.extensionsWriters.remove(EXTENSIONS_WRITER_KEY);
+			p.extensionsWriters.remove("pwr_extensions");
 			if (!keepTrackPointExtension) {
 				p.extensionsWriters.remove(GPXTPX_TRACK_POINT_EXTENSION);
 			}
@@ -1559,16 +1561,23 @@ public class GPXUtilities {
 	public static void assignExtensionWriter(WptPt wptPt, Map<String, String> pluginsExtensions) {
 		HashMap<String, String> regularExtensions = new HashMap<>();
 		HashMap<String, String> gpxtpxExtensions = new HashMap<>();
+		HashMap<String, String> powerPrefixExtensions = new HashMap<>();
 
 		for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
 			if (entry.getKey().startsWith(GPXTPX_PREFIX)) {
 				gpxtpxExtensions.put(entry.getKey(), entry.getValue());
+			} else if (entry.getKey().startsWith("pwr:")) {
+				powerPrefixExtensions.put(entry.getKey(), entry.getValue());
 			} else {
 				regularExtensions.put(entry.getKey(), entry.getValue());
 			}
 		}
 		if (!Algorithms.isEmpty(regularExtensions)) {
 			wptPt.setExtensionsWriter(EXTENSIONS_WRITER_KEY, createExtensionsWriter(regularExtensions, true));
+		}
+		if (!Algorithms.isEmpty(powerPrefixExtensions)) {
+
+			wptPt.setExtensionsWriter("pwr_extensions", createExtensionsWriter(powerPrefixExtensions, false));
 		}
 		if (!Algorithms.isEmpty(gpxtpxExtensions)) {
 			wptPt.setExtensionsWriter(GPXTPX_TRACK_POINT_EXTENSION, createGpxTpxExtensionsWriter(gpxtpxExtensions, false));
