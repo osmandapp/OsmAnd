@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import net.osmand.plus.OsmAndTaskManager;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController;
@@ -47,6 +49,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -80,6 +83,8 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	public static final String PRESELECTED_TAB_PARAMS_KEY = "preselected_tab_params";
 	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
+	private static final String SELECTED_TRACK_PATHS_KEY = "selected_track_paths";
+	private static final String SELECTION_LISTENER_TAG_KEY = "selection_listener_tag";
 
 	private ImageView searchButton;
 
@@ -90,8 +95,42 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	private PreselectedTabParams preselectedTabParams;
 	private String callingFragmentTag = null;
 
+	@Nullable
+	private ArrayList<String> selectedTrackPaths;
+	@Nullable
+	private String selectionListenerTag;
+	private boolean initialTabSelected;
+
 	public boolean getContentStatusBarNightMode() {
 		return nightMode;
+	}
+
+	private boolean isSelectTracksMode() {
+		return selectedTrackPaths != null;
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		if (savedInstanceState != null && selectedTrackPaths == null) {
+			selectedTrackPaths = savedInstanceState.getStringArrayList(SELECTED_TRACK_PATHS_KEY);
+			selectionListenerTag = savedInstanceState.getString(SELECTION_LISTENER_TAG_KEY);
+		}
+		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (isSelectTracksMode()) {
+			outState.putStringArrayList(SELECTED_TRACK_PATHS_KEY, selectedTrackPaths);
+			outState.putString(SELECTION_LISTENER_TAG_KEY, selectionListenerTag);
+		}
+	}
+
+	@NonNull
+	@Override
+	protected TrackTabsHelper createTrackTabsHelper(@NonNull OsmandApplication app) {
+		return new TrackTabsHelper(app, selectedTrackPaths);
 	}
 
 	@Override
@@ -162,6 +201,12 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		int iconColor = ColorUtilities.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
 		switchGroup.setImageTintList(ColorStateList.valueOf(iconColor));
 		actionsButton.setImageTintList(ColorStateList.valueOf(iconColor));
+
+		if (isSelectTracksMode()) {
+			TextView title = toolbar.findViewById(R.id.toolbar_title);
+			title.setText(R.string.select_tracks);
+			AndroidUiHelper.updateVisibility(actionsButton, false);
+		}
 	}
 
 	private void onBackPressed() {
@@ -229,7 +274,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	private void updateButtonsState() {
 		TrackTab trackTab = getSelectedTab();
 		if (trackTab != null) {
-			if (TrackTabType.ON_MAP == trackTab.type && !Algorithms.isEmpty(trackTabsHelper.getRecentlyVisibleTracks())) {
+			if (isHideAllButtonAvailable(trackTab)) {
 				boolean anySelected = itemsSelectionHelper.hasSelectedItems();
 				selectionButton.setTitleId(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent);
 				selectionButton.setEnabled(!Algorithms.isEmpty(trackTabsHelper.getRecentlyVisibleTracks()) || anySelected);
@@ -244,12 +289,17 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		}
 	}
 
+	private boolean isHideAllButtonAvailable(@NonNull TrackTab trackTab) {
+		return !isSelectTracksMode() && TrackTabType.ON_MAP == trackTab.type
+				&& !Algorithms.isEmpty(trackTabsHelper.getRecentlyVisibleTracks());
+	}
+
 	@NonNull
 	private View.OnClickListener getSelectionButtonClickListener() {
 		return v -> {
 			TrackTab tab = getSelectedTab();
 			if (tab != null) {
-				if (TrackTabType.ON_MAP == tab.type && !Algorithms.isEmpty(trackTabsHelper.getRecentlyVisibleTracks())) {
+				if (isHideAllButtonAvailable(tab)) {
 					Set<TrackItem> selectedItems = itemsSelectionHelper.getSelectedItems();
 					boolean hasSelectedItems = !Algorithms.isEmpty(selectedItems);
 					Set<TrackItem> selectTracks = hasSelectedItems ? selectedItems : trackTabsHelper.getRecentlyVisibleTracks();
@@ -275,17 +325,28 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
 		if (isAdded()) {
 			trackTabsHelper.updateTrackItems(folder);
-			String initialTabId = preselectedTabParams != null
-					? preselectedTabParams.getTabId()
-					: TrackTabType.ON_MAP.name();
+			String initialTabId = getInitialTabId();
 			trackTabsHelper.sortTrackTabIfNeeded(getTab(initialTabId));
 			AndroidUiHelper.updateVisibility(progressBar, false);
 			updateTrackTabs();
 			applyPreselectedParams();
+			if (isSelectTracksMode() && !initialTabSelected) {
+				setSelectedTab(initialTabId);
+				initialTabSelected = true;
+			}
 			updateTabsContent();
 			updateButtonsState();
 			preselectedTabParams = null;
 		}
+	}
+
+	@NonNull
+	private String getInitialTabId() {
+		if (preselectedTabParams != null) {
+			return preselectedTabParams.getTabId();
+		}
+		boolean hasSelectedTracks = !Algorithms.isEmpty(selectedTrackPaths);
+		return hasSelectedTracks ? TrackTabType.ALL.name() : TrackTabType.ON_MAP.name();
 	}
 
 	@Override
@@ -330,9 +391,31 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		}
 	}
 
+	@Override
+	public void onGpxSelectionInProgress(@NonNull SelectedGpxFile selectedGpxFile) {
+		if (!isSelectTracksMode()) {
+			super.onGpxSelectionInProgress(selectedGpxFile);
+		}
+	}
+
 	public void saveChanges() {
 		trackTabsHelper.saveTabsSortModes();
-		trackTabsHelper.saveTracksVisibility();
+		if (isSelectTracksMode()) {
+			notifyTracksSelected();
+			dismiss();
+		} else {
+			trackTabsHelper.saveTracksVisibility();
+		}
+	}
+
+	private void notifyTracksSelected() {
+		FragmentActivity activity = getActivity();
+		if (activity != null && selectionListenerTag != null) {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			if (manager.findFragmentByTag(selectionListenerTag) instanceof TracksSelectionListener listener) {
+				listener.onTracksSelected(trackTabsHelper.getSelectedPaths());
+			}
+		}
 	}
 
 	public void changeAppearance() {
@@ -381,7 +464,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	@Override
 	public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
 		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		if (activity != null && !isSelectTracksMode()) {
 			openTrackOptions(activity, view, trackItem);
 		}
 	}
@@ -540,6 +623,28 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}
+	}
+
+	/**
+	 * Opens the screen for picking tracks instead of changing their visibility on the map.
+	 * The result goes to the fragment with {@code listenerTag}, which must implement
+	 * {@link TracksSelectionListener}.
+	 */
+	public static void showSelectTracksInstance(@NonNull FragmentActivity activity,
+	                                            @NonNull List<String> selectedPaths,
+	                                            @NonNull String listenerTag) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			TracksTabsFragment fragment = new TracksTabsFragment();
+			fragment.selectedTrackPaths = new ArrayList<>(selectedPaths);
+			fragment.selectionListenerTag = listenerTag;
+			fragment.setRetainInstance(true);
+			fragment.show(manager, TAG);
+		}
+	}
+
+	public interface TracksSelectionListener {
+		void onTracksSelected(@NonNull List<String> paths);
 	}
 
 	@Override
