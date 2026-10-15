@@ -113,15 +113,15 @@
     <string name="poi_seamark">Поморска</string>
     <string name="poi_military">Војска</string>
     <string name="poi_user_defined_other">Кориснички одређено</string>
-    <string name="poi_bakery">Пекара;pekara</string>
-    <string name="poi_alcohol">Подрум пића</string>
-    <string name="poi_cheese">Продавница сирења</string>
+    <string name="poi_bakery">Пекара;пекаре</string>
+    <string name="poi_alcohol">Продавница пића;алкохол;алкохолна пића;продавница пића;Без лиценце</string>
+    <string name="poi_cheese">Продавница сирева;сир</string>
     <string name="poi_chocolate">Продавница чоколаде</string>
     <string name="poi_coffee">Продаје кафе</string>
     <string name="poi_mall">Тржница;Tržni centar;Šoping centar;Тржни центар;Шопинг центар</string>
     <string name="poi_beverages">Продавница пића</string>
-    <string name="poi_butcher">Месна тржница</string>
-    <string name="poi_farm">Сточна продавница</string>
+    <string name="poi_butcher">Месарница;меса;месар;месари;месара</string>
+    <string name="poi_farm">Пољопривредна продавница;тезга на газдинству;продавница на газдинству</string>
     <string name="poi_seafood">Продавница морске хране</string>
     <string name="poi_confectionery">Конфекција</string>
     <string name="poi_supermarket">Супермаркет;Supermarket</string>
@@ -430,7 +430,7 @@
     <string name="poi_college">Колеџ</string>
     <string name="poi_driving_school">Возачка школа;Auto-škola;Ауто-школа</string>
     <string name="poi_kindergarten">Вртић;Vrtić</string>
-    <string name="poi_school">Школа;ОШ;Škola;гимназија</string>
+    <string name="poi_school">Школа;основна школа;јешива</string>
     <string name="poi_training">Установа за вежбање</string>
     <string name="poi_university">Универзитет;факултет</string>
     <string name="poi_courthouse">Суд</string>
@@ -1433,7 +1433,7 @@
     <string name="poi_service">Услуга</string>
     <string name="poi_craft">Радионица</string>
     <string name="poi_convenience">Продавница потребштина;Mini-market;Мини-маркет</string>
-    <string name="poi_deli">Продавница</string>
+    <string name="poi_deli">Дели;деликатесна радња</string>
     <string name="poi_greengrocer">Продавница зеленила</string>
     <string name="poi_ice_cream">Простор са сладоледом</string>
     <string name="poi_pastry">Продавница пецива</string>
@@ -1472,7 +1472,7 @@
     <string name="poi_model">Умањени модели</string>
     <string name="poi_shop_craft">Продавница занатских реквизита</string>
     <string name="poi_religion">Религиозна добра</string>
-    <string name="poi_emergency_phone">Хитан телефон;SOS telefon;СОС телефон</string>
+    <string name="poi_emergency_phone">Хитан телефон</string>
     <string name="poi_fire_flapper">Противпожарна метла</string>
     <string name="poi_fire_water_pond">Противпожарни базен</string>
     <string name="poi_grit_bin">Сандук соли</string>
@@ -3652,7 +3652,7 @@
     <string name="poi_cash_withdrawal_operator">Оператор подизања готовине</string>
     <string name="poi_cash_withdrawal">Подизање готовине</string>
     <string name="poi_cash_withdrawal_yes">Подизање готовине: да</string>
-    <string name="poi_pet_grooming">Шишање љубимаца;gruming pasa;gruming životinja;salon za negu pasa;šišanje pasa;šišanje životinja;груминг животиња;груминг паса;салон за негу животиња;Салон за негу паса;шишање животиња;шишање паса</string>
+    <string name="poi_pet_grooming">Шишање љубимаца</string>
     <string name="poi_charge">Пуњење</string>
     <string name="poi_craft_cabinet_maker">Столар ормана</string>
     <string name="poi_craft_bakery">Домаћи хлеб</string>
@@ -5238,4 +5238,5 @@
     <string name="poi_payment_contactless_xlt_flor_yes">Бесконтактно Флореин</string>
     <string name="poi_disaster_help_point">Пункт за помоћ у случају катастрофе</string>
     <string name="poi_hitchhiking_stop">Место за стопирање</string>
+    <string name="poi_service_abbreviation">Јавни сервис</string>
 </resources>

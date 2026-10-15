@@ -130,9 +130,9 @@
     <string name="poi_military">Militärt</string>
     <string name="poi_user_defined_other">Användardefinierad</string>
     <string name="poi_palaeontological_site">Paleontologisk plats</string>
-    <string name="poi_bakery">Bageri</string>
+    <string name="poi_bakery">Bageri;bagerier</string>
     <string name="poi_alcohol">Spritbutik</string>
-    <string name="poi_cheese">Ostbutik</string>
+    <string name="poi_cheese">Ostbutik;ost</string>
     <string name="poi_chocolate">Chokladaffär</string>
     <string name="poi_coffee">Kaffehandel</string>
     <string name="poi_convenience">Närbutik;livs</string>
@@ -142,7 +142,7 @@
     <string name="poi_deli">Deli</string>
     <string name="poi_farm">Gårdsbutik</string>
     <string name="poi_piste_grooming">Underhåll</string>
-    <string name="poi_greengrocer">Grönsakshandlare</string>
+    <string name="poi_greengrocer">Grönsakshandel;grönsaker;grönsakshandlare</string>
     <string name="poi_seafood">Fisk- och skaldjursaffär</string>
     <string name="poi_confectionery">Godisbutik</string>
     <string name="poi_ice_cream">Glassbar</string>
@@ -150,13 +150,13 @@
     <string name="poi_tea">Tebutik</string>
     <string name="poi_pasta">Pastabutik</string>
     <string name="poi_pastry">Konditori</string>
-    <string name="poi_dairy">Mejeriaffär</string>
-    <string name="poi_vending_machine">Varuautomat</string>
+    <string name="poi_dairy">Mejeriaffär;mejeriprodukter</string>
+    <string name="poi_vending_machine">Varuautomat;tidningsautomat</string>
     <string name="poi_wine">Vinbutik</string>
     <string name="poi_books">Bokhandel</string>
     <string name="poi_bicycle">Cykelaffär</string>
     <string name="poi_anime">Animeaffär</string>
-    <string name="poi_antiques">Antikhandel</string>
+    <string name="poi_antiques">Antikhandel;antikviteter;antikt;antikaffär</string>
     <string name="poi_zoo_type">Typ</string>
     <string name="poi_motorcycle_services">Tjänster</string>
     <string name="poi_motorcycle_type">Motorcykeltyp</string>
@@ -177,12 +177,12 @@
     <string name="poi_socket_schuko_output_filter">Schuko-kontakt, effekt</string>
     <string name="poi_art">Konstbutik</string>
     <string name="poi_baby_goods">Babyartiklar</string>
-    <string name="poi_bag">Väskbutik</string>
+    <string name="poi_bag">Väskbutik;väskaffär</string>
     <string name="poi_bathroom_furnishing">Badrumsinredning</string>
-    <string name="poi_bed">Sängklädsbutik</string>
+    <string name="poi_bed">Sängklädsbutik;madrasser;sängaffär</string>
     <string name="poi_boutique">Modebutik</string>
-    <string name="poi_camera">Kameror och objektiv</string>
-    <string name="poi_carpet">Mattbutik</string>
+    <string name="poi_camera">Kameror och objektiv;kamera;kamerabutik</string>
+    <string name="poi_carpet">Mattbutik;mattaffär</string>
     <string name="poi_charity">Välgörenhetsbutik</string>
     <string name="poi_chemist">Apotek</string>
     <string name="poi_clothes">Klädbutik</string>
@@ -5209,4 +5209,8 @@
     <string name="poi_theme_adventure">Äventyr</string>
     <string name="poi_theme_western">Västern</string>
     <string name="poi_theme_horror">Skräck</string>
+    <string name="poi_theme_ship">Skepp</string>
+    <string name="poi_theme_animal">Djur</string>
+    <string name="poi_theme_pirate">Sjörövare</string>
+    <string name="poi_theme_medieval">Medeltida</string>
 </resources>
