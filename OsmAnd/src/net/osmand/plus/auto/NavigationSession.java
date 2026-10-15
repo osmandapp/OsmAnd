@@ -448,6 +448,13 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		return accessFineLocation || accessCoarseLocation;
 	}
 
+	/**
+	 * Without the purchase or the permission nothing may replace or cover their screens.
+	 */
+	private boolean isCarAccessAllowed() {
+		return InAppPurchaseUtils.isAndroidAutoAvailable(getApp()) && isLocationPermissionAvailable();
+	}
+
 	private boolean requestLocationPermission() {
 		if (!isLocationPermissionAvailable()) {
 			getScreenManager().push(
@@ -490,6 +497,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void processNavigationIntent(@NonNull Uri uri) {
+		if (!isCarAccessAllowed()) {
+			LOG.info("Ignoring navigation intent: purchase or permission check failed");
+			return;
+		}
 		GeoParsedPoint point = GeoPointParserUtil.parse(uri.toString());
 		if (point != null) {
 			CarContext context = getCarContext();
@@ -603,7 +614,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		// Process the intent from DeepLinkNotificationReceiver. Bring the routing screen back to
 		// the top if any other screens were pushed onto it.
 		if (URI_SCHEME.equals(uri.getScheme()) && URI_HOST.equals(uri.getSchemeSpecificPart())
-				&& DEEP_LINK_ACTION_OPEN_ROOT_SCREEN.equals(uri.getFragment())) {
+				&& DEEP_LINK_ACTION_OPEN_ROOT_SCREEN.equals(uri.getFragment()) && isCarAccessAllowed()) {
 			ScreenManager screenManager = getScreenManager();
 			Screen top = screenManager.getTop();
 
@@ -631,6 +642,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	public void startNavigationScreen() {
+		if (!isCarAccessAllowed()) {
+			return;
+		}
 		if (navigationScreen != null) {
 			ScreenManager screenManager = getScreenManager();
 			Screen top = screenManager.getTop();
@@ -693,6 +707,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void routeWasFinished() {
+		if (!isCarAccessAllowed()) {
+			return;
+		}
 		ScreenManager screenManager = getScreenManager();
 		screenManager.popToRoot();
 		screenManager.push(new DestinationReachedScreen(carContext));
@@ -754,7 +771,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void showRoutePreview() {
-		if (isPrivateAccessScreenShown()) {
+		if (isPrivateAccessScreenShown() || !isCarAccessAllowed()) {
 			return;
 		}
 		OsmandApplication app = getApp();
