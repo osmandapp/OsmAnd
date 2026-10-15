@@ -335,6 +335,9 @@ class ButtonPositionSize {
 					i++
 				}
 			}
+			normalizeLeftTopControlsCluster(space, buttons, totalWidth, totalHeight)
+			normalizeBottomLeftAlerts(space, buttons, totalWidth, totalHeight)
+			normalizeRulerNextToMeasurement(space, buttons, totalWidth, totalHeight)
 			if (DEBUG_PRINT) {
 				buttons.forEach {
 					LOG.info("After Button $it ${it.bounds}");
@@ -342,6 +345,149 @@ class ButtonPositionSize {
 				LOG.info("++++ Layout w=$totalWidth h=$totalHeight spc=$space");
 			}
 			return true
+		}
+
+		private fun normalizeLeftTopControlsCluster(
+			space: Int,
+			buttons: List<ButtonPositionSize>,
+			totalWidth: Int,
+			totalHeight: Int
+		) {
+			// Keep the left-top controls coherent in landscape:
+			// search must stay beside configure-map, compass below configure-map.
+			val leftPanel = buttons.firstOrNull { it.id == "map_left_widgets_panel" } ?: return
+			val layers = buttons.firstOrNull { it.id == "map.view.layers" } ?: return
+			val search = buttons.firstOrNull { it.id == "map.view.quick_search" } ?: return
+			val compass = buttons.firstOrNull { it.id == "map.view.compass" } ?: return
+
+			if (!leftPanel.isLeft || !leftPanel.isTop || !layers.isLeft || !layers.isTop || !search.isLeft || !search.isTop || !compass.isLeft || !compass.isTop) {
+				return
+			}
+
+			val minLayersTop = leftPanel.marginY + leftPanel.height + space
+			// Keep controls tied to left panel height in landscape:
+			// left panel 4/8/12 high -> layers at 5/9/13.
+			layers.marginY = minLayersTop
+			layers.marginX = max(0, layers.marginX)
+
+			search.marginY = layers.marginY
+			search.marginX = layers.marginX + layers.width + space
+
+			compass.marginX = layers.marginX
+			compass.marginY = layers.marginY + layers.height + space
+
+			clampToGrid(layers, totalWidth, totalHeight)
+			clampToGrid(search, totalWidth, totalHeight)
+			clampToGrid(compass, totalWidth, totalHeight)
+
+			layers.updateBounds(totalWidth, totalHeight)
+			search.updateBounds(totalWidth, totalHeight)
+			compass.updateBounds(totalWidth, totalHeight)
+		}
+
+		private fun normalizeBottomLeftAlerts(
+			space: Int,
+			buttons: List<ButtonPositionSize>,
+			totalWidth: Int,
+			totalHeight: Int
+		) {
+			// Keep alarm block low (above bottom controls) and separated from left controls.
+			val alarms = buttons.firstOrNull { it.id == "alarms_container" } ?: return
+			val menu = buttons.firstOrNull { it.id == "map.view.menu" }
+			val routePlanning = buttons.firstOrNull { it.id == "map.view.route_planning" }
+			val ruler = buttons.firstOrNull { it.id == "map_ruler_layout" }
+			val bottomPanel = buttons.firstOrNull { it.id == "map_bottom_widgets_panel" }
+			val leftPanel = buttons.firstOrNull { it.id == "map_left_widgets_panel" }
+			val layers = buttons.firstOrNull { it.id == "map.view.layers" }
+			val search = buttons.firstOrNull { it.id == "map.view.quick_search" }
+			val compass = buttons.firstOrNull { it.id == "map.view.compass" }
+			val lanesSpecial = buttons.firstOrNull { it.id == "lanes_widget_special_position" }
+
+			if (!alarms.isLeft || !alarms.isBottom) {
+				return
+			}
+
+			alarms.marginX = 0
+			// First keep alerts just above lower stack.
+			val lowerAnchors = listOfNotNull(
+				menu?.takeIf { it.isLeft && it.isBottom },
+				routePlanning?.takeIf { it.isLeft && it.isBottom },
+				ruler?.takeIf { it.isLeft && it.isBottom },
+				bottomPanel?.takeIf { it.isBottom }
+			)
+			if (lowerAnchors.isEmpty()) {
+				return
+			}
+			alarms.marginY = lowerAnchors.maxOf { it.marginY + it.height + space }
+			clampToGrid(alarms, totalWidth, totalHeight)
+			alarms.updateBounds(totalWidth, totalHeight)
+
+			// If alerts overlap left controls at this low level, shift right first.
+			val upperBlockers = listOfNotNull(
+				leftPanel?.takeIf { it.isLeft && it.isTop },
+				layers?.takeIf { it.isLeft && it.isTop },
+				search?.takeIf { it.isLeft && it.isTop },
+				compass?.takeIf { it.isLeft && it.isTop },
+				lanesSpecial?.takeIf { it.isLeft && it.isTop }
+			)
+			if (upperBlockers.any { alarms.overlap(it) }) {
+				// Use full blocker width envelope here because overlap() treats edge-touch as overlap.
+				val shiftX = upperBlockers.maxOfOrNull { it.marginX + it.width + space } ?: alarms.marginX
+				alarms.marginX = max(alarms.marginX, shiftX)
+				clampToGrid(alarms, totalWidth, totalHeight)
+				alarms.updateBounds(totalWidth, totalHeight)
+			}
+
+			// As a fallback, move up only as much as needed.
+			var guard = 0
+			while (guard++ < totalHeight && upperBlockers.any { alarms.overlap(it) }) {
+				alarms.marginY += 1
+				clampToGrid(alarms, totalWidth, totalHeight)
+				alarms.updateBounds(totalWidth, totalHeight)
+			}
+
+			// Keep ruler in bottom row so alarms stay detached above.
+			if (ruler != null && ruler.isLeft && ruler.isBottom) {
+				val anchor = listOfNotNull(
+					routePlanning?.takeIf { it.isLeft && it.isBottom },
+					menu?.takeIf { it.isLeft && it.isBottom }
+				).firstOrNull()
+				if (anchor == null) {
+					return
+				}
+				ruler.marginY = 0
+				ruler.marginX = max(ruler.marginX, anchor.marginX + anchor.width + space)
+				clampToGrid(ruler, totalWidth, totalHeight)
+				ruler.updateBounds(totalWidth, totalHeight)
+			}
+		}
+
+		private fun clampToGrid(button: ButtonPositionSize, totalWidth: Int, totalHeight: Int) {
+			button.marginX = max(0, min(button.marginX, totalWidth - button.width))
+			button.marginY = max(0, min(button.marginY, totalHeight - button.height))
+		}
+
+		private fun normalizeRulerNextToMeasurement(
+			space: Int,
+			buttons: List<ButtonPositionSize>,
+			totalWidth: Int,
+			totalHeight: Int
+		) {
+			val ruler = buttons.firstOrNull { it.id == "map_ruler_layout" } ?: return
+			val measurement = buttons.firstOrNull { it.id == "measurement_buttons" } ?: return
+			if (!ruler.isLeft || !ruler.isBottom || !measurement.isLeft || !measurement.isBottom) {
+				return
+			}
+
+			// Keep scale ruler beside measurement buttons on the same bottom line.
+			ruler.marginX = measurement.marginX + measurement.width + space
+			ruler.marginY = measurement.marginY
+			clampToGrid(ruler, totalWidth, totalHeight)
+			ruler.updateBounds(totalWidth, totalHeight)
+		}
+
+		private fun verticalOverlap(a: ButtonPositionSize, b: ButtonPositionSize): Boolean {
+			return a.bounds.top < b.bounds.bottom && b.bounds.top < a.bounds.bottom
 		}
 
 		private fun moveAndCheck(toMove: ButtonPositionSize, overlap: ButtonPositionSize,
