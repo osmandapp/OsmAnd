@@ -22,12 +22,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InterruptedIOException;
 import java.util.List;
+import java.util.Map;
 
 public class NetworkWriter extends AbstractWriter {
 
 	private final BackupHelper backupHelper;
 	private final OnUploadItemListener listener;
 	private final boolean autoSync;
+	private final Map<String, LocalFile> localFiles;
 
 	public interface OnUploadItemListener {
 		void onItemUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work);
@@ -43,6 +45,7 @@ public class NetworkWriter extends AbstractWriter {
 		this.backupHelper = backupHelper;
 		this.listener = listener;
 		this.autoSync = autoSync;
+		this.localFiles = backupHelper.getBackup().getLocalFiles();
 	}
 
 	@Override
@@ -65,7 +68,7 @@ public class NetworkWriter extends AbstractWriter {
 		if (listener != null) {
 			listener.onItemUploadDone(item, fileName, error);
 		}
-		if (error != null) {
+		if (error != null && !new BackupError(error).isRejection()) {
 			throw new IOException(error);
 		}
 	}
@@ -160,15 +163,21 @@ public class NetworkWriter extends AbstractWriter {
 			size += file.length();
 		}
 		OnUploadFileListener uploadListener = getUploadDirListener(item, fileName, (int) (size / 1024));
+		String rejection = null;
+		boolean uploaded = false;
 		for (File file : filesToUpload) {
 			item.setFileToWrite(file);
 			String name = BackupUtils.getFileItemName(file, item);
 			String error = uploadItemFile(itemWriter, name, uploadListener);
-			if (error != null) {
+			if (error == null) {
+				uploaded = true;
+			} else if (!new BackupError(error).isRejection()) {
 				return error;
+			} else if (rejection == null) {
+				rejection = error;
 			}
 		}
-		return null;
+		return uploaded ? null : rejection;
 	}
 
 	@NonNull
@@ -191,6 +200,7 @@ public class NetworkWriter extends AbstractWriter {
 
 			@Override
 			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
+				markRejectedVersion(type, fileName, error);
 				if (item instanceof FileSettingsItem) {
 					FileSettingsItem fileItem = (FileSettingsItem) item;
 					String itemFileName = BackupUtils.getFileItemName(fileItem);
@@ -211,6 +221,16 @@ public class NetworkWriter extends AbstractWriter {
 				return isCancelled();
 			}
 		};
+	}
+
+	private void markRejectedVersion(@NonNull String type, @NonNull String fileName, @Nullable String error) {
+		if (error == null || localFiles == null || !new BackupError(error).isRejection()) {
+			return;
+		}
+		LocalFile localFile = localFiles.get(type + "/" + fileName);
+		if (localFile != null) {
+			backupHelper.updateFileRejectedTime(type, fileName, localFile.localModifiedTime);
+		}
 	}
 
 	@NonNull
@@ -245,6 +265,7 @@ public class NetworkWriter extends AbstractWriter {
 
 			@Override
 			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
+				markRejectedVersion(type, fileName, error);
 				if (item instanceof FileSettingsItem) {
 					FileSettingsItem fileItem = (FileSettingsItem) item;
 					String itemFileName = BackupUtils.getFileItemName(fileItem);

@@ -108,7 +108,8 @@ public class BackupInfo {
 		for (LocalFile localFile : filesToUpload) {
 			ExportType type = ExportType.findBy(localFile.item);
 			if (type != null && helper.getBackupTypePref(type, autoSync).get()
-					&& InAppPurchaseUtils.isExportTypeAvailable(app, type)) {
+					&& InAppPurchaseUtils.isExportTypeAvailable(app, type)
+					&& !(autoSync && localFile.isRejectedVersion())) {
 				files.add(localFile);
 			}
 		}

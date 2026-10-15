@@ -140,6 +140,7 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 			UploadedFileInfo fileInfo = infos.get(item.getType().name() + "___" + fileName);
 			if (fileInfo != null) {
 				localFile.uploadTime = fileInfo.getUploadTime();
+				localFile.rejectedTime = fileInfo.getRejectedTime();
 				checkM5Digest(localFile, fileInfo, lastModifiedTime, infoModifiedTime);
 			}
 		}
