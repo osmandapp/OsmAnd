@@ -724,6 +724,15 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		return false;
 	}
 
+	private boolean isAutoStartRoutePreviewPresent() {
+		for (Screen screen : getScreenManager().getScreenStack()) {
+			if (screen instanceof RoutePreviewScreen preview && preview.isStartNavigationOnRouteReady()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private boolean isPrivateAccessScreenShown() {
 		ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
 		Collection<Screen> displayedScreens = screenManager.getScreenStack();
@@ -754,8 +763,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Screen top = !screenManager.getScreenStack().isEmpty() ? screenManager.getTop() : null;
 
 		TargetPoint pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
+		// a card tap preview under another screen (e.g. Settings) must stay: it starts navigation when shown again
 		if (app.getRoutingHelper().isRouteCalculated() && !app.getRoutingHelper().isFollowingMode()
-				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen)) {
+				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen) && !isAutoStartRoutePreviewPresent()) {
 			SearchResult result = new SearchResult();
 			result.location = new LatLon(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
 			GpxFile gpxFile = app.getRoutingHelper().getCurrentGPX();

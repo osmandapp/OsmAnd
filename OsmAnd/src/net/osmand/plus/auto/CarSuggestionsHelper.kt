@@ -69,7 +69,8 @@ class CarSuggestionsHelper(private val app: OsmandApplication) {
 		}
 	}
 
-	private class Card(val key: String, val suggestion: Suggestion)
+	// the suggestion is built only when the cards are published: its PendingIntent is a system call
+	private class Card(val key: String, val createSuggestion: () -> Suggestion)
 
 	private var lastPublishedKeys: List<String>? = null
 
@@ -125,16 +126,16 @@ class CarSuggestionsHelper(private val app: OsmandApplication) {
 				val iconId = getIconId(entry, searchResult)
 				val icon = CarIcon.Builder(IconCompat.createWithResource(app, iconId)).build()
 				val id = "${entry.lat},${entry.lon},${PointDescription.serializeToString(pointDescription)}"
-				val intent = createCardIntent(app, entry)
-				val action = CarPendingIntent.getCarApp(carContext, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
-				val suggestion = Suggestion.Builder()
+				val builder = Suggestion.Builder()
 					.setIdentifier(id)
 					.setTitle(title)
 					.setSubtitle(subtitle)
 					.setIcon(icon)
-					.setAction(action)
-					.build()
-				cards.add(Card("$id|$title|$subtitle|$iconId", suggestion))
+				cards.add(Card("$id|$title|$subtitle|$iconId") {
+					val intent = createCardIntent(app, entry)
+					val action = CarPendingIntent.getCarApp(carContext, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
+					builder.setAction(action).build()
+				})
 			} catch (e: Exception) {
 				LOG.error("Failed to build suggestion for entry: $entry", e)
 			}
@@ -170,8 +171,13 @@ class CarSuggestionsHelper(private val app: OsmandApplication) {
 			return
 		}
 		try {
-			val suggestions = cards.map { card ->
-				card.suggestion
+			val suggestions = cards.mapNotNull { card ->
+				try {
+					card.createSuggestion()
+				} catch (e: Exception) {
+					LOG.error("Failed to build suggestion: ${card.key}", e)
+					null
+				}
 			}
 			carContext.getCarService(SuggestionManager::class.java).updateSuggestions(suggestions)
 			lastPublishedKeys = keys

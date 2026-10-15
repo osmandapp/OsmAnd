@@ -70,6 +70,7 @@ class SearchHistoryHelperListenerTest {
 		listenerCount.set(0)
 		lastSource.set(null)
 		helper.addListener(countingListener)
+		CarTestUtils.assumeHistoryHasRoom(app)
 	}
 
 	@After

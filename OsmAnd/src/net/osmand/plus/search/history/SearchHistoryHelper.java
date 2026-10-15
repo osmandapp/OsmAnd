@@ -49,7 +49,7 @@ public class SearchHistoryHelper {
 
 	private static final Log log = PlatformUtil.getLog(SearchHistoryHelper.class);
 
-	private static final int HISTORY_LIMIT = 1500;
+	public static final int HISTORY_LIMIT = 1500;
 
 	private final OsmandApplication app;
 	private final SearchHistoryDBHelper dbHelper;
@@ -96,6 +96,10 @@ public class SearchHistoryHelper {
 		dbHelper.setLastModifiedTime(lastModifiedTime);
 	}
 
+	/**
+	 * The listener gets the source of the changed entries on the thread that changed the history,
+	 * which can be a background thread.
+	 */
 	public void addListener(@NonNull StateChangedListener<HistorySource> listener) {
 		listeners = CollectionUtils.addToList(listeners, listener);
 	}
@@ -180,12 +184,12 @@ public class SearchHistoryHelper {
 
 		for (HistoryEntry entry : loadedEntries) {
 			PointDescription description = entry.getName();
-			boolean exists = isPointDescriptionExists(description);
 			boolean historyEnabled = entry.getSource() == SEARCH && searchHistoryEnabled
 					|| entry.getSource() == NAVIGATION && navigationHistoryEnabled;
-			if ((includeDeleted || exists)
+			// the existence check reads files for GPX entries, so it goes last
+			if ((source == null || entry.getSource() == source)
 					&& (!onlyEnabledSources || historyEnabled)
-					&& (source == null || entry.getSource() == source)) {
+					&& (includeDeleted || isPointDescriptionExists(description))) {
 				if (!onlyPoints || (!description.isPoiType() && !description.isCustomPoiFilter())) {
 					entries.add(entry);
 				}

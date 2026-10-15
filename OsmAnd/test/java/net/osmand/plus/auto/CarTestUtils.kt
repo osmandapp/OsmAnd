@@ -12,11 +12,13 @@ import net.osmand.data.PointDescription
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
 import net.osmand.plus.search.history.HistoryEntry
+import net.osmand.plus.search.history.SearchHistoryHelper
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.enums.HistorySource
 import net.osmand.search.core.SearchPhrase
 import net.osmand.util.MapUtils
 import org.junit.Assert.assertFalse
+import org.junit.Assume.assumeTrue
 import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.TimeUnit
 
@@ -39,6 +41,15 @@ object CarTestUtils {
 			Thread.sleep(INIT_POLL_MS)
 		}
 		assertFalse("Application initialization timed out before tests could run", app.isApplicationInitializing)
+	}
+
+	/**
+	 * The tests write to the real history: at its limit every added entry deletes the oldest entry of the user.
+	 */
+	fun assumeHistoryHasRoom(app: OsmandApplication) {
+		val size = app.searchHistoryHelper.getHistoryEntries(null, false, true).size
+		assumeTrue("History has $size entries, test entries would push out the user's entries",
+			size + 10 <= SearchHistoryHelper.HISTORY_LIMIT)
 	}
 
 	fun <T> onMain(block: () -> T): T {

@@ -53,6 +53,7 @@ class CarSuggestionsHelperTest {
 		settings.NAVIGATION_HISTORY.set(true)
 
 		CarTestUtils.waitForAppInitialization(app)
+		CarTestUtils.assumeHistoryHasRoom(app)
 	}
 
 	@After

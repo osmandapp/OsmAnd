@@ -211,6 +211,10 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		startNavigationIfReady();
 	}
 
+	public boolean isStartNavigationOnRouteReady() {
+		return startNavigationOnRouteReady;
+	}
+
 	private void startNavigationIfReady() {
 		if (startNavigationOnRouteReady && !calculating && !Algorithms.isEmpty(routeRows)) {
 			getApp().runInUIThread(() -> {
