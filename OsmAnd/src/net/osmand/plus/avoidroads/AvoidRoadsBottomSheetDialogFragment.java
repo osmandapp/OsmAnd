@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.StateChangedListener;
 import net.osmand.data.QuadRect;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -30,6 +31,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -41,6 +43,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.Serializable;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +61,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private static final String HIDE_IMPASSABLE_ROADS_KEY = "hide_impassable_roads";
 	private static final String AVOID_ROADS_OBJECTS_KEY = "avoid_roads_objects";
 	private static final String AVOID_ROADS_APP_MODE_KEY = "avoid_roads_app_mode";
+	private static final String AVOID_TOLL_COUNTRIES_KEY = "avoid_toll_countries";
 
 	private DirectionPointsHelper pointsHelper;
 	private RoutingOptionsHelper routingOptionsHelper;
@@ -66,6 +70,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private final Map<CommonPreference<Boolean>, StateChangedListener<Boolean>> routingPrefListeners = new HashMap<>();
 	private List<AvoidRoadInfo> removedImpassableRoads;
 	private final List<String> enabledFiles = new ArrayList<>();
+	private final List<String> avoidedTollCountries = new ArrayList<>();
+	private boolean tollCountriesInitialized;
 	private LinearLayout stylesContainer;
 
 	private boolean hideImpassableRoads;
@@ -99,6 +105,15 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		}
 		if (!Algorithms.isEmpty(selectedFileNames)) {
 			enabledFiles.addAll(selectedFileNames);
+		}
+		if (!tollCountriesInitialized) {
+			List<String> selectedCountries = savedInstanceState != null && savedInstanceState.containsKey(AVOID_TOLL_COUNTRIES_KEY)
+					? savedInstanceState.getStringArrayList(AVOID_TOLL_COUNTRIES_KEY)
+					: settings.AVOID_TOLL_ROADS_COUNTRIES.getStringsListForProfile(getTargetAppMode());
+			if (selectedCountries != null) {
+				avoidedTollCountries.addAll(selectedCountries);
+			}
+			tollCountriesInitialized = true;
 		}
 		if (routingParametersMap == null) {
 			routingParametersMap = getRoutingParametersMap();
@@ -178,6 +193,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 		populateImpassableRoadsTypes();
 		populateImpassableRoadsFiles();
+		populateTollRoadCountries();
 	}
 
 	private void populateImpassableRoadsObjects() {
@@ -211,7 +227,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		for (Map.Entry<String, Boolean> entry : routingParametersMap.entrySet()) {
 			String parameterId = entry.getKey();
 			boolean selected = entry.getValue();
-			GeneralRouter.RoutingParameter parameter = routingOptionsHelper.getRoutingPrefsForAppModeById(app.getRoutingHelper().getAppMode(), parameterId);
+			GeneralRouter.RoutingParameter parameter = routingOptionsHelper.getRoutingPrefsForAppModeById(getTargetAppMode(), parameterId);
 			String defValue = "";
 			if (parameter != null) {
 				defValue = parameter.getName();
@@ -277,6 +293,48 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				});
 				items.add(item[0]);
 			}
+		}
+	}
+
+	private void populateTollRoadCountries() {
+		if (hideImpassableRoads || !routingParametersMap.containsKey(GeneralRouter.AVOID_TOLL)
+				|| getTargetAppMode().getRouteService() != RouteService.OSMAND) {
+			return;
+		}
+		List<WorldRegion> countries = app.getRegions().getCountriesForMapFiles(
+				app.getResourceManager().getIndexFileNames().keySet());
+		if (countries.isEmpty()) {
+			return;
+		}
+		Collator collator = Collator.getInstance();
+		countries.sort((first, second) -> collator.compare(first.getLocaleName(), second.getLocaleName()));
+
+		items.add(new SubtitleDividerItem(app));
+		items.add(new TitleItem(getString(R.string.avoid_toll_roads_by_country)));
+		items.add(new SimpleBottomSheetItem.Builder()
+				.setTitle(getString(R.string.avoid_toll_roads_by_country_descr))
+				.setLayoutId(R.layout.bottom_sheet_item_title_long)
+				.create());
+		for (WorldRegion country : countries) {
+			String countryId = country.getRegionId();
+			items.add(new TitleItem(country.getLocaleName()));
+			BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
+			BottomSheetItemWithCompoundButton.Builder builder = new BottomSheetItemWithCompoundButton.Builder();
+			builder.setChecked(avoidedTollCountries.contains(countryId));
+			builder.setTitle(getString(R.string.routing_attr_avoid_toll_name));
+			builder.setLayoutId(R.layout.bottom_sheet_item_with_switch_no_icon);
+			builder.setTag(countryId);
+			builder.setOnClickListener(v -> item[0].setChecked(!item[0].isChecked()));
+			builder.setOnCheckedChangeListener((button, checked) -> {
+				item[0].setChecked(checked);
+				avoidedTollCountries.remove(countryId);
+				if (checked) {
+					avoidedTollCountries.add(countryId);
+				}
+			});
+			item[0] = builder.create();
+			item[0].setCompoundButtonColor(compoundButtonColor);
+			items.add(item[0]);
 		}
 	}
 
@@ -351,6 +409,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		outState.putSerializable(AVOID_ROADS_OBJECTS_KEY, (Serializable) removedImpassableRoads);
 		outState.putStringArrayList(ENABLED_FILES_IDS, (ArrayList<String>) enabledFiles);
 		outState.putBoolean(HIDE_IMPASSABLE_ROADS_KEY, hideImpassableRoads);
+		outState.putStringArrayList(AVOID_TOLL_COUNTRIES_KEY, new ArrayList<>(avoidedTollCountries));
 	}
 
 	@Override
@@ -360,7 +419,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		ApplicationMode mode = app.getRoutingHelper().getAppMode();
+		ApplicationMode mode = getTargetAppMode();
 		for (Map.Entry<String, Boolean> entry : routingParametersMap.entrySet()) {
 			String parameterId = entry.getKey();
 			GeneralRouter.RoutingParameter parameter = routingOptionsHelper.getRoutingPrefsForAppModeById(mode, parameterId);
@@ -376,12 +435,13 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			avoidRoadsHelper.removeImpassableRoad(avoidRoadInfo);
 		}
 
+		settings.AVOID_TOLL_ROADS_COUNTRIES.setStringsListForProfile(mode, avoidedTollCountries);
+		pointsHelper.setSelectedFilesForMode(mode, enabledFiles);
 		app.getRoutingHelper().onSettingsChanged(true);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapRouteInfoMenu().updateMenu();
 		}
-		pointsHelper.setSelectedFilesForMode(mode, enabledFiles);
 
 		dismiss();
 	}
@@ -389,9 +449,10 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	@NonNull
 	private HashMap<String, Boolean> getRoutingParametersMap() {
 		HashMap<String, Boolean> map = new HashMap<>();
-		Map<RoutingParameter, Boolean> parameters = routingOptionsHelper.getAvoidParametersWithStates(app);
-		for (Map.Entry<RoutingParameter, Boolean> entry : parameters.entrySet()) {
-			map.put(entry.getKey().getId(), entry.getValue());
+		ApplicationMode mode = getTargetAppMode();
+		for (RoutingParameter parameter : routingOptionsHelper.getAvoidParameters(mode)) {
+			CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+			map.put(parameter.getId(), preference.getModeValue(mode));
 		}
 		return map;
 	}
