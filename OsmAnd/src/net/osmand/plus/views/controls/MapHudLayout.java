@@ -463,7 +463,13 @@ public class MapHudLayout extends FrameLayout {
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
 		} else if (id == R.id.map_alarm_warning || id == R.id.speedometer_widget) {
-			position.setMoveVertical();
+			// In landscape the left column is too short to lift the widget above the compass,
+			// so allow a sideways move next to the button column instead.
+			if (portrait) {
+				position.setMoveVertical();
+			} else {
+				position.setMoveAny();
+			}
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
 		} else if (id == R.id.lanes_widget_special_position) {
@@ -488,8 +494,16 @@ public class MapHudLayout extends FrameLayout {
 			return position;
 		}
 		int id = view.getId();
-		int width = (int) AndroidUtils.pxToDpF(getContext(), view.getWidth()) / 8;
-		int height = (int) AndroidUtils.pxToDpF(getContext(), view.getHeight()) / 8;
+		int width;
+		int height;
+		if (id == R.id.speedometer_widget || id == R.id.map_alarm_warning) {
+			// Round up so that "no overlap on the grid" also means "no overlap on screen".
+			width = (int) Math.ceil(AndroidUtils.pxToDpF(getContext(), view.getWidth()) / CELL_SIZE_DP);
+			height = (int) Math.ceil(AndroidUtils.pxToDpF(getContext(), view.getHeight()) / CELL_SIZE_DP);
+		} else {
+			width = (int) AndroidUtils.pxToDpF(getContext(), view.getWidth()) / 8;
+			height = (int) AndroidUtils.pxToDpF(getContext(), view.getHeight()) / 8;
+		}
 		position.setSize(width, height);
 
 		if (view instanceof VerticalWidgetPanel) {
