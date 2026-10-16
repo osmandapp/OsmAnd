@@ -36,6 +36,8 @@ public class DevicesSettingsCollection {
 		final DeviceType deviceType;
 		boolean enabled;
 		String uuid;
+		// supported services of a BLE device, it can have sensors of several types
+		List<String> serviceUUIDs;
 		Map<DeviceChangeableProperty, String> additionalParams = new LinkedHashMap<>();
 
 		public DeviceSettings(String deviceId, @NonNull AbstractDevice<?> device, boolean deviceEnabled) {
@@ -87,6 +89,15 @@ public class DevicesSettingsCollection {
 
 		public void setUuid(String uuid) {
 			this.uuid = uuid;
+		}
+
+		@Nullable
+		public List<String> getServiceUUIDs() {
+			return serviceUUIDs;
+		}
+
+		public void setServiceUUIDs(@Nullable List<String> serviceUUIDs) {
+			this.serviceUUIDs = serviceUUIDs;
 		}
 	}
 	public interface DevicePreferencesListener {
