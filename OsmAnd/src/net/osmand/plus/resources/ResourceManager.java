@@ -9,6 +9,8 @@ import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.os.HandlerThread;
+import android.system.ErrnoException;
+import android.system.OsConstants;
 import android.util.DisplayMetrics;
 
 import androidx.annotation.NonNull;
@@ -1095,22 +1097,49 @@ public class ResourceManager {
 			@NonNull File file, @Nullable Long modifiedTime) throws IOException {
 		file.getParentFile().mkdirs();
 		if (!isAssetEqualToFile(manager, name, file)) {
-			// native readers may have the file open or mapped, so it is replaced by a rename, never rewritten in place
-			File tempFile = FileUtils.getFileWithDownloadExtension(file);
-			InputStream is = manager.open(name, AssetManager.ACCESS_STREAMING);
-			FileOutputStream out = new FileOutputStream(tempFile);
 			try {
-				Algorithms.streamCopy(is, out);
-			} finally {
-				Algorithms.closeStream(out);
-				Algorithms.closeStream(is);
-			}
-			if (!tempFile.renameTo(file) && !FileUtils.replaceTargetFile(tempFile, file)) {
-				tempFile.delete();
-				throw new IOException("Failed to replace " + file.getAbsolutePath());
+				replaceFileWithAsset(manager, name, file);
+			} catch (IOException e) {
+				if (!isOutOfSpace(e)) {
+					throw e;
+				}
+				// no room for a second copy next to the old file, so it is rewritten in place as before
+				Algorithms.removeAllFiles(file);
+				writeAsset(manager, name, file);
 			}
 		}
 		return modifiedTime != null && file.setLastModified(modifiedTime);
+	}
+
+	private static void replaceFileWithAsset(@NonNull AssetManager manager, @NonNull String name,
+			@NonNull File file) throws IOException {
+		// native readers may have the file open or mapped, so it is replaced by a rename, never rewritten in place;
+		// each call writes its own temp file, so concurrent copies of the same asset do not interfere
+		File tempFile = File.createTempFile(file.getName() + ".", DOWNLOAD_EXT, file.getParentFile());
+		writeAsset(manager, name, tempFile);
+		if (file.isDirectory()) {
+			Algorithms.removeAllFiles(file);
+		}
+		if (!tempFile.renameTo(file)) {
+			tempFile.delete();
+			throw new IOException("Failed to replace " + file.getAbsolutePath());
+		}
+	}
+
+	private static void writeAsset(@NonNull AssetManager manager, @NonNull String name,
+			@NonNull File file) throws IOException {
+		try (InputStream is = manager.open(name, AssetManager.ACCESS_STREAMING);
+		     FileOutputStream out = new FileOutputStream(file)) {
+			Algorithms.streamCopy(is, out);
+		} catch (IOException e) {
+			// a partial file is never left behind: a truncated asset that exists would not be copied again
+			file.delete();
+			throw e;
+		}
+	}
+
+	private static boolean isOutOfSpace(@NonNull IOException e) {
+		return e.getCause() instanceof ErrnoException errnoException && errnoException.errno == OsConstants.ENOSPC;
 	}
 
 	private static boolean isAssetEqualToFile(@NonNull AssetManager manager, @NonNull String name,
