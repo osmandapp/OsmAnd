@@ -122,9 +122,9 @@
     <string name="poi_beverages">Napici</string>
     <string name="poi_butcher">Mesarnica;mesa;mesar;mesari;mesara</string>
     <string name="poi_farm">Poljoprivredna prodavnica;tezga na gazdinstvu;prodavnica na gazdinstvu</string>
-    <string name="poi_seafood">Ribarnica</string>
-    <string name="poi_confectionery">Konfekcija</string>
-    <string name="poi_supermarket">Supermarket</string>
+    <string name="poi_seafood">Ribarnica;riblja pijaca</string>
+    <string name="poi_confectionery">Prodavnica slatkiša;slatkiš;slatkiši;konditorski proizvodi;radnja sa slatkišima</string>
+    <string name="poi_supermarket">Supermarket;hipermarket</string>
     <string name="poi_tea">Čaj</string>
     <string name="poi_pasta">Testenine</string>
     <string name="poi_wine">Vinski podrum</string>
@@ -1434,10 +1434,10 @@
     <string name="poi_craft">Radionica</string>
     <string name="poi_convenience">Prodavnica mešovite robe;prodavnica mešovite robe;prodavnica mešovite robe;mini-market;mini-mart</string>
     <string name="poi_deli">Deli;delikatesna radnja</string>
-    <string name="poi_greengrocer">Piljara</string>
-    <string name="poi_ice_cream">Sladoledžinica</string>
+    <string name="poi_greengrocer">Piljara;povrće;piljar</string>
+    <string name="poi_ice_cream">Sladoledžinica;sladoled</string>
     <string name="poi_pastry">Poslastičarnica</string>
-    <string name="poi_dairy">Mlekara</string>
+    <string name="poi_dairy">Mlekara;mlečni proizvodi</string>
     <string name="poi_vending_machine">Automat za prodaju</string>
     <string name="poi_bag">Torbe</string>
     <string name="poi_bathroom_furnishing">Nameštaj za kupatilo</string>
