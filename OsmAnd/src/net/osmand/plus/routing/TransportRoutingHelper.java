@@ -486,6 +486,7 @@ public class TransportRoutingHelper {
 
 		public void stopCalculation() {
 			params.calculationProgress.isCancelled = true;
+			params.calculationProgress.memoryLimitExceeded = false; // a stop requested here wins over a stop by the memory guard
 		}
 
 		/**
@@ -530,12 +531,18 @@ public class TransportRoutingHelper {
 			ctx.calculationProgress = params.calculationProgress;
 			if (ctx.library != null && !settings.PT_SAFE_MODE.get() && !DISABLE_NATIVE) {
 				log.info("Public transport. Use native library");
-				NativeTransportRoutingResult[] nativeRes = library.runNativePTRouting(
-						MapUtils.get31TileNumberX(params.start.getLongitude()),
-						MapUtils.get31TileNumberY(params.start.getLatitude()),
-						MapUtils.get31TileNumberX(params.end.getLongitude()),
-						MapUtils.get31TileNumberY(params.end.getLatitude()),
-						cfg, ctx.calculationProgress);
+				NativeRoutingMemoryGuard memoryGuard = NativeRoutingMemoryGuard.start(params.ctx, ctx.calculationProgress);
+				NativeTransportRoutingResult[] nativeRes;
+				try {
+					nativeRes = library.runNativePTRouting(
+							MapUtils.get31TileNumberX(params.start.getLongitude()),
+							MapUtils.get31TileNumberY(params.start.getLatitude()),
+							MapUtils.get31TileNumberX(params.end.getLongitude()),
+							MapUtils.get31TileNumberY(params.end.getLatitude()),
+							cfg, ctx.calculationProgress);
+				} finally {
+					memoryGuard.stop();
+				}
 				return TransportRoutePlanner.convertToTransportRoutingResult(nativeRes, cfg);
 			} else {
 				log.info("Public transport. No native library present");
@@ -717,8 +724,13 @@ public class TransportRoutingHelper {
 				error = e.getMessage();
 				log.error(e);
 			}
+			OsmandApplication app = routingHelper.getApplication();
 			if (params.calculationProgress.isCancelled) {
-				return;
+				if (!params.calculationProgress.memoryLimitExceeded) {
+					return; // stopped by stopCalculation(); a stop by NativeRoutingMemoryGuard is an error to show
+				}
+				res = null;
+				error = app.getString(R.string.public_transport_route_out_of_memory);
 			}
 			synchronized (transportRoutingHelper) {
 				transportRoutingHelper.routes = res;
@@ -729,7 +741,6 @@ public class TransportRoutingHelper {
 					}
 				}
 			}
-			OsmandApplication app = routingHelper.getApplication();
 			if (res != null) {
 				transportRoutingHelper.setNewRoute(res);
 			} else if (error != null) {
