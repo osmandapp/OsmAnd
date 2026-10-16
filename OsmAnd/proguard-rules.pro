@@ -130,3 +130,17 @@
 -dontwarn javax.ws.rs.**
 -dontwarn org.immutables.value.**
 -dontwarn org.kxml2.io.**
+
+# Huawei flavor: HMS Core SDK references EMUI/HarmonyOS framework classes that exist only on Huawei
+# firmware, and optional Huawei SDKs it does not depend on (HiAnalytics, IAP Full, security-base).
+# Debug builds already run with the same unresolved references; without these lines R8 stops on missing classes.
+-dontwarn android.telephony.HwTelephonyManager
+-dontwarn com.huawei.android.**
+-dontwarn com.huawei.appgallery.log.LogAdaptor
+-dontwarn com.huawei.hianalytics.**
+-dontwarn com.huawei.hms.iapfull.**
+-dontwarn com.huawei.libcore.io.**
+-dontwarn com.huawei.ohos.localability.**
+-dontwarn com.huawei.secure.android.common.util.SafeBase64
+-dontwarn com.huawei.secure.android.common.util.SafeString
+-dontwarn com.huawei.system.BuildEx
