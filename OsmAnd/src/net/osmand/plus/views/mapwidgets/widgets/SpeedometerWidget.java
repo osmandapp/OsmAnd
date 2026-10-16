@@ -26,6 +26,7 @@ import android.text.TextPaint;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -307,6 +308,14 @@ public class SpeedometerWidget {
 				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_S);
 				speedLimitDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, isCanadaRegion() ? SPEED_LIMIT_DESCRIPTION_SIZE_CANADA_S : SPEED_LIMIT_DESCRIPTION_SIZE_USUAL);
 				break;
+		}
+		// MapHudLayout takes the grid size of the widget from its height, so the parent must not shrink it
+		// when the widget is moved up close to the top edge (#26217): use the real fixed height.
+		ViewGroup.LayoutParams params = view.getLayoutParams();
+		if (params != null) {
+			params.height = Math.max(speedometerLayoutParams.height, speedLimitLayoutParams.height)
+					+ view.getPaddingTop() + view.getPaddingBottom();
+			view.setLayoutParams(params);
 		}
 		speedLimitContainer.setAlpha(speedLimitContainer.getVisibility() == View.VISIBLE ? 1f : 0f);
 		AndroidUiHelper.updateVisibility(speedLimitContainer, false);
