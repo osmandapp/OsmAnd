@@ -29,8 +29,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class SQLiteTileSource implements ITileSource {
@@ -53,6 +56,11 @@ public class SQLiteTileSource implements ITileSource {
 	private static final String BIG_PLANET_TILE_NUMBERING = "BigPlanet";
 	private static final String TILESIZE = "tilesize";
 	private static final String TITLE = "title";
+
+	// files whose expired tiles were already deleted in this process: MapLayers.updateMapSource replaces the map
+	// source with a new instance of the same file on every MapActivity.onResume and closes the old one, and the
+	// cleanup (DELETE over all tiles and VACUUM, which rewrites the whole file) ran on the main thread each time
+	private static final Set<String> CLEARED_FILES = Collections.synchronizedSet(new HashSet<>());
 
 	private final OsmandApplication app;
 
@@ -702,7 +710,7 @@ public class SQLiteTileSource implements ITileSource {
 	
 	public synchronized void closeDB(){
 		LOG.debug("closeDB");
-		if(timeSupported) {
+		if (timeSupported && (file == null || !CLEARED_FILES.contains(file.getAbsolutePath()))) {
 			clearOld();
 		}
 		if(db != null){
@@ -722,6 +730,9 @@ public class SQLiteTileSource implements ITileSource {
 		LOG.debug(sql);
 		db.execSQL(sql);
 		db.execSQL("VACUUM");
+		if (file != null) {
+			CLEARED_FILES.add(file.getAbsolutePath());
+		}
 	}
 
 	@Override
