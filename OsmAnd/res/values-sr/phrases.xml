@@ -122,8 +122,8 @@
     <string name="poi_beverages">Продавница пића</string>
     <string name="poi_butcher">Месарница;меса;месар;месари;месара</string>
     <string name="poi_farm">Пољопривредна продавница;тезга на газдинству;продавница на газдинству</string>
-    <string name="poi_seafood">Продавница морске хране</string>
-    <string name="poi_confectionery">Конфекција</string>
+    <string name="poi_seafood">Рибарница;рибља пијаца</string>
+    <string name="poi_confectionery">Продавница слаткиша;слаткиш;слаткиши;кондиторски производи;радња са слаткишима</string>
     <string name="poi_supermarket">Супермаркет;Supermarket</string>
     <string name="poi_tea">Продавница чаја</string>
     <string name="poi_pasta">Продавница тестенина</string>
@@ -1434,10 +1434,10 @@
     <string name="poi_craft">Радионица</string>
     <string name="poi_convenience">Продавница потребштина;Mini-market;Мини-маркет</string>
     <string name="poi_deli">Дели;деликатесна радња</string>
-    <string name="poi_greengrocer">Продавница зеленила</string>
-    <string name="poi_ice_cream">Простор са сладоледом</string>
+    <string name="poi_greengrocer">Пиљара;поврће;пиљар</string>
+    <string name="poi_ice_cream">Простор са сладоледом;сладолед</string>
     <string name="poi_pastry">Продавница пецива</string>
-    <string name="poi_dairy">Млекара</string>
+    <string name="poi_dairy">Млекара;млечни производи</string>
     <string name="poi_vending_machine">Аутомат продаје</string>
     <string name="poi_bag">Продавница торби;putne torbe;путне торбе</string>
     <string name="poi_bathroom_furnishing">Намештај за купатило;oprema za kupatilo;Опрема за купатило</string>
