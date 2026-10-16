@@ -3005,7 +3005,7 @@
     <string name="osmand_cloud_help_descr">Потрібна допомога\? Звʼяжіться з нами через %1$s</string>
     <string name="osmand_cloud_create_account_descr">Введіть вашу адресу е-пошти, код підтвердження буде надіслано
 \nна неї, а ваші дані буде повʼязано з нею.</string>
-    <string name="osmand_cloud_login_descr">Введіть адресу е-пошти з якою ви реєструвалися. Одноразовий пароль буде надіслано на неї.</string>
+    <string name="osmand_cloud_login_descr">Будь ласка, введіть адресу електронної пошти, яку ви використовували під час реєстрації. На неї буде надіслано одноразовий пароль.</string>
     <string name="verify_email_address">Підтвердити електронну адресу</string>
     <string name="verify_email_address_descr">Код підтвердження надіслано на %1$s. Введіть його в поле знизу.</string>
     <string name="cloud_email_not_registered">Цю електронну адресу ще не зареєстровано для OsmAnd Cloud</string>
@@ -4110,13 +4110,13 @@
     <string name="delete_map_description">Видалити мапу %1$s?</string>
     <string name="maps_and_resources">Мапи й ресурси</string>
     <string name="shared_string_show_icon">Показати піктограму</string>
-    <string name="smart_folder_name_present">Така розумна папка вже є</string>
+    <string name="smart_folder_name_present">Така розумна тека вже існує</string>
     <string name="smart_folder_saved">Розумну теку збережено</string>
     <string name="add_smart_folder">Додати розумну папку</string>
     <string name="empty_name">Назви немає</string>
     <string name="edit_filter">Змінити фільтр</string>
     <string name="save_as_smart_folder">Зберегти як розумну папку</string>
-    <string name="delete_smart_folder_dialog_message">Це видалить розумну папку «%1$s». (Жодні треки не буде видалено.)</string>
+    <string name="delete_smart_folder_dialog_message">Розумну теку «%1$s» буде вилучено. (Треки не видаляться.)</string>
     <string name="average_glide_time_interval_desc">Вкажіть інтервал часу для усереднення ковзання.</string>
     <string name="release_4_6">• Android Auto: додано режим 3D \n\n • Треки: представлено фільтри та розумні папки, оптимізовано пам’ять для великих файлів \n\n • Покращено верхню та нижню панелі віджетів для розміщення всіх віджетів \n\n • Покращене управління місцевими ресурсами \n\n • Настроюване відображення кнопок для зовнішніх контролерів \n\n • Нові віджети: «Коефіцієнт ковзання» та «Позиція сонця» \n\n • OsmAnd Cloud: тепер доступ до видалених файлів \n\n • Покращене забарвлення доріжки в режимі нахилу з новим симетричним градієнтом \n\n • Вирішено проблеми з прозорим рядком стану \n\n • Додано підтримку віджета температури ANT+ \n\n • Представлено віджет «Доступна оперативна пам’ять»</string>
     <string name="map_widget_group_glide_desc">Віджети показують відношення ковзання до цілі або середнє відношення ковзання для поточної поїздки.</string>
@@ -5324,7 +5324,7 @@
     <string name="shared_string_file">Файл</string>
     <string name="shared_string_format">Фрмат</string>
     <string name="delete_media_title">Видалити медіа?</string>
-    <string name="multimedia_notes_view_descr">Ваші аудіо- та відеонотатки знаходяться в %1$s.</string>
+    <string name="multimedia_notes_view_descr">Ваші аудіо- та відеонотатки розміщені в %1$s.</string>
     <string name="shared_string_attached_to">Прикріплений до</string>
     <string name="media_not_attached_title">Поки що ні до чого не прикріплено</string>
     <string name="media_not_attached_descr">Додайте цей медіафайл до вибраного, щоб побачити його на карті.</string>
@@ -5492,4 +5492,13 @@
     <string name="rendering_attr_surface_laterite_name">Латерит</string>
     <string name="traffic_warning_red_light_camera">Камера фіксації проїзду на червоне світло</string>
     <string name="file_name_containes_illegal_char">Назва не може містити: %1$s</string>
+    <string name="storage_directory_visible_external">Видимий зовнішній накопичувач</string>
+    <string name="eta_group_header">Орієнтовний час прибуття</string>
+    <string name="travel_speed">Швидкість руху</string>
+    <string name="default_speed_descr">Використовується, коли немає даних про швидкість руху на цій дорозі або коли ви стоїте на місці.</string>
+    <string name="speed_range">Діапазон швидкостей</string>
+    <string name="speed_range_descr">Використовується як для розрахунку маршруту, так і для визначення часу прибуття.</string>
+    <string name="eta_adapt_to_my_speed">Підлаштувати під мою швидкість</string>
+    <string name="eta_adapt_to_my_speed_descr">Час прибуття розраховується на основі вашої швидкості за останні %1$s.</string>
+    <string name="eta_adapt_to_my_speed_off_descr">Час прибуття розраховується на основі очікуваної швидкості руху на кожній ділянці маршруту. Увімкніть цю функцію, щоб враховувати вашу фактичну швидкість руху.</string>
 </resources>

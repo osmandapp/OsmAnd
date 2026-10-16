@@ -5238,4 +5238,5 @@
     <string name="poi_payment_contactless_xlt_flor_yes">Érintésmentes Florain</string>
     <string name="poi_disaster_help_point">Katasztrófavédelmi segítségnyújtó pont</string>
     <string name="poi_hitchhiking_stop">Stoppolóhely</string>
+    <string name="poi_service_abbreviation">Közszolgáltatás</string>
 </resources>

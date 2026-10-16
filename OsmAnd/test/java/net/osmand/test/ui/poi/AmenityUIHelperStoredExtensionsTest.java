@@ -12,18 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
-import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
 import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.shared.data.AdditionalInfoBundle;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.test.common.AndroidTest;
+import net.osmand.util.Algorithms;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -69,7 +72,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 		Map<String, String> extensions = Collections.singletonMap(KNOWN_COLON_KEY, "+380441234567");
 
 		Map<String, AmenityInfoRow> rows = buildRows(extensions,
-				AdditionalInfoBundle.getExternalNamespaceKeys(extensions));
+				AdditionalInfoBundle.getGenericRowKeys(extensions));
 
 		AmenityInfoRow row = rows.get(KNOWN_COLON_KEY);
 		assertNotNull(row);
@@ -87,7 +90,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 		extensions.put("test:start_date", "1838");
 
 		Map<String, AmenityInfoRow> rows = buildRows(extensions,
-				AdditionalInfoBundle.getExternalNamespaceKeys(extensions));
+				AdditionalInfoBundle.getGenericRowKeys(extensions));
 
 		for (Map.Entry<String, String> entry : extensions.entrySet()) {
 			AmenityInfoRow row = rows.get(entry.getKey());
@@ -99,11 +102,34 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 	}
 
 	@Test
+	public void garminWaypointAddressGetsRowsWithValues() {
+		Map<String, String> extensions = new HashMap<>();
+		extensions.put("gpxx:street_address", "Schoodic Loop Rd");
+		extensions.put("gpxx:city", "Winter Harbor Twn");
+		extensions.put("gpxx:state", "Maine");
+		extensions.put("gpxx:country", "United States");
+		extensions.put("gpxx:postal_code", "04693");
+		extensions.put("phone", "207-288-1300");
+
+		Map<String, AmenityInfoRow> rows = buildRows(extensions,
+				AdditionalInfoBundle.getGenericRowKeys(extensions));
+
+		for (Map.Entry<String, String> entry : extensions.entrySet()) {
+			AmenityInfoRow row = rows.get(entry.getKey());
+			assertNotNull(entry.getKey(), row);
+			assertEquals(entry.getValue(), row.text);
+		}
+		assertEquals("Street address", rows.get("gpxx:street_address").textPrefix);
+		assertEquals("Postal code", rows.get("gpxx:postal_code").textPrefix);
+		assertTrue(rows.get("phone").isPhoneNumber);
+	}
+
+	@Test
 	public void genericFallbackIconOverridesCollidingPoiRule() {
 		Map<String, String> extensions = Collections.singletonMap(COLLIDING_CUSTOM_KEY, "value");
 
 		Map<String, AmenityInfoRow> rows = buildRows(extensions,
-				AdditionalInfoBundle.getExternalNamespaceKeys(extensions));
+				AdditionalInfoBundle.getGenericRowKeys(extensions));
 
 		AmenityInfoRow row = rows.get(COLLIDING_CUSTOM_KEY);
 		assertNotNull(row);
@@ -115,7 +141,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 		Map<String, String> extensions = Collections.singletonMap(AMENITY_ONLY_KEY, "internal value");
 
 		Map<String, AmenityInfoRow> rows = buildRows(extensions,
-				AdditionalInfoBundle.getExternalNamespaceKeys(Collections.emptyMap()));
+				AdditionalInfoBundle.getGenericRowKeys(Collections.emptyMap()));
 
 		assertFalse(rows.containsKey(AMENITY_ONLY_KEY));
 	}
@@ -129,7 +155,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 		storedExtensions.put(CUSTOM_KEY, "United States");
 
 		Map<String, AmenityInfoRow> rows = buildRows(storedExtensions,
-				AdditionalInfoBundle.getExternalNamespaceKeys(storedExtensions));
+				AdditionalInfoBundle.getGenericRowKeys(storedExtensions));
 
 		assertFalse(rows.containsKey(HIDDEN_KEY));
 		assertFalse(rows.containsKey(VISITED_DATE_KEY));
@@ -157,33 +183,37 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 		WptPt wpt = point.toWpt(app);
 
 		Set<String> fallbackKeys =
-				AdditionalInfoBundle.getExternalNamespaceKeys(wpt.getExtensionsToRead());
+				AdditionalInfoBundle.getGenericRowKeys(wpt.getExtensionsToRead());
 
 		assertEquals("internal point fields leaked into the custom fallback: " + fallbackKeys,
 				Collections.emptySet(), fallbackKeys);
 	}
 
 	@Test
-	public void unknownUnprefixedFieldDoesNotUseGenericFallback() {
+	public void unknownUnprefixedFieldUsesGenericFallback() {
 		Map<String, String> extensions = Collections.singletonMap(UNKNOWN_UNPREFIXED_KEY, "value");
 
-		Set<String> fallbackKeys = AdditionalInfoBundle.getExternalNamespaceKeys(extensions);
-		Map<String, AmenityInfoRow> rows = buildRows(extensions, fallbackKeys);
+		Map<String, AmenityInfoRow> rows = buildRows(extensions,
+				AdditionalInfoBundle.getGenericRowKeys(extensions));
 
-		assertTrue(fallbackKeys.isEmpty());
-		assertFalse(rows.containsKey(UNKNOWN_UNPREFIXED_KEY));
+		AmenityInfoRow row = rows.get(UNKNOWN_UNPREFIXED_KEY);
+		assertNotNull(row);
+		assertEquals("value", row.text);
 	}
 
 	@Test
 	public void genericFallbackShowsStoredValueAsIs() {
-		Map<String, String> extensions = Collections.singletonMap(CUSTOM_REFERENCE_KEY, "abc_def");
+		Map<String, String> extensions = new HashMap<>();
+		extensions.put(CUSTOM_REFERENCE_KEY, "abc_def");
+		extensions.put("test:status", "air_conditioning_yes");
 
 		Map<String, AmenityInfoRow> rows = buildRows(extensions,
-				AdditionalInfoBundle.getExternalNamespaceKeys(extensions));
+				AdditionalInfoBundle.getGenericRowKeys(extensions));
 
 		AmenityInfoRow row = rows.get(CUSTOM_REFERENCE_KEY);
 		assertNotNull(row);
 		assertEquals("abc_def", row.text);
+		assertEquals("air_conditioning_yes", rows.get("test:status").text);
 	}
 
 	/**
@@ -195,7 +225,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 		Map<String, String> extensions = Collections.singletonMap(CUSTOM_ROUTE_KEY, "1234");
 
 		Map<String, AmenityInfoRow> rows = buildRows(extensions,
-				AdditionalInfoBundle.getExternalNamespaceKeys(extensions));
+				AdditionalInfoBundle.getGenericRowKeys(extensions));
 
 		assertFalse(rows.containsKey(CUSTOM_ROUTE_KEY));
 	}
@@ -205,7 +235,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 		Map<String, String> extensions = Collections.singletonMap(FILTER_ONLY_KEY, "yes");
 
 		Map<String, AmenityInfoRow> rows = buildRows(extensions,
-				AdditionalInfoBundle.getExternalNamespaceKeys(extensions));
+				AdditionalInfoBundle.getGenericRowKeys(extensions));
 
 		assertFalse(rows.containsKey(FILTER_ONLY_KEY));
 	}
@@ -225,7 +255,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 
 		Map<String, AmenityInfoRow> rows = buildRows(
 				mergedExtensions,
-				AdditionalInfoBundle.getExternalNamespaceKeys(storedExtensions));
+				AdditionalInfoBundle.getGenericRowKeys(storedExtensions));
 
 		assertTrue(rows.containsKey(CUSTOM_KEY));
 		assertEquals("authentication_phone_call_number", rows.get(KNOWN_COLON_KEY).name);
@@ -242,23 +272,62 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 
 		Map<String, AmenityInfoRow> rows = buildRows(
 				normalizedExtensions,
-				AdditionalInfoBundle.getExternalNamespaceKeys(storedExtensions));
+				AdditionalInfoBundle.getGenericRowKeys(storedExtensions));
 
 		assertFalse(rows.containsKey(NORMALIZED_AMENITY_KEY));
 	}
 
+	@Test
+	public void cuisineRowIsTranslatedAsWithTheJavaTypes() {
+		Map<String, String> extensions = new HashMap<>();
+		extensions.put("type", "sustenance");
+		extensions.put("subtype", "restaurant");
+		extensions.put("cuisine", "pizza;burger");
+
+		AmenityInfoRow row = buildRows(extensions, Collections.emptySet()).get("cuisine");
+
+		assertNotNull(row);
+		assertEquals(app.getPoiTypes().getPoiTranslation("cuisine_pizza") + ", "
+				+ app.getPoiTypes().getPoiTranslation("cuisine_burger").toLowerCase(), row.text);
+	}
+
+	@Test
+	public void usMapsRecreationAreaRowFallsBackToItsKey() {
+		String key = "us_maps_recreation_area";
+		Map<String, String> extensions = Collections.singletonMap(key, "value");
+
+		AmenityInfoRow row = buildRows(extensions, AdditionalInfoBundle.getGenericRowKeys(extensions)).get(key);
+
+		assertNotNull(row);
+		assertEquals(Algorithms.capitalizeFirstLetterAndLowercase(key), row.textPrefix);
+	}
+
+	@Test
+	public void typeOfAGroupOpensTheSearchOfThatType() {
+		PoiCategory sustenance = app.getPoiTypes().getPoiCategoryByName("sustenance");
+
+		PoiUIFilter cuisine = app.getPoiFilters().getPoiTypeFilter("sustenance", "cuisine_pizza", true);
+		assertNotNull(cuisine);
+		assertEquals("cuisine:pizza", cuisine.getFilterByName());
+
+		PoiUIFilter cafe = app.getPoiFilters().getPoiTypeFilter("sustenance", "cafe", false);
+		assertNotNull(cafe);
+		assertTrue(cafe.accept(sustenance, "cafe"));
+		assertFalse(cafe.accept(sustenance, "restaurant"));
+	}
+
 	@NonNull
 	private Map<String, AmenityInfoRow> buildRows(@NonNull Map<String, String> extensions,
-	                                              @NonNull Set<String> externalNamespaceKeys) {
+	                                              @NonNull Set<String> genericRowKeys) {
 		Map<String, AmenityInfoRow> rows = new HashMap<>();
 		AmenityUIHelper helper = new AmenityUIHelper(mapActivity,
-				new AdditionalInfoBundle(app.getPoiTypes(), extensions)) {
+				new AdditionalInfoBundle(app.getKPoiTypes(), extensions)) {
 			@Override
 			public void buildAmenityRow(View view, AmenityInfoRow info) {
 				rows.put(info.key, info);
 			}
 		};
-		helper.setExternalNamespaceKeys(externalNamespaceKeys);
+		helper.setGenericRowKeys(genericRowKeys);
 		helper.buildInternal(new LinearLayout(mapActivity));
 		return rows;
 	}

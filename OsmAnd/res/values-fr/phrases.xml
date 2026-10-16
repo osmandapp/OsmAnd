@@ -13,7 +13,7 @@
     <string name="poi_aeroway_gate">Porte d\'embarquement</string>
     <string name="poi_runway">Piste d\'aérodrome</string>
     <string name="poi_aerodrome">Aéroport;Aérodrome</string>
-    <string name="poi_alcohol">Magasin de boissons alcoolisées;alcool;Magasin de vins et spiritueux;vins et spiritueux</string>
+    <string name="poi_alcohol">Magasin de boissons alcoolisées;alcool;spiritueux;Magasin de spiritueux;Caviste</string>
     <string name="poi_alpine_hut">Refuge de montagne gardé;Refuge;Refuge de montagne;cabane alpine</string>
     <string name="poi_ambulance_station">Station d\'ambulances;ambulances</string>
     <string name="poi_archaeological_site">Site archéologique;dolmen;menhir</string>
@@ -25,7 +25,7 @@
     <string name="poi_attraction">Attraction touristique;Attraction</string>
     <string name="poi_baby_hatch">Tour d\'abandon</string>
     <string name="poi_bailiff">Huissier</string>
-    <string name="poi_bakery">Boulangerie;fournil;pâtissier;boulange</string>
+    <string name="poi_bakery">Boulangerie;Boulangeries</string>
     <string name="poi_bank">Banque;microfinance</string>
     <string name="poi_bar">Bar</string>
     <string name="poi_military_barracks">Caserne</string>
@@ -42,14 +42,14 @@
     <string name="poi_beacon_special_purpose">Balise à usage spécifique</string>
     <string name="poi_beauty">Salon de beauté;beauté;Institut de beauté;soins de beauté</string>
     <string name="poi_beverages">Magasin de boissons</string>
-    <string name="poi_bicycle">Magasin de vélos</string>
+    <string name="poi_bicycle">Boutique de vélos;vélo;vélos;vélos;Boutique cycliste;Magasin de vélos</string>
     <string name="poi_bicycle_parking">Parking à vélos;Parking à vélo</string>
     <string name="poi_bicycle_rental">Location de vélos</string>
     <string name="poi_biergarten">Brasserie en plein air</string>
     <string name="poi_bitcoin_yes">Paiement par bitcoin</string>
     <string name="poi_boat_sharing">Partage de voiliers</string>
     <string name="poi_boatyard">Chantier naval</string>
-    <string name="poi_books">Librairie</string>
+    <string name="poi_books">Librairie;Librairie;Librairie</string>
     <string name="poi_boules">Jeu de boules</string>
     <string name="poi_boundary_stone">Borne frontière patrimoniale;Borne frontière</string>
     <string name="poi_boutique">Boutique de mode</string>
@@ -119,7 +119,7 @@
     <string name="poi_dam">Barrage</string>
     <string name="poi_dance_floor">Salle de danse</string>
     <string name="poi_military_danger_area">Zone dangereuse</string>
-    <string name="poi_deli">Épicerie fine</string>
+    <string name="poi_deli">Traiteur;Épicerie fine</string>
     <string name="poi_dentist">Dentiste</string>
     <string name="poi_department_store">Grand magasin</string>
     <string name="poi_diving">Plongeon</string>
@@ -148,7 +148,7 @@
     <string name="poi_fire_station">Caserne de pompiers;incendie</string>
     <string name="poi_first_aid">Premiers secours</string>
     <string name="poi_fishing">Magasin d\'articles de pêche;Magasin de pêche</string>
-    <string name="poi_florist">Fleuriste</string>
+    <string name="poi_florist">Fleuriste;fleurs;fleuriste;fleuristes;compositions florale;Magasin de fleurs</string>
     <string name="poi_fog_signal">Signal de brume</string>
     <string name="poi_food_court">Aire de restauration</string>
     <string name="poi_ford">Gué</string>
@@ -156,8 +156,8 @@
     <string name="poi_fuel">Station-service;essence;carburant</string>
     <string name="poi_funeral_directors">Pompes funèbres</string>
     <string name="poi_funicular">Funiculaire</string>
-    <string name="poi_furniture">Magasin d\'ameublement;meuble;Magasin de meubles</string>
-    <string name="poi_garden_centre">Jardinerie</string>
+    <string name="poi_furniture">Magasin de meubles;meubles;Entreprise d\'aménagement</string>
+    <string name="poi_garden_centre">Jardinerie;jardinerie</string>
     <string name="poi_shop_yes">Magasin</string>
     <string name="poi_gift">Boutique de cadeaux;Souvenirs;cadeaux</string>
     <string name="poi_glacier">Glacier</string>
@@ -289,7 +289,7 @@
     <string name="poi_sauna">Sauna</string>
     <string name="poi_school">École;primaire;maternelle;élémentaire;ecole;collège;secondaire;MEDERSA;médersa</string>
     <string name="poi_scuba_diving">Plongée sous-marine</string>
-    <string name="poi_seafood">Poissonnerie</string>
+    <string name="poi_seafood">Poissonnerie;Marché aux poissons</string>
     <string name="poi_second_hand">Magasin de produits d\'occasion;brocki;Boutique d\'objets d\'occasion</string>
     <string name="poi_disaster_response">Poste d\'intervention en cas de catastrophe</string>
     <string name="poi_shelter">Abri</string>
@@ -511,7 +511,7 @@
     <string name="poi_telephone_exchange">Central téléphonique</string>
     <string name="poi_power_transformer">Transformateur électrique</string>
     <string name="poi_motorcycle">Magasin de motos</string>
-    <string name="poi_frame">Magasin d\'encadrement</string>
+    <string name="poi_frame">Magasin d\'encadrement;encadrer</string>
     <string name="poi_bathroom_furnishing">Magasin d\'équipement pour la salle de bain;Mobilier de salle de bain</string>
     <string name="poi_bed">Magasin de literie</string>
     <string name="poi_clothes_children">Vêtements pour enfants;Vetements pour enfants</string>

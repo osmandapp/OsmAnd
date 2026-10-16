@@ -879,7 +879,7 @@ public class MenuBuilder {
 		textView.setTypeface(DEFAULT);
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
-		textView.setText(text);
+		textView.setText(attrs.isNumber() && text != null ? OsmAndFormatter.formatPhoneNumber(view.getContext(), text) : text);
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 
@@ -1093,7 +1093,8 @@ public class MenuBuilder {
 		}
 		ArrayList<String> values = collectMultiValues(text, "[,;]");
 		if (values.size() > 1) {
-			PoiAdditionalMultiValueDialogController.showDialog(mapActivity, title, values, this::openPhoneNumber);
+			PoiAdditionalMultiValueDialogController.showDialog(mapActivity, title, values,
+					OsmAndFormatter::formatPhoneNumber, this::openPhoneNumber);
 		} else if (values.size() == 1) {
 			openPhoneNumber(view.getContext(), values.get(0));
 		}

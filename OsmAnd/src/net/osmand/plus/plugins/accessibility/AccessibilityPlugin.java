@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.accessibility;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_ACCESSIBILITY;
 
 import android.app.Activity;
+import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -80,6 +82,13 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	@Override
 	public String getPrefsDescription() {
 		return app.getString(R.string.accessibility_prefs_descr);
+	}
+
+	@Override
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		if (mapActivity != null) {
+			mapActivity.updatePinchZoomMagnification();
+		}
 	}
 
 	@Override
