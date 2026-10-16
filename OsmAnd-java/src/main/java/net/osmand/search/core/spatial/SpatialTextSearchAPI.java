@@ -63,7 +63,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public boolean isSearchAvailable(SearchPhrase phrase) {
-		return !phrase.hasCustomSearchType(ObjectType.ONLINE_SEARCH);
+		return super.isSearchAvailable(phrase) && !phrase.hasCustomSearchType(ObjectType.ONLINE_SEARCH);
 	}
 
 	@Override
@@ -82,7 +82,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		LOG.info("Spatial search start call spatialTextSearch.searchAPI");
 		SpatialSearchResults results = spatialTextSearch.searchAPI(phrase.getFullSearchPhrase(), context);
 		LOG.info("Spatial search after call spatialTextSearch.searchAPI");
-		if (results.typoSuggestion != null && !resultMatcher.isCancelled()) {
+		if (results.typoSuggestion != null && phrase.isSearchTypeAllowed(ObjectType.SUGGESTION)
+				&& !resultMatcher.isCancelled()) {
 			// "did you mean": the corrected query, searched when the row is tapped
 			SearchResult suggestion = new SearchResult(phrase);
 			suggestion.objectType = ObjectType.SUGGESTION;
@@ -121,6 +122,9 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 				return false;
 			}
 			SearchResult searchResult = convertResult(phrase, context, spatialResult);
+			if (searchResult != null && !phrase.isSearchTypeAllowed(searchResult.objectType)) {
+				continue;
+			}
 			if (searchResult != null) {
 				publishWithParent(resultMatcher, searchResult);
 			} else {
@@ -228,12 +232,15 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 				? SpatialTextSearchSettings.defaultSettings()
 				: SpatialTextSearchSettings.suggestionSettings();
 		settings.LANG_DEDUPLICATE = phrase.getSettings().getLang();
+		settings.SEARCH_POI &= phrase.isSearchTypeAllowed(ObjectType.POI);
+		settings.SEARCH_POI_CATEGORIES &= phrase.isSearchTypeAllowed(ObjectType.POI_TYPE);
 		return settings;
 	}
 
 	@Override
 	public int getSearchPriority(SearchPhrase phrase) {
-		if (!phrase.isUnknownSearchWordPresent()
+		// the address tab lists are filtered by SpatialAddressByNameAPI and the street / building apis
+		if (!phrase.isUnknownSearchWordPresent() || phrase.isAddressSearch()
 				|| phrase.isLastWord(ObjectType.POI_TYPE, ObjectType.STREET)) {
 			return -1;
 		}
