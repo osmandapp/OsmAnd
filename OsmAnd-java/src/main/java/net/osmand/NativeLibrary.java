@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Supplier;
 
 import org.apache.commons.logging.Log;
 
@@ -49,11 +50,45 @@ import net.osmand.util.MapUtils;
 
 public class NativeLibrary {
 
-	// Native routing, public transport and GPX approximation read a map file through one shared descriptor,
-	// so two of them must not run at once
+	// Native routing, public transport, GPX approximation and native route tile loading read a map file through
+	// one shared descriptor, so two of them must not run at once
 	private static final Object ROUTING_LOCK = new Object();
 
 	public NativeLibrary() {
+	}
+
+	/**
+	 * Runs one native call that reads through the shared descriptor, under ROUTING_LOCK.
+	 * <p>
+	 * A calculation cancelled while it waited for the lock does not enter native code: every caller
+	 * discards the result of a cancelled calculation, so it gets {@code ifCancelled} right away. isCancelled
+	 * is a plain field set from another thread, read here the way the native loop and the Java planners
+	 * read it; a stale read only means one more native call, which the native loop ends itself.
+	 * <p>
+	 * While the call runs, {@link RouteCalculationProgress#nativeCallRunning} is set, so that a memory guard
+	 * measures the native heap only while this calculation, and no other, is inside native code. The flag
+	 * changes under the progress monitor, which the guard holds while it checks the flag and measures.
+	 */
+	private static <T> T nativeCall(RouteCalculationProgress progress, T ifCancelled, Supplier<T> call) {
+		synchronized (ROUTING_LOCK) {
+			if (progress != null && progress.isCancelled) {
+				return ifCancelled;
+			}
+			setNativeCallRunning(progress, true);
+			try {
+				return call.get();
+			} finally {
+				setNativeCallRunning(progress, false);
+			}
+		}
+	}
+
+	private static void setNativeCallRunning(RouteCalculationProgress progress, boolean running) {
+		if (progress != null) {
+			synchronized (progress) {
+				progress.nativeCallRunning = running;
+			}
+		}
 	}
 
 	public static class RenderingGenerationResult {
@@ -251,9 +286,8 @@ public class NativeLibrary {
 
 	public NativeTransportRoutingResult[] runNativePTRouting(int sx31, int sy31, int ex31, int ey31,
 	                                                         TransportRoutingConfiguration cfg, RouteCalculationProgress progress) {
-		synchronized (ROUTING_LOCK) {
-			return nativeTransportRouting(new int[]{sx31, sy31, ex31, ey31}, cfg, progress);
-		}
+		return nativeCall(progress, new NativeTransportRoutingResult[0],
+				() -> nativeTransportRouting(new int[]{sx31, sy31, ex31, ey31}, cfg, progress));
 	}
 
 	public RouteSegmentResult[] runNativeRouting(RoutingContext c, HHRoutingConfig hhRoutingConfig, RouteRegion[] regions, boolean basemap) {
@@ -262,11 +296,10 @@ public class NativeLibrary {
 			setHHNativeFilterAndParameters(c);
 		}
 		final float CPP_NO_DIRECTION = -2 * (float) Math.PI;
-		synchronized (ROUTING_LOCK) {
-			return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ?
-					CPP_NO_DIRECTION : c.config.initialDirection.floatValue(),
-					regions, basemap, c.requestNativePrepareResult);
-		}
+		return nativeCall(c.calculationProgress, new RouteSegmentResult[0],
+				() -> nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ?
+						CPP_NO_DIRECTION : c.config.initialDirection.floatValue(),
+						regions, basemap, c.requestNativePrepareResult));
 	}
 
 	private void setHHNativeFilterAndParameters(RoutingContext ctx) {
@@ -297,10 +330,10 @@ public class NativeLibrary {
 		for (int i = 0; i < pointsSize; i++) {
 			nativePoints[i] = new NativeGpxPointApproximation(gpxPoints.get(i));
 		}
-		NativeGpxRouteApproximationResult nativeResult;
-		synchronized (ROUTING_LOCK) {
-			nativeResult = nativeSearchGpxRoute(gCtx.ctx, nativePoints, regions, useGeo);
-		}
+		// cancelled while waiting for the lock: an empty result leaves gCtx as it was
+		NativeGpxRouteApproximationResult nativeResult = nativeCall(gCtx.ctx.calculationProgress,
+				new NativeGpxRouteApproximationResult(),
+				() -> nativeSearchGpxRoute(gCtx.ctx, nativePoints, regions, useGeo));
 		for (NativeGpxPointApproximation point : nativeResult.finalPoints) {
 			gCtx.finalPoints.add(point.convertToGpxPoint());
 		}
@@ -339,10 +372,19 @@ public class NativeLibrary {
 	}
 
 	public NativeRouteSearchResult loadRouteRegion(RouteSubregion sub, boolean loadObjects) {
+		return loadRouteRegion(sub, loadObjects, null);
+	}
+
+	/**
+	 * Loads a route tile natively. It reads the same descriptor as the native planners, so it goes through
+	 * the lock; a calculation cancelled while waiting gets an empty tile instead of the data.
+	 */
+	public NativeRouteSearchResult loadRouteRegion(RouteSubregion sub, boolean loadObjects, RouteCalculationProgress progress) {
 		if (sub.routeReg.getFilePointer() > Integer.MAX_VALUE) {
 			throw new IllegalStateException("C++ doesn't support files > 2 GB");
 		}
-		NativeRouteSearchResult lr = loadRoutingData(sub.routeReg, sub.routeReg.getName(), (int) sub.routeReg.getFilePointer(), sub, loadObjects);
+		NativeRouteSearchResult lr = nativeCall(progress, new NativeRouteSearchResult(0, new RouteDataObject[0]),
+				() -> loadRoutingData(sub.routeReg, sub.routeReg.getName(), (int) sub.routeReg.getFilePointer(), sub, loadObjects));
 		if (lr != null && lr.nativeHandler != 0) {
 			lr.region = sub;
 		}
@@ -408,9 +450,8 @@ public class NativeLibrary {
 	}
 
 	public boolean needRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates){
-		synchronized (ROUTING_LOCK) {
-			return nativeNeedRequestPrivateAccessRouting(ctx, x31Coordinates, y31Coordinates);
-		}
+		return nativeCall(ctx.calculationProgress, false,
+				() -> nativeNeedRequestPrivateAccessRouting(ctx, x31Coordinates, y31Coordinates));
 	}
 	protected static native boolean nativeNeedRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates);
 

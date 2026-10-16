@@ -17,6 +17,13 @@ import org.apache.commons.logging.Log;
  * the process dies inside the allocator. The guard watches the native heap while a route is
  * calculated and cancels the calculation (the native loop polls isCancelled) when it reaches
  * the budget, so the user gets an error instead of a crash and a restart loop.
+ * <p>
+ * The heap is process-wide and native calculations are serialized by NativeLibrary.ROUTING_LOCK,
+ * so the guard measures only while this calculation is inside native code
+ * (RouteCalculationProgress.nativeCallRunning); while it waits for the lock, the memory belongs to
+ * the calculation holding it. NativeLibrary changes the flag under the progress monitor and clears
+ * it before releasing the lock, and the guard holds that monitor while it checks the flag, measures
+ * and cancels, so a measurement can never see another calculation's memory.
  */
 class NativeRoutingMemoryGuard {
 
@@ -62,15 +69,19 @@ class NativeRoutingMemoryGuard {
 
 	private void watch() {
 		while (!progress.isCancelled) {
-			long allocated = Debug.getNativeHeapAllocatedSize();
-			peakAllocated = Math.max(peakAllocated, allocated);
-			if (allocated > budget) {
-				exceeded = true;
-				progress.memoryLimitExceeded = true;
-				progress.isCancelled = true;
-				log.error("Route calculation stopped: native heap " + allocated / MB
-						+ " MB, budget " + budget / MB + " MB");
-				break;
+			synchronized (progress) {
+				if (progress.nativeCallRunning) {
+					long allocated = Debug.getNativeHeapAllocatedSize();
+					peakAllocated = Math.max(peakAllocated, allocated);
+					if (allocated > budget) {
+						exceeded = true;
+						progress.memoryLimitExceeded = true;
+						progress.isCancelled = true;
+						log.error("Route calculation stopped: native heap " + allocated / MB
+								+ " MB, budget " + budget / MB + " MB");
+						break;
+					}
+				}
 			}
 			try {
 				Thread.sleep(CHECK_INTERVAL_MS);

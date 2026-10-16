@@ -47,6 +47,7 @@ public class RouteCalculationProgress implements Serializable {
 	
 	public boolean isCancelled;
 	public boolean memoryLimitExceeded; // set with isCancelled when the memory guard stops the calculation
+	public boolean nativeCallRunning; // true while NativeLibrary runs native code for this calculation; read and written under this object's monitor
 	public boolean requestPrivateAccessRouting;
 
 	public long routeCalculationStartTime;
