@@ -64,6 +64,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -1092,17 +1093,66 @@ public class ResourceManager {
 
 	public static boolean copyAssets(@NonNull AssetManager manager, @NonNull String name,
 			@NonNull File file, @Nullable Long modifiedTime) throws IOException {
-		if (file.exists()) {
-			Algorithms.removeAllFiles(file);
-		}
 		file.getParentFile().mkdirs();
-		InputStream is = manager.open(name, AssetManager.ACCESS_STREAMING);
-		FileOutputStream out = new FileOutputStream(file);
-		Algorithms.streamCopy(is, out);
-		Algorithms.closeStream(out);
-		Algorithms.closeStream(is);
-
+		if (!isAssetEqualToFile(manager, name, file)) {
+			// native readers may have the file open or mapped, so it is replaced by a rename, never rewritten in place
+			File tempFile = FileUtils.getFileWithDownloadExtension(file);
+			InputStream is = manager.open(name, AssetManager.ACCESS_STREAMING);
+			FileOutputStream out = new FileOutputStream(tempFile);
+			try {
+				Algorithms.streamCopy(is, out);
+			} finally {
+				Algorithms.closeStream(out);
+				Algorithms.closeStream(is);
+			}
+			if (!tempFile.renameTo(file) && !FileUtils.replaceTargetFile(tempFile, file)) {
+				tempFile.delete();
+				throw new IOException("Failed to replace " + file.getAbsolutePath());
+			}
+		}
 		return modifiedTime != null && file.setLastModified(modifiedTime);
+	}
+
+	private static boolean isAssetEqualToFile(@NonNull AssetManager manager, @NonNull String name,
+			@NonNull File file) {
+		if (!file.isFile()) {
+			return false;
+		}
+		try (InputStream assetStream = manager.open(name, AssetManager.ACCESS_STREAMING);
+		     InputStream fileStream = new FileInputStream(file)) {
+			byte[] assetBuffer = new byte[64 * 1024];
+			byte[] fileBuffer = new byte[64 * 1024];
+			while (true) {
+				int assetRead = readFully(assetStream, assetBuffer);
+				int fileRead = readFully(fileStream, fileBuffer);
+				if (assetRead != fileRead) {
+					return false;
+				}
+				if (assetRead == 0) {
+					return true;
+				}
+				for (int i = 0; i < assetRead; i++) {
+					if (assetBuffer[i] != fileBuffer[i]) {
+						return false;
+					}
+				}
+			}
+		} catch (IOException e) {
+			// an unreadable file is rewritten; an unreadable asset fails in the copy itself
+			return false;
+		}
+	}
+
+	private static int readFully(@NonNull InputStream stream, @NonNull byte[] buffer) throws IOException {
+		int total = 0;
+		while (total < buffer.length) {
+			int read = stream.read(buffer, total, buffer.length - total);
+			if (read < 0) {
+				break;
+			}
+			total += read;
+		}
+		return total;
 	}
 
 	public AmenitySearcher getAmenitySearcher() {
