@@ -5523,4 +5523,5 @@
     <string name="eta_adapt_to_my_speed">Tilpas til min hastighed</string>
     <string name="eta_adapt_to_my_speed_descr">Ankomsttidspunktet beregnes ud fra din hastighed de sidste %1$s.</string>
     <string name="eta_adapt_to_my_speed_off_descr">Ankomsttiden er baseret på den forventede hastighed på hver vejstrækning på ruten. Slå til for at basere den på, hvor hurtigt du rent faktisk bevæger dig.</string>
+    <string name="select_tracks">Vælg spor</string>
 </resources>
