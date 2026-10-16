@@ -49,6 +49,9 @@ import net.osmand.util.MapUtils;
 
 public class NativeLibrary {
 
+	// Native routing, public transport and GPX approximation read a map file through one shared descriptor,
+	// so two of them must not run at once
+	private static final Object ROUTING_LOCK = new Object();
 
 	public NativeLibrary() {
 	}
@@ -248,7 +251,9 @@ public class NativeLibrary {
 
 	public NativeTransportRoutingResult[] runNativePTRouting(int sx31, int sy31, int ex31, int ey31,
 	                                                         TransportRoutingConfiguration cfg, RouteCalculationProgress progress) {
-		return nativeTransportRouting(new int[]{sx31, sy31, ex31, ey31}, cfg, progress);
+		synchronized (ROUTING_LOCK) {
+			return nativeTransportRouting(new int[]{sx31, sy31, ex31, ey31}, cfg, progress);
+		}
 	}
 
 	public RouteSegmentResult[] runNativeRouting(RoutingContext c, HHRoutingConfig hhRoutingConfig, RouteRegion[] regions, boolean basemap) {
@@ -257,9 +262,11 @@ public class NativeLibrary {
 			setHHNativeFilterAndParameters(c);
 		}
 		final float CPP_NO_DIRECTION = -2 * (float) Math.PI;
-		return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ?
-				CPP_NO_DIRECTION : c.config.initialDirection.floatValue(),
-				regions, basemap, c.requestNativePrepareResult);
+		synchronized (ROUTING_LOCK) {
+			return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ?
+					CPP_NO_DIRECTION : c.config.initialDirection.floatValue(),
+					regions, basemap, c.requestNativePrepareResult);
+		}
 	}
 
 	private void setHHNativeFilterAndParameters(RoutingContext ctx) {
@@ -290,7 +297,10 @@ public class NativeLibrary {
 		for (int i = 0; i < pointsSize; i++) {
 			nativePoints[i] = new NativeGpxPointApproximation(gpxPoints.get(i));
 		}
-		NativeGpxRouteApproximationResult nativeResult = nativeSearchGpxRoute(gCtx.ctx, nativePoints, regions, useGeo);
+		NativeGpxRouteApproximationResult nativeResult;
+		synchronized (ROUTING_LOCK) {
+			nativeResult = nativeSearchGpxRoute(gCtx.ctx, nativePoints, regions, useGeo);
+		}
 		for (NativeGpxPointApproximation point : nativeResult.finalPoints) {
 			gCtx.finalPoints.add(point.convertToGpxPoint());
 		}
@@ -398,7 +408,9 @@ public class NativeLibrary {
 	}
 
 	public boolean needRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates){
-		return nativeNeedRequestPrivateAccessRouting(ctx, x31Coordinates, y31Coordinates);
+		synchronized (ROUTING_LOCK) {
+			return nativeNeedRequestPrivateAccessRouting(ctx, x31Coordinates, y31Coordinates);
+		}
 	}
 	protected static native boolean nativeNeedRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates);
 
