@@ -529,6 +529,7 @@ object GpxUtilities {
 			}
 			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1")
 			serializer.attribute(null, "xmlns:osmand", "https://osmand.net/docs/technical/osmand-file-formats/osmand-gpx")
+			serializer.attribute(null, "xmlns:pwr", "http://www.garmin.com/xmlschemas/PowerExtension/v1")
 			serializer.attribute(
 				null,
 				"xmlns:gpxtpx",
@@ -849,6 +850,7 @@ object GpxUtilities {
 		assignExtensionWriter(p, extensions, EXTENSIONS_WRITER_KEY, false)
 		writeExtensions(serializer, null, p, null)
 		p.removeExtensionsWriter(EXTENSIONS_WRITER_KEY)
+		p.removeExtensionsWriter("pwr_extensions")
 		if (!keepTrackPointExtension) {
 			p.removeExtensionsWriter(GPXTPX_TRACK_POINT_EXTENSION)
 		}
@@ -867,9 +869,12 @@ object GpxUtilities {
 	) {
 		val regularExtensions = HashMap<String, String>()
 		val gpxtpxExtensions = HashMap<String, String>()
+		val powerPrefixExtensions = HashMap<String, String>()
 		for ((key, value) in extensions) {
 			if (key.startsWith(GPXTPX_PREFIX)) {
 				gpxtpxExtensions[key] = value
+			} else if (key.startsWith("pwr:")) {
+				powerPrefixExtensions[key] = value
 			} else {
 				regularExtensions[key] = value
 			}
@@ -881,6 +886,9 @@ object GpxUtilities {
 		}
 		if (regularExtensions.isNotEmpty()) {
 			wptPt.setExtensionsWriter(regularExtensionsKey, createExtensionsWriter(regularExtensions, true))
+		}
+		if (powerPrefixExtensions.isNotEmpty()) {
+			wptPt.setExtensionsWriter("pwr_extensions", createExtensionsWriter(powerPrefixExtensions, false))
 		}
 		if (gpxtpxExtensions.isNotEmpty()) {
 			wptPt.setExtensionsWriter(GPXTPX_TRACK_POINT_EXTENSION, createGpxTpxExtensionsWriter(gpxtpxExtensions, false))
