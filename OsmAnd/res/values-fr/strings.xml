@@ -5397,4 +5397,5 @@
     <string name="eta_adapt_to_my_speed">Prendre en compte ma vitesse</string>
     <string name="eta_adapt_to_my_speed_descr">L\'heure d\'arrivée estimée est basée sur votre vitesse des dernières %1$s.</string>
     <string name="eta_adapt_to_my_speed_off_descr">L\'heure d\'arrivée est calculée à partir d\'une vitesse estimée pour chaque route. Activez pour basculer ce calcul sur votre vitesse réelle.</string>
+    <string name="select_tracks">Sélectionner les traces</string>
 </resources>
