@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -504,6 +505,10 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			Map<String, List<PoiType>> additionalsMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 			extractPoiAdditionals(poiAdditionals.values(), additionalsMap, excludedPoiAdditionalCategories, false);
 			extractPoiAdditionals(otherAdditionalCategories, additionalsMap, excludedPoiAdditionalCategories, false);
+			// labels depend on all values of a category, not only on the visible ones
+			Map<String, List<PoiType>> allAdditionalsMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+			extractPoiAdditionals(poiAdditionals.values(), allAdditionalsMap, excludedPoiAdditionalCategories, true);
+			extractPoiAdditionals(otherAdditionalCategories, allAdditionalsMap, excludedPoiAdditionalCategories, true);
 
 			if (!additionalsMap.isEmpty()) {
 				for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
@@ -525,6 +530,30 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						categoryIconId = R.drawable.ic_action_folder_stroke;
 					}
 
+					List<PoiType> allCategoryPoiAdditionals = allAdditionalsMap.get(category);
+					if (allCategoryPoiAdditionals == null) {
+						allCategoryPoiAdditionals = entry.getValue();
+					}
+					List<String> translations = new ArrayList<>();
+					List<String> osmValues = new ArrayList<>();
+					for (PoiType poiType : allCategoryPoiAdditionals) {
+						translations.add(poiAdditionalsTranslations.get(poiType));
+						osmValues.add(poiType.getOsmValue());
+					}
+					if (PoiAdditionalLabels.isSingleYes(osmValues)) {
+						PoiType poiType = allCategoryPoiAdditionals.get(0);
+						String keyName = poiType.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT);
+						String label = PoiAdditionalLabels.getSwitchLabel(translations.get(0), categoryLocalizedName);
+						items.add(new PoiFilterListItem(PoiFilterListItemType.SWITCH_ITEM, categoryIconId, label,
+								++groupId, false, false, selectedPoiAdditionals.contains(keyName), category, keyName));
+						continue;
+					}
+					List<String> labels = PoiAdditionalLabels.getGroupLabels(translations, osmValues);
+					Map<PoiType, String> poiAdditionalLabels = new HashMap<>();
+					for (int i = 0; i < allCategoryPoiAdditionals.size(); i++) {
+						poiAdditionalLabels.put(allCategoryPoiAdditionals.get(i), labels.get(i));
+					}
+
 					items.add(new PoiFilterListItem(PoiFilterListItemType.GROUP_HEADER,
 							categoryIconId, categoryLocalizedName, ++groupId, true, expanded, false, category, null));
 					List<PoiType> categoryPoiAdditionals = new ArrayList<>(entry.getValue());
@@ -539,9 +568,12 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 					});
 					for (PoiType poiType : categoryPoiAdditionals) {
 						String keyName = poiType.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT);
-						String translation = poiAdditionalsTranslations.get(poiType);
+						String label = poiAdditionalLabels.get(poiType);
+						if (label == null) {
+							label = poiAdditionalsTranslations.get(poiType);
+						}
 						items.add(new PoiFilterListItem(PoiFilterListItemType.CHECKBOX_ITEM,
-								0, translation, groupId, false, false, selectedPoiAdditionals.contains(keyName), category, keyName));
+								0, label, groupId, false, false, selectedPoiAdditionals.contains(keyName), category, keyName));
 					}
 					if (!showAll && !categoryPoiAdditionals.isEmpty()) {
 						items.add(new PoiFilterListItem(PoiFilterListItemType.BUTTON_ITEM,
