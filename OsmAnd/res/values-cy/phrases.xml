@@ -169,7 +169,7 @@
     <string name="poi_fuel_e10">E10</string>
     <string name="poi_fuel_e20">E20</string>
     <string name="poi_fuel_e85">E85</string>
-    <string name="poi_aerodrome">Maes Awyr;Maes Awyr</string>
+    <string name="poi_aerodrome">Maes Awyr</string>
     <string name="poi_bicycle_parking">Parcio beiciau</string>
     <string name="poi_aerialway_gondola">Gondola</string>
     <string name="poi_speed_camera">Camera cyflymder</string>
@@ -332,7 +332,7 @@
     <string name="poi_public_transport_platform_bus">Arhosfan bysiau</string>
     <string name="poi_public_transport_station">Gorsaf drafnidiaeth cyhoeddus</string>
     <string name="poi_bus_station">Gorsaf fysiau</string>
-    <string name="poi_railway_station">Gorsaf reilffordd;Gorsaf reilffordd;Gorsaf reilffordd</string>
+    <string name="poi_railway_station">Gorsaf reilffordd</string>
     <string name="poi_railway_platform">Platfform rheilffordd;Platfform trên</string>
     <string name="poi_subway_entrance">Mynedfa trenau tanddaearol</string>
     <string name="poi_subway_station">Iawn;Gorsaf trenau tanddaearol</string>
@@ -1237,12 +1237,12 @@
     <string name="poi_route_ferry_ref">Fferi</string>
     <string name="poi_route_subway_ref">Trên tanddaearol</string>
     <string name="poi_route_railway_ref">Llwybr rheilffordd</string>
-    <string name="poi_service_bicycle_repair_yes">Atgyweirio;Trwsio beiciau;Trwsio beiciau</string>
+    <string name="poi_service_bicycle_repair_yes">Atgyweirio;Trwsio beiciau</string>
     <string name="poi_service_bicycle_repair_no">Trwsio beiciau: na</string>
     <string name="poi_service_bicycle_rental_no">Rhentu beic: na</string>
     <string name="poi_service_bicycle_pump_no">Pwmp beic: na</string>
     <string name="poi_service_bicycle_charging_no">Gwefru: na</string>
-    <string name="poi_bicycle_repair_station">Gorsaf atgyweirio beiciau;Gorsaf hunan-atgyweirio beiciau;Gorsaf atgyweirio beiciau;Gorsaf hunan-atgyweirio beiciau</string>
+    <string name="poi_bicycle_repair_station">Gorsaf atgyweirio beiciau;Gorsaf hunan-atgyweirio beiciau</string>
     <string name="poi_training_music">Hyfforddiant: cerddoriaeth</string>
     <string name="poi_training_dance">Hyfforddiant: dawns</string>
     <string name="poi_industrial_wellsite">Math: safle ffynnon</string>
@@ -2962,13 +2962,13 @@
     <string name="poi_shop_additional_yes">Siop</string>
     <string name="poi_service_bicycle_retail_no">Manwerthu beiciau: na</string>
     <string name="poi_service_bicycle_retail_yes">Manwerthu;Manwerthu beiciau</string>
-    <string name="poi_service_bicycle_diy_yes">Offer ar gyfer atgyweirio dy hun;Offer DIY Beic;Offer DIY Beic</string>
+    <string name="poi_service_bicycle_diy_yes">Offer ar gyfer atgyweirio dy hun;Offer DIY Beic</string>
     <string name="poi_service_bicycle_diy_no">Offer beic ar gyfer atgyweirio dy hun: na</string>
     <string name="poi_service_bicycle_cleaning_no">Glanhau beiciau: na</string>
     <string name="poi_service_bicycle_cleaning_yes">Glanhau;Glanhau beiciau</string>
-    <string name="poi_service_bicycle_chaintool_yes">Teclyn cadwyn;teclyn cadwyn beic;Teclyn cadwyn beic</string>
+    <string name="poi_service_bicycle_chaintool_yes">Teclyn cadwyn;teclyn cadwyn beic</string>
     <string name="poi_service_bicycle_chaintool_no">Teclyn cadwyn beic: na</string>
-    <string name="poi_service_bicycle_second_hand_yes">Manwerthu beiciau ail law;Beic ail law;Beic ail law</string>
+    <string name="poi_service_bicycle_second_hand_yes">Manwerthu beiciau ail law;Beic ail law</string>
     <string name="poi_wildlife_hide">Lle i wylio bywyd gwyllt</string>
     <string name="poi_training_language">Hyfforddiant: iaith</string>
     <string name="poi_training_sport">Hyfforddiant: chwaraeon</string>
@@ -3484,7 +3484,7 @@
     <string name="poi_craft_handicraft">Crefftau</string>
     <string name="poi_craft_hvac">Gwresogi, awyru, aerdymheru</string>
     <string name="poi_craft_insulation">Inswleiddiad</string>
-    <string name="poi_toilets">Toiledau;Toiledau</string>
+    <string name="poi_toilets">Toiledau</string>
     <string name="poi_shower">Cawodydd</string>
     <string name="poi_sauna">Sawna</string>
     <string name="poi_crematorium">Amlosgfa</string>
@@ -4300,7 +4300,7 @@
     <string name="poi_abandoned">Wedi\'i adael</string>
     <string name="poi_vending_vouchers">Talebau</string>
     <string name="poi_service_bicycle_second_hand_no">Manwerthu beiciau ail-law: na</string>
-    <string name="poi_service_bicycle_charging_yes">Codi tâl: oes;Codi tâl am feiciau;Codi tâl am feiciau;Codi tâl am feiciau trydan;Codi tâl am feiciau trydan</string>
+    <string name="poi_service_bicycle_charging_yes">Codi tâl: oes;Codi tâl am feiciau;Codi tâl am feiciau trydan</string>
     <string name="poi_crop_raspberry">Cnwd: raspbmafonerry</string>
     <string name="poi_crop_tobacco">Cnwd: tybaco</string>
     <string name="poi_crop_strawberry">Cnwd: mefus</string>

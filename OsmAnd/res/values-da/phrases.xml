@@ -809,7 +809,7 @@
     <string name="poi_garden_furniture">Havemøbler</string>
     <string name="poi_leather">Lædervarebutik</string>
     <string name="poi_music">Musikforretning</string>
-    <string name="poi_tyres">Dæk;Dæk;Dæk;Dækbutik;Dæk</string>
+    <string name="poi_tyres">Dæk;Dækbutik</string>
     <string name="poi_energy">Energibutik</string>
     <string name="poi_watches">Urbutik</string>
     <string name="poi_games">Spil</string>
@@ -1777,7 +1777,7 @@
     <string name="poi_service_bicycle_cleaning_no">Cykelrengøring: nej</string>
     <string name="poi_service_bicycle_chaintool_yes">Kædeværktøj;Cykelkædeværktøj</string>
     <string name="poi_service_bicycle_chaintool_no">Cykelkædeværktøj: nej</string>
-    <string name="poi_service_bicycle_second_hand_yes">Salg af brugte cykler;Brugte cykler;Brugte cykler</string>
+    <string name="poi_service_bicycle_second_hand_yes">Salg af brugte cykler;Brugte cykler</string>
     <string name="poi_service_bicycle_second_hand_no">Salg af brugte cykler: nej</string>
     <string name="poi_wildlife_hide">Vildtskjul</string>
     <string name="poi_training_language">Uddannelse: sprog</string>
@@ -3418,7 +3418,7 @@
     <string name="poi_service_vehicle_glass_yes">glas</string>
     <string name="poi_service_vehicle_motor_yes">Motor</string>
     <string name="poi_service_vehicle_insurance_yes">Forsikring</string>
-    <string name="poi_service_vehicle_tyres_yes">Dæk;Dæk;Dæk;Dæk</string>
+    <string name="poi_service_vehicle_tyres_yes">Dæk</string>
     <string name="poi_aerialway_zip_line">Zipline</string>
     <string name="poi_climbing_adventure">Klatreeventyr</string>
     <string name="poi_via_ferrata">Via ferrata</string>
@@ -3669,7 +3669,7 @@
     <string name="poi_moped_designated">Forbeholdt;Forbeholdt knallerter</string>
     <string name="poi_mofa_yes">Ja:Knallert-45</string>
     <string name="poi_mofa_designated">Forbeholdt;Forbeholdt knallert-45</string>
-    <string name="poi_hgv_yes">Ja;Tung Lastbil;Lastbil;Lastbil</string>
+    <string name="poi_hgv_yes">Ja;Tung Lastbil;Lastbil</string>
     <string name="poi_hgv_destination">Destination;Lastbiladgang til destination</string>
     <string name="poi_hgv_permissive">Tilladt;Lastbiladgang tilladt</string>
     <string name="poi_hgv_designated">Forbeholdt;Forbeholdt lastbiler</string>

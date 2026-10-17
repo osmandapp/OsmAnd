@@ -4743,7 +4743,7 @@
     <string name="poi_photo_booth">Cabina fotográfica;Fotomatón</string>
     <string name="poi_us_maps_recreation_area_activity_poi">Punto de Interés</string>
     <string name="poi_us_maps_recreation_area_activity_scenic_overlook">Mirador;Vista panorámica</string>
-    <string name="poi_us_maps_recreation_area_activity_day_use_site">Área de uso diurno;Sitio de uso diurno;Área de uso diurno;Área recreativa de uso diurno;Sitio recreativo de uso diurno</string>
+    <string name="poi_us_maps_recreation_area_activity_day_use_site">Área de uso diurno;Sitio de uso diurno;Área recreativa de uso diurno;Sitio recreativo de uso diurno</string>
     <string name="poi_us_maps_recreation_area_facility_cabin">Cabaña</string>
     <string name="poi_us_maps_recreation_area_facility_airplane_landing_strip">Pista de aterrizaje aeronáutica</string>
     <string name="poi_us_maps_recreation_area_facility_ranger_station_office">Estación del guardabosques;Estación del guardaparque;Oficina forestal</string>

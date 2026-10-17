@@ -301,7 +301,7 @@
     <string name="poi_funicular">Funiculare</string>
     <string name="poi_military_naval_base">Base militare navale</string>
     <string name="poi_military_barracks">Caserma</string>
-    <string name="poi_electricity_combined_charging">Istatzione de carrigamentu;Istatzione de carrigamentu de veìculos elètricos;Istatzione de càrriga elètrica;Puntu de càrriga;Istatzione de càrriga elètrica;Trastes pro s\'alimentatzione de veìculos elètricos</string>
+    <string name="poi_electricity_combined_charging">Istatzione de carrigamentu;Istatzione de carrigamentu de veìculos elètricos;Istatzione de càrriga elètrica;Puntu de càrriga;Trastes pro s\'alimentatzione de veìculos elètricos</string>
     <string name="poi_vehicle_ramp">Rampa pro veìculos</string>
     <string name="poi_compressed_air">Àera cumpressa</string>
     <string name="poi_bicycle_rental">Nolu bitziclètas</string>
@@ -347,7 +347,7 @@
     <string name="poi_theatre">Teatru</string>
     <string name="poi_theatre_genre_circus">Circu</string>
     <string name="poi_dance_floor">Discoteca</string>
-    <string name="poi_nightclub">Nightclub;Discoteca;Club noturnu;Nightclub</string>
+    <string name="poi_nightclub">Nightclub;Discoteca;Club noturnu</string>
     <string name="poi_marina">Marina (portu minore)</string>
     <string name="poi_swimming_pool">Piscina</string>
     <string name="poi_park">Parcu</string>
@@ -3481,7 +3481,7 @@
     <string name="poi_bulk_purchase">Còmpora a s\'ingrussu</string>
     <string name="poi_substation_type">Casta</string>
     <string name="poi_bulk_purchase_yes">Eja;Còmpora a s\'ingrussu</string>
-    <string name="poi_bulk_purchase_only">Petzi;Còmpora a s\'ingrussu ebbia;Petzi a s\'ingrussu;Ingrussu ebbia;Petzi a s\'ingrussu</string>
+    <string name="poi_bulk_purchase_only">Petzi;Còmpora a s\'ingrussu ebbia;Petzi a s\'ingrussu;Ingrussu ebbia</string>
     <string name="poi_pipeline_substation">Sutaistatzione de sas condutas</string>
     <string name="poi_substation_transmission">Trasmissione</string>
     <string name="poi_substation_distribution">Distributzione</string>

@@ -8,6 +8,8 @@
 	"place", "water"). A wrong synonym turns a place name typed by the user into a category: "Basílica de Nuestra
 	Señora del Pilar" became "churches near Plaza del Pilar" when every church was a "basilica". Translate the first
 	word; add synonyms only when they hold for all objects of the type in your language.
+	Do not repeat words: the first word is searched too, and search ignores case, so a synonym equal to the first
+	word or to another synonym ("Librairie;Librairie", "Fleuriste;fleuriste") does nothing.
 -->
 <!--  poi additional categories -->
 	<string name="poi_fuel_type">Fuel type</string>

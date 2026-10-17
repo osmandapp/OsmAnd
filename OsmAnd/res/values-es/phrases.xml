@@ -1776,7 +1776,7 @@
     <string name="poi_service_bicycle_repair_no">Reparan bicicletas: no</string>
     <string name="poi_service_bicycle_rental_yes">Alquiler;Alquiler de bicicletas;Alquiler de bicis</string>
     <string name="poi_service_bicycle_rental_no">Alquilan bicicletas: no</string>
-    <string name="poi_service_bicycle_pump_yes">Inflador;Bomba de bicicleta;Bomba de bicicleta</string>
+    <string name="poi_service_bicycle_pump_yes">Inflador;Bomba de bicicleta</string>
     <string name="poi_service_bicycle_pump_no">Inflan bicicletas: no</string>
     <string name="poi_service_bicycle_diy_yes">Herramientas para autoreparación</string>
     <string name="poi_service_bicycle_diy_no">Herramientas para autoreparación: no</string>
@@ -3429,7 +3429,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">Reparación de la transmisión</string>
     <string name="poi_service_vehicle_motor_yes">Motores</string>
     <string name="poi_service_vehicle_insurance_yes">Aseguradora</string>
-    <string name="poi_service_vehicle_tyres_yes">Neumáticos;Neumático;Neumático;Neumáticos</string>
+    <string name="poi_service_vehicle_tyres_yes">Neumáticos;Neumático</string>
     <string name="poi_aerialway_zip_line">Tirolesa</string>
     <string name="poi_climbing_adventure">Aventura de escalada</string>
     <string name="poi_via_ferrata">Vía ferrata</string>
@@ -4831,7 +4831,7 @@
     <string name="poi_us_maps_recreation_area_facility_horse_stanchion">Silla de montar</string>
     <string name="poi_us_maps_recreation_area_facility_rv_dump_station">Vertedero para autocaravanas</string>
     <string name="poi_us_maps_recreation_area_facility_rapid">Rápido</string>
-    <string name="poi_us_maps_recreation_area_activity_day_use_site">Área de uso diurno;Sitio de uso diurno;Área de uso diurno;Área recreativa de uso diurno;Sitio recreativo de uso diurno</string>
+    <string name="poi_us_maps_recreation_area_activity_day_use_site">Área de uso diurno;Sitio de uso diurno;Área recreativa de uso diurno;Sitio recreativo de uso diurno</string>
     <string name="poi_us_maps_recreation_area_facility_lighthouse">Faro</string>
     <string name="poi_live_music">Música en vivo</string>
     <string name="poi_music_venue">Local de música;Sala de música;Sala de conciertos</string>

@@ -114,7 +114,7 @@
     <string name="poi_military">Vojska</string>
     <string name="poi_user_defined_other">Korisnički definisano</string>
     <string name="poi_bakery">Pekara;pekare</string>
-    <string name="poi_alcohol">Prodavnica pića;alkohol;alkoholna pića;prodavnica pića;Bez licence</string>
+    <string name="poi_alcohol">Prodavnica pića;alkohol;alkoholna pića;Bez licence</string>
     <string name="poi_cheese">Prodavnica sireva;sir</string>
     <string name="poi_chocolate">Čokolade</string>
     <string name="poi_coffee">Kafa</string>
@@ -170,7 +170,7 @@
     <string name="poi_ticket">Biletarnica</string>
     <string name="poi_tobacco">Duvan</string>
     <string name="poi_toys">Igračke</string>
-    <string name="poi_tyres">Gume; Guma; Guma; Prodavnica guma; Gume</string>
+    <string name="poi_tyres">Gume; Guma; Prodavnica guma</string>
     <string name="poi_vacuum_cleaner">Usisivači</string>
     <string name="poi_video">Video klub</string>
     <string name="poi_electronics">Elektronika</string>
@@ -263,7 +263,7 @@
     <string name="poi_subway_entrance">Ulaz u metro</string>
     <string name="poi_subway_station">Da;Stanica podzemne željeznice</string>
     <string name="poi_taxi">Taksi stanica</string>
-    <string name="poi_aerodrome">Aerodrom;Aerodrom</string>
+    <string name="poi_aerodrome">Aerodrom</string>
     <string name="poi_helipad">Heliodrom</string>
     <string name="poi_runway">Pista</string>
     <string name="poi_aeroway_terminal">Aerodromski terminal</string>
@@ -1432,7 +1432,7 @@
     <string name="poi_entertainment">Slobodno vreme</string>
     <string name="poi_service">Servisi</string>
     <string name="poi_craft">Radionica</string>
-    <string name="poi_convenience">Prodavnica mešovite robe;prodavnica mešovite robe;prodavnica mešovite robe;mini-market;mini-mart</string>
+    <string name="poi_convenience">Prodavnica mešovite robe;mini-market;mini-mart</string>
     <string name="poi_deli">Deli;delikatesna radnja</string>
     <string name="poi_greengrocer">Piljara;povrće;piljar</string>
     <string name="poi_ice_cream">Sladoledžinica;sladoled</string>
@@ -2022,9 +2022,9 @@
     <string name="poi_service_bicycle_diy_no">Alati za samopopravku bicikla: ne</string>
     <string name="poi_service_bicycle_cleaning_yes">Čišćenje;Čišćenje bicikala;Čišćenje bicikla</string>
     <string name="poi_service_bicycle_cleaning_no">Čišćenje bicikla: ne</string>
-    <string name="poi_service_bicycle_chaintool_yes">Alat za lanac;Alat za lanac za bicikla;Alat za lanac za bicikla</string>
+    <string name="poi_service_bicycle_chaintool_yes">Alat za lanac;Alat za lanac za bicikla</string>
     <string name="poi_service_bicycle_chaintool_no">Alat lanca za bicikl: ne</string>
-    <string name="poi_service_bicycle_second_hand_yes">Prodaja polovnih bicikli;Polovni bicikli;Polovni bicikli</string>
+    <string name="poi_service_bicycle_second_hand_yes">Prodaja polovnih bicikli;Polovni bicikli</string>
     <string name="poi_service_bicycle_second_hand_no">Maloprodaja polovnih bicikla: ne</string>
     <string name="poi_service_bicycle_charging_yes">Punjenje: da;Punjenje bicikla;Punjenje bajk bicikla;Punjenje električnog bicikla;Punjenje električnog bajk bicikla</string>
     <string name="poi_service_bicycle_charging_no">Naplata: ne</string>
@@ -3327,7 +3327,7 @@
     <string name="poi_via_ferrata">Zaštićena ruta</string>
     <string name="poi_climbing_adventure">Park za penjanje</string>
     <string name="poi_aerialway_zip_line">Zip lajn</string>
-    <string name="poi_service_vehicle_tyres_yes">Gume; Guma; Guma; Gume</string>
+    <string name="poi_service_vehicle_tyres_yes">Gume; Guma</string>
     <string name="poi_service_vehicle_insurance_yes">Osiguranje</string>
     <string name="poi_service_vehicle_motor_yes">Motor</string>
     <string name="poi_service_vehicle_transmission_repair_yes">Popravka transmisije</string>
@@ -4765,7 +4765,7 @@
     <string name="poi_us_maps_recreation_area_accessibility_info">Informacije o pristupačnosti</string>
     <string name="poi_us_maps_recreation_area_activity_poi">Tačka od interesa</string>
     <string name="poi_us_maps_recreation_area_activity_scenic_overlook">Vidikovac; Panoramski pogled</string>
-    <string name="poi_us_maps_recreation_area_activity_day_use_site">Zona dnevnog korišćenja;Igralište za dnevne upotrebe;Zona dnevnog korišćenja;Igralište za dnevne upotrebe;Zona dnevne rekreacije;Igralište za dnevni odmor</string>
+    <string name="poi_us_maps_recreation_area_activity_day_use_site">Zona dnevnog korišćenja;Igralište za dnevne upotrebe;Zona dnevne rekreacije;Igralište za dnevni odmor</string>
     <string name="poi_us_maps_recreation_area_facility_cabin">Koliba</string>
     <string name="poi_us_maps_recreation_area_facility_airplane_landing_strip">Traka za sletanje aviona</string>
     <string name="poi_us_maps_recreation_area_facility_ranger_station_office">Stanica rendžera/Terenska kancelarija</string>

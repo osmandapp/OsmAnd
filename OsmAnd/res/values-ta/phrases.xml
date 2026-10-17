@@ -1107,7 +1107,7 @@
     <string name="poi_tobacco">புகையிலை கடை</string>
     <string name="poi_toys">டாய்சாப்</string>
     <string name="poi_trade">வர்த்தக இடுகை</string>
-    <string name="poi_tyres">டயர்கள்;டயர்;டயர்;டயர் கடை;டயர்கள்</string>
+    <string name="poi_tyres">டயர்கள்;டயர்;டயர் கடை</string>
     <string name="poi_vacuum_cleaner">வெற்றிட கிளீனர் கடை</string>
     <string name="poi_window_blind">சாளர குருட்டு கடை</string>
     <string name="poi_department_store">டிபார்ட்மென்ட் கடை</string>
@@ -1145,7 +1145,7 @@
     <string name="poi_car_repair">கார் பழுது</string>
     <string name="poi_vehicle_inspection">வாகன ஆய்வு</string>
     <string name="poi_car_wash">கார் கழுவுதல்</string>
-    <string name="poi_fuel">எரிவாயு நிலையம்; பெட்ரோல் நிலையம்; நிரப்புதல் நிலையம்; பெட்ரோல் நிலையம்</string>
+    <string name="poi_fuel">எரிவாயு நிலையம்; பெட்ரோல் நிலையம்; நிரப்புதல் நிலையம்</string>
     <string name="poi_fuel_diesel">வளியெண்ணை</string>
     <string name="poi_fuel_gtl_diesel">சி.டி.எல் டீசல்</string>
     <string name="poi_fuel_hgv_diesel">எச்.சி.வி டீசல்</string>
@@ -1188,9 +1188,9 @@
     <string name="poi_tram_stop">டிராம் நிறுத்தம்</string>
     <string name="poi_public_transport_station">பொது போக்குவரத்து நிலையம்</string>
     <string name="poi_bus_station">பச் நிலையம்</string>
-    <string name="poi_railway_station">ரயில் நிலையம்; ரயில் நிலையம்; ரயில் நிலையம்</string>
+    <string name="poi_railway_station">ரயில் நிலையம்</string>
     <string name="poi_railway_platform">இரயில் பாதை தளம்; ரயில் தளம்</string>
-    <string name="poi_halt">ரெயில்ரோட் ச்டாப்; ரயில் நிறுத்தம்; ரயில் நிலையம்; ரயில் நிலையம்; ரயில் நிலையம்; நிலையம்</string>
+    <string name="poi_halt">ரெயில்ரோட் ச்டாப்; ரயில் நிறுத்தம்; ரயில் நிலையம்; நிலையம்</string>
     <string name="poi_subway_entrance">சுரங்கப்பாதை நுழைவு</string>
     <string name="poi_subway_station">ஆம்; சுரங்கப்பாதை நிலையம்</string>
     <string name="poi_railway_buffer_stop">இரயில் பாதை இடையக நிறுத்தம்</string>
@@ -1628,7 +1628,7 @@
     <string name="poi_theatre_genre_circus">சர்க்கச்</string>
     <string name="poi_gallery">கலைக்கூடம்</string>
     <string name="poi_dance_floor">நடன தளம்</string>
-    <string name="poi_nightclub">நைட் கிளப்; டிச்கோ; டிச்கோ</string>
+    <string name="poi_nightclub">நைட் கிளப்; டிச்கோ</string>
     <string name="poi_beach_resort">கடற்கரை ரிசார்ட்</string>
     <string name="poi_dog_park">நாய் பூங்கா</string>
     <string name="poi_leisure_fishing">மீன்பிடி இடம்</string>
@@ -3861,7 +3861,7 @@
     <string name="poi_service_vehicle_truck_repair_yes">டிரக் பழுது</string>
     <string name="poi_service_vehicle_motor_yes">மின்னோடி</string>
     <string name="poi_service_vehicle_insurance_yes">காப்பீடு</string>
-    <string name="poi_service_vehicle_tyres_yes">டயர்கள்;டயர்;டயர்;டயர்கள்</string>
+    <string name="poi_service_vehicle_tyres_yes">டயர்கள்;டயர்</string>
     <string name="poi_aerialway_zip_line">சிப் வரி</string>
     <string name="poi_climbing_adventure">ஏறும் துணிவு</string>
     <string name="poi_via_ferrata">ஃபெராட்டா வழியாக</string>

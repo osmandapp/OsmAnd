@@ -2086,7 +2086,7 @@
     <string name="poi_bridge_movable_drawbridge">Jenis jembatan bergerak: jembatan jungkit</string>
     <string name="poi_surface_sett">Permukaan: sett</string>
     <string name="poi_route_share_taxi_ref">Angkutan berbagi</string>
-    <string name="poi_service_bicycle_chaintool_yes">Alat rantai;Alat rantai sepeda;Alat rantai sepeda</string>
+    <string name="poi_service_bicycle_chaintool_yes">Alat rantai;Alat rantai sepeda</string>
     <string name="poi_training_hairdressing">Pelatihan: tata rambut</string>
     <string name="poi_industrial_factory">Jenis: pabrik</string>
     <string name="poi_industrial_auto_wrecker">Jenis: penghancur mobil</string>
@@ -2494,7 +2494,7 @@
     <string name="poi_bridge_movable_lift">Jenis jembatan bergerak: angkat</string>
     <string name="poi_surface_gravel">Permukaan: kerikil</string>
     <string name="poi_surface_dirt">Permukaan: tanah</string>
-    <string name="poi_service_bicycle_second_hand_yes">Penjualan ritel sepeda bekas;Sepeda bekas;Sepeda bekas</string>
+    <string name="poi_service_bicycle_second_hand_yes">Penjualan ritel sepeda bekas;Sepeda bekas</string>
     <string name="poi_industrial_gas">Jenis: industri gas</string>
     <string name="poi_technical_monument">Monumen teknik</string>
     <string name="poi_crop_hop">Tanaman: hop</string>
@@ -2710,7 +2710,7 @@
     <string name="poi_foot_no">Akses pejalan kaki: tidak</string>
     <string name="poi_psv_designated">Akses PSV: ditunjuk</string>
     <string name="poi_disabled_no">Akses untuk penyandang disabilitas: tidak</string>
-    <string name="poi_bus_yes">Ya;Bus;Bus</string>
+    <string name="poi_bus_yes">Ya;Bus</string>
     <string name="poi_bus_designated">Ditentukan;Ditentukan untuk bus</string>
     <string name="poi_volcano_type_caldera">Kaldera</string>
     <string name="poi_piste_status_open">Status Piste: buka</string>
@@ -2985,9 +2985,9 @@
     <string name="poi_architecture_stalinist_neoclassicism">Arsitektur: neoklasik stalinist</string>
     <string name="poi_architecture_new_objectivity">Arsitektur: objektivitas baru</string>
     <string name="poi_animal_boarding_dog">Jenis penitipan: anjing</string>
-    <string name="poi_service_bicycle_charging_yes">Pengisian daya: ya;Pengisian daya sepeda;Pengisian daya sepeda;Pengisian daya sepeda listrik;Pengisian daya sepeda listrik</string>
+    <string name="poi_service_bicycle_charging_yes">Pengisian daya: ya;Pengisian daya sepeda;Pengisian daya sepeda listrik</string>
     <string name="poi_service_bicycle_charging_no">Pengisian daya: tidak</string>
-    <string name="poi_bicycle_repair_station">Stasiun perbaikan sepeda;Stasiun swaperbaikan sepeda;Stasiun perbaikan sepeda;Stasiun swaperbaikan sepeda</string>
+    <string name="poi_bicycle_repair_station">Stasiun perbaikan sepeda;Stasiun swaperbaikan sepeda</string>
     <string name="poi_industrial_sawmill">Jenis: pabrik penggergajian kayu</string>
     <string name="poi_industrial_depot">Jenis: depot</string>
     <string name="poi_elevator_no">Tanpa elevator</string>
@@ -3636,7 +3636,7 @@
     <string name="poi_bridge_movable_bascule">Jenis jembatan bergerak: bascule</string>
     <string name="poi_route_funicular_ref">Funikular</string>
     <string name="poi_route_railway_ref">Rute kereta api</string>
-    <string name="poi_service_bicycle_retail_yes">Ritel;Ritel sepeda;Ritel sepeda</string>
+    <string name="poi_service_bicycle_retail_yes">Ritel;Ritel sepeda</string>
     <string name="poi_crop_grass">Tanaman: rumput</string>
     <string name="poi_crop_sunflower">Tanaman: bunga matahari</string>
     <string name="poi_crop_cranberry">Tanaman: cranberry</string>
@@ -4494,7 +4494,7 @@
     <string name="poi_surface_grass_paver">Permukaan: paving rumput</string>
     <string name="poi_route_monorail_ref">Monorel</string>
     <string name="poi_service_bicycle_retail_no">Ritel sepeda: tidak</string>
-    <string name="poi_service_bicycle_diy_yes">Peralatan untuk perbaikan DIY;Peralatan DIY sepeda;Peralatan DIY sepeda</string>
+    <string name="poi_service_bicycle_diy_yes">Peralatan untuk perbaikan DIY;Peralatan DIY sepeda</string>
     <string name="poi_service_bicycle_second_hand_no">Penjualan ritel sepeda bekas: tidak</string>
     <string name="poi_animal_boarding_dog_cat">Jenis penitipan: anjing, kucing</string>
     <string name="poi_office_camping">Kantor perkemahan</string>
@@ -4925,7 +4925,7 @@
     <string name="poi_xmas_event">Acara Natal</string>
     <string name="poi_xmas_pyramid">Piramida Natal</string>
     <string name="poi_public_bookcase_type_metal_cabinet">Jenis: lemari logam</string>
-    <string name="poi_cuisine_crepe">Krep;Krep</string>
+    <string name="poi_cuisine_crepe">Krep</string>
     <string name="poi_cuisine_heuriger">Heuriger</string>
     <string name="poi_cuisine_curry">Kari</string>
     <string name="poi_cuisine_buschenschank">Buschenschank</string>
@@ -4972,7 +4972,7 @@
     <string name="poi_us_maps_recreation_area_activity_skiing_snowboarding">Ski dan seluncur salju</string>
     <string name="poi_us_maps_recreation_area_activity_visitor_programs">Program pengunjung</string>
     <string name="poi_us_maps_recreation_area_activity_water_activities">Aktivitas air</string>
-    <string name="poi_us_maps_recreation_area_activity_day_use_site">Area penggunaan harian;Tempat penggunaan harian;Area penggunaan harian;Tempat penggunaan harian;Area rekreasi penggunaan harian;Tempat rekreasi penggunaan harian</string>
+    <string name="poi_us_maps_recreation_area_activity_day_use_site">Area penggunaan harian;Tempat penggunaan harian;Area rekreasi penggunaan harian;Tempat rekreasi penggunaan harian</string>
     <string name="poi_us_maps_recreation_area_facility_parking">Area parkir</string>
     <string name="poi_us_maps_recreation_area_activity_tidepooling">Mengamati genangan pasang</string>
     <string name="poi_us_maps_recreation_area_activity_trapping">Menjebak</string>
