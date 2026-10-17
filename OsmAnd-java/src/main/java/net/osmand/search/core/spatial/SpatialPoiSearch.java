@@ -50,8 +50,6 @@ public class SpatialPoiSearch {
 	ReentrantReadWriteLock poiTypesIndexLock = new ReentrantReadWriteLock();
 	AtomicInteger ids = new AtomicInteger();
 	Map<String, SpatialPoiType> byKey = new ConcurrentHashMap<>();
-	// lower-case names of the categories, filters and types
-	private final Set<String> typeNames = new HashSet<>();
 	Map<String, List<SpatialPoiType>> byWikidataKey = new ConcurrentHashMap<>();
 	Map<Integer, SpatialPoiType> byId = new ConcurrentHashMap<>();
 	
@@ -160,15 +158,6 @@ public class SpatialPoiSearch {
 	public SpatialPoiSearch(MapPoiTypes types) {
 		this.poiTypes = types;
 		for (PoiCategory pc : poiTypes.getCategories()) {
-			typeNames.add(pc.getTranslation().toLowerCase());
-			for (PoiFilter pf : pc.getPoiFilters()) {
-				typeNames.add(pf.getTranslation().toLowerCase());
-			}
-			for (PoiType pt : pc.getPoiTypes()) {
-				typeNames.add(pt.getTranslation().toLowerCase());
-			}
-		}
-		for (PoiCategory pc : poiTypes.getCategories()) {
 			if (pc == poiTypes.getOtherMapCategory()) {
 				continue;
 			}
@@ -211,14 +200,8 @@ public class SpatialPoiSearch {
 			poiType.parentTypes = new ArrayList<>();
 			poiType.parentTypes.add(parent);
 		}
-		// an additional value is indexed by its name only: "Subway station", not "yes"; a name of a poi type
-		// ("Cafe" of "Cafe: yes") keeps the whole translation, so the value does not take the type's place
-		String translation = PoiAdditionalLabels.getSearchName(pt);
-		if (pt.isAdditional() && typeNames.contains(translation.toLowerCase())) {
-			translation = pt.getTranslation();
-		}
-		if (!basePoiName.equals(translation)) {
-			String[] split = translation.split(";");
+		if (!basePoiName.equals(pt.getTranslation())) {
+			String[] split = pt.getTranslation().split(";");
 			for (String tr : split) {
 				poiType.addName(SearchAlgorithms.alignChars(tr.trim()));
 				// only first
