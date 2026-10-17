@@ -612,7 +612,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 		for (PoiType pt : categoryTypes) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
-			String name = pt.getTranslation();
+			String name = poiAdditional ? AmenityTagEntriesBuilder.getGroupValueLabel(pt) : pt.getTranslation();
 			button.setText(name);
 			PoiCategory category = pt.getCategory() != null ? pt.getCategory() : type;
 
