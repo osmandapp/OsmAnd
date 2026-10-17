@@ -18,6 +18,9 @@ abstract class GalleryRowController(
 ) : IGalleryRowController {
 
 	protected var view: IGalleryRowView? = null
+
+	// Prototype: lets the card drop a row that loaded no media
+	var onEmptyListener: (() -> Unit)? = null
 	private var items: List<GalleryItem> = emptyList()
 	private var loading = false
 
@@ -32,10 +35,14 @@ abstract class GalleryRowController(
 			loading = false
 			view?.onLoadingImage(false)
 
-			items = buildGalleryItems(holder).ifEmpty {
+			val loadedItems = buildGalleryItems(holder)
+			items = loadedItems.ifEmpty {
 				emptyStateItems()
 			}
 			view?.render()
+			if (loadedItems.isEmpty()) {
+				onEmptyListener?.invoke()
+			}
 		}
 
 		override fun onLoadFailed(key: GalleryKey) {
@@ -58,6 +65,10 @@ abstract class GalleryRowController(
 	}
 
 	override fun getGalleryKey() = key
+
+	fun preload() {
+		loadIfNeeded(false)
+	}
 
 	override fun onRowBuilt(collapsed: Boolean) {
 		loadIfNeeded(collapsed)

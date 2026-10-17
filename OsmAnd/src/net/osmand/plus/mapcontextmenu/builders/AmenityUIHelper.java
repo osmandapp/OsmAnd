@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
@@ -81,36 +82,319 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
+		prepareSections(view.getContext());
+		for (CardSection section : CardSection.values()) {
+			if (section != CardSection.ABOUT) {
+				buildSection(view, section);
+			}
+		}
+	}
+
+	// Prototype: sections of osmandapp/OsmAnd#26671, rows sorted by tag key inside a section
+	private Map<CardSection, List<AmenityTagEntry>> sections;
+	private final Map<AmenityTagEntry, String> sortKeys = new HashMap<>();
+	// rows of one value (Outdoor seating: Yes) expand to a nearby search for this value
+	private final Map<AmenityTagEntry, PoiType> searchTypes = new HashMap<>();
+
+	public void prepareSections(@NonNull Context context) {
+		if (sections != null) {
+			return;
+		}
 		initVariables();
-		Context context = view.getContext();
-		List<AmenityTagEntry> infoEntries = new ArrayList<>();
+		sections = new EnumMap<>(CardSection.class);
 		List<AmenityTagEntry> descriptions = new ArrayList<>();
 
 		List<AmenityTagEntry> visibleTags = additionalInfo.getVisibleTags(osmEditingEnabled,
 				preferredLangCandidates, genericRowKeys);
-		for (AmenityTagEntry baseEntry : visibleTags) {
+		Set<String> shownTags = collectShownTags(visibleTags);
+		for (AmenityTagEntry visibleEntry : visibleTags) {
+			AmenityTagEntry baseEntry = visibleEntry;
+			if (isTypeGroup(baseEntry)) {
+				// Prototype: a yes type of the object (internet_access=yes) is a feature titled by its name,
+				// dropped when a feature of the same tag (internet_access:type) is already shown
+				List<PoiType> otherTypes = new ArrayList<>();
+				for (PoiType type : baseEntry.collapsablePoiTypes) {
+					if (!"yes".equals(type.getOsmValue())) {
+						otherTypes.add(type);
+					} else if (!isTagShown(type.getOsmTag(), shownTags)) {
+						AmenityTagEntry yesEntry = buildYesTypeEntry(type);
+						sortKeys.put(yesEntry, getSortKey(type.getOsmTag(), type.getKeyName()));
+						searchTypes.put(yesEntry, type);
+						sections.computeIfAbsent(getCardSection(type.getOsmTag(), type.getKeyName()), s -> new ArrayList<>()).add(yesEntry);
+					}
+				}
+				if (otherTypes.isEmpty()) {
+					continue;
+				}
+				baseEntry = new AmenityTagEntry.Builder(baseEntry.key)
+						.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP)
+						.setCollapsablePoiTypes(otherTypes)
+						.setCollapsableCategory(baseEntry.collapsableCategory)
+						.setPoiAdditional(false)
+						.setOrder(baseEntry.order)
+						.build();
+			}
 			AmenityTagEntry amenityEntry = buildEntryData(context, baseEntry);
 			if (amenityEntry == null) {
 				continue;
 			}
 			if (amenityEntry.isDescription) {
 				descriptions.add(amenityEntry);
+			} else if (isNameTag(baseEntry.key)) {
+				nameTags.add(amenityEntry);
 			} else {
-				infoEntries.add(amenityEntry);
+				sortKeys.put(amenityEntry, getSortKey(baseEntry));
+				PoiType valueType = baseEntry.resolvedType != null ? baseEntry.resolvedType.getAdditionalType() : null;
+				if (valueType != null && !valueType.isText() && valueType.getOsmValue() != null) {
+					searchTypes.put(amenityEntry, valueType);
+				}
+				sections.computeIfAbsent(getCardSection(baseEntry), s -> new ArrayList<>()).add(amenityEntry);
 			}
 		}
 
-		AmenityTagEntriesBuilder.sortInfoEntries(infoEntries);
-		for (AmenityTagEntry info : infoEntries) {
-			buildAmenityRow(view, toAmenityInfoRow(context, info));
-		}
-
 		AmenityTagEntriesBuilder.sortDescriptionEntries(descriptions, getPreferredMapAppLang());
-		for (AmenityTagEntry info : descriptions) {
-			buildAmenityRow(view, toAmenityInfoRow(context, info));
+		if (!descriptions.isEmpty()) {
+			sections.computeIfAbsent(CardSection.ABOUT, s -> new ArrayList<>()).addAll(0, descriptions);
 		}
-		if (PluginsHelper.getActivePlugin(OsmEditingPlugin.class) != null) {
+	}
+
+	// alt_name, old_name, official_name... go into the one names row
+	private final List<AmenityTagEntry> nameTags = new ArrayList<>();
+	private static final String[] NAME_TAGS = {"alt_name", "old_name", "official_name", "short_name", "loc_name",
+			"nat_name", "int_name", "reg_name"};
+
+	private static boolean isNameTag(@NonNull String key) {
+		for (String tag : NAME_TAGS) {
+			if (key.equals(tag) || key.startsWith(tag + ":")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void buildAllNamesRow(@NonNull ViewGroup viewGroup, @NonNull Map<String, String> names,
+	                             @NonNull Map<String, String> altNames) {
+		if (names.isEmpty() && altNames.isEmpty() && nameTags.isEmpty()) {
+			return;
+		}
+		Context context = viewGroup.getContext();
+		String nameHint = app.getString(R.string.shared_string_name);
+		String altHint = app.getString(R.string.shared_string_alt_name);
+		Map<String, String> main = !names.isEmpty() ? names : altNames;
+		Locale nameLocale = getPreferredLocale(main.keySet());
+		if (nameLocale == null) {
+			nameLocale = new Locale(main.keySet().iterator().next());
+		}
+		String mainLang = nameLocale.getLanguage();
+		String name = main.get(mainLang);
+
+		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
+		addNameRows(llv, names, names == main ? mainLang : null, nameHint);
+		addNameRows(llv, altNames, altNames == main ? mainLang : null, altHint);
+		for (AmenityTagEntry entry : nameTags) {
+			View row = createRowContainer(mapActivity, null);
+			buildDetailsRow(row, null, entry.text, entry.textPrefix, null, null, false, null);
+			llv.addView(row);
+		}
+		CollapsableView collapsableView = llv.getChildCount() > 0 ? new CollapsableView(llv, this, true) : null;
+
+		View amenitiesRow = createRowContainer(context, NAMES_ROW_KEY);
+		String hint = main == names ? nameHint : altHint;
+		String prefix = Algorithms.isEmpty(mainLang) ? hint
+				: app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, nameLocale.getDisplayLanguage());
+		buildDetailsRow(amenitiesRow, getRowIcon(R.drawable.ic_action_map_language), name, prefix, null,
+				collapsableView, true, null);
+		int viewGroupChildCount = viewGroup.getChildCount();
+		if (viewGroupChildCount > 0 && !isDividerAtPosition(viewGroup, viewGroupChildCount - 1) && !isFirstRow()) {
+			buildRowDivider(viewGroup, viewGroupChildCount);
+		}
+		viewGroup.addView(amenitiesRow);
+		rowBuilt();
+	}
+
+	private void addNameRows(@NonNull LinearLayout llv, @NonNull Map<String, String> names,
+	                         @Nullable String excludedLang, @NonNull String hint) {
+		for (Map.Entry<String, String> e : names.entrySet()) {
+			if (e.getKey().equals(excludedLang)) {
+				continue;
+			}
+			String prefix = Algorithms.isEmpty(e.getKey()) ? hint
+					: app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, new Locale(e.getKey()).getDisplayLanguage());
+			View row = createRowContainer(mapActivity, null);
+			buildDetailsRow(row, null, e.getValue(), prefix, null, null, false, null);
+			llv.addView(row);
+		}
+	}
+
+	public boolean hasSection(@NonNull CardSection section) {
+		return sections != null && !Algorithms.isEmpty(sections.get(section));
+	}
+
+	public void buildSection(@NonNull View view, @NonNull CardSection section) {
+		List<AmenityTagEntry> infoEntries = sections != null ? sections.get(section) : null;
+		boolean wikidata = section == CardSection.DETAILS && additionalInfo.get(WIKIDATA) != null
+				&& PluginsHelper.getActivePlugin(OsmEditingPlugin.class) != null;
+		if (Algorithms.isEmpty(infoEntries) && !wikidata) {
+			return;
+		}
+		startSection(view, section);
+		if (!Algorithms.isEmpty(infoEntries)) {
+			if (section != CardSection.ABOUT) {
+				AmenityTagEntriesBuilder.sortInfoEntries(infoEntries);
+				infoEntries.sort((e1, e2) -> sortKeys.get(e1).compareTo(sortKeys.get(e2)));
+			}
+			Context context = view.getContext();
+			for (AmenityTagEntry info : infoEntries) {
+				AmenityInfoRow row = toAmenityInfoRow(context, info);
+				PoiType searchType = searchTypes.get(info);
+				if (searchType != null && row.collapsableView == null) {
+					row = toAmenityInfoRow(context, info, getSearchCollapsableView(context, searchType));
+				}
+				buildAmenityRow(view, row);
+			}
+		}
+		if (wikidata) {
 			buildWikiDataRow(view);
+		}
+	}
+
+	public void continueSection(@NonNull CardSection section, boolean firstRow) {
+		currentSection = section;
+		this.firstRow = firstRow;
+	}
+
+	// Prototype: sections of osmandapp/OsmAnd#26671, in this order on the card
+	public enum CardSection {
+		ABOUT(R.string.shared_string_about),
+		OPENING_HOURS(R.string.opening_hours),
+		CONTACTS(R.string.poi_card_section_contacts),
+		SERVICE(R.string.poi_card_section_service),
+		FOOD(R.string.poi_card_section_food),
+		AMENITIES(R.string.poi_card_section_amenities),
+		ACCESSIBILITY(R.string.poi_card_section_accessibility),
+		PAYMENT(R.string.poi_card_section_payment),
+		DETAILS(R.string.shared_string_details);
+
+		@StringRes
+		public final int titleId;
+
+		CardSection(@StringRes int titleId) {
+			this.titleId = titleId;
+		}
+	}
+
+	// the first matching tag wins: internet_access:ssid is a contact, internet_access an amenity
+	private static final Object[][] SECTION_TAGS = {
+			{CardSection.OPENING_HOURS, "opening_hours", "service_times", "collection_times", "seasonal", "operational_status", "xmas"},
+			{CardSection.CONTACTS, "phone", "mobile", "fax", "email", "website", "url", "contact", "facebook", "instagram",
+					"twitter", "vk", "youtube", "skype", "telegram", "addr", "level", "internet_access:ssid"},
+			{CardSection.SERVICE, "takeaway", "delivery", "drive_through", "drive_in", "reservation", "self_service",
+					"self_checkout", "home_visit", "bulk_purchase", "second_hand"},
+			{CardSection.FOOD, "cuisine", "diet", "dish", "cocktails", "coffee", "microbrewery", "organic", "ice_cream"},
+			{CardSection.PAYMENT, "payment", "fee", "charge", "price", "membership", "cash_withdrawal", "parking:fee"},
+			{CardSection.AMENITIES, "toilets", "changing_table", "outdoor_seating", "indoor_seating", "smoking",
+					"air_conditioning", "internet_access", "drinking_water", "shower", "fireplace", "dog", "live_music"},
+			{CardSection.ACCESSIBILITY, "wheelchair", "tactile_paving", "blind", "deaf", "traffic_signals:sound",
+					"traffic_signals:vibration"},
+			{CardSection.ABOUT, "description", "start_date", "architect", "artist_name", "artist", "sculptor",
+					"inscription", "name:etymology", "heritage", "historic"},
+	};
+
+	@Nullable
+	private CardSection currentSection;
+
+	@NonNull
+	private static CardSection getCardSection(@NonNull AmenityTagEntry entry) {
+		if (isTypeGroup(entry)) {
+			// other types of the object (Tourism: Museum, Food: Cafe)
+			return CardSection.DETAILS;
+		}
+		PoiType type = entry.resolvedType != null ? entry.resolvedType.getAdditionalType() : null;
+		if (type == null && !Algorithms.isEmpty(entry.collapsablePoiTypes)) {
+			type = entry.collapsablePoiTypes.get(0);
+		}
+		return getCardSection(type != null ? type.getOsmTag() : null, entry.key);
+	}
+
+	@NonNull
+	private static CardSection getCardSection(@Nullable String osmTag, @NonNull String key) {
+		String tag = osmTag != null ? osmTag : key;
+		for (Object[] row : SECTION_TAGS) {
+			for (int i = 1; i < row.length; i++) {
+				String prefix = (String) row[i];
+				if (tag.equals(prefix) || tag.startsWith(prefix + ":") || tag.startsWith(prefix + "_")
+						|| key.equals(prefix) || key.startsWith(prefix + ":") || key.startsWith(prefix + "_")) {
+					return (CardSection) row[0];
+				}
+			}
+		}
+		return CardSection.DETAILS;
+	}
+
+	@NonNull
+	private static String getSortKey(@NonNull AmenityTagEntry entry) {
+		PoiType type = entry.resolvedType != null ? entry.resolvedType.getAdditionalType() : null;
+		if (type == null && !Algorithms.isEmpty(entry.collapsablePoiTypes)) {
+			type = entry.collapsablePoiTypes.get(0);
+		}
+		return getSortKey(type != null ? type.getOsmTag() : null, entry.key);
+	}
+
+	@NonNull
+	private static String getSortKey(@Nullable String osmTag, @NonNull String key) {
+		return (osmTag != null ? osmTag : key).replace(':', '_');
+	}
+
+	private static boolean isTypeGroup(@NonNull AmenityTagEntry entry) {
+		return entry.collapsableEntryType == AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP && !entry.poiAdditional;
+	}
+
+	@NonNull
+	private static Set<String> collectShownTags(@NonNull List<AmenityTagEntry> entries) {
+		Set<String> tags = new HashSet<>();
+		for (AmenityTagEntry entry : entries) {
+			PoiType type = entry.resolvedType != null ? entry.resolvedType.getAdditionalType() : null;
+			if (type != null && type.getOsmTag() != null) {
+				tags.add(type.getOsmTag());
+			}
+			if (entry.collapsableEntryType == AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP && entry.poiAdditional) {
+				for (PoiType groupType : entry.collapsablePoiTypes) {
+					if (groupType.getOsmTag() != null) {
+						tags.add(groupType.getOsmTag());
+					}
+				}
+			}
+		}
+		return tags;
+	}
+
+	private static boolean isTagShown(@Nullable String tag, @NonNull Set<String> shownTags) {
+		if (tag == null) {
+			return false;
+		}
+		for (String shown : shownTags) {
+			if (shown.equals(tag) || shown.startsWith(tag + ":")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@NonNull
+	private AmenityTagEntry buildYesTypeEntry(@NonNull PoiType type) {
+		return new AmenityTagEntry.Builder(type.getKeyName())
+				.setText(AmenityTagEntriesBuilder.getGroupValueLabel(type))
+				.setIconNameCandidates(List.of(type.getIconKeyName()))
+				.setFallbackIconId(R.drawable.ic_action_note_dark)
+				.setOrder(type.getOrder())
+				.setName(type.getKeyName())
+				.build();
+	}
+
+	public void startSection(@NonNull View view, @NonNull CardSection section) {
+		if (currentSection != section) {
+			currentSection = section;
+			buildSectionHeader(view, app.getString(section.titleId), -1);
 		}
 	}
 
@@ -245,13 +529,36 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	@NonNull
+	private CollapsableView getSearchCollapsableView(@NonNull Context context, @NonNull PoiType type) {
+		LinearLayout view = buildCollapsableContentView(context, true, true);
+		TextViewEx button = buildButtonInCollapsableView(context, false, false);
+		button.setText(R.string.search_nearby);
+		PoiCategory category = type.getCategory() != null ? type.getCategory() : poiCategory;
+		button.setOnClickListener(v -> {
+			PoiUIFilter filter = category != null
+					? app.getPoiFilters().getPoiTypeFilter(category.getKeyName(), type.getKeyName(), type.isAdditional()) : null;
+			if (filter != null) {
+				getMapActivity().getFragmentsHelper().showQuickSearch(filter);
+			}
+		});
+		view.addView(button);
+		return new CollapsableView(view, this, true);
+	}
+
+	@NonNull
 	private AmenityInfoRow toAmenityInfoRow(@NonNull Context context, @NonNull AmenityTagEntry data) {
+		return toAmenityInfoRow(context, data, null);
+	}
+
+	@NonNull
+	private AmenityInfoRow toAmenityInfoRow(@NonNull Context context, @NonNull AmenityTagEntry data,
+	                                        @Nullable CollapsableView collapsableView) {
 		AmenityInfoRow.Builder rowBuilder = new AmenityInfoRow.Builder(data.key)
 				.setIconId(data.iconId)
 				.setTextPrefix(data.textPrefix)
 				.setText(data.text)
 				.setHiddenUrl(data.hiddenUrl)
-				.setCollapsableView(resolveCollapsableView(context, data))
+				.setCollapsableView(collapsableView != null ? collapsableView : resolveCollapsableView(context, data))
 				.setTextColor(data.textColor)
 				.setIsWiki(data.isWiki)
 				.setIsText(data.isText)
@@ -542,7 +849,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			llIconCollapse.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(40f), ViewGroup.LayoutParams.MATCH_PARENT));
 			llIconCollapse.setOrientation(LinearLayout.HORIZONTAL);
 			llIconCollapse.setGravity(Gravity.CENTER_VERTICAL);
-			ll.addView(llIconCollapse);
+			// Prototype: no expand arrows, a tap on the row expands it
 
 			LinearLayout.LayoutParams llIconCollapseParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
 			AndroidUtils.setMargins(llIconCollapseParams, 0, dpToPx(12f), dpToPx(24f), dpToPx(12f));

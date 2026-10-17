@@ -180,7 +180,7 @@ public class MenuRowBuilder {
 			llIconCollapse.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(40f), ViewGroup.LayoutParams.MATCH_PARENT));
 			llIconCollapse.setOrientation(LinearLayout.HORIZONTAL);
 			llIconCollapse.setGravity(Gravity.CENTER_VERTICAL);
-			ll.addView(llIconCollapse);
+			// Prototype: no expand arrows, a tap on the row expands it
 
 			LinearLayout.LayoutParams llIconCollapseParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
 			AndroidUtils.setMargins(llIconCollapseParams, 0, dpToPx(12f), dpToPx(24f), dpToPx(12f));

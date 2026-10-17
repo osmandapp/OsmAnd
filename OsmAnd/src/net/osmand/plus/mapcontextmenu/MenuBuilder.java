@@ -617,6 +617,11 @@ public class MenuBuilder {
 		}
 	}
 
+	@Nullable
+	protected OnlinePhotosRowController getOnlinePhotosRowController() {
+		return onlinePhotosRowController;
+	}
+
 	protected void buildOnlinePhotosRow(@NonNull View view, @NonNull GalleryKey.Location key) {
 		onlinePhotosRowController = resolveOnlinePhotosRowController(key);
 
@@ -940,7 +945,7 @@ public class MenuBuilder {
 			llIconCollapse.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(40f), dpToPx(48f)));
 			llIconCollapse.setOrientation(LinearLayout.HORIZONTAL);
 			llIconCollapse.setGravity(Gravity.CENTER_VERTICAL);
-			ll.addView(llIconCollapse);
+			// Prototype: no expand arrows, a tap on the row expands it
 
 			LinearLayout.LayoutParams llIconCollapseParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
 			AndroidUtils.setMargins(llIconCollapseParams, 0, dpToPx(12f), dpToPx(24f), dpToPx(12f));
@@ -1238,6 +1243,36 @@ public class MenuBuilder {
 		horizontalLine.setLayoutParams(llHorLineParams);
 		horizontalLine.setBackgroundColor(getColor(light ? R.color.divider_color_light : R.color.divider_color_dark));
 		((LinearLayout) view).addView(horizontalLine, index);
+	}
+
+	/**
+	 * Prototype: a group header of the card, a thick separator plus a title.
+	 * @return the number of views added
+	 */
+	public int buildSectionHeader(@NonNull View view, @NonNull String title, int index) {
+		Context ctx = view.getContext();
+		boolean nightMode = !isLightContent();
+		LinearLayout container = (LinearLayout) view;
+		int position = index < 0 ? container.getChildCount() : index;
+		int added = 0;
+		if (position > 0) {
+			View separator = new View(ctx);
+			separator.setTag(DIVIDER_ROW_KEY);
+			separator.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(8f)));
+			separator.setBackgroundColor(ColorUtilities.getActivityBgColor(ctx, nightMode));
+			container.addView(separator, position + added++);
+		}
+		TextViewEx header = new TextViewEx(ctx);
+		header.setTag(DIVIDER_ROW_KEY);
+		header.setText(title);
+		header.setTextSize(15);
+		header.setTypeface(FontCache.getMediumFont());
+		header.setTextColor(ColorUtilities.getPrimaryTextColor(ctx, nightMode));
+		header.setPadding(dpToPx(16f), dpToPx(16f), dpToPx(16f), dpToPx(4f));
+		header.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		container.addView(header, position + added++);
+		firstRow = true;
+		return added;
 	}
 
 	protected boolean isDividerAtPosition(@NonNull ViewGroup viewGroup, int index) {

@@ -24,6 +24,8 @@ import net.osmand.data.Amenity;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.gallery.data.GalleryKey;
+import net.osmand.plus.gallery.online.OnlinePhotosRowController;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
@@ -36,7 +38,9 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AmenityMenuBuilder extends MenuBuilder {
@@ -53,8 +57,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		setShowNearestPoi(!amenity.getType().isWiki());
 	}
 
+	private static final String NEARBY_HEADER_KEY = "nearby_header";
+
+	private final List<View> aboutHeaderViews = new ArrayList<>();
+	private int aboutContentViews;
+
 	@Override
 	public void build(@NonNull ViewGroup view, @Nullable Object object) {
+		amenityUIHelper = null;
 		extensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
 		setCustomOnlinePhotosPosition(extensions.containsKey(WIKIDATA));
 		infoBundle = new AdditionalInfoBundle(app.getKPoiTypes(), extensions);
@@ -68,6 +78,70 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected void buildNearestPoiRow(ViewGroup view) {
+	}
+
+	@Override
+	protected void buildTopInternal(View view) {
+		ViewGroup group = (ViewGroup) view;
+		int start = group.getChildCount();
+		int headerViews = buildSectionHeader(view, app.getString(R.string.shared_string_about), -1);
+		aboutHeaderViews.clear();
+		for (int i = start; i < start + headerViews; i++) {
+			aboutHeaderViews.add(group.getChildAt(i));
+		}
+		aboutContentViews = 0;
+		super.buildTopInternal(view);
+		// the About tags (description:*, start_date, architect, names...) stay with Wikipedia at the top
+		AmenityUIHelper helper = getAmenityUIHelper();
+		helper.prepareSections(view.getContext());
+		helper.continueSection(AmenityUIHelper.CardSection.ABOUT, isFirstRow());
+		helper.buildSection(view, AmenityUIHelper.CardSection.ABOUT);
+		buildAllNamesRow(group);
+		firstRow = helper.isFirstRow();
+		aboutContentViews += group.getChildCount() - start - headerViews;
+		if (aboutContentViews == 0) {
+			removeAboutHeader(group);
+			firstRow = start == 0;
+		}
+	}
+
+	private void removeAboutHeader(@NonNull ViewGroup group) {
+		for (View headerView : aboutHeaderViews) {
+			group.removeView(headerView);
+		}
+		aboutHeaderViews.clear();
+	}
+
+	// Prototype: About shows the photos of a wikidata object only when there are some
+	@Override
+	protected void buildOnlinePhotosRow(@NonNull View view, @NonNull GalleryKey.Location key) {
+		ViewGroup group = (ViewGroup) view;
+		int start = group.getChildCount();
+		super.buildOnlinePhotosRow(view, key);
+		OnlinePhotosRowController controller = getOnlinePhotosRowController();
+		if (!isCustomOnlinePhotosPosition() || controller == null) {
+			return;
+		}
+		List<View> photoViews = new ArrayList<>();
+		for (int i = start; i < group.getChildCount(); i++) {
+			photoViews.add(group.getChildAt(i));
+		}
+		aboutContentViews -= photoViews.size();
+		WeakReference<ViewGroup> groupRef = new WeakReference<>(group);
+		controller.setOnEmptyListener(() -> {
+			ViewGroup g = groupRef.get();
+			if (g != null) {
+				for (View photoView : photoViews) {
+					g.removeView(photoView);
+				}
+				if (aboutContentViews == 0) {
+					removeAboutHeader(g);
+				}
+				requestMenuRelayout(g);
+			}
+			return null;
+		});
+		controller.preload();
 	}
 
 	@Override
@@ -94,20 +168,54 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		processRoutePointAmenityTags(view);
 		buildInternalRows(view);
 
+		// Location: within, nearby places, then the coordinates (MenuBuilder) and the photos around
+		firstRow = amenityUIHelper.isFirstRow();
+		buildSectionHeader(view, app.getString(R.string.poi_card_section_location), -1);
+		super.buildWithinRow((ViewGroup) view);
 		buildNearestRows((ViewGroup) view);
-		buildAltNamesRow((ViewGroup) view);
-		buildNamesRow((ViewGroup) view);
 		if (!amenityUIHelper.isFirstRow()) {
 			firstRow = amenityUIHelper.isFirstRow();
 		}
 	}
 
+	@Override
+	protected void buildWithinRow(ViewGroup viewGroup) {
+		// built in the Location section, see buildInternal
+	}
+
+	private void buildAllNamesRow(ViewGroup view) {
+		HashMap<String, String> names = new HashMap<>();
+		if (!Algorithms.isEmpty(amenity.getName())) {
+			names.put("", amenity.getName());
+		}
+		names.putAll(amenity.getNamesMap(true));
+		getAmenityUIHelper().buildAllNamesRow(view, names, amenity.getAltNamesMap());
+	}
+
+	// Prototype: the "Nearby" header appears with the first nearest row
+	private int insertNearbyHeader(@NonNull ViewGroup group, int position) {
+		View header = group.findViewWithTag(NEARBY_HEADER_KEY);
+		if (header != null) {
+			return group.indexOfChild(header) + 1;
+		}
+		int added = buildSectionHeader(group, app.getString(R.string.poi_card_section_nearby), position);
+		group.getChildAt(position + added - 1).setTag(NEARBY_HEADER_KEY);
+		return position + added;
+	}
+
 	public void buildInternalRows(@NonNull View view) {
-		amenityUIHelper = new AmenityUIHelper(mapActivity, infoBundle);
-		amenityUIHelper.setLight(isLightContent());
-		amenityUIHelper.setLatLon(getLatLon());
-		amenityUIHelper.setCollapseExpandListener(getCollapseExpandListener());
-		amenityUIHelper.buildInternal(view);
+		getAmenityUIHelper().buildInternal(view);
+	}
+
+	@NonNull
+	private AmenityUIHelper getAmenityUIHelper() {
+		if (amenityUIHelper == null) {
+			amenityUIHelper = new AmenityUIHelper(mapActivity, infoBundle);
+			amenityUIHelper.setLight(isLightContent());
+			amenityUIHelper.setLatLon(getLatLon());
+			amenityUIHelper.setCollapseExpandListener(getCollapseExpandListener());
+		}
+		return amenityUIHelper;
 	}
 
 	private void buildNamesRow(ViewGroup view) {
@@ -201,7 +309,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			View wikiRow = group.findViewWithTag(NEAREST_WIKI_KEY);
 			int insertIndex = wikiRow != null
 					? group.indexOfChild(wikiRow) + 1
-					: position;
+					: Math.min(position, group.getChildCount());
 
 			View amenitiesRow = createRowContainer(context, NEAREST_POI_KEY);
 			firstRow = insertIndex == 0 || isDividerAtPosition(group, insertIndex - 1);

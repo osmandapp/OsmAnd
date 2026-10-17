@@ -11,7 +11,15 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
-	<string name="select_tracks">Select tracks</string>
+	<string name="poi_card_section_nearby">Nearby</string>
+    <string name="poi_card_section_contacts">Contacts &amp; address</string>
+    <string name="poi_card_section_service">Service options</string>
+    <string name="poi_card_section_food">Food &amp; drinks</string>
+    <string name="poi_card_section_amenities">Amenities</string>
+    <string name="poi_card_section_accessibility">Accessibility</string>
+    <string name="poi_card_section_payment">Payment &amp; prices</string>
+    <string name="poi_card_section_location">Location</string>
+    <string name="select_tracks">Select tracks</string>
 	<string name="storage_directory_visible_external">Visible external storage</string>
 	<string name="eta_group_header">Estimated arrival time</string>
 	<string name="travel_speed">Travel speed</string>
