@@ -9,8 +9,6 @@ import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.os.HandlerThread;
-import android.system.ErrnoException;
-import android.system.OsConstants;
 import android.util.DisplayMetrics;
 
 import androidx.annotation.NonNull;
@@ -1097,16 +1095,8 @@ public class ResourceManager {
 			@NonNull File file, @Nullable Long modifiedTime) throws IOException {
 		file.getParentFile().mkdirs();
 		if (!isAssetEqualToFile(manager, name, file)) {
-			try {
-				replaceFileWithAsset(manager, name, file);
-			} catch (IOException e) {
-				if (!isOutOfSpace(e)) {
-					throw e;
-				}
-				// no room for a second copy next to the old file, so it is rewritten in place as before
-				Algorithms.removeAllFiles(file);
-				writeAsset(manager, name, file);
-			}
+			// without room for the new copy the old file is kept as it is and the copy fails
+			replaceFileWithAsset(manager, name, file);
 		}
 		return modifiedTime != null && file.setLastModified(modifiedTime);
 	}
@@ -1128,18 +1118,20 @@ public class ResourceManager {
 
 	private static void writeAsset(@NonNull AssetManager manager, @NonNull String name,
 			@NonNull File file) throws IOException {
-		try (InputStream is = manager.open(name, AssetManager.ACCESS_STREAMING);
-		     FileOutputStream out = new FileOutputStream(file)) {
-			Algorithms.streamCopy(is, out);
+		try (InputStream is = manager.open(name, AssetManager.ACCESS_STREAMING)) {
+			// available() of an asset stream is its remaining uncompressed size
+			File folder = file.getParentFile();
+			if (folder != null && folder.getUsableSpace() < is.available()) {
+				throw new IOException("Not enough space for " + name + " in " + folder.getAbsolutePath());
+			}
+			try (FileOutputStream out = new FileOutputStream(file)) {
+				Algorithms.streamCopy(is, out);
+			}
 		} catch (IOException e) {
-			// a partial file is never left behind: a truncated asset that exists would not be copied again
+			// a partial temp file is never left behind to fill the disk
 			file.delete();
 			throw e;
 		}
-	}
-
-	private static boolean isOutOfSpace(@NonNull IOException e) {
-		return e.getCause() instanceof ErrnoException errnoException && errnoException.errno == OsConstants.ENOSPC;
 	}
 
 	private static boolean isAssetEqualToFile(@NonNull AssetManager manager, @NonNull String name,
@@ -1147,27 +1139,38 @@ public class ResourceManager {
 		if (!file.isFile()) {
 			return false;
 		}
-		try (InputStream assetStream = manager.open(name, AssetManager.ACCESS_STREAMING);
-		     InputStream fileStream = new FileInputStream(file)) {
-			byte[] assetBuffer = new byte[64 * 1024];
+		try (InputStream assetStream = manager.open(name, AssetManager.ACCESS_STREAMING)) {
+			return isStreamEqualToFile(assetStream, file);
+		} catch (IOException e) {
+			// an unreadable asset fails in the copy itself
+			return false;
+		}
+	}
+
+	public static boolean isStreamEqualToFile(@NonNull InputStream stream, @NonNull File file) {
+		if (!file.isFile()) {
+			return false;
+		}
+		try (InputStream fileStream = new FileInputStream(file)) {
+			byte[] streamBuffer = new byte[64 * 1024];
 			byte[] fileBuffer = new byte[64 * 1024];
 			while (true) {
-				int assetRead = readFully(assetStream, assetBuffer);
+				int streamRead = readFully(stream, streamBuffer);
 				int fileRead = readFully(fileStream, fileBuffer);
-				if (assetRead != fileRead) {
+				if (streamRead != fileRead) {
 					return false;
 				}
-				if (assetRead == 0) {
+				if (streamRead == 0) {
 					return true;
 				}
-				for (int i = 0; i < assetRead; i++) {
-					if (assetBuffer[i] != fileBuffer[i]) {
+				for (int i = 0; i < streamRead; i++) {
+					if (streamBuffer[i] != fileBuffer[i]) {
 						return false;
 					}
 				}
 			}
 		} catch (IOException e) {
-			// an unreadable file is rewritten; an unreadable asset fails in the copy itself
+			// an unreadable file is rewritten
 			return false;
 		}
 	}
