@@ -11,7 +11,8 @@
 	A value of an additional property (yes, no, limited, only, designated...) is written as "Name: value", always
 	with the value, also for yes: "Fridge: yes", "Fridge: no", "Smoking: not allowed", "Kayaks: yes". The app
 	picks the part it needs: "Yes" under the "Fridge" group, "Fridge" as a filter chip or search result. Do not
-	put the name after ";" - ";" separates search synonyms only.
+	put the name after ";" - ";" separates search synonyms only. The separator is the plain ":" in every language,
+	also in Chinese and Japanese (not the full-width "："); the app splits at the first ":".
 	Do not repeat words: the first word is searched too, and search ignores case, so a synonym equal to the first
 	word or to another synonym ("Librairie;Librairie", "Fleuriste;fleuriste") does nothing.
 -->
