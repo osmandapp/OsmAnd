@@ -3215,7 +3215,7 @@
     <string name="poi_nutrition_supplements">Uztura bagātinātāji</string>
     <string name="poi_outpost">Preču saņemšanas punkts</string>
     <string name="poi_parcel_locker">Paku skapis</string>
-    <string name="poi_parking_space">Invalīdu stāvvieta</string>
+    <string name="poi_parking_space">Stāvvieta;invalīdu stāvvieta</string>
     <string name="poi_pillory">Kauna stabs</string>
     <string name="poi_service_vehicle_car_parts_yes">Auto daļas;auto rezerves daļas</string>
     <string name="poi_service_vehicle_inspection_yes">Tehniskā apskate;transportlīdzekļu tehniskā apskate</string>

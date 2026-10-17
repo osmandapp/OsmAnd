@@ -1585,7 +1585,7 @@
     <string name="poi_indoor_play">مرکز بازی</string>
     <string name="poi_laboratory">آزمایشگاه;پاتوبیولوژی</string>
     <string name="poi_lifeguard">نجات غریق</string>
-    <string name="poi_motorcycle_repair">سیکلت;تعمیر موتور سیکلت</string>
+    <string name="poi_motorcycle_repair">تعمیر موتور سیکلت</string>
     <string name="poi_recycling_container">ظرف بازیافت</string>
     <string name="poi_service_bicycle_repair_yes">تعمیر دوچرخه</string>
     <string name="poi_service_vehicle_car_parts_yes">لوازم یدکی</string>
