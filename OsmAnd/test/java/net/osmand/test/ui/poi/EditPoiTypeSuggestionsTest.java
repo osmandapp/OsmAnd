@@ -13,6 +13,7 @@ import static net.osmand.test.common.SystemDialogInteractions.hasTextEventually;
 import static net.osmand.test.common.SystemDialogInteractions.waitForAnyView;
 import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -21,6 +22,7 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 
 import net.osmand.data.LatLon;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.MapPoiTypesTranslator;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -82,35 +84,31 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 		EditPoiDialogFragment.showAddPoiInstance(mapActivity, latLon.getLatitude(), latLon.getLongitude());
 
-		//check: magasin de v
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de v"));
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
-//		Thread.sleep(100)
-		onView(withText("Magasin de vélos"))
-				.inRoot(RootMatchers.isPlatformPopup())
-				.check(ViewAssertions.matches(isDisplayed()));
-		//clear
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.replaceText(""));
-		//check: magasin de ve
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de ve"));
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
-		onView(withText("Magasin de vélos"))
-				.inRoot(RootMatchers.isPlatformPopup())
-				.check(ViewAssertions.matches(isDisplayed()));
-
-		//clear
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.replaceText(""));
-		//check: magasin de vé
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de vel"));
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
-		onView(withText("Magasin de vélos"))
-				.inRoot(RootMatchers.isPlatformPopup())
-				.check(ViewAssertions.matches(isDisplayed()));
+		// The French name comes from Weblate (was "Magasin de vélos", now "Boutique de vélos"),
+		// so take it from the app instead of hardcoding it.
+		PoiType bicycleShop = app.getPoiTypes().getPoiTypeByKey("bicycle");
+		assertNotNull(bicycleShop);
+		String name = bicycleShop.getTranslation();
+		int accent = name.toLowerCase().indexOf("vé");
+		assertTrue("French bicycle shop name has no \"vé\": " + name, accent > 0);
+		// "<...> v", "<...> ve", "<...> vel": the typed text has no accent, the suggestion has one
+		String prefix = name.substring(0, accent).toLowerCase();
+		String[] queries = {prefix + "v", prefix + "ve", prefix + "vel"};
+		for (int i = 0; i < queries.length; i++) {
+			if (i > 0) {
+				onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.replaceText(""));
+			}
+			onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText(queries[i]));
+			waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText(name), isDisplayed()));
+			onView(withText(name))
+					.inRoot(RootMatchers.isPlatformPopup())
+					.check(ViewAssertions.matches(isDisplayed()));
+		}
 		//select item
-		onView(withText("Magasin de vélos"))
+		onView(withText(name))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.perform(ViewActions.click());
-		onDialogView(withId(R.id.poiTypeEditText)).check(hasTextEventually("Magasin de vélos"));
+		onDialogView(withId(R.id.poiTypeEditText)).check(hasTextEventually(name));
 
 		onDialogView(isRoot()).perform(ViewActions.closeSoftKeyboard());
 
