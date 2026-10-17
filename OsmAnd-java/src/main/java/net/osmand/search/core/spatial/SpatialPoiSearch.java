@@ -200,10 +200,8 @@ public class SpatialPoiSearch {
 			poiType.parentTypes = new ArrayList<>();
 			poiType.parentTypes.add(parent);
 		}
-		// an additional value is indexed by its name only: "Subway station", not "yes"
-		String translation = PoiAdditionalLabels.getSearchName(pt);
-		if (!basePoiName.equals(translation)) {
-			String[] split = translation.split(";");
+		if (!basePoiName.equals(pt.getTranslation())) {
+			String[] split = pt.getTranslation().split(";");
 			for (String tr : split) {
 				poiType.addName(SearchAlgorithms.alignChars(tr.trim()));
 				// only first

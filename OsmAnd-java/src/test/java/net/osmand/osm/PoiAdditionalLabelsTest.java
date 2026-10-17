@@ -61,16 +61,15 @@ public class PoiAdditionalLabelsTest {
 
 	@Test
 	public void searchTakesAcceptedValuesOnly() {
-		assertTrue(PoiAdditionalLabels.isAcceptedValue("yes", "Fridge: yes"));
-		assertTrue(PoiAdditionalLabels.isAcceptedValue("yes", "Takeaway"));
-		assertTrue(PoiAdditionalLabels.isAcceptedValue("only", "Takeaway: only"));
-		assertTrue(PoiAdditionalLabels.isAcceptedValue("designated", "Bicycle: designated"));
-		// station=subway is written "Subway station: yes", older "Yes;Subway station"
-		assertTrue(PoiAdditionalLabels.isAcceptedValue("subway", "Subway station: yes"));
-		assertTrue(PoiAdditionalLabels.isAcceptedValue("subway", "Yes"));
-		assertFalse(PoiAdditionalLabels.isAcceptedValue("no", "Fridge: no"));
-		assertFalse(PoiAdditionalLabels.isAcceptedValue("limited", "Limited"));
-		assertFalse(PoiAdditionalLabels.isAcceptedValue("outside", "Smoking: outside only"));
+		assertTrue(PoiAdditionalLabels.isAcceptedValue("yes"));
+		assertTrue(PoiAdditionalLabels.isAcceptedValue("only"));
+		assertTrue(PoiAdditionalLabels.isAcceptedValue("designated"));
+		// options are not states: fuel:diesel, healthcare:speciality, station=subway
+		assertTrue(PoiAdditionalLabels.isAcceptedValue("gynaecology"));
+		assertTrue(PoiAdditionalLabels.isAcceptedValue("subway"));
+		assertFalse(PoiAdditionalLabels.isAcceptedValue("no"));
+		assertFalse(PoiAdditionalLabels.isAcceptedValue("limited"));
+		assertFalse(PoiAdditionalLabels.isAcceptedValue("outside"));
 	}
 
 	@Test
