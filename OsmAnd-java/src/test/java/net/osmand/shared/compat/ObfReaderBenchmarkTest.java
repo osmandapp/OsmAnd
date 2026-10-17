@@ -51,8 +51,9 @@ import java.util.List;
  * read every amenity                 1.9 ms    2.0 ms      6285
  * find amenities by name (20)       25.1 ms   15.4 ms       360
  * </pre>
- * Opening is not a like for like: java also reads the address and transport headers, which the
- * copy skips. On the objects the copy is at least as fast as java, and on the name search it is
+ * Opening is not a like for like: java also reads the transport header, which the copy skips;
+ * the address header the copy reads too since the address section was copied, at no cost that
+ * {@link AddressReaderBenchmarkTest} could measure. On the objects the copy is at least as fast as java, and on the name search it is
  * half again faster, which is the collation key of {@code KCollatorStringMatcher} paying off: a
  * name search asks the matcher about every name of every amenity of every candidate block. The
  * same files on Kotlin/Native cost 2.4, 21.5, 3.6 and 34.0 ms; there the name search ends up a

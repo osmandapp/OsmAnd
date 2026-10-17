@@ -132,6 +132,30 @@ object KAlgorithms {
 		return c in '0'..'9'
 	}
 
+	/** The first run of digits of [s], "#3" giving 3; stops at a letter or at the end of the run. */
+	fun extractFirstIntegerNumber(s: String): Int {
+		var i = 0
+		for (k in s.indices) {
+			if (isDigit(s[k])) {
+				i = i * 10 + (s[k] - '0')
+			} else if (s[k].isLetter() || i > 0) {
+				// allow '#3'- > 3 parsed
+				break
+			}
+		}
+		return i
+	}
+
+	/** What follows the leading digits of [s]: "12a" gives "a", "12" gives "". */
+	fun extractIntegerSuffix(s: String): String {
+		for (k in s.indices) {
+			if (!s[k].isDigit()) {
+				return s.substring(k)
+			}
+		}
+		return ""
+	}
+
 	/**
 	 * Index right after the leading decimal number of [value], -1 when it does not start with one.
 	 * A trailing dot is not part of the number, so "40." reports 2.
