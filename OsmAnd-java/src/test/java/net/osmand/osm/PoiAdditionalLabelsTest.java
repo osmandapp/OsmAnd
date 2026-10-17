@@ -60,6 +60,28 @@ public class PoiAdditionalLabelsTest {
 	}
 
 	@Test
+	public void searchTakesYesValuesOnly() {
+		assertTrue(PoiAdditionalLabels.isYesValue("yes", "Fridge: yes"));
+		assertTrue(PoiAdditionalLabels.isYesValue("yes", "Takeaway"));
+		// station=subway is written "Subway station: yes", older "Yes;Subway station"
+		assertTrue(PoiAdditionalLabels.isYesValue("subway", "Subway station: yes"));
+		assertTrue(PoiAdditionalLabels.isYesValue("subway", "Yes"));
+		assertFalse(PoiAdditionalLabels.isYesValue("no", "Fridge: no"));
+		assertFalse(PoiAdditionalLabels.isYesValue("limited", "Limited"));
+		assertFalse(PoiAdditionalLabels.isYesValue("outside", "Smoking: outside only"));
+	}
+
+	@Test
+	public void searchNameIsThePartBeforeTheColon() {
+		assertEquals("Станция метро", PoiAdditionalLabels.getSearchName("Станция метро: да", "Subway station: yes", "метро", "Станция метро"));
+		// older strings: "Да;Станция метро" translates to "Да"
+		assertEquals("Станция метро", PoiAdditionalLabels.getSearchName("Да", "Yes", "Станция метро", "Станция метро"));
+		assertEquals("Питьевая вода", PoiAdditionalLabels.getSearchName("Да", "Yes", "", "Питьевая вода"));
+		assertEquals("Takeaway", PoiAdditionalLabels.getSearchName("Takeaway", "Takeaway", "", "Takeaway"));
+		assertEquals("Vegan", PoiAdditionalLabels.getSearchName("Vegan", "Vegan", "", "Diet"));
+	}
+
+	@Test
 	public void translationsWithoutNameStayAsTheyAre() {
 		List<String> current = Arrays.asList("Limited", "No", "Yes");
 		assertEquals(current, PoiAdditionalLabels.getGroupLabels(current, Arrays.asList("limited", "no", "yes")));

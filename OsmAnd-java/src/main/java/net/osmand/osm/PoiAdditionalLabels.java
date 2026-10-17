@@ -36,6 +36,67 @@ public class PoiAdditionalLabels {
 	}
 
 	/**
+	 * Search shows and indexes "yes" values only: OSM value yes, or an English translation "Name: yes"
+	 * ("Subway station: yes" for station=subway) or the older "Yes;Name".
+	 */
+	public static boolean isYesValue(String osmValue, String enTranslation) {
+		if (YES.equals(osmValue)) {
+			return true;
+		}
+		String[] nameValue = splitNameValue(enTranslation);
+		String value = nameValue != null ? nameValue[1] : enTranslation;
+		return YES.equalsIgnoreCase(value);
+	}
+
+	public static boolean isYesValue(PoiType poiType) {
+		return isYesValue(poiType.getOsmValue(), poiType.getEnTranslation());
+	}
+
+	/**
+	 * Name of an additional value in search, the part before ":" ("Subway station: yes" -> "Subway station").
+	 * The older "Yes;Subway station" gives the first synonym, a translation without a name stays as it is.
+	 */
+	public static String getSearchName(String translation, String enTranslation, String synonyms, String groupName) {
+		String[] nameValue = splitNameValue(translation);
+		if (nameValue != null) {
+			return nameValue[0];
+		}
+		if (YES.equalsIgnoreCase(enTranslation)) {
+			if (!Algorithms.isEmpty(synonyms)) {
+				String first = synonyms.split(";")[0].trim();
+				if (!first.isEmpty()) {
+					return first;
+				}
+			}
+			if (!Algorithms.isEmpty(groupName)) {
+				return groupName;
+			}
+		}
+		return translation;
+	}
+
+	public static String getSearchName(AbstractPoiType poiType) {
+		if (!poiType.isAdditional()) {
+			return poiType.getTranslation();
+		}
+		return getSearchName(poiType.getTranslation(), poiType.getEnTranslation(), poiType.getSynonyms(),
+				poiType.getPoiAdditionalCategoryTranslation());
+	}
+
+	public static String getEnSearchName(AbstractPoiType poiType) {
+		String enTranslation = poiType.getEnTranslation();
+		if (!poiType.isAdditional()) {
+			return enTranslation;
+		}
+		String[] nameValue = splitNameValue(enTranslation);
+		if (nameValue != null) {
+			return nameValue[0];
+		}
+		// the older "Yes;Name" has no English name, only the value
+		return YES.equalsIgnoreCase(enTranslation) ? null : enTranslation;
+	}
+
+	/**
 	 * A group of one "yes" value is a single switch, not a list.
 	 */
 	public static boolean isSingleYes(List<String> osmValues) {
