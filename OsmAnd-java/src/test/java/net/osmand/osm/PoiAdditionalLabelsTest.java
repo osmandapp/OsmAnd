@@ -21,6 +21,7 @@ public class PoiAdditionalLabelsTest {
 		assertArrayEquals(new String[] {"吸菸", "允許"}, PoiAdditionalLabels.splitNameValue("吸菸: 允許"));
 		assertNull(PoiAdditionalLabels.splitNameValue("Yes"));
 		assertNull(PoiAdditionalLabels.splitNameValue("Diesel"));
+		assertNull(PoiAdditionalLabels.splitNameValue("1:25 fuel"));
 		assertNull(PoiAdditionalLabels.splitNameValue(""));
 		assertNull(PoiAdditionalLabels.splitNameValue(null));
 	}

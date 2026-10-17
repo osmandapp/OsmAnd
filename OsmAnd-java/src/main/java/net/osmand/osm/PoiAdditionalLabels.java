@@ -19,7 +19,6 @@ public class PoiAdditionalLabels {
 	// values that mean the property is there; search finds an additional value only by one of them
 	private static final Set<String> ACCEPTED_VALUES = Set.of(YES, "only", "designated");
 
-
 	/**
 	 * @return {name, value} or null if the translation is not "Name: value"
 	 */
@@ -33,7 +32,17 @@ public class PoiAdditionalLabels {
 		}
 		String name = translation.substring(0, index).trim();
 		String value = translation.substring(index + 1).trim();
-		return name.isEmpty() || value.isEmpty() ? null : new String[] {name, value};
+		// a name has letters: "1:25 fuel" is a value, not "1" + "25 fuel"
+		return !hasLetter(name) || value.isEmpty() ? null : new String[] {name, value};
+	}
+
+	private static boolean hasLetter(String s) {
+		for (int i = 0; i < s.length(); i++) {
+			if (Character.isLetter(s.charAt(i))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

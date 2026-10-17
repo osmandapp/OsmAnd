@@ -18,13 +18,17 @@ object AmenityTagEntriesBuilder {
 	): AmenityTagEntry {
 		var prefix = textPrefix
 		val text: String
-		val single = if (poiAdditional && types.size == 1) splitNameValue(types[0].getTranslation()) else null
-		if (single != null && isOneTagGroup(types[0])) {
-			// one value of a property: "Smoking: no" -> "Smoking" over "No"
-			prefix = single.first
-			text = KAlgorithms.capitalizeFirstLetter(single.second) ?: single.second
+		val nameValues = if (poiAdditional && types.isNotEmpty()) types.map { splitNameValue(it.getTranslation()) } else emptyList()
+		val propertyName = nameValues.firstOrNull()?.first
+		if (propertyName != null && isOneTagGroup(types[0])
+			&& nameValues.all { it != null && it.first.equals(propertyName, ignoreCase = true) }) {
+			// values of one property: "Smoking: no" -> "Smoking" over "No"
+			prefix = propertyName
+			text = nameValues.joinToString(TRANSLATIONS_SEPARATOR) {
+				KAlgorithms.capitalizeFirstLetter(it!!.second) ?: it.second
+			}
 		} else if (poiAdditional) {
-			// several values, or one option of a list: "Rented boats" over "Kayaks" 
+			// options of a list: "Rented boats" over "Kayaks"
 			text = types.joinToString(TRANSLATIONS_SEPARATOR) { getGroupValueLabel(it) }
 		} else {
 			text = types.joinToString(TRANSLATIONS_SEPARATOR) { it.getTranslation() }
@@ -60,7 +64,8 @@ object AmenityTagEntriesBuilder {
 		}
 		val name = translation.substring(0, index).trim()
 		val value = translation.substring(index + 1).trim()
-		return if (name.isEmpty() || value.isEmpty()) null else Pair(name, value)
+		// a name has letters: "1:25 fuel" is a value, not "1" + "25 fuel"
+		return if (name.none { it.isLetter() } || value.isEmpty()) null else Pair(name, value)
 	}
 
 	/**
