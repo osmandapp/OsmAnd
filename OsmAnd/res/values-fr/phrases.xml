@@ -42,7 +42,7 @@
     <string name="poi_beacon_special_purpose">Balise à usage spécifique</string>
     <string name="poi_beauty">Salon de beauté;beauté;Institut de beauté;soins de beauté</string>
     <string name="poi_beverages">Magasin de boissons</string>
-    <string name="poi_bicycle">Boutique de vélos;vélo;vélos;vélos;Boutique cycliste;Magasin de vélos</string>
+    <string name="poi_bicycle">Magasin de vélos;Boutique de vélos;vélo;vélos;Boutique cycliste</string>
     <string name="poi_bicycle_parking">Parking à vélos;Parking à vélo</string>
     <string name="poi_bicycle_rental">Location de vélos</string>
     <string name="poi_biergarten">Brasserie en plein air</string>
@@ -119,7 +119,7 @@
     <string name="poi_dam">Barrage</string>
     <string name="poi_dance_floor">Salle de danse</string>
     <string name="poi_military_danger_area">Zone dangereuse</string>
-    <string name="poi_deli">Traiteur;Épicerie fine</string>
+    <string name="poi_deli">Épicerie fine;traiteur</string>
     <string name="poi_dentist">Dentiste</string>
     <string name="poi_department_store">Grand magasin</string>
     <string name="poi_diving">Plongeon</string>
