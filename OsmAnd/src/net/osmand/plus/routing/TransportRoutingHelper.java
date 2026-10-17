@@ -468,6 +468,8 @@ public class TransportRoutingHelper {
 		private final Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
 		private final Map<Pair<Location, LatLon>, RouteCalculationResult> walkingRouteSegmentsCache = new HashMap<>();
 		private boolean walkingSegmentsCalculated;
+		// the walking segment being calculated now, on the RoutingHelper executor
+		private RouteCalculationProgress walkingRouteProgress;
 		private final NativeLibrary lib;
 
 		String routeCalcError;
@@ -487,6 +489,11 @@ public class TransportRoutingHelper {
 		public void stopCalculation() {
 			params.calculationProgress.isCancelled = true;
 			params.calculationProgress.memoryLimitExceeded = false; // a stop requested here wins over a stop by the memory guard
+			// otherwise it keeps routing on the RoutingHelper executor next to the public transport calculation that replaces this one
+			RouteCalculationProgress walkingProgress = walkingRouteProgress;
+			if (walkingProgress != null) {
+				walkingProgress.isCancelled = true;
+			}
 		}
 
 		/**
@@ -588,6 +595,7 @@ public class TransportRoutingHelper {
 			params.mode = walkingMode;
 			params.ctx = app;
 			params.calculationProgress = new RouteCalculationProgress();
+			walkingRouteProgress = params.calculationProgress;
 			params.calculationProgressListener = new RouteCalculationProgressListener() {
 
 				@Override
@@ -615,7 +623,7 @@ public class TransportRoutingHelper {
 						}
 						walkingSegmentsFromCacheOnly.clear();
 						walkingSegmentsCalculated = true;
-					} else {
+					} else if (!RouteRecalculationTask.this.params.calculationProgress.isCancelled) {
 						onUpdateCalculationProgress(0);
 						RouteCalculationParams walkingRouteParams = getOrProcessWalkingRouteParams();
 						if (walkingRouteParams != null) {
