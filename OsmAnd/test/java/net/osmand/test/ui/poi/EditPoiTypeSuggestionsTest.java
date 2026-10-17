@@ -82,35 +82,35 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 		EditPoiDialogFragment.showAddPoiInstance(mapActivity, latLon.getLatitude(), latLon.getLongitude());
 
-		//check: magasin de v
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de v"));
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
+		//check: boutique de v
+		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("boutique de v"));
+		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Boutique de vélos"), isDisplayed()));
 //		Thread.sleep(100)
-		onView(withText("Magasin de vélos"))
+		onView(withText("Boutique de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.check(ViewAssertions.matches(isDisplayed()));
 		//clear
 		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.replaceText(""));
-		//check: magasin de ve
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de ve"));
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
-		onView(withText("Magasin de vélos"))
+		//check: boutique de ve
+		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("boutique de ve"));
+		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Boutique de vélos"), isDisplayed()));
+		onView(withText("Boutique de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.check(ViewAssertions.matches(isDisplayed()));
 
 		//clear
 		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.replaceText(""));
-		//check: magasin de vé
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de vel"));
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
-		onView(withText("Magasin de vélos"))
+		//check: boutique de vé
+		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("boutique de vel"));
+		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Boutique de vélos"), isDisplayed()));
+		onView(withText("Boutique de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.check(ViewAssertions.matches(isDisplayed()));
 		//select item
-		onView(withText("Magasin de vélos"))
+		onView(withText("Boutique de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.perform(ViewActions.click());
-		onDialogView(withId(R.id.poiTypeEditText)).check(hasTextEventually("Magasin de vélos"));
+		onDialogView(withId(R.id.poiTypeEditText)).check(hasTextEventually("Boutique de vélos"));
 
 		onDialogView(isRoot()).perform(ViewActions.closeSoftKeyboard());
 
