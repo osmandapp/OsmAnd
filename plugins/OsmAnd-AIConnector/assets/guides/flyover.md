@@ -19,6 +19,8 @@ from the location for the recording and linked again after it.
   first time. Tell the user the expected wait before long videos.
 - Map frames are rendered at twice the size and scaled down (smooth lines) while the doubled size fits 3840 px.
 - Map labels and icons are laid out again every 2.5 s of video time and fade in and out in 0.4 s.
+- My location marker is not drawn in a video or a picture, and the tracks the user has on the map otherwise are
+  taken off it for the recording; `"other_tracks": "keep"` leaves them on.
 
 ### Keep the map slow on the screen
 
@@ -48,6 +50,8 @@ At zoom 15 and 1280x720 a camera move of 1 km takes roughly 8-10 s to stay smoot
 | `osmand_widgets` | works | `["profile_icon", "ruler", "compass"]` |
 | `profile` | works | profile key for the profile icon; default the current profile |
 | `attribution` | works | default "OsmAnd · © OpenStreetMap"; it must credit OpenStreetMap |
+| `output` | works | `video` (default) or `image`: the last frame alone as a JPEG picture (a map card with the panels), `quality` 1-100 (default 92); the result's `file` ends in `.jpg`. Two equal key frames a millisecond apart give a single frame |
+| `logo` | works | with `"osmand_logo"` in `osmand_widgets`: `{"opacity": 0.6, "full_from_s": 30, "fade_s": 0.4, "gravity": "top|left", "margin": 64, "margin_top": 20}`, the logo is translucent until `full_from_s` and opaque from then on (default opaque), placed like a panel (default `bottom|center` with the overlay's own margin) |
 | `panels[]` | works | panels of widgets, see below |
 | `data` | works | your own values for panels, see Values |
 
@@ -118,7 +122,7 @@ recording only; the user's own shown tracks are put back afterwards. Track waypo
 | `file` | works | a saved track: path in OsmAnd's tracks folder, e.g. `rec/2026-10-11_ride.gpx` or `import/x.gpx` (see `osmand_list_tracks`) |
 | `gpx_data` | works | instead of `file`: a GPX passed in the call as text (any track or route); used for this recording only, not added to the user's tracks. Up to about 300 KB (the whole call travels in one Android Binder transaction); a bigger track goes to the phone as a file first |
 | `profile` | works | profile key whose map icons the head uses; default the file's `osmand:profile`, else the current profile; the first track's profile is also the profile icon's when the request has no `profile` |
-| `time` | works | `{"mode": "duration", "duration_s": 30}` (default: the whole video): spread over the time, by the track's own times when it has them, else by distance; `{"mode": "track", "speed_x": 60, "offset_s": 0}`: the track's own times sped up. With `duration` the track speeds up and slows down over `ease_in_s` / `ease_out_s` (default 1 s each) |
+| `time` | works | `{"mode": "duration", "duration_s": 30}` (default: the whole video): spread over the time, by the track's own times when it has them, else by distance; `{"mode": "track", "speed_x": 60, "offset_s": 0}`: the track's own times sped up. With `duration` the track speeds up and slows down over `ease_in_s` / `ease_out_s` (default 1 s each); `"by": "distance"` moves the point evenly along the length of a timed track instead of by its times (no pauses, no sprints), as a camera that flies at one speed does |
 | `from_s` | works | when the track appears and starts moving (its current point stays at the start before) |
 | style | works | over the file's own: `color`, `width` (`thin`/`medium`/`bold`/number), `coloring_type` (`solid`, `speed`, `altitude`, `slope`, ...), `color_palette`, `show_arrows`, `show_start_finish`, `split_type`, `split_interval`, `visualization_3d`, `wall_coloring`, `line_position_3d`, `vertical_exaggeration`, `elevation_meters`, `show_wpts`. Drawn by OsmAnd's own track layer, so a track looks as in the app; `show_arrows` and `show_start_finish` are on unless the file or the request turns them off (a saved track keeps the look the user gave it) |
 | `to_s`, `fade_s` | works | when the track disappears; it fades in after `from_s` and out before `to_s` |
@@ -154,8 +158,9 @@ Order: `wpt` in the request, then the waypoint's own tags, then `wpt_defaults`.
 
 ## OsmAnd elements — works
 
-`"osmand_widgets": ["profile_icon", "ruler", "compass"]`: the profile icon (top left), OsmAnd's ruler (bottom left)
-and compass (top right, turns with the map), drawn as in OsmAnd. The attribution is always drawn bottom right.
+`"osmand_widgets": ["profile_icon", "ruler", "compass", "osmand_logo"]`: the profile icon (top left), OsmAnd's ruler
+(bottom left), compass (top right, turns with the map) and the OsmAnd logo (bottom center, see `logo`), drawn as in
+OsmAnd. The attribution is always drawn bottom right.
 Keep panels clear of these corners with `margin`.
 
 Laying out panels: the frame's corners hold the profile icon (top left), compass (top right), ruler (bottom left)
@@ -171,9 +176,10 @@ Placed like a FrameLayout:
 | Field | Meaning |
 |---|---|
 | `gravity` | `top|left`, `top|center`, `top|right`, `center|left`, `center`, `center|right`, `bottom|left`, `bottom|center`, `bottom|right` |
-| `margin` | from the frame's edge, video pixels; default 16 |
+| `margin` | from the frame's edge, video pixels; default 16; `margin_top`, `margin_bottom`, `margin_left`, `margin_right` for one side |
 | `width` | none: as wide as the widgets; 0-1: a fraction of the frame; above 1: video pixels |
 | `orientation` | `vertical` (default) or `horizontal` |
+| `columns` | a grid of that many equal columns instead of a row or a column; a widget with `"span": "row"` takes a row of its own (a title over a grid of values) |
 | `size` | widget size `small` / `medium` (default) / `large`, as OsmAnd's widget sizes; a widget may set its own |
 | `background` | `default` (the user's widget look), `transparent` (OsmAnd's transparent widgets, outlined text) or 0-1 opacity |
 | `from_s`, `to_s`, `fade_s` | when the panel shows |
@@ -188,11 +194,16 @@ then the title above the value and its unit. Three types:
 - `{"type": "chart", "title": "Heart rate", "value": "gpx[1].hr"}` — the value over the whole track, smoothed, the
   passed part highlighted and a cursor at the current point; `width_dp` (default 280), `height_dp` (default 56).
   `value2` adds a second value as a line on its own scale (e.g. `"value": "gpx[1].ele", "value2": "gpx[1].speed"`),
-  in `color2` (default orange); put both names in the title, e.g. "Altitude · speed".
+  in `color2` (default orange), its labels in `label_color2` (default `color2`); put both names in the title,
+  e.g. "Altitude · speed". The lowest and highest value
+  of each series stand at its side (the first on the left, `value2` on the right), half the track's length and the
+  whole under the plot; `"labels": false` leaves them out. `"cursor": false` leaves out the current point and draws
+  the whole area and the `value` labels in the highlight colour, as at the end of a video (for a still picture).
 
 `icon`: an OsmAnd drawable name (e.g. `widget_speed`, `widget_sensor_heart_rate`); by default the icon OsmAnd's own
 widget for that value has. `unit`: `auto` (the profile's units) or `km`, `mi`, `m`, `ft`, `km/h`, `mph`, `min/km`,
-`min/mi`, `h:mm:ss`, or any label. A value the track does not have is shown as "—".
+`min/mi`, `h:mm:ss`, or any label. A value the track does not have is shown as "—". A value too wide for the panel
+gets a smaller font; `"lines": 3` lets it wrap onto up to that many lines first (a place name).
 
 ### Values
 
@@ -207,7 +218,8 @@ Whole track: `gpx[i].dist`, `.dist_moving`, `.duration`, `.duration_moving`, `.s
 `.wpt_count`, `.segments`.
 
 Track description: `gpx[i].name`, `.desc`, `.author`, `.activity`, `.city` (nearest city, from OsmAnd's track
-list), `.file`, `.meta.<tag>`.
+list), `.region` (where the track was recorded, from OsmAnd's map regions: the most specific region around the
+middle of the track and its country, "Lesser Poland Voivodeship, Poland"), `.file`, `.meta.<tag>`.
 
 Video and camera: `video.time`, `video.progress`, `camera.zoom`, `camera.lat`, `camera.lon`, `camera.heading`,
 `camera.tilt`.

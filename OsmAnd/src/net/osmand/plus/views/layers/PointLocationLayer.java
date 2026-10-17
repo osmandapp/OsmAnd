@@ -122,6 +122,8 @@ public class PointLocationLayer extends OsmandMapLayer
 	private CoreMapMarker navigationMarkerWithHeading;
 
 	private boolean markersInvalidated = true;
+	/** The marker is kept off the map, as while a map video is recorded. */
+	private boolean hidden;
 	private boolean showHeadingCached = false;
 	private Float lastBearingCached;
 	private Float lastHeadingCached;
@@ -693,12 +695,23 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 	}
 
+	/** Keeps the marker off the map, or lets it back: nothing of my location is drawn while hidden. */
+	public void setHidden(boolean hidden) {
+		if (this.hidden != hidden) {
+			this.hidden = hidden;
+			markersInvalidated = true;
+			if (view != null) {
+				view.refreshMap();
+			}
+		}
+	}
+
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
 		Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
         MapRendererView mapRenderer = getMapRenderer();
-		if (view == null || (mapRenderer == null && tileBox.getZoom() < MIN_ZOOM) || lastKnownLocation == null) {
+		if (view == null || (mapRenderer == null && tileBox.getZoom() < MIN_ZOOM) || lastKnownLocation == null || hidden) {
 			clearMapMarkersCollections();
 			return;
 		}
@@ -733,7 +746,7 @@ public class PointLocationLayer extends OsmandMapLayer
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
-		if (view == null || (!hasMapRenderer() && tileBox.getZoom() < MIN_ZOOM) || lastKnownLocation == null) {
+		if (view == null || (!hasMapRenderer() && tileBox.getZoom() < MIN_ZOOM) || lastKnownLocation == null || hidden) {
 			return;
 		}
 		if (!hasMapRenderer()) {

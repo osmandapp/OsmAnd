@@ -67,6 +67,8 @@ class FlyoverTrack {
 	/** The track's own profile (request or file), null when it uses the current one. */
 	@Nullable
 	final String profileKey;
+	/** The current point moves by distance along the track even when the track has times. */
+	private final boolean byDistance;
 	@Nullable
 	private Integer styleColor;
 	private final double speedX;
@@ -167,6 +169,8 @@ class FlyoverTrack {
 		headIcon = spec.optString("head_icon", "location".equals(head) ? profile.getLocationIcon() : profile.getNavigationIcon());
 		JSONObject timing = spec.optJSONObject("time");
 		String mode = timing != null ? timing.optString("mode", "duration") : "duration";
+		// "by": "distance" spreads a timed track over its length, not its times: no pauses, no sprints
+		byDistance = timing != null && "distance".equals(timing.optString("by"));
 		startS = fromS + (timing != null ? timing.optDouble("offset_s", 0) : 0);
 		if ("track".equals(mode) && this.timed) {
 			speedX = timing.optDouble("speed_x", 1);
@@ -209,6 +213,11 @@ class FlyoverTrack {
 	private static File findFile(@NonNull OsmandApplication app, @NonNull String name) {
 		if (Algorithms.isEmpty(name)) {
 			return null;
+		}
+		// an absolute path: a track the app holds outside its tracks folder (a file opened from another app)
+		File absolute = new File(name);
+		if (absolute.isAbsolute() && absolute.isFile()) {
+			return absolute;
 		}
 		File[] candidates = {
 				app.getAppPath(IndexConstants.GPX_INDEX_DIR + name),
@@ -281,7 +290,7 @@ class FlyoverTrack {
 		progress = Math.max(0, Math.min(1, progress));
 		int i;
 		double fraction;
-		if (timed) {
+		if (timed && !byDistance) {
 			double ms = time[0] + progress * (time[time.length - 1] - time[0]);
 			i = search(time, ms);
 			long span = time[i + 1] - time[i];
@@ -461,7 +470,7 @@ class FlyoverTrack {
 
 	/** A point at a distance along the track, with interpolated elevation (the 3D line stays on the relief). */
 	@NonNull
-	private WptPt pointAt(double distance) {
+	WptPt pointAt(double distance) {
 		int i = search(dist, distance);
 		double span = dist[i + 1] - dist[i];
 		double f = span > 0 ? Math.max(0, Math.min(1, (distance - dist[i]) / span)) : 0;
