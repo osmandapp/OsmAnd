@@ -4,5 +4,5 @@
     <string name="poi_fuel_avia_type">ប្រភេទឥន្ធនៈ (Avia)</string>
     <string name="poi_payment_type">ប្រភេទទូទាត់សងប្រាក់</string>
     <string name="poi_payment_fuel_type">កាតឥន្ធនៈ</string>
-    <string name="poi_school">បឋមសិក្សា</string>
+    <string name="poi_school">សាលារៀន;បឋមសិក្សា</string>
 </resources>

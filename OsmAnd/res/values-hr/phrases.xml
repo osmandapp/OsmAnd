@@ -2310,7 +2310,7 @@
     <string name="poi_bureau_de_change">Mjenjačnica</string>
     <string name="poi_camp_site">Kamp</string>
     <string name="poi_florist">Cvjećarnica</string>
-    <string name="poi_fuel">Benzinska</string>
+    <string name="poi_fuel">Benzinska postaja;benzinska</string>
     <string name="poi_jewelry">Zlatarna</string>
     <string name="poi_miniature_golf">Minigolf</string>
     <string name="poi_post_office">Pošta</string>

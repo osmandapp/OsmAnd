@@ -5196,7 +5196,7 @@
     <string name="poi_theme_filter">Tema</string>
     <string name="poi_theme_pirate">Pirata</string>
     <string name="poi_theme_rainforest">Selva</string>
-    <string name="poi_animal_breeding">Vaquería</string>
+    <string name="poi_animal_breeding">Cría de animales</string>
     <string name="poi_craft_printer">Imprenta</string>
     <string name="poi_luggage_locker">Consigna de equipajes</string>
 </resources>
