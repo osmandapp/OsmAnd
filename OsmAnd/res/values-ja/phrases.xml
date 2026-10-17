@@ -3447,7 +3447,7 @@
     <string name="poi_license_classes">取得可能な免許の種類</string>
     <string name="poi_shoe_repair">靴修理店</string>
     <string name="poi_bulk_purchase_yes">可;箱買い</string>
-    <string name="poi_bulk_purchase_only">箱買いのみ可;箱買いのみ可</string>
+    <string name="poi_bulk_purchase_only">箱買いのみ可</string>
     <string name="poi_pipeline_substation">パイプライン用設備</string>
     <string name="poi_substation_transmission">送電用変電所</string>
     <string name="poi_substation_distribution">配電用変電所</string>

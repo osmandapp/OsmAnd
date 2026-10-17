@@ -4840,7 +4840,7 @@
     <string name="poi_us_maps_recreation_area_restrictions">Informace o omezeních</string>
     <string name="poi_us_maps_recreation_area_activity_description">Popis aktivity</string>
     <string name="poi_us_maps_recreation_area_activity_poi">Bod zájmu</string>
-    <string name="poi_us_maps_recreation_area_activity_day_use_site">Oblast denního použití; Místo pro denní použití; Denní plocha; místo pro denní použití; Denní rekreační oblast; Denní rekreační místo</string>
+    <string name="poi_us_maps_recreation_area_activity_day_use_site">Oblast denního použití; Místo pro denní použití; Denní plocha; Denní rekreační oblast; Denní rekreační místo</string>
     <string name="poi_us_maps_recreation_area_facility_boat_takeout">Vytažení lodi</string>
     <string name="poi_us_maps_recreation_area_facility_fire_lookout">Požární hlídka</string>
     <string name="poi_us_maps_recreation_area_activity_scenic_overlook">Malebná vyhlídka</string>

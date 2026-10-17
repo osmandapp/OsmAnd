@@ -360,7 +360,7 @@
     <string name="poi_route_train_ref">Traein</string>
     <string name="poi_route_light_rail_ref">Iarnród éadrom</string>
     <string name="poi_service_bicycle_rental_no">Rothar ar cíos: níl</string>
-    <string name="poi_service_bicycle_diy_yes">Uirlisí le haghaidh deisiú DIY; Uirlisí DIY rothar; Uirlisí DIY Rothar</string>
+    <string name="poi_service_bicycle_diy_yes">Uirlisí le haghaidh deisiú DIY; Uirlisí DIY rothar</string>
     <string name="poi_emergency">Éigeandáil</string>
     <string name="poi_transportation">Iompar</string>
     <string name="poi_road_obstacle">Constaic bhóthair</string>
@@ -758,11 +758,11 @@
     <string name="poi_seamark_harbour">Cuan</string>
     <string name="poi_landmark">Sainchomhartha</string>
     <string name="poi_seamark_light">Solas, seamark</string>
-    <string name="poi_service_bicycle_second_hand_yes">Miondíol rothar athláimhe; Rothar athláimhe; Rothar athláimhe</string>
+    <string name="poi_service_bicycle_second_hand_yes">Miondíol rothar athláimhe; Rothar athláimhe</string>
     <string name="poi_service_bicycle_second_hand_no">Díol miondíola rothar athláimhe: níl</string>
-    <string name="poi_service_bicycle_charging_yes">Muirearú: tá; Muirearú rothar; Muirearú rothar; Luchtú rothar leictreach; Luchtú rothar leictreach</string>
+    <string name="poi_service_bicycle_charging_yes">Muirearú: tá; Muirearú rothar; Luchtú rothar leictreach</string>
     <string name="poi_service_bicycle_charging_no">Muirearú: níl</string>
-    <string name="poi_bicycle_repair_station">Stáisiún deisiúcháin rothar; Stáisiún féindeisiúcháin rothar; Stáisiún deisithe rothar; Stáisiún féindeisiúcháin rothar</string>
+    <string name="poi_bicycle_repair_station">Stáisiún deisiúcháin rothar; Stáisiún féindeisiúcháin rothar; Stáisiún deisithe rothar</string>
     <string name="poi_wildlife_hide">Áit chun breathnú ar fhiadhúlra</string>
     <string name="poi_training_language">Oiliúint: teanga</string>
     <string name="poi_training_martial_art">Oiliúint: ealaín comhraic</string>
@@ -1780,8 +1780,8 @@
     <string name="poi_historic_yes">Réad stairiúil</string>
     <string name="poi_surveillance_yes">Faireachas: tá</string>
     <string name="poi_service_bicycle_retail_no">Miondíol rothar: níl</string>
-    <string name="poi_service_bicycle_repair_yes">Deisiú; Deisiú rothar; Deisiú rothar</string>
-    <string name="poi_service_bicycle_cleaning_yes">Glanadh; Glanadh rothar; Glanadh rothar</string>
+    <string name="poi_service_bicycle_repair_yes">Deisiú; Deisiú rothar</string>
+    <string name="poi_service_bicycle_cleaning_yes">Glanadh; Glanadh rothar</string>
     <string name="poi_industrial_warehouse">Cineál: stóras</string>
     <string name="poi_office_forestry">Oifig foraoiseachta</string>
     <string name="poi_crop_corn">Barr: arbhar</string>
@@ -2039,7 +2039,7 @@
     <string name="poi_charity">Siopa carthanachta</string>
     <string name="poi_organic">Táirgí orgánacha</string>
     <string name="poi_outdoor">Siopa lasmuigh</string>
-    <string name="poi_tyres">Boinn; Bonn; Bonn; Siopa bonn; Boinn</string>
+    <string name="poi_tyres">Boinn; Bonn; Siopa bonn</string>
     <string name="poi_video_games">Cluichí físeáin</string>
     <string name="poi_pyrotechnics">Piriteicnic</string>
     <string name="poi_weapons">Siopa arm</string>
@@ -2641,7 +2641,7 @@
     <string name="poi_climbing_quality_solid">Solad</string>
     <string name="poi_water_utility">Oifig fóntais uisce</string>
     <string name="poi_service_vehicle_glass_yes">Gloine</string>
-    <string name="poi_service_vehicle_tyres_yes">Boinn; Bonn; Bonn; Boinn</string>
+    <string name="poi_service_vehicle_tyres_yes">Boinn; Bonn</string>
     <string name="poi_blood_donation">Tabhartas fola</string>
     <string name="poi_rtsa_scale_1b_asterisk">1B*</string>
     <string name="poi_hazard_additional_minefield">Páirc Mianach</string>
@@ -3103,7 +3103,7 @@
     <string name="poi_theatre_genre_circus">Sorcas</string>
     <string name="poi_gallery">Gailearaí ealaíne</string>
     <string name="poi_dance_floor">Urlár damhsa</string>
-    <string name="poi_nightclub">Club oíche; Dioscó; Dioscó</string>
+    <string name="poi_nightclub">Club oíche; Dioscó</string>
     <string name="poi_ski_resort">Ionad sciála</string>
     <string name="poi_beach_resort">Ionad saoire trá</string>
     <string name="poi_bench">Binse</string>
@@ -3532,10 +3532,10 @@
     <string name="poi_route_ferry_ref">Bád farantóireachta</string>
     <string name="poi_route_subway_ref">Fobhealach</string>
     <string name="poi_shop_additional_yes">Le siopa</string>
-    <string name="poi_service_bicycle_retail_yes">Miondíol; Miondíol rothar; Miondíol rothar</string>
+    <string name="poi_service_bicycle_retail_yes">Miondíol; Miondíol rothar</string>
     <string name="poi_service_bicycle_repair_no">Deisiú rothar: níl</string>
-    <string name="poi_service_bicycle_rental_yes">Cíos; Rothar ar cíos; Rothar ar cíos</string>
-    <string name="poi_service_bicycle_pump_yes">Caidéal; Caidéal rothar; Caidéal rothar</string>
+    <string name="poi_service_bicycle_rental_yes">Cíos; Rothar ar cíos</string>
+    <string name="poi_service_bicycle_pump_yes">Caidéal; Caidéal rothar</string>
     <string name="poi_service_bicycle_pump_no">Caidéal rothar: níl</string>
     <string name="poi_service_bicycle_cleaning_no">Glanadh rothar: níl</string>
     <string name="poi_service_bicycle_chaintool_yes">Chaintool; Stól slabhra rothar; Slabhra-stól rothar</string>
@@ -4860,7 +4860,7 @@
     <string name="poi_us_maps_recreation_area_open_status_unreachable">Do-ghlactha</string>
     <string name="poi_us_maps_recreation_area_activity_scenic_overlook">Dearmad radhairc</string>
     <string name="poi_us_maps_recreation_area_open_status_open_2">Stádas rochtana limistéar áineasa (2): oscailte</string>
-    <string name="poi_us_maps_recreation_area_activity_day_use_site">Limistéar úsáide lae; Suíomh úsáide lae; Limistéar úsáide lae; Suíomh úsáide lae; Limistéar áineasa úsáide lae; Suíomh áineasa úsáide lae</string>
+    <string name="poi_us_maps_recreation_area_activity_day_use_site">Limistéar úsáide lae; Suíomh úsáide lae; Limistéar áineasa úsáide lae; Suíomh áineasa úsáide lae</string>
     <string name="poi_us_maps_recreation_area_facility_fire_lookout">Faire dóiteáin</string>
     <string name="poi_property_management">Oifig bainistíochta maoine</string>
     <string name="poi_climbing_boulder">Bollán dreapadóireachta</string>

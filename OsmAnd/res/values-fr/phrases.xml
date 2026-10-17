@@ -49,7 +49,7 @@
     <string name="poi_bitcoin_yes">Paiement par bitcoin</string>
     <string name="poi_boat_sharing">Partage de voiliers</string>
     <string name="poi_boatyard">Chantier naval</string>
-    <string name="poi_books">Librairie;Librairie;Librairie</string>
+    <string name="poi_books">Librairie</string>
     <string name="poi_boules">Jeu de boules</string>
     <string name="poi_boundary_stone">Borne frontière patrimoniale;Borne frontière</string>
     <string name="poi_boutique">Boutique de mode</string>
@@ -148,7 +148,7 @@
     <string name="poi_fire_station">Caserne de pompiers;incendie</string>
     <string name="poi_first_aid">Premiers secours</string>
     <string name="poi_fishing">Magasin d\'articles de pêche;Magasin de pêche</string>
-    <string name="poi_florist">Fleuriste;fleurs;fleuriste;fleuristes;compositions florale;Magasin de fleurs</string>
+    <string name="poi_florist">Fleuriste;fleurs;fleuristes;compositions florale;Magasin de fleurs</string>
     <string name="poi_fog_signal">Signal de brume</string>
     <string name="poi_food_court">Aire de restauration</string>
     <string name="poi_ford">Gué</string>
@@ -157,7 +157,7 @@
     <string name="poi_funeral_directors">Pompes funèbres</string>
     <string name="poi_funicular">Funiculaire</string>
     <string name="poi_furniture">Magasin de meubles;meubles;Entreprise d\'aménagement</string>
-    <string name="poi_garden_centre">Jardinerie;jardinerie</string>
+    <string name="poi_garden_centre">Jardinerie</string>
     <string name="poi_shop_yes">Magasin</string>
     <string name="poi_gift">Boutique de cadeaux;Souvenirs;cadeaux</string>
     <string name="poi_glacier">Glacier</string>
@@ -4776,7 +4776,7 @@
     <string name="poi_us_maps_recreation_area_reservation_info">Informations sur les réservations</string>
     <string name="poi_us_maps_recreation_area_restrictions">Informations sur les restrictions</string>
     <string name="poi_us_maps_recreation_area_activity_scenic_overlook">Vue panoramique</string>
-    <string name="poi_us_maps_recreation_area_activity_day_use_site">Aire de fréquentation diurne ; Site de fréquentation diurne ; Aire de fréquentation diurne ; Site de fréquentation diurne ; Aire de loisirs diurne ; Site de loisirs diurne</string>
+    <string name="poi_us_maps_recreation_area_activity_day_use_site">Aire de fréquentation diurne ; Site de fréquentation diurne ; Aire de loisirs diurne ; Site de loisirs diurne</string>
     <string name="poi_us_maps_recreation_area_facility_airplane_landing_strip">Piste d\'atterrissage pour avions</string>
     <string name="poi_us_maps_recreation_area_facility_ranger_station_office">Poste de gardes forestiers</string>
     <string name="poi_us_maps_recreation_area_facility_natural_endangered_area">Zone naturelle / Zone en danger</string>

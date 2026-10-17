@@ -1804,7 +1804,7 @@
     <string name="poi_service_bicycle_second_hand_no">Verkoop van tweedehands fietsen: nee</string>
     <string name="poi_service_bicycle_charging_yes">Opladen: ja</string>
     <string name="poi_service_bicycle_charging_no">Opladen: nee</string>
-    <string name="poi_bicycle_repair_station">Fietsenmaker;Zelfreparatiestation voor fietsen;Fietsenmaker;Zelfreparatiestation voor fietsen</string>
+    <string name="poi_bicycle_repair_station">Fietsenmaker;Zelfreparatiestation voor fietsen</string>
     <string name="poi_wildlife_hide">Plek om wild te observeren</string>
     <string name="poi_training_language">Opleiding: taal</string>
     <string name="poi_training_music">Opleiding: muziek</string>

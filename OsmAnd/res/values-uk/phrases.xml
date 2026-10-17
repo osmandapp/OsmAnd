@@ -20,7 +20,7 @@
     <string name="poi_books">Книжковий магазин;книгарня</string>
     <string name="poi_bicycle">Веломагазин; велосипед; велосипеди; велосалон</string>
     <string name="poi_anime">Крамниця аніме</string>
-    <string name="poi_antiques">Антикварний магазин;антикваріат;антикваріат;антикварний магазин</string>
+    <string name="poi_antiques">Антикварний магазин;антикваріат</string>
     <string name="poi_art">Магазин художніх товарів; магазин творів мистецтва</string>
     <string name="poi_baby_goods">Товари для дітей;дитячий магазин</string>
     <string name="poi_bag">Сумки, валізи;магазин сумок</string>
@@ -459,7 +459,7 @@
     <string name="poi_sports_centre">Спортивний центр;спорткомплекс</string>
     <string name="poi_golf_course">Поле для гольфу</string>
     <string name="poi_ice_rink">Ковзанка</string>
-    <string name="poi_pitch">Спортивний майданчик; овальний майданчик; поле для гри з м\'ячем; тенісний корт; спортивне поле; спортивний майданчик</string>
+    <string name="poi_pitch">Спортивний майданчик; овальний майданчик; поле для гри з м\'ячем; тенісний корт; спортивне поле</string>
     <string name="poi_leisure_track">Спортивна доріжка; велотрек; іподром; гоночна траса</string>
     <string name="poi_running_track">Бігова доріжка</string>
     <string name="poi_bicycle_track">Велодоріжка</string>
