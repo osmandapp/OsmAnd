@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.builders.rows.behaviour
 import android.content.Context
 import net.osmand.plus.R
 import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper
+import net.osmand.shared.data.AmenityTagEntriesBuilder
 import net.osmand.shared.osm.PoiType
 import net.osmand.util.Algorithms
 
@@ -70,13 +71,14 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
                 val isTextPredefined = builder.hasTextPrefix() || builder.hasText()
                 if (!builder.hasTextPrefix() || !builder.hasText()) {
                     val translation = poiType.getTranslation()
+                    val nameValue = AmenityTagEntriesBuilder.splitNameValue(translation)
                     if (poiType.isText()) {
                         builder.setTextPrefixIfNotPresent(translation)
                         builder.setTextIfNotPresent(value)
-                    } else if (translation.contains(":")) {
-                        val parts = translation.split(":")
-                        builder.setTextPrefixIfNotPresent(parts[0].trim())
-                        builder.setTextIfNotPresent(Algorithms.capitalizeFirstLetter(parts[1].trim()))
+                    } else if (nameValue != null) {
+                        // "Name: value" -> "Name" over "Value"
+                        builder.setTextPrefixIfNotPresent(nameValue.first)
+                        builder.setTextIfNotPresent(Algorithms.capitalizeFirstLetter(nameValue.second))
                     } else {
                         builder.setTextIfNotPresent(translation)
                     }

@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Labels of additional property values written as "Name: value" in phrases.xml ("Fridge: yes",
@@ -18,8 +16,8 @@ public class PoiAdditionalLabels {
 
 	public static final String YES = "yes";
 
-	// ':' and the full-width forms used by the CJK translations, French puts spaces around it
-	private static final Pattern NAME_VALUE_SEPARATOR = Pattern.compile("\\s*[:\uFF1A\uFE30]\\s*");
+	// ':' and the full-width forms used by the CJK translations
+	private static final String NAME_VALUE_SEPARATORS = ":\uFF1A\uFE30";
 
 	/**
 	 * @return {name, value} or null if the translation is not "Name: value"
@@ -28,11 +26,14 @@ public class PoiAdditionalLabels {
 		if (Algorithms.isEmpty(translation)) {
 			return null;
 		}
-		Matcher matcher = NAME_VALUE_SEPARATOR.matcher(translation);
-		if (!matcher.find() || matcher.start() == 0 || matcher.end() == translation.length()) {
-			return null;
+		for (int i = 0; i < translation.length(); i++) {
+			if (NAME_VALUE_SEPARATORS.indexOf(translation.charAt(i)) >= 0) {
+				String name = translation.substring(0, i).trim();
+				String value = translation.substring(i + 1).trim();
+				return name.isEmpty() || value.isEmpty() ? null : new String[] {name, value};
+			}
 		}
-		return new String[] {translation.substring(0, matcher.start()).trim(), translation.substring(matcher.end()).trim()};
+		return null;
 	}
 
 	/**

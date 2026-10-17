@@ -9,8 +9,8 @@ object AmenityTagEntriesBuilder {
 
 	const val TRANSLATIONS_SEPARATOR = " • "
 	private const val YES = "yes"
-	// ':' and the full-width forms used by the CJK translations, French puts spaces around it
-	private val NAME_VALUE_SEPARATOR = Regex("\\s*[:\uFF1A\uFE30]\\s*")
+	// ':' and the full-width forms used by the CJK translations
+	private val NAME_VALUE_SEPARATORS = charArrayOf(':', '\uFF1A', '\uFE30')
 
 	@JvmStatic
 	fun buildPoiTypesGroupEntry(
@@ -21,11 +21,12 @@ object AmenityTagEntriesBuilder {
 		var prefix = textPrefix
 		val text: String
 		val single = if (poiAdditional && types.size == 1) splitNameValue(types[0].getTranslation()) else null
-		if (single != null) {
-			// one value: "Smoking: no" -> "Smoking" over "No"
+		if (single != null && isOneTagGroup(types[0])) {
+			// one value of a property: "Smoking: no" -> "Smoking" over "No"
 			prefix = single.first
 			text = KAlgorithms.capitalizeFirstLetter(single.second) ?: single.second
 		} else if (poiAdditional) {
+			// several values, or one option of a list: "Rented boats" over "Kayaks" 
 			text = types.joinToString(TRANSLATIONS_SEPARATOR) { getGroupValueLabel(it) }
 		} else {
 			text = types.joinToString(TRANSLATIONS_SEPARATOR) { it.getTranslation() }
@@ -55,11 +56,13 @@ object AmenityTagEntriesBuilder {
 		if (translation.isNullOrEmpty()) {
 			return null
 		}
-		val match = NAME_VALUE_SEPARATOR.find(translation) ?: return null
-		if (match.range.first == 0 || match.range.last + 1 >= translation.length) {
+		val index = translation.indexOfAny(NAME_VALUE_SEPARATORS)
+		if (index < 0) {
 			return null
 		}
-		return Pair(translation.substring(0, match.range.first).trim(), translation.substring(match.range.last + 1).trim())
+		val name = translation.substring(0, index).trim()
+		val value = translation.substring(index + 1).trim()
+		return if (name.isEmpty() || value.isEmpty()) null else Pair(name, value)
 	}
 
 	/**
@@ -70,6 +73,17 @@ object AmenityTagEntriesBuilder {
 		val translation = type.getTranslation()
 		val nameValue = splitNameValue(translation) ?: return translation
 		return if (isYesValue(type)) nameValue.first else translation
+	}
+
+	// all values of the group are one tag (smoking=yes/no/outside), not a list of options (boat:kayak:rental, ...)
+	private fun isOneTagGroup(type: PoiType): Boolean {
+		val category = type.getPoiAdditionalCategory() ?: return true
+		val parent = type.getParentType() ?: return true
+		val tags = (parent.getPoiAdditionals() + parent.getPoiAdditionalsCategorized())
+			.filter { it.getPoiAdditionalCategory() == category }
+			.mapNotNull { it.getOsmTag() }
+			.toSet()
+		return tags.size <= 1
 	}
 
 	private fun isYesValue(type: PoiType): Boolean {
