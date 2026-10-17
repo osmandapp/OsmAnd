@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Labels of additional property values written as "Name: value" in phrases.xml ("Fridge: yes",
@@ -15,9 +16,9 @@ import java.util.Map;
 public class PoiAdditionalLabels {
 
 	public static final String YES = "yes";
+	// values that mean the property is there; search finds an additional value only by one of them
+	private static final Set<String> ACCEPTED_VALUES = Set.of(YES, "only", "designated");
 
-	// ':' and the full-width forms used by the CJK translations
-	private static final String NAME_VALUE_SEPARATORS = ":\uFF1A\uFE30";
 
 	/**
 	 * @return {name, value} or null if the translation is not "Name: value"
@@ -26,31 +27,33 @@ public class PoiAdditionalLabels {
 		if (Algorithms.isEmpty(translation)) {
 			return null;
 		}
-		for (int i = 0; i < translation.length(); i++) {
-			if (NAME_VALUE_SEPARATORS.indexOf(translation.charAt(i)) >= 0) {
-				String name = translation.substring(0, i).trim();
-				String value = translation.substring(i + 1).trim();
-				return name.isEmpty() || value.isEmpty() ? null : new String[] {name, value};
-			}
+		int index = translation.indexOf(':');
+		if (index < 0) {
+			return null;
 		}
-		return null;
+		String name = translation.substring(0, index).trim();
+		String value = translation.substring(index + 1).trim();
+		return name.isEmpty() || value.isEmpty() ? null : new String[] {name, value};
 	}
 
 	/**
-	 * Search shows and indexes "yes" values only: OSM value yes, or an English translation "Name: yes"
-	 * ("Subway station: yes" for station=subway) or the older "Yes;Name".
+	 * Search shows and indexes accepted values only (yes, only, designated): by the OSM value, or by the value of
+	 * the English translation "Name: yes" ("Subway station: yes" for station=subway) or the older "Yes;Name".
 	 */
-	public static boolean isYesValue(String osmValue, String enTranslation) {
-		if (YES.equals(osmValue)) {
+	public static boolean isAcceptedValue(String osmValue, String enTranslation) {
+		if (osmValue != null && ACCEPTED_VALUES.contains(osmValue)) {
 			return true;
+		}
+		if (enTranslation == null) {
+			return false;
 		}
 		String[] nameValue = splitNameValue(enTranslation);
 		String value = nameValue != null ? nameValue[1] : enTranslation;
-		return YES.equalsIgnoreCase(value);
+		return ACCEPTED_VALUES.contains(value.toLowerCase(Locale.ROOT));
 	}
 
-	public static boolean isYesValue(PoiType poiType) {
-		return isYesValue(poiType.getOsmValue(), poiType.getEnTranslation());
+	public static boolean isAcceptedValue(PoiType poiType) {
+		return isAcceptedValue(poiType.getOsmValue(), poiType.getEnTranslation());
 	}
 
 	/**

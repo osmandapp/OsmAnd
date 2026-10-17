@@ -173,7 +173,7 @@ public class SpatialPoiSearch {
 				}
 				addToIndex(pt, null);
 				for (PoiType add : pt.getPoiAdditionals()) {
-					if (add.isTopVisible() && PoiAdditionalLabels.isYesValue(add)) {
+					if (add.isTopVisible() && PoiAdditionalLabels.isAcceptedValue(add)) {
 						addToIndex(add, pt);
 					}
 				}

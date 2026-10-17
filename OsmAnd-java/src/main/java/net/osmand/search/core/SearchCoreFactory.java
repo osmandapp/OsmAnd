@@ -1034,7 +1034,7 @@ public class SearchCoreFactory {
 						}
 						existingResult.pt = f;
 					} else {
-						if (PoiAdditionalLabels.isYesValue(a)) {
+						if (PoiAdditionalLabels.isAcceptedValue(a)) {
 							PoiTypeResult ptr = checkPoiType(nm, a);
 							if (ptr != null && ptr.pt != null && ptr.pt.isTopVisible()) {
 								results.put(a.getKeyName(), ptr);

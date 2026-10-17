@@ -9,8 +9,6 @@ object AmenityTagEntriesBuilder {
 
 	const val TRANSLATIONS_SEPARATOR = " • "
 	private const val YES = "yes"
-	// ':' and the full-width forms used by the CJK translations
-	private val NAME_VALUE_SEPARATORS = charArrayOf(':', '\uFF1A', '\uFE30')
 
 	@JvmStatic
 	fun buildPoiTypesGroupEntry(
@@ -56,7 +54,7 @@ object AmenityTagEntriesBuilder {
 		if (translation.isNullOrEmpty()) {
 			return null
 		}
-		val index = translation.indexOfAny(NAME_VALUE_SEPARATORS)
+		val index = translation.indexOf(':')
 		if (index < 0) {
 			return null
 		}

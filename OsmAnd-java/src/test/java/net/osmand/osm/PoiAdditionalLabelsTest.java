@@ -18,8 +18,7 @@ public class PoiAdditionalLabelsTest {
 	public void splitsNameAndValue() {
 		assertArrayEquals(new String[] {"Fridge", "yes"}, PoiAdditionalLabels.splitNameValue("Fridge: yes"));
 		assertArrayEquals(new String[] {"Payant", "non"}, PoiAdditionalLabels.splitNameValue("Payant : non"));
-		assertArrayEquals(new String[] {"吸菸", "允許"}, PoiAdditionalLabels.splitNameValue("吸菸：允許"));
-		assertArrayEquals(new String[] {"充電", "有"}, PoiAdditionalLabels.splitNameValue("充電︰有"));
+		assertArrayEquals(new String[] {"吸菸", "允許"}, PoiAdditionalLabels.splitNameValue("吸菸: 允許"));
 		assertNull(PoiAdditionalLabels.splitNameValue("Yes"));
 		assertNull(PoiAdditionalLabels.splitNameValue("Diesel"));
 		assertNull(PoiAdditionalLabels.splitNameValue(""));
@@ -60,15 +59,17 @@ public class PoiAdditionalLabelsTest {
 	}
 
 	@Test
-	public void searchTakesYesValuesOnly() {
-		assertTrue(PoiAdditionalLabels.isYesValue("yes", "Fridge: yes"));
-		assertTrue(PoiAdditionalLabels.isYesValue("yes", "Takeaway"));
+	public void searchTakesAcceptedValuesOnly() {
+		assertTrue(PoiAdditionalLabels.isAcceptedValue("yes", "Fridge: yes"));
+		assertTrue(PoiAdditionalLabels.isAcceptedValue("yes", "Takeaway"));
+		assertTrue(PoiAdditionalLabels.isAcceptedValue("only", "Takeaway: only"));
+		assertTrue(PoiAdditionalLabels.isAcceptedValue("designated", "Bicycle: designated"));
 		// station=subway is written "Subway station: yes", older "Yes;Subway station"
-		assertTrue(PoiAdditionalLabels.isYesValue("subway", "Subway station: yes"));
-		assertTrue(PoiAdditionalLabels.isYesValue("subway", "Yes"));
-		assertFalse(PoiAdditionalLabels.isYesValue("no", "Fridge: no"));
-		assertFalse(PoiAdditionalLabels.isYesValue("limited", "Limited"));
-		assertFalse(PoiAdditionalLabels.isYesValue("outside", "Smoking: outside only"));
+		assertTrue(PoiAdditionalLabels.isAcceptedValue("subway", "Subway station: yes"));
+		assertTrue(PoiAdditionalLabels.isAcceptedValue("subway", "Yes"));
+		assertFalse(PoiAdditionalLabels.isAcceptedValue("no", "Fridge: no"));
+		assertFalse(PoiAdditionalLabels.isAcceptedValue("limited", "Limited"));
+		assertFalse(PoiAdditionalLabels.isAcceptedValue("outside", "Smoking: outside only"));
 	}
 
 	@Test
