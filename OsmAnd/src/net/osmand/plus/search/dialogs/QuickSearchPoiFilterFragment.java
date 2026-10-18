@@ -48,7 +48,6 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.core.SearchPhrase;
@@ -910,6 +909,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			SwitchCompat switchItem = view.findViewById(R.id.switchItem);
 			CheckBox checkBoxItem = view.findViewById(R.id.checkboxItem);
 			ImageView expandItem = view.findViewById(R.id.expandItem);
+			TextView countView = view.findViewById(R.id.count);
 			View divider = view.findViewById(R.id.divider);
 
 			if (item != null) {
@@ -929,9 +929,11 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 				}
 				switchItem.setOnCheckedChangeListener(null);
 				checkBoxItem.setOnCheckedChangeListener(null);
+				countView.setText(String.valueOf(item.count));
+				countView.setVisibility(item.count > 0 ? View.VISIBLE : View.GONE);
 				switch (item.type) {
 					case GROUP_HEADER:
-						titleBold.setText(getTextWithCount(item));
+						titleBold.setText(item.text);
 						if (item.expandable) {
 							expandItem.setImageDrawable(item.expanded ?
 									app.getUIUtilities().getThemedIcon(R.drawable.ic_action_arrow_up) :
@@ -947,7 +949,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						checkBoxItem.setVisibility(View.GONE);
 						break;
 					case SWITCH_ITEM:
-						titleRegular.setText(getTextWithCount(item));
+						titleRegular.setText(item.text);
 						titleRegular.setVisibility(View.VISIBLE);
 						switchItem.setVisibility(View.VISIBLE);
 						switchItem.setChecked(item.checked);
@@ -960,7 +962,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						checkBoxItem.setVisibility(View.GONE);
 						break;
 					case CHECKBOX_ITEM:
-						titleRegular.setText(getTextWithCount(item));
+						titleRegular.setText(item.text);
 						titleRegular.setVisibility(View.VISIBLE);
 						checkBoxItem.setVisibility(View.VISIBLE);
 						checkBoxItem.setChecked(item.checked);
@@ -984,16 +986,6 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 				}
 			}
 			return view;
-		}
-
-		@NonNull
-		private CharSequence getTextWithCount(@NonNull PoiFilterListItem item) {
-			if (item.count < 0) {
-				return item.text;
-			}
-			String count = String.valueOf(item.count);
-			String text = getString(R.string.ltr_or_rtl_combine_via_space, item.text, count);
-			return UiUtilities.createColorSpannable(text, ColorUtilities.getSecondaryTextColor(app, nightMode), false, count);
 		}
 	}
 
