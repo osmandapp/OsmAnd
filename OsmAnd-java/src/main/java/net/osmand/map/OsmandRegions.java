@@ -1,6 +1,7 @@
 package net.osmand.map;
 
 import net.osmand.CollatorStringMatcher;
+import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -24,6 +25,7 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -520,6 +522,61 @@ public class OsmandRegions {
 	public WorldRegion getCountryRegionDataByDownloadName(String downloadName) {
 		WorldRegion region = getRegionDataByDownloadName(downloadName);
 		return region != null ? region.getCountryRegion() : null;
+	}
+
+	/** Reads all boundary parts for the selected regions and their descendants in one file search. */
+	public List<BinaryMapDataObject> getRegionBoundaryObjects(Collection<String> regionIds) throws IOException {
+		// Nothing to load when country avoidance is off, even before regions are initialized.
+		if (regionIds.isEmpty()) {
+			return Collections.emptyList();
+		}
+		if (reader == null) {
+			throw new IOException("Country-boundary data is not initialized");
+		}
+		Set<String> selectedIds = new HashSet<>(regionIds);
+		List<BinaryMapDataObject> boundaries = new ArrayList<>();
+		iterateOverAllObjects(new ResultMatcher<BinaryMapDataObject>() {
+			@Override
+			public boolean publish(BinaryMapDataObject object) {
+				if (object.getPointsLength() > 0) {
+					WorldRegion region = getRegionData(getFullName(object));
+					while (region != null) {
+						if (selectedIds.contains(region.getRegionId())) {
+							boundaries.add(object);
+							break;
+						}
+						region = region.getSuperregion();
+					}
+				}
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		});
+		return boundaries;
+	}
+
+	/** Returns distinct catalog countries for installed map and roads-only OBF filenames. */
+	public List<WorldRegion> getCountriesForMapFiles(Collection<String> mapFileNames) {
+		Map<String, WorldRegion> countries = new LinkedHashMap<>();
+		for (String fileName : mapFileNames) {
+			if (fileName == null) {
+				continue;
+			}
+			String normalizedName = fileName.toLowerCase(Locale.US);
+			if (!normalizedName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+				continue;
+			}
+			String downloadName = WorldRegion.getRegionDownloadName(normalizedName);
+			WorldRegion country = getCountryRegionDataByDownloadName(downloadName);
+			if (country != null) {
+				countries.put(country.getRegionId(), country);
+			}
+		}
+		return new ArrayList<>(countries.values());
 	}
 
 	public WorldRegion getRegionDataByDownloadName(String downloadName) {
