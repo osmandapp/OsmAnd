@@ -298,11 +298,16 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						MapUtils.get31LatitudeY((int) rect.top), MapUtils.get31LongitudeX((int) rect.left),
 						MapUtils.get31LatitudeY((int) rect.bottom), MapUtils.get31LongitudeX((int) rect.right),
 						-1, false, null, null);
+				List<PoiType> allPoiAdditionals = new ArrayList<>();
+				for (List<PoiType> categoryPoiAdditionals : additionalsMap.values()) {
+					allPoiAdditionals.addAll(categoryPoiAdditionals);
+				}
+				Map<PoiType, PoiType> textPoiAdditionals = filter.getTextPoiAdditionals(allPoiAdditionals);
 				for (Amenity amenity : amenities) {
 					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
 						boolean accepted = false;
 						for (PoiType poiType : entry.getValue()) {
-							if (filter.acceptedPoiAdditional(amenity, poiType)) {
+							if (filter.acceptedPoiAdditional(amenity, poiType, textPoiAdditionals)) {
 								counts.merge(poiType.getKeyName(), 1, Integer::sum);
 								accepted = true;
 							}
