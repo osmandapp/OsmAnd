@@ -5511,4 +5511,5 @@
     <string name="eta_adapt_to_my_speed_off_descr">يعتمد وقت الوصول على السرعة المتوقعة في كل طريق ضمن المسار؛ قم بتفعيل هذا الخيار ليعتمد الحساب على سرعتك الفعلية أثناء التحرك.</string>
     <string name="flyover_recording">تسجيل فيديو للخريطة: %1$s</string>
     <string name="flyovers">الجسور العلوية</string>
+    <string name="storage_directory_visible_external">وحدة تخزين خارجية مرئية</string>
 </resources>

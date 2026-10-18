@@ -1822,7 +1822,7 @@
     <string name="live_update_frequency_day_variant">Seiceáiltear na nuashonruithe don léarscáil go laethúil.</string>
     <string name="app_restart_required">Caithfear an aip a atosú chun socruithe áirithe a chur i bhfeidhm.</string>
     <string name="lanes_widgets_desc">Taispeánann sé leagan amach na lánaí ar na bóithre agus aibhsíonn sé na cinn le tógáil agus tú ag taistil.</string>
-    <string name="osmand_cloud_login_descr">Cuir isteach an seoladh r-phoist a úsáid tú chun clárú. Seolfar pasfhocal aonuaire chuige.</string>
+    <string name="osmand_cloud_login_descr">Cuir isteach an seoladh ríomhphoist a d’úsáid tú le linn an chláraithe, le do thoil. Seolfar pasfhocal aonuaire chuige.</string>
     <string name="map_widget_distance">Achar</string>
     <string name="update_all_maps_added">Nuashonraigh gach léarscáil a cuireadh i %1$s\?</string>
     <string name="osm_login_descr">Logáil isteach ag úsáid an modh OAuth, nó le d\'ainm úsáideora OSM agus do phasfhocal.</string>
@@ -1893,7 +1893,7 @@
     <string name="max_sensor_temperature">Teocht, uasta</string>
     <string name="zoom_non_animated">Zúm neamhbheochana</string>
     <string name="target_elevation">Airde na sprice</string>
-    <string name="shared_string_eta">Am teachta measta</string>
+    <string name="shared_string_eta">Am measta</string>
     <string name="add_row">Cuir ró leis</string>
     <string name="help_article_setup_a_route_name">Cruthaigh bealach</string>
     <string name="wheel_circumference">Imlíne an rotha</string>
@@ -5327,4 +5327,14 @@
     <string name="flyover_recording">Ag taifeadadh físeán léarscáile: %1$s</string>
     <string name="map_source_saved_as">Foinse léarscáile sábháilte mar \'%1$s\'.</string>
     <string name="map_source_folder_not_created">Níorbh fhéidir fillteán a chruthú do fhoinse na léarscáile. Bain triail as ainm eile.</string>
+    <string name="storage_directory_visible_external">Stóráil sheachtrach infheicthe</string>
+    <string name="eta_group_header">Am teachta measta</string>
+    <string name="travel_speed">Luas taistil</string>
+    <string name="default_speed_descr">Úsáidtear é nuair nach bhfuil sonraí luais ann don bhóthar, nó agus tú i do sheasamh gan gluaiseacht.</string>
+    <string name="speed_range">Raon luais</string>
+    <string name="speed_range_descr">Úsáidtear é chun an bealach a ríomh agus chun am teachta a chinneadh.</string>
+    <string name="eta_adapt_to_my_speed">Cuir tú féin in oiriúint do mo luas</string>
+    <string name="eta_adapt_to_my_speed_descr">Braitheann an t-am teachta ar do luas thar an %1$s deireanach.</string>
+    <string name="eta_adapt_to_my_speed_off_descr">Braitheann an t-am teachta ar an luas a bhfuiltear ag súil leis ar gach bóthar den bhealach. Cuir an ghné seo ar siúl chun é a bhunú ar an luas a bhíonn fút i ndáiríre.</string>
+    <string name="flyovers">Droichid os cionn bóthair</string>
 </resources>

@@ -43,6 +43,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.*;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.LockableViewPager;
@@ -1242,7 +1243,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			AbstractPoiType poiType = getPoiTypeForAmenity(amenity);
 			return poiType != null ? poiType.getTranslation() : null;
 		} else if (object instanceof PoiType type) {
-			return type.getTranslation();
+			return PoiAdditionalLabels.getSearchName(type);
 		} else if(object instanceof MapObject mapObject) {
 			return MapObjectViewHolder.getTypeName(app, mapObject);
 		}

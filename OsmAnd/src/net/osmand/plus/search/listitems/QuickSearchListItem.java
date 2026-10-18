@@ -640,18 +640,23 @@ public class QuickSearchListItem {
 		}
 		int iconId = -1;
 		PointDescription name = entry.getName();
-		if (name != null && !Algorithms.isEmpty(name.getIconName())) {
-			String iconName = name.getIconName();
-			if (RenderingIcons.containsBigIcon(iconName)) {
-				iconId = RenderingIcons.getBigIconResourceId(iconName);
-			} else {
-				iconId = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
-			}
+		if (name != null) {
+			iconId = getIconIdByName(app, name.getIconName());
 		}
 		if (iconId <= 0 && name != null) {
 			iconId = name.getItemIcon();
 		}
 		return iconId;
+	}
+
+	public static int getIconIdByName(@NonNull OsmandApplication app, @Nullable String iconName) {
+		if (Algorithms.isEmpty(iconName)) {
+			return 0;
+		}
+		if (RenderingIcons.containsBigIcon(iconName)) {
+			return RenderingIcons.getBigIconResourceId(iconName);
+		}
+		return app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
 	}
 
 	private static boolean isNavigationHistoryEntry(@NonNull HistoryEntry entry) {

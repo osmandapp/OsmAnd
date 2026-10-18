@@ -25,6 +25,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
+import net.osmand.plus.configmap.tracks.TracksTabsFragment.TracksSelectionListener;
 import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
 import net.osmand.plus.quickaction.ConfirmationBottomSheet.OnConfirmButtonClickListener;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
@@ -41,7 +42,7 @@ import java.util.List;
  */
 
 public class CreateEditActionDialog extends BaseFullScreenDialogFragment implements CallbackWithObject<Object>,
-		OnConfirmButtonClickListener, IAskDismissDialog {
+		OnConfirmButtonClickListener, IAskDismissDialog, TracksSelectionListener {
 
 	public static final String TAG = CreateEditActionDialog.class.getSimpleName();
 
@@ -197,6 +198,13 @@ public class CreateEditActionDialog extends BaseFullScreenDialogFragment impleme
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void onTracksSelected(@NonNull List<String> paths) {
+		if (action instanceof TracksSelectionListener listener) {
+			listener.onTracksSelected(paths);
+		}
 	}
 
 	@Override

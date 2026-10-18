@@ -31,6 +31,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -172,7 +173,7 @@ public class SpatialPoiSearch {
 				}
 				addToIndex(pt, null);
 				for (PoiType add : pt.getPoiAdditionals()) {
-					if (add.isTopVisible() && !add.getKeyName().endsWith("_no")) {
+					if (add.isTopVisible() && PoiAdditionalLabels.isAcceptedValue(add)) {
 						addToIndex(add, pt);
 					}
 				}
@@ -292,13 +293,16 @@ public class SpatialPoiSearch {
 				List<String> possibleValues = subType.possibleValues;
 				List<String> wikidataIds = subType.wikidataIds;
 				TIntArrayList possibleValuesFreqs = subType.possibleValuesFreqs;
-//				int allFreq = subType.frequency;
 				for (int k = 0; k < possibleValues.size(); k++) {
 					String topValueName = possibleValues.get(k);
 					String valueKey = TopIndexFilter.getValueKey(topValueName);
 					String fullKey = subType.name + "_" + valueKey;
 					String wikidataId = wikidataIds != null && k < wikidataIds.size() ? wikidataIds.get(k) : "";
 					int freq = possibleValuesFreqs != null && k < possibleValuesFreqs.size() ? possibleValuesFreqs.get(k) : 0;
+					if (possibleValuesFreqs == null && possibleValues.size() == 1) {
+						// the writer stores per-value frequencies only for 2+ values; one value has the subtype total
+						freq = subType.frequency;
+					}
 					SpatialPoiType topValue = byKey.get(fullKey);
 					if (topValue == null) {
 						topValue = new SpatialPoiType(subType, topValueName, fullKey, ids.getAndIncrement());
