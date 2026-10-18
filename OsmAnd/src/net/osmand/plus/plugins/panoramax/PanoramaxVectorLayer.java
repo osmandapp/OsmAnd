@@ -34,7 +34,6 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -150,6 +149,14 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 				if (panoramaxTilesProvider != null) {
 					mapRenderer.resetMapLayerProvider(layerIndex);
 					clearMapMarkersCollections();
+					panoramaxTilesProvider = null;
+				}
+				return;
+			}
+			// The renderer may overscale tiles beyond the source's supported zoom range.
+			if (!isVisibleAtZoom(tileBox.getZoom(), map)) {
+				if (panoramaxTilesProvider != null) {
+					mapRenderer.resetMapLayerProvider(layerIndex);
 					panoramaxTilesProvider = null;
 				}
 				return;
@@ -282,17 +289,21 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 		return true;
 	}
 
+	static boolean isVisibleAtZoom(int zoom, @NonNull ITileSource map) {
+		ITileSource vectorSource = TileSourceManager.getPanoramaxVectorSource();
+		return zoom >= Math.max(vectorSource.getMinimumZoomSupported(), map.getMinimumZoomSupported())
+				&& zoom <= Math.min(vectorSource.getMaximumZoomSupported(), map.getMaximumZoomSupported());
+	}
+
 	@Override
 	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		TileSourceTemplate panoramaxTemplate = TileSourceManager.getPanoramaxVectorSource();
 		ITileSource map = this.map;
 		if (map == null) {
 			return;
 		}
 
 		int currentZoom = tileBox.getZoom();
-		if (currentZoom < Math.max(panoramaxTemplate.getMinimumZoomSupported(), map.getMinimumZoomSupported())
-				|| currentZoom > Math.min(panoramaxTemplate.getMaximumZoomSupported(), map.getMaximumZoomSupported())) {
+		if (!isVisibleAtZoom(currentZoom, map)) {
 			return;
 		}
 
