@@ -191,6 +191,37 @@ public class PanoramaxImageTest {
 	}
 
 	@Test
+	public void keepsAMissingHeadingUnknownInsteadOfNorth() {
+		PanoramaxImage withoutHeading = new PanoramaxImage(0, 0);
+		Map<String, Object> data = new HashMap<>();
+		data.put(PanoramaxImage.IMAGE_ID_KEY, "a");
+		assertTrue(withoutHeading.setData(data));
+		assertTrue(Double.isNaN(withoutHeading.getCompassAngle()));
+
+		// a null value must read the same as an absent one
+		PanoramaxImage nullHeading = new PanoramaxImage(0, 0);
+		data.put(PanoramaxImage.HEADING_KEY, null);
+		assertTrue(nullHeading.setData(data));
+		assertTrue(Double.isNaN(nullHeading.getCompassAngle()));
+	}
+
+	@Test
+	public void keepsRealHeadingsIncludingNorth() {
+		Map<String, Object> data = new HashMap<>();
+		data.put(PanoramaxImage.IMAGE_ID_KEY, "a");
+
+		data.put(PanoramaxImage.HEADING_KEY, 0);
+		PanoramaxImage north = new PanoramaxImage(0, 0);
+		assertTrue(north.setData(data));
+		assertEquals(0.0, north.getCompassAngle(), 0.0);
+
+		data.put(PanoramaxImage.HEADING_KEY, 321.5);
+		PanoramaxImage northWest = new PanoramaxImage(0, 0);
+		assertTrue(northWest.setData(data));
+		assertEquals(321.5, northWest.getCompassAngle(), 0.0);
+	}
+
+	@Test
 	public void rejectsAFeatureWithoutAnId() {
 		PanoramaxImage image = new PanoramaxImage(0, 0);
 		assertFalse(image.setData(new HashMap<String, Object>()));
