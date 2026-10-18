@@ -172,6 +172,56 @@ public class NetworkUtilsTest {
 	}
 
 	@Test
+	public void testUploadFileFieldWithBoundaryDoesNotBreakBody() throws Exception {
+		AtomicReference<String> capturedContentType = new AtomicReference<>();
+		AtomicReference<byte[]> capturedBody = new AtomicReference<>();
+
+		server.createContext("/api/0.6/gpx/create_injection", new HttpHandler() {
+			@Override
+			public void handle(HttpExchange exchange) throws IOException {
+				capturedContentType.set(exchange.getRequestHeaders().getFirst("Content-Type"));
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				try (InputStream is = exchange.getRequestBody()) {
+					byte[] buf = new byte[4096];
+					int n;
+					while ((n = is.read(buf)) != -1) {
+						baos.write(buf, 0, n);
+					}
+				}
+				capturedBody.set(baos.toByteArray());
+
+				byte[] response = "OK".getBytes(StandardCharsets.UTF_8);
+				exchange.sendResponseHeaders(200, response.length);
+				try (OutputStream os = exchange.getResponseBody()) {
+					os.write(response);
+				}
+			}
+		});
+
+		String description = "text\r\n--CowMooCowMooCowCowCow\r\n"
+				+ "Content-Disposition: form-data; name=\"visibility\"\r\n\r\npublic\r\n--CowMooCowMooCowCowCow--\r\n";
+		Map<String, String> additionalData = new LinkedHashMap<>();
+		additionalData.put("description", description);
+		additionalData.put("visibility", "trackable");
+
+		String url = "http://127.0.0.1:" + serverPort + "/api/0.6/gpx/create_injection";
+		String result = NetworkUtils.uploadFile(url, tempGpxFile, "user:pass", null, "file", false, additionalData);
+		Assert.assertNull("Upload should succeed", result);
+
+		String boundary = capturedContentType.get().substring("multipart/form-data; boundary=".length());
+		Assert.assertFalse("Boundary must not occur in field values", description.contains(boundary));
+		Assert.assertTrue("Boundary must fit RFC 2046 length limit", boundary.length() <= 70);
+
+		String bodyText = new String(capturedBody.get(), StandardCharsets.UTF_8);
+		String[] parts = bodyText.split("--" + boundary);
+		Assert.assertEquals("Preamble, three parts and closing", 5, parts.length);
+		Assert.assertEquals("\r\nContent-Disposition: form-data; name=\"description\"\r\n\r\n" + description + "\r\n", parts[1]);
+		Assert.assertEquals("\r\nContent-Disposition: form-data; name=\"visibility\"\r\n\r\ntrackable\r\n", parts[2]);
+		Assert.assertNotEquals("Each upload gets its own boundary", boundary,
+				NetworkUtils.createBoundary(additionalData));
+	}
+
+	@Test
 	public void testUploadFileGzipBasicAuth() throws Exception {
 		AtomicReference<String> capturedContentType = new AtomicReference<>();
 		AtomicReference<byte[]> capturedBody = new AtomicReference<>();
@@ -215,7 +265,8 @@ public class NetworkUtilsTest {
 		Assert.assertTrue("Body should contain visibility",
 				bodyText.contains("name=\"visibility\"") && bodyText.contains("trackable"));
 
-		String closingBoundary = "\r\n--CowMooCowMooCowCowCow--\r\n";
+		String boundary = capturedContentType.get().substring("multipart/form-data; boundary=".length());
+		String closingBoundary = "\r\n--" + boundary + "--\r\n";
 		Assert.assertTrue("Body should end with closing boundary", bodyText.endsWith(closingBoundary));
 		int fileStart = bodyText.indexOf("\r\n\r\n", bodyText.indexOf("filename=")) + 4;
 		int fileEnd = bodyText.length() - closingBoundary.length();

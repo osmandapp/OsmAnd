@@ -21,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 import java.util.zip.GZIPOutputStream;
 
 public class NetworkUtils {
@@ -111,11 +112,12 @@ public class NetworkUtils {
 				conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
-			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY); //$NON-NLS-1$ //$NON-NLS-2$
+			String boundary = createBoundary(additionalMapData);
+			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary); //$NON-NLS-1$ //$NON-NLS-2$
 			conn.setChunkedStreamingMode(4096);
 			OutputStream ous = conn.getOutputStream();
 			try {
-				writeMultipartBody(ous, fileToUpload, formName, gzip, additionalMapData);
+				writeMultipartBody(ous, boundary, fileToUpload, formName, gzip, additionalMapData);
 			} finally {
 				Algorithms.closeStream(ous);
 			}
@@ -211,15 +213,25 @@ public class NetworkUtils {
 		}
 	}
 
-	private static void writeMultipartBody(OutputStream ous, File fileToUpload, String formName, boolean gzip,
-										   Map<String, String> additionalMapData) throws IOException {
+	static String createBoundary(Map<String, String> additionalMapData) {
+		while (true) {
+			String boundary = BOUNDARY + UUID.randomUUID().toString().replace("-", "");
+			if (additionalMapData == null || additionalMapData.values().stream()
+					.noneMatch(value -> value != null && value.contains(boundary))) {
+				return boundary;
+			}
+		}
+	}
+
+	private static void writeMultipartBody(OutputStream ous, String boundary, File fileToUpload, String formName,
+										   boolean gzip, Map<String, String> additionalMapData) throws IOException {
 		if (additionalMapData != null) {
 			for (Map.Entry<String, String> entry : additionalMapData.entrySet()) {
 				if (entry.getValue() == null) {
 					// omit field so server applies its default instead of receiving an empty string
 					continue;
 				}
-				ous.write(("--" + BOUNDARY + "\r\n").getBytes(StandardCharsets.UTF_8));
+				ous.write(("--" + boundary + "\r\n").getBytes(StandardCharsets.UTF_8));
 				ous.write(("Content-Disposition: form-data; name=\"" + escapeQuotedValue(entry.getKey()) + "\"\r\n\r\n").getBytes(StandardCharsets.UTF_8));
 				ous.write(entry.getValue().getBytes(StandardCharsets.UTF_8));
 				ous.write("\r\n".getBytes(StandardCharsets.UTF_8));
@@ -229,7 +241,7 @@ public class NetworkUtils {
 		if (gzip) {
 			filename += ".gz";
 		}
-		ous.write(("--" + BOUNDARY + "\r\n").getBytes(StandardCharsets.UTF_8));
+		ous.write(("--" + boundary + "\r\n").getBytes(StandardCharsets.UTF_8));
 		ous.write(("Content-Disposition: form-data; name=\"" + escapeQuotedValue(formName) + "\"; filename=\"" + escapeQuotedValue(filename) + "\"\r\n").getBytes(StandardCharsets.UTF_8));
 		ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes(StandardCharsets.UTF_8));
 		InputStream fis = new FileInputStream(fileToUpload);
@@ -246,7 +258,7 @@ public class NetworkUtils {
 		} finally {
 			Algorithms.closeStream(bis);
 		}
-		ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes(StandardCharsets.UTF_8));
+		ous.write(("\r\n--" + boundary + "--\r\n").getBytes(StandardCharsets.UTF_8));
 		ous.flush();
 	}
 
