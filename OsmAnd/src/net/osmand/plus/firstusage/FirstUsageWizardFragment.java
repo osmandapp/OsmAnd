@@ -48,6 +48,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
+import net.osmand.plus.download.FreeRegionHelper;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.resources.ResourceManager;
@@ -507,6 +508,8 @@ public class FirstUsageWizardFragment extends BaseFullScreenFragment implements 
 		if (mapIndexItem != null && !downloadThread.isDownloading(mapIndexItem)
 				&& !mapIndexItem.isDownloaded()
 				&& !mapDownloadCancelled) {
+			// the start screen never asks: its map becomes the free region
+			new FreeRegionHelper(app).setFreeRegion(mapIndexItem);
 			validationManager.startDownload(activity, mapIndexItem);
 			downloadStarted = true;
 		}

@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
@@ -27,11 +26,8 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -841,15 +837,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	protected void startDownload(MapActivity mapActivity, IndexItem indexItem) {
-		OsmandApplication app = mapActivity.getApp();
-		if (!Version.isPaidVersion(app)
-				&& DownloadActivityType.isCountedInDownloads(indexItem)
-				&& app.getSettings().NUMBER_OF_FREE_DOWNLOADS.get() >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
-			ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
-		} else {
-			new DownloadValidationManager(mapActivity.getApp())
-					.startDownload(mapActivity, indexItem);
-		}
+		new DownloadValidationManager(mapActivity.getApp()).startDownload(mapActivity, indexItem);
 	}
 
 	public void createMapDownloadControls(BinaryMapDataObject binaryMapDataObject, String selectedFullName) {

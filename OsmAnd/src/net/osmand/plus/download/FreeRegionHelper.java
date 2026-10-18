@@ -97,6 +97,14 @@ public class FreeRegionHelper {
 		preferences.edit().putString(REGION, region.getRegionId()).apply();
 	}
 
+	/** Makes the region of the item the free region, without asking - for the first-start screen. */
+	public void setFreeRegion(@NonNull IndexItem item) {
+		WorldRegion region = getRegion(item);
+		if (isFreeVersion() && region != null) {
+			setFreeRegion(region);
+		}
+	}
+
 	/**
 	 * @return the free-version region the item counts against, or null when the item is free for
 	 * everyone (world maps, plugin maps, voice, fonts...).
