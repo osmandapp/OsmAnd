@@ -84,6 +84,7 @@ class OnlinePhotosDelegate(
 		onResult: (MediaHolder) -> Unit
 	) {
 		val holder = OnlinePhotosHolder(key.latLon, key.params)
+		holder.markIncomplete()
 
 		if (!cacheManager.exists(rawKey)) {
 			onResult(holder)

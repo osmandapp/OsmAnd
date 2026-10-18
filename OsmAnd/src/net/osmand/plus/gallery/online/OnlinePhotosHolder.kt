@@ -26,6 +26,11 @@ class OnlinePhotosHolder(
 		itemsByGroup.getOrPut(group) { linkedMapOf() }[item.id] = item
 	}
 
+	override var isComplete: Boolean = true
+		private set
+
+	fun markIncomplete() { isComplete = false }
+
 	fun clear() { itemsByGroup.clear() }
 
 	private fun getItemsByGroups(vararg groups: OnlinePhotosGroup): List<MediaItem> {

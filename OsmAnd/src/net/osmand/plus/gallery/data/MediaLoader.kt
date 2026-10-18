@@ -30,7 +30,7 @@ class MediaLoader(
 	) {
 		if (!forceReload) {
 			val cached = repository.get(key)
-			if (cached != null) {
+			if (cached != null && cached.isComplete) {
 				listener.onLoaded(key, cached)
 				return
 			}
