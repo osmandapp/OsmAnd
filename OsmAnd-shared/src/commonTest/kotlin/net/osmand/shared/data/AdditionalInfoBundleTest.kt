@@ -58,7 +58,8 @@ class AdditionalInfoBundleTest {
 		val bundle = bundle(
 			"type" to "sustenance", "subtype" to "fast_food", "route_id" to "1", "wikidata" to "Q1", "image" to "x",
 			"wikipedia" to "w", "content" to "c", "short_description" to "s", "osmand_socket_cee_blue_yes" to "yes",
-			"color" to "#fff", "icon" to "x", "address" to "a", "level" to "0", "ref" to "7"
+			"color" to "#fff", "icon" to "x", "address" to "a", "level" to "0", "ref" to "7",
+			"mapillary" to "123", "panoramax" to "d1c09d84-8704-4b9a-bcee-39a871552802;e5865b58-3a25-4546-8d74-93b412948c18"
 		) ?: return
 		bundle.setCustomHiddenExtensions(listOf("level"))
 
