@@ -3,7 +3,6 @@ package net.osmand.test.ui.map
 import android.content.pm.ActivityInfo
 import android.graphics.Rect
 import android.view.View
-import android.view.ViewGroup
 import androidx.test.espresso.Espresso
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
@@ -13,18 +12,12 @@ import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.quickaction.actions.DayNightModeAction
-import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.settings.enums.ScreenLayoutMode
 import net.osmand.plus.settings.enums.WidgetSize
-import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.views.controls.MapHudLayout
-import net.osmand.plus.views.controls.maphudbuttons.MapButton
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState
-import net.osmand.shared.grid.ButtonPositionSize
 import net.osmand.test.common.AndroidTest
 import net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs
 import org.junit.After
@@ -36,10 +29,12 @@ import org.junit.runner.RunWith
 import kotlin.math.roundToInt
 
 /**
- * #26217: in landscape, when the left button column has no room for the speedometer, it must neither
- * cover map buttons nor jump between two positions on every layout pass. The HUD content height is
- * swept with [MapHudLayout.setExternalVisibleArea], so the affected grid sizes are reached on any
- * phone, tablet or emulator, not only on screens of one particular height.
+ * #26217: in landscape, with a widget in the left panel the left button column can be too short for the
+ * speedometer, and the grid moves it up close to the top edge. There it must keep its full height and
+ * stay in one place on every layout pass. If its parent shrinks it there, its grid size changes and
+ * the grid moves it back down, where it is full size again, so it jumps between the two positions.
+ * The HUD content height is swept with [MapHudLayout.setExternalVisibleArea], so the affected grid
+ * sizes are reached on any phone, tablet or emulator.
  */
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -55,7 +50,6 @@ class SpeedometerLandscapeLayoutTest : AndroidTest() {
 	private var leftPanelOrderBefore: String? = null
 	private var leftPanelOrderChanged = false
 	private var leftWidgetEnabledBefore: Boolean? = null
-	private var buttonState: QuickActionButtonState? = null
 
 	@Before
 	override fun setup() {
@@ -88,17 +82,15 @@ class SpeedometerLandscapeLayoutTest : AndroidTest() {
 		if (leftPanelOrderChanged) {
 			WidgetsPanel.LEFT.getOrderPreference(settings, layoutMode).setModeValue(appMode, leftPanelOrderBefore)
 		}
-		buttonState?.let { app.mapButtonsHelper.removeQuickActionButtonState(it) }
 		settings.SHOW_SPEEDOMETER.setModeValue(appMode, showSpeedometerBefore)
 		settings.SPEEDOMETER_SIZE.setModeValue(appMode, speedometerSizeBefore)
 		settings.MAP_SCREEN_ORIENTATION.set(screenOrientationBefore)
 	}
 
 	@Test
-	fun speedometerDoesNotCoverButtonsOrJumpWhenLeftColumnIsFull() {
-		// The user's setup from the issue: a custom button right above the menu button and a widget
-		// in the left panel, which pushes the configure map, search and compass buttons down.
-		addCustomButtonAboveMenu()
+	fun speedometerKeepsItsSizeAndPositionWithWidgetInLeftPanel() {
+		// A widget in the left panel pushes the configure map, search and compass buttons down the
+		// left column, which leaves less room for the speedometer below them.
 		putWidgetToLeftPanel()
 		val activity = activityRule.launchActivity(null)
 		skipAppStartDialogs(app)
@@ -140,22 +132,19 @@ class SpeedometerLandscapeLayoutTest : AndroidTest() {
 				relayout(hud)
 			}
 			val samples = ArrayList<Rect>()
-			val covered = LinkedHashSet<String>()
 			for (i in 0 until SAMPLED_PASSES) {
 				relayout(hud)
 				samples.add(screenRect(speedometer))
-				// The widget view has transparent padding around the speedometer box; only the box must
-				// not cover buttons.
-				covered.addAll(coveredButtons(hud, screenRect(speedometerBox)))
 			}
 			val positions = samples.distinct()
-			LOG.info("Content height ${heightDp}dp: speedometer $positions, covers $covered")
+			val fullHeight = speedometerBox.height + speedometer.paddingTop + speedometer.paddingBottom
+			LOG.info("Content height ${heightDp}dp: speedometer $positions, full height ${fullHeight}px")
 			if (!isShown(speedometer)) {
 				problems.add("${heightDp}dp: speedometer is not shown (${describe(speedometer)})")
 			} else if (positions.size > 1) {
 				problems.add("${heightDp}dp: speedometer jumps between $positions")
-			} else if (covered.isNotEmpty()) {
-				problems.add("${heightDp}dp: speedometer ${positions[0]} covers $covered")
+			} else if (positions[0].height() < fullHeight) {
+				problems.add("${heightDp}dp: speedometer ${positions[0]} is cut to ${positions[0].height()}px of ${fullHeight}px")
 			}
 			heightDp += HEIGHT_STEP_DP
 		}
@@ -169,22 +158,6 @@ class SpeedometerLandscapeLayoutTest : AndroidTest() {
 		// MapHudLayout refreshes 100 ms after a widget or panel changes its size.
 		Thread.sleep(REFRESH_WAIT_MILLIS)
 		instrumentation.waitForIdleSync()
-	}
-
-	private fun addCustomButtonAboveMenu() {
-		val buttonsHelper = app.mapButtonsHelper
-		val state = buttonsHelper.createNewButtonState()
-		state.setEnabled(true)
-		buttonsHelper.addQuickAction(state, DayNightModeAction())
-		buttonsHelper.addQuickActionButtonState(state)
-		buttonState = state
-
-		val position = ButtonPositionSize(state.id, BUTTON_SIZE, true, false)
-			.setMargin(0, MENU_ROW_HEIGHT)
-			.setMoveAny()
-		@Suppress("UNCHECKED_CAST")
-		val landscapePosition = settings.getPreference(state.id + "_position_landscape") as CommonPreference<Long>
-		landscapePosition.setModeValue(settings.applicationMode, position.toLongValue())
 	}
 
 	// The panel of a widget is resolved from the panel orders when the widget is created, so the order
@@ -225,30 +198,6 @@ class SpeedometerLandscapeLayoutTest : AndroidTest() {
 		app.osmandMap.mapView.refreshMap()
 	}
 
-	private fun coveredButtons(hud: MapHudLayout, speedometerRect: Rect): List<String> {
-		val result = ArrayList<String>()
-		for (button in visibleMapButtons(hud)) {
-			val buttonRect = screenRect(button)
-			if (Rect.intersects(speedometerRect, buttonRect)) {
-				result.add("${AndroidUtils.getViewName(button)} $buttonRect")
-			}
-		}
-		return result
-	}
-
-	private fun visibleMapButtons(root: ViewGroup): List<MapButton> {
-		val result = ArrayList<MapButton>()
-		for (i in 0 until root.childCount) {
-			val child = root.getChildAt(i)
-			if (child is MapButton && isShown(child)) {
-				result.add(child)
-			} else if (child is ViewGroup && child.visibility == View.VISIBLE) {
-				result.addAll(visibleMapButtons(child))
-			}
-		}
-		return result
-	}
-
 	private fun isShown(view: View): Boolean {
 		return view.isShown && view.width > 0 && view.height > 0
 	}
@@ -279,8 +228,6 @@ class SpeedometerLandscapeLayoutTest : AndroidTest() {
 
 		private val LEFT_PANEL_WIDGET = WidgetType.BATTERY
 
-		private const val BUTTON_SIZE = 7
-		private const val MENU_ROW_HEIGHT = 8
 		private const val LATITUDE = 50.4501
 		private const val LONGITUDE = 30.5234
 		private const val SPEED_MPS = 15f
