@@ -126,7 +126,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 		listView.setHeaderDividersEnabled(false);
 		listView.setDivider(null);
 		addFreeVersionBannerHeader(view);
-		addSubscribeEmailRow();
 		addSearchRow();
 		addRestorePurchasesRow();
 		addDescriptionRow();

@@ -69,6 +69,7 @@ import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
+import net.osmand.plus.download.ui.FreeRegionDialogs;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.feedback.CrashBottomSheetDialogFragment;
 import net.osmand.plus.feedback.RateUsHelper;
@@ -293,6 +294,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (showed) {
 				SecondSplashScreenFragment.SHOW = false;
 			}
+		} else if (app.getAppInitializer().isAppVersionChanged()) {
+			FreeRegionDialogs.showUpdateMapsWarning(this);
 		}
 		mapWidgetsVisibilityHelper = new WidgetsVisibilityHelper(this);
 		dashboardOnMap.createDashboardView();

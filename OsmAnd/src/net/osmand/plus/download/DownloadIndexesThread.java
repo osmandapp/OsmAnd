@@ -3,7 +3,6 @@ package net.osmand.plus.download;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.plus.Version.FULL_VERSION_NAME;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
-import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
 
 import android.annotation.SuppressLint;
@@ -630,9 +629,15 @@ public class DownloadIndexesThread {
 		}
 
 		private boolean validateNotExceedsFreeLimit(@NonNull IndexItem item) {
-			boolean exceed = !Version.isPaidVersion(app)
-					&& DownloadActivityType.isCountedInDownloads(item)
-					&& downloads.get() >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+			FreeRegionHelper helper = new FreeRegionHelper(app);
+			WorldRegion freeRegion = helper.getFreeRegion();
+			WorldRegion region = helper.getRegion(item);
+			if (helper.isFreeVersion() && freeRegion == null && region != null) {
+				// the first map chooses the free region, without a dialog
+				helper.setFreeRegion(region);
+				freeRegion = region;
+			}
+			boolean exceed = !helper.isFree(item, freeRegion);
 			if (exceed) {
 				publishProgress(DownloadValidationManager.getFreeVersionMessage(app));
 			}

@@ -1,22 +1,27 @@
 package net.osmand.plus.download;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.ui.FreeRegionDialogs;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 public class DownloadValidationManager {
 
@@ -107,29 +112,58 @@ public class DownloadValidationManager {
 
 	private void downloadFilesWithAllChecks(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
 	                                        @NonNull DownloadValidatedCallback callback) {
-		if (downloadFilesCheck_1_FreeVersion(activity, items)) {
-			downloadFilesCheck_2_Internet(activity, items, callback);
+		IndexItem[] freeItems = downloadFilesCheck_1_FreeRegion(activity, items, callback);
+		if (freeItems != null) {
+			downloadFilesCheck_2_Internet(activity, freeItems, callback);
 		}
 	}
 
 	private boolean downloadFilesCheck_1_FreeVersion(@NonNull FragmentActivity context, IndexItem... items) {
-		if (!Version.isPaidVersion(app) && shouldShowChoosePlan(items)) {
-			ChoosePlanFragment.showInstance(context, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
-			return false;
-		}
-		return true;
+		return downloadFilesCheck_1_FreeRegion(context, items, null) != null;
 	}
 
-	private boolean shouldShowChoosePlan(IndexItem... items) {
-		boolean isAnyItemCountedInDownload = false;
-		for (IndexItem indexItem : items) {
-			if (DownloadActivityType.isCountedInDownloads(indexItem)) {
-				isAnyItemCountedInDownload = true;
-				break;
+	/**
+	 * Free version: new maps of one region only. The first map chooses the region without a dialog
+	 * (it is stored when the download starts), updates of maps on the device always go through.
+	 *
+	 * @return the items to download now, or null when a dialog takes over (replace the free region,
+	 * get Maps+) - it restarts the download itself.
+	 */
+	@Nullable
+	private IndexItem[] downloadFilesCheck_1_FreeRegion(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
+	                                                    @Nullable DownloadValidatedCallback callback) {
+		FreeRegionHelper helper = new FreeRegionHelper(app);
+		if (!helper.isFreeVersion()) {
+			return items;
+		}
+		WorldRegion freeRegion = helper.getFreeRegion();
+		List<IndexItem> free = new ArrayList<>();
+		Set<WorldRegion> otherRegions = new LinkedHashSet<>();
+		for (IndexItem item : items) {
+			WorldRegion region = helper.getRegion(item);
+			if (freeRegion == null && region != null) {
+				freeRegion = region;
+			}
+			if (helper.isFree(item, freeRegion)) {
+				free.add(item);
+			} else {
+				otherRegions.add(region);
 			}
 		}
-		int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
-		return total >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS && isAnyItemCountedInDownload;
+		if (otherRegions.isEmpty()) {
+			return items;
+		}
+		if (!free.isEmpty() || callback == null) {
+			List<String> names = new ArrayList<>();
+			for (WorldRegion region : otherRegions) {
+				names.add(region.getLocaleName());
+			}
+			app.showToastMessage(R.string.free_region_other_regions_need_maps_plus, TextUtils.join(", ", names));
+			return free.isEmpty() ? null : free.toArray(new IndexItem[0]);
+		}
+		FreeRegionDialogs.showOtherRegion(activity, freeRegion, otherRegions.iterator().next(),
+				() -> downloadFilesWithAllChecks(activity, items, callback));
+		return null;
 	}
 
 	private void downloadFilesCheck_2_Internet(@NonNull FragmentActivity context, @NonNull IndexItem[] items,
