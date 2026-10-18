@@ -48,6 +48,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.core.SearchPhrase;
@@ -91,10 +92,12 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	private TextView applyFilterButton;
 	private View applyFilterButtonShadow;
 	private View bottomButtonContainer;
+	private TextView description;
 	private final Set<String> selectedPoiAdditionals = new TreeSet<>();
 	private Set<String> selectedPoiAdditionalsOrig = new TreeSet<>();
 	private final ArrayList<String> collapsedCategories = new ArrayList<>();
 	private final ArrayList<String> showAllCategories = new ArrayList<>();
+	private final Set<String> showAllCountedCategories = new TreeSet<>();
 	private final Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
 	// Places around with a value (by key name) and with any value of a category, null until counted
 	private Map<String, Integer> placesCounts;
@@ -142,7 +145,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 		view = inflater.inflate(R.layout.search_poi_filter, container, false);
 
-		TextView description = view.findViewById(R.id.description);
+		description = view.findViewById(R.id.description);
 		description.setText(filter.getName());
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
@@ -245,7 +248,11 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						break;
 					case BUTTON_ITEM:
 						if (item.category != null) {
-							showAllCategories.add(item.category);
+							if (placesCounts != null) {
+								showAllCountedCategories.add(item.category);
+							} else {
+								showAllCategories.add(item.category);
+							}
 							updateListView();
 						}
 						break;
@@ -291,9 +298,9 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 		Map<String, Integer> counts = new HashMap<>();
 		Map<String, Integer> categoryCounts = new HashMap<>();
-		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Boolean>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Integer>() {
 			@Override
-			protected Boolean doInBackground(Void... params) {
+			protected Integer doInBackground(Void... params) {
 				List<Amenity> amenities = app.getResourceManager().getAmenitySearcher().searchAmenities(filter, null,
 						MapUtils.get31LatitudeY((int) rect.top), MapUtils.get31LongitudeX((int) rect.left),
 						MapUtils.get31LatitudeY((int) rect.bottom), MapUtils.get31LongitudeX((int) rect.right),
@@ -317,14 +324,24 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						}
 					}
 				}
-				return !amenities.isEmpty();
+				return amenities.size();
 			}
 
 			@Override
-			protected void onPostExecute(Boolean hasPlaces) {
-				if (hasPlaces && isAdded()) {
+			protected void onPostExecute(Integer placesCount) {
+				if (placesCount > 0 && isAdded()) {
 					placesCounts = counts;
 					categoryPlacesCounts = categoryCounts;
+					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
+						String category = entry.getKey();
+						if (getCategoryPlacesCount(category) == 0 && getPoiAdditionalsWithPlaces(entry.getValue()).isEmpty()
+								&& !collapsedCategories.contains(category)) {
+							collapsedCategories.add(category);
+						}
+					}
+					String places = getString(R.string.ltr_or_rtl_combine_via_colon,
+							getString(R.string.shared_string_places), String.valueOf(placesCount));
+					description.setText(getString(R.string.ltr_or_rtl_combine_via_bold_point, filter.getName(), places));
 					updateListView();
 				}
 			}
@@ -341,21 +358,17 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		return count != null ? count : 0;
 	}
 
-	// Values that no place around has are hidden, selected ones stay
-	private boolean isPoiAdditionalShown(@NonNull PoiType poiType) {
-		String keyName = poiType.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT);
-		return placesCounts == null || getPlacesCount(poiType) > 0 || selectedPoiAdditionals.contains(keyName);
-	}
-
+	// Selected values count as values with places, so they are never behind Show all
 	@NonNull
-	private List<PoiType> getShownPoiAdditionals(@NonNull List<PoiType> poiAdditionals) {
-		List<PoiType> shown = new ArrayList<>();
+	private List<PoiType> getPoiAdditionalsWithPlaces(@NonNull List<PoiType> poiAdditionals) {
+		List<PoiType> withPlaces = new ArrayList<>();
 		for (PoiType poiType : poiAdditionals) {
-			if (isPoiAdditionalShown(poiType)) {
-				shown.add(poiType);
+			String keyName = poiType.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT);
+			if (getPlacesCount(poiType) > 0 || selectedPoiAdditionals.contains(keyName)) {
+				withPlaces.add(poiType);
 			}
 		}
-		return shown;
+		return withPlaces;
 	}
 
 	private void deleteFilter() {
@@ -607,10 +620,6 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			if (!additionalsMap.isEmpty()) {
 				List<String> categories = new ArrayList<>(additionalsMap.keySet());
 				if (placesCounts != null) {
-					categories.removeIf(category -> {
-						List<PoiType> all = allAdditionalsMap.get(category);
-						return all == null || getShownPoiAdditionals(all).isEmpty();
-					});
 					categories.sort((c1, c2) -> Integer.compare(getCategoryPlacesCount(c2), getCategoryPlacesCount(c1)));
 				}
 				for (String category : categories) {
@@ -647,7 +656,8 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						String keyName = poiType.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT);
 						String label = PoiAdditionalLabels.getSwitchLabel(translations.get(0), categoryLocalizedName);
 						items.add(new PoiFilterListItem(PoiFilterListItemType.SWITCH_ITEM, categoryIconId, label,
-								++groupId, false, false, selectedPoiAdditionals.contains(keyName), category, keyName));
+								++groupId, false, false, selectedPoiAdditionals.contains(keyName), category, keyName,
+								placesCounts != null ? getCategoryPlacesCount(category) : -1));
 						continue;
 					}
 					List<String> labels = PoiAdditionalLabels.getGroupLabels(translations, osmValues);
@@ -657,11 +667,20 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 					}
 
 					items.add(new PoiFilterListItem(PoiFilterListItemType.GROUP_HEADER,
-							categoryIconId, categoryLocalizedName, ++groupId, true, expanded, false, category, null));
-					List<PoiType> categoryPoiAdditionals = getShownPoiAdditionals(categoryValues);
-					List<PoiType> shownCategoryPoiAdditionals = getShownPoiAdditionals(allCategoryPoiAdditionals);
-					if (expanded && categoryPoiAdditionals.isEmpty()) {
-						categoryPoiAdditionals = shownCategoryPoiAdditionals;
+							categoryIconId, categoryLocalizedName, ++groupId, true, expanded, false, category, null,
+							placesCounts != null ? getCategoryPlacesCount(category) : -1));
+					List<PoiType> categoryPoiAdditionals = new ArrayList<>(categoryValues);
+					boolean hasMore = !showAll && !categoryPoiAdditionals.isEmpty();
+					if (placesCounts != null) {
+						// values with places first, the others after Show all
+						List<PoiType> withPlaces = getPoiAdditionalsWithPlaces(allCategoryPoiAdditionals);
+						boolean showAllCounted = showAllCountedCategories.contains(category) || withPlaces.isEmpty();
+						if (!expanded) {
+							categoryPoiAdditionals.clear();
+						} else {
+							categoryPoiAdditionals = new ArrayList<>(showAllCounted ? allCategoryPoiAdditionals : withPlaces);
+						}
+						hasMore = expanded && !showAllCounted && withPlaces.size() < allCategoryPoiAdditionals.size();
 					}
 					Collections.sort(categoryPoiAdditionals, (p1, p2) -> {
 						if (placesCounts != null) {
@@ -685,10 +704,10 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 							label = poiAdditionalsTranslations.get(poiType);
 						}
 						items.add(new PoiFilterListItem(PoiFilterListItemType.CHECKBOX_ITEM,
-								0, label, groupId, false, false, selectedPoiAdditionals.contains(keyName), category, keyName));
+								0, label, groupId, false, false, selectedPoiAdditionals.contains(keyName), category, keyName,
+								placesCounts != null ? getPlacesCount(poiType) : -1));
 					}
-					if (!showAll && !categoryPoiAdditionals.isEmpty() && (placesCounts == null
-							|| categoryPoiAdditionals.size() < shownCategoryPoiAdditionals.size())) {
+					if (hasMore) {
 						items.add(new PoiFilterListItem(PoiFilterListItemType.BUTTON_ITEM,
 								0, getString(R.string.shared_string_show_all).toUpperCase(), groupId, false, false, false, category, null));
 					}
@@ -912,7 +931,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 				checkBoxItem.setOnCheckedChangeListener(null);
 				switch (item.type) {
 					case GROUP_HEADER:
-						titleBold.setText(item.text);
+						titleBold.setText(getTextWithCount(item));
 						if (item.expandable) {
 							expandItem.setImageDrawable(item.expanded ?
 									app.getUIUtilities().getThemedIcon(R.drawable.ic_action_arrow_up) :
@@ -928,7 +947,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						checkBoxItem.setVisibility(View.GONE);
 						break;
 					case SWITCH_ITEM:
-						titleRegular.setText(item.text);
+						titleRegular.setText(getTextWithCount(item));
 						titleRegular.setVisibility(View.VISIBLE);
 						switchItem.setVisibility(View.VISIBLE);
 						switchItem.setChecked(item.checked);
@@ -941,7 +960,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						checkBoxItem.setVisibility(View.GONE);
 						break;
 					case CHECKBOX_ITEM:
-						titleRegular.setText(item.text);
+						titleRegular.setText(getTextWithCount(item));
 						titleRegular.setVisibility(View.VISIBLE);
 						checkBoxItem.setVisibility(View.VISIBLE);
 						checkBoxItem.setChecked(item.checked);
@@ -966,6 +985,16 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			}
 			return view;
 		}
+
+		@NonNull
+		private CharSequence getTextWithCount(@NonNull PoiFilterListItem item) {
+			if (item.count < 0) {
+				return item.text;
+			}
+			String count = String.valueOf(item.count);
+			String text = getString(R.string.ltr_or_rtl_combine_via_space, item.text, count);
+			return UiUtilities.createColorSpannable(text, ColorUtilities.getSecondaryTextColor(app, nightMode), false, count);
+		}
 	}
 
 	public enum PoiFilterListItemType {
@@ -986,10 +1015,17 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		private boolean checked;
 		private final String category;
 		private final String keyName;
+		private final int count;
 
 		public PoiFilterListItem(PoiFilterListItemType type, int iconId, String text, int groupIndex,
 								 boolean expandable, boolean expanded, boolean checked, String category,
 								 String keyName) {
+			this(type, iconId, text, groupIndex, expandable, expanded, checked, category, keyName, -1);
+		}
+
+		public PoiFilterListItem(PoiFilterListItemType type, int iconId, String text, int groupIndex,
+								 boolean expandable, boolean expanded, boolean checked, String category,
+								 String keyName, int count) {
 			this.type = type;
 			this.iconId = iconId;
 			this.text = text;
@@ -999,6 +1035,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			this.checked = checked;
 			this.category = category;
 			this.keyName = keyName;
+			this.count = count;
 		}
 	}
 
