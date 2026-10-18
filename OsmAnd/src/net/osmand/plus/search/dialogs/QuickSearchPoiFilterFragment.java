@@ -58,6 +58,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -79,6 +80,9 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	private static final String QUICK_SEARCH_POI_FILTER_SHOW_ALL_CATEGORIES = "quick_search_poi_filter_show_all_categories";
 	// Radius of the first category search, see SearchAmenityByTypeAPI
 	private static final int PLACES_COUNT_RADIUS = 10000;
+	private static final int MAX_VALUES_WITH_PLACES = 5;
+	// Collapsible section at the end with the categories that no place around has
+	private static final String OTHER_CATEGORIES = "quick_search_poi_filter_other_categories";
 
 	private View view;
 	private ListView listView;
@@ -337,6 +341,9 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 								&& !collapsedCategories.contains(category)) {
 							collapsedCategories.add(category);
 						}
+					}
+					if (!collapsedCategories.contains(OTHER_CATEGORIES)) {
+						collapsedCategories.add(OTHER_CATEGORIES);
 					}
 					String places = getString(R.string.ltr_or_rtl_combine_via_colon,
 							getString(R.string.shared_string_places), String.valueOf(placesCount));
@@ -617,11 +624,48 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			extractPoiAdditionals(otherAdditionalCategories, allAdditionalsMap, excludedPoiAdditionalCategories, true);
 
 			if (!additionalsMap.isEmpty()) {
+				Comparator<PoiType> poiAdditionalsComparator = (p1, p2) -> {
+					if (placesCounts != null) {
+						int compare = Integer.compare(getPlacesCount(p2), getPlacesCount(p1));
+						if (compare != 0) {
+							return compare;
+						}
+					}
+					String firstPoiTypeTranslation = poiAdditionalsTranslations.get(p1);
+					String secondPoiTypeTranslation = poiAdditionalsTranslations.get(p2);
+					if (firstPoiTypeTranslation != null && secondPoiTypeTranslation != null) {
+						return firstPoiTypeTranslation.compareTo(secondPoiTypeTranslation);
+					} else {
+						return 0;
+					}
+				};
 				List<String> categories = new ArrayList<>(additionalsMap.keySet());
 				if (placesCounts != null) {
 					categories.sort((c1, c2) -> Integer.compare(getCategoryPlacesCount(c2), getCategoryPlacesCount(c1)));
+					List<String> otherCategories = new ArrayList<>();
+					for (String category : categories) {
+						List<PoiType> all = allAdditionalsMap.get(category);
+						if (getCategoryPlacesCount(category) == 0
+								&& (all == null || getPoiAdditionalsWithPlaces(all).isEmpty())) {
+							otherCategories.add(category);
+						}
+					}
+					if (!otherCategories.isEmpty()) {
+						categories.removeAll(otherCategories);
+						categories.add(OTHER_CATEGORIES);
+						if (!collapsedCategories.contains(OTHER_CATEGORIES)) {
+							categories.addAll(otherCategories);
+						}
+					}
 				}
 				for (String category : categories) {
+					if (OTHER_CATEGORIES.equals(category)) {
+						items.add(new PoiFilterListItem(PoiFilterListItemType.DIVIDER, 0, null, -1, false, false, false, null, null));
+						items.add(new PoiFilterListItem(PoiFilterListItemType.GROUP_HEADER, R.drawable.ic_action_folder_stroke,
+								getString(R.string.shared_string_other), ++groupId, true,
+								!collapsedCategories.contains(OTHER_CATEGORIES), false, OTHER_CATEGORIES, null));
+						continue;
+					}
 					List<PoiType> categoryValues = additionalsMap.get(category);
 					String categoryLocalizedName = poiTypes.getPoiTranslation(category);
 					boolean expanded = !collapsedCategories.contains(category);
@@ -671,31 +715,25 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 					List<PoiType> categoryPoiAdditionals = new ArrayList<>(categoryValues);
 					boolean hasMore = !showAll && !categoryPoiAdditionals.isEmpty();
 					if (placesCounts != null) {
-						// values with places first, the others after Show all
-						List<PoiType> withPlaces = getPoiAdditionalsWithPlaces(allCategoryPoiAdditionals);
-						boolean showAllCounted = showAllCountedCategories.contains(category) || withPlaces.isEmpty();
-						if (!expanded) {
-							categoryPoiAdditionals.clear();
-						} else {
-							categoryPoiAdditionals = new ArrayList<>(showAllCounted ? allCategoryPoiAdditionals : withPlaces);
-						}
-						hasMore = expanded && !showAllCounted && withPlaces.size() < allCategoryPoiAdditionals.size();
-					}
-					Collections.sort(categoryPoiAdditionals, (p1, p2) -> {
-						if (placesCounts != null) {
-							int compare = Integer.compare(getPlacesCount(p2), getPlacesCount(p1));
-							if (compare != 0) {
-								return compare;
+						// up to 5 values with places, the others after Show all; selected values stay
+						List<PoiType> sorted = new ArrayList<>(allCategoryPoiAdditionals);
+						Collections.sort(sorted, poiAdditionalsComparator);
+						boolean showAllCounted = showAllCountedCategories.contains(category);
+						List<PoiType> visible = new ArrayList<>();
+						for (PoiType poiType : sorted) {
+							String keyName = poiType.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT);
+							if (showAllCounted || selectedPoiAdditionals.contains(keyName)
+									|| (getPlacesCount(poiType) > 0 && visible.size() < MAX_VALUES_WITH_PLACES)) {
+								visible.add(poiType);
 							}
 						}
-						String firstPoiTypeTranslation = poiAdditionalsTranslations.get(p1);
-						String secondPoiTypeTranslation = poiAdditionalsTranslations.get(p2);
-						if (firstPoiTypeTranslation != null && secondPoiTypeTranslation != null) {
-							return firstPoiTypeTranslation.compareTo(secondPoiTypeTranslation);
-						} else {
-							return 0;
+						if (visible.isEmpty()) {
+							visible = sorted;
 						}
-					});
+						categoryPoiAdditionals = expanded ? visible : new ArrayList<>();
+						hasMore = expanded && visible.size() < sorted.size();
+					}
+					Collections.sort(categoryPoiAdditionals, poiAdditionalsComparator);
 					for (PoiType poiType : categoryPoiAdditionals) {
 						String keyName = poiType.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT);
 						String label = poiAdditionalLabels.get(poiType);
