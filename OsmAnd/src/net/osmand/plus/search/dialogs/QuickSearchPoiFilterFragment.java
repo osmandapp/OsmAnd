@@ -4,6 +4,7 @@ import static net.osmand.data.Amenity.OPENING_HOURS;
 
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -30,12 +31,15 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.data.Amenity;
+import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
@@ -46,7 +50,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -71,6 +77,8 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	private static final String QUICK_SEARCH_POI_FILTER_SELECTED_ADDITIONALS = "quick_search_poi_filter_selected_additionals";
 	private static final String QUICK_SEARCH_POI_FILTER_COLLAPSED_CATEGORIES = "quick_search_poi_filter_collapsed_categories";
 	private static final String QUICK_SEARCH_POI_FILTER_SHOW_ALL_CATEGORIES = "quick_search_poi_filter_show_all_categories";
+	// Radius of the first category search, see SearchAmenityByTypeAPI
+	private static final int PLACES_COUNT_RADIUS = 10000;
 
 	private View view;
 	private ListView listView;
@@ -88,6 +96,9 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	private final ArrayList<String> collapsedCategories = new ArrayList<>();
 	private final ArrayList<String> showAllCategories = new ArrayList<>();
 	private final Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
+	// Places around with a value (by key name) and with any value of a category, null until counted
+	private Map<String, Integer> placesCounts;
+	private Map<String, Integer> categoryPlacesCounts;
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
@@ -213,6 +224,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		listView.addFooterView(bottomShadowView, null, false);
 		adapter = new PoiFilterListAdapter(app, getListItems());
 		listView.setAdapter(adapter);
+		countPlaces();
 		listView.setOnItemClickListener((parent, view, position, id) -> {
 			PoiFilterListItem item = adapter.getItem(position - listView.getHeaderViewsCount());
 			if (item != null) {
@@ -262,6 +274,83 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		boolean hasChanges = !nameFilterText.equals(nameFilterTextOrig) || !selectedPoiAdditionals.equals(selectedPoiAdditionalsOrig);
 		bottomButtonContainer.setVisibility(hasChanges ? View.VISIBLE : View.GONE);
 		applyFilterButtonShadow.setVisibility(hasChanges ? View.VISIBLE : View.GONE);
+	}
+
+	private void countPlaces() {
+		SearchPhrase phrase = app.getSearchUICore().getCore().getPhrase();
+		QuadRect rect = phrase != null ? phrase.getRadiusBBoxToSearch(PLACES_COUNT_RADIUS) : null;
+		Map<String, PoiType> poiAdditionals = filter.getPoiAdditionals();
+		if (rect == null || poiAdditionals == null || filter.isEmpty()) {
+			return;
+		}
+		Set<String> excludedPoiAdditionalCategories = getExcludedPoiAdditionalCategories();
+		List<PoiType> otherAdditionalCategories = app.getPoiTypes().getOtherMapCategory().getPoiAdditionalsCategorized();
+		Map<String, List<PoiType>> additionalsMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+		extractPoiAdditionals(poiAdditionals.values(), additionalsMap, excludedPoiAdditionalCategories, true);
+		extractPoiAdditionals(otherAdditionalCategories, additionalsMap, excludedPoiAdditionalCategories, true);
+
+		Map<String, Integer> counts = new HashMap<>();
+		Map<String, Integer> categoryCounts = new HashMap<>();
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Boolean>() {
+			@Override
+			protected Boolean doInBackground(Void... params) {
+				List<Amenity> amenities = app.getResourceManager().getAmenitySearcher().searchAmenities(filter, null,
+						MapUtils.get31LatitudeY((int) rect.top), MapUtils.get31LongitudeX((int) rect.left),
+						MapUtils.get31LatitudeY((int) rect.bottom), MapUtils.get31LongitudeX((int) rect.right),
+						-1, false, null, null);
+				for (Amenity amenity : amenities) {
+					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
+						boolean accepted = false;
+						for (PoiType poiType : entry.getValue()) {
+							if (filter.acceptedPoiAdditional(amenity, poiType)) {
+								counts.merge(poiType.getKeyName(), 1, Integer::sum);
+								accepted = true;
+							}
+						}
+						if (accepted) {
+							categoryCounts.merge(entry.getKey(), 1, Integer::sum);
+						}
+					}
+				}
+				return !amenities.isEmpty();
+			}
+
+			@Override
+			protected void onPostExecute(Boolean hasPlaces) {
+				if (hasPlaces && isAdded()) {
+					placesCounts = counts;
+					categoryPlacesCounts = categoryCounts;
+					updateListView();
+				}
+			}
+		});
+	}
+
+	private int getPlacesCount(@NonNull PoiType poiType) {
+		Integer count = placesCounts != null ? placesCounts.get(poiType.getKeyName()) : null;
+		return count != null ? count : 0;
+	}
+
+	private int getCategoryPlacesCount(@NonNull String category) {
+		Integer count = categoryPlacesCounts != null ? categoryPlacesCounts.get(category) : null;
+		return count != null ? count : 0;
+	}
+
+	// Values that no place around has are hidden, selected ones stay
+	private boolean isPoiAdditionalShown(@NonNull PoiType poiType) {
+		String keyName = poiType.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT);
+		return placesCounts == null || getPlacesCount(poiType) > 0 || selectedPoiAdditionals.contains(keyName);
+	}
+
+	@NonNull
+	private List<PoiType> getShownPoiAdditionals(@NonNull List<PoiType> poiAdditionals) {
+		List<PoiType> shown = new ArrayList<>();
+		for (PoiType poiType : poiAdditionals) {
+			if (isPoiAdditionalShown(poiType)) {
+				shown.add(poiType);
+			}
+		}
+		return shown;
 	}
 
 	private void deleteFilter() {
@@ -511,8 +600,16 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			extractPoiAdditionals(otherAdditionalCategories, allAdditionalsMap, excludedPoiAdditionalCategories, true);
 
 			if (!additionalsMap.isEmpty()) {
-				for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
-					String category = entry.getKey();
+				List<String> categories = new ArrayList<>(additionalsMap.keySet());
+				if (placesCounts != null) {
+					categories.removeIf(category -> {
+						List<PoiType> all = allAdditionalsMap.get(category);
+						return all == null || getShownPoiAdditionals(all).isEmpty();
+					});
+					categories.sort((c1, c2) -> Integer.compare(getCategoryPlacesCount(c2), getCategoryPlacesCount(c1)));
+				}
+				for (String category : categories) {
+					List<PoiType> categoryValues = additionalsMap.get(category);
 					String categoryLocalizedName = poiTypes.getPoiTranslation(category);
 					boolean expanded = !collapsedCategories.contains(category);
 					boolean showAll = showAllCategories.contains(category);
@@ -532,7 +629,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 					List<PoiType> allCategoryPoiAdditionals = allAdditionalsMap.get(category);
 					if (allCategoryPoiAdditionals == null) {
-						allCategoryPoiAdditionals = entry.getValue();
+						allCategoryPoiAdditionals = categoryValues;
 					}
 					List<String> translations = new ArrayList<>();
 					List<String> osmValues = new ArrayList<>();
@@ -556,8 +653,18 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 					items.add(new PoiFilterListItem(PoiFilterListItemType.GROUP_HEADER,
 							categoryIconId, categoryLocalizedName, ++groupId, true, expanded, false, category, null));
-					List<PoiType> categoryPoiAdditionals = new ArrayList<>(entry.getValue());
+					List<PoiType> categoryPoiAdditionals = getShownPoiAdditionals(categoryValues);
+					List<PoiType> shownCategoryPoiAdditionals = getShownPoiAdditionals(allCategoryPoiAdditionals);
+					if (expanded && categoryPoiAdditionals.isEmpty()) {
+						categoryPoiAdditionals = shownCategoryPoiAdditionals;
+					}
 					Collections.sort(categoryPoiAdditionals, (p1, p2) -> {
+						if (placesCounts != null) {
+							int compare = Integer.compare(getPlacesCount(p2), getPlacesCount(p1));
+							if (compare != 0) {
+								return compare;
+							}
+						}
 						String firstPoiTypeTranslation = poiAdditionalsTranslations.get(p1);
 						String secondPoiTypeTranslation = poiAdditionalsTranslations.get(p2);
 						if (firstPoiTypeTranslation != null && secondPoiTypeTranslation != null) {
@@ -575,7 +682,8 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						items.add(new PoiFilterListItem(PoiFilterListItemType.CHECKBOX_ITEM,
 								0, label, groupId, false, false, selectedPoiAdditionals.contains(keyName), category, keyName));
 					}
-					if (!showAll && !categoryPoiAdditionals.isEmpty()) {
+					if (!showAll && !categoryPoiAdditionals.isEmpty() && (placesCounts == null
+							|| categoryPoiAdditionals.size() < shownCategoryPoiAdditionals.size())) {
 						items.add(new PoiFilterListItem(PoiFilterListItemType.BUTTON_ITEM,
 								0, getString(R.string.shared_string_show_all).toUpperCase(), groupId, false, false, false, category, null));
 					}

@@ -582,6 +582,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		return false;
 	}
 
+	public boolean acceptedPoiAdditional(@NonNull Amenity amenity, @NonNull PoiType poiAdditional) {
+		return acceptedAnyFilterOfEachCategory(amenity, Collections.singletonList(poiAdditional));
+	}
+
 	private boolean acceptedAnyFilterOfEachCategory(@NonNull Amenity amenity, @Nullable List<PoiType> selectedFilters) {
 		if (selectedFilters == null) {
 			return true;
