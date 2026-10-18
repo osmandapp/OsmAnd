@@ -73,7 +73,8 @@ public class AverageGlideComputer extends AverageValueComputer {
 	@Override
 	protected void saveLocation(@NonNull Location location, long time) {
 		if (location.hasAltitude()) {
-			Location loc = new Location(location);
+			// the receive time selects the interval, the fix time is kept for the vertical speed
+			Location loc = new GlideLocation(location);
 			loc.setTime(time);
 			locations.add(loc);
 			clearExpiredLocations(BIGGEST_MEASURED_INTERVAL);
@@ -82,22 +83,60 @@ public class AverageGlideComputer extends AverageValueComputer {
 
 	@Nullable
 	public String getFormattedAverageGlideRatio(long measuredInterval) {
-		locationsToUse.clear();
-
-		long now = System.currentTimeMillis();
-		for (Location location : locations) {
-			long locationTime = location.getTime();
-			// Check if the location is within the measured interval and after the start timestamp
-			if (now - locationTime <= measuredInterval) {
-				locationsToUse.add(location);
-			}
-		}
+		collectLocationsToUse(measuredInterval);
 		if (!Algorithms.isEmpty(locationsToUse)) {
 			double distance = calculateTotalDistance(locationsToUse);
 			double difference = calculateAltitudeDifference(locationsToUse);
 			return calculateFormattedRatio(app, distance, difference);
 		}
 		return null;
+	}
+
+	/**
+	 * @return average vertical speed in m/s over the interval, positive when climbing,
+	 * or null when there are not enough points
+	 */
+	@Nullable
+	public Double getAverageVerticalSpeed(long measuredInterval) {
+		collectLocationsToUse(measuredInterval);
+		int size = locationsToUse.size();
+		if (size > 1) {
+			Location start = locationsToUse.get(0);
+			Location end = locationsToUse.get(size - 1);
+			long timeMillis = getTimeSpan(start, end);
+			if (timeMillis > 0) {
+				return (end.getAltitude() - start.getAltitude()) / (timeMillis / 1000.0);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Fixes delivered in a burst (e.g. after the main thread was busy) share the receive time,
+	 * so the time between two fixes is taken from the fixes themselves when the provider sets it.
+	 */
+	private static long getTimeSpan(@NonNull Location start, @NonNull Location end) {
+		long startFixTime = getFixTime(start);
+		long endFixTime = getFixTime(end);
+		if (startFixTime > 0 && endFixTime > startFixTime) {
+			return endFixTime - startFixTime;
+		}
+		return end.getTime() - start.getTime();
+	}
+
+	private static long getFixTime(@NonNull Location location) {
+		return location instanceof GlideLocation glideLocation ? glideLocation.fixTime : 0;
+	}
+
+	private void collectLocationsToUse(long measuredInterval) {
+		locationsToUse.clear();
+		long now = System.currentTimeMillis();
+		for (Location location : locations) {
+			// Check if the location is within the measured interval
+			if (now - location.getTime() <= measuredInterval) {
+				locationsToUse.add(location);
+			}
+		}
 	}
 
 	private double calculateTotalDistance(@NonNull List<Location> locations) {
@@ -161,5 +200,15 @@ public class AverageGlideComputer extends AverageValueComputer {
 
 	public static boolean areAltitudesEqual(@Nullable Double a1, @Nullable Double a2) {
 		return a1 == null && a2 == null || a1 != null && a2 != null && Math.abs(a1 - a2) > 0.01;
+	}
+
+	private static class GlideLocation extends Location {
+
+		private final long fixTime;
+
+		GlideLocation(@NonNull Location location) {
+			super(location);
+			this.fixTime = location.getTime();
+		}
 	}
 }
