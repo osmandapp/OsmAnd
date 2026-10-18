@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseAlertDialogFragment;
+import net.osmand.plus.download.ui.FreeRegionDialogs;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -66,6 +67,8 @@ public class WhatsNewDialogFragment extends BaseAlertDialogFragment {
 			if (mapActivity.getFragmentsHelper().getFragment(SharedStorageWarningFragment.TAG) == null
 					&& SharedStorageWarningFragment.dialogShowRequired(app)) {
 				SharedStorageWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
+			} else {
+				FreeRegionDialogs.showUpdateMapsWarning(mapActivity);
 			}
 		}
 	}
