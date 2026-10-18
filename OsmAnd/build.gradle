@@ -226,18 +226,19 @@ afterEvaluate {
 
 tasks.register('copyOsmAndCoreWithJNI') {
 	dependsOn buildOsmAndCore
+	// Capture paths at configuration time: the configuration cache forbids file() and copy() in doLast
+	def binariesDir = file("../../binaries/android")
+	def libsDir = file("libs")
 	doLast {
-		file("libs/armeabi-v7a").mkdirs()
-		copy { from("../../binaries/android/clang-armeabi-v7a/Debug/libOsmAndCoreWithJNI.so") into("libs/armeabi-v7a") }
-
-		file("libs/arm64-v8a").mkdirs()
-		copy { from("../../binaries/android/clang-arm64-v8a/Debug/libOsmAndCoreWithJNI.so") into("libs/arm64-v8a") }
-
-		file("libs/x86").mkdirs()
-		copy { from("../../binaries/android/clang-x86/Debug/libOsmAndCoreWithJNI.so") into("libs/x86") }
-
-		file("libs/x86_64").mkdirs()
-		copy { from("../../binaries/android/clang-x86_64/Debug/libOsmAndCoreWithJNI.so") into("libs/x86_64") }
+		["armeabi-v7a", "arm64-v8a", "x86", "x86_64"].each { abi ->
+			def abiDir = new File(libsDir, abi)
+			abiDir.mkdirs()
+			def lib = new File(binariesDir, "clang-${abi}/Debug/libOsmAndCoreWithJNI.so")
+			if (lib.exists()) {
+				java.nio.file.Files.copy(lib.toPath(), new File(abiDir, lib.name).toPath(),
+						java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+			}
+		}
 	}
 }
 
