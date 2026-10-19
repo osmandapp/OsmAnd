@@ -150,6 +150,51 @@ public class SpatialPoiCategorySynonymsTest {
 		assertHasCategory(poiSearch, Set.of("fr"), "Preneur de paris", "preneur", "bookmaker");
 	}
 
+	/**
+	 * A word that is also a name of the translator keeps the whole phrase of the map it is in: "restaurant" and "café"
+	 * of "Restaurant et café" are English names of cafe_and_restaurant too, so without the French phrase "et" lost
+	 * the category and the query found "Centre Georges Pompidou" by "et".
+	 */
+	@Test
+	public void testPhraseOfTheMapIsKeptForWordsOfTheTranslator() throws IOException, XmlPullParserException {
+		SpatialPoiSearch poiSearch = new SpatialPoiSearch(poiTypes());
+		Set<String> fr = Set.of("fr");
+		assertHasCategory(poiSearch, fr, "Restaurant et café", "restaurant", "cafe_and_restaurant");
+		assertHasCategory(poiSearch, fr, "Restaurant et café", "et", "cafe_and_restaurant");
+		assertHasCategory(poiSearch, fr, "Restaurant et café", "cafe", "cafe_and_restaurant");
+	}
+
+	/**
+	 * A phrase of the map is a whole name of the category: "Wasserhahn" is one word, "Water tap" two, so the city
+	 * after it ("Wasserhahn Vaduz") must not make the category look like a part of the longer name.
+	 */
+	@Test
+	public void testPhraseOfTheMapIsAWholeName() throws IOException, XmlPullParserException {
+		SpatialPoiSearch poiSearch = new SpatialPoiSearch(poiTypes());
+		assertHasCategory(poiSearch, Set.of("de"), "Wasserhahn", "wasserhahn", "water_tap");
+		Assert.assertEquals(1, poiSearch.getByKey("water_tap").tokensInMatchedName(List.of("wasserhahn")));
+		Assert.assertEquals(2, poiSearch.getByKey("water_tap").tokensInMatchedName(List.of("water")));
+	}
+
+	/**
+	 * The names of maps of one language do not take the category from a word of another language: the query is read
+	 * for every map at once, and a word loses a category for all of them. With a German and a French map, "Kino"
+	 * (de) leaves "ciné" (fr) the cinemas of the French map, and "Fitness-Zentrum" (de, sports_centre) leaves
+	 * "fitness" the fitness stations of every map.
+	 */
+	@Test
+	public void testNameOfMapsOfOneLanguageKeepsCategoriesOfOthers() throws IOException, XmlPullParserException {
+		SpatialPoiSearch poiSearch = new SpatialPoiSearch(poiTypes());
+		Set<String> deFr = Set.of("de", "fr");
+		assertHasCategory(poiSearch, deFr, "Kino ciné", "kino", "cinema");
+		assertHasCategory(poiSearch, deFr, "Kino ciné", "cine", "cinema");
+		assertHasCategory(poiSearch, deFr, "Fitness Zentrum", "fitness", "fitness_station");
+		assertHasCategory(poiSearch, deFr, "Fitness Zentrum", "fitness", "sports_centre");
+		// on the maps of one language the rule still holds
+		assertHasCategory(poiSearch, Set.of("de"), "Friedhofskapelle Kirche", "kirche", "religion_christian");
+		assertNoCategory(poiSearch, Set.of("de"), "Friedhofskapelle Kirche", "friedhofskapelle", "religion_christian");
+	}
+
 	private static void assertHasCategory(SpatialPoiSearch poiSearch, Set<String> languages, String query, String word,
 			String key) {
 		Map<String, Set<String>> res = categoriesByWord(tokens(poiSearch, languages, query), poiSearch);
@@ -214,11 +259,13 @@ public class SpatialPoiCategorySynonymsTest {
 	private static MapPoiTypes poiTypes() throws IOException, XmlPullParserException {
 		Map<String, Map<String, String>> languages = new LinkedHashMap<>();
 		languages.put("gl", Map.of("poi_water_tap", "Billa de auga"));
-		languages.put("fr", Map.of("poi_bookmaker", "Preneur de paris", "poi_cinema", "Cinéma;ciné"));
+		languages.put("fr", Map.of("poi_bookmaker", "Preneur de paris", "poi_cinema", "Cinéma;ciné",
+				"poi_cafe_and_restaurant", "Restaurant et café"));
 		languages.put("sv", Map.of("poi_bench", "Bänk"));
 		languages.put("nl", Map.of("poi_bench_yes", "Bank: ja"));
 		languages.put("de", Map.of("poi_cinema", "Kino;Filmtheater", "poi_bench", "Sitzbank;Parkbank",
-				"poi_bank", "Bank;bankstelle", "poi_religion_christian", "Christentum;Kirche;kapelle;friedhofskapelle"));
+				"poi_bank", "Bank;bankstelle", "poi_religion_christian", "Christentum;Kirche;kapelle;friedhofskapelle",
+				"poi_water_tap", "Wasserhahn", "poi_sports_centre", "Sportzentrum;Fitness-Zentrum"));
 		MapPoiTypes types = new MapPoiTypes(null);
 		types.init();
 		types.setPoiTranslator(new LanguagesTranslator(Algorithms.parseStringsXml(EN_PHRASES), languages));
