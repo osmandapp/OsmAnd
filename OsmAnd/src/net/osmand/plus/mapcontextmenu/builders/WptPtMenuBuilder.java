@@ -158,6 +158,10 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	}
 
+	protected boolean hasAmenityExtension(@NonNull String key) {
+		return !Algorithms.isEmpty(amenityExtensions.get(key));
+	}
+
 	private void buildWaypointsView(View view) {
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedGPXFile(wpt);

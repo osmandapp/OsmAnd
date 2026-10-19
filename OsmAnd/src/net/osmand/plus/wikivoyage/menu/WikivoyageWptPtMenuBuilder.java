@@ -1,5 +1,11 @@
 package net.osmand.plus.wikivoyage.menu;
 
+import static net.osmand.wiki.WikivoyageOSMTags.TAG_DIRECTIONS;
+import static net.osmand.wiki.WikivoyageOSMTags.TAG_EMAIL;
+import static net.osmand.wiki.WikivoyageOSMTags.TAG_OPENING_HOURS;
+import static net.osmand.wiki.WikivoyageOSMTags.TAG_PHONE;
+import static net.osmand.wiki.WikivoyageOSMTags.TAG_PRICE;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -15,6 +21,7 @@ import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
+import net.osmand.wiki.WikivoyageOSMTags;
 
 import java.util.HashMap;
 
@@ -61,11 +68,11 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 
 	@Override
 	protected void prepareDescription(WptPt wpt, View view) {
-		String phones = descTokens.get(KEY_PHONE);
-		String emails = descTokens.get(KEY_EMAIL);
-		String workingHours = descTokens.get(KEY_WORKING_HOURS);
-		String price = descTokens.get(KEY_PRICE);
-		String direction = descTokens.get(KEY_DIRECTIONS);
+		String phones = getTokenWithoutTagRow(KEY_PHONE, TAG_PHONE);
+		String emails = getTokenWithoutTagRow(KEY_EMAIL, TAG_EMAIL);
+		String workingHours = getTokenWithoutTagRow(KEY_WORKING_HOURS, TAG_OPENING_HOURS);
+		String price = getTokenWithoutTagRow(KEY_PRICE, TAG_PRICE);
+		String direction = getTokenWithoutTagRow(KEY_DIRECTIONS, TAG_DIRECTIONS);
 
 		if (!Algorithms.isEmpty(phones)) {
 			buildRow(view, new BuildRowAttrs.Builder().setText(phones).setIconId(R.drawable.ic_action_call_dark)
@@ -92,6 +99,15 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_price_tag)
 					.setText(price).setTextPrefix(app.getString(R.string.shared_string_price)).build());
 		}
+	}
+
+	/**
+	 * The travel data keeps these values twice: as a "\n Phone: ..." line of the description and as a tag
+	 * that is shown as its own row, so the description line gets a row only when the tag is missing.
+	 */
+	@Nullable
+	private String getTokenWithoutTagRow(@NonNull String key, @NonNull WikivoyageOSMTags tag) {
+		return hasAmenityExtension(tag.tag()) ? null : descTokens.get(key);
 	}
 
 	private HashMap<String, String> getDescriptionTokens(String desc, String... allowedKeys) {
