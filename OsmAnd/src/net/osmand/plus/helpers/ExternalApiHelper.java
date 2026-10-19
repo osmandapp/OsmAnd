@@ -30,6 +30,7 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.aidl.AidlPermissionGroup;
 import net.osmand.aidl.AidlSearchResultWrapper;
@@ -64,6 +65,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.TurnType;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
@@ -836,7 +838,7 @@ public class ExternalApiHelper {
 		int limit = totalLimit;
 
 		SearchUICore core = app.getSearchUICore().getCore();
-		core.setOnResultsComplete(() -> {
+		Runnable onSearchFinished = () -> {
 			List<AidlSearchResultWrapper> resultSet = new ArrayList<>();
 			SearchUICore.SearchResultCollection resultCollection = core.getCurrentSearchResult();
 			int count = 0;
@@ -852,7 +854,7 @@ public class ExternalApiHelper {
 				}
 			}
 			callback.onSearchComplete(resultSet);
-		});
+		};
 
 		SearchSettings searchSettings = new SearchSettings(core.getSearchSettings())
 				.setRadiusLevel(radiusLevel)
@@ -875,7 +877,21 @@ public class ExternalApiHelper {
 		}
 		searchSettings = searchSettings.setSearchTypes(searchTypes.toArray(new ObjectType[0]));
 
-		core.search(searchQuery, false, null, searchSettings);
+		// answer this search only: the core is shared with the search screen and Android Auto
+		core.search(searchQuery, false, new ResultMatcher<SearchResult>() {
+			@Override
+			public boolean publish(SearchResult object) {
+				if (object.objectType == ObjectType.SEARCH_FINISHED) {
+					onSearchFinished.run();
+				}
+				return true;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		}, searchSettings);
 	}
 
 	public void testApi(OsmandApplication app, String command) {
