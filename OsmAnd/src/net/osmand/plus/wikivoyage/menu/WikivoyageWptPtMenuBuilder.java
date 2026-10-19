@@ -99,11 +99,13 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 		if (!Algorithms.isEmpty(desc)) {
 			String[] tokens = desc.split("\n");
 			for (String token : tokens) {
+				// lines after the first one start with a space: "\n Phone: ..."
+				String line = token.trim();
 				boolean matched = false;
 				for (String key : allowedKeys) {
-					if (token.startsWith(key)) {
+					if (line.startsWith(key)) {
 						matched = true;
-						String value = token.substring(key.length()).trim();
+						String value = line.substring(key.length()).trim();
 						mTokens.put(key, value);
 					}
 				}
