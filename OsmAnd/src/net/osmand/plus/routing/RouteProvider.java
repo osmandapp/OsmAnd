@@ -917,7 +917,7 @@ public class RouteProvider {
 		bundle.putString("trackFormat", "gpx");
 		bundle.putString("turnInstructionFormat", "osmand");
 		bundle.putString("acceptCompressedResult", "true");
-		if (params.start.hasBearing()) {
+		if (params.start.hasBearing() && lats.length == 2) {
 			bundle.putInt("heading", Math.round(params.start.getBearing()) % 360);
 		}
 
