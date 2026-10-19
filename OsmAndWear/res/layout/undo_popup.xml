@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:background="@drawable/popup_bg"
+	android:gravity="center"
+	android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:singleLine="true"
+        android:textColor="@color/popup_text_color"
+        android:text="@string/item_removed"
+        android:textSize="@dimen/default_list_text_size"
+	    android:paddingStart="16dp"
+	    android:paddingEnd="16dp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_weight="0"
+        android:background="@color/popup_separator_color"/>
+
+    <Button
+        android:id="@+id/undo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="?attr/selectableItemBackground"
+        tools:text="UNDO"
+        android:textColor="@color/popup_text_color"/>
+</LinearLayout>

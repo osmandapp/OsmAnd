@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/action_explore"
+		android:icon="@drawable/ic_action_explore"
+		android:title="@string/shared_string_explore"/>
+
+	<item
+		android:id="@+id/action_saved_articles"
+		android:icon="@drawable/ic_action_read_later"
+		android:title="@string/saved_articles"/>
+</menu>

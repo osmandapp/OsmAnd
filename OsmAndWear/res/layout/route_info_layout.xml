@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/color_transparent">
+
+	<net.osmand.plus.mapcontextmenu.InterceptorLinearLayout
+		android:id="@+id/main_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<include layout="@layout/context_menu_top_shadow" />
+
+		<FrameLayout
+			android:id="@+id/bottom_container"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/route_info_bg"
+			android:foregroundGravity="top|fill_horizontal">
+
+			<net.osmand.plus.LockableScrollView
+				android:id="@+id/route_menu_bottom_scroll"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="?attr/route_info_bg">
+
+				<LinearLayout
+					android:id="@+id/route_menu_cards_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/route_info_bg"
+					android:orientation="vertical"
+					android:paddingBottom="24dp">
+
+				</LinearLayout>
+
+			</net.osmand.plus.LockableScrollView>
+
+		</FrameLayout>
+
+	</net.osmand.plus.mapcontextmenu.InterceptorLinearLayout>
+
+</FrameLayout>

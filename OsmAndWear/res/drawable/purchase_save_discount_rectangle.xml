@@ -1,0 +1,12 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:bottom="1dp"
+		android:left="1dp"
+		android:right="1dp"
+		android:top="1dp">
+		<shape android:shape="rectangle">
+			<corners android:radius="@dimen/radius_small" />
+			<solid android:color="@color/purchase_save_discount" />
+		</shape>
+	</item>
+</layer-list>

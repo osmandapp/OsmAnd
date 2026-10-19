@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<FrameLayout
+		android:id="@+id/image_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/activity_background_basic"
+		tools:paddingTop="16dp">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/device_image"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:adjustViewBounds="true"
+			tools:src="@drawable/img_settings_device_top_dark" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/image"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:adjustViewBounds="true"
+			tools:src="@drawable/img_settings_customize_configure_map_night" />
+
+	</FrameLayout>
+
+	<TextView
+		android:id="@+id/description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/content_padding"
+		android:letterSpacing="0.02"
+		android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size"
+		tools:text="@string/ui_customization_description" />
+
+</LinearLayout>
