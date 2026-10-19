@@ -785,6 +785,20 @@ public class Algorithms {
 		}
 	}
 
+	public static boolean streamCopy(InputStream in, OutputStream out, long maxSize) throws IOException {
+		byte[] b = new byte[BUFFER_SIZE];
+		long size = 0;
+		int read;
+		while ((read = in.read(b)) != -1) {
+			size += read;
+			if (size > maxSize) {
+				return false;
+			}
+			out.write(b, 0, read);
+		}
+		return true;
+	}
+
 
 	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor) throws IOException {
 		streamCopy(in, out, pg, bytesDivisor, null);
