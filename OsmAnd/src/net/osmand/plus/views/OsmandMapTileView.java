@@ -2286,16 +2286,25 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
 			MapRendererView mapRenderer = getMapRenderer();
 			boolean completedAnimation = mapRenderer != null;
+			boolean wasMagnifying = magnifying;
 			magnifying = false;
 
 			if (completedAnimation) {
-                setCurrentZoom(0.0);
-				refreshMap();
-				if (isPinchZoomMagnificationEnabled) {
+				if (wasMagnifying) {
 					mapRenderer.setViewportScale(0.0, false);
 					mapRenderer.setViewportShift(0, 0, false);
-					changeZoomPosition((float) 0, 0);
+					// The magnification was only a viewport transform while the fingers
+					// were down. Commit that scale to camera zoom before ending the gesture.
+					float zoomDelta = (float) (Math.log(relativeToStart) / Math.log(2.0));
+					PointF zoomCenter = multiTouchSupport != null
+							? multiTouchSupport.getFirstPoint() : initialMultiTouchCenterPoint;
+					if (zoomCenter != null) {
+						zoomToAnimate(initialViewport, zoomDelta, (int) zoomCenter.x, (int) zoomCenter.y);
+					}
 				}
+				// Commit the final renderer zoom after converting viewport magnification.
+				setCurrentZoom(0.0);
+				refreshMap();
 			} else {
 				finishZoomAndRotationGesture();
 			}
@@ -2429,9 +2438,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onZoomStarted(PointF centerPoint) {
+			MapRendererView mapRenderer = getMapRenderer();
+			if (mapRenderer != null) {
+				setCurrentZoom(0.0);
+			}
 			initialMultiTouchCenterPoint = centerPoint;
 			initialViewport = getRotatedTileBox();
-			MapRendererView mapRenderer = getMapRenderer();
 			magnifying = false;
 			initialCenterLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport,
 					(int) initialMultiTouchCenterPoint.x, (int) initialMultiTouchCenterPoint.y);
