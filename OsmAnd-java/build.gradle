@@ -57,7 +57,11 @@ tasks.register('collectTestPhrasesResources', Copy) {
 }
 
 tasks.register('collectTestResources', Copy) {
-	delete fileTree("src/test/resources/search")
+	// Drop search tests removed from resources; at execution time, as a configuration cache hit skips configuration
+	def searchDir = file("src/test/resources/search")
+	doFirst {
+		searchDir.deleteDir()
+	}
 	into "src/test/resources/"
 	from("../../resources/test-resources") {
 		include "*"
