@@ -134,7 +134,7 @@
     <string name="poi_railway_station">기차역</string>
     <string name="poi_railway_platform">철도 플랫폼</string>
     <string name="poi_subway_entrance">지하철 입구</string>
-    <string name="poi_subway_station">지하철 역</string>
+    <string name="poi_subway_station">지하철 역: 지하철 역</string>
     <string name="poi_taxi">택시 승차장</string>
     <string name="poi_aerodrome">공항</string>
     <string name="poi_helipad">헬리콥터 이착륙지</string>
@@ -838,7 +838,7 @@
     <string name="poi_luggage_locker">수하물보관함</string>
     <string name="poi_motorcycle_rental_yes">오토바이대여</string>
     <string name="poi_motorcycle_repair">오토바이수리점</string>
-    <string name="poi_parking_space">장애인주차공간</string>
+    <string name="poi_parking_space">주차공간;장애인주차공간</string>
     <string name="poi_religion">종교용품점</string>
     <string name="poi_service_vehicle_car_repair_yes">자동차수리소</string>
 </resources>
