@@ -174,6 +174,13 @@ public class SpatialPoiCategorySynonymsTest {
 		assertHasCategory(poiSearch, Set.of("de"), "Wasserhahn", "wasserhahn", "water_tap");
 		Assert.assertEquals(1, poiSearch.getByKey("water_tap").tokensInMatchedName(List.of("wasserhahn")));
 		Assert.assertEquals(2, poiSearch.getByKey("water_tap").tokensInMatchedName(List.of("water")));
+		// a phrase counts only whole: "internet" is a word of "Internet cafe", not the German "Internetcafé"
+		assertHasCategory(poiSearch, Set.of("de"), "Internet", "internet", "internet_cafe");
+		Assert.assertEquals(2, poiSearch.getByKey("internet_cafe").tokensInMatchedName(List.of("internet")));
+		Assert.assertEquals(1, poiSearch.getByKey("internet_cafe").tokensInMatchedName(List.of("internetcafe")));
+		// the phrases of a language searched before do not change it: "water" is no word of the Dutch "Waterkraan"
+		assertHasCategory(poiSearch, Set.of("nl"), "Waterkraan", "waterkraan", "water_tap");
+		Assert.assertEquals(2, poiSearch.getByKey("water_tap").tokensInMatchedName(List.of("water")));
 	}
 
 	/**
@@ -190,7 +197,12 @@ public class SpatialPoiCategorySynonymsTest {
 		assertHasCategory(poiSearch, deFr, "Kino ciné", "cine", "cinema");
 		assertHasCategory(poiSearch, deFr, "Fitness Zentrum", "fitness", "fitness_station");
 		assertHasCategory(poiSearch, deFr, "Fitness Zentrum", "fitness", "sports_centre");
-		// on the maps of one language the rule still holds
+		// on the maps of one language the rules still hold, also over a name for every map
+		Set<String> de = Set.of("de");
+		assertHasCategory(poiSearch, de, "Fitness Zentrum", "fitness", "sports_centre");
+		assertNoCategory(poiSearch, de, "Fitness Zentrum", "fitness", "fitness_station");
+		assertHasCategory(poiSearch, de, "Sports Fitness Zentrum", "zentrum", "sports_centre");
+		assertNoCategory(poiSearch, de, "Sports Fitness Zentrum", "sports", "sports_centre");
 		assertHasCategory(poiSearch, Set.of("de"), "Friedhofskapelle Kirche", "kirche", "religion_christian");
 		assertNoCategory(poiSearch, Set.of("de"), "Friedhofskapelle Kirche", "friedhofskapelle", "religion_christian");
 	}
@@ -262,10 +274,11 @@ public class SpatialPoiCategorySynonymsTest {
 		languages.put("fr", Map.of("poi_bookmaker", "Preneur de paris", "poi_cinema", "Cinéma;ciné",
 				"poi_cafe_and_restaurant", "Restaurant et café"));
 		languages.put("sv", Map.of("poi_bench", "Bänk"));
-		languages.put("nl", Map.of("poi_bench_yes", "Bank: ja"));
+		languages.put("nl", Map.of("poi_bench_yes", "Bank: ja", "poi_water_tap", "Waterkraan"));
 		languages.put("de", Map.of("poi_cinema", "Kino;Filmtheater", "poi_bench", "Sitzbank;Parkbank",
 				"poi_bank", "Bank;bankstelle", "poi_religion_christian", "Christentum;Kirche;kapelle;friedhofskapelle",
-				"poi_water_tap", "Wasserhahn", "poi_sports_centre", "Sportzentrum;Fitness-Zentrum"));
+				"poi_water_tap", "Wasserhahn", "poi_sports_centre", "Sportzentrum;Fitness-Zentrum",
+				"poi_internet_cafe", "Internetcafé"));
 		MapPoiTypes types = new MapPoiTypes(null);
 		types.init();
 		types.setPoiTranslator(new LanguagesTranslator(Algorithms.parseStringsXml(EN_PHRASES), languages));

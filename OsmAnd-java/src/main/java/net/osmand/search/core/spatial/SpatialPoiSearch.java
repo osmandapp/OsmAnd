@@ -148,25 +148,31 @@ public class SpatialPoiSearch {
 		 * "Place of worship") look complete.
 		 */
 		public int tokensInMatchedName(Collection<String> queryWords) {
-			int min = tokensInMatchedName(names, queryWords, 0);
-			// the phrases of the language of a map: "Wasserhahn" is a whole name of water_tap ("Water tap")
+			int min = tokensInMatchedName(names, queryWords, 0, false);
+			// a phrase of the language of a map is matched whole (matchLanguagePhrases), so it counts only when the
+			// query has all its words: "Wasserhahn" is a whole name of water_tap ("Water tap"), while "internet" is
+			// no word of "Internetcafé" and "water" none of the Dutch "Waterkraan" of an earlier search
 			for (List<String> langNames : languageNames.values()) {
-				min = tokensInMatchedName(langNames, queryWords, min);
+				min = tokensInMatchedName(langNames, queryWords, min, true);
 			}
 			return min == 0 ? tokensInName : min;
 		}
 
-		private static int tokensInMatchedName(List<String> names, Collection<String> queryWords, int min) {
+		private static int tokensInMatchedName(List<String> names, Collection<String> queryWords, int min,
+				boolean allWords) {
 			for (String name : names) {
 				List<String> words = SearchAlgorithms.split(name);
-				boolean matched = false;
+				boolean matched = false, all = true;
 				for (String w : words) {
 					String aligned = SearchAlgorithms.alignChars(w.toLowerCase());
+					boolean wordMatched = false;
 					for (String q : queryWords) {
 						matched |= aligned.startsWith(q);
+						wordMatched |= aligned.equals(q);
 					}
+					all &= wordMatched;
 				}
-				if (matched && (min == 0 || words.size() < min)) {
+				if ((allWords ? all : matched) && (min == 0 || words.size() < min)) {
 					min = words.size();
 				}
 			}
@@ -442,7 +448,7 @@ public class SpatialPoiSearch {
 	 * stations, so "Metro Gas &amp; Diesel" without the diesel tag is still found.
 	 */
 	private static void keepCategoriesOfWholeNames(Map<SpatialPoiType, PoiCatSearch> res,
-			List<SpatialSearchToken> tokens) {
+			List<SpatialSearchToken> tokens, Set<String> searchLanguages) {
 		// word -> the categories named by a whole name of several words that has it
 		Map<SpatialSearchToken, Set<SpatialPoiType>> whole = new HashMap<>();
 		// word -> languages of the maps those whole names hold for, null for every map
@@ -474,7 +480,7 @@ public class SpatialPoiSearch {
 				Set<SpatialPoiType> types = whole.get(t);
 				// a whole name of German maps leaves the word its category on French maps ("Fitness-Zentrum")
 				if (types != null && !types.contains(pc.pt) && !isAdditionalOf(types, pc.pt)
-						&& coversLanguages(wholeLanguages.get(t), pc.languages.get(i))) {
+						&& coversLanguages(wholeLanguages.get(t), pc.languages.get(i), searchLanguages)) {
 					pc.tokens.get(i).removePoiCategoryMatch(pc.pt.id, pc.pt.key);
 					pc.tokens.remove(i);
 					pc.atoms.remove(i);
@@ -514,7 +520,7 @@ public class SpatialPoiSearch {
 	 * translator before the phrases of the language of a map, and in each the translation and synonyms in their
 	 * order in phrases.xml ("Kirche" before "friedhofskapelle").
 	 */
-	private static void keepCategoryNamedOnce(PoiCatSearch pc) {
+	private static void keepCategoryNamedOnce(PoiCatSearch pc, Set<String> searchLanguages) {
 		if (pc.tokens.size() < 2) {
 			return;
 		}
@@ -545,7 +551,7 @@ public class SpatialPoiSearch {
 		}
 		for (int i = pc.tokens.size() - 1; i >= 0; i--) {
 			if (!pc.phrases.get(i).containsKey(best)
-					&& coversLanguages(bestLanguages.get(best), pc.languages.get(i))) {
+					&& coversLanguages(bestLanguages.get(best), pc.languages.get(i), searchLanguages)) {
 				pc.tokens.get(i).removePoiCategoryMatch(pc.pt.id, pc.pt.key);
 				pc.tokens.remove(i);
 				pc.atoms.remove(i);
@@ -570,10 +576,12 @@ public class SpatialPoiSearch {
 
 	/**
 	 * A word loses a category only where the other name holds: the match is removed from the word for every map at
-	 * once, so it stays when the word is the only name of the category on some of its maps.
+	 * once, so it stays when the word is the only name of the category on some of its maps. A match for every map
+	 * (null) means the maps of this search: with a German map alone "Fitness-Zentrum" takes "fitness" from
+	 * fitness_station, with a French map too it does not.
 	 */
-	private static boolean coversLanguages(Set<String> covering, Set<String> languages) {
-		return covering == null || (languages != null && covering.containsAll(languages));
+	private static boolean coversLanguages(Set<String> covering, Set<String> languages, Set<String> searchLanguages) {
+		return covering == null || covering.containsAll(languages == null ? searchLanguages : languages);
 	}
 
 	/** one of the types is an additional of the category (fuel_diesel of fuel) */
@@ -787,9 +795,9 @@ public class SpatialPoiSearch {
 			}
 		}
 		for (PoiCatSearch pc : res.values()) {
-			keepCategoryNamedOnce(pc);
+			keepCategoryNamedOnce(pc, languages);
 		}
-		keepCategoriesOfWholeNames(res, tokens);
+		keepCategoriesOfWholeNames(res, tokens, languages);
 
 		List<PoiCatSearch> finalRes = new ArrayList<>(res.values());
 		Collections.sort(finalRes);
