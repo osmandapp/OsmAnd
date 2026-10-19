@@ -12,11 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
+import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -47,7 +49,15 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 		if (wpt.getLink() != null && PicassoUtils.isImageUrl(wpt.getLink().getHref())) {
 			mainImageUrl = wpt.getLink().getHref();
 		}
-		descTokens = getDescriptionTokens(wpt.getDesc(), KEY_PHONE, KEY_EMAIL, KEY_WORKING_HOURS, KEY_PRICE, KEY_DIRECTIONS);
+		descTokens = getDescriptionTokens(wpt.getDesc(), isTravelArticlePoint(wpt),
+				KEY_PHONE, KEY_EMAIL, KEY_WORKING_HOURS, KEY_PRICE, KEY_DIRECTIONS);
+	}
+
+	private boolean isTravelArticlePoint(@NonNull WptPt wpt) {
+		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedGPXFile(wpt);
+		String path = selectedGpxFile != null ? selectedGpxFile.getGpxFile().getPath() : null;
+		return !Algorithms.isEmpty(path)
+				&& path.startsWith(app.getAppPath(IndexConstants.GPX_TRAVEL_DIR).getAbsolutePath());
 	}
 
 	@Override
@@ -103,20 +113,32 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 
 	/**
 	 * The travel data keeps these values twice: as a "\n Phone: ..." line of the description and as a tag
-	 * that is shown as its own row, so the description line gets a row only when the tag is missing.
+	 * that is shown as its own row, so the description line gets a row only when no tag row shows it.
 	 */
 	@Nullable
 	private String getTokenWithoutTagRow(@NonNull String key, @NonNull WikivoyageOSMTags tag) {
-		return hasAmenityExtension(tag.tag()) ? null : descTokens.get(key);
+		String value = descTokens.get(key);
+		String rowValue = getAmenityRowValues().get(tag.tag());
+		return value != null && rowValue != null && isSameValue(tag, value, rowValue) ? null : value;
 	}
 
-	private HashMap<String, String> getDescriptionTokens(String desc, String... allowedKeys) {
+	// phones and emails of merged language versions may differ, the other values differ only in format
+	private static boolean isSameValue(@NonNull WikivoyageOSMTags tag, @NonNull String value, @NonNull String rowValue) {
+		if (tag == TAG_PHONE) {
+			return value.replaceAll("\\D", "").equals(rowValue.replaceAll("\\D", ""));
+		} else if (tag == TAG_EMAIL) {
+			return value.trim().equalsIgnoreCase(rowValue.trim());
+		}
+		return true;
+	}
+
+	private HashMap<String, String> getDescriptionTokens(String desc, boolean travelPoint, String... allowedKeys) {
 		HashMap<String, String> mTokens = new HashMap<>();
 		if (!Algorithms.isEmpty(desc)) {
 			String[] tokens = desc.split("\n");
 			for (String token : tokens) {
-				// lines after the first one start with a space: "\n Phone: ..."
-				String line = token.trim();
+				// lines after the first one of a travel point start with a space: "\n Phone: ..."
+				String line = travelPoint ? token.trim() : token;
 				boolean matched = false;
 				for (String key : allowedKeys) {
 					if (line.startsWith(key)) {
