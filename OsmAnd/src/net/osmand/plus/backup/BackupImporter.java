@@ -334,6 +334,12 @@ class BackupImporter {
 		List<RemoteFile> filesToDelete = backupInfo != null ? backupInfo.filesToDelete : Collections.emptyList();
 		for (RemoteFile remoteFile : uniqueRemoteFiles) {
 			String fileName = remoteFile.getTypeNamePath();
+			if (!fileName.endsWith(INFO_EXT) && !remoteItemFilesMap.containsKey(fileName)) {
+				remoteItemFilesMap.put(fileName, remoteFile);
+			}
+		}
+		for (RemoteFile remoteFile : uniqueRemoteFiles) {
+			String fileName = remoteFile.getTypeNamePath();
 			if (fileName.endsWith(INFO_EXT)) {
 				boolean delete = false;
 				String origFileName = remoteFile.getName().substring(0, remoteFile.getName().length() - INFO_EXT.length());
@@ -343,17 +349,17 @@ class BackupImporter {
 						break;
 					}
 				}
+				String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
 				UploadedFileInfo fileInfo = infoMap.get(remoteFile.getType() + "___" + origFileName);
 				long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
+				RemoteFile itemFile = remoteItemFilesMap.get(itemFileName);
+				long remoteTime = !readItems && itemFile != null ? itemFile.getUpdatetimems() : remoteFile.getUpdatetimems();
 				if (shouldDownloadOnCollecting(remoteFile, readItems)
-						&& (uploadTime != remoteFile.getUpdatetimems() || delete)) {
+						&& (uploadTime != remoteTime || delete)) {
 					remoteInfoFilesMap.put(new File(tempDir, fileName), remoteFile);
 				}
-				String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
 				remoteInfoNames.add(itemFileName);
 				remoteInfoFiles.add(remoteFile);
-			} else if (!remoteItemFilesMap.containsKey(fileName)) {
-				remoteItemFilesMap.put(fileName, remoteFile);
 			}
 		}
 	}
