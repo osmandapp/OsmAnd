@@ -137,6 +137,11 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 	private static final int[][] SHORT_DEVIATIONS = {
 			{20, 0}, {5, 1}, {8, 1}, {5, 0}, {25, 0}, {5, 1}, {6, 1}, {5, 0}, {15, 0}};
 
+	private static final int[][] STOPPED_IN_DEVIATION = {
+			{20, 0}, {5, 1}, {200, 1}, {3, 4}};
+	private static final int[][] DEVIATION_AT_START = {
+			{5, 0}, {5, 1}, {60, 1}, {5, 0}, {20, 0}};
+
 	@Rule
 	public ActivityScenarioRule<MapActivity> scenarioRule = new ActivityScenarioRule<>(MapActivity.class);
 
@@ -174,6 +179,16 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 
 	@After
 	public void tearDown() {
+		stopRide();
+		screenshotExecutor.shutdown();
+		try {
+			screenshotExecutor.awaitTermination(30, TimeUnit.SECONDS);
+		} catch (InterruptedException ignored) {
+		}
+		super.cleanUp();
+	}
+
+	private void stopRide() {
 		instrumentation.runOnMainSync(() -> {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (voiceListener != null) {
@@ -192,12 +207,9 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 				settings.setApplicationMode(previousAppMode);
 			}
 		});
-		screenshotExecutor.shutdown();
-		try {
-			screenshotExecutor.awaitTermination(30, TimeUnit.SECONDS);
-		} catch (InterruptedException ignored) {
-		}
-		super.cleanUp();
+		rideStartTime = 0;
+		voiceEvents.clear();
+		recalculations.clear();
 	}
 
 	@Test
@@ -218,6 +230,22 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 	@Test
 	public void osmandShortDeviations() throws Throwable {
 		ride(BICYCLE, RouteService.OSMAND, "osmand_short", SHORT_DEVIATIONS);
+	}
+
+	@Test
+	public void osmandPedestrianDeviationAfterStop() throws Throwable {
+		ride(PEDESTRIAN, RouteService.OSMAND, "osmand_pedestrian_stopped", STOPPED_IN_DEVIATION);
+		stopRide();
+		ride(PEDESTRIAN, RouteService.OSMAND, "osmand_pedestrian_after_stop", DEVIATION_AT_START);
+		RecalculationEvent firstForward = null;
+		for (RecalculationEvent event : getRecalculations(getDeviations().get(0)[0], Long.MAX_VALUE)) {
+			if (!event.backward) {
+				firstForward = event;
+				break;
+			}
+		}
+		assertTrue("No forward recalculation after the stop", firstForward != null);
+		assertTrue("The first forward route change after the stop is silent", firstForward.announced);
 	}
 
 	@Test
