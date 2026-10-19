@@ -369,7 +369,7 @@ public class SpatialSearchRanking {
 	/** the query word is a category of the object: "parkplatz" says what a car park named "Parkplatz Edeka" is */
 	private boolean namedByKind(SpatialSearchResultRef ref) {
 		for (SpatialSearchToken t : ref.tokens) {
-			if (ref.atom.poiTypes != null && t.matchPoiCategoryKeys(ref.atom.poiTypes)) {
+			if (ref.atom.poiTypes != null && t.matchPoiCategoryKeys(ref.atom.poiTypes, ref.atom.locale)) {
 				return true;
 			}
 		}

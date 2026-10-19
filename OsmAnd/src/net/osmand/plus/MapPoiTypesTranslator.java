@@ -28,6 +28,8 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 	private final OsmandApplication app;
 	private final Resources enResources;
 	private final Resources localizedResources;
+	// phrases of the language of the data of a map: search names POI categories with them on that map
+	private final Map<String, Resources> languageResources = new ConcurrentHashMap<>();
 
 	public MapPoiTypesTranslator(@NonNull OsmandApplication app) {
 		this(app, Locale.getDefault());
@@ -108,6 +110,25 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 			}
 		}
 		return "";
+	}
+
+	@Override
+	public String getPhrases(AbstractPoiType type, String lang) {
+		AbstractPoiType baseLangType = type.getBaseLangType();
+		int in = getStringId((baseLangType != null ? baseLangType : type).getFormattedKeyName());
+		if (in == 0 || Algorithms.isEmpty(lang)) {
+			return null;
+		}
+		try {
+			Resources resources = languageResources.computeIfAbsent(lang,
+					l -> app.getLocaleHelper().getLocalizedResources(new Locale(l)));
+			return resources.getString(in);
+		} catch (Exception e) {
+			if (PluginsHelper.isDevelopment()) {
+				LOG.info("No phrases: " + type.getKeyName() + " " + lang);
+			}
+		}
+		return null;
 	}
 
 	@Override

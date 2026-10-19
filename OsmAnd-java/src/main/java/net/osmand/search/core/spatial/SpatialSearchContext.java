@@ -983,7 +983,7 @@ public class SpatialSearchContext {
 		}
 		if (poiTypes != null && poiTypes.size() > 0) {
 			for (SpatialSearchToken token : allTokens) {
-				if (t != token && token.matchPoiCategoryKeys(poiTypes) && (otherTokens == null || !otherTokens.contains(token))) {
+				if (t != token && token.matchPoiCategoryKeys(poiTypes, locale) && (otherTokens == null || !otherTokens.contains(token))) {
 					if (otherTokens == null) {
 						otherTokens = new ArrayList<>(3);
 					}
@@ -1040,7 +1040,7 @@ public class SpatialSearchContext {
 		// the query word only names this object's category ('hotel' in 'Hotel Sacher') and every other query word is already
 		// explained by the category: the category atom finds the object without the unmatched name words
 		if (other > 0 && nameFound == 0 && (otherTokens == null ? 0 : otherTokens.size()) == allTokens.size() - 1
-				&& poiTypes != null && t.matchPoiCategoryKeys(poiTypes) && (split == null || t.matchName(split.get(0), null, locale, type))) {
+				&& poiTypes != null && t.matchPoiCategoryKeys(poiTypes, locale) && (split == null || t.matchName(split.get(0), null, locale, type))) {
 			return;
 		}
 		int otherFound = otherTokens == null ? 0 : otherTokens.size();

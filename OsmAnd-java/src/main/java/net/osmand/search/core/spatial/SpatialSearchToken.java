@@ -66,6 +66,10 @@ public class SpatialSearchToken {
 	
 	Set<String> poiCategoryKeysToAutocomplete = new HashSet<>();
 	Set<Integer> poiCategoryIds = new HashSet<>();
+	// a category named by a phrase of the language of some maps ("Kino" of de): id/key -> those languages,
+	// absent for a category named for every map
+	Map<Integer, Set<String>> poiCategoryLanguages = new HashMap<>();
+	Map<String, Set<String>> poiCategoryKeyLanguages = new HashMap<>();
 	List<NameIndexAtom> atoms = new ArrayList<>();
 	TLongObjectHashMap<NameIndexAtom> index = new TLongObjectHashMap<>();
 	HashQuadTree<Integer> quadTree = new HashQuadTree<>(16);
@@ -146,8 +150,10 @@ public class SpatialSearchToken {
 		Map<String, Boolean> fastPrefMatchCheck = new HashMap<String, Boolean>();
 
 		final boolean partOfBuilding;
+		final String locale;
 
 		LocaleRules(String locale) {
+			this.locale = locale;
 			List<CollatorStringMatcher> other = new ArrayList<>();
 			List<CollatorStringMatcher> prefix = new ArrayList<>();
 			partOfBuilding = globalRules.dictionary(locale).likelyPartOfBuilding(word, bldWordSplit);
@@ -235,7 +241,8 @@ public class SpatialSearchToken {
 					return ret;
 				} else if (key.startsWith(NameIndexReader.POI_CATEGORY_PREFIX) && poiCategoryKeysToAutocomplete.size() > 0) {
 					for (String poiCatKey : poiCategoryKeysToAutocomplete) {
-						if (poiCatKey.startsWith(key.substring(NameIndexReader.POI_CATEGORY_PREFIX.length()))) {
+						if (poiCatKey.startsWith(key.substring(NameIndexReader.POI_CATEGORY_PREFIX.length()))
+								&& poiCategoryOfMap(poiCategoryKeyLanguages.get(poiCatKey), lf.locale)) {
 							stats.sub1PartMatchTime.finish();
 							return true;
 						}
@@ -299,6 +306,25 @@ public class SpatialSearchToken {
 	
 	void addPoiCategoryMatch(int id) {
 		poiCategoryIds.add(id);
+	}
+
+	/** @param languages languages of the maps whose objects the category is named for, null for every map */
+	void setPoiCategoryLanguages(int id, String key, Set<String> languages) {
+		if (languages != null) {
+			poiCategoryLanguages.put(id, languages);
+			poiCategoryKeyLanguages.put(key, languages);
+		}
+	}
+
+	/** the word is not this category: another word of the query names it (SpatialPoiSearch.keepCategoryNamedOnce) */
+	void removePoiCategoryMatch(int id, String key) {
+		poiCategoryIds.remove(id);
+		poiCategoryLanguages.remove(id);
+		poiCategoryKeyLanguages.remove(key);
+	}
+
+	private boolean poiCategoryOfMap(Set<String> languages, String locale) {
+		return languages == null || languages.contains(globalRules.locales().language(locale));
 	}
 	
 	boolean addAtom(NameIndexAtom atom) {
@@ -415,7 +441,7 @@ public class SpatialSearchToken {
 			return name.equals(word);
 		}
 		if (name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
-			return poiTypes != null && matchPoiCategoryKeys(poiTypes);
+			return poiTypes != null && matchPoiCategoryKeys(poiTypes, lf.locale);
 		}
 		Boolean cache = lf.fastMatchCheck.get(name);
 		if (cache != null) {
@@ -468,9 +494,14 @@ public class SpatialSearchToken {
 		return !poiCategoryKeysToAutocomplete.isEmpty();
 	}
 	
-	public boolean matchPoiCategoryKeys(TIntArrayList poiTypes) {
+	/**
+	 * @param locale rules locale of the map of the object: a category named in the language of other maps is not
+	 *               the category of this object ("Kino" names cinemas on German maps only)
+	 */
+	public boolean matchPoiCategoryKeys(TIntArrayList poiTypes, String locale) {
 		for (int k = 0; k < poiTypes.size(); k++) {
-			if (poiCategoryIds.contains(poiTypes.getQuick(k))) {
+			int id = poiTypes.getQuick(k);
+			if (poiCategoryIds.contains(id) && poiCategoryOfMap(poiCategoryLanguages.get(id), locale)) {
 				return true;
 			}
 		}

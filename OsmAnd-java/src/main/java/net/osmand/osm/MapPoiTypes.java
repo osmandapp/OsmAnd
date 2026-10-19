@@ -87,6 +87,14 @@ public class MapPoiTypes {
 		String getSynonyms(AbstractPoiType type);
 		String getSynonyms(String keyName);
 
+		/**
+		 * ';'-separated translation and synonyms of the type in a language ("de": "Sitzbank;Parkbank"), null when
+		 * the translator has none. Search names POI categories in the language of the data of a map with them.
+		 */
+		default String getPhrases(AbstractPoiType type, String lang) {
+			return null;
+		}
+
 		String getAllLanguagesTranslationSuffix();
 	}
 
@@ -926,6 +934,11 @@ public class MapPoiTypes {
 			}
 		}
 		return "";
+	}
+
+	/** @see PoiTranslator#getPhrases(AbstractPoiType, String) */
+	public String getPhrases(AbstractPoiType abstractPoiType, String lang) {
+		return poiTranslator == null ? null : poiTranslator.getPhrases(abstractPoiType, lang);
 	}
 
 	public String getEnTranslation(AbstractPoiType abstractPoiType) {
