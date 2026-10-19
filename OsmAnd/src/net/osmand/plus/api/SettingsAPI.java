@@ -22,7 +22,7 @@ public interface SettingsAPI {
 	String getString(Object pref, String key, String defValue);
 	
 	float getFloat(Object pref, String key, float defValue);
-	
+
 	boolean getBoolean(Object pref, String key, boolean defValue);
 	
 	int getInt(Object pref, String key, int defValue);
