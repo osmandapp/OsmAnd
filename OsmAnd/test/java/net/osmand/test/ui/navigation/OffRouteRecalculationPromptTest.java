@@ -525,6 +525,7 @@ public class OffRouteRecalculationPromptTest extends AndroidTest {
 				if (!event.attributed && event.commands.startsWith(ROUTE_RECALC)) {
 					event.attributed = true;
 					announced = true;
+					break;
 				}
 			}
 		}
