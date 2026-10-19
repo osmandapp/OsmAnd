@@ -68,6 +68,10 @@ public class SuppressedRecalculationPrompt {
 		followStartTime = 0;
 	}
 
+	void onRouteCleared() {
+		deviationEnded = true;
+	}
+
 	public static boolean isRouteAgainstMovement(@NonNull Location start, @NonNull RouteCalculationResult route) {
 		List<Location> routeNodes = route.getImmutableAllLocations();
 		int current = RoutingHelperUtils.lookAheadFindMinOrthogonalDistance(start, routeNodes, route.currentRoute, 15);

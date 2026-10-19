@@ -247,6 +247,7 @@ public class RoutingHelper {
 		route = new RouteCalculationResult("");
 		isDeviatedFromRoute = false;
 		routeRecalculationHelper.resetEvalWaitInterval();
+		routeRecalculationHelper.onRouteCleared();
 		app.getWaypointHelper().setNewRoute(route);
 		app.runInUIThread(() -> {
 			Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();

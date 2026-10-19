@@ -101,6 +101,14 @@ public class SuppressedRecalculationPromptTest {
 	}
 
 	@Test
+	public void clearedRouteResetsPromptInterval() {
+		SuppressedRecalculationPrompt prompt = announcedThreeTimes();
+		prompt.onRouteCleared();
+		assertTrue(prompt.shouldAnnounce(START + 19000, false));
+		assertFalse(prompt.shouldAnnounce(START + 20000, false));
+	}
+
+	@Test
 	public void singleBackwardRouteBeforeFollowedRouteStaysSilent() {
 		SuppressedRecalculationPrompt prompt = new SuppressedRecalculationPrompt();
 		assertFalse(prompt.shouldAnnounce(START, true));

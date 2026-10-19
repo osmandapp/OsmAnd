@@ -204,6 +204,10 @@ class RouteRecalculationHelper {
 		suppressedRecalculationPrompt.onRouteNotFollowed();
 	}
 
+	void onRouteCleared() {
+		suppressedRecalculationPrompt.onRouteCleared();
+	}
+
 	private boolean shouldAnnounceNewRoute(RouteCalculationResult res) {
 		if (res.getAppMode().getRouteService() == RouteService.ONLINE) {
 			OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(res.getAppMode().getRoutingProfile());
