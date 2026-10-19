@@ -841,10 +841,14 @@ public class ExternalApiHelper {
 			SearchUICore.SearchResultCollection resultCollection = core.getCurrentSearchResult();
 			int count = 0;
 			for (net.osmand.search.core.SearchResult r : resultCollection.getCurrentSearchResults()) {
+				if (r.location == null) {
+					continue; // poi categories and "did you mean" rows have no point to return
+				}
 				String name = QuickSearchListItem.getName(app, r);
 				String typeName = QuickSearchListItem.getTypeName(app, r);
+				List<String> otherNames = r.otherNames != null ? new ArrayList<>(r.otherNames) : new ArrayList<>();
 				AidlSearchResultWrapper result = new AidlSearchResultWrapper(r.location.getLatitude(), r.location.getLongitude(),
-						name, typeName, r.alternateName, new ArrayList<>(r.otherNames));
+						name, typeName, r.alternateName, otherNames);
 				resultSet.add(result);
 				count++;
 				if (limit != -1 && count >= limit) {
