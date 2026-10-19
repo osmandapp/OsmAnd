@@ -19,6 +19,8 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.measurementtool.adapter.FolderListAdapter.FolderViewHolder;
@@ -176,15 +178,22 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderViewHolder> {
 
 	@NonNull
 	public static List<String> getFolders(@NonNull File parentDir) {
-		List<File> folders = new ArrayList<>();
-		folders.add(parentDir);
-		Algorithms.collectDirs(parentDir, folders);
-
 		List<String> folderPaths = new ArrayList<>();
-		for (File dir : folders) {
+		for (File dir : collectSortedDirs(parentDir)) {
 			folderPaths.add(dir.getAbsolutePath());
 		}
 		return folderPaths;
+	}
+
+	@NonNull
+	public static List<File> collectSortedDirs(@NonNull File parentDir) {
+		List<File> dirs = new ArrayList<>();
+		dirs.add(parentDir);
+		Algorithms.collectDirs(parentDir, dirs);
+
+		Collator collator = OsmAndCollator.primaryCollator();
+		dirs.subList(1, dirs.size()).sort((dir1, dir2) -> collator.compare(dir1.getPath(), dir2.getPath()));
+		return dirs;
 	}
 
 	public static class FolderViewHolder extends RecyclerView.ViewHolder {
