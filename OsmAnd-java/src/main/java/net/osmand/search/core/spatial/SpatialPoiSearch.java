@@ -5,6 +5,7 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -399,23 +400,78 @@ public class SpatialPoiSearch {
 		}
 		int pos = tokens.indexOf(t);
 		for (int p = 0; p < phrases.size(); p++) {
-			List<String> words = SearchAlgorithms.splitAndNormalize(phrases.get(p), false);
-			for (int j = 0; j < words.size(); j++) {
-				int start = pos - j;
-				if (start < 0 || start + words.size() > tokens.size()) {
-					continue;
-				}
-				boolean all = true;
-				for (int k = 0; k < words.size() && all; k++) {
-					all = tokens.get(start + k).getMainCollator().matches(words.get(k));
-				}
-				if (all) {
-					matched = addPhrase(matched, phrases.get(p), rankShift + p);
-					break;
-				}
+			if (inRow(SearchAlgorithms.splitAndNormalize(phrases.get(p), false), tokens, pos)) {
+				matched = addPhrase(matched, phrases.get(p), rankShift + p);
 			}
 		}
 		return matched;
+	}
+
+	/** the query has all the words of a phrase in a row, one of them is the word at pos */
+	private static boolean inRow(List<String> words, List<SpatialSearchToken> tokens, int pos) {
+		for (int j = 0; j < words.size(); j++) {
+			int start = pos - j;
+			if (start < 0 || start + words.size() > tokens.size()) {
+				continue;
+			}
+			boolean all = true;
+			for (int k = 0; k < words.size() && all; k++) {
+				all = tokens.get(start + k).getMainCollator().matches(words.get(k));
+			}
+			if (all) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * A name of several words that the query has whole, in a row, takes its words: "store" of "Hardware store" is
+	 * the hardware category only, not one more of the shops named "... store" ("Liquor store", "Store") that any word
+	 * of a name of the translator matches. Read so, the web search for "Bratislava Hardware store" found 4 shops
+	 * instead of the 62 of "Bratislava hardware". A word alone keeps every category it names ("Store" is the shops).
+	 * The name of an additional keeps the category it is of: "Fuel diesel" (fuel_diesel) leaves "fuel" the gas
+	 * stations, so "Metro Gas &amp; Diesel" without the diesel tag is still found.
+	 */
+	private static void keepCategoriesOfWholeNames(Map<SpatialPoiType, PoiCatSearch> res,
+			List<SpatialSearchToken> tokens) {
+		// word -> the categories named by a whole name of several words that has it
+		Map<SpatialSearchToken, Set<SpatialPoiType>> whole = new HashMap<>();
+		for (PoiCatSearch pc : res.values()) {
+			if (pc.tokens.size() < 2) {
+				continue;
+			}
+			for (int i = 0; i < pc.tokens.size(); i++) {
+				SpatialSearchToken t = pc.tokens.get(i);
+				for (String phrase : pc.phrases.get(i).keySet()) {
+					List<String> words = SearchAlgorithms.splitAndNormalize(phrase, false);
+					if (words.size() > 1 && inRow(words, tokens, tokens.indexOf(t))) {
+						whole.computeIfAbsent(t, k -> new HashSet<>()).add(pc.pt);
+						break;
+					}
+				}
+			}
+		}
+		if (whole.isEmpty()) {
+			return;
+		}
+		Iterator<PoiCatSearch> it = res.values().iterator();
+		while (it.hasNext()) {
+			PoiCatSearch pc = it.next();
+			for (int i = pc.tokens.size() - 1; i >= 0; i--) {
+				Set<SpatialPoiType> types = whole.get(pc.tokens.get(i));
+				if (types != null && !types.contains(pc.pt) && !isAdditionalOf(types, pc.pt)) {
+					pc.tokens.get(i).removePoiCategoryMatch(pc.pt.id, pc.pt.key);
+					pc.tokens.remove(i);
+					pc.atoms.remove(i);
+					pc.languages.remove(i);
+					pc.phrases.remove(i);
+				}
+			}
+			if (pc.tokens.isEmpty()) {
+				it.remove();
+			}
+		}
 	}
 
 	/**
@@ -475,6 +531,16 @@ public class SpatialPoiSearch {
 				pc.phrases.remove(i);
 			}
 		}
+	}
+
+	/** one of the types is an additional of the category (fuel_diesel of fuel) */
+	private static boolean isAdditionalOf(Set<SpatialPoiType> types, SpatialPoiType category) {
+		for (SpatialPoiType t : types) {
+			if (t.parentTypes != null && category.singleType != null && t.parentTypes.contains(category.singleType)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private record PoiCatSearch(SpatialPoiType pt, List<SpatialSearchToken> tokens, List<NameIndexAtom> atoms,
@@ -677,6 +743,7 @@ public class SpatialPoiSearch {
 		for (PoiCatSearch pc : res.values()) {
 			keepCategoryNamedOnce(pc);
 		}
+		keepCategoriesOfWholeNames(res, tokens);
 
 		List<PoiCatSearch> finalRes = new ArrayList<>(res.values());
 		Collections.sort(finalRes);

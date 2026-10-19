@@ -114,6 +114,8 @@ public class SpatialPoiCategorySynonymsTest {
 		assertCategories(poiSearch, "Liquor store", "store", "alcohol");
 
 		assertHasCategory(poiSearch, "Store", "store", "shop");
+		// the name of an additional leaves its category to the word: gas stations named "... Diesel" are found
+		assertHasCategory(poiSearch, "Fuel diesel", "fuel", "fuel");
 	}
 
 	/**
