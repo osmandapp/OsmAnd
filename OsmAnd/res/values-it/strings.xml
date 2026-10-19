@@ -561,7 +561,7 @@
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
     <string name="use_kalman_filter_compass_descr">Riduce il rumore delle letture della bussola ma introduce dell\'inerzia.</string>
     <string name="use_kalman_filter_compass">Usa il filtro di Kalman</string>
-    <string name="wait_current_task_finished">Prego attendere il termine dell\'operazione</string>
+    <string name="wait_current_task_finished">Per favore attendi il completamento dell\'attività in corso</string>
     <string name="plugin_distance_point_hdop">Accuratezza</string>
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nome del file GPX</string>

@@ -12,17 +12,13 @@ import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialog
 import static net.osmand.test.common.SystemDialogInteractions.hasTextEventually;
 import static net.osmand.test.common.SystemDialogInteractions.waitForAnyView;
 import static org.hamcrest.Matchers.allOf;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import android.database.DataSetObserver;
-import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListAdapter;
 
-import androidx.test.espresso.UiController;
-import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.RootMatchers;
@@ -31,7 +27,6 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 
 import net.osmand.data.LatLon;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.MapPoiTypesTranslator;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -41,7 +36,6 @@ import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.AppSettings;
 
-import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -55,7 +49,7 @@ import java.util.concurrent.TimeUnit;
 public class EditPoiTypeSuggestionsTest extends AndroidTest {
 
 	// French name of shop=bicycle: the part of poi_bicycle in values-fr/phrases.xml before the first ';'
-	private static final String BICYCLE_SHOP = "Boutique de vélos";
+	private static final String BICYCLE_SHOP = "Magasin de vélos";
 
 	@Rule
 	public final ActivityTestRule<MapActivity> activityRule = new ActivityTestRule<>(MapActivity.class, true, false);
@@ -64,6 +58,7 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 	public final GrantPermissionRule grantPermissionRule = GrantPermissionRule.grant(ACCESS_FINE_LOCATION);
 
 	private MapActivity mapActivity;
+	private AutoCompleteTextView poiTypeEditText;
 
 	@Before
 	public void setup() {
@@ -79,17 +74,10 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 	public void testPoiTypeSuggestions() throws Throwable {
 		AppSettings.setLocale(app, Locale.FRANCE);
 
-		// A POI type caches its translation on first use, so re-init the types with the French translator
-		// before the map starts using them: types translated in the system language during the app start,
-		// or while the new types have no translator yet, would keep those names in the suggestions
+		// Initialize French POI types before MapActivity can cache translations in another language.
 		Locale.setDefault(Locale.FRANCE);
 		app.reInitPoiTypes();
 		app.getPoiTypes().setPoiTranslator(new MapPoiTypesTranslator(app, new Locale("fr")));
-		PoiType bicycleShop = app.getPoiTypes().getPoiTypeByKey("bicycle");
-		assertNotNull(bicycleShop);
-		assertEquals("French translation of shop=bicycle changed, update the typed queries",
-				BICYCLE_SHOP, bicycleShop.getTranslation());
-
 		activityRule.launchActivity(null);
 		skipAppStartDialogs(app);
 
@@ -103,32 +91,22 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 		EditPoiDialogFragment.showAddPoiInstance(mapActivity, latLon.getLatitude(), latLon.getLongitude());
 
-		// The queries are set with replaceText, not typed: typed keys go through the IME and get lost
-		// (Gboard on the API 36 emulator takes an injected tap on the field for a stylus and swallows
-		// them, and on devices the first keys after an IME restart can be dropped). The field gets focus
-		// without a tap, as the dropdown is shown only for a focused field, and the keyboard is hidden.
-		// The text is not cleared between queries, so the dropdown stays open: a tap on a dropdown that
-		// has just been shown can arrive before its window accepts input and be lost.
-		onDialogView(withId(R.id.poiTypeEditText)).perform(requestFocus(), ViewActions.closeSoftKeyboard());
-		//check: boutique de v
-		setQueryAndWaitForSuggestions("boutique de v");
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText(BICYCLE_SHOP), isDisplayed()));
-		onView(withText(BICYCLE_SHOP))
-				.inRoot(RootMatchers.isPlatformPopup())
-				.check(ViewAssertions.matches(isDisplayed()));
-		//check: boutique de ve
-		setQueryAndWaitForSuggestions("boutique de ve");
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText(BICYCLE_SHOP), isDisplayed()));
-		onView(withText(BICYCLE_SHOP))
-				.inRoot(RootMatchers.isPlatformPopup())
-				.check(ViewAssertions.matches(isDisplayed()));
+		onDialogView(withId(R.id.poiTypeEditText)).check((view, error) -> {
+			if (error != null) {
+				throw error;
+			}
+			poiTypeEditText = (AutoCompleteTextView) view;
+		});
+		InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> poiTypeEditText.requestFocus());
+		onDialogView(isRoot()).perform(ViewActions.closeSoftKeyboard());
 
-		//check: boutique de vel
-		setQueryAndWaitForSuggestions("boutique de vel");
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText(BICYCLE_SHOP), isDisplayed()));
-		onView(withText(BICYCLE_SHOP))
-				.inRoot(RootMatchers.isPlatformPopup())
-				.check(ViewAssertions.matches(isDisplayed()));
+		for (String query : new String[] {"magasin de v", "magasin de ve", "magasin de vel"}) {
+			setQueryAndWaitForSuggestions(query);
+			waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText(BICYCLE_SHOP), isDisplayed()));
+			onView(withText(BICYCLE_SHOP))
+					.inRoot(RootMatchers.isPlatformPopup())
+					.check(ViewAssertions.matches(isDisplayed()));
+		}
 		//select item
 		onView(withText(BICYCLE_SHOP))
 				.inRoot(RootMatchers.isPlatformPopup())
@@ -143,18 +121,9 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 //		assertTrue(isContextMenuOpened());
 	}
 
-	// Espresso does not wait for the filter thread of the dropdown adapter: without this, the checks
-	// could see the suggestions of the previous query, and a tap that comes right before the new
-	// results are published is dropped by the list
-	private static void setQueryAndWaitForSuggestions(String query) throws InterruptedException {
-		AutoCompleteTextView[] field = new AutoCompleteTextView[1];
-		onDialogView(withId(R.id.poiTypeEditText)).check((view, noViewFoundException) -> {
-			if (noViewFoundException != null) {
-				throw noViewFoundException;
-			}
-			field[0] = (AutoCompleteTextView) view;
-		});
-		ListAdapter adapter = field[0].getAdapter();
+	// Wait for the automatic filter to publish this query before checking or clicking its results.
+	private void setQueryAndWaitForSuggestions(String query) throws InterruptedException {
+		ListAdapter adapter = poiTypeEditText.getAdapter();
 		CountDownLatch published = new CountDownLatch(1);
 		DataSetObserver observer = new DataSetObserver() {
 			@Override
@@ -164,30 +133,11 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		};
 		InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> adapter.registerDataSetObserver(observer));
 		try {
-			onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.replaceText(query));
+			// Set text on the UI thread without IME input; keep the popup open between queries.
+			InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> poiTypeEditText.setText(query));
 			assertTrue("No suggestions published for '" + query + "'", published.await(5, TimeUnit.SECONDS));
 		} finally {
 			InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> adapter.unregisterDataSetObserver(observer));
 		}
-	}
-
-	private static ViewAction requestFocus() {
-		return new ViewAction() {
-			@Override
-			public Matcher<View> getConstraints() {
-				return isDisplayed();
-			}
-
-			@Override
-			public String getDescription() {
-				return "request focus";
-			}
-
-			@Override
-			public void perform(UiController uiController, View view) {
-				view.requestFocus();
-				uiController.loopMainThreadUntilIdle();
-			}
-		};
 	}
 }

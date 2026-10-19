@@ -31,6 +31,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -172,7 +173,7 @@ public class SpatialPoiSearch {
 				}
 				addToIndex(pt, null);
 				for (PoiType add : pt.getPoiAdditionals()) {
-					if (add.isTopVisible() && !add.getKeyName().endsWith("_no")) {
+					if (add.isTopVisible() && PoiAdditionalLabels.isAcceptedValue(add)) {
 						addToIndex(add, pt);
 					}
 				}

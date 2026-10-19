@@ -22,6 +22,7 @@ import net.osmand.data.Street;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
@@ -381,7 +382,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		AbstractPoiType poiType = spatialPoiType.singleType;
 		if (poiType != null) {
 			object = poiType;
-			localeName = poiType.getTranslation();
+			localeName = PoiAdditionalLabels.getSearchName(poiType);
 		} else if (spatialPoiType.poiSubType != null) {
 			object = new TopIndexFilter(spatialPoiType.poiSubType, poiTypes, spatialPoiType.poiAdditional);
 			localeName = spatialPoiType.names.get(0);

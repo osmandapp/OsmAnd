@@ -77,7 +77,7 @@ import java.util.List;
 public class QuickActionListFragment extends BaseFullScreenFragment implements QuickActionUpdatesListener,
 		OnConfirmButtonClickListener {
 
-	public static final String TAG = QuickActionListFragment.class.getSimpleName();
+	public static final String TAG = "QuickActionListFragment";
 
 	public static final String ACTIONS_TO_DELETE_KEY = "actions_to_delete";
 	public static final String SCREEN_TYPE_KEY = "screen_type";
