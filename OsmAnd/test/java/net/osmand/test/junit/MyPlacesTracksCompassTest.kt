@@ -13,10 +13,14 @@ import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.myplaces.MyPlacesActivity
+import net.osmand.plus.settings.enums.TracksSortMode
+import net.osmand.shared.gpx.enums.TracksSortScope
 import net.osmand.test.common.AndroidTest
+import org.junit.After
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assume.assumeTrue
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -30,6 +34,8 @@ import org.junit.runner.RunWith
  * [headingIsAvailableOnTracksTab] fails on the code before the fix.
  * [leavingMyPlacesPausesCompass] guards the other half: the updates resumed for My Places must
  * be paused again when it goes to the background, as MapActivity does for itself.
+ * Both tests sort the Tracks tab by "Nearest to current location": only that sort shows the arrows
+ * and turns the updates on.
  */
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -37,11 +43,25 @@ class MyPlacesTracksCompassTest : AndroidTest() {
 
 	companion object {
 		private const val HEADING_TIMEOUT_MS = 5000L
+		private const val ROOT_FOLDER_ID = ""
+	}
+
+	private var savedRootSortMode: TracksSortMode? = null
+
+	@Before
+	fun saveRootSortMode() {
+		savedRootSortMode = app.trackSortModesHelper.getSortMode(ROOT_FOLDER_ID, TracksSortScope.TRACKS)
+	}
+
+	@After
+	fun restoreRootSortMode() {
+		app.trackSortModesHelper.setSortMode(ROOT_FOLDER_ID, TracksSortScope.TRACKS, savedRootSortMode)
 	}
 
 	@Test
 	fun headingIsAvailableOnTracksTab() {
 		assumeTrue("Device has no compass sensor", hasCompass())
+		setRootSortMode(TracksSortMode.NEAREST)
 		pauseUpdatesLikeMapActivity()
 
 		ActivityScenario.launch<MyPlacesActivity>(tracksTabIntent()).use {
@@ -53,6 +73,7 @@ class MyPlacesTracksCompassTest : AndroidTest() {
 	@Test
 	fun leavingMyPlacesPausesCompass() {
 		assumeTrue("Device has no compass sensor", hasCompass())
+		setRootSortMode(TracksSortMode.NEAREST)
 		pauseUpdatesLikeMapActivity()
 
 		ActivityScenario.launch<MyPlacesActivity>(tracksTabIntent()).use { scenario ->
@@ -61,6 +82,10 @@ class MyPlacesTracksCompassTest : AndroidTest() {
 			assertNull("Compass is still running after My Places went to the background",
 				app.locationProvider.heading)
 		}
+	}
+
+	private fun setRootSortMode(sortMode: TracksSortMode) {
+		app.trackSortModesHelper.setSortMode(ROOT_FOLDER_ID, TracksSortScope.TRACKS, sortMode)
 	}
 
 	private fun hasCompass(): Boolean {
