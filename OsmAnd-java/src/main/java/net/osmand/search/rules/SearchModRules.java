@@ -36,6 +36,8 @@ public final class SearchModRules {
 	}
 
 	private final String resourceDir;
+	// false for the search: <index> and <poi> serve only the OBF writer
+	private final boolean indexRules;
 	private final SearchModLocales locales;
 	private final SearchModRulesParser.Layer base;
 	private final Map<String, SearchModLocaleRules> rules = new ConcurrentHashMap<>();
@@ -43,14 +45,27 @@ public final class SearchModRules {
 	// by the locale as callers pass it: normalize() is too slow for every word of a search
 	private final Map<String, SearchModDictionary> byLocale = new ConcurrentHashMap<>();
 
-	/** reads the rules files of OsmAnd-java resources */
+	/** reads the rules files of OsmAnd-java resources, all sections (the OBF writer) */
 	public SearchModRules() {
-		this(RESOURCE_DIR);
+		this(RESOURCE_DIR, true);
+	}
+
+	/**
+	 * The rules the search needs: {@code <query>} and the query forms of mirror pairs. {@code <index>} (alternative
+	 * names, word classes), the index rules of mirror pairs and {@code <poi>} are read only by the OBF writer.
+	 */
+	public static SearchModRules forSearch() {
+		return new SearchModRules(RESOURCE_DIR, false);
 	}
 
 	/** @param resourceDir resource directory of the rules files, another one only in tests */
 	SearchModRules(String resourceDir) {
+		this(resourceDir, true);
+	}
+
+	SearchModRules(String resourceDir, boolean indexRules) {
 		this.resourceDir = resourceDir;
+		this.indexRules = indexRules;
 		SearchModLocales locales = new SearchModLocales();
 		SearchModRulesParser.Layer base = null;
 		try {
@@ -130,7 +145,7 @@ public final class SearchModRules {
 				}
 			}
 		}
-		return new SearchModLocaleRules(locale, layers);
+		return new SearchModLocaleRules(locale, layers, indexRules);
 	}
 
 	private SearchModRulesParser.Layer read(String file, SearchModLocales locales, boolean required) {
@@ -141,7 +156,7 @@ public final class SearchModRules {
 				}
 				return null;
 			}
-			return new SearchModRulesParser(file, locales).parse(input);
+			return new SearchModRulesParser(file, locales, indexRules).parse(input);
 		} catch (IllegalStateException e) {
 			throw e;
 		} catch (Exception e) {

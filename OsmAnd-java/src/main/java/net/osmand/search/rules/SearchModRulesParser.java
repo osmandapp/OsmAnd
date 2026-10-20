@@ -7,6 +7,8 @@ import static net.osmand.search.rules.SearchModLocaleRules.VERSION;
 import net.osmand.PlatformUtil;
 import net.osmand.search.rules.SearchModLocaleRules.Form;
 import net.osmand.search.rules.SearchModLocaleRules.Mirror;
+import net.osmand.search.rules.SearchModLocaleRules.PoiService;
+import net.osmand.search.rules.SearchModRules.SearchModRuleOwner;
 import net.osmand.search.rules.SearchModLocaleRules.Rule;
 import net.osmand.search.rules.SearchModLocaleRules.SkipPenalty;
 import net.osmand.search.rules.SearchModLocaleRules.Unglue;
@@ -32,10 +34,18 @@ final class SearchModRulesParser {
 	// the table that <locales> of rules.xml fills, null for a file without it
 	private final SearchModLocales locales;
 
+	// false: skip what only the OBF writer reads (<index>, <poi>)
+	private final boolean indexRules;
+
 	SearchModRulesParser(String file, SearchModLocales locales) {
+		this(file, locales, true);
+	}
+
+	SearchModRulesParser(String file, SearchModLocales locales, boolean indexRules) {
 		this.file = file;
 		this.layer = new Layer(file);
 		this.locales = locales;
+		this.indexRules = indexRules;
 	}
 
 	/** The rules of one file; a disabled rule removes the rule of an upper layer with its key. */
@@ -46,6 +56,7 @@ final class SearchModRulesParser {
 		final Map<String, Integer> classes = new LinkedHashMap<>();
 		final Map<String, WordRule> query = new LinkedHashMap<>();
 		final Map<String, SkipPenalty> skipPenalty = new LinkedHashMap<>();
+		final Map<String, PoiService> services = new LinkedHashMap<>();
 		// key -> text of the rule for messages
 		final Map<String, String> disabledIndex = new LinkedHashMap<>();
 		final Map<String, String> disabledUnglues = new LinkedHashMap<>();
@@ -119,7 +130,7 @@ final class SearchModRulesParser {
 					if ("rule".equals(tag)) {
 						parseMirrorRule(parser);
 					}
-				} else if (depth == 3 && "index".equals(section)) {
+				} else if (depth == 3 && "index".equals(section) && indexRules) {
 					if ("rule".equals(tag)) {
 						parseIndexRule(parser);
 					} else if ("unglue".equals(tag)) {
@@ -135,6 +146,15 @@ final class SearchModRulesParser {
 						String object = object(parser.getAttributeValue(null, "object"));
 						boolean enabled = enabled(parser);
 						layer.addSkipPenalty(object, words(parser.nextText()), enabled);
+					}
+				} else if (depth == 3 && "poi".equals(section) && indexRules) {
+					// <brand> is read by the brand analyzer, not by the search
+					if ("abbr".equals(tag) && enabled(parser)) {
+						parsePoiAbbreviation(parser);
+					} else if ("service".equals(tag) && enabled(parser)) {
+						PoiService service = PoiService.of(parser.getAttributeValue(null, "word"),
+								parser.getAttributeValue(null, "tags"), parser.getAttributeValue(null, "name"), file);
+						layer.services.put(service.key(), service);
 					}
 				} else if (depth == 3 && "locales".equals(section) && locales != null) {
 					if ("group".equals(tag)) {
@@ -157,7 +177,19 @@ final class SearchModRulesParser {
 		return layer;
 	}
 
-	private void parseIndexRule(XmlPullParser parser) {
+	/**
+	 * a POI name with one form gets the other one as an
+	 * alternative name, both ways, as the alternative names of a mirror pair (whole words, any case, the dot of the
+	 * abbreviation); the full form may be a phrase.
+	 */
+	private void parsePoiAbbreviation(XmlPullParser parser) {
+		String abbreviation = parser.getAttributeValue(null, "short").trim();
+		String full = parser.getAttributeValue(null, "full").trim();
+		layer.add(new Rule(SearchModRuleOwner.POI.tag, abbreviation, full, file, true), true);
+		layer.add(new Rule(SearchModRuleOwner.POI.tag, full, abbreviation, file, false), true);
+	}
+
+		private void parseIndexRule(XmlPullParser parser) {
 		String object = object(parser.getAttributeValue(null, "object"));
 		String from = parser.getAttributeValue(null, "from");
 		if (!enabled(parser)) {

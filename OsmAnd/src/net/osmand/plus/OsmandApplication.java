@@ -179,6 +179,7 @@ public class OsmandApplication extends MultiDexApplication {
 	DayNightHelper daynightHelper;
 	PoiFiltersHelper poiFilters;
 	MapPoiTypes poiTypes;
+	net.osmand.shared.osm.MapPoiTypes kPoiTypes;
 	RoutingHelper routingHelper;
 	TransportRoutingHelper transportRoutingHelper;
 	FavouritesHelper favoritesHelper;
@@ -378,6 +379,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public MapPoiTypes getPoiTypes() {
 		return poiTypes;
+	}
+
+	public net.osmand.shared.osm.MapPoiTypes getKPoiTypes() {
+		return kPoiTypes;
 	}
 
 	public boolean isAppInForeground() {

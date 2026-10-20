@@ -9,6 +9,7 @@ import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.MIN_SPEED_FOR_PACE;
 import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 import android.content.Context;
@@ -676,7 +677,12 @@ public class ChartUtils {
 				}
 				if (attribute.hasValidValue(key)) {
 					float value = attribute.getAttributeValue(key);
-					float currentY = Float.isNaN(divY) ? value * mulY : divY / value;
+					float currentY;
+					if (Float.isNaN(divY)) {
+						currentY = value * mulY;
+					} else {
+						currentY = value < MIN_SPEED_FOR_PACE ? 0 : divY / value;
+					}
 					if (currentY < 0 || Float.isInfinite(currentY)) {
 						currentY = 0;
 					}

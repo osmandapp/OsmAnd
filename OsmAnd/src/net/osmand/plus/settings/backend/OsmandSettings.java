@@ -1562,6 +1562,8 @@ public class OsmandSettings {
 	public static final String BILLING_USER_DONATION_NONE_PARAMETER = "none";
 
 	public final OsmandPreference<Boolean> INAPPS_READ = new BooleanPreference(this, "inapps_read", false).makeGlobal();
+	public final OsmandPreference<String> INSTALL_REFERRER = new StringPreference(this, "install_referrer", "").makeGlobal();
+	public final OsmandPreference<Boolean> INSTALL_REFERRER_CHECKED = new BooleanPreference(this, "install_referrer_checked", false).makeGlobal();
 
 	public final OsmandPreference<String> BILLING_USER_ID = new StringPreference(this, "billing_user_id", "").makeGlobal();
 	public final OsmandPreference<String> BILLING_USER_TOKEN = new StringPreference(this, "billing_user_token", "").makeGlobal();
@@ -2394,6 +2396,7 @@ public class OsmandSettings {
 	public static final int EXTERNAL_STORAGE_TYPE_INTERNAL_FILE = 2; // ctx.getFilesDir()
 	public static final int EXTERNAL_STORAGE_TYPE_OBB = 3; // ctx.getObbDirs
 	public static final int EXTERNAL_STORAGE_TYPE_SPECIFIED = 4;
+	public static final int EXTERNAL_STORAGE_TYPE_MEDIA = 5; // ctx.getExternalMediaDirs()
 
 	public final OsmandPreference<Long> OSMAND_USAGE_SPACE = new LongPreference(this, "osmand_usage_space", 0).makeGlobal();
 

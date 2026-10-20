@@ -5235,4 +5235,16 @@
     <string name="simulate_ui_descr">Πρώτη εκτέλεση, μπάνερ δωρεάν έκδοσης, φυλλάδιο έκπτωσης.</string>
     <string name="ais_set_your_mmsi">Ορίστε το MMSI σας</string>
     <string name="latest_builds">Τελευταία build</string>
+    <string name="eta_group_header">Εκτιμώμενος χρόνος άφιξης</string>
+    <string name="travel_speed">Ταχύτητα ταξιδιού</string>
+    <string name="default_speed_descr">Χρησιμοποιείται όταν δεν υπάρχουν δεδομένα ταχύτητας για τον δρόμο ή όταν είστε σε ακινησία.</string>
+    <string name="speed_range">Εύρος ταχύτητας</string>
+    <string name="speed_range_descr">Χρησιμοποιείται και για τον υπολογισμό διαδρομής και για τον χρόνο άφιξης.</string>
+    <string name="eta_adapt_to_my_speed">Προσαρμογή στην ταχύτητά μου</string>
+    <string name="eta_adapt_to_my_speed_descr">Ο χρόνος άφιξης βασίζεται στην ταχύτητά σας για τα τελευταία %1$s.</string>
+    <string name="eta_adapt_to_my_speed_off_descr">Ο χρόνος άφιξης βασίζεται στην εκτιμώμενη ταχύτητα κάθε δρόμου της διαδρομής. Ενεργοποιήστε το για να βασίζεται στο πόσο γρήγορα κινείστε πραγματικά.</string>
+    <string name="flyover_recording">Καταγραφή βίντεο χάρτη: %1$s</string>
+    <string name="flyovers">Εναέριες όψεις</string>
+    <string name="map_source_saved_as">Η πηγή χάρτη αποθηκεύτηκε ως \'%1$s\'.</string>
+    <string name="map_source_folder_not_created">Δεν ήταν δυνατή η δημιουργία φακέλου για την πηγή χάρτη. Δοκιμάστε ένα διαφορετικό όνομα.</string>
 </resources>

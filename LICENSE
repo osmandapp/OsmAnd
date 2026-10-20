@@ -148,3 +148,6 @@
 	- MERIT DEM (available at http://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_DEM)
 	- ArcticDEM: Porter, Claire; Morin, Paul; Howat, Ian; Noh, Myoung-Jon; Bates, Brian; Peterman, Kenneth; Keesey, Scott; Schlenk, Matthew; Gardiner, Judith; Tomko, Karen; Willis, Michael; Kelleher, Cole; Cloutier, Michael; Husby, Eric; Foga, Steven; Nakamura, Hitomi; Platson, Melisa; Wethington, Michael, Jr.; Williamson, Cathleen; Bauer, Gregory; Enos, Jeremy; Arnold, Galen; Kramer, William; Becker, Peter; Doshi, Abhijit; D’Souza, Cristelle; Cummens, Pat; Laurier, Fabien; Bojesen, Mikkel, 2018, “ArcticDEM”, https://doi.org/10.7910/DVN/OHHUKH, Harvard Dataverse, V1
 	- SONNY's LiDAR DIGITAL TERRAIN MODELS (DTM) OF EUROPEAN COUNTRIES: https://sonny.4lima.de
+	- USGS 3D Elevation Program (3DEP), The National Map (USA, Alaska): U.S. Geological Survey, https://apps.nationalmap.gov/downloader/ (public domain)
+	- USGS 1 arc-second Digital Elevation Model (Canada, Mexico), distributed by OpenTopography: https://portal.opentopography.org/raster?opentopoID=OTNED.012021.4269.2. Includes data from Natural Resources Canada (NRCan) and Mexico's National Institute of Statistics and Geography (INEGI) (public domain)
+	- RGE ALTI® (France): © IGN, https://geoservices.ign.fr/rgealti (Licence Ouverte / Open Licence 2.0, Etalab)

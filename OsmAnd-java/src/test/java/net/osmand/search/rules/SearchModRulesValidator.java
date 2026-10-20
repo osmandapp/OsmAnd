@@ -20,6 +20,7 @@ import org.xmlpull.v1.XmlPullParser;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -43,6 +44,9 @@ final class SearchModRulesValidator {
 	private final Layer layer;
 	// the table that <locales> of rules.xml fills, null for a file without it
 	private final SearchModLocales locales;
+
+	// the abbreviations of <abbr> of the file, one rule per abbreviation
+	private final Set<String> poiAbbreviations = new HashSet<>();
 
 	SearchModRulesValidator(String file, SearchModLocales locales) {
 		this.file = file;
@@ -157,7 +161,7 @@ final class SearchModRulesValidator {
 								+ ", expected " + VERSION);
 					}
 					root = true;
-				} else if (depth == 2 && ("index".equals(tag) || "query".equals(tag))) {
+				} else if (depth == 2 && ("index".equals(tag) || "query".equals(tag) || "poi".equals(tag))) {
 					section = tag;
 				} else if (depth == 2 && "locales".equals(tag)) {
 					if (!BASE_FILE.equals(file)) {
@@ -185,6 +189,18 @@ final class SearchModRulesValidator {
 					parseQueryRule(parser);
 				} else if (depth == 3 && "skipPenalty".equals(tag) && "query".equals(section)) {
 					parseSkipPenalty(parser);
+				} else if (depth == 3 && "abbr".equals(tag) && "poi".equals(section)) {
+					parsePoiAbbreviation(parser);
+				} else if (depth == 3 && "service".equals(tag) && "poi".equals(section)) {
+					parsePoiService(parser);
+				} else if (depth == 3 && "brand".equals(tag) && "poi".equals(section)) {
+					String value = parser.getAttributeValue(null, "value");
+					String where = " (<brand value=\"" + value + "\"> of " + file + ")";
+					checkAttributes(parser, Set.of("value", "tags", "enabled"), "<brand>", where);
+					if (value == null || value.isBlank()) {
+						throw new IllegalArgumentException("Missing value" + where);
+					}
+					checkTagSets(parser.getAttributeValue(null, "tags"), true, where);
 				} else if (depth == 3 && "group".equals(tag) && "locales".equals(section)) {
 					parseGroup(parser);
 				} else if (depth == 3 && "map".equals(tag) && "locales".equals(section)) {
@@ -201,6 +217,57 @@ final class SearchModRulesValidator {
 		}
 		if (localesRead) {
 			locales.build();
+		}
+	}
+
+	private void parsePoiAbbreviation(XmlPullParser parser) throws Exception {
+		String abbreviation = parser.getAttributeValue(null, "short");
+		String full = parser.getAttributeValue(null, "full");
+		String where = " (<abbr short=\"" + abbreviation + "\"> of " + file + ")";
+		checkAttributes(parser, Set.of("short", "full", "enabled"), "<abbr>", where);
+		if (abbreviation == null || abbreviation.isBlank() || full == null || full.isBlank()) {
+			throw new IllegalArgumentException("<abbr> needs short and full" + where);
+		}
+		if (abbreviation.trim().equalsIgnoreCase(full.trim())) {
+			throw new IllegalArgumentException("The full form equals the abbreviation" + where);
+		}
+		if (!poiAbbreviations.add(abbreviation.trim().toLowerCase(Locale.ROOT))) {
+			throw new IllegalArgumentException("Duplicate <abbr>" + where);
+		}
+	}
+
+		private void parsePoiService(XmlPullParser parser) throws Exception {
+		String word = parser.getAttributeValue(null, "word");
+		String where = " (<service word=\"" + word + "\"> of " + file + ")";
+		checkAttributes(parser, Set.of("word", "tags", "name", "enabled"), "<service>", where);
+		if (word == null || word.isBlank()) {
+			throw new IllegalArgumentException("Missing word" + where);
+		}
+		checkTagSets(parser.getAttributeValue(null, "tags"), false, where);
+		String name = parser.getAttributeValue(null, "name");
+		if (name != null) {
+			try {
+				Pattern.compile(name);
+			} catch (PatternSyntaxException e) {
+				throw new IllegalArgumentException("Invalid name regexp '" + name + "'" + where, e);
+			}
+		}
+	}
+
+	// "k=v + k=v | k=v": sets of OSM tags, | between the sets, + inside one
+	private void checkTagSets(String tags, boolean optional, String where) {
+		if (tags == null || tags.isBlank()) {
+			if (optional) {
+				return;
+			}
+			throw new IllegalArgumentException("Missing tags" + where);
+		}
+		for (String set : tags.split("\\|")) {
+			for (String tag : set.split("\\+")) {
+				if (!tag.trim().matches("[^=\\s]+=[^=]+")) {
+					throw new IllegalArgumentException("Invalid tag '" + tag.trim() + "' in tags '" + tags + "'" + where);
+				}
+			}
 		}
 	}
 
@@ -643,11 +710,6 @@ final class SearchModRulesValidator {
 			if (alignedBuildings.contains(word) || alignedIgnorables.contains(word)) {
 				throw new IllegalArgumentException("The <skipPenalty> word '" + word + "' is a house-number "
 						+ "qualifier or an ignorable word: an ignorable word never penalizes a name" + where);
-			}
-			Integer wordClass = rules.classes().get(word);
-			if (wordClass != null && wordClass != CLASS_ALWAYS) {
-				throw new IllegalArgumentException("The <skipPenalty> word '" + word + "' is a word of <class"
-						+ wordClass + ">, which never penalizes a name" + where);
 			}
 		}
 		for (String word : ignorables) {

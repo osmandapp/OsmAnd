@@ -63,14 +63,21 @@ public final class SearchModLocaleRules {
 	private final Map<String, List<Form>> forms;
 	private final Set<String> buildings;
 	private final Set<String> ignorables;
+	private final List<PoiService> services;
 
 	/** @param layers rules files from general to specific: a lower layer replaces or disables rules of upper ones */
 	SearchModLocaleRules(String locale, List<SearchModRulesParser.Layer> layers) {
+		this(locale, layers, true);
+	}
+
+	/** @param withIndex false: no index rules from the mirror pairs (the search does not need them) */
+	SearchModLocaleRules(String locale, List<SearchModRulesParser.Layer> layers, boolean withIndex) {
 		Map<String, Rule> index = new LinkedHashMap<>();
 		Map<String, Unglue> unglues = new LinkedHashMap<>();
 		Map<String, Integer> classes = new LinkedHashMap<>();
 		Map<String, WordRule> query = new LinkedHashMap<>();
 		Map<String, SkipPenalty> skipPenalty = new LinkedHashMap<>();
+		Map<String, PoiService> services = new LinkedHashMap<>();
 		for (SearchModRulesParser.Layer layer : layers) {
 			disable(index, layer.disabledIndex);
 			disable(unglues, layer.disabledUnglues);
@@ -82,6 +89,7 @@ public final class SearchModLocaleRules {
 			classes.putAll(layer.classes);
 			query.putAll(layer.query);
 			skipPenalty.putAll(layer.skipPenalty);
+			services.putAll(layer.services);
 		}
 		Set<String> buildings = new LinkedHashSet<>();
 		Set<String> ignorables = new LinkedHashSet<>();
@@ -111,7 +119,7 @@ public final class SearchModLocaleRules {
 		}
 		List<Rule> indexRules = new ArrayList<>(index.values());
 		for (WordRule rule : query.values()) {
-			if (rule.mirror == null || rule.forms.isEmpty()) {
+			if (!withIndex || rule.mirror == null || rule.forms.isEmpty()) {
 				continue;
 			}
 			Form form = rule.forms.get(0);
@@ -130,6 +138,7 @@ public final class SearchModLocaleRules {
 		this.forms = lists;
 		this.buildings = buildings;
 		this.ignorables = ignorables;
+		this.services = new ArrayList<>(services.values());
 	}
 
 	private void disable(Map<String, ?> rules, Map<String, String> disabled) {
@@ -166,6 +175,11 @@ public final class SearchModLocaleRules {
 	/** Forms of a query word: the forms of its rule, then the reverse forms of the rules whose form it is. */
 	public List<Form> forms(String word) {
 		return forms.getOrDefault(word.toLowerCase(Locale.ROOT), List.of());
+	}
+
+	/** National services of {@code <poi>}: the OBF writer gives their places a searchable tag. */
+	public List<PoiService> services() {
+		return services;
 	}
 
 	/** Words with a form or a reverse form. */
@@ -332,6 +346,58 @@ public final class SearchModLocaleRules {
 			return word.isEmpty() && !isBuilding();
 		}
 
+	}
+
+	/**
+	 * A national service or network of {@code <poi>} ({@code <service word="DMV" tags="office=government +
+	 * government=transportation"/>}): its places, the objects with one of the tag sets ({@code |} between the sets,
+	 * {@code +} inside one) and a name matching {@code name} when it is set, get the word as a searchable tag. The file
+	 * of the locale of the map is the country of the service.
+	 */
+	public record PoiService(String word, List<Map<String, String>> tagSets, Pattern name, String file) {
+
+		static PoiService of(String word, String tags, String name, String file) {
+			List<Map<String, String>> sets = new ArrayList<>();
+			for (String set : tags.split("\\|")) {
+				Map<String, String> m = new LinkedHashMap<>();
+				for (String tag : set.split("\\+")) {
+					int eq = tag.indexOf('=');
+					if (eq > 0) {
+						m.put(tag.substring(0, eq).trim(), tag.substring(eq + 1).trim());
+					}
+				}
+				if (!m.isEmpty()) {
+					sets.add(m);
+				}
+			}
+			Pattern p = name == null || name.isEmpty() ? null
+					: Pattern.compile(name, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE | Pattern.UNICODE_CHARACTER_CLASS);
+			return new PoiService(word, sets, p, file);
+		}
+
+		String key() {
+			return word.toLowerCase(Locale.ROOT) + '\n' + tagSets;
+		}
+
+		/** @param tags OSM tags of the object, @param name its name (may be null) */
+		public boolean matches(Map<String, String> tags, String name) {
+			if (this.name != null && (name == null || !this.name.matcher(name).find())) {
+				return false;
+			}
+			for (Map<String, String> set : tagSets) {
+				boolean all = true;
+				for (Map.Entry<String, String> t : set.entrySet()) {
+					if (!t.getValue().equals(tags.get(t.getKey()))) {
+						all = false;
+						break;
+					}
+				}
+				if (all) {
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 
 	/** The file and the form as written of a mirror pair, for its alternative names (rules-spec.md, 3.4). */

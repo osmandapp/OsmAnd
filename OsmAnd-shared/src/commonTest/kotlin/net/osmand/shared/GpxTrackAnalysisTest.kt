@@ -2,9 +2,11 @@ package net.osmand.shared
 
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxTrackAnalysis
+import net.osmand.shared.gpx.PointAttributes
 import net.osmand.shared.gpx.SplitSegment
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
+import net.osmand.shared.obd.OBDCommand
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -158,6 +160,44 @@ class GpxTrackAnalysisTest {
 		assertTrue(compactAnalysis.pointAttributes.isEmpty())
 		assertEquals(partialEndAttributes.speed,
 			requireNotNull(compactAnalysis.lastUphill).maxSpeed, 0.001f)
+	}
+
+	@Test
+	fun recordedZeroSpeedIsValidChartValue() {
+		val segment = TrkSegment().apply {
+			points.add(WptPt(0.0, 0.0, 1_000_000L, Double.NaN, 5f, Float.NaN))
+			points.add(WptPt(0.0, 0.0, 1_010_000L, Double.NaN, 0f, Float.NaN))
+			points.add(WptPt(0.0, 0.0, 1_020_000L, Double.NaN, 0f, Float.NaN))
+			points.add(WptPt(0.0, 0.0005, 1_030_000L, Double.NaN, 5f, Float.NaN))
+		}
+		val validity = analyze(segment).pointAttributes.map { it.hasValidValue(PointAttributes.POINT_SPEED) }
+
+		assertEquals(listOf(true, true, true, true), validity)
+	}
+
+	@Test
+	fun computedZeroSpeedIsValidOnlyWithTimeStep() {
+		val segment = TrkSegment().apply {
+			points.add(WptPt(0.0, 0.00, 1_000_000L, Double.NaN, 0f, Float.NaN))
+			points.add(WptPt(0.0, 0.01, 1_100_000L, Double.NaN, 0f, Float.NaN))
+			points.add(WptPt(0.0, 0.02, 1_100_000L, Double.NaN, 0f, Float.NaN))
+			points.add(WptPt(0.0, 0.02, 1_200_000L, Double.NaN, 0f, Float.NaN))
+		}
+		val validity = analyze(segment).pointAttributes.map { it.hasValidValue(PointAttributes.POINT_SPEED) }
+
+		assertEquals(listOf(false, true, false, true), validity)
+	}
+
+	@Test
+	fun recordedZeroSensorAndVehicleSpeedIsValidChartValue() {
+		val tags = listOf(PointAttributes.SENSOR_TAG_SPEED, requireNotNull(OBDCommand.OBD_SPEED_COMMAND.gpxTag))
+		val validity = listOf(0f, Float.NaN).map { value ->
+			tags.map { tag ->
+				PointAttributes(0f, 0f, false, false).apply { setAttributeValue(tag, value) }.hasValidValue(tag)
+			}
+		}
+
+		assertEquals(listOf(listOf(true, true), listOf(false, false)), validity)
 	}
 
 	private fun createSparseSegment() = TrkSegment().apply {

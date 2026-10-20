@@ -13,4 +13,6 @@
 		android:text="@string/switch_mode_by_tapping_on_widget"
 		android:textColor="?android:textColorSecondary" />
 
+	<include layout="@layout/widget_settings_mode_row" />
+
 </LinearLayout>
