@@ -20,6 +20,7 @@ import com.vividsolutions.jts.geom.Point;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.PanoramaxTilesProvider;
+import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
@@ -80,6 +81,8 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	//OpenGL
 	// Written on the drawing thread and read by the Reload action.
 	private volatile PanoramaxTilesProvider panoramaxTilesProvider;
+	private ImageMapLayerProvider panoramaxTilesProxy;
+	private boolean panoramaxTilesAttached;
 	private MapMarkersCollection mapMarkersCollection;
 	// MapMarker cannot hide individual surface icons, so use separate markers with/without heading.
 	private MapMarker markerWithHeading;
@@ -150,14 +153,16 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 					mapRenderer.resetMapLayerProvider(layerIndex);
 					clearMapMarkersCollections();
 					panoramaxTilesProvider = null;
+					panoramaxTilesProxy = null;
+					panoramaxTilesAttached = false;
 				}
 				return;
 			}
 			// The renderer may overscale tiles beyond the source's supported zoom range.
 			if (!isVisibleAtZoom(tileBox.getZoom(), map)) {
-				if (panoramaxTilesProvider != null) {
+				if (panoramaxTilesAttached) {
 					mapRenderer.resetMapLayerProvider(layerIndex);
-					panoramaxTilesProvider = null;
+					panoramaxTilesAttached = false;
 				}
 				return;
 			}
@@ -168,13 +173,19 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 					mapRenderer.resetMapLayerProvider(layerIndex);
 					clearMapMarkersCollections();
 					panoramaxTilesProvider = null;
+					panoramaxTilesProxy = null;
+					panoramaxTilesAttached = false;
 				}
 				appliedFilterState = currentFilterState;
 			}
 			if (panoramaxTilesProvider == null) {
 				panoramaxTilesProvider = new PanoramaxTilesProvider(getApplication(), map, view.getDensity(), currentFilterState);
-				mapRenderer.setMapLayerProvider(layerIndex, panoramaxTilesProvider.instantiateProxy(true));
+				panoramaxTilesProxy = panoramaxTilesProvider.instantiateProxy(true);
 				panoramaxTilesProvider.swigReleaseOwnership();
+			}
+			if (!panoramaxTilesAttached) {
+				mapRenderer.setMapLayerProvider(layerIndex, panoramaxTilesProxy);
+				panoramaxTilesAttached = true;
 			} else {
 				panoramaxTilesProvider.setVisibleBBox31(mapRenderer.getVisibleBBox31(), tileBox.getZoom());
 			}
@@ -563,6 +574,8 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 			int layerIndex = view.getLayerIndex(this);
 			mapRenderer.resetMapLayerProvider(layerIndex);
 			panoramaxTilesProvider = null;
+			panoramaxTilesProxy = null;
+			panoramaxTilesAttached = false;
 		}
 	}
 
