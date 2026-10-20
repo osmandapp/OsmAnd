@@ -2472,6 +2472,7 @@
 	<string name="poi_shoes_orthopedic">Orthopedic</string>
 
 	<string name="poi_historic_manor">Historic manor;manor house</string>
+	<string name="poi_historic_building">Historic building</string>
 	<string name="poi_castle_type_stately">Castle type: stately</string>
 	<string name="poi_castle_type_defensive">Castle type: defensive</string>
 	<string name="poi_castle_type_fortress">Castle type: fortress</string>
