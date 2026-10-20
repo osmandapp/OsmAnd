@@ -79,7 +79,8 @@ object AmenityTagEntriesBuilder {
 	}
 
 	// all values of the group are one tag (smoking=yes/no/outside), not a list of options (boat:kayak:rental, ...)
-	private fun isOneTagGroup(type: PoiType): Boolean {
+	@JvmStatic
+	fun isOneTagGroup(type: PoiType): Boolean {
 		val category = type.getPoiAdditionalCategory() ?: return true
 		val parent = type.getParentType() ?: return true
 		val tags = (parent.getPoiAdditionals() + parent.getPoiAdditionalsCategorized())
