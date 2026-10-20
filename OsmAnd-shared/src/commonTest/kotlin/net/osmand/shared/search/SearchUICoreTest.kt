@@ -428,7 +428,7 @@ class SearchUICoreTest {
 	private fun reverseGeocoding(r: SearchResult?, reader: BinaryMapIndexReader, ctx: RoutingContext): String? {
 		val l = r?.location ?: return "no result to geocode"
 		val utils = GeocodingUtilities()
-		val found = utils.sortGeocodingResults(listOf(reader), utils.reverseGeocodingSearch(ctx, l.latitude, l.longitude, false))
+		val found = utils.findAddresses(listOf(reader), utils.reverseGeocodingSearch(ctx, l.latitude, l.longitude, false))
 		val b1 = r.`object` as? Building
 		val s1 = r.relatedObject as? Street
 		if (found.isEmpty()) {

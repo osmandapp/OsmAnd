@@ -288,7 +288,7 @@ class SearchUICore(
 					if (osmId != null && osmId < 0) {
 						osmId = null // do not merge synthetic osmId such as wiki
 					}
-					if (that.isRouteTrack()) {
+					if (that.isRouteTrack() || that.isSuperRoute()) {
 						osmId = null
 						wikidata = null // do not merge routes
 					}
@@ -920,10 +920,6 @@ class SearchUICore(
 		}
 
 		override fun publish(obj: SearchResult): Boolean {
-			// disable boundary for end results
-			if (obj.objectType == ObjectType.BOUNDARY) {
-				return false
-			}
 			val phrase = phrase
 			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matchesName(obj.localeName)
 				&& KAlgorithms.isEmpty(obj.alternateName)
