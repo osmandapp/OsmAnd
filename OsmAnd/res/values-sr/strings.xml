@@ -5466,4 +5466,5 @@
     <string name="eta_adapt_to_my_speed">Прилагоди мојој брзини</string>
     <string name="eta_adapt_to_my_speed_descr">Време доласка се заснива на вашој брзини током последњих %1$s.</string>
     <string name="eta_adapt_to_my_speed_off_descr">Време доласка се заснива на очекиваној брзини на свакој деоници руте. Укључите ову опцију како би се оно заснивало на вашој стварној брзини кретања.</string>
+    <string name="select_tracks">Изабери путање</string>
 </resources>

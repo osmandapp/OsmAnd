@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -35,6 +36,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	private Double cachedTargetAltitude = null;
 	private String cachedFormattedRatio = null;
 
+	private boolean cachedTargetAltitudeMode;
 	private boolean forceUpdate; // becomes 'true' when widget state switched
 
 	public GlideTargetWidget(@NonNull MapActivity mapActivity, @NonNull GlideTargetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
@@ -45,6 +47,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	@Override
 	protected void setupView(@NonNull View view) {
 		super.setupView(view);
+		cachedTargetAltitudeMode = isInTargetAltitudeState();
 		updateInfo(null);
 		updateWidgetName();
 	}
@@ -52,15 +55,19 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	@Override
 	protected View.OnClickListener getOnClickListener() {
 		return v -> {
-			forceUpdate = true;
 			widgetState.changeToNextState();
 			updateInfo(null);
-			updateWidgetName();
 		};
 	}
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
+		// the mode is switched either by tap or from the widget settings
+		if (cachedTargetAltitudeMode != isInTargetAltitudeState()) {
+			cachedTargetAltitudeMode = isInTargetAltitudeState();
+			forceUpdate = true;
+			updateWidgetName();
+		}
 		if (isInTargetAltitudeState()) {
 			updateTargetAltitude();
 		} else {
@@ -74,6 +81,11 @@ public class GlideTargetWidget extends GlideBaseWidget {
 			return getString(isInTargetAltitudeState() ? R.string.target_elevation : R.string.glide_ratio_to_target);
 		}
 		return widgetType != null ? getString(widgetType.titleId) : null;
+	}
+
+	@Override
+	public GlideTargetWidgetState getWidgetState() {
+		return widgetState;
 	}
 
 	@Override
@@ -189,5 +201,10 @@ public class GlideTargetWidget extends GlideBaseWidget {
 
 	public boolean isInTargetAltitudeState() {
 		return widgetState.getPreference().get();
+	}
+
+	@NonNull
+	public OsmandPreference<Boolean> getModePreference() {
+		return widgetState.getPreference();
 	}
 }

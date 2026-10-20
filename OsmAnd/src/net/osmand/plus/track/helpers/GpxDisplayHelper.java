@@ -332,13 +332,22 @@ public class GpxDisplayHelper {
 
 	@NonNull
 	public static String buildTrackSegmentName(GpxFile gpxFile, Track track, TrkSegment segment, OsmandApplication app) {
-		String trackTitle = getTrackTitle(gpxFile, track, app);
-		String segmentTitle = getSegmentTitle(segment, track.getSegments().indexOf(segment), app);
+		return buildTrackSegmentName(gpxFile, track, segment, track.getSegments().indexOf(segment),
+				gpxFile.getNonEmptySegmentsCount(), gpxFile.getNonEmptyTracksCount(), app);
+	}
 
-		boolean oneSegmentPerTrack =
-				gpxFile.getNonEmptySegmentsCount() == gpxFile.getNonEmptyTracksCount();
-		boolean oneOriginalTrack = gpxFile.hasGeneralTrack() && gpxFile.getNonEmptyTracksCount() == 2
-				|| !gpxFile.hasGeneralTrack() && gpxFile.getNonEmptyTracksCount() == 1;
+	// the index and the counts go over the track and the whole file, so a caller that names every segment of a
+	// track passes them in instead of having them looked up again for each segment
+	@NonNull
+	public static String buildTrackSegmentName(GpxFile gpxFile, Track track, TrkSegment segment, int segmentIdx,
+	                                           int nonEmptySegmentsCount, int nonEmptyTracksCount,
+	                                           OsmandApplication app) {
+		String trackTitle = getTrackTitle(gpxFile, track, app);
+		String segmentTitle = getSegmentTitle(segment, segmentIdx, app);
+
+		boolean oneSegmentPerTrack = nonEmptySegmentsCount == nonEmptyTracksCount;
+		boolean oneOriginalTrack = gpxFile.hasGeneralTrack() && nonEmptyTracksCount == 2
+				|| !gpxFile.hasGeneralTrack() && nonEmptyTracksCount == 1;
 
 		if (oneSegmentPerTrack) {
 			return trackTitle;

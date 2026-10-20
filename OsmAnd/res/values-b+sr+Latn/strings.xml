@@ -5463,4 +5463,5 @@
     <string name="eta_adapt_to_my_speed">Prilagodi mojoj brzini</string>
     <string name="eta_adapt_to_my_speed_descr">Vreme dolaska se zasniva na vašoj brzini tokom poslednjih %1$s.</string>
     <string name="eta_adapt_to_my_speed_off_descr">Vreme dolaska se zasniva na očekivanoj brzini na svakoj deonici rute. Uključite ovu opciju kako bi se ono zasnivalo na vašoj stvarnoj brzini kretanja.</string>
+    <string name="select_tracks">Izaberi putanje</string>
 </resources>

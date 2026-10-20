@@ -77,7 +77,7 @@ import java.util.*;
 public class FirstUsageWizardFragment extends BaseFullScreenFragment implements OsmAndLocationListener,
 		AppInitializeListener, DownloadEvents, StorageSelectionListener, FirstUsageActionsListener {
 
-	public static final String TAG = FirstUsageWizardFragment.class.getSimpleName();
+	public static final String TAG = "FirstUsageWizardFragment";
 
 	public static final String FIRST_USAGE = "first_usage";
 	public static final String SHOW_OSMAND_WELCOME_SCREEN = "show_osmand_welcome_screen";

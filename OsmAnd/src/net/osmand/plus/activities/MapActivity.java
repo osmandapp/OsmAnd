@@ -95,7 +95,6 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteRecordingMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -1318,10 +1317,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		dashboardOnMap.onAppModeChanged();
 	}
 
-	public void updatePinchZoomMagnification() {
-		boolean enabled = PluginsHelper.isActive(AccessibilityPlugin.class)
-				&& settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.get();
-		getMapView().setPinchZoomMagnificationEnabled(enabled);
+	private void updatePinchZoomMagnification() {
+		getMapView().setPinchZoomMagnificationEnabled(settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.get());
 	}
 
 	public void updateMapSettings(boolean updateMapRenderer) {

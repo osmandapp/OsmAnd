@@ -5395,4 +5395,5 @@
     <string name="eta_adapt_to_my_speed_descr">Az érkezési idő az elmúlt %1$s mért sebességen alapul.</string>
     <string name="eta_adapt_to_my_speed_off_descr">Az érkezési idő az útvonal egyes szakaszain várható sebesség alapján számítódik. Akkor kapcsolja be ezt a funkciót, ha azt szeretné, hogy a számítás a tényleges haladási sebességet vegye alapul.</string>
     <string name="storage_directory_visible_external">Látható külső tároló</string>
+    <string name="select_tracks">Nyomvonalak kiválasztása</string>
 </resources>

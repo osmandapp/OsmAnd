@@ -20,7 +20,7 @@ public class InstallReferrerReader {
 
 	public static void readOnce(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
-		if (settings.INSTALL_REFERRER_CHECKED.get()) {
+		if (!app.isUserAndroidIdAllowed() || settings.INSTALL_REFERRER_CHECKED.get()) {
 			return;
 		}
 		try {

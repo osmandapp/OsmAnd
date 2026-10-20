@@ -255,8 +255,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private int secondTouchLocationX;
 	private int secondTouchLocationY;
 	private float secondTouchLocationHeight;
-	private float scrollDistanceX;
-	private float scrollDistanceY;
 	private boolean touchActive;
 
 	public OsmandMapTileView(@NonNull Context ctx, int width, int height) {
@@ -1703,8 +1701,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			PointI firstPosition = new PointI((int) firstPoint.x, (int) firstPoint.y);
 			PointF secondPoint = multiTouchSupport.getSecondPoint();
 			PointI secondPosition = new PointI((int) secondPoint.x, (int) secondPoint.y);
-			scrollDistanceX = 0.0f;
-			scrollDistanceY = 0.0f;
 			PointD zoomAndRotation = new PointD();
 			boolean canChange = mapRenderer.getZoomAndRotationAfterPinch(
 					new PointI(firstTouchLocationX, firstTouchLocationY), firstTouchLocationHeight, firstPosition,
@@ -2675,8 +2671,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 			if (e1 != null) {
 				animatedDraggingThread.startDragging(velocityX / 3, velocityY / 3,
-						e1.getX() + scrollDistanceX, e1.getY() + scrollDistanceY,
-						e2.getX() + scrollDistanceX, e2.getY() + scrollDistanceY, true);
+						e1.getX(), e1.getY(),
+						e2.getX(), e2.getY(), true);
 			}
 			return true;
 		}
@@ -2717,9 +2713,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						findFirstTouchMapLocation(e1.getX(), e1.getY());
 						rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 					}
-					scrollDistanceX = distanceX;
-					scrollDistanceY = distanceY;
-					PointI touchPoint = new PointI((int) (e2.getX() + scrollDistanceX), (int) (e2.getY() + scrollDistanceY));
+					PointI touchPoint = new PointI((int) (e2.getX()), (int) (e2.getY()));
 					mapRenderer.setMapTarget(touchPoint, new PointI(firstTouchLocationX, firstTouchLocationY));
 					LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, currentViewport, targetPixelX, targetPixelY);
 					currentViewport.setLatLonCenter(latLon.getLatitude(), latLon.getLongitude());
