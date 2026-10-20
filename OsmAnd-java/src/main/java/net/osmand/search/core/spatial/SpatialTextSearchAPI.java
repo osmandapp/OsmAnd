@@ -239,8 +239,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public int getSearchPriority(SearchPhrase phrase) {
-		// the address tab lists are filtered by SpatialAddressByNameAPI and the street / building apis
-		if (!phrase.isUnknownSearchWordPresent() || phrase.isAddressSearch()
+		// the address tab lists are filtered by SpatialAddressByNameAPI and SpatialStreetByCityAPI
+		if (!phrase.isUnknownSearchWordPresent() || phrase.isAddressListFilter()
 				|| phrase.isLastWord(ObjectType.POI_TYPE, ObjectType.STREET)) {
 			return -1;
 		}

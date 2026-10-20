@@ -697,7 +697,7 @@ public class SearchUICore {
 		@Override
 		public int getSearchPriority(SearchPhrase phrase) {
 			boolean nearestCities = !longDistance && phrase.isEmpty() && phrase.isEmptyQueryAllowed();
-			return nearestCities || phrase.isAddressSearch() ? super.getSearchPriority(phrase) : -1;
+			return nearestCities || phrase.isAddressListFilter() ? super.getSearchPriority(phrase) : -1;
 		}
 	}
 
@@ -709,7 +709,7 @@ public class SearchUICore {
 
 		@Override
 		public int getSearchPriority(SearchPhrase phrase) {
-			return phrase.isUnknownSearchWordPresent() && !phrase.isAddressSearch() ? -1 : super.getSearchPriority(phrase);
+			return phrase.isUnknownSearchWordPresent() && !phrase.isAddressListFilter() ? -1 : super.getSearchPriority(phrase);
 		}
 	}
 
