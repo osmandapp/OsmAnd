@@ -22,6 +22,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
 import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
@@ -91,6 +92,14 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	@Override
 	public boolean isAltitudeMetricDepended() {
 		return true;
+	}
+
+	@Override
+	public void copySettings(@NonNull ApplicationMode appMode, @Nullable String customId) {
+		copySettingsFromMode(appMode, appMode, customId);
+		// copySettingsFromMode keeps the Show icon setting only, so copy the Height setting here
+		ResizableWidgetState duplicateState = new ResizableWidgetState(app, customId, widgetType, getDefaultWidgetSize());
+		duplicateState.getWidgetSizePref().setModeValue(appMode, getWidgetSizePref().getModeValue(appMode));
 	}
 
 	@Override
