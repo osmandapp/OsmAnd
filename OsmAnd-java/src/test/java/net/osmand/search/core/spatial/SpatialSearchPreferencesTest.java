@@ -91,6 +91,9 @@ public class SpatialSearchPreferencesTest {
 		boolean asserted = true;
 	}
 
+	/** search with the suggestion settings, as the app does before the last word is complete */
+	private boolean typing;
+
 	/** the ids each row shows in its own right, parallel to the rows returned by search() */
 	private final List<List<Long>> headIds = new ArrayList<>();
 
@@ -101,6 +104,20 @@ public class SpatialSearchPreferencesTest {
 
 	@Test
 	public void testRecordedPreferences() throws IOException {
+		checkRecordedPreferences(false);
+	}
+
+	/**
+	 * The same judgements while the last word is still being typed: the app searches with the suggestion
+	 * settings until the word is finished, so this is the list a person sees first.
+	 */
+	@Test
+	public void testRecordedPreferencesWhileTyping() throws IOException {
+		checkRecordedPreferences(true);
+	}
+
+	private void checkRecordedPreferences(boolean typing) throws IOException {
+		this.typing = typing;
 		List<Pref> prefs = readPreferences();
 		Assert.assertFalse("preferences.jsonl is empty", prefs.isEmpty());
 
@@ -121,7 +138,8 @@ public class SpatialSearchPreferencesTest {
 		}
 		Score sc = check(prefs, mapsDir);
 
-		System.out.printf("ranking: %s%n", SCORE_RANKING ? "score" : "ladder (old)");
+		System.out.printf("ranking: %s, %s%n", SCORE_RANKING ? "score" : "ladder (old)",
+				typing ? "while typing" : "complete words");
 		System.out.printf("preferences: %d satisfied, %d violated, %d not applicable "
 						+ "(object not returned), %d absorbed by deduplication, %d below the "
 						+ "top %d, %d not asserted, %d without a map%n",
@@ -267,7 +285,8 @@ public class SpatialSearchPreferencesTest {
 			files.add(new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf));
 		}
 		try {
-			SpatialTextSearchSettings settings = SpatialTextSearchSettings.defaultSettings();
+			SpatialTextSearchSettings settings = typing ? SpatialTextSearchSettings.suggestionSettings()
+					: SpatialTextSearchSettings.defaultSettings();
 			settings.SCORE_RANKING = SCORE_RANKING;
 			SpatialSearchContext ctx = new SpatialSearchContext(settings, files,
 					new SpatialPoiSearch(MapPoiTypes.getDefault()), location);

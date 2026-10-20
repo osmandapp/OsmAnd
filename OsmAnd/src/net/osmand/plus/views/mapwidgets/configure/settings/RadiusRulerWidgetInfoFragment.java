@@ -172,4 +172,9 @@ public class RadiusRulerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 
 		void onModeSelected(@NonNull RadiusRulerMode radiusRulerMode);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "radius_ruler_widget_info";
+	}
 }

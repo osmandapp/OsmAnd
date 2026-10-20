@@ -2415,4 +2415,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	public interface OnUpdateInfoListener {
 		void onUpdateInfo();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "measurement_tool";
+	}
 }

@@ -14,12 +14,16 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.lang.reflect.Field;
 import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MapPoiTypesTranslator implements PoiTranslator {
 
 	private static final Log LOG = PlatformUtil.getLog(MapPoiTypesTranslator.class);
+
+	// resource ids do not change within a process
+	private static final Map<String, Integer> STRING_IDS = new ConcurrentHashMap<>();
 
 	private final OsmandApplication app;
 	private final Resources enResources;
@@ -55,9 +59,8 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 	@Override
 	public String getTranslation(String keyName) {
 		try {
-			Field f = R.string.class.getField("poi_" + keyName);
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
+			int in = getStringId(keyName);
+			if (in != 0) {
 				String val = localizedResources.getString(in);
 				if (val != null) {
 					int ind = val.indexOf(';');
@@ -87,9 +90,8 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 	@Override
 	public String getSynonyms(String keyName) {
 		try {
-			Field f = R.string.class.getField("poi_" + keyName);
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
+			int in = getStringId(keyName);
+			if (in != 0) {
 				String val = localizedResources.getString(in);
 				if (val != null) {
 					int ind = val.indexOf(';');
@@ -128,9 +130,8 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 			return Algorithms.capitalizeFirstLetter(keyName.replace('_', ' '));
 		}
 		try {
-			Field f = R.string.class.getField("poi_" + keyName);
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
+			int in = getStringId(keyName);
+			if (in != 0) {
 				String val = enResources.getString(in);
 				if (val != null) {
 					int ind = val.indexOf(';');
@@ -146,5 +147,27 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 			}
 		}
 		return null;
+	}
+
+	private static int getStringId(String keyName) {
+		if (Algorithms.isEmpty(keyName)) {
+			return 0;
+		}
+		Integer cached = STRING_IDS.get(keyName);
+		if (cached != null) {
+			return cached;
+		}
+		// getField() copies a Field on every call and throws for every key without a poi_ string;
+		// AbstractPoiType keeps only the translations that were found, so a missing key is cached as 0.
+		int id = 0;
+		try {
+			id = R.string.class.getField("poi_" + keyName).getInt(null);
+		} catch (NoSuchFieldException | IllegalAccessException e) {
+			if (PluginsHelper.isDevelopment()) {
+				LOG.info("No translation: " + keyName);
+			}
+		}
+		STRING_IDS.put(keyName, id);
+		return id;
 	}
 }

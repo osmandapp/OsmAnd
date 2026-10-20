@@ -194,4 +194,9 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "modify_gradient";
+	}
 }

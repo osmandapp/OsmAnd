@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/button_container"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:orientation="horizontal">
+
+	<ImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/favorites_my_places_icon_size"
+		android:layout_height="@dimen/favorites_my_places_icon_size"
+		android:layout_gravity="center_vertical"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		tools:src="@drawable/ic_action_favorite" />
+
+	<include
+		layout="@layout/gallery_attached_target_content"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="10dp" />
+
+</LinearLayout>

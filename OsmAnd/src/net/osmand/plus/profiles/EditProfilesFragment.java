@@ -530,4 +530,9 @@ public class EditProfilesFragment extends BaseFullScreenFragment {
 
 		void onButtonClicked(int view);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "edit_profiles";
+	}
 }

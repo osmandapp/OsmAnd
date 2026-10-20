@@ -1,0 +1,338 @@
+package net.osmand.plus.helpers
+
+import android.net.Uri
+import androidx.annotation.StringRes
+import androidx.car.app.ScreenManager
+import net.osmand.PlatformUtil
+import net.osmand.plus.OsmandApplication
+import net.osmand.plus.R
+import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.auto.NavigationSession
+import net.osmand.plus.auto.screens.RequestPermissionScreen
+import net.osmand.plus.auto.screens.RequestPurchaseScreen
+import net.osmand.plus.auto.TripUtils
+import net.osmand.plus.inapp.InAppPurchaseUtils
+import net.osmand.plus.base.ContextMenuFragment.MenuState
+import net.osmand.plus.routepreparationmenu.ChooseRouteFragment
+import net.osmand.plus.routing.NextDirectionInfo
+import net.osmand.plus.utils.OsmAndFormatter
+import net.osmand.router.GeneralRouter
+
+object GeoActionHelper {
+
+	private val LOG = PlatformUtil.getLog(GeoActionHelper::class.java)
+
+	const val SCHEME_GEO_ACTION = "geo.action"
+	const val SCHEME_GEO_ACTION_OFFLINE = "geo.action.offline"
+
+	const val ACTION_EXIT_NAVIGATION = "exit_navigation"
+	const val ACTION_MUTE = "mute"
+	const val ACTION_UNMUTE = "unmute"
+
+	const val ACTION_AVOID_TOLLS = "avoid_tolls"
+	const val ACTION_ALLOW_TOLLS = "allow_tolls"
+	const val ACTION_AVOID_HIGHWAYS = "avoid_highways"
+	const val ACTION_ALLOW_HIGHWAYS = "allow_highways"
+	const val ACTION_AVOID_FERRIES = "avoid_ferries"
+	const val ACTION_ALLOW_FERRIES = "allow_ferries"
+
+	const val ACTION_SHOW_ALTERNATES = "show_alternates"
+	const val ACTION_ROUTE_OVERVIEW = "route_overview"
+	const val ACTION_SHOW_DIRECTIONS_LIST = "show_directions_list"
+	const val ACTION_FOLLOW_MODE = "follow_mode"
+	const val ACTION_GO_BACK = "go_back"
+
+	const val ACTION_ETA = "eta"
+	const val ACTION_TIME_TO_DESTINATION = "time_to_destination"
+	const val ACTION_DISTANCE_TO_DESTINATION = "distance_to_destination"
+	const val ACTION_TIME_TO_NEXT_TURN = "time_to_next_turn"
+	const val ACTION_DISTANCE_TO_NEXT_TURN = "distance_to_next_turn"
+	const val ACTION_QUERY_NEXT_TURN = "query_next_turn"
+	const val ACTION_QUERY_DESTINATION = "query_destination"
+	const val ACTION_QUERY_CURRENT_ROAD = "query_current_road"
+
+	const val ACTION_REPORT_CRASH = "report_crash"
+	const val ACTION_REPORT_HAZARD = "report_hazard"
+	const val ACTION_REPORT_POLICE = "report_police"
+	const val ACTION_REPORT_TRAFFIC = "report_traffic"
+	const val ACTION_REPORT_ROAD_CLOSURE = "report_road_closure"
+	const val ACTION_SHOW_TRAFFIC = "show_traffic"
+	const val ACTION_HIDE_TRAFFIC = "hide_traffic"
+	const val ACTION_SHOW_SATELLITE = "show_satellite"
+	const val ACTION_HIDE_SATELLITE = "hide_satellite"
+
+	@JvmStatic
+	fun isGeoActionUri(uri: Uri?): Boolean {
+		val scheme = uri?.scheme ?: return false
+		return scheme.equals(SCHEME_GEO_ACTION, ignoreCase = true) ||
+				scheme.equals(SCHEME_GEO_ACTION_OFFLINE, ignoreCase = true)
+	}
+
+	@JvmStatic
+	@JvmOverloads
+	fun executeAction(
+		app: OsmandApplication,
+		action: String?,
+		mapActivity: MapActivity? = null,
+		session: NavigationSession? = null
+	) {
+		if (action.isNullOrEmpty()) {
+			return
+		}
+		if (session != null) {
+			if (!InAppPurchaseUtils.isAndroidAutoAvailable(app) || !session.isLocationPermissionAvailable) {
+				LOG.info("Ignoring geo action '$action': purchase or permission check failed")
+				return
+			}
+		}
+		executeActionInternal(app, action, mapActivity, session)
+	}
+
+	private fun getActiveNavSession(app: OsmandApplication, session: NavigationSession?): NavigationSession? {
+		val navSession = session ?: app.carNavigationSession ?: return null
+		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app) || !navSession.isLocationPermissionAvailable) {
+			return null
+		}
+		return navSession
+	}
+
+	private fun executeActionInternal(
+		app: OsmandApplication,
+		action: String,
+		mapActivity: MapActivity?,
+		session: NavigationSession?
+	) {
+		when (action) {
+			ACTION_EXIT_NAVIGATION -> {
+				val navSession = getActiveNavSession(app, session)
+				if (navSession != null) {
+					navSession.stopNavigation()
+				} else {
+					val mapActions = mapActivity?.mapActions
+					if (mapActions != null) {
+						mapActions.stopNavigationWithoutConfirm()
+					} else {
+						app.stopNavigation()
+					}
+				}
+			}
+			ACTION_MUTE -> {
+				app.settings.VOICE_MUTE.set(true)
+			}
+			ACTION_UNMUTE -> {
+				app.settings.VOICE_MUTE.set(false)
+			}
+			ACTION_AVOID_TOLLS -> setAvoidRoutingParameter(app, action, GeneralRouter.AVOID_TOLL, true)
+			ACTION_ALLOW_TOLLS -> setAvoidRoutingParameter(app, action, GeneralRouter.AVOID_TOLL, false)
+			ACTION_AVOID_HIGHWAYS -> setAvoidRoutingParameter(app, action, GeneralRouter.AVOID_MOTORWAY, true)
+			ACTION_ALLOW_HIGHWAYS -> setAvoidRoutingParameter(app, action, GeneralRouter.AVOID_MOTORWAY, false)
+			ACTION_AVOID_FERRIES -> setAvoidRoutingParameter(app, action, GeneralRouter.AVOID_FERRIES, true)
+			ACTION_ALLOW_FERRIES -> setAvoidRoutingParameter(app, action, GeneralRouter.AVOID_FERRIES, false)
+			ACTION_SHOW_ALTERNATES,
+			ACTION_SHOW_DIRECTIONS_LIST -> {
+				if (!app.routingHelper.isRouteCalculated) {
+					showFeedback(app, R.string.animate_routing_route_not_calculated)
+					return
+				}
+				// TODO: Integrate with alternative routes UI once implemented (#1294).
+				// The core routing engine supports calculating alternatives (HHAlternativeRoutes),
+				// but app-level UI and navigation session integration are still pending.
+				// Fallback to route details/menu for now.
+				val activity = mapActivity ?: app.osmandMap?.mapView?.mapActivity
+				if (activity != null) {
+					app.runInUIThread {
+						ChooseRouteFragment.showInstance(activity.supportFragmentManager, 0, MenuState.FULL_SCREEN)
+					}
+				} else {
+					showFeedback(app, R.string.download_unsupported_action, action)
+				}
+			}
+			ACTION_ROUTE_OVERVIEW -> {
+				if (!app.routingHelper.isRouteCalculated) {
+					showFeedback(app, R.string.animate_routing_route_not_calculated)
+					return
+				}
+				val activity = mapActivity ?: app.osmandMap?.mapView?.mapActivity
+				if (activity != null) {
+					val portrait = AndroidUiHelper.isOrientationPortrait(activity)
+					app.runInUIThread {
+						app.osmandMap?.fitCurrentRouteToMap(portrait, 0)
+					}
+				} else {
+					showFeedback(app, R.string.download_unsupported_action, action)
+				}
+			}
+			ACTION_FOLLOW_MODE -> {
+				val navSession = getActiveNavSession(app, session)
+				app.runInUIThread {
+					if (navSession != null) {
+						navSession.navigationCarSurface?.handleRecenter()
+					} else {
+						app.mapViewTrackingUtilities.backToLocationImpl()
+					}
+				}
+			}
+			ACTION_GO_BACK -> {
+				val navSession = getActiveNavSession(app, session)
+				app.runInUIThread {
+					if (navSession != null) {
+						val screenManager = navSession.carContext.getCarService(ScreenManager::class.java)
+						val topScreen = screenManager.top
+						if (topScreen is RequestPurchaseScreen || topScreen is RequestPermissionScreen) {
+							return@runInUIThread
+						}
+						if (screenManager.screenStack.size > 1) {
+							screenManager.pop()
+						}
+					} else {
+						mapActivity?.onBackPressedDispatcher?.onBackPressed()
+					}
+				}
+			}
+			ACTION_ETA,
+			ACTION_TIME_TO_DESTINATION -> {
+				if (!app.routingHelper.isRouteCalculated) {
+					showFeedback(app, R.string.animate_routing_route_not_calculated)
+				} else {
+					val eta = OsmAndFormatter.getFormattedTimeShort(app.routingHelper.leftTime.toLong(), true)
+					showFeedback(app, "${app.getString(R.string.shared_string_eta)}: $eta")
+				}
+			}
+			ACTION_DISTANCE_TO_DESTINATION -> {
+				if (!app.routingHelper.isRouteCalculated) {
+					showFeedback(app, R.string.animate_routing_route_not_calculated)
+				} else {
+					val distance = OsmAndFormatter.getFormattedDistance(app.routingHelper.leftDistance.toFloat(), app)
+					showFeedback(app, "${app.getString(R.string.distance)}: $distance")
+				}
+			}
+			ACTION_TIME_TO_NEXT_TURN -> {
+				if (!app.routingHelper.isRouteCalculated) {
+					showFeedback(app, R.string.animate_routing_route_not_calculated)
+				} else {
+					val time = app.routingHelper.leftTimeNextTurn
+					if (time > 0) {
+						showFeedback(app, OsmAndFormatter.getFormattedDuration(time.toLong(), app))
+					} else {
+						showFeedback(app, R.string.shared_string_none)
+					}
+				}
+			}
+			ACTION_DISTANCE_TO_NEXT_TURN -> {
+				if (!app.routingHelper.isRouteCalculated) {
+					showFeedback(app, R.string.animate_routing_route_not_calculated)
+				} else {
+					val nextInfo = app.routingHelper.getNextRouteDirectionInfo(NextDirectionInfo(), false)
+					val dist = nextInfo?.distanceTo ?: 0
+					if (dist > 0) {
+						showFeedback(app, OsmAndFormatter.getFormattedDistance(dist.toFloat(), app))
+					} else {
+						showFeedback(app, R.string.shared_string_none)
+					}
+				}
+			}
+			ACTION_QUERY_NEXT_TURN -> {
+				if (!app.routingHelper.isRouteCalculated) {
+					showFeedback(app, R.string.animate_routing_route_not_calculated)
+				} else {
+					val nextInfo = app.routingHelper.getNextRouteDirectionInfo(NextDirectionInfo(), false)
+					val turnType = nextInfo?.directionInfo?.turnType
+					val desc = if (turnType != null) {
+						TripUtils.getNextTurnDescription(app, nextInfo, turnType, null)
+					} else {
+						""
+					}
+					if (desc.isNotEmpty()) {
+						showFeedback(app, desc)
+					} else {
+						showFeedback(app, R.string.shared_string_none)
+					}
+				}
+			}
+			ACTION_QUERY_DESTINATION -> {
+				val point = app.targetPointsHelper.pointToNavigate
+				if (point != null) {
+					val name = point.onlyName
+					val dest = if (name.isNotEmpty()) {
+						name
+					} else {
+						val latLon = point.latLon
+						"${latLon.latitude}, ${latLon.longitude}"
+					}
+					showFeedback(app, "${app.getString(R.string.route_descr_destination)}: $dest")
+				} else {
+					showFeedback(app, R.string.animate_routing_route_not_calculated)
+				}
+			}
+			ACTION_QUERY_CURRENT_ROAD -> {
+				val streetName = if (app.routingHelper.isRouteCalculated) {
+					app.routingHelper.getCurrentName(NextDirectionInfo(), false).text
+				} else {
+					null
+				}
+				val road = if (!streetName.isNullOrEmpty()) {
+					streetName
+				} else {
+					val locale = app.settings.MAP_PREFERRED_LOCALE.get()
+					val transliterate = app.settings.MAP_TRANSLITERATE_NAMES.get()
+					app.locationProvider.lastKnownRouteSegment?.getName(locale, transliterate)
+				}
+				if (!road.isNullOrEmpty()) {
+					showFeedback(app, road)
+				} else {
+					showFeedback(app, R.string.shared_string_none)
+				}
+			}
+			ACTION_REPORT_CRASH,
+			ACTION_REPORT_HAZARD,
+			ACTION_REPORT_POLICE,
+			ACTION_REPORT_TRAFFIC,
+			ACTION_REPORT_ROAD_CLOSURE,
+			ACTION_SHOW_TRAFFIC,
+			ACTION_HIDE_TRAFFIC,
+			ACTION_SHOW_SATELLITE,
+			ACTION_HIDE_SATELLITE -> {
+				showFeedback(app, R.string.download_unsupported_action, action)
+			}
+			else -> {
+				LOG.warn("Unsupported geo action: $action")
+				showFeedback(app, R.string.download_unsupported_action, action)
+			}
+		}
+	}
+
+	private fun showFeedback(
+		app: OsmandApplication,
+		text: String
+	) {
+		app.toastHelper.showToast(text, true)
+	}
+
+	private fun showFeedback(
+		app: OsmandApplication,
+		@StringRes textId: Int,
+		vararg args: Any
+	) {
+		app.toastHelper.showToast(textId, true, *args)
+	}
+
+	private fun setAvoidRoutingParameter(
+		app: OsmandApplication,
+		action: String,
+		parameterId: String,
+		avoid: Boolean
+	) {
+		val appMode = app.routingHelper.appMode
+		val parameter = app.routingOptionsHelper.getRoutingPrefsForAppModeById(appMode, parameterId)
+		if (parameter == null) {
+			LOG.warn("Routing parameter $parameterId not available for app mode $appMode")
+			showFeedback(app, R.string.download_unsupported_action, action)
+			return
+		}
+		val prop = app.settings.getCustomRoutingBooleanProperty(parameter.id, parameter.defaultBoolean)
+		if (prop.getModeValue(appMode) != avoid) {
+			prop.setModeValue(appMode, avoid)
+			app.routingHelper.onSettingsChanged(appMode, true)
+		}
+	}
+}

@@ -552,4 +552,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		}
 		super.updateSetting(prefId);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "general_profile_settings";
+	}
 }

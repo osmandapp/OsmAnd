@@ -96,4 +96,9 @@ public class ReadGpxDescriptionFragment extends ReadDescriptionFragment {
 			fragment.show(manager, ReadGpxDescriptionFragment.TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "read_gpx_description";
+	}
 }

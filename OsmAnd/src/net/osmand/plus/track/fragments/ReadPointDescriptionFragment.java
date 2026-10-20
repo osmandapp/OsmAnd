@@ -66,4 +66,9 @@ public class ReadPointDescriptionFragment extends ReadDescriptionFragment {
 			fragment.show(manager, ReadDescriptionFragment.TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "read_point_description";
+	}
 }
