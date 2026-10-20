@@ -368,7 +368,7 @@ class BackupImporter {
 	private File getInfoTempFile(@NonNull File tempDir, @NonNull RemoteFile remoteFile) {
 		String fileName = remoteFile.getTypeNamePath();
 		if (BackupUtils.isFileNameTooLong(fileName)) {
-			fileName = remoteFile.getType() + "/" + Integer.toHexString(fileName.hashCode()) + INFO_EXT;
+			fileName = remoteFile.getType() + "/" + DigestUtils.md5Hex(fileName) + INFO_EXT;
 		}
 		return new File(tempDir, fileName);
 	}
