@@ -35,6 +35,7 @@ import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyT
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -135,7 +136,7 @@ public abstract class SearchTrackBaseFragment extends BaseFullScreenDialogFragme
 		super.onResume();
 		searchEditText.requestFocus();
 		AndroidUtils.showSoftKeyboard(requireActivity(), searchEditText);
-		startLocationUpdate();
+		updateLocationUpdate();
 		setupFilterCallback();
 	}
 
@@ -269,10 +270,27 @@ public abstract class SearchTrackBaseFragment extends BaseFullScreenDialogFragme
 		}
 	}
 
+	private void updateLocationUpdate() {
+		if (isResumed() && isLocationUpdateNeeded()) {
+			startLocationUpdate();
+		} else {
+			stopLocationUpdate();
+		}
+	}
+
+	private boolean isLocationUpdateNeeded() {
+		// Only "Nearest to current location" shows distance and direction from my location.
+		// "Nearest to map center" uses the map position and rotation, which do not change while the list is shown.
+		return getTracksSortMode() == TracksSortMode.NEAREST;
+	}
+
 	public void startLocationUpdate() {
 		if (!locationUpdateStarted) {
 			locationUpdateStarted = true;
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
+			if (getActivity() instanceof MyPlacesActivity activity) {
+				activity.requestLocationUpdates(this);
+			}
 			locationProvider.removeCompassListener(locationProvider.getNavigationInfo());
 			locationProvider.addCompassListener(this);
 			locationProvider.addLocationListener(this);
@@ -287,6 +305,9 @@ public abstract class SearchTrackBaseFragment extends BaseFullScreenDialogFragme
 			locationProvider.removeLocationListener(this);
 			locationProvider.removeCompassListener(this);
 			locationProvider.addCompassListener(locationProvider.getNavigationInfo());
+			if (getActivity() instanceof MyPlacesActivity activity) {
+				activity.releaseLocationUpdates(this);
+			}
 		}
 	}
 
@@ -314,6 +335,7 @@ public abstract class SearchTrackBaseFragment extends BaseFullScreenDialogFragme
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders) {
 		settings.SEARCH_TRACKS_SORT_MODE.set(sortMode);
 		adapter.setTracksSortMode(getTracksSortMode());
+		updateLocationUpdate();
 	}
 
 	@NonNull

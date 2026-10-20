@@ -212,7 +212,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			foldersHelper.setGpxImportListener(this);
 		}
 		gpxSelectionHelper.addListener(this);
-		startLocationUpdate();
+		updateLocationUpdate();
 	}
 
 	@Override
@@ -259,13 +259,26 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		}
 	}
 
+	private void updateLocationUpdate() {
+		if (isResumed() && isLocationUpdateNeeded()) {
+			startLocationUpdate();
+		} else {
+			stopLocationUpdate();
+		}
+	}
+
+	private boolean isLocationUpdateNeeded() {
+		// Only "Nearest to current location" shows distance and direction from my location.
+		// "Nearest to map center" uses the map position and rotation, which do not change while the list is shown.
+		return getTracksSortMode() == TracksSortMode.NEAREST;
+	}
+
 	private void startLocationUpdate() {
 		if (!locationUpdateStarted) {
 			locationUpdateStarted = true;
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
-			if (getActivity() instanceof MyPlacesActivity) {
-				// MapActivity paused location and compass updates; MyPlacesActivity pauses them again in onPause
-				locationProvider.resumeAllUpdates();
+			if (getActivity() instanceof MyPlacesActivity activity) {
+				activity.requestLocationUpdates(this);
 			}
 			locationProvider.removeCompassListener(locationProvider.getNavigationInfo());
 			locationProvider.addCompassListener(this);
@@ -281,6 +294,9 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			locationProvider.removeLocationListener(this);
 			locationProvider.removeCompassListener(this);
 			locationProvider.addCompassListener(locationProvider.getNavigationInfo());
+			if (getActivity() instanceof MyPlacesActivity activity) {
+				activity.releaseLocationUpdates(this);
+			}
 		}
 	}
 
@@ -386,6 +402,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 		adapter.setSortMode(sortMode);
 		adapter.setItems(items);
+		updateLocationUpdate();
 	}
 
 	private void sortItems(@NonNull List<Object> items, @NonNull TracksSortMode sortMode) {
