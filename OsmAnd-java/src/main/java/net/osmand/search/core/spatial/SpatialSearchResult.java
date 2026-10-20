@@ -34,7 +34,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	double score; // set by sortResults(), see SpatialSearchRanking
 
 	private static final List<String> FILTER_DUPLICATE_POI_SUBTYPE = new ArrayList<String>(
-			Arrays.asList("building", "internet_access_yes", "atm"));
+			Arrays.asList("building", "historic_building", "internet_access_yes", "atm"));
 	final int ZOOM_SIMILARITY_70_KM = 9 - 8; // 1 symbol - tile z=9 - 1 pixel of z=1
 	final int ZOOM_SIMILARITY_10_KM = 12 - 8; // 2 symbols - tile z=12
 	final int ZOOM_SIMILARITY_1_KM = 15 - 8; // 3 symbols
