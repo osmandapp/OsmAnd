@@ -260,26 +260,28 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	}
 
 	private void updateLocationUpdate() {
-		if (isResumed() && isLocationUpdateNeeded()) {
+		TracksSortMode sortMode = getTracksSortMode();
+		boolean nearestSortMode = sortMode == TracksSortMode.NEAREST || sortMode == TracksSortMode.NEAREST_TO_MAP_CENTER;
+		if (isResumed() && nearestSortMode) {
 			startLocationUpdate();
 		} else {
 			stopLocationUpdate();
 		}
-	}
-
-	private boolean isLocationUpdateNeeded() {
-		// Only "Nearest to current location" shows distance and direction from my location.
-		// "Nearest to map center" uses the map position and rotation, which do not change while the list is shown.
-		return getTracksSortMode() == TracksSortMode.NEAREST;
+		if (getActivity() instanceof MyPlacesActivity activity) {
+			// MapActivity is paused under My Places, so the map center and rotation used by "Nearest to map center"
+			// do not change there: only "Nearest to current location" needs location and compass updates
+			if (locationUpdateStarted && sortMode == TracksSortMode.NEAREST) {
+				activity.requestLocationUpdates(this);
+			} else {
+				activity.releaseLocationUpdates(this);
+			}
+		}
 	}
 
 	private void startLocationUpdate() {
 		if (!locationUpdateStarted) {
 			locationUpdateStarted = true;
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
-			if (getActivity() instanceof MyPlacesActivity activity) {
-				activity.requestLocationUpdates(this);
-			}
 			locationProvider.removeCompassListener(locationProvider.getNavigationInfo());
 			locationProvider.addCompassListener(this);
 			locationProvider.addLocationListener(this);

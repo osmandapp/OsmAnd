@@ -367,8 +367,8 @@ public class MyPlacesActivity extends TabActivity {
 
 	/**
 	 * MapActivity pauses location and compass updates when My Places is opened over it.
-	 * Screens that show distance and direction from my location request them here and release them when hidden,
-	 * so the updates run only while at least one of them is visible.
+	 * Track lists sorted by "Nearest to current location" request them here when resumed and release them
+	 * when paused or sorted otherwise, so the updates run while at least one of them holds them.
 	 */
 	public void requestLocationUpdates(@NonNull Object client) {
 		if (locationUpdateClients.add(client) && locationUpdateClients.size() == 1) {
