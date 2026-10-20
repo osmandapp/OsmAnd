@@ -35,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class BackupUtils {
@@ -42,6 +43,9 @@ public class BackupUtils {
 	public static final String BACKUP_TYPE_PREFIX = "backup_type_";
 	public static final String AUTO_BACKUP_TYPE_PREFIX = "auto_backup_type_";
 	public static final String VERSION_HISTORY_PREFIX = "save_version_history_";
+
+	// file systems of the device limit a file or folder name to 255 bytes
+	private static final int MAX_FILE_NAME_BYTES = 255;
 
 	public static void setLastModifiedTime(@NonNull Context ctx, @NonNull String name) {
 		setLastModifiedTime(ctx, name, System.currentTimeMillis());
@@ -193,6 +197,35 @@ public class BackupUtils {
 			fileName = fileName.substring(1);
 		}
 		return fileName;
+	}
+
+	public static boolean isFileNameTooLong(@NonNull String path) {
+		for (String name : path.split("/")) {
+			if (name.getBytes(StandardCharsets.UTF_8).length > MAX_FILE_NAME_BYTES) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// the last name of the path is cut, so that together with the tail it still fits the limit
+	@NonNull
+	public static String appendToFileName(@NonNull String path, @NonNull String tail) {
+		int nameStart = path.lastIndexOf('/') + 1;
+		int tailEnd = tail.indexOf('/');
+		String nameTail = cutToBytes(tailEnd == -1 ? tail : tail.substring(0, tailEnd), MAX_FILE_NAME_BYTES);
+		String tailRest = tailEnd == -1 ? "" : tail.substring(tailEnd);
+		int maxBytes = MAX_FILE_NAME_BYTES - nameTail.getBytes(StandardCharsets.UTF_8).length;
+		return path.substring(0, nameStart) + cutToBytes(path.substring(nameStart), maxBytes) + nameTail + tailRest;
+	}
+
+	@NonNull
+	private static String cutToBytes(@NonNull String str, int maxBytes) {
+		int end = str.length();
+		while (end > 0 && str.substring(0, end).getBytes(StandardCharsets.UTF_8).length > maxBytes) {
+			end = str.offsetByCodePoints(end, -1);
+		}
+		return str.substring(0, end);
 	}
 
 	public static boolean isLimitedFilesCollectionItem(@NonNull FileSettingsItem item) {

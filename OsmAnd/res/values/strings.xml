@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="cloud_file_name_too_long">File name is too long for this device, rename it in OsmAnd Cloud</string>
 	<string name="average_vertical_speed">Average vertical speed</string>
 	<string name="select_tracks">Select tracks</string>
 	<string name="storage_directory_visible_external">Visible external storage</string>
