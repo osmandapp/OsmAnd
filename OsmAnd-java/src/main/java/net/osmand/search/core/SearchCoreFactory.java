@@ -317,7 +317,7 @@ public class SearchCoreFactory {
 
 		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 40 * 1000;
 		private static final int LONG_ADDRESS_BBOX_RADIUS = 100 * 1000;
-		// village is shown as "<dist> from <city>" only with a city of its own map not farther than that
+		// village is shown as "<dist> from <city>" only with a city not farther than that
 		private static final int MAX_RELATED_CITY_DISTANCE = 100 * 1000;
 		private static final int LIMIT = 10000;
 		private final int MAX_ADRESS_RESULTS_BY_REGIONS = 1000;
@@ -388,8 +388,19 @@ public class SearchCoreFactory {
 			return true;
 		}
 
-		private void setRelatedCity(SearchPhrase phrase, SearchResult res) {
-			City city = townCitiesCache.findRelatedCity(res.location, res.file, MAX_RELATED_CITY_DISTANCE);
+		// related city is searched around the village in every map, not only around the search center:
+		// a village found far away would get an unrelated city near the user otherwise (issue #25285)
+		private void setRelatedCity(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res)
+				throws IOException {
+			QuadRect bbox = TownCitiesCache.getBbox31(res.location, MAX_RELATED_CITY_DISTANCE);
+			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes(bbox, SearchPhraseDataType.ADDRESS);
+			while (offlineIndexes.hasNext()) {
+				if (resultMatcher.isCancelled()) {
+					return;
+				}
+				ensureTownCitiesLoaded(offlineIndexes.next(), phrase, resultMatcher);
+			}
+			City city = townCitiesCache.findRelatedCity(res.location, MAX_RELATED_CITY_DISTANCE);
 			if (city != null) {
 				res.localeRelatedObjectName = city.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 				res.relatedObject = city;
@@ -402,7 +413,9 @@ public class SearchCoreFactory {
 			if (townCitiesCache.contains(r)) {
 				return;
 			}
+			// file is marked as loaded only when all its blocks are read, so a failed read is retried
 			List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
+			List<City> boundaries = r.getCities(null, CityBlocks.BOUNDARY_TYPE, null, phrase.getSettings().getStat());
 			townCitiesCache.add(r);
 			for (City c  : l) {
 				if (phrase.getSettings().isExportObjects()) {
@@ -420,8 +433,7 @@ public class SearchCoreFactory {
 				}
 				townCitiesCache.insertCityQR(c, qr);
 			}
-			l = r.getCities(null, CityBlocks.BOUNDARY_TYPE, null, phrase.getSettings().getStat());
-			for (City c  : l) {
+			for (City c  : boundaries) {
 				if (phrase.getSettings().isExportObjects()) {
 					resultMatcher.exportCity(phrase, c);
 				}
@@ -579,6 +591,8 @@ public class SearchCoreFactory {
 										|| !phrase.isSearchTypeAllowed(ObjectType.VILLAGE)) {
 									return false;
 								}
+								// region of the village is taken from its own map, not from the map of the related city
+								object.setReferenceFile(currentFile[0]);
 								sr.objectType = ObjectType.VILLAGE;
 							}
 						} else {
@@ -663,9 +677,11 @@ public class SearchCoreFactory {
 					r.searchAddressDataByName(req);
 					// cities are read after the name search: the file can't be read while it's being searched
 					for (SearchResult res : immediateResults) {
+						if (resultMatcher.isCancelled()) {
+							break;
+						}
 						if (res.objectType == ObjectType.VILLAGE) {
-							ensureTownCitiesLoaded(r, phrase, resultMatcher);
-							setRelatedCity(phrase, res);
+							setRelatedCity(phrase, resultMatcher, res);
 						}
 					}
 					for (SearchResult res : immediateResults) {
@@ -1929,17 +1945,14 @@ public class SearchCoreFactory {
 			return cacheResArray;
 		}
 
-		// closest city or town (a town counts 10 times farther) from the same file around the location
-		public City findRelatedCity(LatLon location, Object file, int maxDistance) {
+		// closest city or town (a town counts 10 times farther) of any loaded map not farther than maxDistance
+		public City findRelatedCity(LatLon location, int maxDistance) {
 			if (location == null) {
 				return null;
 			}
 			City closestCity = null;
 			double pDist = -1;
-			for (City city : queryCities(MapUtils.calculate31BboxUsingRhumb(maxDistance, location))) {
-				if (city.getReferenceFile() != file) {
-					continue;
-				}
+			for (City city : queryCities(getBbox31(location, maxDistance))) {
 				double dist = MapUtils.getDistance(city.getLocation(), location);
 				if (dist > maxDistance) {
 					continue;
@@ -1951,6 +1964,24 @@ public class SearchCoreFactory {
 				}
 			}
 			return closestCity;
+		}
+
+		// bbox containing the whole circle of the radius (calculate31BboxUsingRhumb gives the inscribed square),
+		// 10% margin: the circle is wider than its east/west points far from the equator
+		// and getDistance uses another earth radius than rhumbDestinationPoint
+		public static QuadRect getBbox31(LatLon location, int radius) {
+			double lat = location.getLatitude();
+			double lon = location.getLongitude();
+			double r = radius * 1.1;
+			double north = MapUtils.rhumbDestinationPoint(lat, lon, r, 0).getLatitude();
+			double south = MapUtils.rhumbDestinationPoint(lat, lon, r, 180).getLatitude();
+			double east = MapUtils.rhumbDestinationPoint(lat, lon, r, 90).getLongitude();
+			double west = MapUtils.rhumbDestinationPoint(lat, lon, r, 270).getLongitude();
+			int top = MapUtils.get31TileNumberY(Math.min(MapUtils.MAX_LATITUDE, north));
+			int bottom = MapUtils.get31TileNumberY(Math.max(MapUtils.MIN_LATITUDE, south));
+			int left = MapUtils.get31TileNumberX(Math.max(MapUtils.MIN_LONGITUDE, west));
+			int right = MapUtils.get31TileNumberX(Math.min(MapUtils.MAX_LONGITUDE, east));
+			return new QuadRect(left, top, right, bottom);
 		}
 
 		public List<City> queryBoundaries(QuadRect bbox) {

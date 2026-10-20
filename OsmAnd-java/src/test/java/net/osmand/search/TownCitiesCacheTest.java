@@ -58,63 +58,127 @@ public class TownCitiesCacheTest {
 	private static final LatLon SAINT_FERREOL = new LatLon(45.7700, 6.3170); // village near Annecy, France
 
 	// Village found far from the search center (Amsterdam) must not be labeled with a city
-	// near the search center, but with a close city of its own map (issue #25285)
+	// near the search center, but with a city close to the village (issue #25285)
 	@Test
 	public void testRelatedCityIsNearVillageNotNearSearchCenter() {
-		Object netherlands = "netherlands.obf";
-		Object france = "france.obf";
 		TownCitiesCache cache = new TownCitiesCache();
-		insert(cache, CityType.CITY, "Hilversum", new LatLon(52.2292, 5.1669), netherlands);
-		insert(cache, CityType.CITY, "Amsterdam", new LatLon(52.3730, 4.8924), netherlands);
-		insert(cache, CityType.CITY, "Paris", new LatLon(48.8566, 2.3522), france);
-		insert(cache, CityType.TOWN, "Annecy", new LatLon(45.8992, 6.1294), france);
-		insert(cache, CityType.TOWN, "Albertville", new LatLon(45.6755, 6.3925), france);
+		insert(cache, CityType.CITY, "Hilversum", new LatLon(52.2292, 5.1669));
+		insert(cache, CityType.CITY, "Amsterdam", new LatLon(52.3730, 4.8924));
+		insert(cache, CityType.CITY, "Paris", new LatLon(48.8566, 2.3522));
+		insert(cache, CityType.TOWN, "Annecy", new LatLon(45.8992, 6.1294));
+		insert(cache, CityType.TOWN, "Albertville", new LatLon(45.6755, 6.3925));
 
-		City city = cache.findRelatedCity(SAINT_FERREOL, france, MAX_DIST);
-		Assert.assertNotNull(city);
-		Assert.assertEquals("Albertville", city.getName());
+		Assert.assertEquals("Albertville", name(cache.findRelatedCity(SAINT_FERREOL, MAX_DIST)));
 	}
 
+	// related city may be in another map and across the border: the region of the village
+	// is taken from its own map, so a near Genève doesn't make the village Swiss
 	@Test
-	public void testRelatedCityFromOtherMapIsIgnored() {
-		Object switzerland = "switzerland.obf";
-		Object france = "france.obf";
+	public void testRelatedCityFromAnyMap() {
 		TownCitiesCache cache = new TownCitiesCache();
-		insert(cache, CityType.CITY, "Genève", new LatLon(46.2044, 6.1432), switzerland);
-		insert(cache, CityType.TOWN, "Annecy", new LatLon(45.8992, 6.1294), france);
+		insert(cache, CityType.CITY, "Genève", new LatLon(46.2044, 6.1432));
+		insert(cache, CityType.TOWN, "Annecy", new LatLon(45.8992, 6.1294));
 
-		City city = cache.findRelatedCity(SAINT_FERREOL, france, MAX_DIST);
-		Assert.assertNotNull(city);
-		Assert.assertEquals("Annecy", city.getName());
+		Assert.assertEquals("Genève", name(cache.findRelatedCity(SAINT_FERREOL, MAX_DIST)));
 	}
 
 	@Test
 	public void testNoRelatedCityFartherThanMaxDistance() {
-		Object france = "france.obf";
 		TownCitiesCache cache = new TownCitiesCache();
-		insert(cache, CityType.CITY, "Paris", new LatLon(48.8566, 2.3522), france);
+		insert(cache, CityType.CITY, "Paris", new LatLon(48.8566, 2.3522));
 
-		Assert.assertNull(cache.findRelatedCity(SAINT_FERREOL, france, MAX_DIST));
+		Assert.assertNull(cache.findRelatedCity(SAINT_FERREOL, MAX_DIST));
 	}
 
 	@Test
 	public void testCityIsPreferredOverCloserTown() {
-		Object france = "france.obf";
 		TownCitiesCache cache = new TownCitiesCache();
-		insert(cache, CityType.TOWN, "Albertville", new LatLon(45.6755, 6.3925), france); // ~12 km
-		insert(cache, CityType.CITY, "Chambéry", new LatLon(45.5646, 5.9178), france); // ~38 km
+		insert(cache, CityType.TOWN, "Albertville", new LatLon(45.6755, 6.3925)); // ~12 km
+		insert(cache, CityType.CITY, "Chambéry", new LatLon(45.5646, 5.9178)); // ~38 km
 
-		Assert.assertEquals("Chambéry", cache.findRelatedCity(SAINT_FERREOL, france, MAX_DIST).getName());
+		Assert.assertEquals("Chambéry", name(cache.findRelatedCity(SAINT_FERREOL, MAX_DIST)));
 	}
 
-	private void insert(TownCitiesCache cache, CityType type, String name, LatLon location, Object file) {
-		City city = new City(type);
-		city.setName(name);
-		city.setLocation(location);
-		city.setReferenceFile(file);
+	// the candidates bbox must contain the whole circle: the inscribed square of
+	// calculate31BboxUsingRhumb lost a city 90 km to the east
+	@Test
+	public void testRelatedCityInEveryDirectionUpToMaxDistance() {
+		LatLon[] villages = { new LatLon(0.5, 10), SAINT_FERREOL, new LatLon(69.65, 18.96), new LatLon(78.22, 15.65) };
+		int[] distances = { 1000, 60000, 70700, 90000, 99000, 101000, 110000 };
+		for (LatLon village : villages) {
+			for (int distance : distances) {
+				for (int bearing = 0; bearing < 360; bearing += 45) {
+					LatLon location = MapUtils.rhumbDestinationPoint(village, distance, bearing);
+					boolean expected = MapUtils.getDistance(village, location) <= MAX_DIST;
+					String msg = village + " " + distance + " m, bearing " + bearing;
+					for (boolean area : new boolean[] { false, true }) {
+						TownCitiesCache cache = new TownCitiesCache();
+						City city = createCity(CityType.CITY, "candidate", location);
+						int x = MapUtils.get31TileNumberX(location.getLongitude());
+						int y = MapUtils.get31TileNumberY(location.getLatitude());
+						int d = area ? 1 << 12 : 0; // ~1 km city area
+						cache.insertCityQR(city, new QuadRect(x - d, y - d, x + d, y + d));
+						Assert.assertSame(msg + (area ? " area" : " point"), expected ? city : null,
+								cache.findRelatedCity(village, MAX_DIST));
+					}
+				}
+			}
+		}
+	}
+
+	@Test
+	public void testRelatedCityDoesntDependOnInsertOrder() {
+		LatLon[] locations = { new LatLon(45.6755, 6.3925), new LatLon(45.5646, 5.9178), new LatLon(46.2044, 6.1432) };
+		CityType[] types = { CityType.TOWN, CityType.CITY, CityType.CITY };
+		String[] names = { "Albertville", "Chambéry", "Genève" };
+		TownCitiesCache direct = new TownCitiesCache();
+		TownCitiesCache reverse = new TownCitiesCache();
+		for (int i = 0; i < names.length; i++) {
+			insert(direct, types[i], names[i], locations[i]);
+			int j = names.length - 1 - i;
+			insert(reverse, types[j], names[j], locations[j]);
+		}
+		Assert.assertEquals(name(direct.findRelatedCity(SAINT_FERREOL, MAX_DIST)),
+				name(reverse.findRelatedCity(SAINT_FERREOL, MAX_DIST)));
+	}
+
+	// a reopened reader of the same file is "already loaded": cities loaded with the first reader must be found
+	@Test
+	public void testRelatedCityAfterReaderReopen() throws IOException {
+		File file = new File(SRC_OBF);
+		BinaryMapIndexReader first = read(file);
+		BinaryMapIndexReader second = read(file);
+		try {
+			TownCitiesCache cache = new TownCitiesCache();
+			cache.add(first);
+			City city = insert(cache, CityType.CITY, "nearby", MapUtils.rhumbDestinationPoint(SAINT_FERREOL, 10000, 0));
+			city.setReferenceFile(first);
+
+			Assert.assertTrue(cache.contains(second));
+			Assert.assertSame(city, cache.findRelatedCity(SAINT_FERREOL, MAX_DIST));
+		} finally {
+			first.close();
+			second.close();
+		}
+	}
+
+	private City insert(TownCitiesCache cache, CityType type, String name, LatLon location) {
+		City city = createCity(type, name, location);
 		int x = MapUtils.get31TileNumberX(location.getLongitude());
 		int y = MapUtils.get31TileNumberY(location.getLatitude());
 		cache.insertCityQR(city, new QuadRect(x, y, x, y));
+		return city;
+	}
+
+	private City createCity(CityType type, String name, LatLon location) {
+		City city = new City(type);
+		city.setName(name);
+		city.setLocation(location);
+		return city;
+	}
+
+	private String name(City city) {
+		return city == null ? null : city.getName();
 	}
 
 	private File copy(File dir, String name) throws IOException {
