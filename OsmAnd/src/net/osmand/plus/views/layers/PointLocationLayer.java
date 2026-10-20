@@ -899,6 +899,12 @@ public class PointLocationLayer extends OsmandMapLayer
 				aroundArea.setColor(profileColor);
 			}
 			markersInvalidated = true;
+
+			// A model that is already known to be missing or broken fails right in getModel(), and then
+			// neither a model nor an icon is set: switch to the default icon now, not on the next map refresh
+			if (navigationIconName.equals(brokenNavigationModelName) || locationIconName.equals(brokenLocationModelName)) {
+				updateParams(appMode, nighMode, locationOutdated);
+			}
 		}
 	}
 

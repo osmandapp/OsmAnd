@@ -248,6 +248,7 @@ public class RoutingHelper {
 		route = new RouteCalculationResult("");
 		isDeviatedFromRoute = false;
 		routeRecalculationHelper.resetEvalWaitInterval();
+		routeRecalculationHelper.onRouteCleared();
 		app.getWaypointHelper().setNewRoute(route);
 		app.runInUIThread(() -> {
 			Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
@@ -505,6 +506,11 @@ public class RoutingHelper {
 					} else if (isDeviatedFromRoute && !voiceRouterStopped) {
 						voiceRouter.interruptRouteCommands();
 						voiceRouterStopped = true; // Prevents excessive execution of stop() code
+					}
+					if (!inRecalc && !wrongMovementDirection && !isDeviatedFromRoute) {
+						routeRecalculationHelper.onRouteFollowed(System.currentTimeMillis());
+					} else {
+						routeRecalculationHelper.onRouteNotFollowed();
 					}
 					voiceRouter.announceOffRoute(distOrth);
 				}

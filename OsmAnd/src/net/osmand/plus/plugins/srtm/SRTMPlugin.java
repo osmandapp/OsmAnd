@@ -258,7 +258,14 @@ public class SRTMPlugin extends OsmandPlugin {
 				ctx.reset3DObjectsProvider();
 			}
 		}
+		NativeCoreContext.updateContourLinesDirectory(app, true);
 		return true;
+	}
+
+	@Override
+	public void disable(@NonNull OsmandApplication app) {
+		super.disable(app);
+		NativeCoreContext.updateContourLinesDirectory(app, false);
 	}
 
 	@Override
