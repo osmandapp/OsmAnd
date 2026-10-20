@@ -123,6 +123,8 @@ class OnlinePhotosDelegate(
 		}
 	}
 
+	override fun canRefresh() = app.settings.isInternetConnectionAvailable
+
 	@Suppress("DEPRECATION") // AsyncTask, needs migration
 	override fun cancel(key: GalleryKey) {
 		if (key !is GalleryKey.Location) {

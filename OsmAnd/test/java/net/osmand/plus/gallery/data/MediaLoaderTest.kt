@@ -18,6 +18,9 @@ class MediaLoaderTest {
 
 	private class CountingDelegate(val results: ArrayDeque<MediaHolder>) : MediaLoadDelegate {
 		var loads = 0
+		var online = true
+
+		override fun canRefresh() = online
 
 		override fun load(
 			key: GalleryKey, onStarted: () -> Unit, onResult: (MediaHolder) -> Unit, onError: () -> Unit
@@ -104,5 +107,65 @@ class MediaLoaderTest {
 		loader.load(key, Recorder())
 		assertEquals(3, delegate.loads)
 		assertFalse(repository.get(key) == null)
+	}
+
+	@Test
+	fun anIncompleteResultIsKeptOfflineInsteadOfBeingLoadedAgain() {
+		val partial = Holder(isComplete = false)
+		val delegate = register(partial, Holder(isComplete = false))
+		loader.load(key, Recorder())
+
+		delegate.online = false
+		val offline = Recorder()
+		loader.load(key, offline)
+
+		assertEquals(1, delegate.loads)
+		assertSame(partial, offline.loaded.single())
+		assertSame(partial, repository.get(key))
+	}
+
+	@Test
+	fun anIncompleteResultIsLoadedAgainWhenTheConnectionReturns() {
+		val full = Holder(isComplete = true)
+		val delegate = register(Holder(isComplete = false), full)
+		loader.load(key, Recorder())
+		delegate.online = false
+		loader.load(key, Recorder())
+
+		delegate.online = true
+		val online = Recorder()
+		loader.load(key, online)
+
+		assertEquals(2, delegate.loads)
+		assertSame(full, online.loaded.single())
+	}
+
+	@Test
+	fun aFirstLoadOfflineAsksTheDelegateOnceAndRetriesOnline() {
+		val delegate = register(Holder(isComplete = false), Holder(isComplete = true))
+		delegate.online = false
+
+		loader.load(key, Recorder())
+		loader.load(key, Recorder())
+		assertEquals(1, delegate.loads)
+
+		delegate.online = true
+		loader.load(key, Recorder())
+		assertEquals(2, delegate.loads)
+		assertTrue(repository.get(key)!!.isComplete)
+	}
+
+	@Test
+	fun reloadIgnoresTheCachedResultEvenOffline() {
+		val fromDisk = Holder(isComplete = false)
+		val delegate = register(Holder(isComplete = false), fromDisk)
+		loader.load(key, Recorder())
+		delegate.online = false
+
+		val reloaded = Recorder()
+		loader.reload(key, reloaded)
+
+		assertEquals(2, delegate.loads)
+		assertSame(fromDisk, reloaded.loaded.single())
 	}
 }
