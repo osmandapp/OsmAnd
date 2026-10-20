@@ -1844,6 +1844,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (rtl) {
 			dx = -dx;
 		}
+		if (mapActivity != null && mapActivity.getMapRouteInfoMenu().isVisible()) {
+			dx += (rtl ? tbw / 2 : tb.getPixWidth() - tbw / 2) - tb.getCenterPixelX();
+			dy += tbh / 2 - tb.getCenterPixelY();
+		}
 
 		tb.setPixelDimensions((int) (tbw * border), (int) (tbh * border));
 		tb.setCenterLocation(0.5f, 0.5f);
