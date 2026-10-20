@@ -38,7 +38,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	private String cachedFormattedRatio = null;
 
 	private boolean cachedTargetAltitudeMode;
-	private boolean forceUpdate; // becomes 'true' when widget state switched
+	private boolean forceUpdate; // becomes 'true' when widget state switched or the altitude units changed
 
 	public GlideTargetWidget(@NonNull MapActivity mapActivity, @NonNull GlideTargetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, WidgetType.GLIDE_TARGET, customId, widgetsPanel);
@@ -97,7 +97,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	@Override
 	public void copySettings(@NonNull ApplicationMode appMode, @Nullable String customId) {
 		copySettingsFromMode(appMode, appMode, customId);
-		// copySettingsFromMode keeps the Show icon setting only, so copy the Height setting here
+		// copySettingsFromMode does not copy the Height setting, so copy it here
 		ResizableWidgetState duplicateState = new ResizableWidgetState(app, customId, widgetType, getDefaultWidgetSize());
 		duplicateState.getWidgetSizePref().setModeValue(appMode, getWidgetSizePref().getModeValue(appMode));
 	}
