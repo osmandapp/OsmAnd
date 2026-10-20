@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
@@ -43,8 +45,11 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +57,7 @@ import java.util.Map;
 public class StorageMigrationFragment extends BaseFullScreenDialogFragment implements StorageMigrationListener {
 
 	private static final String TAG = StorageMigrationFragment.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(StorageMigrationFragment.class);
 
 	private static final String USED_ON_MAP_KEY = "used_on_map";
 	private static final String FILES_COUNT_KEY = "files_count";
@@ -269,7 +275,9 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 				for (Pair<String, Long> pair : errors.values()) {
 					size += pair.second;
 				}
-				spannable.append("\n").append(getString(R.string.files_failed, errors.size(), AndroidUtils.formatSize(app, size)));
+				String failed = getString(R.string.files_failed, errors.size(), AndroidUtils.formatSize(app, size));
+				spannable.append("\n").append(failed);
+				copyFilesDescr.setOnClickListener(v -> showFailedFilesDialog(failed));
 			}
 			if (!Algorithms.isEmpty(existingFiles)) {
 				long size = 0;
@@ -284,6 +292,19 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 		TextView warningInfo = copyFilesDescr.findViewById(android.R.id.title);
 		warningInfo.setSingleLine(false);
 		warningInfo.setText(spannable);
+	}
+
+	private void showFailedFilesDialog(@NonNull String title) {
+		List<String> lines = new ArrayList<>();
+		for (Map.Entry<String, Pair<String, Long>> entry : errors.entrySet()) {
+			lines.add(entry.getKey() + ": " + entry.getValue().first);
+		}
+		Collections.sort(lines);
+		new AlertDialog.Builder(requireActivity())
+				.setTitle(title)
+				.setMessage(TextUtils.join("\n\n", lines))
+				.setPositiveButton(R.string.shared_string_close, null)
+				.show();
 	}
 
 	private void setupFilesDescr() {
@@ -371,6 +392,9 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 		copyFinished = true;
 		this.errors = errors;
 		this.existingFiles = existingFiles;
+		for (Map.Entry<String, Pair<String, Long>> entry : errors.entrySet()) {
+			LOG.error("Could not copy " + entry.getKey() + ": " + entry.getValue().first);
+		}
 		generalProgress = (int) (filesSize.second / 1024);
 		if (sharedStorageMigration) {
 			app.getSettings().SHARED_STORAGE_MIGRATION_FINISHED.set(true);

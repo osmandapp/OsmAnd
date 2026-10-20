@@ -132,7 +132,7 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 				File outputDirectory = new File(newDirectory);
 				String error = copyFile(from.getDirectory(), to.getDirectory(), filePathWithoutStorage, fileName, outputDirectory, fileCopyListener);
 				if (error != null) {
-					errors.put(fileName, new Pair<>(error, fileLength));
+					errors.put(filePathWithoutStorage, new Pair<>(error, fileLength));
 				} else {
 					file.delete();
 				}
