@@ -11,7 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
-	<string name="cloud_file_name_too_long">File name is too long for this device, rename it in OsmAnd Cloud: %1$s</string>
+	<string name="cloud_file_name_too_long">File name is too long for this device, rename it in OsmAnd Cloud</string>
 	<string name="storage_directory_visible_external">Visible external storage</string>
 	<string name="eta_group_header">Estimated arrival time</string>
 	<string name="travel_speed">Travel speed</string>

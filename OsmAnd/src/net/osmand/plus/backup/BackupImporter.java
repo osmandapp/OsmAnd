@@ -160,7 +160,7 @@ class BackupImporter {
 			SettingsItemReader<? extends SettingsItem> reader = item.getReader();
 			if (reader != null) {
 				if (BackupUtils.isFileNameTooLong(remoteFile.getName())) {
-					item.getWarnings().add(app.getString(R.string.cloud_file_name_too_long, remoteFile.getName()));
+					item.getWarnings().add(app.getString(R.string.cloud_file_name_too_long));
 					LOG.error("Cloud file name is too long for the device: " + remoteFile.getName());
 					return;
 				}
