@@ -312,14 +312,21 @@ class RouteDataObject {
 		if (KAlgorithms.isEmpty(lang)) {
 			return names[region!!.nameTypeRule]
 		}
+		var enName: String? = null
 		for (k in names.keys()) {
-			if (region!!.routeEncodingRules.size > k && "name:$lang" == region!!.routeEncodingRules[k]?.getTag()) {
-				return names[k]
+			if (region!!.routeEncodingRules.size > k) {
+				val tag = region!!.routeEncodingRules[k]?.getTag()
+				if ("name:$lang" == tag) {
+					return names[k]
+				} else if ("name:en" == tag) {
+					enName = names[k]
+				}
 			}
 		}
 		val nmDef = names[region!!.nameTypeRule]
 		if (transliterate && !nmDef.isNullOrEmpty()) {
-			return KTransliterationHelper.transliterate(nmDef)
+			// a Latin name of the map (name:en, or the generator's romanisation) beats a transliteration
+			return if (!enName.isNullOrEmpty()) enName else KTransliterationHelper.transliterate(nmDef)
 		}
 		return nmDef
 	}
