@@ -199,7 +199,7 @@ public class AverageGlideComputer extends AverageValueComputer {
 	}
 
 	public static boolean areAltitudesEqual(@Nullable Double a1, @Nullable Double a2) {
-		return a1 == null && a2 == null || a1 != null && a2 != null && Math.abs(a1 - a2) > 0.01;
+		return a1 == null && a2 == null || a1 != null && a2 != null && Math.abs(a1 - a2) < 0.01;
 	}
 
 	private static class GlideLocation extends Location {

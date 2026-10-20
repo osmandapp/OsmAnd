@@ -58,7 +58,7 @@ public class AverageGlideWidgetInfoFragment extends BaseSimpleWidgetInfoFragment
 		modeDescription = view.findViewById(R.id.mode_description);
 		updateModeDescription();
 
-		timeIntervalCard = new TimeIntervalCard(requireMyActivity(), initialIntervalMillis);
+		timeIntervalCard = new TimeIntervalCard(requireMyActivity(), appMode, isUsedOnMap(), initialIntervalMillis);
 		ViewGroup cardContainer = view.findViewById(R.id.time_interval_card_container);
 		cardContainer.addView(timeIntervalCard.build(cardContainer.getContext()));
 	}
