@@ -200,8 +200,12 @@ public abstract class MapObject implements Comparable<MapObject> {
 					if (!Algorithms.isEmpty(nm)) {
 						return unzipContent(nm);
 					}
-					if (transliterate) {
-						return TransliterationHelper.transliterate(getName());
+				}
+				if (transliterate) {
+					// a Latin name of the map (name:en, or the generator's romanisation) beats a transliteration
+					String enName = getEnName(true);
+					if (!Algorithms.isEmpty(enName)) {
+						return enName;
 					}
 				}
 			}
