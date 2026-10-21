@@ -108,6 +108,9 @@ public class SearchUICoreCompatTest {
 
 	@AfterClass
 	public static void close() throws IOException {
+		if (!SearchCompat.enabled()) {
+			return;
+		}
 		MapPoiTypes.setDefault(new MapPoiTypes("src/test/resources/poi_types.xml"));
 		net.osmand.shared.osm.MapPoiTypes.Companion.setDefault(
 				new net.osmand.shared.osm.MapPoiTypes("src/test/resources/poi_types.xml"));
