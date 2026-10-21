@@ -163,6 +163,7 @@ public class SearchApisCompatTest {
 
 	@BeforeClass
 	public static void open() throws Exception {
+		SearchCompat.assumeEnabled();
 		setUpTypes();
 		for (File f : TestObf.searchFiles()) {
 			javaReaders.put(f.getName(), new BinaryMapIndexReader(new RandomAccessFile(f, "r"), f));
