@@ -2,15 +2,16 @@ package net.osmand.shared.binary
 
 import net.osmand.shared.data.Amenity
 import net.osmand.shared.data.MapObject
+import net.osmand.shared.data.RenderedObject
+import net.osmand.shared.osm.edit.EntityType
 import net.osmand.shared.routing.RouteDataObject
 import net.osmand.shared.util.KAlgorithms
 
 /**
  * How an osm id is packed into an obf id, and which tags the indexer treats as names or as ids.
  *
- * A copy of the part of `ObfConstants` in OsmAnd-java that a device needs; the rest of it - the osm
- * url helpers, `EntityType` and everything taking a `RenderedObject` or an `Entity` - belongs to
- * the editing and indexing code and stays there.
+ * A copy of the part of `ObfConstants` in OsmAnd-java that a device needs; the rest of it -
+ * everything taking an `Entity` - belongs to the editing and indexing code and stays there.
  *
  * The packing is what the map creator does on the way in: a node id is shifted left by one, a way
  * id by one with the low bit set, and a relation id is shifted further and marked with
@@ -45,15 +46,48 @@ object ObfConstants {
 		return osmId
 	}
 
+	fun getOsmUrlForId(mapObject: MapObject): String {
+		val type = getOsmEntityType(mapObject)
+		if (type != null) {
+			val osmId = getOsmObjectId(mapObject)
+			return "https://www.openstreetmap.org/" + type.name.lowercase() + "/" + osmId
+		}
+		return ""
+	}
+
+	fun createMapObjectIdFromCleanOsmId(osmId: Long, type: EntityType?): Long {
+		if (type == null) {
+			return osmId
+		}
+		return when (type) {
+			EntityType.NODE -> osmId shl MapObject.AMENITY_ID_RIGHT_SHIFT
+			EntityType.WAY -> (osmId shl MapObject.AMENITY_ID_RIGHT_SHIFT) + 1
+			EntityType.RELATION -> RELATION_BIT + ((osmId shl SHIFT_ID) shl DUPLICATE_SPLIT)
+			else -> osmId
+		}
+	}
+
 	fun getOsmObjectId(obj: MapObject): Long {
 		var originalId = -1L
-		val id = obj.getId()
+		var id = obj.getId()
 		if (id != null) {
+			if (obj is RenderedObject) {
+				id = shiftRenderedObjectId(id)
+			}
 			originalId = getOsmIdFromMapObjectId(id)
 		}
 		return originalId
 	}
 
+	private fun shiftRenderedObjectId(id: Long): Long {
+		return if (isIdFromPropagatedNode(id shr 1) || isIdFromRelation(id shr 1)) {
+			id shr 1
+		} else {
+			id shr SHIFT_ID
+		}
+	}
+
+	// Use getOsmObjectId(MapObject) for RenderedObject
 	// Doesn't work correctly for some TransportStop (stop.getId() = 16055353830 results in osmId 8027676915 which does not exist)
 	// https://www.openstreetmap.org/node/988560310
 	fun getOsmIdFromMapObjectId(id: Long): Long {
@@ -88,6 +122,49 @@ object ObfConstants {
 			return 0
 		}
 		return getOsmId(obj.getId() shr 1)
+	}
+
+	fun getOsmEntityType(obj: MapObject): EntityType? {
+		if (isOsmUrlAvailable(obj)) {
+			val id = obj.getId()!!
+			val originalId = id shr 1
+			if (obj is RenderedObject && isIdFromPropagatedNode(originalId)) {
+				return EntityType.WAY
+			}
+			if (isIdFromPropagatedNode(id)) {
+				return EntityType.WAY
+			}
+			val relationShift = 1L shl 41
+			return if (originalId > relationShift) {
+				EntityType.RELATION
+			} else {
+				if (id % 2 == MapObject.WAY_MODULO_REMAINDER.toLong()) EntityType.WAY else EntityType.NODE
+			}
+		}
+		return null
+	}
+
+	fun getPrintTags(renderedObject: RenderedObject): String {
+		val s = StringBuilder()
+		for ((key, value) in renderedObject.getTags()) {
+			val keyEmpty = KAlgorithms.isEmpty(key)
+			val valueEmpty = KAlgorithms.isEmpty(value)
+			val bothPresent = !keyEmpty && !valueEmpty
+			val anyPresent = !keyEmpty || !valueEmpty
+			if (!keyEmpty) {
+				s.append(key)
+			}
+			if (bothPresent) {
+				s.append(":")
+			}
+			if (!valueEmpty) {
+				s.append(value)
+			}
+			if (anyPresent) {
+				s.append(" ")
+			}
+		}
+		return s.toString().trim { it <= ' ' }
 	}
 
 	fun isOsmUrlAvailable(obj: MapObject): Boolean {
