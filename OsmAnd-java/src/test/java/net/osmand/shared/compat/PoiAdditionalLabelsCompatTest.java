@@ -9,6 +9,7 @@ import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,12 +27,23 @@ import java.util.Map;
  */
 public class PoiAdditionalLabelsCompatTest {
 
+	private static final String POI_TYPES = "src/test/resources/poi_types.xml";
 	private static final net.osmand.shared.osm.PoiAdditionalLabels COPY = net.osmand.shared.osm.PoiAdditionalLabels.INSTANCE;
 
 	@BeforeClass
 	public static void setUp() throws Exception {
 		SearchCompat.assumeEnabled();
 		SearchApisCompatTest.setUpTypes();
+	}
+
+	@AfterClass
+	public static void reset() {
+		if (!SearchCompat.enabled()) {
+			return;
+		}
+		// the names of the poi types were this test's
+		MapPoiTypes.setDefault(new MapPoiTypes(POI_TYPES));
+		net.osmand.shared.osm.MapPoiTypes.Companion.setDefault(new net.osmand.shared.osm.MapPoiTypes(POI_TYPES));
 	}
 
 	@Test
