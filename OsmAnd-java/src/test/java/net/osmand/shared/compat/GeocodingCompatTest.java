@@ -105,10 +105,17 @@ public class GeocodingCompatTest {
 	private static int inCopyOrder;
 	private static int namedRoads;
 
-	/** Common words with the names of the regions, as the app has them and the tests after this one need. */
 	@BeforeClass
-	public static void setUp() throws Exception {
+	public static void open() throws Exception {
 		SearchCompat.assumeEnabled();
+		setUp();
+	}
+
+	/**
+	 * Common words with the names of the regions, as the app has them and the tests after this one need;
+	 * GeocodingBenchmarkTest calls it without OSMAND_SEARCH_COMPAT.
+	 */
+	public static void setUp() throws Exception {
 		SearchApisCompatTest.setUpTypes();
 		assertTrue("the regions in the common words of java", CommonWords.getInstance().getFrequentlyUsed("gelderland") >= 0);
 		assertTrue("the regions in the common words of the copy",
@@ -116,6 +123,12 @@ public class GeocodingCompatTest {
 	}
 
 	@AfterClass
+	public static void reset() {
+		if (SearchCompat.enabled()) {
+			close();
+		}
+	}
+
 	public static void close() {
 		MapPoiTypes.setDefault(new MapPoiTypes(POI_TYPES));
 		net.osmand.shared.osm.MapPoiTypes.Companion.setDefault(new net.osmand.shared.osm.MapPoiTypes(POI_TYPES));
