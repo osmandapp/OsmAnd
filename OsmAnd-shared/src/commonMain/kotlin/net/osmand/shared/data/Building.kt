@@ -1,6 +1,8 @@
 package net.osmand.shared.data
 
 import net.osmand.shared.util.KAlgorithms
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
 /**
  * A house of a [Street], or a range of them when the address section stores an interpolation line
@@ -21,6 +23,8 @@ class Building : MapObject() {
 	enum class BuildingInterpolation(private val v: Int) {
 		ALL(-1), EVEN(-2), ODD(-3), ALPHABETIC(-4);
 
+		@OptIn(ExperimentalObjCName::class)
+		@ObjCName("getInterpolationValue")
 		fun getValue(): Int = v
 
 		companion object {

@@ -2,6 +2,8 @@ package net.osmand.shared.osm
 
 import net.osmand.shared.map.WorldRegion
 import net.osmand.shared.util.KAlgorithms
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
 /**
  * Labels of additional property values written as "Name: value" in phrases.xml ("Fridge: yes",
@@ -12,6 +14,8 @@ import net.osmand.shared.util.KAlgorithms
  */
 object PoiAdditionalLabels {
 
+	@OptIn(ExperimentalObjCName::class)
+	@ObjCName("yes")
 	const val YES = "yes"
 
 	// OSM values of a property state ("smoking=no"); a value outside it is an option ("diesel", "gynaecology")
