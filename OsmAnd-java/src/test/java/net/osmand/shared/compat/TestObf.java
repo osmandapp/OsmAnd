@@ -8,11 +8,16 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
 
 /**
  * The obf files the routing tests ship with, opened once, and the roads in them - real input for the
@@ -53,6 +58,46 @@ public final class TestObf {
 		if (routing != null) {
 			Arrays.sort(routing);
 			files.addAll(Arrays.asList(routing));
+		}
+		return files;
+	}
+
+	/**
+	 * The obf files of the search tests, {@code src/test/resources/search/*.obf.gz}, which
+	 * {@code collectTestResources} copies out of the resources repository before the tests run:
+	 * small extracts of real maps, each with the address section its search case needs. They are
+	 * unpacked into {@code build/search-obf} and unpacked again only when the archive is newer.
+	 * Empty when {@code OSMAND_OBF_CORPUS} is set, so that the corpus is all a test reads.
+	 */
+	public static List<File> searchFiles() throws IOException {
+		List<File> files = new ArrayList<>();
+		String corpus = System.getenv("OSMAND_OBF_CORPUS");
+		File[] archives = new File("src/test/resources/search").listFiles((dir, name) -> name.endsWith(".obf.gz"));
+		if ((corpus != null && !corpus.isEmpty()) || archives == null) {
+			return files;
+		}
+		Arrays.sort(archives);
+		File dir = new File("build/search-obf");
+		if (!dir.isDirectory() && !dir.mkdirs()) {
+			throw new IOException("Cannot create " + dir);
+		}
+		for (File archive : archives) {
+			String name = archive.getName();
+			File obf = new File(dir, name.substring(0, name.length() - ".gz".length()));
+			if (!obf.exists() || obf.lastModified() < archive.lastModified()) {
+				File tmp = new File(dir, obf.getName() + ".tmp");
+				try (InputStream in = new GZIPInputStream(new FileInputStream(archive));
+					 OutputStream out = new FileOutputStream(tmp)) {
+					in.transferTo(out);
+				}
+				if (obf.exists() && !obf.delete()) {
+					throw new IOException("Cannot replace " + obf);
+				}
+				if (!tmp.renameTo(obf)) {
+					throw new IOException("Cannot move " + tmp + " to " + obf);
+				}
+			}
+			files.add(obf);
 		}
 		return files;
 	}

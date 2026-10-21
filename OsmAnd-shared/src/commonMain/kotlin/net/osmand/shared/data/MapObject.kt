@@ -184,7 +184,7 @@ abstract class MapObject : Comparable<MapObject> {
 		copyNames(s, true, true, false)
 	}
 
-	fun getName(lang: String?): String = getName(lang, false)
+	open fun getName(lang: String?): String = getName(lang, false)
 
 	fun getName(lang: String?, transliterate: Boolean): String {
 		if (lang != null && lang.isNotEmpty()) {
