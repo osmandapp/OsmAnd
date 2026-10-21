@@ -95,7 +95,7 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 			gpxItem.locationOnMap = selectedPoint;
 			settings.setMapLocationToShow(gpxItem.locationStart.getLat(), gpxItem.locationStart.getLon(),
 					settings.getLastKnownMapZoom(),
-					new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+					new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.group.getGpxName()),
 					false,
 					gpxItem);
 

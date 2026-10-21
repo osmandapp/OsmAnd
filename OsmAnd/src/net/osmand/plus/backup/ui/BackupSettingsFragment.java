@@ -400,4 +400,9 @@ public class BackupSettingsFragment extends BaseFullScreenFragment implements On
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "backup_settings";
+	}
 }

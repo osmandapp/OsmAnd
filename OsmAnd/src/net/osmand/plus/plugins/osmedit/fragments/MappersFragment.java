@@ -340,4 +340,9 @@ public class MappersFragment extends BaseFullScreenFragment {
 			this.count = count;
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "mappers";
+	}
 }

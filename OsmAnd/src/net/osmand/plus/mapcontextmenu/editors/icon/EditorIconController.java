@@ -22,10 +22,12 @@ import net.osmand.plus.card.icon.CircleIconPaletteElements;
 import net.osmand.plus.card.icon.IconsPaletteElements;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -50,6 +52,13 @@ public class EditorIconController extends BaseDialogController {
 	public static final String SYMBOLS_KEY = "symbols";
 	public static final String ACTIVITIES_KEY = "activities";
 	public static final String TRAVEL_KEY = "travel";
+
+	// Asset groups merged into a POI category with a different key; other groups use their own key
+	private static final Map<String, String> GROUP_POI_CATEGORY_KEYS = Map.of(
+			"transport", "transportation",
+			"nautical", "seamark",
+			"industrial", "man_made"
+	);
 
 	protected final List<IconsCategory> categories = new ArrayList<>();
 	protected IconsCategory selectedCategory;
@@ -76,10 +85,12 @@ public class EditorIconController extends BaseDialogController {
 	}
 
 	protected void initIconCategories() {
+		Map<String, List<String>> assetGroups = readAssetIconGroups();
+		Map<String, List<String>> standaloneAssetGroups = extractStandaloneGroups(assetGroups);
 		initLastUsedCategory();
-		initAssetsCategories();
+		initStandaloneAssetCategories(standaloneAssetGroups);
 		initActivitiesCategory();
-		initPoiCategories();
+		initPoiCategories(assetGroups);
 		sortCategories();
 	}
 
@@ -90,11 +101,15 @@ public class EditorIconController extends BaseDialogController {
 		}
 	}
 
-	protected void initAssetsCategories() {
-		try {
-			categories.addAll(readCategoriesFromAssets(Arrays.asList(SPECIAL_KEY, SYMBOLS_KEY, TRAVEL_KEY)));
-		} catch (JSONException e) {
-			LOG.error(e.getMessage());
+	protected void initStandaloneAssetCategories(@NonNull Map<String, List<String>> standaloneAssetGroups) {
+		for (Map.Entry<String, List<String>> entry : standaloneAssetGroups.entrySet()) {
+			String categoryKey = entry.getKey();
+			List<String> iconKeys = entry.getValue();
+			if (!Algorithms.isEmpty(iconKeys)) {
+				String translatedName = AndroidUtils.getIconStringPropertyName(app, categoryKey);
+				boolean isTopCategory = categoryKey.equals(SPECIAL_KEY);
+				categories.add(new IconsCategory(categoryKey, translatedName, iconKeys, isTopCategory));
+			}
 		}
 	}
 
@@ -114,8 +129,19 @@ public class EditorIconController extends BaseDialogController {
 		}
 	}
 
-	protected void initPoiCategories() {
-		categories.addAll(readOriginalPoiCategories());
+	protected void initPoiCategories(@NonNull Map<String, List<String>> assetGroups) {
+		List<IconsCategory> poiCategories = readOriginalPoiCategories();
+		mergeMissingAssetIcons(poiCategories, assetGroups);
+		for (IconsCategory poiCategory : poiCategories) {
+			// categories are identified by key, so a POI category with a taken key (like "travel") joins that category
+			IconsCategory category = CollectionUtils.searchElementWithCondition(categories,
+					c -> c.getKey().equals(poiCategory.getKey()));
+			if (category != null) {
+				CollectionUtils.addAllIfNotContains(category.getIconKeys(), poiCategory.getIconKeys());
+			} else {
+				categories.add(poiCategory);
+			}
+		}
 	}
 
 	@NonNull
@@ -154,39 +180,31 @@ public class EditorIconController extends BaseDialogController {
 	}
 
 	@NonNull
-	private List<IconsCategory> readCategoriesFromAssets(@NonNull Collection<String> categoriesKeys) throws JSONException {
-		String categoriesJsonStr = null;
-		List<IconsCategory> categories = new ArrayList<>();
-		try {
-			InputStream is = app.getAssets().open(POI_CATEGORIES_FILE);
-			categoriesJsonStr = Algorithms.readFromInputStream(is).toString();
-		} catch (IOException e) {
-			LOG.error("Failed to parse JSON", e);
-		}
-		if (categoriesJsonStr != null) {
-			JSONObject obj = new JSONObject(categoriesJsonStr);
+	protected Map<String, List<String>> readAssetIconGroups() {
+		Map<String, List<String>> assetGroups = new LinkedHashMap<>();
+		try (InputStream is = app.getAssets().open(POI_CATEGORIES_FILE)) {
+			JSONObject obj = new JSONObject(Algorithms.readFromInputStream(is).toString());
 			JSONObject categoriesJson = obj.getJSONObject("categories");
-			for (int i = 0; i < categoriesJson.length(); i++) {
-				JSONArray names = categoriesJson.names();
-				if (names != null) {
-					String categoryKey = names.get(i).toString();
-					if (categoriesKeys.contains(categoryKey)) {
-						JSONObject categoryJson = categoriesJson.getJSONObject(categoryKey);
-						JSONArray iconJsonArray = categoryJson.getJSONArray("icons");
-
-						List<String> iconKeys = new ArrayList<>();
-						for (int j = 0; j < iconJsonArray.length(); j++) {
-							iconKeys.add(iconJsonArray.getString(j));
-						}
-						if (!Algorithms.isEmpty(iconKeys)) {
-							String translatedName = AndroidUtils.getIconStringPropertyName(app, categoryKey);
-							categories.add(new IconsCategory(categoryKey, translatedName, iconKeys, categoryKey.equals(SPECIAL_KEY)));
-						}
-					}
+			JSONArray names = categoriesJson.names();
+			for (int i = 0; names != null && i < names.length(); i++) {
+				String groupKey = names.getString(i);
+				JSONArray iconJsonArray = categoriesJson.getJSONObject(groupKey).getJSONArray("icons");
+				List<String> iconKeys = new ArrayList<>();
+				for (int j = 0; j < iconJsonArray.length(); j++) {
+					iconKeys.add(iconJsonArray.getString(j));
 				}
+				assetGroups.put(groupKey, iconKeys);
 			}
+		} catch (IOException | JSONException e) {
+			LOG.error("Failed to read " + POI_CATEGORIES_FILE, e);
+			assetGroups.clear();
 		}
-		return categories;
+		return assetGroups;
+	}
+
+	@NonNull
+	protected static Map<String, List<String>> extractStandaloneGroups(@NonNull Map<String, List<String>> assetGroups) {
+		return CollectionUtils.extractEntries(assetGroups, SPECIAL_KEY, SYMBOLS_KEY, TRAVEL_KEY);
 	}
 
 	@NonNull
@@ -206,6 +224,45 @@ public class EditorIconController extends BaseDialogController {
 			}
 		}
 		return categories;
+	}
+
+	private void mergeMissingAssetIcons(@NonNull List<IconsCategory> poiCategories,
+	                                    @NonNull Map<String, List<String>> assetGroups) {
+		Set<String> poiIconKeys = new HashSet<>();
+		Map<String, IconsCategory> poiCategoriesByKey = new HashMap<>();
+		for (IconsCategory category : poiCategories) {
+			poiIconKeys.addAll(category.getIconKeys());
+			poiCategoriesByKey.put(category.getKey(), category);
+		}
+		for (Map.Entry<String, List<String>> entry : assetGroups.entrySet()) {
+			String groupKey = entry.getKey();
+			Set<String> missingIconKeys = new LinkedHashSet<>();
+			for (String iconKey : entry.getValue()) {
+				if (!poiIconKeys.contains(iconKey) && RenderingIcons.containsBigIcon(iconKey)) {
+					missingIconKeys.add(iconKey);
+				}
+			}
+			if (missingIconKeys.isEmpty()) {
+				continue;
+			}
+			String categoryKey = GROUP_POI_CATEGORY_KEYS.getOrDefault(groupKey, groupKey);
+			if (!poiCategoriesByKey.containsKey(categoryKey)) {
+				categoryKey = groupKey;
+			}
+			IconsCategory category = poiCategoriesByKey.get(categoryKey);
+			if (category == null) {
+				String translatedName = AndroidUtils.getIconStringPropertyName(app, groupKey);
+				category = new IconsCategory(groupKey, translatedName, new ArrayList<>());
+				poiCategories.add(category);
+				poiCategoriesByKey.put(groupKey, category);
+			}
+			List<String> iconKeys = category.getIconKeys();
+			for (String iconKey : missingIconKeys) {
+				if (!iconKeys.contains(iconKey)) {
+					iconKeys.add(iconKey);
+				}
+			}
+		}
 	}
 
 	public void setSelectedCategory(@NonNull IconsCategory category) {

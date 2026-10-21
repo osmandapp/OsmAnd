@@ -155,4 +155,9 @@ public class LiveMonitoringFragment extends BaseSettingsFragment {
 		liveMonitoringBuffer.setIcon(getPersistentPrefIcon(R.drawable.ic_action_time_span));
 		liveMonitoringBuffer.setDescription(R.string.live_monitoring_max_interval_to_send_desrc);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "live_monitoring_settings";
+	}
 }

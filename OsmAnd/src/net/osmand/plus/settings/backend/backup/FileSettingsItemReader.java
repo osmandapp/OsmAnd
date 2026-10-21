@@ -3,6 +3,7 @@ package net.osmand.plus.settings.backend.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -60,7 +61,7 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 			return savedFile;
 		}
 
-		File tempFile = FileUtils.getFileWithDownloadExtension(savedFile);
+		File tempFile = new File(BackupUtils.appendToFileName(savedFile.getAbsolutePath(), IndexConstants.DOWNLOAD_EXT));
 		OutputStream output = new FileOutputStream(tempFile);
 		byte[] buffer = new byte[SettingsHelper.BUFFER];
 		int count;
