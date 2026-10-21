@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -52,6 +53,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -351,7 +353,12 @@ public class PlanRouteFragment extends BaseFullScreenFragment implements OsmAndL
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.replace(InsetTarget.createLeftSideContainer(true, true, R.id.main_view).build());
-		collection.replace(InsetTarget.createLeftSideContainer(false, true, R.id.map_controls_container).build());
+		// In landscape the map controls are at the bottom of the full-height fragment, keep them above the navigation bar
+		collection.replace(InsetTarget.createCustomBuilder(R.id.map_controls_container)
+				.portraitSides()
+				.landscapeSides(InsetSide.RIGHT, InsetSide.BOTTOM)
+				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout())
+				.applyPadding(true));
 		return collection;
 	}
 
