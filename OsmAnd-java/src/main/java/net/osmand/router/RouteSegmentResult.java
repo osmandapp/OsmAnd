@@ -717,8 +717,12 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	public String getStreetName(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd) {
 		String streetName = getObject().getName(lang, transliterate);
-		if (Algorithms.isEmpty(streetName)) {
+		// a short connector named as the road we turn from ("turn left onto Skyline" while on Skyline)
+		// should be announced by the road it leads to
+		String nameBeforeTurn = Algorithms.isEmpty(streetName) ? null : getNameBeforeTurn(lang, transliterate, list, routeInd);
+		if (Algorithms.isEmpty(streetName) || streetName.equals(nameBeforeTurn)) {
 			// try to get street name from following segments
+			String nextName = null;
 			float distanceFromTurn = getDistance();
 			boolean hasNewTurn = false;
 			for (int n = routeInd + 1; n + 1 < list.size(); n++) {
@@ -726,17 +730,56 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 				if (s1.getTurnType() != null) {
 					hasNewTurn = true;
 				}
-				if (!hasNewTurn && distanceFromTurn < DIST_TO_SEEK_STREET_NAME
-						&& Algorithms.isEmpty(streetName)) {
-					streetName = s1.getObject().getName(lang, transliterate);
+				if (!hasNewTurn && distanceFromTurn < DIST_TO_SEEK_STREET_NAME) {
+					String name = s1.getObject().getName(lang, transliterate);
+					if (!Algorithms.isEmpty(name) && !name.equals(nameBeforeTurn)) {
+						nextName = name;
+						// a short named piece (square, bridge) inside the same road is not the road we turn onto
+						if (nameBeforeTurn != null && returnsToName(lang, transliterate, list, n, nameBeforeTurn)) {
+							nextName = null;
+							break;
+						}
+					}
 				}
 				distanceFromTurn += s1.getDistance();
-				if (distanceFromTurn > DIST_TO_SEEK_STREET_NAME || !Algorithms.isEmpty(streetName)) {
+				if (distanceFromTurn > DIST_TO_SEEK_STREET_NAME || nextName != null) {
 					break;
 				}
 			}
+			if (nextName != null) {
+				streetName = nextName;
+			}
 		}
 		return streetName;
+	}
+
+	private static boolean returnsToName(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd,
+	                                     String name) {
+		String pieceName = list.get(routeInd).getObject().getName(lang, transliterate);
+		float distance = 0;
+		for (int n = routeInd; n < list.size() && distance < DIST_TO_SEEK_STREET_NAME; n++) {
+			String nm = list.get(n).getObject().getName(lang, transliterate);
+			if (!Algorithms.isEmpty(nm) && !nm.equals(pieceName)) {
+				return nm.equals(name);
+			}
+			distance += list.get(n).getDistance();
+		}
+		return false;
+	}
+
+	private static String getNameBeforeTurn(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd) {
+		if (routeInd < 0 || routeInd >= list.size()) {
+			return null;
+		}
+		int turnInd = routeInd;
+		while (turnInd > 0 && list.get(turnInd).getTurnType() == null) {
+			turnInd--;
+		}
+		TurnType turn = list.get(turnInd).getTurnType();
+		if (turnInd == 0 || turn == null || turn.isRoundAbout()) {
+			return null;
+		}
+		return list.get(turnInd - 1).getObject().getName(lang, transliterate);
 	}
 
 	public String getRef(String lang, boolean transliterate) {

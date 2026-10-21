@@ -21,6 +21,7 @@ public class TestEntry {
     private boolean ignoreNative;
     private Map<String, String> expectedResults;
     private Map<String, String> expectedExits;
+    private Map<String, String> expectedStreetNames;
     private Map<String, String> params;
     private int planRoadDirection;
     private boolean shortWay;
@@ -97,6 +98,10 @@ public class TestEntry {
 
     public Map<String, String> getExpectedExits() {
         return expectedExits;
+    }
+
+    public Map<String, String> getExpectedStreetNames() {
+        return expectedStreetNames;
     }
 
     public void setExpectedResults(Map<String, String> expectedResults) {

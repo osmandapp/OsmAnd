@@ -659,13 +659,17 @@ class RouteSegmentResult : StringExternalizable<RouteDataBundle> {
 		return destinationName
 	}
 
-	/** The street the route follows, looking a little ahead when this segment has no name. */
+	/** The street the route follows, looking a little ahead when this segment has no name or keeps the name of the road before the turn. */
 	fun getStreetName(
 		lang: String?, transliterate: Boolean, list: List<RouteSegmentResult>, routeInd: Int
 	): String? {
 		var streetName = getObject().getName(lang, transliterate)
-		if (KAlgorithms.isEmpty(streetName)) {
+		// a short connector named as the road we turn from ("turn left onto Skyline" while on Skyline)
+		// should be announced by the road it leads to
+		val nameBeforeTurn = if (KAlgorithms.isEmpty(streetName)) null else getNameBeforeTurn(lang, transliterate, list, routeInd)
+		if (KAlgorithms.isEmpty(streetName) || streetName == nameBeforeTurn) {
 			// try to get street name from following segments
+			var nextName: String? = null
 			var distanceFromTurn = getDistance()
 			var hasNewTurn = false
 			var n = routeInd + 1
@@ -674,17 +678,62 @@ class RouteSegmentResult : StringExternalizable<RouteDataBundle> {
 				if (s1.getTurnType() != null) {
 					hasNewTurn = true
 				}
-				if (!hasNewTurn && distanceFromTurn < DIST_TO_SEEK_STREET_NAME && KAlgorithms.isEmpty(streetName)) {
-					streetName = s1.getObject().getName(lang, transliterate)
+				if (!hasNewTurn && distanceFromTurn < DIST_TO_SEEK_STREET_NAME) {
+					val name = s1.getObject().getName(lang, transliterate)
+					if (!KAlgorithms.isEmpty(name) && name != nameBeforeTurn) {
+						nextName = name
+						// a short named piece (square, bridge) inside the same road is not the road we turn onto
+						if (nameBeforeTurn != null && returnsToName(lang, transliterate, list, n, nameBeforeTurn)) {
+							nextName = null
+							break
+						}
+					}
 				}
 				distanceFromTurn += s1.getDistance()
-				if (distanceFromTurn > DIST_TO_SEEK_STREET_NAME || !KAlgorithms.isEmpty(streetName)) {
+				if (distanceFromTurn > DIST_TO_SEEK_STREET_NAME || nextName != null) {
 					break
 				}
 				n++
 			}
+			if (nextName != null) {
+				streetName = nextName
+			}
 		}
 		return streetName
+	}
+
+	private fun returnsToName(
+		lang: String?, transliterate: Boolean, list: List<RouteSegmentResult>, routeInd: Int, name: String
+	): Boolean {
+		val pieceName = list[routeInd].getObject().getName(lang, transliterate)
+		var distance = 0f
+		var n = routeInd
+		while (n < list.size && distance < DIST_TO_SEEK_STREET_NAME) {
+			val nm = list[n].getObject().getName(lang, transliterate)
+			if (!KAlgorithms.isEmpty(nm) && nm != pieceName) {
+				return nm == name
+			}
+			distance += list[n].getDistance()
+			n++
+		}
+		return false
+	}
+
+	private fun getNameBeforeTurn(
+		lang: String?, transliterate: Boolean, list: List<RouteSegmentResult>, routeInd: Int
+	): String? {
+		if (routeInd < 0 || routeInd >= list.size) {
+			return null
+		}
+		var turnInd = routeInd
+		while (turnInd > 0 && list[turnInd].getTurnType() == null) {
+			turnInd--
+		}
+		val turn = list[turnInd].getTurnType()
+		if (turnInd == 0 || turn == null || turn.isRoundAbout()) {
+			return null
+		}
+		return list[turnInd - 1].getObject().getName(lang, transliterate)
 	}
 
 	fun getRef(lang: String?, transliterate: Boolean): String? =
