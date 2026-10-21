@@ -656,4 +656,9 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "add_coordinate_format";
+	}
 }

@@ -98,8 +98,8 @@
 							android:id="@+id/direction_icon"
 							android:layout_width="@dimen/directionIconSize"
 							android:layout_height="@dimen/directionIconSize"
-							android:layout_gravity="center_vertical"
-							android:layout_marginTop="1sp"
+							android:layout_gravity="top"
+							android:layout_marginTop="3.5sp"
 							tools:src="@drawable/ic_direction_arrow" />
 
 						<androidx.constraintlayout.widget.ConstraintLayout

@@ -143,4 +143,9 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "file_import_settings";
+	}
 }

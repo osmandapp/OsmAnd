@@ -169,7 +169,7 @@ public class RearrangeItemHolder extends ViewHolder implements UnmovableItem {
 			case MAP_CONTEXT_MENU_AUDIO_NOTE:
 			case MAP_CONTEXT_MENU_VIDEO_NOTE:
 			case MAP_CONTEXT_MENU_PHOTO_NOTE:
-				return R.string.audionotes_plugin_name;
+				return R.string.shared_string_media;
 			case CONTOUR_LINES:
 			case TERRAIN_ID:
 				return R.string.srtm_plugin_name;

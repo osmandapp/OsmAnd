@@ -169,4 +169,9 @@ public class SecondSplashScreenFragment extends BaseFullScreenFragment {
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "second_splash_screen";
+	}
 }

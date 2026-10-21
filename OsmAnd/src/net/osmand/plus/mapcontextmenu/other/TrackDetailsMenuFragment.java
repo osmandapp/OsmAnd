@@ -315,4 +315,9 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "track_details_menu";
+	}
 }

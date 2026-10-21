@@ -499,4 +499,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
 		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (T) fragment : null;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "download";
+	}
 }

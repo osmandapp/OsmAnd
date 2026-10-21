@@ -169,4 +169,8 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 		return ColorUtilities.getActivityBgColorId(isNightMode());
 	}
 
+	@Override
+	public String getAnalyticsScreen() {
+		return "main_external_input_devices";
+	}
 }

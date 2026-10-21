@@ -80,6 +80,7 @@ public class BaseDetailsObjectCompatTest {
 
 	@BeforeClass
 	public static void read() throws Exception {
+		SearchCompat.assumeEnabled();
 		String corpus = System.getenv("OSMAND_OBF_CORPUS");
 		Assume.assumeTrue("a run over OSMAND_OBF_CORPUS leaves the search files out", corpus == null || corpus.isEmpty());
 		if (SearchApisCompatTest.poiPhrases.isEmpty()) {
