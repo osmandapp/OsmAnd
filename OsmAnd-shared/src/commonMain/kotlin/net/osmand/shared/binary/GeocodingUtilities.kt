@@ -101,7 +101,7 @@ class GeocodingUtilities {
 		@JvmField
 		var streetName: String? = null
 
-		// justification
+		// 2nd step, findStreetAndBuildings: the street, the building and the city
 		@JvmField
 		var building: Building? = null
 
@@ -192,7 +192,11 @@ class GeocodingUtilities {
 		val listR = ArrayList<RouteSegmentPoint>()
 		// we allow duplications to search in both files for boundary regions
 		// here we use same code as for normal routing, so we take into account current profile and sort by priority & distance
-		rp.findRouteSegment(lat, lon, ctx, listR, false, true)
+		val best = rp.findRouteSegment(lat, lon, ctx, listR, false, true)
+		if (best != null) {
+			best.others = null
+			listR.add(0, best)
+		}
 		var distSquare = 0.0
 		val streetNames = HashMap<String, MutableList<RouteRegion>>()
 		for (p in listR) {
@@ -240,7 +244,7 @@ class GeocodingUtilities {
 		return words // keep original order ("NC 42" - search by "NC" not by "42")
 	}
 
-	private fun matchStreetName(s1: String?, s2: String?, matchWithCommonWords: Boolean): Boolean {
+	private fun matchStreetName(s1: String?, s2: String?, matchWithCommonWords: Boolean, cache: StreetsCache?): Boolean {
 		if (s1 == null || s2 == null || s1.isEmpty() || s2.isEmpty()) {
 			return false
 		}
@@ -248,33 +252,99 @@ class GeocodingUtilities {
 			return true
 		}
 
-		// Strip dashes before split to match "NC 42" == "NC-42"
-		val undashed1 = s1.replace("-", " ")
-		val undashed2 = s2.replace("-", " ")
-
-		// sorted to compare the words whatever their order
-		var s1words = prepareStreetName(undashed1, false)
-		var s2words = prepareStreetName(undashed2, false)
-		s1words.sort()
-		s2words.sort()
-		if (s1words.isNotEmpty() && s1words == s2words) {
+		var s1words = sortedWords(s1, false, cache)
+		if (s1words.isNotEmpty() && s1words == sortedWords(s2, false, cache)) {
 			return true
 		}
 
 		if (matchWithCommonWords) {
-			s1words = prepareStreetName(undashed1, true)
-			s2words = prepareStreetName(undashed2, true)
-			s1words.sort()
-			s2words.sort()
-			return s1words.isNotEmpty() && s1words == s2words
+			s1words = sortedWords(s1, true, cache)
+			return s1words.isNotEmpty() && s1words == sortedWords(s2, true, cache)
 		}
 
 		return false
 	}
 
-	fun justifyReverseGeocodingSearch(
+	private fun sortedWords(name: String, includeCommonWords: Boolean, cache: StreetsCache?): List<String> {
+		val key = if (includeCommonWords) "+$name" else "-$name"
+		val cached = cache?.words?.get(key)
+		if (cached != null) {
+			return cached
+		}
+		// Strip dashes before split to match "NC 42" == "NC-42"
+		val words = prepareStreetName(name.replace("-", " "), includeCommonWords)
+		// the sort only brings both word lists to one order before equals(), plain string order is enough
+		words.sort()
+		cache?.words?.put(key, words)
+		return words
+	}
+
+	// the street with the name of the road in the address index and the buildings on it within
+	// DISTANCE_BUILDING_PROXIMITY of the point: buildings first, the street after them, the road
+	// itself when no street matches
+	fun findStreetAndBuildings(
 		road: GeocodingResult, reader: BinaryMapIndexReader,
 		knownMinBuildingDistance: Double, result: ResultMatcher<GeocodingResult>?
+	): MutableList<GeocodingResult> = findStreetAndBuildings(road, reader, knownMinBuildingDistance, result, null)
+
+	// the roads of one lookup lie within a few hundred metres of the point and many share the query word
+	// ("calle"): the name index is searched once per word around the point, and every street has its
+	// buildings loaded once
+	private class StreetsCache {
+
+		companion object {
+			const val MARGIN = 1000
+		}
+
+		private data class StreetsKey(val reader: BinaryMapIndexReader, val radius: Int, val word: String)
+
+		private val streets = HashMap<StreetsKey, List<Street>>()
+
+		// by identity: a street equals any street of its id
+		private val withBuildings = ArrayList<Street>()
+
+		val words = HashMap<String, List<String>>()
+
+		fun getStreets(
+			reader: BinaryMapIndexReader, word: String, radius: Int, point: KLatLon,
+			result: ResultMatcher<GeocodingResult>?
+		): List<Street> {
+			val key = StreetsKey(reader, radius, word)
+			val cached = streets[key]
+			if (cached != null) {
+				return cached
+			}
+			val found = ArrayList<Street>()
+			val req = SearchRequest.buildAddressByNameRequest(
+				object : ResultMatcher<MapObject> {
+					override fun publish(obj: MapObject): Boolean {
+						if (obj is Street) {
+							found.add(obj)
+						}
+						return false
+					}
+
+					override fun isCancelled(): Boolean = result != null && result.isCancelled()
+				}, word, KStringMatcherMode.CHECK_EQUALS_FROM_SPACE
+			)
+			req.setBBoxRadius(point.latitude, point.longitude, radius + MARGIN)
+			reader.searchAddressDataByName(req)
+			streets[key] = found
+			return found
+		}
+
+		fun addWithBuildings(street: Street): Boolean {
+			if (withBuildings.any { it === street }) {
+				return false
+			}
+			withBuildings.add(street)
+			return true
+		}
+	}
+
+	private fun findStreetAndBuildings(
+		road: GeocodingResult, reader: BinaryMapIndexReader,
+		knownMinBuildingDistance: Double, result: ResultMatcher<GeocodingResult>?, cache: StreetsCache?
 	): MutableList<GeocodingResult> {
 		var knownMinBuildingDistance = knownMinBuildingDistance
 		val streetsList = ArrayList<GeocodingResult>()
@@ -305,32 +375,27 @@ class GeocodingUtilities {
 			}
 			val req = SearchRequest.buildAddressByNameRequest(
 				object : ResultMatcher<MapObject> {
-					override fun publish(obj: MapObject): Boolean {
-						if (obj is Street && matchStreetName(road.streetName, obj.getName(), addCommonWordsFinal)) {
-							val searchPoint = road.searchPoint!!
-							val d = KMapUtils.getDistance(obj.getLocation()!!, searchPoint.latitude, searchPoint.longitude)
-							// double check to support old format
-							if (d < DISTANCE_STREET_NAME_PROXIMITY_BY_NAME) {
-								val rs = GeocodingResult(road)
-								rs.street = obj
-								// set connection point to sort
-								rs.connectionPoint = obj.getLocation()
-								rs.city = obj.getCity()
-								rs.dist = d
-								streetsList.add(rs)
-								return true
-							}
-							return false
-						}
-						return false
-					}
+					override fun publish(obj: MapObject): Boolean =
+						obj is Street && addStreet(road, obj, addCommonWordsFinal, streetsList, null)
 
 					override fun isCancelled(): Boolean = result != null && result.isCancelled()
 				}, longestWord, KStringMatcherMode.CHECK_EQUALS_FROM_SPACE
 			)
 			val location = road.getLocation()!!
 			req.setBBoxRadius(location.latitude, location.longitude, DISTANCE_STREET_NAME_PROXIMITY_BY_NAME)
-			reader.searchAddressDataByName(req)
+			if (cache == null) {
+				reader.searchAddressDataByName(req)
+			} else {
+				// the same box test the name index does, on the zoom 16 tile of the street
+				for (street in cache.getStreets(reader, longestWord, DISTANCE_STREET_NAME_PROXIMITY_BY_NAME, road.searchPoint!!, result)) {
+					val streetLocation = street.getLocation()!!
+					val x16 = (KMapUtils.get31TileNumberX(streetLocation.longitude) shr 15) shl 15
+					val y16 = (KMapUtils.get31TileNumberY(streetLocation.latitude) shr 15) shl 15
+					if (req.contains(x16, y16, x16, y16)) {
+						addStreet(road, street, addCommonWordsFinal, streetsList, cache)
+					}
+				}
+			}
 		}
 
 		val res = ArrayList<GeocodingResult>()
@@ -348,7 +413,7 @@ class GeocodingUtilities {
 				}
 				street.resetDistance() //reset to road projection
 				street.connectionPoint = road.connectionPoint
-				val streetBuildings = loadStreetBuildings(road, reader, street)
+				val streetBuildings = loadStreetBuildings(road, reader, street, cache)
 				streetBuildings.sortWith(DISTANCE_COMPARATOR)
 				if (streetBuildings.size > 0) {
 					val it = streetBuildings.iterator()
@@ -391,14 +456,19 @@ class GeocodingUtilities {
 	}
 
 	private fun cmpResult(gr1: GeocodingResult, gr2: GeocodingResult): Int {
-		val eqStreet = KAlgorithms.stringsEqual(gr1.streetName, gr2.streetName)
+		// the same street, or the same house number on it, from two maps or from two cities of one map;
+		// the street name too (not only the name of the road it was found for), the nearer one on equal cities
+		val street1 = gr1.street
+		val street2 = gr2.street
+		val eqStreet = KAlgorithms.stringsEqual(gr1.streetName, gr2.streetName) && street1 != null
+				&& street2 != null && KAlgorithms.stringsEqual(street1.getName(), street2.getName())
 		if (eqStreet) {
 			var sameObj = false
 			val building1 = gr1.building
 			val building2 = gr2.building
 			if (gr1.city != null && gr2.city != null) {
 				if (building1 != null && building2 != null) {
-					if (KAlgorithms.stringsEqual(building1.getName(), building2.getName())) {
+					if (KAlgorithms.stringsEqual(gr1.getBuildingString(), gr2.getBuildingString())) {
 						// same building
 						sameObj = true
 					}
@@ -410,7 +480,7 @@ class GeocodingUtilities {
 			if (sameObj) {
 				val cityDist1 = KMapUtils.getDistance(gr1.searchPoint!!, gr1.city!!.getLocation()!!)
 				val cityDist2 = KMapUtils.getDistance(gr2.searchPoint!!, gr2.city!!.getLocation()!!)
-				return if (cityDist1 < cityDist2) {
+				return if (cityDist1 <= cityDist2) {
 					-1
 				} else {
 					1
@@ -420,11 +490,15 @@ class GeocodingUtilities {
 		return 0
 	}
 
-	private fun loadStreetBuildings(road: GeocodingResult, reader: BinaryMapIndexReader, street: GeocodingResult): MutableList<GeocodingResult> {
+	private fun loadStreetBuildings(
+		road: GeocodingResult, reader: BinaryMapIndexReader, street: GeocodingResult, cache: StreetsCache?
+	): MutableList<GeocodingResult> {
 		val streetBuildings = ArrayList<GeocodingResult>()
 		val s = street.street!!
 		val searchPoint = road.searchPoint!!
-		reader.preloadBuildings(s, null)
+		if (cache == null || cache.addWithBuildings(s)) {
+			reader.preloadBuildings(s, null)
+		}
 		for (b in s.getBuildings()) {
 			val latLon2 = b.getLatLon2()
 			val location = b.getLocation()!!
@@ -457,10 +531,49 @@ class GeocodingUtilities {
 		return streetBuildings
 	}
 
-	fun sortGeocodingResults(list: List<BinaryMapIndexReader>, res: List<GeocodingResult>): MutableList<GeocodingResult> {
+	private fun addStreet(
+		road: GeocodingResult, street: Street, matchWithCommonWords: Boolean,
+		streetsList: MutableList<GeocodingResult>, cache: StreetsCache?
+	): Boolean {
+		// "<Segré>" holds the houses of a place without a street, it is not a street named after the place
+		if (street.getName().startsWith("<")) {
+			return false
+		}
+		if (!matchStreetName(road.streetName, street.getName(), matchWithCommonWords, cache)) {
+			return false
+		}
+		val searchPoint = road.searchPoint!!
+		val d = KMapUtils.getDistance(street.getLocation()!!, searchPoint.latitude, searchPoint.longitude)
+		// double check to support old format
+		if (d >= DISTANCE_STREET_NAME_PROXIMITY_BY_NAME) {
+			return false
+		}
+		val rs = GeocodingResult(road)
+		rs.street = street
+		// set connection point to sort
+		rs.connectionPoint = street.getLocation()
+		rs.city = street.getCity()
+		rs.dist = d
+		streetsList.add(rs)
+		return true
+	}
+
+	fun findAddresses(list: List<BinaryMapIndexReader>, res: List<GeocodingResult>): MutableList<GeocodingResult> =
+		findAddresses(list, res, null)
+
+	// the addresses of the roads found by reverseGeocodingSearch: the street and the buildings of
+	// every road, duplicates from neighbouring maps and buildings far behind the nearest dropped,
+	// nearest first; stops early when the matcher is cancelled
+	fun findAddresses(
+		list: List<BinaryMapIndexReader>, res: List<GeocodingResult>, cancel: ResultMatcher<GeocodingResult>?
+	): MutableList<GeocodingResult> {
 		val complete = ArrayList<GeocodingResult>()
 		var minBuildingDistance = 0.0
+		val cache = StreetsCache()
 		for (r in res) {
+			if (cancel != null && cancel.isCancelled()) {
+				break
+			}
 			var reader: BinaryMapIndexReader? = null
 			for (b in list) {
 				for (rb in b.getRoutingIndexes()) {
@@ -474,16 +587,16 @@ class GeocodingUtilities {
 				}
 			}
 			if (reader != null) {
-				val justified = justifyReverseGeocodingSearch(r, reader, minBuildingDistance, null)
-				if (justified.isNotEmpty()) {
-					val md = justified[0].getDistance()
+				val streetAndBuildings = findStreetAndBuildings(r, reader, minBuildingDistance, cancel, cache)
+				if (streetAndBuildings.isNotEmpty()) {
+					val md = streetAndBuildings[0].getDistance()
 					minBuildingDistance = if (minBuildingDistance == 0.0) {
 						md
 					} else {
 						min(md, minBuildingDistance)
 					}
-					justified[0].dist = -1.0 //clear intermediate cached distance
-					complete.addAll(justified)
+					streetAndBuildings[0].dist = -1.0 //clear intermediate cached distance
+					complete.addAll(streetAndBuildings)
 				}
 			} else {
 				complete.add(r)

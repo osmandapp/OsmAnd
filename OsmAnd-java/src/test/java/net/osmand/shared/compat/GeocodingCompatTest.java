@@ -62,9 +62,9 @@ import java.util.Map;
  * <ul>
  * <li>find the roads near it, {@code reverseGeocodingSearch};</li>
  * <li>for the first {@link #JUSTIFIED} of them, look for the streets of their name and the buildings
- * on them, {@code justifyReverseGeocodingSearch}: knowing no building yet, knowing one
+ * on them, {@code findStreetAndBuildings}: knowing no building yet, knowing one
  * {@link #KNOWN_BUILDING_DISTANCE} m away, and with a search already cancelled;</li>
- * <li>find the roads again and sort them as the app does, {@code sortGeocodingResults}, which drops
+ * <li>find the roads again and sort them as the app does, {@code findAddresses}, which drops
  * the results of one place found in two files.</li>
  * </ul>
  * With them, a road named as each street with a number by a dash or with a letter or two in its
@@ -377,7 +377,11 @@ public class GeocodingCompatTest {
 	private static String javaAnswerInItsOrder(GeocodingUtilities utils, RoutingContext jctx, List<BinaryMapIndexReader> readers,
 			double lat, double lon, boolean allowEmptyNames) throws IOException {
 		List<RouteSegmentPoint> roads = new ArrayList<>();
-		new RoutePlannerFrontEnd().findRouteSegment(lat, lon, jctx, roads, false, true);
+		RouteSegmentPoint best = new RoutePlannerFrontEnd().findRouteSegment(lat, lon, jctx, roads, false, true);
+		if (best != null) {
+			best.others = null;
+			roads.add(0, best);
+		}
 		return javaAnswer(utils, readers, () -> reverseGeocodingSearch(roads, lat, lon, allowEmptyNames), false);
 	}
 
@@ -400,12 +404,12 @@ public class GeocodingCompatTest {
 				}
 			}
 			if (reader != null) {
-				lines(sb, "B" + i, utils.justifyReverseGeocodingSearch(r, reader, 0, null));
-				lines(sb, "K" + i, utils.justifyReverseGeocodingSearch(r, reader, KNOWN_BUILDING_DISTANCE, null));
-				lines(sb, "X" + i, utils.justifyReverseGeocodingSearch(r, reader, 0, JAVA_CANCELLED));
+				lines(sb, "B" + i, utils.findStreetAndBuildings(r, reader, 0, null));
+				lines(sb, "K" + i, utils.findStreetAndBuildings(r, reader, KNOWN_BUILDING_DISTANCE, null));
+				lines(sb, "X" + i, utils.findStreetAndBuildings(r, reader, 0, JAVA_CANCELLED));
 			}
 		}
-		List<GeocodingResult> sorted = utils.sortGeocodingResults(readers, reverse.find());
+		List<GeocodingResult> sorted = utils.findAddresses(readers, reverse.find());
 		lines(sb, "C", sorted);
 		if (counted) {
 			count(sorted, sorted.isEmpty() ? null : sorted.get(0).building);
@@ -413,15 +417,13 @@ public class GeocodingCompatTest {
 		return sb.toString();
 	}
 
-	/**
-	 * The roads java finds at the point, in the order the copy finds them, less the nearest: the
-	 * list {@code findRouteSegment} hands back, which it takes the nearest out of.
-	 */
+	/** The roads java finds at the point, the nearest first, in the order the copy finds them. */
 	private static List<RouteSegmentPoint> inCopyOrder(RoutingContext jctx, net.osmand.shared.routing.RoutingContext kctx,
 			double lat, double lon) throws IOException {
 		List<RouteSegmentPoint> j = new ArrayList<>();
 		RouteSegmentPoint jps = new RoutePlannerFrontEnd().findRouteSegment(lat, lon, jctx, j, false, true);
 		if (jps != null) {
+			jps.others = null;
 			j.add(0, jps);
 		}
 		List<net.osmand.shared.routing.RouteSegmentPoint> k = new ArrayList<>();
@@ -448,9 +450,6 @@ public class GeocodingCompatTest {
 			}
 			assertTrue("road " + key + " found by java", match >= 0);
 			ordered.add(j.remove(match));
-		}
-		if (!ordered.isEmpty()) {
-			ordered.remove(0);
 		}
 		return ordered;
 	}
@@ -512,12 +511,12 @@ public class GeocodingCompatTest {
 				}
 			}
 			if (reader != null) {
-				lines(sb, "B" + i, utils.justifyReverseGeocodingSearch(r, reader, 0, null));
-				lines(sb, "K" + i, utils.justifyReverseGeocodingSearch(r, reader, KNOWN_BUILDING_DISTANCE, null));
-				lines(sb, "X" + i, utils.justifyReverseGeocodingSearch(r, reader, 0, COPY_CANCELLED));
+				lines(sb, "B" + i, utils.findStreetAndBuildings(r, reader, 0, null));
+				lines(sb, "K" + i, utils.findStreetAndBuildings(r, reader, KNOWN_BUILDING_DISTANCE, null));
+				lines(sb, "X" + i, utils.findStreetAndBuildings(r, reader, 0, COPY_CANCELLED));
 			}
 		}
-		lines(sb, "C", utils.sortGeocodingResults(readers, utils.reverseGeocodingSearch(ctx, lat, lon, allowEmptyNames)));
+		lines(sb, "C", utils.findAddresses(readers, utils.reverseGeocodingSearch(ctx, lat, lon, allowEmptyNames)));
 		return sb.toString();
 	}
 
@@ -528,8 +527,8 @@ public class GeocodingCompatTest {
 		road.connectionPoint = new LatLon(lat, lon);
 		road.streetName = name;
 		StringBuilder sb = new StringBuilder();
-		lines(sb, "B", utils.justifyReverseGeocodingSearch(road, reader, 0, null));
-		lines(sb, "K", utils.justifyReverseGeocodingSearch(road, reader, KNOWN_BUILDING_DISTANCE, null));
+		lines(sb, "B", utils.findStreetAndBuildings(road, reader, 0, null));
+		lines(sb, "K", utils.findStreetAndBuildings(road, reader, KNOWN_BUILDING_DISTANCE, null));
 		return sb.toString();
 	}
 
@@ -540,8 +539,8 @@ public class GeocodingCompatTest {
 		road.connectionPoint = new net.osmand.shared.data.KLatLon(lat, lon);
 		road.streetName = name;
 		StringBuilder sb = new StringBuilder();
-		lines(sb, "B", utils.justifyReverseGeocodingSearch(road, reader, 0, null));
-		lines(sb, "K", utils.justifyReverseGeocodingSearch(road, reader, KNOWN_BUILDING_DISTANCE, null));
+		lines(sb, "B", utils.findStreetAndBuildings(road, reader, 0, null));
+		lines(sb, "K", utils.findStreetAndBuildings(road, reader, KNOWN_BUILDING_DISTANCE, null));
 		return sb.toString();
 	}
 
