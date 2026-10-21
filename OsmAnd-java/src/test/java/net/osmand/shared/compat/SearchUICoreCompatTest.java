@@ -97,6 +97,7 @@ public class SearchUICoreCompatTest {
 
 	@BeforeClass
 	public static void open() throws Exception {
+		SearchCompat.assumeEnabled();
 		SearchApisCompatTest.setUpTypes();
 		for (File f : TestObf.searchFiles()) {
 			javaReaders.put(f.getName(), new BinaryMapIndexReader(new RandomAccessFile(f, "r"), f));
