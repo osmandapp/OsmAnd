@@ -371,4 +371,9 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_multi_selection_menu";
+	}
 }

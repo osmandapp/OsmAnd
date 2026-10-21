@@ -3,11 +3,14 @@ package net.osmand.search;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import net.osmand.ResultMatcher;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
@@ -184,6 +187,54 @@ public class SearchUICoreGenericTest {
 		Assert.assertSame(a1, cll.getCurrentSearchResults().get(0));
 		Assert.assertSame(b1, cll.getCurrentSearchResults().get(1));
 		Assert.assertSame(b2, cll.getCurrentSearchResults().get(2));
+	}
+
+	@Test
+	public void testNoSearchMoreAfterAllSpatialLevelsShown() throws InterruptedException {
+		// #25940: the dialog shows the levels in its own collection; the core one stays at level 0 and must not
+		// offer "Increase search radius", which reran the same spatial search and appended a copy of every row
+		SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
+		core.init(true);
+		core.registerAPI(new SpatialTextSearchAPI(MapPoiTypes.getDefault()) {
+			@Override
+			public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
+				for (int level = 0; level < 2; level++) {
+					SearchResult r = new SearchResult(phrase);
+					r.localeName = "Tatranská magistrála";
+					r.objectType = ObjectType.POI;
+					r.location = new LatLon(49.1 + level, 19.6);
+					r.spatialSearchVisibleLevel = level;
+					resultMatcher.publish(r);
+				}
+				return true;
+			}
+		});
+		core.updateSettings(core.getSearchSettings().setOriginalLocation(new LatLon(49.08, 19.61)));
+		CountDownLatch finished = new CountDownLatch(1);
+		core.search("Tatranska magistrala", false, new ResultMatcher<SearchResult>() {
+			@Override
+			public boolean publish(SearchResult object) {
+				if (object.objectType == ObjectType.SEARCH_FINISHED) {
+					finished.countDown();
+				}
+				return true;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		});
+		Assert.assertTrue(finished.await(10, TimeUnit.SECONDS));
+
+		SearchResultCollection shown = new SearchResultCollection(core.getPhrase(), true)
+				.addSearchResults(core.getCurrentSearchResult().getCurrentSearchResults(), false, true);
+		Assert.assertEquals(1, shown.getVisibleSpatialSearchResults().size());
+		Assert.assertTrue(shown.showMoreSpatialSearchResults());
+		Assert.assertEquals(2, shown.getVisibleSpatialSearchResults().size());
+		Assert.assertFalse(shown.hasMoreSpatialSearchResults());
+		Assert.assertFalse("All levels are shown: nothing more to search",
+				core.isSearchMoreAvailable(core.getPhrase()));
 	}
 
 	private City createCity() {

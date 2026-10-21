@@ -462,4 +462,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "wpt_pt_editor";
+	}
 }

@@ -70,7 +70,7 @@ class PoiAdditionalActionsBottomSheet : BaseMaterialBottomSheetWithHeader(), IDi
 
 	private fun createRow(parent: ViewGroup, value: String, showDivider: Boolean): View {
 		return inflate(R.layout.bottom_sheet_item_active_color_text, parent, false).apply {
-			findViewById<TextView>(R.id.itemText).text = value
+			findViewById<TextView>(R.id.itemText).text = controller?.getDisplayValue(context, value) ?: value
 			findViewById<View>(R.id.divider).visibility = if (showDivider) View.VISIBLE else View.GONE
 			setOnClickListener {
 				activity?.let { controller?.onItemClick(it, value) }

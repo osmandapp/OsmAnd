@@ -95,4 +95,9 @@ public class CloudTabFragment extends ChangesTabFragment {
 
 		return changeItems;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "backup_cloud_tab";
+	}
 }

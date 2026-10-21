@@ -150,6 +150,76 @@ class GpxUtilitiesLoadTest {
 	}
 
 	@Test
+	fun testLoadGpxFileMapsGarminWaypointAddress() {
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="GPSBabel - https://www.gpsbabel.org"
+			     xmlns="http://www.topografix.com/GPX/1/1"
+			     xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+			  <wpt lat="44.380860329" lon="-68.068499565">
+			    <name>Schoodic Woods Campground</name>
+			    <extensions>
+			      <gpxx:WaypointExtension>
+			        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+			        <gpxx:Address>
+			          <gpxx:StreetAddress>Schoodic Loop Rd</gpxx:StreetAddress>
+			          <gpxx:City>Winter Harbor Twn</gpxx:City>
+			          <gpxx:State>Maine</gpxx:State>
+			          <gpxx:Country>United States</gpxx:Country>
+			          <gpxx:PostalCode>04693</gpxx:PostalCode>
+			        </gpxx:Address>
+			        <gpxx:PhoneNumber>207-288-1300</gpxx:PhoneNumber>
+			      </gpxx:WaypointExtension>
+			    </extensions>
+			  </wpt>
+			</gpx>
+			""".trimIndent(),
+			addGeneralTrack = false
+		)
+
+		assertNull(gpxFile.error)
+		val expected = mapOf(
+			"gpxx:street_address" to "Schoodic Loop Rd",
+			"gpxx:city" to "Winter Harbor Twn",
+			"gpxx:state" to "Maine",
+			"gpxx:country" to "United States",
+			"gpxx:postal_code" to "04693",
+			"phone" to "207-288-1300",
+			"displaymode" to "SymbolAndName"
+		)
+		val extensions = gpxFile.getPointsList().single().getExtensionsToRead()
+		assertEquals(expected, extensions)
+
+		val reloaded = loadGpx(writeGpxToString(gpxFile), addGeneralTrack = false)
+		assertNull(reloaded.error)
+		assertEquals(expected, reloaded.getPointsList().single().getExtensionsToRead())
+	}
+
+	@Test
+	fun testLoadGpxFileMapsGarminAddressReSavedByOlderOsmAnd() {
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="OsmAnd~ 5.4.0" xmlns="http://www.topografix.com/GPX/1/1" xmlns:osmand="https://osmand.net">
+			  <wpt lat="44.380860329" lon="-68.068499565">
+			    <extensions>
+			      <osmand:streetaddress>Schoodic Loop Rd</osmand:streetaddress>
+			      <osmand:city>Winter Harbor Twn</osmand:city>
+			      <osmand:phonenumber>207-288-1300</osmand:phonenumber>
+			    </extensions>
+			  </wpt>
+			</gpx>
+			""".trimIndent(),
+			addGeneralTrack = false
+		)
+
+		assertNull(gpxFile.error)
+		val extensions = gpxFile.getPointsList().single().getExtensionsToRead()
+		assertEquals("Schoodic Loop Rd", extensions[GpxUtilities.GPXX_STREET_ADDRESS])
+		assertEquals("Winter Harbor Twn", extensions[GpxUtilities.GPXX_CITY])
+		assertEquals("207-288-1300", extensions["phone"])
+	}
+
+	@Test
 	fun testLoadGpxFilePreservesGeneralTrackBehaviorForMultipleSegments() {
 		val gpxFile = loadGpx(
 			"""
