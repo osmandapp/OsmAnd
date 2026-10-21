@@ -334,7 +334,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			item.setTitle(settingsItem.getPublicName(app));
 			item.setIcon(getIcon(R.drawable.ic_action_route_distance, getItemIconColor(item.getTag())));
 		} else if (object instanceof GpxDirItem dirItem) {
-			item.setTitle(GpxHelper.INSTANCE.getGpxTitle(dirItem.getFile().name()));
+			item.setTitle(dirItem.getFile().name());
 			item.setIcon(getIcon(R.drawable.ic_action_route_distance, getItemIconColor(item.getTag())));
 		} else if (object instanceof FileSettingsItem settingsItem) {
 			setupBottomSheetItemForFile(item, settingsItem.getFile());

@@ -43,4 +43,8 @@ public class DialogsAndNotificationsSettingsFragment extends BaseSettingsFragmen
 		return super.onPreferenceChange(preference, newValue);
 	}
 
+	@Override
+	public String getAnalyticsScreen() {
+		return "dialogs_and_notifications_settings";
+	}
 }

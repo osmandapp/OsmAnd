@@ -10,13 +10,25 @@
 		android:layout_height="wrap_content"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:layout_marginVertical="@dimen/content_padding_small"
-		android:text="@string/average_glide_time_interval_desc"
+		android:text="@string/switch_mode_by_tapping_on_widget"
 		android:textColor="?android:textColorSecondary" />
 
-	<View
+	<include layout="@layout/widget_settings_mode_row" />
+
+	<include
+		layout="@layout/divider"
 		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:background="?divider_color_basic" />
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:text="@string/average_glide_time_interval_desc"
+		android:textColor="?android:textColorSecondary" />
 
 	<FrameLayout
 		android:id="@+id/time_interval_card_container"

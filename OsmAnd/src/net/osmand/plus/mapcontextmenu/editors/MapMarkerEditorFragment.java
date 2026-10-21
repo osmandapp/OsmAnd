@@ -232,4 +232,9 @@ public class MapMarkerEditorFragment extends BaseFullScreenFragment {
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_marker_editor";
+	}
 }

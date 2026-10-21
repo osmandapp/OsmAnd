@@ -1383,7 +1383,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 	}
 
-	HHNetworkRouteRes prepareRouteResults(HHRoutingContext<T> hctx, HHNetworkRouteRes route, LatLon start, LatLon end, 
+	HHNetworkRouteRes prepareRouteResults(HHRoutingContext<T> hctx, HHNetworkRouteRes route, LatLon start, LatLon end,
 			RouteResultPreparation rrp) throws SQLException, InterruptedException, IOException {
 		hctx.rctx.routingTime = 0;
 		route.stats = hctx.stats;

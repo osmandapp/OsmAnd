@@ -85,4 +85,9 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "maps_plus_plan";
+	}
 }

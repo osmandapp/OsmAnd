@@ -10,7 +10,6 @@ import androidx.car.app.model.Item
 import androidx.car.app.model.ItemList
 import androidx.car.app.model.Row
 import androidx.car.app.model.Template
-import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
@@ -73,6 +72,7 @@ class LandingScreen(
         }
     }
 
+    @Suppress("DEPRECATION") // PlaceListNavigationTemplate, needs migration to MapWithContentTemplate
     override fun getTemplate(): Template {
         val listBuilder = ItemList.Builder()
         val app = app
@@ -141,7 +141,7 @@ class LandingScreen(
                     }
                     .build())
             .build()
-        return PlaceListNavigationTemplate.Builder()
+        return androidx.car.app.navigation.model.PlaceListNavigationTemplate.Builder()
             .setItemList(listBuilder.build())
             .setTitle(app.getString(R.string.app_name))
             .setHeaderAction(Action.APP_ICON)

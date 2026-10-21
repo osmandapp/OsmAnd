@@ -285,4 +285,9 @@ public class SimulateLocationFragment extends BaseFullScreenFragment implements 
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "simulate_location";
+	}
 }

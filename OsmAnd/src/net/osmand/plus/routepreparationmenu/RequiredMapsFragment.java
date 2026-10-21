@@ -380,4 +380,9 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 			requiredMapsFragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "required_maps";
+	}
 }
