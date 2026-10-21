@@ -129,15 +129,22 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 				val decryptAbbreviations = needDecryptAbbreviations()
 				if (wd.length > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
-						sp.firstUnknownSearchWord = if (decryptAbbreviations) Abbreviations.replace(wd) else wd
+						sp.firstUnknownSearchWord = if (decryptAbbreviations) decryptAbbreviation(wd) else wd
 						first = false
 					} else {
-						sp.otherUnknownWords.add(if (decryptAbbreviations) Abbreviations.replace(wd) else wd)
+						sp.otherUnknownWords.add(if (decryptAbbreviations) decryptAbbreviation(wd) else wd)
 					}
 				}
 			}
 		}
 		return sp
+	}
+
+	// "ln" -> "Lane", "sw" -> "Southwest"; a word the full form starts with stays as it is: names match it by prefix
+	// anyway ("st" finds "Street"), and "St Mary's Road" is Saint, not "Street Mary's Road"
+	private fun decryptAbbreviation(word: String): String {
+		val full = Abbreviations.replace(word)
+		return if (full.lowercase().startsWith(word.lowercase())) word else full
 	}
 
 	private fun needDecryptAbbreviations(): Boolean {
