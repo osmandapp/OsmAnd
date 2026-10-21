@@ -28,6 +28,7 @@ class ForgetOBDDeviceDialog : ForgetDeviceBaseDialog() {
 				args.putString(DEVICE_ID_KEY, deviceId)
 				args.putBoolean(BLE_KEY, isBLE)
 				fragment.arguments = args
+				@Suppress("DEPRECATION")
 				fragment.setTargetFragment(targetFragment, 0)
 				fragment.show(manager, TAG)
 			}
@@ -48,6 +49,7 @@ class ForgetOBDDeviceDialog : ForgetDeviceBaseDialog() {
 		}
 	}
 
+	@Suppress("DEPRECATION")
 	override fun onForgetSensorConfirmed() {
 		(targetFragment as ForgetDeviceListener).onForgetSensorConfirmed(deviceId, isBLE)
 	}

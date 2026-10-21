@@ -19,7 +19,7 @@ import java.net.URLConnection;
 
 class GetMapillaryUserAsyncTask extends AsyncTask<String, Void, Pair<String, String>> {
 
-	private static final String TAG = GetMapillaryUserAsyncTask.class.getSimpleName();
+	private static final String TAG = "GetMapillaryUserAsyncTask";
 	private static final String DOWNLOAD_PATH = "https://a.mapillary.com/v3/users?usernames=%s&client_id=%s";
 	private static final String CLIENT_ID = "LXJVNHlDOGdMSVgxZG5mVzlHQ3ZqQTo0NjE5OWRiN2EzNTFkNDg4";
 

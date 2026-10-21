@@ -356,4 +356,9 @@ public class SelectPointsFragment extends BaseFullScreenDialogFragment implement
 
 		void onPointsSelected(@NonNull ImportTrackItem trackItem, @NonNull Set<WptPt> folder);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "select_points";
+	}
 }

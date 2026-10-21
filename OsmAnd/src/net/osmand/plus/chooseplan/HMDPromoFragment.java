@@ -75,4 +75,9 @@ public class HMDPromoFragment extends PromoCompanyFragment {
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "hmd_promo";
+	}
 }

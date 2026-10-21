@@ -20,7 +20,10 @@ data class GalleryMediaMetadata(
 	val durationMs: Long? = null,
 	val latLon: LatLon? = null,
 	val heading: Float? = null,
-	val posterUri: String? = null
+	val posterUri: String? = null,
+	val width: Int? = null,
+	val height: Int? = null,
+	val format: String? = null
 )
 
 interface MediaMetadataRepository {

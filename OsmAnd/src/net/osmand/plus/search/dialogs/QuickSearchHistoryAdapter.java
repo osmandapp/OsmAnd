@@ -46,6 +46,7 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 	private final Calendar calendar = Calendar.getInstance();
 	private final UpdateLocationViewCache locationViewCache;
 	private final SearchTrackDataResolver trackDataResolver;
+	private final int dividerMargin;
 
 	private final List<Item> items = new ArrayList<>();
 	private boolean useMapCenter;
@@ -59,6 +60,7 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 		this.trackDataResolver = trackDataResolver;
 		inflater = UiUtilities.getInflater(activity, nightMode);
 		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
+		dividerMargin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 	}
 
 	public void setUseMapCenter(boolean useMapCenter) {
@@ -210,7 +212,7 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
 			ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) divider.getLayoutParams();
-			params.setMarginStart(0);
+			params.setMarginStart(dividerMargin);
 			params.setMarginEnd(0);
 			divider.setLayoutParams(params);
 			boolean last = isLastResultInGroup(position);

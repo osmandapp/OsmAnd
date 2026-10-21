@@ -260,6 +260,13 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="OsmandTranslucentTheme" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
     <style name="BottomSheet.Dialog" parent="android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:textColor">@null</item>

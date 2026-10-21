@@ -17,7 +17,6 @@ import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
@@ -121,16 +120,16 @@ public class GpxSettingsItem extends FileSettingsItem {
 	}
 
 	private void updateGpxParams(@NonNull GpxDataItem dataItem) {
-		Integer splitType = appearanceInfo.splitType != null
-				? GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType).getType() : null;
-		boolean splitChanged = Algorithms.objectEquals(dataItem.getParameter(SPLIT_TYPE), splitType)
-				|| Algorithms.objectEquals(dataItem.getParameter(SPLIT_INTERVAL), appearanceInfo.splitInterval);
+		Object splitType = dataItem.getParameter(SPLIT_TYPE);
+		Object splitInterval = dataItem.getParameter(SPLIT_INTERVAL);
 
 		appearanceInfo.setParameters(dataItem);
 
 		app.getGpxDbHelper().updateDataItem(dataItem);
 		app.getGpxDbHelper().updateDataItemParameter(dataItem, APPEARANCE_LAST_MODIFIED_TIME, file.lastModified());
 
+		boolean splitChanged = !Algorithms.objectEquals(splitType, dataItem.getParameter(SPLIT_TYPE))
+				|| !Algorithms.objectEquals(splitInterval, dataItem.getParameter(SPLIT_INTERVAL));
 		if (splitChanged) {
 			GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
 			SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(file.getAbsolutePath());

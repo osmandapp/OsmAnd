@@ -441,6 +441,12 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		((TextView) view.findViewById(R.id.shape_name)).setText(backgroundType.getNameId());
 	}
 
+	protected void selectColorInPalette() {
+		SolidPaletteController controller = getColorController();
+		// only a colour already in the palette is highlighted, a group colour is never added to it
+		controller.selectPaletteItemSilently(controller.findPaletteItem(color));
+	}
+
 	protected void updateSelectedColorText() {
 		SolidPaletteController controller = getColorController();
 		((TextView) view.findViewById(R.id.color_name)).setText(controller.getColorName(color));

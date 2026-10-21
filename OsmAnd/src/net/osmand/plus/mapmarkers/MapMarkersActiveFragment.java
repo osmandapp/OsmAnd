@@ -242,4 +242,9 @@ public class MapMarkersActiveFragment extends BaseNestedFragment implements OsmA
 			locationProvider.addCompassListener(locationProvider.getNavigationInfo());
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_markers_active";
+	}
 }

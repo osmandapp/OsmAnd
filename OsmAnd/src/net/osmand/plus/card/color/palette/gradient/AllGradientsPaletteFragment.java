@@ -162,4 +162,9 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 			new AllGradientsPaletteFragment().show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "all_gradients_palette";
+	}
 }
