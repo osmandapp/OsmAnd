@@ -12,7 +12,9 @@ import net.osmand.plus.base.BaseAlertDialogFragment;
 import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.search.core.SearchResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeleteHistoryConfirmationFragment extends BaseAlertDialogFragment {
@@ -34,9 +36,11 @@ public class DeleteHistoryConfirmationFragment extends BaseAlertDialogFragment {
 				.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 					if (getParentFragment() instanceof QuickSearchDialogFragment fragment) {
 						SearchHistoryHelper helper = app.getSearchHistoryHelper();
+						List<SearchResult> searchResults = new ArrayList<>();
 						for (QuickSearchListItem searchListItem : selectedItems) {
-							helper.remove(searchListItem.getSearchResult());
+							searchResults.add(searchListItem.getSearchResult());
 						}
+						helper.remove(searchResults);
 						fragment.reloadHistory();
 						fragment.enableSelectionMode(false, -1);
 					}

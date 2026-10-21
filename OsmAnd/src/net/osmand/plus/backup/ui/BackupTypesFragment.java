@@ -163,4 +163,9 @@ public class BackupTypesFragment extends BaseFullScreenFragment
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "backup_types";
+	}
 }

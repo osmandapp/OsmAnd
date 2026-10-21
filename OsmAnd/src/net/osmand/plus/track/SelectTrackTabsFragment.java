@@ -222,4 +222,9 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	public interface GpxDataItemSelectionListener {
 		void onSelectGpxDataItem(@Nullable GpxDataItem gpxDataItem);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "select_track_tabs";
+	}
 }

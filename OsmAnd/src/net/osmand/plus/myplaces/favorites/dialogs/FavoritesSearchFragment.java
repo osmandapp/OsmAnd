@@ -508,4 +508,9 @@ public class FavoritesSearchFragment extends BaseFullScreenDialogFragment {
 			listAdapter.notifyDataSetChanged();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favorites_search";
+	}
 }

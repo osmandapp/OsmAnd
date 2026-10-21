@@ -50,6 +50,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -73,7 +74,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	private final ExecutorService tilePersistenceExecutor = Executors.newSingleThreadExecutor();
 
 	private final Map<TileKey, GetExplorePlacesImagesTask> loadingTasks = new HashMap<>();
-	private final Map<TileKey, List<Amenity>> tilesCache = new HashMap<>(); // Memory cache for recent tiles
+	private final Map<TileKey, List<Amenity>> tilesCache = new ConcurrentHashMap<>(); // Memory cache for recent tiles
 
 
 	private static class TileKey {
@@ -471,6 +472,20 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 			}
 		}
 		return amenities;
+	}
+
+	// tiles and places held in memory, for the memory log; read without the lock:
+	// a tile's list is complete before it is put and never changed afterwards
+	public int getCachedTilesCount() {
+		return tilesCache.size();
+	}
+
+	public int getCachedPlacesCount() {
+		int count = 0;
+		for (List<Amenity> places : tilesCache.values()) {
+			count += places.size();
+		}
+		return count;
 	}
 
 	@Override

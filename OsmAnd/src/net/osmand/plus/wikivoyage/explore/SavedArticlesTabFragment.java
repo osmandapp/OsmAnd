@@ -178,4 +178,9 @@ public class SavedArticlesTabFragment extends BaseFullScreenFragment implements 
 			return newItems.get(newItems.size() - 1) != oldItems.get(oldItems.size() - 1);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "wikivoyage_saved_articles";
+	}
 }

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	OsmAnd builds (Development plugin): the download in progress, the latest builds and the
+	archive of night builds.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/colorSurface"
+	android:orientation="vertical">
+
+	<include layout="@layout/ui_material_app_bar" />
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<ScrollView
+			android:id="@+id/scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/content_padding">
+
+				<net.osmand.plus.widgets.ui.ScreenDescriptionView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:screenDescriptionText="@string/select_build_to_install" />
+
+				<LinearLayout
+					android:id="@+id/download_section"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:visibility="gone">
+
+					<net.osmand.plus.widgets.ui.GroupHeaderView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:groupHeaderTitle="@string/shared_string_download" />
+
+					<LinearLayout
+						android:id="@+id/download_group"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical">
+
+						<include
+							android:id="@+id/download_row"
+							layout="@layout/item_build_download_row" />
+					</LinearLayout>
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/builds_section"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.ui.GroupHeaderView
+						android:id="@+id/latest_header"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:groupHeaderTitle="@string/latest_builds" />
+
+					<LinearLayout
+						android:id="@+id/latest_group"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical" />
+
+					<LinearLayout
+						android:id="@+id/archive_group"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/ui_group_gap"
+						android:orientation="vertical">
+
+						<include
+							android:id="@+id/archive_row"
+							layout="@layout/item_ui_setting_row" />
+					</LinearLayout>
+				</LinearLayout>
+			</LinearLayout>
+		</ScrollView>
+
+		<LinearLayout
+			android:id="@+id/state_container"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:orientation="vertical"
+			android:padding="@dimen/content_padding"
+			android:visibility="gone">
+
+			<com.google.android.material.progressindicator.CircularProgressIndicator
+				android:id="@+id/state_progress"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:indeterminate="true" />
+
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/state_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding"
+				android:gravity="center"
+				android:textColor="?attr/colorOnSurfaceVariant"
+				android:textSize="@dimen/default_desc_text_size"
+				app:lineHeight="@dimen/ui_line_height_body" />
+
+			<com.google.android.material.button.MaterialButton
+				android:id="@+id/state_button"
+				style="@style/Widget.Material3.Button.TonalButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding"
+				android:text="@string/retry" />
+		</LinearLayout>
+	</FrameLayout>
+</LinearLayout>

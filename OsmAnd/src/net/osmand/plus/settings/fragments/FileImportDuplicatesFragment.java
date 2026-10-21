@@ -101,4 +101,9 @@ public class FileImportDuplicatesFragment extends ImportDuplicatesFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "file_import_duplicates";
+	}
 }
