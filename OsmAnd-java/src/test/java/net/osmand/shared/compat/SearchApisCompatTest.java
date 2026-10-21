@@ -225,6 +225,9 @@ public class SearchApisCompatTest {
 
 	@AfterClass
 	public static void close() throws IOException {
+		if (!SearchCompat.enabled()) {
+			return;
+		}
 		// the names of the poi types were this test's
 		MapPoiTypes.setDefault(new MapPoiTypes(POI_TYPES));
 		net.osmand.shared.osm.MapPoiTypes.Companion.setDefault(new net.osmand.shared.osm.MapPoiTypes(POI_TYPES));
