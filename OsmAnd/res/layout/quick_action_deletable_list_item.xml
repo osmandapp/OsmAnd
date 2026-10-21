@@ -28,18 +28,36 @@
             app:srcCompat="@drawable/ic_action_item_move"
 	        android:layout_marginEnd="4dp" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:layout_gravity="center"
-            android:maxLines="1"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/default_list_text_size"
-            tools:text="Add marker" />
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"
+                tools:text="Add marker" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_desc_text_size"
+                android:visibility="gone"
+                tools:text="Tracks" />
+
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/delete"

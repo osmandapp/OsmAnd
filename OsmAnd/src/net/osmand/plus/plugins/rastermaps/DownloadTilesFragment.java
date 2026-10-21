@@ -743,4 +743,9 @@ public class DownloadTilesFragment extends BaseFullScreenFragment implements IMa
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "download_tiles";
+	}
 }

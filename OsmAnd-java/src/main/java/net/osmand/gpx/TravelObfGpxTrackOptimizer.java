@@ -14,7 +14,7 @@ public class TravelObfGpxTrackOptimizer {
 	private static final double EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE = 10.0;
 	private static final double PRECISION_DUPES = KMapUtils.DEFAULT_LATLON_PRECISION;
 	private static final double PRECISION_EQUAL = KMapUtils.DEFAULT_LATLON_PRECISION; // ~1 meter
-	private static final double PRECISION_CLOSE = KMapUtils.DEFAULT_LATLON_PRECISION * 50; // ~50 meters
+	private static final double PRECISION_NEARBY = KMapUtils.DEFAULT_LATLON_PRECISION * 100; // ~72-110m meters
 
 	public static Track mergeOverlappedSegmentsAtEdges(Track track) {
 		Set<String> duplicates = new HashSet<>();
@@ -221,7 +221,7 @@ public class TravelObfGpxTrackOptimizer {
 
 	private static boolean closeWptPts(WptPt p1, WptPt p2) {
 		return KMapUtils.INSTANCE.areLatLonEqual(
-				p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude(), PRECISION_CLOSE);
+				p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude(), PRECISION_NEARBY);
 	}
 
 	private static String llKey(WptPt edge) {

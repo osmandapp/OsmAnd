@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION") // bridge between legacy net.osmand.gpx and net.osmand.shared.gpx
+
 package net.osmand.plus.shared
 
 import net.osmand.data.LatLon

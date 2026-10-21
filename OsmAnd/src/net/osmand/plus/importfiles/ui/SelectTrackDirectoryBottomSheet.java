@@ -122,7 +122,7 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 		description.setText(count > 0 ? String.valueOf(count) : getString(R.string.shared_string_empty));
 
 		RadioButton compoundButton = view.findViewById(R.id.compound_button);
-		compoundButton.setChecked(Algorithms.stringsEqual(selectedFolder, folder.getName()));
+		compoundButton.setChecked(Algorithms.stringsEqual(selectedFolder, folder.getAbsolutePath()));
 		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), compoundButton);
 
 		view.setOnClickListener(v -> {

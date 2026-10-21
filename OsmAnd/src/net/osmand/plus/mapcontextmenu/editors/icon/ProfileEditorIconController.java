@@ -12,6 +12,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ProfileEditorIconController extends EditorIconController {
 
@@ -23,10 +24,12 @@ public class ProfileEditorIconController extends EditorIconController {
 
 	@Override
 	protected void initIconCategories() {
+		Map<String, List<String>> assetGroups = readAssetIconGroups();
+		Map<String, List<String>> standaloneAssetGroups = extractStandaloneGroups(assetGroups);
 		initProfileIconsCategory();
 		initLastUsedCategory();
-		initAssetsCategories();
-		initPoiCategories();
+		initStandaloneAssetCategories(standaloneAssetGroups);
+		initPoiCategories(assetGroups);
 		sortCategories();
 	}
 

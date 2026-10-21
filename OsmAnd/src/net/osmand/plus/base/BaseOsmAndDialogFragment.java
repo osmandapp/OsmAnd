@@ -19,6 +19,7 @@ import androidx.fragment.app.DialogFragment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
+import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -44,6 +45,9 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = (OsmandApplication) requireActivity().getApplication();
+		if (savedInstanceState == null) {
+			AnalyticsHelper.logScreenOpen(app, getAnalyticsScreen());
+		}
 		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
 		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());

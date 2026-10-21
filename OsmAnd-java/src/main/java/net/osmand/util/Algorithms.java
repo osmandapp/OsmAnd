@@ -785,6 +785,20 @@ public class Algorithms {
 		}
 	}
 
+	public static boolean streamCopy(InputStream in, OutputStream out, long maxSize) throws IOException {
+		byte[] b = new byte[BUFFER_SIZE];
+		long size = 0;
+		int read;
+		while ((read = in.read(b)) != -1) {
+			size += read;
+			if (size > maxSize) {
+				return false;
+			}
+			out.write(b, 0, read);
+		}
+		return true;
+	}
+
 
 	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor) throws IOException {
 		streamCopy(in, out, pg, bytesDivisor, null);
@@ -1093,6 +1107,17 @@ public class Algorithms {
 			return String.format(Locale.UK, "%d:%02d", hours, min);
 		}
 		return String.format(Locale.UK, "%02d:%02d", hours, min);
+	}
+
+	public static String formatFileSize(long bytes) {
+		String[] units = {"B", "KB", "MB", "GB", "TB"};
+		double value = bytes;
+		int unit = 0;
+		while (value >= 1024 && unit < units.length - 1) {
+			value /= 1024;
+			unit++;
+		}
+		return unit == 0 ? bytes + " B" : String.format(Locale.US, "%.1f %s", value, units[unit]);
 	}
 
 	public static <T extends Enum<T>> T parseEnumValue(T[] cl, String val, T defaultValue) {

@@ -381,7 +381,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 		int number = 0;
 		while (true) {
 			number++;
-			String newName = prefix + "_" + number + suffix;
+			String newName = BackupUtils.appendToFileName(prefix, "_" + number + suffix);
 			File newFile = new File(newName);
 			if (!newFile.exists()) {
 				return newFile;

@@ -165,4 +165,9 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 		super.onSaveInstanceState(outState);
 		outState.putInt(SHOW_DATA_MODE, selectedShowMode);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "sensor_widget_setting";
+	}
 }

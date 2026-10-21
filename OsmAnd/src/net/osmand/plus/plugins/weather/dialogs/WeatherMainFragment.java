@@ -247,4 +247,9 @@ public class WeatherMainFragment extends BaseFullScreenFragment implements Downl
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "weather_main";
+	}
 }

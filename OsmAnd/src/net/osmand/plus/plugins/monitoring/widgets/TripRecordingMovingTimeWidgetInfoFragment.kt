@@ -87,4 +87,6 @@ class TripRecordingMovingTimeWidgetInfoFragment : BaseSimpleWidgetInfoFragment()
 		super.onResume()
 		updateModeSetting()
 	}
+
+	override fun getAnalyticsScreen() = "trip_recording_moving_time_widget_info"
 }
