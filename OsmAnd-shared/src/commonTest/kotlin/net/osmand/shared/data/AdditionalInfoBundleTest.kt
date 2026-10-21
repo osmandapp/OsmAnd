@@ -1,7 +1,10 @@
 package net.osmand.shared.data
 
+import net.osmand.shared.data.AmenityTagEntriesBuilder.ValueLabel
+import net.osmand.shared.data.AmenityTagEntriesBuilder.getValueLabel
 import net.osmand.shared.data.AmenityTagEntry.CollapsableEntryType
 import net.osmand.shared.osm.MapPoiTypes
+import net.osmand.shared.osm.PoiType
 import net.osmand.shared.routing.testEnvironment
 import net.osmand.shared.routing.testPlatformName
 import okio.FileSystem
@@ -51,6 +54,16 @@ class AdditionalInfoBundleTest {
 		assertEquals("italian", cuisine.value)
 
 		assertEquals("Changed in 2020", find(bundle.getVisibleTags(true, emptyList()), "note")?.value)
+	}
+
+	@Test
+	fun valueLabelsFollowTheGroup() {
+		val types = poiTypes ?: return
+		fun label(name: String) = getValueLabel(types.getAnyPoiAdditionalTypeByKey(name) as PoiType)
+		assertEquals(ValueLabel.NAME_OVER_VALUE, label("takeaway_yes"))
+		assertEquals(ValueLabel.NAME_OVER_VALUE, label("smoking_no"))
+		assertEquals(ValueLabel.NAME, label("boat_kayak_rental_yes"))
+		assertEquals(ValueLabel.WHOLE, label("payment_pikepass_designated"))
 	}
 
 	@Test

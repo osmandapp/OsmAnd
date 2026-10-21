@@ -70,17 +70,13 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
 
                 val isTextPredefined = builder.hasTextPrefix() || builder.hasText()
                 if (!builder.hasTextPrefix() || !builder.hasText()) {
-                    val translation = poiType.getTranslation()
-                    val nameValue = AmenityTagEntriesBuilder.splitNameValue(translation)
                     if (poiType.isText()) {
-                        builder.setTextPrefixIfNotPresent(translation)
+                        builder.setTextPrefixIfNotPresent(poiType.getTranslation())
                         builder.setTextIfNotPresent(value)
-                    } else if (nameValue != null) {
-                        // "Name: value" -> "Name" over "Value"
-                        builder.setTextPrefixIfNotPresent(nameValue.first)
-                        builder.setTextIfNotPresent(Algorithms.capitalizeFirstLetter(nameValue.second))
                     } else {
-                        builder.setTextIfNotPresent(translation)
+                        val (tagName, tagValue) = AmenityTagEntriesBuilder.getValueLabelParts(poiType)
+                        tagName?.let { builder.setTextPrefixIfNotPresent(it) }
+                        builder.setTextIfNotPresent(tagValue)
                     }
                 }
 
