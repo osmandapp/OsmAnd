@@ -22,6 +22,7 @@ import net.osmand.StateChangedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ISupportInsets;
+import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -58,6 +59,18 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 		settings.DAYNIGHT_MODE.addListener(stateChangedListener);
 
 		super.onCreate(savedInstanceState);
+		if (savedInstanceState == null) {
+			AnalyticsHelper.logScreenOpen(app, getAnalyticsScreen());
+		}
+	}
+
+	/**
+	 * Screen name for the screen_open analytics event, null logs nothing.
+	 * Always a string literal: class names are obfuscated in release builds.
+	 */
+	@Nullable
+	public String getAnalyticsScreen() {
+		return null;
 	}
 
 	@Override

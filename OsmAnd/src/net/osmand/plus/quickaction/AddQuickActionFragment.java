@@ -289,5 +289,10 @@ public class AddQuickActionFragment extends BaseFullScreenFragment implements It
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "add_quick_action";
+	}
 }
 

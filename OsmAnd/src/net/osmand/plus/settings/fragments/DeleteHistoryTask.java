@@ -41,11 +41,12 @@ public class DeleteHistoryTask extends BaseLoadAsyncTask<Void, Void, Void> {
 	protected Void doInBackground(Void... voids) {
 		SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 		boolean clearBackupPoints = false;
+		List<SearchResult> searchResults = new ArrayList<>();
 		List<MapMarker> mapMarkers = new ArrayList<>();
 
 		for (Object item : selectedItems) {
 			if (item instanceof SearchResult searchResult) {
-				historyHelper.remove(searchResult);
+				searchResults.add(searchResult);
 			} else if (item instanceof TargetPoint) {
 				clearBackupPoints = true;
 			} else if (item instanceof MapMarker) {
@@ -53,6 +54,9 @@ public class DeleteHistoryTask extends BaseLoadAsyncTask<Void, Void, Void> {
 			}
 		}
 
+		if (!Algorithms.isEmpty(searchResults)) {
+			historyHelper.remove(searchResults);
+		}
 		if (clearBackupPoints) {
 			app.getTargetPointsHelper().clearBackupPoints();
 		}

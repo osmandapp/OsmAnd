@@ -316,4 +316,9 @@ public class ReportsFragment extends BaseFullScreenFragment implements OnFragmen
 		donationsTotalTextView.setTextColor(textColorPrimary);
 		recipientsTextView.setTextColor(textColorPrimary);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "live_updates_reports";
+	}
 }

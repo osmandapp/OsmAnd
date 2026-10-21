@@ -1,6 +1,7 @@
 package net.osmand.plus.download;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -40,6 +41,9 @@ public class DownloadFileHelper {
 
 	private final OsmandApplication ctx;
 	private boolean interruptDownloading;
+	private volatile int lastResponseCode;
+	private volatile String lastConnectError;
+	private volatile String failureReason;
 
 
 	public DownloadFileHelper(OsmandApplication ctx){
@@ -52,7 +56,39 @@ public class DownloadFileHelper {
 	}
 	
 	public static boolean isInterruptedException(IOException e) {
-		return e != null && e.getMessage().equals("Interrupted");
+		return e != null && "Interrupted".equals(e.getMessage());
+	}
+
+	/**
+	 * Generic reason of the last failed {@link #downloadFile} call for analytics:
+	 * an HTTP code, an errno class or an exception class name, never a message or a path.
+	 */
+	@Nullable
+	public String getFailureReason() {
+		return failureReason;
+	}
+
+	@NonNull
+	private String getFailureReason(@NonNull IOException e) {
+		String message = e.getMessage();
+		if (message != null) {
+			if (message.contains("ENOSPC")) {
+				return "no_space";
+			} else if (message.contains("EACCES") || message.contains("EPERM")) {
+				return "no_access";
+			} else if (message.contains("EROFS")) {
+				return "read_only";
+			}
+		}
+		int code = lastResponseCode;
+		if (code != 0 && code != HttpURLConnection.HTTP_OK && code != HttpURLConnection.HTTP_PARTIAL) {
+			return "http_" + code;
+		}
+		// plain IOException is thrown after the reconnect attempts, the cause is the last connect error
+		if (e.getClass() == IOException.class && lastConnectError != null) {
+			return lastConnectError;
+		}
+		return e.getClass().getSimpleName();
 	}
 	
 	public InputStream getInputStreamToDownload(URL url, boolean forceWifi) throws IOException {
@@ -86,6 +122,7 @@ public class DownloadFileHelper {
 						}
 						conn.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
 						log.info(conn.getResponseMessage() + " " + conn.getResponseCode()); //$NON-NLS-1$
+						lastResponseCode = conn.getResponseCode();
 						boolean wifiConnectionBroken = forceWifi && !isWifiConnected();
 						if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND){
 							notFound = true;
@@ -106,6 +143,7 @@ public class DownloadFileHelper {
 						return;
 					} catch (IOException e) {
 						log.error("IOException", e); //$NON-NLS-1$
+						lastConnectError = e.getClass().getSimpleName();
 						triesDownload--;
 					}
 				}
@@ -210,6 +248,9 @@ public class DownloadFileHelper {
 
 	public boolean downloadFile(IndexItem.DownloadEntry de, IProgress progress,
 								List<File> toReIndex, DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
+		lastResponseCode = 0;
+		lastConnectError = null;
+		failureReason = null;
 		try {
 			List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
 			URL url = new URL(de.urlToDownload); //$NON-NLS-1$
@@ -224,6 +265,7 @@ public class DownloadFileHelper {
 				ResourceManager rm = ctx.getResourceManager();
 				boolean success = FileUtils.replaceTargetFile(rm, de.fileToDownload, de.targetFile);
 				if (!success) {
+					failureReason = "replace_failed";
 					showWarningCallback.showWarning(ctx.getString(R.string.shared_string_io_error) + ": old file can't be deleted");
 					return false;
 				}
@@ -236,6 +278,7 @@ public class DownloadFileHelper {
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e);
+			failureReason = isInterruptedException(e) ? "interrupted" : getFailureReason(e);
 			showWarningCallback.showWarning(ctx.getString(R.string.shared_string_io_error) + ": " + e.getMessage());
 			// Possibly file is corrupted
 			Algorithms.removeAllFiles(de.fileToDownload);

@@ -284,4 +284,9 @@ public class MapButtonAppearanceFragment extends BaseFullScreenFragment implemen
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_button_appearance";
+	}
 }

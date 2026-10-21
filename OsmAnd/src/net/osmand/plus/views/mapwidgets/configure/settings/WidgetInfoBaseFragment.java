@@ -455,4 +455,9 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	                                @NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode) {
 		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, true, layoutMode);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "widget_info";
+	}
 }

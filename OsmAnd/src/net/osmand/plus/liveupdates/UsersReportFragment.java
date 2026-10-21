@@ -120,4 +120,9 @@ public class UsersReportFragment extends BaseFullScreenDialogFragment {
 			return v;
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "users_report";
+	}
 }

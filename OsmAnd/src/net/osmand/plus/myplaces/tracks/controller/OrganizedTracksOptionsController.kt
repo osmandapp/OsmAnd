@@ -14,7 +14,7 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.shared.gpx.data.OrganizedTracksGroup
 
 class OrganizedTracksOptionsController(
-	private val app: OsmandApplication,
+	app: OsmandApplication,
 	private val organizedTracksGroup: OrganizedTracksGroup
 ) : BaseDialogController(app), IDisplayDataProvider, IDialogItemClicked {
 
@@ -47,7 +47,7 @@ class OrganizedTracksOptionsController(
 	override fun getDisplayData(processId: String): DisplayData {
 		val iconsCache = app.uiUtilities
 		val displayData = DisplayData()
-		val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.APP)
+		val nightMode = app.daynightHelper.isNightMode(app.settings.applicationMode, ThemeUsageContext.APP)
 
 		val groupIconId = AndroidUtils.getDrawableId(app, organizedTracksGroup.getIconName(), R.drawable.ic_action_folder_smart)
 		displayData.addDisplayItem(

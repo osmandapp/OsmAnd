@@ -95,4 +95,9 @@ public class TripRecordingSlopeInfoFragment extends BaseSimpleWidgetInfoFragment
 		super.onResume();
 		updateModeSetting();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "trip_recording_slope_info";
+	}
 }

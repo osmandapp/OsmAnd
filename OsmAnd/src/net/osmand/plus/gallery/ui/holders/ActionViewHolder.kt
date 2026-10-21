@@ -3,7 +3,7 @@ package net.osmand.plus.gallery.ui.holders
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
-import net.osmand.plus.activities.MapActivity
+import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.gallery.model.GalleryAction
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.utils.AndroidUtils
@@ -16,17 +16,17 @@ class ActionViewHolder(
 
 	fun bindView(
 		nightMode: Boolean,
-		mapActivity: MapActivity,
+		activity: FragmentActivity,
 		item: GalleryItem.Action
 	) {
 		itemView.findViewById<View>(R.id.card_background).visibility = View.GONE
 		AndroidUtils.setBackgroundColor(
-			mapActivity,
+			activity,
 			itemView,
 			ColorUtilities.getActivityBgColorId(nightMode)
 		)
 		AndroidUtils.setTextPrimaryColor(
-			mapActivity,
+			activity,
 			itemView.findViewById(R.id.title),
 			nightMode
 		)

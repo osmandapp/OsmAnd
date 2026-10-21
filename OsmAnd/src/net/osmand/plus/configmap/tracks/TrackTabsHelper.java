@@ -4,6 +4,7 @@ import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_NO_TRACKS;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_NO_VISIBLE_TRACKS;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_RECENTLY_VISIBLE_TRACKS;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_SORT_TRACKS;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,14 +48,28 @@ public class TrackTabsHelper {
 	private final ItemsSelectionHelper<TrackItem> itemsSelectionHelper;
 
 	private final Set<TrackItem> recentlyVisibleTrackItem = new HashSet<>();
+	private final Set<TrackItem> visibleTrackItems = new HashSet<>();
 	private final Set<String> sortedTrackTabIds = new HashSet<>();
 	protected final Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
 
+	@Nullable
+	private final Set<String> initialSelectedPaths;
+	private boolean selectionInitialized;
+
 	public TrackTabsHelper(@NonNull OsmandApplication app) {
+		this(app, null);
+	}
+
+	/**
+	 * @param selectedPaths tracks to check instead of the visible ones when picking tracks,
+	 *                      or null to edit the visibility of tracks on the map
+	 */
+	public TrackTabsHelper(@NonNull OsmandApplication app, @Nullable Collection<String> selectedPaths) {
 		this.app = app;
 		this.settings = app.getSettings();
 		this.gpxSelectionHelper = app.getSelectedGpxHelper();
 		this.itemsSelectionHelper = new ItemsSelectionHelper<>();
+		this.initialSelectedPaths = selectedPaths != null ? new HashSet<>(selectedPaths) : null;
 	}
 
 	@NonNull
@@ -196,9 +211,10 @@ public class TrackTabsHelper {
 	@NonNull
 	private List<Object> getVisibleItems() {
 		List<Object> items = new ArrayList<>();
-		Set<TrackItem> originalSelectedItems = itemsSelectionHelper.getOriginalSelectedItems();
-		if (!Algorithms.isEmpty(originalSelectedItems)) {
-			items.addAll(originalSelectedItems);
+		Set<TrackItem> visibleItems = initialSelectedPaths != null
+				? visibleTrackItems : itemsSelectionHelper.getOriginalSelectedItems();
+		if (!Algorithms.isEmpty(visibleItems)) {
+			items.addAll(visibleItems);
 		} else if (Algorithms.isEmpty(itemsSelectionHelper.getAllItems())) {
 			items.add(TYPE_NO_TRACKS);
 		} else {
@@ -219,6 +235,7 @@ public class TrackTabsHelper {
 	}
 
 	public void processVisibleTracks() {
+		Set<String> selectedPaths = selectionInitialized ? new HashSet<>(getSelectedPaths()) : initialSelectedPaths;
 		List<TrackItem> selectedItems = new ArrayList<>();
 		if (gpxSelectionHelper.isAnyGpxFileSelected()) {
 			for (TrackItem info : itemsSelectionHelper.getAllItems()) {
@@ -228,8 +245,53 @@ public class TrackTabsHelper {
 				}
 			}
 		}
-		itemsSelectionHelper.setSelectedItems(selectedItems);
-		itemsSelectionHelper.setOriginalSelectedItems(selectedItems);
+		if (initialSelectedPaths == null || selectedPaths == null) {
+			itemsSelectionHelper.setSelectedItems(selectedItems);
+			itemsSelectionHelper.setOriginalSelectedItems(selectedItems);
+		} else {
+			visibleTrackItems.clear();
+			visibleTrackItems.addAll(selectedItems);
+			itemsSelectionHelper.setOriginalSelectedItems(getTrackItems(initialSelectedPaths));
+			itemsSelectionHelper.setSelectedItems(getTrackItems(selectedPaths));
+			selectionInitialized = true;
+		}
+	}
+
+	@NonNull
+	public List<String> getSelectedPaths() {
+		List<String> paths = new ArrayList<>();
+		for (TrackItem item : itemsSelectionHelper.getSelectedItems()) {
+			paths.add(getTrackPath(item));
+		}
+		if (initialSelectedPaths != null) {
+			// Keep tracks the list can't show, e.g. the current track while recording is off
+			Set<String> shownPaths = new HashSet<>();
+			for (TrackItem item : itemsSelectionHelper.getAllItems()) {
+				shownPaths.add(getTrackPath(item));
+			}
+			for (String path : initialSelectedPaths) {
+				if (!shownPaths.contains(path)) {
+					paths.add(path);
+				}
+			}
+		}
+		return paths;
+	}
+
+	@NonNull
+	private Set<TrackItem> getTrackItems(@NonNull Set<String> paths) {
+		Set<TrackItem> items = new HashSet<>();
+		for (TrackItem item : itemsSelectionHelper.getAllItems()) {
+			if (paths.contains(getTrackPath(item))) {
+				items.add(item);
+			}
+		}
+		return items;
+	}
+
+	@NonNull
+	private static String getTrackPath(@NonNull TrackItem item) {
+		return item.isShowCurrentTrack() ? CURRENT_TRACK : item.getPath();
 	}
 
 	@NonNull

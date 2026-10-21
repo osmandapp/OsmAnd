@@ -86,7 +86,7 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 		//"characteristic.value" is deprecated but should be used inside onCharacteristicRead callback
 		if (status == BluetoothGatt.GATT_SUCCESS) {
 			if (requestedCharacteristicUUID == characteristic.uuid) {
-				extrudeOBDData(characteristic.value)
+				extrudeOBDData(@Suppress("DEPRECATION") characteristic.value)
 			}
 		}
 	}
@@ -97,7 +97,7 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 		val charaUUID = characteristic.uuid
 		//"characteristic.value" is deprecated but should be used inside onCharacteristicChanged callback
 		if (requestedCharacteristicUUID == charaUUID) {
-			extrudeOBDData(characteristic.value)
+			extrudeOBDData(@Suppress("DEPRECATION") characteristic.value)
 		}
 	}
 
