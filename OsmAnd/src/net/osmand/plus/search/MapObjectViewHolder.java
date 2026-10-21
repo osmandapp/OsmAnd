@@ -145,7 +145,7 @@ public class MapObjectViewHolder extends RecyclerView.ViewHolder {
 				case VILLAGE -> app.getString(R.string.city_type_village);
 				case SUBURB -> app.getString(R.string.city_type_suburb);
 				case TOWN -> app.getString(R.string.city_type_town);
-				case BOUNDARY -> app.getString(R.string.poi_boundary_stone);
+				case BOUNDARY -> app.getString(R.string.city_type_boundary);
 				case POSTCODE -> app.getString(R.string.postcode);
 				case HAMLET -> app.getString(R.string.city_type_hamlet);
 				case NEIGHBOURHOOD -> app.getString(R.string.city_type_neighbourhood);

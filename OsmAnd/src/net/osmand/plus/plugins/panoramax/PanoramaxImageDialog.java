@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.webkit.WebMessage;
 import android.webkit.WebMessagePort;
 import android.webkit.WebResourceError;
@@ -31,6 +32,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDial
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.shared.panoramax.PanoramaxApi;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,6 +48,19 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 	private static final String BLANK_PAGE_URL = "about:blank";
 
 	private static final String VIEWER_ERROR_URL = "osmand-panoramax://viewer-failed";
+
+	/**
+	 * Official photo only viewer bundle, pinned to the panoramax/web-viewer npm package 5.2.0.
+	 * Changing the version means recomputing {@link #VIEWER_BUNDLE_INTEGRITY}, or the script
+	 * is rejected and the viewer never loads.
+	 */
+	private static final String VIEWER_BUNDLE_URL =
+			"https://cdn.jsdelivr.net/npm/@panoramax/web-viewer@5.2.0/build/cjs/index_photoviewer.js";
+
+	/** SRI digest of exactly the file {@link #VIEWER_BUNDLE_URL} points at.
+	 * Update the integrity hash when changing the bundle version. */
+	private static final String VIEWER_BUNDLE_INTEGRITY =
+			"sha384-A/XfT5HrbLfgrhBB5mk3bsNTuq7SqwhcUZqzYzFRko0jGYYIuf8CTk3y2ufVRPox";
 
 	private static final int VIEWER_TIMEOUT_MS = 20000;
 
@@ -174,6 +189,8 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 	private double compassAngle = Double.NaN;
 	private final UiUtilities iconsCache;
 
+	// The WebView the live callbacks belong to; one from any other WebView is stale.
+	private WebView webView;
 	private WebMessagePort viewerPort;
 	private String viewerNonce;
 	private long lastHeadingTime;
@@ -282,6 +299,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 	private View getWebView() {
 		View view = getMapActivity().getLayoutInflater().inflate(R.layout.panoramax_web_view, null);
 		WebView webView = view.findViewById(R.id.webView);
+		this.webView = webView;
 		webView.setBackgroundColor(Color.argb(1, 0, 0, 0));
 		View noInternetView = view.findViewById(R.id.panoramaxNoInternetLayout);
 		Drawable icWifiOff = iconsCache.getThemedIcon(R.drawable.ic_action_wifi_off);
@@ -299,16 +317,21 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		webView.setWebViewClient(new WebViewClient() {
 			@Override
 			public void onPageFinished(WebView view, String url) {
+				if (!isCurrentWebView(view)) {
+					return;
+				}
 				releaseViewerPort();
 				if (!BLANK_PAGE_URL.equals(url)) {
-					openViewerChannel(webView);
+					openViewerChannel(view);
 				}
 			}
 
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
 				if (VIEWER_ERROR_URL.equals(request.getUrl().toString())) {
-					showViewerError(webView, noInternetView);
+					if (isCurrentWebView(view)) {
+						showViewerError(view, noInternetView);
+					}
 					return true;
 				}
 				return false;
@@ -318,8 +341,8 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 			public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
 				// The page itself is loaded from memory and never fails, so the bundle is the
 				// only request whose failure leaves the viewer unusable.
-				if (PanoramaxConstants.VIEWER_BUNDLE_URL.equals(request.getUrl().toString())) {
-					showViewerError(webView, noInternetView);
+				if (isCurrentWebView(view) && VIEWER_BUNDLE_URL.equals(request.getUrl().toString())) {
+					showViewerError(view, noInternetView);
 				}
 			}
 		});
@@ -330,6 +353,9 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 
 	private void showViewerError(@NonNull WebView webView, @NonNull View noInternetView) {
 		webView.post(() -> {
+			if (!isCurrentWebView(webView)) {
+				return;
+			}
 			webView.loadUrl(BLANK_PAGE_URL);
 			noInternetView.setVisibility(View.VISIBLE);
 		});
@@ -340,7 +366,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		noInternetView.setVisibility(online ? View.GONE : View.VISIBLE);
 		if (online) {
 			viewerNonce = UUID.randomUUID().toString();
-			webView.loadDataWithBaseURL(PanoramaxConstants.INSTANCE_URL, buildViewerHtml(),
+			webView.loadDataWithBaseURL(PanoramaxApi.INSTANCE_URL, buildViewerHtml(),
 					"text/html", "UTF-8", null);
 		}
 	}
@@ -355,11 +381,11 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		viewerPort.setWebMessageCallback(new WebMessagePort.WebMessageCallback() {
 			@Override
 			public void onMessage(WebMessagePort port, WebMessage message) {
-				onViewerMessage(message.getData());
+				onViewerMessage(port, message.getData());
 			}
 		}, new Handler(Looper.getMainLooper()));
 		webView.postWebMessage(new WebMessage(viewerNonce, new WebMessagePort[] {ports[1]}),
-				Uri.parse(PanoramaxConstants.INSTANCE_URL));
+				Uri.parse(PanoramaxApi.INSTANCE_URL));
 	}
 
 	private void releaseViewerPort() {
@@ -369,8 +395,31 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		}
 	}
 
-	private void onViewerMessage(@Nullable String data) {
-		if (data == null) {
+	private boolean isCurrentWebView(@Nullable WebView view) {
+		return view != null && view == webView;
+	}
+
+	/** Releases the viewer and invalidates callbacks before destroying the WebView. */
+	@Override
+	public void onDestroyView() {
+		WebView webView = this.webView;
+		if (webView != null) {
+			this.webView = null;
+			releaseViewerPort();
+			webView.stopLoading();
+			webView.setWebViewClient(new WebViewClient());
+			ViewParent parent = webView.getParent();
+			if (parent instanceof ViewGroup) {
+				((ViewGroup) parent).removeView(webView);
+			}
+			webView.destroy();
+		}
+		super.onDestroyView();
+	}
+
+	/** Close() does not drop messages already queued, so a stale port must be ignored here. */
+	private void onViewerMessage(@NonNull WebMessagePort port, @Nullable String data) {
+		if (port != viewerPort || data == null) {
 			return;
 		}
 		JSONObject message;
@@ -464,12 +513,12 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 				// The bundle ends with a CommonJS assignment that throws without this.
 				+ "<script>var exports={};"
 				+ "function pnxFail(){location.href='" + VIEWER_ERROR_URL + "';}</script>"
-				+ "<script src='" + PanoramaxConstants.VIEWER_BUNDLE_URL + "'"
-				+ " integrity='" + PanoramaxConstants.VIEWER_BUNDLE_INTEGRITY + "'"
+				+ "<script src='" + VIEWER_BUNDLE_URL + "'"
+				+ " integrity='" + VIEWER_BUNDLE_INTEGRITY + "'"
 				+ " crossorigin='anonymous' onerror='pnxFail()'></script>"
 				+ "</head><body>"
 				+ "<pnx-photo-viewer id='viewer'"
-				+ " endpoint='" + PanoramaxConstants.API_URL + "'"
+				+ " endpoint='" + PanoramaxApi.API_URL + "'"
 				+ " picture='" + escapeAttribute(imageId) + "'"
 				+ " widgets='false' url-parameters='false' keyboard-shortcuts='false'>"
 				+ "<pnx-widget-player slot='top' size='md'></pnx-widget-player>"

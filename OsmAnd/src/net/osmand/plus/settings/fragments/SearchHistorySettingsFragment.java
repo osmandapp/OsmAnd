@@ -133,5 +133,10 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 			fragment.show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "search_history_settings";
+	}
 }
 

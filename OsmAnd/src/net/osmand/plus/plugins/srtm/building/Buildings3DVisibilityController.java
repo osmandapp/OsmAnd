@@ -10,6 +10,7 @@ import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class Buildings3DVisibilityController extends BaseDialogController {
 
@@ -19,6 +20,7 @@ public class Buildings3DVisibilityController extends BaseDialogController {
 	private static final int MAX_VISIBILITY = 100;
 
 	private final SRTMPlugin plugin;
+	private final OsmandSettings settings;
 	private final int initialVisibility;
 	private int visibility;
 	private boolean applyChanges = false;
@@ -27,7 +29,8 @@ public class Buildings3DVisibilityController extends BaseDialogController {
 	                                       @NonNull SRTMPlugin plugin) {
 		super(app);
 		this.plugin = plugin;
-		initialVisibility = (int) (plugin.BUILDINGS_3D_ALPHA.get() * 100);
+		this.settings = app.getSettings();
+		initialVisibility = (int) (settings.BUILDINGS_3D_ALPHA.get() * 100);
 		visibility = initialVisibility;
 	}
 
@@ -41,7 +44,7 @@ public class Buildings3DVisibilityController extends BaseDialogController {
 		visibility = (int) percent;
 		float alpha = percent / 100;
 		plugin.apply3DBuildingsAlpha(alpha);
-		plugin.BUILDINGS_3D_ALPHA.set(alpha);
+		settings.BUILDINGS_3D_ALPHA.set(alpha);
 	}
 
 	public void onApplyChanges() {

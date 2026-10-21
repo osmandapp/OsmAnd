@@ -7,3 +7,4 @@
 *.osm
 phrases.xml
 *.obf.gz
+/net/osmand/search/rules/rules*.xml

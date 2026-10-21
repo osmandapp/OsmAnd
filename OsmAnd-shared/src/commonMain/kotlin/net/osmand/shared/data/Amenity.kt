@@ -306,7 +306,7 @@ class Amenity : MapObject() {
 	}
 
 	override fun toStringEn(): String =
-		super.toStringEn() + ": " + type?.getKeyName() + ":" + subType
+		ORIGIN_PREFIX + ":" + getEnName(true) + ": " + type?.getKeyName() + ":" + subType
 
 	override fun toString(): String = type?.getKeyName() + ": " + subType + " " + getName()
 
@@ -927,6 +927,8 @@ class Amenity : MapObject() {
 	}
 
 	companion object {
+		/** Stable prefix for persisted Amenity origins, independent of runtime class names and R8 obfuscation. */
+		const val ORIGIN_PREFIX: String = "Amenity"
 		const val WEBSITE: String = "website"
 		const val URL: String = "url"
 		const val PHONE: String = "phone"

@@ -782,4 +782,9 @@ public class OnlineRoutingEngineFragment extends BaseFullScreenFragment implemen
 		engine.put(EngineParameter.APPROXIMATION_DERIVED_PROFILE, args.getString(DERIVED_PROFILE_ARG));
 		setApproximateCardTitle();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "online_routing_engine";
+	}
 }

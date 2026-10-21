@@ -46,6 +46,8 @@ import net.osmand.util.MapUtils;
 
 public class Amenity extends MapObject {
 
+	/** Stable prefix for persisted Amenity origins, independent of runtime class names and R8 obfuscation. */
+	public static final String ORIGIN_PREFIX = "Amenity";
 	public static final String WEBSITE = "website";
 	public static final String URL = "url";
 	public static final String PHONE = "phone";
@@ -69,6 +71,7 @@ public class Amenity extends MapObject {
 	public static final String WIKIDATA = "wikidata";
 	public static final String WIKIMEDIA_COMMONS = "wikimedia_commons";
 	public static final String MAPILLARY = "mapillary";
+	public static final String PANORAMAX = "panoramax";
 	public static final String DISH = "dish";
 	public static final String REF = "ref";
 	public static final String OSM_DELETE_VALUE = "delete";
@@ -411,7 +414,7 @@ public class Amenity extends MapObject {
 
 	@Override
 	public String toStringEn() {
-		return super.toStringEn() + ": " + type.getKeyName() + ":" + subType;
+		return ORIGIN_PREFIX + ":" + getEnName(true) + ": " + type.getKeyName() + ":" + subType;
 	}
 
 	@Override

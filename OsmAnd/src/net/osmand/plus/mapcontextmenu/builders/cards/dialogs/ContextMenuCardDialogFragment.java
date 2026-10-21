@@ -115,6 +115,9 @@ public class ContextMenuCardDialogFragment extends BaseFullScreenFragment implem
 
 	@Override
 	public void onDestroyView() {
+		if (dialog != null) {
+			dialog.onDestroyView();
+		}
 		super.onDestroyView();
 		if (contentLayout != null && contentView != null) {
 			contentLayout.removeView(contentView);
@@ -186,5 +189,10 @@ public class ContextMenuCardDialogFragment extends BaseFullScreenFragment implem
 		return view == null
 				? Collections.emptyList()
 				: Collections.singletonList(AndroidUtils.getViewBoundOnScreen(view));
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "context_menu_card";
 	}
 }

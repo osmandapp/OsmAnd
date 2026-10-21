@@ -199,7 +199,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				itemHolder.title.setText(groupName);
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_flag, activeColorRes));
 			} else if (currentItem instanceof GpxDirItem dirItem) {
-				itemHolder.title.setText(GpxHelper.INSTANCE.getGpxTitle(dirItem.getFile().name()));
+				itemHolder.title.setText(dirItem.getFile().name());
 				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);

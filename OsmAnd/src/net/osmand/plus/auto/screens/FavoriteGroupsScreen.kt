@@ -3,7 +3,6 @@ package net.osmand.plus.auto.screens
 import androidx.car.app.CarContext
 import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.*
-import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -23,10 +22,11 @@ class FavoriteGroupsScreen(
         })
     }
 
+    @Suppress("DEPRECATION") // PlaceListNavigationTemplate, needs migration to MapWithContentTemplate
     override fun getTemplate(): Template {
         val listBuilder = ItemList.Builder()
         setupFavoriteGroups(listBuilder)
-        return PlaceListNavigationTemplate.Builder()
+        return androidx.car.app.navigation.model.PlaceListNavigationTemplate.Builder()
             .setItemList(listBuilder.build())
             .setTitle(app.getString(R.string.shared_string_favorites))
             .setActionStrip(ActionStrip.Builder().addAction(createSearchAction()).build())

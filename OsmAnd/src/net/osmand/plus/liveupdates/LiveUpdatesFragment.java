@@ -670,4 +670,9 @@ public class LiveUpdatesFragment extends BaseFullScreenDialogFragment implements
 			fragment.show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "live_updates";
+	}
 }
