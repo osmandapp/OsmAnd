@@ -2,6 +2,7 @@ package net.osmand.plus.gallery.online.tasks;
 
 import static net.osmand.plus.gallery.online.OnlinePhotosGroup.MAPILLARY_AMENITY;
 import static net.osmand.plus.gallery.online.OnlinePhotosGroup.OTHER;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.PANORAMAX_AMENITY;
 import static net.osmand.plus.gallery.online.OnlinePhotosGroup.WIKIMEDIA;
 
 import android.net.TrafficStats;
@@ -14,19 +15,23 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.gallery.online.OnlinePhotosHolder;
-import net.osmand.shared.media.RemoteMediaFactory;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryOsmTagHelper;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.shared.api.NetworkAPI.NetworkResponse;
+import net.osmand.shared.media.PanoramaxMediaFactory;
+import net.osmand.shared.media.RemoteMediaFactory;
 import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.shared.media.domain.MediaOrigin;
-import net.osmand.shared.wiki.WikiImage;
-import net.osmand.util.Algorithms;
+import net.osmand.shared.panoramax.PanoramaxApi;
 import net.osmand.shared.wiki.WikiCoreHelper;
 import net.osmand.shared.wiki.WikiCoreHelper.NetworkResponseListener;
+import net.osmand.shared.wiki.WikiImage;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -100,6 +105,24 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 					if (item != null) {
 						holder.addItem(MAPILLARY_AMENITY, item);
 					}
+				}
+			}
+			String panoramaxValue = params.remove(Amenity.PANORAMAX);
+			List<String> panoramaxIds = PanoramaxMediaFactory.parseIds(panoramaxValue);
+			if (!panoramaxIds.isEmpty()) {
+				try {
+					String searchUrl = PanoramaxApi.getSearchUrl(panoramaxIds);
+					NetworkResponse panoramaxResponse = NetworkUtils.sendGetRequest(searchUrl, null);
+					if (panoramaxResponse.getError() == null) {
+						for (MediaItem.Remote item : PanoramaxMediaFactory.fromSearchResponse(
+								panoramaxResponse.getResponse(), panoramaxIds)) {
+							holder.addItem(PANORAMAX_AMENITY, item);
+						}
+					} else {
+						LOG.warn(panoramaxResponse.getError());
+					}
+				} catch (Exception e) {
+					LOG.error(e);
 				}
 			}
 			httpPms.putAll(params);

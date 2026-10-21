@@ -306,4 +306,9 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favorite_appearance";
+	}
 }

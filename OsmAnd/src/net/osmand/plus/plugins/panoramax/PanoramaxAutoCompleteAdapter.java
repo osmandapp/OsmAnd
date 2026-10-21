@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutionException;
 
 public class PanoramaxAutoCompleteAdapter extends ArrayAdapter<String> {
 
-	private static final String TAG = PanoramaxAutoCompleteAdapter.class.getSimpleName();
+	private static final String TAG = "PanoramaxAutoCompleteAdapter";
 
 	private final OsmandApplication app;
 	private final PanoramaxPlugin plugin;

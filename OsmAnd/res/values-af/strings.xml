@@ -523,13 +523,11 @@
     <string name="recording_unavailable">nie beskikbaar nie</string>
     <string name="recording_context_menu_arecord">Neem `n oudio nota</string>
     <string name="recording_context_menu_vrecord">Neem `n video nota</string>
-    <string name="layer_recordings">Opname vel</string>
     <string name="recording_context_menu_play">Speel</string>
     <string name="recording_description">Opname %1$s %2$s van %3$s</string>
     <string name="recording_default_name">besig met opname</string>
     <string name="shared_string_control_start">begin</string>
     <string name="map_widget_av_notes">Oudio/video notas</string>
-    <string name="audionotes_plugin_name">Oudio/video notas</string>
     <string name="map_widget_audionotes">Oudio notas</string>
     <string name="download_select_map_types">Ander kaarte</string>
     <string name="download_srtm_maps">Kontoerlyne</string>

@@ -239,4 +239,9 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "purchases";
+	}
 }

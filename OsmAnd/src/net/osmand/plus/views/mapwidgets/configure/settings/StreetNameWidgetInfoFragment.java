@@ -84,4 +84,9 @@ public class StreetNameWidgetInfoFragment extends WidgetInfoBaseFragment {
 	protected void applySettings() {
 		widget.setShowNextTurnEnabled(appMode, showNextTurn);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "street_name_widget_info";
+	}
 }

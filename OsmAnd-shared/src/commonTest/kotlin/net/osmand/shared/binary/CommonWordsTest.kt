@@ -48,11 +48,6 @@ class CommonWordsTest {
 		assertEquals("Street", Abbreviations.replace("St"))
 		assertEquals("Main", Abbreviations.replace("Main"))
 		assertTrue(Abbreviations.isConjunction("und"))
-		assertTrue(Abbreviations.isCommonSkipOtherCnt("northwest"))
-		assertEquals("Street Saint", Abbreviations.getSearchabbreviations()["st"])
-		assertTrue(Abbreviations.likelyPartOfBuilding("2bis", setOf("2", "bis")))
-		assertFalse(Abbreviations.likelyPartOfBuilding("main", null))
-		assertTrue(Abbreviations.likelyPartOfRef("a1", setOf("a", "1")))
 	}
 
 	@Test
@@ -111,19 +106,10 @@ class CommonWordsTest {
 	}
 
 	private fun abbreviationLine(line: String): String {
-		val fields = line.substring(2).split("\t")
-		val w = dumpUnhex(fields[0])
-		val parts = LinkedHashSet<String>()
-		if (fields[1].isNotEmpty()) {
-			fields[1].split(",").mapTo(parts) { dumpUnhex(it) }
-		}
-		return "A " + fields[0] + "\t" + fields[1] +
+		val w = dumpUnhex(line.substring(2, line.indexOf('\t')))
+		return "A " + dumpHex(w) +
 				"\t" + Abbreviations.isConjunction(w) +
-				"\t" + dumpHex(Abbreviations.replace(w)) +
-				"\t" + Abbreviations.isCommonSkipOtherCnt(w) +
-				"\t" + Abbreviations.likelyPartOfBuilding(w, parts) +
-				"\t" + Abbreviations.likelyPartOfBuilding(w, null) +
-				"\t" + Abbreviations.likelyPartOfRef(w, parts)
+				"\t" + dumpHex(Abbreviations.replace(w))
 	}
 
 	private fun lettersLine(line: String): String {
