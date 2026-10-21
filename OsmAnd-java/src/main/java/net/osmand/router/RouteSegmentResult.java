@@ -741,7 +741,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return streetName;
 	}
 
-	private static String getNameBeforeTurn(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd) {
+	private String getNameBeforeTurn(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd) {
 		// the turn is on this segment (route directions) or on the previous one (turn descriptions)
 		int turnInd = routeInd;
 		if (list.get(turnInd).getTurnType() == null) {
