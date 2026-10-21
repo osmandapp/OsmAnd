@@ -95,7 +95,7 @@
 					android:paddingTop="@dimen/content_padding_half"
 					android:paddingEnd="@dimen/content_padding"
 					android:paddingBottom="@dimen/content_padding_half"
-					android:text="@string/quick_action_add_track"
+					android:text="@string/select_tracks"
 					android:textColor="?attr/colorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
 					app:typefaceWeight="medium"

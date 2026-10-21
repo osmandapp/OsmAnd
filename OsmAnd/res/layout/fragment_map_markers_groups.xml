@@ -20,6 +20,7 @@
         android:layout_gravity="bottom|end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/add_group"
         app:srcCompat="@drawable/ic_action_plus"
         app:backgroundTint="?attr/active_color_basic"
         app:tint="?attr/app_bar_primary_item_color"

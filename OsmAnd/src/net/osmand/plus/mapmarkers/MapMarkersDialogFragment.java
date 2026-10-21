@@ -476,4 +476,9 @@ public class MapMarkersDialogFragment extends BaseFullScreenDialogFragment imple
 			return fragments.size();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_markers";
+	}
 }

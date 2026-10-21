@@ -125,6 +125,11 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 			fragment.show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "navigation_history_settings";
+	}
 }
 
 

@@ -10,6 +10,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -153,6 +154,40 @@ public class PanoramaxImageTest {
 	public void returnsZeroWhenAFeatureCarriesNoDateAtAll() {
 		assertEquals(0, PanoramaxImage.parseCaptureTime(new HashMap<String, Object>()));
 		assertEquals(0, PanoramaxImage.parseCaptureTime(null));
+	}
+
+	@Test
+	public void readsTheDayOfASequenceFeatureAsADate() {
+		Map<String, Object> sequence = new HashMap<>();
+		sequence.put(PanoramaxImage.DATE_KEY, "2025-04-15");
+		assertEquals(LocalDate.of(2025, 4, 15), PanoramaxImage.parseCaptureDate(sequence));
+	}
+
+	@Test
+	public void hasNoDateWhenTheFeatureIsDatedByATimestamp() {
+		Map<String, Object> picture = new HashMap<>();
+		picture.put(PanoramaxImage.TIMESTAMP_KEY, "2024-07-18 07:48:24.248+00");
+		assertNull(PanoramaxImage.parseCaptureDate(picture));
+
+		Map<String, Object> both = new HashMap<>();
+		both.put(PanoramaxImage.TIMESTAMP_KEY, "2024-07-18 07:48:24.248+00");
+		both.put(PanoramaxImage.DATE_KEY, "2025-04-15");
+		assertNull(PanoramaxImage.parseCaptureDate(both));
+	}
+
+	@Test
+	public void hasNoDateWhenTheDayIsMissingOrUnreadable() {
+		assertNull(PanoramaxImage.parseCaptureDate(null));
+		assertNull(PanoramaxImage.parseCaptureDate(new HashMap<String, Object>()));
+
+		Map<String, Object> broken = new HashMap<>();
+		broken.put(PanoramaxImage.DATE_KEY, "not a date");
+		assertNull(PanoramaxImage.parseCaptureDate(broken));
+
+		// A value that carries a time is an instant, so it stays on the timestamp path.
+		Map<String, Object> withTime = new HashMap<>();
+		withTime.put(PanoramaxImage.DATE_KEY, "2025-04-15 10:00:00+00");
+		assertNull(PanoramaxImage.parseCaptureDate(withTime));
 	}
 
 	@Test

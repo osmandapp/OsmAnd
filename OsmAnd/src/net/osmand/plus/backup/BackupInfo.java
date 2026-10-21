@@ -95,7 +95,9 @@ public class BackupInfo {
 		BackupHelper helper = app.getBackupHelper();
 		for (RemoteFile remoteFile : filesToDownload) {
 			ExportType type = ExportType.findBy(remoteFile);
-			if (type != null && helper.getBackupTypePref(type, autoSync).get()) {
+			// manual sync warns about a name too long for the device, auto sync would repeat it on every run
+			boolean skip = autoSync && BackupUtils.isFileNameTooLong(remoteFile.getName());
+			if (type != null && !skip && helper.getBackupTypePref(type, autoSync).get()) {
 				files.add(remoteFile);
 			}
 		}

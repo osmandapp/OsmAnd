@@ -7,7 +7,9 @@ import net.osmand.CallbackWithObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class CollectionUtils {
@@ -88,6 +90,21 @@ public class CollectionUtils {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * Removes the entries with the given keys from {@code source} (which is modified) and returns
+	 * them in a new map, in the order of {@code keys}. Keys absent from {@code source} are ignored.
+	 */
+	@SafeVarargs
+	public static <K, V> Map<K, V> extractEntries(Map<K, V> source, K... keys) {
+		Map<K, V> extracted = new LinkedHashMap<>();
+		for (K key : keys) {
+			if (source.containsKey(key)) {
+				extracted.put(key, source.remove(key));
+			}
+		}
+		return extracted;
 	}
 
 	/********************* Inclusion Checks *******************************/

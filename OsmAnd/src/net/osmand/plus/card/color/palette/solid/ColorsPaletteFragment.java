@@ -201,4 +201,9 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 			new ColorsPaletteFragment().show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "colors_palette";
+	}
 }

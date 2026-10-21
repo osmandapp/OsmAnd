@@ -70,21 +70,7 @@
 		android:background="?attr/list_background_color"
 		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:orientation="vertical">
-
-			<net.osmand.plus.gallery.ui.GalleryGridRecyclerView
-				android:id="@+id/content_list"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:background="?attr/list_background_color"
-				android:clipToPadding="false"
-				android:paddingHorizontal="13dp"
-				android:paddingBottom="@dimen/content_padding_large"/>
-
-		</LinearLayout>
+		<include layout="@layout/gallery_grid_content" />
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/shadow_view"

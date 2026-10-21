@@ -185,7 +185,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 	public void startListeningLocationUpdates() {
 		OsmAndLocationProvider locationProvider = app.getLocationProvider();
-		locationProvider.resumeAllUpdates();
 		locationProvider.addCompassListener(this);
 		locationProvider.addLocationListener(this);
 		locationProvider.removeCompassListener(locationProvider.getNavigationInfo());

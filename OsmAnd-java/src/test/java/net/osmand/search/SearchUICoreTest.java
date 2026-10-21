@@ -238,7 +238,37 @@ public class SearchUICoreTest {
 			}
 		}
 
+		JSONArray geocodingJson = sourceJson.optJSONArray("geocoding");
+		if (geocodingJson != null && !readers.isEmpty()) {
+			for (int i = 0; i < geocodingJson.length(); i++) {
+				JSONObject g = geocodingJson.getJSONObject(i);
+				testReverseGeocoding(g.getDouble("lat"), g.getDouble("lon"), g.getString("result"), readers.get(0));
+			}
+		}
+
 		obfFile.delete();
+	}
+
+	// "geocoding": [{"lat", "lon", "result"}] - the first address of the point as "<house>, <street>, <city>"
+	private void testReverseGeocoding(double lat, double lon, String expected, BinaryMapIndexReader reader) throws IOException {
+		if (geoCtx == null) {
+			geoCtx = GeocodingUtilities.buildDefaultContextForPOI(reader);
+		}
+		List<GeocodingResult> geoResult = geoUtils.reverseGeocodingSearch(geoCtx, lat, lon, false);
+		geoResult = geoUtils.findAddresses(Collections.singletonList(reader), geoResult);
+		StringBuilder present = new StringBuilder();
+		if (!geoResult.isEmpty()) {
+			GeocodingResult r = geoResult.get(0);
+			if (r.building != null) {
+				present.append(r.getBuildingString()).append(", ");
+			}
+			if (r.street != null) {
+				present.append(r.street.getName()).append(", ").append(r.city.getName());
+			} else {
+				present.append(r.streetName);
+			}
+		}
+		Assert.assertEquals(expected, present.toString());
 	}
 
 	private void testReverseGeocoding(SearchResult searchResult, BinaryMapIndexReader reader) throws IOException {
@@ -251,7 +281,7 @@ public class SearchUICoreTest {
 		List<GeocodingResult> geoResult = geoUtils.reverseGeocodingSearch(
 				geoCtx, searchResult.location.getLatitude(), searchResult.location.getLongitude(), false);
 
-		geoResult = geoUtils.sortGeocodingResults(Collections.singletonList(reader), geoResult);
+		geoResult = geoUtils.findAddresses(Collections.singletonList(reader), geoResult);
 
 		Assert.assertFalse(geoResult.isEmpty());
 

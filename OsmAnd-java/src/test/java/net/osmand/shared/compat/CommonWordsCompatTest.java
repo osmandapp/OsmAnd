@@ -65,6 +65,7 @@ public class CommonWordsCompatTest {
 
 	@BeforeClass
 	public static void open() throws IOException {
+		SearchCompat.assumeEnabled();
 		assertTrue(REGIONS + " is missing; :OsmAnd-java:processResources downloads it", REGIONS.exists());
 		PlatformUtil.setOsmandRegions(new OsmandRegions(REGIONS.getPath()));
 		net.osmand.shared.binary.CommonWords.Companion.setOsmandRegions(
@@ -77,7 +78,7 @@ public class CommonWordsCompatTest {
 		collected.addAll(dictionary(java, "commonWordsDictionary").keySet());
 		collected.addAll(dictionary(java, "frequentlyUsedWordsDictionary").keySet());
 		collected.addAll(regionNames());
-		for (Map.Entry<String, String> e : Abbreviations.getSearchabbreviations().entrySet()) {
+		for (Map.Entry<String, String> e : Abbreviations.getAbbreviations().entrySet()) {
 			collected.add(e.getKey());
 			collected.add(e.getValue());
 			collected.add(e.getValue().toLowerCase());
@@ -119,8 +120,6 @@ public class CommonWordsCompatTest {
 	public void abbreviationsAreTheSame() {
 		assertEquals(new TreeMap<>(Abbreviations.getAbbreviations()),
 				new TreeMap<>(net.osmand.shared.binary.Abbreviations.INSTANCE.getAbbreviations()));
-		assertEquals(new TreeMap<>(Abbreviations.getSearchabbreviations()),
-				new TreeMap<>(net.osmand.shared.binary.Abbreviations.INSTANCE.getSearchabbreviations()));
 		for (String w : words) {
 			assertEquals(abbreviationLine(w, false), abbreviationLine(w, true));
 		}
@@ -167,26 +166,12 @@ public class CommonWordsCompatTest {
 				+ copy.getCommonGeocoding(w) + "\t" + copy.getFrequentlyUsed(w) + "\t" + copy.isCommon(w);
 	}
 
-	/**
-	 * {@code A word parts conjunction replaced skip building buildingAlone ref}: the parts are the
-	 * ones the spatial search splits a house number into and hands in with it.
-	 */
+	/** {@code A word conjunction replaced}. */
 	private static String abbreviationLine(String w, boolean ofCopy) {
-		Set<String> parts = SearchAlgorithms.getBuildingCompareSet(w, null);
-		StringBuilder sb = new StringBuilder("A ").append(hex(w)).append('\t');
-		boolean first = true;
-		for (String p : parts) {
-			sb.append(first ? "" : ",").append(hex(p));
-			first = false;
-		}
 		net.osmand.shared.binary.Abbreviations k = net.osmand.shared.binary.Abbreviations.INSTANCE;
-		sb.append('\t').append(ofCopy ? k.isConjunction(w) : Abbreviations.isConjunction(w));
-		sb.append('\t').append(hex(ofCopy ? k.replace(w) : Abbreviations.replace(w)));
-		sb.append('\t').append(ofCopy ? k.isCommonSkipOtherCnt(w) : Abbreviations.isCommonSkipOtherCnt(w));
-		sb.append('\t').append(ofCopy ? k.likelyPartOfBuilding(w, parts) : Abbreviations.likelyPartOfBuilding(w, parts));
-		sb.append('\t').append(ofCopy ? k.likelyPartOfBuilding(w, null) : Abbreviations.likelyPartOfBuilding(w, null));
-		sb.append('\t').append(ofCopy ? k.likelyPartOfRef(w, parts) : Abbreviations.likelyPartOfRef(w, parts));
-		return sb.toString();
+		return "A " + hex(w)
+				+ "\t" + (ofCopy ? k.isConjunction(w) : Abbreviations.isConjunction(w))
+				+ "\t" + hex(ofCopy ? k.replace(w) : Abbreviations.replace(w));
 	}
 
 	/** {@code K word letters letters3 isNumber2Letters startsWithDigit}. */
