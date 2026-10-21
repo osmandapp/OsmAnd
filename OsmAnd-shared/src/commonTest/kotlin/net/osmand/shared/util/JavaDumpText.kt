@@ -1,8 +1,11 @@
 package net.osmand.shared.util
 
 import net.osmand.shared.routing.testEnvironment
+import okio.BufferedSource
 import okio.FileSystem
+import okio.Path
 import okio.Path.Companion.toPath
+import okio.buffer
 
 /**
  * Each char as four hex digits after an 'x', the way the compat tests of OsmAnd-java write a string
@@ -34,10 +37,23 @@ internal fun dumpBits(v: Double): String = v.toRawBits().toULong().toString(16)
  * variable [env] points; null, after saying so, when it is not there.
  */
 internal fun readJavaDump(test: String, env: String, file: String, compatTest: String): List<String>? {
-	val path = testEnvironment(env) ?: "../OsmAnd-java/build/$file"
-	if (!FileSystem.SYSTEM.exists(path.toPath())) {
+	val path = javaDumpPath(test, env, file, compatTest) ?: return null
+	return FileSystem.SYSTEM.read(path) { readUtf8() }.split("\n").filter { it.isNotEmpty() }
+}
+
+/**
+ * [readJavaDump], line by line: for a dump too large to hold as one string. The caller closes it.
+ */
+internal fun openJavaDump(test: String, env: String, file: String, compatTest: String): BufferedSource? {
+	val path = javaDumpPath(test, env, file, compatTest) ?: return null
+	return FileSystem.SYSTEM.source(path).buffer()
+}
+
+private fun javaDumpPath(test: String, env: String, file: String, compatTest: String): Path? {
+	val path = (testEnvironment(env) ?: "../OsmAnd-java/build/$file").toPath()
+	if (!FileSystem.SYSTEM.exists(path)) {
 		println("$test: no java dump at $path, run $compatTest in OsmAnd-java first")
 		return null
 	}
-	return FileSystem.SYSTEM.read(path.toPath()) { readUtf8() }.split("\n").filter { it.isNotEmpty() }
+	return path
 }

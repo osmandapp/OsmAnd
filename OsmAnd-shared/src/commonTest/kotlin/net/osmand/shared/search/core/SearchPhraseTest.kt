@@ -23,7 +23,7 @@ import net.osmand.shared.util.dumpBits
 import net.osmand.shared.util.dumpHex
 import net.osmand.shared.util.dumpUnhex
 import net.osmand.shared.util.primaryCollator
-import net.osmand.shared.util.readJavaDump
+import net.osmand.shared.util.openJavaDump
 import okio.FileSystem
 import okio.Path.Companion.toPath
 import kotlin.test.Test
@@ -77,7 +77,8 @@ class SearchPhraseTest {
 
 	@Test
 	fun sameAsJava() {
-		val lines = readJavaDump(
+		// line by line: the dump is near 100 MB
+		val source = openJavaDump(
 			"SearchPhraseTest", "OSMAND_SEARCH_PHRASE_JAVA_DUMP", "search-phrase-java.txt", "SearchPhraseCompatTest"
 		) ?: return
 		setUp
@@ -89,9 +90,14 @@ class SearchPhraseTest {
 		var orderedOtherwise = 0
 		var matchedOtherwise = 0
 		val matchedOtherwiseExamples = ArrayList<String>()
-		val copyLines = StringBuilder()
+		val copyDump = testEnvironment("OSMAND_SEARCH_PHRASE_COPY_DUMP")
+		val copyLines = if (copyDump == null) null else StringBuilder()
 		val readers = ArrayList<BinaryMapIndexReader>()
-		for (line in lines) {
+		while (true) {
+			val line = source.readUtf8Line() ?: break
+			if (line.isEmpty()) {
+				continue
+			}
 			val f = line.split("\t")
 			val copy: String
 			val java: String
@@ -170,7 +176,7 @@ class SearchPhraseTest {
 				else -> continue
 			}
 			compared[line[0]] = (compared[line[0]] ?: 0) + 1
-			copyLines.append(f[0]).append('\t').append(copy).append('\n')
+			copyLines?.append(f[0])?.append('\t')?.append(copy)?.append('\n')
 			if (copy != java) {
 				if (line[0] == 'R' && closeEnough(java, copy, weightFollowsDistance(f[1]))) {
 					distancesInUlps++
@@ -179,10 +185,11 @@ class SearchPhraseTest {
 				}
 			}
 		}
+		source.close()
 		readers.forEach { it.close() }
 		assertTrue((compared['F'] ?: 0) > 100, "file choices compared: ${compared['F']}")
-		testEnvironment("OSMAND_SEARCH_PHRASE_COPY_DUMP")?.let { out ->
-			FileSystem.SYSTEM.write(out.toPath()) { writeUtf8(copyLines.toString()) }
+		if (copyDump != null) {
+			FileSystem.SYSTEM.write(copyDump.toPath()) { writeUtf8(copyLines.toString()) }
 		}
 		if (different.isNotEmpty()) {
 			fail("different from java:\n" + different.joinToString("\n"))
