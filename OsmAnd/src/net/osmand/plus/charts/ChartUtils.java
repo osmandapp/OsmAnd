@@ -665,6 +665,18 @@ public class ChartUtils {
 	                                                  boolean calcWithoutGaps) {
 		List<Entry> values = new ArrayList<>();
 		float currentX = 0;
+		int firstValidIndex = -1;
+		int lastValidIndex = -1;
+		if (PointAttributes.SENSOR_TAG_SPEED.equals(key)) {
+			for (int i = 0; i < pointAttributes.size(); i++) {
+				if (pointAttributes.get(i).hasValidValue(key)) {
+					if (firstValidIndex < 0) {
+						firstValidIndex = i;
+					}
+					lastValidIndex = i;
+				}
+			}
+		}
 
 		for (int i = 0; i < pointAttributes.size(); i++) {
 			PointAttributes attribute = pointAttributes.get(i);
@@ -675,8 +687,12 @@ public class ChartUtils {
 				if (!(calcWithoutGaps && attribute.getFirstPoint())) {
 					currentX += stepX / divX;
 				}
-				if (attribute.hasValidValue(key)) {
-					float value = attribute.getAttributeValue(key);
+				boolean missingValue = i > firstValidIndex && i < lastValidIndex
+						&& Float.isNaN(attribute.getAttributeValue(key))
+						&& attribute.hasValidValue(PointAttributes.POINT_SPEED)
+						&& attribute.getSpeed() < MIN_SPEED_FOR_PACE;
+				if (missingValue || attribute.hasValidValue(key)) {
+					float value = missingValue ? 0 : attribute.getAttributeValue(key);
 					float currentY;
 					if (Float.isNaN(divY)) {
 						currentY = value * mulY;
