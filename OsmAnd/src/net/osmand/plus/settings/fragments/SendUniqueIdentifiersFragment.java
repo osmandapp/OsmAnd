@@ -46,4 +46,8 @@ public class SendUniqueIdentifiersFragment extends BaseSettingsFragment {
 		}
 	}
 
+	@Override
+	public String getAnalyticsScreen() {
+		return "send_unique_identifiers";
+	}
 }

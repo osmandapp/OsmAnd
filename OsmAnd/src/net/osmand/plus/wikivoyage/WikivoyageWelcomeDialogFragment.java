@@ -78,4 +78,9 @@ public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "wikivoyage_welcome";
+	}
 }

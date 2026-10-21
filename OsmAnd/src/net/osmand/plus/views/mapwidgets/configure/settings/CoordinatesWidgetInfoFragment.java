@@ -114,4 +114,9 @@ public class CoordinatesWidgetInfoFragment extends WidgetInfoBaseFragment {
 			mapInfoLayer.recreateControls();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "coordinates_widget_info";
+	}
 }

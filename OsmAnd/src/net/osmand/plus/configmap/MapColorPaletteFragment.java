@@ -215,5 +215,10 @@ public class MapColorPaletteFragment extends ConfigureMapOptionFragment implemen
 	public void onAvailabilityChanged() {
 		bindColorContent();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_color_palette";
+	}
 }
 

@@ -224,4 +224,9 @@ public class KeyAssignmentsFragment extends BaseFullScreenFragment
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "key_assignments";
+	}
 }

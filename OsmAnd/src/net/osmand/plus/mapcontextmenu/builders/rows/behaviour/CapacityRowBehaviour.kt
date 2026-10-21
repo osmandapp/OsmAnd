@@ -9,7 +9,7 @@ object CapacityRowBehaviour : DefaultPoiAdditionalRowBehaviour() {
 	    super.applyCommonRules(params)
 	    with(params) {
 		    if (Algorithms.isInt(value)) {
-			    val prefix = builder.textPrefix
+			    val prefix = builder.getTextPrefix() ?: ""
 			    builder.setTextPrefix(formatPrefix(prefix, app.getString(R.string.shared_string_capacity)))
 		    }
 	    }

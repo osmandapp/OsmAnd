@@ -68,7 +68,7 @@ class GeocodingBenchmarkTest {
 				}
 				mark = TimeSource.Monotonic.markNow()
 				for (i in points.indices) {
-					made[1] += utils.sortGeocodingResults(listOf(readers[fileOf[i]]), found[i]).size
+					made[1] += utils.findAddresses(listOf(readers[fileOf[i]]), found[i]).size
 				}
 				nanos[1] = mark.elapsedNow().inWholeNanoseconds
 				if (round >= WARMUP_ROUNDS) {

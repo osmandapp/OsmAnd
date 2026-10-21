@@ -28,6 +28,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import net.osmand.Location;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -82,6 +86,7 @@ import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.util.KAlgorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -93,7 +98,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		SortTracksListener, TrackSelectionListener, TrackGroupsListener, EmptyTracksListener, OsmAuthorizationListener,
 		SelectGpxTaskListener, OnTrackFolderAddListener, GpxImportListener, TrackFolderOptionsListener,
 		OnTrackFileMoveListener, RenameCallback, SelectionHelperProvider<TrackItem>, SmartFolderOptionsListener,
-		OrganizedTracksOptionsListener {
+		OrganizedTracksOptionsListener, OsmAndCompassListener, OsmAndLocationListener {
 
 	private static final String TAG = BaseTrackFolderFragment.class.getSimpleName();
 
@@ -114,6 +119,11 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	protected String selectedItemPath;
 	protected String preSelectedFolder;
 	protected SmartFolderHelper smartFolderHelper;
+
+	private Location location;
+	private Float heading;
+	private boolean locationUpdateStarted;
+	private boolean compassUpdateAllowed = true;
 
 	@ColorRes
 	public int getStatusBarColorId() {
@@ -202,6 +212,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			foldersHelper.setGpxImportListener(this);
 		}
 		gpxSelectionHelper.addListener(this);
+		updateLocationUpdate();
 	}
 
 	@Override
@@ -213,6 +224,82 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			foldersHelper.setGpxImportListener(null);
 		}
 		gpxSelectionHelper.removeListener(this);
+		stopLocationUpdate();
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		if (!MapUtils.areLatLonEqual(this.location, location)) {
+			this.location = location;
+			updateLocationUi();
+		}
+	}
+
+	@Override
+	public void updateCompassValue(float value) {
+		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
+		// on non-compass devices
+		float lastHeading = heading != null ? heading : 99;
+		heading = value;
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			updateLocationUi();
+		} else {
+			heading = lastHeading;
+		}
+	}
+
+	private void updateLocationUi() {
+		if (compassUpdateAllowed && adapter != null) {
+			app.runInUIThread(() -> {
+				if (location == null) {
+					location = app.getLocationProvider().getLastKnownLocation();
+				}
+				adapter.notifyItemRangeChanged(0, adapter.getItemCount());
+			});
+		}
+	}
+
+	private void updateLocationUpdate() {
+		TracksSortMode sortMode = getTracksSortMode();
+		boolean nearestSortMode = sortMode == TracksSortMode.NEAREST || sortMode == TracksSortMode.NEAREST_TO_MAP_CENTER;
+		if (isResumed() && nearestSortMode) {
+			startLocationUpdate();
+		} else {
+			stopLocationUpdate();
+		}
+		if (getActivity() instanceof MyPlacesActivity activity) {
+			// MapActivity is paused under My Places, so the map center and rotation used by "Nearest to map center"
+			// do not change there: only "Nearest to current location" needs location and compass updates
+			if (locationUpdateStarted && sortMode == TracksSortMode.NEAREST) {
+				activity.requestLocationUpdates(this);
+			} else {
+				activity.releaseLocationUpdates(this);
+			}
+		}
+	}
+
+	private void startLocationUpdate() {
+		if (!locationUpdateStarted) {
+			locationUpdateStarted = true;
+			OsmAndLocationProvider locationProvider = app.getLocationProvider();
+			locationProvider.removeCompassListener(locationProvider.getNavigationInfo());
+			locationProvider.addCompassListener(this);
+			locationProvider.addLocationListener(this);
+			updateLocationUi();
+		}
+	}
+
+	private void stopLocationUpdate() {
+		if (locationUpdateStarted) {
+			locationUpdateStarted = false;
+			OsmAndLocationProvider locationProvider = app.getLocationProvider();
+			locationProvider.removeLocationListener(this);
+			locationProvider.removeCompassListener(this);
+			locationProvider.addCompassListener(locationProvider.getNavigationInfo());
+			if (getActivity() instanceof MyPlacesActivity activity) {
+				activity.releaseLocationUpdates(this);
+			}
+		}
 	}
 
 	@Override
@@ -249,6 +336,13 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setItemAnimator(null);
+		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+				super.onScrollStateChanged(recyclerView, newState);
+				compassUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE;
+			}
+		});
 		recyclerView.setAdapter(adapter);
 	}
 
@@ -310,6 +404,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 
 		adapter.setSortMode(sortMode);
 		adapter.setItems(items);
+		updateLocationUpdate();
 	}
 
 	private void sortItems(@NonNull List<Object> items, @NonNull TracksSortMode sortMode) {

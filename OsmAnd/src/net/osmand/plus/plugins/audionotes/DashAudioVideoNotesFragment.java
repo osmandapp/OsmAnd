@@ -53,7 +53,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		View view = inflate(R.layout.dash_common_fragment, container, false);
 		((TextView) view.findViewById(R.id.fav_text)).setText(TITLE_ID);
 		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
-			startMyPlacesActivity(AudioVideoNotesPlugin.NOTES_TAB);
+			startMyPlacesActivity(AudioVideoNotesPlugin.MEDIA_TAB);
 			closeDashboard();
 		});
 		return view;

@@ -255,7 +255,9 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	@Override
 	public void stop() {
 		ttsRequests = 0;
-		if (mTts != null) {
+		// Before onInit the engine connection is still being set up under TextToSpeech's internal lock, so
+		// stop() would wait for a slow engine on the main thread (ANR). Nothing can be speaking before onInit.
+		if (mTts != null && speechAllowed) {
 			mTts.stop();
 		}
 		abandonAudioFocus();

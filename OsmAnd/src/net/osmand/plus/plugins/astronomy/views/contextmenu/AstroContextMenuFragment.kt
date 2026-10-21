@@ -1445,4 +1445,6 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	private fun openCatalogSearch(catalog: Catalog) {
 		parent.showSearchDialog(catalog.wid)
 	}
+
+	override fun getAnalyticsScreen() = "astro_context_menu"
 }
