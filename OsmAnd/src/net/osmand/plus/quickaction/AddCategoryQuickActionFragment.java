@@ -175,4 +175,9 @@ public class AddCategoryQuickActionFragment extends BaseFullScreenFragment
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "add_category_quick_action";
+	}
 }

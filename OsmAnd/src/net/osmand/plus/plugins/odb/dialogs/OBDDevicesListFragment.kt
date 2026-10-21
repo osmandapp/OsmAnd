@@ -251,6 +251,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = OBDDevicesListFragment()
+				@Suppress("DEPRECATION")
 				fragment.retainInstance = true
 				manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
@@ -273,4 +274,6 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		}
 		updatePairedSensorsList()
 	}
+
+	override fun getAnalyticsScreen() = "obd_devices_list"
 }

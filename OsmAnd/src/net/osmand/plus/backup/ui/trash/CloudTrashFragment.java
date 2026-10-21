@@ -265,4 +265,9 @@ public class CloudTrashFragment extends BaseFullScreenFragment implements Confir
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "cloud_trash";
+	}
 }

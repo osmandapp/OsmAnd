@@ -410,5 +410,10 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 		}
 		return null;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "storage_migration";
+	}
 }
 

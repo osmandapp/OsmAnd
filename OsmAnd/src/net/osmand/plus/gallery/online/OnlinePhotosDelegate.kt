@@ -1,6 +1,5 @@
 package net.osmand.plus.gallery.online
 
-import android.os.AsyncTask
 import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.gallery.data.GalleryKey
@@ -123,13 +122,14 @@ class OnlinePhotosDelegate(
 		}
 	}
 
+	@Suppress("DEPRECATION") // AsyncTask, needs migration
 	override fun cancel(key: GalleryKey) {
 		if (key !is GalleryKey.Location) {
 			return
 		}
 
 		activeTasks.remove(key)?.let { task ->
-			if (task.status == AsyncTask.Status.RUNNING) {
+			if (task.status == android.os.AsyncTask.Status.RUNNING) {
 				task.cancel(false)
 			}
 		}

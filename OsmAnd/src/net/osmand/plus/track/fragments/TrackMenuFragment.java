@@ -1951,4 +1951,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public boolean shouldProjectMapDisplayPositionToVisibleRect(@NonNull MapPosition position) {
 		return true;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "track_menu";
+	}
 }

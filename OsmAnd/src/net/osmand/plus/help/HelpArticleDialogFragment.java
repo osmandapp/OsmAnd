@@ -146,4 +146,9 @@ public class HelpArticleDialogFragment extends BaseFullScreenDialogFragment {
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "help_article";
+	}
 }
