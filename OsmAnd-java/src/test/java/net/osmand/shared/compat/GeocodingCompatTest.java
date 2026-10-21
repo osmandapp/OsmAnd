@@ -108,6 +108,7 @@ public class GeocodingCompatTest {
 	/** Common words with the names of the regions, as the app has them and the tests after this one need. */
 	@BeforeClass
 	public static void setUp() throws Exception {
+		SearchCompat.assumeEnabled();
 		SearchApisCompatTest.setUpTypes();
 		assertTrue("the regions in the common words of java", CommonWords.getInstance().getFrequentlyUsed("gelderland") >= 0);
 		assertTrue("the regions in the common words of the copy",
