@@ -13,6 +13,7 @@ import net.osmand.shared.util.KSearchAlgorithms
 import net.osmand.shared.util.KStringMatcher
 import net.osmand.shared.util.KTransliterationHelper
 import net.osmand.shared.util.collections.KTIntArrayList
+import net.osmand.shared.util.collections.KTLongArrayList
 
 /**
  * Reads the address section of an obf file: the settlements, postcodes and boundaries in their
@@ -20,8 +21,7 @@ import net.osmand.shared.util.collections.KTIntArrayList
  *
  * A copy of `BinaryMapAddressReaderAdapter` in OsmAnd-java, which stays there for android and
  * tools; this copy is for iOS. The read statistics java collects are left out, as they serve the
- * obf inspection tools, and so is `readNameIndex`, which reads the whole name index for the spatial
- * search, which is not copied yet.
+ * obf inspection tools.
  *
  * A settlement and its streets are stored apart: the settlement's header points at the block of
  * its streets, and each street carries its houses and the streets it crosses, with coordinates as
@@ -702,6 +702,84 @@ class BinaryMapAddressReaderAdapter(private val map: BinaryMapIndexReader) {
 		}
 	}
 
+	internal fun readNameIndex(nameIndex: NameIndexReader): List<NameIndexReader.PrefixNameValue>? {
+		var res: List<NameIndexReader.PrefixNameValue>? = null
+		while (true) {
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return res
+				OsmAndAddressIndex.NAMEINDEX_FIELD_NUMBER -> {
+					val length = readInt()
+					val oldLimit = codedIS.pushLimitLong(length)
+					res = readNameIndexInternal(nameIndex)
+					codedIS.popLimit(oldLimit)
+					return res
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
+	internal fun readNameIndexInternal(pi: NameIndexReader): List<NameIndexReader.PrefixNameValue>? {
+		var res: MutableList<NameIndexReader.PrefixNameValue>? = null
+		val loffsets = if (pi.readAll()) null else KTLongArrayList()
+		var ind = -1
+		while (true) {
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return res
+				OsmAndAddressNameIndexData.TABLE_FIELD_NUMBER -> {
+					val length = readInt()
+					val oldLimit = codedIS.pushLimitLong(length)
+					pi.setTablePointer(codedIS.getTotalBytesRead())
+					pi.readTableBytes(length)
+					map.readNameIndexInspector(null, pi)
+					codedIS.popLimit(oldLimit)
+				}
+				OsmAndAddressNameIndexData.COMMONSTATS_FIELD_NUMBER -> {
+					val length = codedIS.readRawVarint32().toLong()
+					val oldLimit = codedIS.pushLimitLong(length)
+					if (pi.getCommonStats() != null) {
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
+					} else {
+						pi.readTableBytes(length)
+						val stat = CommonIndexedStats.parseFrom(codedIS)
+						pi.setCommonIndexed(stat)
+					}
+					codedIS.popLimit(oldLimit)
+				}
+				OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER -> {
+					var shift = codedIS.getTotalBytesRead()
+					if (ind == -1 && loffsets != null) {
+						res = pi.getAtomsToLoad(loffsets)
+						loffsets.sort()
+						ind = 0
+					}
+					if (loffsets != null) {
+						if (ind >= loffsets.size()) {
+							codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
+							continue
+						} else if (loffsets[ind] != shift) {
+							val skip = loffsets[ind] - shift
+							pi.skipAtomsBytes(skip)
+							codedIS.skipRawBytes(skip)
+							shift = codedIS.getTotalBytesRead()
+						}
+						ind++
+					}
+					val len = codedIS.readRawVarint32()
+					val oldLimit = codedIS.pushLimitLong(len.toLong())
+					pi.readAtomsBytes(len)
+					val prefix = if (pi.isCacheRawBlocks()) pi.addData(codedIS.readRawBytes(len), shift)
+					else pi.addData(AddressNameIndexData.parseFrom(codedIS), shift)
+					res?.add(prefix)
+					codedIS.popLimit(oldLimit)
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
 	/**
 	 * One entry of the name index, which can name several objects: each takes the block type, box
 	 * and offsets seen so far, and is let through by the bitset of the suffixes it was written for.
@@ -861,22 +939,10 @@ class BinaryMapAddressReaderAdapter(private val map: BinaryMapIndexReader) {
 		const val ATTRIBUTEVALUES_FIELD_NUMBER = 16
 	}
 
+	/** The blocks of the name index are [AddressNameIndexData] and [AddressNameIndexDataAtom]. */
 	private object OsmAndAddressNameIndexData {
 		const val TABLE_FIELD_NUMBER = 4
+		const val COMMONSTATS_FIELD_NUMBER = 6
 		const val ATOM_FIELD_NUMBER = 7
-	}
-
-	/** `OsmAndAddressNameIndexData.AddressNameIndexData`. */
-	private object AddressNameIndexData {
-		const val SUFFIXESDICTIONARY_FIELD_NUMBER = 2
-		const val ATOM_FIELD_NUMBER = 4
-	}
-
-	private object AddressNameIndexDataAtom {
-		const val TYPE_FIELD_NUMBER = 3
-		const val SHIFTTOINDEX_FIELD_NUMBER = 5
-		const val SHIFTTOCITYINDEX_FIELD_NUMBER = 6
-		const val XY16_FIELD_NUMBER = 7
-		const val SUFFIXESBITSETINDEX_FIELD_NUMBER = 8
 	}
 }
