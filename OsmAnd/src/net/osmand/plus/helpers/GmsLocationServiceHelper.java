@@ -48,7 +48,8 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 		super(app);
 
 		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(app);
-		fusedLocationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 100).build();
+		long interval = LINEAGE_OS ? LINEAGE_OS_MIN_UPDATE_TIME_MS : 100;
+		fusedLocationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, interval).build();
 		networkLocationRequest = new LocationRequestCompat.Builder(5000)
 				.setQuality(LocationRequestCompat.QUALITY_HIGH_ACCURACY)
 				.setMinUpdateIntervalMillis(500)

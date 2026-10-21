@@ -2,9 +2,11 @@ package net.osmand.shared.compat;
 
 import static org.junit.Assert.assertEquals;
 
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.osm.edit.Entity.EntityType;
 
 import org.junit.Test;
 
@@ -19,7 +21,8 @@ import java.util.Random;
  * The arithmetic is bit shifts and masks over values that reach far up a long, and a copy that got
  * one shift wrong would give plausible looking ids that point at the wrong osm objects. So this
  * runs both over ids built to sit on each of the bits that mean something - relation, split,
- * propagated node - and then over random ids.
+ * propagated node - and then over random ids. An object the renderer drew packs its id once more,
+ * so it gets the same ids as a map object and as a drawn one.
  */
 public class ObfConstantsCompatTest {
 
@@ -80,6 +83,39 @@ public class ObfConstantsCompatTest {
 	}
 
 	@Test
+	public void entityTypesAndUrlsAreTheSame() {
+		for (long id : ids()) {
+			String m = "id " + id;
+			Amenity java = new Amenity();
+			java.setId(id);
+			net.osmand.shared.data.Amenity copy = new net.osmand.shared.data.Amenity();
+			copy.setId(id);
+			assertEquals(m + " entity type", name(ObfConstants.getOsmEntityType(java)),
+					name(net.osmand.shared.binary.ObfConstants.INSTANCE.getOsmEntityType(copy)));
+			assertEquals(m + " url", ObfConstants.getOsmUrlForId(java),
+					net.osmand.shared.binary.ObfConstants.INSTANCE.getOsmUrlForId(copy));
+
+			RenderedObject javaDrawn = new RenderedObject();
+			javaDrawn.setId(id);
+			net.osmand.shared.data.RenderedObject copyDrawn = new net.osmand.shared.data.RenderedObject();
+			copyDrawn.setId(id);
+			assertEquals(m + " drawn osm id", ObfConstants.getOsmObjectId(javaDrawn),
+					net.osmand.shared.binary.ObfConstants.INSTANCE.getOsmObjectId(copyDrawn));
+			assertEquals(m + " drawn entity type", name(ObfConstants.getOsmEntityType(javaDrawn)),
+					name(net.osmand.shared.binary.ObfConstants.INSTANCE.getOsmEntityType(copyDrawn)));
+			assertEquals(m + " drawn url", ObfConstants.getOsmUrlForId(javaDrawn),
+					net.osmand.shared.binary.ObfConstants.INSTANCE.getOsmUrlForId(copyDrawn));
+
+			for (EntityType type : new EntityType[] {null, EntityType.NODE, EntityType.WAY,
+					EntityType.RELATION, EntityType.WAY_BOUNDARY}) {
+				assertEquals(m + " map object id of " + type, ObfConstants.createMapObjectIdFromCleanOsmId(id, type),
+						net.osmand.shared.binary.ObfConstants.INSTANCE.createMapObjectIdFromCleanOsmId(id,
+								type == null ? null : net.osmand.shared.osm.edit.EntityType.valueOf(type.name())));
+			}
+		}
+	}
+
+	@Test
 	public void routeIdPrefixesAreTheSame() {
 		for (String routeId : new String[] {"O7700604", "OSM7700604", "O0", "OSM0", "O", "OSM",
 				"Onot a number", "7700604", "", "OO123", "O-5", "O99999999999999999999"}) {
@@ -110,6 +146,10 @@ public class ObfConstantsCompatTest {
 		}
 	}
 
+	private static String name(Enum<?> type) {
+		return type == null ? null : type.name();
+	}
+
 	/** Ids sitting on each meaningful bit, the plain node and way shapes, and random ones. */
 	private static List<Long> ids() {
 		List<Long> ids = new ArrayList<>();
@@ -123,6 +163,11 @@ public class ObfConstantsCompatTest {
 			ids.add(ObfConstants.RELATION_BIT + ((osm << ObfConstants.SHIFT_ID) << ObfConstants.DUPLICATE_SPLIT));
 			ids.add(ObfConstants.SPLIT_BIT + ((osm << ObfConstants.SHIFT_ID) << ObfConstants.DUPLICATE_SPLIT));
 			ids.add(ObfConstants.PROPAGATE_NODE_BIT + (osm << ObfConstants.SHIFT_PROPAGATED_NODES_BITS));
+			// as the renderer packs them
+			ids.add(osm << ObfConstants.SHIFT_ID);
+			ids.add((osm << ObfConstants.SHIFT_ID) + 1);
+			ids.add((ObfConstants.PROPAGATE_NODE_BIT + (osm << ObfConstants.SHIFT_PROPAGATED_NODES_BITS)) << 1);
+			ids.add((ObfConstants.RELATION_BIT + ((osm << ObfConstants.SHIFT_ID) << ObfConstants.DUPLICATE_SPLIT)) << 1);
 		}
 		Random random = new Random(11);
 		for (int i = 0; i < 20000; i++) {

@@ -1,12 +1,13 @@
 package net.osmand.shared.util
 
 /**
- * Copy of the part of `net.osmand.util.SearchAlgorithms` in OsmAnd-java that the obf reader needs:
- * folding a name onto what a search can match, splitting a query into tokens, and the suffix
- * dictionary and bounding boxes of the poi name index.
+ * Copy of the part of `net.osmand.util.SearchAlgorithms` in OsmAnd-java that the obf reader and
+ * the search words need: folding a name onto what a search can match, splitting a query into
+ * tokens, the suffix dictionary and bounding boxes of the poi name index, and counting the letters
+ * of a word to tell a house number from a name.
  *
- * What stayed in java is the search pipeline's own: encoding suffixes, dropping common words, and
- * the reader helpers that take a protobuf stream.
+ * What stayed in java is the search pipeline's own: encoding suffixes, dropping common words,
+ * splitting a house number into its parts, and the reader helpers that take a protobuf stream.
  *
  * Two deliberate differences from the java original, both about the default locale:
  * - lowercasing here is locale independent. Java lowercases a name with the device's locale, which
@@ -30,6 +31,11 @@ object KSearchAlgorithms {
 	private val CHARS_TO_NORMALIZE_KEY = charArrayOf('’', 'ʼ', '(', ')', '´', '`', '′', '‵', 'ʹ')
 	private val CHARS_TO_NORMALIZE_VALUE = charArrayOf('\'', '\'', ' ', ' ', '\'', '\'', '\'', '\'', '\'')
 	private val APOSTROPHES = charArrayOf('\'', '’', 'ʼ', '´', '`', '′', '‵', 'ʹ')
+
+	/** By char code: the characters of [APOSTROPHES], `ß`, `«` and `»`. */
+	private val REPLACED_CHARS = (APOSTROPHES + charArrayOf('ß', '«', '»')).let { chars ->
+		BooleanArray(chars.maxOf { it.code } + 1).also { table -> chars.forEach { table[it.code] = true } }
+	}
 
 	fun split(name: String): List<String> {
 		var prev = -1
@@ -142,6 +148,10 @@ object KSearchAlgorithms {
 
 	/** Folds a name onto the letters a search can match: no apostrophes, no quotes, no diacritics. */
 	fun alignChars(fullText: String): String {
+		if (!KArabicNormalizer.isSpecialArabic(fullText) && !hasReplacedChars(fullText)) {
+			// every step before the diacritics would return the text as it is
+			return KUnicode.stripDiacritics(fullText)
+		}
 		var result = fullText
 		if (KArabicNormalizer.isSpecialArabic(result)) {
 			result = KArabicNormalizer.normalize(result) ?: result
@@ -151,6 +161,17 @@ object KSearchAlgorithms {
 		result = removeQuotes(result)
 		result = KUnicode.stripDiacritics(result)
 		return result
+	}
+
+	/** Whether [s] holds a character that [removeApostrophes], [replaceGermanSS] or [removeQuotes] replaces. */
+	private fun hasReplacedChars(s: String): Boolean {
+		val replaced = REPLACED_CHARS
+		for (c in s) {
+			if (c.code < replaced.size && replaced[c.code]) {
+				return true
+			}
+		}
+		return false
 	}
 
 	fun removeApostrophes(s: String): String {
@@ -241,6 +262,50 @@ object KSearchAlgorithms {
 			ind += 4
 		}
 		return res
+	}
+
+	fun letters(s: String): Int {
+		var count = 0
+		for (c in s) {
+			if (c.isLetter() && !c.isDigit()) {
+				count++
+			}
+		}
+		return count
+	}
+
+	/** The letters of [s], counted up to one past [maxCount]. */
+	fun letters(s: String, maxCount: Int): Int {
+		var count = 0
+		var i = 0
+		while (count <= maxCount && i < s.length) {
+			val c = s[i]
+			if (c.isLetter() && !c.isDigit()) {
+				count++
+			}
+			i++
+		}
+		return count
+	}
+
+	/** A number with at most one letter, as a house number is: "18", "18b", "#3". */
+	fun isNumber2Letters(name: String?): Boolean {
+		if (name.isNullOrEmpty()) {
+			return false
+		}
+		return startsWithDigit(name) && letters(name) < 2
+	}
+
+	/** A digit comes before any letter; what is neither, "#" or "-", is skipped. */
+	fun startsWithDigit(name: String): Boolean {
+		for (c in name) {
+			if (c.isDigit()) {
+				return true
+			} else if (c.isLetter()) {
+				return false
+			}
+		}
+		return false
 	}
 
 	private fun isTokenCharacter(value: String, index: Int, tokenAlreadyStarted: Boolean): Boolean {

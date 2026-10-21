@@ -39,6 +39,14 @@ class KQuadRect {
 		}
 	}
 
+	/** Grows the box to take in the point, each side assigned in turn as java's `QuadRect` does. */
+	fun include(x: Double, y: Double) {
+		left = if (left <= right) kotlin.math.min(x, this.left) else kotlin.math.max(x, this.left)
+		right = if (left <= right) kotlin.math.max(x, this.right) else kotlin.math.min(x, this.right)
+		top = if (top <= bottom) kotlin.math.min(y, this.top) else kotlin.math.max(y, this.top)
+		bottom = if (top <= bottom) kotlin.math.max(y, this.bottom) else kotlin.math.min(y, this.bottom)
+	}
+
 	fun width(): Double {
 		return kotlin.math.abs(right - left)
 	}

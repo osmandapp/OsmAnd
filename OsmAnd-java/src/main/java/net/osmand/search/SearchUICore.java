@@ -94,7 +94,7 @@ public class SearchUICore {
 	private static boolean debugMode = false;
 
 	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
-			Arrays.asList("building", "internet_access_yes"));
+			Arrays.asList("building", "historic_building", "internet_access_yes"));
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this(poiTypes, locale, transliterate, () -> true);

@@ -108,6 +108,20 @@ object KAlgorithms {
 		}
 	}
 
+	/** True when [value] is digits only, with an optional leading minus; "" is also true, as in java. */
+	fun isInt(value: String): Boolean {
+		val length = value.length
+		for (i in 0 until length) {
+			val ch = value[i]
+			if (!ch.isDigit()) {
+				if (length == 1 || i > 0 || ch != '-') {
+					return false
+				}
+			}
+		}
+		return true
+	}
+
 	/**
 	 * Joins the [symbol] separated parts of [ref] back together, dropping empty parts and any part
 	 * that repeats the one before it. Road refs are often tagged as "A1;A1;A2".
@@ -130,6 +144,30 @@ object KAlgorithms {
 
 	fun isDigit(c: Char): Boolean {
 		return c in '0'..'9'
+	}
+
+	/** The first run of digits of [s], "#3" giving 3; stops at a letter or at the end of the run. */
+	fun extractFirstIntegerNumber(s: String): Int {
+		var i = 0
+		for (k in s.indices) {
+			if (isDigit(s[k])) {
+				i = i * 10 + (s[k] - '0')
+			} else if (s[k].isLetter() || i > 0) {
+				// allow '#3'- > 3 parsed
+				break
+			}
+		}
+		return i
+	}
+
+	/** What follows the leading digits of [s]: "12a" gives "a", "12" gives "". */
+	fun extractIntegerSuffix(s: String): String {
+		for (k in s.indices) {
+			if (!s[k].isDigit()) {
+				return s.substring(k)
+			}
+		}
+		return ""
 	}
 
 	/**
@@ -245,6 +283,45 @@ object KAlgorithms {
 		mapRect.bottom = if (mapRect.bottom == 0.0) gpxRect.bottom else min(mapRect.bottom, gpxRect.bottom)
 	}
 
+	/** Whether every point of [firstPolygon] is inside [secondPolygon]; both are lat, lon, lat, lon... */
+	fun isFirstPolygonInsideSecond(firstPolygon: FloatArray, secondPolygon: FloatArray): Boolean {
+		var i = 0
+		while (i < firstPolygon.size) {
+			val lat = firstPolygon[i]
+			val lon = firstPolygon[i + 1]
+			if (!isPointInsidePolygon(lat, lon, secondPolygon)) {
+				// if at least one point is not inside the boundary, return false
+				return false
+			}
+			i += 2
+		}
+		return true
+	}
+
+	/**
+	 * Whether the point is inside [polygon], given as lat, lon, lat, lon...; an even-odd count of the
+	 * edges a ray to the west crosses.
+	 */
+	fun isPointInsidePolygon(lat: Float, lon: Float, polygon: FloatArray): Boolean {
+		var oddNodes = false
+		var i = 0
+		var j = polygon.size - 2
+		while (i < polygon.size) {
+			val x1 = polygon[i + 1].toDouble()
+			val y1 = polygon[i].toDouble()
+			val x2 = polygon[j + 1].toDouble()
+			val y2 = polygon[j].toDouble()
+			if ((y1 < lat && y2 >= lat || y2 < lat && y1 >= lat) && (x1 <= lon || x2 <= lon)) {
+				if (x1 + (lat - y1) / (y2 - y1) * (x2 - x1) < lon) {
+					oddNodes = !oddNodes
+				}
+			}
+			j = i
+			i += 2
+		}
+		return oddNodes
+	}
+
 	fun sanitizeFileName(fileName: String): String {
 		return fileName
 			.replace("/", "_")
@@ -299,9 +376,25 @@ object KAlgorithms {
 	fun compareFileVersions(f1: String, f2: String): Int =
 		-simplifyFileName(f1).compareTo(simplifyFileName(f2))
 
+	/** [names] in the order of [compareFileVersions], with the key of each name made once. */
+	fun sortByFileVersions(names: Collection<String>): List<String> =
+		names.map { it to simplifyFileName(it) }
+			.sortedWith { n1, n2 -> -n1.second.compareTo(n2.second) }
+			.map { it.first }
+
 	fun capitalizeFirstLetter(s: String?): String? {
 		return if (!s.isNullOrEmpty()) {
 			s[0].uppercaseChar().toString() + if (s.length > 1) s.substring(1) else ""
+		} else {
+			s
+		}
+	}
+
+	/** "EUROPE" and "europe" give "Europe"; a string of one letter is left as it is. */
+	fun capitalizeFirstLetterAndLowercase(s: String?): String? {
+		return if (s != null && s.length > 1) {
+			// not very efficient algorithm
+			s[0].uppercaseChar() + s.substring(1).lowercase()
 		} else {
 			s
 		}

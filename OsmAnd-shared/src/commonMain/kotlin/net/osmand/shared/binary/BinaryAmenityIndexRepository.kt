@@ -3,6 +3,7 @@ package net.osmand.shared.binary
 import net.osmand.shared.data.Amenity
 import net.osmand.shared.data.KLocation
 import net.osmand.shared.io.KFile
+import net.osmand.shared.map.WorldRegion
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.util.KLock
 import net.osmand.shared.util.KMapUtils
@@ -184,7 +185,7 @@ open class BinaryAmenityIndexRepository(
 
 	override fun isWorldMap(): Boolean {
 		val fileName = getFile().name().lowercase()
-		return fileName.startsWith(WORLD_REGION_ID + "_") || fileName.contains("basemap")
+		return fileName.startsWith(WorldRegion.WORLD + "_") || fileName.contains("basemap")
 	}
 
 	/**
@@ -213,8 +214,5 @@ open class BinaryAmenityIndexRepository(
 
 	companion object {
 		private val log = LoggerFactory.getLogger("BinaryAmenityIndexRepository")
-
-		/** `WorldRegion.WORLD`, which stays in OsmAnd-java. */
-		private const val WORLD_REGION_ID = "world"
 	}
 }
