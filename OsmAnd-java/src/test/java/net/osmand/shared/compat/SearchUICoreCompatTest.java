@@ -773,6 +773,15 @@ public class SearchUICoreCompatTest {
 				}
 				assertSameKept(text + " articles " + (i + 1), jp, kp, ja, ka);
 			}
+			// two super routes of one wikidata stay apart: routes are not united
+			List<Object> jsr = new ArrayList<>();
+			List<Object> ksr = new ArrayList<>();
+			for (int i = 0; i < 2; i++) {
+				jsr.add(superRoute(new SearchResult(jp), new net.osmand.data.Amenity(), i, text));
+				ksr.add(superRoute(new net.osmand.shared.search.core.SearchResult((net.osmand.shared.search.core.SearchPhrase) kp),
+						new net.osmand.shared.data.Amenity(), i, text));
+			}
+			assertSameKept(text + " super routes", jp, kp, jsr, ksr);
 		}
 	}
 
@@ -844,6 +853,24 @@ public class SearchUICoreCompatTest {
 		set(r, "objectType", java ? net.osmand.search.core.ObjectType.POI : net.osmand.shared.search.core.ObjectType.POI);
 		set(r, "localeName", name + " " + lang);
 		set(r, "location", java ? new net.osmand.data.LatLon(52.5, 13.4) : new net.osmand.shared.data.KLatLon(52.5, 13.4));
+		return r;
+	}
+
+	/** A super route [i] named [name], with one wikidata for all of them. */
+	private static Object superRoute(Object r, Object amenity, int i, String name) {
+		boolean java = r instanceof SearchResult;
+		call(amenity, "setId", (long) (2 * (i + 1)));
+		call(amenity, "setType", java ? MapPoiTypes.getDefault().getOtherPoiCategory()
+				: net.osmand.shared.osm.MapPoiTypes.Companion.getDefault().getOtherPoiCategory());
+		call(amenity, "setSubType", "hiking");
+		call(amenity, "setName", name + " route " + i);
+		call(amenity, "setLocation", 52.5 + i / 100.0, 13.4);
+		call(amenity, "setAdditionalInfo", "wikidata", "Q64");
+		call(amenity, "setAdditionalInfo", "route_members_ids", "1,2");
+		set(r, "object", amenity);
+		set(r, "objectType", java ? net.osmand.search.core.ObjectType.POI : net.osmand.shared.search.core.ObjectType.POI);
+		set(r, "localeName", name + " route " + i);
+		set(r, "location", java ? new net.osmand.data.LatLon(52.5 + i / 100.0, 13.4) : new net.osmand.shared.data.KLatLon(52.5 + i / 100.0, 13.4));
 		return r;
 	}
 
