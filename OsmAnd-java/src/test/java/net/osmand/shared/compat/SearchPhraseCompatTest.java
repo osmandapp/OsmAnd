@@ -263,6 +263,9 @@ public class SearchPhraseCompatTest {
 
 	@AfterClass
 	public static void wereCompared() {
+		if (!SearchCompat.enabled()) {
+			return;
+		}
 		System.out.println("SearchPhraseCompatTest: " + settings.size() + " settings, " + phrases.size()
 				+ " phrases, " + selectionsCompared + " selections, " + resultsCompared + " results compared");
 	}
