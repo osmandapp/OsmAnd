@@ -120,6 +120,9 @@ public class BaseDetailsObjectCompatTest {
 
 	@AfterClass
 	public static void reset() {
+		if (!SearchCompat.enabled()) {
+			return;
+		}
 		if (dump != null) {
 			dump.close();
 		}
