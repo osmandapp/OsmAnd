@@ -70,7 +70,7 @@ import org.apache.commons.logging.Log;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
@@ -384,8 +384,8 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             poiTypeFilter = getSearchFilter(travelGpx.getMainFilterString(), travelGpx.getPointFilterString());
         }
 
-        Map<Long, BinaryMapDataObject> geometryMap = new HashMap<>(); // live-updates
-        Map<Long, Amenity> amenityMap = new HashMap<>(); // live-updates
+        Map<Long, BinaryMapDataObject> geometryMap = new LinkedHashMap<>(); // live-updates
+        Map<Long, Amenity> amenityMap = new LinkedHashMap<>(); // live-updates
         List<Amenity> currentAmenities = new ArrayList<>();
 
         SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
@@ -442,7 +442,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         if (Algorithms.isEmpty(amenities)) {
             return null;
         }
-        Map<String, QuadRect> groups = new HashMap<>();
+        Map<String, QuadRect> groups = new LinkedHashMap<>();
         List<QuadRect> result = new ArrayList<>();
         for (Amenity am : amenities) {
             if (!am.isRouteTrack()) {
@@ -491,7 +491,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                                        @NonNull List<String> pgBackgrounds,
                                        @NonNull HeightDataLoader.Cancellable isCancelled) {
         int left = 0, right = Integer.MAX_VALUE, top = 0, bottom = Integer.MAX_VALUE;
-        Map<Long, Amenity> amenityMap = new HashMap<>();
+        Map<Long, Amenity> amenityMap = new LinkedHashMap<>();
         for (AmenityIndexRepository repo : repos) {
             try {
                 if (isCancelled.isCancelled()) {

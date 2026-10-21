@@ -63,6 +63,15 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 	@NonNull
 	UiUtilities getIconsCache();
 
+	/**
+	 * Screen name for the screen_open analytics event, null logs nothing.
+	 * Always a string literal: class names are obfuscated in release builds.
+	 */
+	@Nullable
+	default String getAnalyticsScreen() {
+		return null;
+	}
+
 	// === Activity access ===
 
 	default void callActivity(@NonNull OnResultCallback<FragmentActivity> callback) {

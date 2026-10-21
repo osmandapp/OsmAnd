@@ -2,12 +2,14 @@ package net.osmand.plus.resources;
 
 import net.osmand.binary.BinaryVectorTileReader;
 import net.osmand.data.GeometryTile;
+import net.osmand.data.SourceFingerprint;
 import net.osmand.map.ITileSource;
 
 import java.io.File;
 import java.io.IOException;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import static net.osmand.map.TileSourceManager.MAPILLARY_VECTOR_TILE_EXT;
 
@@ -89,19 +91,40 @@ public class GeometryTilesCache extends TilesCache<GeometryTile> {
 
 	@Override
 	protected GeometryTile getTileObject(@NonNull TileLoadDownloadRequest req) {
-		GeometryTile tile = null;
-		File en = new File(req.dirWithTiles, req.tileId);
-		if (en.exists()) {
-			try {
-				tile = BinaryVectorTileReader.readTile(en);
-				downloadIfExpired(req, en.lastModified());
-			} catch (IOException e) {
-				log.error("Cannot read tile", e);
-			} catch (OutOfMemoryError e) {
-				log.error("Out of memory error", e);
-				clearTiles();
-			}
+		File file = new File(req.dirWithTiles, req.tileId);
+		if (!file.exists()) {
+			return null;
 		}
-		return tile;
+		try {
+			GeometryTile tile = readStableGeometryTile(file);
+			if (tile != null) {
+				downloadIfExpired(req, tile.getSourceFingerprint().getLastModified());
+			}
+			return tile;
+		} catch (IOException e) {
+			log.error("Cannot read tile", e);
+		} catch (OutOfMemoryError e) {
+			log.error("Out of memory error", e);
+			clearTiles();
+		}
+		return null;
+	}
+
+	/**
+	 * Reads a tile only if its source stays unchanged and is not being downloaded. Downloads
+	 * rewrite the file in place, and a timestamp can miss a same-size replacement.
+	 */
+	@Nullable
+	private GeometryTile readStableGeometryTile(@NonNull File file) throws IOException {
+		SourceFingerprint before = SourceFingerprint.of(file);
+		if (isDownloadInProgress(file)) {
+			return null;
+		}
+		GeometryTile parsed = BinaryVectorTileReader.readTile(file);
+		SourceFingerprint after = SourceFingerprint.of(file);
+		if (isDownloadInProgress(file) || !before.equals(after)) {
+			return null;
+		}
+		return new GeometryTile(parsed.getData(), before);
 	}
 }

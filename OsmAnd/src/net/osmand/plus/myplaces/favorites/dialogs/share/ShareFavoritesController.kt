@@ -1,7 +1,6 @@
 package net.osmand.plus.myplaces.favorites.dialogs.share
 
 import android.graphics.Typeface
-import android.os.AsyncTask
 import android.text.Spanned
 import androidx.fragment.app.FragmentActivity
 import net.osmand.IndexConstants
@@ -154,6 +153,7 @@ class ShareFavoritesController(
 		return finished
 	}
 
+	@Suppress("DEPRECATION") // AsyncTask.cancel, needs migration
 	private fun abandon() {
 		if (abandoned) {
 			return
@@ -272,19 +272,23 @@ class ShareFavoritesController(
 		dialogManager.askRefreshDialogCompletely(PROCESS_ID)
 	}
 
-	private inner class PrepareShareDataTask : AsyncTask<Void, Void, ShareFavoritesDataPreparer.PreparationResult>() {
+	@Suppress("DEPRECATION") // AsyncTask, needs migration
+	private inner class PrepareShareDataTask : android.os.AsyncTask<Void, Void, ShareFavoritesDataPreparer.PreparationResult>() {
 
+		@Deprecated("Deprecated in Java")
 		override fun doInBackground(vararg params: Void?): ShareFavoritesDataPreparer.PreparationResult {
 			fileSession.cleanupExpiredGpxSessions()
 			return dataPreparer.prepare(groups, folderPath, fileSession) { isCancelled }
 		}
 
+		@Deprecated("Deprecated in Java")
 		override fun onCancelled(result: ShareFavoritesDataPreparer.PreparationResult?) {
 			preparationTask = null
 			preparationRunning = false
 			cleanupSessionIfPossible()
 		}
 
+		@Deprecated("Deprecated in Java")
 		override fun onPostExecute(result: ShareFavoritesDataPreparer.PreparationResult) {
 			preparationTask = null
 			preparationRunning = false

@@ -25,6 +25,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
@@ -224,6 +225,10 @@ public class MapLayers {
 
 		paletteRepositoryListener = event -> {
 			gpxLayer.onPaletteChanged(event);
+			SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+			if (srtmPlugin != null) {
+				srtmPlugin.onPaletteChanged(event);
+			}
 			mapView.refreshMap();
 		};
 		app.getPaletteRepository().addListener(paletteRepositoryListener);

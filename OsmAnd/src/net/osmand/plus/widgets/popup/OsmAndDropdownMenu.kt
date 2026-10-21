@@ -801,6 +801,7 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 }
 
 
+@Suppress("DEPRECATION") // layoutId still selects checkbox options for legacy callers
 fun PopUpMenuItem.toDropdownOption(displayData: PopUpMenuDisplayData? = null): OsmAndDropdownMenuOption<PopUpMenuItem> {
 	val isCheckbox = (isShowCompoundBtn && compoundButtonType == PopUpMenuItem.CompoundButtonType.CHECKBOX)
 			|| displayData?.layoutId == R.layout.popup_menu_item_full_divider_check_box
