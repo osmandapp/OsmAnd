@@ -31,6 +31,15 @@ class OnlinePhotosHolder(
 
 	fun markIncomplete() { isComplete = false }
 
+	/** An incomplete result keeps the photos of [previous] it is missing, so a failed provider does not hide them. */
+	fun keepItemsFrom(previous: MediaHolder?) {
+		if (isComplete || previous !is OnlinePhotosHolder) return
+		previous.itemsByGroup.forEach { (group, items) ->
+			val target = itemsByGroup.getOrPut(group) { linkedMapOf() }
+			items.forEach { (id, item) -> target.getOrPut(id) { item } }
+		}
+	}
+
 	fun clear() { itemsByGroup.clear() }
 
 	private fun getItemsByGroups(vararg groups: OnlinePhotosGroup): List<MediaItem> {

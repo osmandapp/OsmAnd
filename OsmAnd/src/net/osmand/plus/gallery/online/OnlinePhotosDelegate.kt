@@ -55,6 +55,7 @@ class OnlinePhotosDelegate(
 			)
 		} else {
 			cancel(key)
+			val previous = app.galleryHelper.repository.get(key)
 
 			val loadImagesListener = object : GetOnlineImagesTask.GetImageCardsListener {
 
@@ -62,6 +63,7 @@ class OnlinePhotosDelegate(
 
 				override fun onFinish(holder: OnlinePhotosHolder) {
 					activeTasks.remove(key)
+					holder.keepItemsFrom(previous)
 					onResult(holder)
 				}
 			}
