@@ -68,4 +68,9 @@ public class SkiRoutesFragment extends MapRoutesFragment {
 			setupContent(view);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "ski_routes";
+	}
 }

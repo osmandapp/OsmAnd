@@ -79,6 +79,7 @@ public class OsmandRegionsCompatTest {
 
 	@BeforeClass
 	public static void open() throws IOException {
+		SearchCompat.assumeEnabled();
 		assertTrue(REGIONS + " is missing; :OsmAnd-java:processResources downloads it", REGIONS.exists());
 		java = new OsmandRegions(REGIONS.getPath());
 		copy = new net.osmand.shared.map.OsmandRegions(REGIONS.getPath());

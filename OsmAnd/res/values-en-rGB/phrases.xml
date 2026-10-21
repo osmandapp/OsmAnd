@@ -68,7 +68,7 @@
     <string name="poi_railway_platform">Railway platform</string>
     <string name="poi_halt">Railway stop</string>
     <string name="poi_subway_entrance">Underground entrance</string>
-    <string name="poi_subway_station">Underground station</string>
+    <string name="poi_subway_station">Subway station: underground station</string>
     <string name="poi_railway_buffer_stop">Railway buffer stop</string>
     <string name="poi_recycling_centre">Type: recycling centre</string>
     <string name="poi_recycling_aluminium_cans">Aluminium cans</string>

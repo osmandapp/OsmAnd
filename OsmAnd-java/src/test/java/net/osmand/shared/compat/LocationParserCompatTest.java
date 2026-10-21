@@ -91,6 +91,7 @@ public class LocationParserCompatTest {
 
 	@BeforeClass
 	public static void collect() {
+		SearchCompat.assumeEnabled();
 		Set<String> collected = new LinkedHashSet<>();
 		Collections.addAll(collected, PHRASES);
 		Random random = new Random(25092026L);

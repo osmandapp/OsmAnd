@@ -36,6 +36,7 @@ import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
+import net.osmand.plus.inapp.InstallReferrer;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -124,6 +125,7 @@ public class DiscountHelper {
 		pms.put("nd", String.valueOf(app.getAppInitializer().getFirstInstalledDays()));
 		pms.put("ns", String.valueOf(app.getAppInitializer().getNumberOfStarts()));
 		pms.put("lang", app.getLanguage() + "");
+		InstallReferrer.addParams(app, pms);
 		List<String> features = getFeatures(app);
 		if (!features.isEmpty()) {
 			pms.put("features", TextUtils.join(",", features));

@@ -19,7 +19,7 @@ import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.util.Algorithms
 
 class SmartFolderOptionsController(
-	private val app: OsmandApplication,
+	app: OsmandApplication,
 	private val smartFolder: SmartFolder
 ) : BaseDialogController(
 	app
@@ -36,7 +36,7 @@ class SmartFolderOptionsController(
 	override fun getDisplayData(processId: String): DisplayData {
 		val iconsCache = app.uiUtilities
 		val displayData = DisplayData()
-		val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.APP)
+		val nightMode = app.daynightHelper.isNightMode(app.settings.applicationMode, ThemeUsageContext.APP)
 
 		displayData.addDisplayItem(
 			DisplayItem()

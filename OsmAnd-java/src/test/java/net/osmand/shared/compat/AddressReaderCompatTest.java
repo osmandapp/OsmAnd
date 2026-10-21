@@ -20,6 +20,7 @@ import net.osmand.shared.data.KLatLon;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -82,6 +83,11 @@ public class AddressReaderCompatTest {
 		copy.close();
 	}
 
+	@BeforeClass
+	public static void enabled() {
+		SearchCompat.assumeEnabled();
+	}
+
 	@AfterClass
 	public static void addressesWereCompared() {
 		System.out.println("AddressReaderCompatTest: " + filesWithAddress + " files with an address section, "
@@ -98,6 +104,10 @@ public class AddressReaderCompatTest {
 	@Parameterized.Parameters(name = "{index}: {0}")
 	public static List<Object[]> data() throws IOException {
 		List<Object[]> data = new ArrayList<>();
+		if (!SearchCompat.enabled()) {
+			// runs before enabled(): the search maps are not unpacked for nothing
+			return data;
+		}
 		List<File> files = new ArrayList<>(TestObf.files());
 		files.addAll(TestObf.searchFiles());
 		for (File file : files) {

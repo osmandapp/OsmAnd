@@ -118,4 +118,9 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "gpx_group_editor";
+	}
 }

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import net.osmand.data.Postcode;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
@@ -27,6 +28,11 @@ public class PostcodeCompatTest {
 			"STHL 1ZZ", "TKCA 1ZZ", "SEOUL 110-000", "AB 12", "ab1234", "A1234BCD", "c1234abc",
 			"DE-10115", "de10115", "NL-1101 DL", "US-12345", "FR-75001", "RU-101000", "UA-01001", "01 001",
 			"975 00", "97500", "47890", "9731", "97123", "98765", "street", "main 1", "1st", "10th avenue");
+
+	@BeforeClass
+	public static void enabled() {
+		SearchCompat.assumeEnabled();
+	}
 
 	@Test
 	public void normalizeIsTheSame() throws Exception {

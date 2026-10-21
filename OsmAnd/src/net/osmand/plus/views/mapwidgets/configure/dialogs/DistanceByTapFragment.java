@@ -239,4 +239,9 @@ public class DistanceByTapFragment extends BaseFullScreenFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "distance_by_tap";
+	}
 }

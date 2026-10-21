@@ -24,10 +24,6 @@ class AstroArticleWebViewClient(
 		return handleUrl(request.url?.toString())
 	}
 
-	override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-		return handleUrl(url)
-	}
-
 	private fun handleUrl(rawUrl: String?): Boolean {
 		if (rawUrl.isNullOrBlank()) {
 			return false

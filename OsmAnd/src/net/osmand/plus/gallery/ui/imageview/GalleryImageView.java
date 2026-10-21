@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
@@ -26,6 +27,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 public class GalleryImageView extends AppCompatImageView {
+
+	private static final float SCROLL_EDGE_TOLERANCE_PX = 1f;
 	private static final float FINAL_SCALE_MIN_MULTIPLIER = .50f;
 	private static final float FINAL_SCALE_MAX_MULTIPLIER = 1.5f;
 	private static final float MAX_USER_SCALE = 3f;
@@ -450,19 +453,44 @@ public class GalleryImageView extends AppCompatImageView {
 	@Override
 	public boolean canScrollHorizontally(int direction) {
 		currentMatrix.getValues(matrix);
-		float x = matrix[Matrix.MTRANS_X];
+		return canScroll(matrix[Matrix.MTRANS_X], getImageWidth(), viewWidth, direction);
+	}
 
-		if (getImageWidth() < viewWidth) {
-			return false;
+	@Override
+	public boolean canScrollVertically(int direction) {
+		currentMatrix.getValues(matrix);
+		return canScroll(matrix[Matrix.MTRANS_Y], getImageHeight(), viewHeight, direction);
+	}
 
-		} else if (x >= -1 && direction < 0) {
-			return false;
-
-		} else if (Math.abs(x) + viewWidth + 1 >= getImageWidth() && direction > 0) {
+	private static boolean canScroll(float translation, float imageSize, int viewSize, int direction) {
+		if (imageSize <= viewSize + SCROLL_EDGE_TOLERANCE_PX) {
 			return false;
 		}
-
+		if (direction < 0) {
+			return translation < -SCROLL_EDGE_TOLERANCE_PX;
+		}
+		if (direction > 0) {
+			return Math.abs(translation) + viewSize + SCROLL_EDGE_TOLERANCE_PX < imageSize;
+		}
 		return true;
+	}
+
+	@Nullable
+	public RectF getDisplayedImageRect() {
+		Drawable drawable = getDrawable();
+		if (drawable == null || drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0
+				|| viewWidth == 0 || viewHeight == 0) {
+			return null;
+		}
+		RectF rect = new RectF(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+		currentMatrix.mapRect(rect);
+		return rect;
+	}
+
+	public void animateToFit() {
+		if (isZoomed() && state == State.NONE && onDrawReady) {
+			compatPostOnAnimation(new DoubleTapZoom(minScale, (float) viewWidth / 2, (float) viewHeight / 2, false));
+		}
 	}
 
 	private void scaleImage(double deltaScale, float focusX, float focusY, boolean stretchImageToFinal) {
@@ -569,6 +597,7 @@ public class GalleryImageView extends AppCompatImageView {
 						break;
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_POINTER_UP:
+					case MotionEvent.ACTION_CANCEL:
 						setState(State.NONE);
 						break;
 				}
