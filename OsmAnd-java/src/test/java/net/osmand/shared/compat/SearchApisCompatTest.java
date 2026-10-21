@@ -15,6 +15,9 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory;
@@ -160,6 +163,16 @@ public class SearchApisCompatTest {
 
 	@BeforeClass
 	public static void open() throws Exception {
+		setUpTypes();
+		for (File f : TestObf.searchFiles()) {
+			javaReaders.put(f.getName(), new BinaryMapIndexReader(new RandomAccessFile(f, "r"), f));
+			copyReaders.put(f.getName(), new net.osmand.shared.binary.BinaryMapIndexReader(f.getPath()));
+		}
+		loadCases();
+	}
+
+	/** The regions, the english names of the poi types, and the poi types of both sides with them. */
+	static void setUpTypes() throws Exception {
 		assertTrue(REGIONS + " is missing; :OsmAnd-java:processResources downloads it", REGIONS.exists());
 		PlatformUtil.setOsmandRegions(new OsmandRegions(REGIONS.getPath()));
 		net.osmand.shared.binary.CommonWords.Companion.setOsmandRegions(
@@ -174,11 +187,9 @@ public class SearchApisCompatTest {
 		MapPoiTypes.getDefault().setPoiTranslator(new JavaTranslator());
 		net.osmand.shared.osm.MapPoiTypes.Companion.setDefault(new net.osmand.shared.osm.MapPoiTypes(POI_TYPES));
 		net.osmand.shared.osm.MapPoiTypes.Companion.getDefault().setPoiTranslator(new CopyTranslator());
+	}
 
-		for (File f : TestObf.searchFiles()) {
-			javaReaders.put(f.getName(), new BinaryMapIndexReader(new RandomAccessFile(f, "r"), f));
-			copyReaders.put(f.getName(), new net.osmand.shared.binary.BinaryMapIndexReader(f.getPath()));
-		}
+	private static void loadCases() throws IOException {
 		File[] files = SEARCH_CASES.listFiles((dir, name) -> name.endsWith(".json"));
 		assertTrue("search cases in " + SEARCH_CASES + "; collectTestResources copies them", files != null && files.length > 50);
 		Arrays.sort(files);
@@ -499,6 +510,16 @@ public class SearchApisCompatTest {
 			for (String name : v.split(";")) {
 				if (!name.trim().isEmpty() && random.nextInt(16) == 0) {
 					names.add(name.trim());
+				}
+			}
+		}
+		// the names the additional values the apis offer are found by alone: "Smoking" for "Smoking: not allowed"
+		for (PoiCategory pc : MapPoiTypes.getDefault().getCategories()) {
+			for (PoiType pt : pc.getPoiTypes()) {
+				for (PoiType a : pt.getPoiAdditionals()) {
+					if (a.isTopVisible()) {
+						names.add(PoiAdditionalLabels.getSearchName(a));
+					}
 				}
 			}
 		}

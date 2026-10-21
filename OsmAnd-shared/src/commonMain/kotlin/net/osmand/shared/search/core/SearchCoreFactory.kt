@@ -31,6 +31,7 @@ import net.osmand.shared.osm.AbstractPoiType
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.osm.MapPoiTypes.Companion.OSM_WIKI_CATEGORY
 import net.osmand.shared.osm.MapPoiTypes.Companion.WIKI_PLACE
+import net.osmand.shared.osm.PoiAdditionalLabels
 import net.osmand.shared.osm.PoiCategory
 import net.osmand.shared.osm.PoiType
 import net.osmand.shared.search.SearchUICore.SearchResultMatcher
@@ -1025,8 +1026,7 @@ object SearchCoreFactory {
 					}
 					existingResult.pt = f
 				} else {
-					val enTranslation = a.getEnTranslation().lowercase()
-					if ("no" != enTranslation) {
+					if (PoiAdditionalLabels.isAcceptedValue(a)) {
 						val ptr = checkPoiType(nm, a)
 						if (ptr != null && ptr.pt != null && ptr.pt!!.isTopVisible()) {
 							results[a.getKeyName()] = ptr
@@ -1038,11 +1038,14 @@ object SearchCoreFactory {
 
 		private fun checkPoiType(nm: NameStringMatcher, pf: AbstractPoiType): PoiTypeResult? {
 			var res: PoiTypeResult? = null
-			if (nm.matches(pf.getTranslation())) {
-				res = addIfMatch(nm, pf.getTranslation(), pf, res)
+			// an additional value is found by its name only: "Subway station", not "yes"
+			val translation = PoiAdditionalLabels.getSearchName(pf)
+			val enTranslation = PoiAdditionalLabels.getEnSearchName(pf)
+			if (nm.matches(translation)) {
+				res = addIfMatch(nm, translation, pf, res)
 			}
-			if (nm.matches(pf.getEnTranslation())) {
-				res = addIfMatch(nm, pf.getEnTranslation(), pf, res)
+			if (enTranslation != null && nm.matches(enTranslation)) {
+				res = addIfMatch(nm, enTranslation, pf, res)
 			}
 			if (nm.matches(pf.getKeyName())) {
 				res = addIfMatch(nm, pf.getKeyName().replace('_', ' '), pf, res)
@@ -1123,7 +1126,7 @@ object SearchCoreFactory {
 			if (showTopFiltersOnly) {
 				for (pt in topVisibleFilters!!) {
 					val res = SearchResult(phrase)
-					res.localeName = pt.getTranslation()
+					res.localeName = PoiAdditionalLabels.getSearchName(pt)
 					res.`object` = pt
 					addPoiTypeResult(phrase, resultMatcher, showTopFiltersOnly, getStandardFilterId(pt), res)
 				}
@@ -1155,7 +1158,7 @@ object SearchCoreFactory {
 						if (OSM_WIKI_CATEGORY == ptr.pt!!.getKeyName()) {
 							res.localeName = ptr.pt!!.getTranslation() + " (" + types.getAllLanguagesTranslationSuffix() + ")"
 						} else {
-							res.localeName = ptr.pt!!.getTranslation()
+							res.localeName = PoiAdditionalLabels.getSearchName(ptr.pt!!)
 						}
 						res.`object` = ptr.pt
 						addPoiTypeResult(
@@ -1399,8 +1402,10 @@ object SearchCoreFactory {
 			var nameFilter: String? = null
 			var countExtraWords = 0
 			val poiAdditionals: MutableSet<String> = LinkedHashSet()
+			var selectedType: Any? = null
 			if (phrase.isLastWord(ObjectType.POI_TYPE)) {
 				val obj = phrase.getLastSelectedWord()!!.getResult()!!.`object`
+				selectedType = obj
 				if (obj is AbstractPoiType) {
 					poiTypeFilter = getPoiTypeFilter(obj, poiAdditionals)
 				} else if (obj is SearchPoiTypeFilter) {
@@ -1458,10 +1463,25 @@ object SearchCoreFactory {
 					}
 				}
 				val bbox = phrase.getRadiusBBoxToSearch(radius)!!
-				val offlineIndexes = phrase.getOfflineIndexes()
 				// java's TreeSet, only asked whether it holds an id
 				val searchedPois: MutableSet<String> = HashSet()
+				val indexed = if (selectedType == null) null
+						else searchByNameIndex(phrase, resultMatcher, selectedType, bbox)
+				if (indexed != null) {
+					var rm = getResultMatcher(
+						phrase, poiTypeFilter, resultMatcher, nameFilter, null,
+						searchedPois, poiAdditionals, countExtraWords
+					)
+					if (poiTypeFilter is CustomSearchPoiFilter) {
+						rm = poiTypeFilter.wrapResultMatcher(rm)
+					}
+					indexed.forEach { rm.publish(it) }
+				}
+				val offlineIndexes = phrase.getOfflineIndexes()
 				for (r in offlineIndexes) {
+					if (indexed != null && isReadByNameIndex(r)) {
+						continue
+					}
 					var rm = getResultMatcher(
 						phrase, poiTypeFilter, resultMatcher, nameFilter, r,
 						searchedPois, poiAdditionals, countExtraWords
@@ -1480,11 +1500,21 @@ object SearchCoreFactory {
 			return true
 		}
 
+		// null - read the maps with the type filter
+		protected open fun searchByNameIndex(
+			phrase: SearchPhrase, resultMatcher: SearchResultMatcher, poiType: Any, bbox31: KQuadRect
+		): List<Amenity>? {
+			return null
+		}
+
+		protected open fun isReadByNameIndex(reader: BinaryMapIndexReader): Boolean {
+			return false
+		}
 
 		private fun getResultMatcher(
 			phrase: SearchPhrase, poiTypeFilter: SearchPoiTypeFilter?,
 			resultMatcher: SearchResultMatcher, nameFilter: String?,
-			selected: BinaryMapIndexReader, searchedPois: MutableSet<String>,
+			selected: BinaryMapIndexReader?, searchedPois: MutableSet<String>,
 			poiAdditionals: Collection<String>, countExtraWords: Int
 		): ResultMatcher<Amenity> {
 
