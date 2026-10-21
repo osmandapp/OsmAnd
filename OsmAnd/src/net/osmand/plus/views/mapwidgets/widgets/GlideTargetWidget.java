@@ -22,6 +22,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
 import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
@@ -37,7 +38,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	private String cachedFormattedRatio = null;
 
 	private boolean cachedTargetAltitudeMode;
-	private boolean forceUpdate; // becomes 'true' when widget state switched
+	private boolean forceUpdate; // becomes 'true' when widget state switched or the altitude units changed
 
 	public GlideTargetWidget(@NonNull MapActivity mapActivity, @NonNull GlideTargetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, WidgetType.GLIDE_TARGET, customId, widgetsPanel);
@@ -89,6 +90,19 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	}
 
 	@Override
+	public boolean isAltitudeMetricDepended() {
+		return true;
+	}
+
+	@Override
+	public void copySettings(@NonNull ApplicationMode appMode, @Nullable String customId) {
+		copySettingsFromMode(appMode, appMode, customId);
+		// copySettingsFromMode does not copy the Height setting, so copy it here
+		ResizableWidgetState duplicateState = new ResizableWidgetState(app, customId, widgetType, getDefaultWidgetSize());
+		duplicateState.getWidgetSizePref().setModeValue(appMode, getWidgetSizePref().getModeValue(appMode));
+	}
+
+	@Override
 	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
 		super.copySettingsFromMode(sourceAppMode, appMode, customId);
 		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
@@ -98,10 +112,12 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		LatLon targetLocation = getTargetLocation();
 		boolean locationChanged = !MapUtils.areLatLonEqual(targetLocation, cachedTargetLocation);
 
-		boolean metricSystemChanged = isUpdateNeeded();
-		boolean updateNeeded = locationChanged || metricSystemChanged;
+		if (isUpdateNeeded()) {
+			// the altitude units changed: show the value again even if it is the same
+			forceUpdate = true;
+		}
 
-		if (!forceUpdate && !updateNeeded && !isTimeToUpdate(LONG_UPDATE_INTERVAL_MILLIS)) {
+		if (!forceUpdate && !locationChanged && !isTimeToUpdate(LONG_UPDATE_INTERVAL_MILLIS)) {
 			// Avoid too frequent calculations
 			return;
 		}
@@ -109,8 +125,12 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		cachedTargetLocation = targetLocation;
 
 		calculateAltitude(targetLocation, targetAltitude -> {
+			if (!isInTargetAltitudeState()) {
+				// the mode was switched while the altitude was resolved
+				return;
+			}
 			markUpdated();
-			if (forceUpdate || metricSystemChanged || !AverageGlideComputer.areAltitudesEqual(cachedTargetAltitude, targetAltitude)) {
+			if (forceUpdate || !AverageGlideComputer.areAltitudesEqual(cachedTargetAltitude, targetAltitude)) {
 				cachedTargetAltitude = targetAltitude;
 				if (cachedTargetAltitude == null) {
 					setText(NO_VALUE, null);
@@ -124,6 +144,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 					}
 				}
 			}
+			forceUpdate = false;
 		});
 	}
 
@@ -151,6 +172,10 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		cachedTargetLocation = targetLocation;
 
 		calculateAltitude(targetLocation, targetAltitude -> {
+			if (isInTargetAltitudeState()) {
+				// the mode was switched while the altitude was resolved
+				return;
+			}
 			markUpdated();
 			if (forceUpdate || anyChanged || !AverageGlideComputer.areAltitudesEqual(cachedTargetAltitude, targetAltitude)) {
 				cachedTargetAltitude = targetAltitude;
@@ -164,6 +189,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 					}
 				}
 			}
+			forceUpdate = false;
 		});
 	}
 

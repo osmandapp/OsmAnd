@@ -55,7 +55,9 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -76,6 +78,7 @@ public class MyPlacesActivity extends TabActivity {
 	private ValueAnimator tabsHeightAnimator;
 
 	private final List<WeakReference<FragmentStateHolder>> fragmentsStateList = new ArrayList<>();
+	private final Set<Object> locationUpdateClients = new HashSet<>();
 	private int tabSize;
 
 	private Bundle intentParams;
@@ -359,6 +362,24 @@ public class MyPlacesActivity extends TabActivity {
 	protected void onPause() {
 		super.onPause();
 		viewPager.clearOnPageChangeListeners();
+		app.getLocationProvider().pauseAllUpdates();
+	}
+
+	/**
+	 * MapActivity pauses location and compass updates when My Places is opened over it.
+	 * Track lists sorted by "Nearest to current location" request them here when resumed and release them
+	 * when paused or sorted otherwise, so the updates run while at least one of them holds them.
+	 */
+	public void requestLocationUpdates(@NonNull Object client) {
+		if (locationUpdateClients.add(client) && locationUpdateClients.size() == 1) {
+			app.getLocationProvider().resumeAllUpdates();
+		}
+	}
+
+	public void releaseLocationUpdates(@NonNull Object client) {
+		if (locationUpdateClients.remove(client) && locationUpdateClients.isEmpty()) {
+			app.getLocationProvider().pauseAllUpdates();
+		}
 	}
 
 	@Override

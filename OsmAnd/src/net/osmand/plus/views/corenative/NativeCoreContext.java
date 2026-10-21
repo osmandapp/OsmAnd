@@ -117,4 +117,38 @@ public class NativeCoreContext {
 		mapRendererContext = new MapRendererContext(app, density);
 		mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollectionsByProviderType);
 	}
+
+	public static void updateContourLinesDirectory(@NonNull OsmandApplication app, boolean pluginActive) {
+		MapRendererContext mapRendererContext = NativeCoreContext.mapRendererContext;
+		ObfsCollection obfsCollection = init ? obfsCollectionsByProviderType.get(ProviderType.MAIN) : null;
+		if (mapRendererContext == null || obfsCollection == null) {
+			return;
+		}
+		boolean enabled = pluginActive || InAppPurchaseUtils.isContourLinesAvailable(app);
+		File srtmIndexDir = app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
+		String srtmIndexPath = srtmIndexDir.getAbsolutePath();
+		if (enabled == obfsCollection.hasDirectory(srtmIndexPath)) {
+			return;
+		}
+		ObfsCollection contourLinesObfsCollection = obfsCollectionsByProviderType.get(ProviderType.CONTOUR_LINES);
+		if (enabled) {
+			if (!srtmIndexDir.exists()) {
+				srtmIndexDir.mkdir();
+			}
+			if (contourLinesObfsCollection == null) {
+				contourLinesObfsCollection = new ObfsCollection();
+				contourLinesObfsCollection.setIndexCacheFile(new File(app.getCacheDir(), CACHE_FILE_NAME).getAbsolutePath());
+				obfsCollectionsByProviderType.put(ProviderType.CONTOUR_LINES, contourLinesObfsCollection);
+			}
+			if (!contourLinesObfsCollection.hasDirectory(srtmIndexPath)) {
+				contourLinesObfsCollection.addDirectory(srtmIndexPath, false);
+			}
+			mapRendererContext.addDirectory(srtmIndexPath);
+		} else {
+			if (contourLinesObfsCollection != null) {
+				contourLinesObfsCollection.removeDirectory(srtmIndexPath);
+			}
+			mapRendererContext.removeDirectory(srtmIndexPath);
+		}
+	}
 }
