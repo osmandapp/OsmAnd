@@ -1,12 +1,13 @@
 package net.osmand.shared.util
 
 /**
- * Copy of the part of `net.osmand.util.SearchAlgorithms` in OsmAnd-java that the obf reader needs:
- * folding a name onto what a search can match, splitting a query into tokens, and the suffix
- * dictionary and bounding boxes of the poi name index.
+ * Copy of the part of `net.osmand.util.SearchAlgorithms` in OsmAnd-java that the obf reader and
+ * the search words need: folding a name onto what a search can match, splitting a query into
+ * tokens, the suffix dictionary and bounding boxes of the poi name index, and counting the letters
+ * of a word to tell a house number from a name.
  *
- * What stayed in java is the search pipeline's own: encoding suffixes, dropping common words, and
- * the reader helpers that take a protobuf stream.
+ * What stayed in java is the search pipeline's own: encoding suffixes, dropping common words,
+ * splitting a house number into its parts, and the reader helpers that take a protobuf stream.
  *
  * Two deliberate differences from the java original, both about the default locale:
  * - lowercasing here is locale independent. Java lowercases a name with the device's locale, which
@@ -241,6 +242,50 @@ object KSearchAlgorithms {
 			ind += 4
 		}
 		return res
+	}
+
+	fun letters(s: String): Int {
+		var count = 0
+		for (c in s) {
+			if (c.isLetter() && !c.isDigit()) {
+				count++
+			}
+		}
+		return count
+	}
+
+	/** The letters of [s], counted up to one past [maxCount]. */
+	fun letters(s: String, maxCount: Int): Int {
+		var count = 0
+		var i = 0
+		while (count <= maxCount && i < s.length) {
+			val c = s[i]
+			if (c.isLetter() && !c.isDigit()) {
+				count++
+			}
+			i++
+		}
+		return count
+	}
+
+	/** A number with at most one letter, as a house number is: "18", "18b", "#3". */
+	fun isNumber2Letters(name: String?): Boolean {
+		if (name.isNullOrEmpty()) {
+			return false
+		}
+		return startsWithDigit(name) && letters(name) < 2
+	}
+
+	/** A digit comes before any letter; what is neither, "#" or "-", is skipped. */
+	fun startsWithDigit(name: String): Boolean {
+		for (c in name) {
+			if (c.isDigit()) {
+				return true
+			} else if (c.isLetter()) {
+				return false
+			}
+		}
+		return false
 	}
 
 	private fun isTokenCharacter(value: String, index: Int, tokenAlreadyStarted: Boolean): Boolean {
