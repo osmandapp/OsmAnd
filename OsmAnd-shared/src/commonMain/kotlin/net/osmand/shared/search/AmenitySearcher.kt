@@ -109,12 +109,11 @@ class AmenitySearcher(private val mapPoiTypes: MapPoiTypes?) {
 	private val executor = SerialExecutor()
 
 	fun getAmenityRepositories(includeTravel: Boolean, travelFileVisibility: ((String) -> Boolean)?): List<AmenityIndexRepository> {
-		val fileNames = amenityRepositories.block { ArrayList(it.keys) }
 		val travelMaps = ArrayList<AmenityIndexRepository>()
 		val baseMaps = ArrayList<AmenityIndexRepository>()
 		val result = ArrayList<AmenityIndexRepository>()
 
-		fileNames.sortWith(KAlgorithms::compareFileVersions)
+		val fileNames = KAlgorithms.sortByFileVersions(amenityRepositories.block { ArrayList(it.keys) })
 
 		for (fileName in fileNames) {
 			val r = amenityRepositories[fileName]
