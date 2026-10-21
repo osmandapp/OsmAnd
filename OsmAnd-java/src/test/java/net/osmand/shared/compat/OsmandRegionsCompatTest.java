@@ -87,6 +87,9 @@ public class OsmandRegionsCompatTest {
 
 	@AfterClass
 	public static void close() throws IOException {
+		if (!SearchCompat.enabled()) {
+			return;
+		}
 		java.close();
 		copy.close();
 		System.out.println("OsmandRegionsCompatTest: " + regionsCompared + " regions, " + objectsCompared
