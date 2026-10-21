@@ -53,12 +53,13 @@ import java.util.List;
  * </pre>
  * Opening is not a like for like: java also reads the transport header, which the copy skips;
  * the address header the copy reads too since the address section was copied, at no cost that
- * {@link AddressReaderBenchmarkTest} could measure. On the objects the copy is at least as fast as java, and on the name search it is
- * half again faster, which is the collation key of {@code KCollatorStringMatcher} paying off: a
- * name search asks the matcher about every name of every amenity of every candidate block. The
- * same files on Kotlin/Native cost 2.4, 21.5, 3.6 and 34.0 ms; there the name search ends up a
- * little above java on the jvm, since Kotlin/Native costs about twice the jvm either way. See the
- * cross platform benchmark.
+ * {@link AddressReaderBenchmarkTest} could measure. On the objects the copy is at least as fast as
+ * java, and on the name search it is half again faster, which is the collation key of
+ * {@code KCollatorStringMatcher} paying off: a name search asks the matcher about every name of
+ * every amenity of every candidate block. The same files on Kotlin/Native cost 2.4, 21.5, 3.6 and
+ * 20.5 ms; the name search took 34.0 ms there, above java on the jvm, until the walk over the
+ * string table of the name index prepared each key once instead of reducing it on every
+ * comparison. See the cross platform benchmark.
  */
 @Ignore("benchmark, run manually")
 public class ObfReaderBenchmarkTest {

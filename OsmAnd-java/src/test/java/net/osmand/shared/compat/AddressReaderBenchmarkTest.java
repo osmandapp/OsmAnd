@@ -45,16 +45,18 @@ import java.util.Set;
  * every settlement             28.6  21.9    24.5    3.0   2.2     2.8   11.3   6.6     7.3
  * every street                 67.5  51.6    71.2   17.6  14.8    24.7   58.7  47.1    60.8
  * every house                   494   409     687   54.7  49.8    96.2    394   314     591
- * find by name, 20 queries     23.2   9.3    18.3   25.3  16.2    35.8   22.4  17.4    52.0
+ * find by name, 20 queries     23.2   7.6    13.5   25.1   8.7    15.0   23.0   9.4    19.1
  * </pre>
  * settlements, streets, houses, found: Noord-Holland 75 587, 122 172, 4 268 244, 11 624; Kyiv 2 910,
  * 28 186, 177 312, 969; Slovakia 9 055, 85 483, 3 582 428, 1 487.
  *
- * The copy on the jvm is faster than java in every phase, 0.40 to 0.91 of its time; the name search
- * gains most, from the collation key of {@code KCollatorStringMatcher}. Opening costs the copy the
- * same as before the address header was read: 7.02, 4.29 and 20.11 ms on master. Kotlin/Native
- * reads settlements at about the jvm's speed, streets and houses at 1.3 to 1.9 times the copy on the
- * jvm, and searches by name at 2 to 3 times, which puts the search above java on the jvm.
+ * The copy on the jvm is faster than java in every phase, 0.32 to 0.91 of its time; the name search
+ * gains most, from the collation key of {@code KCollatorStringMatcher} and from the walk over the
+ * string table of the name index preparing each key once. Opening costs the copy the same as before
+ * the address header was read: 7.02, 4.29 and 20.11 ms on master. Kotlin/Native reads settlements
+ * at about the jvm's speed, streets and houses at 1.3 to 1.9 times the copy on the jvm, and searches
+ * by name at 1.7 to 2.0 times, still below java on the jvm. Before the string table walk prepared
+ * its keys the native name search took 17.8, 35.6 and 52.4 ms.
  */
 public class AddressReaderBenchmarkTest {
 

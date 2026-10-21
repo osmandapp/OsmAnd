@@ -1207,7 +1207,7 @@ class BinaryMapIndexReader {
 		for (i in queries.indices) {
 			prefixesByQuery.add(LinkedHashMap())
 		}
-		readIndexedStringTablePrefixes(queries, "", prefixesByQuery)
+		readIndexedStringTablePrefixes(queries.map { KCollatorStringMatcher.PreparedName(it) }, "", prefixesByQuery)
 
 		val result = ArrayList<List<QueryToken.Prefix>>(queries.size)
 		for (prefixes in prefixesByQuery) {
@@ -1220,8 +1220,15 @@ class BinaryMapIndexReader {
 		return result
 	}
 
+	/**
+	 * The walk behind [readIndexedStringTablePrefixes]. The queries come prepared, and each key is
+	 * prepared once for all of them: a table of a regional map holds tens of thousands of keys, and
+	 * reducing both strings on every comparison was most of the time a name search took on
+	 * Kotlin/Native.
+	 */
 	private fun readIndexedStringTablePrefixes(
-		queries: List<String?>, prefix: String, prefixesByQuery: List<MutableMap<String, Int>>
+		queries: List<KCollatorStringMatcher.PreparedName?>, prefix: String,
+		prefixesByQuery: List<MutableMap<String, Int>>
 	) {
 		val matched = BooleanArray(queries.size)
 		val matchedSubtables = BooleanArray(queries.size)
@@ -1259,7 +1266,7 @@ class BinaryMapIndexReader {
 					val len = codedIS.readRawVarint32()
 					val oldLim = codedIS.pushLimitLong(len.toLong())
 					if (shouldWeReadSubtable && key != null) {
-						val subqueries = ArrayList<String?>(queries)
+						val subqueries = ArrayList<KCollatorStringMatcher.PreparedName?>(queries)
 						for (i in queries.indices) {
 							if (!matchedSubtables[i]) {
 								subqueries[i] = null
@@ -1277,9 +1284,11 @@ class BinaryMapIndexReader {
 	}
 
 	private fun matchIndexedStringTablePrefix(
-		queries: List<String?>, key: String, matched: BooleanArray, matchedSubtables: BooleanArray
+		queries: List<KCollatorStringMatcher.PreparedName?>, key: String, matched: BooleanArray,
+		matchedSubtables: BooleanArray
 	): Boolean {
 		var shouldWeReadSubtable = false
+		var preparedKey: KCollatorStringMatcher.PreparedName? = null
 		for (i in queries.indices) {
 			val query = queries[i]
 			matched[i] = false
@@ -1287,10 +1296,13 @@ class BinaryMapIndexReader {
 			if (query == null) {
 				continue
 			}
-			val keyStartsWithQuery =
-				KCollatorStringMatcher.cmatches(key, query, KStringMatcherMode.CHECK_ONLY_STARTS_WITH)
-			val queryStartsWithKey =
-				KCollatorStringMatcher.cmatches(query, key, KStringMatcherMode.CHECK_ONLY_STARTS_WITH)
+			val keyName = preparedKey ?: KCollatorStringMatcher.PreparedName(key).also { preparedKey = it }
+			val keyStartsWithQuery = KCollatorStringMatcher.cmatchesPrepared(
+				keyName, query.key, KStringMatcherMode.CHECK_ONLY_STARTS_WITH
+			)
+			val queryStartsWithKey = KCollatorStringMatcher.cmatchesPrepared(
+				query, keyName.key, KStringMatcherMode.CHECK_ONLY_STARTS_WITH
+			)
 			val potentialBranchMatch = keyStartsWithQuery || queryStartsWithKey
 			matched[i] = potentialBranchMatch
 			matchedSubtables[i] = potentialBranchMatch
