@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
+import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -50,6 +51,9 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment, ISu
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = (OsmandApplication) requireActivity().getApplication();
+		if (savedInstanceState == null) {
+			AnalyticsHelper.logScreenOpen(app, getAnalyticsScreen());
+		}
 		settings = app.getSettings();
 		uiUtilities = app.getUIUtilities();
 		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());

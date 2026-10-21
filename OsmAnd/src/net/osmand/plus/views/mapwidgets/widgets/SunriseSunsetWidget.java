@@ -52,6 +52,8 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	private LatLon cachedCenterLatLon;
 	private boolean isLocationChanged;
 	private boolean forceUpdate;
+	private Boolean cachedShowTimeLeft;
+	private SunPositionMode cachedSunPositionMode;
 
 	public SunriseSunsetWidget(@NonNull MapActivity mapActivity, @NonNull SunriseSunsetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, widgetState.getWidgetType(), customId, widgetsPanel);
@@ -107,6 +109,7 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		updateCachedLocation();
+		updateCachedSettings();
 		if (!isUpdateNeeded()) {
 			return;
 		}
@@ -169,6 +172,18 @@ public class SunriseSunsetWidget extends SimpleWidget {
 		if (!areLocationsEqual(cachedCenterLatLon, newCenterLatLon)) {
 			cachedCenterLatLon = newCenterLatLon;
 			isLocationChanged = true;
+		}
+	}
+
+	private void updateCachedSettings() {
+		boolean showTimeLeft = isShowTimeLeft();
+		SunPositionMode sunPositionMode = widgetState.getSunPositionPreference().get();
+		if (!Algorithms.objectEquals(cachedShowTimeLeft, showTimeLeft)
+				|| cachedSunPositionMode != sunPositionMode) {
+			cachedShowTimeLeft = showTimeLeft;
+			cachedSunPositionMode = sunPositionMode;
+			cachedNextTime = 0;
+			forceUpdate = true;
 		}
 	}
 

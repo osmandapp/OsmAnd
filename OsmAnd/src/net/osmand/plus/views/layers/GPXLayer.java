@@ -618,7 +618,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					changed = true;
 				}
 				if (appearanceHelper.isShowStartFinishForTrack(gpxFile, gpxItem, dirItem, selected)) {
-					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
+					List<TrkSegment> segments = selectedGpxFile.getStartFinishSegments();
 					for (TrkSegment segment : segments) {
 						if (segment.getPoints().size() >= 2) {
 							startFinishPointsCount += 2;
@@ -661,7 +661,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				Gpx3DVisualizationType visualizationType = track3DStyle.getVisualizationType();
 
 				if (appearanceHelper.isShowStartFinishForTrack(gpxFile, gpxItem, dirItem, selected)) {
-					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
+					List<TrkSegment> segments = selectedGpxFile.getStartFinishSegments();
 					for (TrkSegment segment : segments) {
 						if (segment.getPoints().size() >= 2) {
 							WptPt start = segment.getPoints().get(0);
@@ -908,7 +908,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				GpxDirItem dirItem = trackItems.dirItem();
 
 				if (appearanceHelper.isShowStartFinishForTrack(gpxFile, gpxItem, dirItem, selected)) {
-					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
+					List<TrkSegment> segments = selectedGpxFile.getStartFinishSegments();
 					for (TrkSegment segment : segments) {
 						if (segment.getPoints().size() >= 2) {
 							WptPt start = segment.getPoints().get(0);

@@ -11,6 +11,8 @@ import net.osmand.plus.R;
 
 public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> extends AsyncTask<Params, Progress, Result> implements IProgress {
 
+	private static final int PROGRESS_MESSAGE = OsmAndConstants.UI_HANDLER_PROGRESS + 2;
+
 	protected String taskName;
 	protected String message = ""; //$NON-NLS-1$
 	protected OsmandApplication ctx;
@@ -59,9 +61,9 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	}
 
 	private void updateProgress(boolean updateOnlyProgress) {
-		if (uiHandler != null && (!uiHandler.hasMessages(1) || !updateOnlyProgress)) {
+		if (uiHandler != null && (!uiHandler.hasMessages(PROGRESS_MESSAGE) || !updateOnlyProgress)) {
 			Message msg = Message.obtain(uiHandler, () -> updateProgress(updateOnlyProgress, tag));
-			msg.what = OsmAndConstants.UI_HANDLER_PROGRESS + 2;
+			msg.what = PROGRESS_MESSAGE;
 			uiHandler.sendMessage(msg);
 		}
 	}

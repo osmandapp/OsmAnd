@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.astronomy
 
+import android.Manifest
 import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
@@ -15,6 +16,7 @@ import android.widget.ProgressBar
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
@@ -171,6 +173,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private lateinit var arModeHelper: StarMapARModeHelper
 	private lateinit var cameraHelper: StarMapCameraHelper
+	private val cameraPermissionLauncher =
+		registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+			if (::cameraHelper.isInitialized) {
+				cameraHelper.onCameraPermissionResult(granted)
+			}
+		}
 	private lateinit var bottomSheetContainer: View
 	private lateinit var bottomSheetBehavior: AstroBottomSheetBehavior<View>
 
@@ -516,7 +524,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			if (!enabled) manualAzimuth = true
 		}
 
-		cameraHelper = StarMapCameraHelper(this, starView, view.findViewById(R.id.camera_view)) { enabled ->
+		cameraHelper = StarMapCameraHelper(this, starView, view.findViewById(R.id.camera_view),
+			{ cameraPermissionLauncher.launch(Manifest.permission.CAMERA) }) { enabled ->
 			updateCameraUI(enabled)
 			if (enabled && !arModeHelper.isArModeEnabled) arModeHelper.toggleArMode(true)
 		}
@@ -586,14 +595,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		zoomInButton = view.findViewById(R.id.star_map_zoom_in_button)
 		zoomInButton.setOnClickListener {
 			if (::starView.isInitialized) {
-				starView.zoomIn()
+				starView.zoomIn(true)
 			}
 		}
 
 		zoomOutButton = view.findViewById(R.id.star_map_zoom_out_button)
 		zoomOutButton.setOnClickListener {
 			if (::starView.isInitialized) {
-				starView.zoomOut()
+				starView.zoomOut(true)
 			}
 		}
 
@@ -774,7 +783,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		setExtraBottomMargin(timeControlCard, eclipseOffset)
 		setExtraBottomMargin(searchButton, eclipseOffset)
 		setExtraBottomMargin(settingsButton, eclipseOffset)
-		setExtraBottomMargin(zoomButtons, eclipseOffset)
 	}
 
 	private fun setExtraBottomMargin(view: View, extraBottom: Int) {
@@ -1032,11 +1040,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
-	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-		super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-		cameraHelper.onRequestPermissionsResult(requestCode, grantResults)
-	}
-
 	private fun updateRegularMapVisibility(visible: Boolean) {
 		regularMapVisible = visible
 		val mapActivity = requireMapActivity()
@@ -1051,6 +1054,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			mainLayout.setPadding(0, 0, 0, mapHeightPx)
 			val display = AndroidUtils.getDisplay(app)
 			val screenDimensions = Point(0, 0)
+			@Suppress("DEPRECATION")
 			display.getSize(screenDimensions)
 			mapActivity.setMapViewPaddings(0, screenDimensions.y - mapHeightPx, 0, 0)
 			mapActivity.refreshMap()
@@ -2457,4 +2461,5 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			?.applyRedFilter(enabled)
 	}
 
+	override fun getAnalyticsScreen() = "star_map"
 }

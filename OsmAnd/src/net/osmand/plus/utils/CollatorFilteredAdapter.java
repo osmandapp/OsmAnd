@@ -13,6 +13,8 @@ import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class CollatorFilteredAdapter extends ArrayAdapter<String> {
@@ -35,6 +37,14 @@ public class CollatorFilteredAdapter extends ArrayAdapter<String> {
 	@Override
 	public String getItem(int position) {
 		return filteredCollection.get(position);
+	}
+
+	@Override
+	public void sort(@NonNull Comparator<? super String> comparator) {
+		// items are read from the copies, not from the list sorted by super.sort()
+		Collections.sort(originalCollection, comparator);
+		Collections.sort(filteredCollection, comparator);
+		notifyDataSetChanged();
 	}
 
 	@NonNull

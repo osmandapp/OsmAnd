@@ -235,4 +235,9 @@ public class EditKeyAssignmentFragment extends BaseFullScreenFragment
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "edit_key_assignment";
+	}
 }

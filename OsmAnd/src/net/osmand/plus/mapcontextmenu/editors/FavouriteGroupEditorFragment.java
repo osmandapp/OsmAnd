@@ -149,4 +149,9 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favourite_group_editor";
+	}
 }

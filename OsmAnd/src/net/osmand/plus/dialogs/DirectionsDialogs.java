@@ -14,9 +14,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
 public class DirectionsDialogs {
 	
 	public static void directionsToDialogAndLaunchMap(@NonNull Activity activity, double lat, double lon,
@@ -64,23 +61,7 @@ public class DirectionsDialogs {
 		}
 	}
 
-	public static void setupPopUpMenuIcon(PopupMenu menu){
-		try {
-			Field[] fields = menu.getClass().getDeclaredFields();
-			for (Field field : fields) {
-				if ("mPopup".equals(field.getName())) {
-					field.setAccessible(true);
-					Object menuPopupHelper = field.get(menu);
-					Class<?> classPopupHelper = Class.forName(menuPopupHelper
-							.getClass().getName());
-					Method setForceIcons = classPopupHelper.getMethod(
-							"setForceShowIcon", boolean.class);
-					setForceIcons.invoke(menuPopupHelper, true);
-					break;
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public static void setupPopUpMenuIcon(PopupMenu menu) {
+		menu.setForceShowIcon(true);
 	}
 }

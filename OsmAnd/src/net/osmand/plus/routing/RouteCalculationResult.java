@@ -38,7 +38,6 @@ import java.util.List;
 public class RouteCalculationResult {
 	private static final Log log = PlatformUtil.getLog(RouteCalculationResult.class);
 
-	private static final double DISTANCE_CLOSEST_TO_INTERMEDIATE = 3000;
 	private static final double DISTANCE_THRESHOLD_TO_INTERMEDIATE = 25;
 	private static final double DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS = 15;
 
@@ -227,12 +226,12 @@ public class RouteCalculationResult {
 		return initialCalculation;
 	}
 
-	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
-	                                                 List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
+	static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
+	                                         List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
 		if (intermediates != null && localDirections != null) {
 			int[] interLocations = new int[intermediates.size()];
 			for (int currentIntermediate = 0; currentIntermediate < intermediates.size(); currentIntermediate++) {
-				double setDistance = DISTANCE_CLOSEST_TO_INTERMEDIATE;
+				double setDistance = Double.MAX_VALUE;
 				LatLon currentIntermediatePoint = intermediates.get(currentIntermediate);
 				int prevLocation = currentIntermediate == 0 ? 0 : interLocations[currentIntermediate - 1];
 				for (int currentLocation = prevLocation; currentLocation < locations.size();
@@ -248,9 +247,6 @@ public class RouteCalculationResult {
 					}
 
 				}
-				if (setDistance == DISTANCE_CLOSEST_TO_INTERMEDIATE) {
-					return;
-				}
 			}
 
 
@@ -264,22 +260,35 @@ public class RouteCalculationResult {
 							&& getDistanceToLocation(locations, intermediates.get(currentIntermediate), locationIndex) > 50) {
 						RouteDirectionInfo toSplit = localDirections.get(currentDirection);
 						// intermediate point should split using average speed from its actual (previous) segment
-						float currentAvgSpeed = localDirections.get(Math.max(0, currentDirection - 1)).getAverageSpeed();
-						RouteDirectionInfo info = new RouteDirectionInfo(currentAvgSpeed, TurnType.straight());
-						info.setRef(toSplit.getRef());
-						info.setStreetName(toSplit.getStreetName());
-						info.setRouteDataObject(toSplit.getRouteDataObject());
-						info.setDestinationName(toSplit.getDestinationName());
-						info.routePointOffset = interLocations[currentIntermediate];
-						info.setDescriptionRoute(ctx.getString(R.string.route_head));//; //$NON-NLS-1$
-						localDirections.add(currentDirection, info);
+						RouteDirectionInfo prevDirection = localDirections.get(Math.max(0, currentDirection - 1));
+						localDirections.add(currentDirection, createIntermediateDirection(ctx, toSplit,
+								prevDirection.getAverageSpeed(), interLocations[currentIntermediate]));
 					}
 					intermediatePoints[currentIntermediate] = currentDirection;
 					currentIntermediate++;
 				}
 				currentDirection++;
 			}
+			while (currentIntermediate < intermediates.size() && !localDirections.isEmpty()) {
+				RouteDirectionInfo lastDirection = localDirections.get(localDirections.size() - 1);
+				localDirections.add(createIntermediateDirection(ctx, lastDirection,
+						lastDirection.getAverageSpeed(), interLocations[currentIntermediate]));
+				intermediatePoints[currentIntermediate] = localDirections.size() - 1;
+				currentIntermediate++;
+			}
 		}
+	}
+
+	private static RouteDirectionInfo createIntermediateDirection(Context ctx, RouteDirectionInfo source,
+	                                                              float averageSpeed, int routePointOffset) {
+		RouteDirectionInfo info = new RouteDirectionInfo(averageSpeed, TurnType.straight());
+		info.setRef(source.getRef());
+		info.setStreetName(source.getStreetName());
+		info.setRouteDataObject(source.getRouteDataObject());
+		info.setDestinationName(source.getDestinationName());
+		info.routePointOffset = routePointOffset;
+		info.setDescriptionRoute(ctx.getString(R.string.route_head));//; //$NON-NLS-1$
+		return info;
 	}
 
 	private static double getDistanceToLocation(List<Location> locations, LatLon p, int currentLocation) {
