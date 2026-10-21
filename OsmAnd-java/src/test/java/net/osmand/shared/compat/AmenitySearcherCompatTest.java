@@ -163,6 +163,9 @@ public class AmenitySearcherCompatTest {
 
 	@AfterClass
 	public static void close() throws IOException {
+		if (!SearchCompat.enabled()) {
+			return;
+		}
 		if (dump != null) {
 			dump.close();
 		}
