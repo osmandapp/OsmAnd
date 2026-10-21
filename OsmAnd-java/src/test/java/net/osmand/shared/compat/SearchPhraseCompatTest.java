@@ -585,7 +585,7 @@ public class SearchPhraseCompatTest {
 	 * so that {@code SearchPhraseTest} can compare them on Kotlin/Native the way java did, apart
 	 * from what the collator of the platform says.
 	 */
-	private static final class NotingCollator implements net.osmand.Collator {
+	static final class NotingCollator implements net.osmand.Collator {
 		private final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
 		private final java.text.Collator keys = keyCollator();
 		private final Set<String> words = new LinkedHashSet<>();
@@ -612,11 +612,14 @@ public class SearchPhraseCompatTest {
 		/** {@code word:key,...}, the keys ordered as the collator orders their words. */
 		String keys() {
 			List<String> list = new ArrayList<>(words);
-			for (String a : list) {
-				for (String b : list) {
-					assertEquals(a + " " + b, Integer.signum(collator.compare(a, b)),
-							Integer.signum(keys.getCollationKey(a).compareTo(keys.getCollationKey(b))));
-				}
+			// the keys order the words as the collator does: in its order, each pair of neighbours agrees
+			List<String> sorted = new ArrayList<>(list);
+			sorted.sort(collator::compare);
+			for (int i = 1; i < sorted.size(); i++) {
+				String a = sorted.get(i - 1);
+				String b = sorted.get(i);
+				assertEquals(a + " " + b, Integer.signum(collator.compare(a, b)),
+						Integer.signum(keys.getCollationKey(a).compareTo(keys.getCollationKey(b))));
 			}
 			StringBuilder sb = new StringBuilder();
 			for (String w : list) {
@@ -1200,12 +1203,18 @@ public class SearchPhraseCompatTest {
 	 * or the copy's internal one, which the jvm knows by a longer name.
 	 */
 	static Object call(Object o, String name, Object... args) {
-		Method found = null;
+		StringBuilder key = new StringBuilder(o.getClass().getName()).append('.').append(name);
+		for (Object a : args) {
+			key.append(',').append(a == null ? "null" : a.getClass().getName());
+		}
+		Method found = METHODS.get(key.toString());
 		for (Class<?> c = o.getClass(); c != null && found == null; c = c.getSuperclass()) {
 			for (Method m : c.getDeclaredMethods()) {
 				boolean named = m.getName().equals(name) || m.getName().startsWith(name + "$");
 				if (named && m.getParameterCount() == args.length && fits(m.getParameterTypes(), args)) {
 					found = m;
+					found.setAccessible(true);
+					METHODS.put(key.toString(), found);
 					break;
 				}
 			}
@@ -1214,7 +1223,6 @@ public class SearchPhraseCompatTest {
 			throw new AssertionError("no " + name + " with " + args.length + " arguments in " + o.getClass());
 		}
 		try {
-			found.setAccessible(true);
 			return found.invoke(o, args);
 		} catch (ReflectiveOperationException e) {
 			throw new AssertionError(name + ": " + e.getCause(), e.getCause() == null ? e : e.getCause());
@@ -1246,11 +1254,23 @@ public class SearchPhraseCompatTest {
 		return true;
 	}
 
+	private static final Map<String, Method> METHODS = new java.util.concurrent.ConcurrentHashMap<>();
+	private static final Map<String, java.lang.reflect.Field> FIELDS = new java.util.concurrent.ConcurrentHashMap<>();
+
 	static Object field(Object o, String name) {
+		java.lang.reflect.Field cached = FIELDS.get(o.getClass().getName() + "." + name);
+		if (cached != null) {
+			try {
+				return cached.get(o);
+			} catch (IllegalAccessException e) {
+				throw new AssertionError(e);
+			}
+		}
 		for (Class<?> c = o.getClass(); c != null; c = c.getSuperclass()) {
 			try {
 				java.lang.reflect.Field f = c.getDeclaredField(name);
 				f.setAccessible(true);
+				FIELDS.put(o.getClass().getName() + "." + name, f);
 				return f.get(o);
 			} catch (NoSuchFieldException e) {
 				// up the classes

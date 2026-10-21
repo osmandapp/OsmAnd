@@ -11,7 +11,7 @@ import net.osmand.shared.util.KStringMatcher
  * A copy of `SearchPhrase.NameStringMatcher` in OsmAnd-java, which stays there for android and
  * tools; this copy is for iOS. Java nests it in `SearchPhrase`, and here it is a class of its own,
  * so that `OsmandRegions` can use it before the phrase is copied. An empty name matches nothing;
- * java also takes a null one, which callers here check themselves.
+ * java also takes a null one, which [matchesName] does.
  */
 class NameStringMatcher(namePart: String, mode: KStringMatcherMode) : KStringMatcher {
 
@@ -38,3 +38,6 @@ class NameStringMatcher(namePart: String, mode: KStringMatcherMode) : KStringMat
 		return sm.matches(name)
 	}
 }
+
+/** [NameStringMatcher.matches] for a name that may be null, which matches nothing, as in java. */
+internal fun NameStringMatcher.matchesName(name: String?): Boolean = name != null && matches(name)
