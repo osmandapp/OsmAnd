@@ -26,6 +26,8 @@ import net.osmand.plus.measurementtool.command.MeasurementModeCommand;
 import net.osmand.plus.routing.IRouteSettingsListener;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
+import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.*;
@@ -275,17 +277,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	public boolean hasRoute() {
 		return !roadSegmentData.isEmpty();
-	}
-
-	// straight segments with intermediate points (elevation along a long straight line) are not a route:
-	// counting them made every short pair of a plain track recalculate one by one
-	private boolean hasRoadRoute() {
-		for (RoadSegmentData data : roadSegmentData.values()) {
-			if (data.getAppMode() != DEFAULT_APP_MODE) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public boolean isApproximationNeeded() {
@@ -785,7 +776,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	private List<Pair<WptPt, WptPt>> getPointsToCalculate() {
 		List<Pair<WptPt, WptPt>> res = new ArrayList<>();
-		boolean hasRoadRoute = hasRoadRoute();
 		for (List<WptPt> points : Arrays.asList(before.getPoints(), after.getPoints())) {
 			for (int i = 0; i < points.size() - 1; i++) {
 				WptPt startPoint = points.get(i);
@@ -793,7 +783,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				Pair<WptPt, WptPt> pair = new Pair<>(startPoint, endPoint);
 
 				boolean calculate = roadSegmentData.get(pair) == null
-						&& (startPoint.hasProfile() || hasRoadRoute || shouldAddIntermediates(startPoint, endPoint));
+						&& (startPoint.hasProfile() || hasRoute() || shouldAddIntermediates(startPoint, endPoint));
 				if (calculate) {
 					res.add(pair);
 				}
@@ -1166,19 +1156,12 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			calculatedPairs++;
 			params.calculationProgressListener.onUpdateCalculationProgress(0);
 			List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
-			if (Algorithms.isEmpty(originalRoute)) {
-				if (pts.size() >= 2 && insertIntermediates) {
-					pts = insertIntermediatePoints(pts);
-				}
-				List<LatLon> latLonList = new ArrayList<>(pts.size());
-				for (WptPt pt : pts) {
-					latLonList.add(new LatLon(pt.getLatitude(), pt.getLongitude()));
-				}
-				originalRoute = Collections.singletonList(RoutePlannerFrontEnd.generateStraightLineSegment(
-						DEFAULT_APP_MODE.getDefaultSpeed(), latLonList));
-			}
-			roadSegmentData.put(currentPair, new RoadSegmentData(route.getAppMode(), currentPair.first, currentPair.second, pts, originalRoute));
+			RoadSegmentData data = Algorithms.isEmpty(originalRoute)
+					? createStraightSegmentData(route.getAppMode(), currentPair, pts)
+					: new RoadSegmentData(route.getAppMode(), currentPair.first, currentPair.second, pts, originalRoute);
+			roadSegmentData.put(currentPair, data);
 			application.runInUIThread(() -> {
+				calculatedPairs += addStraightSegments();
 				updateSegmentsForSnap(true, false);
 				RouteCalculationParams params1 = getParams(false);
 				if (params1 != null) {
@@ -1189,6 +1172,48 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			});
 		};
 		return params;
+	}
+
+	// A pair without a routing profile is a straight line: the router returns only its two ends.
+	// Add all such pairs at once, routing them one by one rebuilt the segments for every pair.
+	private int addStraightSegments() {
+		if (DEFAULT_APP_MODE.getRouteService() != RouteService.STRAIGHT) {
+			return 0;
+		}
+		int added = 0;
+		for (Pair<WptPt, WptPt> pair : getPointsToCalculate()) {
+			WptPt start = pair.first;
+			WptPt end = pair.second;
+			ApplicationMode appMode = ApplicationMode.valueOfStringKey(start.getProfileType(), DEFAULT_APP_MODE);
+			double distance = MapUtils.getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
+			if (appMode == DEFAULT_APP_MODE && distance < RouteProvider.MIN_STRAIGHT_DIST) {
+				List<WptPt> pts = new ArrayList<>(2);
+				for (WptPt point : Arrays.asList(start, end)) {
+					WptPt pt = new WptPt();
+					pt.setLat(point.getLatitude());
+					pt.setLon(point.getLongitude());
+					pts.add(pt);
+				}
+				roadSegmentData.put(pair, createStraightSegmentData(appMode, pair, pts));
+				added++;
+			}
+		}
+		return added;
+	}
+
+	@NonNull
+	private RoadSegmentData createStraightSegmentData(@NonNull ApplicationMode appMode,
+	                                                  @NonNull Pair<WptPt, WptPt> pair, @NonNull List<WptPt> pts) {
+		if (pts.size() >= 2 && insertIntermediates) {
+			pts = insertIntermediatePoints(pts);
+		}
+		List<LatLon> latLonList = new ArrayList<>(pts.size());
+		for (WptPt pt : pts) {
+			latLonList.add(new LatLon(pt.getLatitude(), pt.getLongitude()));
+		}
+		List<RouteSegmentResult> route = Collections.singletonList(RoutePlannerFrontEnd.generateStraightLineSegment(
+				DEFAULT_APP_MODE.getDefaultSpeed(), latLonList));
+		return new RoadSegmentData(appMode, pair.first, pair.second, pts, route);
 	}
 
 	@NonNull
