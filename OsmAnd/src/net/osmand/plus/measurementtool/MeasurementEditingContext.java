@@ -277,6 +277,17 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return !roadSegmentData.isEmpty();
 	}
 
+	// straight segments with intermediate points (elevation along a long straight line) are not a route:
+	// counting them made every short pair of a plain track recalculate one by one
+	private boolean hasRoadRoute() {
+		for (RoadSegmentData data : roadSegmentData.values()) {
+			if (data.getAppMode() != DEFAULT_APP_MODE) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public boolean isApproximationNeeded() {
 		boolean hasDefaultPointsOnly = false;
 		boolean newData = isNewData();
@@ -774,6 +785,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	private List<Pair<WptPt, WptPt>> getPointsToCalculate() {
 		List<Pair<WptPt, WptPt>> res = new ArrayList<>();
+		boolean hasRoadRoute = hasRoadRoute();
 		for (List<WptPt> points : Arrays.asList(before.getPoints(), after.getPoints())) {
 			for (int i = 0; i < points.size() - 1; i++) {
 				WptPt startPoint = points.get(i);
@@ -781,7 +793,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				Pair<WptPt, WptPt> pair = new Pair<>(startPoint, endPoint);
 
 				boolean calculate = roadSegmentData.get(pair) == null
-						&& (startPoint.hasProfile() || hasRoute() || shouldAddIntermediates(startPoint, endPoint));
+						&& (startPoint.hasProfile() || hasRoadRoute || shouldAddIntermediates(startPoint, endPoint));
 				if (calculate) {
 					res.add(pair);
 				}
