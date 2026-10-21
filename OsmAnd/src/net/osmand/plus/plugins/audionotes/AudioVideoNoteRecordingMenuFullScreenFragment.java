@@ -85,4 +85,9 @@ public class AudioVideoNoteRecordingMenuFullScreenFragment extends BaseOsmAndFra
 			manager.executePendingTransactions();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "audio_video_note_recording";
+	}
 }

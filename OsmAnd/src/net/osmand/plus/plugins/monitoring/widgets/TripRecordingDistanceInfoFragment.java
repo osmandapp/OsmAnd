@@ -94,4 +94,9 @@ public class TripRecordingDistanceInfoFragment extends BaseSimpleWidgetInfoFragm
 		super.onResume();
 		updateModeSetting();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "trip_recording_distance_info";
+	}
 }

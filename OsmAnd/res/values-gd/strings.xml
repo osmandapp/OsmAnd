@@ -72,13 +72,13 @@
     <string name="standard_maps">Mapaichean àbhaisteach</string>
     <string name="max_altitude">Àirde as motha</string>
     <string name="shared_string_temperature">Teòthachd</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="help_article_map_point_layers_on_map_name">Puingean air a\' mhapa</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="shared_string_cache">Tasgadan</string>
     <string name="wikipedia_and_travel_maps">Uicipeid agus mapaichean siubhail</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="delete_map_description">Dubh às mapa %1$s?</string>
     <string name="delete_map">Dubh às mapa</string>
     <string name="help_article_personal_name">An dàta agam</string>
@@ -447,7 +447,6 @@
     <string name="selected_delayed_profile">Pròfil thaghta \"%s\"</string>
     <string name="connect_new_scanner">Ceangal sganair ùr</string>
     <string name="ais_address_settings">Seatadh seòlaidh IP</string>
-    <string name="ais_cpa_settings">Seatadh co-cheangailte ri CPA</string>
     <string name="rendering_attr_showClimbingRoutes_description">Seall slighean sreap</string>
     <string name="shared_string_default_view">Sealladh bunaiteach</string>
     <string name="ais_load_data">Luchdaich dàta AIS bho fhaidhle</string>

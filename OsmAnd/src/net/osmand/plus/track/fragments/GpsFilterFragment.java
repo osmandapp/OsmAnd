@@ -312,6 +312,13 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		exitGpsFilterMode();
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		// closeAllFragments() and a finishing activity remove the fragment without dismiss()
+		app.getGpsFilterHelper().removeListener(this);
+	}
+
 	private void enterGpsFilterMode() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -514,5 +521,10 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		void onFinishFiltering(@NonNull GpxFile filteredGpxFile);
 
 		void onDismissGpsFilterFragment(boolean savedCopy, @Nullable String savedFilePath);
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "gps_filter";
 	}
 }

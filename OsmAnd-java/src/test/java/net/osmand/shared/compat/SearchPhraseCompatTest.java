@@ -139,6 +139,7 @@ public class SearchPhraseCompatTest {
 
 	@BeforeClass
 	public static void open() throws IOException {
+		SearchCompat.assumeEnabled();
 		assertTrue(REGIONS + " is missing; :OsmAnd-java:processResources downloads it", REGIONS.exists());
 		PlatformUtil.setOsmandRegions(new OsmandRegions(REGIONS.getPath()));
 		net.osmand.shared.binary.CommonWords.Companion.setOsmandRegions(

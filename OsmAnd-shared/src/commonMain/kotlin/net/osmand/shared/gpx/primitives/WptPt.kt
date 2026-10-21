@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx.primitives
 
+import net.osmand.shared.data.Amenity
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxFormatter
 import net.osmand.shared.gpx.GpxUtilities
@@ -222,7 +223,7 @@ class WptPt : GpxExtensions, Linkable {
 		val extensionsToRead = getExtensionsToRead()
 		var amenityOrigin = extensionsToRead[GpxUtilities.AMENITY_ORIGIN_EXTENSION]
 		val comment = this.comment
-		if (amenityOrigin == null && comment != null && comment.startsWith("Amenity")) {
+		if (amenityOrigin == null && comment != null && comment.startsWith(Amenity.ORIGIN_PREFIX)) {
 			amenityOrigin = comment
 		}
 		return amenityOrigin

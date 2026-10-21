@@ -219,4 +219,9 @@ public class DefaultMapButtonFragment extends BaseFullScreenFragment implements 
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "default_map_button";
+	}
 }

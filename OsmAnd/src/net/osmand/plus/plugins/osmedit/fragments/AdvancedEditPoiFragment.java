@@ -398,4 +398,9 @@ public class AdvancedEditPoiFragment extends BaseFullScreenFragment implements E
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "advanced_edit_poi";
+	}
 }

@@ -30,17 +30,20 @@ public class FolderStatsViewHolder extends RecyclerView.ViewHolder {
 
 	@NonNull
 	private String getFormattedStats(@NonNull TrackFolderAnalysis analysis) {
-		StringBuilder builder = new StringBuilder(app.getString(R.string.shared_string_tracks) + " - " + analysis.getTracksCount() + ", ");
-		appendField(builder, app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app), false);
-		appendField(builder, app.getString(R.string.shared_string_uphill), OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app), false);
-		appendField(builder, app.getString(R.string.shared_string_downhill), OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app), false);
-		appendField(builder, app.getString(R.string.duration), Algorithms.formatDuration(analysis.getTimeSpan(), app.accessibilityEnabled()), false);
-		appendField(builder, app.getString(R.string.shared_string_size), AndroidUtils.formatSize(app, analysis.getFileSize()), true);
+		StringBuilder builder = new StringBuilder();
+		appendField(builder, app.getString(R.string.shared_string_tracks), String.valueOf(analysis.getTracksCount()));
+		appendField(builder, app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
+		appendField(builder, app.getString(R.string.shared_string_uphill), OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app));
+		appendField(builder, app.getString(R.string.shared_string_downhill), OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app));
+		appendField(builder, app.getString(R.string.duration), Algorithms.formatDuration(analysis.getTimeSpan(), app.accessibilityEnabled()));
+		appendField(builder, app.getString(R.string.shared_string_size), AndroidUtils.formatSize(app, analysis.getFileSize()));
 		return builder.toString();
 	}
 
-	private void appendField(@NonNull StringBuilder builder, @NonNull String field, @NonNull String value, boolean lastItem) {
-		builder.append(field.toLowerCase()).append(" - ").append(value);
-		builder.append(lastItem ? "." : ", ");
+	private void appendField(@NonNull StringBuilder builder, @NonNull String field, @NonNull String value) {
+		if (builder.length() > 0) {
+			builder.append(" · ");
+		}
+		builder.append(app.getString(R.string.ltr_or_rtl_combine_via_colon, field, value));
 	}
 }

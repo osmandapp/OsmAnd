@@ -101,10 +101,6 @@ class SearchUICore private constructor() {
 		}
 
 		override fun publish(obj: SearchResult): Boolean {
-			// disable boundary for end results
-			if (obj.objectType == ObjectType.BOUNDARY) {
-				return false
-			}
 			val phrase = phrase
 			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matchesName(obj.localeName)
 				&& KAlgorithms.isEmpty(obj.alternateName)
