@@ -60,7 +60,7 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetInfoFragm
 	}
 
 	private void setupIntervalSliderCard() {
-		timeIntervalCard = new TimeIntervalCard(requireMyActivity(), initialIntervalMillis);
+		timeIntervalCard = new TimeIntervalCard(requireMyActivity(), appMode, isUsedOnMap(), initialIntervalMillis);
 		ViewGroup cardContainer = view.findViewById(R.id.average_speed_interval_card_container);
 		cardContainer.addView(timeIntervalCard.build(cardContainer.getContext()));
 	}
@@ -107,5 +107,10 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetInfoFragm
 		super.applySettings();
 		speedWidget.setShouldSkipStops(appMode, !countStops);
 		speedWidget.setMeasuredInterval(appMode, timeIntervalCard.getSelectedIntervalMillis());
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "average_speed_widget_setting";
 	}
 }

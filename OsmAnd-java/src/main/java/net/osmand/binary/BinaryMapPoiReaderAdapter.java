@@ -454,7 +454,9 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				int len = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimitLong((long) len);
-				PrefixNameValue prefix = pi.addData(OsmAndPoiNameIndexData.parseFrom(codedIS), shift);
+				pi.readAtomsBytes(len);
+				PrefixNameValue prefix = pi.isCacheRawBlocks() ? pi.addData(codedIS.readRawBytes(len), shift)
+						: pi.addData(OsmAndPoiNameIndexData.parseFrom(codedIS), shift);
 				if (res != null) {
 					res.add(prefix);
 				}

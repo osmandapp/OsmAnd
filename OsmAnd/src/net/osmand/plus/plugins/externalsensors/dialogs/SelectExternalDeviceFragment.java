@@ -282,4 +282,9 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	public interface SelectDeviceListener {
 		void selectNewDevice(@Nullable String deviceId, @NonNull SensorWidgetDataFieldType requestedWidgetDataFieldType);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "select_external_device";
+	}
 }

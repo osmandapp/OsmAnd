@@ -13,10 +13,16 @@ import static net.osmand.test.common.SystemDialogInteractions.hasTextEventually;
 import static net.osmand.test.common.SystemDialogInteractions.waitForAnyView;
 import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import android.database.DataSetObserver;
+import android.widget.AutoCompleteTextView;
+import android.widget.ListAdapter;
 
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.RootMatchers;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 
@@ -37,8 +43,13 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class EditPoiTypeSuggestionsTest extends AndroidTest {
+
+	// French name of shop=bicycle: the part of poi_bicycle in values-fr/phrases.xml before the first ';'
+	private static final String BICYCLE_SHOP = "Magasin de vélos";
 
 	@Rule
 	public final ActivityTestRule<MapActivity> activityRule = new ActivityTestRule<>(MapActivity.class, true, false);
@@ -47,6 +58,7 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 	public final GrantPermissionRule grantPermissionRule = GrantPermissionRule.grant(ACCESS_FINE_LOCATION);
 
 	private MapActivity mapActivity;
+	private AutoCompleteTextView poiTypeEditText;
 
 	@Before
 	public void setup() {
@@ -62,14 +74,11 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 	public void testPoiTypeSuggestions() throws Throwable {
 		AppSettings.setLocale(app, Locale.FRANCE);
 
-		activityRule.launchActivity(null);
-		if (app.getPoiTypes().isInit()) {
-			app.reInitPoiTypes();
-		}
-		while (!app.getPoiTypes().isInit()) {
-			Thread.sleep(50);
-		}
+		// Initialize French POI types before MapActivity can cache translations in another language.
+		Locale.setDefault(Locale.FRANCE);
+		app.reInitPoiTypes();
 		app.getPoiTypes().setPoiTranslator(new MapPoiTypesTranslator(app, new Locale("fr")));
+		activityRule.launchActivity(null);
 		skipAppStartDialogs(app);
 
 		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
@@ -82,35 +91,27 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 		EditPoiDialogFragment.showAddPoiInstance(mapActivity, latLon.getLatitude(), latLon.getLongitude());
 
-		//check: magasin de v
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de v"));
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
-//		Thread.sleep(100)
-		onView(withText("Magasin de vélos"))
-				.inRoot(RootMatchers.isPlatformPopup())
-				.check(ViewAssertions.matches(isDisplayed()));
-		//clear
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.replaceText(""));
-		//check: magasin de ve
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de ve"));
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
-		onView(withText("Magasin de vélos"))
-				.inRoot(RootMatchers.isPlatformPopup())
-				.check(ViewAssertions.matches(isDisplayed()));
+		onDialogView(withId(R.id.poiTypeEditText)).check((view, error) -> {
+			if (error != null) {
+				throw error;
+			}
+			poiTypeEditText = (AutoCompleteTextView) view;
+		});
+		InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> poiTypeEditText.requestFocus());
+		onDialogView(isRoot()).perform(ViewActions.closeSoftKeyboard());
 
-		//clear
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.replaceText(""));
-		//check: magasin de vé
-		onDialogView(withId(R.id.poiTypeEditText)).perform(ViewActions.typeText("magasin de vel"));
-		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
-		onView(withText("Magasin de vélos"))
-				.inRoot(RootMatchers.isPlatformPopup())
-				.check(ViewAssertions.matches(isDisplayed()));
+		for (String query : new String[] {"magasin de v", "magasin de ve", "magasin de vel"}) {
+			setQueryAndWaitForSuggestions(query);
+			waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText(BICYCLE_SHOP), isDisplayed()));
+			onView(withText(BICYCLE_SHOP))
+					.inRoot(RootMatchers.isPlatformPopup())
+					.check(ViewAssertions.matches(isDisplayed()));
+		}
 		//select item
-		onView(withText("Magasin de vélos"))
+		onView(withText(BICYCLE_SHOP))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.perform(ViewActions.click());
-		onDialogView(withId(R.id.poiTypeEditText)).check(hasTextEventually("Magasin de vélos"));
+		onDialogView(withId(R.id.poiTypeEditText)).check(hasTextEventually(BICYCLE_SHOP));
 
 		onDialogView(isRoot()).perform(ViewActions.closeSoftKeyboard());
 
@@ -118,5 +119,25 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 //
 //		waitForAnyView(2000, 50, withId(R.id.context_menu_layout));
 //		assertTrue(isContextMenuOpened());
+	}
+
+	// Wait for the automatic filter to publish this query before checking or clicking its results.
+	private void setQueryAndWaitForSuggestions(String query) throws InterruptedException {
+		ListAdapter adapter = poiTypeEditText.getAdapter();
+		CountDownLatch published = new CountDownLatch(1);
+		DataSetObserver observer = new DataSetObserver() {
+			@Override
+			public void onChanged() {
+				published.countDown();
+			}
+		};
+		InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> adapter.registerDataSetObserver(observer));
+		try {
+			// Set text on the UI thread without IME input; keep the popup open between queries.
+			InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> poiTypeEditText.setText(query));
+			assertTrue("No suggestions published for '" + query + "'", published.await(5, TimeUnit.SECONDS));
+		} finally {
+			InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> adapter.unregisterDataSetObserver(observer));
+		}
 	}
 }

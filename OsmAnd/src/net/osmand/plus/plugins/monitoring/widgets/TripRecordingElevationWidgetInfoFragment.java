@@ -94,4 +94,9 @@ public class TripRecordingElevationWidgetInfoFragment extends BaseSimpleWidgetIn
 		super.onResume();
 		updateModeSetting();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "trip_recording_elevation_widget_info";
+	}
 }
