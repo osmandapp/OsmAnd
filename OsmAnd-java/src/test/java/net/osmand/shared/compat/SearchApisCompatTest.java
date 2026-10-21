@@ -15,6 +15,9 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory;
@@ -162,6 +165,7 @@ public class SearchApisCompatTest {
 
 	@BeforeClass
 	public static void open() throws Exception {
+		SearchCompat.assumeEnabled();
 		setUpTypes();
 		for (File f : TestObf.searchFiles()) {
 			javaReaders.put(f.getName(), new BinaryMapIndexReader(new RandomAccessFile(f, "r"), f));
@@ -514,6 +518,16 @@ public class SearchApisCompatTest {
 			for (String name : v.split(";")) {
 				if (!name.trim().isEmpty() && random.nextInt(16) == 0) {
 					names.add(name.trim());
+				}
+			}
+		}
+		// the names the additional values the apis offer are found by alone: "Smoking" for "Smoking: not allowed"
+		for (PoiCategory pc : MapPoiTypes.getDefault().getCategories()) {
+			for (PoiType pt : pc.getPoiTypes()) {
+				for (PoiType a : pt.getPoiAdditionals()) {
+					if (a.isTopVisible()) {
+						names.add(PoiAdditionalLabels.getSearchName(a));
+					}
 				}
 			}
 		}

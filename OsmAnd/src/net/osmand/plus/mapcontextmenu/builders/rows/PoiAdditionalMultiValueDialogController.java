@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders.rows;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -17,6 +19,7 @@ public class PoiAdditionalMultiValueDialogController extends BaseDialogControlle
 
 	private final String title;
 	private final ArrayList<String> values;
+	private ValueFormatter valueFormatter;
 	private OnItemClickListener itemClickListener;
 
 	public PoiAdditionalMultiValueDialogController(@NonNull OsmandApplication app,
@@ -43,6 +46,15 @@ public class PoiAdditionalMultiValueDialogController extends BaseDialogControlle
 		return values;
 	}
 
+	@NonNull
+	public String getDisplayValue(@NonNull Context context, @NonNull String value) {
+		return valueFormatter != null ? valueFormatter.format(context, value) : value;
+	}
+
+	public void setValueFormatter(@Nullable ValueFormatter formatter) {
+		valueFormatter = formatter;
+	}
+
 	public void setItemClickListener(@NonNull OnItemClickListener listener) {
 		itemClickListener = listener;
 	}
@@ -62,12 +74,21 @@ public class PoiAdditionalMultiValueDialogController extends BaseDialogControlle
 	                              @Nullable String title,
 	                              @NonNull ArrayList<String> values,
 	                              @NonNull OnItemClickListener listener) {
+		showDialog(activity, title, values, null, listener);
+	}
+
+	public static void showDialog(@NonNull FragmentActivity activity,
+	                              @Nullable String title,
+	                              @NonNull ArrayList<String> values,
+	                              @Nullable ValueFormatter valueFormatter,
+	                              @NonNull OnItemClickListener listener) {
 		if (values.isEmpty()) {
 			return;
 		}
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		PoiAdditionalMultiValueDialogController controller =
 				new PoiAdditionalMultiValueDialogController(app, title, values);
+		controller.setValueFormatter(valueFormatter);
 		controller.setItemClickListener(listener);
 
 		DialogManager dialogManager = app.getDialogManager();
@@ -76,6 +97,11 @@ public class PoiAdditionalMultiValueDialogController extends BaseDialogControlle
 		if (!PoiAdditionalActionsBottomSheet.showInstance(activity.getSupportFragmentManager())) {
 			dialogManager.unregister(controller.getProcessId());
 		}
+	}
+
+	public interface ValueFormatter {
+		@NonNull
+		String format(@NonNull Context context, @NonNull String value);
 	}
 
 	public interface OnItemClickListener {

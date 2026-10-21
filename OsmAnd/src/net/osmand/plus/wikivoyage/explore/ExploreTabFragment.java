@@ -443,4 +443,9 @@ public class ExploreTabFragment extends BaseFullScreenFragment implements Downlo
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "wikivoyage_explore_tab";
+	}
 }

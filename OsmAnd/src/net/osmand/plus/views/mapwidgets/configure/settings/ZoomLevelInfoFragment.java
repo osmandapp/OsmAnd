@@ -90,4 +90,9 @@ public class ZoomLevelInfoFragment extends BaseSimpleWidgetInfoFragment {
 		TextView selectedZoomLevelType = view.findViewById(R.id.selected_zoom_level_type);
 		selectedZoomLevelType.setText(zoomLevelType.titleId);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "zoom_level_info";
+	}
 }

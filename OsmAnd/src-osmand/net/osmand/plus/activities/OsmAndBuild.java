@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class OsmAndBuild {
 
-	protected static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
+	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
 
 	public String path;
 	public String size;

@@ -5,6 +5,7 @@ import androidx.annotation.OptIn
 import androidx.car.app.CarContext
 import androidx.car.app.annotations.ExperimentalCarApi
 import androidx.car.app.model.Action
+import androidx.car.app.model.Header
 import androidx.car.app.model.Pane
 import androidx.car.app.model.PaneTemplate
 import androidx.car.app.model.Row
@@ -45,8 +46,12 @@ class PrivateAccessScreen(carContext: CarContext) : BaseAndroidAutoScreen(carCon
 				.addAction(cancelAction)
 				.build()
 		)
-			.setTitle(app.getString(R.string.poi_access_private))
-			.setHeaderAction(Action.BACK)
+			.setHeader(
+				Header.Builder()
+					.setTitle(app.getString(R.string.poi_access_private))
+					.setStartHeaderAction(Action.BACK)
+					.build()
+			)
 			.build()
 
 		return MapWithContentTemplate.Builder()

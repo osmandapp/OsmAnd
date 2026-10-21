@@ -25,6 +25,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,10 +54,14 @@ import net.osmand.plus.importfiles.ui.SelectPointsFragment.PointsSelectionListen
 import net.osmand.plus.importfiles.ui.SelectTrackDirectoryBottomSheet.FolderSelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.MapDrawParams;
+import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
+import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
@@ -128,6 +133,13 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 	@Override
 	protected boolean isUsedOnMap() {
 		return true;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.recycler_view));
+		return collection;
 	}
 
 	@NonNull
@@ -406,6 +418,9 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 
 	@Override
 	public void onExitConfirmed() {
+		if (importListener != null && !isSavingTracks()) {
+			importListener.onImportComplete(false);
+		}
 		dismiss();
 	}
 
@@ -483,8 +498,23 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 		}
 		if (!(activity instanceof MyPlacesActivity) && tracksFragment == null) {
 			openTracksTabInMyPlaces();
+		} else if (activity instanceof MyPlacesActivity) {
+			reloadMyPlacesTracks((MyPlacesActivity) activity);
 		}
 		dismissAllowingStateLoss();
+	}
+
+	private void reloadMyPlacesTracks(@NonNull MyPlacesActivity activity) {
+		// this fragment is retained, so importListener can belong to the tracks screen of a destroyed activity:
+		// reload the live tab, unless it is already loading (a running loader must not be restarted)
+		for (Fragment fragment : activity.getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof AvailableTracksFragment) {
+				TrackFoldersHelper helper = ((AvailableTracksFragment) fragment).getTrackFoldersHelper();
+				if (helper != null && !helper.isLoadingTracks()) {
+					helper.reloadTracks(true);
+				}
+			}
+		}
 	}
 
 	private void openTracksTabInMyPlaces() {
@@ -515,5 +545,10 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "import_tracks";
 	}
 }

@@ -48,7 +48,7 @@ public abstract class InAppPurchaseHelper {
 
 	// Debug tag, for logging
 	protected static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(InAppPurchaseHelper.class);
-	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
+	private static final String TAG = "InAppPurchaseHelper";
 
 	public static final String SERVER_URL = "https://osmand.net";
 	public static final String SUBSCRIPTION_REGISTER_URL = SERVER_URL + "/subscription/register";
@@ -981,6 +981,7 @@ public abstract class InAppPurchaseHelper {
 		parameters.put("lang", ctx.getLanguage());
 		parameters.put("nd", String.valueOf(ctx.getAppInitializer().getFirstInstalledDays()));
 		parameters.put("ns", String.valueOf(ctx.getAppInitializer().getNumberOfStarts()));
+		InstallReferrer.addParams(ctx, parameters);
 		if (ctx.isUserAndroidIdAllowed()) {
 			parameters.put("aid", ctx.getUserAndroidId());
 		}

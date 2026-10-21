@@ -116,4 +116,9 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "turn_screen_on";
+	}
 }

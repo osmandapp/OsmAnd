@@ -84,7 +84,7 @@ public class GeocodingBenchmarkTest {
 				}
 				start = System.nanoTime();
 				for (int i = 0; i < points.size(); i++) {
-					made[1] += utils.sortGeocodingResults(List.of(readers.get(fileOf.get(i))), found.get(i)).size();
+					made[1] += utils.findAddresses(List.of(readers.get(fileOf.get(i))), found.get(i)).size();
 				}
 				nanos[1] = System.nanoTime() - start;
 				if (round >= WARMUP_ROUNDS) {

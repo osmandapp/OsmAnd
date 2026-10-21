@@ -218,4 +218,9 @@ public class DownloadItemFragment extends BaseFullScreenDialogFragment implement
 			fragment.show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "download_item";
+	}
 }

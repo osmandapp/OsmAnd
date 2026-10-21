@@ -197,12 +197,12 @@ class GeocodingUtilitiesTest {
 					b.getRoutingIndexes().any { r.regionFP == it.getFilePointer() && r.regionLen == it.getLength() }
 				}
 				if (reader != null) {
-					lines(sb, "B$i", utils.justifyReverseGeocodingSearch(r, reader, 0.0, null))
-					lines(sb, "K$i", utils.justifyReverseGeocodingSearch(r, reader, KNOWN_BUILDING_DISTANCE, null))
-					lines(sb, "X$i", utils.justifyReverseGeocodingSearch(r, reader, 0.0, CANCELLED))
+					lines(sb, "B$i", utils.findStreetAndBuildings(r, reader, 0.0, null))
+					lines(sb, "K$i", utils.findStreetAndBuildings(r, reader, KNOWN_BUILDING_DISTANCE, null))
+					lines(sb, "X$i", utils.findStreetAndBuildings(r, reader, 0.0, CANCELLED))
 				}
 			}
-			lines(sb, "C", utils.sortGeocodingResults(readers, utils.reverseGeocodingSearch(ctx, lat, lon, allowEmptyNames)))
+			lines(sb, "C", utils.findAddresses(readers, utils.reverseGeocodingSearch(ctx, lat, lon, allowEmptyNames)))
 			return sb.toString()
 		}
 
@@ -213,8 +213,8 @@ class GeocodingUtilitiesTest {
 			road.connectionPoint = KLatLon(lat, lon)
 			road.streetName = name
 			val sb = StringBuilder()
-			lines(sb, "B", utils.justifyReverseGeocodingSearch(road, reader, 0.0, null))
-			lines(sb, "K", utils.justifyReverseGeocodingSearch(road, reader, KNOWN_BUILDING_DISTANCE, null))
+			lines(sb, "B", utils.findStreetAndBuildings(road, reader, 0.0, null))
+			lines(sb, "K", utils.findStreetAndBuildings(road, reader, KNOWN_BUILDING_DISTANCE, null))
 			return sb.toString()
 		}
 
@@ -400,7 +400,7 @@ class GeocodingUtilitiesTest {
 				val reader = readers.firstOrNull { b ->
 					b.getRoutingIndexes().any { r.regionFP == it.getFilePointer() && r.regionLen == it.getLength() }
 				} ?: continue
-				if (utils.justifyReverseGeocodingSearch(r, reader, 0.0, null).any {
+				if (utils.findStreetAndBuildings(r, reader, 0.0, null).any {
 						it.building != null && it.getDistance() > 0 && it.getDistance() < AT_THE_POINT
 					}) {
 					return true
