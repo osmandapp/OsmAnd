@@ -1,7 +1,10 @@
 package net.osmand.shared.data
 
+import net.osmand.shared.data.AmenityTagEntriesBuilder.ValueLabel
+import net.osmand.shared.data.AmenityTagEntriesBuilder.getValueLabel
 import net.osmand.shared.data.AmenityTagEntry.CollapsableEntryType
 import net.osmand.shared.osm.MapPoiTypes
+import net.osmand.shared.osm.PoiType
 import net.osmand.shared.routing.testEnvironment
 import net.osmand.shared.routing.testPlatformName
 import okio.FileSystem
@@ -54,11 +57,22 @@ class AdditionalInfoBundleTest {
 	}
 
 	@Test
+	fun valueLabelsFollowTheGroup() {
+		val types = poiTypes ?: return
+		fun label(name: String) = getValueLabel(types.getAnyPoiAdditionalTypeByKey(name) as PoiType)
+		assertEquals(ValueLabel.NAME_OVER_VALUE, label("takeaway_yes"))
+		assertEquals(ValueLabel.NAME_OVER_VALUE, label("smoking_no"))
+		assertEquals(ValueLabel.NAME, label("boat_kayak_rental_yes"))
+		assertEquals(ValueLabel.WHOLE, label("payment_pikepass_designated"))
+	}
+
+	@Test
 	fun skippedKeysAreNotShown() {
 		val bundle = bundle(
 			"type" to "sustenance", "subtype" to "fast_food", "route_id" to "1", "wikidata" to "Q1", "image" to "x",
 			"wikipedia" to "w", "content" to "c", "short_description" to "s", "osmand_socket_cee_blue_yes" to "yes",
-			"color" to "#fff", "icon" to "x", "address" to "a", "level" to "0", "ref" to "7"
+			"color" to "#fff", "icon" to "x", "address" to "a", "level" to "0", "ref" to "7",
+			"mapillary" to "123", "panoramax" to "d1c09d84-8704-4b9a-bcee-39a871552802;e5865b58-3a25-4546-8d74-93b412948c18"
 		) ?: return
 		bundle.setCustomHiddenExtensions(listOf("level"))
 

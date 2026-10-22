@@ -677,7 +677,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		eclipseTimeline.setOnTimeChangedListener { millis, fromUser ->
 			if (fromUser) scheduleEclipseSliderTime(millis)
 		}
-		val rtl = view.layoutDirection == View.LAYOUT_DIRECTION_RTL
+		val rtl = AndroidUtils.isLayoutRtl(view.context)
 		eclipsePrevious.scaleX = if (rtl) 1f else -1f
 		eclipseNext.scaleX = if (rtl) -1f else 1f
 
@@ -766,17 +766,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		systemLeftInset = maxOf(sysBars?.left ?: 0, cutout.left)
 		systemRightInset = maxOf(sysBars?.right ?: 0, cutout.right)
 
+		updateMapControlsContainerMargins()
+		updateEclipseModeOffsets()
+	}
+
+	private fun updateMapControlsContainerMargins() {
 		mapControlsContainer.updateLayoutParams<ViewGroup.MarginLayoutParams> {
 			rightMargin = systemRightInset
 			leftMargin = systemLeftInset
 			topMargin = systemTopInset
-			bottomMargin = systemBottomInset
+			// The regular map covers the bottom of the screen, including the navigation bar
+			bottomMargin = if (regularMapVisible) 0 else systemBottomInset
 		}
-		updateEclipseModeOffsets()
 	}
 
 	private fun updateEclipseModeOffsets() {
-		if (::eclipseCard.isInitialized) applyBottomWindowInsets(eclipseCard, regularMapVisible)
+		if (::eclipseCard.isInitialized) setExtraBottomMargin(eclipseCard, 0)
 		val eclipseOffset = if (::eclipseCard.isInitialized && eclipseCard.isVisible) {
 			eclipseCard.height + resources.getDimensionPixelSize(R.dimen.content_padding)
 		} else 0
@@ -825,16 +830,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val existingDialog =
 			childFragmentManager.findFragmentByTag(StarMapSearchDialogFragment.TAG) as? StarMapSearchDialogFragment
 		existingDialog?.dismissAllowingStateLoss()
-	}
-
-	private fun applyBottomWindowInsets(view: View, reset: Boolean = false, extraBottom: Int = 0) {
-		val baseMarginBottom = view.resources.getDimensionPixelSize(R.dimen.content_padding)
-		val bottomMargin = baseMarginBottom + extraBottom + if (reset) 0 else systemBottomInset
-		val layoutParams = view.layoutParams as? ViewGroup.MarginLayoutParams ?: return
-		if (layoutParams.bottomMargin == bottomMargin) return
-		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-			this.bottomMargin = bottomMargin
-		}
 	}
 
 	private fun updateArModeUI(enabled: Boolean) {
@@ -1073,6 +1068,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				)
 			}
 		}
+		updateMapControlsContainerMargins()
 		updateEclipseModeOffsets()
 		if (isEclipseModeActive() && ::eclipseCard.isInitialized) {
 			eclipseCard.post { centerEclipseTargetAtSelectedTime() }
