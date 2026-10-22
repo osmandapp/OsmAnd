@@ -25,6 +25,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.MapPoiTypesTranslator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -102,6 +103,7 @@ public class QuickSearchHelper implements ResourceListener {
 		OsmandSettings settings = app.getSettings();
 		core = new SearchUICore(app.getPoiTypes(), settings.MAP_PREFERRED_LOCALE.get(),
 				settings.MAP_TRANSLITERATE_NAMES.get(), () -> settings.isInternetConnectionAvailable());
+		core.setRegionPoiTranslators(lang -> new MapPoiTypesTranslator(app, new Locale(lang)));
 		app.getResourceManager().addResourceListener(this);
 		applySearchStatSetting(core.getSearchSettings());
 	}

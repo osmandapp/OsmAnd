@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
+import java.util.function.Function;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TLongHashSet;
@@ -31,6 +32,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.MapPoiTypes.PoiTranslator;
 import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -52,6 +54,7 @@ public class SpatialPoiSearch {
 	Map<String, SpatialPoiType> byKey = new ConcurrentHashMap<>();
 	Map<String, List<SpatialPoiType>> byWikidataKey = new ConcurrentHashMap<>();
 	Map<Integer, SpatialPoiType> byId = new ConcurrentHashMap<>();
+	Set<String> languages = ConcurrentHashMap.newKeySet();
 	
 	public static class SpatialPoiType {
 		public final AbstractPoiType singleType;
@@ -220,6 +223,34 @@ public class SpatialPoiSearch {
 		addToIndex(basePoiName, poiType);
 	}
 
+
+	// names of one more language, once: the language of the search location, "Schule" in Leipzig for an app in Ukrainian
+	public void addLanguage(String lang, Function<String, PoiTranslator> translators) {
+		if (!languages.add(lang)) {
+			return;
+		}
+		PoiTranslator translator = translators.apply(lang);
+		WriteLock wl = poiTypesIndexLock.writeLock();
+		try {
+			wl.lock();
+			for (SpatialPoiType poiType : byKey.values()) {
+				AbstractPoiType pt = poiType.singleType;
+				if (pt == null) {
+					continue;
+				}
+				String names = translator.getTranslation(pt) + ";" + translator.getSynonyms(pt);
+				for (String tr : names.split(";")) {
+					String name = SearchAlgorithms.alignChars(tr.trim());
+					if (name.length() > 0 && !"null".equals(name) && !poiType.names.contains(name)) {
+						poiType.addName(name);
+						poiTypesIndex.put(name, poiType);
+					}
+				}
+			}
+		} finally {
+			wl.unlock();
+		}
+	}
 
 	private void updateNamesWikidataId(SpatialPoiType poiType, String names) {
 		WriteLock wl = poiTypesIndexLock.writeLock();
