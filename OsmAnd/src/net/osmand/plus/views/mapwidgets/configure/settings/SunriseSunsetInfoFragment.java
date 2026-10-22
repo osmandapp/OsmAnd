@@ -22,12 +22,14 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget;
 import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 
 public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String SHOW_TIME_TO_LEFT = "show_time_to_left";
 	private static final String SUN_POSITION_MODE = "sun_position_mode";
+	private static final String SHOW_TIME_REQUEST_KEY = "show_time_request_key";
+	private static final String SUN_POSITION_MODE_REQUEST_KEY = "sun_position_mode_request_key";
 
 	private static final int UPDATE_UI_PERIOD_MS = 60_000; // every minute
 
@@ -69,6 +71,14 @@ public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 		if (getWidget() == WidgetType.SUN_POSITION) {
 			setupSunPositionMode();
 		}
+		SingleSelectionDialogFragment.setResultListener(this, SHOW_TIME_REQUEST_KEY, index -> {
+			showTimeToLeft = index == 0;
+			updateTimeDescription();
+		});
+		SingleSelectionDialogFragment.setResultListener(this, SUN_POSITION_MODE_REQUEST_KEY, index -> {
+			selectedSunPositionMode = index;
+			updateSunPositionDescription();
+		});
 	}
 
 	private void setupSunPositionMode() {
@@ -91,10 +101,7 @@ public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 				.setTitle(R.string.shared_string_mode)
 				.setControlsColor(ColorUtilities.getActiveColor(app, nightMode));
 
-		CustomAlert.showSingleSelection(dialogData, items, selectedSunPositionMode, v -> {
-			selectedSunPositionMode = (int) v.getTag();
-			updateSunPositionDescription();
-		});
+		SingleSelectionDialogFragment.showInstance(this, SUN_POSITION_MODE_REQUEST_KEY, dialogData, items, selectedSunPositionMode);
 	}
 
 	private void updateSunPositionDescription() {
@@ -127,11 +134,7 @@ public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 				.setTitle(R.string.shared_string_show)
 				.setControlsColor(ColorUtilities.getActiveColor(app, nightMode));
 
-		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
-			int which = (int) v.getTag();
-			showTimeToLeft = which == 0;
-			updateTimeDescription();
-		});
+		SingleSelectionDialogFragment.showInstance(this, SHOW_TIME_REQUEST_KEY, dialogData, items, selected);
 	}
 
 	private void updateTimeDescription() {

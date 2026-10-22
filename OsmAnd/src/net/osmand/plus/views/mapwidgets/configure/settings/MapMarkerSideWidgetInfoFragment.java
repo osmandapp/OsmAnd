@@ -30,7 +30,7 @@ import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.MarkerClickBehaviour;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.SideMarkerMode;
 import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -43,6 +43,8 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 	private static final String MARKER_MODE_KEY = "marker_mode";
 	private static final String MARKER_CLICK_BEHAVIOUR_KEY = "marker_click_behaviour";
 	private static final String AVERAGE_SPEED_INTERVAL_KEY = "average_speed_interval";
+	private static final String MARKER_MODE_REQUEST_KEY = "marker_mode_request_key";
+	private static final String CLICK_BEHAVIOUR_REQUEST_KEY = "click_behaviour_request_key";
 
 	private boolean firstMarker = true;
 	private OsmandPreference<SideMarkerMode> markerModePref;
@@ -95,6 +97,14 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 		selectedIntervalMillis = averageSpeedIntervalPref.getModeValue(appMode);
 
 		setupConfigButtons();
+		SingleSelectionDialogFragment.setResultListener(this, MARKER_MODE_REQUEST_KEY, index -> {
+			selectedMarkerMode = SideMarkerMode.values()[index];
+			setupConfigButtons();
+		});
+		SingleSelectionDialogFragment.setResultListener(this, CLICK_BEHAVIOUR_REQUEST_KEY, index -> {
+			selectedMarkerClickBehaviour = MarkerClickBehaviour.values()[index];
+			setupConfigButtons();
+		});
 	}
 
 	private void setupConfigButtons() {
@@ -255,11 +265,7 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 				.setTitle(R.string.click_on_widget)
 				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode));
 
-		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
-			int which = (int) v.getTag();
-			selectedMarkerClickBehaviour = MarkerClickBehaviour.values()[which];
-			setupConfigButtons();
-		});
+		SingleSelectionDialogFragment.showInstance(this, CLICK_BEHAVIOUR_REQUEST_KEY, dialogData, items, selected);
 	}
 
 	private void showMarkerModeDialog() {
@@ -273,11 +279,7 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 				.setTitle(R.string.shared_string_mode)
 				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode));
 
-		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
-			int which = (int) v.getTag();
-			selectedMarkerMode = SideMarkerMode.values()[which];
-			setupConfigButtons();
-		});
+		SingleSelectionDialogFragment.showInstance(this, MARKER_MODE_REQUEST_KEY, dialogData, items, selected);
 	}
 
 	private void setupListItemBackground(@NonNull View view) {
