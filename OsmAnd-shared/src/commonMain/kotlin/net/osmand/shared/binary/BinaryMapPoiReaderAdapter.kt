@@ -7,7 +7,7 @@ import net.osmand.shared.data.KLocation
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.osm.PoiCategory
-import net.osmand.shared.search.core.KHashQuadTree
+import net.osmand.shared.search.core.HashQuadTree
 import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.util.KCollatorStringMatcher
 import net.osmand.shared.util.KMapUtils
@@ -883,7 +883,7 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 						) {
 							val d = abs(req.x.toLong() - x31) + abs(req.y.toLong() - y31)
 							offsets.put(shift, d)
-							tagGroupCoords.add(KHashQuadTree.encodeTileId(EVAL_TAG_GROUP_ZOOM, x31, y31))
+							tagGroupCoords.add(HashQuadTree.encodeTileId(EVAL_TAG_GROUP_ZOOM, x31, y31))
 						}
 					}
 					return
@@ -1060,8 +1060,8 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 						val yB = ((yData + 1) shl (31 - zoom)) - 1
 						intersectBbox = !(left31 > xR || xL > right31 || bottom31 < yT || yB < top31)
 						if (tagGroupsToRead != null) {
-							var xyLT = KHashQuadTree.encodeTileId31(EVAL_TAG_GROUP_ZOOM, xL, yT)
-							var xyRB = KHashQuadTree.encodeTileId31(EVAL_TAG_GROUP_ZOOM, xR, yB)
+							var xyLT = HashQuadTree.encodeTileId31(EVAL_TAG_GROUP_ZOOM, xL, yT)
+							var xyRB = HashQuadTree.encodeTileId31(EVAL_TAG_GROUP_ZOOM, xR, yB)
 							if (xyLT == xyRB) {
 								readSubBoxesTagGroup = tagGroupsToRead.contains(xyLT)
 							} else {
