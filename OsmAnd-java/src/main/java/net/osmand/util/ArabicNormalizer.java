@@ -19,8 +19,7 @@ public class ArabicNormalizer {
         if (text == null || text.isEmpty()) {
             return false;
         }
-        char first = text.charAt(0);
-        if (Character.UnicodeBlock.of(first) == Character.UnicodeBlock.ARABIC) {
+        if (startsWithArabic(text)) {
             for (char c : text.toCharArray()) {
                 if (isDiacritic(c) || isArabicDigit(c) || isNeedReplace(c)) {
                     return true;
@@ -48,8 +47,7 @@ public class ArabicNormalizer {
         if (text == null || text.isEmpty()) {
             return null;  // Handle null input
         }
-        char first = text.charAt(0);
-        if (Character.UnicodeBlock.of(first) != Character.UnicodeBlock.ARABIC) {
+        if (!startsWithArabic(text)) {
             return text;
         }
 
@@ -64,6 +62,13 @@ public class ArabicNormalizer {
             }
         }
         return String.valueOf(textChars);
+    }
+
+    // Locality streets are stored as "<name>", optionally followed by a district.
+    private static boolean startsWithArabic(String text) {
+        int start = text.charAt(0) == '<' ? 1 : 0; // Detect Arabic after '<', e.g. "<روضة>" (locality-street marker)
+        return start < text.length()
+                && Character.UnicodeBlock.of(text.charAt(start)) == Character.UnicodeBlock.ARABIC;
     }
 
     private static boolean isDiacritic(char c) {

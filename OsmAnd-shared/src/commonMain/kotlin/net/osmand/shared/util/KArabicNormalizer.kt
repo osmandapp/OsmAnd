@@ -31,7 +31,7 @@ object KArabicNormalizer {
 		if (text.isNullOrEmpty()) {
 			return false
 		}
-		if (!isArabicBlock(text[0])) {
+		if (!startsWithArabic(text)) {
 			return false
 		}
 		for (c in text) {
@@ -61,7 +61,7 @@ object KArabicNormalizer {
 		if (text.isEmpty()) {
 			return null
 		}
-		if (!isArabicBlock(text[0])) {
+		if (!startsWithArabic(text)) {
 			return text
 		}
 		val chars = text.toCharArray()
@@ -83,6 +83,12 @@ object KArabicNormalizer {
 			i += 2
 		}
 		return c
+	}
+
+	// Locality streets are stored as "<name>", optionally followed by a district.
+	private fun startsWithArabic(text: String): Boolean {
+		val start = if (text[0] == '<') 1 else 0
+		return start < text.length && isArabicBlock(text[start])
 	}
 
 	private fun isArabicBlock(c: Char): Boolean = c in ARABIC_BLOCK_FIRST..ARABIC_BLOCK_LAST
