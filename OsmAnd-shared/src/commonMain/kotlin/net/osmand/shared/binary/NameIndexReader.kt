@@ -271,10 +271,16 @@ class NameIndexReader private constructor(
 		return this
 	}
 
+	/**
+	 * The blocks a query matched, in the order of the file as [BinaryMapIndexReader.readFullNameIndex] gives them; java
+	 * gives them in the order of a hash set.
+	 */
 	fun getMatchedPrefixes(query: String): List<PrefixNameValue>? {
 		val keys = matchedKeys[query] ?: return null
 		val r = ArrayList<PrefixNameValue>()
-		for (l in keys.toArray()) {
+		val shifts = keys.toArray()
+		shifts.sort()
+		for (l in shifts) {
 			val pv = indexByRef[l]!!
 			r.add(pv)
 		}

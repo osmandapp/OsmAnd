@@ -13,9 +13,7 @@ import net.osmand.shared.util.collections.KTLongObjectMap
  *
  * A copy of `HashSkipTileQuadTree` in OsmAnd-java, which stays there for android and tools; this
  * copy is for iOS. Left out are the statistics of the skips, `SkipStats`, which only the
- * benchmarks of OsmAnd-java read, and `TreeExtraIndex`, which nothing uses. The objects added
- * after a build replace their tile entries in the hash order of a map, here and in java, so the
- * entries of one tile may come in another order than java's.
+ * benchmarks of OsmAnd-java read, and `TreeExtraIndex`, which nothing uses.
  */
 class HashSkipTileQuadTree<T>(minZoom: Int, maxZoom: Int, indexedZooms: IntArray) {
 
@@ -25,6 +23,9 @@ class HashSkipTileQuadTree<T>(minZoom: Int, maxZoom: Int, indexedZooms: IntArray
 	internal var zoomBuckets: Array<ZoomBucket?>? = null
 	internal var tileEntries: MutableList<TileEntry<T>> = ArrayList()
 	internal var modified: KTLongObjectMap<MutableList<TileEntry<T>>>? = null
+	// the ids of modified in the order they were added, which a hash map does not keep: java builds them in the order
+	// of its hashes
+	internal val modifiedOrder = KTLongArrayList()
 
 	constructor() : this(DEFALT_MIN_ZOOM, DEFALT_MAX_ZOOM, DEFAULT_INDEXED_ZOOMS)
 
@@ -221,6 +222,7 @@ class HashSkipTileQuadTree<T>(minZoom: Int, maxZoom: Int, indexedZooms: IntArray
 					if (list == null) {
 						list = ArrayList()
 						modified.put(objId, list)
+						modifiedOrder.add(objId)
 					}
 					list.add(te)
 				} else {
@@ -239,7 +241,9 @@ class HashSkipTileQuadTree<T>(minZoom: Int, maxZoom: Int, indexedZooms: IntArray
 					entries.add(e)
 				}
 			}
-			modified.forEachValue { entries.addAll(it) }
+			for (i in 0 until modifiedOrder.size()) {
+				entries.addAll(modified[modifiedOrder[i]]!!)
+			}
 			tileEntries = entries
 		}
 		val buckets = arrayOfNulls<ZoomBucket>(maxZoom + 1)
@@ -284,6 +288,7 @@ class HashSkipTileQuadTree<T>(minZoom: Int, maxZoom: Int, indexedZooms: IntArray
 			tileEntries[lastTileIdFirstInd].skipNextTileId = index
 		}
 		this.modified = KTLongObjectMap()
+		modifiedOrder.clear()
 		return tileEntries.size
 	}
 

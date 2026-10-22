@@ -315,8 +315,14 @@ class SearchCoreFactoryTest {
 		}
 	}
 
-	/** The english names of the poi types, as `SearchUICoreTest` gives them. */
-	internal class Translator(val phrases: Map<String, String>) : PoiTranslator {
+	/**
+	 * The english names of the poi types, as `SearchUICoreTest` gives them, and those of the phrases of [langs]
+	 * by language for [getTranslator].
+	 */
+	internal class Translator(
+		val phrases: Map<String, String>,
+		private val langs: Map<String, Map<String, String>> = emptyMap()
+	) : PoiTranslator {
 		private fun translation(keyName: String): String? {
 			val v = phrases["poi_$keyName"] ?: return null
 			val ind = v.indexOf(';')
@@ -360,6 +366,8 @@ class SearchCoreFactoryTest {
 		override fun getSynonyms(keyName: String): String? = synonyms(keyName)
 
 		override fun getAllLanguagesTranslationSuffix(): String = "all languages"
+
+		override fun getTranslator(lang: String): PoiTranslator? = langs[lang]?.let { Translator(it) }
 	}
 
 	companion object {

@@ -92,7 +92,7 @@ class SpatialSearchToken(
 	internal var categoryMatchMode = false
 	internal val cacheCategoryFilterObjects = KTLongHashSet()
 
-	data class PartialMatch(val atom: NameIndexAtom, val other: List<SpatialSearchToken>, val nonNumericMatch: Boolean)
+	data class PartialMatch(val atom: NameIndexAtom, val other: List<SpatialSearchToken>?, val nonNumericMatch: Boolean)
 
 	init {
 		categoryMatchMode = ow.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)
@@ -433,11 +433,11 @@ class SpatialSearchToken(
 		return false
 	}
 
-	fun addPartialCommonAtom(atom: NameIndexAtom, otherTokens: List<SpatialSearchToken>, numericNotMatch: Boolean) {
+	fun addPartialCommonAtom(atom: NameIndexAtom, otherTokens: List<SpatialSearchToken>?, numericNotMatch: Boolean) {
 		partialExactMatch.add(PartialMatch(atom, otherTokens, numericNotMatch))
 	}
 
-	fun addPartialOtherAtom(atom: NameIndexAtom, otherTokens: List<SpatialSearchToken>, numericNotMatch: Boolean) {
+	fun addPartialOtherAtom(atom: NameIndexAtom, otherTokens: List<SpatialSearchToken>?, numericNotMatch: Boolean) {
 		partialMatch.add(PartialMatch(atom, otherTokens, numericNotMatch))
 	}
 

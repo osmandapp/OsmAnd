@@ -19,6 +19,7 @@ import net.osmand.shared.routing.RouteSubregion
 import net.osmand.shared.util.collections.KTIntArrayList
 import net.osmand.shared.util.collections.KTIntObjectMap
 import net.osmand.shared.util.KCollatorStringMatcher
+import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.KStringMatcher
 import net.osmand.shared.util.collections.KTLongHashSet
 import net.osmand.shared.util.collections.KTLongObjectMap
@@ -985,6 +986,38 @@ class BinaryMapIndexReader {
 		return sr.getSearchResults()
 	}
 
+	/** The header of the settlement at [offset] of [r], without its streets. */
+	fun readCityObject(r: AddressRegion, offset: Long): City? {
+		if (!(offset >= r.filePointer && offset <= (r.length + r.filePointer))) {
+			throw IllegalArgumentException()
+		}
+		codedIS.seek(offset)
+		val length = codedIS.readRawVarint32().toLong()
+		val oldLim = codedIS.pushLimitLong(length)
+		// city header
+		val city = addressAdapter.readCityHeader(null, null, offset, r.attributeTagsTable)
+		codedIS.popLimit(oldLim)
+		return city
+	}
+
+	/** The street at [offset] of [r] in [city], with its houses and crossings. */
+	fun readStreetObject(r: AddressRegion, city: City, offset: Long): MapObject {
+		if (!(offset >= r.filePointer && offset <= (r.length + r.filePointer))) {
+			throw IllegalArgumentException()
+		}
+		val cx24 = KMapUtils.get31TileNumberX(city.getLocation()!!.longitude) shr 7
+		val cy24 = KMapUtils.get31TileNumberY(city.getLocation()!!.latitude) shr 7
+		codedIS.seek(offset)
+		val s = Street(city)
+		s.setFileOffset(offset)
+		val length = codedIS.readRawVarint32().toLong()
+		val oldLim = codedIS.pushLimitLong(length)
+		// cityx
+		addressAdapter.readStreet(s, null, true, cx24, cy24, null, r.attributeTagsTable)
+		codedIS.popLimit(oldLim)
+		return s
+	}
+
 	/** The amenities of every poi section whose name matches the request's query. */
 	fun searchPoiByName(req: SearchRequest<Amenity>): MutableList<Amenity> {
 		val nameQuery = req.nameQuery
@@ -1009,7 +1042,8 @@ class BinaryMapIndexReader {
 	/**
 	 * Reads the name index of the region of [reader]: the keys of its string table that match the
 	 * query of the reader and the blocks of atoms behind them, or all of them when it has no query.
-	 * Returns the blocks of the query, or null without one; the reader keeps them all.
+	 * Returns the blocks of the query in the order of the file, or null without one; the reader keeps
+	 * them all.
 	 */
 	fun readFullNameIndex(reader: NameIndexReader): List<NameIndexReader.PrefixNameValue>? {
 		val poiRegion = reader.poiRegion
@@ -1022,7 +1056,8 @@ class BinaryMapIndexReader {
 			addressAdapter.readNameIndex(reader)
 		}
 		codedIS.popLimit(old)
-		return res
+		// the blocks read before come first, in the order of a hash set: the order of the file whatever was read
+		return res?.sortedBy { it.shift }
 	}
 
 	/**
@@ -1426,6 +1461,9 @@ class BinaryMapIndexReader {
 		handle.close()
 	}
 
+	/** Bytes read from the file so far, for the statistics of a search. */
+	fun getBytesRead(): Long = codedIS.bytesRead
+
 	/** Field numbers of `OsmAndStructure` in osmand_odb.proto, frozen by the obf format. */
 	private object OsmAndStructure {
 		const val VERSION_FIELD_NUMBER = 1
@@ -1458,6 +1496,10 @@ class BinaryMapIndexReader {
 
 		/** The field of `OsmAndStructure` an HH routing section occupies; [HHRouteRegion.getFieldNumber]. */
 		const val HHROUTINGINDEX_FIELD_NUMBER = 10
+
+		/** The offset an atom of a poi name index keeps as a `fixed32`, as protobuf reads it low byte first. */
+		fun convertFixed32ToRef(k: Int): Int =
+			(k shl 24) or ((k and 0xff00) shl 8) or ((k ushr 8) and 0xff00) or (k ushr 24)
 
 		private val MASK_TO_READ = ((1 shl SHIFT_COORDINATES) - 1).inv()
 
