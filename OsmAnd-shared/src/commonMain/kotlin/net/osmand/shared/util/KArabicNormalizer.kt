@@ -85,10 +85,8 @@ object KArabicNormalizer {
 		return c
 	}
 
-	// Locality streets are stored as "<name>", optionally followed by a district.
 	private fun startsWithArabic(text: String): Boolean {
-		val start = if (text[0] == '<') 1 else 0
-		return start < text.length && isArabicBlock(text[start])
+		return isArabicBlock(text[0]) || (text.length > 1 && isArabicBlock(text[1]))
 	}
 
 	private fun isArabicBlock(c: Char): Boolean = c in ARABIC_BLOCK_FIRST..ARABIC_BLOCK_LAST

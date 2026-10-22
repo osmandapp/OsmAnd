@@ -64,11 +64,9 @@ public class ArabicNormalizer {
         return String.valueOf(textChars);
     }
 
-    // Locality streets are stored as "<name>", optionally followed by a district.
     private static boolean startsWithArabic(String text) {
-        int start = text.charAt(0) == '<' ? 1 : 0; // Detect Arabic after '<', e.g. "<روضة>" (locality-street marker)
-        return start < text.length()
-                && Character.UnicodeBlock.of(text.charAt(start)) == Character.UnicodeBlock.ARABIC;
+        return Character.UnicodeBlock.of(text.charAt(0)) == Character.UnicodeBlock.ARABIC
+                || (text.length() > 1 && Character.UnicodeBlock.of(text.charAt(1)) == Character.UnicodeBlock.ARABIC);
     }
 
     private static boolean isDiacritic(char c) {
