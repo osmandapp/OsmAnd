@@ -340,6 +340,7 @@
 						android:layout_width="150dp"
 						android:layout_height="40dp"
 						android:layout_gravity="center"
+						android:layoutDirection="ltr"
 						android:max="100"
 						android:progress="50"
 						android:rotation="270" />
