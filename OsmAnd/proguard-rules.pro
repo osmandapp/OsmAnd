@@ -80,9 +80,15 @@
 	net.osmand.**Callback *;
 }
 
-# --- Reflection on R: poi_*/translation strings and h_*/mm_* rendering icons are read by field name ---
+# --- Reflection on R: poi_*/translation strings and h_*/mm_*/mx_* rendering icons are read by field name ---
 -keepclassmembers class net.osmand.plus.R$string { public static <fields>; }
--keepclassmembers class net.osmand.plus.R$drawable { public static <fields>; }
+# RenderingIcons scans R.drawable for these prefixes only. Keeping every field would keep every drawable
+# under optimized resource shrinking; the other drawables looked up by name are listed in res/raw/keep.xml.
+-keepclassmembers class net.osmand.plus.R$drawable {
+	public static int h_*;
+	public static int mm_*;
+	public static int mx_*;
+}
 
 # --- Constructors called through Class.newInstance()/getConstructor() (full mode drops them otherwise) ---
 -keepclassmembers,allowobfuscation class * extends net.osmand.plus.quickaction.QuickAction {
