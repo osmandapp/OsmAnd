@@ -781,7 +781,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun updateEclipseModeOffsets() {
-		if (::eclipseCard.isInitialized) applyBottomWindowInsets(eclipseCard, regularMapVisible)
+		if (::eclipseCard.isInitialized) setExtraBottomMargin(eclipseCard, 0)
 		val eclipseOffset = if (::eclipseCard.isInitialized && eclipseCard.isVisible) {
 			eclipseCard.height + resources.getDimensionPixelSize(R.dimen.content_padding)
 		} else 0
@@ -830,16 +830,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val existingDialog =
 			childFragmentManager.findFragmentByTag(StarMapSearchDialogFragment.TAG) as? StarMapSearchDialogFragment
 		existingDialog?.dismissAllowingStateLoss()
-	}
-
-	private fun applyBottomWindowInsets(view: View, reset: Boolean = false, extraBottom: Int = 0) {
-		val baseMarginBottom = view.resources.getDimensionPixelSize(R.dimen.content_padding)
-		val bottomMargin = baseMarginBottom + extraBottom + if (reset) 0 else systemBottomInset
-		val layoutParams = view.layoutParams as? ViewGroup.MarginLayoutParams ?: return
-		if (layoutParams.bottomMargin == bottomMargin) return
-		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-			this.bottomMargin = bottomMargin
-		}
 	}
 
 	private fun updateArModeUI(enabled: Boolean) {
