@@ -181,17 +181,14 @@ androidComponents {
 			tasks.matching { it.name == name }.configureEach { it.dependsOn(deps) }
 		}
 		dependOn("merge${taskName}Assets", collectExternalResources)
-		if (taskName.endsWith("Debug")) {
-			dependOn("merge${taskName}AndroidTestAssets", collectExternalResources)
-		}
+		dependOn("merge${taskName}AndroidTestAssets", collectExternalResources)
 		dependOn("map${taskName}SourceSetPaths", copyIcons)
 		dependOn("process${taskName}NavigationResources", copyIcons)
 		dependOn("merge${taskName}Resources", collectExternalResources)
 		dependOn("generate${taskName}Resources", collectExternalResources)
+		dependOn("compile${taskName}JavaWithJavac", collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
 		if (variant.name.contains('Opengldebug')) {
-			dependOn("compile${taskName}JavaWithJavac", collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore)
-		} else {
-			dependOn("compile${taskName}JavaWithJavac", collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+			dependOn("compile${taskName}JavaWithJavac", copyOsmAndCoreWithJNI)
 		}
 	}
 	// Debug builds keep native symbols for readable native crash stacks; release libraries stay stripped
