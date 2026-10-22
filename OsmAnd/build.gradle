@@ -194,6 +194,10 @@ androidComponents {
 			dependOn("compile${taskName}JavaWithJavac", collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
 		}
 	}
+	// Debug builds keep native symbols for readable native crash stacks; release libraries stay stripped
+	onVariants(selector().withBuildType("debug")) { variant ->
+		variant.packaging.jniLibs.keepDebugSymbols.add("**/*.so")
+	}
 }
 
 afterEvaluate {
