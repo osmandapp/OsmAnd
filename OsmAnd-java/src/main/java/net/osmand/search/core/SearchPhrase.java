@@ -497,20 +497,6 @@ public class SearchPhrase {
 		return settings.hasCustomSearchType(type);
 	}
 
-	// the address tab (and the AIDL address search): only address objects and coordinates are requested
-	public boolean isAddressSearch() {
-		ObjectType[] searchTypes = getSearchTypes();
-		if (searchTypes == null) {
-			return false;
-		}
-		for (ObjectType type : searchTypes) {
-			if (!ObjectType.isAddress(type) && type != ObjectType.LOCATION && type != ObjectType.PARTIAL_LOCATION) {
-				return false;
-			}
-		}
-		return true;
-	}
-
 	// the address tab list opened by a city / postcode button, or the streets of a selected city / postcode:
 	// the typed text filters this list instead of starting a new full-text search
 	public boolean isAddressListFilter() {
@@ -526,7 +512,7 @@ public class SearchPhrase {
 			}
 		}
 		return cityOrPostcodeList
-				|| isAddressSearch() && isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE);
+				|| isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE);
 	}
 
 	public boolean isSearchTypeAllowed(ObjectType searchType) {
