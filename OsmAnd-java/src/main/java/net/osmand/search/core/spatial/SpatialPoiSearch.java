@@ -346,7 +346,7 @@ public class SpatialPoiSearch {
 	}
 	
 	private void addPoiCategoryMatch(SpatialSearchContext ctx, SpatialPoiType a, SpatialSearchToken t,
-			Map<SpatialPoiType, PoiCatSearch> res) {
+			Map<SpatialPoiType, PoiCatSearch> res, String matchedName) {
 		int total = 0;
 		for (SpatialSearchFileCache l : ctx.internalFile) {
 			if (l.poiFrequencies != null) {
@@ -384,6 +384,7 @@ public class SpatialPoiSearch {
 		}
 		
 		NameIndexAtom atom = new NameIndexAtom(a.key, a.id, total);
+		atom.matchedName = matchedName;
 		cs.atoms.add(atom);
 		cs.tokens.add(t);
 		if (typedInFull(t, a)) {
@@ -443,20 +444,20 @@ public class SpatialPoiSearch {
 				readLock.unlock();
 			}
 			for (SpatialPoiType a : poiTypes) {
-				boolean match = false;
+				String matchedName = null;
 				for (String n : a.names) {
 					if (t.getMainCollator().matches(n)) {
-						match = true;
+						matchedName = n;
 						break;
 					}
 				}
-				if (match) {
-					addPoiCategoryMatch(ctx, a, t, res);
+				if (matchedName != null) {
+					addPoiCategoryMatch(ctx, a, t, res, matchedName);
 					if (a.wikidataId != null) {
 						List<SpatialPoiType> otherTypes = byWikidataKey.get(a.wikidataId);
 						for (SpatialPoiType otherA : otherTypes) {
 							if (otherA.id != a.id) {
-								addPoiCategoryMatch(ctx, otherA, t, res);
+								addPoiCategoryMatch(ctx, otherA, t, res, matchedName);
 							}
 						}
 					}

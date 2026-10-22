@@ -744,6 +744,8 @@ public class SpatialSearchToken {
 		String locale = "";
 		// found by a name the OBF writer made by a search rule, not by a name of OSM
 		boolean ruleSpelling;
+		// poi category: its name the token matched, "Schule" for "schu"
+		String matchedName;
 
 		NameIndexAtom(String name, long id, int total) {
 			this(name, SpatialSearchToken.POI_CATEGORY_TYPE, id, 0, null, false, -total, total,
@@ -757,6 +759,7 @@ public class SpatialSearchToken {
 			this.distinctFoundCnt = cp.distinctFoundCnt;
 			this.locale = cp.locale;
 			this.ruleSpelling = cp.ruleSpelling;
+			this.matchedName = cp.matchedName;
 		}
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,

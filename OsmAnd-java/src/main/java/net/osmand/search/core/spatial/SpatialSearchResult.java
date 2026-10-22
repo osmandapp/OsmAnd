@@ -227,30 +227,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	}
 
 	// the category name the query words matched: "schu" -> Schule
-	public String getPoiCategoryMatchedName(SpatialPoiSearch poiSearch) {
-		SpatialPoiType category = getPoiCategory(poiSearch);
-		List<SpatialSearchToken> tokens = objs.isEmpty() ? null : objs.get(0).tokens;
-		if (category == null || Algorithms.isEmpty(tokens)) {
-			return null;
-		}
-		for (String name : new ArrayList<>(category.names)) {
-			if (tokensMatch(tokens, name)) {
-				return name;
-			}
-		}
-		return null;
-	}
-
-	private static boolean tokensMatch(List<SpatialSearchToken> tokens, String name) {
-		if (Algorithms.isEmpty(name)) {
-			return false;
-		}
-		for (SpatialSearchToken t : tokens) {
-			if (!t.getMainCollator().matches(name)) {
-				return false;
-			}
-		}
-		return true;
+	public String getPoiCategoryMatchedName() {
+		return isPoiCategory() ? objs.get(0).atom.matchedName : null;
 	}
 
 	public String getExtraNameMatch() {
