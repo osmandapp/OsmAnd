@@ -952,6 +952,7 @@ class Amenity : MapObject() {
 		const val WIKIDATA: String = "wikidata"
 		const val WIKIMEDIA_COMMONS: String = "wikimedia_commons"
 		const val MAPILLARY: String = "mapillary"
+		const val PANORAMAX: String = "panoramax"
 		const val DISH: String = "dish"
 		const val REF: String = "ref"
 		const val OSM_DELETE_VALUE: String = "delete"

@@ -1542,6 +1542,10 @@ public class BinaryMapIndexReader {
 			res = addressAdapter.readNameIndex(reader);
 		}
 		codedIS.popLimit(old);
+		if (res != null) {
+			// the blocks read before come first, in the order of a hash set: the order of the file whatever was read
+			res.sort((a, b) -> Long.compare(a.shift, b.shift));
+		}
 		return res;
 	}
 	
