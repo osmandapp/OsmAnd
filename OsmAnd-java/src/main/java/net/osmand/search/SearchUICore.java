@@ -20,7 +20,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.MapPoiTypes.PoiTranslator;
 import net.osmand.osm.PoiType;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
@@ -64,7 +63,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.function.Function;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BooleanSupplier;
@@ -91,7 +89,6 @@ public class SearchUICore {
 	List<SearchCoreAPI> apis = new ArrayList<>();
 	private SearchSettings searchSettings;
 	private MapPoiTypes poiTypes;
-	private Function<String, PoiTranslator> regionPoiTranslators;
 	private final BooleanSupplier internetConnectionAvailable;
 
 	private static boolean debugMode = false;
@@ -651,11 +648,6 @@ public class SearchUICore {
 		init(false);
 	}
 
-	// spatial search also matches poi categories in the languages of the search location
-	public void setRegionPoiTranslators(Function<String, PoiTranslator> regionPoiTranslators) {
-		this.regionPoiTranslators = regionPoiTranslators;
-	}
-
 	public void init(boolean useSpatialSearch) {
 		SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
 		if (!useSpatialSearch) {
@@ -668,9 +660,6 @@ public class SearchUICore {
 		apis.add(searchAmenityTypesAPI);
 		// one instance for both apis: one poi type index and one name-index cache
 		SpatialTextSearchAPI spatialTextSearchAPI = useSpatialSearch ? new SpatialTextSearchAPI(poiTypes) : null;
-		if (spatialTextSearchAPI != null) {
-			spatialTextSearchAPI.setRegionPoiTranslators(regionPoiTranslators);
-		}
 		apis.add(useSpatialSearch
 				? new SpatialCategoryAmenityByTypeAPI(poiTypes, spatialTextSearchAPI)
 				: new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));

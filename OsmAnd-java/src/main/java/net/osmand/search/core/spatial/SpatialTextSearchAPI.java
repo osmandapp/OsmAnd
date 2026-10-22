@@ -22,7 +22,6 @@ import net.osmand.data.Street;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.MapPoiTypes.PoiTranslator;
 import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
@@ -43,7 +42,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Function;
 
 public class SpatialTextSearchAPI extends SearchBaseAPI {
 
@@ -55,8 +53,6 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	private final MapPoiTypes poiTypes;
 	private final SpatialTextSearch spatialTextSearch = new SpatialTextSearch();
 	private final SpatialPoiSearch poiSearch;
-	// poi type names of the languages of the search location, null - only the languages of poiTypes
-	private Function<String, PoiTranslator> regionPoiTranslators;
 
 	public SpatialTextSearchAPI(MapPoiTypes poiTypes) {
 		super(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.BOUNDARY, ObjectType.POSTCODE,
@@ -71,16 +67,13 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return !phrase.hasCustomSearchType(ObjectType.ONLINE_SEARCH);
 	}
 
-	public void setRegionPoiTranslators(Function<String, PoiTranslator> regionPoiTranslators) {
-		this.regionPoiTranslators = regionPoiTranslators;
-	}
-
 	@Override
 	public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+		// poi categories are also matched in the languages of the search location: "de" in Leipzig
 		String regionLang = phrase.getSettings().getRegionLang();
-		if (regionPoiTranslators != null && !Algorithms.isEmpty(regionLang)) {
+		if (!Algorithms.isEmpty(regionLang)) {
 			for (String lang : regionLang.split(",")) {
-				poiSearch.addLanguage(lang, regionPoiTranslators);
+				poiSearch.addLanguage(lang);
 			}
 		}
 		SpatialTextSearchSettings settings = createSpatialSettings(phrase);

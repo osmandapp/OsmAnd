@@ -16,7 +16,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
-import java.util.function.Function;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TLongHashSet;
@@ -203,33 +202,33 @@ public class SpatialPoiSearch {
 			poiType.parentTypes = new ArrayList<>();
 			poiType.parentTypes.add(parent);
 		}
-		if (!basePoiName.equals(pt.getTranslation())) {
-			String[] split = pt.getTranslation().split(";");
-			for (String tr : split) {
-				poiType.addName(SearchAlgorithms.alignChars(tr.trim()));
-				// only first
-				break;
-			}
-		}
-		String synonyms = pt.getSynonyms();
-		if (!Algorithms.isEmpty(synonyms)) {
-			String[] split = synonyms.split(";");
-			for (String tr : split) {
-				if (tr.trim().length() > 0) {
-					poiType.addName(SearchAlgorithms.alignChars(tr.trim()));
-				}
-			}
+		String translation = basePoiName.equals(pt.getTranslation()) ? null : pt.getTranslation();
+		for (String name : getNames(translation, pt.getSynonyms())) {
+			poiType.addName(name);
 		}
 		addToIndex(basePoiName, poiType);
 	}
 
+	// translation (only the first name) and synonyms
+	private static List<String> getNames(String translation, String synonyms) {
+		String all = (Algorithms.isEmpty(translation) ? "" : translation.split(";")[0]) + ";"
+				+ (synonyms == null ? "" : synonyms);
+		List<String> names = new ArrayList<>();
+		for (String name : all.split(";")) {
+			if (name.trim().length() > 0) {
+				names.add(SearchAlgorithms.alignChars(name.trim()));
+			}
+		}
+		return names;
+	}
 
-	// names of one more language, once: the language of the search location, "Schule" in Leipzig for an app in Ukrainian
-	public void addLanguage(String lang, Function<String, PoiTranslator> translators) {
-		if (!languages.add(lang)) {
+	// names of one more language, once: "Schule" in Leipzig for an app in Ukrainian
+	public void addLanguage(String lang) {
+		PoiTranslator translator = poiTypes.getPoiTranslator();
+		PoiTranslator langTranslator = translator == null || !languages.add(lang) ? null : translator.getTranslator(lang);
+		if (langTranslator == null) {
 			return;
 		}
-		PoiTranslator translator = translators.apply(lang);
 		WriteLock wl = poiTypesIndexLock.writeLock();
 		try {
 			wl.lock();
@@ -238,10 +237,8 @@ public class SpatialPoiSearch {
 				if (pt == null) {
 					continue;
 				}
-				String names = translator.getTranslation(pt) + ";" + translator.getSynonyms(pt);
-				for (String tr : names.split(";")) {
-					String name = SearchAlgorithms.alignChars(tr.trim());
-					if (name.length() > 0 && !"null".equals(name) && !poiType.names.contains(name)) {
+				for (String name : getNames(langTranslator.getTranslation(pt), langTranslator.getSynonyms(pt))) {
+					if (!poiType.names.contains(name)) {
 						poiType.addName(name);
 						poiTypesIndex.put(name, poiType);
 					}
@@ -251,6 +248,7 @@ public class SpatialPoiSearch {
 			wl.unlock();
 		}
 	}
+
 
 	private void updateNamesWikidataId(SpatialPoiType poiType, String names) {
 		WriteLock wl = poiTypesIndexLock.writeLock();
