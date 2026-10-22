@@ -45,6 +45,6 @@ object MediaUriResolver {
 	}
 
 	private fun shouldUseExternalUriAsDetailsLink(mediaItem: MediaItem.Remote): Boolean {
-		return mediaItem.origin == MediaOrigin.WIKIPEDIA
+		return mediaItem.origin == MediaOrigin.WIKIPEDIA || mediaItem.origin == MediaOrigin.PANORAMAX
 	}
 }
