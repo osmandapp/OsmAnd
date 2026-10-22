@@ -1,5 +1,6 @@
 package net.osmand.shared.binary
 
+import net.osmand.shared.routing.RoutingTestFixtures
 import net.osmand.shared.search.AmenitySearcherTest
 import net.osmand.shared.util.KSearchAlgorithms
 import net.osmand.shared.util.dumpFnv
@@ -7,6 +8,7 @@ import net.osmand.shared.util.dumpHex
 import net.osmand.shared.util.dumpUnhex
 import net.osmand.shared.util.openJavaDump
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.test.fail
 
@@ -144,7 +146,41 @@ class NameIndexReaderTest {
 		println("NameIndexReaderTest: the same as java, lines by kind $compared")
 	}
 
+	/**
+	 * The blocks of a query come in the order of the file, read now, read before or both, and from the cache of the
+	 * query: the atoms of a word of the spatial search follow them. Java gives the blocks read before in the order
+	 * of a hash set from the cache, and first from a read.
+	 */
+	@Test
+	fun blocksComeInTheOrderOfTheFile() {
+		val reader = BinaryMapIndexReader(RoutingTestFixtures.resource("Turn_lanes_test.obf"))
+		try {
+			val index = NameIndexReader(reader.getAddressIndexes()[0]).setCacheRawBlocks(true)
+			val some = reader.readFullNameIndex(index.setQuery("some", keys { it.length % 2 == 0 }))!!
+			val all = reader.readFullNameIndex(index.setQuery("all", keys { true }))!!
+			assertTrue(some.isNotEmpty() && all.size > some.size, "blocks: ${some.size} of ${all.size}")
+			assertInFileOrder("read now", some)
+			assertInFileOrder("read before and now", all)
+			val again = reader.readFullNameIndex(index.setQuery("all", keys { true }))!!
+			assertEquals(all.map { it.shift }, again.map { it.shift }, "read before")
+			assertEquals(all.map { it.shift }, index.getMatchedPrefixes("all")!!.map { it.shift }, "from the cache")
+		} finally {
+			reader.close()
+		}
+	}
+
 	companion object {
+
+		private fun keys(match: (String) -> Boolean): NameIndexReader.NameIndexReaderMatcher =
+			object : NameIndexReader.NameIndexReaderMatcher("") {
+				override fun matchKey(key: String): Boolean = match(key)
+			}
+
+		private fun assertInFileOrder(what: String, blocks: List<NameIndexReader.PrefixNameValue>) {
+			for (i in 1 until blocks.size) {
+				assertTrue(blocks[i - 1].shift < blocks[i].shift, "$what: block $i at ${blocks[i].shift} after ${blocks[i - 1].shift}")
+			}
+		}
 
 		/** `NameIndexCompatTest.MATCHER_KEYS`. */
 		private const val MATCHER_KEYS = 300

@@ -832,7 +832,7 @@ public class SpatialSearchTokenCompatTest {
 		write("E", sb.toString());
 	}
 
-	static String bits(double v) {
+	public static String bits(double v) {
 		return Long.toHexString(Double.doubleToRawLongBits(v));
 	}
 

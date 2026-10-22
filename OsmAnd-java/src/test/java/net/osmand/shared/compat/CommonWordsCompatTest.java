@@ -185,7 +185,7 @@ public class CommonWordsCompatTest {
 	}
 
 	/** Each char as four hex digits, so that any string fits on a line. */
-	static String hex(String s) {
+	public static String hex(String s) {
 		StringBuilder sb = new StringBuilder(s.length() * 4 + 1).append('x');
 		for (int i = 0; i < s.length(); i++) {
 			String h = Integer.toHexString(s.charAt(i));
