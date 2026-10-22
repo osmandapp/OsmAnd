@@ -11,6 +11,9 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="astro_ar_mode">AR mode</string>
+	<string name="astro_camera_view">Camera view</string>
+	<string name="astro_reset_field_of_view">Reset field of view</string>
 	<string name="cloud_file_name_too_long">File name is too long for this device, rename it in OsmAnd Cloud</string>
 	<string name="average_vertical_speed">Average vertical speed</string>
 	<string name="select_tracks">Select tracks</string>
