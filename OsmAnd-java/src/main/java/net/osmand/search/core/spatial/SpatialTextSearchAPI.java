@@ -69,6 +69,11 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+		// poi categories are also matched in the main language of the search location: "de" in Leipzig, "uk" of "uk,ru"
+		String regionLang = phrase.getSettings().getRegionLang();
+		if (!Algorithms.isEmpty(regionLang)) {
+			poiSearch.addLanguage(regionLang.split(",")[0]);
+		}
 		SpatialTextSearchSettings settings = createSpatialSettings(phrase);
 		List<BinaryMapIndexReader> files = getSpatialSearchFiles(phrase, settings);
 		if (Algorithms.isEmpty(files)) {
