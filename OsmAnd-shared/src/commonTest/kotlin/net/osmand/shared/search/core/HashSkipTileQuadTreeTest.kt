@@ -1,6 +1,7 @@
 package net.osmand.shared.search.core
 
 import net.osmand.shared.util.KMapUtils
+import net.osmand.shared.util.dumpFnv
 import net.osmand.shared.util.readJavaDump
 import kotlin.math.abs
 import kotlin.math.min
@@ -48,7 +49,7 @@ class HashSkipTileQuadTreeTest {
 		}
 		val copy = LinkedHashMap<String, String>()
 		fun same(name: String, answer: String) {
-			copy[name] = answer.length.toString() + "\t" + fnv(answer)
+			copy[name] = answer.length.toString() + "\t" + dumpFnv(answer)
 		}
 		tileIds(boxes, queries, ::same)
 		val default = HashSkipTileQuadTree<Int>()
@@ -134,16 +135,6 @@ class HashSkipTileQuadTreeTest {
 			intArrayOf(2, 14) to intArrayOf(),
 			intArrayOf(0, 18) to intArrayOf(2, 4, 6, 8, 10, 12, 14)
 		)
-
-		/** `NameIndexCompatTest.fnv`. */
-		private fun fnv(s: String): Long {
-			var h = 0xcbf29ce484222325uL.toLong()
-			for (c in s) {
-				h = h xor c.code.toLong()
-				h *= 0x100000001b3L
-			}
-			return h
-		}
 
 		private fun randomBox(random: Random): IntArray {
 			val size = when (random.nextInt(5)) {
@@ -281,7 +272,7 @@ class HashSkipTileQuadTreeTest {
 				val q = queries[i]
 				val r = entries(if (i % 5 == 4) t.get(q, 3, 12) else t.get(q), false)
 				val answer = (if (anyOrder) sorted(r) else r) + "|" + t.contains(q)
-				hashes.append(fnv(answer)).append(';')
+				hashes.append(dumpFnv(answer)).append(';')
 			}
 			return hashes.toString()
 		}
