@@ -677,7 +677,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		eclipseTimeline.setOnTimeChangedListener { millis, fromUser ->
 			if (fromUser) scheduleEclipseSliderTime(millis)
 		}
-		val rtl = view.layoutDirection == View.LAYOUT_DIRECTION_RTL
+		val rtl = AndroidUtils.isLayoutRtl(view.context)
 		eclipsePrevious.scaleX = if (rtl) 1f else -1f
 		eclipseNext.scaleX = if (rtl) -1f else 1f
 
