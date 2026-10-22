@@ -40,6 +40,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -294,6 +295,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		} else {
 			result.localeName = obj.getName(lang, transliterate);
 			result.otherNames = obj.getOtherNames(transliterate, result.localeName);
+			result.alternateName = getMatchedOtherName(ssr, obj, result.localeName, result.otherNames);
 			if (Algorithms.isNotEmpty(extraNameMatch)) {
 				result.localeName += " (" + extraNameMatch + ")"; // ref
 			}
@@ -392,10 +394,47 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		result.object = object;
 		result.objectType = ObjectType.POI_TYPE;
 		result.localeName = localeName;
+		result.alternateName = getMatchedOtherName(ssr.objs.get(0).tokens, localeName, spatialPoiType.names);
 		result.priority = SEARCH_PRIORITY;
 		result.priorityDistance = 0;
 		result.preferredZoom = PREFERRED_POI_ZOOM;
 		return result;
+	}
+
+	// the other name the typed words of obj matched when the shown one does not: "Школа (Schule)"
+	public static String getMatchedOtherName(SpatialSearchResult ssr, MapObject obj, String localeName,
+	                                         Collection<String> otherNames) {
+		for (SpatialSearchResultRef ref : ssr.objs) {
+			if (ref.atom.object == obj) {
+				return getMatchedOtherName(ref.tokens, localeName, otherNames);
+			}
+		}
+		return null;
+	}
+
+	private static String getMatchedOtherName(List<SpatialSearchToken> tokens, String localeName,
+	                                          Collection<String> otherNames) {
+		if (tokens.isEmpty() || otherNames == null || allTokensMatch(tokens, localeName)) {
+			return null;
+		}
+		for (String name : new ArrayList<>(otherNames)) {
+			if (!name.equalsIgnoreCase(localeName) && allTokensMatch(tokens, name)) {
+				return name;
+			}
+		}
+		return null;
+	}
+
+	private static boolean allTokensMatch(List<SpatialSearchToken> tokens, String name) {
+		if (Algorithms.isEmpty(name)) {
+			return false;
+		}
+		for (SpatialSearchToken t : tokens) {
+			if (!t.getMainCollator().matches(name)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private int countStreetRefs(SpatialSearchResult spatialResult) {
