@@ -29,6 +29,11 @@ internal fun dumpUnhex(h: String): String {
 	return sb.toString()
 }
 
+/** Strings as the compat tests of OsmAnd-java write a list of them: [dumpHex] each, joined by commas, "-" for none. */
+internal fun dumpHexList(list: List<String>): String = if (list.isEmpty()) "-" else list.joinToString(",") { dumpHex(it) }
+
+internal fun dumpUnhexList(h: String): List<String> = if (h == "-") emptyList() else h.split(",").map { dumpUnhex(it) }
+
 /** The FNV-1a hash of the chars of [s], `NameIndexCompatTest.fnv` of OsmAnd-java: a long answer in a dump. */
 internal fun dumpFnv(s: String): Long {
 	var h = 0xcbf29ce484222325uL.toLong()

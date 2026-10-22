@@ -29,6 +29,7 @@ object KMapUtils {
 	const val LONGITUDE_TURN = 360.0
 	const val DEFAULT_LATLON_PRECISION = 0.00001
 	const val HIGH_LATLON_PRECISION = 0.0000001
+	const val METERS_IN_DEGREE = 111320.0
 
 	private const val BASE_SHORT_OSM_URL = "https://openstreetmap.org/go/"
 
@@ -605,6 +606,26 @@ object KMapUtils {
 
 	/** The odd bits of [coord], what [interleaveBits] took from x. */
 	fun deinterleaveX(coord: Long): Long = compactBits(coord ushr 1)
+
+	/**
+	 * The 31 bbox [left, top, right, bottom] of a square of [radiusMeters] along the meridian and the
+	 * parallel around the middle of tile [x], [y] of zoom [z].
+	 */
+	fun calc31BboxRhumb(radiusMeters: Int, x: Int, y: Int, z: Int): IntArray {
+		val lat = getLatitudeFromTile(z.toDouble(), y + 0.5)
+		val lon = getLongitudeFromTile(z.toDouble(), x + 0.5)
+		val deltaLat = radiusMeters / METERS_IN_DEGREE
+		val deltaLon = radiusMeters / (METERS_IN_DEGREE * cos(lat.toRadians()))
+		val northLat = lat + deltaLat
+		val southLat = lat - deltaLat
+		val westLon = lon - deltaLon
+		val eastLon = lon + deltaLon
+		val top = get31TileNumberY(min(MAX_LATITUDE, northLat))
+		val left = get31TileNumberX(max(MIN_LONGITUDE, westLon))
+		val bottom = get31TileNumberY(max(MIN_LATITUDE, southLat))
+		val right = get31TileNumberX(min(MAX_LONGITUDE, eastLon))
+		return intArrayOf(left, top, right, bottom)
+	}
 
 	private fun compactBits(value: Long): Long {
 		var v = value and 0x5555555555555555L
