@@ -24,6 +24,8 @@ public class HashSkipTileQuadTree<T> {
 	ZoomBucket[] zoomBuckets;
 	List<TileEntry<T>> tileEntries = new ArrayList<>();
 	TLongObjectHashMap<List<TileEntry<T>>> modified = null; 
+	// the ids of modified in the order they were added, which a hash map does not keep
+	TLongArrayList modifiedOrder = new TLongArrayList();
 	
 	public HashSkipTileQuadTree() {
 		this(DEFALT_MIN_ZOOM, DEFALT_MAX_ZOOM, DEFAULT_INDEXED_ZOOMS);
@@ -355,6 +357,7 @@ public class HashSkipTileQuadTree<T> {
 				if (modified != null) {
 					if (!modified.containsKey(objId)) {
 						modified.put(objId, new ArrayList<>());
+						modifiedOrder.add(objId);
 					}
 					modified.get(objId).add(te);
 				} else {
@@ -374,9 +377,8 @@ public class HashSkipTileQuadTree<T> {
 					tileEntries.add(e);
 				}
 			}
-			Iterator<List<TileEntry<T>>> it = modified.valueCollection().iterator();
-			while (it.hasNext()) {
-				tileEntries.addAll(it.next());
+			for (int i = 0; i < modifiedOrder.size(); i++) {
+				tileEntries.addAll(modified.get(modifiedOrder.get(i)));
 			}
 			this.tileEntries = tileEntries;
 		}
@@ -424,6 +426,7 @@ public class HashSkipTileQuadTree<T> {
 			tileEntries.get(lastTileIdFirstInd).skipNextTileId = index;
 		}
 		modified = new TLongObjectHashMap<>();
+		modifiedOrder.clear();
 		return tileEntries.size();
 	}
 

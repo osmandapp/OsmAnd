@@ -1,6 +1,7 @@
 package net.osmand.binary;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -409,12 +410,15 @@ public class NameIndexReader {
 		return this;
 	}
 	
+	/** The blocks a query matched, in the order of the file as {@link BinaryMapIndexReader#readFullNameIndex} gives them. */
 	public List<PrefixNameValue> getMatchedPrefixes(String query) {
 		if (!matchedKeys.containsKey(query)) {
 			return null;
 		}
 		List<PrefixNameValue> r = new ArrayList<>();
-		for (long l : matchedKeys.get(query).toArray()) {
+		long[] shifts = matchedKeys.get(query).toArray();
+		Arrays.sort(shifts);
+		for (long l : shifts) {
 			PrefixNameValue pv = indexByRef.get(l);
 			r.add(pv);
 		}

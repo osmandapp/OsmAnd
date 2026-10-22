@@ -1066,7 +1066,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 		}
 		// 4. New intersection check the limits
-		HashMap<Long, NameIndexAtom> atomObjs = new HashMap<>(4);
+		// in the order the atoms come: the checks of a category look at the first of them
+		Map<Long, NameIndexAtom> atomObjs = new LinkedHashMap<>(4);
 		// we check that poi category is complete in the end 
 		boolean poiCategoryOnMatchingWord = false;
 		boolean poiCategoryOnNumber = false;

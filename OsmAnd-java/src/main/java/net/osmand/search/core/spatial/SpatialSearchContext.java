@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -504,13 +505,18 @@ public class SpatialSearchContext {
 
 	private Map<TIntArrayList, List<AtomByTokens>> groupAtomsByTokens(List<SpatialSearchToken> tokens, Predicate<NameIndexAtom> filter) {
 		TLongObjectHashMap<AtomByTokens> boundaries = new TLongObjectHashMap<>();
+		// in the order the words found them: of two boundaries with as many other words that contain each other,
+		// the one met first is deleted
+		List<AtomByTokens> ordered = new ArrayList<>();
 		// 1. index boundaries by tokens 
 		for (int tokenOrder = 0; tokenOrder < tokens.size(); tokenOrder++) {
 			SpatialSearchToken token = tokens.get(tokenOrder);
 			for (NameIndexAtom a : token.atoms) {
 				if (filter.test(a)) {
 					if (!boundaries.containsKey(a.id)) {
-						boundaries.put(a.id, new AtomByTokens(a, new TIntArrayList(5)));
+						AtomByTokens b = new AtomByTokens(a, new TIntArrayList(5));
+						boundaries.put(a.id, b);
+						ordered.add(b);
 					}
 					boundaries.get(a.id).lstTokens.add(tokenOrder);
 				}
@@ -518,8 +524,8 @@ public class SpatialSearchContext {
 		}
 //		System.out.println("Boundaries " + boundaries.size());
 		// 2. combine boundaries by same tokens to find the largest boundary
-		Map<TIntArrayList, List<AtomByTokens>> regroup = new HashMap<>();
-		for(AtomByTokens b : boundaries.valueCollection()) {
+		Map<TIntArrayList, List<AtomByTokens>> regroup = new LinkedHashMap<>();
+		for(AtomByTokens b : ordered) {
 			List<AtomByTokens> list = regroup.get(b.lstTokens);
 			if (list == null) {
 				list = new ArrayList<>();

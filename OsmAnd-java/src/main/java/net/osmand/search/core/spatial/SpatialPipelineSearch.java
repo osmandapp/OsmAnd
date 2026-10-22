@@ -46,6 +46,8 @@ public class SpatialPipelineSearch {
 		final PipelineMetrics metrics = new PipelineMetrics();
 
 		final TLongObjectHashMap<SpatialPipelineObjectRes> objectsById = new TLongObjectHashMap<>();
+		// the objects in the order the words found them
+		final List<SpatialPipelineObjectRes> objects = new ArrayList<>();
 		List<SpatialObjectsBucket> initBuckets;
 
 		List<SpatialObjectsBucket> allBuckets = new ArrayList<>();
@@ -125,7 +127,7 @@ public class SpatialPipelineSearch {
 			if (resTree == null && resObjectsByMasks != null && !resObjectsByMasks.isEmpty()) {
 				ctx.metrics.treeBuild.start();
 				resTree = new HashSkipTileQuadTree<>();
-				long[] masks = resObjectsByMasks.keys();
+				long[] masks = sortedKeys(resObjectsByMasks);
 				for (int i = 0; i < masks.length; i++) {
 					List<SpatialPipelineObjectRes> list = resObjectsByMasks.get(masks[i]);
 					if (list != null) {
@@ -311,7 +313,7 @@ public class SpatialPipelineSearch {
 		if (b == null || b.resObjectsByMasks == null || b.resObjectsByMasks.isEmpty()) {
 			return;
 		}
-		long[] masks = b.resObjectsByMasks.keys();
+		long[] masks = sortedKeys(b.resObjectsByMasks);
 		for (int i = 0; i < masks.length; i++) {
 			long mask = masks[i];
 			if (SpatialPipelineObjectRes.countCoveredTokens(mask) == targetTokens) {
@@ -401,7 +403,7 @@ public class SpatialPipelineSearch {
 		}
 		SpatialObjectsBucket fullCoveredBucket = new SpatialObjectsBucket(toSplit);
 		SpatialObjectsBucket combinedRareBucket = new SpatialObjectsBucket(toSplit);
-		long[] masks = pMasks.map.keys();
+		long[] masks = sortedKeys(pMasks.map);
 		for (int i = 0; i < masks.length; i++) {
 			long mask = masks[i];
 			boolean isFullCovered = (SpatialPipelineObjectRes.countCoveredTokens(mask) == totalTokens);
@@ -568,13 +570,14 @@ public class SpatialPipelineSearch {
 				} else {
 					SpatialPipelineObjectRes obj = new SpatialPipelineObjectRes(totalTokens, atom, tokenIdx, noPoiType);
 					ctx.objectsById.put(atom.id, obj);
+					ctx.objects.add(obj);
 				}
 			}
 		}
 
 		// create initial bucket & split it
 		SpatialObjectsBucket mainBucket = new SpatialObjectsBucket(0);
-		for (SpatialPipelineObjectRes obj : ctx.objectsById.valueCollection()) {
+		for (SpatialPipelineObjectRes obj : ctx.objects) {
 			long mask = obj.mainMask;
 			mainBucket.potentialMasks.add(mask, obj);
 			obj.alignOtherVariants();
@@ -782,6 +785,13 @@ public class SpatialPipelineSearch {
 		return true;
 	}
 
+	// where the order of the masks makes the results: the order of their values, not of their hashes
+	private static long[] sortedKeys(TLongObjectHashMap<?> map) {
+		long[] keys = map.keys();
+		Arrays.sort(keys);
+		return keys;
+	}
+
 	private SpatialSearchResultsList createResultList(List<SpatialSearchToken> tokens,
 			List<SpatialPipelineObjectRes> r) {
 		SpatialSearchResultsList singleResults = new SpatialSearchResultsList(ctx.searchContext, tokens);
@@ -954,12 +964,9 @@ public class SpatialPipelineSearch {
 				}
 				groupByTokens.get(mask).add(r);
 			}
-			TLongObjectIterator<List<SpatialPipelineObjectRes>> it = groupByTokens.iterator();
 			boolean ex = false;
-			while (it.hasNext()) {
-				it.advance();
-				long mask = it.key();
-				List<SpatialPipelineObjectRes> res = it.value();
+			for (long mask : sortedKeys(groupByTokens)) {
+				List<SpatialPipelineObjectRes> res = groupByTokens.get(mask);
 				List<SpatialSearchToken> lst = new ArrayList<>();
 				for (int i = 0; i < tokensSize; i++) {
 					if (SpatialPipelineObjectRes.getTokenState(mask, i) != 0) {
