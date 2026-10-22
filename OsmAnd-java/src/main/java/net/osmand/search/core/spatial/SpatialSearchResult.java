@@ -226,6 +226,33 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return null;
 	}
 
+	// the category name the query words matched when they don't match the shown one: "schu" -> Schule (Школа)
+	public String getPoiCategoryMatchedName(SpatialPoiSearch poiSearch, String shownName) {
+		SpatialPoiType category = getPoiCategory(poiSearch);
+		List<SpatialSearchToken> tokens = objs.isEmpty() ? null : objs.get(0).tokens;
+		if (category == null || Algorithms.isEmpty(tokens) || tokensMatch(tokens, shownName)) {
+			return null;
+		}
+		for (String name : new ArrayList<>(category.names)) {
+			if (tokensMatch(tokens, name)) {
+				return name;
+			}
+		}
+		return null;
+	}
+
+	private static boolean tokensMatch(List<SpatialSearchToken> tokens, String name) {
+		if (Algorithms.isEmpty(name)) {
+			return false;
+		}
+		for (SpatialSearchToken t : tokens) {
+			if (!t.getMainCollator().matches(name)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public String getExtraNameMatch() {
 		return extraNameMatch;
 	}
