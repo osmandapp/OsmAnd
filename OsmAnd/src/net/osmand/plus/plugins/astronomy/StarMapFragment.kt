@@ -766,13 +766,18 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		systemLeftInset = maxOf(sysBars?.left ?: 0, cutout.left)
 		systemRightInset = maxOf(sysBars?.right ?: 0, cutout.right)
 
+		updateMapControlsContainerMargins()
+		updateEclipseModeOffsets()
+	}
+
+	private fun updateMapControlsContainerMargins() {
 		mapControlsContainer.updateLayoutParams<ViewGroup.MarginLayoutParams> {
 			rightMargin = systemRightInset
 			leftMargin = systemLeftInset
 			topMargin = systemTopInset
-			bottomMargin = systemBottomInset
+			// The regular map covers the bottom of the screen, including the navigation bar
+			bottomMargin = if (regularMapVisible) 0 else systemBottomInset
 		}
-		updateEclipseModeOffsets()
 	}
 
 	private fun updateEclipseModeOffsets() {
@@ -1073,6 +1078,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				)
 			}
 		}
+		updateMapControlsContainerMargins()
 		updateEclipseModeOffsets()
 		if (isEclipseModeActive() && ::eclipseCard.isInitialized) {
 			eclipseCard.post { centerEclipseTargetAtSelectedTime() }
