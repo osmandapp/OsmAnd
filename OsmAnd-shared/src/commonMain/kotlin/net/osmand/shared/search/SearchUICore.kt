@@ -24,6 +24,7 @@ import net.osmand.shared.search.core.SearchPhrase
 import net.osmand.shared.search.core.SearchResult
 import net.osmand.shared.search.core.SearchSettings
 import net.osmand.shared.search.core.matchesName
+import net.osmand.shared.util.JavaFormat
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KCollator
 import net.osmand.shared.util.KMapUtils
@@ -1194,61 +1195,8 @@ class SearchUICore(
 					subType = " ($subtype)"
 				}
 			}
-			return "$r [[${r.getFoundWordCount()}, ${r.objectType!!}$subType, ${fixed(r.getUnknownPhraseMatchWeight(), 3)}, " +
-					"${fixed(dist / 1000, 2)} km]]"
-		}
-
-		/** `%.nf` of java's `Formatter`: the digits of the double as java writes it, rounded half up. */
-		private fun fixed(value: Double, digits: Int): String {
-			if (value.isNaN()) {
-				return "NaN"
-			}
-			if (value.isInfinite()) {
-				return if (value > 0) "Infinity" else "-Infinity"
-			}
-			val negative = value < 0 || (value == 0.0 && 1 / value < 0)
-			val text = kotlin.math.abs(value).toString()
-			val e = text.indexOfFirst { it == 'E' || it == 'e' }
-			val mantissa = if (e >= 0) text.substring(0, e) else text
-			val dot = mantissa.indexOf('.')
-			val all = if (dot >= 0) mantissa.substring(0, dot) + mantissa.substring(dot + 1) else mantissa
-			val point = (if (dot >= 0) dot else mantissa.length) + (if (e >= 0) text.substring(e + 1).toInt() else 0)
-			// the digits of the integer part and the fraction that stay, at least one before the point
-			val kept = IntArray(maxOf(point, 1) + digits)
-			val shift = kept.size - digits - point
-			for (i in all.indices) {
-				val at = i + shift
-				if (at in kept.indices) {
-					kept[at] = all[i] - '0'
-				}
-			}
-			val next = point + digits
-			if (next in all.indices && next >= 0 && all[next] >= '5') {
-				var i = kept.size - 1
-				while (i >= 0) {
-					if (kept[i] < 9) {
-						kept[i]++
-						break
-					}
-					kept[i] = 0
-					i--
-				}
-				if (i < 0) {
-					return (if (negative) "-1" else "1") + format(kept, digits)
-				}
-			}
-			return (if (negative) "-" else "") + format(kept, digits)
-		}
-
-		private fun format(kept: IntArray, digits: Int): String {
-			val sb = StringBuilder()
-			for (i in kept.indices) {
-				if (i == kept.size - digits) {
-					sb.append('.')
-				}
-				sb.append(kept[i])
-			}
-			return sb.toString()
+			return "$r [[${r.getFoundWordCount()}, ${r.objectType!!}$subType, " +
+					"${JavaFormat.fixed(r.getUnknownPhraseMatchWeight(), 3)}, ${JavaFormat.fixed(dist / 1000, 2)} km]]"
 		}
 
 		@JvmStatic
