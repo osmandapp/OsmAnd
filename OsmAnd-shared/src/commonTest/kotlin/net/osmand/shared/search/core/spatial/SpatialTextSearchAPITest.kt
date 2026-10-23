@@ -9,6 +9,7 @@ import net.osmand.shared.map.OsmandRegions
 import net.osmand.shared.osm.AbstractPoiType
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testEnvironment
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.SearchUICore
@@ -143,11 +144,11 @@ class SpatialTextSearchAPITest {
 						val text = dumpUnhex(f[1])
 						// the settings of SpatialTextSearchTest the api searches with: by default for a complete word
 						variant = if (text.endsWith(" ")) 0 else 5
-						copyLines.addAll(query(text, f[2]))
+						copyLines.addAll(testAppCall { query(text, f[2]) })
 					}
 					"K" -> {
 						variant = -1
-						copyLines.addAll(select(dumpUnhex(f[1]), dumpUnhex(f[2]), dumpUnhex(f[3]), f[4].toInt()))
+						copyLines.addAll(testAppCall { select(dumpUnhex(f[1]), dumpUnhex(f[2]), dumpUnhex(f[3]), f[4].toInt()) })
 					}
 				}
 			}

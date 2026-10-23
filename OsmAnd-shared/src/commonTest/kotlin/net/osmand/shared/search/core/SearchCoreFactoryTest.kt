@@ -14,6 +14,7 @@ import net.osmand.shared.osm.AbstractPoiType
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.osm.PoiTranslator
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.SearchUICore.SearchResultMatcher
 import net.osmand.shared.search.core.SearchCoreFactory.PoiAdditionalCustomFilter
@@ -112,7 +113,7 @@ class SearchCoreFactoryTest {
 								break
 							}
 						}
-						run!!.phrase(line, answers, stats)
+						testAppCall { run!!.phrase(line, answers, stats) }
 					}
 					'D' -> {
 						val f = line.substring(2).split("\t")

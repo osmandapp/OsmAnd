@@ -9,3 +9,5 @@ actual fun testHeapAfterGc(): Long {
 	System.gc()
 	return runtime.totalMemory() - runtime.freeMemory()
 }
+
+actual fun <T> testAppCall(block: () -> T): T = block()

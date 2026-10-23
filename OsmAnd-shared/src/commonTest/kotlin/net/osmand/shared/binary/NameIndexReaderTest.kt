@@ -1,6 +1,7 @@
 package net.osmand.shared.binary
 
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.search.AmenitySearcherTest
 import net.osmand.shared.util.KSearchAlgorithms
 import net.osmand.shared.util.dumpFnv
@@ -45,90 +46,92 @@ class NameIndexReaderTest {
 				val line = source.readUtf8Line() ?: break
 				val f = line.split("\t")
 				val kind = f[0][0]
-				val copy: String = when (kind) {
-					'X' -> {
-						val w = dumpUnhex(f[1])
-						"X\t${f[1]}\t${NameIndexReader.altNameVariant(w)}\t${NameIndexReader.isIndexMarker(w)}"
-					}
-					'F' -> {
-						reader?.close()
-						reader = BinaryMapIndexReader(AmenitySearcherTest.path(dumpUnhex(f[1])))
-						line
-					}
-					'I' -> {
-						index = f[1].toInt()
-						whole = nameIndexReader(reader!!, index).setCacheRawBlocks(f[2] == "1")
-						queries = null
-						line
-					}
-					'A' -> {
-						val j = whole!!
-						"A\t" + outcome { reader!!.readFullNameIndex(j) } + "\t" + bytes(j)
-					}
-					'C' -> {
-						val j = whole!!
-						val res = "C\t" + dumpFnv(commonWords(j))
-						all = reader!!.readFullNameIndex(j.setQuery("all", everyKey()))
-						blocks = sorted(all)
-						block = 0
-						res
-					}
-					'B' -> {
-						val p = blocks.getOrNull(block++)
-						if (p == null) "B no block" else "B\t" + dumpHex(p.key!!) + "\t" + p.shift + "\t" + dumpFnv(describe(p))
-					}
-					'L' -> {
-						val j = whole!!
-						val res = "L\t" + shifts(all) + "\t" + shifts(j.getMatchedPrefixes("all")) + "\t" + bytes(j)
-						if (block != blocks.size) "$res and ${blocks.size - block} blocks more" else res
-					}
-					'Q' -> {
-						val q = queries ?: nameIndexReader(reader!!, index).setCacheRawBlocks(true).also { queries = it }
-						val query = dumpUnhex(f[1])
-						if (f[2] == "1") {
-							q.resetBytesStat()
+				val copy: String = testAppCall {
+					when (kind) {
+						'X' -> {
+							val w = dumpUnhex(f[1])
+							"X\t${f[1]}\t${NameIndexReader.altNameVariant(w)}\t${NameIndexReader.isIndexMarker(w)}"
 						}
-						val res = reader!!.readFullNameIndex(q.setQuery(query))
-						"Q\t" + f[1] + "\t" + f[2] + "\t" + shifts(res) + "\t" + shifts(q.getMatchedPrefixes(query)) + "\t" + bytes(q)
-					}
-					'G' -> {
-						val q = queries!!
-						when (f[1]) {
-							"clear" -> q.clearPrefixes()
-							"gc" -> q.gcPrefixes(20)
+						'F' -> {
+							reader?.close()
+							reader = BinaryMapIndexReader(AmenitySearcherTest.path(dumpUnhex(f[1])))
+							line
 						}
-						"G\t" + f[1] + "\t" + bytes(q)
-					}
-					'R' -> {
-						val q = queries!!
-						q.clearQuery()
-						val res = "R\t" + outcome { reader!!.readFullNameIndex(q) }
-						reader!!.resetReadLimits()
-						q.clearPrefixes()
-						res
-					}
-					'K' -> {
-						keys = f.drop(1).map { dumpUnhex(it) }
-						val own = sample(blocks.map { it.key!! }, MATCHER_KEYS)
-						if (own == keys) line else "K the copy samples other keys: $own"
-					}
-					'M' -> {
-						val matcher = NameIndexReader.NameIndexReaderMatcher(dumpUnhex(f[1]))
-						val bits = StringBuilder()
-						for (key in keys) {
-							bits.append(if (matcher.matchKey(key)) '1' else '0')
+						'I' -> {
+							index = f[1].toInt()
+							whole = nameIndexReader(reader!!, index).setCacheRawBlocks(f[2] == "1")
+							queries = null
+							line
 						}
-						"M\t" + f[1] + "\t" + bits
-					}
-					'W' -> {
-						val words = names(blocks, whole!!)
-						val answers = StringBuilder()
-						for (w in words) {
-							answers.append(NameIndexReader.altNameVariant(w)).append(if (NameIndexReader.isIndexMarker(w)) "m" else "").append(';')
+						'A' -> {
+							val j = whole!!
+							"A\t" + outcome { reader!!.readFullNameIndex(j) } + "\t" + bytes(j)
 						}
-						"W\t" + words.size + "\t" + dumpFnv(answers.toString())
+						'C' -> {
+							val j = whole!!
+							val res = "C\t" + dumpFnv(commonWords(j))
+							all = reader!!.readFullNameIndex(j.setQuery("all", everyKey()))
+							blocks = sorted(all)
+							block = 0
+							res
+						}
+						'B' -> {
+							val p = blocks.getOrNull(block++)
+							if (p == null) "B no block" else "B\t" + dumpHex(p.key!!) + "\t" + p.shift + "\t" + dumpFnv(describe(p))
+						}
+						'L' -> {
+							val j = whole!!
+							val res = "L\t" + shifts(all) + "\t" + shifts(j.getMatchedPrefixes("all")) + "\t" + bytes(j)
+							if (block != blocks.size) "$res and ${blocks.size - block} blocks more" else res
+						}
+						'Q' -> {
+							val q = queries ?: nameIndexReader(reader!!, index).setCacheRawBlocks(true).also { queries = it }
+							val query = dumpUnhex(f[1])
+							if (f[2] == "1") {
+								q.resetBytesStat()
+							}
+							val res = reader!!.readFullNameIndex(q.setQuery(query))
+							"Q\t" + f[1] + "\t" + f[2] + "\t" + shifts(res) + "\t" + shifts(q.getMatchedPrefixes(query)) + "\t" + bytes(q)
+						}
+						'G' -> {
+							val q = queries!!
+							when (f[1]) {
+								"clear" -> q.clearPrefixes()
+								"gc" -> q.gcPrefixes(20)
+							}
+							"G\t" + f[1] + "\t" + bytes(q)
+						}
+						'R' -> {
+							val q = queries!!
+							q.clearQuery()
+							val res = "R\t" + outcome { reader!!.readFullNameIndex(q) }
+							reader!!.resetReadLimits()
+							q.clearPrefixes()
+							res
+						}
+						'K' -> {
+							keys = f.drop(1).map { dumpUnhex(it) }
+							val own = sample(blocks.map { it.key!! }, MATCHER_KEYS)
+							if (own == keys) line else "K the copy samples other keys: $own"
+						}
+						'M' -> {
+							val matcher = NameIndexReader.NameIndexReaderMatcher(dumpUnhex(f[1]))
+							val bits = StringBuilder()
+							for (key in keys) {
+								bits.append(if (matcher.matchKey(key)) '1' else '0')
+							}
+							"M\t" + f[1] + "\t" + bits
+						}
+						'W' -> {
+							val words = names(blocks, whole!!)
+							val answers = StringBuilder()
+							for (w in words) {
+								answers.append(NameIndexReader.altNameVariant(w)).append(if (NameIndexReader.isIndexMarker(w)) "m" else "").append(';')
+							}
+							"W\t" + words.size + "\t" + dumpFnv(answers.toString())
+						}
+						else -> line
 					}
-					else -> line
 				}
 				compared[kind] = (compared[kind] ?: 0) + 1
 				if (copy != line && different.size < 20) {
