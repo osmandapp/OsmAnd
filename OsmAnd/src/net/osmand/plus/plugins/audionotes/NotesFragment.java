@@ -37,6 +37,7 @@ import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
 import net.osmand.plus.gallery.data.Cancellable;
 import net.osmand.plus.gallery.data.GalleryMediaMetadata;
 import net.osmand.plus.gallery.data.MediaMetadataListener;
+import net.osmand.plus.gallery.data.MediaMetadataRepository;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
@@ -417,9 +418,16 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 	}
 
 	private List<MediaNote> sortNotesByDateDescending(List<MediaNote> notes) {
+		// the time of a recording is its file's modification time: read it once per note instead of
+		// twice per comparison, which with thousands of notes kept the UI thread busy for seconds
+		MediaMetadataRepository repository = app.getGalleryHelper().getMetadataRepository();
+		Map<MediaNote, Long> displayTimes = new IdentityHashMap<>();
+		for (MediaNote note : notes) {
+			displayTimes.put(note, note.getDisplayTime(repository));
+		}
 		Collections.sort(notes, (first, second) -> {
-			long firstTime = first.getDisplayTime(app.getGalleryHelper().getMetadataRepository());
-			long secondTime = second.getDisplayTime(app.getGalleryHelper().getMetadataRepository());
+			long firstTime = displayTimes.get(first);
+			long secondTime = displayTimes.get(second);
 			if (firstTime < secondTime) {
 				return 1;
 			} else if (firstTime == secondTime) {
