@@ -21,6 +21,8 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -45,6 +47,14 @@ public class GpxApproximator {
 	private Runnable approximationTask;
 
 	private static final ThreadPoolExecutor SINGLE_THREAD_EXECUTOR = new ThreadPoolExecutor(1, 1, 0L, MILLISECONDS, new LinkedBlockingQueue<>());
+
+	/**
+	 * Runs a synchronous approximation on the thread of the asynchronous ones and waits for it, so that it never
+	 * runs at the same time as another approximation. Must not be called from that thread.
+	 */
+	public static <T> T runOnApproximationThread(@NonNull Callable<T> task) throws ExecutionException, InterruptedException {
+		return SINGLE_THREAD_EXECUTOR.submit(task).get();
+	}
 
 	public GpxApproximator(@NonNull OsmandApplication ctx, @NonNull LocationsHolder locationsHolder) throws IOException {
 		this.ctx = ctx;

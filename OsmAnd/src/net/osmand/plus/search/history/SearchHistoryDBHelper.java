@@ -224,6 +224,7 @@ class SearchHistoryDBHelper {
 		if (db != null) {
 			try {
 				insert(entry, db);
+				updateLastModifiedTime();
 			} finally {
 				db.close();
 			}
@@ -248,7 +249,6 @@ class SearchHistoryDBHelper {
 						getObjectTypeName(entry), getCityTypeName(entry), entry.getDisplayName(), entry.getPoiCategoryKey(),
 						entry.getPoiSubtypeKey(), entry.getTypeName(), entry.getAddress(), entry.getRelatedObjectName(),
 						entry.getOpeningHours(), entry.getAlternateName(), entry.getPhotoUrl(), entry.getOsmId()});
-		updateLastModifiedTime();
 	}
 
 	@NonNull
