@@ -4,23 +4,36 @@
     android:height="32dp"
     android:viewportWidth="32"
     android:viewportHeight="32">
-  <path android:pathData="M1.76,0H30.24A1.76,1.76 0 0 1 32,1.76V30.24A1.76,1.76 0 0 1 30.24,32H1.76A1.76,1.76 0 0 1 0,30.24V1.76A1.76,1.76 0 0 1 1.76,0Z">
+  <path android:pathData="M16,16m-16,0a16,16 0,1 1,32 0a16,16 0,1 1,-32 0">
     <aapt:attr name="android:fillColor">
       <gradient
           android:type="linear"
-          android:startX="44.015"
-          android:startY="27.602"
-          android:endX="22.705"
-          android:endY="-9.309">
+          android:startX="28.800"
+          android:startY="30.400"
+          android:endX="4.800"
+          android:endY="1.600">
         <item android:offset="0" android:color="#8F2A85"/>
         <item android:offset="1" android:color="#2570B6"/>
       </gradient>
     </aapt:attr>
   </path>
+  <path
+      android:pathData="M4.064,9.120H3.200V22.880H4.064"
+      android:strokeColor="#ffffff"
+      android:strokeWidth="0.288"
+      android:strokeLineCap="round"
+      android:strokeLineJoin="round"/>
+  <path
+      android:pathData="M27.936,9.120H28.800V22.880H27.936"
+      android:strokeColor="#ffffff"
+      android:strokeWidth="0.288"
+      android:strokeLineCap="round"
+      android:strokeLineJoin="round"/>
   <group
-      android:scaleX="0.030507"
-      android:scaleY="0.030507"
-      android:translateY="2.5067">
+      android:scaleX="0.024670"
+      android:scaleY="0.024670"
+      android:translateX="3.0731"
+      android:translateY="5.0960">
     <path
         android:pathData="m 237.26632,380.61176 c -0.66327,0 -1.32653,0 -1.9898,0 L 198.7968,369.99948 c -2.65307,-0.66327 -4.64287,-3.31634 -4.64287,-6.63268 V 314.285 c 0,-1.9898 1.32653,-3.97961 2.65307,-5.30614 1.9898,-1.32654 3.9796,-1.32654 5.96941,-0.66327 l 36.47972,13.26535 c 2.65307,0.66327 4.64287,3.31634 4.64287,5.96941 v 46.42873 c 0,1.98981 -0.66327,3.97961 -2.65307,5.30614 -1.32654,0.66327 -2.65307,1.32654 -3.97961,1.32654 z m -29.84704,-22.5511 23.21437,6.63268 v -33.16338 l -23.21437,-8.62248 z"
         android:fillColor="#ffffff"/>
