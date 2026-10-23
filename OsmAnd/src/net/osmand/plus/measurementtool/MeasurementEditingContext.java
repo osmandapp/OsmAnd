@@ -1200,6 +1200,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				}
 				roadSegmentData.put(pair, createStraightSegmentData(appMode, pair, pts));
 				added++;
+			} else {
+				break; // the router takes this pair, the following ones are added after its result, as before
 			}
 		}
 		return added;
