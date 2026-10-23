@@ -2,6 +2,7 @@ package net.osmand.plus.auto.screens;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.car.app.CarContext;
 import androidx.car.app.model.Action;
@@ -21,6 +22,12 @@ public class RequestPurchaseScreen extends BaseAndroidAutoScreen {
 
 	public RequestPurchaseScreen(@NonNull CarContext carContext) {
 		super(carContext);
+		// Back must not reveal the screens below without the purchase
+		carContext.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+			}
+		});
 	}
 
 	@NonNull

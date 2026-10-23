@@ -3,6 +3,7 @@ package net.osmand.plus.auto.screens;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
@@ -44,6 +45,12 @@ public class RequestPermissionScreen extends BaseAndroidAutoScreen {
 	                               @Nullable LocationPermissionCheckCallback callback) {
 		super(carContext);
 		mLocationPermissionCheckCallback = callback;
+		// Back must not reveal the screens below without the permission
+		carContext.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+			}
+		});
 	}
 
 	@NonNull
