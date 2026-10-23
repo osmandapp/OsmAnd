@@ -12,13 +12,16 @@ import net.osmand.util.Algorithms;
 public class StreetNameWidgetState extends WidgetState {
 
 	private static final String SHOW_NEXT_TURN_PREF_ID = "show_next_turn_info";
+	private static final String PRIORITIZE_DESTINATION_PREF_ID = "prioritize_destination";
 
 	private final CommonPreference<Boolean> showNextTurnPref;
+	private final CommonPreference<Boolean> prioritizeDestinationPref;
 	private final WidgetType widgetType = WidgetType.STREET_NAME;
 
 	public StreetNameWidgetState(@NonNull OsmandApplication app, @Nullable String customId) {
 		super(app);
 		showNextTurnPref = registerShowNextTurnPreference(customId);
+		prioritizeDestinationPref = registerPrioritizeDestinationPreference(customId);
 	}
 
 	public boolean isShowNextTurnEnabled(@NonNull ApplicationMode appMode) {
@@ -27,6 +30,14 @@ public class StreetNameWidgetState extends WidgetState {
 
 	public void setShowNextTurnEnabled(@NonNull ApplicationMode appMode, boolean value) {
 		showNextTurnPref.setModeValue(appMode, value);
+	}
+
+	public boolean isPrioritizeDestinationEnabled(@NonNull ApplicationMode appMode) {
+		return prioritizeDestinationPref.getModeValue(appMode);
+	}
+
+	public void setPrioritizeDestinationEnabled(@NonNull ApplicationMode appMode, boolean value) {
+		prioritizeDestinationPref.setModeValue(appMode, value);
 	}
 
 	@NonNull
@@ -53,11 +64,21 @@ public class StreetNameWidgetState extends WidgetState {
 	public void copyPrefsFromMode(@NonNull ApplicationMode sourceAppMode,
 	                              @NonNull ApplicationMode appMode, @Nullable String customId) {
 		registerShowNextTurnPreference(customId).setModeValue(appMode, showNextTurnPref.getModeValue(sourceAppMode));
+		registerPrioritizeDestinationPreference(customId).setModeValue(appMode, prioritizeDestinationPref.getModeValue(sourceAppMode));
 	}
 
 	@NonNull
 	private CommonPreference<Boolean> registerShowNextTurnPreference(@Nullable String customId) {
 		String prefId = SHOW_NEXT_TURN_PREF_ID;
+		if (!Algorithms.isEmpty(customId)) {
+			prefId += "_" + customId;
+		}
+		return settings.registerBooleanPreference(prefId, false).makeProfile().cache();
+	}
+
+	@NonNull
+	private CommonPreference<Boolean> registerPrioritizeDestinationPreference(@Nullable String customId) {
+		String prefId = PRIORITIZE_DESTINATION_PREF_ID;
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += "_" + customId;
 		}
