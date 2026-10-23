@@ -7,6 +7,7 @@ import net.osmand.shared.binary.BinaryMapIndexReader
 import net.osmand.shared.binary.ResultMatcher
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testEnvironment
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.SearchUICore.SearchResultCollection
@@ -114,21 +115,24 @@ class SearchUICoreBenchmarkTest {
 						}
 						var mark = TimeSource.Monotonic.markNow()
 						val matcher = SearchResultMatcher(recorder, phrase, 0, AtomicInt(0), -1)
-						core.searchInternal(phrase, matcher)
+						testAppCall { core.searchInternal(phrase, matcher) }
 						nanos[0] += mark.elapsedNow().inWholeNanoseconds
 						found[0] += matcher.getCount().toLong()
 
 						val all = SearchUICoreTest.copies(matcher.getRequestResults())
 						val apis = byApi.map { SearchUICoreTest.copies(it) }
 						mark = TimeSource.Monotonic.markNow()
-						val kept = SearchResultCollection(phrase).addSearchResults(all, true, true)
+						val kept = testAppCall { SearchResultCollection(phrase).addSearchResults(all, true, true) }
 						nanos[1] += mark.elapsedNow().inWholeNanoseconds
 						found[1] += kept.getCurrentSearchResults().size.toLong()
 
 						mark = TimeSource.Monotonic.markNow()
-						var merged = SearchResultCollection(phrase)
-						for (api in apis) {
-							merged = merged.combineWithCollection(SearchResultCollection(phrase).addSearchResults(api, true, true), true, true)
+						val merged = testAppCall {
+							var combined = SearchResultCollection(phrase)
+							for (api in apis) {
+								combined = combined.combineWithCollection(SearchResultCollection(phrase).addSearchResults(api, true, true), true, true)
+							}
+							combined
 						}
 						nanos[2] += mark.elapsedNow().inWholeNanoseconds
 						found[2] += merged.getCurrentSearchResults().size.toLong()

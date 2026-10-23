@@ -5,6 +5,7 @@ import net.osmand.shared.data.KLatLon
 import net.osmand.shared.map.OsmandRegions
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testEnvironment
 import net.osmand.shared.routing.testHeapAfterGc
 import net.osmand.shared.routing.testPlatformName
@@ -91,7 +92,7 @@ class SpatialTextSearchAPIBenchmarkTest {
 					for (text in run.texts) {
 						val kind = if (text.endsWith(" ")) 0 else 1
 						val start = TimeSource.Monotonic.markNow()
-						core.immediateSearch(text, run.center)
+						testAppCall { core.immediateSearch(text, run.center) }
 						ms[kind] += start.elapsedNow().inWholeMicroseconds / 1000.0
 						if (round == 0) {
 							queries[kind]++
