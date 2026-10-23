@@ -1,10 +1,5 @@
 package net.osmand.plus.helpers;
 
-import android.content.Context;
-import android.hardware.display.DisplayManager;
-import android.os.Build;
-import android.view.Display;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -82,7 +77,7 @@ public class ToastHelper {
 		return new ToastDisplayHandler() {
 			@Override
 			public void showSimpleToast(@NonNull String text, boolean isLong) {
-				Toast.makeText(getVisualContext(app), text, isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
+				Toast.makeText(app, text, isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
@@ -113,21 +108,6 @@ public class ToastHelper {
 					LOG.error("Malformed format string for resource " + textId, e);
 					return app.getString(textId);
 				}
-			}
-
-			@NonNull
-			private static Context getVisualContext(@NonNull Context context) {
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-					DisplayManager displayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
-					if (displayManager != null) {
-						Display defaultDisplay = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
-						if (defaultDisplay != null) {
-							return context.createDisplayContext(defaultDisplay)
-									.createWindowContext(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY, null);
-						}
-					}
-				}
-				return context;
 			}
 		};
 	}
