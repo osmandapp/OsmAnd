@@ -59,7 +59,7 @@ class SpatialTextSearch(searchRulesDir: String) {
 		var TYPO_SUGGESTION = true
 
 		// lang to deduplicate results
-		var LANG_DEDUPLICATE = ""
+		var LANG_DEDUPLICATE: String? = ""
 
 		var SEARCH_ADDR = true
 		var SEARCH_POI = true
