@@ -62,6 +62,10 @@ public class RoutingConfiguration {
 	// 1.5 Recalculate distance help
 	public float recalculateDistance = 20000f;
 
+	// 1.5.1 Ferry crossing, see FerryRoutingHelper
+	public int ferryBoardingTime;
+	public int ferryTerminalTime;
+
 	// 1.6 Time to calculate all access restrictions based on conditions
 	public long routeCalculationTime = 0;
 
@@ -238,6 +242,8 @@ public class RoutingConfiguration {
 				i.nativeMemoryLimitation = memoryLimits.nativeMemoryLimitMb * (1l << 20);
 			}
 			i.planRoadDirection = parseSilentInt(getAttribute(i.router, "planRoadDirection"), i.planRoadDirection);
+			i.ferryBoardingTime = parseSilentInt(getAttribute(i.router, FerryRoutingHelper.BOARDING_TIME_ATTRIBUTE), 0);
+			i.ferryTerminalTime = parseSilentInt(getAttribute(i.router, FerryRoutingHelper.TERMINAL_TIME_ATTRIBUTE), 0);
 			if (directionPointsBuilder != null) {
 				QuadRect rect = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 				List<net.osmand.osm.edit.Node> lst = directionPointsBuilder.queryInBox(rect, new ArrayList<Node>());
@@ -275,7 +281,8 @@ public class RoutingConfiguration {
 			return attributes;
 		}
 
-		private String getAttribute(VehicleRouter router, String propertyName) {
+		// profile attribute or the global one
+		public String getAttribute(VehicleRouter router, String propertyName) {
 			if (router.containsAttribute(propertyName)) {
 				return router.getAttribute(propertyName);
 			}

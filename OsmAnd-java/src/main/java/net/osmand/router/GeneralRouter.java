@@ -548,25 +548,30 @@ public class GeneralRouter implements VehicleRouter {
 		if (definedSpd == null) {
 			// not implemented direction usage
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
- 			definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
+			definedSpd = limitSpeed(road, spd, maxSpeed);
 			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, definedSpd, dir);
 		}
 		return definedSpd;
 	}
 	
+	// ferry moves with its own speed, whatever vehicle is on board
+	private float limitSpeed(RouteDataObject road, float speed, float max) {
+		return FerryRoutingHelper.isFerry(road) ? speed : Math.max(Math.min(speed, max), minSpeed);
+	}
+
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road, boolean dir) {
 		// don't use cache cause max/min is different for routing speed
 		if (maxVehicleSpeed != maxSpeed) {
 			// not implemented direction usage
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
-			return Math.max(Math.min(spd, maxVehicleSpeed), minSpeed);
+			return limitSpeed(road, spd, maxVehicleSpeed);
 		}
 		Float sp = getCache(RouteDataObjectAttribute.ROAD_SPEED, road, dir);
 		if (sp == null) {
 			// not implemented direction usage
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
-			sp = Math.max(Math.min(spd, maxVehicleSpeed), minSpeed);
+			sp = limitSpeed(road, spd, maxVehicleSpeed);
 			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, sp, dir);
 		}
 		return sp;
