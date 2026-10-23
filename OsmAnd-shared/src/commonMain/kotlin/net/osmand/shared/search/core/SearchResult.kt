@@ -11,6 +11,7 @@ import net.osmand.shared.osm.PoiCategory
 import net.osmand.shared.osm.PoiFilter
 import net.osmand.shared.osm.PoiType
 import net.osmand.shared.search.core.SearchCoreFactory.PREFERRED_DEFAULT_ZOOM
+import net.osmand.shared.search.core.spatial.SpatialSearchResult
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.KSearchAlgorithms
@@ -21,8 +22,7 @@ import kotlin.math.max
  * A result of the search, and the weight by which it is sorted.
  *
  * A copy of `SearchResult` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. The fields of the spatial search, `spatialResult` and `spatialSearchVisibleLevel`, come
- * with the spatial search.
+ * for iOS.
  */
 class SearchResult {
 
@@ -40,6 +40,8 @@ class SearchResult {
 	@JvmField
 	var `object`: Any? = null
 	@JvmField
+	var spatialResult: SpatialSearchResult? = null
+	@JvmField
 	var objectType: ObjectType? = null
 	@JvmField
 	var file: BinaryMapIndexReader? = null
@@ -48,6 +50,8 @@ class SearchResult {
 	var priority = 0.0
 	@JvmField
 	var priorityDistance = 0.0
+	@JvmField
+	var spatialSearchVisibleLevel = 0
 
 	@JvmField
 	var location: KLatLon? = null

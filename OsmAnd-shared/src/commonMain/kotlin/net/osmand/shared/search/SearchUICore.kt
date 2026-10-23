@@ -11,11 +11,13 @@ import net.osmand.shared.data.BaseDetailsObject
 import net.osmand.shared.data.Building
 import net.osmand.shared.data.City
 import net.osmand.shared.data.KLatLon
+import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.data.MapObject
 import net.osmand.shared.data.Street
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.osm.AbstractPoiType
 import net.osmand.shared.osm.MapPoiTypes
+import net.osmand.shared.osm.PoiType
 import net.osmand.shared.search.core.CustomSearchPoiFilter
 import net.osmand.shared.search.core.ObjectType
 import net.osmand.shared.search.core.SearchCoreAPI
@@ -23,7 +25,9 @@ import net.osmand.shared.search.core.SearchCoreFactory
 import net.osmand.shared.search.core.SearchPhrase
 import net.osmand.shared.search.core.SearchResult
 import net.osmand.shared.search.core.SearchSettings
+import net.osmand.shared.search.core.TopIndexFilter
 import net.osmand.shared.search.core.matchesName
+import net.osmand.shared.search.core.spatial.SpatialTextSearchAPI
 import net.osmand.shared.util.JavaFormat
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KCollator
@@ -32,6 +36,7 @@ import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.collections.KTreeSet
 import okio.IOException
 import kotlin.jvm.JvmStatic
+import kotlin.math.max
 import kotlin.reflect.KClass
 
 /**
@@ -40,9 +45,9 @@ import kotlin.reflect.KClass
  * typed in, one after another, cancelled by the next one.
  *
  * A copy of `SearchUICore` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. What serves the spatial search, its apis, `init(true)` and the levels of the results
- * shown, comes with the spatial search. Left out: the statistics of time and memory java keeps
- * for a search, and the test json it makes of the objects a search exports.
+ * for iOS. `init` of the spatial search takes the directory of the search rules, which java reads
+ * from its classpath. Left out: the statistics of time and memory java keeps for a search, and the
+ * test json it makes of the objects a search exports.
  */
 class SearchUICore(
 	private var poiTypes: MapPoiTypes,
@@ -75,14 +80,25 @@ class SearchUICore(
 		currentSearchResult = SearchResultCollection(phrase)
 	}
 
-	class SearchResultCollection(private val phrase: SearchPhrase) {
+	class SearchResultCollection(
+		private val phrase: SearchPhrase,
+		private val skipSorting: Boolean,
+		private var spatialSearchVisibleLevel: Int
+	) {
 		internal val searchResults: MutableList<SearchResult> = ArrayList()
 		private var useLimit = false
 
+		constructor(phrase: SearchPhrase) : this(phrase, false)
+
+		constructor(phrase: SearchPhrase, skipSorting: Boolean) : this(phrase, skipSorting, 0)
+
 		fun combineWithCollection(collection: SearchResultCollection, resort: Boolean, removeDuplicates: Boolean): SearchResultCollection {
-			val src = SearchResultCollection(phrase)
+			val src = SearchResultCollection(
+				phrase, skipSorting || collection.skipSorting,
+				max(spatialSearchVisibleLevel, collection.spatialSearchVisibleLevel)
+			)
 			src.addSearchResults(searchResults, false, false)
-			src.addSearchResults(collection.searchResults, resort, removeDuplicates)
+			src.addSearchResults(collection.searchResults, resort && !src.skipSorting, removeDuplicates)
 			return src
 		}
 
@@ -99,7 +115,10 @@ class SearchUICore(
 			if (KAlgorithms.isEmpty(sr)) {
 				return this
 			}
-			if (resortAll) {
+			if (skipSorting) {
+				// spatial search results come sorted and deduplicated by the engine
+				searchResults.addAll(sr)
+			} else if (resortAll) {
 				searchResults.addAll(sr)
 				if (removeDuplicates) {
 					val start = currentTimeMillis()
@@ -171,6 +190,45 @@ class SearchUICore(
 		fun hasSearchResults(): Boolean = !KAlgorithms.isEmpty(searchResults)
 
 		fun getCurrentSearchResults(): List<SearchResult> = searchResults
+
+		fun getVisibleSpatialSearchResults(): List<SearchResult> {
+			if (!skipSorting) {
+				return getCurrentSearchResults()
+			}
+			val visibleResults = ArrayList<SearchResult>()
+			for (level in 0..spatialSearchVisibleLevel) {
+				for (result in searchResults) {
+					if (result.spatialSearchVisibleLevel == level) {
+						visibleResults.add(result)
+					}
+				}
+			}
+			return visibleResults
+		}
+
+		fun hasMoreSpatialSearchResults(): Boolean {
+			if (!skipSorting) {
+				return false
+			}
+			for (result in searchResults) {
+				if (result.spatialSearchVisibleLevel > spatialSearchVisibleLevel) {
+					return true
+				}
+			}
+			return false
+		}
+
+		fun showMoreSpatialSearchResults(): Boolean {
+			if (!hasMoreSpatialSearchResults()) {
+				return false
+			}
+			spatialSearchVisibleLevel++
+			return true
+		}
+
+		fun isSkipSorting(): Boolean = skipSorting
+
+		fun getSpatialSearchVisibleLevel(): Int = spatialSearchVisibleLevel
 
 		fun getPhrase(): SearchPhrase = phrase
 
@@ -477,11 +535,12 @@ class SearchUICore(
 			val rm = SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit)
 			api.search(sphrase, rm)
 
-			val collection = SearchResultCollection(sphrase)
+			val skipResultSorting = api is SpatialTextSearchAPI
+			val collection = SearchResultCollection(sphrase, skipResultSorting)
 			if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 				collection.setUseLimit(true)
 			}
-			collection.addSearchResults(rm.getRequestResults(), resortAll, removeDuplicates)
+			collection.addSearchResults(rm.getRequestResults(), resortAll && !skipResultSorting, removeDuplicates)
 			if (debugMode) {
 				LOG.info("Finish shallow search <$sphrase> Results=${rm.getRequestResults().size}")
 			}
@@ -506,19 +565,148 @@ class SearchUICore(
 	}
 
 	fun init() {
+		initApis(null)
+	}
+
+	/**
+	 * @param searchRulesDir the directory of the search rules `rules*.xml` the spatial search reads, where java reads
+	 * them from its classpath; the classic search does not read them
+	 */
+	fun init(useSpatialSearch: Boolean, searchRulesDir: String) {
+		initApis(if (useSpatialSearch) searchRulesDir else null)
+	}
+
+	// the apis of the spatial search with the rules of [searchRulesDir], of the classic search without
+	private fun initApis(searchRulesDir: String?) {
+		val useSpatialSearch = searchRulesDir != null
 		val amenitiesApi = SearchCoreFactory.SearchAmenityByNameAPI()
-		apis.add(amenitiesApi)
+		if (!useSpatialSearch) {
+			apis.add(amenitiesApi) // classic
+		}
 		apis.add(SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi, internetConnectionAvailable))
-		val searchAmenityTypesAPI = SearchCoreFactory.SearchAmenityTypesAPI(poiTypes)
+		val searchAmenityTypesAPI = if (useSpatialSearch)
+			SpatialAmenityTypesAPI(poiTypes)
+		else
+			SearchCoreFactory.SearchAmenityTypesAPI(poiTypes)
 		apis.add(searchAmenityTypesAPI)
-		apis.add(SearchCoreFactory.SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI))
-		val streetsApi = SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI()
+		// one instance for both apis: one poi type index and one name-index cache
+		val spatialTextSearchAPI = if (searchRulesDir != null) SpatialTextSearchAPI(poiTypes, searchRulesDir) else null
+		apis.add(
+			if (spatialTextSearchAPI != null)
+				SpatialCategoryAmenityByTypeAPI(poiTypes, spatialTextSearchAPI)
+			else
+				SearchCoreFactory.SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI)
+		)
+		val streetsApi = if (useSpatialSearch)
+			SpatialBuildingAndIntersectionsByStreetAPI()
+		else
+			SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI()
 		apis.add(streetsApi)
-		val cityApi = SearchCoreFactory.SearchStreetByCityAPI(streetsApi)
+		val cityApi = if (useSpatialSearch)
+			SpatialStreetByCityAPI(streetsApi)
+		else
+			SearchCoreFactory.SearchStreetByCityAPI(streetsApi)
 		apis.add(cityApi)
-		val townCitiesCache = SearchCoreFactory.TownCitiesCache()
-		apis.add(SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache))
-		apis.add(SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache))
+		if (spatialTextSearchAPI != null) {
+			apis.add(SpatialNearestCitySearchAPI(streetsApi, cityApi))
+			apis.add(spatialTextSearchAPI)
+		} else {
+			val townCitiesCache = SearchCoreFactory.TownCitiesCache()
+			apis.add(SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache))
+			apis.add(SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache))
+		}
+	}
+
+	private class SpatialNearestCitySearchAPI(
+		streetsApi: SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI,
+		cityApi: SearchCoreFactory.SearchStreetByCityAPI
+	) : SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, SearchCoreFactory.TownCitiesCache()) {
+
+		override fun getSearchPriority(p: SearchPhrase): Int {
+			return if (p.isEmpty() && p.isEmptyQueryAllowed()) super.getSearchPriority(p) else -1
+		}
+	}
+
+	private class SpatialStreetByCityAPI(
+		streetsApi: SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI
+	) : SearchCoreFactory.SearchStreetByCityAPI(streetsApi) {
+
+		override fun getSearchPriority(p: SearchPhrase): Int {
+			return if (p.isUnknownSearchWordPresent()) -1 else super.getSearchPriority(p)
+		}
+	}
+
+	private class SpatialBuildingAndIntersectionsByStreetAPI : SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI() {
+
+		override fun search(phrase: SearchPhrase, resultMatcher: SearchResultMatcher): Boolean {
+			val selectedResult = phrase.getLastSelectedWord()!!.getResult()!!
+			val street = selectedResult.`object`
+			if (selectedResult.file == null && street is Street
+				&& street.getBuildings().isEmpty() && street.getIntersectedStreets().isEmpty()
+			) {
+				return true
+			}
+			return super.search(phrase, resultMatcher)
+		}
+
+		override fun getSearchPriority(p: SearchPhrase): Int {
+			return if (p.isLastWord(ObjectType.STREET)) super.getSearchPriority(p) else -1
+		}
+	}
+
+	// poi categories come from the spatial engine; used only by shallowSearch (categories list)
+	private class SpatialAmenityTypesAPI(types: MapPoiTypes) : SearchCoreFactory.SearchAmenityTypesAPI(types) {
+
+		override fun getSearchPriority(p: SearchPhrase): Int {
+			return -1
+		}
+	}
+
+	private class SpatialCategoryAmenityByTypeAPI(
+		types: MapPoiTypes,
+		private val spatialTextSearchAPI: SpatialTextSearchAPI
+	) : SearchCoreFactory.SearchAmenityByTypeAPI(types, null) {
+
+		override fun searchByNameIndex(
+			phrase: SearchPhrase, resultMatcher: SearchResultMatcher, poiType: Any, bbox31: KQuadRect
+		): List<Amenity>? {
+			val keys = getNameIndexKeys(poiType) ?: return null
+			val res = ArrayList<Amenity>()
+			for (key in keys) {
+				res.addAll(spatialTextSearchAPI.searchPoiByCategory(phrase, resultMatcher, key, bbox31))
+			}
+			return res
+		}
+
+		override fun isReadByNameIndex(reader: BinaryMapIndexReader): Boolean {
+			return SpatialTextSearchAPI.hasPoiTypesInNameIndex(reader)
+		}
+
+		override fun getSearchPriority(p: SearchPhrase): Int {
+			return if (p.isLastWord(ObjectType.POI_TYPE)) super.getSearchPriority(p) else -1
+		}
+
+		companion object {
+			// a whole category also takes reference types, the name index has none: it is read with the type filter
+			private fun getNameIndexKeys(poiType: Any): List<String>? {
+				if (poiType is PoiType) {
+					return listOf(poiType.getKeyName())
+				} else if (poiType is TopIndexFilter) {
+					return listOf(poiType.getFilterId())
+				} else if (poiType is CustomSearchPoiFilter) {
+					val acceptedTypes = poiType.getAcceptedTypes() ?: return null
+					val keys = ArrayList<String>()
+					for (types in acceptedTypes.values) {
+						if (types == null) {
+							return null
+						}
+						keys.addAll(types)
+					}
+					return if (keys.isEmpty()) null else keys
+				}
+				return null
+			}
+		}
 	}
 
 	fun clearAPIs() {
@@ -625,11 +813,12 @@ class SearchUICore(
 		val searchPhrase = phrase.generateNewPhrase(text, searchSettings)
 		val rm = SearchResultMatcher(null, searchPhrase, requestNumber.get(), requestNumber, totalLimit)
 		searchInternal(searchPhrase, rm)
-		val resultCollection = SearchResultCollection(searchPhrase)
+		val skipResultSorting = shouldSkipResultSorting(searchPhrase)
+		val resultCollection = SearchResultCollection(searchPhrase, skipResultSorting)
 		if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 			resultCollection.setUseLimit(true)
 		}
-		resultCollection.addSearchResults(rm.getRequestResults(), true, true)
+		resultCollection.addSearchResults(rm.getRequestResults(), !skipResultSorting, true)
 		val settings = phrase.getSettings()!!
 		if (settings.isExportObjects()) {
 			settings.setExportedCities(rm.getExportedCities())
@@ -680,7 +869,7 @@ class SearchUICore(
 					delay(TIMEOUT_BEFORE_FILTER)
 
 					if (!filtered) {
-						val quickRes = SearchResultCollection(phrase)
+						val quickRes = SearchResultCollection(phrase, currentSearchResult.isSkipSorting())
 						if (debugMode) {
 							LOG.info("Filtering current data <$phrase> Results=${currentSearchResult.searchResults.size}")
 						}
@@ -716,14 +905,15 @@ class SearchUICore(
 			}
 			searchInternal(phrase, rm)
 			if (!rm.isCancelled()) {
-				val collection = SearchResultCollection(phrase)
+				val skipResultSorting = shouldSkipResultSorting(phrase)
+				val collection = SearchResultCollection(phrase, skipResultSorting)
 				if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 					collection.setUseLimit(true)
 				}
 				if (debugMode) {
 					LOG.info("Processing search results <$phrase>")
 				}
-				collection.addSearchResults(rm.getRequestResults(), true, true)
+				collection.addSearchResults(rm.getRequestResults(), !skipResultSorting, true)
 				if (debugMode) {
 					LOG.info("Finishing search <$phrase> Results=${rm.getRequestResults().size}")
 				}
@@ -743,6 +933,38 @@ class SearchUICore(
 
 	private fun submit(task: suspend () -> Unit) {
 		executor.submit(task)
+	}
+
+	fun isSpatialSearch(): Boolean {
+		for (api in apis) {
+			if (api is SpatialTextSearchAPI) {
+				return true
+			}
+		}
+		return false
+	}
+
+	private fun shouldSkipResultSorting(phrase: SearchPhrase): Boolean {
+		var spatialSearch = false
+		for (api in apis) {
+			if (!api.isSearchAvailable(phrase) || api.getSearchPriority(phrase) == -1) {
+				continue
+			}
+			if (api is SpatialTextSearchAPI) {
+				spatialSearch = true
+			} else if (isLegacyLocalMapSearchApi(api)) {
+				return false
+			}
+		}
+		return spatialSearch
+	}
+
+	private fun isLegacyLocalMapSearchApi(api: SearchCoreAPI): Boolean {
+		return api is SearchCoreFactory.SearchAmenityByNameAPI
+				|| api is SearchCoreFactory.SearchAmenityByTypeAPI
+				|| api is SearchCoreFactory.SearchAddressByNameAPI
+				|| api is SearchCoreFactory.SearchStreetByCityAPI
+				|| api is SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI
 	}
 
 	fun isSearchMoreAvailable(phrase: SearchPhrase): Boolean {

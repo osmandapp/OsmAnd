@@ -99,7 +99,7 @@ public class SpatialTextSearchCompatTest {
 	private static final int CITIES = 6;
 	private static final int STREETS_PER_CITY = 2;
 	private static final int POIS = 8;
-	private static final int POI_BOX = 1 << 17;
+	static final int POI_BOX = 1 << 17;
 	private static final int ALL_MAPS_PHRASES = 10;
 
 	private Writer dump;
@@ -283,7 +283,7 @@ public class SpatialTextSearchCompatTest {
 	}
 
 	/** The first language of the region of [location], as {@code SearchSettings} finds it for the search. */
-	private static String regionLang(LatLon location) throws IOException {
+	static String regionLang(LatLon location) throws IOException {
 		Map.Entry<WorldRegion, BinaryMapDataObject> e = PlatformUtil.getOsmandRegions().getSmallestBinaryMapDataObjectAt(location);
 		String lang = e == null ? null : e.getKey().getParams().getRegionLang();
 		return Algorithms.isEmpty(lang) ? null : lang.split(",")[0];
@@ -294,7 +294,7 @@ public class SpatialTextSearchCompatTest {
 	 * names of the poi around [center] alone and with a settlement, the names of their categories, also in
 	 * [lang] when there is one.
 	 */
-	private static List<String> phrases(BinaryMapIndexReader r, LatLon center, PoiTranslator lang) throws IOException {
+	static List<String> phrases(BinaryMapIndexReader r, LatLon center, PoiTranslator lang) throws IOException {
 		Random random = new Random(26);
 		Set<String> res = new LinkedHashSet<>();
 		List<City> cities = new ArrayList<>(r.getCities(null, CityBlocks.CITY_TOWN_TYPE));
@@ -415,7 +415,7 @@ public class SpatialTextSearchCompatTest {
 	}
 
 	/** The phrase with its last word cut short and still being typed, null when the word is too short. */
-	private static String incomplete(String phrase) {
+	static String incomplete(String phrase) {
 		int space = phrase.lastIndexOf(' ');
 		String last = phrase.substring(space + 1);
 		if (last.length() < 4) {
@@ -428,7 +428,7 @@ public class SpatialTextSearchCompatTest {
 	 * The phrase with two letters of its longest word swapped: the second and the third, inside the key of
 	 * the name index, or the last two, after it. Null when the word is shorter than 5 letters.
 	 */
-	private static String typo(String phrase, boolean inKey) {
+	static String typo(String phrase, boolean inKey) {
 		String[] words = phrase.split(" ");
 		int longest = 0;
 		for (int i = 1; i < words.length; i++) {

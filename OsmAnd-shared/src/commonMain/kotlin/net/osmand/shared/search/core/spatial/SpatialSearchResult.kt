@@ -299,7 +299,7 @@ class SpatialSearchResult internal constructor(
 		}
 	}
 
-	fun addExtraResult(other: SpatialSearchResult, lang: String) {
+	fun addExtraResult(other: SpatialSearchResult, lang: String?) {
 		val obj = getFirstRefObject(false)
 		val otherObj = other.getFirstRefObject(false)
 		if (otherObj == null) {
