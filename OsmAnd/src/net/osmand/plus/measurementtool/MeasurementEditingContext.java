@@ -1187,8 +1187,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(start.getProfileType(), DEFAULT_APP_MODE);
 			double distance = MapUtils.getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
 			if (appMode == DEFAULT_APP_MODE && distance < RouteProvider.MIN_STRAIGHT_DIST) {
+				// the router drops an end at the same place as the start (RouteCalculationResult.checkForDuplicatePoints)
+				List<WptPt> ends = distance > 0 ? Arrays.asList(start, end) : Collections.singletonList(start);
 				List<WptPt> pts = new ArrayList<>(2);
-				for (WptPt point : Arrays.asList(start, end)) {
+				for (WptPt point : ends) {
 					WptPt pt = new WptPt();
 					pt.setLat(point.getLatitude());
 					pt.setLon(point.getLongitude());
