@@ -22,6 +22,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.TimeZone;
 
 public final class MediaMetadataUtils {
 
@@ -58,14 +59,25 @@ public final class MediaMetadataUtils {
 
 	@Nullable
 	private static Long getPhotoCreationTime(@NonNull ExifInterface exif) {
-		Long dateTime = exif.getDateTimeOriginal();
+		Long dateTime = localToUtc(exif.getDateTimeOriginal(), exif.getAttribute(ExifInterface.TAG_OFFSET_TIME_ORIGINAL));
 		if (dateTime == null) {
-			dateTime = exif.getDateTimeDigitized();
+			dateTime = localToUtc(exif.getDateTimeDigitized(), exif.getAttribute(ExifInterface.TAG_OFFSET_TIME_DIGITIZED));
 		}
 		if (dateTime == null) {
-			dateTime = exif.getDateTime();
+			dateTime = localToUtc(exif.getDateTime(), exif.getAttribute(ExifInterface.TAG_OFFSET_TIME));
 		}
 		return dateTime != null && dateTime > 0 ? dateTime : null;
+	}
+
+	// EXIF date and time are the camera's local time. Without an offset tag ExifInterface reads them as UTC,
+	// so they are taken as the device's time zone instead.
+	@Nullable
+	private static Long localToUtc(@Nullable Long time, @Nullable String offset) {
+		if (time == null || !Algorithms.isEmpty(offset)) {
+			return time;
+		}
+		TimeZone timeZone = TimeZone.getDefault();
+		return time - timeZone.getOffset(time - timeZone.getOffset(time));
 	}
 
 	@Nullable
