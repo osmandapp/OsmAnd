@@ -8,7 +8,7 @@
         android:key="training_category"
         android:title="@string/training_parameters">
 
-        <EditTextPreference
+        <net.osmand.plus.settings.preferences.EditTextPreferenceEx
             android:key="training_body_weight"
             android:defaultValue="80"
             android:inputType="numberDecimal"
@@ -19,7 +19,7 @@
             android:summary="%s kg"
             tools:summary="80 kg" />
 
-        <EditTextPreference
+        <net.osmand.plus.settings.preferences.EditTextPreferenceEx
             android:key="training_ftp"
             android:defaultValue="200"
             android:inputType="number"
