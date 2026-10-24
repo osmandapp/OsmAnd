@@ -147,7 +147,8 @@ public enum WidgetGroup {
 	}
 
 	public int getOrder(@Nullable WidgetsPanel panel) {
-		return getWidgets(panel).get(0).ordinal();
+		List<WidgetType> widgets = getWidgets(panel);
+		return !widgets.isEmpty() ? widgets.get(0).ordinal() : 0;
 	}
 
 	@Nullable

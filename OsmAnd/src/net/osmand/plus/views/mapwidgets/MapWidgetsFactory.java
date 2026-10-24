@@ -110,6 +110,8 @@ public class MapWidgetsFactory {
 				return new ElevationProfileWidget(mapActivity, customId, panel);
 			case NP:
 				return new NPWidget(mapActivity, customId, panel);
+			case FTP:
+				return new FtpWidget(mapActivity, customId, panel);
 			case AIDL_WIDGET:
 				return app.getAidlApi().askCreateExternalWidget(mapActivity, customId, panel);
 			default:
