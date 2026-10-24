@@ -30,9 +30,10 @@ import org.junit.Assert.assertTrue
  *    also stays clear of the system bars. The panels are the top and bottom widget panels, the
  *    rects that shown fragments report as [ICoveredScreenRectProvider], and the panel shown in
  *    `bottomFragmentContainer`.
- * 2. A panel shown in `bottomFragmentContainer` starts at the top of the container. Map controls
- *    are laid out right above the container, so anything above the panel inside it is an empty
- *    strip of map between the controls and the panel.
+ * 2. A panel shown in `bottomFragmentContainer` starts at the top of the container, and the map
+ *    HUD ends there too. Map controls are laid out at the bottom of the HUD, so a gap above the
+ *    container or above the panel inside it is an empty strip of map between the controls and the
+ *    panel.
  * 3. The map center, which zoom buttons and the location marker use, is on the visible map: not
  *    under a panel and not under a system bar.
  */
@@ -52,6 +53,7 @@ object MapHudInvariants {
 		val allowedOverlaps: Set<Pair<String, String>>,
 		val safeArea: Rect,
 		val bottomPanel: String?,
+		val hudBottom: Int?,
 		val bottomContainerTop: Int?,
 		val bottomPanelContentTop: Int?,
 		val mapCenter: Point?
@@ -103,6 +105,7 @@ object MapHudInvariants {
 		}
 
 		var bottomPanelName: String? = null
+		var hudBottom: Int? = null
 		var bottomContainerTop: Int? = null
 		var bottomPanelContentTop: Int? = null
 		val bottomContainer = activity.findViewById<ViewGroup>(R.id.bottomFragmentContainer)
@@ -113,6 +116,7 @@ object MapHudInvariants {
 			panelViews[BOTTOM_CONTAINER] = bottomContainer
 			bottomPanelName = fragments.firstOrNull { it.view === bottomPanel }?.javaClass?.simpleName
 					?: getName(bottomPanel)
+			hudBottom = activity.findViewById<View>(R.id.map_hud_layout)?.let { AndroidUtils.getViewBoundOnScreen(it).bottom }
 			bottomContainerTop = containerRect.top
 			bottomPanelContentTop = getContentTop(bottomPanel)
 		}
@@ -148,7 +152,7 @@ object MapHudInvariants {
 		} else {
 			null
 		}
-		return Snapshot(controls, panels, allowedOverlaps, safeArea, bottomPanelName, bottomContainerTop,
+		return Snapshot(controls, panels, allowedOverlaps, safeArea, bottomPanelName, hudBottom, bottomContainerTop,
 				bottomPanelContentTop, mapCenter)
 	}
 
@@ -166,6 +170,11 @@ object MapHudInvariants {
 			}
 		}
 		val containerTop = snapshot.bottomContainerTop
+		val hudBottom = snapshot.hudBottom
+		if (containerTop != null && hudBottom != null && hudBottom != containerTop) {
+			violations.add("Map HUD ends ${containerTop - hudBottom}px above $BOTTOM_CONTAINER with ${snapshot.bottomPanel}, "
+					+ "leaving a strip of map between the map controls and the panel")
+		}
 		val contentTop = snapshot.bottomPanelContentTop
 		if (containerTop != null && contentTop != null && contentTop != containerTop) {
 			violations.add("${snapshot.bottomPanel} in $BOTTOM_CONTAINER starts ${contentTop - containerTop}px "
