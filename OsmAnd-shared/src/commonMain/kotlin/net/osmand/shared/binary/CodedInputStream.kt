@@ -213,16 +213,44 @@ class CodedInputStream(private val handle: FileHandle, bufferSize: Int = DEFAULT
 	}
 
 	/** A `bytes` field: its varint length, then that many raw bytes. */
-	fun readBytes(): ByteArray {
-		val size = readRawVarint32()
+	fun readBytes(): ByteArray = readRawBytes(readRawVarint32())
+
+	/**
+	 * The next [size] bytes as they are. What the buffer holds is copied at once; a rest shorter than
+	 * the buffer is copied out of the buffer filled again, which the reads after want anyway, and a
+	 * longer rest is read from the file straight into the array, as protobuf reads a long field.
+	 */
+	fun readRawBytes(size: Int): ByteArray {
 		if (size <= bufferLength - pos) {
 			val value = buffer.copyOfRange(pos, pos + size)
 			pos += size
 			return value
 		}
 		val bytes = ByteArray(size)
-		for (i in 0 until size) {
-			bytes[i] = readRawByte()
+		var read = bufferLength - pos
+		buffer.copyInto(bytes, 0, pos, bufferLength)
+		pos = bufferLength
+		if (size - read < buffer.size) {
+			while (read < size) {
+				fill()
+				val n = minOf(size - read, bufferLength)
+				buffer.copyInto(bytes, read, 0, n)
+				pos = n
+				read += n
+			}
+		} else {
+			bufferStart += pos
+			pos = 0
+			bufferLength = 0
+			while (read < size) {
+				val n = handle.read(bufferStart, bytes, read, size - read)
+				if (n <= 0) {
+					throw IllegalStateException("read past the end of the file at $bufferStart")
+				}
+				bytesRead += n
+				bufferStart += n
+				read += n
+			}
 		}
 		return bytes
 	}

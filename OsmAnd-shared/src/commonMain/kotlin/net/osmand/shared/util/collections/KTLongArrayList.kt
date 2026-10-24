@@ -76,6 +76,13 @@ class KTLongArrayList @JvmOverloads constructor(
 
 	fun toArray(): LongArray = data.copyOf(size)
 
+	/** Sorts the payload only, the unused tail of the backing array is left alone. */
+	fun sort() {
+		if (size > 1) {
+			data.sort(0, size)
+		}
+	}
+
 	fun ensureCapacity(capacity: Int) {
 		if (capacity > data.size) {
 			grow(capacity)

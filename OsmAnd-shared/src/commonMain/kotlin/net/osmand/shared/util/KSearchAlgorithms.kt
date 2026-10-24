@@ -1,5 +1,7 @@
 package net.osmand.shared.util
 
+import net.osmand.shared.util.collections.KTIntArrayList
+
 /**
  * Copy of the part of `net.osmand.util.SearchAlgorithms` in OsmAnd-java that the obf reader and
  * the search words need: folding a name onto what a search can match, splitting a query into
@@ -262,6 +264,39 @@ object KSearchAlgorithms {
 			ind += 4
 		}
 		return res
+	}
+
+	/** The bbox field of an atom of a name index: its varints, decoded by [decodeBboxForNameAtoms] at zoom 31. */
+	fun decodeBboxForNameAtomsBytes(bbox: ByteArray?, x16: Int, y16: Int): IntArray? {
+		var dBbox: IntArray? = null
+		if (bbox != null) {
+			val lst = KTIntArrayList()
+			var pos = 0
+			while (pos < bbox.size) {
+				// as protobuf reads a varint from a stream: the bits past 32 are dropped, ten bytes at most
+				var n = 0
+				var shift = 0
+				while (true) {
+					if (pos >= bbox.size) {
+						throw IllegalStateException("truncated varint in a bbox")
+					}
+					val b = bbox[pos++].toInt()
+					if (shift < 32) {
+						n = n or ((b and 0x7f) shl shift)
+					}
+					if (b and 0x80 == 0) {
+						break
+					}
+					shift += 7
+					if (shift >= 64) {
+						throw IllegalStateException("malformed varint in a bbox")
+					}
+				}
+				lst.add(n)
+			}
+			dBbox = decodeBboxForNameAtoms(lst.toArray(), x16, y16, 31)
+		}
+		return dBbox
 	}
 
 	fun letters(s: String): Int {
