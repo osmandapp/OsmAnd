@@ -85,6 +85,7 @@ public class RoutingHelper {
 	private Location lastGoodRouteLocation;
 	private boolean routeWasFinished;
 	private ApplicationMode mode;
+	private long etaSpeedStartTime; // speed measured before navigation or in another profile is not used
 	private boolean deviceHasBearing;
 
 	private boolean isDeviatedFromRoute;
@@ -211,6 +212,9 @@ public class RoutingHelper {
 	public void setFollowingMode(boolean follow) {
 		app.logRoutingEvent("setFollowingMode follow " + follow);
 		isPausedOnAADisconnect = false;
+		if (follow && !isFollowingMode) {
+			etaSpeedStartTime = System.currentTimeMillis();
+		}
 		isFollowingMode = follow;
 		isPauseNavigation = false;
 		if (!follow) {
@@ -341,6 +345,9 @@ public class RoutingHelper {
 	}
 
 	public void setAppMode(@NonNull ApplicationMode mode) {
+		if (this.mode != mode) {
+			etaSpeedStartTime = System.currentTimeMillis();
+		}
 		this.mode = mode;
 		voiceRouter.updateAppMode();
 	}
@@ -830,20 +837,23 @@ public class RoutingHelper {
 	}
 
 	/**
-	 * With "Use my average speed" the time left follows the speed measured over the profile's
-	 * interval. The route estimate stays while there is no data or the user stands still.
+	 * With "Adapt to my speed" the time left follows the moving speed measured during navigation
+	 * over the profile's interval. Stops are skipped, so standing still doesn't drive the average
+	 * towards zero. Until the interval is filled the route estimate is blended in, so the first
+	 * seconds can't swing the arrival time. The route estimate stays while there is no data.
 	 */
 	private int applyAverageSpeed(int routeTime, int distance) {
 		ApplicationMode mode = getAppMode();
-		if (mode == null || distance <= 0 || !settings.ETA_USE_AVERAGE_SPEED.getModeValue(mode)) {
+		if (!isFollowingMode || mode == null || distance <= 0 || !settings.ETA_USE_AVERAGE_SPEED.getModeValue(mode)) {
 			return routeTime;
 		}
 		long interval = settings.ETA_AVERAGE_SPEED_INTERVAL.getModeValue(mode);
-		float speed = app.getAverageSpeedComputer().getAverageSpeed(0, interval, false);
-		if (Float.isNaN(speed) || speed < MIN_AVERAGE_SPEED_FOR_ETA) {
+		float speed = app.getAverageSpeedComputer().getAverageSpeed(etaSpeedStartTime, interval, true);
+		if (interval <= 0 || Float.isNaN(speed) || speed < MIN_AVERAGE_SPEED_FOR_ETA) {
 			return routeTime;
 		}
-		return (int) (distance / speed);
+		float filled = Math.min(1f, (float) (System.currentTimeMillis() - etaSpeedStartTime) / interval);
+		return Math.round(routeTime + (distance / speed - routeTime) * filled);
 	}
 
 	public OsmandSettings getSettings() {
