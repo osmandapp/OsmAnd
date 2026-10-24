@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply from: 'build-common.gradle'
 apply from: rootProject.file("versions.gradle")
 
-apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 
@@ -45,10 +44,6 @@ android {
 		coreLibraryDesugaringEnabled true
 	}
 
-	kotlinOptions {
-		jvmTarget = "17"
-	}
-
 	defaultConfig {
 		minSdkVersion osmand_minSdk
 		versionCode 5550
@@ -86,21 +81,26 @@ android {
 		}
 		gplayFull {
 			java.srcDirs = ["src-google", "src-gplay"]
+			kotlin.srcDirs = ["src-google", "src-gplay"]
 		}
 		gplayFree {
 			java.srcDirs = ["src-google", "src-gplay"]
+			kotlin.srcDirs = ["src-google", "src-gplay"]
 			manifest.srcFile "AndroidManifest-gplayFree.xml"
 		}
 		androidFull {
 			java.srcDirs = ["src-google", "src-osmand", "src-nogplay"]
+			kotlin.srcDirs = ["src-google", "src-osmand", "src-nogplay"]
 			manifest.srcFile "AndroidManifest-androidFull.xml"
 		}
 		nightlyFree {
 			java.srcDirs = ["src-google", "src-osmand", "src-nogplay"]
+			kotlin.srcDirs = ["src-google", "src-osmand", "src-nogplay"]
 			manifest.srcFile "AndroidManifest-nightlyFree.xml"
 		}
 		huawei {
 			java.srcDirs = ["src-huawei", "src-nogplay"]
+			kotlin.srcDirs = ["src-huawei", "src-nogplay"]
 			manifest.srcFile "AndroidManifest-huawei.xml"
 		}
 
@@ -111,6 +111,8 @@ android {
 
 	buildFeatures {
 		aidl true
+		buildConfig true
+		resValues true
 		compose true
 	}
 
@@ -170,53 +172,32 @@ android {
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 		}
 	}
+}
 
-	applicationVariants.configureEach {
-		def variant = it
+androidComponents {
+	onVariants(selector().all()) { variant ->
 		def taskName = variant.name.capitalize()
-		def mergeAssetsTaskName = "merge${taskName}Assets"
-		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
-			println(osmandTask.getName() + " merge assets")
-			osmandTask.dependsOn(collectExternalResources)
+		def dependOn = { String name, Object... deps ->
+			tasks.matching { it.name == name }.configureEach { it.dependsOn(deps) }
 		}
-		if (taskName.endsWith("Debug")) {
-			def mergeAndroidTestAssetsTaskName = "merge${taskName}AndroidTestAssets"
-			tasks.named(mergeAndroidTestAssetsTaskName).configure { osmandTask ->
-				println(osmandTask.getName() + " merge test assets")
-				osmandTask.dependsOn(collectExternalResources)
-			}
+		dependOn("merge${taskName}Assets", collectExternalResources)
+		dependOn("merge${taskName}AndroidTestAssets", collectExternalResources)
+		dependOn("map${taskName}SourceSetPaths", copyIcons)
+		dependOn("process${taskName}NavigationResources", copyIcons)
+		dependOn("merge${taskName}Resources", collectExternalResources)
+		dependOn("generate${taskName}Resources", collectExternalResources)
+		dependOn("compile${taskName}JavaWithJavac", collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+		if (variant.name.contains('Opengldebug')) {
+			dependOn("compile${taskName}JavaWithJavac", copyOsmAndCoreWithJNI)
 		}
-		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
-		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
-			println(osmandTask.getName())
-			osmandTask.dependsOn(copyIcons)
-		}
-		def mergeResources= "merge${taskName}Resources"
-		tasks.named(mergeResources).configure { osmandTask ->
-			println(osmandTask.getName() + " merge resources")
-			osmandTask.dependsOn(collectExternalResources)
-		}
-		def generateResources= "generate${taskName}Resources"
-		tasks.named(generateResources).configure { osmandTask ->
-			println(osmandTask.getName() + " generate resources")
-			osmandTask.dependsOn(collectExternalResources)
-		}
+	}
+	// Debug builds keep native symbols for readable native crash stacks; release libraries stay stripped
+	onVariants(selector().withBuildType("debug")) { variant ->
+		variant.packaging.jniLibs.keepDebugSymbols.add("**/*.so")
 	}
 }
 
 afterEvaluate {
-	android.applicationVariants.configureEach { variant ->
-		if (variant.name.contains('Opengldebug')) {
-			variant.javaCompileProvider.configure {
-				dependsOn collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore
-			}
-		} else {
-			variant.javaCompileProvider.configure {
-				dependsOn collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore
-			}
-		}
-	}
-
 	Gradle gradle = getGradle()
 	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
 	if (tskReqStr.contains("huawei")) {

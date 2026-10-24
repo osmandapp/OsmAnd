@@ -173,7 +173,6 @@ public class ResourceManager {
 		tilesCacheList.add(bitmapTilesCache);
 		tilesCacheList.add(mapillaryVectorTilesCache);
 
-		asyncLoadingThread.start();
 		renderingBufferImageThread = new HandlerThread("RenderingBaseImage");
 		renderingBufferImageThread.start();
 
@@ -194,6 +193,10 @@ public class ResourceManager {
 		}
 
 		amenitySearcher = new AmenitySearcher(app.getPoiTypes());
+
+		// Start last: the thread reads the final fields of this object (tileDownloader, renderer), and
+		// R8 may load them once before its loop, so they must be assigned before the thread starts.
+		asyncLoadingThread.start();
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {
