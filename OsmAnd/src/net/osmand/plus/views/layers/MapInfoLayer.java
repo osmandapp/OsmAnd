@@ -112,6 +112,12 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	private WindowInsetsCompat lastWindowInsets;
 
 	private boolean isContentVisible = false;
+	private final View.OnLayoutChangeListener bottomContainerLayoutListener = (v, left, top, right, bottom,
+	                                                                          oldLeft, oldTop, oldRight, oldBottom) -> {
+		if ((bottom > top) != (oldBottom > oldTop)) {
+			v.post(() -> updateLayerInsets(isContentVisible, true));
+		}
+	};
 	private boolean appearanceRefreshScheduled;
 	private final Runnable appearanceRefreshRunnable = () -> {
 		appearanceRefreshScheduled = false;
@@ -203,6 +209,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 			if (bottomFragmentContainer != null) {
 				bottomFragmentContainer.setOnChildChanged(null);
+				bottomFragmentContainer.removeOnLayoutChangeListener(bottomContainerLayoutListener);
 			}
 
 			mapDisplayPositionManager.unregisterCoveredScreenRectProvider(this);
@@ -275,11 +282,21 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		InsetTargetBuilder builder = InsetTarget.createCustomBuilder(mapHudLayout).preferMargin(true);
 
 		InsetSide[] sides = {InsetSide.TOP, InsetSide.BOTTOM, InsetSide.LEFT, InsetSide.RIGHT};
+		if (isBottomPanelShown()) {
+			// The panel below the HUD already pads itself for the navigation bar
+			sides = new InsetSide[] {InsetSide.TOP, InsetSide.LEFT, InsetSide.RIGHT};
+		}
 		builder.portraitSides(sides).landscapeSides(sides);
 
 		collection.add(builder);
 		InsetsUtils.processInsets(mapActivity.findViewById(R.id.map_hud_container), collection, lastWindowInsets);
 		isContentVisible = isVisible;
+	}
+
+	private boolean isBottomPanelShown() {
+		// A hidden panel stays in the container but takes no space, the HUD has to stay above the navigation bar then
+		return bottomFragmentContainer != null && bottomFragmentContainer.getChildCount() > 0
+				&& bottomFragmentContainer.getHeight() > 0;
 	}
 
 	@Override
@@ -312,6 +329,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			}
 			return Unit.INSTANCE;
 		});
+		bottomFragmentContainer.addOnLayoutChangeListener(bottomContainerLayoutListener);
 	}
 
 	@Nullable
