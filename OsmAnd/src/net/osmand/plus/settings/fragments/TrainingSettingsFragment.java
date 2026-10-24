@@ -7,21 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.util.Algorithms;
 
 public class TrainingSettingsFragment extends BaseSettingsFragment {
 
 	public static final String TAG = TrainingSettingsFragment.class.getName();
-
-	private static final String BODY_WEIGHT_KEY = "training_body_weight";
-	private static final String FTP_KEY = "training_ftp";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,10 +23,8 @@ public class TrainingSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-	    ApplicationMode appMode = getSelectedAppMode();
-	
         // Body weight preference
-        EditTextPreference bodyWeightPref = findPreference(BODY_WEIGHT_KEY);
+        EditTextPreference bodyWeightPref = findPreference(settings.TRAINING_BODY_WEIGHT.getId());
         if (bodyWeightPref != null) {
                 bodyWeightPref.setOnBindEditTextListener(editText ->
                     editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL));
@@ -54,7 +43,7 @@ public class TrainingSettingsFragment extends BaseSettingsFragment {
         }
 
         // FTP preference
-        EditTextPreference ftpPref = findPreference(FTP_KEY);
+        EditTextPreference ftpPref = findPreference(settings.TRAINING_FTP.getId());
         if (ftpPref != null) {
         	ftpPref.setOnBindEditTextListener(editText -> {
         		editText.setInputType(InputType.TYPE_CLASS_NUMBER);
