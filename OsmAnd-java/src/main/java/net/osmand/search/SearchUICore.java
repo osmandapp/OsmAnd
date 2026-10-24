@@ -671,26 +671,33 @@ public class SearchUICore {
 				? new SpatialStreetByCityAPI(streetsApi)
 				: new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
 		apis.add(cityApi);
+		SearchCoreFactory.TownCitiesCache townCitiesCache = new SearchCoreFactory.TownCitiesCache();
 		if (useSpatialSearch) {
-			apis.add(new SpatialNearestCitySearchAPI(streetsApi, cityApi));
+			apis.add(new SpatialAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache));
+			apis.add(new SpatialAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache));
 			apis.add(spatialTextSearchAPI);
 		} else {
-			SearchCoreFactory.TownCitiesCache townCitiesCache = new SearchCoreFactory.TownCitiesCache();
 			apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache));
 			apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache));
 		}
 	}
 
-	private static class SpatialNearestCitySearchAPI extends SearchAddressByNameAPI {
+	// nearest cities, and the lists of the address tab filtered by the typed text as in the classic search
+	private static class SpatialAddressByNameAPI extends SearchAddressByNameAPI {
 
-		public SpatialNearestCitySearchAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi,
-		                                   SearchStreetByCityAPI cityApi) {
-			super(streetsApi, cityApi, false, new SearchCoreFactory.TownCitiesCache());
+		private final boolean longDistance;
+
+		public SpatialAddressByNameAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi,
+		                               SearchStreetByCityAPI cityApi, boolean longDistance,
+		                               SearchCoreFactory.TownCitiesCache townCitiesCache) {
+			super(streetsApi, cityApi, longDistance, townCitiesCache);
+			this.longDistance = longDistance;
 		}
 
 		@Override
 		public int getSearchPriority(SearchPhrase phrase) {
-			return phrase.isEmpty() && phrase.isEmptyQueryAllowed() ? super.getSearchPriority(phrase) : -1;
+			boolean nearestCities = !longDistance && phrase.isEmpty() && phrase.isEmptyQueryAllowed();
+			return nearestCities || phrase.isAddressListFilter() ? super.getSearchPriority(phrase) : -1;
 		}
 	}
 
@@ -702,7 +709,7 @@ public class SearchUICore {
 
 		@Override
 		public int getSearchPriority(SearchPhrase phrase) {
-			return phrase.isUnknownSearchWordPresent() ? -1 : super.getSearchPriority(phrase);
+			return phrase.isUnknownSearchWordPresent() && !phrase.isAddressListFilter() ? -1 : super.getSearchPriority(phrase);
 		}
 	}
 
