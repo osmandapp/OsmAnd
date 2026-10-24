@@ -43,10 +43,17 @@ final class FlyoverBanner {
 
 	private final OsmandApplication app;
 	private final Runnable onCancel;
+	private final int textId;
 
 	FlyoverBanner(@NonNull OsmandApplication app, @NonNull Runnable onCancel) {
+		this(app, onCancel, R.string.flyover_recording);
+	}
+
+	/** @param textId the progress text, with the percentage as its argument */
+	FlyoverBanner(@NonNull OsmandApplication app, @NonNull Runnable onCancel, int textId) {
 		this.app = app;
 		this.onCancel = onCancel;
+		this.textId = textId;
 	}
 
 	/** On the UI thread. */
@@ -64,7 +71,7 @@ final class FlyoverBanner {
 		// again with every update: MapActivity hands the window's insets to the map whenever they change
 		setMapBottomInset(activity, false);
 		TextView text = bar.findViewWithTag(TEXT_TAG);
-		text.setText(app.getString(R.string.flyover_recording, percent + "%"));
+		text.setText(app.getString(textId, percent + "%"));
 	}
 
 	/** The last recorded frame in place of the map, on the UI thread. */

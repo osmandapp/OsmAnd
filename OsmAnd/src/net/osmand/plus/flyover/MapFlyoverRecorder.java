@@ -22,6 +22,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.shared.SharedUtil;
@@ -29,11 +30,14 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.views.MapViewWithLayers;
+import net.osmand.plus.views.layers.GPXLayer;
+import net.osmand.plus.views.layers.PointLocationLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -88,6 +92,14 @@ public class MapFlyoverRecorder {
 	private static final long APP_INIT_TIMEOUT_MS = 60_000;
 	private static final long FIRST_FRAME_TIMEOUT_MS = 30_000;
 	private static final long FRAME_TIMEOUT_MS = 5_000;
+	/** The start is drawn up to this many times for the track lines to reach the renderer. */
+	private static final int TRACK_LINES_TRIES = 5;
+	// a picture's progress: the track's points are there, the map has loaded, the track lines are in the
+	// renderer, the frame is rendered
+	private static final int IMAGE_PROGRESS_POINTS = 15;
+	private static final int IMAGE_PROGRESS_MAP = 45;
+	private static final int IMAGE_PROGRESS_LINES = 70;
+	private static final int IMAGE_PROGRESS_FRAME = 90;
 	private static final int BIT_RATE_PER_PIXEL = 8;
 	private static final int SUPERSAMPLING = 2;
 	private static final long SYMBOLS_UPDATE_MS = 2500;
@@ -164,7 +176,9 @@ public class MapFlyoverRecorder {
 		drone = null;
 		droneLevel = Double.NaN;
 		elevationScaleBefore = Float.NaN;
-		File file = getFile(params.getFileName());
+		// "output": "image": the last frame alone, as a JPEG picture (a map card), instead of a video
+		boolean image = "image".equals(spec.optString("output"));
+		File file = getFile(params.getFileName(), image);
 		recordingFile = file;
 		VideoEncoder encoder = null;
 		List<FlyoverTrack> tracks = new ArrayList<>();
@@ -172,11 +186,13 @@ public class MapFlyoverRecorder {
 		boolean[] linkedToLocation = new boolean[1];
 		Float[] magnifierBefore = new Float[1];
 		FlyoverSession[] session = new FlyoverSession[1];
-		FlyoverBanner banner = new FlyoverBanner(app, () -> cancelled = true);
+		FlyoverBanner banner = new FlyoverBanner(app, () -> cancelled = true,
+				image ? R.string.flyover_generating_image : R.string.flyover_recording);
 		int notIdleFrames = 0;
 		try {
 			// a map linked to my location goes back to it at every fix and draws my marker at its center;
-			// navigation, compass and auto-follow would also move, zoom and tilt it between frames
+			// navigation, compass and auto-follow would also move, zoom and tilt it between frames;
+			// my location marker itself does not belong in the video when the camera passes it
 			runInUiThread(() -> {
 				// kept on disk until the end: a crash meanwhile is undone at the next start
 				session[0] = new FlyoverSession(app, mapView);
@@ -187,6 +203,10 @@ public class MapFlyoverRecorder {
 				tracking.setTrackingPaused(true);
 				linkedToLocation[0] = tracking.isMapLinkedToLocation();
 				tracking.setMapLinkedToLocation(false);
+				PointLocationLayer locationLayer = app.getOsmandMap().getMapLayers().getLocationLayer();
+				if (locationLayer != null) {
+					locationLayer.setHidden(true);
+				}
 			});
 			double videoS = getVideoDuration(params, spec);
 			JSONArray gpxSpecs = spec.optJSONArray("gpx");
@@ -221,7 +241,7 @@ public class MapFlyoverRecorder {
 			}
 			int frameMin = Math.min(params.getWidth(), params.getHeight());
 			float tilePx = 256 * Math.max(1f, Math.max(params.getWidth(), params.getHeight()) / 640f);
-			showTracks(tracks, shownBefore);
+			showTracks(tracks, shownBefore, "keep".equals(spec.optString("other_tracks")));
 			// rendered at twice the size and scaled down: thin lines and text edges stop shimmering in motion
 			int scale = params.getWidth() * SUPERSAMPLING <= MAX_SIZE && params.getHeight() * SUPERSAMPLING <= MAX_SIZE ? SUPERSAMPLING : 1;
 			renderWidth = params.getWidth() * scale;
@@ -241,7 +261,7 @@ public class MapFlyoverRecorder {
 					mapView.applyDisplayScaleSettings();
 				});
 			}
-			encoder = new VideoEncoder(file, params.getWidth(), params.getHeight(), params.getFps());
+			encoder = image ? null : new VideoEncoder(file, params.getWidth(), params.getHeight(), params.getFps());
 			if (!spec.has("profile") && !tracks.isEmpty() && tracks.get(0).profileKey != null) {
 				// the profile icon of the first track's profile, not the phone's current one
 				spec.put("profile", tracks.get(0).profileKey);
@@ -254,6 +274,7 @@ public class MapFlyoverRecorder {
 			String layoutWarning = panels.overlaps(overlay.takenAreas(params.getWidth(), params.getHeight()));
 			FlyoverCallouts callouts = new FlyoverCallouts(app, tracks, spec, params.getWidth(), params.getHeight(),
 					videoS, params.getFps());
+			// a picture is the last frame of its flight: the frames before it let the map layers settle
 			int frames = (int) Math.round(videoS * params.getFps()) + 1;
 			// the map moves across the screen at most this fast: above ~250 px/s sharp lines strobe
 			float pxPerTile = 256 * Math.max(1f, Math.max(params.getWidth(), params.getHeight()) / 640f);
@@ -264,22 +285,35 @@ public class MapFlyoverRecorder {
 			// is a few frames here, so that timer is switched off while the symbols are suspended.
 			view.setSymbolsUpdateInterval(Integer.MAX_VALUE);
 			int symbolsEvery = Math.max(1, (int) (SYMBOLS_UPDATE_MS * params.getFps() / 1000));
-			// the renderer still shows the phone's camera: draw the start once, unrecorded, so frame 0 is right
-			applyCamera(cameraAt(params, spec, followed, follow, 0, frameMin, tilePx),
-					() -> updateTracks(tracks, 0, videoS));
 			// load_timeout_s: how long a frame may wait for map data (relief on a slow device loads for long)
 			double loadTimeoutS = spec.optDouble("load_timeout_s", Double.NaN);
 			long firstTimeout = Double.isNaN(loadTimeoutS) ? FIRST_FRAME_TIMEOUT_MS : (long) (loadTimeoutS * 1000);
 			long frameTimeout = Double.isNaN(loadTimeoutS) ? FRAME_TIMEOUT_MS : (long) (loadTimeoutS * 1000);
 			String notIdleReason = null;
-			waitForIdleFrame(view, firstTimeout);
-			measureDrone(true);
-			// once more: settings changed for the video (map magnifier, relief) reach the renderer with a delay,
-			// and the first recorded frame showed the map at the old scale
+			// a track with a GPS filter has no points to show until the filter, on its own thread, is through
+			waitForTrackPoints(tracks, firstTimeout);
+			// a picture is one frame: its progress is the steps up to it, not the frames
+			showProgress(banner, image, IMAGE_PROGRESS_POINTS);
+			// the renderer still shows the phone's camera: draw the start once, unrecorded, so frame 0 is right
 			applyCamera(cameraAt(params, spec, followed, follow, 0, frameMin, tilePx),
 					() -> updateTracks(tracks, 0, videoS));
 			waitForIdleFrame(view, firstTimeout);
 			measureDrone(true);
+			showProgress(banner, image, IMAGE_PROGRESS_MAP);
+			// once more: settings changed for the video (map magnifier, relief) reach the renderer with a delay,
+			// and the first recorded frame showed the map at the old scale; and until the track layer has put
+			// the lines of the tracks into the renderer (a picture is one frame: it must not come before)
+			for (int k = 0; k < TRACK_LINES_TRIES; k++) {
+				applyCamera(cameraAt(params, spec, followed, follow, 0, frameMin, tilePx),
+						() -> updateTracks(tracks, 0, videoS));
+				waitForIdleFrame(view, firstTimeout);
+				measureDrone(true);
+				if (tracksRendered(tracks)) {
+					break;
+				}
+				LOG.info("Flyover: the track lines are not in the renderer yet, drawing the start again");
+			}
+			showProgress(banner, image, IMAGE_PROGRESS_LINES);
 			for (int k = 0; drone != null && k < DRONE_WARMUP_FRAMES; k++) {
 				// the drone's camera learns how far the engine's camera is at a zoom: frame 0 again until it knows
 				applyCamera(cameraAt(params, spec, followed, follow, 0, frameMin, tilePx),
@@ -294,7 +328,7 @@ public class MapFlyoverRecorder {
 				}
 				// another view took the renderer over meanwhile: take it back
 				boolean retaken = ensureRenderer();
-				if (i % params.getFps() == 0) {
+				if (!image && i % params.getFps() == 0) {
 					int percent = 100 * i / frames;
 					app.runInUIThread(() -> banner.show(percent));
 				}
@@ -343,6 +377,7 @@ public class MapFlyoverRecorder {
 					}
 					LOG.warn("Flyover frame " + i + " is not idle: " + reason);
 				}
+				showProgress(banner, image, IMAGE_PROGRESS_FRAME);
 				Bitmap bitmap = view.getBitmap();
 				if (bitmap == null) {
 					throw new IllegalStateException("The renderer gave no picture for frame " + i);
@@ -353,7 +388,7 @@ public class MapFlyoverRecorder {
 					frame = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 				}
 				Canvas frameCanvas = new Canvas(frame);
-				overlay.draw(frameCanvas, camera[0], (float) camera[2], (float) camera[3]);
+				overlay.draw(frameCanvas, camera[0], (float) camera[2], (float) camera[3], t / 1000.0);
 				for (FlyoverTrack track : tracks) {
 					double metersPerPixel = 40075016 * Math.cos(Math.toRadians(camera[0]))
 							/ (tilePx * Math.pow(2, camera[2]));
@@ -377,7 +412,11 @@ public class MapFlyoverRecorder {
 					callouts.draw(frameCanvas, t / 1000.0, onScreen::get);
 				}
 				panels.draw(frameCanvas, new FlyoverValues.Frame(t / 1000.0, videoS, camera));
-				encoder.encode(frame, i * 1_000_000L / params.getFps());
+				if (encoder != null) {
+					encoder.encode(frame, i * 1_000_000L / params.getFps());
+				} else if (i == frames - 1) {
+					saveImage(frame, file, spec.optInt("quality", 92));
+				}
 				if (i % Math.max(1, params.getFps() / PREVIEW_PER_S) == 0) {
 					// the map area of the app shows what is recorded, a few times a second
 					Bitmap preview = Bitmap.createScaledBitmap(frame, frame.getWidth() / 2, frame.getHeight() / 2, true);
@@ -385,8 +424,10 @@ public class MapFlyoverRecorder {
 				}
 				frame.recycle();
 			}
-			encoder.finish();
-			encoder = null;
+			if (encoder != null) {
+				encoder.finish();
+				encoder = null;
+			}
 			params.setFilePath(file.getAbsolutePath());
 			params.setFrames(frames);
 			String warnings = unknownKeys(spec);
@@ -425,6 +466,10 @@ public class MapFlyoverRecorder {
 					tracking.setTrackingPaused(false);
 					if (linkedToLocation[0]) {
 						tracking.setMapLinkedToLocation(true);
+					}
+					PointLocationLayer locationLayer = app.getOsmandMap().getMapLayers().getLocationLayer();
+					if (locationLayer != null) {
+						locationLayer.setHidden(false);
 					}
 				});
 			} catch (InterruptedException e) {
@@ -628,14 +673,24 @@ public class MapFlyoverRecorder {
 	}
 
 	@NonNull
-	private File getFile(@Nullable String name) {
+	private File getFile(@Nullable String name, boolean image) {
 		File dir = getFolder(app);
 		dir.mkdirs();
 		if (Algorithms.isEmpty(name)) {
 			name = "flyover_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US).format(new Date());
 		}
 		name = name.replaceAll("[/\\\\]", "_");
-		return new File(dir, name.endsWith(".mp4") ? name : name + ".mp4");
+		String extension = image ? ".jpg" : ".mp4";
+		return new File(dir, name.toLowerCase(Locale.US).endsWith(extension) ? name : name + extension);
+	}
+
+	/** The frame as a JPEG picture: the whole output of an "image" recording. */
+	private static void saveImage(@NonNull Bitmap frame, @NonNull File file, int quality) throws java.io.IOException {
+		try (java.io.FileOutputStream out = new java.io.FileOutputStream(file)) {
+			if (!frame.compress(Bitmap.CompressFormat.JPEG, Math.max(1, Math.min(100, quality)), out)) {
+				throw new java.io.IOException("Cannot encode the picture");
+			}
+		}
 	}
 
 	/**
@@ -772,7 +827,8 @@ public class MapFlyoverRecorder {
 
 	private static final Set<String> KNOWN_KEYS = new HashSet<>(Arrays.asList("keyframes", "width", "height", "fps",
 			"name", "camera", "duration_s", "gpx", "osmand_widgets", "attribution", "profile", "scale",
-			"ease_in_s", "ease_out_s", "panels", "data", "ui_scale", "load_timeout_s", "smooth_s", "refresh_s", "detail", "map_magnifier"));
+			"ease_in_s", "ease_out_s", "panels", "data", "ui_scale", "load_timeout_s", "smooth_s", "refresh_s", "detail", "map_magnifier",
+			"logo", "output", "quality", "other_tracks"));
 
 	@NonNull
 	private static String unknownKeys(@NonNull JSONObject spec) {
@@ -1110,6 +1166,49 @@ public class MapFlyoverRecorder {
 		return moved[0];
 	}
 
+	/** The banner's percentage for a picture, which is made in steps rather than frames. */
+	private void showProgress(@NonNull FlyoverBanner banner, boolean image, int percent) {
+		if (image) {
+			app.runInUIThread(() -> banner.show(percent));
+		}
+	}
+
+	/** Waits until every drawn track has points to show: its GPS filter, if it has one, has finished. */
+	private void waitForTrackPoints(@NonNull List<FlyoverTrack> tracks, long timeoutMs) throws InterruptedException {
+		long until = SystemClock.elapsedRealtime() + timeoutMs;
+		while (SystemClock.elapsedRealtime() < until) {
+			if (cancelled) {
+				throw new CancellationException("Cancelled on the phone");
+			}
+			boolean[] ready = {true};
+			runInUiThread(() -> {
+				for (FlyoverTrack track : tracks) {
+					SelectedGpxFile selected = track.selected;
+					if (selected != null && !"none".equals(track.draw) && selected.getPointsToDisplay().isEmpty()) {
+						ready[0] = false;
+					}
+				}
+			});
+			if (ready[0]) {
+				return;
+			}
+			Thread.sleep(50);
+		}
+		LOG.warn("Flyover: a track had no points to show within " + timeoutMs + " ms");
+	}
+
+	/** Whether the track layer has the lines of every drawn track in the renderer. */
+	private boolean tracksRendered(@NonNull List<FlyoverTrack> tracks) {
+		GPXLayer layer = app.getOsmandMap().getMapLayers().getGpxLayer();
+		for (FlyoverTrack track : tracks) {
+			if (track.selected != null && !"none".equals(track.draw)
+					&& !layer.hasRenderedSegments(track.selected.getGpxFileToDisplay().getPath())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/** Tracks that grow or fade change their lines; the GPX layer then rebuilds them in place for this frame. */
 	private void updateTracks(@NonNull List<FlyoverTrack> tracks, double t, double videoS) {
 		boolean changed = false;
@@ -1167,11 +1266,13 @@ public class MapFlyoverRecorder {
 	}
 
 	/** The tracks are shown for the recording only: the user's selection is put back afterwards. */
-	private void showTracks(@NonNull List<FlyoverTrack> tracks, @NonNull Map<String, SelectedGpxFile> shownBefore)
-			throws InterruptedException {
-		if (tracks.isEmpty()) {
-			return;
-		}
+	/**
+	 * Shows the tracks of the request on the map. The tracks the user has on the map otherwise are taken off it
+	 * for the recording ({@code "other_tracks": "keep"} leaves them): they do not belong in the video, and the
+	 * track layer would spend a good part of every frame on them.
+	 */
+	private void showTracks(@NonNull List<FlyoverTrack> tracks, @NonNull Map<String, SelectedGpxFile> shownBefore,
+	                        boolean keepOthers) throws InterruptedException {
 		runInUiThread(() -> {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
 			// the user's selection first: a file given twice would otherwise record our own selection as his
@@ -1181,19 +1282,34 @@ public class MapFlyoverRecorder {
 					shownBefore.put(track.file.getAbsolutePath(), before);
 				}
 			}
+			if (!keepOthers) {
+				for (SelectedGpxFile other : new ArrayList<>(helper.getSelectedGPXFiles())) {
+					if (!other.isShowCurrentTrack() && !shownBefore.containsKey(other.getGpxFile().getPath())) {
+						hiddenOthers.add(other.getGpxFile());
+						helper.selectGpxFile(other.getGpxFile(), GpxSelectionParams.newInstance().hideFromMap());
+					}
+				}
+			}
 			for (FlyoverTrack track : tracks) {
 				track.selected = helper.selectGpxFile(track.gpx, GpxSelectionParams.newInstance().showOnMap());
 			}
 		});
 	}
 
+	// the user's tracks taken off the map for the recording, put back afterwards
+	private final List<GpxFile> hiddenOthers = new ArrayList<>();
+
 	private void hideTracks(@NonNull List<FlyoverTrack> tracks, @NonNull Map<String, SelectedGpxFile> shownBefore) {
-		if (tracks.isEmpty()) {
+		if (tracks.isEmpty() && hiddenOthers.isEmpty()) {
 			return;
 		}
 		try {
 			runInUiThread(() -> {
 				GpxSelectionHelper helper = app.getSelectedGpxHelper();
+				for (GpxFile other : hiddenOthers) {
+					helper.selectGpxFile(other, GpxSelectionParams.newInstance().showOnMap());
+				}
+				hiddenOthers.clear();
 				for (FlyoverTrack track : tracks) {
 					if (track.selected != null) {
 						track.selected.setStartFinishSegments(null);

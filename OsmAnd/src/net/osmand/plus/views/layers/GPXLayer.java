@@ -1979,6 +1979,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 			}
 		}
+		// the lines are gone from the renderer: the segments are drawn again at the next draw, whether or not
+		// their paints changed
+		renderedSegmentsCache.clear();
+	}
+
+	/** Whether a track's lines are in the renderer: a picture of the map taken before that shows no track. */
+	public boolean hasRenderedSegments(@NonNull String path) {
+		Set<TrkSegment> segments = renderedSegmentsCache.get(path);
+		return segments != null && !segments.isEmpty();
 	}
 
 	private void syncGpx(GpxFile gpxFile) {
