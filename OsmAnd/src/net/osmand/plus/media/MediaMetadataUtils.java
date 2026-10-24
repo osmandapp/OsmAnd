@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.TimeZone;
+import java.util.regex.Pattern;
 
 public final class MediaMetadataUtils {
 
@@ -32,6 +33,8 @@ public final class MediaMetadataUtils {
 	private static final String EXIF_LOCATION_PROVIDER = MEDIA_LOCATION_PROVIDER_PREFIX + "exif";
 	private static final String METADATA_LOCATION_PROVIDER = MEDIA_LOCATION_PROVIDER_PREFIX + "metadata";
 	private static final String FILE_NAME_LOCATION_PROVIDER = MEDIA_LOCATION_PROVIDER_PREFIX + "file_name";
+	// The only offset form ExifInterface applies to EXIF date and time; any other value is ignored by it
+	private static final Pattern EXIF_OFFSET_PATTERN = Pattern.compile("[+-](0\\d|1[0-4]):\\d\\d");
 
 	/**
 	 * Returns the photo's EXIF coordinates with optional altitude and heading,
@@ -69,11 +72,11 @@ public final class MediaMetadataUtils {
 		return dateTime != null && dateTime > 0 ? dateTime : null;
 	}
 
-	// EXIF date and time are the camera's local time. Without an offset tag ExifInterface reads them as UTC,
+	// EXIF date and time are the camera's local time. Without an offset it applies, ExifInterface reads them as UTC,
 	// so they are taken as the device's time zone instead.
 	@Nullable
 	private static Long localToUtc(@Nullable Long time, @Nullable String offset) {
-		if (time == null || !Algorithms.isEmpty(offset)) {
+		if (time == null || offset != null && EXIF_OFFSET_PATTERN.matcher(offset).matches()) {
 			return time;
 		}
 		TimeZone timeZone = TimeZone.getDefault();
