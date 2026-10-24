@@ -136,6 +136,8 @@ public enum WidgetType {
 	BICYCLE_DISTANCE("ant_bicycle_distance", R.string.map_widget_ant_bicycle_dist, R.string.map_widget_ant_bicycle_dist_desc, R.drawable.widget_sensor_distance_day, R.drawable.widget_sensor_distance_night, 0, ANT_PLUS, RIGHT),
 	RSSI("rssi", R.string.map_widget_rssi, R.string.rssi_widget_desc, R.drawable.widget_sensor_speed_day, R.drawable.widget_sensor_speed_night, R.string.docs_widget_rssi, null, RIGHT),
 
+	FTP("ftp", R.string.map_widget_ftp, R.string.map_widget_ftp_desc, R.drawable.widget_sensor_bicycle_power_day, R.drawable.widget_sensor_bicycle_power_night, 0, TRAINING, RIGHT),
+
 	WEATHER_TEMPERATURE_WIDGET("weather_temp", R.string.map_settings_weather_temp, R.string.temperature_widget_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, WEATHER, RIGHT),
 	WEATHER_PRECIPITATION_WIDGET("weather_precip", R.string.map_settings_weather_precip, R.string.precipitation_widget_desc, R.drawable.widget_weather_precipitation_day, R.drawable.widget_weather_precipitation_night, 0, WEATHER, RIGHT),
 	WEATHER_WIND_WIDGET("weather_wind", R.string.map_settings_weather_wind, R.string.wind_widget_desc, R.drawable.widget_weather_wind_day, R.drawable.widget_weather_wind_night, 0, WEATHER, RIGHT),

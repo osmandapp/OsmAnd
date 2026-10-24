@@ -3639,6 +3639,8 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> BUILDINGS_3D_COLOR_STYLE = new IntPreference(this, "buildings_3d_color_style", 1).makeProfile().cache();
 	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_NIGHT_COLOR = new IntPreference(this, "buildings_3d_custom_night_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
 	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_DAY_COLOR = new IntPreference(this, "buildings_3d_custom_day_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
+	public final CommonPreference<Float> TRAINING_BODY_WEIGHT = new FloatPreference(this, "training_body_weight", 80f).makeProfile();
+	public final CommonPreference<Integer> TRAINING_FTP = new IntPreference(this, "training_ftp", 200).makeProfile();
 
 	@NonNull
 	public OsmandPreference<Boolean> getAllowPrivatePreference(@NonNull ApplicationMode appMode) {
