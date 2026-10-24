@@ -13,6 +13,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment
 import net.osmand.plus.mapmarkers.PlanRouteFragment
 import net.osmand.plus.measurementtool.MeasurementToolFragment
+import net.osmand.plus.measurementtool.SnapTrackWarningFragment
 import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter
 import net.osmand.plus.track.GpxSelectionParams
 import net.osmand.plus.track.fragments.TrackMenuFragment
@@ -98,6 +99,17 @@ class MapHudInvariantsTest : AndroidTest() {
 			MeasurementToolFragment.showInstance(activity.supportFragmentManager)
 		}
 		assertPanelShown(activity, MeasurementToolFragment.TAG)
+	}
+
+	@Test
+	fun planRouteAttachToRoads() {
+		val activity = openMap()
+		val selectedGpxFile = importAndSelectGpx()
+		scenarioRule.scenario.onActivity {
+			// Plan a route hides itself and stays in bottomFragmentContainer while the snap warning is shown
+			MeasurementToolFragment.showInstance(activity, selectedGpxFile.gpxFile, 0, MeasurementToolFragment.ATTACH_ROADS_MODE)
+		}
+		assertPanelShown(activity, SnapTrackWarningFragment.TAG)
 	}
 
 	@Test
