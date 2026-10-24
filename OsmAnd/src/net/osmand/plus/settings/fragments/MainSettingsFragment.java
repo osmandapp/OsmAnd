@@ -149,6 +149,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			if (mapActivity != null) {
 				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.TRAINING_SETTINGS);
 			}
+			return true;
 		} else if (EXPORT_TO_FILE.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
