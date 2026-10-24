@@ -9,7 +9,7 @@ enum class MediaOrigin(
 	OSM(iconName = "ic_osm"),
 	WIKIPEDIA(titleKey = "wikimedia", iconName = "ic_logo_wikimedia"),
 	MAPILLARY(iconName = "ic_logo_mapillary"),
-	PANORAMAX(titleKey = "panoramax"),
+	PANORAMAX(titleKey = "panoramax", iconName = "ic_logo_panoramax"),
 	OTHER,
 	UNKNOWN
 }
