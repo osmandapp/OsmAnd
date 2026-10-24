@@ -63,7 +63,11 @@ object PhoneNumberFormatter {
 		val code = getCountryCode(digits)
 		val national = digits.substring(code.length)
 		val plan = NUMBERING_PLANS[code]
-		val groups = if (plan != null && plan.sum() == national.length) {
+		val groups = if (plan != null) {
+			// a length the plan does not expect means a misread code, e.g. "0011 61..." read as +1
+			if (plan.sum() != national.length || hasLongAreaCode(code, value)) {
+				return number
+			}
 			plan
 		} else {
 			if (isAlreadyGrouped(value)) {
@@ -86,6 +90,15 @@ object PhoneNumberFormatter {
 			digits.substring(0, 2) in TWO_DIGIT_CODES -> digits.substring(0, 2)
 			else -> digits.substring(0, 3)
 		}
+	}
+
+	// +7 area codes have 3 to 5 digits, the plan only 3: keep a longer one written by the mapper
+	private fun hasLongAreaCode(code: String, value: String): Boolean {
+		if (code != "7") {
+			return false
+		}
+		val groups = value.split(NON_DIGITS).filter { it.isNotEmpty() }
+		return groups.size > 1 && groups[1].length in 4..5
 	}
 
 	// keep grouping written by the mapper: they know where the area code ends, we don't
