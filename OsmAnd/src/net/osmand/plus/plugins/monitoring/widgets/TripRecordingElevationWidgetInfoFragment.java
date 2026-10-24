@@ -15,11 +15,12 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetInfoFragment;
 import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 
 public class TripRecordingElevationWidgetInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String ELEVATION_MODE = "elevation_mode";
+	private static final String MODE_REQUEST_KEY = "mode_request_key";
 
 	@Nullable
 	private OsmandPreference<TripRecordingElevationMode> elevationModePreference;
@@ -51,6 +52,10 @@ public class TripRecordingElevationWidgetInfoFragment extends BaseSimpleWidgetIn
 			iconMode.setImageDrawable(app.getUIUtilities().getIcon(elevationModePreference.get().getIcon(widget.isUphillType(), nightMode)));
 			modeButton.setOnClickListener(v -> showElevationModeDialog());
 			modeButton.setBackground(getPressedStateDrawable());
+			SingleSelectionDialogFragment.setResultListener(this, MODE_REQUEST_KEY, index -> {
+				selectedMode = index;
+				updateModeSetting();
+			});
 		}
 	}
 
@@ -64,10 +69,7 @@ public class TripRecordingElevationWidgetInfoFragment extends BaseSimpleWidgetIn
 				.setTitle(R.string.shared_string_mode)
 				.setControlsColor(ColorUtilities.getActiveColor(app, nightMode));
 
-		CustomAlert.showSingleSelection(dialogData, items, selectedMode, v -> {
-			selectedMode = (int) v.getTag();
-			updateModeSetting();
-		});
+		SingleSelectionDialogFragment.showInstance(this, MODE_REQUEST_KEY, dialogData, items, selectedMode);
 	}
 
 	private void updateModeSetting() {

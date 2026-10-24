@@ -469,7 +469,9 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+		if (lifecycleCallbacks != null) {
+			getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+		}
 	}
 
 	@Override
