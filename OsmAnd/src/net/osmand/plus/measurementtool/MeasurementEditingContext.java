@@ -804,6 +804,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	private void recreateSegments(List<TrkSegment> segments, List<TrkSegment> segmentsForSnap,
 	                              List<WptPt> points, boolean calculateIfNeeded) {
+		boolean calculate = false;
 		List<Integer> roadSegmentIndexes = new ArrayList<>();
 		TrkSegment s = new TrkSegment();
 		segments.add(s);
@@ -852,7 +853,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 						segmentForSnapPoints.addAll(pts);
 					} else {
 						if (calculateIfNeeded && roadSegmentIndexes.contains(segmentsForSnap.size())) {
-							scheduleRouteCalculateIfNotEmpty();
+							calculate = true;
 						}
 						if (segmentForSnapPoints.isEmpty()) {
 							segmentForSnapPoints.add(point);
@@ -869,6 +870,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			TrkSegment segmentForSnap = new TrkSegment();
 			segmentForSnap.getPoints().addAll(points);
 			segmentsForSnap.add(segmentForSnap);
+		}
+		// once after the loop: a call per pair started a new calculation whenever the router was idle meanwhile
+		if (calculate) {
+			scheduleRouteCalculateIfNotEmpty();
 		}
 	}
 
