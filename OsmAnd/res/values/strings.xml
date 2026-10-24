@@ -5909,4 +5909,16 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_difficulty_preference_description">Prefer routes of this difficulty, although routing over harder or easier pistes is still possible if shorter.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
+    <string name="fuel_prices_plugin_name">Fuel prices</string>
+    <string name="fuel_prices_title">Prices</string>
+    <string name="fuel_prices_plugin_description">Shows current fuel prices in the details of fuel stations.\n\nCountries available:\n- United Kingdom: Fuel Finder</string>
+    <string name="fuel_prices_loading">Loading...</string>
+    <string name="fuel_prices_unavailable">Prices not found</string>
+    <string name="fuel_prices_updated">Updated %1$s</string>
+    <string name="fuel_prices_type_e10">Unleaded (E10)</string>
+    <string name="fuel_prices_type_e5">Super unleaded (E5)</string>
+    <string name="fuel_prices_type_diesel">Diesel (B7)</string>
+    <string name="fuel_prices_type_premium_diesel">Premium diesel (B7)</string>
+    <string name="fuel_prices_type_b10">Biodiesel (B10)</string>
+    <string name="fuel_prices_type_hvo">HVO</string>
 </resources>
