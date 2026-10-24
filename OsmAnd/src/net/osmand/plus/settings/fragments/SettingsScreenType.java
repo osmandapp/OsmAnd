@@ -54,6 +54,7 @@ public enum SettingsScreenType {
 	WEATHER_SETTINGS(WeatherSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.weather_settings, R.layout.profile_preference_toolbar),
 	EXTERNAL_SETTINGS_WRITE_TO_TRACK_SETTINGS(ExternalSettingsWriteToTrackSettingsFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.external_sensors_write_to_track_settings, R.layout.profile_preference_toolbar),
 	DANGEROUS_GOODS(DangerousGoodsFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.dangerous_goods_parameters, R.layout.global_preference_toolbar),
+	TRAINING_SETTINGS("training_settings", false, null, R.xml.training_settings, R.layout.global_preference_toolbar),
 	EXTERNAL_INPUT_DEVICE(MainExternalInputDevicesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.external_input_device_settings, R.layout.profile_preference_toolbar_with_switch),
 	/* not a preference screen - the Vessel tracker (AIS) plugin builds its own Material 3 UI */
 	AIS_SETTINGS(AisTrackerSettingsFragment.class.getName(), true, ApplyQueryType.NONE, 0, 0),
