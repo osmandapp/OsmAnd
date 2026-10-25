@@ -255,15 +255,17 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Nullable
 	private String getIconCategoryKey(@NonNull EditorIconController controller, @NonNull String iconName) {
+		String originalKey = null;
 		for (IconsCategory category : controller.getCategories()) {
-			if (category.getKey().equals(EditorIconController.ORIGINAL_KEY)) {
-				continue;
-			}
 			if (category.containsIcon(iconName)) {
-				return category.getKey();
+				if (!category.getKey().equals(EditorIconController.ORIGINAL_KEY)) {
+					return category.getKey();
+				}
+				// the POI icon that is in no other category is shown in "Original"
+				originalKey = category.getKey();
 			}
 		}
-		return null;
+		return originalKey;
 	}
 
 	@Override

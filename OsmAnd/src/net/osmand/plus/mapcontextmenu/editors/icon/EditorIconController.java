@@ -475,6 +475,11 @@ public class EditorIconController extends BaseDialogController {
 		DialogManager dialogManager = app.getDialogManager();
 		String processId = getProcessId(originalIconKey);
 		EditorIconController controller = (EditorIconController) dialogManager.findController(processId);
+		if (controller != null && !Objects.equals(controller.getOriginalIconKey(), originalIconKey)) {
+			// left by the editor of another point that was not destroyed normally
+			dialogManager.unregister(processId);
+			controller = null;
+		}
 		if (controller == null) {
 			controller = new EditorIconController(app);
 			controller.setSelectedIconKey(preselectedIconKey);
