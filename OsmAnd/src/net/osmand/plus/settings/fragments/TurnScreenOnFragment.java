@@ -22,6 +22,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		setupUseSystemScreenTimeout();
 		setupTurnScreenOnTimePref();
+		setupKeepScreenOnDuringTurnsPref();
 		setupTurnScreenOnSensorPref();
 		setupTurnScreenOnNavigationInstructionsPref();
 		setupTurnScreenOnPowerButtonPref();
@@ -82,6 +83,12 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		turnScreenOnTime.setEntryValues(entryValues);
 		turnScreenOnTime.setDescription(getString(R.string.turn_screen_on_wake_time_descr, getString(R.string.keep_screen_on)));
 		turnScreenOnTime.setIcon(getPersistentPrefIcon(R.drawable.ic_action_time_span));
+	}
+
+	private void setupKeepScreenOnDuringTurnsPref() {
+		SwitchPreferenceEx keepScreenOnDuringTurns = findPreference(settings.KEEP_SCREEN_ON_DURING_TURNS.getId());
+		keepScreenOnDuringTurns.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification_navigation));
+		keepScreenOnDuringTurns.setDescription(R.string.keep_screen_on_during_turns_descr);
 	}
 
 	private void setupTurnScreenOnSensorPref() {
