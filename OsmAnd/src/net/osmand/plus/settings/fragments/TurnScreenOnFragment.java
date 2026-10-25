@@ -97,12 +97,9 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	}
 
 	private void setupTurnScreenOnPowerButtonPref() {
-		ApplicationMode appMode = getSelectedAppMode();
 		SwitchPreferenceEx turnScreenOnPowerButton = findPreference(settings.TURN_SCREEN_ON_POWER_BUTTON.getId());
 		turnScreenOnPowerButton.setIcon(getPersistentPrefIcon(R.drawable.ic_action_power_button));
 		turnScreenOnPowerButton.setDescription(R.string.turn_screen_on_power_button_descr);
-		turnScreenOnPowerButton.setChecked(settings.TURN_SCREEN_ON_POWER_BUTTON.getModeValue(appMode));
-		turnScreenOnPowerButton.setSummaryOff(R.string.shared_string_disabled);
 	}
 
 	@Override

@@ -113,6 +113,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 					| PowerManager.ACQUIRE_CAUSES_WAKEUP, "OsmAnd:OnVoiceWakeupTag");
 	}
 
+	@SuppressLint("WakelockTimeout")
 	public void doUnlock() {
 		if (lockUIAdapter != null && keyguardManager.isKeyguardLocked()) {
 			lockUIAdapter.setKeyguardFlags(true);
@@ -178,6 +179,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 	 *		the short period after system timeout, when screen off but phone not yet locked
 	 */
 	public void restartLockTimeout() {
+		uiHandler.removeMessages(LOCK_TIMEOUT_MESSAGE);
 		doKeepOn(true);
 
 		int timeout = turnScreenOnTime.get();
@@ -195,7 +197,6 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		if (!keepScreenAwakeReasons.isEmpty() || timeout == 0) {
 			doKeepOn(true);
 		} else {
-			uiHandler.removeMessages(LOCK_TIMEOUT_MESSAGE);
 			Message message = Message.obtain(uiHandler, this::doLock);
 			message.what = LOCK_TIMEOUT_MESSAGE;
 			uiHandler.sendMessageDelayed(message, timeout * 1000L);
