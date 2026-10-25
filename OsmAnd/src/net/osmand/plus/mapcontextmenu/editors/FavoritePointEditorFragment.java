@@ -53,6 +53,8 @@ import java.util.Set;
 
 public class FavoritePointEditorFragment extends PointEditorFragment {
 
+	private static final String ICON_SELECTED_BY_USER_KEY = "editor_icon_selected_by_user";
+
 	private FavouritesHelper favouritesHelper;
 
 	@Nullable
@@ -86,6 +88,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			setColor(getInitialColor());
 			setIcon(getInitialIconId());
 			setBackgroundType(getInitialBackgroundType());
+			if (savedInstanceState != null) {
+				restoreEditorState(savedInstanceState);
+			}
 		}
 	}
 
@@ -556,6 +561,21 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			backgroundType = DEFAULT_BACKGROUND_TYPE;
 		}
 		return backgroundType;
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(ICON_SELECTED_BY_USER_KEY, iconSelectedByUser);
+	}
+
+	@Override
+	protected void restoreEditorState(@NonNull Bundle savedInstanceState) {
+		super.restoreEditorState(savedInstanceState);
+		if (selectedGroup != null) {
+			group = favouritesHelper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(app, selectedGroup.getName()));
+		}
+		iconSelectedByUser = savedInstanceState.getBoolean(ICON_SELECTED_BY_USER_KEY, iconSelectedByUser);
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity) {
