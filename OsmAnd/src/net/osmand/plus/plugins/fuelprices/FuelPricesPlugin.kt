@@ -86,7 +86,7 @@ class FuelPricesPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 			lat = amenity.location.latitude,
 			lon = amenity.location.longitude,
 			countryRegionId = countryRegionId,
-			ref = providerFor(countryRegionId)?.refTag?.let { amenity.getAdditionalInfo(it) }, // TODO
+			ref = providerFor(countryRegionId)?.refKey?.let { amenity.getAdditionalInfo(it) }, // TODO
 		)
 	}
 

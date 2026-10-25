@@ -19,7 +19,7 @@ class FuelFinderProvider(private val app: OsmandApplication) : FuelPriceProvider
 	override val name = "Fuel Finder"
 	override val countryRegionId = WorldRegion.UNITED_KINGDOM_REGION_ID
 	override val currency = "GBP"
-	override val refTag = "ref:GB:fuel_finder"
+	override val refKey = "ref_GB_fuel_finder"
 
 	private val file = File(app.cacheDir, "fuel_prices/fuel_finder.csv")
 	private var stations = emptyList<ProviderPrices>()

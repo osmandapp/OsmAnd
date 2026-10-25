@@ -23,7 +23,7 @@ interface FuelPriceProvider {
 	val name: String
 	val countryRegionId: String
 	val currency: String
-	val refTag: String?
+	val refKey: String?
 
 	fun stationByRef(ref: String): ProviderPrices?
 	fun stationsNear(lat: Double, lon: Double, radiusMeters: Double): List<ProviderPrices>
