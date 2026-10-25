@@ -619,7 +619,9 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		if (activity != null && !activity.isChangingConfigurations()) {
 			dialogManager.unregister(ConfigureWidgetsController.PROCESS_ID);
 		}
-		getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+		if (lifecycleCallbacks != null) {
+			getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+		}
 	}
 
 	@Override
