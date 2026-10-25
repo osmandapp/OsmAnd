@@ -3547,7 +3547,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
 	<string name="ftp">FTP (Functional Threshold Power)</string>
 	<string name="map_widget_np">Normalized power</string>
 	<string name="map_widget_np_desc">Shows the normalized power</string>
-	<string name="copy_from_other_profile">Copy from another profile</string>
     <string name="turn_screen_on">Turn screen on</string>
     <string name="map_during_navigation_info">Map during navigation</string>
     <string name="map_during_navigation">Map during navigation</string>
