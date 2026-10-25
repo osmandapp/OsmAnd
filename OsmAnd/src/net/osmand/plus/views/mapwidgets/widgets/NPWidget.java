@@ -59,6 +59,16 @@ public class NPWidget extends SimpleWidget {
 	 * a value is displayed. Prevents showing a meaningless spike during the
 	 * first seconds of a ride.
 	 */
+	/**
+	 * Tolerance applied to the full-window check. Widget updates are driven by
+	 * map refresh ticks and carry jitter, so samples are never spaced at
+	 * exactly 1 s. Without a tolerance, the pruning rule (evict when older
+	 * than the window) and the full-window check (contribute when the window
+	 * span reaches exactly NP_WINDOW_MS) can never both be satisfied, and no
+	 * average is ever contributed.
+	 */
+	private static final long WINDOW_FILL_TOLERANCE_MS = 2000L;
+
 	private static final int MIN_AVERAGES_FOR_DISPLAY = 5;
 
 	private final ExternalSensorsPlugin externalSensorsPlugin;
@@ -153,9 +163,10 @@ public class NPWidget extends SimpleWidget {
 		double windowSpanMs = now - windowSamples.peekFirst().timestamp + 1;
 		double rollingAverage = windowPowerSum / windowSamples.size();
 
-		// Only contribute once the window is full; partial windows would
-		// overweight the very first seconds of the ride.
-		if (windowSpanMs >= NP_WINDOW_MS) {
+		// Contribute once the window is (nearly) full. The tolerance absorbs
+		// jitter in the update cadence; partial windows would overweight the
+		// very first seconds of the ride.
+		if (windowSpanMs >= NP_WINDOW_MS - WINDOW_FILL_TOLERANCE_MS) {
 			sumRollingAvgPow4 += Math.pow(rollingAverage, 4);
 			rollingAvgCount++;
 		}
