@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Resources looked up by name at runtime, which no code or XML references directly.
+	Strict mode: the app calls Resources.getIdentifier(), so the default safe mode keeps every
+	resource whose name starts with any string constant in the dex, which is all of them.
+
+	@string/*            R.string reflection and getIdentifier() with names built at runtime: POI types,
+	                     routing and rendering attributes, languages, release notes, help articles,
+	                     OsmAnd-shared Localization keys, and any key of the AIDL getText() API.
+	h_* mm_* mx_*        map icons: RenderingIcons (reflection over R.drawable), the native renderer,
+	                     POI, favorite, GPX and route icons, road shields.
+	ic_bg_point_*        favorite backgrounds (BackgroundType).
+	bg_point_*           shape outlines, "<shape>_contour" (ShapesCard, FavoriteShapesCardController).
+	ic_action_* widget_* icon names from AIDL clients, server purchase and MOTD data, custom plugins,
+	                     custom routing profiles and saved settings (AndroidUtils.getDrawableId).
+	ic_logo_*            media source logos named by MediaOrigin in OsmAnd-shared.
+	img_help_*           vehicle parameter illustrations named in OsmAnd-shared.
+	com_android_billingclient_*
+	                     Play Billing phenotype registration files, which no code in the app references.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+	tools:shrinkMode="strict"
+	tools:keep="@string/*,@drawable/h_*,@drawable/mm_*,@drawable/mx_*,@drawable/ic_bg_point_*,@drawable/bg_point_*,@drawable/ic_action_*,@drawable/widget_*,@drawable/ic_logo_*,@drawable/img_help_*,@raw/com_android_billingclient_*,@xml/com_android_billingclient_*" />
