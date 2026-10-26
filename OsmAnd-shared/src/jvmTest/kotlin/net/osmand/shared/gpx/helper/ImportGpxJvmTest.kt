@@ -5,7 +5,6 @@ import net.osmand.shared.gpx.primitives.WptPt
 import okio.Buffer
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -60,12 +59,18 @@ class ImportGpxJvmTest {
 	}
 
 	@Test
-	fun testTruncatedKmlReturnsErrorInsteadOfThrowing() {
-		val result = ImportGpx.loadGPXFileFromKml(
-			Buffer().writeUtf8("<kml><Document><Placemark><name>Cut</name><LineString><coordinates>1,2 3,4")
+	fun testSpacesAroundCommasStayInsideTuple() {
+		val gpxFile = importKml(
+			"<Placemark><name>Line</name><LineString>" +
+					"<coordinates>30.0, 50.0, 10 31.0 ,51.0 , 20\n32.0,52.0</coordinates>" +
+					"</LineString></Placemark>"
 		)
 
-		assertNotNull(result.first.error)
+		assertNull(gpxFile.error)
+		val points = singleTrackPoints(gpxFile, "Line")
+		assertEquals(listOf(50.0, 51.0, 52.0), points.map { it.lat })
+		assertEquals(listOf(30.0, 31.0, 32.0), points.map { it.lon })
+		assertEquals(listOf(10.0, 20.0), points.take(2).map { it.ele })
 	}
 
 	private fun importKml(body: String): GpxFile =

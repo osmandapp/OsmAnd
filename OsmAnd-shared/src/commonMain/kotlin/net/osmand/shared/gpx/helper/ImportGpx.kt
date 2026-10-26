@@ -23,8 +23,6 @@ object ImportGpx {
 	private const val TAG_GX_COORD = "gx:coord"
 	private const val TAG_WHEN = "when"
 
-	private val WHITESPACE = Regex("\\s+")
-
 	@Throws(IOException::class)
 	fun loadGpxWithFileSize(source: Source, fileName: String): Pair<GpxFile, Long> {
 		return when {
@@ -91,95 +89,103 @@ object ImportGpx {
 			setFeature(FEATURE_PROCESS_NAMESPACES, false)
 			setInput(inputStream, null)
 		}
-
 		try {
-			val folderNameStack = ArrayDeque<String>()
-			var documentName: String? = null
-			var currentPlacemarkName: String? = null
-			var currentPlacemarkDesc: String? = null
-			var currentCoordinates: String? = null
-			var isGxTrack = false
-			val gxCoords = mutableListOf<String>()
-			val gxWhens = mutableListOf<String>()
-			var elementCount = 0
-			var isFolderName = false
+			return parseKmlEvents(parser, serializer, sink, flushEvery)
+		} finally {
+			parser.close()
+		}
+	}
 
-			while (true) {
-				when (parser.getEventType()) {
-					XmlPullParser.START_TAG -> when (parser.getName()) {
-						TAG_FOLDER -> {
-							folderNameStack.addLast("")
-							isFolderName = true
-						}
-						TAG_DOCUMENT -> documentName = ""
-						TAG_PLACEMARK -> {
-							currentPlacemarkName = null
-							currentPlacemarkDesc = null
-							currentCoordinates = null
-							isFolderName = false
-						}
-						TAG_GX_TRACK -> isGxTrack = true
-						TAG_NAME -> {
-							val text = parser.nextText()
-							when {
-								documentName == "" -> documentName = text
-								isFolderName -> {
-									if (folderNameStack.isNotEmpty()) {
-										folderNameStack[folderNameStack.lastIndex] = text
-										isFolderName = false
-									}
-								}
-								else -> currentPlacemarkName = text
-							}
-						}
-						TAG_DESC -> currentPlacemarkDesc = parser.nextText()
-						TAG_COORDS -> currentCoordinates = parser.nextText()
-						TAG_GX_COORD -> if (isGxTrack) gxCoords.add(parser.nextText())
-						TAG_WHEN -> if (isGxTrack) gxWhens.add(parser.nextText())
+	private fun parseKmlEvents(
+		parser: XmlPullParser,
+		serializer: XmlSerializer,
+		sink: Sink,
+		flushEvery: Int
+	): String? {
+		val folderNameStack = ArrayDeque<String>()
+		var documentName: String? = null
+		var currentPlacemarkName: String? = null
+		var currentPlacemarkDesc: String? = null
+		var currentCoordinates: String? = null
+		var isGxTrack = false
+		val gxCoords = mutableListOf<String>()
+		val gxWhens = mutableListOf<String>()
+		var elementCount = 0
+		var isFolderName = false
+
+		while (true) {
+			when (parser.getEventType()) {
+				XmlPullParser.START_TAG -> when (parser.getName()) {
+					TAG_FOLDER -> {
+						folderNameStack.addLast("")
+						isFolderName = true
 					}
-
-					XmlPullParser.END_TAG -> when (parser.getName()) {
-						TAG_FOLDER -> {
-							folderNameStack.removeLastOrNull()
-							isFolderName = false
-						}
-						TAG_PLACEMARK -> {
-							if (currentCoordinates != null) {
-								writePlacemarkAsGpx(
-									serializer,
-									currentPlacemarkName,
-									currentPlacemarkDesc,
-									currentCoordinates,
-									folderNameStack.lastOrNull() ?: documentName
-								)
-								elementCount++
+					TAG_DOCUMENT -> documentName = ""
+					TAG_PLACEMARK -> {
+						currentPlacemarkName = null
+						currentPlacemarkDesc = null
+						currentCoordinates = null
+						isFolderName = false
+					}
+					TAG_GX_TRACK -> isGxTrack = true
+					TAG_NAME -> {
+						val text = parser.nextText()
+						when {
+							documentName == "" -> documentName = text
+							isFolderName -> {
+								if (folderNameStack.isNotEmpty()) {
+									folderNameStack[folderNameStack.lastIndex] = text
+									isFolderName = false
+								}
 							}
+							else -> currentPlacemarkName = text
 						}
-						TAG_GX_TRACK -> {
-							writeGxTrackAsGpx(
+					}
+					TAG_DESC -> currentPlacemarkDesc = parser.nextText()
+					TAG_COORDS -> currentCoordinates = parser.nextText()
+					TAG_GX_COORD -> if (isGxTrack) gxCoords.add(parser.nextText())
+					TAG_WHEN -> if (isGxTrack) gxWhens.add(parser.nextText())
+				}
+
+				XmlPullParser.END_TAG -> when (parser.getName()) {
+					TAG_FOLDER -> {
+						folderNameStack.removeLastOrNull()
+						isFolderName = false
+					}
+					TAG_PLACEMARK -> {
+						if (currentCoordinates != null) {
+							writePlacemarkAsGpx(
 								serializer,
 								currentPlacemarkName,
-								gxCoords,
-								gxWhens
+								currentPlacemarkDesc,
+								currentCoordinates,
+								folderNameStack.lastOrNull() ?: documentName
 							)
-							isGxTrack = false
-							gxCoords.clear()
-							gxWhens.clear()
 							elementCount++
 						}
 					}
-					XmlPullParser.END_DOCUMENT -> return documentName
+					TAG_GX_TRACK -> {
+						writeGxTrackAsGpx(
+							serializer,
+							currentPlacemarkName,
+							gxCoords,
+							gxWhens
+						)
+						isGxTrack = false
+						gxCoords.clear()
+						gxWhens.clear()
+						elementCount++
+					}
 				}
-
-				if (elementCount >= flushEvery) {
-					sink.flush()
-					elementCount = 0
-				}
-
-				parser.next()
+				XmlPullParser.END_DOCUMENT -> return documentName
 			}
-		} finally {
-			parser.close()
+
+			if (elementCount >= flushEvery) {
+				sink.flush()
+				elementCount = 0
+			}
+
+			parser.next()
 		}
 	}
 
@@ -253,7 +259,7 @@ object ImportGpx {
 		times: List<String>
 	) {
 		val trackPoints = coords.mapIndexedNotNull { index, coordString ->
-			val parts = coordString.trim().split(WHITESPACE)
+			val parts = splitByWhitespace(coordString)
 			if (parts.size >= 2) {
 				PointData(
 					lon = parts[0],
@@ -281,12 +287,46 @@ object ImportGpx {
 	}
 
 	private fun parseCoordinates(coords: String): List<PointData> =
-		coords.trim().split(WHITESPACE).mapNotNull { pointString ->
+		splitCoordinateTuples(coords).mapNotNull { pointString ->
 			val parts = pointString.split(",")
 			if (parts.size >= 2) {
 				PointData(lon = parts[0], lat = parts[1], ele = parts.getOrNull(2))
 			} else null
 		}
+
+	private fun splitCoordinateTuples(coords: String): List<String> {
+		val tuples = mutableListOf<String>()
+		for (token in splitByWhitespace(coords)) {
+			val last = tuples.lastOrNull()
+			if (last != null && (last.endsWith(',') || token.startsWith(','))) {
+				tuples[tuples.lastIndex] = last + token
+			} else {
+				tuples.add(token)
+			}
+		}
+		return tuples
+	}
+
+	private fun splitByWhitespace(text: String): List<String> {
+		val parts = mutableListOf<String>()
+		var start = -1
+		for (i in text.indices) {
+			if (isXmlWhitespace(text[i])) {
+				if (start >= 0) {
+					parts.add(text.substring(start, i))
+					start = -1
+				}
+			} else if (start < 0) {
+				start = i
+			}
+		}
+		if (start >= 0) {
+			parts.add(text.substring(start))
+		}
+		return parts
+	}
+
+	private fun isXmlWhitespace(c: Char): Boolean = c == ' ' || c == '\n' || c == '\t' || c == '\r'
 
 	data class PointData(
 		val lon: String,
