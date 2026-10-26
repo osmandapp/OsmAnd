@@ -33,6 +33,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -140,6 +141,7 @@ import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -1562,6 +1564,33 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			trackChartPoints.setHighlightedPoint(new LatLon(lat, lon));
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
 			mapActivity.refreshMap();
+		}
+	}
+
+	@Override
+	public void onChartPointSelected(TrkSegment segment, double lat, double lon) {
+		onPointSelected(segment, lat, lon);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && (!isPortrait() || getCurrentMenuState() != MenuState.FULL_SCREEN)) {
+			showPointInVisibleMap(mapActivity.getMapView(), lat, lon);
+		}
+	}
+
+	private void showPointInVisibleMap(@NonNull OsmandMapTileView mapView, double lat, double lon) {
+		RotatedTileBox tb = mapView.getRotatedTileBox();
+		Rect visibleRect = mapDisplayPositionManager.getVisibleMapRect();
+		if (visibleRect == null) {
+			visibleRect = new Rect(0, 0, tb.getPixWidth(), tb.getPixHeight());
+		}
+		visibleRect.inset(visibleRect.width() / 10, visibleRect.height() / 10);
+		PointF pixel = NativeUtilities.getPixelFromLatLon(mapView.getMapRenderer(), tb, lat, lon);
+		if (!visibleRect.contains((int) pixel.x, (int) pixel.y)) {
+			if (mapView.getAnimatedDraggingThread().isAnimating()) {
+				// as TrackDetailsMenu does: while the highlight is dragged, do not wait for the running animation to stop
+				mapView.setLatLon(lat, lon);
+			} else {
+				mapView.getAnimatedDraggingThread().startMoving(lat, lon, mapView.getZoom(), mapView.getZoomFloatPart());
+			}
 		}
 	}
 

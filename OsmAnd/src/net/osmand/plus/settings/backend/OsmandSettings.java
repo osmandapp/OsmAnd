@@ -2260,7 +2260,12 @@ public class OsmandSettings {
 	public String getTileSourceTitle(@NonNull String fileName) {
 		if (fileName.endsWith(SQLITE_EXT)) {
 			ITileSource tileSource = getTileSourceByName(fileName, false);
-			return getTileSourceTitle(tileSource, fileName);
+			String title = getTileSourceTitle(tileSource, fileName);
+			if (tileSource instanceof SQLiteTileSource) {
+				// Created only to read the title, nothing else closes its database
+				((SQLiteTileSource) tileSource).closeConnection();
+			}
+			return title;
 		}
 		return fileName;
 	}
