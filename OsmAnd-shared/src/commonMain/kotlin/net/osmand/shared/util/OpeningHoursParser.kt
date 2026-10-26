@@ -1100,7 +1100,8 @@ object OpeningHoursParser {
 		override fun toLocalRuleString(): String = toRuleString(true)
 
 		override fun isOpened24_7(): Boolean {
-			if (isOpenedEveryDay()) {
+			// month or date ranges like "Oct-Mar off" don't cover the whole year (#11571)
+			if (isOpenedEveryDay() && isOpenedEveryMonth() && !hasDayMonths()) {
 				if (startTimes.size > 0) {
 					for (i in 0 until startTimes.size) {
 						if (startTimes[i] == 0 && endTimes[i] / 60 == 24) {
@@ -1117,6 +1118,15 @@ object OpeningHoursParser {
 		fun isOpenedEveryDay(): Boolean {
 			for (i in 0 until 7) {
 				if (!days[i]) {
+					return false
+				}
+			}
+			return true
+		}
+
+		fun isOpenedEveryMonth(): Boolean {
+			for (i in 0 until 12) {
+				if (!months[i]) {
 					return false
 				}
 			}
