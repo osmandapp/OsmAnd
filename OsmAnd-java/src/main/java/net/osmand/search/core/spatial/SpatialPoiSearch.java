@@ -127,6 +127,17 @@ public class SpatialPoiSearch {
 			return true;
 		}
 
+		public String getOriginalName(String alignedName) {
+			if (singleType != null) {
+				for (String name : getOriginalNames(singleType.getTranslation(), singleType.getSynonyms())) {
+					if (SearchAlgorithms.alignChars(name).equals(alignedName)) {
+						return name;
+					}
+				}
+			}
+			return alignedName;
+		}
+
 		/**
 		 * Fewest words of a name of the type that has a word starting with one of the query words. A one-word synonym
 		 * ("cistern", "temple") must not make a partial match of another name ("water" of "Water tank", "place" of
@@ -209,14 +220,22 @@ public class SpatialPoiSearch {
 		addToIndex(basePoiName, poiType);
 	}
 
-	// translation (only the first name) and synonyms
 	private static List<String> getNames(String translation, String synonyms) {
+		List<String> names = new ArrayList<>();
+		for (String name : getOriginalNames(translation, synonyms)) {
+			names.add(SearchAlgorithms.alignChars(name));
+		}
+		return names;
+	}
+
+	// translation (only the first name) and synonyms
+	private static List<String> getOriginalNames(String translation, String synonyms) {
 		String all = (Algorithms.isEmpty(translation) ? "" : translation.split(";")[0]) + ";"
 				+ (synonyms == null ? "" : synonyms);
 		List<String> names = new ArrayList<>();
 		for (String name : all.split(";")) {
-			if (name.trim().length() > 0) {
-				names.add(SearchAlgorithms.alignChars(name.trim()));
+			if (!name.trim().isEmpty()) {
+				names.add(name.trim());
 			}
 		}
 		return names;
