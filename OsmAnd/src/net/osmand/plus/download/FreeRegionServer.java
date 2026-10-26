@@ -24,12 +24,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * The server decides whether the free region may be replaced. A GET request, so that the
+ * The server decides whether the free region may be replaced. The app sends how many replaces it
+ * has already made and whether the user has left an email. A GET request, so that the
  * parameters - package, version, nd, ns, aid, utm* - land in the server access log.
  * <p>
- * PROTOTYPE: until /api/replace-download-map is deployed the answer is simulated on the device -
- * the first replace is allowed, the next ones are not; the "answer" preference
- * ("allow" / "deny") forces it. The real email request is the existing
+ * PROTOTYPE: the "proto_answer" preference ("ok" / "request_email" / "no") overrides the server
+ * answer for testing; "local" answers by the server rule on the device until the server is deployed. The real email request is the existing
  * https://osmand.net/subscription/register_email - not called here, a test address must not land
  * in the mailing list.
  */
@@ -40,11 +40,37 @@ public class FreeRegionServer {
 	private static final String REPLACE_URL = "https://osmand.net/api/replace-download-map";
 	private static final long FAKE_NETWORK_DELAY_MS = 1200;
 
-	private static final String PROTO_REPLACES_USED = "proto_replaces_used";
 	private static final String PROTO_ANSWER = "proto_answer";
+	private static final String PROTO_LOCAL = "local";
+
+	public enum ReplaceAnswer {
+		/** Replace now. */
+		OK("ok"),
+		/** One more replace for an email. */
+		REQUEST_EMAIL("request_email"),
+		/** No more replaces - only Maps+. */
+		NO("no");
+
+		private final String status;
+
+		ReplaceAnswer(@NonNull String status) {
+			this.status = status;
+		}
+
+		@Nullable
+		static ReplaceAnswer fromStatus(@Nullable String status) {
+			for (ReplaceAnswer answer : values()) {
+				if (answer.status.equalsIgnoreCase(status)) {
+					return answer;
+				}
+			}
+			return null;
+		}
+	}
 
 	public interface ReplaceCallback {
-		void onReplaceChecked(boolean allowed);
+		/** @param answer null when the server could not be reached */
+		void onReplaceChecked(@Nullable ReplaceAnswer answer);
 	}
 
 	private final OsmandApplication app;
@@ -69,6 +95,8 @@ public class FreeRegionServer {
 		InstallReferrer.addParams(app, params);
 		params.put("from", from.getRegionId());
 		params.put("to", to.getRegionId());
+		params.put("replaces", String.valueOf(new FreeRegionHelper(app).getReplacesCount()));
+		params.put("email", String.valueOf(app.getSettings().EMAIL_SUBSCRIBED.get()));
 
 		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, String>() {
 			@Override
@@ -79,44 +107,42 @@ public class FreeRegionServer {
 
 			@Override
 			protected void onPostExecute(String response) {
-				Boolean allowed = parseAllowed(response);
-				if (allowed != null && !hasForcedAnswer()) {
-					callback.onReplaceChecked(allowed);
+				String forced = preferences.getString(PROTO_ANSWER, null);
+				if (PROTO_LOCAL.equals(forced)) {
+					callback.onReplaceChecked(answerLocally(params));
+				} else if (ReplaceAnswer.fromStatus(forced) != null) {
+					callback.onReplaceChecked(ReplaceAnswer.fromStatus(forced));
 				} else {
-					simulateReplace(callback);
+					callback.onReplaceChecked(parseAnswer(response));
 				}
 			}
 		});
 	}
 
 	@Nullable
-	private Boolean parseAllowed(@Nullable String response) {
+	private ReplaceAnswer parseAnswer(@Nullable String response) {
 		if (response == null) {
 			return null;
 		}
 		try {
-			return "ok".equalsIgnoreCase(new JSONObject(response).optString("status"));
+			ReplaceAnswer answer = ReplaceAnswer.fromStatus(new JSONObject(response).optString("status"));
+			// an unknown answer of a newer server - no replace
+			return answer != null ? answer : ReplaceAnswer.NO;
 		} catch (JSONException e) {
 			LOG.error("Replace response: " + response, e);
 			return null;
 		}
 	}
 
-	private boolean hasForcedAnswer() {
-		String forced = preferences.getString(PROTO_ANSWER, "");
-		return "allow".equals(forced) || "deny".equals(forced);
-	}
-
-	private void simulateReplace(@NonNull ReplaceCallback callback) {
-		handler.postDelayed(() -> {
-			int used = preferences.getInt(PROTO_REPLACES_USED, 0);
-			String forced = preferences.getString(PROTO_ANSWER, "");
-			boolean allowed = "allow".equals(forced) || (!"deny".equals(forced) && used < 1);
-			if (allowed) {
-				preferences.edit().putInt(PROTO_REPLACES_USED, used + 1).apply();
-			}
-			callback.onReplaceChecked(allowed);
-		}, FAKE_NETWORK_DELAY_MS);
+	/** The rule of the server: 5 replaces, then one more for an email, at most 1000. */
+	@NonNull
+	private static ReplaceAnswer answerLocally(@NonNull Map<String, String> params) {
+		int replaces = Integer.parseInt(params.get("replaces"));
+		boolean email = Boolean.parseBoolean(params.get("email"));
+		if (replaces >= 1000) {
+			return ReplaceAnswer.NO;
+		}
+		return replaces >= 5 && !email ? ReplaceAnswer.REQUEST_EMAIL : ReplaceAnswer.OK;
 	}
 
 	public void registerEmail(@NonNull String email, @NonNull Runnable onRegistered) {

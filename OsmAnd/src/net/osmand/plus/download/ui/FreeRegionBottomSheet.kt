@@ -23,6 +23,7 @@ import net.osmand.plus.R
 import net.osmand.plus.base.BaseMaterialModalBottomSheetDialogFragment
 import net.osmand.plus.download.FreeRegionHelper
 import net.osmand.plus.download.FreeRegionServer
+import net.osmand.plus.download.FreeRegionServer.ReplaceAnswer
 import net.osmand.plus.download.local.LocalItem
 import net.osmand.plus.download.local.LocalOperationTask
 import net.osmand.plus.download.local.OperationType
@@ -33,9 +34,8 @@ import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
 
 /**
- * Free version: a map of another region. One sheet goes through the steps - replace (the server
- * decides), then, when it is not allowed, an email for one more replace or Maps+ when the email is
- * already left.
+ * Free version: a map of another region. One sheet goes through the steps - replace, then what the
+ * server answers: replace now, one more replace for an email, or only Maps+.
  */
 class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 
@@ -196,16 +196,23 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 
 	private fun requestReplace() {
 		setLoading(true)
-		FreeRegionServer(osmandApp).requestReplace(freeRegion, region) { allowed ->
+		FreeRegionServer(osmandApp).requestReplace(freeRegion, region) { answer ->
 			if (!isAdded) {
 				return@requestReplace
 			}
 			setLoading(false)
-			if (allowed) {
-				applyReplace()
-			} else {
-				step = if (osmandSettings.EMAIL_SUBSCRIBED.get()) Step.BUY else Step.EMAIL
-				updateStep()
+			when (answer) {
+				ReplaceAnswer.OK -> applyReplace()
+				ReplaceAnswer.REQUEST_EMAIL -> {
+					// the email is already left - the server must not ask again, so only Maps+
+					step = if (osmandSettings.EMAIL_SUBSCRIBED.get()) Step.BUY else Step.EMAIL
+					updateStep()
+				}
+				ReplaceAnswer.NO -> {
+					step = Step.BUY
+					updateStep()
+				}
+				null -> osmandApp.showShortToastMessage(R.string.no_inet_connection)
 			}
 		}
 	}
@@ -219,9 +226,8 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 		setLoading(true)
 		FreeRegionServer(osmandApp).registerEmail(getEmail()) {
 			if (isAdded) {
-				setLoading(false)
-				// a left email always allows the replace - no second check by the server
-				applyReplace()
+				// ask again - now with the email left
+				requestReplace()
 			}
 		}
 	}
@@ -230,7 +236,7 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 		val app = osmandApp
 		val callback = onReplaced ?: return
 		dismiss()
-		FreeRegionHelper(app).setFreeRegion(region)
+		FreeRegionHelper(app).replaceFreeRegion(region)
 		val items = mapsToDelete.values.flatten()
 		if (items.isEmpty()) {
 			callback.run()

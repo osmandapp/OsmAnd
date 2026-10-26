@@ -62,6 +62,7 @@ public class FreeRegionHelper {
 	static final String PREFERENCES_NAME = "net.osmand.free_region";
 	private static final String REGION = "region";
 	private static final String MIGRATED = "migrated";
+	private static final String REPLACES = "replaces";
 	private static final String UPDATE_WARNING_SHOWN = "update_warning_shown";
 
 	/** Maps built before 01.07.2026 do not work with the new search. */
@@ -95,6 +96,18 @@ public class FreeRegionHelper {
 
 	public void setFreeRegion(@NonNull WorldRegion region) {
 		preferences.edit().putString(REGION, region.getRegionId()).apply();
+	}
+
+	/** The user replaced the free region - the server decides on the next replace by their count. */
+	public void replaceFreeRegion(@NonNull WorldRegion region) {
+		preferences.edit()
+				.putString(REGION, region.getRegionId())
+				.putInt(REPLACES, getReplacesCount() + 1)
+				.apply();
+	}
+
+	public int getReplacesCount() {
+		return preferences.getInt(REPLACES, 0);
 	}
 
 	/** Makes the region of the item the free region, without asking - for the first-start screen. */
