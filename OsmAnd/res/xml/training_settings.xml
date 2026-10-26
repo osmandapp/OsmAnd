@@ -10,7 +10,9 @@
 
         <net.osmand.plus.settings.preferences.EditTextPreferenceEx
             android:key="training_body_weight"
+            android:layout="@layout/preference_with_descr"
             android:defaultValue="80"
+            android:icon="@drawable/ic_action_weight"
             android:inputType="numberDecimal"
             android:persistent="true"
             android:selectAllOnFocus="true"
@@ -21,7 +23,9 @@
 
         <net.osmand.plus.settings.preferences.EditTextPreferenceEx
             android:key="training_ftp"
+            android:layout="@layout/preference_with_descr"
             android:defaultValue="200"
+            android:icon="@drawable/ic_action_power"
             android:inputType="number"
             android:persistent="true"
             android:selectAllOnFocus="true"
