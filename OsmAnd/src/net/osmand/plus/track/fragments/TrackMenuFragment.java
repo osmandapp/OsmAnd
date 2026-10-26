@@ -1582,7 +1582,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		visibleRect.inset(visibleRect.width() / 10, visibleRect.height() / 10);
 		PointF pixel = NativeUtilities.getPixelFromLatLon(mapView.getMapRenderer(), tb, lat, lon);
 		if (!visibleRect.contains((int) pixel.x, (int) pixel.y)) {
-			mapView.getAnimatedDraggingThread().startMoving(lat, lon, mapView.getZoom(), mapView.getZoomFloatPart());
+			if (mapView.getAnimatedDraggingThread().isAnimating()) {
+				// as TrackDetailsMenu does: while the highlight is dragged, do not wait for the running animation to stop
+				mapView.setLatLon(lat, lon);
+			} else {
+				mapView.getAnimatedDraggingThread().startMoving(lat, lon, mapView.getZoom(), mapView.getZoomFloatPart());
+			}
 		}
 	}
 
