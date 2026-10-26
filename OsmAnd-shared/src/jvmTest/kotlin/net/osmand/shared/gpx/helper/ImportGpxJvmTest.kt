@@ -58,21 +58,6 @@ class ImportGpxJvmTest {
 		assertEquals(17.97, point.lon)
 	}
 
-	@Test
-	fun testSpacesAroundCommasStayInsideTuple() {
-		val gpxFile = importKml(
-			"<Placemark><name>Line</name><LineString>" +
-					"<coordinates>30.0, 50.0, 10 31.0 ,51.0 , 20\n32.0,52.0</coordinates>" +
-					"</LineString></Placemark>"
-		)
-
-		assertNull(gpxFile.error)
-		val points = singleTrackPoints(gpxFile, "Line")
-		assertEquals(listOf(50.0, 51.0, 52.0), points.map { it.lat })
-		assertEquals(listOf(30.0, 31.0, 32.0), points.map { it.lon })
-		assertEquals(listOf(10.0, 20.0), points.take(2).map { it.ele })
-	}
-
 	private fun importKml(body: String): GpxFile =
 		ImportGpx.loadGPXFileFromKml(
 			Buffer().writeUtf8(

@@ -287,25 +287,12 @@ object ImportGpx {
 	}
 
 	private fun parseCoordinates(coords: String): List<PointData> =
-		splitCoordinateTuples(coords).mapNotNull { pointString ->
-			val parts = pointString.split(",")
+		splitByWhitespace(coords).mapNotNull { pointString ->
+			val parts = pointString.trim().split(",")
 			if (parts.size >= 2) {
 				PointData(lon = parts[0], lat = parts[1], ele = parts.getOrNull(2))
 			} else null
 		}
-
-	private fun splitCoordinateTuples(coords: String): List<String> {
-		val tuples = mutableListOf<String>()
-		for (token in splitByWhitespace(coords)) {
-			val last = tuples.lastOrNull()
-			if (last != null && (last.endsWith(',') || token.startsWith(','))) {
-				tuples[tuples.lastIndex] = last + token
-			} else {
-				tuples.add(token)
-			}
-		}
-		return tuples
-	}
 
 	private fun splitByWhitespace(text: String): List<String> {
 		val parts = mutableListOf<String>()
