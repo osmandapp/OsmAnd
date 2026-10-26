@@ -31,6 +31,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FolderListAdapter extends RecyclerView.Adapter<FolderViewHolder> {
@@ -189,11 +190,19 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderViewHolder> {
 	public static List<File> collectSortedDirs(@NonNull File parentDir) {
 		List<File> dirs = new ArrayList<>();
 		dirs.add(parentDir);
-		Algorithms.collectDirs(parentDir, dirs);
-
-		Collator collator = OsmAndCollator.primaryCollator();
-		dirs.subList(1, dirs.size()).sort((dir1, dir2) -> collator.compare(dir1.getPath(), dir2.getPath()));
+		collectSortedDirs(parentDir, dirs, OsmAndCollator.primaryCollator());
 		return dirs;
+	}
+
+	private static void collectSortedDirs(@NonNull File parentDir, @NonNull List<File> dirs, @NonNull Collator collator) {
+		File[] subDirs = parentDir.listFiles(File::isDirectory);
+		if (subDirs != null) {
+			Arrays.sort(subDirs, (dir1, dir2) -> collator.compare(dir1.getName(), dir2.getName()));
+			for (File dir : subDirs) {
+				dirs.add(dir);
+				collectSortedDirs(dir, dirs, collator);
+			}
+		}
 	}
 
 	public static class FolderViewHolder extends RecyclerView.ViewHolder {
