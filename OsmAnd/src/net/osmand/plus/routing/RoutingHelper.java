@@ -544,7 +544,8 @@ public class RoutingHelper {
 			}
 			deviationChanged = wasDeviatedFromRoute != isDeviatedFromRoute;
 		}
-		if (deviationChanged) {
+		// route point events above fire while the flag is reset, so repeat the update while off route
+		if (deviationChanged || isDeviatedFromRoute) {
 			fireRoutingDataUpdateEvent();
 		}
 
