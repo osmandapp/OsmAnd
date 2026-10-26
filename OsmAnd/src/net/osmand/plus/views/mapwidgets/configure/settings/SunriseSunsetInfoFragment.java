@@ -53,7 +53,7 @@ public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 			preference = widget.getPreference();
 			sunPositionPreference = widget.getSunPositionPreference();
 		}
-		boolean defaultShowTimeToLeft = preference.getModeValue(appMode);
+		boolean defaultShowTimeToLeft = preference != null && preference.getModeValue(appMode);
 		showTimeToLeft = bundle.getBoolean(SHOW_TIME_TO_LEFT, defaultShowTimeToLeft);
 		selectedSunPositionMode = bundle.getInt(SUN_POSITION_MODE, sunPositionPreference != null ?
 				sunPositionPreference.getModeValue(appMode).ordinal() : SunPositionMode.SUN_POSITION_MODE.ordinal());

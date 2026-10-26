@@ -1414,11 +1414,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			RotatedTileBox tb = tileView.getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
-			int marginStartPx = 0;
 
 			if (!isPortrait()) {
 				tileBoxWidthPx = tb.getPixWidth() - getWidth();
-				marginStartPx = getWidth();
 			} else {
 				int fHeight = getViewHeight() - y - AndroidUtils.getStatusBarHeight(mapActivity);
 				tileBoxHeightPx = tb.getPixHeight() - fHeight;
@@ -1426,8 +1424,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 			boolean contains = tileView.fullyContains(tb, r.getLeft(), r.getTop(), r.getRight(), r.getBottom());
 			if (!contains && r.getLeft() != 0 && r.getRight() != 0) {
-				tileView.fitRectToMap(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(),
-						tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
+				tileView.fitRectToMapCenter(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(),
+						tileBoxWidthPx, tileBoxHeightPx);
 			}
 			adjustMapPosition = false;
 		}
