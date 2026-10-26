@@ -74,6 +74,8 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		setupBackupAndRestorePref();
 		Preference purchasesSettings = requirePreference(PURCHASES_SETTINGS);
 		purchasesSettings.setIcon(getContentIcon(R.drawable.ic_action_purchases));
+		Preference trainingSettings = requirePreference(TRAINING_SETTINGS);
+		trainingSettings.setIcon(getContentIcon(R.drawable.ic_action_training));
 		PreferenceCategory selectedProfile = requirePreference(SELECTED_PROFILE);
 		selectedProfile.setIconSpaceReserved(false);
 		setupConfigureProfilePref();
