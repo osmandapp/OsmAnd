@@ -5,6 +5,7 @@ import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialog
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
 
@@ -37,6 +38,9 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.test.common.AndroidTest;
@@ -100,6 +104,58 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertTrue("Opening the Track tab is expected to expand the menu, but it went from "
 				+ headerOnlyMenuTop + " to " + expandedMenuTop, expandedMenuTop < headerOnlyMenuTop);
 		assertMapCenteredAboveMenu(expandedMenuTop);
+	}
+
+	/**
+	 * The expanded menu hides the top widgets panel, so once the menu is closed the map center has to return
+	 * below the panel, where it was before the menu.
+	 */
+	@Test
+	public void testMapCenterRestoredBelowTopPanelAfterMenuClosed() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		boolean widgetEnabled = setTopPanelWidget(true);
+		try {
+			awaitTrackMenuSettled();
+			boolean[] panelShown = new boolean[1];
+			scenarioRule.getScenario().onActivity(activity ->
+					panelShown[0] = activity.findViewById(R.id.top_widgets_panel).isShown());
+			assumeTrue("A top toolbar, such as a map download suggestion, hides the top panel", panelShown[0]);
+			float ratioBeforeMenu = getMapRatio().y;
+
+			scenarioRule.getScenario().onActivity(activity ->
+					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+			awaitTrackMenuSettled();
+			clickViewWithId(R.id.action_track);
+			awaitTrackMenuSettled();
+			// in portrait Back collapses the menu to its header first
+			for (int i = 0; i < 3 && getTrackMenuView() != null; i++) {
+				Espresso.pressBack();
+				awaitTrackMenuSettled();
+			}
+			assertNull("Track menu is not closed", getTrackMenuView());
+			assertEquals("Map center after the menu is closed", ratioBeforeMenu, getMapRatio().y, 0.005f);
+		} finally {
+			setTopPanelWidget(widgetEnabled);
+		}
+	}
+
+	/**
+	 * Shows or hides the map center coordinates widget in the top panel.
+	 *
+	 * @return whether it was shown before
+	 */
+	private boolean setTopPanelWidget(boolean enabled) {
+		boolean[] enabledBefore = new boolean[1];
+		scenarioRule.getScenario().onActivity(activity -> {
+			MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+			for (MapWidgetInfo widgetInfo : registry.getWidgetInfoForType(WidgetType.COORDINATES_MAP_CENTER)) {
+				enabledBefore[0] |= widgetInfo.isEnabledForAppMode(app.getSettings().getApplicationMode(),
+						MapWidgetInfo.getWidgetsVisibility(app, app.getSettings().getApplicationMode(), null));
+				registry.enableDisableWidgetForMode(app.getSettings().getApplicationMode(), widgetInfo, enabled, null, true);
+			}
+		});
+		return enabledBefore[0];
 	}
 
 	/**
