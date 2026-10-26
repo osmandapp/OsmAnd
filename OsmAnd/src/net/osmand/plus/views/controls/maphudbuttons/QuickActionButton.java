@@ -2,6 +2,7 @@ package net.osmand.plus.views.controls.maphudbuttons;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,6 +72,9 @@ public class QuickActionButton extends MapButton {
 	public void update() {
 		setWidgetVisible(layer.isWidgetVisibleForButton(this));
 		super.update();
+		if (getVisibility() != View.VISIBLE) {
+			return;
+		}
 
 		if (widgetVisible) {
 			setContentDescription(app.getString(R.string.shared_string_cancel));
