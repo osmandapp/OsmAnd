@@ -11,16 +11,19 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
-	<string name="free_region_get_maps_plus">Get Maps+</string>
 	<string name="free_region_not_chosen_descr">The region of your first downloaded map becomes your free region.</string>
 	<string name="free_region_banner_descr">All maps of %1$s are free.</string>
-	<string name="free_region_maps_size">Maps: %1$d · %2$s</string>
-	<string name="free_region_replace_note">On replace, maps of other regions are deleted. The world map and plugin maps (contour lines, terrain, depth, Wikipedia, travel guides) stay.</string>
 	<string name="free_region_other_title">%1$s is not your free region</string>
-	<string name="free_region_other_descr">Replace %1$s with %2$s, or get Maps+ for all regions.</string>
-	<string name="free_region_not_eligible_title">You\'re not eligible for a free replace</string>
-	<string name="free_region_not_eligible_email_descr">Leave your email to replace it. We send OsmAnd news and discounts about once a month.</string>
-	<string name="free_region_not_eligible_buy_descr">Get Maps+ to download maps of all regions.</string>
+	<string name="free_region_other_descr">The free version includes maps of one region. To download %1$s, maps of other regions will be deleted.</string>
+	<string name="free_region_will_be_deleted">Will be deleted</string>
+	<string name="free_region_maps_stay">The world overview map, contour lines and other plugin maps stay.</string>
+	<string name="free_region_delete_and_download">Delete and download</string>
+	<string name="free_region_replace_used_title">Free replace already used</string>
+	<string name="free_region_not_eligible_email_descr">Leave your email to replace your free region once more, or get unlimited map downloads.</string>
+	<string name="free_region_email_helper">We\'ll send OsmAnd news. You can unsubscribe at any time.</string>
+	<string name="free_region_email_maps_deleted">Maps of %1$s (%2$s) will be deleted.</string>
+	<string name="free_region_send_and_replace">Send and replace</string>
+	<string name="free_region_not_eligible_buy_descr">Your free region is %1$s. To download %2$s and keep your current maps, get unlimited map downloads.</string>
 	<string name="free_region_update_maps_title">Update your maps</string>
 	<string name="free_region_update_maps_descr">The new search needs maps of this version. Update all your maps - it is free.</string>
 	<string name="free_region_other_regions_need_maps_plus">Other regions need Maps+: %1$s</string>
