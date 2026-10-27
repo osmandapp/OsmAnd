@@ -884,6 +884,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			lastStarCameraState?.let { state ->
 				apply2DMode(state.is2DMode)
 				starView.restoreCameraState(state)
+				if (!state.is2DMode) compassButton.update(-state.azimuth.toFloat())
 			}
 		}
 		restoredActiveEclipseCameraState?.let { state ->
