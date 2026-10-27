@@ -272,11 +272,13 @@ class ButtonPositionSize {
 		private const val MARGIN_MASK = (1 shl MAX_MARGIN_BITS) - 1
 		private const val SIZE_MASK = (1 shl MAX_SIZE_BITS) - 1
 
+		@JvmOverloads
 		fun computeNonOverlap(
 			space: Int,
 			buttons: List<ButtonPositionSize>,
 			totalWidth: Int,
-			totalHeight: Int
+			totalHeight: Int,
+			unresolved: MutableList<String>? = null
 		): Boolean {
 			buttons.forEach {
 				it.updateBounds(totalWidth, totalHeight);
@@ -308,6 +310,13 @@ class ButtonPositionSize {
 						val moved = moveButton(space, button, check, totalWidth, totalHeight)
 						if (!moved) {
 							failMove = true;
+							// A button that is not allowed to move never was a candidate, and a zero-sized
+							// grid (layout not measured yet) cannot fit anything; only a movable button
+							// left overlapping on a real grid is worth reporting.
+							if ((button.xMove || button.yMove) && totalWidth > 0 && totalHeight > 0) {
+								LOG.warn("Can't resolve overlap of ${button.id} with ${check.id}, keeping ${button.id} at $ox,$oy")
+								unresolved?.add("${button.id}/${check.id}")
+							}
 							break;
 						}
 						if (check.xMove || check.yMove) {
