@@ -98,5 +98,7 @@ public abstract class MultiColoringGeometryWayContext extends CommonGeometryWayC
 		float carScale;
 		@Nullable
 		Bitmap bitmap;
+		@Nullable
+		byte[] pixels;
 	}
 }

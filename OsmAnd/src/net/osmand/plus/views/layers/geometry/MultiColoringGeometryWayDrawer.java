@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.jni.QListFColorARGB;
+import net.osmand.core.jni.SingleSkImage;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
@@ -214,6 +215,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 				|| icon.circleColor != circleColor || icon.outerRadius != outerRadius
 				|| icon.innerRadius != innerRadius || icon.carScale != carScale) {
 			icon.bitmap = pathPoint.drawBitmap(getContext());
+			icon.pixels = null;
 			icon.visible = visible;
 			icon.arrowColor = arrowColor;
 			icon.circleColor = circleColor;
@@ -222,6 +224,24 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 			icon.carScale = carScale;
 		}
 		return icon.bitmap;
+	}
+
+	// a SingleSkImage gives its image away when it is copied, so it is not shared (as in IconPixelsCache): every line
+	// gets its own, made from the pixels copied once per arrow icon
+	@NonNull
+	@Override
+	protected SingleSkImage createPathIcon(@NonNull Bitmap bitmap) {
+		MultiColoringGeometryWayContext.ArrowIcon icon = getContext().getArrowIcon(false);
+		if (icon.bitmap != bitmap) {
+			icon = getContext().getArrowIcon(true);
+		}
+		if (icon.bitmap != bitmap) {
+			return super.createPathIcon(bitmap);
+		}
+		if (icon.pixels == null) {
+			icon.pixels = AndroidUtils.getByteArrayFromBitmap(bitmap);
+		}
+		return NativeUtilities.createSkImage(bitmap.getWidth(), bitmap.getHeight(), icon.pixels);
 	}
 
 	private static class ArrowPathPoint extends PathPoint {
