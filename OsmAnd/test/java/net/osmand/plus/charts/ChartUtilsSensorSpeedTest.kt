@@ -52,6 +52,18 @@ class ChartUtilsSensorSpeedTest {
 	}
 
 	@Test
+	fun brakingDistanceBeforeStopIsNotCountedAsMovement() {
+		val attributes = createAttributes(
+			5f to 5f, Float.NaN to 0f, Float.NaN to 0f, Float.NaN to 0f, Float.NaN to 0f, Float.NaN to 0f, 5f to 5f
+		)
+		attributes[1].distance = 2.5f
+		val entries = ChartUtils.getPointAttributeValues(
+			PointAttributes.SENSOR_TAG_SPEED, attributes, GPXDataSetAxisType.TIME, 1f, 1f, Float.NaN, false
+		)
+		assertEquals(listOf(0f to 5f, 1f to 0f, 2f to 0f, 3f to 0f, 4f to 0f, 5f to 0f, 6f to 5f), entries.map { it.x to it.y })
+	}
+
+	@Test
 	fun stopInsideSensorDropoutIsNotPlotted() {
 		val attributes = createAttributes(
 			5f to 5f, Float.NaN to 5f, Float.NaN to 5f, Float.NaN to 0f, Float.NaN to 5f, Float.NaN to 5f, 5f to 5f

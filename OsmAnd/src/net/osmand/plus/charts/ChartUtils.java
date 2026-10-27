@@ -713,9 +713,14 @@ public class ChartUtils {
 		for (int i = 0; i < pointAttributes.size(); i++) {
 			PointAttributes attribute = pointAttributes.get(i);
 			if (attribute.hasValidValue(PointAttributes.SENSOR_TAG_SPEED)) {
-				if (gapStart >= 0 && gapStart < i && !moving
-						&& gapTime > 0 && gapDistance / gapTime < MIN_SPEED_FOR_PACE) {
-					Arrays.fill(stops, gapStart, i, true);
+				if (gapStart >= 0 && gapStart < i && !moving) {
+					PointAttributes firstGapPoint = pointAttributes.get(gapStart);
+					boolean singlePoint = i - gapStart == 1;
+					float distance = singlePoint ? firstGapPoint.getDistance() : gapDistance;
+					float time = singlePoint ? firstGapPoint.getTimeDiff() : gapTime;
+					if (time > 0 && distance / time < MIN_SPEED_FOR_PACE) {
+						Arrays.fill(stops, gapStart, i, true);
+					}
 				}
 				gapStart = i + 1;
 				moving = false;
@@ -725,8 +730,10 @@ public class ChartUtils {
 				if (!Float.isNaN(attribute.getSensorSpeed()) || !(attribute.getSpeed() < MIN_SPEED_FOR_PACE)) {
 					moving = true;
 				}
-				gapDistance += attribute.getDistance();
-				gapTime += attribute.getTimeDiff();
+				if (i > gapStart) {
+					gapDistance += attribute.getDistance();
+					gapTime += attribute.getTimeDiff();
+				}
 			}
 		}
 		return stops;
