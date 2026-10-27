@@ -248,6 +248,16 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return getDefaultIconName();
 	}
 
+	/**
+	 * A point without its own icon in a folder without an icon gets the star, not the last used icon.
+	 */
+	@NonNull
+	@Override
+	protected String getDefaultIconName() {
+		String iconName = getPreselectedIconName();
+		return !Algorithms.isEmpty(iconName) ? iconName : DEFAULT_ICON_NAME;
+	}
+
 	private void selectIconInController() {
 		EditorIconController controller = getIconController();
 		selectingIconForGroup = true;
@@ -529,6 +539,18 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * The editor opened from My Places is not the one of the map context menu, so the folder sheets reach it here.
+	 */
+	static void setPointsGroupOutsideMap(@NonNull FragmentActivity activity, @NonNull PointsGroup pointsGroup) {
+		for (Fragment fragment : activity.getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof FavoritePointEditorFragment editorFragment) {
+				editorFragment.setPointsGroup(pointsGroup);
+				return;
+			}
+		}
 	}
 
 	@Override
