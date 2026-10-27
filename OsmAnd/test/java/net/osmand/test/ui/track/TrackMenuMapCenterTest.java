@@ -89,6 +89,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 	private static final float RATIO_TOLERANCE = 0.05f;
 	private static final float TRACK_CENTER_TOLERANCE = 0.03f;
 	private static final int ZOOM_INTO_TRACK = 18;
+	private static final int PICKED_TWICE_COUNT = 80;
 
 	@Rule
 	public ActivityScenarioRule<MapActivity> scenarioRule = new ActivityScenarioRule<>(MapActivity.class);
@@ -282,6 +283,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			// the track goes from south to north, so the end of the chart is its northern end
 			assertChartPointShownAboveMenu(true, points.get(points.size() - 1));
 			assertChartPointShownAboveMenu(false, points.get(0));
+			assertPointPickedTwiceShownAboveMenu(gpxFile.getTracks().get(0).getSegments().get(0), points);
 		} finally {
 			app.getSelectedGpxHelper().selectGpxFile(gpxFile, GpxSelectionParams.newInstance().hideFromMap());
 			file.delete();
@@ -299,6 +301,38 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertTrue("Chart " + (chartEnd ? "end" : "start") + ": the track point is at " + x + ", " + y
 				+ " px, the menu at " + menuTop + " px", x >= 0 && x <= tileBox.getPixWidth() && y >= 0 && y <= menuTop);
 		assertEquals("Picking a chart point must not change the zoom", zoom, getZoom(), 0.01f);
+	}
+
+	/**
+	 * A tap on the chart reports the tapped point twice, a few milliseconds apart, the second time while the map is
+	 * already moving to it. With Version 1 of the map rendering engine the running animation could overwrite or shift
+	 * the second report, so the map stayed where it was or went past the point. Picks the ends of the track in turn,
+	 * the reports 0 to 4 ms apart.
+	 */
+	private void assertPointPickedTwiceShownAboveMenu(@NonNull TrkSegment segment, @NonNull List<WptPt> points) {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		for (int i = 0; i < PICKED_TWICE_COUNT; i++) {
+			WptPt point = points.get(i % 2 == 0 ? points.size() - 1 : 0);
+			long gapNanos = i % 40 * 100_000L;
+			onTrackMenu(fragment -> {
+				fragment.onChartPointSelected(segment, point.getLat(), point.getLon());
+				long start = System.nanoTime();
+				while (System.nanoTime() - start < gapNanos) {
+					// busy wait: the gap is shorter than the sleep granularity
+				}
+				fragment.onChartPointSelected(segment, point.getLat(), point.getLon());
+			});
+			SystemClock.sleep(100);
+			for (int j = 0; j < 50 && mapView.getAnimatedDraggingThread().isAnimating(); j++) {
+				SystemClock.sleep(50);
+			}
+			RotatedTileBox tileBox = mapView.getRotatedTileBox();
+			float x = tileBox.getPixXFromLatLon(point.getLat(), point.getLon());
+			float y = tileBox.getPixYFromLatLon(point.getLat(), point.getLon());
+			float menuTop = getMenuTopRatio() * tileBox.getPixHeight();
+			assertTrue("Picked twice " + gapNanos / 1000 + " us apart, pick " + i + ": the track point is at " + x + ", "
+					+ y + " px, the menu at " + menuTop + " px", x >= 0 && x <= tileBox.getPixWidth() && y >= 0 && y <= menuTop);
+		}
 	}
 
 	/**

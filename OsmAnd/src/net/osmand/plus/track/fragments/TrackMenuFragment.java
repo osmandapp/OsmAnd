@@ -223,6 +223,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private GPXTabItemType chartTabToOpen;
 	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
+	private LatLon mapMovedToPoint;
 	private RouteActivitySelectionHelper routeActivitySelectionHelper;
 	private RouteKey routeKey;
 	private boolean temporarySelected;
@@ -1582,12 +1583,19 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		visibleRect.inset(visibleRect.width() / 10, visibleRect.height() / 10);
 		PointF pixel = NativeUtilities.getPixelFromLatLon(mapView.getMapRenderer(), tb, lat, lon);
 		if (!visibleRect.contains((int) pixel.x, (int) pixel.y)) {
+			LatLon point = new LatLon(lat, lon);
 			if (mapView.getAnimatedDraggingThread().isAnimating()) {
+				if (mapView.getMapRenderer() == null && point.equals(mapMovedToPoint)) {
+					// a point reported again (a tap reports it twice): with Version 1 of the map engine the next step
+					// of the animation started for it could overwrite setLatLon()
+					mapView.getAnimatedDraggingThread().stopAnimatingSync();
+				}
 				// as TrackDetailsMenu does: while the highlight is dragged, do not wait for the running animation to stop
 				mapView.setLatLon(lat, lon);
 			} else {
 				mapView.getAnimatedDraggingThread().startMoving(lat, lon, mapView.getZoom(), mapView.getZoomFloatPart());
 			}
+			mapMovedToPoint = point;
 		}
 	}
 
