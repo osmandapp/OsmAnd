@@ -39,6 +39,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SUNRISE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SUNSET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SUN_POSITION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.IF;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
@@ -98,7 +99,7 @@ public class WidgetsAvailabilityHelper {
 		regWidgetVisibility(NEXT_TURN, nextTurnSet);
 		regWidgetVisibility(SMALL_NEXT_TURN, smallNextTurnSet);
 		regWidgetVisibility(SECOND_NEXT_TURN, secondNextTurnSet);
-		
+
 		regWidgetAvailability(NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SMALL_NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SECOND_NEXT_TURN, exceptDefault);
@@ -146,6 +147,7 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(TRUE_BEARING, all);
 		regWidgetAvailability(RADIUS_RULER, all);
 		regWidgetAvailability(CURRENT_TIME, all);
+		regWidgetAvailability(WidgetType.IF, all);
 	}
 
 	@NonNull
