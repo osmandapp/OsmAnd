@@ -541,6 +541,18 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return null;
 	}
 
+	/**
+	 * The editor opened from My Places is not the one of the map context menu, so the folder sheets reach it here.
+	 */
+	static void setPointsGroupOutsideMap(@NonNull FragmentActivity activity, @NonNull PointsGroup pointsGroup) {
+		for (Fragment fragment : activity.getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof FavoritePointEditorFragment editorFragment) {
+				editorFragment.setPointsGroup(pointsGroup);
+				return;
+			}
+		}
+	}
+
 	@Override
 	protected void showSelectCategoryDialog() {
 		FragmentManager fragmentManager = getFragmentManager();
