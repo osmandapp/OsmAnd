@@ -41,6 +41,7 @@ import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -49,6 +50,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
@@ -129,13 +131,15 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 	public void testMapCenterRestoredBelowTopPanelAfterMenuClosed() throws Throwable {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
+		// without a map of the track region, the map download suggestion hides the top panel once the track is fitted
+		boolean suggestMapEnabled = setSuggestMapEnabled(false);
 		boolean widgetEnabled = setTopPanelWidget(true);
 		try {
 			awaitTrackMenuSettled();
 			boolean[] panelShown = new boolean[1];
 			scenarioRule.getScenario().onActivity(activity ->
 					panelShown[0] = activity.findViewById(R.id.top_widgets_panel).isShown());
-			assumeTrue("A top toolbar, such as a map download suggestion, hides the top panel", panelShown[0]);
+			assumeTrue("A top toolbar hides the top panel", panelShown[0]);
 			float ratioBeforeMenu = getMapRatio().y;
 
 			scenarioRule.getScenario().onActivity(activity ->
@@ -152,7 +156,23 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			assertEquals("Map center after the menu is closed", ratioBeforeMenu, getMapRatio().y, 0.005f);
 		} finally {
 			setTopPanelWidget(widgetEnabled);
+			setSuggestMapEnabled(suggestMapEnabled);
 		}
+	}
+
+	/**
+	 * Allows or forbids the top toolbar that suggests to download the map of the region on the screen.
+	 *
+	 * @return whether it was allowed before
+	 */
+	private boolean setSuggestMapEnabled(boolean enabled) {
+		OsmandPreference<Boolean> preference = app.getSettings().SHOW_SUGGEST_MAP_DIALOG;
+		boolean enabledBefore = preference.get();
+		preference.set(enabled);
+		if (!enabled) {
+			scenarioRule.getScenario().onActivity(activity -> activity.hideTopToolbar(TopToolbarControllerType.SUGGEST_MAP));
+		}
+		return enabledBefore;
 	}
 
 	/**
