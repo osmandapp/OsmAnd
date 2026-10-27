@@ -3542,6 +3542,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="copy_from_other_profile">Copy from another profile</string>
 	<string name="training_settings_descr">Set rider body weight and FTP for training features</string>
 	<string name="training">Training</string>
+	<string name="training_desc">Training widgets for cycling metrics</string>
 	<string name="training_parameters">Training parameters</string>
 	<string name="rider_body_weight">Rider body weight</string>
 	<string name="ftp">FTP (Functional Threshold Power)</string>
