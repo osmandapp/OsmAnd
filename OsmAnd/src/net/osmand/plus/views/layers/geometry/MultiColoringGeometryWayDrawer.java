@@ -88,12 +88,8 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		int borderColor = coloringType.isGradient() ? borderPaint.getColor() : 0;
 		float borderWidth = coloringType.isGradient() ? borderPaint.getStrokeWidth() : 0;
 
-		PathPoint arrowPathPointSample = getArrowPathPointSample(style, false);
-		arrowPathPointSample.scaled = false;
-		PathPoint specialArrowPathPointSample = getArrowPathPointSample(style, true);
-		specialArrowPathPointSample.scaled = false;
-		Bitmap pointBitmap = arrowPathPointSample.drawBitmap(getContext());
-		Bitmap specialPointBitmap = specialArrowPathPointSample.drawBitmap(getContext());
+		Bitmap pointBitmap = getArrowBitmap(style, false);
+		Bitmap specialPointBitmap = getArrowBitmap(style, true);
 
 		if (pointBitmap == null) {
 			pointBitmap = style.getPointBitmap();
@@ -197,9 +193,35 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		return new ArrowPathPoint(iconX, iconY, angle, style, percent, useSpecialArrow);
 	}
 
-	@NonNull
-	private PathPoint getArrowPathPointSample(GeometryWayStyle<?> style, boolean useSpecialArrow) {
-		return new ArrowPathPoint(0, 0, 0, style, 0, useSpecialArrow);
+	// A track of many segments draws a vector line per segment, mostly with the same colors: the arrow icon is drawn
+	// again only when the colors or the sizes it is drawn with change
+	@Nullable
+	private Bitmap getArrowBitmap(@NonNull GeometryWayStyle<?> style, boolean useSpecialArrow) {
+		ArrowPathPoint pathPoint = new ArrowPathPoint(0, 0, 0, style, 0, useSpecialArrow);
+		pathPoint.scaled = false;
+		if (!(style instanceof GeometrySolidWayStyle<?> solidStyle)) {
+			return pathPoint.drawBitmap(getContext());
+		}
+		boolean visible = pathPoint.shouldDrawArrow();
+		int arrowColor = solidStyle.getPointColor();
+		int circleColor = useSpecialArrow ? pathPoint.getCircleColor(solidStyle) : 0;
+		// the circle radii are dp at the style's creation, the other dp sizes are taken now: both with the car scale
+		float outerRadius = useSpecialArrow ? solidStyle.getOuterCircleRadius() : 0;
+		float innerRadius = useSpecialArrow ? solidStyle.getInnerCircleRadius() : 0;
+		float carScale = getContext().getApp().getOsmandMap().getCarDensityScaleCoef();
+		MultiColoringGeometryWayContext.ArrowIcon icon = getContext().getArrowIcon(useSpecialArrow);
+		if (icon.bitmap == null || icon.visible != visible || icon.arrowColor != arrowColor
+				|| icon.circleColor != circleColor || icon.outerRadius != outerRadius
+				|| icon.innerRadius != innerRadius || icon.carScale != carScale) {
+			icon.bitmap = pathPoint.drawBitmap(getContext());
+			icon.visible = visible;
+			icon.arrowColor = arrowColor;
+			icon.circleColor = circleColor;
+			icon.outerRadius = outerRadius;
+			icon.innerRadius = innerRadius;
+			icon.carScale = carScale;
+		}
+		return icon.bitmap;
 	}
 
 	private static class ArrowPathPoint extends PathPoint {
@@ -234,6 +256,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 			return null;
 		}
 
+		// getArrowBitmap caches the icons drawn here by their inputs: a new input here must go into its key
 		@Override
 		protected void draw(@NonNull Canvas canvas, @NonNull GeometryWayContext context) {
 			if (style instanceof GeometrySolidWayStyle<?> arrowsWayStyle && shouldDrawArrow()) {
