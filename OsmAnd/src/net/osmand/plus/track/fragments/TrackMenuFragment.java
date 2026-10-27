@@ -1116,6 +1116,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			boolean topControlsVisible = shouldShowTopControls(menuVisible);
 			boolean bottomControlsVisible = shouldShowBottomControls(menuVisible);
 			mapActivity.getWidgetsVisibilityHelper().updateControlsVisibility(topControlsVisible, bottomControlsVisible);
+			// show or hide the top widgets panel before the map center is placed beside the menu, not on the next redraw
+			mapActivity.getMapLayers().getMapInfoLayer().updateVerticalPanels();
 			mapActivity.refreshMap();
 		}
 	}

@@ -4,11 +4,13 @@ import static net.osmand.test.common.OsmAndDialogInteractions.clickViewWithId;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
 
+import android.app.UiAutomation;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Handler;
@@ -26,6 +28,7 @@ import androidx.test.espresso.IdlingResource;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.utils.ViewPortHandler;
@@ -159,6 +162,54 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			setTopPanelWidget(widgetEnabled);
 			setSuggestMapEnabled(suggestMapEnabled);
 		}
+	}
+
+	/**
+	 * In landscape the menu beside the map hides the top widgets panel, so the map center must not stay below
+	 * the hidden panel.
+	 */
+	@Test
+	public void testMapCenterNotBelowTopPanelHiddenInLandscape() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		boolean suggestMapEnabled = setSuggestMapEnabled(false);
+		boolean widgetEnabled = setTopPanelWidget(true);
+		UiAutomation uiAutomation = InstrumentationRegistry.getInstrumentation().getUiAutomation();
+		int[] rotation = new int[1];
+		scenarioRule.getScenario().onActivity(activity -> rotation[0] = activity.getWindowManager().getDefaultDisplay().getRotation());
+		try {
+			// ROTATION_FREEZE_0..270 are the Surface rotations: a quarter turn of a portrait screen is landscape,
+			// whatever the natural orientation of the device
+			uiAutomation.setRotation(isPortrait() ? (rotation[0] + 1) % 4 : UiAutomation.ROTATION_FREEZE_CURRENT);
+			for (int i = 0; i < 50 && isPortrait(); i++) {
+				SystemClock.sleep(100);
+			}
+			assertFalse("The screen did not turn to landscape", isPortrait());
+			awaitTrackMenuSettled();
+			assumeTrue("A top toolbar hides the top panel", isTopPanelShown());
+
+			scenarioRule.getScenario().onActivity(activity ->
+					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+			awaitTrackMenuSettled();
+			assertFalse("The track menu is expected to hide the top panel", isTopPanelShown());
+			assertEquals("Map center with the top panel hidden", 0.5f, getMapRatio().y, 0.005f);
+		} finally {
+			uiAutomation.setRotation(rotation[0]);
+			setTopPanelWidget(widgetEnabled);
+			setSuggestMapEnabled(suggestMapEnabled);
+		}
+	}
+
+	private boolean isPortrait() {
+		boolean[] portrait = new boolean[1];
+		scenarioRule.getScenario().onActivity(activity -> portrait[0] = AndroidUiHelper.isOrientationPortrait(activity));
+		return portrait[0];
+	}
+
+	private boolean isTopPanelShown() {
+		boolean[] shown = new boolean[1];
+		scenarioRule.getScenario().onActivity(activity -> shown[0] = activity.findViewById(R.id.top_widgets_panel).isShown());
+		return shown[0];
 	}
 
 	/**
