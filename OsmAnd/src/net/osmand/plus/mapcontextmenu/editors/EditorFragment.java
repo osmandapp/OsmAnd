@@ -462,6 +462,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		updateSelectedColorText();
 		getIconController().updateAccentColor(color);
 		shapesCard.updateSelectedShape(color, backgroundType);
+		updateSelectedShapeText();
 	}
 
 	protected void updateSelectedShapeText() {
