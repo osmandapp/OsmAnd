@@ -35,7 +35,8 @@ public enum WidgetGroup {
 	WEATHER(R.string.shared_string_weather, R.string.weather_widget_group_desc, R.drawable.widget_weather_umbrella_day, R.drawable.widget_weather_umbrella_night, 0),
 	SUNRISE_SUNSET(R.string.map_widget_sun_position, R.string.map_widget_group_sunrise_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0),
 	GLIDE(R.string.map_widget_group_glide_ratio, R.string.map_widget_group_glide_desc, R.drawable.widget_glide_ratio_to_target_day, R.drawable.widget_glide_ratio_to_target_night, 0),
-	ROUTE_GUIDANCE(R.string.route_guidance, R.string.route_guidance_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers);
+	ROUTE_GUIDANCE(R.string.route_guidance, R.string.route_guidance_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers),
+	TRAINING(R.string.training, R.string.training_desc, R.drawable.widget_sensor_bicycle_power_day, R.drawable.widget_sensor_bicycle_power_night, 0);
 
 	@StringRes
 	public final int titleId;
