@@ -665,18 +665,9 @@ public class ChartUtils {
 	                                                  boolean calcWithoutGaps) {
 		List<Entry> values = new ArrayList<>();
 		float currentX = 0;
-		int firstValidIndex = -1;
-		int lastValidIndex = -1;
-		if (PointAttributes.SENSOR_TAG_SPEED.equals(key)) {
-			for (int i = 0; i < pointAttributes.size(); i++) {
-				if (pointAttributes.get(i).hasValidValue(key)) {
-					if (firstValidIndex < 0) {
-						firstValidIndex = i;
-					}
-					lastValidIndex = i;
-				}
-			}
-		}
+		boolean[] missingValues = PointAttributes.SENSOR_TAG_SPEED.equals(key)
+				? getMissingSensorSpeedStops(pointAttributes)
+				: null;
 
 		for (int i = 0; i < pointAttributes.size(); i++) {
 			PointAttributes attribute = pointAttributes.get(i);
@@ -687,10 +678,7 @@ public class ChartUtils {
 				if (!(calcWithoutGaps && attribute.getFirstPoint())) {
 					currentX += stepX / divX;
 				}
-				boolean missingValue = i > firstValidIndex && i < lastValidIndex
-						&& Float.isNaN(attribute.getAttributeValue(key))
-						&& attribute.hasValidValue(PointAttributes.POINT_SPEED)
-						&& attribute.getSpeed() < MIN_SPEED_FOR_PACE;
+				boolean missingValue = missingValues != null && missingValues[i];
 				if (missingValue || attribute.hasValidValue(key)) {
 					float value = missingValue ? 0 : attribute.getAttributeValue(key);
 					float currentY;
@@ -713,6 +701,35 @@ public class ChartUtils {
 			}
 		}
 		return values;
+	}
+
+	@NonNull
+	private static boolean[] getMissingSensorSpeedStops(@NonNull List<PointAttributes> pointAttributes) {
+		boolean[] stops = new boolean[pointAttributes.size()];
+		int gapStart = -1;
+		boolean moving = false;
+		float gapDistance = 0;
+		float gapTime = 0;
+		for (int i = 0; i < pointAttributes.size(); i++) {
+			PointAttributes attribute = pointAttributes.get(i);
+			if (attribute.hasValidValue(PointAttributes.SENSOR_TAG_SPEED)) {
+				if (gapStart >= 0 && gapStart < i && !moving
+						&& gapTime > 0 && gapDistance / gapTime < MIN_SPEED_FOR_PACE) {
+					Arrays.fill(stops, gapStart, i, true);
+				}
+				gapStart = i + 1;
+				moving = false;
+				gapDistance = 0;
+				gapTime = 0;
+			} else {
+				if (!Float.isNaN(attribute.getSensorSpeed()) || !(attribute.getSpeed() < MIN_SPEED_FOR_PACE)) {
+					moving = true;
+				}
+				gapDistance += attribute.getDistance();
+				gapTime += attribute.getTimeDiff();
+			}
+		}
+		return stops;
 	}
 
 
