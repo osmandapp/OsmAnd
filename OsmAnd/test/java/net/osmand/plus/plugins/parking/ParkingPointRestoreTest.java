@@ -67,6 +67,9 @@ public class ParkingPointRestoreTest {
 	@After
 	@SuppressWarnings("unchecked")
 	public void tearDown() {
+		if (plugin == null) {
+			return;
+		}
 		Float lat = (Float) savedValues.get(PARKING_POINT_LAT);
 		Float lon = (Float) savedValues.get(PARKING_POINT_LON);
 		// Also refreshes the position cached by the plugin
@@ -99,6 +102,23 @@ public class ParkingPointRestoreTest {
 		assertTrue(plugin.getParkingType());
 		assertEquals(PICK_UP_UNTIL, plugin.getParkingTime());
 		assertEquals(PARKED_AT, plugin.getStartParkingTime());
+	}
+
+	@Test
+	public void parkingSetAgainWithoutTimeLimitStaysUnlimited() {
+		// A point loaded from a file keeps all its GPX extensions, and setParkingPoint() reuses it for the next parking
+		FavouritePoint point = savedParkingPoint(PICK_UP_UNTIL);
+		point.setCalendarEvent(true);
+		FavouritePoint loaded = restore(point);
+		loaded.setPickupDate(-1);
+		loaded.setCalendarEvent(false);
+
+		FavouritePoint restored = restore(loaded);
+		assertFalse(restored.getCalendarEvent());
+		plugin.updateParkingPoint(restored);
+
+		assertFalse(plugin.getParkingType());
+		assertTrue(plugin.getParkingTime() <= 0);
 	}
 
 	/**
