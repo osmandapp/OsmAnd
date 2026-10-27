@@ -362,6 +362,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		// Map compass resets made before the star map was opened must not drop the restored azimuth
+		lastResetRotationToNorth = app.mapViewTrackingUtilities.lastResetRotationToNorth
 		if (savedInstanceState?.getBoolean(STATE_ECLIPSE_ACTIVE) == true) {
 			activeEclipseType = savedInstanceState.getString(STATE_ECLIPSE_TYPE)
 				?.let { runCatching { EclipseExplorerType.valueOf(it) }.getOrNull() }
