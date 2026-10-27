@@ -527,9 +527,13 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		}
 		if (getPickupDate() > 0) {
 			extensions.put(PICKUP_DATE, GpxUtilities.INSTANCE.formatTime(getPickupDate()));
+		} else {
+			extensions.remove(PICKUP_DATE);
 		}
 		if (getCalendarEvent()) {
 			extensions.put(CALENDAR_EXTENSION, "true");
+		} else {
+			extensions.remove(CALENDAR_EXTENSION);
 		}
 		if (iconId != 0) {
 			point.setIconName(getIconEntryName(ctx).substring(3));
