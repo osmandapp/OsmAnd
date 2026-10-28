@@ -1661,7 +1661,7 @@ You will be able to pair this scanner again at any time.</string>
     • Accessibility: touch target size for buttons changed to 48 dp; fixed issue with map UI visible for screen readers \n\n
     • Japanese voice prompts reworked \n\n
     • Elevation change and slope evaluation reworked \n\n
-    </string>    
+    </string>
     <string name="free_favorites_backup_description">Register in OsmAnd Cloud to get free backup for favorites and settings.</string>
     <string name="free_favorites_backup">Free Favorites Backup</string>
     <string name="get_osmand_cloud">Get OsmAnd Cloud</string>
@@ -3539,6 +3539,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="reset_to_default">Reset to default</string>
     <string name="osmand_settings_descr">Effective for the entire app</string>
     <string name="osmand_settings">OsmAnd settings</string>
+    <string name="map_widget_power_zone">Power Zone</string>
+	<string name="map_widget_power_zone_desc">Shows the current power zone</string>
     <string name="copy_from_other_profile">Copy from another profile</string>
     <string name="turn_screen_on">Turn screen on</string>
     <string name="map_during_navigation_info">Map during navigation</string>
