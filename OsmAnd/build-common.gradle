@@ -134,61 +134,73 @@ clean {
 }
 
 tasks.register('validateTranslations') {
-	println "Validating translations"
-	def taskStartTime = System.currentTimeMillis()
-
-	def pattern = /%(\d+\$)?[sSdD]/
+	def resDir = file("res")
 	def files = ["strings.xml", "phrases.xml"]
-	def defaultPlaceholders = [:]
-	def parser = new XmlParser()
+	// The check runs at execution time (a configuration cache hit skips the configuration phase)
+	// and only when one of the strings files changed
+	def validatedFile = layout.buildDirectory.file("validateTranslations/validated")
+	inputs.files(fileTree(resDir) { include files.collect { "values*/$it" } })
+			.withPropertyName("translations")
+			.withPathSensitivity(PathSensitivity.RELATIVE)
+	outputs.file(validatedFile)
 
-	def normalizePlaceholders = { placeholders -> placeholders.collect { it.toLowerCase() }.toSet() }
+	doLast {
+		println "Validating translations"
+		def taskStartTime = System.currentTimeMillis()
 
-	files.each { fileName ->
-		def file = new File(file("res/values"), fileName)
-		if (file.exists()) {
-			parser.parse(file).string.each { node ->
-				def placeholders = (node.text() ?: "").findAll(pattern)
-				defaultPlaceholders[node.@name] = normalizePlaceholders(placeholders)
-			}
-		} else {
-			println "Skipping missing default file: ${file.path}"
-		}
-	}
+		def pattern = /%(\d+\$)?[sSdD]/
+		def defaultPlaceholders = [:]
+		def parser = new XmlParser()
 
-	def issues = []
-	def directories = file("res").listFiles().findAll {
-		it.isDirectory() && it.name.startsWith("values-")
-	}
+		def normalizePlaceholders = { placeholders -> placeholders.collect { it.toLowerCase() }.toSet() }
 
-	directories.each { dir ->
 		files.each { fileName ->
-			def file = new File(dir, fileName)
+			def file = new File(new File(resDir, "values"), fileName)
 			if (file.exists()) {
-				def placeholders = [:]
 				parser.parse(file).string.each { node ->
-					def translationPlaceholders = (node.text() ?: "").findAll(pattern)
-					placeholders[node.@name] = normalizePlaceholders(translationPlaceholders)
+					def placeholders = (node.text() ?: "").findAll(pattern)
+					defaultPlaceholders[node.@name] = normalizePlaceholders(placeholders)
 				}
+			} else {
+				println "Skipping missing default file: ${file.path}"
+			}
+		}
 
-				defaultPlaceholders.each { key, defaultValues ->
-					if (placeholders.containsKey(key)) {
-						def translationValues = placeholders[key]
-						if (defaultValues != translationValues) {
-							issues << "Mismatch in ${file.path}: '${key}' -> Default: ${defaultValues}, Translation: ${translationValues}"
+		def issues = []
+		def directories = resDir.listFiles().findAll {
+			it.isDirectory() && it.name.startsWith("values-")
+		}
+
+		directories.each { dir ->
+			files.each { fileName ->
+				def file = new File(dir, fileName)
+				if (file.exists()) {
+					def placeholders = [:]
+					parser.parse(file).string.each { node ->
+						def translationPlaceholders = (node.text() ?: "").findAll(pattern)
+						placeholders[node.@name] = normalizePlaceholders(translationPlaceholders)
+					}
+
+					defaultPlaceholders.each { key, defaultValues ->
+						if (placeholders.containsKey(key)) {
+							def translationValues = placeholders[key]
+							if (defaultValues != translationValues) {
+								issues << "Mismatch in ${file.path}: '${key}' -> Default: ${defaultValues}, Translation: ${translationValues}"
+							}
 						}
 					}
 				}
 			}
 		}
-	}
 
-	if (!issues.isEmpty()) {
-		issues.each { println "ERROR: $it" }
-		throw new GradleException("Translation validation failed with ${issues.size()} issue(s).")
+		if (!issues.isEmpty()) {
+			issues.each { println "ERROR: $it" }
+			throw new GradleException("Translation validation failed with ${issues.size()} issue(s).")
+		}
+		validatedFile.get().asFile.text = "${directories.size()} translations validated\n"
+		def validationEndTime = System.currentTimeMillis()
+		println "Translations validated in ${(validationEndTime - taskStartTime)} ms"
 	}
-	def validationEndTime = System.currentTimeMillis()
-	println "Translations validated in ${(validationEndTime - taskStartTime)} ms"
 }
 
 tasks.register('downloadWorldMiniBasemap', Download) {
