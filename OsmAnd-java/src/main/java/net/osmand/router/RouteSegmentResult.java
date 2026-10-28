@@ -6,6 +6,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataBundle;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.router.lanes.TurnTypeAI;
 import net.osmand.binary.StringExternalizable;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
@@ -40,6 +41,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	private String[] description = null;
 	// this make not possible to make turns in between segment result for now
 	private TurnType turnType;
+	// the OSM-shaped turn and lane model; turnType above is its lossy export, see TurnTypeAI
+	private TurnTypeAI turnTypeAI;
 	private boolean leftside = false;
 
 	private int gpxPointIndex = -1; // used by approximation to reconstruct finalPoints.routeToTarget
@@ -523,6 +526,16 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return turnType;
 	}
 	
+	public TurnTypeAI getTurnTypeAI() {
+		return turnTypeAI;
+	}
+
+	/** sets the model and keeps the legacy object in step with it, so both callers see one answer */
+	public void setTurnTypeAI(TurnTypeAI turnTypeAI) {
+		this.turnTypeAI = turnTypeAI;
+		this.turnType = turnTypeAI == null ? null : turnTypeAI.getOldTurnType();
+	}
+
 	public void setTurnType(TurnType turnType) {
 		this.turnType = turnType;
 	}
