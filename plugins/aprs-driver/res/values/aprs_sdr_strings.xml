@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="plugin_aprs_sdr_name">APRS RTL-SDR driver</string>
+    <string name="plugin_aprs_sdr_description">Receives APRS packets from RTL2832U USB dongles and feeds aprs-core.</string>
+</resources>
