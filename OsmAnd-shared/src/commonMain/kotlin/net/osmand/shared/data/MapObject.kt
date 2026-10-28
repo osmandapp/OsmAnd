@@ -200,8 +200,12 @@ abstract class MapObject : Comparable<MapObject> {
 					if (!KAlgorithms.isEmpty(nm)) {
 						return unzipContent(nm)!!
 					}
-					if (transliterate) {
-						return KTransliterationHelper.transliterate(getName())
+				}
+				if (transliterate) {
+					// a Latin name of the map (name:en, or the generator's romanisation) beats a transliteration
+					val enName = getEnName(true)
+					if (!KAlgorithms.isEmpty(enName)) {
+						return enName
 					}
 				}
 			}
