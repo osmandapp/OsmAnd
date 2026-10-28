@@ -41,7 +41,7 @@ object WikiCoreHelper {
 	private const val GET_WIKI_DATA_ACTION = "get-wiki-data?"
 	private const val DEPT_CAT_LIMIT = 1
 
-	private val IMAGE_EXTENSIONS = listOf(".jpeg", ".jpg", ".png", ".gif")
+	private val IMAGE_EXTENSIONS = listOf(".jpeg", ".jpg", ".png", ".gif", ".webp")
 
 	@OptIn(ExperimentalSerializationApi::class)
 	private val jsonParser = Json {
