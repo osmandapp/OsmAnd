@@ -2515,9 +2515,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						setZoomAndAnimationImpl(initialViewport.getZoom(), 0, initialViewport.getZoomFloatPart(), multiTouchFirstX, multiTouchFirstY);
 						initialFirstLocation = new PointI(firstTouchLocationX, firstTouchLocationY);
 					}
-					// Diagnostic: scale the viewport without shifting its origin.
+					// Diagnostic: allow horizontal viewport shifting while keeping its vertical origin fixed.
 					mapRenderer.setViewportScale(limitMagnificationScale(relativeToStart), false);
-					mapRenderer.setViewportShift(0, 0, false);
+					mapRenderer.setViewportShift(multiTouchFirstX, 0, false);
 					// Re-center so the same initial tile stays under the finger
 					mapRenderer.setMapTarget(new PointI(multiTouchFirstX, multiTouchFirstY), initialFirstLocation);
 					float calcRotate = initialViewport.getRotate() + relAngle;
