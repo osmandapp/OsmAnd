@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="@dimen/map_tile_preview_size"
+	android:layout_height="@dimen/map_tile_preview_size">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/placeholder"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:srcCompat="?attr/image_tile_placeholder" />
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/tile_image"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/tile_zoom"
+		style="@style/DescStyle.Medium"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="start|bottom"
+		android:layout_marginStart="@dimen/gpx_small_icon_margin"
+		android:layout_marginBottom="@dimen/gpx_small_icon_margin"
+		android:background="@drawable/tile_zoom_rounded_background"
+		android:paddingHorizontal="@dimen/content_padding_half"
+		android:paddingVertical="@dimen/list_item_button_padding"
+		android:textColor="?attr/app_bar_primary_item_color"
+		tools:text="19" />
+
+</FrameLayout>

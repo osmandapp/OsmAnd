@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="poi_traffic_signals_sound">دھُنی</string>
+    <string name="poi_clothes_type">قسم</string>
+    <string name="poi_shoes_type">قسم</string>
+    <string name="poi_additional_type">ہور</string>
+    <string name="poi_fire_hydrant_type">قسم</string>
+    <string name="poi_highway_crossing_type">قسم</string>
+    <string name="poi_parking_type">قسم</string>
+    <string name="poi_animal_training_type">قسم</string>
+    <string name="poi_resort_type">قسم</string>
+    <string name="poi_social_facility_type">قسم</string>
+    <string name="poi_direction_n">دشا: اُتر</string>
+    <string name="poi_direction_ne">دشا: اُتر پورب</string>
+    <string name="poi_direction_e">دشا: پورب</string>
+    <string name="poi_direction_se">دشا: دکھݨ پورب</string>
+    <string name="poi_telescope_type">قسم</string>
+    <string name="poi_archaeological_site_type">قسم</string>
+    <string name="poi_information_type">قسم</string>
+    <string name="poi_bicycle_parking_type">قسم</string>
+    <string name="poi_recycling_type">قسم</string>
+    <string name="poi_shelter_type">قسم</string>
+    <string name="poi_zoo_type">قسم</string>
+    <string name="poi_animal_shelter_purpose">ترک</string>
+    <string name="poi_books_type">کتاباں</string>
+    <string name="twitter">ٹویٹر</string>
+    <string name="reddit">ریڈٹ</string>
+    <string name="poi_fire_hydrant_position">ستھتی</string>
+    <string name="poi_service_general">سروِس</string>
+    <string name="poi_theatre_genre">شیلی</string>
+    <string name="poi_fee">فیز</string>
+</resources>

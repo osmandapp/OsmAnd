@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/shared_string_accessibility">
+
+	<Preference
+		android:icon="@drawable/ic_action_android"
+		android:key="accessibility_options"
+		android:layout="@layout/preference_permission"
+		android:persistent="false"
+		android:summary="@string/shared_string_enable"
+		android:title="@string/accessibility_mode_disabled" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="accessibility_mode"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/accessibility_mode"
+		tools:icon="@drawable/ic_action_android"
+		tools:summary="@string/accessibility_default" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="speech_rate"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/speech_rate"
+		tools:icon="@drawable/ic_world_globe_dark"
+		tools:summary="50 %" />
+
+	<PreferenceCategory
+		android:key="announce"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/accessibility_announce" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="accessibility_smart_autoannounce"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/access_smart_autoannounce" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="accessibility_autoannounce_period"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/access_autoannounce_period"
+		tools:summary="10 seconds" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="direction_style"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/settings_direction_style"
+		tools:summary="@string/direction_style_sidewise" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="direction_audio_feedback"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/access_direction_audio_feedback" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="direction_haptic_feedback"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/access_direction_haptic_feedback" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="copy_plugin_settings"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/copy_from_other_profile"
+		tools:icon="@drawable/ic_action_copy" />
+
+	<Preference
+		android:key="reset_to_default"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/reset_plugin_to_default"
+		tools:icon="@drawable/ic_action_reset_to_default_dark" />
+
+</PreferenceScreen>
