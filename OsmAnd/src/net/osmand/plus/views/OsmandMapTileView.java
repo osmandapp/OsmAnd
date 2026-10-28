@@ -2515,9 +2515,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						setZoomAndAnimationImpl(initialViewport.getZoom(), 0, initialViewport.getZoomFloatPart(), multiTouchFirstX, multiTouchFirstY);
 						initialFirstLocation = new PointI(firstTouchLocationX, firstTouchLocationY);
 					}
-					// Diagnostic: isolate SwiftShader crashes by keeping the viewport unscaled.
-					mapRenderer.setViewportScale(1.0, false);
-					mapRenderer.setViewportShift(multiTouchFirstX, getViewHeight() - multiTouchFirstY,  false);
+					// Diagnostic: scale the viewport without shifting its origin.
+					mapRenderer.setViewportScale(limitMagnificationScale(relativeToStart), false);
+					mapRenderer.setViewportShift(0, 0, false);
 					// Re-center so the same initial tile stays under the finger
 					mapRenderer.setMapTarget(new PointI(multiTouchFirstX, multiTouchFirstY), initialFirstLocation);
 					float calcRotate = initialViewport.getRotate() + relAngle;
