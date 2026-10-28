@@ -166,6 +166,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private final Map<String, CachedTrack> segmentsCache = new ConcurrentHashMap<>();
 	private final Map<String, Set<TrkSegment>> renderedSegmentsCache = new ConcurrentHashMap<>();
 	private SelectedGpxFile tmpVisibleTrack;
+	// The selected track is drawn once more over the other tracks, from copies of its segments
+	private String selectedTrackPath;
+	private int selectedTrackCopyOrder;
+	private Map<TrkSegment, TrkSegment> selectedTrackCopies = new HashMap<>();
+	private final Set<TrkSegment> selectedTrackRenderedCopies = new HashSet<>();
 
 	private final List<WptPt> pointsCache = new ArrayList<>();
 	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
@@ -327,6 +332,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			visibleGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 		}
 		boolean tmpVisibleTrackChanged = updateTmpVisibleTrack(visibleGPXFiles);
+		updateSelectedTrack();
 
 		pointsCache.clear();
 		removeCachedUnselectedTracks(visibleGPXFiles);
@@ -411,6 +417,20 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		return tmpVisibleTrackChanged;
+	}
+
+	private void updateSelectedTrack() {
+		MapActivity mapActivity = getMapActivity();
+		TrackMenuFragment fragment = mapActivity != null && customObjectsDelegate == null
+				? mapActivity.getFragmentsHelper().getTrackMenuFragment() : null;
+		SelectedGpxFile selectedGpxFile = fragment != null ? fragment.getSelectedGpxFile() : null;
+		if (selectedGpxFile != null) {
+			String path = selectedGpxFile.isShowCurrentTrack() ? null : selectedGpxFile.getGpxFile().getPath();
+			if (!Algorithms.objectEquals(selectedTrackPath, path)) {
+				selectedTrackPath = path;
+				removeSelectedTrackCopy();
+			}
+		}
 	}
 
 	@Nullable
@@ -1261,7 +1281,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
 	                                       List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
+		boolean hasMapRenderer = hasMapRenderer();
 		SelectedGpxFile currentTrack = null;
+		SelectedGpxFile selectedTrack = null;
 		int baseOrder = getBaseOrder();
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			GpxFile gpxFile = selectedGpxFile.getGpxFile();
@@ -1273,9 +1295,28 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (selectedGpxFile.isShowCurrentTrack()) {
 				currentTrack = selectedGpxFile;
 			} else {
-				drawSelectedFileSegments(selectedGpxFile, false, canvas, tileBox, settings, baseOrder);
+				boolean selected = Algorithms.objectEquals(selectedTrackPath, gpxFile.getPath());
+				if (selected) {
+					selectedTrack = selectedGpxFile;
+				}
+				if (hasMapRenderer || !selected) {
+					drawSelectedFileSegments(selectedGpxFile, false, canvas, tileBox, settings, baseOrder);
+				}
 			}
 			baseOrder -= GpxGeometryWay.VECTOR_LINES_RESERVED;
+		}
+		if (selectedTrack == null) {
+			removeSelectedTrackCopy();
+		} else if (hasMapRenderer) {
+			// Existing lines keep their order, so the copy is drawn over the other tracks without recreating them
+			if (selectedTrackCopyOrder != baseOrder) {
+				removeSelectedTrackCopy();
+				selectedTrackCopyOrder = baseOrder;
+			}
+			drawSelectedFileSegments(selectedTrack, false, canvas, tileBox, settings, baseOrder, true);
+			baseOrder -= GpxGeometryWay.VECTOR_LINES_RESERVED;
+		} else {
+			drawSelectedFileSegments(selectedTrack, false, canvas, tileBox, settings, baseOrder);
 		}
 		if (currentTrack != null) {
 			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings, baseOrder);
@@ -1285,13 +1326,49 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack,
 	                                      Canvas canvas, RotatedTileBox tileBox, DrawSettings settings,
 	                                      int baseOrder) {
+		drawSelectedFileSegments(selectedGpxFile, currentTrack, canvas, tileBox, settings, baseOrder, false);
+	}
+
+	@NonNull
+	private List<TrkSegment> getSelectedTrackCopies(@NonNull List<TrkSegment> segments) {
+		Map<TrkSegment, TrkSegment> copies = new HashMap<>();
+		List<TrkSegment> segmentCopies = new ArrayList<>();
+		for (TrkSegment segment : segments) {
+			TrkSegment segmentCopy = selectedTrackCopies.get(segment);
+			if (segmentCopy == null) {
+				segmentCopy = new TrkSegment();
+				segmentCopy.setName(segment.getName());
+				segmentCopy.setGeneralSegment(segment.getGeneralSegment());
+				segmentCopy.setPoints(segment.getPoints());
+				segmentCopy.setRouteSegments(segment.getRouteSegments());
+				segmentCopy.setRouteTypes(segment.getRouteTypes());
+				segmentCopy.copyExtensions(segment);
+			}
+			copies.put(segment, segmentCopy);
+			segmentCopies.add(segmentCopy);
+		}
+		selectedTrackCopies = copies;
+		return segmentCopies;
+	}
+
+	private void removeSelectedTrackCopy() {
+		for (TrkSegment segmentCopy : selectedTrackRenderedCopies) {
+			resetSymbolProviders(segmentCopy);
+		}
+		selectedTrackRenderedCopies.clear();
+		selectedTrackCopies.clear();
+	}
+
+	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack,
+	                                      Canvas canvas, RotatedTileBox tileBox, DrawSettings settings,
+	                                      int baseOrder, boolean selectedTrackCopy) {
 		boolean hasMapRenderer = hasMapRenderer();
 		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		String gpxFilePath = gpxFile.getPath();
 
 		boolean visible = isGpxFileVisible(selectedGpxFile, tileBox);
 		if (!visible) {
-			removeSelectedFilesSegments(gpxFilePath);
+			removeSelectedFileSegments(gpxFilePath, selectedTrackCopy);
 			return;
 		}
 		TrackDbItems trackItems = getTrackDbItems(gpxFile);
@@ -1325,7 +1402,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 		boolean gradient = scaleType != null || hasMapRenderer && outlineScaleType != null;
 		if (!gpxFile.hasTrkPt() && gradient) {
-			removeSelectedFilesSegments(gpxFilePath);
+			removeSelectedFileSegments(gpxFilePath, selectedTrackCopy);
 			return;
 		}
 
@@ -1339,9 +1416,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else if (coloringType.isTrackSolid() || coloringType.isRouteInfoAttribute()) {
 			segments.addAll(selectedGpxFile.getPointsToDisplay());
 		}
+		if (selectedTrackCopy) {
+			segments = getSelectedTrackCopies(segments);
+		}
 
 		List<TrkSegment> oldSegments = new ArrayList<>();
-		Set<TrkSegment> renderedSegments = renderedSegmentsCache.get(gpxFilePath);
+		Set<TrkSegment> renderedSegments = selectedTrackCopy
+				? selectedTrackRenderedCopies : renderedSegmentsCache.get(gpxFilePath);
 		if (renderedSegments != null) {
 			// segments.contains for every rendered segment made each frame quadratic in the number of segments;
 			// the drawn segments rarely change, so they go into a set only when some rendered segment is gone
@@ -1959,6 +2040,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
+	private void removeSelectedFileSegments(@NonNull String path, boolean selectedTrackCopy) {
+		if (selectedTrackCopy) {
+			removeSelectedTrackCopy();
+		} else {
+			removeSelectedFilesSegments(path);
+		}
+	}
+
 	private void removeSelectedFilesSegments(@NonNull String path) {
 		Set<TrkSegment> renderedSegments = renderedSegmentsCache.remove(path);
 		if (renderedSegments != null) {
@@ -1972,6 +2061,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void clearSelectedFilesSegments() {
 		segmentsCache.clear();
+		removeSelectedTrackCopy();
 		if (hasMapRenderer()) {
 			for (Set<TrkSegment> segments : renderedSegmentsCache.values()) {
 				for (TrkSegment segment : segments) {
