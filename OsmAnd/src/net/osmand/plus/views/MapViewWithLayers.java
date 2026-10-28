@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.MapRendererSetupOptions;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -128,13 +127,6 @@ public class MapViewWithLayers extends FrameLayout {
 		if (mapRendererContext != null) {
 			if (atlasMapRendererView == null) {
 				atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
-				// Diagnostic: keep GPU uploads on the render thread.
-				atlasMapRendererView.setupOptions = new MapRendererSetupOptions() {
-					@Override
-					public void setGpuWorkerThreadEnabled(boolean enabled) {
-						super.setGpuWorkerThreadEnabled(false);
-					}
-				};
 			} else {
 				atlasMapRendererView.handleOnCreate(null);
 			}
