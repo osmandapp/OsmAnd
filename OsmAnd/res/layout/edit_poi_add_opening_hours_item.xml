@@ -11,14 +11,13 @@
 		app:srcCompat="@drawable/ic_action_time"
 		app:tint="?android:textColorSecondary" />
 
-	<net.osmand.plus.widgets.ButtonEx
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/addOpeningHoursButton"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginStart="72dp"
 		android:layout_marginLeft="72dp"
-		android:text="@string/add_opening_hours"
-		android:textSize="@dimen/default_sub_text_size"
-		app:typefaceWeight="medium" />
+		app:dialogButtonTitle="@string/add_opening_hours"
+		app:dialogButtonType="primary" />
 
 </RelativeLayout>
