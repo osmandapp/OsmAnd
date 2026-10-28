@@ -1661,7 +1661,7 @@ You will be able to pair this scanner again at any time.</string>
     • Accessibility: touch target size for buttons changed to 48 dp; fixed issue with map UI visible for screen readers \n\n
     • Japanese voice prompts reworked \n\n
     • Elevation change and slope evaluation reworked \n\n
-    </string>    
+    </string>
     <string name="free_favorites_backup_description">Register in OsmAnd Cloud to get free backup for favorites and settings.</string>
     <string name="free_favorites_backup">Free Favorites Backup</string>
     <string name="get_osmand_cloud">Get OsmAnd Cloud</string>
@@ -3537,9 +3537,14 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="general_settings_profile_descr">App theme, units, region</string>
     <string name="screen_alerts_descr">Alerts shown bottom left during navigation.</string>
     <string name="reset_to_default">Reset to default</string>
-    <string name="osmand_settings_descr">Effective for the entire app</string>
-    <string name="osmand_settings">OsmAnd settings</string>
-    <string name="copy_from_other_profile">Copy from another profile</string>
+    	<string name="osmand_settings_descr">Effective for the entire app</string>
+    	<string name="osmand_settings">OsmAnd settings</string>
+	<string name="training_settings_descr">Sets the user training parameters</string>
+	<string name="training">Training</string>
+	<string name="training_parameters">Training parameters</string>
+	<string name="rider_body_weight">Body weight</string>
+	<string name="ftp">Functional Threshold Power</string>
+	<string name="copy_from_other_profile">Copy from another profile</string>
     <string name="turn_screen_on">Turn screen on</string>
     <string name="map_during_navigation_info">Map during navigation</string>
     <string name="map_during_navigation">Map during navigation</string>
