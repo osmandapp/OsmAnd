@@ -230,13 +230,15 @@ final class SearchModRulesParser {
 
 	/**
 	 * One form is the attributes of the rule ({@code to}, {@code object}; {@code object="building"} without {@code to}),
-	 * several forms are {@code <to>} elements with their own {@code object}.
+	 * several forms are {@code <to>} elements with their own {@code object}; {@code numPrefix="true"} lets a number glue
+	 * to the word in a query ("56ave").
 	 */
 	private void parseQueryRule(XmlPullParser parser) throws Exception {
 		String word = parser.getAttributeValue(null, "from").toLowerCase(Locale.ROOT);
 		String to = parser.getAttributeValue(null, "to");
 		String object = parser.getAttributeValue(null, "object");
 		boolean enabled = enabled(parser);
+		boolean numPrefix = "true".equals(parser.getAttributeValue(null, "numPrefix"));
 		List<Form> forms = new ArrayList<>();
 		while (parser.nextTag() == XmlPullParser.START_TAG) {
 			forms.add(form(parser.getAttributeValue(null, "object"), parser.nextText().trim()));
@@ -248,7 +250,7 @@ final class SearchModRulesParser {
 		if (forms.isEmpty()) {
 			forms.add(form(object, to == null ? "" : to.trim()));
 		}
-		layer.add(new WordRule(word, forms), true);
+		layer.add(new WordRule(word, forms, numPrefix), true);
 	}
 
 	// an empty text is a house-number qualifier (object="building") or an ignorable word

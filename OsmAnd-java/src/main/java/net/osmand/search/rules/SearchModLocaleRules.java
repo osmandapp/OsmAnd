@@ -29,8 +29,10 @@ import java.util.regex.Pattern;
  * a word with several meanings lists them as {@code <to>} elements with their own {@code object}, the first is the
  * main one. Every form gets a reverse form of the same owner; a reverse form is one step. {@code object="building"}
  * without {@code to} marks the word as a part of a house number, {@code to=""} makes it an ignorable word of every
- * owner (an optional query token that never penalizes a name). {@code <skipPenalty>} lists the words of names that
- * do not penalize an object when the query does not have them, optionally for some owners only.
+ * owner (an optional query token that never penalizes a name). {@code numPrefix="true"} lets a number glue to the
+ * word, its forms and reverse forms in a query: {@code "56ave"} is read as the words {@code "56"} and {@code "ave"}.
+ * {@code <skipPenalty>} lists the words of names that do not penalize an object when the query does not have them,
+ * optionally for some owners only.
  * <p>
  * Rules are layered from general to specific: {@code rules.xml} (every map), {@code rules_<language>.xml}, then
  * {@code rules_<language>_<COUNTRY>.xml}. A rule of a lower layer with the key of an upper one replaces it whole,
@@ -63,6 +65,8 @@ public final class SearchModLocaleRules {
 	private final Map<String, List<Form>> forms;
 	private final Set<String> buildings;
 	private final Set<String> ignorables;
+	// words of numPrefix rules with their forms and reverse forms
+	private final Set<String> numPrefixWords;
 	private final List<PoiService> services;
 
 	/** @param layers rules files from general to specific: a lower layer replaces or disables rules of upper ones */
@@ -113,6 +117,20 @@ public final class SearchModLocaleRules {
 				forms.computeIfAbsent(form.word(), k -> new LinkedHashSet<>()).add(new Form(form.object(), rule.word));
 			}
 		}
+		Set<String> numPrefixWords = new LinkedHashSet<>();
+		for (WordRule rule : query.values()) {
+			if (!rule.numPrefix()) {
+				continue;
+			}
+			numPrefixWords.add(rule.word);
+			for (Form form : rule.forms) {
+				numPrefixWords.add(form.word());
+				for (Form reverse : forms.getOrDefault(form.word(), Set.of())) {
+					numPrefixWords.add(reverse.word());
+				}
+			}
+		}
+		numPrefixWords.remove("");
 		Map<String, List<String>> skip = new LinkedHashMap<>();
 		for (SkipPenalty entry : skipPenalty.values()) {
 			skip.computeIfAbsent(entry.word(), k -> new ArrayList<>()).add(entry.object());
@@ -138,6 +156,7 @@ public final class SearchModLocaleRules {
 		this.forms = lists;
 		this.buildings = buildings;
 		this.ignorables = ignorables;
+		this.numPrefixWords = numPrefixWords;
 		this.services = new ArrayList<>(services.values());
 	}
 
@@ -195,6 +214,47 @@ public final class SearchModLocaleRules {
 	/** Words with an empty {@code to}: optional query words that never penalize a name (conjunctions, articles). */
 	public Set<String> ignorables() {
 		return ignorables;
+	}
+
+	/** Words a number can glue to in a query ({@code numPrefix="true"}): the words, forms and reverse forms. */
+	public Set<String> numPrefixWords() {
+		return numPrefixWords;
+	}
+
+	/**
+	 * The number of a query word glued to a word of {@link #numPrefixWords}: "56ave" and "56ave." (incomplete) are
+	 * "56" + "ave". The word after the number is matched whole. An English ordinal keeps its suffix ("21st", "3rd" are
+	 * words of names, "56st" is not an ordinal).
+	 *
+	 * @return the length of the number, 0 when the word is not a glued one
+	 */
+	public static int numPrefixLength(String word, Set<String> numPrefixWords) {
+		int n = 0;
+		while (n < word.length() && word.charAt(n) >= '0' && word.charAt(n) <= '9') {
+			n++;
+		}
+		if (n == 0 || n == word.length() || numPrefixWords.isEmpty()) {
+			return 0;
+		}
+		int end = word.charAt(word.length() - 1) == '.' ? word.length() - 1 : word.length();
+		String suffix = word.substring(n, end);
+		if (!numPrefixWords.contains(suffix) || suffix.equals(ordinalSuffix(word, n))) {
+			return 0;
+		}
+		return n;
+	}
+
+	// the English ordinal suffix of the number word[0, n): 1st, 2nd, 3rd, 11th-13th, 4th
+	private static String ordinalSuffix(String word, int n) {
+		if (n > 1 && word.charAt(n - 2) == '1') {
+			return "th";
+		}
+		return switch (word.charAt(n - 1)) {
+			case '1' -> "st";
+			case '2' -> "nd";
+			case '3' -> "rd";
+			default -> "th";
+		};
 	}
 
 	/** Words of {@code <skipPenalty>} aligned ({@link SearchAlgorithms#alignChars}) -> the owners they apply to. */
@@ -409,10 +469,19 @@ public final class SearchModLocaleRules {
 	 *
 	 * @param mirror the pair is a mirror pair, its alternative names are rules of {@code <index>} too; null for a rule
 	 *               of {@code <query>}
+	 * @param numPrefix a number glues to the word in a query ("56ave")
 	 */
-	public record WordRule(String word, List<Form> forms, Mirror mirror) {
+	public record WordRule(String word, List<Form> forms, Mirror mirror, boolean numPrefix) {
 		WordRule(String word, List<Form> forms) {
-			this(word, forms, null);
+			this(word, forms, null, false);
+		}
+
+		WordRule(String word, List<Form> forms, Mirror mirror) {
+			this(word, forms, mirror, false);
+		}
+
+		WordRule(String word, List<Form> forms, boolean numPrefix) {
+			this(word, forms, null, numPrefix);
 		}
 
 		boolean hasForm(String form) {

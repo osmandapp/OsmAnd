@@ -39,6 +39,7 @@ final class SearchModRulesValidator {
 
 	private static final Set<String> INDEX_ATTRIBUTES = Set.of("from", "to", "object", "mode", "enabled", "keys");
 	private static final Set<String> QUERY_ATTRIBUTES = Set.of("from", "to", "object", "enabled");
+	private static final Set<String> QUERY_RULE_ATTRIBUTES = Set.of("from", "to", "object", "enabled", "numPrefix");
 
 	private final String file;
 	private final Layer layer;
@@ -220,7 +221,7 @@ final class SearchModRulesValidator {
 		}
 	}
 
-	private void parsePoiAbbreviation(XmlPullParser parser) throws Exception {
+	private void parsePoiAbbreviation(XmlPullParser parser) {
 		String abbreviation = parser.getAttributeValue(null, "short");
 		String full = parser.getAttributeValue(null, "full");
 		String where = " (<abbr short=\"" + abbreviation + "\"> of " + file + ")";
@@ -236,7 +237,7 @@ final class SearchModRulesValidator {
 		}
 	}
 
-		private void parsePoiService(XmlPullParser parser) throws Exception {
+		private void parsePoiService(XmlPullParser parser) {
 		String word = parser.getAttributeValue(null, "word");
 		String where = " (<service word=\"" + word + "\"> of " + file + ")";
 		checkAttributes(parser, Set.of("word", "tags", "name", "enabled"), "<service>", where);
@@ -372,8 +373,6 @@ final class SearchModRulesValidator {
 	/**
 	 * One form is the attributes of the rule ({@code to}, {@code object}; {@code object="building"} without {@code to}),
 	 * several forms are {@code <to>} elements with their own {@code object}.
-	 */
-	/**
 	 * A mirror pair, a {@code <rule>} directly under {@code <rules>} (rules-spec.md, 3.4): one word and its one form,
 	 * a query form both ways and alternative names both ways. It shares the key of a query rule in the layers.
 	 */
@@ -421,13 +420,14 @@ final class SearchModRulesValidator {
 		if (parser.getAttributeValue(null, "mode") != null) {
 			throw new IllegalArgumentException("mode applies to a regexp of <index>" + where);
 		}
-		checkAttributes(parser, QUERY_ATTRIBUTES, "a query rule", where);
+		checkAttributes(parser, QUERY_RULE_ATTRIBUTES, "a query rule", where);
 		if (from == null || from.isEmpty()) {
 			throw new IllegalArgumentException("Missing from in " + file);
 		}
 		String to = parser.getAttributeValue(null, "to");
 		String object = parser.getAttributeValue(null, "object");
 		boolean enabled = booleanAttribute(parser, "enabled", true, where);
+		boolean numPrefix = booleanAttribute(parser, "numPrefix", false, where);
 		String word = from.toLowerCase(Locale.ROOT);
 		List<Form> forms = new ArrayList<>();
 		while (parser.nextTag() == XmlPullParser.START_TAG) {
@@ -438,7 +438,7 @@ final class SearchModRulesValidator {
 			forms.add(parseForm(word, parser.getAttributeValue(null, "object"), parser.nextText().trim(), where));
 		}
 		if (!enabled) {
-			if (to != null || object != null || !forms.isEmpty()) {
+			if (to != null || object != null || !forms.isEmpty() || numPrefix) {
 				throw new IllegalArgumentException("A disabled rule holds only from" + where);
 			}
 			layer.add(new WordRule(word, List.of()), false);
@@ -468,7 +468,27 @@ final class SearchModRulesValidator {
 			throw new IllegalArgumentException("Missing to" + where);
 		}
 		validateForms(word, forms, where);
-		layer.add(new WordRule(word, forms), true);
+		if (numPrefix) {
+			validateNumPrefix(word, forms, where);
+		}
+		layer.add(new WordRule(word, forms, numPrefix), true);
+	}
+
+	// "56ave": a glued word of one letter is a house number ("12e"), a qualifier or an ignorable word glues to nothing
+	private void validateNumPrefix(String word, List<Form> forms, String where) {
+		for (Form form : forms) {
+			if (form.isBuilding() || form.isIgnorable()) {
+				throw new IllegalArgumentException("numPrefix needs a form: a house-number qualifier or an ignorable "
+						+ "word is not glued to a number" + where);
+			}
+			if (SearchAlgorithms.letters(form.word()) < 2) {
+				throw new IllegalArgumentException("numPrefix needs a form of two letters at least" + where);
+			}
+		}
+		if (SearchAlgorithms.letters(word) < 2 || SearchAlgorithms.letters(word) != word.length()) {
+			throw new IllegalArgumentException("numPrefix needs a word of two letters at least and only of letters: "
+					+ "\"12e\" is a house number" + where);
+		}
 	}
 
 	private Form parseForm(String word, String object, String text, String where) {

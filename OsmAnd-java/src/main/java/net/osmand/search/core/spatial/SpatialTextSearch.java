@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -26,6 +27,7 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.NameIndexReader;
+import net.osmand.search.rules.SearchModLocaleRules;
 import net.osmand.search.rules.SearchModRules;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -783,14 +785,24 @@ public class SpatialTextSearch {
 		List<String> owords = new ArrayList<String>();
 		// split by hyphen as we supposed to index them separately
 		List<String> words = SearchAlgorithms.splitAndNormalize(input, owords, false);
+		Set<String> numPrefixWords = numPrefixWords(ctx);
 		List<SpatialSearchToken> tokens = new ArrayList<>();
 		for (int ind = 0; ind < words.size(); ind++) {
 			String w = words.get(ind);
+			String ow = owords.get(ind);
 			if (w.equals(SpatialSearchToken.DOT_INCOMPLETE_STRING)) {
 				continue;
 			}
+			// "56ave" of a Canadian address is "56 ave"
+			int number = SearchModLocaleRules.numPrefixLength(w, numPrefixWords);
+			if (number > 0 && number < ow.length()) {
+				tokens.add(new SpatialSearchToken(cache.searchRules, ctx.settings.MIN_CHARACTERS_INCOMPLETE,
+						w.substring(0, number), ow.substring(0, number), tokens.size()));
+				w = w.substring(number);
+				ow = ow.substring(number);
+			}
 			SpatialSearchToken token = new SpatialSearchToken(cache.searchRules, ctx.settings.MIN_CHARACTERS_INCOMPLETE, w,
-					owords.get(ind), tokens.size());
+					ow, tokens.size());
 			tokens.add(token);
 		}
 		for (SpatialSearchToken t : tokens) {
@@ -802,10 +814,22 @@ public class SpatialTextSearch {
 		return tokens;
 	}
 
+	// numPrefix words of the rules of the loaded maps: a word is split for the maps of the locales that have the rule
+	private Set<String> numPrefixWords(SpatialSearchContext ctx) {
+        Set<String> words = new HashSet<>();
+		Set<String> locales = new HashSet<>();
+		for (SpatialSearchFileCache file : ctx.internalFile) {
+			if (locales.add(file.locale)) {
+				words.addAll(cache.searchRules.rules(file.locale).numPrefixWords());
+			}
+		}
+		return words;
+	}
+
 	public SpatialSearchResults searchTest(String input, SpatialSearchContext ctx, int limitPrint) throws IOException {
 		
 		SpatialSearchResults res = searchAPI(input, ctx);
-		if (res.mainResults != null && res.mainResults.size() > 0) {
+		if (res.mainResults != null && !res.mainResults.isEmpty()) {
 			System.out.println("--------");
 			System.out.printf("Main: %s\n", res.combinations.get(0));
 			int all = res.mainResults.size();

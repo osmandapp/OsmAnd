@@ -251,6 +251,46 @@ public class SearchModLocaleRulesTest {
 	}
 
 	@Test
+	public void numPrefixGluesANumberToAWord() {
+		// #26691: Canada Post writes "10720 56 AVE NW", a query has "10720 56ave"
+		Set<String> ca = searchRules.rules("en_CA").numPrefixWords();
+		assertTrue(ca.containsAll(Set.of("ave", "av", "avenue", "st", "street", "rd", "road", "dr", "drive")));
+		assertEquals(Set.of(), searchRules.rules("en_US").numPrefixWords());
+		assertEquals(Set.of(), searchRules.rules("en").numPrefixWords());
+		assertEquals(2, SearchModLocaleRules.numPrefixLength("56ave", ca));
+		assertEquals(2, SearchModLocaleRules.numPrefixLength("56ave.", ca));
+		assertEquals(2, SearchModLocaleRules.numPrefixLength("56avenue", ca));
+		assertEquals(3, SearchModLocaleRules.numPrefixLength("101av", ca));
+		assertEquals(2, SearchModLocaleRules.numPrefixLength("56st", ca));
+		assertEquals(2, SearchModLocaleRules.numPrefixLength("11st", ca));
+		assertEquals(2, SearchModLocaleRules.numPrefixLength("13rd", ca));
+		// the word after the number is matched whole
+		assertEquals(0, SearchModLocaleRules.numPrefixLength("56aven", ca));
+		assertEquals(0, SearchModLocaleRules.numPrefixLength("56", ca));
+		assertEquals(0, SearchModLocaleRules.numPrefixLength("ave", ca));
+		assertEquals(0, SearchModLocaleRules.numPrefixLength("12e", ca));
+		assertEquals(0, SearchModLocaleRules.numPrefixLength("56ave", Set.of()));
+		// an ordinal is a word of names: "1st Avenue", "31st Road"
+		for (String ordinal : List.of("1st", "21st", "31st", "101st", "3rd", "23rd", "43rd", "2nd", "56th", "1st.")) {
+			assertEquals(ordinal, 0, SearchModLocaleRules.numPrefixLength(ordinal, ca));
+		}
+		SearchModLocaleRules rules = of("<query><rule from=\"ave\" to=\"Avenue\" numPrefix=\"true\"/>"
+				+ "<rule from=\"av\" to=\"Avenue\"/></query>");
+		// the reverse forms of the form: "av" of "avenue"
+		assertEquals(Set.of("ave", "avenue", "av"), rules.numPrefixWords());
+	}
+
+	@Test
+	public void numPrefixNeedsAWordOfLetters() {
+		expect("<query><rule from=\"e\" to=\"East\" object=\"street\" numPrefix=\"true\"/></query>", "two letters");
+		expect("<query><rule from=\"apt\" object=\"building\" numPrefix=\"true\"/></query>", "numPrefix needs a form");
+		expect("<query><rule from=\"the\" to=\"\" numPrefix=\"true\"/></query>", "numPrefix needs a form");
+		expect("<query><rule from=\"ave\" to=\"Avenue\" numPrefix=\"maybe\"/></query>", "expected true or false");
+		expect("<query><rule from=\"ave\" enabled=\"false\" numPrefix=\"true\"/></query>", "holds only from");
+		expect("<rule from=\"blvd\" to=\"Boulevard\" numPrefix=\"true\"/>", "Unknown attribute numPrefix");
+	}
+
+	@Test
 	public void removedAttributes() {
 		expect("<query><rule from=\"st\" to=\"Street\" replace=\"true\"/></query>", "replace is removed");
 		expect("<index><rule from=\"(?iu)a+\" to=\"b\" replace=\"false\"/></index>", "replace is removed");
