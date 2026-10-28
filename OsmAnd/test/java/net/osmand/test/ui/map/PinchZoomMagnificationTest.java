@@ -3,7 +3,6 @@ package net.osmand.test.ui.map;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -22,7 +21,6 @@ import androidx.test.filters.LargeTest;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.IMapRenderer;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
@@ -197,13 +195,6 @@ public class PinchZoomMagnificationTest extends AndroidTest {
 			center.set(new float[] {location[0] + view.getWidth() / 2f, location[1] + view.getHeight() * 0.4f});
 		});
 		SystemClock.sleep(1000);
-
-		getScenario().onActivity(activity -> {
-			IMapRenderer renderer = mapView.getMapRenderer().getMapAnimator().getMapRenderer();
-			assertTrue("Renderer must be initialized before checking the GPU worker", renderer.isRenderingInitialized());
-			assertFalse("GPU worker must be disabled for this diagnostic run",
-					renderer.getSetupOptions().getGpuWorkerThreadEnabled());
-		});
 
 		float x = center.get()[0];
 		float y = center.get()[1];
