@@ -175,6 +175,10 @@ public class VoiceRouter {
 		settings.VOICE_MUTE.setModeValue(mode, mute);
 	}
 
+	public boolean pebbleVoiceEnabled() {
+		return settings.PEBBLE_VOICE.get();
+	}
+
 	public boolean isMute() {
 		return settings.VOICE_MUTE.get();
 	}
