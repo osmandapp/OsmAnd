@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -155,6 +156,8 @@ public class RoutingConfiguration {
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<>();
 		private Map<String, String> attributes = new LinkedHashMap<>();
 		private Set<Long> impassableRoadLocations = new HashSet<>();
+		// road id -> blocked points (x31 << 32 | y31)
+		private Map<Long, Set<Long>> impassableRoadPoints = new LinkedHashMap<>();
 		private QuadTree<Node> directionPointsBuilder;
 
 		public Builder() {
@@ -219,7 +222,10 @@ public class RoutingConfiguration {
 			i.smoothenPointsNoRoute = parseSilentFloat(getAttribute(i.router, "smoothenPointsNoRoute"), i.smoothenPointsNoRoute);
 			i.penaltyForReverseDirection = parseSilentFloat(getAttribute(i.router, "penaltyForReverseDirection"), (float) i.penaltyForReverseDirection);
 
-			i.router.setImpassableRoads(new HashSet<>(impassableRoadLocations));
+			Set<Long> wholeRoads = new HashSet<>(impassableRoadLocations);
+			wholeRoads.removeAll(impassableRoadPoints.keySet());
+			i.router.setImpassableRoads(wholeRoads);
+			i.router.setImpassableRoadPoints(impassableRoadPoints);
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int memoryLimitMB = memoryLimits.memoryLimitMb;
 			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
@@ -260,6 +266,7 @@ public class RoutingConfiguration {
 		
 		public void clearImpassableRoadLocations() {
 			impassableRoadLocations.clear();
+			impassableRoadPoints.clear();
 		}
 		
 		public Set<Long> getImpassableRoadLocations() {
@@ -269,6 +276,28 @@ public class RoutingConfiguration {
 		public Builder addImpassableRoad(long routeId) {
 			impassableRoadLocations.add(routeId);
 			return this;
+		}
+
+		// blocks only the segment of the road nearest to the point, not the whole road
+		public boolean addImpassableRoad(long routeId, int x31, int y31) {
+			impassableRoadLocations.add(routeId);
+			Set<Long> points = impassableRoadPoints.get(routeId);
+			if (points == null) {
+				points = new LinkedHashSet<>();
+				impassableRoadPoints.put(routeId, points);
+			}
+			return points.add(((long) x31 << 32) | (y31 & 0xffffffffL));
+		}
+
+		public void removeImpassableRoad(long routeId, int x31, int y31) {
+			Set<Long> points = impassableRoadPoints.get(routeId);
+			if (points != null) {
+				points.remove(((long) x31 << 32) | (y31 & 0xffffffffL));
+				if (points.isEmpty()) {
+					impassableRoadPoints.remove(routeId);
+					impassableRoadLocations.remove(routeId);
+				}
+			}
 		}
 
 		public Map<String, String> getAttributes() {
@@ -309,6 +338,7 @@ public class RoutingConfiguration {
 
 		public void removeImpassableRoad(long routeId) {
 			impassableRoadLocations.remove(routeId);
+			impassableRoadPoints.remove(routeId);
 		}
 	}
 

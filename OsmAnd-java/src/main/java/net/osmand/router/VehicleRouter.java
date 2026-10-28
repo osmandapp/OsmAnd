@@ -44,6 +44,11 @@ public interface VehicleRouter {
 	public float defineRoutingObstacle(RouteDataObject road, int point, boolean isBackwardDir);
 
 	/**
+	 * Segment between two neighbouring points of the road is blocked by the user (avoid road)
+	 */
+	public boolean isImpassableSegment(RouteDataObject road, int segStart, int segEnd);
+
+	/**
 	 * return routing speed in m/s for vehicle for specified road
 	 */
 	public float defineRoutingSpeed(RouteDataObject road, boolean dir);
