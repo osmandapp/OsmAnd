@@ -13,9 +13,11 @@ import static org.junit.Assume.assumeTrue;
 import android.app.UiAutomation;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
+import android.view.InputDevice;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.IdlingResource;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -93,6 +96,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 	private static final float TRACK_CENTER_TOLERANCE = 0.03f;
 	private static final int ZOOM_INTO_TRACK = 18;
 	private static final int PICKED_TWICE_COUNT = 80;
+	private static final int SMALL_DRAG_PX = 40;
 
 	@Rule
 	public ActivityScenarioRule<MapActivity> scenarioRule = new ActivityScenarioRule<>(MapActivity.class);
@@ -117,6 +121,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 
 		float headerOnlyMenuTop = getMenuTopRatio();
 		assertMapCenteredAboveMenu(headerOnlyMenuTop);
+		assertZoomButtonsKeepMapCenter();
 
 		clickViewWithId(R.id.action_track);
 		awaitTrackMenuSettled();
@@ -125,6 +130,156 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertTrue("Opening the Track tab is expected to expand the menu, but it went from "
 				+ headerOnlyMenuTop + " to " + expandedMenuTop, expandedMenuTop < headerOnlyMenuTop);
 		assertMapCenteredAboveMenu(expandedMenuTop);
+		assertZoomButtonsKeepMapCenter();
+	}
+
+	/**
+	 * The tabs of the menu change its height, and the map center has to follow it.
+	 */
+	@Test
+	public void testMapCenterAboveMenuOnEveryTab() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		assumeTrue("The menu covers the lower part of the map only in portrait", isPortrait());
+		scenarioRule.getScenario().onActivity(activity ->
+				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		awaitTrackMenuSettled();
+
+		for (int tabId : new int[] {R.id.action_track, R.id.action_points, R.id.action_options, R.id.action_overview}) {
+			clickViewWithId(tabId);
+			awaitTrackMenuSettled();
+			int[] state = new int[1];
+			onTrackMenu(fragment -> state[0] = fragment.getCurrentMenuState());
+			// a full screen menu leaves no map to center
+			if (state[0] != MenuState.FULL_SCREEN) {
+				assertMapCenteredAboveMenu(getMenuTopRatio());
+			}
+		}
+	}
+
+	/**
+	 * Opened with a fit, as from the list of tracks, the menu has to fit the track into the map part above it.
+	 */
+	@Test
+	public void testTrackFittedAboveMenuWhenOpened() {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		assumeTrue("The menu covers the lower part of the map only in portrait", isPortrait());
+
+		zoomIntoTrack();
+		scenarioRule.getScenario().onActivity(activity ->
+				TrackMenuFragment.showInstance(activity, selectedGpxFile, null, null, null, new Bundle()));
+		awaitTrackMenuSettled();
+		int[] state = new int[1];
+		onTrackMenu(fragment -> state[0] = fragment.getCurrentMenuState());
+		assertTrackFittedAboveMenu(state[0]);
+	}
+
+	/**
+	 * The menu dragged a little and let go returns to its state, and the map center has to stay where it was.
+	 */
+	@Test
+	public void testMapCenterKeptAfterSmallMenuDrag() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		assumeTrue("Only the menu at the bottom of the screen is dragged", isPortrait());
+		scenarioRule.getScenario().onActivity(activity ->
+				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		awaitTrackMenuSettled();
+		clickViewWithId(R.id.action_track);
+		awaitTrackMenuSettled();
+		float menuTop = getMenuTopRatio();
+		float ratio = getMapRatio().y;
+		LatLon target = getMapTarget();
+
+		View menuView = getTrackMenuView();
+		assertNotNull("Track menu is not shown", menuView);
+		Rect menuRect = AndroidUtils.getViewBoundOnScreen(menuView);
+		dragOnScreen(menuRect.exactCenterX(), menuRect.top + SMALL_DRAG_PX, menuRect.top - SMALL_DRAG_PX);
+		awaitTrackMenuSettled();
+		assertEquals("Menu after a small drag", menuTop, getMenuTopRatio(), 0.005f);
+		assertEquals("Map center after a small drag of the menu", ratio, getMapRatio().y, 0.005f);
+		double moved = MapUtils.getDistance(target, getMapTarget());
+		assertTrue("A small drag of the menu moved the map by " + moved + " m", moved < 1);
+	}
+
+	/**
+	 * The map center is already in the visible part of the map, so going to the background and back must not move
+	 * it. Before the fix of the issue it got there only when the app came back.
+	 */
+	@Test
+	public void testMapCenterKeptAfterReturnFromBackground() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		scenarioRule.getScenario().onActivity(activity ->
+				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		awaitTrackMenuSettled();
+		clickViewWithId(R.id.action_track);
+		awaitTrackMenuSettled();
+		PointF ratio = new PointF(getMapRatio().x, getMapRatio().y);
+		LatLon target = getMapTarget();
+
+		scenarioRule.getScenario().moveToState(Lifecycle.State.CREATED);
+		scenarioRule.getScenario().moveToState(Lifecycle.State.RESUMED);
+		awaitTrackMenuSettled();
+		assertEquals("Map center after the return from the background", ratio.x, getMapRatio().x, 0.005f);
+		assertEquals("Map center after the return from the background", ratio.y, getMapRatio().y, 0.005f);
+		double moved = MapUtils.getDistance(target, getMapTarget());
+		assertTrue("The return from the background moved the map by " + moved + " m", moved < 1);
+	}
+
+	/**
+	 * The +/- buttons on the screen zoom around the map center, so the map center has to stay where it is.
+	 */
+	private void assertZoomButtonsKeepMapCenter() {
+		for (int buttonId : new int[] {R.id.map_zoom_in_button, R.id.map_zoom_out_button}) {
+			String button = app.getResources().getResourceEntryName(buttonId);
+			LatLon target = getMapTarget();
+			float zoom = getZoom();
+			// the button's click handler, not an Espresso tap: on the tablet such a tap changed the zoom by 0.2
+			scenarioRule.getScenario().onActivity(activity -> {
+				View view = findShownView(activity.getWindow().getDecorView(), buttonId);
+				assertNotNull(button + " is not shown", view);
+				view.performClick();
+			});
+			awaitTrackMenuSettled();
+			assertEquals(button + " changes the zoom by one", 1f, Math.abs(getZoom() - zoom), 0.1f);
+			double moved = MapUtils.getDistance(target, getMapTarget());
+			assertTrue(button + " moved the map center by " + moved + " m", moved < 1);
+		}
+	}
+
+	@Nullable
+	private static View findShownView(@NonNull View view, int id) {
+		if (view.getId() == id && view.isShown()) {
+			return view;
+		}
+		if (view instanceof ViewGroup group) {
+			for (int i = 0; i < group.getChildCount(); i++) {
+				View shownView = findShownView(group.getChildAt(i), id);
+				if (shownView != null) {
+					return shownView;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Drags a finger on the screen from fromY to toY and lifts it, as a user would.
+	 */
+	private static void dragOnScreen(float x, float fromY, float toY) {
+		UiAutomation uiAutomation = InstrumentationRegistry.getInstrumentation().getUiAutomation();
+		long downTime = SystemClock.uptimeMillis();
+		int steps = 10;
+		for (int i = 0; i <= steps + 1; i++) {
+			int action = i == 0 ? MotionEvent.ACTION_DOWN : i <= steps ? MotionEvent.ACTION_MOVE : MotionEvent.ACTION_UP;
+			float y = fromY + (toY - fromY) * Math.min(i, steps) / steps;
+			MotionEvent event = MotionEvent.obtain(downTime, downTime + i * 16L, action, x, y, 0);
+			event.setSource(InputDevice.SOURCE_TOUCHSCREEN);
+			uiAutomation.injectInputEvent(event, true);
+			event.recycle();
+		}
 	}
 
 	/**
@@ -174,17 +329,9 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertNotNull(selectedGpxFile);
 		boolean suggestMapEnabled = setSuggestMapEnabled(false);
 		boolean widgetEnabled = setTopPanelWidget(true);
-		UiAutomation uiAutomation = InstrumentationRegistry.getInstrumentation().getUiAutomation();
-		int[] rotation = new int[1];
-		scenarioRule.getScenario().onActivity(activity -> rotation[0] = activity.getWindowManager().getDefaultDisplay().getRotation());
+		int rotation = getRotation();
 		try {
-			// ROTATION_FREEZE_0..270 are the Surface rotations: a quarter turn of a portrait screen is landscape,
-			// whatever the natural orientation of the device
-			uiAutomation.setRotation(isPortrait() ? (rotation[0] + 1) % 4 : UiAutomation.ROTATION_FREEZE_CURRENT);
-			for (int i = 0; i < 50 && isPortrait(); i++) {
-				SystemClock.sleep(100);
-			}
-			assertFalse("The screen did not turn to landscape", isPortrait());
+			turnToLandscape(rotation);
 			awaitTrackMenuSettled();
 			assumeTrue("A top toolbar hides the top panel", isTopPanelShown());
 
@@ -194,10 +341,105 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			assertFalse("The track menu is expected to hide the top panel", isTopPanelShown());
 			assertEquals("Map center with the top panel hidden", 0.5f, getMapRatio().y, 0.005f);
 		} finally {
-			uiAutomation.setRotation(rotation[0]);
+			setRotation(rotation);
 			setTopPanelWidget(widgetEnabled);
 			setSuggestMapEnabled(suggestMapEnabled);
 		}
+	}
+
+	/**
+	 * In landscape the menu is a panel beside the map. Opened with a fit, it has to fit the track into the map part
+	 * beside it; on the Track tab the map center has to be in the middle of that part, and the +/- buttons must not
+	 * move it.
+	 */
+	@Test
+	public void testTrackAndMapCenterBesideMenuInLandscape() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		boolean suggestMapEnabled = setSuggestMapEnabled(false);
+		int rotation = getRotation();
+		try {
+			turnToLandscape(rotation);
+			zoomIntoTrack();
+			scenarioRule.getScenario().onActivity(activity ->
+					TrackMenuFragment.showInstance(activity, selectedGpxFile, null, null, null, new Bundle()));
+			awaitTrackMenuSettled();
+			assertTrackFittedBesideMenu();
+
+			clickViewWithId(R.id.action_track);
+			awaitTrackMenuSettled();
+			assertMapCenteredBesideMenu();
+			assertZoomButtonsKeepMapCenter();
+		} finally {
+			setRotation(rotation);
+			setSuggestMapEnabled(suggestMapEnabled);
+		}
+	}
+
+	private int getRotation() {
+		int[] rotation = new int[1];
+		scenarioRule.getScenario().onActivity(activity -> rotation[0] = activity.getWindowManager().getDefaultDisplay().getRotation());
+		return rotation[0];
+	}
+
+	private void turnToLandscape(int rotation) {
+		// ROTATION_FREEZE_0..270 are the Surface rotations: a quarter turn of a portrait screen is landscape,
+		// whatever the natural orientation of the device
+		setRotation(isPortrait() ? (rotation + 1) % 4 : UiAutomation.ROTATION_FREEZE_CURRENT);
+		for (int i = 0; i < 50 && isPortrait(); i++) {
+			SystemClock.sleep(100);
+		}
+		assertFalse("The screen did not turn to landscape", isPortrait());
+	}
+
+	private static void setRotation(int rotation) {
+		InstrumentationRegistry.getInstrumentation().getUiAutomation().setRotation(rotation);
+	}
+
+	/**
+	 * Returns the part of the map that the menu beside it, in landscape, leaves visible, in map pixels.
+	 */
+	@NonNull
+	private Rect getMapPartBesideMenu() {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		RotatedTileBox tileBox = mapView.getRotatedTileBox();
+		View menuView = getTrackMenuView();
+		assertNotNull("Track menu is not shown", menuView);
+		Rect menu = AndroidUtils.getViewBoundOnScreen(menuView);
+		int[] mapLocation = AndroidUtils.getLocationOnScreen(mapView.getView());
+		menu.offset(-mapLocation[0], -mapLocation[1]);
+		Rect part = new Rect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
+		if (menu.centerX() < part.centerX()) {
+			part.left = menu.right;
+		} else {
+			part.right = menu.left;
+		}
+		return part;
+	}
+
+	private void assertMapCenteredBesideMenu() {
+		RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
+		Rect part = getMapPartBesideMenu();
+		PointF ratio = getMapRatio();
+		String message = "The map center is at " + ratio.x * tileBox.getPixWidth() + ", "
+				+ ratio.y * tileBox.getPixHeight() + " px, the map beside the menu " + part.toShortString();
+		assertEquals(message, part.exactCenterX() / tileBox.getPixWidth(), ratio.x, RATIO_TOLERANCE);
+		assertEquals(message, part.exactCenterY() / tileBox.getPixHeight(), ratio.y, RATIO_TOLERANCE);
+	}
+
+	private void assertTrackFittedBesideMenu() {
+		RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
+		KQuadRect rect = selectedGpxFile.getGpxFile().getRect();
+		float left = tileBox.getPixXFromLatLon(rect.centerY(), rect.getLeft());
+		float right = tileBox.getPixXFromLatLon(rect.centerY(), rect.getRight());
+		float top = tileBox.getPixYFromLatLon(rect.getTop(), rect.centerX());
+		float bottom = tileBox.getPixYFromLatLon(rect.getBottom(), rect.centerX());
+		Rect part = getMapPartBesideMenu();
+		String message = "The track is at " + left + ".." + right + " x " + top + ".." + bottom
+				+ " px, the map beside the menu " + part.toShortString();
+		assertTrue(message, left >= part.left && right <= part.right && top >= part.top && bottom <= part.bottom);
+		assertEquals(message, part.exactCenterX(), (left + right) / 2, TRACK_CENTER_TOLERANCE * tileBox.getPixWidth());
+		assertEquals(message, part.exactCenterY(), (top + bottom) / 2, TRACK_CENTER_TOLERANCE * tileBox.getPixHeight());
 	}
 
 	private boolean isPortrait() {
@@ -332,8 +574,11 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			assumeTrue("The Track tab list creates the chart only when it fits into the half screen menu", chartShown[0]);
 
 			// the track goes from south to north, so the end of the chart is its northern end
-			assertChartPointShownAboveMenu(true, points.get(points.size() - 1));
-			assertChartPointShownAboveMenu(false, points.get(0));
+			WptPt start = points.get(0);
+			WptPt end = points.get(points.size() - 1);
+			assertChartPointShownAboveMenu("Chart end tapped", chart -> tapChart(chart, true), end);
+			assertChartPointShownAboveMenu("Chart start tapped", chart -> tapChart(chart, false), start);
+			assertChartPointShownAboveMenu("Chart dragged to its end", TrackMenuMapCenterTest::dragChartToEnd, end);
 			assertPointPickedTwiceShownAboveMenu(gpxFile.getTracks().get(0).getSegments().get(0), points);
 		} finally {
 			app.getSelectedGpxHelper().selectGpxFile(gpxFile, GpxSelectionParams.newInstance().hideFromMap());
@@ -341,15 +586,16 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		}
 	}
 
-	private void assertChartPointShownAboveMenu(boolean chartEnd, @NonNull WptPt point) {
+	private void assertChartPointShownAboveMenu(@NonNull String gesture, @NonNull Consumer<Chart<?>> pick,
+	                                            @NonNull WptPt point) {
 		float zoom = getZoom();
-		onTrackMenu(fragment -> tapChart(findChart(fragment.requireView()), chartEnd));
+		onTrackMenu(fragment -> pick.accept(findChart(fragment.requireView())));
 		awaitTrackMenuSettled();
 		RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
 		float x = tileBox.getPixXFromLatLon(point.getLat(), point.getLon());
 		float y = tileBox.getPixYFromLatLon(point.getLat(), point.getLon());
 		float menuTop = getMenuTopRatio() * tileBox.getPixHeight();
-		assertTrue("Chart " + (chartEnd ? "end" : "start") + ": the track point is at " + x + ", " + y
+		assertTrue(gesture + ": the track point is at " + x + ", " + y
 				+ " px, the menu at " + menuTop + " px", x >= 0 && x <= tileBox.getPixWidth() && y >= 0 && y <= menuTop);
 		assertEquals("Picking a chart point must not change the zoom", zoom, getZoom(), 0.01f);
 	}
@@ -417,6 +663,27 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		long downTime = SystemClock.uptimeMillis();
 		for (int action : new int[] {MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP}) {
 			MotionEvent event = MotionEvent.obtain(downTime, SystemClock.uptimeMillis(), action, x, y, 0);
+			chart.dispatchTouchEvent(event);
+			event.recycle();
+		}
+	}
+
+	/**
+	 * Drags a finger along the chart from its first value to its last, as the user moves the slider. Like the tap,
+	 * the events go to the chart view directly.
+	 */
+	private static void dragChartToEnd(@Nullable Chart<?> chart) {
+		assertNotNull("The Track tab shows no chart", chart);
+		ViewPortHandler handler = chart.getViewPortHandler();
+		float left = handler.contentLeft() + 1;
+		float right = handler.contentRight() - 1;
+		float y = handler.getContentCenter().y;
+		long downTime = SystemClock.uptimeMillis();
+		int steps = 20;
+		for (int i = 0; i <= steps + 1; i++) {
+			int action = i == 0 ? MotionEvent.ACTION_DOWN : i <= steps ? MotionEvent.ACTION_MOVE : MotionEvent.ACTION_UP;
+			float x = left + (right - left) * Math.min(i, steps) / steps;
+			MotionEvent event = MotionEvent.obtain(downTime, downTime + i * 16L, action, x, y, 0);
 			chart.dispatchTouchEvent(event);
 			event.recycle();
 		}
