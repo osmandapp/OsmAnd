@@ -57,6 +57,16 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 	}
 
 	@Override
+	protected void applyToPointEditor(@NonNull PointsGroup pointsGroup) {
+		FragmentActivity activity = getActivity();
+		if (activity == null || activity instanceof MapActivity) {
+			super.applyToPointEditor(pointsGroup);
+		} else {
+			FavoritePointEditorFragment.setPointsGroupOutsideMap(activity, pointsGroup);
+		}
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle state = savedInstanceState != null ? savedInstanceState : getArguments();

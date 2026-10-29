@@ -20,7 +20,7 @@ import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetInfoFragment
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer
 import net.osmand.plus.widgets.alert.AlertDialogData
-import net.osmand.plus.widgets.alert.CustomAlert
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment
 
 class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 	private var selectedAverageMode: Boolean = false
@@ -39,6 +39,7 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 	companion object {
 		private const val AVERAGE_MODE_KEY = "average_mode"
 		private const val AVERAGE_VALUE_INTERVAL_KEY = "average_value_interval"
+		private const val MODE_REQUEST_KEY = "mode_request_key"
 	}
 
 	override fun initParams(bundle: Bundle) {
@@ -63,6 +64,10 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 		selectedAverageMode = averageValueModePref?.getModeValue(appMode) ?: selectedAverageMode
 
 		setupConfigButtons()
+		SingleSelectionDialogFragment.setResultListener(this, MODE_REQUEST_KEY) { index ->
+			selectedAverageMode = index != 0
+			setupConfigButtons()
+		}
 	}
 
 	private fun getModeName(averageMode: Boolean): String {
@@ -232,11 +237,7 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 			.setTitle(R.string.shared_string_mode)
 			.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
 
-		CustomAlert.showSingleSelection(dialogData, items, selected) { v: View ->
-			val which = v.tag as Int
-			selectedAverageMode = which != 0
-			setupConfigButtons()
-		}
+		SingleSelectionDialogFragment.showInstance(this, MODE_REQUEST_KEY, dialogData, items, selected)
 	}
 
 	private fun setupListItemBackground(view: View) {

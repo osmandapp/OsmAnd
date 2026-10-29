@@ -39,6 +39,9 @@ import net.osmand.PlatformUtil
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.gallery.controller.GalleryPagerController
+import net.osmand.plus.gallery.data.Cancellable
+import net.osmand.plus.gallery.data.GalleryMediaMetadata
+import net.osmand.plus.gallery.data.MediaMetadataListener
 import net.osmand.plus.gallery.ui.viewer.MediaViewerPage
 import net.osmand.plus.gallery.ui.viewer.MediaViewerSheetLayout
 import net.osmand.plus.utils.InsetTarget.Type
@@ -79,6 +82,7 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment(), MediaViewerPage {
 
 	private var pendingSeekMs = -1
 	private var progressAnimator: ObjectAnimator? = null
+	private var durationRequest: Cancellable? = null
 
 	private var seekBurstDirection = 0
 	private var seekBurstTotalMs = 0
@@ -144,7 +148,7 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment(), MediaViewerPage {
 		setupControls()
 		setupGestures()
 		setupSurface()
-		updateProgressTexts(0, 0)
+		showKnownDuration()
 
 		return rootView
 	}
@@ -623,6 +627,25 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment(), MediaViewerPage {
 		positionTime.text = formatTime(positionMs)
 	}
 
+	// The player is created on the first Play, so until then the duration comes from the file metadata
+	private fun showKnownDuration() {
+		val current = mediaItem ?: return
+		val repository = app.galleryHelper.metadataRepository
+		val cached = repository.getCached(current)
+		updateProgressTexts(0, cached?.durationMs?.toInt() ?: 0)
+		if (cached == null) {
+			durationRequest = repository.request(listOf(current), object : MediaMetadataListener {
+				override fun onMetadataLoaded(item: MediaItem, metadata: GalleryMediaMetadata) {
+					if (view != null && !prepared) {
+						durationTime.text = formatTime(metadata.durationMs?.toInt() ?: 0)
+					}
+				}
+
+				override fun onBatchFinished() {}
+			})
+		}
+	}
+
 	private fun updateProgressTexts(positionMs: Int, durationMs: Int) {
 		positionTime.text = formatTime(positionMs)
 		durationTime.text = formatTime(durationMs)
@@ -833,6 +856,8 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment(), MediaViewerPage {
 		handler.removeCallbacksAndMessages(null)
 		progressAnimator?.cancel()
 		progressAnimator = null
+		durationRequest?.cancel()
+		durationRequest = null
 		pendingSeekMs = -1
 		releasePlayer()
 		surface?.release()

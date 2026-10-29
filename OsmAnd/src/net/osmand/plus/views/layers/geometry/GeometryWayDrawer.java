@@ -279,10 +279,10 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		if (pathBitmap != null) {
 			builder.setScreenScale(getContext().getDensity())
 					.setPathIconStep(bitmapStep)
-					.setPathIcon(NativeUtilities.createSkImageFromBitmap(pathBitmap))
+					.setPathIcon(createPathIcon(pathBitmap))
 					.setPathIconOnSurface(bitmapOnSurface);
 			if (specialPathBitmap != null) {
-				builder.setSpecialPathIcon(NativeUtilities.createSkImageFromBitmap(specialPathBitmap));
+				builder.setSpecialPathIcon(createPathIcon(specialPathBitmap));
 				if (specialBitmapStep != -1) {
 					builder.setSpecialPathIconStep(specialBitmapStep);
 				}
@@ -325,6 +325,11 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			builder.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor));
 		}
 		builder.buildAndAddToCollection(collection).setArrowsFixedOnPath(isArrowsFixedOnPath());
+	}
+
+	@NonNull
+	protected SingleSkImage createPathIcon(@NonNull Bitmap bitmap) {
+		return NativeUtilities.createSkImageFromBitmap(bitmap);
 	}
 
 	protected void updateVectorLine(@NonNull VectorLinesCollection collection,

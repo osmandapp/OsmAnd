@@ -15,6 +15,7 @@ public class InAppPurchaseUtils {
 	public static final int HMD_PROMO_YEARS = 3;
 	public static final int HUGEROCK_PROMO_MONTHS = 6;
 	public static final int TRIPLTEK_PROMO_MONTHS = 12;
+	private static final boolean ANDROID_AUTO_FREE = true;
 	private static final long ANDROID_AUTO_START_DATE_MS = 10L * 1000L * 60L * 60L * 24L; // 10 days
 
 	public static boolean isFullVersionPurchased(@NonNull OsmandApplication app) {
@@ -174,6 +175,9 @@ public class InAppPurchaseUtils {
 	}
 
 	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication app) {
+		if (ANDROID_AUTO_FREE) {
+			return true;
+		}
 		long time = System.currentTimeMillis();
 		long installTime = Math.max(Version.getUpdateTime(app), Version.getInstallTime(app));
 		if (time >= installTime + ANDROID_AUTO_START_DATE_MS) {

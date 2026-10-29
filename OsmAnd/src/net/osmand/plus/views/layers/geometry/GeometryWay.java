@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
 import java.util.TreeMap;
 
 import gnu.trove.list.array.TByteArrayList;
@@ -67,6 +68,12 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 	}
 
 	protected GeometryWayStyle<?> getStyle(int index, GeometryWayStyle<?> defaultWayStyle) {
+		if (styleMap instanceof NavigableMap<Integer, GeometryWayStyle<?>> sortedStyleMap) {
+			// the same as the loop below, without copying all keys for every point: 3D tracks and gradient routes
+			// have a style for every point
+			Integer key = sortedStyleMap.floorKey(index);
+			return key != null ? sortedStyleMap.get(key) : defaultWayStyle;
+		}
 		List<Integer> list = new ArrayList<>(styleMap.keySet());
 		for (int i = list.size() - 1; i >= 0; i--) {
 			int c = list.get(i);
