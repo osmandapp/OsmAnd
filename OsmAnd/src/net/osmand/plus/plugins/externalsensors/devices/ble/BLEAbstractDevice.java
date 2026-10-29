@@ -82,6 +82,8 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	private boolean currentHasActualDataState;
 	@Nullable
 	protected List<BluetoothGattCharacteristic> cachedCharacteristics;
+	@Nullable
+	private ScanCallback connectScanCallback;
 
 
 	public BLEAbstractDevice(@NonNull BluetoothAdapter bluetoothAdapter, @NonNull String deviceId) {
@@ -486,10 +488,17 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 					.setReportDelay(0L)
 					.build();
 			ScanFilter filter = new ScanFilter.Builder().setDeviceAddress(targetAddress).build();
-			scanner.startScan(Collections.singletonList(filter), settings, new ScanCallback() {
+			stopConnectScan();
+			ScanCallback callback = new ScanCallback() {
 				@Override
 				public void onScanResult(int callbackType, ScanResult result) {
-					scanner.stopScan(this);
+					// results queued before stopScan() are still delivered; an extra connectGatt() opens a second
+					// GATT client, the MTU requests collide and services are never discovered
+					if (connectScanCallback != this) {
+						scanner.stopScan(this);
+						return;
+					}
+					stopConnectScan();
 					bluetoothGatt = result.getDevice().connectGatt(ctx, false, gattCallback, BluetoothDevice.TRANSPORT_AUTO);
 				}
 
@@ -498,7 +507,19 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 					super.onScanFailed(errorCode);
 					LOG.debug("robustScan failed " + errorCode);
 				}
-			});
+			};
+			connectScanCallback = callback;
+			scanner.startScan(Collections.singletonList(filter), settings, callback);
+		}
+	}
+
+	@SuppressLint("MissingPermission")
+	private void stopConnectScan() {
+		ScanCallback callback = connectScanCallback;
+		connectScanCallback = null;
+		BluetoothLeScanner scanner = bluetoothAdapter != null ? bluetoothAdapter.getBluetoothLeScanner() : null;
+		if (callback != null && scanner != null) {
+			scanner.stopScan(callback);
 		}
 	}
 
@@ -506,6 +527,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	@Override
 	public boolean disconnect() {
 		setCurrentState(DeviceConnectionState.DISCONNECTED);
+		stopConnectScan();
 		if (bluetoothAdapter == null || bluetoothGatt == null) {
 			LOG.debug("BluetoothAdapter not initialized on disconnect");
 			return false;
