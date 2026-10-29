@@ -178,7 +178,7 @@ public class SearchApisCompatTest {
 	static void setUpTypes() throws Exception {
 		assertTrue(REGIONS + " is missing; :OsmAnd-java:processResources downloads it", REGIONS.exists());
 		PlatformUtil.setOsmandRegions(new OsmandRegions(REGIONS.getPath()));
-		net.osmand.shared.binary.CommonWords.Companion.setOsmandRegions(
+		net.osmand.shared.map.OsmandRegions.setDefault(
 				new net.osmand.shared.map.OsmandRegions(REGIONS.getPath()));
 		for (Map.Entry<String, String> e : Algorithms.parseStringsXml(PHRASES).entrySet()) {
 			if (e.getKey().startsWith("poi_")) {

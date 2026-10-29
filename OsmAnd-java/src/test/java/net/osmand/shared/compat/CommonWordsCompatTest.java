@@ -68,7 +68,7 @@ public class CommonWordsCompatTest {
 		SearchCompat.assumeEnabled();
 		assertTrue(REGIONS + " is missing; :OsmAnd-java:processResources downloads it", REGIONS.exists());
 		PlatformUtil.setOsmandRegions(new OsmandRegions(REGIONS.getPath()));
-		net.osmand.shared.binary.CommonWords.Companion.setOsmandRegions(
+		net.osmand.shared.map.OsmandRegions.setDefault(
 				new net.osmand.shared.map.OsmandRegions(REGIONS.getPath()));
 		java = CommonWords.getInstance();
 		copy = net.osmand.shared.binary.CommonWords.getInstance();
