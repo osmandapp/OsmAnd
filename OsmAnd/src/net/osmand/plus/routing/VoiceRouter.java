@@ -900,17 +900,19 @@ public class VoiceRouter {
 	}
 
 	public void newRouteIsCalculated(boolean newRoute) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
-			if (newRoute) {
-				p.newRouteCalculated(router.getLeftDistance(), router.getLeftTime());
-			} else if (settings.SPEAK_ROUTE_RECALCULATION.get()) {
-				p.routeRecalculated(router.getLeftDistance(), router.getLeftTime());
+		if (newRoute || settings.SPEAK_ROUTE_RECALCULATION.get()) {
+			CommandBuilder p = getNewCommandPlayerToPlay();
+			if (p != null) {
+				if (newRoute) {
+					p.newRouteCalculated(router.getLeftDistance(), router.getLeftTime());
+				} else {
+					p.routeRecalculated(router.getLeftDistance(), router.getLeftTime());
+				}
+			} else if (player == null) {
+				pendingCommand = new VoiceCommandPending(!newRoute ? ROUTE_RECALCULATED : ROUTE_CALCULATED, this);
 			}
-		} else if (player == null && (newRoute || settings.SPEAK_ROUTE_RECALCULATION.get())) {
-			pendingCommand = new VoiceCommandPending(!newRoute ? ROUTE_RECALCULATED : ROUTE_CALCULATED, this);
+			play(p);
 		}
-		play(p);
 		if (newRoute) {
 			playGoAheadDist = -1;
 			waitAnnouncedOffRoute = 0;
