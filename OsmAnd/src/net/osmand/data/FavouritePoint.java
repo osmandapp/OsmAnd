@@ -546,6 +546,9 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		}
 		if (getColor() != 0) {
 			point.setColor(getColor());
+		} else {
+			// the colour read from the file comes back with the amenity extensions
+			point.removeColor();
 		}
 		if (!Algorithms.isEmpty(amenityOriginName)) {
 			point.setAmenityOriginName(amenityOriginName);
