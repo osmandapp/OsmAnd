@@ -76,6 +76,8 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 	private static final String LOGIN_DIALOG_TYPE_KEY = "login_dialog_type_key";
 	private static final String LOGIN_STARTING_DIALOG_TYPE_KEY = "login_starting_dialog_type_key";
 	private static final String SIGN_IN_KEY = "sign_in_key";
+	private static final String VERIFICATION_CODE_KEY = "verification_code_key";
+	private static final String ERROR_TEXT_KEY = "error_text_key";
 
 	private static final int VERIFICATION_CODE_EXPIRATION_TIME_MIN = 10 * 60 * 1000; // 10 minutes
 
@@ -152,6 +154,9 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 		setupToolbar();
 		setupTextWatchers();
 		updateContent();
+		if (savedInstanceState != null && dialogType == VERIFY_EMAIL) {
+			restoreVerifyEmailState(savedInstanceState);
+		}
 		setupSupportButton();
 		if (!InsetsUtils.isEdgeToEdgeSupported()) {
 			setupKeyboardListener();
@@ -172,7 +177,24 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 		outState.putBoolean(SIGN_IN_KEY, signIn);
 		outState.putString(LOGIN_DIALOG_TYPE_KEY, dialogType.name());
 		outState.putString(LOGIN_STARTING_DIALOG_TYPE_KEY, startingDialogType.name());
+		if (dialogType == VERIFY_EMAIL && editText != null) {
+			outState.putString(VERIFICATION_CODE_KEY, editText.getText().toString());
+			if (errorText.getVisibility() == View.VISIBLE) {
+				outState.putString(ERROR_TEXT_KEY, errorText.getText().toString());
+			}
+		}
 		super.onSaveInstanceState(outState);
+	}
+
+	private void restoreVerifyEmailState(@NonNull Bundle savedInstanceState) {
+		editText.setText(savedInstanceState.getString(VERIFICATION_CODE_KEY));
+		editText.setSelection(editText.length());
+		String error = savedInstanceState.getString(ERROR_TEXT_KEY);
+		if (error != null) {
+			errorText.setText(error);
+			buttonContinue.setEnabled(false);
+			AndroidUiHelper.updateVisibility(errorText, true);
+		}
 	}
 
 	@Override
@@ -303,6 +325,7 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 		AndroidUiHelper.updateVisibility(errorText, false);
 		AndroidUiHelper.updateVisibility(resendButton, false);
 		AndroidUiHelper.updateVisibility(codeMissingDescription, false);
+		AndroidUiHelper.updateVisibility(buttonChoosePlan, false);
 
 		editText.requestFocus();
 		AndroidUtils.softKeyboardDelayed(requireActivity(), editText);
