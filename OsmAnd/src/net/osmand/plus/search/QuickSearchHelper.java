@@ -96,6 +96,7 @@ public class QuickSearchHelper implements ResourceListener {
 	private final SearchUICore core;
 	private SearchResultCollection resultCollection;
 	private boolean mapsIndexed;
+	private volatile List<String> mapsWithoutSpatialSearch = Collections.emptyList();
 
 	public QuickSearchHelper(OsmandApplication app) {
 		this.app = app;
@@ -109,7 +110,11 @@ public class QuickSearchHelper implements ResourceListener {
 	public SearchUICore getCore() {
 		if (mapsIndexed) {
 			mapsIndexed = false;
-			setRepositoriesForSearchUICore(app);
+			if (core.isSpatialSearch() != useSpatialTextSearch()) {
+				initSearchUICore();
+			} else {
+				setRepositoriesForSearchUICore(app);
+			}
 		}
 		return core;
 	}
@@ -124,6 +129,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public void initSearchUICore() {
 		mapsIndexed = false;
+		mapsWithoutSpatialSearch = app.getResourceManager().getMapsWithoutSpatialSearch();
 		setRepositoriesForSearchUICore(app);
 		core.clearAPIs();
 		core.resetSearch();
@@ -153,7 +159,13 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	private boolean useSpatialTextSearch() {
-		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get();
+		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get() && mapsWithoutSpatialSearch.isEmpty();
+	}
+
+	// maps to update before the spatial search is used, until then the old search works
+	@NonNull
+	public List<String> getMapsWithoutSpatialSearch() {
+		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get() ? mapsWithoutSpatialSearch : Collections.emptyList();
 	}
 
 	public void refreshCustomPoiFilters() {
@@ -953,6 +965,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	@Override
 	public void onMapsIndexed() {
+		mapsWithoutSpatialSearch = app.getResourceManager().getMapsWithoutSpatialSearch();
 		mapsIndexed = true;
 	}
 

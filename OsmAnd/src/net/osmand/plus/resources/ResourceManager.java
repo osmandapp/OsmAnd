@@ -989,6 +989,22 @@ public class ResourceManager {
 		return readers.toArray(new BinaryMapIndexReader[0]);
 	}
 
+	@NonNull
+	public List<String> getMapsWithoutSpatialSearch() {
+		List<String> maps = new ArrayList<>();
+		for (BinaryMapReaderResource r : getFileReaders()) {
+			String fileName = r.getFileName();
+			BinaryMapIndexReader shallowReader = r.getShallowReader();
+			boolean regularMap = !fileName.endsWith(BINARY_WIKI_MAP_INDEX_EXT)
+					&& !fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
+			if (regularMap && shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData())
+					&& !r.isSpatialSearchSupported()) {
+				maps.add(fileName);
+			}
+		}
+		return maps;
+	}
+
 	public Map<String, String> getIndexFileNames() {
 		return new LinkedHashMap<>(indexFileNames);
 	}
