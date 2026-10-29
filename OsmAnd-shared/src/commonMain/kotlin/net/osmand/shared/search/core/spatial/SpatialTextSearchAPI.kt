@@ -55,7 +55,7 @@ open class SpatialTextSearchAPI(
 	internal val poiSearch = SpatialPoiSearch(poiTypes)
 
 	override fun isSearchAvailable(p: SearchPhrase): Boolean {
-		return !p.hasCustomSearchType(ObjectType.ONLINE_SEARCH)
+		return super.isSearchAvailable(p) && !p.hasCustomSearchType(ObjectType.ONLINE_SEARCH)
 	}
 
 	override fun search(phrase: SearchPhrase, resultMatcher: SearchResultMatcher): Boolean {
@@ -82,7 +82,9 @@ open class SpatialTextSearchAPI(
 		val results = spatialTextSearch.searchAPI(phrase.getFullSearchPhrase(), context)
 		LOG.info("Spatial search after call spatialTextSearch.searchAPI")
 		val typoSuggestion = results.typoSuggestion
-		if (typoSuggestion != null && !resultMatcher.isCancelled()) {
+		if (typoSuggestion != null && phrase.isSearchTypeAllowed(ObjectType.SUGGESTION)
+			&& !resultMatcher.isCancelled()
+		) {
 			// "did you mean": the corrected query, searched when the row is tapped
 			val suggestion = SearchResult(phrase)
 			suggestion.objectType = ObjectType.SUGGESTION
@@ -119,6 +121,9 @@ open class SpatialTextSearchAPI(
 				return false
 			}
 			val searchResult = convertResult(phrase, context, spatialResult)
+			if (searchResult != null && !phrase.isSearchTypeAllowed(searchResult.objectType!!)) {
+				continue
+			}
 			if (searchResult != null) {
 				publishWithParent(resultMatcher, searchResult)
 			} else {
@@ -221,11 +226,16 @@ open class SpatialTextSearchAPI(
 		else
 			SpatialTextSearchSettings.suggestionSettings()
 		settings.LANG_DEDUPLICATE = phrase.getSettings()!!.getLang()
+		settings.SEARCH_POI = settings.SEARCH_POI and phrase.isSearchTypeAllowed(ObjectType.POI)
+		settings.SEARCH_POI_CATEGORIES = settings.SEARCH_POI_CATEGORIES and phrase.isSearchTypeAllowed(ObjectType.POI_TYPE)
 		return settings
 	}
 
 	override fun getSearchPriority(p: SearchPhrase): Int {
-		if (!p.isUnknownSearchWordPresent() || p.isLastWord(ObjectType.POI_TYPE, ObjectType.STREET)) {
+		// the address tab lists are filtered by SpatialAddressByNameAPI and SpatialStreetByCityAPI
+		if (!p.isUnknownSearchWordPresent() || p.isAddressListFilter()
+			|| p.isLastWord(ObjectType.POI_TYPE, ObjectType.STREET)
+		) {
 			return -1
 		}
 		return SEARCH_PRIORITY

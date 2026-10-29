@@ -219,7 +219,7 @@ class SpatialSearchResult internal constructor(
 		val category = getPoiCategory(poiSearch) ?: return null
 		for (name in category.names) {
 			if (objs[0].tokens.all { it.getMainCollator().matches(name) }) {
-				return name
+				return category.getOriginalName(name)
 			}
 		}
 		return null

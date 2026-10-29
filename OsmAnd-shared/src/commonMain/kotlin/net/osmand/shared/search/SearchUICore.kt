@@ -607,23 +607,28 @@ class SearchUICore(
 		else
 			SearchCoreFactory.SearchStreetByCityAPI(streetsApi)
 		apis.add(cityApi)
+		val townCitiesCache = SearchCoreFactory.TownCitiesCache()
 		if (spatialTextSearchAPI != null) {
-			apis.add(SpatialNearestCitySearchAPI(streetsApi, cityApi))
+			apis.add(SpatialAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache))
+			apis.add(SpatialAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache))
 			apis.add(spatialTextSearchAPI)
 		} else {
-			val townCitiesCache = SearchCoreFactory.TownCitiesCache()
 			apis.add(SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache))
 			apis.add(SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache))
 		}
 	}
 
-	private class SpatialNearestCitySearchAPI(
+	// nearest cities, and the lists of the address tab filtered by the typed text as in the classic search
+	private class SpatialAddressByNameAPI(
 		streetsApi: SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI,
-		cityApi: SearchCoreFactory.SearchStreetByCityAPI
-	) : SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, SearchCoreFactory.TownCitiesCache()) {
+		cityApi: SearchCoreFactory.SearchStreetByCityAPI,
+		private val longDistance: Boolean,
+		townCitiesCache: SearchCoreFactory.TownCitiesCache
+	) : SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, longDistance, townCitiesCache) {
 
 		override fun getSearchPriority(p: SearchPhrase): Int {
-			return if (p.isEmpty() && p.isEmptyQueryAllowed()) super.getSearchPriority(p) else -1
+			val nearestCities = !longDistance && p.isEmpty() && p.isEmptyQueryAllowed()
+			return if (nearestCities || p.isAddressListFilter()) super.getSearchPriority(p) else -1
 		}
 	}
 
@@ -632,7 +637,7 @@ class SearchUICore(
 	) : SearchCoreFactory.SearchStreetByCityAPI(streetsApi) {
 
 		override fun getSearchPriority(p: SearchPhrase): Int {
-			return if (p.isUnknownSearchWordPresent()) -1 else super.getSearchPriority(p)
+			return if (p.isUnknownSearchWordPresent() && !p.isAddressListFilter()) -1 else super.getSearchPriority(p)
 		}
 	}
 

@@ -346,6 +346,24 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 
 	fun hasCustomSearchType(type: ObjectType): Boolean = settings!!.hasCustomSearchType(type)
 
+	// the address tab list opened by a city / postcode button, or the streets of a selected city / postcode:
+	// the typed text filters this list instead of starting a new full-text search
+	fun isAddressListFilter(): Boolean {
+		val searchTypes = getSearchTypes()
+		if (searchTypes == null || searchTypes.isEmpty()) {
+			return false
+		}
+		var cityOrPostcodeList = true
+		for (type in searchTypes) {
+			if (type != ObjectType.CITY && type != ObjectType.VILLAGE && type != ObjectType.POSTCODE) {
+				cityOrPostcodeList = false
+				break
+			}
+		}
+		return cityOrPostcodeList ||
+				isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE)
+	}
+
 	fun isSearchTypeAllowed(searchType: ObjectType): Boolean = isSearchTypeAllowed(searchType, false)
 
 	fun isSearchTypeAllowed(searchType: ObjectType, exclusive: Boolean): Boolean {
