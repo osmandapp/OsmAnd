@@ -165,7 +165,8 @@ android {
 		}
 		release {
 			signingConfig signingConfigs.publishing
-			minifyEnabled true
+			// R8 stops on classes the HMS SDK references but does not ship, so huawei builds go without it, as before 5.4
+			minifyEnabled !gradle.startParameter.taskRequests.toString().toLowerCase().contains("huawei")
 			shrinkResources false
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 		}

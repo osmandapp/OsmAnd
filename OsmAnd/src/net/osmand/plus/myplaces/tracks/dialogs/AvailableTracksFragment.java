@@ -430,17 +430,15 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		super.restoreState(bundle);
 
 		if (rootFolder != null) {
-			if (!Algorithms.isEmpty(selectedItemPath)) {
-				TrackItem trackItem = getTrackItem(rootFolder, selectedItemPath);
-				if (trackItem != null) {
-					showTrackItem(rootFolder, trackItem);
-				}
-				selectedItemPath = null;
+			TrackItem trackItem = Algorithms.isEmpty(selectedItemPath) ? null : getTrackItem(rootFolder, selectedItemPath);
+			if (trackItem != null) {
+				showTrackItem(rootFolder, trackItem);
 			} else if (!Algorithms.isEmpty(preSelectedFolder)
 					&& !preSelectedFolder.equals(rootFolder.getDirFile().absolutePath())) {
 				openSubfolder(rootFolder, new KFile(preSelectedFolder), null);
-				preSelectedFolder = null;
 			}
+			selectedItemPath = null;
+			preSelectedFolder = null;
 		}
 	}
 

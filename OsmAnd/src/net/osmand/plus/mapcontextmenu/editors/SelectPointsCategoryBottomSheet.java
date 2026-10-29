@@ -135,10 +135,7 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 
 		itemView.setOnClickListener(v -> {
 			PointsGroup selectedPointsGroup = prepareSelectedPointsGroup(pointsGroup);
-			PointEditor pointEditor = getPointEditor();
-			if (pointEditor != null) {
-				pointEditor.setPointsGroup(selectedPointsGroup);
-			}
+			applyToPointEditor(selectedPointsGroup);
 			if (listener != null) {
 				listener.onCategorySelected(selectedPointsGroup);
 			}
@@ -146,6 +143,13 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 		});
 
 		return itemView;
+	}
+
+	protected void applyToPointEditor(@NonNull PointsGroup pointsGroup) {
+		PointEditor pointEditor = getPointEditor();
+		if (pointEditor != null) {
+			pointEditor.setPointsGroup(pointsGroup);
+		}
 	}
 
 	protected int getTitleStringId() {
