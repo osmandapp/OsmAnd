@@ -519,8 +519,9 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                                        @NonNull List<String> pgColors,
                                        @NonNull List<String> pgBackgrounds,
                                        @NonNull HeightDataLoader.Cancellable isCancelled) {
-        int left = 0, right = Integer.MAX_VALUE, top = 0, bottom = Integer.MAX_VALUE;
         Map<Long, Amenity> amenityMap = new LinkedHashMap<>();
+        List<Amenity> currentAmenities = new ArrayList<>();
+        String routeId = article.getRouteId();
         for (AmenityIndexRepository repo : repos) {
             try {
                 if (isCancelled.isCancelled()) {
@@ -529,18 +530,20 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 if (shouldSkipRepository(repo, article)) {
                     continue;
                 }
-                BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
-                        0, 0, Algorithms.emptyIfNull(article.title), left, right, top, bottom,
-                        getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
-                        getAmenityMatcher(article, amenityMap, new ArrayList<>(), isCancelled),
-                        null);
-                if (article.routeRadius > 0 && !article.hasBbox31()) {
-                    pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius);
+                currentAmenities.clear();
+                // route_name of article points is not in the POI name index, so search by title misses most of them
+                if (!Algorithms.isEmpty(routeId)) {
+                    repo.searchPoiByName(buildArticlePointsRequest(article, routeId, amenityMap,
+                            currentAmenities, isCancelled)); // indexed route_id
                 }
-                if (!Algorithms.isEmpty(article.title)) {
-                    repo.searchPoiByName(pointRequest);
-                } else {
-                    repo.searchPoi(pointRequest);
+                if (currentAmenities.isEmpty()) {
+                    BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = buildArticlePointsRequest(article,
+                            Algorithms.emptyIfNull(article.title), amenityMap, currentAmenities, isCancelled);
+                    if (!Algorithms.isEmpty(article.title)) {
+                        repo.searchPoiByName(pointRequest);
+                    } else {
+                        repo.searchPoi(pointRequest);
+                    }
                 }
             } catch (Exception e) {
                 LOG.error(e.getMessage());
@@ -549,6 +552,23 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         List<Amenity> amenities = getPointList(amenityMap, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds);
         pointList.addAll(amenities);
         return !isCancelled.isCancelled();
+    }
+
+    @NonNull
+    private BinaryMapIndexReader.SearchRequest<Amenity> buildArticlePointsRequest(@NonNull TravelArticle article,
+                                                                                @NonNull String query,
+                                                                                @NonNull Map<Long, Amenity> amenityMap,
+                                                                                @NonNull List<Amenity> currentAmenities,
+                                                                                @NonNull HeightDataLoader.Cancellable isCancelled) {
+        BinaryMapIndexReader.SearchRequest<Amenity> request = BinaryMapIndexReader.buildSearchPoiRequest(
+                0, 0, query, 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
+                getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
+                getAmenityMatcher(article, amenityMap, currentAmenities, isCancelled),
+                null);
+        if (article.routeRadius > 0 && !article.hasBbox31()) {
+            request.setBBoxRadius(article.lat, article.lon, article.routeRadius);
+        }
+        return request;
     }
 
     private List<Amenity> getPointList(Map<Long, Amenity> amenityMap,
