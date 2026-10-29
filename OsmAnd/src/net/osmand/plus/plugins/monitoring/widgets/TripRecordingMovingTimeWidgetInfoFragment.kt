@@ -11,12 +11,13 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetInfoFragment
 import net.osmand.plus.widgets.alert.AlertDialogData
-import net.osmand.plus.widgets.alert.CustomAlert
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment
 
 class TripRecordingMovingTimeWidgetInfoFragment : BaseSimpleWidgetInfoFragment() {
 
 	companion object {
 		const val MOVING_TIME_MODE = "moving_time_mode"
+		private const val MODE_REQUEST_KEY = "mode_request_key"
 	}
 
 	private var modeOsmandPreference: OsmandPreference<MovingTimeMode>? = null
@@ -50,6 +51,10 @@ class TripRecordingMovingTimeWidgetInfoFragment : BaseSimpleWidgetInfoFragment()
 
 			modeButton.setOnClickListener { showModeDialog() }
 			modeButton.background = pressedStateDrawable
+			SingleSelectionDialogFragment.setResultListener(this, MODE_REQUEST_KEY) { index ->
+				selectedMode = index
+				updateModeSetting()
+			}
 		}
 	}
 
@@ -61,10 +66,7 @@ class TripRecordingMovingTimeWidgetInfoFragment : BaseSimpleWidgetInfoFragment()
 			.setTitle(R.string.shared_string_mode)
 			.setControlsColor(ColorUtilities.getActiveColor(app, nightMode))
 
-		CustomAlert.showSingleSelection(dialogData, items, selectedMode) { v ->
-			selectedMode = v.tag as Int
-			updateModeSetting()
-		}
+		SingleSelectionDialogFragment.showInstance(this, MODE_REQUEST_KEY, dialogData, items, selectedMode)
 	}
 
 	private fun updateModeSetting() {

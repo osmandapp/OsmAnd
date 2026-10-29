@@ -1115,6 +1115,37 @@ public class OpeningHoursParserTest {
 		testParsedAndAssembledCorrectly("Mo-Fr ٤:٣٠-١٠:٠٠ ص, ٧:٣٠ ص-١١:٠٠ م; Sa, Su, PH ١:٣٠-١١:٠٠ م", hours);
 	}
 
+	@Test
+	public void testMonthRangeOffKeepsMonths() throws ParseException {
+		// month range "off" rules must not be shown as "24/7 off" (#11571)
+		OpeningHoursParser.initLocalStrings(Locale.UK);
+		OpeningHoursParser.setTwelveHourFormattingEnabled(false, Locale.UK);
+		OpeningHours hours = parseOpenedHours("Oct-Mar off");
+		testParsedAndAssembledCorrectly("Jan-Mar, Oct-Dec Mo-Su off", hours);
+		testOpened("05.08.2024 12:00", hours, false);
+		testOpened("05.11.2024 12:00", hours, false);
+
+		hours = parseOpenedHours("Jan-Mar off; Mo-Fr 10:00-18:00");
+		testParsedAndAssembledCorrectly("Jan-Mar Mo-Su off; Mo-Fr 10:00-18:00", hours);
+
+		hours = parseOpenedHours("Mo-Fr 10:00-18:00; Oct-Mar off");
+		testParsedAndAssembledCorrectly("Mo-Fr 10:00-18:00; Jan-Mar, Oct-Dec Mo-Su off", hours);
+	}
+
+	@Test
+	public void testMonthRangeOffIsNotOpened24_7() throws ParseException {
+		// an "off" rule outside its months must not make the info "open 24/7" (#11571)
+		OpeningHoursParser.initLocalStrings(Locale.UK);
+		OpeningHoursParser.setTwelveHourFormattingEnabled(false, Locale.UK);
+		OpeningHours hours = parseOpenedHours("Mo-Fr 10:00-18:00; Oct-Mar off");
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.US).parse("05.08.2024 12:00"));
+		OpeningHours.Info info = hours.getCombinedInfo(cal);
+		Assert.assertTrue("opened", info.isOpened());
+		Assert.assertFalse("opened 24/7", info.isOpened24_7());
+		testInfo("05.08.2024 12:00", hours, "Open until 18:00");
+	}
+
 	private static OpeningHours parseOpenedHours(String string) {
 		return OpeningHoursParser.parseOpenedHours(string);
 	}

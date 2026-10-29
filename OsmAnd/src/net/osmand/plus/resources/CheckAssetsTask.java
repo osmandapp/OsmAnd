@@ -28,6 +28,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,8 +88,9 @@ public class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
 					progress.startTask(app.getString(R.string.installing_new_resources), -1);
 					AssetManager manager = app.getAssets();
 					boolean firstInstall = !settings.PREVIOUS_INSTALLED_VERSION.isSet();
-					unpackBundledAssets(manager, appDataDir, firstInstall || forceUpdate, overwrite, forceCheck);
-					settings.PREVIOUS_INSTALLED_VERSION.set(fv);
+					if (unpackBundledAssets(manager, appDataDir, firstInstall || forceUpdate, overwrite, forceCheck)) {
+						settings.PREVIOUS_INSTALLED_VERSION.set(fv);
+					}
 					copyRegionsBoundaries(overwrite);
 					// see Issue #3381
 					//copyPoiTypes();
@@ -141,7 +143,7 @@ public class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
 		try {
 			File file = app.getAppPath("regions.ocbf");
 			boolean exists = file.exists();
-			if (!exists || overwrite) {
+			if (!exists || overwrite && !isRegionsBoundariesEqualToFile(file)) {
 				FileOutputStream fout = new FileOutputStream(file);
 				Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"), fout);
 				fout.close();
@@ -152,9 +154,16 @@ public class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
 		}
 	}
 
-	private void unpackBundledAssets(@NonNull AssetManager manager, @NonNull File appDataDir,
+	private static boolean isRegionsBoundariesEqualToFile(@NonNull File file) throws IOException {
+		try (InputStream is = OsmandRegions.class.getResourceAsStream("regions.ocbf")) {
+			return is != null && ResourceManager.isStreamEqualToFile(is, file);
+		}
+	}
+
+	private boolean unpackBundledAssets(@NonNull AssetManager manager, @NonNull File appDataDir,
 			boolean firstInstall, boolean overwrite,
 			boolean forceCheck) throws IOException, XmlPullParserException {
+		boolean allCopied = true;
 		AssetsCollection assetsCollection = app.getResourceManager().getAssets();
 		for (AssetEntry asset : assetsCollection.getEntries()) {
 			String[] modes = asset.mode.split("\\|");
@@ -207,9 +216,17 @@ public class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
 				}
 			}
 			if (shouldCopy) {
-				ResourceManager.copyAssets(manager, asset.source, destinationFile, asset.getVersionTime());
+				try {
+					ResourceManager.copyAssets(manager, asset.source, destinationFile, asset.getVersionTime());
+				} catch (IOException e) {
+					// one failed asset does not stop the others; the version is not stored, so the copy is retried
+					allCopied = false;
+					warnings.add(e.getMessage());
+					log.error("Failed to copy " + asset.source, e);
+				}
 			}
 		}
+		return allCopied;
 	}
 
 	@Override

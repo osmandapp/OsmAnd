@@ -224,6 +224,7 @@ class SearchHistoryDBHelper {
 		if (db != null) {
 			try {
 				insert(entry, db);
+				updateLastModifiedTime();
 			} finally {
 				db.close();
 			}
@@ -248,7 +249,6 @@ class SearchHistoryDBHelper {
 						getObjectTypeName(entry), getCityTypeName(entry), entry.getDisplayName(), entry.getPoiCategoryKey(),
 						entry.getPoiSubtypeKey(), entry.getTypeName(), entry.getAddress(), entry.getRelatedObjectName(),
 						entry.getOpeningHours(), entry.getAlternateName(), entry.getPhotoUrl(), entry.getOsmId()});
-		updateLastModifiedTime();
 	}
 
 	@NonNull
@@ -308,11 +308,24 @@ class SearchHistoryDBHelper {
 					} while (query.moveToNext());
 					if (reinsert) {
 						log.error("Reinsert all values for search history");
-						db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME);
-						entries.clear();
-						entries.addAll(st.values());
-						for (HistoryEntry he : entries) {
-							insert(he, db);
+						// one transaction instead of a commit per row, which kept the UI thread busy for seconds
+						db.execSQL("BEGIN TRANSACTION");
+						try {
+							db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME);
+							entries.clear();
+							entries.addAll(st.values());
+							for (HistoryEntry he : entries) {
+								insert(he, db);
+							}
+							db.execSQL("COMMIT");
+						} catch (RuntimeException e) {
+							// fails when the transaction has already ended (failed COMMIT, or SQLite rolled back itself)
+							try {
+								db.execSQL("ROLLBACK");
+							} catch (RuntimeException rollbackError) {
+								e.addSuppressed(rollbackError);
+							}
+							throw e;
 						}
 						updateLastModifiedTime();
 					}

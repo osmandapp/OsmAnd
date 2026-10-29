@@ -234,7 +234,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		}
 		for (String name : category.names) {
 			if (objs.get(0).tokens.stream().allMatch(t -> t.getMainCollator().matches(name))) {
-				return name;
+				return category.getOriginalName(name);
 			}
 		}
 		return null;

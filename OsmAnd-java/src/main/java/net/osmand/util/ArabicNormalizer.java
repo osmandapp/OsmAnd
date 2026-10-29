@@ -19,8 +19,7 @@ public class ArabicNormalizer {
         if (text == null || text.isEmpty()) {
             return false;
         }
-        char first = text.charAt(0);
-        if (Character.UnicodeBlock.of(first) == Character.UnicodeBlock.ARABIC) {
+        if (startsWithArabic(text)) {
             for (char c : text.toCharArray()) {
                 if (isDiacritic(c) || isArabicDigit(c) || isNeedReplace(c)) {
                     return true;
@@ -48,8 +47,7 @@ public class ArabicNormalizer {
         if (text == null || text.isEmpty()) {
             return null;  // Handle null input
         }
-        char first = text.charAt(0);
-        if (Character.UnicodeBlock.of(first) != Character.UnicodeBlock.ARABIC) {
+        if (!startsWithArabic(text)) {
             return text;
         }
 
@@ -64,6 +62,11 @@ public class ArabicNormalizer {
             }
         }
         return String.valueOf(textChars);
+    }
+
+    private static boolean startsWithArabic(String text) {
+        return Character.UnicodeBlock.of(text.charAt(0)) == Character.UnicodeBlock.ARABIC
+                || (text.length() > 1 && Character.UnicodeBlock.of(text.charAt(1)) == Character.UnicodeBlock.ARABIC);
     }
 
     private static boolean isDiacritic(char c) {
