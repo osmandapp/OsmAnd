@@ -1656,55 +1656,6 @@ public class BinaryMapIndexReader {
 		return poiIndexes;
 	}
 
-	// spatial search reads the common words stats of the name index, maps generated before 2026-06 don't have them
-	public boolean isSpatialSearchSupported() throws IOException {
-		for (AddressRegion r : addressIndexes) {
-			if (!hasNameIndexCommonStats(r, OsmandOdb.OsmAndAddressIndex.NAMEINDEX_FIELD_NUMBER,
-					OsmandOdb.OsmAndAddressNameIndexData.TABLE_FIELD_NUMBER,
-					OsmandOdb.OsmAndAddressNameIndexData.COMMONSTATS_FIELD_NUMBER)) {
-				return false;
-			}
-		}
-		for (PoiRegion r : poiIndexes) {
-			if (!hasNameIndexCommonStats(r, OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER,
-					OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER,
-					OsmandOdb.OsmAndPoiNameIndex.COMMONSTATS_FIELD_NUMBER)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean hasNameIndexCommonStats(BinaryIndexPart part, int nameIndexField, int tableField,
-	                                        int commonStatsField) throws IOException {
-		codedIS.seek(part.filePointer);
-		long old = codedIS.pushLimitLong(part.length);
-		try {
-			while (true) {
-				int t = codedIS.readTag();
-				int tag = WireFormat.getTagFieldNumber(t);
-				if (tag == 0) {
-					// no name index at all - nothing to search by name
-					return true;
-				} else if (tag != nameIndexField) {
-					skipUnknownField(t);
-					continue;
-				}
-				long nameIndexLimit = codedIS.pushLimitLong(readInt());
-				// the table goes first, the common stats right after it
-				t = codedIS.readTag();
-				if (WireFormat.getTagFieldNumber(t) == tableField) {
-					codedIS.skipRawBytes(readInt());
-					t = codedIS.readTag();
-				}
-				codedIS.popLimit(nameIndexLimit);
-				return WireFormat.getTagFieldNumber(t) == commonStatsField;
-			}
-		} finally {
-			codedIS.popLimit(old);
-		}
-	}
-
 
 	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom, SearchFilter searchFilter) {
 		return buildSearchRequest(sleft, sright, stop, sbottom, zoom, searchFilter, null);

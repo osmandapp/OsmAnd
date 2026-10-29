@@ -56,20 +56,6 @@ public class BinaryMapReaderResource {
 		return file.lastModified();
 	}
 
-	public boolean isSpatialSearchSupported() {
-		BinaryMapIndexReader initialReader = this.initialReader;
-		if (initialReader == null) {
-			return true;
-		}
-		// own file handle, the quick search reader could be busy in the search thread
-		try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
-			return new BinaryMapIndexReader(raf, initialReader).isSpatialSearchSupported();
-		} catch (Exception e) {
-			log.error("Fail to check spatial search index " + file.getName(), e);
-			return true;
-		}
-	}
-
 	// should not use methods to read from file!
 	@Nullable
 	public BinaryMapIndexReader getShallowReader() {

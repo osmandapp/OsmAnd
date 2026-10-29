@@ -59,6 +59,7 @@ import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.router.TransportStopsRouteReader;
 import net.osmand.search.AmenitySearcher;
 import net.osmand.search.core.AmenityIndexRepository;
+import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -998,7 +999,7 @@ public class ResourceManager {
 			boolean regularMap = !fileName.endsWith(BINARY_WIKI_MAP_INDEX_EXT)
 					&& !fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
 			if (regularMap && shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData())
-					&& !r.isSpatialSearchSupported()) {
+					&& !SpatialTextSearchAPI.hasPoiTypesInNameIndex(shallowReader)) {
 				maps.add(fileName);
 			}
 		}
