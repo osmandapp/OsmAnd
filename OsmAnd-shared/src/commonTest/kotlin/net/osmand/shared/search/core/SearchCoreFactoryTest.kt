@@ -593,7 +593,7 @@ class SearchCoreFactoryTest {
 			return SHIFTED
 		}
 
-		private fun nearlyEqual(a: String, b: String): Boolean {
+		internal fun nearlyEqual(a: String, b: String): Boolean {
 			if (ulps(a, b) <= 3) {
 				return true
 			}

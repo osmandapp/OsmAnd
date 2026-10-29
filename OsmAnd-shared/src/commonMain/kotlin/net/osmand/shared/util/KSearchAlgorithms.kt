@@ -1,6 +1,7 @@
 package net.osmand.shared.util
 
 import net.osmand.shared.util.collections.KTIntArrayList
+import net.osmand.shared.util.collections.KTreeSet
 
 /**
  * Copy of the part of `net.osmand.util.SearchAlgorithms` in OsmAnd-java that the obf reader and
@@ -341,6 +342,47 @@ object KSearchAlgorithms {
 			}
 		}
 		return false
+	}
+
+	/**
+	 * The runs of digits and of letters of a house number, lowercased and in order: "12B" gives "12" and "b".
+	 *
+	 * @param inCaseDuplicates gets the runs in the order of the name, a run met twice twice
+	 */
+	fun getBuildingCompareSet(name: String, inCaseDuplicates: MutableList<String>?): Set<String> {
+		inCaseDuplicates?.clear()
+		var resultSet: MutableSet<String>? = null
+		val currentToken = StringBuilder()
+		var lastType = 0
+		for (ch in name) {
+			val type = if (ch.isDigit()) 1 else if (ch.isLetter()) 2 else 0
+			val addToken = type != lastType
+			if (addToken && currentToken.isNotEmpty()) {
+				if (resultSet == null) {
+					resultSet = KTreeSet(naturalOrder())
+				}
+				val toAdd = currentToken.toString().lowercase()
+				inCaseDuplicates?.add(toAdd)
+				resultSet.add(toAdd)
+				currentToken.clear()
+			}
+			if (type > 0) {
+				currentToken.append(ch)
+			}
+			lastType = type
+		}
+		if (currentToken.isNotEmpty()) {
+			if (resultSet == null) {
+				return setOf(currentToken.toString().lowercase())
+			}
+			val toAdd = currentToken.toString().lowercase()
+			inCaseDuplicates?.add(toAdd)
+			resultSet.add(toAdd)
+		}
+		if (resultSet == null) {
+			return setOf(name.lowercase())
+		}
+		return resultSet
 	}
 
 	private fun isTokenCharacter(value: String, index: Int, tokenAlreadyStarted: Boolean): Boolean {
