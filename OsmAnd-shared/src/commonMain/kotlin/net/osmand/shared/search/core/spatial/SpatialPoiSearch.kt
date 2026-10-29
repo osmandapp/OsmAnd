@@ -104,6 +104,17 @@ class SpatialPoiSearch(types: MapPoiTypes) {
 			return true
 		}
 
+		fun getOriginalName(alignedName: String): String {
+			if (singleType != null) {
+				for (name in getOriginalNames(singleType.getTranslation(), singleType.getSynonyms())) {
+					if (KSearchAlgorithms.alignChars(name) == alignedName) {
+						return name
+					}
+				}
+			}
+			return alignedName
+		}
+
 		/**
 		 * Fewest words of a name of the type that has a word starting with one of the query words. A one-word synonym
 		 * ("cistern", "temple") must not make a partial match of another name ("water" of "Water tank", "place" of
@@ -578,14 +589,22 @@ class SpatialPoiSearch(types: MapPoiTypes) {
 
 	companion object {
 
-		// translation (only the first name) and synonyms
 		private fun getNames(translation: String?, synonyms: String?): List<String> {
+			val names = ArrayList<String>()
+			for (name in getOriginalNames(translation, synonyms)) {
+				names.add(KSearchAlgorithms.alignChars(name))
+			}
+			return names
+		}
+
+		// translation (only the first name) and synonyms
+		private fun getOriginalNames(translation: String?, synonyms: String?): List<String> {
 			val all = (if (KAlgorithms.isEmpty(translation)) "" else WorldRegion.splitLikeJava(translation!!, ";")[0]) + ";" +
 					(synonyms ?: "")
 			val names = ArrayList<String>()
 			for (name in WorldRegion.splitLikeJava(all, ";")) {
 				if (name.trim().isNotEmpty()) {
-					names.add(KSearchAlgorithms.alignChars(name.trim()))
+					names.add(name.trim())
 				}
 			}
 			return names

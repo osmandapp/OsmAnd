@@ -69,7 +69,8 @@ import java.util.TreeMap;
  * a hash set. For each the rows of the result: the spatial result each stands for, as that test writes it, and what
  * the api made of it; the others, as the suggestion of a typo. Then the first poi categories and streets of a map the
  * complete phrases found, each selected in its query and searched as the app searches a row tapped, alone and with a
- * name or a house number typed after it.
+ * name or a house number typed after it. Each complete phrase is also searched with the types of the address tab and
+ * with those of the address search of the aidl api, which the api filters its results by.
  * <p>
  * Behind {@code OSMAND_SEARCH_COMPAT}, see {@link SearchCompat}:
  * <pre>
@@ -84,6 +85,12 @@ public class SpatialTextSearchAPICompatTest {
 	private static final int EXTRA_NAME_CITIES = 60;
 	// "search further" twice: 60 km of the 10 of a category
 	private static final int WIDE_RADIUS_LEVEL = 3;
+	// the types of the address tab and of the address search of the aidl api
+	private static final ObjectType[][] SEARCH_TYPES = {
+			{ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE, ObjectType.HOUSE, ObjectType.STREET_INTERSECTION,
+					ObjectType.STREET, ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION},
+			{ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE, ObjectType.STREET, ObjectType.HOUSE,
+					ObjectType.STREET_INTERSECTION}};
 
 	private Writer dump;
 	private final Map<String, Map<String, String>> langPhrases = new HashMap<>();
@@ -92,6 +99,7 @@ public class SpatialTextSearchAPICompatTest {
 	private final Set<String> namesOfLanguages = new HashSet<>();
 	private SpatialPoiSearch names;
 	private int queries;
+	private int typedQueries;
 	private int rows;
 	private int spatialRows;
 	private int categoryRows;
@@ -143,10 +151,11 @@ public class SpatialTextSearchAPICompatTest {
 			net.osmand.shared.osm.MapPoiTypes.Companion.setDefault(
 					new net.osmand.shared.osm.MapPoiTypes("src/test/resources/poi_types.xml"));
 		}
-		System.out.printf("SpatialTextSearchAPICompatTest: %d maps, %d queries, %d rows (%d of the spatial search, %d of "
-						+ "poi categories, %d with a part of an object), %d suggestions of a typo; %d categories and streets "
-						+ "selected, %d rows; languages %s%n",
-				maps.size(), queries, rows, spatialRows, categoryRows, extraNames, typos, selected, selectedRows, languages);
+		System.out.printf("SpatialTextSearchAPICompatTest: %d maps, %d queries (%d with the types of a search), %d rows (%d "
+						+ "of the spatial search, %d of poi categories, %d with a part of an object), %d suggestions of a "
+						+ "typo; %d categories and streets selected, %d rows; languages %s%n",
+				maps.size(), queries, typedQueries, rows, spatialRows, categoryRows, extraNames, typos, selected,
+				selectedRows, languages);
 		assertTrue("queries", queries > 1000);
 		assertTrue("rows of the spatial search", spatialRows > 10000);
 		assertTrue("rows of poi categories", categoryRows > 100);
@@ -182,16 +191,19 @@ public class SpatialTextSearchAPICompatTest {
 		Map<String, String> categories = new TreeMap<>();
 		Map<String, String> streets = new TreeMap<>();
 		for (String phrase : phrases) {
-			query(readers, regions, center, "en", phrase + " ", categories, streets);
-			query(readers, regions, center, "en", phrase, null, null);
+			query(readers, regions, center, "en", null, phrase + " ", categories, streets);
+			query(readers, regions, center, "en", null, phrase, null, null);
 			for (String other : new String[] {SpatialTextSearchCompatTest.incomplete(phrase),
 					SpatialTextSearchCompatTest.typo(phrase, true), SpatialTextSearchCompatTest.typo(phrase, false)}) {
 				if (other != null) {
-					query(readers, regions, center, "en", other + " ", null, null);
+					query(readers, regions, center, "en", null, other + " ", null, null);
 				}
 			}
 			if (regionLang != null && !regionLang.equals("en")) {
-				query(readers, regions, center, regionLang, phrase + " ", null, null);
+				query(readers, regions, center, regionLang, null, phrase + " ", null, null);
+			}
+			for (ObjectType[] types : SEARCH_TYPES) {
+				query(readers, regions, center, "en", types, phrase + " ", null, null);
 			}
 		}
 		// a category tapped and a name typed after it, a street tapped and a house number typed after it
@@ -319,11 +331,22 @@ public class SpatialTextSearchAPICompatTest {
 		return core;
 	}
 
-	private void query(List<BinaryMapIndexReader> readers, OsmandRegions regions, LatLon center, String lang, String text,
-			Map<String, String> categories, Map<String, String> streets) throws Exception {
-		write("Q", hex(text), lang);
-		queries++;
+	// a query of the search in [lang], with [types] the types of a search or null; "T" lines are the ones with types
+	private void query(List<BinaryMapIndexReader> readers, OsmandRegions regions, LatLon center, String lang,
+			ObjectType[] types, String text, Map<String, String> categories, Map<String, String> streets) throws Exception {
 		SearchUICore core = core(readers, regions, lang);
+		if (types == null) {
+			write("Q", hex(text), lang);
+		} else {
+			StringBuilder names = new StringBuilder();
+			for (ObjectType type : types) {
+				names.append(names.length() == 0 ? "" : ",").append(type.name());
+			}
+			write("T", hex(text), lang, names.toString());
+			core.updateSettings(core.getSearchSettings().setSearchTypes(types));
+			typedQueries++;
+		}
+		queries++;
 		SearchResultCollection c = core.immediateSearch(text, center);
 		SpatialSearchContext ctx = SpatialTextSearchAccess.context(core.getApiByClass(SpatialTextSearchAPI.class));
 		List<SearchResult> rs = c.getCurrentSearchResults();

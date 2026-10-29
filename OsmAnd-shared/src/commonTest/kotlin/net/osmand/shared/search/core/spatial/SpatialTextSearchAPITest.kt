@@ -44,10 +44,10 @@ import kotlin.test.fail
  * [sameAsJava] reads what `SpatialTextSearchAPICompatTest` in OsmAnd-java wrote to
  * `../OsmAnd-java/build/spatial-search-api-java.txt`, or wherever `OSMAND_SPATIAL_SEARCH_API_JAVA_DUMP` points: the
  * rows java's search gave to phrases made of the objects of real maps, searched from the center of each map over all
- * of them, and the rows of the poi categories and streets it selected. It searches the same, each query by a new core, and holds
- * the copy to java as [SpatialTextSearchTest.Comparison] tells, each row of a spatial result with what the api made of
- * it: the same atoms make the same row. The rows the spatial search does not stand for, the suggestion of a typo, are
- * the same, and so are the rows of the categories and streets selected.
+ * of them, some with the types of a search, and the rows of the poi categories and streets it selected. It searches
+ * the same, each query by a new core, and holds the copy to java as [SpatialTextSearchTest.Comparison] tells, each row
+ * of a spatial result with what the api made of it: the same atoms make the same row. The rows the spatial search does
+ * not stand for, the suggestion of a typo, are the same, and so are the rows of the categories and streets selected.
  */
 class SpatialTextSearchAPITest {
 
@@ -146,6 +146,12 @@ class SpatialTextSearchAPITest {
 						variant = if (text.endsWith(" ")) 0 else 5
 						copyLines.addAll(testAppCall { query(text, f[2]) })
 					}
+					"T" -> {
+						val text = dumpUnhex(f[1])
+						variant = if (text.endsWith(" ")) 0 else 5
+						val types = f[3].split(",").map { ObjectType.valueOf(it) }
+						copyLines.addAll(testAppCall { query(text, f[2], types) })
+					}
 					"K" -> {
 						variant = -1
 						copyLines.addAll(testAppCall { select(dumpUnhex(f[1]), dumpUnhex(f[2]), dumpUnhex(f[3]), f[4].toInt()) })
@@ -205,8 +211,12 @@ class SpatialTextSearchAPITest {
 		return core
 	}
 
-	private fun query(text: String, lang: String): List<String> {
+	// a query of the search in [lang], with [types] the types of a search or null
+	private fun query(text: String, lang: String, types: List<ObjectType>? = null): List<String> {
 		val core = core(lang)
+		if (types != null) {
+			core.updateSettings(core.getSearchSettings().setSearchTypes(*types.toTypedArray()))
+		}
 		val c = core.immediateSearch(text, center)
 		val ctx = context(core)
 		val rs = c.getCurrentSearchResults()

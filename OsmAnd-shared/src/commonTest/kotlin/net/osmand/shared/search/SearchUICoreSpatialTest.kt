@@ -13,6 +13,7 @@ import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.search.SearchUICore.SearchResultCollection
 import net.osmand.shared.search.SearchUICore.SearchResultMatcher
 import net.osmand.shared.search.core.ObjectType
+import net.osmand.shared.search.core.SearchCoreAPI
 import net.osmand.shared.search.core.SearchCoreFactory
 import net.osmand.shared.search.core.SearchPhrase
 import net.osmand.shared.search.core.SearchPhraseTest
@@ -22,6 +23,7 @@ import net.osmand.shared.search.core.spatial.SpatialSearchQueryRulesTest
 import net.osmand.shared.search.core.spatial.SpatialTextSearchAPI
 import net.osmand.shared.util.KMapUtils
 import okio.FileSystem
+import kotlin.reflect.KClass
 import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -125,6 +127,94 @@ class SearchUICoreSpatialTest {
 		val phrase = core.resetPhrase("Kyiv Oblast pizzeria")
 		assertSame(boundaryResult, phrase.getLastSelectedWord()!!.getResult())
 		assertTrue(api.getSearchPriority(phrase) != -1, "Selecting a boundary must not disable spatial text search")
+	}
+
+	@Test
+	fun spatialSearchApiForSearchTypes() {
+		val core = core()
+		val addressTabTypes = arrayOf(
+			ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE, ObjectType.HOUSE,
+			ObjectType.STREET_INTERSECTION, ObjectType.STREET, ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION
+		)
+		val aidlAddressTypes = arrayOf(
+			ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE, ObjectType.STREET,
+			ObjectType.HOUSE, ObjectType.STREET_INTERSECTION
+		)
+
+		assertSpatialTextSearch(core, null, "Khreshchatyk 22", true)
+		assertSpatialTextSearch(core, addressTabTypes, "Khreshchatyk 22", true)
+		assertSpatialTextSearch(core, aidlAddressTypes, "Khreshchatyk 22", true)
+		assertSpatialTextSearch(core, arrayOf(ObjectType.CITY, ObjectType.VILLAGE), "Kiev", false)
+		assertSpatialTextSearch(core, arrayOf(ObjectType.CITY), "Kiev", false)
+		assertSpatialTextSearch(core, arrayOf(ObjectType.POSTCODE), "0100", false)
+		assertSpatialTextSearch(core, arrayOf(), "Khreshchatyk", false)
+		assertFalse(
+			isApiRunning(core, SearchCoreFactory.SearchAddressByNameAPI::class, setSearchTypes(core, arrayOf(), "Khreshchatyk"))
+		)
+
+		setSearchTypes(core, addressTabTypes, "")
+		selectCity(core, createCity())
+		val streetsPhrase = core.resetPhrase("Kyiv Khreshch")
+		assertTrue(
+			isApiRunning(core, SearchCoreFactory.SearchStreetByCityAPI::class, streetsPhrase),
+			"Typed text must filter the streets of the city selected on the address tab"
+		)
+		assertFalse(isApiRunning(core, SpatialTextSearchAPI::class, streetsPhrase))
+
+		setSearchTypes(core, null, "")
+		val group = SearchResult(core.resetPhrase("Revgroup"))
+		group.objectType = ObjectType.FAVORITE_GROUP
+		group.localeName = "Revgroup"
+		core.selectSearchResult(group)
+		val groupPhrase = core.resetPhrase("Revgroup Khreshch")
+		assertFalse(isApiRunning(core, SpatialTextSearchAPI::class, groupPhrase), "Only favorites are searched inside a favorites group")
+	}
+
+	// the lists of the address tab are searched by name near and far, as the classic search searches them
+	@Test
+	fun addressListsAreSearchedAsByTheClassicSearch() {
+		val spatial = core()
+		val classic = SearchUICore(MapPoiTypes.getDefault(), "en", false)
+		classic.init()
+		for (types in listOf(arrayOf(ObjectType.CITY, ObjectType.VILLAGE), arrayOf(ObjectType.POSTCODE))) {
+			val expected = addressByNamePriorities(classic, setSearchTypes(classic, types, "Kiev"))
+			assertEquals(2, expected.size)
+			assertEquals(expected, addressByNamePriorities(spatial, setSearchTypes(spatial, types, "Kiev")), types.contentToString())
+		}
+	}
+
+	private fun addressByNamePriorities(core: SearchUICore, phrase: SearchPhrase): List<Int> =
+		core.apis.filter { it is SearchCoreFactory.SearchAddressByNameAPI && it.isSearchAvailable(phrase) }
+			.map { it.getSearchPriority(phrase) }
+
+	private fun assertSpatialTextSearch(core: SearchUICore, searchTypes: Array<ObjectType>?, text: String, spatial: Boolean) {
+		val phrase = setSearchTypes(core, searchTypes, text)
+		val types = searchTypes?.contentToString() ?: "null"
+		assertEquals(spatial, isApiRunning(core, SpatialTextSearchAPI::class, phrase), "Spatial text search for types $types")
+		if (searchTypes != null && searchTypes.isNotEmpty()) {
+			assertEquals(
+				!spatial, isApiRunning(core, SearchCoreFactory.SearchAddressByNameAPI::class, phrase),
+				"Address by name search for types $types"
+			)
+		}
+	}
+
+	private fun setSearchTypes(core: SearchUICore, searchTypes: Array<ObjectType>?, text: String): SearchPhrase {
+		val settings = if (searchTypes == null)
+			core.getSearchSettings().resetSearchTypes()
+		else
+			core.getSearchSettings().setSearchTypes(*searchTypes)
+		core.updateSettings(settings.setEmptyQueryAllowed(true))
+		return core.resetPhrase(text)
+	}
+
+	private fun isApiRunning(core: SearchUICore, cl: KClass<out SearchCoreAPI>, phrase: SearchPhrase): Boolean {
+		for (api in core.apis) {
+			if (cl.isInstance(api) && api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) != -1) {
+				return true
+			}
+		}
+		return false
 	}
 
 	@Test
