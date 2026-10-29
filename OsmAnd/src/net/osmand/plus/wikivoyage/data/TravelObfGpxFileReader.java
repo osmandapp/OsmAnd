@@ -47,6 +47,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.measurementtool.GpxApproximationHelper;
 import net.osmand.plus.measurementtool.GpxApproximationParams;
+import net.osmand.plus.routing.GpxApproximator;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.search.core.AmenityIndexRepository;
@@ -78,11 +81,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.ExecutionException;
 
 import gnu.trove.list.array.TIntArrayList;
 
 public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFile> {
     private static final Log LOG = PlatformUtil.getLog(TravelObfGpxFileReader.class);
+    private static final long ROUTE_CALCULATION_POLL_MS = 100;
 
     // Do not clutter GPX with tags that are always generated.
     private static final Set<String> doNotSaveAmenityGpxTags = Set.of(
@@ -167,9 +172,33 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 GpxApproximationParams params = new GpxApproximationParams();
                 params.setAppMode(mode);
                 gpxApproximationHelper = new GpxApproximationHelper(app, params);
-                GpxFile approximatedGpxFile = GpxApproximationHelper
-                        .approximateGpxSync(app, targetGpxFile, params, gpxApproximationHelper);
-                new GpxElevationTransfer(approximatedGpxFile, targetGpxFile).transfer();
+                GpxApproximationHelper helper = gpxApproximationHelper;
+                // the approximation reads the maps natively as route calculations do, and two of them must not do it
+                // at once: it waits for the route being calculated and runs on the thread of the other approximations
+                waitForRouteCalculation();
+                GpxFile approximatedGpxFile = null;
+                try {
+                    approximatedGpxFile = GpxApproximator.runOnApproximationThread(() -> isCancelled() ? null
+                            : GpxApproximationHelper.approximateGpxSync(app, targetGpxFile, params, helper));
+                } catch (ExecutionException | InterruptedException e) {
+                    LOG.error("Height data approximation failed", e);
+                }
+                if (approximatedGpxFile != null) {
+                    new GpxElevationTransfer(approximatedGpxFile, targetGpxFile).transfer();
+                }
+            }
+        }
+    }
+
+    private void waitForRouteCalculation() {
+        RoutingHelper routingHelper = app.getRoutingHelper();
+        TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+        while (!isCancelled()
+                && (routingHelper.isRouteBeingCalculated() || transportRoutingHelper.isRouteBeingCalculated())) {
+            try {
+                Thread.sleep(ROUTE_CALCULATION_POLL_MS);
+            } catch (InterruptedException e) {
+                return;
             }
         }
     }

@@ -22,11 +22,12 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ExternalDeviceShowMode;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 
 public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment implements SelectExternalDeviceFragment.SelectDeviceListener {
 
 	private static final String SHOW_DATA_MODE = "show_data_mode";
+	private static final String SHOW_MODE_REQUEST_KEY = "show_mode_request_key";
 
 	private SensorTextWidget sensorWidget;
 	protected ExternalSensorsPlugin plugin;
@@ -84,6 +85,10 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 		AndroidUiHelper.updateVisibility(showSourceButton, true);
 		updateSourceDeviceUI();
 		updateShowModeDescription();
+		SingleSelectionDialogFragment.setResultListener(this, SHOW_MODE_REQUEST_KEY, index -> {
+			selectedShowMode = index;
+			updateShowModeDescription();
+		});
 	}
 
 	@Override
@@ -101,10 +106,7 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 				.setTitle(R.string.shared_string_mode)
 				.setControlsColor(ColorUtilities.getActiveColor(app, nightMode));
 
-		CustomAlert.showSingleSelection(dialogData, items, selectedShowMode, v -> {
-			selectedShowMode = (int) v.getTag();
-			updateShowModeDescription();
-		});
+		SingleSelectionDialogFragment.showInstance(this, SHOW_MODE_REQUEST_KEY, dialogData, items, selectedShowMode);
 	}
 
 	private void updateShowModeDescription() {

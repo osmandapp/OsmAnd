@@ -332,7 +332,9 @@ public class PointLocationLayer extends OsmandMapLayer
 		recreateMarkerCollection();
 	}
 
-	private boolean recreateMarkerCollection() {
+	// called from onPrepareBufferImage both by the phone map (RenderingBaseImage thread) and by the Android Auto
+	// screen (drawOverMap on main): the marker icons are drawn into bitmaps here and must not be drawn from both at once
+	private synchronized boolean recreateMarkerCollection() {
 		if (view == null || !hasMapRenderer()) {
 			return false;
 		}

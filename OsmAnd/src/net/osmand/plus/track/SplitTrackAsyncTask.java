@@ -106,9 +106,6 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	public static void processGroupTrack(@NonNull OsmandApplication app, @NonNull TrackDisplayGroup group,
 	                                     @Nullable IProgress progress, boolean joinSegments) {
-		if (group.getTrack() == null) {
-			return;
-		}
 		// the segment names depend on counts over the whole file: taken once here instead of for every segment,
 		// and only when the names are built (as in createGpxDisplayItem: no split and not the general track)
 		boolean segmentNames = !group.isSplitUphillDownhill()
@@ -116,7 +113,15 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 		GpxFile gpxFile = group.getGpxFile();
 		int nonEmptySegmentsCount = segmentNames ? gpxFile.getNonEmptySegmentsCount() : 0;
 		int nonEmptyTracksCount = segmentNames ? gpxFile.getNonEmptyTracksCount() : 0;
+		processGroupTrack(app, group, progress, joinSegments, nonEmptySegmentsCount, nonEmptyTracksCount);
+	}
 
+	public static void processGroupTrack(@NonNull OsmandApplication app, @NonNull TrackDisplayGroup group,
+	                                     @Nullable IProgress progress, boolean joinSegments,
+	                                     int nonEmptySegmentsCount, int nonEmptyTracksCount) {
+		if (group.getTrack() == null) {
+			return;
+		}
 		List<GpxDisplayItem> displayItems = new ArrayList<>();
 		for (int segmentIdx = 0; segmentIdx < group.getTrack().getSegments().size(); segmentIdx++) {
 			if (progress != null && progress.isInterrupted()) {
