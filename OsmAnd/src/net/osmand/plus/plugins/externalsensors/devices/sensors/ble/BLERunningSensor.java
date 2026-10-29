@@ -210,13 +210,6 @@ public class BLERunningSensor extends BLEAbstractSensor {
 			return Collections.singletonList(new SensorDataField(R.string.shared_string_time, -1, timestamp));
 		}
 
-		@Nullable
-		@Override
-		public List<SensorWidgetDataField> getWidgetFields() {
-			return Collections.singletonList(
-					new SensorDistanceWidgetDataField(R.string.external_device_characteristic_stride_length, -1, strideLength));
-		}
-
 		@NonNull
 		@Override
 		public String toString() {
@@ -290,20 +283,21 @@ public class BLERunningSensor extends BLEAbstractSensor {
 		boolean totalDistancePreset = (flags & 0x02) != 0;
 		running = (flags & 0x04) != 0;
 
-		float speed = (float) characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 1) / 3.6f * 256.0f;
+		// speed in 1/256 m/s, stride length in 1/100 m, total distance in 1/10 m
+		float speed = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 1) / 256.0f;
 		int cadence = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 3);
 		getDevice().fireSensorDataEvent(this, createRunningSpeedData(speed));
 		getDevice().fireSensorDataEvent(this, createRunningCadenceData(cadence));
 
 		float strideLength = -1;
 		if (strideLengthPresent) {
-			strideLength = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 4);
+			strideLength = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 4) / 100.0f;
 			getDevice().fireSensorDataEvent(this, createRunningStrideLengthData(strideLength));
 		}
 
 		float totalDistance = -1;
 		if (totalDistancePreset) {
-			totalDistance = (float) characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT32, strideLengthPresent ? 6 : 4) * 3.6f / 10.0f;
+			totalDistance = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT32, strideLengthPresent ? 6 : 4) / 10.0f;
 			getDevice().fireSensorDataEvent(this, createRunningDistanceData(totalDistance));
 		}
 	}
