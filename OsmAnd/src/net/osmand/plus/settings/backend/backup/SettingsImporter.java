@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -20,7 +21,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
@@ -83,11 +86,14 @@ class SettingsImporter {
 	}
 
 	private void updateFilesInfo(@NonNull File file, List<SettingsItem> settingsItemList) throws IOException {
+		// A folder is written as one entry per file: sum their sizes, so that getSize() does not walk the local folder of the same name
+		Map<FileSettingsItem, Long> foldersSizes = new IdentityHashMap<>();
 		ZipFile zipfile = new ZipFile(file.getPath());
 		Enumeration<? extends ZipEntry> zipEnum = zipfile.entries();
 		while (zipEnum.hasMoreElements()) {
 			ZipEntry zipEntry = zipEnum.nextElement();
 			long size = zipEntry.getSize();
+			String entryName = checkEntryName(zipEntry.getName());
 			for (SettingsItem settingsItem : settingsItemList) {
 				if (settingsItem instanceof FileSettingsItem
 						&& zipEntry.getName().equals(settingsItem.getFileName())) {
@@ -96,8 +102,14 @@ class SettingsImporter {
 					fileSettingsItem.setLastModifiedTime(zipEntry.getTime());
 					break;
 				}
+				if (settingsItem instanceof FileSettingsItem fileSettingsItem
+						&& entryName.startsWith(BackupUtils.removeLeadingSlash(settingsItem.getFileName()) + File.separator)) {
+					foldersSizes.merge(fileSettingsItem, size, Long::sum);
+					break;
+				}
 			}
 		}
+		foldersSizes.forEach(FileSettingsItem::setSize);
 	}
 
 	private List<SettingsItem> processItems(@NonNull File file, @Nullable List<SettingsItem> items) throws IllegalArgumentException, IOException {
