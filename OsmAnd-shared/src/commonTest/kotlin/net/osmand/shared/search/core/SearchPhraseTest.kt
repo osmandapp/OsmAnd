@@ -576,7 +576,7 @@ class SearchPhraseTest {
 			if (!FileSystem.SYSTEM.exists(regions.toPath())) {
 				fail("regions.ocbf not found at $regions; :OsmAnd-java:processResources downloads it, or set OSMAND_REGIONS_OCBF")
 			}
-			CommonWords.osmandRegions = OsmandRegions(regions)
+			OsmandRegions.setDefault(OsmandRegions(regions))
 			// the phrase ranks its words by the default instance; it has to hold the words of the regions
 			if (CommonWords.getInstance().getFrequentlyUsed("gelderland") == -1) {
 				fail("the common words were built before the regions were set")
