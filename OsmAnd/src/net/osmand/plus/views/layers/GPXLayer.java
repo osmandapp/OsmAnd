@@ -1343,16 +1343,21 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		List<TrkSegment> oldSegments = new ArrayList<>();
 		Set<TrkSegment> renderedSegments = renderedSegmentsCache.get(gpxFilePath);
 		if (renderedSegments != null) {
-			Iterator<TrkSegment> it = renderedSegments.iterator();
-			while (it.hasNext()) {
-				TrkSegment renderedSegment = it.next();
-				if (!segments.contains(renderedSegment)) {
-					if (renderedSegment.getRenderer() instanceof RenderableSegment renderableSegment) {
-						oldSegments.add(renderedSegment);
-					} else {
-						resetSymbolProviders(renderedSegment);
+			// segments.contains for every rendered segment made each frame quadratic in the number of segments;
+			// the drawn segments rarely change, so they go into a set only when some rendered segment is gone
+			if (hasRenderedSegmentsNotIn(segments, renderedSegments)) {
+				Set<TrkSegment> segmentsSet = new HashSet<>(segments);
+				Iterator<TrkSegment> it = renderedSegments.iterator();
+				while (it.hasNext()) {
+					TrkSegment renderedSegment = it.next();
+					if (!segmentsSet.contains(renderedSegment)) {
+						if (renderedSegment.getRenderer() instanceof RenderableSegment renderableSegment) {
+							oldSegments.add(renderedSegment);
+						} else {
+							resetSymbolProviders(renderedSegment);
+						}
+						it.remove();
 					}
-					it.remove();
 				}
 			}
 		} else {
@@ -1435,6 +1440,19 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		for (TrkSegment oldSegment : oldSegments) {
 			resetSymbolProviders(oldSegment);
 		}
+	}
+
+	// the segments are distinct objects, so every rendered segment is among them exactly when the number of segments
+	// found among the rendered ones equals the number of rendered ones; one pass of hash lookups, no allocation
+	private static boolean hasRenderedSegmentsNotIn(@NonNull List<TrkSegment> segments,
+	                                                @NonNull Set<TrkSegment> renderedSegments) {
+		int found = 0;
+		for (int i = 0; i < segments.size(); i++) {
+			if (renderedSegments.contains(segments.get(i))) {
+				found++;
+			}
+		}
+		return found != renderedSegments.size();
 	}
 
 	@NonNull

@@ -33,11 +33,12 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 
 public class DistanceByTapFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
+	private static final String TEXT_SIZE_REQUEST_KEY = "text_size_request_key";
 
 	private Toolbar toolbar;
 	private View toolbarSwitchContainer;
@@ -70,6 +71,10 @@ public class DistanceByTapFragment extends BaseFullScreenFragment {
 
 		setupToolbar();
 		setupConfigButtons();
+		SingleSelectionDialogFragment.setResultListener(this, TEXT_SIZE_REQUEST_KEY, index -> {
+			settings.DISTANCE_BY_TAP_TEXT_SIZE.set(DistanceByTapTextSize.values()[index]);
+			setupConfigButtons();
+		});
 
 		return view;
 	}
@@ -134,11 +139,7 @@ public class DistanceByTapFragment extends BaseFullScreenFragment {
 				.setTitle(R.string.text_size)
 				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode));
 
-		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
-			int which = (int) v.getTag();
-			settings.DISTANCE_BY_TAP_TEXT_SIZE.set(DistanceByTapTextSize.values()[which]);
-			setupConfigButtons();
-		});
+		SingleSelectionDialogFragment.showInstance(this, TEXT_SIZE_REQUEST_KEY, dialogData, items, selected);
 	}
 
 	private View createButtonWithState(int iconId,
