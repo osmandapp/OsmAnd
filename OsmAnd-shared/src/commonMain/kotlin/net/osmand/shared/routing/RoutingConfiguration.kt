@@ -409,6 +409,7 @@ class RoutingConfiguration {
 				}
 			} finally {
 				// java closed the stream only on the way out; a failed parse used to leak it
+				parser.close()
 				source.close()
 			}
 			return config

@@ -8,6 +8,7 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ConcatAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,13 +48,19 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		return false;
 	}
 
+	// the list scrolls in a container limited to the screen, so it lays out only the visible rows:
+	// in a scroll view it created a row for every segment, and a track with thousands of segments froze the app
+	@Override
+	protected boolean useExpandableList() {
+		return true;
+	}
+
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		View itemView = inflate(R.layout.bottom_sheet_select_segment);
-		items.add(new BaseBottomSheetItem.Builder().setCustomView(itemView).create());
+		RecyclerView recyclerView = (RecyclerView) inflate(R.layout.bottom_sheet_select_segment);
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(recyclerView).create());
 
-		setupTrackRow(itemView);
-		setupItemsList(itemView);
+		setupItemsList(recyclerView);
 	}
 
 	private void setupTrackRow(@NonNull View view) {
@@ -111,17 +119,38 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		});
 	}
 
-	private void setupItemsList(@NonNull View view) {
-		RecyclerView recyclerView = view.findViewById(R.id.gpx_segment_list);
-		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+	private void setupItemsList(@NonNull RecyclerView recyclerView) {
+		recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
 		recyclerView.setNestedScrollingEnabled(false);
 
-		TrackSelectSegmentAdapter adapter = new TrackSelectSegmentAdapter(view.getContext(), gpxFile);
+		TrackSelectSegmentAdapter adapter = new TrackSelectSegmentAdapter(recyclerView.getContext(), gpxFile);
 		adapter.setAdapterListener((item) -> {
 			notifyListener(item);
 			dismiss();
 		});
-		recyclerView.setAdapter(adapter);
+		// the header is the first row of the list, so it scrolls away with the segments as before
+		recyclerView.setAdapter(new ConcatAdapter(new HeaderAdapter(), adapter));
+	}
+
+	private class HeaderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+		@NonNull
+		@Override
+		public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+			View view = inflate(R.layout.bottom_sheet_select_segment_header, parent, false);
+			setupTrackRow(view);
+			return new RecyclerView.ViewHolder(view) {
+			};
+		}
+
+		@Override
+		public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+		}
+
+		@Override
+		public int getItemCount() {
+			return 1;
+		}
 	}
 
 	private void notifyListener(GpxItem item) {

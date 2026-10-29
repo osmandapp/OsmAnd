@@ -65,6 +65,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -1100,17 +1101,98 @@ public class ResourceManager {
 
 	public static boolean copyAssets(@NonNull AssetManager manager, @NonNull String name,
 			@NonNull File file, @Nullable Long modifiedTime) throws IOException {
-		if (file.exists()) {
+		file.getParentFile().mkdirs();
+		if (!isAssetEqualToFile(manager, name, file)) {
+			// without room for the new copy the old file is kept as it is and the copy fails
+			replaceFileWithAsset(manager, name, file);
+		}
+		return modifiedTime != null && file.setLastModified(modifiedTime);
+	}
+
+	private static void replaceFileWithAsset(@NonNull AssetManager manager, @NonNull String name,
+			@NonNull File file) throws IOException {
+		// native readers may have the file open or mapped, so it is replaced by a rename, never rewritten in place;
+		// each call writes its own temp file, so concurrent copies of the same asset do not interfere
+		File tempFile = File.createTempFile(file.getName() + ".", DOWNLOAD_EXT, file.getParentFile());
+		writeAsset(manager, name, tempFile);
+		if (file.isDirectory()) {
 			Algorithms.removeAllFiles(file);
 		}
-		file.getParentFile().mkdirs();
-		InputStream is = manager.open(name, AssetManager.ACCESS_STREAMING);
-		FileOutputStream out = new FileOutputStream(file);
-		Algorithms.streamCopy(is, out);
-		Algorithms.closeStream(out);
-		Algorithms.closeStream(is);
+		if (!tempFile.renameTo(file)) {
+			tempFile.delete();
+			throw new IOException("Failed to replace " + file.getAbsolutePath());
+		}
+	}
 
-		return modifiedTime != null && file.setLastModified(modifiedTime);
+	private static void writeAsset(@NonNull AssetManager manager, @NonNull String name,
+			@NonNull File file) throws IOException {
+		try (InputStream is = manager.open(name, AssetManager.ACCESS_STREAMING)) {
+			// available() of an asset stream is its remaining uncompressed size
+			File folder = file.getParentFile();
+			if (folder != null && folder.getUsableSpace() < is.available()) {
+				throw new IOException("Not enough space for " + name + " in " + folder.getAbsolutePath());
+			}
+			try (FileOutputStream out = new FileOutputStream(file)) {
+				Algorithms.streamCopy(is, out);
+			}
+		} catch (IOException e) {
+			// a partial temp file is never left behind to fill the disk
+			file.delete();
+			throw e;
+		}
+	}
+
+	private static boolean isAssetEqualToFile(@NonNull AssetManager manager, @NonNull String name,
+			@NonNull File file) {
+		if (!file.isFile()) {
+			return false;
+		}
+		try (InputStream assetStream = manager.open(name, AssetManager.ACCESS_STREAMING)) {
+			return isStreamEqualToFile(assetStream, file);
+		} catch (IOException e) {
+			// an unreadable asset fails in the copy itself
+			return false;
+		}
+	}
+
+	public static boolean isStreamEqualToFile(@NonNull InputStream stream, @NonNull File file) {
+		if (!file.isFile()) {
+			return false;
+		}
+		try (InputStream fileStream = new FileInputStream(file)) {
+			byte[] streamBuffer = new byte[64 * 1024];
+			byte[] fileBuffer = new byte[64 * 1024];
+			while (true) {
+				int streamRead = readFully(stream, streamBuffer);
+				int fileRead = readFully(fileStream, fileBuffer);
+				if (streamRead != fileRead) {
+					return false;
+				}
+				if (streamRead == 0) {
+					return true;
+				}
+				for (int i = 0; i < streamRead; i++) {
+					if (streamBuffer[i] != fileBuffer[i]) {
+						return false;
+					}
+				}
+			}
+		} catch (IOException e) {
+			// an unreadable file is rewritten
+			return false;
+		}
+	}
+
+	private static int readFully(@NonNull InputStream stream, @NonNull byte[] buffer) throws IOException {
+		int total = 0;
+		while (total < buffer.length) {
+			int read = stream.read(buffer, total, buffer.length - total);
+			if (read < 0) {
+				break;
+			}
+			total += read;
+		}
+		return total;
 	}
 
 	public AmenitySearcher getAmenitySearcher() {

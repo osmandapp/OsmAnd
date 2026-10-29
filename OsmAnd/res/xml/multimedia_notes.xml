@@ -133,7 +133,7 @@
 		android:key="open_notes"
 		android:layout="@layout/preference_button"
 		android:persistent="false"
-		android:title="@string/notes"
+		android:title="@string/shared_string_media"
 		tools:icon="@drawable/ic_action_folder" />
 
 	<Preference

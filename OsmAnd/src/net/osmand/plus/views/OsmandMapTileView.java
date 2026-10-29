@@ -1835,8 +1835,27 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				marginTopPx, marginLeftPx, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false);
 	}
 
+	/**
+	 * Fits the rect into tileBoxWidthPx x tileBoxHeightPx and puts its center at the map center. Meant for a
+	 * menu that is a covered screen rect of MapDisplayPositionManager: the map center is in the middle of the
+	 * map part the menu leaves uncovered, and it follows the menu when the menu moves after the fit.
+	 */
+	public void fitRectToMapCenter(double left, double right, double top, double bottom,
+	                               int tileBoxWidthPx, int tileBoxHeightPx) {
+		RotatedTileBox tb = currentViewport.copy();
+		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
+				0, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false, true);
+	}
+
 	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
 			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, float border, boolean rotate) {
+		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
+				marginTopPx, marginLeftPx, rtl, border, rotate, false);
+	}
+
+	private void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
+			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, float border,
+			boolean rotate, boolean toMapCenter) {
 		int dx = marginLeftPx;
 		int dy = marginTopPx;
 		int tbw = (tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth());
