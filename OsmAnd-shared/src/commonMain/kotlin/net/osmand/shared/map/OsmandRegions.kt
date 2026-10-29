@@ -97,6 +97,12 @@ class OsmandRegions {
 		this.translator = translator
 	}
 
+	/**
+	 * Reads the regions out of [fileName]. A missing file throws an IOException, a damaged one what
+	 * reading it runs into, usually an IllegalStateException of the reader; any exception is
+	 * declared, since on iOS one that is not ends the app instead of reaching the caller.
+	 */
+	@Throws(Exception::class)
 	fun prepareFile(fileName: String): BinaryMapIndexReader {
 		val reader = BinaryMapIndexReader(fileName)
 		this.reader = reader
