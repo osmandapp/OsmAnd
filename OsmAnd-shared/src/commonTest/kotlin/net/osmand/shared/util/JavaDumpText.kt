@@ -29,6 +29,16 @@ internal fun dumpUnhex(h: String): String {
 	return sb.toString()
 }
 
+/** The FNV-1a hash of the chars of [s], `NameIndexCompatTest.fnv` of OsmAnd-java: a long answer in a dump. */
+internal fun dumpFnv(s: String): Long {
+	var h = 0xcbf29ce484222325uL.toLong()
+	for (c in s) {
+		h = h xor c.code.toLong()
+		h *= 0x100000001b3L
+	}
+	return h
+}
+
 /** java's `Long.toHexString(Double.doubleToRawLongBits(v))`. */
 internal fun dumpBits(v: Double): String = v.toRawBits().toULong().toString(16)
 

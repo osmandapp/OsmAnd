@@ -2,6 +2,7 @@ package net.osmand.shared.binary
 
 import net.osmand.shared.search.AmenitySearcherTest
 import net.osmand.shared.util.KSearchAlgorithms
+import net.osmand.shared.util.dumpFnv
 import net.osmand.shared.util.dumpHex
 import net.osmand.shared.util.dumpUnhex
 import net.osmand.shared.util.openJavaDump
@@ -64,7 +65,7 @@ class NameIndexReaderTest {
 					}
 					'C' -> {
 						val j = whole!!
-						val res = "C\t" + fnv(commonWords(j))
+						val res = "C\t" + dumpFnv(commonWords(j))
 						all = reader!!.readFullNameIndex(j.setQuery("all", everyKey()))
 						blocks = sorted(all)
 						block = 0
@@ -72,7 +73,7 @@ class NameIndexReaderTest {
 					}
 					'B' -> {
 						val p = blocks.getOrNull(block++)
-						if (p == null) "B no block" else "B\t" + dumpHex(p.key!!) + "\t" + p.shift + "\t" + fnv(describe(p))
+						if (p == null) "B no block" else "B\t" + dumpHex(p.key!!) + "\t" + p.shift + "\t" + dumpFnv(describe(p))
 					}
 					'L' -> {
 						val j = whole!!
@@ -123,7 +124,7 @@ class NameIndexReaderTest {
 						for (w in words) {
 							answers.append(NameIndexReader.altNameVariant(w)).append(if (NameIndexReader.isIndexMarker(w)) "m" else "").append(';')
 						}
-						"W\t" + words.size + "\t" + fnv(answers.toString())
+						"W\t" + words.size + "\t" + dumpFnv(answers.toString())
 					}
 					else -> line
 				}
@@ -167,16 +168,6 @@ class NameIndexReaderTest {
 				"threw"
 			}
 
-		/** `NameIndexCompatTest.fnv`. */
-		private fun fnv(s: String): Long {
-			var h = 0xcbf29ce484222325uL.toLong()
-			for (c in s) {
-				h = h xor c.code.toLong()
-				h *= 0x100000001b3L
-			}
-			return h
-		}
-
 		private fun bytes(j: NameIndexReader): String {
 			val b = j.getBytesStat()
 			return "${b.readTableBytes}\t${b.skipTableBytes}\t${b.readAtomBytes}\t${b.skipAtomBytes}\t" +
@@ -195,7 +186,7 @@ class NameIndexReaderTest {
 			for (p in sorted(list)) {
 				sb.append(p.shift).append(',')
 			}
-			return list.size.toString() + ":" + fnv(sb.toString())
+			return list.size.toString() + ":" + dumpFnv(sb.toString())
 		}
 
 		/** `NameIndexCompatTest.sample`. */
