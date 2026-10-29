@@ -145,13 +145,6 @@ class SpatialTextSearchTest {
 		}
 	}
 
-	private fun names(poiSearch: SpatialPoiSearch): Set<String> {
-		val names = HashSet<String>()
-		for (t in poiSearch.byKey.values) {
-			names.addAll(t.names)
-		}
-		return names
-	}
 
 	/**
 	 * What the copy answers to a query, to a category or for the poi types, against java: each answer is
@@ -169,8 +162,8 @@ class SpatialTextSearchTest {
 	 * - [SECONDARY]: which atoms stand for a result, and what they make of it, as its poi category and the name that
  *   matched it, with the same level, keys, score, words and main object: with the same atoms the result is the same;
 	 * - [TIES]: the order of results of equal level, keys and score, the same main objects;
-	 * - [TAIL]: which of the objects of a word of more atoms than `LIMIT_READ_OBJECTS` are read, and so the
-	 *   results of a query of that word alone;
+	 * - [TAIL]: which of the objects of words of more atoms than `LIMIT_READ_OBJECTS` each are read, and so the
+	 *   results of a query of those words;
 	 * - [LANGUAGE]: results of a poi category matched by a name of a language added, in java and not in the copy
 	 *   or back: the order of those names in the prefix tree of the categories.
 	 * In the last two the results both have, by level, keys and main object, have the same score, and those of the same
@@ -178,9 +171,19 @@ class SpatialTextSearchTest {
 	 *
 	 * On Kotlin/Native the doubles of a line, marked by '~', may be a few ulps off, as the functions of the platform
 	 * give the distances, see [nearlySame]; and the coordinates of a result and its box to show by a millionth, see
-	 * [shiftedSame]: the reader drops the fraction of a tile or a box worked out from them.
+	 * [shiftedSame]: the reader drops the fraction of a tile or a box worked out from them. [places] are the fields
+	 * of a line of a result that hold those coordinates.
+	 *
+	 * Where a line of a result has the objects deduplication united into it, [united], and the fields those make,
+	 * [unitedMakes], the order also decides which duplicates of a result are united into it: [MERGED], with the same
+	 * atoms the result is the same but for those.
 	 */
-	internal class Comparison(private val onJvm: Boolean) {
+	internal class Comparison(
+		private val onJvm: Boolean,
+		private val places: Set<Int> = setOf(LAT_LON, MAIN),
+		private val united: Int = -1,
+		private val unitedMakes: Set<Int> = emptySet()
+	) {
 		/** The lines of java compared, by kind. */
 		val lines = HashMap<Char, Int>()
 		/** The answers by how they compare. */
@@ -220,7 +223,7 @@ class SpatialTextSearchTest {
 					when (same(java[i], copy[i])) {
 						IN_ULPS -> ulps++
 						SHIFTED -> shift++
-						DIFFERENT_LINE -> all = false
+						DIFFERENT_LINE, MERGED_LINE -> all = false
 					}
 				}
 				if (all) {
@@ -247,7 +250,7 @@ class SpatialTextSearchTest {
 				if (DIFFERENT_LINE !in kinds) {
 					inUlps += kinds.count { it == IN_ULPS }
 					shifted += kinds.count { it == SHIFTED }
-					return JAVA_ORDER
+					return if (MERGED_LINE in kinds) MERGED else JAVA_ORDER
 				}
 				val fj = rj.map { it.split("\t") }
 				val fc = rc.map { it.split("\t") }
@@ -270,12 +273,28 @@ class SpatialTextSearchTest {
 			return DIFFERENT
 		}
 
-		private fun same(java: String, copy: String): Int = when {
-			java == copy -> SAME_LINE
-			onJvm -> DIFFERENT_LINE
-			nearlySame(java, copy) -> IN_ULPS
-			shiftedSame(java, copy) -> SHIFTED
-			else -> DIFFERENT_LINE
+		private fun same(java: String, copy: String): Int {
+			val kind = when {
+				java == copy -> SAME_LINE
+				onJvm -> DIFFERENT_LINE
+				nearlySame(java, copy) -> IN_ULPS
+				shiftedSame(java, copy) -> SHIFTED
+				else -> DIFFERENT_LINE
+			}
+			if (kind != DIFFERENT_LINE || united < 0) {
+				return kind
+			}
+			// the same but for other objects united into it and what they make of it
+			val j = java.split("\t").toMutableList()
+			val c = copy.split("\t").toMutableList()
+			if (j[0] != "R" || j.size != c.size || j.size <= united || j[united] == c[united]) {
+				return DIFFERENT_LINE
+			}
+			for (i in unitedMakes + united) {
+				j[i] = ""
+				c[i] = ""
+			}
+			return if (same(j.joinToString("\t"), c.joinToString("\t")) == DIFFERENT_LINE) DIFFERENT_LINE else MERGED_LINE
 		}
 
 		// the same result but for what other atoms of it make: the same atoms make the same result
@@ -363,13 +382,14 @@ class SpatialTextSearchTest {
 			return true
 		}
 
-		// a query of one word with more atoms than the objects the search reads
+		// a query each word of which has more atoms than the objects the search reads: of more single objects than
+		// those, the pipeline reads the ones of the best prescore, of equal prescore in the order of its objects
 		private fun tail(tokens: String, variant: Int): Boolean {
 			val words = tokens.split(";").filter { it.isNotEmpty() }
-			if (words.size != 1) {
+			if (words.isEmpty()) {
 				return false
 			}
-			val atoms = words[0].split(":")[3].toInt()
+			val atoms = words.minOf { it.split(":")[3].toInt() }
 			val limit = settings(variant).LIMIT_READ_OBJECTS
 			return limit in 1 until atoms
 		}
@@ -433,7 +453,7 @@ class SpatialTextSearchTest {
 				}
 				val close = when {
 					j[0] == "B" -> numbersClose(j[i], c[i])
-					i == LAT_LON || i == MAIN -> numbersClose(j[i], c[i])
+					i in places -> numbersClose(j[i], c[i])
 					i == BOX -> boxClose(j[i], c[i])
 					i == SCORE -> {
 						score = numbersClose(j[i], c[i])
@@ -524,23 +544,25 @@ class SpatialTextSearchTest {
 		internal const val TIES = "ties"
 		internal const val TAIL = "tail"
 		internal const val LANGUAGE = "language"
+		internal const val MERGED = "merged"
 		internal const val DIFFERENT = "different"
 
 		private const val SAME_LINE = 0
 		private const val IN_ULPS = 1
 		private const val SHIFTED = 2
 		private const val DIFFERENT_LINE = 3
+		private const val MERGED_LINE = 4
 
 		// the fields of a line of a result, see result
 		private const val LEVEL = 2
 		private const val KEY = 3
 		private const val KEY_STRING = 4
 		private const val SCORE = 5
-		private const val LAT_LON = 7
+		internal const val LAT_LON = 7
 		private const val MATCHED_NAME = 12
 		private const val BOX = 13
 		private const val REFS = 14
-		private const val MAIN = 16
+		internal const val MAIN = 16
 		// what other atoms of a result do not change: level, keys, score, the words it leaves, the name of another
 		// language, the words it matched, the main object
 		private val PRIMARY = intArrayOf(LEVEL, KEY, KEY_STRING, SCORE, 8, 9, 10, MAIN)
@@ -611,6 +633,15 @@ class SpatialTextSearchTest {
 					.append(dumpFnv(atoms.toString()).toULong().toString(16)).append(';')
 			}
 			return sb.toString()
+		}
+
+		/** `SpatialTextSearchAccess.names` of OsmAnd-java: the names of all the poi types of the search. */
+		internal fun names(poiSearch: SpatialPoiSearch): Set<String> {
+			val names = HashSet<String>()
+			for (t in poiSearch.byKey.values) {
+				names.addAll(t.names)
+			}
+			return names
 		}
 
 		/** `SpatialTextSearchAccess.poiTypes` of OsmAnd-java. */
@@ -684,15 +715,15 @@ class SpatialTextSearchTest {
 			return sb.toString()
 		}
 
-		private fun mapObject(o: MapObject): String =
+		internal fun mapObject(o: MapObject): String =
 			o::class.simpleName + "," + ObfConstants.getOsmObjectId(o) + "," + dumpHex(o.getName())
 
-		private fun latLon(l: KLatLon?): String = if (l == null) "-" else number(l.latitude) + "," + number(l.longitude)
+		internal fun latLon(l: KLatLon?): String = if (l == null) "-" else number(l.latitude) + "," + number(l.longitude)
 
-		private fun number(v: Double): String = "~" + dumpBits(v)
+		internal fun number(v: Double): String = "~" + dumpBits(v)
 
 		/** The same line but for the doubles after '~', each within a few ulps. */
-		private fun nearlySame(java: String, copy: String): Boolean {
+		internal fun nearlySame(java: String, copy: String): Boolean {
 			val a = ArrayList<String>()
 			val b = ArrayList<String>()
 			return skeleton(java, a) == skeleton(copy, b) && a.size == b.size &&

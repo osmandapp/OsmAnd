@@ -1,8 +1,11 @@
 package net.osmand.search.core.spatial;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeMap;
 
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.LatLon;
@@ -11,6 +14,7 @@ import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
+import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 
 import static net.osmand.shared.compat.CommonWordsCompatTest.hex;
 import static net.osmand.shared.compat.NameIndexCompatTest.fnv;
@@ -42,6 +46,40 @@ public final class SpatialTextSearchAccess {
 					.append(Long.toHexString(fnv(atoms.toString()))).append(';');
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * The [words] words of a query by their order in it, where only the results of a search are at hand: those the results
+	 * stand for as {@link #tokens} writes them, what the search left of them, and the others as "-:order:-:0:-".
+	 */
+	public static String tokensOf(List<SpatialSearchResult> results, int words) {
+		TreeMap<Integer, SpatialSearchToken> byOrder = new TreeMap<>();
+		for (SpatialSearchResult r : results) {
+			for (SpatialSearchResultRef ref : r.objs) {
+				for (SpatialSearchToken t : ref.tokens) {
+					byOrder.putIfAbsent(t.originalOrder, t);
+				}
+			}
+		}
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < Math.max(words, byOrder.isEmpty() ? 0 : byOrder.lastKey() + 1); i++) {
+			SpatialSearchToken t = byOrder.get(i);
+			sb.append(t == null ? "-:" + i + ":-:0:-;" : tokens(List.of(t)));
+		}
+		return sb.toString();
+	}
+
+	/** A context of the poi types of [api], all {@link #result} asks of one. */
+	public static SpatialSearchContext context(SpatialTextSearchAPI api) throws ReflectiveOperationException {
+		Field f = SpatialTextSearchAPI.class.getDeclaredField("poiSearch");
+		f.setAccessible(true);
+		return new SpatialSearchContext(SpatialTextSearchSettings.defaultSettings(), List.of(), (SpatialPoiSearch) f.get(api),
+				null);
+	}
+
+	/** The name of its poi category a result was matched by. */
+	public static String matchedName(SpatialSearchResult r, SpatialSearchContext ctx) {
+		return r.getPoiCategoryMatchedName(ctx.poiSearch);
 	}
 
 	/** The poi types of the search by id: key, place, wikidata and names. */
