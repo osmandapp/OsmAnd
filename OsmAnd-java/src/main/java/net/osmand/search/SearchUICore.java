@@ -61,6 +61,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -86,7 +87,10 @@ public class SearchUICore {
 	private AtomicInteger requestNumber = new AtomicInteger();
 	private int totalLimit = -1; // -1 unlimited - not used
 
-	List<SearchCoreAPI> apis = new ArrayList<>();
+	// iterated by the ui and the search thread, changed only on init and engine switch
+	List<SearchCoreAPI> apis = new CopyOnWriteArrayList<>();
+	// apis added by init: the classic or the spatial search
+	private List<SearchCoreAPI> engineApis = new ArrayList<>();
 	private SearchSettings searchSettings;
 	private MapPoiTypes poiTypes;
 	private final BooleanSupplier internetConnectionAvailable;
@@ -649,6 +653,7 @@ public class SearchUICore {
 	}
 
 	public void init(boolean useSpatialSearch) {
+		int start = apis.size();
 		SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
 		if (!useSpatialSearch) {
 			apis.add(amenitiesApi); // classic
@@ -680,6 +685,18 @@ public class SearchUICore {
 			apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache));
 			apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache));
 		}
+		engineApis = new ArrayList<>(apis.subList(start, apis.size()));
+	}
+
+	// replaced in the search thread: a running search keeps its apis, the next one uses the new engine
+	public void setSpatialSearch(boolean useSpatialSearch, Runnable afterSwitch) {
+		singleThreadedExecutor.submit(() -> {
+			if (isSpatialSearch() != useSpatialSearch) {
+				apis.removeAll(engineApis);
+				init(useSpatialSearch);
+				afterSwitch.run();
+			}
+		});
 	}
 
 	// nearest cities, and the lists of the address tab filtered by the typed text as in the classic search

@@ -2483,6 +2483,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
 	                                   SearchResultListener resultListener, boolean preserveSelectedPoiTypeNames) {
+		searchHelper.updateSearchEngine(searchUICore.getSearchSettings().getOriginalLocation());
 		searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection;
 			SearchCoreAPI regionResultApi;
