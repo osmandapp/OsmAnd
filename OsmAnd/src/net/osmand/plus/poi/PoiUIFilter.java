@@ -582,6 +582,18 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		return false;
 	}
 
+	@NonNull
+	public Map<PoiType, PoiType> getTextPoiAdditionals(@NonNull List<PoiType> poiAdditionals) {
+		Map<PoiType, PoiType> textFilters = new HashMap<>();
+		fillFilterCategories(poiAdditionals, new HashMap<>(), textFilters);
+		return textFilters;
+	}
+
+	public boolean acceptedPoiAdditional(@NonNull Amenity amenity, @NonNull PoiType poiAdditional,
+	                                     @NonNull Map<PoiType, PoiType> textPoiAdditionals) {
+		return acceptedFilter(amenity, poiAdditional, textPoiAdditionals);
+	}
+
 	private boolean acceptedAnyFilterOfEachCategory(@NonNull Amenity amenity, @Nullable List<PoiType> selectedFilters) {
 		if (selectedFilters == null) {
 			return true;
