@@ -1,10 +1,6 @@
 package net.osmand.plus.helpers;
 
 import android.content.Context;
-import android.hardware.display.DisplayManager;
-import android.os.Build;
-import android.view.Display;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,7 +10,9 @@ import androidx.car.app.CarToast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -82,7 +80,7 @@ public class ToastHelper {
 		return new ToastDisplayHandler() {
 			@Override
 			public void showSimpleToast(@NonNull String text, boolean isLong) {
-				Toast.makeText(getVisualContext(app), text, isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
+				Toast.makeText(getToastContext(), text, isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
@@ -115,19 +113,13 @@ public class ToastHelper {
 				}
 			}
 
+			// A toast needs a visual context: with the application context StrictMode logs every toast,
+			// and a window context of another type makes Android reject the toast window (#26769)
 			@NonNull
-			private static Context getVisualContext(@NonNull Context context) {
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-					DisplayManager displayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
-					if (displayManager != null) {
-						Display defaultDisplay = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
-						if (defaultDisplay != null) {
-							return context.createDisplayContext(defaultDisplay)
-									.createWindowContext(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY, null);
-						}
-					}
-				}
-				return context;
+			private Context getToastContext() {
+				OsmandMap osmandMap = app.getOsmandMap();
+				MapActivity mapActivity = osmandMap != null ? osmandMap.getMapView().getMapActivity() : null;
+				return mapActivity != null ? mapActivity : app;
 			}
 		};
 	}

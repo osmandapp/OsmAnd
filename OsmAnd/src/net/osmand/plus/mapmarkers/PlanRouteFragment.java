@@ -352,6 +352,10 @@ public class PlanRouteFragment extends BaseFullScreenFragment implements OsmAndL
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
+		if (portrait && !fullScreen) {
+			// Shown in bottomFragmentContainer, the panel does not reach the status bar
+			collection.replace(InsetTarget.createRootInset().portraitSides().build());
+		}
 		collection.replace(InsetTarget.createLeftSideContainer(true, true, R.id.main_view).build());
 		// In landscape the map controls are at the bottom of the full-height fragment, keep them above the navigation bar
 		collection.replace(InsetTarget.createCustomBuilder(R.id.map_controls_container)

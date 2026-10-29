@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Paint;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.R;
@@ -19,6 +20,9 @@ public abstract class MultiColoringGeometryWayContext extends CommonGeometryWayC
 	private final Paint circlePaint;
 
 	private final Bitmap specialArrowBitmap;
+
+	private final ArrowIcon arrowIcon = new ArrowIcon();
+	private final ArrowIcon specialArrowIcon = new ArrowIcon();
 
 	public MultiColoringGeometryWayContext(@NonNull Context ctx, float density) {
 		super(ctx, density);
@@ -77,5 +81,24 @@ public abstract class MultiColoringGeometryWayContext extends CommonGeometryWayC
 
 	public Paint getCirclePaint() {
 		return circlePaint;
+	}
+
+	@NonNull
+	ArrowIcon getArrowIcon(boolean special) {
+		return special ? specialArrowIcon : arrowIcon;
+	}
+
+	// the last arrow icon drawn for a vector line and the values it was drawn with
+	static class ArrowIcon {
+		boolean visible;
+		int arrowColor;
+		int circleColor;
+		float outerRadius;
+		float innerRadius;
+		float carScale;
+		@Nullable
+		Bitmap bitmap;
+		@Nullable
+		byte[] pixels;
 	}
 }

@@ -13,11 +13,12 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.GlideTargetWidget;
 import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 
 public class GlideTargetWidgetInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String KEY_TARGET_ELEVATION_MODE = "target_elevation_mode";
+	private static final String MODE_REQUEST_KEY = "mode_request_key";
 
 	private GlideTargetWidget widget;
 
@@ -52,6 +53,10 @@ public class GlideTargetWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 		modeButton.setBackground(getPressedStateDrawable());
 		modeDescription = view.findViewById(R.id.mode_description);
 		updateModeDescription();
+		SingleSelectionDialogFragment.setResultListener(this, MODE_REQUEST_KEY, index -> {
+			targetElevationMode = index == 1;
+			updateModeDescription();
+		});
 	}
 
 	private void showModeDialog() {
@@ -60,10 +65,7 @@ public class GlideTargetWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 				.setTitle(R.string.shared_string_mode)
 				.setControlsColor(ColorUtilities.getActiveColor(app, nightMode));
 
-		CustomAlert.showSingleSelection(dialogData, items, targetElevationMode ? 1 : 0, v -> {
-			targetElevationMode = (int) v.getTag() == 1;
-			updateModeDescription();
-		});
+		SingleSelectionDialogFragment.showInstance(this, MODE_REQUEST_KEY, dialogData, items, targetElevationMode ? 1 : 0);
 	}
 
 	private void updateModeDescription() {

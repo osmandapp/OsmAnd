@@ -41,12 +41,14 @@ import java.util.*;
 public class EditorIconController extends BaseDialogController {
 
 	public static final String PROCESS_ID = "editor_process_select_icon";
+	private static final String ORIGINAL_ICON_PROCESS_ID = "editor_process_select_icon_with_original";
 
 	private static final Log LOG = PlatformUtil.getLog(EditorIconController.class);
 
 	private static final int LAST_USED_ICONS_LIMIT = 12;
 
 	private static final String POI_CATEGORIES_FILE = "poi_categories.json";
+	public static final String ORIGINAL_KEY = "original";
 	public static final String LAST_USED_KEY = "last_used_icons";
 	public static final String SPECIAL_KEY = "special";
 	public static final String SYMBOLS_KEY = "symbols";
@@ -64,6 +66,7 @@ public class EditorIconController extends BaseDialogController {
 	protected IconsCategory selectedCategory;
 	protected List<String> lastUsedIcons;
 	private String selectedIconKey;
+	private String originalIconKey;
 
 	protected EditorIconCardController cardController;
 	private EditorIconScreenController screenController;
@@ -87,11 +90,18 @@ public class EditorIconController extends BaseDialogController {
 	protected void initIconCategories() {
 		Map<String, List<String>> assetGroups = readAssetIconGroups();
 		Map<String, List<String>> standaloneAssetGroups = extractStandaloneGroups(assetGroups);
+		initOriginalCategory();
 		initLastUsedCategory();
 		initStandaloneAssetCategories(standaloneAssetGroups);
 		initActivitiesCategory();
 		initPoiCategories(assetGroups);
 		sortCategories();
+	}
+
+	protected void initOriginalCategory() {
+		if (originalIconKey != null) {
+			categories.add(new IconsCategory(ORIGINAL_KEY, app.getString(R.string.shared_string_original), List.of(originalIconKey), true));
+		}
 	}
 
 	protected void initLastUsedCategory() {
@@ -317,6 +327,15 @@ public class EditorIconController extends BaseDialogController {
 		this.selectedIconKey = selectedIconKey;
 	}
 
+	@Nullable
+	public String getOriginalIconKey() {
+		return originalIconKey;
+	}
+
+	public void setOriginalIconKey(@Nullable String originalIconKey) {
+		this.originalIconKey = originalIconKey;
+	}
+
 	@ColorInt
 	public int getControlsAccentColor() {
 		return controlsAccentColor;
@@ -366,13 +385,27 @@ public class EditorIconController extends BaseDialogController {
 
 	@NonNull
 	protected IconsCategory findInitialIconCategory() {
-		return findIconCategory(getSelectedIconKey());
+		String iconKey = getSelectedIconKey();
+		IconsCategory category = findIconCategory(iconKey, Set.of(ORIGINAL_KEY));
+		if (iconKey != null && !category.containsIcon(iconKey)) {
+			// the icon is in no other category, e.g. the original icon of a POI
+			return findIconCategory(iconKey);
+		}
+		return category;
 	}
 
 	@NonNull
 	protected IconsCategory findIconCategory(@Nullable String iconKey) {
+		return findIconCategory(iconKey, null);
+	}
+
+	@NonNull
+	protected IconsCategory findIconCategory(@Nullable String iconKey, @Nullable Collection<String> categoriesToSkip) {
 		if (iconKey != null) {
 			for (IconsCategory category : categories) {
+				if (categoriesToSkip != null && categoriesToSkip.contains(category.getKey())) {
+					continue;
+				}
 				if (category.containsIcon(iconKey)) {
 					return category;
 				}
@@ -395,29 +428,64 @@ public class EditorIconController extends BaseDialogController {
 
 	@NonNull
 	protected IconsCategory getDefaultCategory() {
-		return categories.get(0);
+		IconsCategory category = categories.get(0);
+		// "original" of the point editor holds a single icon, it is not a default category
+		if (originalIconKey != null && category.getKey().equals(ORIGINAL_KEY) && categories.size() > 1) {
+			category = categories.get(1);
+		}
+		return category;
 	}
 
 	@NonNull
 	@Override
 	public String getProcessId() {
-		return PROCESS_ID;
+		return getProcessId(originalIconKey);
+	}
+
+	/**
+	 * A controller with the original icon of a point is registered separately,
+	 * so that a folder editor opened from the point editor does not get the original icon.
+	 */
+	@NonNull
+	private static String getProcessId(@Nullable String originalIconKey) {
+		return originalIconKey != null ? ORIGINAL_ICON_PROCESS_ID : PROCESS_ID;
 	}
 
 	public static void onDestroy(@NonNull OsmandApplication app) {
+		onDestroy(app, null);
+	}
+
+	public static void onDestroy(@NonNull OsmandApplication app, @Nullable String originalIconKey) {
 		DialogManager manager = app.getDialogManager();
-		manager.unregister(PROCESS_ID);
+		manager.unregister(getProcessId(originalIconKey));
 	}
 
 	@NonNull
-	public static EditorIconController getInstance(@NonNull OsmandApplication app, @NonNull Fragment targetFragment, @Nullable String preselectedIconKey) {
+	public static EditorIconController getInstance(@NonNull OsmandApplication app,
+	                                               @NonNull Fragment targetFragment,
+	                                               @Nullable String preselectedIconKey) {
+		return getInstance(app, targetFragment, preselectedIconKey, null);
+	}
+
+	@NonNull
+	public static EditorIconController getInstance(@NonNull OsmandApplication app,
+	                                               @NonNull Fragment targetFragment,
+	                                               @Nullable String preselectedIconKey,
+	                                               @Nullable String originalIconKey) {
 		DialogManager dialogManager = app.getDialogManager();
-		EditorIconController controller = (EditorIconController) dialogManager.findController(PROCESS_ID);
+		String processId = getProcessId(originalIconKey);
+		EditorIconController controller = (EditorIconController) dialogManager.findController(processId);
+		if (controller != null && !Objects.equals(controller.getOriginalIconKey(), originalIconKey)) {
+			// left by the editor of another point that was not destroyed normally
+			dialogManager.unregister(processId);
+			controller = null;
+		}
 		if (controller == null) {
 			controller = new EditorIconController(app);
 			controller.setSelectedIconKey(preselectedIconKey);
+			controller.setOriginalIconKey(originalIconKey);
 			controller.init();
-			dialogManager.register(PROCESS_ID, controller);
+			dialogManager.register(processId, controller);
 		}
 		controller.setTargetFragment(targetFragment);
 		return controller;

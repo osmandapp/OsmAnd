@@ -48,7 +48,14 @@ class NativeRoutingMemoryGuard {
 		return guard;
 	}
 
-	/** Device RAM minus 1 GB for the system and the rest of the app, within 512 MB and 3 GB. */
+	/**
+	 * Device RAM minus 1 GB for the system and the rest of the app, never more than 3 GB and never
+	 * less than half of the device RAM. The half-RAM floor only changes the 1-2 GB band: there the
+	 * reserve alone leaves less than a single public transport route needs on a dense network
+	 * (measured 485 MB of growth for a 4.7 km trip in Hamburg), so the flat 512 MB floor stopped
+	 * ordinary routes. Below 1 GB the floor stays 512 MB, and from 2 GB up the reserve already
+	 * leaves more than half of RAM, so every other device keeps the budget it has today.
+	 */
 	private static long getBudget(@NonNull Context ctx) {
 		long totalMem = 0;
 		ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
@@ -57,7 +64,9 @@ class NativeRoutingMemoryGuard {
 			am.getMemoryInfo(info);
 			totalMem = info.totalMem;
 		}
-		return Math.max(MIN_BUDGET, Math.min(MAX_BUDGET, totalMem - RESERVED_RAM));
+		long budget = Math.min(MAX_BUDGET, totalMem - RESERVED_RAM);
+		long floor = Math.max(MIN_BUDGET, totalMem / 2);
+		return Math.min(MAX_BUDGET, Math.max(floor, budget));
 	}
 
 	private void watch() {
