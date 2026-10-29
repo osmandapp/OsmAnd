@@ -167,8 +167,12 @@ public class QuickSearchHelper implements ResourceListener {
 				: app.getResourceManager().getMapsWithoutSpatialSearch(location, SPATIAL_SEARCH_MAPS_RADIUS);
 		boolean spatial = useSpatialTextSearch();
 		if (spatialSearch != spatial) {
+			// as initSearchUICore, but keeps the search phrase; a running search keeps its copy of the apis
 			spatialSearch = spatial;
-			core.setSpatialSearch(spatial, this::refreshCustomPoiFilters);
+			core.clearAPIs();
+			core.init(spatial);
+			registerNonMapSearchAPIs();
+			refreshCustomPoiFilters();
 		}
 	}
 
