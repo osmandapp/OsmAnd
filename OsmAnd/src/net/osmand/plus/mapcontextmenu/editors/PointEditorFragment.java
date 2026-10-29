@@ -55,7 +55,7 @@ import java.util.Map;
 
 public abstract class PointEditorFragment extends EditorFragment {
 
-	private static final String SELECTED_GROUP_KEY = "editor_selected_group";
+	protected static final String SELECTED_GROUP_KEY = "editor_selected_group";
 
 	private TextView addDelDescription;
 	private TextView addAddressBtn;
@@ -566,13 +566,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 			if (position == items.size()) {
 				holder.groupButton.setOnClickListener(view -> showAddNewCategoryFragment());
 			} else {
-				holder.groupButton.setOnClickListener(view -> {
-					int previousSelectedPosition = getItemPosition(selectedGroup);
-					setPointsGroup(items.get(holder.getAdapterPosition()), shouldUpdateAppearance());
-
-					notifyItemChanged(holder.getAdapterPosition());
-					notifyItemChanged(previousSelectedPosition);
-				});
+				holder.groupButton.setOnClickListener(view -> setPointsGroup(items.get(holder.getAdapterPosition())));
 				PointsGroup group = items.get(position);
 				setupGroupName(holder.groupName, group);
 				holder.pointsCounter.setText(String.valueOf(group.getPoints().size()));
