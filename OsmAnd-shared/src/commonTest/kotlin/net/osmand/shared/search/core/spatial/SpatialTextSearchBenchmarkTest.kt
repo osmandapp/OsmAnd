@@ -4,6 +4,7 @@ import net.osmand.shared.binary.BinaryMapIndexReader
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testEnvironment
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.core.SearchCoreFactoryTest
@@ -101,7 +102,7 @@ class SpatialTextSearchBenchmarkTest {
 							val ctx = SpatialSearchContext(SpatialTextSearchTest.settings(v), readers, poiSearch, run.center)
 							ctx.stats.printLogs = false
 							val start = TimeSource.Monotonic.markNow()
-							search.searchAPI(run.phrases[i], ctx)
+							testAppCall { search.searchAPI(run.phrases[i], ctx) }
 							ms[if (v == 0) 0 else 1] += start.elapsedNow().inWholeMicroseconds / 1000.0
 							if (round == 0) {
 								queries[if (v == 0) 0 else 1]++

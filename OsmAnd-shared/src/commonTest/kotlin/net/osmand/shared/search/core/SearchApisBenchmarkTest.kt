@@ -6,6 +6,7 @@ import kotlinx.serialization.json.JsonObject
 import net.osmand.shared.binary.BinaryMapIndexReader
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testEnvironment
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.SearchUICore.SearchResultMatcher
@@ -95,7 +96,7 @@ class SearchApisBenchmarkTest {
 							if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) != -1) {
 								val matcher = SearchResultMatcher(null, phrase, 0, AtomicInt(0), -1)
 								try {
-									api.search(phrase, matcher)
+									testAppCall { api.search(phrase, matcher) }
 								} catch (e: Exception) {
 									// the core goes on to the next api
 								}

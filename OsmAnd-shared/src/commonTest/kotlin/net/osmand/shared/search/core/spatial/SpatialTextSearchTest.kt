@@ -8,6 +8,7 @@ import net.osmand.shared.data.MapObject
 import net.osmand.shared.data.Street
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testEnvironment
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.core.SearchCoreFactoryTest
@@ -99,11 +100,11 @@ class SpatialTextSearchTest {
 					"C" -> openMaps(f)
 					"Q" -> {
 						variant = f[1].toInt()
-						copyLines.addAll(query(variant, dumpUnhex(f[2])))
+						copyLines.addAll(testAppCall { query(variant, dumpUnhex(f[2])) })
 					}
 					"K" -> {
 						variant = -1
-						copyLines.addAll(category(dumpUnhex(f[1])))
+						copyLines.addAll(testAppCall { category(dumpUnhex(f[1])) })
 					}
 					"P" -> {
 						if (poiSearch == null) {
