@@ -1001,6 +1001,30 @@ class BinaryMapIndexReader {
 		return req.getSearchResults()
 	}
 
+	/** A read aborted by an error (OutOfMemoryError) leaves its limits on the stream and every next read fails. */
+	fun resetReadLimits() {
+		codedIS.popLimit(Long.MAX_VALUE)
+	}
+
+	/**
+	 * Reads the name index of the region of [reader]: the keys of its string table that match the
+	 * query of the reader and the blocks of atoms behind them, or all of them when it has no query.
+	 * Returns the blocks of the query, or null without one; the reader keeps them all.
+	 */
+	fun readFullNameIndex(reader: NameIndexReader): List<NameIndexReader.PrefixNameValue>? {
+		val poiRegion = reader.poiRegion
+		val addressRegion = reader.addressRegion
+		codedIS.seek(poiRegion?.filePointer ?: addressRegion!!.filePointer)
+		val old = codedIS.pushLimitLong(poiRegion?.length ?: addressRegion!!.length)
+		val res = if (poiRegion != null) {
+			poiAdapter.readNameIndex(reader)
+		} else {
+			addressAdapter.readNameIndex(reader)
+		}
+		codedIS.popLimit(old)
+		return res
+	}
+
 	/**
 	 * The categories whose name starts with [query], and for the rest the subcategories that do.
 	 * A category that matches itself is put in with a null list, meaning all of its subcategories.
@@ -1248,6 +1272,45 @@ class BinaryMapIndexReader {
 			result.add(tokenPrefixes)
 		}
 		return result
+	}
+
+	/** Hands each key of a string table of a name index to [inspector], and the tables under the keys it matches. */
+	internal fun readNameIndexInspector(prefix: String?, inspector: NameIndexReader) {
+		var key: String? = null
+		var match = true
+		while (true) {
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return
+				IndexedStringTable.KEY_FIELD_NUMBER -> {
+					var read = codedIS.readString()
+					if (prefix != null) {
+						read = prefix + read
+					}
+					key = read
+					match = inspector.matchKey(read)
+				}
+				IndexedStringTable.VAL_FIELD_NUMBER -> {
+					val value = readInt().toInt() // FIXME for 64 bit support
+					if (match) {
+						inspector.putKey(key, value, prefix)
+					}
+				}
+				IndexedStringTable.SUBTABLES_FIELD_NUMBER -> {
+					val len = codedIS.readRawVarint32().toLong()
+					val oldLim = codedIS.pushLimitLong(len)
+					if (match) {
+						readNameIndexInspector(key, inspector)
+					} else {
+						val skip = codedIS.getBytesUntilLimit()
+						inspector.skipTableBytes(skip)
+						codedIS.skipRawBytes(skip)
+					}
+					codedIS.popLimit(oldLim)
+				}
+				else -> skipUnknownField(t)
+			}
+		}
 	}
 
 	/**
