@@ -29,6 +29,15 @@ object KUnicode {
 		return platformNormalizeNFC(input)
 	}
 
+	/** Canonical decomposition (NFD). */
+	fun normalizeNFD(input: String): String {
+		if (input.isEmpty() || isAscii(input)) {
+			// ascii decomposes to itself
+			return input
+		}
+		return platformNormalizeNFD(input)
+	}
+
 	/**
 	 * True when [input] holds a non-spacing mark, or a character whose decomposition holds one.
 	 *

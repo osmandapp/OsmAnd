@@ -656,6 +656,21 @@ object KMapUtils {
 		return rect
 	}
 
+	/** A box of 31 tiles around a point, [radiusMeters] measured along the zoom 16 tile at its latitude. */
+	fun calculate31Bbox(latitude: Double, longitude: Double, radiusMeters: Int): KQuadRect {
+		val zoom = 16.0
+		val coeff = radiusMeters / getTileDistanceWidth(latitude, zoom)
+		val tx = getTileNumberX(zoom, longitude)
+		val ty = getTileNumberY(zoom, latitude)
+		val topLeftX = max(0.0, tx - coeff)
+		val topLeftY = max(0.0, ty - coeff)
+		val max = (1 shl zoom.toInt()) - 1
+		val bottomRightX = min(max.toDouble(), tx + coeff)
+		val bottomRightY = min(max.toDouble(), ty + coeff)
+		val pw = getPowZoom(31 - zoom)
+		return KQuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw)
+	}
+
 	fun getInterpolatedY(x1: Float, y1: Float, x2: Float, y2: Float, x: Float): Float {
 		val a = y1 - y2
 		val b = x2 - x1

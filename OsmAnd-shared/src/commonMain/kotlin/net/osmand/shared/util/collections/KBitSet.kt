@@ -35,6 +35,17 @@ class KBitSet @JvmOverloads constructor(bitCapacity: Int = BITS_PER_WORD) {
 		if (value) set(index) else clear(index)
 	}
 
+	/** Sets the bits from [fromIndex] (inclusive) to [toIndex] (exclusive). */
+	fun set(fromIndex: Int, toIndex: Int) {
+		requireIndex(fromIndex)
+		if (fromIndex > toIndex) {
+			throw IndexOutOfBoundsException("fromIndex $fromIndex > toIndex $toIndex")
+		}
+		for (i in fromIndex until toIndex) {
+			set(i)
+		}
+	}
+
 	fun clear(index: Int) {
 		requireIndex(index)
 		val word = index shr WORD_SHIFT
@@ -160,6 +171,30 @@ class KBitSet @JvmOverloads constructor(bitCapacity: Int = BITS_PER_WORD) {
 			}
 			word++
 			if (word >= words.size) {
+				return -1
+			}
+			bits = words[word]
+		}
+	}
+
+	/** Index of the last set bit at or before [fromIndex], or -1; -1 itself is allowed and gives -1. */
+	fun previousSetBit(fromIndex: Int): Int {
+		if (fromIndex < 0) {
+			if (fromIndex == -1) {
+				return -1
+			}
+			throw IndexOutOfBoundsException("fromIndex < -1: $fromIndex")
+		}
+		var word = fromIndex shr WORD_SHIFT
+		if (word >= words.size) {
+			return length() - 1
+		}
+		var bits = words[word] and (-1L ushr (BIT_MASK - (fromIndex and BIT_MASK)))
+		while (true) {
+			if (bits != 0L) {
+				return (word + 1) * BITS_PER_WORD - 1 - bits.countLeadingZeroBits()
+			}
+			if (word-- == 0) {
 				return -1
 			}
 			bits = words[word]

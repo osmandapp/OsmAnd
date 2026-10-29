@@ -377,7 +377,7 @@ class SpatialSearchTokenTest {
 	}
 
 	private fun partials(list: List<SpatialSearchToken.PartialMatch>): String =
-		list.joinToString("") { it.atom.getName() + ":" + it.other.size + ":" + it.nonNumericMatch + ";" }
+		list.joinToString("") { it.atom.getName() + ":" + it.other!!.size + ":" + it.nonNumericMatch + ";" }
 
 	private fun describe(a: NameIndexAtom): String =
 		a.name + "/" + a.type + "/" + a.id + "/" + a.parentid + "/" + a.cityAsStreet + "/" + a.otherWordsCnt + "/" +

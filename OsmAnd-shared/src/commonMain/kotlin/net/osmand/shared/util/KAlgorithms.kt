@@ -160,6 +160,27 @@ object KAlgorithms {
 		return i
 	}
 
+	/** The first run of digits of [s] wherever it is, "Ave 12b" giving 12; 0 without digits. */
+	fun extractIntegerNumber(s: String): Int {
+		var i = 0
+		var k = 0
+		while (k < s.length) {
+			if (isDigit(s[k])) {
+				break
+			}
+			k++
+		}
+		while (k < s.length) {
+			if (isDigit(s[k])) {
+				i = i * 10 + (s[k] - '0')
+			} else {
+				break
+			}
+			k++
+		}
+		return i
+	}
+
 	/** What follows the leading digits of [s]: "12a" gives "a", "12" gives "". */
 	fun extractIntegerSuffix(s: String): String {
 		for (k in s.indices) {
