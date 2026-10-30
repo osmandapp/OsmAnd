@@ -105,6 +105,94 @@ class SearchPhraseTest {
 		assertEquals(listOf("a", "b c"), SearchPhrase.splitWords(" a| b c ", ArrayList(), "\\|"))
 	}
 
+	/** A live update has no address section, so its region comes from the file name, as android and iOS name it. */
+	@Test
+	fun aLiveUpdateIsNamedAfterItsRegion() {
+		withCopies(listOf(LIVE_UPDATE to "Turn_lanes_test_25_10_28.obf", LIVE_UPDATE to "turn_lanes_test_25_10_28.live.obf")) {
+			val (android, ios) = it
+			assertEquals("Turn lanes", android.getRegionName())
+			assertEquals("turn lanes", ios.getRegionName())
+		}
+	}
+
+	/** The first file to give a poi claims it, so the updates of a region, which may have removed it, are read before it. */
+	@Test
+	fun liveUpdatesGoRightBeforeTheirRegion() {
+		setUp
+		for (live in listOf("Turn_lanes_test_25_10_%s.obf", "turn_lanes_test_25_10_%s.live.obf")) {
+			val files = listOf(
+				LIVE_UPDATE to live.replace("%s", "28"),
+				"routing/Routing_test_63.obf" to "Routing_test_63.obf",
+				LIVE_UPDATE to live.replace("%s", "27"),
+				"Turn_lanes_test.obf" to "Turn_lanes_test.obf"
+			)
+			withCopies(files) { readers ->
+				val (newest, other, older, region) = readers
+				val nearRegion = region.getMapIndexes()[0].getCenterLatLon()
+				assertFiles(listOf(other, newest, older, region), readers, null)
+				assertFiles(listOf(newest, older, region, other), readers, nearRegion)
+			}
+		}
+	}
+
+	/** A wiki file has the region name of its map, and the updates are read once, before the first of the two. */
+	@Test
+	fun liveUpdatesAreReadOnceWhenTheRegionHasAWikiFile() {
+		setUp
+		val files = listOf(
+			NO_MAP_DATA to "Turn_lanes_test.wiki.obf",
+			"Turn_lanes_test.obf" to "Turn_lanes_test.obf",
+			LIVE_UPDATE to "turn_lanes_test_25_10_28.live.obf"
+		)
+		withCopies(files) { readers ->
+			val (wiki, region, live) = readers
+			assertEquals(region.getRegionName(), wiki.getRegionName())
+			assertFiles(listOf(live, wiki, region), readers, null)
+			// a file without map data or an address center goes last around a location
+			assertFiles(listOf(live, region, wiki), readers, region.getMapIndexes()[0].getCenterLatLon())
+		}
+	}
+
+	/** Updates whose region is not among the files, as when only the file of a selected result is, are read last. */
+	@Test
+	fun aLiveUpdateWithoutItsRegionIsReadLast() {
+		setUp
+		val files = listOf(
+			LIVE_UPDATE to "turn_lanes_test_25_10_28.live.obf",
+			"routing/Routing_test_63.obf" to "Routing_test_63.obf"
+		)
+		withCopies(files) { readers ->
+			val (live, other) = readers
+			assertFiles(listOf(other, live), readers, null)
+			assertFiles(listOf(other, live), readers, other.getMapIndexes()[0].getCenterLatLon())
+			assertFiles(listOf(live), listOf(live), null)
+		}
+	}
+
+	private fun assertFiles(expected: List<BinaryMapIndexReader>, readers: List<BinaryMapIndexReader>, location: KLatLon?) {
+		val settings = SearchSettings(readers).let { s -> if (location == null) s else s.setOriginalLocation(location) }
+		val phrase = SearchPhrase.emptyPhrase(settings)
+		phrase.sortFiles()
+		assertEquals(expected.map { it.getFile().name() }, phrase.getOfflineIndexes().map { it.getFile().name() }, "around $location")
+	}
+
+	/** Readers of copies of test maps, by the names given, closed and deleted afterwards. */
+	private fun withCopies(files: List<Pair<String, String>>, check: (List<BinaryMapIndexReader>) -> Unit) {
+		val dir = FileSystem.SYSTEM_TEMPORARY_DIRECTORY / "search-files-${Random.nextLong().toULong()}"
+		FileSystem.SYSTEM.createDirectory(dir)
+		val readers = ArrayList<BinaryMapIndexReader>()
+		try {
+			for ((source, name) in files) {
+				FileSystem.SYSTEM.copy(RoutingTestFixtures.resource(source).toPath(), dir / name)
+				readers.add(BinaryMapIndexReader((dir / name).toString()))
+			}
+			check(readers)
+		} finally {
+			readers.forEach { it.close() }
+			FileSystem.SYSTEM.deleteRecursively(dir)
+		}
+	}
+
 	@Test
 	fun sameAsJava() {
 		// line by line: the dump is near 100 MB
@@ -571,6 +659,11 @@ class SearchPhraseTest {
 	private fun unhexList(h: String): List<String> = if (h == "-") emptyList() else h.split(",").map { dumpUnhex(it) }
 
 	companion object {
+		// written as a live update is: map, routing, pois and transport, no addresses
+		private const val LIVE_UPDATE = "routing/Routing_test_100_private_delivery.obf"
+		// routing only: no map data and no addresses, so no center to measure a distance from
+		private const val NO_MAP_DATA = "routing/Routing_test_76.obf"
+
 		internal val setUp: Unit by lazy {
 			val regions = testEnvironment("OSMAND_REGIONS_OCBF") ?: "../OsmAnd-java/src/main/resources/net/osmand/map/regions.ocbf"
 			if (!FileSystem.SYSTEM.exists(regions.toPath())) {

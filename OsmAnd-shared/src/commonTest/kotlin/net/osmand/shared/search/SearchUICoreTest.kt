@@ -532,6 +532,24 @@ class SearchUICoreTest {
 		assertSame(b2, cll.getCurrentSearchResults()[2])
 	}
 
+	/** What iOS does in place of [SearchUICore.shallowSearch] by class: finds the api among the registered ones. */
+	@Test
+	fun shallowSearchWithTheApiItself() {
+		SearchPhraseTest.setUp
+		val core = SearchUICore(MapPoiTypes.getDefault(), "en", false)
+		core.init()
+		val api = OneResultApi()
+		core.registerAPI(api)
+		assertTrue(core.getApis().any { it is SearchCoreFactory.SearchAmenityTypesAPI })
+		assertSame(api, core.getApis().single { it is OneResultApi })
+
+		val byApi = core.shallowSearch(api, "cafe", null, true, true, core.getSearchSettings())
+		val byClass = core.shallowSearch(OneResultApi::class, "cafe", null, true, true, core.getSearchSettings())!!
+		assertEquals(listOf("cafe"), byApi.getCurrentSearchResults().map { it.localeName })
+		assertEquals(byClass.getCurrentSearchResults().map { it.localeName }, byApi.getCurrentSearchResults().map { it.localeName })
+		assertEquals(2, api.searches.get())
+	}
+
 	private fun originPhrase(): SearchPhrase {
 		SearchPhraseTest.setUp
 		val ss = SearchSettings(null as SearchSettings?).setOriginalLocation(KLatLon(0.0, 0.0))
@@ -684,6 +702,60 @@ class SearchUICoreTest {
 			log.toList()
 		)
 		assertEquals(0, api.overlaps.get())
+	}
+
+	/** A cancelled search ends without a word; what runs after the search waits for it all the same. */
+	@Test
+	fun runAfterSearchWaitsForACancelledSearch() = runBlocking {
+		SearchPhraseTest.setUp
+		val core = SearchUICore(MapPoiTypes.getDefault(), "en", false)
+		val api = BlockingApi()
+		core.registerAPI(api)
+		val cancelled = AtomicInt(0)
+		core.search("cafe", false, object : ResultMatcher<SearchResult> {
+			override fun publish(obj: SearchResult): Boolean = true
+
+			override fun isCancelled(): Boolean = cancelled.get() == 1
+		})
+		try {
+			until { api.running.get() == 1 }
+			cancelled.set(1)
+			val searchesRunning = AtomicInt(-1)
+			core.runAfterSearch { searchesRunning.set(api.running.get()) }
+			delay(200)
+			assertEquals(-1, searchesRunning.get())
+			api.released.set(1)
+			until { searchesRunning.get() != -1 }
+			assertEquals(0, searchesRunning.get())
+		} finally {
+			// a failure above must not leave the search thread spinning
+			api.released.set(1)
+		}
+	}
+
+	/** An api that searches until it is let go. */
+	private class BlockingApi : SearchCoreAPI {
+		val running = AtomicInt(0)
+		val released = AtomicInt(0)
+
+		override fun getSearchPriority(p: SearchPhrase): Int = 1
+
+		override fun search(phrase: SearchPhrase, resultMatcher: SearchResultMatcher): Boolean {
+			running.incrementAndGet()
+			while (released.get() == 0) {
+				// searching
+			}
+			running.decrementAndGet()
+			return true
+		}
+
+		override fun isSearchMoreAvailable(phrase: SearchPhrase): Boolean = false
+
+		override fun isSearchAvailable(p: SearchPhrase): Boolean = true
+
+		override fun getMinimalSearchRadius(phrase: SearchPhrase): Int = 0
+
+		override fun getNextSearchRadius(phrase: SearchPhrase): Int = 0
 	}
 
 	private suspend fun until(condition: () -> Boolean) {

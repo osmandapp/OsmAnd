@@ -1503,8 +1503,9 @@ class BinaryMapIndexReader {
 
 		private val MASK_TO_READ = ((1 shl SHIFT_COORDINATES) - 1).inv()
 
-		private val OSM_DIFF_FILE_NAME = Regex("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+\\.obf")
-		private val OSM_DIFF_DATE_ENDING = Regex("_([0-9]+_){2}[0-9]+\\.obf")
+		// a live update: "Germany_berlin_europe_25_10_28.obf" on android, "germany_berlin_europe_25_10_28.live.obf" on iOS
+		private val OSM_DIFF_FILE_NAME = Regex("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+(\\.live)?\\.obf")
+		private val OSM_DIFF_DATE_ENDING = Regex("_([0-9]+_){2}[0-9]+(\\.live)?\\.obf")
 	}
 
 	/** Field numbers of the map section messages in osmand_odb.proto, frozen by the obf format. */
