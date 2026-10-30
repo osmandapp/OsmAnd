@@ -161,12 +161,12 @@ public class PrepareBackupTask {
 	private void doCollectRemoteFiles() {
 		try {
 			app.getNetworkSettingsHelper().collectSettings(PREPARE_BACKUP_KEY, false,
-					(succeed, empty, items, remoteFiles) -> {
+					(succeed, empty, items, remoteFiles, error) -> {
 						if (succeed) {
 							backup.setSettingsItems(items);
 							backup.setRemoteFiles(remoteFiles);
 						} else {
-							onError(app.getString(R.string.backup_error_failed_to_fetch_remote_items));
+							onError(Algorithms.isEmpty(error) ? app.getString(R.string.backup_error_failed_to_fetch_remote_items) : error);
 						}
 						onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
 					}, autoSync);
