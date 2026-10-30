@@ -532,6 +532,24 @@ class SearchUICoreTest {
 		assertSame(b2, cll.getCurrentSearchResults()[2])
 	}
 
+	/** What iOS does in place of [SearchUICore.shallowSearch] by class: finds the api among the registered ones. */
+	@Test
+	fun shallowSearchWithTheApiItself() {
+		SearchPhraseTest.setUp
+		val core = SearchUICore(MapPoiTypes.getDefault(), "en", false)
+		core.init()
+		val api = OneResultApi()
+		core.registerAPI(api)
+		assertTrue(core.getApis().any { it is SearchCoreFactory.SearchAmenityTypesAPI })
+		assertSame(api, core.getApis().single { it is OneResultApi })
+
+		val byApi = core.shallowSearch(api, "cafe", null, true, true, core.getSearchSettings())
+		val byClass = core.shallowSearch(OneResultApi::class, "cafe", null, true, true, core.getSearchSettings())!!
+		assertEquals(listOf("cafe"), byApi.getCurrentSearchResults().map { it.localeName })
+		assertEquals(byClass.getCurrentSearchResults().map { it.localeName }, byApi.getCurrentSearchResults().map { it.localeName })
+		assertEquals(2, api.searches.get())
+	}
+
 	private fun originPhrase(): SearchPhrase {
 		SearchPhraseTest.setUp
 		val ss = SearchSettings(null as SearchSettings?).setOriginalLocation(KLatLon(0.0, 0.0))

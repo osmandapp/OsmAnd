@@ -509,6 +509,9 @@ class SearchUICore(
 		return null
 	}
 
+	/** The registered apis, for iOS: Objective-C has no [KClass] to call [getApiByClass] with. */
+	fun getApis(): List<SearchCoreAPI> = ArrayList(apis)
+
 	fun <T : SearchCoreAPI> shallowSearch(cl: KClass<T>, text: String, matcher: ResultMatcher<SearchResult>?): SearchResultCollection? {
 		return shallowSearch(cl, text, matcher, true, true)
 	}
@@ -526,27 +529,35 @@ class SearchUICore(
 	): SearchResultCollection? {
 		val api = getApiByClass(cl)
 		if (api != null) {
-			if (debugMode) {
-				LOG.info("Start shallow search <$phrase> API=<$api>")
-			}
-			val sphrase = phrase.generateNewPhrase(text, searchSettings)
-			preparePhrase(sphrase)
-			val ai = AtomicInt(0)
-			val rm = SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit)
-			api.search(sphrase, rm)
-
-			val skipResultSorting = api is SpatialTextSearchAPI
-			val collection = SearchResultCollection(sphrase, skipResultSorting)
-			if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
-				collection.setUseLimit(true)
-			}
-			collection.addSearchResults(rm.getRequestResults(), resortAll && !skipResultSorting, removeDuplicates)
-			if (debugMode) {
-				LOG.info("Finish shallow search <$sphrase> Results=${rm.getRequestResults().size}")
-			}
-			return collection
+			return shallowSearch(api, text, matcher, resortAll, removeDuplicates, searchSettings)
 		}
 		return null
+	}
+
+	/** [shallowSearch] with the api itself, for iOS, which finds it in [getApis]. */
+	fun shallowSearch(
+		api: SearchCoreAPI, text: String, matcher: ResultMatcher<SearchResult>?,
+		resortAll: Boolean, removeDuplicates: Boolean, searchSettings: SearchSettings?
+	): SearchResultCollection {
+		if (debugMode) {
+			LOG.info("Start shallow search <$phrase> API=<$api>")
+		}
+		val sphrase = phrase.generateNewPhrase(text, searchSettings)
+		preparePhrase(sphrase)
+		val ai = AtomicInt(0)
+		val rm = SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit)
+		api.search(sphrase, rm)
+
+		val skipResultSorting = api is SpatialTextSearchAPI
+		val collection = SearchResultCollection(sphrase, skipResultSorting)
+		if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
+			collection.setUseLimit(true)
+		}
+		collection.addSearchResults(rm.getRequestResults(), resortAll && !skipResultSorting, removeDuplicates)
+		if (debugMode) {
+			LOG.info("Finish shallow search <$sphrase> Results=${rm.getRequestResults().size}")
+		}
+		return collection
 	}
 
 	fun <T : SearchCoreAPI> shallowSearchAsync(
