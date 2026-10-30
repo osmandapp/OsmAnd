@@ -170,6 +170,19 @@
 				<category android:name="android.intent.category.BROWSABLE" />
 			</intent-filter>
 
+			<!-- Marketing deep links osmand.net/app/... shared with iOS (see OsmAnd-Issues #3088). -->
+			<!-- path + pathPrefix="/app/" instead of pathPrefix="/app": osmand.net/apps must stay in the browser. -->
+			<intent-filter android:autoVerify="true">
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="osmand.net" />
+				<data android:path="/app" />
+				<data android:pathPrefix="/app/" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+
 			<intent-filter>
 				<data android:scheme="http" />
 				<data android:scheme="https" />

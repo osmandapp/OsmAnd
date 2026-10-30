@@ -54,6 +54,9 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.tracks.PreselectedTabParams;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.dashboard.DashboardType;
+import net.osmand.plus.deeplink.AppDeepLink;
+import net.osmand.plus.deeplink.AppDeepLinkParser;
+import net.osmand.plus.deeplink.AppDeepLinkRouter;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -151,6 +154,7 @@ public class IntentHelper {
 
 	public boolean parseLaunchIntents() {
 		return parseGeoActionIntent()
+				|| parseAppDeepLinkIntent()
 				|| parseNavigationIntent()
 				|| parseBackupAuthorizationIntent()
 				|| parseSetPinOnMapIntent()
@@ -171,6 +175,24 @@ public class IntentHelper {
 				String action = GeoPointParserUtil.parseGeoAction(uri.toString());
 				if (!Algorithms.isEmpty(action)) {
 					GeoActionHelper.executeAction(app, action, mapActivity);
+				}
+				clearIntent(intent);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean parseAppDeepLinkIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && isUriHierarchical(intent)) {
+			Uri data = intent.getData();
+			if (isOsmAndSite(data) && AppDeepLinkParser.INSTANCE.isAppDeepLink(data)) {
+				AppDeepLink link = AppDeepLinkParser.INSTANCE.parse(data);
+				if (link != null) {
+					new AppDeepLinkRouter(mapActivity).open(link);
+				} else {
+					LOG.error("Unknown OsmAnd app deep link: " + data);
 				}
 				clearIntent(intent);
 				return true;
