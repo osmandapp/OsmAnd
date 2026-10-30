@@ -448,7 +448,8 @@ public class MapSelectionHelper {
 			if (symbolIcon != null) {
 				renderedObject.setIconRes(symbolIcon.getContent());
 			}
-			if (symbolCaption != null) {
+			if (symbolCaption != null && tags.keySet().stream()
+					.noneMatch(tag -> tag.startsWith("osmand_") && tag.endsWith("_stub"))) {
 				renderedObject.setName(symbolCaption.getContent());
 			}
 			for (Map.Entry<String, String> entry : tags.entrySet()) {
