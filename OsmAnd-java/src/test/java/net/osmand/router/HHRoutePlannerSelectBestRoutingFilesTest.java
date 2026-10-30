@@ -1,6 +1,7 @@
 package net.osmand.router;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,6 +53,17 @@ public class HHRoutePlannerSelectBestRoutingFilesTest {
 		assertEquals(Collections.singleton(wales), selectMaps(start, end, england, wales));
 	}
 
+	@Test
+	public void testThorshofnToLanganesBeyondNetworkPointsBbox() throws IOException {
+		LatLon start = new LatLon(66.200045, -15.337281);
+		LatLon end = new LatLon(66.378523, -14.532976);
+		// Iceland_europe.obf of 2026-10-01: its routing data reaches 66.57N, its car HH network points only 66.14N.
+		BinaryMapIndexReader iceland = reader("Iceland_europe", 1, new QuadRect(-24.6, 66.6, -13.4, 63.3),
+				new QuadRect(-23.8, 66.14, -13.5, 63.3));
+
+		assertEquals(Collections.singleton(iceland), selectMaps(start, end, iceland));
+	}
+
 	private Set<BinaryMapIndexReader> selectMaps(LatLon start, LatLon end, BinaryMapIndexReader... readers)
 			throws IOException {
 		try {
@@ -65,6 +77,7 @@ public class HHRoutePlannerSelectBestRoutingFilesTest {
 			hctx.rctx = ctx;
 			HHRoutingContext<NetworkDBPoint> selected = HHRoutePlanner.create(ctx)
 					.selectBestRoutingFiles(start, end, hctx, false);
+			assertNotNull("No files found for routing", selected);
 			Set<BinaryMapIndexReader> result = new HashSet<>();
 			for (HHRouteRegionPointsCtx<NetworkDBPoint> region : selected.regions) {
 				result.add(region.file);
@@ -78,6 +91,11 @@ public class HHRoutePlannerSelectBestRoutingFilesTest {
 	}
 
 	private BinaryMapIndexReader reader(String name, long edition, QuadRect bounds) throws IOException {
+		return reader(name, edition, bounds, bounds);
+	}
+
+	private BinaryMapIndexReader reader(String name, long edition, QuadRect bounds, QuadRect hhBounds)
+			throws IOException {
 		// Model routing block bounds without loading OBF data; use the real region polygons and group selection.
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(null, new File(name + "_2.obf"), false) {
 			@Override
@@ -93,7 +111,7 @@ public class HHRoutePlannerSelectBestRoutingFilesTest {
 		HHRouteRegion hhRegion = new HHRouteRegion() {
 			@Override
 			public QuadRect getLatLonBbox() {
-				return bounds;
+				return hhBounds;
 			}
 		};
 		hhRegion.profile = "car";
