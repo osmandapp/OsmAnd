@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="update_maps_to_use_new_search">Update maps to use the new search (%1$s)</string>
 	<string name="astro_ar_mode">AR mode</string>
 	<string name="astro_camera_view">Camera view</string>
 	<string name="astro_reset_field_of_view">Reset field of view</string>

@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -2481,6 +2483,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
 	                                   SearchResultListener resultListener, boolean preserveSelectedPoiTypeNames) {
+		searchHelper.updateSearchEngine(searchUICore.getSearchSettings().getOriginalLocation());
 		searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection;
 			SearchCoreAPI regionResultApi;
@@ -2964,7 +2967,20 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				updateSendEmptySearchBottomBar(false);
 			}
 			mainSearchFragment.updateListAdapter(rows, append, false);
+			addUpdateMapsForNewSearchRow();
 			updateTopFilterChips();
+		}
+	}
+
+	private void addUpdateMapsForNewSearchRow() {
+		int maps = searchHelper.getMapsWithoutSpatialSearch().size();
+		if (maps > 0 && !isTextEmpty()) {
+			String title = getString(R.string.update_maps_to_use_new_search, String.valueOf(maps));
+			mainSearchFragment.getListAdapter().insertListItem(new QuickSearchButtonListItem(app, R.drawable.ic_action_update, title, v -> {
+				Intent intent = new Intent(app, app.getAppCustomization().getDownloadIndexActivity());
+				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.UPDATES_TAB);
+				startActivity(intent);
+			}), 0);
 		}
 	}
 

@@ -91,11 +91,15 @@ public class QuickSearchHelper implements ResourceListener {
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 154;
 	public static final int SEARCH_ONLINE_API_PRIORITY = 500;
 	public static final int SEARCH_ONLINE_AMENITY_PRIORITY = 500;
+	// maps around the search location the spatial search reads
+	private static final int SPATIAL_SEARCH_MAPS_RADIUS = 100_000;
 
 	private final OsmandApplication app;
 	private final SearchUICore core;
 	private SearchResultCollection resultCollection;
 	private boolean mapsIndexed;
+	private boolean spatialSearch;
+	private List<String> mapsWithoutSpatialSearch = Collections.emptyList();
 
 	public QuickSearchHelper(OsmandApplication app) {
 		this.app = app;
@@ -128,7 +132,8 @@ public class QuickSearchHelper implements ResourceListener {
 		core.clearAPIs();
 		core.resetSearch();
 		resultCollection = null;
-		core.init(useSpatialTextSearch());
+		spatialSearch = useSpatialTextSearch();
+		core.init(spatialSearch);
 
 		registerNonMapSearchAPIs();
 		refreshCustomPoiFilters();
@@ -153,7 +158,27 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	private boolean useSpatialTextSearch() {
-		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get();
+		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get() && mapsWithoutSpatialSearch.isEmpty();
+	}
+
+	// the old search works while a map around the search location is older than the spatial search needs
+	public void updateSearchEngine(@Nullable LatLon location) {
+		mapsWithoutSpatialSearch = location == null ? Collections.emptyList()
+				: app.getResourceManager().getMapsWithoutSpatialSearch(location, SPATIAL_SEARCH_MAPS_RADIUS);
+		boolean spatial = useSpatialTextSearch();
+		if (spatialSearch != spatial) {
+			// as initSearchUICore, but keeps the search phrase; a running search keeps its copy of the apis
+			spatialSearch = spatial;
+			core.clearAPIs();
+			core.init(spatial);
+			registerNonMapSearchAPIs();
+			refreshCustomPoiFilters();
+		}
+	}
+
+	@NonNull
+	public List<String> getMapsWithoutSpatialSearch() {
+		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get() ? mapsWithoutSpatialSearch : Collections.emptyList();
 	}
 
 	public void refreshCustomPoiFilters() {

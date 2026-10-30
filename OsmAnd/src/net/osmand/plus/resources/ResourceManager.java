@@ -23,6 +23,8 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CachedOsmandIndexes;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -59,6 +61,7 @@ import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.router.TransportStopsRouteReader;
 import net.osmand.search.AmenitySearcher;
 import net.osmand.search.core.AmenityIndexRepository;
+import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -987,6 +990,24 @@ public class ResourceManager {
 			}
 		}
 		return readers.toArray(new BinaryMapIndexReader[0]);
+	}
+
+	@NonNull
+	public List<String> getMapsWithoutSpatialSearch(@NonNull LatLon location, int radius) {
+		QuadRect rect = MapUtils.calculate31BboxUsingRhumb(radius, location);
+		List<String> maps = new ArrayList<>();
+		for (BinaryMapReaderResource r : getFileReaders()) {
+			String fileName = r.getFileName();
+			BinaryMapIndexReader shallowReader = r.getShallowReader();
+			boolean regularMap = !fileName.endsWith(BINARY_WIKI_MAP_INDEX_EXT)
+					&& !fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
+			if (regularMap && shallowReader != null
+					&& shallowReader.containsPoiData((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom)
+					&& !SpatialTextSearchAPI.hasPoiTypesInNameIndex(shallowReader)) {
+				maps.add(fileName);
+			}
+		}
+		return maps;
 	}
 
 	public Map<String, String> getIndexFileNames() {
