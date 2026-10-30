@@ -683,7 +683,7 @@ public class MapHudLayout extends FrameLayout {
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
-		if (w > 0 && w != oldw) {
+		if (w > 0 && (w != oldw || h != oldh)) {
 			refresh();
 		}
 	}
