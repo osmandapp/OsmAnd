@@ -86,6 +86,7 @@
 		android:name="net.osmand.plus.OsmandApplication" android:configChanges="locale"
 		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true"
 		android:supportsRtl="true" android:usesCleartextTraffic="true"
+		android:networkSecurityConfig="@xml/network_security_config"
 		android:hasFragileUserData="true" android:requestLegacyExternalStorage="true"
 		android:localeConfig="@xml/locales_config">
 
