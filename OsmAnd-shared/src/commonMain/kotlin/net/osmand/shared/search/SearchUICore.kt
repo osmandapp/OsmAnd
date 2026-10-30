@@ -951,6 +951,18 @@ class SearchUICore(
 		executor.submit(task)
 	}
 
+	/**
+	 * Runs [task] on the search thread once what [search] and [shallowSearchAsync] were asked for
+	 * before it has ended, searches still waiting their turn and cancelled ones too, which end
+	 * without a word: for iOS, which closes the files they read only then. [shallowSearch] runs on
+	 * the thread that calls it and is not waited for. A Kotlin exception the task throws is
+	 * dropped; one that passes through Objective-C on its way, from a block calling Kotlin, ends
+	 * the app. Waiting for the task on the search thread never ends.
+	 */
+	fun runAfterSearch(task: () -> Unit) {
+		submit { task() }
+	}
+
 	fun isSpatialSearch(): Boolean {
 		for (api in apis) {
 			if (api is SpatialTextSearchAPI) {
