@@ -195,7 +195,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		}
 
 		if (!keepScreenAwakeReasons.isEmpty() || timeout == 0) {
-			doKeepOn(true);
+			//doKeepOn(true); <- we did exactly that at the start of the function
 		} else {
 			Message message = Message.obtain(uiHandler, this::doLock);
 			message.what = LOCK_TIMEOUT_MESSAGE;
