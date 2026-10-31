@@ -277,9 +277,12 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 	}
 
 	public void onStop(@NonNull Activity activity) {
-		lock();
-		if (!activity.isFinishing() && turnScreenOnSensor.get()) {
-			switchSensor(true);
+		if (!activity.isChangingConfigurations()) {
+			lock();
+
+			if (turnScreenOnSensor.get()) {
+				switchSensor(true);
+			}
 		}
 	}
 
