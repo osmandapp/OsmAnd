@@ -1980,6 +1980,14 @@ public class OsmandSettings {
 		TURN_SCREEN_ON_TIME_INT.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
 	}
 
+	public final CommonPreference<Boolean> KEEP_SCREEN_ON_DURING_TURNS = new BooleanPreference(this, "keep_screen_on_during_turns", false).makeProfile();
+
+	{
+		KEEP_SCREEN_ON_DURING_TURNS.setModeDefaultValue(ApplicationMode.CAR, false);
+		KEEP_SCREEN_ON_DURING_TURNS.setModeDefaultValue(ApplicationMode.BICYCLE, false);
+		KEEP_SCREEN_ON_DURING_TURNS.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
+	}
+
 	public final CommonPreference<Boolean> TURN_SCREEN_ON_SENSOR = new BooleanPreference(this, "turn_screen_on_sensor", false).makeProfile();
 
 	{

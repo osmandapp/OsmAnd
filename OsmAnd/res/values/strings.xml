@@ -3055,10 +3055,11 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator projection</string>
     <string name="keep_screen_on">Keep screen on</string>
     <string name="turn_screen_on_wake_time_descr">Select the screen timeout after waking up. (\"%1$s\" applies no timeout.)</string>
+    <string name="keep_screen_on_during_turns">Keep screen on during turns</string>
+    <string name="keep_screen_on_during_turns_descr">Keep the screen awake when approaching a navigation turn.</string>
     <string name="turn_screen_on_proximity_sensor">Proximity sensor</string>
     <string name="turn_screen_on_power_button">Power button</string>
     <string name="turn_screen_on_power_button_descr">Pressing the device power button will turn the screen on with OsmAnd on top of the lock screen.</string>
-    <string name="turn_screen_on_power_button_disabled">Disabled. Requires \'Keep screen on\' under \'Timeout after wake-up\'.</string>
     <string name="turn_screen_on_navigation_instructions">Navigation instructions</string>
     <string name="turn_screen_on_navigation_instructions_descr">Each navigation instruction will turn the screen on.</string>
     <string name="turn_screen_on_descr">Select screen wake-up options (make sure OsmAnd is in the foreground when the device is being locked):</string>
