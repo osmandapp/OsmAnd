@@ -30,6 +30,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_PLUGINS_ID = DRAWER_ITEM_ID_SCHEME + "plugins";
 	String DRAWER_SETTINGS_ID = DRAWER_ITEM_ID_SCHEME + "settings.new";
 	String DRAWER_HELP_ID = DRAWER_ITEM_ID_SCHEME + "help";
+	String DRAWER_EXIT_ID = DRAWER_ITEM_ID_SCHEME + "exit";
 	String DRAWER_BUILDS_ID = DRAWER_ITEM_ID_SCHEME + "builds";
 	String DRAWER_DIVIDER_ID = DRAWER_ITEM_ID_SCHEME + "divider";
 	String DRAWER_OSMAND_VERSION_ID = DRAWER_ITEM_ID_SCHEME + "osmand_version";
