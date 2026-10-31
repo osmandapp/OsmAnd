@@ -80,7 +80,13 @@ class BinaryMapIndexReader {
 		this.hhAdapter = BinaryHHRouteReaderAdapter(this)
 		this.poiAdapter = BinaryMapPoiReaderAdapter(this)
 		this.addressAdapter = BinaryMapAddressReaderAdapter(this)
-		init()
+		try {
+			init()
+		} catch (e: Throwable) {
+			// nobody gets the reader to close
+			runCatching { handle.close() }
+			throw e
+		}
 	}
 
 	/** Takes a path rather than a [KFile], for java callers that do not have okio on their classpath. */
