@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+	<!-- Cleartext stays permitted: android:usesCleartextTraffic is ignored once this config exists -->
+	<base-config cleartextTrafficPermitted="true">
+		<trust-anchors>
+			<!-- System store only: it has ISRG Root X1 since Android 7.1.1, so a user can still distrust it -->
+			<certificates src="system" />
+		</trust-anchors>
+	</base-config>
+</network-security-config>
