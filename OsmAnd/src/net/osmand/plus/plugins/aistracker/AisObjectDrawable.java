@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.ColorARGB;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -40,6 +41,8 @@ import net.osmand.util.MapUtils;
  */
 public class AisObjectDrawable {
 
+	private static final int NATIVE_LINE_WIDTH = 6;
+
 	private final AisTrackerPlugin plugin;
 	private final AisObject ais;
 	private final AisImagesCache imagesCache;
@@ -49,6 +52,7 @@ public class AisObjectDrawable {
 	private int visualState;
 	private MapMarker marker;
 	private VectorLine directionLine;
+	private VectorLine shapeLine;
 	private int baseOrder;
 	private String renderKey;
 	private long renderedVersion;
@@ -205,28 +209,38 @@ public class AisObjectDrawable {
 		if (!shouldDrawShape(tileBox.getZoom())) {
 			return;
 		}
-		float a;
-		float b;
-		float c;
-		float d;
 		double density = tileBox.getPixDensity();
+		double[][] outline = getShapeOutline();
+		for (int i = 0; i + 1 < outline.length; i++) {
+			canvas.drawLine((float) (x + outline[i][0] * density), (float) (y - outline[i][1] * density),
+					(float) (x + outline[i + 1][0] * density), (float) (y - outline[i + 1][1] * density), paint);
+		}
+	}
+
+	/**
+	 * Vessel outline in meters from the AIS position: x to starboard, y towards the bow.
+	 * The first point is repeated at the end to close the outline.
+	 */
+	@NonNull
+	private double[][] getShapeOutline() {
+		double a;
+		double b;
+		double c;
+		double d;
 		if (ais.getDimensionToBow() == 0 && ais.getDimensionToPort() == 0) {
-			a = (float) (ais.getDimensionToStern() * density * 0.5);
+			// Only the overall size is reported, so the shape is centered on the position
+			a = ais.getDimensionToStern() * 0.5;
 			b = a;
-			c = (float) (ais.getDimensionToStarboard() * density * 0.5);
+			c = ais.getDimensionToStarboard() * 0.5;
 			d = c;
 		} else {
-			a = (float) (ais.getDimensionToBow() * density);
-			b = (float) (ais.getDimensionToStern() * density);
-			c = (float) (ais.getDimensionToPort() * density);
-			d = (float) (ais.getDimensionToStarboard() * density);
+			a = ais.getDimensionToBow();
+			b = ais.getDimensionToStern();
+			c = ais.getDimensionToPort();
+			d = ais.getDimensionToStarboard();
 		}
-		float e = 0.5f * (c + d);
-		canvas.drawLine(x - c, y + b, x - c, y - a + e, paint);
-		canvas.drawLine(x - c, y - a + e, x - c + e, y - a, paint);
-		canvas.drawLine(x - c + e, y - a, x + d, y - a + e, paint);
-		canvas.drawLine(x + d, y - a + e, x + d, y + b, paint);
-		canvas.drawLine(x + d, y + b, x - c, y + b, paint);
+		double e = 0.5 * (c + d);
+		return new double[][] {{-c, -b}, {-c, a - e}, {-c + e, a}, {d, a - e}, {d, -b}, {-c, -b}};
 	}
 
 	public void draw(@NonNull Paint paint, @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
@@ -288,7 +302,7 @@ public class AisObjectDrawable {
 	}
 
 	public boolean hasAnyAisRenderData() {
-		return marker != null || directionLine != null;
+		return marker != null || directionLine != null || shapeLine != null;
 	}
 
 	public void updateAisRenderData(@Nullable OsmandMapTileView mapView, boolean cpaWarning,
@@ -300,9 +314,11 @@ public class AisObjectDrawable {
 		this.cpaWarning = cpaWarning;
 		int zoom = mapView == null ? 0 : mapView.getZoom();
 		AisLatLon position = ais.getPosition();
-		if (!visible || mapView == null || position == null) {
+		MapRendererView mapRenderer = mapView == null ? null : mapView.getMapRenderer();
+		if (!visible || mapRenderer == null || position == null) {
 			marker.setIsHidden(true);
 			removeDirectionLine(vectorLinesCollection);
+			removeShapeLine(vectorLinesCollection);
 			return;
 		}
 
@@ -316,6 +332,8 @@ public class AisObjectDrawable {
 		marker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(1), rotation);
 		marker.setPosition(location);
 		marker.setIsHidden(false);
+
+		updateShapeLine(position, zoom, vectorLinesCollection);
 
 		float movement = getMovement();
 		boolean drawDirection = zoom >= AisTrackerLayer.START_ZOOM_SHOW_DIRECTION
@@ -331,19 +349,16 @@ public class AisObjectDrawable {
 				builder.setLineId(ais.getMmsi());
 				builder.setBaseOrder(baseOrder + 10);
 				builder.setFillColor(NativeUtilities.createFColorARGB(Color.BLACK));
-				builder.setLineWidth(6);
+				builder.setLineWidth(NATIVE_LINE_WIDTH);
 				builder.setPoints(initialPoints);
 				directionLine = builder.buildAndAddToCollection(vectorLinesCollection);
 			}
 			if (directionLine != null) {
 				int bitmapHeight = bitmap == null ? 48 : bitmap.getHeight();
-				int inverseZoom = mapView.getMaxZoom() - zoom;
-				float zoomFactor = (float) MapUtils.getPowZoom(inverseZoom);
-				// Start slightly below the visible vessel tip. AIS icons contain transparent
-				// padding, so using the geometric icon edge leaves a noticeable gap.
-				float startOffset = bitmapHeight * 0.34f * zoomFactor;
-				float length = Math.max(movement * bitmapHeight * 0.75f * zoomFactor,
-						startOffset + bitmapHeight * 0.25f * zoomFactor);
+				float points31InPixel = get31PointsInPixel(mapRenderer);
+				// Same pixel distances as the Version 1 renderer in draw()
+				float startOffset = bitmapHeight / 4f * points31InPixel;
+				float length = startOffset + movement * bitmapHeight * points31InPixel;
 				double theta = Math.toRadians(rotation);
 				int startDx = (int) Math.ceil(-Math.sin(theta) * startOffset);
 				int startDy = (int) Math.ceil(Math.cos(theta) * startOffset);
@@ -359,11 +374,80 @@ public class AisObjectDrawable {
 		renderedZoom = mapView.getZoom() + mapView.getZoomFloatPart();
 	}
 
+	private float get31PointsInPixel(@NonNull MapRendererView mapRenderer) {
+		long tileSize31 = 1L << (31 - mapRenderer.getZoomLevel().ordinal());
+		return (float) (tileSize31 / mapRenderer.getTileSizeOnScreenInPixels());
+	}
+
+	private boolean shouldDrawNativeShape(int zoom) {
+		return shouldDrawShape(zoom) && (visualState != 1 || ais.getHeading() != INVALID_HEADING);
+	}
+
+	private float getShapeBearing() {
+		if (visualState == 1) {
+			return ais.getHeading();
+		}
+		if (!needRotation()) {
+			return 0;
+		}
+		return ais.getHeading() != INVALID_HEADING && ais.getHeading() != 0
+				? ais.getHeading() : ais.getVesselRotation();
+	}
+
+	@NonNull
+	private QVectorPointI getShapePoints(@NonNull AisLatLon position) {
+		double bearing = Math.toRadians(getShapeBearing());
+		double sin = Math.sin(bearing);
+		double cos = Math.cos(bearing);
+		double metersInLatitudeDegree = MapUtils.METERS_IN_DEGREE;
+		double metersInLongitudeDegree = metersInLatitudeDegree * Math.cos(Math.toRadians(position.getLatitude()));
+		QVectorPointI points = new QVectorPointI();
+		for (double[] point : getShapeOutline()) {
+			double east = point[0] * cos + point[1] * sin;
+			double north = point[1] * cos - point[0] * sin;
+			points.add(new PointI(
+					MapUtils.get31TileNumberX(position.getLongitude() + east / metersInLongitudeDegree),
+					MapUtils.get31TileNumberY(position.getLatitude() + north / metersInLatitudeDegree)));
+		}
+		return points;
+	}
+
+	private void updateShapeLine(@NonNull AisLatLon position, int zoom,
+			@NonNull VectorLinesCollection vectorLinesCollection) {
+		if (!shouldDrawNativeShape(zoom)) {
+			removeShapeLine(vectorLinesCollection);
+			return;
+		}
+		QVectorPointI points = getShapePoints(position);
+		if (shapeLine == null) {
+			VectorLineBuilder builder = new VectorLineBuilder();
+			builder.setLineId(-ais.getMmsi());
+			builder.setBaseOrder(baseOrder + 10);
+			builder.setFillColor(NativeUtilities.createFColorARGB(Color.BLACK));
+			builder.setLineWidth(NATIVE_LINE_WIDTH);
+			builder.setPoints(points);
+			shapeLine = builder.buildAndAddToCollection(vectorLinesCollection);
+		} else {
+			shapeLine.setPoints(points);
+		}
+		if (shapeLine != null) {
+			shapeLine.setIsHidden(false);
+		}
+	}
+
 	private void removeDirectionLine(@NonNull VectorLinesCollection vectorLinesCollection) {
 		if (directionLine != null) {
 			directionLine.setIsHidden(true);
 			vectorLinesCollection.removeLine(directionLine);
 			directionLine = null;
+		}
+	}
+
+	private void removeShapeLine(@NonNull VectorLinesCollection vectorLinesCollection) {
+		if (shapeLine != null) {
+			shapeLine.setIsHidden(true);
+			vectorLinesCollection.removeLine(shapeLine);
+			shapeLine = null;
 		}
 	}
 
@@ -374,6 +458,7 @@ public class AisObjectDrawable {
 			marker = null;
 		}
 		removeDirectionLine(vectorLinesCollection);
+		removeShapeLine(vectorLinesCollection);
 		renderKey = null;
 		renderedVersion = 0;
 		renderedZoom = -1;
