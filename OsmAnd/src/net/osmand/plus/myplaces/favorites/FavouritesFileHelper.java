@@ -36,6 +36,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class FavouritesFileHelper {
 
@@ -156,6 +157,31 @@ public class FavouritesFileHelper {
 		enqueueSave(groups, saveAllGroups, listener, waiter);
 		try {
 			waiter.await();
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			log.error(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * Blocks until the saves queued so far are finished. Must not be called on the UI thread.
+	 */
+	public void waitForPendingSaves(long timeoutMs) {
+		CountDownLatch waiter = new CountDownLatch(1);
+		synchronized (saveLock) {
+			if (!saveRunning) {
+				return;
+			}
+			if (pendingSave == null) {
+				pendingSave = new SaveBatch(Collections.emptyList(), false, null, waiter);
+			} else {
+				pendingSave.merge(Collections.emptyList(), false, null, waiter);
+			}
+		}
+		try {
+			if (!waiter.await(timeoutMs, TimeUnit.MILLISECONDS)) {
+				log.error("Favorites save did not finish in " + timeoutMs + " ms");
+			}
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 			log.error(e.getMessage(), e);
