@@ -23,8 +23,8 @@ import kotlin.math.min
  * What was typed into the search: the words already selected as results, and the unknown words
  * after them that are still searched for. Immutable object!
  *
- * A copy of `SearchPhrase` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. Java nests `NameStringMatcher` here; the copy has it in a file of its own.
+ * Based on `SearchPhrase` from OsmAnd-java. Java nests `NameStringMatcher` here; the copy has
+ * it in a file of its own.
  */
 class SearchPhrase private constructor(private val settings: SearchSettings?, private val clt: KCollator) {
 

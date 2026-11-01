@@ -9,9 +9,8 @@ import kotlin.math.floor
 /**
  * Orders the files of a search by how far their pois are from where it runs, in steps of 50 km.
  *
- * A copy of `RegionPriorityProvider` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS. Java keeps the files by step in a `TreeMap`; common Kotlin has none, so the
- * steps are walked in order by hand.
+ * Based on `RegionPriorityProvider` from OsmAnd-java. Java keeps the files by step in a
+ * `TreeMap`; common Kotlin has none, so the steps are walked in order by hand.
  */
 class RegionPriorityProvider(phrase: SearchPhrase?) {
 

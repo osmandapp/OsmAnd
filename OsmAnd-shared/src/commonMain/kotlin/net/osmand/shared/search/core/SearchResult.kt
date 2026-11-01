@@ -21,8 +21,7 @@ import kotlin.math.max
 /**
  * A result of the search, and the weight by which it is sorted.
  *
- * A copy of `SearchResult` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS.
+ * Based on `SearchResult` from OsmAnd-java.
  */
 class SearchResult {
 

@@ -33,15 +33,13 @@ import kotlin.math.min
 /**
  * An open obf file, with the index sections it carries located and the routing ones read.
  *
- * A copy of `BinaryMapIndexReader` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS, so a route can be calculated and a map read there without the C++ core. It
- * carries the structure walk in the constructor, the routing and HH sections, the map, poi and
- * address sections, `readInt` and the string table, and skips the transport section, which the
- * searches copied so far do not read. The method names are java's, so the two can be compared side
- * by side.
+ * Based on `BinaryMapIndexReader` from OsmAnd-java. It carries the structure walk in the
+ * constructor, the routing and HH sections, the map, poi and address sections, `readInt` and
+ * the string table, and skips the transport section, which the searches copied so far do not
+ * read. The method names are java's, so the two can be compared side by side.
  *
- * The read statistics java collects behind `READ_STATS` are left out: they serve the obf
- * inspection tools, which stay in OsmAnd-java.
+ * The read statistics collected behind `READ_STATS` in OsmAnd-java for OBF inspection tools are
+ * not implemented here.
  */
 class BinaryMapIndexReader {
 

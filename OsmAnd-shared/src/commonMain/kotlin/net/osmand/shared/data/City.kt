@@ -8,10 +8,9 @@ import kotlin.math.min
 /**
  * A settlement, postcode or boundary of the address section: what a street belongs to.
  *
- * A copy of `net.osmand.data.City` in OsmAnd-java, which stays there for android and tools. Its
- * [CityType] was copied earlier, out of the class, for the amenity model. Left out: the JSON
- * export, which only writes test data from OsmAnd-java, and the reading of an OSM entity, which is
- * the map generator's.
+ * Based on `net.osmand.data.City` from OsmAnd-java. Its [CityType] was copied earlier, out of
+ * the class, for the amenity model. Left out: the JSON export, which only writes test data from
+ * OsmAnd-java, and the reading of an OSM entity, which is the map generator's.
  */
 class City : MapObject {
 

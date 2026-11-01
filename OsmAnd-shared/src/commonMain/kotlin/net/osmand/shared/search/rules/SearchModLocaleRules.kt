@@ -21,9 +21,9 @@ import net.osmand.shared.search.rules.SearchModRules.SearchModRuleOwner
  * `rules_<language>_<COUNTRY>.xml`. A rule of a lower layer with the key of an upper one replaces it
  * whole, `enabled="false"` removes it.
  *
- * A copy of the query part of `SearchModLocaleRules` in OsmAnd-java, which stays there for android,
- * the OBF writer and tools; this copy is for iOS. The rules of `<index>`, `<unglue>`, the word
- * classes and `<poi>` serve only the OBF writer, as do the index rules of mirror pairs.
+ * Based on the query part of `SearchModLocaleRules` from OsmAnd-java. The rules of `<index>`,
+ * `<unglue>`, the word classes and `<poi>` serve only the OBF writer, as do the index rules of
+ * mirror pairs.
  *
  * @param layers rules files from general to specific: a lower layer replaces or disables rules of upper ones
  */

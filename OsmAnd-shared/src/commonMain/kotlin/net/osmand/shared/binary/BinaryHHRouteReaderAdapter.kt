@@ -120,11 +120,10 @@ open class HHRouteRegion : BinaryIndexPart() {
  * of a region when a route is calculated over it, and the edges of one vertex when the search
  * reaches it.
  *
- * A copy of `BinaryHHRouteReaderAdapter` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS. Java reads the vertices into a `Class<T>` chosen by the caller,
- * which is how the tools plug in their point subclasses; here they are always [NetworkDBPoint].
- * The two `bytes` fields of a vertex's edges go through a [PointSegments] pair rather than the
- * protobuf message java builds them into.
+ * Based on `BinaryHHRouteReaderAdapter` from OsmAnd-java. Java reads the vertices into a
+ * `Class<T>` chosen by the caller, which is how the tools plug in their point subclasses; here
+ * they are always [NetworkDBPoint]. The two `bytes` fields of a vertex's edges go through a
+ * [PointSegments] pair rather than the protobuf message java builds them into.
  */
 class BinaryHHRouteReaderAdapter internal constructor(private val map: BinaryMapIndexReader) {
 

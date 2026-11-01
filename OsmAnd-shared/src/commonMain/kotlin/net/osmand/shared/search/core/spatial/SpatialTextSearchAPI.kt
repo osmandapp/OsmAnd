@@ -37,10 +37,10 @@ import net.osmand.shared.util.LoggerFactory
  * searched by [SpatialTextSearch] over the maps around its location, and its results made results
  * of the search; and the amenities of a poi category read from the name index.
  *
- * A copy of `SpatialTextSearchAPI` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS. The search rules are read from [searchRulesDir], the directory of `rules*.xml`,
- * where java reads them from its classpath. The search does not time itself here: the statistics
- * of the reader java turns timing on by are not in the copy of the settings.
+ * Based on `SpatialTextSearchAPI` from OsmAnd-java. The search rules are read from
+ * [searchRulesDir], the directory of `rules*.xml`, where java reads them from its classpath.
+ * The search does not time itself here: the statistics of the reader java turns timing on by
+ * are not in the copy of the settings.
  */
 open class SpatialTextSearchAPI(
 	private val poiTypes: MapPoiTypes,

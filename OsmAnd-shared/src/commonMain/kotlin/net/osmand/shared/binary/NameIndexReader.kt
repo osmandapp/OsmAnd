@@ -13,11 +13,10 @@ import kotlin.jvm.JvmField
  * does: the keys of its string table that match a query, the blocks of atoms behind them, which it
  * keeps for the next query, and the common words of the index.
  *
- * A copy of `NameIndexReader` in OsmAnd-java, which stays there for android and tools; this copy
- * is for iOS. Left out is what serves only the obf inspection tools of OsmAnd-tools: the frequencies
- * of the suffixes of a prefix, the statistics of suffixes and boundaries, the merge methods of
- * [ValueFreq] and the prefix tree of the common words. The blocks are the messages of
- * `NameIndexData.kt`.
+ * Based on `NameIndexReader` from OsmAnd-java. Left out is what serves only the obf inspection
+ * tools of OsmAnd-tools: the frequencies of the suffixes of a prefix, the statistics of
+ * suffixes and boundaries, the merge methods of [ValueFreq] and the prefix tree of the common
+ * words. The blocks are the messages of `NameIndexData.kt`.
  */
 class NameIndexReader private constructor(
 	// read params

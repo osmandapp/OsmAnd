@@ -35,9 +35,9 @@ import net.osmand.shared.util.synchronized
  * The poi categories of the spatial search: their names in a prefix tree to match the words of a
  * query, and the amenities of a category read by the poi index of the maps.
  *
- * A copy of `SpatialPoiSearch` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. The prefix tree of the names is guarded by one lock where java takes a read-write lock:
- * the readers of a search wait for each other here, a word at a time.
+ * Based on `SpatialPoiSearch` from OsmAnd-java. The prefix tree of the names is guarded by one
+ * lock where java takes a read-write lock: the readers of a search wait for each other here, a
+ * word at a time.
  */
 class SpatialPoiSearch(types: MapPoiTypes) {
 

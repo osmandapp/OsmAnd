@@ -20,8 +20,7 @@ import kotlin.math.min
  * each matched, the groups crossed with each other a step at a time, from the objects that match the
  * whole query alone to the combinations of several, until enough results are found.
  *
- * A copy of `SpatialPipelineSearch` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS.
+ * Based on `SpatialPipelineSearch` from OsmAnd-java.
  */
 class SpatialPipelineSearch(ctx: SpatialSearchContext, tokens: List<SpatialSearchToken>) {
 

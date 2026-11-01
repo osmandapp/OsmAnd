@@ -5,8 +5,7 @@ import net.osmand.shared.data.KLatLon
 /**
  * A word of a phrase that a search result was selected for.
  *
- * A copy of `SearchWord` in OsmAnd-java, which stays there for android and tools; this copy is for
- * iOS.
+ * Based on `SearchWord` from OsmAnd-java.
  */
 class SearchWord(word: String, private val result: SearchResult?) {
 

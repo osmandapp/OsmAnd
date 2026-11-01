@@ -11,9 +11,9 @@ import net.osmand.shared.util.collections.KTLongObjectMap
  * the spatial search finds the boxes of a box in and joins two sets of boxes with, see
  * [HashSkipTileQuadTreeJoiner].
  *
- * A copy of `HashSkipTileQuadTree` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS. Left out are the statistics of the skips, `SkipStats`, which only the
- * benchmarks of OsmAnd-java read, and `TreeExtraIndex`, which nothing uses.
+ * Based on `HashSkipTileQuadTree` from OsmAnd-java. Left out are the statistics of the skips,
+ * `SkipStats`, which only the benchmarks of OsmAnd-java read, and `TreeExtraIndex`, which
+ * nothing uses.
  */
 class HashSkipTileQuadTree<T>(minZoom: Int, maxZoom: Int, indexedZooms: IntArray) {
 

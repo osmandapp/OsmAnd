@@ -44,10 +44,9 @@ import kotlin.reflect.KClass
  * find sorted, united by osm id or wikidata and cleared of duplicates, and a search of each phrase
  * typed in, one after another, cancelled by the next one.
  *
- * A copy of `SearchUICore` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. `init` of the spatial search takes the directory of the search rules, which java reads
- * from its classpath. Left out: the statistics of time and memory java keeps for a search, and the
- * test json it makes of the objects a search exports.
+ * Based on `SearchUICore` from OsmAnd-java. `init` of the spatial search takes the directory of
+ * the search rules, which java reads from its classpath. Left out: the statistics of time and
+ * memory java keeps for a search, and the test json it makes of the objects a search exports.
  */
 class SearchUICore(
 	private var poiTypes: MapPoiTypes,

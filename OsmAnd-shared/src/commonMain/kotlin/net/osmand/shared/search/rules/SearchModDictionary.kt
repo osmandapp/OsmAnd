@@ -11,8 +11,7 @@ import net.osmand.shared.util.KSearchAlgorithms
  * Spatial search (v2) word dictionaries of the [SearchModLocaleRules] of one locale, see
  * [SearchModRules.dictionary]. Immutable.
  *
- * A copy of `SearchModDictionary` in OsmAnd-java, which stays there for android and tools; this copy
- * is for iOS. Without `isIgnorable`, which nothing calls.
+ * Based on `SearchModDictionary` from OsmAnd-java. Without `isIgnorable`, which nothing calls.
  */
 class SearchModDictionary internal constructor(private val locale: String, rules: SearchModLocaleRules) {
 

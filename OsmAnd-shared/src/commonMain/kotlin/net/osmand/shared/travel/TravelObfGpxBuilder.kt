@@ -51,13 +51,13 @@ import net.osmand.shared.util.primaryCollator
  * waypoints and every tag of the route come from their poi section, and the two are tied together
  * by route_id.
  *
- * A copy of `TravelObfGpxFileReader` in the android app, which stays there; this copy is for iOS.
- * Three things are left behind with it. It was an `AsyncTask` - this is a plain call, and the
- * caller decides what thread it runs on and shows its own progress. It approximated the altitudes
- * of a track against the routing graph afterwards, which needs the router - do that to the file
- * this returns. And it sorted waypoints with the ICU collator in numeric mode, which no platform
- * here has; [compareWaypointNames] is a hand-written stand-in, so "Station 9" still comes before
- * "Station 15", but two names the collator calls equal may end up the other way round.
+ * Based on `TravelObfGpxFileReader` from the Android app. Three operations differ here. It was
+ * an `AsyncTask` - this is a plain call, and the caller decides what thread it runs on and
+ * shows its own progress. It approximated the altitudes of a track against the routing graph
+ * afterwards, which is a separate operation for the caller on the file this returns. And it
+ * sorted waypoints with the ICU collator in numeric mode, which the shared collator API does
+ * not expose; [compareWaypointNames] is a hand-written stand-in, so "Station 9" still comes
+ * before "Station 15", but two names the collator calls equal may end up the other way round.
  */
 class TravelObfGpxBuilder(private val context: TravelObfContext) {
 

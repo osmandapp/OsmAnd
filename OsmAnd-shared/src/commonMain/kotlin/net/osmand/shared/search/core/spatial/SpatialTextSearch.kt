@@ -41,10 +41,10 @@ import kotlin.math.max
  * The spatial text search: the words of a query matched against the name indexes of the maps and
  * the objects their atoms make together.
  *
- * A copy of `SpatialTextSearch` in OsmAnd-java, which stays there for android and tools; this copy
- * is for iOS. The search rules are read from [searchRulesDir], the directory of `rules*.xml`, where
- * java reads them from its classpath. Without `mainTest`, `initFile` and `searchTest`, which only the
- * diagnostics of java call, and `findObjCombinationsSimpleIteration`, which nothing calls.
+ * Based on `SpatialTextSearch` from OsmAnd-java. The search rules are read from
+ * [searchRulesDir], the directory of `rules*.xml`, where java reads them from its classpath.
+ * Without `mainTest`, `initFile` and `searchTest`, which only the diagnostics of java call, and
+ * `findObjCombinationsSimpleIteration`, which nothing calls.
  */
 class SpatialTextSearch(searchRulesDir: String) {
 

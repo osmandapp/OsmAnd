@@ -8,8 +8,8 @@ import net.osmand.shared.util.KSearchAlgorithms
  * and only burst into internal routing nodes when the bucket size strictly
  * exceeds COMPACT_COUNT (5).
  *
- * A copy of `StringPrefixTree` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. Without `simpleGet`, `printTree` and `main`, which only the diagnostics of java call.
+ * Based on `StringPrefixTree` from OsmAnd-java. Without `simpleGet`, `printTree` and `main`,
+ * which only the diagnostics of java call.
  */
 class StringPrefixTree<T> {
 

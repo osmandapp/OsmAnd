@@ -24,8 +24,7 @@ import kotlin.math.min
  * One result of the spatial search: one combination of the atoms the words of the query matched, the
  * objects of those atoms and how the result ranks.
  *
- * A copy of `SpatialSearchResult` in OsmAnd-java, which stays there for android and tools; this copy
- * is for iOS.
+ * Based on `SpatialSearchResult` from OsmAnd-java.
  */
 class SpatialSearchResult internal constructor(
 	parentList: SpatialSearchResultsList, internal val parentInd: Int, internal val preciseLatlon: KLatLon?,
