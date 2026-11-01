@@ -297,6 +297,7 @@ class ButtonPositionSize {
 				val button = buttons[i]
 				var ox = button.marginX;
 				var oy = button.marginY;
+				var fallbackCovered = Double.MAX_VALUE;
 				var j = i - 1;
 				while (j >= 0) {
 					if (iter++ > MAX_ITERATIONS) {
@@ -313,9 +314,13 @@ class ButtonPositionSize {
 						if (check.xMove || check.yMove) {
 							// if overlapped button / panel moveable save it
 							// do not overlap buttons but allow to overlap buttons over pannels
-							ox = button.marginX;
-							oy = button.marginY;
-
+							// if there is no free place further, keep the first of the least covered positions
+							val covered = coveredArea(button, buttons, i)
+							if (covered < fallbackCovered) {
+								fallbackCovered = covered
+								ox = button.marginX;
+								oy = button.marginY;
+							}
 						}
 						movedOnce = true
 						if (DEBUG_PRINT_MOVE) {
@@ -342,6 +347,16 @@ class ButtonPositionSize {
 				LOG.info("++++ Layout w=$totalWidth h=$totalHeight spc=$space");
 			}
 			return true
+		}
+
+		private fun coveredArea(button: ButtonPositionSize, buttons: List<ButtonPositionSize>, count: Int): Double {
+			var area = 0.0
+			for (k in 0 until count) {
+				if (buttons[k].isMoveDescendantsAny()) { // panels can be overlapped
+					area += KQuadRect.intersectionArea(button.bounds, buttons[k].bounds)
+				}
+			}
+			return area
 		}
 
 		private fun moveAndCheck(toMove: ButtonPositionSize, overlap: ButtonPositionSize,
