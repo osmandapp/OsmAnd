@@ -1147,4 +1147,20 @@ class OpeningHoursParserTest {
 		testInfo("05.08.2024 12:00", hours, "Open until 18:00")
 	}
 
+	@Test
+	fun testUnknownConditionAfterAnd() {
+		fun unknown(format: String) = OpeningHoursParser.parseOpenedHours(format)!!.hasUnknownCondition()
+
+		assertTrue(unknown("Apr 14-Oct 31 AND stationary_noise>95"))
+		assertTrue(unknown("Mo-Fr 06:00-20:00 and weight > 7.5"))
+		assertTrue(unknown("Mo-Fr 06:00-20:00; Sa 06:00-12:00 AND weight>7.5"))
+		assertTrue(unknown("delivery AND Mo-Fr 06:00-20:00; Sa 06:00-12:00"))
+		// both sides of AND are opening hours
+		assertFalse(unknown("Jun-Aug AND Mo-Fr 07:00-09:00"))
+		// an unknown word without AND stays as it was
+		assertFalse(unknown("Mo-Fr 06:00-20:00 \"weight>7.5 AND more\""))
+		assertFalse(unknown("Mo-Fri 06:00-20:00"))
+		assertFalse(unknown("07:30-08:30; yes @ Sa,Su,PH"))
+	}
+
 }

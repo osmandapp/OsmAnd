@@ -1146,6 +1146,20 @@ public class OpeningHoursParserTest {
 		testInfo("05.08.2024 12:00", hours, "Open until 18:00");
 	}
 
+	@Test
+	public void testUnknownConditionAfterAnd() {
+		Assert.assertTrue(parseOpenedHours("Apr 14-Oct 31 AND stationary_noise>95").hasUnknownCondition());
+		Assert.assertTrue(parseOpenedHours("Mo-Fr 06:00-20:00 and weight > 7.5").hasUnknownCondition());
+		Assert.assertTrue(parseOpenedHours("Mo-Fr 06:00-20:00; Sa 06:00-12:00 AND weight>7.5").hasUnknownCondition());
+		Assert.assertTrue(parseOpenedHours("delivery AND Mo-Fr 06:00-20:00; Sa 06:00-12:00").hasUnknownCondition());
+		// both sides of AND are opening hours
+		Assert.assertFalse(parseOpenedHours("Jun-Aug AND Mo-Fr 07:00-09:00").hasUnknownCondition());
+		// an unknown word without AND stays as it was
+		Assert.assertFalse(parseOpenedHours("Mo-Fr 06:00-20:00 \"weight>7.5 AND more\"").hasUnknownCondition());
+		Assert.assertFalse(parseOpenedHours("Mo-Fri 06:00-20:00").hasUnknownCondition());
+		Assert.assertFalse(parseOpenedHours("07:30-08:30; yes @ Sa,Su,PH").hasUnknownCondition());
+	}
+
 	private static OpeningHours parseOpenedHours(String string) {
 		return OpeningHoursParser.parseOpenedHours(string);
 	}
