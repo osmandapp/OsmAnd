@@ -556,7 +556,7 @@ public class SearchHistoryHelper {
 		entry.setPoiSubtypeKey(amenity.getSubType());
 		entry.setOpeningHours(amenity.getOpeningHours());
 		entry.setPhotoUrl(amenity.getWikiIconUrl());
-		entry.setOsmId(amenity.getOsmId());
+		entry.setOsmId(amenity.getId()); // goes back to Amenity.setId() when the entry is opened
 	}
 
 	private void applySearchResultMetadata(@NonNull HistoryEntry entry, @NonNull SearchResult searchResult) {

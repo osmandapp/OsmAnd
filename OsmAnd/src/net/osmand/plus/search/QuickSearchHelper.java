@@ -781,6 +781,7 @@ public class QuickSearchHelper implements ResourceListener {
 			amenity.setSubType(poiSubtypeKey);
 			amenity.setName(!Algorithms.isEmpty(entry.getDisplayName()) ? entry.getDisplayName() : entry.getName().getName());
 			amenity.setLocation(entry.getLat(), entry.getLon());
+			amenity.setId(entry.getOsmId());
 			if (!Algorithms.isEmpty(entry.getOpeningHours())) {
 				amenity.setOpeningHours(entry.getOpeningHours());
 			}
