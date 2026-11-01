@@ -322,7 +322,9 @@ class BinaryMapIndexReader {
 	 * Whether a routing section has roads in the zoom 14 tile of the point. A region named in
 	 * [checkedRegions] is skipped, and every region asked is added to it, so a caller asking
 	 * several readers over the same regions asks each region once.
+	 * Read failures are propagated, including a handle closed during a resource update.
 	 */
+	@Throws(Exception::class)
 	fun containsActualRouteData(x31: Int, y31: Int, checkedRegions: MutableSet<String>?): Boolean {
 		val zoomToLoad = 14
 		val x = x31 shr zoomToLoad
