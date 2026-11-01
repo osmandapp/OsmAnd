@@ -22,9 +22,8 @@ import kotlin.math.abs
  * Reads the poi section of an obf file: the tables that decode an amenity, the r-tree of boxes
  * over it, and the amenities themselves.
  *
- * A copy of `BinaryMapPoiReaderAdapter` in OsmAnd-java, which stays there for android and tools;
- * this copy is for iOS. The read statistics java collects behind its stats hooks are left out, as
- * they serve the obf inspection tools.
+ * Based on `BinaryMapPoiReaderAdapter` from OsmAnd-java. The read statistics java collects
+ * behind its stats hooks are left out, as they serve the obf inspection tools.
  *
  * Amenities are stored twice over: once in the boxes of the tree, which carry only the types they
  * hold, and once in the data blocks the boxes point at. A search walks the tree with the filter,

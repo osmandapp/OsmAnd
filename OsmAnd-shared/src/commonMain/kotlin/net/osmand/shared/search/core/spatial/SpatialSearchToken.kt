@@ -37,10 +37,9 @@ import kotlin.math.min
  * by the search rules of the locale of each map, and the atoms of the names it matched with the tile
  * trees of their places.
  *
- * A copy of `SpatialSearchToken` in OsmAnd-java, which stays there for android and tools; this copy
- * is for iOS. Without `wordSpacePrefixCache` and `wordSpaceCollatorSuffix`, which nothing reads. The
- * deleted atoms are a set of longs, the indexes of the atoms widened, read as [deletedAtoms] where java
- * also has `getDeletedAtoms()`.
+ * Based on `SpatialSearchToken` from OsmAnd-java. Without `wordSpacePrefixCache` and
+ * `wordSpaceCollatorSuffix`, which nothing reads. The deleted atoms are a set of longs, the
+ * indexes of the atoms widened, read as [deletedAtoms] where java also has `getDeletedAtoms()`.
  */
 class SpatialSearchToken(
 	globalRules: SearchModRules,

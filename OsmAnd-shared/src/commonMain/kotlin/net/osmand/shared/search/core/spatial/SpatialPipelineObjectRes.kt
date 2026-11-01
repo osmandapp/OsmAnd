@@ -8,8 +8,8 @@ import net.osmand.shared.util.collections.KTLongHashSet
  * An object of the pipeline of the spatial search, or two of them joined, with the words of the query
  * each one matched and the mask of their states.
  *
- * A copy of `SpatialPipelineObjectRes` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS. Without `allowedSlow`, `checkBuildingVsStreet` and `minType`, which nothing calls.
+ * Based on `SpatialPipelineObjectRes` from OsmAnd-java. Without `allowedSlow`,
+ * `checkBuildingVsStreet` and `minType`, which nothing calls.
  */
 class SpatialPipelineObjectRes {
 

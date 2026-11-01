@@ -15,10 +15,8 @@ import okio.buffer
  * Anything an obf file names and puts on the map: its id, where it is, and what it is called in
  * every language the file carries.
  *
- * A copy of `MapObject` in OsmAnd-java, which stays there for android and tools; this copy is for
- * iOS. `toJSON` and `parseJSON` are left out: the only things that use them are the address
- * classes, which are not copied yet, and the search history, which stays on the platform. They
- * would come back with kotlinx.serialization if the search port needs them.
+ * Based on `MapObject` from OsmAnd-java. `toJSON` and `parseJSON`, used by address
+ * serialization and search history in OsmAnd-java, are not implemented here.
  */
 abstract class MapObject : Comparable<MapObject> {
 

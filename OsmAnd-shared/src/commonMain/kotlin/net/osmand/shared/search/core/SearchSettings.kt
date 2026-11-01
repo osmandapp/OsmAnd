@@ -21,10 +21,10 @@ import kotlin.jvm.JvmStatic
  * The settings a search runs with: where, in which languages, how far, over which files and for
  * which types. Immutable object: the setters return a changed copy.
  *
- * A copy of `SearchSettings` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. The statistics of the reader (`stat`) are not copied, as they are not in the shared
- * reader, and neither is `toJSON`, which only the server calls. [parseJSON] reads the settings of
- * the search tests; as with org.json in java, numbers and booleans may also be given as strings.
+ * Based on `SearchSettings` from OsmAnd-java. The statistics of the reader (`stat`) are not
+ * copied, as they are not in the shared reader, and neither is `toJSON`, which only the server
+ * calls. [parseJSON] reads the settings of the search tests; as with org.json in java, numbers
+ * and booleans may also be given as strings.
  */
 class SearchSettings {
 

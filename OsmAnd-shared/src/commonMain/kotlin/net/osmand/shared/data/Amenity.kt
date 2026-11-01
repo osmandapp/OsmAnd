@@ -28,9 +28,9 @@ import kotlin.jvm.JvmStatic
  * A point of interest read out of the poi section of an obf file: what it is, where it is, and
  * every tag the indexer kept for it.
  *
- * A copy of `Amenity` in OsmAnd-java, which stays there for android and tools; this copy is for
- * iOS. `toJSON` and `parseJSON` are left out for the same reason as in [MapObject]. A track stored
- * in an obf file is an amenity too - [isRouteTrack] - which is how the travel code finds one.
+ * Based on `Amenity` from OsmAnd-java. `toJSON` and `parseJSON` are left out for the same
+ * reason as in [MapObject]. A track stored in an obf file is an amenity too - [isRouteTrack] -
+ * which is how the travel code finds one.
  */
 class Amenity : MapObject() {
 

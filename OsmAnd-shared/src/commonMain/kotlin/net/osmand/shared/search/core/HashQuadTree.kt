@@ -7,8 +7,8 @@ import net.osmand.shared.util.collections.KTLongObjectMap
  * Objects by the tile they are put in, a map of tile ids for each zoom: what the spatial search
  * looks up for the objects in a tile and in the tiles around it at the zooms above.
  *
- * A copy of `HashQuadTree` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. The tile ids it encodes are also what the poi reader says a tag group belongs to.
+ * Based on `HashQuadTree` from OsmAnd-java. The tile ids it encodes are also what the poi
+ * reader says a tag group belongs to.
  *
  * This is not exact QuadTree implementation -
  * It doesn't support search for containing objects for performance reasons.

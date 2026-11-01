@@ -11,8 +11,8 @@ import kotlin.math.max
  * buckets of the two trees are walked side by side, zoom against zoom, and the index of each bucket
  * skips the parent tiles the other one has nothing in.
  *
- * A copy of `HashSkipTileQuadTreeJoiner` in OsmAnd-java, which stays there for android and tools;
- * this copy is for iOS. Without the statistics of the skips, as [HashSkipTileQuadTree].
+ * Based on `HashSkipTileQuadTreeJoiner` from OsmAnd-java. Without the statistics of the skips,
+ * as [HashSkipTileQuadTree].
  *
  * @param T payload type for the first tree.
  * @param R payload type for the second tree.

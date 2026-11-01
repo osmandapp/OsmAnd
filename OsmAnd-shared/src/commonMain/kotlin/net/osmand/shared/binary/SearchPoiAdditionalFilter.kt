@@ -5,7 +5,7 @@ package net.osmand.shared.binary
  * Only the attributes the file marks as top index can be filtered this way, because only those
  * are written into the boxes of the tree.
  *
- * A copy of `BinaryMapIndexReader.SearchPoiAdditionalFilter`, which stays in OsmAnd-java.
+ * Based on `BinaryMapIndexReader.SearchPoiAdditionalFilter` from OsmAnd-java.
  */
 interface SearchPoiAdditionalFilter {
 

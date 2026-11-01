@@ -32,10 +32,9 @@ import kotlin.math.abs
  * one or more objects of it, whose names carry the region's names and parameters; the objects
  * tagged `boundary` are extra polygons of a region, its inclusions and exclusions.
  *
- * A copy of `OsmandRegions` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. Left out:
+ * Based on `OsmandRegions` from OsmAnd-java. Left out:
  * - `prepareFile()` without a path, which copies the file out of the java resources; a platform
- *   hands this copy the path of its own `regions.ocbf`;
+ *   supplies the path of its own `regions.ocbf`;
  * - `cacheAllCountries`, with the quad tree and the country lists it fills and `containsCountry`,
  *   which reads them. Only `main()` calls it, so `query` always searches the file, as it does in
  *   the apps;

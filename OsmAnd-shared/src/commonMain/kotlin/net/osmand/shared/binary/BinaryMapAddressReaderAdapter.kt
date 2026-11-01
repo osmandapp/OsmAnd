@@ -19,9 +19,8 @@ import net.osmand.shared.util.collections.KTLongArrayList
  * Reads the address section of an obf file: the settlements, postcodes and boundaries in their
  * blocks, their streets with houses and crossings, and the name index over all of them.
  *
- * A copy of `BinaryMapAddressReaderAdapter` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS. The read statistics java collects are left out, as they serve the
- * obf inspection tools.
+ * Based on `BinaryMapAddressReaderAdapter` from OsmAnd-java. The read statistics java collects
+ * are left out, as they serve the obf inspection tools.
  *
  * A settlement and its streets are stored apart: the settlement's header points at the block of
  * its streets, and each street carries its houses and the streets it crosses, with coordinates as

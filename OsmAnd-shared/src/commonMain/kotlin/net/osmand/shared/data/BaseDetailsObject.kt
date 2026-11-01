@@ -17,9 +17,9 @@ import kotlin.jvm.JvmField
  * Objects that stand for one place - an amenity from each of several files, the object the
  * renderer drew, an address - and the amenity made of them all.
  *
- * A copy of `BaseDetailsObject` in OsmAnd-java, which stays there for android and tools; this copy
- * is for iOS. Java also takes public transport stops: it keeps their amenity, matches a drawn stop
- * with a stop nearby, and lists them. Stops are not copied, so neither are those branches.
+ * Based on `BaseDetailsObject` from OsmAnd-java. Java also takes public transport stops: it
+ * keeps their amenity, matches a drawn stop with a stop nearby, and lists them. Stops are not
+ * copied, so neither are those branches.
  */
 open class BaseDetailsObject(private val lang: String?) {
 

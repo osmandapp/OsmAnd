@@ -36,8 +36,7 @@ import kotlin.math.max
 /**
  * The state of one spatial text search: the maps, the words of the query and their atoms.
  *
- * A copy of `SpatialSearchContext` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS.
+ * Based on `SpatialSearchContext` from OsmAnd-java.
  */
 class SpatialSearchContext(
 	settings: SpatialTextSearchSettings, files: List<BinaryMapIndexReader>,

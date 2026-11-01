@@ -12,9 +12,8 @@ import kotlin.math.max
  * en_US, "Switzerland_ticino_europe" is it_CH); the longest prefix wins. A map this table does not
  * cover gets "" and only the base rules.
  *
- * A copy of the search part of `SearchModLocales` in OsmAnd-java, which stays there for android,
- * the OBF writer and tools; this copy is for iOS. The statistics groups, the transliteration of
- * names and the locale of a name of a map serve only the OBF writer.
+ * Based on the search part of `SearchModLocales` from OsmAnd-java. The statistics groups, the
+ * transliteration of names and the locale of a name of a map serve only the OBF writer.
  */
 class SearchModLocales internal constructor() {
 

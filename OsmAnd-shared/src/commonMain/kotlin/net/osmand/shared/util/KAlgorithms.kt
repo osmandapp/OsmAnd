@@ -369,7 +369,7 @@ object KAlgorithms {
 	 * A map file name reduced to what decides its age: the region, without the extension and
 	 * without the format version, and with a timestamp of zeros when it carries no digits at all.
 	 *
-	 * A copy of the private `Algorithms.simplifyFileName`, which stays in OsmAnd-java.
+	 * Based on the private `Algorithms.simplifyFileName` from OsmAnd-java.
 	 */
 	fun simplifyFileName(filename: String): String {
 		var lc = filename.lowercase()
@@ -391,8 +391,8 @@ object KAlgorithms {
 	 * Orders map file names the way the app consults them: the newest build of a region first, and
 	 * a file with no timestamp last of its region.
 	 *
-	 * A copy of `Algorithms.getStringVersionComparator`, which stays in OsmAnd-java. Note that it
-	 * is descending - the minus is in the original.
+	 * Based on `Algorithms.getStringVersionComparator` from OsmAnd-java. Note that it is
+	 * descending - the minus is in the original.
 	 */
 	fun compareFileVersions(f1: String, f2: String): Int =
 		-simplifyFileName(f1).compareTo(simplifyFileName(f2))

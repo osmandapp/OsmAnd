@@ -30,8 +30,8 @@ import kotlin.math.min
  * combination, one atom of each word, and the objects of the atoms read to check the houses, the refs
  * and the crossings of the streets.
  *
- * A copy of `SpatialSearchResultsList` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS. Without `getRawAtomsSumId`, which only a line commented out in java calls.
+ * Based on `SpatialSearchResultsList` from OsmAnd-java. Without `getRawAtomsSumId`, which only
+ * a line commented out in java calls.
  */
 class SpatialSearchResultsList : Comparable<SpatialSearchResultsList> {
 

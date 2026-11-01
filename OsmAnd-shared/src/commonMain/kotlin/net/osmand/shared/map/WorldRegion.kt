@@ -12,8 +12,7 @@ import kotlin.jvm.JvmStatic
  * its names, the maps it can be downloaded as, and its boundary. [OsmandRegions] reads them all
  * out of `regions.ocbf` and hangs them into one tree under [WORLD].
  *
- * A copy of `WorldRegion` in OsmAnd-java, which stays there for android and tools; this copy is for
- * iOS. It is not `Serializable`.
+ * Based on `WorldRegion` from OsmAnd-java. It is not `Serializable`.
  */
 open class WorldRegion(regionFullName: String, downloadName: String?) {
 

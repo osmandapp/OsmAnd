@@ -34,8 +34,8 @@ import net.osmand.shared.util.collections.KTIntArrayList
  * name, and the ones that stand for an object the map shows, found by its osm id, its wikidata or
  * its names and made into one [BaseDetailsObject].
  *
- * A copy of `AmenitySearcher` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. The public transport stops are left out, with the model of public transport.
+ * Based on `AmenitySearcher` from OsmAnd-java. The public transport stops are left out, with
+ * the model of public transport.
  */
 class AmenitySearcher(private val mapPoiTypes: MapPoiTypes?) {
 

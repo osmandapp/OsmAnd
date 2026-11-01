@@ -8,10 +8,9 @@ import net.osmand.shared.util.KStringMatcher
  * Whether a name matches a part of what was typed, the way the search compares names: through the
  * collator, in one of the [KStringMatcherMode]s.
  *
- * A copy of `SearchPhrase.NameStringMatcher` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS. Java nests it in `SearchPhrase`, and here it is a class of its own,
- * so that `OsmandRegions` can use it before the phrase is copied. An empty name matches nothing;
- * java also takes a null one, which [matchesName] does.
+ * Based on `SearchPhrase.NameStringMatcher` from OsmAnd-java. It is a separate class here,
+ * available to both `SearchPhrase` and `OsmandRegions`. An empty name matches nothing; java
+ * also takes a null one, which [matchesName] does.
  */
 class NameStringMatcher(namePart: String, mode: KStringMatcherMode) : KStringMatcher {
 

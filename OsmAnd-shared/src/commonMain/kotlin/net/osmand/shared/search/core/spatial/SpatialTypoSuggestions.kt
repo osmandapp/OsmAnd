@@ -14,9 +14,8 @@ import kotlin.math.min
  * that names at most MAX_OBJECTS objects is corrected to a word one edit away that names RATIO times as many objects
  * (any number when it names none). The rule was chosen on query logs and synthetic typos, see osmandapp/OsmAnd#5409.
  *
- * A copy of `SpatialTypoSuggestions` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. The neighbours of the words are kept by the word itself, as java's `IdentityHashMap`: a word
- * of a query is equal only to itself.
+ * Based on `SpatialTypoSuggestions` from OsmAnd-java. The neighbours of the words are kept by
+ * the word itself, as java's `IdentityHashMap`: a word of a query is equal only to itself.
  */
 internal class SpatialTypoSuggestions(private val ctx: SpatialSearchContext) {
 

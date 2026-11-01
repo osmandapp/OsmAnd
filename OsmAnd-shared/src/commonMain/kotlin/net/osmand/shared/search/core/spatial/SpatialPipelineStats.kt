@@ -8,9 +8,8 @@ import kotlin.math.min
 /**
  * The masks of the objects of the pipeline in the log of a search.
  *
- * A copy of `SpatialPipelineStats` in OsmAnd-java, which stays there for android and tools; this copy
- * is for iOS. Only `printTree`, which the log of the pipeline prints: `printTokenTree` and
- * `evaluateMaskIntersections` are called by nothing.
+ * Based on `SpatialPipelineStats` from OsmAnd-java. Only `printTree`, which the log of the
+ * pipeline prints: `printTokenTree` and `evaluateMaskIntersections` are called by nothing.
  */
 object SpatialPipelineStats {
 

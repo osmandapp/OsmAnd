@@ -9,9 +9,9 @@ import kotlin.jvm.JvmField
  * A poi section of an obf file: the box it covers, the tables that decode the numbers an amenity
  * is stored as, and the tag groups of the administrative areas the amenities sit in.
  *
- * A copy of `BinaryMapPoiReaderAdapter.PoiRegion` in OsmAnd-java, which stays there for android
- * and tools; this copy is for iOS. The tables are read lazily, the first time something is read
- * out of the section, so a file that is never searched never pays for them.
+ * Based on `BinaryMapPoiReaderAdapter.PoiRegion` from OsmAnd-java. The tables are read lazily,
+ * the first time something is read out of the section, so a file that is never searched never
+ * pays for them.
  */
 class PoiRegion : BinaryIndexPart() {
 

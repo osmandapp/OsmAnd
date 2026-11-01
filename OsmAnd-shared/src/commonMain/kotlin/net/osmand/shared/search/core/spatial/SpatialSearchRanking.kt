@@ -17,8 +17,7 @@ import kotlin.math.min
  * One bounded score in place of tiers 4..11 of [SpatialSearchResult.compare], so a large gap
  * on one signal can outweigh a small gap on another. Weights fitted on spatial_search/preferences.jsonl.
  *
- * A copy of `SpatialSearchRanking` in OsmAnd-java, which stays there for android and tools; this copy
- * is for iOS.
+ * Based on `SpatialSearchRanking` from OsmAnd-java.
  */
 class SpatialSearchRanking {
 

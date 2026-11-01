@@ -10,10 +10,9 @@ import kotlin.jvm.JvmField
  * A map section of an obf file: the table that turns a tag and a value into a number and back, and
  * the r-tree roots, one per zoom range.
  *
- * A copy of `BinaryMapIndexReader.MapIndex` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS. The encoding table is what makes a [BinaryMapDataObject] readable:
- * the objects carry numbers, and only the section that wrote them knows what they mean, which is
- * why every object keeps the index it came from.
+ * Based on `BinaryMapIndexReader.MapIndex` from OsmAnd-java. The encoding table is what makes a
+ * [BinaryMapDataObject] readable: the objects carry numbers, and only the section that wrote
+ * them knows what they mean, which is why every object keeps the index it came from.
  *
  * The layer sets hold a handful of ids each, so they are plain sets of boxed ints rather than a
  * primitive set copied in from trove.

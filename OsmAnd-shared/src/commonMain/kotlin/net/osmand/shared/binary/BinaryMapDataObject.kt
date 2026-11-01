@@ -12,11 +12,10 @@ import kotlin.math.sqrt
  * One object of a map section: its points in 31 coordinates, the numbers of its tags, and its
  * names. The numbers mean nothing without [mapIndex], which holds the table that decodes them.
  *
- * A copy of `BinaryMapDataObject` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS. One difference from java: where java hands back a null it read - a name the
- * string table had nothing for, a type its section has no rule for - this answers "" or leaves the
- * entry out instead of throwing; the reader fills names and their order together, so no object
- * read out of a file gets there.
+ * Based on `BinaryMapDataObject` from OsmAnd-java. One difference from java: where java hands
+ * back a null it read - a name the string table had nothing for, a type its section has no rule
+ * for - this answers "" or leaves the entry out instead of throwing; the reader fills names and
+ * their order together, so no object read out of a file gets there.
  */
 class BinaryMapDataObject {
 

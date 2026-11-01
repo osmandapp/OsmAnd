@@ -58,9 +58,9 @@ import kotlin.math.abs
  * streets of a settlement, houses and crossings of a street, and a location typed or pasted as a
  * link; with their constants and the cache of settlements the address search keeps.
  *
- * A copy of `SearchCoreFactory` in OsmAnd-java, which stays there for android and tools; this copy
- * is for iOS. The statistics of the reader are not kept, so where java hands a result to the reader
- * and answers whether statistics are kept, the copy answers false, as java does without them.
+ * Based on `SearchCoreFactory` from OsmAnd-java. The statistics of the reader are not kept, so
+ * where java hands a result to the reader and answers whether statistics are kept, the copy
+ * answers false, as java does without them.
  */
 object SearchCoreFactory {
 

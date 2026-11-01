@@ -14,10 +14,10 @@ import kotlin.concurrent.Volatile
  * use. A missing or broken file is logged and searched without its rules: rules refine the search,
  * they must not stop it.
  *
- * A copy of `SearchModRules.forSearch()` of OsmAnd-java, which stays there for android, the OBF
- * writer and tools; this copy is for iOS. It reads what the search reads there: `<query>`, the query
- * forms of mirror pairs and the map prefixes of `<locales>`. The files are read from a directory,
- * the one OsmAnd-java packs them from (`resources/abbr`), not from the classpath.
+ * Based on `SearchModRules.forSearch()` from OsmAnd-java. It reads what the search reads there:
+ * `<query>`, the query forms of mirror pairs and the map prefixes of `<locales>`. The files are
+ * read from a directory, the one OsmAnd-java packs them from (`resources/abbr`), not from the
+ * classpath.
  */
 class SearchModRules private constructor(private val resourceDir: String) {
 
