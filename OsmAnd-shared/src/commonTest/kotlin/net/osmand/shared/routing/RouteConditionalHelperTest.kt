@@ -56,6 +56,30 @@ class RouteConditionalHelperTest {
 	}
 
 	@Test
+	fun testHoursJoinedToAnUnknownConditionChangeNothing() {
+		val region = region(
+			"highway" to "primary",
+			"motorcycle:conditional" to "no @ (Jan 1-Dec 31 AND stationary_noise>95)"
+		)
+		assertTrue(region.quickGetEncodingRule(2)!!.conditional())
+
+		val road = road(region, 1, 2)
+		val before = road.types!!.toList()
+		helper.processConditionalTags(road, 0L)
+		assertEquals(before, road.types!!.toList())
+	}
+
+	@Test
+	fun testHoursJoinedToOtherHoursStillApply() {
+		val region = region("highway" to "primary", "access:conditional" to "no @ (Jan 1-Dec 31 AND Mo-Su)")
+
+		val road = road(region, 1, 2)
+		helper.processConditionalTags(road, 0L)
+
+		assertTrue(tagsOf(road).contains("access" to "no"), tagsOf(road).toString())
+	}
+
+	@Test
 	fun testPointTypesGetTheirConditionalsResolvedToo() {
 		val region = region("highway" to "primary", "access:conditional" to "no @ (24/7)")
 		val road = road(region, 1)

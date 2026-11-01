@@ -43,8 +43,9 @@ class RouteTypeRule(t: String, v: String?) {
 	/** A single `value @ (opening hours)` alternative of a `*:conditional` tag. */
 	class RouteTypeCondition internal constructor(val value: String?, val condition: String) {
 
+		// "Mo-Fr AND weight>7.5" can't be checked, the same as "weight>7.5" alone
 		internal val hours: OpeningHoursParser.OpeningHours? =
-			OpeningHoursParser.parseOpenedHours(condition)
+			OpeningHoursParser.parseOpenedHours(condition)?.takeUnless { it.hasUnknownCondition() }
 
 		/** Index of the rule this condition resolves to, assigned by the owning route region. */
 		var ruleId: Int = 0

@@ -43,6 +43,7 @@ public class OpeningHoursParser {
 	private static final int LAST_NTH_WEEKDAY = 5;
 	private static final int DAYS_IN_WEEK = 7;
 	private static final int NTH_WEEKDAY_FROM_END_OFFSET = LAST_NTH_WEEKDAY;
+	private static final String CONDITION_AND = "and";
 
 	private static boolean twelveHourFormatting;
 	private static DateFormat twelveHourFormatter;
@@ -166,6 +167,7 @@ public class OpeningHoursParser {
 		private ArrayList<OpeningHoursRule> rules;
 		private String original;
 		private int sequenceCount;
+		private boolean unknownCondition;
 
 		public static class Info {
 
@@ -310,6 +312,14 @@ public class OpeningHoursParser {
 		 */
 		public void addRules(List<? extends OpeningHoursRule> rules) {
 			this.rules.addAll(rules);
+		}
+
+		/**
+		 * @return true when the original string also requires a condition that is not opening hours,
+		 * for example "Mo-Fr 06:00-20:00 AND weight>7.5", so these hours alone don't describe it
+		 */
+		public boolean hasUnknownCondition() {
+			return unknownCondition;
 		}
 
 		public int getSequenceCount() {
@@ -2030,7 +2040,11 @@ public class OpeningHoursParser {
 		}
 	}
 
-	public static void parseRuleV2(String r, int sequenceIndex, List<OpeningHoursRule> rules) {
+	/**
+	 * @return true when the rule is joined by AND with a condition that is not opening hours, for
+	 * example "Mo-Fr 06:00-20:00 AND weight>7.5". The parsed rule keeps only the opening hours.
+	 */
+	public static boolean parseRuleV2(String r, int sequenceIndex, List<OpeningHoursRule> rules) {
 		r = r.trim();
 
 		final String[] daysStr = new String[]{"mo", "tu", "we", "th", "fr", "sa", "su"};
@@ -2057,7 +2071,7 @@ public class OpeningHoursParser {
 			Arrays.fill(months, true);
 			basic.addTimeRange(0, 24 * 60);
 			rules.add(basic);
-			return;
+			return false;
 		}
 		List<Token> tokens = new ArrayList<>();
 		int startWord = 0;
@@ -2169,7 +2183,19 @@ public class OpeningHoursParser {
 				}
 			}
 		}
+		boolean hasAnd = false;
+		boolean hasUnknownToken = false;
+		for (Token t : tokens) {
+			if (t.type == TokenType.TOKEN_UNKNOWN) {
+				if (CONDITION_AND.equals(t.text)) {
+					hasAnd = true;
+				} else {
+					hasUnknownToken = true;
+				}
+			}
+		}
 		buildRule(basic, tokens, rules);
+		return hasAnd && hasUnknownToken;
 	}
 
 	private static void buildRule(BasicOpeningHourRule basic, List<Token> tokens, List<OpeningHoursRule> rules) {
@@ -2564,8 +2590,8 @@ public class OpeningHoursParser {
 	 * @param r the string to parse
 	 * @return BasicRule if the String is successfully parsed and UnparseableRule otherwise
 	 */
-	public static void parseRules(String r, int sequenceIndex, List<OpeningHoursRule> rules) {
-		parseRuleV2(r, sequenceIndex, rules);
+	public static boolean parseRules(String r, int sequenceIndex, List<OpeningHoursRule> rules) {
+		return parseRuleV2(r, sequenceIndex, rules);
 	}
 
 	/**
@@ -2588,7 +2614,9 @@ public class OpeningHoursParser {
 			for (String r : rules) {
 				// check if valid
 				List<OpeningHoursRule> rList = new ArrayList<>();
-				parseRules(r, i, rList);
+				if (parseRules(r, i, rList)) {
+					rs.unknownCondition = true;
+				}
 				for (OpeningHoursRule rule : rList) {
 					if (rule instanceof BasicOpeningHourRule) {
 						basicRules.add((BasicOpeningHourRule) rule);
