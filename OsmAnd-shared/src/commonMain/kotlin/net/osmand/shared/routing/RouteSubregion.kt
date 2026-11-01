@@ -37,10 +37,6 @@ class RouteSubregion {
 	@JvmField
 	var subregions: MutableList<RouteSubregion>? = null
 
-	/** Objects of this node once it has been read, cleared as soon as they are handed out. */
-	@JvmField
-	var dataObjects: MutableList<RouteDataObject?>? = null
-
 	constructor(routeReg: RouteRegion) {
 		this.routeReg = routeReg
 	}

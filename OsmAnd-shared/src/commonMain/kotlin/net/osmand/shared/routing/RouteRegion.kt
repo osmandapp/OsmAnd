@@ -1,8 +1,11 @@
 package net.osmand.shared.routing
 
 import net.osmand.shared.binary.BinaryIndexPart
+import net.osmand.shared.util.KLock
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.collections.KTIntObjectMap
+import net.osmand.shared.util.synchronized
+import kotlin.concurrent.Volatile
 import kotlin.jvm.JvmField
 import kotlin.math.max
 import kotlin.math.min
@@ -21,13 +24,22 @@ class RouteRegion : BinaryIndexPart() {
 	@JvmField
 	var regionsRead: Int = 0
 
+	/**
+	 * The rule table. Routing adds rules while it calculates ([findOrCreateRouteType]), and the
+	 * region is shared by the readers of its file, so a rule added then goes into a new table that
+	 * takes the place of this one: a thread reading the table reads a whole one.
+	 */
 	@JvmField
+	@Volatile
 	var routeEncodingRules: MutableList<RouteTypeRule?> = ArrayList()
 
 	@JvmField
 	var routeEncodingRulesBytes: Int = 0
 
+	@Volatile
 	private var decodingRules: MutableMap<String, Int>? = null
+
+	private val rulesLock = KLock()
 
 	@JvmField
 	var subregions: MutableList<RouteSubregion> = ArrayList()
@@ -86,16 +98,20 @@ class RouteRegion : BinaryIndexPart() {
 
 	/** Index of the rule for [tag]/[value], or -1. */
 	fun searchRouteEncodingRule(tag: String, value: String?): Int {
-		var rules = decodingRules
-		if (rules == null) {
-			rules = LinkedHashMap()
-			for (i in 1 until routeEncodingRules.size) {
-				val rt = routeEncodingRules[i] ?: continue
-				rules[rt.getTag() + "#" + (rt.getValue() ?: "")] = i
-			}
-			decodingRules = rules
+		val rules = decodingRules ?: synchronized(rulesLock) {
+			decodingRules ?: buildDecodingRules().also { decodingRules = it }
 		}
 		return rules[tag + "#" + (value ?: "")] ?: -1
+	}
+
+	private fun buildDecodingRules(): MutableMap<String, Int> {
+		val rules = LinkedHashMap<String, Int>()
+		val table = routeEncodingRules
+		for (i in 1 until table.size) {
+			val rt = table[i] ?: continue
+			rules[rt.getTag() + "#" + (rt.getValue() ?: "")] = i
+		}
+		return rules
 	}
 
 	fun getNameTypeRule(): Int = nameTypeRule
@@ -120,6 +136,10 @@ class RouteRegion : BinaryIndexPart() {
 		if (append && id > 0) {
 			decodingRules?.put(rt.getTag() + "#" + (rt.getValue() ?: ""), id)
 		}
+		initSpecialRule(id, tags, `val`)
+	}
+
+	private fun initSpecialRule(id: Int, tags: String, `val`: String?) {
 		if (tags == "name") {
 			nameTypeRule = id
 		} else if (tags == "ref") {
@@ -156,7 +176,11 @@ class RouteRegion : BinaryIndexPart() {
 		}
 	}
 
-	/** Resolves every conditional rule to the plain rule it stands for while the condition holds. */
+	/**
+	 * Resolves every conditional rule to the plain rule it stands for while the condition holds. Runs
+	 * as the rules are read, before any reader looks them up, so the rules it adds go into the table
+	 * in place rather than into copies of it.
+	 */
 	fun completeRouteEncodingRules() {
 		for (i in routeEncodingRules.indices) {
 			val rtr = routeEncodingRules[i]
@@ -164,7 +188,12 @@ class RouteRegion : BinaryIndexPart() {
 				val tag = rtr.getNonConditionalTag()
 				for (c in rtr.getConditions()!!) {
 					if (c.value != null) {
-						c.ruleId = findOrCreateRouteType(tag, c.value)
+						var ruleId = searchRouteEncodingRule(tag, c.value)
+						if (ruleId == -1) {
+							ruleId = routeEncodingRules.size
+							initRouteEncodingRule(ruleId, tag, c.value)
+						}
+						c.ruleId = ruleId
 					}
 				}
 			}
@@ -301,13 +330,48 @@ class RouteRegion : BinaryIndexPart() {
 		return rdo
 	}
 
-	fun findOrCreateRouteType(tag: String, value: String?): Int {
+	/**
+	 * The rule for [tag]/[value], added when the region has none. The table and its index are copied
+	 * with the rule added and then put in place of the old ones, the table first, so that a thread
+	 * finding the rule in the index finds it in the table.
+	 */
+	fun findOrCreateRouteType(tag: String, value: String?): Int = synchronized(rulesLock) {
 		var ruleId = searchRouteEncodingRule(tag, value)
 		if (ruleId == -1) {
 			ruleId = routeEncodingRules.size
-			initRouteEncodingRule(ruleId, tag, value)
+			val rt = RouteTypeRule(tag, value)
+			val table = ArrayList(routeEncodingRules)
+			table.add(rt)
+			val index = LinkedHashMap(decodingRules ?: buildDecodingRules())
+			if (ruleId > 0) {
+				index[rt.getTag() + "#" + (rt.getValue() ?: "")] = ruleId
+			}
+			routeEncodingRules = table
+			decodingRules = index
+			initSpecialRule(ruleId, tag, value)
 		}
-		return ruleId
+		ruleId
+	}
+
+	/** Publishes complete rules while the file's structure lock is held. */
+	internal fun initEncodingRulesFrom(source: RouteRegion) = synchronized(rulesLock) {
+		directionForward = source.directionForward
+		directionBackward = source.directionBackward
+		maxheightForward = source.maxheightForward
+		maxheightBackward = source.maxheightBackward
+		directionTrafficSignalsForward = source.directionTrafficSignalsForward
+		directionTrafficSignalsBackward = source.directionTrafficSignalsBackward
+		trafficSignals = source.trafficSignals
+		stopSign = source.stopSign
+		stopMinor = source.stopMinor
+		giveWaySign = source.giveWaySign
+		nameTypeRule = source.nameTypeRule
+		refTypeRule = source.refTypeRule
+		destinationTypeRule = source.destinationTypeRule
+		destinationRefTypeRule = source.destinationRefTypeRule
+		routeEncodingRulesBytes = source.routeEncodingRulesBytes
+		routeEncodingRules = source.routeEncodingRules
+		decodingRules = source.decodingRules
 	}
 
 	companion object {

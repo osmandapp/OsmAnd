@@ -1,33 +1,39 @@
 package net.osmand.shared.binary
 
+import net.osmand.shared.IndexConstants
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KLock
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.synchronized
+import okio.IOException
 
 /**
- * The readers of one obf file, one for each [BinaryMapReaderResourceType], so that the searches, the
- * routing and the poi of a file each read it through a file handle of their own.
+ * The readers of one obf file: the first one walks the file's structure, and each
+ * [BinaryMapReaderResourceType] gets a reader of its own over that structure, so that the searches,
+ * the routing and the poi of a file read it at the same time through file handles of their own.
+ * A copy of `BinaryMapReaderResource` in the android app.
  *
- * A copy of `BinaryMapReaderResource` in the android app, which stays there; this copy is for iOS.
- * It differs in two things:
- * - every reader walks the file's structure itself, rather than sharing the structure the first
- *   reader walked: reading fills that structure in as it goes (the poi categories, the map encoding
- *   rules, the routing trees), so readers on different threads must not share it;
- * - the first reader is opened when a reader is first asked for, not when the file is indexed, and
- *   it is then the reader of the first type asked for, so a file read for one purpose is walked once.
+ * Android is handed the first reader when it indexes the file; here it is opened the first time a
+ * reader is asked for, and a file whose format version is not [IndexConstants.BINARY_MAP_VERSION]
+ * gets none, as android leaves such a file out when indexing. Files are walked and opened outside
+ * the lock, so that closing a file or asking what it holds does not wait for another thread.
  *
- * A file is walked outside the lock, so that closing the file or asking what it holds does not wait
- * for a walk on another thread. A file that cannot be read - missing, being replaced, damaged - has
- * no readers: the error is logged once and every reader asked for is null, until the file is handed
- * over again as a new resource.
+ * A failed initial read or a copy detecting a changed file size prevents further opens until the
+ * registry replaces this resource. Readers already published remain available until [close]. A
+ * copy that fails to open for another reason is retried on the next request.
  */
-class BinaryMapReaderResource(private val file: KFile) {
+class BinaryMapReaderResource internal constructor(
+	private val file: KFile,
+	private val openReader: (BinaryMapIndexReader?) -> BinaryMapIndexReader
+) {
+
+	constructor(file: KFile) : this(file, { reference ->
+		if (reference == null) BinaryMapIndexReader(file) else BinaryMapIndexReader(reference)
+	})
 
 	private val lock = KLock()
 	private val readers = arrayOfNulls<BinaryMapIndexReader>(BinaryMapReaderResourceType.entries.size)
 	private var initialReader: BinaryMapIndexReader? = null
-	private var initialReaderTaken = false
 	private var failed = false
 	private var closed = false
 
@@ -43,58 +49,29 @@ class BinaryMapReaderResource(private val file: KFile) {
 			if (opened != null || closed || failed) {
 				return opened
 			}
-			val initialReader = initialReader
-			if (initialReader != null && !initialReaderTaken) {
-				initialReaderTaken = true
-				readers[type.ordinal] = initialReader
-				return initialReader
-			}
 		}
-		val reader = open() ?: return null
-		var unused: BinaryMapIndexReader? = null
-		val result = synchronized(lock) {
-			val opened = readers[type.ordinal]
-			if (closed || opened != null) {
-				// closed meanwhile, or another thread opened the same type first
-				unused = reader
-				opened
-			} else {
-				readers[type.ordinal] = reader
-				if (initialReader == null) {
-					initialReader = reader
-					initialReaderTaken = true
-				}
-				reader
-			}
-		}
-		unused?.let { close(it) }
-		return result
+		val initialReader = getShallowReader() ?: return null
+		return open(
+			open = { openReader(initialReader) },
+			remembered = { it is ObfFileChangedException },
+			opened = { readers[type.ordinal] },
+			keep = { readers[type.ordinal] = it }
+		)
 	}
 
-	/**
-	 * A reader to ask what the file holds - its sections, their boxes - but not to read with: it is
-	 * also the reader of the first type asked for, which may be reading on another thread.
-	 */
+	/** The reader that walked the file, to ask what the file holds - its sections, their boxes - not to read with. */
 	fun getShallowReader(): BinaryMapIndexReader? {
 		synchronized(lock) {
 			if (initialReader != null || closed || failed) {
 				return initialReader
 			}
 		}
-		val reader = open() ?: return null
-		var unused: BinaryMapIndexReader? = null
-		val result = synchronized(lock) {
-			val initialReader = initialReader
-			if (closed || initialReader != null) {
-				unused = reader
-				initialReader
-			} else {
-				this.initialReader = reader
-				reader
-			}
-		}
-		unused?.let { close(it) }
-		return result
+		return open(
+			open = { walk() },
+			remembered = { true },
+			opened = { initialReader },
+			keep = { initialReader = it }
+		)
 	}
 
 	fun getFile(): KFile = file
@@ -109,10 +86,7 @@ class BinaryMapReaderResource(private val file: KFile) {
 			closed = true
 			initialReader?.let { closing.add(it) }
 			for (i in readers.indices) {
-				val reader = readers[i]
-				if (reader != null && reader !== initialReader) {
-					closing.add(reader)
-				}
+				readers[i]?.let { closing.add(it) }
 				readers[i] = null
 			}
 			initialReader = null
@@ -136,15 +110,55 @@ class BinaryMapReaderResource(private val file: KFile) {
 
 	fun isUseForPublicTransport(): Boolean = synchronized(lock) { useForPublicTransport }
 
-	// without the lock: a walk of a big file takes hundreds of milliseconds
-	private fun open(): BinaryMapIndexReader? {
-		return try {
-			BinaryMapIndexReader(file)
-		} catch (e: Exception) {
-			log.error("Fail to initialize ${file.name()}", e)
-			synchronized(lock) { failed = true }
-			null
+	private fun walk(): BinaryMapIndexReader {
+		val reader = openReader(null)
+		if (reader.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
+			close(reader)
+			throw IOException("${file.name()} has version ${reader.getVersion()}, not ${IndexConstants.BINARY_MAP_VERSION}")
 		}
+		return reader
+	}
+
+	/**
+	 * Opens a reader without the lock - a walk of a big file takes hundreds of milliseconds - and
+	 * keeps it, unless the file was closed meanwhile or another thread opened the same reader first,
+	 * in which case that one is returned and this one closed. An error [remembered] prevents any
+	 * further readers from being published, including opens already in progress.
+	 */
+	private fun open(
+		open: () -> BinaryMapIndexReader,
+		remembered: (Exception) -> Boolean,
+		opened: () -> BinaryMapIndexReader?,
+		keep: (BinaryMapIndexReader) -> Unit
+	): BinaryMapIndexReader? {
+		val reader = try {
+			open()
+		} catch (e: Exception) {
+			val report = if (remembered(e)) {
+				synchronized(lock) {
+					val firstFailure = !failed && !closed
+					failed = true
+					firstFailure
+				}
+			} else {
+				true
+			}
+			if (report) log.error("Fail to initialize ${file.name()}", e)
+			return null
+		}
+		var unused: BinaryMapIndexReader? = null
+		val result = synchronized(lock) {
+			val other = opened()
+			if (closed || failed || other != null) {
+				unused = reader
+				other
+			} else {
+				keep(reader)
+				reader
+			}
+		}
+		unused?.let { close(it) }
+		return result
 	}
 
 	private fun close(reader: BinaryMapIndexReader) {

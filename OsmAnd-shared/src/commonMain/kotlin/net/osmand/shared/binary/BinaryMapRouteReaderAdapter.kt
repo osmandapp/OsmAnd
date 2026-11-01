@@ -9,6 +9,7 @@ import net.osmand.shared.util.collections.KTIntObjectMap
 import net.osmand.shared.util.collections.KTLongArrayList
 import net.osmand.shared.util.collections.KTLongObjectMap
 import net.osmand.shared.util.internString
+import net.osmand.shared.util.synchronized
 
 /**
  * Reads the routing section of an obf file: the encoding rules of a [RouteRegion], the r-tree of
@@ -40,7 +41,7 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 
 	private fun readInt(): Long = map.readInt()
 
-	internal fun readRouteIndex(region: RouteRegion) {
+	internal fun readRouteIndex(region: RouteRegion, readSubregions: Boolean = true) {
 		var routeEncodingRule = 1
 		var routeEncodingRulesSize = 0L
 		while (true) {
@@ -62,6 +63,10 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 					region.routeEncodingRulesBytes = (codedIS.getTotalBytesRead() - routeEncodingRulesSize).toInt()
 				}
 				OsmAndRoutingIndex.ROOTBOXES_FIELD_NUMBER, OsmAndRoutingIndex.BASEMAPBOXES_FIELD_NUMBER -> {
+					if (!readSubregions) {
+						codedIS.skipRawBytes(readInt())
+						continue
+					}
 					val subregion = RouteSubregion(region)
 					subregion.length = readInt()
 					subregion.filePointer = codedIS.getTotalBytesRead()
@@ -235,9 +240,8 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 	private fun readRouteTreeData(
 		routeTree: RouteSubregion, idTables: KTLongArrayList,
 		restrictions: KTLongObjectMap<RestrictionInfo>
-	) {
+	): List<RouteDataObject?> {
 		val dataObjects = ArrayList<RouteDataObject?>()
-		routeTree.dataObjects = dataObjects
 		idTables.clear()
 		restrictions.clear()
 		var stringTable: List<String>? = null
@@ -288,7 +292,7 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 							}
 						}
 					}
-					return
+					return dataObjects
 				}
 				RouteDataBlock.DATAOBJECTS_FIELD_NUMBER -> {
 					val length = codedIS.readRawVarint32()
@@ -443,26 +447,26 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 		}
 	}
 
-	fun initRouteRegion(routeReg: RouteRegion) {
+	fun initRouteRegion(routeReg: RouteRegion) = synchronized(map.structureLock) {
 		if (routeReg.routeEncodingRules.isEmpty()) {
+			val parsed = RouteRegion()
 			codedIS.seek(routeReg.filePointer)
-			val oldLimit = codedIS.pushLimitLong(routeReg.length)
-			readRouteIndex(routeReg)
-			codedIS.popLimit(oldLimit)
+			codedIS.withLimit(routeReg.length) {
+				readRouteIndex(parsed, readSubregions = false)
+			}
+			routeReg.initEncodingRulesFrom(parsed)
 		}
 	}
 
+	// java keeps the roads of a box in the box until they are handed out; the boxes are shared by
+	// the readers of the file, so here they stay with the reader reading them
 	fun loadRouteRegionData(rs: RouteSubregion): List<RouteDataObject?> {
-		if (rs.dataObjects == null) {
-			codedIS.seek(rs.filePointer + rs.shiftToData)
-			val limit = codedIS.readRawVarint32()
-			val oldLimit = codedIS.pushLimitLong(limit.toLong())
-			readRouteTreeData(rs, idTables, restrictionMap)
-			codedIS.popLimit(oldLimit)
-		}
-		val res = rs.dataObjects!!
-		rs.dataObjects = null
-		return res
+		codedIS.seek(rs.filePointer + rs.shiftToData)
+		val limit = codedIS.readRawVarint32()
+		val oldLimit = codedIS.pushLimitLong(limit.toLong())
+		val dataObjects = readRouteTreeData(rs, idTables, restrictionMap)
+		codedIS.popLimit(oldLimit)
+		return dataObjects
 	}
 
 	fun loadRouteRegionData(toLoad: MutableList<RouteSubregion>, matcher: ResultMatcher<RouteDataObject>) {
@@ -472,14 +476,7 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 			if (p1 == p2) 0 else if (p1 < p2) -1 else 1
 		}
 		for (rs in toLoad) {
-			if (rs.dataObjects == null) {
-				codedIS.seek(rs.filePointer + rs.shiftToData)
-				val limit = codedIS.readRawVarint32()
-				val oldLimit = codedIS.pushLimitLong(limit.toLong())
-				readRouteTreeData(rs, idTables, restrictionMap)
-				codedIS.popLimit(oldLimit)
-			}
-			for (ro in rs.dataObjects!!) {
+			for (ro in loadRouteRegionData(rs)) {
 				if (ro != null) {
 					matcher.publish(ro)
 				}
@@ -487,8 +484,6 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 					break
 				}
 			}
-			// free objects
-			rs.dataObjects = null
 			if (matcher.isCancelled()) {
 				break
 			}
@@ -498,13 +493,24 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 	fun searchRouteRegionTree(req: SearchRequest<RouteDataObject>, list: List<RouteSubregion>, toLoad: MutableList<RouteSubregion>): List<RouteSubregion> {
 		for (rs in list) {
 			if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
-				if (rs.subregions == null) {
-					codedIS.seek(rs.filePointer)
-					val old = codedIS.pushLimitLong(rs.length)
-					readRouteTree(rs, null, if (req.contains(rs.left, rs.top, rs.right, rs.bottom)) -1 else 1, false)
-					codedIS.popLimit(old)
+				val subregions = synchronized(map.structureLock) {
+					rs.subregions ?: run {
+						val parsed = RouteSubregion(rs).apply { shiftToData = rs.shiftToData }
+						val regionsRead = rs.routeReg.regionsRead
+						try {
+							codedIS.seek(rs.filePointer)
+							codedIS.withLimit(rs.length) {
+								readRouteTree(parsed, null, if (req.contains(rs.left, rs.top, rs.right, rs.bottom)) -1 else 1, false)
+							}
+						} catch (e: Throwable) {
+							rs.routeReg.regionsRead = regionsRead
+							throw e
+						}
+						rs.shiftToData = parsed.shiftToData
+						parsed.subregions!!.also { rs.subregions = it }
+					}
 				}
-				searchRouteRegionTree(req, rs.subregions!!, toLoad)
+				searchRouteRegionTree(req, subregions, toLoad)
 
 				if (rs.shiftToData != 0L) {
 					toLoad.add(rs)

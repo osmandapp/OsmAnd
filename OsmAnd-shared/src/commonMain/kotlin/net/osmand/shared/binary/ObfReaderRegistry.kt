@@ -1,31 +1,35 @@
 package net.osmand.shared.binary
 
 import net.osmand.shared.io.KFile
+import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KLock
 import net.osmand.shared.util.synchronized
 
 /**
  * The obf files of the app and their readers, kept open between requests: the part of
- * `ResourceManager` in the android app that holds `fileReaders`, which stays there; this copy is for
- * iOS, so that the app gets its readers only from here and never opens, reads or closes one itself.
+ * `ResourceManager` in the android app that holds `fileReaders`, so that the app gets its readers
+ * from here and does not open, read or close one itself.
  *
- * The platform hands over the files it has with [setFiles], at start and whenever they change. A
- * file it no longer has is closed, and so is one whose time stamp or size changed, since an update
- * writes the new file at the path of the old one; the next request opens it again. As in android, a
- * closed file's readers are closed at once: a search or a route still reading through one fails
- * inside the shared code, which catches it, and the next one reads the new file.
- *
- * The files keep the order they were handed over in, which is the order the searches read them in:
- * android sorts the file names itself, the platform has to hand them over sorted the same way.
+ * The platform hands over the files it has with [setFiles], at start and whenever they change, with
+ * what each may be used for, as android decides when it indexes a file. A file it no longer has is
+ * closed, and so is one whose time stamp or size changed, since an update writes the new file at the
+ * path of the old one; the next request opens it again. As in android's `closeFile`, a closed file's
+ * readers are closed at once: a search or a route still reading through one fails inside the shared
+ * code, which catches it, and the next one reads the new file. The files are kept in android's
+ * order, [KAlgorithms.compareFileVersions] of their names.
  *
  * A file is opened the first time something asks about it, on the thread that asks, so the first
  * [getQuickSearchFiles], [getRoutingMapFiles] or [getAmenityRepositories] walks every file it looks
- * at: not for the main thread.
+ * at: not for the main thread. Android walks them when it indexes the files, from a cache of their
+ * structure.
  */
 class ObfReaderRegistry {
 
-	/** A file the platform has; [useForRouting] when routes may be calculated over it. */
-	class ObfFile(val path: String, val useForRouting: Boolean)
+	/**
+	 * A file the platform has: [useForRouting] when routes may be calculated over it,
+	 * [useForPublicTransport] when public transport routes may.
+	 */
+	class ObfFile(val path: String, val useForRouting: Boolean, val useForPublicTransport: Boolean)
 
 	private data class FileStamp(val lastModified: Long, val length: Long)
 
@@ -50,6 +54,7 @@ class ObfReaderRegistry {
 				val old = entriesByPath[obfFile.path]
 				val resource = if (old != null && old.stamp == stamp) old.resource else BinaryMapReaderResource(file)
 				resource.setUseForRouting(obfFile.useForRouting)
+				resource.setUseForPublicTransport(obfFile.useForPublicTransport)
 				val entry = Entry(obfFile.path, resource, stamp)
 				next.add(entry)
 				nextByPath[obfFile.path] = entry
@@ -60,7 +65,9 @@ class ObfReaderRegistry {
 					amenityRepositories.remove(old.path)
 				}
 			}
-			entries = next
+			entries = next.sortedWith { e1, e2 ->
+				KAlgorithms.compareFileVersions(e1.resource.getFileName(), e2.resource.getFileName())
+			}
 			entriesByPath = nextByPath
 		}
 		for (resource in closing) {
@@ -68,7 +75,7 @@ class ObfReaderRegistry {
 		}
 	}
 
-	/** The files in the order they were handed over. */
+	/** The files in android's order. */
 	fun getFileReaders(): List<BinaryMapReaderResource> = synchronized(lock) { entries }.map { it.resource }
 
 	fun getFileReader(path: String): BinaryMapReaderResource? = synchronized(lock) { entriesByPath[path]?.resource }
@@ -113,7 +120,7 @@ class ObfReaderRegistry {
 		}
 	}
 
-	/** The repositories of the files with pois, in the order the files were handed over. */
+	/** The repositories of the files with pois, in android's order of the files. */
 	fun getAmenityRepositories(): List<BinaryAmenityIndexRepository> {
 		val repositories = ArrayList<BinaryAmenityIndexRepository>()
 		for (entry in synchronized(lock) { entries }) {
