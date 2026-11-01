@@ -428,6 +428,10 @@ public class VoiceRouter {
 		int dist = nextInfo.distanceTo;
 		RouteDirectionInfo next = nextInfo.directionInfo;
 
+		if (atd.isTurnStateActive(0, dist, STATE_TURN_IN)) {
+			app.getLockHelper().onTurnAhead();
+		}
+
 		// If routing is changed update status to unknown
 		if (next != nextRouteDirection) {
 			nextRouteDirection = next;
