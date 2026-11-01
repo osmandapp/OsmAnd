@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReaderStats.SearchStat;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -25,6 +26,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -774,7 +776,11 @@ public class QuickSearchHelper implements ResourceListener {
 			amenity.setSubType(poiSubtypeKey);
 			amenity.setName(!Algorithms.isEmpty(entry.getDisplayName()) ? entry.getDisplayName() : entry.getName().getName());
 			amenity.setLocation(entry.getLat(), entry.getLon());
-			amenity.setId(entry.getOsmId());
+			Long osmId = entry.getOsmId();
+			if (osmId != null) {
+				// the entry stores Amenity.getOsmId(), written back from this object when the entry is opened
+				amenity.setId(ObfConstants.createMapObjectIdFromCleanOsmId(osmId, EntityType.NODE));
+			}
 			if (!Algorithms.isEmpty(entry.getOpeningHours())) {
 				amenity.setOpeningHours(entry.getOpeningHours());
 			}
