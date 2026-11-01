@@ -17,6 +17,7 @@ import net.osmand.shared.util.collections.KTIntLongMap
 import net.osmand.shared.util.collections.KTLongArrayList
 import net.osmand.shared.util.collections.KTLongHashSet
 import kotlin.math.abs
+import net.osmand.shared.util.synchronized
 
 /**
  * Reads the poi section of an obf file: the tables that decode an amenity, the r-tree of boxes
@@ -185,12 +186,14 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 	}
 
 	/** Reads the decoding tables of [region], unless they are read already. */
-	fun initCategories(region: PoiRegion) {
+	fun initCategories(region: PoiRegion) = synchronized(map.structureLock) {
 		if (region.categories.isEmpty()) {
+			val parsed = PoiRegion()
 			codedIS.seek(region.filePointer)
-			val oldLimit = codedIS.pushLimitLong(region.length)
-			readPoiIndex(region, true)
-			codedIS.popLimit(oldLimit)
+			codedIS.withLimit(region.length) {
+				readPoiIndex(parsed, true)
+			}
+			region.initCategoriesFrom(parsed)
 		}
 	}
 
@@ -526,9 +529,10 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 				OsmAndPoiBoxDataAtom.TAGGROUPS_FIELD_NUMBER -> {
 					val sz = codedIS.readRawVarint32()
 					val old = codedIS.pushLimitLong(sz.toLong())
+					val tagGroups = map.getTagGroups(region)
 					while (codedIS.getBytesUntilLimit() > 0) {
 						val tagGroupId = codedIS.readUInt32()
-						val list = region.getTagValues(tagGroupId)
+						val list = tagGroups.getTagValues(tagGroupId)
 						if (list != null && list.isNotEmpty()) {
 							am!!.addTagGroup(tagGroupId, list)
 						}
@@ -646,7 +650,7 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 					val oldLimit = codedIS.pushLimitLong(length)
 					// here offsets are sorted by distance
 					offsets = readPoiNameIndex(query, req, region, coordsTagGroups)
-					coordsTagGroups = region.checkMissingTagGroups(coordsTagGroups)
+					coordsTagGroups = map.getTagGroups(region).checkMissingTagGroups(coordsTagGroups)
 					codedIS.popLimit(oldLimit)
 				}
 				OsmAndPoiIndex.BOXES_FIELD_NUMBER -> {
@@ -678,7 +682,7 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 					}
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
 					if (coordsTagGroups.size() > 0) {
-						region.updReadTagGroups(coordsTagGroups)
+						map.getTagGroups(region).updReadTagGroups(coordsTagGroups)
 					}
 					return
 				}
@@ -1186,7 +1190,7 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 							tagValuePairs.add(TagValuePair(tagValues[i], tagValues[i + 1], -1))
 							i += 2
 						}
-						region.setTagGroups(id, tagValuePairs)
+						map.getTagGroups(region).setTagGroups(id, tagValuePairs)
 					}
 					return
 				}

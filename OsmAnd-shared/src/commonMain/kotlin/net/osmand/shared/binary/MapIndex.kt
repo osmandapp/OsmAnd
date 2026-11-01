@@ -83,6 +83,25 @@ class MapIndex : BinaryIndexPart() {
 
 	fun decodeType(type: Int): TagValuePair? = decodingRules[type]
 
+	/** Publishes complete rules while the file's structure lock is held. */
+	internal fun initEncodingRulesFrom(source: MapIndex) {
+		encodingRules.putAll(source.encodingRules)
+		for (id in source.decodingRules.keys()) {
+			decodingRules.put(id, source.decodingRules[id]!!)
+		}
+		nameEncodingType = source.nameEncodingType
+		nameEnEncodingType = source.nameEnEncodingType
+		refEncodingType = source.refEncodingType
+		coastlineEncodingType = source.coastlineEncodingType
+		coastlineBrokenEncodingType = source.coastlineBrokenEncodingType
+		landEncodingType = source.landEncodingType
+		onewayAttribute = source.onewayAttribute
+		onewayReverseAttribute = source.onewayReverseAttribute
+		positiveLayers.addAll(source.positiveLayers)
+		negativeLayers.addAll(source.negativeLayers)
+		encodingRulesSizeBytes = source.encodingRulesSizeBytes
+	}
+
 	/** Adds the two rules that the file does not carry but the renderer expects to exist. */
 	fun finishInitializingTags() {
 		var free = decodingRules.size()

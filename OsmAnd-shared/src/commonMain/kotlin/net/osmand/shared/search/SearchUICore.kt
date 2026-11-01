@@ -34,7 +34,6 @@ import net.osmand.shared.util.KCollator
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.collections.KTreeSet
-import okio.IOException
 import kotlin.jvm.JvmStatic
 import kotlin.math.max
 import kotlin.reflect.KClass
@@ -509,7 +508,7 @@ class SearchUICore(
 		return null
 	}
 
-	/** The registered apis, for iOS: Objective-C has no [KClass] to call [getApiByClass] with. */
+	/** The registered apis, for a caller that has no [KClass] to call [getApiByClass] with, as in Objective-C. */
 	fun getApis(): List<SearchCoreAPI> = ArrayList(apis)
 
 	fun <T : SearchCoreAPI> shallowSearch(cl: KClass<T>, text: String, matcher: ResultMatcher<SearchResult>?): SearchResultCollection? {
@@ -534,7 +533,11 @@ class SearchUICore(
 		return null
 	}
 
-	/** [shallowSearch] with the api itself, for iOS, which finds it in [getApis]. */
+	/**
+	 * [shallowSearch] with the api itself, for a caller that finds it in [getApis]. A file the api
+	 * fails to read is logged, as in [search], and the results found so far are returned, where java's
+	 * `shallowSearch` throws: a caller in Objective-C could not catch it.
+	 */
 	fun shallowSearch(
 		api: SearchCoreAPI, text: String, matcher: ResultMatcher<SearchResult>?,
 		resortAll: Boolean, removeDuplicates: Boolean, searchSettings: SearchSettings?
@@ -546,7 +549,11 @@ class SearchUICore(
 		preparePhrase(sphrase)
 		val ai = AtomicInt(0)
 		val rm = SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit)
-		api.search(sphrase, rm)
+		try {
+			api.search(sphrase, rm)
+		} catch (e: Throwable) {
+			LOG.error(e.message, e)
+		}
 
 		val skipResultSorting = api is SpatialTextSearchAPI
 		val collection = SearchResultCollection(sphrase, skipResultSorting)
@@ -560,18 +567,44 @@ class SearchUICore(
 		return collection
 	}
 
+	/**
+	 * [shallowSearch] on the search thread. The callback gets null when the search fails, rather than
+	 * never: java calls it only after a search that did not throw.
+	 */
 	fun <T : SearchCoreAPI> shallowSearchAsync(
 		cl: KClass<T>, text: String, matcher: ResultMatcher<SearchResult>?,
 		resortAll: Boolean, removeDuplicates: Boolean, searchSettings: SearchSettings?,
 		callback: ((SearchResultCollection?) -> Boolean)?
 	) {
 		submit {
-			try {
-				val collection = shallowSearch(cl, text, matcher, resortAll, removeDuplicates, searchSettings)
-				callback?.invoke(collection)
-			} catch (e: IOException) {
+			val collection = try {
+				shallowSearch(cl, text, matcher, resortAll, removeDuplicates, searchSettings)
+			} catch (e: Throwable) {
 				LOG.error(e.message, e)
+				null
 			}
+			callback?.invoke(collection)
+		}
+	}
+
+	/**
+	 * [shallowSearchAsync] with the api itself, for a caller that finds it in [getApis]. On the search
+	 * thread a shallow search never reads a file at the same time as [search] does: both read through
+	 * the same readers.
+	 */
+	fun shallowSearchAsync(
+		api: SearchCoreAPI, text: String, matcher: ResultMatcher<SearchResult>?,
+		resortAll: Boolean, removeDuplicates: Boolean, searchSettings: SearchSettings?,
+		callback: ((SearchResultCollection?) -> Boolean)?
+	) {
+		submit {
+			val collection = try {
+				shallowSearch(api, text, matcher, resortAll, removeDuplicates, searchSettings)
+			} catch (e: Throwable) {
+				LOG.error(e.message, e)
+				null
+			}
+			callback?.invoke(collection)
 		}
 	}
 
@@ -954,7 +987,7 @@ class SearchUICore(
 	/**
 	 * Runs [task] on the search thread once what [search] and [shallowSearchAsync] were asked for
 	 * before it has ended, searches still waiting their turn and cancelled ones too, which end
-	 * without a word: for iOS, which closes the files they read only then. [shallowSearch] runs on
+	 * without a word: for an app that closes the files they read only then. [shallowSearch] runs on
 	 * the thread that calls it and is not waited for. A Kotlin exception the task throws is
 	 * dropped; one that passes through Objective-C on its way, from a block calling Kotlin, ends
 	 * the app. Waiting for the task on the search thread never ends.
