@@ -33,6 +33,7 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
@@ -274,7 +275,13 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 		if (activity == null) {
 			return;
 		}
-		if (pair.second instanceof Amenity amenity) {
+		Object object = pair.second;
+		if (searchResult.relatedObject instanceof HistoryEntry && object instanceof Amenity historyAmenity) {
+			// history has no tags of the amenity, so a route would not open as a track
+			Amenity detailedAmenity = app.getSearchUICore().findAmenity(historyAmenity);
+			object = detailedAmenity != null ? detailedAmenity : historyAmenity;
+		}
+		if (object instanceof Amenity amenity) {
 			ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
 			if (amenity.isRouteTrack() && !amenity.isSuperRoute()) {
 				TravelHelper travelHelper = app.getTravelHelper();
