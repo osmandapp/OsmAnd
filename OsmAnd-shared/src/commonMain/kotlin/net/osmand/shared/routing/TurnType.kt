@@ -7,9 +7,8 @@ import net.osmand.shared.util.LoggerFactory
 /**
  * A manoeuvre: which way to go, plus the lane layout it applies to.
  *
- * A copy of `net.osmand.router.TurnType`, which stays in OsmAnd-java: android, tools and the C++ core keep using
- * the original, and this copy is for iOS. Keep the two identical; `TurnTypeCompatTest` checks that they behave
- * the same.
+ * Based on `net.osmand.router.TurnType` from OsmAnd-java. Keep behavior compatible with the
+ * original; `TurnTypeCompatTest` checks that they behave the same.
  *
  * Lanes are packed into an int per lane:
  * - bit 0: whether the lane is active for this manoeuvre;
@@ -491,6 +490,8 @@ class TurnType(
 			"sharp_right" -> TSHR
 			"sharp_left" -> TSHL
 			"reverse" -> TU
+			// not an OSM value: a u turn to the right, left-side navigation
+			"reverse_right" -> TRU
 			// unknown string
 			else -> C
 		}
@@ -513,6 +514,18 @@ class TurnType(
 				}
 			}
 			return turn
+		}
+
+		@JvmStatic
+		fun hasActiveLane(lanes: IntArray?): Boolean {
+			if (lanes != null) {
+				for (lane in lanes) {
+					if (lane % 2 == 1) {
+						return true
+					}
+				}
+			}
+			return false
 		}
 	}
 }

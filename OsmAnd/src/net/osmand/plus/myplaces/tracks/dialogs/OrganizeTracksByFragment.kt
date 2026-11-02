@@ -186,4 +186,6 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
 		super.onItemPurchased(sku, active)
 		adapter?.notifyDataSetChanged()
 	}
+
+	override fun getAnalyticsScreen() = "organize_tracks_by"
 }

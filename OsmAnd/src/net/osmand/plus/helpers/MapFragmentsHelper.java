@@ -6,6 +6,8 @@ import static net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSear
 import static net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchTab.HISTORY;
 import static net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType.REGULAR;
 
+import android.content.Intent;
+
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.BaseMaterialFragment;
+import net.osmand.plus.base.NewIntentListener;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -32,6 +35,7 @@ import net.osmand.plus.dialogs.selectlocation.SelectLocationFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
+import net.osmand.plus.mapcontextmenu.other.DestinationReachedFragment;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.PlanRouteFragment;
@@ -152,6 +156,28 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 			manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
 		} catch (IllegalStateException e) {
 			LOG.error("Error updating fragment " + fragment.getClass().getSimpleName(), e);
+		}
+	}
+
+	public void onNewIntent(@NonNull Intent intent) {
+		if (!intent.hasCategory(Intent.CATEGORY_LAUNCHER)) {
+			stopNavigationIfArrived();
+		}
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof NewIntentListener listener) {
+				listener.onNewIntent(intent);
+			}
+		}
+	}
+
+	private void stopNavigationIfArrived() {
+		// Check the route, not the menu: after arriving in the background it is added only in MapActivity.onResume()
+		if (activity.getRoutingHelper().isRouteWasFinished()) {
+			activity.getMapActions().stopNavigationWithoutConfirm();
+			DestinationReachedFragment fragment = getFragment(DestinationReachedFragment.TAG);
+			if (fragment != null) {
+				fragment.dismiss();
+			}
 		}
 	}
 

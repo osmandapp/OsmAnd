@@ -26,11 +26,14 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.NameIndexReader;
+import net.osmand.search.rules.SearchModRules;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
@@ -67,6 +70,8 @@ public class SpatialTextSearch {
 		public boolean SEARCH_SUGGESTION = false; // incomplete to add '.' in the end
 		// not used in search as maps provided (web could multiply by 1.5x or adjust bbox)
 		public int SUGGESTED_SEARCH_RADIUS_KM = 400;  
+		// "did you mean" the query with a misspelled word corrected (SpatialTypoSuggestions)
+		public boolean TYPO_SUGGESTION = true;
 				
 		// lang to deduplicate results
 		public String LANG_DEDUPLICATE = ""; 
@@ -87,6 +92,8 @@ public class SpatialTextSearch {
 		
 		// max prefixes for each name reader
 		public int AUTO_CLEAR_PREFIX_CACHE_LIMIT = 1000;
+		// max bytes of name index blocks kept in all files during and between searches
+		public long AUTO_CLEAR_PREFIX_CACHE_BYTES = 64 << 20;
 
 		// Deduplicate results in the end by checking osm id of the first object in combination
 		public boolean DEDUPLICATE_RES = true;
@@ -122,6 +129,10 @@ public class SpatialTextSearch {
 		public boolean SCORE_RANKING = true; // false - old lexicographic ladder
 		// one-word query: POIs found by category only and unrated, read nearest first ("restaurant" finds 180K; 0 - all)
 		public int LIMIT_READ_SINGLE_OBJECTS = 1500;
+		// objects read for one stage, the best by SpatialSearchRanking.prescore (0 - all)
+		public int LIMIT_READ_OBJECTS = 1000;
+		// a word still being typed whose index blocks are larger is matched whole ('sch' 14 MB; 0 - never)
+		public int LIMIT_INCOMPLETE_BYTES = 5 << 20;
 
 		public int MIN_ELO_RATING = 1400; // see SearchResult.MIN_ELO_RATING
 		public int WORLD_ELO_RATING = 1500; // from world map by default
@@ -272,19 +283,30 @@ public class SpatialTextSearch {
 		public final long length;
 		public final long edition;
 		public final List<NameIndexReader> indexReaders = new ArrayList<NameIndexReader>();
+		// the same indexes read for typo neighbours only, so their blocks never push out the blocks of the query
+		public final List<NameIndexReader> typoReaders = new ArrayList<NameIndexReader>();
 		public Map<String, Integer> poiFrequencies = null;
 		public SpatialPoiSearch poiSearch;
+		// rules locale of the data of the map (en_US, de_CH...), whatever the language of the user is
+		public final String locale;
 
-		public SpatialSearchFileCache(BinaryMapIndexReader r) {
+		public SpatialSearchFileCache(BinaryMapIndexReader r, SearchModRules searchRules) {
 			file = r.getFile().getName();
 			length = r.getFile().length();
 			edition = r.getDateCreated();
+			String region = file;
 			for (AddressRegion a : r.getAddressIndexes()) {
-				indexReaders.add(new NameIndexReader(a));
+				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
+				typoReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
+				region = a.getName();
 			}
 			for (PoiRegion a : r.getPoiIndexes()) {
-				indexReaders.add(new NameIndexReader(a));
+				indexReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
+				typoReaders.add(new NameIndexReader(a).setCacheRawBlocks(true));
+				region = r.getAddressIndexes().isEmpty() ? a.getName() : region;
 			}
+			// the region name keeps a subregion with its own locale: "Switzerland_ticino"
+			locale = searchRules.locales().forMap(region);
 		}
 
 		public boolean test(BinaryMapIndexReader r) {
@@ -297,6 +319,9 @@ public class SpatialTextSearch {
 
 		public Map<String, SpatialSearchFileCache> filesCache = new HashMap<>();
 
+		// read once: rules.xml and then the rules of a locale on the first map of that locale
+		public final SearchModRules searchRules = SearchModRules.forSearch();
+
 	}
 
 	public static class SpatialSearchResults {
@@ -308,6 +333,9 @@ public class SpatialTextSearch {
 		public List<SpatialSearchResult> mainResults;
 
 		public List<SpatialSearchResultsList> combinations;
+
+		// the input with one misspelled word corrected, null when every word is found
+		public String typoSuggestion;
 
 		public SpatialSearchStats stats;
 		
@@ -564,7 +592,68 @@ public class SpatialTextSearch {
 		ctx.initFiles(cache);
 	}
 
+	private void clearPrefixCacheIfLarge(SpatialSearchContext ctx) {
+		long bytes = 0;
+		for (SpatialSearchFileCache fc : ctx.internalFile) {
+			for (NameIndexReader r : fc.indexReaders) {
+				// the query keeps the tokens with every atom and object read by this search
+				r.clearQuery();
+				bytes += r.getCachedBytes();
+			}
+		}
+		if (bytes > ctx.settings.AUTO_CLEAR_PREFIX_CACHE_BYTES) {
+			for (SpatialSearchFileCache fc : ctx.internalFile) {
+				for (NameIndexReader r : fc.indexReaders) {
+					r.clearPrefixes();
+				}
+			}
+		}
+	}
+
 	public SpatialSearchResults searchAPI(String input, SpatialSearchContext ctx) throws IOException {
+		try {
+			return searchAPIInternal(input, ctx);
+		} catch (IOException | RuntimeException | Error e) {
+			for (BinaryMapIndexReader r : ctx.files) {
+				r.resetReadLimits();
+			}
+			throw e;
+		} finally {
+			clearPrefixCacheIfLarge(ctx);
+		}
+	}
+
+	// ctx is built with SpatialTextSearchSettings.searchPoiByCategorySettings
+	public List<Amenity> searchPoiByCategory(SpatialSearchContext ctx, String categoryKey, QuadRect bboxLatLon,
+			int poiZoom, int limit) throws IOException {
+		SpatialPoiType spatialType = null;
+		if (!categoryKey.startsWith(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX)) {
+			spatialType = ctx.poiSearch.getByKey(categoryKey);
+			if (spatialType == null) {
+				return Collections.emptyList();
+			}
+			categoryKey = spatialType.getKey();
+		}
+		boolean indexed = spatialType == null
+				|| (spatialType.singleType instanceof PoiType poiType && !poiType.isNonIndx());
+		if (!indexed) {
+			return ctx.poiSearch.loadPOIObjects(ctx, spatialType, bboxLatLon, poiZoom, limit);
+		}
+		SpatialSearchResults res = searchAPI(NameIndexReader.POI_CATEGORY_PREFIX + categoryKey, ctx);
+		List<Amenity> amenities = new ArrayList<>();
+		if (res.mainResults != null) {
+			for (SpatialSearchResult r : res.mainResults) {
+				for (MapObject o : r.getObjects()) {
+					if (o instanceof Amenity amenity) {
+						amenities.add(amenity);
+					}
+				}
+			}
+		}
+		return amenities;
+	}
+
+	private SpatialSearchResults searchAPIInternal(String input, SpatialSearchContext ctx) throws IOException {
 		ctx.stats.requestTime.start();
 		SpatialSearchResults res = new SpatialSearchResults();
 		if (ctx.settings.SEARCH_SUGGESTION && !input.endsWith(CollatorStringMatcher.INCOMPLETE_DOT + "") && 
@@ -576,7 +665,7 @@ public class SpatialTextSearch {
 		
 		// 1. prepare tokens
 		if (ctx.settings.SEARCH_POI_BY_CATEGORY_ONLY) {
-			res.tokens = Collections.singletonList(new SpatialSearchToken(0, input, input, 1));
+			res.tokens = Collections.singletonList(new SpatialSearchToken(cache.searchRules, 0, input, input, 1));
 		} else {
 			res.tokens = splitWords(ctx, input);
 		}
@@ -586,6 +675,7 @@ public class SpatialTextSearch {
 		ctx.setTokens(res.tokens);
 		ctx.processPoiCategories();
 		ctx.readAtoms();
+		res.typoSuggestion = ctx.typos.suggestion(input, res.tokens);
 		ctx.stats.step1Atoms.finish();
 
 		// 3. sort tokens
@@ -699,7 +789,7 @@ public class SpatialTextSearch {
 			if (w.equals(SpatialSearchToken.DOT_INCOMPLETE_STRING)) {
 				continue;
 			}
-			SpatialSearchToken token = new SpatialSearchToken(ctx.settings.MIN_CHARACTERS_INCOMPLETE, w,
+			SpatialSearchToken token = new SpatialSearchToken(cache.searchRules, ctx.settings.MIN_CHARACTERS_INCOMPLETE, w,
 					owords.get(ind), tokens.size());
 			tokens.add(token);
 		}

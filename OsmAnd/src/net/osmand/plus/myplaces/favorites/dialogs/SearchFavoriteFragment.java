@@ -701,4 +701,9 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "search_favorite";
+	}
 }

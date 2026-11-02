@@ -99,24 +99,6 @@
     <string name="ais_load_data">從檔案載入 AIS 資料</string>
     <string name="ais_address_settings">IP 位址設定</string>
     <string name="ais_address_settings_description">選擇 NMEA 通訊協定 (UDP/TCP) ，並指定對應的位址與連接埠</string>
-    <string name="ais_nmea_protocol">NMEA 資料接收通訊協定</string>
-    <string name="ais_nmea_protocol_description">選擇 NMEA 資料接收通訊協定</string>
-    <string name="ais_address_nmea_server">NMEA 資料來源的 IP 位址</string>
-    <string name="ais_address_nmea_server_description">定義 NMEA 資料來源的 IP 位址（若使用 TCP）</string>
-    <string name="ais_port_nmea_server">NMEA 資料來源的 TCP 連接埠</string>
-    <string name="ais_port_nmea_server_description">定義 NMEA 資料來源的 TCP 連接埠編號</string>
-    <string name="ais_port_nmea_local">本機 NMEA 資料接收器的 UDP 連接埠</string>
-    <string name="ais_port_nmea_local_description">定義 OsmAnd 接收 NMEA 資料的 UDP 連接埠</string>
-    <string name="ais_object_lost_timeouts">AIS 物件的顯示時限設定</string>
-    <string name="ais_object_lost_timeout">物件訊號消失時的顯示時限</string>
-    <string name="ais_object_lost_timeout_description">設定 AIS 物件訊號消失後顯示時限：移除指定時間內未收到訊號的 AIS 物件。</string>
-    <string name="ais_ship_lost_timeout">船隻訊號消失的顯示時限。</string>
-    <string name="ais_ship_lost_timeout_description">設定船隻訊號消失後的顯示時限：劃掉指定時間內未收到訊號的船隻。</string>
-    <string name="ais_cpa_settings">與 CPA 相關的設定</string>
-    <string name="ais_cpa_warning_time">最短距離 (CPA) 前的警告時間</string>
-    <string name="ais_cpa_warning_time_description">如果 TCPA（與其他船隻達到 CPA 的時間）小於此值，則該船隻會以紅色標示。</string>
-    <string name="ais_cpa_warning_distance">最接近之最短距離 (CPA) 的警告距離</string>
-    <string name="ais_cpa_warning_distance_description">如果 CPA 小於此值，且在不久的將來就會達到 CPA（請參閱設定達到 CPA 的警告時間），則船隻會以紅色標記。</string>
     <string name="plugin_ais_tracker_name">AIS 船隻追蹤器</string>
     <string name="plugin_ais_tracker_description">顯示 AIS 位置及周遭船隻資訊。AIS 資料透過網路從外部 AIS 接收器接收。</string>
     <string name="plugin_ais_tracker_disclaimer">免責聲明\n\n本插件乃業餘開發項目，未經專業可靠性及準確度測試。用戶使用時務必格外小心，切勿在任何情況下（尤其是導航或可能危及生命安全的情境）完全依賴本軟件。</string>
@@ -675,8 +657,8 @@
     <string name="with_waypoints">有路徑節點</string>
     <string name="shared_string_reset_all">重設所有</string>
     <string name="date_of_creation">新增日期</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="filter_by_name">依名稱篩選</string>
     <string name="filter_screen_title">過濾條件</string>
     <string name="filter_tracks_count">過濾條件：%d</string>
@@ -2315,7 +2297,6 @@
     <string name="live_monitoring">線上追蹤</string>
     <string name="save_track_logging_accuracy">記錄精度</string>
     <string name="tracks_view_descr">您已紀錄的軌跡位於 %1$s，或是 OsmAnd 資料夾。</string>
-    <string name="multimedia_notes_view_descr">您的 OSM 註記位於 %1$s。</string>
     <string name="video_notes">視訊註記</string>
     <string name="photo_notes">照片註記</string>
     <string name="accessibility_announce">播報</string>
@@ -2836,8 +2817,6 @@
     <string name="will_open_at">開始營業時間</string>
     <string name="will_open_on">營業日期</string>
     <string name="additional_actions">其他選項</string>
-    <string name="av_locations_selected_desc">包括坐標和所選註解資料的 GPX 檔案。</string>
-    <string name="av_locations_all_desc">包括坐標和所有註解資料的 GPX 檔案。</string>
     <string name="modify_the_search_query">更改您的搜尋。</string>
     <string name="shared_string_actions">選項</string>
     <string name="shared_string_marker">旗標</string>
@@ -2849,11 +2828,6 @@
     <string name="marker_activated">標記 %s 已啟動。</string>
     <string name="one_tap_active_descr">輕觸在地圖上的旗標，將其移動到活動標記的頂端，而不用打開內容選單。</string>
     <string name="one_tap_active">「點一下」啟動</string>
-    <string name="empty_state_av_notes">新增筆記！</string>
-    <string name="empty_state_av_notes_desc">您可以透過小工具或內容選單，在地圖上的任何位置加入音訊、影片或照片筆記。</string>
-    <string name="notes_by_date">以日期排序的音訊／視訊註記</string>
-    <string name="by_date">按照日期</string>
-    <string name="by_type">按照類型</string>
     <string name="looking_for_tracks_with_waypoints">尋找有航點的軌跡</string>
     <string name="shared_string_more_without_dots">更多</string>
     <string name="appearance_on_the_map">在地圖上顯示</string>
@@ -3333,8 +3307,6 @@
     <string name="simulate_your_location_stop_descr">停止位置模擬。</string>
     <string name="simulate_your_location_descr">模擬目前位置，以便在路線規劃或記錄 GPX 軌跡時使用。</string>
     <string name="looking_up_address">搜尋地址</string>
-    <string name="av_locations_descr">GPX 檔案加上地點。</string>
-    <string name="av_locations">地點</string>
     <string name="plugin_settings">外掛元件</string>
     <string name="routing_attr_avoid_shuttle_train_name">避免車載列車</string>
     <string name="routing_attr_avoid_shuttle_train_description">避免車載列車路線</string>
@@ -3443,7 +3415,6 @@
     <string name="welcome_header">歡迎</string>
     <string name="current_route">目前的路線</string>
     <string name="osm_changes_added_to_local_edits">OSM 變更已加入本機編輯設定</string>
-    <string name="local_recordings_delete_all_confirm">您是否要刪除 %1$d 個註記？</string>
     <string name="delay_to_start_navigation">指引後開始路線建議…</string>
     <string name="shared_string_go">開始</string>
     <string name="osmand_parking_overdue">已逾期</string>
@@ -3550,7 +3521,6 @@
     <string name="plugin_nautical_descr">使用航行路線、航道燈、海域危險區域、航行或停泊限制區等資訊。如要使用此功能，請下載相應的海圖，並在「地圖設定」中啟用「海圖」樣式 \n \n更多詳情請瀏覽 %1$s 。</string>
     <string name="plugin_ski_name">滑雪視圖</string>
     <string name="plugin_ski_descr">設計用於冬季運動場域的導航：顯示滑雪雪道、纜車和越野滑雪道，並以彩色線條標示難度等級。如要使用此功能，請啟用此插件，並前往「設定地圖」，選擇「冬季和滑雪」地圖樣式。</string>
-    <string name="audionotes_plugin_name">語音/影像備註</string>
     <string name="audionotes_plugin_description">在旅程中透過地圖按鈕或位置選單，快速記錄語音、相片或影片備註。</string>
     <string name="osmand_parking_plugin_name">泊車地點</string>
     <string name="osmand_parking_plugin_description">標記車輛停泊位置，並在停車計時器到期時通知行事曆。要設置旗標，請在地圖上選擇地點，點選「選項」，然後選擇「新增泊車位」。</string>
@@ -3563,7 +3533,6 @@
     <string name="rename_failed">重新命名失敗。</string>
     <string name="back_to_map">返回地圖</string>
     <string name="share_note">分享註解</string>
-    <string name="watch">觀看</string>
     <string name="notes">音訊與視訊註記</string>
     <string name="online_map">線上地圖</string>
     <string name="free">%1$s 可用</string>
@@ -3916,7 +3885,6 @@
     <string name="recording_unavailable">無法使用</string>
     <string name="recording_context_menu_arecord">錄音附註</string>
     <string name="recording_context_menu_vrecord">錄影附註</string>
-    <string name="layer_recordings">記錄層</string>
     <string name="recording_context_menu_play">播放</string>
     <string name="recording_description">錄製 %1$s %3$s %2$s</string>
     <string name="recording_default_name">錄製中</string>
@@ -4561,7 +4529,7 @@
     <string name="move_point">移動標點</string>
     <string name="osm_recipients_label">OSM 收件人</string>
     <string name="total_donations">捐款總計</string>
-    <string name="day_off_label">關閉</string>
+    <string name="day_off_label">休息</string>
     <string name="winter_and_ski_renderer">冬季和滑雪</string>
     <string name="touring_view_renderer">旅遊風景</string>
     <string name="nautical_renderer">航海</string>

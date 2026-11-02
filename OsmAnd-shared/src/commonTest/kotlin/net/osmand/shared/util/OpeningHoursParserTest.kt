@@ -634,6 +634,7 @@ class OpeningHoursParserTest {
 		testTimeRestrictedOffRules()
 		testMonthRuleOverride()
 		testHolidayWithWeekday()
+		testLocalizedHolidays()
 		testNthWeekdayOfMonth()
 		testOvernightNextOpening()
 		testRealWorldSchedules()
@@ -810,6 +811,23 @@ class OpeningHoursParserTest {
 		hours = OpeningHoursParser.parseOpenedHours("SH Mo-Fr 10:00-14:00")
 		println(hours)
 		testOpened("06.10.2025 11:00", hours, false) // regular Monday
+	}
+
+	private fun testLocalizedHolidays() {
+		OpeningHoursParser.initLocalStrings("en-GB")
+		OpeningHoursParser.setTwelveHourFormattingEnabled(false, "en-GB")
+		OpeningHoursParser.setAdditionalString("public_holiday", "Public holidays")
+		OpeningHoursParser.setAdditionalString("school_holiday", "School holidays")
+		OpeningHoursParser.setAdditionalString("easter", "Easter")
+		val hours = OpeningHoursParser.parseOpenedHours("Mo-Fr 10:00-18:00; Sa-Su, PH, SH, Easter 12:00-16:00")
+		println(hours?.toLocalString())
+		assertEquals(
+			"Mon-Fri 10:00-18:00; Sat, Sun, Public holidays, School holidays, Easter 12:00-16:00",
+			hours?.toLocalString()
+		)
+		testParsedAndAssembledCorrectly("Mo-Fr 10:00-18:00; Sa, Su, PH, SH, Easter 12:00-16:00", hours)
+		OpeningHoursParser.setAdditionalString("public_holiday", "PH")
+		OpeningHoursParser.setAdditionalString("school_holiday", "SH")
 	}
 
 	private fun testNthWeekdayOfMonth() {
@@ -1098,6 +1116,35 @@ class OpeningHoursParserTest {
 			"Mo-Fr ٤:٣٠-١٠:٠٠ ص, ٧:٣٠ ص-١١:٠٠ م; Sa, Su, PH ١:٣٠-١١:٠٠ م",
 			"Mo-Fr 4:30-10:00 ص, 7:30 ص-11:00 م; Sa, Su, PH 1:30-11:00 م"
 		)
+	}
+
+	@Test
+	fun testMonthRangeOffKeepsMonths() {
+		// month range "off" rules must not be shown as "24/7 off" (#11571)
+		OpeningHoursParser.initLocalStrings("en-GB")
+		OpeningHoursParser.setTwelveHourFormattingEnabled(false, "en-GB")
+		var hours = OpeningHoursParser.parseOpenedHours("Oct-Mar off")
+		testParsedAndAssembledCorrectly("Jan-Mar, Oct-Dec Mo-Su off", hours)
+		testOpened("05.08.2024 12:00", hours, false)
+		testOpened("05.11.2024 12:00", hours, false)
+
+		hours = OpeningHoursParser.parseOpenedHours("Jan-Mar off; Mo-Fr 10:00-18:00")
+		testParsedAndAssembledCorrectly("Jan-Mar Mo-Su off; Mo-Fr 10:00-18:00", hours)
+
+		hours = OpeningHoursParser.parseOpenedHours("Mo-Fr 10:00-18:00; Oct-Mar off")
+		testParsedAndAssembledCorrectly("Mo-Fr 10:00-18:00; Jan-Mar, Oct-Dec Mo-Su off", hours)
+	}
+
+	@Test
+	fun testMonthRangeOffIsNotOpened24_7() {
+		// an "off" rule outside its months must not make the info "open 24/7" (#11571)
+		OpeningHoursParser.initLocalStrings("en-GB")
+		OpeningHoursParser.setTwelveHourFormattingEnabled(false, "en-GB")
+		val hours = OpeningHoursParser.parseOpenedHours("Mo-Fr 10:00-18:00; Oct-Mar off")
+		val info = hours!!.getCombinedInfo(timeOf("05.08.2024 12:00"))
+		assertTrue(info.isOpened(), "opened")
+		assertFalse(info.isOpened24_7(), "opened 24/7")
+		testInfo("05.08.2024 12:00", hours, "Open until 18:00")
 	}
 
 }

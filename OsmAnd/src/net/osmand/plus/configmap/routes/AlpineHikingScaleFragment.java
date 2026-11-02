@@ -53,4 +53,9 @@ public class AlpineHikingScaleFragment extends MapRoutesFragment {
 		addCard(new AlpineHikingCard(getMapActivity()));
 		addRenderingClassCard(ALPINE.getRenderingPropertyAttr());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "alpine_hiking_scale";
+	}
 }

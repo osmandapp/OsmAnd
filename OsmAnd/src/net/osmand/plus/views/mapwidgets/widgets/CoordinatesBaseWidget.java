@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -43,8 +44,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
 
 public abstract class CoordinatesBaseWidget extends MapWidget {
 	private static final Log log = PlatformUtil.getLog(CoordinatesMapCenterWidget.class);
@@ -67,6 +66,8 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 
 	private boolean cachedLayoutRtl;
 	private final CommonPreference<String> coordinateFormatPref;
+	private final DecimalFormat swissGridFormat = OsmAndFormatter.createSwissGridFormat();
+	private final Paint textPaint = new Paint();
 
 	protected int getLayoutId() {
 		return R.layout.coordinates_widget;
@@ -259,10 +260,6 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		double[] swissGrid = swissGridPlus
 				? SwissGridApproximation.convertWGS84ToLV95(latLon)
 				: SwissGridApproximation.convertWGS84ToLV03(latLon);
-		DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
-		formatSymbols.setDecimalSeparator('.');
-		formatSymbols.setGroupingSeparator(' ');
-		DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
 
 		firstIcon.setImageDrawable(getLatitudeIcon(lat));
 		secondIcon.setImageDrawable(getLongitudeIcon(lon));
@@ -313,7 +310,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	}
 
 	private void setCoordinateText(@NonNull OutlinedTextContainer textView, @NonNull String text) {
-		AndroidUtils.setTruncatedText(textView, TextDirectionUtil.markAsLTR(text));
+		AndroidUtils.setTruncatedText(textView, TextDirectionUtil.markAsLTR(text), textPaint);
 	}
 
 	protected void setCoordinateIcon(@NonNull ImageView imageView, @NonNull Drawable drawable) {

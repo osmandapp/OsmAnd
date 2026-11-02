@@ -50,6 +50,14 @@ kotlin {
 			defFile(project.file("src/nativeInterop/cinterop/libxml2.def"))
 			packageName("libxml2")
 		}
+		iosTarget.compilations.getByName("main").cinterops.create("sqlite3") {
+			defFile(project.file("src/nativeInterop/cinterop/sqlite3.def"))
+			packageName("sqlite3")
+		}
+		// sqlite3.def carries no linkerOpts, so the test binaries link sqlite themselves
+		iosTarget.binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.TestExecutable::class.java).configureEach {
+			linkerOpts("-lsqlite3")
+		}
 	}
 
 	// the default test binary is a debug build with LLVM optimisations off, which makes any
@@ -63,7 +71,6 @@ kotlin {
 	val datetimeVersion = "0.6.1"
 	val okioVersion = "3.9.0"
 	val kxml2Version = "2.3.0"
-	val sqliterVersion = "1.3.1"
 	val sqliteJDBCVersion = "3.34.0"
 	val commonLoggingVersion = "1.2"
 	val coroutinesVersion = "1.8.1"
@@ -78,7 +85,7 @@ kotlin {
 			implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
 			implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
-			implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
+			api("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
 			implementation("com.squareup.okio:okio:$okioVersion")
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 			implementation("co.touchlab:stately-concurrent-collections:$statelyVersion")
@@ -102,7 +109,6 @@ kotlin {
             implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
 		}
 		iosMain.dependencies {
-			implementation("co.touchlab:sqliter-driver:$sqliterVersion")
             implementation("io.ktor:ktor-client-darwin:$ktorVersion")
 		}
 

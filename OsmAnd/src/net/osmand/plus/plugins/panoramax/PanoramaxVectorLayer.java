@@ -20,6 +20,7 @@ import com.vividsolutions.jts.geom.Point;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.PanoramaxTilesProvider;
+import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
@@ -34,7 +35,6 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -79,7 +79,10 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	private Map<QuadPointDouble, Map<?, ?>> visiblePoints = new HashMap<>();
 
 	//OpenGL
-	private PanoramaxTilesProvider panoramaxTilesProvider;
+	// Written on the drawing thread and read by the Reload action.
+	private volatile PanoramaxTilesProvider panoramaxTilesProvider;
+	private ImageMapLayerProvider panoramaxTilesProxy;
+	private boolean panoramaxTilesAttached;
 	private MapMarkersCollection mapMarkersCollection;
 	// MapMarker cannot hide individual surface icons, so use separate markers with/without heading.
 	private MapMarker markerWithHeading;
@@ -87,7 +90,7 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	Bitmap selectedImageBitmap;
 	Bitmap headingImageBitmap;
 	// The state the current OpenGL provider was built for; a change means its tiles are stale.
-	private PanoramaxFilterState appliedFilterState;
+	private volatile PanoramaxFilterState appliedFilterState;
 
 	PanoramaxVectorLayer(@NonNull Context context) {
 		super(context, false);
@@ -150,6 +153,16 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 					mapRenderer.resetMapLayerProvider(layerIndex);
 					clearMapMarkersCollections();
 					panoramaxTilesProvider = null;
+					panoramaxTilesProxy = null;
+					panoramaxTilesAttached = false;
+				}
+				return;
+			}
+			// The renderer may overscale tiles beyond the source's supported zoom range.
+			if (!isVisibleAtZoom(tileBox.getZoom(), map)) {
+				if (panoramaxTilesAttached) {
+					mapRenderer.resetMapLayerProvider(layerIndex);
+					panoramaxTilesAttached = false;
 				}
 				return;
 			}
@@ -160,17 +173,36 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 					mapRenderer.resetMapLayerProvider(layerIndex);
 					clearMapMarkersCollections();
 					panoramaxTilesProvider = null;
+					panoramaxTilesProxy = null;
+					panoramaxTilesAttached = false;
 				}
 				appliedFilterState = currentFilterState;
 			}
 			if (panoramaxTilesProvider == null) {
 				panoramaxTilesProvider = new PanoramaxTilesProvider(getApplication(), map, view.getDensity(), currentFilterState);
-				mapRenderer.setMapLayerProvider(layerIndex, panoramaxTilesProvider.instantiateProxy(true));
+				panoramaxTilesProxy = panoramaxTilesProvider.instantiateProxy(true);
 				panoramaxTilesProvider.swigReleaseOwnership();
+			}
+			if (!panoramaxTilesAttached) {
+				mapRenderer.setMapLayerProvider(layerIndex, panoramaxTilesProxy);
+				panoramaxTilesAttached = true;
 			} else {
 				panoramaxTilesProvider.setVisibleBBox31(mapRenderer.getVisibleBBox31(), tileBox.getZoom());
 			}
 		}
+	}
+
+	/**
+	 * Tiles the native core already holds cannot be invalidated one by one, so reloading reuses
+	 * the filter-change lifecycle: with no applied state the next onPrepareBufferImage() clears
+	 * the caches, detaches the native provider and builds a new one.
+	 */
+	public void reload() {
+		if (panoramaxTilesProvider == null) {
+			PanoramaxTilesProvider.clearRasterCache(getApplication());
+		}
+		// Unconditional and last: a check that raced with a new provider still tears it down.
+		appliedFilterState = null;
 	}
 
 	@Override
@@ -268,17 +300,21 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 		return true;
 	}
 
+	static boolean isVisibleAtZoom(int zoom, @NonNull ITileSource map) {
+		ITileSource vectorSource = TileSourceManager.getPanoramaxVectorSource();
+		return zoom >= Math.max(vectorSource.getMinimumZoomSupported(), map.getMinimumZoomSupported())
+				&& zoom <= Math.min(vectorSource.getMaximumZoomSupported(), map.getMaximumZoomSupported());
+	}
+
 	@Override
 	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		TileSourceTemplate panoramaxTemplate = TileSourceManager.getPanoramaxVectorSource();
 		ITileSource map = this.map;
 		if (map == null) {
 			return;
 		}
 
 		int currentZoom = tileBox.getZoom();
-		if (currentZoom < Math.max(panoramaxTemplate.getMinimumZoomSupported(), map.getMinimumZoomSupported())
-				|| currentZoom > Math.min(panoramaxTemplate.getMaximumZoomSupported(), map.getMaximumZoomSupported())) {
+		if (!isVisibleAtZoom(currentZoom, map)) {
 			return;
 		}
 
@@ -354,13 +390,17 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	private void drawLines(Canvas canvas, RotatedTileBox tileBox, List<Geometry> geometries,
 	                       int tileX, int tileY, int tileZoom, PanoramaxFilterState filterState) {
 		for (Geometry geometry : geometries) {
+			// Sequence tiles also contain picture points, so skip non-line geometries before filtering.
+			if (!(geometry instanceof LineString) && !(geometry instanceof MultiLineString)) {
+				continue;
+			}
 			if (geometry.isEmpty() || filterState.filtered(geometry.getUserData())) {
 				continue;
 			}
 
 			if (geometry instanceof MultiLineString) {
 				drawMultiLineString(canvas, tileBox, (MultiLineString) geometry, tileX, tileY, tileZoom);
-			} else if (geometry instanceof LineString) {
+			} else {
 				drawLineString(canvas, tileBox, (LineString) geometry, tileX, tileY, tileZoom);
 			}
 		}
@@ -534,6 +574,8 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 			int layerIndex = view.getLayerIndex(this);
 			mapRenderer.resetMapLayerProvider(layerIndex);
 			panoramaxTilesProvider = null;
+			panoramaxTilesProxy = null;
+			panoramaxTilesAttached = false;
 		}
 	}
 

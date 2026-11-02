@@ -23,7 +23,7 @@ object DistanceRowBehaviour : DefaultPoiAdditionalRowBehaviour() {
 				    OsmAndFormatter.getFormattedDistance(valueAsFloatInMeters, app)
 			    }
 			    builder.setText(formattedValue)
-			    val prefix = builder.textPrefix
+			    val prefix = builder.getTextPrefix() ?: ""
 			    builder.setTextPrefix(formatPrefix(prefix, app.getString(R.string.distance)))
 		    } catch (e: RuntimeException) {
 			    LOG.error(e.message, e)

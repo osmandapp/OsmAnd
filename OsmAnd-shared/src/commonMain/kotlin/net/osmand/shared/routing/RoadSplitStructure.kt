@@ -26,6 +26,10 @@ class RoadSplitStructure {
 	@JvmField var rightMaxPrio: Int = 0
 	@JvmField var roadsOnRight: Int = 0
 
+	/** Where every road leaving the intersection goes, and where the route goes, as deviations. */
+	@JvmField var attachedAngles: MutableList<Double> = ArrayList()
+	@JvmField var currentDeviation: Double = 0.0
+
 	/** True when nothing here actually turns: every road leaves within the slight-turn margin. */
 	fun allAreStraight(): Boolean {
 		for (angle in leftLanesInfo) {

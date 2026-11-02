@@ -87,7 +87,7 @@ abstract class SettingsMapPointsStorage {
 					break;
 				}
 				String lon = tok.nextToken();
-				list.add(new LatLon(Float.parseFloat(lat), Float.parseFloat(lon)));
+				list.add(new LatLon(Double.parseDouble(lat), Double.parseDouble(lon)));
 			}
 		}
 		return list;
@@ -150,8 +150,8 @@ abstract class SettingsMapPointsStorage {
 			if (i > 0) {
 				pointsBuilder.append(",");
 			}
-			pointsBuilder.append((float) points.get(i).getLatitude())
-					.append(",").append((float) points.get(i).getLongitude());
+			pointsBuilder.append(points.get(i).getLatitude())
+					.append(",").append(points.get(i).getLongitude());
 		}
 		StringBuilder descriptionsBuilder = new StringBuilder();
 		for (int i = 0; i < descriptions.size(); i++) {

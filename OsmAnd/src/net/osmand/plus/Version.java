@@ -54,6 +54,17 @@ public class Version {
 		return net.osmand.plus.BuildConfig.FLAVOR;
 	}
 
+	/**
+	 * Gradle build variant, e.g. nightlyFreeLegacyFatRelease. R8 writes a mapping.txt per variant,
+	 * so a crash report needs it to pick the mapping that retraces its stack.
+	 */
+	@NonNull
+	public static String getBuildVariant() {
+		String buildType = net.osmand.plus.BuildConfig.BUILD_TYPE;
+		String flavor = getBuildFlavor();
+		return Algorithms.isEmpty(flavor) ? buildType : flavor + Algorithms.capitalizeFirstLetter(buildType);
+	}
+
 	public static boolean isGooglePlayEnabled() {
 		return !isHuawei() && !isAmazon() && !isHMDBuild();
 	}

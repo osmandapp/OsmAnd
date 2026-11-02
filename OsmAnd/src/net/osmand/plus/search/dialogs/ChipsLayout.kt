@@ -193,6 +193,8 @@ class ChipsLayout @JvmOverloads constructor(
 		}
 	}
 
+	fun hasVisibleChips(): Boolean = items.any { it.visible }
+
 	fun setOnChipClickListener(listener: OnChipClickListener?) {
 		chipClickListener = listener
 	}

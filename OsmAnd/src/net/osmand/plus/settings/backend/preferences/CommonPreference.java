@@ -359,7 +359,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		if (appMode != null) {
 			if (!global) {
 				if (isSetForMode(appMode)) {
-					String value = asStringModeValue(appMode);
+					String value = getExportValue(appMode);
 					if (value != null) {
 						json.put(getId(), value);
 					}
@@ -368,7 +368,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 			}
 		} else if (global) {
 			if (isSet()) {
-				String value = asString();
+				String value = getExportValue(null);
 				if (value != null) {
 					json.put(getId(), value);
 				}
@@ -376,6 +376,17 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 			}
 		}
 		return false;
+	}
+
+	@Nullable
+	private String getExportValue(@Nullable ApplicationMode mode) {
+		OsmandPlugin plugin = getRelatedPlugin();
+		if (plugin == null || !plugin.disablePreferences()) {
+			return mode != null ? asStringModeValue(mode) : asString();
+		}
+		Object prefs = mode != null ? settings.getProfilePreferences(mode) : getPreferences();
+		T defaultValue = mode != null ? getProfileDefaultValue(mode) : getDefaultValue();
+		return toString(getValue(prefs, defaultValue));
 	}
 
 	@Override

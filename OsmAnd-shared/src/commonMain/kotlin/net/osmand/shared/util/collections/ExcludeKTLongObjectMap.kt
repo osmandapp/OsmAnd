@@ -5,9 +5,9 @@ package net.osmand.shared.util.collections
  * [keys] were not in the base. The HH planner limits a detailed search by every network point
  * except the two it runs between.
  *
- * A copy of `net.osmand.router.ExcludeTLongObjectMap` in OsmAnd-java, which stays there for
- * android and tools; this copy is for iOS. The java class implements the whole `TLongObjectMap`
- * and throws on everything but these two; here the lookup interface is all the planner asks for.
+ * Based on `net.osmand.router.ExcludeTLongObjectMap` from OsmAnd-java. The java class
+ * implements the whole `TLongObjectMap` and throws on everything but these two; here the lookup
+ * interface is all the planner asks for.
  */
 class ExcludeKTLongObjectMap<V : Any>(
 	private val map: KTLongObjectLookup<V>,

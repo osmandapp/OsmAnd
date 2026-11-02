@@ -139,6 +139,80 @@ object KMapAlgorithms {
 	}
 
 	/**
+	 * Where the segment from the out point to the in point crosses the edge of the box, as x in the
+	 * high 32 bits and y in the low ones, or -1 when it does not; a copy of
+	 * `MapAlgorithms.calculateIntersection`.
+	 */
+	fun calculateIntersection(
+		inx: Int, iny: Int, outx: Int, outy: Int, leftX: Int, rightX: Int, bottomY: Int, topY: Int
+	): Long {
+		// firstly try to search if the line goes in
+		if (outy < topY && iny >= topY) {
+			val tx = (outx + ((inx - outx).toDouble() * (topY - outy)) / (iny - outy)).toInt()
+			if (leftX <= tx && tx <= rightX) {
+				return combine2Points(tx, topY)
+			}
+		}
+		if (outy > bottomY && iny <= bottomY) {
+			val tx = (outx + ((inx - outx).toDouble() * (outy - bottomY)) / (outy - iny)).toInt()
+			if (leftX <= tx && tx <= rightX) {
+				return combine2Points(tx, bottomY)
+			}
+		}
+		if (outx < leftX && inx >= leftX) {
+			val ty = (outy + ((iny - outy).toDouble() * (leftX - outx)) / (inx - outx)).toInt()
+			if (ty >= topY && ty <= bottomY) {
+				return combine2Points(leftX, ty)
+			}
+		}
+		if (outx > rightX && inx <= rightX) {
+			val ty = (outy + ((iny - outy).toDouble() * (outx - rightX)) / (outx - inx)).toInt()
+			if (ty >= topY && ty <= bottomY) {
+				return combine2Points(rightX, ty)
+			}
+		}
+
+		// try to search if point goes out
+		if (outy > topY && iny <= topY) {
+			val tx = (outx + ((inx - outx).toDouble() * (topY - outy)) / (iny - outy)).toInt()
+			if (leftX <= tx && tx <= rightX) {
+				return combine2Points(tx, topY)
+			}
+		}
+		if (outy < bottomY && iny >= bottomY) {
+			val tx = (outx + ((inx - outx).toDouble() * (outy - bottomY)) / (outy - iny)).toInt()
+			if (leftX <= tx && tx <= rightX) {
+				return combine2Points(tx, bottomY)
+			}
+		}
+		if (outx > leftX && inx <= leftX) {
+			val ty = (outy + ((iny - outy).toDouble() * (leftX - outx)) / (inx - outx)).toInt()
+			if (ty >= topY && ty <= bottomY) {
+				return combine2Points(leftX, ty)
+			}
+		}
+		if (outx < rightX && inx >= rightX) {
+			val ty = (outy + ((iny - outy).toDouble() * (outx - rightX)) / (outx - inx)).toInt()
+			if (ty >= topY && ty <= bottomY) {
+				return combine2Points(rightX, ty)
+			}
+		}
+		if (outx == rightX || outx == leftX) {
+			if (outy >= topY && outy <= bottomY) {
+				return combine2Points(outx, outy)
+			}
+		}
+		if (outy == topY || outy == bottomY) {
+			if (leftX <= outx && outx <= rightX) {
+				return combine2Points(outx, outy)
+			}
+		}
+		return -1L
+	}
+
+	private fun combine2Points(x: Int, y: Int): Long = (x.toLong() shl 32) or y.toLong()
+
+	/**
 	 * Where the horizontal line at [middleY] crosses the segment from the previous node to the node,
 	 * or [Int.MIN_VALUE] when it does not; a copy of `MapAlgorithms.ray_intersect_x`.
 	 */

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/content_container"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:id="@+id/info_container"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				style="@style/TitleStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:layout_marginBottom="@dimen/text_margin_small"
+				android:maxLines="2"
+				android:paddingEnd="@dimen/content_padding"
+				android:textColor="?android:textColorPrimary"
+				tools:text="Favorite name" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/content_padding_small"
+				android:orientation="horizontal">
+
+				<ImageView
+					android:id="@+id/direction_icon"
+					android:layout_width="@dimen/directionIconSize"
+					android:layout_height="@dimen/directionIconSize"
+					android:layout_gravity="center_vertical"
+					android:layout_marginTop="1sp"
+					tools:src="@drawable/ic_direction_arrow" />
+
+				<androidx.constraintlayout.widget.ConstraintLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/description"
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:textColor="?android:textColorSecondary"
+						app:layout_constrainedWidth="true"
+						app:layout_constraintBottom_toBottomOf="parent"
+						app:layout_constraintEnd_toStartOf="@+id/suffix_description"
+						app:layout_constraintHorizontal_bias="0.0"
+						app:layout_constraintHorizontal_chainStyle="packed"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toTopOf="parent"
+						tools:text="1,2 km • Paris" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/suffix_description"
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:textColor="?android:textColorSecondary"
+						android:visibility="gone"
+						app:layout_constraintBaseline_toBaselineOf="@id/description"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toEndOf="@id/description"
+						tools:text="| 28.12.2022" />
+
+				</androidx.constraintlayout.widget.ConstraintLayout>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<ImageButton
+			android:id="@+id/menu_button"
+			style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+			android:layout_width="@dimen/acceptable_touch_radius"
+			android:layout_height="@dimen/acceptable_touch_radius"
+			android:layout_gravity="center_vertical"
+			android:layout_margin="@dimen/text_margin_small"
+			android:contentDescription="@string/shared_string_menu"
+			android:src="@drawable/ic_overflow_menu_white"
+			android:tint="?attr/default_icon_color" />
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/divider"
+		layout="@layout/simple_divider_item" />
+
+</LinearLayout>

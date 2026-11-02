@@ -21,18 +21,26 @@ class TurnLanesRoutingTest {
 		RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION = false
 		val failures = ArrayList<String>()
 		var cases = 0
-		val reader = BinaryMapIndexReader(RoutingTestFixtures.resource("Turn_lanes_test.obf"))
+		// a case may bring its own small map instead of growing the shared one
+		val readers = HashMap<String, BinaryMapIndexReader>()
 		try {
 			for (entry in RoutingTestFixtures.entries("test_turn_lanes.json")) {
 				cases++
+				val map = entry.params["map"]
+				val path = if (map != null) "turn_lanes/$map" else "Turn_lanes_test.obf"
 				try {
+					val reader = readers.getOrPut(path) {
+						BinaryMapIndexReader(RoutingTestFixtures.resource(path))
+					}
 					routeAndCheck(entry, listOf(reader))
 				} catch (e: Throwable) {
 					failures.add(entry.testName + ": " + e.message)
 				}
 			}
 		} finally {
-			reader.close()
+			for (reader in readers.values) {
+				reader.close()
+			}
 		}
 		println("TurnLanesRoutingTest on ${testPlatformName()}: $cases cases, ${failures.size} failed")
 		assertTrue(cases > 100, "cases run: $cases")

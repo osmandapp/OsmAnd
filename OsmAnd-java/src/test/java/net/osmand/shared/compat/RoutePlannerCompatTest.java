@@ -80,7 +80,11 @@ public class RoutePlannerCompatTest {
 	public static List<Object[]> data() throws IOException {
 		List<Object[]> data = new ArrayList<>();
 		for (TestEntry te : entries("/test_turn_lanes.json")) {
-			data.add(new Object[] {"lanes: " + te.getTestName(), te, Arrays.asList(RESOURCES + "Turn_lanes_test.obf"), true});
+			// a case may bring its own small map instead of growing the shared one
+			Map<String, String> laneParams = te.getParams();
+			String map = laneParams != null && laneParams.containsKey("map")
+					? RESOURCES + "turn_lanes/" + laneParams.get("map") : RESOURCES + "Turn_lanes_test.obf";
+			data.add(new Object[] {"lanes: " + te.getTestName(), te, Arrays.asList(map), true});
 		}
 		for (TestEntry te : entries("/test_routing.json")) {
 			Map<String, String> params = te.getParams();

@@ -2,6 +2,7 @@ package net.osmand.search.core.spatial;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -30,6 +31,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.MapPoiTypes.PoiTranslator;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -50,6 +53,7 @@ public class SpatialPoiSearch {
 	Map<String, SpatialPoiType> byKey = new ConcurrentHashMap<>();
 	Map<String, List<SpatialPoiType>> byWikidataKey = new ConcurrentHashMap<>();
 	Map<Integer, SpatialPoiType> byId = new ConcurrentHashMap<>();
+	Set<String> languages = ConcurrentHashMap.newKeySet();
 	
 	public static class SpatialPoiType {
 		public final AbstractPoiType singleType;
@@ -122,6 +126,40 @@ public class SpatialPoiSearch {
 			names.add(name);
 			return true;
 		}
+
+		public String getOriginalName(String alignedName) {
+			if (singleType != null) {
+				for (String name : getOriginalNames(singleType.getTranslation(), singleType.getSynonyms())) {
+					if (SearchAlgorithms.alignChars(name).equals(alignedName)) {
+						return name;
+					}
+				}
+			}
+			return alignedName;
+		}
+
+		/**
+		 * Fewest words of a name of the type that has a word starting with one of the query words. A one-word synonym
+		 * ("cistern", "temple") must not make a partial match of another name ("water" of "Water tank", "place" of
+		 * "Place of worship") look complete.
+		 */
+		public int tokensInMatchedName(Collection<String> queryWords) {
+			int min = 0;
+			for (String name : names) {
+				List<String> words = SearchAlgorithms.split(name);
+				boolean matched = false;
+				for (String w : words) {
+					String aligned = SearchAlgorithms.alignChars(w.toLowerCase());
+					for (String q : queryWords) {
+						matched |= aligned.startsWith(q);
+					}
+				}
+				if (matched && (min == 0 || words.size() < min)) {
+					min = words.size();
+				}
+			}
+			return min == 0 ? tokensInName : min;
+		}
 		
 		@Override
 		public String toString() {
@@ -148,7 +186,7 @@ public class SpatialPoiSearch {
 				}
 				addToIndex(pt, null);
 				for (PoiType add : pt.getPoiAdditionals()) {
-					if (add.isTopVisible() && !add.getKeyName().endsWith("_no")) {
+					if (add.isTopVisible() && PoiAdditionalLabels.isAcceptedValue(add)) {
 						addToIndex(add, pt);
 					}
 				}
@@ -175,24 +213,59 @@ public class SpatialPoiSearch {
 			poiType.parentTypes = new ArrayList<>();
 			poiType.parentTypes.add(parent);
 		}
-		if (!basePoiName.equals(pt.getTranslation())) {
-			String[] split = pt.getTranslation().split(";");
-			for (String tr : split) {
-				poiType.addName(SearchAlgorithms.alignChars(tr.trim()));
-				// only first
-				break;
-			}
-		}
-		String synonyms = pt.getSynonyms();
-		if (!Algorithms.isEmpty(synonyms)) {
-			String[] split = synonyms.split(";");
-			for (String tr : split) {
-				if (tr.trim().length() > 0) {
-					poiType.addName(SearchAlgorithms.alignChars(tr.trim()));
-				}
-			}
+		String translation = basePoiName.equals(pt.getTranslation()) ? null : pt.getTranslation();
+		for (String name : getNames(translation, pt.getSynonyms())) {
+			poiType.addName(name);
 		}
 		addToIndex(basePoiName, poiType);
+	}
+
+	private static List<String> getNames(String translation, String synonyms) {
+		List<String> names = new ArrayList<>();
+		for (String name : getOriginalNames(translation, synonyms)) {
+			names.add(SearchAlgorithms.alignChars(name));
+		}
+		return names;
+	}
+
+	// translation (only the first name) and synonyms
+	private static List<String> getOriginalNames(String translation, String synonyms) {
+		String all = (Algorithms.isEmpty(translation) ? "" : translation.split(";")[0]) + ";"
+				+ (synonyms == null ? "" : synonyms);
+		List<String> names = new ArrayList<>();
+		for (String name : all.split(";")) {
+			if (!name.trim().isEmpty()) {
+				names.add(name.trim());
+			}
+		}
+		return names;
+	}
+
+	// names of one more language, once: "Schule" in Leipzig for an app in Ukrainian
+	public void addLanguage(String lang) {
+		PoiTranslator translator = poiTypes.getPoiTranslator();
+		PoiTranslator langTranslator = translator == null || !languages.add(lang) ? null : translator.getTranslator(lang);
+		if (langTranslator == null) {
+			return;
+		}
+		WriteLock wl = poiTypesIndexLock.writeLock();
+		try {
+			wl.lock();
+			for (SpatialPoiType poiType : byKey.values()) {
+				AbstractPoiType pt = poiType.singleType;
+				if (pt == null) {
+					continue;
+				}
+				for (String name : getNames(langTranslator.getTranslation(pt), langTranslator.getSynonyms(pt))) {
+					if (!poiType.names.contains(name)) {
+						poiType.addName(name);
+						poiTypesIndex.put(name, poiType);
+					}
+				}
+			}
+		} finally {
+			wl.unlock();
+		}
 	}
 
 
@@ -268,13 +341,16 @@ public class SpatialPoiSearch {
 				List<String> possibleValues = subType.possibleValues;
 				List<String> wikidataIds = subType.wikidataIds;
 				TIntArrayList possibleValuesFreqs = subType.possibleValuesFreqs;
-//				int allFreq = subType.frequency;
 				for (int k = 0; k < possibleValues.size(); k++) {
 					String topValueName = possibleValues.get(k);
 					String valueKey = TopIndexFilter.getValueKey(topValueName);
 					String fullKey = subType.name + "_" + valueKey;
 					String wikidataId = wikidataIds != null && k < wikidataIds.size() ? wikidataIds.get(k) : "";
 					int freq = possibleValuesFreqs != null && k < possibleValuesFreqs.size() ? possibleValuesFreqs.get(k) : 0;
+					if (possibleValuesFreqs == null && possibleValues.size() == 1) {
+						// the writer stores per-value frequencies only for 2+ values; one value has the subtype total
+						freq = subType.frequency;
+					}
 					SpatialPoiType topValue = byKey.get(fullKey);
 					if (topValue == null) {
 						topValue = new SpatialPoiType(subType, topValueName, fullKey, ids.getAndIncrement());
@@ -358,7 +434,24 @@ public class SpatialPoiSearch {
 		NameIndexAtom atom = new NameIndexAtom(a.key, a.id, total);
 		cs.atoms.add(atom);
 		cs.tokens.add(t);
-		t.addPoiCategoryMatch(a.id);
+		if (typedInFull(t, a)) {
+			t.addPoiCategoryMatch(a.id);
+		}
+	}
+
+	// a category matched by a word still being typed is only a row: "ca" does not list every catholic church
+	private static boolean typedInFull(SpatialSearchToken t, SpatialPoiType a) {
+		if (!t.incomplete) {
+			return true;
+		}
+		for (String n : a.names) {
+			for (String w : SearchAlgorithms.splitAndNormalize(n, false)) {
+				if (SearchAlgorithms.alignChars(w).equals(t.wordNoDot)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public int getCategoryFrequency(SpatialSearchContext ctx, String categoryKey) {
@@ -436,6 +529,10 @@ public class SpatialPoiSearch {
 				SpatialSearchToken token = pc.tokens.get(i);
 				NameIndexAtom atom = pc.atoms.get(i);
 				token.addAtom(atom);
+				if (!typedInFull(token, pc.pt())) {
+					token.poiCategoryKeysToAutocomplete.remove(atom.name);
+					token.poiCategoryIds.remove((int) atom.id);
+				}
 			}
 			// Problem "Helipad 32" (doesn't list object because no 32 ref is found"
 			// Categories are not needed if exact result is found (there is always option to go in category and filter later)

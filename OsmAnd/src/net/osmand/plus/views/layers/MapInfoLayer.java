@@ -239,6 +239,10 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (topWidgetsVisibleForSystemBars != isVisible) {
 			topWidgetsVisibleForSystemBars = isVisible;
 			updateSystemBarsForPanelVisibilityChange();
+			if (isVisible) {
+				// shown again with the bounds it had before, so topPanelBoundsChangeListener reports no change
+				mapDisplayPositionManager.updateMapDisplayPosition(true);
+			}
 		}
 	}
 

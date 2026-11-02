@@ -390,4 +390,9 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 	public interface AddWidgetListener {
 		void onWidgetSelectedToAdd(@NonNull String widgetsId, @NonNull WidgetsPanel widgetsPanel, boolean recreateControls);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "add_widget";
+	}
 }

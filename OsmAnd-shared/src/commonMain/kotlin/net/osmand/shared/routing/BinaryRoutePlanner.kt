@@ -22,10 +22,9 @@ import kotlin.math.abs
  * segment's cost is time in seconds; the heuristic is the straight line at the profile's maximum
  * speed, or the time along a precalculated route when the context has one.
  *
- * A copy of `net.osmand.router.BinaryRoutePlanner`, which stays in OsmAnd-java for android and
- * tools; this copy is for iOS, where it is to replace the C++ router. The open sets are
- * [KPriorityQueue], which orders equal costs the way `java.util.PriorityQueue` does, so that the two
- * planners find the same route where two are equally good.
+ * Based on `net.osmand.router.BinaryRoutePlanner` from OsmAnd-java. The open sets are
+ * [KPriorityQueue], which orders equal costs the way `java.util.PriorityQueue` does, so that
+ * the two planners find the same route where two are equally good.
  */
 class BinaryRoutePlanner {
 
@@ -397,7 +396,7 @@ class BinaryRoutePlanner {
 		if (obstacle < 0) {
 			return -1.0
 		}
-		val heightObstacle = ctx.getRouter().defineHeightObstacle(road, segmentInd, prevSegmentInd)
+		val heightObstacle = ctx.getRouter().defineHeightObstacle(road, prevSegmentInd, segmentInd)
 		if (heightObstacle < 0) {
 			return -1.0
 		}

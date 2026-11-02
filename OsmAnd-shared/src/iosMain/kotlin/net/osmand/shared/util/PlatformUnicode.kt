@@ -26,3 +26,7 @@ internal actual fun platformStripDiacritics(value: String): String {
 @OptIn(BetaInteropApi::class)
 internal actual fun platformNormalizeNFC(value: String): String =
 	NSString.create(string = value).precomposedStringWithCanonicalMapping
+
+@OptIn(BetaInteropApi::class)
+internal actual fun platformNormalizeNFD(value: String): String =
+	NSString.create(string = value).decomposedStringWithCanonicalMapping

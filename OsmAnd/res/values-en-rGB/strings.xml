@@ -178,7 +178,6 @@
     <string name="apply_to_all_points">Apply to all points</string>
     <string name="hmd_promo">HMD Promo for %1$s months</string>
     <string name="ais_address_settings">IP address settings</string>
-    <string name="ais_nmea_protocol">Protocol for NMEA data reception</string>
     <string name="obd_simulation_device">Simulation device</string>
     <string name="download_depth_countours">Nautical depth contours</string>
     <string name="astronomy_map">Astronomy Map</string>
@@ -299,7 +298,7 @@
     <string name="search_more">Search more…</string>
     <string name="astro_search_empty_description">Try changing the filters or observation time.</string>
     <string name="astro_search_input_hint">Input text</string>
-    <string name="day_off_label">off</string>
+    <string name="day_off_label">closed</string>
     <string name="astro_explore_my_data">My data</string>
     <string name="astro_explore_schedule_subtitle">Upcoming astronomical events</string>
     <string name="open_from">Open from</string>
@@ -502,7 +501,6 @@
     <string name="shared_string_markers">Markers</string>
     <string name="set_step_size_summary">Choose a step size to group your tracks.</string>
     <string name="set_step_size">Set step size</string>
-    <string name="audionotes_plugin_name">Audio/video notes</string>
     <string name="organize_by_summary">Automatically organise your tracks into groups based on a selected parameter like activity, speed, or location.</string>
     <string name="shared_string_accessibility">Accessibility</string>
     <string name="organize_by">Organise by</string>

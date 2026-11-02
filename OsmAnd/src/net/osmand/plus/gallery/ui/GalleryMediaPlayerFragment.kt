@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.RectF
 import android.graphics.SurfaceTexture
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
@@ -33,10 +34,16 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.OneShotPreDrawListener
 import net.osmand.PlatformUtil
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.gallery.controller.GalleryPagerController
+import net.osmand.plus.gallery.data.Cancellable
+import net.osmand.plus.gallery.data.GalleryMediaMetadata
+import net.osmand.plus.gallery.data.MediaMetadataListener
+import net.osmand.plus.gallery.ui.viewer.MediaViewerPage
+import net.osmand.plus.gallery.ui.viewer.MediaViewerSheetLayout
 import net.osmand.plus.utils.InsetTarget.Type
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.shared.media.domain.MediaItem
@@ -44,7 +51,7 @@ import net.osmand.shared.media.domain.MediaType
 import kotlin.math.abs
 import kotlin.math.min
 
-class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
+class GalleryMediaPlayerFragment : BaseFullScreenFragment(), MediaViewerPage {
 
 	private var position = 0
 	private var controller: GalleryPagerController? = null
@@ -75,6 +82,7 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 
 	private var pendingSeekMs = -1
 	private var progressAnimator: ObjectAnimator? = null
+	private var durationRequest: Cancellable? = null
 
 	private var seekBurstDirection = 0
 	private var seekBurstTotalMs = 0
@@ -140,13 +148,51 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 		setupControls()
 		setupGestures()
 		setupSurface()
-		updateProgressTexts(0, 0)
+		showKnownDuration()
 
 		return rootView
 	}
 
 	override fun getInsetTargets(): InsetTargetsCollection {
 		return super.getInsetTargets().apply { removeType(Type.ROOT_INSET) }
+	}
+
+	override fun contentRect(): RectF? {
+		if (view == null) return null
+		if (!isVideo) return audioVirtualContentRect()
+		if (textureView.layoutParams.width > 0 && textureView.width > 0) {
+			return RectF(0f, 0f, textureView.width.toFloat(), textureView.height.toFloat()).apply {
+				textureView.matrix.mapRect(this)
+				offset(textureView.left.toFloat(), textureView.top.toFloat())
+			}
+		}
+		val poster = posterView.drawable ?: return null
+		if (posterView.visibility != View.VISIBLE || poster.intrinsicWidth <= 0 || poster.intrinsicHeight <= 0) return null
+		return RectF(0f, 0f, poster.intrinsicWidth.toFloat(), poster.intrinsicHeight.toFloat()).apply {
+			posterView.imageMatrix.mapRect(this)
+			offset(posterView.left.toFloat(), posterView.top.toFloat())
+		}
+	}
+
+	private fun audioVirtualContentRect(): RectF {
+		val aspect = MediaViewerSheetLayout.AUDIO_VIRTUAL_CONTENT_ASPECT
+		val width = min(rootView.width.toFloat(), rootView.height * aspect)
+		val height = width / aspect
+		return RectF(0f, 0f, width, height).apply {
+			offset(rootView.width / 2f - width / 2f, rootView.height / 2f - height / 2f)
+		}
+	}
+
+	override fun canScrollVertically(direction: Int): Boolean = isVideo && zoomScale > 1f
+
+	override fun onPreviewSettled() {
+		if (isVideo && zoomScale > 1f) resetZoom(animated = true)
+	}
+
+	private fun notifyContentChanged(view: View) {
+		OneShotPreDrawListener.add(view) {
+			(parentFragment as? GalleryPhotoPagerFragment)?.onPageContentChanged(this)
+		}
 	}
 
 	private fun setupArtwork() {
@@ -156,6 +202,7 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 			app.galleryHelper.posterLoader.loadPoster(item) { poster ->
 				if (poster != null && !playbackStarted) {
 					posterView.setImageBitmap(poster)
+					notifyContentChanged(posterView)
 				}
 			}
 		} else {
@@ -580,6 +627,25 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 		positionTime.text = formatTime(positionMs)
 	}
 
+	// The player is created on the first Play, so until then the duration comes from the file metadata
+	private fun showKnownDuration() {
+		val current = mediaItem ?: return
+		val repository = app.galleryHelper.metadataRepository
+		val cached = repository.getCached(current)
+		updateProgressTexts(0, cached?.durationMs?.toInt() ?: 0)
+		if (cached == null) {
+			durationRequest = repository.request(listOf(current), object : MediaMetadataListener {
+				override fun onMetadataLoaded(item: MediaItem, metadata: GalleryMediaMetadata) {
+					if (view != null && !prepared) {
+						durationTime.text = formatTime(metadata.durationMs?.toInt() ?: 0)
+					}
+				}
+
+				override fun onBatchFinished() {}
+			})
+		}
+	}
+
 	private fun updateProgressTexts(positionMs: Int, durationMs: Int) {
 		positionTime.text = formatTime(positionMs)
 		durationTime.text = formatTime(durationMs)
@@ -729,6 +795,7 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 				Gravity.CENTER
 			)
 			textureView.layoutParams = params
+			notifyContentChanged(textureView)
 		}
 	}
 
@@ -769,6 +836,14 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 		}
 	}
 
+	override fun onResume() {
+		super.onResume()
+		val item = mediaItem ?: return
+		if (item.type == MediaType.AUDIO && controller?.takeAutoPlayOnOpen(item.id) == true) {
+			togglePlayPause()
+		}
+	}
+
 	override fun onPause() {
 		super.onPause()
 		pausePlayback()
@@ -781,6 +856,8 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 		handler.removeCallbacksAndMessages(null)
 		progressAnimator?.cancel()
 		progressAnimator = null
+		durationRequest?.cancel()
+		durationRequest = null
 		pendingSeekMs = -1
 		releasePlayer()
 		surface?.release()
@@ -828,4 +905,6 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 				arguments = Bundle().apply { putInt(SELECTED_POSITION_KEY, position) }
 			}
 	}
+
+	override fun getAnalyticsScreen() = "gallery_media_player"
 }

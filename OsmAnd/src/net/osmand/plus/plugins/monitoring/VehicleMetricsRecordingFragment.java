@@ -339,5 +339,10 @@ public class VehicleMetricsRecordingFragment extends BaseFullScreenFragment {
 			this.titleId = titleId;
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "vehicle_metrics_recording";
+	}
 }
 

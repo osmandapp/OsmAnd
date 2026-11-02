@@ -8,13 +8,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.poi.PoiFilterUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.settings.enums.HistorySource;
@@ -30,25 +34,30 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SearchHistoryHelper {
 
 	private static final Log log = PlatformUtil.getLog(SearchHistoryHelper.class);
 
-	private static final int HISTORY_LIMIT = 1500;
+	public static final int HISTORY_LIMIT = 1500;
 
 	private final OsmandApplication app;
 	private final SearchHistoryDBHelper dbHelper;
 	private final Map<HistoryEntryKey, HistoryEntry> map = new ConcurrentHashMap<>();
 
 	private List<HistoryEntry> loadedEntries;
+	private volatile List<StateChangedListener<HistorySource>> listeners = new ArrayList<>();
 
 	public static class HistoryObject {
 		private final Object object;
@@ -86,6 +95,30 @@ public class SearchHistoryHelper {
 
 	public void setLastModifiedTime(long lastModifiedTime) {
 		dbHelper.setLastModifiedTime(lastModifiedTime);
+	}
+
+	/**
+	 * The listener gets the source of the changed entries on the thread that changed the history,
+	 * which can be a background thread.
+	 */
+	public void addListener(@NonNull StateChangedListener<HistorySource> listener) {
+		listeners = CollectionUtils.addToList(listeners, listener);
+	}
+
+	public void removeListener(@NonNull StateChangedListener<HistorySource> listener) {
+		listeners = CollectionUtils.removeFromList(listeners, listener);
+	}
+
+	private void notifyListeners(@NonNull HistorySource source) {
+		for (StateChangedListener<HistorySource> listener : listeners) {
+			listener.stateChanged(source);
+		}
+	}
+
+	private void notifyListeners(@NonNull Set<HistorySource> sources) {
+		for (HistorySource source : sources) {
+			notifyListeners(source);
+		}
 	}
 
 	public void addNewItemToHistory(double latitude, double longitude, PointDescription name,
@@ -152,12 +185,12 @@ public class SearchHistoryHelper {
 
 		for (HistoryEntry entry : loadedEntries) {
 			PointDescription description = entry.getName();
-			boolean exists = isPointDescriptionExists(description);
 			boolean historyEnabled = entry.getSource() == SEARCH && searchHistoryEnabled
 					|| entry.getSource() == NAVIGATION && navigationHistoryEnabled;
-			if ((includeDeleted || exists)
+			// the existence check reads files for GPX entries, so it goes last
+			if ((source == null || entry.getSource() == source)
 					&& (!onlyEnabledSources || historyEnabled)
-					&& (source == null || entry.getSource() == source)) {
+					&& (includeDeleted || isPointDescriptionExists(description))) {
 				if (!onlyPoints || (!description.isPoiType() && !description.isCustomPoiFilter())) {
 					entries.add(entry);
 				}
@@ -211,7 +244,7 @@ public class SearchHistoryHelper {
 		return new PointDescription(PointDescription.POINT_TYPE_GPX_FILE, gpxInfo.getFileName());
 	}
 
-	public void remove(SearchResult searchResult) {
+	private void removeSearchResult(@NonNull SearchResult searchResult, @NonNull Set<HistorySource> removedSources) {
 		HistoryEntry entry = searchResult instanceof SearchHistoryAPI.HistorySearchResult historySearchResult
 				? historySearchResult.getHistoryEntry()
 				: getHistoryEntry(searchResult.object);
@@ -220,7 +253,9 @@ public class SearchHistoryHelper {
 		}
 
 		if (entry != null) {
-			remove(entry);
+			if (removeEntry(entry.getName(), entry.getSource())) {
+				removedSources.add(entry.getSource());
+			}
 			return;
 		}
 
@@ -230,7 +265,7 @@ public class SearchHistoryHelper {
 		}
 
 		if (pd != null) {
-			remove(pd);
+			removeEntries(pd, removedSources);
 		} else {
 			log.error(String.format(
 					"Can't get PointDescription from SearchResult: %s, object: %s (%s), relatedObject: %s (%s), objectType: %s",
@@ -242,6 +277,20 @@ public class SearchHistoryHelper {
 					searchResult.objectType
 			));
 		}
+	}
+
+	public void remove(SearchResult searchResult) {
+		Set<HistorySource> removedSources = EnumSet.noneOf(HistorySource.class);
+		removeSearchResult(searchResult, removedSources);
+		notifyListeners(removedSources);
+	}
+
+	public void remove(@NonNull Collection<SearchResult> results) {
+		Set<HistorySource> removedSources = EnumSet.noneOf(HistorySource.class);
+		for (SearchResult result : results) {
+			removeSearchResult(result, removedSources);
+		}
+		notifyListeners(removedSources);
 	}
 
 	private PointDescription getPointDescription(Object item) {
@@ -263,11 +312,7 @@ public class SearchHistoryHelper {
 		return item instanceof HistoryEntry historyEntry ? historyEntry : null;
 	}
 
-	private void remove(@NonNull HistoryEntry entry) {
-		remove(entry.getName(), entry.getSource());
-	}
-
-	private void remove(PointDescription pd) {
+	private void removeEntries(@NonNull PointDescription pd, @NonNull Set<HistorySource> removedSources) {
 		checkLoadedEntries();
 		List<HistoryEntry> toRemove = new ArrayList<>();
 		for (HistoryEntry entry : loadedEntries) {
@@ -276,11 +321,13 @@ public class SearchHistoryHelper {
 			}
 		}
 		for (HistoryEntry entry : toRemove) {
-			remove(entry);
+			if (removeEntry(entry.getName(), entry.getSource())) {
+				removedSources.add(entry.getSource());
+			}
 		}
 	}
 
-	private void remove(@NonNull PointDescription pd, @NonNull HistorySource source) {
+	private boolean removeEntry(@NonNull PointDescription pd, @NonNull HistorySource source) {
 		checkLoadedEntries();
 		HistoryEntryKey key = new HistoryEntryKey(pd, source);
 		HistoryEntry model = map.get(key);
@@ -290,7 +337,9 @@ public class SearchHistoryHelper {
 			}
 			loadedEntries = CollectionUtils.removeFromList(loadedEntries, model);
 			map.remove(key);
+			return true;
 		}
+		return false;
 	}
 
 	public void removeAll() {
@@ -299,6 +348,7 @@ public class SearchHistoryHelper {
 			app.getPoiFilters().clearHistory();
 			loadedEntries = new ArrayList<>();
 			map.clear();
+			notifyListeners(EnumSet.allOf(HistorySource.class));
 		}
 	}
 
@@ -333,6 +383,7 @@ public class SearchHistoryHelper {
 				dbHelper.add(model);
 			}
 			updateEntriesList();
+			notifyListeners(model.getSource());
 		}
 	}
 
@@ -341,6 +392,11 @@ public class SearchHistoryHelper {
 			addItemToHistoryWithReplacement(model);
 		}
 		updateEntriesList();
+		Set<HistorySource> sources = EnumSet.noneOf(HistorySource.class);
+		for (HistoryEntry model : entries) {
+			sources.add(model.getSource());
+		}
+		notifyListeners(sources);
 	}
 
 	public void updateEntriesList() {
@@ -428,11 +484,12 @@ public class SearchHistoryHelper {
 				if (custom != null) {
 					custom.clearFilter();
 					custom.updateTypesToAccept(parent);
+					acceptTypesWithAdditional(custom, additional);
 					custom.setFilterByName(additional.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT));
 
 					SearchPhrase phrase = searchUICore.getPhrase();
 					result = new SearchResult(phrase);
-					result.localeName = custom.getName();
+					result.localeName = PoiAdditionalLabels.getSearchName(additional);
 					result.object = custom;
 					result.priority = SEARCH_AMENITY_TYPE_PRIORITY;
 					result.priorityDistance = 0;
@@ -441,6 +498,25 @@ public class SearchHistoryHelper {
 			}
 		}
 		searchUICore.selectSearchResult(result);
+	}
+
+	// the parent type alone misses the other types declaring the attribute (#24941)
+	private void acceptTypesWithAdditional(@NonNull PoiUIFilter filter, @NonNull PoiType additional) {
+		Map<PoiCategory, LinkedHashSet<String>> accepted = filter.getAcceptedTypes();
+		for (PoiType type : PoiFilterUtils.getTypesWithAdditional(app.getPoiTypes(), additional)) {
+			PoiCategory category = type.getCategory();
+			if (accepted.containsKey(category) && accepted.get(category) == null) {
+				continue; // the whole category is accepted
+			}
+			LinkedHashSet<String> keys = accepted.get(category);
+			if (keys == null) {
+				keys = new LinkedHashSet<>();
+				accepted.put(category, keys);
+			}
+			if (keys.add(type.getKeyName())) {
+				filter.selectSubTypesToAccept(category, keys);
+			}
+		}
 	}
 
 	private void applyObjectMetadata(@NonNull HistoryEntry entry, @NonNull PointDescription name,

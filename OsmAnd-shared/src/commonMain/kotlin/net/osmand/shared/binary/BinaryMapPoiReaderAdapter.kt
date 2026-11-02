@@ -7,13 +7,14 @@ import net.osmand.shared.data.KLocation
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.osm.PoiCategory
-import net.osmand.shared.search.core.KHashQuadTree
+import net.osmand.shared.search.core.HashQuadTree
 import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.util.KCollatorStringMatcher
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.KSearchAlgorithms
 import net.osmand.shared.util.collections.KTIntArrayList
 import net.osmand.shared.util.collections.KTIntLongMap
+import net.osmand.shared.util.collections.KTLongArrayList
 import net.osmand.shared.util.collections.KTLongHashSet
 import kotlin.math.abs
 
@@ -21,10 +22,8 @@ import kotlin.math.abs
  * Reads the poi section of an obf file: the tables that decode an amenity, the r-tree of boxes
  * over it, and the amenities themselves.
  *
- * A copy of `BinaryMapPoiReaderAdapter` in OsmAnd-java, which stays there for android and tools;
- * this copy is for iOS. The read statistics java collects behind its stats hooks are left out, as
- * they serve the obf inspection tools, and so is `readNameIndex`, which walks the whole name index
- * for those same tools.
+ * Based on `BinaryMapPoiReaderAdapter` from OsmAnd-java. The read statistics java collects
+ * behind its stats hooks are left out, as they serve the obf inspection tools.
  *
  * Amenities are stored twice over: once in the boxes of the tree, which carry only the types they
  * hold, and once in the data blocks the boxes point at. A search walks the tree with the filter,
@@ -548,6 +547,81 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 	private fun normalizeSearchPoiByNameQuery(query: String): String =
 		query.replace("\"", "").lowercase()
 
+	internal fun readNameIndexInternal(pi: NameIndexReader): List<NameIndexReader.PrefixNameValue>? {
+		var res: MutableList<NameIndexReader.PrefixNameValue>? = null
+		val loffsets = if (pi.readAll()) null else KTLongArrayList()
+		var ind = -1
+		while (true) {
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return res
+				OsmAndPoiNameIndex.TABLE_FIELD_NUMBER -> {
+					val length = readInt()
+					val oldLimit = codedIS.pushLimitLong(length)
+					pi.setTablePointer(codedIS.getTotalBytesRead())
+					pi.readTableBytes(length)
+					map.readNameIndexInspector(null, pi)
+					codedIS.popLimit(oldLimit)
+				}
+				OsmAndPoiNameIndex.COMMONSTATS_FIELD_NUMBER -> {
+					val length = codedIS.readRawVarint32().toLong()
+					val oldLimit = codedIS.pushLimitLong(length)
+					if (pi.getCommonStats() != null) {
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
+					} else {
+						val stat = CommonIndexedStats.parseFrom(codedIS)
+						pi.setCommonIndexed(stat)
+					}
+					codedIS.popLimit(oldLimit)
+				}
+				OsmAndPoiNameIndex.DATA_FIELD_NUMBER -> {
+					var shift = codedIS.getTotalBytesRead()
+					if (ind == -1 && loffsets != null) {
+						res = pi.getAtomsToLoad(loffsets)
+						loffsets.sort()
+						ind = 0
+					}
+					if (loffsets != null) {
+						if (ind >= loffsets.size()) {
+							codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
+							continue
+						} else if (loffsets[ind] != shift) {
+							codedIS.skipRawBytes(loffsets[ind] - shift)
+							shift = codedIS.getTotalBytesRead()
+						}
+						ind++
+					}
+					val len = codedIS.readRawVarint32()
+					val oldLimit = codedIS.pushLimitLong(len.toLong())
+					pi.readAtomsBytes(len)
+					val prefix = if (pi.isCacheRawBlocks()) pi.addData(codedIS.readRawBytes(len), shift)
+					else pi.addData(OsmAndPoiNameIndexData.parseFrom(codedIS), shift)
+					res?.add(prefix)
+					codedIS.popLimit(oldLimit)
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
+	internal fun readNameIndex(nameIndexReader: NameIndexReader): List<NameIndexReader.PrefixNameValue>? {
+		var res: List<NameIndexReader.PrefixNameValue>? = null
+		while (true) {
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return res
+				OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER -> {
+					val length = readInt()
+					val oldLimit = codedIS.pushLimitLong(length)
+					res = readNameIndexInternal(nameIndexReader)
+					codedIS.popLimit(oldLimit)
+					return res
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
 	/**
 	 * The amenities of [region] whose name matches the request's query. The name index gives the
 	 * offsets of the data blocks that hold a candidate; the blocks are then read and each amenity
@@ -808,7 +882,7 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 						) {
 							val d = abs(req.x.toLong() - x31) + abs(req.y.toLong() - y31)
 							offsets.put(shift, d)
-							tagGroupCoords.add(KHashQuadTree.encodeTileId(EVAL_TAG_GROUP_ZOOM, x31, y31))
+							tagGroupCoords.add(HashQuadTree.encodeTileId(EVAL_TAG_GROUP_ZOOM, x31, y31))
 						}
 					}
 					return
@@ -985,8 +1059,8 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 						val yB = ((yData + 1) shl (31 - zoom)) - 1
 						intersectBbox = !(left31 > xR || xL > right31 || bottom31 < yT || yB < top31)
 						if (tagGroupsToRead != null) {
-							var xyLT = KHashQuadTree.encodeTileId31(EVAL_TAG_GROUP_ZOOM, xL, yT)
-							var xyRB = KHashQuadTree.encodeTileId31(EVAL_TAG_GROUP_ZOOM, xR, yB)
+							var xyLT = HashQuadTree.encodeTileId31(EVAL_TAG_GROUP_ZOOM, xL, yT)
+							var xyRB = HashQuadTree.encodeTileId31(EVAL_TAG_GROUP_ZOOM, xR, yB)
 							if (xyLT == xyRB) {
 								readSubBoxesTagGroup = tagGroupsToRead.contains(xyLT)
 							} else {
@@ -1249,22 +1323,11 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 		const val TAGGROUPS_FIELD_NUMBER = 17
 	}
 
+	/** The blocks of the name index are [OsmAndPoiNameIndexData] and [OsmAndPoiNameIndexDataAtom]. */
 	private object OsmAndPoiNameIndex {
 		const val TABLE_FIELD_NUMBER = 3
+		const val COMMONSTATS_FIELD_NUMBER = 4
 		const val DATA_FIELD_NUMBER = 5
-	}
-
-	private object OsmAndPoiNameIndexData {
-		const val SUFFIXESDICTIONARY_FIELD_NUMBER = 2
-		const val ATOMS_FIELD_NUMBER = 3
-	}
-
-	private object OsmAndPoiNameIndexDataAtom {
-		const val ZOOM_FIELD_NUMBER = 2
-		const val X_FIELD_NUMBER = 3
-		const val Y_FIELD_NUMBER = 4
-		const val SUFFIXESBITSETINDEX_FIELD_NUMBER = 5
-		const val SHIFTTO_FIELD_NUMBER = 14
 	}
 
 	private object OsmAndPoiTagGroups {

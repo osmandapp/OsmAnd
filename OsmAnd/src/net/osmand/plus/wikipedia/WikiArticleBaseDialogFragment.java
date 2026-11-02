@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -17,12 +16,10 @@ import android.widget.TextView;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.widgets.popup.PopUpMenu;
@@ -44,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -144,6 +142,9 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 	private final CopyOnWriteArrayList<Call> imageLoadingCalls = new CopyOnWriteArrayList<>();
 	private final AtomicInteger imageLoadingGeneration = new AtomicInteger();
 	private HeaderImageTask headerImageTask;
+
+	protected Map<String, String> articleLanguageItems;
+	protected Set<String> articleLanguageCodes;
 
 	protected void updateWebSettings() {
 		WikiArticleShowImages showImages = settings.WIKI_ARTICLE_SHOW_IMAGES.get();
@@ -495,7 +496,7 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 	protected abstract String createHtmlContent();
 
 
-	protected void setupLanguageChanger(final TextView selectedLangTv) {
+	protected void setupLanguageChanger(TextView selectedLangTv) {
 		this.selectedLangTv = selectedLangTv;
 		ColorStateList selectedLangColorStateList = selectedLangColorStateList();
 		selectedLangTv.setTextColor(selectedLangColorStateList);
@@ -512,30 +513,49 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 		);
 	}
 
-	protected boolean showPopupLangMenu(final View anchor, final Set<String> languageCodes) {
-		final Context context = getContext();
+	// <language code, display name>
+	protected Map<String, String> getArticleLanguagesList(Context context, Set<String> languageCodes) {
+		if (articleLanguageItems == null || articleLanguageCodes == null || !articleLanguageCodes.equals(languageCodes)) {
+			articleLanguageItems = buildArticleLanguagesList(context, languageCodes);
+			articleLanguageCodes = new HashSet<>(languageCodes);
+		}
+		return new LinkedHashMap<>(articleLanguageItems);
+	}
+
+	protected Map<String, String> buildArticleLanguagesList(Context context, Set<String> languageCodes) {
+		Map<String, String> languages = new HashMap<>();
+		String languageName;
+		for (String code : languageCodes) {
+			languageName = AndroidUtils.getLangTranslation(context, code);
+			if (languageName.equalsIgnoreCase(code)) {
+				// AndroidUtils.getLangTranslation() didn't recognize this language code.
+				// Skip this language as we don't have proper name to display in the language list.
+				continue;
+			}
+			languages.put(code, languageName);
+		}
+		return AndroidUtils.sortByValue(languages);
+	}
+
+	protected boolean showPopupLangMenu(View anchor, Set<String> languageCodes) {
+		Context context = getContext();
 		if (context == null) return false;
 
 		List<PopUpMenuItem> items = new ArrayList<>();
+		Map<String, String> sortedNames = getArticleLanguagesList(context, languageCodes);
 
-		final Map<String, String> names = new HashMap<>();
-		for (String n : languageCodes) {
-			names.put(n, FileNameTranslationHelper.getVoiceName(context, n));
-		}
-		final String langSelected = getSelectedLanguage();
-		final String selectedLangName = names.remove(langSelected);
+		String langSelected = getSelectedLanguage();
+		String selectedLangName = sortedNames.remove(langSelected);
 
-		if (Algorithms.isEmpty(names)) {
+		if (Algorithms.isEmpty(sortedNames)) {
 			return false;
 		}
-
-		final Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
 
 		if (selectedLangName != null) {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(selectedLangName)
 					.setOnClickListener(_item -> {
-						final String selectedLanguage = getSelectedLanguage();
+						String selectedLanguage = getSelectedLanguage();
 						if (!selectedLanguage.equals(langSelected)) {
 							setSelectedLanguage(langSelected);
 							populateArticle();
@@ -546,8 +566,8 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(e.getValue())
 					.setOnClickListener(_item -> {
-						final String selectedLanguage = getSelectedLanguage();
-						final String itemLanguage = e.getKey();
+						String selectedLanguage = getSelectedLanguage();
+						String itemLanguage = e.getKey();
 						if (!selectedLanguage.equals(itemLanguage)) {
 							setSelectedLanguage(e.getKey());
 							populateArticle();
@@ -564,6 +584,7 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 		return true;
 	}
 
-	protected abstract void setSelectedLanguage(final String languageCode);
+	protected abstract void setSelectedLanguage(String languageCode);
+
 	protected abstract String getSelectedLanguage();
 }

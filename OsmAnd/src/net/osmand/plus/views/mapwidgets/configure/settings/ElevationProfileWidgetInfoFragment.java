@@ -82,4 +82,9 @@ public class ElevationProfileWidgetInfoFragment extends WidgetInfoBaseFragment {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(KEY_SHOW_SLOPE, showSlope);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "elevation_profile_widget_info";
+	}
 }

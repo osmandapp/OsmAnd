@@ -1527,6 +1527,11 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 	
+	// a read aborted by an error (OutOfMemoryError) leaves its limits on the stream and every next read fails
+	public void resetReadLimits() {
+		codedIS.popLimit(Long.MAX_VALUE);
+	}
+
 	public List<PrefixNameValue> readFullNameIndex(NameIndexReader reader) throws IOException {
 		codedIS.seek(reader.poiRegion != null ? reader.poiRegion.filePointer : reader.addressRegion.filePointer);
 		long old = codedIS.pushLimitLong(reader.poiRegion != null ? reader.poiRegion.length : reader.addressRegion.length);
@@ -1537,6 +1542,10 @@ public class BinaryMapIndexReader {
 			res = addressAdapter.readNameIndex(reader);
 		}
 		codedIS.popLimit(old);
+		if (res != null) {
+			// the blocks read before come first, in the order of a hash set: the order of the file whatever was read
+			res.sort((a, b) -> Long.compare(a.shift, b.shift));
+		}
 		return res;
 	}
 	

@@ -15,13 +15,16 @@ import androidx.annotation.RequiresApi;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.search.SearchUICore;
 
 import org.apache.commons.logging.Log;
 
@@ -42,6 +45,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -107,6 +111,22 @@ public class MemoryLog {
 	// than mapped into the process, which is what Debug.getMemoryStat("summary.graphics") reads
 	private static final String[] SMAPS_CATEGORIES =
 			{"dalvik", "native", "gpu", "so", "code", "obf", "font", "stack", "anon", "other"};
+	// scudo on 64-bit Android keeps every size class in its own 256 MB region, the batch class
+	// first and then the classes below in this order, so the address of a primary mapping says
+	// which class it belongs to and the mapped part of a region is the high-water mark of the class
+	private static final int SCUDO_REGION_SHIFT = 28;
+	private static final int[] SCUDO_CLASSES = {0, 32, 48, 64, 80, 96, 112, 144, 176, 192, 224, 288,
+			352, 448, 592, 800, 1104, 1648, 2096, 2576, 3120, 4112, 4624, 7120, 8720, 11664, 14224,
+			16400, 18448, 23056, 29456, 33296, 65552};
+	// the classes below this say nothing, and there are 33 of them on every line otherwise
+	private static final long SCUDO_CLASS_MIN_KB = 10 * 1024;
+	// a region grown to this is out of room: the next allocation of that class goes elsewhere
+	private static final long SCUDO_CLASS_FULL_KB = 250 * 1024;
+	// maps is one line per mapping, and the process near the mapping limit is the one this is for:
+	// 63k lines parse in ~30 ms on a desktop, so only a device far slower than that turns it off
+	private static final long MAPS_BUDGET_MS = 1000;
+	private static final byte[] SCUDO_PRIMARY = "[anon:scudo:primary".getBytes(StandardCharsets.US_ASCII);
+	private static final byte[] SCUDO_SECONDARY = "[anon:scudo:secondary".getBytes(StandardCharsets.US_ASCII);
 	// a heap smaller than this explains itself; below it a histogram is not worth seconds of freeze
 	private static final long HISTOGRAM_HEAP_THRESHOLD = 350L * 1024 * 1024;
 	// many devices cap the heap at 256 MB, where the absolute threshold can never be reached,
@@ -126,35 +146,43 @@ public class MemoryLog {
 			{"art.gc.blocking-gc-time", "bgcms"},
 	};
 
-	private static final ReferenceQueue<Activity> DESTROYED_QUEUE = new ReferenceQueue<>();
-	private static final List<DestroyedActivity> DESTROYED = new ArrayList<>();
+	private final ReferenceQueue<Activity> destroyedQueue = new ReferenceQueue<>();
+	private final List<DestroyedActivity> destroyed = new ArrayList<>();
 
-	private static long lastSampleTime;
-	private static long peakUsed;
-	private static boolean sessionStarted;
-	private static final AtomicBoolean activitiesWatched = new AtomicBoolean();
-	private static int sampleCount;
-	private static boolean summaryAffordable = true;
-	private static boolean smapsAffordable = true;
-	private static int smapsCount;
-	private static long smapsRss;
-	private static long previousAllocated;
-	private static long previousBlockingGcTime;
-	private static long lastRss;
-	private static long previousRss;
-	private static long previousCpu;
-	private static long previousRead;
-	private static long previousWrite;
-	private static boolean summaryDue;
-	private static long lastHistogramTime;
+	private long lastSampleTime;
+	private long peakUsed;
+	private boolean sessionStarted;
+	private final AtomicBoolean activitiesWatched = new AtomicBoolean();
+	private int sampleCount;
+	private boolean summaryAffordable = true;
+	private boolean smapsAffordable = true;
+	private boolean mapsAffordable = true;
+	private int smapsCount;
+	private long smapsRss;
+	private long previousAllocated;
+	private long previousBlockingGcTime;
+	private long lastRss;
+	private long previousRss;
+	private long previousCpu;
+	private long previousRead;
+	private long previousWrite;
+	private boolean summaryDue;
+	private long lastHistogramTime;
 	// written from the main thread and read by the sampler, so they are kept lock free: the
 	// callback is a counter update and must never wait behind a walk of the process. Level and
 	// count share one value so that a sample cannot read one of them from a later trim than the
 	// other: the high half holds the level raised by one, the low half the number of calls.
-	private static final AtomicLong trims = new AtomicLong();
+	private final AtomicLong trims = new AtomicLong();
+	// route calculations, searches and address lookups since the previous sample: all of them
+	// load map data in bursts
+	private final AtomicInteger routeCalculations = new AtomicInteger();
+	private int previousSearches;
+	private int previousAddressRequests;
+	private int previousAddressLookups;
+	private long previousAddressLookupsTimeMs;
 
 	// called from a background thread, at most once per SAMPLE_INTERVAL
-	public static synchronized void sample(@NonNull OsmandApplication app) {
+	public synchronized void sample(@NonNull OsmandApplication app) {
 		long time = SystemClock.elapsedRealtime();
 		Runtime runtime = Runtime.getRuntime();
 		long used = runtime.totalMemory() - runtime.freeMemory();
@@ -196,16 +224,21 @@ public class MemoryLog {
 
 	// the system asking for memory back is the clearest sign that the process is in trouble,
 	// and it arrives on the main thread, so it is only remembered here and written by the sample
-	public static void onTrimMemory(int level) {
+	public void onTrimMemory(int level) {
 		trims.accumulateAndGet(level, (current, raised) -> {
 			long highest = Math.max(current >>> 32, raised + 1);
 			return (highest << 32) | ((current & 0xffffffffL) + 1);
 		});
 	}
 
+	// called from the routing thread when a calculation ends, cancelled or not
+	public void onRouteCalculated() {
+		routeCalculations.incrementAndGet();
+	}
+
 	// MB/count of what the map renderer keeps in GPU memory by type, e.g. "tex:120/340,slot:0/1200,vbo:10/180,ibo:2/180,mesh:0/180"
 	@Nullable
-	private static String gpuMemory(@NonNull OsmandApplication app) {
+	private String gpuMemory(@NonNull OsmandApplication app) {
 		try {
 			MapRendererView mapRenderer = app.getOsmandMap().getMapView().getMapRenderer();
 			return mapRenderer != null ? mapRenderer.getGpuMemoryStats() : null;
@@ -216,7 +249,7 @@ public class MemoryLog {
 	}
 
 	@NonNull
-	private static String buildSample(@NonNull OsmandApplication app, long time, long used, long max) {
+	private String buildSample(@NonNull OsmandApplication app, long time, long used, long max) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("t=").append(time / 1000);
 		sb.append(" heap=").append(mb(used)).append('/').append(mb(max));
@@ -231,6 +264,7 @@ public class MemoryLog {
 		appendVmCounts(sb);
 		appendProcessSummary(sb);
 		appendSmaps(sb);
+		appendMaps(sb);
 		appendThreadNames(sb);
 		String gpu = gpuMemory(app);
 		if (gpu != null) {
@@ -253,6 +287,31 @@ public class MemoryLog {
 		if (busy != null) {
 			sb.append(" busy=").append(busy);
 		}
+		int calculations = routeCalculations.getAndSet(0);
+		if (calculations > 0) {
+			sb.append(" rcalc=").append(calculations);
+		}
+		int searches = SearchUICore.getSearchesRun();
+		if (searches > previousSearches) {
+			sb.append(" srch=").append(searches - previousSearches);
+		}
+		previousSearches = searches;
+		GeocodingLookupService geocoding = app.getGeocodingLookupService();
+		if (geocoding != null) {
+			int requests = geocoding.getRequests();
+			if (requests > previousAddressRequests) {
+				sb.append(" georeq=").append(requests - previousAddressRequests);
+			}
+			previousAddressRequests = requests;
+			int lookups = geocoding.getLookups();
+			long lookupsTimeMs = geocoding.getLookupsTimeMs();
+			if (lookups > previousAddressLookups) {
+				sb.append(" geo=").append(lookups - previousAddressLookups);
+				sb.append(" geoms=").append(lookupsTimeMs - previousAddressLookupsTimeMs);
+				previousAddressLookups = lookups;
+				previousAddressLookupsTimeMs = lookupsTimeMs;
+			}
+		}
 		String histogram = maybeCollectHistogram(app, time, used);
 		if (histogram != null) {
 			sb.append(' ').append(histogram);
@@ -264,7 +323,7 @@ public class MemoryLog {
 	// started by native code, and the map renderer, the Qt pool and hwui all run on those.
 	// One read of /proc/self/status gives the real count plus the resident size and the swap,
 	// none of which any Debug counter carries and none of which costs a walk of smaps.
-	private static void appendProcStatus(@NonNull StringBuilder sb) {
+	private void appendProcStatus(@NonNull StringBuilder sb) {
 		long rss = 0;
 		long swap = 0;
 		long threads = 0;
@@ -295,7 +354,7 @@ public class MemoryLog {
 		}
 	}
 
-	private static long parseStatusKb(@NonNull String line) {
+	private long parseStatusKb(@NonNull String line) {
 		int from = line.indexOf(':') + 1;
 		int to = line.indexOf(" kB");
 		return parse(line.substring(from, to > from ? to : line.length()).trim());
@@ -304,7 +363,7 @@ public class MemoryLog {
 
 	// cpu time and disk traffic since the previous sample: a process that allocates hard also
 	// burns cpu, and heavy writes are how track recording shows up
-	private static void appendCpuAndIo(@NonNull StringBuilder sb) {
+	private void appendCpuAndIo(@NonNull StringBuilder sb) {
 		long cpu = readCpuMillis();
 		if (cpu > 0) {
 			if (previousCpu > 0 && cpu >= previousCpu) {
@@ -325,7 +384,7 @@ public class MemoryLog {
 		}
 	}
 
-	private static long readCpuMillis() {
+	private long readCpuMillis() {
 		try (BufferedReader reader = new BufferedReader(new FileReader("/proc/self/stat"))) {
 			String line = reader.readLine();
 			if (line == null) {
@@ -349,7 +408,7 @@ public class MemoryLog {
 	}
 
 	@Nullable
-	private static long[] readIoBytes() {
+	private long[] readIoBytes() {
 		long read = 0;
 		long write = 0;
 		try (BufferedReader reader = new BufferedReader(new FileReader("/proc/self/io"))) {
@@ -369,7 +428,7 @@ public class MemoryLog {
 
 	// binder proxies and loaded classes are counted by the runtime itself, so reading them is
 	// a native call rather than a heap walk; both grow when something is held that should not be
-	private static void appendVmCounts(@NonNull StringBuilder sb) {
+	private void appendVmCounts(@NonNull StringBuilder sb) {
 		try {
 			sb.append(" bnd=").append(Debug.getBinderLocalObjectCount());
 			sb.append('/').append(Debug.getBinderProxyObjectCount());
@@ -381,7 +440,7 @@ public class MemoryLog {
 	}
 
 	// a thread count says a pool leaked, the names say which pool
-	private static void appendThreadNames(@NonNull StringBuilder sb) {
+	private void appendThreadNames(@NonNull StringBuilder sb) {
 		if (!summaryDue) {
 			return;
 		}
@@ -419,7 +478,7 @@ public class MemoryLog {
 
 	// "pool-3-thread-1", "Binder:8423_2" and "OsmAndCore#4" are all one group each
 	@NonNull
-	private static String threadPrefix(@NonNull String name) {
+	private String threadPrefix(@NonNull String name) {
 		for (int i = 0; i < name.length(); i++) {
 			char c = name.charAt(i);
 			if (Character.isDigit(c) || c == '-' || c == '#' || c == '_' || c == ':') {
@@ -430,7 +489,7 @@ public class MemoryLog {
 	}
 
 	@Nullable
-	private static String readFirstLine(@NonNull File file) {
+	private String readFirstLine(@NonNull File file) {
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 			String line = reader.readLine();
 			return line != null ? line.trim() : null;
@@ -441,7 +500,7 @@ public class MemoryLog {
 
 	// the counters are totals since the process started; the delta since the previous sample
 	// is what tells a quiet minute apart from one that churned a gigabyte
-	private static void appendRuntimeStats(@NonNull StringBuilder sb) {
+	private void appendRuntimeStats(@NonNull StringBuilder sb) {
 		long allocated = 0;
 		long blockingGcTime = 0;
 		for (String[] stat : RUNTIME_STATS) {
@@ -465,7 +524,7 @@ public class MemoryLog {
 
 	// graphics and swap are counted in neither heap, and on a map screen graphics is the
 	// largest single number, so it is worth the cost of reading smaps every few samples
-	private static void appendProcessSummary(@NonNull StringBuilder sb) {
+	private void appendProcessSummary(@NonNull StringBuilder sb) {
 		summaryDue = sampleCount++ % SUMMARY_EVERY == 0;
 		if (!summaryAffordable || !summaryDue) {
 			return;
@@ -498,7 +557,7 @@ public class MemoryLog {
 	 * Only the categories are written, never the names of the mapped files: those are the maps
 	 * somebody downloaded, which is where they live and where they travel.
 	 */
-	private static void appendSmaps(@NonNull StringBuilder sb) {
+	private void appendSmaps(@NonNull StringBuilder sb) {
 		boolean periodic = summaryDue && smapsCount++ % SMAPS_EVERY == 0;
 		// growth does not wait for a summary sample: a peak of a few hundred megabytes can come
 		// and go inside one 30 s interval, and it is the peak the breakdown is wanted for
@@ -530,7 +589,7 @@ public class MemoryLog {
 	 * bytes: decoding it into strings costs several times more than the kernel spends producing it.
 	 */
 	@Nullable
-	private static String readSmapsByCategory() {
+	private String readSmapsByCategory() {
 		long[] totals = new long[SMAPS_CATEGORIES.length];
 		int category = SMAPS_OTHER;
 		byte[] buffer = new byte[SMAPS_BUFFER];
@@ -589,7 +648,157 @@ public class MemoryLog {
 		return sb.length() > 0 ? sb.toString() : null;
 	}
 
-	private static long parseKb(@NonNull byte[] b, int from, int to) {
+	/**
+	 * Native crashes with "Scudo ERROR: internal map failure (Out of memory)" are the process
+	 * running into the mapping limit (~65k) rather than out of memory: once a size class fills its
+	 * region, scudo serves that class from the secondary, one mapping per block, and soon from
+	 * every class. The tombstone shows only the end state, so the mapping count, the secondary
+	 * blocks and the classes that have grown are written here, to see which class goes first.
+	 */
+	private void appendMaps(@NonNull StringBuilder sb) {
+		if (!mapsAffordable) {
+			return;
+		}
+		long start = SystemClock.uptimeMillis();
+		String maps = readMaps();
+		long spent = SystemClock.uptimeMillis() - start;
+		if (maps != null) {
+			sb.append(maps);
+		}
+		if (spent > MAPS_BUDGET_MS && sampleCount > 1) {
+			mapsAffordable = false;
+			sb.append(" mapsOff=").append(spent);
+		}
+	}
+
+	@Nullable
+	private String readMaps() {
+		int count = 0;
+		int secondary = 0;
+		// start, end and writable-primary flag of every primary mapping: the region base is the
+		// lowest of them, which is known only at the end
+		long[] primary = new long[3 * 64];
+		int primaryCount = 0;
+		byte[] buffer = new byte[SMAPS_BUFFER];
+		int filled = 0;
+		try (FileInputStream in = new FileInputStream("/proc/self/maps")) {
+			while (true) {
+				int read = in.read(buffer, filled, buffer.length - filled);
+				if (read > 0) {
+					filled += read;
+				}
+				int lineStart = 0;
+				for (int i = 0; i < filled; i++) {
+					if (buffer[i] != '\n') {
+						continue;
+					}
+					count++;
+					int name = indexOf(buffer, lineStart, i, (byte) '[');
+					if (name >= 0 && startsWith(buffer, name, i, SCUDO_SECONDARY)) {
+						secondary++;
+					} else if (name >= 0 && startsWith(buffer, name, i, SCUDO_PRIMARY)) {
+						if (primaryCount * 3 == primary.length) {
+							long[] grown = new long[primary.length * 2];
+							System.arraycopy(primary, 0, grown, 0, primary.length);
+							primary = grown;
+						}
+						int dash = indexOf(buffer, lineStart, i, (byte) '-');
+						int space = indexOf(buffer, dash + 1, i, (byte) ' ');
+						// primary_reserve is address space only, it counts for the base, not the size
+						boolean used = buffer[space + 2] == 'w' && buffer[name + SCUDO_PRIMARY.length] == ']';
+						primary[primaryCount * 3] = parseHex(buffer, lineStart, dash);
+						primary[primaryCount * 3 + 1] = parseHex(buffer, dash + 1, space);
+						primary[primaryCount * 3 + 2] = used ? 1 : 0;
+						primaryCount++;
+					}
+					lineStart = i + 1;
+				}
+				if (read < 0) {
+					break;
+				}
+				if (lineStart > 0) {
+					System.arraycopy(buffer, lineStart, buffer, 0, filled - lineStart);
+					filled -= lineStart;
+				} else if (filled == buffer.length) {
+					filled = 0;
+				}
+			}
+		} catch (IOException | RuntimeException e) {
+			log.error(e);
+			return null;
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append(" vma=").append(count);
+		sb.append(" sec=").append(secondary);
+		// 32-bit scudo packs its classes differently, and older Android has no scudo at all
+		if (primaryCount == 0 || !is64Bit()) {
+			return sb.toString();
+		}
+		long base = Long.MAX_VALUE;
+		for (int i = 0; i < primaryCount; i++) {
+			base = Math.min(base, primary[i * 3]);
+		}
+		long[] kb = new long[SCUDO_CLASSES.length];
+		for (int i = 0; i < primaryCount; i++) {
+			int region = (int) ((primary[i * 3] - base) >>> SCUDO_REGION_SHIFT);
+			if (primary[i * 3 + 2] == 1 && region < kb.length) {
+				kb[region] += (primary[i * 3 + 1] - primary[i * 3]) / 1024;
+			}
+		}
+		StringBuilder classes = new StringBuilder();
+		int full = 0;
+		for (int i = 0; i < kb.length; i++) {
+			if (i > 0 && kb[i] >= SCUDO_CLASS_FULL_KB) {
+				full++;
+			}
+			if (kb[i] >= SCUDO_CLASS_MIN_KB) {
+				classes.append(classes.length() > 0 ? "," : "")
+						.append(i == 0 ? "batch" : String.valueOf(SCUDO_CLASSES[i]))
+						.append(':').append(kb[i] / 1024);
+			}
+		}
+		if (classes.length() > 0) {
+			sb.append(" scudo=").append(classes);
+		}
+		sb.append(" full=").append(full);
+		return sb.toString();
+	}
+
+	private boolean is64Bit() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && android.os.Process.is64Bit();
+	}
+
+	private int indexOf(@NonNull byte[] b, int from, int to, byte value) {
+		for (int i = from; i < to; i++) {
+			if (b[i] == value) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	private boolean startsWith(@NonNull byte[] b, int from, int to, @NonNull byte[] prefix) {
+		if (to - from < prefix.length) {
+			return false;
+		}
+		for (int i = 0; i < prefix.length; i++) {
+			if (b[from + i] != prefix[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private long parseHex(@NonNull byte[] b, int from, int to) {
+		long value = 0;
+		for (int i = from; i < to; i++) {
+			byte c = b[i];
+			value = value << 4 | (c <= '9' ? c - '0' : (c | 0x20) - 'a' + 10);
+		}
+		return value;
+	}
+
+	private long parseKb(@NonNull byte[] b, int from, int to) {
 		long value = 0;
 		for (int i = from; i < to; i++) {
 			byte c = b[i];
@@ -602,7 +811,7 @@ public class MemoryLog {
 		return value;
 	}
 
-	private static int categoryOf(@NonNull String header) {
+	private int categoryOf(@NonNull String header) {
 		// address perms offset dev inode [name] — an anonymous mapping simply has no sixth field,
 		// and taking the last one instead would read the inode as a name
 		int i = 0;
@@ -656,7 +865,7 @@ public class MemoryLog {
 	// a heap walk, counting what a cache already knows costs nothing. Only non empty values are
 	// written so that a line stays short.
 	@Nullable
-	private static String buildHeld(@NonNull OsmandApplication app) {
+	private String buildHeld(@NonNull OsmandApplication app) {
 		StringBuilder sb = new StringBuilder();
 		try {
 			ResourceManager manager = app.getResourceManager();
@@ -692,6 +901,10 @@ public class MemoryLog {
 			appendCount(sb, "addr", manager.getAddressRepositories().size());
 		} catch (RuntimeException e) {
 		}
+		if (app.getExplorePlacesProvider() instanceof ExplorePlacesOnlineProvider provider) {
+			appendCount(sb, "expltile", provider.getCachedTilesCount());
+			appendCount(sb, "expl", provider.getCachedPlacesCount());
+		}
 		try {
 			appendCount(sb, "layer", app.getOsmandMap().getMapView().getLayers().size());
 		} catch (RuntimeException e) {
@@ -711,7 +924,7 @@ public class MemoryLog {
 		return sb.length() > 0 ? sb.toString() : null;
 	}
 
-	private static void appendCount(@NonNull StringBuilder sb, @NonNull String name, long value) {
+	private void appendCount(@NonNull StringBuilder sb, @NonNull String name, long value) {
 		if (value <= 0) {
 			return;
 		}
@@ -724,7 +937,7 @@ public class MemoryLog {
 	// a histogram is worth taking when the heap is large enough to be worth explaining, and it
 	// costs seconds, so it happens at most twice an hour and can be turned off
 	@Nullable
-	private static String maybeCollectHistogram(@NonNull OsmandApplication app, long time, long used) {
+	private String maybeCollectHistogram(@NonNull OsmandApplication app, long time, long used) {
 		long max = Runtime.getRuntime().maxMemory();
 		if (used < Math.min(HISTOGRAM_HEAP_THRESHOLD, (long) (max * HISTOGRAM_HEAP_RATIO))) {
 			return null;
@@ -750,7 +963,7 @@ public class MemoryLog {
 	// what the app was doing when the sample was taken, so that a heap spike can be told
 	// apart from a leak: a route calculation and a search allocate a lot on purpose
 	@Nullable
-	private static String busyWith(@NonNull OsmandApplication app) {
+	private String busyWith(@NonNull OsmandApplication app) {
 		StringBuilder sb = new StringBuilder();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isRouteBeingCalculated()) {
@@ -765,7 +978,7 @@ public class MemoryLog {
 		return sb.length() > 0 ? sb.toString() : null;
 	}
 
-	private static void append(@NonNull StringBuilder sb, @NonNull String value) {
+	private void append(@NonNull StringBuilder sb, @NonNull String value) {
 		if (sb.length() > 0) {
 			sb.append(',');
 		}
@@ -774,7 +987,7 @@ public class MemoryLog {
 
 	// activities are destroyed by the system, so any that outlive their onDestroy by a while is
 	// either a leak or a slow collection; both are worth knowing about before the process died
-	public static void watchActivities(@NonNull OsmandApplication app) {
+	public void watchActivities(@NonNull OsmandApplication app) {
 		// diagnostics restart every time the app comes back to the foreground, and this is
 		// called from the main thread, which must not wait for a sample to finish
 		if (!activitiesWatched.compareAndSet(false, true)) {
@@ -783,8 +996,8 @@ public class MemoryLog {
 		app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
 			@Override
 			public void onActivityDestroyed(@NonNull Activity activity) {
-				synchronized (DESTROYED) {
-					DESTROYED.add(new DestroyedActivity(activity, DESTROYED_QUEUE));
+				synchronized (destroyed) {
+					destroyed.add(new DestroyedActivity(activity, destroyedQueue));
 				}
 			}
 
@@ -815,14 +1028,14 @@ public class MemoryLog {
 	}
 
 	@Nullable
-	private static String countRetained(long time) {
-		synchronized (DESTROYED) {
-			for (Reference<?> collected = DESTROYED_QUEUE.poll(); collected != null; collected = DESTROYED_QUEUE.poll()) {
-				DESTROYED.remove(collected);
+	private String countRetained(long time) {
+		synchronized (destroyed) {
+			for (Reference<?> collected = destroyedQueue.poll(); collected != null; collected = destroyedQueue.poll()) {
+				destroyed.remove(collected);
 			}
 			int retained = 0;
 			long oldest = 0;
-			for (Iterator<DestroyedActivity> it = DESTROYED.iterator(); it.hasNext(); ) {
+			for (Iterator<DestroyedActivity> it = destroyed.iterator(); it.hasNext(); ) {
 				DestroyedActivity destroyed = it.next();
 				if (destroyed.get() == null) {
 					it.remove();
@@ -847,20 +1060,20 @@ public class MemoryLog {
 	// the summary is attached to the exit record of this very process and survives its death,
 	// but it is capped at 128 bytes, so it carries the totals rather than a cut off sample
 	@NonNull
-	private static String buildProcessSummary(long time, long used, long max) {
+	private String buildProcessSummary(long time, long used, long max) {
 		return "t=" + time / 1000
 				+ " h=" + mb(used) + '/' + mb(max)
 				+ " n=" + mb(Debug.getNativeHeapAllocatedSize()) + '/' + mb(Debug.getNativeHeapSize());
 	}
 
-	private static void setProcessStateSummary(@NonNull OsmandApplication app, @NonNull String sample) {
+	private void setProcessStateSummary(@NonNull OsmandApplication app, @NonNull String sample) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 			setProcessStateSummaryApi30(app, sample);
 		}
 	}
 
 	@RequiresApi(api = Build.VERSION_CODES.R)
-	private static void setProcessStateSummaryApi30(@NonNull OsmandApplication app, @NonNull String sample) {
+	private void setProcessStateSummaryApi30(@NonNull OsmandApplication app, @NonNull String sample) {
 		ActivityManager manager = app.getSystemService(ActivityManager.class);
 		if (manager == null) {
 			return;
@@ -881,7 +1094,7 @@ public class MemoryLog {
 	// keeps the newest MAX_FILE_SIZE bytes, the older samples are dropped. The tail is moved
 	// in small chunks: the log is tens of megabytes and reading it into one array would be a
 	// larger allocation than anything this class is meant to observe.
-	private static void append(@NonNull File file, @NonNull String text) {
+	private void append(@NonNull File file, @NonNull String text) {
 		try (RandomAccessFile out = new RandomAccessFile(file, "rw")) {
 			long length = out.length();
 			if (length > MAX_FILE_SIZE) {
@@ -895,7 +1108,7 @@ public class MemoryLog {
 		}
 	}
 
-	private static void rotate(@NonNull RandomAccessFile out, long from) throws IOException {
+	private void rotate(@NonNull RandomAccessFile out, long from) throws IOException {
 		byte[] buffer = new byte[ROTATE_BUFFER];
 		long read = from;
 		long write = 0;
@@ -922,7 +1135,7 @@ public class MemoryLog {
 		out.seek(write);
 	}
 
-	private static int indexOfLineStart(@NonNull byte[] bytes, int length) {
+	private int indexOfLineStart(@NonNull byte[] bytes, int length) {
 		for (int i = 0; i < length; i++) {
 			if (bytes[i] == '\n') {
 				return i + 1;
@@ -931,7 +1144,7 @@ public class MemoryLog {
 		return 0;
 	}
 
-	private static long parse(@Nullable String value) {
+	private long parse(@Nullable String value) {
 		try {
 			return value != null ? Long.parseLong(value) : 0;
 		} catch (NumberFormatException e) {
@@ -939,11 +1152,11 @@ public class MemoryLog {
 		}
 	}
 
-	private static long kbStat(@NonNull Debug.MemoryInfo info, @NonNull String name) {
+	private long kbStat(@NonNull Debug.MemoryInfo info, @NonNull String name) {
 		return parse(info.getMemoryStat(name)) / 1024;
 	}
 
-	private static long mb(long bytes) {
+	private long mb(long bytes) {
 		return bytes / (1024 * 1024);
 	}
 }

@@ -455,4 +455,9 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "download_search";
+	}
 }
