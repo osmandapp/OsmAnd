@@ -378,11 +378,11 @@ public class TextRenderer {
 					String locale = rc.preferredLocale;
 					String nameTag = obj.getMapIndex().decodeType(tag).tag;
 					boolean transliterate = !locale.isEmpty() && rc.transliterate;
+					boolean isLocale = !locale.isEmpty() && nameTag.length() == 5 + locale.length()
+							&& nameTag.endsWith(locale);
 					// name:<lang> only: other tags like piste:ref are separate texts
-					if (nameTag.startsWith("name:")) {
+					if (nameTag.startsWith("name:") && (nameTag.length() <= 8 || isLocale)) {
 						// localized name replaces missing name: name:<locale>, or name:en if transliterate and no name:<locale>
-						boolean isLocale = !locale.isEmpty() && nameTag.length() == 5 + locale.length()
-								&& nameTag.endsWith(locale);
 						boolean englishFallback = !isLocale && transliterate && nameTag.equals("name:en");
 						if ((!isLocale && !englishFallback) || !Algorithms.isBlank(obj.getName())
 								|| (englishFallback && getObjectName(obj, "name:" + locale) != null)) {
