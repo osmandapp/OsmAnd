@@ -5909,4 +5909,13 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_difficulty_preference_description">Prefer routes of this difficulty, although routing over harder or easier pistes is still possible if shorter.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
+    <string name="map_widget_climbs_count">Climbs count</string>
+    <string name="map_widget_climbs_count_desc">Shows the number of climbs completed and remaining in the planned route, based on elevation and grade thresholds.</string>
+    <string name="climbs_count_min_elevation">Min climb elevation</string>
+    <string name="climbs_count_min_elevation_desc">Minimum elevation gain in meters to be considered a climb</string>
+    <string name="climbs_count_min_grade">Min climb grade</string>
+    <string name="climbs_count_min_grade_desc">Minimum average grade percentage to be considered a climb</string>
+    <string name="climb_profile_title">Climb Profile</string>
+    <string name="climb_profile_show_overlay">Show climb profile overlay</string>
+    <string name="climb_profile_show_overlay_desc">Show a profile of the current climb at the bottom of the screen while climbing</string>
 </resources>

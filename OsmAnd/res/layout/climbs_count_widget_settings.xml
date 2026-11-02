@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/climbs_count_settings_container"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:background="?attr/list_background_color">
+
+	<include
+		layout="@layout/divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding" />
+
+	<!-- Show Overlay Setting -->
+	<LinearLayout
+		android:id="@+id/show_overlay_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:background="?attr/list_background_color">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/content_padding_small">
+
+			<TextView
+				android:id="@+id/show_overlay_title"
+				style="@style/TitleStyle"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:maxLines="1" />
+
+			<androidx.appcompat.widget.SwitchCompat
+				android:id="@+id/show_overlay_toggle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical" />
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/show_overlay_desc"
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/list_content_padding_large"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding_small"
+			android:textColor="?android:textColorSecondary" />
+
+	</LinearLayout>
+
+	<include
+		layout="@layout/divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding" />
+
+	<!-- Min Elevation Setting -->
+	<LinearLayout
+		android:id="@+id/min_elevation_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:background="?attr/list_background_color">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/content_padding_small">
+
+			<TextView
+				android:id="@+id/min_elevation_title"
+				style="@style/TitleStyle"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:maxLines="1" />
+
+			<EditText
+				android:id="@+id/min_elevation_edit"
+				style="@style/TitleStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:inputType="number" />
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/min_elevation_desc"
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/list_content_padding_large"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding_small"
+			android:textColor="?android:textColorSecondary" />
+
+	</LinearLayout>
+
+	<include
+		layout="@layout/divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding" />
+
+	<!-- Min Grade Setting -->
+	<LinearLayout
+		android:id="@+id/min_grade_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:background="?attr/list_background_color">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/content_padding_small">
+
+			<TextView
+				android:id="@+id/min_grade_title"
+				style="@style/TitleStyle"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:maxLines="1" />
+
+			<EditText
+				android:id="@+id/min_grade_edit"
+				style="@style/TitleStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:inputType="numberDecimal" />
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/min_grade_desc"
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/list_content_padding_large"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding_small"
+			android:textColor="?android:textColorSecondary" />
+
+	</LinearLayout>
+
+</LinearLayout>
