@@ -110,7 +110,6 @@ class BleSensorSimulator(context: Context) {
     private val pendingServices = ArrayDeque<BluetoothGattService>()
     private val characteristics = mutableMapOf<UUID, BluetoothGattCharacteristic>()
     private val centrals = linkedMapOf<String, Central>()
-    private var advertising = false
     private var advertiseWithName = true
     private var tick = 0
     private var totalDistanceM = 0.0
@@ -177,10 +176,8 @@ class BleSensorSimulator(context: Context) {
         if (config == null) return
         handler.removeCallbacks(tickRunnable)
         handler.removeCallbacks(nameCheckRunnable)
-        if (advertising) {
-            bluetoothManager?.adapter?.bluetoothLeAdvertiser?.stopAdvertising(advertiseCallback)
-            advertising = false
-        }
+        // also when advertising is still starting, its callback has not come yet
+        bluetoothManager?.adapter?.bluetoothLeAdvertiser?.stopAdvertising(advertiseCallback)
         gattServer?.let { server ->
             centrals.values.forEach { server.cancelConnection(it.device) }
             server.close()
@@ -209,7 +206,8 @@ class BleSensorSimulator(context: Context) {
     private fun restoreAdapterName() {
         val original = prefs.getString(KEY_ORIGINAL_NAME, null) ?: return
         val adapter = bluetoothManager?.adapter ?: return
-        if (adapter.name == original || adapter.setName(original)) {
+        // set it even when the name looks restored: a rename from start() may still be pending
+        if (adapter.setName(original)) {
             prefs.edit().remove(KEY_ORIGINAL_NAME).apply()
             log("Bluetooth name restored to \"$original\"")
         } else {
@@ -321,7 +319,8 @@ class BleSensorSimulator(context: Context) {
     private val advertiseCallback = object : AdvertiseCallback() {
         override fun onStartSuccess(settingsInEffect: AdvertiseSettings) {
             handler.post {
-                advertising = true
+                // stopped meanwhile
+                if (config == null) return@post
                 setStatus("Advertising")
                 handler.removeCallbacks(tickRunnable)
                 handler.post(tickRunnable)
