@@ -6,6 +6,7 @@ import static net.osmand.plus.views.mapwidgets.widgetstates.InclinometerWidgetSt
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,17 +20,15 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.utils.InclinometerSensor;
-import net.osmand.plus.views.mapwidgets.utils.InclinometerSensor.InclinometerListener;
 import net.osmand.plus.views.mapwidgets.widgets.InclinometerWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.InclinometerWidgetState;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
-import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.util.List;
 import java.util.Locale;
 
-public class InclinometerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment implements InclinometerListener {
+public class InclinometerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String KEY_PERCENT_UNITS = "percent_units";
 	private static final String KEY_WARNING_ANGLE = "warning_angle";
@@ -53,8 +52,6 @@ public class InclinometerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment
 	private TextView warningAngleValue;
 	private TextView criticalAngleValue;
 	private TextView calibrationStatus;
-	private DialogButton calibrateButton;
-	private DialogButton resetCalibrationButton;
 
 	@NonNull
 	@Override
@@ -104,20 +101,12 @@ public class InclinometerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment
 		soundAlertButton.setBackground(getPressedStateDrawable());
 
 		calibrationStatus = view.findViewById(R.id.calibration_status);
-		calibrateButton = view.findViewById(R.id.calibrate_button);
-		calibrateButton.setOnClickListener(v -> {
-			if (sensor.calibrate()) {
-				app.showShortToastMessage(R.string.inclinometer_calibration_saved);
-			} else {
-				app.showShortToastMessage(R.string.inclinometer_sensor_unavailable);
-			}
-			updateCalibrationStatus();
-		});
-		resetCalibrationButton = view.findViewById(R.id.reset_calibration_button);
-		resetCalibrationButton.setOnClickListener(v -> {
-			sensor.resetCalibration();
-			updateCalibrationStatus();
-		});
+		View calibrationButton = view.findViewById(R.id.calibration_container);
+		calibrationButton.setOnClickListener(v ->
+				InclinometerCalibrationFragment.showInstance(requireActivity().getSupportFragmentManager()));
+		calibrationButton.setBackground(getPressedStateDrawable());
+		ImageView calibrationArrow = view.findViewById(R.id.calibration_arrow);
+		calibrationArrow.setImageDrawable(AndroidUtils.getDrawableForDirection(app, calibrationArrow.getDrawable()));
 		updateCalibrationStatus();
 	}
 
@@ -154,24 +143,7 @@ public class InclinometerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (sensor.isSensorAvailable()) {
-			sensor.requestUpdates(this);
-		}
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		sensor.removeListener(this);
-	}
-
-	@Override
-	public void onInclinationChanged(float pitchDegrees, float rollDegrees) {
-	}
-
-	@Override
-	public boolean isInclinometerActive() {
-		return isResumed();
+		updateCalibrationStatus();
 	}
 
 	private void showUnitsDialog() {
@@ -240,8 +212,6 @@ public class InclinometerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment
 			status = getString(R.string.inclinometer_not_calibrated);
 		}
 		calibrationStatus.setText(status);
-		calibrateButton.setEnabled(sensor.isSensorAvailable());
-		resetCalibrationButton.setEnabled(offset != null);
 	}
 
 	@Override

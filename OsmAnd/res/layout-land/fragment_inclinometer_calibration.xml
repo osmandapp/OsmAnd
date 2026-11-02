@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/list_background_color">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height"
+			android:minHeight="@dimen/toolbar_height"
+			app:title="@string/inclinometer_calibration"
+			app:titleTextAppearance="@style/AppBarTitlePrimary" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<include layout="@layout/list_item_divider" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation="horizontal">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:padding="@dimen/content_padding">
+
+			<net.osmand.plus.views.mapwidgets.configure.settings.InclinometerLevelView
+				android:id="@+id/level_view"
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				app:layout_constraintBottom_toTopOf="@id/values_row"
+				app:layout_constraintDimensionRatio="1"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHeight_max="280dp"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_chainStyle="packed" />
+
+			<LinearLayout
+				android:id="@+id/values_row"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:orientation="horizontal"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/level_view">
+
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:gravity="center_horizontal"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.TextViewEx
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@string/inclinometer_pitch"
+						android:textColor="?android:textColorSecondary" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/pitch_value"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size_large"
+						app:typefaceWeight="medium"
+						tools:text="0.0°" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:gravity="center_horizontal"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.TextViewEx
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@string/inclinometer_roll"
+						android:textColor="?android:textColorSecondary" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/roll_value"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size_large"
+						app:typefaceWeight="medium"
+						tools:text="0.0°" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+		<View
+			android:layout_width="1dp"
+			android:layout_height="match_parent"
+			android:background="?attr/dashboard_divider" />
+
+		<androidx.core.widget.NestedScrollView
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:fillViewport="true"
+			android:overScrollMode="never">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical"
+				android:orientation="vertical"
+				android:padding="@dimen/content_padding">
+
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/TitleStyle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/inclinometer_calibration_desc"
+					android:textColor="?android:textColorPrimary" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/status_title"
+					style="@style/TitleStyle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding"
+					android:textColor="?android:textColorPrimary"
+					tools:text="@string/inclinometer_calibrated" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/status_description"
+					style="@style/DescStyle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textColor="?android:textColorSecondary"
+					tools:text="Offset: pitch 0.4°, roll -1.2°" />
+
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
+					android:id="@+id/calibrate_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding"
+					app:dialogButtonTitle="@string/inclinometer_calibrate"
+					app:dialogButtonType="primary" />
+
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
+					android:id="@+id/reset_calibration_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_half"
+					app:dialogButtonTitle="@string/inclinometer_reset_calibration"
+					app:dialogButtonType="secondaryActive" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/DescStyle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding"
+					android:text="@string/inclinometer_calibration_applies_to_all"
+					android:textColor="?android:textColorSecondary" />
+
+			</LinearLayout>
+
+		</androidx.core.widget.NestedScrollView>
+
+	</LinearLayout>
+
+</LinearLayout>
