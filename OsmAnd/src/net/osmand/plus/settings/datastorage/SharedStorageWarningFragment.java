@@ -361,7 +361,7 @@ public class SharedStorageWarningFragment extends BaseFullScreenFragment impleme
 	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		File dir = settings.getExternalStorageDirectory();
-		return !FileUtils.isWritable(dir) && !settings.SHARED_STORAGE_MIGRATION_FINISHED.get();
+		return !settings.SHARED_STORAGE_MIGRATION_FINISHED.get() && !FileUtils.isWritable(dir);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean usedOnMap) {
@@ -379,5 +379,10 @@ public class SharedStorageWarningFragment extends BaseFullScreenFragment impleme
 	public void onStorageSelected(@NonNull StorageItem storageItem) {
 		selectedStorage = storageItem;
 		setupMigrationFolders();
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "shared_storage_warning";
 	}
 }

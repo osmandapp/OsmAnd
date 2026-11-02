@@ -271,4 +271,9 @@ public class WeatherLayerFragment extends BaseFullScreenFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "weather_layer";
+	}
 }

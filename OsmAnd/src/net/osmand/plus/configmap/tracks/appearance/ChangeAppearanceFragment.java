@@ -220,4 +220,9 @@ public class ChangeAppearanceFragment extends BaseFullScreenDialogFragment imple
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "change_appearance";
+	}
 }

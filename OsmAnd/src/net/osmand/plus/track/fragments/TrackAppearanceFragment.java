@@ -955,4 +955,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	public interface OnNeedScrollListener {
 		void onVerticalScrollNeeded(int y);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "track_appearance";
+	}
 }

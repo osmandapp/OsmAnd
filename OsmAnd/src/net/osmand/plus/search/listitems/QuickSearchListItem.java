@@ -53,6 +53,7 @@ import java.util.Objects;
 public class QuickSearchListItem {
 
 	private static final String STREET_INTERSECTION_DIVIDER = " + ";
+	private static final int TYPES_NAME_LENGTH = 20;
 	protected final OsmandApplication app;
 	private final SearchResult searchResult;
 
@@ -333,7 +334,11 @@ public class QuickSearchListItem {
 			case POI_TYPE:
 				String res = "";
 				if (searchResult.object instanceof AbstractPoiType abstractPoiType) {
-					res = abstractPoiType.getParentTypeName();
+					res = abstractPoiType.isAdditional() ? PoiFilterUtils.getTypesName(
+							PoiFilterUtils.getTypesWithAdditional(app.getPoiTypes(), abstractPoiType), TYPES_NAME_LENGTH) : "";
+					if (Algorithms.isEmpty(res)) {
+						res = abstractPoiType.getParentTypeName();
+					}
 				} else if (searchResult.object instanceof CustomSearchPoiFilter customSearchPoiFilter) {
 					res = customSearchPoiFilter.getName();
 				} else if (searchResult.object instanceof SearchPoiAdditionalFilter searchPoiAdditionalFilter) {
@@ -414,6 +419,8 @@ public class QuickSearchListItem {
 				return "";
 			case UNKNOWN_NAME_FILTER:
 				break;
+			case SUGGESTION:
+				return "";
 		}
 		return searchResult.objectType.name();
 	}
@@ -493,6 +500,9 @@ public class QuickSearchListItem {
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int defIconColor = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 		switch (searchResult.objectType) {
+			case SUGGESTION:
+				return getIcon(app, R.drawable.ic_action_search_dark,
+						nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange);
 			case CITY:
 			case BOUNDARY:
 				// the same mapping as the map marker of an address result uses
@@ -630,18 +640,23 @@ public class QuickSearchListItem {
 		}
 		int iconId = -1;
 		PointDescription name = entry.getName();
-		if (name != null && !Algorithms.isEmpty(name.getIconName())) {
-			String iconName = name.getIconName();
-			if (RenderingIcons.containsBigIcon(iconName)) {
-				iconId = RenderingIcons.getBigIconResourceId(iconName);
-			} else {
-				iconId = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
-			}
+		if (name != null) {
+			iconId = getIconIdByName(app, name.getIconName());
 		}
 		if (iconId <= 0 && name != null) {
 			iconId = name.getItemIcon();
 		}
 		return iconId;
+	}
+
+	public static int getIconIdByName(@NonNull OsmandApplication app, @Nullable String iconName) {
+		if (Algorithms.isEmpty(iconName)) {
+			return 0;
+		}
+		if (RenderingIcons.containsBigIcon(iconName)) {
+			return RenderingIcons.getBigIconResourceId(iconName);
+		}
+		return app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
 	}
 
 	private static boolean isNavigationHistoryEntry(@NonNull HistoryEntry entry) {

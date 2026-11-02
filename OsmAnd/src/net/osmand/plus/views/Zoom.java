@@ -96,10 +96,12 @@ public class Zoom {
             maxZoom = mapRendererView.getMaxZoomLevel();
         }
 
-        if (baseZoom == (int) maxZoom && zoomFloatPart + deltaZoom > maxZoom - baseZoom) {
+        if (baseZoom >= (int) maxZoom && zoomFloatPart + deltaZoom > maxZoom - baseZoom) {
+            baseZoom = (int) maxZoom;
             deltaZoom = maxZoom - baseZoom - zoomFloatPart;
         }
-        else if (baseZoom == (int) Math.ceil(minZoom) && zoomFloatPart + deltaZoom < minZoom - baseZoom) {
+        else if (baseZoom <= (int) Math.ceil(minZoom) && zoomFloatPart + deltaZoom < minZoom - baseZoom) {
+            baseZoom = (int) Math.ceil(minZoom);
             deltaZoom = minZoom - baseZoom - zoomFloatPart;
         }
 

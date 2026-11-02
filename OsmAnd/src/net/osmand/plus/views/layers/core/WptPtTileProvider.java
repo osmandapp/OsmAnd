@@ -1,15 +1,12 @@
 package net.osmand.plus.views.layers.core;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -17,8 +14,6 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
 
@@ -30,13 +25,11 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
 
    private final QListPointI points31 = new QListPointI();
    private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
-   private final Map<Long, IconData> bigIconsCache = new ConcurrentHashMap<>();
-   private final Map<Long, IconData> smallIconsCache = new ConcurrentHashMap<>();
+   private final IconPixelsCache<Long> bigIconsCache = new IconPixelsCache<>();
+   private final IconPixelsCache<Long> smallIconsCache = new IconPixelsCache<>();
 
    private MapTiledCollectionProvider providerInstance;
    private final PointI offset;
-
-   private record IconData(int width, int height, byte[] pixels) {}
 
    public WptPtTileProvider(@NonNull Context context, int baseOrder, boolean textVisible,
                             @Nullable TextRasterizer.Style textStyle, float density) {
@@ -109,42 +102,25 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
       if (data == null) {
          return SwigUtilities.nullSkImage();
       }
-      IconData icon;
       long key = data.getKey();
       if (isFullSize) {
-         icon = bigIconsCache.get(key);
-         if (icon == null) {
+         return bigIconsCache.getImage(key, k -> {
             PointImageDrawable pointImageDrawable;
             if (data.hasMarker) {
                pointImageDrawable = PointImageUtils.getOrCreateSyncedIcon(ctx, data.color, data.wptPt);
             } else {
                pointImageDrawable = PointImageUtils.getFromPoint(ctx, data.color, data.withShadow, data.wptPt);
             }
-            Bitmap bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale, data.history);
-            icon = convertBitmapToIconData(bitmap);
-            bigIconsCache.put(key, icon);
-         }
+            return pointImageDrawable.getBigMergedBitmap(data.textScale, data.history);
+         });
       } else {
-         icon = smallIconsCache.get(key);
-         if (icon == null) {
+         return smallIconsCache.getImage(key, k -> {
             PointImageDrawable pointImageDrawable = PointImageUtils.getFromPoint(ctx, data.color,
                     data.withShadow, data.wptPt);
-            Bitmap bitmap = pointImageDrawable.getSmallMergedBitmap(data.textScale);
-            icon = convertBitmapToIconData(bitmap);
-            smallIconsCache.put(key, icon);
-         }
+            return pointImageDrawable.getSmallMergedBitmap(data.textScale);
+         });
       }
-      return icon != null ? NativeUtilities.createSkImage(icon.width, icon.height, icon.pixels) : SwigUtilities.nullSkImage();
    }
-
-	@Nullable
-	private IconData convertBitmapToIconData(@Nullable Bitmap bitmap) {
-		if (bitmap != null) {
-			byte[] pixels = AndroidUtils.getByteArrayFromBitmap(bitmap);
-			return new IconData(bitmap.getWidth(), bitmap.getHeight(), pixels);
-		}
-		return null;
-	}
 
    @Override
    public String getCaption(int index) {

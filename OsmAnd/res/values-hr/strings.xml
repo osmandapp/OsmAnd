@@ -18,7 +18,6 @@
     <string name="recording_unavailable">nedostupno</string>
     <string name="recording_context_menu_arecord">Snimi zvučni zapis</string>
     <string name="recording_context_menu_vrecord">Snimi video zapis</string>
-    <string name="layer_recordings">Snimanje sloja</string>
     <string name="recording_context_menu_play">Pokreni</string>
     <string name="recording_description">Snimanje %1$s %2$s of %3$s</string>
     <string name="recording_default_name">snimanje</string>
@@ -32,7 +31,6 @@
     <string name="download_regular_maps">Standardna karta</string>
     <string name="recording_photo_description">Slika %1$s of %2$s</string>
     <string name="av_video_format">Video format</string>
-    <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
     <string name="rendering_attr_noAdminboundaries_name">Sakrij granice</string>
     <string name="download_roads_only_maps">Samo cestovne karte</string>
     <string name="download_srtm_maps">Izohipse</string>
@@ -783,7 +781,6 @@
     <string name="welcome_header">Dobrodošli</string>
     <string name="current_route">Trenutna ruta</string>
     <string name="rendering_value_orange_name">Narančasta</string>
-    <string name="local_recordings_delete_all_confirm">Izbrisati ćete %1$d bilješke. Jeste li sigurni?</string>
     <string name="delay_to_start_navigation">Započni turn-by-turn navigaciju poslije…</string>
     <string name="shared_string_go">Kreni</string>
     <string name="osm_edits">OSM promjene</string>
@@ -867,7 +864,6 @@
     <string name="close_changeset">Zatvori promjene</string>
     <string name="lang_pms">Pijemonte</string>
     <string name="osmand_parking_overdue">zakasnio</string>
-    <string name="watch">Prikaži</string>
     <string name="download_tab_local">Lokalno</string>
     <string name="traffic_warning_hazard">Opasnost</string>
     <string name="no_updates_available">Nema dostupnih ažuriranja</string>

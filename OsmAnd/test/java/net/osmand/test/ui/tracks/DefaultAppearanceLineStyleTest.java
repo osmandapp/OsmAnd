@@ -1,6 +1,5 @@
 package net.osmand.test.ui.tracks;
 
-import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
@@ -8,6 +7,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static net.osmand.test.common.EspressoUtils.onDialogView;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 
 import static org.hamcrest.Matchers.allOf;
@@ -80,12 +80,12 @@ public class DefaultAppearanceLineStyleTest extends AndroidTest {
 		Espresso.onIdle();
 
 		// --- UI: open the Line style card and pick "Dashed" from its popup selector ---
-		onView(allOf(withId(R.id.card_selector), isDescendantOfA(lineStyleCardHeader())))
+		onDialogView(allOf(withId(R.id.card_selector), isDescendantOfA(lineStyleCardHeader())))
 				.perform(click());
 		ComposePopupMenu.clickItem(composeRule, app.getString(R.string.gpx_line_style_dashed));
 
 		// the card's own selector row must reflect the new choice immediately
-		onView(allOf(withId(R.id.title), isDescendantOfA(allOf(withId(R.id.card_selector), isDescendantOfA(lineStyleCardHeader())))))
+		onDialogView(allOf(withId(R.id.title), isDescendantOfA(allOf(withId(R.id.card_selector), isDescendantOfA(lineStyleCardHeader())))))
 				.check(matches(withText(R.string.gpx_line_style_dashed)));
 
 		// --- Setting: save and confirm it persisted to the folder's own DB row ---

@@ -199,6 +199,11 @@ public class OutlinedTextContainer extends FrameLayoutEx {
 		mainTextView.setTextSize(unit, size);
 	}
 
+	public void setMaxWidth(int maxPixels) {
+		outlineTextView.setMaxWidth(maxPixels);
+		mainTextView.setMaxWidth(maxPixels);
+	}
+
 	public void setTypeface(@Nullable Typeface tf, int style) {
 		outlineTextView.setTypeface(tf, style);
 		mainTextView.setTypeface(tf, style);

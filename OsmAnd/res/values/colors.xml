@@ -679,16 +679,22 @@
     <!-- or styles: use the semantic tokens below.                     -->
     <!-- Named by HSL lightness: neutral/90 = L 90%.                   -->
     <!-- Within a family H and S are fixed; only L changes.            -->
+    <!-- blue H230 S100 · blue/mid H230 S70 · blue/muted H230 S29.4    -->
 
-    <color name="palette_blue_93">#DDE5FF</color>
+    <color name="palette_blue_93">#DBE1FF</color>
     <color name="palette_blue_85">#B2BFFF</color>
     <color name="palette_blue_77">#8A9DFF</color>
     <color name="palette_blue_60">#3355FF</color>
     <color name="palette_blue_48">#0029F5</color>
-	<color name="palette_blue_muted_93">#E8EAF2</color>
-	<color name="palette_blue_muted_60">#7B88B7</color>
-    <color name="palette_blue_muted_45">#516094</color>
-    <color name="palette_blue_muted_30">#364063</color>
+
+    <color name="palette_blue_mid_38">#1D34A5</color>
+    <color name="palette_blue_mid_30">#172982</color>
+
+    <color name="palette_blue_muted_93">#E8EAF2</color>
+    <color name="palette_blue_muted_90">#DEE1ED</color>
+    <color name="palette_blue_muted_80">#BDC2DB</color>
+    <color name="palette_blue_muted_40">#485284</color>
+    <color name="palette_blue_muted_30">#363E63</color>
 
     <color name="palette_neutral_100">#FFFFFF</color>
     <color name="palette_neutral_95">#F1F1F3</color>
@@ -698,32 +704,37 @@
     <color name="palette_neutral_70">#AEAEB7</color>
     <color name="palette_neutral_60">#9292A0</color>
     <color name="palette_neutral_55">#858594</color>
-    <color name="palette_neutral_45">#6B6B7B</color>
     <color name="palette_neutral_30">#484851</color>
     <color name="palette_neutral_25">#3C3C44</color>
+    <color name="palette_neutral_20">#303036</color>
     <color name="palette_neutral_15">#242429</color>
     <color name="palette_neutral_10">#18181B</color>
     <color name="palette_neutral_0">#000000</color>
 
+    <color name="palette_orange_90">#FFE7CC</color>
     <color name="palette_orange_50">#FF8800</color>
     <color name="palette_orange_40">#CC6D00</color>
+    <color name="palette_orange_30">#995200</color>
 
+    <color name="palette_red_90">#FAD1D6</color>
     <color name="palette_red_65">#EE5D70</color>
-	<color name="palette_red_50">#E71832</color>
+    <color name="palette_red_50">#E71832</color>
     <color name="palette_red_45">#CF162D</color>
+    <color name="palette_red_30">#8A0F1E</color>
 
+    <color name="palette_green_90">#D6F5E0</color>
     <color name="palette_green_50">#34CB66</color>
-	<color name="palette_green_40">#339944</color>
+    <color name="palette_green_40">#339944</color>
     <color name="palette_green_30">#1F7A3D</color>
 
-    <!-- ============================================================ -->
     <!-- M3 MIGRATION — SEMANTIC ROLES                                 -->
-    <!-- Names match Material 3 attribute names so MDC components      -->
-    <!-- pick them up via styles.xml without a translation layer.      -->
-    <!--                                                               -->
-    <!-- Pressed states use baked opaque values, not M3 state layers.  -->
-    <!-- ============================================================ -->
+    <!-- Names match the Material 3 theme attributes (colorX -> x) so    -->
+    <!-- MDC components pick them up via the Material themes.            -->
+    <!-- Pressed states are baked opaque values, not M3 state layers:    -->
+    <!-- alpha states lose contrast in direct sunlight. Do not "fix"     -->
+    <!-- them to alpha. Scrim is the one intentional exception.          -->
 
+    <!-- Surface -->
     <color name="surface_light">@color/palette_neutral_95</color>
     <color name="surface_dark">@color/palette_neutral_0</color>
     <color name="surface_container_light">@color/palette_neutral_100</color>
@@ -736,11 +747,14 @@
     <color name="on_surface_dark">@color/palette_neutral_90</color>
     <color name="on_surface_variant_light">@color/palette_neutral_30</color>
     <color name="on_surface_variant_dark">@color/palette_neutral_70</color>
-    <color name="on_surface_tertiary_light">@color/palette_neutral_45</color>
-    <color name="on_surface_tertiary_dark">@color/palette_neutral_55</color>
     <color name="on_surface_disabled_light">@color/palette_neutral_55</color>
     <color name="on_surface_disabled_dark">@color/palette_neutral_60</color>
+    <color name="surface_inverse_light">@color/palette_neutral_20</color>
+    <color name="surface_inverse_dark">@color/palette_neutral_90</color>
+    <color name="on_surface_inverse_light">@color/palette_neutral_95</color>
+    <color name="on_surface_inverse_dark">@color/palette_neutral_20</color>
 
+    <!-- Primary -->
     <color name="primary_light">@color/palette_blue_60</color>
     <color name="primary_dark">@color/palette_blue_77</color>
     <color name="primary_pressed_light">@color/palette_blue_48</color>
@@ -748,24 +762,27 @@
     <color name="on_primary_light">@color/palette_neutral_100</color>
     <color name="on_primary_dark">@color/palette_neutral_15</color>
     <color name="primary_container_light">@color/palette_blue_93</color>
-    <color name="primary_container_dark">@color/palette_blue_muted_30</color>
+    <color name="primary_container_dark">@color/palette_blue_mid_30</color>
     <color name="primary_container_pressed_light">@color/palette_blue_85</color>
-    <color name="primary_container_pressed_dark">@color/palette_blue_muted_45</color>
+    <color name="primary_container_pressed_dark">@color/palette_blue_mid_38</color>
     <color name="on_primary_container_light">@color/palette_blue_muted_30</color>
     <color name="on_primary_container_dark">@color/palette_blue_93</color>
+    <color name="primary_inverse_light">@color/palette_blue_77</color>
+    <color name="primary_inverse_dark">@color/palette_blue_48</color>
 
-	<color name="brand_accent_light">@color/palette_orange_50</color>
-	<color name="brand_accent_dark">@color/palette_orange_50</color>
+    <!-- Secondary -->
+    <color name="secondary_light">@color/palette_blue_muted_40</color>
+    <color name="secondary_dark">@color/palette_blue_muted_80</color>
+    <color name="on_secondary_light">@color/palette_neutral_100</color>
+    <color name="on_secondary_dark">@color/palette_neutral_15</color>
+    <color name="secondary_container_light">@color/palette_blue_muted_90</color>
+    <color name="secondary_container_dark">@color/palette_blue_muted_30</color>
+    <color name="secondary_container_pressed_light">@color/palette_blue_muted_80</color>
+    <color name="secondary_container_pressed_dark">@color/palette_blue_muted_40</color>
+    <color name="on_secondary_container_light">@color/palette_blue_muted_30</color>
+    <color name="on_secondary_container_dark">@color/palette_blue_muted_93</color>
 
-	<color name="secondary_light">@color/palette_blue_muted_45</color>
-	<color name="secondary_dark">@color/palette_blue_muted_60</color>
-	<color name="on_secondary_light">@color/palette_neutral_100</color>
-	<color name="on_secondary_dark">@color/palette_neutral_15</color>
-	<color name="secondary_container_light">@color/palette_blue_muted_93</color>
-	<color name="secondary_container_dark">@color/palette_blue_muted_30</color>
-	<color name="on_secondary_container_light">@color/palette_blue_muted_30</color>
-	<color name="on_secondary_container_dark">@color/palette_blue_muted_93</color>
-
+    <!-- Outline -->
     <color name="outline_light">@color/palette_neutral_55</color>
     <color name="outline_dark">@color/palette_neutral_55</color>
     <color name="outline_variant_light">@color/palette_neutral_85</color>
@@ -773,23 +790,45 @@
     <color name="outline_disabled_light">@color/palette_neutral_80</color>
     <color name="outline_disabled_dark">@color/palette_neutral_30</color>
 
+    <!-- Error -->
     <color name="error_light">@color/palette_red_45</color>
     <color name="error_dark">@color/palette_red_65</color>
-	<color name="error_icon_light">@color/palette_red_50</color>
-	<color name="error_icon_dark">@color/palette_red_50</color>
     <color name="on_error_light">@color/palette_neutral_100</color>
     <color name="on_error_dark">@color/palette_neutral_15</color>
+    <color name="error_container_light">@color/palette_red_90</color>
+    <color name="error_container_dark">@color/palette_red_30</color>
+    <color name="on_error_container_light">@color/palette_red_30</color>
+    <color name="on_error_container_dark">@color/palette_red_90</color>
+    <color name="error_icon_light">@color/palette_red_50</color>
+    <color name="error_icon_dark">@color/palette_red_50</color>
 
+    <!-- Success -->
     <color name="success_light">@color/palette_green_30</color>
     <color name="success_dark">@color/palette_green_50</color>
-	<color name="success_icon_light">@color/palette_green_40</color>
-	<color name="success_icon_dark">@color/palette_green_40</color>
-	
+    <color name="on_success_light">@color/palette_neutral_100</color>
+    <color name="on_success_dark">@color/palette_neutral_15</color>
+    <color name="success_container_light">@color/palette_green_90</color>
+    <color name="success_container_dark">@color/palette_green_30</color>
+    <color name="on_success_container_light">@color/palette_green_30</color>
+    <color name="on_success_container_dark">@color/palette_green_90</color>
+    <color name="success_icon_light">@color/palette_green_40</color>
+    <color name="success_icon_dark">@color/palette_green_40</color>
+
+    <!-- Warning -->
     <color name="warning_light">@color/palette_orange_40</color>
     <color name="warning_dark">@color/palette_orange_50</color>
-	<color name="warning_icon_light">@color/palette_orange_50</color>
-	<color name="warning_icon_dark">@color/palette_orange_50</color>
+    <color name="on_warning_light">@color/palette_neutral_100</color>
+    <color name="on_warning_dark">@color/palette_neutral_15</color>
+    <color name="warning_container_light">@color/palette_orange_90</color>
+    <color name="warning_container_dark">@color/palette_orange_30</color>
+    <color name="on_warning_container_light">@color/palette_orange_30</color>
+    <color name="on_warning_container_dark">@color/palette_orange_90</color>
+    <color name="warning_icon_light">@color/palette_orange_50</color>
+    <color name="warning_icon_dark">@color/palette_orange_50</color>
 
+    <!-- Brand accent: OsmAnd orange. Not an M3 role, icons only. -->
+    <color name="brand_accent_light">@color/palette_orange_50</color>
+    <color name="brand_accent_dark">@color/palette_orange_50</color>
 
     <color name="scrim_light">#52000000</color>
     <color name="scrim_dark">#52000000</color>

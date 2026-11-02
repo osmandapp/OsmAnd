@@ -186,8 +186,8 @@
     <string name="voice_stream_notification">Upozornění</string>
     <string name="voice_stream_music">Média/zvuky navigace</string>
     <string name="warning_tile_layer_not_downloadable">Data pro mapovou vrstvu %1$s nelze stáhnout, reinstalace může pomoci.</string>
-    <string name="overlay_transparency">Průhlednost překryvu</string>
-    <string name="map_transparency">Průhlednost základní mapy</string>
+    <string name="overlay_transparency">Viditelnost překryvu</string>
+    <string name="map_transparency">Viditelnost základní mapy</string>
     <string name="layer_underlay">Podkladová mapa…</string>
     <string name="map_underlay">Podkresová mapa</string>
     <string name="layer_overlay">Překryvná mapa…</string>
@@ -544,7 +544,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic (administrativní úrovně 5-9).</string>
     <string name="download_select_map_types">Ostatní mapy</string>
-    <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
     <string name="srtm_plugin_description">Poskytuje terén a podrobnou topografii pro vizuální pochopení reliéfu krajiny a sjízdnosti pomocí vrstevnic, stínování kopců nebo zbarvení svahů a 3D zobrazení.\n\nChcete-li tyto funkce pro danou oblast aktivovat, musíte si dodatečně stáhnout mapu vrstevnic a/nebo terénu (3D), sestavenou z dat SRTM a ASTER.\n\nDalší informace najdete na %1$s.</string>
     <string name="srtm_plugin_name">Topografie</string>
     <string name="download_srtm_maps">Vrstevnice</string>
@@ -560,7 +559,6 @@
     <string name="av_video_format">Formát videozáznamu</string>
     <string name="recording_error">Nahrávání selhalo</string>
     <string name="recording_unavailable">nedostupné</string>
-    <string name="layer_recordings">Audio/video nahrávky</string>
     <string name="recording_description">Nahrávka %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nahrávání</string>
     <string name="shared_string_control_start">Start</string>
@@ -929,7 +927,6 @@
     <string name="free">%1$s volných</string>
     <string name="device_memory">Paměť zařízení</string>
     <string name="shared_string_audio">Audio</string>
-    <string name="watch">Zobrazit</string>
     <string name="shared_string_selected">Vybraný</string>
     <string name="rename_failed">Přejmenování selhalo.</string>
     <string name="shared_string_currently_recording_track">Právě zaznamenávaná trasa</string>
@@ -1024,7 +1021,6 @@
     <string name="rendering_value_disabled_name">Vypnuto</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Příslušnost k síti</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
-    <string name="local_recordings_delete_all_confirm">Smazat %1$d poznámek\?</string>
     <string name="download_wikipedia_maps">Wikipedie</string>
     <string name="rendering_value_red_name">Červená</string>
     <string name="rendering_value_default13_name">Výchozí (13)</string>
@@ -1066,8 +1062,6 @@
     <string name="shared_string_skip">Přeskočit</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="plugin_settings">Moduly</string>
-    <string name="av_locations_descr">GPX soubor s umístěními.</string>
-    <string name="av_locations">Umístění</string>
     <string name="routing_attr_avoid_shuttle_train_name">Žádný autovlak</string>
     <string name="routing_attr_avoid_shuttle_train_description">Vyhne se použití autovlaků</string>
     <string name="lang_la">Latina</string>
@@ -1284,7 +1278,7 @@
     <string name="shared_string_read_more">Číst více</string>
     <string name="select_map_marker">Vyberte mapovou značku</string>
     <string name="upload_anonymously">Nahrát anonymně</string>
-    <string name="show_transparency_seekbar">Zobrazit posuvník průhlednosti</string>
+    <string name="show_transparency_seekbar">Zobrazit posuvník viditelnosti</string>
     <string name="download_files_error_not_enough_space">Nedostatek místa!
 \nV úložišti je zapotřebí dočasně {3} MB a trvale {1} MB.
 \n(Aktuálně je k dispozici pouze {2} MB.)</string>
@@ -1731,11 +1725,6 @@
     <string name="shared_string_added">Přidáno</string>
     <string name="marker_activated">Značka %s aktivována.</string>
     <string name="one_tap_active_descr">Klepněte na značku na mapě pro její přesunutí na první místo v aktivních značkách bez otevření kontextové nabídky.</string>
-    <string name="empty_state_av_notes">Dělejte si poznámky!</string>
-    <string name="empty_state_av_notes_desc">Přidejte audio, video nebo fotografické poznámky pro libovolný bod na mapě, pomocí nástroje nebo kontextového menu.</string>
-    <string name="notes_by_date">Multimediální poznámky podle data</string>
-    <string name="by_date">Podle datumu</string>
-    <string name="by_type">Podle typu</string>
     <string name="empty_state_markers_active_desc">Klepnutím nebo přidržením označte \'Místa\', pak klepněte na tlačítko značky s vlajkou.</string>
     <string name="modify_the_search_query">Změňte vyhledávací dotaz.</string>
     <string name="one_tap_active">Funkce \"Jedním stiskem\" je aktivní</string>
@@ -1754,8 +1743,6 @@
     <string name="will_open_at">Otevírá v</string>
     <string name="will_open_on">Otevírá v</string>
     <string name="additional_actions">Další akce</string>
-    <string name="av_locations_selected_desc">GPX soubor se souřadnicemi a daty vybraných poznámek.</string>
-    <string name="av_locations_all_desc">GPS soubor se souřadnicemi a daty všech poznámek.</string>
     <string name="shared_string_actions">Akce</string>
     <string name="winter_and_ski_renderer">Zimní</string>
     <string name="touring_view_renderer">Cestovní</string>
@@ -2740,7 +2727,6 @@
     <string name="osm_editing">Editace OSM</string>
     <string name="accessibility_announce">Oznámení</string>
     <string name="photo_notes">Foto-poznámky</string>
-    <string name="multimedia_notes_view_descr">Vaše OSM poznámky jsou v %1$s.</string>
     <string name="tracks_view_descr">Všechny vaše zaznamenané stopy jsou v %1$s, nebo ve složce OsmAnd.</string>
     <string name="save_track_logging_accuracy">Přesnost záznamu</string>
     <string name="live_monitoring">Sledování online</string>
@@ -4037,11 +4023,11 @@
     <string name="sort_size_descending">Nejdříve velká velikost</string>
     <string name="delete_map">Smazat mapu</string>
     <string name="help_article_purchases_giveaway_name">Dárek</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="standard_maps">Standardní mapy</string>
     <string name="max_altitude">Max. nadmořská výška</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Hlasové výzvy / upozornění</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="shared_string_created">Vytvořeno</string>
     <string name="help_article_map_tracks_on_map_name">Stopy a trasy</string>
     <string name="app_mode_paragliding">Paragliding</string>
@@ -4673,26 +4659,8 @@
     <string name="ais_load_data">Načíst data AIS ze souboru</string>
     <string name="ais_address_settings">Nastavení IP adresy</string>
     <string name="ais_address_settings_description">Zvolte protokol NMEA (UDP/TCP) a zadejte odpovídající adresy a porty</string>
-    <string name="ais_nmea_protocol">Protokol pro získávání dat NMEA</string>
-    <string name="ais_nmea_protocol_description">Zvolte protokol pro příjem dat NMEA</string>
-    <string name="ais_address_nmea_server">IP adresa datového zdroje NMEA</string>
-    <string name="ais_port_nmea_server">TCP port zdroje dat NMEA</string>
-    <string name="ais_port_nmea_server_description">Definujte číslo TCP portu NMEA datového zdroje</string>
-    <string name="ais_port_nmea_local">UDP port lokálního přijímače dat NMEA</string>
-    <string name="ais_port_nmea_local_description">Definovat UDP port, kde bude OsmAnd získávat data NMEA</string>
-    <string name="ais_object_lost_timeouts">Nastavení časového limitu pro příjem signálu AIS</string>
-    <string name="ais_object_lost_timeout">Časový limit pro viditelnost při ztrátě objektu</string>
-    <string name="ais_object_lost_timeout_description">Nastavení času pro viditelnost objektu AIS: Pokud se v dané době neobdrží žádný signál, objekt bude automaticky odstraněn z displeje.</string>
-    <string name="ais_ship_lost_timeout">Časový limit zastarání lodi</string>
-    <string name="ais_ship_lost_timeout_description">Nastavit časový limit zastarání viditelnosti lodě: po tomto čase bez příjmu signálu bude symbol lodě přeškrtnutý.</string>
-    <string name="ais_cpa_settings">Nastavení týkající se CPA</string>
-    <string name="ais_cpa_warning_time">Výstražná doba před dosažením nejbližšího bodu přiblížení (CPA)</string>
-    <string name="ais_cpa_warning_distance">Výstražná vzdálenost pro nejbližší bod přiblížení (CPA)</string>
     <string name="plugin_ais_tracker_name">Sledování plavidel (AIS)</string>
     <string name="plugin_ais_tracker_disclaimer">UPOZORNĚNÍ\n\nTento plugin je hobby projekt a není určen k použití v kritických aplikacích. Nezaručuje spolehlivost ani přesnost. Nespoléhejte se na tento software při navigaci, v situacích ohrožujících život ani při jakýchkoli jiných zásadních činnostech.</string>
-    <string name="ais_address_nmea_server_description">Definujte IP adresu datového zdroje NMEA (v případě použití TCP)</string>
-    <string name="ais_cpa_warning_time_description">Pokud TCPA (čas do největšího přiblížení) s jiným plavidlem klesne pod definovanou mez, plavidlo se zvýrazní červeně.</string>
-    <string name="ais_cpa_warning_distance_description">Plavidla se zvýrazní červeně, pokud je CPA (nejbližší bod přiblížení) pod definovanou prahovou hodnotou a TCPA (čas do CPA) spadá do varovného času nastaveného v poli „Varovný čas do dosažení CPA“.</string>
     <string name="plugin_ais_tracker_description">Zobrazuje polohu AIS a informace o plavidlech v okolí. Data AIS jsou přijímána prostřednictvím sítě z externího přijímače AIS.</string>
     <string name="no_places_available">Žádná místa v zobrazené oblasti</string>
     <string name="no_photo_for_location_desc">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
@@ -4917,7 +4885,7 @@
     <string name="button_frames">Rámečky tlačítek</string>
     <string name="visualizing_button_grid">Mřížka tlačítek na mapě</string>
     <string name="deleted_maps_warning">Chystáte se odstranit %d položek\nChcete pokračovat?</string>
-    <string name="deleted_maps_prompt">Tyto mapy již nejsou podporovány a byly nahrazeny menšími oblastmi. Odstraňte je prosím a stáhněte si nové verze.</string>
+    <string name="deleted_maps_prompt">Tyto mapy již nejsou podporovány. Odstraňte je prosím a stáhněte si nové verze.</string>
     <string name="unsupported_maps">Nepodporované mapy</string>
     <string name="routing_attr_weightrating_name">Maximální hmotnost při plném zatížení</string>
     <string name="routing_attr_maxaxleload_name">Maximální zatížení nápravy</string>
@@ -5182,13 +5150,7 @@
     <string name="shared_string_media">Média</string>
     <string name="no_media">Bez médií</string>
     <string name="no_media_descr">Můžete přidávat fotografie, videa nebo zvukové poznámky z fotoaparátu nebo knihovny.</string>
-    <string name="ais_own_object">Nastavení pro zobrazení vlastního objektu AIS</string>
-    <string name="ais_own_mmsi">Vlastní MMSI (identifikační kód námořní mobilní služby)</string>
-    <string name="ais_own_mmsi_description">Identifikujte MMSI (9místnou číselnou hodnotu) vlastního objektu AIS.</string>
-    <string name="ais_display_own_position">Definujte, zda se má zobrazit vlastní objekt AIS.</string>
-    <string name="ais_display_own_position_description">Obvykle OsmAnd zobrazuje vlastní polohu. Dodatečné zobrazení vlastního objektu AIS může být matoucí a lze ho zde vypnout.</string>
     <string name="ais_receive_in_background">Přijímat data AIS, i když je OsmAnd pozastaven.</string>
-    <string name="ais_receive_in_background_description">Pokud je povoleno, přijímač zpráv AIS zůstane spuštěný, i když je OsmAnd pozastaven nebo na pozadí. Pokud je zakázáno, nebudou přijímány žádné zprávy, pokud je OsmAnd na pozadí.</string>
     <string name="data_storage">Ukládání dat</string>
     <string name="main_storage">Hlavní úložiště</string>
     <string name="media_storage">Úložiště médií</string>
@@ -5273,8 +5235,8 @@
     <string name="release_5_4">• Vylepšené uživatelské rozhraní vyhledávání: třídění, filtry podle kategorií, přehlednější vzhled\n\n • Přidávání fotografií a médií do oblíbených\n\n • Oblíbené: podskupiny a složky, které lze připnout\n\n • Souřadnice: vyhledávání, mapová mřížka a zobrazení bodů zájmu (POI) nyní podporují lokátory EPSG a Maidenhead\n\n • Opraveny výpadky navigace; přepínání mezi standardním a rychlým trasováním\n\n • Nastavení měřítka mapy v Android Auto nezávisle na nastavení v telefonu\n\n • Nové prostorové vyhledávání — vyhledávání míst a okolí daného místa\n\n • Do sekce Astronomie přidány sluneční a měsíční zatmění</string>
     <string name="always_keep_local_copy">Vždy držte lokální kopii</string>
     <string name="always_keep_local_copy_description">Media zůstávají připojena i v případě, že je originál odstraněn z galerie nebo souborů.</string>
-    <string name="use_spatial_text_search">Použít prostorové vyhledávání textu</string>
-    <string name="use_spatial_text_search_description">Nahradit standardní rychlé vyhledávací rozhraní API s experimentálním systémem pro vyhledávání textu.</string>
+    <string name="use_spatial_search">Použít prostorové vyhledávání textu</string>
+    <string name="use_spatial_search_description">Nahradit standardní rychlé vyhledávací rozhraní API s experimentálním systémem pro vyhledávání textu.</string>
     <string name="astro_lunar_eclipse">Měsíční zatmění</string>
     <string name="astro_lunar_eclipse_subtitle">Prozkoumejte po celém světě zatmění Měsíce</string>
     <string name="astro_previous_lunar_eclipse">Předchozí zatmění Měsíce</string>
@@ -5294,4 +5256,10 @@
     <string name="gpx_line_style_solid">Plná</string>
     <string name="gpx_line_style_dotted">Tečkovaná</string>
     <string name="gpx_line_style">Styl čáry</string>
+    <string name="trip_rec_start_from_notification">Zahájit z oznámení</string>
+    <string name="trip_rec_start_from_notification_descr">Zobrazuje oznámení s tlačítkem pro zahájení nahrávání výletu. Během nahrávání je oznámení stále zobrazeno.</string>
+    <string name="contour_labels">Popisky</string>
+    <string name="contour_label_direction_descr">Do kopce: horní část každého čísla nadmořské výšky směřuje k vyššímu terénu, stejně jako na papírových topografických mapách. Krátké značky na čarách směřují dolů.</string>
+    <string name="rendering_attr_contourLabelDirection_name">Směr štítku</string>
+    <string name="rendering_value_uphill_name">Stoupání</string>
 </resources>

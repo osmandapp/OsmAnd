@@ -1,6 +1,5 @@
 package net.osmand.plus.gallery.online
 
-import android.os.AsyncTask
 import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.gallery.data.GalleryKey
@@ -56,6 +55,7 @@ class OnlinePhotosDelegate(
 			)
 		} else {
 			cancel(key)
+			val previous = app.galleryHelper.repository.get(key)
 
 			val loadImagesListener = object : GetOnlineImagesTask.GetImageCardsListener {
 
@@ -63,6 +63,7 @@ class OnlinePhotosDelegate(
 
 				override fun onFinish(holder: OnlinePhotosHolder) {
 					activeTasks.remove(key)
+					holder.keepItemsFrom(previous)
 					onResult(holder)
 				}
 			}
@@ -85,6 +86,7 @@ class OnlinePhotosDelegate(
 		onResult: (MediaHolder) -> Unit
 	) {
 		val holder = OnlinePhotosHolder(key.latLon, key.params)
+		holder.markIncomplete()
 
 		if (!cacheManager.exists(rawKey)) {
 			onResult(holder)
@@ -123,13 +125,16 @@ class OnlinePhotosDelegate(
 		}
 	}
 
+	override fun canRefresh() = app.settings.isInternetConnectionAvailable
+
+	@Suppress("DEPRECATION") // AsyncTask, needs migration
 	override fun cancel(key: GalleryKey) {
 		if (key !is GalleryKey.Location) {
 			return
 		}
 
 		activeTasks.remove(key)?.let { task ->
-			if (task.status == AsyncTask.Status.RUNNING) {
+			if (task.status == android.os.AsyncTask.Status.RUNNING) {
 				task.cancel(false)
 			}
 		}

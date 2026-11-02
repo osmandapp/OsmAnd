@@ -407,4 +407,9 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 		currentTrackFolder.addTrackItem(item);
 		updateContent();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "select_track_folder";
+	}
 }

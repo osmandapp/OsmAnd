@@ -151,6 +151,14 @@ public class RoutePlannerFrontEnd {
 		if (dataObjects.isEmpty()) {
 			ctx.loadTileData(px, py, 14, dataObjects, allowDuplications);
 		}
+		// a boat in open water or a wide channel can be far from any waterway: look farther for water to start
+		// from, the gap to the point is then crossed over open water (see SeaRoutePlanner)
+		if (dataObjects.isEmpty() && ctx.getRouter().getProfile() == net.osmand.shared.routing.GeneralRouterProfile.BOAT) {
+			ctx.loadTileData(px, py, 12, dataObjects, allowDuplications);
+			if (dataObjects.isEmpty()) {
+				ctx.loadTileData(px, py, 10, dataObjects, allowDuplications);
+			}
+		}
 		if (list == null) {
 			list = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		}

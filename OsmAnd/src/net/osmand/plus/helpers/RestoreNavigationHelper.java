@@ -72,7 +72,6 @@ public class RestoreNavigationHelper {
 			@Override
 			protected GpxFile doInBackground(String... params) {
 				if (gpxPath != null) {
-					// Reverse also should be stored ?
 					GpxFile gpxFile = SharedUtil.loadGpxFile(new File(gpxPath));
 					return gpxFile.getError() == null ? gpxFile : null;
 				}
@@ -108,6 +107,9 @@ public class RestoreNavigationHelper {
 					if (routeIndex != -1) {
 						builder.setSelectedRoute(routeIndex);
 					}
+					builder.setPassWholeRoute(settings.GPX_PASS_WHOLE_ROUTE.get());
+					builder.setReverse(settings.GPX_ROUTE_REVERSE.get());
+					builder.setReverseStrategy(settings.GPX_REVERSE_STRATEGY.get());
 					ApplicationMode appMode = routingHelper.getAppMode();
 					if (!gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
 						GpxApproximationParams params = new GpxApproximationParams();

@@ -78,6 +78,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	private boolean isMapLinkedToLocation = true;
 	private boolean movingToMyLocation;
+	private volatile boolean trackingPaused;
 
 	private long hitTime;
 
@@ -196,7 +197,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			if (routePlanningMode) {
 				preventCompassRotation = MapRouteInfoMenu.isRelatedFragmentVisible(mapView);
 			}
-			if (settings.isCompassMode(COMPASS_DIRECTION) && !preventCompassRotation && allowRotationAfterReset()) {
+			if (settings.isCompassMode(COMPASS_DIRECTION) && !preventCompassRotation && allowRotationAfterReset()
+					&& !trackingPaused) {
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1.0) {
 					mapView.setRotate(-val, false);
 				}
@@ -290,7 +292,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		if (mapView != null) {
 			MapRendererView mapRenderer = mapView.getMapRenderer();
 			RotatedTileBox tb = mapView.getRotatedTileBox();
-			if (isMapLinkedToLocation() && location != null) {
+			if (isMapLinkedToLocation() && location != null && !trackingPaused) {
 				Float rotation = null;
 				boolean pendingRotation = false;
 				int currentMapRotation = settings.ROTATE_MAP.get();
@@ -445,7 +447,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void switchRoutePlanningMode() {
 		routePlanningMode = routingHelper.isRoutePlanningMode();
 		updateSettings();
-		if (!routePlanningMode && followingMode) {
+		if (!routePlanningMode && followingMode && !trackingPaused) {
 			backToLocationImpl();
 		}
 	}
@@ -469,7 +471,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void updateMapTilt() {
-		if (mapView != null) {
+		if (mapView != null && !trackingPaused) {
 			mapView.setElevationAngle(settings.getLastKnownMapElevation());
 		}
 	}
@@ -502,7 +504,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void backToLocationImpl(int zoom, boolean forceZoom) {
-		if (mapView != null) {
+		if (mapView != null && !trackingPaused) {
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
 			Location lastKnownLocation = locationProvider.getLastKnownLocation();
 			Location lastStaleKnownLocation = locationProvider.getLastStaleKnownLocation();
@@ -573,6 +575,17 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
+	/**
+	 * While another owner drives the camera (a flyover recording), location, compass, navigation and
+	 * auto-follow do not move, turn, zoom or tilt the map.
+	 */
+	public void setTrackingPaused(boolean paused) {
+		trackingPaused = paused;
+		if (paused) {
+			app.removeMessagesInUiThread(AUTO_FOLLOW_MSG_ID);
+		}
+	}
+
 	public boolean isMapLinkedToLocation() {
 		return isMapLinkedToLocation;
 	}
@@ -593,7 +606,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		settings.MAP_LINKED_TO_LOCATION.set(isMapLinkedToLocation);
 		if (!isMapLinkedToLocation) {
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			if (autoFollow > 0 && routingHelper.isFollowingMode() && !routePlanningMode) {
+			if (autoFollow > 0 && routingHelper.isFollowingMode() && !routePlanningMode && !trackingPaused) {
 				backToLocationWithDelay(autoFollow);
 			}
 		} else {

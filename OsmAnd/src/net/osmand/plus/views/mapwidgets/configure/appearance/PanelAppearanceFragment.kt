@@ -362,4 +362,6 @@ class PanelAppearanceFragment : BaseOsmAndFragment() {
 	private fun onAppearanceChanged() {
 		parentAppearanceFragment?.onAppearanceChanged() ?: updateContent()
 	}
+
+	override fun getAnalyticsScreen() = "panel_appearance"
 }

@@ -159,7 +159,6 @@ public class SpeedometerWidget {
 	private Bitmap widgetRevealBitmap;
 
 	private final ValueAnimator speedAlertAnimator;
-	private ValueAnimator speedLimitAnimator;
 	private SpeedometerAnimationDrawable animationDrawable;
 	private boolean isExceeding = false;
 	private boolean isExceedWarning = false;
@@ -189,15 +188,6 @@ public class SpeedometerWidget {
 	public SpeedometerWidget(@NonNull OsmandApplication app, @NonNull ThemeUsageContext usageContext) {
 		this(app, null, null, usageContext);
 		drawBitmap = true;
-		speedLimitAnimator = ValueAnimator.ofFloat(0f, 1f);
-		speedLimitAnimator.setDuration(SPEED_LIMIT_REVEAL_ANIM_DURATION);
-		speedLimitAnimator.setRepeatCount(0);
-		speedLimitAnimator.addUpdateListener(animation -> {
-			speedLimitAlpha = (float) animation.getAnimatedValue();
-			if (speedLimitAlpha < 0.0001) {
-				cachedSpeedLimitText = null;
-			}
-		});
 	}
 
 	public SpeedometerWidget(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @Nullable View view, @NonNull ThemeUsageContext usageContext) {
@@ -496,8 +486,24 @@ public class SpeedometerWidget {
 				} else if (speedAlertProgress > targetSpeedAlertProgress) {
 					speedAlertProgress = Math.max(targetSpeedAlertProgress, speedAlertProgress - delta);
 				}
+				updateSpeedLimitAlpha(currentTime - lastSpeedAlertFrameTime);
 			}
 			lastSpeedAlertFrameTime = currentTime;
+		}
+	}
+
+	// Animators are not updated while the phone screen is off, so the car bitmap is animated by frame time
+	private void updateSpeedLimitAlpha(long frameInterval) {
+		if (speedLimitAlpha != targetSpeedLimitAlpha) {
+			float delta = (float) frameInterval / SPEED_LIMIT_REVEAL_ANIM_DURATION;
+			if (speedLimitAlpha < targetSpeedLimitAlpha) {
+				speedLimitAlpha = Math.min(targetSpeedLimitAlpha, speedLimitAlpha + delta);
+			} else {
+				speedLimitAlpha = Math.max(targetSpeedLimitAlpha, speedLimitAlpha - delta);
+			}
+			if (speedLimitAlpha == 0) {
+				cachedSpeedLimitText = null;
+			}
 		}
 	}
 
@@ -505,12 +511,7 @@ public class SpeedometerWidget {
 		float targetAlpha = show ? 1f : 0f;
 		if (targetSpeedLimitAlpha != targetAlpha) {
 			targetSpeedLimitAlpha = targetAlpha;
-			if (drawBitmap) {
-				if (speedLimitAnimator.isRunning()) {
-					speedLimitAnimator.cancel();
-				}
-				startFloatValueAnimator(speedLimitAnimator, !show);
-			} else {
+			if (!drawBitmap) {
 				if (speedLimitContainer.getAlpha() == targetAlpha &&
 						speedLimitContainer.getVisibility() == (show ? View.VISIBLE : View.GONE)) {
 					return;

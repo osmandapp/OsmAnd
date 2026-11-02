@@ -494,4 +494,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "configure_profile";
+	}
 }

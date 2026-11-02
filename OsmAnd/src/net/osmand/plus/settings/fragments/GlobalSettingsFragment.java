@@ -353,4 +353,9 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		}
 		setupDefaultAppModePref();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "global_settings";
+	}
 }

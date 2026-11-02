@@ -135,4 +135,9 @@ public class EditDescriptionFragment extends BaseFullScreenDialogFragment {
 	public interface OnDescriptionSavedCallback {
 		void onDescriptionSaved();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "edit_description";
+	}
 }

@@ -162,4 +162,9 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "sun_parameters";
+	}
 }

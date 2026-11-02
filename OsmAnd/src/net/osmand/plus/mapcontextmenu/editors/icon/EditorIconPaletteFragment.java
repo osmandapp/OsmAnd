@@ -295,4 +295,9 @@ public class EditorIconPaletteFragment extends BaseFullScreenDialogFragment impl
 			new EditorIconPaletteFragment().show(fragmentManager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "editor_icon_palette";
+	}
 }

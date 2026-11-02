@@ -245,6 +245,7 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 		TLongSet optEdges = pathEdges(hubPath(route));
 		List<AltCandidate> candidates = new ArrayList<>();
 		TLongSet seenPaths = new TLongHashSet();
+		seenPaths.add(signature(hubPath(route))); // a via node on the main route yields the main route
 		for (T v : settled) {
 			AltCandidate c = admissibleThrough(v, optEdges);
 			if (c != null && seenPaths.add(signature(c.path))) {

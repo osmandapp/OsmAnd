@@ -3,6 +3,7 @@ package net.osmand.plus.auto.screens
 import android.os.Bundle
 import androidx.car.app.CarContext
 import androidx.car.app.model.Action
+import androidx.car.app.model.Header
 import androidx.car.app.model.MessageTemplate
 import androidx.car.app.model.Template
 import net.osmand.plus.OsmandApplication
@@ -25,7 +26,11 @@ class MissingMapsScreen(carContext: CarContext, screenType: MissingMapsScreenTyp
 	override fun getTemplate(): Template {
 		val title = app.getString(screenType.titleId)
 		val message = app.getString(screenType.messageId)
-		val builder = MessageTemplate.Builder(message).setTitle(title)
+		val header = Header.Builder()
+			.setTitle(title)
+			.setStartHeaderAction(Action.BACK)
+			.build()
+		val builder = MessageTemplate.Builder(message).setHeader(header)
 
 		if (screenType == MissingMapsScreenType.POSSIBLE_MISSING_MAPS) {
 			builder.addAction(
@@ -57,7 +62,6 @@ class MissingMapsScreen(carContext: CarContext, screenType: MissingMapsScreenTyp
 					}
 					.build()
 			)
-			.setHeaderAction(Action.BACK)
 			.build()
 	}
 }

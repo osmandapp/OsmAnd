@@ -196,4 +196,9 @@ public class DeletedMapsFragment extends BaseFullScreenDialogFragment implements
 		});
 		OsmAndTaskManager.executeTask(removeTask, items.toArray(new LocalItem[0]));
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "deleted_maps";
+	}
 }

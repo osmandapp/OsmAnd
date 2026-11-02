@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.InvalidProtocolBufferException;
 
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.list.array.TLongArrayList;
@@ -59,9 +60,14 @@ public class NameIndexReader {
 		return 0;
 	}
 
+	/** a name the OBF writer made by a search rule (<unglue>, <index>) carries this word: another spelling of a name
+	 *  of the object, not a name of OSM ("Hauptstr" of "Hauptstraße", "Пасхи" of "о. Пасхи") */
+	public static final String RULE_SPELLING_COMMON = "spellvariantcommon";
+
 	/** words the generator adds to a name for the search: never keys, never counted as words of the name */
 	public static boolean isIndexMarker(String word) {
-		return CITY_AS_STREET_COMMON.equalsIgnoreCase(word) || altNameVariant(word) > 0;
+		return CITY_AS_STREET_COMMON.equalsIgnoreCase(word) || RULE_SPELLING_COMMON.equalsIgnoreCase(word)
+				|| altNameVariant(word) > 0;
 	}
 	public static final String POI_CATEGORY_PREFIX = "#^";
 	
@@ -73,7 +79,9 @@ public class NameIndexReader {
 	private Map<String, TLongHashSet> matchedKeys = new HashMap<String, TLongHashSet>();
 	// cache for prefixes
 	private Map<Long, PrefixNameValue> indexByRef = new HashMap<>();
+	private long cachedBytes;
 	private long tablePointer;
+	private boolean cacheRawBlocks;
 	
 	// common words
 	private CommonIndexedStats commonStats;
@@ -164,7 +172,20 @@ public class NameIndexReader {
 		public String key;
 		public OsmAndPoiNameIndexData poi = null;
 		public AddressNameIndexData addr = null;
+		public byte[] data;
 		public long shift;
+
+		public OsmAndPoiNameIndexData getPoi() throws InvalidProtocolBufferException {
+			return poi == null && data != null && poiRegion != null ? OsmAndPoiNameIndexData.parseFrom(data) : poi;
+		}
+
+		public AddressNameIndexData getAddr() throws InvalidProtocolBufferException {
+			return addr == null && data != null && addressRegion != null ? AddressNameIndexData.parseFrom(data) : addr;
+		}
+
+		boolean isLoaded() {
+			return poi != null || addr != null || data != null;
+		}
 		
 		
 		@Override
@@ -326,6 +347,7 @@ public class NameIndexReader {
 		}
 		obj.shift = currentShift;
 		obj.poi = from;
+		cachedBytes += from.getSerializedSize();
 		return obj;
 	}
 	
@@ -336,7 +358,7 @@ public class NameIndexReader {
 		while(it.hasNext()) {
 			long l = it.next();
 			PrefixNameValue pv = indexByRef.get(l);
-			if (pv.addr == null && pv.poi == null) {
+			if (!pv.isLoaded()) {
 				loffsets.add(l);
 			} else {
 				r.add(pv);
@@ -346,6 +368,26 @@ public class NameIndexReader {
 	}
 
 
+	public PrefixNameValue addData(byte[] from, long currentShift) {
+		PrefixNameValue obj = indexByRef.get(currentShift);
+		if (obj.isLoaded()) {
+			throw new IllegalStateException(obj.toString());
+		}
+		obj.shift = currentShift;
+		obj.data = from;
+		cachedBytes += from.length;
+		return obj;
+	}
+
+	public boolean isCacheRawBlocks() {
+		return cacheRawBlocks;
+	}
+
+	public NameIndexReader setCacheRawBlocks(boolean cacheRawBlocks) {
+		this.cacheRawBlocks = cacheRawBlocks;
+		return this;
+	}
+
 	public PrefixNameValue addData(AddressNameIndexData from, long currentShift) {
 		PrefixNameValue obj = indexByRef.get(currentShift);
 		if (obj.addr != null) {
@@ -353,6 +395,7 @@ public class NameIndexReader {
 		}
 		obj.shift = currentShift;
 		obj.addr = from;
+		cachedBytes += from.getSerializedSize();
 		return obj;
 	}
 	
@@ -380,11 +423,24 @@ public class NameIndexReader {
 
 	public void gcPrefixes(int limit) {
 		if (limit > 0 && indexByRef.size() > limit) {
-			indexByRef.clear();
-			if (matchedKeys != null) {
-				matchedKeys.clear();
-			}
+			clearPrefixes();
 		}
+	}
+
+	public void clearPrefixes() {
+		indexByRef.clear();
+		cachedBytes = 0;
+		if (matchedKeys != null) {
+			matchedKeys.clear();
+		}
+	}
+
+	public long getCachedBytes() {
+		return cachedBytes;
+	}
+
+	public void clearQuery() {
+		query = null;
 	}
 	
 	public void resetBytesStat() {

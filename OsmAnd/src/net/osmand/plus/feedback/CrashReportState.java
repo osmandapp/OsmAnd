@@ -83,6 +83,7 @@ public class CrashReportState {
 			sb.append(" (").append(info.versionCode).append(')');
 		}
 		sb.append(" package=").append(app.getPackageName());
+		sb.append(" variant=").append(Version.getBuildVariant());
 		sb.append(" paid=").append(Version.isPaidVersion(app));
 		sb.append(" uptime=").append(uptimeSeconds()).append("s\n");
 	}
