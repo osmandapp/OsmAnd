@@ -2905,7 +2905,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
 		}
 		applySelectedSortSetting();
-		runCoreSearch(searchQuery, false, true);
+		// spatial rows are appended without deduplication, and a larger radius finds them again: replace them
+		SearchResultCollection collection = getResultCollection();
+		boolean spatialResults = collection != null && collection.isSkipSorting();
+		runCoreSearch(searchQuery, false, !spatialResults, spatialResults);
 	}
 
 	private boolean showMoreSpatialSearchResults() {
