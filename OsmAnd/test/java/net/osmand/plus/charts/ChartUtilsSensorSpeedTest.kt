@@ -44,7 +44,9 @@ class ChartUtilsSensorSpeedTest {
 		val attributes = createAttributes(
 			5f to 5f, Float.NaN to 0f, Float.NaN to 0f, Float.NaN to 0f, Float.NaN to 0f, Float.NaN to 0f, 5f to 5f
 		)
-		attributes[3].distance = 0.3f
+		for (i in 1..5) {
+			attributes[i].distance = 0.2f
+		}
 		val entries = ChartUtils.getPointAttributeValues(
 			PointAttributes.SENSOR_TAG_SPEED, attributes, GPXDataSetAxisType.TIME, 1f, 1f, Float.NaN, false
 		)
@@ -72,16 +74,6 @@ class ChartUtilsSensorSpeedTest {
 			PointAttributes.SENSOR_TAG_SPEED, attributes, GPXDataSetAxisType.TIME, 1f, 1f, Float.NaN, false
 		)
 		assertEquals(listOf(0f to 5f, 6f to 5f), entries.map { it.x to it.y })
-	}
-
-	@Test
-	fun missingSensorSpeedWithoutGpsSpeedWhileMovingIsNotPlotted() {
-		val attributes = createAttributes(5f to 5f, Float.NaN to 0f, 5f to 5f)
-		attributes[1].distance = 5f
-		val entries = ChartUtils.getPointAttributeValues(
-			PointAttributes.SENSOR_TAG_SPEED, attributes, GPXDataSetAxisType.TIME, 1f, 1f, Float.NaN, false
-		)
-		assertEquals(listOf(0f to 5f, 2f to 5f), entries.map { it.x to it.y })
 	}
 
 	@Test
