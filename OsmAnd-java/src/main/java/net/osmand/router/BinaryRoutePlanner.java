@@ -643,8 +643,7 @@ public class BinaryRoutePlanner {
 					}
 					break;
 				}
-				if (tp == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON
-						|| (isOnlyRestriction(tp) && from.getRoad().getRestrictionVia(i) == viaId)) {
+				if (isOnlyRestriction(tp) && from.getRoad().getRestrictionVia(i) == viaId) {
 					return false;
 				}
 			}

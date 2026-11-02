@@ -547,9 +547,7 @@ class BinaryRoutePlanner {
 					}
 					break
 				}
-				if (tp == RouteDataObject.RESTRICTION_ONLY_STRAIGHT_ON
-					|| (isOnlyRestriction(tp) && from.getRoad().getRestrictionVia(i) == viaId)
-				) {
+				if (isOnlyRestriction(tp) && from.getRoad().getRestrictionVia(i) == viaId) {
 					return false
 				}
 			}
