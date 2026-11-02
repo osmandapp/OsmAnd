@@ -104,6 +104,10 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 				ListState.Failed(e.message)
 			}
 			app.runInUIThread { setListState(newState) }
+			if (newState is ListState.Loaded && incrementalSupported) {
+				val sizes = BuildDeltaDownloader(app).fetchSizes()
+				app.runInUIThread { setDeltaSizes(sizes) }
+			}
 		}
 	}
 
@@ -434,6 +438,13 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 		listState = state
 		for (listener in listeners.toList()) {
 			listener.onListStateChanged(state)
+		}
+	}
+
+	private fun setDeltaSizes(sizes: Map<String, BuildDeltaDownloader.DeltaSize>) {
+		deltaSizes = sizes
+		for (listener in listeners.toList()) {
+			listener.onDeltaSizesChanged()
 		}
 	}
 
