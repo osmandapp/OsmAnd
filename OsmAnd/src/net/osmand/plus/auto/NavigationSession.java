@@ -141,6 +141,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private boolean carNavigationShouldBeActive; // it could set true before init navigationManager
 	private TripHelper tripHelper;
 	private CarSuggestionsHelper suggestionsHelper;
+	// a suggestion card tap or a navigation intent, kept until the purchase or the location permission
 	@Nullable
 	private Intent pendingSuggestionIntent;
 	@Nullable
@@ -469,7 +470,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				if (GeoActionHelper.isGeoActionUri(uri)) {
 					processGeoActionIntent(uri);
 				} else if (ACTION_NAVIGATE.equals(intent.getAction())) {
-					processNavigationIntent(uri);
+					processNavigationIntent(intent);
 				} else {
 					processDeepLinkActions(uri);
 				}
@@ -489,7 +490,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
-	private void processNavigationIntent(@NonNull Uri uri) {
+	private void processNavigationIntent(@NonNull Intent intent) {
+		Uri uri = intent.getData();
+		if (uri == null || retainIntentUntilAccess(intent)) {
+			return;
+		}
 		GeoParsedPoint point = GeoPointParserUtil.parse(uri.toString());
 		if (point != null) {
 			CarContext context = getCarContext();
@@ -517,14 +522,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
-	private void processSuggestionIntent(@NonNull Intent intent) {
-		if (!isStateAtLeast(State.CREATED)) {
-			return;
-		}
+	private boolean retainIntentUntilAccess(@NonNull Intent intent) {
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
 			pendingSuggestionIntent = intent;
-			LOG.info("Retaining suggestion intent until purchase is completed");
+			LOG.info("Retaining intent until purchase is completed");
 			if (requestPurchaseScreen != null) {
 				requestPurchaseScreen.getLifecycle().addObserver(new DefaultLifecycleObserver() {
 					@Override
@@ -535,11 +537,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					}
 				});
 			}
-			return;
+			return true;
 		}
 		if (!isLocationPermissionAvailable()) {
 			pendingSuggestionIntent = intent;
-			LOG.info("Retaining suggestion intent until permission is granted");
+			LOG.info("Retaining intent until permission is granted");
 			ScreenManager screenManager = getScreenManager();
 			Screen top = screenManager.getTop();
 			if (!(top instanceof RequestPermissionScreen)) {
@@ -552,9 +554,17 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					pendingSuggestionIntent = null;
 				}
 			});
-			return;
+			return true;
 		}
 		pendingSuggestionIntent = null;
+		return false;
+	}
+
+	private void processSuggestionIntent(@NonNull Intent intent) {
+		if (!isStateAtLeast(State.CREATED) || retainIntentUntilAccess(intent)) {
+			return;
+		}
+		OsmandApplication app = getApp();
 		if (isNavigationActive()) {
 			LOG.info("Ignoring suggestion intent: navigation is already active");
 			return;
@@ -585,7 +595,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (pendingSuggestionIntent != null) {
 			Intent intent = pendingSuggestionIntent;
 			pendingSuggestionIntent = null;
-			processSuggestionIntent(intent);
+			if (intent.hasExtra(CarSuggestionsHelper.EXTRA_SUGGESTION_POINT)) {
+				processSuggestionIntent(intent);
+			} else {
+				processNavigationIntent(intent);
+			}
 		}
 	}
 
