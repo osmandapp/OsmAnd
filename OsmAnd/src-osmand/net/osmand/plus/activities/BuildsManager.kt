@@ -102,8 +102,6 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 			return
 		}
 		deltaSizes = emptyMap()
-		// the date format is not thread safe and the screen reads it on this thread
-		val installedDate = getInstalledDate()
 		setListState(ListState.Loading)
 		listExecutor.execute {
 			val newState = try {
@@ -115,17 +113,14 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 			app.runInUIThread { setListState(newState) }
 			if (newState is ListState.Loaded && incrementalSupported
 				&& app.settings.BUILD_DELTA_FAILED_FINGERPRINT.get() != Build.FINGERPRINT) {
-				loadDeltaSizes(newState.builds, installedDate)
+				loadDeltaSizes()
 			}
 		}
 	}
 
 	/** Separately from the list, which is complete without the sizes. */
-	private fun loadDeltaSizes(builds: List<OsmAndBuild>, installedDate: Date?) {
-		sizesExecutor.execute {
-			val newBuilds = builds.filter { installedDate == null || it.date?.after(installedDate) == true }
-			setDeltaSizes(deltaDownloader.fetchSizes(newBuilds.take(MAX_BUILDS_WITH_SIZE).map { it.path }))
-		}
+	private fun loadDeltaSizes() {
+		sizesExecutor.execute { setDeltaSizes(deltaDownloader.fetchSizes()) }
 	}
 
 	private fun setDeltaSizes(sizes: Map<String, BuildDeltaDownloader.DeltaSize>) {
@@ -523,7 +518,6 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 
 		const val CONNECT_TIMEOUT_MS = 15_000
 		const val READ_TIMEOUT_MS = 30_000
-		private const val MAX_BUILDS_WITH_SIZE = 4
 		private const val BUFFER_SIZE = 64 * 1024
 		private const val PROGRESS_INTERVAL_MS = 200L
 		private const val HTTP_RANGE_NOT_SATISFIABLE = 416
