@@ -6,6 +6,7 @@ import static net.osmand.plus.views.mapwidgets.widgetstates.InclinometerWidgetSt
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -104,6 +105,8 @@ public class InclinometerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment
 		calibrationButton.setOnClickListener(v ->
 				InclinometerCalibrationFragment.showInstance(requireActivity().getSupportFragmentManager()));
 		calibrationButton.setBackground(getPressedStateDrawable());
+		ImageView calibrationArrow = view.findViewById(R.id.calibration_arrow);
+		calibrationArrow.setImageDrawable(AndroidUtils.getDrawableForDirection(app, calibrationArrow.getDrawable()));
 		updateCalibrationStatus();
 	}
 

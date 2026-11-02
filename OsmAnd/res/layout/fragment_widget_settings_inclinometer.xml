@@ -293,6 +293,7 @@
 		</LinearLayout>
 
 		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/calibration_arrow"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_marginStart="@dimen/content_padding"
