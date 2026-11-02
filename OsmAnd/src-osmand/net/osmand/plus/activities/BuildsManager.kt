@@ -47,6 +47,7 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 
 	interface Listener {
 		fun onListStateChanged(state: ListState) = Unit
+		fun onDeltaSizesChanged() = Unit
 		fun onDownloadStateChanged(state: DownloadState) = Unit
 	}
 
@@ -62,11 +63,17 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 		private set
 	var downloadState: DownloadState = DownloadState.Idle
 		private set
+	/** The builds that can be downloaded as a difference to the installed APK, by path. */
+	var deltaSizes: Map<String, BuildDeltaDownloader.DeltaSize> = emptyMap()
+		private set
 
 	@Volatile
 	private var downloadId = 0
 	@Volatile
 	private var connection: HttpURLConnection? = null
+
+	@Volatile
+	private var incrementalSupported = false
 
 	private var pendingInstall = false
 	private var previousInstallDate: String? = null
@@ -182,6 +189,9 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 				if (next == XmlPullParser.END_DOCUMENT) {
 					break
 				}
+				if (next == XmlPullParser.START_TAG && parser.name == "builds") {
+					incrementalSupported = parser.getAttributeValue(null, "incremental").toBoolean()
+				}
 				if (next != XmlPullParser.START_TAG || parser.name != "build"
 					|| !"osmand".equals(parser.getAttributeValue(null, "type"), true)) {
 					continue
@@ -200,7 +210,47 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 		return builds
 	}
 
+	/** A download that has started goes on as it was; a new one first tries the difference. */
+	private fun downloadDelta(id: Int, build: OsmAndBuild): Boolean {
+		if (partFile.length() > 0 || !deltaSizes.containsKey(build.path)) {
+			return false
+		}
+		var lastNotification = 0L
+		val callback = object : BuildDeltaDownloader.Callback {
+			override fun onConnection(connection: HttpURLConnection?) {
+				this@BuildsManager.connection = connection
+			}
+
+			override fun onProgress(done: Long, total: Long) {
+				val now = SystemClock.elapsedRealtime()
+				if (now - lastNotification > PROGRESS_INTERVAL_MS) {
+					lastNotification = now
+					app.runInUIThread {
+						if (id == downloadId) {
+							setDownloadState(DownloadState.Running(build, done, total))
+						}
+					}
+				}
+			}
+
+			override fun isCancelled() = id != downloadId
+		}
+		val apk = apkFile
+		if (!BuildDeltaDownloader(app).download(build, apk, callback)) {
+			return false
+		}
+		app.runInUIThread {
+			if (id == downloadId) {
+				setDownloadState(DownloadState.Completed(build, apk))
+			}
+		}
+		return true
+	}
+
 	private fun downloadWithRetries(id: Int, build: OsmAndBuild) {
+		if (downloadDelta(id, build) || id != downloadId) {
+			return
+		}
 		var attempt = 0
 		while (true) {
 			try {
