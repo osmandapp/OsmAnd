@@ -717,26 +717,44 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	public String getStreetName(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd) {
 		String streetName = getObject().getName(lang, transliterate);
-		if (Algorithms.isEmpty(streetName)) {
+		String nameBeforeTurn = null;
+		if (!Algorithms.isEmpty(streetName)) {
+			nameBeforeTurn = getNameBeforeTurn(lang, transliterate, list, routeInd);
+		}
+		if (Algorithms.isEmpty(streetName) || streetName.equals(nameBeforeTurn)) {
 			// try to get street name from following segments
 			float distanceFromTurn = getDistance();
-			boolean hasNewTurn = false;
-			for (int n = routeInd + 1; n + 1 < list.size(); n++) {
-				RouteSegmentResult s1 = list.get(n);
-				if (s1.getTurnType() != null) {
-					hasNewTurn = true;
-				}
-				if (!hasNewTurn && distanceFromTurn < DIST_TO_SEEK_STREET_NAME
-						&& Algorithms.isEmpty(streetName)) {
-					streetName = s1.getObject().getName(lang, transliterate);
-				}
-				distanceFromTurn += s1.getDistance();
-				if (distanceFromTurn > DIST_TO_SEEK_STREET_NAME || !Algorithms.isEmpty(streetName)) {
-					break;
-				}
+			for (int n = routeInd + 1; n + 1 < list.size() && distanceFromTurn < DIST_TO_SEEK_STREET_NAME
+					&& list.get(n).getTurnType() == null; n++) {
+				String name = list.get(n).getObject().getName(lang, transliterate);
+				if (!Algorithms.isEmpty(name) && !name.equals(nameBeforeTurn)) {
+					// a short named piece (square, bridge) inside the same road is not the road we turn onto
+					String nameAfter = list.get(n + 1).getObject().getName(lang, transliterate);
+                    if (nameBeforeTurn != null && nameBeforeTurn.equals(nameAfter)) {
+						return streetName;
+					}
+                    return name;
+                }
+				distanceFromTurn += list.get(n).getDistance();
 			}
 		}
 		return streetName;
+	}
+
+	private String getNameBeforeTurn(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd) {
+		// the turn is on this segment (route directions) or on the previous one (turn descriptions)
+		int turnInd = routeInd;
+		if (list.get(turnInd).getTurnType() == null) {
+			turnInd--;
+		}
+		if (turnInd <= 0) {
+			return null;
+		}
+		TurnType turn = list.get(turnInd).getTurnType();
+		if (turn == null || turn.isRoundAbout()) {
+			return null;
+		}
+		return list.get(turnInd - 1).getObject().getName(lang, transliterate);
 	}
 
 	public String getRef(String lang, boolean transliterate) {
