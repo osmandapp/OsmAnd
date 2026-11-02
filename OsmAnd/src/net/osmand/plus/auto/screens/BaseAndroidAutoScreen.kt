@@ -30,6 +30,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	private var prevRotationAngle = 0f
 	private var prevZoom: Zoom? = null
 	private var prevMapLinkedToLocation = false
+	private var prevFollowingMode = false
 	private var prevStateSaved = false
 	protected var firstTimeGetTemplate = true
 
@@ -174,6 +175,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	private fun saveMapState() {
 		val mapView = app.osmandMap.mapView
 		prevMapLinkedToLocation = app.mapViewTrackingUtilities.isMapLinkedToLocation
+		prevFollowingMode = app.routingHelper.isFollowingMode
 		prevZoom = mapView.currentZoom
 		prevRotationAngle = mapView.rotate
 		prevElevationAngle = mapView.normalizeElevationAngle(mapView.elevationAngle)
@@ -184,17 +186,25 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		val mapView = app.osmandMap.mapView
 		val locationProvider = app.locationProvider
 		val lastKnownLocation = locationProvider.lastKnownLocation
+		// navigation started on this screen goes to its own view, not to the one before the screen
+		val navigationStarted = app.routingHelper.isFollowingMode && !prevFollowingMode
+		val zoom = prevZoom ?: mapView.currentZoom
 		mapView.animateToState(
 			lastKnownLocation?.latitude ?: mapView.latitude,
 			lastKnownLocation?.longitude ?: mapView.longitude,
-			prevZoom ?: mapView.currentZoom,
+			if (navigationStarted && zoom.baseZoom < NAVIGATION_ZOOM) {
+				Zoom(NAVIGATION_ZOOM, 0f, mapView.minZoom, mapView.maxZoom)
+			} else {
+				zoom
+			},
 			prevRotationAngle,
-			prevElevationAngle,
+			if (navigationStarted) app.settings.lastKnownMapElevation else prevElevationAngle,
 			ANIMATION_RETURN_FROM_PREVIEW_TIME.toLong(),
 			false)
 	}
 
 	companion object {
 		private const val DEFAULT_CONTENT_LIMIT = 12
+		private const val NAVIGATION_ZOOM = 17
 	}
 }

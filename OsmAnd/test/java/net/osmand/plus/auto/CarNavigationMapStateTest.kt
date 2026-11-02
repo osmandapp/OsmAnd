@@ -66,7 +66,7 @@ import java.util.concurrent.TimeUnit
  * reach the navigation view or the saved tilt. The route comes from a GPX, so no offline map is needed.
  * Remove @Ignore before running the cases.
  */
-@Ignore("Manual check: ~90 s, starts the OpenGL renderer in the test process")
+@Ignore("Manual check: ~100 s, starts the OpenGL renderer in the test process")
 @RunWith(AndroidJUnit4::class)
 @SuppressLint("RestrictedApi")
 class CarNavigationMapStateTest {
@@ -201,6 +201,17 @@ class CarNavigationMapStateTest {
 		assertNavigationView()
 		assertFalse("The preview must not stay under navigation", CarTestUtils.onMain { previewInStack() })
 		assertEquals(Lifecycle.State.DESTROYED, CarTestUtils.onMain { preview.lifecycle.currentState })
+	}
+
+	@Test
+	fun startOnPhoneFromFlatMapUsesSavedTilt() {
+		// the map before a preview can be flat: closing the preview must not bring that back into navigation
+		CarTestUtils.onMain { app.osmandMap.mapView.setElevationAngle(PREVIEW_TILT) }
+		buildRouteAndWaitForPreview()
+
+		startNavigationOnPhone()
+
+		assertNavigationView()
 	}
 
 	@Test
