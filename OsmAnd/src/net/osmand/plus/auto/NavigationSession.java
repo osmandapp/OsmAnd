@@ -83,6 +83,7 @@ import net.osmand.util.GeoPointParserUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -656,6 +657,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
 			navigationCarSurface.setCallback(navigationScreen);
 		}
+		closeRoutePreviews();
 		getScreenManager().push(navigationScreen);
 		// navigation already started
 		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !carNavigationShouldBeActive) {
@@ -664,6 +666,20 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
+
+	/**
+	 * Navigation goes on top of the stack, so a preview under it would stay alive and fit the route to the map
+	 * on every recalculation. Closing it also returns the map to the state from before the preview.
+	 */
+	private void closeRoutePreviews() {
+		if (routingHelper.isFollowingMode()) {
+			for (Screen screen : new ArrayList<>(getScreenManager().getScreenStack())) {
+				if (screen instanceof RoutePreviewScreen) {
+					screen.finish();
+				}
+			}
+		}
+	}
 
 	@Override
 	public void stopNavigation() {
