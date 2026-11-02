@@ -16,6 +16,7 @@ import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DistanceTo
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.GlideAverageWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.InclinometerWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
@@ -106,6 +107,10 @@ public class MapWidgetsFactory {
 			case GLIDE_AVERAGE:
 				GlideAverageWidgetState glideAverageWidgetState = new GlideAverageWidgetState(app, customId);
 				return new GlideAverageWidget(mapActivity, glideAverageWidgetState, customId, panel);
+			case INCLINOMETER_PITCH:
+			case INCLINOMETER_ROLL:
+				InclinometerWidgetState inclinometerState = new InclinometerWidgetState(app, customId, widgetType);
+				return new InclinometerWidget(mapActivity, inclinometerState, customId, panel);
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity, customId, panel);
 			case AIDL_WIDGET:

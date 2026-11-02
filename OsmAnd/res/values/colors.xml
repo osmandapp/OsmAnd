@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="inclinometer_level_safe">#5BAF3F</color>
+	<color name="inclinometer_level_warning">#F0B400</color>
+	<color name="inclinometer_level_critical">#EE3232</color>
 	<color name="lunar_eclipse_visibility">#7E57C2</color>
 	<color name="lunar_eclipse_marker">#ECEFF1</color>
 	<color name="lunar_eclipse_marker_outline">#4527A0</color>

@@ -122,6 +122,7 @@ import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettingsManager;
 import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
+import net.osmand.plus.views.mapwidgets.utils.InclinometerSensor;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.VoiceProviderDialog;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -226,6 +227,7 @@ public class OsmandApplication extends MultiDexApplication {
 	DownloadTilesHelper downloadTilesHelper;
 	AverageSpeedComputer averageSpeedComputer;
 	AverageGlideComputer averageGlideComputer;
+	InclinometerSensor inclinometerSensor;
 	WeatherHelper weatherHelper;
 	DialogManager dialogManager;
 	SmartFolderHelper smartFolderHelper;
@@ -734,6 +736,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public AverageGlideComputer getAverageGlideComputer() {
 		return averageGlideComputer;
+	}
+
+	@NonNull
+	public InclinometerSensor getInclinometerSensor() {
+		return inclinometerSensor;
 	}
 
 	@NonNull

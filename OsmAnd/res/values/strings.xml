@@ -11,6 +11,28 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="inclinometer">Inclinometer</string>
+	<string name="map_widget_group_inclinometer_desc">Widgets show the vehicle tilt measured by the device motion sensors: pitch (forward and backward) and roll (left and right). Fix the device in its mount and calibrate the widgets on level ground.</string>
+	<string name="inclinometer_pitch">Pitch</string>
+	<string name="map_widget_inclinometer_pitch_desc">Shows the forward and backward tilt of the vehicle. The arrow shows whether the front is raised or lowered.</string>
+	<string name="inclinometer_roll">Roll</string>
+	<string name="map_widget_inclinometer_roll_desc">Shows the left and right tilt of the vehicle. The arrow points to the lowered side.</string>
+	<string name="inclinometer_slope_unit">Slope unit</string>
+	<string name="switch_units_by_tapping_on_widget">You can also tap the widget to switch units.</string>
+	<string name="shared_string_percent">Percent</string>
+	<string name="shared_string_alerts">Alerts</string>
+	<string name="inclinometer_warning_angle">Warning angle</string>
+	<string name="inclinometer_critical_angle">Critical angle</string>
+	<string name="inclinometer_sound_alert">Sound alert</string>
+	<string name="inclinometer_sound_alert_desc">Play a sound when a threshold is exceeded.</string>
+	<string name="inclinometer_calibration">Calibration</string>
+	<string name="inclinometer_calibration_desc">Park on level ground with the device fixed in its mount, then tap Calibrate. The calibration is shared by all inclinometer widgets.</string>
+	<string name="inclinometer_calibrated">Calibrated</string>
+	<string name="inclinometer_not_calibrated">Not calibrated</string>
+	<string name="inclinometer_calibration_offset">Offset: pitch %1$s, roll %2$s</string>
+	<string name="inclinometer_calibrate">Calibrate</string>
+	<string name="inclinometer_calibration_saved">Calibration saved</string>
+	<string name="inclinometer_sensor_unavailable">Tilt sensor is not available on this device.</string>
 	<string name="astro_ar_mode">AR mode</string>
 	<string name="astro_camera_view">Camera view</string>
 	<string name="astro_reset_field_of_view">Reset field of view</string>
