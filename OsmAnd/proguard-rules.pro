@@ -130,3 +130,6 @@
 -dontwarn javax.ws.rs.**
 -dontwarn org.immutables.value.**
 -dontwarn org.kxml2.io.**
+
+# ZipFile creates its extra fields by reflection
+-keepclassmembers class * implements org.apache.commons.compress.archivers.zip.ZipExtraField { <init>(); }

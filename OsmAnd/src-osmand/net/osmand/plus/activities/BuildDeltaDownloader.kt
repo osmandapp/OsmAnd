@@ -1,11 +1,11 @@
 package net.osmand.plus.activities
 
-import net.osmand.IndexConstants
 import net.osmand.PlatformUtil
 import net.osmand.apkdelta.ApkArchive
 import net.osmand.apkdelta.ApkDeltaApplier
 import net.osmand.osm.io.NetworkUtils
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.utils.FileUtils
 import net.osmand.util.Algorithms
 import org.json.JSONArray
 import java.io.File
@@ -22,10 +22,7 @@ class BuildDeltaDownloader(private val app: OsmandApplication) {
 	/** [exact] is false while the server still has to build the delta and [size] is its estimate. */
 	class DeltaSize(val size: Long, val exact: Boolean)
 
-	val deltaFile: File get() = File(tempDir, DELTA_NAME)
-
-	/** Removed at every start of the app. */
-	private val tempDir: File get() = app.getAppPath(IndexConstants.TEMP_DIR).also { it.mkdirs() }
+	val deltaFile: File get() = File(FileUtils.getTempDir(app), DELTA_NAME)
 
 	/** What the builds would take instead of the whole APK. Only decorates the list, so it never fails. */
 	fun fetchSizes(paths: List<String>): Map<String, DeltaSize> {
@@ -77,7 +74,7 @@ class BuildDeltaDownloader(private val app: OsmandApplication) {
 	}
 
 	fun buildApk(delta: File, target: File, cancellation: ApkDeltaApplier.Cancellation) {
-		ApkDeltaApplier.apply(requireInstalledApk(), delta, target, tempDir, cancellation)
+		ApkDeltaApplier.apply(requireInstalledApk(), delta, target, FileUtils.getTempDir(app), cancellation)
 	}
 
 	private fun requireInstalledApk(): File = installedApk() ?: throw IOException("No installed APK to start from")

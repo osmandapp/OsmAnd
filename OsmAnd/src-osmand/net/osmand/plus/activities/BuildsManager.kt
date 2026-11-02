@@ -17,6 +17,7 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
+import java.net.SocketTimeoutException
 import java.text.ParseException
 import java.util.Date
 import java.util.Properties
@@ -101,6 +102,8 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 			return
 		}
 		deltaSizes = emptyMap()
+		// the date format is not thread safe and the screen reads it on this thread
+		val installedDate = getInstalledDate()
 		setListState(ListState.Loading)
 		listExecutor.execute {
 			val newState = try {
@@ -112,22 +115,24 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 			app.runInUIThread { setListState(newState) }
 			if (newState is ListState.Loaded && incrementalSupported
 				&& app.settings.BUILD_DELTA_FAILED_FINGERPRINT.get() != Build.FINGERPRINT) {
-				loadDeltaSizes(newState.builds)
+				loadDeltaSizes(newState.builds, installedDate)
 			}
 		}
 	}
 
 	/** Separately from the list, which is complete without the sizes. */
-	private fun loadDeltaSizes(builds: List<OsmAndBuild>) {
+	private fun loadDeltaSizes(builds: List<OsmAndBuild>, installedDate: Date?) {
 		sizesExecutor.execute {
-			val installedDate = getInstalledDate()
 			val newBuilds = builds.filter { installedDate == null || it.date?.after(installedDate) == true }
-			val sizes = deltaDownloader.fetchSizes(newBuilds.take(MAX_BUILDS_WITH_SIZE).map { it.path })
-			app.runInUIThread {
-				deltaSizes = sizes
-				for (listener in listeners.toList()) {
-					listener.onDeltaSizesChanged()
-				}
+			setDeltaSizes(deltaDownloader.fetchSizes(newBuilds.take(MAX_BUILDS_WITH_SIZE).map { it.path }))
+		}
+	}
+
+	private fun setDeltaSizes(sizes: Map<String, BuildDeltaDownloader.DeltaSize>) {
+		app.runInUIThread {
+			deltaSizes = sizes
+			for (listener in listeners.toList()) {
+				listener.onDeltaSizesChanged()
 			}
 		}
 	}
@@ -257,9 +262,11 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 				LOG.warn("Build download attempt $attempt failed: ${e.message}")
 				if (e is ApkDeltaApplier.MismatchException) {
 					app.settings.BUILD_DELTA_FAILED_FINGERPRINT.set(Build.FINGERPRINT)
+					setDeltaSizes(emptyMap())
 				}
+				// waiting for the server again would only delay the whole APK
 				val lastAttempt = e is HttpStatusException || e is ApkDeltaApplier.MismatchException
-						|| attempt >= RETRY_DELAYS_MS.size
+						|| (delta && e is SocketTimeoutException) || attempt >= RETRY_DELAYS_MS.size
 				if (delta && lastAttempt) {
 					delta = false
 					attempt = 0
@@ -284,12 +291,16 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 	}
 
 	private fun downloadDelta(id: Int, build: OsmAndBuild) {
+		discardPart()
 		val delta = deltaDownloader.deltaFile
 		val connection = deltaDownloader.openDeltaConnection(build)
 		this.connection = connection
 		try {
 			deltaDownloader.sendManifest(connection)
 			val code = connection.responseCode
+			if (id != downloadId) {
+				return
+			}
 			if (code != HttpURLConnection.HTTP_OK) {
 				throw HttpStatusException(code)
 			}

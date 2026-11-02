@@ -56,10 +56,6 @@ class BuildsArchiveFragment : BaseMaterialFragment(), BuildsManager.Listener {
 		manager.removeListener(this)
 	}
 
-	override fun onDeltaSizesChanged() {
-		adapter.notifyDataSetChanged()
-	}
-
 	override fun onListStateChanged(state: ListState) {
 		if (state is ListState.Loaded) {
 			adapter.setBuilds(state.builds.filter {
@@ -100,8 +96,7 @@ class BuildsArchiveFragment : BaseMaterialFragment(), BuildsManager.Listener {
 			val params = view.layoutParams as ViewGroup.MarginLayoutParams
 			params.topMargin = if (position == 0) 0 else view.resources.getDimensionPixelSize(R.dimen.ui_segment_gap)
 			view.layoutParams = params
-			BuildsFragment.bindBuildRow(holder.row, builds[position], installedDate,
-				manager.deltaSizes[builds[position].path]) {
+			BuildsFragment.bindBuildRow(holder.row, builds[position], installedDate) {
 				BuildDownloadDialog.show(parentFragmentManager, it)
 			}
 		}

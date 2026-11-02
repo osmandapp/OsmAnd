@@ -3,7 +3,6 @@ package net.osmand.apkdelta;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
-import org.apache.commons.compress.utils.BoundedInputStream;
 import org.apache.commons.compress.utils.IOUtils;
 
 import java.io.BufferedInputStream;
@@ -67,9 +66,9 @@ public final class ApkDeltaApplier {
 		try {
 			new ApkDeltaApplier(tempDir, cancellation).apply(oldApk, delta, newApk);
 			done = true;
-		} catch (RuntimeException e) {
-			// that is how lengths from a broken delta end
-			throw new IOException("Broken delta", e);
+		} catch (RuntimeException | OutOfMemoryError | LinkageError e) {
+			// a delta is an optimization: whatever goes wrong here, the whole APK is still there
+			throw new IOException("Could not apply the delta", e);
 		} finally {
 			if (!done) {
 				newApk.delete();
@@ -119,12 +118,13 @@ public final class ApkDeltaApplier {
 		byte kind = meta.readByte();
 		switch (kind) {
 			case ApkDeltaFormat.KIND_COPY:
-				try (InputStream raw = oldZip.getRawInputStream(oldEntry(oldZip, meta.readUTF()))) {
-					IOUtils.copy(raw, output, BUFFER_SIZE);
+				ZipArchiveEntry copied = oldEntry(oldZip, meta.readUTF());
+				try (InputStream raw = oldZip.getRawInputStream(copied)) {
+					copy(raw, copied.getCompressedSize(), output);
 				}
 				break;
 			case ApkDeltaFormat.KIND_FULL:
-				IOUtils.copy(new BoundedInputStream(delta, meta.readLong()), output, BUFFER_SIZE);
+				copy(delta, meta.readLong(), output);
 				break;
 			case ApkDeltaFormat.KIND_DELTA:
 				ZipArchiveEntry oldEntry = oldEntry(oldZip, meta.readUTF());
@@ -167,7 +167,7 @@ public final class ApkDeltaApplier {
 		try {
 			try (InputStream input = oldZip.getInputStream(oldEntry);
 			     OutputStream file = new FileOutputStream(inflated)) {
-				IOUtils.copy(input, file, BUFFER_SIZE);
+				copy(input, oldEntry.getSize(), file);
 			}
 			try (RandomAccessFile file = new RandomAccessFile(inflated, "r")) {
 				bspatch(file, 0, file.length(), patch, output);
@@ -199,7 +199,7 @@ public final class ApkDeltaApplier {
 				long diffLength = number(numbers, 0);
 				long extraLength = number(numbers, 8);
 				addOld(old, oldOffset, oldSize, position, diffLength, diff, output);
-				IOUtils.copy(new BoundedInputStream(extra, extraLength), output, BUFFER_SIZE);
+				copy(extra, extraLength, output);
 				position += diffLength + number(numbers, 16);
 				written += diffLength + extraLength;
 			}
@@ -228,6 +228,17 @@ public final class ApkDeltaApplier {
 			output.write(buffer, 0, chunk);
 			position += chunk;
 			left -= chunk;
+		}
+	}
+
+	private void copy(InputStream input, long length, OutputStream output) throws IOException {
+		for (long left = length; left > 0; ) {
+			int read = input.read(buffer, 0, (int) Math.min(left, buffer.length));
+			if (read < 0) {
+				throw new EOFException();
+			}
+			output.write(buffer, 0, read);
+			left -= read;
 		}
 	}
 

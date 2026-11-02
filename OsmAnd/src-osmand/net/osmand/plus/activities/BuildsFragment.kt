@@ -288,7 +288,7 @@ class BuildsFragment : BaseMaterialFragment(), BuildsManager.Listener {
 		 */
 		@JvmStatic
 		fun bindBuildRow(row: SettingRow, build: OsmAndBuild, installedDate: Date?,
-		                 deltaSize: BuildDeltaDownloader.DeltaSize?, onClick: (OsmAndBuild) -> Unit) {
+		                 deltaSize: BuildDeltaDownloader.DeltaSize? = null, onClick: (OsmAndBuild) -> Unit) {
 			val context = row.view.context
 			row.setIcon(R.drawable.ic_action_apk,
 				AndroidUtils.getColorFromAttr(context, R.attr.colorOnSurfaceVariant))
