@@ -13,6 +13,8 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.GLIDE_AVERAGE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.GLIDE_TARGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INCLINOMETER_PITCH;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INCLINOMETER_ROLL;
 import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
 import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
@@ -129,6 +131,8 @@ public class WidgetsInitializer {
 		addWidgetInfo(SUN_POSITION);
 		addWidgetInfo(GLIDE_TARGET);
 		addWidgetInfo(GLIDE_AVERAGE);
+		addWidgetInfo(INCLINOMETER_PITCH);
+		addWidgetInfo(INCLINOMETER_ROLL);
 	}
 
 	private void addWidgetInfo(@NonNull WidgetType widgetType) {

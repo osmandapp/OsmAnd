@@ -22,6 +22,8 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATIO
 import static net.osmand.plus.views.mapwidgets.WidgetType.GLIDE_AVERAGE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.GLIDE_TARGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INCLINOMETER_PITCH;
+import static net.osmand.plus.views.mapwidgets.WidgetType.INCLINOMETER_ROLL;
 import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
 import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
@@ -130,6 +132,8 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(SUN_POSITION, all);
 		regWidgetAvailability(GLIDE_TARGET, all);
 		regWidgetAvailability(GLIDE_AVERAGE, all);
+		regWidgetAvailability(INCLINOMETER_PITCH, all);
+		regWidgetAvailability(INCLINOMETER_ROLL, all);
 
 		// vertical
 		regWidgetVisibility(STREET_NAME, CAR);

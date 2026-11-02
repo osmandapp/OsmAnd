@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/units_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_small">
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/TitleStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/inclinometer_slope_unit"
+			android:textColor="?android:textColorPrimary" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/units_description"
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorSecondary"
+			tools:text="Degrees" />
+
+	</LinearLayout>
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding_small"
+		android:text="@string/switch_units_by_tapping_on_widget"
+		android:textColor="?android:textColorSecondary" />
+
+	<include layout="@layout/inclinometer_settings_card_gap" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/TitleStyle.Medium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:text="@string/shared_string_alerts"
+		android:textColor="?attr/active_color_basic" />
+
+	<FrameLayout
+		android:id="@+id/slider_labels"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/warning_angle_label"
+			style="@style/TitleStyle.Medium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorPrimary"
+			tools:text="25°" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/critical_angle_label"
+			style="@style/TitleStyle.Medium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorPrimary"
+			tools:text="35°" />
+
+	</FrameLayout>
+
+	<com.google.android.material.slider.RangeSlider
+		android:id="@+id/thresholds_slider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:stepSize="1"
+		android:valueFrom="0"
+		android:valueTo="60" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:orientation="horizontal">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/slider_min_label"
+			style="@style/DescStyle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="start"
+			android:textColor="?android:textColorSecondary"
+			tools:text="0°" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/slider_max_label"
+			style="@style/DescStyle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="end"
+			android:textColor="?android:textColorSecondary"
+			tools:text="60°" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical"
+				android:orientation="horizontal">
+
+				<View
+					android:layout_width="8dp"
+					android:layout_height="8dp"
+					android:background="@drawable/inclinometer_level_dot"
+					android:backgroundTint="@color/inclinometer_level_warning" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/TitleStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/content_padding_half"
+					android:text="@string/inclinometer_warning_angle"
+					android:textColor="?android:textColorPrimary" />
+
+			</LinearLayout>
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/warning_angle_value"
+				style="@style/DescStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:textColor="?android:textColorSecondary"
+				tools:text="25°" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical"
+				android:orientation="horizontal">
+
+				<View
+					android:layout_width="8dp"
+					android:layout_height="8dp"
+					android:background="@drawable/inclinometer_level_dot"
+					android:backgroundTint="@color/inclinometer_level_critical" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/TitleStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/content_padding_half"
+					android:text="@string/inclinometer_critical_angle"
+					android:textColor="?android:textColorPrimary" />
+
+			</LinearLayout>
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/critical_angle_value"
+				style="@style/DescStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:textColor="?android:textColorSecondary"
+				tools:text="35°" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<include
+		layout="@layout/divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding" />
+
+	<LinearLayout
+		android:id="@+id/sound_alert_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_small">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<net.osmand.plus.widgets.TextViewEx
+				style="@style/TitleStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/inclinometer_sound_alert"
+				android:textColor="?android:textColorPrimary" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				style="@style/DescStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/inclinometer_sound_alert_desc"
+				android:textColor="?android:textColorSecondary" />
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.SwitchCompat
+			android:id="@+id/sound_alert_toggle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/list_content_padding_large"
+			android:background="@null"
+			android:clickable="false"
+			android:focusable="false"
+			android:focusableInTouchMode="false"
+			android:saveEnabled="false" />
+
+	</LinearLayout>
+
+	<include layout="@layout/inclinometer_settings_card_gap" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/TitleStyle.Medium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:text="@string/inclinometer_calibration"
+		android:textColor="?attr/active_color_basic" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/TitleStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/inclinometer_calibration_desc"
+			android:textColor="?android:textColorPrimary" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/calibration_status"
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:textColor="?android:textColorSecondary"
+			tools:text="Calibrated · Offset: pitch 0.4°, roll -1.2°" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:orientation="horizontal">
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/calibrate_button"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_weight="1"
+				app:dialogButtonTitle="@string/inclinometer_calibrate"
+				app:dialogButtonType="primary" />
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/reset_calibration_button"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding_half"
+				android:layout_weight="1"
+				app:dialogButtonTitle="@string/shared_string_reset"
+				app:dialogButtonType="secondary" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
