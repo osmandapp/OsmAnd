@@ -11,8 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
-	<string name="build_update_size">update: %1$s</string>
-	<string name="build_update_size_estimated">update: about %1$s</string>
+	<string name="build_update_size">upd %1$s</string>
+	<string name="build_update_size_estimated">upd ~%1$s</string>
 	<string name="astro_ar_mode">AR mode</string>
 	<string name="astro_camera_view">Camera view</string>
 	<string name="astro_reset_field_of_view">Reset field of view</string>
