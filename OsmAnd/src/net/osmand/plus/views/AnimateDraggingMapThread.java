@@ -264,7 +264,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 			float duration = fullDuration - rotateDuration;
 			PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
 			startThreadAnimating(() -> {
-				animator.animateAzimuthTo(finalRotation, rotateDuration, TimingFunction.Linear, userInteractionAnimationKey);
+				animator.animateAzimuthTo(-finalRotation, rotateDuration, TimingFunction.Linear, userInteractionAnimationKey);
 				animatingMapRotation = true;
 				animatingMapAnimator();
 				animatingMapRotation = false;

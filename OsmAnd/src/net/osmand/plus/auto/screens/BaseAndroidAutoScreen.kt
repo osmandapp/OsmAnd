@@ -156,10 +156,11 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	}
 
 	override fun onDestroy(owner: LifecycleOwner) {
-		if (prevMapLinkedToLocation != app.mapViewTrackingUtilities.isMapLinkedToLocation) {
-			app.mapViewTrackingUtilities.isMapLinkedToLocation = prevMapLinkedToLocation
-		}
 		if (prevStateSaved) {
+			val mapLinkedToLocation = prevMapLinkedToLocation || app.routingHelper.isFollowingMode
+			if (mapLinkedToLocation != app.mapViewTrackingUtilities.isMapLinkedToLocation) {
+				app.mapViewTrackingUtilities.isMapLinkedToLocation = mapLinkedToLocation
+			}
 			restoreMapState()
 		}
 	}
