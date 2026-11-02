@@ -177,7 +177,7 @@ public class TextRenderer {
 		cv.drawText(text, centerX, centerY, paint);
 	}
 
-	public void drawTextOverCanvas(RenderingContext rc, Canvas cv, String preferredLocale) {
+	public void drawTextOverCanvas(RenderingContext rc, Canvas cv) {
 		int size = rc.textToDraw.size();
 
 		// 1. Sort text using text order
@@ -194,9 +194,6 @@ public class TextRenderer {
 		for (int i = 0; i < size; i++) {
 			TextDrawInfo text = rc.textToDraw.get(i);
 			if (text.text != null && text.text.length() > 0) {
-				if (preferredLocale.length() > 0) {
-					text.text = TransliterationHelper.transliterate(text.text);
-				}
 				updateTextPaint(text, rc);
 				// align center y
 				text.centerY += (-paintText.ascent());
@@ -384,23 +381,55 @@ public class TextRenderer {
 			map.forEachEntry(new TIntObjectProcedure<String>() {
 				@Override
 				public boolean execute(int tag, String name) {
-					if (name != null && name.trim().length() > 0) {
-						boolean isName = tag == obj.getMapIndex().nameEncodingType;
-						String nameTag = isName ? "" : obj.getMapIndex().decodeType(tag).tag;
-						boolean skip = isName && !rc.preferredLocale.isEmpty() &&
-								map.containsKey(obj.getMapIndex().nameEnEncodingType);
-						// not completely correct we should check "name"+rc.preferredLocale
-//						if (tag == obj.getMapIndex().nameEnEncodingType && !rc.useEnglishNames) {
-//							skip = true;
-//						}
-						if (!skip) {
-							createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, name, nameTag);
+					if (name == null || name.trim().length() == 0) {
+						return true;
+					}
+					String locale = rc.preferredLocale;
+					String nameTag = obj.getMapIndex().decodeType(tag).tag;
+					boolean transliterate = !locale.isEmpty() && rc.transliterate;
+					int pos = nameTag.lastIndexOf(':');
+					if (pos >= 0 && pos + 4 >= nameTag.length()) {
+						// localized tag replaces missing base tag: name:<locale>, or name:en if transliterate and no name:<locale>
+						String lang = nameTag.substring(pos + 1);
+						nameTag = nameTag.substring(0, pos);
+						boolean englishFallback = lang.equals("en") && rc.transliterate
+								&& getObjectName(obj, nameTag + ":" + locale) == null;
+						if (locale.isEmpty() || getObjectName(obj, nameTag) != null
+								|| (!lang.equals(locale) && !englishFallback)) {
+							return true;
+						}
+						transliterate = false;
+					} else if (!locale.isEmpty()) {
+						String localizedName = getObjectName(obj, nameTag + ":" + locale);
+						if (localizedName != null) {
+							name = localizedName;
+							transliterate = false;
 						}
 					}
+					if (transliterate) {
+						// latin name: name:en if present (as V2), else transliterated
+						String enName = getObjectName(obj, nameTag + ":en");
+						name = enName != null ? enName : TransliterationHelper.transliterate(name);
+					}
+					createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, name,
+							"name".equals(nameTag) ? "" : nameTag);
 					return true;
 				}
 			});
 		}
+	}
+
+	// empty value counts as missing
+	@Nullable
+	private static String getObjectName(BinaryMapDataObject obj, String tag) {
+		TIntObjectHashMap<String> map = obj.getObjectNames();
+		for (int type : map.keys()) {
+			String name = map.get(type);
+			if (!Algorithms.isEmpty(name) && tag.equals(obj.getMapIndex().decodeType(type).tag)) {
+				return name;
+			}
+		}
+		return null;
 	}
 
 	boolean calculatePathToRotate(RenderingContext rc, TextDrawInfo p, PointF[] points, boolean drawOnPath) {
