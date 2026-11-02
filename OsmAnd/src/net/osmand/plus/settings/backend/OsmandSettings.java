@@ -3638,6 +3638,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> ENABLE_MSAA = new BooleanPreference(this, "enable_msaa", false).makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> SPHERICAL_MAP = new BooleanPreference(this, "spherical_map", false).makeProfile().cache();
+	public final CommonPreference<Boolean> CAST_SHADOWS = new BooleanPreference(this, "cast_shadows", false).makeProfile().cache();
 
 	public static final float BUILDINGS_3D_ALPHA_DEF_VALUE = 0.5f;
 	public static final int BUILDINGS_3D_DEFAULT_COLOR = 0x666666;
