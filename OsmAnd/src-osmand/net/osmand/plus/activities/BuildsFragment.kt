@@ -233,9 +233,12 @@ class BuildsFragment : BaseMaterialFragment(), BuildsManager.Listener {
 		} else {
 			size
 		}
-		downloadSubtitle.text = status?.let {
-			getString(R.string.ltr_or_rtl_combine_via_bold_point, it, progress)
-		} ?: progress
+		// a delta keeps nothing to resume from
+		downloadSubtitle.text = if (status != null && downloaded > 0) {
+			getString(R.string.ltr_or_rtl_combine_via_bold_point, status, progress)
+		} else {
+			status ?: progress
+		}
 		downloadProgress.visibility = View.VISIBLE
 		if (total > 0) {
 			downloadProgress.isIndeterminate = false
