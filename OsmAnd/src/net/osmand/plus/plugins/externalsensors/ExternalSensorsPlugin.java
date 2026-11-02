@@ -203,15 +203,16 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	@Nullable
 	public AbstractDevice<?> getAnyDevice(@NonNull SensorWidgetDataFieldType fieldType) {
-		for (AbstractDevice<?> device : getPairedDevices()) {
-			for (AbstractSensor sensor : device.getSensors()) {
-				List<SensorWidgetDataFieldType> supportedTypes = sensor.getSupportedWidgetDataFieldTypes();
-				if (supportedTypes.contains(fieldType)) {
-					return device;
-				}
+		AbstractDevice<?> firstDevice = null;
+		for (AbstractDevice<?> device : getPairedDevicesByWidgetType(fieldType)) {
+			if (device.isConnected()) {
+				return device;
+			}
+			if (firstDevice == null) {
+				firstDevice = device;
 			}
 		}
-		return null;
+		return firstDevice;
 	}
 
 	@Nullable
