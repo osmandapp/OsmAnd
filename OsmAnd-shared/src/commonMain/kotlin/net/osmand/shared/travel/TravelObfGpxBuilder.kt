@@ -432,11 +432,9 @@ class TravelObfGpxBuilder(private val context: TravelObfContext) {
 		pgColors: MutableList<String>, pgBackgrounds: MutableList<String>,
 		isCancelled: Cancellable
 	): Boolean {
-		val left = 0
-		val right = Int.MAX_VALUE
-		val top = 0
-		val bottom = Int.MAX_VALUE
 		val amenityMap = LinkedHashMap<Long, Amenity>()
+		val currentAmenities = ArrayList<Amenity>()
+		val routeId = article.getRouteId()
 		for (repo in repos) {
 			try {
 				if (isCancelled.isCancelled()) {
@@ -445,18 +443,20 @@ class TravelObfGpxBuilder(private val context: TravelObfContext) {
 				if (shouldSkipRepository(repo, article)) {
 					continue
 				}
-				val pointRequest = SearchRequest.buildSearchPoiRequest(
-					0, 0, KAlgorithms.emptyIfNull(article.title), left, right, top, bottom,
-					getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
-					getAmenityMatcher(article, amenityMap, ArrayList(), isCancelled), null
-				)
-				if (article.routeRadius > 0 && !article.hasBbox31()) {
-					pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius)
+				currentAmenities.clear()
+				// route_name of article points is not in the POI name index, so search by title misses most of them
+				if (!KAlgorithms.isEmpty(routeId)) {
+					repo.searchPoiByName(buildArticlePointsRequest(article, routeId!!, amenityMap,
+						currentAmenities, isCancelled)) // indexed route_id
 				}
-				if (!KAlgorithms.isEmpty(article.title)) {
-					repo.searchPoiByName(pointRequest)
-				} else {
-					repo.searchPoi(pointRequest)
+				if (currentAmenities.isEmpty()) {
+					val pointRequest = buildArticlePointsRequest(article, KAlgorithms.emptyIfNull(article.title),
+						amenityMap, currentAmenities, isCancelled)
+					if (!KAlgorithms.isEmpty(article.title)) {
+						repo.searchPoiByName(pointRequest)
+					} else {
+						repo.searchPoi(pointRequest)
+					}
 				}
 			} catch (e: Exception) {
 				log.error(e.message, e)
@@ -464,6 +464,21 @@ class TravelObfGpxBuilder(private val context: TravelObfContext) {
 		}
 		pointList.addAll(getPointList(article, amenityMap, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds))
 		return !isCancelled.isCancelled()
+	}
+
+	private fun buildArticlePointsRequest(
+		article: TravelArticle, query: String, amenityMap: MutableMap<Long, Amenity>,
+		currentAmenities: MutableList<Amenity>, isCancelled: Cancellable
+	): SearchRequest<Amenity> {
+		val request = SearchRequest.buildSearchPoiRequest(
+			0, 0, query, 0, Int.MAX_VALUE, 0, Int.MAX_VALUE,
+			getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
+			getAmenityMatcher(article, amenityMap, currentAmenities, isCancelled), null
+		)
+		if (article.routeRadius > 0 && !article.hasBbox31()) {
+			request.setBBoxRadius(article.lat, article.lon, article.routeRadius)
+		}
+		return request
 	}
 
 	/**
