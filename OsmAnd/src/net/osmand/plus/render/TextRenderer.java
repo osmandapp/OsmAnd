@@ -333,20 +333,11 @@ public class TextRenderer {
 				TextDrawInfo text = new TextDrawInfo(name);
 				text.fillProperties(rc, render, xMid, yMid);
 				String tagName2 = render.getStringPropertyValue(render.ALL.R_NAME_TAG2);
-				if (!Algorithms.isEmpty(tagName2)) {
-					o.getObjectNames().forEachEntry(new TIntObjectProcedure<String>() {
-						@Override
-						public boolean execute(int tagid, String nname) {
-							String tagNameN2 = o.getMapIndex().decodeType(tagid).tag;
-							if (tagName2.equals(tagNameN2)) {
-								if (nname != null && nname.trim().length() > 0 && !nname.equals(text.text)) {
-									text.text += " (" + nname + ")";
-								}
-								return false;
-							}
-							return true;
-						}
-					});
+				if (!Algorithms.isBlank(tagName2)) {
+					String extraName = getPreferredName(o, rc, tagName2, getObjectName(o, tagName2));
+					if (extraName != null && !extraName.equals(text.text)) {
+						text.text += " (" + extraName + ")";
+					}
 				}
 				paintText.setTextSize(text.textSize);
 				Rect bs = new Rect();
@@ -381,50 +372,62 @@ public class TextRenderer {
 			map.forEachEntry(new TIntObjectProcedure<String>() {
 				@Override
 				public boolean execute(int tag, String name) {
-					if (name == null || name.trim().length() == 0) {
+					if (Algorithms.isBlank(name)) {
 						return true;
 					}
 					String locale = rc.preferredLocale;
 					String nameTag = obj.getMapIndex().decodeType(tag).tag;
 					boolean transliterate = !locale.isEmpty() && rc.transliterate;
-					// name:<lang> only: other short suffixes like piste:ref are separate texts
-					if (nameTag.startsWith("name:") && nameTag.length() <= 8) {
+					// name:<lang> only: other tags like piste:ref are separate texts
+					if (nameTag.startsWith("name:")) {
 						// localized name replaces missing name: name:<locale>, or name:en if transliterate and no name:<locale>
 						boolean isLocale = !locale.isEmpty() && nameTag.length() == 5 + locale.length()
 								&& nameTag.endsWith(locale);
 						boolean englishFallback = !isLocale && transliterate && nameTag.equals("name:en");
-						if ((!isLocale && !englishFallback) || !Algorithms.isEmpty(obj.getName())
+						if ((!isLocale && !englishFallback) || !Algorithms.isBlank(obj.getName())
 								|| (englishFallback && getObjectName(obj, "name:" + locale) != null)) {
 							return true;
 						}
 						nameTag = "name";
-						transliterate = false;
-					} else if (!locale.isEmpty()) {
-						String localizedName = getObjectName(obj, nameTag + ":" + locale);
-						if (localizedName != null) {
-							name = localizedName;
-							transliterate = false;
-						}
 					}
-					if (transliterate) {
-						// latin name: name:en if present (as V2), else transliterated
-						String enName = getObjectName(obj, nameTag + ":en");
-						name = enName != null ? enName : TransliterationHelper.transliterate(name);
+					name = getPreferredName(obj, rc, nameTag, name);
+					if (name != null) {
+						createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, name,
+								"name".equals(nameTag) ? "" : nameTag);
 					}
-					createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, name,
-							"name".equals(nameTag) ? "" : nameTag);
 					return true;
 				}
 			});
 		}
 	}
 
-	// empty value counts as missing
+	@Nullable
+	private static String getPreferredName(BinaryMapDataObject obj, RenderingContext rc, String tag, String name) {
+		String locale = rc.preferredLocale;
+		if (!locale.isEmpty()) {
+			String localizedName = getObjectName(obj, tag + ":" + locale);
+			if (localizedName != null) {
+				return localizedName;
+			}
+			if (rc.transliterate) {
+				String enName = getObjectName(obj, tag + ":en");
+				if (enName != null) {
+					return enName;
+				}
+				if (!Algorithms.isBlank(name)) {
+					name = TransliterationHelper.transliterate(name);
+				}
+			}
+		}
+		return Algorithms.isBlank(name) ? null : name;
+	}
+
+	// blank value counts as missing
 	@Nullable
 	private static String getObjectName(BinaryMapDataObject obj, String tag) {
 		Integer type = obj.getMapIndex().getRule(tag, null);
 		String name = type != null ? obj.getNameByType(type) : null;
-		return Algorithms.isEmpty(name) ? null : name;
+		return Algorithms.isBlank(name) ? null : name;
 	}
 
 	boolean calculatePathToRotate(RenderingContext rc, TextDrawInfo p, PointF[] points, boolean drawOnPath) {
