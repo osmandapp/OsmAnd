@@ -26,11 +26,14 @@
 	<string name="inclinometer_sound_alert">Sound alert</string>
 	<string name="inclinometer_sound_alert_desc">Play a sound when a threshold is exceeded.</string>
 	<string name="inclinometer_calibration">Calibration</string>
-	<string name="inclinometer_calibration_desc">Park on level ground with the device fixed in its mount, then tap Calibrate. The calibration is shared by all inclinometer widgets.</string>
+	<string name="inclinometer_calibration_desc">Park on level ground with the device fixed in its mount.</string>
+	<string name="inclinometer_calibration_applies_to_all">Applies to all inclinometer widgets.</string>
 	<string name="inclinometer_calibrated">Calibrated</string>
 	<string name="inclinometer_not_calibrated">Not calibrated</string>
 	<string name="inclinometer_calibration_offset">Offset: pitch %1$s, roll %2$s</string>
 	<string name="inclinometer_calibrate">Calibrate</string>
+	<string name="inclinometer_recalibrate">Recalibrate</string>
+	<string name="inclinometer_reset_calibration">Reset calibration</string>
 	<string name="inclinometer_calibration_saved">Calibration saved</string>
 	<string name="inclinometer_sensor_unavailable">Tilt sensor is not available on this device.</string>
 	<string name="astro_ar_mode">AR mode</string>
