@@ -2743,7 +2743,9 @@ public class OsmandSettings {
 	}
 
 	public float getLastKnownMapElevation(@NonNull ApplicationMode appMode) {
-		return getLastKnownMapElevationPref().getModeValue(appMode);
+		CommonPreference<Float> preference = getLastKnownMapElevationPref();
+		float elevation = preference.getModeValue(appMode);
+		return Float.isNaN(elevation) ? preference.getProfileDefaultValue(appMode) : elevation;
 	}
 
 	public void setLastKnownMapElevation(float elevation) {
