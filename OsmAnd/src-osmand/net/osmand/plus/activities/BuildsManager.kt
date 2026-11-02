@@ -1,7 +1,9 @@
 package net.osmand.plus.activities
 
+import android.os.Build
 import android.os.SystemClock
 import net.osmand.PlatformUtil
+import net.osmand.apkdelta.ApkDeltaApplier
 import net.osmand.osm.io.NetworkUtils
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.Version
@@ -15,6 +17,7 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
+import java.net.SocketTimeoutException
 import java.text.ParseException
 import java.util.Date
 import java.util.Properties
@@ -47,12 +50,15 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 
 	interface Listener {
 		fun onListStateChanged(state: ListState) = Unit
+		fun onDeltaSizesChanged() = Unit
 		fun onDownloadStateChanged(state: DownloadState) = Unit
 	}
 
 	private val listeners = mutableListOf<Listener>()
 	private val listExecutor = Executors.newSingleThreadExecutor()
 	private val downloadExecutor = Executors.newSingleThreadExecutor()
+	private val sizesExecutor = Executors.newSingleThreadExecutor()
+	private val deltaDownloader = BuildDeltaDownloader(app)
 
 	private val apkFile: File get() = app.getAppPath(DOWNLOAD_BUILD_NAME)
 	private val partFile: File get() = app.getAppPath(DOWNLOAD_BUILD_PART_NAME)
@@ -62,11 +68,18 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 		private set
 	var downloadState: DownloadState = DownloadState.Idle
 		private set
+	/** The builds that can be downloaded as a difference to the installed APK, by path. */
+	@Volatile
+	var deltaSizes: Map<String, BuildDeltaDownloader.DeltaSize> = emptyMap()
+		private set
 
 	@Volatile
 	private var downloadId = 0
 	@Volatile
 	private var connection: HttpURLConnection? = null
+
+	@Volatile
+	private var incrementalSupported = false
 
 	private var pendingInstall = false
 	private var previousInstallDate: String? = null
@@ -88,6 +101,9 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 		if (state is ListState.Loading || state is ListState.Loaded && !force) {
 			return
 		}
+		deltaSizes = emptyMap()
+		// the date format is not thread safe and the screen reads it on this thread
+		val installedDate = getInstalledDate()
 		setListState(ListState.Loading)
 		listExecutor.execute {
 			val newState = try {
@@ -97,6 +113,27 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 				ListState.Failed(e.message)
 			}
 			app.runInUIThread { setListState(newState) }
+			if (newState is ListState.Loaded && incrementalSupported
+				&& app.settings.BUILD_DELTA_FAILED_FINGERPRINT.get() != Build.FINGERPRINT) {
+				loadDeltaSizes(newState.builds, installedDate)
+			}
+		}
+	}
+
+	/** Separately from the list, which is complete without the sizes. */
+	private fun loadDeltaSizes(builds: List<OsmAndBuild>, installedDate: Date?) {
+		sizesExecutor.execute {
+			val newBuilds = builds.filter { installedDate == null || it.date?.after(installedDate) == true }
+			setDeltaSizes(deltaDownloader.fetchSizes(newBuilds.take(MAX_BUILDS_WITH_SIZE).map { it.path }))
+		}
+	}
+
+	private fun setDeltaSizes(sizes: Map<String, BuildDeltaDownloader.DeltaSize>) {
+		app.runInUIThread {
+			deltaSizes = sizes
+			for (listener in listeners.toList()) {
+				listener.onDeltaSizesChanged()
+			}
 		}
 	}
 
@@ -182,6 +219,9 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 				if (next == XmlPullParser.END_DOCUMENT) {
 					break
 				}
+				if (next == XmlPullParser.START_TAG && parser.name == "builds") {
+					incrementalSupported = parser.getAttributeValue(null, "incremental").toBoolean()
+				}
 				if (next != XmlPullParser.START_TAG || parser.name != "build"
 					|| !"osmand".equals(parser.getAttributeValue(null, "type"), true)) {
 					continue
@@ -201,17 +241,38 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 	}
 
 	private fun downloadWithRetries(id: Int, build: OsmAndBuild) {
+		if (id != downloadId) {
+			return
+		}
+		// a download that has started goes on as it was
+		var delta = deltaSizes.containsKey(build.path) && readMeta()?.path != build.path
 		var attempt = 0
 		while (true) {
 			try {
-				download(id, build)
+				if (delta) {
+					downloadDelta(id, build)
+				} else {
+					download(id, build)
+				}
 				return
 			} catch (e: IOException) {
 				if (id != downloadId) {
 					return
 				}
 				LOG.warn("Build download attempt $attempt failed: ${e.message}")
-				if (e is HttpStatusException || attempt >= RETRY_DELAYS_MS.size) {
+				if (e is ApkDeltaApplier.MismatchException) {
+					app.settings.BUILD_DELTA_FAILED_FINGERPRINT.set(Build.FINGERPRINT)
+					setDeltaSizes(emptyMap())
+				}
+				// waiting for the server again would only delay the whole APK
+				val lastAttempt = e is HttpStatusException || e is ApkDeltaApplier.MismatchException
+						|| (delta && e is SocketTimeoutException) || attempt >= RETRY_DELAYS_MS.size
+				if (delta && lastAttempt) {
+					delta = false
+					attempt = 0
+					continue
+				}
+				if (lastAttempt) {
 					val total = readMeta()?.total ?: -1
 					app.runInUIThread {
 						if (id == downloadId) {
@@ -226,6 +287,34 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 					return
 				}
 			}
+		}
+	}
+
+	private fun downloadDelta(id: Int, build: OsmAndBuild) {
+		discardPart()
+		val delta = deltaDownloader.deltaFile
+		val connection = deltaDownloader.openDeltaConnection(build)
+		this.connection = connection
+		try {
+			deltaDownloader.sendManifest(connection)
+			val code = connection.responseCode
+			if (id != downloadId) {
+				return
+			}
+			if (code != HttpURLConnection.HTTP_OK) {
+				throw HttpStatusException(code)
+			}
+			val total = connection.contentLengthLong
+			if (transfer(id, build, connection, delta, 0, total)) {
+				// the bytes are here, the rest is work on the phone without a measure
+				notifyRunning(id, build, delta.length(), -1)
+				deltaDownloader.buildApk(delta, apkFile) { id != downloadId }
+				notifyCompleted(id, build)
+			}
+		} finally {
+			connection.disconnect()
+			this.connection = null
+			delta.delete()
 		}
 	}
 
@@ -288,10 +377,25 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 	}
 
 	private fun copy(id: Int, build: OsmAndBuild, connection: HttpURLConnection, offset: Long, total: Long) {
+		if (!transfer(id, build, connection, partFile, offset, total)) {
+			return
+		}
+		val apk = apkFile
+		apk.delete()
+		if (!partFile.renameTo(apk)) {
+			throw IOException("Could not rename ${partFile.name}")
+		}
+		metaFile.delete()
+		notifyCompleted(id, build)
+	}
+
+	/** @return false if the download was stopped on the way */
+	private fun transfer(id: Int, build: OsmAndBuild, connection: HttpURLConnection, file: File, offset: Long,
+	                     total: Long): Boolean {
 		var downloaded = offset
 		var lastNotification = 0L
 		connection.inputStream.use { input ->
-			FileOutputStream(partFile, offset > 0).use { output ->
+			FileOutputStream(file, offset > 0).use { output ->
 				val buffer = ByteArray(BUFFER_SIZE)
 				while (true) {
 					val read = input.read(buffer)
@@ -303,32 +407,33 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 					val now = SystemClock.elapsedRealtime()
 					if (now - lastNotification > PROGRESS_INTERVAL_MS) {
 						lastNotification = now
-						val progress = downloaded
-						app.runInUIThread {
-							if (id == downloadId) {
-								setDownloadState(DownloadState.Running(build, progress, total))
-							}
-						}
+						notifyRunning(id, build, downloaded, total)
 					}
 				}
 			}
 		}
 		if (id != downloadId) {
-			return
+			return false
 		}
-		if (total > 0 && partFile.length() != total) {
+		if (total > 0 && file.length() != total) {
 			// a stream that ends early is not an error for HttpURLConnection - it is for an APK
-			throw IOException("Incomplete download: ${partFile.length()} of $total bytes")
+			throw IOException("Incomplete download: ${file.length()} of $total bytes")
 		}
-		val apk = apkFile
-		apk.delete()
-		if (!partFile.renameTo(apk)) {
-			throw IOException("Could not rename ${partFile.name}")
-		}
-		metaFile.delete()
+		return true
+	}
+
+	private fun notifyRunning(id: Int, build: OsmAndBuild, downloaded: Long, total: Long) {
 		app.runInUIThread {
 			if (id == downloadId) {
-				setDownloadState(DownloadState.Completed(build, apk))
+				setDownloadState(DownloadState.Running(build, downloaded, total))
+			}
+		}
+	}
+
+	private fun notifyCompleted(id: Int, build: OsmAndBuild) {
+		app.runInUIThread {
+			if (id == downloadId) {
+				setDownloadState(DownloadState.Completed(build, apkFile))
 			}
 		}
 	}
@@ -416,8 +521,9 @@ class BuildsManager private constructor(private val app: OsmandApplication) {
 		private const val URL_TO_RETRIEVE_BUILDS = "https://osmand.net/builds"
 		const val LATEST_BUILDS_FOLDER = "latest-night-build/"
 
-		private const val CONNECT_TIMEOUT_MS = 15_000
-		private const val READ_TIMEOUT_MS = 30_000
+		const val CONNECT_TIMEOUT_MS = 15_000
+		const val READ_TIMEOUT_MS = 30_000
+		private const val MAX_BUILDS_WITH_SIZE = 4
 		private const val BUFFER_SIZE = 64 * 1024
 		private const val PROGRESS_INTERVAL_MS = 200L
 		private const val HTTP_RANGE_NOT_SATISFIABLE = 416
