@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="exit_app_running_work_warning">Active navigation, track recording and map downloads will stop.</string>
 	<string name="astro_ar_mode">AR mode</string>
 	<string name="astro_camera_view">Camera view</string>
 	<string name="astro_reset_field_of_view">Reset field of view</string>

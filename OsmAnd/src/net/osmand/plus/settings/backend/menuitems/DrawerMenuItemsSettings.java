@@ -37,6 +37,7 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 		originalOrderIds.add(DRAWER_PLUGINS_ID);
 		originalOrderIds.add(DRAWER_SETTINGS_ID);
 		originalOrderIds.add(DRAWER_HELP_ID);
+		originalOrderIds.add(DRAWER_EXIT_ID);
 		originalOrderIds.add(DRAWER_BUILDS_ID);
 		originalOrderIds.add(DRAWER_OSMAND_VERSION_ID);
 	}
@@ -122,6 +123,7 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 		hiddenByDefault.add(DRAWER_OSMAND_VERSION_ID);
 		hiddenByDefault.add(DRAWER_ANT_PLUS_ID);
 		hiddenByDefault.add(DRAWER_VEHICLE_METRICS_ID);
+		hiddenByDefault.add(DRAWER_EXIT_ID);
 		return hiddenByDefault;
 	}
 }

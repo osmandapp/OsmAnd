@@ -32,6 +32,7 @@ import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.help.HelpActivity;
+import net.osmand.plus.helpers.AppExitHelper;
 import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
@@ -606,6 +607,15 @@ public class MapActivityActions extends MapActions {
 					Intent intent = new Intent(activity, HelpActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					activity.startActivity(intent);
+					return true;
+				}));
+
+		adapter.addItem(new ContextMenuItem(DRAWER_EXIT_ID)
+				.setTitleId(R.string.shared_string_exit, activity)
+				.setIcon(R.drawable.ic_action_logout)
+				.setListener((uiAdapter, view, item, isChecked) -> {
+					app.logEvent("drawer_exit");
+					AppExitHelper.exit(activity, nightMode);
 					return true;
 				}));
 
