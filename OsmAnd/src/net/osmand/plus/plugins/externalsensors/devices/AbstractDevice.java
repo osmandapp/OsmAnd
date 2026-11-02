@@ -60,7 +60,7 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 
 		}
 
-		default void onDeviceSensorsChanged(@NonNull AbstractDevice<?> device) {
+		default void onDeviceSensorsChanged(@NonNull AbstractDevice<?> device, @NonNull List<? extends AbstractSensor> addedSensors) {
 
 		}
 	}

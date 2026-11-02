@@ -200,11 +200,11 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 	}
 
 	@Override
-	public void onDeviceSensorsChanged(@NonNull AbstractDevice<?> device) {
+	public void onDeviceSensorsChanged(@NonNull AbstractDevice<?> device, @NonNull List<? extends AbstractSensor> addedSensors) {
 		app.runInUIThread(() -> {
 			if (device instanceof BLEAbstractDevice bleDevice && isDevicePaired(device)) {
 				saveDeviceSensors(bleDevice);
-				onDevicePaired(device);
+				onDeviceSensorsAdded(device, addedSensors);
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
 					mapActivity.updateApplicationModeSettings();
@@ -606,6 +606,10 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 	}
 
 	public void onDevicePaired(@NonNull AbstractDevice<?> device) {
+
+	}
+
+	public void onDeviceSensorsAdded(@NonNull AbstractDevice<?> device, @NonNull List<? extends AbstractSensor> sensors) {
 
 	}
 

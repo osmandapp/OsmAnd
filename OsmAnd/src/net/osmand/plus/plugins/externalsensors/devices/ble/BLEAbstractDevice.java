@@ -138,11 +138,11 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	/**
 	 * Adds a sensor for every supported service of the device that has no sensor yet.
 	 *
-	 * @return true if a sensor was added
+	 * @return the added sensors
 	 */
-	public boolean addSensorsForServices(@NonNull Collection<UUID> serviceUUIDs) {
+	@NonNull
+	public List<BLEAbstractSensor> addSensorsForServices(@NonNull Collection<UUID> serviceUUIDs) {
 		List<BLEAbstractSensor> newSensors = new ArrayList<>(sensors);
-		boolean added = false;
 		for (UUID serviceUUID : serviceUUIDs) {
 			if (hasSensorForService(newSensors, serviceUUID)) {
 				continue;
@@ -160,16 +160,14 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 				newSensors.add(new BLECuffPressureSensor(this));
 			} else if (GattAttributes.UUID_SERVICE_CYCLING_POWER.equals(serviceUUID)) {
 				newSensors.add(new BLEBikePowerSensor(this));
-			} else {
-				continue;
 			}
-			added = true;
 		}
-		if (added) {
+		List<BLEAbstractSensor> addedSensors = new ArrayList<>(newSensors.subList(sensors.size(), newSensors.size()));
+		if (!addedSensors.isEmpty()) {
 			// sensors are iterated from BLE callbacks, so replace the list instead of modifying it
 			sensors = newSensors;
 		}
-		return added;
+		return addedSensors;
 	}
 
 	/**
@@ -213,9 +211,9 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		return null;
 	}
 
-	private void fireDeviceSensorsChanged() {
+	private void fireDeviceSensorsChanged(@NonNull List<BLEAbstractSensor> addedSensors) {
 		for (DeviceListener listener : listeners) {
-			listener.onDeviceSensorsChanged(this);
+			listener.onDeviceSensorsChanged(this, addedSensors);
 		}
 	}
 
@@ -335,9 +333,10 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			for (BluetoothGattService service : services) {
 				serviceUUIDs.add(service.getUuid());
 			}
-			if (addSensorsForServices(serviceUUIDs)) {
+			List<BLEAbstractSensor> addedSensors = addSensorsForServices(serviceUUIDs);
+			if (!addedSensors.isEmpty()) {
 				LOG.debug("added sensors for services of '" + getName() + "': " + getSensorServiceUUIDs());
-				fireDeviceSensorsChanged();
+				fireDeviceSensorsChanged(addedSensors);
 			}
 			for (BLEAbstractSensor sensor : sensors) {
 				sensor.requestCharacteristic(cachedCharacteristics);
