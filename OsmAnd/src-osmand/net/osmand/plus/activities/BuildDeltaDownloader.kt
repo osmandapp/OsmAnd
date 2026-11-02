@@ -24,14 +24,16 @@ class BuildDeltaDownloader(private val app: OsmandApplication) {
 
 	val deltaFile: File get() = File(FileUtils.getTempDir(app), DELTA_NAME)
 
-	/** What the builds would take instead of the whole APK. Only decorates the list, so it never fails. */
-	fun fetchSizes(paths: List<String>): Map<String, DeltaSize> {
-		if (installedApk() == null || paths.isEmpty()) {
+	/**
+	 * What the builds the server offers would take instead of the whole APK, by path. Only decorates
+	 * the list, so it never fails.
+	 */
+	fun fetchSizes(): Map<String, DeltaSize> {
+		if (installedApk() == null) {
 			return emptyMap()
 		}
 		try {
-			val query = paths.joinToString("&") { "path=" + URLEncoder.encode(it, "UTF-8") }
-			val connection = NetworkUtils.getHttpURLConnection("$URL_DELTA/sizes?$query")
+			val connection = NetworkUtils.getHttpURLConnection("$URL_DELTA/sizes")
 			try {
 				connection.connectTimeout = BuildsManager.CONNECT_TIMEOUT_MS
 				connection.readTimeout = BuildsManager.READ_TIMEOUT_MS
