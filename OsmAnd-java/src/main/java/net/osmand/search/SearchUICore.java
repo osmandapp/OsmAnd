@@ -260,6 +260,9 @@ public class SearchUICore {
 					}
 				}
 			}
+			if (phrase.getSettings().getSortType() == SortType.ONLY_BY_DISTANCE) {
+				visibleResults.sort(new SearchResultComparator(phrase));
+			}
 			return Collections.unmodifiableList(visibleResults);
 		}
 
