@@ -994,14 +994,15 @@ public class ResourceManager {
 
 	@NonNull
 	public List<String> getMapsWithoutSpatialSearch(@NonNull LatLon location, int radius) {
-		QuadRect rect = MapUtils.calculate31BboxUsingRhumb(radius, location);
+		QuadRect rect = MapUtils.calculate31Bbox(location.getLatitude(), location.getLongitude(), radius);
 		List<String> maps = new ArrayList<>();
 		for (BinaryMapReaderResource r : getFileReaders()) {
 			String fileName = r.getFileName();
 			BinaryMapIndexReader shallowReader = r.getShallowReader();
 			boolean regularMap = !fileName.endsWith(BINARY_WIKI_MAP_INDEX_EXT)
 					&& !fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
-			if (regularMap && shallowReader != null
+			// the World basemap covers every location
+			if (regularMap && shallowReader != null && !shallowReader.isBasemap()
 					&& shallowReader.containsPoiData((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom)
 					&& !SpatialTextSearchAPI.hasPoiTypesInNameIndex(shallowReader)) {
 				maps.add(fileName);
