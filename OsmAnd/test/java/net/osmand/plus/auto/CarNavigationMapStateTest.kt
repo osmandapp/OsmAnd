@@ -53,6 +53,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Assume.assumeTrue
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -63,7 +64,9 @@ import java.util.concurrent.TimeUnit
 /**
  * A route preview tilts the map to 2D, turns it north up and unlinks it from the location. None of that may
  * reach the navigation view or the saved tilt. The route comes from a GPX, so no offline map is needed.
+ * Remove @Ignore before running the cases.
  */
+@Ignore("Manual check: ~90 s, starts the OpenGL renderer in the test process")
 @RunWith(AndroidJUnit4::class)
 @SuppressLint("RestrictedApi")
 class CarNavigationMapStateTest {
