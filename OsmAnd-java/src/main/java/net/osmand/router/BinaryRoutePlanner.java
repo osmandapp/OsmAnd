@@ -628,7 +628,7 @@ public class BinaryRoutePlanner {
 
 
 
-	private boolean checkViaRestrictions(RouteSegment from, RouteSegment to) {
+	private boolean checkViaRestrictions(RouteSegment from, RouteSegment to, long viaId) {
 		if (from != null && to != null) {
 			long fid = to.getRoad().getId();
 			for (int i = 0; i < from.getRoad().getRestrictionLength(); i++) {
@@ -643,12 +643,19 @@ public class BinaryRoutePlanner {
 					}
 					break;
 				}
-				if (tp == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+				if (tp == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON
+						|| (isOnlyRestriction(tp) && from.getRoad().getRestrictionVia(i) == viaId)) {
 					return false;
 				}
 			}
 		}
 		return true;
+	}
+
+	private static boolean isOnlyRestriction(int type) {
+		return type == MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN
+				|| type == MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN
+				|| type == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
 	}
 
 	private RouteSegment getParentDiffId(RouteSegment s) {
@@ -677,7 +684,7 @@ public class BinaryRoutePlanner {
 			RouteSegment oppParent = getParentDiffId(opposite);
 			RouteSegment to = reverseWaySearch ? curParent : oppParent;
 			RouteSegment from = !reverseWaySearch ? curParent : oppParent;
-			if (checkViaRestrictions(from, to)) {
+			if (checkViaRestrictions(from, to, currentSegment.getRoad().getId())) {
 				FinalRouteSegment frs = new FinalRouteSegment(currentSegment.getRoad(), 
 						currentSegment.getSegmentStart(), currentSegment.getSegmentEnd());
 				frs.setParentRoute(currentSegment.getParentRoute());
@@ -761,7 +768,7 @@ public class BinaryRoutePlanner {
 							break;
 						}
 					}
-					if (rv == viaId && via && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+					if (rv == viaId && via && isOnlyRestriction(rt)) {
 						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
 						break;
 					}
@@ -778,7 +785,7 @@ public class BinaryRoutePlanner {
 						}
 					}
 
-					if (rv == viaId && via && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+					if (rv == viaId && via && isOnlyRestriction(rt)) {
 						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
 						break;
 					}
