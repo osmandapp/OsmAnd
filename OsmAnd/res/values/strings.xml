@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="street_name_from_map">Street name from map</string>
+	<string name="street_name_not_found_nearby">No named street found nearby</string>
 	<string name="cast_shadows">Shadows</string>
 	<string name="build_update_size">upd %1$s</string>
 	<string name="build_update_size_estimated">upd ~%1$s</string>
