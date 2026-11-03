@@ -313,7 +313,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 			highlightedPointCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getPointsOrder() - 2100);
+			builder.setBaseOrder(ChartPointsHelper.HIGHLIGHTED_POINT_ORDER);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(
