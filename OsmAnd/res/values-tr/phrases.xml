@@ -812,7 +812,7 @@
     <string name="poi_payment_terminal">Ödeme terminali</string>
     <string name="poi_money_lender">Borç para veren</string>
     <string name="poi_pawnbroker">Tefeci</string>
-    <string name="poi_bureau_de_change">Büro de değişiklik;döviz;Döviz bürosu</string>
+    <string name="poi_bureau_de_change">Döviz bürosu;döviz;kur bürosu</string>
     <string name="poi_accountant">Muhasebeci;müşavir</string>
     <string name="poi_bitcoin_yes">Bitcoin ödeme</string>
     <string name="poi_cave_entrance">Mağara girişi</string>
