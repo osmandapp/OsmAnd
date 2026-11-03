@@ -56,12 +56,17 @@ tasks.register('collectTestPhrasesResources', Copy) {
 	}
 }
 
+tasks.register('collectTestSearchResources', Sync) {
+	from "../../resources/test-resources/search"
+	into "src/test/resources/search"
+	include "*"
+}
+
 tasks.register('collectTestResources', Copy) {
-	delete fileTree("src/test/resources/search")
+	dependsOn collectTestSearchResources
 	into "src/test/resources/"
 	from("../../resources/test-resources") {
 		include "*"
-		include "/search/*"
 		include "/routing/*"
 		include "/turn_lanes/*"
 		include "/approximation/*"
