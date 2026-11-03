@@ -81,14 +81,16 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			Set<String> deletedPointKeys = collectStalePointKeys(groups, journalRead.getDeletions().getPointKeys());
 
 			boolean success = saveExternalFiles(groups, deletedPointKeys);
-			if (!success) {
-				return false;
-			}
 
+			// Keep the internal copy current even if a group file could not be written,
+			// otherwise every change is lost on the next load
 			File internalFile = helper.getInternalFile();
 			Exception internalError = helper.saveFileAtomic(groups, internalFile);
 			if (internalError != null) {
 				log.error(internalError.getMessage(), internalError);
+				return false;
+			}
+			if (!success) {
 				return false;
 			}
 
@@ -195,6 +197,7 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 
 	private boolean saveLocalGroups(@NonNull List<FavoriteGroup> localGroups,
 			@NonNull Map<String, FavoriteGroup> fileGroups, @NonNull Set<String> deleted) {
+		boolean success = true;
 		for (FavoriteGroup localGroup : localGroups) {
 			FavoriteGroup fileGroup = fileGroups.get(localGroup.getName());
 			// Collect non deleted points from external group
@@ -217,11 +220,11 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			// Save file if group changed
 			if (isGroupChanged(localGroup, fileGroup)) {
 				if (!saveFavoriteGroup(localGroup)) {
-					return false;
+					success = false;
 				}
 			}
 		}
-		return true;
+		return success;
 	}
 
 	// FavouritePoint.equals() ignores links, so attaching or detaching media alone would never reach the group file
