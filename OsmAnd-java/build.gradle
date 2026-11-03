@@ -65,6 +65,7 @@ tasks.register('collectTestResources', Copy) {
 		include "/routing/*"
 		include "/turn_lanes/*"
 		include "/approximation/*"
+		include "/poi_name_index/*"
 	}
 	from("../../resources/poi") {
 		include "poi_types.xml"
