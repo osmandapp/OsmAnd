@@ -31,6 +31,23 @@ public class NativeUtilities {
 
 	public static final int MIN_ALTITUDE_VALUE = -20_000;
 
+	// Two native points per thread for the conversions whose PointI never leaves the method: each
+	// new PointI is a native allocation plus a Java object with a finalizer, and the layers make
+	// these conversions hundreds of times per redraw (created lazily, after the native core is loaded)
+	private static final ThreadLocal<PointI[]> SCRATCH_POINTS = new ThreadLocal<>();
+
+	@NonNull
+	private static PointI[] scratchPoints(int x, int y) {
+		PointI[] points = SCRATCH_POINTS.get();
+		if (points == null) {
+			points = new PointI[] {new PointI(), new PointI()};
+			SCRATCH_POINTS.set(points);
+		}
+		points[0].setX(x);
+		points[0].setY(y);
+		return points;
+	}
+
 	public static SingleSkImage createSkImageFromBitmap(@NonNull Bitmap bitmap) {
 		return createSkImage(bitmap.getWidth(), bitmap.getHeight(), AndroidUtils.getByteArrayFromBitmap(bitmap));
 	}
@@ -233,14 +250,13 @@ public class NativeUtilities {
 	public static LatLon getLatLonFromElevatedPixel(@Nullable MapRendererView mapRenderer,
 	                                                @NonNull RotatedTileBox tileBox,
 	                                                int x, int y) {
-		PointI point31 = null;
 		if (mapRenderer != null) {
-			point31 = get31FromElevatedPixel(mapRenderer, x, y);
+			PointI[] points = scratchPoints(x, y);
+			if (mapRenderer.getLocationFromElevatedPoint(points[0], points[1])) {
+				return getLatLonFromPoint31(points[1]);
+			}
 		}
-		if (point31 == null) {
-			return tileBox.getLatLonFromPixel(x, y);
-		}
-		return getLatLonFromPoint31(point31);
+		return tileBox.getLatLonFromPixel(x, y);
 	}
 
 	@Nullable
@@ -278,14 +294,32 @@ public class NativeUtilities {
 		return latLon;
 	}
 
+	// The last point resolved by HeightsResolverTask and the one being resolved (main thread only).
+	// A widget asks for the same map center twice a second: without these, every time the renderer
+	// had no elevation data for it, a new task was started that reads the terrain files again.
+	private static LatLon resolvedAltitudeLatLon;
+	private static Double resolvedAltitude;
+	private static LatLon resolvingAltitudeLatLon;
+
 	public static void getAltitudeForLatLon(@Nullable MapRendererView mapRenderer, @Nullable LatLon latLon,
 	                                        @NonNull OnResultCallback<Double> callback) {
 		if (latLon != null) {
 			Double altitude = getAltitudeForLatLon(mapRenderer, latLon);
 			if (altitude != null) {
 				callback.onResult(altitude);
-			} else {
-				HeightsResolverCallback heightsCallback = heights -> callback.onResult(heights != null && heights.length > 0 ? (double) heights[0] : null);
+			} else if (MapUtils.areLatLonEqual(latLon, resolvedAltitudeLatLon)) {
+				callback.onResult(resolvedAltitude);
+			} else if (!MapUtils.areLatLonEqual(latLon, resolvingAltitudeLatLon)) {
+				resolvingAltitudeLatLon = latLon;
+				HeightsResolverCallback heightsCallback = heights -> {
+					Double resolved = heights != null && heights.length > 0 ? (double) heights[0] : null;
+					resolvedAltitudeLatLon = latLon;
+					resolvedAltitude = resolved;
+					if (resolvingAltitudeLatLon == latLon) {
+						resolvingAltitudeLatLon = null;
+					}
+					callback.onResult(resolved);
+				};
 				HeightsResolverTask task = new HeightsResolverTask(Collections.singletonList(latLon), heightsCallback);
 				OsmAndTaskManager.executeTask(task);
 			}
@@ -304,7 +338,7 @@ public class NativeUtilities {
 	public static Double getAltitudeForLatLon(@Nullable MapRendererView mapRenderer, double lat, double lon) {
 		int x = MapUtils.get31TileNumberX(lon);
 		int y = MapUtils.get31TileNumberY(lat);
-		return getAltitudeForElevatedPoint(mapRenderer, new PointI(x, y));
+		return mapRenderer != null ? getAltitudeForElevatedPoint(mapRenderer, scratchPoints(x, y)[0]) : null;
 	}
 
 	public static Double getAltitudeForPixelPoint(@Nullable MapRendererView mapRenderer, @Nullable PointI screenPoint) {
@@ -334,12 +368,13 @@ public class NativeUtilities {
 	@NonNull
 	public static PointF getPixelFromLatLon(@Nullable MapRendererView mapRenderer,
 			@NonNull RotatedTileBox tileBox, double lat, double lon) {
-		PointI screenPoint = getScreenPointFromLatLon(mapRenderer, lat, lon);
-		if (screenPoint != null) {
-			return new PointF(screenPoint.getX(), screenPoint.getY());
-		} else {
-			return new PointF(tileBox.getPixXFromLatLon(lat, lon), tileBox.getPixYFromLatLon(lat, lon));
+		if (mapRenderer != null) {
+			PointI[] points = scratchPoints(MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat));
+			if (mapRenderer.getScreenPointFromLocation(points[0], points[1], true)) {
+				return new PointF(points[1].getX(), points[1].getY());
+			}
 		}
+		return new PointF(tileBox.getPixXFromLatLon(lat, lon), tileBox.getPixYFromLatLon(lat, lon));
 	}
 
 	@Nullable
@@ -362,9 +397,9 @@ public class NativeUtilities {
 		int y31 = point31.getY();
 		PointF point = null;
 		if (mapRenderer != null) {
-			PointI screenPoint = new PointI();
-			if (mapRenderer.getScreenPointFromLocation(new PointI(x31, y31), screenPoint, true)) {
-				point = new PointF(screenPoint.getX(), screenPoint.getY());
+			PointI[] points = scratchPoints(x31, y31);
+			if (mapRenderer.getScreenPointFromLocation(points[0], points[1], true)) {
+				point = new PointF(points[1].getX(), points[1].getY());
 			}
 		}
 		if (point == null) {
@@ -396,10 +431,9 @@ public class NativeUtilities {
 		PointF pixel = null;
 
 		if (mapRenderer != null) {
-			PointI point31 = new PointI(x31, y31);
-			PointI screenPoint = new PointI();
-			if (mapRenderer.getElevatedPointFromLocation(point31, screenPoint, true)) {
-				pixel = new PointF(screenPoint.getX(), screenPoint.getY());
+			PointI[] points = scratchPoints(x31, y31);
+			if (mapRenderer.getElevatedPointFromLocation(points[0], points[1], true)) {
+				pixel = new PointF(points[1].getX(), points[1].getY());
 			}
 		}
 
@@ -457,8 +491,8 @@ public class NativeUtilities {
 	public static boolean containsLatLon(@Nullable MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,
 	                                     double latitude, double longitude) {
 		if (mapRenderer != null) {
-			return mapRenderer.isPositionVisible(new PointI(MapUtils.get31TileNumberX(longitude),
-					MapUtils.get31TileNumberY(latitude)));
+			return mapRenderer.isPositionVisible(scratchPoints(MapUtils.get31TileNumberX(longitude),
+					MapUtils.get31TileNumberY(latitude))[0]);
 		} else {
 			return tileBox.containsLatLon(latitude, longitude);
 		}

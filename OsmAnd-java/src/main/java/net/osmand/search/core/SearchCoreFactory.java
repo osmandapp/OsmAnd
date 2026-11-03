@@ -30,6 +30,7 @@ import net.osmand.data.*;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -40,6 +41,7 @@ import net.osmand.shared.util.PlatformUtil;
 import net.osmand.util.*;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.text.DecimalFormat;
@@ -398,9 +400,9 @@ public class SearchCoreFactory {
 			}
 			while (offlineIndexes.hasNext()) {
 				BinaryMapIndexReader r = offlineIndexes.next();
-				if (!townCitiesCache.contains(r.getRegionName())) {
+				if (!townCitiesCache.contains(r)) {
 					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
-					townCitiesCache.add(r.getRegionName());
+					townCitiesCache.add(r);
 					for (City c  : l) {
 						if (phrase.getSettings().isExportObjects()) {
 							resultMatcher.exportCity(phrase, c);
@@ -564,7 +566,9 @@ public class SearchCoreFactory {
 								}
 								City closestCity = null;
 								if (closestCities == null) {
-									closestCities = townCitiesCache.queryCities(villagesBbox);
+									// cities are loaded only from files near the user: a village from a file beyond that keeps the region name
+									closestCities = townCitiesCache.contains(currentFile[0])
+											? townCitiesCache.queryCities(villagesBbox) : Collections.emptyList();
 								}
 								double minDist = -1;
 								double pDist = -1;
@@ -626,7 +630,7 @@ public class SearchCoreFactory {
 				String wordToSearch = phrase.getUnknownWordToSearch();
 				List<String> wordToSearchSplit = splitAndNormalize(wordToSearch, true);
 				if (wordToSearchSplit.size() > 1) {
-					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
+					wordToSearch = SearchPhrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
 				}
 				SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 						phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
@@ -791,7 +795,6 @@ public class SearchCoreFactory {
 			}
 			ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
 				int limit = 0;
-				boolean isSkipped = false;
 
 				@Override
 				public boolean publish(Amenity object) {
@@ -803,7 +806,6 @@ public class SearchCoreFactory {
 					}
 					String poiID = object.getType().getKeyName() + "_" + object.getId();
 					if (ids.contains(poiID)) {
-						isSkipped = true;
 						return false;
 					}
 					SearchResult sr = new SearchResult(phrase);
@@ -853,11 +855,6 @@ public class SearchCoreFactory {
 				@Override
 				public boolean isCancelled() {
 					return resultMatcher.isCancelled() && (limit < LIMIT);
-				}
-
-				@Override
-				public boolean isSkippedDuplication() {
-					return isSkipped;
 				}
 			};
 
@@ -1037,8 +1034,7 @@ public class SearchCoreFactory {
 						}
 						existingResult.pt = f;
 					} else {
-						String enTranslation = a.getEnTranslation().toLowerCase();
-						if (!"no".equals(enTranslation) ) {
+						if (PoiAdditionalLabels.isAcceptedValue(a)) {
 							PoiTypeResult ptr = checkPoiType(nm, a);
 							if (ptr != null && ptr.pt != null && ptr.pt.isTopVisible()) {
 								results.put(a.getKeyName(), ptr);
@@ -1051,11 +1047,14 @@ public class SearchCoreFactory {
 
 		private PoiTypeResult checkPoiType(NameStringMatcher nm, AbstractPoiType pf) {
 			PoiTypeResult res = null;
-			if (nm.matches(pf.getTranslation())) {
-				res = addIfMatch(nm, pf.getTranslation(), pf, res);
+			// an additional value is found by its name only: "Subway station", not "yes"
+			String translation = PoiAdditionalLabels.getSearchName(pf);
+			String enTranslation = PoiAdditionalLabels.getEnSearchName(pf);
+			if (nm.matches(translation)) {
+				res = addIfMatch(nm, translation, pf, res);
 			}
-			if (nm.matches(pf.getEnTranslation())) {
-				res = addIfMatch(nm, pf.getEnTranslation(), pf, res);
+			if (enTranslation != null && nm.matches(enTranslation)) {
+				res = addIfMatch(nm, enTranslation, pf, res);
 			}
 			if (nm.matches(pf.getKeyName())) {
 				res = addIfMatch(nm, pf.getKeyName().replace('_', ' '), pf, res);
@@ -1141,7 +1140,7 @@ public class SearchCoreFactory {
 			if (showTopFiltersOnly) {
 				for (AbstractPoiType pt : topVisibleFilters) {
 					SearchResult res = new SearchResult(phrase);
-					res.localeName = pt.getTranslation();
+					res.localeName = PoiAdditionalLabels.getSearchName(pt);
 					res.object = pt;
 					addPoiTypeResult(phrase, resultMatcher, showTopFiltersOnly, getStandardFilterId(pt), res);
 				}
@@ -1173,7 +1172,7 @@ public class SearchCoreFactory {
 						if (OSM_WIKI_CATEGORY.equals(ptr.pt.getKeyName())) {
 							res.localeName = ptr.pt.getTranslation() + " (" + types.getAllLanguagesTranslationSuffix() + ")";
 						} else {
-							res.localeName = ptr.pt.getTranslation();
+							res.localeName = PoiAdditionalLabels.getSearchName(ptr.pt);
 						}
 						res.object = ptr.pt;
 						addPoiTypeResult(phrase, resultMatcher, showTopFiltersOnly, getStandardFilterId(ptr.pt),
@@ -1427,8 +1426,10 @@ public class SearchCoreFactory {
 			String nameFilter = null;
 			int countExtraWords = 0;
 			Set<String> poiAdditionals = new LinkedHashSet<>();
+			Object selectedType = null;
 			if (phrase.isLastWord(ObjectType.POI_TYPE)) {
 				Object obj = phrase.getLastSelectedWord().getResult().object;
+				selectedType = obj;
 				if (obj instanceof AbstractPoiType) {
 					poiTypeFilter = getPoiTypeFilter((AbstractPoiType) obj, poiAdditionals);
 				} else if (obj instanceof SearchPoiTypeFilter) {
@@ -1486,9 +1487,22 @@ public class SearchCoreFactory {
 					}
 				}
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(radius);
-				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
 				Set<String> searchedPois = new TreeSet<>();
+				List<Amenity> indexed = selectedType == null ? null
+						: searchByNameIndex(phrase, resultMatcher, selectedType, bbox);
+				if (indexed != null) {
+					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, null,
+							searchedPois, poiAdditionals, countExtraWords);
+					if (poiTypeFilter instanceof CustomSearchPoiFilter) {
+						rm = ((CustomSearchPoiFilter) poiTypeFilter).wrapResultMatcher(rm);
+					}
+					indexed.forEach(rm::publish);
+				}
+				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
 				for (BinaryMapIndexReader r : offlineIndexes) {
+					if (indexed != null && isReadByNameIndex(r)) {
+						continue;
+					}
 					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, r,
 							searchedPois, poiAdditionals, countExtraWords);
 					if (poiTypeFilter instanceof CustomSearchPoiFilter) {
@@ -1504,6 +1518,15 @@ public class SearchCoreFactory {
 			return true;
 		}
 
+		// null - read the maps with the type filter
+		protected List<Amenity> searchByNameIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+				Object poiType, QuadRect bbox31) throws IOException {
+			return null;
+		}
+
+		protected boolean isReadByNameIndex(BinaryMapIndexReader reader) {
+			return false;
+		}
 
 		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchPoiTypeFilter poiTypeFilter,
 		                                                final SearchResultMatcher resultMatcher, final String nameFilter,
@@ -1876,12 +1899,20 @@ public class SearchCoreFactory {
 		private QuadTree<City> boundariesQR = new QuadTree<City>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				12, 0.55f);
 		
-		public boolean contains(String value) {
-			return townCitiesInit.contains(value);
+		public boolean contains(BinaryMapIndexReader reader) {
+			return townCitiesInit.contains(getKey(reader));
 		}
 		
-		public void add(String value) {
-			townCitiesInit.add(value);
+		public void add(BinaryMapIndexReader reader) {
+			townCitiesInit.add(getKey(reader));
+		}
+
+		// files could share the same region name (ex. old combined German state maps are all "Germany"),
+		// so cities must be cached per file, otherwise only the first file of the region is loaded
+		private String getKey(BinaryMapIndexReader reader) {
+			File file = reader.getFile();
+			String name = file != null ? file.getAbsolutePath() : reader.getRegionName();
+			return name + "_" + reader.getDateCreated();
 		}
 		
 		public void insertCityQR(City c, QuadRect r) {

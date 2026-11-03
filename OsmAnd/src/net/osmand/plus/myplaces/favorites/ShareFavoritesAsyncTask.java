@@ -11,18 +11,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
 
-public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
+public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Exception> {
+
+	private static final Log log = PlatformUtil.getLog(ShareFavoritesAsyncTask.class);
 
 	private static final int MAX_CHARS_IN_DESCRIPTION = 100000;
 
@@ -69,8 +75,14 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	@Override
-	protected Void doInBackground(Void... params) {
-		favouritesHelper.getFileHelper().saveFile(groups, destFile);
+	@Nullable
+	protected Exception doInBackground(Void... params) {
+		Exception error = favouritesHelper.getFileHelper().saveFile(groups, destFile);
+		if (error != null) {
+			log.error("Failed to prepare favorites for sharing: " + destFile, error);
+			Algorithms.removeAllFiles(destFile);
+			return error;
+		}
 		pointsDescription = buildPointsDescription(app, groups);
 		return null;
 	}
@@ -149,9 +161,13 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	@Override
-	protected void onPostExecute(Void res) {
+	protected void onPostExecute(@Nullable Exception error) {
 		if (listener != null) {
 			listener.shareFavoritesFinished(destFile, pointsDescription);
+		}
+		if (error != null) {
+			app.showToastMessage(R.string.share_favorites_preparation_failed);
+			return;
 		}
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity) && destFile.exists()) {
@@ -184,6 +200,6 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		void shareFavoritesStarted();
 
-		void shareFavoritesFinished(@NonNull File destFile, @NonNull Spanned pointsDescription);
+		void shareFavoritesFinished(@NonNull File destFile, @Nullable Spanned pointsDescription);
 	}
 }

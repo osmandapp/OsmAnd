@@ -129,6 +129,19 @@ public class NavigationService extends Service {
 		int usageIntent = intent != null ? intent.getIntExtra(USAGE_INTENT, 0) : 0;
 		if (isUsed()) {
 			LOG.info(">>>> NavigationService is used by = " + usedBy.get());
+			// A running service of a "Restricted" app is taken out of the foreground in the background.
+			// Before addUsageIntent(), so its refresh reposts what buildTopNotification() cancels.
+			OsmandApplication app = getApp();
+			NotificationHelper notificationHelper = app.getNotificationHelper();
+			Notification notification = notificationHelper.buildTopNotification(this, getNotificationType());
+			try {
+				startForeground(notification != null ? notification : notificationHelper.buildFallbackNotification());
+			} catch (Exception e) {
+				LOG.error("Failed to keep NavigationService in the foreground (usedBy=" + usedBy.get() + ")", e);
+				resetServiceState(app);
+				stopSelf();
+				return START_NOT_STICKY;
+			}
 			addUsageIntent(usageIntent);
 			return START_REDELIVER_INTENT;
 		}
@@ -142,18 +155,19 @@ public class NavigationService extends Service {
 		locationServiceHelper = app.createLocationServiceHelper();
 		app.setNavigationService(this);
 
-		NotificationType type = isUsedBy(USED_BY_NAVIGATION) ? NAVIGATION : isUsedBy(USED_BY_GPX) ? GPX : AIS;
 		NotificationHelper notificationHelper = app.getNotificationHelper();
-		Notification notification = notificationHelper.buildTopNotification(this, type);
+		Notification notification = notificationHelper.buildTopNotification(this, getNotificationType());
 
 		boolean hasNotification = notification != null;
 		if (hasNotification) {
 			try {
 				startForeground(notification);
 			} catch (Exception e) {
-				app.setNavigationService(null);
 				LOG.error("Failed to start NavigationService (usedBy=" + usedBy.get() + ")", e);
-				usedBy.set(0);
+				resetServiceState(app);
+				// The service has to go down right away: a service that never reached the
+				// foreground state is killed with ForegroundServiceDidNotStartInTimeException.
+				stopSelf();
 				return START_NOT_STICKY;
 			}
 			try {
@@ -163,6 +177,7 @@ public class NavigationService extends Service {
 			}
 		} else {
 			LOG.error("NavigationService could not be started because the notification is null. usedBy=" + usedBy.get());
+			resetServiceState(app);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 				try {
 					startForeground(notificationHelper.buildFallbackNotification());
@@ -178,12 +193,22 @@ public class NavigationService extends Service {
 		return START_REDELIVER_INTENT;
 	}
 
+	@NonNull
+	private NotificationType getNotificationType() {
+		return isUsedBy(USED_BY_NAVIGATION) ? NAVIGATION : isUsedBy(USED_BY_GPX) ? GPX : AIS;
+	}
+
 	private void startForeground(@NonNull Notification notification) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			startForeground(TOP_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
 		} else {
 			startForeground(TOP_NOTIFICATION_SERVICE_ID, notification);
 		}
+	}
+
+	private void resetServiceState(@NonNull OsmandApplication app) {
+		app.setNavigationService(null);
+		usedBy.set(0);
 	}
 
 	@Override
@@ -198,8 +223,7 @@ public class NavigationService extends Service {
 		stopForeground(STOP_FOREGROUND_REMOVE);
 
 		OsmandApplication app = getApp();
-		app.setNavigationService(null);
-		usedBy.set(0);
+		resetServiceState(app);
 		removeLocationUpdates();
 		removeLocationSourceListener();
 

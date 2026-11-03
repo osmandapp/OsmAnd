@@ -24,7 +24,8 @@
 		<item name="colorOnPrimary">@color/on_primary_light</item>
 
 		<item name="colorSurface">@color/surface_light</item>
-		<item name="colorSurfaceContainerHigh">@color/surface_container_highest_light</item>
+		<item name="colorSurfaceContainer">@color/surface_container_light</item>
+		<item name="colorSurfaceContainerHigh">?attr/colorSurfaceContainer</item>
 		<item name="colorOnSurface">@color/on_surface_light</item>
 		<item name="colorOnSurfaceVariant">@color/on_surface_variant_light</item>
 
@@ -42,7 +43,8 @@
 		<item name="colorOnPrimary">@color/on_primary_dark</item>
 
 		<item name="colorSurface">@color/surface_dark</item>
-		<item name="colorSurfaceContainerHigh">@color/surface_container_highest_dark</item>
+		<item name="colorSurfaceContainer">@color/surface_container_dark</item>
+		<item name="colorSurfaceContainerHigh">?attr/colorSurfaceContainer</item>
 		<item name="colorOnSurface">@color/on_surface_dark</item>
 		<item name="colorOnSurfaceVariant">@color/on_surface_variant_dark</item>
 

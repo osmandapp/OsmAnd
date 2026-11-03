@@ -449,7 +449,18 @@ public class MapSelectionHelper {
 				renderedObject.setIconRes(symbolIcon.getContent());
 			}
 			if (symbolCaption != null) {
-				renderedObject.setName(symbolCaption.getContent());
+				boolean stubCaption = tags.keySet().stream()
+						.anyMatch(tag -> tag.startsWith("osmand_") && tag.endsWith("_stub"));
+				if (stubCaption) {
+					QStringStringHash names = obfMapObject.getCaptionsInAllLanguages();
+					QStringList langs = names.keys();
+					for (int i = 0; i < langs.size(); i++) {
+						renderedObject.setName(langs.get(i), names.get(langs.get(i)));
+					}
+					renderedObject.setName(obfMapObject.getCaptionInNativeLanguage());
+				} else {
+					renderedObject.setName(symbolCaption.getContent());
+				}
 			}
 			for (Map.Entry<String, String> entry : tags.entrySet()) {
 				renderedObject.putTag(entry.getKey(), entry.getValue());

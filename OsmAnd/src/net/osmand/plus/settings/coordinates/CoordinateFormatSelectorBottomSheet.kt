@@ -21,6 +21,8 @@ import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
+import net.osmand.shared.settings.coordinates.CoordinateFormat
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds
 
 class CoordinateFormatSelectorBottomSheet : BaseMaterialBottomSheetWithHeader() {
 

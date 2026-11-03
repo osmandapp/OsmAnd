@@ -38,6 +38,7 @@ The `:OsmAnd-shared` module is a **Kotlin Multiplatform (KMP)** library designed
   - `kotlinx-datetime`: For date and time operations.
   - `okio`: For cross-platform I/O.
   - `stately`: For concurrent collections.
+- **Editing rules:** `OsmAnd-shared` is also compiled by the iOS app and by the standalone JVM build. Keep both compiling: an `actual` for every `expect` in each platform source set, no JVM-only imports in `commonMain`, and no removal of overloads or `@Jvm*`/`@Throws` annotations that Swift or Java callers use. When a change has to break compatibility anyway, name the affected declarations and consumers in the reply and in the pull request.
 
 ## 4. Architecture & Key Components
 ### Plugin Architecture
@@ -89,7 +90,7 @@ Use Gradle to build the project.
 Many resources (icons, fonts, voice files) are not in the main `res` folder but are collected from `../../resources` during the build process via the `collectExternalResources` task.
 
 ## 7. Coding Standards & Best Practices
-- **UI Design:** Follow **Google Material Design** and standard **Android development guidelines** for all new layouts and components.
+- **UI Design:** For new Material 3 UI, follow `OsmAnd/ui-guidelines/README.md`, then Google Material 3 and Android development guidelines.
 - **Logging:** Use `PlatformUtil.getLog(YourClass.class)` for logging. Do not use `android.util.Log` directly in core classes to maintain portability.
 - **Dependency Injection:** The project uses manual dependency injection. Key services and helpers are accessible via `OsmandApplication`.
 - **Theming & Resources:** When creating or modifying UI, ensure consistency by utilizing and updating existing resource files:
@@ -113,8 +114,7 @@ Many resources (icons, fonts, voice files) are not in the main `res` folder but 
 - **Updating Plugins:** Most plugin-specific code is in `net.osmand.plus.plugins`.
 
 ## 9. Restrictions
-- **Building Gradle project:** YOU MUST NEVER run Gradle build task by yourself! EVEN for verifying build errors!!!
-- **No manual Gradle build emulation:** YOU MUST NEVER reconstruct an Android/Gradle compilation classpath from cached JARs, transformed dependencies, generated classes, or build directories, and MUST NEVER invoke `kotlinc`, `javac`, or similar tools to compile a full Android fragment, source set, module, or project as a substitute for Gradle. Do not spend time resolving cascading classpath errors. Unless the user explicitly requests additional verification, use only fast, targeted checks such as `git diff --check`, XML/resource syntax validation, or isolated tests that have a direct, already-available runtime.
+- **Building Gradle project:** You may run Gradle build tasks to verify that a change compiles (see section 6). Prefer the narrowest task that proves the point (a module `assembleDebug` or a targeted `compile*` task over a full build), and when a build is not needed use fast checks instead - `git diff --check`, XML/resource syntax validation, or an isolated test with an already-available runtime.
 - **New files for git** When creating source, resource, or documentation files intended for the change, add them to VCS. Do not add temporary, generated, local, or diagnostic files. Never change .gitignore file unless explicitly requested. Do not commit unless explicitly requested.
 
 ## 10. Language Preference

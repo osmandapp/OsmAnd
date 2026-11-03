@@ -52,4 +52,9 @@ public class CycleRoutesFragment extends MapRoutesFragment {
 		addCard(new CycleRouteTypesCard(getMapActivity()));
 		addRenderingClassCard(BICYCLE.getRenderingPropertyAttr());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "cycle_routes";
+	}
 }

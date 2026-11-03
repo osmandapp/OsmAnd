@@ -3,7 +3,7 @@ package net.osmand.plus.settings.fragments;
 import net.osmand.plus.R;
 import net.osmand.plus.keyevent.fragments.MainExternalInputDevicesFragment;
 import net.osmand.plus.plugins.accessibility.AccessibilitySettingsFragment;
-import net.osmand.plus.plugins.aistracker.AisTrackerSettingsFragment;
+import net.osmand.plus.plugins.aistracker.fragments.AisTrackerSettingsFragment;
 import net.osmand.plus.plugins.audionotes.MultimediaNotesFragment;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.plugins.externalsensors.ExternalSettingsWriteToTrackSettingsFragment;
@@ -17,6 +17,7 @@ import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.mediastorage.MediaStorageFragment;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.settings.fragments.voice.VoiceAnnouncesFragment;
+import net.osmand.plus.wikipedia.WikipediaSettingsFragment;
 
 public enum SettingsScreenType {
 
@@ -49,11 +50,13 @@ public enum SettingsScreenType {
 	ANT_PLUS_SETTINGS(ExternalDevicesListFragment.class.getName(), false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
 	VEHICLE_METRICS_SETTINGS(OBDDevicesListFragment.class.getName(), false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
 	VEHICLE_CONNECTED_METRICS_SETTINGS(OBDMainFragment.class.getName(), false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
+	WIKIPEDIA_SETTINGS(WikipediaSettingsFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.wikipedia_settings, R.layout.profile_preference_toolbar),
 	WEATHER_SETTINGS(WeatherSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.weather_settings, R.layout.profile_preference_toolbar),
 	EXTERNAL_SETTINGS_WRITE_TO_TRACK_SETTINGS(ExternalSettingsWriteToTrackSettingsFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.external_sensors_write_to_track_settings, R.layout.profile_preference_toolbar),
 	DANGEROUS_GOODS(DangerousGoodsFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.dangerous_goods_parameters, R.layout.global_preference_toolbar),
 	EXTERNAL_INPUT_DEVICE(MainExternalInputDevicesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.external_input_device_settings, R.layout.profile_preference_toolbar_with_switch),
-	AIS_SETTINGS(AisTrackerSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.ais_settings, R.layout.profile_preference_toolbar),
+	/* not a preference screen - the Vessel tracker (AIS) plugin builds its own Material 3 UI */
+	AIS_SETTINGS(AisTrackerSettingsFragment.class.getName(), true, ApplyQueryType.NONE, 0, 0),
 	POSITION_ANIMATION(PositionAnimationFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.position_animation_settings, R.layout.profile_preference_toolbar_with_switch);
 
 	public final String fragmentName;

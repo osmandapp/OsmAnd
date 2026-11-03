@@ -506,7 +506,7 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 		if (!itemStart.before(lastWeekStart) && itemStart.before(yesterdayStart)) {
 			return getString(R.string.last_week);
 		}
-		return new SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(item.getTime());
+		return Algorithms.capitalizeFirstLetter(new SimpleDateFormat("LLLL yyyy", Locale.getDefault()).format(item.getTime()));
 	}
 
 	@NonNull
@@ -872,5 +872,10 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "quick_search_history";
 	}
 }

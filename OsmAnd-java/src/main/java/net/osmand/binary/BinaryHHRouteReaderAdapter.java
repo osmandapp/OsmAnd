@@ -355,6 +355,27 @@ public class BinaryHHRouteReaderAdapter {
 		
 	}
 	
+	/**
+	 * Segment headers are read together with the points, so a region of another reader over the same file
+	 * that didn't read points can take them. Inner blocks (sublist) are read lazily from its own file.
+	 */
+	public static void copySegmentHeaders(HHRouteRegion src, HHRouteRegion dst) {
+		if (dst.segments != null || src.segments == null) {
+			return;
+		}
+		List<HHRouteBlockSegments> segments = new ArrayList<>();
+		for (HHRouteBlockSegments s : src.segments) {
+			HHRouteBlockSegments block = new HHRouteBlockSegments();
+			block.idRangeStart = s.idRangeStart;
+			block.idRangeLength = s.idRangeLength;
+			block.profileId = s.profileId;
+			block.length = s.length;
+			block.filePointer = s.filePointer;
+			segments.add(block);
+		}
+		dst.segments = segments;
+	}
+
 	private <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRoutingContext<T>  ctx, HHRouteRegionPointsCtx<T> reg, 
 			HHRouteBlockSegments block, int searchInd, boolean reverse) throws IOException {
 		if (block.sublist != null) {
@@ -419,11 +440,11 @@ public class BinaryHHRouteReaderAdapter {
 						long olLimit = codedIS.pushLimitLong(len);
 						HHRoutePointSegments s = readSegments();
 						codedIS.popLimit(olLimit);
-						if (point != null) {
-							// not used from this file
+						// block is read again after unload, keep already loaded (and edited) edges
+						if (point != null && point.connected(reverse) == null) {
 							HHRouteDataStructure.setSegments(ctx, point, s.getSegmentsIn().toByteArray(),
-									s.getSegmentsOut().toByteArray());
-							loaded += point.connected(true).size() + point.connected(false).size();
+									s.getSegmentsOut().toByteArray(), reverse);
+							loaded += point.connected(reverse).size();
 						}
 					}
 

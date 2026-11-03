@@ -160,8 +160,10 @@ public class NavigateGpxHelper {
 					.setPassWholeRoute(params.isPassWholeRoute())
 					.setCheckLocationPermission(params.isNeedLocationPermission())
 					.setSnapToRoad(params.isSnapToRoad())
-					.setSnapToRoadMode(params.getSnapToRoadMode())
-					.setSnapToRoadThreshold(params.getSnapToRoadThreshold());
+					.setSnapToRoadMode(params.getSnapToRoadMode());
+			if (params.getSnapToRoadThreshold() > 0) {
+				navigationParams.setSnapToRoadThreshold(params.getSnapToRoadThreshold());
+			}
 
 			saveAndNavigateGpx(mapActivity, gpxFile, navigationParams);
 			return true;

@@ -303,6 +303,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		item.setParameter(COLOR, settings.CURRENT_TRACK_COLOR.get());
 		item.setParameter(WIDTH, settings.CURRENT_TRACK_WIDTH.get());
 		item.setParameter(SHOW_ARROWS, settings.CURRENT_TRACK_SHOW_ARROWS.get());
+		item.setParameter(LINE_STYLE, settings.CURRENT_TRACK_LINE_STYLE.get());
 		item.setParameter(TRACK_VISUALIZATION_TYPE, settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.get());
 		item.setParameter(SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
 		item.setParameter(COLORING_TYPE, coloringStyle.getId());

@@ -118,6 +118,17 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		return resource.getReader(BinaryMapReaderResourceType.POI);
 	}
 
+	/**
+	 * The index of every open file was parsed when the file was opened, so a question about what a
+	 * file covers can be answered from it. {@link #getOpenReader()} instead opens a second file
+	 * handle for the POI section, which is what we are trying to avoid when the answer is "nothing
+	 * here".
+	 */
+	@Nullable
+	private BinaryMapIndexReader getShallowReader() {
+		return resource.getShallowReader();
+	}
+
 	@Override
 	public void close() {
 	}
@@ -230,7 +241,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	@NonNull
 	@Override
 	public List<BinaryMapPoiReaderAdapter.PoiRegion> getReaderPoiIndexes() {
-		BinaryMapIndexReader reader = getOpenReader();
+		BinaryMapIndexReader reader = getShallowReader();
 		return reader != null ? reader.getPoiIndexes() : new ArrayList<>();
 	}
 
@@ -282,6 +293,13 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	public boolean isWorldMap() {
 		String fileName = getFile().getName().toLowerCase();
 		return fileName.startsWith(WorldRegion.WORLD + "_") || fileName.contains("basemap");
+	}
+
+	@Override
+	public boolean isMapSectionIntersects(@NonNull SearchRequest<?> searchRequest) {
+		BinaryMapIndexReader reader = getShallowReader();
+		return reader != null && reader.containsMapData(searchRequest.getLeft(), searchRequest.getTop(),
+				searchRequest.getRight(), searchRequest.getBottom(), searchRequest.getZoom());
 	}
 
 	@Override

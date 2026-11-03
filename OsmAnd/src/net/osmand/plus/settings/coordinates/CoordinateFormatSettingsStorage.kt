@@ -6,6 +6,7 @@ import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.backend.preferences.IntPreference
 import net.osmand.plus.settings.backend.preferences.ListStringPreference
 import net.osmand.plus.settings.backend.preferences.OsmandPreference
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds
 import java.util.Collections
 import java.util.LinkedHashSet
 

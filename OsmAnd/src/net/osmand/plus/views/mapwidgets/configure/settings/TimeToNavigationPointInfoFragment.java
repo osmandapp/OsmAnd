@@ -44,7 +44,8 @@ public class TimeToNavigationPointInfoFragment extends BaseSimpleWidgetInfoFragm
 			intermediate = navigationPointWidget.isIntermediate();
 			arrivalTimeOtherwiseTimeToGoPref = navigationPointWidget.getPreference();
 		}
-		boolean defaultArrivalTimeOtherwiseTimeToGo = arrivalTimeOtherwiseTimeToGoPref.getModeValue(appMode);
+		boolean defaultArrivalTimeOtherwiseTimeToGo = arrivalTimeOtherwiseTimeToGoPref != null
+				&& arrivalTimeOtherwiseTimeToGoPref.getModeValue(appMode);
 		arrivalTimeOtherwiseTimeToGo = bundle
 				.getBoolean(KEY_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO, defaultArrivalTimeOtherwiseTimeToGo);
 	}
@@ -121,5 +122,10 @@ public class TimeToNavigationPointInfoFragment extends BaseSimpleWidgetInfoFragm
 	private interface TimeModeSelectionCallback {
 
 		void onTimeModeSelected(@NonNull TimeToNavigationPointState state);
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "time_to_navigation_point_info";
 	}
 }

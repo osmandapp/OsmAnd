@@ -25,6 +25,7 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.palette.domain.PaletteConstants;
@@ -96,6 +97,22 @@ public class GpxAppearanceHelper {
 			}
 		}
 		return gpxFile.isShowArrows();
+	}
+
+	@NonNull
+	public GpxLineStyleType getLineStyleTypeForTrack(@NonNull GpxFile gpxFile, @Nullable GpxDataItem gpxItem, @Nullable GpxDirItem dirItem) {
+		TrackDrawInfo drawInfo = getTrackDrawInfoForTrack(gpxFile);
+		if (drawInfo != null) {
+			return drawInfo.getLineStyleType();
+		} else if (gpxFile.isShowCurrentTrack()) {
+			return GpxLineStyleType.Companion.getLineStyleType(settings.CURRENT_TRACK_LINE_STYLE.get());
+		} else if (gpxItem != null) {
+			String lineStyle = getAppearanceParameter(gpxItem, dirItem, LINE_STYLE);
+			if (lineStyle != null) {
+				return GpxLineStyleType.Companion.getLineStyleType(lineStyle);
+			}
+		}
+		return gpxFile.getLineStyleType();
 	}
 
 	public boolean isShowStartFinishForTrack(@NonNull GpxFile gpxFile, @Nullable GpxDataItem gpxItem, @Nullable GpxDirItem dirItem) {

@@ -51,6 +51,7 @@ class CompassDrawable(private val original: Drawable) : Drawable() {
 	}
 
 	@Deprecated("Deprecated in Java")
+	@Suppress("DEPRECATION")
 	override fun getOpacity(): Int {
 		return original.opacity
 	}

@@ -67,7 +67,8 @@ class NearbyPlacesAdapter(
 	}
 
 	private fun isNightMode(): Boolean {
-		return getApp().daynightHelper.isNightMode(ThemeUsageContext.APP)
+		val app = getApp()
+		return app.daynightHelper.isNightMode(app.settings.applicationMode, ThemeUsageContext.APP)
 	}
 
 	override fun onBindViewHolder(holder: NearbyViewHolder, position: Int) {
@@ -120,7 +121,7 @@ class NearbyPlacesAdapter(
 			val osmanPoiType = item.osmandPoiKey
 			val itemType = osmanPoiType ?: item.subType
 			val subType = poiTypes.getPoiTypeByKey(itemType)
-			val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.MAP)
+			val nightMode = app.daynightHelper.isNightMode(app.settings.applicationMode, ThemeUsageContext.MAP)
 			val poiIcon = QuickSearchListItem.getAmenityTypeIcon(
 				app,
 				item,

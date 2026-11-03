@@ -136,4 +136,9 @@ public class ConfigureMenuRootFragment extends BaseFullScreenFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "configure_menu_root";
+	}
 }

@@ -1,14 +1,12 @@
 package net.osmand.plus.mapsource;
 
 
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -137,6 +135,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 			sqliteDB = savedInstanceState.getBoolean(SQLITE_DB_KEY);
 			fromTemplate = savedInstanceState.getBoolean(FROM_TEMPLATE_KEY);
 		}
+		updateBackPressedCallback();
 		View root = inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
@@ -190,8 +189,9 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		saveBtnTitle.setTextColor(ContextCompat.getColorStateList(app,
 				nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
 		saveBtn.setOnClickListener(view -> {
-			saveTemplate();
-			dismiss();
+			if (saveTemplate()) {
+				dismiss();
+			}
 		});
 		ScrollView scrollView = root.findViewById(R.id.scroll_view);
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
@@ -257,24 +257,13 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		Dialog dialog = getDialog();
-		if (dialog != null) {
-			dialog.setOnKeyListener((_dialog, keyCode, event) -> {
-				if (keyCode == KeyEvent.KEYCODE_BACK) {
-					if (event.getAction() == KeyEvent.ACTION_DOWN) {
-						return true;
-					} else if (wasChanged || fromTemplate) {
-						showExitDialog();
-					} else {
-						dismiss();
-					}
-					return true;
-				}
-				return false;
-			});
-		}
+	protected boolean isBackPressedCallbackEnabled() {
+		return wasChanged || fromTemplate;
+	}
+
+	@Override
+	protected void handleBackPressed() {
+		showExitDialog();
 	}
 
 	@Override
@@ -283,7 +272,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 			minZoom = min;
 			maxZoom = max;
 			updateDescription(ConfigurationItem.ZOOM_LEVELS);
-			wasChanged = true;
+			markChanged();
 		}
 	}
 
@@ -292,7 +281,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		if (isAdded()) {
 			expireTimeMinutes = expireValue;
 			updateDescription(ConfigurationItem.EXPIRE_TIME);
-			wasChanged = true;
+			markChanged();
 		}
 	}
 
@@ -301,7 +290,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		if (isAdded()) {
 			this.elliptic = elliptic;
 			updateDescription(ConfigurationItem.MERCATOR_PROJECTION);
-			wasChanged = true;
+			markChanged();
 		}
 	}
 
@@ -310,7 +299,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		if (isAdded()) {
 			this.sqliteDB = sqliteDb;
 			updateDescription(ConfigurationItem.STORAGE_FORMAT);
-			wasChanged = true;
+			markChanged();
 		}
 	}
 
@@ -324,11 +313,16 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 	private void checkWasChanged() {
 		if (!Algorithms.objectEquals(editedLayerName, nameEditText.getText().toString())
 				|| !Algorithms.objectEquals(urlToLoad, urlEditText.getText().toString())) {
-			wasChanged = true;
+			markChanged();
 		}
 	}
 
-	private void saveTemplate() {
+	private void markChanged() {
+		wasChanged = true;
+		updateBackPressedCallback();
+	}
+
+	private boolean saveTemplate() {
 		try {
 			String newName = nameEditText.getText().toString();
 			String urlToLoad = urlEditText.getText().toString();
@@ -349,8 +343,12 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 					if (IndexConstants.SQLITE_EXT.equals(ext)) {
 						f = FileUtils.renameSQLiteFile(app, f, newName + ext, null);
 					} else {
-						f.renameTo(app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName));
-						f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName);
+						File renamed = app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName);
+						if (!f.renameTo(renamed)) {
+							app.showToastMessage(R.string.file_can_not_be_renamed);
+							return false;
+						}
+						f = renamed;
 					}
 				}
 			}
@@ -379,7 +377,10 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 					storageChanged = f.exists();
 				}
 			} else {
-				settings.installTileSource(template);
+				if (!settings.installTileSource(template)) {
+					app.showToastMessage(R.string.map_source_folder_not_created);
+					return false;
+				}
 				storageChanged = f != null && f.exists() && IndexConstants.SQLITE_EXT.equals(ext);
 			}
 			if (storageChanged) {
@@ -389,8 +390,14 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 			if (fragment instanceof OnMapSourceUpdateListener) {
 				((OnMapSourceUpdateListener) fragment).onMapSourceUpdated();
 			}
+			if (!newName.equals(template.getName())) {
+				app.showToastMessage(R.string.map_source_saved_as, template.getName());
+			}
+			return true;
 		} catch (RuntimeException e) {
 			LOG.error("Error on saving template " + e);
+			app.showToastMessage(R.string.shared_string_unexpected_error);
+			return false;
 		}
 	}
 
@@ -558,5 +565,10 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 			}
 			return null;
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "edit_map_source";
 	}
 }

@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.srtm;
 
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LABEL_DIRECTION_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
@@ -17,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadItem;
@@ -98,6 +100,12 @@ public class ContourLinesMenu {
 			densityPref = null;
 		}
 
+		RenderingRuleProperty labelDirectionProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LABEL_DIRECTION_ATTR);
+		String labelDirectionName = labelDirectionProp != null ? AndroidUtils.getRenderingStringPropertyName(app,
+				labelDirectionProp.getAttrName(), labelDirectionProp.getName()) : null;
+		CommonPreference<String> labelDirectionPref = labelDirectionProp != null
+				? settings.getCustomRenderProperty(labelDirectionProp.getAttrName()) : null;
+
 		CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
 		CommonPreference<String> colorPref = settings.getCustomRenderProperty(colorSchemeProp.getAttrName());
 
@@ -133,6 +141,11 @@ public class ContourLinesMenu {
 				} else if (contourDensityProp != null && itemId == contourDensityName.hashCode()) {
 					plugin.selectPropertyValue(mapActivity, contourDensityProp, densityPref,
 							() -> onPropertyValueSelected(uiAdapter, item, contourDensityProp));
+				} else if (labelDirectionProp != null && itemId == labelDirectionName.hashCode()) {
+					View anchor = view != null ? view.findViewById(R.id.description) : null;
+					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
+					ConfigureMapDialogs.showRenderingPropertyMenu(mapActivity, anchor, labelDirectionProp,
+							labelDirectionPref, nightMode, () -> onPropertyValueSelected(uiAdapter, item, labelDirectionProp));
 				}
 				return false;
 			}
@@ -172,6 +185,10 @@ public class ContourLinesMenu {
 					.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, contourLinesProp))
 					.setListener(l));
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
+					.setCategory(true)
+					.setTitleId(R.string.shared_string_appearance, mapActivity)
+					.setLayout(R.layout.list_group_title_with_descr));
+			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(colorSchemeStringId, mapActivity)
 					.setLayout(R.layout.list_item_single_line_descrition_narrow)
 					.setIcon(R.drawable.ic_action_appearance)
@@ -191,6 +208,19 @@ public class ContourLinesMenu {
 						.setLayout(R.layout.list_item_single_line_descrition_narrow)
 						.setIcon(R.drawable.ic_plugin_srtm)
 						.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, contourDensityProp))
+						.setListener(l));
+			}
+			if (labelDirectionProp != null) {
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
+						.setCategory(true)
+						.setTitleId(R.string.contour_labels, mapActivity)
+						.setDescription(app.getString(R.string.contour_label_direction_descr))
+						.setLayout(R.layout.list_group_title_with_descr));
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
+						.setTitle(labelDirectionName)
+						.setLayout(R.layout.list_item_single_line_descrition_narrow)
+						.setIcon(R.drawable.ic_action_altitude)
+						.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, labelDirectionProp))
 						.setListener(l));
 			}
 		}

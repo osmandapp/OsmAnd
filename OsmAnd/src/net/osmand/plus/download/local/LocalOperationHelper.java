@@ -37,6 +37,7 @@ import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.map.ITileSource;
@@ -51,6 +52,8 @@ import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 public class LocalOperationHelper {
 
@@ -93,7 +96,7 @@ public class LocalOperationHelper {
 				Algorithms.removeAllFiles(tWal);
 			}
 			if (item.getType() == TILES_DATA) {
-				clearMapillaryTiles(item);
+				clearStreetLevelImageryTiles(item);
 			}
 			if (item.getType() == TERRAIN_DATA) {
 				clearHeightmapTiles(item);
@@ -119,7 +122,7 @@ public class LocalOperationHelper {
 		ITileSource source = (ITileSource) item.getAttachedObject();
 		if (source != null) {
 			source.deleteTiles(item.getFile().getAbsolutePath());
-			clearMapillaryTiles(item);
+			clearStreetLevelImageryTiles(item);
 		}
 		return source != null;
 	}
@@ -183,12 +186,12 @@ public class LocalOperationHelper {
 		return file;
 	}
 
-	// Clear tiles for both Mapillary sources together
-	private void clearMapillaryTiles(@NonNull LocalItem item) {
+	// The raster tiles of a street-level imagery provider are rendered from its vector tiles,
+	// so the two caches of the same provider are cleared together.
+	private void clearStreetLevelImageryTiles(@NonNull LocalItem item) {
 		ITileSource src = (ITileSource) item.getAttachedObject();
-		ITileSource mapilaryCache = TileSourceManager.getMapillaryCacheSource();
-		ITileSource mapilaryVector = TileSourceManager.getMapillaryVectorSource();
-		if (src != null && (mapilaryVector.getName().equals(src.getName()) || mapilaryCache.getName().equals(src.getName()))) {
+		List<ITileSource> siblings = src != null ? getStreetLevelImagerySources(src.getName()) : null;
+		if (siblings != null) {
 			File current = item.getFile();
 			File parent = current.getParentFile();
 			if (parent == null) {
@@ -202,10 +205,11 @@ public class LocalOperationHelper {
 				String withoutExt = Algorithms.getFileNameWithoutExtension(f);
 				String sqliteExt = SQLITE_EXT.replace(".", "");
 				ITileSource cache = null;
-				if (withoutExt.equals(mapilaryCache.getName())) {
-					cache = mapilaryCache;
-				} else if (withoutExt.equals(mapilaryVector.getName())) {
-					cache = mapilaryVector;
+				for (ITileSource sibling : siblings) {
+					if (withoutExt.equals(sibling.getName())) {
+						cache = sibling;
+						break;
+					}
 				}
 				if (cache != null) {
 					if (f.isDirectory()) {
@@ -217,6 +221,22 @@ public class LocalOperationHelper {
 				}
 			}
 		}
+	}
+
+	@Nullable
+	private static List<ITileSource> getStreetLevelImagerySources(@NonNull String sourceName) {
+		List<ITileSource> mapillary = Arrays.asList(TileSourceManager.getMapillaryVectorSource(),
+				TileSourceManager.getMapillaryCacheSource());
+		List<ITileSource> panoramax = Arrays.asList(TileSourceManager.getPanoramaxVectorSource(),
+				TileSourceManager.getPanoramaxCacheSource());
+		for (List<ITileSource> sources : Arrays.asList(mapillary, panoramax)) {
+			for (ITileSource source : sources) {
+				if (source.getName().equals(sourceName)) {
+					return sources;
+				}
+			}
+		}
+		return null;
 	}
 
 	private void clearHeightmapTiles(@NonNull LocalItem item) {

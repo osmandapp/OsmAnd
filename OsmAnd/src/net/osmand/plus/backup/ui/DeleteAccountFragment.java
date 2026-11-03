@@ -335,4 +335,9 @@ public class DeleteAccountFragment extends BaseFullScreenFragment implements OnD
 			this.descriptionId = descriptionId;
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "delete_account";
+	}
 }

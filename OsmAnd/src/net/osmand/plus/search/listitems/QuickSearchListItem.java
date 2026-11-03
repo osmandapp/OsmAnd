@@ -53,6 +53,7 @@ import java.util.Objects;
 public class QuickSearchListItem {
 
 	private static final String STREET_INTERSECTION_DIVIDER = " + ";
+	private static final int TYPES_NAME_LENGTH = 20;
 	protected final OsmandApplication app;
 	private final SearchResult searchResult;
 
@@ -100,8 +101,8 @@ public class QuickSearchListItem {
 		return isDestinationHistory(searchResult);
 	}
 
-	public boolean isLegacyHistoryItem() {
-		return isLegacySearchHistory(searchResult);
+	public boolean isHistoryItem() {
+		return getHistoryEntry() != null;
 	}
 
 	@Nullable
@@ -333,7 +334,11 @@ public class QuickSearchListItem {
 			case POI_TYPE:
 				String res = "";
 				if (searchResult.object instanceof AbstractPoiType abstractPoiType) {
-					res = abstractPoiType.getParentTypeName();
+					res = abstractPoiType.isAdditional() ? PoiFilterUtils.getTypesName(
+							PoiFilterUtils.getTypesWithAdditional(app.getPoiTypes(), abstractPoiType), TYPES_NAME_LENGTH) : "";
+					if (Algorithms.isEmpty(res)) {
+						res = abstractPoiType.getParentTypeName();
+					}
 				} else if (searchResult.object instanceof CustomSearchPoiFilter customSearchPoiFilter) {
 					res = customSearchPoiFilter.getName();
 				} else if (searchResult.object instanceof SearchPoiAdditionalFilter searchPoiAdditionalFilter) {
@@ -414,6 +419,8 @@ public class QuickSearchListItem {
 				return "";
 			case UNKNOWN_NAME_FILTER:
 				break;
+			case SUGGESTION:
+				return "";
 		}
 		return searchResult.objectType.name();
 	}
@@ -465,6 +472,25 @@ public class QuickSearchListItem {
 	}
 
 	@Nullable
+	public static String getAddressIconName(@NonNull SearchResult searchResult) {
+		return switch (searchResult.objectType) {
+			case CITY, BOUNDARY -> {
+				CityType cityType = searchResult.object instanceof City city ? city.getType() : null;
+				if (cityType == CityType.CITY) {
+					yield "mx_place_city";
+				}
+				yield cityType == CityType.TOWN ? "mx_place_town" : "ic_action_building2";
+			}
+			case VILLAGE -> "mx_village";
+			case POSTCODE -> "ic_action_postcode";
+			case STREET -> "ic_action_street_name";
+			case HOUSE -> "ic_action_building";
+			case STREET_INTERSECTION -> "ic_action_intersection";
+			default -> null;
+		};
+	}
+
+	@Nullable
 	public static Drawable getIcon(OsmandApplication app, SearchResult searchResult) {
 		if (searchResult == null || searchResult.objectType == null) {
 			return null;
@@ -474,13 +500,15 @@ public class QuickSearchListItem {
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int defIconColor = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 		switch (searchResult.objectType) {
+			case SUGGESTION:
+				return getIcon(app, R.drawable.ic_action_search_dark,
+						nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange);
 			case CITY:
 			case BOUNDARY:
-				boolean town = (searchResult.object instanceof City)
-						&& (((City) searchResult.object).getType() == CityType.TOWN);
-				return town
-						? getIcon(app, R.drawable.mx_place_town, defIconColor)
-						: getIcon(app, R.drawable.ic_action_building2, defIconColor);
+				// the same mapping as the map marker of an address result uses
+				int cityIconId = RenderingIcons.getResIdOrDefault(app,
+						getAddressIconName(searchResult), R.drawable.ic_action_building2);
+				return getIcon(app, cityIconId, defIconColor);
 			case VILLAGE:
 				return getIcon(app, R.drawable.mx_village, defIconColor);
 			case POSTCODE:
@@ -612,18 +640,23 @@ public class QuickSearchListItem {
 		}
 		int iconId = -1;
 		PointDescription name = entry.getName();
-		if (name != null && !Algorithms.isEmpty(name.getIconName())) {
-			String iconName = name.getIconName();
-			if (RenderingIcons.containsBigIcon(iconName)) {
-				iconId = RenderingIcons.getBigIconResourceId(iconName);
-			} else {
-				iconId = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
-			}
+		if (name != null) {
+			iconId = getIconIdByName(app, name.getIconName());
 		}
 		if (iconId <= 0 && name != null) {
 			iconId = name.getItemIcon();
 		}
 		return iconId;
+	}
+
+	public static int getIconIdByName(@NonNull OsmandApplication app, @Nullable String iconName) {
+		if (Algorithms.isEmpty(iconName)) {
+			return 0;
+		}
+		if (RenderingIcons.containsBigIcon(iconName)) {
+			return RenderingIcons.getBigIconResourceId(iconName);
+		}
+		return app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
 	}
 
 	private static boolean isNavigationHistoryEntry(@NonNull HistoryEntry entry) {
@@ -635,13 +668,6 @@ public class QuickSearchListItem {
 				&& searchResult.objectType == ObjectType.RECENT_OBJ
 				&& searchResult.object instanceof HistoryEntry entry
 				&& isNavigationHistoryEntry(entry);
-	}
-
-	private static boolean isLegacySearchHistory(@Nullable SearchResult searchResult) {
-		return searchResult != null
-				&& searchResult.objectType == ObjectType.RECENT_OBJ
-				&& searchResult.object instanceof HistoryEntry entry
-				&& !isNavigationHistoryEntry(entry);
 	}
 
 	@NonNull

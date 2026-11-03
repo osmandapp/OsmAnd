@@ -87,4 +87,9 @@ public class TrackWallHeightFragment extends MapOptionSliderFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "track_wall_height";
+	}
 }

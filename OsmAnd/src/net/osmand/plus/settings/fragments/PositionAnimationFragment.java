@@ -111,4 +111,9 @@ public class PositionAnimationFragment extends BaseSettingsFragment {
 	private boolean isPositionAnimationEnabled() {
 		return settings.ANIMATE_MY_LOCATION.getModeValue(getSelectedAppMode());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "position_animation";
+	}
 }

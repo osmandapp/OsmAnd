@@ -48,6 +48,7 @@ import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.inapp.InstallReferrerReader;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
@@ -113,7 +114,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -125,6 +125,7 @@ public class AppInitializer implements IProgress {
 	private static final Log LOG = PlatformUtil.getLog(AppInitializer.class);
 	private static final int MAX_OPENGL_FAILURES = 3;
 	private static final int MAX_OPENGL_DISABLE = 6;
+	private static final long MAP_UPDATES_CHECK_INTERVAL_MS = 2 * 24 * 60 * 60 * 1000L; // 2 days
 
 	private final OsmandApplication app;
 	private final AppVersionUpgradeOnInit appVersionUpgrade;
@@ -225,12 +226,10 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void checkMapUpdates() {
-		long diff = System.currentTimeMillis() - app.getSettings().LAST_CHECKED_UPDATES.get();
-		if (diff >= 2 * 24 * 60 * 60L && new Random().nextInt(5) == 0 &&
-				app.getSettings().isInternetConnectionAvailable()) {
-			app.getDownloadThread().runReloadIndexFiles();
-		} else if (Version.isDeveloperVersion(app)) {
-//			app.getDownloadThread().runReloadIndexFiles();
+		OsmandSettings settings = app.getSettings();
+		long diff = System.currentTimeMillis() - settings.LAST_CHECKED_UPDATES.get();
+		if (diff >= MAP_UPDATES_CHECK_INTERVAL_MS && settings.isInternetConnectionAvailable()) {
+			app.getDownloadThread().runReloadIndexFilesSilent();
 		}
 	}
 
@@ -298,6 +297,7 @@ public class AppInitializer implements IProgress {
 	public void reInitPoiTypes() {
 		MapPoiTypes.setDefault(new MapPoiTypes(null));
 		app.poiTypes = MapPoiTypes.getDefaultNoInit();
+		app.kPoiTypes = KPoiTypes.createEmpty();
 		initPoiTypes();
 	}
 
@@ -308,7 +308,9 @@ public class AppInitializer implements IProgress {
 		} else {
 			app.poiTypes.init();
 		}
-		app.poiTypes.setPoiTranslator(new MapPoiTypesTranslator(app));
+		MapPoiTypesTranslator translator = new MapPoiTypesTranslator(app);
+		app.poiTypes.setPoiTranslator(translator);
+		KPoiTypes.init(app, app.kPoiTypes, translator);
 		notifyEvent(POI_TYPES_INITIALIZED);
 	}
 
@@ -332,6 +334,7 @@ public class AppInitializer implements IProgress {
 		app.panelAppearanceSettingsManager = startupInit(
 				new PanelAppearanceSettingsManager(app, settings), PanelAppearanceSettingsManager.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
+		app.kPoiTypes = KPoiTypes.createEmpty();
 		app.transportRoutingHelper = startupInit(new TransportRoutingHelper(app), TransportRoutingHelper.class);
 		app.routingHelper = startupInit(new RoutingHelper(app), RoutingHelper.class);
 		app.routingOptionsHelper = startupInit(new RoutingOptionsHelper(app), RoutingOptionsHelper.class);
@@ -393,6 +396,9 @@ public class AppInitializer implements IProgress {
 
 	private void initOpeningHoursParser() {
 		OpeningHoursParser.setAdditionalString("off", app.getString(R.string.day_off_label));
+		OpeningHoursParser.setAdditionalString("public_holiday", app.getString(R.string.opening_hours_public_holiday));
+		OpeningHoursParser.setAdditionalString("school_holiday", app.getString(R.string.opening_hours_school_holiday));
+		OpeningHoursParser.setAdditionalString("easter", app.getString(R.string.opening_hours_easter));
 		OpeningHoursParser.setAdditionalString("is_open", app.getString(R.string.poi_dialog_opening_hours));
 		OpeningHoursParser.setAdditionalString("is_open_24_7", app.getString(R.string.shared_string_is_open_24_7));
 		OpeningHoursParser.setAdditionalString("will_open_at", app.getString(R.string.will_open_at));
@@ -528,6 +534,8 @@ public class AppInitializer implements IProgress {
 				importBundledSettingsSync();
 				notifyEvent(BUNDLED_OSF_IMPORTED);
 			}
+			// Asynchronous: started first, so that the first motd request finds the campaign stored
+			InstallReferrerReader.readOnce(app);
 			app.getRendererRegistry().initRenderers(warnings);
 			notifyEvent(INIT_RENDERERS);
 			// native depends on renderers

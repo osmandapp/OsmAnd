@@ -125,6 +125,13 @@ public class RecordingsFileHelper {
 		Algorithms.removeAllFiles(recording.getFile());
 	}
 
+	public void updateRecordingFileName(@NonNull String oldFileName, @NonNull Recording recording) {
+		Map<String, Recording> newMap = new LinkedHashMap<>(recordingByFileName);
+		newMap.remove(oldFileName);
+		newMap.put(recording.getFile().getName(), recording);
+		recordingByFileName = newMap;
+	}
+
 	boolean indexFile(boolean registerInGPX, @NonNull File file, boolean updatePhotoInformation) {
 		String name = file.getName();
 		if (CollectionUtils.endsWithAny(name, THREEGP_EXTENSION, MPEG4_EXTENSION, IMG_EXTENSION)) {

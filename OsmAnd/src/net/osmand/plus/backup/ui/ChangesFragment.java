@@ -371,4 +371,9 @@ public class ChangesFragment extends BaseFullScreenFragment implements OnPrepare
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "backup_changes";
+	}
 }
