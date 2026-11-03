@@ -5401,7 +5401,7 @@
     <string name="astro_ar_mode">AR-mód</string>
     <string name="astro_camera_view">Kameranézet</string>
     <string name="astro_reset_field_of_view">Látómező visszaállítása</string>
-    <string name="cloud_file_name_too_long">Túl hosszú a fájl neve t ehhez az eszközhöz; nevezze át az OsmAnd Cloudban</string>
+    <string name="cloud_file_name_too_long">A fájlnév túl hosszú ehhez az eszközhöz, nevezze át az OsmAnd Cloudban</string>
     <string name="average_vertical_speed">Átlagos függőleges sebesség</string>
     <string name="public_transport_route_out_of_memory">Túl hosszú a tömegközlekedési útvonal ahhoz, hogy ezen az eszközön kiszámítható legyen. Válasszon egy közelebbi úti célt.</string>
 </resources>
