@@ -533,8 +533,13 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	@SuppressLint("MissingPermission")
 	@Override
 	public boolean disconnect() {
+		boolean wasDisconnected = isDisconnected();
 		setCurrentState(DeviceConnectionState.DISCONNECTED);
 		stopConnectScan();
+		// close() below drops the GATT callback, so the system disconnect event never reaches the listeners
+		if (!wasDisconnected) {
+			fireDeviceDisconnectedEvent();
+		}
 		if (bluetoothAdapter == null || bluetoothGatt == null) {
 			LOG.debug("BluetoothAdapter not initialized on disconnect");
 			return false;
