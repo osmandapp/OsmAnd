@@ -23,6 +23,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.routing.NativeRoutingMemoryGuard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
@@ -38,6 +39,7 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	public static final String TAG = AllocatedRoutingMemoryBottomSheet.class.getSimpleName();
 
 	private static final int BYTES_IN_MB = 1024 * 1024;
+	private static final int GUARD_LIMIT_STEP_MB = 512;
 
 	private Integer[] range;
 	private int minValue;
@@ -47,18 +49,21 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	private int defaultValue;
 
 	private CommonPreference<Integer> preference;
+	private boolean guardLimit;
+	private int autoGuardLimitMb;
 
 	private View sliderContainer;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		preference = settings.MEMORY_ALLOCATED_FOR_ROUTING;
+		guardLimit = settings.ROUTING_MEMORY_GUARD_LIMIT.getId().equals(getPrefId());
+		preference = guardLimit ? settings.ROUTING_MEMORY_GUARD_LIMIT : settings.MEMORY_ALLOCATED_FOR_ROUTING;
 		initData();
 	}
 
 	private void initData() {
-		List<Integer> rangeList = getAvailableRange();
+		List<Integer> rangeList = guardLimit ? getGuardLimitRange() : getAvailableRange();
 		range = new Integer[rangeList.size()];
 		rangeList.toArray(range);
 		if (range.length > 0) {
@@ -72,10 +77,10 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		String title = getString(R.string.memory_allocated_for_routing);
+		String title = getString(guardLimit ? R.string.routing_memory_guard_limit : R.string.memory_allocated_for_routing);
 		items.add(new TitleItem(title));
 
-		String description = getString(R.string.memory_allocated_for_routing_ds);
+		String description = getString(guardLimit ? R.string.routing_memory_guard_limit_descr : R.string.memory_allocated_for_routing_ds);
 		items.add(new LongDescriptionItem(description));
 
 		View view = inflate(R.layout.bottom_sheet_allocated_routing_memory);
@@ -141,7 +146,16 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	private String getFormattedMb(int value) {
+		if (guardLimit && value == 0) {
+			return getAutoGuardLimitText(this, autoGuardLimitMb);
+		}
 		return getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(value), "MB");
+	}
+
+	@NonNull
+	static String getAutoGuardLimitText(@NonNull Fragment fragment, int autoLimitMb) {
+		String mb = fragment.getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(autoLimitMb), "MB");
+		return fragment.getString(R.string.ltr_or_rtl_combine_with_brackets, fragment.getString(R.string.shared_string_automatic), mb);
 	}
 
 	@Override
@@ -157,6 +171,20 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	@Override
 	protected int getRightBottomButtonTextId() {
 		return R.string.shared_string_apply;
+	}
+
+	/**
+	 * 0 (automatic budget), then 512 MB steps up to device RAM minus 1 GB, the most the guard accepts.
+	 */
+	private List<Integer> getGuardLimitRange() {
+		autoGuardLimitMb = NativeRoutingMemoryGuard.getAutoBudgetMb(requireActivity());
+		int maxLimitMb = NativeRoutingMemoryGuard.getMaxBudgetMb(requireActivity());
+		List<Integer> range = new ArrayList<>();
+		range.add(0);
+		for (int mb = GUARD_LIMIT_STEP_MB; mb <= maxLimitMb; mb += GUARD_LIMIT_STEP_MB) {
+			range.add(mb);
+		}
+		return range;
 	}
 
 	private List<Integer> getAvailableRange() {

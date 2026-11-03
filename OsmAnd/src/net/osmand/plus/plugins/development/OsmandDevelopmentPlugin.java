@@ -120,6 +120,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.SHOULD_SHOW_DISCOUNT_BOTTOM_SHEET);
 		pluginPreferences.add(settings.TRANSPARENT_STATUS_BAR);
 		pluginPreferences.add(settings.MEMORY_ALLOCATED_FOR_ROUTING);
+		pluginPreferences.add(settings.ROUTING_MEMORY_GUARD_LIMIT);
 		pluginPreferences.add(settings.SHOW_INFO_ABOUT_PRESSED_KEY);
 		pluginPreferences.add(settings.USE_SPATIAL_TEXT_SEARCH);
 

@@ -30,6 +30,7 @@ import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.routing.NativeRoutingMemoryGuard;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
@@ -123,6 +124,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupMaxRenderingThreadsPref();
 		setupMemoryAllocatedForRoutingPref();
+		setupRoutingMemoryGuardLimitPref();
 		setupGlobalAppAllocatedMemoryPref();
 		setupNativeAppAllocatedMemoryPref();
 		setupAgpsDataDownloadedPref();
@@ -267,6 +269,18 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		int value = settings.MEMORY_ALLOCATED_FOR_ROUTING.get();
 		Preference preference = findPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId());
 		preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(value), "MB"));
+		preference.setIconSpaceReserved(false);
+	}
+
+	private void setupRoutingMemoryGuardLimitPref() {
+		int value = settings.ROUTING_MEMORY_GUARD_LIMIT.get();
+		Preference preference = findPreference(settings.ROUTING_MEMORY_GUARD_LIMIT.getId());
+		if (value == 0) {
+			preference.setSummary(AllocatedRoutingMemoryBottomSheet.getAutoGuardLimitText(this,
+					NativeRoutingMemoryGuard.getAutoBudgetMb(app)));
+		} else {
+			preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(value), "MB"));
+		}
 		preference.setIconSpaceReserved(false);
 	}
 
@@ -426,7 +440,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			if (fragmentManager != null) {
 				MaxRenderingThreadsBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
 			}
-		} else if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(prefId)) {
+		} else if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(prefId)
+				|| settings.ROUTING_MEMORY_GUARD_LIMIT.getId().equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				AllocatedRoutingMemoryBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
@@ -463,6 +478,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		if (prefId.equals(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId())) {
 			applyPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId(), applyToAllProfiles, newValue);
 			setupMemoryAllocatedForRoutingPref();
+		} else if (prefId.equals(settings.ROUTING_MEMORY_GUARD_LIMIT.getId())) {
+			applyPreference(settings.ROUTING_MEMORY_GUARD_LIMIT.getId(), applyToAllProfiles, newValue);
+			setupRoutingMemoryGuardLimitPref();
 		} else if (prefId.equals(settings.MAX_RENDERING_THREADS.getId())) {
 			applyPreference(settings.MAX_RENDERING_THREADS.getId(), applyToAllProfiles, newValue);
 			setupMaxRenderingThreadsPref();

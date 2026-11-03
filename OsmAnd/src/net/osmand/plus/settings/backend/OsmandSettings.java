@@ -3471,6 +3471,10 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> MEMORY_ALLOCATED_FOR_ROUTING =
 			new IntPreference(this, "memory_allocated_for_routing", 256).makeGlobal();
 
+	// native heap at which NativeRoutingMemoryGuard stops a route calculation, MB; 0 = automatic
+	public final CommonPreference<Integer> ROUTING_MEMORY_GUARD_LIMIT =
+			new IntPreference(this, "routing_memory_guard_limit", 0).makeGlobal();
+
 	// Live Updates
 	public final OsmandPreference<Boolean> IS_LIVE_UPDATES_ON =
 			new BooleanPreference(this, "is_live_updates_on", false).makeGlobal().makeShared();
