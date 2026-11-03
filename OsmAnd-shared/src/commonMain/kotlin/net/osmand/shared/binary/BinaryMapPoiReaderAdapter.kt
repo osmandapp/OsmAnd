@@ -874,10 +874,11 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 					if (shift != Int.MIN_VALUE) {
 						val x31 = x shl (31 - zoom)
 						val y31 = y shl (31 - zoom)
-						val x31r = (x + 1) shl (31 - zoom)
-						val y31b = (y + 1) shl (31 - zoom)
+						val x31r = ((x + 1) shl (31 - zoom)) - 1
+						val y31b = ((y + 1) shl (31 - zoom)) - 1
 						val r = KQuadRect(x31.toDouble(), y31.toDouble(), x31r.toDouble(), y31b.toDouble())
-						if (req.contains(x31, y31, x31, y31) ||
+						// Data box may be larger than the request bbox (e.g. a render tile), so check overlap, not the box corner
+						if (req.intersects(x31, y31, x31r, y31b) ||
 							r.contains(req.x.toDouble(), req.y.toDouble(), req.x.toDouble(), req.y.toDouble())
 						) {
 							val d = abs(req.x.toLong() - x31) + abs(req.y.toLong() - y31)
