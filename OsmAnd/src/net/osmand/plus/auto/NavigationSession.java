@@ -266,6 +266,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 
 		app.onCarNavigationSessionStart(this);
+		// A location that arrived before the session started must not be lost:
+		// OsmAndLocationProvider.setLocationFromService() stores one only while the session has started
+		app.getLocationProvider().ensureLatestLocation();
 		app.getOsmandMap().getMapView().setupRenderingView();
 
 		if (!app.isAppInForegroundOnRootDevice()) {
