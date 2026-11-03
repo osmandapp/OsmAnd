@@ -720,14 +720,31 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return Algorithms.isEmpty(n) ? null : n.trim().toLowerCase();
 	}
 	
+	private String dedupOldName(SpatialSearchResult r) {
+		MapObject o = r.getMainObject();
+		String name = o instanceof Amenity a ? a.getAdditionalInfo("old_name") : null;
+		if (Algorithms.isEmpty(name)) {
+			return null;
+		}
+		String n = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(name));
+		return Algorithms.isEmpty(n) ? null : n.trim().toLowerCase();
+	}
+
 	private List<SpatialSearchResult> deduplicateByProximity(List<SpatialSearchResult> sorted,
 			SpatialSearchContext ctx) {
 		// first pass: name every row and chain it to the previous row of that name
 		Map<String, SpatialSearchResult> lastSameName = new HashMap<>();
+		// a place renamed in OSM keeps its old name on the stops called after it: "Campingplatz Berlin" (old_name
+		// Campingplatz Krossinsee) and the bus stop "Campingplatz Krossinsee" 317 m away - pref-0007
+		Map<String, List<SpatialSearchResult>> byOldName = new HashMap<>();
 		for (SpatialSearchResult s : sorted) {
 			s.dedupName = dedupName(s);
 			if (s.dedupName != null) {
 				s.prevDedupSameName = lastSameName.put(s.dedupName, s);
+			}
+			String old = dedupOldName(s);
+			if (old != null && !old.equals(s.dedupName)) {
+				byOldName.computeIfAbsent(old, k -> new ArrayList<>()).add(s);
 			}
 		}
 		List<SpatialSearchResult> out = new ArrayList<>(sorted.size());
@@ -743,6 +760,14 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 						break;
 					}
 					prev = prev.prevDedupSameName;
+				}
+				List<SpatialSearchResult> renamed = same == null ? byOldName.get(s.dedupName) : null;
+				for (int i = 0; renamed != null && i < renamed.size() && i < MAX_SAME_NAME; i++) {
+					SpatialSearchResult place = renamed.get(i);
+					if (place != s && place.getLatLon() != null && isSamePlace(place, s)) {
+						same = place;
+						break;
+					}
 				}
 			}
 			if (same != null) {
