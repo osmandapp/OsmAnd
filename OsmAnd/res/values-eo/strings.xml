@@ -5402,4 +5402,13 @@
     <string name="file_name_containes_illegal_char">Nomo ne enhavu: %1$s</string>
     <string name="trip_rec_start_from_notification">Starti kun sciigo</string>
     <string name="trip_rec_start_from_notification_descr">Montri sciigon kun butono por komenci registri kurson. Dum registrado la sciigo ĉiam estas montrata.</string>
+    <string name="select_tracks">Elekti spurojn</string>
+    <string name="storage_directory_visible_external">Videbla ekstera konservejo</string>
+    <string name="eta_group_header">Proksimuma tempo de alveno</string>
+    <string name="travel_speed">Rapido de vojaĝo</string>
+    <string name="default_speed_descr">Uzata kiam mankas datumoj pri rapido por la vojo aŭ kiam vi ne moviĝas.</string>
+    <string name="speed_range">Variejo de rapido</string>
+    <string name="speed_range_descr">Uzata por kalkuli kurson kaj tempon de alveno.</string>
+    <string name="eta_adapt_to_my_speed">Adapti al mia rapido</string>
+    <string name="eta_adapt_to_my_speed_descr">Tempo de alveno baziĝas sur via rapido dum la antaŭa(j) %1$s.</string>
 </resources>
