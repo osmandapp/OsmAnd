@@ -274,7 +274,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		preference.setIcon(getPersistentPrefIcon(R.drawable.ic_action_battery));
 		preference.setDescription(R.string.battery_saving_mode_descr);
 		// only the OpenGL (version 2) renderer limits its frame rate
-		preference.setVisible(settings.USE_OPENGL_RENDER.get());
+		preference.setVisible(settings.isOpenGlRendererEnabled());
 	}
 
 	private void setupSendAnonymousDataPref() {
