@@ -293,7 +293,8 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	private void zoomMapToRoute() {
 		RoutingHelper rh = getApp().getRoutingHelper();
 		QuadRect mapRect = RoutingHelperUtils.getRouteRect(getApp(), rh.getRoute());
-		if (mapRect != null) {
+		// during navigation the map follows the location. Route listeners get the event even if this preview has just been closed
+		if (mapRect != null && !rh.isFollowingMode()) {
 			adjustMapToRect(getApp().getMapViewTrackingUtilities().getDefaultLocation(), mapRect);
 		}
 	}

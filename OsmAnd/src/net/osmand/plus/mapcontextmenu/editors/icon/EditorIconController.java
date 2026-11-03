@@ -63,6 +63,7 @@ public class EditorIconController extends BaseDialogController {
 	);
 
 	protected final List<IconsCategory> categories = new ArrayList<>();
+	private final Set<String> poiIconKeys = new HashSet<>();
 	protected IconsCategory selectedCategory;
 	protected List<String> lastUsedIcons;
 	private String selectedIconKey;
@@ -238,7 +239,7 @@ public class EditorIconController extends BaseDialogController {
 
 	private void mergeMissingAssetIcons(@NonNull List<IconsCategory> poiCategories,
 	                                    @NonNull Map<String, List<String>> assetGroups) {
-		Set<String> poiIconKeys = new HashSet<>();
+		poiIconKeys.clear();
 		Map<String, IconsCategory> poiCategoriesByKey = new HashMap<>();
 		for (IconsCategory category : poiCategories) {
 			poiIconKeys.addAll(category.getIconKeys());
@@ -316,6 +317,10 @@ public class EditorIconController extends BaseDialogController {
 	@NonNull
 	public List<IconsCategory> getCategories() {
 		return categories;
+	}
+
+	public boolean isPoiIcon(@NonNull String iconKey) {
+		return poiIconKeys.contains(iconKey);
 	}
 
 	@Nullable

@@ -773,7 +773,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				settings.executePreservingPrefTimestamp(prevAppMode, () -> {
 					settings.setLastKnownMapRotation(prevAppMode, getMapRotateTarget());
 					if (!app.getOsmandMap().getMapView().getAnimatedDraggingThread().isAnimating()) {
-						settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
+						app.getOsmandMap().saveLastKnownMapElevation(prevAppMode);
 					}
 				});
 				updateApplicationModeSettings();
@@ -1260,7 +1260,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.setLastKnownMapZoom(mapView.getZoom());
 		settings.setLastKnownMapZoomFloatPart(mapView.getZoomFloatPart());
 		settings.setLastKnownMapRotation(mapView.getRotate());
-		settings.setLastKnownMapElevation(mapView.getElevationAngle());
+		app.getOsmandMap().saveLastKnownMapElevation(settings.getApplicationMode());
 		settings.MAP_ACTIVITY_ENABLED = false;
 		LOG.info(">>>> MAP_ACTIVITY_ENABLED = false");
 
