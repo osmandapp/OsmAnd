@@ -49,8 +49,6 @@ import net.osmand.util.MapUtils;
 
 public class NativeLibrary {
 
-	public static final int CONTOUR_LINES_MODE_WITHOUT = 1;
-	public static final int CONTOUR_LINES_MODE_ONLY = 2;
 
 	public NativeLibrary() {
 	}
@@ -407,7 +405,7 @@ public class NativeLibrary {
 	protected static native ByteBuffer getGeotiffTile(
 		String tilePath, String outColorFilename, String midColorFilename, int type, int size, int zoom, int x, int y);
 
-	protected static native byte[] getMapboxVectorTileData(int zoom, int x, int y, int shift, int contourLinesMode);
+	protected static native byte[] getMapboxVectorTileData(int zoom, int x, int y, int shift, boolean contourLinesOnly);
 	/**/
 	// Empty native impl
 	/*
