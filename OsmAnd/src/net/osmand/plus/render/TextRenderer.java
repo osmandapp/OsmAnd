@@ -376,7 +376,6 @@ public class TextRenderer {
 				@Override
 				public boolean execute(int tag, String name) {
 					String nameTag = obj.getMapIndex().decodeType(tag).tag;
-					// name:<lang> is not a separate text, it replaces name (see getPreferredName)
 					if (!Algorithms.isBlank(name) && !nameTag.startsWith(LOCALIZED_NAME_PREFIX)) {
 						String text = getPreferredName(obj, rc, nameTag, name);
 						if (text != null) {
@@ -396,7 +395,6 @@ public class TextRenderer {
 		}
 	}
 
-	// <tag>:<locale>, else with transliteration <tag>:en or transliterated name
 	@Nullable
 	private String getPreferredName(BinaryMapDataObject obj, RenderingContext rc, String tag, @Nullable String name) {
 		if (!Algorithms.isEmpty(rc.preferredLocale)) {
