@@ -7,6 +7,7 @@ import android.os.Debug;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.router.RouteCalculationProgress;
 
 import org.apache.commons.logging.Log;
@@ -17,8 +18,9 @@ import org.apache.commons.logging.Log;
  * the process dies inside the allocator. The guard watches the native heap while a route is
  * calculated and cancels the calculation (the native loop polls isCancelled) when it reaches
  * the budget, so the user gets an error instead of a crash and a restart loop.
+ * The Development plugin can replace the automatic budget (ROUTING_MEMORY_GUARD_LIMIT).
  */
-class NativeRoutingMemoryGuard {
+public class NativeRoutingMemoryGuard {
 
 	private static final Log log = PlatformUtil.getLog(NativeRoutingMemoryGuard.class);
 
@@ -40,8 +42,8 @@ class NativeRoutingMemoryGuard {
 	}
 
 	@NonNull
-	static NativeRoutingMemoryGuard start(@NonNull Context ctx, @NonNull RouteCalculationProgress progress) {
-		NativeRoutingMemoryGuard guard = new NativeRoutingMemoryGuard(progress, getBudget(ctx));
+	static NativeRoutingMemoryGuard start(@NonNull OsmandApplication app, @NonNull RouteCalculationProgress progress) {
+		NativeRoutingMemoryGuard guard = new NativeRoutingMemoryGuard(progress, getBudget(app));
 		guard.thread = new Thread(guard::watch, "RoutingMemoryGuard");
 		guard.thread.setDaemon(true);
 		guard.thread.start();
@@ -56,17 +58,45 @@ class NativeRoutingMemoryGuard {
 	 * ordinary routes. Below 1 GB the floor stays 512 MB, and from 2 GB up the reserve already
 	 * leaves more than half of RAM, so every other device keeps the budget it has today.
 	 */
-	private static long getBudget(@NonNull Context ctx) {
-		long totalMem = 0;
+	private static long getAutoBudget(long totalMem) {
+		long budget = Math.min(MAX_BUDGET, totalMem - RESERVED_RAM);
+		long floor = Math.max(MIN_BUDGET, totalMem / 2);
+		return Math.min(MAX_BUDGET, Math.max(floor, budget));
+	}
+
+	/**
+	 * A limit set in the Development plugin replaces the automatic budget, but stays within
+	 * MIN_BUDGET and device RAM minus RESERVED_RAM.
+	 */
+	private static long getBudget(@NonNull OsmandApplication app) {
+		long totalMem = getTotalMemory(app);
+		int limitMb = app.getSettings().ROUTING_MEMORY_GUARD_LIMIT.get();
+		if (limitMb > 0) {
+			return Math.max(MIN_BUDGET, Math.min(limitMb * MB, getMaxBudget(totalMem)));
+		}
+		return getAutoBudget(totalMem);
+	}
+
+	private static long getMaxBudget(long totalMem) {
+		return Math.max(MIN_BUDGET, totalMem - RESERVED_RAM);
+	}
+
+	private static long getTotalMemory(@NonNull Context ctx) {
 		ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
 		if (am != null) {
 			ActivityManager.MemoryInfo info = new ActivityManager.MemoryInfo();
 			am.getMemoryInfo(info);
-			totalMem = info.totalMem;
+			return info.totalMem;
 		}
-		long budget = Math.min(MAX_BUDGET, totalMem - RESERVED_RAM);
-		long floor = Math.max(MIN_BUDGET, totalMem / 2);
-		return Math.min(MAX_BUDGET, Math.max(floor, budget));
+		return 0;
+	}
+
+	public static int getAutoBudgetMb(@NonNull Context ctx) {
+		return (int) (getAutoBudget(getTotalMemory(ctx)) / MB);
+	}
+
+	public static int getMaxBudgetMb(@NonNull Context ctx) {
+		return (int) (getMaxBudget(getTotalMemory(ctx)) / MB);
 	}
 
 	private void watch() {

@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="routing_memory_guard_limit">Routing memory limit</string>
+	<string name="routing_memory_guard_limit_descr">Route calculation stops with \"not enough memory\" when the app uses this much native memory. Automatic: device RAM minus 1 GB, at most 3 GB. Higher values let long routes without fast routing finish, but the system may close the app.</string>
 	<string name="cast_shadows">Shadows</string>
 	<string name="build_update_size">upd %1$s</string>
 	<string name="build_update_size_estimated">upd ~%1$s</string>

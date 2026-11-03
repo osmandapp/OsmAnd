@@ -238,6 +238,12 @@
 		android:title="@string/memory_allocated_for_routing"
 		tools:summary="256 MB" />
 	<Preference
+		android:key="routing_memory_guard_limit"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/routing_memory_guard_limit"
+		tools:summary="@string/shared_string_automatic" />
+	<Preference
 		android:key="native_app_allocated_memory"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
