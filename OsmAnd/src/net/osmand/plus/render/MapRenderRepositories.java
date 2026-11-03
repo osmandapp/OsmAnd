@@ -726,6 +726,8 @@ public class MapRenderRepositories {
 			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.preferredLocale = getMapPreferredLocale(app, requestedBox.getZoom());
+			currentRenderingContext.transliterate = !isBasemapZoom(requestedBox.getZoom())
+					&& settings.MAP_TRANSLITERATE_NAMES.get();
 			float mapDensity = (float) requestedBox.getMapDensity();
 			currentRenderingContext.setDensityValue(mapDensity);
 			// Text/icon scales according to mapDensity (so text is size of road)
