@@ -39,6 +39,10 @@ class ObfReaderRegistry {
 	private var entries: List<Entry> = emptyList()
 	private var entriesByPath: Map<String, Entry> = emptyMap()
 	private val amenityRepositories = HashMap<String, BinaryAmenityIndexRepository>()
+	private val reverseGeocoder by lazy { GeocodingService(this) }
+
+	/** One serialized address lookup context over this registry's STREET_LOOKUP readers. */
+	fun getGeocodingService(): GeocodingService = reverseGeocoder
 
 	fun setFiles(files: List<ObfFile>) {
 		val closing = ArrayList<BinaryMapReaderResource>()
