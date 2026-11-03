@@ -200,6 +200,17 @@
 	<string name="share_favorites_preparation_failed">Could not prepare files for sharing.</string>
 	<string name="share_favorites_share_failed">Could not share the file.</string>
 	<string name="share_favorites_missing_media_warning">Some attached media could not be included.</string>
+    <string name="release_5_5">
+        • Spatial Search on by default: search around a place, better ranking, synonyms, typo-tolerant\n\n
+        • 3D buildings cast shadows, with an adjustable sun direction\n\n
+        • Panoramax plugin: street-level imagery on the map\n\n
+        • Media library: all photos, videos and audio notes in one place\n\n
+        • Dashed and dotted track lines, default look per track folder\n\n
+        • Travel speed settings for routing and arrival time\n\n
+        • Android Auto: recent destinations, auto Free ride, Google Assistant and Gemini\n\n
+        • Quick action to show or hide tracks\n\n
+        • Contour line labels face uphill\n\n
+    </string>
     <string name="release_5_4">
         • Refreshed search UI: sorting, category filters, cleaner look\n\n
         • Attach photos and media to Favorites\n\n
