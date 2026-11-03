@@ -40,6 +40,10 @@ public class SpatialSearchRanking {
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
+	/** "lidl espoo": a POI found together with a city is near by its distance to that city's centre plus this share
+	 *  of the distance from the search point to the city - a city is matched by its bbox, and the bbox of Espoo with
+	 *  its sea area covers Helsinki, so the Lidls of Helsinki next to the search point must not come first */
+	public double wCityFromLocation = 0.25;
 	/** elo above MIN_ELO_RATING at which the rating term saturates */
 	public double ratingSpan = 1200.0;
 
@@ -129,9 +133,25 @@ public class SpatialSearchRanking {
 			return 0;
 		}
 		Double km = center == null ? null : SpatialSearchResult.getDistance(r, center) / 1000.0;
+		LatLon city = km == null || !(head.atom.object instanceof Amenity) ? null : matchedCityCenter(r);
+		if (city != null && r.getLatLon() != null) {
+			km = (MapUtils.getDistance(r.getLatLon(), city) + wCityFromLocation * MapUtils.getDistance(center, city))
+					/ 1000.0;
+		}
 		return score(nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
 				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r))
 				- (head.atom.ruleSpelling ? wRuleSpelling : 0);
+	}
+
+	/** centre of the city (town, village, suburb) the query named together with the object, if any */
+	private static LatLon matchedCityCenter(SpatialSearchResult r) {
+		for (int i = 1; i < r.objs.size(); i++) {
+			if (r.objs.get(i).atom.object instanceof City c && c.getType() != City.CityType.POSTCODE
+					&& c.getLocation() != null) {
+				return c.getLocation();
+			}
+		}
+		return null;
 	}
 
 	/**
