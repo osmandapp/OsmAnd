@@ -47,6 +47,7 @@ public class OnlineRoutingSettingsItemTest {
 	private OnlineRoutingHelper helper;
 	private OsmandSettings settings;
 	private long originalGlobalEditTime;
+	private long originalEnginesEditTime;
 
 	@Before
 	public void setUp() {
@@ -55,6 +56,7 @@ public class OnlineRoutingSettingsItemTest {
 		helper = app.getOnlineRoutingHelper();
 		settings = app.getSettings();
 		originalGlobalEditTime = settings.getLastGlobalPreferencesEditTime();
+		originalEnginesEditTime = settings.ONLINE_ROUTING_ENGINES.getLastModifiedTime();
 		removeTestEngines();
 	}
 
@@ -62,11 +64,13 @@ public class OnlineRoutingSettingsItemTest {
 	public void tearDown() {
 		removeTestEngines();
 		settings.setLastGlobalPreferencesEditTime(originalGlobalEditTime);
+		settings.ONLINE_ROUTING_ENGINES.setLastModifiedTime(originalEnginesEditTime);
 	}
 
 	@Test
 	public void anIdenticalEngineRestoreDoesNotTouchGlobalSettings() {
 		helper.saveEngine(engine(ENGINE_KEY, ENGINE_NAME, URL_A));
+		helper.saveEngine(engine(OTHER_ENGINE_KEY, OTHER_ENGINE_NAME, URL_A));
 		String storedBefore = settings.ONLINE_ROUTING_ENGINES.get();
 		long globalEditTime = markGlobalEditTime();
 
