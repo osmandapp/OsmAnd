@@ -3981,7 +3981,7 @@
     <string name="help_article_navigation_setup_gpx_navigation_name">Наводи помоћу трага</string>
     <string name="help_article_navigation_routing_online_routing_name">Путања мрежна</string>
     <string name="help_article_map_map_context_menu_name">Приручни мени мапе</string>
-    <string name="map_widget_glide_average_desc">Приказује просечну размеру једрења за постављено време.</string>
+    <string name="map_widget_glide_average_desc">Приказује просечну размеру једрења или просечну вертикалну брзину за постављено време.</string>
     <string name="copy_build_version">Умножи број издања</string>
     <string name="help_article_navigation_car_play_name">КарПлеј</string>
     <string name="help_article_personal_import_export_name">Увоз / Извоз</string>
@@ -3993,7 +3993,7 @@
     <string name="folder_export_empty_error">Нема ничег за извоз, фасцикла је празна</string>
     <string name="help_article_plan_route_name">План путовања</string>
     <string name="help_article_widgets_map_buttons_name">Дугмад карте</string>
-    <string name="map_widget_glide_target_desc">Приказује размеру једрења потребну за достизање циљне тачке.</string>
+    <string name="map_widget_glide_target_desc">Приказује размеру једрења потребну за достизање циљне тачке или надморску висину циљне тачке.</string>
     <string name="help_article_map_track_context_menu_name">Приручни изборник трагова</string>
     <string name="osmand_cloud_deleted_account_descr">Налог и сви подаци су избрисани из ОсмАнд Облака.</string>
     <string name="free_settings_backup">Складиштење бесплатних поставки</string>
@@ -5467,4 +5467,13 @@
     <string name="eta_adapt_to_my_speed_descr">Време доласка се заснива на вашој брзини током последњих %1$s.</string>
     <string name="eta_adapt_to_my_speed_off_descr">Време доласка се заснива на очекиваној брзини на свакој деоници руте. Укључите ову опцију како би се оно заснивало на вашој стварној брзини кретања.</string>
     <string name="select_tracks">Изабери путање</string>
+    <string name="build_update_size">ажур %1$s</string>
+    <string name="build_update_size_estimated">ажур ~%1$s</string>
+    <string name="astro_ar_mode">АР режим</string>
+    <string name="astro_camera_view">Приказ камере</string>
+    <string name="astro_reset_field_of_view">Ресетуј видно поље</string>
+    <string name="cloud_file_name_too_long">Назив датотеке је предугачак за овај уређај; промените му назив у ОсмАнд Облаку</string>
+    <string name="average_vertical_speed">Просечна вертикална брзина</string>
+    <string name="public_transport_route_out_of_memory">Рута јавног превоза је предугачка за израчунавање на овом уређају. Изаберите ближе одредиште.</string>
+    <string name="cast_shadows">Сенке</string>
 </resources>
