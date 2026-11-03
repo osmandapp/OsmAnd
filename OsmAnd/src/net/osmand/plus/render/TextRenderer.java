@@ -41,6 +41,9 @@ import gnu.trove.procedure.TIntObjectProcedure;
 
 public class TextRenderer {
 
+	private static final String NAME_TAG = "name";
+	private static final String LOCALIZED_NAME_PREFIX = NAME_TAG + ":";
+
 	public static final String DROID_SERIF = "Droid Serif";
 
 	private final Context context;
@@ -372,40 +375,32 @@ public class TextRenderer {
 			map.forEachEntry(new TIntObjectProcedure<String>() {
 				@Override
 				public boolean execute(int tag, String name) {
-					if (Algorithms.isBlank(name)) {
-						return true;
-					}
-					String locale = rc.preferredLocale;
 					String nameTag = obj.getMapIndex().decodeType(tag).tag;
-					boolean transliterate = !locale.isEmpty() && rc.transliterate;
-					boolean isLocale = !locale.isEmpty() && nameTag.length() == 5 + locale.length()
-							&& nameTag.endsWith(locale);
-					// name:<lang> only: other tags like piste:ref are separate texts
-					if (nameTag.startsWith("name:") && (nameTag.length() <= 8 || isLocale)) {
-						// localized name replaces missing name: name:<locale>, or name:en if transliterate and no name:<locale>
-						boolean englishFallback = !isLocale && transliterate && nameTag.equals("name:en");
-						if ((!isLocale && !englishFallback) || !Algorithms.isBlank(obj.getName())
-								|| (englishFallback && getObjectName(obj, "name:" + locale) != null)) {
-							return true;
+					// name:<lang> is not a separate text, it replaces name (see getPreferredName)
+					if (!Algorithms.isBlank(name) && !nameTag.startsWith(LOCALIZED_NAME_PREFIX)) {
+						String text = getPreferredName(obj, rc, nameTag, name);
+						if (text != null) {
+							createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, text,
+									tag == obj.getMapIndex().nameEncodingType ? "" : nameTag);
 						}
-						nameTag = "name";
-					}
-					name = getPreferredName(obj, rc, nameTag, name);
-					if (name != null) {
-						createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, name,
-								"name".equals(nameTag) ? "" : nameTag);
 					}
 					return true;
 				}
 			});
+			if (Algorithms.isBlank(obj.getName())) {
+				String text = getPreferredName(obj, rc, NAME_TAG, null);
+				if (text != null) {
+					createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, text, "");
+				}
+			}
 		}
 	}
 
+	// <tag>:<locale>, else with transliteration <tag>:en or transliterated name
 	@Nullable
-	private static String getPreferredName(BinaryMapDataObject obj, RenderingContext rc, String tag, String name) {
-		String locale = rc.preferredLocale;
-		if (!locale.isEmpty()) {
-			String localizedName = getObjectName(obj, tag + ":" + locale);
+	private String getPreferredName(BinaryMapDataObject obj, RenderingContext rc, String tag, @Nullable String name) {
+		if (!Algorithms.isEmpty(rc.preferredLocale)) {
+			String localizedName = getObjectName(obj, tag + ":" + rc.preferredLocale);
 			if (localizedName != null) {
 				return localizedName;
 			}
@@ -415,16 +410,15 @@ public class TextRenderer {
 					return enName;
 				}
 				if (!Algorithms.isBlank(name)) {
-					name = TransliterationHelper.transliterate(name);
+					return TransliterationHelper.transliterate(name);
 				}
 			}
 		}
 		return Algorithms.isBlank(name) ? null : name;
 	}
 
-	// blank value counts as missing
 	@Nullable
-	private static String getObjectName(BinaryMapDataObject obj, String tag) {
+	private String getObjectName(BinaryMapDataObject obj, String tag) {
 		Integer type = obj.getMapIndex().getRule(tag, null);
 		String name = type != null ? obj.getNameByType(type) : null;
 		return Algorithms.isBlank(name) ? null : name;
