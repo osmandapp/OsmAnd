@@ -18,11 +18,11 @@ import kotlin.jvm.JvmStatic
  * and the additional attributes that can hang off any of the three. Everything that turns a tag
  * and a value read out of an obf file into something with a name and an icon goes through here.
  *
- * A copy of `MapPoiTypes` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. Two things are left out, both of which belong to writing obf files rather than reading
- * them: `parseAmenity`, which the indexer uses to turn osm tags into an amenity, and the `main`
- * and `print` helpers. The names of a type are not in the file - they come from the platform's
- * string resources through a [PoiTranslator], and without one a type falls back to its key name.
+ * Based on `MapPoiTypes` from OsmAnd-java. Two things are left out, both of which belong to
+ * writing obf files rather than reading them: `parseAmenity`, which the indexer uses to turn
+ * osm tags into an amenity, and the `main` and `print` helpers. The names of a type are not in
+ * the file - they come from the platform's string resources through a [PoiTranslator], and
+ * without one a type falls back to its key name.
  */
 class MapPoiTypes(private var resourceName: String?) {
 

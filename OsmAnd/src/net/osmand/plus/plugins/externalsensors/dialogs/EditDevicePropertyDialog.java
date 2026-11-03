@@ -181,4 +181,9 @@ public class EditDevicePropertyDialog extends BaseFullScreenDialogFragment {
 	public interface OnSaveSensorPropertyCallback {
 		void changeSensorPropertyValue(@NonNull String sensorId, @NonNull DeviceChangeableProperty property, @NonNull String newValue);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "edit_device_property";
+	}
 }

@@ -176,4 +176,6 @@ class GradientEditorFragment : BaseFullScreenDialogFragment(), IGradientEditorVi
 	}
 
 	override fun getFragmentActivity() = activity
+
+	override fun getAnalyticsScreen() = "gradient_editor"
 }

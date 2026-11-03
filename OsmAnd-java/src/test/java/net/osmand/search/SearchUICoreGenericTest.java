@@ -2,12 +2,16 @@ package net.osmand.search;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import net.osmand.ResultMatcher;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
@@ -15,6 +19,8 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchCoreAPI;
+import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
@@ -111,7 +117,71 @@ public class SearchUICoreGenericTest {
 		Assert.assertTrue("Selecting a boundary must not disable spatial text search",
 				api.getSearchPriority(phrase) != -1);
 	}
-	
+
+	@Test
+	public void testSpatialSearchApiForSearchTypes() {
+		SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
+		core.init(true);
+		ObjectType[] addressTabTypes = {ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE, ObjectType.HOUSE,
+				ObjectType.STREET_INTERSECTION, ObjectType.STREET, ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION};
+		ObjectType[] aidlAddressTypes = {ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE, ObjectType.STREET,
+				ObjectType.HOUSE, ObjectType.STREET_INTERSECTION};
+
+		assertSpatialTextSearch(core, null, "Khreshchatyk 22", true);
+		assertSpatialTextSearch(core, addressTabTypes, "Khreshchatyk 22", true);
+		assertSpatialTextSearch(core, aidlAddressTypes, "Khreshchatyk 22", true);
+		assertSpatialTextSearch(core, new ObjectType[] {ObjectType.CITY, ObjectType.VILLAGE}, "Kiev", false);
+		assertSpatialTextSearch(core, new ObjectType[] {ObjectType.CITY}, "Kiev", false);
+		assertSpatialTextSearch(core, new ObjectType[] {ObjectType.POSTCODE}, "0100", false);
+		assertSpatialTextSearch(core, new ObjectType[0], "Khreshchatyk", false);
+		Assert.assertFalse(isApiRunning(core, SearchCoreFactory.SearchAddressByNameAPI.class,
+				setSearchTypes(core, new ObjectType[0], "Khreshchatyk")));
+
+		setSearchTypes(core, addressTabTypes, "");
+		selectCity(core, createCity());
+		SearchPhrase streetsPhrase = core.resetPhrase("Kyiv Khreshch");
+		Assert.assertTrue("Typed text must filter the streets of the city selected on the address tab",
+				isApiRunning(core, SearchStreetByCityAPI.class, streetsPhrase));
+		Assert.assertFalse(isApiRunning(core, SpatialTextSearchAPI.class, streetsPhrase));
+
+		setSearchTypes(core, null, "");
+		SearchResult group = new SearchResult(core.resetPhrase("Revgroup"));
+		group.objectType = ObjectType.FAVORITE_GROUP;
+		group.localeName = "Revgroup";
+		core.selectSearchResult(group);
+		SearchPhrase groupPhrase = core.resetPhrase("Revgroup Khreshch");
+		Assert.assertFalse("Only favorites are searched inside a favorites group",
+				isApiRunning(core, SpatialTextSearchAPI.class, groupPhrase));
+	}
+
+	private void assertSpatialTextSearch(SearchUICore core, ObjectType[] searchTypes, String text, boolean spatial) {
+		SearchPhrase phrase = setSearchTypes(core, searchTypes, text);
+		String types = searchTypes == null ? "null" : Arrays.toString(searchTypes);
+		Assert.assertEquals("Spatial text search for types " + types,
+				spatial, isApiRunning(core, SpatialTextSearchAPI.class, phrase));
+		if (searchTypes != null && searchTypes.length > 0) {
+			Assert.assertEquals("Address by name search for types " + types,
+					!spatial, isApiRunning(core, SearchCoreFactory.SearchAddressByNameAPI.class, phrase));
+		}
+	}
+
+	private SearchPhrase setSearchTypes(SearchUICore core, ObjectType[] searchTypes, String text) {
+		SearchSettings settings = searchTypes == null
+				? core.getSearchSettings().resetSearchTypes()
+				: core.getSearchSettings().setSearchTypes(searchTypes);
+		core.updateSettings(settings.setEmptyQueryAllowed(true));
+		return core.resetPhrase(text);
+	}
+
+	private boolean isApiRunning(SearchUICore core, Class<? extends SearchCoreAPI> cl, SearchPhrase phrase) {
+		for (SearchCoreAPI api : core.apis) {
+			if (cl.isInstance(api) && api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) != -1) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	@Test
 	public void testDuplicates() throws IOException {
@@ -184,6 +254,54 @@ public class SearchUICoreGenericTest {
 		Assert.assertSame(a1, cll.getCurrentSearchResults().get(0));
 		Assert.assertSame(b1, cll.getCurrentSearchResults().get(1));
 		Assert.assertSame(b2, cll.getCurrentSearchResults().get(2));
+	}
+
+	@Test
+	public void testNoSearchMoreAfterAllSpatialLevelsShown() throws InterruptedException {
+		// #25940: the dialog shows the levels in its own collection; the core one stays at level 0 and must not
+		// offer "Increase search radius", which reran the same spatial search and appended a copy of every row
+		SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
+		core.init(true);
+		core.registerAPI(new SpatialTextSearchAPI(MapPoiTypes.getDefault()) {
+			@Override
+			public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
+				for (int level = 0; level < 2; level++) {
+					SearchResult r = new SearchResult(phrase);
+					r.localeName = "Tatranská magistrála";
+					r.objectType = ObjectType.POI;
+					r.location = new LatLon(49.1 + level, 19.6);
+					r.spatialSearchVisibleLevel = level;
+					resultMatcher.publish(r);
+				}
+				return true;
+			}
+		});
+		core.updateSettings(core.getSearchSettings().setOriginalLocation(new LatLon(49.08, 19.61)));
+		CountDownLatch finished = new CountDownLatch(1);
+		core.search("Tatranska magistrala", false, new ResultMatcher<SearchResult>() {
+			@Override
+			public boolean publish(SearchResult object) {
+				if (object.objectType == ObjectType.SEARCH_FINISHED) {
+					finished.countDown();
+				}
+				return true;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		});
+		Assert.assertTrue(finished.await(10, TimeUnit.SECONDS));
+
+		SearchResultCollection shown = new SearchResultCollection(core.getPhrase(), true)
+				.addSearchResults(core.getCurrentSearchResult().getCurrentSearchResults(), false, true);
+		Assert.assertEquals(1, shown.getVisibleSpatialSearchResults().size());
+		Assert.assertTrue(shown.showMoreSpatialSearchResults());
+		Assert.assertEquals(2, shown.getVisibleSpatialSearchResults().size());
+		Assert.assertFalse(shown.hasMoreSpatialSearchResults());
+		Assert.assertFalse("All levels are shown: nothing more to search",
+				core.isSearchMoreAvailable(core.getPhrase()));
 	}
 
 	private City createCity() {

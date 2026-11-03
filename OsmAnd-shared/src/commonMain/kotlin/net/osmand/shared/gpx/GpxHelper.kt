@@ -15,7 +15,7 @@ object GpxHelper {
 		if (KAlgorithms.isEmpty(name)) {
 			""
 		} else {
-			KAlgorithms.capitalizeFirstLetter(KFile.getFileNameWithoutExtension(name))
+			KAlgorithms.capitalizeFirstLetter(name)
 		}
 
 	fun getFolderName(

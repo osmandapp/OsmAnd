@@ -345,6 +345,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				drawableResToUpdate = R.drawable.ic_direction_arrow;
 				markerImageViewToUpdate = itemViewHolder.iconDirection;
 			}
+			itemViewHolder.optionsBtn.setContentDescription(app.getString(markerInHistory ? R.string.shared_string_restore : R.string.mark_passed));
 
 			itemViewHolder.title.setText(marker.getName(app));
 

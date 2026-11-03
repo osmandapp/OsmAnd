@@ -9,8 +9,8 @@ import kotlin.math.min
  * Live state of one route calculation: how far it has got, what it has loaded, and how long that
  * took.
  *
- * A copy of `net.osmand.router.RouteCalculationProgress`, which stays in OsmAnd-java: android, tools and the C++ core keep using
- * the original, and this copy is for iOS. Keep the two identical, field names included.
+ * Based on `net.osmand.router.RouteCalculationProgress` from OsmAnd-java. Keep behavior and
+ * field names compatible with the original.
  */
 class RouteCalculationProgress {
 

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class WikivoyageJsonParser {
 
-	private static final String TAG = WikivoyageJsonParser.class.getSimpleName();
+	private static final String TAG = "WikivoyageJsonParser";
 
 	private static final String HEADERS = "headers";
 	private static final String SUBHEADERS = "subheaders";

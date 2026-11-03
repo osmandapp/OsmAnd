@@ -410,4 +410,9 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 			requireMyActivity().showOsmAndCloud(this);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favorite_folders";
+	}
 }

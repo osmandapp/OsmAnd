@@ -14,8 +14,9 @@
 	<include
 		android:id="@+id/button_left"
 		layout="@layout/preference_button_with_icon"
-		android:layout_width="wrap_content"
+		android:layout_width="0dp"
 		android:layout_height="match_parent"
+		android:layout_weight="1"
 		android:minWidth="@dimen/context_menu_top_right_button_min_width"
 		android:minHeight="@dimen/setting_list_item_large_height" />
 
@@ -32,10 +33,11 @@
 	<include
 		android:id="@+id/button_right"
 		layout="@layout/preference_button_with_icon"
-		android:layout_width="wrap_content"
+		android:layout_width="0dp"
 		android:layout_height="match_parent"
 		android:layout_marginStart="@dimen/content_padding_half"
 		android:layout_marginLeft="@dimen/content_padding_half"
+		android:layout_weight="1"
 		android:minWidth="@dimen/context_menu_top_right_button_min_width"
 		android:minHeight="@dimen/setting_list_item_large_height" />
 

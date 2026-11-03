@@ -8,7 +8,6 @@ import androidx.car.app.model.CarIcon
 import androidx.car.app.model.ItemList
 import androidx.car.app.model.Row
 import androidx.car.app.model.Template
-import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -42,8 +41,9 @@ class TracksFoldersScreen(
         })
     }
 
+    @Suppress("DEPRECATION") // PlaceListNavigationTemplate, needs migration to MapWithContentTemplate
     override fun getTemplate(): Template {
-        val templateBuilder = PlaceListNavigationTemplate.Builder()
+        val templateBuilder = androidx.car.app.navigation.model.PlaceListNavigationTemplate.Builder()
         setupTrackFolders(templateBuilder)
         val actionStripBuilder = ActionStrip.Builder()
         actionStripBuilder.addAction(
@@ -68,7 +68,7 @@ class TracksFoldersScreen(
     }
 
 
-    private fun setupTrackFolders(templateBuilder: PlaceListNavigationTemplate.Builder) {
+    private fun setupTrackFolders(templateBuilder: androidx.car.app.navigation.model.PlaceListNavigationTemplate.Builder) {
         val listBuilder = ItemList.Builder()
         val iconLastModified =
             CarIcon.Builder(IconCompat.createWithResource(app, R.drawable.ic_action_history))
@@ -102,7 +102,7 @@ class TracksFoldersScreen(
                 break
             }
             val title = trackTab.getDirName(includingSubdirs = true)
-            val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.MAP)
+            val nightMode = app.daynightHelper.isNightMode(app.settings.applicationMode, ThemeUsageContext.MAP)
             val iconColorId = ColorUtilities.getDefaultIconColorId(nightMode)
             val iconDrawable = app.uiUtilities.getIcon(trackTab.type.iconId, iconColorId)
             val icon = CarIcon.Builder(

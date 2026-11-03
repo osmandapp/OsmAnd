@@ -73,13 +73,17 @@ public class GpxDisplayHelper {
 		List<GpxDisplayGroup> displayGroups = new ArrayList<>();
 		String name = getGroupName(app, gpxFile);
 		if (gpxFile.getTracks().size() > 0) {
+			// counted over the whole file once, not again for every track
+			int nonEmptySegmentsCount = processTrack ? gpxFile.getNonEmptySegmentsCount() : 0;
+			int nonEmptyTracksCount = processTrack ? gpxFile.getNonEmptyTracksCount() : 0;
 			for (int i = 0; i < gpxFile.getTracks().size(); i++) {
 				TrackDisplayGroup group = buildTrackDisplayGroup(gpxFile, i, name, false);
 				if (processTrack) {
 					GpxDataItem dataItem = !Algorithms.isEmpty(gpxFile.getPath())
 							? app.getGpxDbHelper().getItem(new KFile(gpxFile.getPath())) : null;
 					boolean joinSegments = dataItem != null ? dataItem.getParameter(GpxParameter.JOIN_SEGMENTS) : false;
-					SplitTrackAsyncTask.processGroupTrack(app, group, null, joinSegments);
+					SplitTrackAsyncTask.processGroupTrack(app, group, null, joinSegments,
+							nonEmptySegmentsCount, nonEmptyTracksCount);
 				}
 				if (!Algorithms.isEmpty(group.getDisplayItems()) || !processTrack) {
 					displayGroups.add(group);
@@ -234,7 +238,7 @@ public class GpxDisplayHelper {
 		if (!isSplittingTrack(selectedGpxFile) && item != null) {
 			GpxSplitParams params = getGpxSplitParams(item);
 			List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile, false);
-			SplitTrackListener listener = getSplitTrackListener(selectedGpxFile, groups, callback);
+			SplitTrackListener listener = getSplitTrackListener(selectedGpxFile, groups, params, callback);
 
 			splitTrackAsync(selectedGpxFile, groups, params, listener);
 		} else if (callback != null) {
@@ -311,16 +315,20 @@ public class GpxDisplayHelper {
 	@NonNull
 	private SplitTrackListener getSplitTrackListener(@NonNull SelectedGpxFile selectedGpxFile,
 	                                                 @NonNull List<GpxDisplayGroup> groups,
+	                                                 @NonNull GpxSplitParams params,
 	                                                 @Nullable CallbackWithObject<Boolean> callback) {
 		return new SplitTrackListener() {
 			@Override
 			public void trackSplittingFinished(boolean success) {
-				if (success) {
+				boolean actual = success && params.equals(getGpxSplitParams(selectedGpxFile));
+				if (actual) {
 					selectedGpxFile.setSplitGroups(groups, app);
+				}
+				if (success) {
 					app.getOsmandMap().getMapView().refreshMap();
 				}
 				if (callback != null) {
-					callback.processResult(success);
+					callback.processResult(actual);
 				}
 			}
 		};
@@ -328,13 +336,22 @@ public class GpxDisplayHelper {
 
 	@NonNull
 	public static String buildTrackSegmentName(GpxFile gpxFile, Track track, TrkSegment segment, OsmandApplication app) {
-		String trackTitle = getTrackTitle(gpxFile, track, app);
-		String segmentTitle = getSegmentTitle(segment, track.getSegments().indexOf(segment), app);
+		return buildTrackSegmentName(gpxFile, track, segment, track.getSegments().indexOf(segment),
+				gpxFile.getNonEmptySegmentsCount(), gpxFile.getNonEmptyTracksCount(), app);
+	}
 
-		boolean oneSegmentPerTrack =
-				gpxFile.getNonEmptySegmentsCount() == gpxFile.getNonEmptyTracksCount();
-		boolean oneOriginalTrack = gpxFile.hasGeneralTrack() && gpxFile.getNonEmptyTracksCount() == 2
-				|| !gpxFile.hasGeneralTrack() && gpxFile.getNonEmptyTracksCount() == 1;
+	// the index and the counts go over the track and the whole file, so a caller that names every segment of a
+	// track passes them in instead of having them looked up again for each segment
+	@NonNull
+	public static String buildTrackSegmentName(GpxFile gpxFile, Track track, TrkSegment segment, int segmentIdx,
+	                                           int nonEmptySegmentsCount, int nonEmptyTracksCount,
+	                                           OsmandApplication app) {
+		String trackTitle = getTrackTitle(gpxFile, track, app);
+		String segmentTitle = getSegmentTitle(segment, segmentIdx, app);
+
+		boolean oneSegmentPerTrack = nonEmptySegmentsCount == nonEmptyTracksCount;
+		boolean oneOriginalTrack = gpxFile.hasGeneralTrack() && nonEmptyTracksCount == 2
+				|| !gpxFile.hasGeneralTrack() && nonEmptyTracksCount == 1;
 
 		if (oneSegmentPerTrack) {
 			return trackTitle;

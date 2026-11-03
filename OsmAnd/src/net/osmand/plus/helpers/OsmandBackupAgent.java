@@ -84,6 +84,9 @@ public class OsmandBackupAgent extends BackupAgentHelper {
 		getSharedPreferences(OsmandSettings.getSharedPreferencesName(null), Context.MODE_PRIVATE)
 				.edit()
 				.putInt(OsmandSettings.NUMBER_OF_FREE_DOWNLOADS_ID, 0)
+				// The referrer belongs to the backed up install, a new install has to read its own
+				.remove(OsmandSettings.INSTALL_REFERRER_ID)
+				.remove(OsmandSettings.INSTALL_REFERRER_CHECKED_ID)
 				.apply();
 	}
 }

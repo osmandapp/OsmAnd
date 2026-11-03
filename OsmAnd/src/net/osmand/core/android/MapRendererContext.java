@@ -3,7 +3,7 @@ package net.osmand.core.android;
 import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
 import static net.osmand.IndexConstants.OPENGL_SHADERS_CACHE_DIR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR;
+import static net.osmand.plus.settings.backend.OsmandSettings.BUILDINGS_3D_DEFAULT_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.FOG_DEFAULT_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.FOG_NIGHTMODE_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
@@ -277,6 +277,7 @@ public class MapRendererContext {
 			setMapBackgroundColor();
 		}
 		setSkyAndFogColors();
+		updateShadows();
 		PluginsHelper.updateMapPresentationEnvironment(this);
 	}
 
@@ -524,6 +525,7 @@ public class MapRendererContext {
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
 		updateElevationConfiguration();
+		updateShadows();
 
 		if (obfMapRasterLayerProvider != null) {
 			mapRendererView.resetMapLayerProvider(providerType.layerIndex);
@@ -547,7 +549,7 @@ public class MapRendererContext {
 				return;
 			}
 			SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-			if (srtmPlugin != null && srtmPlugin.ENABLE_3D_MAP_OBJECTS.get()) {
+			if (srtmPlugin != null && app.getSettings().ENABLE_3D_MAP_OBJECTS.get()) {
 				Buildings3DColorType colorType = srtmPlugin.get3DBuildingsColorStyle();
 				boolean useCustomColor = colorType == Buildings3DColorType.CUSTOM;
 				int customColor = useCustomColor
@@ -604,6 +606,13 @@ public class MapRendererContext {
 			if (mapRenderer.remove3DObjectColor(pointI)) {
 				highlight3dObjects.remove(latLon);
 			}
+		}
+	}
+
+	public void updateShadows() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView != null) {
+			mapRendererView.castShadows(app.getSettings().CAST_SHADOWS.get());
 		}
 	}
 

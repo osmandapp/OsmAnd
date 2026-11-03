@@ -213,4 +213,9 @@ public class PanelsLayoutFragment extends BaseFullScreenFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "panels_layout";
+	}
 }

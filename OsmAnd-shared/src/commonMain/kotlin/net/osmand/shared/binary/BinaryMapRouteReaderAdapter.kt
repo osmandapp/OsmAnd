@@ -14,11 +14,10 @@ import net.osmand.shared.util.internString
  * Reads the routing section of an obf file: the encoding rules of a [RouteRegion], the r-tree of
  * boxes over its roads, and the roads of a box.
  *
- * A copy of `BinaryMapRouteReaderAdapter` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS, so a route can be calculated there without the C++ core. The
- * three data classes the java one nests - `RouteTypeRule`, `RouteRegion`, `RouteSubregion` - were
- * copied earlier and live in `net.osmand.shared.routing`. The method names are java's, so the two
- * can be compared side by side.
+ * Based on `BinaryMapRouteReaderAdapter` from OsmAnd-java. The three data classes the java one
+ * nests - `RouteTypeRule`, `RouteRegion`, `RouteSubregion` - were copied earlier and live in
+ * `net.osmand.shared.routing`. The method names are java's, so the two can be compared side by
+ * side.
  */
 class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMapIndexReader) {
 

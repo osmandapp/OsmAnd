@@ -284,4 +284,9 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "coordinates_grid";
+	}
 }

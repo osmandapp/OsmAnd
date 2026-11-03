@@ -23,6 +23,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
+import net.osmand.plus.measurementtool.adapter.FolderListAdapter;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.utils.AndroidUtils;
@@ -33,7 +34,6 @@ import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragment implements OnTrackFolderAddListener {
@@ -93,10 +93,7 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 	}
 
 	private void createFoldersItem() {
-		List<File> folders = new ArrayList<>();
-		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
-		folders.add(gpxDir);
-		Algorithms.collectDirs(gpxDir, folders);
+		List<File> folders = FolderListAdapter.collectSortedDirs(app.getAppPath(GPX_INDEX_DIR));
 
 		View view = inflate(R.layout.favorite_categories_dialog);
 		LinearLayout container = view.findViewById(R.id.list_container);
@@ -122,7 +119,7 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 		description.setText(count > 0 ? String.valueOf(count) : getString(R.string.shared_string_empty));
 
 		RadioButton compoundButton = view.findViewById(R.id.compound_button);
-		compoundButton.setChecked(Algorithms.stringsEqual(selectedFolder, folder.getName()));
+		compoundButton.setChecked(Algorithms.stringsEqual(selectedFolder, folder.getAbsolutePath()));
 		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), compoundButton);
 
 		view.setOnClickListener(v -> {

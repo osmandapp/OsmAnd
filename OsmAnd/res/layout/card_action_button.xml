@@ -11,7 +11,7 @@
 		style="@style/DescStyle.Medium"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical"
+		android:layout_gravity="center_vertical|start"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:textColor="?attr/active_color_basic"
 		tools:text="Action" />

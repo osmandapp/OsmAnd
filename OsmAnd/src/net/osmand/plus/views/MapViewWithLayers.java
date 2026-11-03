@@ -20,6 +20,7 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.flyover.MapFlyoverRecorder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -69,6 +70,10 @@ public class MapViewWithLayers extends FrameLayout {
 	}
 
 	public void setupRenderingView() {
+		if (MapFlyoverRecorder.isRendererHeld()) {
+			// a flyover renders the map off the screen; it sets up this view again when it gives the renderer back
+			return;
+		}
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		View androidAutoPlaceholder = findViewById(R.id.AndroidAutoPlaceholder);
 		boolean useAndroidAuto = carNavigationSession != null && carNavigationSession.hasStarted()
@@ -167,7 +172,10 @@ public class MapViewWithLayers extends FrameLayout {
 		if (atlasMapRendererView != null) {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
-				mapView.setMapRenderer(null, true);
+				// another view (a flyover recording) may have the map now: only our own renderer is detached
+				if (mapView.getMapRenderer() == atlasMapRendererView) {
+					mapView.setMapRenderer(null, true);
+				}
 				resetMapRendererView();
 				atlasMapRendererView.handleOnDestroy();
 			}

@@ -16,6 +16,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
@@ -83,6 +85,14 @@ public class CustomAlert {
 
 	public static void showSingleSelection(@NonNull AlertDialogData data, @NonNull SelectionDialogItem[] items,
 	                                       int selectedEntryIndex, @Nullable View.OnClickListener itemClickListener) {
+		AlertDialog dialog = createSingleSelection(data, items, selectedEntryIndex, itemClickListener);
+		dialog.show();
+		applyAdditionalParameters(dialog, data);
+	}
+
+	@NonNull
+	static AlertDialog createSingleSelection(@NonNull AlertDialogData data, @NonNull SelectionDialogItem[] items,
+	                                         int selectedEntryIndex, @Nullable View.OnClickListener itemClickListener) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
 				data.getContext(), data.getItemsLayoutRes(), items, selectedEntryIndex, null,
@@ -90,9 +100,9 @@ public class CustomAlert {
 		);
 		builder.setAdapter(adapter, null);
 
-		AlertDialog dialog = builder.show();
-		applyAdditionalParameters(dialog, data);
+		AlertDialog dialog = builder.create();
 		adapter.setDialog(dialog);
+		return dialog;
 	}
 
 	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
@@ -125,7 +135,8 @@ public class CustomAlert {
 
 	private static AlertDialog.Builder createAlertDialogBuilder(@NonNull AlertDialogData data) {
 		Context ctx = data.getContext();
-		AlertDialog.Builder builder = new Builder(ctx);
+		Drawable icon = data.getIcon();
+		AlertDialog.Builder builder = icon != null ? createIconDialogBuilder(ctx, data.isNightMode(), icon) : new Builder(ctx);
 
 		if (data.getTitle() != null) {
 			builder.setTitle(data.getTitle());
@@ -157,10 +168,20 @@ public class CustomAlert {
 		return builder;
 	}
 
+	private static AlertDialog.Builder createIconDialogBuilder(@NonNull Context ctx, boolean nightMode, @NonNull Drawable icon) {
+		Context materialCtx = UiUtilities.getThemedContext(ctx, nightMode, R.style.OsmandMaterialLightTheme, R.style.OsmandMaterialDarkTheme);
+		return new MaterialAlertDialogBuilder(materialCtx, com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered)
+				.setIcon(icon);
+	}
+
 	private static void applyAdditionalParameters(@NonNull AlertDialog dialog, @NonNull AlertDialogData data) {
 		if (data.getPositiveButtonTextColor() != null) {
 			Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
 			button.setTextColor(data.getPositiveButtonTextColor());
+		}
+		if (data.getNegativeButtonTextColor() != null) {
+			Button button = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+			button.setTextColor(data.getNegativeButtonTextColor());
 		}
 	}
 }

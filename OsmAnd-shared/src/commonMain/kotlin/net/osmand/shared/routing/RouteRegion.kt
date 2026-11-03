@@ -13,8 +13,8 @@ import kotlin.math.min
  * Roads are stored with their tags replaced by indices into [routeEncodingRules], so a road can
  * only be read through the region it came from.
  *
- * A copy of `BinaryMapRouteReaderAdapter.RouteRegion`, which stays in OsmAnd-java: android, tools and the C++ core keep using
- * the original, and this copy is for iOS. Keep the two identical.
+ * Based on `BinaryMapRouteReaderAdapter.RouteRegion` from OsmAnd-java. Keep behavior compatible
+ * with the original.
  */
 class RouteRegion : BinaryIndexPart() {
 

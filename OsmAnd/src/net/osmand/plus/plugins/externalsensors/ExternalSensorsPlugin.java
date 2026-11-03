@@ -452,10 +452,15 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	void onDevicePaired(@NonNull AbstractDevice<?> device) {
-		for (AbstractSensor sensor : device.getSensors()) {
+		onDeviceSensorsAdded(device, device.getSensors());
+	}
+
+	void onDeviceSensorsAdded(@NonNull AbstractDevice<?> device, @NonNull List<? extends AbstractSensor> addedSensors) {
+		for (AbstractSensor sensor : addedSensors) {
 			for (SensorWidgetDataFieldType widgetDataFieldType : sensor.getSupportedWidgetDataFieldTypes()) {
 				ExternalSensorTrackDataType widgetType = ExternalSensorTrackDataType.Companion.getBySensorWidgetDataFieldType(widgetDataFieldType);
-				if (widgetType != null) {
+				// an empty value is also "None" chosen by the user, keep it for the data the device already had
+				if (widgetType != null && !hasOtherSensor(device, addedSensors, widgetDataFieldType)) {
 					CommonPreference<String> deviceIdPref = getWriteToTrackDeviceIdPref(widgetType);
 					for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 						String deviceId = deviceIdPref.getModeValue(appMode);
@@ -466,6 +471,16 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 				}
 			}
 		}
+	}
+
+	private boolean hasOtherSensor(@NonNull AbstractDevice<?> device, @NonNull List<? extends AbstractSensor> sensors,
+	                               @NonNull SensorWidgetDataFieldType widgetDataFieldType) {
+		for (AbstractSensor sensor : device.getSensors()) {
+			if (!sensors.contains(sensor) && sensor.getSupportedWidgetDataFieldTypes().contains(widgetDataFieldType)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@NonNull

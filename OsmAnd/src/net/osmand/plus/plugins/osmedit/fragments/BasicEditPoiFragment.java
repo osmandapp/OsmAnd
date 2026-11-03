@@ -289,4 +289,9 @@ public class BasicEditPoiFragment extends BaseFullScreenFragment implements OnFr
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "basic_edit_poi";
+	}
 }
