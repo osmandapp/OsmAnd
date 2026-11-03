@@ -89,16 +89,38 @@ public class SensorTextWidget extends SimpleWidget {
 	}
 
 	private void applyDeviceId() {
-		AbstractDevice<?> currentDevice = null;
-		if (externalDeviceId == null || plugin.isAnyConnectedDeviceId(externalDeviceId)) {
-			List<AbstractDevice<?>> deviceList = plugin.getPairedDevicesByWidgetType(fieldType);
-			if (!Algorithms.isEmpty(deviceList)) {
-				currentDevice = deviceList.get(0);
-			}
-		} else {
-			currentDevice = plugin.getPairedDeviceById(externalDeviceId);
+		AbstractDevice<?> currentDevice = getSelectedDevice();
+		if (currentDevice == null) {
+			currentDevice = plugin.getAnyDevice(fieldType);
 		}
 		setSensor(getSensor(currentDevice));
+	}
+
+	// The settings show a forgotten device as "Any connected", so the widget treats it the same way
+	@Nullable
+	private AbstractDevice<?> getSelectedDevice() {
+		if (externalDeviceId == null || plugin.isAnyConnectedDeviceId(externalDeviceId)) {
+			return null;
+		}
+		return plugin.getPairedDeviceById(externalDeviceId);
+	}
+
+	private void updateAnyConnectedDevice() {
+		if (getSelectedDevice() != null) {
+			return;
+		}
+		AbstractDevice<?> currentDevice = getWidgetDevice();
+		if (currentDevice != null && currentDevice.isConnected()) {
+			return;
+		}
+		AbstractDevice<?> anyDevice = plugin.getAnyDevice(fieldType);
+		if (anyDevice != null && anyDevice != currentDevice && (currentDevice == null || anyDevice.isConnected())) {
+			AbstractSensor newSensor = getSensor(anyDevice);
+			if (newSensor != null) {
+				setSensor(newSensor);
+				forceUpdate = true;
+			}
+		}
 	}
 
 	public SensorTextWidget(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
@@ -168,6 +190,7 @@ public class SensorTextWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
+		updateAnyConnectedDevice();
 		if (isDeviceConnected() && (sensor != null && !Algorithms.isEmpty(sensor.getLastSensorDataList()))) {
 			if (isShowSensorData()) {
 				List<SensorData> dataList = sensor.getLastSensorDataList();
@@ -208,23 +231,6 @@ public class SensorTextWidget extends SimpleWidget {
 			}
 		} else {
 			setText(NO_VALUE, null);
-		}
-		AbstractDevice<?> currentDevice = null;
-		if (sensor != null) {
-			currentDevice = this.sensor.getDevice();
-		}
-		if (plugin.isAnyConnectedDeviceId(externalDeviceId) &&
-				(currentDevice == null || (!currentDevice.isConnected() && !currentDevice.isConnecting()))) {
-			AbstractDevice<?> device = plugin.getAnyDevice(getFieldType());
-			if (device != null) {
-				AbstractSensor newSensor = getSensor(device);
-				if (newSensor != null) {
-					if (currentDevice != null) {
-						currentDevice.removeListener(deviceListener);
-					}
-					setSensor(newSensor);
-				}
-			}
 		}
 		setImageDrawable(getIconId());
 		forceUpdate = false;
