@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="cast_shadows">Shadows</string>
 	<string name="build_update_size">upd %1$s</string>
 	<string name="build_update_size_estimated">upd ~%1$s</string>
 	<string name="astro_ar_mode">AR mode</string>
