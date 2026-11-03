@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -40,6 +41,9 @@ public class SpatialSearchRanking {
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
+	/** "lidl espoo": a POI found together with a city that the map places in another city of the same kind - a city is
+	 *  matched by its bbox, and the bbox of Espoo with its sea area covers Helsinki */
+	public double wOutsideCity = 1.0;
 	/** elo above MIN_ELO_RATING at which the rating term saturates */
 	public double ratingSpan = 1200.0;
 
@@ -131,7 +135,60 @@ public class SpatialSearchRanking {
 		Double km = center == null ? null : SpatialSearchResult.getDistance(r, center) / 1000.0;
 		return score(nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
 				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r))
-				- (head.atom.ruleSpelling ? wRuleSpelling : 0);
+				- (head.atom.ruleSpelling ? wRuleSpelling : 0)
+				- (outsideMatchedCity(r) ? wOutsideCity : 0);
+	}
+
+	/**
+	 * The POI carries the settlements whose boundaries hold it (tag groups of the map: name, name:xx, place). It is
+	 * outside the city the query named when it holds a settlement of the same kind under another name: a Lidl in
+	 * Helsinki is in the city Helsinki, not in Espoo. No settlement of that kind (a village without its own boundary,
+	 * a map without tag groups) - nothing is known, nothing changes.
+	 */
+	static boolean outsideMatchedCity(SpatialSearchResult r) {
+		SpatialSearchResultRef head = r.getFirstRef();
+		if (head == null || !(head.atom.object instanceof Amenity a) || Algorithms.isEmpty(a.getTagGroups())) {
+			return false;
+		}
+		for (int i = 1; i < r.objs.size(); i++) {
+			if (r.objs.get(i).atom.object instanceof City c && c.getType() != null
+					&& c.getType().storedAsSeparateAdminEntity() && c.getType() != City.CityType.POSTCODE) {
+				return outsideCity(a, c);
+			}
+		}
+		return false;
+	}
+
+	private static boolean outsideCity(Amenity a, City c) {
+		String kind = c.getType().name().toLowerCase();
+		boolean sameKind = false;
+		for (List<TagValuePair> group : a.getTagGroups().values()) {
+			boolean kindMatches = false, nameMatches = false;
+			for (TagValuePair p : group) {
+				if (p.tag.equals("place")) {
+					kindMatches = kind.equals(p.value);
+				} else if (p.tag.equals("name") || p.tag.startsWith("name:")) {
+					nameMatches |= isNameOf(c, p.value);
+				}
+			}
+			if (kindMatches && nameMatches) {
+				return false;
+			}
+			sameKind |= kindMatches;
+		}
+		return sameKind;
+	}
+
+	private static boolean isNameOf(City c, String name) {
+		if (name.equalsIgnoreCase(c.getName())) {
+			return true;
+		}
+		for (String n : c.getNamesMap(true).values()) {
+			if (name.equalsIgnoreCase(n)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
