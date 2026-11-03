@@ -18,6 +18,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.RoadsLookup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -32,6 +33,7 @@ import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +47,9 @@ public class BasicInfoHolder extends RecyclerView.ViewHolder {
 	private final boolean nightMode;
 	private final EditText streetEditText;
 	private final View streetFromMapButton;
+	// the number the button put in, replaced or cleared with the next street; a typed one is kept
+	@Nullable
+	private String numberFromMap;
 	private final EditText houseNumberEditText;
 	private final EditText phoneEditText;
 	private final EditText webSiteEditText;
@@ -119,11 +124,14 @@ public class BasicInfoHolder extends RecyclerView.ViewHolder {
 		location.setLatitude(latLon.getLatitude());
 		location.setLongitude(latLon.getLongitude());
 		streetFromMapButton.setEnabled(false);
-		app.getGeocodingLookupService().findRoads(location, RoadsLookup.ADDRESS, false, null, roads -> {
+		GeocodingLookupService service = app.getGeocodingLookupService();
+		service.findRoads(location, RoadsLookup.ADDRESS, false, null, roads -> {
 			Map<String, Double> streets = getNearestStreets(roads);
+			Map<String, String> buildings = streets.isEmpty()
+					? new HashMap<>() : getNearestBuildings(service.findAddresses(roads));
 			app.runInUIThread(() -> {
 				streetFromMapButton.setEnabled(true);
-				onStreetsFound(streets);
+				onStreetsFound(streets, buildings);
 			});
 		});
 	}
@@ -160,18 +168,34 @@ public class BasicInfoHolder extends RecyclerView.ViewHolder {
 		return streets;
 	}
 
-	private void onStreetsFound(@NonNull Map<String, Double> streets) {
+	// the number of the nearest building on every street; addresses come nearest first
+	@NonNull
+	private static Map<String, String> getNearestBuildings(@NonNull List<GeocodingResult> addresses) {
+		Map<String, String> buildings = new HashMap<>();
+		for (GeocodingResult address : addresses) {
+			RouteDataObject road = address.point != null ? address.point.getRoad() : null;
+			String street = road != null ? road.getName() : null;
+			String number = address.getBuildingString();
+			if (!Algorithms.isEmpty(street) && !Algorithms.isEmpty(number) && !buildings.containsKey(street)) {
+				buildings.put(street, number);
+			}
+		}
+		return buildings;
+	}
+
+	private void onStreetsFound(@NonNull Map<String, Double> streets, @NonNull Map<String, String> buildings) {
 		if (streets.isEmpty()) {
 			app.showShortToastMessage(R.string.street_name_not_found_nearby);
 		} else if (streets.size() == 1) {
-			setStreet(streets.keySet().iterator().next());
+			String street = streets.keySet().iterator().next();
+			setAddress(street, buildings.get(street));
 		} else {
 			List<PopUpMenuItem> items = new ArrayList<>();
 			for (Map.Entry<String, Double> street : streets.entrySet()) {
 				items.add(new PopUpMenuItem.Builder(app)
 						.setTitle(street.getKey())
 						.setTrailingText(OsmAndFormatter.getFormattedDistance(street.getValue().floatValue(), app))
-						.setOnClickListener(item -> setStreet(street.getKey()))
+						.setOnClickListener(item -> setAddress(street.getKey(), buildings.get(street.getKey())))
 						.create());
 			}
 			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
@@ -182,8 +206,16 @@ public class BasicInfoHolder extends RecyclerView.ViewHolder {
 		}
 	}
 
-	private void setStreet(@NonNull String street) {
+	// the number is a guess from the nearest building on the street, the user corrects it if needed
+	private void setAddress(@NonNull String street, @Nullable String number) {
 		streetEditText.setText(street);
 		streetEditText.setSelection(streetEditText.length());
+		String current = houseNumberEditText.getText().toString();
+		if (!Algorithms.isEmpty(number)) {
+			houseNumberEditText.setText(number);
+		} else if (numberFromMap != null && numberFromMap.equals(current)) {
+			houseNumberEditText.setText(null);
+		}
+		numberFromMap = number;
 	}
 }
