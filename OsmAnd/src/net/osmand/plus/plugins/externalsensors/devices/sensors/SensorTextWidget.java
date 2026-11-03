@@ -156,6 +156,11 @@ public class SensorTextWidget extends SimpleWidget {
 		}
 	}
 
+	@Override
+	public void destroyWidget() {
+		setSensor(null);
+	}
+
 	@Nullable
 	public AbstractDevice<?> getWidgetDevice() {
 		return sensor == null ? null : sensor.device;
