@@ -36,7 +36,7 @@ open class BaseDetailsObject(private val lang: String?) {
 
 	private var objectCompleteness = ObjectCompleteness.EMPTY
 
-	private enum class ObjectCompleteness {
+	enum class ObjectCompleteness {
 		EMPTY,
 		COMBINED,
 		FULL
@@ -58,6 +58,18 @@ open class BaseDetailsObject(private val lang: String?) {
 		if (objects.isNotEmpty()) {
 			objectCompleteness = if (containsAmenity) ObjectCompleteness.FULL else ObjectCompleteness.COMBINED
 		}
+	}
+
+	/** Imports an already combined result, including data not present in its component objects. */
+	constructor(
+		mapObjects: List<MapObject>, amenity: Amenity, lang: String?, completeness: ObjectCompleteness
+	) : this(lang) {
+		for (obj in mapObjects) {
+			addObjectNoCombine(obj)
+		}
+		require(objects.isNotEmpty() || completeness == ObjectCompleteness.EMPTY)
+		syntheticAmenity = amenity
+		objectCompleteness = completeness
 	}
 
 	fun getSyntheticAmenity(): Amenity = syntheticAmenity
