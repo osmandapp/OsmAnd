@@ -1,9 +1,11 @@
 package net.osmand.plus.settings.backend.backup.items;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -18,8 +20,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.plus.settings.backend.backup.exporttype.MapSourcesExportType;
 import net.osmand.util.Algorithms;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
@@ -40,6 +45,7 @@ public class MapSourcesSettingsItemTest {
 	private static final String TEST_SOURCE_PREFIX = "map_sources_backup_test_";
 
 	private final List<File> filesToDelete = new ArrayList<>();
+	private final List<SQLiteTileSource> sourcesToClose = new ArrayList<>();
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -73,9 +79,18 @@ public class MapSourcesSettingsItemTest {
 		} else {
 			settings.MAP_SOURCES_LOCAL_MODIFIED_TIME.resetToDefault();
 		}
+		for (SQLiteTileSource source : sourcesToClose) {
+			source.closeConnection();
+		}
 		for (File file : filesToDelete) {
 			Algorithms.removeAllFiles(file);
 		}
+	}
+
+	@Test
+	public void emptyStateHashMatchesSha256() {
+		assertEquals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+				MapSourcesSettingsItem.getStateHash(Collections.emptyList()));
 	}
 
 	@Test
@@ -237,16 +252,17 @@ public class MapSourcesSettingsItemTest {
 	}
 
 	@Test
-	public void fileTimestampChangeDoesNotChangeInitializedLogicalTime() throws IOException {
+	public void fileTimestampChangeDoesNotChangeInitializedLogicalTime() {
 		TileSourceTemplate source = createSource(TEST_SOURCE_PREFIX + System.nanoTime(), "https://example.com/{0}/{1}/{2}");
-		File metainfo = createMetainfoFile(source.getName());
 		MapSourcesSettingsItem item = new MapSourcesSettingsItem(app, Collections.singletonList(source));
+		installItem(item);
+		File metainfo = new File(app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName()), ".metainfo");
 		long baseline = System.currentTimeMillis() - 60_000L;
 		item.setLocalModifiedTime(baseline);
 
 		assertTrue(metainfo.setLastModified(System.currentTimeMillis()));
 
-		assertEquals(baseline, item.getLocalModifiedTime());
+		assertEquals(baseline, getLocalItem().getLocalModifiedTime());
 	}
 
 	@Test
@@ -260,7 +276,7 @@ public class MapSourcesSettingsItemTest {
 
 			assertTrue(file.setLastModified(System.currentTimeMillis()));
 
-			assertEquals(baseline, item.getLocalModifiedTime());
+			assertEquals(baseline, getLocalItem().getLocalModifiedTime());
 		} finally {
 			source.closeDB();
 		}
@@ -268,25 +284,247 @@ public class MapSourcesSettingsItemTest {
 
 	@Test
 	public void sourceConfigurationChangeAdvancesLogicalTime() {
-		TileSourceTemplate source = createSource("Source", "https://example.com/{0}/{1}/{2}");
+		TileSourceTemplate source = createSource(TEST_SOURCE_PREFIX + System.nanoTime(), "https://example.com/{0}/{1}/{2}");
 		MapSourcesSettingsItem item = new MapSourcesSettingsItem(app, Collections.singletonList(source));
+		installItem(item);
 		long baseline = System.currentTimeMillis() - 60_000L;
 		item.setLocalModifiedTime(baseline);
 
 		source.setReferer("https://osmand.net");
+		assertTrue(settings.installTileSource(source));
 
-		assertTrue(item.getLocalModifiedTime() > baseline);
+		assertTrue(getLocalItem().getLocalModifiedTime() > baseline);
 	}
 
 	@Test
 	public void cloudModifiedTimeRemainsStableWhenStateDoesNotChange() {
-		TileSourceTemplate source = createSource("Source", "https://example.com/{0}/{1}/{2}");
+		TileSourceTemplate source = createSource(TEST_SOURCE_PREFIX + System.nanoTime(), "https://example.com/{0}/{1}/{2}");
 		MapSourcesSettingsItem item = new MapSourcesSettingsItem(app, Collections.singletonList(source));
+		installItem(item);
 		long remoteTime = System.currentTimeMillis() - 60_000L;
 
 		item.setLocalModifiedTime(remoteTime);
 
-		assertEquals(remoteTime, item.getLocalModifiedTime());
+		assertEquals(remoteTime, getLocalItem().getLocalModifiedTime());
+	}
+
+	@Test
+	public void unreadDownloadDoesNotChangeBackupState() throws Exception {
+		TileSourceTemplate source = createSource(TEST_SOURCE_PREFIX + System.nanoTime(), "https://example.com/{0}/{1}/{2}");
+		MapSourcesSettingsItem item = new MapSourcesSettingsItem(app, Collections.singletonList(source));
+		installItem(item);
+		long baseline = System.currentTimeMillis() - 120_000L;
+		item.setLocalModifiedTime(baseline);
+		String stateHash = settings.MAP_SOURCES_BACKUP_STATE_HASH.get();
+		MapSourcesSettingsItem unread = new MapSourcesSettingsItem(app,
+				new JSONObject().put("type", "MAP_SOURCES").put("file", "map_sources.json"));
+
+		unread.setLocalModifiedTime(baseline + 60_000L);
+
+		assertEquals(stateHash, settings.MAP_SOURCES_BACKUP_STATE_HASH.get());
+		assertEquals(baseline, settings.MAP_SOURCES_LOCAL_MODIFIED_TIME.get().longValue());
+		assertEquals(baseline, getLocalItem().getLocalModifiedTime());
+	}
+
+	@Test
+	public void emptyDownloadDoesNotInitializeBackupState() throws Exception {
+		MapSourcesSettingsItem empty = new MapSourcesSettingsItem(app, new JSONObject().put("items", new JSONArray()));
+
+		empty.setLocalModifiedTime(System.currentTimeMillis());
+
+		assertFalse(settings.MAP_SOURCES_BACKUP_STATE_HASH.isSet());
+		assertFalse(settings.MAP_SOURCES_LOCAL_MODIFIED_TIME.isSet());
+	}
+
+	@Test
+	public void failedJsonReadDoesNotAcknowledgePartialState() throws Exception {
+		MapSourcesSettingsItem original = new MapSourcesSettingsItem(app, Collections.singletonList(
+				createSource("Source", "https://example.com/{0}/{1}/{2}")));
+		JSONObject json = original.writeItemsToJson(new JSONObject());
+		json.getJSONArray("items").put("invalid source");
+		MapSourcesSettingsItem remote = new MapSourcesSettingsItem(app,
+				new JSONObject().put("type", "MAP_SOURCES").put("file", "map_sources.json"));
+		settings.MAP_SOURCES_BACKUP_STATE_HASH.set("previous-state");
+		settings.MAP_SOURCES_LOCAL_MODIFIED_TIME.set(100L);
+
+		try {
+			remote.readItemsFromJson(json);
+			fail("Invalid source must fail the entire read");
+		} catch (IllegalArgumentException expected) {
+			assertTrue(remote.getItems().isEmpty());
+		}
+		remote.setLocalModifiedTime(200L);
+
+		assertEquals("previous-state", settings.MAP_SOURCES_BACKUP_STATE_HASH.get());
+		assertEquals(100L, settings.MAP_SOURCES_LOCAL_MODIFIED_TIME.get().longValue());
+		remote.readItemsFromJson(original.writeItemsToJson(new JSONObject()));
+		assertEquals(1, remote.getItems().size());
+	}
+
+	@Test
+	public void restoredSqliteNumericUrlDoesNotCreateLocalChange() throws Exception {
+		assertInstalledStateKeepsRemoteTime(true, "https://example.com/{0}/{1}/{2}", 60, ".png");
+	}
+
+	@Test
+	public void restoredSqliteUrlNormalizationDoesNotCreateLocalChange() throws Exception {
+		assertInstalledStateKeepsRemoteTime(true, "https://example.com/{z}/{x}/{y}", 60, ".png");
+	}
+
+	@Test
+	public void restoredSqliteZeroExpirationDoesNotCreateLocalChange() throws Exception {
+		assertInstalledStateKeepsRemoteTime(true, "https://example.com/{0}/{1}/{2}", 0, ".png");
+	}
+
+	@Test
+	public void restoredDirectoryWithoutExtensionDoesNotCreateLocalChange() throws Exception {
+		assertInstalledStateKeepsRemoteTime(false, "https://example.com/{0}/{1}/{2}", 60, null);
+	}
+
+	@Test
+	public void restoringSubsetPreservesLocalAdditions() {
+		MapSourcesSettingsItem existing = new MapSourcesSettingsItem(app, Collections.singletonList(
+				createSource(TEST_SOURCE_PREFIX + System.nanoTime(), "https://local.example/{0}/{1}/{2}")));
+		installItem(existing);
+		MapSourcesSettingsItem imported = new MapSourcesSettingsItem(app, Collections.singletonList(
+				createSource(TEST_SOURCE_PREFIX + System.nanoTime(), "https://remote.example/{0}/{1}/{2}")));
+		installItem(imported);
+		long remoteTime = System.currentTimeMillis() - 60_000L;
+
+		imported.setLocalModifiedTime(remoteTime);
+
+		assertEquals(MapSourcesSettingsItem.getStateHash(imported.getItems()), settings.MAP_SOURCES_BACKUP_STATE_HASH.get());
+		long localTime = getLocalItem().getLocalModifiedTime();
+		assertTrue(localTime > remoteTime);
+		assertEquals(localTime, getLocalItem().getLocalModifiedTime());
+	}
+
+	@Test
+	public void failedDirectoryInstallationCanBeRetried() throws IOException {
+		TileSourceTemplate source = createSource(TEST_SOURCE_PREFIX + System.nanoTime(), "https://example.com/{0}/{1}/{2}");
+		MapSourcesSettingsItem item = new MapSourcesSettingsItem(app, Collections.singletonList(source));
+		File blocker = app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName());
+		filesToDelete.add(blocker);
+		assertTrue(blocker.createNewFile());
+
+		item.apply();
+
+		assertFalse(item.isAppliedLocally());
+		assertTrue(item.getAppliedItems().isEmpty());
+		assertTrue(blocker.delete());
+		item.apply();
+		assertTrue(item.isAppliedLocally());
+		assertEquals(1, item.getAppliedItems().size());
+	}
+
+	@Test
+	public void failedSqliteOpenIsNotApplied() {
+		String name = TEST_SOURCE_PREFIX + System.nanoTime();
+		SQLiteTileSource source = new SQLiteTileSource(app, name, 1, 20, "https://example.com/{0}/{1}/{2}", "",
+				false, false, "", "", false, -1, false, "");
+		MapSourcesSettingsItem item = new MapSourcesSettingsItem(app, Collections.singletonList(source));
+		File blocker = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name + IndexConstants.SQLITE_EXT);
+		filesToDelete.add(blocker);
+		assertTrue(blocker.mkdirs());
+
+		item.apply();
+
+		assertFalse(item.isAppliedLocally());
+		assertTrue(item.getAppliedItems().isEmpty());
+	}
+
+	@Test
+	public void failedSqliteWriteIsNotApplied() {
+		String name = TEST_SOURCE_PREFIX + System.nanoTime();
+		SQLiteTileSource source = new SQLiteTileSource(app, name, 1, 20, "https://example.com/{0}/{1}/{2}", "",
+				false, false, "", "", false, -1, false, "");
+		MapSourcesSettingsItem item = new MapSourcesSettingsItem(app, Collections.singletonList(source));
+		File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name + IndexConstants.SQLITE_EXT);
+		filesToDelete.add(file);
+		SQLiteConnection db = app.getSQLiteAPI().getOrCreateDatabase(file.getAbsolutePath(), true);
+		assertNotNull(db);
+		try {
+			db.execSQL("CREATE TABLE tiles (unexpected int)");
+		} finally {
+			db.close();
+		}
+
+		item.apply();
+
+		assertFalse(item.isAppliedLocally());
+		assertTrue(item.getAppliedItems().isEmpty());
+	}
+
+	@Test
+	public void partialInstallationIsNotApplied() throws IOException {
+		TileSourceTemplate installed = createSource(TEST_SOURCE_PREFIX + System.nanoTime(), "https://first.example/{0}/{1}/{2}");
+		TileSourceTemplate failed = createSource(TEST_SOURCE_PREFIX + System.nanoTime(), "https://second.example/{0}/{1}/{2}");
+		MapSourcesSettingsItem item = new MapSourcesSettingsItem(app, Arrays.asList(installed, failed));
+		File blocker = app.getAppPath(IndexConstants.TILES_INDEX_DIR + failed.getName());
+		filesToDelete.add(app.getAppPath(IndexConstants.TILES_INDEX_DIR + installed.getName()));
+		filesToDelete.add(blocker);
+		assertTrue(blocker.createNewFile());
+
+		item.apply();
+
+		assertFalse(item.isAppliedLocally());
+		assertEquals(Collections.singletonList(installed), item.getAppliedItems());
+	}
+
+	@Test
+	public void emptySourcesAreOmittedFromExport() {
+		assertTrue(app.getFileSettingsHelper().getFilteredSettingsItems(
+				Collections.singletonMap(ExportType.MAP_SOURCES, Collections.emptyList()),
+				Collections.singletonList(ExportType.MAP_SOURCES), Collections.emptyList(), true).isEmpty());
+	}
+
+	@Test
+	public void getNewItemsReturnsIndependentMutableList() {
+		TileSourceTemplate source = createSource("Source", "https://example.com/{0}/{1}/{2}");
+		MapSourcesSettingsItem item = new MapSourcesSettingsItem(app, Collections.singletonList(source));
+
+		List<ITileSource> newItems = item.getNewItems();
+		newItems.clear();
+		newItems.add(createSource("Other", "https://other.example/{0}/{1}/{2}"));
+
+		assertEquals(Collections.singletonList(source), item.getItems());
+		assertEquals(Collections.singletonList(source), item.getNewItems());
+	}
+
+	@Test
+	public void replacingExistingSourceIsApplied() {
+		TileSourceTemplate source = createSource(TEST_SOURCE_PREFIX + System.nanoTime(), "https://example.com/{0}/{1}/{2}");
+		installItem(new MapSourcesSettingsItem(app, Collections.singletonList(source)));
+		MapSourcesSettingsItem replacement = new MapSourcesSettingsItem(app, Collections.singletonList(source));
+		replacement.setShouldReplace(true);
+
+		installItem(replacement);
+
+		assertTrue(replacement.isAppliedLocally());
+		assertEquals(1, replacement.getAppliedItems().size());
+	}
+
+	@Test
+	public void renamedSqliteImportDoesNotAcknowledgeExistingSource() {
+		String name = TEST_SOURCE_PREFIX + System.nanoTime();
+		SQLiteTileSource existing = new SQLiteTileSource(app, name, 1, 20, "https://local.example/{0}/{1}/{2}", "",
+				false, false, "", "", false, -1, false, "");
+		installItem(new MapSourcesSettingsItem(app, Collections.singletonList(existing)));
+		SQLiteTileSource incoming = new SQLiteTileSource(app, name, 1, 20, "https://remote.example/{0}/{1}/{2}", "",
+				false, false, "", "", false, -1, false, "");
+		MapSourcesSettingsItem imported = new MapSourcesSettingsItem(app, Collections.singletonList(incoming));
+		filesToDelete.add(app.getAppPath(IndexConstants.TILES_INDEX_DIR + name + "_1" + IndexConstants.SQLITE_EXT));
+		imported.processDuplicateItems();
+		imported.apply();
+		assertTrue(imported.isAppliedLocally());
+		assertEquals(name + "_1", imported.getAppliedItems().get(0).getName());
+		long remoteTime = System.currentTimeMillis() - 60_000L;
+
+		imported.setLocalModifiedTime(remoteTime);
+
+		assertEquals(MapSourcesSettingsItem.getStateHash(imported.getAppliedItems()),
+				settings.MAP_SOURCES_BACKUP_STATE_HASH.get());
+		assertTrue(getLocalItem().getLocalModifiedTime() > remoteTime);
 	}
 
 	@Test
@@ -314,6 +552,72 @@ public class MapSourcesSettingsItemTest {
 
 		assertEquals(interruptedTime, item.getLocalModifiedTime());
 		assertNotEquals("", settings.MAP_SOURCES_BACKUP_STATE_HASH.get());
+	}
+
+	private void assertInstalledStateKeepsRemoteTime(boolean sqlite, String url, long expire, String ext) throws Exception {
+		TileSourceTemplate source = createSource(TEST_SOURCE_PREFIX + System.nanoTime(), url);
+		MapSourcesSettingsItem original = new MapSourcesSettingsItem(app, Collections.singletonList(source));
+		JSONObject json = original.writeItemsToJson(new JSONObject());
+		JSONObject sourceJson = json.getJSONArray("items").getJSONObject(0);
+		sourceJson.put("sql", sqlite);
+		sourceJson.put("url", url);
+		sourceJson.put("expire", expire);
+		if (ext == null) {
+			sourceJson.remove("ext");
+		} else {
+			sourceJson.put("ext", ext);
+		}
+		MapSourcesSettingsItem restored = new MapSourcesSettingsItem(app, json);
+		installItem(restored);
+		long remoteTime = System.currentTimeMillis() - 60_000L;
+
+		restored.setLocalModifiedTime(remoteTime);
+
+		MapSourcesSettingsItem local = getLocalItem();
+		assertEquals(remoteTime, local.getLocalModifiedTime());
+		ITileSource installed = null;
+		for (ITileSource candidate : local.getItems()) {
+			if (source.getName().equals(candidate.getName())) {
+				installed = candidate;
+				break;
+			}
+		}
+		assertNotNull(installed);
+		assertEquals(sqlite ? url.replace("{z}", "{0}").replace("{x}", "{1}").replace("{y}", "{2}") : url,
+				installed.getUrlTemplate());
+		if (ext == null) {
+			assertEquals(".jpg", installed.getTileFormat());
+		}
+		if (sqlite && expire == 0) {
+			assertEquals(-1, installed.getExpirationTimeMinutes());
+		}
+		assertEquals(remoteTime, getLocalItem().getLocalModifiedTime());
+	}
+
+	private void installItem(MapSourcesSettingsItem item) {
+		List<File> installedFiles = new ArrayList<>();
+		for (ITileSource source : item.getItems()) {
+			String suffix = source instanceof SQLiteTileSource ? IndexConstants.SQLITE_EXT : "";
+			File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName() + suffix);
+			filesToDelete.add(file);
+			installedFiles.add(source instanceof SQLiteTileSource ? file : new File(file, ".metainfo"));
+		}
+		item.processDuplicateItems();
+		item.apply();
+		assertTrue("Source installation failed", item.isAppliedLocally());
+		for (File file : installedFiles) {
+			assertTrue("Source was not installed: " + file, file.isFile());
+		}
+	}
+
+	private MapSourcesSettingsItem getLocalItem() {
+		List<ITileSource> sources = new MapSourcesExportType().fetchExportData(app, false);
+		for (ITileSource source : sources) {
+			if (source instanceof SQLiteTileSource) {
+				sourcesToClose.add((SQLiteTileSource) source);
+			}
+		}
+		return new MapSourcesSettingsItem(app, sources);
 	}
 
 	private File createMetainfoFile(String sourceName) throws IOException {

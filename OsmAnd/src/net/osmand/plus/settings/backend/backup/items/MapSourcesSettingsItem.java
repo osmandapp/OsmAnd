@@ -16,8 +16,10 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.settings.backend.backup.exporttype.MapSourcesExportType;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,8 +28,10 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -116,7 +120,37 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		persistBackupState(getStateHash(items), lastModifiedTime);
+		if (items.isEmpty()) {
+			// Empty items do not provide an imported state to acknowledge.
+			return;
+		}
+		// Installation normalizes metadata, so use the same on-disk state as the next scan.
+		List<ITileSource> installedSources = new MapSourcesExportType().fetchExportData(app, false);
+		try {
+			Set<String> importedIds = new HashSet<>();
+			for (ITileSource source : appliedItems.isEmpty() ? items : appliedItems) {
+				importedIds.add(getSourceId(source));
+			}
+			List<ITileSource> importedSources = new ArrayList<>();
+			for (ITileSource source : installedSources) {
+				if (importedIds.contains(getSourceId(source))) {
+					importedSources.add(source);
+				}
+			}
+			// Sources absent from the import must remain detectable as local additions.
+			persistBackupState(getStateHash(importedSources), lastModifiedTime);
+		} finally {
+			for (ITileSource source : installedSources) {
+				if (source instanceof SQLiteTileSource) {
+					((SQLiteTileSource) source).closeConnection();
+				}
+			}
+		}
+	}
+
+	@NonNull
+	private static String getSourceId(@NonNull ITileSource source) {
+		return (source instanceof SQLiteTileSource ? "sqlite:" : "template:") + source.getName();
 	}
 
 	private void persistBackupState(@NonNull String stateHash, long lastModifiedTime) {
@@ -129,36 +163,45 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	@Override
 	public void apply() {
-		List<ITileSource> newItems = getNewItems();
-		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {
-			appliedItems = new ArrayList<>(newItems);
+		appliedItems = new ArrayList<>();
+		List<ITileSource> itemsToApply = getNewItems();
+		if (!itemsToApply.isEmpty() || !duplicateItems.isEmpty()) {
 			if (shouldReplace) {
 				for (ITileSource tileSource : duplicateItems) {
 					if (tileSource instanceof SQLiteTileSource) {
 						File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName() + IndexConstants.SQLITE_EXT);
 						if (f != null && f.exists() && Algorithms.removeAllFiles(f)) {
-							appliedItems.add(tileSource);
+							itemsToApply.add(tileSource);
 						}
 					} else if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
 						File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName());
 						if (f != null && f.exists() && f.isDirectory() && Algorithms.removeAllFiles(f)) {
-							appliedItems.add(tileSource);
+							itemsToApply.add(tileSource);
 						}
 					}
 				}
 			} else {
 				for (ITileSource tileSource : duplicateItems) {
-					appliedItems.add(renameItem(tileSource));
+					itemsToApply.add(renameItem(tileSource));
 				}
 			}
-			for (ITileSource tileSource : appliedItems) {
+			for (ITileSource tileSource : itemsToApply) {
+				boolean installed = false;
 				if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
-					app.getSettings().installTileSource((TileSourceManager.TileSourceTemplate) tileSource);
+					installed = app.getSettings().installTileSource((TileSourceManager.TileSourceTemplate) tileSource);
 				} else if (tileSource instanceof SQLiteTileSource) {
-					((SQLiteTileSource) tileSource).createDataBase();
+					installed = ((SQLiteTileSource) tileSource).tryCreateDataBase();
+				}
+				if (installed) {
+					appliedItems.add(tileSource);
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean isAppliedLocally() {
+		return !items.isEmpty() && appliedItems.size() == items.size();
 	}
 
 	@Override
@@ -223,6 +266,7 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 				return;
 			}
 			JSONArray jsonArray = json.getJSONArray("items");
+			List<ITileSource> sources = new ArrayList<>(jsonArray.length());
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject object = jsonArray.getJSONObject(i);
 				boolean sql = object.optBoolean("sql");
@@ -264,8 +308,9 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 					template = SQLiteTileSource.fromBackup(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY,
 							referer, userAgent, timeSupported, expire, inversiveZoom, rule, ext, tileSize, bitDensity, avgSize);
 				}
-				items.add(template);
+				sources.add(template);
 			}
+			items.addAll(sources);
 		} catch (JSONException e) {
 			warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 			throw new IllegalArgumentException("Json parse error", e);
@@ -299,7 +344,8 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 		for (MapSourceBackupState sourceState : sourceStates) {
 			appendField(state, sourceState.canonicalState);
 		}
-		return DigestUtils.sha256Hex(state.toString());
+		// Older Android versions provide a platform Hex class without encodeHexString().
+		return new String(Hex.encodeHex(DigestUtils.sha256(state.toString())));
 	}
 
 	@NonNull
@@ -318,7 +364,7 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	private static final class MapSourceBackupState {
 
-		private final SortedMap<String, BackupProperty> properties = new TreeMap<>();
+		private final SortedMap<String, Object> properties = new TreeMap<>();
 		private final String canonicalState;
 
 		private MapSourceBackupState(@NonNull ITileSource source) {
@@ -345,40 +391,31 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 			// Legacy SQLite sources can discover and persist this value when a tile is
 			// decoded. Keep it in backup, but do not treat derived runtime metadata as
 			// a semantic source change. Directory-source tile size remains semantic.
-			put("tileSize", source.getTileSize(), !sqlite);
+			put("tileSize", source.getTileSize());
 			put("bitDensity", source.getBitDensity());
 			put("avgSize", source.getAvgSize());
 			put("rule", normalizeString(source.getRule()));
-			canonicalState = createCanonicalState();
+			canonicalState = createCanonicalState(sqlite);
 		}
 
 		private void put(@NonNull String name, @NonNull Object value) {
-			put(name, value, true);
-		}
-
-		private void put(@NonNull String name, @NonNull Object value, boolean hashRelevant) {
-			properties.put(name, new BackupProperty(value, hashRelevant));
+			properties.put(name, value);
 		}
 
 		@NonNull
-		private JSONObject toJson() throws JSONException {
-			JSONObject json = new JSONObject();
-			for (Map.Entry<String, BackupProperty> property : properties.entrySet()) {
-				json.put(property.getKey(), property.getValue().value);
-			}
-			return json;
+		private JSONObject toJson() {
+			return new JSONObject(properties);
 		}
 
 		@NonNull
-		private String createCanonicalState() {
+		private String createCanonicalState(boolean sqlite) {
 			StringBuilder state = new StringBuilder();
-			for (Map.Entry<String, BackupProperty> entry : properties.entrySet()) {
-				BackupProperty property = entry.getValue();
-				if (!property.hashRelevant) {
+			for (Map.Entry<String, Object> entry : properties.entrySet()) {
+				if (sqlite && "tileSize".equals(entry.getKey())) {
 					continue;
 				}
 				appendField(state, entry.getKey());
-				Object value = property.value;
+				Object value = entry.getValue();
 				appendField(state, value instanceof Boolean ? "boolean" : value instanceof Number ? "number" : "string");
 				appendField(state, value);
 			}
@@ -388,17 +425,6 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 		@NonNull
 		private static String normalizeString(@Nullable String value) {
 			return value != null ? value : "";
-		}
-
-		private static final class BackupProperty {
-
-			private final Object value;
-			private final boolean hashRelevant;
-
-			private BackupProperty(@NonNull Object value, boolean hashRelevant) {
-				this.value = value;
-				this.hashRelevant = hashRelevant;
-			}
 		}
 	}
 
