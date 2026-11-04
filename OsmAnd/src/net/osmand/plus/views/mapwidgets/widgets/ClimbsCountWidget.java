@@ -268,15 +268,6 @@ public class ClimbsCountWidget extends SimpleWidget {
 			double elevationGain = currPoint.getEle() - prevPoint.getEle();
 			double segmentDistance = MapUtils.getDistance(prevPoint.getLatitude(), prevPoint.getLongitude(), currPoint.getLatitude(), currPoint.getLongitude());
 
-			// Track cumulative distance from start of route
-			if (i == 1) {
-				climbDistanceProfile.add(0.0);
-				climbElevationProfile.add(prevPoint.getEle());
-			}
-
-			climbDistanceProfile.add(climbDistanceProfile.get(climbDistanceProfile.size() - 1) + segmentDistance);
-			climbElevationProfile.add(currPoint.getEle());
-
 			if (!inClimb) {
 				// Not in a climb, check if we should start one
 				if (elevationGain > 0) {
@@ -292,27 +283,39 @@ public class ClimbsCountWidget extends SimpleWidget {
 					climbDistanceProfile.add(0.0);
 					climbElevationProfile.add(currPoint.getEle());
 					climbDistanceProfile.add(segmentDistance);
+				} else {
+					// Not in a climb and not climbing - reset profiles
+					climbElevationProfile = new ArrayList<>();
+					climbDistanceProfile = new ArrayList<>();
 				}
 			} else {
-				// We're in a climb
-				if (elevationGain > 0) {
-					// Still climbing
+				// We're in a climb - add to profiles
+				climbElevationProfile.add(currPoint.getEle());
+				if (climbDistanceProfile.isEmpty()) {
+					climbDistanceProfile.add(segmentDistance);
+				} else {
+					climbDistanceProfile.add(climbDistanceProfile.get(climbDistanceProfile.size() - 1) + segmentDistance);
+				}
+
+				if (elevationGain >= 0) {
+					// Still climbing or flat
 					currentClimbGain += elevationGain;
 					currentClimbDistance += segmentDistance;
 					netClimbGain += elevationGain;
 				} else {
-					// Descending or flat - reduce net gain but don't end climb yet
+					// Descending - reduce net gain but don't end climb yet
 					netClimbGain += elevationGain;
 					currentClimbDistance += segmentDistance;
 
-					// Only end climb if we have significant descent (more than 1m) AND net gain is still positive
-					// OR if net gain has gone negative (we've descended more than we climbed)
-					if (elevationGain < -1 || netClimbGain <= 0) {
+					// End climb only if net gain has gone negative (we've descended more than we climbed)
+					if (netClimbGain <= 0) {
 						// End of climb - check if it meets criteria
-						if (netClimbGain >= minElevation) {
-							float avgGrade = calculateGrade(netClimbGain, currentClimbDistance);
+						// Use the positive gain we had before this descent
+						double totalGain = currentClimbGain;
+						if (totalGain >= minElevation) {
+							float avgGrade = calculateGrade(totalGain, currentClimbDistance);
 							if (avgGrade >= minGrade) {
-								Climb climb = createClimb(climbStartIndex, i - 1, netClimbGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
+								Climb climb = createClimb(climbStartIndex, i - 1, totalGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
 								result.climbs.add(climb);
 								result.info.totalClimbs++;
 							}
@@ -324,10 +327,10 @@ public class ClimbsCountWidget extends SimpleWidget {
 		}
 
 		// Handle the last climb if we're still in one
-		if (inClimb && netClimbGain >= minElevation) {
-			float avgGrade = calculateGrade(netClimbGain, currentClimbDistance);
+		if (inClimb && currentClimbGain >= minElevation) {
+			float avgGrade = calculateGrade(currentClimbGain, currentClimbDistance);
 			if (avgGrade >= minGrade) {
-				Climb climb = createClimb(climbStartIndex, allPoints.size() - 1, netClimbGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
+				Climb climb = createClimb(climbStartIndex, allPoints.size() - 1, currentClimbGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
 				result.climbs.add(climb);
 				result.info.totalClimbs++;
 			}
