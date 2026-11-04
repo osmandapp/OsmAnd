@@ -5405,4 +5405,5 @@
     <string name="average_vertical_speed">Átlagos függőleges sebesség</string>
     <string name="public_transport_route_out_of_memory">Túl hosszú a tömegközlekedési útvonal ahhoz, hogy ezen az eszközön kiszámítható legyen. Válasszon egy közelebbi úti célt.</string>
     <string name="build_update_size_estimated">becsült letöltési idő: ~%1$s</string>
+    <string name="release_5_5">• A térbeli keresés alapértelmezés szerint be van kapcsolva: hely környékén történő keresés, jobb rangsorolás, szinonimák, elírás-tolerancia\n\n • A 3D épületek árnyékot vetnek; a nap iránya beállítható\n\n • Panoramax bővítmény: utcaszintű képek a térképen\n\n • Médiakönyvtár: az összes fénykép, videó és hangjegyzet egy helyen\n\n • Szaggatott és pontozott útvonalvonalak, alapértelmezett megjelenés útvonalmappánként\n\n • Utazási sebesség-beállítások az útvonaltervezéshez és az érkezési idő kiszámításához\n\n • Android Auto: legutóbbi úti célok, automatikus „Szabad utazás” funkció, Google Assistant és Gemini\n\n • Gyorsművelet az útvonalak megjelenítéséhez vagy elrejtéséhez\n\n • A kontúrvonalak feliratai felfelé néznek</string>
 </resources>
