@@ -81,6 +81,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
 import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
@@ -903,7 +904,19 @@ public class OsmandSettings {
 
 	public static final String NUMBER_OF_FREE_DOWNLOADS_ID = "free_downloads_v3";
 
-	private final OsmandPreference<String> PLUGINS = new StringPreference(this, "enabled_plugins", "").makeGlobal().makeShared();
+	private final OsmandPreference<String> PLUGINS = new StringPreference(this, "enabled_plugins", "") {
+		@Override
+		public boolean writeToJson(@NonNull JSONObject json, @Nullable ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				return super.writeToJson(json, appMode);
+			}
+			// iOS interprets missing IDs as disabled, so defaults must be exported too.
+			Set<String> plugins = getPlugins();
+			plugins.addAll(PluginsHelper.getDefaultEnabledPluginIds(plugins));
+			json.put(getId(), TextUtils.join(",", plugins));
+			return true;
+		}
+	}.makeGlobal().makeShared();
 
 	public Set<String> getEnabledPlugins() {
 		String plugs = PLUGINS.get();
