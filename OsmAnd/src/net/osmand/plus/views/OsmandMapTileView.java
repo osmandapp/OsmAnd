@@ -41,6 +41,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
+import net.osmand.data.TiltedMapFit;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
@@ -80,7 +81,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,13 +112,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final long ANIMATION_PREVIEW_TIME = 1500;
 	private static final float ZOOM_STEP_TO_FIT = 0.05f;
 	private static final float MARGIN_PERCENT_TO_FIT = 0.8f;
-	// Fitting on a tilted map, see fitRectToTiltedMap()
-	private static final int TILTED_FIT_MAX_POINTS = 100;
-	private static final int TILTED_FIT_STEPS = 12;
-	private static final double TILTED_FIT_RATIO = 0.99;
-	private static final double TILTED_FIT_MIN_RATIO = 0.97;
-	private static final double TILTED_FIT_MAX_SQUEEZE = 5;
-	private static final float TILTED_FIT_SQUEEZE_STEP_PX = 4;
 	private static final int CHANGE_LOCATION_DIFF_METERS = 2;
 
 	private static final int LIMITED_MAX_FRAME_RATE = 20;
@@ -1897,10 +1891,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (!rotate && renderer != null && elevationAngle < DEFAULT_ELEVATION_ANGLE) {
 			// The map is drawn under the status bar, but the route is not to be fitted there
 			int statusBarPx = routeMenu && tileBoxHeightPx > 0 ? getStatusBarInsetPx() : 0;
-			float areaLeft = tb.getCenterPixelX() + dx - tbw / 2f;
-			float areaTop = tb.getCenterPixelY() + dy - tbh / 2f;
-			if (fitRectToTiltedMap(renderer, left, right, top, bottom, points, areaLeft, areaTop + statusBarPx,
-					areaLeft + tbw, areaTop + tbh, border)) {
+			float centerX = tb.getCenterPixelX() + dx;
+			float areaTop = tb.getCenterPixelY() + dy - tbh / 2f + statusBarPx;
+			float areaHeight = tbh - statusBarPx;
+			float boxTop = areaTop + areaHeight * (1 - border) / 2;
+			if (fitRectToTiltedMap(renderer, left, right, top, bottom, points, centerX - tbw * border / 2, boxTop,
+					centerX + tbw * border / 2, boxTop + areaHeight * border)) {
 				return;
 			}
 		}
@@ -1940,162 +1936,39 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	/**
-	 * Fits the rect into a screen area of a tilted map. The tile box math of fitRectToMap() is flat: on a tilted
-	 * map the ground above the map target is squeezed towards the horizon, and the rect ends up far from the
-	 * area, e.g. behind the route preview menu.
-	 * <p>
-	 * The box is the area without the margins, and its top is not higher than the row where the ground is
-	 * squeezed TILTED_FIT_MAX_SQUEEZE times more than at the box bottom: higher a route is a line at the
-	 * horizon. The screen bbox of the points is then centered in the box and scaled to it, a few times over, as
-	 * the perspective makes each step approximate. Tilt and rotation are kept.
+	 * Fits the points, or the rect corners, into a screen box of a tilted map. The tile box math of
+	 * fitRectToMap() is flat, while on a tilted map the ground above the map target is squeezed towards the
+	 * horizon: see TiltedMapFit.
 	 *
-	 * @param points the points to fit, the rect corners when null
-	 * @return false when the points could not be fitted, e.g. the box is above the horizon
+	 * @return false if they could not be fitted, e.g. the box is over the horizon
 	 */
 	private boolean fitRectToTiltedMap(@NonNull MapRendererView renderer, double left, double right,
 	                                   double top, double bottom, @Nullable List<LatLon> points,
-	                                   float areaLeft, float areaTop, float areaRight, float areaBottom,
-	                                   float border) {
-		// The renderer must show the map as startMoving() will move it, not mid-animation
+	                                   float boxLeft, float boxTop, float boxRight, float boxBottom) {
+		// The renderer has to show the map as startMoving() will move it, not in the middle of an animation
 		animatedDraggingThread.stopAnimatingSync();
-		areaLeft = Math.max(0, areaLeft);
-		areaTop = Math.max(0, areaTop);
-		areaRight = Math.min(currentViewport.getPixWidth(), areaRight);
-		areaBottom = Math.min(currentViewport.getPixHeight(), areaBottom);
-		float marginX = (areaRight - areaLeft) * (1 - border) / 2;
-		float marginY = (areaBottom - areaTop) * (1 - border) / 2;
-		float x0 = areaLeft + marginX;
-		float x1 = areaRight - marginX;
-		float y1 = areaBottom - marginY;
-		float squeezedRow = getSqueezedRow(renderer, (x0 + x1) / 2, areaTop + marginY, y1);
-		float y0 = Math.max(areaTop + marginY, squeezedRow);
-		if (x1 - x0 < 1 || y1 - y0 < 1) {
-			return false;
+		if (Algorithms.isEmpty(points)) {
+			points = Arrays.asList(new LatLon(top, left), new LatLon(top, right),
+					new LatLon(bottom, right), new LatLon(bottom, left));
 		}
-		float qx = (x0 + x1) / 2;
-		float qy = (y0 + y1) / 2;
-		double[] boxGround = getGround31(renderer, qx, qy);
-		if (boxGround == null) {
-			return false;
-		}
-
-		double rectX0 = MapUtils.get31TileNumberX(left);
-		double rectX1 = MapUtils.get31TileNumberX(right);
-		double rectY0 = MapUtils.get31TileNumberY(top);
-		double rectY1 = MapUtils.get31TileNumberY(bottom);
-		double[] rectCenter = {(rectX0 + rectX1) / 2, (rectY0 + rectY1) / 2};
-		double[][] corners = {{rectX0, rectY0}, {rectX1, rectY0}, {rectX1, rectY1}, {rectX0, rectY1}};
 		PointI target = renderer.getTarget();
-		TiltedMapFit fit = new TiltedMapFit(renderer, new double[] {target.getX(), target.getY()},
-				get31Points(points, corners), boxGround, qx, qy, x1 - x0, y1 - y0,
-				currentViewport.getPixWidth(), currentViewport.getPixHeight());
-
-		double scale = 1;
-		double[] fitTarget = fit.targetFor(rectCenter, boxGround, scale);
-		double ratio = Double.NaN;
-		for (int i = 0; i < TILTED_FIT_STEPS; i++) {
-			if (!fit.center(fitTarget, scale)) {
-				// A point is off the screen or over the horizon: zoom out
-				fitTarget = fit.zoomedTarget(fitTarget, scale, scale * 2);
-				scale *= 2;
-				ratio = Double.NaN;
-				continue;
-			}
-			fitTarget = fit.getTarget();
-			ratio = fit.getRatio();
-			if (ratio == 0 || (ratio <= 1 && ratio >= TILTED_FIT_MIN_RATIO)) {
-				break;
-			}
-			double newScale = scale * ratio / TILTED_FIT_RATIO;
-			fitTarget = fit.zoomedTarget(fitTarget, scale, newScale);
-			scale = newScale;
-			ratio = Double.NaN;
-		}
-		if (Double.isNaN(ratio) || ratio > 1) {
+		TiltedMapFit fit = new TiltedMapFit(new RendererProjection(renderer), target.getX(), target.getY(),
+				elevationAngle, points, boxLeft, boxTop, boxRight, boxBottom);
+		if (!fit.fit()) {
 			return false;
 		}
-
-		float currentZoom = getZoom() + getZoomFloatPart();
+		float zoomNow = getZoom() + getZoomFloatPart();
 		int minZoom = Math.max(getMinZoom(), MIN_ZOOM_LIMIT);
 		int maxZoom = Math.min(getMaxZoom(), MAX_ZOOM_LIMIT);
-		Zoom zoom = Zoom.checkZoomBounds(renderer, Zoom.fromDistanceRatio(1, scale, currentZoom), minZoom, maxZoom);
-		double zoomScale = Zoom.getDistanceAfterZoom(1, currentZoom, zoom.getBaseZoom() + zoom.getZoomFloatPart());
-		if (Math.abs(zoomScale - scale) > scale * 1e-4) {
-			double[] zoomed = fit.zoomedTarget(fitTarget, scale, zoomScale);
-			fitTarget = fit.center(zoomed, zoomScale) ? fit.getTarget() : zoomed;
+		Zoom zoom = Zoom.checkZoomBounds(renderer, Zoom.fromDistanceRatio(1, fit.getScale(), zoomNow), minZoom, maxZoom);
+		// The zoom the map allows may differ from the fitted one
+		if (!fit.center(Zoom.getDistanceAfterZoom(1, zoomNow, zoom.getBaseZoom() + zoom.getZoomFloatPart()))) {
+			return false;
 		}
-		double lat = MapUtils.get31LatitudeY((int) Math.max(0, Math.min(Integer.MAX_VALUE, fitTarget[1])));
-		double lon = MapUtils.get31LongitudeX((int) Math.max(0, Math.min(Integer.MAX_VALUE, fitTarget[0])));
-		animatedDraggingThread.startMoving(lat, lon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
+		double[] fitTarget = fit.getTarget();
+		animatedDraggingThread.startMoving(MapUtils.get31LatitudeY((int) fitTarget[1]),
+				MapUtils.get31LongitudeX((int) fitTarget[0]), zoom.getBaseZoom(), zoom.getZoomFloatPart());
 		return true;
-	}
-
-	/**
-	 * The highest row between top and bottom where the ground under a pixel of the column is at most
-	 * TILTED_FIT_MAX_SQUEEZE times longer than at the bottom.
-	 */
-	private static float getSqueezedRow(@NonNull MapRendererView renderer, float x, float top, float bottom) {
-		double bottomStep = getGroundStep(renderer, x, bottom - TILTED_FIT_SQUEEZE_STEP_PX);
-		if (bottomStep <= 0) {
-			return bottom;
-		}
-		double topStep = getGroundStep(renderer, x, top);
-		if (topStep > 0 && topStep <= bottomStep * TILTED_FIT_MAX_SQUEEZE) {
-			return top;
-		}
-		float squeezed = top;
-		float fine = bottom;
-		for (int i = 0; i < 16; i++) {
-			float y = (squeezed + fine) / 2;
-			double step = getGroundStep(renderer, x, y);
-			if (step > 0 && step <= bottomStep * TILTED_FIT_MAX_SQUEEZE) {
-				fine = y;
-			} else {
-				squeezed = y;
-			}
-		}
-		return fine;
-	}
-
-	/** Ground length under TILTED_FIT_SQUEEZE_STEP_PX down the column from (x, y), or -1 over the horizon. */
-	private static double getGroundStep(@NonNull MapRendererView renderer, float x, float y) {
-		double[] a = getGround31(renderer, x, y);
-		double[] b = getGround31(renderer, x, y + TILTED_FIT_SQUEEZE_STEP_PX);
-		return a != null && b != null ? Math.hypot(a[0] - b[0], a[1] - b[1]) : -1;
-	}
-
-	@NonNull
-	private static List<double[]> get31Points(@Nullable List<LatLon> points, @NonNull double[][] corners) {
-		List<double[]> result = new ArrayList<>();
-		if (Algorithms.isEmpty(points)) {
-			Collections.addAll(result, corners);
-			return result;
-		}
-		// Every n-th point and the extreme ones: the screen bbox is what is fitted
-		int step = (points.size() + TILTED_FIT_MAX_POINTS - 1) / TILTED_FIT_MAX_POINTS;
-		int west = 0;
-		int east = 0;
-		int north = 0;
-		int south = 0;
-		for (int i = 0; i < points.size(); i++) {
-			LatLon p = points.get(i);
-			west = p.getLongitude() < points.get(west).getLongitude() ? i : west;
-			east = p.getLongitude() > points.get(east).getLongitude() ? i : east;
-			north = p.getLatitude() > points.get(north).getLatitude() ? i : north;
-			south = p.getLatitude() < points.get(south).getLatitude() ? i : south;
-			if (i % step == 0 || i == points.size() - 1) {
-				result.add(get31(p));
-			}
-		}
-		for (int i : new int[] {west, east, north, south}) {
-			result.add(get31(points.get(i)));
-		}
-		return result;
-	}
-
-	@NonNull
-	private static double[] get31(@NonNull LatLon p) {
-		return new double[] {MapUtils.get31TileNumberX(p.getLongitude()), MapUtils.get31TileNumberY(p.getLatitude())};
 	}
 
 	/**
@@ -2111,171 +1984,51 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	/**
-	 * Screen of a tilted map at another zoom and target, from the renderer as it is now: the zoom change by
-	 * scale (ground distance ratio) scales the ground around the target, so a point P is on the screen where
-	 * the point t0 + (P - target) / scale is now, t0 being the target now.
-	 * <p>
-	 * With 3D relief a point is drawn higher than its ground position, by its height over the ground length of
-	 * a screen pixel there: lift = height / groundPerPixel. The height of each point is taken from the screen
-	 * now (lift now times ground per pixel now), and the ground per pixel of another zoom is scale times that
-	 * of the same row now.
+	 * Screen of the renderer as it is now.
 	 */
-	private static class TiltedMapFit {
-
-		private static final int ROW_STEP = 8;
+	private static class RendererProjection implements TiltedMapFit.Projection {
 
 		private final MapRendererView renderer;
-		private final double[] t0;
-		private final List<double[]> points;
-		private final double[] boxGround;
-		private final float boxX;
-		private final float boxY;
-		private final float boxWidth;
-		private final float boxHeight;
 		private final PointI location = new PointI();
 		private final PointI pixel = new PointI();
 
-		private final double pixelGround;
-		private final double[] rowGround;
-		private final double[] heights;
-
-		private double[] target;
-		private float minX, minY, maxX, maxY;
-
-		TiltedMapFit(@NonNull MapRendererView renderer, @NonNull double[] t0, @NonNull List<double[]> points,
-		             @NonNull double[] boxGround, float boxX, float boxY, float boxWidth, float boxHeight,
-		             int mapWidth, int mapHeight) {
+		RendererProjection(@NonNull MapRendererView renderer) {
 			this.renderer = renderer;
-			this.t0 = t0;
-			this.points = points;
-			this.boxGround = boxGround;
-			this.boxX = boxX;
-			this.boxY = boxY;
-			this.boxWidth = boxWidth;
-			this.boxHeight = boxHeight;
-			double[] next = getGround31(renderer, boxX + 1, boxY);
-			pixelGround = next != null ? Math.hypot(next[0] - boxGround[0], next[1] - boxGround[1]) : 0;
+		}
 
-			// Ground length of a pixel across each row now, -1 over the horizon
-			rowGround = new double[mapHeight / ROW_STEP + 2];
-			for (int i = 0; i < rowGround.length; i++) {
-				double[] a = getGround31(renderer, mapWidth / 2f - ROW_STEP, i * ROW_STEP);
-				double[] b = getGround31(renderer, mapWidth / 2f + ROW_STEP, i * ROW_STEP);
-				rowGround[i] = a != null && b != null ? Math.hypot(a[0] - b[0], a[1] - b[1]) / (2 * ROW_STEP) : -1;
+		@Nullable
+		@Override
+		public double[] getPixel(double x31, double y31) {
+			// Off the screen and behind the camera too
+			return setLocation(x31, y31) && renderer.getScreenPointFromLocation(location, pixel, true)
+					? new double[] {pixel.getX(), pixel.getY()} : null;
+		}
+
+		@Nullable
+		@Override
+		public double[] getElevatedPixel(double x31, double y31) {
+			// Only on the screen: the heights of other places may be not loaded
+			return setLocation(x31, y31) && renderer.getElevatedPointFromLocation(location, pixel, false)
+					? new double[] {pixel.getX(), pixel.getY()} : null;
+		}
+
+		@Nullable
+		@Override
+		public double[] getLocation(double x, double y) {
+			pixel.setX((int) x);
+			pixel.setY((int) y);
+			return renderer.getLocationFromScreenPoint(pixel, location)
+					? new double[] {location.getX(), location.getY()} : null;
+		}
+
+		private boolean setLocation(double x31, double y31) {
+			if (x31 < 0 || y31 < 0 || x31 > Integer.MAX_VALUE || y31 > Integer.MAX_VALUE) {
+				return false;
 			}
-			// Heights of the points that are on the screen now, 0 for the others
-			heights = new double[points.size()];
-			PointI elevated = new PointI();
-			for (int i = 0; i < points.size(); i++) {
-				double[] p = points.get(i);
-				location.setX((int) p[0]);
-				location.setY((int) p[1]);
-				if (renderer.getScreenPointFromLocation(location, pixel, false)
-						&& renderer.getElevatedPointFromLocation(location, elevated, false)) {
-					double ground = getRowGround(pixel.getY());
-					heights[i] = ground > 0 ? (pixel.getY() - elevated.getY()) * ground : 0;
-				}
-			}
-		}
-
-		private double getRowGround(float y) {
-			int i = Math.round(y / ROW_STEP);
-			return i >= 0 && i < rowGround.length ? rowGround[i] : -1;
-		}
-
-		@NonNull
-		double[] getTarget() {
-			return target.clone();
-		}
-
-		/** The target with which p is under the screen point that groundNow is under now. */
-		@NonNull
-		double[] targetFor(@NonNull double[] p, @NonNull double[] groundNow, double scale) {
-			return new double[] {p[0] - scale * (groundNow[0] - t0[0]), p[1] - scale * (groundNow[1] - t0[1])};
-		}
-
-		/** The target for another scale that keeps the ground under the box center. */
-		@NonNull
-		double[] zoomedTarget(@NonNull double[] target, double scale, double newScale) {
-			double[] ground = {target[0] + scale * (boxGround[0] - t0[0]), target[1] + scale * (boxGround[1] - t0[1])};
-			return targetFor(ground, boxGround, newScale);
-		}
-
-		/**
-		 * Moves the target from start until the screen bbox of the points is centered in the box.
-		 *
-		 * @return false when a point is off the screen
-		 */
-		boolean center(@NonNull double[] start, double scale) {
-			target = start.clone();
-			for (int i = 0; i < 8; i++) {
-				if (!measure(scale)) {
-					return false;
-				}
-				float px = (minX + maxX) / 2;
-				float py = (minY + maxY) / 2;
-				if (Math.abs(px - boxX) < 1 && Math.abs(py - boxY) < 1) {
-					return true;
-				}
-				// The ground point under p moves to the box center
-				double[] ground = getGround31(renderer, px, py);
-				if (ground == null) {
-					return false;
-				}
-				target[0] += scale * (ground[0] - boxGround[0]);
-				target[1] += scale * (ground[1] - boxGround[1]);
-			}
-			return measure(scale);
-		}
-
-		/** How many times the screen bbox of the points is larger than the box, after center() or measure(). */
-		double getRatio() {
-			return Math.max((maxX - minX) / boxWidth, (maxY - minY) / boxHeight);
-		}
-
-		private boolean measure(double scale) {
-			minX = minY = Float.MAX_VALUE;
-			maxX = maxY = -Float.MAX_VALUE;
-			for (int i = 0; i < points.size(); i++) {
-				double[] p = points.get(i);
-				double x = t0[0] + (p[0] - target[0]) / scale;
-				double y = t0[1] + (p[1] - target[1]) / scale;
-				if (x < 0 || y < 0 || x > Integer.MAX_VALUE || y > Integer.MAX_VALUE) {
-					return false;
-				}
-				location.setX((int) x);
-				location.setY((int) y);
-				if (!renderer.getScreenPointFromLocation(location, pixel, true)) {
-					return false;
-				}
-				// A point behind the camera or over the horizon projects too, to a wrong pixel: check the
-				// ground under the pixel
-				double[] ground = getGround31(renderer, pixel.getX(), pixel.getY());
-				if (ground == null || Math.hypot(ground[0] - x, ground[1] - y)
-						> 0.05 * Math.hypot(x - t0[0], y - t0[1]) + 3 * pixelGround) {
-					return false;
-				}
-				float py = pixel.getY();
-				double pixelLength = getRowGround(py);
-				if (heights[i] != 0 && pixelLength > 0) {
-					py -= (float) (heights[i] / (scale * pixelLength));
-				}
-				minX = Math.min(minX, pixel.getX());
-				maxX = Math.max(maxX, pixel.getX());
-				minY = Math.min(minY, py);
-				maxY = Math.max(maxY, py);
-			}
+			location.setX((int) x31);
+			location.setY((int) y31);
 			return true;
 		}
-	}
-
-	@Nullable
-	private static double[] getGround31(@NonNull MapRendererView renderer, float x, float y) {
-		PointI location = new PointI();
-		if (renderer.getLocationFromScreenPoint(new PointI((int) x, (int) y), location)) {
-			return new double[] {location.getX(), location.getY()};
-		}
-		return null;
 	}
 
 	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
