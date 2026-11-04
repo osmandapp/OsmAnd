@@ -5247,4 +5247,22 @@
     <string name="flyovers">Εναέριες όψεις</string>
     <string name="map_source_saved_as">Η πηγή χάρτη αποθηκεύτηκε ως \'%1$s\'.</string>
     <string name="map_source_folder_not_created">Δεν ήταν δυνατή η δημιουργία φακέλου για την πηγή χάρτη. Δοκιμάστε ένα διαφορετικό όνομα.</string>
+    <string name="release_5_4">• Ανανεωμένο UI αναζήτησης: ταξινόμηση, φίλτρα κατηγοριών, πιο καθαρή εμφάνιση\n\n • Επισυνάψτε φωτογραφίες και πολυμέσα στα Αγαπημένα\n\n • Αγαπημένα: υποστήριξη υποομάδων και καρφιτσωμένοι φάκελοι\n\n • Συντεταγμένες: η αναζήτηση, το πλέγμα χάρτη και η εμφάνιση ΣΕ τώρα υποστηρίζουν EPSG και σύστημα εντοπισμού Maidenhead\n\n • Επιδιόρθωση διακοπών πλοήγησης: εναλλαγή μεταξύ Τυπικής και Γρήγορης δρομολόγησης\n\n • Ορίστε την κλίμακα χάρτη στο Android Auto χωριστά από το τηλέφωνό σας\n\n• Νέα χωρική αναζήτηση — βρείτε μέρη και αναζητήστε γύρω από ένα μέρος\n\n • Προστέθηκαν εκλείψεις ήλιου και σελήνης στην Αστρονομία</string>
+    <string name="heap_dump_auto">Συλλογή κατά την υψηλή χρήση</string>
+    <string name="java_memory">Μνήμη Java</string>
+    <string name="ais_load_data_descr">Γίνεται αναπαραγωγή όλων των μηνυμάτων AIS από ένα αρχείο καταγραφής.</string>
+    <string name="ais_enter_mmsi_desc">Εισάγετε 9 ψηφία ή αφήστε το κενό για καθαρισμό.</string>
+    <string name="ais_error_mmsi_length">Πρέπει να είναι 9 ψηφία</string>
+    <string name="ais_reset_plugin_settings">Επαναφορά ρυθμίσεων προσθέτου</string>
+    <string name="ais_reset_connection_settings">Επαναφορά ρυθμίσεων σύνδεσης</string>
+    <string name="gpx_line_style">Στυλ γραμμής</string>
+    <string name="gpx_line_style_solid">Συμπαγές</string>
+    <string name="gpx_line_style_dashed">Με παύλες</string>
+    <string name="gpx_line_style_dotted">Με τελείες</string>
+    <string name="gpx_line_style_desc_unavailable_for_color">Τα στυλ γραμμών με παύλες και με τελείες δεν είναι διαθέσιμα για μη συμπαγές χρώμα ίχνους.</string>
+    <string name="gpx_color_unavailable_for_line_style">Αυτός ο χρωματισμός δεν είναι διαθέσιμος για μη συμπαγές στυλ γραμμής.</string>
+    <string name="gpx_color_desc_unavailable_for_style">Μόνο συμπαγές χρώμα ίχνους είναι διαθέσιμο για στυλ γραμμής με παύλες ή με τελείες.</string>
+    <string name="ais_set_your_mmsi_desc">Το δικό σας σκάφος ίσως πυροδοτεί συνεχώς προειδοποιήσεις. Ορίστε το MMSI σας ώστε το OsmAnd να το ξεχωρίζει από τα υπόλοιπα σκάφη.</string>
+    <string name="ais_hide_after_desc">Αφαιρεί πλήρως το σκάφος μετά από %1$s χωρίς σήμα.</string>
+    <string name="file_name_containes_illegal_char">Το όνομα δεν πρέπει να περιέχει: %1$s</string>
 </resources>
