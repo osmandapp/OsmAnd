@@ -134,9 +134,8 @@ public class AmenityUIHelper extends MenuBuilder {
 		if (baseEntry.poiAdditional) {
 			String poiAdditionalCategoryName = baseEntry.key;
 			String poiAdditionalIconName = poiTypes.getPoiAdditionalCategoryIconName(poiAdditionalCategoryName);
-			AbstractPoiType parentType = firstType.getParentType();
-			List<String> iconNameCandidates = nonEmptyIconNames(poiAdditionalIconName, poiAdditionalCategoryName,
-					firstType.getIconKeyName(), parentType != null ? parentType.getIconKeyName() : null);
+			List<String> iconNameCandidates = nonEmptyIconNames(
+					poiAdditionalIconName, poiAdditionalCategoryName, firstType.getIconKeyName());
 			return AmenityTagEntriesBuilder.buildPoiTypesGroupEntry(poiAdditionalCategoryName, firstType.getKeyName(),
 					firstType.getPoiAdditionalCategoryTranslation(), categoryTypes, baseEntry.collapsableEntries,
 					firstType.getOrder(), 0, iconNameCandidates, R.drawable.ic_action_note_dark, true,
