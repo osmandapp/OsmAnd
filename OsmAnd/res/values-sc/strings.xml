@@ -129,7 +129,7 @@
     <string name="plugin_distance_point">Puntu</string>
     <string name="gpx_file_name">Nùmene de s\'archìviu GPX</string>
     <string name="gpx_saved_sucessfully">Archìviu GPX sarvadu in {0}</string>
-    <string name="shared_string_do_not_show_again">No ammustrare dae nou</string>
+    <string name="shared_string_do_not_show_again">Non torres a mustrare</string>
     <string name="wait_current_task_finished">Pro praghere iseta sa fine de su traballu presente</string>
     <string name="use_kalman_filter_compass_descr">Mìnimat s\'abbolotu de sa bùssola ma annanghet inèrtzia.</string>
     <string name="use_kalman_filter_compass">Imprea su filtru de Kalman</string>
@@ -3752,13 +3752,13 @@
     <string name="panoramax_no_internet_desc">Sas fotografias de Panoramax sunt a disponimentu in lìnia ebbia.</string>
     <string name="quick_action_showhide_panoramax_descr">Unu butone pro ammustrare o cuare s\'istratu de Panoramax in sa mapa.</string>
     <string name="panoramax_menu_filter_description_new">Filtra sas immàgines pro autore, data o casta.</string>
-    <string name="plugin_panoramax_descr">Ammustra comente istratu superiore de sa mapa sas immàgines a livellu de su caminu de Panoramax, una prataforma federada, cun litzèntzia aberta, pro mapas fotogràficas. Ùtile pro verificare sa cobertura chi b\'est giai e pranificare su chi depet èssere galu registradu.</string>
+    <string name="plugin_panoramax_descr">Ammustra comente istratu superiore de sa mapa sas immàgines a livellu de su caminu de Panoramax, una prataforma federada, cun litzèntzia aberta, pro mapas fotogràficas. Ùtile pro verificare sa cobertura chi b\'est giai e pranificare su chi bolet galu registradu.</string>
     <string name="astro_eclipse_column_below_horizon">Suta de s\'orizonte</string>
     <string name="quick_action_add_track">Annanghe una rasta</string>
     <string name="quick_action_tracks_select_descr">Annanghe una o prus rastas pro las ammustrare o cuare in sa mapa cun unu tocu ebbia.</string>
     <string name="quick_action_tracks_always_ask_descr">Tochende custa atzione as a abèrrere sa lista de sas rastas, in ue podes ammustrare o cuare una o prus de cussas.</string>
     <string name="quick_action_all_tracks">Totu sas rastas</string>
-    <string name="route_calculation_out_of_memory">S\'àndala est tropu longa pro èssere carculada in custu dispositivu. Annanghe puntos de coladòrgiu o issèbera una destinatzione prus a curtzu.</string>
+    <string name="route_calculation_out_of_memory">S\'àndala est tropu longa pro la carculare in custu dispositivu. Annanghe puntos de coladòrgiu o issèbera una destinatzione prus a curtzu.</string>
     <string name="java_memory">Memòria Java</string>
     <string name="ais_load_data_descr">Torra a riproduire sos messàgios AIS dae un\'archìviu registradu.</string>
     <string name="map_rendering">Disinnu de sa mapa</string>
@@ -3958,7 +3958,7 @@
     <string name="coordinate_format_cancel_changes_title">Modìficas non sarvadas</string>
     <string name="coordinate_format_description">Formados preferidos pro s\'atzessu lestru dae su menù de cuntestu e dae sa chirca.</string>
     <string name="coordinate_format_discard_changes">Iscarta sas modìficas</string>
-    <string name="coordinate_format_last_item_warning">Serbit a su mancu unu formadu de coordinadas.</string>
+    <string name="coordinate_format_last_item_warning">Bisòngiat a su mancu unu formadu de coordinadas.</string>
     <string name="coordinate_format_select_other">Ischerta un\'àteru formadu</string>
     <string name="coordinate_format_primary">Printzipale</string>
     <string name="favorite_confirm_delete_folder">Custu at a iscantzellare sa cartella \"%1$s\", incluidas sas suta-cartellas e %2$d puntu(os) preferidu(os).</string>
@@ -5012,7 +5012,7 @@
     <string name="help_article_navigation_routing_train_routing_name">Càrculu de s\'àndala in trenu</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Nàviga sighende una rasta</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Nàviga cun sos marcadores</string>
-    <string name="help_article_navigation_setup_route_details_name">Minujas de s\'àndala</string>
+    <string name="help_article_navigation_setup_route_details_name">Detàllios de s\'àndala</string>
     <string name="help_article_navigation_setup_route_navigation_name">Preparatzione de s\'àndala</string>
     <string name="help_article_personal_name">Sos datos meos</string>
     <string name="help_article_personal_import_export_name">Importa / esporta</string>
@@ -5153,7 +5153,7 @@
     <string name="rendering_value_sector3_name">Setore 3</string>
     <string name="rendering_value_sector4_name">Setore 4</string>
     <string name="rendering_value_sector5_name">Setore 5</string>
-    <string name="rendering_value_small_name">Piticu</string>
+    <string name="rendering_value_small_name">Minore</string>
     <string name="rendering_value_name_only_name">Petzi su nùmene</string>
     <string name="device_disconnected">%1$s disconnessu</string>
     <string name="device_connected">%1$s connessu</string>
@@ -5297,4 +5297,16 @@
     <string name="battery_saving_mode">Modalidade de rispàrmiu de sa bateria</string>
     <string name="file_name_containes_illegal_char">Su nùmene non podet cuntènnere: %1$s</string>
     <string name="download_wikipedia_label">Iscàrriga Wikipedia</string>
+    <string name="cast_shadows">Umbras</string>
+    <string name="build_update_size">agiornamentu %1$s</string>
+    <string name="build_update_size_estimated">agiornamentu ~%1$s</string>
+    <string name="astro_ar_mode">Modalidade AR</string>
+    <string name="astro_camera_view">Vista de sa fotocàmera</string>
+    <string name="astro_reset_field_of_view">Riprìstina su campu visivu</string>
+    <string name="cloud_file_name_too_long">Su nùmene de s\'archìviu est tropu longu pro custu dispositivu, muda·lu in OsmAnd Cloud</string>
+    <string name="average_vertical_speed">Lestresa verticale mèdia</string>
+    <string name="public_transport_route_out_of_memory">S\'àndala de trasportu pùblicu est tropu longa pro la carculare in custu dispositivu. Issèbera una destinatzione prus a curtzu.</string>
+    <string name="release_5_5">• Chirca ispatziale ativa comente impostatzione predefinida: chirca a fùrriu de unu logu, ordinamentu megioradu de sos resurtados, sinònimos e tolleràntzia pro sos errores de iscritura\n\n • Sos edifìtzios 3D faghent umbra, cun sa diretzione de su sole chi si podet regulare\n\n • Estensione Panoramax: immàgines a livellu de su caminu in sa mapa\n\n • Biblioteca multimediale: totu sas fotografias, sos vìdeos e sas notas àudio in unu logu ebbia\n\n • Lìnias de sas rastas a tratigheddos e a puntigheddos, aparèntzia predefinida pro cada cartella de rastas\n\n • Impostatziones de sa lestresa de biàgiu pro su càrculu de s\'àndala e pro s\'ora de arrivu\n\n • Android Auto: destinatziones reghentes, Biàgiu lìberu in automàticu, Assistente Google e Gemini\n\n • Atzione lestra pro ammustrare o cuare sas rastas\n\n • Sas etichetas de sas curvas de livellu sunt giradas cara a s\'artziada</string>
+    <string name="map_widget_glide_average_desc">Ammustrat su raportu de planada mèdiu o sa lestresa verticale mèdia pro s\'intervallu impostadu.</string>
+    <string name="map_widget_glide_target_desc">Ammustrat su raportu de planada netzessàriu pro lòmpere a su puntu de destinatzione o s\'artària de cussu puntu.</string>
 </resources>
