@@ -399,7 +399,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			localeName = PoiAdditionalLabels.getSearchName(poiType);
 		} else if (spatialPoiType.poiSubType != null) {
 			object = new TopIndexFilter(spatialPoiType.poiSubType, poiTypes, spatialPoiType.poiAdditional);
-			localeName = spatialPoiType.names.get(0);
+			// the value itself: the names list starts with the alternative names of the map (Lidl -> its name:fa)
+			localeName = spatialPoiType.poiAdditional;
 		} else {
 			return null;
 		}

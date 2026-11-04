@@ -661,7 +661,7 @@ public class SpatialPoiSearch {
 
 			@Override
 			public String getName() {
-				return spt.names.get(0);
+				return spt.poiAdditional;
 			}
 
 			@Override
