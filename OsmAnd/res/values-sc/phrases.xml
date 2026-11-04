@@ -294,7 +294,7 @@
     <string name="poi_camp_site">Campègiu;camping;logu pro sa tenda</string>
     <string name="poi_caravan_site">Tretu pro caravan e camper;àrea camper;autocaravanas</string>
     <string name="poi_picnic_site">Logu atretzadu pro picnic</string>
-    <string name="poi_spring">Mitza;mitza naturale</string>
+    <string name="poi_spring">Mitza;mitza naturale;fonte;fonte naturale;bena;bena naturale;</string>
     <string name="poi_geyser">Geyser</string>
     <string name="poi_cemetery">Campusantu</string>
     <string name="poi_grave_yard">Campusantu de sa crèsia;campusantu</string>
@@ -352,10 +352,10 @@
     <string name="poi_swimming_pool">Piscina</string>
     <string name="poi_park">Parcu;giardinu pùblicu</string>
     <string name="poi_cafe">Tzilleri;cafè;sala de su te</string>
-    <string name="poi_restaurant">Ristorante;pizzeria;tratoria;buffet</string>
+    <string name="poi_restaurant">Ristorante;pizzeria;pitzeria;tratoria;buffet</string>
     <string name="poi_bar">Bar;tzilleri;taverna;cocktail bar</string>
     <string name="poi_pub">Pub;taverna</string>
-    <string name="poi_drinking_water">Abba potàbile;funtana</string>
+    <string name="poi_drinking_water">Abba potàbile;funtana;càntaruv</string>
     <string name="poi_craft_blacksmith">Mastru de ferru</string>
     <string name="poi_craft_brewery">Birrifìtziu;fàbrica de birra</string>
     <string name="poi_craft_clockmaker">Rellogiaju</string>
@@ -475,7 +475,7 @@
     <string name="poi_beach_resort">Istabilimentu balneare</string>
     <string name="poi_dog_park">Parcu pro sos canes;àrea pro sos canes</string>
     <string name="poi_leisure_fishing">Logu pro piscare</string>
-    <string name="poi_miniature_golf">Minigolf;golf in miniatura</string>
+    <string name="poi_miniature_golf">Minigolf;golf in miniadura</string>
     <string name="poi_biergarten">Giardinu de sa birra (Biergarten)</string>
     <string name="poi_fast_food">Màndigu lestru;fast food</string>
     <string name="poi_craft_caterer">Servìtziu de ristoratzione</string>
