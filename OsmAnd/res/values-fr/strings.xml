@@ -2801,7 +2801,7 @@
     <string name="announcement_time_passing">Durée</string>
     <string name="analyze_by_intervals">Analyser par intervalles</string>
     <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
-    <string name="announcement_time_descr">Le rythme des annonces vocales dépend du type d\'alerte, de la vitesse actuelle et du type de navigation.</string>
+    <string name="announcement_time_descr">Le moment de diffusion des instructions vocales dépend du type d\'instruction, de la vitesse actuelle et de la vitesse par défaut.</string>
     <string name="announcement_time_title">Délai de l\'annonce</string>
     <string name="announcement_time_off_route">Hors de l\'itinéraire prévu</string>
     <string name="routing_engine_vehicle_type_cycling_road">Vélo de route</string>
@@ -3897,12 +3897,12 @@
     <string name="feature_available_as_part_of_plan">%1$s disponible dans le cadre de l\'abonnement %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="average_glide_ratio">Finesse moyenne</string>
-    <string name="map_widget_glide_average_desc">Affiche la finesse moyenne sur l\'intervalle défini.</string>
+    <string name="map_widget_glide_average_desc">Affiche le taux de plané moyen ou la vitesse verticale moyenne pour l\'intervalle défini.</string>
     <string name="map_widget_group_glide_ratio">Finesse</string>
     <string name="glide_ratio_to_target">Finesse par rapport à la destination</string>
     <string name="average_glide_time_interval_desc">Indiquer l’intervalle de temps pour le calcul de la finesse moyenne.</string>
     <string name="map_widget_group_glide_desc">Les widgets affichent la finesse vers la cible ou la finesse moyenne pour le trajet en cours.</string>
-    <string name="map_widget_glide_target_desc">Affiche la finesse nécessaire pour atteindre le point cible.</string>
+    <string name="map_widget_glide_target_desc">Indique la finesse nécessaire pour atteindre le point cible ou l\'altitude de ce dernier.</string>
     <string name="wheel_circumference">Circonférence de la roue</string>
     <string name="external_sensor_name_property_description">Nom du capteur</string>
     <string name="help_article_map_interact_with_map_name">Interagir avec la carte</string>
@@ -5398,4 +5398,13 @@
     <string name="eta_adapt_to_my_speed_descr">L\'heure d\'arrivée estimée est basée sur votre vitesse des dernières %1$s.</string>
     <string name="eta_adapt_to_my_speed_off_descr">L\'heure d\'arrivée est calculée à partir d\'une vitesse estimée pour chaque route. Activez pour basculer ce calcul sur votre vitesse réelle.</string>
     <string name="select_tracks">Sélectionner les traces</string>
+    <string name="cast_shadows">Ombres</string>
+    <string name="build_update_size">mise à jour %1$s</string>
+    <string name="build_update_size_estimated">mise à jour ~%1$s</string>
+    <string name="astro_ar_mode">Mode AR</string>
+    <string name="astro_camera_view">Angle de prise de vue</string>
+    <string name="astro_reset_field_of_view">Réinitialiser le champ de vision</string>
+    <string name="cloud_file_name_too_long">Le nom du fichier est trop long pour cet appareil. Renommez-le dans OsmAnd Cloud.</string>
+    <string name="average_vertical_speed">Vitesse verticale moyenne</string>
+    <string name="public_transport_route_out_of_memory">L\'itinéraire en transports en commun est trop long pour être calculé sur cet appareil. Choisissez une destination plus proche.</string>
 </resources>

@@ -276,4 +276,5 @@
     <string name="send_live_location_error">Imbia s\'errore de sa positzione in direta: %1$s</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_error">Errore</string>
+    <string name="location_source">Fonte pro sa positzione</string>
 </resources>
