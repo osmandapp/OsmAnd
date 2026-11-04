@@ -26,6 +26,7 @@ import android.text.TextPaint;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -149,6 +150,9 @@ public class SpeedometerWidget {
 	private boolean lastNightMode;
 	private Integer cachedMetricSystem;
 	private DrivingRegion cachedRegion;
+	// the theme and region the speed limit sign was created for
+	private boolean speedLimitSignNightMode;
+	private DrivingRegion speedLimitSignRegion;
 
 	@Nullable
 	private Bitmap widgetBitmap;
@@ -156,7 +160,6 @@ public class SpeedometerWidget {
 	private Bitmap widgetRevealBitmap;
 
 	private final ValueAnimator speedAlertAnimator;
-	private ValueAnimator speedLimitAnimator;
 	private SpeedometerAnimationDrawable animationDrawable;
 	private boolean isExceeding = false;
 	private boolean isExceedWarning = false;
@@ -186,15 +189,6 @@ public class SpeedometerWidget {
 	public SpeedometerWidget(@NonNull OsmandApplication app, @NonNull ThemeUsageContext usageContext) {
 		this(app, null, null, usageContext);
 		drawBitmap = true;
-		speedLimitAnimator = ValueAnimator.ofFloat(0f, 1f);
-		speedLimitAnimator.setDuration(SPEED_LIMIT_REVEAL_ANIM_DURATION);
-		speedLimitAnimator.setRepeatCount(0);
-		speedLimitAnimator.addUpdateListener(animation -> {
-			speedLimitAlpha = (float) animation.getAnimatedValue();
-			if (speedLimitAlpha < 0.0001) {
-				cachedSpeedLimitText = null;
-			}
-		});
 	}
 
 	public SpeedometerWidget(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @Nullable View view, @NonNull ThemeUsageContext usageContext) {
@@ -315,6 +309,14 @@ public class SpeedometerWidget {
 				speedLimitDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, isCanadaRegion() ? SPEED_LIMIT_DESCRIPTION_SIZE_CANADA_S : SPEED_LIMIT_DESCRIPTION_SIZE_USUAL);
 				break;
 		}
+		// MapHudLayout takes the grid size of the widget from its height, so the parent must not shrink it
+		// when the widget is moved up close to the top edge (#26217): use the real fixed height.
+		ViewGroup.LayoutParams params = view.getLayoutParams();
+		if (params != null) {
+			params.height = Math.max(speedometerLayoutParams.height, speedLimitLayoutParams.height)
+					+ view.getPaddingTop() + view.getPaddingBottom();
+			view.setLayoutParams(params);
+		}
 		speedLimitContainer.setAlpha(speedLimitContainer.getVisibility() == View.VISIBLE ? 1f : 0f);
 		AndroidUiHelper.updateVisibility(speedLimitContainer, false);
 	}
@@ -389,13 +391,11 @@ public class SpeedometerWidget {
 					if (!Algorithms.stringsEqual(speedLimitText, cachedSpeedLimitText)) {
 						cachedSpeedLimitText = speedLimitText;
 						isChanged = true;
+						setSpeedLimitText(speedLimitText);
 					}
 				}
 				if (actualExceededAlarm != null) {
 					cachedWarningSpeedLimit = actualExceededAlarm.getIntValue();
-				}
-				if (alarm != null) {
-					setSpeedLimitText(speedLimitText);
 				}
 				AndroidUiHelper.updateVisibility(view, true);
 				updateSpeedLimitVisibility(alarm != null);
@@ -495,8 +495,24 @@ public class SpeedometerWidget {
 				} else if (speedAlertProgress > targetSpeedAlertProgress) {
 					speedAlertProgress = Math.max(targetSpeedAlertProgress, speedAlertProgress - delta);
 				}
+				updateSpeedLimitAlpha(currentTime - lastSpeedAlertFrameTime);
 			}
 			lastSpeedAlertFrameTime = currentTime;
+		}
+	}
+
+	// Animators are not updated while the phone screen is off, so the car bitmap is animated by frame time
+	private void updateSpeedLimitAlpha(long frameInterval) {
+		if (speedLimitAlpha != targetSpeedLimitAlpha) {
+			float delta = (float) frameInterval / SPEED_LIMIT_REVEAL_ANIM_DURATION;
+			if (speedLimitAlpha < targetSpeedLimitAlpha) {
+				speedLimitAlpha = Math.min(targetSpeedLimitAlpha, speedLimitAlpha + delta);
+			} else {
+				speedLimitAlpha = Math.max(targetSpeedLimitAlpha, speedLimitAlpha - delta);
+			}
+			if (speedLimitAlpha == 0) {
+				cachedSpeedLimitText = null;
+			}
 		}
 	}
 
@@ -504,12 +520,7 @@ public class SpeedometerWidget {
 		float targetAlpha = show ? 1f : 0f;
 		if (targetSpeedLimitAlpha != targetAlpha) {
 			targetSpeedLimitAlpha = targetAlpha;
-			if (drawBitmap) {
-				if (speedLimitAnimator.isRunning()) {
-					speedLimitAnimator.cancel();
-				}
-				startFloatValueAnimator(speedLimitAnimator, !show);
-			} else {
+			if (!drawBitmap) {
 				if (speedLimitContainer.getAlpha() == targetAlpha &&
 						speedLimitContainer.getVisibility() == (show ? View.VISIBLE : View.GONE)) {
 					return;
@@ -922,7 +933,11 @@ public class SpeedometerWidget {
 		updateBackgroundColors(nightMode);
 		float progress = drawBitmap ? speedAlertProgress : speedAlertAnimator.getAnimatedFraction();
 		updateTextColor(progress);
-		if (!drawBitmap) {
+		DrivingRegion region = settings.DRIVING_REGION.getModeValue(mode);
+		if (!drawBitmap && (speedLimitSignRegion != region || speedLimitSignNightMode != nightMode)) {
+			// a fresh drawable on every update made the view request a layout and rasterize the sign again
+			speedLimitSignRegion = region;
+			speedLimitSignNightMode = nightMode;
 			speedLimitContainer.setBackground(getSpeedLimitDrawable(nightMode, app.getResources().getDisplayMetrics().density));
 			int limitColor = getSpeedLimitColor(nightMode);
 			speedLimitValueView.setTextColor(limitColor);

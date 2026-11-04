@@ -72,6 +72,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			setColor(getPointColor());
 			setIconName(getInitialIconName(wpt));
 			setBackgroundType(BackgroundType.getByTypeName(wpt.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
+			if (savedInstanceState != null) {
+				restoreEditorState(savedInstanceState);
+			}
 		}
 	}
 
@@ -461,5 +464,10 @@ public class WptPtEditorFragment extends PointEditorFragment {
 						.commitAllowingStateLoss();
 			}
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "wpt_pt_editor";
 	}
 }

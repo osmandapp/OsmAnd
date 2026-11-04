@@ -48,6 +48,7 @@ import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.core.IconPixelsCache;
 import net.osmand.plus.views.layers.core.TransportStopsTileProvider;
 import net.osmand.plus.views.layers.core.TransportStopsTileProvider.StopsCollectionPoint;
 import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
@@ -441,9 +442,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		if (transportStops.size() > 0) {
 			int pointsOrder = getPointsOrder() - 1;
 			mapMarkersCollection = new MapMarkersCollection();
+			IconPixelsCache<PointImageDrawable> bigIconsCache = new IconPixelsCache<>();
+			IconPixelsCache<PointImageDrawable> smallIconsCache = new IconPixelsCache<>();
 			for (TransportStop ts : transportStops) {
-				StopsCollectionPoint collectionPoint =
-						new StopsCollectionPoint(getContext(), ts, getTextScale(), transportRouteType);
+				StopsCollectionPoint collectionPoint = new StopsCollectionPoint(getContext(), ts, getTextScale(),
+						transportRouteType, bigIconsCache, smallIconsCache);
 				MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 				mapMarkerBuilder
 						.setPosition(collectionPoint.getPoint31())

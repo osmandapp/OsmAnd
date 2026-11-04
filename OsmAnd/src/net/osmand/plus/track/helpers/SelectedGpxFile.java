@@ -49,6 +49,8 @@ public class SelectedGpxFile {
 	private boolean fullAnalysisRunning;
 
 	protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
+	@Nullable
+	private List<TrkSegment> startFinishSegments;
 	protected List<GpxDisplayGroup> splitGroups;
 
 	@NonNull
@@ -407,6 +409,17 @@ public class SelectedGpxFile {
 
 	public boolean isRoutePoints() {
 		return routePoints;
+	}
+
+	/** Segments whose ends get the start and finish icons; by default the displayed ones. */
+	@NonNull
+	public List<TrkSegment> getStartFinishSegments() {
+		return startFinishSegments != null ? startFinishSegments : getPointsToDisplay();
+	}
+
+	/** A flyover draws a track in pieces (passed, not reached yet); its start and finish stay the whole track's. */
+	public void setStartFinishSegments(@Nullable List<TrkSegment> segments) {
+		startFinishSegments = segments;
 	}
 
 	@NonNull

@@ -184,17 +184,15 @@ public class TransportRoutingHelper {
 		listeners.add(new WeakReference<>(l));
 	}
 
-	public boolean removeListener(IRouteInformationListener lt) {
+	public void removeListener(IRouteInformationListener lt) {
 		Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
 		while (it.hasNext()) {
 			WeakReference<IRouteInformationListener> ref = it.next();
 			IRouteInformationListener l = ref.get();
 			if (l == null || lt == l) {
 				it.remove();
-				return true;
 			}
 		}
-		return false;
 	}
 
 	public void recalculateRouteDueToSettingsChange() {
@@ -470,6 +468,8 @@ public class TransportRoutingHelper {
 		private final Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
 		private final Map<Pair<Location, LatLon>, RouteCalculationResult> walkingRouteSegmentsCache = new HashMap<>();
 		private boolean walkingSegmentsCalculated;
+		// the walking segment being calculated now, on the RoutingHelper executor
+		private RouteCalculationProgress walkingRouteProgress;
 		private final NativeLibrary lib;
 
 		String routeCalcError;
@@ -488,6 +488,12 @@ public class TransportRoutingHelper {
 
 		public void stopCalculation() {
 			params.calculationProgress.isCancelled = true;
+			params.calculationProgress.memoryLimitExceeded = false; // a stop requested here wins over a stop by the memory guard
+			// otherwise it keeps routing on the RoutingHelper executor next to the public transport calculation that replaces this one
+			RouteCalculationProgress walkingProgress = walkingRouteProgress;
+			if (walkingProgress != null) {
+				walkingProgress.isCancelled = true;
+			}
 		}
 
 		/**
@@ -532,12 +538,18 @@ public class TransportRoutingHelper {
 			ctx.calculationProgress = params.calculationProgress;
 			if (ctx.library != null && !settings.PT_SAFE_MODE.get() && !DISABLE_NATIVE) {
 				log.info("Public transport. Use native library");
-				NativeTransportRoutingResult[] nativeRes = library.runNativePTRouting(
-						MapUtils.get31TileNumberX(params.start.getLongitude()),
-						MapUtils.get31TileNumberY(params.start.getLatitude()),
-						MapUtils.get31TileNumberX(params.end.getLongitude()),
-						MapUtils.get31TileNumberY(params.end.getLatitude()),
-						cfg, ctx.calculationProgress);
+				NativeRoutingMemoryGuard memoryGuard = NativeRoutingMemoryGuard.start(params.ctx, ctx.calculationProgress);
+				NativeTransportRoutingResult[] nativeRes;
+				try {
+					nativeRes = library.runNativePTRouting(
+							MapUtils.get31TileNumberX(params.start.getLongitude()),
+							MapUtils.get31TileNumberY(params.start.getLatitude()),
+							MapUtils.get31TileNumberX(params.end.getLongitude()),
+							MapUtils.get31TileNumberY(params.end.getLatitude()),
+							cfg, ctx.calculationProgress);
+				} finally {
+					memoryGuard.stop();
+				}
 				return TransportRoutePlanner.convertToTransportRoutingResult(nativeRes, cfg);
 			} else {
 				log.info("Public transport. No native library present");
@@ -583,6 +595,7 @@ public class TransportRoutingHelper {
 			params.mode = walkingMode;
 			params.ctx = app;
 			params.calculationProgress = new RouteCalculationProgress();
+			walkingRouteProgress = params.calculationProgress;
 			params.calculationProgressListener = new RouteCalculationProgressListener() {
 
 				@Override
@@ -610,7 +623,7 @@ public class TransportRoutingHelper {
 						}
 						walkingSegmentsFromCacheOnly.clear();
 						walkingSegmentsCalculated = true;
-					} else {
+					} else if (!RouteRecalculationTask.this.params.calculationProgress.isCancelled) {
 						onUpdateCalculationProgress(0);
 						RouteCalculationParams walkingRouteParams = getOrProcessWalkingRouteParams();
 						if (walkingRouteParams != null) {
@@ -719,8 +732,13 @@ public class TransportRoutingHelper {
 				error = e.getMessage();
 				log.error(e);
 			}
+			OsmandApplication app = routingHelper.getApplication();
 			if (params.calculationProgress.isCancelled) {
-				return;
+				if (!params.calculationProgress.memoryLimitExceeded) {
+					return; // stopped by stopCalculation(); a stop by NativeRoutingMemoryGuard is an error to show
+				}
+				res = null;
+				error = app.getString(R.string.public_transport_route_out_of_memory);
 			}
 			synchronized (transportRoutingHelper) {
 				transportRoutingHelper.routes = res;
@@ -731,7 +749,6 @@ public class TransportRoutingHelper {
 					}
 				}
 			}
-			OsmandApplication app = routingHelper.getApplication();
 			if (res != null) {
 				transportRoutingHelper.setNewRoute(res);
 			} else if (error != null) {

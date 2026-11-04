@@ -169,15 +169,22 @@ public class SearchPhrase {
 				boolean decryptAbbreviations = needDecryptAbbreviations();
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
-						sp.firstUnknownSearchWord = decryptAbbreviations ? Abbreviations.replace(wd) : wd;
+						sp.firstUnknownSearchWord = decryptAbbreviations ? decryptAbbreviation(wd) : wd;
 						first = false;
 					} else {
-						sp.otherUnknownWords.add(decryptAbbreviations ? Abbreviations.replace(wd) : wd);
+						sp.otherUnknownWords.add(decryptAbbreviations ? decryptAbbreviation(wd) : wd);
 					}
 				}
 			}
 		}
 		return sp;
+	}
+
+	// "ln" -> "Lane", "sw" -> "Southwest"; a word the full form starts with stays as it is: names match it by prefix
+	// anyway ("st" finds "Street"), and "St Mary's Road" is Saint, not "Street Mary's Road"
+	private static String decryptAbbreviation(String word) {
+		String full = Abbreviations.replace(word);
+		return full.toLowerCase().startsWith(word.toLowerCase()) ? word : full;
 	}
 
 	private boolean needDecryptAbbreviations() {
@@ -250,7 +257,7 @@ public class SearchPhrase {
 		return sp;
 	}
 	
-	public String selectMainUnknownWordToSearch(List<String> searchWords) {
+	public static String selectMainUnknownWordToSearch(List<String> searchWords) {
 		Collections.sort(searchWords, commonWordsComparator);
 		for (String s : searchWords) {
 			s = s.trim();
@@ -488,6 +495,24 @@ public class SearchPhrase {
 
 	public boolean hasCustomSearchType(ObjectType type) {
 		return settings.hasCustomSearchType(type);
+	}
+
+	// the address tab list opened by a city / postcode button, or the streets of a selected city / postcode:
+	// the typed text filters this list instead of starting a new full-text search
+	public boolean isAddressListFilter() {
+		ObjectType[] searchTypes = getSearchTypes();
+		if (searchTypes == null || searchTypes.length == 0) {
+			return false;
+		}
+		boolean cityOrPostcodeList = true;
+		for (ObjectType type : searchTypes) {
+			if (type != ObjectType.CITY && type != ObjectType.VILLAGE && type != ObjectType.POSTCODE) {
+				cityOrPostcodeList = false;
+				break;
+			}
+		}
+		return cityOrPostcodeList
+				|| isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE);
 	}
 
 	public boolean isSearchTypeAllowed(ObjectType searchType) {

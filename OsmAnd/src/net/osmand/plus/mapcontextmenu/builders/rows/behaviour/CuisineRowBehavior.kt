@@ -12,7 +12,7 @@ object CuisineRowBehavior : DefaultPoiAdditionalRowBehaviour() {
 		    val sb = StringBuilder()
 		    val cuisines = value.split(";")
 		    for (name in cuisines) {
-			    val translation = app.poiTypes.getPoiTranslation("cuisine_$name")
+			    val translation = app.kPoiTypes.getPoiTranslation("cuisine_$name").orEmpty()
 			    if (sb.isNotEmpty()) {
 				    sb.append(", ")
 				    sb.append(translation.lowercase())

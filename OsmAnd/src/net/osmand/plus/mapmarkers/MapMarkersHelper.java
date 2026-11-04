@@ -66,9 +66,14 @@ public class MapMarkersHelper {
 
 	private long favoriteMarkersModifiedTime;
 	private long trackMarkersModifiedTime;
+	private volatile int markersVersion;
 
 	public List<MapMarker> getMapMarkers() {
 		return mapMarkers;
+	}
+
+	public int getMarkersVersion() {
+		return markersVersion;
 	}
 
 	public List<MapMarker> getMapMarkersHistory() {
@@ -184,6 +189,7 @@ public class MapMarkersHelper {
 			}
 		}
 		dataHelper.saveGroups(markersGroups, mapMarkers);
+		markersVersion++;
 		if (notify) {
 			notifyMarkersChanged();
 		}

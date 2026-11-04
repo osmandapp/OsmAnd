@@ -151,6 +151,14 @@ public class RoutePlannerFrontEnd {
 		if (dataObjects.isEmpty()) {
 			ctx.loadTileData(px, py, 14, dataObjects, allowDuplications);
 		}
+		// a boat in open water or a wide channel can be far from any waterway: look farther for water to start
+		// from, the gap to the point is then crossed over open water (see SeaRoutePlanner)
+		if (dataObjects.isEmpty() && ctx.getRouter().getProfile() == net.osmand.shared.routing.GeneralRouterProfile.BOAT) {
+			ctx.loadTileData(px, py, 12, dataObjects, allowDuplications);
+			if (dataObjects.isEmpty()) {
+				ctx.loadTileData(px, py, 10, dataObjects, allowDuplications);
+			}
+		}
 		if (list == null) {
 			list = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		}
@@ -504,8 +512,8 @@ public class RoutePlannerFrontEnd {
 		return res;
 	}
 
-	private void calculateRegionsWithAllRoutePoints(RoutingContext ctx, OsmandRegions osmandRegions,
-	                                                LatLon start, List<LatLon> targets) throws IOException {
+	void calculateRegionsWithAllRoutePoints(RoutingContext ctx, OsmandRegions osmandRegions,
+	                                        LatLon start, List<LatLon> targets) throws IOException {
 		Map<String, Integer> regionCounter = new LinkedHashMap<>();
 
 		getRegionsOfPoint(start, regionCounter, osmandRegions);

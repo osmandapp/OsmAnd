@@ -48,7 +48,7 @@ class StarCompassButton @JvmOverloads constructor(
 
 		override fun getDefaultIconName(nightMode: Boolean?): String {
 			val compassMode = CompassMode.MANUALLY_ROTATED
-			val mode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP)
+			val mode = app.getDaynightHelper().isNightMode(app.settings.applicationMode, ThemeUsageContext.MAP)
 			return app.getResources().getResourceEntryName(compassMode.iconId.getIconId(mode))
 		}
 
@@ -119,7 +119,9 @@ class StarCompassButton @JvmOverloads constructor(
 			) else 0
 		)
 
+		val mapRotation = (imageView.drawable as? CompassDrawable)?.mapRotation ?: 0f
 		super.updateIcon()
+		(imageView.drawable as? CompassDrawable)?.mapRotation = mapRotation
 	}
 
 	@SuppressLint("ClickableViewAccessibility")

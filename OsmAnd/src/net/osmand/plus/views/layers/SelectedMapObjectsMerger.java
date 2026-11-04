@@ -141,7 +141,7 @@ public class SelectedMapObjectsMerger extends MapObjectsMerger<SelectedMapObject
 	private List<? extends MapObject> filterMapObjects(
 			@NonNull String nameEn,
 			@NonNull List<SelectedMapObject> selectedMapObjects) {
-		if (nameEn.startsWith("Amenity")) {
+		if (nameEn.startsWith(Amenity.ORIGIN_PREFIX)) {
 			if (amenities == null) {
 				amenities = searcher.searchAmenities(pointLatLon, searchSettings);
 			}

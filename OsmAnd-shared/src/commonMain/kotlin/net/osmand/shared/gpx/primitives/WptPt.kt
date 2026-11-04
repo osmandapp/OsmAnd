@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx.primitives
 
+import net.osmand.shared.data.Amenity
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxFormatter
 import net.osmand.shared.gpx.GpxUtilities
@@ -190,15 +191,15 @@ class WptPt : GpxExtensions, Linkable {
 	fun getKey() = "${name.orEmpty()}__${category.orEmpty()}"
 
 	fun getIconName(): String? {
-		return getExtensionsToRead()[GpxUtilities.ICON_NAME_EXTENSION]
+		return getExtension(GpxUtilities.ICON_NAME_EXTENSION)
 	}
 
 	fun isHidden(): Boolean {
-		return getExtensionsToRead()[GpxUtilities.HIDDEN_EXTENSION]?.toBoolean() ?: false
+		return getExtension(GpxUtilities.HIDDEN_EXTENSION)?.toBoolean() ?: false
 	}
 
 	fun isPinned(): Boolean {
-		return getExtensionsToRead()[GpxUtilities.PINNED_EXTENSION]?.toBoolean() ?: false
+		return getExtension(GpxUtilities.PINNED_EXTENSION)?.toBoolean() ?: false
 	}
 
 	fun getIconNameOrDefault(): String {
@@ -222,7 +223,7 @@ class WptPt : GpxExtensions, Linkable {
 		val extensionsToRead = getExtensionsToRead()
 		var amenityOrigin = extensionsToRead[GpxUtilities.AMENITY_ORIGIN_EXTENSION]
 		val comment = this.comment
-		if (amenityOrigin == null && comment != null && comment.startsWith("Amenity")) {
+		if (amenityOrigin == null && comment != null && comment.startsWith(Amenity.ORIGIN_PREFIX)) {
 			amenityOrigin = comment
 		}
 		return amenityOrigin
@@ -250,7 +251,7 @@ class WptPt : GpxExtensions, Linkable {
 	}
 
 	fun getBackgroundType(): String? {
-		return getExtensionsToRead()[GpxUtilities.BACKGROUND_TYPE_EXTENSION]
+		return getExtension(GpxUtilities.BACKGROUND_TYPE_EXTENSION)
 	}
 
 	fun setBackgroundType(backType: String?) {
@@ -263,11 +264,11 @@ class WptPt : GpxExtensions, Linkable {
 	}
 
 	fun getProfileType(): String? {
-		return getExtensionsToRead()[GpxUtilities.PROFILE_TYPE_EXTENSION]
+		return getExtension(GpxUtilities.PROFILE_TYPE_EXTENSION)
 	}
 
 	fun getAddress(): String? {
-		return getExtensionsToRead()[GpxUtilities.ADDRESS_EXTENSION]
+		return getExtension(GpxUtilities.ADDRESS_EXTENSION)
 	}
 
 	fun setAddress(address: String?) {
@@ -311,7 +312,7 @@ class WptPt : GpxExtensions, Linkable {
 
 	fun getTrkPtIndex(): Int {
 		return try {
-			getExtensionsToRead()[GpxUtilities.TRKPT_INDEX_EXTENSION]?.toInt() ?: -1
+			getExtension(GpxUtilities.TRKPT_INDEX_EXTENSION)?.toInt() ?: -1
 		} catch (e: NumberFormatException) {
 			-1
 		}
@@ -411,7 +412,7 @@ class WptPt : GpxExtensions, Linkable {
 	}
 
 	fun getSpecialPointType(): String? {
-		return getExtensionsToRead()[GpxUtilities.POINT_TYPE_EXTENSION]
+		return getExtension(GpxUtilities.POINT_TYPE_EXTENSION)
 	}
 
 	fun setSpecialPointType(type: String?) {

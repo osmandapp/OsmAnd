@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -35,7 +36,6 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteFolder;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.favorites.dialogs.share.ShareFavoritesController;
@@ -50,6 +50,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.shared.favorites.FavoriteFolderPath;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
@@ -272,6 +273,14 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 					})
 					.create();
 			items.add(addToTrackGroupItem);
+
+			BaseBottomSheetItem addToNavigationItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_navigation_outlined))
+					.setTitle(getString(R.string.add_to_navigation))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(view -> addToNavigation())
+					.create();
+			items.add(addToNavigationItem);
 		}
 		items.add(new DividerHalfItem(getContext()));
 
@@ -323,6 +332,18 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		if (result == ShareHandlingResult.GPX_FALLBACK_REQUIRED) {
 			fragment.shareFavorites(subtreeGroups, folderPath);
 		}
+		dismiss();
+	}
+
+	private void addToNavigation() {
+		BaseFavoriteListFragment fragment = getFavoriteListFragment();
+		if (fragment == null) return;
+
+		List<FavouritePoint> points = new ArrayList<>();
+		for (FavoriteGroup group : subtreeGroups) {
+			points.addAll(group.getPoints());
+		}
+		FavoriteMenu.addToNavigation(requireActivity(), points, fragment);
 		dismiss();
 	}
 
@@ -420,7 +441,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 			return true;
 		}
 		if (!FavoriteFolderPath.isValidSegment(newSegment)) {
-			app.showShortToastMessage(R.string.favorite_folder_invalid_name);
+			app.showShortToastMessage(R.string.favorite_folder_invalid_name, FavoriteFolderPath.SUBFOLDER_PLACEHOLDER);
 			return false;
 		}
 		String parentPath = FavoriteFolderPath.parentPath(folderPath);

@@ -59,7 +59,10 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 	}
 
 	public void updateIconsSelection() {
-		paletteController.onSelectIconFromPalette(centralController.getSelectedIconKey());
+		String iconKey = centralController.getSelectedIconKey();
+		if (!paletteController.isSelectedIcon(iconKey)) {
+			paletteController.onSelectIconFromPalette(iconKey);
+		}
 	}
 
 	@NonNull
@@ -122,6 +125,16 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 			@Override
 			public boolean isAccentColorCanBeChanged() {
 				return true;
+			}
+
+			@Override
+			public void onSelectIconFromPalette(@NonNull String icon) {
+				if (isSelectedIcon(icon)) {
+					// a tap on the selected icon is a choice too, as in the full list of icons
+					onIconSelected(icon);
+				} else {
+					super.onSelectIconFromPalette(icon);
+				}
 			}
 		};
 		paletteController.setPaletteListener(icon -> centralController.onIconSelectedFromPalette(icon, null));

@@ -3,7 +3,7 @@ package net.osmand.core.android;
 import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
 import static net.osmand.IndexConstants.OPENGL_SHADERS_CACHE_DIR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR;
+import static net.osmand.plus.settings.backend.OsmandSettings.BUILDINGS_3D_DEFAULT_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.FOG_DEFAULT_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.FOG_NIGHTMODE_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
@@ -277,6 +277,7 @@ public class MapRendererContext {
 			setMapBackgroundColor();
 		}
 		setSkyAndFogColors();
+		updateShadows();
 		PluginsHelper.updateMapPresentationEnvironment(this);
 	}
 
@@ -332,10 +333,26 @@ public class MapRendererContext {
 
 	@NonNull
 	protected QStringStringHash getMapStyleSettings() {
-		// Apply map style settings
-		OsmandSettings settings = app.getSettings();
+		QStringStringHash styleSettings = new QStringStringHash();
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (storage == null) {
+			// Neither the selected style nor "default" could be loaded. Keep the core style
+			// defaults instead of failing the caller: initialization and Android Auto call this.
+			Log.e(TAG, "No rendering rules storage, map style settings are not applied");
+		} else {
+			for (Map.Entry<String, String> setting : collectStyleProperties(storage).entrySet()) {
+				styleSettings.set(setting.getKey(), setting.getValue());
+			}
+		}
+		if (nightMode) {
+			styleSettings.set("nightMode", "true");
+		}
+		return styleSettings;
+	}
 
+	@NonNull
+	private Map<String, String> collectStyleProperties(@NonNull RenderingRulesStorage storage) {
+		OsmandSettings settings = app.getSettings();
 		List<RenderingRuleProperty> customRules = storage.PROPS.getCustomRules();
 		Map<String, RenderingClass> renderingClasses = storage.getRenderingClasses();
 		Map<String, String> properties = new LinkedHashMap<>(customRules.size() + renderingClasses.size());
@@ -364,14 +381,7 @@ public class MapRendererContext {
 			properties.put(name, String.valueOf(enabled));
 			parentsStates.put(name, enabled);
 		}
-		QStringStringHash styleSettings = new QStringStringHash();
-		for (Map.Entry<String, String> setting : properties.entrySet()) {
-			styleSettings.set(setting.getKey(), setting.getValue());
-		}
-		if (nightMode) {
-			styleSettings.set("nightMode", "true");
-		}
-		return styleSettings;
+		return properties;
 	}
 
 	public void removeDirectory(String dirPath) {
@@ -515,6 +525,7 @@ public class MapRendererContext {
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
 		updateElevationConfiguration();
+		updateShadows();
 
 		if (obfMapRasterLayerProvider != null) {
 			mapRendererView.resetMapLayerProvider(providerType.layerIndex);
@@ -538,7 +549,7 @@ public class MapRendererContext {
 				return;
 			}
 			SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-			if (srtmPlugin != null && srtmPlugin.ENABLE_3D_MAP_OBJECTS.get()) {
+			if (srtmPlugin != null && app.getSettings().ENABLE_3D_MAP_OBJECTS.get()) {
 				Buildings3DColorType colorType = srtmPlugin.get3DBuildingsColorStyle();
 				boolean useCustomColor = colorType == Buildings3DColorType.CUSTOM;
 				int customColor = useCustomColor
@@ -595,6 +606,13 @@ public class MapRendererContext {
 			if (mapRenderer.remove3DObjectColor(pointI)) {
 				highlight3dObjects.remove(latLon);
 			}
+		}
+	}
+
+	public void updateShadows() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView != null) {
+			mapRendererView.castShadows(app.getSettings().CAST_SHADOWS.get());
 		}
 	}
 

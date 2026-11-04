@@ -145,4 +145,9 @@ public class InputDevicesFragment extends BaseFullScreenFragment implements Inpu
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "input_devices";
+	}
 }

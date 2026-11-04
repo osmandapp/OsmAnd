@@ -664,7 +664,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	}
 
 	@Override
-	public void shareFavoritesFinished(@NonNull File destFile, @NonNull Spanned pointsDescription) {
+	public void shareFavoritesFinished(@NonNull File destFile, @Nullable Spanned pointsDescription) {
 		updateProgressVisibility(false);
 	}
 
@@ -1024,5 +1024,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				initListExpandedState();
 			}
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favorites_tree";
 	}
 }

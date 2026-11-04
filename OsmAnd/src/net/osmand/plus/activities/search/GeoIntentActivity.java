@@ -139,4 +139,9 @@ public class GeoIntentActivity extends OsmandListActivity {
 			progressDialog = null;
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "geo_intent";
+	}
 }

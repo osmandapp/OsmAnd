@@ -65,6 +65,7 @@ import net.osmand.plus.plugins.mapillary.MapillaryFirstDialogFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
+import net.osmand.plus.plugins.panoramax.PanoramaxFiltersFragment;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.srtm.building.Buildings3DFragment;
 import net.osmand.plus.plugins.srtm.ContourLinesMenu;
@@ -327,6 +328,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.map_overlay);
 		} else if (isCurrentType(MAPILLARY)) {
 			tv.setText(R.string.street_level_imagery);
+		} else if (isCurrentType(PANORAMAX)) {
+			tv.setText(R.string.panoramax);
 		} else if (isCurrentType(CONTOUR_LINES)) {
 			tv.setText(R.string.download_srtm_maps);
 		} else if (isCurrentType(OSM_NOTES)) {
@@ -540,6 +543,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		mapActivity.getRoutingHelper().removeListener(this);
 		nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		this.visible = visible;
+		mapActivity.updateBackPressedCallbackState();
 		updateVisibilityStack(type, visible);
 
 		ApplicationMode currentAppMode = getMyApplication().getSettings().APPLICATION_MODE.get();
@@ -592,6 +596,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					ConfigureMapFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(MAPILLARY)) {
 					MapillaryFiltersFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(PANORAMAX)) {
+					PanoramaxFiltersFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TRAVEL_ROUTES)) {
 					TravelRoutesFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TRANSPORT_LINES)) {
@@ -1032,7 +1038,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isCurrentTypeHasIndividualFragment() {
 		return isCurrentType(
-				CONFIGURE_MAP, MAPILLARY, TERRAIN, RELIEF_3D, MAP_ROUTES, RENDERING_CLASS,
+				CONFIGURE_MAP, MAPILLARY, PANORAMAX, TERRAIN, RELIEF_3D, MAP_ROUTES, RENDERING_CLASS,
 				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS,
 				NAUTICAL_DEPTH, COORDINATE_GRID, BUILDINGS_3D
 		);
@@ -1098,7 +1104,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 		DashboardType previous = visibleTypes.getPrevious();
 		if (previous != null) {
-			if (isCurrentType(MAPILLARY)) {
+			if (isCurrentType(MAPILLARY, PANORAMAX)) {
 				hideKeyboard();
 			}
 			visibleTypes.pop(); // Remove current visible type.

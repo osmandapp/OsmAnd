@@ -1,9 +1,11 @@
 package net.osmand.plus.plugins.externalsensors
 
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothManager
 import android.bluetooth.le.BluetoothLeScanner
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
+import android.content.Context
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
@@ -11,12 +13,13 @@ import net.osmand.PlatformUtil
 import net.osmand.util.Algorithms
 import org.apache.commons.logging.Log
 
-class BleDeviceUuidFinder(val targetDeviceId: String, val callback: DeviceFoundCallback) {
+class BleDeviceUuidFinder(context: Context, val targetDeviceId: String, val callback: DeviceFoundCallback) {
 	interface DeviceFoundCallback {
 		fun onDeviceFound(uuid: String?)
 	}
 
-	private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+	private val bluetoothAdapter: BluetoothAdapter? =
+		context.getSystemService(BluetoothManager::class.java)?.adapter
 	private var scanThread: HandlerThread? = null
 	private var scanHandler: Handler? = null
 	private var bleScanner: BluetoothLeScanner? = null

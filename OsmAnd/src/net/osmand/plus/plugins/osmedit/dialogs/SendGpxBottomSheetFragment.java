@@ -52,6 +52,7 @@ import java.util.stream.Collectors;
 public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SendGpxBottomSheetFragment.class.getSimpleName();
+	private static final String FILE_PATHS_KEY = "file_paths_key";
 
 	private final OsmEditingPlugin plugin = PluginsHelper.requirePlugin(OsmEditingPlugin.class);
 
@@ -68,9 +69,15 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		Bundle args = getArguments();
+		String[] filePaths = args != null ? args.getStringArray(FILE_PATHS_KEY) : null;
+		files = filePaths != null ? Arrays.stream(filePaths).map(File::new).toArray(File[]::new) : new File[0];
 		gpxDbHelper = app.getGpxDbHelper();
 		if (uploadVisibility == null) {
 			uploadVisibility = plugin.OSM_UPLOAD_VISIBILITY.get();
+		}
+		if (files.length == 0) {
+			dismissAllowingStateLoss();
 		}
 	}
 
@@ -245,9 +252,11 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	                                @NonNull File[] files, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SendGpxBottomSheetFragment fragment = new SendGpxBottomSheetFragment();
-			fragment.files = files;
+			Bundle args = new Bundle();
+			String[] filePaths = Arrays.stream(files).map(File::getPath).toArray(String[]::new);
+			args.putStringArray(FILE_PATHS_KEY, filePaths);
+			fragment.setArguments(args);
 			fragment.setTargetFragment(target, 0);
-			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}
 	}

@@ -123,6 +123,10 @@ public class MapTransparencyHelper {
 	public void showTransparencyBar(@NonNull CommonPreference<Integer> preference) {
 		hideParameterBar();
 		transparencySetting = preference;
+		if (transparencyBarLayout == null || transparencySlider == null) {
+			// No MapActivity attached: initTransparencyBar() shows the bar from transparencySetting
+			return;
+		}
 		transparencyBarLayout.setVisibility(View.VISIBLE);
 		transparencySlider.setValue(preference.get());
 		updateTransparencySliderUi();
@@ -177,7 +181,7 @@ public class MapTransparencyHelper {
 	}
 
 	public void hideParameterBar() {
-		parameterBarLayout.setVisibility(View.GONE);
+		AndroidUiHelper.updateVisibility(parameterBarLayout, false);
 		parameterMinSetting = null;
 		parameterMaxSetting = null;
 		parameterStepSetting = null;

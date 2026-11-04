@@ -1,6 +1,5 @@
 package net.osmand.plus.auto.screens
 
-import android.os.AsyncTask
 import android.text.SpannableString
 import android.text.Spanned
 import androidx.car.app.CarContext
@@ -12,7 +11,6 @@ import androidx.car.app.model.DistanceSpan
 import androidx.car.app.model.ItemList
 import androidx.car.app.model.Row
 import androidx.car.app.model.Template
-import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -71,24 +69,28 @@ class TracksScreen(
 		app.osmandMap.mapLayers.gpxLayer.customObjectsDelegate = CustomMapObjects()
 	}
 
-	private inner class LoadTracksTask : AsyncTask<Unit, Unit, Unit>() {
+	@Suppress("DEPRECATION") // AsyncTask, needs migration
+	private inner class LoadTracksTask : android.os.AsyncTask<Unit, Unit, Unit>() {
+        @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg params: Unit?) {
             prepareTrackItems()
         }
 
+        @Deprecated("Deprecated in Java")
         override fun onPostExecute(result: Unit?) {
             invalidate()
         }
     }
 
+    @Suppress("DEPRECATION") // AsyncTask, PlaceListNavigationTemplate: needs migration
     override fun getTemplate(): Template {
-        val templateBuilder = PlaceListNavigationTemplate.Builder()
+        val templateBuilder = androidx.car.app.navigation.model.PlaceListNavigationTemplate.Builder()
         val title = if (trackTab.type == TrackTabType.ALL) {
             app.getString(R.string.sort_last_modified)
         } else {
             trackTab.getName()
         }
-        val isLoading = loadTracksTask.status != AsyncTask.Status.FINISHED
+        val isLoading = loadTracksTask.status != android.os.AsyncTask.Status.FINISHED
         templateBuilder.setLoading(isLoading)
         if (!isLoading) {
             setupTracks(templateBuilder)
@@ -103,7 +105,7 @@ class TracksScreen(
 
     private fun prepareTrackItems() {
         val newMap = HashMap<TrackItem, SelectedGpxFile>()
-        for (track in trackTab.trackItems) {
+        for (track in trackTab.getTrackItems()) {
             track.getFile()?.let { file ->
                 val item = gpxDbHelper.getItem(file) { updateTrack(track, it) }
                 if (item != null) {
@@ -122,12 +124,12 @@ class TracksScreen(
         trackItem.dataItem = dataItem
     }
 
-	private fun setupTracks(templateBuilder: PlaceListNavigationTemplate.Builder) {
+	private fun setupTracks(templateBuilder: androidx.car.app.navigation.model.PlaceListNavigationTemplate.Builder) {
 		val latLon = app.mapViewTrackingUtilities.defaultLocation
 		val listBuilder = ItemList.Builder()
-		val tracksSize = trackTab.trackItems.size
+		val tracksSize = trackTab.getTrackItems().size
 		val selectedGpxFiles = ArrayList<SelectedGpxFile>()
-		val tracks = trackTab.trackItems.subList(0, tracksSize.coerceAtMost(contentLimit - 1))
+		val tracks = trackTab.getTrackItems().subList(0, tracksSize.coerceAtMost(contentLimit - 1))
 		val mapRect = KQuadRect()
 		for (track in tracks) {
 			val gpxFile = loadedGpxFiles[track]

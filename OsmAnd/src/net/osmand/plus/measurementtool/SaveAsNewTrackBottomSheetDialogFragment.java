@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.VIEW_TYPE_ADD;
 import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.getFolders;
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
+import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARS;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -260,7 +261,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (text.isEmpty()) {
 			nameTextBox.setError(getString(R.string.empty_filename));
 		} else if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(text).find()) {
-			nameTextBox.setError(getString(R.string.file_name_containes_illegal_char));
+			nameTextBox.setError(getString(R.string.file_name_containes_illegal_char, ILLEGAL_FILE_NAME_CHARS));
 		} else if (isFileExist(text)) {
 			nameTextBox.setError(getString(R.string.file_with_name_already_exist));
 		} else {

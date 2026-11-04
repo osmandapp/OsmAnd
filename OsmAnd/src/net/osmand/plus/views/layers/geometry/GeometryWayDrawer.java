@@ -77,6 +77,11 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		this.context = context;
 	}
 
+	/** While a flyover video is recorded the arrows stay at their places on a growing line and while zooming. */
+	private boolean isArrowsFixedOnPath() {
+		return getContext().getApp().getOsmandMap().getMapView().isArrowsFixedOnPath();
+	}
+
 	public T getContext() {
 		return context;
 	}
@@ -212,6 +217,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 						hasColorizationMapping, hasOutlineColorizationMapping, color, outlineColor);
 
 				line.setShowArrows(showPathBitmaps);
+				line.setArrowsFixedOnPath(isArrowsFixedOnPath());
 				if (showPathBitmaps && pathBitmap != null) {
 					line.setPathIconStep(bitmapStep);
 					if (specialPathBitmap != null && specialBitmapStep != -1) {
@@ -273,10 +279,10 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		if (pathBitmap != null) {
 			builder.setScreenScale(getContext().getDensity())
 					.setPathIconStep(bitmapStep)
-					.setPathIcon(NativeUtilities.createSkImageFromBitmap(pathBitmap))
+					.setPathIcon(createPathIcon(pathBitmap))
 					.setPathIconOnSurface(bitmapOnSurface);
 			if (specialPathBitmap != null) {
-				builder.setSpecialPathIcon(NativeUtilities.createSkImageFromBitmap(specialPathBitmap));
+				builder.setSpecialPathIcon(createPathIcon(specialPathBitmap));
 				if (specialBitmapStep != -1) {
 					builder.setSpecialPathIconStep(specialBitmapStep);
 				}
@@ -318,7 +324,12 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			builder.setFillColor(NativeUtilities.createFColorARGB(color));
 			builder.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor));
 		}
-		builder.buildAndAddToCollection(collection);
+		builder.buildAndAddToCollection(collection).setArrowsFixedOnPath(isArrowsFixedOnPath());
+	}
+
+	@NonNull
+	protected SingleSkImage createPathIcon(@NonNull Bitmap bitmap) {
+		return NativeUtilities.createSkImageFromBitmap(bitmap);
 	}
 
 	protected void updateVectorLine(@NonNull VectorLinesCollection collection,

@@ -4,6 +4,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice
+import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor
 import net.osmand.plus.settings.backend.preferences.CommonPreferenceProvider
 
 class ExternalSensorsDeviceHelper(
@@ -21,5 +22,10 @@ class ExternalSensorsDeviceHelper(
 	override fun onDevicePaired(device: AbstractDevice<*>) {
 		super.onDevicePaired(device)
 		externalSensorsPlugin.onDevicePaired(device)
+	}
+
+	override fun onDeviceSensorsAdded(device: AbstractDevice<*>, sensors: List<AbstractSensor>) {
+		super.onDeviceSensorsAdded(device, sensors)
+		externalSensorsPlugin.onDeviceSensorsAdded(device, sensors)
 	}
 }

@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -17,6 +18,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.R.drawable;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -258,6 +260,15 @@ public class RenderingIcons {
 			}
 		}
 		return null;
+	}
+
+	@DrawableRes
+	public static int getResIdOrDefault(@NonNull Context ctx, @Nullable String id, @DrawableRes int defIconId) {
+		if (Algorithms.isEmpty(id)) {
+			return defIconId;
+		}
+		Integer resId = getResId(id);
+		return resId != null ? resId : AndroidUtils.getDrawableId(ctx, id, defIconId);
 	}
 
 	public static Integer getResId(@NonNull String id) {

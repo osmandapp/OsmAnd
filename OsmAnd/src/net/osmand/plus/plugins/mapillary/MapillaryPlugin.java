@@ -89,7 +89,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Nullable
 	private GalleryRowController mapillaryRowController;
 	private MapillaryVectorLayer vectorLayer;
-	private MapWidgetInfo mapillaryWidgetRegInfo;
 
 	public MapillaryPlugin(OsmandApplication app) {
 		super(app);
@@ -103,7 +102,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		MAPILLARY_FILTER_FROM_DATE = registerLongPreference("mapillary_filter_from_date", 0).makeGlobal().makeShared();
 		MAPILLARY_FILTER_TO_DATE = registerLongPreference("mapillary_filter_to_date", 0).makeGlobal().makeShared();
 		MAPILLARY_FILTER_PANO = registerBooleanPreference("mapillary_filter_pano", false).makeGlobal().makeShared();
-		MAPILLARY_PHOTOS_ROW_COLLAPSED = registerBooleanPreference("mapillary_menu_collapsed", true).makeGlobal().makeShared();
+		MAPILLARY_PHOTOS_ROW_COLLAPSED = registerBooleanPreference("mapillary_menu_collapsed", true).makeGlobal();
 	}
 
 	@Override
@@ -190,6 +189,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 			mapView.removeLayer(vectorLayer);
 			vectorLayer.setMap(null);
 		}
+		app.getResourceManager().getMapillaryVectorTilesCache()
+				.setMapillaryActive(vectorLayer.getMap() != null);
 		app.getOsmandMap().getMapLayers().updateMapSource(mapView, null);
 	}
 
@@ -229,8 +230,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 		};
 
 		adapter.addItem(new ContextMenuItem(MAPILLARY)
-				.setTitleId(R.string.street_level_imagery, mapActivity)
-				.setDescription("Mapillary")
+				.setTitleId(R.string.mapillary, mapActivity)
+				.setDescription(app.getString(R.string.street_level_imagery))
 				.setSelected(SHOW_MAPILLARY.get())
 				.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_mapillary)
@@ -276,14 +277,29 @@ public class MapillaryPlugin extends OsmandPlugin {
 		return true;
 	}
 
-	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {
-		if (mapillaryWidgetRegInfo != null) {
+	@Nullable
+	private MapWidgetInfo getDefaultWidgetInfo(@NonNull MapActivity mapActivity) {
+		// Only the default Mapillary widget, not custom duplicates.
+		return mapActivity.getMapLayers().getMapWidgetRegistry()
+				.getWidgetInfoById(WidgetType.MAPILLARY.id);
+	}
+
+	public boolean isWidgetVisible(@NonNull MapActivity mapActivity) {
+		MapWidgetInfo widgetInfo = getDefaultWidgetInfo(mapActivity);
+		return widgetInfo != null && widgetInfo.isEnabledForAppMode(
+				app.getSettings().getApplicationMode(), ScreenLayoutMode.getDefault(mapActivity));
+	}
+
+	public void setWidgetVisible(@NonNull MapActivity mapActivity, boolean visible) {
+		MapWidgetInfo widgetInfo = getDefaultWidgetInfo(mapActivity);
+		if (widgetInfo == null) {
+			return;
+		}
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+		if (widgetInfo.isEnabledForAppMode(appMode, layoutMode) != visible) {
 			MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
-			List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
-			for (ApplicationMode mode : allModes) {
-				widgetRegistry.enableDisableWidgetForMode(mode, mapillaryWidgetRegInfo, visible, layoutMode, false);
-			}
+			widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, visible, layoutMode, false);
 			MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mil != null) {
 				mil.recreateControls();

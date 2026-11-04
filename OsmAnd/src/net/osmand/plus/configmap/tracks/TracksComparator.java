@@ -24,11 +24,14 @@ import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.util.KMapUtils;
 import net.osmand.util.CollectionUtils;
 
 import java.util.Comparator;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 public class TracksComparator implements Comparator<Object> {
 
@@ -37,6 +40,12 @@ public class TracksComparator implements Comparator<Object> {
 	public final TracksSortMode sortMode;
 	public final Collator collator = OsmAndCollator.primaryCollator();
 	private boolean useSubdirs = false;
+
+	// Sorting keys have to stay constant for the whole sort, otherwise TimSort throws
+	// "Comparison method violates its general contract!". Track folders read them from the
+	// file system and recalculate them lazily, so they are cached per comparator instance.
+	private final Map<ComparableTracksGroup, Long> lastModifiedCache = new IdentityHashMap<>();
+	private final Map<ComparableTracksGroup, TrackFolderAnalysis> analysisCache = new IdentityHashMap<>();
 
 	public TracksComparator(@NonNull TrackTab trackTab, @NonNull OsmandApplication app) {
 		this.trackTab = trackTab;
@@ -64,17 +73,15 @@ public class TracksComparator implements Comparator<Object> {
 		if (o2 instanceof Integer) {
 			return 1;
 		}
-		if (o1 instanceof TrackItem && ((TrackItem) o1).isShowCurrentTrack()) {
-			return -1;
+		boolean currentTrack1 = o1 instanceof TrackItem && ((TrackItem) o1).isShowCurrentTrack();
+		boolean currentTrack2 = o2 instanceof TrackItem && ((TrackItem) o2).isShowCurrentTrack();
+		if (currentTrack1 || currentTrack2) {
+			return currentTrack1 && currentTrack2 ? 0 : (currentTrack1 ? -1 : 1);
 		}
-		if (o2 instanceof TrackItem && ((TrackItem) o2).isShowCurrentTrack()) {
-			return 1;
-		}
-		if (o1 instanceof VisibleTracksGroup) {
-			return -1;
-		}
-		if (o2 instanceof VisibleTracksGroup) {
-			return 1;
+		boolean visibleGroup1 = o1 instanceof VisibleTracksGroup;
+		boolean visibleGroup2 = o2 instanceof VisibleTracksGroup;
+		if (visibleGroup1 || visibleGroup2) {
+			return visibleGroup1 && visibleGroup2 ? 0 : (visibleGroup1 ? -1 : 1);
 		}
 		if (o1 instanceof ComparableTracksGroup folder1) {
 			if (o2 instanceof ComparableTracksGroup folder2) {
@@ -90,8 +97,15 @@ public class TracksComparator implements Comparator<Object> {
 		if (o2 instanceof ComparableTracksGroup) {
 			return 1;
 		}
-		if (o1 instanceof TrackItem && o2 instanceof TrackItem) {
+		boolean trackItem1 = o1 instanceof TrackItem;
+		boolean trackItem2 = o2 instanceof TrackItem;
+		if (trackItem1 && trackItem2) {
 			return compareTrackItems((TrackItem) o1, (TrackItem) o2);
+		}
+		// Any other row (folder statistics for example) is kept after the tracks. Reporting it
+		// as equal to every track would make the comparator intransitive.
+		if (trackItem1 || trackItem2) {
+			return trackItem1 ? -1 : 1;
 		}
 		return 0;
 	}
@@ -120,8 +134,8 @@ public class TracksComparator implements Comparator<Object> {
 			}
 
 			case DISTANCE_ASCENDING, DISTANCE_DESCENDING: {
-				float dist1 = group1.getFolderAnalysis().getTotalDistance();
-				float dist2 = group2.getFolderAnalysis().getTotalDistance();
+				float dist1 = getFolderAnalysis(group1).getTotalDistance();
+				float dist2 = getFolderAnalysis(group2).getTotalDistance();
 				if (Math.abs(dist1 - dist2) >= EQUIVALENT_TOLERANCE) {
 					multiplier = sortMode == DISTANCE_ASCENDING ? 1 : -1;
 					return multiplier * Float.compare(dist1, dist2);
@@ -129,8 +143,8 @@ public class TracksComparator implements Comparator<Object> {
 			}
 
 			case DURATION_ASCENDING, DURATION_DESCENDING: {
-				int timeSpan1 = group1.getFolderAnalysis().getTimeSpan();
-				int timeSpan2 = group2.getFolderAnalysis().getTimeSpan();
+				int timeSpan1 = getFolderAnalysis(group1).getTimeSpan();
+				int timeSpan2 = getFolderAnalysis(group2).getTimeSpan();
 				if (timeSpan1 != timeSpan2) {
 					multiplier = sortMode == DURATION_ASCENDING ? 1 : -1;
 					return multiplier * Long.compare(timeSpan1, timeSpan2);
@@ -288,15 +302,19 @@ public class TracksComparator implements Comparator<Object> {
 		if (file2 == null) {
 			return -1;
 		}
-		if (file1.lastModified() == file2.lastModified()) {
+		// Deliberately not file.lastModified(): reading the file system during the sort makes the
+		// comparison result change when tracks are deleted in background (a missing file reports 0).
+		long lastModified1 = item1.getLastModified();
+		long lastModified2 = item2.getLastModified();
+		if (lastModified1 == lastModified2) {
 			return compareTrackItemNames(item1, item2);
 		}
-		return compareFilesByLastModified(file1.lastModified(), file2.lastModified());
+		return compareFilesByLastModified(lastModified1, lastModified2);
 	}
 
 	private int compareFolderFilesByLastModified(@NonNull ComparableTracksGroup folder1, @NonNull ComparableTracksGroup folder2) {
-		long lastModified1 = folder1.lastModified();
-		long lastModified2 = folder2.lastModified();
+		long lastModified1 = getLastModified(folder1);
+		long lastModified2 = getLastModified(folder2);
 
 		if (lastModified1 == lastModified2) {
 			return compareTrackFolderNames(folder1, folder2);
@@ -306,6 +324,25 @@ public class TracksComparator implements Comparator<Object> {
 
 	private int compareFilesByLastModified(long lastModified1, long lastModified2) {
 		return -Long.compare(lastModified1, lastModified2);
+	}
+
+	private long getLastModified(@NonNull ComparableTracksGroup group) {
+		Long lastModified = lastModifiedCache.get(group);
+		if (lastModified == null) {
+			lastModified = group.lastModified();
+			lastModifiedCache.put(group, lastModified);
+		}
+		return lastModified;
+	}
+
+	@NonNull
+	private TrackFolderAnalysis getFolderAnalysis(@NonNull ComparableTracksGroup group) {
+		TrackFolderAnalysis analysis = analysisCache.get(group);
+		if (analysis == null) {
+			analysis = group.getFolderAnalysis();
+			analysisCache.put(group, analysis);
+		}
+		return analysis;
 	}
 
 	private int compareTrackItemNames(@NonNull TrackItem item1, @NonNull TrackItem item2) {

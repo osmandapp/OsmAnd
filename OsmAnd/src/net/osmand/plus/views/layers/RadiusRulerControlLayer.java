@@ -102,7 +102,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private final Path arrow = new Path();
 	private final Path arrowArc = new Path();
 	private final Path redCompassLines = new Path();
-	private final Path rulerCircle = new Path();
+	private final float[] rulerCircleLines = new float[((int) (360 / CIRCLE_ANGLE_STEP) + 1) * 4];
+	private int rulerCircleLinesSize;
 
 	private final double[] degrees = new double[72];
 	public static final String[] CARDINAL_DIRECTIONS = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
@@ -329,6 +330,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 
 	public boolean isRulerWidgetOn() {
 		MapActivity activity = getMapActivity();
+		boolean on = false;
 		if (activity != null) {
 			ApplicationMode appMode = app.getSettings().getApplicationMode();
 			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
@@ -336,13 +338,13 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			rulerWidgets.clear();
 			widgetRegistry.collectWidgetsInfo(rulerWidgets, appMode, layoutMode, null, RADIUS_RULER, true);
 
-			for (int i = 0; i < rulerWidgets.size(); i++) {
-				if (isPanelVisible(rulerWidgets.get(i).getWidgetPanel())) {
-					return true;
-				}
+			for (int i = 0; i < rulerWidgets.size() && !on; i++) {
+				on = isPanelVisible(rulerWidgets.get(i).getWidgetPanel());
 			}
+			// the widgets hold their activity: keep none of them between two draws
+			rulerWidgets.clear();
 		}
-		return false;
+		return on;
 	}
 
 	private boolean isPanelVisible(WidgetsPanel widgetsPanel) {
@@ -573,7 +575,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		double distance = getDistanceForPixelRadius(circleRadius, tb);
 		QuadPoint canvasOffset = getCachedAACanvasOffset();
 		PointF previousPoint = null;
-		rulerCircle.reset();
+		rulerCircleLinesSize = 0;
 		if (sphericalMap && !isVisibleGlobeDistance(distance)) {
 			return;
 		}
@@ -581,33 +583,42 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			LatLon latLon = calculateDestinationPoint(currentCenterLatLon, distance, a, sphericalMap);
 			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon);
 			if (screenPoint == null) {
-				drawCirclePath(canvas, attrs);
-				rulerCircle.reset();
+				drawCircleLines(canvas, attrs);
 				previousPoint = null;
 				continue;
 			}
 			if (previousPoint != null && isProjectionDiscontinuity(previousPoint, screenPoint, circleRadius)) {
 				// Do not connect points across a globe projection discontinuity.
-				drawCirclePath(canvas, attrs);
-				rulerCircle.reset();
+				drawCircleLines(canvas, attrs);
+				previousPoint = null;
 			}
-			float x = screenPoint.x + canvasOffset.x;
-			float y = screenPoint.y + canvasOffset.y;
-			if (rulerCircle.isEmpty()) {
-				rulerCircle.moveTo(x, y);
-			} else {
-				rulerCircle.lineTo(x, y);
+			if (previousPoint != null && rulerCircleLinesSize + 4 <= rulerCircleLines.length) {
+				rulerCircleLines[rulerCircleLinesSize++] = previousPoint.x + canvasOffset.x;
+				rulerCircleLines[rulerCircleLinesSize++] = previousPoint.y + canvasOffset.y;
+				rulerCircleLines[rulerCircleLinesSize++] = screenPoint.x + canvasOffset.x;
+				rulerCircleLines[rulerCircleLinesSize++] = screenPoint.y + canvasOffset.y;
 			}
 			previousPoint = screenPoint;
 		}
-		drawCirclePath(canvas, attrs);
+		drawCircleLines(canvas, attrs);
 	}
 
-	private void drawCirclePath(@NonNull Canvas canvas, @NonNull RenderingLineAttributes attrs) {
-		if (!rulerCircle.isEmpty()) {
-			canvas.drawPath(rulerCircle, attrs.shadowPaint);
-			canvas.drawPath(rulerCircle, attrs.paint);
+	// Separate segments instead of a Path: the UI renderer rasterizes an antialiased stroked
+	// path of this size in software, into a new mask of about 1 MB on every frame
+	private void drawCircleLines(@NonNull Canvas canvas, @NonNull RenderingLineAttributes attrs) {
+		if (rulerCircleLinesSize > 0) {
+			drawLines(canvas, rulerCircleLines, rulerCircleLinesSize, attrs.shadowPaint);
+			drawLines(canvas, rulerCircleLines, rulerCircleLinesSize, attrs.paint);
+			rulerCircleLinesSize = 0;
 		}
+	}
+
+	private void drawLines(@NonNull Canvas canvas, @NonNull float[] lines, int size, @NonNull Paint paint) {
+		// round caps of neighbour segments would overlap and show as dots on a translucent line
+		Paint.Cap cap = paint.getStrokeCap();
+		paint.setStrokeCap(Paint.Cap.BUTT);
+		canvas.drawLines(lines, 0, size, paint);
+		paint.setStrokeCap(cap);
 	}
 
 	private void drawTextInPosition(@NonNull Canvas canvas, @NonNull String text, @NonNull PointF textPosition,

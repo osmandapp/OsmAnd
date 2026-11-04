@@ -62,6 +62,9 @@ public class ContextMenuCardDialogFragment extends BaseFullScreenFragment implem
 		if (dialog.getType() == ContextMenuCardDialog.CardDialogType.MAPILLARY) {
 			view.findViewById(R.id.dialog_layout)
 					.setBackgroundColor(ContextCompat.getColor(activity, R.color.mapillary_action_bar));
+		} else if (dialog.getType() == ContextMenuCardDialog.CardDialogType.PANORAMAX) {
+			view.findViewById(R.id.dialog_layout)
+					.setBackgroundColor(ContextCompat.getColor(activity, R.color.panoramax_action_bar));
 		}
 		contentLayout = view.findViewById(R.id.content);
 		contentView = dialog.getContentView();
@@ -112,6 +115,9 @@ public class ContextMenuCardDialogFragment extends BaseFullScreenFragment implem
 
 	@Override
 	public void onDestroyView() {
+		if (dialog != null) {
+			dialog.onDestroyView();
+		}
 		super.onDestroyView();
 		if (contentLayout != null && contentView != null) {
 			contentLayout.removeView(contentView);
@@ -132,6 +138,9 @@ public class ContextMenuCardDialogFragment extends BaseFullScreenFragment implem
 	public int getStatusBarColorId() {
 		if (dialog != null && dialog.getType() == ContextMenuCardDialog.CardDialogType.MAPILLARY) {
 			return R.color.status_bar_mapillary;
+		}
+		if (dialog != null && dialog.getType() == ContextMenuCardDialog.CardDialogType.PANORAMAX) {
+			return R.color.status_bar_panoramax;
 		}
 		return -1;
 	}
@@ -180,5 +189,10 @@ public class ContextMenuCardDialogFragment extends BaseFullScreenFragment implem
 		return view == null
 				? Collections.emptyList()
 				: Collections.singletonList(AndroidUtils.getViewBoundOnScreen(view));
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "context_menu_card";
 	}
 }

@@ -34,6 +34,7 @@ import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.IndexItem.DownloadEntry;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalOperationHelper;
+import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.ResourceManager;
@@ -474,6 +475,9 @@ public class DownloadIndexesThread {
 					String name = item.getBasename();
 					int count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
 					item.setDownloaded(true);
+					// the file may be reindexed only when the queue is done, show it as up to date already
+					item.setOutdated(false);
+					item.setLocalTimestamp(item.getTimestamp());
 					HistoryDownloadEntry entry = new HistoryDownloadEntry(name, count);
 					if (count == 1) {
 						dbHelper.add(entry, DatabaseHelper.DOWNLOAD_ENTRY);
@@ -535,6 +539,7 @@ public class DownloadIndexesThread {
 				boolean forceWifi = downloadFileHelper.isWifiConnected();
 				Set<IndexItem> currentDownloads = new HashSet<>();
 				StringBuilder warnings = new StringBuilder();
+				boolean firstFileReindexed = false;
 				try {
 					while (!indexItemDownloading.isEmpty()) {
 						IndexItem item = indexItemDownloading.poll();
@@ -586,16 +591,16 @@ public class DownloadIndexesThread {
 								}
 							}
 							publishProgress(item);
-							String warning = reindexFiles(filesToReindex);
-							if (!Algorithms.isEmpty(warning)) {
-								warnings.append(" ").append(warning);
+							// reindexing checks all maps, so do it for the first file (to use it right away)
+							// and then once the queue is done, not after every downloaded file
+							if (!firstFileReindexed || indexItemDownloading.isEmpty()) {
+								firstFileReindexed = true;
+								reindexDownloadedFiles(filesToReindex, warnings);
 							}
-							filesToReindex.clear();
-							// slow down but let update all button work properly
-							indexes.updateOutdatedFiles();
 						}
 					}
 				} finally {
+					reindexDownloadedFiles(filesToReindex, warnings);
 					if (currentDownloadingItem != null) {
 						clearPendingFilesToDelete(currentDownloadingItem);
 					}
@@ -635,6 +640,19 @@ public class DownloadIndexesThread {
 				publishProgress(DownloadValidationManager.getFreeVersionMessage(app));
 			}
 			return !exceed;
+		}
+
+		private void reindexDownloadedFiles(@NonNull List<File> filesToReindex, @NonNull StringBuilder warnings) {
+			if (filesToReindex.isEmpty()) {
+				return;
+			}
+			String warning = reindexFiles(filesToReindex);
+			if (!Algorithms.isEmpty(warning)) {
+				warnings.append(" ").append(warning);
+			}
+			filesToReindex.clear();
+			// slow down but let update all button work properly
+			indexes.updateOutdatedFiles();
 		}
 
 		private String reindexFiles(List<File> filesToReindex) {
@@ -705,7 +723,9 @@ public class DownloadIndexesThread {
 					}
 					checkDownload(item, time);
 				} else {
-					app.logMapDownloadEvent("failed", item, time);
+					String details = AnalyticsHelper.getDownloadFailureDetails(app,
+							downloadFileHelper.getFailureReason(), de.targetFile, item.getContentSize());
+					app.logMapDownloadEvent("failed", item, time, details);
 				}
 			}
 			return result;

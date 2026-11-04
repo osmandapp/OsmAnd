@@ -142,7 +142,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			if (args.containsKey(SCREEN_LAYOUT_MODE)) {
 				layoutMode = AndroidUtils.getSerializable(args, SCREEN_LAYOUT_MODE, ScreenLayoutMode.class);
 			}
-			if (args.containsKey(CONTEXT_SELECTED_WIDGET) || args.containsKey(ADD_TO_NEXT)) {
+			if (savedInstanceState == null && (args.containsKey(CONTEXT_SELECTED_WIDGET) || args.containsKey(ADD_TO_NEXT))) {
 				addNewWidget();
 			}
 		}
@@ -177,6 +177,10 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		bottomButtons.setVisibility(View.GONE);
 		bottomButtonsShadow.setVisibility(View.GONE);
 
+		if (lifecycleCallbacks != null) {
+			// the view is created again when the fragment comes back from the back stack
+			getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+		}
 		lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
 			@Override
 			public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
@@ -556,6 +560,9 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 	@Override
 	public void onWidgetsConfigurationChanged() {
+		if (!isAdded()) {
+			return;
+		}
 		WidgetsListFragment fragment = getSelectedFragment();
 		if (fragment != null && !isEditMode) {
 			fragment.reloadWidgets();
@@ -612,7 +619,9 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		if (activity != null && !activity.isChangingConfigurations()) {
 			dialogManager.unregister(ConfigureWidgetsController.PROCESS_ID);
 		}
-		getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+		if (lifecycleCallbacks != null) {
+			getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+		}
 	}
 
 	@Override
@@ -714,5 +723,10 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		args.putBoolean(ADD_TO_NEXT, addNext);
 
 		ConfigureWidgetsFragment.showInstance(activity, panel, appMode, args);
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "configure_widgets";
 	}
 }

@@ -19,6 +19,8 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.measurementtool.adapter.FolderListAdapter.FolderViewHolder;
@@ -29,6 +31,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FolderListAdapter extends RecyclerView.Adapter<FolderViewHolder> {
@@ -176,15 +179,30 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderViewHolder> {
 
 	@NonNull
 	public static List<String> getFolders(@NonNull File parentDir) {
-		List<File> folders = new ArrayList<>();
-		folders.add(parentDir);
-		Algorithms.collectDirs(parentDir, folders);
-
 		List<String> folderPaths = new ArrayList<>();
-		for (File dir : folders) {
+		for (File dir : collectSortedDirs(parentDir)) {
 			folderPaths.add(dir.getAbsolutePath());
 		}
 		return folderPaths;
+	}
+
+	@NonNull
+	public static List<File> collectSortedDirs(@NonNull File parentDir) {
+		List<File> dirs = new ArrayList<>();
+		dirs.add(parentDir);
+		collectSortedDirs(parentDir, dirs, OsmAndCollator.primaryCollator());
+		return dirs;
+	}
+
+	private static void collectSortedDirs(@NonNull File parentDir, @NonNull List<File> dirs, @NonNull Collator collator) {
+		File[] subDirs = parentDir.listFiles(File::isDirectory);
+		if (subDirs != null) {
+			Arrays.sort(subDirs, (dir1, dir2) -> collator.compare(dir1.getName(), dir2.getName()));
+			for (File dir : subDirs) {
+				dirs.add(dir);
+				collectSortedDirs(dir, dirs, collator);
+			}
+		}
 	}
 
 	public static class FolderViewHolder extends RecyclerView.ViewHolder {

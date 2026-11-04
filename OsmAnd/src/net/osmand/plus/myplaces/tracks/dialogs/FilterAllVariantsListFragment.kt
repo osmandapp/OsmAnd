@@ -36,6 +36,7 @@ class FilterAllVariantsListFragment : BaseFullScreenDialogFragment(), SmartFolde
 	companion object {
 		val TAG: String = FilterAllVariantsListFragment::class.java.simpleName
 
+		@Suppress("DEPRECATION") // retainInstance, needs migration
 		fun showInstance(
 			app: OsmandApplication,
 			manager: FragmentManager,
@@ -230,4 +231,6 @@ class FilterAllVariantsListFragment : BaseFullScreenDialogFragment(), SmartFolde
 
 	override fun onSmartFolderCreated(smartFolder: SmartFolder) {
 	}
+
+	override fun getAnalyticsScreen() = "filter_all_variants_list"
 }

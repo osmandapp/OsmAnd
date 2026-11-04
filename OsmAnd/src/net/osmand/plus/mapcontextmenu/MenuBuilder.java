@@ -56,6 +56,7 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.TransportStopMatcher;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndTaskManager;
@@ -74,7 +75,6 @@ import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchType;
 import net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.rows.PoiAdditionalMultiValueDialogController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryRowBuilder;
 import net.osmand.plus.gallery.online.OnlinePhotosRowController;
 import net.osmand.plus.mapcontextmenu.other.MenuObject;
@@ -743,7 +743,7 @@ public class MenuBuilder {
 		}
 		if (showNearbyTransportRoutes()) {
 			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
-			String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS_UI, app);
+			String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopMatcher.SHOW_STOPS_RADIUS_METERS, app);
 			buildRow(view, new BuildRowAttrs.Builder().setText(routesWithingDistance)
 					.setCollapsable(collapsableView != null).setCollapsableView(collapsableView)
 					.setMatchWithDivider(true).build());
@@ -879,7 +879,7 @@ public class MenuBuilder {
 		textView.setTypeface(DEFAULT);
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
-		textView.setText(text);
+		textView.setText(attrs.isNumber() && text != null ? OsmAndFormatter.formatPhoneNumber(view.getContext(), text) : text);
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 
@@ -1054,7 +1054,8 @@ public class MenuBuilder {
 		textView.setTypeface(DEFAULT);
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
-		textView.setText(WikiArticleHelper.getPartialContent(description));
+		textView.setText(Algorithms.isHtmlText(description)
+				? WikiArticleHelper.getPartialContent(description) : description.trim());
 
 		if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);
@@ -1092,7 +1093,8 @@ public class MenuBuilder {
 		}
 		ArrayList<String> values = collectMultiValues(text, "[,;]");
 		if (values.size() > 1) {
-			PoiAdditionalMultiValueDialogController.showDialog(mapActivity, title, values, this::openPhoneNumber);
+			PoiAdditionalMultiValueDialogController.showDialog(mapActivity, title, values,
+					OsmAndFormatter::formatPhoneNumber, this::openPhoneNumber);
 		} else if (values.size() == 1) {
 			openPhoneNumber(view.getContext(), values.get(0));
 		}

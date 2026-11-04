@@ -449,4 +449,9 @@ public class TravelRoutesFragment extends BaseFullScreenFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "travel_routes";
+	}
 }

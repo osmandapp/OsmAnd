@@ -140,4 +140,9 @@ public class CustomMapButtonsFragment extends BaseMapButtonsFragment implements 
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "custom_map_buttons";
+	}
 }

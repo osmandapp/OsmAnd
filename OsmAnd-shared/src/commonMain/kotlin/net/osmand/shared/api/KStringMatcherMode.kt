@@ -18,4 +18,7 @@ enum class KStringMatcherMode {
 
 	// simple collator equals
 	CHECK_EQUALS,
+
+	// tests the other way round: the part should start with one of the words of the base
+	MULTISEARCH,
 }

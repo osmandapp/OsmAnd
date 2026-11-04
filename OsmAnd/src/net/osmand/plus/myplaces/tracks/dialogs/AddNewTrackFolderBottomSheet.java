@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_PATH_NAME_CHARACTERS;
+import static net.osmand.plus.utils.FileUtils.ILLEGAL_PATH_NAME_CHARS;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -102,7 +103,7 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 			nameTextBox.setError(getString(R.string.empty_filename));
 		} else {
 			if (ILLEGAL_PATH_NAME_CHARACTERS.matcher(name).find()) {
-				nameTextBox.setError(getString(R.string.file_name_containes_illegal_char));
+				nameTextBox.setError(getString(R.string.file_name_containes_illegal_char, ILLEGAL_PATH_NAME_CHARS));
 			} else {
 				File parent = parentFolder != null ? parentFolder : app.getAppPath(GPX_INDEX_DIR);
 				File destFolder = new File(parent, name);

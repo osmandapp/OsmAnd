@@ -30,7 +30,7 @@ android {
 	sourceSets {
 		main {
 			manifest.srcFile "AndroidManifest-library.xml"
-			java.srcDirs = ["src", "src-gms", "src-google"]
+			java.srcDirs = ["src", "src-gms", "src-google", "src-nogplay"]
 		}
 	}
 

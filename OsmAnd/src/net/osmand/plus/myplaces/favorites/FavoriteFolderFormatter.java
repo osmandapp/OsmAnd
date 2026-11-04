@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.shared.favorites.FavoriteFolderPath;
 import net.osmand.util.Algorithms;
 
 import java.util.List;

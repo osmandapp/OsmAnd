@@ -28,7 +28,7 @@ import java.util.List;
 
 public class WikiArticleHelper {
 
-	private static final String TAG = WikiArticleHelper.class.getSimpleName();
+	private static final String TAG = "WikiArticleHelper";
 
 	private static final int PARTIAL_CONTENT_PHRASES = 3;
 	private static final String PAGE_PREFIX_HTTP = "http://";

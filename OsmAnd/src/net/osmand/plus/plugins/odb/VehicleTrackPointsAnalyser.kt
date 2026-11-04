@@ -35,6 +35,6 @@ class VehicleTrackPointsAnalyser : GpxTrackAnalysis.TrackPointsAnalyser {
         if (Algorithms.isEmpty(value)) {
             value = wptPt.getExtensionsToRead()[key]
         }
-        return Algorithms.parseFloatSilently(value, 0f)
+        return Algorithms.parseFloatSilently(value, Float.NaN)
     }
 }

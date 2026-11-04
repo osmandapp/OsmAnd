@@ -4,7 +4,7 @@
     <string name="background_work">Funcionamiento en segundo plano</string>
     <string name="battery_optimization_description">Desactivar la optimización de la batería para «OsmAnd Tracker» de modo que no se desconecte repentinamente cuando esté en segundo plano.</string>
     <string name="sharing_in_background">Compartir en segundo plano</string>
-    <string name="go_to_settings">Ir a los ajustes</string>
+    <string name="go_to_settings">Ir a la configuración</string>
     <string name="shared_string_later">Más tarde</string>
     <string name="not_sent_yet">Aún sin enviar</string>
     <string name="not_found_yet">Aún no encontrada</string>
@@ -204,8 +204,8 @@
     <string name="privacy_policy_telegram_client">El rastreador de OsmAnd (en inglés como «OsmAnd Tracker»), es uno de los clientes que utiliza la plataforma abierta de Telegram. Sus contactos pueden utilizar cualquier otro cliente de Telegram.</string>
     <string name="privacy_policy_agree">Al pulsar en «Continuar», aceptas las políticas de privacidad de Telegram y de OsmAnd.</string>
     <string name="shared_string_accept">Aceptar</string>
-    <string name="telegram_privacy_policy">Política de privacidad de Telegram</string>
-    <string name="osmand_privacy_policy">Política de privacidad OsmAnd</string>
+    <string name="telegram_privacy_policy">Normativa de privacidad de Telegram</string>
+    <string name="osmand_privacy_policy">Normativa de privacidad de OsmAnd</string>
     <string name="how_it_works">Cómo funciona</string>
     <string name="received_gps_points">Puntos GPX recibidos: %1$s</string>
     <string name="shared_string_appearance">Aspecto</string>

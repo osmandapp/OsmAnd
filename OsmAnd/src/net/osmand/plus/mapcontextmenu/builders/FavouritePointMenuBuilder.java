@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -37,6 +36,7 @@ import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.shared.data.AdditionalInfoBundle;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -45,6 +45,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class FavouritePointMenuBuilder extends MenuBuilder {
 
@@ -54,6 +55,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private AdditionalInfoBundle mergedAmenityInfoBundle;
 	private Map<String, String> mergedAmenityExtensions = new HashMap<>();
 	private Map<String, String> sourceAmenityExtensions = Collections.emptyMap();
+	private Set<String> genericRowKeys = Collections.emptySet();
 
 	public FavouritePointMenuBuilder(@NonNull MapActivity activity, @NonNull FavouritePoint point, @Nullable Amenity amenity) {
 		super(activity);
@@ -73,8 +75,9 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		if (amenity == null) {
 			setAmenity(helper.findAmenityByIdentity(originName, lat, lon, storedExtensions));
 		}
+		genericRowKeys = AdditionalInfoBundle.getGenericRowKeys(storedExtensions);
 		mergedAmenityExtensions = helper.getUpdatedAmenityExtensions(storedExtensions, amenity);
-		mergedAmenityInfoBundle = new AdditionalInfoBundle(app.getPoiTypes(), mergedAmenityExtensions);
+		mergedAmenityInfoBundle = new AdditionalInfoBundle(app.getKPoiTypes(), mergedAmenityExtensions);
 		if (amenity != null) {
 			sourceAmenityExtensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
 			setCustomOnlinePhotosPosition(sourceAmenityExtensions.containsKey(WIKIDATA));
@@ -109,6 +112,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 		if (!Algorithms.isEmpty(mergedAmenityExtensions)) {
 			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, mergedAmenityInfoBundle);
+			helper.setGenericRowKeys(genericRowKeys);
 			helper.setLight(isLightContent());
 			helper.setLatLon(getLatLon());
 			helper.setCollapseExpandListener(getCollapseExpandListener());
@@ -141,7 +145,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	@Nullable
 	private AmenityDescriptionBuilder createSourceAmenityDescriptionBuilder() {
 		if (amenity != null) {
-			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getPoiTypes(), sourceAmenityExtensions);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getKPoiTypes(), sourceAmenityExtensions);
 			return new AmenityDescriptionBuilder(this, amenity, bundle, isLightContent());
 		}
 		return null;

@@ -3,6 +3,7 @@ package net.osmand.shared.gpx
 import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.currentTimeMillis
+import net.osmand.shared.gpx.enums.GpxLineStyleType
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup
 import net.osmand.shared.gpx.GpxUtilities.RouteSegment
 import net.osmand.shared.gpx.GpxUtilities.RouteType
@@ -761,6 +762,26 @@ class GpxFile : GpxExtensions {
 
 	fun setShowArrows(showArrows: Boolean) {
 		getExtensionsToWrite()["show_arrows"] = showArrows.toString()
+	}
+
+	fun isLineStyleSet(): Boolean {
+		return extensions?.containsKey("line_style") ?: false
+	}
+
+	fun getLineStyleType(): GpxLineStyleType {
+		val lineStyle = extensions?.get("line_style")
+		if (lineStyle != null) {
+			return GpxLineStyleType.getLineStyleType(lineStyle)
+		}
+		return GpxLineStyleType.SOLID
+	}
+
+	fun getLineStyleTypeName(): String? {
+		return if (isLineStyleSet()) getLineStyleType().typeName else null
+	}
+
+	fun setLineStyleType(lineStyleType: String) {
+		getExtensionsToWrite()["line_style"] = GpxLineStyleType.getLineStyleType(lineStyleType).typeName
 	}
 
 	fun get3DVisualizationType(): String? {

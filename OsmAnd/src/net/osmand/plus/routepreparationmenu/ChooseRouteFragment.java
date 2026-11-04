@@ -324,7 +324,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 	public void analyseOnMap(LatLon location, GpxDisplayItem gpxItem) {
 		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 				settings.getLastKnownMapZoom(),
-				new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+				new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.group.getGpxName()),
 				false,
 				gpxItem);
 
@@ -942,5 +942,10 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 			args.putInt(RouteDetailsFragment.ROUTE_ID_KEY, position);
 			return Fragment.instantiate(requireContext(), RouteDetailsFragment.class.getName(), args);
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "choose_route";
 	}
 }

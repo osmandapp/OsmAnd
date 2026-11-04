@@ -5,7 +5,6 @@ import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -14,7 +13,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +40,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -326,22 +325,13 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
-			@Override
-			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
-					if (event.getAction() == KeyEvent.ACTION_DOWN) {
-						return true;
-					} else {
-						dismissCheckForChanges();
-						return true;
-					}
-				}
-				return false;
-			}
-		});
+	protected boolean isBackPressedCallbackEnabled() {
+		return true;
+	}
+
+	@Override
+	protected void handleBackPressed() {
+		dismissCheckForChanges();
 	}
 
 	@Override
@@ -569,12 +559,7 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 		}
 		CollatorFilteredAdapter adapter = new CollatorFilteredAdapter(getActivity(),
 				R.layout.list_textview, new ArrayList<>(subCategories.keySet()));
-		adapter.sort(new Comparator<Object>() {
-			@Override
-			public int compare(Object lhs, Object rhs) {
-				return lhs.toString().compareTo(rhs.toString());
-			}
-		});
+		adapter.sort(OsmAndCollator.primaryCollator());
 		poiTypeEditText.setAdapter(adapter);
 		poiTypeEditText.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -660,5 +645,10 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 
 	public interface OnSaveButtonClickListener {
 		void onSaveButtonClick();
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "edit_poi";
 	}
 }

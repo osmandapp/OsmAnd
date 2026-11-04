@@ -693,22 +693,22 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public String getColoringType() {
-		if (extensions != null) {
-			return extensions.get("coloring_type");
+		if (extensionsArray != null) {
+			return getExtensionsToRead().get("coloring_type");
 		}
 		return null;
 	}
 
 	public String getGradientScaleType() {
-		if (extensions != null) {
-			return extensions.get("gradient_scale_type");
+		if (extensionsArray != null) {
+			return getExtensionsToRead().get("gradient_scale_type");
 		}
 		return null;
 	}
 
 	public String getGradientColorPalette() {
-		if (extensions != null) {
-			return extensions.get("color_palette");
+		if (extensionsArray != null) {
+			return getExtensionsToRead().get("color_palette");
 		}
 		return null;
 	}
@@ -726,8 +726,8 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public String getSplitType() {
-		if (extensions != null) {
-			return extensions.get("split_type");
+		if (extensionsArray != null) {
+			return getExtensionsToRead().get("split_type");
 		}
 		return null;
 	}
@@ -737,8 +737,8 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public double getSplitInterval() {
-		if (extensions != null) {
-			String splitIntervalStr = extensions.get("split_interval");
+		if (extensionsArray != null) {
+			String splitIntervalStr = getExtensionsToRead().get("split_interval");
 			if (!Algorithms.isEmpty(splitIntervalStr)) {
 				try {
 					return Double.parseDouble(splitIntervalStr);
@@ -756,8 +756,8 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public String getWidth(String defWidth) {
 		String widthValue = null;
-		if (extensions != null) {
-			widthValue = extensions.get("width");
+		if (extensionsArray != null) {
+			widthValue = getExtensionsToRead().get("width");
 		}
 		return widthValue != null ? widthValue : defWidth;
 	}
@@ -767,13 +767,13 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public boolean isShowArrowsSet() {
-		return extensions != null && extensions.containsKey("show_arrows");
+		return extensionsArray != null && getExtensionsToRead().containsKey("show_arrows");
 	}
 
 	public boolean isShowArrows() {
 		String showArrows = null;
-		if (extensions != null) {
-			showArrows = extensions.get("show_arrows");
+		if (extensionsArray != null) {
+			showArrows = getExtensionsToRead().get("show_arrows");
 		}
 		return Boolean.parseBoolean(showArrows);
 	}
@@ -783,7 +783,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public String get3DVisualizationType() {
-		return extensions == null ? null : extensions.get("line_3d_visualization_by_type");
+		return extensionsArray == null ? null : getExtensionsToRead().get("line_3d_visualization_by_type");
 	}
 
 	public void set3DVisualizationType(String visualizationType) {
@@ -791,7 +791,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public String get3DWallColoringType() {
-		return extensions == null ? null : extensions.get("line_3d_visualization_wall_color_type");
+		return extensionsArray == null ? null : getExtensionsToRead().get("line_3d_visualization_wall_color_type");
 	}
 
 	public void set3DWallColoringType(String trackWallColoringType) {
@@ -799,7 +799,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public String get3DLinePositionType() {
-		return extensions == null ? null : extensions.get("line_3d_visualization_position_type");
+		return extensionsArray == null ? null : getExtensionsToRead().get("line_3d_visualization_position_type");
 	}
 
 	public void set3DLinePositionType(String trackLinePositionType) {
@@ -825,12 +825,12 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public boolean isShowStartFinishSet() {
-		return extensions != null && extensions.containsKey("show_start_finish");
+		return extensionsArray != null && getExtensionsToRead().containsKey("show_start_finish");
 	}
 
 	public boolean isShowStartFinish() {
-		if (extensions != null && extensions.containsKey("show_start_finish")) {
-			return Boolean.parseBoolean(extensions.get("show_start_finish"));
+		if (extensionsArray != null && getExtensionsToRead().containsKey("show_start_finish")) {
+			return Boolean.parseBoolean(getExtensionsToRead().get("show_start_finish"));
 		}
 		return true;
 	}
@@ -852,8 +852,8 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public String getRef() {
-		if (extensions != null) {
-			return extensions.get("ref");
+		if (extensionsArray != null) {
+			return getExtensionsToRead().get("ref");
 		}
 		return null;
 	}

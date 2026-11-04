@@ -8,6 +8,7 @@ import net.osmand.data.LatLon;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.util.LocationParser;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -58,6 +59,13 @@ public class LocationSearchTest {
 		
 	}
 	
+	@Test
+	public void testUTMZoneOutOfRange() {
+		// there is no UTM zone 61
+		Assert.assertNull(LocationParser.parseLocation("61 N 673429 4749123"));
+		Assert.assertNull(LocationParser.parseLocation("61N6734294749123"));
+	}
+
 	@Test
 	public void testBasicSpaceSearch() throws IOException {
 		search("5.0 3.0", new LatLon(5, 3));

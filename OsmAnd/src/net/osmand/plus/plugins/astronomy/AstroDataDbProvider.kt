@@ -266,10 +266,26 @@ class AstroDataDbProvider : AstroDataProvider() {
 				val app = ctx.applicationContext as OsmandApplication
 				app.settings.PREFERRED_LOCALE.get().takeIf { it.isNotEmpty() }
 					?.substringBefore('-')
-					?: ctx.resources.configuration.locale.language
+					?: ctx.resources.configuration.locales[0].language
 			} else { lang }
 
 			val db = dbHelper.readableDatabase
+
+			val languagesCursor = db.query(
+				TABLE_WIKIPEDIA, arrayOf(COL_WIKI_LANG), "$COL_WIKI_WIKIDATA = ?",arrayOf(wikidataId), null, null, null
+			)
+
+			val languages = mutableSetOf<String>()
+
+			languagesCursor.use { c ->
+				while(c.moveToNext()) {
+					val l = c.getString(0)
+					if (l != null) {
+						languages.add(l)
+					}
+				}
+			}
+
 			val cursor = db.query(
 				TABLE_WIKIPEDIA,
 				null,
@@ -308,7 +324,8 @@ class AstroDataDbProvider : AstroDataProvider() {
 			}
 
 			db.close()
-			return bestArticle ?: enArticle
+			val result = (bestArticle ?: enArticle)?.copy(wikiContentLocales = languages.toSet())
+			return result
 		} catch (e: Exception) {
 			LOG.error("Error reading Wikipedia article from DB", e)
 		}
@@ -328,7 +345,7 @@ class AstroDataDbProvider : AstroDataProvider() {
 	) {
 		val app = ctx.applicationContext as OsmandApplication
 		val lang = app.settings.PREFERRED_LOCALE.get().takeIf { it.isNotEmpty() }?.substringBefore('-')
-			?: ctx.resources.configuration.locale.language
+			?: ctx.resources.configuration.locales[0].language
 
 		val langWiki = "${lang}wiki"
 		val enWiki = "enwiki"
