@@ -132,24 +132,17 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		}
 
 		long pickupTime = point.getPickupDate();
-		setParkingTimeAndType(pickupTime > 0 ? pickupTime : -1);
-		setParkingPickupDate(point.getTimestamp());
+		long time = pickupTime > 0 ? pickupTime : -1;
+		// GPX stores whole seconds; an unchanged restore must preserve local milliseconds.
+		if (getParkingTime() / 1000 != time / 1000) {
+			setParkingTime(time);
+		}
+		parkingType.set(time > 0);
+		if (getStartParkingTime() / 1000 != point.getTimestamp() / 1000) {
+			setParkingPickupDate(point.getTimestamp());
+		}
 		setParkingPosition(point.getLatitude(), point.getLongitude());
 		addOrRemoveParkingEvent(point.getCalendarEvent());
-
-		if (point.getCalendarEvent()) {
-			addCalendarEvent(app);
-		}
-	}
-
-	public void applyRestoredParkingPoint(@NonNull FavouritePoint point) {
-		if (point.getSpecialPointType() != SpecialPointType.PARKING) {
-			return;
-		}
-
-		// Removing the old Favourite must not reset unchanged shared preferences.
-		deleteParkingFavourite(false);
-		updateParkingPoint(point);
 	}
 
 	public boolean clearParkingPosition() {
@@ -160,7 +153,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingEvent.resetToDefault();
 		parkingPickupDate.resetToDefault();
 		parkingPosition = null;
-		deleteParkingFavourite(true);
+		FavouritePoint pnt = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.PARKING);
+		if (pnt != null) {
+			app.getFavoritesHelper().deleteFavourite(pnt);
+		}
 		return true;
 	}
 
@@ -172,9 +168,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	public boolean setParkingType(boolean limited) {
-		if (!limited) {
+		if (!limited)
 			parkingTime.set(-1L);
-		}
 		parkingType.set(limited);
 		return true;
 	}
@@ -187,18 +182,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public boolean setParkingPickupDate(long timeInMillis) {
 		parkingPickupDate.set(timeInMillis);
 		return true;
-	}
-
-	private void setParkingTimeAndType(long timeInMillis) {
-		setParkingTime(timeInMillis);
-		parkingType.set(timeInMillis > 0);
-	}
-
-	private void deleteParkingFavourite(boolean saveImmediately) {
-		FavouritePoint point = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.PARKING);
-		if (point != null) {
-			app.getFavoritesHelper().deleteFavourite(point, saveImmediately);
-		}
 	}
 
 	@Override
@@ -287,7 +270,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			showDeleteEventWarning(activity);
 			cancelParking();
 			if (activity instanceof MapActivity) {
-				deleteParkingFavourite(true);
+				FavouritePoint pnt = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.PARKING);
+				if (pnt != null) {
+					app.getFavoritesHelper().deleteFavourite(pnt);
+				}
 				((MapActivity) activity).getContextMenu().close();
 			}
 		});

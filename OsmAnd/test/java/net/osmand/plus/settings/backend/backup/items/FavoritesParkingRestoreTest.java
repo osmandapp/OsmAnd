@@ -3,11 +3,16 @@ package net.osmand.plus.settings.backend.backup.items;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeNotNull;
 import static org.junit.Assume.assumeTrue;
 
+import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -17,6 +22,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavoriteDeletionsJournal;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -28,10 +34,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(AndroidJUnit4.class)
 public class FavoritesParkingRestoreTest {
@@ -40,9 +52,9 @@ public class FavoritesParkingRestoreTest {
 	private static final double LON_A = 4.892;
 	private static final double LAT_B = 48.856;
 	private static final double LON_B = 2.352;
-	private static final long PICKUP_A = 1_700_000_000_000L;
-	private static final long PICKUP_B = 1_800_000_000_000L;
-	private static final long LIMIT_B = 1_900_000_000_000L;
+	private static final long START_A = 1_700_000_000_123L;
+	private static final long START_B = 1_800_000_000_456L;
+	private static final long LIMIT_B = 1_900_000_000_789L;
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -63,9 +75,13 @@ public class FavoritesParkingRestoreTest {
 	private boolean restorePreferences = true;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws InterruptedException {
 		Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
 		app = (OsmandApplication) context.getApplicationContext();
+		CountDownLatch initialized = new CountDownLatch(1);
+		app.getAppInitializer().addOnFinishListener(init -> initialized.countDown());
+		assertTrue("Application initialization timed out", initialized.await(30, TimeUnit.SECONDS));
+		InstrumentationRegistry.getInstrumentation().waitForIdleSync();
 		settings = app.getSettings();
 		favoritesHelper = app.getFavoritesHelper();
 		plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
@@ -119,58 +135,57 @@ public class FavoritesParkingRestoreTest {
 
 	@Test
 	public void anIdenticalParkingPointUpdateLeavesSharedSettingsUntouched() {
-		plugin.updateParkingPoint(parking(LAT_A, LON_A, PICKUP_A, 0));
+		plugin.updateParkingPoint(parking(LAT_A, LON_A, START_A, -1));
 		long globalEditTime = markGlobalEditTime();
 
-		plugin.updateParkingPoint(parking(LAT_A, LON_A, PICKUP_A, 0));
+		plugin.updateParkingPoint(parking(LAT_A, LON_A, START_A, -1));
 
-		assertParkingState(LAT_A, LON_A, false, 0, PICKUP_A, false);
+		assertParkingState(LAT_A, LON_A, false, -1, START_A, false);
 		assertEquals(globalEditTime, settings.getLastGlobalPreferencesEditTime());
 	}
 
 	@Test
 	public void aChangedParkingPointUpdateAppliesEveryPreference() {
-		plugin.updateParkingPoint(parking(LAT_A, LON_A, PICKUP_A, 0));
-		// Set the event flag without a point, so no calendar intent is fired from a test.
+		plugin.updateParkingPoint(parking(LAT_A, LON_A, START_A, -1));
 		plugin.addOrRemoveParkingEvent(true);
 
-		plugin.updateParkingPoint(parking(LAT_B, LON_B, PICKUP_B, LIMIT_B));
+		plugin.updateParkingPoint(parking(LAT_B, LON_B, START_B, LIMIT_B));
 
-		assertParkingState(LAT_B, LON_B, true, LIMIT_B, PICKUP_B, false);
+		assertParkingState(LAT_B, LON_B, true, LIMIT_B, START_B, false);
 	}
 
 	@Test
 	public void aParkingPointUpdateCanReturnToAnUnlimitedState() {
-		plugin.updateParkingPoint(parking(LAT_B, LON_B, PICKUP_B, LIMIT_B));
+		plugin.updateParkingPoint(parking(LAT_B, LON_B, START_B, LIMIT_B));
 
-		plugin.updateParkingPoint(parking(LAT_A, LON_A, PICKUP_A, 0));
+		plugin.updateParkingPoint(parking(LAT_A, LON_A, START_A, -1));
 
-		assertParkingState(LAT_A, LON_A, false, 0, PICKUP_A, false);
+		assertParkingState(LAT_A, LON_A, false, -1, START_A, false);
 	}
 
 	@Test
 	public void aNonParkingPointDoesNotTouchParkingSettings() {
-		plugin.updateParkingPoint(parking(LAT_A, LON_A, PICKUP_A, 0));
+		plugin.updateParkingPoint(parking(LAT_A, LON_A, START_A, -1));
 		long globalEditTime = markGlobalEditTime();
 
 		plugin.updateParkingPoint(new FavouritePoint(LAT_B, LON_B, "Some place", "My places"));
 
-		assertParkingState(LAT_A, LON_A, false, 0, PICKUP_A, false);
+		assertParkingState(LAT_A, LON_A, false, -1, START_A, false);
 		assertEquals(globalEditTime, settings.getLastGlobalPreferencesEditTime());
 	}
 
 	@Test
 	public void anExplicitParkingChangeStillUpdatesSharedSettings() {
-		plugin.updateParkingPoint(parking(LAT_A, LON_A, PICKUP_A, 0));
+		plugin.updateParkingPoint(parking(LAT_A, LON_A, START_A, -1));
 		long globalEditTime = markGlobalEditTime();
 
 		plugin.setParkingPosition(LAT_B, LON_B);
 		plugin.setParkingType(true);
 		plugin.setParkingTime(LIMIT_B);
-		plugin.setParkingPickupDate(PICKUP_B);
+		plugin.setParkingPickupDate(START_B);
 		plugin.addOrRemoveParkingEvent(true);
 
-		assertParkingState(LAT_B, LON_B, true, LIMIT_B, PICKUP_B, true);
+		assertParkingState(LAT_B, LON_B, true, LIMIT_B, START_B, true);
 		assertTrue(settings.getLastGlobalPreferencesEditTime() > globalEditTime);
 
 		plugin.setParkingType(false);
@@ -179,15 +194,15 @@ public class FavoritesParkingRestoreTest {
 	}
 
 	@Test
-	public void anIdenticalRestoreThroughTheFavoritesItemKeepsSharedSettings() {
+	public void anIdenticalRestoreThroughTheFavoritesItemKeepsSharedSettings() throws Exception {
 		assumeFavoritesStoreIsEmpty();
 		try {
-			givenLocalParking(LAT_A, LON_A, PICKUP_A, 0);
+			givenLocalParking(LAT_A, LON_A, START_A, -1);
 			long globalEditTime = markGlobalEditTime();
 
-			restoreParking(parking(LAT_A, LON_A, PICKUP_A, 0));
+			restoreParking(parking(LAT_A, LON_A, START_A, -1));
 
-			assertParkingState(LAT_A, LON_A, false, 0, PICKUP_A, false);
+			assertParkingState(LAT_A, LON_A, false, -1, START_A, false);
 			assertEquals(globalEditTime, settings.getLastGlobalPreferencesEditTime());
 			assertSingleParkingFavourite(LAT_A, LON_A);
 		} finally {
@@ -196,15 +211,114 @@ public class FavoritesParkingRestoreTest {
 	}
 
 	@Test
-	public void aChangedRestoreThroughTheFavoritesItemAppliesTheImportedPoint() {
+	public void aChangedRestoreThroughTheFavoritesItemAppliesTheImportedPoint() throws Exception {
 		assumeFavoritesStoreIsEmpty();
 		try {
-			givenLocalParking(LAT_A, LON_A, PICKUP_A, 0);
+			givenLocalParking(LAT_A, LON_A, START_A, -1);
 
-			restoreParking(parking(LAT_B, LON_B, PICKUP_B, LIMIT_B));
+			restoreParking(parking(LAT_B, LON_B, START_B, LIMIT_B));
 
-			assertParkingState(LAT_B, LON_B, true, LIMIT_B, PICKUP_B, false);
+			assertParkingState(LAT_B, LON_B, true, LIMIT_B / 1000 * 1000, START_B / 1000 * 1000, false);
 			assertSingleParkingFavourite(LAT_B, LON_B);
+		} finally {
+			removePersonalFavourites();
+		}
+	}
+
+	@Test
+	public void anIdenticalLimitedGpxRestorePreservesLocalMilliseconds() throws Exception {
+		assumeFavoritesStoreIsEmpty();
+		try {
+			givenLocalParking(LAT_B, LON_B, START_B, LIMIT_B);
+			long globalEditTime = markGlobalEditTime();
+
+			restoreParking(parking(LAT_B, LON_B, START_B, LIMIT_B));
+			restoreParking(favoritesHelper.getSpecialPoint(SpecialPointType.PARKING));
+
+			assertParkingState(LAT_B, LON_B, true, LIMIT_B, START_B, false);
+			assertEquals(globalEditTime, settings.getLastGlobalPreferencesEditTime());
+			assertSingleParkingFavourite(LAT_B, LON_B);
+		} finally {
+			removePersonalFavourites();
+		}
+	}
+
+	@Test
+	public void aRestoredCalendarFlagDoesNotOpenTheCalendarEditor() throws Exception {
+		assumeFavoritesStoreIsEmpty();
+		Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+		IntentFilter filter = new IntentFilter(Intent.ACTION_EDIT);
+		filter.addDataType("vnd.android.cursor.item/event");
+		Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(filter,
+				new Instrumentation.ActivityResult(Activity.RESULT_OK, null), true);
+		try {
+			givenLocalParking(LAT_B, LON_B, START_B, LIMIT_B);
+			plugin.addOrRemoveParkingEvent(true);
+			FavouritePoint point = favoritesHelper.getSpecialPoint(SpecialPointType.PARKING);
+			point.setCalendarEvent(true);
+			instrumentation.runOnMainSync(() -> plugin.addCalendarEvent(app));
+			assertEquals("The monitor must intercept an explicit calendar action", 1, monitor.getHits());
+			long globalEditTime = markGlobalEditTime();
+
+			restoreParking(point);
+			restoreParking(favoritesHelper.getSpecialPoint(SpecialPointType.PARKING));
+
+			assertEquals(1, monitor.getHits());
+			assertParkingState(LAT_B, LON_B, true, LIMIT_B, START_B, true);
+			assertEquals(globalEditTime, settings.getLastGlobalPreferencesEditTime());
+		} finally {
+			instrumentation.removeMonitor(monitor);
+			removePersonalFavourites();
+		}
+	}
+
+	@Test
+	public void updatingParkingDoesNotDeleteOrJournalTheExistingFavourite() {
+		assumeFavoritesStoreIsEmpty();
+		try {
+			givenLocalParking(LAT_A, LON_A, START_A, -1);
+			FavouritePoint existing = favoritesHelper.getSpecialPoint(SpecialPointType.PARKING);
+			assertTrue(FavoriteDeletionsJournal.read(app).getDeletions().isEmpty());
+
+			plugin.updateParkingPoint(parking(LAT_B, LON_B, START_B, LIMIT_B));
+
+			assertSame(existing, favoritesHelper.getSpecialPoint(SpecialPointType.PARKING));
+			assertTrue(FavoriteDeletionsJournal.read(app).getDeletions().isEmpty());
+		} finally {
+			removePersonalFavourites();
+		}
+	}
+
+	@Test
+	public void uiCreatedParkingSurvivesGpxBackupAndRestore() throws Exception {
+		assumeFavoritesStoreIsEmpty();
+		try {
+			for (boolean limited : new boolean[] {false, true}) {
+				plugin.setParkingPosition(LAT_A, LON_A);
+				plugin.setParkingType(limited);
+				if (limited) {
+					plugin.setParkingTime(LIMIT_B);
+				}
+				favoritesHelper.setParkingPoint(plugin.getParkingPosition(), null, plugin.getParkingTime(), false);
+				FavouritePoint original = favoritesHelper.getSpecialPoint(SpecialPointType.PARKING);
+				assertNotNull(original);
+				long startTime = original.getTimestamp() / 1000 * 1000;
+				FavoritesSettingsItem restored = readParkingBackup(original);
+				removePersonalFavourites();
+				plugin.clearParkingPosition();
+
+				restored.setShouldReplace(true);
+				restored.processDuplicateItems();
+				restored.apply();
+
+				assertTrue(restored.isAppliedLocally());
+				assertParkingState(LAT_A, LON_A, limited, limited ? LIMIT_B / 1000 * 1000 : -1,
+						startTime, false);
+				favoritesHelper.loadFavorites();
+				assertSingleParkingFavourite(LAT_A, LON_A);
+				assertTrue(FavoriteDeletionsJournal.read(app).getDeletions().isEmpty());
+				removePersonalFavourites();
+			}
 		} finally {
 			removePersonalFavourites();
 		}
@@ -220,20 +334,48 @@ public class FavoritesParkingRestoreTest {
 		restorePreferences = true;
 	}
 
-	private void givenLocalParking(double lat, double lon, long pickupDate, long limit) {
-		FavouritePoint local = parking(lat, lon, pickupDate, limit);
+	private void givenLocalParking(double lat, double lon, long startTime, long limit) {
+		FavouritePoint local = parking(lat, lon, startTime, limit);
 		favoritesHelper.addFavourite(local, new AddFavoriteOptions());
 		plugin.updateParkingPoint(local);
 	}
 
-	private void restoreParking(FavouritePoint imported) {
+	private void restoreParking(FavouritePoint imported) throws Exception {
+		FavoritesSettingsItem item = readParkingBackup(imported);
+		item.setShouldReplace(true);
+		item.processDuplicateItems();
+		item.apply();
+		assertTrue(item.isAppliedLocally());
+		assertTrue(FavoriteDeletionsJournal.read(app).getDeletions().isEmpty());
+	}
+
+	private FavoritesSettingsItem readParkingBackup(FavouritePoint imported) throws Exception {
 		FavoriteGroup personal = new FavoriteGroup(FavoriteGroup.PERSONAL_CATEGORY,
 				new ArrayList<>(Collections.singletonList(imported)), 0, true, true);
 		FavoritesSettingsItem item = new FavoritesSettingsItem(app,
 				new ArrayList<>(Collections.singletonList(personal)));
-		item.setShouldReplace(true);
-		item.processDuplicateItems();
-		item.apply();
+		File file = File.createTempFile("parking_restore_", ".gpx", app.getCacheDir());
+		try {
+			try (FileOutputStream output = new FileOutputStream(file)) {
+				item.getWriter().writeToStream(output, null);
+			}
+			assertTrue(file.length() > 0);
+			assertTrue(item.getWarnings().isEmpty());
+			FavoritesSettingsItem restored = new FavoritesSettingsItem(app, new JSONObject()
+					.put("type", "FAVOURITES").put("file", item.getDefaultFileName()));
+			try (FileInputStream input = new FileInputStream(file)) {
+				restored.getReader().readFromStream(input, file, item.getDefaultFileName());
+			}
+			assertTrue(restored.getWarnings().isEmpty());
+			assertEquals(1, restored.getItems().size());
+			FavouritePoint point = restored.getItems().get(0).getPoints().get(0);
+			assertEquals(imported.getTimestamp() / 1000 * 1000, point.getTimestamp());
+			assertEquals(imported.getPickupDate() > 0 ? imported.getPickupDate() / 1000 * 1000 : 0,
+					point.getPickupDate());
+			return restored;
+		} finally {
+			assertTrue(file.delete());
+		}
 	}
 
 	private void assertSingleParkingFavourite(double lat, double lon) {
@@ -262,14 +404,14 @@ public class FavoritesParkingRestoreTest {
 	}
 
 	private void assertParkingState(double lat, double lon, boolean limited, long time,
-	                                long pickupDate, boolean calendarEvent) {
+	                                long startTime, boolean calendarEvent) {
 		LatLon position = plugin.constructParkingPosition();
 		assertNotNull(position);
 		assertEquals(lat, position.getLatitude(), 0.0001);
 		assertEquals(lon, position.getLongitude(), 0.0001);
 		assertEquals(limited, plugin.getParkingType());
 		assertEquals(time, plugin.getParkingTime());
-		assertEquals(pickupDate, plugin.getStartParkingTime());
+		assertEquals(startTime, plugin.getStartParkingTime());
 		assertEquals(calendarEvent, plugin.isParkingEventAdded());
 	}
 
@@ -279,12 +421,12 @@ public class FavoritesParkingRestoreTest {
 		return time;
 	}
 
-	private static FavouritePoint parking(double lat, double lon, long pickupDate, long limit) {
+	private static FavouritePoint parking(double lat, double lon, long startTime, long limit) {
 		FavouritePoint point = new FavouritePoint(lat, lon, SpecialPointType.PARKING.getName(),
 				FavoriteGroup.PERSONAL_CATEGORY);
 		point.setAltitude(10);
-		point.setTimestamp(limit);
-		point.setPickupDate(pickupDate);
+		point.setTimestamp(startTime);
+		point.setPickupDate(limit);
 		point.setCalendarEvent(false);
 		return point;
 	}
