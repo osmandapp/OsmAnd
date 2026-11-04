@@ -592,7 +592,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 		ScreenManager screenManager = getScreenManager();
 		screenManager.popToRoot();
-		screenManager.pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, result, true, true), this::onRoutePreviewResult);
+		screenManager.pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, result, true, getCardCountdownMs()), this::onRoutePreviewResult);
+	}
+
+	protected long getCardCountdownMs() {
+		return RoutePreviewScreen.CARD_COUNTDOWN_MS;
 	}
 
 	private void processPendingSuggestionIntent() {
@@ -757,9 +761,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		return false;
 	}
 
-	private boolean isAutoStartRoutePreviewPresent() {
+	private boolean isCardRoutePreviewPresent() {
 		for (Screen screen : getScreenManager().getScreenStack()) {
-			if (screen instanceof RoutePreviewScreen preview && preview.isStartNavigationOnRouteReady()) {
+			if (screen instanceof RoutePreviewScreen preview && preview.hasStartCountdown()) {
 				return true;
 			}
 		}
@@ -796,9 +800,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Screen top = !screenManager.getScreenStack().isEmpty() ? screenManager.getTop() : null;
 
 		TargetPoint pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
-		// a card tap preview under another screen (e.g. Settings) must stay: it starts navigation when shown again
 		if (app.getRoutingHelper().isRouteCalculated() && !app.getRoutingHelper().isFollowingMode()
-				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen) && !isAutoStartRoutePreviewPresent()) {
+				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen) && !isCardRoutePreviewPresent()) {
 			SearchResult result = new SearchResult();
 			result.location = new LatLon(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
 			GpxFile gpxFile = app.getRoutingHelper().getCurrentGPX();
