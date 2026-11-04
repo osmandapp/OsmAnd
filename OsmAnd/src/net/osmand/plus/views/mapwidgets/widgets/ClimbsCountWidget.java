@@ -44,9 +44,12 @@ public class ClimbsCountWidget extends SimpleWidget {
 		private List<Double> elevations;
 		private List<Double> distances;
 		private double progress;
+		private int vamTarget;
+		private double currentVAM;
 		private Paint redPaint;
 		private Paint orangePaint;
 		private Paint linePaint;
+		private Paint opponentPaint;
 
 		public ElevationProfileView(Context context) {
 			super(context);
@@ -79,12 +82,21 @@ public class ClimbsCountWidget extends SimpleWidget {
 			linePaint.setStyle(Paint.Style.STROKE);
 			linePaint.setStrokeWidth(5);
 			linePaint.setAntiAlias(true);
+
+			opponentPaint = new Paint();
+			opponentPaint.setColor(0xFF8A2BE2); // Blue Violet for opponent
+			opponentPaint.setStyle(Paint.Style.STROKE);
+			opponentPaint.setStrokeWidth(3);
+			opponentPaint.setAntiAlias(true);
+			opponentPaint.setPathEffect(new android.graphics.DashPathEffect(new float[]{10, 5}, 0));
 		}
 
-		public void setData(List<Double> elevations, List<Double> distances, double progress) {
+		public void setData(List<Double> elevations, List<Double> distances, double progress, int vamTarget, double currentVAM) {
 			this.elevations = elevations;
 			this.distances = distances;
 			this.progress = Math.max(0, Math.min(1, progress));
+			this.vamTarget = vamTarget;
+			this.currentVAM = currentVAM;
 			invalidate();
 		}
 
@@ -148,10 +160,45 @@ public class ClimbsCountWidget extends SimpleWidget {
 			// Draw the profile line
 			canvas.drawPath(path, linePaint);
 
+			// Draw virtual opponent line at position based on VAM target
+			// Opponent starts at the same time as user and rides at speed corresponding to target VAM
+			// opponentDistance = (targetVAM / currentVAM) * currentDistance
+			// opponentRatio = opponentDistance / totalClimbDistance = (targetVAM / currentVAM) * progress
+			if (vamTarget > 0 && currentVAM > 0) {
+				double opponentRatio = ((double) vamTarget / currentVAM) * progress;
+				opponentRatio = Math.max(0, Math.min(1, opponentRatio));
+				int opponentX = (int) (width * opponentRatio);
+				
+				// Draw vertical dashed line for opponent position
+				canvas.drawLine(opponentX, 0, opponentX, height, opponentPaint);
+			}
+
 			// Draw the cutoff point as a vertical line (progress indicator)
 			if (cutoffX > 0 && cutoffX < width) {
 				canvas.drawLine(cutoffX, 0, cutoffX, height, redPaint);
 			}
+		}
+
+		private float getElevationAtX(float[] points, int x, int width, int height, double minEle, double elevationRange) {
+			// Find the segment that contains this x position
+			for (int i = 0; i < points.length - 2; i += 2) {
+				float x1 = points[i];
+				float x2 = points[i + 2];
+				float y1 = points[i + 1];
+				float y2 = points[i + 3];
+
+				if (x1 <= x && x <= x2) {
+					// Linear interpolation
+					float t = (x2 == x1) ? 0 : (x - x1) / (x2 - x1);
+					return y1 + t * (y2 - y1);
+				} else if (x < x1) {
+					// x is before this segment, return first point
+					return points[1];
+				}
+				// x is after this segment, continue to next
+			}
+			// x is at or after the last segment, return last point
+			return points[points.length - 1];
 		}
 	}
 
@@ -626,7 +673,9 @@ public class ClimbsCountWidget extends SimpleWidget {
 
 		// Update elevation profile view with data
 		if (elevationProfileView != null && climb.elevationProfile != null && !climb.elevationProfile.isEmpty()) {
-			elevationProfileView.setData(climb.elevationProfile, climb.distanceProfile, progress);
+			float currentVAM = calculateVAM(climbInfo);
+			int vamTarget = getVamTarget();
+			elevationProfileView.setData(climb.elevationProfile, climb.distanceProfile, progress, vamTarget, currentVAM);
 		}
 		// Update position indicator
 		View positionIndicator = climbProfileOverlay.findViewById(R.id.climb_profile_position_indicator);
@@ -667,6 +716,10 @@ public class ClimbsCountWidget extends SimpleWidget {
 	@NonNull
 	public CommonPreference<Float> getMinClimbGradePref() {
 		return widgetState.getMinClimbGradePref();
+	}
+
+	public int getVamTarget() {
+		return widgetState.getVamTarget();
 	}
 
 	// Inner class to hold climb count info

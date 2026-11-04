@@ -15,16 +15,19 @@ public class ClimbsCountWidgetState extends ResizableWidgetState {
 	private static final int DEFAULT_MIN_CLIMB_ELEVATION = 30; // meters
 	private static final float DEFAULT_MIN_CLIMB_GRADE = 3.0f; // percentage
 	private static final boolean DEFAULT_SHOW_OVERLAY = true;
+	private static final int DEFAULT_VAM_TARGET = 800; // vm/h
 
 	private final CommonPreference<Integer> minClimbElevationPref;
 	private final CommonPreference<Float> minClimbGradePref;
 	private final CommonPreference<Boolean> showOverlayPref;
+	private final CommonPreference<Integer> vamTargetPref;
 
 	public ClimbsCountWidgetState(@NonNull OsmandApplication app, @Nullable String customId) {
 		super(app, customId, WidgetType.CLIMBS_COUNT, WidgetSize.SMALL);
 		this.minClimbElevationPref = registerMinClimbElevationPref(customId);
 		this.minClimbGradePref = registerMinClimbGradePref(customId);
 		this.showOverlayPref = registerShowOverlayPref(customId);
+		this.vamTargetPref = registerVamTargetPref(customId);
 	}
 
 	@NonNull
@@ -58,6 +61,16 @@ public class ClimbsCountWidgetState extends ResizableWidgetState {
 	}
 
 	@NonNull
+	private CommonPreference<Integer> registerVamTargetPref(@Nullable String customId) {
+		String prefId = "climbs_count_vam_target";
+		if (!Algorithms.isEmpty(customId)) {
+			prefId += customId;
+		}
+		return settings.registerIntPreference(prefId, DEFAULT_VAM_TARGET)
+				.makeProfile();
+	}
+
+	@NonNull
 	public CommonPreference<Integer> getMinClimbElevationPref() {
 		return minClimbElevationPref;
 	}
@@ -84,6 +97,15 @@ public class ClimbsCountWidgetState extends ResizableWidgetState {
 		return showOverlayPref.get();
 	}
 
+	@NonNull
+	public CommonPreference<Integer> getVamTargetPref() {
+		return vamTargetPref;
+	}
+
+	public int getVamTarget() {
+		return vamTargetPref.get();
+	}
+
 	@Override
 	public void copyPrefs(@NonNull ApplicationMode appMode, @Nullable String customId) {
 		copyPrefsFromMode(appMode, appMode, customId);
@@ -95,6 +117,7 @@ public class ClimbsCountWidgetState extends ResizableWidgetState {
 		registerMinClimbElevationPref(customId).setModeValue(appMode, minClimbElevationPref.getModeValue(sourceAppMode));
 		registerMinClimbGradePref(customId).setModeValue(appMode, minClimbGradePref.getModeValue(sourceAppMode));
 		registerShowOverlayPref(customId).setModeValue(appMode, showOverlayPref.getModeValue(sourceAppMode));
+		registerVamTargetPref(customId).setModeValue(appMode, vamTargetPref.getModeValue(sourceAppMode));
 		super.copyPrefsFromMode(sourceAppMode, appMode, customId);
 	}
 }

@@ -5918,4 +5918,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="climb_profile_title">Climb Profile</string>
     <string name="climb_profile_show_overlay">Show climb profile overlay</string>
     <string name="climb_profile_show_overlay_desc">Show a profile of the current climb at the bottom of the screen while climbing</string>
+    <string name="climbs_count_vam_target">VAM target</string>
+    <string name="climbs_count_vam_target_desc">Target Vertical Ascent Speed in vm/h to compete against (virtual opponent will ride at 90% of this value)</string>
 </resources>

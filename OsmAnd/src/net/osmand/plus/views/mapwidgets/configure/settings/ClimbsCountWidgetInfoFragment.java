@@ -20,14 +20,17 @@ public class ClimbsCountWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 	private static final String MIN_ELEVATION_KEY = "min_elevation_key";
 	private static final String MIN_GRADE_KEY = "min_grade_key";
 	private static final String SHOW_OVERLAY_KEY = "show_overlay_key";
+	private static final String VAM_TARGET_KEY = "vam_target_key";
 
 	private CommonPreference<Integer> minClimbElevationPref;
 	private CommonPreference<Float> minClimbGradePref;
 	private CommonPreference<Boolean> showOverlayPref;
+	private CommonPreference<Integer> vamTargetPref;
 
 	private int minElevation = 30;
 	private float minGrade = 3.0f;
 	private boolean showOverlay = true;
+	private int vamTarget = 800;
 
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
@@ -36,9 +39,11 @@ public class ClimbsCountWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 			minClimbElevationPref = climbsCountWidget.getMinClimbElevationPref();
 			minClimbGradePref = climbsCountWidget.getMinClimbGradePref();
 			showOverlayPref = climbsCountWidget.getWidgetState().getShowOverlayPref();
+			vamTargetPref = climbsCountWidget.getWidgetState().getVamTargetPref();
 			minElevation = bundle.containsKey(MIN_ELEVATION_KEY) ? bundle.getInt(MIN_ELEVATION_KEY) : minClimbElevationPref.get();
 			minGrade = bundle.containsKey(MIN_GRADE_KEY) ? bundle.getFloat(MIN_GRADE_KEY) : minClimbGradePref.get();
 			showOverlay = bundle.containsKey(SHOW_OVERLAY_KEY) ? bundle.getBoolean(SHOW_OVERLAY_KEY) : showOverlayPref.get();
+			vamTarget = bundle.containsKey(VAM_TARGET_KEY) ? bundle.getInt(VAM_TARGET_KEY) : vamTargetPref.get();
 		}
 	}
 
@@ -48,6 +53,7 @@ public class ClimbsCountWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 		outState.putInt(MIN_ELEVATION_KEY, minElevation);
 		outState.putFloat(MIN_GRADE_KEY, minGrade);
 		outState.putBoolean(SHOW_OVERLAY_KEY, showOverlay);
+		outState.putInt(VAM_TARGET_KEY, vamTarget);
 	}
 
 	@Override
@@ -138,6 +144,38 @@ public class ClimbsCountWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 			minGradeEdit.requestFocus();
 			AndroidUtils.showSoftKeyboard(getActivity(), minGradeEdit);
 		});
+
+		// Setup VAM target field
+		View vamTargetContainer = view.findViewById(R.id.vam_target_container);
+		TextView vamTargetTitle = view.findViewById(R.id.vam_target_title);
+		TextView vamTargetDesc = view.findViewById(R.id.vam_target_desc);
+		EditText vamTargetEdit = view.findViewById(R.id.vam_target_edit);
+
+		vamTargetTitle.setText(R.string.climbs_count_vam_target);
+		vamTargetDesc.setText(R.string.climbs_count_vam_target_desc);
+		vamTargetEdit.setText(String.valueOf(vamTarget));
+		vamTargetEdit.setHint(R.string.climbs_count_vam_target);
+
+		vamTargetContainer.setOnClickListener(v -> {
+			// Focus the edit text for direct editing
+			vamTargetEdit.requestFocus();
+		});
+
+		vamTargetEdit.setOnFocusChangeListener((v, hasFocus) -> {
+			if (!hasFocus) {
+				try {
+					vamTarget = Integer.parseInt(vamTargetEdit.getText().toString());
+				} catch (NumberFormatException e) {
+					vamTarget = 800;
+					vamTargetEdit.setText("800");
+				}
+			}
+		});
+
+		vamTargetEdit.setOnClickListener(v -> {
+			vamTargetEdit.requestFocus();
+			AndroidUtils.showSoftKeyboard(getActivity(), vamTargetEdit);
+		});
 	}
 
 	@Override
@@ -145,15 +183,17 @@ public class ClimbsCountWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 		boolean elevationChanged = minElevation != minClimbElevationPref.get();
 		boolean gradeChanged = Math.abs(minGrade - minClimbGradePref.get()) > 0.01f;
 		boolean overlayChanged = showOverlay != showOverlayPref.get();
+		boolean vamTargetChanged = vamTarget != vamTargetPref.get();
 
 		minClimbElevationPref.set(minElevation);
 		minClimbGradePref.set(minGrade);
 		showOverlayPref.set(showOverlay);
+		vamTargetPref.set(vamTarget);
 
 		if (widgetInfo != null && widgetInfo.widget instanceof ClimbsCountWidget) {
 			ClimbsCountWidget widget = (ClimbsCountWidget) widgetInfo.widget;
 			widget.updateWidgetView();
-			if (elevationChanged || gradeChanged || overlayChanged) {
+			if (elevationChanged || gradeChanged || overlayChanged || vamTargetChanged) {
 				widget.updateInfo(null);
 			}
 		}
