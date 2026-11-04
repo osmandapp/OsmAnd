@@ -10,6 +10,7 @@ import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.gpx.primitives.Linkable
 import net.osmand.shared.media.LinkMediaFactory
 import net.osmand.shared.media.MediaProvider
+import net.osmand.shared.media.domain.MediaItem
 import java.net.URI
 
 class MediaLibraryScanner(private val app: OsmandApplication, private val plugin: AudioVideoNotesPlugin?) {
@@ -32,8 +33,12 @@ class MediaLibraryScanner(private val app: OsmandApplication, private val plugin
 		for (recording in plugin?.allRecordings.orEmpty().toList()) {
 			add(Link(storage.createMediaFileHref(recording.file)).apply { text = recording.file.name }, recording = recording)
 		}
+		val resolver = app.galleryHelper.mediaSourceResolver
 		fun addTarget(target: Linkable, kind: MediaAttachment.Kind, name: String, latLon: LatLon, path: String? = null) {
 			for (link in target.links.orEmpty().toList()) {
+				val item = LinkMediaFactory.fromLinks(listOf(link)).firstOrNull()
+				// A link to a local file that is gone cannot be played: skip it, as the A/V notes list did
+				if (item != null && item !is MediaItem.Remote && resolver.getPlaybackUri(item) == null) continue
 				val titled = if (link.text.isNullOrBlank()) Link(link).apply { text = link.href?.substringBefore('?')?.substringAfterLast('/') } else link
 				add(titled, MediaAttachment(target, link, kind, name, latLon, path))
 			}
