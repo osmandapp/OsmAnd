@@ -119,4 +119,9 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 				break;
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "external_settings_write_to_track_settings";
+	}
 }

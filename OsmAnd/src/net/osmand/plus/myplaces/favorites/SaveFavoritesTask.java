@@ -181,9 +181,12 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			// Delete external group file if it does not exist in local groups
 			if (!hasLocalGroup) {
 				File file = helper.getExternalFile(fileGroup);
-				if (file.exists() && !file.delete()) {
-					log.warn("Failed to delete orphaned favorites file: " + file.getAbsolutePath());
-					return false;
+				if (file.exists()) {
+					log.info("Deleting orphaned favorites file: " + file.getName());
+					if (!file.delete()) {
+						log.warn("Failed to delete orphaned favorites file: " + file.getAbsolutePath());
+						return false;
+					}
 				}
 			}
 		}
@@ -212,10 +215,27 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			// save favoritePoints from memory in order to update existing
 			localGroup.getPoints().addAll(all.values());
 			// Save file if group changed
-			if (!localGroup.equals(fileGroup)) {
+			if (isGroupChanged(localGroup, fileGroup)) {
 				if (!saveFavoriteGroup(localGroup)) {
 					return false;
 				}
+			}
+		}
+		return true;
+	}
+
+	// FavouritePoint.equals() ignores links, so attaching or detaching media alone would never reach the group file
+	static boolean isGroupChanged(@NonNull FavoriteGroup localGroup, @Nullable FavoriteGroup fileGroup) {
+		return !localGroup.equals(fileGroup) || !linksEqual(localGroup, fileGroup);
+	}
+
+	// Called for equal groups only: same points in the same order
+	private static boolean linksEqual(@NonNull FavoriteGroup localGroup, @NonNull FavoriteGroup fileGroup) {
+		List<FavouritePoint> localPoints = localGroup.getPoints();
+		List<FavouritePoint> filePoints = fileGroup.getPoints();
+		for (int i = 0; i < localPoints.size(); i++) {
+			if (!localPoints.get(i).linksEqual(filePoints.get(i))) {
+				return false;
 			}
 		}
 		return true;

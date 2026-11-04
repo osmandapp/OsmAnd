@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
+import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARS;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -104,7 +105,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 				Editable text = nameEditText.getText();
 				if (text.length() >= 1) {
 					if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(text).find()) {
-						nameEditText.setError(app.getString(R.string.file_name_containes_illegal_char));
+						nameEditText.setError(app.getString(R.string.file_name_containes_illegal_char, ILLEGAL_FILE_NAME_CHARS));
 					}
 				}
 			}

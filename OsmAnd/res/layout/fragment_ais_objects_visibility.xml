@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Objects visibility screen of the Vessel tracker (AIS) plugin.
+	Both sliders commit immediately - there is no Save button.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/colorSurface"
+	android:orientation="vertical">
+
+	<include layout="@layout/ui_material_app_bar" />
+
+	<ScrollView
+		android:id="@+id/scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingBottom="@dimen/content_padding">
+
+			<include layout="@layout/ui_hero_image" />
+
+			<net.osmand.plus.widgets.ui.ScreenDescriptionView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:screenDescriptionText="@string/ais_objects_visibility_desc" />
+
+			<include
+				android:id="@+id/outdated_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/ui_group_gap"
+				layout="@layout/ui_slider_card" />
+
+			<net.osmand.plus.widgets.ui.GroupFooterView
+				android:id="@+id/outdated_footer"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+			<include
+				android:id="@+id/hide_after_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/ui_group_gap"
+				layout="@layout/ui_slider_card" />
+
+			<net.osmand.plus.widgets.ui.GroupFooterView
+				android:id="@+id/hide_after_footer"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

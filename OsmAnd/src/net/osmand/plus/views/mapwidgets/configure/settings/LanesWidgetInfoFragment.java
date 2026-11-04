@@ -67,4 +67,9 @@ public class LanesWidgetInfoFragment extends WidgetInfoBaseFragment {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(SHOW_MINOR_TURNS, showMinorTurns);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "lanes_widget_info";
+	}
 }

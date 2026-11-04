@@ -39,6 +39,7 @@ import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.FavouritesLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -127,11 +128,14 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	public void updateParkingPoint(@NonNull FavouritePoint point) {
 		if (point.getSpecialPointType() == SpecialPointType.PARKING) {
-			long timestamp = point.getTimestamp();
-			boolean timeRestricted = timestamp > 0;
+			// FavouritesHelper.setParkingPoint() keeps the pick-up time in pickupDate and the parking time in timestamp
+			long pickupTime = point.getPickupDate();
+			boolean timeRestricted = pickupTime > 0;
 			setParkingType(timeRestricted);
-			setParkingTime(timeRestricted ? timestamp : 0);
-			setParkingPickupDate(point.getPickupDate());
+			if (timeRestricted) {
+				setParkingTime(pickupTime);
+			}
+			setParkingPickupDate(point.getTimestamp());
 			setParkingPosition(point.getLatitude(), point.getLongitude());
 			addOrRemoveParkingEvent(point.getCalendarEvent());
 
@@ -203,6 +207,15 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	@Override
 	public String getComponentId1() {
 		return PARKING_PLUGIN_COMPONENT;
+	}
+
+	@Override
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		// The favorites layer shows the parking point from a hidden folder only while the plugin is active
+		FavouritesLayer favouritesLayer = app.getOsmandMap().getMapLayers().getFavouritesLayer();
+		if (favouritesLayer != null) {
+			favouritesLayer.setShowHiddenParking(isActive());
+		}
 	}
 
 	@Override

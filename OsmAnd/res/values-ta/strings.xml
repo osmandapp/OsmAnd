@@ -237,19 +237,12 @@
     <string name="will_close_at">மூடுகிறது</string>
     <string name="will_open_at">திறக்கும்</string>
     <string name="will_open_on">திறக்கும்</string>
-    <string name="av_locations_selected_desc">தேர்ந்தெடுக்கப்பட்ட குறிப்புகளின் ஒருங்கிணைப்புகள் மற்றும் தரவுகளுடன் சிபிஎக்ச் கோப்பு.</string>
-    <string name="av_locations_all_desc">அனைத்து குறிப்புகளின் ஒருங்கிணைப்புகள் மற்றும் தரவுகளுடன் சிபிஎக்ச் கோப்பு.</string>
     <string name="shared_string_marker">குறியீடு</string>
     <string name="empty_state_osm_edits">OpenStreetMap பொருள்களை உருவாக்க அல்லது மாற்றவும்</string>
     <string name="shared_string_deleted">அழிக்கப்பட்டது</string>
     <string name="shared_string_edited">திருத்தப்பட்டது</string>
     <string name="shared_string_added">சேர்க்கப்பட்டது</string>
     <string name="marker_activated">குறியீடு %s செயல்படுத்தப்பட்டது.</string>
-    <string name="empty_state_av_notes">குறிப்புகளை உருவாக்குங்கள்!</string>
-    <string name="empty_state_av_notes_desc">விட்செட்டுகள் அல்லது சூழல் மெனுக்களைப் பயன்படுத்தி வரைபடத்தில் எந்த கட்டத்திலும் ஆடியோ, வீடியோ அல்லது புகைப்படக் குறிப்புகளைச் சேர்க்கவும்.</string>
-    <string name="notes_by_date">A/V குறிப்புகள் தேதி</string>
-    <string name="by_date">தேதியின் மூலம்</string>
-    <string name="by_type">வகையின் மூலம்</string>
     <string name="looking_for_tracks_with_waypoints">வழிகாட்டுதல்களுடன் பாதைகளை தேடுகிறது</string>
     <string name="shared_string_more_without_dots">மேலும்</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / மாதம்</string>
@@ -730,7 +723,6 @@
     <string name="recording_unavailable">கிடைக்கவில்லை</string>
     <string name="recording_context_menu_arecord">ஆடியோ குறிப்பு எடுக்கவும்</string>
     <string name="recording_context_menu_vrecord">வீடியோ குறிப்பு எடுக்கவும்</string>
-    <string name="layer_recordings">பதிவு அடுக்கு</string>
     <string name="recording_context_menu_play">இயக்க</string>
     <string name="recording_description">%1$s %3$s %2$s பதிவுசெய்கிறது</string>
     <string name="recording_default_name">பதிவு</string>
@@ -927,7 +919,7 @@
     <string name="move_point">நகரும் புள்ளி</string>
     <string name="osm_recipients_label">OSM பெறுபவர்கள்</string>
     <string name="total_donations">மொத்த நன்கொடைகள்</string>
-    <string name="day_off_label">தொலைவில் உள்ள</string>
+    <string name="day_off_label">விடுமுறை</string>
     <string name="winter_and_ski_renderer">குளிர்காலம் மற்றும் பற்றுக் கரண்டி</string>
     <string name="touring_view_renderer">சுற்றுப்பயண காட்சி</string>
     <string name="nautical_renderer">கடலோடிகளுக்குரிய</string>
@@ -941,7 +933,6 @@
     <string name="welcome_header">வருக</string>
     <string name="current_route">தற்போதைய பாதை</string>
     <string name="osm_changes_added_to_local_edits">ஓஎஸ்எம் மாற்றங்கள் உள்மாற்ற கூட்டமைப்பில் சேர்க்கபட்டது</string>
-    <string name="local_recordings_delete_all_confirm">%1$d குறிப்புகளை நீக்கவா?</string>
     <string name="delay_to_start_navigation">பின்-மூலம் வழிகாட்டுதலைத் தொடங்குங்கள்…</string>
     <string name="shared_string_go">செல்</string>
     <string name="osmand_parking_overdue">தாமதம்</string>
@@ -1136,7 +1127,6 @@
     <string name="help_article_personal_color_palette_schemes_name">வண்ண திட்டங்கள்</string>
     <string name="obd_plugin_name">வாகன அளவீடுகள்</string>
     <string name="global_settings">உலகளாவிய அமைப்புகள்</string>
-    <string name="audionotes_plugin_name">ஆடியோ/வீடியோ குறிப்புகள்</string>
     <string name="shared_string_accessibility">அணுகல்</string>
     <string name="tracker_item">ஒச்மண்ட் டிராக்கர்</string>
     <string name="settings_preset">இயல்புநிலை சுயவிவரம்</string>
@@ -2956,7 +2946,7 @@
     <string name="standard_maps">நிலையான வரைபடங்கள்</string>
     <string name="app_mode_baby_transport">குழந்தை போக்குவரத்து</string>
     <string name="release_4_6">And ஆண்ட்ராய்டு Auto: 3D பயன்முறையைச் சேர்க்கப்பட்டது\n\n • தடங்கள்: அறிமுகப்படுத்தப்பட்ட வடிப்பான்கள் மற்றும் அறிவுள்ள கோப்புறைகள், பெரிய கோப்புகளுக்கான உகந்த நினைவகம்\n\n • அனைத்து விட்செட்டுகளுக்கும் இடமளிக்க மேம்பட்ட மேல் மற்றும் கீழ் விட்செட் பேனல்கள்\n\n Local மேம்பட்ட உள்ளக வள மேலாண்மை\n\n Conterge வெளிப்புற கட்டுப்படுத்திகளுக்கான தனிப்பயனாக்கக்கூடிய பொத்தான் மேப்பிங்\n\n • புதிய விட்செட்டுகள்: \"கிளைடு விகிதம்\" மற்றும் \"சூரிய நிலை\"\n\n • OSMand Cloud: இப்போது நீக்கப்பட்ட கோப்புகளை அணுகவும்\n\n St புதிய சமச்சீர் சாய்வுடன் சாய்வு பயன்முறையில் மேம்பட்ட டிராக் வண்ணம்\n\n Fact வெளிப்படையான நிலை பட்டியுடன் தீர்க்கப்பட்ட சிக்கல்கள்\n\n Ant ANT+ வெப்பநிலை விட்செட்டுக்கு உதவி சேர்க்கப்பட்டது\n\n \"கிடைக்கக்கூடிய ரேம்\" விட்செட்டை அறிமுகப்படுத்தியது</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="no_poi_for_category">போய் கண்டுபிடிக்கப்படவில்லை</string>
     <string name="number_of_tracks">%1$s தடங்கள்</string>
     <string name="shared_string_not_checked">சரிபார்க்கப்படவில்லை</string>
@@ -3412,7 +3402,6 @@
     <string name="shared_string_qr_code">QR குறியீடு</string>
     <string name="share_menu_location">இருப்பிடத்தைப் பகிரவும்</string>
     <string name="shared_string_send">அனுப்பு</string>
-    <string name="av_locations_descr">இருப்பிடங்களுடன் சிபிஎக்ச் கோப்பு.</string>
     <string name="agps_data_last_downloaded">A-GPS தரவு பதிவிறக்கம்: %1$s</string>
     <string name="srtm_plugin_description">நிலப்பரப்பு கோடுகள், இல்சேட், சாய்வு போன்ற நிலப்பரப்பு தகவல்கள், நிலத்தின் இடத்தையும், ஈடு, வழிசெலுத்தல் மற்றும் பலவற்றை பார்வைக்கு மதிப்பிட உதவுகின்றன. வரைபடத்தில் நிலப்பரப்பு தகவல்களை விளிம்பு கோடுகள், நிவாரண நிழல் மற்றும்/அல்லது செங்குத்தான வண்ணம் ஆகியவற்றால் குறிக்கலாம்.\n\n அடிப்படை தரவு SRTM மற்றும் ASTER இலிருந்து உருவாகிறது.\n\n மேலும் வாசிப்பு %1$s.</string>
     <string name="osm_editing_plugin_description">உலகின் விரிவான வரைபடத்தை பராமரிக்கும் உலகளாவிய சமூகமான ஓபன்ச்ட்ரீட்மேப்பிற்கு பங்களிப்புகளைச் செய்யுங்கள் மற்றும் ஒவ்வொரு பயனருக்கும் புதுப்பித்த திறந்த மூல தரவை வழங்குகிறது.\n\n எங்கள் வலைத்தளமான %1$s இல் வரைபடத்தை எவ்வாறு திருத்துவது என்பதற்கான வழிமுறைகளை நீங்கள் காணலாம்.</string>
@@ -3654,7 +3643,7 @@
     <string name="liter_per_hour">எல்/ம</string>
     <string name="quick_action_btn_tutorial_descr">பொத்தானை நீண்ட நேரம் தட்டுவதும் இழுப்பதும் திரையில் அதன் நிலையை மாற்றுகிறது.</string>
     <string name="quick_action_map_source_switch">வரைபட மூலமானது \"%s\" ஆக மாற்றப்பட்டது.</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="show_track_on_map">வரைபடத்தில் தடத்தைக் காட்டு</string>
     <string name="osm_edits_view_descr">நீங்கள் இன்னும் பதிவேற்றப்படாத திருத்தங்கள் அல்லது OSM பிழைகள் அனைத்தையும் %1$s இல் காண்க. ஏற்கனவே பதிவேற்றிய மாற்றங்கள் இனி காண்பிக்கப்படாது.</string>
     <string name="gpx_monitoring_stop">பயணப் பதிவு இடைநிறுத்தம்</string>
@@ -4149,7 +4138,6 @@
     <string name="avoid_ferries">படகுகள் இல்லை</string>
     <string name="layer_osm_bugs">OSM குறிப்புகள் (ஆன்லைன்)</string>
     <string name="opening_at">திறக்க</string>
-    <string name="av_locations">இருப்பிடங்கள்</string>
     <string name="share_note">பகிர்வு குறிப்பு</string>
     <string name="battery_optimization_settings">பேட்டரி தேர்வுமுறை அமைப்புகள்</string>
     <string name="shared_string_created">உருவாக்கப்பட்டது</string>
@@ -4237,7 +4225,6 @@
     <string name="monitoring_prefs_descr">வழிசெலுத்தல், பதிவு துல்லியம்</string>
     <string name="accessibility_prefs_descr">படவுரு, வண்ணம் மற்றும் பெயர் தேர்வு செய்யவும்</string>
     <string name="live_monitoring_descr">பயண பதிவைப் பயன்படுத்தி தற்போதைய இருப்பிடத்தைப் பகிர அனுமதிக்கிறது.</string>
-    <string name="multimedia_notes_view_descr">உங்கள் OSM குறிப்புகள் %1$s இல் உள்ளன.</string>
     <string name="track_saved">ட்ராக் சேமிக்கப்பட்டது</string>
     <string name="layer_osm_edits">OSM திருத்தங்கள்</string>
     <string name="change_data_storage_full_description">OSMAND தரவு கோப்புகளை புதிய இலக்குக்கு நகர்த்தவா?\n %1$s&gt; %2$s</string>
@@ -4271,7 +4258,6 @@
     <string name="system_default_theme">கணினி இயல்புநிலை</string>
     <string name="shared_string_max_speed">அதிகபட்சம். விரைவு</string>
     <string name="dark_theme">இருண்ட</string>
-    <string name="watch">வாட்ச்</string>
     <string name="int_min">மணித்துளி.</string>
     <string name="plugins_menu_group">செருகுநிரல்கள்</string>
     <string name="obd_vin">வின்</string>
@@ -4324,7 +4310,6 @@
     <string name="downloads">பதிவிறக்கங்கள்</string>
     <string name="dashboard_or_drawer_description">நெகிழ்வான டாச்போர்டு அல்லது நிலையான பட்டியல் வழியாக பயன்பாட்டை முதன்மையாக கட்டுப்படுத்த ஒரு தேர்வு வழங்கப்படுகிறது. உங்கள் விருப்பம் எப்போதும் டாச்போர்டு அமைப்புகளில் மாற்றப்படலாம்.</string>
     <string name="number_of_contributors">பங்களிப்பாளர்களின் எண்ணிக்கை</string>
-    <string name="file_name_containes_illegal_char">கோப்பு பெயரில் சட்டவிரோத தன்மை</string>
     <string name="quick_action_item_screen">திரை %d</string>
     <string name="quick_action_take_audio_note_descr">திரையின் நடுவில் ஆடியோ குறிப்பைச் சேர்க்க ஒரு பொத்தான்.</string>
     <string name="quick_action_add_parking_descr">திரையின் நடுவில் பார்க்கிங் இருப்பிடத்தைச் சேர்க்க ஒரு பொத்தான்.</string>
@@ -4479,11 +4464,6 @@
     <string name="ais_load_data">கோப்பிலிருந்து AIS தரவை ஏற்றவும்</string>
     <string name="ais_address_settings">ஐபி முகவரி அமைப்புகள்</string>
     <string name="ais_address_settings_description">NMEA நெறிமுறை (UDP/TCP) ஐத் தேர்ந்தெடுத்து முகவரிகளை வரையறுக்கவும்</string>
-    <string name="ais_nmea_protocol">NMEA தரவு வரவேற்புக்கான நெறிமுறை</string>
-    <string name="ais_nmea_protocol_description">NMEA தரவு வரவேற்புக்கான நெறிமுறையைத் தேர்வுசெய்க</string>
-    <string name="ais_port_nmea_local_description">OSMAND NMEA தரவைப் பெறும் UDP போர்ட்டை வரையறுக்கவும்</string>
-    <string name="ais_object_lost_timeouts">AIS சமிக்ஞை வரவேற்புக்கான காலக்கெடு அமைப்புகள்</string>
-    <string name="ais_cpa_warning_distance">அணுகுமுறையின் மூடு புள்ளிக்கான எச்சரிக்கை தூரம் (சிபிஏ)</string>
     <string name="plugin_ais_tracker_name">AIS வெசெல் டிராக்கர்</string>
     <string name="plugin_ais_tracker_description">AIS நிலைகள் மற்றும் சுற்றியுள்ள கப்பல்களைப் பற்றிய தகவல்களைக் காண்பி. AIS தரவு வெளிப்புற AIS பெறுநரிடமிருந்து பிணையம் வழியாக பெறப்படுகிறது.</string>
     <string name="shared_string_default_view">இயல்புநிலை பார்வை</string>
@@ -4493,7 +4473,6 @@
     <string name="key_is_already_assigned_error">\"%1$s\" விசை ஏற்கனவே செயலுக்கு ஒதுக்கப்பட்டுள்ளது: \"%2$s\"</string>
     <string name="selected_delayed_profile">தேர்ந்தெடுக்கப்பட்ட சுயவிவரம் \"%s\"</string>
     <string name="apply_to_current_profile">\"%1$s\" க்கு மட்டுமே பொருந்தும்</string>
-    <string name="ais_cpa_settings">CPA தொடர்பான அமைப்புகள்</string>
     <string name="no_places_available">இடங்கள் எதுவும் கிடைக்கவில்லை</string>
     <string name="no_photo_for_location_desc">இந்த இடத்தில் பயனர் புகைப்படங்கள் எதுவும் சேர்க்கப்படவில்லை</string>
     <string name="map_widget_route_information_desc">மதிப்பிடப்பட்ட வருகை நேரம், மீதமுள்ள பயண நேரம் மற்றும் தற்போதைய வழிசெலுத்தல் வழிக்கான தூரத்தைக் காட்டுகிறது.</string>
@@ -4501,19 +4480,7 @@
     <string name="location_source_descr">இயல்பாக, கூகிள் பிளேயிலிருந்து நிறுவப்பட்ட OSMAND இருப்பிடத்தை தீர்மானிக்க %1$s ஐப் பயன்படுத்துகிறது.\n\n நீங்கள் தவறான இருப்பிடத் தகவலைப் பெற்றால் அல்லது %2$s இல்லாமல் சாதனத்தைப் பயன்படுத்தினால், \" %3$s\" க்கு மாற முயற்சிக்கவும்</string>
     <string name="application_profile_changed">பயன்பாட்டு சுயவிவரம் \"%s\" ஆக மாற்றப்பட்டது</string>
     <string name="hmd_promo">%1$s மாதங்களுக்கு HMD விளம்பர</string>
-    <string name="ais_address_nmea_server_description">NMEA தரவு மூலத்தின் ஐபி முகவரியை வரையறுக்கவும் (TCP பயன்படுத்தப்பட்டால்)</string>
-    <string name="ais_port_nmea_server">NMEA தரவு மூலத்தின் TCP துறைமுகம்</string>
-    <string name="ais_port_nmea_server_description">NMEA தரவு மூலத்தின் TCP துறைமுகம் எண்ணை வரையறுக்கவும்</string>
-    <string name="ais_port_nmea_local">உள்ளக NMEA தரவு பெறுநரின் யுடிபி துறைமுகம்</string>
     <string name="shared_string_road_exit">வெளியேறு</string>
-    <string name="ais_address_nmea_server">NMEA தரவு மூலத்தின் ஐபி முகவரி</string>
-    <string name="ais_object_lost_timeout">பொருள் தொலைந்து போகும்போது தெரிவுநிலைக்கான நேரம் முடிந்தது</string>
-    <string name="ais_object_lost_timeout_description">AIS பொருள்களின் தெரிவுநிலைக்கு நேரத்தை அமைக்கவும்: சமிக்ஞை வரவேற்பு இல்லாமல் இந்த நேரத்திற்குப் பிறகு, AIS பொருள் திரையில் இருந்து அகற்றப்படும்.</string>
-    <string name="ais_ship_lost_timeout">சமிக்ஞை பெறாதபோது கப்பல் தெரிவுநிலைக்கான நேரம் முடிந்தது</string>
-    <string name="ais_cpa_warning_time">அணுகுமுறையின் மிக நெருக்கமான இடத்தை அடைய எச்சரிக்கை நேரம் (சிபிஏ)</string>
-    <string name="ais_ship_lost_timeout_description">கப்பல் தெரிவுநிலைக்கு நேரத்தை அமைக்கவும்: சமிக்ஞை வரவேற்பு இல்லாமல் இந்த நேரத்திற்குப் பிறகு, கப்பல் அடையாளம் அதன் நிலையை திரையில் மாற்றும்: அது கடக்கப்படும்.</string>
-    <string name="ais_cpa_warning_time_description">TCPA (மற்றொரு கப்பலுடன் CPA ஐ அடைய வேண்டிய நேரம்) இந்த மதிப்பை விட குறைவாக இருந்தால், கப்பல் சிவப்பு நிறத்துடன் குறிக்கப்பட்டுள்ளது.</string>
-    <string name="ais_cpa_warning_distance_description">CPA இந்த மதிப்பை விட குறைவாகவும், எதிர்காலத்தில் CPA ஐ அடைந்தால் கப்பல்கள் சிவப்பு நிறத்துடன் குறிக்கப்பட்டுள்ளன (CPA ஐ அடைய எச்சரிக்கை நேரத்தை அமைப்பதைப் பார்க்கவும்).</string>
     <string name="plugin_ais_tracker_disclaimer">மறுப்பு\n\n இந்த சொருகி ஒரு பொழுதுபோக்கு திட்டம் மற்றும் நம்பகத்தன்மை மற்றும் சரியான தன்மைக்காக வடிவமைக்கப்படவில்லை. வழிசெலுத்தல் மற்றும்/அல்லது வாழ்க்கையின் பாதுகாப்பு உட்பட எந்த வகையிலும் இந்த மென்பொருளை நம்ப வேண்டாம்.</string>
     <string name="map_widget_route_information">பாதை செய்தி</string>
     <string name="map_widget_distance">தூரம்</string>

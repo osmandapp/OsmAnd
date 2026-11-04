@@ -54,6 +54,17 @@ public class Version {
 		return net.osmand.plus.BuildConfig.FLAVOR;
 	}
 
+	/**
+	 * Gradle build variant, e.g. nightlyFreeLegacyFatRelease. R8 writes a mapping.txt per variant,
+	 * so a crash report needs it to pick the mapping that retraces its stack.
+	 */
+	@NonNull
+	public static String getBuildVariant() {
+		String buildType = net.osmand.plus.BuildConfig.BUILD_TYPE;
+		String flavor = getBuildFlavor();
+		return Algorithms.isEmpty(flavor) ? buildType : flavor + Algorithms.capitalizeFirstLetter(buildType);
+	}
+
 	public static boolean isGooglePlayEnabled() {
 		return !isHuawei() && !isAmazon() && !isHMDBuild();
 	}
@@ -159,11 +170,15 @@ public class Version {
 	}
 
 	public static boolean isPaidVersion(@NonNull OsmandApplication app) {
+		return isPaidVersion(app, true);
+	}
+
+	public static boolean isPaidVersion(@NonNull OsmandApplication app, boolean checkDevBuild) {
 		return !isFreeVersion(app)
-				|| InAppPurchaseUtils.isFullVersionAvailable(app)
-				|| InAppPurchaseUtils.isLiveUpdatesAvailable(app)
-				|| InAppPurchaseUtils.isMapsPlusAvailable(app)
-				|| InAppPurchaseUtils.isOsmAndProAvailable(app)
+				|| InAppPurchaseUtils.isFullVersionAvailable(app, checkDevBuild)
+				|| InAppPurchaseUtils.isLiveUpdatesAvailable(app, checkDevBuild)
+				|| InAppPurchaseUtils.isMapsPlusAvailable(app, checkDevBuild)
+				|| InAppPurchaseUtils.isOsmAndProAvailable(app, checkDevBuild)
 				|| InAppPurchaseUtils.isBrandPromoAvailable(app);
 	}
 

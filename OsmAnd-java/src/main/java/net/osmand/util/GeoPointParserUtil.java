@@ -17,6 +17,32 @@ import java.util.regex.Pattern;
 
 public class GeoPointParserUtil {
 
+	public static String parseGeoAction(String uriString) {
+		if (Algorithms.isEmpty(uriString)) {
+			return "";
+		}
+		URI uri = createUri(uriString);
+		if (uri == null) {
+			return "";
+		}
+		String scheme = uri.getScheme();
+		if (scheme == null) {
+			return "";
+		}
+		scheme = scheme.toLowerCase(Locale.US);
+		if (!"geo.action".equals(scheme) && !"geo.action.offline".equals(scheme)) {
+			return "";
+		}
+		Map<String, String> params = getQueryParameters(uri);
+		for (Map.Entry<String, String> entry : params.entrySet()) {
+			if ("act".equalsIgnoreCase(entry.getKey())) {
+				String val = entry.getValue();
+				return val != null ? val.trim().toLowerCase(Locale.US) : "";
+			}
+		}
+		return "";
+	}
+
 	private static String getQueryParameter(final String param, URI uri) {
 		final String query = uri.getQuery();
 		String value = null;

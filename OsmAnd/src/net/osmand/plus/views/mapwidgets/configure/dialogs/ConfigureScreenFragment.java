@@ -358,4 +358,9 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements C
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "configure_screen";
+	}
 }

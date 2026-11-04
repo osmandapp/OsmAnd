@@ -315,4 +315,9 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "track_folder";
+	}
 }

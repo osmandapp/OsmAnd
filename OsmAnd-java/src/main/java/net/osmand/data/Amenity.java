@@ -8,6 +8,7 @@ import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
+import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 
 import java.util.ArrayList;
@@ -39,11 +40,14 @@ import net.osmand.osm.PoiType;
 import net.osmand.shared.wiki.WikiHelper;
 import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 
 public class Amenity extends MapObject {
 
+	/** Stable prefix for persisted Amenity origins, independent of runtime class names and R8 obfuscation. */
+	public static final String ORIGIN_PREFIX = "Amenity";
 	public static final String WEBSITE = "website";
 	public static final String URL = "url";
 	public static final String PHONE = "phone";
@@ -67,6 +71,7 @@ public class Amenity extends MapObject {
 	public static final String WIKIDATA = "wikidata";
 	public static final String WIKIMEDIA_COMMONS = "wikimedia_commons";
 	public static final String MAPILLARY = "mapillary";
+	public static final String PANORAMAX = "panoramax";
 	public static final String DISH = "dish";
 	public static final String REF = "ref";
 	public static final String OSM_DELETE_VALUE = "delete";
@@ -409,7 +414,7 @@ public class Amenity extends MapObject {
 
 	@Override
 	public String toStringEn() {
-		return super.toStringEn() + ": " + type.getKeyName() + ":" + subType;
+		return ORIGIN_PREFIX + ":" + getEnName(true) + ": " + type.getKeyName() + ":" + subType;
 	}
 
 	@Override
@@ -847,6 +852,11 @@ public class Amenity extends MapObject {
 	}
 
 	public Map<String, String> getAmenityExtensions(MapPoiTypes mapPoiTypes, boolean addPrefixes) {
+		return getAmenityExtensions(mapPoiTypes, addPrefixes, false, null);
+	}
+
+	public Map<String, String> getAmenityExtensions(MapPoiTypes mapPoiTypes, boolean addPrefixes,
+	                                                boolean excludeWikiContent, String preferredLang) {
 		Map<String, String> result = new HashMap<>();
 		Map<String, List<PoiType>> categories = new HashMap<>();
 
@@ -863,7 +873,8 @@ public class Amenity extends MapObject {
 			result.put(addPrefixes ? AMENITY_PREFIX + OPENING_HOURS : OPENING_HOURS, openingHours);
 		}
 		if (hasAdditionalInfo()) {
-			result.putAll(getAdditionalInfoAndCollectCategories(mapPoiTypes, categories, addPrefixes));
+			result.putAll(getAdditionalInfoAndCollectCategories(mapPoiTypes, categories, addPrefixes,
+					excludeWikiContent, preferredLang));
 
 			//join collected tags by category into one string
 			for (Map.Entry<String, List<PoiType>> entry : categories.entrySet()) {
@@ -886,9 +897,15 @@ public class Amenity extends MapObject {
 
 	public Map<String, String> getAdditionalInfoAndCollectCategories(MapPoiTypes mapPoiTypes,
 	                                                                 Map<String, List<PoiType>> categories,
-	                                                                 boolean addPrefixes) {
+	                                                                 boolean addPrefixes,
+	                                                                 boolean excludeWikiContent,
+	                                                                 String preferredLang) {
 		Map<String, String> result = new HashMap<>();
+		boolean hasDefaultShortDescription = getInternalAdditionalInfoMap().containsKey(SHORT_DESCRIPTION);
 		for (String key : getAdditionalInfoKeys()) {
+			if (excludeWikiContent && isWikiContentTag(key, preferredLang, hasDefaultShortDescription)) {
+				continue;
+			}
 			String value = getAdditionalInfo(key);
 			PoiType poiType = getPoiType(mapPoiTypes, key, value);
 			if (poiType != null && poiType.isFilterOnly()) {
@@ -918,6 +935,55 @@ public class Amenity extends MapObject {
 			result.put(key, value);
 		}
 		return result;
+	}
+
+	public static boolean isWikiContentTag(String key, String preferredLang,
+	                                       boolean hasDefaultShortDescription) {
+		if (isContentTag(key) || WIKI_CATEGORY.equals(key)
+				|| hasLangSuffix(key, WIKI_LANG) || hasLangSuffix(key, LANG_YES)) {
+			return true;
+		}
+		if (Algorithms.isEmpty(preferredLang) || !hasLangSuffix(key, SHORT_DESCRIPTION)) {
+			return false;
+		}
+		if (isTagWithLang(key, SHORT_DESCRIPTION, preferredLang)) {
+			return false;
+		}
+		if (isTagWithLang(key, SHORT_DESCRIPTION, "en")) {
+			// without the unsuffixed tag this is the only English copy left
+			return hasDefaultShortDescription;
+		}
+		return true;
+	}
+
+	private static boolean isTagWithLang(String key, String tag, String lang) {
+		return key.equals(tag + ":" + lang) || key.equals(tag + XML_COLON + lang);
+	}
+
+	public static Map<String, String> removeWikiContentTags(Map<String, String> extensions,
+	                                                       String preferredLang) {
+		boolean hasDefaultShortDescription = extensions.containsKey(SHORT_DESCRIPTION)
+				|| extensions.containsKey(OSM_PREFIX + SHORT_DESCRIPTION);
+		Map<String, String> result = new LinkedHashMap<>();
+		for (Entry<String, String> entry : extensions.entrySet()) {
+			if (!isWikiContentTag(stripOsmPrefix(entry.getKey()), preferredLang, hasDefaultShortDescription)) {
+				result.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return result;
+	}
+
+	private static boolean isContentTag(String key) {
+		return CONTENT.equals(key) || CONTENT_JSON.equals(key)
+				|| hasLangSuffix(key, CONTENT) || hasLangSuffix(key, CONTENT_JSON);
+	}
+
+	private static boolean hasLangSuffix(String key, String tag) {
+		return CollectionUtils.startsWithAny(key, tag + ":", tag + XML_COLON);
+	}
+
+	private static String stripOsmPrefix(String key) {
+		return key.startsWith(OSM_PREFIX) ? key.substring(OSM_PREFIX.length()) : key;
 	}
 
 	private PoiType getPoiType(MapPoiTypes mapPoiTypes, String key, String value) {

@@ -3,6 +3,8 @@ package net.osmand.plus.settings.coordinates
 import net.osmand.LocationConvert
 import net.osmand.data.PointDescription
 import net.osmand.plus.OsmandApplication
+import net.osmand.shared.settings.coordinates.CoordinateFormat
+import net.osmand.shared.settings.coordinates.CoordinateFormatIds
 
 enum class BuiltInCoordinateFormat(val id: String, val legacyFormat: Int) {
 	DDD(CoordinateFormatIds.BUILTIN_DDD, LocationConvert.FORMAT_DEGREES),
@@ -29,6 +31,11 @@ enum class BuiltInCoordinateFormat(val id: String, val legacyFormat: Int) {
 		fun fromId(id: String?): BuiltInCoordinateFormat? {
 			val normalized = CoordinateFormatIds.normalize(id) ?: return null
 			return entries.firstOrNull { it.id == normalized }
+		}
+
+		@JvmStatic
+		fun fromOldFormat(format: Int): String? {
+			return entries.firstOrNull { it.legacyFormat == format }?.id
 		}
 
 		@JvmStatic

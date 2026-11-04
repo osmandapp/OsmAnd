@@ -119,4 +119,9 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "zoom_levels";
+	}
 }

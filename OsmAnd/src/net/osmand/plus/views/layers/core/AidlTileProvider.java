@@ -74,12 +74,12 @@ public class AidlTileProvider extends interface_MapTiledCollectionProvider {
 		this.smallIconBg = aidlMapLayer.getSmallIconBg();
 		this.offset = new PointI(0, 0);
 		this.bigIconOffset = new PointI(0, (int) yOffset);
-		this.swigTakeOwnership();
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
 		if (providerInstance == null) {
-			providerInstance = instantiateProxy();
+			providerInstance = instantiateProxy(true);
+			swigReleaseOwnership();
 		}
 		mapRenderer.addSymbolsProvider(providerInstance);
 	}

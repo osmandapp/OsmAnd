@@ -1560,4 +1560,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		int timeInSeconds = model.getExpectedTime();
 		return Algorithms.formatDuration(timeInSeconds, app.accessibilityEnabled());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "route_details";
+	}
 }

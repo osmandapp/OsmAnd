@@ -56,6 +56,9 @@ public class OpeningHoursParser {
 		initLocalStrings();
 
 		additionalStrings.put("off", "off");
+		additionalStrings.put("public_holiday", "PH");
+		additionalStrings.put("school_holiday", "SH");
+		additionalStrings.put("easter", "Easter");
 		additionalStrings.put("is_open", "Open");
 		additionalStrings.put("is_open_24_7", "Open 24/7");
 		additionalStrings.put("is_open_24_7_short", "24/7");
@@ -1211,7 +1214,6 @@ public class OpeningHoursParser {
 		}
 
 		private String toRuleString(boolean useLocalization) {
-			String[] dayNames = useLocalization ? localDaysStr : daysStr;
 			String[] monthNames = useLocalization ? localMothsStr : monthsStr;
 			String offStr = useLocalization ? additionalStrings.get("off") : "off";
 
@@ -1339,7 +1341,7 @@ public class OpeningHoursParser {
 			}
 
 			// Day
-			appendDaysString(b, dayNames);
+			appendDaysString(b, useLocalization);
 			// Time
 			if (startTimes == null || startTimes.size() == 0) {
 				if (isOpened24_7()) {
@@ -1427,7 +1429,8 @@ public class OpeningHoursParser {
 
 		@Override
 		public boolean isOpened24_7() {
-			boolean opened24_7 = isOpenedEveryDay();
+			// month or date ranges like "Oct-Mar off" don't cover the whole year (#11571)
+			boolean opened24_7 = isOpenedEveryDay() && isOpenedEveryMonth() && !hasDayMonths();
 
 			if (opened24_7) {
 				if (startTimes != null && startTimes.size() > 0) {
@@ -1454,6 +1457,15 @@ public class OpeningHoursParser {
 				}
 			}
 			return openedEveryDay;
+		}
+
+		public boolean isOpenedEveryMonth() {
+			for (int i = 0; i < 12; i++) {
+				if (!months[i]) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 		@Override
@@ -1606,10 +1618,14 @@ public class OpeningHoursParser {
 		}
 
 		public void appendDaysString(StringBuilder builder) {
-			appendDaysString(builder, daysStr);
+			appendDaysString(builder, false);
 		}
 
-		public void appendDaysString(StringBuilder builder, String[] daysNames) {
+		public void appendDaysString(StringBuilder builder, boolean useLocalization) {
+			String[] daysNames = useLocalization ? localDaysStr : daysStr;
+			String publicHolidayStr = useLocalization ? additionalStrings.get("public_holiday") : "PH";
+			String schoolHolidayStr = useLocalization ? additionalStrings.get("school_holiday") : "SH";
+			String easterStr = useLocalization ? additionalStrings.get("easter") : "Easter";
 			boolean dash = false;
 			boolean first = true;
 			for (int i = 0; i < 7; i++) {
@@ -1637,21 +1653,21 @@ public class OpeningHoursParser {
 				if (!first) {
 					builder.append(", ");
 				}
-				builder.append("PH");
+				builder.append(publicHolidayStr);
 				first = false;
 			}
 			if (schoolHoliday) {
 				if (!first) {
 					builder.append(", ");
 				}
-				builder.append("SH");
+				builder.append(schoolHolidayStr);
 				first = false;
 			}
 			if (easter) {
 				if (!first) {
 					builder.append(", ");
 				}
-				builder.append("Easter");
+				builder.append(easterStr);
 				first = false;
 			}
 			if(!first) {

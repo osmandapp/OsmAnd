@@ -117,6 +117,7 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 					KStringMatcherMode.CHECK_EQUALS_FROM_SPACE -> CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 					KStringMatcherMode.CHECK_CONTAINS -> CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS
 					KStringMatcherMode.CHECK_EQUALS -> CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS
+					KStringMatcherMode.MULTISEARCH -> CollatorStringMatcher.StringMatcherMode.MULTISEARCH
 				}
 
 			override fun matches(name: String): Boolean = sm.matches(name)

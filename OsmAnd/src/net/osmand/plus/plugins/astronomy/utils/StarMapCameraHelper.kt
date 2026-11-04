@@ -10,6 +10,9 @@ import android.hardware.camera2.CameraCaptureSession
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
+import android.hardware.camera2.params.OutputConfiguration
+import android.hardware.camera2.params.SessionConfiguration
+import android.os.Build
 import android.util.Size
 import android.view.Surface
 import android.view.TextureView
@@ -20,6 +23,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import net.osmand.plus.plugins.astronomy.views.StarView
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.shared.util.LoggerFactory
 import kotlin.math.abs
 import kotlin.math.atan
@@ -30,6 +34,7 @@ class StarMapCameraHelper(
 	private val fragment: Fragment,
 	private val starView: StarView,
 	private val cameraTextureView: TextureView,
+	private val requestCameraPermission: () -> Unit,
 	private val onCameraStateChanged: (Boolean) -> Unit
 ) {
 
@@ -41,11 +46,11 @@ class StarMapCameraHelper(
 
 	private var cameraDevice: CameraDevice? = null
 	private var captureSession: CameraCaptureSession? = null
+	private var cameraOpenRequested = false
 	private var previewSize: Size? = null
 	private var baseTransformMatrix: Matrix? = null
 
 	companion object {
-		const val PERMISSION_REQUEST_CAMERA = 1001
 		private val log = LoggerFactory.getLogger("StarMapCameraHelper")
 	}
 
@@ -67,20 +72,18 @@ class StarMapCameraHelper(
 		closeCamera()
 	}
 
-	fun onRequestPermissionsResult(requestCode: Int, grantResults: IntArray) {
-		if (requestCode == PERMISSION_REQUEST_CAMERA) {
-			if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				toggleCameraOverlay() // Retry enabling
-			} else {
-				Toast.makeText(fragment.context, "Camera permission required for overlay", Toast.LENGTH_SHORT).show()
-			}
+	fun onCameraPermissionResult(granted: Boolean) {
+		if (granted) {
+			toggleCameraOverlay() // Retry enabling
+		} else {
+			Toast.makeText(fragment.context, "Camera permission required for overlay", Toast.LENGTH_SHORT).show()
 		}
 	}
 
 	fun toggleCameraOverlay() {
 		val context = fragment.requireContext()
 		if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-			fragment.requestPermissions(arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST_CAMERA)
+			requestCameraPermission()
 			return
 		}
 
@@ -131,6 +134,7 @@ class StarMapCameraHelper(
 			return
 		}
 
+		cameraOpenRequested = true
 		if (cameraTextureView.isAvailable) {
 			startCameraSession()
 		} else {
@@ -175,16 +179,25 @@ class StarMapCameraHelper(
 
 			manager.openCamera(cameraId, object : CameraDevice.StateCallback() {
 				override fun onOpened(camera: CameraDevice) {
+					if (!cameraOpenRequested) {
+						// The overlay was closed while the camera was still opening
+						camera.close()
+						return
+					}
 					cameraDevice = camera
 					createCaptureSession()
 				}
 				override fun onDisconnected(camera: CameraDevice) {
 					camera.close()
-					cameraDevice = null
+					if (cameraDevice === camera) {
+						cameraDevice = null
+					}
 				}
 				override fun onError(camera: CameraDevice, error: Int) {
 					camera.close()
-					cameraDevice = null
+					if (cameraDevice === camera) {
+						cameraDevice = null
+					}
 				}
 			}, null)
 		} catch (e: Exception) {
@@ -213,10 +226,10 @@ class StarMapCameraHelper(
 
 	private fun configureTransform(viewWidth: Int, viewHeight: Int) {
 		val activity = fragment.activity ?: return
-		if (null == previewSize || null == cameraTextureView) {
+		if (null == previewSize) {
 			return
 		}
-		val rotation = activity.windowManager.defaultDisplay.rotation
+		val rotation = AndroidUtils.getDisplay(activity).rotation
 		val matrix = Matrix()
 		val viewRect = RectF(0f, 0f, viewWidth.toFloat(), viewHeight.toFloat())
 		val bufferRect =
@@ -293,6 +306,7 @@ class StarMapCameraHelper(
 
 	private fun createCaptureSession() {
 		try {
+			val device = cameraDevice ?: return
 			val texture = cameraTextureView.surfaceTexture!!
 			if (previewSize != null) {
 				texture.setDefaultBufferSize(previewSize!!.width, previewSize!!.height)
@@ -301,24 +315,44 @@ class StarMapCameraHelper(
 			}
 			val surface = Surface(texture)
 
-			val builder = cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
-			builder?.addTarget(surface)
+			val builder = device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
+			builder.addTarget(surface)
 
-			cameraDevice?.createCaptureSession(listOf(surface), object : CameraCaptureSession.StateCallback() {
+			val stateCallback = object : CameraCaptureSession.StateCallback() {
 				override fun onConfigured(session: CameraCaptureSession) {
+					if (cameraDevice !== device) {
+						// The camera was closed or reopened while the session was being configured
+						session.close()
+						return
+					}
 					captureSession = session
-					builder?.build()?.let {
-						session.setRepeatingRequest(it, null, null)
+					try {
+						session.setRepeatingRequest(builder.build(), null, null)
+					} catch (e: Exception) {
+						log.error("Failed to start camera preview", e)
 					}
 				}
 				override fun onConfigureFailed(session: CameraCaptureSession) {}
-			}, null)
+			}
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+				val sessionConfiguration = SessionConfiguration(
+					SessionConfiguration.SESSION_REGULAR,
+					listOf(OutputConfiguration(surface)),
+					ContextCompat.getMainExecutor(cameraTextureView.context),
+					stateCallback
+				)
+				device.createCaptureSession(sessionConfiguration)
+			} else {
+				@Suppress("DEPRECATION")
+				device.createCaptureSession(listOf(surface), stateCallback, null)
+			}
 		} catch (e: Exception) {
 			log.error("Failed to create capture session", e)
 		}
 	}
 
 	private fun closeCamera() {
+		cameraOpenRequested = false
 		captureSession?.close()
 		captureSession = null
 		cameraDevice?.close()

@@ -188,4 +188,9 @@ public class ConfigureScreenPageFragment extends BaseOsmAndFragment implements Q
 		fragment.setArguments(args);
 		return fragment;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "configure_screen_page";
+	}
 }

@@ -405,7 +405,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 				FavoriteSelection selection = new FavoriteSelection(selectionHelper.getSelectedItems());
 				if (selection.isOnlyPoints()) {
 					menu.showPointsSelectOptionsMenu(view, selection.getPoints(), selectedGroup, nightMode,
-							FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this);
+							FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this);
 				} else if (selection.hasFolders()) {
 					menu.showDeleteSelectionOptionsMenu(view, selection, nightMode, FavoriteFolderFragment.this);
 				}
@@ -498,6 +498,12 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 		return folder;
 	}
 
+	@Nullable
+	@Override
+	protected String getImportTargetFolder() {
+		return getSelectedFolderPath();
+	}
+
 	@NonNull
 	private List<FavoriteFolder> getChildFolders(@Nullable FavoriteFolder selectedFolder) {
 		if (selectedFolder == null || isRootExactFolder(selectedFolder)) {
@@ -578,5 +584,10 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favorite_folder";
 	}
 }

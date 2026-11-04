@@ -17,7 +17,8 @@ object RangeTrackFilterSerializer : KSerializer<RangeTrackFilter<*>> {
 
 	@OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
 	override val descriptor: SerialDescriptor =
-		buildClassSerialDescriptor(RangeTrackFilter::class.simpleName ?: "RangeTrackFilter") {
+		// a literal: the class name is renamed in minified Android builds
+		buildClassSerialDescriptor("RangeTrackFilter") {
 			element("filterType", TrackFilterType.serializer().descriptor)
 			element("minValue", buildSerialDescriptor("minValue", SerialKind.CONTEXTUAL))
 			element("maxValue", buildSerialDescriptor("maxValue", SerialKind.CONTEXTUAL))

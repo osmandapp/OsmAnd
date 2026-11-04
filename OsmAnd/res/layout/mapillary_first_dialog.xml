@@ -63,77 +63,86 @@
 	                android:paddingEnd="24dp"
 	                android:layout_marginStart="24dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal"
-	                android:layout_marginEnd="16dp"
-	                android:layout_marginStart="24dp">
+            </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+        </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingRight="24dp"
-                            android:text="@string/mapillary_widget"
-                            android:textColor="?android:textColorPrimary"
-                            android:textSize="@dimen/default_list_text_size"
-	                        android:paddingEnd="24dp" />
+        <LinearLayout
+            android:id="@+id/widget_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/bottom_sheet_divider_margin_start"
+            android:layout_marginTop="10dp"
+            android:paddingRight="@dimen/content_padding"
+            android:paddingVertical="10dp"
+	        android:paddingStart="@dimen/bottom_sheet_divider_margin_start"
+	        android:paddingEnd="@dimen/content_padding">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:paddingRight="24dp"
-                            android:text="@string/mapillary_widget_descr"
-                            android:textColor="?android:textColorSecondary"
-                            android:textSize="@dimen/default_sub_text_size"
-	                        android:paddingEnd="24dp" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                    </LinearLayout>
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/widget_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"/>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="24dp"
-                    android:background="?attr/dashboard_divider"
-	                android:layout_marginStart="24dp" />
-
-                <Button
-                    android:id="@+id/actionButton"
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="16dp"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="24dp"
+                    android:text="@string/mapillary_widget"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+	                android:paddingEnd="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:gravity="start|center_vertical"
-                    android:textColor="?attr/contextMenuButtonColor"
-                    android:text="@string/shared_string_ok"
-	                android:layout_marginStart="16dp"
-	                android:paddingEnd="8dp"
-	                android:paddingStart="8dp" />
+                    android:paddingRight="24dp"
+                    android:text="@string/mapillary_widget_descr"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+	                android:paddingEnd="24dp" />
 
             </LinearLayout>
 
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/widget_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:focusable="false" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
+            android:background="?attr/dashboard_divider"
+	        android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start" />
+
+        <LinearLayout
+            android:id="@+id/bottom_buttons_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/actionButton"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:paddingLeft="@dimen/bottom_sheet_divider_margin_start"
+                android:paddingRight="8dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:gravity="start|center_vertical"
+                android:textColor="?attr/contextMenuButtonColor"
+                android:text="@string/shared_string_ok"
+	            android:paddingEnd="8dp"
+	            android:paddingStart="@dimen/bottom_sheet_divider_margin_start" />
 
         </LinearLayout>
 

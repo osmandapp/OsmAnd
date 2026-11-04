@@ -19,6 +19,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.myplaces.favorites.FavoriteDeletionsJournal;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesFileHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -39,9 +40,12 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup> {
 
@@ -49,6 +53,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	private FavouritesHelper favoritesHelper;
 	private FavoriteGroup personalGroup;
+	private List<String> appliedGroupNames;
 	@Nullable
 	private Map<String, String> hrefRewrites;
 
@@ -69,6 +74,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		super.init();
 		favoritesHelper = app.getFavoritesHelper();
 		existingItems = new ArrayList<>(favoritesHelper.getFavoriteGroups());
+		appliedGroupNames = new ArrayList<>();
 	}
 
 	@NonNull
@@ -150,12 +156,28 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	@Override
 	public void apply() {
+		favoritesHelper.runBulkUpdate(this::applyGroups);
+	}
+
+	/** Every group applied must be present once apply() has reloaded the groups from disk. */
+	@Override
+	public boolean isAppliedLocally() {
+		for (String name : appliedGroupNames) {
+			if (favoritesHelper.getGroup(name) == null) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private void applyGroups() {
 		List<FavoriteGroup> newItems = getNewItems();
 		if (personalGroup != null) {
 			duplicateItems.add(personalGroup);
 		}
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {
 			appliedItems = new ArrayList<>(newItems);
+			List<FavouritePoint> replacedPoints = new ArrayList<>();
 
 			for (FavoriteGroup duplicate : duplicateItems) {
 				boolean isPersonal = duplicate.isPersonal();
@@ -164,9 +186,12 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					FavoriteGroup existingGroup = favoritesHelper.getGroup(duplicate.getName());
 					if (existingGroup != null) {
 						List<FavouritePoint> favouritePoints = new ArrayList<>(existingGroup.getPoints());
+						// Not journaled here: the incoming group replaces these points. Only the points it does
+						// not bring back are journaled, once the incoming points are in (journalRemovedPoints).
 						for (FavouritePoint favouritePoint : favouritePoints) {
-							favoritesHelper.deleteFavourite(favouritePoint, false);
+							favoritesHelper.deleteFavourite(favouritePoint, false, false);
 						}
+						replacedPoints.addAll(favouritePoints);
 					}
 				}
 				if (!isPersonal) {
@@ -189,16 +214,41 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 							group.getIconName(), group.getBackgroundType());
 				}
 				localGroup.copyAppearance(group);
+				// addFavoriteGroup() may resolve the name, so collect it from the local group.
+				appliedGroupNames.add(localGroup.getName());
 
 				PointsGroup pointsGroup = group.toPointsGroup(app);
 				for (FavouritePoint point : group.getPoints()) {
 					favoritesHelper.addFavourite(point, pointsGroup, new AddFavoriteOptions());
 				}
 			}
+			journalRemovedPoints(replacedPoints);
 			favoritesHelper.sortAll();
 			favoritesHelper.saveCurrentPointsIntoFile(false);
 			favoritesHelper.loadFavorites();
 		}
+	}
+
+	private void journalRemovedPoints(@NonNull List<FavouritePoint> replacedPoints) {
+		Map<String, Set<String>> keysByGroup = new HashMap<>();
+		List<FavouritePoint> removedPoints = new ArrayList<>();
+		for (FavouritePoint point : replacedPoints) {
+			Set<String> keys = keysByGroup.get(point.getCategory());
+			if (keys == null) {
+				keys = new HashSet<>();
+				FavoriteGroup group = favoritesHelper.getGroup(point.getCategory());
+				if (group != null) {
+					for (FavouritePoint groupPoint : group.getPoints()) {
+						keys.add(groupPoint.getKey());
+					}
+				}
+				keysByGroup.put(point.getCategory(), keys);
+			}
+			if (!keys.contains(point.getKey())) {
+				removedPoints.add(point);
+			}
+		}
+		FavoriteDeletionsJournal.addAll(app, removedPoints, null);
 	}
 
 	@Override

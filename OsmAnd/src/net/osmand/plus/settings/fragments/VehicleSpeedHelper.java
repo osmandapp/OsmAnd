@@ -3,37 +3,19 @@ package net.osmand.plus.settings.fragments;
 import static net.osmand.plus.routing.RouteService.DIRECT_TO;
 import static net.osmand.plus.routing.RouteService.STRAIGHT;
 import static net.osmand.plus.settings.backend.ApplicationMode.FAST_SPEED_THRESHOLD;
-import static net.osmand.plus.settings.enums.SpeedSliderType.DEFAULT_SPEED;
-import static net.osmand.plus.settings.enums.SpeedSliderType.DEFAULT_SPEED_ONLY;
-import static net.osmand.plus.settings.enums.SpeedSliderType.MAX_SPEED;
-import static net.osmand.plus.settings.enums.SpeedSliderType.MIN_SPEED;
 
-import android.app.Activity;
-import android.content.Context;
 import android.util.Pair;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-
-import com.google.android.material.slider.Slider;
-import com.google.android.material.slider.Slider.OnChangeListener;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.settings.enums.SpeedConstants;
-import net.osmand.plus.settings.enums.SpeedSliderType;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.GeneralRouter;
 
 public class VehicleSpeedHelper {
@@ -43,146 +25,52 @@ public class VehicleSpeedHelper {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final ApplicationMode mode;
-	private final boolean nightMode;
 
 	public VehicleSpeedHelper(@NonNull OsmandApplication app, @NonNull ApplicationMode mode) {
 		this.app = app;
 		this.mode = mode;
 		this.settings = app.getSettings();
-		this.nightMode = app.getDaynightHelper().isNightMode(mode, ThemeUsageContext.APP);
 	}
 
-	public void showSeekbarSettingsDialog(@NonNull Activity activity) {
+	/** Slider bounds and current values of the profile, in the units the user sees. */
+	public static class SpeedConfig {
+		public float ratio;
+		public int min;
+		public int max;
+		public float defaultSpeed;
+		public float minSpeed;
+		public float maxSpeed;
+		public boolean defaultSpeedOnly;
+		public boolean decimalPrecision;
+		public String units;
+	}
+
+	@NonNull
+	public SpeedConfig createSpeedConfig() {
 		GeneralRouter router = app.getRouter(mode);
 		RouteService routeService = mode.getRouteService();
-
 		float maxSpeedLimit = VehicleSpeedConfigLimits.getMaxSpeedConfigLimit(app, mode);
-		boolean defaultSpeedOnly = routeService == STRAIGHT || routeService == DIRECT_TO;
-		boolean decimalPrecision = !defaultSpeedOnly && router != null && maxSpeedLimit / 1.5f <= FAST_SPEED_THRESHOLD;
+		SpeedConfig config = new SpeedConfig();
+		config.defaultSpeedOnly = routeService == STRAIGHT || routeService == DIRECT_TO || router == null;
+		config.decimalPrecision = !config.defaultSpeedOnly && maxSpeedLimit / 1.5f <= FAST_SPEED_THRESHOLD;
 
 		float[] ratio = getSpeedRatio();
 		float[] minValue = new float[1];
 		float[] maxValue = new float[1];
-
-		Pair<Integer, Integer> pair = getMinMax(router, ratio, minValue, maxValue, defaultSpeedOnly, decimalPrecision);
-		int min = pair.first;
-		int max = pair.second;
-
-		showDialog(activity, ratio, minValue, maxValue, min, max, defaultSpeedOnly, decimalPrecision);
-	}
-
-	private void showDialog(@NonNull Activity activity, float[] ratio,
-	                        float[] minValue, float[] maxValue, int min, int max,
-	                        boolean defaultSpeedOnly, boolean decimalPrecision) {
-		float settingsDefaultSpeed = mode.getDefaultSpeed();
-		float[] defaultValue = {roundSpeed(settingsDefaultSpeed * ratio[0], decimalPrecision)};
-
-		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
-		View view = LayoutInflater.from(themedContext).inflate(R.layout.default_speed_dialog, null, false);
-		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-		builder.setView(view);
-		builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-			mode.setDefaultSpeed(defaultValue[0] / ratio[0]);
-			if (!defaultSpeedOnly) {
-				mode.setMinSpeed(minValue[0] / ratio[0]);
-				mode.setMaxSpeed(maxValue[0] / ratio[0]);
-			}
-			app.getRoutingHelper().onSettingsChanged(mode);
-		});
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setNeutralButton(R.string.shared_string_revert, (dialog, which) -> {
-			mode.resetDefaultSpeed();
-			if (!defaultSpeedOnly) {
-				mode.setMinSpeed(0f);
-				mode.setMaxSpeed(0f);
-			}
-			app.getRoutingHelper().onSettingsChanged(mode);
-		});
-		setupSliders(view, defaultValue, minValue, maxValue, min, max, defaultSpeedOnly, decimalPrecision);
-		builder.show();
-	}
-
-	private void setupSliders(@NonNull View view, float[] defaultValue, float[] minValue, float[] maxValue,
-	                          int min, int max, boolean defaultSpeedOnly, boolean decimalPrecision) {
-		String speedUnits = getSpeedUnits();
-		int color = mode.getProfileColor(nightMode);
-		if (!defaultSpeedOnly) {
-			setupSpeedSlider(DEFAULT_SPEED, speedUnits, defaultValue, minValue, maxValue, min, max, decimalPrecision, view, color);
-			setupSpeedSlider(MIN_SPEED, speedUnits, defaultValue, minValue, maxValue, min, max, decimalPrecision, view, color);
-			setupSpeedSlider(MAX_SPEED, speedUnits, defaultValue, minValue, maxValue, min, max, decimalPrecision, view, color);
-		} else {
-			setupSpeedSlider(DEFAULT_SPEED_ONLY, speedUnits, defaultValue, minValue, maxValue, min, max, false, view, color);
-
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.default_speed_div), false);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.default_speed_container), false);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.max_speed_div), false);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.max_speed_container), false);
-		}
-	}
-
-	private void setupSpeedSlider(@NonNull SpeedSliderType type, @NonNull String speedUnits,
-	                              @NonNull float[] defaultValue, @NonNull float[] minValue,
-	                              @NonNull float[] maxValue, int min, int max, boolean decimalPrecision,
-	                              @NonNull View seekbarView, @ColorInt int activeColor) {
-		View sliderLayout = seekbarView.findViewById(type.layoutId);
-		float[] speedValue = getSpeedValue(type, defaultValue, minValue, maxValue);
-
-		Slider slider = sliderLayout.findViewById(R.id.speed_slider);
-		TextView speedTitleTv = sliderLayout.findViewById(R.id.speed_title);
-		TextView speedMinTv = sliderLayout.findViewById(R.id.speed_seekbar_min_text);
-		TextView speedMaxTv = sliderLayout.findViewById(R.id.speed_seekbar_max_text);
-		TextView speedUnitsTv = sliderLayout.findViewById(R.id.speed_units);
-		TextView selectedSpeedTv = sliderLayout.findViewById(R.id.speed_text);
-
-		speedTitleTv.setText(type.titleId);
-		speedMinTv.setText(String.valueOf(min));
-		speedMaxTv.setText(String.valueOf(max));
-		selectedSpeedTv.setText(formatSpeed(speedValue[0], decimalPrecision));
-		speedUnitsTv.setText(speedUnits);
-
-		slider.setValueTo(max - min);
-		slider.setValue(Math.max(speedValue[0] - min, 0));
-		slider.addOnChangeListener(getChangeListener(type, selectedSpeedTv, defaultValue, speedValue, minValue, maxValue, min, decimalPrecision));
-		UiUtilities.setupSlider(slider, nightMode, activeColor);
+		Pair<Integer, Integer> pair = getMinMax(router, ratio, minValue, maxValue, config.defaultSpeedOnly, config.decimalPrecision);
+		config.ratio = ratio[0];
+		config.min = pair.first;
+		config.max = pair.second;
+		config.minSpeed = minValue[0];
+		config.maxSpeed = maxValue[0];
+		config.defaultSpeed = roundSpeed(mode.getDefaultSpeed() * ratio[0], config.decimalPrecision);
+		config.units = getSpeedUnits();
+		return config;
 	}
 
 	@NonNull
-	private OnChangeListener getChangeListener(@NonNull SpeedSliderType type, @NonNull TextView textView,
-	                                           @NonNull float[] defaultValue, @NonNull float[] speedValue,
-	                                           @NonNull float[] minValue, @NonNull float[] maxValue,
-	                                           int min, boolean decimalPrecision) {
-		return (slider, val, fromUser) -> {
-			float progress = decimalPrecision ? Math.round(val * 10) / 10f : (int) val;
-			float value = min + progress;
-			switch (type) {
-				case DEFAULT_SPEED:
-				case DEFAULT_SPEED_ONLY:
-					if (value > maxValue[0]) {
-						value = maxValue[0];
-						slider.setValue(Math.max(value - min, 0));
-					} else if (value < minValue[0]) {
-						value = minValue[0];
-						slider.setValue(Math.max(value - min, 0));
-					}
-					break;
-				case MIN_SPEED:
-					if (value > defaultValue[0]) {
-						value = defaultValue[0];
-						slider.setValue(Math.max(value - min, 0));
-					}
-					break;
-				case MAX_SPEED:
-					if (value < defaultValue[0]) {
-						value = defaultValue[0];
-						slider.setValue(Math.max(value - min, 0));
-					}
-					break;
-				default:
-					break;
-			}
-			speedValue[0] = value;
-			textView.setText(formatSpeed(value, decimalPrecision));
-		};
+	public String formatSpeed(@NonNull SpeedConfig config, float speed) {
+		return formatSpeed(speed, config.decimalPrecision);
 	}
 
 	@NonNull
@@ -241,18 +129,6 @@ public class VehicleSpeedHelper {
 				return app.getString(R.string.mile_per_hour);
 		}
 		return constants.toShortString();
-	}
-
-	@NonNull
-	private float[] getSpeedValue(@NonNull SpeedSliderType type, @NonNull float[] defaultValue,
-	                              @NonNull float[] minValue, @NonNull float[] maxValue) {
-		switch (type) {
-			case MIN_SPEED:
-				return minValue;
-			case MAX_SPEED:
-				return maxValue;
-		}
-		return defaultValue;
 	}
 
 	@NonNull

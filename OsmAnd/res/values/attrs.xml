@@ -209,18 +209,24 @@
 		<attr name="icon_button_background_focused" format="reference" />
 		<attr name="icon_button_background_pressed" format="reference" />
 		<attr name="btn_history_disabled_card_bg" format="reference" />
-		<!-- M3 migration -->
+		<!-- M3 migration: OsmAnd roles not declared by the Material library -->
+		<attr name="colorSurfaceContainerHighestPressed" format="reference" />
+		<attr name="colorOnSurfaceDisabled" format="reference" />
 		<attr name="colorPrimaryPressed" format="reference" />
 		<attr name="colorPrimaryContainerPressed" format="reference" />
-		<attr name="colorSurfaceContainerHighestPressed" format="reference" />
-		<attr name="colorOnSurfaceTertiary" format="reference" />
-		<attr name="colorOnSurfaceDisabled" format="reference" />
+		<attr name="colorSecondaryContainerPressed" format="reference" />
 		<attr name="colorOutlineDisabled" format="reference" />
-		<attr name="colorSuccess" format="reference" />
-		<attr name="colorWarning" format="reference" />
-		<attr name="colorSuccessIcon" format="reference" />
-		<attr name="colorWarningIcon" format="reference" />
 		<attr name="colorErrorIcon" format="reference" />
+		<attr name="colorSuccess" format="reference" />
+		<attr name="colorOnSuccess" format="reference" />
+		<attr name="colorSuccessContainer" format="reference" />
+		<attr name="colorOnSuccessContainer" format="reference" />
+		<attr name="colorSuccessIcon" format="reference" />
+		<attr name="colorWarning" format="reference" />
+		<attr name="colorOnWarning" format="reference" />
+		<attr name="colorWarningContainer" format="reference" />
+		<attr name="colorOnWarningContainer" format="reference" />
+		<attr name="colorWarningIcon" format="reference" />
 		<attr name="colorBrandAccent" format="reference" />
     </declare-styleable>
 
@@ -380,5 +386,25 @@
 		<attr name="primaryTextColor" format="reference" />
 		<attr name="secondaryTextColor" format="reference" />
 		<attr name="tertiaryTextColor" format="reference" />
+	</declare-styleable>
+
+	<declare-styleable name="GroupHeaderView">
+		<attr name="groupHeaderTitle" format="string" />
+		<attr name="groupHeaderTrailingIcon" format="reference" />
+		<attr name="groupHeaderTrailingContentDescription" format="string" />
+	</declare-styleable>
+
+	<declare-styleable name="GroupFooterView">
+		<attr name="groupFooterText" format="string" />
+	</declare-styleable>
+
+	<declare-styleable name="ScreenDescriptionView">
+		<attr name="screenDescriptionText" format="string" />
+	</declare-styleable>
+
+	<declare-styleable name="MainSwitchView">
+		<attr name="mainSwitchLabel" format="string" />
+		<attr name="mainSwitchUseStateLabel" format="boolean" />
+		<attr name="mainSwitchChecked" format="boolean" />
 	</declare-styleable>
 </resources>

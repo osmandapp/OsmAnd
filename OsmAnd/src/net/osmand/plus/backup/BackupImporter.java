@@ -159,6 +159,11 @@ class BackupImporter {
 		try {
 			SettingsItemReader<? extends SettingsItem> reader = item.getReader();
 			if (reader != null) {
+				if (BackupUtils.isFileNameTooLong(remoteFile.getName())) {
+					item.getWarnings().add(app.getString(R.string.cloud_file_name_too_long));
+					LOG.error("Cloud file name is too long for the device: " + remoteFile.getName());
+					return;
+				}
 				String fileName = remoteFile.getTypeNamePath();
 				File tempFile = new File(tempDir, fileName);
 				String errorStr = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadItemFileListener(item), autoSync);
@@ -169,15 +174,24 @@ class BackupImporter {
 				if (!error) {
 					is = new FileInputStream(tempFile);
 					File file = reader.readFromStream(is, tempFile, remoteFile.getName());
+					boolean applied = true;
 					if (forceReadData) {
 						if (item instanceof CollectionSettingsItem<?>) {
 							((CollectionSettingsItem<?>) item).processDuplicateItems();
 						}
 						item.apply();
+						applied = item.isAppliedLocally();
 					}
-					updateFileM5Digest(remoteFile, item, file);
-					updateFileUploadTime(remoteFile, item);
-					FavoritesBackupMerger.onDownloadSuccess(app, item, remoteFile);
+					if (applied) {
+						updateFileM5Digest(remoteFile, item, file);
+						updateFileUploadTime(remoteFile, item);
+						FavoritesBackupMerger.onDownloadSuccess(app, item, remoteFile);
+					} else {
+						// Leaving the upload time unrecorded makes the next sync download the file
+						// again, instead of reading the missing local file as a local deletion.
+						item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
+						LOG.error("Downloaded item was not applied locally: " + item.getName());
+					}
 					if (PluginsHelper.isDevelopment()) {
 						UploadedFileInfo info = backupHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 						LOG.debug(" importItemFile file info " + info);
@@ -338,7 +352,7 @@ class BackupImporter {
 				long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
 				if (shouldDownloadOnCollecting(remoteFile, readItems)
 						&& (uploadTime != remoteFile.getUpdatetimems() || delete)) {
-					remoteInfoFilesMap.put(new File(tempDir, fileName), remoteFile);
+					remoteInfoFilesMap.put(getInfoTempFile(tempDir, remoteFile), remoteFile);
 				}
 				String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
 				remoteInfoNames.add(itemFileName);
@@ -347,6 +361,16 @@ class BackupImporter {
 				remoteItemFilesMap.put(fileName, remoteFile);
 			}
 		}
+	}
+
+	// the info is only read from its temp file, so a name too long for the device is replaced by its hash
+	@NonNull
+	private File getInfoTempFile(@NonNull File tempDir, @NonNull RemoteFile remoteFile) {
+		String fileName = remoteFile.getTypeNamePath();
+		if (BackupUtils.isFileNameTooLong(fileName)) {
+			fileName = remoteFile.getType() + "/" + DigestUtils.md5Hex(fileName) + INFO_EXT;
+		}
+		return new File(tempDir, fileName);
 	}
 
 	private void collectNoInfoRemoteItemFiles(@NonNull List<RemoteFile> noInfoRemoteItemFiles,

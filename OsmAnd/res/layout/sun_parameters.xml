@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -85,5 +86,18 @@
 			android:stepSize="1.0" />
 
 	</LinearLayout>
+
+	<androidx.appcompat.widget.SwitchCompat
+		android:id="@+id/shadows_switch"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="@dimen/context_menu_action_buttons_h"
+		android:background="?attr/selectableItemBackground"
+		android:padding="@dimen/content_padding"
+		android:saveEnabled="false"
+		android:text="@string/cast_shadows"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size"
+		app:switchPadding="@dimen/content_padding" />
 
 </LinearLayout>

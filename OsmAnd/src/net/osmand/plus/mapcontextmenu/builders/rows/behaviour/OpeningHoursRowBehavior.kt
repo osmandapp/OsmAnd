@@ -1,7 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders.rows.behaviour
 
-import net.osmand.data.AmenityTagEntry
 import net.osmand.plus.R
+import net.osmand.shared.data.AmenityTagEntry
 import net.osmand.util.OpeningHoursParser
 import java.util.Calendar
 
@@ -15,7 +15,7 @@ object OpeningHoursRowBehavior : DefaultPoiAdditionalRowBehaviour() {
 		    var vl = value
 		    val formattedValue = vl.replace("; ", "\n").replace(",", ", ")
 		    builder.setCollapsableEntries(listOf(AmenityTagEntry.Builder(key).setText(formattedValue).build()))
-		    builder.collapsableEntryType = AmenityTagEntry.CollapsableEntryType.OPENING_HOURS
+		    builder.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.OPENING_HOURS)
 
 		    val openingHours = OpeningHoursParser.parseOpenedHours(vl)
 		    if (openingHours != null) {

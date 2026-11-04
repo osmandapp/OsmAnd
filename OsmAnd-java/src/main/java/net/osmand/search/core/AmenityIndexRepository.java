@@ -46,5 +46,8 @@ public interface AmenityIndexRepository {
 
 	boolean isPoiSectionIntersects(SearchRequest<?> searchRequest);
 
+	/** Answers from the index that was parsed when the file was opened, without reading the file. */
+	boolean isMapSectionIntersects(SearchRequest<?> searchRequest);
+
 	List<Amenity> searchAmenitiesByName(int x, int y, int l, int t, int r, int b, String query, ResultMatcher<Amenity> resulMatcher);
 }

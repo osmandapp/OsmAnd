@@ -52,4 +52,9 @@ public class HikingRoutesFragment extends MapRoutesFragment {
 		addCard(new HikingRoutesCard(getMapActivity()));
 		addRenderingClassCard(HIKING.getRenderingPropertyAttr());
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "hiking_routes";
+	}
 }

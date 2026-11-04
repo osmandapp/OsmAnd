@@ -254,4 +254,9 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "snap_track_warning";
+	}
 }

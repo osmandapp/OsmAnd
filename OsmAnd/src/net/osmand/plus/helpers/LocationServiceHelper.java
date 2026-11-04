@@ -4,6 +4,7 @@ import static android.content.Context.LOCATION_SERVICE;
 
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,10 @@ import java.util.LinkedList;
 public abstract class LocationServiceHelper {
 
 	protected static final Log LOG = PlatformUtil.getLog(LocationServiceHelper.class);
+
+	// LineageOS builds the open Qualcomm GNSS HAL, which turns a 0 ms request into 10 Hz fixes (#20984)
+	protected static final boolean LINEAGE_OS = Build.PRODUCT != null && Build.PRODUCT.startsWith("lineage_");
+	protected static final long LINEAGE_OS_MIN_UPDATE_TIME_MS = 1000;
 
 	protected final OsmandApplication app;
 

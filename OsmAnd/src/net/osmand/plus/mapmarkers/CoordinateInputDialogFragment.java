@@ -1367,4 +1367,9 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 	public interface OnPointsSavedListener {
 		void onPointsSaved();
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "coordinate_input";
+	}
 }

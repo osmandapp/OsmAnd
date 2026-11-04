@@ -1,7 +1,7 @@
 package net.osmand.shared.util
 
-import co.touchlab.stately.collections.ConcurrentMutableMap
 import net.osmand.shared.data.KLatLon
+import net.osmand.shared.data.KQuadPointDouble
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.toDegrees
 import net.osmand.shared.extensions.toRadians
@@ -29,6 +29,7 @@ object KMapUtils {
 	const val LONGITUDE_TURN = 360.0
 	const val DEFAULT_LATLON_PRECISION = 0.00001
 	const val HIGH_LATLON_PRECISION = 0.0000001
+	const val METERS_IN_DEGREE = 111320.0
 
 	private const val BASE_SHORT_OSM_URL = "https://openstreetmap.org/go/"
 
@@ -425,13 +426,17 @@ object KMapUtils {
 		return str
 	}
 
-	fun interleaveBits(x: Long, y: Long): Long {
-		var c: Long = 0
-		for (b in 31 downTo 0) {
-			c = c shl 1 or (x shr b and 1)
-			c = c shl 1 or (y shr b and 1)
-		}
-		return c
+	/** The low 32 bits of [x] and [y] interleaved, x's bit above y's: java's `interleaveBitsFast`. */
+	fun interleaveBits(x: Long, y: Long): Long = splitBits(y) or (splitBits(x) shl 1)
+
+	private fun splitBits(value: Long): Long {
+		var v = value and 0x00000000FFFFFFFFL
+		v = (v or (v shl 16)) and 0x0000FFFF0000FFFFL
+		v = (v or (v shl 8)) and 0x00FF00FF00FF00FFL
+		v = (v or (v shl 4)) and 0x0F0F0F0F0F0F0F0FL
+		v = (v or (v shl 2)) and 0x3333333333333333L
+		v = (v or (v shl 1)) and 0x5555555555555555L
+		return v
 	}
 
 	fun unifyRotationDiff(rotate: Float, targetRotate: Float): Float {
@@ -489,6 +494,31 @@ object KMapUtils {
 		return diff
 	}
 
+	/**
+	 * Where a point projects onto the segment between two others, clamped to its ends, in 31 coords.
+	 */
+	fun getProjectionPoint31(px: Int, py: Int, st31x: Int, st31y: Int, end31x: Int, end31y: Int): KQuadPointDouble {
+		// st31x, st31y - A, end31x, end31y - B, px, py - C
+		val tWidth = getTileWidth(py)
+		// Scalar multiplication between (AB, AC)
+		val projection = (end31x - st31x) * tWidth * (px - st31x) * tWidth +
+				(end31y - st31y) * tWidth * (py - st31y) * tWidth
+		val mDist = squareRootDist31(end31x, end31y, st31x, st31y)
+		var pry = end31y.toDouble()
+		var prx = end31x.toDouble()
+		if (projection < 0) {
+			prx = st31x.toDouble()
+			pry = st31y.toDouble()
+		} else if (projection >= mDist * mDist) {
+			prx = end31x.toDouble()
+			pry = end31y.toDouble()
+		} else {
+			prx = st31x + (end31x - st31x) * (projection / (mDist * mDist))
+			pry = st31y + (end31y - st31y) * (projection / (mDist * mDist))
+		}
+		return KQuadPointDouble(prx, pry)
+	}
+
 	fun squareRootDist31(x1: Int, y1: Int, x2: Int, y2: Int): Double {
 		return sqrt(squareDist31TileMetric(x1, y1, x2, y2))
 	}
@@ -533,33 +563,31 @@ object KMapUtils {
 	}
 
 	private const val PRECISION_ZOOM = 14
-	private val DIST_CACHE = ConcurrentMutableMap<Int, Double>()
+
+	/**
+	 * Tile widths in metres per 31-coordinate unit, one per row at [PRECISION_ZOOM], NaN until computed.
+	 * The routing asks for a width on every distance it measures, so this is an array indexed by the
+	 * row rather than a map: no key boxing and no lock. Two threads computing the same row write the
+	 * same value, so the race is harmless; the java original keeps a `TIntObjectHashMap` under a lock.
+	 */
+	private val DIST_CACHE = DoubleArray((1 shl PRECISION_ZOOM) + 2) { Double.NaN }
+
+	private fun tileWidthAtRow(tileY: Int): Double {
+		var d = DIST_CACHE[tileY]
+		if (d.isNaN()) {
+			d = getTileDistanceWidth(get31LatitudeY(tileY shl (31 - PRECISION_ZOOM)), PRECISION_ZOOM.toDouble()) / (1 shl (31 - PRECISION_ZOOM))
+			DIST_CACHE[tileY] = d
+		}
+		return d
+	}
+
 	private fun getTileWidth(y31: Int): Double {
 		val y = y31 / (1.0 * (1 shl (31 - PRECISION_ZOOM)))
-		var tileY = y.toInt()
+		val tileY = y.toInt()
 		val ry = y - tileY
-		var d: Double? = null
-		var dp: Double? = null
-		d = DIST_CACHE[tileY]
-		if (d == null) {
-			val td = getTileDistanceWidth(
-				get31LatitudeY(tileY shl (31 - PRECISION_ZOOM)),
-				PRECISION_ZOOM.toDouble()
-			) / (1 shl (31 - PRECISION_ZOOM))
-			d = td
-			DIST_CACHE[tileY] = td
-		}
-		tileY += 1
-		dp = DIST_CACHE[tileY]
-		if (dp == null) {
-			val tdp = getTileDistanceWidth(
-				get31LatitudeY(tileY shl (31 - PRECISION_ZOOM)),
-				PRECISION_ZOOM.toDouble()
-			) / (1 shl (31 - PRECISION_ZOOM))
-			dp = tdp
-			DIST_CACHE[tileY] = tdp
-		}
-		return ry * dp!! + (1 - ry) * d!!
+		val d = tileWidthAtRow(tileY)
+		val dp = tileWidthAtRow(tileY + 1)
+		return ry * dp + (1 - ry) * d
 	}
 
 	fun rightSide(
@@ -573,20 +601,40 @@ object KMapUtils {
 		return sa < 0
 	}
 
-	fun deinterleaveY(coord: Long): Long {
-		var x: Long = 0
-		for (b in 31 downTo 0) {
-			x = x shl 1 or (1L and coord shr (b * 2))
-		}
-		return x
+	/** The even bits of [coord], what [interleaveBits] took from y; java's loop over the 32 bits, by masks. */
+	fun deinterleaveY(coord: Long): Long = compactBits(coord)
+
+	/** The odd bits of [coord], what [interleaveBits] took from x. */
+	fun deinterleaveX(coord: Long): Long = compactBits(coord ushr 1)
+
+	/**
+	 * The 31 bbox [left, top, right, bottom] of a square of [radiusMeters] along the meridian and the
+	 * parallel around the middle of tile [x], [y] of zoom [z].
+	 */
+	fun calc31BboxRhumb(radiusMeters: Int, x: Int, y: Int, z: Int): IntArray {
+		val lat = getLatitudeFromTile(z.toDouble(), y + 0.5)
+		val lon = getLongitudeFromTile(z.toDouble(), x + 0.5)
+		val deltaLat = radiusMeters / METERS_IN_DEGREE
+		val deltaLon = radiusMeters / (METERS_IN_DEGREE * cos(lat.toRadians()))
+		val northLat = lat + deltaLat
+		val southLat = lat - deltaLat
+		val westLon = lon - deltaLon
+		val eastLon = lon + deltaLon
+		val top = get31TileNumberY(min(MAX_LATITUDE, northLat))
+		val left = get31TileNumberX(max(MIN_LONGITUDE, westLon))
+		val bottom = get31TileNumberY(max(MIN_LATITUDE, southLat))
+		val right = get31TileNumberX(min(MAX_LONGITUDE, eastLon))
+		return intArrayOf(left, top, right, bottom)
 	}
 
-	fun deinterleaveX(coord: Long): Long {
-		var x: Long = 0
-		for (b in 31 downTo 0) {
-			x = x shl 1 or (1L and coord shr (b * 2 + 1))
-		}
-		return x
+	private fun compactBits(value: Long): Long {
+		var v = value and 0x5555555555555555L
+		v = (v or (v ushr 1)) and 0x3333333333333333L
+		v = (v or (v ushr 2)) and 0x0F0F0F0F0F0F0F0FL
+		v = (v or (v ushr 4)) and 0x00FF00FF00FF00FFL
+		v = (v or (v ushr 8)) and 0x0000FFFF0000FFFFL
+		v = (v or (v ushr 16)) and 0x00000000FFFFFFFFL
+		return v
 	}
 
 	fun calculateLatLonBbox(latitude: Double, longitude: Double, radiusMeters: Int): KQuadRect {
@@ -606,6 +654,21 @@ object KMapUtils {
 		rect.right = get31LongitudeX(rect.right.toInt())
 		rect.bottom = get31LatitudeY(rect.bottom.toInt())
 		return rect
+	}
+
+	/** A box of 31 tiles around a point, [radiusMeters] measured along the zoom 16 tile at its latitude. */
+	fun calculate31Bbox(latitude: Double, longitude: Double, radiusMeters: Int): KQuadRect {
+		val zoom = 16.0
+		val coeff = radiusMeters / getTileDistanceWidth(latitude, zoom)
+		val tx = getTileNumberX(zoom, longitude)
+		val ty = getTileNumberY(zoom, latitude)
+		val topLeftX = max(0.0, tx - coeff)
+		val topLeftY = max(0.0, ty - coeff)
+		val max = (1 shl zoom.toInt()) - 1
+		val bottomRightX = min(max.toDouble(), tx + coeff)
+		val bottomRightY = min(max.toDouble(), ty + coeff)
+		val pw = getPowZoom(31 - zoom)
+		return KQuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw)
 	}
 
 	fun getInterpolatedY(x1: Float, y1: Float, x2: Float, y2: Float, x: Float): Float {
@@ -669,6 +732,16 @@ object KMapUtils {
 		precision: Double
 	): Boolean {
 		return abs(lat1 - lat2) < precision && abs(lon1 - lon2) < precision
+	}
+
+	fun calculate31BboxUsingRhumb(radiusMeters: Int, l: KLatLon): KQuadRect {
+		val northWest = rhumbDestinationPoint(l.latitude, l.longitude, radiusMeters.toDouble(), 315.0)
+		val southEast = rhumbDestinationPoint(l.latitude, l.longitude, radiusMeters.toDouble(), 135.0)
+		val top = get31TileNumberY(min(MAX_LATITUDE, northWest.latitude))
+		val left = get31TileNumberX(max(MIN_LONGITUDE, northWest.longitude))
+		val bottom = get31TileNumberY(max(MIN_LATITUDE, southEast.latitude))
+		val right = get31TileNumberX(min(MAX_LONGITUDE, southEast.longitude))
+		return KQuadRect(left.toDouble(), top.toDouble(), right.toDouble(), bottom.toDouble())
 	}
 
 	fun rhumbDestinationPoint(latLon: KLatLon, distance: Double, bearing: Double): KLatLon {

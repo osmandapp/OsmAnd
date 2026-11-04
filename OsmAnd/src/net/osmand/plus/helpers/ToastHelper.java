@@ -1,10 +1,6 @@
 package net.osmand.plus.helpers;
 
 import android.content.Context;
-import android.hardware.display.DisplayManager;
-import android.os.Build;
-import android.view.Display;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,11 +8,20 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.car.app.CarToast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
+import java.util.IllegalFormatException;
+
 public class ToastHelper {
+
+	private static final Log LOG = PlatformUtil.getLog(ToastHelper.class);
 
 	public interface ToastDisplayHandler {
 		void showSimpleToast(@NonNull String text, boolean isLong);
@@ -75,7 +80,7 @@ public class ToastHelper {
 		return new ToastDisplayHandler() {
 			@Override
 			public void showSimpleToast(@NonNull String text, boolean isLong) {
-				Toast.makeText(getVisualContext(app), text, isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
+				Toast.makeText(getToastContext(), text, isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
@@ -89,27 +94,32 @@ public class ToastHelper {
 
 			@Override
 			public void showSimpleToast(int textId, boolean isLong, Object... args) {
-				showSimpleToast(app.getString(textId, args), isLong);
+				showSimpleToast(getString(textId, args), isLong);
 			}
 
 			@Override
 			public void showCarToast(int textId, boolean isLong, Object... args) {
-				showCarToast(app.getString(textId, args), isLong);
+				showCarToast(getString(textId, args), isLong);
 			}
 
 			@NonNull
-			private static Context getVisualContext(@NonNull Context context) {
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-					DisplayManager displayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
-					if (displayManager != null) {
-						Display defaultDisplay = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
-						if (defaultDisplay != null) {
-							return context.createDisplayContext(defaultDisplay)
-									.createWindowContext(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY, null);
-						}
-					}
+			private String getString(@StringRes int textId, Object... args) {
+				try {
+					return args == null || args.length == 0 ? app.getString(textId) : app.getString(textId, args);
+				} catch (IllegalFormatException e) {
+					// a translation with an unescaped '%' must not take the app down with it
+					LOG.error("Malformed format string for resource " + textId, e);
+					return app.getString(textId);
 				}
-				return context;
+			}
+
+			// A toast needs a visual context: with the application context StrictMode logs every toast,
+			// and a window context of another type makes Android reject the toast window (#26769)
+			@NonNull
+			private Context getToastContext() {
+				OsmandMap osmandMap = app.getOsmandMap();
+				MapActivity mapActivity = osmandMap != null ? osmandMap.getMapView().getMapActivity() : null;
+				return mapActivity != null ? mapActivity : app;
 			}
 		};
 	}

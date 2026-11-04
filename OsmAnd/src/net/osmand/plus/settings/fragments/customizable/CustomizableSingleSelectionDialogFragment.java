@@ -92,4 +92,9 @@ public class CustomizableSingleSelectionDialogFragment extends CustomizableDialo
 		}
 		return false;
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "customizable_single_selection";
+	}
 }

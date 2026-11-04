@@ -33,6 +33,7 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
@@ -128,6 +129,9 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 					SearchResult sr = item.getSearchResult();
 					if (item.isSpatialCategorySearchResult()) {
 						onSpatialCategorySearchResultClick(sr);
+					} else if (sr.objectType == SUGGESTION) {
+						// "did you mean": the corrected query is searched as typed
+						dialogFragment.replaceQueryWithText(sr.localeName.trim() + " ");
 					} else if (sr.objectType == POI
 							|| sr.objectType == LOCATION
 							|| sr.objectType == HOUSE
@@ -137,6 +141,9 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 							|| sr.objectType == STREET_INTERSECTION
 							|| sr.objectType == GPX_TRACK) {
 
+						showResult(sr);
+					} else if (isCityResultWithMenu(sr)) {
+						app.getSearchHistoryHelper().selectSearchResult(sr);
 						showResult(sr);
 					} else if (sr.objectType == INDEX_ITEM) {
 						processIndexItemClick((IndexItem) sr.relatedObject);
@@ -150,6 +157,16 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 				}
 			}
 		}
+	}
+
+	// Outside the Address tab a city opens its context menu in both v1 and spatial search.
+	// In the Address tab (its list or the results typed there) a city goes deeper to its streets.
+	private boolean isCityResultWithMenu(@NonNull SearchResult sr) {
+		return (sr.objectType == CITY || sr.objectType == VILLAGE
+				|| sr.objectType == BOUNDARY)
+				&& sr.location != null
+				&& getType() != SearchListFragmentType.ADDRESS
+				&& !dialogFragment.isAddressSearch();
 	}
 
 	private void onSpatialCategorySearchResultClick(@NonNull SearchResult searchResult) {
@@ -258,7 +275,13 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 		if (activity == null) {
 			return;
 		}
-		if (pair.second instanceof Amenity amenity) {
+		Object object = pair.second;
+		if (searchResult.relatedObject instanceof HistoryEntry && object instanceof Amenity historyAmenity) {
+			// history has no tags of the amenity, so a route would not open as a track
+			Amenity detailedAmenity = app.getSearchUICore().findAmenity(historyAmenity);
+			object = detailedAmenity != null ? detailedAmenity : historyAmenity;
+		}
+		if (object instanceof Amenity amenity) {
 			ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
 			if (amenity.isRouteTrack() && !amenity.isSuperRoute()) {
 				TravelHelper travelHelper = app.getTravelHelper();

@@ -8,30 +8,44 @@ import net.osmand.shared.util.KAlgorithms
 
 open class GpxExtensions {
 
-	var extensions: MutableMap<String, String>? = null
-	var deferredExtensions: MutableMap<String, String>? = null
+	// [key, value, key, value ...] sorted by key - see GpxExtensionsMap
+	internal var extensionsArray: Array<String?>? = null
+	internal var deferredArray: Array<String?>? = null
 	var extensionsWriters: MutableMap<String, GpxExtensionsWriter>? = null
 
+	var extensions: MutableMap<String, String>?
+		get() = if (extensionsArray == null) null else GpxExtensionsMap(this, false)
+		set(value) {
+			extensionsArray = GpxExtensionsMap.toArray(value)
+		}
+
+	var deferredExtensions: MutableMap<String, String>?
+		get() = if (deferredArray == null) null else GpxExtensionsMap(this, true)
+		set(value) {
+			deferredArray = GpxExtensionsMap.toArray(value)
+		}
+
+	/** One extension without building the map view - for the getters called per point per frame. */
+	fun getExtension(key: String): String? {
+		val array = extensionsArray ?: return null
+		val index = GpxExtensionsMap.indexOf(array, key)
+		return if (index >= 0) array[index + 1] else null
+	}
+
 	fun getExtensionsToRead(): Map<String, String> {
-		return extensions ?: emptyMap()
+		return if (extensionsArray == null) emptyMap() else GpxExtensionsMap(this, false)
 	}
 
 	fun getExtensionsToWrite(): MutableMap<String, String> {
-		if (extensions == null) {
-			extensions = LinkedHashMap()
-		}
-		return extensions!!
+		return GpxExtensionsMap(this, false)
 	}
 
 	fun getDeferredExtensionsToRead(): Map<String, String> {
-		return deferredExtensions ?: emptyMap()
+		return if (deferredArray == null) emptyMap() else GpxExtensionsMap(this, true)
 	}
 
 	fun getDeferredExtensionsToWrite(): MutableMap<String, String> {
-		if (deferredExtensions == null) {
-			deferredExtensions = LinkedHashMap()
-		}
-		return deferredExtensions!!
+		return GpxExtensionsMap(this, true)
 	}
 
 	fun getExtensionsWritersToWrite(): MutableMap<String, GpxExtensionsWriter> {
@@ -54,27 +68,20 @@ open class GpxExtensions {
 	}
 
 	fun copyExtensions(e: GpxExtensions) {
-		val extensionsToRead = e.getExtensionsToRead()
-		if (extensionsToRead.isNotEmpty()) {
-			getExtensionsToWrite().putAll(extensionsToRead.toMap())
+		val source = e.extensionsArray ?: return
+		if (extensionsArray == null) {
+			// a fresh copy, the usual case: one array instead of a map and an insert per key
+			extensionsArray = source.copyOf()
+		} else {
+			getExtensionsToWrite().putAll(e.getExtensionsToRead().toMap())
 		}
 	}
 
 	fun getColor(defColor: Int?): Int? {
-		var clrValue: String? = null
-		val extensions = this.extensions
-		if (extensions != null) {
-			clrValue = extensions[COLOR_NAME_EXTENSION]
-			if (clrValue == null) {
-				clrValue = extensions["colour"]
-			}
-			if (clrValue == null) {
-				clrValue = extensions["displaycolor"]
-			}
-			if (clrValue == null) {
-				clrValue = extensions["displaycolour"]
-			}
-		}
+		val clrValue = getExtension(COLOR_NAME_EXTENSION)
+			?: getExtension("colour")
+			?: getExtension("displaycolor")
+			?: getExtension("displaycolour")
 		return GpxUtilities.parseColor(clrValue, defColor)
 	}
 
@@ -92,7 +99,7 @@ open class GpxExtensions {
 		getExtensionsToWrite().remove(COLOR_NAME_EXTENSION)
 	}
 
-	fun getWidth(defaultWidth: String?) = extensions?.get(LINE_WIDTH_EXTENSION) ?: defaultWidth
+	fun getWidth(defaultWidth: String?) = getExtension(LINE_WIDTH_EXTENSION) ?: defaultWidth
 
 	fun setWidth(width: String?) {
 		width?.let {

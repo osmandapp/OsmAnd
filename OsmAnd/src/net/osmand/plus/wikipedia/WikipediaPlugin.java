@@ -52,6 +52,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
@@ -113,6 +114,11 @@ public class WikipediaPlugin extends OsmandPlugin {
 	@Override
 	public String getName() {
 		return app.getString(R.string.shared_string_wikipedia);
+	}
+
+	@Override
+	public SettingsScreenType getSettingsScreenType() {
+		return SettingsScreenType.WIKIPEDIA_SETTINGS;
 	}
 
 	@Override
@@ -430,9 +436,13 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	public String getLanguagesSummary() {
-		if (hasCustomSettings()) {
+		return getLanguagesSummary(app.getSettings().getApplicationMode());
+	}
+
+	public String getLanguagesSummary(@NonNull ApplicationMode mode) {
+		if (hasCustomSettings(mode)) {
 			List<String> translations = new ArrayList<>();
-			for (String locale : getLanguagesToShow()) {
+			for (String locale : getLanguagesToShow(mode)) {
 				translations.add(getWikiLanguageTranslation(locale));
 			}
 			return TextUtils.join(", ", translations);

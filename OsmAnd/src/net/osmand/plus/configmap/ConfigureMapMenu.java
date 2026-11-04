@@ -16,6 +16,7 @@ import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.D
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.BUILDINGS_3D;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LABEL_DIRECTION_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
@@ -527,6 +528,7 @@ public class ConfigureMapMenu {
 				|| ROAD_STYLE_ATTR.equals(attrName)
 				|| CONTOUR_WIDTH_ATTR.equals(attrName)
 				|| CONTOUR_DENSITY_ATTR.equals(attrName)
+				|| CONTOUR_LABEL_DIRECTION_ATTR.equals(attrName)
 				|| CONTOUR_LINES_ATTR.equals(attrName)
 				|| CONTOUR_LINES_SCHEME_ATTR.equals(attrName)
 				|| CURRENT_TRACK_COLOR_ATTR.equals(attrName)

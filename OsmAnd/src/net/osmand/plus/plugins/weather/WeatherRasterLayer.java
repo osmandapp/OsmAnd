@@ -81,7 +81,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 			WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
 			MapRendererView mapRenderer = getMapRenderer();
 
-			if (mapRenderer == null || resourcesManager == null || resourcesManager.getBandSettings().empty()) {
+			if (mapRenderer == null || resourcesManager == null || !weatherHelper.hasBandSettings()) {
 				return;
 			}
 
@@ -226,7 +226,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		MapRendererView mapRenderer = getMapRenderer();
 		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
 		if (view == null || mapRenderer == null || resourcesManager == null
-				|| resourcesManager.getBandSettings().empty()) {
+				|| !weatherHelper.hasBandSettings()) {
 			return;
 		}
 

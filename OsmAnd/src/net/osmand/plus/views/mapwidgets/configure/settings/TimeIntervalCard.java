@@ -9,6 +9,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.utils.AverageValueComputer;
@@ -25,8 +26,9 @@ public class TimeIntervalCard extends BaseCard {
 
 	private long selectedIntervalMillis;
 
-	public TimeIntervalCard(@NonNull FragmentActivity activity, long initialIntervalMillis) {
-		super(activity);
+	public TimeIntervalCard(@NonNull FragmentActivity activity, @NonNull ApplicationMode appMode,
+	                        boolean usedOnMap, long initialIntervalMillis) {
+		super(activity, appMode, usedOnMap);
 		selectedIntervalMillis = initialIntervalMillis;
 		availableIntervals = collectAvailableIntervals();
 	}

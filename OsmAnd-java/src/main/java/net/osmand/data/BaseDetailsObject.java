@@ -157,6 +157,11 @@ public class BaseDetailsObject {
 	}
 
 	public boolean overlapsWith(Object object) {
+		if (object instanceof BaseDetailsObject detailsObject) {
+			// a group collected by the renderer keeps its ids in the sets, not in a single object
+			return !Collections.disjoint(osmIds, detailsObject.osmIds)
+					|| !Collections.disjoint(wikidataIds, detailsObject.wikidataIds);
+		}
 		Long osmId = getOsmId(object);
 		String wikidata = getWikidata(object);
 
@@ -330,6 +335,9 @@ public class BaseDetailsObject {
 	}
 
 	private static void updateAmenitySubTypes(Amenity amenity, String subTypesToAdd) {
+		if (Algorithms.isEmpty(subTypesToAdd)) {
+			return;
+		}
 		if (amenity.getSubType() == null) {
 			amenity.setSubType(subTypesToAdd);
 		} else {
@@ -360,7 +368,10 @@ public class BaseDetailsObject {
 			syntheticAmenity.setLocation(location);
 		}
 		PoiCategory type = amenity.getType();
-		if (syntheticAmenity.getType() == null && type != null) {
+		MapPoiTypes poiTypes = MapPoiTypes.getDefault();
+		if (type != null && (syntheticAmenity.getType() == null
+				|| (poiTypes.isOtherCategory(syntheticAmenity.getType()) && !poiTypes.isOtherCategory(type)))) {
+			// a placeholder, e.g. a marker of an address result, must not shadow a real category
 			syntheticAmenity.setType(type);
 		}
 		String subType = amenity.getSubType();

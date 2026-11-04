@@ -6,16 +6,17 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.favorites.FavoriteFolderPath;
 import net.osmand.util.Algorithms;
 
 public class FavouriteGroupEditorFragment extends GroupEditorFragment {
@@ -42,6 +43,16 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 			return activity.getContextMenu().getFavoritePointEditor();
 		}
 		return null;
+	}
+
+	@Override
+	protected void applyToPointEditor(@NonNull PointsGroup pointsGroup) {
+		FragmentActivity activity = getActivity();
+		if (activity == null || activity instanceof MapActivity) {
+			super.applyToPointEditor(pointsGroup);
+		} else {
+			FavoritePointEditorFragment.setPointsGroupOutsideMap(activity, pointsGroup);
+		}
 	}
 
 	@Override
@@ -104,7 +115,7 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 	protected String getInvalidNameError(@NonNull String trimmedName) {
 		return pointsGroup != null || trimmedName.isEmpty() || FavoriteFolderPath.isValidSegment(trimmedName)
 				? null
-				: getString(R.string.favorite_folder_invalid_name);
+				: getString(R.string.favorite_folder_invalid_name, FavoriteFolderPath.SUBFOLDER_PLACEHOLDER);
 	}
 
 	@NonNull
@@ -148,5 +159,10 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favourite_group_editor";
 	}
 }

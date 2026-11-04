@@ -77,4 +77,9 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "osmand_pro_plan";
+	}
 }

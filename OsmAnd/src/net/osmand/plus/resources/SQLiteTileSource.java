@@ -534,13 +534,14 @@ public class SQLiteTileSource implements ITileSource {
 			} catch (SQLException e) {
 				LOG.info("Error adding column " + e);
 			}
+			// A null value must become SQL NULL, not the text "null".
 			db.execSQL("update info set " + columnName + " = ?", new Object[] {value != null ? value : ""});
 		}
 	}
 
 	private boolean hasTimeColumn(SQLiteConnection db) {
 		SQLiteCursor cursor;
-		cursor = db.rawQuery("SELECT * FROM tiles", null);
+		cursor = db.rawQuery("SELECT * FROM tiles LIMIT 0", null);
 		cursor.moveToFirst();
 		List<String> cols = Arrays.asList(cursor.getColumnNames());
 		boolean timeSupported = cols.contains("time");
@@ -719,6 +720,27 @@ public class SQLiteTileSource implements ITileSource {
 		}
 		db.execSQL("DELETE FROM tiles");
 		db.execSQL("VACUUM");
+		// In WAL mode VACUUM only rewrites the database into the -wal file, the .sqlitedb
+		// keeps its size until a checkpoint truncates it.
+		checkpointWal(db);
+	}
+
+	private void checkpointWal(@NonNull SQLiteConnection db) {
+		SQLiteCursor cursor = null;
+		try {
+			// TRUNCATE waits for the other readers, the default PASSIVE gives up on them.
+			cursor = db.rawQuery("PRAGMA wal_checkpoint(TRUNCATE)", null);
+			// rawQuery() is lazy: the checkpoint runs only when the cursor is stepped.
+			if (cursor != null && cursor.moveToFirst() && cursor.getInt(0) != 0) {
+				LOG.warn("Checkpoint is busy, tiles database was not truncated: " + file);
+			}
+		} catch (RuntimeException e) {
+			LOG.error("Failed to checkpoint tiles database " + file, e);
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+		}
 	}
 
 	@Override
@@ -792,6 +814,13 @@ public class SQLiteTileSource implements ITileSource {
 			clearOld();
 		}
 		if(db != null){
+			db.close();
+			db = null;
+		}
+	}
+
+	public synchronized void closeConnection() {
+		if (db != null) {
 			db.close();
 			db = null;
 		}

@@ -1,12 +1,10 @@
 package net.osmand.plus.plugins.astronomy.search
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.TypedValue
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +16,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.ListPopupWindow
+import android.widget.PopupWindow
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -144,8 +142,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private lateinit var catalogsViewAllRow: View
 	private lateinit var catalogsViewAllCount: TextView
 
-	private var sortPopup: ListPopupWindow? = null
-	private var filterPopup: ListPopupWindow? = null
+	private var sortPopup: PopupWindow? = null
+	private var filterPopup: PopupWindow? = null
 	private var filterAndSortJob: Job? = null
 	private var filterAndSortRequestId = 0
 
@@ -227,13 +225,11 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 	}
 
-	override fun createDialog(savedInstanceState: Bundle?): Dialog {
-		return object : Dialog(requireContext(), theme) {
-			override fun onBackPressed() {
-				if (!handleBackPressedInternal()) {
-					super.onBackPressed()
-				}
-			}
+	override fun isBackPressedCallbackEnabled(): Boolean = true
+
+	override fun handleBackPressed() {
+		if (!handleBackPressedInternal()) {
+			super.handleBackPressed()
 		}
 	}
 
@@ -1620,15 +1616,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			}
 			items
 		}
-		sortPopup = PopUpMenu.showAndGet(
-			createPopupDisplayData(
-				anchor = anchor,
-				items = items,
-				alignEnd = false,
-				limitHeight = false,
-				layoutId = R.layout.popup_star_search_sort_menu_item
-			)
-		)
+		sortPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items))
 	}
 
 	private fun getMyDataInsertionOrderMap(quickPresetType: StarMapSearchQuickPresetType): Map<String, Int> {
@@ -1744,27 +1732,17 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				}
 			)
 		}
-		filterPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items, alignEnd = true, limitHeight = true))
+		filterPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items))
 	}
 
 	private fun createPopupDisplayData(
 		anchor: View,
-		items: List<PopUpMenuItem>,
-		alignEnd: Boolean,
-		limitHeight: Boolean,
-		layoutId: Int = R.layout.popup_star_search_menu_item
+		items: List<PopUpMenuItem>
 	): PopUpMenuDisplayData {
-		val contentPaddingHalf = resources.getDimensionPixelSize(R.dimen.content_padding_half)
 		return PopUpMenuDisplayData().apply {
 			anchorView = anchor
-			this.layoutId = layoutId
 			nightMode = this@StarMapSearchDialogFragment.nightMode
 			widthMode = PopUpMenuWidthMode.STANDARD
-			showCompound = true
-			this.limitHeight = limitHeight
-			dropDownGravity = if (alignEnd) Gravity.END or Gravity.BOTTOM else Gravity.START or Gravity.BOTTOM
-			horizontalOffset = if (alignEnd) -contentPaddingHalf else contentPaddingHalf
-			verticalOffset = -anchor.height + contentPaddingHalf
 			menuItems = items
 		}
 	}
@@ -1833,4 +1811,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		dismissSortPopup()
 		dismissFilterPopup()
 	}
+
+	override fun getAnalyticsScreen() = "star_map_search"
 }

@@ -170,4 +170,9 @@ public class LogcatActivity extends BaseLogcatActivity {
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "logcat";
+	}
 }
