@@ -5239,4 +5239,6 @@
     <string name="poi_disaster_help_point">Punkt za pomoć u slučaju katastrofe</string>
     <string name="poi_hitchhiking_stop">Mesto za stopiranje</string>
     <string name="poi_service_abbreviation">Javni servis</string>
+    <string name="poi_internet_access_fee">Naknada za pristup internetu</string>
+    <string name="poi_historic_building">Istorijska zgrada</string>
 </resources>
