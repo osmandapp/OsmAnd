@@ -2801,7 +2801,7 @@
     <string name="announcement_time_passing">Durée</string>
     <string name="analyze_by_intervals">Analyser par intervalles</string>
     <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
-    <string name="announcement_time_descr">Le moment où les différentes instructions vocales sont diffusées dépend du type d\'instruction, de la vitesse de navigation actuelle et de la vitesse de navigation par défaut.</string>
+    <string name="announcement_time_descr">Le moment de diffusion des instructions vocales dépend du type d\'instruction, de la vitesse actuelle et de la vitesse par défaut.</string>
     <string name="announcement_time_title">Délai de l\'annonce</string>
     <string name="announcement_time_off_route">Hors de l\'itinéraire prévu</string>
     <string name="routing_engine_vehicle_type_cycling_road">Vélo de route</string>
