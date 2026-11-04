@@ -776,7 +776,6 @@
     <string name="import_routing_file">Uvezete datoteka za nasočuvanje</string>
     <string name="multimedia_notes_prefs_descr">Navigacija, točnost na evidencija</string>
     <string name="monitoring_prefs_descr">Navigacija, točnost na evidencija</string>
-    <string name="multimedia_notes_view_descr">Vasite OSM zabeleski se vo %1$s.</string>
     <string name="video_notes">Video zabeleski</string>
     <string name="accessibility_prefs_descr">Izberete ikona, boja i ime</string>
     <string name="live_monitoring_descr">Dozvoluva spodeluvanje na momentalnata lokacija so koristenje na snimanje patuvanje.</string>
@@ -1721,11 +1720,6 @@
     <string name="empty_state_osm_edits">Kreirajte ili menuvajte objekti na OpenStreetMap</string>
     <string name="one_tap_active_descr">Doprete marker na kartata za da go premestite na vrvot na aktivnite markeri bez da go otvorite kontekstnoto meni.</string>
     <string name="one_tap_active">„Eden dopir“ e aktiven</string>
-    <string name="empty_state_av_notes">Napravete beleški!</string>
-    <string name="empty_state_av_notes_desc">Dodajte audio, video ili foto beleški na koja bilo točka na kartata so koristenje na grafičkite kontroli ili kontekstnite menija.</string>
-    <string name="notes_by_date">Audio/Video (A/V) beleški po datum</string>
-    <string name="by_date">Po datum</string>
-    <string name="by_type">Po vid</string>
     <string name="looking_for_tracks_with_waypoints">Baranje pateki so popatni točki</string>
     <string name="shared_string_gpx_waypoints">Sledete gi popatnite točki</string>
     <string name="favourites_group">Kategorija omileni</string>
@@ -1879,7 +1873,6 @@
     <string name="without_time_limit">Bez vremensko ograničuvanje</string>
     <string name="context_menu_read_full_article">Pročitajte ja celata statija</string>
     <string name="will_open_at">Otvora vo</string>
-    <string name="av_locations_all_desc">GPX datoteka so koordinati i podatoci za site beleški.</string>
     <string name="empty_state_osm_edits_descr">Kreirajte ili menuvajte POI na OpenStreetMap, otvorete gi ili komentirajte beleški za OSM i pridonesete so snimeni GPX datoteki.</string>
     <string name="shared_string_deleted">Izbrisano</string>
     <string name="shared_string_edited">Uredeno</string>
@@ -1998,7 +1991,6 @@
     <string name="christmas_poi">Bozicen POI</string>
     <string name="christmas_desc">Očekuvajḱi gi božiḱnite i novogodišnite praznici, možete da izberete da prikažuvate povrzani POI kako novogodišni elki i pazari, itn.</string>
     <string name="modify_the_search_query">Promenete go vašeto prebaruvanje.</string>
-    <string name="av_locations_selected_desc">GPX datoteka so koordinati i podatoci od izbranite beleški.</string>
     <string name="additional_actions">Dopolnitelni dejstva</string>
     <string name="will_open_on">Otvora vo</string>
     <string name="shared_string_one">Eden</string>
@@ -2250,7 +2242,6 @@
     <string name="marker_2nd">Vtor marker</string>
     <string name="min_km">min/km</string>
     <string name="looking_up_address">Poglednuvanje na adresa</string>
-    <string name="av_locations_descr">GPX datoteka so lokacii.</string>
     <string name="routing_attr_avoid_shuttle_train_name">Nema šatl-voz</string>
     <string name="routing_attr_avoid_shuttle_train_description">Izbegnuva koristenje na šatl vozovi</string>
     <string name="download_live_updates">Ažuriranja vo živo</string>
@@ -2297,7 +2288,6 @@
     <string name="shared_string_manage">Upravuvaj</string>
     <string name="shared_string_edit">Ureduvaj</string>
     <string name="welmode_download_maps">Prevzemete mapi</string>
-    <string name="local_recordings_delete_all_confirm">Da se izbrišat %1$d beleški\?</string>
     <string name="delay_to_start_navigation">Započnete so vodenje čekor po čekor po…</string>
     <string name="osmand_parking_overdue">Zadocnet</string>
     <string name="osm_edits">Ureduvanja na OSM</string>
@@ -2431,7 +2421,6 @@
     <string name="lang_hsb">Soribijanski (Goren)</string>
     <string name="lang_kab">Kabileski</string>
     <string name="lang_ber">Berberski</string>
-    <string name="av_locations">Lokacii</string>
     <string name="traffic_warning_hazard">Opasno</string>
     <string name="rendering_value_boldOutline_name">Zadebeleni madvoresni linii</string>
     <string name="no_updates_available">Nema dostapni ažuriranja</string>
@@ -2472,7 +2461,6 @@
     <string name="plugin_ski_name">Prikaz na karta za skijanje</string>
     <string name="audionotes_plugin_description">Pravete audio/foto/video beleški za vreme na patuvanjeto, koristejḱi go ili kopče za mapa ili kontekstnoto meni za lokacija.</string>
     <string name="osmand_parking_plugin_name">Parking pozicija</string>
-    <string name="audionotes_plugin_name">Audio/video beleski</string>
     <string name="rendering_value_yellow_name">Zolta</string>
     <string name="rendering_value_translucent_yellow_name">Prodzirno zolta</string>
     <string name="rendering_value_lightgreen_name">Svetlo zelena</string>
@@ -2501,7 +2489,6 @@
     <string name="debugging_and_development">OsmAnd razvoj</string>
     <string name="share_note">Spodeli zabeleska</string>
     <string name="rendering_attr_pisteGrooming_name">Izravnuvanje na patekata</string>
-    <string name="watch">Pogledni</string>
     <string name="gps_status">Status na GPS</string>
     <string name="proxy_pref_title">Proksi</string>
     <string name="proxy_pref_descr">Navedete proksi-server.</string>
@@ -3018,7 +3005,6 @@
     <string name="stop_routing_confirm">Da se zapre navigacijata\?</string>
     <string name="av_video_format">Format na video izlez</string>
     <string name="recording_unavailable">Nedostapno</string>
-    <string name="layer_recordings">Sloj za snimanje</string>
     <string name="recording_default_name">Se snima</string>
     <string name="recording_context_menu_play">Sviri</string>
     <string name="recording_description">Se snima %1$s %3$s %2$s</string>

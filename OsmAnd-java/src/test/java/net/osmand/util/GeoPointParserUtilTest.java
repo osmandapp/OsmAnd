@@ -887,4 +887,65 @@ public class GeoPointParserUtilTest {
 			throw new RuntimeException("URLs not equal; actual=" + actual + ", expected=" + expected);
 	}
 
+	@Test
+	public void testParseGeoAction() {
+		// Navigation control
+		Assert.assertEquals("exit_navigation", GeoPointParserUtil.parseGeoAction("geo.action:?act=exit_navigation"));
+		Assert.assertEquals("exit_navigation", GeoPointParserUtil.parseGeoAction("geo.action.offline:?act=exit_navigation"));
+		Assert.assertEquals("mute", GeoPointParserUtil.parseGeoAction("geo.action:?act=mute"));
+		Assert.assertEquals("unmute", GeoPointParserUtil.parseGeoAction("geo.action:?act=unmute&source=assistant"));
+		Assert.assertEquals("exit_navigation", GeoPointParserUtil.parseGeoAction("geo.action:?foo=bar&act=exit_navigation"));
+
+		// Hierarchical URI (empty authority / 3 slashes, host, etc.)
+		Assert.assertEquals("exit_navigation", GeoPointParserUtil.parseGeoAction("geo.action:///?act=exit_navigation"));
+		Assert.assertEquals("exit_navigation", GeoPointParserUtil.parseGeoAction("geo.action://host/?act=exit_navigation"));
+
+		// Route preferences
+		Assert.assertEquals("avoid_tolls", GeoPointParserUtil.parseGeoAction("geo.action:?act=avoid_tolls"));
+		Assert.assertEquals("allow_tolls", GeoPointParserUtil.parseGeoAction("geo.action.offline:?act=allow_tolls"));
+		Assert.assertEquals("avoid_highways", GeoPointParserUtil.parseGeoAction("geo.action:?act=avoid_highways"));
+		Assert.assertEquals("allow_highways", GeoPointParserUtil.parseGeoAction("geo.action.offline:?act=allow_highways"));
+		Assert.assertEquals("avoid_ferries", GeoPointParserUtil.parseGeoAction("geo.action:?act=avoid_ferries"));
+		Assert.assertEquals("allow_ferries", GeoPointParserUtil.parseGeoAction("geo.action.offline:?act=allow_ferries"));
+
+		// Map & UI actions
+		Assert.assertEquals("show_alternates", GeoPointParserUtil.parseGeoAction("geo.action:?act=show_alternates"));
+		Assert.assertEquals("route_overview", GeoPointParserUtil.parseGeoAction("geo.action.offline:?act=route_overview"));
+		Assert.assertEquals("show_directions_list", GeoPointParserUtil.parseGeoAction("geo.action:?act=show_directions_list"));
+		Assert.assertEquals("follow_mode", GeoPointParserUtil.parseGeoAction("geo.action.offline:?act=follow_mode"));
+		Assert.assertEquals("go_back", GeoPointParserUtil.parseGeoAction("geo.action:?act=go_back"));
+
+		// Status queries
+		Assert.assertEquals("eta", GeoPointParserUtil.parseGeoAction("geo.action:?act=eta"));
+		Assert.assertEquals("time_to_destination", GeoPointParserUtil.parseGeoAction("geo.action.offline:?act=time_to_destination"));
+		Assert.assertEquals("distance_to_destination", GeoPointParserUtil.parseGeoAction("geo.action:?act=distance_to_destination"));
+		Assert.assertEquals("time_to_next_turn", GeoPointParserUtil.parseGeoAction("geo.action:?act=time_to_next_turn"));
+		Assert.assertEquals("distance_to_next_turn", GeoPointParserUtil.parseGeoAction("geo.action.offline:?act=distance_to_next_turn"));
+		Assert.assertEquals("query_next_turn", GeoPointParserUtil.parseGeoAction("geo.action:?act=query_next_turn"));
+		Assert.assertEquals("query_destination", GeoPointParserUtil.parseGeoAction("geo.action:?act=query_destination"));
+		Assert.assertEquals("query_current_road", GeoPointParserUtil.parseGeoAction("geo.action.offline:?act=query_current_road"));
+
+		// Incident & map layers
+		Assert.assertEquals("report_crash", GeoPointParserUtil.parseGeoAction("geo.action:?act=report_crash"));
+		Assert.assertEquals("report_hazard", GeoPointParserUtil.parseGeoAction("geo.action:?act=report_hazard"));
+		Assert.assertEquals("report_police", GeoPointParserUtil.parseGeoAction("geo.action:?act=report_police"));
+		Assert.assertEquals("report_traffic", GeoPointParserUtil.parseGeoAction("geo.action:?act=report_traffic"));
+		Assert.assertEquals("report_road_closure", GeoPointParserUtil.parseGeoAction("geo.action:?act=report_road_closure"));
+		Assert.assertEquals("show_traffic", GeoPointParserUtil.parseGeoAction("geo.action:?act=show_traffic"));
+		Assert.assertEquals("hide_traffic", GeoPointParserUtil.parseGeoAction("geo.action:?act=hide_traffic"));
+		Assert.assertEquals("show_satellite", GeoPointParserUtil.parseGeoAction("geo.action:?act=show_satellite"));
+		Assert.assertEquals("hide_satellite", GeoPointParserUtil.parseGeoAction("geo.action:?act=hide_satellite"));
+
+		// Case-insensitivity
+		Assert.assertEquals("exit_navigation", GeoPointParserUtil.parseGeoAction("geo.action:?ACT=EXIT_NAVIGATION"));
+		Assert.assertEquals("mute", GeoPointParserUtil.parseGeoAction("GEO.ACTION:?act=MUTE"));
+
+		// Edge cases & non-action URIs
+		Assert.assertEquals("unknown_action", GeoPointParserUtil.parseGeoAction("geo.action:?act=unknown_action"));
+		Assert.assertEquals("", GeoPointParserUtil.parseGeoAction("geo:52.52,13.40"));
+		Assert.assertEquals("", GeoPointParserUtil.parseGeoAction("https://osmand.net"));
+		Assert.assertEquals("", GeoPointParserUtil.parseGeoAction("geo.action:"));
+		Assert.assertEquals("", GeoPointParserUtil.parseGeoAction(null));
+	}
+
 }

@@ -451,4 +451,9 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public void onSmartFolderRenamed(@NonNull SmartFolder smartFolder) {
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "search_my_places_tracks";
+	}
 }

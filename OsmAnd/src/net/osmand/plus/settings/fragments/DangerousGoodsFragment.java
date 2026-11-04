@@ -176,4 +176,9 @@ public class DangerousGoodsFragment extends BaseSettingsFragment {
 	public static int getHazmatUsaClass(@NonNull String id) {
 		return Algorithms.parseIntSilently(id.replace(HAZMAT_CATEGORY_USA_PREFIX, ""), -1);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "dangerous_goods";
+	}
 }

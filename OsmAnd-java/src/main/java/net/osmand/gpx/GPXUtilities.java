@@ -2,6 +2,7 @@
 package net.osmand.gpx;
 
 
+import static net.osmand.data.Amenity.ORIGIN_PREFIX;
 import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
 import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 import static net.osmand.util.Algorithms.isDigit;
@@ -13,7 +14,6 @@ import net.osmand.binary.StringBundle;
 import net.osmand.binary.StringBundleWriter;
 import net.osmand.binary.StringBundleXmlReader;
 import net.osmand.binary.StringBundleXmlWriter;
-import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.SplitMetric.DistanceSplitMetric;
 import net.osmand.gpx.SplitMetric.TimeSplitMetric;
@@ -634,7 +634,7 @@ public class GPXUtilities {
 		public String getAmenityOriginName() {
 			Map<String, String> extensionsToRead = getExtensionsToRead();
 			String amenityOrigin = extensionsToRead.get(AMENITY_ORIGIN_EXTENSION);
-			if (amenityOrigin == null && comment != null && comment.startsWith(Amenity.class.getSimpleName())) {
+			if (amenityOrigin == null && comment != null && comment.startsWith(ORIGIN_PREFIX)) {
 				amenityOrigin = comment;
 			}
 			return amenityOrigin;

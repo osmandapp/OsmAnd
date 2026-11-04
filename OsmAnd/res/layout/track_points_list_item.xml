@@ -92,7 +92,7 @@
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
 						android:layout_marginTop="1sp"
-						android:contentDescription="@string/show_view_angle"
+						android:importantForAccessibility="no"
 						app:srcCompat="@drawable/ic_direction_arrow"
 						tools:tint="@color/icon_color_active_light" />
 

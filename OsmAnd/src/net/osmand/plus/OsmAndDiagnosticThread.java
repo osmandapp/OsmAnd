@@ -3,7 +3,6 @@ package net.osmand.plus;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.feedback.StackSampler;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
@@ -17,7 +16,6 @@ public class OsmAndDiagnosticThread extends Thread {
 
 	private static final long POLL_INTERVAL_MS = 500L;
 	private final OsmandApplication app;
-	private final StackSampler stackSampler = new StackSampler();
 	private long lastDiagnosticThreadFailedTime = 0;
 	private long lastCallChainBuiltTime = 0;
 
@@ -111,8 +109,7 @@ public class OsmAndDiagnosticThread extends Thread {
 	}
 
 	private void awaitNextCheck() throws InterruptedException {
-		stackSampler.sample();
-		app.getMemoryLog().sample(app, stackSampler);
+		app.getMemoryLog().sample(app);
 		Thread.sleep(POLL_INTERVAL_MS);
 	}
 }

@@ -430,4 +430,9 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "terrain";
+	}
 }

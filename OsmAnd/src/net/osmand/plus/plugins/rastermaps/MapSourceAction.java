@@ -14,9 +14,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.util.Pair;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -30,7 +27,6 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -83,18 +79,12 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	protected void saveListToParams(List<Pair<String, String>> list) {
-		getParams().put(getListKey(), new Gson().toJson(list));
+		getParams().put(getListKey(), pairsToJson(list));
 	}
 
 	@Override
 	public List<Pair<String, String>> loadListFromParams() {
-		String json = getParams().get(getListKey());
-		if (json == null || json.isEmpty()) return new ArrayList<>();
-
-		Type listType = new TypeToken<ArrayList<Pair<String, String>>>() {
-		}.getType();
-
-		return new Gson().fromJson(json, listType);
+		return pairsFromJson(getParams().get(getListKey()));
 	}
 
 	@Override
@@ -136,9 +126,9 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getTranslatedItemName(Context context, String item) {
-		if (item.equals(LAYER_OSM_VECTOR)) {
+		if (LAYER_OSM_VECTOR.equals(item)) {
 			return context.getString(R.string.vector_data);
-		} else if (item.endsWith(IndexConstants.SQLITE_EXT)) {
+		} else if (item != null && item.endsWith(IndexConstants.SQLITE_EXT)) {
 			String itemName = getItemNameFromParams(context, item);
 			return itemName != null ? itemName : item.substring(0, item.length() - IndexConstants.SQLITE_EXT.length());
 		}

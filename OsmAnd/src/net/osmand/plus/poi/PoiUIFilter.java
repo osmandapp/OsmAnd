@@ -23,6 +23,7 @@ import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -113,7 +114,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		filterId = STD_PREFIX + standardIconId + idSuffix;
 
 		poiTypes = app.getPoiTypes();
-		name = type == null ? app.getString(R.string.poi_filter_closest_poi) : (type.getTranslation() + idSuffix);
+		name = type == null ? app.getString(R.string.poi_filter_closest_poi) : (PoiAdditionalLabels.getSearchName(type) + idSuffix);
 		if (type == null) {
 			initSearchAll();
 			updatePoiAdditionals();
@@ -579,6 +580,18 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			}
 		}
 		return false;
+	}
+
+	@NonNull
+	public Map<PoiType, PoiType> getTextPoiAdditionals(@NonNull List<PoiType> poiAdditionals) {
+		Map<PoiType, PoiType> textFilters = new HashMap<>();
+		fillFilterCategories(poiAdditionals, new HashMap<>(), textFilters);
+		return textFilters;
+	}
+
+	public boolean acceptedPoiAdditional(@NonNull Amenity amenity, @NonNull PoiType poiAdditional,
+	                                     @NonNull Map<PoiType, PoiType> textPoiAdditionals) {
+		return acceptedFilter(amenity, poiAdditional, textPoiAdditionals);
 	}
 
 	private boolean acceptedAnyFilterOfEachCategory(@NonNull Amenity amenity, @Nullable List<PoiType> selectedFilters) {

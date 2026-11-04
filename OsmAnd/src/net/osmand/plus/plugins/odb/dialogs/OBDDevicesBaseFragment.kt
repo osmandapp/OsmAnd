@@ -59,7 +59,7 @@ abstract class OBDDevicesBaseFragment : BaseFullScreenFragment() {
 		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode))
 		toolbar.setNavigationIcon(AndroidUtils.getNavigationIconResId(app))
 		toolbar.setNavigationContentDescription(R.string.shared_string_close)
-		toolbar.setNavigationOnClickListener { v: View? -> requireActivity().onBackPressed() }
+		toolbar.setNavigationOnClickListener { v: View? -> requireActivity().onBackPressedDispatcher.onBackPressed() }
 	}
 
 	protected val elevation: Float

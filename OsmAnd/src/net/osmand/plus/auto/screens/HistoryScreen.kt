@@ -1,16 +1,15 @@
 package net.osmand.plus.auto.screens
 
-import android.os.AsyncTask
 import android.text.SpannableString
 import android.text.Spanned
 import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.Action
-import androidx.car.app.model.ActionStrip
 import androidx.car.app.model.CarIcon
 import androidx.car.app.model.CarLocation
 import androidx.car.app.model.DistanceSpan
+import androidx.car.app.model.Header
 import androidx.car.app.model.ItemList
 import androidx.car.app.model.ListTemplate
 import androidx.car.app.model.Metadata
@@ -52,11 +51,14 @@ class HistoryScreen(
 		OsmAndTaskManager.executeTask(updateItemsTask)
 	}
 
-	private inner class UpdateHistoryItemsTask : AsyncTask<Unit, Unit, Unit>() {
+	@Suppress("DEPRECATION") // AsyncTask, needs migration
+	private inner class UpdateHistoryItemsTask : android.os.AsyncTask<Unit, Unit, Unit>() {
+		@Deprecated("Deprecated in Java")
 		override fun doInBackground(vararg params: Unit?) {
 			prepareHistoryItems()
 		}
 
+		@Deprecated("Deprecated in Java")
 		override fun onPostExecute(result: Unit?) {
 			invalidate()
 		}
@@ -66,24 +68,27 @@ class HistoryScreen(
     override fun getTemplate(): Template {
         val templateBuilder = ListTemplate.Builder()
         val app = app
-	    val isLoading = updateItemsTask.status != AsyncTask.Status.FINISHED
+	    @Suppress("DEPRECATION") // AsyncTask, needs migration
+	    val isLoading = updateItemsTask.status != android.os.AsyncTask.Status.FINISHED
 	    if (!isLoading) {
 		    prepareList(templateBuilder)
 	    }
-        val actionStripBuilder = ActionStrip.Builder()
-        actionStripBuilder.addAction(
+        val searchAction =
             Action.Builder()
                 .setIcon(
                     CarIcon.Builder(
                         IconCompat.createWithResource(
                             carContext, R.drawable.ic_action_search_dark)).build())
                 .setOnClickListener { openSearch() }
-                .build())
+                .build()
+        val header = Header.Builder()
+            .setTitle(app.getString(R.string.shared_string_history))
+            .setStartHeaderAction(Action.BACK)
+            .addEndHeaderAction(searchAction)
+            .build()
         return templateBuilder
 	        .setLoading(isLoading)
-            .setTitle(app.getString(R.string.shared_string_history))
-            .setHeaderAction(Action.BACK)
-            .setActionStrip(actionStripBuilder.build())
+            .setHeader(header)
             .build()
     }
 

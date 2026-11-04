@@ -10,6 +10,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Samples the stacks of the busy threads for the "hot=" field of the memory log.
+ * <p>
+ * NOT USED since 5.4.9. {@link Thread#getStackTrace()} of another thread makes ART suspend
+ * that thread, and when the thread does not reach a suspend point within the runtime's
+ * timeout (about 8 s, it happens under GC pressure or inside runtime waits such as monitor
+ * inflation or weak-global access) ART aborts the whole process: "SuspendThreadByPeer timed
+ * out" / "Thread suspension timed out". In the first day of 5.4.8 that was 4 of 7 native
+ * crashes, two of them at a 16-37 MB heap. Kept for debuggable builds and as a reference.
+ */
 public class StackSampler {
 
 	private static final long SAMPLE_INTERVAL = 2 * 1000L;

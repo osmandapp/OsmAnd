@@ -323,4 +323,9 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "local_search";
+	}
 }

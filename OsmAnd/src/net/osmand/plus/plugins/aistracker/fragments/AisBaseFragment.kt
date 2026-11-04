@@ -50,7 +50,7 @@ abstract class AisBaseFragment : BaseMaterialFragment() {
 	) {
 		val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
 		toolbar.setTitle(titleId)
-		toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+		toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
 		toolbar.menu.clear()
 		toolbar.menu.add(resetActionId).apply {
 			val icon = AppCompatResources.getDrawable(view.context, resetIconId)?.mutate()

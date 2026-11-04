@@ -97,5 +97,10 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 			app.showToastMessage(e.getMessage());
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "print_dialog";
+	}
 }
 

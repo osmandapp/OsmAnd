@@ -10,6 +10,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
 
 public class ScrollingFooterBehaviour extends AppBarLayout.ScrollingViewBehavior {
 
@@ -31,8 +32,10 @@ public class ScrollingFooterBehaviour extends AppBarLayout.ScrollingViewBehavior
 		}
 
 		boolean viewChanged = super.onDependentViewChanged(parent, child, dependency);
-		int bottomPadding = appBar.getTop() + appBar.getTotalScrollRange()
-				- AndroidUtils.getStatusBarHeight(parent.getContext());
+		int bottomPadding = appBar.getTop() + appBar.getTotalScrollRange();
+		if (!InsetsUtils.isEdgeToEdgeSupported()) {
+			bottomPadding -= AndroidUtils.getStatusBarHeight(parent.getContext());
+		}
 		boolean paddingChanged = bottomPadding != child.getPaddingBottom();
 		if (paddingChanged) {
 			child.setPadding(child.getPaddingLeft(), child.getPaddingTop(), child.getPaddingRight(),

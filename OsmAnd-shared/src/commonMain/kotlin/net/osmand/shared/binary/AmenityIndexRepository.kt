@@ -10,7 +10,7 @@ import net.osmand.shared.util.collections.KPriorityQueue
  * closed and reopened, is the platform's business; everything that searches amenities goes
  * through this.
  *
- * A copy of `net.osmand.search.core.AmenityIndexRepository`, which stays in OsmAnd-java.
+ * Based on `net.osmand.search.core.AmenityIndexRepository` from OsmAnd-java.
  */
 interface AmenityIndexRepository {
 

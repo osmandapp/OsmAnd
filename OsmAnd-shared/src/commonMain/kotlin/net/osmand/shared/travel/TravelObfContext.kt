@@ -6,9 +6,9 @@ import net.osmand.shared.data.KLatLon
 /**
  * What [TravelObfHelper] needs from the platform: which obf files to search, and where the user is.
  *
- * In android this is `ResourceManager` plus a few settings; deciding which files are open, which
- * ones the user has switched off and in what order they are consulted stays there, because it
- * depends on downloads, live updates and map settings that shared knows nothing about.
+ * The caller supplies the available files, their order and the relevant settings. In the
+ * Android app these come from `ResourceManager` and app settings. This keeps the helper
+ * independent of how each application manages downloads, live updates and enabled maps.
  */
 interface TravelObfContext {
 

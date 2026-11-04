@@ -14,7 +14,6 @@ import androidx.car.app.model.Metadata
 import androidx.car.app.model.Place
 import androidx.car.app.model.Row
 import androidx.car.app.model.Template
-import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -55,8 +54,9 @@ class POIScreen(
         loadPOI()
     }
 
+    @Suppress("DEPRECATION") // PlaceListNavigationTemplate, needs migration to MapWithContentTemplate
     override fun getTemplate(): Template {
-        val templateBuilder = PlaceListNavigationTemplate.Builder()
+        val templateBuilder = androidx.car.app.navigation.model.PlaceListNavigationTemplate.Builder()
         if (loading) {
             templateBuilder.setLoading(true)
         } else {
