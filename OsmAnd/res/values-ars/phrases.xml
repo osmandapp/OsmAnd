@@ -2065,7 +2065,7 @@
     <string name="poi_male_no">ممنوع على الرجال</string>
     <string name="poi_male_yes">ذكور</string>
     <string name="poi_public_bath">حمام عام</string>
-    <string name="poi_car_wash_no">غسيل سيارات: لا: لا</string>
+    <string name="poi_car_wash_no">غسيل سيارات: لا</string>
     <string name="poi_brushless_no">غسيل بالفرشه: لا يوجد</string>
     <string name="poi_brushless_yes">بدون فرشات: نعم</string>
     <string name="poi_full_service_yes">خدمة شاملة</string>

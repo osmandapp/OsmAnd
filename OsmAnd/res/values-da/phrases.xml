@@ -1512,7 +1512,7 @@
     <string name="poi_diaper_no">Ingen puslebord</string>
     <string name="poi_diaper_room">Puslerum</string>
     <string name="poi_events_venue">Selskabslokale</string>
-    <string name="poi_car_wash_no">Bilvask: nej: nej</string>
+    <string name="poi_car_wash_no">Bilvask: nej</string>
     <string name="poi_maxstay">Parkeringstidsgrænse</string>
     <string name="poi_vending_parking_tickets">Parkeringsbilletter</string>
     <string name="poi_vending_cigarettes">Cigaretter</string>
@@ -3551,9 +3551,9 @@
     <string name="poi_hazard_additional_minefield">Minefelt</string>
     <string name="poi_hazard_additional_contamination">Kontaminering</string>
     <string name="poi_defibrillator_location">Placering</string>
-    <string name="poi_changing_table_yes">Puslebord: ja: ja</string>
-    <string name="poi_changing_table_no">Puslebord: nej: nej</string>
-    <string name="poi_changing_table_limited">Puslebord: begrænset: begrænset</string>
+    <string name="poi_changing_table_yes">Puslebord: ja</string>
+    <string name="poi_changing_table_no">Puslebord: nej</string>
+    <string name="poi_changing_table_limited">Puslebord: begrænset</string>
     <string name="poi_changing_table_location_room">Puslebordsplacering: værelse</string>
     <string name="poi_changing_table_location_male_toilet">Puslebordsplacering: herretoilet</string>
     <string name="poi_changing_table_location_female_toilet">Puslebordsplacering: dametoilet</string>

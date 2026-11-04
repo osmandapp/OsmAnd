@@ -1510,7 +1510,7 @@
     <string name="poi_diaper_yes">Cambiador de pañales: sí</string>
     <string name="poi_diaper_no">Cambiador de pañales: no</string>
     <string name="poi_diaper_room">Habitación para cambio de pañales</string>
-    <string name="poi_car_wash_no">Lavadero de automóviles: no: no</string>
+    <string name="poi_car_wash_no">Lavadero de automóviles: no</string>
     <string name="poi_maxstay">Estadía máxima</string>
     <string name="poi_vending_parking_tickets">Tickets de estacionamiento</string>
     <string name="poi_vending_cigarettes">Cigarrillos;Cigarros</string>
@@ -3552,9 +3552,9 @@
     <string name="poi_hazard_additional_minefield">Campo minado</string>
     <string name="poi_hazard_additional_contamination">Contaminación</string>
     <string name="poi_defibrillator_location">Ubicación</string>
-    <string name="poi_changing_table_yes">Cambiador de pañales: sí: sí</string>
-    <string name="poi_changing_table_no">Cambiador de pañales: no: no</string>
-    <string name="poi_changing_table_limited">Cambiador de pañales: limitado: limitado</string>
+    <string name="poi_changing_table_yes">Cambiador de pañales: sí</string>
+    <string name="poi_changing_table_no">Cambiador de pañales: no</string>
+    <string name="poi_changing_table_limited">Cambiador de pañales: limitado</string>
     <string name="poi_changing_table_location_room">Ubicación del cambiador: habitación</string>
     <string name="poi_changing_table_location_male_toilet">Ubicación del cambiador: baño masculino</string>
     <string name="poi_changing_table_location_female_toilet">Ubicación del cambiador: baño femenino</string>

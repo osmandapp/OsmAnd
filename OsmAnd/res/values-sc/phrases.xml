@@ -1959,7 +1959,7 @@
     <string name="poi_full_service_yes">Servìtziu cumpridu</string>
     <string name="poi_brushless_yes">Chene ispàtzulas: eja</string>
     <string name="poi_brushless_no">Chene ispàtzulas: nono</string>
-    <string name="poi_car_wash_no">Innetadura de automòbiles: nono: nono</string>
+    <string name="poi_car_wash_no">Innetadura de automòbiles: nono</string>
     <string name="poi_public_bath">Bagnu pùblicu</string>
     <string name="poi_male_yes">Òmines</string>
     <string name="poi_male_no">Proibidu a sos òmines</string>
@@ -3552,9 +3552,9 @@
     <string name="poi_hazard_additional_minefield">Campu minadu</string>
     <string name="poi_hazard_additional_contamination">Contaminatzione</string>
     <string name="poi_defibrillator_location">Positzione</string>
-    <string name="poi_changing_table_yes">Fasciatoju: eja: eja</string>
-    <string name="poi_changing_table_no">Fasciatoju: nono: nono</string>
-    <string name="poi_changing_table_limited">Fasciatoju: limitadu: limitadu</string>
+    <string name="poi_changing_table_yes">Fasciatoju: eja</string>
+    <string name="poi_changing_table_no">Fasciatoju: nono</string>
+    <string name="poi_changing_table_limited">Fasciatoju: limitadu</string>
     <string name="poi_changing_table_location_room">Logu de su fasciatoju: aposentu</string>
     <string name="poi_changing_table_location_male_toilet">Logu de su fasciatoju: bagnu de sos òmines</string>
     <string name="poi_changing_table_location_female_toilet">Logu de su fasciatoju: bagnu de sas fèminas</string>

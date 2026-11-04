@@ -330,7 +330,7 @@
     <string name="poi_female_yes">Perempuan</string>
     <string name="poi_male_no">Dilarang untuk pria</string>
     <string name="poi_male_yes">Laki-laki</string>
-    <string name="poi_car_wash_no">Pencucian mobil: bukan: tidak</string>
+    <string name="poi_car_wash_no">Pencucian mobil: bukan</string>
     <string name="poi_brushless_yes">Tanpa sikat: ya</string>
     <string name="poi_automated_no">Otomatis: tidak</string>
     <string name="poi_automated_yes">Otomatis: ya</string>
@@ -2818,7 +2818,7 @@
     <string name="poi_industrial_refinery">Jenis: kilang</string>
     <string name="poi_crop_vegetables">Tanaman: sayuran</string>
     <string name="poi_tanning_salon">Solarium</string>
-    <string name="poi_changing_table_limited">Meja ganti: terbatas: terbatas</string>
+    <string name="poi_changing_table_limited">Meja ganti: terbatas</string>
     <string name="poi_memorial_koshinto">Koshinto</string>
     <string name="poi_counselling_type_family_yes">Konseling (keluarga): ya</string>
     <string name="poi_counselling_type_family_no">Konseling (keluarga): tidak</string>
@@ -3300,8 +3300,8 @@
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
     <string name="poi_hazard_additional_erosion">Erosi</string>
     <string name="poi_hazard_additional_avalanche">Longsoran salju</string>
-    <string name="poi_changing_table_yes">Meja ganti: ya: ya</string>
-    <string name="poi_changing_table_no">Meja ganti: tidak: tidak</string>
+    <string name="poi_changing_table_yes">Meja ganti: ya</string>
+    <string name="poi_changing_table_no">Meja ganti: tidak</string>
     <string name="poi_changing_table_fee_no">Biaya meja ganti: tidak</string>
     <string name="poi_charcoal_pile">Tumpukan arang</string>
     <string name="poi_taxi_office">Kantor taksi</string>
