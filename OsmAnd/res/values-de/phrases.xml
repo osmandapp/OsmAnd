@@ -1424,7 +1424,7 @@
     <string name="poi_automated_yes">Automatisiert: ja</string>
     <string name="poi_automated_no">Automatisiert: nein</string>
     <string name="poi_brushless_no">Bürstenlos: nein</string>
-    <string name="poi_car_wash_no">Autowaschanlage: nein: nein</string>
+    <string name="poi_car_wash_no">Autowaschanlage: nein</string>
     <string name="poi_male_yes">Männlich</string>
     <string name="poi_male_no">Für Männer verboten</string>
     <string name="poi_female_yes">Weiblich</string>
@@ -3555,9 +3555,9 @@
     <string name="poi_hazard_additional_minefield">Minenfeld</string>
     <string name="poi_hazard_additional_contamination">Kontamination</string>
     <string name="poi_defibrillator_location">Standort</string>
-    <string name="poi_changing_table_yes">Wickeltisch: ja: ja</string>
-    <string name="poi_changing_table_no">Wickeltisch: nein: nein</string>
-    <string name="poi_changing_table_limited">Wickeltisch: begrenzt: begrenzt</string>
+    <string name="poi_changing_table_yes">Wickeltisch: ja</string>
+    <string name="poi_changing_table_no">Wickeltisch: nein</string>
+    <string name="poi_changing_table_limited">Wickeltisch: begrenzt</string>
     <string name="poi_changing_table_location_room">Wickeltischposition: Raum</string>
     <string name="poi_changing_table_location_male_toilet">Wickeltischposition: Herrentoilette</string>
     <string name="poi_changing_table_location_female_toilet">Wickeltischposition: Damentoilette</string>

@@ -1440,7 +1440,7 @@
     <string name="poi_takeaway_no">Pas de vente à emporter</string>
     <string name="poi_outdoor_seating_yes">Terrasse : oui</string>
     <string name="poi_outdoor_seating_no">Pas de terrasse</string>
-    <string name="poi_car_wash_no">Lavage de voiture : non : non</string>
+    <string name="poi_car_wash_no">Lavage de voiture : non</string>
     <string name="poi_maxstay">Stationnement limité dans le temps</string>
     <string name="poi_vending_parking_tickets">Tickets de stationnement</string>
     <string name="poi_vending_sweets">Bonbons;Distributeur de bonbons</string>
@@ -3551,9 +3551,9 @@
     <string name="poi_hazard_additional_minefield">Champ de mines</string>
     <string name="poi_hazard_additional_contamination">Contamination</string>
     <string name="poi_defibrillator_location">Emplacement</string>
-    <string name="poi_changing_table_yes">Table à langer : oui : oui</string>
-    <string name="poi_changing_table_no">Table à langer : non : non</string>
-    <string name="poi_changing_table_limited">Table à langer : limitée : limitée</string>
+    <string name="poi_changing_table_yes">Table à langer : oui</string>
+    <string name="poi_changing_table_no">Table à langer : non</string>
+    <string name="poi_changing_table_limited">Table à langer : limitée</string>
     <string name="poi_changing_table_location_room">Emplacement de la table à langer : pièce séparée</string>
     <string name="poi_changing_table_location_male_toilet">Emplacement de la table à langer : toilettes hommes</string>
     <string name="poi_changing_table_location_female_toilet">Emplacement de la table à langer : toilettes femmes</string>

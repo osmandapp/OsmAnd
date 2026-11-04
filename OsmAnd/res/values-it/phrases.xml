@@ -1377,7 +1377,7 @@
     <string name="poi_full_service_yes">Servizio completo</string>
     <string name="poi_brushless_yes">Senza spazzole: sì</string>
     <string name="poi_brushless_no">Senza spazzola: no</string>
-    <string name="poi_car_wash_no">Autolavaggio: no: no</string>
+    <string name="poi_car_wash_no">Autolavaggio: no</string>
     <string name="poi_public_bath">Terme libere;Terme pubbliche</string>
     <string name="poi_indoor_no">Esterno</string>
     <string name="poi_toilets_yes">Servizi igenici: sì</string>
@@ -2744,9 +2744,9 @@
     <string name="poi_seamark_clearance_height_open">Margine di altezza (aperto)</string>
     <string name="poi_seamark_clearance_width">Margine di larghezza</string>
     <string name="poi_car_pooling">Punto per la condivisione di automobili</string>
-    <string name="poi_changing_table_yes">Fasciatoio: sì: sì</string>
-    <string name="poi_changing_table_no">Fasciatoio: no: no</string>
-    <string name="poi_changing_table_limited">Fasciatoio: limitato: limitato</string>
+    <string name="poi_changing_table_yes">Fasciatoio: sì</string>
+    <string name="poi_changing_table_no">Fasciatoio: no</string>
+    <string name="poi_changing_table_limited">Fasciatoio: limitato</string>
     <string name="poi_changing_table_location_room">Posizionamento del fasciatoio: in stanza</string>
     <string name="poi_changing_table_location_male_toilet">Posizionamento del fasciatoio: bagno maschile</string>
     <string name="poi_changing_table_location_female_toilet">Posizionamento del fasciatoio: bagno femminile</string>

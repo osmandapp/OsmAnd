@@ -1704,7 +1704,7 @@
     <string name="poi_full_service_yes">Serviço completo</string>
     <string name="poi_brushless_yes">Sem escovas: sim</string>
     <string name="poi_brushless_no">Sem escova: não</string>
-    <string name="poi_car_wash_no">Lavagem de automóveis: não: não</string>
+    <string name="poi_car_wash_no">Lavagem de automóveis: não</string>
     <string name="poi_public_bath">Banhos públicos;banho público</string>
     <string name="poi_male_yes">Masculino</string>
     <string name="poi_male_no">Proibido para homens</string>
@@ -3552,9 +3552,9 @@
     <string name="poi_hazard_additional_minefield">Campo minado</string>
     <string name="poi_hazard_additional_contamination">Contaminação</string>
     <string name="poi_defibrillator_location">Localização</string>
-    <string name="poi_changing_table_yes">Mesa muda-fraldas: sim: sim</string>
-    <string name="poi_changing_table_no">Mesa muda-fraldas: não: não</string>
-    <string name="poi_changing_table_limited">Mesa muda-fraldas: limitada: limitada</string>
+    <string name="poi_changing_table_yes">Mesa muda-fraldas: sim</string>
+    <string name="poi_changing_table_no">Mesa muda-fraldas: não</string>
+    <string name="poi_changing_table_limited">Mesa muda-fraldas: limitada</string>
     <string name="poi_changing_table_location_room">Mesa muda-fraldas: sala</string>
     <string name="poi_changing_table_location_male_toilet">Local da mesa muda-fraldas: WC masculino</string>
     <string name="poi_changing_table_location_female_toilet">Local da mesa muda-fraldas: WC feminino</string>

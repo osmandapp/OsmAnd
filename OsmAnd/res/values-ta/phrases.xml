@@ -617,8 +617,8 @@
     <string name="poi_rtsa_scale_3b_asterisk">3 பி</string>
     <string name="poi_hazard_additional_flood">வெள்ளம்</string>
     <string name="poi_defibrillator_location">இடம்</string>
-    <string name="poi_changing_table_no">மாற்றும் அட்டவணை: இல்லை: இல்லை</string>
-    <string name="poi_changing_table_limited">மாற்றும் அட்டவணை: வரையறுக்கப்பட்டுள்ளது: வரையறுக்கப்பட்ட</string>
+    <string name="poi_changing_table_no">மாற்றும் அட்டவணை: இல்லை</string>
+    <string name="poi_changing_table_limited">மாற்றும் அட்டவணை: வரையறுக்கப்பட்டுள்ளது</string>
     <string name="poi_changing_table_fee_yes">அட்டவணை கட்டணத்தை மாற்றுதல்: ஆம்</string>
     <string name="poi_vehicle_customers">வாகன அணுகல்: வாடிக்கையாளர்கள்</string>
     <string name="poi_vehicle_military">வாகன அணுகல்: தரைப்படை</string>
@@ -2330,7 +2330,7 @@
     <string name="poi_full_service_yes">முழு பணி</string>
     <string name="poi_brushless_yes">தூரிகை இல்லாதது: ஆம்</string>
     <string name="poi_brushless_no">தூரிகை: இல்லை</string>
-    <string name="poi_car_wash_no">கார் கழுவுதல்: இல்லை: இல்லை</string>
+    <string name="poi_car_wash_no">கார் கழுவுதல்: இல்லை</string>
     <string name="poi_public_bath">பொது குளியல்</string>
     <string name="poi_male_yes">ஆண்</string>
     <string name="poi_male_no">ஆண்களுக்கு தடைசெய்யப்பட்டுள்ளது</string>
@@ -3961,7 +3961,7 @@
     <string name="poi_hazard_additional_avalanche">பனிச்சரிவு</string>
     <string name="poi_hazard_additional_minefield">கண்ணிவெடி</string>
     <string name="poi_hazard_additional_contamination">மாசுபடுதல்</string>
-    <string name="poi_changing_table_yes">அட்டவணையை மாற்றுதல்: ஆம்: ஆம்</string>
+    <string name="poi_changing_table_yes">அட்டவணையை மாற்றுதல்: ஆம்</string>
     <string name="poi_changing_table_location_room">அட்டவணையை மாற்றும் இடம்: அறை</string>
     <string name="poi_changing_table_location_male_toilet">அட்டவணையை மாற்றுதல் இடம்: ஆண் கழிப்பறை</string>
     <string name="poi_changing_table_location_female_toilet">அட்டவணையை மாற்றுதல் இடம்: பெண் கழிப்பறை</string>
