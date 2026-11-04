@@ -751,8 +751,8 @@ public class BinaryMapPoiReaderAdapter {
 				if (shift != Integer.MIN_VALUE) {
 					int x31 = (x << (31 - zoom));
 					int y31 = (y << (31 - zoom));
-					int x31r = ((x + 1) << (31 - zoom)) - 1;
-					int y31b = ((y + 1) << (31 - zoom)) - 1;
+					int x31r = ((x + 1) << (31 - zoom));
+					int y31b = ((y + 1) << (31 - zoom));
 					QuadRect r = new QuadRect(x31, y31, x31r, y31b);
 					// Data box may be larger than the request bbox (e.g. a render tile), so check overlap, not the box corner
 					if (req.intersects(x31, y31, x31r, y31b) || r.contains(req.x, req.y, req.x, req.y)) {
