@@ -124,6 +124,40 @@ class AdditionalInfoBundleTest {
 	}
 
 	@Test
+	fun socketTagsBecomeSocketGroup() {
+		val rows = bundle(
+			"type" to "transportation", "subtype" to "charging_station", "socket:chademo" to "2",
+			"socket:chademo:output" to "50 kW", "socket:type2" to "4", "socket:type2:output" to "22 kW",
+			"socket:type2:voltage" to "400 V", "socket:schuko" to "no", "capacity" to "6"
+		)?.getVisibleTags(false, emptyList()) ?: return
+
+		assertEquals(listOf("capacity", "socket"), rows.map { it.key })
+		val group = find(rows, "socket")!!
+		assertEquals(CollapsableEntryType.POI_TYPE_GROUP, group.collapsableEntryType)
+		assertTrue(group.poiAdditional)
+		assertEquals("transportation", group.collapsableCategory?.getKeyName())
+		assertEquals(
+			listOf("osmand_socket_type2_yes", "osmand_socket_chademo_yes"),
+			group.collapsablePoiTypes?.map { it.getKeyName() }
+		)
+		assertEquals("4 × 22 kW · 400 V", group.getCollapsableEntryValue("osmand_socket_type2_yes"))
+		assertEquals("2 × 50 kW", group.getCollapsableEntryValue("osmand_socket_chademo_yes"))
+	}
+
+	@Test
+	fun socketKeysOfMapDataAndStoredPointJoinOneGroup() {
+		val rows = bundle(
+			"type" to "transportation", "subtype" to "charging_station", "socket_type2" to "yes",
+			"osm_tag_socket_type2_output" to "22 kW", "socket_type2_cable" to "1"
+		)?.getVisibleTags(false, emptyList()) ?: return
+
+		assertEquals(listOf("socket_type2_cable", "socket"), rows.map { it.key }, "type2_cable has no socket filter type")
+		val group = find(rows, "socket")!!
+		assertEquals(listOf("osmand_socket_type2_yes"), group.collapsablePoiTypes?.map { it.getKeyName() })
+		assertEquals("22 kW", group.getCollapsableEntryValue("osmand_socket_type2_yes"))
+	}
+
+	@Test
 	fun localizedTagTakesPreferredLanguageAsHeader() {
 		val tags = arrayOf(
 			"type" to "sustenance", "subtype" to "fast_food", "brand" to "McD", "brand:en" to "McD en",
