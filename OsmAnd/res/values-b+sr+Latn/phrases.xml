@@ -1839,7 +1839,7 @@
     <string name="poi_full_service_yes">Puna usluga</string>
     <string name="poi_brushless_yes">Bez četki: da</string>
     <string name="poi_brushless_no">Bez četkica: ne</string>
-    <string name="poi_car_wash_no">Perionica auta: ne: ne</string>
+    <string name="poi_car_wash_no">Perionica auta: ne</string>
     <string name="poi_public_bath">Javno kupatilo</string>
     <string name="poi_male_yes">Muškarci</string>
     <string name="poi_male_no">Zabranjeno za muškarce</string>
@@ -3707,9 +3707,9 @@
     <string name="poi_changing_table_location_female_toilet">Promene lokacije stola: ženski toalet</string>
     <string name="poi_changing_table_location_male_toilet">Promene lokacije stola: muški toalet</string>
     <string name="poi_changing_table_location_room">Promene lokacije stola: soba</string>
-    <string name="poi_changing_table_limited">Promena stola: limitirano: limitirano</string>
-    <string name="poi_changing_table_no">Promena stola: ne: ne</string>
-    <string name="poi_changing_table_yes">Promena stola: da: da</string>
+    <string name="poi_changing_table_limited">Promena stola: limitirano</string>
+    <string name="poi_changing_table_no">Promena stola: ne</string>
+    <string name="poi_changing_table_yes">Promena stola: da</string>
     <string name="poi_defibrillator_location">Lokacija</string>
     <string name="poi_hazard_additional_contamination">Kontaminacija</string>
     <string name="poi_hazard_additional_minefield">Minsko polje</string>

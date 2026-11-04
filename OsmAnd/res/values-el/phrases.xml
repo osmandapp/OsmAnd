@@ -1697,7 +1697,7 @@
     <string name="poi_automated_no">Αυτόματο: όχι</string>
     <string name="poi_full_service_yes">Πλήρης εξυπηρέτηση</string>
     <string name="poi_brushless_yes">Χωρίς βούρτσες: ναι</string>
-    <string name="poi_car_wash_no">Πλύσιμο αμαξιού: όχι: όχι</string>
+    <string name="poi_car_wash_no">Πλύσιμο αμαξιού: όχι</string>
     <string name="poi_public_bath">Δημόσια λουτρά;Δημόσιο Λουτρό</string>
     <string name="poi_male_yes">Άνδρες</string>
     <string name="poi_male_no">Απαγορευμένο για άνδρες</string>
@@ -3651,9 +3651,9 @@
     <string name="poi_changing_table_location_female_toilet">Τοποθεσία αλλαξιέρας: τουαλέτα γυναικών</string>
     <string name="poi_changing_table_location_male_toilet">Τοποθεσία αλλαξιέρας: τουαλέτα ανδρών</string>
     <string name="poi_changing_table_location_room">Τοποθεσία αλλαξιέρας: δωμάτιο</string>
-    <string name="poi_changing_table_limited">Αλλαξιέρα: περιορισμένη: περιορισμένη</string>
-    <string name="poi_changing_table_no">Αλλαξιέρα: όχι: όχι</string>
-    <string name="poi_changing_table_yes">Αλλαξιέρα: ναι: ναι</string>
+    <string name="poi_changing_table_limited">Αλλαξιέρα: περιορισμένη</string>
+    <string name="poi_changing_table_no">Αλλαξιέρα: όχι</string>
+    <string name="poi_changing_table_yes">Αλλαξιέρα: ναι</string>
     <string name="poi_defibrillator_location">Τοποθεσία</string>
     <string name="poi_hazard_additional_contamination">Μόλυνση</string>
     <string name="poi_hazard_additional_minefield">Ναρκοπέδιο</string>

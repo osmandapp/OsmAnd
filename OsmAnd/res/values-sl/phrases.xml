@@ -1616,7 +1616,7 @@
     <string name="poi_second_hand_no">Brez rabljenega blaga</string>
     <string name="poi_automated_yes">Avtomatsko: da</string>
     <string name="poi_brushless_yes">Brezkrtačni: da</string>
-    <string name="poi_car_wash_no">Avtopralnica: ne: ne</string>
+    <string name="poi_car_wash_no">Avtopralnica: ne</string>
     <string name="poi_indoor_no">Zunanje</string>
     <string name="poi_toilets_yes">Stranišča: da</string>
     <string name="poi_toilets_wheelchair_no">Dostop do stranišč za invalidske vozičke: ne</string>
@@ -3621,7 +3621,7 @@
     <string name="poi_rtsa_scale_2a">2A</string>
     <string name="poi_rtsa_scale_2a_asterisk">2A*</string>
     <string name="poi_rtsa_scale_2b">2B</string>
-    <string name="poi_changing_table_limited">Previjalna miza: omejeno: omejeno</string>
+    <string name="poi_changing_table_limited">Previjalna miza: omejeno</string>
     <string name="poi_taxi_office">Pisarna taksijev</string>
     <string name="poi_monastery_type_clerks_regular">Vrsta samostana: redovni duhovniški</string>
     <string name="poi_url">URL</string>
@@ -3673,9 +3673,9 @@
     <string name="poi_charcoal_pile">Oglarska kopa</string>
     <string name="poi_changing_table_count">Število miz za previjanje</string>
     <string name="poi_changing_table_location_female_toilet">Lokacija previjalne mize: žensko stranišče</string>
-    <string name="poi_changing_table_no">Previjalna miza: ne: ne</string>
+    <string name="poi_changing_table_no">Previjalna miza: ne</string>
     <string name="poi_defibrillator_location">Lokacija</string>
-    <string name="poi_changing_table_yes">Previjalna miza: da: da</string>
+    <string name="poi_changing_table_yes">Previjalna miza: da</string>
     <string name="poi_hazard_additional_contamination">Kontaminacija</string>
     <string name="poi_hazard_additional_minefield">Minsko polje</string>
     <string name="poi_hazard_additional_avalanche">Plaz</string>

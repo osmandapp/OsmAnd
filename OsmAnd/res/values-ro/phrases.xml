@@ -1683,7 +1683,7 @@
     <string name="poi_male_no">Interzis pentru bărbați</string>
     <string name="poi_male_yes">Masculin</string>
     <string name="poi_public_bath">Baie publică</string>
-    <string name="poi_car_wash_no">Spălătorie auto: nu: nu</string>
+    <string name="poi_car_wash_no">Spălătorie auto: nu</string>
     <string name="poi_brushless_no">Fără perii: nu</string>
     <string name="poi_brushless_yes">Fără perii: da</string>
     <string name="poi_full_service_yes">Servicii complete</string>
@@ -3441,7 +3441,7 @@
     <string name="poi_changing_table_fee_no">Taxa pentru masa de schimbat: nu</string>
     <string name="poi_changing_table_fee_yes">Taxă pentru masa de schimb: da</string>
     <string name="poi_changing_table_count">Numărătoarea mesei de schimbare</string>
-    <string name="poi_changing_table_yes">Masă de schimb: da: da</string>
+    <string name="poi_changing_table_yes">Masă de schimb: da</string>
     <string name="poi_defibrillator_location">Locație</string>
     <string name="poi_hazard_additional_contamination">Contaminare</string>
     <string name="poi_hazard_additional_minefield">Câmp minat</string>
@@ -3633,8 +3633,8 @@
     <string name="poi_changing_table_location_female_toilet">Locația mesei de schimb: toaletă pentru femei</string>
     <string name="poi_changing_table_location_male_toilet">Locația mesei de schimb: toaletă bărbați</string>
     <string name="poi_changing_table_location_room">Amplasarea mesei de schimb: cameră</string>
-    <string name="poi_changing_table_limited">Masă de înfășat: limitat: limitat</string>
-    <string name="poi_changing_table_no">Masă de înfășat: nu: nu</string>
+    <string name="poi_changing_table_limited">Masă de înfășat: limitat</string>
+    <string name="poi_changing_table_no">Masă de înfășat: nu</string>
     <string name="poi_climbing_grade_french_min">Cel mai ușor traseu (grade franceze)</string>
     <string name="poi_climbing_grade_saxon_min">Cel mai ușor traseu (grade saxone)</string>
     <string name="poi_climbing_routes">Trasee de cățărare</string>

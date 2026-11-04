@@ -2013,7 +2013,7 @@
     <string name="poi_diet_gluten_free_no">Glútenlaus matur: nei</string>
     <string name="poi_automated_no">Sjálfvirkt: nei</string>
     <string name="poi_brushless_no">Burstalaust: nei</string>
-    <string name="poi_car_wash_no">Bílaþvottur: nei: nei</string>
+    <string name="poi_car_wash_no">Bílaþvottur: nei</string>
     <string name="poi_male_yes">Karlar</string>
     <string name="poi_male_no">Bannað körlum</string>
     <string name="poi_female_yes">Konur</string>
@@ -3552,9 +3552,9 @@
     <string name="poi_hazard_additional_minefield">Jarðsprengjusvæði</string>
     <string name="poi_hazard_additional_contamination">Smithætta</string>
     <string name="poi_defibrillator_location">Staðsetning</string>
-    <string name="poi_changing_table_yes">Skiptiborð: já: já</string>
-    <string name="poi_changing_table_no">Skiptiborð: nei: nei</string>
-    <string name="poi_changing_table_limited">Skiptiborð: takmarkað: takmarkað</string>
+    <string name="poi_changing_table_yes">Skiptiborð: já</string>
+    <string name="poi_changing_table_no">Skiptiborð: nei</string>
+    <string name="poi_changing_table_limited">Skiptiborð: takmarkað</string>
     <string name="poi_changing_table_location_room">Staðsetning skiptiborðs: herbergi</string>
     <string name="poi_changing_table_location_male_toilet">Staðsetning skiptiborðs: karlasnyrtingar</string>
     <string name="poi_changing_table_location_female_toilet">Staðsetning skiptiborðs: kvennasnyrtingar</string>

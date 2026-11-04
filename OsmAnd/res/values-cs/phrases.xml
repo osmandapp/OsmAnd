@@ -1566,7 +1566,7 @@
     <string name="poi_full_service_yes">Všechny služby</string>
     <string name="poi_brushless_yes">Bezkartáčové: ano</string>
     <string name="poi_brushless_no">Bez kartáčů: ne</string>
-    <string name="poi_car_wash_no">Automyčka: ne: ne</string>
+    <string name="poi_car_wash_no">Automyčka: ne</string>
     <string name="poi_public_bath">Veřejná sprcha</string>
     <string name="poi_male_yes">Muži</string>
     <string name="poi_male_no">Zakázané pro muže</string>
@@ -3530,9 +3530,9 @@
     <string name="poi_hazard_additional_minefield">Minové pole</string>
     <string name="poi_hazard_additional_contamination">Kontaminace</string>
     <string name="poi_defibrillator_location">Poloha</string>
-    <string name="poi_changing_table_yes">Přebalovací pult: ano: ano</string>
-    <string name="poi_changing_table_no">Přebalovací pult: ne: ne</string>
-    <string name="poi_changing_table_limited">Přebalovací pult: omezeně: omezeně</string>
+    <string name="poi_changing_table_yes">Přebalovací pult: ano</string>
+    <string name="poi_changing_table_no">Přebalovací pult: ne</string>
+    <string name="poi_changing_table_limited">Přebalovací pult: omezeně</string>
     <string name="poi_changing_table_location_room">Umístění přebalovacího pultu: místnost</string>
     <string name="poi_changing_table_location_male_toilet">Umístění přebalovacího pultu: pánské toalety</string>
     <string name="poi_changing_table_location_female_toilet">Umístění přebalovacího pultu: dámské toalety</string>

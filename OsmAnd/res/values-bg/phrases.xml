@@ -699,9 +699,9 @@
     <string name="poi_hazard_additional_minefield">Минно поле</string>
     <string name="poi_hazard_additional_contamination">Замърсяване</string>
     <string name="poi_defibrillator_location">Местоположение</string>
-    <string name="poi_changing_table_yes">Маса за повиване: да: да</string>
-    <string name="poi_changing_table_no">Маса за повиване: не: не</string>
-    <string name="poi_changing_table_limited">Маса за повиване: ограничено: ограничено</string>
+    <string name="poi_changing_table_yes">Маса за повиване: да</string>
+    <string name="poi_changing_table_no">Маса за повиване: не</string>
+    <string name="poi_changing_table_limited">Маса за повиване: ограничено</string>
     <string name="poi_changing_table_location_room">Местоположение на масата за повиване: стая</string>
     <string name="poi_changing_table_location_male_toilet">Местоположение на масата за повиване: мъжка тоалетна</string>
     <string name="poi_changing_table_location_female_toilet">Местоположение на масата за повиване: женска тоалетна</string>
