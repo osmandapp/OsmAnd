@@ -233,12 +233,14 @@ public class ClimbsCountWidget extends SimpleWidget {
 		}
 
 		// Find climbs by identifying uphill segments that meet criteria
-		// We'll track climbs more intelligently - only end a climb when we have a significant descent
+		// A climb ends when there's more than 50m without ascent AND no new climb starts within 200m
+		// Implementation: end climb when there's 200m without ascent (this satisfies both conditions)
 		int climbStartIndex = 0;
 		boolean inClimb = false;
 		double currentClimbGain = 0;
 		double currentClimbDistance = 0;
 		double netClimbGain = 0; // Net gain from climb start (can go negative temporarily)
+		double distanceSinceLastAscent = 0; // Distance traveled without positive elevation gain
 
 		// For building elevation profiles per climb
 		List<Double> climbElevationProfile = new ArrayList<>();
@@ -267,6 +269,13 @@ public class ClimbsCountWidget extends SimpleWidget {
 
 			double elevationGain = currPoint.getEle() - prevPoint.getEle();
 			double segmentDistance = MapUtils.getDistance(prevPoint.getLatitude(), prevPoint.getLongitude(), currPoint.getLatitude(), currPoint.getLongitude());
+
+			// Track distance since last ascent for climb termination
+			if (elevationGain > 0) {
+				distanceSinceLastAscent = 0;
+			} else {
+				distanceSinceLastAscent += segmentDistance;
+			}
 
 			if (!inClimb) {
 				// Not in a climb, check if we should start one
@@ -303,14 +312,14 @@ public class ClimbsCountWidget extends SimpleWidget {
 					currentClimbDistance += segmentDistance;
 					netClimbGain += elevationGain;
 				} else {
-					// Descending - reduce net gain but don't end climb yet
+					// Descending - reduce net gain
 					netClimbGain += elevationGain;
 					currentClimbDistance += segmentDistance;
 
-					// End climb only if net gain has gone negative (we've descended more than we climbed)
-					if (netClimbGain <= 0) {
+					// End climb if there's been more than 200m without ascent
+					// (this satisfies: >50m without ascent AND no new climb within 200m, since distanceSinceLastAscent resets on ascent)
+					if (distanceSinceLastAscent > 200) {
 						// End of climb - check if it meets criteria
-						// Use the positive gain we had before this descent
 						double totalGain = currentClimbGain;
 						if (totalGain >= minElevation) {
 							float avgGrade = calculateGrade(totalGain, currentClimbDistance);
@@ -321,6 +330,8 @@ public class ClimbsCountWidget extends SimpleWidget {
 							}
 						}
 						inClimb = false;
+						// Reset distance since last ascent
+						distanceSinceLastAscent = 0;
 					}
 				}
 			}
