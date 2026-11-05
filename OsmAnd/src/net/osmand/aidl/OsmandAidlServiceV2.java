@@ -63,6 +63,7 @@ import net.osmand.aidlapi.gpx.AGpxRecordingInfo;
 import net.osmand.aidlapi.gpx.AGpxSearchResult;
 import net.osmand.aidlapi.gpx.GpxSearchParams;
 import net.osmand.aidlapi.gpx.GpxPointsParams;
+import net.osmand.aidlapi.info.AApiAccess;
 import net.osmand.aidlapi.info.AMapWidgetValue;
 import net.osmand.aidlapi.info.AMapWidgetsLayout;
 import net.osmand.aidlapi.info.MapWidgetsLayoutParams;
@@ -806,6 +807,18 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			} catch (Exception e) {
 				handleException(e);
 				return false;
+			}
+		}
+
+		@Override
+		public AApiAccess getApiAccess() {
+			try {
+				// not through getApi: an app without access asks here why its calls are refused
+				String packName = getCallingAppPackName();
+				return packName != null ? getApp().getAidlApi().getApiAccess(packName) : null;
+			} catch (Exception e) {
+				handleException(e);
+				return null;
 			}
 		}
 

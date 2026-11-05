@@ -38,6 +38,7 @@ import net.osmand.aidlapi.map.MapFlyoverParams;
 import net.osmand.aidlapi.map.AFlyoverFile;
 import net.osmand.aidlapi.map.FlyoverFileParams;
 import net.osmand.aidlapi.map.AMapScreenshot;
+import net.osmand.aidlapi.info.AApiAccess;
 import net.osmand.aidlapi.info.AMapWidgetValue;
 import net.osmand.aidlapi.info.AMapWidgetsLayout;
 import net.osmand.aidlapi.info.MapWidgetsLayoutParams;
@@ -1049,4 +1050,13 @@ interface IOsmAndAidlInterface {
      * Replace the widgets of one panel: add, remove, reorder widgets and pages, as Configure screen does.
      */
     boolean setMapWidgetsPanel(in SetMapWidgetsPanelParams params);
+
+    /**
+     * Access of the calling app: whether it is turned on in OsmAnd's Connected apps, and the permission groups
+     * with their methods and whether each is granted. Other methods return false or null to an app without access
+     * to them; this one answers any bound app, a turned off one too.
+     *
+     * @return AApiAccess; null from an OsmAnd without this method
+     */
+    AApiAccess getApiAccess();
 }
