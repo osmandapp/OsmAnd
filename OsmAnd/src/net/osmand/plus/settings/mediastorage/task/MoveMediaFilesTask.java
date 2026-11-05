@@ -299,30 +299,31 @@ public class MoveMediaFilesTask extends AsyncTask<Void, Object, Map<String, Pair
 		}
 		logDebug("Move media deleting old sources: count=" + sourcesToDelete.size());
 		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Boolean>() {
-			private final List<Recording> deletedRecordings = new ArrayList<>();
+			private final List<Recording> recordingsToDelete = new ArrayList<>();
 
 			@Override
 			protected Boolean doInBackground(Void... params) {
-				return deleteMovedSources(sourcesToDelete, deletedRecordings);
+				return deleteMovedSources(sourcesToDelete, recordingsToDelete);
 			}
 
 			@Override
 			protected void onPostExecute(Boolean success) {
-				unregisterRecordings(deletedRecordings);
+				deleteRecordings(recordingsToDelete);
 				callback.processResult(success);
 			}
 		});
 	}
 
-	private boolean deleteMovedSources(@NonNull List<MediaSource> sourcesToDelete, @NonNull List<Recording> deletedRecordings) {
+	private boolean deleteMovedSources(@NonNull List<MediaSource> sourcesToDelete, @NonNull List<Recording> recordingsToDelete) {
 		boolean failed = false;
 		for (MediaSource source : sourcesToDelete) {
+			Recording recording = getRecording(source);
+			if (recording != null) {
+				recordingsToDelete.add(recording);
+				continue;
+			}
 			try {
-				Recording recording = getRecording(source);
 				source.delete();
-				if (recording != null) {
-					deletedRecordings.add(recording);
-				}
 			} catch (IOException e) {
 				failed = true;
 				log.warn("Failed to delete moved media source: " + source.getId(), e);
@@ -339,12 +340,12 @@ public class MoveMediaFilesTask extends AsyncTask<Void, Object, Map<String, Pair
 		return sameFile ? recording : null;
 	}
 
-	private void unregisterRecordings(@NonNull List<Recording> recordings) {
-		// The A/V notes plugin indexes its folder only on startup: drop the deleted originals
-		// from its index, otherwise they are listed next to their moved copies until a restart.
+	private void deleteRecordings(@NonNull List<Recording> recordings) {
+		// The A/V notes plugin indexes its folder only on startup: delete its notes through it,
+		// otherwise the deleted originals are listed next to their moved copies until a restart.
 		if (recordingsHelper != null) {
 			for (Recording recording : recordings) {
-				recordingsHelper.unregisterRecording(recording);
+				recordingsHelper.deleteRecording(recording);
 			}
 		}
 	}

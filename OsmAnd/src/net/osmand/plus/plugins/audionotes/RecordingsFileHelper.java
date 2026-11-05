@@ -118,15 +118,11 @@ public class RecordingsFileHelper {
 	}
 
 	public void deleteRecording(@NonNull Recording recording) {
-		unregisterRecording(recording);
-		Algorithms.removeAllFiles(recording.getFile());
-	}
-
-	public void unregisterRecording(@NonNull Recording recording) {
 		recordings.unregisterObject(recording.getLatitude(), recording.getLongitude(), recording);
 		Map<String, Recording> newMap = new LinkedHashMap<>(recordingByFileName);
 		newMap.remove(recording.getFile().getName());
 		recordingByFileName = newMap;
+		Algorithms.removeAllFiles(recording.getFile());
 	}
 
 	public void updateRecordingFileName(@NonNull String oldFileName, @NonNull Recording recording) {
