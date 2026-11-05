@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="update_maps_to_use_new_search">Update maps to use the new search (%1$s)</string>
 	<string name="free_region_not_chosen_descr">The region of your first downloaded map becomes your free region.</string>
 	<string name="free_region_banner_descr">All maps of %1$s are free.</string>
 	<string name="free_region_other_title">%1$s is not your free region</string>
