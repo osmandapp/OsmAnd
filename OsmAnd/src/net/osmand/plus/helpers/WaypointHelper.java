@@ -345,7 +345,7 @@ public class WaypointHelper {
 
 	@Nullable
 	public AlarmInfo calculateSpeedLimitAlarm(@NonNull RouteDataObject object, @NonNull Location location, @NonNull SpeedConstants constants, boolean whenExceeded) {
-		float maxSpeed = object.getMaximumSpeed(object.bearingVsRouteDirection(location), appMode.getRouteTypeProfile());
+		float maxSpeed = object.getMaximumSpeed(object.bearingVsRouteDirection(location), getSelectedRouteTypeProfile());
 		float delta = whenExceeded ? settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f : maxSpeed * -1;
 		return createSpeedAlarm(constants, maxSpeed, location, delta);
 	}
@@ -353,7 +353,7 @@ public class WaypointHelper {
 	@Nullable
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc,
 	                                             SpeedConstants sc, boolean showCameras) {
-		float maxSpeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc), appMode.getRouteTypeProfile());
+		float maxSpeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc), getSelectedRouteTypeProfile());
 		float delta = settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(sc, maxSpeed, loc, delta);
 		if (speedAlarm != null) {
@@ -393,6 +393,12 @@ public class WaypointHelper {
 			}
 		}
 		return speedAlarm;
+	}
+
+	// appMode is updated only with a new route, while the road under the position
+	// has to follow the profile selected now, e.g. in free drive after switching Truck to Car
+	private int getSelectedRouteTypeProfile() {
+		return settings.getApplicationMode().getRouteTypeProfile();
 	}
 
 	public void announceVisibleLocations() {

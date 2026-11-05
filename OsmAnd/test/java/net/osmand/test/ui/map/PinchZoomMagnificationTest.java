@@ -20,10 +20,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.Zoom;
 import net.osmand.test.common.AndroidTest;
 
 import org.junit.After;
@@ -115,6 +117,37 @@ public class PinchZoomMagnificationTest extends AndroidTest {
 		assertEquals(1f, pinchInAndGetMagnificationScale(), 0.001f);
 	}
 
+	@Test
+	public void releasedZoomPersistsAcrossMagnifiedPinches() {
+		getScenario().onActivity(activity -> settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.set(true));
+		assertMagnified(pinchInAndGetMagnificationScale());
+		float firstZoom = getCommittedZoom();
+		assertTrue("First pinch did not commit its zoom", firstZoom > ZOOM + 0.8f);
+
+		assertMagnified(pinchInAndGetMagnificationScale(false));
+		float secondZoom = getCommittedZoom();
+		assertTrue("Second pinch did not start from the released zoom", secondZoom > firstZoom + 0.8f);
+	}
+
+	private float getCommittedZoom() {
+		AtomicReference<Float> zoom = new AtomicReference<>();
+		getScenario().onActivity(activity -> {
+			OsmandMapTileView mapView = getMapView();
+			float rendererZoom = getRendererZoom(mapView);
+			assertEquals("Released zoom still contains a gesture animation", 0f, mapView.getZoomAnimation(), 0.0001f);
+			assertEquals("Current zoom differs from the renderer", rendererZoom,
+					(float) mapView.getCurrentRotatedTileBox().getFullZoom(), 0.0001f);
+			zoom.set(rendererZoom);
+		});
+		return zoom.get();
+	}
+
+	private static float getRendererZoom(@NonNull OsmandMapTileView mapView) {
+		MapRendererView renderer = mapView.getMapRenderer();
+		assertNotNull(renderer);
+		return renderer.getZoomLevel().ordinal() + Zoom.visualToFloatPart(renderer.getVisualZoom());
+	}
+
 	@NonNull
 	private ActivityScenario<MapActivity> getScenario() {
 		return scenarioRule.getScenario();
@@ -140,12 +173,20 @@ public class PinchZoomMagnificationTest extends AndroidTest {
 	 * while both fingers are still down.
 	 */
 	private float pinchInAndGetMagnificationScale() {
+		return pinchInAndGetMagnificationScale(true);
+	}
+
+	private float pinchInAndGetMagnificationScale(boolean resetZoom) {
 		OsmandMapTileView mapView = getMapView();
 		AtomicReference<float[]> center = new AtomicReference<>();
+		AtomicReference<Float> initialZoom = new AtomicReference<>();
 		getScenario().onActivity(activity -> {
 			app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 			mapView.setLatLon(LAT, LON);
-			mapView.setIntZoom(ZOOM);
+			if (resetZoom) {
+				mapView.setIntZoom(ZOOM);
+			}
+			initialZoom.set(getRendererZoom(mapView));
 			mapView.refreshMap();
 			View view = mapView.getView();
 			assertNotNull(view);
@@ -165,9 +206,20 @@ public class PinchZoomMagnificationTest extends AndroidTest {
 			injectPinch(downTime, MotionEvent.ACTION_MOVE, x, y, halfDistance, 2);
 		}
 		AtomicReference<Float> scale = new AtomicReference<>();
-		InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> scale.set(mapView.getMagnificationScale()));
+		InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
+			scale.set(mapView.getMagnificationScale());
+			if (scale.get() > 1f) {
+				assertEquals("Magnification reset the zoom from the previous gesture", initialZoom.get(),
+						getRendererZoom(mapView), 0.0001f);
+			}
+		});
 
 		injectPinch(downTime, pointerAction(MotionEvent.ACTION_POINTER_UP), x, y, END_HALF_DISTANCE, 2);
+		float releasedZoom = getCommittedZoom();
+		if (scale.get() > 1f) {
+			assertEquals("Released zoom did not retain the viewport magnification", 1f,
+					releasedZoom - initialZoom.get(), 0.1f);
+		}
 		injectPinch(downTime, MotionEvent.ACTION_UP, x, y, END_HALF_DISTANCE, 1);
 		SystemClock.sleep(1000);
 		return scale.get();

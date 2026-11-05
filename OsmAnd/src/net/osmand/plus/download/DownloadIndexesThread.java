@@ -474,6 +474,9 @@ public class DownloadIndexesThread {
 					String name = item.getBasename();
 					int count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
 					item.setDownloaded(true);
+					// the file may be reindexed only when the queue is done, show it as up to date already
+					item.setOutdated(false);
+					item.setLocalTimestamp(item.getTimestamp());
 					HistoryDownloadEntry entry = new HistoryDownloadEntry(name, count);
 					if (count == 1) {
 						dbHelper.add(entry, DatabaseHelper.DOWNLOAD_ENTRY);

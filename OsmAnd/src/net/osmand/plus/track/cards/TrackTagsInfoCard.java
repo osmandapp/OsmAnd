@@ -84,7 +84,7 @@ public class TrackTagsInfoCard extends BaseMetadataCard {
 	@Override
 	@StringRes
 	protected int getTitleId() {
-		return R.string.poi_information;
+		return R.string.external_device_details_information;
 	}
 
 	@Override

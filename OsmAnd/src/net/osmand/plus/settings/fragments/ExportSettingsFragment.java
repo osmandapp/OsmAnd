@@ -5,6 +5,7 @@ import static net.osmand.plus.settings.backend.backup.exporttype.ExportType.MAP_
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
@@ -202,8 +204,21 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		File tempDir = FileUtils.getTempDir(app);
 		String fileName = getFileName();
 		List<SettingsItem> items = app.getFileSettingsHelper().prepareSettingsItems(getSelectedData(), Collections.emptyList(), true);
-		progress.setMax(getMaxProgress(items));
-		app.getFileSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
+		// the size of a folder item walks all its files (tile caches hold thousands), which froze the main thread
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Integer>() {
+			@Override
+			protected Integer doInBackground(Void... params) {
+				return getMaxProgress(items);
+			}
+
+			@Override
+			protected void onPostExecute(Integer maxProgress) {
+				if (isAdded() && progress != null && progress.isShowing()) {
+					progress.setMax(maxProgress);
+					app.getFileSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
+				}
+			}
+		});
 	}
 
 	private int getMaxProgress(List<SettingsItem> items) {

@@ -34,7 +34,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	double score; // set by sortResults(), see SpatialSearchRanking
 
 	private static final List<String> FILTER_DUPLICATE_POI_SUBTYPE = new ArrayList<String>(
-			Arrays.asList("building", "internet_access_yes", "atm"));
+			Arrays.asList("building", "historic_building", "internet_access_yes", "atm"));
 	final int ZOOM_SIMILARITY_70_KM = 9 - 8; // 1 symbol - tile z=9 - 1 pixel of z=1
 	final int ZOOM_SIMILARITY_10_KM = 12 - 8; // 2 symbols - tile z=12
 	final int ZOOM_SIMILARITY_1_KM = 15 - 8; // 3 symbols
@@ -222,6 +222,20 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	public SpatialPoiType getPoiCategory(SpatialPoiSearch poiSearch) {
 		if (!objs.isEmpty() && objs.get(0).isPoiCategory()) {
 			return poiSearch.getById((int) objs.get(0).atom.id);
+		}
+		return null;
+	}
+
+	// the category name the query words matched: "schu" -> Schule
+	public String getPoiCategoryMatchedName(SpatialPoiSearch poiSearch) {
+		SpatialPoiType category = getPoiCategory(poiSearch);
+		if (category == null) {
+			return null;
+		}
+		for (String name : category.names) {
+			if (objs.get(0).tokens.stream().allMatch(t -> t.getMainCollator().matches(name))) {
+				return category.getOriginalName(name);
+			}
 		}
 		return null;
 	}

@@ -277,6 +277,7 @@ public class MapRendererContext {
 			setMapBackgroundColor();
 		}
 		setSkyAndFogColors();
+		updateShadows();
 		PluginsHelper.updateMapPresentationEnvironment(this);
 	}
 
@@ -524,6 +525,7 @@ public class MapRendererContext {
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
 		updateElevationConfiguration();
+		updateShadows();
 
 		if (obfMapRasterLayerProvider != null) {
 			mapRendererView.resetMapLayerProvider(providerType.layerIndex);
@@ -604,6 +606,13 @@ public class MapRendererContext {
 			if (mapRenderer.remove3DObjectColor(pointI)) {
 				highlight3dObjects.remove(latLon);
 			}
+		}
+	}
+
+	public void updateShadows() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView != null) {
+			mapRendererView.castShadows(app.getSettings().CAST_SHADOWS.get());
 		}
 	}
 

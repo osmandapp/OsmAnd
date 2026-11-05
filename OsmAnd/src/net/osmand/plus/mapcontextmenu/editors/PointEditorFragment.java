@@ -55,6 +55,8 @@ import java.util.Map;
 
 public abstract class PointEditorFragment extends EditorFragment {
 
+	private static final String SELECTED_GROUP_KEY = "editor_selected_group";
+
 	private TextView addDelDescription;
 	private TextView addAddressBtn;
 	private TextView addToHiddenGroupInfo;
@@ -75,6 +77,28 @@ public abstract class PointEditorFragment extends EditorFragment {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.point_editor_fragment;
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (selectedGroup != null) {
+			outState.putString(SELECTED_GROUP_KEY, selectedGroup.getName());
+		}
+	}
+
+	@Override
+	protected void restoreEditorState(@NonNull Bundle savedInstanceState) {
+		super.restoreEditorState(savedInstanceState);
+		String groupName = savedInstanceState.getString(SELECTED_GROUP_KEY);
+		if (groupName != null) {
+			for (PointsGroup group : getPointsGroups().values()) {
+				if (groupName.equals(group.getName())) {
+					selectedGroup = group;
+					break;
+				}
+			}
+		}
 	}
 
 	@SuppressLint("ClickableViewAccessibility")

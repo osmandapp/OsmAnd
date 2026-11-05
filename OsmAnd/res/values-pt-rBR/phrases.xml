@@ -1491,7 +1491,7 @@
     <string name="poi_automated_yes">Automatizado: sim</string>
     <string name="poi_automated_no">Automatizado: não</string>
     <string name="poi_full_service_yes">Serviço completo</string>
-    <string name="poi_car_wash_no">Lava-Jato: Não: não</string>
+    <string name="poi_car_wash_no">Lava-Jato: Não</string>
     <string name="poi_aeroway_fuel">Estação de combustível de aeronaves</string>
     <string name="poi_public_bath">Banho público</string>
     <string name="poi_male_yes">Masculino</string>
@@ -3552,9 +3552,9 @@
     <string name="poi_hazard_additional_minefield">Campo minado</string>
     <string name="poi_hazard_additional_contamination">Contaminação</string>
     <string name="poi_defibrillator_location">Localização</string>
-    <string name="poi_changing_table_yes">Trocador de fraldas: sim: sim</string>
-    <string name="poi_changing_table_no">Trocador de fraldas: não: não</string>
-    <string name="poi_changing_table_limited">Trocador de fraldas: limitado: limitado</string>
+    <string name="poi_changing_table_yes">Trocador de fraldas: sim</string>
+    <string name="poi_changing_table_no">Trocador de fraldas: não</string>
+    <string name="poi_changing_table_limited">Trocador de fraldas: limitado</string>
     <string name="poi_changing_table_location_room">Localização do trocador de fraldas: quarto</string>
     <string name="poi_changing_table_location_male_toilet">Localização do trocador de fraldas: banheiro masculino</string>
     <string name="poi_changing_table_location_female_toilet">Localização do trocador de fraldas: banheiro feminino</string>

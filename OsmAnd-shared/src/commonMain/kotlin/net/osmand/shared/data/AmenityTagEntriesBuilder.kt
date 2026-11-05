@@ -10,29 +10,22 @@ object AmenityTagEntriesBuilder {
 	const val TRANSLATIONS_SEPARATOR = " • "
 	private const val YES = "yes"
 
+	enum class ValueLabel {
+		NAME_OVER_VALUE, NAME, WHOLE
+	}
+
+	data class ValueLabelParts(val tagName: String?, val tagValue: String)
+
 	@JvmStatic
 	fun buildPoiTypesGroupEntry(
 		key: String, name: String?, textPrefix: String?, types: List<PoiType>, order: Int, iconId: Int,
 		iconNameCandidates: List<String>, fallbackIconId: Int, poiAdditional: Boolean,
 		collapsableCategory: PoiCategory?
 	): AmenityTagEntry {
-		var prefix = textPrefix
-		val text: String
-		val nameValues = if (poiAdditional && types.isNotEmpty()) types.map { splitNameValue(it.getTranslation()) } else emptyList()
-		val propertyName = nameValues.firstOrNull()?.first
-		if (propertyName != null && isOneTagGroup(types[0])
-			&& nameValues.all { it != null && it.first.equals(propertyName, ignoreCase = true) }) {
-			// values of one property: "Smoking: no" -> "Smoking" over "No"
-			prefix = propertyName
-			text = nameValues.joinToString(TRANSLATIONS_SEPARATOR) {
-				KAlgorithms.capitalizeFirstLetter(it!!.second) ?: it.second
-			}
-		} else if (poiAdditional) {
-			// options of a list: "Rented boats" over "Kayaks"
-			text = types.joinToString(TRANSLATIONS_SEPARATOR) { getGroupValueLabel(it) }
-		} else {
-			text = types.joinToString(TRANSLATIONS_SEPARATOR) { it.getTranslation() }
-		}
+		val parts = if (poiAdditional) types.map { getValueLabelParts(it) } else null
+		val prefix = parts?.firstNotNullOfOrNull { it.tagName } ?: textPrefix
+		val text = parts?.joinToString(TRANSLATIONS_SEPARATOR) { it.tagValue }
+			?: types.joinToString(TRANSLATIONS_SEPARATOR) { it.getTranslation() }
 		return AmenityTagEntry.Builder(key)
 			.setName(name)
 			.setTextPrefix(prefix)
@@ -68,15 +61,28 @@ object AmenityTagEntriesBuilder {
 		return if (name.none { it.isLetter() } || value.isEmpty()) null else Pair(name, value)
 	}
 
-	/**
-	 * A value inside a group of several values: "Kayaks" for yes, "Kayaks: limited" otherwise, "Cash" as it is.
-	 */
 	@JvmStatic
-	fun getGroupValueLabel(type: PoiType): String {
-		val translation = type.getTranslation()
-		val nameValue = splitNameValue(translation) ?: return translation
-		return if (isYesValue(type)) nameValue.first else translation
+	fun getValueLabel(type: PoiType): ValueLabel = when {
+		isOneTagGroup(type) -> ValueLabel.NAME_OVER_VALUE
+		isYesValue(type) -> ValueLabel.NAME
+		else -> ValueLabel.WHOLE
 	}
+
+	@JvmStatic
+	fun getValueLabelParts(translation: String, label: ValueLabel): ValueLabelParts {
+		val nameValue = if (label == ValueLabel.WHOLE) null else splitNameValue(translation)
+		return when {
+			nameValue == null -> ValueLabelParts(null, translation)
+			label == ValueLabel.NAME -> ValueLabelParts(null, nameValue.first)
+			else -> ValueLabelParts(
+				nameValue.first, KAlgorithms.capitalizeFirstLetter(nameValue.second) ?: nameValue.second
+			)
+		}
+	}
+
+	@JvmStatic
+	fun getValueLabelParts(type: PoiType): ValueLabelParts =
+		getValueLabelParts(type.getTranslation(), getValueLabel(type))
 
 	// all values of the group are one tag (smoking=yes/no/outside), not a list of options (boat:kayak:rental, ...)
 	private fun isOneTagGroup(type: PoiType): Boolean {

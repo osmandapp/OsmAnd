@@ -3,7 +3,9 @@ package net.osmand.shared.data
 import net.osmand.shared.data.Amenity.Companion.ALT_NAME_WITH_LANG_PREFIX
 import net.osmand.shared.data.Amenity.Companion.COLLAPSABLE_PREFIX
 import net.osmand.shared.data.Amenity.Companion.LANG_YES
+import net.osmand.shared.data.Amenity.Companion.MAPILLARY
 import net.osmand.shared.data.Amenity.Companion.NOTE
+import net.osmand.shared.data.Amenity.Companion.PANORAMAX
 import net.osmand.shared.data.Amenity.Companion.ROUTE
 import net.osmand.shared.data.Amenity.Companion.SUBTYPE
 import net.osmand.shared.data.Amenity.Companion.TYPE
@@ -322,7 +324,7 @@ class AdditionalInfoBundle(
 
 	fun isKeyToSkip(key: String): Boolean =
 		KCollectionUtils.startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX, LANG_YES)
-				|| KCollectionUtils.equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary", "subway_region")
+				|| KCollectionUtils.equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", MAPILLARY, PANORAMAX, "subway_region")
 				|| MapObject.isNameLangTag(key)
 				|| key.contains(ROUTE)
 

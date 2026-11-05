@@ -88,7 +88,7 @@
     <string name="poi_speed_camera">Hitrostna kamera</string>
     <string name="poi_junction">Križišče</string>
     <string name="poi_rest_area">Počivališče</string>
-    <string name="poi_water_well">Vodni vir</string>
+    <string name="poi_water_well">Vodnjak</string>
     <string name="poi_dam">Pregradni jez</string>
     <string name="poi_watermill">Mlin na vodo</string>
     <string name="poi_post_office">Pošta;pogodbena pošta;poštna poslovalnica</string>
@@ -1616,7 +1616,7 @@
     <string name="poi_second_hand_no">Brez rabljenega blaga</string>
     <string name="poi_automated_yes">Avtomatsko: da</string>
     <string name="poi_brushless_yes">Brezkrtačni: da</string>
-    <string name="poi_car_wash_no">Avtopralnica: ne: ne</string>
+    <string name="poi_car_wash_no">Avtopralnica: ne</string>
     <string name="poi_indoor_no">Zunanje</string>
     <string name="poi_toilets_yes">Stranišča: da</string>
     <string name="poi_toilets_wheelchair_no">Dostop do stranišč za invalidske vozičke: ne</string>
@@ -2021,7 +2021,7 @@
     <string name="poi_internet_access_type_yes">Z internetnim dostopom</string>
     <string name="poi_shelter_type_lean_to">Prizidek</string>
     <string name="poi_shelter_type_picnic_shelter">Piknik</string>
-    <string name="poi_bin_no">Brez košare</string>
+    <string name="poi_bin_no">Smetnjak: ne</string>
     <string name="poi_bench_yes">Klop: da</string>
     <string name="poi_flagpole">Drog za zastavo</string>
     <string name="poi_cypress">Cipresa</string>
@@ -2057,7 +2057,7 @@
     <string name="poi_beach_shingle">Prodna</string>
     <string name="poi_beach_rocky">Skalnata</string>
     <string name="poi_bench_no">Klop: ne</string>
-    <string name="poi_bin_yes">S košaro</string>
+    <string name="poi_bin_yes">Smetnjak: da</string>
     <string name="poi_shelter_type_public_transport">Javni prevoz</string>
     <string name="poi_shelter_type_weather_shelter">Vremensko zatočišče</string>
     <string name="poi_shelter_type_basic_hut">Navadna koliba;Bivak</string>
@@ -2387,7 +2387,7 @@
     <string name="poi_dog_yes">Psi: da</string>
     <string name="poi_dog_no">Psi: ne</string>
     <string name="poi_social_facility_group_home">Skupinski dom</string>
-    <string name="poi_social_facility_shelter">Zavetišče</string>
+    <string name="poi_social_facility_shelter">Zavetje</string>
     <string name="poi_social_facility_ambulatory_care">Ambulantna oskrba</string>
     <string name="poi_social_facility_for_child">Za otroke</string>
     <string name="poi_social_facility_for_orphan">Za sirote</string>
@@ -3621,7 +3621,7 @@
     <string name="poi_rtsa_scale_2a">2A</string>
     <string name="poi_rtsa_scale_2a_asterisk">2A*</string>
     <string name="poi_rtsa_scale_2b">2B</string>
-    <string name="poi_changing_table_limited">Previjalna miza: omejeno: omejeno</string>
+    <string name="poi_changing_table_limited">Previjalna miza: omejeno</string>
     <string name="poi_taxi_office">Pisarna taksijev</string>
     <string name="poi_monastery_type_clerks_regular">Vrsta samostana: redovni duhovniški</string>
     <string name="poi_url">URL</string>
@@ -3673,9 +3673,9 @@
     <string name="poi_charcoal_pile">Oglarska kopa</string>
     <string name="poi_changing_table_count">Število miz za previjanje</string>
     <string name="poi_changing_table_location_female_toilet">Lokacija previjalne mize: žensko stranišče</string>
-    <string name="poi_changing_table_no">Previjalna miza: ne: ne</string>
+    <string name="poi_changing_table_no">Previjalna miza: ne</string>
     <string name="poi_defibrillator_location">Lokacija</string>
-    <string name="poi_changing_table_yes">Previjalna miza: da: da</string>
+    <string name="poi_changing_table_yes">Previjalna miza: da</string>
     <string name="poi_hazard_additional_contamination">Kontaminacija</string>
     <string name="poi_hazard_additional_minefield">Minsko polje</string>
     <string name="poi_hazard_additional_avalanche">Plaz</string>
@@ -4041,7 +4041,7 @@
     <string name="poi_water_source_tap">Pipa</string>
     <string name="poi_water_source_water_tank">Rezervoar za vodo</string>
     <string name="poi_water_source_powered_pump">Črpalka na pogon</string>
-    <string name="poi_water_source_well">Vodnjak</string>
+    <string name="poi_water_source_well">Izvir</string>
     <string name="poi_water_source_river">Reka</string>
     <string name="poi_water_source_lake">Jezero</string>
     <string name="poi_weighbridge">Mostna tehtnica;Tehtnica za tovornjake;Cestna tehtnica</string>
@@ -4348,7 +4348,7 @@
     <string name="poi_playground_swing">Gugalnica</string>
     <string name="poi_playground_spinning_circle">Vrteči krog</string>
     <string name="poi_playground_basketswing">Mrežasta gugalnica</string>
-    <string name="poi_playground_basketrotator">Vrtljiva košara</string>
+    <string name="poi_playground_basketrotator">Vrtljiv koš</string>
     <string name="poi_playground_tunnel_tube">Igralna cev</string>
     <string name="poi_playground_aerialrotator">Viseči vrtiljak</string>
     <string name="poi_playground_seesaw">Previsna gugalnica</string>
@@ -4583,7 +4583,7 @@
     <string name="poi_cemt_iii">III</string>
     <string name="poi_cemt_iv">IV</string>
     <string name="poi_surface_chipseal">Podlaga: chipseal</string>
-    <string name="poi_not_pt_shelter_yes">Zavetišče (ne za javni prevoz)</string>
+    <string name="poi_not_pt_shelter_yes">Zavetje (ne za javni prevoz)</string>
     <string name="poi_motorcar_designated">Avtomobil: določeno</string>
     <string name="poi_vehicle_designated">Namenjeno za vozila</string>
     <string name="poi_horse_designated">Namenjeno za konje</string>

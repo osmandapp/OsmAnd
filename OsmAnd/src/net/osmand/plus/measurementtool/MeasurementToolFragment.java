@@ -1442,8 +1442,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		MapActivity mapActivity = getMapActivity();
 		if (adjustMapPosition && mapActivity != null) {
 			QuadRect quadRect = gpxData.getRect();
-			mapActivity.getMapView().fitRectToMap(quadRect.left, quadRect.right, quadRect.top, quadRect.bottom,
-					((int) quadRect.width()), ((int) quadRect.height()), 0);
+			mapActivity.getMapView().fitRectToMap(quadRect.left, quadRect.right, quadRect.top, quadRect.bottom, 0, 0, 0);
 		}
 		adjustMapPosition = true;
 	}
@@ -2243,7 +2242,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 		QuadRect rect = gpxData.getRect();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		mapView.fitRectToMap(rect.left, rect.right, rect.top, rect.bottom, (int) rect.width(), (int) rect.height(), 0);
+		mapView.fitRectToMap(rect.left, rect.right, rect.top, rect.bottom, 0, 0, 0);
 
 		MeasurementEditingContext editingCtx = new MeasurementEditingContext(app);
 		editingCtx.setGpxData(gpxData);

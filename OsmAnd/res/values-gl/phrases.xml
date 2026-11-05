@@ -2124,7 +2124,7 @@
     <string name="poi_automated_no">Automatizado: non</string>
     <string name="poi_full_service_yes">Servizo completo</string>
     <string name="poi_brushless_no">Vasoira xiratoria: non</string>
-    <string name="poi_car_wash_no">Lavado de coches: non: non</string>
+    <string name="poi_car_wash_no">Lavado de coches: non</string>
     <string name="poi_male_yes">Homes</string>
     <string name="poi_male_no">Prohibido para homes</string>
     <string name="poi_female_yes">Mulleres</string>
@@ -3552,9 +3552,9 @@
     <string name="poi_hazard_additional_minefield">Perigo: campo minado</string>
     <string name="poi_hazard_additional_contamination">Perigo: contaminación</string>
     <string name="poi_defibrillator_location">Localización</string>
-    <string name="poi_changing_table_yes">Cambiador de cueiros: si: si</string>
-    <string name="poi_changing_table_no">Cambiador de cueiros: non: non</string>
-    <string name="poi_changing_table_limited">Cambiador de cueiros: limitado: limitado</string>
+    <string name="poi_changing_table_yes">Cambiador de cueiros: si</string>
+    <string name="poi_changing_table_no">Cambiador de cueiros: non</string>
+    <string name="poi_changing_table_limited">Cambiador de cueiros: limitado</string>
     <string name="poi_changing_table_location_room">Localización do cambiador de cueiros: sala aparte</string>
     <string name="poi_changing_table_location_male_toilet">Localización do cambiador de cueiros: no aseo masculino</string>
     <string name="poi_changing_table_location_female_toilet">Localización do cambiador de cueiros: no aseo feminino</string>

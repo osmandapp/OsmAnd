@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -136,7 +137,12 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	@NonNull
 	public String getTitle(@NonNull Context ctx) {
 		String message = getMessage();
-		return message != null ? message : ctx.getString(getMessageId());
+		String title = message != null ? message : ctx.getString(getMessageId());
+		if (getWidgetType().getGroup() == WidgetGroup.TRIP_RECORDING) {
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_colon,
+					ctx.getString(R.string.map_widget_monitoring), title);
+		}
+		return title;
 	}
 
 	@NonNull

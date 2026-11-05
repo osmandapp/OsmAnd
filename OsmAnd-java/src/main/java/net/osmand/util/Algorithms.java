@@ -785,6 +785,20 @@ public class Algorithms {
 		}
 	}
 
+	public static boolean streamCopy(InputStream in, OutputStream out, long maxSize) throws IOException {
+		byte[] b = new byte[BUFFER_SIZE];
+		long size = 0;
+		int read;
+		while ((read = in.read(b)) != -1) {
+			size += read;
+			if (size > maxSize) {
+				return false;
+			}
+			out.write(b, 0, read);
+		}
+		return true;
+	}
+
 
 	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor) throws IOException {
 		streamCopy(in, out, pg, bytesDivisor, null);
@@ -1034,6 +1048,11 @@ public class Algorithms {
 
 	public static boolean isInt(double d) {
 		return (d == Math.floor(d)) && !Double.isInfinite(d);
+	}
+
+	public static int roundToStep(int value, int min, int max, int step) {
+		int rounded = min + Math.round((float) (value - min) / step) * step;
+		return Math.max(min, Math.min(max, rounded));
 	}
 
 	public static boolean isInt(String value) {

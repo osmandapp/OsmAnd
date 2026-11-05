@@ -1664,7 +1664,7 @@
     <string name="poi_full_service_yes">Full service: yes</string>
     <string name="poi_brushless_yes">Borstlös: ja</string>
     <string name="poi_brushless_no">Borstlös: nej</string>
-    <string name="poi_car_wash_no">Biltvätt: nej: nej</string>
+    <string name="poi_car_wash_no">Biltvätt: nej</string>
     <string name="poi_public_bath">Offentligt bad</string>
     <string name="poi_male_yes">Hane</string>
     <string name="poi_male_no">Förbjudet för män</string>
@@ -3666,9 +3666,9 @@
     <string name="poi_changing_table_location_room">Plats för skötbord: rum</string>
     <string name="poi_changing_table_location_male_toilet">Plats för skötbord: toalett för män</string>
     <string name="poi_changing_table_location_female_toilet">Plats för skötbord: toalett för kvinnor</string>
-    <string name="poi_changing_table_limited">Skötbord: begränsat: begränsat</string>
-    <string name="poi_changing_table_no">Skötbord: nej: nej</string>
-    <string name="poi_changing_table_yes">Skötbord: ja: ja</string>
+    <string name="poi_changing_table_limited">Skötbord: begränsat</string>
+    <string name="poi_changing_table_no">Skötbord: nej</string>
+    <string name="poi_changing_table_yes">Skötbord: ja</string>
     <string name="poi_defibrillator_location">Plats</string>
     <string name="poi_hazard_additional_contamination">Förorening</string>
     <string name="poi_hazard_additional_minefield">Minfält</string>

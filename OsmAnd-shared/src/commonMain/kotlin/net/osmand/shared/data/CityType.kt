@@ -3,9 +3,8 @@ package net.osmand.shared.data
 /**
  * What kind of settlement a `place` tag names, and how big it is taken to be.
  *
- * A copy of `City.CityType` in OsmAnd-java, lifted out of `City`, which belongs to the address
- * section and is not copied yet. An amenity needs it to say which of the administrative areas it
- * sits in is worth showing.
+ * Based on `City.CityType` from OsmAnd-java. It is a separate enum shared by [City] and
+ * [Amenity], which uses it to choose which administrative area to display.
  */
 enum class CityType(private val radius: Double, private val population: Int) {
 

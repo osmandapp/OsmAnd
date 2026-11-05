@@ -83,6 +83,7 @@ import net.osmand.util.GeoPointParserUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -99,7 +100,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	static final int SUGGESTIONS_UPDATE_MSG_ID = OsmAndConstants.UI_HANDLER_CAR_SUGGESTIONS + 1;
 	private static final long SUGGESTIONS_UPDATE_DELAY_MS = 300;
 
-	static final String TAG = NavigationSession.class.getSimpleName();
+	static final String TAG = "NavigationSession";
 	static final String URI_SCHEME = "osmand";
 	static final String URI_HOST = "car_navigation";
 
@@ -141,6 +142,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private boolean carNavigationShouldBeActive; // it could set true before init navigationManager
 	private TripHelper tripHelper;
 	private CarSuggestionsHelper suggestionsHelper;
+	// a suggestion card tap or a navigation intent, kept until the purchase or the location permission
 	@Nullable
 	private Intent pendingSuggestionIntent;
 	@Nullable
@@ -264,6 +266,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 
 		app.onCarNavigationSessionStart(this);
+		// A location that arrived before the session started must not be lost:
+		// OsmAndLocationProvider.setLocationFromService() stores one only while the session has started
+		app.getLocationProvider().ensureLatestLocation();
 		app.getOsmandMap().getMapView().setupRenderingView();
 
 		if (!app.isAppInForegroundOnRootDevice()) {
@@ -469,7 +474,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				if (GeoActionHelper.isGeoActionUri(uri)) {
 					processGeoActionIntent(uri);
 				} else if (ACTION_NAVIGATE.equals(intent.getAction())) {
-					processNavigationIntent(uri);
+					processNavigationIntent(intent);
 				} else {
 					processDeepLinkActions(uri);
 				}
@@ -489,7 +494,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
-	private void processNavigationIntent(@NonNull Uri uri) {
+	private void processNavigationIntent(@NonNull Intent intent) {
+		Uri uri = intent.getData();
+		if (uri == null || retainIntentUntilAccess(intent)) {
+			return;
+		}
 		GeoParsedPoint point = GeoPointParserUtil.parse(uri.toString());
 		if (point != null) {
 			CarContext context = getCarContext();
@@ -517,14 +526,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
-	private void processSuggestionIntent(@NonNull Intent intent) {
-		if (!isStateAtLeast(State.CREATED)) {
-			return;
-		}
+	private boolean retainIntentUntilAccess(@NonNull Intent intent) {
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
 			pendingSuggestionIntent = intent;
-			LOG.info("Retaining suggestion intent until purchase is completed");
+			LOG.info("Retaining intent until purchase is completed");
 			if (requestPurchaseScreen != null) {
 				requestPurchaseScreen.getLifecycle().addObserver(new DefaultLifecycleObserver() {
 					@Override
@@ -535,11 +541,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					}
 				});
 			}
-			return;
+			return true;
 		}
 		if (!isLocationPermissionAvailable()) {
 			pendingSuggestionIntent = intent;
-			LOG.info("Retaining suggestion intent until permission is granted");
+			LOG.info("Retaining intent until permission is granted");
 			ScreenManager screenManager = getScreenManager();
 			Screen top = screenManager.getTop();
 			if (!(top instanceof RequestPermissionScreen)) {
@@ -552,9 +558,17 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					pendingSuggestionIntent = null;
 				}
 			});
-			return;
+			return true;
 		}
 		pendingSuggestionIntent = null;
+		return false;
+	}
+
+	private void processSuggestionIntent(@NonNull Intent intent) {
+		if (!isStateAtLeast(State.CREATED) || retainIntentUntilAccess(intent)) {
+			return;
+		}
+		OsmandApplication app = getApp();
 		if (isNavigationActive()) {
 			LOG.info("Ignoring suggestion intent: navigation is already active");
 			return;
@@ -585,7 +599,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (pendingSuggestionIntent != null) {
 			Intent intent = pendingSuggestionIntent;
 			pendingSuggestionIntent = null;
-			processSuggestionIntent(intent);
+			if (intent.hasExtra(CarSuggestionsHelper.EXTRA_SUGGESTION_POINT)) {
+				processSuggestionIntent(intent);
+			} else {
+				processNavigationIntent(intent);
+			}
 		}
 	}
 
@@ -642,6 +660,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
 			navigationCarSurface.setCallback(navigationScreen);
 		}
+		closeRoutePreviews();
 		getScreenManager().push(navigationScreen);
 		// navigation already started
 		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !carNavigationShouldBeActive) {
@@ -650,6 +669,20 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
+
+	/**
+	 * Navigation goes on top of the stack, so a preview under it would stay alive and fit the route to the map
+	 * on every recalculation. Closing it also returns the map to the state from before the preview.
+	 */
+	private void closeRoutePreviews() {
+		if (routingHelper.isFollowingMode()) {
+			for (Screen screen : new ArrayList<>(getScreenManager().getScreenStack())) {
+				if (screen instanceof RoutePreviewScreen) {
+					screen.finish();
+				}
+			}
+		}
+	}
 
 	@Override
 	public void stopNavigation() {

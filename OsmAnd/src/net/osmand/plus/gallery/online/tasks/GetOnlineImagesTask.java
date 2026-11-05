@@ -30,6 +30,7 @@ import net.osmand.shared.media.domain.MediaOrigin;
 import net.osmand.shared.panoramax.PanoramaxApi;
 import net.osmand.shared.wiki.WikiCoreHelper;
 import net.osmand.shared.wiki.WikiCoreHelper.NetworkResponseListener;
+import net.osmand.shared.wiki.WikiCoreHelper.WikiImagesResult;
 import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 
@@ -93,8 +94,11 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 				httpPms.put("lang", preferredLang);
 			}
 
-			List<WikiImage> wikimediaImageList = WikiCoreHelper.INSTANCE.getWikiImageList(params, networkResponseListener);
-			for (WikiImage wikiImage : wikimediaImageList) {
+			WikiImagesResult wikimedia = WikiCoreHelper.INSTANCE.loadWikiImages(params, networkResponseListener);
+			if (wikimedia.getFailed()) {
+				holder.markIncomplete();
+			}
+			for (WikiImage wikiImage : wikimedia.getImages()) {
 				holder.addItem(WIKIMEDIA, RemoteMediaFactory.fromWikiImage(wikiImage));
 			}
 			String key = params.remove(Amenity.MAPILLARY);
@@ -120,15 +124,19 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 						}
 					} else {
 						LOG.warn(panoramaxResponse.getError());
+						holder.markIncomplete();
 					}
 				} catch (Exception e) {
 					LOG.error(e);
+					holder.markIncomplete();
 				}
 			}
 			httpPms.putAll(params);
 			String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place", httpPms,
 					"Requesting location images...", false, false);
-			if (!Algorithms.isEmpty(response)) {
+			if (Algorithms.isEmpty(response)) {
+				holder.markIncomplete();
+			} else {
 				JSONObject obj = new JSONObject(response);
 				JSONArray images = obj.getJSONArray("features");
 				if (images.length() > 0) {
@@ -151,6 +159,7 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 			}
 		} catch (Exception e) {
 			LOG.error(e);
+			holder.markIncomplete();
 		}
 
 		return holder;

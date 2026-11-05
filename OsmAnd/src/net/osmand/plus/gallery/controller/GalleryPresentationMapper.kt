@@ -62,6 +62,8 @@ class GalleryPresentationMapper(
 
 	fun statsText(stats: MediaLibraryStats): String {
 		val counts = app.getString(R.string.gallery_stats_counts, stats.photos, stats.videos, stats.audios)
+		// Files that are missing on disk have no size, and formatSize() is empty for 0 bytes
+		if (stats.bytes <= 0) return counts
 		val size = app.getString(
 			R.string.gallery_stats_size, AndroidUtils.formatSize(app, stats.bytes)
 		)

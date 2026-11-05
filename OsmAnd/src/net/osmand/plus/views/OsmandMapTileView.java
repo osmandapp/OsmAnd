@@ -1673,6 +1673,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public float normalizeElevationAngle(float elevationAngle) {
+		if (Float.isNaN(elevationAngle)) {
+			return DEFAULT_ELEVATION_ANGLE;
+		}
 		return elevationAngle > 90 ? 90f : Math.max(minAllowedElevationAngle, elevationAngle);
 	}
 
@@ -1835,14 +1838,37 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				marginTopPx, marginLeftPx, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false);
 	}
 
+	/**
+	 * Fits the rect into tileBoxWidthPx x tileBoxHeightPx and puts its center at the map center. Meant for a
+	 * menu that is a covered screen rect of MapDisplayPositionManager: the map center is in the middle of the
+	 * map part the menu leaves uncovered, and it follows the menu when the menu moves after the fit.
+	 */
+	public void fitRectToMapCenter(double left, double right, double top, double bottom,
+	                               int tileBoxWidthPx, int tileBoxHeightPx) {
+		RotatedTileBox tb = currentViewport.copy();
+		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
+				0, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false, true);
+	}
+
 	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
 			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, float border, boolean rotate) {
+		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
+				marginTopPx, marginLeftPx, rtl, border, rotate, false);
+	}
+
+	private void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
+			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, float border,
+			boolean rotate, boolean toMapCenter) {
 		int dx = marginLeftPx;
 		int dy = marginTopPx;
 		int tbw = (tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth());
 		int tbh = (tileBoxHeightPx > 0 ? tileBoxHeightPx : tb.getPixHeight());
 		if (rtl) {
 			dx = -dx;
+		}
+		if (mapActivity != null && mapActivity.getMapRouteInfoMenu().isVisible()) {
+			dx += (rtl ? tbw / 2 : tb.getPixWidth() - tbw / 2) - tb.getCenterPixelX();
+			dy += tbh / 2 - tb.getCenterPixelY();
 		}
 
 		tb.setPixelDimensions((int) (tbw * border), (int) (tbh * border));
@@ -2286,16 +2312,25 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
 			MapRendererView mapRenderer = getMapRenderer();
 			boolean completedAnimation = mapRenderer != null;
+			boolean wasMagnifying = magnifying;
 			magnifying = false;
 
 			if (completedAnimation) {
-                setCurrentZoom(0.0);
-				refreshMap();
-				if (isPinchZoomMagnificationEnabled) {
+				if (wasMagnifying) {
 					mapRenderer.setViewportScale(0.0, false);
 					mapRenderer.setViewportShift(0, 0, false);
-					changeZoomPosition((float) 0, 0);
+					// The magnification was only a viewport transform while the fingers
+					// were down. Commit that scale to camera zoom before ending the gesture.
+					float zoomDelta = (float) (Math.log(relativeToStart) / Math.log(2.0));
+					PointF zoomCenter = multiTouchSupport != null
+							? multiTouchSupport.getFirstPoint() : initialMultiTouchCenterPoint;
+					if (zoomCenter != null) {
+						zoomToAnimate(initialViewport, zoomDelta, (int) zoomCenter.x, (int) zoomCenter.y);
+					}
 				}
+				// Commit the final renderer zoom after converting viewport magnification.
+				setCurrentZoom(0.0);
+				refreshMap();
 			} else {
 				finishZoomAndRotationGesture();
 			}
@@ -2429,9 +2464,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onZoomStarted(PointF centerPoint) {
+			MapRendererView mapRenderer = getMapRenderer();
+			if (mapRenderer != null) {
+				setCurrentZoom(0.0);
+			}
 			initialMultiTouchCenterPoint = centerPoint;
 			initialViewport = getRotatedTileBox();
-			MapRendererView mapRenderer = getMapRenderer();
 			magnifying = false;
 			initialCenterLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport,
 					(int) initialMultiTouchCenterPoint.x, (int) initialMultiTouchCenterPoint.y);

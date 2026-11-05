@@ -49,6 +49,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	private static final int SEARCH_PRIORITY = SEARCH_ADDRESS_BY_NAME_PRIORITY;
 	private static final long POI_TYPES_IN_NAME_INDEX_EDITION = 1782864000000L; // 2026-07-01 UTC
+	private static final int[] INCREASED_SEARCH_RADIUS_KM = {500, 700};
 
 	private final MapPoiTypes poiTypes;
 	private final SpatialTextSearch spatialTextSearch = new SpatialTextSearch();
@@ -64,11 +65,18 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public boolean isSearchAvailable(SearchPhrase phrase) {
-		return !phrase.hasCustomSearchType(ObjectType.ONLINE_SEARCH);
+		return super.isSearchAvailable(phrase) && !phrase.hasCustomSearchType(ObjectType.ONLINE_SEARCH);
 	}
 
 	@Override
 	public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+		// poi categories are matched in the app language and English (poiTypes), the map language (Configure map)
+		// and the main language of the search location: "de" in Leipzig, "uk" of "uk,ru"
+		for (String lang : new String[] {phrase.getSettings().getLang(), phrase.getSettings().getRegionLang()}) {
+			if (!Algorithms.isEmpty(lang)) {
+				poiSearch.addLanguage(lang.split(",")[0]);
+			}
+		}
 		SpatialTextSearchSettings settings = createSpatialSettings(phrase);
 		List<BinaryMapIndexReader> files = getSpatialSearchFiles(phrase, settings);
 		if (Algorithms.isEmpty(files)) {
@@ -83,7 +91,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		LOG.info("Spatial search start call spatialTextSearch.searchAPI");
 		SpatialSearchResults results = spatialTextSearch.searchAPI(phrase.getFullSearchPhrase(), context);
 		LOG.info("Spatial search after call spatialTextSearch.searchAPI");
-		if (results.typoSuggestion != null && !resultMatcher.isCancelled()) {
+		if (results.typoSuggestion != null && phrase.isSearchTypeAllowed(ObjectType.SUGGESTION)
+				&& !resultMatcher.isCancelled()) {
 			// "did you mean": the corrected query, searched when the row is tapped
 			SearchResult suggestion = new SearchResult(phrase);
 			suggestion.objectType = ObjectType.SUGGESTION;
@@ -122,6 +131,9 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 				return false;
 			}
 			SearchResult searchResult = convertResult(phrase, context, spatialResult);
+			if (searchResult != null && !phrase.isSearchTypeAllowed(searchResult.objectType)) {
+				continue;
+			}
 			if (searchResult != null) {
 				publishWithParent(resultMatcher, searchResult);
 			} else {
@@ -229,12 +241,19 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 				? SpatialTextSearchSettings.defaultSettings()
 				: SpatialTextSearchSettings.suggestionSettings();
 		settings.LANG_DEDUPLICATE = phrase.getSettings().getLang();
+		settings.SEARCH_POI &= phrase.isSearchTypeAllowed(ObjectType.POI);
+		settings.SEARCH_POI_CATEGORIES &= phrase.isSearchTypeAllowed(ObjectType.POI_TYPE);
+		int increased = getIncreasedRadiusKm(phrase.getRadiusLevel());
+		if (increased > 0) {
+			settings.SUGGESTED_SEARCH_RADIUS_KM = Math.max(settings.SUGGESTED_SEARCH_RADIUS_KM, increased);
+		}
 		return settings;
 	}
 
 	@Override
 	public int getSearchPriority(SearchPhrase phrase) {
-		if (!phrase.isUnknownSearchWordPresent()
+		// the address tab lists are filtered by SpatialAddressByNameAPI and SpatialStreetByCityAPI
+		if (!phrase.isUnknownSearchWordPresent() || phrase.isAddressListFilter()
 				|| phrase.isLastWord(ObjectType.POI_TYPE, ObjectType.STREET)) {
 			return -1;
 		}
@@ -243,7 +262,23 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
-		return false;
+		return phrase.getRadiusLevel() <= INCREASED_SEARCH_RADIUS_KM.length;
+	}
+
+	@Override
+	public int getMinimalSearchRadius(SearchPhrase phrase) {
+		return createSpatialSettings(phrase).SUGGESTED_SEARCH_RADIUS_KM * 1000;
+	}
+
+	@Override
+	public int getNextSearchRadius(SearchPhrase phrase) {
+		int increased = getIncreasedRadiusKm(phrase.getRadiusLevel() + 1);
+		return increased > 0 ? increased * 1000 : getMinimalSearchRadius(phrase);
+	}
+
+	private static int getIncreasedRadiusKm(int radiusLevel) {
+		int ind = Math.min(radiusLevel, INCREASED_SEARCH_RADIUS_KM.length + 1) - 2;
+		return ind >= 0 ? INCREASED_SEARCH_RADIUS_KM[ind] : 0;
 	}
 
 	private SearchResult convertResult(SearchPhrase phrase, SpatialSearchContext context, SpatialSearchResult ssr) {
@@ -385,7 +420,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			localeName = PoiAdditionalLabels.getSearchName(poiType);
 		} else if (spatialPoiType.poiSubType != null) {
 			object = new TopIndexFilter(spatialPoiType.poiSubType, poiTypes, spatialPoiType.poiAdditional);
-			localeName = spatialPoiType.names.get(0);
+			// the value itself: the names list starts with the alternative names of the map (Lidl -> its name:fa)
+			localeName = spatialPoiType.poiAdditional;
 		} else {
 			return null;
 		}

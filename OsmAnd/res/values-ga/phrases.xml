@@ -205,7 +205,7 @@
     <string name="poi_automated_no">Uathoibrithe: ní hea</string>
     <string name="poi_full_service_yes">Seirbhís iomlán</string>
     <string name="poi_brushless_no">Gan scuab: níl</string>
-    <string name="poi_car_wash_no">Nigh carr: níl: ní hea</string>
+    <string name="poi_car_wash_no">Nigh carr: níl</string>
     <string name="poi_female_yes">Baineann</string>
     <string name="poi_indoor_no">Amuigh faoin aer</string>
     <string name="poi_toilets_yes">Leithris: tá</string>
@@ -1145,7 +1145,7 @@
     <string name="poi_rtsa_scale_1a_asterisk">1A*</string>
     <string name="poi_rtsa_scale_1b">1B</string>
     <string name="poi_defibrillator_location">Suíomh</string>
-    <string name="poi_changing_table_yes">Tábla á athrú: yes: tá</string>
+    <string name="poi_changing_table_yes">Tábla á athrú: tá</string>
     <string name="poi_changing_table_location_room">Suíomh an tábla a athrú: seomra</string>
     <string name="poi_changing_table_location_female_toilet">Suíomh an tábla a athrú: leithreas baineann</string>
     <string name="poi_changing_table_location_unisex_toilet">Suíomh an tábla a athrú: leithreas unisex</string>
@@ -2424,8 +2424,8 @@
     <string name="poi_rtsa_scale_3b">3B</string>
     <string name="poi_hazard_additional_falling_rocks">Titim charraige</string>
     <string name="poi_hazard_additional_nuclear">Núicléach</string>
-    <string name="poi_changing_table_no">Tábla á athrú: níl: ní hea</string>
-    <string name="poi_changing_table_limited">Tábla á athrú: teoranta: teoranta</string>
+    <string name="poi_changing_table_no">Tábla á athrú: níl</string>
+    <string name="poi_changing_table_limited">Tábla á athrú: teoranta</string>
     <string name="poi_vehicle_yes">Rochtain ar fheithicil: tá</string>
     <string name="poi_vehicle_private">Rochtain ar fheithiclí: príobháideach</string>
     <string name="poi_vehicle_no">Rochtain ar fheithiclí: níl</string>

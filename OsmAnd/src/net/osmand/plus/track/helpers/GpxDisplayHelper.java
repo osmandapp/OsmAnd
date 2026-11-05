@@ -73,13 +73,17 @@ public class GpxDisplayHelper {
 		List<GpxDisplayGroup> displayGroups = new ArrayList<>();
 		String name = getGroupName(app, gpxFile);
 		if (gpxFile.getTracks().size() > 0) {
+			// counted over the whole file once, not again for every track
+			int nonEmptySegmentsCount = processTrack ? gpxFile.getNonEmptySegmentsCount() : 0;
+			int nonEmptyTracksCount = processTrack ? gpxFile.getNonEmptyTracksCount() : 0;
 			for (int i = 0; i < gpxFile.getTracks().size(); i++) {
 				TrackDisplayGroup group = buildTrackDisplayGroup(gpxFile, i, name, false);
 				if (processTrack) {
 					GpxDataItem dataItem = !Algorithms.isEmpty(gpxFile.getPath())
 							? app.getGpxDbHelper().getItem(new KFile(gpxFile.getPath())) : null;
 					boolean joinSegments = dataItem != null ? dataItem.getParameter(GpxParameter.JOIN_SEGMENTS) : false;
-					SplitTrackAsyncTask.processGroupTrack(app, group, null, joinSegments);
+					SplitTrackAsyncTask.processGroupTrack(app, group, null, joinSegments,
+							nonEmptySegmentsCount, nonEmptyTracksCount);
 				}
 				if (!Algorithms.isEmpty(group.getDisplayItems()) || !processTrack) {
 					displayGroups.add(group);

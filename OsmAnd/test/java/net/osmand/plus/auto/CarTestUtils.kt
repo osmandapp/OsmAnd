@@ -60,7 +60,7 @@ object CarTestUtils {
 		return result!!.getOrThrow()
 	}
 
-	private val TARGET_POINTS_BACKUP_FLOAT_KEYS = listOf(
+	private val TARGET_POINTS_BACKUP_DOUBLE_KEYS = listOf(
 		OsmandSettings.POINT_NAVIGATE_LAT_BACKUP,
 		OsmandSettings.POINT_NAVIGATE_LON_BACKUP,
 		OsmandSettings.START_POINT_LAT_BACKUP,
@@ -74,14 +74,14 @@ object CarTestUtils {
 		OsmandSettings.INTERMEDIATE_POINTS_DESCRIPTION_BACKUP
 	)
 
-	class TargetPointsBackup(val floats: Map<String, Float?>, val strings: Map<String, String?>)
+	class TargetPointsBackup(val doubles: Map<String, Double?>, val strings: Map<String, String?>)
 
 	fun saveTargetPointsBackup(app: OsmandApplication): TargetPointsBackup {
 		val api = app.settings.settingsAPI
 		val prefs = app.settings.globalPreferences
-		val floats = TARGET_POINTS_BACKUP_FLOAT_KEYS.associateWith { key ->
+		val doubles = TARGET_POINTS_BACKUP_DOUBLE_KEYS.associateWith { key ->
 			if (api.contains(prefs, key)) {
-				api.getFloat(prefs, key, 0f)
+				api.getDouble(prefs, key, 0.0)
 			} else {
 				null
 			}
@@ -93,14 +93,14 @@ object CarTestUtils {
 				null
 			}
 		}
-		return TargetPointsBackup(floats, strings)
+		return TargetPointsBackup(doubles, strings)
 	}
 
 	fun restoreTargetPointsBackup(app: OsmandApplication, backup: TargetPointsBackup) {
 		val editor = app.settings.settingsAPI.edit(app.settings.globalPreferences)
-		for ((key, value) in backup.floats) {
+		for ((key, value) in backup.doubles) {
 			if (value != null) {
-				editor.putFloat(key, value)
+				editor.putDouble(key, value)
 			} else {
 				editor.remove(key)
 			}

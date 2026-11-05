@@ -4020,14 +4020,14 @@
     <string name="write_bearing_description">Gem pejling for hvert sporpunkt under optagelse</string>
     <string name="feature_available_as_part_of_plan">%1$s tilgængelig som en del af %2$s-abonnementet</string>
     <string name="shared_string_included">Inkluderet</string>
-    <string name="map_widget_glide_average_desc">Viser det gennemsnitlige glidetal for det indstillede interval.</string>
+    <string name="map_widget_glide_average_desc">Viser det gennemsnitlige glidetal eller den gennemsnitlige vertikale hastighed for det indstillede interval.</string>
     <string name="average_glide_time_interval_desc">Angiv tidsintervallet for glide-gennemsnit.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="average_glide_ratio">Gennemsnitligt glidetal</string>
     <string name="glide_ratio_to_target">Glidetal til mål</string>
     <string name="map_widget_group_glide_ratio">Glidetal</string>
     <string name="map_widget_group_glide_desc">Moduler viser glidetal til målet eller gennemsnitlig glidetal for den aktuelle tur.</string>
-    <string name="map_widget_glide_target_desc">Viser det nødvendige glidetal for at nå målpunktet.</string>
+    <string name="map_widget_glide_target_desc">Viser det nødvendige glidetal for at nå målpunktet eller højden for målpunktet.</string>
     <string name="wheel_circumference">Hjulomkreds</string>
     <string name="external_sensor_name_property_description">Sensornavn</string>
     <string name="contact_us">Kontakt os</string>
@@ -5524,4 +5524,13 @@
     <string name="eta_adapt_to_my_speed_descr">Ankomsttidspunktet beregnes ud fra din hastighed de sidste %1$s.</string>
     <string name="eta_adapt_to_my_speed_off_descr">Ankomsttiden er baseret på den forventede hastighed på hver vejstrækning på ruten. Slå til for at basere den på, hvor hurtigt du rent faktisk bevæger dig.</string>
     <string name="select_tracks">Vælg spor</string>
+    <string name="cast_shadows">Skygger</string>
+    <string name="build_update_size">opd %1$s</string>
+    <string name="build_update_size_estimated">opd ~%1$s</string>
+    <string name="astro_ar_mode">AR-tilstand</string>
+    <string name="astro_camera_view">Kameravisning</string>
+    <string name="astro_reset_field_of_view">Nulstil synsfeltet</string>
+    <string name="cloud_file_name_too_long">Filnavnet er for langt til denne enhed. Omdøb det i OsmAnd Cloud</string>
+    <string name="average_vertical_speed">Gennemsnitlig vertikal hastighed</string>
+    <string name="public_transport_route_out_of_memory">Ruten med offentlig transport er for lang til at kunne beregnes på denne enhed. Vælg en destination, der ligger tættere på.</string>
 </resources>

@@ -15,8 +15,10 @@ import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class NetworkSettingsHelper extends SettingsHelper {
 
@@ -168,7 +170,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	private String collectFormattedWarnings(@NonNull List<SettingsItem> items) {
-		List<String> warnings = new ArrayList<>();
+		Set<String> warnings = new LinkedHashSet<>();
 		for (SettingsItem item : items) {
 			warnings.addAll(item.getWarnings());
 		}

@@ -29,6 +29,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapRendererView.MapRendererViewListener;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndConstants;
@@ -375,10 +376,21 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		if (surface != null) {
 			mapView.setView(surfaceView);
 		}
-		if (getApp().isApplicationInitializing()) {
+		// The renderer needs only the native core, like the phone map (OsmandMapTileView.setupRenderingView):
+		// waiting for the whole app init would show the non-OpenGL map with 2D icons for several seconds
+		if (getApp().isApplicationInitializing() && !NativeCoreContext.isInit()) {
 			getApp().getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
+				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+					if (event == AppInitEvents.NATIVE_OPEN_GL_INITIALIZED) {
+						init.removeListener(this);
+						setupOffscreenRenderer();
+					}
+				}
+
+				@Override
 				public void onFinish(@NonNull AppInitializer init) {
+					init.removeListener(this);
 					setupOffscreenRenderer();
 				}
 			});

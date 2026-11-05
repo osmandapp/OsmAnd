@@ -1429,7 +1429,8 @@ public class OpeningHoursParser {
 
 		@Override
 		public boolean isOpened24_7() {
-			boolean opened24_7 = isOpenedEveryDay();
+			// month or date ranges like "Oct-Mar off" don't cover the whole year (#11571)
+			boolean opened24_7 = isOpenedEveryDay() && isOpenedEveryMonth() && !hasDayMonths();
 
 			if (opened24_7) {
 				if (startTimes != null && startTimes.size() > 0) {
@@ -1456,6 +1457,15 @@ public class OpeningHoursParser {
 				}
 			}
 			return openedEveryDay;
+		}
+
+		public boolean isOpenedEveryMonth() {
+			for (int i = 0; i < 12; i++) {
+				if (!months[i]) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 		@Override

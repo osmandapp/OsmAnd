@@ -23,9 +23,11 @@ public class SunParametersController extends BaseDialogController {
 	private final SRTMPlugin plugin;
 	private final int initialAzimuth;
 	private final int initialAltitude;
+	private final boolean initialShadowsEnabled;
 
 	private int azimuth;
 	private int altitude;
+	private boolean shadowsEnabled;
 	private boolean applyChanges = false;
 
 	public SunParametersController(@NonNull OsmandApplication app, @NonNull SRTMPlugin plugin) {
@@ -33,8 +35,10 @@ public class SunParametersController extends BaseDialogController {
 		this.plugin = plugin;
 		this.initialAzimuth = plugin.HILLSHADE_SUN_AZIMUTH.get();
 		this.initialAltitude = plugin.HILLSHADE_SUN_ANGLE.get();
+		this.initialShadowsEnabled = app.getSettings().CAST_SHADOWS.get();
 		this.azimuth = initialAzimuth;
 		this.altitude = initialAltitude;
+		this.shadowsEnabled = initialShadowsEnabled;
 	}
 
 	@NonNull
@@ -53,6 +57,15 @@ public class SunParametersController extends BaseDialogController {
 		plugin.HILLSHADE_SUN_ANGLE.set(value);
 	}
 
+	public boolean isShadowsEnabled() {
+		return shadowsEnabled;
+	}
+
+	public void setShadowsEnabled(boolean enabled) {
+		shadowsEnabled = enabled;
+		app.getSettings().CAST_SHADOWS.set(enabled);
+	}
+
 	public void onApplyChanges() {
 		applyChanges = true;
 	}
@@ -62,6 +75,7 @@ public class SunParametersController extends BaseDialogController {
 		if (super.finishProcessIfNeeded(activity)) {
 			setAzimuth(applyChanges ? azimuth : initialAzimuth);
 			setAltitude(applyChanges ? altitude : initialAltitude);
+			setShadowsEnabled(applyChanges ? shadowsEnabled : initialShadowsEnabled);
 			return true;
 		}
 		return false;
@@ -84,7 +98,8 @@ public class SunParametersController extends BaseDialogController {
 	}
 
 	protected boolean hasChanges() {
-		return initialAzimuth != azimuth || initialAltitude != altitude;
+		return initialAzimuth != azimuth || initialAltitude != altitude
+				|| initialShadowsEnabled != shadowsEnabled;
 	}
 
 	public static void showDialog(@NonNull OsmandApplication app, @NonNull FragmentManager manager) {

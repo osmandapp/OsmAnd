@@ -68,7 +68,7 @@ import btools.routingapp.IBRouterService;
 public class RouteProvider {
 
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
-	private static final int MIN_STRAIGHT_DIST = 50000;
+	public static final int MIN_STRAIGHT_DIST = 50000;
 
 	private final GpxRouteHelper gpxRouteHelper = new GpxRouteHelper(this);
 
@@ -917,6 +917,9 @@ public class RouteProvider {
 		bundle.putString("trackFormat", "gpx");
 		bundle.putString("turnInstructionFormat", "osmand");
 		bundle.putString("acceptCompressedResult", "true");
+		if (params.start.hasBearing() && lats.length == 2) {
+			bundle.putInt("heading", Math.round(params.start.getBearing()) % 360);
+		}
 
 		String osmandProfileName = params.mode.getUserProfileName();
 		if (osmandProfileName.indexOf("Brouter") == 0) {

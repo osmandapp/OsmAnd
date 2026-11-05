@@ -29,7 +29,7 @@ import java.net.URLEncoder;
  */
 class GetPanoramaxUserAsyncTask extends AsyncTask<String, Void, Pair<String, String>> {
 
-	private static final String TAG = GetPanoramaxUserAsyncTask.class.getSimpleName();
+	private static final String TAG = "GetPanoramaxUserAsyncTask";
 
 	@Override
 	protected Pair<String, String> doInBackground(String... params) {

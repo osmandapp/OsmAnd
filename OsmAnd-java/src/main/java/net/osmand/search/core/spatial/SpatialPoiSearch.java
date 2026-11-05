@@ -31,6 +31,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.MapPoiTypes.PoiTranslator;
 import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -52,6 +53,7 @@ public class SpatialPoiSearch {
 	Map<String, SpatialPoiType> byKey = new ConcurrentHashMap<>();
 	Map<String, List<SpatialPoiType>> byWikidataKey = new ConcurrentHashMap<>();
 	Map<Integer, SpatialPoiType> byId = new ConcurrentHashMap<>();
+	Set<String> languages = ConcurrentHashMap.newKeySet();
 	
 	public static class SpatialPoiType {
 		public final AbstractPoiType singleType;
@@ -123,6 +125,17 @@ public class SpatialPoiSearch {
 			}
 			names.add(name);
 			return true;
+		}
+
+		public String getOriginalName(String alignedName) {
+			if (singleType != null) {
+				for (String name : getOriginalNames(singleType.getTranslation(), singleType.getSynonyms())) {
+					if (SearchAlgorithms.alignChars(name).equals(alignedName)) {
+						return name;
+					}
+				}
+			}
+			return alignedName;
 		}
 
 		/**
@@ -200,24 +213,59 @@ public class SpatialPoiSearch {
 			poiType.parentTypes = new ArrayList<>();
 			poiType.parentTypes.add(parent);
 		}
-		if (!basePoiName.equals(pt.getTranslation())) {
-			String[] split = pt.getTranslation().split(";");
-			for (String tr : split) {
-				poiType.addName(SearchAlgorithms.alignChars(tr.trim()));
-				// only first
-				break;
-			}
-		}
-		String synonyms = pt.getSynonyms();
-		if (!Algorithms.isEmpty(synonyms)) {
-			String[] split = synonyms.split(";");
-			for (String tr : split) {
-				if (tr.trim().length() > 0) {
-					poiType.addName(SearchAlgorithms.alignChars(tr.trim()));
-				}
-			}
+		String translation = basePoiName.equals(pt.getTranslation()) ? null : pt.getTranslation();
+		for (String name : getNames(translation, pt.getSynonyms())) {
+			poiType.addName(name);
 		}
 		addToIndex(basePoiName, poiType);
+	}
+
+	private static List<String> getNames(String translation, String synonyms) {
+		List<String> names = new ArrayList<>();
+		for (String name : getOriginalNames(translation, synonyms)) {
+			names.add(SearchAlgorithms.alignChars(name));
+		}
+		return names;
+	}
+
+	// translation (only the first name) and synonyms
+	private static List<String> getOriginalNames(String translation, String synonyms) {
+		String all = (Algorithms.isEmpty(translation) ? "" : translation.split(";")[0]) + ";"
+				+ (synonyms == null ? "" : synonyms);
+		List<String> names = new ArrayList<>();
+		for (String name : all.split(";")) {
+			if (!name.trim().isEmpty()) {
+				names.add(name.trim());
+			}
+		}
+		return names;
+	}
+
+	// names of one more language, once: "Schule" in Leipzig for an app in Ukrainian
+	public void addLanguage(String lang) {
+		PoiTranslator translator = poiTypes.getPoiTranslator();
+		PoiTranslator langTranslator = translator == null || !languages.add(lang) ? null : translator.getTranslator(lang);
+		if (langTranslator == null) {
+			return;
+		}
+		WriteLock wl = poiTypesIndexLock.writeLock();
+		try {
+			wl.lock();
+			for (SpatialPoiType poiType : byKey.values()) {
+				AbstractPoiType pt = poiType.singleType;
+				if (pt == null) {
+					continue;
+				}
+				for (String name : getNames(langTranslator.getTranslation(pt), langTranslator.getSynonyms(pt))) {
+					if (!poiType.names.contains(name)) {
+						poiType.addName(name);
+						poiTypesIndex.put(name, poiType);
+					}
+				}
+			}
+		} finally {
+			wl.unlock();
+		}
 	}
 
 
@@ -613,7 +661,7 @@ public class SpatialPoiSearch {
 
 			@Override
 			public String getName() {
-				return spt.names.get(0);
+				return spt.poiAdditional;
 			}
 
 			@Override
