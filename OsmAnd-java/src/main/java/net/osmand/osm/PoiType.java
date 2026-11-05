@@ -185,8 +185,8 @@ public class PoiType extends AbstractPoiType {
 	public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
 		if (isAdditional()) {
 			parentType.putTypes(acceptedTypes);
-			LinkedHashSet<String> set = acceptedTypes.get(category);
-			if (filterOnly && set != null) {
+			LinkedHashSet<String> set = filterOnly ? acceptedTypes.get(category) : null;
+			if (set != null) {
 				for (PoiType pt : category.getPoiTypes()) {
 					List<PoiType> poiAdditionals = pt.getPoiAdditionals();
 					if (poiAdditionals == null) {
