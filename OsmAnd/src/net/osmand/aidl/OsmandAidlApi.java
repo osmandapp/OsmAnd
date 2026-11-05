@@ -170,6 +170,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class OsmandAidlApi {
 
@@ -2160,8 +2161,13 @@ public class OsmandAidlApi {
 		}
 		WidgetsPanel widgetsPanel = panel;
 		boolean[] result = {false};
+		// taken by the task when it starts or by the caller when it stops waiting, so a refused call changes nothing
+		AtomicBoolean taken = new AtomicBoolean();
 		CountDownLatch latch = new CountDownLatch(1);
 		app.runInUIThread(() -> {
+			if (!taken.compareAndSet(false, true)) {
+				return;
+			}
 			try {
 				result[0] = applyWidgetsPanel(mapActivity, appMode, widgetsPanel, pages);
 			} catch (Exception e) {
@@ -2171,7 +2177,11 @@ public class OsmandAidlApi {
 			}
 		});
 		try {
-			return latch.await(5, TimeUnit.SECONDS) && result[0];
+			if (!latch.await(5, TimeUnit.SECONDS) && taken.compareAndSet(false, true)) {
+				return false;
+			}
+			latch.await();
+			return result[0];
 		} catch (InterruptedException e) {
 			return false;
 		}
