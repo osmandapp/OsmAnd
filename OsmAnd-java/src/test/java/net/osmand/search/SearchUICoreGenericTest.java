@@ -257,9 +257,9 @@ public class SearchUICoreGenericTest {
 	}
 
 	@Test
-	public void testNoSearchMoreAfterAllSpatialLevelsShown() throws InterruptedException {
-		// #25940: the dialog shows the levels in its own collection; the core one stays at level 0 and must not
-		// offer "Increase search radius", which reran the same spatial search and appended a copy of every row
+	public void testSpatialSearchRadiusIncreasedAfterAllLevelsShown() throws InterruptedException {
+		// #26250: once the "Show more" levels are shown, "Increase search radius" takes the maps within 500 km,
+		// then 700 km. The dialog replaces the rows then: appended, they came twice (#25940)
 		SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
 		core.init(true);
 		core.registerAPI(new SpatialTextSearchAPI(MapPoiTypes.getDefault()) {
@@ -300,8 +300,21 @@ public class SearchUICoreGenericTest {
 		Assert.assertTrue(shown.showMoreSpatialSearchResults());
 		Assert.assertEquals(2, shown.getVisibleSpatialSearchResults().size());
 		Assert.assertFalse(shown.hasMoreSpatialSearchResults());
-		Assert.assertFalse("All levels are shown: nothing more to search",
-				core.isSearchMoreAvailable(core.getPhrase()));
+		SearchPhrase phrase = core.getPhrase();
+		Assert.assertTrue(core.isSearchMoreAvailable(phrase));
+		Assert.assertEquals(300 * 1000, core.getMinimalSearchRadius(phrase));
+		Assert.assertEquals(500 * 1000, core.getNextSearchRadius(phrase));
+
+		core.updateSettings(core.getSearchSettings().setRadiusLevel(2));
+		phrase = core.resetPhrase("Tatranska magistrala");
+		Assert.assertTrue(core.isSearchMoreAvailable(phrase));
+		Assert.assertEquals(500 * 1000, core.getMinimalSearchRadius(phrase));
+		Assert.assertEquals(700 * 1000, core.getNextSearchRadius(phrase));
+
+		core.updateSettings(core.getSearchSettings().setRadiusLevel(3));
+		phrase = core.resetPhrase("Tatranska magistrala");
+		Assert.assertFalse(core.isSearchMoreAvailable(phrase));
+		Assert.assertEquals(700 * 1000, core.getMinimalSearchRadius(phrase));
 	}
 
 	private City createCity() {
