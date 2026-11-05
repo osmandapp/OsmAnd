@@ -698,7 +698,7 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	protected void applyPurchases() {
-		applyPurchases(true);
+		applyPurchases(true, true);
 	}
 
 	/**
@@ -706,8 +706,11 @@ public abstract class InAppPurchaseHelper {
 	 *                 service and the server. When false (billing setup or query failure)
 	 *                 the state is unknown, so purchases may only be granted, never revoked
 	 *                 - otherwise an offline user loses paid features they own.
+	 * @param localPurchasesKnown true if the store returned the local purchases or the build has no
+	 *                 store. A store that is missing or unusable on the device says nothing
+	 *                 about a full version bought in it, so the full version is kept then.
 	 */
-	protected void applyPurchases(boolean verified) {
+	protected void applyPurchases(boolean verified, boolean localPurchasesKnown) {
 		boolean canRevoke = verified && (!ctx.getBackupHelper().isRegistered()
 				|| this.externalPurchasesRequested);
 
@@ -715,7 +718,7 @@ public abstract class InAppPurchaseHelper {
 		boolean depthContoursPurchased = isPurchasedLocalDeepContours();
 		if (purchasedFullVersion) {
 			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
-		} else if (ctx.getSettings().FULL_VERSION_PURCHASED.get() && canRevoke) {
+		} else if (ctx.getSettings().FULL_VERSION_PURCHASED.get() && canRevoke && localPurchasesKnown) {
 			// e.g. the full version came with the OsmAnd Cloud account and the user logged out
 			ctx.getSettings().FULL_VERSION_PURCHASED.set(false);
 		}
@@ -1141,7 +1144,7 @@ public abstract class InAppPurchaseHelper {
 				// Also reached on error paths, where the local purchase flags were never
 				// populated. Their emptiness is only meaningful when the store is missing
 				// from the device - a failed query says nothing about what the user owns.
-				applyPurchases(localBillingUnavailable);
+				applyPurchases(localBillingUnavailable, false);
 			}
 		}
 	}
