@@ -2596,6 +2596,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return rect;
 	}
 
+	/**
+	 * The points getRouteRect() bounds, or null for a public transport route.
+	 */
+	@Nullable
+	public List<LatLon> getRoutePoints(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getApp();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		if (isTransportRouteCalculated() || !routingHelper.isRouteCalculated()) {
+			return null;
+		}
+		return RoutingHelperUtils.getRoutePoints(app, routingHelper.getRoute());
+	}
+
 	public void onUpdatedIndexesList() {
 		for (BaseCard card : menuCards) {
 			if (card instanceof DownloadEvents) {
