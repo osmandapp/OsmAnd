@@ -21,6 +21,7 @@ import androidx.car.app.model.Row;
 import androidx.car.app.model.Template;
 import androidx.car.app.navigation.model.MapWithContentTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.PlatformUtil;
@@ -235,7 +236,8 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	private void startCountdownIfReady() {
 		if (!hasStartCountdown() || countdownDone || isCountdownRunning()
-				|| calculating || Algorithms.isEmpty(routeRows)) {
+				|| calculating || Algorithms.isEmpty(routeRows)
+				|| !getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
 			return;
 		}
 		if (getApp().getRoutingHelper().getRoute().hasMissingMaps()) {

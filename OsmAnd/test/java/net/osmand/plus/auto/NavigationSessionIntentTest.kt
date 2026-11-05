@@ -244,6 +244,25 @@ class NavigationSessionIntentTest {
 	}
 
 	@Test
+	fun countdownWaitsUntilPreviewIsShown() {
+		resumeAtBerlinStart()
+		CarTestUtils.onMain { carContext.lifecycleOwner.registry.currentState = Lifecycle.State.CREATED }
+		val pd = PointDescription(PointDescription.POINT_TYPE_ADDRESS, "${testPrefix}hidden-preview")
+		createdDescriptions.add(pd)
+		val cardIntent = CarSuggestionsHelper.createCardIntent(app, HistoryEntry(BERLIN_LAT, BERLIN_LON, pd, HistorySource.NAVIGATION))
+		CarTestUtils.onMain { session.onNewIntent(cardIntent) }
+		val preview = CarTestUtils.onMain { carContext.getCarService(TestScreenManager::class.java).top }
+		assertTrue("Top screen must be RoutePreviewScreen, was: ${preview?.javaClass?.simpleName}", preview is RoutePreviewScreen)
+		preview as RoutePreviewScreen
+		assumeRouteReady()
+		Thread.sleep(START_CLICK_TIMEOUT_SEC * 1000)
+		assertFalse("The countdown must not run while the preview is not shown", CarTestUtils.onMain { preview.isCountdownRunning })
+
+		resumeAtBerlinStart()
+		assertTrue("The countdown must start when the preview is shown", waitFor(START_TIMEOUT_SEC) { preview.isCountdownRunning })
+	}
+
+	@Test
 	fun suggestionCardShowsPreviewWithCountdownWithoutStartingNavigation() {
 		val preview = openCardPreviewWithRoute("countdown-preview")
 		assertTrue("The countdown must run after the route is ready", CarTestUtils.onMain { preview.isCountdownRunning })
