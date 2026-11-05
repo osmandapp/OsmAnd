@@ -15,11 +15,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import net.osmand.data.LatLon
+import net.osmand.data.PointDescription
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.auto.screens.RequestPermissionScreen
 import net.osmand.plus.auto.screens.RequestPermissionScreen.LocationPermissionCheckCallback
 import net.osmand.plus.auto.screens.RoutePreviewScreen
+import net.osmand.plus.search.history.HistoryEntry
+import net.osmand.plus.settings.enums.HistorySource
 import org.junit.After
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Assume.assumeTrue
 import org.junit.Before
@@ -138,6 +142,27 @@ class NavigationSessionPermissionGateTest {
 			permissionScreen.finish()
 		}
 		assertTopScreen(RoutePreviewScreen::class.java)
+	}
+
+	@Test
+	fun suggestionCardIsKeptUntilPermissionIsGrantedAndOpensCountdownPreview() {
+		val pd = PointDescription(PointDescription.POINT_TYPE_ADDRESS, "${testPrefix}gate-card")
+		val cardIntent = CarSuggestionsHelper.createCardIntent(app, HistoryEntry(BERLIN_LAT, BERLIN_LON, pd, HistorySource.NAVIGATION))
+		CarTestUtils.onMain { session.onNewIntent(cardIntent) }
+		assertTopScreen(RequestPermissionScreen::class.java)
+
+		permissionAvailable = true
+		val permissionScreen = topScreen() as RequestPermissionScreen
+		val callbackField = RequestPermissionScreen::class.java.getDeclaredField("mLocationPermissionCheckCallback")
+		callbackField.isAccessible = true
+		val callback = callbackField.get(permissionScreen) as LocationPermissionCheckCallback
+		CarTestUtils.onMain {
+			callback.onPermissionGranted()
+			permissionScreen.finish()
+		}
+		assertTopScreen(RoutePreviewScreen::class.java)
+		val preview = topScreen() as RoutePreviewScreen
+		assertTrue("The kept card intent must open the preview with a countdown", CarTestUtils.onMain { preview.hasStartCountdown() })
 	}
 
 	private fun assertTopScreen(expected: Class<out Screen>) {
