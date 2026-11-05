@@ -94,6 +94,7 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 		}
 		Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(app, amenity, DESCRIPTION, filteredInfo);
 		if (pair != null) {
+			buildShortWikiDescription(view, filteredInfo, true);
 			String routeId = amenity.getRouteId();
 			if (!Algorithms.isEmpty(routeId) && app.getResourceManager().hasTravelRepositories()) {
 				buildDescriptionRow(view, pair.first, v -> {
