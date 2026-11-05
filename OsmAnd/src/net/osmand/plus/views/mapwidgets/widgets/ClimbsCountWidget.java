@@ -162,8 +162,7 @@ public class ClimbsCountWidget extends SimpleWidget {
 
 			// Draw virtual opponent line at position based on VAM target
 			// Opponent starts at the same time as user and rides at speed corresponding to target VAM
-			// opponentDistance = (targetVAM / currentVAM) * currentDistance
-			// opponentRatio = opponentDistance / totalClimbDistance = (targetVAM / currentVAM) * progress
+			// opponentRatio = (targetVAM / currentVAM) * progress
 			if (vamTarget > 0 && currentVAM > 0) {
 				double opponentRatio = ((double) vamTarget / currentVAM) * progress;
 				opponentRatio = Math.max(0, Math.min(1, opponentRatio));
@@ -177,28 +176,6 @@ public class ClimbsCountWidget extends SimpleWidget {
 			if (cutoffX > 0 && cutoffX < width) {
 				canvas.drawLine(cutoffX, 0, cutoffX, height, redPaint);
 			}
-		}
-
-		private float getElevationAtX(float[] points, int x, int width, int height, double minEle, double elevationRange) {
-			// Find the segment that contains this x position
-			for (int i = 0; i < points.length - 2; i += 2) {
-				float x1 = points[i];
-				float x2 = points[i + 2];
-				float y1 = points[i + 1];
-				float y2 = points[i + 3];
-
-				if (x1 <= x && x <= x2) {
-					// Linear interpolation
-					float t = (x2 == x1) ? 0 : (x - x1) / (x2 - x1);
-					return y1 + t * (y2 - y1);
-				} else if (x < x1) {
-					// x is before this segment, return first point
-					return points[1];
-				}
-				// x is after this segment, continue to next
-			}
-			// x is at or after the last segment, return last point
-			return points[points.length - 1];
 		}
 	}
 
@@ -532,15 +509,18 @@ public class ClimbsCountWidget extends SimpleWidget {
 	}
 
 	private float calculateVAM(@NonNull CurrentClimbInfo climbInfo) {
-		// VAM = Vertical Ascent per Minute in vm/h (vertical meters per hour)
-		// VAM (vm/h) = (elevationGain / climbDistance) * currentSpeed * 3600
-		// elevationGain in meters, climbDistance in meters, currentSpeed in m/s
-		// Result: (m/m) * (m/s) * s/h = m/h = vm/h
+		// VAM = Vertical Ascent Speed in vm/h (vertical meters per hour)
+		// Accurate calculation from current speed and current grade:
+		// VAM = currentSpeed * sin(atan(currentGrade/100)) * 3600
+		// This calculates the actual vertical component of the current speed
 
-		if (climbInfo.climb == null || climbInfo.climb.distance <= 0) {
+		if (climbInfo.climb == null) {
 			return 0f;
 		}
 
+		// Get current grade at current position
+		float currentGrade = calculateCurrentGrade(climbInfo);
+		
 		// Get current speed in m/s from location
 		float currentSpeed = 0;
 		if (app != null && app.getLocationProvider() != null) {
@@ -555,15 +535,22 @@ public class ClimbsCountWidget extends SimpleWidget {
 			currentSpeed = app.getAverageSpeedComputer().getAverageSpeed(0, 10000, false);
 		}
 
-		// If still no speed, use a default
+		// If still no speed, cannot calculate VAM
 		if (currentSpeed <= 0) {
-			currentSpeed = 5f; // 5 m/s = 18 km/h default
+			return 0f;
 		}
 
-		// VAM (vm/h) = (elevationGain / climbDistance) * currentSpeed * 3600
-		float vam = (float) ((climbInfo.climb.elevationGain / climbInfo.climb.distance) * currentSpeed * 3600);
-
-		return vam;
+		// Calculate VAM from speed and grade
+		// For a grade of G%, the slope angle theta has: tan(theta) = G/100
+		// The vertical component of speed is: speed * sin(theta)
+		// We use: sin(atan(x)) = x / sqrt(1 + x^2)
+		// So: sin(atan(currentGrade/100)) = (currentGrade/100) / sqrt(1 + (currentGrade/100)^2)
+		
+		double gradeFactor = currentGrade / 100.0;
+		double sinGrade = gradeFactor / Math.sqrt(1.0 + gradeFactor * gradeFactor);
+		
+		// VAM (vm/h) = currentSpeed (m/s) * sin(grade) * 3600 (s/h)
+		return currentSpeed * (float) sinGrade * 3600f;
 	}
 
 	private void updateClimbProfileOverlay() {
