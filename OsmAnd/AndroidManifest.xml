@@ -8,6 +8,14 @@
 		android:name="${applicationId}.SERVICE_PERMISSION"
 		android:protectionLevel="signature" />
 
+	<!-- declared with uses-permission by apps that use the AIDL API; binding does not require it, so that apps
+	 connected before it keep working -->
+	<permission
+		android:name="${applicationId}.permission.API"
+		android:label="@string/permission_api_label"
+		android:description="@string/permission_api_descr"
+		android:protectionLevel="normal" />
+
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />

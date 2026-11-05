@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="permission_api_label">use the OsmAnd API</string>
+	<string name="permission_api_descr">Lets the app use OsmAnd through its API, within the permission groups you allow it in OsmAnd.</string>
 	<string name="cast_shadows">Shadows</string>
 	<string name="build_update_size">upd %1$s</string>
 	<string name="build_update_size_estimated">upd ~%1$s</string>
