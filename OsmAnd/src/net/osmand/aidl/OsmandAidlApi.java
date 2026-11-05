@@ -2597,7 +2597,12 @@ public class OsmandAidlApi {
 	 */
 	public boolean isMethodAllowed(@NonNull String pack, @NonNull String method) {
 		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
-		return connectedApp.isEnabled() && connectedApp.isMethodAllowed(method);
+		boolean allowed = connectedApp.isEnabled() && connectedApp.isMethodAllowed(method);
+		// called on every AIDL call: the time is saved only now and then
+		if (allowed && connectedApp.updateLastUseTime(System.currentTimeMillis())) {
+			saveConnectedApps();
+		}
+		return allowed;
 	}
 
 	/**
@@ -2612,7 +2617,7 @@ public class OsmandAidlApi {
 	public ConnectedApp getOrCreateConnectedApp(@NonNull String pack) {
 		ConnectedApp connectedApp = connectedApps.get(pack);
 		if (connectedApp == null) {
-			connectedApp = new ConnectedApp(app, pack, false, AidlPermissionGroup.getDefaultGroups());
+			connectedApp = new ConnectedApp(app, pack, false, AidlPermissionGroup.getDefaultGroups(), 0);
 			connectedApps.put(pack, connectedApp);
 			saveConnectedApps();
 		}
@@ -2628,6 +2633,11 @@ public class OsmandAidlApi {
 			groups.remove(group);
 		}
 		connectedApp.setGroups(groups);
+		return saveConnectedApps();
+	}
+
+	public boolean revokeAllGroups(@NonNull ConnectedApp connectedApp) {
+		connectedApp.setGroups(Collections.emptySet());
 		return saveConnectedApps();
 	}
 
@@ -2655,7 +2665,8 @@ public class OsmandAidlApi {
 		return app.getSharedPreferences(CONNECTIONS_PREFS, Context.MODE_PRIVATE);
 	}
 
-	private boolean saveConnectedApps() {
+	// also called from the binder threads: one snapshot at a time, so an older one is never committed last
+	private synchronized boolean saveConnectedApps() {
 		try {
 			JSONArray array = new JSONArray();
 			for (ConnectedApp connectedApp : connectedApps.values()) {
@@ -2667,6 +2678,7 @@ public class OsmandAidlApi {
 					groups.put(group.getId());
 				}
 				obj.put(ConnectedApp.GROUPS_KEY, groups);
+				obj.put(ConnectedApp.LAST_USE_KEY, connectedApp.getLastUseTime());
 				array.put(obj);
 			}
 			return getConnectionsPreferences().edit().putString(CONNECTED_APPS_KEY, array.toString()).commit();
@@ -2701,7 +2713,7 @@ public class OsmandAidlApi {
 						}
 					}
 				}
-				connectedApps.put(pack, new ConnectedApp(app, pack, enabled, groups));
+				connectedApps.put(pack, new ConnectedApp(app, pack, enabled, groups, obj.optLong(ConnectedApp.LAST_USE_KEY)));
 			}
 			if (legacy) {
 				saveConnectedApps();
