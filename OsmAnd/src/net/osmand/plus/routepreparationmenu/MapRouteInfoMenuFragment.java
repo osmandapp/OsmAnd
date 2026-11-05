@@ -17,7 +17,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.QuadRect;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
@@ -302,23 +301,8 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRoutePlanningMode()) {
 			QuadRect r = menu.getRouteRect(mapActivity);
-			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
-			int tileBoxWidthPx = 0;
-			int tileBoxHeightPx = 0;
-
-			if (!isPortrait()) {
-				tileBoxWidthPx = tb.getPixWidth() - getWidth();
-			} else {
-				// The map down to the menu card, which is drawn below the top shadow of the menu view
-				int[] menuParent = new int[2];
-				int[] map = new int[2];
-				((View) getMainView().getParent()).getLocationOnScreen(menuParent);
-				mapActivity.getMapView().getView().getLocationOnScreen(map);
-				tileBoxHeightPx = menuParent[1] + y + getShadowHeight() - map[1];
-			}
 			if (r.left != 0 && r.right != 0) {
-				mapActivity.getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx,
-						0, menu.getRoutePoints(mapActivity));
+				fitRectAboveMenu(r, menu.getRoutePoints(mapActivity), y);
 				return true;
 			}
 		}

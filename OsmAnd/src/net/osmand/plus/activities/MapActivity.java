@@ -97,6 +97,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteRecordingMenu;
+import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -1789,15 +1790,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		int leftBottomPaddingPx = 0;
 		WeakReference<MapRouteInfoMenuFragment> menuFragmentRef = mapRouteInfoMenu.findMenuFragment();
 		MapRouteInfoMenuFragment menuFragment = menuFragmentRef != null ? menuFragmentRef.get() : null;
+		WeakReference<FollowTrackFragment> followTrackRef = mapRouteInfoMenu.findFollowTrackFragment();
+		FollowTrackFragment followTrackFragment = followTrackRef != null ? followTrackRef.get() : null;
 		// The menu fits the route itself when it moves: fit it the same way, or the two fits
 		// that run after a route calculation leave the route where the later one puts it
-		if (menuFragment != null && menuFragment.fitRouteToMap()) {
+		if (menuFragment != null && menuFragment.fitRouteToMap()
+				|| followTrackFragment != null && followTrackFragment.fitRouteToMap()) {
 			return;
 		}
-		WeakReference<?> fragmentRef = menuFragmentRef;
-		if (fragmentRef == null) {
-			fragmentRef = mapRouteInfoMenu.findFollowTrackFragment();
-		}
+		WeakReference<?> fragmentRef = menuFragmentRef != null ? menuFragmentRef : followTrackRef;
 		View mapBottomView = findViewById(R.id.map_bottom_widgets_panel);
 		int mapBottomViewHeight = mapBottomView.getHeight();
 		if (fragmentRef != null) {

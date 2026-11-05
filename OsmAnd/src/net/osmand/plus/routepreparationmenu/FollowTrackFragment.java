@@ -21,10 +21,11 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
@@ -262,15 +263,27 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		return y;
 	}
 
-	private void adjustMapPosition(int y) {
+	/**
+	 * Fits the route and the track into the map part above the menu in the state the menu is in or is moving
+	 * to, the same way as when the user moves the menu.
+	 *
+	 * @return false when there is nothing to fit
+	 */
+	public boolean fitRouteToMap() {
+		return adjustMapPosition(getMenuStatePosY(getCurrentMenuState()));
+	}
+
+	private boolean adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
-			return;
+			return false;
 		}
 
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRoutePlanningMode()) {
-			QuadRect rect = mapActivity.getMapRouteInfoMenu().getRouteRect(mapActivity);
+			MapRouteInfoMenu menu = mapActivity.getMapRouteInfoMenu();
+			QuadRect rect = menu.getRouteRect(mapActivity);
+			List<LatLon> points = new ArrayList<>(menu.getRoutePoints(mapActivity));
 
 			if (gpxFile != null) {
 				KQuadRect gpxRect = gpxFile.getRect();
@@ -279,23 +292,16 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				rect.right = Math.max(rect.right, gpxRect.getRight());
 				rect.top = Math.max(rect.top, gpxRect.getTop());
 				rect.bottom = Math.min(rect.bottom, gpxRect.getBottom());
-			}
-
-			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
-			int tileBoxWidthPx = 0;
-			int tileBoxHeightPx = 0;
-
-			if (!isPortrait()) {
-				tileBoxWidthPx = tb.getPixWidth() - getWidth();
-			} else {
-				int fHeight = getViewHeight() - y - AndroidUtils.getStatusBarHeight(app);
-				tileBoxHeightPx = tb.getPixHeight() - fHeight;
+				for (WptPt point : gpxFile.getAllSegmentsPoints()) {
+					points.add(new LatLon(point.getLat(), point.getLon()));
+				}
 			}
 			if (rect.left != 0 && rect.right != 0) {
-				mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
-						tileBoxWidthPx, tileBoxHeightPx, 0);
+				fitRectAboveMenu(rect, points, y);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	@Override
