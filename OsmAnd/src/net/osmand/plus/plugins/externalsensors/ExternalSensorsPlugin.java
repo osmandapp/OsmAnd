@@ -252,6 +252,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	// Choosing None used to remove the value, and pairing used to fill every unset value.
 	// So an unset value with a matching paired device means None, not "never configured".
+	// The edit time is kept so that OsmAnd Cloud doesn't treat the profile as changed by the user.
 	private void migrateUnsetTrackSources() {
 		if (UNSET_TRACK_SOURCES_MIGRATED.get() || !devicesHelper.areSavedDevicesCreated()) {
 			return;
@@ -261,7 +262,9 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 				CommonPreference<String> deviceIdPref = getWriteToTrackDeviceIdPref(dataType);
 				for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 					if (!deviceIdPref.isSetForMode(appMode)) {
+						long editTime = settings.getLastModePreferencesEditTime(appMode);
 						deviceIdPref.setModeValue(appMode, "");
+						settings.setLastModePreferencesEditTime(appMode, editTime);
 					}
 				}
 			}
