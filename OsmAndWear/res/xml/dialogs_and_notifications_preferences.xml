@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:description="@string/dialogs_and_notifications_descr"
+	android:key="dialogs_and_notifications"
+	android:title="@string/dialogs_and_notifications_title">
+
+	<Preference
+		android:key="dialogs_and_notifications_preferences_info"
+		android:layout="@layout/preference_info"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/dialogs_and_notifications_descr"
+		tools:icon="@drawable/ic_action_info_dark" />
+
+	<SwitchPreferenceCompat
+		android:icon="@drawable/ic_action_notification"
+		android:key="do_not_show_startup_messages"
+		android:layout="@layout/preference_switch_with_descr"
+		android:persistent="false"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/start_up_message_pref" />
+
+	<SwitchPreferenceCompat
+		android:icon="@drawable/ic_action_import"
+		android:key="show_download_map_dialog"
+		android:layout="@layout/preference_switch_with_descr"
+		android:persistent="true"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/download_map_dialog" />
+
+</PreferenceScreen>

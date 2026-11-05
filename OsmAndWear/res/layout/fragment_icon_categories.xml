@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ImageButton
+					android:id="@+id/back_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center"
+					android:contentDescription="@string/back"
+					app:srcCompat="@drawable/ic_arrow_back" />
+
+				<FrameLayout
+					android:layout_width="0dp"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_weight="1"
+					android:layout_marginStart="@dimen/content_padding">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/toolbar_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:ellipsize="end"
+						android:layout_gravity="center_vertical"
+						android:letterSpacing="@dimen/text_button_letter_spacing"
+						android:maxLines="2"
+						android:textColor="?attr/app_bar_primary_item_color"
+						android:textSize="@dimen/dialog_header_text_size"
+						app:typefaceWeight="medium"
+						tools:text="@string/routing_settings_2" />
+
+					<include
+						layout="@layout/search_text_layout"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent" />
+
+				</FrameLayout>
+
+				<ImageButton
+					android:id="@+id/action_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center"
+					android:contentDescription="@string/back"
+					app:srcCompat="@drawable/ic_action_search_dark" />
+
+			</LinearLayout>
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<net.osmand.plus.widgets.chips.HorizontalChipsView
+		android:id="@+id/icons_categories_selector"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:listitem="@layout/custom_chip_view"
+		tools:orientation="horizontal" />
+
+	<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+		android:id="@+id/progress_bar"
+		style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="4dp"
+		android:indeterminate="true"
+		android:visibility="gone"
+		app:mpb_progressStyle="horizontal"
+		app:mpb_setBothDrawables="true"
+		app:mpb_useIntrinsicPadding="false" />
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/icon_categories"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
+</LinearLayout>

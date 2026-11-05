@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/widget_bg"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/simple_widget_small_height"
+	android:orientation="vertical"
+	android:paddingStart="9dp"
+	android:paddingTop="6dp"
+	android:paddingEnd="16dp"
+	android:paddingBottom="3dp">
+
+	<LinearLayout
+		android:id="@+id/container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/arrow_icon"
+				android:layout_width="36dp"
+				android:layout_height="36dp"
+				android:layout_gravity="center"
+				android:layout_marginEnd="12dp"
+				android:gravity="center"
+				app:srcCompat="@drawable/ic_action_remove_dark" />
+
+			<TextView
+				android:id="@+id/distance_text"
+				android:layout_width="wrap_content"
+				android:layout_height="36dp"
+				android:layout_gravity="center_vertical|start"
+				android:layout_marginEnd="3dp"
+				android:gravity="center"
+				android:includeFontPadding="false"
+				android:maxLines="1"
+				android:textColor="@color/text_color_primary_light"
+				android:textSize="24sp"
+				tools:text="Value" />
+
+			<TextView
+				android:id="@+id/distance_sub_text"
+				android:layout_width="wrap_content"
+				android:layout_height="36dp"
+				android:layout_gravity="center_vertical|start"
+				android:layout_marginEnd="6dp"
+				android:gravity="center"
+				android:includeFontPadding="false"
+				android:maxLines="1"
+				android:textColor="@color/text_color_secondary_light"
+				android:textSize="24sp"
+				tools:text="Value" />
+
+			<TextView
+				android:id="@+id/map_exit_ref"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginEnd="6dp"
+				android:background="@drawable/bg_navigation_widget_exit"
+				android:minWidth="@dimen/map_widget_height"
+				android:paddingHorizontal="6dp"
+				android:textColor="@color/card_and_list_background_light"
+				android:textSize="24sp"
+				android:visibility="gone"
+				tools:text="Exit 8"
+				tools:visibility="visible" />
+
+			<LinearLayout
+				android:id="@+id/map_shields_container"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center"
+				android:layout_marginEnd="6dp"
+				android:gravity="center"
+				android:orientation="horizontal"
+				android:visibility="gone"
+				tools:visibility="visible" />
+
+			<TextView
+				android:id="@+id/street_text"
+				android:layout_width="wrap_content"
+				android:layout_height="36dp"
+				android:layout_gravity="center_vertical|start"
+				android:ellipsize="end"
+				android:gravity="center"
+				android:includeFontPadding="false"
+				android:maxLines="1"
+				android:textColor="@color/text_color_primary_light"
+				android:textSize="24sp"
+				tools:text="Value" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

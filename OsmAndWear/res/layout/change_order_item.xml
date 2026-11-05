@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginLeft="5dip"
+    android:layout_marginRight="5dip"
+    android:weightSum="1"
+    android:background="@color/card_and_list_background_light"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp">
+
+    <ImageButton
+        android:id="@+id/down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/shared_string_move_down"
+        android:translationX="25dp"
+        app:srcCompat="@drawable/ic_action_down_dark" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="@string/layer_poi"
+        android:textSize="12sp"
+        android:textColor="@color/activity_background_color_dark"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/shared_string_move_up"
+        android:translationX="-25dp"
+        app:srcCompat="@drawable/ic_action_up_dark" />
+
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/dialog_content_margin"
+		android:layout_marginTop="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:textColor="?android:attr/textColorSecondary"
+		android:layout_marginBottom="@dimen/content_padding_half"
+		android:text="@string/animate_routing_gpx"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginStart="@dimen/dialog_content_margin" />
+
+	<LinearLayout
+		android:id="@+id/layout_animate_gpx"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/dialog_content_margin"
+			android:layout_marginTop="@dimen/map_small_button_margin"
+			android:layout_marginRight="@dimen/content_padding"
+			android:textColor="?android:attr/textColorSecondary"
+			android:gravity="start"
+			android:text="@string/select_animate_speedup"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginStart="@dimen/dialog_content_margin" />
+
+		<com.google.android.material.slider.Slider
+			android:id="@+id/Speedup"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/dialog_content_margin"
+			android:layout_marginTop="@dimen/map_small_button_margin"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginStart="@dimen/dialog_content_margin"
+			android:layout_marginEnd="@dimen/content_padding" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/dialog_content_margin"
+			android:layout_marginTop="@dimen/map_small_button_margin"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginStart="@dimen/dialog_content_margin"
+			android:layout_marginEnd="@dimen/content_padding">
+
+			<TextView
+				android:id="@+id/MinSpeedup"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="?android:attr/textColorSecondary"
+				android:layout_weight="0.5"
+				android:gravity="start"
+				android:text="10" />
+
+			<TextView
+				android:id="@+id/MaxSpeedup"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="?android:attr/textColorSecondary"
+				android:layout_weight="0.5"
+				android:gravity="end"
+				android:text="15" />
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

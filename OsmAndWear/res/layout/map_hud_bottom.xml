@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center"
+	android:orientation="vertical">
+
+	<FrameLayout
+		android:id="@+id/bottom_controls_container"
+		android:layout_width="match_parent"
+		android:layout_height="180dp">
+
+		<LinearLayout
+			android:id="@+id/alarms_container"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_gravity="bottom|start"
+			android:layout_marginBottom="@dimen/map_alarm_bottom_margin"
+			android:orientation="vertical">
+
+			<include
+				android:id="@+id/map_alarm_warning"
+				layout="@layout/map_alarm_warning"
+				android:layout_width="@dimen/map_alarm_size"
+				android:layout_height="@dimen/map_alarm_size"
+				android:layout_marginStart="@dimen/map_button_margin" />
+
+			<include
+				android:id="@+id/speedometer_widget"
+				layout="@layout/speedometer_widget" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/map_transparency_layout"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|center_horizontal"
+			android:layout_marginBottom="@dimen/map_button_size"
+			android:orientation="horizontal">
+
+			<com.google.android.material.slider.Slider
+				android:id="@+id/map_transparency_slider"
+				android:layout_width="@dimen/map_trans_seek_size"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginHorizontal="@dimen/dashPadding" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/layer_param_layout"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|center_horizontal"
+			android:layout_marginBottom="@dimen/map_button_size"
+			android:orientation="horizontal"
+			android:visibility="gone">
+
+			<com.google.android.material.slider.Slider
+				android:id="@+id/layer_param_slider"
+				android:layout_width="140dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginHorizontal="@dimen/dashPadding" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|start"
+			android:layout_marginStart="@dimen/map_button_margin"
+			android:layout_marginBottom="@dimen/map_button_margin">
+
+			<FrameLayout
+				android:id="@+id/measurement_buttons"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+
+				<ImageButton
+					android:id="@+id/snap_to_road_image_button"
+					android:layout_width="@dimen/map_button_size"
+					android:layout_height="@dimen/map_button_size"
+					android:layout_gravity="bottom"
+					android:background="@drawable/btn_circle"
+					android:contentDescription="@string/snap_to_road"
+					android:visibility="gone"
+					tools:src="@drawable/ic_action_remove_dark" />
+
+				<include
+					android:id="@+id/profile_with_config_btn"
+					layout="@layout/profile_with_config_btn_layout"
+					android:layout_width="wrap_content"
+					android:layout_height="@dimen/map_button_size"
+					android:layout_gravity="bottom"
+					android:visibility="gone" />
+
+			</FrameLayout>
+
+		</LinearLayout>
+
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/map_horizontal_progress"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="4dp"
+			android:layout_gravity="bottom"
+			android:max="100"
+			android:visibility="gone"
+			app:mpb_progressStyle="horizontal"
+			app:mpb_setBothDrawables="true"
+			app:mpb_useIntrinsicPadding="false"
+			tools:progress="60"
+			tools:visibility="visible" />
+
+	</FrameLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<include
+			layout="@layout/recording_note_fragment"
+			tools:visibility="gone" />
+
+		<include
+			layout="@layout/move_marker_bottom_sheet"
+			tools:visibility="gone" />
+
+		<include
+			layout="@layout/add_gpx_point_bottom_sheet"
+			tools:visibility="gone" />
+
+	</FrameLayout>
+
+</LinearLayout>

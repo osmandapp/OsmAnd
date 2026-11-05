@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:title="@string/external_sensors_plugin_name">
+
+	<Preference
+		android:key="write_data_description"
+		android:layout="@layout/preference_description"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/write_data_from_sensor_to_track" />
+
+</PreferenceScreen>

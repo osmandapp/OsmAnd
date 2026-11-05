@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item
+		android:id="@+id/action_menu"
+		android:icon="@drawable/ic_overflow_menu_white"
+		android:iconTint="?attr/app_bar_primary_item_color"
+		android:title="@string/shared_string_more_actions"
+		app:showAsAction="always" />
+</menu>

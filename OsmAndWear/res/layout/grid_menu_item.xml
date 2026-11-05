@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackgroundBorderless"
+	android:orientation="vertical"
+	android:paddingLeft="@dimen/bottom_sheet_content_padding_small"
+	android:paddingRight="@dimen/bottom_sheet_content_padding_small"
+	tools:background="#17171A"
+	tools:layout_gravity="center"
+	android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
+	android:paddingStart="@dimen/bottom_sheet_content_padding_small">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginBottom="@dimen/grid_menu_item_bottom_top_margin"
+		android:layout_marginTop="@dimen/grid_menu_item_bottom_top_margin"
+		tools:src="@drawable/ic_action_delete_dark"
+		tools:tint="#808080"/>
+
+	<TextView
+		android:id="@+id/title"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:ellipsize="end"
+		android:gravity="center_horizontal"
+		android:lines="2"
+		android:maxLines="2"
+		android:textColor="?android:textColorPrimary"
+		tools:text="Remove POI"/>
+
+</LinearLayout>

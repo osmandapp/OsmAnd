@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/main_view"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		app:layout_behavior="net.osmand.plus.backup.ui.ScrollingFooterBehaviour">
+
+		<androidx.core.widget.NestedScrollView
+			android:id="@+id/scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:fillViewport="true">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/bottom_sheet_large_list_item_height">
+
+				<LinearLayout
+					android:id="@+id/warnings_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/warning"
+						style="@style/TitleStyle"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:layout_marginVertical="@dimen/content_padding_small"
+						android:textColor="?android:textColorPrimary"
+						tools:text="@string/delete_account_warning" />
+
+					<include
+						android:id="@+id/data_deleted"
+						layout="@layout/simple_warning_item" />
+
+					<include
+						android:id="@+id/account_deleted"
+						layout="@layout/simple_warning_item" />
+
+					<include
+						android:id="@+id/secondary_devices"
+						layout="@layout/simple_warning_item" />
+
+					<include layout="@layout/simple_divider_item" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/manage_subscriptions"
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="start"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:layout_marginVertical="@dimen/content_padding_small"
+						android:textColor="?android:textColorSecondary"
+						tools:text="@string/osmand_cloud_deletion_subscriptions_warning" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/progress_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+						android:id="@+id/progress_bar"
+						style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+						android:layout_width="match_parent"
+						android:layout_height="4dp"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:layout_marginTop="@dimen/dialog_content_margin"
+						android:layout_marginBottom="@dimen/content_padding"
+						android:indeterminate="false"
+						android:max="100"
+						android:progress="100"
+						app:mpb_progressStyle="horizontal"
+						app:mpb_setBothDrawables="true"
+						app:mpb_useIntrinsicPadding="false" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/progress_description"
+						style="@style/TitleStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="start"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:layout_marginVertical="@dimen/content_padding_small"
+						android:textColor="?android:textColorSecondary"
+						tools:text="@string/osmand_cloud_deleting_account_descr" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</androidx.core.widget.NestedScrollView>
+
+		<LinearLayout
+			android:id="@+id/buttons_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:background="?attr/list_background_color"
+			android:orientation="vertical"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingBottom="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/delete_button_warning"
+				style="@style/DescStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginVertical="@dimen/content_padding_small"
+				android:text="@string/action_cannot_be_undone"
+				android:textColor="?android:textColorSecondary" />
+
+			<include
+				android:id="@+id/delete_button"
+				layout="@layout/bottom_sheet_dialog_button"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/bottom_sheet_cancel_button_height" />
+
+			<include
+				android:id="@+id/close_button"
+				layout="@layout/bottom_sheet_dialog_button"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/dialog_button_height" />
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:color/transparent"
+		android:stateListAnimator="@animator/appbar_always_elevated">
+
+		<com.google.android.material.appbar.CollapsingToolbarLayout
+			android:id="@+id/toolbar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height_expanded"
+			android:background="?attr/list_background_color"
+			app:collapsedTitleTextAppearance="@style/AppBarTitlePrimary"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMarginBottom="@dimen/content_padding_small"
+			app:expandedTitleMarginEnd="@dimen/content_padding"
+			app:expandedTitleMarginStart="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitlePrimary"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/toolbar_height"
+				android:minHeight="@dimen/toolbar_height"
+				app:layout_collapseMode="pin"
+				app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				app:titleMarginEnd="0dp"
+				app:titleMarginStart="0dp"
+				tools:title="@string/delete_account">
+
+			</androidx.appcompat.widget.Toolbar>
+
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

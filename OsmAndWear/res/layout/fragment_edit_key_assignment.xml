@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:transitionName="shared_element_container">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<androidx.core.widget.NestedScrollView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:fillViewport="true"
+			android:overScrollMode="never">
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/recycler_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:clipToPadding="false"
+				android:nestedScrollingEnabled="false"
+				android:orientation="vertical"
+				android:scrollbars="none" />
+
+		</androidx.core.widget.NestedScrollView>
+
+	</FrameLayout>
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:color/transparent"
+		android:stateListAnimator="@animator/appbar_always_elevated">
+
+		<com.google.android.material.appbar.CollapsingToolbarLayout
+			android:id="@+id/toolbar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height_expanded_large"
+			android:background="?attr/list_background_color"
+			app:collapsedTitleTextAppearance="@style/AppBarTitlePrimary"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMarginBottom="@dimen/content_padding"
+			app:expandedTitleMarginEnd="@dimen/content_padding"
+			app:expandedTitleMarginStart="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitlePrimary"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/toolbar_height"
+				android:minHeight="@dimen/setting_list_item_large_height"
+				app:layout_collapseMode="pin"
+				app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				app:titleMarginEnd="0dp"
+				app:titleMarginStart="0dp"
+				tools:title="My location">
+
+			</androidx.appcompat.widget.Toolbar>
+
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:orientation="vertical">
+
+		<include layout="@layout/card_top_divider" />
+
+		<FrameLayout
+			android:id="@+id/bottom_buttons"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dialog_button_ex_height"
+			android:background="?attr/list_background_color">
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/save_button"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				app:dialogButtonTitle="@string/shared_string_save"
+				app:dialogButtonType="primary" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

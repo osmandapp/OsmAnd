@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/plan_route_toolbar_and_up_down_row"/>
+
+    <FrameLayout
+        android:id="@+id/markers_list_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@color/activity_background_color_dark">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/markers_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <include layout="@layout/card_bottom_divider"/>
+    </FrameLayout>
+
+</LinearLayout>

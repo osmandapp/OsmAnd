@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:clickable="true"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
+	android:focusable="true"
+	android:fitsSystemWindows="true">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/app_bar_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/list_background_color">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:id="@+id/toolbar_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/color_transparent"
+				android:minHeight="@dimen/toolbar_height"
+				android:orientation="horizontal">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/back_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="20dp"
+					android:layout_height="20dp"
+					android:layout_gravity="center"
+					android:layout_marginStart="20dp"
+					android:tint="@color/icon_color_default_light"
+					android:translationX="25dp"
+					app:srcCompat="@drawable/ic_action_close" />
+
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_marginHorizontal="@dimen/content_padding"
+					android:layout_marginVertical="@dimen/content_padding_half"
+					android:layout_weight="1"
+					android:orientation="vertical"
+					android:translationX="20dp">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/toolbar_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textSize="15sp"
+						app:typefaceWeight="medium"
+						tools:text="@string/map_widget_left" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/toolbar_subtitle"
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="?android:textColorSecondary"
+						tools:text="Driving" />
+
+				</LinearLayout>
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/reset_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="20dp"
+					android:layout_height="20dp"
+					android:layout_marginStart="0dp"
+					android:layout_gravity="center"
+					android:tint="?attr/default_icon_color"
+					app:srcCompat="@drawable/ic_action_reset" />
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/copy_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="20dp"
+					android:layout_height="20dp"
+					android:layout_marginRight="40dp"
+					android:layout_gravity="center"
+					android:tint="?attr/default_icon_color"
+					app:srcCompat="@drawable/ic_action_copy" />
+
+			</LinearLayout>
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="?attr/activity_background_color"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/content_list"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/activity_background_color"
+			android:clipToPadding="false"/>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/shadow_view"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/abp__shadow_height"
+			android:scaleType="fitXY"
+			app:srcCompat="@drawable/bg_shadow_list_bottom" />
+
+		<LinearLayout
+			android:id="@+id/apply_button_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:orientation="vertical">
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="?attr/divider_color_basic" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/list_background_color"
+				android:clickable="true"
+				android:focusable="true"
+				android:paddingHorizontal="@dimen/content_padding"
+				android:paddingVertical="@dimen/content_padding_small">
+
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
+					android:id="@+id/apply_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:dialogButtonType="primary"
+					app:dialogButtonTitle="@string/shared_string_apply"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

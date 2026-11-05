@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <integer name="app_bar_elevation_anim_duration" tools:override="true">0</integer>
+</resources>

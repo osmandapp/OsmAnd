@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:gravity="center_vertical"
+	android:minHeight="@dimen/bottom_sheet_list_item_height"
+	android:padding="0dp">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding_half"
+		tools:src="@drawable/ic_action_coordinates_latitude" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="horizontal">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				style="@style/TitleStyle"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical|start"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_weight="1"
+				android:ellipsize="end"
+				android:maxLines="4"
+				android:textColor="?android:textColorPrimary"
+				tools:text="Some Title" />
+
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical|end"
+				android:layout_marginTop="0dp"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:padding="0dp">
+
+				<androidx.appcompat.widget.SwitchCompat
+					android:id="@+id/compound_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical|end"
+					android:background="@null"
+					android:clickable="false"
+					android:focusable="false"
+					android:focusableInTouchMode="false"
+					android:saveEnabled="false" />
+
+				<LinearLayout
+					android:id="@+id/get_btn"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical|end"
+					android:background="@drawable/ui_button_pro"
+					android:gravity="bottom"
+					android:orientation="horizontal"
+					android:paddingHorizontal="9dp"
+					android:paddingVertical="4dp">
+
+					<TextView
+						android:id="@+id/get"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:gravity="center_vertical"
+						android:lineSpacingExtra="0sp"
+						android:text="@string/shared_string_get"
+						android:textColor="@color/active_color_primary_light"
+						android:textSize="16sp" />
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="6dp"
+						android:src="@drawable/ic_arrow_forward"
+						app:tint="@color/active_color_primary_light" />
+				</LinearLayout>
+
+			</FrameLayout>
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/bottom_divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/divider_color_basic"
+			android:visibility="gone"
+			tools:visibility="visible" />
+
+	</LinearLayout>
+
+</LinearLayout>
