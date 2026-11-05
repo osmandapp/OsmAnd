@@ -620,7 +620,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		List<QuickSearchListItem> items = new ArrayList<>();
 		if (!Algorithms.isEmpty(results)) {
 			for (SearchResult result : results) {
-				if (result.object instanceof MapObject || result.objectType == ObjectType.SUGGESTION) {
+				if (result.object instanceof MapObject) {
 					items.add(new QuickSearchListItem(app, result));
 				}
 			}
