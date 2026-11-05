@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="permission_api_label">use the OsmAnd API</string>
+	<string name="permission_api_descr">Lets the app use OsmAnd through its API, within the permission groups you allow it in OsmAnd.</string>
 	<string name="terrain_shadows_hillshade_footer">Terrain shadows are off while Terrain shows Hillshade: Hillshade already shades the relief.</string>
 	<string name="shadows_on_description">Shadows on: buildings cast shadows from the sun.</string>
 	<string name="shadows_off_description">Shadows off: buildings are drawn without shadows.</string>
