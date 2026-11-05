@@ -32,11 +32,6 @@ class AdditionalInfoBundle(
 
 	data class ResolvedPoiType(val additionalType: PoiType?, val categoryType: PoiType?)
 
-	private class TextTagGroupChild(val type: PoiType) {
-		var count: String? = null
-		val attributes = LinkedHashMap<String, String>()
-	}
-
 	private val langLookup = object : PoiAdditionalLangLookup {
 		override fun hasLang(key: String): Boolean = poiTypes.getAnyPoiAdditionalTypeByKey(key)?.getLang() != null
 	}
@@ -82,19 +77,19 @@ class AdditionalInfoBundle(
 	): MutableList<AmenityTagEntry> {
 		val category = getCategory()
 		val collectedPoiTypes = LinkedHashMap<String, MutableList<PoiType>>()
-		val textTagGroupChildren = LinkedHashMap<String, TextTagGroupChild>()
+		val socketGroup = SocketTagGroup(poiTypes)
 		val entries = collectPlainRows(allowNoteTag, preferredLangs, category, collectedPoiTypes,
-			textTagGroupChildren, genericRowKeys)
+			socketGroup, genericRowKeys)
 		entries.addAll(collectCollapsableGroups(category))
 		entries.addAll(collectPoiTypeGroups(category, collectedPoiTypes))
-		entries.addAll(collectTextTagGroups(category, textTagGroupChildren.values))
+		collectSocketGroup(category, socketGroup.getItems())?.let { entries.add(it) }
 		return entries
 	}
 
 	private fun collectPlainRows(
 		allowNoteTag: Boolean, preferredLangs: List<String>?, category: PoiCategory?,
 		collectedPoiTypes: MutableMap<String, MutableList<PoiType>>,
-		textTagGroupChildren: MutableMap<String, TextTagGroupChild>, genericRowKeys: Set<String>
+		socketGroup: SocketTagGroup, genericRowKeys: Set<String>
 	): MutableList<AmenityTagEntry> {
 		val showDefaultTags = isDefaultForCategory()
 		val entries = ArrayList<AmenityTagEntry>()
@@ -112,7 +107,7 @@ class AdditionalInfoBundle(
 			val resolvedType = resolvePoiType(category, key, strValue)
 			val additionalType = resolvedType.additionalType
 			val categoryType = resolvedType.categoryType
-			if (addTextTagGroupChild(additionalType, strValue, textTagGroupChildren)) {
+			if (socketGroup.add(additionalType, strValue)) {
 				continue
 			}
 			if (isFilterOnlyOrGrouped(additionalType)) {
@@ -214,65 +209,15 @@ class AdditionalInfoBundle(
 			.setPoiAdditional(true)
 			.setOrder(types[0].getOrder())
 
-	private fun addTextTagGroupChild(
-		type: PoiType?, value: String?, children: MutableMap<String, TextTagGroupChild>
-	): Boolean {
-		if (type == null || value == null || !type.isText()) {
-			return false
-		}
-		val tag = type.getRawOsmTag() ?: return false
-		val groupType = getTextTagGroupType(tag)
-		if (groupType != null) {
-			children.getOrPut(tag) { TextTagGroupChild(groupType) }.count = value
-			return true
-		}
-		val parentTag = tag.substringBeforeLast(':', "")
-		val parentType = if (parentTag.isNotEmpty()) getTextTagGroupType(parentTag) else null
-		if (parentType != null) {
-			children.getOrPut(parentTag) { TextTagGroupChild(parentType) }.attributes[tag.substringAfterLast(':')] = value
-			return true
-		}
-		return false
-	}
-
-	// the map creator adds osmand_socket_type2=yes to socket:type2 for the search filter of the socket category
-	private fun getTextTagGroupType(tag: String): PoiType? {
-		val filterTag = TEXT_TAG_GROUP_TYPE_PREFIX + tag.replace(':', '_')
-		return poiTypes.getPoiTypeByTagValue(filterTag, TEXT_TAG_GROUP_TYPE_VALUE)
-			?.takeIf { it.isFilterOnly() && !KAlgorithms.isEmpty(it.getPoiAdditionalCategory()) }
-	}
-
-	private fun collectTextTagGroups(
-		category: PoiCategory?, children: Collection<TextTagGroupChild>
-	): List<AmenityTagEntry> {
-		val groups = LinkedHashMap<String, MutableList<TextTagGroupChild>>()
-		for (child in children) {
-			val groupName = child.type.getPoiAdditionalCategory()
-			if (groupName != null && !ABSENT_TEXT_TAG_GROUP_COUNTS.contains(child.count)) {
-				groups.getOrPut(groupName) { ArrayList() }.add(child)
-			}
-		}
-		val entries = ArrayList<AmenityTagEntry>()
-		for ((groupName, groupChildren) in groups) {
-			val sortedChildren = groupChildren.sortedBy { it.type.getParentType()?.getPoiAdditionals()?.indexOf(it.type) }
-			entries.add(
-				poiAdditionalGroupBuilder(groupName, sortedChildren.map { it.type }, category)
-					.setCollapsableEntries(sortedChildren.map {
-						AmenityTagEntry.Builder(it.type.getKeyName()).setValue(formatTextTagGroupValue(it)).build()
-					})
-					.build()
-			)
-		}
-		return entries
-	}
-
-	// "4 × 22 kW · 400 V · 32 A": OSM text values, nothing to translate
-	private fun formatTextTagGroupValue(child: TextTagGroupChild): String? {
-		val attributes = LinkedHashMap(child.attributes)
-		val count = child.count?.takeIf { it.toIntOrNull() != null }
-		val head = listOfNotNull(count, attributes.remove(OUTPUT_ATTRIBUTE)).joinToString(COUNT_SEPARATOR)
-		val details = listOfNotNull(attributes.remove(VOLTAGE_ATTRIBUTE), attributes.remove(CURRENT_ATTRIBUTE)) + attributes.values
-		return (listOf(head) + details).filter { it.isNotEmpty() }.joinToString(ATTRIBUTE_SEPARATOR).ifEmpty { null }
+	private fun collectSocketGroup(
+		category: PoiCategory?, items: List<SocketTagGroup.Item>
+	): AmenityTagEntry? {
+		val groupName = items.firstOrNull()?.type?.getPoiAdditionalCategory() ?: return null
+		return poiAdditionalGroupBuilder(groupName, items.map { it.type }, category)
+			.setCollapsableEntries(items.map {
+				AmenityTagEntry.Builder(it.type.getKeyName()).setValue(it.value).build()
+			})
+			.build()
 	}
 
 	private fun toLocalizedAmenityTagEntry(
@@ -426,15 +371,6 @@ class AdditionalInfoBundle(
 
 		private const val CUISINE_INFO_ID = COLLAPSABLE_PREFIX + Amenity.CUISINE
 		private const val DISH_INFO_ID = COLLAPSABLE_PREFIX + Amenity.DISH
-
-		private const val TEXT_TAG_GROUP_TYPE_PREFIX = "osmand_"
-		private const val TEXT_TAG_GROUP_TYPE_VALUE = "yes"
-		private val ABSENT_TEXT_TAG_GROUP_COUNTS = setOf("no", "0")
-		private const val OUTPUT_ATTRIBUTE = "output"
-		private const val VOLTAGE_ATTRIBUTE = "voltage"
-		private const val CURRENT_ATTRIBUTE = "current"
-		private const val COUNT_SEPARATOR = " × "
-		private const val ATTRIBUTE_SEPARATOR = " · "
 
 		@JvmStatic
 		fun getGenericRowKeys(storedExtensions: Map<String, String>): Set<String> =
