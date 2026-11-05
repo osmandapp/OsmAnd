@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="permission_api_label">use the OsmAnd API</string>
+	<string name="permission_api_descr">Lets the app use OsmAnd through its API, within the permission groups you allow it in OsmAnd.</string>
 	<string name="attach_to_track">Attach to track</string>
 	<string name="visualization">Visualization</string>
 	<string name="terrain_shadows">Terrain shadows</string>
