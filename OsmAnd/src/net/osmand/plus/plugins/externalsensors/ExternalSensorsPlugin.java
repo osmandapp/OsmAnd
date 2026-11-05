@@ -60,6 +60,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
@@ -79,7 +80,6 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public final CommonPreference<String> POWER_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
-	private final CommonPreference<Boolean> UNSET_TRACK_SOURCES_MIGRATED;
 	private static final String DEVICES_SETTINGS_PREF_ID = "external_devices_settings";
 	public static final int RECONNECT_DEVICE_TIMEOUT = 30;
 	public static final int RECONNECT_DEVICE_DELAY = 5;
@@ -104,7 +104,6 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		POWER_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.BIKE_POWER.getPreferenceId(), ANY_DEVICE).makeProfile().cache();
 		HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.HEART_RATE.getPreferenceId(), ANY_DEVICE).makeProfile().cache();
 		TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.TEMPERATURE.getPreferenceId(), ANY_DEVICE).makeProfile().cache();
-		UNSET_TRACK_SOURCES_MIGRATED = registerBooleanPreference("unset_track_sensor_sources_migrated", false).makeGlobal();
 
 		devicesHelper = new ExternalSensorsDeviceHelper(app, deviceSettingsPreferenceProvider);
 		settings = app.getSettings();
@@ -253,12 +252,10 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	// Choosing None used to remove the value, and pairing used to fill every unset value.
 	// So an unset value with a matching paired device means None, not "never configured".
 	// The edit time is kept so that OsmAnd Cloud doesn't treat the profile as changed by the user.
-	private void migrateUnsetTrackSources() {
-		if (UNSET_TRACK_SOURCES_MIGRATED.get() || !devicesHelper.areSavedDevicesCreated()) {
-			return;
-		}
+	public void migrateUnsetTrackSources() {
+		Set<SensorWidgetDataFieldType> pairedFieldTypes = devicesHelper.getSavedDevicesFieldTypes();
 		for (ExternalSensorTrackDataType dataType : ExternalSensorTrackDataType.values()) {
-			if (getAnyDevice(dataType.getSensorType()) != null) {
+			if (pairedFieldTypes.contains(dataType.getSensorType())) {
 				CommonPreference<String> deviceIdPref = getWriteToTrackDeviceIdPref(dataType);
 				for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 					if (!deviceIdPref.isSetForMode(appMode)) {
@@ -269,7 +266,6 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 				}
 			}
 		}
-		UNSET_TRACK_SOURCES_MIGRATED.set(true);
 	}
 
 	public boolean isAnyConnectedDeviceId(@NonNull String deviceId){
@@ -283,7 +279,6 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	@Override
 	public void mapActivityCreate(@NonNull MapActivity activity) {
 		devicesHelper.setActivity(activity);
-		migrateUnsetTrackSources();
 	}
 
 	@Override
@@ -294,9 +289,6 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		devicesHelper.setActivity(activity);
-		if (activity != null) {
-			migrateUnsetTrackSources();
-		}
 		shutdownScheduler();
 		reconnectToDeviceScheduler = Executors.newSingleThreadScheduledExecutor();
 		return true;

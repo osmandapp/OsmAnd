@@ -54,6 +54,7 @@ import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLERunningSCDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLETemperatureDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
@@ -66,8 +67,10 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -171,8 +174,27 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 		updateDevices(activity);
 	}
 
-	boolean areSavedDevicesCreated() {
-		return devices.keySet().containsAll(devicesSettingsCollection.getDeviceIds());
+	@NonNull
+	Set<SensorWidgetDataFieldType> getSavedDevicesFieldTypes() {
+		BluetoothAdapter currentAdapter = bluetoothAdapter;
+		if (bluetoothAdapter == null) {
+			BluetoothManager bluetoothManager = (BluetoothManager) app.getSystemService(Context.BLUETOOTH_SERVICE);
+			bluetoothAdapter = bluetoothManager != null ? bluetoothManager.getAdapter() : null;
+		}
+		Set<SensorWidgetDataFieldType> fieldTypes = new HashSet<>();
+		for (String deviceId : devicesSettingsCollection.getDeviceIds()) {
+			DeviceSettings deviceSettings = devicesSettingsCollection.getDeviceSettings(deviceId);
+			DeviceType deviceType = deviceSettings != null ? deviceSettings.getDeviceType() : null;
+			AbstractDevice<?> device = deviceType != null ? createDevice(deviceType, deviceId, deviceSettings) : null;
+			if (device != null) {
+				restoreDeviceSensors(device, deviceSettings);
+				for (AbstractSensor sensor : device.getSensors()) {
+					fieldTypes.addAll(sensor.getSupportedWidgetDataFieldTypes());
+				}
+			}
+		}
+		bluetoothAdapter = currentAdapter;
+		return fieldTypes;
 	}
 
 	private void restoreDeviceSensors(@NonNull AbstractDevice<?> device, @NonNull DeviceSettings deviceSettings) {

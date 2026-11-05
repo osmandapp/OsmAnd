@@ -53,6 +53,7 @@ import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.srtm.TerrainMode;
@@ -183,8 +184,10 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_4_03 = 5403;
 	// 5500 - 5.5-00 (Ask once to update the maps older than the new search, see OutdatedMapsWarning)
 	public static final int VERSION_5_5_00 = 5500;
+	// 5501 - 5.5-01 (Keep a None chosen for external sensor track recording, see ExternalSensorsPlugin)
+	public static final int VERSION_5_5_01 = 5501;
 
-	public static final int LAST_APP_VERSION = VERSION_5_5_00;
+	public static final int LAST_APP_VERSION = VERSION_5_5_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -367,6 +370,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_4_03) {
 					migrateAisDefaultConnectionToSetUp(settings);
+				}
+				if (prevAppVersion < VERSION_5_5_01) {
+					app.getAppInitializer().addOnFinishListener(init -> migrateUnsetSensorTrackSources());
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -1159,6 +1165,13 @@ public class AppVersionUpgradeOnInit {
 	 * TCP with the old default host (192.168.200.16) is not carried over: that default pointed at
 	 * a LAN address of somebody else, so such a user sets the host up once.
 	 */
+	private void migrateUnsetSensorTrackSources() {
+		ExternalSensorsPlugin plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
+		if (plugin != null) {
+			plugin.migrateUnsetTrackSources();
+		}
+	}
+
 	private void migrateAisDefaultConnectionToSetUp(@NonNull OsmandSettings settings) {
 		if (!settings.getEnabledPlugins().contains(AisTrackerPlugin.AISTRACKER_ID)) {
 			return;
