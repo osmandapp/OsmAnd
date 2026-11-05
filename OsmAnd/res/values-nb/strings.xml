@@ -4478,8 +4478,8 @@
     <string name="disable_map_layers">Skru av kartlag</string>
     <string name="travel_topics">Reiseemner</string>
     <string name="play_weather_forecast">Spill av værmelding</string>
-    <string name="routing_attr_avoid_cobblestone_name">Unngå brostein</string>
-    <string name="routing_attr_avoid_cobblestone_description">Unngå brostein</string>
+    <string name="routing_attr_avoid_cobblestone_name">Unngå kuppelstein</string>
+    <string name="routing_attr_avoid_cobblestone_description">Unngå kuppelstein</string>
     <string name="map_text">Kartopptegning</string>
     <string name="wall_height">Vegghøyde</string>
     <string name="backup_error_failed_to_transfer_file">Klarte ikke å overføre sky-fil(er).</string>

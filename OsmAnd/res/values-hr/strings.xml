@@ -1453,4 +1453,6 @@
     <string name="follow_track">Prati stazu</string>
     <string name="customize_route_line">Prilagodi liniju rute</string>
     <string name="simulate_navigation">Simuliraj navigaciju</string>
+    <string name="routing_attr_avoid_sett_name">Bez kamenih kocki</string>
+    <string name="routing_attr_avoid_sett_description">Izbjegava kamene kocke</string>
 </resources>

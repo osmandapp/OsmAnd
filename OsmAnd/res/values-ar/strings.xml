@@ -2052,8 +2052,8 @@
     <string name="rendering_attr_highway_class_cycleway_name">طريق الدراجات</string>
     <string name="rendering_attr_undefined_name">غير محدد</string>
     <string name="use_osm_live_public_transport_description">تمكين تغييرات النقل العام أوسماند لايف.</string>
-    <string name="routing_attr_avoid_sett_name">بدون ضبط</string>
-    <string name="routing_attr_avoid_sett_description">تجنب الطرق المرصوفة</string>
+    <string name="routing_attr_avoid_sett_name">بدون رصف بالحجارة المنحوتة</string>
+    <string name="routing_attr_avoid_sett_description">تجنب الرصف بالحجارة المنحوتة</string>
     <string name="routing_attr_avoid_train_name">بدون قطارات</string>
     <string name="routing_attr_avoid_train_description">تجنب القطارات</string>
     <string name="routing_attr_avoid_subway_name">تجنب قطارالانفاق</string>
@@ -4322,8 +4322,8 @@
     <string name="allow_display_on_top">السماح بالعرض في الأعلى</string>
     <string name="allow_display_on_top_description">السماح بعرض نصوص الخريطة فوق بعضها البعض</string>
     <string name="map_text">عرض الخريطة</string>
-    <string name="routing_attr_avoid_cobblestone_name">تجنب الحصى</string>
-    <string name="routing_attr_avoid_cobblestone_description">تجنب الحصى</string>
+    <string name="routing_attr_avoid_cobblestone_name">تجنب الرصف بالحجارة المستديرة</string>
+    <string name="routing_attr_avoid_cobblestone_description">تجنب الرصف بالحجارة المستديرة</string>
     <string name="release_4_8">• خيار تلوين التضاريس الجديد \"الارتفاع\" \n \n • لوحات الألوان المخصصة للتضاريس، والمسارات، والطرق \n \n • متغير ثلاثي الأبعاد لأيقونات موضع الموقع \n \n • يمكن الآن تخصيص الإجراءات السريعة للوحات المفاتيح الخارجية \n \n • الطقس: تحديث واجهة المستخدم، وأضاف الرسوم المتحركة الرياح \n \n • تحسينات المسار ثلاثي الأبعاد: خيارات التصور والتلوين الجديدة \n \n • توسيع نطاق اختيار الطرق السياحية على الخريطة \n \n • تمت إضافة خيار موضوع التطبيق لمتابعة وضع الخريطة \n \n • احصائيات المسار الثابت، والفرز والبحث \n \n • تحرير OSM: حذف طريقة ترخيص تسجيل الدخول / كلمة المرور \n \n • التبديل إلى صفحة مشاركة النظام بدءا من Android 14</string>
     <string name="quick_action_move_map_right">الخريطة إلى اليمين</string>
     <string name="quick_action_move_map_left">الخريطة إلى اليسار</string>

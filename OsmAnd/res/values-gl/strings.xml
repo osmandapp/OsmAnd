@@ -2070,8 +2070,8 @@
     <string name="avoid_pt_types_descr">Escolle os tipos de transporte público a evitar para a navegación:</string>
     <string name="quick_action_day_night_mode">Modo %s</string>
     <string name="avoid_pt_types">Evitar tipos de transporte…</string>
-    <string name="routing_attr_avoid_sett_name">Sen pavimento empedrado ou lastrado</string>
-    <string name="routing_attr_avoid_sett_description">Evitar pavimento empedrado e lastrado</string>
+    <string name="routing_attr_avoid_sett_name">Sen adoquinado</string>
+    <string name="routing_attr_avoid_sett_description">Evitar adoquinado</string>
     <string name="files_failed">Non se puideron copiar %1$d ficheiros (%2$s).</string>
     <string name="dont_move_maps">Non mover</string>
     <string name="public_transport_ped_route_title">A ruta a pé é de aproximadamente %1$s e podería ser máis rápida que no transporte público</string>
@@ -3414,4 +3414,6 @@
     <string name="group_altitude_elevation">Altitude e elevación</string>
     <string name="group_sensors">Sensores</string>
     <string name="year_of_creation">Ano de creación</string>
+    <string name="routing_attr_avoid_cobblestone_name">Evitar empedrado</string>
+    <string name="routing_attr_avoid_cobblestone_description">Evitar empedrado</string>
 </resources>
