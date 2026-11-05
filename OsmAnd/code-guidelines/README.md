@@ -5,12 +5,13 @@ Rules for new Java and Kotlin code in `:OsmAnd`. Existing code moves to them whe
 ## Classes are objects, not bags of static methods
 
 - Do not write a class where everything is static, and no Kotlin `object` that is only a set of functions. Logic is an instance: it gets what it needs (`OsmandApplication`, settings, other services) in the constructor and keeps its own state.
-- An instance that holds state for the whole app is created once and owned by a long-lived component, reachable through it (`app.getDownloadThread().getFreeVersionMaps()`), not re-created with `new` at every call site.
+- An instance that holds state for the whole app is created once and owned by a long-lived component, reachable through it (`app.getDownloadThread().getFreeVersionMapDownloads()`), not re-created with `new` at every call site.
 - Static is fine for constants and for a fragment's `showInstance(...)`.
 
 ## Names say what the class is
 
-- No `Helper` in class names, and no other catch-all suffix that says nothing about the class (`Utils`, `Manager`). Name the thing the class represents or does: `FreeVersionMaps`, `FreeRegionApi`, `OutdatedMapsWarning` — not `FreeRegionHelper`.
+- No `Helper` in class names, and no other suffix that names a technical layer instead of the thing: `Utils`, `Manager`, `Api`, `Server`, `Dialogs`. Name what the class represents or does: `FreeVersionMapDownloads`, `OutdatedMapsWarning` — not `FreeRegionHelper`, `FreeRegionApi`.
+- One feature, one class: its state, its rules and its server requests stay together (`FreeVersionMapDownloads` keeps the free region, checks the downloads and asks the server for a replace). Split off only what is a thing of its own - a fragment, a dialog - not a layer.
 - A class named after one feature holds that feature only. A dialog about something else gets its own class, even if it is shown in the same flow.
 
 ## Language
