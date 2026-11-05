@@ -1,6 +1,7 @@
 package net.osmand.plus.auto
 
 import android.annotation.SuppressLint
+import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
 import androidx.car.app.CarContext
@@ -225,6 +226,20 @@ class NavigationSessionIntentTest {
 		assertTrue(
 			"The destination must be the card point, was: ${target!!.latitude}, ${target.longitude}",
 			MapUtils.getDistance(target.latitude, target.longitude, BERLIN_LAT, BERLIN_LON) < 1
+		)
+	}
+
+	@Test
+	fun suggestionCardShowsAppOnCarScreen() {
+		val pd = PointDescription(PointDescription.POINT_TYPE_ADDRESS, "${testPrefix}show-app")
+		createdDescriptions.add(pd)
+		val cardIntent = CarSuggestionsHelper.createCardIntent(app, HistoryEntry(BERLIN_LAT, BERLIN_LON, pd, HistorySource.NAVIGATION))
+		CarTestUtils.onMain { session.onNewIntent(cardIntent) }
+		val appComponent = ComponentName(app, NavigationCarAppService::class.java)
+		val intents = CarTestUtils.onMain { carContext.startCarAppIntents.toList() }
+		assertTrue(
+			"A card tap must show the app on the car screen, was: $intents",
+			intents.any { intent -> intent.component == appComponent }
 		)
 	}
 

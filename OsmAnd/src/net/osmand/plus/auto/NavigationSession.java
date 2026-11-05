@@ -7,6 +7,7 @@ import static net.osmand.plus.OsmAndLocationProvider.NOT_SWITCH_TO_NETWORK_WHEN_
 import static net.osmand.plus.OsmAndLocationProvider.isRunningOnEmulator;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -19,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.car.app.CarContext;
+import androidx.car.app.HostException;
 import androidx.car.app.Screen;
 import androidx.car.app.ScreenManager;
 import androidx.car.app.Session;
@@ -590,9 +592,19 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			result.location = latLon;
 		}
 
+		showAppOnCarScreen();
 		ScreenManager screenManager = getScreenManager();
 		screenManager.popToRoot();
 		screenManager.pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, result, true, getCardCountdownMs()), this::onRoutePreviewResult);
+	}
+
+	private void showAppOnCarScreen() {
+		try {
+			Intent intent = new Intent().setComponent(new ComponentName(getCarContext(), NavigationCarAppService.class));
+			getCarContext().startCarApp(intent);
+		} catch (HostException | SecurityException e) {
+			LOG.error("Failed to show the app on the car screen", e);
+		}
 	}
 
 	protected long getCardCountdownMs() {
