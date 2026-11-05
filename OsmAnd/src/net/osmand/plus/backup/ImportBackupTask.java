@@ -36,6 +36,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 
 	private ImportListener importListener;
 	private BackupCollectListener collectListener;
+	private String collectError;
 	private CheckDuplicatesListener duplicatesListener;
 	private final BackupImporter importer;
 	private final RemoteFilesType filesType;
@@ -124,6 +125,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 					remoteFiles = result.remoteFiles;
 					return result.items;
 				} catch (IllegalArgumentException | IOException e) {
+					collectError = e.getMessage();
 					NetworkSettingsHelper.LOG.error("Failed to collect items for backup", e);
 				}
 				break;
@@ -171,7 +173,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 			case COLLECT:
 			case COLLECT_AND_READ:
 				helper.importAsyncTasks.remove(key);
-				collectListener.onBackupCollectFinished(items != null, false, this.items, remoteFiles);
+				collectListener.onBackupCollectFinished(items != null, false, this.items, remoteFiles, collectError);
 				break;
 			case CHECK_DUPLICATES:
 				if (duplicatesListener != null) {
