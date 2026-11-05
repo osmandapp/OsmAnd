@@ -449,7 +449,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				padding = getWidth() / 2 - mHalfWidthFirstTab;
 			}
 			setPadding(padding, getPaddingTop(), padding, getPaddingBottom());
-			if (scrollOffset == 0) scrollOffset = getWidth() / 2 - padding;
+			if (scrollOffset == 0) {
+				scrollOffset = getWidth() / 2 - padding;
+				scrollToChild(currentPosition, 0);
+			}
 		}
 	};
 

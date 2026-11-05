@@ -76,11 +76,10 @@
 
 				<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 					android:id="@+id/widget_text"
-					android:layout_width="wrap_content"
+					android:layout_width="match_parent"
 					android:layout_height="match_parent"
-					android:layout_gravity="center"
 					android:layout_marginHorizontal="36dp"
-					android:gravity="center"
+					android:gravity="center_vertical|start"
 					android:includeFontPadding="false"
 					android:letterSpacing="0.04"
 					android:maxLines="1"

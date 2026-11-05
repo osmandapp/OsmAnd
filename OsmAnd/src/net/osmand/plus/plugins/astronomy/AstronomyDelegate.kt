@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.astronomy
 
-import android.os.AsyncTask
 import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.gallery.data.GalleryKey
@@ -66,7 +65,8 @@ class AstronomyDelegate(
 	override fun cancel(key: GalleryKey) {
 		if (key !is GalleryKey.Astronomy) return
 		activeTasks.remove(key)?.let { task ->
-			if (task.status == AsyncTask.Status.RUNNING) {
+			@Suppress("DEPRECATION") // AsyncTask, needs migration
+			if (task.status == android.os.AsyncTask.Status.RUNNING) {
 				task.cancel(false)
 			}
 		}

@@ -195,7 +195,7 @@ class GalleryLayoutMorph(
 			val start = startStates[end.key]!!
 			builder?.element(start.sectionId, start.card, end.sectionId, end.card, GalleryMotion.stagger(index), GalleryMotion.MOVE_DURATION_MS)
 		}
-		if (builder != null && cards != null) {
+		if (builder != null) {
 			startOpenEdges.forEach { (section, open) -> builder.openEdgesBefore(section, open) }
 			val seen = HashSet<String>()
 			for (index in 0 until recyclerView.childCount) {

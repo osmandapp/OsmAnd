@@ -7,8 +7,7 @@ import kotlin.jvm.JvmField
  * attribute of one. What they share is a key name, the registry they came from, and the list of
  * additional attributes that apply to them.
  *
- * A copy of `AbstractPoiType` in OsmAnd-java, which stays there for android and tools; this copy
- * is for iOS.
+ * Based on `AbstractPoiType` from OsmAnd-java.
  *
  * [equals] is by key name and there is no `hashCode` to match it, exactly as in java: a type put in
  * a hash set is therefore found by identity and not by name, and code that relies on that - the

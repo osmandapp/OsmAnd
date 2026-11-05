@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.view.ViewCompat
 import androidx.core.widget.ImageViewCompat
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer
@@ -35,7 +34,7 @@ object PanelAppearanceApplier {
 		}
 		val independentDrawable = DrawableCompat.wrap(drawable).mutate()
 		DrawableCompat.setTintList(independentDrawable, background.tintColors)
-		ViewCompat.setBackground(view, independentDrawable)
+		view.background = independentDrawable
 	}
 
 	@JvmStatic

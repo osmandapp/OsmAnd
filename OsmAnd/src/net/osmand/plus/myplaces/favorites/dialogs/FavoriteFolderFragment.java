@@ -585,4 +585,9 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favorite_folder";
+	}
 }

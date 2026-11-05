@@ -346,4 +346,9 @@ public class TilesDownloadProgressFragment extends BaseFullScreenFragment implem
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "tiles_download_progress";
+	}
 }

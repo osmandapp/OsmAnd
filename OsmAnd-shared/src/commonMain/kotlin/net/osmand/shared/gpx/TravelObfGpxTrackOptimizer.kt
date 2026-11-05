@@ -10,8 +10,8 @@ import net.osmand.shared.util.KMapUtils
  * boundary is written once per file, and the two pieces overlap by a few points near the edge, so
  * a naive concatenation leaves a loop there and counts the overlap twice.
  *
- * A copy of `TravelObfGpxTrackOptimizer` in OsmAnd-java, which stays there for android; this copy
- * is for iOS. Both work on the shared gpx types already, so the two can be compared directly.
+ * Based on `TravelObfGpxTrackOptimizer` from OsmAnd-java. Both work on the shared gpx types
+ * already, so the two can be compared directly.
  *
  * Human-based version of OverlappedSegmentsMergerDS / OverlappedSegmentsMergerGPT (commit 17701568cb)
  */

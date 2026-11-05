@@ -3748,8 +3748,6 @@
     <string name="media_storage_camera_folder_note_descr">Audio on tallennettu Music/OsmAnd.</string>
     <string name="always_keep_local_copy">Säilytä aina alkuperäinen kopio</string>
     <string name="always_keep_local_copy_description">Media pysyy liitettynä siitä huolimatta poistetaanko alkuperäinen galleriasta tai tiedostosta.</string>
-    <string name="use_spatial_text_search">Käytä paikkatietopohjaista tekstihakua</string>
-    <string name="use_spatial_text_search_description">Korvaa tavalliset pikahakurajapinnat kokeellisella paikkatietopohjaisella tekstihakukoneella.</string>
     <string name="astro_lunar_eclipse">Kuunpimennys</string>
     <string name="astro_lunar_eclipse_subtitle">Tutki koko maapallon kuunpimennystä</string>
     <string name="astro_previous_lunar_eclipse">Edellinen kuunpimennys</string>

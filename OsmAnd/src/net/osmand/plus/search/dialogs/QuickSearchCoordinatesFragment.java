@@ -1082,4 +1082,9 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "quick_search_coordinates";
+	}
 }

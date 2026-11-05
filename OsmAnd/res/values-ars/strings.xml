@@ -1396,7 +1396,7 @@
     <string name="rendering_attr_piste_difficulty_advanced_name">متقدم</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="app_mode_ski_touring">جولة التزلج</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="native_app_allocated_memory">إجمالي الذاكرة الأصلية</string>
     <string name="ui_customization_description">تخصيص كمية العناصر في قائمة تكوين خيارات الخريطة. \n \nيمكنك تعطيل الإضافات غير المستخدمة لإخفاء جميع الضوابط من الطلب %1$s.</string>
     <string name="osmand_plus_extended_description_part1">أوسماند بلس (توجيهات OSM للملاحة الآلية) تطبيق خريطة وملاحة مع إمكانية الوصول إلى بيانات الموقع مجاناً وفي جميع أنحاء العالم، وبجودة عالية.
@@ -1564,7 +1564,7 @@
     <string name="build_installed">إصدار {0} تثبيت بنجاح ({1}).</string>
     <string name="backup_promocode">الرمز الترويجي</string>
     <string name="one_image_per_tile">ملف صورة واحد لكل إطار متجانب</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="delete_history_items_descr">حذف عناصر السجل المحددة؟</string>
     <string name="activity_type_mountainbike_name">دراجة جبلية</string>
     <string name="shared_string_foot">القدم</string>

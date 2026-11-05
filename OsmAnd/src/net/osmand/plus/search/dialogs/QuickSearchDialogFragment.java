@@ -43,6 +43,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.*;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.LockableViewPager;
@@ -619,7 +620,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		List<QuickSearchListItem> items = new ArrayList<>();
 		if (!Algorithms.isEmpty(results)) {
 			for (SearchResult result : results) {
-				if (result.object instanceof MapObject) {
+				if (result.object instanceof MapObject || result.objectType == ObjectType.SUGGESTION) {
 					items.add(new QuickSearchListItem(app, result));
 				}
 			}
@@ -1156,12 +1157,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 		filterChips.updateContent(filterChipItems);
 		searchResultPoiTypesChips.setContentEnabled(!searching);
-		if (!searching) {
+		if (!searching || topChips.isEmpty() || !searchResultPoiTypesChips.hasVisibleChips()) {
 			searchResultPoiTypesChips.updateContent(topChips);
 		}
 		boolean filterChipsVisible = searchVisible && hasVisibleChip(filterChipItems);
 		filterChips.setVisibility(filterChipsVisible ? View.VISIBLE : View.GONE);
-		boolean poiTypesChipsVisible = searchVisible && !topChips.isEmpty();
+		boolean poiTypesChipsVisible = searchVisible && searchResultPoiTypesChips.hasVisibleChips();
 		searchResultPoiTypesChips.setVisibility(poiTypesChipsVisible ? View.VISIBLE : View.GONE);
 		if (filterChipsVisible || poiTypesChipsVisible) {
 			buttonToolbarView.setVisibility(View.VISIBLE);
@@ -1242,7 +1243,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			AbstractPoiType poiType = getPoiTypeForAmenity(amenity);
 			return poiType != null ? poiType.getTranslation() : null;
 		} else if (object instanceof PoiType type) {
-			return type.getTranslation();
+			return PoiAdditionalLabels.getSearchName(type);
 		} else if(object instanceof MapObject mapObject) {
 			return MapObjectViewHolder.getTypeName(app, mapObject);
 		}
@@ -2904,7 +2905,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
 		}
 		applySelectedSortSetting();
-		runCoreSearch(searchQuery, false, true);
+		// spatial rows are appended without deduplication, and a larger radius finds them again: replace them
+		SearchResultCollection collection = getResultCollection();
+		boolean spatialResults = collection != null && collection.isSkipSorting();
+		runCoreSearch(searchQuery, false, !spatialResults, spatialResults);
 	}
 
 	private boolean showMoreSpatialSearchResults() {
@@ -3379,5 +3383,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	// so that back navigation restores exactly the query which is displayed now.
 	public void saveAddressSearchState() {
 		addressSearchStack.push(searchEditText.getText().toString());
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "quick_search";
 	}
 }

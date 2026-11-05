@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.audionotes.library
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -43,6 +44,7 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		@Suppress("DEPRECATION")
 		setHasOptionsMenu(true)
 		val plugin = requireNotNull(PluginsHelper.getPlugin(AudioVideoNotesPlugin::class.java))
 		controller = MediaLibraryController(app, plugin)
@@ -60,7 +62,7 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		chips = root.findViewById<ChipsLayout>(R.id.chips).also { setupChips(it) }
 		updateChips()
 		binder = GalleryGridBinder(root.findViewById(R.id.recycler_view), controller, requireActivity(), nightMode, sectionCards = true)
-			.also { it.pendingLayoutState = savedInstanceState?.getParcelable(LAYOUT_STATE_KEY) }
+			.also { it.pendingLayoutState = savedInstanceState?.let { state -> AndroidUtils.getParcelable(state, LAYOUT_STATE_KEY, Parcelable::class.java) } }
 		controller.attach(this)
 		return root
 	}
@@ -83,6 +85,7 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		super.onPause()
 	}
 
+	@Deprecated("Deprecated in Java")
 	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 		menu.clear()
 		if (controller.isSelectionMode()) {
@@ -92,6 +95,7 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		}
 	}
 
+	@Deprecated("Deprecated in Java")
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		if (!controller.isSelectionMode()) return false
 		return when (item.itemId) {

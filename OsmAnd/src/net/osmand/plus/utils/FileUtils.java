@@ -1,10 +1,16 @@
 package net.osmand.plus.utils;
 
+import static android.system.OsConstants.S_IRWXG;
+import static android.system.OsConstants.S_IRWXO;
+import static android.system.OsConstants.S_IRWXU;
 import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_META_NAME;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_PART_NAME;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
+
+import android.system.ErrnoException;
+import android.system.Os;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
@@ -39,6 +46,8 @@ import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -50,6 +59,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class FileUtils {
+
+	private static final Log LOG = PlatformUtil.getLog(FileUtils.class);
 
 	public static final int APPROXIMATE_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 	private static final long STALE_BUILD_PART_MS = 3 * 24 * 60 * 60 * 1000L;
@@ -382,13 +393,25 @@ public class FileUtils {
 	}
 
 	public static boolean isWritable(@NonNull File dirToTest, boolean testWrite) {
+		return getWriteError(dirToTest, testWrite) == null;
+	}
+
+	/**
+	 * @return null when the directory is writable, otherwise the reason why it is not
+	 */
+	@Nullable
+	public static String getWriteError(@NonNull File dirToTest, boolean testWrite) {
 		InputStream in = null;
 		OutputStream out = null;
-		boolean isWriteable;
+		String error = null;
 		try {
 			dirToTest.mkdirs();
+			if (!dirToTest.isDirectory()) {
+				// File.mkdirs() does not tell why it failed, Os.mkdir() throws the reason, e.g. EACCES
+				Os.mkdir(getFirstMissingDir(dirToTest).getAbsolutePath(), S_IRWXU | S_IRWXG | S_IRWXO);
+			}
 			File writeTestFile = File.createTempFile("osmand_", ".tmp", dirToTest);
-			isWriteable = writeTestFile.exists();
+			boolean isWriteable = writeTestFile.exists();
 
 			if (isWriteable && testWrite) {
 				out = new FileOutputStream(writeTestFile);
@@ -399,13 +422,28 @@ public class FileUtils {
 				isWriteable = XML_FILE_SIGNATURE == fileSignature;
 			}
 			writeTestFile.delete();
-		} catch (IOException e) {
-			isWriteable = false;
+			if (!isWriteable) {
+				error = "test file could not be written";
+			}
+		} catch (IOException | ErrnoException e) {
+			error = Algorithms.isEmpty(e.getMessage()) ? e.toString() : e.getMessage();
 		} finally {
 			Algorithms.closeStream(in);
 			Algorithms.closeStream(out);
 		}
-		return isWriteable;
+		if (error != null) {
+			LOG.warn("Directory is not writable: " + dirToTest + " (" + error + ")");
+		}
+		return error;
+	}
+
+	@NonNull
+	private static File getFirstMissingDir(@NonNull File dir) {
+		File missingDir = dir.getAbsoluteFile();
+		while (missingDir.getParentFile() != null && !missingDir.getParentFile().exists()) {
+			missingDir = missingDir.getParentFile();
+		}
+		return missingDir;
 	}
 
 	public static boolean isTempFile(@NonNull OsmandApplication app, @Nullable String path) {

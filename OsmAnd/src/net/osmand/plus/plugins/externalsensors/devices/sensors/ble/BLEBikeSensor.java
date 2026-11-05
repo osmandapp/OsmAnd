@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection;
 import net.osmand.plus.plugins.externalsensors.GattAttributes;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
@@ -38,7 +39,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 	private int lastCrankRevolutions = -1;
 	private int lastCrankEventTime = -1;
 
-	private float wheelSize; //m
+	private float wheelSize = DevicesSettingsCollection.DEFAULT_WHEEL_CIRCUMFERENCE; //m
 
 	private BikeCadenceData lastBikeCadenceData;
 	private BikeSpeedDistanceData lastBikeSpeedDistanceData;

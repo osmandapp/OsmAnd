@@ -19,16 +19,15 @@ import kotlin.math.max
  * One route calculation over a set of open obf files: the request, plus the tiles of roads the
  * planner has loaded and the graph nodes built over them.
  *
- * The request half is [RoutingRequest]; this adds what the java planner needs to run - the readers
- * and their subregions, the tile cache with its memory accounting, and the segments a restriction
- * leaves to visit. A tile is loaded whole the first time a point in it is asked for, its roads are
- * filtered through the vehicle router and, with the direction points attached, turned into
- * [RouteSegment] chains keyed by point.
+ * The request half is [RoutingRequest]; this adds what the shared planner needs to run - the
+ * readers and their subregions, the tile cache with its memory accounting, and the segments a
+ * restriction leaves to visit. A tile is loaded whole the first time a point in it is asked
+ * for, its roads are filtered through the vehicle router and, with the direction points
+ * attached, turned into [RouteSegment] chains keyed by point.
  *
- * A copy of `net.osmand.router.RoutingContext`, which stays in OsmAnd-java for android and tools;
- * this copy is for iOS. What is left out is the native side - the C++ session handle, the
- * `NativeLibrary` and the tiles loaded through it - because on iOS this planner is what replaces
- * the C++ one.
+ * Based on `net.osmand.router.RoutingContext` from OsmAnd-java. The C++ session handle,
+ * `NativeLibrary` and the tiles loaded through it are not included; this context loads tiles
+ * through the shared OBF readers.
  */
 class RoutingContext : RoutingRequest {
 

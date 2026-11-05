@@ -33,6 +33,8 @@
 	<string name="step_connection">2. How the computer connects</string>
 	<string name="access_wifi">Wi-Fi</string>
 	<string name="access_usb">USB (adb)</string>
+	<string name="keep_screen_on_title">Keep the screen on while the assistant works</string>
+	<string name="keep_screen_on_summary">For 10 minutes after its last request, so the phone does not lock under it.</string>
 	<string name="bridge_title">Find the phone automatically</string>
 	<string name="bridge_summary">Keeps working when the router gives the phone a new address. Needs Python 3 on the computer.</string>
 	<string name="wifi_footer">The computer and the phone are on the same Wi-Fi. Run this on the computer once to get the bridge:</string>

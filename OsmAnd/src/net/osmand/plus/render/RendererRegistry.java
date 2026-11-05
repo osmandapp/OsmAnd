@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -180,7 +181,7 @@ public class RendererRegistry {
 	@Nullable
 	private RenderingRulesStorage loadRenderer(RenderingRulesStorage main, String name, Map<String, RenderingRulesStorage> loadedRenderers,
 	                                           Map<String, String> renderingConstants) throws IOException, XmlPullParserException {
-		if (!readRenderingConstants(name, renderingConstants)) {
+		if (!readOrRestoreRenderingConstants(name, renderingConstants)) {
 			return null;
 		}
 		// parse content
@@ -222,29 +223,64 @@ public class RendererRegistry {
 		return main;
 	}
 
+	private boolean readOrRestoreRenderingConstants(String name, Map<String, String> renderingConstants) throws XmlPullParserException, IOException {
+		try {
+			return readRenderingConstants(name, renderingConstants);
+		} catch (IOException | XmlPullParserException e) {
+			// The cached copy of a built-in style is rewritten only on app update, so restore a damaged one now
+			if (!isInternalStyle(name)) {
+				throw e;
+			}
+			log.error("Rendering style " + name + " is damaged, restoring it from the app", e);
+			copyFileForInternalStyle(name);
+			return readRenderingConstants(name, renderingConstants);
+		}
+	}
+
+	private boolean isInternalStyle(String name) {
+		if ("default".equalsIgnoreCase(name)) {
+			name = DEFAULT_RENDER;
+		}
+		return !externalRenderers.containsKey(name) && getInternalRender(name) != null;
+	}
+
 	private boolean readRenderingConstants(String name, Map<String, String> renderingConstants) throws XmlPullParserException, IOException {
 		InputStream is = getInputStream(name);
 		if (is == null) {
 			return false;
 		}
+		Map<String, String> constants = new LinkedHashMap<>();
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(is, "UTF-8");
+			boolean styleFound = false;
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String tagName = parser.getName();
+					styleFound |= tagName.equals("renderingStyle");
 					if (tagName.equals("renderingConstant")) {
-						if (!renderingConstants.containsKey(parser.getAttributeValue("", "name"))) {
-							renderingConstants.put(parser.getAttributeValue("", "name"),
+						if (!constants.containsKey(parser.getAttributeValue("", "name"))) {
+							constants.put(parser.getAttributeValue("", "name"),
 									parser.getAttributeValue("", "value"));
 						}
 					}
 				}
 			}
+			// The parser ends an empty file or a file cut off between two tags without an error
+			if (!styleFound || parser.getDepth() > 0) {
+				String message = "Rendering style " + name + " is incomplete";
+				if (isInternalStyle(name)) {
+					throw new XmlPullParserException(message);
+				}
+				log.error(message);
+			}
 		} finally {
 			is.close();
 		}
+		// Only a complete read adds its constants, so a damaged copy leaves no values behind for the retry
+		constants.keySet().removeAll(renderingConstants.keySet());
+		renderingConstants.putAll(constants);
 		return true;
 	}
 
@@ -300,8 +336,12 @@ public class RendererRegistry {
 
 	public void copyFileForInternalStyle(String name) {
 		try {
-			FileOutputStream fout = new FileOutputStream(getFileForInternalStyle(name));
+			File file = getFileForInternalStyle(name);
 			String internalRender = getInternalRender(name);
+			if (!Algorithms.isEmpty(internalRender) && isInternalStyleEqualToFile(internalRender, file)) {
+				return;
+			}
+			FileOutputStream fout = new FileOutputStream(file);
 			if (!Algorithms.isEmpty(internalRender)) {
 				InputStream resourceAsStream = RenderingRulesStorage.class.getResourceAsStream(internalRender);
 				if (resourceAsStream != null) {
@@ -311,6 +351,13 @@ public class RendererRegistry {
 			fout.close();
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
+		}
+	}
+
+	private static boolean isInternalStyleEqualToFile(@NonNull String internalRender,
+			@NonNull File file) throws IOException {
+		try (InputStream is = RenderingRulesStorage.class.getResourceAsStream(internalRender)) {
+			return is != null && ResourceManager.isStreamEqualToFile(is, file);
 		}
 	}
 

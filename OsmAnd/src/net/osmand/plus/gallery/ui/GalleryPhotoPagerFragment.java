@@ -757,4 +757,9 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 			return mediaItems.size();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "gallery_photo_pager";
+	}
 }

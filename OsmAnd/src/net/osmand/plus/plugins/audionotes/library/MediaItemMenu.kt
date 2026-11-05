@@ -93,7 +93,7 @@ object MediaItemMenu {
 	private fun popup(anchor: View, nightMode: Boolean, items: List<PopUpMenuItem>) {
 		PopUpMenu.show(PopUpMenuDisplayData().apply {
 			anchorView = anchor; this.nightMode = nightMode; menuItems = items
-			widthMode = PopUpMenuWidthMode.STANDARD; showCompound = false
+			widthMode = PopUpMenuWidthMode.STANDARD
 		})
 	}
 

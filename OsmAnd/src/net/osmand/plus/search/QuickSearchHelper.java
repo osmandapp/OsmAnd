@@ -210,6 +210,13 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	@Nullable
+	public Amenity findAmenity(@NonNull Amenity amenity) {
+		AmenitySearcher amenitySearch = app.getResourceManager().getAmenitySearcher();
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+		return amenitySearch.searchDetailedAmenity(new AmenitySearcher.Request(amenity), settings);
+	}
+
+	@Nullable
 	private static NameStringMatcher createGpxNameMatcher(@NonNull SearchPhrase phrase) {
 		String text = phrase.getFullSearchPhrase();
 		if (text.length() <= 1 && phrase.isNoSelectedType()) {
@@ -608,7 +615,10 @@ public class QuickSearchHelper implements ResourceListener {
 					result.object = postcode;
 					return true;
 				case STREET:
-					City streetCity = createRelatedCity(entry, location);
+					String streetCityName = entry.getRelatedObjectName();
+					City streetCity = Algorithms.isEmpty(streetCityName)
+							? createRelatedCity(entry, location)
+							: createHistoryCity(CityType.CITY, streetCityName, location, null);
 					result.object = createHistoryStreet(streetCity, displayName, location, entry.getOsmId());
 					result.relatedObject = streetCity;
 					if (Algorithms.isEmpty(result.localeRelatedObjectName)) {
@@ -685,6 +695,12 @@ public class QuickSearchHelper implements ResourceListener {
 			}
 			if (Algorithms.isEmpty(streetName)) {
 				streetName = "";
+			}
+			// the stored type name of a building is "<street>, <city>"
+			String cityName = city.getName();
+			String streetPrefix = streetName + ", ";
+			if (!Algorithms.isEmpty(streetName) && cityName.startsWith(streetPrefix)) {
+				city = createHistoryCity(CityType.CITY, cityName.substring(streetPrefix.length()), location, null);
 			}
 			return createHistoryStreet(city, streetName, location, null);
 		}

@@ -55,10 +55,16 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 	private List<GpxItem> getGpxItems(@NonNull GpxFile gpxFile) {
 		List<GpxItem> gpxItems = new ArrayList<>();
 
+		// the segment names depend on counts over the whole file: taken once here instead of for every segment
+		int nonEmptySegmentsCount = gpxFile.getNonEmptySegmentsCount();
+		int nonEmptyTracksCount = gpxFile.getNonEmptyTracksCount();
 		int segmentIndex = 0;
 		for (Track track : gpxFile.getTracks(false)) {
-			for (TrkSegment segment : track.getSegments()) {
-				String trackSegmentTitle = GpxDisplayHelper.buildTrackSegmentName(gpxFile, track, segment, app);
+			List<TrkSegment> segments = track.getSegments();
+			for (int i = 0; i < segments.size(); i++) {
+				TrkSegment segment = segments.get(i);
+				String trackSegmentTitle = GpxDisplayHelper.buildTrackSegmentName(gpxFile, track, segment, i,
+						nonEmptySegmentsCount, nonEmptyTracksCount, app);
 				gpxItems.add(new SegmentItem(segment, trackSegmentTitle, segmentIndex));
 				segmentIndex++;
 			}

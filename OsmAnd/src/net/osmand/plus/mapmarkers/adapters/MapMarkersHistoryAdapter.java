@@ -108,6 +108,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 
 			itemViewHolder.optionsBtn.setBackground(AppCompatResources.getDrawable(app, nightMode ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_reset_to_default_dark, actionIconColor));
+			itemViewHolder.optionsBtn.setContentDescription(app.getString(R.string.shared_string_restore));
 			itemViewHolder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {

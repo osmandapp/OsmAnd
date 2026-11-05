@@ -16,9 +16,11 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
@@ -31,6 +33,7 @@ import net.osmand.search.core.SearchCoreFactory.SearchBuildingAndIntersectionsBy
 import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
 import net.osmand.search.core.SearchExportSettings;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
@@ -91,7 +94,7 @@ public class SearchUICore {
 	private static boolean debugMode = false;
 
 	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
-			Arrays.asList("building", "internet_access_yes"));
+			Arrays.asList("building", "historic_building", "internet_access_yes"));
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this(poiTypes, locale, transliterate, () -> true);
@@ -399,7 +402,7 @@ public class SearchUICore {
 					if (osmId != null && osmId < 0) {
 						osmId = null; // do not merge synthetic osmId such as wiki
 					}
-					if (that.isRouteTrack()) {
+					if (that.isRouteTrack() || that.isSuperRoute()) {
 						osmId = null;
 						wikidata = null; // do not merge routes
 					}
@@ -655,8 +658,10 @@ public class SearchUICore {
 				? new SpatialAmenityTypesAPI(poiTypes)
 				: new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
+		// one instance for both apis: one poi type index and one name-index cache
+		SpatialTextSearchAPI spatialTextSearchAPI = useSpatialSearch ? new SpatialTextSearchAPI(poiTypes) : null;
 		apis.add(useSpatialSearch
-				? new SpatialCategoryAmenityByTypeAPI(poiTypes)
+				? new SpatialCategoryAmenityByTypeAPI(poiTypes, spatialTextSearchAPI)
 				: new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
 		SearchBuildingAndIntersectionsByStreetAPI streetsApi = useSpatialSearch
 				? new SpatialBuildingAndIntersectionsByStreetAPI()
@@ -666,26 +671,33 @@ public class SearchUICore {
 				? new SpatialStreetByCityAPI(streetsApi)
 				: new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
 		apis.add(cityApi);
+		SearchCoreFactory.TownCitiesCache townCitiesCache = new SearchCoreFactory.TownCitiesCache();
 		if (useSpatialSearch) {
-			apis.add(new SpatialNearestCitySearchAPI(streetsApi, cityApi));
-			apis.add(new SpatialTextSearchAPI(poiTypes));
+			apis.add(new SpatialAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache));
+			apis.add(new SpatialAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache));
+			apis.add(spatialTextSearchAPI);
 		} else {
-			SearchCoreFactory.TownCitiesCache townCitiesCache = new SearchCoreFactory.TownCitiesCache();
 			apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache));
 			apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache));
 		}
 	}
 
-	private static class SpatialNearestCitySearchAPI extends SearchAddressByNameAPI {
+	// nearest cities, and the lists of the address tab filtered by the typed text as in the classic search
+	private static class SpatialAddressByNameAPI extends SearchAddressByNameAPI {
 
-		public SpatialNearestCitySearchAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi,
-		                                   SearchStreetByCityAPI cityApi) {
-			super(streetsApi, cityApi, false, new SearchCoreFactory.TownCitiesCache());
+		private final boolean longDistance;
+
+		public SpatialAddressByNameAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi,
+		                               SearchStreetByCityAPI cityApi, boolean longDistance,
+		                               SearchCoreFactory.TownCitiesCache townCitiesCache) {
+			super(streetsApi, cityApi, longDistance, townCitiesCache);
+			this.longDistance = longDistance;
 		}
 
 		@Override
 		public int getSearchPriority(SearchPhrase phrase) {
-			return phrase.isEmpty() && phrase.isEmptyQueryAllowed() ? super.getSearchPriority(phrase) : -1;
+			boolean nearestCities = !longDistance && phrase.isEmpty() && phrase.isEmptyQueryAllowed();
+			return nearestCities || phrase.isAddressListFilter() ? super.getSearchPriority(phrase) : -1;
 		}
 	}
 
@@ -697,7 +709,7 @@ public class SearchUICore {
 
 		@Override
 		public int getSearchPriority(SearchPhrase phrase) {
-			return phrase.isUnknownSearchWordPresent() ? -1 : super.getSearchPriority(phrase);
+			return phrase.isUnknownSearchWordPresent() && !phrase.isAddressListFilter() ? -1 : super.getSearchPriority(phrase);
 		}
 	}
 
@@ -735,8 +747,49 @@ public class SearchUICore {
 
 	private static class SpatialCategoryAmenityByTypeAPI extends SearchAmenityByTypeAPI {
 
-		public SpatialCategoryAmenityByTypeAPI(MapPoiTypes types) {
+		private final SpatialTextSearchAPI spatialTextSearchAPI;
+
+		public SpatialCategoryAmenityByTypeAPI(MapPoiTypes types, SpatialTextSearchAPI spatialTextSearchAPI) {
 			super(types, null);
+			this.spatialTextSearchAPI = spatialTextSearchAPI;
+		}
+
+		@Override
+		protected List<Amenity> searchByNameIndex(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+				Object poiType, QuadRect bbox31) throws IOException {
+			List<String> keys = getNameIndexKeys(poiType);
+			if (keys == null) {
+				return null;
+			}
+			List<Amenity> res = new ArrayList<>();
+			for (String key : keys) {
+				res.addAll(spatialTextSearchAPI.searchPoiByCategory(phrase, resultMatcher, key, bbox31));
+			}
+			return res;
+		}
+
+		@Override
+		protected boolean isReadByNameIndex(BinaryMapIndexReader reader) {
+			return SpatialTextSearchAPI.hasPoiTypesInNameIndex(reader);
+		}
+
+		// a whole category also takes reference types, the name index has none: it is read with the type filter
+		private static List<String> getNameIndexKeys(Object poiType) {
+			if (poiType instanceof PoiType pt) {
+				return Collections.singletonList(pt.getKeyName());
+			} else if (poiType instanceof TopIndexFilter filter) {
+				return Collections.singletonList(filter.getFilterId());
+			} else if (poiType instanceof CustomSearchPoiFilter filter && filter.getAcceptedTypes() != null) {
+				List<String> keys = new ArrayList<>();
+				for (Set<String> types : filter.getAcceptedTypes().values()) {
+					if (types == null) {
+						return null;
+					}
+					keys.addAll(types);
+				}
+				return keys.isEmpty() ? null : keys;
+			}
+			return null;
 		}
 
 		@Override
@@ -1092,9 +1145,6 @@ public class SearchUICore {
 
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
-		if (currentSearchResult != null && currentSearchResult.hasMoreSpatialSearchResults()) {
-			return true;
-		}
 		for (SearchCoreAPI api : apis) {
 			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) >= 0
 					&& api.isSearchMoreAvailable(phrase)) {

@@ -2789,7 +2789,7 @@
     <string name="help_article_map_point_layers_on_map_name">지도의 포인트</string>
     <string name="sensor_temperature_desc">센서의 온도를 표시함</string>
     <string name="shared_string_reset_all">모두 재설정</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="filter_screen_title">검색 필터</string>
     <string name="help_article_widgets_info_widgets_name">정보 위젯</string>
     <string name="tripltek_promo">Tripltek 프로모션에 대한 %1$s 달</string>
@@ -3030,7 +3030,7 @@
     <string name="no_poi_for_category">POI를 찾을 수 없음</string>
     <string name="rendering_value_sectors_name">섹터</string>
     <string name="tts_title">음성합성</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="shared_string_paused">일시중지됨</string>

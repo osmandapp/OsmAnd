@@ -61,7 +61,7 @@ class MediaDetailsContentBuilder(private val app: OsmandApplication) {
 		items += DetailsItem.Header(FILE_CARD, app.getString(R.string.shared_string_file))
 		val details = item.details
 		details?.getDescription(app.language)?.takeIf { it.isNotBlank() }?.let { items += DetailsItem.Text(FILE_CARD, it) }
-		items += fileCardRow(R.string.shared_string_name, item.title, middleEllipsis = true)
+		item.title.takeIf { it.isNotBlank() }?.let { items += fileCardRow(R.string.shared_string_name, it, middleEllipsis = true) }
 		metadata?.format?.let { items += fileCardRow(R.string.shared_string_format, it) }
 		(metadata?.creationTimeMs ?: metadata?.lastModifiedTimeMs)?.let {
 			items += fileCardRow(R.string.shared_string_created, OsmAndFormatter.getFormattedDateTime(app, it))

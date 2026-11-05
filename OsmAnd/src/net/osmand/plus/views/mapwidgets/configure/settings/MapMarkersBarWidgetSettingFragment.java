@@ -71,4 +71,9 @@ public class MapMarkersBarWidgetSettingFragment extends WidgetInfoBaseFragment {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(KEY_DISPLAYED_MARKERS, oneMarkerDisplayed);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_markers_bar_widget_setting";
+	}
 }

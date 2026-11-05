@@ -12,6 +12,7 @@ import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
 import java.text.MessageFormat
 import java.util.Date
+import java.util.Locale
 
 /** Asks before a build is downloaded. A dialog fragment, so a rotation keeps it open. */
 class BuildDownloadDialog : DialogFragment() {
@@ -25,12 +26,17 @@ class BuildDownloadDialog : DialogFragment() {
 		val date = build.date?.let { AndroidUtils.formatDateTime(app, it.time) } ?: ""
 		return MaterialAlertDialogBuilder(context)
 			.setMessage(MessageFormat.format(getString(R.string.install_selected_build),
-				build.tag, date, build.size))
+				build.tag, date, downloadSize(app, build)))
 			.setPositiveButton(R.string.shared_string_download) { _, _ ->
 				BuildsManager.getInstance(app).startDownload(build)
 			}
 			.setNegativeButton(R.string.shared_string_cancel, null)
 			.create()
+	}
+
+	private fun downloadSize(app: OsmandApplication, build: OsmAndBuild): String? {
+		val delta = BuildsManager.getInstance(app).deltaSizes[build.path] ?: return build.size
+		return "%.1f".format(Locale.US, delta.size / (1024.0 * 1024.0))
 	}
 
 	companion object {

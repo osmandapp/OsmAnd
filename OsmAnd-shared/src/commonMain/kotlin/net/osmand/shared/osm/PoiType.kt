@@ -4,9 +4,9 @@ package net.osmand.shared.osm
  * One leaf of poi_types.xml: either a poi type such as "bakery", or an additional attribute such
  * as "opening_hours". Which of the two it is depends on whether it has a parent type.
  *
- * A copy of `PoiType` in OsmAnd-java, which stays there for android and tools; this copy is for
- * iOS. A reference type carries no data of its own: every getter forwards to the type it points
- * at, so that one type can appear under several filters without being copied.
+ * Based on `PoiType` from OsmAnd-java. A reference type carries no data of its own: every
+ * getter forwards to the type it points at, so that one type can appear under several filters
+ * without being copied.
  */
 class PoiType(
 	poiTypes: MapPoiTypes,

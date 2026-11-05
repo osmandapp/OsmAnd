@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.webkit.WebMessage;
 import android.webkit.WebMessagePort;
 import android.webkit.WebResourceError;
@@ -91,12 +92,14 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 			"  var attribution = document.getElementById('attribution');",
 			"  var port = null;",
 			"  var picture = null;",
+			// Without view:azimuth the viewer still reports x = 0 (north), which is not a real heading.
+			"  var headingKnown = false;",
 			"  var sentHeading = null;",
 			"  var pendingHeading = null;",
 			"  var headingTimer = null;",
 			"  var headingSentAt = 0;",
 			"",
-			"  function attributionText() {",
+			"  function attributionParts() {",
 			"    var meta = viewer.psv && viewer.psv.getPictureMetadata();",
 			"    var caption = meta && meta.caption;",
 			"    var parts = ['\\u00A9 Panoramax'];",
@@ -109,13 +112,25 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 			"    if (meta && meta.properties && meta.properties.license) {",
 			"      parts.push(meta.properties.license);",
 			"    }",
-			"    return parts.join(' \\u00B7 ');",
+			"    return parts;",
+			"  }",
+			"",
+			// Each part is a bidi isolate so a locale date cannot reorder its digits against its neighbours.
+			"  function showAttribution() {",
+			"    attribution.textContent = '';",
+			"    attributionParts().forEach(function(part, i) {",
+			"      if (i > 0) { attribution.appendChild(document.createTextNode(' \\u00B7 ')); }",
+			"      var isolate = document.createElement('bdi');",
+			"      isolate.textContent = part;",
+			"      attribution.appendChild(isolate);",
+			"    });",
 			"  }",
 			"",
 			"  function sendPicture() {",
 			"    if (!port || !picture) { return; }",
 			"    port.postMessage(JSON.stringify({type: '" + MESSAGE_TYPE_PICTURE + "',",
-			"      id: picture.picId, lat: picture.lat, lon: picture.lon, heading: picture.x}));",
+			"      id: picture.picId, lat: picture.lat, lon: picture.lon,",
+			"      heading: headingKnown ? picture.x : null}));",
 			"  }",
 			"",
 			"  function normalizeAngle(a) { var n = a % 360; return n < 0 ? n + 360 : n; }",
@@ -139,6 +154,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 			"  }",
 			"",
 			"  function onViewRotated(e) {",
+			"    if (!headingKnown) { return; }",
 			"    var heading = toAngle(e && e.detail ? e.detail.x : null);",
 			"    if (heading === null) { return; }",
 			"    if (headingTimer !== null) { pendingHeading = heading; return; }",
@@ -161,8 +177,10 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 			"",
 			"  function onPictureLoaded(e) {",
 			"    picture = e && e.detail;",
+			"    var meta = viewer.psv && viewer.psv.getPictureMetadata();",
+			"    headingKnown = toAngle(meta && meta.properties && meta.properties['view:azimuth']) !== null;",
 			"    resetHeading();",
-			"    attribution.textContent = attributionText();",
+			"    showAttribution();",
 			"    sendPicture();",
 			"  }",
 			"",
@@ -188,6 +206,8 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 	private double compassAngle = Double.NaN;
 	private final UiUtilities iconsCache;
 
+	// The WebView the live callbacks belong to; one from any other WebView is stale.
+	private WebView webView;
 	private WebMessagePort viewerPort;
 	private String viewerNonce;
 	private long lastHeadingTime;
@@ -296,6 +316,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 	private View getWebView() {
 		View view = getMapActivity().getLayoutInflater().inflate(R.layout.panoramax_web_view, null);
 		WebView webView = view.findViewById(R.id.webView);
+		this.webView = webView;
 		webView.setBackgroundColor(Color.argb(1, 0, 0, 0));
 		View noInternetView = view.findViewById(R.id.panoramaxNoInternetLayout);
 		Drawable icWifiOff = iconsCache.getThemedIcon(R.drawable.ic_action_wifi_off);
@@ -313,16 +334,21 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		webView.setWebViewClient(new WebViewClient() {
 			@Override
 			public void onPageFinished(WebView view, String url) {
+				if (!isCurrentWebView(view)) {
+					return;
+				}
 				releaseViewerPort();
 				if (!BLANK_PAGE_URL.equals(url)) {
-					openViewerChannel(webView);
+					openViewerChannel(view);
 				}
 			}
 
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
 				if (VIEWER_ERROR_URL.equals(request.getUrl().toString())) {
-					showViewerError(webView, noInternetView);
+					if (isCurrentWebView(view)) {
+						showViewerError(view, noInternetView);
+					}
 					return true;
 				}
 				return false;
@@ -332,8 +358,8 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 			public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
 				// The page itself is loaded from memory and never fails, so the bundle is the
 				// only request whose failure leaves the viewer unusable.
-				if (VIEWER_BUNDLE_URL.equals(request.getUrl().toString())) {
-					showViewerError(webView, noInternetView);
+				if (isCurrentWebView(view) && VIEWER_BUNDLE_URL.equals(request.getUrl().toString())) {
+					showViewerError(view, noInternetView);
 				}
 			}
 		});
@@ -344,6 +370,9 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 
 	private void showViewerError(@NonNull WebView webView, @NonNull View noInternetView) {
 		webView.post(() -> {
+			if (!isCurrentWebView(webView)) {
+				return;
+			}
 			webView.loadUrl(BLANK_PAGE_URL);
 			noInternetView.setVisibility(View.VISIBLE);
 		});
@@ -369,7 +398,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		viewerPort.setWebMessageCallback(new WebMessagePort.WebMessageCallback() {
 			@Override
 			public void onMessage(WebMessagePort port, WebMessage message) {
-				onViewerMessage(message.getData());
+				onViewerMessage(port, message.getData());
 			}
 		}, new Handler(Looper.getMainLooper()));
 		webView.postWebMessage(new WebMessage(viewerNonce, new WebMessagePort[] {ports[1]}),
@@ -383,8 +412,31 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		}
 	}
 
-	private void onViewerMessage(@Nullable String data) {
-		if (data == null) {
+	private boolean isCurrentWebView(@Nullable WebView view) {
+		return view != null && view == webView;
+	}
+
+	/** Releases the viewer and invalidates callbacks before destroying the WebView. */
+	@Override
+	public void onDestroyView() {
+		WebView webView = this.webView;
+		if (webView != null) {
+			this.webView = null;
+			releaseViewerPort();
+			webView.stopLoading();
+			webView.setWebViewClient(new WebViewClient());
+			ViewParent parent = webView.getParent();
+			if (parent instanceof ViewGroup) {
+				((ViewGroup) parent).removeView(webView);
+			}
+			webView.destroy();
+		}
+		super.onDestroyView();
+	}
+
+	/** Close() does not drop messages already queued, so a stale port must be ignored here. */
+	private void onViewerMessage(@NonNull WebMessagePort port, @Nullable String data) {
+		if (port != viewerPort || data == null) {
 			return;
 		}
 		JSONObject message;

@@ -244,4 +244,9 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 			adapter.updateItem(localGroup);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "local_categories";
+	}
 }

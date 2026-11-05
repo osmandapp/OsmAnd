@@ -16,6 +16,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.CollectionUtils;
@@ -180,6 +181,17 @@ public class OsmandMap {
 			return carViewDensity / density;
 		}
 		return 1f;
+	}
+
+	/**
+	 * While a car session is running the map is the car one: it can show 2D just for a route preview,
+	 * and the car screens save the tilt themselves when the user changes it.
+	 */
+	public void saveLastKnownMapElevation(@NonNull ApplicationMode appMode) {
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
+			app.getSettings().setLastKnownMapElevation(appMode, mapView.getElevationAngle());
+		}
 	}
 
 	public void fitCurrentRouteToMap(boolean portrait, int leftBottomPaddingPx) {

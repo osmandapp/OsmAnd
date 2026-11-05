@@ -4311,9 +4311,9 @@
     <string name="send_logcat_log_descr">Detaljert loggfil</string>
     <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="with_waypoints">Med rutepunkter</string>
-    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_range_selected_format">%1$s - %2$s, %3$s</string>
     <string name="max_altitude">Maks. høyde</string>
-    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_date_selected_format">%1$s - %2$s</string>
     <string name="app_mode_paragliding">Paragliding</string>
     <string name="filter_by_name">Filtrer etter navn</string>
     <string name="shared_string_reset_all">Tilbaksestill alt</string>
@@ -5046,12 +5046,8 @@
     <string name="open_till_short">Til</string>
     <string name="shared_string_minimum">Minimum</string>
     <string name="button_frames">Knapperammer</string>
-    <string name="ais_port_nmea_server">TCP-port for NMEA-datakilde</string>
-    <string name="ais_port_nmea_server_description">Definer TCP-portnummer for NMEA-datakilden</string>
     <string name="ais_address_settings_description">Velg NMEA-protokollen (UDP/TCP) og angi de tilhørende adressene og portene</string>
     <string name="ais_address_settings">IP-adresseinnstillinger</string>
-    <string name="ais_address_nmea_server">IP-adresse for NMEA-datakilde</string>
-    <string name="ais_address_nmea_server_description">Definer IP-adresse for NMEA-datakilden (hvis TCP brukes)</string>
     <string name="open_from_short">Fra</string>
     <string name="astro_designations">Betegnelser</string>
     <string name="obd_simulation_device">Simuleringsenhet</string>

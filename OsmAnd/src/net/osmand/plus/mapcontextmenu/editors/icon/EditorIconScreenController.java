@@ -5,7 +5,6 @@ import static net.osmand.plus.mapcontextmenu.editors.icon.EditorIconScreenAdapte
 import static net.osmand.plus.mapcontextmenu.editors.icon.EditorIconScreenAdapter.ICON_SEARCH_RESULT;
 import static net.osmand.plus.utils.ColorUtilities.getActiveColor;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
-import static net.osmand.search.core.ObjectType.SEARCH_FINISHED;
 
 import android.content.Context;
 import android.view.View;
@@ -13,8 +12,6 @@ import android.view.View;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
-import net.osmand.ResultMatcher;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenFragment;
@@ -28,11 +25,6 @@ import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.search.SearchUICore;
-import net.osmand.search.SearchUICore.SearchResultCollection;
-import net.osmand.search.core.ObjectType;
-import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -46,15 +38,14 @@ public class EditorIconScreenController implements IDialogController {
 	private final EditorIconController centralController;
 	private IEditorIconPaletteScreen screen;
 
-	private final SearchUICore searchUICore;
-	private final List<PoiType> lastSearchResults = new ArrayList<>();
+	private final EditorIconSearcher iconSearcher;
+	private final List<IconSearchResult> lastSearchResults = new ArrayList<>();
 	private boolean inSearchMode;
-	private boolean searchCancelled;
 
 	public EditorIconScreenController(@NonNull OsmandApplication app, @NonNull EditorIconController centralController) {
 		this.app = app;
 		this.centralController = centralController;
-		this.searchUICore = app.getSearchUICore().getCore();
+		this.iconSearcher = new EditorIconSearcher(app, centralController);
 	}
 
 	public void bindScreen(@NonNull IEditorIconPaletteScreen screen) {
@@ -73,11 +64,8 @@ public class EditorIconScreenController implements IDialogController {
 	public List<ScreenItem> populateScreenItems() {
 		List<ScreenItem> screenItems = new ArrayList<>();
 		if (inSearchMode) {
-			for (PoiType poiType : lastSearchResults) {
-				EditorIconUtils.retrieveIconKey(poiType, iconKey -> {
-					IconSearchResult searchResult = new IconSearchResult(iconKey, poiType);
-					screenItems.add(new ScreenItem(ICON_SEARCH_RESULT, searchResult));
-				});
+			for (IconSearchResult searchResult : lastSearchResults) {
+				screenItems.add(new ScreenItem(ICON_SEARCH_RESULT, searchResult));
 			}
 		} else {
 			for (IconsCategory category : centralController.getCategories()) {
@@ -174,8 +162,7 @@ public class EditorIconScreenController implements IDialogController {
 
 	public void exitSearchMode() {
 		inSearchMode = false;
-		searchCancelled = true;
-		lastSearchResults.clear();
+		clearSearchQuery();
 		if (screen != null) {
 			screen.onScreenModeChanged();
 		}
@@ -186,48 +173,23 @@ public class EditorIconScreenController implements IDialogController {
 	}
 
 	public void clearSearchQuery() {
-		searchCancelled = true;
+		iconSearcher.cancel();
 		lastSearchResults.clear();
 	}
 
 	public void searchIcons(@NonNull String text) {
-		lastSearchResults.clear();
-		if (Algorithms.isEmpty(text)) {
+		clearSearchQuery();
+		String query = text.trim();
+		if (Algorithms.isEmpty(query)) {
 			if (screen != null) {
 				screen.updateScreenContent();
 			}
 			return;
 		}
-		searchCancelled = false;
-		SearchSettings searchSettings = searchUICore.getSearchSettings().setSearchTypes(ObjectType.POI_TYPE);
-		searchUICore.updateSettings(searchSettings);
-		searchUICore.search(text, true, new ResultMatcher<>() {
-			@Override
-			public boolean publish(SearchResult searchResult) {
-				if (searchResult.objectType == SEARCH_FINISHED) {
-					SearchResultCollection resultCollection = searchUICore.getCurrentSearchResult();
-					List<PoiType> results = new ArrayList<>();
-					for (SearchResult result : resultCollection.getCurrentSearchResults()) {
-						Object poiObject = result.object;
-						if (poiObject instanceof PoiType poiType) {
-							if (!poiType.isAdditional()) {
-								results.add(poiType);
-							}
-						}
-					}
-					lastSearchResults.addAll(results);
-					app.runInUIThread(() -> {
-						if (screen != null) {
-							screen.updateScreenContent();
-						}
-					});
-				}
-				return true;
-			}
-
-			@Override
-			public boolean isCancelled() {
-				return searchCancelled;
+		iconSearcher.search(query, results -> {
+			lastSearchResults.addAll(results);
+			if (screen != null) {
+				screen.updateScreenContent();
 			}
 		});
 	}

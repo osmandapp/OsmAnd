@@ -151,6 +151,7 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createRootInset().portraitSides().build());
 		collection.replace(InsetTarget.createLeftSideContainer(true, view).build());
 		collection.replace(InsetTarget.createHorizontalLandscape(true,  R.id.top_bar_layout, R.id.chart_content).build());
 		collection.replace(InsetTarget.createBottomContainer(R.id.chart_container).build());
@@ -314,5 +315,10 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "track_details_menu";
 	}
 }

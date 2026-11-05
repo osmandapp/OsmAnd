@@ -980,7 +980,8 @@ public class BinaryMapAddressReaderAdapter {
 				int len = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimitLong((long) len);
 				pi.readAtomsBytes(len);
-				PrefixNameValue prefix = pi.addData(AddressNameIndexData.parseFrom(codedIS), shift);
+				PrefixNameValue prefix = pi.isCacheRawBlocks() ? pi.addData(codedIS.readRawBytes(len), shift)
+						: pi.addData(AddressNameIndexData.parseFrom(codedIS), shift);
 				if (res != null) {
 					res.add(prefix);
 				}

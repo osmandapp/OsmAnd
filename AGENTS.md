@@ -38,6 +38,7 @@ The `:OsmAnd-shared` module is a **Kotlin Multiplatform (KMP)** library designed
   - `kotlinx-datetime`: For date and time operations.
   - `okio`: For cross-platform I/O.
   - `stately`: For concurrent collections.
+- **Editing rules:** `OsmAnd-shared` is also compiled by the iOS app and by the standalone JVM build. Keep both compiling: an `actual` for every `expect` in each platform source set, no JVM-only imports in `commonMain`, and no removal of overloads or `@Jvm*`/`@Throws` annotations that Swift or Java callers use. When a change has to break compatibility anyway, name the affected declarations and consumers in the reply and in the pull request.
 
 ## 4. Architecture & Key Components
 ### Plugin Architecture
