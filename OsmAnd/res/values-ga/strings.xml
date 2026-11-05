@@ -2070,7 +2070,7 @@
     <string name="osm_recipient_stat">Cuir %1$s in eagar, suim %2$s mBTC</string>
     <string name="go_to_map">Taispeáin léarscáil</string>
     <string name="obd_fuel_type_gasoline">Gásailín</string>
-    <string name="routing_attr_avoid_cobblestone_description">Seachain cobblestone</string>
+    <string name="routing_attr_avoid_cobblestone_description">Seachain clocha duirlinge</string>
     <string name="purchases_feature_desc_pro_widgets">Faigh rochtain ar ghnéithe OsmAnd Pro: Dathú bealaigh agus níos mó.</string>
     <string name="contour_lines_hillshade_slope">Línte comhrianta, cnocán, fána</string>
     <string name="continue_with">Lean ar aghaidh le %1$s</string>
@@ -2548,7 +2548,7 @@
     <string name="quick_action_navigation_voice_on">Guth Mute</string>
     <string name="quick_actions_delete">Scrios gníomh</string>
     <string name="download_wikipedia_description">Íoslódáil na hailt Vicipéide le haghaidh %1$s chun iad a léamh as líne.</string>
-    <string name="routing_attr_avoid_sett_name">Gan socrú</string>
+    <string name="routing_attr_avoid_sett_name">Gan clocha snoite</string>
     <string name="vehicle_parameters_descr">Meáchan, airde, fad, luas</string>
     <string name="voice_announces_descr">Treoracha agus fógraí nascleanúna</string>
     <string name="obd_speed_desc">Taispeánann seo luas ón mBraiteoir Luais Feithicle (VSS).</string>
@@ -3056,7 +3056,7 @@
     <string name="key_assignment_add_key">Cuir eochair leis</string>
     <string name="action_icon">Deilbhín gníomhaíochta</string>
     <string name="map_text">Rindreáil Léarscáile</string>
-    <string name="routing_attr_avoid_cobblestone_name">Seachain cobblestone</string>
+    <string name="routing_attr_avoid_cobblestone_name">Seachain clocha duirlinge</string>
     <string name="bottom">Bun</string>
     <string name="top_and_bottom">Barr agus bun</string>
     <string name="missing_maps_description">Tá roinnt léarscáileanna as líne a theastaíonn don bhealach seo ar iarraidh nó níl siad cothrom le dáta. Íoslódáil nó nuashonraigh na léarscáileanna seo le do thoil.</string>
@@ -3601,7 +3601,7 @@
     <string name="read_wikipedia_offline">Léigh Vicipéid as líne</string>
     <string name="storage_directory_shared">Cuimhne chomhroinnte</string>
     <string name="hno">Uimhir an tí</string>
-    <string name="routing_attr_avoid_sett_description">Seachnaíonn seo tacar</string>
+    <string name="routing_attr_avoid_sett_description">Seachnaíonn clocha pábhála snoite</string>
     <string name="monitoring_notification">Taispeáin an cnaipe \'Taifead\' sna Fógraí</string>
     <string name="mapillary_menu_descr_dates">Ná hamharc ach ar íomhánna breise</string>
     <string name="quick_action_edit_action">Cuir gníomh in eagar</string>

@@ -2075,8 +2075,8 @@
     <string name="avoid_roads_descr">Оберіть на мапі, або зі списку нижче, дороги яких ви хочете уникати під час навігації:</string>
     <string name="show_along_the_route">Показувати вздовж маршруту</string>
     <string name="quick_action_switch_day_night_descr">Перемикач денного та нічного режимів OsmAnd.</string>
-    <string name="routing_attr_avoid_sett_name">Уникати бруківки</string>
-    <string name="routing_attr_avoid_sett_description">Уникати бруківки</string>
+    <string name="routing_attr_avoid_sett_name">Уникати бруківки (тесаний)</string>
+    <string name="routing_attr_avoid_sett_description">Уникати бруківки (тесаний)</string>
     <string name="files_failed">Не вдалося скопіювати %1$d файлів (%2$s).</string>
     <string name="dont_move_maps">Не переміщувати</string>
     <string name="public_transport_ped_route_title">Маршрут пішки приблизно %1$s, і може бути швидшим за громадський транспорт</string>
@@ -4321,8 +4321,8 @@
     <string name="allow_display_on_top">Дозволити показ зверху</string>
     <string name="allow_display_on_top_description">Дозволити показ текстів мап один над одним</string>
     <string name="map_text">Рендеринг карти</string>
-    <string name="routing_attr_avoid_cobblestone_name">Уникати бруківки</string>
-    <string name="routing_attr_avoid_cobblestone_description">Уникати бруківки</string>
+    <string name="routing_attr_avoid_cobblestone_name">Уникати бруківки (кругляк)</string>
+    <string name="routing_attr_avoid_cobblestone_description">Уникати бруківки (кругляк)</string>
     <string name="disable_map_layers">Вимкнути шари мапи</string>
     <string name="disable_map_layers_descr">Вимкнути всі шари мапи над векторною мапою (потрібен перезапуск).</string>
     <string name="steps_per_minute_unit">Кроки/хв</string>
