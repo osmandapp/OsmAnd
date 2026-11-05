@@ -270,18 +270,23 @@ public class RouteDataObject {
 			if (Algorithms.isEmpty(lang)) {
 				return names.get(region.nameTypeRule);
 			}
+			String enName = null;
 			int[] kt = names.keys();
 			for (int i = 0; i < kt.length; i++) {
 				int k = kt[i];
 				if (region.routeEncodingRules.size() > k) {
-					if (("name:" + lang).equals(region.routeEncodingRules.get(k).getTag())) {
+					String tag = region.routeEncodingRules.get(k).getTag();
+					if (("name:" + lang).equals(tag)) {
 						return names.get(k);
+					} else if ("name:en".equals(tag)) {
+						enName = names.get(k);
 					}
 				}
 			}
 			String nmDef = names.get(region.nameTypeRule);
 			if (transliterate && nmDef != null && nmDef.length() > 0) {
-				return TransliterationHelper.transliterate(nmDef);
+				// a Latin name of the map (name:en, or the generator's romanisation) beats a transliteration
+				return !Algorithms.isEmpty(enName) ? enName : TransliterationHelper.transliterate(nmDef);
 			}
 			return nmDef;
 		}

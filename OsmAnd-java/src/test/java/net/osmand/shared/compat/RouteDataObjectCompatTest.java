@@ -69,6 +69,7 @@ public class RouteDataObjectCompatTest {
 				assertEquals(m, j.isClockwise(dir), k.isClockwise(dir));
 				for (String lang : LANGS) {
 					assertEquals(m + " " + lang, j.getName(lang, false), k.getName(lang, false));
+					assertEquals(m + " " + lang, j.getName(lang, true), k.getName(lang, true));
 					assertEquals(m + " " + lang, j.getRef(lang, false, dir), k.getRef(lang, false, dir));
 					assertEquals(m + " " + lang, j.getDestinationRef(lang, false, dir), k.getDestinationRef(lang, false, dir));
 					assertEquals(m + " " + lang, j.getDestinationName(lang, false, dir), k.getDestinationName(lang, false, dir));
