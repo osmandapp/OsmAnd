@@ -2608,6 +2608,22 @@ public class OsmandAidlApi {
 		return connectedApp.isEnabled() && connectedApp.isGroupGranted(group);
 	}
 
+	/**
+	 * Callbacks are called from OsmAnd's own threads, where the caller is OsmAnd itself,
+	 * so the app that registered the callback is checked instead.
+	 *
+	 * @return true if the app is OsmAnd, or it is enabled and the group is granted to it
+	 */
+	boolean isCallbackAllowed(@Nullable String pack, @Nullable AidlPermissionGroup group) {
+		if (pack == null) {
+			return false;
+		} else if (pack.equals(app.getPackageName())) {
+			return true;
+		}
+		ConnectedApp connectedApp = connectedApps.get(pack);
+		return connectedApp != null && connectedApp.isEnabled() && (group == null || connectedApp.isGroupGranted(group));
+	}
+
 	@NonNull
 	public ConnectedApp getOrCreateConnectedApp(@NonNull String pack) {
 		ConnectedApp connectedApp = connectedApps.get(pack);
@@ -2785,7 +2801,7 @@ public class OsmandAidlApi {
 					}
 				}
 				for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
-					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0) {
+					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0 && isCallbackAllowed(cb.getPack(), cb.getGroup())) {
 						try {
 							cb.getCallback().updateNavigationInfo(directionInfo);
 						} catch (Exception e) {
@@ -2808,7 +2824,7 @@ public class OsmandAidlApi {
 					}
 				}
 				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
-					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0) {
+					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0 && isCallbackAllowed(cb.getPack(), cb.getGroup())) {
 						try {
 							cb.getCallback().updateNavigationInfo(directionInfo);
 						} catch (Exception e) {
@@ -2833,7 +2849,7 @@ public class OsmandAidlApi {
 		VoiceRouter.VoiceMessageListener listener = (cmds, played) -> {
 			if (aidlCallbackListener != null) {
 				for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
-					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0) {
+					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0 && isCallbackAllowed(cb.getPack(), cb.getGroup())) {
 						try {
 							cb.getCallback().onVoiceRouterNotify(new OnVoiceNavigationParams(cmds, played));
 						} catch (Exception e) {
@@ -2844,7 +2860,7 @@ public class OsmandAidlApi {
 			}
 			if (aidlCallbackListenerV2 != null) {
 				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
-					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0) {
+					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0 && isCallbackAllowed(cb.getPack(), cb.getGroup())) {
 						try {
 							cb.getCallback().onVoiceRouterNotify(new net.osmand.aidlapi.navigation.OnVoiceNavigationParams(cmds, played));
 						} catch (Exception e) {
@@ -2869,7 +2885,7 @@ public class OsmandAidlApi {
 		LogcatMessageListener listener = (_filterLevel, logs) -> {
 			if (aidlCallbackListenerV2 != null) {
 				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
-					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_LOGCAT_MESSAGE) > 0) {
+					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_LOGCAT_MESSAGE) > 0 && isCallbackAllowed(cb.getPack(), cb.getGroup())) {
 						try {
 							cb.getCallback().onLogcatMessage(new OnLogcatMessageParams(_filterLevel, logs));
 						} catch (Exception e) {
@@ -2946,7 +2962,7 @@ public class OsmandAidlApi {
 		IContextMenuButtonListener listener = (buttonId, pointId, layerId) -> {
 			if (aidlCallbackListener != null) {
 				for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
-					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_CONTEXT_MENU_BUTTONS_CLICK) > 0) {
+					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_CONTEXT_MENU_BUTTONS_CLICK) > 0 && isCallbackAllowed(cb.getPack(), cb.getGroup())) {
 						try {
 							cb.getCallback().onContextMenuButtonClicked(buttonId, pointId, layerId);
 						} catch (Exception e) {
@@ -2957,7 +2973,7 @@ public class OsmandAidlApi {
 			}
 			if (aidlCallbackListenerV2 != null) {
 				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
-					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_CONTEXT_MENU_BUTTONS_CLICK) > 0) {
+					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_CONTEXT_MENU_BUTTONS_CLICK) > 0 && isCallbackAllowed(cb.getPack(), cb.getGroup())) {
 						try {
 							cb.getCallback().onContextMenuButtonClicked(buttonId, pointId, layerId);
 						} catch (Exception e) {
@@ -3476,7 +3492,7 @@ public class OsmandAidlApi {
 		if (aidlCallbackListenerV2 != null) {
 			for (Map.Entry<Long, OsmandAidlServiceV2.AidlCallbackParams> entry : aidlCallbackListenerV2.getAidlCallbacks().entrySet()) {
 				OsmandAidlServiceV2.AidlCallbackParams cb = entry.getValue();
-				if ((cb.getKey() & KEY_ON_KEY_EVENT) > 0) {
+				if ((cb.getKey() & KEY_ON_KEY_EVENT) > 0 && isCallbackAllowed(cb.getPack(), cb.getGroup())) {
 					Set<Integer> keyEventsList = keyEventCallbacks.get(entry.getKey());
 					// An empty list means all key are requested
 					if (keyEventsList != null && (keyEventsList.isEmpty() || keyEventsList.contains(event.getKeyCode()))) {

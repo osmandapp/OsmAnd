@@ -1,5 +1,7 @@
 package net.osmand.aidl;
 
+import androidx.annotation.NonNull;
+
 import java.util.Map;
 
 public interface AidlCallbackListener {
@@ -15,9 +17,10 @@ public interface AidlCallbackListener {
 	 *              4 - key for onContextMenuButtonClicked(...)
 	 *              8 - key for... future use
 	 *             16 - key for... future use
+	 * @param method - AIDL method that registers the callback: its permission group is checked when the callback is called
 	 * @return long - unique id of callback. Could be used for unregistering callback
 	 */
-	long addAidlCallback(IOsmAndAidlCallback callback, int key);
+	long addAidlCallback(IOsmAndAidlCallback callback, int key, @NonNull String method);
 
 
 	/**
