@@ -1,22 +1,26 @@
 package net.osmand.plus.download;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.freeregion.FreeRegionBottomSheet;
+import net.osmand.plus.download.freeregion.FreeRegionCheck;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class DownloadValidationManager {
 
@@ -91,9 +95,7 @@ public class DownloadValidationManager {
 	}
 
 	private void copyVoiceAssetsWithoutInternet(@NonNull FragmentActivity activity, IndexItem... items) {
-		if (downloadFilesCheck_1_FreeVersion(activity, items)) {
-			downloadFilesCheck_3_ValidateSpace(activity, items, downloadThread::runDownloadFiles);
-		}
+		downloadFilesCheck_3_ValidateSpace(activity, items, downloadThread::runDownloadFiles);
 	}
 
 	private boolean isAllAssets(@NonNull IndexItem... items) {
@@ -107,29 +109,38 @@ public class DownloadValidationManager {
 
 	private void downloadFilesWithAllChecks(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
 	                                        @NonNull DownloadValidatedCallback callback) {
-		if (downloadFilesCheck_1_FreeVersion(activity, items)) {
-			downloadFilesCheck_2_Internet(activity, items, callback);
+		IndexItem[] freeItems = downloadFilesCheck_1_FreeRegion(activity, items, callback);
+		if (freeItems != null) {
+			downloadFilesCheck_2_Internet(activity, freeItems, callback);
 		}
 	}
 
-	private boolean downloadFilesCheck_1_FreeVersion(@NonNull FragmentActivity context, IndexItem... items) {
-		if (!Version.isPaidVersion(app) && shouldShowChoosePlan(items)) {
-			ChoosePlanFragment.showInstance(context, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
-			return false;
+	/**
+	 * Free version: new maps of one region only, updates of maps on the device always go through.
+	 * A single map of another region opens the replace of the free region, which restarts the download
+	 * itself; maps of other regions requested together with free ones are skipped with a toast.
+	 *
+	 * @return the items to download now, or null when nothing is left or the replace sheet takes over
+	 */
+	@Nullable
+	private IndexItem[] downloadFilesCheck_1_FreeRegion(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
+	                                                    @NonNull DownloadValidatedCallback callback) {
+		FreeRegionCheck check = downloadThread.getFreeVersionMapDownloads().check(items);
+		if (check.isAllFree()) {
+			return items;
 		}
-		return true;
-	}
-
-	private boolean shouldShowChoosePlan(IndexItem... items) {
-		boolean isAnyItemCountedInDownload = false;
-		for (IndexItem indexItem : items) {
-			if (DownloadActivityType.isCountedInDownloads(indexItem)) {
-				isAnyItemCountedInDownload = true;
-				break;
-			}
+		if (check.getFreeItems().isEmpty() && check.getFreeRegion() != null) {
+			WorldRegion region = check.getOtherRegions().iterator().next();
+			FreeRegionBottomSheet.showInstance(activity, check.getFreeRegion(), region, items,
+					() -> downloadFilesWithAllChecks(activity, items, callback));
+			return null;
 		}
-		int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
-		return total >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS && isAnyItemCountedInDownload;
+		List<String> names = new ArrayList<>();
+		for (WorldRegion region : check.getOtherRegions()) {
+			names.add(region.getLocaleName());
+		}
+		app.showToastMessage(R.string.free_region_other_regions_need_maps_plus, TextUtils.join(", ", names));
+		return check.getFreeItems().isEmpty() ? null : check.getFreeItems().toArray(new IndexItem[0]);
 	}
 
 	private void downloadFilesCheck_2_Internet(@NonNull FragmentActivity context, @NonNull IndexItem[] items,

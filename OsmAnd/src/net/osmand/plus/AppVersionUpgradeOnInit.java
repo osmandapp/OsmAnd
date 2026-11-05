@@ -181,8 +181,10 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_4_02 = 5402;
 	// 5403 - 5.4-03 (Keep the AIS connection of existing users on the default values set up)
 	public static final int VERSION_5_4_03 = 5403;
+	// 5500 - 5.5-00 (Ask once to update the maps older than the new search, see OutdatedMapsWarning)
+	public static final int VERSION_5_5_00 = 5500;
 
-	public static final int LAST_APP_VERSION = VERSION_5_4_03;
+	public static final int LAST_APP_VERSION = VERSION_5_5_00;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 

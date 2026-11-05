@@ -507,6 +507,8 @@ public class FirstUsageWizardFragment extends BaseFullScreenFragment implements 
 		if (mapIndexItem != null && !downloadThread.isDownloading(mapIndexItem)
 				&& !mapIndexItem.isDownloaded()
 				&& !mapDownloadCancelled) {
+			// the start screen never asks: its map becomes the free region
+			downloadThread.getFreeVersionMapDownloads().chooseFreeRegion(mapIndexItem);
 			validationManager.startDownload(activity, mapIndexItem);
 			downloadStarted = true;
 		}
