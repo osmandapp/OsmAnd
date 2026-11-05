@@ -13,6 +13,7 @@ import androidx.car.app.model.MessageTemplate
 import androidx.car.app.model.PaneTemplate
 import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.MapWithContentTemplate
+import androidx.car.app.suggestion.SuggestionManager
 import androidx.car.app.testing.SessionController
 import androidx.car.app.testing.TestCarContext
 import androidx.car.app.testing.TestScreenManager
@@ -32,6 +33,7 @@ import net.osmand.plus.auto.screens.RoutePreviewScreen
 import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.routing.IRouteInformationListener
 import net.osmand.plus.search.history.HistoryEntry
+import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.enums.HistorySource
 import net.osmand.util.MapUtils
 import org.junit.After
@@ -56,6 +58,8 @@ class NavigationSessionIntentTest {
 		private const val BERLIN_LON = 13.3777
 		private const val BERLIN_START_LAT = 52.5219
 		private const val BERLIN_START_LON = 13.4132
+		private const val BERLIN_VIA_LAT = 52.5200
+		private const val BERLIN_VIA_LON = 13.3950
 		private const val ROUTE_TIMEOUT_SEC = 60L
 		private const val START_TIMEOUT_SEC = 15L
 		private const val SHORT_COUNTDOWN_MS = 3000L
@@ -68,6 +72,7 @@ class NavigationSessionIntentTest {
 	private lateinit var carContext: TestCarContext
 	private lateinit var session: NavigationSession
 	private lateinit var controller: SessionController
+	private lateinit var recordingManager: CarTestUtils.RecordingSuggestionManager
 
 	private val testPrefix = "25977-test-" + UUID.randomUUID().toString() + "-"
 	private val createdDescriptions = mutableListOf<PointDescription>()
@@ -111,6 +116,8 @@ class NavigationSessionIntentTest {
 		InstrumentationRegistry.getInstrumentation().runOnMainSync {
 			carContext = TestCarContext.createCarContext(app)
 			carContext.updateHandshakeInfo(HandshakeInfo(CarTestUtils.TEST_HOST_PACKAGE, CarAppApiLevels.LEVEL_5))
+			recordingManager = CarTestUtils.RecordingSuggestionManager(carContext)
+			carContext.overrideCarService(SuggestionManager::class.java, recordingManager)
 			session = object : NavigationSession() {
 				override fun getCardCountdownMs(): Long = countdownMs
 			}
@@ -241,6 +248,148 @@ class NavigationSessionIntentTest {
 			"A card tap must show the app on the car screen, was: $intents",
 			intents.any { intent -> intent.component == appComponent }
 		)
+	}
+
+	@Test
+	fun previousRouteCardIsFirstWithoutDuplicateDestination() {
+		setUpPreviousRoute("previous-route-card")
+		resumeAtBerlinStart()
+		val destinationPrefix = "$BERLIN_LAT,$BERLIN_LON,"
+		assertTrue(
+			"The previous route must be published as the first card",
+			waitFor(START_TIMEOUT_SEC) {
+				recordingManager.publications.lastOrNull()?.firstOrNull()?.identifier?.startsWith(CarSuggestionsHelper.PREVIOUS_ROUTE_ID_PREFIX) == true
+			}
+		)
+		val identifiers = CarTestUtils.onMain { recordingManager.publications.last().map { suggestion -> suggestion.identifier } }
+		assertFalse(
+			"The previous route destination must not get a second card, was: $identifiers",
+			identifiers.any { identifier -> identifier.startsWith(destinationPrefix) }
+		)
+	}
+
+	@Test
+	fun previousRouteCardRestoresStartAndIntermediatePoints() {
+		setUpPreviousRoute("previous-route-restore")
+		resumeAtBerlinStart()
+		val destination = CarTestUtils.onMain { app.targetPointsHelper.pointToNavigateBackup }
+		assertNotNull("The previous route must be backed up", destination)
+		val cardIntent = CarSuggestionsHelper.createPreviousRouteCardIntent(app, destination!!)
+		CarTestUtils.onMain { session.onNewIntent(cardIntent) }
+
+		val preview = CarTestUtils.onMain { carContext.getCarService(TestScreenManager::class.java).top }
+		assertTrue("Top screen must be RoutePreviewScreen, was: ${preview?.javaClass?.simpleName}", preview is RoutePreviewScreen)
+		assertTrue("A previous route card must get a countdown", CarTestUtils.onMain { (preview as RoutePreviewScreen).hasStartCountdown() })
+		val targetPointsHelper = app.targetPointsHelper
+		val start = CarTestUtils.onMain { targetPointsHelper.pointToStart }
+		val intermediates = CarTestUtils.onMain { targetPointsHelper.intermediatePoints.toList() }
+		val target = CarTestUtils.onMain { targetPointsHelper.pointToNavigate }
+		assertNotNull("The start point must be restored", start)
+		assertTrue("The start point must be restored, was: ${start!!.latLon}", isNear(start.latLon, BERLIN_START_LAT, BERLIN_START_LON))
+		assertEquals("The intermediate point must be restored", 1, intermediates.size)
+		assertTrue(
+			"The intermediate point must be restored, was: ${intermediates[0].latLon}",
+			isNear(intermediates[0].latLon, BERLIN_VIA_LAT, BERLIN_VIA_LON)
+		)
+		assertNotNull("The destination must be restored", target)
+		assertTrue("The destination must be restored, was: ${target!!.latLon}", isNear(target.latLon, BERLIN_LAT, BERLIN_LON))
+	}
+
+	@Test
+	fun previousRouteCardLeavesFourNewestHistoryCards() {
+		val destination = setUpPreviousRoute("previous-route-limit")
+		val newest = ArrayList<String>()
+		for (i in 1..4) {
+			if (i == 3) {
+				CarTestUtils.addNewestEntry(app, destination, BERLIN_LAT, BERLIN_LON, createdDescriptions)
+			}
+			val pd = PointDescription(PointDescription.POINT_TYPE_ADDRESS, "${testPrefix}limit-$i")
+			CarTestUtils.addNewestEntry(app, pd, BERLIN_LAT + i * 0.001, BERLIN_LON + i * 0.001, createdDescriptions)
+			newest.add(pd.name)
+		}
+		resumeAtBerlinStart()
+		assertTrue(
+			"The previous route and the newest history entries must be published",
+			waitFor(START_TIMEOUT_SEC) {
+				val cards = recordingManager.publications.lastOrNull()
+				cards != null && cards.size == 5
+						&& cards[0].identifier.startsWith(CarSuggestionsHelper.PREVIOUS_ROUTE_ID_PREFIX)
+						&& cards[1].title.toString() == newest[3]
+			}
+		)
+		val titles = CarTestUtils.onMain { recordingManager.publications.last().drop(1).map { card -> card.title.toString() } }
+		assertEquals(
+			"The 4 newest history entries without the previous route destination must follow the previous route",
+			newest.reversed(),
+			titles
+		)
+	}
+
+	@Test
+	fun noPreviousRouteCardWithoutBackup() {
+		CarTestUtils.onMain { app.targetPointsHelper.clearBackupPoints() }
+		val pd = PointDescription(PointDescription.POINT_TYPE_ADDRESS, "${testPrefix}no-backup")
+		CarTestUtils.addNewestEntry(app, pd, BERLIN_LAT, BERLIN_LON, createdDescriptions)
+		resumeAtBerlinStart()
+		assertTrue(
+			"The newest history entry must be the first card without a previous route",
+			waitFor(START_TIMEOUT_SEC) {
+				recordingManager.publications.lastOrNull()?.firstOrNull()?.identifier?.contains(pd.name) == true
+			}
+		)
+		val identifiers = CarTestUtils.onMain { recordingManager.publications.last().map { card -> card.identifier } }
+		assertFalse(
+			"There must be no previous route card without a backup, was: $identifiers",
+			identifiers.any { identifier -> identifier.startsWith(CarSuggestionsHelper.PREVIOUS_ROUTE_ID_PREFIX) }
+		)
+	}
+
+	@Test
+	fun noPreviousRouteCardWhenNavigationHistoryIsOff() {
+		setUpPreviousRoute("previous-route-history-off")
+		app.settings.NAVIGATION_HISTORY.set(false)
+		resumeAtBerlinStart()
+		assertTrue("The cards must be published", waitFor(START_TIMEOUT_SEC) { recordingManager.publications.isNotEmpty() })
+		val identifiers = CarTestUtils.onMain { recordingManager.publications.last().map { card -> card.identifier } }
+		assertFalse(
+			"There must be no previous route card when navigation history is off, was: $identifiers",
+			identifiers.any { identifier -> identifier.startsWith(CarSuggestionsHelper.PREVIOUS_ROUTE_ID_PREFIX) }
+		)
+	}
+
+	@Test
+	fun previousRouteCardOpensPlainPreviewWhenDestinationChanged() {
+		setUpPreviousRoute("previous-route-changed")
+		val destination = CarTestUtils.onMain { app.targetPointsHelper.pointToNavigateBackup }
+		assertNotNull("The previous route must be backed up", destination)
+		val cardIntent = CarSuggestionsHelper.createPreviousRouteCardIntent(app, destination!!)
+		val newDestination = PointDescription(PointDescription.POINT_TYPE_ADDRESS, "${testPrefix}previous-route-changed-new")
+		val newVia = PointDescription(PointDescription.POINT_TYPE_ADDRESS, "${testPrefix}previous-route-changed-via")
+		val newStart = PointDescription(PointDescription.POINT_TYPE_ADDRESS, "${testPrefix}previous-route-changed-start")
+		createdDescriptions.addAll(listOf(newDestination, newVia, newStart))
+		CarTestUtils.onMain {
+			val targetPointsHelper = app.targetPointsHelper
+			targetPointsHelper.navigateToPoint(LatLon(BERLIN_VIA_LAT, BERLIN_START_LON), false, -1, newDestination)
+			targetPointsHelper.navigateToPoint(LatLon(BERLIN_START_LAT, BERLIN_LON), false, 0, newVia)
+			targetPointsHelper.setStartPoint(LatLon(BERLIN_LAT, BERLIN_START_LON), false, newStart)
+			targetPointsHelper.clearAllPoints(false)
+		}
+		val intermediatesBackup = app.settings.settingsAPI.getString(
+			app.settings.globalPreferences, OsmandSettings.INTERMEDIATE_POINTS_BACKUP, "")
+		assertFalse("The changed previous route must have its own intermediate point", intermediatesBackup.isNullOrEmpty())
+		resumeAtBerlinStart()
+		CarTestUtils.onMain { session.onNewIntent(cardIntent) }
+
+		val preview = CarTestUtils.onMain { carContext.getCarService(TestScreenManager::class.java).top }
+		assertTrue("Top screen must be RoutePreviewScreen, was: ${preview?.javaClass?.simpleName}", preview is RoutePreviewScreen)
+		val targetPointsHelper = app.targetPointsHelper
+		val target = CarTestUtils.onMain { targetPointsHelper.pointToNavigate }
+		val intermediates = CarTestUtils.onMain { targetPointsHelper.intermediatePoints.toList() }
+		assertNotNull("The card destination must be set", target)
+		assertTrue("The card destination must be set, was: ${target!!.latLon}", isNear(target.latLon, BERLIN_LAT, BERLIN_LON))
+		assertTrue("The changed previous route must not be restored, was: $intermediates", intermediates.isEmpty())
+		val start = CarTestUtils.onMain { targetPointsHelper.pointToStart }
+		assertTrue("The changed previous route start must not be used, was: ${start?.latLon}", start == null)
 	}
 
 	@Test
@@ -414,6 +563,24 @@ class NavigationSessionIntentTest {
 		assertTrue("The countdown must start after the route is ready", waitFor(START_TIMEOUT_SEC) { preview.isCountdownRunning })
 		return preview
 	}
+
+	private fun setUpPreviousRoute(name: String): PointDescription {
+		val start = PointDescription(PointDescription.POINT_TYPE_ADDRESS, "$testPrefix$name-start")
+		val via = PointDescription(PointDescription.POINT_TYPE_ADDRESS, "$testPrefix$name-via")
+		val destination = PointDescription(PointDescription.POINT_TYPE_ADDRESS, "$testPrefix$name-destination")
+		createdDescriptions.addAll(listOf(start, via, destination))
+		CarTestUtils.onMain {
+			val targetPointsHelper = app.targetPointsHelper
+			targetPointsHelper.navigateToPoint(LatLon(BERLIN_LAT, BERLIN_LON), false, -1, destination)
+			targetPointsHelper.navigateToPoint(LatLon(BERLIN_VIA_LAT, BERLIN_VIA_LON), false, 0, via)
+			targetPointsHelper.setStartPoint(LatLon(BERLIN_START_LAT, BERLIN_START_LON), false, start)
+			targetPointsHelper.clearAllPoints(false)
+		}
+		return destination
+	}
+
+	private fun isNear(latLon: LatLon, lat: Double, lon: Double): Boolean =
+		MapUtils.getDistance(latLon.latitude, latLon.longitude, lat, lon) < 1
 
 	private fun resumeAtBerlinStart() {
 		CarTestUtils.onMain {

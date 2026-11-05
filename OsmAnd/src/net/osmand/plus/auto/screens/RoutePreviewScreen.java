@@ -1,6 +1,8 @@
 package net.osmand.plus.auto.screens;
 
+import static net.osmand.plus.base.ContextMenuFragment.MenuState.HEADER_ONLY;
 import static net.osmand.search.core.ObjectType.GPX_TRACK;
+import static net.osmand.search.core.ObjectType.ROUTE;
 
 import android.os.CountDownTimer;
 import android.text.SpannableString;
@@ -42,6 +44,7 @@ import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.views.MapActions;
 import net.osmand.search.core.SearchResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
@@ -130,11 +133,32 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			} else {
 				buildRouteByGivenGpx(selectedGpxFile.getGpxFile());
 			}
+		} else if (searchResult.objectType == ROUTE) {
+			restorePreviousRoute();
 		} else {
 			getApp().getOsmandMap().getMapActions().replaceDestination(
 					searchResult.location, QuickSearchListItem.getPointDescriptionObject(getApp(), searchResult).first);
 			invalidate();
 		}
+	}
+
+	private void restorePreviousRoute() {
+		OsmandApplication app = getApp();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+			targetPointsHelper.restoreTargetPoints(true);
+		} else {
+			targetPointsHelper.restoreTargetPoints(false);
+			TargetPoint start = targetPointsHelper.getPointToStart();
+			MapActions mapActions = app.getOsmandMap().getMapActions();
+			if (start != null) {
+				mapActions.enterRoutePlanningModeGivenGpx(null, start.getLatLon(), start.getOriginalPointDescription(), true, true, HEADER_ONLY);
+			} else {
+				mapActions.enterRoutePlanningModeGivenGpx(null, null, null, true, true, HEADER_ONLY);
+			}
+		}
+		invalidate();
 	}
 
 	private void buildRouteByGivenGpx(@NonNull GpxFile gpxFile) {

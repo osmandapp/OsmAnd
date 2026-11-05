@@ -82,6 +82,7 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -581,6 +582,26 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			LOG.error("Invalid suggestion intent: " + intent);
 			return;
 		}
+		SearchResult result = null;
+		if (intent.getBooleanExtra(CarSuggestionsHelper.EXTRA_PREVIOUS_ROUTE, false)) {
+			SearchResult previousRoute = CarSuggestionsHelper.createPreviousRouteResult(app);
+			if (previousRoute != null && MapUtils.areLatLonEqual(previousRoute.location, latLon)) {
+				result = previousRoute;
+			}
+		}
+		if (result == null) {
+			result = createHistoryResult(serializedName, latLon);
+		}
+
+		showAppOnCarScreen();
+		ScreenManager screenManager = getScreenManager();
+		screenManager.popToRoot();
+		screenManager.pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, result, true, getCardCountdownMs()), this::onRoutePreviewResult);
+	}
+
+	@NonNull
+	private SearchResult createHistoryResult(@NonNull String serializedName, @NonNull LatLon latLon) {
+		OsmandApplication app = getApp();
 		PointDescription pointDescription = PointDescription.deserializeFromString(serializedName, latLon);
 		HistoryEntry entry = app.getSearchHistoryHelper().getEntryByName(pointDescription, HistorySource.NAVIGATION);
 		if (entry == null) {
@@ -591,11 +612,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (result.location == null) {
 			result.location = latLon;
 		}
-
-		showAppOnCarScreen();
-		ScreenManager screenManager = getScreenManager();
-		screenManager.popToRoot();
-		screenManager.pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, result, true, getCardCountdownMs()), this::onRoutePreviewResult);
+		return result;
 	}
 
 	private void showAppOnCarScreen() {
