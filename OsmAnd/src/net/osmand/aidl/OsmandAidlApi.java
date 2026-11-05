@@ -62,6 +62,7 @@ import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.aidlapi.customization.AProfile;
 import net.osmand.aidlapi.customization.PreferenceParams;
 import net.osmand.aidlapi.exit.ExitAppParams;
+import net.osmand.aidlapi.info.AApiAccess;
 import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.info.GetTextParams;
 import net.osmand.aidlapi.logcat.OnLogcatMessageParams;
@@ -2657,6 +2658,16 @@ public class OsmandAidlApi {
 			return setAppEnabled(activity, connectedApp, true);
 		}
 		return saveConnectedApps();
+	}
+
+	@NonNull
+	public AApiAccess getApiAccess(@NonNull String pack) {
+		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
+		ArrayList<String> groups = new ArrayList<>();
+		for (AidlPermissionGroup group : connectedApp.getGroups()) {
+			groups.add(group.getId());
+		}
+		return new AApiAccess(connectedApp.isEnabled(), groups);
 	}
 
 	// connections are kept in their own preferences file: not in the backups (Android backup agent, Cloud, export)
