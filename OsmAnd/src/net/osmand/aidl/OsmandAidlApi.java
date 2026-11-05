@@ -2597,7 +2597,12 @@ public class OsmandAidlApi {
 	 */
 	public boolean isMethodAllowed(@NonNull String pack, @NonNull String method) {
 		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
-		return connectedApp.isEnabled() && connectedApp.isMethodAllowed(method);
+		boolean allowed = connectedApp.isEnabled() && connectedApp.isMethodAllowed(method);
+		// called on every AIDL call: the time is saved only now and then
+		if (allowed && connectedApp.updateLastUseTime(System.currentTimeMillis())) {
+			saveConnectedApps();
+		}
+		return allowed;
 	}
 
 	/**
@@ -2631,6 +2636,11 @@ public class OsmandAidlApi {
 		return saveConnectedApps();
 	}
 
+	public boolean revokeAllGroups(@NonNull ConnectedApp connectedApp) {
+		connectedApp.setGroups(Collections.emptySet());
+		return saveConnectedApps();
+	}
+
 	/**
 	 * The user answered a permission request of the app: the requested groups get the chosen state, other groups
 	 * stay as they were. The app is turned on only if at least one requested group is granted.
@@ -2655,7 +2665,8 @@ public class OsmandAidlApi {
 		return app.getSharedPreferences(CONNECTIONS_PREFS, Context.MODE_PRIVATE);
 	}
 
-	private boolean saveConnectedApps() {
+	// also called from the binder threads: one snapshot at a time, so an older one is never committed last
+	private synchronized boolean saveConnectedApps() {
 		try {
 			JSONArray array = new JSONArray();
 			for (ConnectedApp connectedApp : connectedApps.values()) {
@@ -2667,6 +2678,7 @@ public class OsmandAidlApi {
 					groups.put(group.getId());
 				}
 				obj.put(ConnectedApp.GROUPS_KEY, groups);
+				obj.put(ConnectedApp.LAST_USE_KEY, connectedApp.getLastUseTime());
 				array.put(obj);
 			}
 			return getConnectionsPreferences().edit().putString(CONNECTED_APPS_KEY, array.toString()).commit();
@@ -2701,7 +2713,9 @@ public class OsmandAidlApi {
 						}
 					}
 				}
-				connectedApps.put(pack, new ConnectedApp(app, pack, enabled, groups));
+				ConnectedApp connectedApp = new ConnectedApp(app, pack, enabled, groups);
+				connectedApp.setLastUseTime(obj.optLong(ConnectedApp.LAST_USE_KEY));
+				connectedApps.put(pack, connectedApp);
 			}
 			if (legacy) {
 				saveConnectedApps();
