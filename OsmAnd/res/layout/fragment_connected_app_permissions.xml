@@ -56,6 +56,11 @@
 					android:layout_height="wrap_content"
 					android:orientation="vertical" />
 
+				<net.osmand.plus.widgets.ui.GroupFooterView
+					android:id="@+id/last_use_footer"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" />
+
 				<net.osmand.plus.widgets.ui.GroupHeaderView
 					android:id="@+id/system_header"
 					android:layout_width="match_parent"
@@ -74,6 +79,15 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					app:groupFooterText="@string/aidl_group_system_footer" />
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/revoke_all_button"
+					style="@style/Widget.Material3Expressive.Button.TonalButton"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:text="@string/aidl_permissions_revoke_all" />
 			</LinearLayout>
 		</LinearLayout>
 	</ScrollView>

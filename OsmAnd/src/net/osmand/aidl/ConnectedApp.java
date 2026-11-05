@@ -67,6 +67,10 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	static final String PACK_KEY = "pack";
 	static final String ENABLED_KEY = "enabled";
 	static final String GROUPS_KEY = "groups";
+	static final String LAST_USE_KEY = "last_use";
+
+	// the last use is kept in memory on every call and saved at most once in this interval
+	private static final long LAST_USE_SAVE_INTERVAL = 5 * 60 * 1000;
 
 	private final OsmandApplication app;
 
@@ -88,6 +92,8 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	private volatile boolean enabled;
 	// read from the binder threads: never changed in place, a new unmodifiable set replaces the reference
 	private volatile Set<AidlPermissionGroup> groups;
+	private volatile long lastUseTime;
+	private volatile long savedLastUseTime;
 
 	ConnectedApp(OsmandApplication app, String pack, boolean enabled, @NonNull Set<AidlPermissionGroup> groups) {
 		this.app = app;
@@ -156,6 +162,27 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 
 	void setGroups(@NonNull Set<AidlPermissionGroup> groups) {
 		this.groups = Collections.unmodifiableSet(new LinkedHashSet<>(groups));
+	}
+
+	public long getLastUseTime() {
+		return lastUseTime;
+	}
+
+	void setLastUseTime(long time) {
+		lastUseTime = time;
+		savedLastUseTime = time;
+	}
+
+	/**
+	 * @return true if the time should be saved: the saved one is older than LAST_USE_SAVE_INTERVAL
+	 */
+	boolean updateLastUseTime(long time) {
+		lastUseTime = time;
+		if (time - savedLastUseTime >= LAST_USE_SAVE_INTERVAL) {
+			savedLastUseTime = time;
+			return true;
+		}
+		return false;
 	}
 
 	public boolean isMethodAllowed(@NonNull String method) {
