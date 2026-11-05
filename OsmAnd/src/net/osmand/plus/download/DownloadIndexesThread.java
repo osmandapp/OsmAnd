@@ -761,7 +761,7 @@ public class DownloadIndexesThread {
 		int downloadTimeSec = (int) (downloadTime / 1000L);
 		params.put("download_time", String.valueOf(downloadTimeSec));
 
-		String url = AndroidNetworkUtils.getHttpProtocol() + "osmand.net/api/check_download";
+		String url = "https://osmand.net/api/check_download";
 		AndroidNetworkUtils.sendRequestAsync(app, url, params, "Check download", false, false, null);
 	}
 }
