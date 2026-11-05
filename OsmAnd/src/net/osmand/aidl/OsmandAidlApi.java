@@ -2094,7 +2094,7 @@ public class OsmandAidlApi {
 			}
 		}
 		for (WidgetType type : WidgetType.values()) {
-			if (isWidgetTypeAddable(type, appMode)) {
+			if (isWidgetTypeAddable(type, appMode, allWidgets)) {
 				WidgetsPanel panel = type.getPanel(type.id, appMode, layoutMode, app.getSettings());
 				widgets.add(new net.osmand.aidlapi.info.AMapWidgetInfo(type.id, type.id, app.getString(type.titleId),
 						panel.name(), -1, 0, false, type.isPurchased(app)));
@@ -2102,9 +2102,22 @@ public class OsmandAidlApi {
 		}
 	}
 
-	private boolean isWidgetTypeAddable(@NonNull WidgetType type, @NonNull ApplicationMode appMode) {
-		return type != WidgetType.AIDL_WIDGET && type.titleId != 0 && type.isAllowed()
-				&& WidgetsAvailabilityHelper.isWidgetAvailable(app, type.id, appMode);
+	/**
+	 * Plugin widgets exist only while their plugin is on, so a type is offered only if the registry has a widget
+	 * of it, as in the add list of Configure screen.
+	 */
+	private boolean isWidgetTypeAddable(@NonNull WidgetType type, @NonNull ApplicationMode appMode,
+	                                    @NonNull List<MapWidgetInfo> allWidgets) {
+		if (type == WidgetType.AIDL_WIDGET || type.titleId == 0 || !type.isAllowed()
+				|| !WidgetsAvailabilityHelper.isWidgetAvailable(app, type.id, appMode)) {
+			return false;
+		}
+		for (MapWidgetInfo info : allWidgets) {
+			if (info.getWidgetType() == type) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	boolean setMapWidgetsPanel(@Nullable String appModeKey, @Nullable String panelName, @Nullable List<String> pages) {
@@ -2167,7 +2180,7 @@ public class OsmandAidlApi {
 				MapWidgetInfo info = panelWidgets.get(id);
 				if (info == null || usedIds.contains(id)) {
 					WidgetType type = WidgetType.getById(id);
-					if (type == null || !isWidgetTypeAddable(type, appMode) || !type.isPanelsAllowed(panels)) {
+					if (type == null || !isWidgetTypeAddable(type, appMode, allWidgets) || !type.isPanelsAllowed(panels)) {
 						LOG.error("setMapWidgetsPanel: widget " + id + " can't be on panel " + panel);
 						return false;
 					}
@@ -2198,6 +2211,7 @@ public class OsmandAidlApi {
 		MapWidgetsFactory factory = new MapWidgetsFactory(mapActivity);
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
 		List<MapWidgetInfo> enabled = new ArrayList<>();
+		List<String> newWidgetIds = new ArrayList<>();
 		List<List<String>> pagedOrder = new ArrayList<>();
 		for (List<Object> resolved : resolvedPages) {
 			List<String> order = new ArrayList<>();
@@ -2221,12 +2235,16 @@ public class OsmandAidlApi {
 						return false;
 					}
 					usedIds.add(id);
-					settings.getCustomWidgetsKeys(layoutMode).addModeValue(appMode, id);
+					newWidgetIds.add(id);
 				}
 				enabled.add(info);
 				order.add(info.key);
 			}
 			pagedOrder.add(order);
+		}
+		// saved only once every new widget is created, so a refused call leaves no widget behind
+		for (String id : newWidgetIds) {
+			settings.getCustomWidgetsKeys(layoutMode).addModeValue(appMode, id);
 		}
 		List<String> visibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 		for (MapWidgetInfo info : panelWidgets.values()) {
@@ -3211,7 +3229,7 @@ public class OsmandAidlApi {
 	 */
 	private static final Set<String> READ_ONLY_PREFERENCES = new HashSet<>(Arrays.asList(
 			"enabled_plugins", "send_anonymous_map_downloads_data", "send_anonymous_app_usage_data",
-			"proxy_host", "proxy_port", "online_routing_engines", "is_live_updates_on", "speed_cameras_uninstalled",
+			"enable_proxy", "proxy_host", "proxy_port", "online_routing_engines", "is_live_updates_on", "speed_cameras_uninstalled",
 			"should_show_free_version_banner", "should_show_discount_bottom_sheet",
 			"search_history", "navigation_history", "map_markers_history", "selected_gpx",
 			"map_info_controls", "custom_widgets_keys", "left_widget_panel_order", "right_widget_panel_order",
