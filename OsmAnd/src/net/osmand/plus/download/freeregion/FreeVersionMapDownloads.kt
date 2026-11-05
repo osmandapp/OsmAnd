@@ -14,11 +14,16 @@ import net.osmand.plus.download.local.LocalItem
 import net.osmand.plus.download.local.LocalItemType
 import net.osmand.plus.download.local.LocalItemUtils
 import net.osmand.plus.helpers.FileNameTranslationHelper
+import net.osmand.plus.inapp.InstallReferrer
+import net.osmand.plus.utils.AndroidNetworkUtils
 import net.osmand.util.Algorithms
+import org.json.JSONException
+import org.json.JSONObject
 import java.io.IOException
 
 /**
- * Maps of the free version: all maps of one region - the free region - and their updates are free.
+ * Map downloads of the free version: all maps of one region - the free region - and their updates are
+ * free.
  *
  * The free region is a country - the region right under a continent, so Germany with all its Länder
  * is one region. In the big federations it is a first-level region (a US state), otherwise one free
@@ -28,12 +33,12 @@ import java.io.IOException
  * always free. The world overview map, seamarks and the maps of plugins - contour lines, terrain,
  * depth, Wikipedia, travel guides - are never counted and never deleted when the free region is
  * replaced. A map of another region needs a replace, which the server allows by the number of
- * replaces already made, see [FreeRegionApi].
+ * replaces already made and whether the user has left an email, see [requestReplace].
  *
  * The free region and the replaces are kept in their own preferences file, not in OsmandSettings:
  * the Android backup and the OsmAnd Cloud export must not bring them back after a reinstall.
  */
-class FreeVersionMaps(private val app: OsmandApplication) {
+class FreeVersionMapDownloads(private val app: OsmandApplication) {
 
 	private val preferences: SharedPreferences =
 		app.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
@@ -124,6 +129,61 @@ class FreeVersionMaps(private val app: OsmandApplication) {
 			return true
 		}
 		return region == freeRegion
+	}
+
+	/**
+	 * Asks the server whether the free region may be replaced. A GET request, so that the parameters -
+	 * package, version, nd, ns, aid, utm* - land in the server access log.
+	 *
+	 * @param onAnswer gets null when the server could not be reached
+	 */
+	fun requestReplace(from: WorldRegion, to: WorldRegion, onAnswer: (answer: ReplaceAnswer?) -> Unit) {
+		val initializer = app.appInitializer
+		val params = linkedMapOf(
+			"package" to app.packageName,
+			"version" to Version.getFullVersion(app),
+			"lang" to app.language,
+			"nd" to initializer.firstInstalledDays.toString(),
+			"ns" to initializer.numberOfStarts.toString())
+		if (app.isUserAndroidIdAllowed) {
+			params["aid"] = app.userAndroidId
+		}
+		InstallReferrer.addParams(app, params)
+		params["from"] = from.regionId
+		params["to"] = to.regionId
+		params["replaces"] = replacesCount.toString()
+		params["email"] = app.settings.EMAIL_SUBSCRIBED.get().toString()
+
+		AndroidNetworkUtils.sendRequestAsync(app, REPLACE_URL, params, "Requesting free region replace...",
+			false, false) { result, _, _ -> onAnswer(ReplaceAnswer.parse(result)) }
+	}
+
+	/** Subscribes the email to OsmAnd news; the server answers with the registered address. */
+	fun registerEmail(email: String, onRegistered: (registered: Boolean) -> Unit) {
+		val params = mutableMapOf("email" to email)
+		if (app.isUserAndroidIdAllowed) {
+			params["aid"] = app.userAndroidId
+		}
+		AndroidNetworkUtils.sendRequestAsync(app, REGISTER_EMAIL_URL, params, "Subscribing email...",
+			false, true) { result, _, _ ->
+			val registered = isEmailRegistered(email, result)
+			if (registered) {
+				app.settings.EMAIL_SUBSCRIBED.set(true)
+			}
+			onRegistered(registered)
+		}
+	}
+
+	private fun isEmailRegistered(email: String, response: String?): Boolean {
+		if (response == null) {
+			return false
+		}
+		return try {
+			email.equals(JSONObject(response).optString("email"), ignoreCase = true)
+		} catch (e: JSONException) {
+			LOG.error("Register email response: $response", e)
+			false
+		}
 	}
 
 	/** Maps deleted when the free region is replaced by [newRegion]: maps of every other region. */
@@ -224,11 +284,14 @@ class FreeVersionMaps(private val app: OsmandApplication) {
 	}
 
 	companion object {
-		private val LOG = PlatformUtil.getLog(FreeVersionMaps::class.java)
+		private val LOG = PlatformUtil.getLog(FreeVersionMapDownloads::class.java)
 
 		private val FEDERATIONS = setOf(
 			"northamerica_us", "northamerica_canada", "russia", "southamerica_brazil",
 			"asia_india", "asia_china", "australia-oceania-all_australia-oceania")
+
+		private const val REPLACE_URL = "https://osmand.net/api/replace-download-map"
+		private const val REGISTER_EMAIL_URL = "https://osmand.net/subscription/register_email"
 
 		private const val PREFERENCES_NAME = "net.osmand.free_region"
 		private const val REGION = "region"
@@ -244,7 +307,7 @@ class FreeVersionMaps(private val app: OsmandApplication) {
 	}
 }
 
-/** What a download request may get now, see [FreeVersionMaps.check]. */
+/** What a download request may get now, see [FreeVersionMapDownloads.check]. */
 class FreeRegionCheck(
 	val freeRegion: WorldRegion?,
 	val freeItems: List<IndexItem>,
@@ -253,4 +316,33 @@ class FreeRegionCheck(
 ) {
 	val isAllFree: Boolean
 		get() = otherRegions.isEmpty()
+}
+
+enum class ReplaceAnswer(private val status: String) {
+	/** Replace now. */
+	OK("ok"),
+
+	/** One more replace for an email. */
+	REQUEST_EMAIL("request_email"),
+
+	/** No more replaces - only Maps+. */
+	NO("no");
+
+	companion object {
+		private val LOG = PlatformUtil.getLog(ReplaceAnswer::class.java)
+
+		/** @return null when the response can't be read, [NO] for a status unknown to this version */
+		fun parse(response: String?): ReplaceAnswer? {
+			if (response == null) {
+				return null
+			}
+			return try {
+				val status = JSONObject(response).optString("status")
+				entries.firstOrNull { it.status.equals(status, ignoreCase = true) } ?: NO
+			} catch (e: JSONException) {
+				LOG.error("Replace response: $response", e)
+				null
+			}
+		}
+	}
 }

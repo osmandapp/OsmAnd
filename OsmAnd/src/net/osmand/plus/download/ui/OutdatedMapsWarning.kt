@@ -4,23 +4,19 @@ import android.content.Intent
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import net.osmand.PlatformUtil
+import net.osmand.IndexConstants
 import net.osmand.plus.AppVersionUpgradeOnInit
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.download.DownloadActivity
-import net.osmand.plus.download.local.LocalItemType
-import net.osmand.plus.download.local.LocalItemUtils
-import net.osmand.plus.helpers.FileNameTranslationHelper
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
-import net.osmand.util.Algorithms
-import java.text.ParseException
+import net.osmand.search.core.spatial.SpatialTextSearchAPI
 
 /**
- * The new search of 5.5 does not work with maps built before 01.07.2026. Once, on the update from an
- * older version - when What's New is closed - the user is asked to update such maps; the updates are
- * free in the free version too.
+ * The new search of 5.5 needs maps built from 2026-07 on. Once, on the update from an older version -
+ * when What's New is closed - the user is asked to update older maps; the updates are free in the free
+ * version too.
  */
 class OutdatedMapsWarning(private val app: OsmandApplication) {
 
@@ -28,42 +24,29 @@ class OutdatedMapsWarning(private val app: OsmandApplication) {
 		if (app.appInitializer.prevAppVersion >= AppVersionUpgradeOnInit.VERSION_5_5_00) {
 			return
 		}
-		// map dates and regions are known only when the app is initialized
+		// the maps are read only when the app is initialized
 		app.appInitializer.addOnFinishListener {
-			if (AndroidUtils.isActivityNotDestroyed(activity) && hasMapsOlderThanNewSearch()) {
+			if (AndroidUtils.isActivityNotDestroyed(activity) && hasMapsWithoutSpatialSearch()) {
 				show(activity)
 			}
 		}
 	}
 
-	/** Standard and roads-only maps of a region; world and custom maps are left out. */
-	private fun hasMapsOlderThanNewSearch(): Boolean {
-		val resourceManager = app.resourceManager
-		val dates = resourceManager.indexFileNames
-		val dateFormat = resourceManager.dateFormat
-		for ((fileName, file) in resourceManager.indexFiles) {
-			val type = LocalItemUtils.getItemType(app, file)
-			if (type != LocalItemType.MAP_DATA && type != LocalItemType.ROAD_DATA || !isRegionMap(fileName)) {
-				continue
-			}
-			val date = try {
-				dates[fileName]?.let { dateFormat.parse(it)?.time }
-			} catch (e: ParseException) {
-				LOG.error(e)
-				null
-			}
-			if ((date ?: file.lastModified()) < NEW_SEARCH_MAPS_DATE) {
-				return true
-			}
+	/**
+	 * Maps with POI data but without the new search - the same check as the search makes
+	 * ([SpatialTextSearchAPI.hasPoiTypesInNameIndex]). The world basemap, Wikipedia and travel maps
+	 * don't count.
+	 */
+	private fun hasMapsWithoutSpatialSearch(): Boolean {
+		return app.resourceManager.fileReaders.any { resource ->
+			val fileName = resource.fileName
+			val reader = resource.shallowReader
+			reader != null && !reader.isBasemap
+					&& !fileName.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)
+					&& !fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)
+					&& reader.containsPoiData()
+					&& !SpatialTextSearchAPI.hasPoiTypesInNameIndex(reader)
 		}
-		return false
-	}
-
-	private fun isRegionMap(fileName: String): Boolean {
-		// "Ukraine_kyiv-city_europe_2.road.obf" -> "ukraine_kyiv-city_europe"
-		val downloadName = Algorithms.removeFileVersionSuffix(fileName.substringBefore('.')).lowercase()
-		return FileNameTranslationHelper.getStandardMapName(app, downloadName) == null
-				&& app.regions.getRegionDataByDownloadName(downloadName) != null
 	}
 
 	private fun show(activity: FragmentActivity) {
@@ -83,12 +66,5 @@ class OutdatedMapsWarning(private val app: OsmandApplication) {
 		val intent = Intent(activity, app.appCustomization.downloadIndexActivity)
 		intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.UPDATES_TAB)
 		activity.startActivity(intent)
-	}
-
-	companion object {
-		private val LOG = PlatformUtil.getLog(OutdatedMapsWarning::class.java)
-
-		/** 01.07.2026: maps built before it do not work with the new search. */
-		private const val NEW_SEARCH_MAPS_DATE = 1782864000000L
 	}
 }

@@ -107,7 +107,7 @@ public class FreeVersionBanner {
 	private void updateBanner() {
 		boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.APP);
 		updateBannerColors();
-		WorldRegion region = app.getDownloadThread().getFreeVersionMaps().getFreeRegion();
+		WorldRegion region = app.getDownloadThread().getFreeVersionMapDownloads().getFreeRegion();
 		freeVersionTitleTextView.setText(R.string.free_version_title);
 		downloadsLeftTextView.setText(region != null ? region.getLocaleName() : "");
 		freeVersionSubtitleTextView.setVisibility(View.VISIBLE);

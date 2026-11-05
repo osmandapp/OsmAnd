@@ -54,8 +54,8 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 	private lateinit var mapsToDelete: Map<WorldRegion, List<LocalItem>>
 	private lateinit var mainView: View
 
-	private val freeVersionMaps: FreeVersionMaps
-		get() = osmandApp.downloadThread.freeVersionMaps
+	private val freeVersionMapDownloads: FreeVersionMapDownloads
+		get() = osmandApp.downloadThread.freeVersionMapDownloads
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -68,7 +68,7 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 		}
 		freeRegion = from
 		region = to
-		mapsToDelete = freeVersionMaps.collectMapsToDelete(region)
+		mapsToDelete = freeVersionMapDownloads.collectMapsToDelete(region)
 		savedInstanceState?.getString(STEP_KEY)?.let { step = Step.valueOf(it) }
 	}
 
@@ -207,7 +207,7 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 
 	private fun requestReplace() {
 		setLoading(true)
-		FreeRegionApi(osmandApp).requestReplace(freeRegion, region) { answer ->
+		freeVersionMapDownloads.requestReplace(freeRegion, region) { answer ->
 			if (!isAdded) {
 				return@requestReplace
 			}
@@ -230,7 +230,7 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 			return
 		}
 		setLoading(true)
-		FreeRegionApi(osmandApp).registerEmail(getEmail()) { registered ->
+		freeVersionMapDownloads.registerEmail(getEmail()) { registered ->
 			if (!isAdded) {
 				return@registerEmail
 			}
@@ -249,7 +249,7 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 		val activity = requireActivity()
 		val continueDownload = onReplaced ?: Runnable { restartDownload(activity) }
 		dismiss()
-		freeVersionMaps.replaceFreeRegion(region)
+		freeVersionMapDownloads.replaceFreeRegion(region)
 		val items = mapsToDelete.values.flatten()
 		if (items.isEmpty()) {
 			continueDownload.run()

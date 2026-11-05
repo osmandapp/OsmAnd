@@ -125,7 +125,7 @@ public class DownloadValidationManager {
 	@Nullable
 	private IndexItem[] downloadFilesCheck_1_FreeRegion(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
 	                                                    @NonNull DownloadValidatedCallback callback) {
-		FreeRegionCheck check = downloadThread.getFreeVersionMaps().check(items);
+		FreeRegionCheck check = downloadThread.getFreeVersionMapDownloads().check(items);
 		if (check.isAllFree()) {
 			return items;
 		}

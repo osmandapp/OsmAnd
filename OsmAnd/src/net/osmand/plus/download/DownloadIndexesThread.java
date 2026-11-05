@@ -29,7 +29,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DatabaseHelper.HistoryDownloadEntry;
-import net.osmand.plus.download.freeregion.FreeVersionMaps;
+import net.osmand.plus.download.freeregion.FreeVersionMapDownloads;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.IndexItem.DownloadEntry;
 import net.osmand.plus.download.local.LocalItem;
@@ -59,7 +59,7 @@ public class DownloadIndexesThread {
 
 	private final DatabaseHelper dbHelper;
 	private final DownloadFileHelper downloadFileHelper;
-	private final FreeVersionMaps freeVersionMaps;
+	private final FreeVersionMapDownloads freeVersionMapDownloads;
 	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<>());
 	private final ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<>();
 	private final Map<String, List<File>> pendingFilesToDelete = new ConcurrentHashMap<>();
@@ -92,12 +92,12 @@ public class DownloadIndexesThread {
 		updateLoadedFiles();
 		downloadFileHelper = new DownloadFileHelper(app);
 		dbHelper = new DatabaseHelper(app);
-		freeVersionMaps = new FreeVersionMaps(app);
+		freeVersionMapDownloads = new FreeVersionMapDownloads(app);
 	}
 
 	@NonNull
-	public FreeVersionMaps getFreeVersionMaps() {
-		return freeVersionMaps;
+	public FreeVersionMapDownloads getFreeVersionMapDownloads() {
+		return freeVersionMapDownloads;
 	}
 
 	public void updateLoadedFiles() {
@@ -619,7 +619,7 @@ public class DownloadIndexesThread {
 		}
 
 		private boolean validateNotExceedsFreeLimit(@NonNull IndexItem item) {
-			boolean free = freeVersionMaps.canDownload(item);
+			boolean free = freeVersionMapDownloads.canDownload(item);
 			if (!free) {
 				publishProgress(DownloadValidationManager.getFreeVersionMessage(app));
 			}
