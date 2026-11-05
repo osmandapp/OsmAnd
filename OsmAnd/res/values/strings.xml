@@ -24,8 +24,8 @@
 	<string name="free_region_email_maps_deleted">Maps of %1$s (%2$s) will be deleted.</string>
 	<string name="free_region_send_and_replace">Send and replace</string>
 	<string name="free_region_not_eligible_buy_descr">Your free region is %1$s. To download %2$s and keep your current maps, get unlimited map downloads.</string>
-	<string name="free_region_update_maps_title">Update your maps</string>
-	<string name="free_region_update_maps_descr">The new search needs maps of this version. Update all your maps - it is free.</string>
+	<string name="outdated_maps_warning_title">Update your maps</string>
+	<string name="outdated_maps_warning_descr">The new search needs maps of this version. Update all your maps - it is free.</string>
 	<string name="free_region_other_regions_need_maps_plus">Other regions need Maps+: %1$s</string>
 	<string name="cast_shadows">Shadows</string>
 	<string name="build_update_size">upd %1$s</string>

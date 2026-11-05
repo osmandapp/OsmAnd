@@ -1,4 +1,4 @@
-package net.osmand.plus.download.ui
+package net.osmand.plus.download.freeregion
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -19,11 +19,13 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import net.osmand.map.WorldRegion
 import net.osmand.plus.OsmAndTaskManager
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseMaterialModalBottomSheetDialogFragment
-import net.osmand.plus.download.FreeRegionHelper
-import net.osmand.plus.download.FreeRegionServer
-import net.osmand.plus.download.FreeRegionServer.ReplaceAnswer
+import net.osmand.plus.chooseplan.ChoosePlanFragment
+import net.osmand.plus.chooseplan.OsmAndFeature
+import net.osmand.plus.download.DownloadValidationManager
+import net.osmand.plus.download.IndexItem
 import net.osmand.plus.download.local.LocalItem
 import net.osmand.plus.download.local.LocalOperationTask
 import net.osmand.plus.download.local.OperationType
@@ -43,6 +45,8 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 
 	private var step = Step.REPLACE
 	private var loading = false
+
+	/** Continues the download that opened the sheet; lost when the sheet is recreated. */
 	private var onReplaced: Runnable? = null
 
 	private lateinit var freeRegion: WorldRegion
@@ -50,19 +54,21 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 	private lateinit var mapsToDelete: Map<WorldRegion, List<LocalItem>>
 	private lateinit var mainView: View
 
+	private val freeVersionMaps: FreeVersionMaps
+		get() = osmandApp.downloadThread.freeVersionMaps
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		val regions = osmandApp.regions
 		val from = regions.getRegionData(requireArguments().getString(FREE_REGION_KEY))
 		val to = regions.getRegionData(requireArguments().getString(REGION_KEY))
-		if (from == null || to == null || onReplaced == null) {
-			// recreated: the pending download is lost with the old activity
+		if (from == null || to == null) {
 			dismissAllowingStateLoss()
 			return
 		}
 		freeRegion = from
 		region = to
-		mapsToDelete = FreeRegionHelper(osmandApp).collectMapsToDelete(region)
+		mapsToDelete = freeVersionMaps.collectMapsToDelete(region)
 		savedInstanceState?.getString(STEP_KEY)?.let { step = Step.valueOf(it) }
 	}
 
@@ -75,7 +81,7 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 		setupEmailField()
 		mainView.findViewById<View>(R.id.get_maps_plus_button).setOnClickListener {
 			dismiss()
-			FreeRegionDialogs.showChoosePlan(requireActivity())
+			ChoosePlanFragment.showInstance(requireActivity(), OsmAndFeature.UNLIMITED_MAP_DOWNLOADS)
 		}
 		mainView.findViewById<View>(R.id.cancel_button).setOnClickListener { dismiss() }
 		mainView.findViewById<View>(R.id.replace_button).setOnClickListener {
@@ -114,7 +120,7 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 	}
 
 	private fun getMapsToDeleteSize(): String {
-		return AndroidUtils.formatSize(osmandApp, FreeRegionHelper.getSize(mapsToDelete.values.flatten()))
+		return AndroidUtils.formatSize(osmandApp, mapsToDelete.values.flatten().sumOf { it.size })
 	}
 
 	private fun setupEmailField() {
@@ -134,6 +140,11 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 
 	private fun getEmail(): String {
 		return mainView.findViewById<TextInputEditText>(R.id.email_edit).text?.toString()?.trim().orEmpty()
+	}
+
+	private fun setStep(step: Step) {
+		this.step = step
+		updateStep()
 	}
 
 	private fun updateStep() {
@@ -196,22 +207,17 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 
 	private fun requestReplace() {
 		setLoading(true)
-		FreeRegionServer(osmandApp).requestReplace(freeRegion, region) { answer ->
+		FreeRegionApi(osmandApp).requestReplace(freeRegion, region) { answer ->
 			if (!isAdded) {
 				return@requestReplace
 			}
 			setLoading(false)
 			when (answer) {
 				ReplaceAnswer.OK -> applyReplace()
-				ReplaceAnswer.REQUEST_EMAIL -> {
-					// the email is already left - the server must not ask again, so only Maps+
-					step = if (osmandSettings.EMAIL_SUBSCRIBED.get()) Step.BUY else Step.EMAIL
-					updateStep()
-				}
-				ReplaceAnswer.NO -> {
-					step = Step.BUY
-					updateStep()
-				}
+				// the email is already left - the server must not ask again, so only Maps+
+				ReplaceAnswer.REQUEST_EMAIL ->
+					setStep(if (osmandSettings.EMAIL_SUBSCRIBED.get()) Step.BUY else Step.EMAIL)
+				ReplaceAnswer.NO -> setStep(Step.BUY)
 				null -> osmandApp.showShortToastMessage(R.string.no_inet_connection)
 			}
 		}
@@ -224,31 +230,51 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 			return
 		}
 		setLoading(true)
-		FreeRegionServer(osmandApp).registerEmail(getEmail()) {
-			if (isAdded) {
+		FreeRegionApi(osmandApp).registerEmail(getEmail()) { registered ->
+			if (!isAdded) {
+				return@registerEmail
+			}
+			if (registered) {
 				// ask again - now with the email left
 				requestReplace()
+			} else {
+				setLoading(false)
+				osmandApp.showShortToastMessage(R.string.shared_string_unexpected_error)
 			}
 		}
 	}
 
 	private fun applyReplace() {
 		val app = osmandApp
-		val callback = onReplaced ?: return
+		val activity = requireActivity()
+		val continueDownload = onReplaced ?: Runnable { restartDownload(activity) }
 		dismiss()
-		FreeRegionHelper(app).replaceFreeRegion(region)
+		freeVersionMaps.replaceFreeRegion(region)
 		val items = mapsToDelete.values.flatten()
 		if (items.isEmpty()) {
-			callback.run()
+			continueDownload.run()
 			return
 		}
 		val listener = object : LocalOperationTask.OperationListener {
 			override fun onOperationFinished(type: OperationType, result: String) {
-				callback.run()
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					continueDownload.run()
+				}
 			}
 		}
 		OsmAndTaskManager.executeTask(
 			LocalOperationTask(app, OperationType.DELETE_OPERATION, listener), *items.toTypedArray())
+	}
+
+	/** The sheet was recreated and lost the pending download: start it again by the file names. */
+	private fun restartDownload(activity: FragmentActivity) {
+		val app = activity.application as OsmandApplication
+		val indexes = app.downloadThread.indexes
+		val fileNames = requireArguments().getStringArrayList(ITEMS_KEY).orEmpty()
+		val items = fileNames.mapNotNull { indexes.getIndexItem(it) }
+		if (items.isNotEmpty() && AndroidUtils.isActivityNotDestroyed(activity)) {
+			DownloadValidationManager(app).startDownload(activity, *items.toTypedArray())
+		}
 	}
 
 	override fun initialBottomSheetState(): Int = BottomSheetBehavior.STATE_EXPANDED
@@ -281,17 +307,23 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 		private val TAG = FreeRegionBottomSheet::class.java.simpleName
 		private const val FREE_REGION_KEY = "free_region"
 		private const val REGION_KEY = "region"
+		private const val ITEMS_KEY = "items"
 		private const val STEP_KEY = "step"
 
+		/**
+		 * @param items the download that opened the sheet, to start it again after the sheet is recreated
+		 * @param onReplaced continues the download after the replace
+		 */
 		@JvmStatic
 		fun showInstance(activity: FragmentActivity, freeRegion: WorldRegion, region: WorldRegion,
-		                 onReplaced: Runnable) {
+		                 items: Array<IndexItem>, onReplaced: Runnable) {
 			val manager = activity.supportFragmentManager
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 				val fragment = FreeRegionBottomSheet()
 				fragment.arguments = Bundle().apply {
 					putString(FREE_REGION_KEY, freeRegion.regionId)
 					putString(REGION_KEY, region.regionId)
+					putStringArrayList(ITEMS_KEY, ArrayList(items.map { it.fileName }))
 				}
 				fragment.onReplaced = onReplaced
 				fragment.show(manager, TAG)

@@ -21,7 +21,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.FreeRegionHelper;
 import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -102,30 +101,25 @@ public class FreeVersionBanner {
 	}
 
 	/**
-	 * Free version: one free region instead of the 7 downloads counter. The limit is never
-	 * "reached" - the free region and updates stay free.
+	 * Free version: the free region - all its maps and every update are free. There is no limit to
+	 * reach, so the banner only changes with the region.
 	 */
 	private void updateBanner() {
-		updateBannerState(1);
-		WorldRegion region = new FreeRegionHelper(app).getFreeRegion();
-		freeVersionBanner.findViewById(R.id.marksLinearLayout).setVisibility(View.GONE);
+		boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.APP);
+		updateBannerColors();
+		WorldRegion region = app.getDownloadThread().getFreeVersionMaps().getFreeRegion();
+		freeVersionTitleTextView.setText(R.string.free_version_title);
 		downloadsLeftTextView.setText(region != null ? region.getLocaleName() : "");
 		freeVersionSubtitleTextView.setVisibility(View.VISIBLE);
 		freeVersionSubtitleTextView.setText(region != null
 				? activity.getString(R.string.free_region_banner_descr, region.getLocaleName())
 				: activity.getString(R.string.free_region_not_chosen_descr));
+		freeVersionDescriptionTextView.setText(R.string.get_unlimited_downloads);
+		updateCtaButton(nightMode);
 	}
 
-	private void updateBannerState(int downloadsLeft) {
-		boolean limitReached = downloadsLeft == 0;
-		boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.APP);
-		updateBannerColors();
-		freeVersionTitleTextView.setText(limitReached ? R.string.free_download_limit_reached : R.string.free_version_title);
-		downloadsLeftTextView.setVisibility(limitReached ? View.GONE : View.VISIBLE);
-		freeVersionSubtitleTextView.setVisibility(limitReached ? View.VISIBLE : View.GONE);
-		freeVersionDescriptionTextView.setText(R.string.get_unlimited_downloads);
-		boolean hasDiscount = updateCtaDiscountBadge(nightMode);
-		boolean filledCta = limitReached || hasDiscount;
+	private void updateCtaButton(boolean nightMode) {
+		boolean filledCta = updateCtaDiscountBadge(nightMode);
 		int ctaBackgroundId = R.drawable.free_version_banner_cta_neutral_ripple;
 		int ctaHorizontalMargin = 0;
 		int ctaTopMargin = 0;

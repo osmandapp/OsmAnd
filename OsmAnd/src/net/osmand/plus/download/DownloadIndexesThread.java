@@ -29,6 +29,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DatabaseHelper.HistoryDownloadEntry;
+import net.osmand.plus.download.freeregion.FreeVersionMaps;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.IndexItem.DownloadEntry;
 import net.osmand.plus.download.local.LocalItem;
@@ -37,7 +38,6 @@ import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -59,6 +59,7 @@ public class DownloadIndexesThread {
 
 	private final DatabaseHelper dbHelper;
 	private final DownloadFileHelper downloadFileHelper;
+	private final FreeVersionMaps freeVersionMaps;
 	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<>());
 	private final ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<>();
 	private final Map<String, List<File>> pendingFilesToDelete = new ConcurrentHashMap<>();
@@ -91,6 +92,12 @@ public class DownloadIndexesThread {
 		updateLoadedFiles();
 		downloadFileHelper = new DownloadFileHelper(app);
 		dbHelper = new DatabaseHelper(app);
+		freeVersionMaps = new FreeVersionMaps(app);
+	}
+
+	@NonNull
+	public FreeVersionMaps getFreeVersionMaps() {
+		return freeVersionMaps;
 	}
 
 	public void updateLoadedFiles() {
@@ -230,19 +237,6 @@ public class DownloadIndexesThread {
 			}
 		}
 		return false;
-	}
-
-	public int getCountedDownloads() {
-		int i = 0;
-		if (currentDownloadingItem != null && DownloadActivityType.isCountedInDownloads(currentDownloadingItem)) {
-			i++;
-		}
-		for (IndexItem ii : indexItemDownloading) {
-			if (DownloadActivityType.isCountedInDownloads(ii)) {
-				i++;
-			}
-		}
-		return i;
 	}
 
 	public void runReloadIndexFilesSilent() {
@@ -450,12 +444,8 @@ public class DownloadIndexesThread {
 
 	private class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, IndexItem, Object, String> implements DownloadFileShowWarning {
 
-		private final OsmandPreference<Integer> downloads;
-
-
 		public DownloadIndexesAsyncTask() {
 			super(app);
-			downloads = app.getSettings().NUMBER_OF_FREE_DOWNLOADS;
 		}
 
 		@Override
@@ -565,9 +555,6 @@ public class DownloadIndexesThread {
 
 						boolean success = downloadFile(item, filesToReindex, forceWifi);
 						if (success) {
-							if (DownloadActivityType.isCountedInDownloads(item)) {
-								downloads.set(downloads.get() + 1);
-							}
 							if (item.getBasename().equalsIgnoreCase(DownloadResources.WORLD_SEAMARKS_KEY)) {
 								File folder = app.getAppPath(IndexConstants.MAPS_PATH);
 								String fileName = DownloadResources.WORLD_SEAMARKS_OLD_NAME
@@ -632,19 +619,11 @@ public class DownloadIndexesThread {
 		}
 
 		private boolean validateNotExceedsFreeLimit(@NonNull IndexItem item) {
-			FreeRegionHelper helper = new FreeRegionHelper(app);
-			WorldRegion freeRegion = helper.getFreeRegion();
-			WorldRegion region = helper.getRegion(item);
-			if (helper.isFreeVersion() && freeRegion == null && region != null) {
-				// the first map chooses the free region, without a dialog
-				helper.setFreeRegion(region);
-				freeRegion = region;
-			}
-			boolean exceed = !helper.isFree(item, freeRegion);
-			if (exceed) {
+			boolean free = freeVersionMaps.canDownload(item);
+			if (!free) {
 				publishProgress(DownloadValidationManager.getFreeVersionMessage(app));
 			}
-			return !exceed;
+			return free;
 		}
 
 		private void reindexDownloadedFiles(@NonNull List<File> filesToReindex, @NonNull StringBuilder warnings) {
