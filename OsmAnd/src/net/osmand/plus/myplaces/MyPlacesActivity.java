@@ -139,6 +139,7 @@ public class MyPlacesActivity extends TabActivity {
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setTitle(R.string.shared_string_my_places);
+			actionBar.setSubtitle(null);
 			actionBar.setElevation(0);
 		}
 	}
