@@ -215,6 +215,33 @@ public class GeocodingLookupService {
 				return !hasAnyRequest(latLon);
 			}
 		};
+		List<GeocodingResult> addresses;
+		try {
+			addresses = new GeocodingUtilities().findAddresses(getStreetLookupReaders(), roads, cancel);
+		} catch (IOException | RuntimeException e) {
+			LOG.error("Exception happened during reverse geocoding", e);
+			return null;
+		}
+		if (cancel.isCancelled()) {
+			return null;
+		}
+		return addresses.isEmpty() ? new GeocodingResult() : addresses.get(0);
+	}
+
+	// the streets and buildings of roads just found by findRoads with RoadsLookup.ADDRESS, nearest first.
+	// Call it from that findRoads callback: usedReaders are then the maps the roads came from.
+	@NonNull
+	public List<GeocodingResult> findAddresses(@NonNull List<GeocodingResult> roads) {
+		try {
+			return new GeocodingUtilities().findAddresses(getStreetLookupReaders(), roads);
+		} catch (IOException | RuntimeException e) {
+			LOG.error("Exception happened during reverse geocoding", e);
+			return new ArrayList<>();
+		}
+	}
+
+	@NonNull
+	private List<BinaryMapIndexReader> getStreetLookupReaders() {
 		List<BinaryMapIndexReader> readers = new ArrayList<>();
 		for (BinaryMapReaderResource resource : usedReaders) {
 			if (!resource.isClosed()) {
@@ -224,17 +251,7 @@ public class GeocodingLookupService {
 				}
 			}
 		}
-		List<GeocodingResult> addresses;
-		try {
-			addresses = new GeocodingUtilities().findAddresses(readers, roads, cancel);
-		} catch (IOException | RuntimeException e) {
-			LOG.error("Exception happened during reverse geocoding", e);
-			return null;
-		}
-		if (cancel.isCancelled()) {
-			return null;
-		}
-		return addresses.isEmpty() ? new GeocodingResult() : addresses.get(0);
+		return readers;
 	}
 
 	// the roads near the point, nearest first, passed to the callback on the lookup thread; null when a

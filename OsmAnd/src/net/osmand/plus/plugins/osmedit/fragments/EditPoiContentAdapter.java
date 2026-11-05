@@ -183,7 +183,7 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 			}
 			case TYPE_BASIC_INFO -> {
 				itemView = themedInflater.inflate(R.layout.edit_poi_basic_info_item, parent, false);
-				yield new BasicInfoHolder(itemView);
+				yield new BasicInfoHolder(itemView, app, nightMode);
 			}
 			case TYPE_ADD_OPENING_HOURS -> {
 				itemView = themedInflater.inflate(R.layout.edit_poi_add_opening_hours_item, parent, false);

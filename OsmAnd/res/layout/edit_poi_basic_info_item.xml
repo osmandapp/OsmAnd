@@ -29,10 +29,25 @@
 			app:srcCompat="@drawable/ic_action_street_name"
 			app:tint="?android:textColorSecondary" />
 
+		<ImageButton
+			android:id="@+id/streetFromMapButton"
+			android:layout_width="@dimen/acceptable_touch_radius"
+			android:layout_height="@dimen/acceptable_touch_radius"
+			android:layout_alignTop="@id/streetEditText"
+			android:layout_alignBottom="@id/streetEditText"
+			android:layout_alignParentEnd="true"
+			android:layout_marginEnd="@dimen/text_margin_small"
+			android:background="?attr/selectableItemBackgroundBorderless"
+			android:contentDescription="@string/street_name_from_map"
+			app:srcCompat="@drawable/ic_action_location_marker_outlined"
+			app:tint="?android:textColorSecondary" />
+
 		<EditText
 			android:id="@+id/streetEditText"
 			style="@style/create_poi_text_field"
 			android:layout_below="@id/contactInfoTextView"
+			android:layout_toStartOf="@id/streetFromMapButton"
+			android:layout_marginEnd="0dp"
 			android:hint="@string/street_name"
 			android:inputType="textMultiLine"
 			tools:text="testText" />
