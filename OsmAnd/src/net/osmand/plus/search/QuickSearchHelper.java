@@ -162,7 +162,7 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	// the old search works while a map around the search location is older than the spatial search needs
-	public void updateSearchEngine(@Nullable LatLon location) {
+	public boolean updateSearchEngine(@Nullable LatLon location) {
 		mapsWithoutSpatialSearch = location == null ? Collections.emptyList()
 				: app.getResourceManager().getMapsWithoutSpatialSearch(location, SPATIAL_SEARCH_MAPS_RADIUS);
 		boolean spatial = useSpatialTextSearch();
@@ -173,7 +173,9 @@ public class QuickSearchHelper implements ResourceListener {
 			core.init(spatial);
 			registerNonMapSearchAPIs();
 			refreshCustomPoiFilters();
+			return true;
 		}
+		return false;
 	}
 
 	@NonNull

@@ -2484,7 +2484,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
 	                                   SearchResultListener resultListener, boolean preserveSelectedPoiTypeNames) {
-		searchHelper.updateSearchEngine(searchUICore.getSearchSettings().getOriginalLocation());
+		if (searchHelper.updateSearchEngine(searchUICore.getSearchSettings().getOriginalLocation()) && searchMore) {
+			// the results and the radius of the other engine are not continued: search anew
+			searchUICore.updateSettings(searchUICore.getSearchSettings().setRadiusLevel(1));
+			runCoreSearch(text, showQuickResult, false, resultListener, true);
+			return;
+		}
 		searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection;
 			SearchCoreAPI regionResultApi;
