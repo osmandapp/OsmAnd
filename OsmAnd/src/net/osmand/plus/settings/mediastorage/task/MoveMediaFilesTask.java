@@ -23,7 +23,6 @@ import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.Recording;
-import net.osmand.plus.plugins.audionotes.RecordingsFileHelper;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.mediastorage.MediaSource;
 import net.osmand.plus.settings.mediastorage.MediaStorageHelper;
@@ -295,40 +294,30 @@ public class MoveMediaFilesTask extends AsyncTask<Void, Object, Map<String, Pair
 		}
 		logDebug("Move media deleting old sources: count=" + sourcesToDelete.size());
 		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Boolean>() {
+			private final List<Recording> deletedRecordings = new ArrayList<>();
+
 			@Override
 			protected Boolean doInBackground(Void... params) {
-				return deleteMovedSources(sourcesToDelete);
+				return deleteMovedSources(sourcesToDelete, deletedRecordings);
 			}
 
 			@Override
 			protected void onPostExecute(Boolean success) {
-				removeDeletedRecordings(sourcesToDelete);
+				removeRecordings(deletedRecordings);
 				callback.processResult(success);
 			}
 		});
 	}
 
-	private void removeDeletedRecordings(@NonNull List<MediaSource> deletedSources) {
-		// The A/V notes plugin indexes its folder only on startup, so drop the moved originals
-		// from its index, otherwise they are listed next to their copies until a restart.
-		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
-		if (plugin == null) {
-			return;
-		}
-		RecordingsFileHelper recordingsHelper = plugin.getRecordingsFileHelper();
-		for (MediaSource source : deletedSources) {
-			Recording recording = recordingsHelper.getRecordingByFileName().get(source.getFileName());
-			if (recording != null && !recording.getFile().exists()) {
-				recordingsHelper.deleteRecording(recording);
-			}
-		}
-	}
-
-	private boolean deleteMovedSources(@NonNull List<MediaSource> sourcesToDelete) {
+	private boolean deleteMovedSources(@NonNull List<MediaSource> sourcesToDelete, @NonNull List<Recording> deletedRecordings) {
 		boolean failed = false;
 		for (MediaSource source : sourcesToDelete) {
 			try {
+				Recording recording = getRecording(source);
 				source.delete();
+				if (recording != null) {
+					deletedRecordings.add(recording);
+				}
 			} catch (IOException e) {
 				failed = true;
 				log.warn("Failed to delete moved media source: " + source.getId(), e);
@@ -336,6 +325,28 @@ public class MoveMediaFilesTask extends AsyncTask<Void, Object, Map<String, Pair
 		}
 		logDebug("Move media delete old sources finished: success=" + !failed);
 		return !failed;
+	}
+
+	@Nullable
+	private Recording getRecording(@NonNull MediaSource source) {
+		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
+		if (plugin == null) {
+			return null;
+		}
+		Recording recording = plugin.getRecordingsFileHelper().getRecordingByFileName().get(source.getFileName());
+		boolean sameFile = recording != null && source.getHrefKeys().contains(mediaStorageHelper.createMediaFileHref(recording.getFile()));
+		return sameFile ? recording : null;
+	}
+
+	private void removeRecordings(@NonNull List<Recording> recordings) {
+		// The A/V notes plugin indexes its folder only on startup: drop the deleted originals
+		// from its index, otherwise they are listed next to their moved copies until a restart.
+		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
+		if (plugin != null) {
+			for (Recording recording : recordings) {
+				plugin.getRecordingsFileHelper().removeRecording(recording);
+			}
+		}
 	}
 
 	private void deleteTarget(@NonNull MediaTarget target) {
