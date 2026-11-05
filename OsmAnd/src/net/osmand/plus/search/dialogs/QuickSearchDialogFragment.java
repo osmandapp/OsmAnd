@@ -163,6 +163,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private final List<ChipsLayout.ChipData> filterChipItems = new ArrayList<>();
 	private View advancedCoordinatesCard;
 	private SearchResultCollection unfilteredResultCollection;
+	private SearchResultCollection popularPlacesCollection;
+	private PoiUIFilter popularPlacesFilter;
 	private TextView sendEmptySearchText;
 	private FrameLayout sendEmptySearchButton;
 	private QuickSearchMainListFragment mainSearchFragment;
@@ -1650,7 +1652,11 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		updateChipsState();
 		if (changed) {
 			applySelectedSortSetting();
-			rerunCurrentSearchQuery(true);
+			if (popularPlacesCollection != null) {
+				renderPopularPlaces(false);
+			} else {
+				rerunCurrentSearchQuery(true);
+			}
 		}
 	}
 
@@ -1951,6 +1957,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void setResultCollection(SearchResultCollection resultCollection, boolean preserveSelectedPoiTypeNames) {
 		if (resultCollection == null) {
 			unfilteredResultCollection = null;
+			popularPlacesCollection = null;
+			popularPlacesFilter = null;
 			preservePoiTypeChips = preserveSelectedPoiTypeNames || shouldPreservePoiTypeChipsDuringSearch();
 			if (!preserveSelectedPoiTypeNames) {
 				selectedResultPoiTypeNames.clear();
@@ -3366,15 +3374,28 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void showResult(@NonNull PoiUIFilter filter, @NonNull SearchResultCollection collection) {
+		popularPlacesCollection = collection;
+		popularPlacesFilter = filter;
 		mainSearchFragment.getAdapter().clear();
-		updateSearchResult(collection, true);
-		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
+		applySelectedSortSetting();
+		renderPopularPlaces(true);
 		updateTabBarVisibility(false);
 		setButtonToolbarVisible(true);
 		toolbarEdit.setVisibility(View.GONE);
 		searchEditText.setHint(R.string.popular_places);
 		searchEditText.setEnabled(false);
 		toolbar.setVisibility(View.VISIBLE);
+	}
+
+	private void renderPopularPlaces(boolean append) {
+		SearchResultCollection collection = popularPlacesCollection;
+		if (selectedSortByOption == SortByOption.NEAREST) {
+			SearchPhrase phrase = SearchPhrase.emptyPhrase(searchUICore.getSearchSettings());
+			collection = new SearchResultCollection(phrase)
+					.addSearchResults(popularPlacesCollection.getCurrentSearchResults(), true, false);
+		}
+		updateSearchResult(collection, append);
+		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(popularPlacesFilter);
 	}
 
 	public void showSearchHistoryResult(@NonNull SearchResult searchResult) {
