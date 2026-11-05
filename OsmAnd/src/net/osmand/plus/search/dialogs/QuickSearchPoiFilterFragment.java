@@ -105,7 +105,6 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	// Places around with a value (by key name) and with any value of a category, null until counted
 	private Map<String, Integer> placesCounts;
 	private Map<String, Integer> categoryPlacesCounts;
-	private AsyncTask<Void, Void, Integer> countPlacesTask;
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
@@ -302,7 +301,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 		Map<String, Integer> counts = new HashMap<>();
 		Map<String, Integer> categoryCounts = new HashMap<>();
-		countPlacesTask = OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Integer>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Integer>() {
 			@Override
 			protected Integer doInBackground(Void... params) {
 				List<Amenity> amenities = app.getResourceManager().getAmenitySearcher().searchAmenities(filter, filter.getAdditionalFilter(),
@@ -471,9 +470,6 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 	public void refreshList() {
 		// The edited filter has other types: drop the old counts and count again
-		if (countPlacesTask != null) {
-			countPlacesTask.cancel(false);
-		}
 		placesCounts = null;
 		categoryPlacesCounts = null;
 		description.setText(filter.getName());
