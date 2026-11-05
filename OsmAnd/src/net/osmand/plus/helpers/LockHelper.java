@@ -215,6 +215,16 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		return useSystemScreenTimeout.get() ? 0 : turnScreenOnTime.get();
 	}
 
+	/**
+	 * Keeps the screen turned on by a navigation instruction until the announced turn is passed,
+	 * the usual timeout runs out after that. Never turns the screen on by itself.
+	 */
+	public void onTurnAhead() {
+		if (turnScreenOnNavigationInstructions.get()) {
+			uiHandler.post(this::resetLockTimerIfNeeded);
+		}
+	}
+
 	private void resetLockTimerIfNeeded() {
 		if (uiHandler.hasMessages(LOCK_SCREEN_MESSAGE)) {
 			uiHandler.removeCallbacks(lockRunnable);
