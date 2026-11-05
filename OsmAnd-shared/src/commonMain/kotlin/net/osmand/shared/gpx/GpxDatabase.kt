@@ -23,6 +23,9 @@ class GpxDatabase {
 	companion object {
 		val log = LoggerFactory.getLogger("GpxDatabase")
 
+		// bumping this runs GpxDbUtils.onUpgrade, which only migrates the schema: existing rows are
+		// not read again. A column that GpxReader fills from the file also needs
+		// GpxTrackAnalysis.ANALYSIS_VERSION bumped, or existing tracks keep it empty
 		const val DB_VERSION = 36
 		const val DB_NAME = "gpx_database"
 		const val GPX_TABLE_NAME = "gpxTable"
