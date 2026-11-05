@@ -23,6 +23,7 @@ import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.Recording;
+import net.osmand.plus.plugins.audionotes.RecordingsFileHelper;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.mediastorage.MediaSource;
 import net.osmand.plus.settings.mediastorage.MediaStorageHelper;
@@ -62,6 +63,8 @@ public class MoveMediaFilesTask extends AsyncTask<Void, Object, Map<String, Pair
 
 	private final OsmandApplication app;
 	private final MediaStorageHelper mediaStorageHelper;
+	@Nullable
+	private final RecordingsFileHelper recordingsHelper;
 	private final WeakReference<OsmandActionBarActivity> activity;
 	private final MediaStorageLocation to;
 	private final StorageItem fromItem;
@@ -84,6 +87,8 @@ public class MoveMediaFilesTask extends AsyncTask<Void, Object, Map<String, Pair
 			@Nullable MoveFilesStopListener stopTaskListener, @Nullable CallbackWithObject<Boolean> moveListener) {
 		this.app = app;
 		this.mediaStorageHelper = new MediaStorageHelper(app);
+		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
+		this.recordingsHelper = plugin != null ? plugin.getRecordingsFileHelper() : null;
 		this.activity = new WeakReference<>(activity);
 		this.to = to;
 		this.fromItem = toStorageItem(from);
@@ -303,7 +308,7 @@ public class MoveMediaFilesTask extends AsyncTask<Void, Object, Map<String, Pair
 
 			@Override
 			protected void onPostExecute(Boolean success) {
-				removeRecordings(deletedRecordings);
+				unregisterRecordings(deletedRecordings);
 				callback.processResult(success);
 			}
 		});
@@ -329,22 +334,17 @@ public class MoveMediaFilesTask extends AsyncTask<Void, Object, Map<String, Pair
 
 	@Nullable
 	private Recording getRecording(@NonNull MediaSource source) {
-		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
-		if (plugin == null) {
-			return null;
-		}
-		Recording recording = plugin.getRecordingsFileHelper().getRecordingByFileName().get(source.getFileName());
+		Recording recording = recordingsHelper != null ? recordingsHelper.getRecordingByFileName().get(source.getFileName()) : null;
 		boolean sameFile = recording != null && source.getHrefKeys().contains(mediaStorageHelper.createMediaFileHref(recording.getFile()));
 		return sameFile ? recording : null;
 	}
 
-	private void removeRecordings(@NonNull List<Recording> recordings) {
+	private void unregisterRecordings(@NonNull List<Recording> recordings) {
 		// The A/V notes plugin indexes its folder only on startup: drop the deleted originals
 		// from its index, otherwise they are listed next to their moved copies until a restart.
-		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
-		if (plugin != null) {
+		if (recordingsHelper != null) {
 			for (Recording recording : recordings) {
-				plugin.getRecordingsFileHelper().removeRecording(recording);
+				recordingsHelper.unregisterRecording(recording);
 			}
 		}
 	}
