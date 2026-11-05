@@ -582,6 +582,11 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		return false;
 	}
 
+	@Nullable
+	public SearchPoiAdditionalFilter getAdditionalFilter() {
+		return additionalFilter;
+	}
+
 	@NonNull
 	public Map<PoiType, PoiType> getTextPoiAdditionals(@NonNull List<PoiType> poiAdditionals) {
 		Map<PoiType, PoiType> textFilters = new HashMap<>();
