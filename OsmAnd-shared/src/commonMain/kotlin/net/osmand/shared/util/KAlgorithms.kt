@@ -160,6 +160,27 @@ object KAlgorithms {
 		return i
 	}
 
+	/** The first run of digits of [s] wherever it is, "Ave 12b" giving 12; 0 without digits. */
+	fun extractIntegerNumber(s: String): Int {
+		var i = 0
+		var k = 0
+		while (k < s.length) {
+			if (isDigit(s[k])) {
+				break
+			}
+			k++
+		}
+		while (k < s.length) {
+			if (isDigit(s[k])) {
+				i = i * 10 + (s[k] - '0')
+			} else {
+				break
+			}
+			k++
+		}
+		return i
+	}
+
 	/** What follows the leading digits of [s]: "12a" gives "a", "12" gives "". */
 	fun extractIntegerSuffix(s: String): String {
 		for (k in s.indices) {
@@ -348,7 +369,7 @@ object KAlgorithms {
 	 * A map file name reduced to what decides its age: the region, without the extension and
 	 * without the format version, and with a timestamp of zeros when it carries no digits at all.
 	 *
-	 * A copy of the private `Algorithms.simplifyFileName`, which stays in OsmAnd-java.
+	 * Based on the private `Algorithms.simplifyFileName` from OsmAnd-java.
 	 */
 	fun simplifyFileName(filename: String): String {
 		var lc = filename.lowercase()
@@ -370,8 +391,8 @@ object KAlgorithms {
 	 * Orders map file names the way the app consults them: the newest build of a region first, and
 	 * a file with no timestamp last of its region.
 	 *
-	 * A copy of `Algorithms.getStringVersionComparator`, which stays in OsmAnd-java. Note that it
-	 * is descending - the minus is in the original.
+	 * Based on `Algorithms.getStringVersionComparator` from OsmAnd-java. Note that it is
+	 * descending - the minus is in the original.
 	 */
 	fun compareFileVersions(f1: String, f2: String): Int =
 		-simplifyFileName(f1).compareTo(simplifyFileName(f2))

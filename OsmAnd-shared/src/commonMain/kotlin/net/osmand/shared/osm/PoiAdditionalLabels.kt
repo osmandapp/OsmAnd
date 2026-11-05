@@ -9,8 +9,7 @@ import kotlin.native.ObjCName
  * Labels of additional property values written as "Name: value" in phrases.xml ("Fridge: yes",
  * "Smoking: not allowed", "Kayaks: yes"). A translation without the separator is shown as it is.
  *
- * A copy of `PoiAdditionalLabels` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS.
+ * Based on `PoiAdditionalLabels` from OsmAnd-java.
  */
 object PoiAdditionalLabels {
 

@@ -622,7 +622,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		List<QuickSearchListItem> items = new ArrayList<>();
 		if (!Algorithms.isEmpty(results)) {
 			for (SearchResult result : results) {
-				if (result.object instanceof MapObject || result.objectType == ObjectType.SUGGESTION) {
+				if (result.object instanceof MapObject) {
 					items.add(new QuickSearchListItem(app, result));
 				}
 			}
@@ -2253,6 +2253,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_postcode, getString(R.string.select_postcode), v -> {
 			searchEditText.setHint(R.string.type_postcode);
 			startPostcodeSearch();
+			setResultCollection(null);
 			mainSearchFragment.getAdapter().clear();
 			updateTabBarVisibility(false);
 			openKeyboard();
@@ -2908,7 +2909,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
 		}
 		applySelectedSortSetting();
-		runCoreSearch(searchQuery, false, true);
+		// spatial rows are appended without deduplication, and a larger radius finds them again: replace them
+		SearchResultCollection collection = getResultCollection();
+		boolean spatialResults = collection != null && collection.isSkipSorting();
+		runCoreSearch(searchQuery, false, !spatialResults, spatialResults);
 	}
 
 	private boolean showMoreSpatialSearchResults() {

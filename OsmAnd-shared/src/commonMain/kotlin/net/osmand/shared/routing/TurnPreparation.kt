@@ -9,15 +9,15 @@ import kotlin.math.min
  * Turning a route that has been found into the manoeuvres a driver is told about, and into the times
  * and speeds each segment is driven at.
  *
- * This runs over segments that are already decided - whichever planner produced them - so it is what
- * makes two platforms describe the same route the same way. The C++ router carries its own copy of
- * all of it in `routeResultPreparation.cpp`; while both exist, android is told by the java side and
- * iOS by the C++ one, and they can disagree about a manoeuvre on the same road.
+ * This runs over the route segments supplied by a planner, providing common manoeuvre
+ * preparation for all platforms. The C++ router has a separate implementation in
+ * `routeResultPreparation.cpp`; sharing the preparation avoids differences between
+ * implementations for the same route.
  *
- * A copy of that preparation from `RouteResultPreparation` in OsmAnd-java, which stays there whole
- * for android and tools; this copy is for iOS. It carries the part that decides manoeuvres, lanes and
- * times, and leaves out the orchestration around it - the tile machinery, the area routing, the
- * debug printing and `convertFinalSegmentToResults`, which walks the java planner's own segments.
+ * Based on the manoeuvre, lane and timing preparation in `RouteResultPreparation` from
+ * OsmAnd-java. [RouteResultPreparation] handles the surrounding orchestration over shared
+ * planner segments, including area routing and `convertFinalSegmentToResults`. The Java debug
+ * printing helpers are not implemented here.
  */
 object TurnPreparation {
 

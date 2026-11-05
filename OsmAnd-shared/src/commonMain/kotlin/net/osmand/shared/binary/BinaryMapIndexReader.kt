@@ -19,6 +19,7 @@ import net.osmand.shared.routing.RouteSubregion
 import net.osmand.shared.util.collections.KTIntArrayList
 import net.osmand.shared.util.collections.KTIntObjectMap
 import net.osmand.shared.util.KCollatorStringMatcher
+import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.KStringMatcher
 import net.osmand.shared.util.collections.KTLongHashSet
 import net.osmand.shared.util.collections.KTLongObjectMap
@@ -32,15 +33,13 @@ import kotlin.math.min
 /**
  * An open obf file, with the index sections it carries located and the routing ones read.
  *
- * A copy of `BinaryMapIndexReader` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS, so a route can be calculated and a map read there without the C++ core. It
- * carries the structure walk in the constructor, the routing and HH sections, the map, poi and
- * address sections, `readInt` and the string table, and skips the transport section, which the
- * searches copied so far do not read. The method names are java's, so the two can be compared side
- * by side.
+ * Based on `BinaryMapIndexReader` from OsmAnd-java. It carries the structure walk in the
+ * constructor, the routing and HH sections, the map, poi and address sections, `readInt` and
+ * the string table, and skips the transport section, which the searches copied so far do not
+ * read. The method names are java's, so the two can be compared side by side.
  *
- * The read statistics java collects behind `READ_STATS` are left out: they serve the obf
- * inspection tools, which stay in OsmAnd-java.
+ * The read statistics collected behind `READ_STATS` in OsmAnd-java for OBF inspection tools are
+ * not implemented here.
  */
 class BinaryMapIndexReader {
 
@@ -985,6 +984,38 @@ class BinaryMapIndexReader {
 		return sr.getSearchResults()
 	}
 
+	/** The header of the settlement at [offset] of [r], without its streets. */
+	fun readCityObject(r: AddressRegion, offset: Long): City? {
+		if (!(offset >= r.filePointer && offset <= (r.length + r.filePointer))) {
+			throw IllegalArgumentException()
+		}
+		codedIS.seek(offset)
+		val length = codedIS.readRawVarint32().toLong()
+		val oldLim = codedIS.pushLimitLong(length)
+		// city header
+		val city = addressAdapter.readCityHeader(null, null, offset, r.attributeTagsTable)
+		codedIS.popLimit(oldLim)
+		return city
+	}
+
+	/** The street at [offset] of [r] in [city], with its houses and crossings. */
+	fun readStreetObject(r: AddressRegion, city: City, offset: Long): MapObject {
+		if (!(offset >= r.filePointer && offset <= (r.length + r.filePointer))) {
+			throw IllegalArgumentException()
+		}
+		val cx24 = KMapUtils.get31TileNumberX(city.getLocation()!!.longitude) shr 7
+		val cy24 = KMapUtils.get31TileNumberY(city.getLocation()!!.latitude) shr 7
+		codedIS.seek(offset)
+		val s = Street(city)
+		s.setFileOffset(offset)
+		val length = codedIS.readRawVarint32().toLong()
+		val oldLim = codedIS.pushLimitLong(length)
+		// cityx
+		addressAdapter.readStreet(s, null, true, cx24, cy24, null, r.attributeTagsTable)
+		codedIS.popLimit(oldLim)
+		return s
+	}
+
 	/** The amenities of every poi section whose name matches the request's query. */
 	fun searchPoiByName(req: SearchRequest<Amenity>): MutableList<Amenity> {
 		val nameQuery = req.nameQuery
@@ -999,6 +1030,32 @@ class BinaryMapIndexReader {
 			codedIS.popLimit(old)
 		}
 		return req.getSearchResults()
+	}
+
+	/** A read aborted by an error (OutOfMemoryError) leaves its limits on the stream and every next read fails. */
+	fun resetReadLimits() {
+		codedIS.popLimit(Long.MAX_VALUE)
+	}
+
+	/**
+	 * Reads the name index of the region of [reader]: the keys of its string table that match the
+	 * query of the reader and the blocks of atoms behind them, or all of them when it has no query.
+	 * Returns the blocks of the query in the order of the file, or null without one; the reader keeps
+	 * them all.
+	 */
+	fun readFullNameIndex(reader: NameIndexReader): List<NameIndexReader.PrefixNameValue>? {
+		val poiRegion = reader.poiRegion
+		val addressRegion = reader.addressRegion
+		codedIS.seek(poiRegion?.filePointer ?: addressRegion!!.filePointer)
+		val old = codedIS.pushLimitLong(poiRegion?.length ?: addressRegion!!.length)
+		val res = if (poiRegion != null) {
+			poiAdapter.readNameIndex(reader)
+		} else {
+			addressAdapter.readNameIndex(reader)
+		}
+		codedIS.popLimit(old)
+		// the blocks read before come first, in the order of a hash set: the order of the file whatever was read
+		return res?.sortedBy { it.shift }
 	}
 
 	/**
@@ -1250,6 +1307,45 @@ class BinaryMapIndexReader {
 		return result
 	}
 
+	/** Hands each key of a string table of a name index to [inspector], and the tables under the keys it matches. */
+	internal fun readNameIndexInspector(prefix: String?, inspector: NameIndexReader) {
+		var key: String? = null
+		var match = true
+		while (true) {
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return
+				IndexedStringTable.KEY_FIELD_NUMBER -> {
+					var read = codedIS.readString()
+					if (prefix != null) {
+						read = prefix + read
+					}
+					key = read
+					match = inspector.matchKey(read)
+				}
+				IndexedStringTable.VAL_FIELD_NUMBER -> {
+					val value = readInt().toInt() // FIXME for 64 bit support
+					if (match) {
+						inspector.putKey(key, value, prefix)
+					}
+				}
+				IndexedStringTable.SUBTABLES_FIELD_NUMBER -> {
+					val len = codedIS.readRawVarint32().toLong()
+					val oldLim = codedIS.pushLimitLong(len)
+					if (match) {
+						readNameIndexInspector(key, inspector)
+					} else {
+						val skip = codedIS.getBytesUntilLimit()
+						inspector.skipTableBytes(skip)
+						codedIS.skipRawBytes(skip)
+					}
+					codedIS.popLimit(oldLim)
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
 	/**
 	 * The walk behind [readIndexedStringTablePrefixes]. The queries come prepared, and each key is
 	 * prepared once for all of them, the keys at the top of a table once for all the searches after,
@@ -1363,6 +1459,9 @@ class BinaryMapIndexReader {
 		handle.close()
 	}
 
+	/** Bytes read from the file so far, for the statistics of a search. */
+	fun getBytesRead(): Long = codedIS.bytesRead
+
 	/** Field numbers of `OsmAndStructure` in osmand_odb.proto, frozen by the obf format. */
 	private object OsmAndStructure {
 		const val VERSION_FIELD_NUMBER = 1
@@ -1395,6 +1494,10 @@ class BinaryMapIndexReader {
 
 		/** The field of `OsmAndStructure` an HH routing section occupies; [HHRouteRegion.getFieldNumber]. */
 		const val HHROUTINGINDEX_FIELD_NUMBER = 10
+
+		/** The offset an atom of a poi name index keeps as a `fixed32`, as protobuf reads it low byte first. */
+		fun convertFixed32ToRef(k: Int): Int =
+			(k shl 24) or ((k and 0xff00) shl 8) or ((k ushr 8) and 0xff00) or (k ushr 24)
 
 		private val MASK_TO_READ = ((1 shl SHIFT_COORDINATES) - 1).inv()
 

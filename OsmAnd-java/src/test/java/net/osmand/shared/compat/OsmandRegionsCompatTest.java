@@ -102,7 +102,7 @@ public class OsmandRegionsCompatTest {
 
 	/** The tree as each locale builds it, and once with the continents translated. */
 	@Test
-	public void treesAreTheSame() throws IOException {
+	public void treesAreTheSame() throws Exception {
 		compareTree("en", java.getWorldRegion(), copy.getWorldRegion());
 		for (String[] locale : LOCALES) {
 			compareTree(locale[0] + "_" + locale[1], prepared(locale, false));
@@ -122,7 +122,7 @@ public class OsmandRegionsCompatTest {
 		}
 	}
 
-	private static Object[] prepared(String[] locale, boolean translate) throws IOException {
+	private static Object[] prepared(String[] locale, boolean translate) throws Exception {
 		OsmandRegions j = new OsmandRegions(false);
 		net.osmand.shared.map.OsmandRegions k = new net.osmand.shared.map.OsmandRegions(false);
 		j.setLocale(locale[0], locale[1]);

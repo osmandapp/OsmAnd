@@ -8,8 +8,8 @@ import kotlin.native.ObjCName
  * A house of a [Street], or a range of them when the address section stores an interpolation line
  * from this number to [getName2].
  *
- * A copy of `net.osmand.data.Building` in OsmAnd-java, which stays there for android and tools.
- * Left out: the JSON export, which only writes test data from OsmAnd-java.
+ * Based on `net.osmand.data.Building` from OsmAnd-java. Left out: the JSON export, which only
+ * writes test data from OsmAnd-java.
  */
 class Building : MapObject() {
 

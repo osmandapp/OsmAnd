@@ -235,6 +235,13 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	@Nullable
+	public Amenity findAmenity(@NonNull Amenity amenity) {
+		AmenitySearcher amenitySearch = app.getResourceManager().getAmenitySearcher();
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+		return amenitySearch.searchDetailedAmenity(new AmenitySearcher.Request(amenity), settings);
+	}
+
+	@Nullable
 	private static NameStringMatcher createGpxNameMatcher(@NonNull SearchPhrase phrase) {
 		String text = phrase.getFullSearchPhrase();
 		if (text.length() <= 1 && phrase.isNoSelectedType()) {

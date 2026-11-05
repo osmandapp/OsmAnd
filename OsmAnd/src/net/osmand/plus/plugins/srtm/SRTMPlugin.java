@@ -105,6 +105,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	private final StateChangedListener<Boolean> terrainListener;
 	private final StateChangedListener<Integer> hillshadeSunAngleListener;
 	private final StateChangedListener<Integer> hillshadeSunAzimuthListener;
+	private final StateChangedListener<Boolean> castShadowsListener;
 	private final StateChangedListener<String> terrainModeListener;
 	private final StateChangedListener<Float> verticalExaggerationListener;
 	private final StateChangedListener<MetricsConstants> metricSystemListener;
@@ -174,6 +175,14 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		hillshadeSunAzimuthListener = change -> app.runInUIThread(this::updateElevationConfiguration);
 		HILLSHADE_SUN_AZIMUTH.addListener(hillshadeSunAzimuthListener);
+
+		castShadowsListener = change -> app.runInUIThread(() -> {
+			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+			if (mapContext != null) {
+				mapContext.updateShadows();
+			}
+		});
+		settings.CAST_SHADOWS.addListener(castShadowsListener);
 	}
 
 	public void updateElevationConfiguration() {

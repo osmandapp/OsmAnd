@@ -3557,9 +3557,9 @@
     <string name="poi_changing_table_location_female_toilet">Locatie verschoontafel: damestoilet</string>
     <string name="poi_changing_table_location_male_toilet">Locatie verschoontafel: herentoilet</string>
     <string name="poi_changing_table_location_room">Locatie verschoontafel: kamer</string>
-    <string name="poi_changing_table_limited">Verschoontafel: beperkt: beperkt</string>
-    <string name="poi_changing_table_no">Verschoontafel: nee: nee</string>
-    <string name="poi_changing_table_yes">Verschoontafel: ja: ja</string>
+    <string name="poi_changing_table_limited">Verschoontafel: beperkt</string>
+    <string name="poi_changing_table_no">Verschoontafel: nee</string>
+    <string name="poi_changing_table_yes">Verschoontafel: ja</string>
     <string name="poi_defibrillator_location">Locatie</string>
     <string name="poi_hazard_additional_contamination">Verontreiniging</string>
     <string name="poi_hazard_additional_minefield">Mijnenveld</string>

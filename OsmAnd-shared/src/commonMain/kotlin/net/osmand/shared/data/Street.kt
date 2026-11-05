@@ -6,8 +6,8 @@ import net.osmand.shared.util.KMapUtils
 /**
  * A street of a [City] in the address section, with the buildings and crossing streets read for it.
  *
- * A copy of `net.osmand.data.Street` in OsmAnd-java, which stays there for android and tools. Left
- * out: the JSON export, which only writes test data from OsmAnd-java.
+ * Based on `net.osmand.data.Street` from OsmAnd-java. Left out: the JSON export, which only
+ * writes test data from OsmAnd-java.
  */
 class Street(private val city: City?) : MapObject() {
 

@@ -4111,7 +4111,7 @@
     <string name="contact_support">Tacaíocht teagmhála</string>
     <string name="trip_recording_show_start_dialog_setting">Má tá tú díchumasaithe, tosóidh an taifeadadh díreach tar éis an ghiuirléid nó an mhír roghchláir a thapáil, gan bacadh leis an dialóg dheimhnithe.</string>
     <string name="routing_engine_vehicle_type_cycling_road">Rothaíocht ar bhóithre</string>
-    <string name="announcement_time_descr">Braitheann uainiú anouncement leideanna gutha éagsúla ar chineál pras, luas nascleanúna reatha, agus luas nascleanúna réamhshocraithe.</string>
+    <string name="announcement_time_descr">Braitheann uainiú announcement leideanna gutha éagsúla ar chineál pras, luas nascleanúna reatha, agus luas nascleanúna réamhshocraithe.</string>
     <string name="announcement_time_off_route">Lasmuigh den bhealach</string>
     <string name="announcement_time_passing">Pasáil</string>
     <string name="save_global_track_interval_descr">Sonraigh an t-eatramh logála don taifeadadh rian ginearálta (casta air tríd an ngiuirléid \'Taifeadadh turas\' ar an léarscáil).</string>

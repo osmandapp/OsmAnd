@@ -127,7 +127,7 @@ class CommonWordsTest {
 			if (!FileSystem.SYSTEM.exists(path.toPath())) {
 				fail("regions.ocbf not found at $path; :OsmAnd-java:processResources downloads it, or set OSMAND_REGIONS_OCBF")
 			}
-			CommonWords.osmandRegions = OsmandRegions(path)
+			OsmandRegions.setDefault(OsmandRegions(path))
 			CommonWords.getInstance()
 		}
 	}

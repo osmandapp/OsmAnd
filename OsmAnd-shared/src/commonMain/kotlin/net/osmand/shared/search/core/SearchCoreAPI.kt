@@ -6,8 +6,7 @@ import net.osmand.shared.search.SearchUICore.SearchResultMatcher
  * One kind of search the core runs for a phrase: addresses by name, pois by name or by type, a
  * location typed or pasted as a link, and so on.
  *
- * A copy of `SearchCoreAPI` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS.
+ * Based on `SearchCoreAPI` from OsmAnd-java.
  */
 interface SearchCoreAPI {
 

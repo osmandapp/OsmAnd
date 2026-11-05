@@ -128,10 +128,10 @@
     <string name="poi_tea">Продавница чаја</string>
     <string name="poi_pasta">Продавница тестенина</string>
     <string name="poi_wine">Вински подрум</string>
-    <string name="poi_books">Књижара</string>
+    <string name="poi_books">Књижара;књижара;продавци књига</string>
     <string name="poi_bicycle">Продавница бицкли;продавница бицикала</string>
     <string name="poi_anime">Аниме продавница</string>
-    <string name="poi_antiques">Антикварница</string>
+    <string name="poi_antiques">Продавница антиквитета;антиквитети;антикварница;антикварница</string>
     <string name="poi_art">Продавница уметнина;prodajna galerija;Продајна галерија</string>
     <string name="poi_baby_goods">Ствари за бебу;bebi-oprema;Oprema za bebe;беби-опрема;Опрема за бебе</string>
     <string name="poi_boutique">Модни бутик;Butik</string>
@@ -1438,7 +1438,7 @@
     <string name="poi_ice_cream">Простор са сладоледом;сладолед</string>
     <string name="poi_pastry">Продавница пецива</string>
     <string name="poi_dairy">Млекара;млечни производи</string>
-    <string name="poi_vending_machine">Аутомат продаје</string>
+    <string name="poi_vending_machine">Аутомат за продају;апарат за новине</string>
     <string name="poi_bag">Продавница торби;putne torbe;путне торбе</string>
     <string name="poi_bathroom_furnishing">Намештај за купатило;oprema za kupatilo;Опрема за купатило</string>
     <string name="poi_bed">Продавница кревета;prodavnica kreveta</string>
@@ -1839,7 +1839,7 @@
     <string name="poi_full_service_yes">Пуна услуга</string>
     <string name="poi_brushless_yes">Без четкица: да</string>
     <string name="poi_brushless_no">Без четкица: не</string>
-    <string name="poi_car_wash_no">Прање кола: не: не</string>
+    <string name="poi_car_wash_no">Прање кола: не</string>
     <string name="poi_public_bath">Јавно купатило;Javno kupatilo</string>
     <string name="poi_male_yes">Мушкарци</string>
     <string name="poi_male_no">Забрањено за мушкарце</string>
@@ -3707,9 +3707,9 @@
     <string name="poi_changing_table_location_female_toilet">Локација промене стола: женски тоалет</string>
     <string name="poi_changing_table_location_male_toilet">Локација промене стола: мушки тоалет</string>
     <string name="poi_changing_table_location_room">Локација промене стола: соба</string>
-    <string name="poi_changing_table_limited">Промена стола: ограничена: ограничено</string>
-    <string name="poi_changing_table_no">Промена стола: не: не</string>
-    <string name="poi_changing_table_yes">Промена стола: да: да</string>
+    <string name="poi_changing_table_limited">Промена стола: ограничена</string>
+    <string name="poi_changing_table_no">Промена стола: не</string>
+    <string name="poi_changing_table_yes">Промена стола: да</string>
     <string name="poi_defibrillator_location">Локација</string>
     <string name="poi_hazard_additional_contamination">Контаминација</string>
     <string name="poi_hazard_additional_minefield">Минско поље</string>
@@ -5239,4 +5239,6 @@
     <string name="poi_disaster_help_point">Пункт за помоћ у случају катастрофе</string>
     <string name="poi_hitchhiking_stop">Место за стопирање</string>
     <string name="poi_service_abbreviation">Јавни сервис</string>
+    <string name="poi_internet_access_fee">Накнада за приступ интернету</string>
+    <string name="poi_historic_building">Историјска зграда</string>
 </resources>

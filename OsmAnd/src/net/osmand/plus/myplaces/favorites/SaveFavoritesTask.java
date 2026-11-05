@@ -81,14 +81,16 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			Set<String> deletedPointKeys = collectStalePointKeys(groups, journalRead.getDeletions().getPointKeys());
 
 			boolean success = saveExternalFiles(groups, deletedPointKeys);
-			if (!success) {
-				return false;
-			}
 
+			// Keep the internal copy current even if a group file could not be written,
+			// otherwise every change is lost on the next load
 			File internalFile = helper.getInternalFile();
 			Exception internalError = helper.saveFileAtomic(groups, internalFile);
 			if (internalError != null) {
 				log.error(internalError.getMessage(), internalError);
+				return false;
+			}
+			if (!success) {
 				return false;
 			}
 
@@ -195,6 +197,7 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 
 	private boolean saveLocalGroups(@NonNull List<FavoriteGroup> localGroups,
 			@NonNull Map<String, FavoriteGroup> fileGroups, @NonNull Set<String> deleted) {
+		boolean success = true;
 		for (FavoriteGroup localGroup : localGroups) {
 			FavoriteGroup fileGroup = fileGroups.get(localGroup.getName());
 			// Collect non deleted points from external group
@@ -215,10 +218,27 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			// save favoritePoints from memory in order to update existing
 			localGroup.getPoints().addAll(all.values());
 			// Save file if group changed
-			if (!localGroup.equals(fileGroup)) {
+			if (isGroupChanged(localGroup, fileGroup)) {
 				if (!saveFavoriteGroup(localGroup)) {
-					return false;
+					success = false;
 				}
+			}
+		}
+		return success;
+	}
+
+	// FavouritePoint.equals() ignores links, so attaching or detaching media alone would never reach the group file
+	static boolean isGroupChanged(@NonNull FavoriteGroup localGroup, @Nullable FavoriteGroup fileGroup) {
+		return !localGroup.equals(fileGroup) || !linksEqual(localGroup, fileGroup);
+	}
+
+	// Called for equal groups only: same points in the same order
+	private static boolean linksEqual(@NonNull FavoriteGroup localGroup, @NonNull FavoriteGroup fileGroup) {
+		List<FavouritePoint> localPoints = localGroup.getPoints();
+		List<FavouritePoint> filePoints = fileGroup.getPoints();
+		for (int i = 0; i < localPoints.size(); i++) {
+			if (!localPoints.get(i).linksEqual(filePoints.get(i))) {
+				return false;
 			}
 		}
 		return true;

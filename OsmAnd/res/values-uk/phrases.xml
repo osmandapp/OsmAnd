@@ -2978,7 +2978,7 @@
     <string name="poi_emergency_no">Крайня необхідність: немає</string>
     <string name="poi_cuisine_sushi">Суші</string>
     <string name="poi_crop_cassava">Вирощується культура: маніока</string>
-    <string name="poi_car_wash_no">Автомийка: немає: ні</string>
+    <string name="poi_car_wash_no">Автомийка: немає</string>
     <string name="poi_wetland_swamp">Відкрите болото</string>
     <string name="poi_route_railway_ref">Маршрут залізниці</string>
     <string name="poi_microwave_oven_yes">Мікрохвильова піч: присутня</string>
@@ -3557,9 +3557,9 @@
     <string name="poi_hazard_additional_minefield">Мінне поле</string>
     <string name="poi_hazard_additional_contamination">Забруднення</string>
     <string name="poi_defibrillator_location">Розташування</string>
-    <string name="poi_changing_table_yes">Сповивальний стіл: так: так</string>
-    <string name="poi_changing_table_no">Сповивальний стіл: ні: ні</string>
-    <string name="poi_changing_table_limited">Сповивальний стіл: обмежено: обмежено</string>
+    <string name="poi_changing_table_yes">Сповивальний стіл: так</string>
+    <string name="poi_changing_table_no">Сповивальний стіл: ні</string>
+    <string name="poi_changing_table_limited">Сповивальний стіл: обмежено</string>
     <string name="poi_changing_table_location_room">Розташування сповивального столу: кімната</string>
     <string name="poi_changing_table_location_male_toilet">Розташування сповивального столу: чоловічий туалет</string>
     <string name="poi_changing_table_location_female_toilet">Розташування сповивального столу: жіночий туалет</string>

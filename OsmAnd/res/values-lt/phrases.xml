@@ -1038,7 +1038,7 @@
     <string name="poi_free_flying_paragliding_yes">Parasparniai</string>
     <string name="poi_piste_grooming_no">Ne</string>
     <string name="poi_piste_difficulty_novice">Naujokas</string>
-    <string name="poi_car_wash_no">Automobilių plovykla: nėra: ne</string>
+    <string name="poi_car_wash_no">Automobilių plovykla: nėra</string>
     <string name="poi_self_service_no">Be savitarnos: ne</string>
     <string name="poi_drinking_water_no">Geriamas vanduo: ne</string>
     <string name="poi_fee_no">Mokestis: ne</string>
@@ -4117,9 +4117,9 @@
     <string name="poi_rtsa_scale_nc">n/n</string>
     <string name="poi_rtsa_scale_nc_asterisk">n/n*</string>
     <string name="poi_flare">Dujų fakelas;Fakelinis bokštas</string>
-    <string name="poi_changing_table_yes">Pervystymo stalas: taip: taip</string>
-    <string name="poi_changing_table_no">Pervystymo stalas: ne: ne</string>
-    <string name="poi_changing_table_limited">Pervystymo stalas: ribotas: ribotas</string>
+    <string name="poi_changing_table_yes">Pervystymo stalas: taip</string>
+    <string name="poi_changing_table_no">Pervystymo stalas: ne</string>
+    <string name="poi_changing_table_limited">Pervystymo stalas: ribotas</string>
     <string name="poi_changing_table_location_room">Pervystymo stalo vieta: kambarys</string>
     <string name="poi_changing_table_location_male_toilet">Pervystymo stalo vieta: vyrų tualetas</string>
     <string name="poi_changing_table_location_female_toilet">Pervystymo stalo vieta: moterų tualetas</string>

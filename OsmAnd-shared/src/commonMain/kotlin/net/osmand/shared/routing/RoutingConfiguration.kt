@@ -22,9 +22,8 @@ import kotlin.jvm.JvmStatic
  * A configuration is built, not edited: [Builder] holds what the XML declared and hands out a fresh
  * configuration per calculation.
  *
- * A copy of `net.osmand.router.RoutingConfiguration`, which stays in OsmAnd-java: android, tools and the C++ core keep using
- * the original, and this copy is for iOS. Keep the two identical; `RoutingConfigurationCompatTest` checks that they behave
- * the same.
+ * Based on `net.osmand.router.RoutingConfiguration` from OsmAnd-java. Keep behavior compatible
+ * with the original; `RoutingConfigurationCompatTest` checks that they behave the same.
  */
 class RoutingConfiguration {
 

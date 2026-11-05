@@ -49,6 +49,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	private static final int SEARCH_PRIORITY = SEARCH_ADDRESS_BY_NAME_PRIORITY;
 	private static final long POI_TYPES_IN_NAME_INDEX_EDITION = 1782864000000L; // 2026-07-01 UTC
+	private static final int[] INCREASED_SEARCH_RADIUS_KM = {500, 700};
 
 	private final MapPoiTypes poiTypes;
 	private final SpatialTextSearch spatialTextSearch = new SpatialTextSearch();
@@ -242,6 +243,10 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		settings.LANG_DEDUPLICATE = phrase.getSettings().getLang();
 		settings.SEARCH_POI &= phrase.isSearchTypeAllowed(ObjectType.POI);
 		settings.SEARCH_POI_CATEGORIES &= phrase.isSearchTypeAllowed(ObjectType.POI_TYPE);
+		int increased = getIncreasedRadiusKm(phrase.getRadiusLevel());
+		if (increased > 0) {
+			settings.SUGGESTED_SEARCH_RADIUS_KM = Math.max(settings.SUGGESTED_SEARCH_RADIUS_KM, increased);
+		}
 		return settings;
 	}
 
@@ -257,7 +262,23 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
-		return false;
+		return phrase.getRadiusLevel() <= INCREASED_SEARCH_RADIUS_KM.length;
+	}
+
+	@Override
+	public int getMinimalSearchRadius(SearchPhrase phrase) {
+		return createSpatialSettings(phrase).SUGGESTED_SEARCH_RADIUS_KM * 1000;
+	}
+
+	@Override
+	public int getNextSearchRadius(SearchPhrase phrase) {
+		int increased = getIncreasedRadiusKm(phrase.getRadiusLevel() + 1);
+		return increased > 0 ? increased * 1000 : getMinimalSearchRadius(phrase);
+	}
+
+	private static int getIncreasedRadiusKm(int radiusLevel) {
+		int ind = Math.min(radiusLevel, INCREASED_SEARCH_RADIUS_KM.length + 1) - 2;
+		return ind >= 0 ? INCREASED_SEARCH_RADIUS_KM[ind] : 0;
 	}
 
 	private SearchResult convertResult(SearchPhrase phrase, SpatialSearchContext context, SpatialSearchResult ssr) {
@@ -399,7 +420,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			localeName = PoiAdditionalLabels.getSearchName(poiType);
 		} else if (spatialPoiType.poiSubType != null) {
 			object = new TopIndexFilter(spatialPoiType.poiSubType, poiTypes, spatialPoiType.poiAdditional);
-			localeName = spatialPoiType.names.get(0);
+			// the value itself: the names list starts with the alternative names of the map (Lidl -> its name:fa)
+			localeName = spatialPoiType.poiAdditional;
 		} else {
 			return null;
 		}

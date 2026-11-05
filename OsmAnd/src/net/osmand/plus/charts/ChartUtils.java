@@ -665,6 +665,9 @@ public class ChartUtils {
 	                                                  boolean calcWithoutGaps) {
 		List<Entry> values = new ArrayList<>();
 		float currentX = 0;
+		boolean[] missingValues = PointAttributes.SENSOR_TAG_SPEED.equals(key)
+				? getMissingSensorSpeedStops(pointAttributes)
+				: null;
 
 		for (int i = 0; i < pointAttributes.size(); i++) {
 			PointAttributes attribute = pointAttributes.get(i);
@@ -675,8 +678,9 @@ public class ChartUtils {
 				if (!(calcWithoutGaps && attribute.getFirstPoint())) {
 					currentX += stepX / divX;
 				}
-				if (attribute.hasValidValue(key)) {
-					float value = attribute.getAttributeValue(key);
+				boolean missingValue = missingValues != null && missingValues[i];
+				if (missingValue || attribute.hasValidValue(key)) {
+					float value = missingValue ? 0 : attribute.getAttributeValue(key);
 					float currentY;
 					if (Float.isNaN(divY)) {
 						currentY = value * mulY;
@@ -697,6 +701,25 @@ public class ChartUtils {
 			}
 		}
 		return values;
+	}
+
+	@NonNull
+	private static boolean[] getMissingSensorSpeedStops(@NonNull List<PointAttributes> pointAttributes) {
+		boolean[] stops = new boolean[pointAttributes.size()];
+		int gapStart = -1;
+		for (int i = 0; i < pointAttributes.size(); i++) {
+			PointAttributes attribute = pointAttributes.get(i);
+			if (attribute.hasValidValue(PointAttributes.SENSOR_TAG_SPEED)) {
+				if (gapStart >= 0) {
+					Arrays.fill(stops, gapStart, i, true);
+				}
+				gapStart = i + 1;
+			} else if (!Float.isNaN(attribute.getSensorSpeed()) || !attribute.hasValidValue(PointAttributes.POINT_SPEED)
+					|| attribute.getSpeed() >= MIN_SPEED_FOR_PACE) {
+				gapStart = -1;
+			}
+		}
+		return stops;
 	}
 
 

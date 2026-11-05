@@ -1397,7 +1397,7 @@
     <string name="poi_brushless">Бесконтактная</string>
     <string name="poi_brushless_yes">Бесконтактно: да</string>
     <string name="poi_brushless_no">Контактная</string>
-    <string name="poi_car_wash_no">Автомойка: нет: нет</string>
+    <string name="poi_car_wash_no">Автомойка: нет</string>
     <string name="poi_public_bath">Общественная баня</string>
     <string name="poi_male_yes">Для мужчин</string>
     <string name="poi_male_no">Не для мужчин</string>
@@ -3525,9 +3525,9 @@
     <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
     <string name="poi_change_delete">Удаленный объект</string>
     <string name="poi_healthcare_speciality_radiotherapy">Радиотерапия</string>
-    <string name="poi_changing_table_yes">Пеленальный стол: есть: есть</string>
-    <string name="poi_changing_table_no">Пеленальный стол: нет: нет</string>
-    <string name="poi_changing_table_limited">Пеленальный стол: ограничено: ограничено</string>
+    <string name="poi_changing_table_yes">Пеленальный стол: есть</string>
+    <string name="poi_changing_table_no">Пеленальный стол: нет</string>
+    <string name="poi_changing_table_limited">Пеленальный стол: ограничено</string>
     <string name="poi_changing_table_location_room">Местоположение пеленального стола: комната</string>
     <string name="poi_changing_table_location_male_toilet">Местоположение пеленального стола: мужской туалет</string>
     <string name="poi_changing_table_location_female_toilet">Местоположение пеленального стола: женский туалет</string>

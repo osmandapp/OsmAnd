@@ -12,8 +12,8 @@ import kotlin.math.min
 /**
  * An object the map renderer drew: its tags, its geometry in 31 tiles and where its label went.
  *
- * A copy of `NativeLibrary.RenderedObject` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS. Java nests it in `NativeLibrary`; here it is a model of its own.
+ * Based on `NativeLibrary.RenderedObject` from OsmAnd-java. Java nests it in `NativeLibrary`;
+ * here it is a model of its own.
  */
 open class RenderedObject : MapObject() {
 

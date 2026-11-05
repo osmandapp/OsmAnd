@@ -178,7 +178,7 @@ public class SearchApisCompatTest {
 	static void setUpTypes() throws Exception {
 		assertTrue(REGIONS + " is missing; :OsmAnd-java:processResources downloads it", REGIONS.exists());
 		PlatformUtil.setOsmandRegions(new OsmandRegions(REGIONS.getPath()));
-		net.osmand.shared.binary.CommonWords.Companion.setOsmandRegions(
+		net.osmand.shared.map.OsmandRegions.setDefault(
 				new net.osmand.shared.map.OsmandRegions(REGIONS.getPath()));
 		for (Map.Entry<String, String> e : Algorithms.parseStringsXml(PHRASES).entrySet()) {
 			if (e.getKey().startsWith("poi_")) {
@@ -1127,8 +1127,8 @@ public class SearchApisCompatTest {
 
 	// the english names of the poi types, as SearchUICoreTest gives them
 
-	private static String translation(String keyName) {
-		String val = poiPhrases.get("poi_" + keyName);
+	private static String translation(Map<String, String> phrases, String keyName) {
+		String val = phrases.get("poi_" + keyName);
 		if (val != null) {
 			int ind = val.indexOf(';');
 			if (ind > 0) {
@@ -1138,8 +1138,8 @@ public class SearchApisCompatTest {
 		return val;
 	}
 
-	private static String synonyms(String keyName) {
-		String val = poiPhrases.get("poi_" + keyName);
+	private static String synonyms(Map<String, String> phrases, String keyName) {
+		String val = phrases.get("poi_" + keyName);
 		if (val != null) {
 			int ind = val.indexOf(';');
 			if (ind > 0) {
@@ -1153,6 +1153,19 @@ public class SearchApisCompatTest {
 	/** The english names of the poi types, as {@code SearchUICoreTest} gives them. */
 	static final class JavaTranslator implements MapPoiTypes.PoiTranslator {
 
+		private final Map<String, String> phrases;
+		private final Map<String, Map<String, String>> langs;
+
+		JavaTranslator() {
+			this(poiPhrases, Map.of());
+		}
+
+		/** The names of [phrases], and of the phrases of [langs] by language for {@link #getTranslator}. */
+		JavaTranslator(Map<String, String> phrases, Map<String, Map<String, String>> langs) {
+			this.phrases = phrases;
+			this.langs = langs;
+		}
+
 		@Override
 		public String getTranslation(AbstractPoiType type) {
 			AbstractPoiType base = type.getBaseLangType();
@@ -1164,7 +1177,7 @@ public class SearchApisCompatTest {
 
 		@Override
 		public String getTranslation(String keyName) {
-			return translation(keyName);
+			return translation(phrases, keyName);
 		}
 
 		@Override
@@ -1178,7 +1191,7 @@ public class SearchApisCompatTest {
 
 		@Override
 		public String getEnTranslation(String keyName) {
-			return translation(keyName);
+			return translation(phrases, keyName);
 		}
 
 		@Override
@@ -1192,12 +1205,18 @@ public class SearchApisCompatTest {
 
 		@Override
 		public String getSynonyms(String keyName) {
-			return synonyms(keyName);
+			return synonyms(phrases, keyName);
 		}
 
 		@Override
 		public String getAllLanguagesTranslationSuffix() {
 			return "all languages";
+		}
+
+		@Override
+		public MapPoiTypes.PoiTranslator getTranslator(String lang) {
+			Map<String, String> p = langs.get(lang);
+			return p == null ? null : new JavaTranslator(p, Map.of());
 		}
 	}
 
@@ -1214,7 +1233,7 @@ public class SearchApisCompatTest {
 
 		@Override
 		public String getTranslation(String keyName) {
-			return translation(keyName);
+			return translation(poiPhrases, keyName);
 		}
 
 		@Override
@@ -1228,7 +1247,7 @@ public class SearchApisCompatTest {
 
 		@Override
 		public String getEnTranslation(String keyName) {
-			return translation(keyName);
+			return translation(poiPhrases, keyName);
 		}
 
 		@Override
@@ -1242,7 +1261,7 @@ public class SearchApisCompatTest {
 
 		@Override
 		public String getSynonyms(String keyName) {
-			return synonyms(keyName);
+			return synonyms(poiPhrases, keyName);
 		}
 
 		@Override

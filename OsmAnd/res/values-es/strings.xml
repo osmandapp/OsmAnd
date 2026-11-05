@@ -177,7 +177,7 @@
     <string name="daynight_mode_auto">Amanecer/atardecer</string>
     <string name="daynight_mode_sensor">Sensor de luz</string>
     <string name="daynight">Modo diurno/nocturno</string>
-    <string name="shared_string_select_all">Marcar todo</string>
+    <string name="shared_string_select_all">Seleccionar todo</string>
     <string name="shared_string_refresh">Actualizar</string>
     <string name="fast_route_mode">Ruta más rápida</string>
     <string name="fast_route_mode_descr">Activar para calcular la ruta más rápida o desactivar para la más eficiente en combustible.</string>
@@ -658,7 +658,7 @@
 \n Nota 2: En la nueva ubicación de almacenamiento será imposible compartir archivos entre OsmAnd y OsmAnd+.</string>
     <string name="keep_and_add_destination_point">Añadir como último destino</string>
     <string name="route_descr_select_destination">Definir destino</string>
-    <string name="shared_string_select_on_map">Marcar en el mapa</string>
+    <string name="shared_string_select_on_map">Seleccionar en el mapa</string>
     <string name="shared_string_favorite">Favorito</string>
     <string name="route_info">Información de la ruta</string>
     <string name="calculate_osmand_route_without_internet">Cálculo sin Internet del segmento de ruta OsmAnd</string>
@@ -936,8 +936,8 @@
     <string name="routing_settings_2">Ajustes de navegación</string>
     <string name="general_settings_2">Configuración general</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_deselect">Desmarcar</string>
-    <string name="shared_string_deselect_all">Desmarcar todo</string>
+    <string name="shared_string_deselect">Deseleccionar</string>
+    <string name="shared_string_deselect_all">Deseleccionar todo</string>
     <string name="shared_string_unexpected_error">Error inesperado</string>
     <string name="shared_string_action_template">Acción {0}</string>
     <string name="shared_string_collapse">Contraer</string>
@@ -2841,7 +2841,7 @@
     <string name="routing_engine_vehicle_type_mtb">Bicicleta de montaña</string>
     <string name="select_segments">Elegir segmentos</string>
     <string name="select_segments_description">«%1$s» contiene más de un segmento, define el tramo para la navegación.</string>
-    <string name="toast_select_edits_for_upload">Marcar ediciones a subir</string>
+    <string name="toast_select_edits_for_upload">Seleccionar ediciones para cargar</string>
     <string name="temporary_conditional_routing_descr">Usar las restricciones viales que están activas ahora en el mapa</string>
     <string name="routing_attr_short_way_description">Ruta optimizada más corta (bajo consumo)</string>
     <string name="routing_attr_driving_style_description">Elige el propósito de la conducción para obtener la ruta más corta, más rápida o más segura</string>
@@ -3248,7 +3248,7 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una representación esquemática de iconos con niveles de zoom bajos para aquellos PDI que normalmente no se muestran</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
     <string name="quick_action_add_route_descr">Botón para empezar una ruta desde la mitad de la pantalla.</string>
-    <string name="select_suggested_points">Marcar los puntos sugeridos</string>
+    <string name="select_suggested_points">Seleccionar puntos sugeridos</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="location_source_descr">Si se instala OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación. \n \nSi obtienes información inexacta de la ubicación o usas un dispositivo sin «%2$s», intenta cambiar a «%3$s»</string>
     <string name="location_source">Proveedor de la ubicación</string>

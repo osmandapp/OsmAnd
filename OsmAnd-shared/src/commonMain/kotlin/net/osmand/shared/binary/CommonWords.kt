@@ -3,15 +3,14 @@ package net.osmand.shared.binary
 import net.osmand.shared.map.OsmandRegions
 import net.osmand.shared.map.WorldRegion
 import net.osmand.shared.util.KSearchAlgorithms
-import kotlin.concurrent.Volatile
 import kotlin.jvm.JvmStatic
 
 /**
  * A copy of `CommonWords` in OsmAnd-java: the words that are too common to search a name by, and
  * the frequent ones, each with its rank. A search looks for the rarest word of a phrase first.
  *
- * The words of the regions come from [osmandRegions], which the app sets once it has read them, as
- * java takes them from `PlatformUtil.getOsmandRegions`.
+ * The words of the regions come from [OsmandRegions.getDefault], as java takes them from
+ * `PlatformUtil.getOsmandRegions`: the app sets the regions before the first [getInstance].
  *
  * `getPoiInstance`, `getAddrInstance` and `mainFilterFrequentWords`, which only the tools call,
  * are not copied.
@@ -8609,11 +8608,7 @@ class CommonWords private constructor() {
 		// for ex: 100 bridge, ленина 30, but not potenitally name of street (31st road)
 		private const val NUMBER_WITH_LESS_THAN_2_LETTERS = "NUMBER_WITH_LESS_THAN_2_LETTERS"
 
-		/** Where [getInstance] takes the words of the regions from; set it before the first call. */
-		@Volatile
-		var osmandRegions: OsmandRegions? = null
-
-		private val DEFAULT_INSTANCE: CommonWords by lazy { create(osmandRegions) }
+		private val DEFAULT_INSTANCE: CommonWords by lazy { create(OsmandRegions.getDefault()) }
 
 		@JvmStatic
 		fun getInstance(): CommonWords = DEFAULT_INSTANCE

@@ -12,6 +12,25 @@
 	Thx - Hardy
 -->
 	<string name="update_maps_to_use_new_search">Update maps to use the new search (%1$s)</string>
+	<string name="free_region_not_chosen_descr">The region of your first downloaded map becomes your free region.</string>
+	<string name="free_region_banner_descr">All maps of %1$s are free.</string>
+	<string name="free_region_other_title">%1$s is not your free region</string>
+	<string name="free_region_other_descr">The free version includes maps of one region. To download %1$s, maps of other regions will be deleted.</string>
+	<string name="free_region_will_be_deleted">Will be deleted</string>
+	<string name="free_region_maps_stay">The world overview map, contour lines and other plugin maps stay.</string>
+	<string name="free_region_delete_and_download">Delete and download</string>
+	<string name="free_region_replace_used_title">Free replace already used</string>
+	<string name="free_region_not_eligible_email_descr">Leave your email to replace your free region once more, or get unlimited map downloads.</string>
+	<string name="free_region_email_helper">We\'ll send OsmAnd news. You can unsubscribe at any time.</string>
+	<string name="free_region_email_maps_deleted">Maps of %1$s (%2$s) will be deleted.</string>
+	<string name="free_region_send_and_replace">Send and replace</string>
+	<string name="free_region_not_eligible_buy_descr">Your free region is %1$s. To download %2$s and keep your current maps, get unlimited map downloads.</string>
+	<string name="outdated_maps_warning_title">Update your maps</string>
+	<string name="outdated_maps_warning_descr">The new search needs maps of this version. Update all your maps - it is free.</string>
+	<string name="free_region_other_regions_need_maps_plus">Other regions need Maps+: %1$s</string>
+	<string name="cast_shadows">Shadows</string>
+	<string name="build_update_size">upd %1$s</string>
+	<string name="build_update_size_estimated">upd ~%1$s</string>
 	<string name="astro_ar_mode">AR mode</string>
 	<string name="astro_camera_view">Camera view</string>
 	<string name="astro_reset_field_of_view">Reset field of view</string>
@@ -198,6 +217,17 @@
 	<string name="share_favorites_preparation_failed">Could not prepare files for sharing.</string>
 	<string name="share_favorites_share_failed">Could not share the file.</string>
 	<string name="share_favorites_missing_media_warning">Some attached media could not be included.</string>
+    <string name="release_5_5">
+        • Spatial Search on by default: search around a place, better ranking, synonyms, typo-tolerant\n\n
+        • 3D buildings cast shadows, with an adjustable sun direction\n\n
+        • Panoramax plugin: street-level imagery on the map\n\n
+        • Media library: all photos, videos and audio notes in one place\n\n
+        • Dashed and dotted track lines, default look per track folder\n\n
+        • Travel speed settings for routing and arrival time\n\n
+        • Android Auto: recent destinations, auto Free ride, Google Assistant and Gemini\n\n
+        • Quick action to show or hide tracks\n\n
+        • Contour line labels face uphill\n\n
+    </string>
     <string name="release_5_4">
         • Refreshed search UI: sorting, category filters, cleaner look\n\n
         • Attach photos and media to Favorites\n\n
@@ -2790,7 +2820,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="show_track_on_map">Show track on map</string>
     <string name="start_recording">Start recording</string>
     <string name="announcement_time_title">Announcement time</string>
-    <string name="announcement_time_descr">The anouncement timing of different voice prompts depends on prompt type, current navigation speed, and default navigation speed.</string>
+    <string name="announcement_time_descr">The announcement timing of different voice prompts depends on prompt type, current navigation speed, and default navigation speed.</string>
     <string name="announcement_time_intervals">Time and distance intervals</string>
     <string name="shared_string_turn">Turn</string>
     <string name="announcement_time_arrive">Arrive at destination</string>

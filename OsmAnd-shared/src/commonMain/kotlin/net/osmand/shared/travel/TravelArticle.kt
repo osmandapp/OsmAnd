@@ -22,9 +22,9 @@ import kotlin.jvm.JvmStatic
  * One wikivoyage article, or one track stored in an obf file - [TravelGpx] is the second kind.
  * It carries what the poi section said about it and, once it has been built, the gpx itself.
  *
- * A copy of `TravelArticle` in the android app, which stays there; this copy is for iOS. Left out:
- * `Parcelable`, which is how android passes the identifier between screens, and `getTravelBook`,
- * which turns a path into a display name through the app's directory layout.
+ * Based on `TravelArticle` from the Android app. Left out: `Parcelable`, which is how android
+ * passes the identifier between screens, and `getTravelBook`, which turns a path into a display
+ * name through the app's directory layout.
  */
 open class TravelArticle {
 

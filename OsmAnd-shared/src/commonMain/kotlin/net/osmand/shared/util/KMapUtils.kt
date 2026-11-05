@@ -29,6 +29,7 @@ object KMapUtils {
 	const val LONGITUDE_TURN = 360.0
 	const val DEFAULT_LATLON_PRECISION = 0.00001
 	const val HIGH_LATLON_PRECISION = 0.0000001
+	const val METERS_IN_DEGREE = 111320.0
 
 	private const val BASE_SHORT_OSM_URL = "https://openstreetmap.org/go/"
 
@@ -425,13 +426,17 @@ object KMapUtils {
 		return str
 	}
 
-	fun interleaveBits(x: Long, y: Long): Long {
-		var c: Long = 0
-		for (b in 31 downTo 0) {
-			c = c shl 1 or (x shr b and 1)
-			c = c shl 1 or (y shr b and 1)
-		}
-		return c
+	/** The low 32 bits of [x] and [y] interleaved, x's bit above y's: java's `interleaveBitsFast`. */
+	fun interleaveBits(x: Long, y: Long): Long = splitBits(y) or (splitBits(x) shl 1)
+
+	private fun splitBits(value: Long): Long {
+		var v = value and 0x00000000FFFFFFFFL
+		v = (v or (v shl 16)) and 0x0000FFFF0000FFFFL
+		v = (v or (v shl 8)) and 0x00FF00FF00FF00FFL
+		v = (v or (v shl 4)) and 0x0F0F0F0F0F0F0F0FL
+		v = (v or (v shl 2)) and 0x3333333333333333L
+		v = (v or (v shl 1)) and 0x5555555555555555L
+		return v
 	}
 
 	fun unifyRotationDiff(rotate: Float, targetRotate: Float): Float {
@@ -596,20 +601,40 @@ object KMapUtils {
 		return sa < 0
 	}
 
-	fun deinterleaveY(coord: Long): Long {
-		var x: Long = 0
-		for (b in 31 downTo 0) {
-			x = x shl 1 or (1L and coord shr (b * 2))
-		}
-		return x
+	/** The even bits of [coord], what [interleaveBits] took from y; java's loop over the 32 bits, by masks. */
+	fun deinterleaveY(coord: Long): Long = compactBits(coord)
+
+	/** The odd bits of [coord], what [interleaveBits] took from x. */
+	fun deinterleaveX(coord: Long): Long = compactBits(coord ushr 1)
+
+	/**
+	 * The 31 bbox [left, top, right, bottom] of a square of [radiusMeters] along the meridian and the
+	 * parallel around the middle of tile [x], [y] of zoom [z].
+	 */
+	fun calc31BboxRhumb(radiusMeters: Int, x: Int, y: Int, z: Int): IntArray {
+		val lat = getLatitudeFromTile(z.toDouble(), y + 0.5)
+		val lon = getLongitudeFromTile(z.toDouble(), x + 0.5)
+		val deltaLat = radiusMeters / METERS_IN_DEGREE
+		val deltaLon = radiusMeters / (METERS_IN_DEGREE * cos(lat.toRadians()))
+		val northLat = lat + deltaLat
+		val southLat = lat - deltaLat
+		val westLon = lon - deltaLon
+		val eastLon = lon + deltaLon
+		val top = get31TileNumberY(min(MAX_LATITUDE, northLat))
+		val left = get31TileNumberX(max(MIN_LONGITUDE, westLon))
+		val bottom = get31TileNumberY(max(MIN_LATITUDE, southLat))
+		val right = get31TileNumberX(min(MAX_LONGITUDE, eastLon))
+		return intArrayOf(left, top, right, bottom)
 	}
 
-	fun deinterleaveX(coord: Long): Long {
-		var x: Long = 0
-		for (b in 31 downTo 0) {
-			x = x shl 1 or (1L and coord shr (b * 2 + 1))
-		}
-		return x
+	private fun compactBits(value: Long): Long {
+		var v = value and 0x5555555555555555L
+		v = (v or (v ushr 1)) and 0x3333333333333333L
+		v = (v or (v ushr 2)) and 0x0F0F0F0F0F0F0F0FL
+		v = (v or (v ushr 4)) and 0x00FF00FF00FF00FFL
+		v = (v or (v ushr 8)) and 0x0000FFFF0000FFFFL
+		v = (v or (v ushr 16)) and 0x00000000FFFFFFFFL
+		return v
 	}
 
 	fun calculateLatLonBbox(latitude: Double, longitude: Double, radiusMeters: Int): KQuadRect {
@@ -629,6 +654,21 @@ object KMapUtils {
 		rect.right = get31LongitudeX(rect.right.toInt())
 		rect.bottom = get31LatitudeY(rect.bottom.toInt())
 		return rect
+	}
+
+	/** A box of 31 tiles around a point, [radiusMeters] measured along the zoom 16 tile at its latitude. */
+	fun calculate31Bbox(latitude: Double, longitude: Double, radiusMeters: Int): KQuadRect {
+		val zoom = 16.0
+		val coeff = radiusMeters / getTileDistanceWidth(latitude, zoom)
+		val tx = getTileNumberX(zoom, longitude)
+		val ty = getTileNumberY(zoom, latitude)
+		val topLeftX = max(0.0, tx - coeff)
+		val topLeftY = max(0.0, ty - coeff)
+		val max = (1 shl zoom.toInt()) - 1
+		val bottomRightX = min(max.toDouble(), tx + coeff)
+		val bottomRightY = min(max.toDouble(), ty + coeff)
+		val pw = getPowZoom(31 - zoom)
+		return KQuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw)
 	}
 
 	fun getInterpolatedY(x1: Float, y1: Float, x2: Float, y2: Float, x: Float): Float {

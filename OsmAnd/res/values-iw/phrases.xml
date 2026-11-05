@@ -2796,7 +2796,7 @@
     <string name="poi_self_service_no">ללא שירות עצמי: לא</string>
     <string name="poi_automated_yes">אוטומטי: כן</string>
     <string name="poi_automated_no">אוטומטי: לא</string>
-    <string name="poi_car_wash_no">שטיפת רכב: אין: לא</string>
+    <string name="poi_car_wash_no">שטיפת רכב: אין</string>
     <string name="poi_public_bath">מרחץ ציבורי;מרחצאות ציבוריות</string>
     <string name="poi_male_yes">גברים</string>
     <string name="poi_male_no">אסור לגברים</string>
@@ -3792,9 +3792,9 @@
     <string name="poi_hazard_additional_minefield">שדה מוקשים</string>
     <string name="poi_hazard_additional_contamination">זיהום</string>
     <string name="poi_defibrillator_location">מיקום</string>
-    <string name="poi_changing_table_yes">משטח החתלה: יש: כן</string>
-    <string name="poi_changing_table_no">משטח החתלה: אין: לא</string>
-    <string name="poi_changing_table_limited">משטח החתלה: מוגבל: מוגבל</string>
+    <string name="poi_changing_table_yes">משטח החתלה: יש</string>
+    <string name="poi_changing_table_no">משטח החתלה: אין</string>
+    <string name="poi_changing_table_limited">משטח החתלה: מוגבל</string>
     <string name="poi_changing_table_location_room">מיקום משטח ההחתלה: חדר</string>
     <string name="poi_changing_table_location_male_toilet">מיקום משטח ההחתלה: שירותי גברים</string>
     <string name="poi_changing_table_location_female_toilet">מיקום משטח ההחתלה: שירותי נשים</string>

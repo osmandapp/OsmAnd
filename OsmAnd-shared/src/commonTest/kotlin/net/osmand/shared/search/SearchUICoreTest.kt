@@ -24,6 +24,7 @@ import net.osmand.shared.data.Street
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.routing.RoutingContext
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.SearchUICore.SearchResultCollection
 import net.osmand.shared.search.SearchUICore.SearchResultMatcher
@@ -100,20 +101,22 @@ class SearchUICoreTest {
 			while (true) {
 				val line = source.readUtf8Line() ?: break
 				val f = line.substring(2).split("\t")
-				when (line[0]) {
-					'X' -> poiPhrases[dumpUnhex(f[0])] = dumpUnhex(f[1])
-					'C' -> {
-						val t = types ?: typesWith(poiPhrases).also { types = it }
-						val keys = source.readUtf8Line()!!
-						assertTrue(keys.startsWith("K "), "the keys of case ${f[0]}")
-						SearchCoreFactory.DISPLAY_DEFAULT_POI_TYPES = f[4] == "true"
-						run = CaseRun(dumpUnhex(f[1]), settings(f, readers), SearchPhraseTest.JavaCollator(keys.substring(2)), t)
+				testAppCall {
+					when (line[0]) {
+						'X' -> poiPhrases[dumpUnhex(f[0])] = dumpUnhex(f[1])
+						'C' -> {
+							val t = types ?: typesWith(poiPhrases).also { types = it }
+							val keys = source.readUtf8Line()!!
+							assertTrue(keys.startsWith("K "), "the keys of case ${f[0]}")
+							SearchCoreFactory.DISPLAY_DEFAULT_POI_TYPES = f[4] == "true"
+							run = CaseRun(dumpUnhex(f[1]), settings(f, readers), SearchPhraseTest.JavaCollator(keys.substring(2)), t)
+						}
+						'Q' -> run!!.phrase(f, stats)
+						'F', 'I', 'J', 'N' -> run!!.order(line[0], f, stats)
+						'R' -> run!!.result(f, stats)
+						'Y' -> run!!.same(f, stats)
+						'M' -> run!!.queries(f, stats)
 					}
-					'Q' -> run!!.phrase(f, stats)
-					'F', 'I', 'J', 'N' -> run!!.order(line[0], f, stats)
-					'R' -> run!!.result(f, stats)
-					'Y' -> run!!.same(f, stats)
-					'M' -> run!!.queries(f, stats)
 				}
 			}
 		} finally {
@@ -316,9 +319,11 @@ class SearchUICoreTest {
 					val json = Json.parseToJsonElement(dumpUnhex(f[5])).jsonObject
 					val files = if (f[3] == "-") emptyList() else f[3].split(",").map { dumpUnhex(it) }
 					val name = dumpUnhex(f[1])
-					compared += testCase(name, json, files, readers, SearchPhraseTest.JavaCollator(keys.substring(2)), mismatches, geocoded)
+					compared += testAppCall {
+						testCase(name, json, files, readers, SearchPhraseTest.JavaCollator(keys.substring(2)), mismatches, geocoded)
+					}
 					val platform = ArrayList<String>()
-					testCase(name, json, files, readers, null, platform, null)
+					testAppCall { testCase(name, json, files, readers, null, platform, null) }
 					orderedOtherwise += platform.size
 					cases++
 				}

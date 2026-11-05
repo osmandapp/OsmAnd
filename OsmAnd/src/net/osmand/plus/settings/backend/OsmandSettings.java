@@ -2743,7 +2743,9 @@ public class OsmandSettings {
 	}
 
 	public float getLastKnownMapElevation(@NonNull ApplicationMode appMode) {
-		return getLastKnownMapElevationPref().getModeValue(appMode);
+		CommonPreference<Float> preference = getLastKnownMapElevationPref();
+		float elevation = preference.getModeValue(appMode);
+		return Float.isNaN(elevation) ? preference.getProfileDefaultValue(appMode) : elevation;
 	}
 
 	public void setLastKnownMapElevation(float elevation) {
@@ -3449,6 +3451,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference(this, "CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();
 
+	public final OsmandPreference<String> BUILD_DELTA_FAILED_FINGERPRINT = new StringPreference(this, "build_delta_failed_fingerprint", null).makeGlobal();
+
 	public final OsmandPreference<Boolean> FOLLOW_THE_ROUTE = new BooleanPreference(this, "follow_to_route", false).makeGlobal();
 	public final OsmandPreference<String> FOLLOW_THE_GPX_ROUTE = new StringPreference(this, "follow_gpx", null).makeGlobal();
 	public final OsmandPreference<Boolean> SHOW_RESTART_NAVIGATION_DIALOG = new BooleanPreference(this, "show_restart_navigation_dialog", true).makeGlobal();
@@ -3636,6 +3640,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> ENABLE_MSAA = new BooleanPreference(this, "enable_msaa", false).makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> SPHERICAL_MAP = new BooleanPreference(this, "spherical_map", false).makeProfile().cache();
+	public final CommonPreference<Boolean> CAST_SHADOWS = new BooleanPreference(this, "cast_shadows", false).makeProfile().cache();
 
 	public static final float BUILDINGS_3D_ALPHA_DEF_VALUE = 0.5f;
 	public static final int BUILDINGS_3D_DEFAULT_COLOR = 0x666666;

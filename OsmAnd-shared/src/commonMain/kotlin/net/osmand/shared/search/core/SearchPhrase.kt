@@ -23,8 +23,8 @@ import kotlin.math.min
  * What was typed into the search: the words already selected as results, and the unknown words
  * after them that are still searched for. Immutable object!
  *
- * A copy of `SearchPhrase` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. Java nests `NameStringMatcher` here; the copy has it in a file of its own.
+ * Based on `SearchPhrase` from OsmAnd-java. Java nests `NameStringMatcher` here; the copy has
+ * it in a file of its own.
  */
 class SearchPhrase private constructor(private val settings: SearchSettings?, private val clt: KCollator) {
 
@@ -345,6 +345,24 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 	fun isCustomSearch(): Boolean = getSearchTypes() != null
 
 	fun hasCustomSearchType(type: ObjectType): Boolean = settings!!.hasCustomSearchType(type)
+
+	// the address tab list opened by a city / postcode button, or the streets of a selected city / postcode:
+	// the typed text filters this list instead of starting a new full-text search
+	fun isAddressListFilter(): Boolean {
+		val searchTypes = getSearchTypes()
+		if (searchTypes == null || searchTypes.isEmpty()) {
+			return false
+		}
+		var cityOrPostcodeList = true
+		for (type in searchTypes) {
+			if (type != ObjectType.CITY && type != ObjectType.VILLAGE && type != ObjectType.POSTCODE) {
+				cityOrPostcodeList = false
+				break
+			}
+		}
+		return cityOrPostcodeList ||
+				isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE)
+	}
 
 	fun isSearchTypeAllowed(searchType: ObjectType): Boolean = isSearchTypeAllowed(searchType, false)
 

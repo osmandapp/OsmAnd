@@ -19,7 +19,7 @@
     <string name="shared_string_sort">Òrdina</string>
     <string name="shared_string_exit">Essi</string>
     <string name="shared_string_close">Serra</string>
-    <string name="shared_string_all">Totus</string>
+    <string name="shared_string_all">Totu</string>
     <string name="shared_string_off">Istudadu</string>
     <string name="shared_string_install">Installa</string>
     <string name="shared_string_share">Cumpartzi</string>
@@ -141,7 +141,7 @@
     <string name="si_min_km">Minutos a su chilòmetru</string>
     <string name="si_min_m">Minutos a su mìlliu</string>
     <string name="si_nm_h">Mìllias nàuticas a s\'ora (knots)</string>
-    <string name="si_mi_feet">Mìllias/pedes</string>
+    <string name="si_mi_feet">Mìllias/pees</string>
     <string name="si_mi_yard">Mìllias/iardas</string>
     <string name="si_km_m">Chilòmetros/metros</string>
     <string name="si_nm">Mìllias nàuticas</string>
@@ -253,7 +253,7 @@
     <string name="time_zone_descr">Issèbera su fusu oràriu de ammustrare in sos messàgios de positzione tuos.</string>
     <string name="time_zone">Fusu oràriu</string>
     <string name="units_and_formats">Unidades e formados</string>
-    <string name="unit_of_length_descr">Muda s\'unidade de mèdida pro sa distàntzia.</string>
+    <string name="unit_of_length_descr">Muda s\'unidade de medida pro sa distàntzia.</string>
     <string name="unit_of_length">Unidades de longària</string>
     <string name="unit_of_speed_system_descr">Issèbera s\'unidade de letresa.</string>
     <string name="unit_of_speed_system">Unidade de lestresa</string>
@@ -276,4 +276,5 @@
     <string name="send_live_location_error">Imbia s\'errore de sa positzione in direta: %1$s</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_error">Errore</string>
+    <string name="location_source">Fonte pro sa positzione</string>
 </resources>
