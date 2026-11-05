@@ -139,9 +139,12 @@ public class DataStorageHelper {
 				visibleIndex++;
 				int notSelectedIcon = getIconResForExternalStorage(dir, false);
 				int selectedIcon = getIconResForExternalStorage(dir, true);
+				String title = EXTERNAL_STORAGE.equals(keyPrefix) && !Environment.isExternalStorageRemovable(dir)
+						? app.getString(R.string.device_memory)
+						: app.getString(titleRes) + " " + visibleIndex;
 				StorageItem item = StorageItem.builder()
 						.setKey(keyPrefix + visibleIndex)
-						.setTitle(app.getString(titleRes) + " " + visibleIndex)
+						.setTitle(title)
 						.setDirectory(dir.getAbsolutePath())
 						.setType(storageType)
 						.setIconResIds(notSelectedIcon, selectedIcon)
