@@ -11,6 +11,15 @@ interface MediaLoadDelegate {
 		onError: () -> Unit
 	)
 
+	/** Optional incremental results; existing delegates can keep returning one final result. */
+	fun loadWithUpdates(
+		key: GalleryKey,
+		onStarted: () -> Unit,
+		onUpdate: (MediaHolder) -> Unit,
+		onResult: (MediaHolder) -> Unit,
+		onError: () -> Unit
+	) = load(key, onStarted, onResult, onError)
+
 	fun cancel(key: GalleryKey) = Unit
 	fun canRefresh(): Boolean = true
 }

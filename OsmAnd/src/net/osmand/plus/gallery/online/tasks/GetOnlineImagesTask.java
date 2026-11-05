@@ -19,6 +19,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.gallery.online.OnlinePhotosHolder;
+import net.osmand.plus.gallery.online.FotoshiGalleryAdapter;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryOsmTagHelper;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -42,8 +43,10 @@ import org.json.JSONObject;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.RejectedExecutionException;
 
-public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolder> {
+public class GetOnlineImagesTask extends AsyncTask<Void, OnlinePhotosHolder, OnlinePhotosHolder> {
 	private static final Log LOG = PlatformUtil.getLog(GetOnlineImagesTask.class);
 
 	private static final int GET_IMAGE_CARD_THREAD_ID = 10104;
@@ -54,6 +57,7 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 	private final Map<String, String> params;
 	private final GetImageCardsListener imageCardsListener;
 	private final NetworkResponseListener networkResponseListener;
+	private FutureTask<OnlinePhotosHolder> fotoshiTask;
 
 	public GetOnlineImagesTask(@NonNull OsmandApplication app, @NonNull LatLon latLon,
 	                           @Nullable Map<String, String> params,
@@ -77,6 +81,21 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 	protected OnlinePhotosHolder doInBackground(Void... voids) {
 		TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
 		OnlinePhotosHolder holder = new OnlinePhotosHolder(latLon, params);
+		// Never forward this local provider parameter to OsmAnd's image service.
+		String fotoshiOsmId = params == null ? null : params.remove(FotoshiGalleryAdapter.OSM_ID_PARAM);
+		if (FotoshiGalleryAdapter.isEnabled(fotoshiOsmId)) {
+			fotoshiTask = new FutureTask<>(() -> {
+				OnlinePhotosHolder fotoshi = new OnlinePhotosHolder(latLon, new LinkedHashMap<>());
+				FotoshiGalleryAdapter.load(fotoshiOsmId, fotoshi);
+				return fotoshi;
+			});
+			try {
+				AsyncTask.THREAD_POOL_EXECUTOR.execute(fotoshiTask);
+			} catch (RejectedExecutionException e) {
+				fotoshiTask = null;
+				holder.markIncomplete();
+			}
+		}
 		try {
 			Map<String, String> httpPms = new LinkedHashMap<>();
 			httpPms.put("lat", String.valueOf((float) latLon.getLatitude()));
@@ -162,7 +181,36 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 			holder.markIncomplete();
 		}
 
+		if (fotoshiTask != null) {
+			// Existing providers can render while the optional provider is still loading.
+			OnlinePhotosHolder partial = holder.copy();
+			partial.markIncomplete();
+			publishProgress(partial);
+			try {
+				if (isCancelled()) {
+					fotoshiTask.cancel(true);
+					return holder;
+				}
+				OnlinePhotosHolder fotoshi = fotoshiTask.get();
+				for (MediaItem item : fotoshi.getItems()) holder.addItem(OTHER, item);
+				if (!fotoshi.isComplete()) holder.markIncomplete();
+			} catch (Exception e) {
+				fotoshiTask.cancel(true);
+				holder.markIncomplete();
+				if (e instanceof InterruptedException) Thread.currentThread().interrupt();
+			}
+		}
 		return holder;
+	}
+
+	@Override
+	protected void onProgressUpdate(OnlinePhotosHolder... holders) {
+		if (!isCancelled() && imageCardsListener != null) imageCardsListener.onPartialResult(holders[0]);
+	}
+
+	@Override
+	protected void onCancelled(OnlinePhotosHolder holder) {
+		if (fotoshiTask != null) fotoshiTask.cancel(true);
 	}
 
 	@Override
@@ -174,6 +222,8 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 
 	public interface GetImageCardsListener {
 		void onTaskStarted();
+
+		default void onPartialResult(OnlinePhotosHolder holder) {}
 
 		void onFinish(OnlinePhotosHolder cardsHolder);
 	}

@@ -45,6 +45,7 @@ object MediaUriResolver {
 	}
 
 	private fun shouldUseExternalUriAsDetailsLink(mediaItem: MediaItem.Remote): Boolean {
-		return mediaItem.origin == MediaOrigin.WIKIPEDIA || mediaItem.origin == MediaOrigin.PANORAMAX
+		return mediaItem.origin == MediaOrigin.WIKIPEDIA || mediaItem.origin == MediaOrigin.PANORAMAX ||
+			(mediaItem.id.startsWith("fotoshi:") && mediaItem.externalUri?.startsWith("https://fotoshi.com/photo/") == true)
 	}
 }
