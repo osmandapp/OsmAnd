@@ -171,6 +171,10 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 		updateDevices(activity);
 	}
 
+	boolean areSavedDevicesCreated() {
+		return devices.keySet().containsAll(devicesSettingsCollection.getDeviceIds());
+	}
+
 	private void restoreDeviceSensors(@NonNull AbstractDevice<?> device, @NonNull DeviceSettings deviceSettings) {
 		List<String> serviceUUIDs = deviceSettings.getServiceUUIDs();
 		if (device instanceof BLEAbstractDevice bleDevice && !Algorithms.isEmpty(serviceUUIDs)) {
@@ -204,7 +208,6 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 		app.runInUIThread(() -> {
 			if (device instanceof BLEAbstractDevice bleDevice && isDevicePaired(device)) {
 				saveDeviceSensors(bleDevice);
-				onDeviceSensorsAdded(device, addedSensors);
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
 					mapActivity.updateApplicationModeSettings();
@@ -592,7 +595,6 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 						saveDeviceSensors(bleDevice);
 					}
 					updateDeviceProperties(device);
-					onDevicePaired(device);
 				}
 			}
 			//connectDevice(activity, device);
@@ -603,14 +605,6 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 				mapActivity.updateApplicationModeSettings();
 			}
 		});
-	}
-
-	public void onDevicePaired(@NonNull AbstractDevice<?> device) {
-
-	}
-
-	public void onDeviceSensorsAdded(@NonNull AbstractDevice<?> device, @NonNull List<? extends AbstractSensor> sensors) {
-
 	}
 
 	public boolean isDeviceEnabled(@NonNull AbstractDevice<?> device) {

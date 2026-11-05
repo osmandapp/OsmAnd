@@ -79,6 +79,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public final CommonPreference<String> POWER_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
+	private final CommonPreference<Boolean> UNSET_TRACK_SOURCES_MIGRATED;
 	private static final String DEVICES_SETTINGS_PREF_ID = "external_devices_settings";
 	public static final int RECONNECT_DEVICE_TIMEOUT = 30;
 	public static final int RECONNECT_DEVICE_DELAY = 5;
@@ -98,13 +99,14 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	public ExternalSensorsPlugin(@NonNull OsmandApplication app) {
 		super(app);
-		SPEED_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.BIKE_SPEED.getPreferenceId(), "").makeProfile().cache();
-		CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.BIKE_CADENCE.getPreferenceId(), "").makeProfile().cache();
-		POWER_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.BIKE_POWER.getPreferenceId(), "").makeProfile().cache();
-		HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.HEART_RATE.getPreferenceId(), "").makeProfile().cache();
-		TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.TEMPERATURE.getPreferenceId(), "").makeProfile().cache();
+		SPEED_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.BIKE_SPEED.getPreferenceId(), ANY_DEVICE).makeProfile().cache();
+		CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.BIKE_CADENCE.getPreferenceId(), ANY_DEVICE).makeProfile().cache();
+		POWER_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.BIKE_POWER.getPreferenceId(), ANY_DEVICE).makeProfile().cache();
+		HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.HEART_RATE.getPreferenceId(), ANY_DEVICE).makeProfile().cache();
+		TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.TEMPERATURE.getPreferenceId(), ANY_DEVICE).makeProfile().cache();
+		UNSET_TRACK_SOURCES_MIGRATED = registerBooleanPreference("unset_track_sensor_sources_migrated", false).makeGlobal();
 
-		devicesHelper = new ExternalSensorsDeviceHelper(this, app, deviceSettingsPreferenceProvider);
+		devicesHelper = new ExternalSensorsDeviceHelper(app, deviceSettingsPreferenceProvider);
 		settings = app.getSettings();
 	}
 
@@ -228,25 +230,43 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	private void attachDeviceSensorInfoToRecordedTrack(@NonNull ExternalSensorTrackDataType dataType, @NonNull JSONObject json) {
-		CommonPreference<String> preference = getWriteToTrackDeviceIdPref(dataType);
-		String deviceId = preference.getModeValue(settings.getApplicationMode());
-		if (!Algorithms.isEmpty(deviceId)) {
-			boolean anyConnected = ANY_DEVICE.equals(deviceId);
-			AbstractDevice<?> deviceById = devicesHelper.getAnyDevice(deviceId);
-			ArrayList<AbstractDevice<?>> devices = new ArrayList<>();
-			if(anyConnected) {
-				devices.addAll(devicesHelper.getAllDevices());
-			} else if(deviceById != null) {
-				devices.add(deviceById);
+		AbstractDevice<?> device = getWriteToTrackDevice(dataType, settings.getApplicationMode());
+		if (device != null) {
+			try {
+				device.writeSensorDataToJson(json, dataType.getSensorType());
+			} catch (JSONException e) {
+				LOG.error(e);
 			}
-			for (AbstractDevice<?> device : devices) {
-				try {
-					device.writeSensorDataToJson(json, dataType.getSensorType());
-				} catch (JSONException e) {
-					LOG.error(e);
+		}
+	}
+
+	@Nullable
+	public AbstractDevice<?> getWriteToTrackDevice(@NonNull ExternalSensorTrackDataType dataType, @Nullable ApplicationMode appMode) {
+		String deviceId = getWriteToTrackDeviceIdPref(dataType).getModeValue(appMode);
+		if (Algorithms.isEmpty(deviceId)) {
+			return null;
+		}
+		AbstractDevice<?> device = getPairedDeviceById(deviceId);
+		return device != null ? device : getAnyDevice(dataType.getSensorType());
+	}
+
+	// Choosing None used to remove the value, and pairing used to fill every unset value.
+	// So an unset value with a matching paired device means None, not "never configured".
+	private void migrateUnsetTrackSources() {
+		if (UNSET_TRACK_SOURCES_MIGRATED.get() || !devicesHelper.areSavedDevicesCreated()) {
+			return;
+		}
+		for (ExternalSensorTrackDataType dataType : ExternalSensorTrackDataType.values()) {
+			if (getAnyDevice(dataType.getSensorType()) != null) {
+				CommonPreference<String> deviceIdPref = getWriteToTrackDeviceIdPref(dataType);
+				for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+					if (!deviceIdPref.isSetForMode(appMode)) {
+						deviceIdPref.setModeValue(appMode, "");
+					}
 				}
 			}
 		}
+		UNSET_TRACK_SOURCES_MIGRATED.set(true);
 	}
 
 	public boolean isAnyConnectedDeviceId(@NonNull String deviceId){
@@ -260,6 +280,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	@Override
 	public void mapActivityCreate(@NonNull MapActivity activity) {
 		devicesHelper.setActivity(activity);
+		migrateUnsetTrackSources();
 	}
 
 	@Override
@@ -270,6 +291,9 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		devicesHelper.setActivity(activity);
+		if (activity != null) {
+			migrateUnsetTrackSources();
+		}
 		shutdownScheduler();
 		reconnectToDeviceScheduler = Executors.newSingleThreadScheduledExecutor();
 		return true;
@@ -450,38 +474,6 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 				return TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 		}
 		throw new IllegalArgumentException("Unknown sensor type");
-	}
-
-	void onDevicePaired(@NonNull AbstractDevice<?> device) {
-		onDeviceSensorsAdded(device, device.getSensors());
-	}
-
-	void onDeviceSensorsAdded(@NonNull AbstractDevice<?> device, @NonNull List<? extends AbstractSensor> addedSensors) {
-		for (AbstractSensor sensor : addedSensors) {
-			for (SensorWidgetDataFieldType widgetDataFieldType : sensor.getSupportedWidgetDataFieldTypes()) {
-				ExternalSensorTrackDataType widgetType = ExternalSensorTrackDataType.Companion.getBySensorWidgetDataFieldType(widgetDataFieldType);
-				// an empty value is also "None" chosen by the user, keep it for the data the device already had
-				if (widgetType != null && !hasOtherSensor(device, addedSensors, widgetDataFieldType)) {
-					CommonPreference<String> deviceIdPref = getWriteToTrackDeviceIdPref(widgetType);
-					for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-						String deviceId = deviceIdPref.getModeValue(appMode);
-						if (Algorithms.isEmpty(deviceId)) {
-							deviceIdPref.setModeValue(appMode, device.getDeviceId());
-						}
-					}
-				}
-			}
-		}
-	}
-
-	private boolean hasOtherSensor(@NonNull AbstractDevice<?> device, @NonNull List<? extends AbstractSensor> sensors,
-	                               @NonNull SensorWidgetDataFieldType widgetDataFieldType) {
-		for (AbstractSensor sensor : device.getSensors()) {
-			if (!sensors.contains(sensor) && sensor.getSupportedWidgetDataFieldTypes().contains(widgetDataFieldType)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@NonNull
