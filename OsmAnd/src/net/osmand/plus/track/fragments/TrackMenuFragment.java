@@ -1204,7 +1204,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				} else {
 					GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
 					if (!isGpxFileSelected(app, gpxFile)) {
-						params.showOnMap().selectedByUser().addToHistory().addToMarkers();
+						params.showOnMap().selectedByUser().addToMarkers();
 					} else {
 						params.hideFromMap();
 					}
@@ -1731,7 +1731,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				boolean showOnMap = GpxSelectionHelper.isGpxFileSelected(app, gpx);
 				GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
 				if (showOnMap) {
-					params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+					params.showOnMap().selectedByUser().addToMarkers();
 				} else {
 					params.hideFromMap();
 				}
@@ -1880,7 +1880,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private static void selectAndProcessGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
 	                                        @NonNull CallbackWithObject<SelectedGpxFile> callback) {
 		GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap().syncGroup()
-				.selectedByUser().addToHistory().addToMarkers().saveSelection();
+				.selectedByUser().addToMarkers().saveSelection();
 
 		SelectedGpxFile selectGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 		if (selectGpxFile != null) {
