@@ -42,8 +42,6 @@ public class SpatialSearchRanking {
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
-	/** share of the way to the city a POI of the city is the farther for a person outside it: see distanceViaCity */
-	public double wayToCityShare = 0.5;
 	/** elo above MIN_ELO_RATING at which the rating term saturates */
 	public double ratingSpan = 1200.0;
 
@@ -132,79 +130,29 @@ public class SpatialSearchRanking {
 		if (head == null) {
 			return 0;
 		}
-		Double km = center == null ? null
-				: Math.min(SpatialSearchResult.getDistance(r, center) / 1000.0, distanceViaCity(r, center));
+		Double km = center == null ? null : SpatialSearchResult.getDistance(r, center) / 1000.0;
 		return score(nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
 				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r))
 				- (head.atom.ruleSpelling ? wRuleSpelling : 0);
 	}
 
 	/**
-	 * "lidl espoo": a POI found together with a city that the map places in another city - a city is matched by its
-	 * bbox, and the bbox of Espoo with its sea area covers Helsinki. Such a POI is a tier below the POIs of the named
-	 * city (see {@link SpatialSearchResult#compare}), not a score penalty: a Lidl of Vantaa 700 m from the user
-	 * outscored the Lidls of Helsinki 4 km off by any penalty that left the far ones of Helsinki above the near ones.
-	 * <p>
-	 * The POI carries the settlements whose boundaries hold it (tag groups of the map: name, name:xx, place). It is
-	 * outside the city the query named when it holds a settlement of the same rank under another name: a Lidl in
-	 * Helsinki is in the city Helsinki, not in Espoo. A city and a town are one rank - the town Leonding borders the city
-	 * Linz, the town Hluboká the city of Budějovice. No settlement of that rank (a village without its own boundary,
-	 * a map without tag groups) - nothing is known, nothing changes.
+	 * "lidl espoo": the bbox of Espoo covers Helsinki. A POI is outside the named city when its tag groups hold
+	 * a settlement of the same rank under another name; it goes a tier below (see {@link SpatialSearchResult#compare}),
+	 * as any score penalty let a near Lidl of Vantaa beat the Lidls of Helsinki. No tag groups - nothing changes.
 	 */
 	static boolean outsideMatchedCity(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r.getFirstRef();
 		if (head == null || !(head.atom.object instanceof Amenity a) || Algorithms.isEmpty(a.getTagGroups())) {
 			return false;
 		}
-		SpatialSearchResultRef city = matchedCity(r);
-		return city != null && outsideCity(a, (City) city.atom.object);
-	}
-
-	/** the settlement the query named together with the object */
-	private static SpatialSearchResultRef matchedCity(SpatialSearchResult r) {
 		for (int i = 1; i < r.objs.size(); i++) {
 			if (r.objs.get(i).atom.object instanceof City c && c.getType() != null
 					&& c.getType().storedAsSeparateAdminEntity() && c.getType() != City.CityType.POSTCODE) {
-				return r.objs.get(i);
+				return outsideCity(a, c);
 			}
 		}
-		return null;
-	}
-
-	/**
-	 * "lidl espoo" from Vantaa, 23 km off the centre of Espoo: the Lidls of Espoo are 15-27 km from the person, so
-	 * ordered by that distance the first screen is the edge of Espoo next to Vantaa, and its centre goes behind
-	 * "show more". For a person outside the bbox of the city the query named, a POI of that city is as far as from the
-	 * city's place node plus a share of the way to it, when that is nearer: the centre comes first, a shop on the
-	 * near edge stays on the first screen. Inside the bbox ("lidl espoo" from Helsinki, "hofer leonding" from Linz)
-	 * nothing changes: the nearest shop of the neighbour is the answer there. Nor for a POI of another city, a tier
-	 * below anyway (see outsideMatchedCity).
-	 *
-	 * @return km, or infinity when the distance from the person stays
-	 */
-	private double distanceViaCity(SpatialSearchResult r, LatLon person) {
-		SpatialSearchResultRef city = matchedCity(r);
-		LatLon poi = r.getLatLon();
-		if (city == null || poi == null || !(r.getFirstRef().atom.object instanceof Amenity) || outsideMatchedCity(r)) {
-			return Double.POSITIVE_INFINITY;
-		}
-		City c = (City) city.atom.object;
-		LatLon centre = c.getLocation();
-		if (centre == null || insideCityBbox(city.atom, c, person)) {
-			return Double.POSITIVE_INFINITY;
-		}
-		return (MapUtils.getDistance(centre, poi) + wayToCityShare * MapUtils.getDistance(person, centre)) / 1000.0;
-	}
-
-	private static boolean insideCityBbox(NameIndexAtom atom, City c, LatLon person) {
-		int[] b = atom.coords == null ? null : atom.coords.bbox31;
-		if (b == null) {
-			// no bbox: the radius of its kind around the place
-			return MapUtils.getDistance(person, c.getLocation()) <= c.getType().getRadius();
-		}
-		int x = MapUtils.get31TileNumberX(person.getLongitude()), y = MapUtils.get31TileNumberY(person.getLatitude());
-		return x >= Math.min(b[0], b[2]) && x <= Math.max(b[0], b[2])
-				&& y >= Math.min(b[1], b[3]) && y <= Math.max(b[1], b[3]);
+		return false;
 	}
 
 	private static boolean outsideCity(Amenity a, City c) {
@@ -227,7 +175,7 @@ public class SpatialSearchRanking {
 		return sameKind;
 	}
 
-	/** a town is of the rank of a city: either has its own boundary and neighbours the other */
+	/** a town is of the rank of a city: the town Leonding borders the city Linz */
 	private static String settlementRank(String place) {
 		return "town".equals(place) ? "city" : place;
 	}
