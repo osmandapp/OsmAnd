@@ -2070,7 +2070,7 @@ public class RouteResultPreparation {
 		}
 		return calculateRawTurnLanes(convertReverseLanes(turnLanes), 0);
 	}
-	
+
 	public static int[] parseLanes(RouteDataObject ro, double dirToNorthEastPi) {
 		int lns = 0;
 		try {
@@ -2465,14 +2465,20 @@ public class RouteResultPreparation {
 
 	private boolean findActiveIndexByLanes(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes,
 	                                       RouteSegmentResult prevSegm, RouteSegmentResult currentSegm) {
-		int[] prevCntLanes = parseLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
-		int[] curCntLanes = parseLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
+		int[] prevCntLanes = parseTurnLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
+		if (prevCntLanes == null) {
+			prevCntLanes = parseLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
+		}
+		int[] curCntLanes = parseTurnLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
+		if (curCntLanes == null) {
+			curCntLanes = parseLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
+		}
 		int attachedLanesCount = getAttachedLanesCount(rs);
 		if (prevCntLanes != null && curCntLanes != null
 				&& prevCntLanes.length > curCntLanes.length
 				&& prevCntLanes.length == curCntLanes.length + attachedLanesCount) {
 			if (rs.roadsOnLeft == 0 && rs.roadsOnRight > 0) {
-				pair[0] = 0;
+				pair[0] = 0;47.72376, 11.74627
 				pair[1] = curCntLanes.length - 1;
 				pair[2] = directions[0];
 				int secondary = TurnType.getSecondaryTurn(rawLanes[0]);

@@ -1180,8 +1180,10 @@ object TurnLanes {
 		prevSegm: RouteSegmentResult,
 		currentSegm: RouteSegmentResult
 	): Boolean {
-		val prevCntLanes = parseLanes(prevSegm.getObject(), prevSegm.getBearingBegin() * PI / 180)
-		val curCntLanes = parseLanes(currentSegm.getObject(), currentSegm.getBearingBegin() * PI / 180)
+		val prevCntLanes = parseTurnLanes(prevSegm.getObject(), prevSegm.getBearingBegin() * PI / 180)
+			?: parseLanes(prevSegm.getObject(), prevSegm.getBearingBegin() * PI / 180)
+		val curCntLanes = parseTurnLanes(currentSegm.getObject(), currentSegm.getBearingBegin() * PI / 180)
+			?: parseLanes(currentSegm.getObject(), currentSegm.getBearingBegin() * PI / 180)
 		val attachedLanesCount = getAttachedLanesCount(rs)
 		if (prevCntLanes != null && curCntLanes != null &&
 			prevCntLanes.size > curCntLanes.size &&
