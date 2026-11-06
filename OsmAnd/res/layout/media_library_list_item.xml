@@ -14,12 +14,14 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
-			android:padding="@dimen/content_padding">
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/content_padding_small">
 
 			<androidx.appcompat.widget.AppCompatCheckBox
 				android:id="@+id/selection_check"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginTop="4dp"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:background="@null"
 				android:clickable="false"
@@ -31,7 +33,8 @@
 
 			<FrameLayout
 				android:layout_width="36dp"
-				android:layout_height="36dp">
+				android:layout_height="36dp"
+				android:layout_marginTop="4dp">
 
 				<ImageView
 					android:id="@+id/image"
@@ -66,25 +69,27 @@
 
 				<TextView
 					android:id="@+id/title"
+					style="@style/TitleStyle"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginEnd="40dp"
 					android:ellipsize="middle"
+					android:gravity="center_vertical"
 					android:includeFontPadding="false"
 					android:maxLines="1"
-					android:minHeight="20dp"
-					android:textSize="@dimen/default_list_text_size" />
+					android:minHeight="@dimen/default_title_line_height" />
 
 				<TextView
 					android:id="@+id/description"
+					style="@style/DescStyle"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginEnd="40dp"
 					android:ellipsize="end"
+					android:gravity="center_vertical"
 					android:includeFontPadding="false"
 					android:maxLines="1"
-					android:minHeight="16dp"
-					android:textSize="@dimen/default_sub_text_size" />
+					android:minHeight="@dimen/default_desc_line_height" />
 
 				<LinearLayout
 					android:id="@+id/attachment_container"
@@ -103,21 +108,21 @@
 
 					<TextView
 						android:id="@+id/attachment_name"
+						style="@style/DescStyle"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginStart="@dimen/content_padding_half"
+						android:layout_marginStart="@dimen/content_padding_small_half"
 						android:layout_weight="1"
 						android:ellipsize="end"
 						android:includeFontPadding="false"
-						android:maxLines="1"
-						android:textSize="@dimen/default_sub_text_size" />
+						android:maxLines="1" />
 
 					<TextView
 						android:id="@+id/attachment_count"
+						style="@style/DescStyle"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:includeFontPadding="false"
-						android:textSize="@dimen/default_sub_text_size" />
+						android:includeFontPadding="false" />
 
 				</LinearLayout>
 
