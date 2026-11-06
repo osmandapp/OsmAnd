@@ -5418,4 +5418,9 @@
     <string name="free_region_not_eligible_email_descr">Hagyja meg az e-mail címét, hogy ismét lecserélje az ingyenes régiót vagy szerezzen korlátlan térképletöltést.</string>
     <string name="free_region_email_helper">OsmAnd hírleveleket fogunk küldeni. Bármikor leiratkozhat.</string>
     <string name="free_region_email_maps_deleted">%1$s (%2$s) térképei törlésre kerülnek.</string>
+    <string name="free_region_send_and_replace">Küldés és csere</string>
+    <string name="free_region_not_eligible_buy_descr">Az ingyenes régiója %1$s. %2$s letöltéséhez és a jelenlegi térképei megtartásához szerezzen korlátlan térképletöltést.</string>
+    <string name="outdated_maps_warning_title">Frissítse térképeit</string>
+    <string name="outdated_maps_warning_descr">Az új kereséshez az ilyen verziójú térképekre van szükség. Frissítse az összes térképét - ingyenes.</string>
+    <string name="free_region_other_regions_need_maps_plus">Más régiókhoz szükség van a Maps+ alkalmazásra: %1$s</string>
 </resources>
