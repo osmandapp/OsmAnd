@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.audionotes.library
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import androidx.fragment.app.FragmentActivity
 import net.osmand.PlatformUtil
 import net.osmand.data.FavouritePoint
@@ -24,9 +23,6 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin
 import net.osmand.plus.settings.mediastorage.MediaStorageHelper
 import net.osmand.plus.settings.mediastorage.MediaStorageLocation
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.widgets.alert.AlertDialogData
-import net.osmand.plus.widgets.alert.AlertDialogExtra
-import net.osmand.plus.widgets.alert.CustomAlert
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
@@ -53,7 +49,9 @@ object MediaItemMenu {
 			})
 			if (entry.mediaItem is MediaItem.Internal) add(item(app, R.string.shared_string_rename,
 				R.drawable.ic_action_edit_outlined, nightMode) { rename(activity, entry, nightMode) })
-			add(item(app, R.string.attach_to_favorite, MediaLibraryIcons.ATTACH_TO_FAVORITE, nightMode, divider = true) {
+			// Shown disabled until media can be attached to tracks
+			add(item(app, R.string.attach_to_track, R.drawable.ic_action_track_add, nightMode, divider = true, action = null))
+			add(item(app, R.string.attach_to_favorite, MediaLibraryIcons.ATTACH_TO_FAVORITE, nightMode) {
 				SelectMediaFavoriteBottomSheet.create(entry.href, entry.title)
 					.show(activity.supportFragmentManager, SelectMediaFavoriteBottomSheet.TAG)
 			})
@@ -83,11 +81,12 @@ object MediaItemMenu {
 	}
 
 	private fun item(app: OsmandApplication, title: Int, icon: Int, nightMode: Boolean,
-		divider: Boolean = false, warning: Boolean = false, action: () -> Unit): PopUpMenuItem {
+		divider: Boolean = false, warning: Boolean = false, action: (() -> Unit)?): PopUpMenuItem {
 		val color = if (warning) ColorUtilities.getWarningColor(app, nightMode) else ColorUtilities.getDefaultIconColor(app, nightMode)
 		return PopUpMenuItem.Builder(app).setTitleId(title).setIcon(app.uiUtilities.getPaintedIcon(icon, color))
 			.showTopDivider(divider).apply { if (warning) setTitleColor(color) }
-			.setOnClickListener { action() }.create()
+			// The dropdown shows an item that has no action and does not dismiss as disabled
+			.apply { if (action != null) setOnClickListener { action() } else setDismissOnClick(false) }.create()
 	}
 
 	private fun popup(anchor: View, nightMode: Boolean, items: List<PopUpMenuItem>) {
@@ -99,16 +98,10 @@ object MediaItemMenu {
 
 	private fun rename(activity: FragmentActivity, entry: MediaLibraryEntry, nightMode: Boolean) {
 		val app = activity.application as OsmandApplication
-		val data = AlertDialogData(activity, nightMode)
-			.setTitle(R.string.shared_string_rename)
-			.setControlsColor(ColorUtilities.getActiveColor(app, nightMode))
-			.setNegativeButton(R.string.shared_string_cancel, null)
-		data.setPositiveButton(R.string.shared_string_apply) { _, _ ->
-			val name = (data.getExtra(AlertDialogExtra.EDIT_TEXT) as? EditText)?.text?.toString()?.trim().orEmpty()
-			if (name.isEmpty()) {
-				app.showShortToastMessage(R.string.empty_name)
-				return@setPositiveButton
-			}
+		val recording = entry.recording
+		val currentName = if (recording != null) recording.getDescriptionName(recording.fileName).orEmpty()
+		else entry.title.substringBeforeLast('.')
+		MediaDialogs.rename(activity, currentName, nightMode) { name ->
 			AttachedMediaDataHelper(app).renameMedia(entry.recording, entry.href, name,
 				entry.attachments.groupBy({ it.target }, { it.link })) { newHref ->
 				app.runInUIThread {
@@ -121,10 +114,6 @@ object MediaItemMenu {
 				true
 			}
 		}
-		val recording = entry.recording
-		val currentName = if (recording != null) recording.getDescriptionName(recording.fileName).orEmpty()
-		else entry.title.substringBeforeLast('.')
-		CustomAlert.showInput(data, activity, currentName, app.getString(R.string.shared_string_name))
 	}
 
 	private fun onRenamed(activity: FragmentActivity, entry: MediaLibraryEntry, newId: String?) {
