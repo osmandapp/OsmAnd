@@ -23,8 +23,8 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 
 	private final QListPointI points31 = new QListPointI();
 	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
-	private final IconPixelsCache<Long> bigIconsCache = new IconPixelsCache<>();
-	private final IconPixelsCache<Long> smallIconsCache = new IconPixelsCache<>();
+	private final IconPixelsCache<IconKey> bigIconsCache = new IconPixelsCache<>();
+	private final IconPixelsCache<IconKey> smallIconsCache = new IconPixelsCache<>();
 	private final Context ctx;
 	private final int baseOrder;
 	private final boolean textVisible;
@@ -104,7 +104,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		if (data == null) {
 			return SwigUtilities.nullSkImage();
 		}
-		long key = data.getKey();
+		IconKey key = data.getKey();
 		if (isFullSize) {
 			return bigIconsCache.getImage(key, k -> {
 				PointImageDrawable drawable;
@@ -207,9 +207,12 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 			this.textScale = textScale;
 		}
 
-		long getKey() {
-			return ((long) color << 6) + ((long) overlayIconId << 4) + ((withShadow ? 1 : 0) << 3)
-					+ ((hasMarker ? 1 : 0) << 2) + (int) (textScale * 10) + (backgroundType != null ? backgroundType.ordinal() : 0);
+		IconKey getKey() {
+			return new IconKey(color, withShadow, overlayIconId, backgroundType, hasMarker, textScale);
 		}
+	}
+
+	private record IconKey(int color, boolean withShadow, int overlayIconId, BackgroundType backgroundType,
+	                       boolean hasMarker, float textScale) {
 	}
 }
