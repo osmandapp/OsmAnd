@@ -601,9 +601,7 @@ public class AppInitializer implements IProgress {
 					continue;
 				}
 				UpdateFrequency updateFrequency = updateFrequencies[updateFrequencyOrd];
-				long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
-
-				if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
+				if (isUpdateOverdue(fileName, updateFrequency, settings)) {
 					runLiveUpdate(app, fileName, false, null);
 					PendingIntent alarmIntent = getPendingIntent(app, fileName);
 					int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
