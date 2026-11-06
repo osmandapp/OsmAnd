@@ -142,8 +142,9 @@ public class SpatialSearchRanking {
 	/**
 	 * The POI carries the settlements whose boundaries hold it (tag groups of the map: name, name:xx, place). It is
 	 * outside the city the query named when it holds a settlement of the same kind under another name: a Lidl in
-	 * Helsinki is in the city Helsinki, not in Espoo. No settlement of that kind (a village without its own boundary,
-	 * a map without tag groups) - nothing is known, nothing changes.
+	 * Helsinki is in the city Helsinki, not in Espoo. A city and a town are one kind, a municipality: the Lidl of
+	 * Klaukkala holds the town Nurmijärvi, not the city Espoo. No settlement of that kind (a village without its own
+	 * boundary, a map without tag groups) - nothing is known, nothing changes.
 	 */
 	static boolean outsideMatchedCity(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r.getFirstRef();
@@ -160,13 +161,13 @@ public class SpatialSearchRanking {
 	}
 
 	private static boolean outsideCity(Amenity a, City c) {
-		String kind = c.getType().name().toLowerCase();
+		String kind = settlementKind(c.getType().name().toLowerCase());
 		boolean sameKind = false;
 		for (List<TagValuePair> group : a.getTagGroups().values()) {
 			boolean kindMatches = false, nameMatches = false;
 			for (TagValuePair p : group) {
 				if (p.tag.equals("place")) {
-					kindMatches = kind.equals(p.value);
+					kindMatches = kind.equals(settlementKind(p.value));
 				} else if (p.tag.equals("name") || p.tag.startsWith("name:")) {
 					nameMatches |= isNameOf(c, p.value);
 				}
@@ -177,6 +178,11 @@ public class SpatialSearchRanking {
 			sameKind |= kindMatches;
 		}
 		return sameKind;
+	}
+
+	/** a city and a town are both a municipality and never hold each other */
+	private static String settlementKind(String place) {
+		return "town".equals(place) ? "city" : place;
 	}
 
 	private static boolean isNameOf(City c, String name) {
