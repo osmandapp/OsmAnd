@@ -43,11 +43,14 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
 
+import android.content.res.Configuration;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import java.util.Collections;
@@ -61,6 +64,8 @@ public class WidgetsAvailabilityHelper {
 	private static final long ROUTE_WIDGETS_V2_INTRO_TIME_MS = 1704096000000L; // Mon Jan 01 2024
 	private static final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
+	// overrides widgetsVisibilityMap on a phone in landscape
+	private static final Map<String, Set<ApplicationMode>> phoneLandscapeVisibilityMap = new LinkedHashMap<>();
 
 	public static boolean isWidgetAvailable(@NonNull OsmandApplication app, @NonNull String widgetId, @NonNull ApplicationMode appMode) {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
@@ -75,8 +80,15 @@ public class WidgetsAvailabilityHelper {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
 			return app.getAppCustomization().isWidgetVisible(widgetId, appMode);
 		}
-		Set<ApplicationMode> widgetsVisibility = widgetsVisibilityMap.get(widgetId);
+		Set<ApplicationMode> widgetsVisibility = isPhoneLandscape(app) && phoneLandscapeVisibilityMap.containsKey(widgetId)
+				? phoneLandscapeVisibilityMap.get(widgetId)
+				: widgetsVisibilityMap.get(widgetId);
 		return widgetsVisibility != null && widgetsVisibility.contains(appMode);
+	}
+
+	private static boolean isPhoneLandscape(@NonNull OsmandApplication app) {
+		int orientation = app.getResources().getConfiguration().orientation;
+		return orientation == Configuration.ORIENTATION_LANDSCAPE && !AndroidUiHelper.isTablet(app);
 	}
 
 	public static void initRegVisibility(@NonNull OsmandApplication app) {
@@ -95,6 +107,12 @@ public class WidgetsAvailabilityHelper {
 		boolean enableWidgetsV2 = installTime == 0 || installTime >= ROUTE_WIDGETS_V2_INTRO_TIME_MS;
 		if (enableWidgetsV2) {
 			regWidgetVisibility(ROUTE_INFO, exceptDefault);
+			// the bottom Route info leaves a phone in landscape too little map: the side widgets go there instead
+			registerWidget(ROUTE_INFO.id, phoneLandscapeVisibilityMap, none);
+			registerWidget(INTERMEDIATE_DESTINATION.id, phoneLandscapeVisibilityMap, exceptDefault);
+			registerWidget(DISTANCE_TO_DESTINATION.id, phoneLandscapeVisibilityMap, exceptDefault);
+			registerWidget(TIME_TO_INTERMEDIATE.id, phoneLandscapeVisibilityMap, exceptDefault);
+			registerWidget(TIME_TO_DESTINATION.id, phoneLandscapeVisibilityMap, exceptDefault);
 		}
 
 		regWidgetVisibility(NEXT_TURN, nextTurnSet);
