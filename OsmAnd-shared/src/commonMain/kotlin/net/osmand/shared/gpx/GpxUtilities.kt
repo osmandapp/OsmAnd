@@ -1887,22 +1887,15 @@ object GpxUtilities {
 	}
 
 	fun toDouble(value: String?): Double {
-		if (value.isNullOrEmpty()) return Double.NaN
+		val text = value?.trim { it.isXmlWhitespace() }
+		if (text.isNullOrEmpty()) return Double.NaN
 
-		var start = 0
-		var len = value.length
-		while (start < len && value[start].isXmlWhitespace()) {
-			start++
-		}
-		while (len > start && value[len - 1].isXmlWhitespace()) {
-			len--
-		}
-		if (start == len) return Double.NaN
-		var i = start
+		var i = 0
+		val len = text.length
 		var negative = false
 
-		if (value[i] == '-' || value[i] == '+') {
-			negative = value[i] == '-'
+		if (text[i] == '-' || text[i] == '+') {
+			negative = text[i] == '-'
 			i++
 			if (i == len) return Double.NaN
 		}
@@ -1915,7 +1908,7 @@ object GpxUtilities {
 		var fracDigits = 0
 
 		while (i < len) {
-			val c = value[i]
+			val c = text[i]
 			when {
 				c in '0'..'9' -> {
 					hasDigits = true
@@ -1937,7 +1930,7 @@ object GpxUtilities {
 				}
 				c == 'e' || c == 'E' -> {
 					// fallback for scientific notation
-					return value.substring(start, len).toDouble()
+					return text.toDouble()
 				}
 				else -> return Double.NaN
 			}
