@@ -18,7 +18,8 @@ object AmenityTagEntriesBuilder {
 
 	@JvmStatic
 	fun buildPoiTypesGroupEntry(
-		key: String, name: String?, textPrefix: String?, types: List<PoiType>, order: Int, iconId: Int,
+		key: String, name: String?, textPrefix: String?, types: List<PoiType>,
+		typeEntries: List<AmenityTagEntry>?, order: Int, iconId: Int,
 		iconNameCandidates: List<String>, fallbackIconId: Int, poiAdditional: Boolean,
 		collapsableCategory: PoiCategory?
 	): AmenityTagEntry {
@@ -37,6 +38,7 @@ object AmenityTagEntriesBuilder {
 			.setTextLinesLimit(1)
 			.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP)
 			.setCollapsablePoiTypes(types)
+			.setCollapsableEntries(typeEntries)
 			.setPoiAdditional(poiAdditional)
 			.setCollapsableCategory(collapsableCategory)
 			.build()
