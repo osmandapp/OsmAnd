@@ -1889,8 +1889,16 @@ object GpxUtilities {
 	fun toDouble(value: String?): Double {
 		if (value.isNullOrEmpty()) return Double.NaN
 
-		var i = 0
-		val len = value.length
+		var start = 0
+		var len = value.length
+		while (start < len && value[start].isXmlWhitespace()) {
+			start++
+		}
+		while (len > start && value[len - 1].isXmlWhitespace()) {
+			len--
+		}
+		if (start == len) return Double.NaN
+		var i = start
 		var negative = false
 
 		if (value[i] == '-' || value[i] == '+') {
@@ -1929,7 +1937,7 @@ object GpxUtilities {
 				}
 				c == 'e' || c == 'E' -> {
 					// fallback for scientific notation
-					return value.toDouble()
+					return value.substring(start, len).toDouble()
 				}
 				else -> return Double.NaN
 			}
