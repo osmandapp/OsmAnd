@@ -3,6 +3,7 @@ package net.osmand.search.core.spatial;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -41,9 +42,6 @@ public class SpatialSearchRanking {
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
-	/** "lidl espoo": a POI found together with a city that the map places in another city of the same kind - a city is
-	 *  matched by its bbox, and the bbox of Espoo with its sea area covers Helsinki */
-	public double wOutsideCity = 1.0;
 	/** elo above MIN_ELO_RATING at which the rating term saturates */
 	public double ratingSpan = 1200.0;
 
@@ -135,14 +133,19 @@ public class SpatialSearchRanking {
 		Double km = center == null ? null : SpatialSearchResult.getDistance(r, center) / 1000.0;
 		return score(nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
 				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r))
-				- (head.atom.ruleSpelling ? wRuleSpelling : 0)
-				- (outsideMatchedCity(r) ? wOutsideCity : 0);
+				- (head.atom.ruleSpelling ? wRuleSpelling : 0);
 	}
 
 	/**
+	 * "lidl espoo": a POI found together with a city that the map places in another city - a city is matched by its
+	 * bbox, and the bbox of Espoo with its sea area covers Helsinki. Such a POI is a tier below the POIs of the named
+	 * city (see {@link SpatialSearchResult#compare}), not a score penalty: a Lidl of Vantaa 700 m from the user
+	 * outscored the Lidls of Helsinki 4 km off by any penalty that left the far ones of Helsinki above the near ones.
+	 * <p>
 	 * The POI carries the settlements whose boundaries hold it (tag groups of the map: name, name:xx, place). It is
-	 * outside the city the query named when it holds a settlement of the same kind under another name: a Lidl in
-	 * Helsinki is in the city Helsinki, not in Espoo. No settlement of that kind (a village without its own boundary,
+	 * outside the city the query named when it holds a settlement of the same rank under another name: a Lidl in
+	 * Helsinki is in the city Helsinki, not in Espoo. A city and a town are one rank - the town Leonding borders the city
+	 * Linz, the town Hluboká the city of Budějovice. No settlement of that rank (a village without its own boundary,
 	 * a map without tag groups) - nothing is known, nothing changes.
 	 */
 	static boolean outsideMatchedCity(SpatialSearchResult r) {
@@ -160,13 +163,13 @@ public class SpatialSearchRanking {
 	}
 
 	private static boolean outsideCity(Amenity a, City c) {
-		String kind = c.getType().name().toLowerCase();
+		String kind = settlementRank(c.getType().name().toLowerCase(Locale.ROOT));
 		boolean sameKind = false;
 		for (List<TagValuePair> group : a.getTagGroups().values()) {
 			boolean kindMatches = false, nameMatches = false;
 			for (TagValuePair p : group) {
 				if (p.tag.equals("place")) {
-					kindMatches = kind.equals(p.value);
+					kindMatches = kind.equals(settlementRank(p.value));
 				} else if (p.tag.equals("name") || p.tag.startsWith("name:")) {
 					nameMatches |= isNameOf(c, p.value);
 				}
@@ -177,6 +180,11 @@ public class SpatialSearchRanking {
 			sameKind |= kindMatches;
 		}
 		return sameKind;
+	}
+
+	/** a town is of the rank of a city: either has its own boundary and neighbours the other */
+	private static String settlementRank(String place) {
+		return "town".equals(place) ? "city" : place;
 	}
 
 	private static boolean isNameOf(City c, String name) {

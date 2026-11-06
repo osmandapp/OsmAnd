@@ -32,6 +32,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	public BaseDetailsObject unitedObject;
 	int biggestCityType = -1;
 	double score; // set by sortResults(), see SpatialSearchRanking
+	boolean outsideCity; // set by sortResults(), see SpatialSearchRanking#outsideMatchedCity
 
 	private static final List<String> FILTER_DUPLICATE_POI_SUBTYPE = new ArrayList<String>(
 			Arrays.asList("building", "historic_building", "internet_access_yes", "atm"));
@@ -598,6 +599,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			// continuum, and cutting it into buckets put "show more" after the third row in half
 			// of all queries
 			key = addCompareKey(key, 6, o.parent.ranking.answerParts(o)); // 6 bit - 64
+			key = addCompareKey(key, 1, o.outsideCity ? 1 : 0); // 1 bit - POIs of another city
 			return key;
 		}
 		key = addCompareKey(key, 6, o.objs.size()); // 6 bit - 64
@@ -626,6 +628,11 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		}
 		if (ranking != null) {
 			res = Integer.compare(ranking.answerParts(o1), ranking.answerParts(o2));
+			if (res != 0) {
+				return res;
+			}
+			// a POI of another city goes below every POI of the city the query named, however close it is
+			res = Boolean.compare(o1.outsideCity, o2.outsideCity);
 			if (res != 0) {
 				return res;
 			}
