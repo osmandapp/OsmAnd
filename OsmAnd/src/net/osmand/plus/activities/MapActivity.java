@@ -263,6 +263,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
 		super.onCreate(savedInstanceState);
+		if (IntentHelper.openFileInOwnTask(this)) {
+			return;
+		}
 		registerMapBackPressedCallback();
 		getSupportFragmentManager().registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, true);
 		getSupportFragmentManager().addOnBackStackChangedListener(this::updateBackPressedCallbackState);
@@ -1146,6 +1149,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		if (intentHelper == null) {
+			return; // finished in onCreate, see IntentHelper.openFileInOwnTask()
+		}
 		destroyProgressBarForRouting();
 		getMapActions().setMapActivity(null);
 		getMapLayers().setMapActivity(null);
