@@ -99,7 +99,11 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		backgroundRow.setTitle(R.string.ais_run_in_background)
 		backgroundRow.setSubtitle(getString(R.string.ais_run_in_background_desc))
 		backgroundRow.setOnClickListener {
-			plugin.AIS_RECEIVE_IN_BACKGROUND.setModeValue(appMode, !plugin.AIS_RECEIVE_IN_BACKGROUND.getModeValue(appMode))
+			val enabled = !plugin.AIS_RECEIVE_IN_BACKGROUND.getModeValue(appMode)
+			plugin.AIS_RECEIVE_IN_BACKGROUND.setModeValue(appMode, enabled)
+			if (enabled) {
+				AndroidUtils.requestNotificationPermissionIfNeeded(requireActivity())
+			}
 			updateContent()
 		}
 
