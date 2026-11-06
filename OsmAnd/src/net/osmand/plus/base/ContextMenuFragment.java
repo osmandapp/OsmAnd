@@ -45,9 +45,12 @@ import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
+
+import java.util.List;
 
 public abstract class ContextMenuFragment extends BaseFullScreenFragment implements MapControlsThemeProvider {
 
@@ -718,6 +721,37 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 
 	public int getShadowHeight() {
 		return shadowHeight;
+	}
+
+	/**
+	 * Fits the rect, or on a tilted map these points of it, into the map part left uncovered by the menu at y,
+	 * by the status bar and by the top widgets.
+	 */
+	protected void fitRectAboveMenu(@NonNull QuadRect rect, @NonNull List<LatLon> points, int y) {
+		MapActivity mapActivity = getMapActivity();
+		View mainView = getMainView();
+		if (mapActivity == null || mainView == null || !(mainView.getParent() instanceof View)) {
+			return;
+		}
+		OsmandMapTileView mapView = mapActivity.getMapView();
+		int[] map = AndroidUtils.getLocationOnScreen(mapView.getView());
+		// The map is drawn under the status bar
+		int top = Math.max(0, AndroidUtils.getStatusBarHeight(mapActivity) - map[1]);
+		View topWidgets = mapActivity.findViewById(R.id.top_widgets_panel);
+		if (topWidgets != null && topWidgets.getVisibility() == View.VISIBLE) {
+			top = Math.max(top, AndroidUtils.getViewBoundOnScreen(topWidgets).bottom - map[1]);
+		}
+		RotatedTileBox tb = mapView.getRotatedTileBox();
+		int width = 0;
+		int bottom = tb.getPixHeight();
+		if (isPortrait()) {
+			// The menu card is drawn below the top shadow of the menu view
+			int[] menuParent = AndroidUtils.getLocationOnScreen((View) mainView.getParent());
+			bottom = menuParent[1] + y + getShadowHeight() - map[1];
+		} else {
+			width = tb.getPixWidth() - getWidth();
+		}
+		mapView.fitRectToMap(rect.left, rect.right, rect.top, rect.bottom, width, bottom - top, top, points);
 	}
 
 	public int getFullScreenTopPosY() {

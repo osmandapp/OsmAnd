@@ -1837,7 +1837,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	/**
 	 * Same as fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx), but on a
 	 * tilted map fits these points of the rect instead of its corners: in perspective the rect corners are
-	 * mostly empty ground and take zoom away.
+	 * mostly empty ground and take zoom away. With no points the corners are fitted on a tilted map, with
+	 * null the rect is fitted as on a flat map.
 	 */
 	public void fitRectToMap(double left, double right, double top, double bottom, int tileBoxWidthPx,
 	                         int tileBoxHeightPx, int marginTopPx, @Nullable List<LatLon> points) {
@@ -1881,22 +1882,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (rtl) {
 			dx = -dx;
 		}
-		boolean routeMenu = mapActivity != null && mapActivity.getMapRouteInfoMenu().isVisible();
-		if (routeMenu) {
+		// The rect goes to the middle of the map part a menu leaves uncovered: tileBoxHeightPx below marginTopPx,
+		// or tileBoxWidthPx at the end side. fitRectToMapCenter() puts it at the map center instead
+		if (!toMapCenter) {
 			dx += (rtl ? tbw / 2 : tb.getPixWidth() - tbw / 2) - tb.getCenterPixelX();
 			dy += tbh / 2 - tb.getCenterPixelY();
 		}
 
 		MapRendererView renderer = getMapRenderer();
-		if (!rotate && renderer != null && elevationAngle < DEFAULT_ELEVATION_ANGLE) {
-			// The map is drawn under the status bar, but the route is not to be fitted there
-			int statusBarPx = routeMenu && tileBoxHeightPx > 0 ? getStatusBarInsetPx() : 0;
+		if (points != null && !rotate && renderer != null && elevationAngle < DEFAULT_ELEVATION_ANGLE) {
 			float centerX = tb.getCenterPixelX() + dx;
-			float areaTop = tb.getCenterPixelY() + dy - tbh / 2f + statusBarPx;
-			float areaHeight = tbh - statusBarPx;
-			float boxTop = areaTop + areaHeight * (1 - border) / 2;
+			float boxTop = tb.getCenterPixelY() + dy - tbh / 2f + tbh * (1 - border) / 2;
 			if (fitRectToTiltedMap(renderer, left, right, top, bottom, points, centerX - tbw * border / 2, boxTop,
-					centerX + tbw * border / 2, boxTop + areaHeight * border)) {
+					centerX + tbw * border / 2, boxTop + tbh * border)) {
 				return;
 			}
 		}
@@ -1969,18 +1967,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		animatedDraggingThread.startMoving(MapUtils.get31LatitudeY((int) fitTarget[1]),
 				MapUtils.get31LongitudeX((int) fitTarget[0]), zoom.getBaseZoom(), zoom.getZoomFloatPart());
 		return true;
-	}
-
-	/**
-	 * Height of the status bar when the map is drawn under it.
-	 */
-	private int getStatusBarInsetPx() {
-		if (view == null) {
-			return 0;
-		}
-		int[] location = new int[2];
-		view.getLocationOnScreen(location);
-		return location[1] == 0 ? AndroidUtils.getStatusBarHeight(app) : 0;
 	}
 
 	/**

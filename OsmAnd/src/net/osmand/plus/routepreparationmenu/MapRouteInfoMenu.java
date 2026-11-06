@@ -2597,14 +2597,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	/**
-	 * The points getRouteRect() bounds, or null for a public transport route.
+	 * The points getRouteRect() bounds, or none for a public transport route: its rect corners are fitted.
 	 */
-	@Nullable
+	@NonNull
 	public List<LatLon> getRoutePoints(@NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (isTransportRouteCalculated() || !routingHelper.isRouteCalculated()) {
-			return null;
+			return Collections.emptyList();
 		}
 		return RoutingHelperUtils.getRoutePoints(app, routingHelper.getRoute());
 	}
