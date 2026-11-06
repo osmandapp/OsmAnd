@@ -1028,14 +1028,8 @@ object GpxUtilities {
 	}
 
 	private fun normalizeIso8601Input(input: String): String {
-		var start = 0
-		var end = input.length
-		while (start < end && input[start].isXmlWhitespace()) {
-			start++
-		}
-		while (end > start && input[end - 1].isXmlWhitespace()) {
-			end--
-		}
+		val start = input.indexAfterLeadingXmlWhitespace()
+		val end = input.indexBeforeTrailingXmlWhitespace(start)
 		val needsTrim = start != 0 || end != input.length
 		val delimiterIndex = start + 10
 		val needsSpaceReplacement = end - start > 10 &&
@@ -1238,6 +1232,22 @@ object GpxUtilities {
 
 	private fun Char.isXmlWhitespace(): Boolean {
 		return this == ' ' || this == '\t' || this == '\r' || this == '\n'
+	}
+
+	private fun String.indexAfterLeadingXmlWhitespace(): Int {
+		var start = 0
+		while (start < length && this[start].isXmlWhitespace()) {
+			start++
+		}
+		return start
+	}
+
+	private fun String.indexBeforeTrailingXmlWhitespace(start: Int): Int {
+		var end = length
+		while (end > start && this[end - 1].isXmlWhitespace()) {
+			end--
+		}
+		return end
 	}
 
 	fun getCreationTime(gpxFile: GpxFile?): Long {
@@ -1887,15 +1897,16 @@ object GpxUtilities {
 	}
 
 	fun toDouble(value: String?): Double {
-		val text = value?.trim { it.isXmlWhitespace() }
-		if (text.isNullOrEmpty()) return Double.NaN
+		if (value.isNullOrEmpty()) return Double.NaN
 
-		var i = 0
-		val len = text.length
+		val start = value.indexAfterLeadingXmlWhitespace()
+		val len = value.indexBeforeTrailingXmlWhitespace(start)
+		if (start == len) return Double.NaN
+		var i = start
 		var negative = false
 
-		if (text[i] == '-' || text[i] == '+') {
-			negative = text[i] == '-'
+		if (value[i] == '-' || value[i] == '+') {
+			negative = value[i] == '-'
 			i++
 			if (i == len) return Double.NaN
 		}
@@ -1908,7 +1919,7 @@ object GpxUtilities {
 		var fracDigits = 0
 
 		while (i < len) {
-			val c = text[i]
+			val c = value[i]
 			when {
 				c in '0'..'9' -> {
 					hasDigits = true
@@ -1930,7 +1941,7 @@ object GpxUtilities {
 				}
 				c == 'e' || c == 'E' -> {
 					// fallback for scientific notation
-					return text.toDouble()
+					return value.substring(start, len).toDouble()
 				}
 				else -> return Double.NaN
 			}
