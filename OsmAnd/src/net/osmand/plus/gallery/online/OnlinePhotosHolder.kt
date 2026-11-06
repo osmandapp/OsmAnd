@@ -40,6 +40,14 @@ class OnlinePhotosHolder(
 		}
 	}
 
+	/** Snapshot before merging a provider result; published holders are never mutated. */
+	fun copy(): OnlinePhotosHolder = OnlinePhotosHolder(latLon, params).also { copy ->
+		itemsByGroup.forEach { (group, items) ->
+			items.values.forEach { copy.addItem(group, it) }
+		}
+		if (!isComplete) copy.markIncomplete()
+	}
+
 	fun clear() { itemsByGroup.clear() }
 
 	private fun getItemsByGroups(vararg groups: OnlinePhotosGroup): List<MediaItem> {
