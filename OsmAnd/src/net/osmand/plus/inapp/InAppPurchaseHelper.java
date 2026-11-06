@@ -715,6 +715,9 @@ public abstract class InAppPurchaseHelper {
 		boolean depthContoursPurchased = isPurchasedLocalDeepContours();
 		if (purchasedFullVersion) {
 			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+		} else if (ctx.getSettings().FULL_VERSION_PURCHASED.get() && canRevoke) {
+			// e.g. the full version came with the OsmAnd Cloud account and the user logged out
+			ctx.getSettings().FULL_VERSION_PURCHASED.set(false);
 		}
 		if (depthContoursPurchased) {
 			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);

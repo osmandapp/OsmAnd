@@ -4680,8 +4680,8 @@
     <string name="allow_display_on_top">Permitir exibição na parte superior</string>
     <string name="allow_display_on_top_description">Permitir a exibição de textos de mapas uns sobre os outros</string>
     <string name="map_text">Redefinição do mapa</string>
-    <string name="routing_attr_avoid_cobblestone_name">Evitar paralelepípedos</string>
-    <string name="routing_attr_avoid_cobblestone_description">Evitar paralelepípedos</string>
+    <string name="routing_attr_avoid_cobblestone_name">Evitar pedras arredondadas</string>
+    <string name="routing_attr_avoid_cobblestone_description">Evitar calçamento de pedras arredondadas</string>
     <string name="apply_only_to_new">Aplicar apenas a novos</string>
     <string name="change_default_tracks_appearance_confirmation">Aplicar alterações nas trilhas existentes na pasta ou apenas às novas?</string>
     <string name="gpx_approximation_geo_cpp">Baseado em geometria (C++, rápido)</string>

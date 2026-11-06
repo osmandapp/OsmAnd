@@ -2152,8 +2152,8 @@
     <string name="rendering_attr_highway_class_bridleway_name">Для коней</string>
     <string name="rendering_attr_highway_class_steps_name">Прыступкі</string>
     <string name="rendering_attr_highway_class_path_name">Сцежка</string>
-    <string name="routing_attr_avoid_sett_name">Без брукаваных дарог</string>
-    <string name="routing_attr_avoid_sett_description">Пазбягаць брукаваных дарог</string>
+    <string name="routing_attr_avoid_sett_name">Без брукаванкі (цёсаны камень)</string>
+    <string name="routing_attr_avoid_sett_description">Пазбягаць брукаванкі (цёсаны камень)</string>
     <string name="shared_string_degrees">Градусы</string>
     <string name="shared_string_milliradians">Мілірадыяны</string>
     <string name="angular_measeurement">Адзінкі вуглоў</string>
@@ -4242,4 +4242,6 @@
     <string name="route_calculation_route_not_found_desc">Хуткая пабудова маршруту не змагла знайсці маршрут. Пераход на стандартны разлік.</string>
     <string name="route_calculation_unavailable_parameters_desc">Хуткая пабудова маршруту недаступная пры выбраных параметрах маршруту. Пераключэнне на стандартны разлік.</string>
     <string name="route_calculation_standard_long_route_desc">Стандартны разлік для доўгіх маршрутаў (&gt;300 км) можа заняць шмат часу. Дадаванне прамежкавага пункта можа паскорыць гэты працэс.</string>
+    <string name="routing_attr_avoid_cobblestone_name">Пазбягаць брукаванкі (круглякі)</string>
+    <string name="routing_attr_avoid_cobblestone_description">Пазбягаць брукаванкі (круглякі)</string>
 </resources>

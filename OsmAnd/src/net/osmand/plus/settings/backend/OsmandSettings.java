@@ -46,7 +46,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiContext;
 import androidx.core.text.util.LocalePreferences;
 
+import net.osmand.Collator;
 import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
 import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
@@ -2350,6 +2352,22 @@ public class OsmandSettings {
 
 	public Map<String, String> getTileSourceEntries() {
 		return getTileSourceEntries(true);
+	}
+
+	// Map source, overlay and underlay lists: A-Z by title, equal titles by key
+	@NonNull
+	public Map<String, String> getTileSourceEntriesSortedByTitle() {
+		List<Map.Entry<String, String>> entries = new ArrayList<>(getTileSourceEntries().entrySet());
+		Collator collator = OsmAndCollator.primaryCollator();
+		entries.sort((e1, e2) -> {
+			int result = collator.compare(e1.getValue(), e2.getValue());
+			return result != 0 ? result : e1.getKey().compareTo(e2.getKey());
+		});
+		Map<String, String> sorted = new LinkedHashMap<>();
+		for (Map.Entry<String, String> entry : entries) {
+			sorted.put(entry.getKey(), entry.getValue());
+		}
+		return sorted;
 	}
 
 	public Map<String, String> getTileSourceEntries(boolean sqlite) {

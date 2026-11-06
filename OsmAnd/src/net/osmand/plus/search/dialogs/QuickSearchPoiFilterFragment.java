@@ -304,7 +304,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Integer>() {
 			@Override
 			protected Integer doInBackground(Void... params) {
-				List<Amenity> amenities = app.getResourceManager().getAmenitySearcher().searchAmenities(filter, null,
+				List<Amenity> amenities = app.getResourceManager().getAmenitySearcher().searchAmenities(filter, filter.getAdditionalFilter(),
 						MapUtils.get31LatitudeY((int) rect.top), MapUtils.get31LongitudeX((int) rect.left),
 						MapUtils.get31LatitudeY((int) rect.bottom), MapUtils.get31LongitudeX((int) rect.right),
 						-1, false, null, null);
@@ -469,8 +469,13 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	}
 
 	public void refreshList() {
+		// The edited filter has other types: drop the old counts and count again
+		placesCounts = null;
+		categoryPlacesCounts = null;
+		description.setText(filter.getName());
 		initListItems();
 		updateListView();
+		countPlaces();
 	}
 
 	private void updateListView() {

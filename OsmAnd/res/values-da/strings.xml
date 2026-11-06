@@ -4337,9 +4337,9 @@
     <string name="gpx_approximation_geo_cpp">Geometri-baseret (C++, hurtig)</string>
     <string name="allow_display_on_top">Tillad visning ovenpå</string>
     <string name="allow_display_on_top_description">Tillad visning af korttekster oven på hinanden</string>
-    <string name="routing_attr_avoid_cobblestone_description">Undgå brosten</string>
+    <string name="routing_attr_avoid_cobblestone_description">Undgå toppesten</string>
     <string name="map_text">Kortgengivelse</string>
-    <string name="routing_attr_avoid_cobblestone_name">Undgå brosten</string>
+    <string name="routing_attr_avoid_cobblestone_name">Undgå toppesten</string>
     <string name="track_vertical_exaggeration_description">Ved at ændre skalaværdien kan du ændre 3D-sporets højde.</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="disable_map_layers_descr">Deaktiver alle kortlag over vektorkortet (genstart påkrævet).</string>
@@ -5533,4 +5533,5 @@
     <string name="cloud_file_name_too_long">Filnavnet er for langt til denne enhed. Omdøb det i OsmAnd Cloud</string>
     <string name="average_vertical_speed">Gennemsnitlig vertikal hastighed</string>
     <string name="public_transport_route_out_of_memory">Ruten med offentlig transport er for lang til at kunne beregnes på denne enhed. Vælg en destination, der ligger tættere på.</string>
+    <string name="release_5_5">• Rumlig søgning er aktiveret som standard: søgning omkring et sted, bedre rangering, synonymer, tolerance over for stavefejl\n\n • 3D-bygninger kaster skygger, og solens retning kan justeres\n\n • Panoramax-udvidelse: billeder på gadeniveau på kortet\n\n • Mediebibliotek: alle fotos, videoer og lydnoter samlet ét sted\n\n • Streg- og prikstreger på sporene, standardudseende pr. spormappe\n\n • Indstillinger for rejsehastighed for ruteberegning og ankomsttid\n\n • Android Auto: seneste destinationer, Auto Free Ride, Google Assistant og Gemini\n\n • Hurtig handling til at vise eller skjule spor\n\n • Konturlinje-etiketter vender op ad bakke</string>
 </resources>

@@ -65,6 +65,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -462,15 +463,43 @@ public class TrackDetailsMenu {
 				if (forceFit) {
 					mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
 							tileBoxWidthPx, tileBoxHeightPx, topMarginPx);
-				} else if (location != null &&
-						!mapActivity.getMapView().getTileBox(tileBoxWidthPx, tileBoxHeightPx, topMarginPx).containsLatLon(location)) {
-					boolean animating = mapActivity.getMapView().getAnimatedDraggingThread().isAnimating();
-					mapActivity.getMapView().fitLocationToMap(location.getLatitude(), location.getLongitude(),
-							mapActivity.getMapView().getZoom(), tileBoxWidthPx, tileBoxHeightPx, topMarginPx, !animating);
-				} else {
+					return;
+				}
+				OsmandMapTileView mapView = mapActivity.getMapView();
+				RotatedTileBox visibleBox = mapView.getTileBox(tileBoxWidthPx, tileBoxHeightPx, topMarginPx);
+				boolean dragging = chart.getOnTouchListener().getLastGesture() == ChartGesture.DRAG;
+				boolean following = mapView.getAnimatedDraggingThread().isFollowing();
+				if (location == null || visibleBox.containsLatLon(location) && !(dragging && following)) {
 					mapActivity.refreshMap();
+				} else if (dragging || following) {
+					followLocation(mapView, visibleBox, location);
+					mapActivity.refreshMap();
+				} else {
+					boolean animating = mapView.getAnimatedDraggingThread().isAnimating();
+					mapView.fitLocationToMap(location.getLatitude(), location.getLongitude(),
+							mapView.getZoom(), tileBoxWidthPx, tileBoxHeightPx, topMarginPx, !animating);
 				}
 			}
+		}
+	}
+
+	/**
+	 * Drag events come faster than a move animation ends and the location steps from one chart entry
+	 * to the next, so the map is not moved to each of them: it follows the point with a delay.
+	 * Once the point has left the box the map aims to bring it deeper inside, which keeps the point
+	 * on screen while the map is behind it.
+	 */
+	private void followLocation(@NonNull OsmandMapTileView mapView, @NonNull RotatedTileBox box, @NonNull LatLon location) {
+		float x = box.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
+		float y = box.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+		float marginX = box.getPixWidth() / 4f;
+		float marginY = box.getPixHeight() / 4f;
+		float dx = x < marginX ? x - marginX : Math.max(x - box.getPixWidth() + marginX, 0);
+		float dy = y < marginY ? y - marginY : Math.max(y - box.getPixHeight() + marginY, 0);
+		if (dx != 0 || dy != 0) {
+			RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+			LatLon target = tb.getLatLonFromPixel(tb.getCenterPixelX() + dx, tb.getCenterPixelY() + dy);
+			mapView.getAnimatedDraggingThread().followTarget(target.getLatitude(), target.getLongitude());
 		}
 	}
 

@@ -1976,8 +1976,8 @@
     <string name="rendering_attr_highway_class_cycleway_name">自行車道</string>
     <string name="rendering_attr_undefined_name">未定義</string>
     <string name="use_osm_live_public_transport_description">為 OsmAnd Live 變更啟用大眾運輸。</string>
-    <string name="routing_attr_avoid_sett_name">避免枕木</string>
-    <string name="routing_attr_avoid_sett_description">避免枕木</string>
+    <string name="routing_attr_avoid_sett_name">避開方石路面</string>
+    <string name="routing_attr_avoid_sett_description">避開方石路面</string>
     <string name="files_failed">無法複製 %1$d 檔案 (%2$s)。</string>
     <string name="dont_move_maps">不要移動</string>
     <string name="public_transport_ped_route_title">步行路徑約 %1$s，可能比大眾運輸還快</string>
@@ -4161,8 +4161,8 @@
     <string name="allow_display_on_top">允許顯示在頂部</string>
     <string name="allow_display_on_top_description">允許在彼此之上顯示地圖文字</string>
     <string name="map_text">地圖呈現</string>
-    <string name="routing_attr_avoid_cobblestone_name">避免鵝卵石</string>
-    <string name="routing_attr_avoid_cobblestone_description">避免鵝卵石</string>
+    <string name="routing_attr_avoid_cobblestone_name">避開鵝卵石路面</string>
+    <string name="routing_attr_avoid_cobblestone_description">避開鵝卵石路面</string>
     <string name="steps_per_minute_unit">步數每分鐘</string>
     <string name="disable_map_layers_descr">停用向量地圖上的所有地圖圖層（需要重新啟動）。</string>
     <string name="disable_map_layers">停用地圖圖層</string>

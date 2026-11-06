@@ -41,6 +41,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
+import net.osmand.data.TiltedMapFit;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
@@ -73,12 +74,14 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.MapGestureType;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1831,6 +1834,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				marginTopPx, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false);
 	}
 
+	/**
+	 * Same as fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx), but on a
+	 * tilted map fits these points of the rect instead of its corners: in perspective the rect corners are
+	 * mostly empty ground and take zoom away.
+	 */
+	public void fitRectToMap(double left, double right, double top, double bottom, int tileBoxWidthPx,
+	                         int tileBoxHeightPx, int marginTopPx, @Nullable List<LatLon> points) {
+		RotatedTileBox tb = currentViewport.copy();
+		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
+				marginTopPx, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false, false, points);
+	}
+
 	public void fitRectToMap(double left, double right, double top, double bottom,
 			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
 		RotatedTileBox tb = currentViewport.copy();
@@ -1847,18 +1862,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	                               int tileBoxWidthPx, int tileBoxHeightPx) {
 		RotatedTileBox tb = currentViewport.copy();
 		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
-				0, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false, true);
+				0, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false, true, null);
 	}
 
 	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
 			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, float border, boolean rotate) {
 		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
-				marginTopPx, marginLeftPx, rtl, border, rotate, false);
+				marginTopPx, marginLeftPx, rtl, border, rotate, false, null);
 	}
 
 	private void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
 			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, float border,
-			boolean rotate, boolean toMapCenter) {
+			boolean rotate, boolean toMapCenter, @Nullable List<LatLon> points) {
 		int dx = marginLeftPx;
 		int dy = marginTopPx;
 		int tbw = (tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth());
@@ -1866,9 +1881,24 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (rtl) {
 			dx = -dx;
 		}
-		if (mapActivity != null && mapActivity.getMapRouteInfoMenu().isVisible()) {
+		boolean routeMenu = mapActivity != null && mapActivity.getMapRouteInfoMenu().isVisible();
+		if (routeMenu) {
 			dx += (rtl ? tbw / 2 : tb.getPixWidth() - tbw / 2) - tb.getCenterPixelX();
 			dy += tbh / 2 - tb.getCenterPixelY();
+		}
+
+		MapRendererView renderer = getMapRenderer();
+		if (!rotate && renderer != null && elevationAngle < DEFAULT_ELEVATION_ANGLE) {
+			// The map is drawn under the status bar, but the route is not to be fitted there
+			int statusBarPx = routeMenu && tileBoxHeightPx > 0 ? getStatusBarInsetPx() : 0;
+			float centerX = tb.getCenterPixelX() + dx;
+			float areaTop = tb.getCenterPixelY() + dy - tbh / 2f + statusBarPx;
+			float areaHeight = tbh - statusBarPx;
+			float boxTop = areaTop + areaHeight * (1 - border) / 2;
+			if (fitRectToTiltedMap(renderer, left, right, top, bottom, points, centerX - tbw * border / 2, boxTop,
+					centerX + tbw * border / 2, boxTop + areaHeight * border)) {
+				return;
+			}
 		}
 
 		tb.setPixelDimensions((int) (tbw * border), (int) (tbh * border));
@@ -1902,6 +1932,102 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					zoom, 0f, 90f, ANIMATION_PREVIEW_TIME, false);
 		} else {
 			animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
+		}
+	}
+
+	/**
+	 * Fits the points, or the rect corners, into a screen box of a tilted map. The tile box math of
+	 * fitRectToMap() is flat, while on a tilted map the ground above the map target is squeezed towards the
+	 * horizon: see TiltedMapFit.
+	 *
+	 * @return false if they could not be fitted, e.g. the box is over the horizon
+	 */
+	private boolean fitRectToTiltedMap(@NonNull MapRendererView renderer, double left, double right,
+	                                   double top, double bottom, @Nullable List<LatLon> points,
+	                                   float boxLeft, float boxTop, float boxRight, float boxBottom) {
+		// The renderer has to show the map as startMoving() will move it, not in the middle of an animation
+		animatedDraggingThread.stopAnimatingSync();
+		if (Algorithms.isEmpty(points)) {
+			points = Arrays.asList(new LatLon(top, left), new LatLon(top, right),
+					new LatLon(bottom, right), new LatLon(bottom, left));
+		}
+		PointI target = renderer.getTarget();
+		TiltedMapFit fit = new TiltedMapFit(new RendererProjection(renderer), target.getX(), target.getY(),
+				elevationAngle, points, boxLeft, boxTop, boxRight, boxBottom);
+		if (!fit.fit()) {
+			return false;
+		}
+		float zoomNow = getZoom() + getZoomFloatPart();
+		int minZoom = Math.max(getMinZoom(), MIN_ZOOM_LIMIT);
+		int maxZoom = Math.min(getMaxZoom(), MAX_ZOOM_LIMIT);
+		Zoom zoom = Zoom.checkZoomBounds(renderer, Zoom.fromDistanceRatio(1, fit.getScale(), zoomNow), minZoom, maxZoom);
+		// The zoom the map allows may differ from the fitted one
+		if (!fit.center(Zoom.getDistanceAfterZoom(1, zoomNow, zoom.getBaseZoom() + zoom.getZoomFloatPart()))) {
+			return false;
+		}
+		double[] fitTarget = fit.getTarget();
+		animatedDraggingThread.startMoving(MapUtils.get31LatitudeY((int) fitTarget[1]),
+				MapUtils.get31LongitudeX((int) fitTarget[0]), zoom.getBaseZoom(), zoom.getZoomFloatPart());
+		return true;
+	}
+
+	/**
+	 * Height of the status bar when the map is drawn under it.
+	 */
+	private int getStatusBarInsetPx() {
+		if (view == null) {
+			return 0;
+		}
+		int[] location = new int[2];
+		view.getLocationOnScreen(location);
+		return location[1] == 0 ? AndroidUtils.getStatusBarHeight(app) : 0;
+	}
+
+	/**
+	 * Screen of the renderer as it is now.
+	 */
+	private static class RendererProjection implements TiltedMapFit.Projection {
+
+		private final MapRendererView renderer;
+		private final PointI location = new PointI();
+		private final PointI pixel = new PointI();
+
+		RendererProjection(@NonNull MapRendererView renderer) {
+			this.renderer = renderer;
+		}
+
+		@Nullable
+		@Override
+		public double[] getPixel(double x31, double y31) {
+			// Off the screen and behind the camera too
+			return setLocation(x31, y31) && renderer.getScreenPointFromLocation(location, pixel, true)
+					? new double[] {pixel.getX(), pixel.getY()} : null;
+		}
+
+		@Nullable
+		@Override
+		public double[] getElevatedPixel(double x31, double y31) {
+			// Only on the screen: the heights of other places may be not loaded
+			return setLocation(x31, y31) && renderer.getElevatedPointFromLocation(location, pixel, false)
+					? new double[] {pixel.getX(), pixel.getY()} : null;
+		}
+
+		@Nullable
+		@Override
+		public double[] getLocation(double x, double y) {
+			pixel.setX((int) x);
+			pixel.setY((int) y);
+			return renderer.getLocationFromScreenPoint(pixel, location)
+					? new double[] {location.getX(), location.getY()} : null;
+		}
+
+		private boolean setLocation(double x31, double y31) {
+			if (x31 < 0 || y31 < 0 || x31 > Integer.MAX_VALUE || y31 > Integer.MAX_VALUE) {
+				return false;
+			}
+			location.setX((int) x31);
+			location.setY((int) y31);
+			return true;
 		}
 	}
 

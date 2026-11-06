@@ -45,19 +45,22 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 	@Override
 	public void onBindViewHolder(@NonNull FoundDeviceViewHolder holder, int position) {
 		int itemType = getItemViewType(position);
-		boolean anyConnected = plugin.isAnyConnectedDeviceId(selectedDeviceId);
+		boolean noneSelected = withNoneVariant && Algorithms.isEmpty(selectedDeviceId);
+		boolean deviceSelected = !Algorithms.isEmpty(selectedDeviceId) && plugin.getPairedDeviceById(selectedDeviceId) != null;
 		if (itemType == NONE_ITEM_TYPE) {
-			holder.selectionMark.setChecked(Algorithms.isEmpty(selectedDeviceId)
-					|| !anyConnected && plugin.getDevice(selectedDeviceId) == null);
+			holder.selectionMark.setChecked(noneSelected);
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, null));
 			holder.description.setVisibility(View.GONE);
 			holder.name.setText(R.string.shared_string_none);
 			holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_track_disabled, nightMode));
 		} else if (itemType == ANY_CONNECTED_ITEM_TYPE) {
-			holder.selectionMark.setChecked(anyConnected);
+			holder.selectionMark.setChecked(!noneSelected && !deviceSelected);
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, plugin.getAnyConnectedDeviceId()));
 			holder.description.setVisibility(View.GONE);
-			holder.name.setText(R.string.any_connected);
+			AbstractDevice<?> anyDevice = plugin.getAnyDevice(widgetDataFieldType);
+			holder.name.setText(anyDevice != null
+					? app.getString(R.string.any_connected_with_device, anyDevice.getName())
+					: app.getString(R.string.any_connected));
 			holder.icon.setImageDrawable(uiUtils.getIcon(widgetDataFieldType.disconnectedIconId, nightMode));
 		} else if (itemType == DEVICE_ITEM_TYPE) {
 			super.onBindViewHolder(holder, position);

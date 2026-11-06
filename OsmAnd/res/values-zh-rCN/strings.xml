@@ -3351,7 +3351,7 @@
     <string name="live_monitoring_max_interval_to_send_desrc">指定一段缓冲时间保留位置，以在无连接的情况下发送</string>
     <string name="routing_attr_piste_type_downhill_name">高山和滑降滑雪</string>
     <string name="welcome_to_open_beta_description">旅行指南目前基于维基导游。在开放测试期间可免费测试所有功能。</string>
-    <string name="routing_attr_avoid_sett_description">避免原石铺砖</string>
+    <string name="routing_attr_avoid_sett_description">避开方石路面</string>
     <string name="quick_action_need_to_add_item_to_list">在“快捷操作”设置中将至少一个项目添加到列表中</string>
     <string name="routing_attr_allow_skating_only_description">仅为自由式或滑行滑雪整修的路线，不设传统滑道。</string>
     <string name="routing_attr_allow_classic_only_description">仅针对传统滑雪方式整修的路线，不含滑行滑雪道。这包括由小型雪地摩托整修的松软滑雪道和滑雪者人工开辟的滑雪道。</string>
@@ -3380,7 +3380,7 @@
     <string name="topo_render_descr">适合远足、徒步旅行和野外骑行。在户外可读性强。对比鲜明的道路和自然物体，不同的路线类型，高级等高线选项，额外的细节。调整路面完整性可区分道路质量。无夜间模式。</string>
     <string name="touring_view_render_descr">具有高对比度和最大细节的旅行风格。包括 OsmAnd 默认样式的所有选项，同时显示尽可能多的细节，特别是道路、路径和其他出行方式。道路类型之间明确的“旅游地图集”区别。适合白天、晚上和室外使用。</string>
     <string name="quick_action_switch_day_night_descr">OsmAnd 日间和夜间模式的切换开关。</string>
-    <string name="routing_attr_avoid_sett_name">无原石铺砖</string>
+    <string name="routing_attr_avoid_sett_name">避开方石路面</string>
     <string name="routing_attr_piste_type_downhill_description">可进行高山或滑降滑雪的斜坡，并可使用滑雪缆车。</string>
     <string name="routing_attr_piste_type_sled_description">供雪橇使用的斜坡。</string>
     <string name="routeInfo_winter_ice_road_name">冬季和冰雪道路</string>
@@ -4554,7 +4554,7 @@
     <string name="liter">升</string>
     <string name="obd_vin">车辆识别号码</string>
     <string name="shared_string_key">键</string>
-    <string name="routing_attr_avoid_cobblestone_description">避免鹅卵石</string>
+    <string name="routing_attr_avoid_cobblestone_description">避开鹅卵石路面</string>
     <string name="routing_type">路线类型</string>
     <string name="shared_string_increase">增加</string>
     <string name="save_favorite_default_appearance">将更改应用于文件夹中已存在的点，还是仅应用于新的点？</string>
@@ -4568,7 +4568,7 @@
     <string name="shared_string_dp">dp</string>
     <string name="top">顶部</string>
     <string name="gpx_approximation_java">基于路径规划（Java）</string>
-    <string name="routing_attr_avoid_cobblestone_name">避免鹅卵石</string>
+    <string name="routing_attr_avoid_cobblestone_name">避开鹅卵石路面</string>
     <string name="gpx_approximation">GPX 近似</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="title_3d_track">3D 轨迹</string>

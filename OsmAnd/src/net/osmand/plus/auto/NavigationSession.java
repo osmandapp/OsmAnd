@@ -7,6 +7,7 @@ import static net.osmand.plus.OsmAndLocationProvider.NOT_SWITCH_TO_NETWORK_WHEN_
 import static net.osmand.plus.OsmAndLocationProvider.isRunningOnEmulator;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -19,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.car.app.CarContext;
+import androidx.car.app.HostException;
 import androidx.car.app.Screen;
 import androidx.car.app.ScreenManager;
 import androidx.car.app.Session;
@@ -80,6 +82,7 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -579,6 +582,26 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			LOG.error("Invalid suggestion intent: " + intent);
 			return;
 		}
+		SearchResult result = null;
+		if (intent.getBooleanExtra(CarSuggestionsHelper.EXTRA_PREVIOUS_ROUTE, false)) {
+			SearchResult previousRoute = CarSuggestionsHelper.createPreviousRouteResult(app);
+			if (previousRoute != null && MapUtils.areLatLonEqual(previousRoute.location, latLon)) {
+				result = previousRoute;
+			}
+		}
+		if (result == null) {
+			result = createHistoryResult(serializedName, latLon);
+		}
+
+		showAppOnCarScreen();
+		ScreenManager screenManager = getScreenManager();
+		screenManager.popToRoot();
+		screenManager.pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, result, true, getCardCountdownMs()), this::onRoutePreviewResult);
+	}
+
+	@NonNull
+	private SearchResult createHistoryResult(@NonNull String serializedName, @NonNull LatLon latLon) {
+		OsmandApplication app = getApp();
 		PointDescription pointDescription = PointDescription.deserializeFromString(serializedName, latLon);
 		HistoryEntry entry = app.getSearchHistoryHelper().getEntryByName(pointDescription, HistorySource.NAVIGATION);
 		if (entry == null) {
@@ -589,10 +612,20 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (result.location == null) {
 			result.location = latLon;
 		}
+		return result;
+	}
 
-		ScreenManager screenManager = getScreenManager();
-		screenManager.popToRoot();
-		screenManager.pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, result, true, true), this::onRoutePreviewResult);
+	private void showAppOnCarScreen() {
+		try {
+			Intent intent = new Intent().setComponent(new ComponentName(getCarContext(), NavigationCarAppService.class));
+			getCarContext().startCarApp(intent);
+		} catch (HostException | SecurityException e) {
+			LOG.error("Failed to show the app on the car screen", e);
+		}
+	}
+
+	protected long getCardCountdownMs() {
+		return RoutePreviewScreen.CARD_COUNTDOWN_MS;
 	}
 
 	private void processPendingSuggestionIntent() {
@@ -757,9 +790,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		return false;
 	}
 
-	private boolean isAutoStartRoutePreviewPresent() {
+	private boolean isCardRoutePreviewPresent() {
 		for (Screen screen : getScreenManager().getScreenStack()) {
-			if (screen instanceof RoutePreviewScreen preview && preview.isStartNavigationOnRouteReady()) {
+			if (screen instanceof RoutePreviewScreen preview && preview.hasStartCountdown()) {
 				return true;
 			}
 		}
@@ -796,9 +829,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Screen top = !screenManager.getScreenStack().isEmpty() ? screenManager.getTop() : null;
 
 		TargetPoint pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
-		// a card tap preview under another screen (e.g. Settings) must stay: it starts navigation when shown again
 		if (app.getRoutingHelper().isRouteCalculated() && !app.getRoutingHelper().isFollowingMode()
-				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen) && !isAutoStartRoutePreviewPresent()) {
+				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen) && !isCardRoutePreviewPresent()) {
 			SearchResult result = new SearchResult();
 			result.location = new LatLon(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
 			GpxFile gpxFile = app.getRoutingHelper().getCurrentGPX();
