@@ -66,12 +66,14 @@ public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 	@Override
 	public String getString(String key, @Nullable String defValue) {
 		OsmandPreference<?> preference = osmandSettings.getPreference(key);
-		if (preference instanceof StringPreference) {
-			return ((StringPreference) preference).getModeValue(appMode);
-		} else {
-			Object value = preference.getModeValue(appMode);
-			if (value != null) {
-				return value.toString();
+		if (preference != null) {
+			if (preference instanceof StringPreference) {
+				return ((StringPreference) preference).getModeValue(appMode);
+			} else {
+				Object value = preference.getModeValue(appMode);
+				if (value != null) {
+					return value.toString();
+				}
 			}
 		}
 		return defValue;
