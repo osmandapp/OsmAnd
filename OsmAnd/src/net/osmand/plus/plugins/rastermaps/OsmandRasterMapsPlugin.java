@@ -256,17 +256,23 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			return;
 		}
 		OsmandSettings settings = app.getSettings();
-		Map<String, String> entriesMap = settings.getTileSourceEntries();
+		Map<String, String> entriesMap = settings.getTileSourceEntriesSortedByTitle();
 		ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
+		String selectedKey = mapPref.get();
+		int selectedItem = -1;
+		if (keys.remove(selectedKey)) {
+			keys.add(0, selectedKey);
+			selectedItem = 0;
+		}
 		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, getThemeRes(mapActivity)));
 		String[] items = new String[entriesMap.size() + 1];
 		int i = 0;
-		for (String it : entriesMap.values()) {
-			items[i++] = it;
+		for (String key : keys) {
+			items[i++] = entriesMap.get(key);
 		}
 
 		items[i] = app.getString(R.string.install_more);
-		builder.setSingleChoiceItems(items, -1, (dialog, which) -> {
+		builder.setSingleChoiceItems(items, selectedItem, (dialog, which) -> {
 					MapActivity activity = mapActivityRef.get();
 					if (activity == null || activity.isFinishing()) {
 						return;
