@@ -5,7 +5,6 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.plus.configmap.tracks.appearance.favorite.FavoriteAppearanceController.PROCESS_ID;
 import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -48,6 +47,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 
 import java.util.Collections;
+import java.util.Objects;
 
 public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 
@@ -96,15 +96,9 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
-	@NonNull
 	@Override
-	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
-		return new Dialog(requireActivity(), getThemeId()) {
-			@Override
-			public void onBackPressed() {
-				dismiss();
-			}
-		};
+	protected boolean isBackPressedCallbackEnabled() {
+		return true;
 	}
 
 	private void registerFavoriteAppearanceController() {
@@ -239,7 +233,7 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 			if (controller.getColor() != null && controller.getColor() != color) {
 				hasChanges = true;
 			}
-			if (controller.getIcon() != null && !controller.getIcon().equals(iconName)) {
+			if (controller.hasIconSelection() && !Objects.equals(controller.getIcon(), iconName)) {
 				hasChanges = true;
 			}
 			if (controller.getShape() != null && controller.getShape() != backgroundType) {
@@ -268,7 +262,9 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 					controller.getColorCardController().getColorsPaletteController().renewLastUsedTime();
 				}
 			}
-			favouritesHelper.updateGroupIconName(favoriteGroup, controller.getIcon(), saveOption, false);
+			if (controller.hasIconSelection()) {
+				favouritesHelper.updateGroupIconName(favoriteGroup, controller.getIcon(), saveOption, false);
+			}
 			if (controller.getIcon() != null) {
 				controller.getIconController().addIconToLastUsed(controller.getIcon());
 			}
