@@ -97,7 +97,6 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.*;
 import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnFileUploadCallback;
-import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
@@ -608,7 +607,6 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.removeType(Type.ROOT_INSET);
 		collection.replace(InsetTarget.createBottomContainer(R.id.main_content).build());
 		collection.replace(InsetTarget.createHorizontalLandscape(R.id.map_controls_container).build());
 		return collection;

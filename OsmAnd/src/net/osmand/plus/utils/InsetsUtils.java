@@ -187,8 +187,23 @@ public class InsetsUtils {
 		}
 
 		for (InsetTarget target : collection.getByType(Type.ROOT_INSET)) {
-			applyRootInsetsPaddings(root, target, insets);
+			applyRootInsets(root, target, insets);
 		}
+	}
+
+	private static void applyRootInsets(@NonNull View root, @NonNull InsetTarget target, @NonNull WindowInsetsCompat insets) {
+		EnumSet<InsetSide> sides = target.getSides(isOrientationPortrait(root.getContext()));
+		if (sides != null && sides.contains(InsetSide.TOP) && isInBottomFragmentContainer(root)) {
+			// A panel at the bottom of the map screen does not reach the status bar. A top padding
+			// would only add an empty strip above it and lift the map controls laid out above the container.
+			sides = EnumSet.copyOf(sides);
+			sides.remove(InsetSide.TOP);
+		}
+		applyPadding(root, insets, sides, target.getTypeMask());
+	}
+
+	private static boolean isInBottomFragmentContainer(@NonNull View view) {
+		return view.getParent() instanceof View parent && parent.getId() == R.id.bottomFragmentContainer;
 	}
 
 	private static void applyAppBarWithCollapseInsets(View root, InsetTarget target, WindowInsetsCompat insets, InsetTargetsCollection collection) {
