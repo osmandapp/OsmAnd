@@ -614,6 +614,16 @@ public class OsmAndFormatter {
 		}
 	}
 
+	@NonNull
+	public static String getFormattedPower(float watts, @NonNull OsmandApplication app) {
+		return getFormattedPowerValue(watts, app).format(app);
+	}
+
+	@NonNull
+	public static FormattedValue getFormattedPowerValue(float watts, @NonNull OsmandApplication app) {
+		return new FormattedValue(watts, Float.toString(watts), app.getString(R.string.power_watts_unit));
+	}
+
 	public static float convertToMeters(float distance, MetricsConstants mc) {
 		float mainUnitInMeters;
 		switch (mc) {
