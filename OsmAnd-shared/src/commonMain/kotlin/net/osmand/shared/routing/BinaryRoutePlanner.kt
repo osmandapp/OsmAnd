@@ -531,7 +531,7 @@ class BinaryRoutePlanner {
 		return directionAllowed
 	}
 
-	private fun checkViaRestrictions(from: RouteSegment?, to: RouteSegment?): Boolean {
+	private fun checkViaRestrictions(ctx: RoutingContext, from: RouteSegment?, to: RouteSegment?, viaId: Long, reverseWay: Boolean): Boolean {
 		if (from != null && to != null) {
 			val fid = to.getRoad().getId()
 			for (i in 0 until from.getRoad().getRestrictionLength()) {
@@ -547,12 +547,35 @@ class BinaryRoutePlanner {
 					}
 					break
 				}
-				if (tp == RouteDataObject.RESTRICTION_ONLY_STRAIGHT_ON) {
+				if (from.getRoad().getRestrictionVia(i) == viaId && isViaOnlyRestriction(ctx, tp, id, to, reverseWay)) {
 					return false
 				}
 			}
 		}
 		return true
+	}
+
+	/**
+	 * A relation with several via ways is stored as via1 + the final "to", so left / right count only if "to"
+	 * leaves the end of the via way: otherwise the way after via1 is the legal continuation.
+	 */
+	private fun isViaOnlyRestriction(ctx: RoutingContext, type: Int, to: Long, viaEnd: RouteSegment, reverseWay: Boolean): Boolean {
+		if (type == RouteDataObject.RESTRICTION_ONLY_STRAIGHT_ON) {
+			return true
+		}
+		if (type != RouteDataObject.RESTRICTION_ONLY_RIGHT_TURN && type != RouteDataObject.RESTRICTION_ONLY_LEFT_TURN) {
+			return false
+		}
+		val x = viaEnd.getRoad().getPoint31XTile(viaEnd.getSegmentEnd().toInt())
+		val y = viaEnd.getRoad().getPoint31YTile(viaEnd.getSegmentEnd().toInt())
+		var road = ctx.loadRouteSegment(x, y, ctx.config.memoryLimitation - ctx.memoryOverhead, reverseWay)
+		while (road != null) {
+			if (road.getRoad().getId() == to) {
+				return true
+			}
+			road = road.next
+		}
+		return false
 	}
 
 	private fun getParentDiffId(segment: RouteSegment?): RouteSegment? {
@@ -584,7 +607,7 @@ class BinaryRoutePlanner {
 			val oppParent = getParentDiffId(opposite)
 			val to = if (reverseWaySearch) curParent else oppParent
 			val from = if (!reverseWaySearch) curParent else oppParent
-			if (checkViaRestrictions(from, to)) {
+			if (checkViaRestrictions(ctx, from, to, currentSegment.getRoad().getId(), reverseWaySearch)) {
 				val frs = FinalRouteSegment(
 					currentSegment.getRoad(),
 					currentSegment.getSegmentStart().toInt(), currentSegment.getSegmentEnd().toInt()
@@ -645,14 +668,14 @@ class BinaryRoutePlanner {
 		}
 		ctx.segmentsToVisitPrescripted.clear()
 		ctx.segmentsToVisitNotForbidden.clear()
-		processRestriction(ctx, inputNext, reverseWay, 0, road)
+		processRestriction(ctx, inputNext, reverseWay, 0, road, null)
 		if (parent != null) {
-			processRestriction(ctx, inputNext, reverseWay, road.id, parent.getRoad())
+			processRestriction(ctx, inputNext, reverseWay, road.id, parent.getRoad(), if (reverseWay) parent else segment)
 		}
 		return true
 	}
 
-	private fun processRestriction(ctx: RoutingContext, inputNext: RouteSegment?, reverseWay: Boolean, viaId: Long, road: RouteDataObject) {
+	private fun processRestriction(ctx: RoutingContext, inputNext: RouteSegment?, reverseWay: Boolean, viaId: Long, road: RouteDataObject, viaEnd: RouteSegment?) {
 		val via = viaId != 0L
 		var next = inputNext
 		var exclusiveRestriction = false
@@ -668,7 +691,7 @@ class BinaryRoutePlanner {
 							break
 						}
 					}
-					if (rv == viaId && via && rt == RouteDataObject.RESTRICTION_ONLY_STRAIGHT_ON) {
+					if (rv == viaId && via && isViaOnlyRestriction(ctx, rt, road.getRestrictionId(i), viaEnd!!, reverseWay)) {
 						type = RouteDataObject.RESTRICTION_NO_STRAIGHT_ON
 						break
 					}
@@ -686,7 +709,7 @@ class BinaryRoutePlanner {
 						}
 					}
 
-					if (rv == viaId && via && rt == RouteDataObject.RESTRICTION_ONLY_STRAIGHT_ON) {
+					if (rv == viaId && via && isViaOnlyRestriction(ctx, rt, restrictedTo, viaEnd!!, reverseWay)) {
 						type = RouteDataObject.RESTRICTION_NO_STRAIGHT_ON
 						break
 					}
