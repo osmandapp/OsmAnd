@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-	Body of the Rename media dialog. The title, the buttons, the corner radius and the outer paddings
-	come from the Material 3 dialog style.
+	Body of TextInputDialog. The title, the buttons, the corner radius and the outer paddings come
+	from the Material 3 dialog style.
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,16 +10,15 @@
 	android:paddingEnd="@dimen/ui_dialog_padding">
 
 	<com.google.android.material.textfield.TextInputLayout
-		android:id="@+id/name_layout"
+		android:id="@+id/text_input"
 		style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:hint="@string/shared_string_name"
 		app:endIconDrawable="@drawable/ic_action_clear_field"
 		app:endIconMode="clear_text">
 
 		<com.google.android.material.textfield.TextInputEditText
-			android:id="@+id/name_edit"
+			android:id="@+id/text_input_edit"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:importantForAutofill="no"
