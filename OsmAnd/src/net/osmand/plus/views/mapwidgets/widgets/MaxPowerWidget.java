@@ -7,21 +7,20 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.shared.gpx.GpxParameter;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 
 public class MaxPowerWidget extends SimpleWidget {
 
-	private Integer cachedMaxPower;
+	private Float cachedMaxPower;
+	private final NormalizedPowerCalculator powerCalculator;
 
 	public MaxPowerWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, MAX_POWER, customId, widgetsPanel);
+		this.powerCalculator = NormalizedPowerCalculator.getInstance();
 	}
 
 	@Override
@@ -33,40 +32,23 @@ public class MaxPowerWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
-		int maxPower = getMaxPower();
-		if (isUpdateNeeded() || cachedMaxPower == null || cachedMaxPower != maxPower) {
+		float maxPower = powerCalculator.updateAndGetNormalizedPower();
+		if (isUpdateNeeded() || cachedMaxPower == null || Math.abs(cachedMaxPower - maxPower) > 0.01f) {
 			cachedMaxPower = maxPower;
-			if (cachedMaxPower > 0) {
-				FormattedValue formattedPower = OsmAndFormatter.getFormattedPower(cachedMaxPower.floatValue(), app);
+			float currentMaxPower = powerCalculator.getMaxPower();
+			if (currentMaxPower > 0) {
+				FormattedValue formattedPower = OsmAndFormatter.getFormattedPowerValue(currentMaxPower, app);
 				setText(formattedPower.value, formattedPower.unit);
 			} else {
-				setText(NO_VALUE, null);
+				// Keep the last shown value if sensor is temporarily unavailable
+				if (cachedMaxPower > 0) {
+					FormattedValue formattedPower = OsmAndFormatter.getFormattedPowerValue(cachedMaxPower, app);
+					setText(formattedPower.value, formattedPower.unit);
+				} else {
+					setText(NO_VALUE, null);
+				}
 			}
 		}
-	}
-
-	private int getMaxPower() {
-		GpxTrackAnalysis analysis = getCurrentTrackAnalysis();
-		if (analysis != null) {
-			Object maxPowerParam = analysis.getGpxParameter(GpxParameter.MAX_SENSOR_POWER);
-			if (maxPowerParam != null) {
-				return (Integer) maxPowerParam;
-			}
-		}
-		return 0;
-	}
-
-	@Nullable
-	private GpxTrackAnalysis getCurrentTrackAnalysis() {
-		// Try to get analysis from current GPX route
-		if (routingHelper.getCurrentGPXRoute() != null) {
-			return routingHelper.getCurrentGPXRoute().getFile().getTrackAnalysis(app);
-		}
-		// Try to get analysis from saving track helper
-		if (app.getSavingTrackHelper() != null && app.getSavingTrackHelper().getCurrentTrack() != null) {
-			return app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
-		}
-		return null;
 	}
 
 	@Override
