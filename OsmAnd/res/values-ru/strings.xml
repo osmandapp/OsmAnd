@@ -5166,4 +5166,5 @@
     <string name="media_storage_manually_specified_descr">Файлы сохраняются в пользовательскую папку и сортируются по типу (аудио, фото, видео).</string>
     <string name="change_media_storage_question">Изменить хранилище медиа?</string>
     <string name="share_favorites_media_preparation_failed">Не удалось включить прикрепленные медиафайлы. Только обмен баллами.</string>
+    <string name="cast_shadows">Тени</string>
 </resources>
