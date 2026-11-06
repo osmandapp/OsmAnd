@@ -76,6 +76,18 @@ public class NormalizedPowerCalculator {
 
 	/** Timestamp of the last processed sample, in milliseconds. */
 	private long lastSampleTime = 0;
+	
+	/** Timestamp when the ride started, in milliseconds. */
+	private long rideStartTime = 0;
+
+	/** Maximum power seen during the ride. */
+	private float maxPower = 0;
+
+	/** Ride-wide running sum of power for average calculation. */
+	private double sumPower = 0;
+
+	/** Ride-wide count of power samples for average calculation. */
+	private long powerSampleCount = 0;
 
 	private static class PowerSample {
 		final long timestamp;
@@ -118,6 +130,11 @@ public class NormalizedPowerCalculator {
 
 		if (currentPower != null && currentPower > 0) {
 			long now = System.currentTimeMillis();
+			
+			// Initialize ride start time on first sample
+			if (rideStartTime == 0) {
+				rideStartTime = now;
+			}
 
 			// One sample per second is sufficient; also guards against
 			// processing the same sensor value more than once per update cycle.
@@ -151,6 +168,10 @@ public class NormalizedPowerCalculator {
 			sumRollingAvgPow4 = 0;
 			rollingAvgCount = 0;
 			lastSampleTime = 0;
+			rideStartTime = System.currentTimeMillis();
+			maxPower = 0;
+			sumPower = 0;
+			powerSampleCount = 0;
 		}
 	}
 
@@ -166,6 +187,74 @@ public class NormalizedPowerCalculator {
 			}
 			return (float) (windowPowerSum / windowSamples.size());
 		}
+	}
+
+	/**
+	 * Returns the maximum power seen during the ride.
+	 * 
+	 * @return the maximum power in watts, or 0 if no data
+	 */
+	public float getMaxPower() {
+		synchronized (this) {
+			return maxPower;
+		}
+	}
+
+	/**
+	 * Returns the average power for the ride.
+	 * 
+	 * @return the average power in watts, or 0 if not enough data
+	 */
+	public float getAveragePower() {
+		synchronized (this) {
+			if (powerSampleCount == 0) {
+				return 0f;
+			}
+			return (float) (sumPower / powerSampleCount);
+		}
+	}
+
+	/**
+	 * Returns the ride duration in seconds.
+	 * 
+	 * @return ride duration in seconds
+	 */
+	public long getRideDurationSeconds() {
+		synchronized (this) {
+			if (rideStartTime == 0) {
+				return 0;
+			}
+			return (System.currentTimeMillis() - rideStartTime) / 1000;
+		}
+	}
+
+	/**
+	 * Calculates and returns the Training Stress Score (TSS).
+	 * TSS = (time in seconds * Normalized Power * Intensity Factor) / (FTP * 3600) * 100
+	 * 
+	 * @param ftp Functional Threshold Power
+	 * @return TSS value, or 0 if not enough data
+	 */
+	public float getTSS(int ftp) {
+		if (ftp <= 0) {
+			return 0f;
+		}
+		
+		float normalizedPower = getNormalizedPower();
+		if (normalizedPower <= 0) {
+			return 0f;
+		}
+		
+		long rideDurationSeconds = getRideDurationSeconds();
+		if (rideDurationSeconds <= 0) {
+			return 0f;
+		}
+		
+		// Calculate Intensity Factor
+		float intensityFactor = normalizedPower / ftp;
+		
+		// TSS = (time * NP * IF) / (FTP * 3600) * 100
+		return (rideDurationSeconds * normalizedPower * intensityFactor) / (ftp * 3600f) * 100f;
 	}
 
 	/**
@@ -241,6 +330,15 @@ public class NormalizedPowerCalculator {
 		synchronized (this) {
 			windowSamples.addLast(new PowerSample(now, power));
 			windowPowerSum += power;
+
+			// Update max power
+			if (power > maxPower) {
+				maxPower = power;
+			}
+
+			// Update average power
+			sumPower += power;
+			powerSampleCount++;
 
 			long cutoff = now - NP_WINDOW_MS;
 			while (!windowSamples.isEmpty() && windowSamples.peekFirst().timestamp < cutoff) {
