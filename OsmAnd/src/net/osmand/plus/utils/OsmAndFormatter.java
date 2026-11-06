@@ -601,6 +601,16 @@ public class OsmAndFormatter {
 		return getFormattedSpeedValue(metersPerSeconds, app, mode.hasFastSpeed(), app.getSettings().SPEED_SYSTEM.getModeValue(mode));
 	}
 
+	@NonNull
+	public static String getFormattedPower(float watts, @NonNull OsmandApplication app) {
+		return getFormattedPowerValue(watts, app).format(app);
+	}
+
+	@NonNull
+	public static FormattedValue getFormattedPowerValue(float watts, @NonNull OsmandApplication app) {
+		return new FormattedValue(watts, Float.toString(watts), app.getString(R.string.power_watts_unit));
+	}
+
 	public static float getMpSFromFormattedValue(OsmandApplication app, float value, SpeedConstants speedFormat) {
 		return (value * getMetersInModeUnit(app, speedFormat) / METERS_IN_KILOMETER) / 3.6f;
 	}

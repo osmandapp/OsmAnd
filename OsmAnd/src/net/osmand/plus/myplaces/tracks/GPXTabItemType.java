@@ -12,6 +12,7 @@ public enum GPXTabItemType {
 	GPX_TAB_ITEM_GENERAL(R.string.shared_string_overview, R.layout.gpx_item_general),
 	GPX_TAB_ITEM_ALTITUDE(R.string.altitude, R.layout.gpx_item_altitude),
 	GPX_TAB_ITEM_SPEED(R.string.shared_string_speed, R.layout.gpx_item_speed),
+	GPX_TAB_ITEM_POWER(R.string.map_widget_ant_bicycle_power, R.layout.gpx_item_power),
 	GPX_TAB_ITEM_NO_ALTITUDE(R.string.altitude, R.layout.gpx_item_no_altitude);
 
 	private final int titleId;
