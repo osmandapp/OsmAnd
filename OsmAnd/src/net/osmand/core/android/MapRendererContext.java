@@ -632,6 +632,9 @@ public class MapRendererContext {
 			elevationConfiguration.setZScaleFactor(plugin.getVerticalExaggerationScale());
 			elevationConfiguration.setHillshadeSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
 			elevationConfiguration.setHillshadeSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
+			if (plugin.isTerrainShadowsEnabled()) {
+				elevationConfiguration.setVisualizationAlpha(plugin.getTerrainTransparency() / 255f);
+			}
 		}
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
 	}
