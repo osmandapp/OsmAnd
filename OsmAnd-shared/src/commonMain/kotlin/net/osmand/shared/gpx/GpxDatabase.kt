@@ -9,6 +9,8 @@ import net.osmand.shared.data.StringIntPair
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.extensions.format
 import net.osmand.shared.gpx.GpxParameter.*
+import net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION
+import net.osmand.shared.gpx.GpxUtilities.POINT_SPEED
 import net.osmand.shared.io.KFile
 import net.osmand.shared.routing.ColoringType
 import net.osmand.shared.util.DbUtils
@@ -269,6 +271,9 @@ class GpxDatabase {
 		val item = GpxDataItem.fromDatabase(file)
 		val analysis = GpxTrackAnalysis().apply { collectPointData = false }
 		processItemParameters(item, query, entries, analysis)
+		// the database keeps no point data, so flag the data its stored values prove
+		analysis.setHasData(POINT_SPEED, analysis.isSpeedSpecified())
+		analysis.setHasData(POINT_ELEVATION, analysis.isElevationSpecified())
 		item.setAnalysis(analysis)
 		return item
 	}
