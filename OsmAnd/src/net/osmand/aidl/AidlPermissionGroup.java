@@ -15,14 +15,15 @@ import java.util.Set;
 
 /**
  * Groups of the AIDL API methods a connected app can be allowed to use. Methods are named as in
- * OsmandAidlService(V2).getApi(reason); methods not listed in any group are always allowed (service calls).
+ * OsmandAidlService(V2).getApi(reason); a method checked there under another name is also listed by its AIDL name,
+ * for getApiAccess. Methods not listed in any group are always allowed (service calls).
  */
 public enum AidlPermissionGroup {
 
 	MAP("map", R.drawable.ic_world_globe_dark, R.string.shared_string_map, R.string.aidl_group_map_descr, true,
 			"refreshMap", "setMapLocation", "setMapCamera", "showMapPoint", "addMapPoint", "updateMapPoint", "removeMapPoint",
 			"addMapLayer", "updateMapLayer", "removeMapLayer", "addMapWidget", "updateMapWidget", "removeMapWidget",
-			"addWidgetGroup", "removeWidgetGroup", "regWidgetVisibility", "setMapMargins", "setZoomLimits",
+			"addWidgetGroup", "removeWidgetGroup", "regWidgetVisibility", "regWidgetAvailability", "setMapMargins", "setZoomLimits",
 			"addContextMenuButtons", "updateContextMenuButtons", "removeContextMenuButtons",
 			"isFragmentOpen", "isMenuOpen"),
 	SEARCH("search", R.drawable.ic_action_search_dark, R.string.shared_string_search, R.string.aidl_group_search_descr, true,
@@ -32,7 +33,7 @@ public enum AidlPermissionGroup {
 	NAVIGATION("navigation", R.drawable.ic_action_gdirections_dark, R.string.shared_string_navigation, R.string.aidl_group_navigation_descr, false,
 			"navigate", "navigateGpx", "navigateSearch", "pauseNavigation", "resumeNavigation", "stopNavigation",
 			"muteNavigation", "unmuteNavigation", "addRoadBlock", "removeRoadBlock", "getBlockedRoads", "registerForNavUpdates",
-			"registerForVoiceRouterMessages"),
+			"registerForNavigationUpdates", "registerForVoiceRouterMessages"),
 	FAVORITES("favorites", R.drawable.ic_action_favorite, R.string.shared_string_favorites, R.string.aidl_group_favorites_descr, false,
 			"addFavorite", "updateFavorite", "removeFavorite", "addFavoriteGroup", "updateFavoriteGroup",
 			"removeFavoriteGroup", "addMapMarker", "updateMapMarker", "removeMapMarker", "removeAllActiveMapMarkers"),
@@ -55,7 +56,8 @@ public enum AidlPermissionGroup {
 			"registerForKeyEvents", "setCustomization", "customizeOsmandSettings", "areOsmandSettingsCustomized",
 			"setFeaturesEnabledIds", "setFeaturesDisabledIds", "setFeaturesEnabledPatterns",
 			"setFeaturesDisabledPatterns", "setNavDrawerItems", "setNavDrawerFooterParams", "setNavDrawerLogo",
-			"setNavDrawerLogoWithParams");
+			"setNavDrawerLogoWithParams",
+			"setEnabledIds", "setDisabledIds", "setEnabledPatterns", "setDisabledPatterns", "setNavDrawerFooterWithParams");
 
 	private final String id;
 	@DrawableRes
@@ -106,6 +108,11 @@ public enum AidlPermissionGroup {
 
 	public boolean isSensitive() {
 		return this == SYSTEM;
+	}
+
+	@NonNull
+	public Set<String> getMethods() {
+		return methods;
 	}
 
 	@Nullable
