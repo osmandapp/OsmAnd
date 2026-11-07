@@ -5414,7 +5414,7 @@
     <string name="free_region_other_title">%1$s n\'est pas votre région gratuite</string>
     <string name="free_region_other_descr">La version gratuite inclut les cartes pour une région. Pour télécharger %1$s, les cartes des autres régions seront supprimées.</string>
     <string name="free_region_will_be_deleted">Sera supprimée</string>
-    <string name="free_region_maps_stay">La carte générale du monde, les courbes de niveau ainsi que les cartes des autres extensions ne seront pas mises à jour.</string>
+    <string name="free_region_maps_stay">La carte générale du monde, les courbes de niveau et les autres cartes des extensions restent inchangées.</string>
     <string name="free_region_delete_and_download">Supprimer et télécharger</string>
     <string name="free_region_replace_used_title">Remplacement gratuit d\'une région déjà utilisée</string>
     <string name="free_region_not_eligible_email_descr">Laissez-nous votre courriel pour modifier votre région gratuite une nouvelle fois ou pour bénéficier du téléchargement de cartes sans limite.</string>
