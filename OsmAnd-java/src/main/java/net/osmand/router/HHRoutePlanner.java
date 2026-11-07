@@ -650,10 +650,16 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				Math.max(start.getLatitude(), end.getLatitude()),
 				Math.max(start.getLongitude(), end.getLongitude()),
 				Math.min(start.getLatitude(), end.getLatitude()));
+		int startX = MapUtils.get31TileNumberX(start.getLongitude());
+		int startY = MapUtils.get31TileNumberY(start.getLatitude());
+		int endX = MapUtils.get31TileNumberX(end.getLongitude());
+		int endY = MapUtils.get31TileNumberY(end.getLatitude());
 		
 		for (BinaryMapIndexReader r : hctx.rctx.map.keySet()) {
 			for (HHRouteRegion hhregion : r.getHHRoutingIndexes()) {
-				if (hhregion.profile.equals(profile) && QuadRect.intersects(hhregion.getLatLonBbox(), qr)) {
+				// the bbox of network points can end before the map does (Iceland: 66.14N, roads up to 66.57N)
+				if (hhregion.profile.equals(profile) && (QuadRect.intersects(hhregion.getLatLonBbox(), qr)
+						|| r.containsActualRouteData(startX, startY, null) && r.containsActualRouteData(endX, endY, null))) {
 					double intersect = QuadRect.intersectionArea(hhregion.getLatLonBbox(), qr);
 					HHRouteRegionsGroup.appendToGroups(hhregion, r, groups, intersect);
 				}
