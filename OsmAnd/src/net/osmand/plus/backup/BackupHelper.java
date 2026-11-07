@@ -262,6 +262,7 @@ public class BackupHelper {
 	}
 
 	public void logout() {
+		app.getInAppPurchaseHelper().revokeExternalFullVersion();
 		resetBackupPurchase();
 		settings.BACKUP_DEVICE_ID.resetToDefault();
 		settings.BACKUP_ACCESS_TOKEN.resetToDefault();

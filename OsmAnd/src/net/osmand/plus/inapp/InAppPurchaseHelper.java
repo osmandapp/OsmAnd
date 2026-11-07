@@ -715,9 +715,6 @@ public abstract class InAppPurchaseHelper {
 		boolean depthContoursPurchased = isPurchasedLocalDeepContours();
 		if (purchasedFullVersion) {
 			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
-		} else if (ctx.getSettings().FULL_VERSION_PURCHASED.get() && canRevoke) {
-			// e.g. the full version came with the OsmAnd Cloud account and the user logged out
-			ctx.getSettings().FULL_VERSION_PURCHASED.set(false);
 		}
 		if (depthContoursPurchased) {
 			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
@@ -753,6 +750,16 @@ public abstract class InAppPurchaseHelper {
 		logDebug("User " + (subscribedToMaps ? "HAS" : "DOES NOT HAVE") + " Maps purchased.");
 
 		refreshAndroidAuto();
+	}
+
+	/**
+	 * Takes back, on the OsmAnd Cloud logout, a full version that came only with the account. It is not
+	 * revoked elsewhere: the store may not list it for another Google account or when it cannot be used.
+	 */
+	public void revokeExternalFullVersion() {
+		if (isPurchasedExternalFullVersion() && !isPurchasedLocalFullVersion()) {
+			ctx.getSettings().FULL_VERSION_PURCHASED.set(false);
+		}
 	}
 
 	protected boolean isPurchasedExternalFullVersion() {
