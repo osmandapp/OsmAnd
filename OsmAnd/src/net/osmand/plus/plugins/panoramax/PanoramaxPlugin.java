@@ -94,7 +94,7 @@ public class PanoramaxPlugin extends OsmandPlugin {
 	@Override
 	public int getLogoResourceId() {
 		// TODO: Replace with a dedicated Panoramax icon when artwork is available.
-		return R.drawable.ic_action_photo_street;
+		return R.drawable.ic_action_panoramax;
 	}
 
 	@Override
@@ -224,7 +224,7 @@ public class PanoramaxPlugin extends OsmandPlugin {
 				.setDescription(app.getString(R.string.street_level_imagery))
 				.setSelected(SHOW_PANORAMAX.get())
 				.setColor(app, SHOW_PANORAMAX.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_action_photo_street)
+				.setIcon(R.drawable.ic_action_panoramax)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setItemDeleteAction(SHOW_PANORAMAX)
 				.setListener(listener));
