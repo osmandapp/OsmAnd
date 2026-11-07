@@ -11,6 +11,7 @@ public class UploadedFileInfo {
 	private final String name;
 	private long uploadTime;
 	private String md5Digest = "";
+	private long rejectedTime;
 
 	public UploadedFileInfo(@NonNull String type, @NonNull String name) {
 		this(type, name, 0, "");
@@ -50,6 +51,14 @@ public class UploadedFileInfo {
 
 	public void setMd5Digest(@NonNull String md5Digest) {
 		this.md5Digest = md5Digest;
+	}
+
+	public long getRejectedTime() {
+		return rejectedTime;
+	}
+
+	public void setRejectedTime(long rejectedTime) {
+		this.rejectedTime = rejectedTime;
 	}
 
 	@Override
