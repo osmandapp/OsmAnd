@@ -742,6 +742,26 @@ public class IntentHelper {
 		return false;
 	}
 
+	/**
+	 * Started for result by another app, MapActivity opens as a second instance inside that app's task.
+	 * A file from such an app is passed on to the map in OsmAnd's own task instead.
+	 */
+	public static boolean openFileInOwnTask(@NonNull MapActivity mapActivity) {
+		Intent intent = mapActivity.getIntent();
+		Uri data = intent.getData();
+		String action = intent.getAction();
+		boolean file = data != null && ("file".equals(data.getScheme()) || "content".equals(data.getScheme()))
+				|| Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action);
+		if (mapActivity.getCallingActivity() == null || !file) {
+			return false;
+		}
+		// The system chooser forwards the caller's result, which would keep the map in the caller's task
+		Intent mapIntent = new Intent(intent).setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+		mapActivity.startActivity(mapIntent);
+		mapActivity.finish();
+		return true;
+	}
+
 	public void parseContentIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null) {
