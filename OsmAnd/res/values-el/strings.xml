@@ -5312,4 +5312,21 @@
     <string name="route_calculation_method_standard_only_desc">Χρησιμοποιεί πάντα την Τυπική δρομολόγηση. Πιο αργή, αλλά επιτρέπει την πλοήγηση με χάρτες από διαφορετικές ημερομηνίες.</string>
     <string name="route_calculation_method_fast_only_desc">Χρησιμοποιεί πάντα τη Γρήγορη δρομολόγηση. Ο υπολογισμός θα σταματά και θα ρωτά για ενημερώσεις εάν δεν αντιστοιχούν οι ημερομηνίες χαρτών.</string>
     <string name="compass_calibration_needed">Χρειάζεται βαθμονόμηση πυξίδας</string>
+    <string name="update_maps_to_use_new_search">Ενημερώστε τους χάρτες για χρήση της νέας αναζήτησης (%1$s)</string>
+    <string name="free_region_not_chosen_descr">Η περιοχή του πρώτου χάρτη που κατεβάσατε γίνεται η δωρεάν σας περιοχή.</string>
+    <string name="free_region_banner_descr">Όλοι χάρτες της περιοχής %1$s είναι δωρεάν.</string>
+    <string name="free_region_other_title">Η περιοχή %1$s δεν είναι η δωρεάν σας περιοχή</string>
+    <string name="free_region_other_descr">Η δωρεάν έκδοση περιλαμβάνει χάρτες μιας περιοχής. Για να κατεβάσετε την περιοχή %1$s, οι χάρτες των άλλων περιοχών θα διαγραφούν.</string>
+    <string name="free_region_will_be_deleted">Θα διαγραφεί</string>
+    <string name="free_region_maps_stay">Η επισκόπηση παγκόσμιου χάρτη, οι ισοϋψείς καμπύλες και άλλα πρόσθετα χαρτών θα παραμείνουν.</string>
+    <string name="free_region_delete_and_download">Διαγραφή και λήψη</string>
+    <string name="free_region_replace_used_title">Χρησιμοποιήθηκε ήδη η δωρεάν αντικατάσταση</string>
+    <string name="free_region_not_eligible_email_descr">Αφήστε το email σας για να αντιακατασταθεί η δωρεάν περιοχή σας ακόμα μια φορά ή για να λάβετε απεριόριστες λήψεις χαρτών.</string>
+    <string name="free_region_email_helper">Θα στέλνουμε νέα του OsmAnd. Μπορείτε να κάνετε απεγγραφή οποτεδήποτε.</string>
+    <string name="free_region_email_maps_deleted">Χάρτες της περιοχής %1$s (%2$s) θα διαγραφούν.</string>
+    <string name="free_region_send_and_replace">Αποστολή και αντικατάσταση</string>
+    <string name="free_region_not_eligible_buy_descr">Η δωρεάν περιοχή σας είναι %1$s. Για να κατεβάσετε την περιοχή %2$s και να διατηρήσετε τους τρέχοντές χάρτες σας, λάβετε τις απεριόριστες λήψεις χαρτών.</string>
+    <string name="outdated_maps_warning_title">Ενημερώστε τους χάρτες σας</string>
+    <string name="outdated_maps_warning_descr">Η νέα αναζήτηση χρειάζεται χάρτες αυτής της έκδοσης. Ενημερώστε όλους τους χάρτες σας - είναι δωρεάν.</string>
+    <string name="free_region_other_regions_need_maps_plus">Άλλες περιοχές χρειάζονται το Maps+: %1$s</string>
 </resources>

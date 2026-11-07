@@ -5534,4 +5534,21 @@
     <string name="average_vertical_speed">Gennemsnitlig vertikal hastighed</string>
     <string name="public_transport_route_out_of_memory">Ruten med offentlig transport er for lang til at kunne beregnes på denne enhed. Vælg en destination, der ligger tættere på.</string>
     <string name="release_5_5">• Rumlig søgning er aktiveret som standard: søgning omkring et sted, bedre rangering, synonymer, tolerance over for stavefejl\n\n • 3D-bygninger kaster skygger, og solens retning kan justeres\n\n • Panoramax-udvidelse: billeder på gadeniveau på kortet\n\n • Mediebibliotek: alle fotos, videoer og lydnoter samlet ét sted\n\n • Streg- og prikstreger på sporene, standardudseende pr. spormappe\n\n • Indstillinger for rejsehastighed for ruteberegning og ankomsttid\n\n • Android Auto: seneste destinationer, Auto Free Ride, Google Assistant og Gemini\n\n • Hurtig handling til at vise eller skjule spor\n\n • Konturlinje-etiketter vender op ad bakke</string>
+    <string name="update_maps_to_use_new_search">Opdater kortene for at bruge den nye søgning (%1$s)</string>
+    <string name="free_region_not_chosen_descr">Regionen på det første kort, du har downloadet, bliver din gratis region.</string>
+    <string name="free_region_banner_descr">Alle kort over %1$s er gratis.</string>
+    <string name="free_region_other_title">%1$s er ikke din gratis region</string>
+    <string name="free_region_other_descr">Den gratis version indeholder kort over én region. Hvis du downloader %1$s, vil kortene over de øvrige regioner blive slettet.</string>
+    <string name="free_region_will_be_deleted">Vil blive slettet</string>
+    <string name="free_region_maps_stay">Verdenskortet, højdekurverne og andre udvidelseskort forbliver.</string>
+    <string name="free_region_delete_and_download">Slet og download</string>
+    <string name="free_region_not_eligible_email_descr">Indtast din e-mailadresse for at skifte din gratis region endnu en gang, eller få ubegrænset adgang til kortdownloads.</string>
+    <string name="free_region_replace_used_title">Gratis udskiftning allerede brugt</string>
+    <string name="free_region_email_helper">Vi sender dig nyheder om OsmAnd. Du kan til enhver tid afmelde dig.</string>
+    <string name="free_region_email_maps_deleted">Kort over %1$s (%2$s) vil blive slettet.</string>
+    <string name="free_region_send_and_replace">Send og erstat</string>
+    <string name="free_region_not_eligible_buy_descr">Din gratis region er %1$s. Hvis du vil downloade %2$s og beholde dine nuværende kort, skal du skaffe dig ubegrænset adgang til kortdownloads.</string>
+    <string name="outdated_maps_warning_title">Opdater dine kort</string>
+    <string name="outdated_maps_warning_descr">Den nye søgefunktion kræver kort i denne version. Opdater alle dine kort – det er gratis.</string>
+    <string name="free_region_other_regions_need_maps_plus">Andre regioner skal bruge Maps+: %1$s</string>
 </resources>

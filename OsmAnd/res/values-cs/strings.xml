@@ -5262,4 +5262,5 @@
     <string name="contour_label_direction_descr">Do kopce: horní část každého čísla nadmořské výšky směřuje k vyššímu terénu, stejně jako na papírových topografických mapách. Krátké značky na čarách směřují dolů.</string>
     <string name="rendering_attr_contourLabelDirection_name">Směr štítku</string>
     <string name="rendering_value_uphill_name">Stoupání</string>
+    <string name="release_5_5">• Prostorové vyhledávání zapnuté ve výchozím stavu: vyhledávejte v okolí místa, lepší řazení, synonyma, tolerantní k překlepům\n\n• 3D budovy vrhají stíny, směr slunce lze nastavit\n\n• Modul Panoramax: snímky z úrovně ulice na mapě\n\n• Knihovna médií: všechny fotky, videa a audio poznámky na jednom místě\n\n• Čárkované a tečkované linie stop, výchozí vzhled pro každou složku se stopami\n\n• Nastavení cestovní rychlosti pro plánování trasy a čas příjezdu\n\n• Android Auto: nedávné cíle, volná jízda, Google Assistant a Gemini\n\n• Rychlá akce pro zobrazení nebo skrytí stop\n\n• Popisky vrstevnic jsou orientované k vrcholu</string>
 </resources>

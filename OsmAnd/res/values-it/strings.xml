@@ -4016,7 +4016,7 @@
     <string name="feature_available_as_part_of_plan">%1$s disponibile come parte del piano %2$s</string>
     <string name="shared_string_included">Incluso</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="map_widget_glide_average_desc">Mostra il rapporto di planata medio per l\'intervallo impostato.</string>
+    <string name="map_widget_glide_average_desc">Mostra il rapporto di planata medio o la velocità verticale media per l\'intervallo impostato.</string>
     <string name="map_widget_glide_target_desc">Mostra il rapporto di planata necessario per raggiungere il punto di destinazione.</string>
     <string name="average_glide_ratio">Rapporto di planata medio</string>
     <string name="glide_ratio_to_target">Rapporto di planata rispetto al target</string>
@@ -5435,4 +5435,5 @@
     <string name="flyovers">Sorvoli</string>
     <string name="select_tracks">Selezione tracce</string>
     <string name="storage_directory_visible_external">Archivio esterno visibile</string>
+    <string name="update_maps_to_use_new_search">Aggiorna le mappe per usare la nuova ricerca (%1$s)</string>
 </resources>
