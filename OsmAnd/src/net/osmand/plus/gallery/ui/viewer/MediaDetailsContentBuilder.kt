@@ -15,6 +15,7 @@ import net.osmand.shared.media.domain.MediaType
 import net.osmand.shared.media.library.MediaFormatting
 import net.osmand.shared.util.Localization
 import net.osmand.util.Algorithms
+import net.osmand.util.TextDirectionUtil
 
 sealed class DetailsItem {
 	abstract val card: Int
@@ -68,7 +69,9 @@ class MediaDetailsContentBuilder(private val app: OsmandApplication) {
 		}
 		metadata?.sizeBytes?.takeIf { it > 0 }?.let { items += fileCardRow(R.string.shared_string_size, AndroidUtils.formatSize(app, it)) }
 		if (item.type == MediaType.PHOTO || item.type == MediaType.VIDEO) {
-			MediaFormatting.resolution(metadata?.width, metadata?.height)?.let { items += fileCardRow(R.string.shared_string_resolution, it) }
+			MediaFormatting.resolution(metadata?.width, metadata?.height)?.let {
+				items += fileCardRow(R.string.shared_string_resolution, TextDirectionUtil.markAsLTR(it))
+			}
 		}
 		if (item.type == MediaType.VIDEO || item.type == MediaType.AUDIO) {
 			metadata?.durationMs?.let { items += fileCardRow(R.string.duration, MediaFormatting.duration(it)) }
