@@ -30,7 +30,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -621,9 +620,6 @@ public class AisTrackerPlugin extends OsmandPlugin {
 			}
 		}
 		updateAisBackgroundService();
-		if (AIS_RECEIVE_IN_BACKGROUND.get()) {
-			AndroidUtils.requestNotificationPermissionIfNeeded(activity);
-		}
 	}
 
 	@Override
