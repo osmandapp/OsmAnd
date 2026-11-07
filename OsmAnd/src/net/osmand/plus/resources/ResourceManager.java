@@ -1097,6 +1097,10 @@ public class ResourceManager {
 		if (!isAssetEqualToFile(manager, name, file)) {
 			// without room for the new copy the old file is kept as it is and the copy fails
 			replaceFileWithAsset(manager, name, file);
+		} else if (modifiedTime == null) {
+			// an unchanged file gets the copy time like a rewritten one: Updates lists a bundled
+			// TTS voice whose file is older than the installed app
+			file.setLastModified(System.currentTimeMillis());
 		}
 		return modifiedTime != null && file.setLastModified(modifiedTime);
 	}
