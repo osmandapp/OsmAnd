@@ -236,7 +236,11 @@ public class Renderable {
                                  @Nullable float[] dashPattern, boolean drawArrows,
                                  @Nullable Track3DStyle track3DStyle, boolean recreateSegments) {
             if (geometryWay != null) {
-                List<WptPt> points = coloringType.isRouteInfoAttribute() ? this.points : getPointsForDrawing();
+                // The OpenGL way simplifies the points for each zoom itself. The culled list belongs to the canvas
+                // drawing: a draw without the renderer (while it is handed over, as to Android Auto or a video
+                // recording) culls the track for that moment's zoom, and the way must not keep that afterwards.
+                List<WptPt> points = coloringType.isRouteInfoAttribute() || geometryWay.hasMapRenderer()
+                        ? this.points : getPointsForDrawing();
                 if (!Algorithms.isEmpty(points)) {
                     geometryWay.setTrackStyleParams(trackColor, trackWidth, dashPattern, drawArrows,
                             track3DStyle, coloringType, routeInfoAttribute, gradientColorPalette);

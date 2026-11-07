@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="flyover_generating_image">Generating image: %1$s</string>
 <!--
 	README:
 	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/

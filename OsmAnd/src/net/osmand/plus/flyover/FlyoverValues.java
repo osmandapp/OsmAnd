@@ -31,9 +31,69 @@ import java.util.regex.Pattern;
  * {@code video.*}, {@code camera.*} and {@code data.<name>} passed in the request. Formatted with OsmAnd's own
  * formatters in the profile's units unless a unit is given.
  */
-class FlyoverValues {
+public class FlyoverValues {
 
 	enum Kind {DISTANCE, SPEED, PACE, ALTITUDE, DURATION, CLOCK, DATE, PERCENT, NUMBER, TEXT}
+
+	/**
+	 * Where the track was recorded, from OsmAnd's map regions: the most specific region around the middle of the
+	 * track, followed by its country ("Lesser Poland Voivodeship, Poland"); null when no region is found.
+	 */
+	@Nullable
+	private String regionName(@NonNull FlyoverTrack track) {
+		WptPt middle = track.pointAt(track.getLength() / 2);
+		return regionName(app, middle.getLat(), middle.getLon());
+	}
+
+	/** The region of a place as {@code gpx[n].region} gives it, for callers laying a picture out around it. */
+	@Nullable
+	public static String regionName(@NonNull OsmandApplication app, double lat, double lon) {
+		int x31 = MapUtils.get31TileNumberX(lon);
+		int y31 = MapUtils.get31TileNumberY(lat);
+		net.osmand.map.OsmandRegions regions = app.getRegions();
+		net.osmand.map.WorldRegion deepest = null;
+		try {
+			for (net.osmand.binary.BinaryMapDataObject o : regions.query(x31, y31)) {
+				if (!net.osmand.map.OsmandRegions.contain(o, x31, y31)) {
+					continue;
+				}
+				net.osmand.map.WorldRegion region = regions.getRegionData(regions.getFullName(o));
+				if (region != null && (deepest == null || region.getLevel() > deepest.getLevel())) {
+					deepest = region;
+				}
+			}
+		} catch (java.io.IOException e) {
+			return null;
+		}
+		if (deepest == null || Algorithms.isBlank(deepest.getLocaleName())) {
+			return null;
+		}
+		net.osmand.map.WorldRegion country = deepest;
+		while (country != null && country.getLevel() > COUNTRY_LEVEL) {
+			country = country.getSuperregion();
+		}
+		String countryName = country != null && country != deepest && country.getLevel() == COUNTRY_LEVEL
+				? country.getLocaleName() : null;
+		return Algorithms.isBlank(countryName) ? deepest.getLocaleName() : deepest.getLocaleName() + ", " + countryName;
+	}
+
+	/** Level of countries in the world regions tree: world is 0, continents are 1. */
+	private static final int COUNTRY_LEVEL = 2;
+
+	/**
+	 * Numbers of a value's kind formatted with their unit, as the widgets format them ("673 m", "5.8 km/h"),
+	 * for the labels of a chart; "—" for NaN. The numbers are in the units the track has (meters, m/s).
+	 */
+	@NonNull
+	String[] formatRange(@NonNull String expr, @NonNull double[] numbers) {
+		Kind kind = kindOf(expr.replaceFirst("^gpx\\[\\d+]\\.", ""));
+		String[] out = new String[numbers.length];
+		for (int i = 0; i < numbers.length; i++) {
+			String[] f = format(new Value(numbers[i], kind, null), "auto", -1);
+			out[i] = f[1].isEmpty() ? f[0] : f[0] + " " + f[1];
+		}
+		return out;
+	}
 
 	/** A resolved value: the number (NaN when the track does not have it) or text, and how to format it. */
 	static class Value {
@@ -215,6 +275,7 @@ class FlyoverValues {
 			case "desc": return new Value(track.gpx.getMetadata().getDesc());
 			case "author": return new Value(track.gpx.getMetadata().getAuthor() != null ? track.gpx.getMetadata().getAuthor().getName() : null);
 			case "activity": return new Value(track.gpx.getMetadata().getExtensionsToRead().get("activity"));
+			case "region": return new Value(regionName(track));
 			case "file": return new Value(track.file.getName());
 		}
 		if (name.endsWith("_so_far")) {
@@ -490,8 +551,8 @@ class FlyoverValues {
 		switch (name) {
 			case "speed": case "sensor_speed": return Kind.SPEED;
 			case "pace": return Kind.PACE;
-			case "ele": return Kind.ALTITUDE;
-			case "bike_distance": return Kind.DISTANCE;
+			case "ele": case "climb": case "descent": return Kind.ALTITUDE;
+			case "bike_distance": case "dist": case "progress_dist": case "remaining_dist": return Kind.DISTANCE;
 			case "time": return Kind.CLOCK;
 			default: return Kind.NUMBER;
 		}
