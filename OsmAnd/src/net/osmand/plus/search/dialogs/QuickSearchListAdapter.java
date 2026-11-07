@@ -289,7 +289,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		String textTitle;
 		int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
 		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
-			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
+			double rd = searchUICore.isSpatialSearch()
+					? OsmAndFormatter.roundToWholeMainUnits(minimalSearchRadius, app)
+					: OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
 					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		} else {
@@ -360,7 +362,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		String textTitle;
 		int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
 		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
-			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
+			double rd = searchUICore.isSpatialSearch()
+					? OsmAndFormatter.roundToWholeMainUnits(minimalSearchRadius, app)
+					: OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
 					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		} else {

@@ -222,7 +222,9 @@ public class SearchHelper {
 					builder.setTitle(app.getString(R.string.increase_search_radius));
 					int minimalSearchRadius = searchUICore.getMinimalSearchRadius(phrase);
 					if (count == 0 && minimalSearchRadius != Integer.MAX_VALUE) {
-						double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
+						double rd = searchUICore.isSpatialSearch()
+								? OsmAndFormatter.roundToWholeMainUnits(minimalSearchRadius, app)
+								: OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 						builder.addText(app.getString(R.string.nothing_found_in_radius) + " "
 								+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS));
 					}
