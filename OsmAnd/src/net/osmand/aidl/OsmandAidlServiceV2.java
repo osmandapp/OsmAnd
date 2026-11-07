@@ -216,9 +216,11 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 	}
 
 	@Override
-	public long addAidlCallback(IOsmAndAidlCallback callback, int key) {
+	public long addAidlCallback(IOsmAndAidlCallback callback, int key, @NonNull String method) {
 		long id = getAndIncrementCallbackId();
-		callbacks.put(id, new AidlCallbackParams(callback, key));
+		// callbacks are called from OsmAnd's own threads, so the app that registers one is remembered here
+		String pack = getCallingAppPackName();
+		callbacks.put(id, new AidlCallbackParams(callback, key, pack, AidlPermissionGroup.getByMethod(method)));
 		return id;
 	}
 
@@ -1002,8 +1004,10 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		@Override
 		public long registerForUpdates(long updateTimeMS, IOsmAndAidlCallback callback) {
 			try {
-				if (updateTimeMS >= MIN_UPDATE_TIME_MS) {
-					long id = addAidlCallback(callback, KEY_ON_UPDATE);
+				if (getApi("registerForUpdates") == null) {
+					return CANNOT_ACCESS_API_ERROR;
+				} else if (updateTimeMS >= MIN_UPDATE_TIME_MS) {
+					long id = addAidlCallback(callback, KEY_ON_UPDATE, "registerForUpdates");
 					startRemoteUpdates(updateTimeMS, id, callback);
 					return id;
 				} else {
@@ -1084,9 +1088,10 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				mHandler.postDelayed(() -> {
 					try {
-						if (callbacks.containsKey(callbackId)) {
-							OsmandAidlApi api = getApi("isUpdateAllowed");
-							if (api != null && api.isUpdateAllowed()) {
+						AidlCallbackParams params = callbacks.get(callbackId);
+						if (params != null) {
+							OsmandAidlApi api = getApp().getAidlApi();
+							if (api.isUpdateAllowed() && api.isCallbackAllowed(params.getPack(), params.getGroup())) {
 								callback.onUpdate();
 							}
 							startRemoteUpdates(updateTimeMS, callbackId, callback);
@@ -1288,7 +1293,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 						removeAidlCallback(params.getCallbackId());
 						return -1;
 					} else {
-						long id = addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE);
+						long id = addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE, "registerForNavUpdates");
 						api.registerForNavigationUpdates(id);
 						return id;
 					}
@@ -1311,7 +1316,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 						removeAidlCallback(params.getCallbackId());
 						return -1;
 					} else {
-						long id = addAidlCallback(callback, KEY_ON_KEY_EVENT);
+						long id = addAidlCallback(callback, KEY_ON_KEY_EVENT, "registerForKeyEvents");
 						api.registerForKeyEvents(id, params.getKeyEventList());
 						return id;
 					}
@@ -1331,7 +1336,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				if (api != null && params != null) {
 					long callbackId = params.getCallbackId();
 					if (callbackId == -1 || !callbacks.containsKey(callbackId)) {
-						callbackId = addAidlCallback(callback, KEY_ON_CONTEXT_MENU_BUTTONS_CLICK);
+						callbackId = addAidlCallback(callback, KEY_ON_CONTEXT_MENU_BUTTONS_CLICK, "addContextMenuButtons");
 						params.setCallbackId(callbackId);
 					}
 					boolean buttonsAdded = api.addContextMenuButtons(new AidlContextMenuButtonsWrapper(params), callbackId);
@@ -1411,7 +1416,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 						removeAidlCallback(params.getCallbackId());
 						return -1;
 					} else {
-						long id = addAidlCallback(callback, KEY_ON_VOICE_MESSAGE);
+						long id = addAidlCallback(callback, KEY_ON_VOICE_MESSAGE, "registerForVoiceRouterMessages");
 						api.registerForVoiceRouterMessages(id);
 						return id;
 					}
@@ -1694,7 +1699,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 						removeAidlCallback(params.getCallbackId());
 						return -1;
 					} else {
-						long id = addAidlCallback(callback, KEY_ON_LOGCAT_MESSAGE);
+						long id = addAidlCallback(callback, KEY_ON_LOGCAT_MESSAGE, "registerForLogcatMessages");
 						String filterLevel = params.getFilterLevel();
 						api.registerLogcatListener(id, filterLevel);
 						return id;
@@ -1797,11 +1802,25 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 	public static class AidlCallbackParams {
 		private IOsmAndAidlCallback callback;
 		private long key;
+		private final String pack;
+		@Nullable
+		private final AidlPermissionGroup group;
 
-		AidlCallbackParams(IOsmAndAidlCallback callback, long key) {
+		AidlCallbackParams(IOsmAndAidlCallback callback, long key, String pack, @Nullable AidlPermissionGroup group) {
 			this.callback = callback;
 
 			this.key = key;
+			this.pack = pack;
+			this.group = group;
+		}
+
+		public String getPack() {
+			return pack;
+		}
+
+		@Nullable
+		public AidlPermissionGroup getGroup() {
+			return group;
 		}
 
 		public IOsmAndAidlCallback getCallback() {
