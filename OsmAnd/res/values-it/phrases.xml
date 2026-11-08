@@ -105,7 +105,7 @@
     <string name="poi_ticket">Biglietteria</string>
     <string name="poi_vacuum_cleaner">Negozio aspirapolvere</string>
     <string name="poi_variety_store">Negozi articoli a basso costo</string>
-    <string name="poi_video">Videonoleggio;Negozio di DVD</string>
+    <string name="poi_video">Videoteca;negozio di video</string>
     <string name="poi_window_blind">Negozio finestre cieche</string>
     <string name="poi_department_store">Grande magazzino;Grandi magazzini</string>
     <string name="poi_electronics">Negozio elettronica;negozio di elettronica</string>
@@ -158,7 +158,7 @@
     <string name="poi_kindergarten">Scuola dell\'infanzia;nido;Asilo;Scuola materna</string>
     <string name="poi_college">Università</string>
     <string name="poi_university">Università</string>
-    <string name="poi_social_facility">Struttura che fornisce servizi sociali;RSA;Struttura sociale</string>
+    <string name="poi_social_facility">Struttura di assistenza sociale;banco alimentare</string>
     <string name="poi_courthouse">Tribunale</string>
     <string name="poi_prison">Carcere</string>
     <string name="poi_register_office">Anagrafe</string>
