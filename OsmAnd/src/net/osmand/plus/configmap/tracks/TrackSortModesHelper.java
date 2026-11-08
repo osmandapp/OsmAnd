@@ -58,26 +58,24 @@ public class TrackSortModesHelper {
 		}
 	}
 
-	public void setSortModes(@NonNull Map<String, TracksSortMode> sortModes) {
-		// The extra file separator is not checked here to avoid redundant validations.
-		// It should be handled in the methods that call this one.
-		cachedSortModes.clear();
-		cachedSortModes.putAll(sortModes);
-	}
-
-	public void onTrackFolderIdChanged(@NonNull TracksGroup trackFolder, @NonNull File oldDir) {
+	public void onTrackFolderIdChanged(@NonNull File oldDir, @NonNull File newDir) {
 		String previousId = getFolderId(oldDir.getAbsolutePath());
-		String newId = trackFolder.getId();
+		String newId = getFolderId(newDir.getAbsolutePath());
 		boolean keysChanged = TrackSortModeKeyUtils.copyLegacyTrackSortModeForRenamedFolder(cachedSortModes, previousId, newId);
-		keysChanged |= TrackSortModeKeyUtils.moveUnambiguousV2Keys(cachedSortModes, previousId, newId);
-		keysChanged |= TrackSortModeKeyUtils.copyTopLevelFolderSortMode(cachedSortModes, previousId, newId);
+		keysChanged |= TrackSortModeKeyUtils.moveFolderKeys(cachedSortModes, previousId, newId);
 		if (keysChanged) {
 			syncSettings();
 		}
 	}
 
+	public void onSmartFolderRenamed(@NonNull String previousId, @NonNull String newId) {
+		if (TrackSortModeKeyUtils.moveFolderKeys(cachedSortModes, previousId, newId)) {
+			syncSettings();
+		}
+	}
+
 	public void onTrackFolderDeleted(@NonNull TracksGroup trackFolder) {
-		if (TrackSortModeKeyUtils.removeUnambiguousV2Keys(cachedSortModes, trackFolder.getId())) {
+		if (TrackSortModeKeyUtils.removeFolderKeys(cachedSortModes, trackFolder.getId())) {
 			syncSettings();
 		}
 	}
@@ -104,7 +102,7 @@ public class TrackSortModesHelper {
 
 	void reloadFromPreference() {
 		Map<String, TracksSortMode> stored = TrackSortModeKeyUtils.parseSortModes(preference.getStringsList());
-		// Import runs on the UI thread while folder moves may mutate the cache in background,
+		// Import runs on the UI thread while folder moves and deletions may mutate the cache in background,
 		// so the map is replaced atomically instead of updated in place.
 		cachedSortModes = new ConcurrentHashMap<>(stored);
 	}

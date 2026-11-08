@@ -123,7 +123,9 @@ class SmartFolderOptionsController(
 						if (app.smartFolderHelper.isSmartFolderPresent(newName)) {
 							app.showToastMessage(R.string.smart_folder_name_present)
 						} else {
+							val previousId = smartFolder.getId()
 							app.smartFolderHelper.renameSmartFolder(smartFolder, newName)
+							app.trackSortModesHelper.onSmartFolderRenamed(previousId, smartFolder.getId())
 							onSmartFolderRenamed(smartFolder)
 						}
 					}
@@ -156,6 +158,7 @@ class SmartFolderOptionsController(
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButton(R.string.shared_string_delete) { dialog: DialogInterface?, which: Int ->
 					app.smartFolderHelper.deleteSmartFolder(smartFolder)
+					app.trackSortModesHelper.onTrackFolderDeleted(smartFolder)
 					onSmartFolderDeleted()
 				}
 			val folderName = smartFolder.getName()

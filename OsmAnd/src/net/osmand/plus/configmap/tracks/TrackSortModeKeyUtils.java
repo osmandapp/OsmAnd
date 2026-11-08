@@ -20,9 +20,9 @@ import java.util.Map;
  * Encodes track sorting preference keys and preserves compatibility with the legacy V1 format.
  *
  * <p>V1 stored only a folder name, while V2 stores a relative folder path. Reading a V1 key is a
- * non-mutating fallback: the preference is not rewritten during startup. Because persisted keys
- * have no version marker, rename and delete operations modify only keys that are structurally
- * identifiable as V2; a plain top-level key can also be a legacy V1 key and must be retained.</p>
+ * non-mutating fallback: the preference is not rewritten during startup. Persisted keys have no
+ * version marker, so a top-level key can also be a legacy V1 key of same-named nested folders;
+ * explicit rename, move and delete operations still treat it as the key of the top-level folder.</p>
  */
 final class TrackSortModeKeyUtils {
 
@@ -97,19 +97,16 @@ final class TrackSortModeKeyUtils {
 		return absolutePath;
 	}
 
-	/**
-	 * Moves only keys that are structurally identifiable as V2. V1 and top-level V2 keys use the
-	 * same plain string format, so moving a plain key could lose a legacy setting.
-	 */
-	static boolean moveUnambiguousV2Keys(@NonNull Map<String, TracksSortMode> sortModes,
-	                                     @NonNull String previousId,
-	                                     @NonNull String newId) {
+	/** Moves the keys of a folder and its subfolders; moved values replace keys at the destination. */
+	static boolean moveFolderKeys(@NonNull Map<String, TracksSortMode> sortModes,
+	                              @NonNull String previousId,
+	                              @NonNull String newId) {
 		if (previousId.equals(newId)) {
 			return false;
 		}
 		Map<String, TracksSortMode> movedSortModes = new HashMap<>();
 		for (Map.Entry<String, TracksSortMode> entry : new HashMap<>(sortModes).entrySet()) {
-			String suffix = getUnambiguousV2KeySuffix(entry.getKey(), previousId);
+			String suffix = getFolderKeySuffix(entry.getKey(), previousId);
 			if (suffix != null) {
 				sortModes.remove(entry.getKey());
 				movedSortModes.put(newId + suffix, entry.getValue());
@@ -125,13 +122,15 @@ final class TrackSortModeKeyUtils {
 	/**
 	 * Preserves the effective legacy sorting of a nested folder after an explicit rename or move.
 	 * The legacy V1 key remains untouched because it may still apply to another folder with the
-	 * same leaf name. An exact V2 source is handled by {@link #moveUnambiguousV2Keys(Map, String,
-	 * String)} instead, and a pre-existing destination V2 key has priority.
+	 * same leaf name. Nothing is copied while the folder keeps its leaf name, as the fallback still
+	 * applies. An exact V2 source is handled by {@link #moveFolderKeys(Map, String, String)}
+	 * instead, and a pre-existing destination V2 key has priority.
 	 */
 	static boolean copyLegacyTrackSortModeForRenamedFolder(@NonNull Map<String, TracksSortMode> sortModes,
 	                                                       @NonNull String previousId,
 	                                                       @NonNull String newId) {
-		if (!previousId.contains(File.separator) || previousId.equals(newId)) {
+		if (!previousId.contains(File.separator) || previousId.equals(newId)
+				|| Algorithms.objectEquals(getLegacyFolderId(previousId), getLegacyFolderId(newId))) {
 			return false;
 		}
 		String sourceKey = getSortModeKey(previousId, TracksSortScope.TRACKS);
@@ -147,29 +146,10 @@ final class TrackSortModeKeyUtils {
 		return true;
 	}
 
-	/**
-	 * Preserves the direct sorting state when a top-level folder is explicitly renamed or moved.
-	 * The plain source key remains because it may be a legacy V1 key for another folder with the
-	 * same name. A pre-existing key for the destination has priority over the copied value.
-	 */
-	static boolean copyTopLevelFolderSortMode(@NonNull Map<String, TracksSortMode> sortModes,
-	                                         @NonNull String previousId,
-	                                         @NonNull String newId) {
-		if (previousId.isEmpty() || previousId.contains(File.separator) || previousId.equals(newId)) {
-			return false;
-		}
-		TracksSortMode sortMode = sortModes.get(previousId);
-		if (sortMode == null || sortModes.containsKey(newId)) {
-			return false;
-		}
-		sortModes.put(newId, sortMode);
-		return true;
-	}
-
-	/** Removes only structurally identifiable V2 keys after an explicit folder deletion. */
-	static boolean removeUnambiguousV2Keys(@NonNull Map<String, TracksSortMode> sortModes,
-	                                        @NonNull String folderId) {
-		return sortModes.keySet().removeIf(key -> getUnambiguousV2KeySuffix(key, folderId) != null);
+	/** Removes the keys of a folder and its subfolders after an explicit folder deletion. */
+	static boolean removeFolderKeys(@NonNull Map<String, TracksSortMode> sortModes,
+	                                @NonNull String folderId) {
+		return sortModes.keySet().removeIf(key -> getFolderKeySuffix(key, folderId) != null);
 	}
 
 	@Nullable
@@ -182,12 +162,12 @@ final class TrackSortModeKeyUtils {
 	}
 
 	@Nullable
-	private static String getUnambiguousV2KeySuffix(@NonNull String key, @NonNull String folderId) {
+	private static String getFolderKeySuffix(@NonNull String key, @NonNull String folderId) {
 		if (folderId.isEmpty()) {
 			return null;
 		}
 		if (key.equals(folderId)) {
-			return folderId.contains(File.separator) ? "" : null;
+			return "";
 		}
 		if (key.startsWith(folderId + File.separator)
 				|| key.startsWith(folderId + SCOPE_SEPARATOR)

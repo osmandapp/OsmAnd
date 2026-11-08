@@ -62,19 +62,17 @@ public class TrackSortModeKeyUtilsTest {
 		assertEquals(TracksSortMode.NAME_DESCENDING,
 				TrackSortModeKeyUtils.resolveSortMode(sortModes,
 						"Archive" + File.separator + "2025", TracksSortScope.TRACKS));
-		assertFalse(TrackSortModeKeyUtils.copyTopLevelFolderSortMode(sortModes,
-				"Trips" + File.separator + "2025", "Archive" + File.separator + "2025"));
 	}
 
 	@Test
-	public void movingNestedFolderMovesOnlyUnambiguousV2Keys() {
+	public void movingNestedFolderMovesItsKeysAndKeepsLegacyKey() {
 		Map<String, TracksSortMode> sortModes = new LinkedHashMap<>();
 		sortModes.put("2025", TracksSortMode.NAME_ASCENDING);
 		sortModes.put("Trips" + File.separator + "2025", TracksSortMode.DATE_ASCENDING);
 		sortModes.put("Trips" + File.separator + "2025" + File.separator + "Day trips",
 				TracksSortMode.LAST_MODIFIED);
 
-		assertTrue(TrackSortModeKeyUtils.moveUnambiguousV2Keys(sortModes,
+		assertTrue(TrackSortModeKeyUtils.moveFolderKeys(sortModes,
 				"Trips" + File.separator + "2025", "Archive" + File.separator + "2025"));
 
 		assertEquals(TracksSortMode.NAME_ASCENDING, sortModes.get("2025"));
@@ -106,50 +104,95 @@ public class TrackSortModeKeyUtilsTest {
 	}
 
 	@Test
-	public void movingTopLevelFolderCopiesDirectKeyAndMovesChildKeys() {
+	public void movingNestedFolderWithoutRenameKeepsUsingLegacyKey() {
 		Map<String, TracksSortMode> sortModes = new LinkedHashMap<>();
-		sortModes.put("Trips", TracksSortMode.NAME_ASCENDING);
-		sortModes.put("Trips" + File.separator + "2025", TracksSortMode.DATE_ASCENDING);
+		sortModes.put("2025", TracksSortMode.DATE_ASCENDING);
+		Map<String, TracksSortMode> expectedStoredModes = new LinkedHashMap<>(sortModes);
 
-		assertTrue(TrackSortModeKeyUtils.moveUnambiguousV2Keys(sortModes,
-				"Trips", "Archive"));
-		assertTrue(TrackSortModeKeyUtils.copyTopLevelFolderSortMode(sortModes,
-				"Trips", "Archive"));
+		assertFalse(TrackSortModeKeyUtils.copyLegacyTrackSortModeForRenamedFolder(sortModes,
+				"Trips" + File.separator + "2025", "Archive" + File.separator + "2025"));
+		assertFalse(TrackSortModeKeyUtils.moveFolderKeys(sortModes,
+				"Trips" + File.separator + "2025", "Archive" + File.separator + "2025"));
 
-		assertEquals(TracksSortMode.NAME_ASCENDING, sortModes.get("Trips"));
-		assertEquals(TracksSortMode.NAME_ASCENDING, sortModes.get("Archive"));
-		assertNull(sortModes.get("Trips" + File.separator + "2025"));
+		assertEquals(expectedStoredModes, sortModes);
 		assertEquals(TracksSortMode.DATE_ASCENDING,
-				sortModes.get("Archive" + File.separator + "2025"));
+				TrackSortModeKeyUtils.resolveSortMode(sortModes,
+						"Archive" + File.separator + "2025", TracksSortScope.TRACKS));
 	}
 
 	@Test
-	public void movingTopLevelFolderCopiesOnlyDirectKey() {
+	public void renamingTopLevelFolderMovesItsKeysAndDescendants() {
+		String school = "Travel" + File.separator + "School";
+		String year = school + File.separator + "2025";
 		Map<String, TracksSortMode> sortModes = new LinkedHashMap<>();
-		sortModes.put("Trips", TracksSortMode.DATE_ASCENDING);
+		sortModes.put("Travel", TracksSortMode.NAME_ASCENDING);
+		sortModes.put("Travel::" + TracksSortScope.ORGANIZED_BY_NAME.name(), TracksSortMode.NAME_DESCENDING);
+		sortModes.put(school, TracksSortMode.DATE_DESCENDING);
+		sortModes.put(year, TracksSortMode.LAST_MODIFIED);
+		sortModes.put("TravelOld" + File.separator + "School", TracksSortMode.DISTANCE_ASCENDING);
 
-		assertTrue(TrackSortModeKeyUtils.copyTopLevelFolderSortMode(sortModes,
-				"Trips", "Archive"));
+		assertTrue(TrackSortModeKeyUtils.moveFolderKeys(sortModes, "Travel", "Archive"));
 
-		assertEquals(TracksSortMode.DATE_ASCENDING, sortModes.get("Trips"));
-		assertEquals(TracksSortMode.DATE_ASCENDING, sortModes.get("Archive"));
+		Map<String, TracksSortMode> expected = new LinkedHashMap<>();
+		expected.put("Archive", TracksSortMode.NAME_ASCENDING);
+		expected.put("Archive::" + TracksSortScope.ORGANIZED_BY_NAME.name(), TracksSortMode.NAME_DESCENDING);
+		expected.put("Archive" + File.separator + "School", TracksSortMode.DATE_DESCENDING);
+		expected.put("Archive" + File.separator + "School" + File.separator + "2025", TracksSortMode.LAST_MODIFIED);
+		expected.put("TravelOld" + File.separator + "School", TracksSortMode.DISTANCE_ASCENDING);
+		assertEquals(expected, sortModes);
 	}
 
 	@Test
-	public void deletingTopLevelFolderKeepsAmbiguousLegacyKey() {
+	public void renamingAncestorKeepsLegacyFallbackOfDescendants() {
+		Map<String, TracksSortMode> sortModes = new LinkedHashMap<>();
+		sortModes.put("School", TracksSortMode.NAME_ASCENDING);
+		sortModes.put("Travel" + File.separator + "Other", TracksSortMode.DATE_ASCENDING);
+
+		assertTrue(TrackSortModeKeyUtils.moveFolderKeys(sortModes, "Travel", "Archive"));
+
+		assertNull(sortModes.get("Archive" + File.separator + "School"));
+		assertEquals(TracksSortMode.NAME_ASCENDING,
+				TrackSortModeKeyUtils.resolveSortMode(sortModes,
+						"Archive" + File.separator + "School", TracksSortScope.TRACKS));
+	}
+
+	@Test
+	public void movedKeysReplaceOnlyMatchingDestinationKeys() {
+		String source = "Travel" + File.separator + "School";
+		String destination = "Archive" + File.separator + "School";
+		Map<String, TracksSortMode> sortModes = new LinkedHashMap<>();
+		sortModes.put(source, TracksSortMode.NAME_ASCENDING);
+		sortModes.put(destination, TracksSortMode.DATE_DESCENDING);
+		sortModes.put(destination + File.separator + "2025", TracksSortMode.LAST_MODIFIED);
+		sortModes.put("Archive" + File.separator + "Other", TracksSortMode.DISTANCE_ASCENDING);
+
+		assertTrue(TrackSortModeKeyUtils.moveFolderKeys(sortModes, source, destination));
+
+		Map<String, TracksSortMode> expected = new LinkedHashMap<>();
+		expected.put(destination, TracksSortMode.NAME_ASCENDING);
+		expected.put(destination + File.separator + "2025", TracksSortMode.LAST_MODIFIED);
+		expected.put("Archive" + File.separator + "Other", TracksSortMode.DISTANCE_ASCENDING);
+		assertEquals(expected, sortModes);
+	}
+
+	@Test
+	public void deletingTopLevelFolderRemovesItsKeysAndDescendants() {
 		Map<String, TracksSortMode> sortModes = new LinkedHashMap<>();
 		sortModes.put("Trips", TracksSortMode.NAME_ASCENDING);
+		sortModes.put("Trips::" + TracksSortScope.ORGANIZED_BY_NAME.name(), TracksSortMode.NAME_DESCENDING);
 		sortModes.put("Trips" + File.separator + "2025", TracksSortMode.DATE_ASCENDING);
 		sortModes.put("Trips2" + File.separator + "2025", TracksSortMode.DISTANCE_ASCENDING);
 		sortModes.put("Other", TracksSortMode.LAST_MODIFIED);
 
-		assertTrue(TrackSortModeKeyUtils.removeUnambiguousV2Keys(sortModes, "Trips"));
+		assertTrue(TrackSortModeKeyUtils.removeFolderKeys(sortModes, "Trips"));
 
-		assertEquals(TracksSortMode.NAME_ASCENDING, sortModes.get("Trips"));
-		assertNull(sortModes.get("Trips" + File.separator + "2025"));
-		assertEquals(TracksSortMode.DISTANCE_ASCENDING,
-				sortModes.get("Trips2" + File.separator + "2025"));
-		assertEquals(TracksSortMode.LAST_MODIFIED, sortModes.get("Other"));
+		Map<String, TracksSortMode> expected = new LinkedHashMap<>();
+		expected.put("Trips2" + File.separator + "2025", TracksSortMode.DISTANCE_ASCENDING);
+		expected.put("Other", TracksSortMode.LAST_MODIFIED);
+		assertEquals(expected, sortModes);
+		assertNull(TrackSortModeKeyUtils.resolveSortMode(sortModes, "Trips", TracksSortScope.TRACKS));
+		assertNull(TrackSortModeKeyUtils.resolveSortMode(sortModes,
+				"Other" + File.separator + "Trips", TracksSortScope.TRACKS));
 	}
 
 	@Test
