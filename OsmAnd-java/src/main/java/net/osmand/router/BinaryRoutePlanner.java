@@ -481,6 +481,9 @@ public class BinaryRoutePlanner {
 		short segmentInd = reverseWaySearch ? segment.getSegmentStart() : segment.getSegmentEnd();
 		short prevSegmentInd = !reverseWaySearch ? segment.getSegmentStart() : segment.getSegmentEnd();
 
+		if (ctx.getRouter().isImpassableSegment(road, segment.getSegmentStart(), segment.getSegmentEnd())) {
+			return -1;
+		}
 		double distTimeOnRoadToPass = calcRoutingSegmentTimeOnlyDist(ctx.getRouter(), segment);
 		// calculate possible obstacle plus time
 		double obstacle = 0;
