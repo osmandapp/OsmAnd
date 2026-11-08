@@ -6,7 +6,6 @@ import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +57,6 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +82,6 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 
 	private long modifiedTime = -1;
 	private List<GpxDisplayGroup> displayGroups;
-	private List<GpxDisplayGroup> oldSplitGroups;
 
 	private View headerView;
 	private ListView listView;
@@ -105,7 +102,6 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 				selectedGpxFile = new SelectedGpxFile();
 				selectedGpxFile.setGpxFile(gpxFile, app);
 			}
-			oldSplitGroups = selectedGpxFile.getSplitGroups(app);
 
 			GpxDataItemCallback callback = new GpxDataItemCallback() {
 				@Override
@@ -300,10 +296,6 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 			@Override
 			public void trackSplittingFinished(boolean success) {
 				AndroidUiHelper.updateVisibility(progressBar, false);
-				if (success) {
-					List<GpxDisplayGroup> groups = getDisplayGroups();
-					selectedGpxFile.setSplitGroups(groups, app);
-				}
 				updateContent();
 			}
 		};
@@ -401,7 +393,11 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 			modifiedTime = gpxFile.getModifiedTime();
 			GpxDisplayHelper displayHelper = app.getGpxDisplayHelper();
 			List<GpxDisplayGroup> collectedGroup = displayHelper.collectDisplayGroups(selectedGpxFile, gpxFile, true, true);
-			displayGroups = TrackDisplayHelper.filterGroups(collectedGroup, filterTypes);
+			// The cached groups are drawn on the map and shown in the track menu, so the analysis splits copies.
+			displayGroups = new ArrayList<>();
+			for (GpxDisplayGroup group : TrackDisplayHelper.filterGroups(collectedGroup, filterTypes)) {
+				displayGroups.add(group.copy());
+			}
 		}
 		return displayGroups;
 	}
@@ -436,14 +432,8 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 	@NonNull
 	private List<GpxDisplayItem> getSplitSegments() {
 		List<GpxDisplayItem> splitSegments = new ArrayList<>();
-		List<GpxDisplayGroup> result;
-		if (!Algorithms.isEmpty(selectedGpxFile.getSplitGroups(app))) {
-			result = selectedGpxFile.getSplitGroups(app);
-		} else {
-			result = displayHelper.getGpxFile(true);
-		}
-
-		if (result != null && !result.isEmpty() && !segment.getPoints().isEmpty()) {
+		List<GpxDisplayGroup> result = getDisplayGroups();
+		if (!result.isEmpty() && !segment.getPoints().isEmpty()) {
 			for (GpxDisplayGroup group : result) {
 				TrackDisplayGroup trackGroup = getTrackDisplayGroup(group);
 				if (trackGroup != null) {
@@ -513,12 +503,6 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 			PointDescription pointDescription = mapLayers.getGpxLayer().getObjectName(gpxPoint);
 			mapLayers.getContextMenuLayer().showContextMenu(latLon, pointDescription, gpxPoint, null);
 		}
-	}
-
-	@Override
-	public void onDismiss(@NonNull DialogInterface dialog) {
-		super.onDismiss(dialog);
-		selectedGpxFile.setSplitGroups(oldSplitGroups, app, true);
 	}
 
 	@Override
