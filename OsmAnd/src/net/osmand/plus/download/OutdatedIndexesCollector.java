@@ -221,6 +221,8 @@ public class OutdatedIndexesCollector {
 				if (itemSize != oldItemSize) {
 					outdated = true;
 				}
+			} else if (item instanceof AssetIndexItem) {
+				// TTS voices come with the APK and are replaced by CheckAssetsTask on every app update
 			} else {
 				if (parsed && item.getTimestamp() > item.getLocalTimestamp()) {
 					outdated = true;
