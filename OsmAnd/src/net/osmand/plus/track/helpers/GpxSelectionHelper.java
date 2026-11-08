@@ -50,6 +50,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +82,7 @@ public class GpxSelectionHelper {
 	private final AtomicBoolean pendingRestoreRunning = new AtomicBoolean();
 	private final AtomicInteger restoreGeneration = new AtomicInteger();
 	private long pendingRestoreStartTime;
+	private volatile String storedSelections;
 	private final Collator collator = OsmAndCollator.primaryCollator();
 	private List<WeakReference<SelectGpxTaskListener>> listeners = new ArrayList<>();
 	private SelectGpxTask selectGpxTask;
@@ -92,12 +94,31 @@ public class GpxSelectionHelper {
 	}
 
 	public void clearAllGpxFilesToShow(boolean backupSelection) {
+		clearAllGpxFilesToShow(backupSelection, false);
+	}
+
+	private void clearAllGpxFilesToShow(boolean backupSelection, boolean keepUnavailable) {
 		List<PendingSelection> pendingSnapshot;
 		synchronized (pendingSelections) {
 			pendingSnapshot = new ArrayList<>(pendingSelections.values());
 		}
 		cancelPendingRestore();
 		selectedGpxFilesBackUp.clear();
+		if (keepUnavailable) {
+			// Tracks missing on this device are not listed, so applying the listed tracks keeps them selected.
+			for (Iterator<PendingSelection> it = pendingSnapshot.iterator(); it.hasNext(); ) {
+				PendingSelection selection = it.next();
+				if (!new File(selection.path).isFile()) {
+					it.remove();
+					PendingSelection kept = new PendingSelection(selection.path, selection.selectedByUser,
+							selection.color, selection.hiddenGroups, restoreGeneration.get());
+					kept.restoreAttempted = true;
+					synchronized (pendingSelections) {
+						pendingSelections.put(kept.key, kept);
+					}
+				}
+			}
+		}
 		if (backupSelection) {
 			for (SelectedGpxFile file : selectedGPXFiles) {
 				BackupSelection backup = BackupSelection.fromGpxFile(
@@ -136,17 +157,16 @@ public class GpxSelectionHelper {
 		for (BackupSelection backup : backups) {
 			if (!backup.currentTrack) {
 				File file = new File(backup.path);
-				if (file.isFile()) {
-					if (backup.gpxFile == null || file.lastModified() != backup.modifiedTime) {
-						PendingSelection selection = new PendingSelection(
-								backup.path, backup.selectedByUser, null, null, generation);
-						synchronized (pendingSelections) {
-							pendingSelections.put(selection.key, selection);
-						}
-					} else {
-						selectGpxFile(backup.gpxFile, GpxSelectionParams.getDefaultSelectionParams()
-								.setSelectedByUser(backup.selectedByUser));
+				// A file missing on this device stays pending until it arrives.
+				if (!file.isFile() || backup.gpxFile == null || file.lastModified() != backup.modifiedTime) {
+					PendingSelection selection = new PendingSelection(
+							backup.path, backup.selectedByUser, null, null, generation);
+					synchronized (pendingSelections) {
+						pendingSelections.put(selection.key, selection);
 					}
+				} else {
+					selectGpxFile(backup.gpxFile, GpxSelectionParams.getDefaultSelectionParams()
+							.setSelectedByUser(backup.selectedByUser));
 				}
 			} else {
 				selectGpxFile(savingTrackHelper.getCurrentTrack().gpxFile,
@@ -367,17 +387,70 @@ public class GpxSelectionHelper {
 	}
 
 	public void loadGPXTracks(@Nullable IProgress progress) {
+		readSelections(app.getSettings().SELECTED_GPX.get());
+	}
+
+	/** Applies selections imported with the global settings without saving them back. */
+	public void onSelectionsImported() {
 		String load = app.getSettings().SELECTED_GPX.get();
+		if (Algorithms.objectEquals(load, storedSelections) || !readSelections(load)) {
+			return;
+		}
+		for (SelectedGpxFile selectedFile : new ArrayList<>(selectedGPXFiles)) {
+			GpxFile gpx = selectedFile.getGpxFile();
+			String path = gpx.getPath();
+			// Only tracks that saving would write can be dropped by the import. Tracks it keeps stay
+			// shown and are re-read as on startup to take their imported state.
+			if (!selectedFile.isShowCurrentTrack() && !selectedFile.notShowNavigationDialog
+					&& !Algorithms.isEmpty(path) && !isPendingSelection(path)) {
+				selectGpxFile(gpx, GpxSelectionParams.newInstance().hideFromMap().syncGroup());
+			}
+		}
+		app.getOsmandMap().refreshMap();
+		if (!app.isApplicationInitializing()) {
+			startPendingGpxRestore();
+		}
+	}
+
+	/** Restores a pending selection whose file has just appeared, for example after a cloud download. */
+	public void onGpxFileAvailable(@NonNull String path) {
+		boolean retry = false;
+		synchronized (pendingSelections) {
+			PendingSelection selection = pendingSelections.get(path);
+			if (selection != null && selection.restoreAttempted) {
+				selection.restoreAttempted = false;
+				selection.restoreAttempts = 0;
+				retry = true;
+			}
+		}
+		if (retry && !app.isApplicationInitializing()) {
+			app.runInUIThread(this::startPendingGpxRestore);
+		}
+	}
+
+	private boolean readSelections(@Nullable String load) {
+		storedSelections = load;
+		List<JSONObject> entries = new ArrayList<>();
+		if (!Algorithms.isEmpty(load)) {
+			try {
+				JSONArray ar = new JSONArray(load);
+				for (int i = 0; i < ar.length(); i++) {
+					entries.add(ar.getJSONObject(i));
+				}
+			} catch (JSONException e) {
+				// Unreadable here, for example a list written by iOS: the stored value and the current state are kept.
+				log.error(e);
+				return false;
+			}
+		}
 		int generation = restoreGeneration.incrementAndGet();
 		synchronized (pendingSelections) {
 			pendingSelections.clear();
 		}
 		selectedGpxFilesBackUp.clear();
-		if (!Algorithms.isEmpty(load)) {
+		if (!entries.isEmpty()) {
 			try {
-				JSONArray ar = new JSONArray(load);
-				for (int i = 0; i < ar.length(); i++) {
-					JSONObject obj = ar.getJSONObject(i);
+				for (JSONObject obj : entries) {
 					boolean backup = obj.has(BACKUP);
 					boolean selectedByUser = obj.optBoolean(SELECTED_BY_USER, true);
 					if (obj.has(FILE)) {
@@ -413,14 +486,15 @@ public class GpxSelectionHelper {
 					}
 				}
 			} catch (Exception e) {
-				app.getSettings().SELECTED_GPX.set("");
 				synchronized (pendingSelections) {
 					pendingSelections.clear();
 				}
 				selectedGpxFilesBackUp.clear();
 				log.error(e);
+				return false;
 			}
 		}
+		return true;
 	}
 
 	public void startPendingGpxRestore() {
@@ -448,8 +522,7 @@ public class GpxSelectionHelper {
 
 		File file = new File(selection.path);
 		if (!file.isFile()) {
-			removePendingSelection(selection);
-			saveCurrentSelections();
+			// Not on this device yet: the selection stays pending and is not retried in this cycle.
 			app.runInUIThread(() -> loadNextPendingSelection(generation));
 			return;
 		}
@@ -476,17 +549,13 @@ public class GpxSelectionHelper {
 								+ " in " + (System.currentTimeMillis() - fileRestoreStart) + " ms");
 						app.getOsmandMap().refreshMap();
 						removePendingSelection(selection);
-					} else if (!file.isFile() || gpx == null || gpx.getError() != null) {
-						removePendingSelection(selection);
-					} else {
+					} else if (file.isFile() && gpx != null && gpx.getError() == null) {
 						markPendingSelectionForRetry(selection);
 					}
-					saveCurrentSelections();
 				}
 			} catch (RuntimeException error) {
 				log.error("Failed to restore selected GPX " + selection.path, error);
 				// Keep the pending preference for a retry on the next process start.
-				saveCurrentSelections();
 			} finally {
 				loadNextPendingSelection(generation);
 			}
@@ -637,7 +706,9 @@ public class GpxSelectionHelper {
 				log.error(e);
 			}
 		}
-		app.getSettings().SELECTED_GPX.set(array.toString());
+		String selections = array.toString();
+		storedSelections = selections;
+		app.getSettings().SELECTED_GPX.set(selections);
 	}
 
 	public SelectedGpxFile selectGpxFile(@NonNull GpxFile gpx, @NonNull GpxSelectionParams params) {
@@ -869,7 +940,7 @@ public class GpxSelectionHelper {
 
 	public void saveTracksVisibility(@NonNull Collection<TrackItem> trackItems, boolean clearPrevious) {
 		if (clearPrevious) {
-			clearAllGpxFilesToShow(true);
+			clearAllGpxFilesToShow(true, true);
 		}
 		List<String> selectedPaths = new ArrayList<>();
 		for (TrackItem item : trackItems) {

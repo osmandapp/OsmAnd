@@ -175,6 +175,8 @@ public class GpxSettingsItem extends FileSettingsItem {
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.showOnMap().syncGroup().setSelectedByUser(selectedGpxFile.selectedByUser);
 					gpxHelper.selectGpxFile(gpxFile, params);
+				} else {
+					gpxHelper.onGpxFileAvailable(file.getAbsolutePath());
 				}
 				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 				KFile kFile = SharedUtil.kFile(file);
