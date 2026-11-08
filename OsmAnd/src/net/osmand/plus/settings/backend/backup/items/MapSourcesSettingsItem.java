@@ -40,6 +40,7 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	private static final int APPROXIMATE_MAP_SOURCES_SIZE_BYTES = 450;
 
 	private List<String> existingItemsNames;
+	private int skippedItemsCount;
 
 	public MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull List<ITileSource> items) {
 		super(app, null, items);
@@ -164,20 +165,18 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	@Override
 	public void apply() {
 		appliedItems = new ArrayList<>();
+		skippedItemsCount = 0;
 		List<ITileSource> itemsToApply = getNewItems();
 		if (!itemsToApply.isEmpty() || !duplicateItems.isEmpty()) {
 			if (shouldReplace) {
 				for (ITileSource tileSource : duplicateItems) {
-					if (tileSource instanceof SQLiteTileSource) {
-						File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName() + IndexConstants.SQLITE_EXT);
-						if (f != null && f.exists() && Algorithms.removeAllFiles(f)) {
-							itemsToApply.add(tileSource);
-						}
-					} else if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
-						File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName());
-						if (f != null && f.exists() && f.isDirectory() && Algorithms.removeAllFiles(f)) {
-							itemsToApply.add(tileSource);
-						}
+					File f = getReplaceableFile(tileSource);
+					if (f == null) {
+						// No source of this type can be replaced under this name (e.g. another type or a
+						// built-in source holds it). Skip it instead of treating it as an installation failure.
+						skippedItemsCount++;
+					} else if (Algorithms.removeAllFiles(f)) {
+						itemsToApply.add(tileSource);
 					}
 				}
 			} else {
@@ -199,9 +198,21 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 		}
 	}
 
+	@Nullable
+	private File getReplaceableFile(@NonNull ITileSource tileSource) {
+		if (tileSource instanceof SQLiteTileSource) {
+			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName() + IndexConstants.SQLITE_EXT);
+			return f != null && f.exists() ? f : null;
+		} else if (tileSource instanceof TileSourceManager.TileSourceTemplate) {
+			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + tileSource.getName());
+			return f != null && f.isDirectory() ? f : null;
+		}
+		return null;
+	}
+
 	@Override
 	public boolean isAppliedLocally() {
-		return !items.isEmpty() && appliedItems.size() == items.size();
+		return !items.isEmpty() && appliedItems.size() + skippedItemsCount == items.size();
 	}
 
 	@Override
@@ -305,8 +316,7 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 					template = tileSourceTemplate;
 				} else {
-					template = SQLiteTileSource.fromBackup(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY,
-							referer, userAgent, timeSupported, expire, inversiveZoom, rule, ext, tileSize, bitDensity, avgSize);
+					template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, userAgent, timeSupported, expire, inversiveZoom, rule);
 				}
 				sources.add(template);
 			}

@@ -133,7 +133,7 @@ class BackupImporter {
 					tasks.add(new ItemFileImportTask(remoteFile, item, true));
 				} else if (item.isAppliedLocally()) {
 					remoteFileItems.put(remoteFile, item);
-					updateFileUploadTime(remoteFile, item);
+					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
 				} else {
 					onItemApplyFailed(item);
 				}

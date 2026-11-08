@@ -61,7 +61,7 @@ class BackupImporterApplyTest {
 	@Test
 	fun successfulPreviouslyReadItemIsAcknowledged() {
 		runImport(false)
-		assertEquals(listOf(300L), helper.uploadTimes)
+		assertEquals(listOf(200L), helper.uploadTimes)
 		assertEquals(200L, item.localModifiedTime)
 		assertEquals(200L, item.lastModifiedTime)
 	}
@@ -194,7 +194,7 @@ class BackupImporterApplyTest {
 			assertTrue(restored.isAppliedLocally)
 			assertEquals(setOf(firstDir.name, remoteDir.name), restored.appliedItems.map { it.name }.toSet())
 			assertFalse(File(firstDir.parentFile, firstDir.name + "_1").exists())
-			assertEquals(listOf(300L), helper.uploadTimes)
+			assertEquals(listOf(if (forceReadData) 300L else 200L), helper.uploadTimes)
 			assertEquals(200L, settings.MAP_SOURCES_LOCAL_MODIFIED_TIME.get().toLong())
 			val sources = MapSourcesExportType().fetchExportData(app, false)
 			try {

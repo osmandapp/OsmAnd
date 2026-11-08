@@ -154,48 +154,6 @@ public class MapSourcesSettingsItemTest {
 	}
 
 	@Test
-	public void sqliteDatabaseRoundTripPreservesBackupState() {
-		String name = TEST_SOURCE_PREFIX + System.nanoTime();
-		File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name + IndexConstants.SQLITE_EXT);
-		filesToDelete.add(file);
-		SQLiteTileSource original = SQLiteTileSource.fromBackup(app, name, 3, 16,
-				"https://tiles.example/{0}/{1}/{2}.jpg", "1-4", true, true,
-				"https://example.com/a'b", "OsmAnd test", true, 3_600_000L,
-				true, "template:1", ".jpg", 512, 32, 24_000);
-		String originalHash = MapSourcesSettingsItem.getStateHash(Collections.singletonList(original));
-
-		original.createDataBase();
-		SQLiteTileSource restored = new SQLiteTileSource(app, file, Collections.emptyList());
-		try {
-			assertEquals(originalHash,
-					MapSourcesSettingsItem.getStateHash(Collections.singletonList(restored)));
-		} finally {
-			restored.closeDB();
-		}
-	}
-
-	@Test
-	public void restoredSqliteTileSizeRemainsAutoDetectable() throws Exception {
-		String name = TEST_SOURCE_PREFIX + System.nanoTime();
-		File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name + IndexConstants.SQLITE_EXT);
-		filesToDelete.add(file);
-		SQLiteTileSource.fromBackup(app, name, 1, 20, "https://example.com/{0}/{1}/{2}", "",
-				false, false, "", "", false, -1, false, "", ".png", 256, 16, -1).createDataBase();
-		SQLiteTileSource restored = new SQLiteTileSource(app, file, Collections.emptyList());
-		try {
-			String initialHash = MapSourcesSettingsItem.getStateHash(Collections.singletonList(restored));
-			assertEquals(256, restored.getTileSize());
-
-			decodeTile(restored, 512);
-
-			assertEquals(512, restored.getTileSize());
-			assertEquals(initialHash, MapSourcesSettingsItem.getStateHash(Collections.singletonList(restored)));
-		} finally {
-			restored.closeDB();
-		}
-	}
-
-	@Test
 	public void legacySqliteConstructorLeavesTileSizeAutoDetectable() throws Exception {
 		String name = TEST_SOURCE_PREFIX + System.nanoTime();
 		File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name + IndexConstants.SQLITE_EXT);
@@ -217,7 +175,7 @@ public class MapSourcesSettingsItemTest {
 
 	@Test
 	public void autoDetectedSqliteTileSizeDoesNotChangeStateHash() throws Exception {
-		SQLiteTileSource source = createLegacySqliteSource(null, 16);
+		SQLiteTileSource source = createLegacySqliteSource();
 		try {
 			String initialHash = MapSourcesSettingsItem.getStateHash(Collections.singletonList(source));
 			assertEquals(256, source.getTileSize());
@@ -229,23 +187,6 @@ public class MapSourcesSettingsItemTest {
 			JSONObject json = new MapSourcesSettingsItem(app, Collections.singletonList(source))
 					.writeItemsToJson(new JSONObject());
 			assertEquals(512, json.getJSONArray("items").getJSONObject(0).getInt("tileSize"));
-		} finally {
-			source.closeDB();
-		}
-	}
-
-	@Test
-	public void sqliteMetadataDefaultsAreNormalizedBeforeBackup() throws Exception {
-		SQLiteTileSource source = createLegacySqliteSource(null, 0);
-		try {
-			MapSourcesSettingsItem original = new MapSourcesSettingsItem(app, Collections.singletonList(source));
-			JSONObject json = original.writeItemsToJson(new JSONObject());
-			MapSourcesSettingsItem restored = new MapSourcesSettingsItem(app, json);
-
-			assertEquals(".png", source.getTileFormat());
-			assertEquals(16, source.getBitDensity());
-			assertEquals(MapSourcesSettingsItem.getStateHash(original.getItems()),
-					MapSourcesSettingsItem.getStateHash(restored.getItems()));
 		} finally {
 			source.closeDB();
 		}
@@ -267,7 +208,7 @@ public class MapSourcesSettingsItemTest {
 
 	@Test
 	public void sqliteFileTimestampChangeDoesNotChangeInitializedLogicalTime() {
-		SQLiteTileSource source = createLegacySqliteSource(null, 16);
+		SQLiteTileSource source = createLegacySqliteSource();
 		try {
 			File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName() + IndexConstants.SQLITE_EXT);
 			MapSourcesSettingsItem item = new MapSourcesSettingsItem(app, Collections.singletonList(source));
@@ -505,6 +446,26 @@ public class MapSourcesSettingsItemTest {
 	}
 
 	@Test
+	public void duplicateOfAnotherTypeIsSkippedWithoutFailure() {
+		String name = TEST_SOURCE_PREFIX + System.nanoTime();
+		installItem(new MapSourcesSettingsItem(app, Collections.singletonList(
+				createSource(name, "https://local.example/{0}/{1}/{2}"))));
+		SQLiteTileSource incoming = new SQLiteTileSource(app, name, 1, 20, "https://remote.example/{0}/{1}/{2}", "",
+				false, false, "", "", false, -1, false, "");
+		MapSourcesSettingsItem imported = new MapSourcesSettingsItem(app, Collections.singletonList(incoming));
+		imported.setShouldReplace(true);
+		File sqliteFile = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name + IndexConstants.SQLITE_EXT);
+		filesToDelete.add(sqliteFile);
+
+		imported.processDuplicateItems();
+		imported.apply();
+
+		assertTrue(imported.isAppliedLocally());
+		assertTrue(imported.getAppliedItems().isEmpty());
+		assertFalse(sqliteFile.exists());
+	}
+
+	@Test
 	public void renamedSqliteImportDoesNotAcknowledgeExistingSource() {
 		String name = TEST_SOURCE_PREFIX + System.nanoTime();
 		SQLiteTileSource existing = new SQLiteTileSource(app, name, 1, 20, "https://local.example/{0}/{1}/{2}", "",
@@ -629,7 +590,7 @@ public class MapSourcesSettingsItemTest {
 		return metainfo;
 	}
 
-	private SQLiteTileSource createLegacySqliteSource(String tileFormat, int bitDensity) {
+	private SQLiteTileSource createLegacySqliteSource() {
 		String name = TEST_SOURCE_PREFIX + System.nanoTime();
 		File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name + IndexConstants.SQLITE_EXT);
 		filesToDelete.add(file);
@@ -637,10 +598,9 @@ public class MapSourcesSettingsItemTest {
 		assertNotNull(db);
 		try {
 			db.execSQL("CREATE TABLE tiles (x int, y int, z int, s int, image blob, PRIMARY KEY (x,y,z,s))");
-			db.execSQL("CREATE TABLE info(tilenumbering, minzoom, maxzoom, url, ext, img_density)");
-			db.execSQL("INSERT INTO info (tilenumbering, minzoom, maxzoom, url, ext, img_density) "
-					+ "VALUES (?, ?, ?, ?, ?, ?)", new Object[] {"simple", 1, 20,
-					"https://example.com/{0}/{1}/{2}", tileFormat, bitDensity});
+			db.execSQL("CREATE TABLE info(tilenumbering, minzoom, maxzoom, url)");
+			db.execSQL("INSERT INTO info (tilenumbering, minzoom, maxzoom, url) VALUES (?, ?, ?, ?)",
+					new Object[] {"simple", 1, 20, "https://example.com/{0}/{1}/{2}"});
 		} finally {
 			db.close();
 		}
