@@ -5241,4 +5241,6 @@
     <string name="poi_service_abbreviation">Javni servis</string>
     <string name="poi_internet_access_fee">Naknada za pristup internetu</string>
     <string name="poi_historic_building">Istorijska zgrada</string>
+    <string name="poi_socket_type2_cable_yes">Kabl tipa 2</string>
+    <string name="poi_zone">Zona</string>
 </resources>
