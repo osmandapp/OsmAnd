@@ -185,6 +185,8 @@ public class ClimbsCountWidget extends SimpleWidget {
 
 	private int totalClimbs = 0;
 	private int completedClimbs = 0;
+	private List<Climb> climbs = new ArrayList<>();
+	private List<Double> cumulativeDistances = new ArrayList<>();
 	private CurrentClimbInfo currentClimbInfo;
 	private View climbProfileOverlay;
 	private ElevationProfileView elevationProfileView;
@@ -244,6 +246,7 @@ public class ClimbsCountWidget extends SimpleWidget {
 		result.info.totalClimbs = 0;
 		result.info.completedClimbs = 0;
 		result.climbs = new ArrayList<>();
+		climbs.clear();
 
 		GpxFile gpxFile = routingHelper.getCurrentGPX();
 		if (gpxFile == null) {
@@ -282,6 +285,7 @@ public class ClimbsCountWidget extends SimpleWidget {
 					if (avgGrade >= minGrade) {
 						Climb climb = createClimb(climbStartIndex, i - 1, netClimbGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
 						result.climbs.add(climb);
+						climbs.add(climb);
 						result.info.totalClimbs++;
 					}
 				}
@@ -350,6 +354,7 @@ public class ClimbsCountWidget extends SimpleWidget {
 							if (avgGrade >= minGrade) {
 								Climb climb = createClimb(climbStartIndex, i - 1, totalGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
 								result.climbs.add(climb);
+								climbs.add(climb);
 								result.info.totalClimbs++;
 							}
 						}
@@ -367,9 +372,27 @@ public class ClimbsCountWidget extends SimpleWidget {
 			if (avgGrade >= minGrade) {
 				Climb climb = createClimb(climbStartIndex, allPoints.size() - 1, currentClimbGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
 				result.climbs.add(climb);
+				climbs.add(climb);
 				result.info.totalClimbs++;
 			}
 		}
+
+		// Build cumulative distances for all points
+		cumulativeDistances.clear();
+		cumulativeDistances.add(0.0);
+		for (int i = 1; i < allPoints.size(); i++) {
+			WptPt prev = allPoints.get(i - 1);
+			WptPt curr = allPoints.get(i);
+			if (!Double.isNaN(prev.getEle()) && !Double.isNaN(curr.getEle())) {
+				double dist = MapUtils.getDistance(prev.getLatitude(), prev.getLongitude(), curr.getLatitude(), curr.getLongitude());
+				cumulativeDistances.add(cumulativeDistances.get(i - 1) + dist);
+			} else {
+				cumulativeDistances.add(cumulativeDistances.get(i - 1));
+			}
+		}
+		
+		// Also update the member variable
+		this.cumulativeDistances = new ArrayList<>(cumulativeDistances);
 
 		// Calculate completed climbs based on current location
 		RouteCalculationResult route = routingHelper.getRoute();
@@ -378,17 +401,32 @@ public class ClimbsCountWidget extends SimpleWidget {
 			int wholeDistance = route.getWholeDistance();
 
 			// Find which climb the user is currently on
-			updateCurrentClimbInfo(result.climbs, allPoints, routeDistance);
+			updateCurrentClimbInfo(result.climbs, allPoints, routeDistance, cumulativeDistances);
 
-			if (wholeDistance > 0) {
-				float routeProgress = (float) routeDistance / wholeDistance;
-				result.info.completedClimbs = (int) (result.info.totalClimbs * routeProgress);
-			} else {
+			// Count completed climbs based on actual position
+			// A climb is completed if the user has passed its end point
+			int completedCount = 0;
+			for (Climb climb : result.climbs) {
+				if (climb.endIndex < cumulativeDistances.size()) {
+					double climbEndDist = cumulativeDistances.get(climb.endIndex);
+					if (routeDistance >= climbEndDist) {
+						completedCount++;
+					}
+				}
+			}
+			result.info.completedClimbs = completedCount;
+
+			// Also update completedClimbs member variable for overlay logic
+			this.completedClimbs = completedCount;
+
+			if (wholeDistance == 0) {
 				result.info.completedClimbs = 0;
+				this.completedClimbs = 0;
 			}
 		} else {
 			result.info.completedClimbs = 0;
 			currentClimbInfo = null;
+			this.completedClimbs = 0;
 		}
 
 		return result;
@@ -407,24 +445,10 @@ public class ClimbsCountWidget extends SimpleWidget {
 		return climb;
 	}
 
-	private void updateCurrentClimbInfo(List<Climb> climbs, List<WptPt> allPoints, int currentDistanceFromStart) {
-		if (climbs.isEmpty() || allPoints.isEmpty()) {
+	private void updateCurrentClimbInfo(List<Climb> climbs, List<WptPt> allPoints, int currentDistanceFromStart, List<Double> cumulativeDistances) {
+		if (climbs.isEmpty() || allPoints.isEmpty() || cumulativeDistances.isEmpty()) {
 			currentClimbInfo = null;
 			return;
-		}
-
-		// Calculate cumulative distances for each point
-		List<Double> cumulativeDistances = new ArrayList<>();
-		cumulativeDistances.add(0.0);
-		for (int i = 1; i < allPoints.size(); i++) {
-			WptPt prev = allPoints.get(i - 1);
-			WptPt curr = allPoints.get(i);
-			if (!Double.isNaN(prev.getEle()) && !Double.isNaN(curr.getEle())) {
-				double dist = MapUtils.getDistance(prev.getLatitude(), prev.getLongitude(), curr.getLatitude(), curr.getLongitude());
-				cumulativeDistances.add(cumulativeDistances.get(i - 1) + dist);
-			} else {
-				cumulativeDistances.add(cumulativeDistances.get(i - 1));
-			}
 		}
 
 		// Find current climb based on current distance
@@ -460,6 +484,58 @@ public class ClimbsCountWidget extends SimpleWidget {
 
 		// User is not on any climb
 		currentClimbInfo = null;
+	}
+
+	@Nullable
+	private Climb findNextClimb(@NonNull List<Double> cumulativeDistances, int currentDistanceFromStart) {
+		// Look for the next climb that starts after current position
+		Climb nextClimb = null;
+		double minDistanceToNext = Double.MAX_VALUE;
+		
+		for (Climb climb : climbs) {
+			if (climb.startIndex < cumulativeDistances.size()) {
+				double climbStartDist = cumulativeDistances.get(climb.startIndex);
+				
+				// If climb starts after current position
+				if (climbStartDist > currentDistanceFromStart) {
+					double distanceToClimb = climbStartDist - currentDistanceFromStart;
+					
+					// Consider climbs within 500m
+					if (distanceToClimb < 500 && distanceToClimb < minDistanceToNext) {
+						minDistanceToNext = distanceToClimb;
+						nextClimb = climb;
+					}
+				}
+			}
+		}
+
+		return nextClimb;
+	}
+
+	@Nullable
+	private Climb findPreviousClimb(@NonNull List<Double> cumulativeDistances, int currentDistanceFromStart) {
+		// Look for the most recent climb that ended before current position
+		Climb prevClimb = null;
+		double minDistanceAfterEnd = Double.MAX_VALUE;
+		
+		for (Climb climb : climbs) {
+			if (climb.endIndex < cumulativeDistances.size()) {
+				double climbEndDist = cumulativeDistances.get(climb.endIndex);
+				
+				// If climb ended before current position
+				if (climbEndDist < currentDistanceFromStart) {
+					double distanceAfterClimb = currentDistanceFromStart - climbEndDist;
+					
+					// Consider climbs that were completed within last 200m
+					if (distanceAfterClimb < 200 && distanceAfterClimb < minDistanceAfterEnd) {
+						minDistanceAfterEnd = distanceAfterClimb;
+						prevClimb = climb;
+					}
+				}
+			}
+		}
+
+		return prevClimb;
 	}
 
 	// Result class to hold both info and climbs
@@ -559,11 +635,51 @@ public class ClimbsCountWidget extends SimpleWidget {
 			return;
 		}
 
+		// Show overlay if user is on a climb
 		if (currentClimbInfo != null && currentClimbInfo.climb != null) {
 			showClimbProfileOverlay(currentClimbInfo);
-		} else {
-			hideClimbProfileOverlay();
+			return;
 		}
+
+		// Also show overlay for next upcoming climb (within 500m)
+		// This helps users see what's coming up
+		RouteCalculationResult route = routingHelper.getRoute();
+		if (route != null && !cumulativeDistances.isEmpty()) {
+			int routeDistance = route.getDistanceFromStart();
+			
+			// Find next climb
+			Climb nextClimb = findNextClimb(cumulativeDistances, routeDistance);
+			if (nextClimb != null) {
+				// Create a dummy CurrentClimbInfo for the next climb
+				// This will show the climb profile but with 0 progress
+				CurrentClimbInfo nextClimbInfo = new CurrentClimbInfo();
+				nextClimbInfo.climb = nextClimb;
+				nextClimbInfo.currentPointIndex = nextClimb.startIndex;
+				nextClimbInfo.currentDistanceInClimb = 0;
+				nextClimbInfo.totalClimbDistance = nextClimb.distance;
+				
+				showClimbProfileOverlay(nextClimbInfo);
+				return;
+			}
+			
+			// Also check for recently completed climb (within 200m after end)
+			Climb prevClimb = findPreviousClimb(cumulativeDistances, routeDistance);
+			if (prevClimb != null) {
+				// Create a dummy CurrentClimbInfo for the previous climb
+				// This will show the climb profile with 100% progress (completed)
+				CurrentClimbInfo prevClimbInfo = new CurrentClimbInfo();
+				prevClimbInfo.climb = prevClimb;
+				prevClimbInfo.currentPointIndex = prevClimb.endIndex;
+				prevClimbInfo.currentDistanceInClimb = prevClimb.distance;
+				prevClimbInfo.totalClimbDistance = prevClimb.distance;
+				
+				showClimbProfileOverlay(prevClimbInfo);
+				return;
+			}
+		}
+
+		// Hide overlay if no climb is active, upcoming, or recently completed
+		hideClimbProfileOverlay();
 	}
 
 	private void showClimbProfileOverlay(@NonNull CurrentClimbInfo climbInfo) {
