@@ -152,7 +152,7 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 		if (langs != null) {
 			val langArr = langs.split(",")
 			for (lang in langArr) {
-				if (lang == "en") {
+				if (lang == "en" || lang == "ms") {
 					return true
 				}
 			}

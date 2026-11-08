@@ -50,6 +50,7 @@ public class Abbreviations {
 		addConjunction("et");
 		addConjunction("y");
 		addConjunction("и");
+		addConjunction("dan"); // Malay / Indonesian
 		
 		
 
@@ -71,6 +72,16 @@ public class Abbreviations {
 		addStreetStatus("st", "Street"); // 2 values could be saint
 		addStreetStatus("hwy", "Highway");
 		addStreetStatus("blvd", "Boulevard");
+		// Malay street status (DBP-style abbreviations, also used in Indonesia)
+		addStreetStatus("jln", "Jalan");
+		addStreetStatus("lrg", "Lorong");
+		addStreetStatus("tmn", "Taman");
+		addStreetStatus("kg", "Kampung");
+		addStreetStatus("sg", "Sungai");
+		addStreetStatus("bkt", "Bukit");
+		addStreetStatus("bdr", "Bandar");
+		addStreetStatus("pkn", "Pekan");
+		addStreetStatus("tg", "Tanjung");
 	}
 
     // Indexing data
