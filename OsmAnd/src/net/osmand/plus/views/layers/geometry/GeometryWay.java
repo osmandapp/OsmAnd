@@ -49,6 +49,8 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 	public long linesPriority = Long.MIN_VALUE;
 	public VectorLinesCollection vectorLinesCollection;
 	public VectorLineArrowsProvider vectorLineArrowsProvider;
+	@Nullable
+	private TrackLinesCollection sharedLines;
 
 	public interface GeometryWayProvider {
 		double getLatitude(int index);
@@ -163,10 +165,34 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 				vectorLineArrowsProvider = null;
 			}
 			if (vectorLinesCollection != null) {
-				mapRenderer.removeSymbolsProvider(vectorLinesCollection);
+				if (sharedLines == null) {
+					mapRenderer.removeSymbolsProvider(vectorLinesCollection);
+				} else if (vectorLinesCollection == sharedLines.getCollection()) {
+					drawer.removeOwnLines(vectorLinesCollection);
+				} else {
+					drawer.forgetOwnLines();
+				}
 				vectorLinesCollection = null;
 			}
 		}
+	}
+
+	/**
+	 * Draws the lines of this way into the collection shared by the whole track instead of its own one.
+	 * Returns true when the way has to be drawn again.
+	 */
+	public boolean setSharedLines(@Nullable TrackLinesCollection sharedLines) {
+		if (this.sharedLines == sharedLines) {
+			return false;
+		}
+		resetSymbolProviders();
+		this.sharedLines = sharedLines;
+		if (sharedLines != null) {
+			drawer.useSharedCollection(sharedLines.allocateLineIds());
+		} else {
+			drawer.useOwnCollection();
+		}
+		return true;
 	}
 
 	public void resetArrowsProvider() {
@@ -559,6 +585,16 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 			boolean newLine3DState = false;
 			if (!Algorithms.isEmpty(pathsData)) {
 				newLine3DState = pathsData.get(0).style.trackVisualizationType != Gpx3DVisualizationType.NONE;
+			}
+			TrackLinesCollection sharedLines = this.sharedLines;
+			if (sharedLines != null) {
+				collection = sharedLines.obtain(mapRenderer, newLine3DState, linesPriority);
+				if (collection != vectorLinesCollection) {
+					drawer.forgetOwnLines();
+				}
+				drawer.drawPath(collection, baseOrder, shouldDrawArrows(), pathsData);
+				this.vectorLinesCollection = collection;
+				return;
 			}
 			boolean currentLine3DState = vectorLinesCollection != null &&
 					vectorLinesCollection.getHasVolumetricSymbols();

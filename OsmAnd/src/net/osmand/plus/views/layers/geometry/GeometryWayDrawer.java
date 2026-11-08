@@ -29,7 +29,10 @@ import net.osmand.shared.routing.Gpx3DWallColorType;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GeometryWayDrawer<T extends GeometryWayContext> {
 
@@ -38,6 +41,12 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	private static final Log log = PlatformUtil.getLog(GeometryWayDrawer.class);
 
 	private final T context;
+
+	// In a collection shared with other ways: the first id of this way's lines and the lines it added,
+	// so it never scans or removes the lines of the others
+	protected int firstLineId = LINE_ID;
+	@Nullable
+	private Map<Integer, VectorLine> ownLines;
 
 	public static class DrawPathData {
 		Path path;
@@ -75,6 +84,31 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	public GeometryWayDrawer(T context) {
 		this.context = context;
+	}
+
+	public void useSharedCollection(int firstLineId) {
+		this.firstLineId = firstLineId;
+		this.ownLines = new HashMap<>();
+	}
+
+	public void useOwnCollection() {
+		this.firstLineId = LINE_ID;
+		this.ownLines = null;
+	}
+
+	public void removeOwnLines(@NonNull VectorLinesCollection collection) {
+		if (ownLines != null) {
+			for (VectorLine line : ownLines.values()) {
+				collection.removeLine(line);
+			}
+			ownLines.clear();
+		}
+	}
+
+	public void forgetOwnLines() {
+		if (ownLines != null) {
+			ownLines.clear();
+		}
 	}
 
 	/** While a flyover video is recorded the arrows stay at their places on a growing line and while zooming. */
@@ -202,9 +236,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			outlineColorizationMapping = colorizationMapping;
 		}
 
-		QListVectorLine lines = collection.getLines();
-		for (int i = 0; i < lines.size(); i++) {
-			VectorLine line = lines.get(i);
+		for (VectorLine line : getLinesToUpdate(collection, lineId)) {
 			if (line.getLineId() == lineId) {
 				line.setElevationScaleFactor(additionalExaggeration);
 				line.setFillColor(NativeUtilities.createFColorARGB(color));
@@ -324,7 +356,25 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			builder.setFillColor(NativeUtilities.createFColorARGB(color));
 			builder.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor));
 		}
-		builder.buildAndAddToCollection(collection).setArrowsFixedOnPath(isArrowsFixedOnPath());
+		VectorLine newLine = builder.buildAndAddToCollection(collection);
+		newLine.setArrowsFixedOnPath(isArrowsFixedOnPath());
+		if (ownLines != null) {
+			ownLines.put(lineId, newLine);
+		}
+	}
+
+	@NonNull
+	private List<VectorLine> getLinesToUpdate(@NonNull VectorLinesCollection collection, int lineId) {
+		if (ownLines != null) {
+			VectorLine line = ownLines.get(lineId);
+			return line != null ? Collections.singletonList(line) : Collections.emptyList();
+		}
+		QListVectorLine lines = collection.getLines();
+		List<VectorLine> result = new ArrayList<>();
+		for (int i = 0; i < lines.size(); i++) {
+			result.add(lines.get(i));
+		}
+		return result;
 	}
 
 	@NonNull
@@ -389,7 +439,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	                     @NonNull List<DrawPathData31> pathsData) {
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
-		int lineId = LINE_ID;
+		int lineId = firstLineId;
 		for (DrawPathData31 data : pathsData) {
 			if (!dataArr.isEmpty() && prevStyle != null && (data != null &&
 					!data.style.equalsExceptColor(prevStyle) || data.style.isUnique()

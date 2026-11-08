@@ -66,7 +66,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	                            boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
-		int lineId = LINE_ID;
+		int lineId = firstLineId;
 		for (DrawPathData31 data : pathsData) {
 			if (!dataArr.isEmpty() && prevStyle != null && data.style == null) {
 				drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);

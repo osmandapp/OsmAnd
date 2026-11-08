@@ -80,6 +80,7 @@ import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
 import net.osmand.plus.views.layers.core.WptPtTileProvider;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
+import net.osmand.plus.views.layers.geometry.TrackLinesCollection;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -165,6 +166,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private List<SelectedGpxFile> trackDbItemsSelection;
 	private final Map<String, CachedTrack> segmentsCache = new ConcurrentHashMap<>();
 	private final Map<String, Set<TrkSegment>> renderedSegmentsCache = new ConcurrentHashMap<>();
+	private final Map<String, TrackLinesCollection> trackLinesCache = new ConcurrentHashMap<>();
 	private SelectedGpxFile tmpVisibleTrack;
 
 	private final List<WptPt> pointsCache = new ArrayList<>();
@@ -1339,6 +1341,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else if (coloringType.isTrackSolid() || coloringType.isRouteInfoAttribute()) {
 			segments.addAll(selectedGpxFile.getPointsToDisplay());
 		}
+		// One lines collection for the whole track. Not with arrows: one arrows provider over all lines would
+		// rebuild the arrows of every line each time any line changes
+		boolean shareLines = hasMapRenderer && !currentTrack && !gradient && coloringType.isTrackSolid()
+				&& !appearanceHelper.isShowArrowsForTrack(gpxFile, gpxItem, dirItem, selected);
+		TrackLinesCollection trackLines = null;
+		if (shareLines) {
+			trackLines = trackLinesCache.computeIfAbsent(gpxFilePath, path -> new TrackLinesCollection());
+		} else {
+			resetTrackLines(gpxFilePath);
+		}
 
 		List<TrkSegment> oldSegments = new ArrayList<>();
 		Set<TrkSegment> renderedSegments = renderedSegmentsCache.get(gpxFilePath);
@@ -1403,6 +1415,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					|| mapActivityInvalidated || invalidated || newTsRenderer || !renderedSegments.contains(ts);
 			if (ts.getRenderer() instanceof RenderableSegment renderableSegment) {
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
+				GpxGeometryWay segmentWay = renderableSegment.getGeometryWay();
+				if (hasMapRenderer && segmentWay != null) {
+					updated |= segmentWay.setSharedLines(trackLines);
+				}
 				GpxLineStyleType lineStyleType = selected && coloringType.isTrackSolid()
 						? appearanceHelper.getLineStyleTypeForTrack(gpxFile, gpxItem, dirItem)
 						: GpxLineStyleType.SOLID;
@@ -1714,6 +1730,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		for (SelectedGpxFile gpx : unselectedGpxFiles) {
+			resetTrackLines(gpx.getGpxFileToDisplay().getPath());
 			resetSymbolProviders(gpx.getPointsToDisplay());
 		}
 		Set<String> cachedTracksPaths = segmentsCache.keySet();
@@ -1959,7 +1976,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
+	// before the segments are reset, so that they do not remove their lines one by one
+	private void resetTrackLines(@NonNull String path) {
+		TrackLinesCollection trackLines = trackLinesCache.remove(path);
+		if (trackLines != null) {
+			trackLines.reset(getMapRenderer());
+		}
+	}
+
 	private void removeSelectedFilesSegments(@NonNull String path) {
+		resetTrackLines(path);
 		Set<TrkSegment> renderedSegments = renderedSegmentsCache.remove(path);
 		if (renderedSegments != null) {
 			for (TrkSegment renderedSegment : renderedSegments) {
@@ -1972,6 +1998,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void clearSelectedFilesSegments() {
 		segmentsCache.clear();
+		for (String path : new ArrayList<>(trackLinesCache.keySet())) {
+			resetTrackLines(path);
+		}
 		if (hasMapRenderer()) {
 			for (Set<TrkSegment> segments : renderedSegmentsCache.values()) {
 				for (TrkSegment segment : segments) {
