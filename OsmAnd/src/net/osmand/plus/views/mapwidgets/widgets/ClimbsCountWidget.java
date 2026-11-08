@@ -238,7 +238,11 @@ public class ClimbsCountWidget extends SimpleWidget {
 	}
 
 	private boolean isRouteAvailable() {
-		return routingHelper != null && routingHelper.isFollowingMode() && routingHelper.getCurrentGPX() != null;
+		if (routingHelper == null || !routingHelper.isFollowingMode()) {
+			return false;
+		}
+		// Route is available if we have a GPX file or a calculated route
+		return routingHelper.getCurrentGPX() != null || routingHelper.getRoute() != null;
 	}
 
 	private ClimbsResult calculateClimbs(int minElevation, float minGrade) {
@@ -248,14 +252,35 @@ public class ClimbsCountWidget extends SimpleWidget {
 		result.climbs = new ArrayList<>();
 		climbs.clear();
 
+		// Try to get points from GPX file first, then from calculated route
+		List<WptPt> allPoints = new ArrayList<>();
+		
 		GpxFile gpxFile = routingHelper.getCurrentGPX();
-		if (gpxFile == null) {
-			return result;
+		if (gpxFile != null) {
+			List<WptPt> gpxPoints = gpxFile.getAllSegmentsPoints();
+			if (gpxPoints != null && !gpxPoints.isEmpty()) {
+				allPoints.addAll(gpxPoints);
+			}
 		}
-
-		// Get all points from the route using the public API
-		List<WptPt> allPoints = gpxFile.getAllSegmentsPoints();
-		if (allPoints == null || allPoints.size() < 2) {
+		
+		// If no GPX or GPX has no points, try to get points from calculated route
+		if (allPoints.isEmpty()) {
+			RouteCalculationResult route = routingHelper.getRoute();
+			if (route != null) {
+				List<Location> locations = route.getImmutableAllLocations();
+				if (locations != null && !locations.isEmpty()) {
+					for (Location loc : locations) {
+						WptPt point = new WptPt();
+						point.setLat(loc.getLatitude());
+						point.setLon(loc.getLongitude());
+						point.setEle(loc.getAltitude());
+						allPoints.add(point);
+					}
+				}
+			}
+		}
+		
+		if (allPoints.size() < 2) {
 			return result;
 		}
 
