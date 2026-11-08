@@ -424,6 +424,43 @@ public class FavouritePoint implements LocationPoint, Linkable {
 				&& (this.backgroundType == point.backgroundType);
 	}
 
+	/**
+	 * Compares links as they are written to GPX, so a point read back from its group file equals the saved one:
+	 * links with a blank href are not written, empty text or type is read back as null.
+	 */
+	public boolean linksEqual(@NonNull FavouritePoint point) {
+		int size = links != null ? links.size() : 0;
+		int otherSize = point.links != null ? point.links.size() : 0;
+		int i = nextSavedLink(links, 0);
+		int j = nextSavedLink(point.links, 0);
+		while (i < size && j < otherSize) {
+			Link link = links.get(i);
+			Link other = point.links.get(j);
+			if (!Algorithms.stringsEqual(link.getHref(), other.getHref())
+					|| !Algorithms.stringsEqual(emptyToNull(link.getText()), emptyToNull(other.getText()))
+					|| !Algorithms.stringsEqual(emptyToNull(link.getType()), emptyToNull(other.getType()))) {
+				return false;
+			}
+			i = nextSavedLink(links, i + 1);
+			j = nextSavedLink(point.links, j + 1);
+		}
+		return i >= size && j >= otherSize;
+	}
+
+	private static int nextSavedLink(@Nullable List<Link> links, int from) {
+		int size = links != null ? links.size() : 0;
+		int index = from;
+		while (index < size && (links.get(index) == null || Algorithms.isBlank(links.get(index).getHref()))) {
+			index++;
+		}
+		return index;
+	}
+
+	@Nullable
+	private static String emptyToNull(@Nullable String value) {
+		return Algorithms.isEmpty(value) ? null : value;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -527,9 +564,13 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		}
 		if (getPickupDate() > 0) {
 			extensions.put(PICKUP_DATE, GpxUtilities.INSTANCE.formatTime(getPickupDate()));
+		} else {
+			extensions.remove(PICKUP_DATE);
 		}
 		if (getCalendarEvent()) {
 			extensions.put(CALENDAR_EXTENSION, "true");
+		} else {
+			extensions.remove(CALENDAR_EXTENSION);
 		}
 		if (iconId != 0) {
 			point.setIconName(getIconEntryName(ctx).substring(3));
@@ -542,6 +583,9 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		}
 		if (getColor() != 0) {
 			point.setColor(getColor());
+		} else {
+			// the colour read from the file comes back with the amenity extensions
+			point.removeColor();
 		}
 		if (!Algorithms.isEmpty(amenityOriginName)) {
 			point.setAmenityOriginName(amenityOriginName);

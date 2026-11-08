@@ -35,6 +35,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.DelayAutoCompleteTextView;
 
@@ -97,7 +98,9 @@ public class PanoramaxFiltersFragment extends BaseFullScreenFragment {
         Button reloadTile = view.findViewById(R.id.button_reload_tile);
         reloadTile.setOnClickListener(v -> {
             ResourceManager manager = app.getResourceManager();
+            // Clear vectors first so in-flight renders cannot remain valid.
             manager.clearCacheAndTiles(TileSourceManager.getPanoramaxVectorSource());
+            plugin.reload();
             mapActivity.refreshMap();
         });
 
@@ -144,12 +147,9 @@ public class PanoramaxFiltersFragment extends BaseFullScreenFragment {
 
         EditText dateFromEt = view.findViewById(R.id.date_from_edit_text);
         DatePickerDialog.OnDateSetListener dateFromDialog = (v, year, monthOfYear, dayOfMonth) -> {
-            Calendar from = Calendar.getInstance();
-            from.set(Calendar.YEAR, year);
-            from.set(Calendar.MONTH, monthOfYear);
-            from.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            dateFromEt.setText(dateFormat.format(from.getTime()));
-            plugin.PANORAMAX_FILTER_FROM_DATE.set(from.getTimeInMillis());
+            long from = OsmAndFormatter.getStartOfDay(year, monthOfYear, dayOfMonth);
+            dateFromEt.setText(dateFormat.format(new Date(from)));
+            plugin.PANORAMAX_FILTER_FROM_DATE.set(from);
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         };
@@ -165,12 +165,9 @@ public class PanoramaxFiltersFragment extends BaseFullScreenFragment {
 
         EditText dateToEt = view.findViewById(R.id.date_to_edit_text);
         DatePickerDialog.OnDateSetListener dateToDialog = (v, year, monthOfYear, dayOfMonth) -> {
-            Calendar to = Calendar.getInstance();
-            to.set(Calendar.YEAR, year);
-            to.set(Calendar.MONTH, monthOfYear);
-            to.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            dateToEt.setText(dateFormat.format(to.getTime()));
-            plugin.PANORAMAX_FILTER_TO_DATE.set(to.getTimeInMillis());
+            long to = OsmAndFormatter.getEndOfDay(year, monthOfYear, dayOfMonth);
+            dateToEt.setText(dateFormat.format(new Date(to)));
+            plugin.PANORAMAX_FILTER_TO_DATE.set(to);
             enableButtonApply(view);
             mapActivity.getDashboard().refreshContent(true);
         };
@@ -214,9 +211,19 @@ public class PanoramaxFiltersFragment extends BaseFullScreenFragment {
             String dateFrom = dateFromEt.getText().toString();
             String dateTo = dateToEt.getText().toString();
 
-            if (!plugin.PANORAMAX_FILTER_USERNAME.get().isEmpty() || !dateFrom.isEmpty() || !dateTo.isEmpty() || plugin.PANORAMAX_FILTER_PANO.get()) {
-                plugin.USE_PANORAMAX_FILTER.set(true);
+            // Autocomplete results may lag behind edits, so use a resolved account only
+            // while it still matches the current field value.
+            String storedUser = plugin.PANORAMAX_FILTER_USERNAME.get();
+            String storedUserKey = plugin.PANORAMAX_FILTER_USER_KEY.get();
+            boolean resolvedUser = !storedUser.isEmpty() && !storedUserKey.isEmpty()
+                    && storedUser.equals(username.trim());
+            if (!resolvedUser) {
+                plugin.PANORAMAX_FILTER_USER_KEY.set("");
+                plugin.PANORAMAX_FILTER_USERNAME.set("");
             }
+            boolean filtering = resolvedUser
+                    || !dateFrom.isEmpty() || !dateTo.isEmpty() || plugin.PANORAMAX_FILTER_PANO.get();
+            plugin.USE_PANORAMAX_FILTER.set(filtering);
             if (dateFrom.isEmpty()) {
                 plugin.PANORAMAX_FILTER_FROM_DATE.set(0L);
             }

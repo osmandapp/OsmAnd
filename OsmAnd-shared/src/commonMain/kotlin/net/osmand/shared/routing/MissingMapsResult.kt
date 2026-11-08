@@ -3,9 +3,9 @@ package net.osmand.shared.routing
 /**
  * The outcome of the missing maps check, as far as [RouteCalculationProgress] is concerned.
  *
- * Working the outcome out needs the region index and a whole routing context, neither of which is
- * here yet, so the calculation stays in OsmAnd-java and only its answer crosses over. The progress
- * itself just carries the reference; the one thing it is asked for is the message below.
+ * The missing maps calculation (`MissingMapsCalculator` in OsmAnd-java) is not implemented in
+ * shared. This interface lets a caller supply its result to [RouteCalculationProgress], which
+ * carries the reference. Consumers can read the error message through this interface.
  */
 interface MissingMapsResult {
 

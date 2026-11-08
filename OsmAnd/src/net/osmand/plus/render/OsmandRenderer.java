@@ -290,7 +290,7 @@ public class OsmandRenderer {
 			// notifyListeners(mapTileDownloader);
 			drawIconsOverCanvas(rc, cv);
 			// notifyListeners(mapTileDownloader);
-			textRenderer.drawTextOverCanvas(rc, cv, rc.preferredLocale);
+			textRenderer.drawTextOverCanvas(rc, cv);
 			notifyListeners(mapTileDownloader);
 
 			rc.renderingTime = System.currentTimeMillis() - now;

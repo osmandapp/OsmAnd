@@ -48,6 +48,9 @@ public class WeatherWidget extends SimpleWidget {
 
 	private static final int MAX_METERS_TO_PREVIOUS_FORECAST = 30 * 1000;
 	private static final int HIDE_OLD_DATA_DELAY = 1000;
+	// the core evaluates a weather tile per request, and a moving map updates widgets on every frame;
+	// MapInfoLayer updates them every 500 ms while the map stands, so the final centre is still requested
+	private static final long UPDATE_INTERVAL_MILLIS = 500;
 
 	private final WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 	private final WeatherHelper weatherHelper;
@@ -60,6 +63,7 @@ public class WeatherWidget extends SimpleWidget {
 	private ZoomLevel lastZoom;
 	private Long dateTime;
 	private long lastDateTime;
+	private long lastUpdateTime;
 
 	private boolean lastObtainingFailed;
 	private PointI lastDisplayedForecastPoint31;
@@ -225,7 +229,10 @@ public class WeatherWidget extends SimpleWidget {
 		}
 
 		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
-		if (resourcesManager != null && shouldObtainValue(point31, zoom, dateTime)) {
+		long time = System.currentTimeMillis();
+		if (resourcesManager != null && time - lastUpdateTime > UPDATE_INTERVAL_MILLIS
+				&& shouldObtainValue(point31, zoom, dateTime)) {
+			lastUpdateTime = time;
 			ValueRequest request = new ValueRequest();
 			request.setClientId(TAG);
 			request.setBand(band);

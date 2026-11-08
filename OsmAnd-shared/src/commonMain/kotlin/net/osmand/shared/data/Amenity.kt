@@ -28,9 +28,9 @@ import kotlin.jvm.JvmStatic
  * A point of interest read out of the poi section of an obf file: what it is, where it is, and
  * every tag the indexer kept for it.
  *
- * A copy of `Amenity` in OsmAnd-java, which stays there for android and tools; this copy is for
- * iOS. `toJSON` and `parseJSON` are left out for the same reason as in [MapObject]. A track stored
- * in an obf file is an amenity too - [isRouteTrack] - which is how the travel code finds one.
+ * Based on `Amenity` from OsmAnd-java. `toJSON` and `parseJSON` are left out for the same
+ * reason as in [MapObject]. A track stored in an obf file is an amenity too - [isRouteTrack] -
+ * which is how the travel code finds one.
  */
 class Amenity : MapObject() {
 
@@ -306,7 +306,7 @@ class Amenity : MapObject() {
 	}
 
 	override fun toStringEn(): String =
-		super.toStringEn() + ": " + type?.getKeyName() + ":" + subType
+		ORIGIN_PREFIX + ":" + getEnName(true) + ": " + type?.getKeyName() + ":" + subType
 
 	override fun toString(): String = type?.getKeyName() + ": " + subType + " " + getName()
 
@@ -927,6 +927,8 @@ class Amenity : MapObject() {
 	}
 
 	companion object {
+		/** Stable prefix for persisted Amenity origins, independent of runtime class names and R8 obfuscation. */
+		const val ORIGIN_PREFIX: String = "Amenity"
 		const val WEBSITE: String = "website"
 		const val URL: String = "url"
 		const val PHONE: String = "phone"
@@ -950,6 +952,7 @@ class Amenity : MapObject() {
 		const val WIKIDATA: String = "wikidata"
 		const val WIKIMEDIA_COMMONS: String = "wikimedia_commons"
 		const val MAPILLARY: String = "mapillary"
+		const val PANORAMAX: String = "panoramax"
 		const val DISH: String = "dish"
 		const val REF: String = "ref"
 		const val OSM_DELETE_VALUE: String = "delete"

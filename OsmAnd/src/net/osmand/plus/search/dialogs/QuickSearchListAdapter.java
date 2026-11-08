@@ -268,9 +268,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			view = bindDisabledHistoryItem(listItem, convertView);
 		} else {
 			view = bindSearchResultItem(position, convertView, listItem);
-			useBigDividerMargin = searchResult != null && searchResult.objectType != ObjectType.POI &&
-					searchResult.objectType != ObjectType.INDEX_ITEM &&
-					searchResult.objectType != ObjectType.GPX_TRACK;
+			useBigDividerMargin = !isLayoutIdChanged(view, R.layout.search_list_item);
 		}
 
 		setupBackground(position, view, listItem);
@@ -504,7 +502,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			SearchResultViewHolder.bindCoordinatesSearchResult(view, listItem);
 			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
 			setupCheckBox(position, view, listItem);
-		} else if (searchResult != null && searchResult.objectType == ObjectType.POI_TYPE) {
+		} else if (searchResult != null && searchResult.objectType == ObjectType.POI_TYPE && listItem.isHistoryItem()) {
 			view = getConvertView(convertView, R.layout.search_category_list_item);
 			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
 			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);

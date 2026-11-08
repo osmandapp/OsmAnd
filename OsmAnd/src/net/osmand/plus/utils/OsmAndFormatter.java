@@ -10,6 +10,8 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.core.text.BidiFormatter;
+import androidx.core.text.TextDirectionHeuristicsCompat;
 
 import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
@@ -37,6 +39,7 @@ import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
+import net.osmand.shared.util.PhoneNumberFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.TextDirectionUtil;
 
@@ -66,6 +69,7 @@ public class OsmAndFormatter {
 	public static final float METERS_IN_KILOMETER = 1000f;
 	public static final float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
 	public static final float METERS_IN_ONE_NAUTICALMILE = 1852f; // 1852
+	public static final float MIN_SPEED_FOR_PACE = 0.111111111f;
 
 	public static final float YARDS_IN_ONE_METER = 1.0936f;
 	public static final float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
@@ -253,11 +257,30 @@ public class OsmAndFormatter {
 	public static long getStartOfDayForTime(long time) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(time);
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
+		return getStartOfDay(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+				calendar.get(Calendar.DAY_OF_MONTH));
+	}
+
+	public static long getStartOfDay(int year, int month, int dayOfMonth) {
+		return dayCalendar(year, month, dayOfMonth).getTimeInMillis();
+	}
+
+	public static long getEndOfDay(int year, int month, int dayOfMonth) {
+		Calendar calendar = dayCalendar(year, month, dayOfMonth);
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 59);
+		calendar.set(Calendar.MILLISECOND, 999);
 		return calendar.getTimeInMillis();
+	}
+
+	// Clear time fields before constructing the local date.
+	@NonNull
+	private static Calendar dayCalendar(int year, int month, int dayOfMonth) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.clear();
+		calendar.set(year, month, dayOfMonth);
+		return calendar;
 	}
 
 	public static Date getTimeForTimeZone(long time, @NonNull String timeZone) {
@@ -728,7 +751,7 @@ public class OsmAndFormatter {
 				return getFormattedLowSpeed(mph10 / 10f, unit, app);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_KILOMETER) {
-			if (metersPerSeconds < 0.111111111) {
+			if (metersPerSeconds < MIN_SPEED_FOR_PACE) {
 				return new FormattedValue(metersPerSeconds, "-", unit, false);
 			}
 			float minPerKm = METERS_IN_KILOMETER / (metersPerSeconds * 60);
@@ -739,7 +762,7 @@ public class OsmAndFormatter {
 				return new FormattedValue(seconds, Algorithms.formatDuration(seconds, false), unit);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_MILE) {
-			if (metersPerSeconds < 0.111111111) {
+			if (metersPerSeconds < MIN_SPEED_FOR_PACE) {
 				return new FormattedValue(metersPerSeconds, "-", unit, false);
 			}
 			float minPerM = (METERS_IN_ONE_MILE) / (metersPerSeconds * 60);
@@ -987,23 +1010,25 @@ public class OsmAndFormatter {
 			}
 		} else if (outputFormat == SWISS_GRID_FORMAT) {
 			double[] swissGrid = SwissGridApproximation.convertWGS84ToLV03(new LatLon(lat, lon));
-			DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
-			formatSymbols.setDecimalSeparator('.');
-			formatSymbols.setGroupingSeparator(' ');
-			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
+			DecimalFormat swissGridFormat = createSwissGridFormat();
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		} else if (outputFormat == SWISS_GRID_PLUS_FORMAT) {
 			double[] swissGrid = SwissGridApproximation.convertWGS84ToLV95(new LatLon(lat, lon));
-			DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
-			formatSymbols.setDecimalSeparator('.');
-			formatSymbols.setGroupingSeparator(' ');
-			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
+			DecimalFormat swissGridFormat = createSwissGridFormat();
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		} else if (outputFormat == MAIDENHEAD_FORMAT) {
 			result.append(MaidenheadPoint.toMaidenhead(lat, lon));
 		}
 		String formattedCoordinates = result.toString();
 		return forceLTR ? TextDirectionUtil.markAsLTR(formattedCoordinates) : formattedCoordinates;
+	}
+
+	@NonNull
+	public static DecimalFormat createSwissGridFormat() {
+		DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
+		formatSymbols.setDecimalSeparator('.');
+		formatSymbols.setGroupingSeparator(' ');
+		return new DecimalFormat("###,###.##", formatSymbols);
 	}
 
 	private static String formatCoordinate(double coordinate, int outputType) {
@@ -1054,6 +1079,17 @@ public class OsmAndFormatter {
 		coordinate -= deg;
 		coordinate *= 60.0;
 		return coordinate;
+	}
+
+	/**
+	 * Display-only: groups the digits and keeps them left-to-right in RTL layouts,
+	 * otherwise the space-separated groups are shown in reverse order.
+	 */
+	@NonNull
+	public static String formatPhoneNumber(@NonNull Context context, @NonNull String text) {
+		String formatted = PhoneNumberFormatter.INSTANCE.format(text);
+		BidiFormatter bidiFormatter = BidiFormatter.getInstance(AndroidUtils.isLayoutRtl(context));
+		return bidiFormatter.unicodeWrap(formatted, TextDirectionHeuristicsCompat.LTR);
 	}
 
 	@NonNull

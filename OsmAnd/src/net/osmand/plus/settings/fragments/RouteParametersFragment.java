@@ -1025,4 +1025,9 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			default -> null;
 		};
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "route_parameters";
+	}
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
@@ -27,10 +28,12 @@ public class AlertDialogData {
 
 	@Nullable private String title;
 	@Nullable private Integer titleId;
+	@Nullable private Drawable icon;
 
 	@Nullable private String negativeButtonTitle;
 	@Nullable private Integer negativeButtonTitleId;
 	@Nullable private OnClickListener negativeButtonListener;
+	@Nullable @ColorInt private Integer negativeButtonTextColor;
 
 	@Nullable private String neutralButtonTitle;
 	@Nullable private Integer neutralButtonTitleId;
@@ -123,6 +126,16 @@ public class AlertDialogData {
 		return this;
 	}
 
+	public AlertDialogData setNegativeButtonTextColor(@Nullable Integer negativeButtonTextColor) {
+		this.negativeButtonTextColor = negativeButtonTextColor;
+		return this;
+	}
+
+	public AlertDialogData setIcon(@Nullable Drawable icon) {
+		this.icon = icon;
+		return this;
+	}
+
 	public AlertDialogData setControlsColor(@Nullable @ColorInt Integer controlsColor) {
 		this.controlsColor = controlsColor;
 		return this;
@@ -205,6 +218,17 @@ public class AlertDialogData {
 	@ColorInt
 	public Integer getPositiveButtonTextColor() {
 		return positiveButtonTextColor;
+	}
+
+	@Nullable
+	@ColorInt
+	public Integer getNegativeButtonTextColor() {
+		return negativeButtonTextColor;
+	}
+
+	@Nullable
+	public Drawable getIcon() {
+		return icon;
 	}
 
 	@Nullable

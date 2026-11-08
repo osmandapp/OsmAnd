@@ -132,12 +132,6 @@
 		android:persistent="false"
 		android:title="@string/threads_allocated_for_rendering"
 		tools:summary="8 threads" />
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="battery_saving"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/battery_saving_mode" />
 
 	<PreferenceCategory
 		android:key="search"
@@ -145,11 +139,11 @@
 		android:title="@string/shared_string_search" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="use_spatial_text_search"
+		android:key="use_spatial_search"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/use_spatial_text_search" />
+		android:title="@string/use_spatial_search" />
 
 	<PreferenceCategory
 		android:key="debugging_and_development"

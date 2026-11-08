@@ -183,4 +183,9 @@ public class TrackItemsFragment extends BaseFullScreenFragment implements OsmAnd
 			locationProvider.addCompassListener(locationProvider.getNavigationInfo());
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "track_items";
+	}
 }

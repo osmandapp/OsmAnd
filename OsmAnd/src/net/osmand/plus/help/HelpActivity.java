@@ -99,4 +99,9 @@ public class HelpActivity extends BaseLogcatActivity implements LoadArticlesList
 			}
 		});
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "help";
+	}
 }

@@ -9,21 +9,23 @@ import kotlin.math.min
  * Turning a route that has been found into the manoeuvres a driver is told about, and into the times
  * and speeds each segment is driven at.
  *
- * This runs over segments that are already decided - whichever planner produced them - so it is what
- * makes two platforms describe the same route the same way. The C++ router carries its own copy of
- * all of it in `routeResultPreparation.cpp`; while both exist, android is told by the java side and
- * iOS by the C++ one, and they can disagree about a manoeuvre on the same road.
+ * This runs over the route segments supplied by a planner, providing common manoeuvre
+ * preparation for all platforms. The C++ router has a separate implementation in
+ * `routeResultPreparation.cpp`; sharing the preparation avoids differences between
+ * implementations for the same route.
  *
- * A copy of that preparation from `RouteResultPreparation` in OsmAnd-java, which stays there whole
- * for android and tools; this copy is for iOS. It carries the part that decides manoeuvres, lanes and
- * times, and leaves out the orchestration around it - the tile machinery, the area routing, the
- * debug printing and `convertFinalSegmentToResults`, which walks the java planner's own segments.
+ * Based on the manoeuvre, lane and timing preparation in `RouteResultPreparation` from
+ * OsmAnd-java. [RouteResultPreparation] handles the surrounding orchestration over shared
+ * planner segments, including area routing and `convertFinalSegmentToResults`. The Java debug
+ * printing helpers are not implemented here.
  */
 object TurnPreparation {
 
 	const val UNMATCHED_HIGHWAY_TYPE = "highway_unmatched"
 
 	private const val TURN_DEGREE_MIN = 45.0
+
+	private const val TWICE_ROAD_LOOKAHEAD_M = 150.0
 
 	// decrease speed proportionally from 15ms (50kmh)
 	private const val SLOW_DOWN_SPEED_THRESHOLD = 15.0
@@ -157,8 +159,13 @@ object TurnPreparation {
 			val currentSegment = result[i]
 			val currentTurn = currentSegment.getTurnType()
 			dist += currentSegment.getDistance()
-			if (currentTurn == null || currentTurn.lanes == null) {
+			if (currentTurn == null) {
 				// skip
+			} else if (currentTurn.lanes == null) {
+				if (!TurnType.isSlightTurn(currentTurn.value)) {
+					// all turns except: C, KL, KR, TSLL, TSLR
+					nextSegment = null
+				}
 			} else {
 				var merged = false
 				if (nextSegment != null) {
@@ -418,24 +425,46 @@ object TurnPreparation {
 
 	/** Whether the same road appears twice around this segment, which changes what the lanes mean. */
 	private fun twiceRoadPresent(result: List<RouteSegmentResult>, i: Int): Boolean {
-		if (i > 0 && i < result.size - 1) {
-			val prev = result[i - 1]
-			TurnLanes.getTurnLanesString(prev) ?: return false
-			val curr = result[i]
-			val next = result[i + 1]
-			if (prev.getObject().getId() == curr.getObject().getId()) {
-				// check if turn lanes allowed for next segment
-				return next.getAttachedRoutes(next.getStartPointIndex()).isNotEmpty()
-			} else {
-				for (attach in curr.getAttachedRoutes(curr.getStartPointIndex())) {
-					if (attach.getObject().getId() == prev.getObject().getId()) {
-						// check if road the continue in attached roads
-						return true
-					}
-				}
-			}
+		if (i <= 0 || i >= result.size - 1) {
+			return false
 		}
-		return false
+		val prev = result[i - 1]
+		val turnLanes = TurnLanes.getTurnLanesString(prev) ?: return false
+		val curr = result[i]
+		val prevId = prev.getObject().getId()
+		if (prevId == curr.getObject().getId()) {
+			// same way, two segments
+			var dist = curr.getDistance().toDouble()
+			var j = i + 1
+			while (j < result.size && dist <= TWICE_ROAD_LOOKAHEAD_M) {
+				val next = result[j]
+				if (next.getAttachedRoutes(next.getStartPointIndex()).isNotEmpty()) {
+					return true
+				}
+				val lanes = TurnLanes.getTurnLanesString(next)
+				if (lanes != null && lanes != turnLanes) {
+					return false
+				}
+				if (turnLanes == lanes) {
+					return true
+				}
+				dist += next.getDistance()
+				j++
+			}
+			return false
+		}
+		// different ways: prev's road continues as an attached one
+		var attachedPriority = TurnLanes.MAX_SPEAK_PRIORITY
+		for (attach in curr.getAttachedRoutes(curr.getStartPointIndex())) {
+			if (attach.getObject().getId() == prevId) {
+				return true
+			}
+			attachedPriority = min(attachedPriority, TurnLanes.highwaySpeakPriority(attach.getObject().getHighway()))
+		}
+		// same turn:lanes, minor attached roads (3+ classes lower), except none lanes (none can mean different)
+		val minorAttachedRoads = attachedPriority == TurnLanes.MAX_SPEAK_PRIORITY
+				|| attachedPriority - TurnLanes.highwaySpeakPriority(curr.getObject().getHighway()) > 2
+		return turnLanes == TurnLanes.getTurnLanesString(curr) && !TurnLanes.hasNoneLane(turnLanes) && minorAttachedRoads
 	}
 
 	// ---- how long each segment takes ----

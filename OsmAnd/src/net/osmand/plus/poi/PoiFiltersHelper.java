@@ -193,6 +193,28 @@ public class PoiFiltersHelper {
 	}
 
 	@Nullable
+	public PoiUIFilter getPoiTypeFilter(@NonNull String categoryKey, @NonNull String poiTypeKey, boolean poiAdditional) {
+		PoiCategory category = app.getPoiTypes().getPoiCategoryByName(categoryKey);
+		PoiUIFilter filter = category != null ? getFilterById(PoiUIFilter.STD_PREFIX + category.getKeyName()) : null;
+		if (filter != null) {
+			filter.clearFilter();
+			if (poiAdditional) {
+				filter.setTypeToAccept(category, true);
+				AbstractPoiType poiType = app.getPoiTypes().getAnyPoiAdditionalTypeByKey(poiTypeKey);
+				if (poiType != null) {
+					filter.updateTypesToAccept(poiType);
+				}
+				filter.setFilterByName(poiTypeKey.replace('_', ':').toLowerCase());
+			} else {
+				LinkedHashSet<String> accept = new LinkedHashSet<>();
+				accept.add(poiTypeKey);
+				filter.selectSubTypesToAccept(category, accept);
+			}
+		}
+		return filter;
+	}
+
+	@Nullable
 	public PoiUIFilter getFilter(TopIndexFilter topIndexFilter,
 			Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
 		PoiUIFilter poiUIFilter = new PoiUIFilter(topIndexFilter, acceptedTypes, app);

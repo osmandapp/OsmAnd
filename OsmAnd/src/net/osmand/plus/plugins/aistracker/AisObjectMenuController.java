@@ -70,7 +70,7 @@ public class AisObjectMenuController extends MenuController {
                     if (cpaTime < Long.MAX_VALUE) {
                         if (isPositive) {
                             long hours = (long)cpaTime;
-                            double minutes = (cpaTime % 1 - hours) * 60.0;
+                            double minutes = (cpaTime - hours) * 60.0;
                             addMenuItem("CPA", String.format("%.1f nm", cpa.getCpa()));
                             if (hours >= 2.0) {
                                 addMenuItem("TCPA", String.format("%d hours %.0f min", hours, minutes));

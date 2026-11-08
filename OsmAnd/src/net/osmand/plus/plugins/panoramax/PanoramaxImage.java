@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins.panoramax;
 
+import androidx.annotation.Nullable;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Map;
@@ -111,6 +114,32 @@ public class PanoramaxImage {
 		}
 		Object timestamp = userData.get(TIMESTAMP_KEY);
 		return timestamp != null ? parseTimestamp(timestamp) : parseTimestamp(userData.get(DATE_KEY));
+	}
+
+	/**
+	 * Returns the calendar date for a date-only feature.
+	 * Features with full timestamps are handled by {@link #parseCaptureTime(Map)}.
+	 */
+	@Nullable
+	static LocalDate parseCaptureDate(Map<?, ?> userData) {
+		if (userData == null || userData.get(TIMESTAMP_KEY) != null) {
+			return null;
+		}
+		Object date = userData.get(DATE_KEY);
+		if (date == null) {
+			return null;
+		}
+		Matcher matcher = TIMESTAMP_PATTERN.matcher(date.toString().trim());
+		// Group 4 is the hour, so a value that has one is an instant rather than a day.
+		if (!matcher.matches() || matcher.group(4) != null) {
+			return null;
+		}
+		try {
+			return LocalDate.of(Integer.parseInt(matcher.group(1)),
+					Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)));
+		} catch (RuntimeException e) {
+			return null;
+		}
 	}
 
 	/**

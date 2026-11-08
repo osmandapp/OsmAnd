@@ -111,7 +111,9 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 						result = sendResult == BluetoothStatusCodes.SUCCESS
 						errorMessage = "Send result code {$sendResult}"
 					} else {
-						result = gatt.writeCharacteristic(it)
+						@Suppress("DEPRECATION")
+						it.value = command.toByteArray()
+						result = @Suppress("DEPRECATION") gatt.writeCharacteristic(it)
 						errorMessage = "writeCharacteristic failed"
 					}
 					val writeDuration = System.currentTimeMillis() - startTime
@@ -195,7 +197,7 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 	override fun connect(context: Context, activity: Activity?): Boolean {
 		if (uuid == null) {
 			currentState = DeviceConnectionState.CONNECTING
-			val deviceFinder = BleDeviceUuidFinder(deviceId, object : DeviceFoundCallback {
+			val deviceFinder = BleDeviceUuidFinder(context, deviceId, object : DeviceFoundCallback {
 				override fun onDeviceFound(uuid: String?) {
 					currentState = DeviceConnectionState.DISCONNECTED
 					if (uuid != null) {

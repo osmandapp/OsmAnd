@@ -69,7 +69,7 @@
 						android:layout_marginTop="@dimen/text_margin_small"
 						android:layout_marginEnd="@dimen/content_padding_half"
 						android:layout_marginBottom="@dimen/text_margin_small"
-						android:contentDescription="@string/show_view_angle"
+						android:importantForAccessibility="no"
 						android:scaleType="center"
 						app:srcCompat="@drawable/ic_direction_arrow"
 						tools:tint="@color/icon_color_active_light" />

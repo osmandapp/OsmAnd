@@ -523,6 +523,80 @@ class ButtonPositionSizeTest {
 		assertTrue(!slider.overlap(ruler), "slider=${slider.bounds}, ruler=${ruler.bounds}")
 	}
 
+	/**
+	 * Bottom row of a portrait phone in the order MapHudLayout passes it: map buttons first
+	 * (MapControlsLayer order), then the ruler. Issue #26820.
+	 */
+	private fun portraitBottomRow(gridWidth: Int, extraMarginX: Int, rulerWidth: Int,
+	                              extraFromLeft: Boolean = false,
+	                              extraMove: ButtonPositionSize.() -> ButtonPositionSize): List<ButtonPositionSize> {
+		val buttons = listOf(
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveVertical(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveHorizontal(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveVertical(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveVertical(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveVertical(),
+			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveHorizontal(),
+			ButtonPositionSize("map.view.menu", 7, true, false).setMoveHorizontal(),
+			ButtonPositionSize("map.view.route_planning", 7, true, false).setMoveHorizontal(),
+			ButtonPositionSize("quick_actions", 7, extraFromLeft, false).setMargin(extraMarginX, 0).extraMove(),
+			ButtonPositionSize("map_ruler_layout", rulerWidth, true, false).setSize(rulerWidth, 3).setMoveHorizontal(),
+		)
+		assertTrue(ButtonPositionSize.computeNonOverlap(1, buttons, gridWidth, 115))
+		return buttons
+	}
 
+	@Test
+	fun testRuler_noRoomRightOfExtraButton_shouldStayInFirstHole() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		// Every way a quick action button can be movable: see QuickActionButtonState.setupButtonPosition()
+		val moves = listOf<ButtonPositionSize.() -> ButtonPositionSize>(
+			{ setMoveHorizontal() }, { setMoveVertical() }, { setMoveAny() })
+		for (move in moves) {
+			// 1080x2400 at 400 dpi: 54 cells wide, the 120dp ruler is 15 cells at most
+			val buttons = portraitBottomRow(54, 16, 15, extraMove = move)
+			val ruler = buttons.first { it.id == "map_ruler_layout" }
+			val myLocation = buttons.first { it.id == "map.view.back_to_loc" }
+			val zoomOut = buttons.first { it.id == "map.view.zoom_out" }
 
+			assertTrue(!ruler.overlap(myLocation), "ruler=${ruler.bounds}, myLocation=${myLocation.bounds}")
+			assertTrue(!ruler.overlap(zoomOut), "ruler=${ruler.bounds}, zoomOut=${zoomOut.bounds}")
+			assertTrue { check(buttons, "map_ruler_layout", 16.0, 112.0) }
+		}
+	}
+
+	@Test
+	fun testRuler_shouldNotJumpWhileItGrowsWithZoom() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		// The ruler width follows the zoom; its position must not depend on it
+		for (rulerWidth in 6..15) {
+			val buttons = portraitBottomRow(54, 16, rulerWidth) { setMoveHorizontal() }
+			assertTrue(check(buttons, "map_ruler_layout", 16.0, 112.0), "rulerWidth=$rulerWidth")
+		}
+	}
+
+	@Test
+	fun testRuler_holeNarrowerThanRuler_shouldStayInFirstHole() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		// 49 cells (Redmi Note 9S at its stock 440 dpi): only 10 free cells before the extra button
+		val buttons = portraitBottomRow(49, 16, 15) { setMoveHorizontal() }
+		val ruler = buttons.first { it.id == "map_ruler_layout" }
+		val myLocation = buttons.first { it.id == "map.view.back_to_loc" }
+		val zoomOut = buttons.first { it.id == "map.view.zoom_out" }
+
+		assertTrue(!ruler.overlap(myLocation), "ruler=${ruler.bounds}, myLocation=${myLocation.bounds}")
+		assertTrue(!ruler.overlap(zoomOut), "ruler=${ruler.bounds}, zoomOut=${zoomOut.bounds}")
+		assertTrue { check(buttons, "map_ruler_layout", 16.0, 112.0) }
+	}
+
+	@Test
+	fun testRuler_roomRightOfExtraButton_shouldMoveThere() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		// The extra button is next to Route and there is a free hole after it: 15 cells fit exactly,
+		// touching My location is not an overlap
+		for (rulerWidth in listOf(14, 15)) {
+			val buttons = portraitBottomRow(54, 16, rulerWidth, extraFromLeft = true) { setMoveHorizontal() }
+			assertTrue(check(buttons, "map_ruler_layout", 24.0, 112.0), "rulerWidth=$rulerWidth")
+		}
+	}
 }

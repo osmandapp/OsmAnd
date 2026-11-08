@@ -9,9 +9,8 @@ import kotlin.jvm.JvmField
  * One HH section a route is calculated over: the file it is in, which of the section's parameter
  * sets is used, and the vertices read from it by their file ids. [id] is the vertices' `mapId`.
  *
- * A copy of `HHRouteDataStructure.HHRouteRegionPointsCtx` in OsmAnd-java, which stays there for
- * android and tools; this copy is for iOS. Java's other constructor takes the tools' SQLite
- * `HHRoutingDB` instead of a file and is not copied.
+ * Based on `HHRouteDataStructure.HHRouteRegionPointsCtx` from OsmAnd-java. Java's other
+ * constructor takes the tools' SQLite `HHRoutingDB` instead of a file and is not copied.
  */
 class HHRouteRegionPointsCtx(
 	@JvmField val id: Short,

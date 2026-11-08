@@ -1,7 +1,6 @@
 package net.osmand.plus.views.layers.core;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -30,7 +29,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopType;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -50,6 +48,8 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 	private final PointI offset;
 
 	private final OsmandMapLayer.MapLayerData<List<TransportStop>> layerData;
+	private final IconPixelsCache<PointImageDrawable> bigIconsCache = new IconPixelsCache<>();
+	private final IconPixelsCache<PointImageDrawable> smallIconsCache = new IconPixelsCache<>();
 	private MapTiledCollectionProvider providerInstance;
 
 	public TransportStopsTileProvider(@NonNull Context context, OsmandMapLayer.MapLayerData<List<TransportStop>> layerData,
@@ -169,7 +169,7 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 			LatLon latLon = stop.getLocation();
 			if (latLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
 					latLon.getLongitude(), latLon.getLatitude())) {
-				StopsCollectionPoint point = new StopsCollectionPoint(ctx, stop, textScale, "");
+				StopsCollectionPoint point = new StopsCollectionPoint(ctx, stop, textScale, "", bigIconsCache, smallIconsCache);
 				res.add(point.instantiateProxy(true));
 				point.swigReleaseOwnership();
 			}
@@ -228,14 +228,20 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 		private final float textScale;
 		private final PointI point31;
 		private final String transportRouteType;
+		private final IconPixelsCache<PointImageDrawable> bigIconsCache;
+		private final IconPixelsCache<PointImageDrawable> smallIconsCache;
 
-		public StopsCollectionPoint(@NonNull Context ctx, @NonNull TransportStop stop, float textScale, String transportRouteType) {
+		public StopsCollectionPoint(@NonNull Context ctx, @NonNull TransportStop stop, float textScale, String transportRouteType,
+		                            @NonNull IconPixelsCache<PointImageDrawable> bigIconsCache,
+		                            @NonNull IconPixelsCache<PointImageDrawable> smallIconsCache) {
 			this.ctx = ctx;
 			this.textScale = textScale;
 			LatLon latLon = stop.getLocation();
 			this.point31 = new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
 					MapUtils.get31TileNumberY(latLon.getLatitude()));
 			this.transportRouteType = transportRouteType;
+			this.bigIconsCache = bigIconsCache;
+			this.smallIconsCache = smallIconsCache;
 		}
 
 
@@ -246,7 +252,6 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 
 		@Override
 		public SingleSkImage getImageBitmap(boolean isFullSize) {
-			Bitmap bitmap;
 			if (isFullSize) {
 				PointImageDrawable pointImageDrawable = null;
 				if (transportRouteType.isEmpty()) {
@@ -264,16 +269,19 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 				if (pointImageDrawable == null) {
 					return SwigUtilities.nullSkImage();
 				}
-				pointImageDrawable.setAlpha(0.9f);
-				bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
+				return bigIconsCache.getImage(pointImageDrawable, drawable -> {
+					drawable.setAlpha(0.9f);
+					return drawable.getBigMergedBitmap(textScale, false);
+				});
 			} else {
 				PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 						ContextCompat.getColor(ctx, R.color.transport_stop_icon_background),
 						true, false, 0, BackgroundType.SQUARE);
-				pointImageDrawable.setAlpha(0.9f);
-				bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
+				return smallIconsCache.getImage(pointImageDrawable, drawable -> {
+					drawable.setAlpha(0.9f);
+					return drawable.getSmallMergedBitmap(textScale);
+				});
 			}
-			return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
 		}
 
 		@Override

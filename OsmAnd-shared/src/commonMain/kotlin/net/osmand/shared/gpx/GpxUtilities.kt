@@ -68,6 +68,11 @@ object GpxUtilities {
 	private const val GPXTPX_TRACK_POINT_EXTENSION = "${GPXTPX_XML_PREFIX}:TrackPointExtension"
 	private const val EXTENSIONS_WRITER_KEY = "extensions"
 	const val OSMAND_EXTENSIONS_PREFIX = "$OSMAND_XML_PREFIX:"
+	const val GPXX_STREET_ADDRESS = "$GPXX_XML_PREFIX:street_address"
+	const val GPXX_CITY = "$GPXX_XML_PREFIX:city"
+	const val GPXX_STATE = "$GPXX_XML_PREFIX:state"
+	const val GPXX_POSTAL_CODE = "$GPXX_XML_PREFIX:postal_code"
+	const val GPXX_COUNTRY = "$GPXX_XML_PREFIX:country"
 	const val OSM_PREFIX = "osm_tag_"
 	const val AMENITY_PREFIX = "amenity_"
 	const val ORIGIN_EXTENSION = "origin"
@@ -77,6 +82,7 @@ object GpxUtilities {
 
 	const val GAP_PROFILE_TYPE = "gap"
 	const val TRKPT_INDEX_EXTENSION = "trkpt_idx"
+	const val OFFSET_EXTENSION = "offset"
 	const val DEFAULT_ICON_NAME = "special_star"
 
 	const val POINT_ELEVATION = "ele"
@@ -142,7 +148,14 @@ object GpxUtilities {
 		"temp" to PointAttributes.SENSOR_TAG_TEMPERATURE_W,
 		"wtemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_W,
 		"atemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_A,
-		"activity" to ACTIVITY_TYPE
+		"activity" to ACTIVITY_TYPE,
+		// Garmin address, matched by the bare name: an unprefixed or osmand: city/state/country maps here too
+		"streetaddress" to GPXX_STREET_ADDRESS,
+		"city" to GPXX_CITY,
+		"state" to GPXX_STATE,
+		"country" to GPXX_COUNTRY,
+		"postalcode" to GPXX_POSTAL_CODE,
+		"phonenumber" to "phone"
 	)
 
 	const val RADIUS_DIVIDER = 5000
@@ -1015,14 +1028,8 @@ object GpxUtilities {
 	}
 
 	private fun normalizeIso8601Input(input: String): String {
-		var start = 0
-		var end = input.length
-		while (start < end && input[start].isXmlWhitespace()) {
-			start++
-		}
-		while (end > start && input[end - 1].isXmlWhitespace()) {
-			end--
-		}
+		val start = input.indexAfterLeadingXmlWhitespace()
+		val end = input.indexBeforeTrailingXmlWhitespace(start)
 		val needsTrim = start != 0 || end != input.length
 		val delimiterIndex = start + 10
 		val needsSpaceReplacement = end - start > 10 &&
@@ -1227,6 +1234,22 @@ object GpxUtilities {
 		return this == ' ' || this == '\t' || this == '\r' || this == '\n'
 	}
 
+	private fun String.indexAfterLeadingXmlWhitespace(): Int {
+		var start = 0
+		while (start < length && this[start].isXmlWhitespace()) {
+			start++
+		}
+		return start
+	}
+
+	private fun String.indexBeforeTrailingXmlWhitespace(start: Int): Int {
+		var end = length
+		while (end > start && this[end - 1].isXmlWhitespace()) {
+			end--
+		}
+		return end
+	}
+
 	fun getCreationTime(gpxFile: GpxFile?): Long {
 		var time: Long = 0
 		if (gpxFile != null) {
@@ -1353,7 +1376,7 @@ object GpxUtilities {
 							tagName == "routepointextension" -> {
 								routePointExtension = true
 								if (parse is WptPt) {
-									parse.getExtensionsToWrite()["offset"] =
+									parse.getExtensionsToWrite()[OFFSET_EXTENSION] =
 										routeTrackSegment.points.size.toString()
 								}
 							}
@@ -1876,8 +1899,10 @@ object GpxUtilities {
 	fun toDouble(value: String?): Double {
 		if (value.isNullOrEmpty()) return Double.NaN
 
-		var i = 0
-		val len = value.length
+		val start = value.indexAfterLeadingXmlWhitespace()
+		val len = value.indexBeforeTrailingXmlWhitespace(start)
+		if (start == len) return Double.NaN
+		var i = start
 		var negative = false
 
 		if (value[i] == '-' || value[i] == '+') {
@@ -1916,7 +1941,7 @@ object GpxUtilities {
 				}
 				c == 'e' || c == 'E' -> {
 					// fallback for scientific notation
-					return value.toDouble()
+					return value.substring(start, len).toDouble()
 				}
 				else -> return Double.NaN
 			}

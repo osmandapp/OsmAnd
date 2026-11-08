@@ -36,7 +36,12 @@ object SegmentedList {
 		}
 	}
 
-	private fun backgroundFor(index: Int, count: Int): Int = when {
+	/**
+	 * Background of the row at [index] of [count] visible rows - for lists whose rows are not
+	 * direct children of one container, such as a RecyclerView.
+	 */
+	@JvmStatic
+	fun backgroundFor(index: Int, count: Int): Int = when {
 		count == 1 -> R.drawable.bg_ui_segment_single
 		index == 0 -> R.drawable.bg_ui_segment_first
 		index == count - 1 -> R.drawable.bg_ui_segment_last

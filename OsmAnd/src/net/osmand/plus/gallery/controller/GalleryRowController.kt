@@ -2,7 +2,7 @@ package net.osmand.plus.gallery.controller
 
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.activities.MapActivity
+import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.gallery.contract.IGalleryRowController
 import net.osmand.plus.gallery.contract.IGalleryRowView
 import net.osmand.plus.gallery.data.GalleryKey
@@ -69,8 +69,12 @@ abstract class GalleryRowController(
 
 	private fun loadIfNeeded(collapsed: Boolean) {
 		if (!collapsed && !loading && items.isEmpty()) {
-			app.galleryHelper.mediaLoader.load(key, loadListener)
+			loadMedia()
 		}
+	}
+
+	protected open fun loadMedia() {
+		app.galleryHelper.mediaLoader.load(key, loadListener)
 	}
 
 	override fun getGalleryItems(): List<GalleryItem> {
@@ -103,10 +107,10 @@ abstract class GalleryRowController(
 	protected open fun resolveRowHolderType(position: Int): MediaHolderType =
 		if (position == 0) MediaHolderType.MAIN else MediaHolderType.STANDARD
 
-	fun createAdapter(mapActivity: MapActivity, nightMode: Boolean): GalleryGridAdapter {
+	fun createAdapter(activity: FragmentActivity, nightMode: Boolean): GalleryGridAdapter {
 		val registry = app.galleryHelper.loadStateRegistry
 		return GalleryGridAdapter(
-			mapActivity = mapActivity,
+			activity = activity,
 			onMediaClicked = ::onMediaItemClicked,
 			onReloadMediaItems = ::onReloadMediaItems,
 			onActionClicked = ::handleGalleryAction,

@@ -299,4 +299,9 @@ public class CoordinatesFormatEditFragment extends BaseCoordinateFormatFragment 
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "coordinates_format_edit";
+	}
 }

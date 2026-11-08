@@ -466,4 +466,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		MenuItem itemShow = menu.add(0, MENU_ITEM_SHARE, 0, R.string.shared_string_share);
 		itemShow.setOnMenuItemClickListener(itemClickListener);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "wikivoyage_article";
+	}
 }

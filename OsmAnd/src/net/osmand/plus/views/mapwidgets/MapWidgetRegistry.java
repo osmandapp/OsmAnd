@@ -61,6 +61,9 @@ public class MapWidgetRegistry {
 	}
 
 	public void clearWidgets() {
+		for (MapWidgetInfo widgetInfo : getAllWidgets()) {
+			widgetInfo.widget.destroyWidget();
+		}
 		allWidgets.clear();
 		notifyWidgetsCleared();
 	}

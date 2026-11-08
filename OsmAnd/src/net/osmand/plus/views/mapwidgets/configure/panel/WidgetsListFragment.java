@@ -582,4 +582,9 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		adapter.setItems(newItems);
 		diffRes.dispatchUpdatesTo(adapter);
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "widgets_list";
+	}
 }
