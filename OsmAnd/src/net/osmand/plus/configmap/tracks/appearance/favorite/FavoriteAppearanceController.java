@@ -40,6 +40,7 @@ public class FavoriteAppearanceController implements IDialogController, IColorCa
 	private Integer selectedColor;
 	@Nullable
 	private String selectedIconName;
+	private boolean iconSelected;
 	@Nullable
 	private BackgroundType selectedBackgroundType;
 
@@ -143,6 +144,10 @@ public class FavoriteAppearanceController implements IDialogController, IColorCa
 		return selectedIconName;
 	}
 
+	public boolean hasIconSelection() {
+		return selectedIconName != null || iconSelected;
+	}
+
 	@NonNull
 	public String requireIcon() {
 		return selectedIconName != null ? selectedIconName : favoriteListener.getOriginalIconKey();
@@ -160,6 +165,7 @@ public class FavoriteAppearanceController implements IDialogController, IColorCa
 
 	public void setIcon(@Nullable String iconName) {
 		selectedIconName = iconName;
+		iconSelected = true;
 	}
 
 	private void updateCards() {
