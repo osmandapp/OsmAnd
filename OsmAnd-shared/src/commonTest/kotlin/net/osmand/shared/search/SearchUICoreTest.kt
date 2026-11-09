@@ -550,6 +550,26 @@ class SearchUICoreTest {
 		assertEquals(2, api.searches.get())
 	}
 
+	/** A file that fails to read halfway, as a damaged one does: Objective-C gets what was found before it. */
+	@Test
+	fun aShallowSearchThatFailsToReadReturnsWhatItFound() {
+		SearchPhraseTest.setUp
+		val core = SearchUICore(MapPoiTypes.getDefault(), "en", false)
+		core.init()
+		val api = object : SearchCoreAPI by OneResultApi() {
+			override fun search(phrase: SearchPhrase, resultMatcher: SearchResultMatcher): Boolean {
+				val sr = SearchResult(phrase)
+				sr.localeName = phrase.getUnknownSearchPhrase()
+				sr.objectType = ObjectType.POI
+				sr.location = KLatLon(0.0, 0.0)
+				resultMatcher.publish(sr)
+				throw IllegalStateException("read past the end of the file")
+			}
+		}
+		val found = core.shallowSearch(api, "cafe", null, true, true, core.getSearchSettings())
+		assertEquals(listOf("cafe"), found.getCurrentSearchResults().map { it.localeName })
+	}
+
 	private fun originPhrase(): SearchPhrase {
 		SearchPhraseTest.setUp
 		val ss = SearchSettings(null as SearchSettings?).setOriginalLocation(KLatLon(0.0, 0.0))

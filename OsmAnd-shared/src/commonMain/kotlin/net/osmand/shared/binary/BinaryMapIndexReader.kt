@@ -19,10 +19,12 @@ import net.osmand.shared.routing.RouteSubregion
 import net.osmand.shared.util.collections.KTIntArrayList
 import net.osmand.shared.util.collections.KTIntObjectMap
 import net.osmand.shared.util.KCollatorStringMatcher
+import net.osmand.shared.util.KLock
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.KStringMatcher
 import net.osmand.shared.util.collections.KTLongHashSet
 import net.osmand.shared.util.collections.KTLongObjectMap
+import net.osmand.shared.util.synchronized
 import okio.FileHandle
 import okio.IOException
 import okio.FileSystem
@@ -59,6 +61,36 @@ class BinaryMapIndexReader {
 	 */
 	private val topIndexedStringKeys = KTLongObjectMap<IndexedStringKey>()
 
+	/**
+	 * Guards the parts of the file's structure a search fills in as it reads - the poi categories,
+	 * the map encoding rules and levels, the routing rules and boxes - which every reader of the file
+	 * opened over this one shares; java leaves them unguarded.
+	 */
+	internal val structureLock: KLock
+
+	/** The tag groups of each poi section this reader has read, for this reader only: see [PoiTagGroups]. */
+	private val poiTagGroups = HashMap<PoiRegion, PoiTagGroups>()
+	private var lastTagGroupsRegion: PoiRegion? = null
+	private var lastTagGroups: PoiTagGroups? = null
+
+	/**
+	 * The tag groups of [region] this reader has read. Asked for every amenity that has tag groups,
+	 * nearly always about the section asked before.
+	 */
+	fun getTagGroups(region: PoiRegion): PoiTagGroups {
+		val last = lastTagGroups
+		if (last != null && region === lastTagGroupsRegion) {
+			return last
+		}
+		val groups = poiTagGroups.getOrPut(region) { PoiTagGroups() }
+		lastTagGroupsRegion = region
+		lastTagGroups = groups
+		return groups
+	}
+
+	/** The size of the file when it was walked, to tell a copy whether it opened the same file. */
+	private var fileSize: Long = 0
+
 	private var version: Int = 0
 	private var dateCreated: Long = 0
 	private var initCorrectly = false
@@ -78,14 +110,61 @@ class BinaryMapIndexReader {
 		this.hhAdapter = BinaryHHRouteReaderAdapter(this)
 		this.poiAdapter = BinaryMapPoiReaderAdapter(this)
 		this.addressAdapter = BinaryMapAddressReaderAdapter(this)
-		init()
+		this.structureLock = KLock()
+		try {
+			init()
+		} catch (e: Throwable) {
+			// nobody gets the reader to close
+			runCatching { handle.close() }
+			throw e
+		}
 	}
 
 	/** Takes a path rather than a [KFile], for java callers that do not have okio on their classpath. */
 	constructor(filePath: String) : this(KFile(filePath))
 
+	/**
+	 * Another reader of the file [referenceToSameFile] reads: a file handle of its own over the
+	 * structure that reader walked, which is not walked again, so that two threads can read the file
+	 * at once. Java's `BinaryMapIndexReader(raf, referenceToSameFile)`; the centres of the address
+	 * regions are the ones already computed rather than computed again. Throws
+	 * [ObfFileChangedException] when the file at the path is no longer the size it was walked at: an
+	 * update has written another file there, which the structure does not describe.
+	 */
+	constructor(referenceToSameFile: BinaryMapIndexReader) {
+		this.file = referenceToSameFile.file
+		this.handle = FileSystem.SYSTEM.openReadOnly(file.path().toPath())
+		val size = try {
+			handle.size()
+		} catch (e: Throwable) {
+			runCatching { handle.close() }
+			throw e
+		}
+		if (size != referenceToSameFile.fileSize) {
+			runCatching { handle.close() }
+			throw ObfFileChangedException("${file.name()} is $size bytes, it was ${referenceToSameFile.fileSize} when it was opened")
+		}
+		this.fileSize = size
+		this.codedIS = CodedInputStream(handle)
+		this.routeAdapter = BinaryMapRouteReaderAdapter(this)
+		this.hhAdapter = BinaryHHRouteReaderAdapter(this)
+		this.poiAdapter = BinaryMapPoiReaderAdapter(this)
+		this.addressAdapter = BinaryMapAddressReaderAdapter(this)
+		this.structureLock = referenceToSameFile.structureLock
+		version = referenceToSameFile.version
+		dateCreated = referenceToSameFile.dateCreated
+		initCorrectly = referenceToSameFile.initCorrectly
+		mapIndexes.addAll(referenceToSameFile.mapIndexes)
+		poiIndexes.addAll(referenceToSameFile.poiIndexes)
+		routingIndexes.addAll(referenceToSameFile.routingIndexes)
+		hhIndexes.addAll(referenceToSameFile.hhIndexes)
+		addressIndexes.addAll(referenceToSameFile.addressIndexes)
+		basemap = referenceToSameFile.basemap
+	}
+
 	private fun init() {
 		val size = handle.size()
+		fileSize = size
 		codedIS.seek(0)
 		codedIS.pushLimitLong(size)
 		var reachedEnd = false
@@ -241,7 +320,9 @@ class BinaryMapIndexReader {
 	 * Whether a routing section has roads in the zoom 14 tile of the point. A region named in
 	 * [checkedRegions] is skipped, and every region asked is added to it, so a caller asking
 	 * several readers over the same regions asks each region once.
+	 * Read failures are propagated, including a handle closed during a resource update.
 	 */
+	@Throws(Exception::class)
 	fun containsActualRouteData(x31: Int, y31: Int, checkedRegions: MutableSet<String>?): Boolean {
 		val zoomToLoad = 14
 		val x = x31 shr zoomToLoad
@@ -537,11 +618,15 @@ class BinaryMapIndexReader {
 				continue
 			}
 			// lazy initializing rules
-			if (mapIndex.encodingRules.isEmpty()) {
-				codedIS.seek(mapIndex.filePointer)
-				val oldLimit = codedIS.pushLimitLong(mapIndex.length)
-				readMapIndex(mapIndex, true)
-				codedIS.popLimit(oldLimit)
+			synchronized(structureLock) {
+				if (mapIndex.encodingRules.isEmpty()) {
+					val parsed = MapIndex()
+					codedIS.seek(mapIndex.filePointer)
+					codedIS.withLimit(mapIndex.length) {
+						readMapIndex(parsed, true)
+					}
+					mapIndex.initEncodingRulesFrom(parsed)
+				}
 			}
 			for (index in mapIndex.getRoots()) {
 				if (index.minZoom <= req.zoom && index.maxZoom >= req.zoom) {
@@ -555,15 +640,24 @@ class BinaryMapIndexReader {
 					}
 
 					// lazy initializing trees
-					if (index.trees == null) {
-						index.trees = ArrayList()
-						codedIS.seek(index.filePointer)
-						val oldLimit = codedIS.pushLimitLong(index.length)
-						readMapLevel(index)
-						codedIS.popLimit(oldLimit)
+					val trees = synchronized(structureLock) {
+						index.trees ?: run {
+							val parsed = MapRoot().apply {
+								left = index.left
+								right = index.right
+								top = index.top
+								bottom = index.bottom
+								minZoom = index.minZoom
+								maxZoom = index.maxZoom
+								trees = ArrayList()
+							}
+							codedIS.seek(index.filePointer)
+							codedIS.withLimit(index.length) { readMapLevel(parsed) }
+							parsed.trees!!.also { index.trees = it }
+						}
 					}
 
-					for (tree in index.trees!!) {
+					for (tree in trees) {
 						if (tree.right < req.left || tree.left > req.right ||
 							tree.top > req.bottom || tree.bottom < req.top) {
 							continue
@@ -958,14 +1052,14 @@ class BinaryMapIndexReader {
 	 */
 	fun readAmenityBboxes(pr: PoiRegion, tileIds: KTLongHashSet): Boolean {
 		poiAdapter.initCategories(pr)
-		val missing = pr.checkMissingTagGroups(tileIds)
+		val missing = getTagGroups(pr).checkMissingTagGroups(tileIds)
 		if (missing.size() == 0) {
 			return false
 		}
 		val sr = SearchRequest<Amenity>()
 		codedIS.seek(pr.filePointer)
 		val oldLim = codedIS.pushLimitLong(pr.length)
-		pr.updReadTagGroups(missing) // update before as tileIds is modified
+		getTagGroups(pr).updReadTagGroups(missing) // update before as tileIds is modified
 		poiAdapter.readPoiBboxes(pr, sr, missing)
 		codedIS.popLimit(oldLim)
 
