@@ -3910,7 +3910,7 @@
     <string name="trash_is_empty">Kôš je prázdny</string>
     <string name="rendering_value_sacScale_description">Švajčiarsky alpinistický klub</string>
     <string name="shared_string_class">Trieda</string>
-    <string name="map_widget_glide_average_desc">Zobrazuje priemerný pomer kĺzavosti pre nastavený interval.</string>
+    <string name="map_widget_glide_average_desc">Zobrazuje priemerný pomer kĺzavosti alebo priemernú vertikálnu rýchlosť pre nastavený interval.</string>
     <string name="glide_ratio_to_target">Pomer kĺzania k cieľu</string>
     <string name="map_widget_group_glide_ratio">Pomer kĺzania</string>
     <string name="average_glide_ratio">Priemerný pomer kĺzania</string>
