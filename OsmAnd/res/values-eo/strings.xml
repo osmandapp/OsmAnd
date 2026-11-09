@@ -5415,4 +5415,12 @@
     <string name="free_region_not_chosen_descr">La regiono de via unue elŝutita mapo iĝas via senpaga regiono.</string>
     <string name="free_region_banner_descr">Ĉiuj mapoj de %1$s estas senpagaj.</string>
     <string name="free_region_other_title">%1$s ne estas via senpaga regiono</string>
+    <string name="free_region_other_descr">La senpaga versio ampleksas mapojn de unu regiono. Por elŝuti mapojn de %1$s, necesas forigi mapojn de aliaj regionoj.</string>
+    <string name="free_region_will_be_deleted">Estos forigitaj:</string>
+    <string name="free_region_maps_stay">La fundamenta mapo de mondo, nivelkurboj kaj aliaj mapoj de kromprogramoj ne estos forigitaj.</string>
+    <string name="free_region_delete_and_download">Forigi kaj elŝuti</string>
+    <string name="free_region_replace_used_title">Senpaga anstataŭigo jam uzita</string>
+    <string name="free_region_not_eligible_email_descr">Enigu vian retpoŝtan adreson por senpage anstataŭigi vian regionon unufoje pli, aŭ akiru senlimajn elŝutojn.</string>
+    <string name="free_region_email_helper">Ni sendos al vi novaĵojn pri OsmAnd. Vi ĉiam povos malaboni.</string>
+    <string name="free_region_email_maps_deleted">Mapoj de %1$s (%2$s) estos forigitaj.</string>
 </resources>
