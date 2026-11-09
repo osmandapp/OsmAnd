@@ -11,6 +11,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.text.util.Linkify;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +58,6 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -306,32 +305,17 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	@NonNull
 	private CollapsableView getOpeningHoursCollapsableView(@NonNull Context context, @NonNull String openingHours) {
-		String checkDate = additionalInfo.get(CHECK_DATE_OPENING_HOURS);
+		String checkDate = additionalInfo.getFilteredInfo().get(CHECK_DATE_OPENING_HOURS);
 		if (Algorithms.isEmpty(checkDate)) {
 			return getCollapsableTextView(context, true, openingHours);
 		}
 		String text = app.getString(R.string.ltr_or_rtl_combine_via_colon,
-				app.getString(R.string.check_date), formatCheckDate(checkDate));
+				app.getString(R.string.poi_check_date), OsmAndFormatter.getFormattedIsoDate(app, checkDate));
 		CollapsableView collapsableView = getCollapsableTextView(context, true, text);
 		TextView textView = (TextView) collapsableView.getContentView();
-		textView.setTextSize(14);
+		textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimension(R.dimen.default_desc_text_size));
 		textView.setTextColor(ColorUtilities.getSecondaryTextColor(app, !isLightContent()));
 		return collapsableView;
-	}
-
-	@NonNull
-	private String formatCheckDate(@NonNull String value) {
-		try {
-			SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-			parser.setLenient(false);
-			Date date = parser.parse(value);
-			if (date != null) {
-				return android.text.format.DateFormat.getDateFormat(app).format(date);
-			}
-		} catch (ParseException e) {
-			// keep partial dates like 2025-07 as they are
-		}
-		return value;
 	}
 
 	@NonNull
