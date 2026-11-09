@@ -89,23 +89,24 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 		AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getKPoiTypes(), extensions);
 		Map<String, Object> filteredInfo = bundle.getFilteredLocalizedInfo();
 
+		Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(app, amenity, DESCRIPTION, filteredInfo);
+		String routeId = amenity.getRouteId();
+		boolean travelArticle = !Algorithms.isEmpty(routeId) && app.getResourceManager().hasTravelRepositories();
+		if (pair != null && !travelArticle) {
+			buildDescriptionRow(view, pair.first, null, null, getWikipediaClickListener(filteredInfo));
+			return true;
+		}
 		if (buildShortWikiDescription(view, filteredInfo, allowOnlineWiki)) {
 			return true;
 		}
-		Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(app, amenity, DESCRIPTION, filteredInfo);
 		if (pair != null) {
-			String routeId = amenity.getRouteId();
-			if (!Algorithms.isEmpty(routeId) && app.getResourceManager().hasTravelRepositories()) {
-				buildDescriptionRow(view, pair.first, v -> {
-					FragmentManager manager = mapActivity.getSupportFragmentManager();
-					TravelArticleIdentifier identifier = new TravelArticleIdentifier(null,
-							amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
-							null, routeId, null);
-					WikivoyageArticleDialogFragment.showInstance(app, manager, identifier, null);
-				}, app.getString(R.string.context_menu_read_article));
-			} else {
-				buildDescriptionRow(view, pair.first);
-			}
+			buildDescriptionRow(view, pair.first, v -> {
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				TravelArticleIdentifier identifier = new TravelArticleIdentifier(null,
+						amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
+						null, routeId, null);
+				WikivoyageArticleDialogFragment.showInstance(app, manager, identifier, null);
+			}, app.getString(R.string.context_menu_read_article));
 			return true;
 		}
 		return false;
