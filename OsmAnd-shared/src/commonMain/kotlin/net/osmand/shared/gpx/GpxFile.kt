@@ -1086,8 +1086,9 @@ class GpxFile : GpxExtensions {
 
 	fun updateTrackName(newName: String) {
 		metadata.name = newName
-		if (tracks.size == 1) {
-			tracks[0].name = newName
+		val fileTracks = getTracks(false)
+		if (fileTracks.size == 1) {
+			fileTracks[0].name = newName
 		}
 		modifiedTime = currentTimeMillis()
 	}
