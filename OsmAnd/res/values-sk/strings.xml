@@ -3925,7 +3925,7 @@
     <string name="shared_string_reset_all">Resetovať všetko</string>
     <string name="date_of_creation">Dátum vytvorenia</string>
     <string name="map_widget_group_glide_desc">Nástroj zobrazuje pomer kĺzavosti k cieľu alebo priemerný pomer kĺzavosti pre aktuálny výlet.</string>
-    <string name="map_widget_glide_target_desc">Zobrazuje pomer kĺzavosti potrebný na dosiahnutie cieľového bodu.</string>
+    <string name="map_widget_glide_target_desc">Zobrazuje pomer kĺzavosti potrebný na dosiahnutie cieľového bodu alebo výšku cieľového bodu.</string>
     <string name="help_article_map_legend_osmand_name">Štýl mapy OsmAnd</string>
     <string name="help_article_map_legend_nautical_map_name">Štýl námornej mapy</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O navigácii OsmAnd</string>
