@@ -142,4 +142,9 @@ public class MapMarkerSelectionFragment extends BaseFullScreenDialogFragment {
 			return convertView;
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "map_marker_selection";
+	}
 }

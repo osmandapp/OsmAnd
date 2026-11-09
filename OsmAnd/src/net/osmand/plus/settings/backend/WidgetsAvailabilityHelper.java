@@ -90,7 +90,9 @@ public class WidgetsAvailabilityHelper {
 		ApplicationMode[] smallNextTurnSet = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT, TRAIN};
 		ApplicationMode[] secondNextTurnSet = {CAR, BICYCLE, PEDESTRIAN, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE, MOPED};
 
-		boolean enableWidgetsV2 = Version.getInstallTime(app) >= ROUTE_WIDGETS_V2_INTRO_TIME_MS;
+		// The first start of a new install comes here before FIRST_INSTALLED is written (0)
+		long installTime = Version.getInstallTime(app);
+		boolean enableWidgetsV2 = installTime == 0 || installTime >= ROUTE_WIDGETS_V2_INTRO_TIME_MS;
 		if (enableWidgetsV2) {
 			regWidgetVisibility(ROUTE_INFO, exceptDefault);
 		}

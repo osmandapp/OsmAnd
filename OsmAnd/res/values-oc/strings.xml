@@ -265,10 +265,6 @@
     <string name="shared_string_added">Ajustat</string>
     <string name="marker_activated">Marcador %s activat.</string>
     <string name="one_tap_active">\'Un tòc\' actiu</string>
-    <string name="empty_state_av_notes">Notatz !</string>
-    <string name="notes_by_date">Nòtas ordenadas per data</string>
-    <string name="by_date">Per data</string>
-    <string name="by_type">Per tipe</string>
     <string name="shared_string_more_without_dots">Mai</string>
     <string name="appearance_on_the_map">Aparença de la mapa</string>
     <string name="favourites_group">Categoria de luòcs preferits</string>
@@ -852,7 +848,6 @@
     <string name="shared_string_help">Ajuda</string>
     <string name="record_plugin_name">Enregistrament d\'escorregudas</string>
     <string name="plugin_touringview_name">Vista toristica de la mapa</string>
-    <string name="audionotes_plugin_name">Nòtas audio/video</string>
     <string name="osmand_parking_plugin_name">Posicion d\'aparcament</string>
     <string name="osm_editing_plugin_name">Modificar OpenStreetMap</string>
     <string name="shared_string_favorites">Preferéncias</string>
@@ -1736,7 +1731,7 @@
     <string name="shared_string_others">Autres</string>
     <string name="routeInfo_surface_name">Superficia</string>
     <string name="routing_attr_piste_type_skitour_name">Esquilh de rota</string>
-    <string name="routing_attr_avoid_sett_name">Sensa peirada nimai caladat</string>
+    <string name="routing_attr_avoid_sett_name">Sensa pavats</string>
     <string name="routing_attr_height_name">Limit d\'auçada</string>
     <string name="navigate_point_northing">Devèrs Nòrd</string>
     <string name="shared_string_nothing_selected">Ren de seleccionat</string>
@@ -1750,7 +1745,7 @@
     <string name="mapillary">Mapillary</string>
     <string name="type_address">Mena d\'adreiça</string>
     <string name="routing_attr_piste_type_sled_name">Tirassa</string>
-    <string name="routing_attr_avoid_sett_description">Evitar lei caladats e lei peiradas</string>
+    <string name="routing_attr_avoid_sett_description">Evitar lei pavats</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas per esquilh alpin ò eslalom e accès ai remonradors.</string>
     <string name="routing_attr_allow_advanced_description">Vias dificilas, amb espachas perilhosas e estiradas de pendent sobde.</string>
     <string name="routing_attr_allow_intermediate_name">Permetre lei percors intermediaris</string>
@@ -2091,4 +2086,6 @@
     <string name="map_widget_group_glide_desc">Lei clavelets mòstan la deriva a respècte de la destinacon ò la deriva mejana de la corsa correnta.</string>
     <string name="shared_string_accessibility">Accessibilitat</string>
     <string name="help_article_widgets_name">Clavelets de la mapa</string>
+    <string name="routing_attr_avoid_cobblestone_name">Evitar lei caladats</string>
+    <string name="routing_attr_avoid_cobblestone_description">Evitar lei caladats</string>
 </resources>

@@ -309,4 +309,9 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "accessibility_settings";
+	}
 }

@@ -303,4 +303,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		showCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}
 
+	@Override
+	public String getAnalyticsScreen() {
+		return "voice_announces";
+	}
 }

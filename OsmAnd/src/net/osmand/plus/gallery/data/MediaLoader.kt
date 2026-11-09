@@ -1,5 +1,6 @@
 package net.osmand.plus.gallery.data
 
+import net.osmand.plus.gallery.model.MediaHolder
 import kotlin.reflect.KClass
 
 class MediaLoader(
@@ -30,7 +31,7 @@ class MediaLoader(
 	) {
 		if (!forceReload) {
 			val cached = repository.get(key)
-			if (cached != null) {
+			if (cached != null && shouldReuseCachedHolder(key, cached)) {
 				listener.onLoaded(key, cached)
 				return
 			}
@@ -86,5 +87,9 @@ class MediaLoader(
 			listeners.remove(key)
 			delegates[key::class]?.cancel(key)
 		}
+	}
+
+	private fun shouldReuseCachedHolder(key: GalleryKey, cached: MediaHolder): Boolean {
+		return cached.isComplete || delegates[key::class]?.canRefresh() == false
 	}
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -21,6 +22,7 @@
 		android:paddingTop="@dimen/content_padding_half"
 		android:paddingBottom="@dimen/content_padding"
 		android:textSize="@dimen/default_desc_text_size"
+		app:lineHeight="@dimen/default_desc_line_height"
 		tools:text="Photos 3, videos 2, audio 2.\nSize 14 mb." />
 
 </LinearLayout>

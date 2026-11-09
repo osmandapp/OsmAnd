@@ -32,10 +32,10 @@ import kotlin.math.min
  * the graph's vertices. When a resolved edge costs more than the graph promised (live map updates,
  * a parameter the graph was not built for) the edge is corrected and the search runs again.
  *
- * A copy of `HHRoutePlanner` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. Java's `T extends NetworkDBPoint` is [NetworkDBPoint] here, and the planner over the
- * tools' SQLite `HHRoutingDB` (`createDB`) is not copied: the apps route over obf files through
- * [create]. The point id helpers sit on [HHRouteDataStructure].
+ * Based on `HHRoutePlanner` from OsmAnd-java. Java's `T extends NetworkDBPoint` is
+ * [NetworkDBPoint] here, and the planner over the tools' SQLite `HHRoutingDB` (`createDB`) is
+ * not copied: the apps route over obf files through [create]. The point id helpers sit on
+ * [HHRouteDataStructure].
  */
 class HHRoutePlanner private constructor(ctx: RoutingContext) {
 

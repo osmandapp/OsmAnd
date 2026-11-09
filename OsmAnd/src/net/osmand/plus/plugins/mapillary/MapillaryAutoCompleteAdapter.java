@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutionException;
 
 public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> {
 
-	private static final String TAG = MapillaryAutoCompleteAdapter.class.getSimpleName();
+	private static final String TAG = "MapillaryAutoCompleteAdapter";
 
 	private final OsmandApplication app;
 	private final MapillaryPlugin plugin;

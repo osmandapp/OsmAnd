@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.IndexConstants;
-import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -19,9 +18,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -30,6 +32,8 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.shared.data.AdditionalInfoBundle;
+import net.osmand.shared.data.AmenityTagEntry;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
@@ -45,7 +49,8 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
 	private Map<String, String> amenityExtensions = new HashMap<>();
-	private Set<String> genericFallbackKeys = Collections.emptySet();
+	private Set<String> genericRowKeys = Collections.emptySet();
+	private Map<String, String> amenityRowValues;
 
 	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt,
 			@Nullable PlaceDetailsObject detailsObject) {
@@ -66,7 +71,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 				setAmenity(helper.findAmenity(originName, wpt.getLatitude(), wpt.getLongitude()));
 			}
 		}
-		genericFallbackKeys = AmenityExtensionsHelper.getStoredExtensionFallbackKeys(wpt.getExtensionsToRead());
+		genericRowKeys = AdditionalInfoBundle.getGenericRowKeys(wpt.getExtensionsToRead());
 		amenityExtensions = helper.getUpdatedAmenityExtensions(wpt.getExtensionsToRead(), amenity);
 	}
 
@@ -142,9 +147,9 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
 			boolean light = isLightContent();
-			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getPoiTypes(), amenityExtensions);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getKPoiTypes(), amenityExtensions);
 			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, bundle);
-			helper.setGenericFallbackKeys(genericFallbackKeys);
+			helper.setGenericRowKeys(genericRowKeys);
 			helper.setLight(light);
 			helper.setLatLon(getLatLon());
 			helper.setCollapseExpandListener(getCollapseExpandListener());
@@ -156,6 +161,27 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	protected void prepareDescription(WptPt wpt, View view) {
 
+	}
+
+	/**
+	 * Values of the extensions that get their own row in {@link #buildInternal}, by key.
+	 */
+	@NonNull
+	protected Map<String, String> getAmenityRowValues() {
+		if (amenityRowValues == null) {
+			amenityRowValues = new HashMap<>();
+			if (!Algorithms.isEmpty(amenityExtensions)) {
+				AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getKPoiTypes(), amenityExtensions);
+				boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
+				List<String> preferredLangs = LocaleHelper.getPreferredLangCandidates(app);
+				for (AmenityTagEntry entry : bundle.getVisibleTags(osmEditingEnabled, preferredLangs, genericRowKeys)) {
+					if (!Algorithms.isEmpty(entry.value)) {
+						amenityRowValues.put(entry.key, entry.value);
+					}
+				}
+			}
+		}
+		return amenityRowValues;
 	}
 
 	private void buildWaypointsView(View view) {

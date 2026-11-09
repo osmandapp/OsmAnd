@@ -487,7 +487,7 @@ public class MapLayers {
 		if (includeOfflineMaps) {
 			entriesMap.put(LAYER_OSM_VECTOR, app.getString(R.string.vector_data));
 		}
-		entriesMap.putAll(settings.getTileSourceEntries());
+		entriesMap.putAll(settings.getTileSourceEntriesSortedByTitle());
 		entriesMap.put(LAYER_INSTALL_MORE, app.getString(R.string.install_more));
 		entriesMap.put(LAYER_ADD, app.getString(R.string.shared_string_add_manually));
 		List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());

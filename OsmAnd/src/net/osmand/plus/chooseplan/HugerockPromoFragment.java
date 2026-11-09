@@ -68,4 +68,9 @@ public class HugerockPromoFragment extends PromoCompanyFragment {
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "hugerock_promo";
+	}
 }

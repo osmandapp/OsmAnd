@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.*;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.LockableViewPager;
@@ -53,6 +55,7 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -160,6 +163,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private final List<ChipsLayout.ChipData> filterChipItems = new ArrayList<>();
 	private View advancedCoordinatesCard;
 	private SearchResultCollection unfilteredResultCollection;
+	private SearchResultCollection popularPlacesCollection;
+	private PoiUIFilter popularPlacesFilter;
 	private TextView sendEmptySearchText;
 	private FrameLayout sendEmptySearchButton;
 	private QuickSearchMainListFragment mainSearchFragment;
@@ -228,6 +233,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private QuickSearchType searchType = QuickSearchType.REGULAR;
 
 	private static final double DISTANCE_THRESHOLD = 70000; // 70km
+	private static final double MY_LOCATION_THRESHOLD = 50; // 50m
 	private static final int EXPIRATION_TIME_MIN = 10; // 10 minutes
 
 	private static boolean isDebugMode = SearchUICore.isDebugMode();
@@ -860,12 +866,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (dialog == null) {
 			return;
 		}
-		updateSearchAroundLocationAfterMapReturn();
 		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 		dialog.show();
 		paused = false;
 		cancelPrev = false;
 		hidden = false;
+		updateSearchAroundLocationAfterMapReturn();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.updateBackPressedCallbackState();
@@ -914,20 +920,21 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (mapCenter == null) {
 			return;
 		}
+		useMapCenter = !isMapCenterAtMyLocation(mapCenter);
+		updateSearchAroundLocation(useMapCenter ? mapCenter : new LatLon(location.getLatitude(), location.getLongitude()));
+		updateUseMapCenterUI();
+		updateContent(null);
+	}
+
+	private boolean isMapCenterAtMyLocation(@NonNull LatLon mapCenter) {
 		if (location == null) {
-			useMapCenter = true;
-			updateSearchAroundLocation(mapCenter);
-			updateUseMapCenterUI();
-			updateContent(null);
-			return;
+			return false;
+		}
+		if (app.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+			return true;
 		}
 		double distance = MapUtils.getDistance(mapCenter, location.getLatitude(), location.getLongitude());
-		if (distance >= DISTANCE_THRESHOLD) {
-			useMapCenter = true;
-			updateSearchAroundLocation(mapCenter);
-			updateUseMapCenterUI();
-			updateContent(null);
-		}
+		return distance < MY_LOCATION_THRESHOLD;
 	}
 
 	private void visibilityChanged(boolean visible) {
@@ -1154,12 +1161,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 		filterChips.updateContent(filterChipItems);
 		searchResultPoiTypesChips.setContentEnabled(!searching);
-		if (!searching) {
+		if (!searching || topChips.isEmpty() || !searchResultPoiTypesChips.hasVisibleChips()) {
 			searchResultPoiTypesChips.updateContent(topChips);
 		}
 		boolean filterChipsVisible = searchVisible && hasVisibleChip(filterChipItems);
 		filterChips.setVisibility(filterChipsVisible ? View.VISIBLE : View.GONE);
-		boolean poiTypesChipsVisible = searchVisible && !topChips.isEmpty();
+		boolean poiTypesChipsVisible = searchVisible && searchResultPoiTypesChips.hasVisibleChips();
 		searchResultPoiTypesChips.setVisibility(poiTypesChipsVisible ? View.VISIBLE : View.GONE);
 		if (filterChipsVisible || poiTypesChipsVisible) {
 			buttonToolbarView.setVisibility(View.VISIBLE);
@@ -1240,7 +1247,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			AbstractPoiType poiType = getPoiTypeForAmenity(amenity);
 			return poiType != null ? poiType.getTranslation() : null;
 		} else if (object instanceof PoiType type) {
-			return type.getTranslation();
+			return PoiAdditionalLabels.getSearchName(type);
 		} else if(object instanceof MapObject mapObject) {
 			return MapObjectViewHolder.getTypeName(app, mapObject);
 		}
@@ -1645,7 +1652,11 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		updateChipsState();
 		if (changed) {
 			applySelectedSortSetting();
-			rerunCurrentSearchQuery(true);
+			if (popularPlacesCollection != null) {
+				renderPopularPlaces(false);
+			} else {
+				rerunCurrentSearchQuery(true);
+			}
 		}
 	}
 
@@ -1700,8 +1711,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		LatLon searchLatLon;
 		if (centerLatLon == null) {
 			LatLon clt = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-			searchLatLon = clt;
-			useMapCenter = true;
+			useMapCenter = !isMapCenterAtMyLocation(clt);
+			searchLatLon = useMapCenter ? clt : new LatLon(location.getLatitude(), location.getLongitude());
 			searchEditText.setHint(R.string.search_poi_category_hint);
 		} else {
 			searchLatLon = centerLatLon;
@@ -1946,6 +1957,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void setResultCollection(SearchResultCollection resultCollection, boolean preserveSelectedPoiTypeNames) {
 		if (resultCollection == null) {
 			unfilteredResultCollection = null;
+			popularPlacesCollection = null;
+			popularPlacesFilter = null;
 			preservePoiTypeChips = preserveSelectedPoiTypeNames || shouldPreservePoiTypeChipsDuringSearch();
 			if (!preserveSelectedPoiTypeNames) {
 				selectedResultPoiTypeNames.clear();
@@ -2248,6 +2261,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_postcode, getString(R.string.select_postcode), v -> {
 			searchEditText.setHint(R.string.type_postcode);
 			startPostcodeSearch();
+			setResultCollection(null);
 			mainSearchFragment.getAdapter().clear();
 			updateTabBarVisibility(false);
 			openKeyboard();
@@ -2478,6 +2492,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
 	                                   SearchResultListener resultListener, boolean preserveSelectedPoiTypeNames) {
+		if (searchHelper.updateSearchEngine(searchUICore.getSearchSettings().getOriginalLocation()) && searchMore) {
+			// the results and the radius of the other engine are not continued: search anew
+			searchUICore.updateSettings(searchUICore.getSearchSettings().setRadiusLevel(1));
+			runCoreSearch(text, showQuickResult, false, resultListener, true);
+			return;
+		}
 		searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection;
 			SearchCoreAPI regionResultApi;
@@ -2762,22 +2782,15 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void restoreDefaultSearchLocation() {
 		if (searchUICore == null) {
 			return;
-		}//
+		}
 		LatLon searchLatLon = null;
 		LatLon mapCenter = getCurrentMapCenter();
-		if (location != null) {
-			searchLatLon = new LatLon(location.getLatitude(), location.getLongitude());
-			useMapCenter = false;
-			if (mapCenter != null) {
-				double distance = MapUtils.getDistance(mapCenter, location.getLatitude(), location.getLongitude());
-				if (distance >= DISTANCE_THRESHOLD) {
-					searchLatLon = mapCenter;
-					useMapCenter = true;
-				}
-			}
-		} else if (mapCenter != null) {
+		if (mapCenter != null && !isMapCenterAtMyLocation(mapCenter)) {
 			searchLatLon = mapCenter;
 			useMapCenter = true;
+		} else if (location != null) {
+			searchLatLon = new LatLon(location.getLatitude(), location.getLongitude());
+			useMapCenter = false;
 		}
 		if (searchLatLon != null) {
 			updateSearchAroundLocation(searchLatLon);
@@ -2909,7 +2922,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
 		}
 		applySelectedSortSetting();
-		runCoreSearch(searchQuery, false, true);
+		// spatial rows are appended without deduplication, and a larger radius finds them again: replace them
+		SearchResultCollection collection = getResultCollection();
+		boolean spatialResults = collection != null && collection.isSkipSorting();
+		runCoreSearch(searchQuery, false, !spatialResults, spatialResults);
 	}
 
 	private boolean showMoreSpatialSearchResults() {
@@ -2968,7 +2984,20 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				updateSendEmptySearchBottomBar(false);
 			}
 			mainSearchFragment.updateListAdapter(rows, append, false);
+			addUpdateMapsForNewSearchRow();
 			updateTopFilterChips();
+		}
+	}
+
+	private void addUpdateMapsForNewSearchRow() {
+		int maps = searchHelper.getMapsWithoutSpatialSearch().size();
+		if (maps > 0 && !isTextEmpty()) {
+			String title = getString(R.string.update_maps_to_use_new_search, String.valueOf(maps));
+			mainSearchFragment.getListAdapter().insertListItem(new QuickSearchButtonListItem(app, R.drawable.ic_action_update, title, v -> {
+				Intent intent = new Intent(app, app.getAppCustomization().getDownloadIndexActivity());
+				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.UPDATES_TAB);
+				startActivity(intent);
+			}), 0);
 		}
 	}
 
@@ -3345,15 +3374,28 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void showResult(@NonNull PoiUIFilter filter, @NonNull SearchResultCollection collection) {
+		popularPlacesCollection = collection;
+		popularPlacesFilter = filter;
 		mainSearchFragment.getAdapter().clear();
-		updateSearchResult(collection, true);
-		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
+		applySelectedSortSetting();
+		renderPopularPlaces(true);
 		updateTabBarVisibility(false);
 		setButtonToolbarVisible(true);
 		toolbarEdit.setVisibility(View.GONE);
 		searchEditText.setHint(R.string.popular_places);
 		searchEditText.setEnabled(false);
 		toolbar.setVisibility(View.VISIBLE);
+	}
+
+	private void renderPopularPlaces(boolean append) {
+		SearchResultCollection collection = popularPlacesCollection;
+		if (selectedSortByOption == SortByOption.NEAREST) {
+			SearchPhrase phrase = SearchPhrase.emptyPhrase(searchUICore.getSearchSettings());
+			collection = new SearchResultCollection(phrase)
+					.addSearchResults(popularPlacesCollection.getCurrentSearchResults(), true, false);
+		}
+		updateSearchResult(collection, append);
+		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(popularPlacesFilter);
 	}
 
 	public void showSearchHistoryResult(@NonNull SearchResult searchResult) {
@@ -3384,5 +3426,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	// so that back navigation restores exactly the query which is displayed now.
 	public void saveAddressSearchState() {
 		addressSearchStack.push(searchEditText.getText().toString());
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "quick_search";
 	}
 }

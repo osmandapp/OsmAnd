@@ -44,6 +44,7 @@ import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.FavoritesTileProvider;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -67,6 +68,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private OsmandSettings settings;
 	private ContextMenuLayer contextMenuLayer;
 	private boolean showFavorites;
+	private boolean showHiddenParking;
 	private float textScale = 1f;
 	private boolean textVisible;
 	private boolean nightMode;
@@ -140,13 +142,14 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		cache.clear();
 		if (hasMapRenderer()) {
-			if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
+			if (mapActivityInvalidated || invalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
 					|| favoritesChanged || textScaleChanged || textVisibleChanged
 					|| (customObjectsDelegate != null && customObjectsDelegate.isChanged())) {
 				showFavorites();
 				if (customObjectsDelegate != null) {
 					customObjectsDelegate.acceptChanges();
 				}
+				invalidated = false;
 				mapRendererChanged = false;
 			}
 		} else {
@@ -187,11 +190,11 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		for (FavouritePoint favoritePoint : pointsToDraw) {
 			double lat = favoritePoint.getLatitude();
 			double lon = favoritePoint.getLongitude();
-			if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()
+			if (isPointVisibleOnMap(favoritePoint) && favoritePoint != contextMenuLayer.getMoveableObject()
 					&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
 					&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 				MapMarker marker = null;
-				if (synced) {
+				if (isSyncedPoint(favoritePoint, synced)) {
 					marker = mapMarkersHelper.getMapMarker(favoritePoint);
 					if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
 						continue;
@@ -226,6 +229,38 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			drawBigPoint(canvas, favoritePoint, x, y, pair.second, textScale);
 		}
 
+	}
+
+	/**
+	 * Set by the Parking position plugin from updateLayers(): true while the plugin is active.
+	 */
+	public void setShowHiddenParking(boolean showHiddenParking) {
+		if (this.showHiddenParking != showHiddenParking) {
+			this.showHiddenParking = showHiddenParking;
+			invalidated = true;
+		}
+	}
+
+	/**
+	 * The parking favorite stays on the map while the Parking position plugin is active,
+	 * even if its folder is hidden. Other points follow the visibility of their folder.
+	 */
+	private boolean isPointVisibleOnMap(@NonNull FavouritePoint point) {
+		return point.isVisible() || showHiddenParking && point.getSpecialPointType() == SpecialPointType.PARKING;
+	}
+
+	public boolean hasPointOnMapAt(@NonNull LatLon latLon) {
+		for (FavouritePoint point : favouritesHelper.getFavouritePoints()) {
+			if (isPointVisibleOnMap(point) && MapUtils.areLatLonEqual(latLon, point.getLatitude(), point.getLongitude())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isSyncedPoint(@NonNull FavouritePoint point, boolean synced) {
+		// A hidden synced folder has no markers, so the parking point shown despite it is drawn as a plain favorite
+		return synced && point.isVisible();
 	}
 
 	private boolean isSynced(@NonNull FavoriteGroup group) {
@@ -313,9 +348,9 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private void showFavoritePoints(float textScale, boolean synced, List<FavouritePoint> points) {
 		for (FavouritePoint favoritePoint : points) {
-			if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {
+			if (isPointVisibleOnMap(favoritePoint) && favoritePoint != contextMenuLayer.getMoveableObject()) {
 				MapMarker marker = null;
-				if (synced) {
+				if (isSyncedPoint(favoritePoint, synced)) {
 					marker = mapMarkersHelper.getMapMarker(favoritePoint);
 					if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
 						continue;
@@ -368,7 +403,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		for (FavouritePoint favouritePoint : favouritePoints) {
-			if (!favouritePoint.isVisible()) {
+			if (!isPointVisibleOnMap(favouritePoint)) {
 				continue;
 			}
 

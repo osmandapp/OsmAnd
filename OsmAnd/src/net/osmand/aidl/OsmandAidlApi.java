@@ -22,13 +22,24 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.ParcelFileDescriptor;
 import android.view.KeyEvent;
+import android.view.PixelCopy;
+import android.view.SurfaceView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,6 +82,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.card.color.palette.solid.data.DefaultColors;
+import net.osmand.plus.flyover.FlyoverSession;
+import net.osmand.plus.flyover.MapFlyoverRecorder;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.NavigateGpxHelper;
@@ -90,6 +103,7 @@ import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.development.LogcatAsyncTask;
 import net.osmand.plus.plugins.development.LogcatMessageListener;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
@@ -118,6 +132,7 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -125,6 +140,8 @@ import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -135,6 +152,8 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.TurnType;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
@@ -149,6 +168,8 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class OsmandAidlApi {
 
@@ -229,6 +250,9 @@ public class OsmandAidlApi {
 
 	private final OsmandApplication app;
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
+	private static final String CONNECTIONS_PREFS = "aidl_connections";
+	private static final String CONNECTED_APPS_KEY = "connected_apps";
+
 	private final Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
 	private final Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
 	private final Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
@@ -237,11 +261,17 @@ public class OsmandAidlApi {
 	private final Map<Long, LogcatAsyncTask> logcatAsyncTasks = new ConcurrentHashMap<>();
 
 	private MapActivity mapActivity;
+	// the last file read by getGpxPoints: pages of a big track must not load it again
+	private File pointsFile;
+	private long pointsFileModified;
+	private List<WptPt> pointsCache;
 
 	private boolean mapActivityActive;
 
 	public OsmandAidlApi(@NonNull OsmandApplication app) {
 		this.app = app;
+		// before the tracks are loaded: settings a crashed flyover recording left behind
+		FlyoverSession.recover(app);
 		loadConnectedApps();
 	}
 
@@ -350,6 +380,8 @@ public class OsmandAidlApi {
 						if (!Float.isNaN(rotation)) {
 							mapView.setRotate(rotation, false);
 						}
+						// as a pan by hand: a map linked to my location would go back to it at the next fix
+						app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 						if (animated) {
 							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, zoomFloatPart);
 						} else {
@@ -1525,30 +1557,119 @@ public class OsmandAidlApi {
 	}
 
 	boolean getImportedGpxV2(List<net.osmand.aidlapi.gpx.AGpxFile> files) {
-		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
-		for (GpxDataItem dataItem : gpxDataItems) {
-			KFile file = dataItem.getFile();
-			String fileName = file.name();
-			String absolutePath = file.absolutePath();
-			boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
-			long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
-			long fileSize = file.length();
-			Integer color = dataItem.getParameter(COLOR);
-			String colorName = "";
-			if (color != null) {
-				colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
-			}
-			net.osmand.aidlapi.gpx.AGpxFileDetails details = null;
-			GpxTrackAnalysis analysis = dataItem.getAnalysis();
-			if (analysis != null) {
-				details = createGpxFileDetailsV2(analysis);
-			}
-			net.osmand.aidlapi.gpx.AGpxFile gpxFile = new net.osmand.aidlapi.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, colorName, details);
-			gpxFile.setRelativePath(GpxUiHelper.getGpxFileRelativePath(app, absolutePath));
-
-			files.add(gpxFile);
+		for (GpxDataItem dataItem : app.getGpxDbHelper().getItems()) {
+			files.add(createGpxFileV2(dataItem));
 		}
 		return true;
+	}
+
+	@NonNull
+	private net.osmand.aidlapi.gpx.AGpxFile createGpxFileV2(@NonNull GpxDataItem dataItem) {
+		KFile file = dataItem.getFile();
+		String fileName = file.name();
+		String absolutePath = file.absolutePath();
+		boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
+		long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
+		long fileSize = file.length();
+		Integer color = dataItem.getParameter(COLOR);
+		String colorName = "";
+		if (color != null) {
+			colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
+		}
+		net.osmand.aidlapi.gpx.AGpxFileDetails details = null;
+		GpxTrackAnalysis analysis = dataItem.getAnalysis();
+		if (analysis != null) {
+			details = createGpxFileDetailsV2(analysis);
+		}
+		net.osmand.aidlapi.gpx.AGpxFile gpxFile = new net.osmand.aidlapi.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, colorName, details);
+		gpxFile.setRelativePath(GpxUiHelper.getGpxFileRelativePath(app, absolutePath));
+		gpxFile.setActivityType(dataItem.getParameter(GpxParameter.ACTIVITY_TYPE));
+		gpxFile.setNearestCityName(dataItem.getParameter(GpxParameter.NEAREST_CITY_NAME));
+		Double startLat = dataItem.getParameter(GpxParameter.START_LAT);
+		Double startLon = dataItem.getParameter(GpxParameter.START_LON);
+		if (startLat != null && startLon != null) {
+			gpxFile.setStartLocation(startLat, startLon);
+		}
+		return gpxFile;
+	}
+
+	@NonNull
+	net.osmand.aidlapi.gpx.AGpxSearchResult searchGpx(@NonNull net.osmand.aidlapi.gpx.GpxSearchParams params) {
+		List<GpxDataItem> items = app.getGpxDbHelper().getItems();
+		String query = params.getQuery() != null ? params.getQuery().toLowerCase() : null;
+		String folder = Algorithms.isEmpty(params.getFolder()) ? null : params.getFolder().replaceAll("/+$", "") + "/";
+		Set<String> activityTypes = new TreeSet<>();
+		List<net.osmand.aidlapi.gpx.AGpxFile> found = new ArrayList<>();
+		for (GpxDataItem item : items) {
+			String activity = item.getParameter(GpxParameter.ACTIVITY_TYPE);
+			if (!Algorithms.isEmpty(activity)) {
+				activityTypes.add(activity);
+			}
+			String path = GpxUiHelper.getGpxFileRelativePath(app, item.getFile().absolutePath());
+			if (query != null && !path.toLowerCase().contains(query)
+					|| folder != null && !path.startsWith(folder)
+					|| !Algorithms.isEmpty(params.getActivityType()) && !params.getActivityType().equals(activity)) {
+				continue;
+			}
+			long startTime = item.getParameter(GpxParameter.START_TIME);
+			double distance = item.getParameter(GpxParameter.TOTAL_DISTANCE);
+			if (params.getFromTime() > 0 && (startTime == Long.MAX_VALUE || startTime < params.getFromTime())
+					|| params.getToTime() > 0 && (startTime == Long.MAX_VALUE || startTime > params.getToTime())
+					|| params.getMinDistance() > 0 && distance < params.getMinDistance()
+					|| params.getMaxDistance() > 0 && distance > params.getMaxDistance()) {
+				continue;
+			}
+			if (!matchesStats(item, params)) {
+				continue;
+			}
+			net.osmand.aidlapi.gpx.AGpxFile file = createGpxFileV2(item);
+			if (!params.isShownOnly() || file.isActive()) {
+				found.add(file);
+			}
+		}
+		String sort = params.getSort();
+		if (net.osmand.aidlapi.gpx.GpxSearchParams.SORT_NAME.equals(sort)) {
+			found.sort((a, b) -> a.getRelativePath().compareToIgnoreCase(b.getRelativePath()));
+		} else if (net.osmand.aidlapi.gpx.GpxSearchParams.SORT_LONGEST.equals(sort)) {
+			found.sort((a, b) -> Float.compare(getDistance(b), getDistance(a)));
+		} else if (net.osmand.aidlapi.gpx.GpxSearchParams.SORT_OLDEST.equals(sort)) {
+			found.sort((a, b) -> Long.compare(getStartTime(a), getStartTime(b)));
+		} else {
+			found.sort((a, b) -> Long.compare(getStartTime(b), getStartTime(a)));
+		}
+		int from = Math.min(Math.max(0, params.getOffset()), found.size());
+		int to = Math.min(found.size(), from + Math.max(0, params.getLimit()));
+		return new net.osmand.aidlapi.gpx.AGpxSearchResult(items.size(), found.size(),
+				new ArrayList<>(found.subList(from, to)), new ArrayList<>(activityTypes));
+	}
+
+	private static boolean matchesStats(@NonNull GpxDataItem item, @NonNull net.osmand.aidlapi.gpx.GpxSearchParams params) {
+		double descent = item.getParameter(GpxParameter.DIFF_ELEVATION_DOWN);
+		double minElevation = item.getParameter(GpxParameter.MIN_ELEVATION);
+		double maxElevation = item.getParameter(GpxParameter.MAX_ELEVATION);
+		double maxSpeed = item.getParameter(GpxParameter.MAX_SPEED);
+		long timeSpan = item.getParameter(GpxParameter.TIME_SPAN);
+		double distance = item.getParameter(GpxParameter.TOTAL_DISTANCE);
+		// over the whole time, stops and lifts included
+		double avgSpeed = timeSpan > 0 ? distance / (timeSpan / 1000.0) : 0;
+		// tracks without elevations keep min 99999 and max -100, so their range is negative
+		double elevationRange = maxElevation - minElevation;
+		return (params.getMinDescent() <= 0 || descent >= params.getMinDescent())
+				&& (params.getMinElevationRange() <= 0 || elevationRange >= params.getMinElevationRange())
+				&& (params.getMinMaxSpeed() <= 0 || maxSpeed >= params.getMinMaxSpeed())
+				&& (params.getMaxMaxSpeed() <= 0 || maxSpeed <= params.getMaxMaxSpeed())
+				&& (params.getMaxAvgSpeed() <= 0 || avgSpeed > 0 && avgSpeed < params.getMaxAvgSpeed());
+	}
+
+	private static float getDistance(@NonNull net.osmand.aidlapi.gpx.AGpxFile file) {
+		return file.getDetails() != null ? file.getDetails().getTotalDistance() : 0;
+	}
+
+	// tracks without times sort by the file time
+	private static long getStartTime(@NonNull net.osmand.aidlapi.gpx.AGpxFile file) {
+		net.osmand.aidlapi.gpx.AGpxFileDetails details = file.getDetails();
+		long start = details != null ? details.getStartTime() : Long.MAX_VALUE;
+		return start != Long.MAX_VALUE && start > 0 ? start : file.getModifiedTime();
 	}
 
 	boolean getImportedGpx(List<AGpxFile> files) {
@@ -1725,6 +1846,500 @@ public class OsmandAidlApi {
 			return true;
 		}
 		return false;
+	}
+
+	boolean setMapCamera(double latitude, double longitude, float zoom, float rotation, float elevationAngle,
+	                     boolean animated) {
+		MapActivity mapActivity = this.mapActivity;
+		if (mapActivity == null) {
+			return false;
+		}
+		app.runInUIThread(() -> {
+			OsmandMapTileView mapView = mapActivity.getMapView();
+			if (!Float.isNaN(rotation)) {
+				mapView.setRotate(rotation, false);
+			}
+			if (!Float.isNaN(elevationAngle)) {
+				mapView.setElevationAngle(elevationAngle);
+			}
+			if (!Double.isNaN(latitude) && !Double.isNaN(longitude)) {
+				// as a pan by hand: a map linked to my location would go back to it at the next fix
+				app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+				int baseZoom = mapView.getZoom();
+				float zoomFloatPart = mapView.getZoomFloatPart();
+				if (!Float.isNaN(zoom) && zoom > 0) {
+					float limited = Math.max(mapView.getMinZoom(), Math.min(zoom, mapView.getMaxZoom()));
+					baseZoom = (int) limited;
+					zoomFloatPart = limited - baseZoom;
+				}
+				if (animated) {
+					mapView.getAnimatedDraggingThread().startMoving(latitude, longitude, baseZoom, zoomFloatPart);
+				} else {
+					mapView.setLatLon(latitude, longitude);
+					mapView.setZoomWithFloatPart(baseZoom, zoomFloatPart);
+				}
+			}
+			mapActivity.refreshMap();
+		});
+		return true;
+	}
+
+	boolean recordMapFlyover(@NonNull net.osmand.aidlapi.map.MapFlyoverParams params) {
+		return new MapFlyoverRecorder(app).record(params);
+	}
+
+	boolean getFlyoverFiles(@NonNull List<net.osmand.aidlapi.map.AFlyoverFile> files) {
+		for (File file : MapFlyoverRecorder.listVideos(app)) {
+			files.add(new net.osmand.aidlapi.map.AFlyoverFile(file.getName(), file.length(), file.lastModified(),
+					MapFlyoverRecorder.isBeingRecorded(file)));
+		}
+		return true;
+	}
+
+	@Nullable
+	ParcelFileDescriptor openFlyoverFile(@Nullable String fileName) throws FileNotFoundException {
+		File file = Algorithms.isEmpty(fileName) ? null : MapFlyoverRecorder.getVideo(app, fileName);
+		return file != null ? ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY) : null;
+	}
+
+	@Nullable
+	net.osmand.aidlapi.map.AMapScreenshot getMapScreenshot(int maxWidth, int quality, boolean mapOnly) {
+		MapActivity mapActivity = this.mapActivity;
+		if (mapActivity == null || Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+			return null;
+		}
+		Window window = mapActivity.getWindow();
+		View decorView = window.getDecorView();
+		int width = decorView.getWidth();
+		int height = decorView.getHeight();
+		if (width == 0 || height == 0 || !decorView.isShown()) {
+			return null;
+		}
+		// the window copy has the buttons and widgets but holes where the map surface is
+		// (OpenGL or the legacy renderer), so the surfaces are copied on their own and the window goes over them
+		Bitmap windowBitmap = mapOnly ? null : copyPixels(window, null, width, height);
+		if (!mapOnly && windowBitmap == null) {
+			return null;
+		}
+		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmap);
+		List<SurfaceView> surfaces = new ArrayList<>();
+		collectSurfaceViews(decorView, surfaces);
+		for (SurfaceView surfaceView : surfaces) {
+			if (surfaceView.isShown() && surfaceView.getWidth() > 0 && surfaceView.getHeight() > 0) {
+				Bitmap surface = copyPixels(null, surfaceView, surfaceView.getWidth(), surfaceView.getHeight());
+				if (surface != null) {
+					int[] location = new int[2];
+					surfaceView.getLocationInWindow(location);
+					canvas.drawBitmap(surface, location[0], location[1], null);
+					surface.recycle();
+				}
+			}
+		}
+		if (windowBitmap != null) {
+			canvas.drawBitmap(windowBitmap, 0, 0, null);
+			windowBitmap.recycle();
+		}
+		if (maxWidth > 0 && maxWidth < width) {
+			Bitmap scaled = Bitmap.createScaledBitmap(bitmap, maxWidth, Math.round((float) height * maxWidth / width), true);
+			bitmap.recycle();
+			bitmap = scaled;
+		}
+		// a binder transaction holds about 1 MB, so lower the quality until the image fits
+		int q = quality > 0 ? Math.min(quality, 100) : 80;
+		byte[] image;
+		do {
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			bitmap.compress(Bitmap.CompressFormat.JPEG, q, out);
+			image = out.toByteArray();
+			q -= 15;
+		} while (image.length > 700_000 && q > 20);
+		net.osmand.aidlapi.map.AMapScreenshot screenshot =
+				new net.osmand.aidlapi.map.AMapScreenshot(image, bitmap.getWidth(), bitmap.getHeight());
+		bitmap.recycle();
+		return screenshot;
+	}
+
+	@Nullable
+	private Bitmap copyPixels(@Nullable Window window, @Nullable SurfaceView surfaceView, int width, int height) {
+		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		CountDownLatch latch = new CountDownLatch(1);
+		int[] result = {PixelCopy.ERROR_UNKNOWN};
+		PixelCopy.OnPixelCopyFinishedListener listener = copyResult -> {
+			result[0] = copyResult;
+			latch.countDown();
+		};
+		Handler handler = new Handler(Looper.getMainLooper());
+		try {
+			if (window != null) {
+				PixelCopy.request(window, bitmap, listener, handler);
+			} else if (surfaceView != null) {
+				PixelCopy.request(surfaceView, bitmap, listener, handler);
+			}
+			if (latch.await(5, TimeUnit.SECONDS) && result[0] == PixelCopy.SUCCESS) {
+				return bitmap;
+			}
+		} catch (InterruptedException | IllegalArgumentException e) {
+			LOG.error(e);
+		}
+		bitmap.recycle();
+		return null;
+	}
+
+	private void collectSurfaceViews(@NonNull View view, @NonNull List<SurfaceView> surfaces) {
+		if (view instanceof SurfaceView) {
+			surfaces.add((SurfaceView) view);
+		} else if (view instanceof ViewGroup) {
+			ViewGroup group = (ViewGroup) view;
+			for (int i = 0; i < group.getChildCount(); i++) {
+				collectSurfaceViews(group.getChildAt(i), surfaces);
+			}
+		}
+	}
+
+	@Nullable
+	net.osmand.aidlapi.gpx.AGpxPoints getGpxPoints(@Nullable String fileName, int offset, int limit) {
+		List<WptPt> points;
+		if (Algorithms.isEmpty(fileName)) {
+			points = app.getSavingTrackHelper().getCurrentGpx().getAllSegmentsPoints();
+		} else {
+			points = getFilePoints(fileName);
+		}
+		if (points == null) {
+			return null;
+		}
+		ArrayList<net.osmand.aidlapi.gpx.AGpxPoint> page = new ArrayList<>();
+		int from = Math.max(0, offset);
+		int to = Math.min(points.size(), from + Math.max(0, limit));
+		for (int i = from; i < to; i++) {
+			WptPt point = points.get(i);
+			page.add(new net.osmand.aidlapi.gpx.AGpxPoint(point.getLat(), point.getLon(), point.getEle(),
+					point.getTime(), point.getSpeed()));
+		}
+		return new net.osmand.aidlapi.gpx.AGpxPoints(points.size(), page);
+	}
+
+	@Nullable
+	private synchronized List<WptPt> getFilePoints(@NonNull String fileName) {
+		File file = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
+		if (!file.exists()) {
+			file = app.getAppPath(IndexConstants.GPX_IMPORT_DIR + fileName);
+		}
+		if (!file.exists()) {
+			return null;
+		}
+		if (!file.equals(pointsFile) || file.lastModified() != pointsFileModified) {
+			GpxFile gpxFile = SharedUtil.loadGpxFile(file);
+			if (gpxFile.getError() != null) {
+				return null;
+			}
+			pointsFile = file;
+			pointsFileModified = file.lastModified();
+			pointsCache = gpxFile.getAllSegmentsPoints();
+		}
+		return pointsCache;
+	}
+
+	boolean getMapWidgetValues(@NonNull List<net.osmand.aidlapi.info.AMapWidgetValue> widgets) {
+		MapActivity mapActivity = this.mapActivity;
+		if (mapActivity == null) {
+			return false;
+		}
+		CountDownLatch latch = new CountDownLatch(1);
+		app.runInUIThread(() -> {
+			try {
+				MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
+				ApplicationMode appMode = app.getSettings().getApplicationMode();
+				int filter = MapWidgetRegistry.ENABLED_MODE | MapWidgetRegistry.AVAILABLE_MODE | MapWidgetRegistry.MATCHING_PANELS_MODE;
+				for (MapWidgetInfo info : registry.getWidgetsForPanel(mapActivity, appMode, null, filter, Arrays.asList(WidgetsPanel.values()))) {
+					View view = info.widget.getView();
+					String value = view != null ? getWidgetText(info, view) : "";
+					widgets.add(new net.osmand.aidlapi.info.AMapWidgetValue(info.key, info.getTitle(mapActivity),
+							value, info.getWidgetPanel().name(), info.widget.isViewVisible()));
+				}
+			} finally {
+				latch.countDown();
+			}
+		});
+		try {
+			return latch.await(5, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			return false;
+		}
+	}
+
+	@Nullable
+	net.osmand.aidlapi.info.AMapWidgetsLayout getMapWidgetsLayout(@Nullable String appModeKey) {
+		MapActivity mapActivity = this.mapActivity;
+		ApplicationMode appMode = getWidgetsAppMode(appModeKey);
+		if (mapActivity == null || appMode == null) {
+			return null;
+		}
+		ArrayList<net.osmand.aidlapi.info.AMapWidgetInfo> widgets = new ArrayList<>();
+		CountDownLatch latch = new CountDownLatch(1);
+		app.runInUIThread(() -> {
+			try {
+				collectWidgetsLayout(mapActivity, appMode, widgets);
+			} catch (Exception e) {
+				LOG.error(e.getMessage(), e);
+				widgets.clear();
+			} finally {
+				latch.countDown();
+			}
+		});
+		try {
+			if (!latch.await(5, TimeUnit.SECONDS)) {
+				return null;
+			}
+		} catch (InterruptedException e) {
+			return null;
+		}
+		return new net.osmand.aidlapi.info.AMapWidgetsLayout(appMode.getStringKey(),
+				app.getSettings().USE_SEPARATE_LAYOUTS.getModeValue(appMode), widgets);
+	}
+
+	private void collectWidgetsLayout(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
+	                                  @NonNull List<net.osmand.aidlapi.info.AMapWidgetInfo> widgets) {
+		ScreenLayoutMode layoutMode = getWidgetsLayoutMode(mapActivity, appMode);
+		MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
+		List<MapWidgetInfo> allWidgets = registry.getWidgets(mapActivity, appMode, layoutMode);
+		int filter = MapWidgetRegistry.ENABLED_MODE | MapWidgetRegistry.AVAILABLE_MODE | MapWidgetRegistry.MATCHING_PANELS_MODE;
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			int page = -1;
+			int lastPageIndex = Integer.MIN_VALUE;
+			int order = 0;
+			for (MapWidgetInfo info : registry.getFilteredWidgets(allWidgets, appMode, layoutMode, filter, Collections.singletonList(panel))) {
+				if (page == -1 || info.pageIndex != lastPageIndex) {
+					page++;
+					lastPageIndex = info.pageIndex;
+					order = 0;
+				}
+				WidgetType type = info.getWidgetType();
+				widgets.add(new net.osmand.aidlapi.info.AMapWidgetInfo(info.key, type.id, info.getTitle(mapActivity),
+						panel.name(), page, order++, true, type.isPurchased(app)));
+			}
+		}
+		for (WidgetType type : WidgetType.values()) {
+			if (isWidgetTypeAddable(type, appMode, allWidgets)) {
+				WidgetsPanel panel = type.getPanel(type.id, appMode, layoutMode, app.getSettings());
+				widgets.add(new net.osmand.aidlapi.info.AMapWidgetInfo(type.id, type.id, app.getString(type.titleId),
+						panel.name(), -1, 0, false, type.isPurchased(app)));
+			}
+		}
+	}
+
+	/**
+	 * Plugin widgets exist only while their plugin is on, so a type is offered only if the registry has a widget
+	 * of it, as in the add list of Configure screen.
+	 */
+	private boolean isWidgetTypeAddable(@NonNull WidgetType type, @NonNull ApplicationMode appMode,
+	                                    @NonNull List<MapWidgetInfo> allWidgets) {
+		if (type == WidgetType.AIDL_WIDGET || type.titleId == 0 || !type.isAllowed()
+				|| !WidgetsAvailabilityHelper.isWidgetAvailable(app, type.id, appMode)) {
+			return false;
+		}
+		for (MapWidgetInfo info : allWidgets) {
+			if (info.getWidgetType() == type) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	boolean setMapWidgetsPanel(@Nullable String appModeKey, @Nullable String panelName, @Nullable List<String> pages) {
+		MapActivity mapActivity = this.mapActivity;
+		ApplicationMode appMode = getWidgetsAppMode(appModeKey);
+		WidgetsPanel panel = null;
+		for (WidgetsPanel p : WidgetsPanel.values()) {
+			if (p.name().equalsIgnoreCase(panelName)) {
+				panel = p;
+			}
+		}
+		if (mapActivity == null || appMode == null || panel == null || pages == null) {
+			return false;
+		}
+		WidgetsPanel widgetsPanel = panel;
+		boolean[] result = {false};
+		CountDownLatch latch = new CountDownLatch(1);
+		app.runInUIThread(() -> {
+			try {
+				result[0] = applyWidgetsPanel(mapActivity, appMode, widgetsPanel, pages);
+			} catch (Exception e) {
+				LOG.error(e.getMessage(), e);
+			} finally {
+				latch.countDown();
+			}
+		});
+		try {
+			return latch.await(5, TimeUnit.SECONDS) && result[0];
+		} catch (InterruptedException e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Saves a panel the way Configure screen does: creates the new widgets, sets the visibility of the panel's
+	 * widgets and writes the paged order. Checks every id first, so nothing changes if one of them is wrong.
+	 */
+	private boolean applyWidgetsPanel(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
+	                                  @NonNull WidgetsPanel panel, @NonNull List<String> pages) {
+		OsmandSettings settings = app.getSettings();
+		ScreenLayoutMode layoutMode = getWidgetsLayoutMode(mapActivity, appMode);
+		MapWidgetRegistry registry = mapActivity.getMapLayers().getMapWidgetRegistry();
+		List<WidgetsPanel> panels = Collections.singletonList(panel);
+		List<MapWidgetInfo> allWidgets = registry.getWidgets(mapActivity, appMode, layoutMode);
+		Map<String, MapWidgetInfo> panelWidgets = new LinkedHashMap<>();
+		for (MapWidgetInfo info : registry.getFilteredWidgets(allWidgets, appMode, layoutMode,
+				MapWidgetRegistry.AVAILABLE_MODE | MapWidgetRegistry.MATCHING_PANELS_MODE, panels)) {
+			panelWidgets.put(info.key, info);
+		}
+		// pass 1: an id of a widget on this panel keeps it, any other id names the type of a new widget
+		Set<String> usedIds = new HashSet<>();
+		List<List<Object>> resolvedPages = new ArrayList<>();
+		for (String page : pages) {
+			List<Object> resolved = new ArrayList<>();
+			for (String part : page.split(WidgetsPanel.WIDGET_SEPARATOR)) {
+				String id = part.trim();
+				if (id.isEmpty()) {
+					continue;
+				}
+				MapWidgetInfo info = panelWidgets.get(id);
+				if (info == null || usedIds.contains(id)) {
+					WidgetType type = WidgetType.getById(id);
+					if (type == null || !isWidgetTypeAddable(type, appMode, allWidgets) || !type.isPanelsAllowed(panels)) {
+						LOG.error("setMapWidgetsPanel: widget " + id + " can't be on panel " + panel);
+						return false;
+					}
+					MapWidgetInfo original = panelWidgets.get(type.id);
+					info = original != null && !usedIds.contains(type.id) ? original : null;
+					resolved.add(info != null ? info : type);
+				} else {
+					resolved.add(info);
+				}
+				if (info != null) {
+					usedIds.add(info.key);
+				}
+			}
+			if (panel.isPanelVertical() && resolved.size() > 1) {
+				for (Object widget : resolved) {
+					String id = widget instanceof MapWidgetInfo ? ((MapWidgetInfo) widget).key : ((WidgetType) widget).id;
+					if (WidgetType.isComplexWidget(id)) {
+						LOG.error("setMapWidgetsPanel: widget " + id + " takes a whole row");
+						return false;
+					}
+				}
+			}
+			if (!resolved.isEmpty()) {
+				resolvedPages.add(resolved);
+			}
+		}
+		// pass 2: create the new widgets, as ConfigureWidgetsController does for a widget added from the list
+		MapWidgetsFactory factory = new MapWidgetsFactory(mapActivity);
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
+		List<MapWidgetInfo> enabled = new ArrayList<>();
+		List<String> newWidgetIds = new ArrayList<>();
+		List<List<String>> pagedOrder = new ArrayList<>();
+		for (List<Object> resolved : resolvedPages) {
+			List<String> order = new ArrayList<>();
+			for (Object widget : resolved) {
+				MapWidgetInfo info;
+				if (widget instanceof MapWidgetInfo) {
+					info = (MapWidgetInfo) widget;
+				} else {
+					WidgetType type = (WidgetType) widget;
+					// ids are type__time; two new widgets of one type in a call need different times
+					long time = System.currentTimeMillis();
+					String id;
+					do {
+						id = type.id + MapWidgetInfo.DELIMITER + time++;
+					} while (usedIds.contains(id) || registry.getWidgetInfoById(id) != null);
+					MapWidget mapWidget = factory.createMapWidget(id, type, panel);
+					info = mapWidget != null ? creator.askCreateWidgetInfo(id, mapWidget, type, panel) : null;
+					if (info == null || registry.getFilteredWidgets(Collections.singletonList(info), appMode, layoutMode,
+							MapWidgetRegistry.AVAILABLE_MODE, panels).isEmpty()) {
+						LOG.error("setMapWidgetsPanel: widget " + type.id + " can't be created on panel " + panel);
+						return false;
+					}
+					usedIds.add(id);
+					newWidgetIds.add(id);
+				}
+				enabled.add(info);
+				order.add(info.key);
+			}
+			pagedOrder.add(order);
+		}
+		// saved only once every new widget is created, so a refused call leaves no widget behind
+		for (String id : newWidgetIds) {
+			settings.getCustomWidgetsKeys(layoutMode).addModeValue(appMode, id);
+		}
+		List<String> visibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+		for (MapWidgetInfo info : panelWidgets.values()) {
+			if (!enabled.contains(info) && info.isEnabledForAppMode(appMode, visibility)) {
+				registry.enableDisableWidgetForMode(appMode, info, false, layoutMode, false);
+			}
+		}
+		for (MapWidgetInfo info : enabled) {
+			if (!info.isEnabledForAppMode(appMode, visibility) || !panelWidgets.containsValue(info)) {
+				registry.enableDisableWidgetForMode(appMode, info, true, layoutMode, false);
+			}
+		}
+		panel.setWidgetsOrder(appMode, pagedOrder, settings, layoutMode);
+		MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+		if (mapInfoLayer != null && appMode == settings.getApplicationMode()) {
+			mapInfoLayer.recreateAllControls(mapActivity);
+		}
+		return true;
+	}
+
+	@Nullable
+	private ApplicationMode getWidgetsAppMode(@Nullable String appModeKey) {
+		return Algorithms.isEmpty(appModeKey) ? app.getSettings().getApplicationMode()
+				: ApplicationMode.valueOfStringKey(appModeKey, null);
+	}
+
+	@Nullable
+	private ScreenLayoutMode getWidgetsLayoutMode(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
+		if (app.getSettings().USE_SEPARATE_LAYOUTS.getModeValue(appMode)) {
+			return AndroidUiHelper.isPortrait(mapActivity) ? ScreenLayoutMode.PORTRAIT : ScreenLayoutMode.LANDSCAPE;
+		}
+		return null;
+	}
+
+	@NonNull
+	private String getWidgetText(@NonNull MapWidgetInfo info, @NonNull View view) {
+		// text widgets keep "value unit" in the content description; others show it in their text views
+		CharSequence description = view.getContentDescription();
+		if (info.widget instanceof TextInfoWidget && !Algorithms.isEmpty(description)) {
+			return description.toString();
+		}
+		StringBuilder text = new StringBuilder();
+		collectTexts(view, text);
+		return text.toString().trim();
+	}
+
+	private void collectTexts(@NonNull View view, @NonNull StringBuilder text) {
+		if (view.getVisibility() != View.VISIBLE) {
+			return;
+		}
+		if (view instanceof TextView) {
+			CharSequence value = ((TextView) view).getText();
+			if (!Algorithms.isEmpty(value)) {
+				text.append(value).append(' ');
+			}
+		} else if (view instanceof ViewGroup) {
+			ViewGroup group = (ViewGroup) view;
+			for (int i = 0; i < group.getChildCount(); i++) {
+				collectTexts(group.getChildAt(i), text);
+			}
+		}
+	}
+
+	@NonNull
+	net.osmand.aidlapi.gpx.AGpxRecordingInfo getGpxRecordingInfo() {
+		SavingTrackHelper helper = app.getSavingTrackHelper();
+		boolean pluginEnabled = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
+		return new net.osmand.aidlapi.gpx.AGpxRecordingInfo(helper.getIsRecording(), pluginEnabled,
+				helper.getDistance(), helper.getDuration(), helper.getTrkPoints(), helper.getLastTrackPointTime());
 	}
 
 	boolean takePhotoNote(double latitude, double longitude) {
@@ -1960,19 +2575,84 @@ public class OsmandAidlApi {
 		return res;
 	}
 
-	public boolean switchEnabled(@NonNull ConnectedApp connectedApp) {
-		connectedApp.switchEnabled();
-		return saveConnectedApps();
+	/**
+	 * Turns the app on or off together with its OsmAnd plugin, if the app has one
+	 */
+	public boolean setAppEnabled(@Nullable Activity activity, @NonNull ConnectedApp connectedApp, boolean enabled) {
+		connectedApp.setEnabled(enabled);
+		boolean saved = saveConnectedApps();
+		OsmandPlugin plugin = PluginsHelper.getPlugin(connectedApp.getPack());
+		if (plugin != null && plugin.isEnabled() != enabled) {
+			PluginsHelper.enablePlugin(activity, app, plugin, enabled);
+		}
+		return saved;
 	}
 
 	public boolean isAppEnabled(@NonNull String pack) {
+		return getOrCreateConnectedApp(pack).isEnabled();
+	}
+
+	/**
+	 * @return true if the app is enabled and the method's permission group is granted to it
+	 */
+	public boolean isMethodAllowed(@NonNull String pack, @NonNull String method) {
+		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
+		return connectedApp.isEnabled() && connectedApp.isMethodAllowed(method);
+	}
+
+	/**
+	 * @return true if the app is enabled and the group is granted to it
+	 */
+	public boolean isGroupAllowed(@NonNull String pack, @NonNull AidlPermissionGroup group) {
+		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
+		return connectedApp.isEnabled() && connectedApp.isGroupGranted(group);
+	}
+
+	@NonNull
+	public ConnectedApp getOrCreateConnectedApp(@NonNull String pack) {
 		ConnectedApp connectedApp = connectedApps.get(pack);
 		if (connectedApp == null) {
-			connectedApp = new ConnectedApp(app, pack, false);
+			connectedApp = new ConnectedApp(app, pack, false, AidlPermissionGroup.getDefaultGroups());
 			connectedApps.put(pack, connectedApp);
 			saveConnectedApps();
 		}
-		return connectedApp.isEnabled();
+		return connectedApp;
+	}
+
+	public boolean setGroupGranted(@NonNull ConnectedApp connectedApp, @NonNull AidlPermissionGroup group,
+	                               boolean granted) {
+		Set<AidlPermissionGroup> groups = new LinkedHashSet<>(connectedApp.getGroups());
+		if (granted) {
+			groups.add(group);
+		} else {
+			groups.remove(group);
+		}
+		connectedApp.setGroups(groups);
+		return saveConnectedApps();
+	}
+
+	/**
+	 * The user answered a permission request of the app: the requested groups get the chosen state, other groups
+	 * stay as they were. The app is turned on only if at least one requested group is granted.
+	 */
+	public boolean applyRequestedGroups(@Nullable Activity activity, @NonNull String pack,
+	                                    @NonNull Set<AidlPermissionGroup> requested,
+	                                    @NonNull Set<AidlPermissionGroup> granted) {
+		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
+		Set<AidlPermissionGroup> groups = new LinkedHashSet<>(connectedApp.getGroups());
+		groups.removeAll(requested);
+		groups.addAll(granted);
+		connectedApp.setGroups(groups);
+		if (!granted.isEmpty() && !connectedApp.isEnabled()) {
+			return setAppEnabled(activity, connectedApp, true);
+		}
+		return saveConnectedApps();
+	}
+
+	// connections are kept in their own preferences file: not in the backups (Android backup agent, Cloud, export)
+	@NonNull
+	private SharedPreferences getConnectionsPreferences() {
+		return app.getSharedPreferences(CONNECTIONS_PREFS, Context.MODE_PRIVATE);
 	}
 
 	private boolean saveConnectedApps() {
@@ -1982,11 +2662,16 @@ public class OsmandAidlApi {
 				JSONObject obj = new JSONObject();
 				obj.put(ConnectedApp.ENABLED_KEY, connectedApp.isEnabled());
 				obj.put(ConnectedApp.PACK_KEY, connectedApp.getPack());
+				JSONArray groups = new JSONArray();
+				for (AidlPermissionGroup group : connectedApp.getGroups()) {
+					groups.put(group.getId());
+				}
+				obj.put(ConnectedApp.GROUPS_KEY, groups);
 				array.put(obj);
 			}
-			return app.getSettings().API_CONNECTED_APPS_JSON.set(array.toString());
+			return getConnectionsPreferences().edit().putString(CONNECTED_APPS_KEY, array.toString()).commit();
 		} catch (JSONException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return false;
 	}
@@ -1994,15 +2679,36 @@ public class OsmandAidlApi {
 	public void loadConnectedApps() {
 		try {
 			connectedApps.clear();
-			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.get());
+			String json = getConnectionsPreferences().getString(CONNECTED_APPS_KEY, null);
+			boolean legacy = json == null;
+			if (legacy) {
+				json = app.getSettings().API_CONNECTED_APPS_JSON.get();
+			}
+			JSONArray array = new JSONArray(json);
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj = array.getJSONObject(i);
 				String pack = obj.optString(ConnectedApp.PACK_KEY, "");
 				boolean enabled = obj.optBoolean(ConnectedApp.ENABLED_KEY, true);
-				connectedApps.put(pack, new ConnectedApp(app, pack, enabled));
+				// apps connected before the permission groups keep their full access
+				Set<AidlPermissionGroup> groups = AidlPermissionGroup.getAllGroups();
+				JSONArray groupsJson = obj.optJSONArray(ConnectedApp.GROUPS_KEY);
+				if (groupsJson != null) {
+					groups.clear();
+					for (int j = 0; j < groupsJson.length(); j++) {
+						AidlPermissionGroup group = AidlPermissionGroup.getById(groupsJson.optString(j));
+						if (group != null) {
+							groups.add(group);
+						}
+					}
+				}
+				connectedApps.put(pack, new ConnectedApp(app, pack, enabled, groups));
+			}
+			if (legacy) {
+				saveConnectedApps();
+				app.getSettings().API_CONNECTED_APPS_JSON.resetToDefault();
 			}
 		} catch (JSONException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 	}
 
@@ -2518,7 +3224,7 @@ public class OsmandAidlApi {
 		String prefId = params.getPrefId();
 		OsmandSettings settings = app.getSettings();
 		OsmandPreference<?> pref = settings.getPreference(prefId);
-		if (pref != null && settings.isExportAvailableForPref(pref)) {
+		if (pref != null && settings.isExportAvailableForPref(pref) && !isReadOnlyPreference(prefId)) {
 			String value = params.getValue();
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
 
@@ -2540,6 +3246,30 @@ public class OsmandAidlApi {
 			return success;
 		}
 		return false;
+	}
+
+	/**
+	 * Settings connected apps may read but not change: plugins are switched by changePluginState, privacy and
+	 * network choices and purchase banners stay with the user, histories and shown tracks have their own calls,
+	 * map widgets are changed by setMapWidgetsPanel.
+	 */
+	private static final Set<String> READ_ONLY_PREFERENCES = new HashSet<>(Arrays.asList(
+			"enabled_plugins", "send_anonymous_map_downloads_data", "send_anonymous_app_usage_data",
+			"enable_proxy", "proxy_host", "proxy_port", "online_routing_engines", "is_live_updates_on", "speed_cameras_uninstalled",
+			"should_show_free_version_banner", "should_show_discount_bottom_sheet",
+			"search_history", "navigation_history", "map_markers_history", "selected_gpx",
+			"map_info_controls", "custom_widgets_keys", "left_widget_panel_order", "right_widget_panel_order",
+			"top_widget_panel_order", "bottom_widget_panel_order"));
+
+	private static boolean isReadOnlyPreference(@NonNull String prefId) {
+		// portrait_ and landscape_ copies of the widget layout (ScreenLayoutMode)
+		for (ScreenLayoutMode layoutMode : ScreenLayoutMode.values()) {
+			String prefix = layoutMode.name().toLowerCase() + "_";
+			if (prefId.startsWith(prefix) && READ_ONLY_PREFERENCES.contains(prefId.substring(prefix.length()))) {
+				return true;
+			}
+		}
+		return READ_ONLY_PREFERENCES.contains(prefId);
 	}
 
 	public boolean getPreference(PreferenceParams params) {
@@ -2718,10 +3448,28 @@ public class OsmandAidlApi {
 	}
 
 	private static net.osmand.aidlapi.gpx.AGpxFileDetails createGpxFileDetailsV2(@NonNull GpxTrackAnalysis a) {
-		return new net.osmand.aidlapi.gpx.AGpxFileDetails(a.getTotalDistance(), a.getTotalTracks(), a.getStartTime(), a.getEndTime(),
+		net.osmand.aidlapi.gpx.AGpxFileDetails details = new net.osmand.aidlapi.gpx.AGpxFileDetails(a.getTotalDistance(),
+				a.getTotalTracks(), a.getStartTime(), a.getEndTime(),
 				a.getTimeSpan(), a.getTimeMoving(), a.getTotalDistanceMoving(), a.getDiffElevationUp(), a.getDiffElevationDown(),
 				a.getAvgElevation(), a.getMinElevation(), a.getMaxElevation(), a.getMinSpeed(), a.getMaxSpeed(), a.getAvgSpeed(),
 				a.getPoints(), a.getWptPoints(), a.getWptCategoryNamesSet());
+		// the analysis has -1 averages without a sensor, the API has 0
+		if (a.getMaxSensorHr() > 0) {
+			details.setHeartRate(a.getAvgSensorHr(), a.getMinSensorHr(), a.getMaxSensorHr());
+		}
+		if (a.getMaxSensorSpeed() > 0) {
+			details.setSensorSpeed(a.getAvgSensorSpeed(), a.getMaxSensorSpeed());
+		}
+		if (a.getMaxSensorPower() > 0) {
+			details.setPower(a.getAvgSensorPower(), a.getMaxSensorPower());
+		}
+		if (a.getMaxSensorCadence() > 0) {
+			details.setCadence(a.getAvgSensorCadence(), a.getMaxSensorCadence());
+		}
+		if (a.getMaxSensorTemperature() != 0 || a.getAvgSensorTemperature() != -1) {
+			details.setTemperature(a.getAvgSensorTemperature(), a.getMaxSensorTemperature());
+		}
+		return details;
 	}
 
 	public boolean onKeyEvent(KeyEvent event) {

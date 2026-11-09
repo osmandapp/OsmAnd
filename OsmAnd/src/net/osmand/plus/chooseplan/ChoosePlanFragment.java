@@ -259,12 +259,12 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		priceButtons = MapsPlusPlanFragment.collectPriceButtons(app, purchaseHelper, nightMode);
 		price = getMapsPlusContinuePrice(priceButtons);
 
-		boolean fullVersion = !Version.isFreeVersion(app);
+		boolean osmandPlusApp = !Version.isFreeVersion(app);
 		boolean subscribedToMaps = InAppPurchaseUtils.isMapsPlusAvailable(app, false);
-		boolean fullVersionPurchased = InAppPurchaseUtils.isFullVersionAvailable(app, false);
+		boolean fullVersionInAppPurchased = InAppPurchaseUtils.isFullVersionAvailable(app, false);
 
-		boolean isFullVersion = fullVersion || fullVersionPurchased;
-		boolean mapsPlusPurchased = subscribedToMaps || isFullVersion;
+		boolean hasFullVersion = osmandPlusApp || fullVersionInAppPurchased;
+		boolean mapsPlusPurchased = subscribedToMaps || hasFullVersion;
 		boolean available = !mapsPlusPurchased && selectedFeature.isAvailableInMapsPlus() && Version.isInAppPurchaseSupported();
 
 		iconId = available ? R.drawable.ic_action_osmand_maps_plus : R.drawable.ic_action_osmand_maps_plus_desaturated;
@@ -289,7 +289,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		}, available);
 
 		if (mapsPlusPurchased) {
-			updatePurchasedButton(mapsPlusView, fullVersion);
+			updatePurchasedButton(mapsPlusView, osmandPlusApp);
 		}
 	}
 
@@ -327,11 +327,11 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		view.setEnabled(available);
 	}
 
-	private void updatePurchasedButton(@NonNull View view, boolean isFullVersion) {
+	private void updatePurchasedButton(@NonNull View view, boolean osmandPlusApp) {
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescription = view.findViewById(R.id.description);
 
-		String version = getString(isFullVersion ? R.string.osmand_plus : R.string.maps_plus);
+		String version = getString(osmandPlusApp ? R.string.osmand_plus : R.string.maps_plus);
 		boolean featureIncluded = selectedFeature.isAvailableInMapsPlus();
 		int pattern = featureIncluded ? R.string.included_in_your_current_plan : R.string.not_available_with;
 		tvTitle.setText(String.format(getString(pattern), version));
@@ -375,5 +375,10 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	@Override
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
 
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "choose_plan";
 	}
 }

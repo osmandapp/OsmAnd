@@ -1,5 +1,6 @@
 package net.osmand.shared.binary
 
+import net.osmand.shared.util.collections.KTIntArrayList
 import okio.FileHandle
 
 /**
@@ -8,8 +9,8 @@ import okio.FileHandle
  *
  * A copy of the part of protobuf's `CodedInputStream` that `BinaryMapIndexReader` in OsmAnd-java
  * uses, with the same method names, so the two readers can be compared line by line. The buffer
- * is 5 KB like the java one, so a seek costs both readers the same refill. There is one addition:
- * [seek], which OsmAnd's patched copy of the java class has too.
+ * is 5 KB like the java one, so a seek costs both readers the same refill. There are two additions:
+ * [seek], which OsmAnd's patched copy of the java class has too, and [readSInt32s].
  */
 class CodedInputStream(private val handle: FileHandle, bufferSize: Int = DEFAULT_BUFFER_SIZE) {
 
@@ -87,12 +88,77 @@ class CodedInputStream(private val handle: FileHandle, bufferSize: Int = DEFAULT
 								return result
 							}
 						}
-						throw IllegalStateException("malformed varint at ${getTotalBytesRead()}")
+						malformedVarint()
 					}
 				}
 			}
 		}
 		return result
+	}
+
+	/** The varint at [pos], which the caller has checked is whole in the buffer. */
+	@Suppress("NOTHING_TO_INLINE")
+	private inline fun readVarint32InBuffer(): Int {
+		var p = pos
+		val buf = buffer
+		var tmp = buf[p++].toInt()
+		if (tmp >= 0) {
+			pos = p
+			return tmp
+		}
+		var result = tmp and 0x7f
+		tmp = buf[p++].toInt()
+		if (tmp >= 0) {
+			result = result or (tmp shl 7)
+		} else {
+			result = result or ((tmp and 0x7f) shl 7)
+			tmp = buf[p++].toInt()
+			if (tmp >= 0) {
+				result = result or (tmp shl 14)
+			} else {
+				result = result or ((tmp and 0x7f) shl 14)
+				tmp = buf[p++].toInt()
+				if (tmp >= 0) {
+					result = result or (tmp shl 21)
+				} else {
+					result = result or ((tmp and 0x7f) shl 21)
+					tmp = buf[p++].toInt()
+					result = result or (tmp shl 28)
+					if (tmp < 0) {
+						// Discard upper 32 bits.
+						var discarded = 0
+						while (buf[p++] < 0) {
+							if (++discarded == 5) {
+								pos = p
+								malformedVarint()
+							}
+						}
+					}
+				}
+			}
+		}
+		pos = p
+		return result
+	}
+
+	/**
+	 * Appends the zigzag varints up to the current limit to [out], one number each, without a call
+	 * per number: this is how the loops that read coordinates take them.
+	 */
+	fun readSInt32s(out: KTIntArrayList) {
+		val remaining = getBytesUntilLimit()
+		if (remaining <= 0) {
+			return
+		}
+		// a varint takes at least a byte, so the numbers up to the limit fit
+		out.ensureCapacity(out.size + remaining.toInt())
+		val data = out.data
+		var size = out.size
+		while (limit - bufferStart - pos > 0) {
+			val n = if (bufferLength - pos >= MAX_VARINT_SIZE) readVarint32InBuffer() else readRawVarint32()
+			data[size++] = (n ushr 1) xor -(n and 1)
+		}
+		out.size = size
 	}
 
 	fun readRawVarint64(): Long {
@@ -106,8 +172,11 @@ class CodedInputStream(private val handle: FileHandle, bufferSize: Int = DEFAULT
 			}
 			shift += 7
 		}
-		throw IllegalStateException("malformed varint at ${getTotalBytesRead()}")
+		malformedVarint()
 	}
+
+	/** Out of line: building the message inside the readers above made every call of them slower. */
+	private fun malformedVarint(): Nothing = throw IllegalStateException("malformed varint at ${getTotalBytesRead()}")
 
 	fun readInt32(): Int = readRawVarint32()
 
@@ -144,16 +213,44 @@ class CodedInputStream(private val handle: FileHandle, bufferSize: Int = DEFAULT
 	}
 
 	/** A `bytes` field: its varint length, then that many raw bytes. */
-	fun readBytes(): ByteArray {
-		val size = readRawVarint32()
+	fun readBytes(): ByteArray = readRawBytes(readRawVarint32())
+
+	/**
+	 * The next [size] bytes as they are. What the buffer holds is copied at once; a rest shorter than
+	 * the buffer is copied out of the buffer filled again, which the reads after want anyway, and a
+	 * longer rest is read from the file straight into the array, as protobuf reads a long field.
+	 */
+	fun readRawBytes(size: Int): ByteArray {
 		if (size <= bufferLength - pos) {
 			val value = buffer.copyOfRange(pos, pos + size)
 			pos += size
 			return value
 		}
 		val bytes = ByteArray(size)
-		for (i in 0 until size) {
-			bytes[i] = readRawByte()
+		var read = bufferLength - pos
+		buffer.copyInto(bytes, 0, pos, bufferLength)
+		pos = bufferLength
+		if (size - read < buffer.size) {
+			while (read < size) {
+				fill()
+				val n = minOf(size - read, bufferLength)
+				buffer.copyInto(bytes, read, 0, n)
+				pos = n
+				read += n
+			}
+		} else {
+			bufferStart += pos
+			pos = 0
+			bufferLength = 0
+			while (read < size) {
+				val n = handle.read(bufferStart, bytes, read, size - read)
+				if (n <= 0) {
+					throw IllegalStateException("read past the end of the file at $bufferStart")
+				}
+				bytesRead += n
+				bufferStart += n
+				read += n
+			}
 		}
 		return bytes
 	}
@@ -177,6 +274,16 @@ class CodedInputStream(private val handle: FileHandle, bufferSize: Int = DEFAULT
 		limit = oldLimit
 	}
 
+	/** Restores the enclosing limit even if reading a nested message fails. */
+	internal inline fun <T> withLimit(byteLimit: Long, read: () -> T): T {
+		val oldLimit = pushLimitLong(byteLimit)
+		try {
+			return read()
+		} finally {
+			popLimit(oldLimit)
+		}
+	}
+
 	fun getBytesUntilLimit(): Long = limit - getTotalBytesRead()
 
 	fun skipRawBytes(size: Long) {
@@ -196,6 +303,9 @@ class CodedInputStream(private val handle: FileHandle, bufferSize: Int = DEFAULT
 
 	companion object {
 		const val DEFAULT_BUFFER_SIZE = 5 * 1024
+
+		/** The longest varint: a negative int is written sign extended to 64 bits, in 10 bytes. */
+		private const val MAX_VARINT_SIZE = 10
 
 		const val WIRETYPE_VARINT = 0
 		const val WIRETYPE_FIXED64 = 1

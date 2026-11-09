@@ -247,6 +247,13 @@ public class FavoriteMenu {
 				.showTopDivider(true)
 				.create());
 
+		items.add(new PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_import)
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_import))
+				.setOnClickListener(v -> importFavourites(fragment))
+				.showTopDivider(true)
+				.create());
+
 		if (selectedGroup != null) {
 			items.add(new PopUpMenuItem.Builder(activity)
 					.setTitleId(R.string.change_appearance)

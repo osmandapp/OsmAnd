@@ -132,12 +132,6 @@
 		android:persistent="false"
 		android:title="@string/threads_allocated_for_rendering"
 		tools:summary="8 threads" />
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="battery_saving"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/battery_saving_mode" />
 
 	<PreferenceCategory
 		android:key="search"

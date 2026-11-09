@@ -41,7 +41,6 @@ import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
-import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.auto.NavigationSession;
@@ -852,10 +851,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	                               boolean cancelPreviousSearch,
 	                               ResultMatcher<RouteDataObject> result) {
 		return currentPositionHelper.getRouteSegment(loc, appMode, cancelPreviousSearch, result);
-	}
-
-	public boolean getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {
-		return currentPositionHelper.getGeocodingResult(loc, result);
 	}
 
 	@Nullable

@@ -102,6 +102,7 @@ import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
+import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
@@ -879,7 +880,7 @@ public class MenuBuilder {
 		textView.setTypeface(DEFAULT);
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
-		textView.setText(text);
+		textView.setText(attrs.isNumber() && text != null ? OsmAndFormatter.formatPhoneNumber(view.getContext(), text) : text);
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 
@@ -996,6 +997,11 @@ public class MenuBuilder {
 	}
 
 	public View buildDescriptionRow(View view, String description, @Nullable View.OnClickListener onClickListener, @Nullable String buttonText) {
+		return buildDescriptionRow(view, description, onClickListener, buttonText, null);
+	}
+
+	public View buildDescriptionRow(View view, String description, @Nullable View.OnClickListener onClickListener,
+			@Nullable String buttonText, @Nullable View.OnClickListener wikipediaClickListener) {
 		String descriptionLabel = app.getString(R.string.shared_string_description);
 		if (onClickListener == null) {
 			onClickListener = v -> showDescriptionDialog(view.getContext(), description, descriptionLabel);
@@ -1054,7 +1060,8 @@ public class MenuBuilder {
 		textView.setTypeface(DEFAULT);
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
-		textView.setText(WikiArticleHelper.getPartialContent(description));
+		textView.setText(Algorithms.isHtmlText(description)
+				? WikiArticleHelper.getPartialContent(description) : description.trim());
 
 		if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);
@@ -1073,7 +1080,25 @@ public class MenuBuilder {
 		if (buttonText == null) {
 			buttonText = app.getString(R.string.context_menu_read_full);
 		}
-		buildReadFullButton(llText, buttonText, onClickListener);
+		if (wikipediaClickListener != null) {
+			// the Wikipedia button moves to the next line when both buttons do not fit,
+			// FlowLayout can't be measured with the unspecified width used for baseline alignment
+			ll.setBaselineAligned(false);
+			int spacing = dpToPx(8f);
+			FlowLayout buttonsContainer = new FlowLayout(view.getContext());
+			LinearLayout.LayoutParams containerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			AndroidUtils.setMargins(containerParams, dpToPx(16f), 0, 0, dpToPx(16f) - spacing);
+			buttonsContainer.setLayoutParams(containerParams);
+			buildReadFullButton(buttonsContainer, new FlowLayout.LayoutParams(spacing, spacing),
+					buttonText, R.drawable.ic_action_read_text, onClickListener);
+			buildReadFullButton(buttonsContainer, new FlowLayout.LayoutParams(spacing, spacing),
+					app.getString(R.string.shared_string_wikipedia), R.drawable.ic_plugin_wikipedia, wikipediaClickListener);
+			llText.addView(buttonsContainer);
+		} else {
+			LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dpToPx(36f));
+			AndroidUtils.setMargins(buttonParams, dpToPx(16f), 0, 0, dpToPx(16f));
+			buildReadFullButton(llText, buttonParams, buttonText, R.drawable.ic_action_read_text, onClickListener);
+		}
 
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);
@@ -1092,7 +1117,8 @@ public class MenuBuilder {
 		}
 		ArrayList<String> values = collectMultiValues(text, "[,;]");
 		if (values.size() > 1) {
-			PoiAdditionalMultiValueDialogController.showDialog(mapActivity, title, values, this::openPhoneNumber);
+			PoiAdditionalMultiValueDialogController.showDialog(mapActivity, title, values,
+					OsmAndFormatter::formatPhoneNumber, this::openPhoneNumber);
 		} else if (values.size() == 1) {
 			openPhoneNumber(view.getContext(), values.get(0));
 		}
@@ -1243,14 +1269,14 @@ public class MenuBuilder {
 		return child != null && DIVIDER_ROW_KEY.equals(child.getTag());
 	}
 
-	protected void buildReadFullButton(LinearLayout container, String btnText, View.OnClickListener onClickListener) {
+	protected void buildReadFullButton(@NonNull ViewGroup container, @NonNull ViewGroup.LayoutParams params,
+			String btnText, @DrawableRes int iconId, View.OnClickListener onClickListener) {
 		Context ctx = container.getContext();
 		boolean light = isLightContent();
 
 		TextViewEx button = new TextViewEx(new ContextThemeWrapper(ctx, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
-		LinearLayout.LayoutParams llButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dpToPx(36f));
-		AndroidUtils.setMargins(llButtonParams, dpToPx(16f), 0, 0, dpToPx(16f));
-		button.setLayoutParams(llButtonParams);
+		button.setLayoutParams(params);
+		button.setMinimumHeight(dpToPx(36f));
 		button.setTypeface(FontCache.getMediumFont());
 		button.setBackgroundResource(light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);
 		button.setTextSize(14);
@@ -1266,9 +1292,9 @@ public class MenuBuilder {
 		button.setOnClickListener(onClickListener);
 		button.setAllCaps(true);
 		button.setText(btnText);
-		Drawable normal = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
+		Drawable normal = app.getUIUtilities().getIcon(iconId,
 				light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
-		Drawable pressed = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
+		Drawable pressed = app.getUIUtilities().getIcon(iconId,
 				light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p);
 
 		Drawable drawable = AndroidUtils.createPressedStateListDrawable(normal, pressed);

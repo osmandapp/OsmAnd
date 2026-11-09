@@ -192,4 +192,9 @@ public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "search_track_items";
+	}
 }

@@ -35,6 +35,9 @@ public class AverageSpeedComputer extends AverageValueComputer {
 
 	@Override
 	protected boolean isEnabled() {
+		if (settings.ETA_USE_AVERAGE_SPEED.get()) {
+			return true;
+		}
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		if (mapInfoLayer == null) {

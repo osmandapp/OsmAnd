@@ -13,7 +13,6 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataF
 import net.osmand.plus.plugins.externalsensors.dialogs.SelectExternalDeviceFragment;
 import net.osmand.plus.plugins.externalsensors.dialogs.SelectExternalDeviceFragment.SelectDeviceListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.CustomObjectPreference;
 import net.osmand.util.Algorithms;
@@ -47,27 +46,19 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 			pref.setLayoutResource(R.layout.preference_with_descr);
 			addOnPreferencesScreen(pref);
 		}
-		CommonPreference<String> deviceIdPref = plugin.getWriteToTrackDeviceIdPref(dataType);
-		String deviceId = deviceIdPref.getModeValue(getSelectedAppMode());
-		String deviceName = getString(R.string.shared_string_none);
-		boolean deviceFound = false;
-
+		ApplicationMode appMode = getSelectedAppMode();
+		String deviceId = plugin.getWriteToTrackDeviceIdPref(dataType).getModeValue(appMode);
+		AbstractDevice<?> device = plugin.getWriteToTrackDevice(dataType, appMode);
+		boolean deviceFound = device != null;
+		String deviceName;
 		if (Algorithms.isEmpty(deviceId)) {
 			deviceName = getString(R.string.shared_string_none);
-		} else if (plugin.getDevice(deviceId) != null) {
-			AbstractDevice<?> device = plugin.getDevice(deviceId);
-			if (device != null) {
-				deviceName = device.getName();
-				deviceFound = true;
-			}
+		} else if (device == null) {
+			deviceName = getString(R.string.any_connected);
+		} else if (deviceId.equals(device.getDeviceId())) {
+			deviceName = device.getName();
 		} else {
-			AbstractDevice<?> connectedDevice = plugin.getAnyDevice(dataType.getSensorType());
-			if (connectedDevice != null) {
-				deviceName = String.format(getString(R.string.any_connected_with_device), connectedDevice.getName());
-				deviceFound = true;
-			} else {
-				deviceName = getString(R.string.any_connected);
-			}
+			deviceName = getString(R.string.any_connected_with_device, device.getName());
 		}
 		pref.setSummary(deviceName);
 		SensorWidgetDataFieldType sensorType = dataType.getSensorType();
@@ -95,28 +86,15 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 
 	@Override
 	public void selectNewDevice(@Nullable String deviceId, @NonNull SensorWidgetDataFieldType requestedWidgetDataFieldType) {
-		ApplicationMode appMode = getSelectedAppMode();
-		switch (requestedWidgetDataFieldType) {
-			case BIKE_SPEED:
-				plugin.SPEED_SENSOR_WRITE_TO_TRACK_DEVICE_ID.setModeValue(appMode, deviceId);
-				setupSensorSettings(ExternalSensorTrackDataType.BIKE_SPEED);
-				break;
-			case BIKE_CADENCE:
-				plugin.CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE_ID.setModeValue(appMode, deviceId);
-				setupSensorSettings(ExternalSensorTrackDataType.BIKE_CADENCE);
-				break;
-			case BIKE_POWER:
-				plugin.POWER_SENSOR_WRITE_TO_TRACK_DEVICE_ID.setModeValue(appMode, deviceId);
-				setupSensorSettings(ExternalSensorTrackDataType.BIKE_POWER);
-				break;
-			case HEART_RATE:
-				plugin.HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID.setModeValue(appMode, deviceId);
-				setupSensorSettings(ExternalSensorTrackDataType.HEART_RATE);
-				break;
-			case TEMPERATURE:
-				plugin.TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID.setModeValue(appMode, deviceId);
-				setupSensorSettings(ExternalSensorTrackDataType.TEMPERATURE);
-				break;
+		ExternalSensorTrackDataType dataType = ExternalSensorTrackDataType.Companion.getBySensorWidgetDataFieldType(requestedWidgetDataFieldType);
+		if (dataType != null) {
+			plugin.getWriteToTrackDeviceIdPref(dataType).setModeValue(getSelectedAppMode(), deviceId != null ? deviceId : "");
+			setupSensorSettings(dataType);
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "external_settings_write_to_track_settings";
 	}
 }

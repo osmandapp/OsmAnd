@@ -48,14 +48,21 @@ import kotlin.time.TimeSource
  * open the files                      4.3 ms       3.7 ms          2.4 ms      26
  * read every map object, all zooms   15.6 ms       9.4 ms         21.5 ms   47393
  * read every amenity                  1.9 ms       2.0 ms          3.6 ms    6285
- * find amenities by name (20)        25.1 ms      15.4 ms         34.0 ms     360
+ * find amenities by name (20)        25.1 ms      15.4 ms         20.5 ms     360
  * ```
  * Kotlin/Native reads a map object in about the time the java reader takes on the jvm, and in
  * about twice the time this same code takes there; an amenity costs it only half again as much.
  * On the name search the copy is half again faster than java on the jvm, which is the collation
- * key of `KCollatorStringMatcher` paying off; Kotlin/Native then pays its usual factor of about
- * two on top, which lands it somewhat above java on the jvm. Opening is not a like for like: java
- * also reads the address and transport headers, which the copy skips.
+ * key of `KCollatorStringMatcher` paying off. On Kotlin/Native it took 34.0 ms, above java on the
+ * jvm, until the walk over the string table of the name index prepared each key once instead of
+ * reducing it on every comparison. Opening is not a like for like: java
+ * also reads the transport header, which the copy skips; the address header the copy reads too
+ * since the address section was copied, at no cost `AddressReaderBenchmarkTest` could measure.
+ *
+ * The test files are 31 since. Over them, opening a second reader of each over the structure the
+ * first one walked - what each type of `BinaryMapReaderResource` costs - takes 0.4 ms on the jvm
+ * and 0.3 ms on Kotlin/Native, against 5.0-5.5 ms and 3.3-3.6 ms to open the files; on a 414 MB
+ * regional map, 0.1 ms against 9.3 ms on the jvm.
  */
 class ObfReaderBenchmarkTest {
 
@@ -87,6 +94,21 @@ class ObfReaderBenchmarkTest {
 			}
 		}
 		row("open the files", openMs, files.size, false)
+
+		// what each type of BinaryMapReaderResource costs once the file is open
+		var copyMs = Double.MAX_VALUE
+		val opened = files.map { BinaryMapIndexReader(it) }
+		repeat(WARMUP_ROUNDS + MEASURED_ROUNDS) { round ->
+			val mark = TimeSource.Monotonic.markNow()
+			val copies = opened.map { BinaryMapIndexReader(it) }
+			val ms = mark.elapsedNow().inWholeMicroseconds / 1000.0
+			copies.forEach { it.close() }
+			if (round >= WARMUP_ROUNDS && ms < copyMs) {
+				copyMs = ms
+			}
+		}
+		opened.forEach { it.close() }
+		row("open a second reader of each", copyMs, files.size, false)
 
 		var searchMs = Double.MAX_VALUE
 		var objects = 0

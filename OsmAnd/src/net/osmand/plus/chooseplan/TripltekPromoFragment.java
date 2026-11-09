@@ -68,4 +68,9 @@ public class TripltekPromoFragment extends PromoCompanyFragment {
 			fragment.show(manager, TAG);
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "tripltek_promo";
+	}
 }

@@ -1025,4 +1025,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "favorites_tree";
+	}
 }

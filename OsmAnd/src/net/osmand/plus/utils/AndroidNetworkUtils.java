@@ -3,7 +3,6 @@ package net.osmand.plus.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -1071,10 +1070,4 @@ public class AndroidNetworkUtils {
 		public void setGeneralProgress(String genProgress) {
 		}
 	}
-
-	@NonNull
-	public static String getHttpProtocol() {
-		return Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1 ? "http://" : "https://";
-	}
-
 }

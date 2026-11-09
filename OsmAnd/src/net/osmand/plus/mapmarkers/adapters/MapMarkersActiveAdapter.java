@@ -118,6 +118,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			drawableResToUpdate = R.drawable.ic_direction_arrow;
 			markerImageViewToUpdate = holder.iconDirection;
 		}
+		holder.optionsBtn.setContentDescription(app.getString(R.string.mark_passed));
 		if (pos == getItemCount() - 1) {
 			holder.bottomShadow.setVisibility(View.VISIBLE);
 			holder.divider.setVisibility(View.GONE);

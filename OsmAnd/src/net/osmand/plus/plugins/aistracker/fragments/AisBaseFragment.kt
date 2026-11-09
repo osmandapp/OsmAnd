@@ -50,7 +50,7 @@ abstract class AisBaseFragment : BaseMaterialFragment() {
 	) {
 		val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
 		toolbar.setTitle(titleId)
-		toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+		toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
 		toolbar.menu.clear()
 		toolbar.menu.add(resetActionId).apply {
 			val icon = AppCompatResources.getDrawable(view.context, resetIconId)?.mutate()
@@ -118,6 +118,8 @@ abstract class AisBaseFragment : BaseMaterialFragment() {
 		/* the app bar has to sit below the status bar, and the content has to scroll under the
 		 * navigation bar instead of ending above it */
 		collection.add(InsetTarget.createRootInset())
+		/* in landscape the back and reset buttons stay clear of the navigation bar and the cutout */
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.toolbar))
 		collection.add(InsetTarget.createScrollable(R.id.scroll_view))
 		return collection
 	}

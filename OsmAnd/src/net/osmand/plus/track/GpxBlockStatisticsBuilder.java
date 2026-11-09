@@ -113,6 +113,17 @@ public class GpxBlockStatisticsBuilder {
 		return GpxUiHelper.makeGpxDisplayItem(app, gpxFile, GPX, analysis);
 	}
 
+	@NonNull
+	private GpxDisplayItem getChartDisplayItem(@NonNull GpxDisplayItem displayItem) {
+		if (displayItem.analysis.getCollectPointData()) {
+			return displayItem;
+		}
+		// the blocks can show a summary analysis, the chart is drawn from the point data of the full one
+		GpxTrackAnalysis analysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+		GpxDisplayItem item = GpxUiHelper.makeGpxDisplayItem(app, getGPXFile(), GPX, analysis);
+		return item != null ? item : displayItem;
+	}
+
 	private GpxFile getGPXFile() {
 		return selectedGpxFile.getGpxFileToDisplay();
 	}
@@ -470,9 +481,10 @@ public class GpxBlockStatisticsBuilder {
 						}
 					}
 					if (!list.isEmpty()) {
-						displayItem.chartTypes = list.toArray(new GPXDataSetType[0]);
-						displayItem.locationOnMap = displayItem.locationStart;
-						actionsListener.openAnalyzeOnMap(displayItem);
+						GpxDisplayItem gpxItem = getChartDisplayItem(displayItem);
+						gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
+						gpxItem.locationOnMap = gpxItem.locationStart;
+						actionsListener.openAnalyzeOnMap(gpxItem);
 					}
 				}
 			});

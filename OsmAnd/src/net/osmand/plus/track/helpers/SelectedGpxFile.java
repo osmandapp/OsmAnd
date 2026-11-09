@@ -48,13 +48,17 @@ public class SelectedGpxFile {
 	private int runningAnalysisGeneration = -1;
 	private boolean fullAnalysisRunning;
 
-	protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
+	// Replaced, never changed in place: the map iterates it on the UI thread while trip recording
+	// clears it and adds segments on background threads (saving the track, loading it on app start).
+	protected volatile List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
+	@Nullable
+	private List<TrkSegment> startFinishSegments;
 	protected List<GpxDisplayGroup> splitGroups;
 
 	@NonNull
 	protected QuadRect bounds = new QuadRect();
 	@Nullable
-	protected TrackArea area = null;
+	protected volatile TrackArea area = null;
 
 	protected int color;
 	protected long modifiedTime = -1;
@@ -409,6 +413,17 @@ public class SelectedGpxFile {
 		return routePoints;
 	}
 
+	/** Segments whose ends get the start and finish icons; by default the displayed ones. */
+	@NonNull
+	public List<TrkSegment> getStartFinishSegments() {
+		return startFinishSegments != null ? startFinishSegments : getPointsToDisplay();
+	}
+
+	/** A flyover draws a track in pieces (passed, not reached yet); its start and finish stay the whole track's. */
+	public void setStartFinishSegments(@Nullable List<TrkSegment> segments) {
+		startFinishSegments = segments;
+	}
+
 	@NonNull
 	public List<TrkSegment> getPointsToDisplay() {
 		if (filteredSelectedGpxFile != null) {
@@ -429,17 +444,20 @@ public class SelectedGpxFile {
 	}
 
 	public final void addEmptySegmentToDisplay() {
-		processedPointsToDisplay.add(new TrkSegment());
+		List<TrkSegment> segments = new ArrayList<>(processedPointsToDisplay);
+		segments.add(new TrkSegment());
+		processedPointsToDisplay = segments;
 	}
 
 	public final void appendTrackPointToDisplay(@NonNull OsmandApplication app,
 	                                            @NonNull WptPt point, boolean firstPoint) {
+		List<TrkSegment> segments = processedPointsToDisplay;
 		TrkSegment lastSegment;
-		if (processedPointsToDisplay.isEmpty()) {
+		if (segments.isEmpty()) {
 			lastSegment = new TrkSegment();
-			processedPointsToDisplay.add(lastSegment);
+			processedPointsToDisplay = new ArrayList<>(Collections.singletonList(lastSegment));
 		} else {
-			lastSegment = processedPointsToDisplay.get(processedPointsToDisplay.size() - 1);
+			lastSegment = segments.get(segments.size() - 1);
 		}
 		lastSegment.getPoints().add(point);
 
@@ -476,8 +494,10 @@ public class SelectedGpxFile {
 
 		// Update path31 without iterating all points
 		if (hasMapRenderer(app)) {
+			TrackArea area = this.area;
 			if (area == null) {
 				area = new TrackArea();
+				this.area = area;
 			}
 			int x31 = MapUtils.get31TileNumberX(point.getLon());
 			int y31 = MapUtils.get31TileNumberY(point.getLat());
@@ -486,7 +506,7 @@ public class SelectedGpxFile {
 	}
 
 	public final void clearSegmentsToDisplay() {
-		processedPointsToDisplay.clear();
+		processedPointsToDisplay = new ArrayList<>();
 		bounds = new QuadRect();
 		area = null;
 	}
@@ -504,8 +524,11 @@ public class SelectedGpxFile {
 			return filteredSelectedGpxFile.getAreaToDisplay();
 		}
 
+		// read once: trip recording may reset it to null on another thread
+		TrackArea area = this.area;
 		if (area == null) {
-			updateArea(true);
+			area = createArea();
+			this.area = area;
 		}
 		return area.normalized();
 	}
@@ -515,12 +538,12 @@ public class SelectedGpxFile {
 	}
 
 	protected final void updateArea(boolean hasMapRenderer) {
-		if (!hasMapRenderer) {
-			area = null;
-			return;
-		}
+		area = hasMapRenderer ? createArea() : null;
+	}
 
-		area = new TrackArea();
+	@NonNull
+	private TrackArea createArea() {
+		TrackArea area = new TrackArea();
 		for (TrkSegment segment : processedPointsToDisplay) {
 			for (WptPt point : segment.getPoints()) {
 				int x31 = MapUtils.get31TileNumberX(point.getLongitude());
@@ -528,6 +551,7 @@ public class SelectedGpxFile {
 				area.add(new PointI(x31, y31));
 			}
 		}
+		return area;
 	}
 
 	public int getHiddenGroupsCount() {

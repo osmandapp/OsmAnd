@@ -517,7 +517,6 @@
     <string name="recording_unavailable">მიუწვდომელია</string>
     <string name="recording_context_menu_arecord">ხმოვანი შენიშვნის ჩაწერა</string>
     <string name="recording_context_menu_vrecord">ვიდეო შენიშვნის ჩაწერა</string>
-    <string name="layer_recordings">ჩანაწერების დონე</string>
     <string name="recording_context_menu_play">დაკვრა</string>
     <string name="recording_description">ჩანაწერი %1$s %2$s %3$s-დან</string>
     <string name="recording_default_name">მიმდინარეობს ჩაწერა</string>
@@ -525,7 +524,6 @@
     <string name="audionotes_location_not_defined">გამოიყენეთ \"მდებარეობის გამოყენება…\" შენიშვნის სასურველი მდებარეობისათვის მისანიჭებლად.</string>
     <string name="map_widget_audionotes">ხმოვანი შენიშვნები</string>
     <string name="audionotes_plugin_description">მგზავრობისას ხმოვანი/ვიდეო შენიშვნების ჩაწერა.</string>
-    <string name="audionotes_plugin_name">ხმოვანი/ვიდეო შენიშვნები</string>
     <string name="srtm_plugin_name">ტოპოგრაფია</string>
     <string name="download_select_map_types">სხვა რუკები</string>
     <string name="download_srtm_maps">კოტურული ხაზების მონაცემები</string>
@@ -1134,7 +1132,6 @@
     <string name="favourites">რჩეულები</string>
     <string name="tab_title_advanced">დამატებით</string>
     <string name="tab_title_basic">ძირითადი</string>
-    <string name="av_locations">მდებარეობები</string>
     <string name="next_proceed">შემდეგი</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="shared_string_skip">გამოტოვება</string>
@@ -1175,7 +1172,6 @@
     <string name="shared_string_enable">ჩართვა</string>
     <string name="shared_string_dismiss">მოცილება</string>
     <string name="shared_string_release">გამოშვებულია</string>
-    <string name="watch">ყურება</string>
     <string name="settings_privacy">კონფიდენციალობა</string>
     <string name="rendering_value_default_name">ნაგულისხმევი</string>
     <string name="navigate_point_easting">აღმოსავლეთისკენ</string>
@@ -1415,9 +1411,6 @@
     <string name="will_open_on">იღება</string>
     <string name="will_open_at">იღება</string>
     <string name="total_donations">შემოწირულობები სულ</string>
-    <string name="by_type">ტიპით</string>
-    <string name="by_date">თარიღით</string>
-    <string name="empty_state_av_notes">ჩაინიშნეთ!</string>
     <string name="empty_state_markers_groups">ჯგუფების იმპორტი</string>
     <string name="favourites_group">რჩეულების კატეგორია</string>
     <string name="mark_passed">გავლილად მონიშვნა</string>
@@ -2468,8 +2461,8 @@
     <string name="rename_track">ტრეკის სახელის გადარქმევა</string>
     <string name="context_menu_item_edit_waypoint">GPX გზის წერტილის ჩასწორება</string>
     <string name="weather_wind_kn">კვნძ</string>
-    <string name="routing_attr_avoid_sett_name">კოჭის გარეშე</string>
-    <string name="routing_attr_avoid_sett_description">კოჭის აცილება</string>
+    <string name="routing_attr_avoid_sett_name">თლილი ქვის ქვაფენილის გარეშე</string>
+    <string name="routing_attr_avoid_sett_description">თლილი ქვის ქვაფენილის თავიდან არიდება</string>
     <string name="rendering_attr_whiteWaterSports_name">მდინარის სპორტები</string>
     <string name="rendering_attr_horse_scale_demanding_name">მოთხოვნადი</string>
     <string name="mapillary_menu_title_tile_cache">ფილების კეში</string>
@@ -2807,4 +2800,6 @@
     <string name="plugin_ski_descr">შექმნილია ზამთრის სპორტის ზონებში ნავიგაციისთვის: იხილეთ სათხილამურო ტრასები, საბაგიროები და სათხილამურო სარბენი ბილიკები. სირთულის დონეები მითითებულია ფერადი ხაზებით. გამოსაყენებლად გაააქტიურეთ ეს დამატება მენიუში „რუკის მორგება“ აირჩიეთ სტილი „ზამთარი და თხილამურები“.</string>
     <string name="select_base_profile_dialog_message">შექმენით თქვენი მორგებული პროფილი აპლიკაციის ერთ-ერთ სტანდარტულ პროფილზე დაყრდნობით. ეს განსაზღვრავს საბაზისო პარამეტრებს, როგორიცაა ვიჯეტების ხილვადობა, სიჩქარისა და მანძილის ერთეულები. ქვემოთ მოცემულია სტანდარტული პროფილები და მორგებული პროფილების მაგალითები, რომლებიც შეგიძლიათ მათ საფუძველზე შექმნათ:</string>
     <string name="srtm_plugin_description">უზრუნველყოფს რელიეფისა და დეტალური ტოპოგრაფიის ვიზუალურ აღქმას კონტურის ხაზების, დაჩრდილვის, დახრილობის შეფერილობისა და 3D ხედის მეშვეობით. ეს დაგეხმარებათ ლანდშაფტისა და გამავლობის შეფასებაში.\n\nამ ფუნქციების გასააქტიურებლად საჭიროა დამატებით გადმოწეროთ „კონტურის ხაზები“ ან „რელიეფის (3D)“ რუკა, რომელიც შედგენილია SRTM და ASTER მონაცემების საფუძველზე.\n\nდამატებითი ინფორმაცია: %1$s.</string>
+    <string name="routing_attr_avoid_cobblestone_name">რიყის ქვის ქვაფენილის თავიდან არიდება</string>
+    <string name="routing_attr_avoid_cobblestone_description">რიყის ქვის ქვაფენილის თავიდან არიდება</string>
 </resources>

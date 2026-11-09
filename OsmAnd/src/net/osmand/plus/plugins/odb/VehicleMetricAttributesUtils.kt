@@ -48,7 +48,7 @@ class VehicleMetricAttributesUtils {
             drawFilled: Boolean,
             calcWithoutGaps: Boolean
         ): OrderedLineDataSet {
-            val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.APP)
+            val nightMode = app.daynightHelper.isNightMode(app.settings.applicationMode, ThemeUsageContext.APP)
             val widgetType: OBDDataComputer.OBDTypeWidget? =
                 OBDDataComputer.OBDTypeWidget.findByGpxTag(graphType.dataKey)
 

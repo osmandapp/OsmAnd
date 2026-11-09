@@ -2,6 +2,10 @@ package net.osmand.plus.plugins.astronomy.search
 
 import android.content.Context
 import io.github.cosinekitty.astronomy.Observer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.withContext
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.astronomy.AstroDataProvider
 import net.osmand.plus.plugins.astronomy.StarMapFragment
 import net.osmand.plus.plugins.astronomy.utils.AstroUtils
@@ -29,7 +33,11 @@ internal class StarMapSearchPreparedDataFactory(
 	private val nightMode: Boolean
 ) {
 
-	fun create(context: Context, parent: StarMapFragment?): StarMapSearchPreparedData {
+	fun create(
+		context: Context,
+		parent: StarMapFragment?,
+		catalogDescriptions: Map<String, String>
+	): StarMapSearchPreparedData {
 		val objects = parent?.getSearchableObjects().orEmpty()
 		val observer = parent?.starView?.observer ?: Observer(0.0, 0.0, 0.0)
 		val currentCalendar = parent?.viewModel?.currentCalendar?.value ?: Calendar.getInstance()
@@ -54,7 +62,7 @@ internal class StarMapSearchPreparedDataFactory(
 
 		return StarMapSearchPreparedData(
 			entries = entries,
-			catalogEntries = buildCatalogEntries(context, entries),
+			catalogEntries = buildCatalogEntries(context, entries, catalogDescriptions),
 			widToDisplayName = widToDisplayName,
 			computationContext = computationContext
 		)
@@ -76,9 +84,26 @@ internal class StarMapSearchPreparedDataFactory(
 		return StarMapSearchComputationContext(observer, now, dusk, dawn)
 	}
 
+	/**
+	 * Reads the Wikipedia article of every catalog from the astro database (one query per catalog),
+	 * so it runs on the IO dispatcher and never on the main thread.
+	 */
+	suspend fun loadCatalogDescriptions(app: OsmandApplication): Map<String, String> =
+		withContext(Dispatchers.IO) {
+			val descriptions = mutableMapOf<String, String>()
+			for (catalog in dataProvider.getCatalogs(app)) {
+				ensureActive()
+				dataProvider.getAstroArticle(app, catalog.wid)?.description?.let {
+					descriptions[catalog.wid] = it
+				}
+			}
+			descriptions
+		}
+
 	private fun buildCatalogEntries(
 		context: Context,
-		preparedEntries: List<StarMapSearchEntry>
+		preparedEntries: List<StarMapSearchEntry>,
+		catalogDescriptions: Map<String, String>
 	): List<StarMapCatalogEntry> {
 		val objectCountByCatalogWid = preparedEntries
 			.flatMap { it.catalogWids }
@@ -88,7 +113,7 @@ internal class StarMapSearchPreparedDataFactory(
 			StarMapCatalogEntry(
 				catalog = catalog,
 				displayName = catalog.name,
-				description = dataProvider.getAstroArticle(context, catalog.wid)?.description,
+				description = catalogDescriptions[catalog.wid],
 				objectCount = objectCountByCatalogWid[catalog.wid] ?: 0
 			)
 		}

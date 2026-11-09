@@ -128,4 +128,9 @@ public class BackupAuthorizationFragment extends BaseFullScreenFragment implemen
 					.commitAllowingStateLoss();
 		}
 	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "backup_authorization";
+	}
 }

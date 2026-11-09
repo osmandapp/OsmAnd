@@ -22,6 +22,7 @@ import net.osmand.data.Street;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
@@ -47,6 +48,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	private static final Log LOG = PlatformUtil.getLog(SpatialTextSearch.class);
 
 	private static final int SEARCH_PRIORITY = SEARCH_ADDRESS_BY_NAME_PRIORITY;
+	private static final long POI_TYPES_IN_NAME_INDEX_EDITION = 1782864000000L; // 2026-07-01 UTC
+	private static final int[] INCREASED_SEARCH_RADIUS_KM = {500, 700};
 
 	private final MapPoiTypes poiTypes;
 	private final SpatialTextSearch spatialTextSearch = new SpatialTextSearch();
@@ -62,11 +65,18 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public boolean isSearchAvailable(SearchPhrase phrase) {
-		return !phrase.hasCustomSearchType(ObjectType.ONLINE_SEARCH);
+		return super.isSearchAvailable(phrase) && !phrase.hasCustomSearchType(ObjectType.ONLINE_SEARCH);
 	}
 
 	@Override
 	public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+		// poi categories are matched in the app language and English (poiTypes), the map language (Configure map)
+		// and the main language of the search location: "de" in Leipzig, "uk" of "uk,ru"
+		for (String lang : new String[] {phrase.getSettings().getLang(), phrase.getSettings().getRegionLang()}) {
+			if (!Algorithms.isEmpty(lang)) {
+				poiSearch.addLanguage(lang.split(",")[0]);
+			}
+		}
 		SpatialTextSearchSettings settings = createSpatialSettings(phrase);
 		List<BinaryMapIndexReader> files = getSpatialSearchFiles(phrase, settings);
 		if (Algorithms.isEmpty(files)) {
@@ -81,6 +91,16 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		LOG.info("Spatial search start call spatialTextSearch.searchAPI");
 		SpatialSearchResults results = spatialTextSearch.searchAPI(phrase.getFullSearchPhrase(), context);
 		LOG.info("Spatial search after call spatialTextSearch.searchAPI");
+		if (results.typoSuggestion != null && phrase.isSearchTypeAllowed(ObjectType.SUGGESTION)
+				&& !resultMatcher.isCancelled()) {
+			// "did you mean": the corrected query, searched when the row is tapped
+			SearchResult suggestion = new SearchResult(phrase);
+			suggestion.objectType = ObjectType.SUGGESTION;
+			suggestion.object = results.typoSuggestion;
+			suggestion.localeName = results.typoSuggestion;
+			suggestion.priority = SEARCH_PRIORITY;
+			resultMatcher.publish(suggestion);
+		}
 		if (results.mainResults == null) {
 			return true;
 		}
@@ -111,6 +131,9 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 				return false;
 			}
 			SearchResult searchResult = convertResult(phrase, context, spatialResult);
+			if (searchResult != null && !phrase.isSearchTypeAllowed(searchResult.objectType)) {
+				continue;
+			}
 			if (searchResult != null) {
 				publishWithParent(resultMatcher, searchResult);
 			} else {
@@ -118,6 +141,34 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			}
 		}
 		return true;
+	}
+
+	// maps built before 2026-07 have no poi types in the name index
+	public static boolean hasPoiTypesInNameIndex(BinaryMapIndexReader reader) {
+		return reader.getDateCreated() >= POI_TYPES_IN_NAME_INDEX_EDITION;
+	}
+
+	public List<Amenity> searchPoiByCategory(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+			String categoryKey, QuadRect bbox31) throws IOException {
+		QuadRect bboxLatLon = new QuadRect(MapUtils.get31LongitudeX((int) bbox31.left),
+				MapUtils.get31LatitudeY((int) bbox31.top), MapUtils.get31LongitudeX((int) bbox31.right),
+				MapUtils.get31LatitudeY((int) bbox31.bottom));
+		// the list needs every object: at this zoom the per-tile thinning of the map layer is off
+		SpatialTextSearchSettings settings = SpatialTextSearchSettings.searchPoiByCategorySettings(PREFERRED_POI_ZOOM,
+				bboxLatLon);
+		settings.LIMIT_READ_SINGLE_OBJECTS = 0;
+		settings.LIMIT_READ_OBJECTS = 0;
+		List<BinaryMapIndexReader> files = new ArrayList<>();
+		Iterator<BinaryMapIndexReader> it = phrase.getOfflineIndexes(bbox31, SearchPhraseDataType.POI);
+		while (it.hasNext()) {
+			BinaryMapIndexReader reader = it.next();
+			if (hasPoiTypesInNameIndex(reader)) {
+				addFile(files, reader);
+			}
+		}
+		SpatialSearchContext context = createSpatialContext(phrase, resultMatcher, files, poiSearch, settings);
+		return spatialTextSearch.searchPoiByCategory(context, categoryKey, bboxLatLon, PREFERRED_POI_ZOOM,
+				Integer.MAX_VALUE);
 	}
 
 	private SpatialSearchContext createSpatialContext(SearchPhrase phrase, SearchResultMatcher resultMatcher,
@@ -190,12 +241,19 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 				? SpatialTextSearchSettings.defaultSettings()
 				: SpatialTextSearchSettings.suggestionSettings();
 		settings.LANG_DEDUPLICATE = phrase.getSettings().getLang();
+		settings.SEARCH_POI &= phrase.isSearchTypeAllowed(ObjectType.POI);
+		settings.SEARCH_POI_CATEGORIES &= phrase.isSearchTypeAllowed(ObjectType.POI_TYPE);
+		int increased = getIncreasedRadiusKm(phrase.getRadiusLevel());
+		if (increased > 0) {
+			settings.SUGGESTED_SEARCH_RADIUS_KM = Math.max(settings.SUGGESTED_SEARCH_RADIUS_KM, increased);
+		}
 		return settings;
 	}
 
 	@Override
 	public int getSearchPriority(SearchPhrase phrase) {
-		if (!phrase.isUnknownSearchWordPresent()
+		// the address tab lists are filtered by SpatialAddressByNameAPI and SpatialStreetByCityAPI
+		if (!phrase.isUnknownSearchWordPresent() || phrase.isAddressListFilter()
 				|| phrase.isLastWord(ObjectType.POI_TYPE, ObjectType.STREET)) {
 			return -1;
 		}
@@ -204,15 +262,29 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
-		return false;
+		return phrase.getRadiusLevel() <= INCREASED_SEARCH_RADIUS_KM.length;
+	}
+
+	@Override
+	public int getMinimalSearchRadius(SearchPhrase phrase) {
+		return createSpatialSettings(phrase).SUGGESTED_SEARCH_RADIUS_KM * 1000;
+	}
+
+	@Override
+	public int getNextSearchRadius(SearchPhrase phrase) {
+		int increased = getIncreasedRadiusKm(phrase.getRadiusLevel() + 1);
+		return increased > 0 ? increased * 1000 : getMinimalSearchRadius(phrase);
+	}
+
+	private static int getIncreasedRadiusKm(int radiusLevel) {
+		int ind = Math.min(radiusLevel, INCREASED_SEARCH_RADIUS_KM.length + 1) - 2;
+		return ind >= 0 ? INCREASED_SEARCH_RADIUS_KM[ind] : 0;
 	}
 
 	private SearchResult convertResult(SearchPhrase phrase, SpatialSearchContext context, SpatialSearchResult ssr) {
 		SearchResult result = new SearchResult(phrase);
 
-		LatLon spatialLocation = ssr.getLatLon();
-		LatLon phraseLocation = phrase.getSettings().getOriginalLocation();
-		LatLon location = spatialLocation != null ? spatialLocation : phraseLocation; // nullable
+		LatLon location = ssr.getLatLon(); // nullable
 
 		String lang = phrase.getSettings().getLang();
 		boolean transliterate = phrase.getSettings().isTransliterate();
@@ -345,10 +417,11 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		AbstractPoiType poiType = spatialPoiType.singleType;
 		if (poiType != null) {
 			object = poiType;
-			localeName = poiType.getTranslation();
+			localeName = PoiAdditionalLabels.getSearchName(poiType);
 		} else if (spatialPoiType.poiSubType != null) {
 			object = new TopIndexFilter(spatialPoiType.poiSubType, poiTypes, spatialPoiType.poiAdditional);
-			localeName = spatialPoiType.names.get(0);
+			// the value itself: the names list starts with the alternative names of the map (Lidl -> its name:fa)
+			localeName = spatialPoiType.poiAdditional;
 		} else {
 			return null;
 		}

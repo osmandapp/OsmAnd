@@ -208,7 +208,10 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 			log.debug("ttsRequests=" + ttsRequests);
 			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "" + System.currentTimeMillis());
 			if (AudioFocusHelperImpl.playbackAuthorized) {
-				mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
+				if (mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params) == TextToSpeech.ERROR) {
+					// Not queued (the engine is unbound or died), so no completion callback will come
+					stop();
+				}
 			} else {
 				stop();
 			}
@@ -255,7 +258,9 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	@Override
 	public void stop() {
 		ttsRequests = 0;
-		if (mTts != null) {
+		// Before onInit the engine connection is still being set up under TextToSpeech's internal lock, so
+		// stop() would wait for a slow engine on the main thread (ANR). Nothing can be speaking before onInit.
+		if (mTts != null && speechAllowed) {
 			mTts.stop();
 		}
 		abandonAudioFocus();

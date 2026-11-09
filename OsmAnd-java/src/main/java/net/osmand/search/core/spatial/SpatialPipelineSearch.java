@@ -561,7 +561,9 @@ public class SpatialPipelineSearch {
 				SpatialPipelineObjectRes existing = ctx.objectsById.get(atom.id);
 				boolean noPoiType = disallowPoiType(atom, token);
 				if (existing != null) {
-					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType, lastDupToken, copies,
+					// "Shabu Shabu": the name has the word twice, so the copy side by side is the same name, not "8 8 ave"
+					int dupToken = lastDupToken == tokenIdx - 1 && nameRepeatsWord(atom, token.word) ? tokenIdx : lastDupToken;
+					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType, dupToken, copies,
 							copies == null ? 0 : tokensOf(atom.id));
 				} else {
 					SpatialPipelineObjectRes obj = new SpatialPipelineObjectRes(totalTokens, atom, tokenIdx, noPoiType);
@@ -624,6 +626,19 @@ public class SpatialPipelineSearch {
 		return tokens;
 	}
 
+	private boolean nameRepeatsWord(NameIndexAtom atom, String word) {
+		if (atom.name == null) {
+			return false;
+		}
+		int count = 0;
+		for (String w : atom.name.split(" ")) {
+			if (w.equals(word) && ++count > 1) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// the nearest token before with the same word, the token itself when there is none
 	private int previousCopy(long[] copies, int tokenIdx) {
 		long before = copies == null ? 0 : copies[tokenIdx] & ((1L << tokenIdx) - 1);
@@ -640,7 +655,7 @@ public class SpatialPipelineSearch {
 		}
 		long time = System.nanoTime();
 		int nonCategoryRes = 0;
-		SpatialSearchResultsList stageList = createResultList(tokens, limitSingleObjects(preResults));
+		SpatialSearchResultsList stageList = createResultList(tokens, limitByPrescore(limitSingleObjects(preResults)));
 		stageList.loadObjectsAndCalcBuildings(ctx.searchContext);
 		if (ctx.isCancelled()) {
 			return true;
@@ -713,6 +728,60 @@ public class SpatialPipelineSearch {
 		return res;
 	}
 
+	/**
+	 * Only the single objects (a street with a house number to check counts as one) with the best prescore are read.
+	 * Categories, combinations of several objects and pre-results with a token matched by nothing are always read:
+	 * their rank depends on the objects.
+	 */
+	private List<SpatialPipelineObjectRes> limitByPrescore(List<SpatialPipelineObjectRes> preResults) {
+		int limit = ctx.settings.LIMIT_READ_OBJECTS;
+		SpatialSearchRanking ranking = ctx.searchContext.ranking;
+		LatLon l = ctx.searchContext.location;
+		if (limit <= 0 || preResults.size() <= limit || ranking == null || l == null) {
+			return preResults;
+		}
+		List<SpatialPipelineObjectRes> res = new ArrayList<>();
+		List<SpatialPipelineObjectRes> single = new ArrayList<>();
+		for (SpatialPipelineObjectRes r : preResults) {
+			if (r.mainAtom.isPoiCategory() || r.refs2 != null || !oneObjectForAllTokens(r)) {
+				res.add(r);
+			} else {
+				single.add(r);
+			}
+		}
+		if (single.size() <= limit) {
+			return preResults;
+		}
+		boolean queryIsKind = false, number = false;
+		for (SpatialSearchToken t : ctx.tokens) {
+			queryIsKind |= t.hasPoiCategoryKeys();
+			number |= t.word.chars().anyMatch(Character::isDigit);
+		}
+		double[] score = new double[single.size()];
+		Integer[] order = new Integer[single.size()];
+		for (int i = 0; i < single.size(); i++) {
+			score[i] = ranking.prescore(single.get(i), l, ctx.searchContext.poiSearch, ctx.settings.MIN_ELO_RATING,
+					queryIsKind, number);
+			order[i] = i;
+		}
+		Arrays.sort(order, (a, b) -> Double.compare(score[b], score[a]));
+		for (int i = 0; i < limit; i++) {
+			res.add(single.get(order[i]));
+		}
+		return res;
+	}
+
+	private static boolean oneObjectForAllTokens(SpatialPipelineObjectRes r) {
+		long id = r.mainAtom.id;
+		for (int i = 0; i < r.atoms.length; i++) {
+			// a token matched by a reference (a house number) is read with the object
+			if (r.atoms[i] == null ? r.refs1 == null || r.refs1[i] == null : r.atoms[i].id != id) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	private SpatialSearchResultsList createResultList(List<SpatialSearchToken> tokens,
 			List<SpatialPipelineObjectRes> r) {
 		SpatialSearchResultsList singleResults = new SpatialSearchResultsList(ctx.searchContext, tokens);
@@ -773,7 +842,7 @@ public class SpatialPipelineSearch {
 			enlargeBboxes(currentLevel);
 			depth = runSearch(tokensSize, depth, currentLevel);
 		}
-		if (ctx.overallResults <= MIN_RESULTS_PARTIAL && tokensSize > 1 && !ctx.isCancelled()) {
+		if (ctx.nonCatResults <= MIN_RESULTS_PARTIAL && tokensSize > 1 && !ctx.isCancelled()) {
 			if (ctx.stats.printLogs) {
 				System.out.printf("PIPELINE LOOKUP %d partial results\n", depth);
 			}

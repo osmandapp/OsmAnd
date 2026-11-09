@@ -227,7 +227,7 @@
     <string name="wall_height">ความสูงของกำแพง</string>
     <string name="disable_map_layers">ปิดเลเยอร์ของแผนที่</string>
     <string name="fixed_height">จำกัดความสูง</string>
-    <string name="routing_attr_avoid_cobblestone_name">หลีกเลี่ยงหินขรุขระ</string>
+    <string name="routing_attr_avoid_cobblestone_name">หลีกเลี่ยงถนนหินกลม</string>
     <string name="delete_actions_button">ปุ่มลบ</string>
     <string name="quick_action_location_by_gpx">ตำแหน่งโดย GPX</string>
     <string name="quick_action_directions_from">จุดเริ่มต้น</string>
@@ -753,4 +753,7 @@
     <string name="favourites">สถานที่ที่ชื่นชอบ</string>
     <string name="configure_profile">ตั้งค่าโปรไฟล์</string>
     <string name="routing_settings">การนำทาง</string>
+    <string name="routing_attr_avoid_cobblestone_description">หลีกเลี่ยงถนนหินกลม</string>
+    <string name="routing_attr_avoid_sett_name">หลีกเลี่ยงถนนปูหินตัด</string>
+    <string name="routing_attr_avoid_sett_description">หลีกเลี่ยงถนนปูหินตัด</string>
 </resources>

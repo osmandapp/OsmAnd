@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.astronomy.search
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -147,6 +146,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private var filterPopup: PopupWindow? = null
 	private var filterAndSortJob: Job? = null
 	private var filterAndSortRequestId = 0
+	private var catalogDescriptions: Map<String, String>? = null
+	private var catalogDescriptionsJob: Job? = null
 
 	private var currentMode: ScreenMode = ScreenMode.EXPLORE
 	private var currentFullSearchMode: FullSearchMode = FullSearchMode.INPUT
@@ -226,13 +227,11 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 	}
 
-	override fun createDialog(savedInstanceState: Bundle?): Dialog {
-		return object : Dialog(requireContext(), theme) {
-			override fun onBackPressed() {
-				if (!handleBackPressedInternal()) {
-					super.onBackPressed()
-				}
-			}
+	override fun isBackPressedCallbackEnabled(): Boolean = true
+
+	override fun handleBackPressed() {
+		if (!handleBackPressedInternal()) {
+			super.handleBackPressed()
 		}
 	}
 
@@ -1112,7 +1111,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun refreshPreparedEntries() {
 		val parent = parentFragment as? StarMapFragment
-		val preparedData = searchPreparedDataFactory.create(requireContext(), parent)
+		val preparedData = searchPreparedDataFactory.create(requireContext(), parent, catalogDescriptions.orEmpty())
 		preparedEntries.clear()
 		preparedEntries.addAll(preparedData.entries)
 		preparedCatalogEntries.clear()
@@ -1120,6 +1119,23 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		widToDisplayName.clear()
 		widToDisplayName.putAll(preparedData.widToDisplayName)
 		searchHelper.updateComputationContext(preparedData.computationContext)
+		loadCatalogDescriptions()
+	}
+
+	private fun loadCatalogDescriptions() {
+		if (view == null || catalogDescriptions != null || catalogDescriptionsJob?.isActive == true) {
+			return
+		}
+		catalogDescriptionsJob = viewLifecycleOwner.lifecycleScope.launch {
+			val descriptions = searchPreparedDataFactory.loadCatalogDescriptions(app)
+			catalogDescriptions = descriptions
+			val updatedEntries = preparedCatalogEntries.map { it.copy(description = descriptions[it.catalog.wid]) }
+			preparedCatalogEntries.clear()
+			preparedCatalogEntries.addAll(updatedEntries)
+			if (shouldShowCatalogEntries()) {
+				applyFiltersAndSort(scrollToTop = false)
+			}
+		}
 	}
 
 	private fun shouldShowInfoHeader(): Boolean {
@@ -1619,14 +1635,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 			}
 			items
 		}
-		sortPopup = PopUpMenu.showAndGet(
-			createPopupDisplayData(
-				anchor = anchor,
-				items = items,
-				limitHeight = false,
-				layoutId = R.layout.popup_star_search_sort_menu_item
-			)
-		)
+		sortPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items))
 	}
 
 	private fun getMyDataInsertionOrderMap(quickPresetType: StarMapSearchQuickPresetType): Map<String, Int> {
@@ -1742,22 +1751,17 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				}
 			)
 		}
-		filterPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items, limitHeight = true))
+		filterPopup = PopUpMenu.showAndGet(createPopupDisplayData(anchor, items))
 	}
 
 	private fun createPopupDisplayData(
 		anchor: View,
-		items: List<PopUpMenuItem>,
-		limitHeight: Boolean,
-		layoutId: Int = R.layout.popup_star_search_menu_item
+		items: List<PopUpMenuItem>
 	): PopUpMenuDisplayData {
 		return PopUpMenuDisplayData().apply {
 			anchorView = anchor
-			this.layoutId = layoutId
 			nightMode = this@StarMapSearchDialogFragment.nightMode
 			widthMode = PopUpMenuWidthMode.STANDARD
-			showCompound = true
-			this.limitHeight = limitHeight
 			menuItems = items
 		}
 	}
@@ -1826,4 +1830,6 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		dismissSortPopup()
 		dismissFilterPopup()
 	}
+
+	override fun getAnalyticsScreen() = "star_map_search"
 }

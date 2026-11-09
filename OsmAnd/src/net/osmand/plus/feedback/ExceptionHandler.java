@@ -76,6 +76,7 @@ class ExceptionHandler implements UncaughtExceptionHandler {
 		if (info != null) {
 			builder.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
 		}
+		builder.append("\nBuild variant : ").append(Version.getBuildVariant());
 		builder.append("\n")
 				.append("Exception occurred in thread ")
 				.append(thread)

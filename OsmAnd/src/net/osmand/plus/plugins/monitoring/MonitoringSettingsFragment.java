@@ -266,7 +266,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 
 	private void setupShowTripRecNotificationPref() {
 		SwitchPreferenceEx showTripRecNotification = findPreference(settings.SHOW_TRIP_REC_NOTIFICATION.getId());
-		showTripRecNotification.setDescription(getString(R.string.trip_rec_notification_settings_desc));
+		showTripRecNotification.setDescription(getString(R.string.trip_rec_start_from_notification_descr));
 		showTripRecNotification.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 
@@ -369,21 +369,8 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		if (plugin != null) {
 			ApplicationMode appMode = getSelectedAppMode();
 			for (ExternalSensorTrackDataType dataType : ExternalSensorTrackDataType.values()) {
-				CommonPreference<String> pref = plugin.getWriteToTrackDeviceIdPref(dataType);
-
-				String deviceId = pref.getModeValue(appMode);
-				if (!Algorithms.isEmpty(deviceId)) {
-					boolean sensorLinked = false;
-					if (!plugin.isAnyConnectedDeviceId(deviceId)) {
-						if (plugin.getDevice(deviceId) != null) {
-							sensorLinked = true;
-						}
-					} else if (plugin.getAnyDevice(dataType.getSensorType()) != null) {
-						sensorLinked = true;
-					}
-					if (sensorLinked) {
-						names.add(getString(dataType.getTitleId()));
-					}
+				if (plugin.getWriteToTrackDevice(dataType, appMode) != null) {
+					names.add(getString(dataType.getTitleId()));
 				}
 			}
 		}
@@ -575,5 +562,10 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			app.showToastMessage(R.string.plugin_prefs_reset_successful);
 			updateAllSettings();
 		}
+	}
+
+	@Override
+	public String getAnalyticsScreen() {
+		return "monitoring_settings";
 	}
 }

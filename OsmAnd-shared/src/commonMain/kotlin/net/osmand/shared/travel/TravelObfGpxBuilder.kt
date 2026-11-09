@@ -51,13 +51,13 @@ import net.osmand.shared.util.primaryCollator
  * waypoints and every tag of the route come from their poi section, and the two are tied together
  * by route_id.
  *
- * A copy of `TravelObfGpxFileReader` in the android app, which stays there; this copy is for iOS.
- * Three things are left behind with it. It was an `AsyncTask` - this is a plain call, and the
- * caller decides what thread it runs on and shows its own progress. It approximated the altitudes
- * of a track against the routing graph afterwards, which needs the router - do that to the file
- * this returns. And it sorted waypoints with the ICU collator in numeric mode, which no platform
- * here has; [compareWaypointNames] is a hand-written stand-in, so "Station 9" still comes before
- * "Station 15", but two names the collator calls equal may end up the other way round.
+ * Based on `TravelObfGpxFileReader` from the Android app. Three operations differ here. It was
+ * an `AsyncTask` - this is a plain call, and the caller decides what thread it runs on and
+ * shows its own progress. It approximated the altitudes of a track against the routing graph
+ * afterwards, which is a separate operation for the caller on the file this returns. And it
+ * sorted waypoints with the ICU collator in numeric mode, which the shared collator API does
+ * not expose; [compareWaypointNames] is a hand-written stand-in, so "Station 9" still comes
+ * before "Station 15", but two names the collator calls equal may end up the other way round.
  */
 class TravelObfGpxBuilder(private val context: TravelObfContext) {
 
@@ -327,8 +327,8 @@ class TravelObfGpxBuilder(private val context: TravelObfContext) {
 			poiTypeFilter = getSearchFilter(travelGpx.getMainFilterString(), travelGpx.getPointFilterString())
 		}
 
-		val geometryMap = HashMap<Long, BinaryMapDataObject>() // live-updates
-		val amenityMap = HashMap<Long, Amenity>() // live-updates
+		val geometryMap = LinkedHashMap<Long, BinaryMapDataObject>() // live-updates
+		val amenityMap = LinkedHashMap<Long, Amenity>() // live-updates
 		val currentAmenities = ArrayList<Amenity>()
 
 		val pointRequest = SearchRequest.buildSearchPoiRequest(
@@ -432,11 +432,9 @@ class TravelObfGpxBuilder(private val context: TravelObfContext) {
 		pgColors: MutableList<String>, pgBackgrounds: MutableList<String>,
 		isCancelled: Cancellable
 	): Boolean {
-		val left = 0
-		val right = Int.MAX_VALUE
-		val top = 0
-		val bottom = Int.MAX_VALUE
-		val amenityMap = HashMap<Long, Amenity>()
+		val amenityMap = LinkedHashMap<Long, Amenity>()
+		val currentAmenities = ArrayList<Amenity>()
+		val routeId = article.getRouteId()
 		for (repo in repos) {
 			try {
 				if (isCancelled.isCancelled()) {
@@ -445,18 +443,20 @@ class TravelObfGpxBuilder(private val context: TravelObfContext) {
 				if (shouldSkipRepository(repo, article)) {
 					continue
 				}
-				val pointRequest = SearchRequest.buildSearchPoiRequest(
-					0, 0, KAlgorithms.emptyIfNull(article.title), left, right, top, bottom,
-					getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
-					getAmenityMatcher(article, amenityMap, ArrayList(), isCancelled), null
-				)
-				if (article.routeRadius > 0 && !article.hasBbox31()) {
-					pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius)
+				currentAmenities.clear()
+				// route_name of article points is not in the POI name index, so search by title misses most of them
+				if (!KAlgorithms.isEmpty(routeId)) {
+					repo.searchPoiByName(buildArticlePointsRequest(article, routeId!!, amenityMap,
+						currentAmenities, isCancelled)) // indexed route_id
 				}
-				if (!KAlgorithms.isEmpty(article.title)) {
-					repo.searchPoiByName(pointRequest)
-				} else {
-					repo.searchPoi(pointRequest)
+				if (currentAmenities.isEmpty()) {
+					val pointRequest = buildArticlePointsRequest(article, KAlgorithms.emptyIfNull(article.title),
+						amenityMap, currentAmenities, isCancelled)
+					if (!KAlgorithms.isEmpty(article.title)) {
+						repo.searchPoiByName(pointRequest)
+					} else {
+						repo.searchPoi(pointRequest)
+					}
 				}
 			} catch (e: Exception) {
 				log.error(e.message, e)
@@ -464,6 +464,21 @@ class TravelObfGpxBuilder(private val context: TravelObfContext) {
 		}
 		pointList.addAll(getPointList(article, amenityMap, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds))
 		return !isCancelled.isCancelled()
+	}
+
+	private fun buildArticlePointsRequest(
+		article: TravelArticle, query: String, amenityMap: MutableMap<Long, Amenity>,
+		currentAmenities: MutableList<Amenity>, isCancelled: Cancellable
+	): SearchRequest<Amenity> {
+		val request = SearchRequest.buildSearchPoiRequest(
+			0, 0, query, 0, Int.MAX_VALUE, 0, Int.MAX_VALUE,
+			getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
+			getAmenityMatcher(article, amenityMap, currentAmenities, isCancelled), null
+		)
+		if (article.routeRadius > 0 && !article.hasBbox31()) {
+			request.setBBoxRadius(article.lat, article.lon, article.routeRadius)
+		}
+		return request
 	}
 
 	/**

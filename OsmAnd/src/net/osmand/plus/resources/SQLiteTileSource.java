@@ -455,7 +455,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	private boolean hasTimeColumn(SQLiteConnection db) {
 		SQLiteCursor cursor;
-		cursor = db.rawQuery("SELECT * FROM tiles", null);
+		cursor = db.rawQuery("SELECT * FROM tiles LIMIT 0", null);
 		cursor.moveToFirst();
 		List<String> cols = Arrays.asList(cursor.getColumnNames());
 		boolean timeSupported = cols.contains("time");
@@ -728,6 +728,13 @@ public class SQLiteTileSource implements ITileSource {
 			clearOld();
 		}
 		if(db != null){
+			db.close();
+			db = null;
+		}
+	}
+
+	public synchronized void closeConnection() {
+		if (db != null) {
 			db.close();
 			db = null;
 		}

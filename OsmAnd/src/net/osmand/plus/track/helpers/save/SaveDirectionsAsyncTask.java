@@ -44,7 +44,7 @@ public class SaveDirectionsAsyncTask extends AsyncTask<File, Void, GpxFile> {
 		if (gpxFile.getError() == null) {
 			GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
 			if (showOnMap) {
-				params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+				params.showOnMap().selectedByUser().addToMarkers();
 			} else {
 				params.hideFromMap();
 			}
