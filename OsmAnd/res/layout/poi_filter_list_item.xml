@@ -15,7 +15,6 @@
         android:layout_height="@dimen/card_row_min_height"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingRight="@dimen/content_padding"
         android:paddingEnd="@dimen/content_padding">
 
         <LinearLayout
