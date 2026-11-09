@@ -337,7 +337,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 					categoryPlacesCounts = categoryCounts;
 					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
 						String category = entry.getKey();
-						if (getCategoryPlacesCount(category) == 0 && getPoiAdditionalsWithPlaces(entry.getValue()).isEmpty()
+						if (!category.isEmpty() && getCategoryPlacesCount(category) == 0 && getPoiAdditionalsWithPlaces(entry.getValue()).isEmpty()
 								&& !collapsedCategories.contains(category)) {
 							collapsedCategories.add(category);
 						}
