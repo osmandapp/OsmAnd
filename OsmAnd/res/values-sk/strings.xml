@@ -5032,7 +5032,7 @@
     <string name="astro_type_black_hole">Čierna diera</string>
     <string name="astro_type_planet">Planéta</string>
     <string name="astro_type_sun">Slnko</string>
-    <string name="astro_type_satellite">Satelit</string>
+    <string name="astro_type_satellite">Družica</string>
     <string name="astro_type_nebula">Hmlovina</string>
     <string name="astro_type_open_cluster">Otvorená hviezdokopa</string>
     <string name="astro_type_globular_cluster">Guľová hviezdokopa</string>
