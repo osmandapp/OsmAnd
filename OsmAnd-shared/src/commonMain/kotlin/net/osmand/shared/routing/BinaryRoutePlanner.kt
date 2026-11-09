@@ -531,7 +531,7 @@ class BinaryRoutePlanner {
 		return directionAllowed
 	}
 
-	private fun checkViaRestrictions(from: RouteSegment?, to: RouteSegment?): Boolean {
+	private fun checkViaRestrictions(from: RouteSegment?, to: RouteSegment?, viaId: Long): Boolean {
 		if (from != null && to != null) {
 			val fid = to.getRoad().getId()
 			for (i in 0 until from.getRoad().getRestrictionLength()) {
@@ -547,12 +547,18 @@ class BinaryRoutePlanner {
 					}
 					break
 				}
-				if (tp == RouteDataObject.RESTRICTION_ONLY_STRAIGHT_ON) {
+				if (isOnlyRestriction(tp) && from.getRoad().getRestrictionVia(i) == viaId) {
 					return false
 				}
 			}
 		}
 		return true
+	}
+
+	private fun isOnlyRestriction(type: Int): Boolean {
+		return type == RouteDataObject.RESTRICTION_ONLY_RIGHT_TURN
+			|| type == RouteDataObject.RESTRICTION_ONLY_LEFT_TURN
+			|| type == RouteDataObject.RESTRICTION_ONLY_STRAIGHT_ON
 	}
 
 	private fun getParentDiffId(segment: RouteSegment?): RouteSegment? {
@@ -584,7 +590,7 @@ class BinaryRoutePlanner {
 			val oppParent = getParentDiffId(opposite)
 			val to = if (reverseWaySearch) curParent else oppParent
 			val from = if (!reverseWaySearch) curParent else oppParent
-			if (checkViaRestrictions(from, to)) {
+			if (checkViaRestrictions(from, to, currentSegment.getRoad().getId())) {
 				val frs = FinalRouteSegment(
 					currentSegment.getRoad(),
 					currentSegment.getSegmentStart().toInt(), currentSegment.getSegmentEnd().toInt()
@@ -668,7 +674,7 @@ class BinaryRoutePlanner {
 							break
 						}
 					}
-					if (rv == viaId && via && rt == RouteDataObject.RESTRICTION_ONLY_STRAIGHT_ON) {
+					if (rv == viaId && via && isOnlyRestriction(rt)) {
 						type = RouteDataObject.RESTRICTION_NO_STRAIGHT_ON
 						break
 					}
@@ -686,7 +692,7 @@ class BinaryRoutePlanner {
 						}
 					}
 
-					if (rv == viaId && via && rt == RouteDataObject.RESTRICTION_ONLY_STRAIGHT_ON) {
+					if (rv == viaId && via && isOnlyRestriction(rt)) {
 						type = RouteDataObject.RESTRICTION_NO_STRAIGHT_ON
 						break
 					}
