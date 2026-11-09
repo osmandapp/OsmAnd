@@ -271,6 +271,10 @@ class AstroDataDbProvider : AstroDataProvider() {
 			} else { lang }
 
 			val db = dbHelper.readableDatabase
+			if (!hasWikipediaTable(db)) {
+				db.close()
+				return null
+			}
 
 			val languagesCursor = db.query(
 				TABLE_WIKIPEDIA, arrayOf(COL_WIKI_LANG), "$COL_WIKI_WIKIDATA = ?",arrayOf(wikidataId), null, null, null
