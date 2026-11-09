@@ -38,6 +38,8 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	private static final Log log = PlatformUtil.getLog(GeometryWayDrawer.class);
 
 	private final T context;
+	@Nullable
+	private SharedVectorLines sharedLines;
 
 	public static class DrawPathData {
 		Path path;
@@ -84,6 +86,10 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	public T getContext() {
 		return context;
+	}
+
+	void setSharedLines(@Nullable SharedVectorLines sharedLines) {
+		this.sharedLines = sharedLines;
 	}
 
 	public static float getVectorLineScale(@NonNull Context context) {
@@ -202,67 +208,64 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			outlineColorizationMapping = colorizationMapping;
 		}
 
-		QListVectorLine lines = collection.getLines();
-		for (int i = 0; i < lines.size(); i++) {
-			VectorLine line = lines.get(i);
-			if (line.getLineId() == lineId) {
-				line.setElevationScaleFactor(additionalExaggeration);
-				line.setFillColor(NativeUtilities.createFColorARGB(color));
-				float vectorLineScale = getVectorLineScale(context.getApp());
-				line.setLineWidth(width * vectorLineScale);
-				line.setOutlineWidth(outlineWidth * vectorLineScale);
-				line.setPoints(points);
+		VectorLine line = findLine(collection, lineId);
+		if (line != null) {
+			line.setElevationScaleFactor(additionalExaggeration);
+			line.setFillColor(NativeUtilities.createFColorARGB(color));
+			float vectorLineScale = getVectorLineScale(context.getApp());
+			line.setLineWidth(width * vectorLineScale);
+			line.setOutlineWidth(outlineWidth * vectorLineScale);
+			line.setPoints(points);
 
-				setupColorization(line, colorizationScheme, colorizationMapping, outlineColorizationMapping,
-						hasColorizationMapping, hasOutlineColorizationMapping, color, outlineColor);
+			setupColorization(line, colorizationScheme, colorizationMapping, outlineColorizationMapping,
+					hasColorizationMapping, hasOutlineColorizationMapping, color, outlineColor);
 
-				line.setShowArrows(showPathBitmaps);
-				line.setArrowsFixedOnPath(isArrowsFixedOnPath());
-				if (showPathBitmaps && pathBitmap != null) {
-					line.setPathIconStep(bitmapStep);
-					if (specialPathBitmap != null && specialBitmapStep != -1) {
-						line.setSpecialPathIconStep(specialBitmapStep);
-					}
+			line.setShowArrows(showPathBitmaps);
+			line.setArrowsFixedOnPath(isArrowsFixedOnPath());
+			if (showPathBitmaps && pathBitmap != null) {
+				line.setPathIconStep(bitmapStep);
+				if (specialPathBitmap != null && specialBitmapStep != -1) {
+					line.setSpecialPathIconStep(specialBitmapStep);
 				}
-				line.setHeights(heights);
-				if (showRaised) {
-					if (linePositionType != null) {
-						line.setElevatedLineVisibility(linePositionType == TOP || linePositionType == TOP_BOTTOM);
-						line.setSurfaceLineVisibility(linePositionType == BOTTOM || linePositionType == TOP_BOTTOM);
-					}
-					line.setFillColor(new FColorARGB(a, r, g, b));
-					line.setOutlineWidth(width * getVectorLineScale(context.getApp()) / 2.0f);
-
-					if (wallColorType == Gpx3DWallColorType.NONE) {
-						line.setColorizationScheme(COLORIZATION_GRADIENT);
-						line.setNearOutlineColor(new FColorARGB(0, r, g, b));
-						line.setFarOutlineColor(new FColorARGB(0, r, g, b));
-					} else if (wallColorType == SOLID) {
-						if (!hasOutlineColorizationMapping) {
-							line.setFillColor(new FColorARGB(a, r, g, b));
-							line.setOutlineColor(new FColorARGB(a, r, g, b));
-						}
-					} else {
-						boolean gradient = wallColorType.isGradient();
-						float fromAlfa = wallColorType == UPWARD_GRADIENT ? 0f : a;
-						float toAlfa = wallColorType == UPWARD_GRADIENT || gradient ? a : 0f;
-						if (hasOutlineColorizationMapping) {
-							line.setNearOutlineColor(new FColorARGB(fromAlfa, 1, 1, 1));
-							line.setFarOutlineColor(new FColorARGB(toAlfa, 1, 1, 1));
-						} else {
-							line.setNearOutlineColor(new FColorARGB(fromAlfa, r, g, b));
-							line.setFarOutlineColor(new FColorARGB(toAlfa, r, g, b));
-						}
-					}
-				}
-				return;
 			}
+			line.setHeights(heights);
+			if (showRaised) {
+				if (linePositionType != null) {
+					line.setElevatedLineVisibility(linePositionType == TOP || linePositionType == TOP_BOTTOM);
+					line.setSurfaceLineVisibility(linePositionType == BOTTOM || linePositionType == TOP_BOTTOM);
+				}
+				line.setFillColor(new FColorARGB(a, r, g, b));
+				line.setOutlineWidth(width * getVectorLineScale(context.getApp()) / 2.0f);
+
+				if (wallColorType == Gpx3DWallColorType.NONE) {
+					line.setColorizationScheme(COLORIZATION_GRADIENT);
+					line.setNearOutlineColor(new FColorARGB(0, r, g, b));
+					line.setFarOutlineColor(new FColorARGB(0, r, g, b));
+				} else if (wallColorType == SOLID) {
+					if (!hasOutlineColorizationMapping) {
+						line.setFillColor(new FColorARGB(a, r, g, b));
+						line.setOutlineColor(new FColorARGB(a, r, g, b));
+					}
+				} else {
+					boolean gradient = wallColorType.isGradient();
+					float fromAlfa = wallColorType == UPWARD_GRADIENT ? 0f : a;
+					float toAlfa = wallColorType == UPWARD_GRADIENT || gradient ? a : 0f;
+					if (hasOutlineColorizationMapping) {
+						line.setNearOutlineColor(new FColorARGB(fromAlfa, 1, 1, 1));
+						line.setFarOutlineColor(new FColorARGB(toAlfa, 1, 1, 1));
+					} else {
+						line.setNearOutlineColor(new FColorARGB(fromAlfa, r, g, b));
+						line.setFarOutlineColor(new FColorARGB(toAlfa, r, g, b));
+					}
+				}
+			}
+			return;
 		}
 		VectorLineBuilder builder = new VectorLineBuilder();
 		float vectorLineScale = getVectorLineScale(context.getApp());
 		builder.setPoints(points)
 				.setIsHidden(false)
-				.setLineId(lineId)
+				.setLineId(sharedLines != null ? sharedLines.newLineId() : lineId)
 				.setLineWidth(width * vectorLineScale)
 				.setOutlineWidth(outlineWidth * vectorLineScale)
 				.setApproximationEnabled(approximationEnabled)
@@ -324,7 +327,28 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			builder.setFillColor(NativeUtilities.createFColorARGB(color));
 			builder.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor));
 		}
-		builder.buildAndAddToCollection(collection).setArrowsFixedOnPath(isArrowsFixedOnPath());
+		VectorLine newLine = builder.buildAndAddToCollection(collection);
+		newLine.setArrowsFixedOnPath(isArrowsFixedOnPath());
+		if (sharedLines != null) {
+			sharedLines.addLine(this, lineId, newLine);
+		}
+	}
+
+	// In a collection shared with other ways the line ids of this way are not the ids in the collection,
+	// and scanning the lines of all ways for every line would be quadratic
+	@Nullable
+	private VectorLine findLine(@NonNull VectorLinesCollection collection, int lineId) {
+		if (sharedLines != null) {
+			return sharedLines.findLine(this, lineId);
+		}
+		QListVectorLine lines = collection.getLines();
+		for (int i = 0; i < lines.size(); i++) {
+			VectorLine line = lines.get(i);
+			if (line.getLineId() == lineId) {
+				return line;
+			}
+		}
+		return null;
 	}
 
 	@NonNull

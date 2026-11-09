@@ -49,6 +49,9 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 	public long linesPriority = Long.MIN_VALUE;
 	public VectorLinesCollection vectorLinesCollection;
 	public VectorLineArrowsProvider vectorLineArrowsProvider;
+	// Lines and arrows shared with other ways instead of a collection and arrows of this way
+	@Nullable
+	private SharedVectorLines sharedLines;
 
 	public interface GeometryWayProvider {
 		double getLatitude(int index);
@@ -163,10 +166,28 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 				vectorLineArrowsProvider = null;
 			}
 			if (vectorLinesCollection != null) {
-				mapRenderer.removeSymbolsProvider(vectorLinesCollection);
+				if (sharedLines != null) {
+					sharedLines.removeLines(mapRenderer, drawer);
+				} else {
+					mapRenderer.removeSymbolsProvider(vectorLinesCollection);
+				}
 				vectorLinesCollection = null;
 			}
 		}
+	}
+
+	/**
+	 * Draws the lines of this way, with their arrows, into a collection shared with other ways instead of
+	 * a collection of its own. Returns true when the way has to be drawn again.
+	 */
+	public boolean setSharedLines(@Nullable SharedVectorLines sharedLines) {
+		if (this.sharedLines == sharedLines) {
+			return false;
+		}
+		resetSymbolProviders();
+		this.sharedLines = sharedLines;
+		drawer.setSharedLines(sharedLines);
+		return true;
 	}
 
 	public void resetArrowsProvider() {
@@ -436,7 +457,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 			updatePathLine(passedLineId, passedDist);
 		}
 
-		if (shouldDrawArrows()) {
+		if (sharedLines == null && shouldDrawArrows()) {
 			VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
 			VectorLineArrowsProvider vectorLineArrowsProvider = this.vectorLineArrowsProvider;
 
@@ -506,7 +527,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 					MapRendererView mapRenderer = getMapRenderer();
 					VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
 					VectorLineArrowsProvider vectorLineArrowsProvider = this.vectorLineArrowsProvider;
-					if (mapRenderer != null && vectorLinesCollection != null
+					if (mapRenderer != null && vectorLinesCollection != null && sharedLines == null
 							&& (vectorLineArrowsProvider == null || !mapRenderer.hasSymbolsProvider(vectorLineArrowsProvider))) {
 						VectorLineArrowsProvider arrowsProvider = new VectorLineArrowsProvider(vectorLinesCollection);
 						arrowsProvider.setPriority(linesPriority);
@@ -559,6 +580,12 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 			boolean newLine3DState = false;
 			if (!Algorithms.isEmpty(pathsData)) {
 				newLine3DState = pathsData.get(0).style.trackVisualizationType != Gpx3DVisualizationType.NONE;
+			}
+			if (sharedLines != null) {
+				collection = sharedLines.obtainCollection(mapRenderer, newLine3DState, linesPriority, drawer);
+				drawer.drawPath(collection, baseOrder, shouldDrawArrows(), pathsData);
+				this.vectorLinesCollection = collection;
+				return;
 			}
 			boolean currentLine3DState = vectorLinesCollection != null &&
 					vectorLinesCollection.getHasVolumetricSymbols();

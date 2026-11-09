@@ -80,6 +80,7 @@ import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
 import net.osmand.plus.views.layers.core.WptPtTileProvider;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
+import net.osmand.plus.views.layers.geometry.SharedVectorLines;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -165,6 +166,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private List<SelectedGpxFile> trackDbItemsSelection;
 	private final Map<String, CachedTrack> segmentsCache = new ConcurrentHashMap<>();
 	private final Map<String, Set<TrkSegment>> renderedSegmentsCache = new ConcurrentHashMap<>();
+	private final Map<String, SharedVectorLines> trackLinesCache = new ConcurrentHashMap<>();
 	private SelectedGpxFile tmpVisibleTrack;
 
 	private final List<WptPt> pointsCache = new ArrayList<>();
@@ -1364,6 +1366,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			renderedSegments = new HashSet<>();
 			renderedSegmentsCache.put(gpxFilePath, renderedSegments);
 		}
+		// All segments of a track draw into one collection of lines, not the segments of the track being recorded
+		SharedVectorLines trackLines = hasMapRenderer && !currentTrack
+				? trackLinesCache.computeIfAbsent(gpxFilePath, path -> new SharedVectorLines()) : null;
 		QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 		String actualGpxWidth = appearanceHelper.getTrackWidth(gpxFile, null, gpxItem, dirItem);
 		String defaultGpxWidth = appearanceHelper.getTrackWidth(gpxFile, defaultWidthPref.get(), gpxItem, dirItem);
@@ -1403,6 +1408,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					|| mapActivityInvalidated || invalidated || newTsRenderer || !renderedSegments.contains(ts);
 			if (ts.getRenderer() instanceof RenderableSegment renderableSegment) {
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
+				GpxGeometryWay segmentWay = renderableSegment.getGeometryWay();
+				if (hasMapRenderer && segmentWay != null) {
+					updated |= segmentWay.setSharedLines(trackLines);
+				}
 				GpxLineStyleType lineStyleType = selected && coloringType.isTrackSolid()
 						? appearanceHelper.getLineStyleTypeForTrack(gpxFile, gpxItem, dirItem)
 						: GpxLineStyleType.SOLID;
@@ -1439,6 +1448,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		for (TrkSegment oldSegment : oldSegments) {
 			resetSymbolProviders(oldSegment);
+		}
+		MapRendererView mapRenderer = getMapRenderer();
+		if (trackLines != null && mapRenderer != null) {
+			trackLines.updateArrows(mapRenderer, appearanceHelper.isShowArrowsForTrack(gpxFile, gpxItem, dirItem, selected));
 		}
 	}
 
@@ -1957,9 +1970,18 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (cachedTrack != null) {
 			segmentsCache.put(newPath, cachedTrack);
 		}
+		SharedVectorLines trackLines = trackLinesCache.remove(oldPath);
+		if (trackLines != null) {
+			trackLinesCache.put(newPath, trackLines);
+		}
 	}
 
 	private void removeSelectedFilesSegments(@NonNull String path) {
+		// before the segments, so that they do not remove their lines one by one from the collection
+		SharedVectorLines trackLines = trackLinesCache.remove(path);
+		if (trackLines != null) {
+			trackLines.release(getMapRenderer());
+		}
 		Set<TrkSegment> renderedSegments = renderedSegmentsCache.remove(path);
 		if (renderedSegments != null) {
 			for (TrkSegment renderedSegment : renderedSegments) {
@@ -1972,6 +1994,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void clearSelectedFilesSegments() {
 		segmentsCache.clear();
+		for (SharedVectorLines trackLines : trackLinesCache.values()) {
+			trackLines.release(getMapRenderer());
+		}
+		trackLinesCache.clear();
 		if (hasMapRenderer()) {
 			for (Set<TrkSegment> segments : renderedSegmentsCache.values()) {
 				for (TrkSegment segment : segments) {
