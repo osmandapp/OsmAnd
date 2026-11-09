@@ -574,7 +574,7 @@ public class BackupHelper {
 					List<RemoteFile> remoteFiles = new ArrayList<>();
 					if (!Algorithms.isEmpty(error)) {
 						status = STATUS_SERVER_ERROR;
-						message = "Download file list error: " + new BackupError(error);
+						message = error;
 					} else if (!Algorithms.isEmpty(resultJson)) {
 						try {
 							JSONObject res = new JSONObject(resultJson);
