@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.astronomy
 
 import android.content.Context
+import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import androidx.core.database.getDoubleOrNull
@@ -330,6 +331,45 @@ class AstroDataDbProvider : AstroDataProvider() {
 			LOG.error("Error reading Wikipedia article from DB", e)
 		}
 		return null
+	}
+
+	override fun getCatalogDescriptions(ctx: Context): Map<String, String> {
+		val descriptions = mutableMapOf<String, String>()
+		val app = ctx.applicationContext as OsmandApplication
+		val bestLang = app.settings.PREFERRED_LOCALE.get().takeIf { it.isNotEmpty() }?.substringBefore('-')
+			?: ctx.resources.configuration.locales[0].language
+		try {
+			DbHelper(app).readableDatabase.use { db ->
+				if (!hasWikipediaTable(db)) {
+					return descriptions
+				}
+				db.query(
+					TABLE_WIKIPEDIA,
+					arrayOf(COL_WIKI_WIKIDATA, COL_WIKI_LANG, COL_WIKI_EXTRACT),
+					"$COL_WIKI_WIKIDATA IN (SELECT $COL_CATALOGS_WID FROM $TABLE_CATALOGS) AND $COL_WIKI_LANG IN (?, ?)",
+					arrayOf(bestLang, "en"),
+					null, null, null
+				).use { c ->
+					while (c.moveToNext()) {
+						val wid = c.getString(0)
+						val description = c.getStringOrNull(2) ?: continue
+						// Same choice as getAstroArticleImpl: the preferred language, otherwise English
+						if (c.getString(1) == bestLang || wid !in descriptions) {
+							descriptions[wid] = description
+						}
+					}
+				}
+			}
+		} catch (e: Exception) {
+			LOG.error("Error reading catalog descriptions from DB", e)
+		}
+		return descriptions
+	}
+
+	// The bundled stars.db has no articles, only the extended database has this table
+	private fun hasWikipediaTable(db: SQLiteDatabase): Boolean {
+		return DatabaseUtils.queryNumEntries(db, "sqlite_master", "type = 'table' AND name = ?",
+			arrayOf(TABLE_WIKIPEDIA)) > 0
 	}
 
 	private fun loadLocalizedNames(ctx: Context, db: SQLiteDatabase, objects: List<SkyObject>) {
