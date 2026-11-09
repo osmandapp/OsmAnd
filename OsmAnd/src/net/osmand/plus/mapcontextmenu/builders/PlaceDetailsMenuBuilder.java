@@ -100,13 +100,16 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 			return true;
 		}
 		if (pair != null) {
+			// the online Wikipedia row is built only after the place itself has no description
+			boolean placeItself = amenity == this.amenity;
+			View.OnClickListener wikipediaClickListener = placeItself ? getWikipediaClickListener(filteredInfo) : null;
 			buildDescriptionRow(view, pair.first, v -> {
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
 				TravelArticleIdentifier identifier = new TravelArticleIdentifier(null,
 						amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
 						null, routeId, null);
 				WikivoyageArticleDialogFragment.showInstance(app, manager, identifier, null);
-			}, app.getString(R.string.context_menu_read_article));
+			}, app.getString(R.string.context_menu_read_article), wikipediaClickListener);
 			return true;
 		}
 		return false;
