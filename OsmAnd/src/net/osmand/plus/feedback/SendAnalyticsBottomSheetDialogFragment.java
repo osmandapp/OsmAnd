@@ -19,11 +19,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -46,7 +45,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		View titleView = inflate(R.layout.make_better_title);
 		items.add(new SimpleBottomSheetItem.Builder().setCustomView(titleView).create());
 
-		items.add(new SubtitleDividerItem(themedContext));
+		items.add(new SimpleDividerItem(themedContext));
 
 		if (settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.isSet()) {
 			sendAnonymousMapDownloadsData = settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get();
@@ -61,8 +60,9 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		BottomSheetItemWithCompoundButton[] downloadedMapsItem = new BottomSheetItemWithCompoundButton[1];
 		downloadedMapsItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(sendAnonymousMapDownloadsData)
+				.setDescription(getString(R.string.downloaded_maps_collect_descr))
 				.setTitle(getString(R.string.downloaded_maps))
-				.setLayoutId(R.layout.bottom_sheet_item_with_switch_no_icon)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_no_icon)
 				.setOnClickListener(v -> {
 					boolean checked = !downloadedMapsItem[0].isChecked();
 					downloadedMapsItem[0].setChecked(checked);
@@ -73,15 +73,16 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.create();
 		items.add(downloadedMapsItem[0]);
 
-		items.add(new LongDescriptionItem(getString(R.string.downloaded_maps_collect_descr)));
-
-		items.add(new SubtitmeListDividerItem(themedContext));
+		DividerItem optionsDivider = new DividerItem(themedContext);
+		optionsDivider.setMargins(getDimensionPixelSize(R.dimen.content_padding), 0, 0, 0);
+		items.add(optionsDivider);
 
 		BottomSheetItemWithCompoundButton[] visitedScreensItem = new BottomSheetItemWithCompoundButton[1];
 		visitedScreensItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(sendAnonymousAppUsageData)
+				.setDescription(getString(R.string.visited_screens_collect_descr))
 				.setTitle(getString(R.string.visited_screens))
-				.setLayoutId(R.layout.bottom_sheet_item_with_switch_no_icon)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_no_icon)
 				.setOnClickListener(v -> {
 					boolean checked = !visitedScreensItem[0].isChecked();
 					visitedScreensItem[0].setChecked(checked);
@@ -92,9 +93,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.create();
 		items.add(visitedScreensItem[0]);
 
-		items.add(new LongDescriptionItem(getString(R.string.visited_screens_collect_descr)));
-
-		items.add(new DividerItem(themedContext));
+		items.add(new SimpleDividerItem(themedContext));
 
 		String privacyPolicyText = getString(R.string.shared_string_privacy_policy);
 		String text = getString(R.string.privacy_and_security_change_descr, privacyPolicyText);
@@ -107,9 +106,11 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		int linkTextColor = ColorUtilities.getActiveColor(app, nightMode);
 		spannable.setSpan(new ForegroundColorSpan(linkTextColor), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		LongDescriptionItem descriptionItem = new LongDescriptionItem(spannable);
-		descriptionItem.setDescriptionLinksClickable(true);
-		items.add(descriptionItem);
+		items.add(new BottomSheetItemWithDescription.Builder()
+				.setDescription(spannable)
+				.setDescriptionLinksClickable(true)
+				.setLayoutId(R.layout.make_better_footer)
+				.create());
 	}
 
 	@Override
