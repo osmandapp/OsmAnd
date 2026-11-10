@@ -338,7 +338,7 @@
     <string name="poi_public_transport_stop_position">Pozicija na postojkata za javnot prevoz</string>
     <string name="poi_public_transport_station">Stanica na javniot transport</string>
     <string name="poi_bus_station">Avtobuska stanica</string>
-    <string name="poi_railway_station">Železnička stanica; Železnička stanica; Železnička stanica</string>
+    <string name="poi_railway_station">Železnička stanica</string>
     <string name="poi_railway_buffer_stop">Železnička medjuspremna stanica</string>
     <string name="poi_taxi">Taksi postojka</string>
     <string name="poi_aerodrome">Aerodrom</string>
@@ -481,7 +481,7 @@
     <string name="poi_garages">Garazi</string>
     <string name="poi_public_transport_platform_tram">Tramvajska stanica</string>
     <string name="poi_subway_entrance">Vlez vo metroto</string>
-    <string name="poi_railway_platform">Železnička platforma; železnička platforma</string>
+    <string name="poi_railway_platform">Železnička platforma</string>
     <string name="poi_halt">Zelznicka postojka, zeleznicka postojka</string>
     <string name="poi_aerialway_rope_tow">Lift (zicarnica) za vlečenje na jaže</string>
     <string name="poi_post_box">Postenska kutija</string>
@@ -612,7 +612,7 @@
     <string name="poi_museum">Музеј</string>
     <string name="poi_park">Парк</string>
     <string name="poi_pharmacy">Аптека</string>
-    <string name="poi_religion_christian">Црква</string>
+    <string name="poi_religion_christian">Христијанство;црква</string>
     <string name="poi_restaurant">Ресторан</string>
     <string name="poi_river">Река</string>
     <string name="poi_spring">Извор</string>

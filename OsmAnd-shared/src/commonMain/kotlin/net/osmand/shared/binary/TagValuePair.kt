@@ -7,8 +7,7 @@ import kotlin.jvm.JvmField
  * table gave the pair. HH network points carry the tags the vehicle profile filters on as a list
  * of these.
  *
- * A copy of `BinaryMapIndexReader.TagValuePair` in OsmAnd-java, which stays there for android
- * and tools; this copy is for iOS.
+ * Based on `BinaryMapIndexReader.TagValuePair` from OsmAnd-java.
  */
 class TagValuePair(
 	@JvmField var tag: String?,

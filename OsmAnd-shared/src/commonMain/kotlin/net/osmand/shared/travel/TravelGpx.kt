@@ -19,9 +19,9 @@ import kotlin.jvm.JvmField
  * A track stored in an obf file rather than written by hand: what the poi section said about it,
  * and the gpx once it has been built out of the map section.
  *
- * A copy of `TravelGpx` in the android app, which stays there; this copy is for iOS. The `url`,
- * `url_text` and `wpt_extra_tags` tag names live on `TravelObfHelper` in java, which arrives with
- * the next step; they are here because this is what reads them.
+ * Based on `TravelGpx` from the Android app. The `url`, `url_text` and `wpt_extra_tags` tag
+ * names live on `TravelObfHelper` in the Java implementation; here they are defined with the
+ * model that reads them.
  */
 class TravelGpx : TravelArticle {
 

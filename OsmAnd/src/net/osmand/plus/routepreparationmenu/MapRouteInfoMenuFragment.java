@@ -106,6 +106,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	}
 
 	@Override
+	public boolean resolveNightMode() {
+		// Follow the current profile like MapRouteInfoMenu, which paints the rest of this view
+		return app.getDaynightHelper().isNightMode(settings.getApplicationMode(), getThemeUsageContext());
+	}
+
+	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		MapActivity mapActivity = requireMapActivity();
@@ -283,15 +289,24 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		super.calculateLayout(view, initLayout);
 	}
 
-	private void adjustMapPosition(int y) {
+	/**
+	 * Fits the route into the map part above the menu in the state the menu is in or is moving to, the same
+	 * way as when the user moves the menu.
+	 *
+	 * @return false when there is no route to fit
+	 */
+	public boolean fitRouteToMap() {
+		return adjustMapPosition(getMenuStatePosY(getCurrentMenuState()));
+	}
+
+	private boolean adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
-		if (menu == null || menu.isSelectFromMap() || mapActivity == null) {
-			return;
+		if (menu == null || menu.isSelectFromMap() || mapActivity == null || mapActivity.getMapView().getView() == null) {
+			return false;
 		}
 
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRoutePlanningMode()) {
-			mapActivity.getMapView();
 			QuadRect r = menu.getRouteRect(mapActivity);
 			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
@@ -300,13 +315,20 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 			if (!isPortrait()) {
 				tileBoxWidthPx = tb.getPixWidth() - getWidth();
 			} else {
-				int fHeight = getViewHeight() - y - AndroidUtils.getStatusBarHeight(app);
-				tileBoxHeightPx = tb.getPixHeight() - fHeight;
+				// The map down to the menu card, which is drawn below the top shadow of the menu view
+				int[] menuParent = new int[2];
+				int[] map = new int[2];
+				((View) getMainView().getParent()).getLocationOnScreen(menuParent);
+				mapActivity.getMapView().getView().getLocationOnScreen(map);
+				tileBoxHeightPx = menuParent[1] + y + getShadowHeight() - map[1];
 			}
 			if (r.left != 0 && r.right != 0) {
-				mapActivity.getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+				mapActivity.getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx,
+						0, menu.getRoutePoints(mapActivity));
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public void setBottomShadowVisible(boolean visible) {

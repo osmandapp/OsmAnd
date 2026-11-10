@@ -3608,7 +3608,7 @@
     <string name="external_device_low_battery">Baterija je prazna</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="map_widget_group_glide_desc">Spravca koja prikazuje razmeru jedrenja do cilja ili prosečnu razmeru jedrenja trenutnog putovanja.</string>
-    <string name="map_widget_glide_average_desc">Prikazuje prosečnu razmeru jedrenja za postavljeno vreme.</string>
+    <string name="map_widget_glide_average_desc">Prikazuje prosečnu razmeru jedrenja ili prosečnu vertikalnu brzinu za postavljeno vreme.</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigacija snimljenom rutom</string>
     <string name="github_discussion">Razgovor na Githubu</string>
     <string name="contact_us">Kontaktiraj nas</string>
@@ -3933,7 +3933,7 @@
     <string name="goods_delivery_desc">Dostavna vozila mogu biti zabranjena na nekim putevima.</string>
     <string name="release_4_6">• Android Auto: Dodat 3D mod\n\n • Trase: Uvedeni filteri i pametne mape, optimizovana memorija za veće fajlove\n\n • Poboljšani gornji i donji paneli vidžeta za smeštaj svih vidžeta\n\n • Poboljšano upravljanje lokalnim resursima\n\n • Prilagodljivo mapiranje dugmeta za spoljne kontrolere\n\n • Novi vidžet: \"Koeficijent klizanja\" i \"Položaj sunca\"\n\n • OsmAnd Cloud: Sada pristupi izbrisanim fajlovima\n\n • Poboljšano bojenje trase u načinu nagiba s novim simetričnim prelazom\n\n • Eliminiše probleme s transparentnom statusnom linijom\n\n • Dodata podrška za vidžet ANT + temperature vidžet\n\n • Predstavljen vidžet \"Dostupan RAM\"</string>
     <string name="live_monitoring_adress_descr">Odredi WEB adresu sa pravilima izraza za odrednice: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
-    <string name="map_widget_glide_target_desc">Prikazuje razmeru jedrenja potrebnu za dostizanje odredišta.</string>
+    <string name="map_widget_glide_target_desc">Prikazuje razmeru jedrenja potrebnu za dostizanje odredišta ili nadmorsku visinu odredišta.</string>
     <string name="average_glide_time_interval_desc">Odredite međuvreme za određivanje proseka jedrenja.</string>
     <string name="help_article_map_tracks_on_map_name">Trase i rute</string>
     <string name="help_article_map_vector_maps_name">Vektorske mape (stil mape)</string>
@@ -5464,4 +5464,31 @@
     <string name="eta_adapt_to_my_speed_descr">Vreme dolaska se zasniva na vašoj brzini tokom poslednjih %1$s.</string>
     <string name="eta_adapt_to_my_speed_off_descr">Vreme dolaska se zasniva na očekivanoj brzini na svakoj deonici rute. Uključite ovu opciju kako bi se ono zasnivalo na vašoj stvarnoj brzini kretanja.</string>
     <string name="select_tracks">Izaberi putanje</string>
+    <string name="cast_shadows">Senke</string>
+    <string name="build_update_size">ažur %1$s</string>
+    <string name="build_update_size_estimated">ažur ~%1$s</string>
+    <string name="astro_ar_mode">AR režim</string>
+    <string name="astro_camera_view">Prikaz kamere</string>
+    <string name="astro_reset_field_of_view">Resetuj vidno polje</string>
+    <string name="cloud_file_name_too_long">Naziv datoteke je predugačak za ovaj uređaj; promenite mu naziv u OsmAnd Oblaku</string>
+    <string name="average_vertical_speed">Prosečna vertikalna brzina</string>
+    <string name="public_transport_route_out_of_memory">Ruta javnog prevoza je predugačka za izračunavanje na ovom uređaju. Izaberite bliže odredište.</string>
+    <string name="release_5_5">• Prostorna pretraga uključena je podrazumevano: pretraga oko određene lokacije, bolje rangiranje, sinonimi, tolerancija na greške u kucanju\n\n • 3D objekti bacaju senke, uz mogućnost podešavanja pravca sunca\n\n • Dodatak Panoramax: prikaz fotografija sa nivoa ulice na mapi\n\n • Biblioteka medija: sve fotografije, video-zapisi i audio-beleške na jednom mestu\n\n • Linije tragova prikazane isprekidanim ili tačkastim crtama, podrazumevani izgled po fascikli sa tragovima\n\n • Podešavanja brzine kretanja za planiranje rute i procenu vremena dolaska\n\n • Android Auto: nedavne destinacije, automatski režim slobodne vožnje, Google Assistant i Gemini\n\n • Brza radnja za prikazivanje ili skrivanje tragova\n\n • Oznake na izohipsama (linije visine) okrenute su uzbrdo</string>
+    <string name="update_maps_to_use_new_search">Ažurirajte mape da biste koristili novu pretragu (%1$s)</string>
+    <string name="free_region_not_chosen_descr">Region vaše prve preuzete mape postaje vaš besplatni region.</string>
+    <string name="free_region_banner_descr">Sve mape od %1$s su besplatne.</string>
+    <string name="free_region_other_title">%1$s nije vaš besplatni region</string>
+    <string name="free_region_other_descr">Besplatna verzija uključuje mape jednog regiona. Da biste preuzeli %1$s, mape ostalih regiona će biti obrisane.</string>
+    <string name="free_region_will_be_deleted">Biće obrisano</string>
+    <string name="free_region_maps_stay">Pregledna mapa sveta, konturne linije i ostale mape dodataka ostaju.</string>
+    <string name="free_region_delete_and_download">Obriši i preuzmi</string>
+    <string name="free_region_replace_used_title">Besplatna zamena već korišćenih</string>
+    <string name="free_region_not_eligible_email_descr">Ostavite svoju e-poštu da biste ponovo zamenili svoj besplatni region ili dobili neograničena preuzimanja mapa.</string>
+    <string name="free_region_email_helper">Slaćemo vam OsmAnd vesti. Možete se odjaviti u bilo kom trenutku.</string>
+    <string name="free_region_email_maps_deleted">Mape za %1$s (%2$s) će biti obrisane.</string>
+    <string name="free_region_send_and_replace">Pošalji i zameni</string>
+    <string name="free_region_not_eligible_buy_descr">Vaš besplatni region je %1$s. Da biste preuzeli %2$s i zadržali trenutne mape, potražite neograničeno preuzimanje mapa.</string>
+    <string name="outdated_maps_warning_title">Ažurirajte svoje mape</string>
+    <string name="outdated_maps_warning_descr">Novoj pretrazi su potrebne mape ove verzije. Ažurirajte sve svoje mape - besplatno je.</string>
+    <string name="free_region_other_regions_need_maps_plus">Ostalim regionima su potrebne Mape+: %1$s</string>
 </resources>

@@ -91,6 +91,7 @@ Many resources (icons, fonts, voice files) are not in the main `res` folder but 
 
 ## 7. Coding Standards & Best Practices
 - **UI Design:** For new Material 3 UI, follow `OsmAnd/ui-guidelines/README.md`, then Google Material 3 and Android development guidelines.
+- **Code structure and naming:** For new Java and Kotlin code, follow `OsmAnd/code-guidelines/README.md` (no all-static classes, no `Helper` / `Api` / `Manager` names, one class per feature, `MapActivity` stays thin, one-time actions after an update go through `AppVersionUpgradeOnInit`).
 - **Logging:** Use `PlatformUtil.getLog(YourClass.class)` for logging. Do not use `android.util.Log` directly in core classes to maintain portability.
 - **Dependency Injection:** The project uses manual dependency injection. Key services and helpers are accessible via `OsmandApplication`.
 - **Theming & Resources:** When creating or modifying UI, ensure consistency by utilizing and updating existing resource files:

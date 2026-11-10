@@ -1,6 +1,12 @@
 package net.osmand.shared.binary
 
+import net.osmand.shared.IndexConstants
 import net.osmand.shared.data.Amenity
+import net.osmand.shared.data.Building
+import net.osmand.shared.data.City
+import net.osmand.shared.data.KLatLon
+import net.osmand.shared.data.MapObject
+import net.osmand.shared.data.Street
 import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.io.KFile
 import net.osmand.shared.osm.PoiCategory
@@ -13,9 +19,14 @@ import net.osmand.shared.routing.RouteSubregion
 import net.osmand.shared.util.collections.KTIntArrayList
 import net.osmand.shared.util.collections.KTIntObjectMap
 import net.osmand.shared.util.KCollatorStringMatcher
+import net.osmand.shared.util.KLock
+import net.osmand.shared.util.KMapUtils
+import net.osmand.shared.util.KStringMatcher
 import net.osmand.shared.util.collections.KTLongHashSet
 import net.osmand.shared.util.collections.KTLongObjectMap
+import net.osmand.shared.util.synchronized
 import okio.FileHandle
+import okio.IOException
 import okio.FileSystem
 import okio.Path.Companion.toPath
 import kotlin.math.max
@@ -24,15 +35,13 @@ import kotlin.math.min
 /**
  * An open obf file, with the index sections it carries located and the routing ones read.
  *
- * A copy of `BinaryMapIndexReader` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS, so a route can be calculated and a map read there without the C++ core. It
- * carries the structure walk in the constructor, the routing and HH sections, the map section,
- * `readInt` and the string table, and skips the address, poi and transport sections, which will
- * be read when the searches that use them are copied. The method names are java's, so the two can
- * be compared side by side.
+ * Based on `BinaryMapIndexReader` from OsmAnd-java. It carries the structure walk in the
+ * constructor, the routing and HH sections, the map, poi and address sections, `readInt` and
+ * the string table, and skips the transport section, which the searches copied so far do not
+ * read. The method names are java's, so the two can be compared side by side.
  *
- * The read statistics java collects behind `READ_STATS` are left out: they serve the obf
- * inspection tools, which stay in OsmAnd-java.
+ * The read statistics collected behind `READ_STATS` in OsmAnd-java for OBF inspection tools are
+ * not implemented here.
  */
 class BinaryMapIndexReader {
 
@@ -42,6 +51,45 @@ class BinaryMapIndexReader {
 	private val routeAdapter: BinaryMapRouteReaderAdapter
 	private val hhAdapter: BinaryHHRouteReaderAdapter
 	private val poiAdapter: BinaryMapPoiReaderAdapter
+	private val addressAdapter: BinaryMapAddressReaderAdapter
+
+	/**
+	 * The keys at the top of the indexed string tables searches have read, by where each is in the
+	 * file, prepared for matching once. A name search reads every one of them, five hundred to two
+	 * thousand of a regional map, and the next search the same ones; a subtable only for a key that
+	 * matches. Like [codedIS], for one search at a time.
+	 */
+	private val topIndexedStringKeys = KTLongObjectMap<IndexedStringKey>()
+
+	/**
+	 * Guards the parts of the file's structure a search fills in as it reads - the poi categories,
+	 * the map encoding rules and levels, the routing rules and boxes - which every reader of the file
+	 * opened over this one shares; java leaves them unguarded.
+	 */
+	internal val structureLock: KLock
+
+	/** The tag groups of each poi section this reader has read, for this reader only: see [PoiTagGroups]. */
+	private val poiTagGroups = HashMap<PoiRegion, PoiTagGroups>()
+	private var lastTagGroupsRegion: PoiRegion? = null
+	private var lastTagGroups: PoiTagGroups? = null
+
+	/**
+	 * The tag groups of [region] this reader has read. Asked for every amenity that has tag groups,
+	 * nearly always about the section asked before.
+	 */
+	fun getTagGroups(region: PoiRegion): PoiTagGroups {
+		val last = lastTagGroups
+		if (last != null && region === lastTagGroupsRegion) {
+			return last
+		}
+		val groups = poiTagGroups.getOrPut(region) { PoiTagGroups() }
+		lastTagGroupsRegion = region
+		lastTagGroups = groups
+		return groups
+	}
+
+	/** The size of the file when it was walked, to tell a copy whether it opened the same file. */
+	private var fileSize: Long = 0
 
 	private var version: Int = 0
 	private var dateCreated: Long = 0
@@ -51,6 +99,7 @@ class BinaryMapIndexReader {
 	private val poiIndexes = ArrayList<PoiRegion>()
 	private val routingIndexes = ArrayList<RouteRegion>()
 	private val hhIndexes = ArrayList<HHRouteRegion>()
+	private val addressIndexes = ArrayList<AddressRegion>()
 	private var basemap = false
 
 	constructor(file: KFile) {
@@ -60,14 +109,62 @@ class BinaryMapIndexReader {
 		this.routeAdapter = BinaryMapRouteReaderAdapter(this)
 		this.hhAdapter = BinaryHHRouteReaderAdapter(this)
 		this.poiAdapter = BinaryMapPoiReaderAdapter(this)
-		init()
+		this.addressAdapter = BinaryMapAddressReaderAdapter(this)
+		this.structureLock = KLock()
+		try {
+			init()
+		} catch (e: Throwable) {
+			// nobody gets the reader to close
+			runCatching { handle.close() }
+			throw e
+		}
 	}
 
 	/** Takes a path rather than a [KFile], for java callers that do not have okio on their classpath. */
 	constructor(filePath: String) : this(KFile(filePath))
 
+	/**
+	 * Another reader of the file [referenceToSameFile] reads: a file handle of its own over the
+	 * structure that reader walked, which is not walked again, so that two threads can read the file
+	 * at once. Java's `BinaryMapIndexReader(raf, referenceToSameFile)`; the centres of the address
+	 * regions are the ones already computed rather than computed again. Throws
+	 * [ObfFileChangedException] when the file at the path is no longer the size it was walked at: an
+	 * update has written another file there, which the structure does not describe.
+	 */
+	constructor(referenceToSameFile: BinaryMapIndexReader) {
+		this.file = referenceToSameFile.file
+		this.handle = FileSystem.SYSTEM.openReadOnly(file.path().toPath())
+		val size = try {
+			handle.size()
+		} catch (e: Throwable) {
+			runCatching { handle.close() }
+			throw e
+		}
+		if (size != referenceToSameFile.fileSize) {
+			runCatching { handle.close() }
+			throw ObfFileChangedException("${file.name()} is $size bytes, it was ${referenceToSameFile.fileSize} when it was opened")
+		}
+		this.fileSize = size
+		this.codedIS = CodedInputStream(handle)
+		this.routeAdapter = BinaryMapRouteReaderAdapter(this)
+		this.hhAdapter = BinaryHHRouteReaderAdapter(this)
+		this.poiAdapter = BinaryMapPoiReaderAdapter(this)
+		this.addressAdapter = BinaryMapAddressReaderAdapter(this)
+		this.structureLock = referenceToSameFile.structureLock
+		version = referenceToSameFile.version
+		dateCreated = referenceToSameFile.dateCreated
+		initCorrectly = referenceToSameFile.initCorrectly
+		mapIndexes.addAll(referenceToSameFile.mapIndexes)
+		poiIndexes.addAll(referenceToSameFile.poiIndexes)
+		routingIndexes.addAll(referenceToSameFile.routingIndexes)
+		hhIndexes.addAll(referenceToSameFile.hhIndexes)
+		addressIndexes.addAll(referenceToSameFile.addressIndexes)
+		basemap = referenceToSameFile.basemap
+	}
+
 	private fun init() {
 		val size = handle.size()
+		fileSize = size
 		codedIS.seek(0)
 		codedIS.pushLimitLong(size)
 		var reachedEnd = false
@@ -118,17 +215,67 @@ class BinaryMapIndexReader {
 					codedIS.seek(poiInd.filePointer + poiInd.length)
 					poiIndexes.add(poiInd)
 				}
-				OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER,
+				OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER -> {
+					val region = AddressRegion()
+					region.length = readInt()
+					region.filePointer = codedIS.getTotalBytesRead()
+					val oldLimit = codedIS.pushLimitLong(region.length)
+					addressAdapter.readAddressIndex(region)
+					if (region.name != null) {
+						addressIndexes.add(region)
+					}
+					codedIS.popLimit(oldLimit)
+					codedIS.seek(region.filePointer + region.length)
+				}
 				OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER -> {
 					val length = readInt()
 					codedIS.seek(codedIS.getTotalBytesRead() + length)
 				}
 				OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER -> {
 					val cversion = codedIS.readUInt32()
+					calculateCenterPointForRegions()
 					initCorrectly = cversion == version
 					reachedEnd = true
 				}
 				else -> skipUnknownField(t)
+			}
+		}
+	}
+
+	/**
+	 * The centre each address section reports as the centre of its region: the hub graph's box if
+	 * the file has one, else the coarsest map level or the routing box of a section of the same name.
+	 */
+	private fun calculateCenterPointForRegions() {
+		for (reg in addressIndexes) {
+			for (h in hhIndexes) {
+				val top = h.top
+				if (top != null) { // name null Algorithms.objectEquals(reg.name, h.name)
+					val qr = top.getLatLonBox()
+					reg.calculatedCenter = KLatLon(qr.centerY(), qr.centerX())
+					break
+				}
+			}
+			if (reg.calculatedCenter == null) {
+				for (map in mapIndexes) {
+					if (reg.name == map.name) {
+						if (map.getRoots().size > 0) {
+							reg.calculatedCenter = map.getCenterLatLon()
+							break
+						}
+					}
+				}
+			}
+			if (reg.calculatedCenter == null) {
+				for (map in routingIndexes) {
+					if (reg.name == map.name) {
+						reg.calculatedCenter = KLatLon(
+							map.getTopLatitude() / 2 + map.getBottomLatitude() / 2,
+							map.getLeftLongitude() / 2 + map.getRightLongitude() / 2
+						)
+						break
+					}
+				}
 			}
 		}
 	}
@@ -173,7 +320,9 @@ class BinaryMapIndexReader {
 	 * Whether a routing section has roads in the zoom 14 tile of the point. A region named in
 	 * [checkedRegions] is skipped, and every region asked is added to it, so a caller asking
 	 * several readers over the same regions asks each region once.
+	 * Read failures are propagated, including a handle closed during a resource update.
 	 */
+	@Throws(Exception::class)
 	fun containsActualRouteData(x31: Int, y31: Int, checkedRegions: MutableSet<String>?): Boolean {
 		val zoomToLoad = 14
 		val x = x31 shr zoomToLoad
@@ -469,11 +618,15 @@ class BinaryMapIndexReader {
 				continue
 			}
 			// lazy initializing rules
-			if (mapIndex.encodingRules.isEmpty()) {
-				codedIS.seek(mapIndex.filePointer)
-				val oldLimit = codedIS.pushLimitLong(mapIndex.length)
-				readMapIndex(mapIndex, true)
-				codedIS.popLimit(oldLimit)
+			synchronized(structureLock) {
+				if (mapIndex.encodingRules.isEmpty()) {
+					val parsed = MapIndex()
+					codedIS.seek(mapIndex.filePointer)
+					codedIS.withLimit(mapIndex.length) {
+						readMapIndex(parsed, true)
+					}
+					mapIndex.initEncodingRulesFrom(parsed)
+				}
 			}
 			for (index in mapIndex.getRoots()) {
 				if (index.minZoom <= req.zoom && index.maxZoom >= req.zoom) {
@@ -487,15 +640,24 @@ class BinaryMapIndexReader {
 					}
 
 					// lazy initializing trees
-					if (index.trees == null) {
-						index.trees = ArrayList()
-						codedIS.seek(index.filePointer)
-						val oldLimit = codedIS.pushLimitLong(index.length)
-						readMapLevel(index)
-						codedIS.popLimit(oldLimit)
+					val trees = synchronized(structureLock) {
+						index.trees ?: run {
+							val parsed = MapRoot().apply {
+								left = index.left
+								right = index.right
+								top = index.top
+								bottom = index.bottom
+								minZoom = index.minZoom
+								maxZoom = index.maxZoom
+								trees = ArrayList()
+							}
+							codedIS.seek(index.filePointer)
+							codedIS.withLimit(index.length) { readMapLevel(parsed) }
+							parsed.trees!!.also { index.trees = it }
+						}
 					}
 
-					for (tree in index.trees!!) {
+					for (tree in trees) {
 						if (tree.right < req.left || tree.left > req.right ||
 							tree.top > req.bottom || tree.bottom < req.top) {
 							continue
@@ -684,14 +846,27 @@ class BinaryMapIndexReader {
 		var minY = Int.MAX_VALUE
 		var maxY = 0
 		req.numberOfVisitedObjects++
-		while (codedIS.getBytesUntilLimit() > 0) {
-			val x = (codedIS.readSInt32() shl SHIFT_COORDINATES) + px
-			val y = (codedIS.readSInt32() shl SHIFT_COORDINATES) + py
-			req.cacheCoordinates.add(x)
-			req.cacheCoordinates.add(y)
+		val coordinates = req.cacheCoordinates
+		codedIS.readSInt32s(coordinates)
+		if (coordinates.size % 2 == 1) {
+			// the last y of an odd count is read past the end of the field, as java reads it
+			coordinates.add(codedIS.readSInt32())
+		}
+		val data = coordinates.data
+		val left = req.left
+		val right = req.right
+		val top = req.top
+		val bottom = req.bottom
+		var i = 0
+		val n = coordinates.size
+		while (i < n) {
+			val x = (data[i] shl SHIFT_COORDINATES) + px
+			val y = (data[i + 1] shl SHIFT_COORDINATES) + py
+			data[i] = x
+			data[i + 1] = y
 			px = x
 			py = y
-			if (!contains && req.left <= x && req.right >= x && req.top <= y && req.bottom >= y) {
+			if (!contains && left <= x && right >= x && top <= y && bottom >= y) {
 				contains = true
 			}
 			if (!contains) {
@@ -700,6 +875,7 @@ class BinaryMapIndexReader {
 				minY = min(minY, y)
 				maxY = max(maxY, y)
 			}
+			i += 2
 		}
 		if (!contains) {
 			if (maxX >= req.left && minX <= req.right && minY <= req.bottom && maxY >= req.top) {
@@ -738,13 +914,21 @@ class BinaryMapIndexReader {
 					py = tree.top and MASK_TO_READ
 					size = codedIS.readRawVarint32()
 					old = codedIS.pushLimitLong(size.toLong())
-					while (codedIS.getBytesUntilLimit() > 0) {
-						val x = (codedIS.readSInt32() shl SHIFT_COORDINATES) + px
-						val y = (codedIS.readSInt32() shl SHIFT_COORDINATES) + py
-						polygon.add(x)
-						polygon.add(y)
+					codedIS.readSInt32s(polygon)
+					if (polygon.size % 2 == 1) {
+						// the last y of an odd count is read past the end of the field, as java reads it
+						polygon.add(codedIS.readSInt32())
+					}
+					val points = polygon.data
+					var k = 0
+					while (k < polygon.size) {
+						val x = (points[k] shl SHIFT_COORDINATES) + px
+						val y = (points[k + 1] shl SHIFT_COORDINATES) + py
+						points[k] = x
+						points[k + 1] = y
 						px = x
 						py = y
+						k += 2
 					}
 					codedIS.popLimit(old)
 				}
@@ -868,14 +1052,14 @@ class BinaryMapIndexReader {
 	 */
 	fun readAmenityBboxes(pr: PoiRegion, tileIds: KTLongHashSet): Boolean {
 		poiAdapter.initCategories(pr)
-		val missing = pr.checkMissingTagGroups(tileIds)
+		val missing = getTagGroups(pr).checkMissingTagGroups(tileIds)
 		if (missing.size() == 0) {
 			return false
 		}
 		val sr = SearchRequest<Amenity>()
 		codedIS.seek(pr.filePointer)
 		val oldLim = codedIS.pushLimitLong(pr.length)
-		pr.updReadTagGroups(missing) // update before as tileIds is modified
+		getTagGroups(pr).updReadTagGroups(missing) // update before as tileIds is modified
 		poiAdapter.readPoiBboxes(pr, sr, missing)
 		codedIS.popLimit(oldLim)
 
@@ -894,6 +1078,38 @@ class BinaryMapIndexReader {
 		return sr.getSearchResults()
 	}
 
+	/** The header of the settlement at [offset] of [r], without its streets. */
+	fun readCityObject(r: AddressRegion, offset: Long): City? {
+		if (!(offset >= r.filePointer && offset <= (r.length + r.filePointer))) {
+			throw IllegalArgumentException()
+		}
+		codedIS.seek(offset)
+		val length = codedIS.readRawVarint32().toLong()
+		val oldLim = codedIS.pushLimitLong(length)
+		// city header
+		val city = addressAdapter.readCityHeader(null, null, offset, r.attributeTagsTable)
+		codedIS.popLimit(oldLim)
+		return city
+	}
+
+	/** The street at [offset] of [r] in [city], with its houses and crossings. */
+	fun readStreetObject(r: AddressRegion, city: City, offset: Long): MapObject {
+		if (!(offset >= r.filePointer && offset <= (r.length + r.filePointer))) {
+			throw IllegalArgumentException()
+		}
+		val cx24 = KMapUtils.get31TileNumberX(city.getLocation()!!.longitude) shr 7
+		val cy24 = KMapUtils.get31TileNumberY(city.getLocation()!!.latitude) shr 7
+		codedIS.seek(offset)
+		val s = Street(city)
+		s.setFileOffset(offset)
+		val length = codedIS.readRawVarint32().toLong()
+		val oldLim = codedIS.pushLimitLong(length)
+		// cityx
+		addressAdapter.readStreet(s, null, true, cx24, cy24, null, r.attributeTagsTable)
+		codedIS.popLimit(oldLim)
+		return s
+	}
+
 	/** The amenities of every poi section whose name matches the request's query. */
 	fun searchPoiByName(req: SearchRequest<Amenity>): MutableList<Amenity> {
 		val nameQuery = req.nameQuery
@@ -908,6 +1124,32 @@ class BinaryMapIndexReader {
 			codedIS.popLimit(old)
 		}
 		return req.getSearchResults()
+	}
+
+	/** A read aborted by an error (OutOfMemoryError) leaves its limits on the stream and every next read fails. */
+	fun resetReadLimits() {
+		codedIS.popLimit(Long.MAX_VALUE)
+	}
+
+	/**
+	 * Reads the name index of the region of [reader]: the keys of its string table that match the
+	 * query of the reader and the blocks of atoms behind them, or all of them when it has no query.
+	 * Returns the blocks of the query in the order of the file, or null without one; the reader keeps
+	 * them all.
+	 */
+	fun readFullNameIndex(reader: NameIndexReader): List<NameIndexReader.PrefixNameValue>? {
+		val poiRegion = reader.poiRegion
+		val addressRegion = reader.addressRegion
+		codedIS.seek(poiRegion?.filePointer ?: addressRegion!!.filePointer)
+		val old = codedIS.pushLimitLong(poiRegion?.length ?: addressRegion!!.length)
+		val res = if (poiRegion != null) {
+			poiAdapter.readNameIndex(reader)
+		} else {
+			addressAdapter.readNameIndex(reader)
+		}
+		codedIS.popLimit(old)
+		// the blocks read before come first, in the order of a hash set: the order of the file whatever was read
+		return res?.sortedBy { it.shift }
 	}
 
 	/**
@@ -974,6 +1216,168 @@ class BinaryMapIndexReader {
 	}
 
 	/**
+	 * Address section
+	 */
+
+	fun containsAddressData(): Boolean = addressIndexes.size > 0
+
+	fun hasRegions(): Boolean = addressIndexes.isNotEmpty()
+
+	fun getAddressIndexes(): List<AddressRegion> = addressIndexes
+
+	fun getRegionNames(): MutableList<String> {
+		val names = ArrayList<String>()
+		for (r in addressIndexes) {
+			names.add(r.name!!)
+		}
+		return names
+	}
+
+	/** The country part of the first region name, "Netherlands" of "Netherlands_noord-holland". */
+	fun getCountryName(): String {
+		val rg = getRegionNames()
+		if (rg.size > 0) {
+			return rg[0].split("_")[0]
+		}
+		return ""
+	}
+
+	/**
+	 * The name of the region the file covers, readable: from the address section, or from the file
+	 * name when there is none, with the version, the date of a live update and the country prefix
+	 * taken off, "Noord-holland europe" of "Netherlands_noord-holland_europe_2.obf".
+	 */
+	fun getRegionName(): String {
+		val rg = getRegionNames()
+		if (rg.size == 0) {
+			rg.add(file.name())
+		}
+		var ls = rg[0]
+		if (ls.lastIndexOf('_') != -1) {
+			if (OSM_DIFF_FILE_NAME.matches(ls)) {
+				val m = OSM_DIFF_DATE_ENDING.find(ls)
+				if (m != null) {
+					ls = ls.substring(0, m.range.first)
+					return if (ls.lastIndexOf('_') != -1) {
+						ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ')
+					} else {
+						ls
+					}
+				}
+			} else {
+				if (ls.contains(".")) {
+					ls = ls.substring(0, ls.indexOf("."))
+				}
+				if (ls.endsWith("_" + IndexConstants.BINARY_MAP_VERSION)) {
+					ls = ls.substring(0, ls.length - ("_" + IndexConstants.BINARY_MAP_VERSION).length)
+				}
+				if (ls.lastIndexOf('_') != -1) {
+					ls = ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ')
+				}
+				return ls
+			}
+		}
+		return ls
+	}
+
+	fun getRegionCenter(): KLatLon? {
+		for (r in addressIndexes) {
+			val center = r.calculatedCenter
+			if (center != null) {
+				return center
+			}
+		}
+		return null
+	}
+
+	fun getCities(resultMatcher: SearchRequest<City>?, type: CityBlocks?): MutableList<City> =
+		getCities(resultMatcher, null, null, type, null)
+
+	fun getCities(resultMatcher: SearchRequest<City>?, type: CityBlocks?, onlyRegion: AddressRegion?): MutableList<City> =
+		getCities(resultMatcher, null, null, type, onlyRegion)
+
+	/** The settlements of the blocks of [type], matched by [matcher] against every name they carry. */
+	fun getCities(
+		resultMatcher: SearchRequest<City>?, matcher: KStringMatcher?, lang: String?, type: CityBlocks?,
+		onlyRegion: AddressRegion?
+	): MutableList<City> {
+		val cities = ArrayList<City>()
+		val inds = if (onlyRegion == null) addressIndexes else listOf(onlyRegion)
+		for (r in inds) {
+			for (block in r.cities) {
+				if (type != null && block.type == type.index) {
+					codedIS.seek(block.filePointer)
+					val old = codedIS.pushLimitLong(block.length)
+					addressAdapter.readCities(cities, resultMatcher, matcher, r.attributeTagsTable)
+					codedIS.popLimit(old)
+				}
+			}
+		}
+		return cities
+	}
+
+	fun preloadStreets(c: City, resultMatcher: SearchRequest<Street>?): Int = preloadStreets(c, resultMatcher, false)
+
+	/** Reads the streets of [c] into it, with their houses and crossings when [loadBuildings]. */
+	fun preloadStreets(c: City, resultMatcher: SearchRequest<Street>?, loadBuildings: Boolean): Int {
+		val reg: AddressRegion
+		try {
+			reg = checkAddressIndex(c.getFileOffset())
+		} catch (e: IllegalArgumentException) {
+			throw IOException(e.message + " while reading " + c + " (id: " + c.getId() + ")")
+		}
+		codedIS.seek(c.getFileOffset())
+		val size = codedIS.readRawVarint32()
+		val old = codedIS.pushLimitLong(size.toLong())
+		addressAdapter.readCityStreets(resultMatcher, c, loadBuildings, reg.attributeTagsTable)
+		codedIS.popLimit(old)
+		return size
+	}
+
+	private fun checkAddressIndex(offset: Long): AddressRegion {
+		for (r in addressIndexes) {
+			if (offset >= r.filePointer && offset <= (r.length + r.filePointer)) {
+				return r
+			}
+		}
+		throw IllegalArgumentException("Illegal offset $offset")
+	}
+
+	/** Reads the houses and crossings of [s] into it; a postcode's street keeps only its own houses. */
+	fun preloadBuildings(s: Street, resultMatcher: SearchRequest<Building>?) {
+		val reg = checkAddressIndex(s.getFileOffset())
+		codedIS.seek(s.getFileOffset())
+		val size = codedIS.readRawVarint32()
+		val old = codedIS.pushLimitLong(size.toLong())
+		val city = s.getCity()
+		addressAdapter.readStreet(
+			s, resultMatcher, true, 0, 0, if (city != null && city.isPostcode()) city.getName() else null,
+			reg.attributeTagsTable
+		)
+		codedIS.popLimit(old)
+	}
+
+	fun searchAddressDataByName(req: SearchRequest<MapObject>): MutableList<MapObject> =
+		searchAddressDataByName(req, null)
+
+	/** The settlements and streets of every address section whose name matches the request's query. */
+	fun searchAddressDataByName(req: SearchRequest<MapObject>, typeFilter: List<CityBlocks>?): MutableList<MapObject> {
+		for (reg in addressIndexes) {
+			if (reg.indexNameOffset != -1L) {
+				codedIS.seek(reg.indexNameOffset)
+				val len = readInt()
+				val old = codedIS.pushLimitLong(len)
+				addressAdapter.searchAddressDataByName(reg, req, typeFilter)
+				codedIS.popLimit(old)
+			}
+			if (req.isCancelled()) {
+				break
+			}
+		}
+		return req.getSearchResults()
+	}
+
+	/**
 	 * Where in the name index each of [queries] could sit. The index is a tree of string tables
 	 * whose keys build up a name letter by letter, so a query word is looked for down every branch
 	 * whose key it still shares a start with, in either direction: "bak" reaches "bakery", and
@@ -984,7 +1388,7 @@ class BinaryMapIndexReader {
 		for (i in queries.indices) {
 			prefixesByQuery.add(LinkedHashMap())
 		}
-		readIndexedStringTablePrefixes(queries, "", prefixesByQuery)
+		readIndexedStringTablePrefixes(queries.map { KCollatorStringMatcher.PreparedName(it) }, "", prefixesByQuery)
 
 		val result = ArrayList<List<QueryToken.Prefix>>(queries.size)
 		for (prefixes in prefixesByQuery) {
@@ -997,8 +1401,54 @@ class BinaryMapIndexReader {
 		return result
 	}
 
+	/** Hands each key of a string table of a name index to [inspector], and the tables under the keys it matches. */
+	internal fun readNameIndexInspector(prefix: String?, inspector: NameIndexReader) {
+		var key: String? = null
+		var match = true
+		while (true) {
+			val t = codedIS.readTag()
+			when (CodedInputStream.getTagFieldNumber(t)) {
+				0 -> return
+				IndexedStringTable.KEY_FIELD_NUMBER -> {
+					var read = codedIS.readString()
+					if (prefix != null) {
+						read = prefix + read
+					}
+					key = read
+					match = inspector.matchKey(read)
+				}
+				IndexedStringTable.VAL_FIELD_NUMBER -> {
+					val value = readInt().toInt() // FIXME for 64 bit support
+					if (match) {
+						inspector.putKey(key, value, prefix)
+					}
+				}
+				IndexedStringTable.SUBTABLES_FIELD_NUMBER -> {
+					val len = codedIS.readRawVarint32().toLong()
+					val oldLim = codedIS.pushLimitLong(len)
+					if (match) {
+						readNameIndexInspector(key, inspector)
+					} else {
+						val skip = codedIS.getBytesUntilLimit()
+						inspector.skipTableBytes(skip)
+						codedIS.skipRawBytes(skip)
+					}
+					codedIS.popLimit(oldLim)
+				}
+				else -> skipUnknownField(t)
+			}
+		}
+	}
+
+	/**
+	 * The walk behind [readIndexedStringTablePrefixes]. The queries come prepared, and each key is
+	 * prepared once for all of them, the keys at the top of a table once for all the searches after,
+	 * [topIndexedStringKeys]: a table of a regional map holds tens of thousands of keys, and reducing
+	 * both strings on every comparison was most of the time a name search took on Kotlin/Native.
+	 */
 	private fun readIndexedStringTablePrefixes(
-		queries: List<String?>, prefix: String, prefixesByQuery: List<MutableMap<String, Int>>
+		queries: List<KCollatorStringMatcher.PreparedName?>, prefix: String,
+		prefixesByQuery: List<MutableMap<String, Int>>
 	) {
 		val matched = BooleanArray(queries.size)
 		val matchedSubtables = BooleanArray(queries.size)
@@ -1009,12 +1459,10 @@ class BinaryMapIndexReader {
 			when (CodedInputStream.getTagFieldNumber(t)) {
 				0 -> return
 				IndexedStringTable.KEY_FIELD_NUMBER -> {
-					var read = codedIS.readString()
-					if (prefix.isNotEmpty()) {
-						read = prefix + read
-					}
+					val top = if (prefix.isEmpty()) readTopIndexedStringKey() else null
+					val read = top?.key ?: (prefix + codedIS.readString())
 					key = read
-					shouldWeReadSubtable = matchIndexedStringTablePrefix(queries, read, matched, matchedSubtables)
+					shouldWeReadSubtable = matchIndexedStringTablePrefix(queries, read, top, matched, matchedSubtables)
 				}
 				IndexedStringTable.VAL_FIELD_NUMBER -> {
 					val value = readInt().toInt() // FIXME for 64 bit support
@@ -1036,7 +1484,7 @@ class BinaryMapIndexReader {
 					val len = codedIS.readRawVarint32()
 					val oldLim = codedIS.pushLimitLong(len.toLong())
 					if (shouldWeReadSubtable && key != null) {
-						val subqueries = ArrayList<String?>(queries)
+						val subqueries = ArrayList<KCollatorStringMatcher.PreparedName?>(queries)
 						for (i in queries.indices) {
 							if (!matchedSubtables[i]) {
 								subqueries[i] = null
@@ -1054,9 +1502,11 @@ class BinaryMapIndexReader {
 	}
 
 	private fun matchIndexedStringTablePrefix(
-		queries: List<String?>, key: String, matched: BooleanArray, matchedSubtables: BooleanArray
+		queries: List<KCollatorStringMatcher.PreparedName?>, key: String, top: IndexedStringKey?,
+		matched: BooleanArray, matchedSubtables: BooleanArray
 	): Boolean {
 		var shouldWeReadSubtable = false
+		var preparedKey = top?.prepared
 		for (i in queries.indices) {
 			val query = queries[i]
 			matched[i] = false
@@ -1064,10 +1514,16 @@ class BinaryMapIndexReader {
 			if (query == null) {
 				continue
 			}
-			val keyStartsWithQuery =
-				KCollatorStringMatcher.cmatches(key, query, KStringMatcherMode.CHECK_ONLY_STARTS_WITH)
-			val queryStartsWithKey =
-				KCollatorStringMatcher.cmatches(query, key, KStringMatcherMode.CHECK_ONLY_STARTS_WITH)
+			val keyName = preparedKey ?: KCollatorStringMatcher.PreparedName(key).also {
+				preparedKey = it
+				top?.prepared = it
+			}
+			val keyStartsWithQuery = KCollatorStringMatcher.cmatchesPrepared(
+				keyName, query.key, KStringMatcherMode.CHECK_ONLY_STARTS_WITH
+			)
+			val queryStartsWithKey = KCollatorStringMatcher.cmatchesPrepared(
+				query, keyName.key, KStringMatcherMode.CHECK_ONLY_STARTS_WITH
+			)
 			val potentialBranchMatch = keyStartsWithQuery || queryStartsWithKey
 			matched[i] = potentialBranchMatch
 			matchedSubtables[i] = potentialBranchMatch
@@ -1076,16 +1532,36 @@ class BinaryMapIndexReader {
 		return shouldWeReadSubtable
 	}
 
+	private fun readTopIndexedStringKey(): IndexedStringKey {
+		val at = codedIS.getTotalBytesRead()
+		val known = topIndexedStringKeys[at]
+		if (known != null) {
+			codedIS.skipRawBytes(codedIS.readRawVarint32().toLong())
+			return known
+		}
+		val read = IndexedStringKey(codedIS.readString())
+		topIndexedStringKeys.put(at, read)
+		return read
+	}
+
+	/** A key at the top of an indexed string table, prepared for matching the first time a query needs it. */
+	private class IndexedStringKey(val key: String) {
+		var prepared: KCollatorStringMatcher.PreparedName? = null
+	}
+
 	fun close() {
 		handle.close()
 	}
+
+	/** Bytes read from the file so far, for the statistics of a search. */
+	fun getBytesRead(): Long = codedIS.bytesRead
 
 	/** Field numbers of `OsmAndStructure` in osmand_odb.proto, frozen by the obf format. */
 	private object OsmAndStructure {
 		const val VERSION_FIELD_NUMBER = 1
 		const val TRANSPORTINDEX_FIELD_NUMBER = 4
 		const val MAPINDEX_FIELD_NUMBER = BinaryMapIndexReader.MAPINDEX_FIELD_NUMBER
-		const val ADDRESSINDEX_FIELD_NUMBER = 7
+		const val ADDRESSINDEX_FIELD_NUMBER = BinaryMapIndexReader.ADDRESSINDEX_FIELD_NUMBER
 		const val POIINDEX_FIELD_NUMBER = BinaryMapIndexReader.POIINDEX_FIELD_NUMBER
 		const val ROUTINGINDEX_FIELD_NUMBER = 9
 		const val HHROUTINGINDEX_FIELD_NUMBER = BinaryMapIndexReader.HHROUTINGINDEX_FIELD_NUMBER
@@ -1104,13 +1580,24 @@ class BinaryMapIndexReader {
 		/** The field of `OsmAndStructure` a map section occupies; [MapIndex.getFieldNumber]. */
 		const val MAPINDEX_FIELD_NUMBER = 6
 
+		/** The field of `OsmAndStructure` an address section occupies; [AddressRegion.getFieldNumber]. */
+		const val ADDRESSINDEX_FIELD_NUMBER = 7
+
 		/** The field of `OsmAndStructure` a poi section occupies; [PoiRegion.getFieldNumber]. */
 		const val POIINDEX_FIELD_NUMBER = 8
 
 		/** The field of `OsmAndStructure` an HH routing section occupies; [HHRouteRegion.getFieldNumber]. */
 		const val HHROUTINGINDEX_FIELD_NUMBER = 10
 
+		/** The offset an atom of a poi name index keeps as a `fixed32`, as protobuf reads it low byte first. */
+		fun convertFixed32ToRef(k: Int): Int =
+			(k shl 24) or ((k and 0xff00) shl 8) or ((k ushr 8) and 0xff00) or (k ushr 24)
+
 		private val MASK_TO_READ = ((1 shl SHIFT_COORDINATES) - 1).inv()
+
+		// a live update: "Germany_berlin_europe_25_10_28.obf" on android, "germany_berlin_europe_25_10_28.live.obf" on iOS
+		private val OSM_DIFF_FILE_NAME = Regex("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+(\\.live)?\\.obf")
+		private val OSM_DIFF_DATE_ENDING = Regex("_([0-9]+_){2}[0-9]+(\\.live)?\\.obf")
 	}
 
 	/** Field numbers of the map section messages in osmand_odb.proto, frozen by the obf format. */

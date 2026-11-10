@@ -277,6 +277,7 @@ public class MapRendererContext {
 			setMapBackgroundColor();
 		}
 		setSkyAndFogColors();
+		updateShadows();
 		PluginsHelper.updateMapPresentationEnvironment(this);
 	}
 
@@ -524,6 +525,7 @@ public class MapRendererContext {
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
 		updateElevationConfiguration();
+		updateShadows();
 
 		if (obfMapRasterLayerProvider != null) {
 			mapRendererView.resetMapLayerProvider(providerType.layerIndex);
@@ -607,6 +609,13 @@ public class MapRendererContext {
 		}
 	}
 
+	public void updateShadows() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView != null) {
+			mapRendererView.castShadows(app.getSettings().CAST_SHADOWS.get());
+		}
+	}
+
 	public void updateElevationConfiguration() {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView == null) {
@@ -614,8 +623,10 @@ public class MapRendererContext {
 		}
 		ElevationConfiguration elevationConfiguration = new ElevationConfiguration();
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		boolean disableVertexHillshade = plugin != null && plugin.isTerrainLayerEnabled() && plugin.isHillshadeMode();
-		if (disableVertexHillshade) {
+		// The vertex hillshade is drawn only as Terrain shadows, as on iOS
+		if (plugin != null && plugin.isTerrainShadowsEnabled()) {
+			elevationConfiguration.setVisualizationAlpha(plugin.getTerrainTransparency() / 255f);
+		} else {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}

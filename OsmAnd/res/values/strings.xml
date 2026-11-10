@@ -13,6 +13,35 @@
 -->
 	<string name="avoid_toll_roads_by_country">Avoid toll roads by country</string>
 	<string name="avoid_toll_roads_by_country_descr">Only countries with downloaded maps are shown. Avoid toll roads in the countries enabled below. No toll roads above still applies to all countries. Routes affected by country-specific avoidance may take longer to calculate.</string>
+	<string name="visualization">Visualization</string>
+	<string name="terrain_shadows">Terrain shadows</string>
+	<string name="terrain_shadows_description">Real-time dynamic shading for 3D terrain. Highlights landscape geometry with minimal performance impact.</string>
+	<string name="terrain_shadows_relief_3d_footer">3D Relief is automatically enabled, as it is required to render Terrain shadows.</string>
+	<string name="update_maps_to_use_new_search">Update maps to use the new search (%1$s)</string>
+	<string name="free_region_not_chosen_descr">The region of your first downloaded map becomes your free region.</string>
+	<string name="free_region_banner_descr">All maps of %1$s are free.</string>
+	<string name="free_region_other_title">%1$s is not your free region</string>
+	<string name="free_region_other_descr">The free version includes maps of one region. To download %1$s, maps of other regions will be deleted.</string>
+	<string name="free_region_will_be_deleted">Will be deleted</string>
+	<string name="free_region_maps_stay">The world overview map, contour lines and other plugin maps stay.</string>
+	<string name="free_region_delete_and_download">Delete and download</string>
+	<string name="free_region_replace_used_title">Free replace already used</string>
+	<string name="free_region_not_eligible_email_descr">Leave your email to replace your free region once more, or get unlimited map downloads.</string>
+	<string name="free_region_email_helper">We\'ll send OsmAnd news. You can unsubscribe at any time.</string>
+	<string name="free_region_email_maps_deleted">Maps of %1$s (%2$s) will be deleted.</string>
+	<string name="free_region_send_and_replace">Send and replace</string>
+	<string name="free_region_not_eligible_buy_descr">Your free region is %1$s. To download %2$s and keep your current maps, get unlimited map downloads.</string>
+	<string name="outdated_maps_warning_title">Update your maps</string>
+	<string name="outdated_maps_warning_descr">The new search needs maps of this version. Update all your maps - it is free.</string>
+	<string name="free_region_other_regions_need_maps_plus">Other regions need Maps+: %1$s</string>
+	<string name="cast_shadows">Shadows</string>
+	<string name="build_update_size">upd %1$s</string>
+	<string name="build_update_size_estimated">upd ~%1$s</string>
+	<string name="astro_ar_mode">AR mode</string>
+	<string name="astro_camera_view">Camera view</string>
+	<string name="astro_reset_field_of_view">Reset field of view</string>
+	<string name="cloud_file_name_too_long">File name is too long for this device, rename it in OsmAnd Cloud</string>
+	<string name="average_vertical_speed">Average vertical speed</string>
 	<string name="select_tracks">Select tracks</string>
 	<string name="storage_directory_visible_external">Visible external storage</string>
 	<string name="eta_group_header">Estimated arrival time</string>
@@ -163,6 +192,7 @@
 	<string name="quick_action_tracks_select_descr">Add one or more tracks to show or hide them on the map with a single tap.</string>
 	<string name="quick_action_tracks_always_ask_descr">Tapping this action opens the list of tracks, where you can show or hide one or more of them.</string>
 	<string name="quick_action_all_tracks">All tracks</string>
+	<string name="public_transport_route_out_of_memory">The public transport route is too long to calculate on this device. Choose a closer destination.</string>
 	<string name="route_calculation_out_of_memory">The route is too long to calculate on this device. Add intermediate points or choose a closer destination.</string>
 	<string name="java_memory">Java memory</string>
 	<string name="ais_load_data_descr">Replay AIS messages from a recorded file.</string>
@@ -193,6 +223,17 @@
 	<string name="share_favorites_preparation_failed">Could not prepare files for sharing.</string>
 	<string name="share_favorites_share_failed">Could not share the file.</string>
 	<string name="share_favorites_missing_media_warning">Some attached media could not be included.</string>
+    <string name="release_5_5">
+        • Spatial Search on by default: search around a place, better ranking, synonyms, typo-tolerant\n\n
+        • 3D buildings cast shadows, with an adjustable sun direction\n\n
+        • Panoramax plugin: street-level imagery on the map\n\n
+        • Media library: all photos, videos and audio notes in one place\n\n
+        • Dashed and dotted track lines, default look per track folder\n\n
+        • Travel speed settings for routing and arrival time\n\n
+        • Android Auto: recent destinations, auto Free ride, Google Assistant and Gemini\n\n
+        • Quick action to show or hide tracks\n\n
+        • Contour line labels face uphill\n\n
+    </string>
     <string name="release_5_4">
         • Refreshed search UI: sorting, category filters, cleaner look\n\n
         • Attach photos and media to Favorites\n\n
@@ -1514,8 +1555,8 @@ You will be able to pair this scanner again at any time.</string>
     <string name="filter_screen_title">Filter</string>
     <string name="filter_tracks_count">Filter: %d</string>
     <string name="map_widget_group_glide_desc">Widgets show the glide ratio to the target or average glide ratio for the current trip.</string>
-    <string name="map_widget_glide_average_desc">Shows the average glide ratio for the set interval.</string>
-    <string name="map_widget_glide_target_desc">Shows the glide ratio needed to reach the target point.</string>
+    <string name="map_widget_glide_average_desc">Shows the average glide ratio or the average vertical speed for the set interval.</string>
+    <string name="map_widget_glide_target_desc">Shows the glide ratio needed to reach the target point or the elevation of the target point.</string>
     <string name="average_glide_time_interval_desc">Specify the time interval for glide averaging.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="average_glide_ratio">Average glide ratio</string>
@@ -2785,7 +2826,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="show_track_on_map">Show track on map</string>
     <string name="start_recording">Start recording</string>
     <string name="announcement_time_title">Announcement time</string>
-    <string name="announcement_time_descr">The anouncement timing of different voice prompts depends on prompt type, current navigation speed, and default navigation speed.</string>
+    <string name="announcement_time_descr">The announcement timing of different voice prompts depends on prompt type, current navigation speed, and default navigation speed.</string>
     <string name="announcement_time_intervals">Time and distance intervals</string>
     <string name="shared_string_turn">Turn</string>
     <string name="announcement_time_arrive">Arrive at destination</string>

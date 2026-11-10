@@ -4,8 +4,7 @@ package net.osmand.shared.osm
  * A top level group of poi_types.xml: "shop", "transportation", "tourism". It is both a filter
  * over its own types and the owner of the filters nested inside it.
  *
- * A copy of `PoiCategory` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS.
+ * Based on `PoiCategory` from OsmAnd-java.
  */
 class PoiCategory(registry: MapPoiTypes, keyName: String, private val regId: Int) :
 	PoiFilter(registry, null, keyName, null) {

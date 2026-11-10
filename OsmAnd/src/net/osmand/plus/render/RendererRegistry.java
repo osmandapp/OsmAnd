@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -335,8 +336,12 @@ public class RendererRegistry {
 
 	public void copyFileForInternalStyle(String name) {
 		try {
-			FileOutputStream fout = new FileOutputStream(getFileForInternalStyle(name));
+			File file = getFileForInternalStyle(name);
 			String internalRender = getInternalRender(name);
+			if (!Algorithms.isEmpty(internalRender) && isInternalStyleEqualToFile(internalRender, file)) {
+				return;
+			}
+			FileOutputStream fout = new FileOutputStream(file);
 			if (!Algorithms.isEmpty(internalRender)) {
 				InputStream resourceAsStream = RenderingRulesStorage.class.getResourceAsStream(internalRender);
 				if (resourceAsStream != null) {
@@ -346,6 +351,13 @@ public class RendererRegistry {
 			fout.close();
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
+		}
+	}
+
+	private static boolean isInternalStyleEqualToFile(@NonNull String internalRender,
+			@NonNull File file) throws IOException {
+		try (InputStream is = RenderingRulesStorage.class.getResourceAsStream(internalRender)) {
+			return is != null && ResourceManager.isStreamEqualToFile(is, file);
 		}
 	}
 

@@ -166,6 +166,9 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 			List<String> visibleNamesList = new ArrayList<>();
 			List<String> items = new ArrayList<>();
 			for (TerrainMode mode : TerrainMode.values(app)) {
+				if (mode.isTerrainShadows()) {
+					continue;
+				}
 				items.add(mode.getKeyName());
 				visibleNamesList.add(mode.getDescription());
 			}

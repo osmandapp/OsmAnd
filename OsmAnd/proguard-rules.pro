@@ -124,9 +124,18 @@
 -keep class org.mozilla.javascript.regexp.** { *; }
 -keep class org.mozilla.javascript.typedarrays.** { *; }
 -keep class org.mozilla.javascript.xmlimpl.** { *; }
+# ScriptRuntime resolves these by name (Kit.classOrNull). Renamed, its class constants are null: NativeRegExp.init()
+# is not matched and the first regex literal in a voice script throws IllegalStateException("RegExp").
+-keepnames class org.mozilla.javascript.Context
+-keepnames class org.mozilla.javascript.ContextFactory
+-keepnames class org.mozilla.javascript.Function
+-keepnames class org.mozilla.javascript.ScriptableObject
 
 # Optional dependency surfaces referenced by bundled libraries but not available on Android.
 -dontwarn java.beans.**
 -dontwarn javax.ws.rs.**
 -dontwarn org.immutables.value.**
 -dontwarn org.kxml2.io.**
+
+# ZipFile creates its extra fields by reflection
+-keepclassmembers class * implements org.apache.commons.compress.archivers.zip.ZipExtraField { <init>(); }

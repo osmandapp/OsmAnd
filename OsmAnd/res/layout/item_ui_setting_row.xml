@@ -53,6 +53,8 @@
 			tools:visibility="visible" />
 	</LinearLayout>
 
+	<!-- not saved: every row has this id, so a restored screen would give all switches the state
+		of the last one; the screens always set the switch from the setting -->
 	<com.google.android.material.materialswitch.MaterialSwitch
 		android:id="@+id/switch_widget"
 		style="@style/Widget.Material3.CompoundButton.MaterialSwitch"
@@ -61,6 +63,7 @@
 		android:layout_marginStart="@dimen/content_padding"
 		android:clickable="false"
 		android:focusable="false"
+		android:saveEnabled="false"
 		android:visibility="gone"
 		tools:visibility="visible" />
 </LinearLayout>

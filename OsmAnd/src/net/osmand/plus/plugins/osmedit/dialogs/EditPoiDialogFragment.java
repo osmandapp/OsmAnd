@@ -40,6 +40,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -558,12 +559,7 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 		}
 		CollatorFilteredAdapter adapter = new CollatorFilteredAdapter(getActivity(),
 				R.layout.list_textview, new ArrayList<>(subCategories.keySet()));
-		adapter.sort(new Comparator<Object>() {
-			@Override
-			public int compare(Object lhs, Object rhs) {
-				return lhs.toString().compareTo(rhs.toString());
-			}
-		});
+		adapter.sort(OsmAndCollator.primaryCollator());
 		poiTypeEditText.setAdapter(adapter);
 		poiTypeEditText.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 

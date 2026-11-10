@@ -158,7 +158,7 @@ class BuildsFragment : BaseMaterialFragment(), BuildsManager.Listener {
 		val inflater = LayoutInflater.from(latestGroup.context)
 		for (build in latest) {
 			val rowView = inflater.inflate(R.layout.item_ui_setting_row, latestGroup, false)
-			bindBuildRow(SettingRow(rowView), build, installedDate) {
+			bindBuildRow(SettingRow(rowView), build, installedDate, manager.deltaSizes[build.path]) {
 				BuildDownloadDialog.show(parentFragmentManager, it)
 			}
 			latestGroup.addView(rowView)
@@ -175,6 +175,10 @@ class BuildsFragment : BaseMaterialFragment(), BuildsManager.Listener {
 				AndroidUtils.formatDate(osmandApp, dates.min()),
 				AndroidUtils.formatDate(osmandApp, dates.max())))
 		}
+	}
+
+	override fun onDeltaSizesChanged() {
+		(manager.listState as? ListState.Loaded)?.let { updateBuilds(it.builds) }
 	}
 
 	override fun onDownloadStateChanged(state: DownloadState) {
@@ -229,9 +233,12 @@ class BuildsFragment : BaseMaterialFragment(), BuildsManager.Listener {
 		} else {
 			size
 		}
-		downloadSubtitle.text = status?.let {
-			getString(R.string.ltr_or_rtl_combine_via_bold_point, it, progress)
-		} ?: progress
+		// a delta keeps nothing to resume from
+		downloadSubtitle.text = if (status != null && downloaded > 0) {
+			getString(R.string.ltr_or_rtl_combine_via_bold_point, status, progress)
+		} else {
+			status ?: progress
+		}
 		downloadProgress.visibility = View.VISIBLE
 		if (total > 0) {
 			downloadProgress.isIndeterminate = false
@@ -275,10 +282,13 @@ class BuildsFragment : BaseMaterialFragment(), BuildsManager.Listener {
 
 	companion object {
 
-		/** One row of a build list: tag, date and size; newer than the installed build in primary. */
+		/**
+		 * One row of a build list: tag, date, size and what an update to it takes; newer than the
+		 * installed build in primary.
+		 */
 		@JvmStatic
 		fun bindBuildRow(row: SettingRow, build: OsmAndBuild, installedDate: Date?,
-		                 onClick: (OsmAndBuild) -> Unit) {
+		                 deltaSize: BuildDeltaDownloader.DeltaSize? = null, onClick: (OsmAndBuild) -> Unit) {
 			val context = row.view.context
 			row.setIcon(R.drawable.ic_action_apk,
 				AndroidUtils.getColorFromAttr(context, R.attr.colorOnSurfaceVariant))
@@ -286,10 +296,12 @@ class BuildsFragment : BaseMaterialFragment(), BuildsManager.Listener {
 			row.hideSwitch()
 			val date = build.date?.let { AndroidUtils.formatDateTime(context, it.time) }
 			val size = build.size?.toFloatOrNull()?.let { context.getString(R.string.file_size_in_mb, it) }
-			row.setSubtitle(if (date != null && size != null) {
-				context.getString(R.string.ltr_or_rtl_combine_via_bold_point, date, size)
-			} else {
-				date ?: size
+			val update = deltaSize?.let {
+				context.getString(if (it.exact) R.string.build_update_size else R.string.build_update_size_estimated,
+					AndroidUtils.formatSize(context, it.size))
+			}
+			row.setSubtitle(listOfNotNull(date, size, update).reduceOrNull { first, second ->
+				context.getString(R.string.ltr_or_rtl_combine_via_bold_point, first, second)
 			})
 			val newer = installedDate != null && build.date?.after(installedDate) == true
 			row.setSubtitleColor(AndroidUtils.getColorFromAttr(context,

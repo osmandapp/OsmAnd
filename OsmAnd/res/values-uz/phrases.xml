@@ -162,18 +162,18 @@
     <string name="poi_fire_hydrant">Ўт ўчириш гидранти</string>
     <string name="poi_fire_extinguisher">Ўтўчиргич</string>
     <string name="poi_archaeological_site_fortification">Mudofaa inshootlari</string>
-    <string name="poi_cafe">Чайхана</string>
-    <string name="poi_college">Texnikum;kollej</string>
-    <string name="poi_fast_food">Lavash</string>
-    <string name="poi_fuel">Metan;benzin;бензин</string>
+    <string name="poi_cafe">Kafe;choyxona</string>
+    <string name="poi_college">Kollej;texnikum</string>
+    <string name="poi_fast_food">Tez ovqatlanish</string>
+    <string name="poi_fuel">Yoqilg‘i quyish shoxobchasi;metan;benzin;бензин</string>
     <string name="poi_hospital">Shifoxona</string>
-    <string name="poi_kindergarten">Maktabgacha</string>
+    <string name="poi_kindergarten">Bolalar bog‘chasi;maktabgacha</string>
     <string name="poi_museum">Muzey</string>
     <string name="poi_pharmacy">Dorixona</string>
-    <string name="poi_religion_muslim">Masjid</string>
+    <string name="poi_religion_muslim">Islom;masjid</string>
     <string name="poi_school">Maktab</string>
-    <string name="poi_tax_inspection">Soliq</string>
-    <string name="poi_toilets">Tahoratxona</string>
+    <string name="poi_tax_inspection">Soliq inspeksiyasi;soliq</string>
+    <string name="poi_toilets">Hojatxona;tahoratxona</string>
     <string name="poi_townhall">Hokimlik</string>
     <string name="poi_university">Universitet</string>
 </resources>

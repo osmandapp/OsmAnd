@@ -15,10 +15,9 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.configmap.MapOptionSliderFragment;
-import net.osmand.plus.configmap.MapOptionSliderFragment.MapOptionSliderListener;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -29,7 +28,7 @@ import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 
-public class Relief3DFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents, MapOptionSliderListener {
+public class Relief3DFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents {
 
 	public static final String TAG = Relief3DFragment.class.getSimpleName();
 
@@ -99,7 +98,7 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 		View verticalExaggerationBtn = root.findViewById(R.id.vertical_exaggeration_button);
 		verticalExaggerationBtn.setOnClickListener(view -> callMapActivity(mapActivity -> {
 			mapActivity.getDashboard().hideDashboard();
-			Relief3DExaggerationFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+			Relief3DExaggerationFragment.showInstance(mapActivity.getSupportFragmentManager(), DashboardType.RELIEF_3D);
 		}));
 	}
 
@@ -163,16 +162,6 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 				plugin.registerLayers(mapActivity, mapActivity);
 			}
 		});
-	}
-
-	@Override
-	public void onMapOptionChanged(float value) {
-		plugin.setVerticalExaggerationScale(value);
-		refreshMap();
-	}
-
-	protected void refreshMap() {
-		callMapActivity(MapActivity::refreshMap);
 	}
 
 	@Override

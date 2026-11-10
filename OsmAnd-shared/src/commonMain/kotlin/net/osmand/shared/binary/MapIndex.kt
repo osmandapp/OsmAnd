@@ -10,10 +10,9 @@ import kotlin.jvm.JvmField
  * A map section of an obf file: the table that turns a tag and a value into a number and back, and
  * the r-tree roots, one per zoom range.
  *
- * A copy of `BinaryMapIndexReader.MapIndex` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS. The encoding table is what makes a [BinaryMapDataObject] readable:
- * the objects carry numbers, and only the section that wrote them knows what they mean, which is
- * why every object keeps the index it came from.
+ * Based on `BinaryMapIndexReader.MapIndex` from OsmAnd-java. The encoding table is what makes a
+ * [BinaryMapDataObject] readable: the objects carry numbers, and only the section that wrote
+ * them knows what they mean, which is why every object keeps the index it came from.
  *
  * The layer sets hold a handful of ids each, so they are plain sets of boxed ints rather than a
  * primitive set copied in from trove.
@@ -82,6 +81,25 @@ class MapIndex : BinaryIndexPart() {
 	fun getRoots(): MutableList<MapRoot> = roots
 
 	fun decodeType(type: Int): TagValuePair? = decodingRules[type]
+
+	/** Publishes complete rules while the file's structure lock is held. */
+	internal fun initEncodingRulesFrom(source: MapIndex) {
+		encodingRules.putAll(source.encodingRules)
+		for (id in source.decodingRules.keys()) {
+			decodingRules.put(id, source.decodingRules[id]!!)
+		}
+		nameEncodingType = source.nameEncodingType
+		nameEnEncodingType = source.nameEnEncodingType
+		refEncodingType = source.refEncodingType
+		coastlineEncodingType = source.coastlineEncodingType
+		coastlineBrokenEncodingType = source.coastlineBrokenEncodingType
+		landEncodingType = source.landEncodingType
+		onewayAttribute = source.onewayAttribute
+		onewayReverseAttribute = source.onewayReverseAttribute
+		positiveLayers.addAll(source.positiveLayers)
+		negativeLayers.addAll(source.negativeLayers)
+		encodingRulesSizeBytes = source.encodingRulesSizeBytes
+	}
 
 	/** Adds the two rules that the file does not carry but the renderer expects to exist. */
 	fun finishInitializingTags() {

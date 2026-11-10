@@ -402,7 +402,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 			showTrackCompound.setChecked(checked);
 			GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
 			if (checked) {
-				params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+				params.showOnMap().selectedByUser().addToMarkers();
 			} else {
 				params.hideFromMap();
 			}

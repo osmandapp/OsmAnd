@@ -6,9 +6,9 @@ import net.osmand.shared.io.KFile
  * The articles the user has saved, which [TravelObfHelper] falls back to when the obf file an
  * article came from is no longer there.
  *
- * `TravelLocalDataHelper` in the android app keeps these in its own sqlite database, together with
- * the reading history and the listeners the travel screens need; that stays platform side. This is
- * only the part the helper asks for.
+ * `TravelLocalDataHelper` in the Android app stores bookmarks and reading history in a SQLite
+ * database and notifies the travel screens. This interface exposes the bookmark operations
+ * [TravelObfHelper] needs; the caller supplies the storage implementation.
  */
 interface TravelBookmarks {
 

@@ -16,11 +16,12 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgetstates.MemoryWidgetState.MemoryInfoType;
 import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 
 public class MemoryInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String MEMORY_INFO_TYPE_KEY = "memory_info_type";
+	private static final String MEMORY_INFO_TYPE_REQUEST_KEY = "memory_info_type_request_key";
 
 	private OsmandPreference<MemoryInfoType> memoryInfoTypePref;
 	private MemoryInfoType memoryInfoType;
@@ -64,6 +65,10 @@ public class MemoryInfoFragment extends BaseSimpleWidgetInfoFragment {
 		modeContainer.setBackground(getPressedStateDrawable());
 
 		updateModeUI();
+		SingleSelectionDialogFragment.setResultListener(this, MEMORY_INFO_TYPE_REQUEST_KEY, index -> {
+			memoryInfoType = MemoryInfoType.values()[index];
+			updateModeUI();
+		});
 	}
 
 	private void showMemoryInfoTypeSelectionDialog() {
@@ -79,11 +84,7 @@ public class MemoryInfoFragment extends BaseSimpleWidgetInfoFragment {
 				.setTitle(R.string.shared_string_mode)
 				.setControlsColor(ColorUtilities.getActiveColor(app, nightMode));
 
-		CustomAlert.showSingleSelection(dialogData, items, memoryInfoType.ordinal(), v -> {
-			int which = (int) v.getTag();
-			memoryInfoType = MemoryInfoType.values()[which];
-			updateModeUI();
-		});
+		SingleSelectionDialogFragment.showInstance(this, MEMORY_INFO_TYPE_REQUEST_KEY, dialogData, items, memoryInfoType.ordinal());
 	}
 
 	private void updateModeUI() {

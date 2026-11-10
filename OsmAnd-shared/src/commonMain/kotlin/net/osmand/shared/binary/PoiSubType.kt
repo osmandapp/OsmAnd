@@ -7,9 +7,8 @@ import kotlin.jvm.JvmField
 /**
  * One additional attribute a poi section can put on an amenity, with the values it uses for it.
  *
- * A copy of `BinaryMapPoiReaderAdapter.PoiSubType` in OsmAnd-java, which stays there for android
- * and tools; this copy is for iOS. A text subtype carries free text and has no value list; the
- * others encode a value as its position in [possibleValues].
+ * Based on `BinaryMapPoiReaderAdapter.PoiSubType` from OsmAnd-java. A text subtype carries free
+ * text and has no value list; the others encode a value as its position in [possibleValues].
  */
 class PoiSubType {
 

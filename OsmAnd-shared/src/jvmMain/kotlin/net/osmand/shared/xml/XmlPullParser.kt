@@ -10,6 +10,9 @@ import org.xmlpull.v1.XmlPullParserException
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
+import java.io.PushbackInputStream
+
+private val UTF8_BOM = byteArrayOf(0xEF.toByte(), 0xBB.toByte(), 0xBF.toByte())
 
 actual class XmlPullParser actual constructor() {
 
@@ -58,7 +61,7 @@ actual class XmlPullParser actual constructor() {
 
 	@Throws(XmlParserException::class)
 	actual fun setInput(file: KFile, inputEncoding: String?) {
-		inputStream = FileInputStream(File(file.absolutePath()))
+		inputStream = skipUtf8Bom(FileInputStream(File(file.absolutePath())), inputEncoding)
 		parser.setInput(inputStream, inputEncoding)
 	}
 
@@ -69,7 +72,7 @@ actual class XmlPullParser actual constructor() {
 
 	@Throws(XmlParserException::class)
 	actual fun setInput(input: Source, inputEncoding: String?) {
-		val inputStream = SourceInputStream(input)
+		val inputStream = skipUtf8Bom(SourceInputStream(input), inputEncoding)
 		parser.setInput(inputStream, inputEncoding)
 	}
 
@@ -196,4 +199,17 @@ actual class XmlPullParser actual constructor() {
 	} catch (e: XmlPullParserException) {
 		throw XmlParserException(e.message, e)
 	}
+}
+
+private fun skipUtf8Bom(input: InputStream, encoding: String?): InputStream {
+	if (!Charsets.UTF_8.name().equals(encoding, ignoreCase = true)) {
+		return input
+	}
+	val stream = PushbackInputStream(input, UTF8_BOM.size)
+	val head = stream.readNBytes(UTF8_BOM.size)
+	if (!head.contentEquals(UTF8_BOM)) {
+		stream.unread(head)
+	}
+
+	return stream
 }

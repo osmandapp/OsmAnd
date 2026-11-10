@@ -7,6 +7,7 @@ import static net.osmand.plus.plugins.srtm.SRTMPlugin.DEFAULT_HILLSHADE_SUN_AZIM
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -32,6 +33,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 
 	private TextView tvAltitude;
 	private Slider altitudeSlider;
+	private CompoundButton shadowsSwitch;
 
 	private SunParametersController controller;
 
@@ -71,8 +73,21 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		tvAltitude = view.findViewById(R.id.altitude_value_tv);
 
 		setupSliders();
+		setupShadowsSwitch(view);
 		container.addView(view);
 		updateApplyButton(controller.hasChanges());
+	}
+
+	private void setupShadowsSwitch(@NonNull View view) {
+		shadowsSwitch = view.findViewById(R.id.shadows_switch);
+		shadowsSwitch.setVisibility(app.useOpenGlRenderer() ? View.VISIBLE : View.GONE);
+		shadowsSwitch.setChecked(controller.isShadowsEnabled());
+		UiUtilities.setupCompoundButton(nightMode, getAppModeColor(nightMode), shadowsSwitch);
+		shadowsSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+			controller.setShadowsEnabled(isChecked);
+			updateApplyButton(controller.hasChanges());
+			refreshMap();
+		});
 	}
 
 	private void setupSliders() {
@@ -128,6 +143,8 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 	protected void resetToDefault() {
 		controller.setAzimuth(DEFAULT_HILLSHADE_SUN_AZIMUTH);
 		controller.setAltitude(DEFAULT_HILLSHADE_SUN_ANGLE);
+		controller.setShadowsEnabled(settings.CAST_SHADOWS.getDefaultValue());
+		shadowsSwitch.setChecked(controller.isShadowsEnabled());
 		setupSliders();
 		updateApplyButton(controller.hasChanges());
 		refreshMap();

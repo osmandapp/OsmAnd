@@ -3586,8 +3586,8 @@
     <string name="rotate_map_manual_opt">Diputar secara manual</string>
     <string name="map_online_data">Peta daring dan ubin</string>
     <string name="index_name_voice">Perintah suara (direkam, fitur terbatas)</string>
-    <string name="routing_attr_avoid_sett_description">Menghindari sett</string>
-    <string name="routing_attr_avoid_sett_name">Tidak ada sett</string>
+    <string name="routing_attr_avoid_sett_description">Menghindari paving batu pahat</string>
+    <string name="routing_attr_avoid_sett_name">Tanpa paving batu pahat</string>
     <string name="map_widget_target_distance_desc">Menampilkan jarak antara kamera dan lokasi sasaran.</string>
     <string name="map_widget_zoom_level_desc">Menampilkan tingkat perbesaran peta saat ini.</string>
     <string name="routing_attr_piste_type_downhill_name">Ski alpine dan turunan</string>
@@ -4708,8 +4708,8 @@
     <string name="allow_display_on_top">Perbolehkan menampilkan di atas</string>
     <string name="allow_display_on_top_description">Perbolehkan menampilkan teks peta di atas</string>
     <string name="map_text">Perenderan Peta</string>
-    <string name="routing_attr_avoid_cobblestone_name">Hindari batu bulat</string>
-    <string name="routing_attr_avoid_cobblestone_description">Hindari batu bulat</string>
+    <string name="routing_attr_avoid_cobblestone_name">Hindari jalan batu bulat</string>
+    <string name="routing_attr_avoid_cobblestone_description">Hindari jalan batu bulat</string>
     <string name="quick_action_map_style">Gaya peta</string>
     <string name="shared_string_simulate">Simulasikan</string>
     <string name="quick_action_destination">Tujuan</string>

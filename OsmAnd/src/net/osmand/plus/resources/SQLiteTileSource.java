@@ -733,6 +733,13 @@ public class SQLiteTileSource implements ITileSource {
 		}
 	}
 
+	public synchronized void closeConnection() {
+		if (db != null) {
+			db.close();
+			db = null;
+		}
+	}
+
 	public void clearOld() {
 		SQLiteConnection db = getDatabase();
 		long expiration = getExpirationTimeMillis();

@@ -95,10 +95,10 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteRecordingMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RouteService;
@@ -774,7 +774,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				settings.executePreservingPrefTimestamp(prevAppMode, () -> {
 					settings.setLastKnownMapRotation(prevAppMode, getMapRotateTarget());
 					if (!app.getOsmandMap().getMapView().getAnimatedDraggingThread().isAnimating()) {
-						settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
+						app.getOsmandMap().saveLastKnownMapElevation(prevAppMode);
 					}
 				});
 				updateApplicationModeSettings();
@@ -1261,7 +1261,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.setLastKnownMapZoom(mapView.getZoom());
 		settings.setLastKnownMapZoomFloatPart(mapView.getZoomFloatPart());
 		settings.setLastKnownMapRotation(mapView.getRotate());
-		settings.setLastKnownMapElevation(mapView.getElevationAngle());
+		app.getOsmandMap().saveLastKnownMapElevation(settings.getApplicationMode());
 		settings.MAP_ACTIVITY_ENABLED = false;
 		LOG.info(">>>> MAP_ACTIVITY_ENABLED = false");
 
@@ -1318,10 +1318,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		dashboardOnMap.onAppModeChanged();
 	}
 
-	public void updatePinchZoomMagnification() {
-		boolean enabled = PluginsHelper.isActive(AccessibilityPlugin.class)
-				&& settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.get();
-		getMapView().setPinchZoomMagnificationEnabled(enabled);
+	private void updatePinchZoomMagnification() {
+		getMapView().setPinchZoomMagnificationEnabled(settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.get());
 	}
 
 	public void updateMapSettings(boolean updateMapRenderer) {
@@ -1789,7 +1787,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void fitCurrentRouteToMap() {
 		boolean portrait = true;
 		int leftBottomPaddingPx = 0;
-		WeakReference<?> fragmentRef = mapRouteInfoMenu.findMenuFragment();
+		WeakReference<MapRouteInfoMenuFragment> menuFragmentRef = mapRouteInfoMenu.findMenuFragment();
+		MapRouteInfoMenuFragment menuFragment = menuFragmentRef != null ? menuFragmentRef.get() : null;
+		// The menu fits the route itself when it moves: fit it the same way, or the two fits
+		// that run after a route calculation leave the route where the later one puts it
+		if (menuFragment != null && menuFragment.fitRouteToMap()) {
+			return;
+		}
+		WeakReference<?> fragmentRef = menuFragmentRef;
 		if (fragmentRef == null) {
 			fragmentRef = mapRouteInfoMenu.findFollowTrackFragment();
 		}

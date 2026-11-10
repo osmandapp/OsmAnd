@@ -55,6 +55,7 @@ class OnlinePhotosDelegate(
 			)
 		} else {
 			cancel(key)
+			val previous = app.galleryHelper.repository.get(key)
 
 			val loadImagesListener = object : GetOnlineImagesTask.GetImageCardsListener {
 
@@ -62,6 +63,7 @@ class OnlinePhotosDelegate(
 
 				override fun onFinish(holder: OnlinePhotosHolder) {
 					activeTasks.remove(key)
+					holder.keepItemsFrom(previous)
 					onResult(holder)
 				}
 			}
@@ -84,6 +86,7 @@ class OnlinePhotosDelegate(
 		onResult: (MediaHolder) -> Unit
 	) {
 		val holder = OnlinePhotosHolder(key.latLon, key.params)
+		holder.markIncomplete()
 
 		if (!cacheManager.exists(rawKey)) {
 			onResult(holder)
@@ -121,6 +124,8 @@ class OnlinePhotosDelegate(
 			OsmAndTaskManager.executeTask(cacheWriteTask)
 		}
 	}
+
+	override fun canRefresh() = app.settings.isInternetConnectionAvailable
 
 	@Suppress("DEPRECATION") // AsyncTask, needs migration
 	override fun cancel(key: GalleryKey) {

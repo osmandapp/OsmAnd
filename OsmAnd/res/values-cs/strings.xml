@@ -3994,8 +3994,8 @@
     <string name="feature_available_as_part_of_plan">%1$s je k dispozici jako součást plánu %2$s</string>
     <string name="shared_string_included">Zahrnuto</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="map_widget_glide_average_desc">Zobrazuje průměrný klouzavý poměr pro nastavený interval.</string>
-    <string name="map_widget_glide_target_desc">Zobrazuje klouzavost potřebnou k dosažení cílového bodu.</string>
+    <string name="map_widget_glide_average_desc">Zobrazuje průměrný klouzavý poměr nebo průměrnou vertikální rychlost pro nastavený interval.</string>
+    <string name="map_widget_glide_target_desc">Zobrazuje klouzavost potřebnou k dosažení cílového bodu nebo cílové výšky.</string>
     <string name="map_widget_group_glide_desc">Widgety zobrazují poměr klouzavosti k cíli nebo průměrný poměr klouzavosti pro aktuální let.</string>
     <string name="average_glide_time_interval_desc">Zadejte časový interval pro průměrování klouzání.</string>
     <string name="average_glide_ratio">Průměrný klouzavý poměr</string>
@@ -5262,4 +5262,5 @@
     <string name="contour_label_direction_descr">Do kopce: horní část každého čísla nadmořské výšky směřuje k vyššímu terénu, stejně jako na papírových topografických mapách. Krátké značky na čarách směřují dolů.</string>
     <string name="rendering_attr_contourLabelDirection_name">Směr štítku</string>
     <string name="rendering_value_uphill_name">Stoupání</string>
+    <string name="release_5_5">• Prostorové vyhledávání zapnuté ve výchozím stavu: vyhledávejte v okolí místa, lepší řazení, synonyma, tolerantní k překlepům\n\n• 3D budovy vrhají stíny, směr slunce lze nastavit\n\n• Modul Panoramax: snímky z úrovně ulice na mapě\n\n• Knihovna médií: všechny fotky, videa a audio poznámky na jednom místě\n\n• Čárkované a tečkované linie stop, výchozí vzhled pro každou složku se stopami\n\n• Nastavení cestovní rychlosti pro plánování trasy a čas příjezdu\n\n• Android Auto: nedávné cíle, volná jízda, Google Assistant a Gemini\n\n• Rychlá akce pro zobrazení nebo skrytí stop\n\n• Popisky vrstevnic jsou orientované k vrcholu</string>
 </resources>

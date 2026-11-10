@@ -155,7 +155,7 @@
     <string name="poi_first_aid">प्रथमोपचार</string>
     <string name="poi_hospital">दवाखाना;रुग्णालय;हॉस्पिटल</string>
     <string name="poi_place_farm">शेत</string>
-    <string name="poi_capital">राजधानी</string>
+    <string name="poi_capital">राजधानी: राजधानी</string>
     <string name="poi_country">देश</string>
     <string name="poi_embassy">दूतावास</string>
     <string name="poi_university">विद्यापीठ</string>
@@ -240,13 +240,13 @@
     <string name="poi_bar">बार</string>
     <string name="poi_battlefield">रणांगण</string>
     <string name="poi_bay">खाडी</string>
-    <string name="poi_beach">बीच;समुद्रकिनारा</string>
+    <string name="poi_beach">समुद्रकिनारा;बीच</string>
     <string name="poi_beauty">ब्युटी;सौंदर्य प्रसाधनगृह</string>
     <string name="poi_bed">पलंगाचे दुकान</string>
     <string name="poi_blood_donation">रक्तदान केंद्र</string>
     <string name="poi_boat_rental">बोट भाड्याने</string>
     <string name="poi_brothel">वेश्यालय</string>
-    <string name="poi_cafe">अमृततुल्य;कॅफे;कॉफी;चहा;रसवंतीगृह</string>
+    <string name="poi_cafe">कॅफे;कॉफी;चहा;अमृततुल्य</string>
     <string name="poi_canal">कालवा;कॅनल</string>
     <string name="poi_car_rental">भाड्याची गाडी;भाड्याने गाडी</string>
     <string name="poi_car_sharing">कार शेअरिंग</string>
@@ -254,7 +254,7 @@
     <string name="poi_casino">कॅसिनो</string>
     <string name="poi_castle">गढी;राजवाडा</string>
     <string name="poi_cave_entrance">गुहा</string>
-    <string name="poi_childcare">अंगणवाडी;पाळणाघर</string>
+    <string name="poi_childcare">पाळणाघर;अंगणवाडी</string>
     <string name="poi_cinema">चित्रपटगृह;सिनेमा</string>
     <string name="poi_clinic">क्लिनिक;चिकित्सालय</string>
     <string name="poi_company">कंपनी ऑफिस;कंपनी कार्यालय</string>
@@ -294,7 +294,7 @@
     <string name="poi_hill">टेकडी</string>
     <string name="poi_historic_cannon">तोफ</string>
     <string name="poi_hookah_lounge">हुक्का पार्लर</string>
-    <string name="poi_hostel">छात्रालय;वसतिगृह;हॉस्टेल</string>
+    <string name="poi_hostel">हॉस्टेल;वसतिगृह;छात्रालय</string>
     <string name="poi_houseware">घरगुती वस्तू</string>
     <string name="poi_information_office">पर्यटन कार्यालय</string>
     <string name="poi_insurance">इन्शुरन्स ऑफिस;विमा कार्यालय</string>
@@ -316,7 +316,7 @@
     <string name="poi_motorcycle_repair">मोटरसायकल दुरुस्ती</string>
     <string name="poi_newsagent">वृत्तपत्र विक्रेता</string>
     <string name="poi_ngo">अशासकीय संस्था</string>
-    <string name="poi_nightclub">डिस्को;नाईट क्लब</string>
+    <string name="poi_nightclub">नाईट क्लब;डिस्को</string>
     <string name="poi_optician">चष्माविक्रेता;चष्मेविक्रेता</string>
     <string name="poi_park">उद्यान;पार्क</string>
     <string name="poi_pharmacy">औषधांचे दुकान;औषधालय;केमिस्ट दुकान</string>
@@ -348,7 +348,7 @@
     <string name="poi_variety_store">व्हरायटी स्टोअर</string>
     <string name="poi_waste_basket">कचरा पेटी;कचरापेटी</string>
     <string name="poi_water">जलाशय;तलाव</string>
-    <string name="poi_water_lake">लेक;सरोवर</string>
+    <string name="poi_water_lake">सरोवर;लेक</string>
     <string name="poi_water_tap">पाण्याचा नळ</string>
     <string name="poi_water_tower">पाण्याची टाकी</string>
     <string name="poi_waterfall">धबधबा</string>

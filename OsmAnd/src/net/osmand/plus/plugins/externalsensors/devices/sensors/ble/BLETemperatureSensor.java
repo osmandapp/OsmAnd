@@ -19,20 +19,25 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataF
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 public class BLETemperatureSensor extends BLEAbstractSensor {
 
+	// NaN, NRes, reserved and infinity values are mantissas from 0x7FFFFE to 0x800002
+	private static final int FLOAT_POSITIVE_INFINITY = 0x7FFFFE;
+	private static final int FLOAT_NEGATIVE_INFINITY = -0x7FFFFE;
+
 	private TemperatureData lastTemperatureData;
 
 	public static class TemperatureData implements SensorData {
 
 		private final long timestamp;
-		private final double temperature;
+		private final BigDecimal temperature;
 
-		TemperatureData(long timestamp, double temperature) {
+		TemperatureData(long timestamp, @NonNull BigDecimal temperature) {
 			this.timestamp = timestamp;
 			this.temperature = temperature;
 		}
@@ -42,7 +47,7 @@ public class BLETemperatureSensor extends BLEAbstractSensor {
 		}
 
 		public double getTemperature() {
-			return temperature;
+			return temperature.doubleValue();
 		}
 
 		@NonNull
@@ -131,7 +136,10 @@ public class BLETemperatureSensor extends BLEAbstractSensor {
 
 	private void decodeTemperatureCharacteristic(@NonNull BluetoothGatt gatt,
 	                                             @NonNull BluetoothGattCharacteristic characteristic) {
-		double temperature = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_FLOAT, 1);
+		BigDecimal temperature = parseIeee11073Float(characteristic.getValue(), 1);
+		if (temperature == null) {
+			return;
+		}
 		TemperatureData data = new TemperatureData(System.currentTimeMillis(), temperature);
 		this.lastTemperatureData = data;
 		getDevice().fireSensorDataEvent(this, data);
@@ -141,7 +149,22 @@ public class BLETemperatureSensor extends BLEAbstractSensor {
 	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		TemperatureData data = lastTemperatureData;
 		if (data != null) {
-			json.put(SENSOR_TAG_TEMPERATURE_A, data.temperature);
+			json.put(SENSOR_TAG_TEMPERATURE_A, data.getTemperature());
 		}
+	}
+
+	// IEEE-11073 32-bit FLOAT keeps the decimal exponent, so the value is shown with the precision the sensor sent
+	@Nullable
+	public static BigDecimal parseIeee11073Float(@Nullable byte[] value, int offset) {
+		if (value == null || value.length < offset + 4) {
+			return null;
+		}
+		int mantissa = (value[offset] & 0xFF) | (value[offset + 1] & 0xFF) << 8 | value[offset + 2] << 16;
+		int exponent = value[offset + 3];
+		if (mantissa >= FLOAT_POSITIVE_INFINITY || mantissa <= FLOAT_NEGATIVE_INFINITY) {
+			return null;
+		}
+		BigDecimal result = BigDecimal.valueOf(mantissa, -exponent);
+		return result.scale() < 0 ? result.setScale(0) : result;
 	}
 }

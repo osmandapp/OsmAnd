@@ -30,6 +30,7 @@ import net.osmand.data.*;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -1033,8 +1034,7 @@ public class SearchCoreFactory {
 						}
 						existingResult.pt = f;
 					} else {
-						String enTranslation = a.getEnTranslation().toLowerCase();
-						if (!"no".equals(enTranslation) ) {
+						if (PoiAdditionalLabels.isAcceptedValue(a)) {
 							PoiTypeResult ptr = checkPoiType(nm, a);
 							if (ptr != null && ptr.pt != null && ptr.pt.isTopVisible()) {
 								results.put(a.getKeyName(), ptr);
@@ -1047,11 +1047,14 @@ public class SearchCoreFactory {
 
 		private PoiTypeResult checkPoiType(NameStringMatcher nm, AbstractPoiType pf) {
 			PoiTypeResult res = null;
-			if (nm.matches(pf.getTranslation())) {
-				res = addIfMatch(nm, pf.getTranslation(), pf, res);
+			// an additional value is found by its name only: "Subway station", not "yes"
+			String translation = PoiAdditionalLabels.getSearchName(pf);
+			String enTranslation = PoiAdditionalLabels.getEnSearchName(pf);
+			if (nm.matches(translation)) {
+				res = addIfMatch(nm, translation, pf, res);
 			}
-			if (nm.matches(pf.getEnTranslation())) {
-				res = addIfMatch(nm, pf.getEnTranslation(), pf, res);
+			if (enTranslation != null && nm.matches(enTranslation)) {
+				res = addIfMatch(nm, enTranslation, pf, res);
 			}
 			if (nm.matches(pf.getKeyName())) {
 				res = addIfMatch(nm, pf.getKeyName().replace('_', ' '), pf, res);
@@ -1137,7 +1140,7 @@ public class SearchCoreFactory {
 			if (showTopFiltersOnly) {
 				for (AbstractPoiType pt : topVisibleFilters) {
 					SearchResult res = new SearchResult(phrase);
-					res.localeName = pt.getTranslation();
+					res.localeName = PoiAdditionalLabels.getSearchName(pt);
 					res.object = pt;
 					addPoiTypeResult(phrase, resultMatcher, showTopFiltersOnly, getStandardFilterId(pt), res);
 				}
@@ -1169,7 +1172,7 @@ public class SearchCoreFactory {
 						if (OSM_WIKI_CATEGORY.equals(ptr.pt.getKeyName())) {
 							res.localeName = ptr.pt.getTranslation() + " (" + types.getAllLanguagesTranslationSuffix() + ")";
 						} else {
-							res.localeName = ptr.pt.getTranslation();
+							res.localeName = PoiAdditionalLabels.getSearchName(ptr.pt);
 						}
 						res.object = ptr.pt;
 						addPoiTypeResult(phrase, resultMatcher, showTopFiltersOnly, getStandardFilterId(ptr.pt),

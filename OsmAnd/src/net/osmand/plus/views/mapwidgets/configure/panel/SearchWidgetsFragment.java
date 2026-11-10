@@ -137,6 +137,10 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 		setupButtonListeners();
 		setupToolbar();
 
+		if (lifecycleCallbacks != null) {
+			// the view is created again when the fragment comes back from the back stack
+			getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+		}
 		lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
 			@Override
 			public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
@@ -469,7 +473,9 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+		if (lifecycleCallbacks != null) {
+			getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+		}
 	}
 
 	@Override

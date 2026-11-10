@@ -14,6 +14,7 @@ import net.osmand.data.City;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
@@ -488,7 +489,7 @@ public class SearchHistoryHelper {
 
 					SearchPhrase phrase = searchUICore.getPhrase();
 					result = new SearchResult(phrase);
-					result.localeName = additional.getTranslation();
+					result.localeName = PoiAdditionalLabels.getSearchName(additional);
 					result.object = custom;
 					result.priority = SEARCH_AMENITY_TYPE_PRIORITY;
 					result.priorityDistance = 0;
@@ -555,7 +556,7 @@ public class SearchHistoryHelper {
 		entry.setPoiSubtypeKey(amenity.getSubType());
 		entry.setOpeningHours(amenity.getOpeningHours());
 		entry.setPhotoUrl(amenity.getWikiIconUrl());
-		entry.setOsmId(amenity.getOsmId());
+		entry.setOsmId(amenity.getId()); // goes back to Amenity.setId() when the entry is opened
 	}
 
 	private void applySearchResultMetadata(@NonNull HistoryEntry entry, @NonNull SearchResult searchResult) {

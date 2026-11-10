@@ -2838,7 +2838,7 @@
     <string name="shared_string_turn">Поворот</string>
     <string name="announcement_time_intervals">Интервалы времени и расстояния</string>
     <string name="announcement_time_title">Время оповещения</string>
-    <string name="announcement_time_descr">Время голосового оповещения определяется его типом, текущей скоростью навигации и скоростью навигации по умолчанию.</string>
+    <string name="announcement_time_descr">Время голосового оповещения определяется его типом, текущей скоростью навигации и скоростью навигации по умолчанию.</string>
     <string name="start_recording">Начать запись</string>
     <string name="show_track_on_map">Показать трек на карте</string>
     <string name="message_server_error">Ошибка сервера: %1$s</string>
@@ -5166,4 +5166,5 @@
     <string name="media_storage_manually_specified_descr">Файлы сохраняются в пользовательскую папку и сортируются по типу (аудио, фото, видео).</string>
     <string name="change_media_storage_question">Изменить хранилище медиа?</string>
     <string name="share_favorites_media_preparation_failed">Не удалось включить прикрепленные медиафайлы. Только обмен баллами.</string>
+    <string name="cast_shadows">Тени</string>
 </resources>

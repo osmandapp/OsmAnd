@@ -23,10 +23,9 @@ import kotlin.math.min
  * on which side - because a "keep left" only means anything when there is something to keep away
  * from. [RoadSplitStructure] is that picture.
  *
- * A copy of the lane logic in `RouteResultPreparation` in OsmAnd-java, which stays there for android
- * and tools. The copy is for iOS, so that it stops using the C++ router's own version in
- * `routeResultPreparation.cpp` and describes a manoeuvre the way android does.
- * `TurnLanesCompatTest` checks the copy against the java original.
+ * Based on the lane logic in `RouteResultPreparation` from OsmAnd-java. This provides common
+ * lane preparation for all platforms. `TurnLanesCompatTest` checks compatibility with the Java
+ * implementation.
  */
 object TurnLanes {
 

@@ -78,11 +78,18 @@ public abstract class MapBitmapDrawer {
 		if (resourceManager.updateRenderedMapNeeded(tileBox, drawSettings)) {
 			resourceManager.updateRendererMap(tileBox, interrupted -> app.runInUIThread(() -> {
 				if (isDrawingAllowed()) {
-					mapBitmap = renderer.getBitmap();
+					mapBitmap = copyRenderedBitmap(renderer.getBitmap());
 					notifyDrawn(mapBitmap != null);
 				}
 			}), true);
 		}
+	}
+
+	// The renderer reuses its bitmap for the next render and recycles it when the size changes
+	// (e.g. the main map of the legacy renderer), so a view must never hold the renderer's own bitmap.
+	@Nullable
+	private Bitmap copyRenderedBitmap(@Nullable Bitmap bitmap) {
+		return bitmap != null && !bitmap.isRecycled() ? bitmap.copy(bitmap.getConfig(), false) : null;
 	}
 
 	protected abstract void createTileBox();

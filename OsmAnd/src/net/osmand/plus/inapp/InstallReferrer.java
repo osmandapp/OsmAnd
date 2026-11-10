@@ -13,6 +13,7 @@ import java.util.Map;
 /**
  * Campaign of the Google Play install (utm_source, utm_medium, utm_campaign).
  * Ad click ids are not kept, only the fact that the install came from an ad click.
+ * Read and sent only while sending the unique user identifier (aid) is allowed.
  */
 public class InstallReferrer {
 
@@ -26,7 +27,7 @@ public class InstallReferrer {
 		if (Algorithms.isEmpty(referrer)) {
 			return "";
 		}
-		Uri uri = Uri.parse("?" + referrer);
+		Uri uri = parseQuery(referrer);
 		Uri.Builder builder = new Uri.Builder();
 		for (String key : CAMPAIGN_KEYS) {
 			String value = uri.getQueryParameter(key);
@@ -46,16 +47,25 @@ public class InstallReferrer {
 	}
 
 	public static void addParams(@NonNull OsmandApplication app, @NonNull Map<String, String> params) {
+		if (!app.isUserAndroidIdAllowed()) {
+			return;
+		}
 		String referrer = app.getSettings().INSTALL_REFERRER.get();
 		if (Algorithms.isEmpty(referrer)) {
 			return;
 		}
-		Uri uri = Uri.parse("?" + referrer);
+		Uri uri = parseQuery(referrer);
 		for (String key : uri.getQueryParameterNames()) {
 			String value = uri.getQueryParameter(key);
 			if (!Algorithms.isEmpty(value)) {
 				params.put(key, value);
 			}
 		}
+	}
+
+	@NonNull
+	private static Uri parseQuery(@NonNull String query) {
+		// Not Uri.parse("?" + query): it takes the first ':' anywhere in the string for a scheme separator
+		return new Uri.Builder().encodedQuery(query).build();
 	}
 }

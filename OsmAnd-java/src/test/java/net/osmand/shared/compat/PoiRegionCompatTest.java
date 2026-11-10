@@ -18,8 +18,9 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * The bookkeeping inside {@link net.osmand.shared.binary.PoiRegion} against java's: which tag
- * groups a section has already read, and how a subtype id is split.
+ * The bookkeeping of {@link net.osmand.shared.binary.PoiTagGroups} and
+ * {@link net.osmand.shared.binary.PoiRegion} against java's {@link PoiRegion}: which tag groups a
+ * section has already read, and how a subtype id is split.
  *
  * This is here because none of the obf files the tests ship with carries tag groups or top index
  * attributes, so {@link PoiSearchCompatTest} never reaches the code that handles them. What can be
@@ -41,7 +42,7 @@ public class PoiRegionCompatTest {
 	@Test
 	public void tagGroupsAreStoredTheSame() {
 		PoiRegion java = new PoiRegion();
-		net.osmand.shared.binary.PoiRegion copy = new net.osmand.shared.binary.PoiRegion();
+		net.osmand.shared.binary.PoiTagGroups copy = new net.osmand.shared.binary.PoiTagGroups();
 		for (int id : new int[] {3, 1, 7, 3, 0}) {
 			java.setTagGroups(id, pairs("place", "city", "name", "Praha " + id));
 			copy.setTagGroups(id, copyPairs("place", "city", "name", "Praha " + id));
@@ -56,7 +57,7 @@ public class PoiRegionCompatTest {
 	@Test
 	public void missingTagGroupsAreTheSame() {
 		PoiRegion java = new PoiRegion();
-		net.osmand.shared.binary.PoiRegion copy = new net.osmand.shared.binary.PoiRegion();
+		net.osmand.shared.binary.PoiTagGroups copy = new net.osmand.shared.binary.PoiTagGroups();
 		Random random = new Random(7);
 		for (int round = 0; round < 200; round++) {
 			long[] asked = new long[1 + random.nextInt(8)];

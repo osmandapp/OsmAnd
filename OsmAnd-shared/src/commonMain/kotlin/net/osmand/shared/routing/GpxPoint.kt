@@ -7,9 +7,8 @@ import kotlin.jvm.JvmField
  * One point of a track being attached to roads: where it is, how far along the track, the road
  * segment the planner found for it, and the roads that lead from it to the next attached point.
  *
- * A copy of `RoutePlannerFrontEnd.GpxPoint` in OsmAnd-java, which stays there; this copy is for
- * iOS. Java's `object`, the whole track drawn as one straight-line road, is [track] here, since
- * `object` is a Kotlin keyword.
+ * Based on `RoutePlannerFrontEnd.GpxPoint` from OsmAnd-java. Java's `object`, the whole track
+ * drawn as one straight-line road, is [track] here, since `object` is a Kotlin keyword.
  */
 class GpxPoint() {
 

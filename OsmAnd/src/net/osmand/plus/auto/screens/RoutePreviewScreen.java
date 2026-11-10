@@ -1,7 +1,10 @@
 package net.osmand.plus.auto.screens;
 
+import static net.osmand.plus.base.ContextMenuFragment.MenuState.HEADER_ONLY;
 import static net.osmand.search.core.ObjectType.GPX_TRACK;
+import static net.osmand.search.core.ObjectType.ROUTE;
 
+import android.os.CountDownTimer;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
@@ -41,6 +44,7 @@ import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.views.MapActions;
 import net.osmand.search.core.SearchResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
@@ -54,6 +58,9 @@ import java.util.List;
  */
 public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements IRouteInformationListener,
 		DefaultLifecycleObserver {
+
+	public static final long CARD_COUNTDOWN_MS = 10_000;
+	private static final long COUNTDOWN_INTERVAL_MS = 1000;
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(RoutePreviewScreen.class);
 
@@ -70,7 +77,11 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	private boolean calculateRoute;
 	private boolean calculating;
-	private boolean startNavigationOnRouteReady;
+	private final long countdownMs;
+	@Nullable
+	private CountDownTimer countdownTimer;
+	private int countdownSeconds;
+	private boolean countdownDone;
 
 	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<>() {
 		@Override
@@ -85,17 +96,17 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	public RoutePreviewScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
 	                          @NonNull SearchResult searchResult, boolean calculateRoute) {
-		this(carContext, settingsAction, searchResult, calculateRoute, false);
+		this(carContext, settingsAction, searchResult, calculateRoute, 0);
 	}
 
 	public RoutePreviewScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
 	                          @NonNull SearchResult searchResult, boolean calculateRoute,
-	                          boolean startNavigationOnRouteReady) {
+	                          long countdownMs) {
 		super(carContext);
 		this.settingsAction = settingsAction;
 		this.searchResult = searchResult;
 		this.calculateRoute = calculateRoute;
-		this.startNavigationOnRouteReady = startNavigationOnRouteReady;
+		this.countdownMs = countdownMs;
 		getLifecycle().addObserver(this);
 		calculating = calculateRoute;
 		setMarker(RoutePreviewScreen.class.getSimpleName());
@@ -122,11 +133,32 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			} else {
 				buildRouteByGivenGpx(selectedGpxFile.getGpxFile());
 			}
+		} else if (searchResult.objectType == ROUTE) {
+			restorePreviousRoute();
 		} else {
 			getApp().getOsmandMap().getMapActions().replaceDestination(
 					searchResult.location, QuickSearchListItem.getPointDescriptionObject(getApp(), searchResult).first);
 			invalidate();
 		}
+	}
+
+	private void restorePreviousRoute() {
+		OsmandApplication app = getApp();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+			targetPointsHelper.restoreTargetPoints(true);
+		} else {
+			targetPointsHelper.restoreTargetPoints(false);
+			TargetPoint start = targetPointsHelper.getPointToStart();
+			MapActions mapActions = app.getOsmandMap().getMapActions();
+			if (start != null) {
+				mapActions.enterRoutePlanningModeGivenGpx(null, start.getLatLon(), start.getOriginalPointDescription(), true, true, HEADER_ONLY);
+			} else {
+				mapActions.enterRoutePlanningModeGivenGpx(null, null, null, true, true, HEADER_ONLY);
+			}
+		}
+		invalidate();
 	}
 
 	private void buildRouteByGivenGpx(@NonNull GpxFile gpxFile) {
@@ -164,8 +196,9 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			this.routeRows = routeRows;
 			calculating = app.getRoutingHelper().isRouteBeingCalculated();
 			invalidate();
-			startNavigationIfReady();
+			startCountdownIfReady();
 		} else if (routingHelper.getRoute().hasMissingMaps()) {
+			cancelCountdown();
 			showMissingMapsScreen();
 		}
 	}
@@ -193,6 +226,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
 		super.onDestroy(owner);
+		cancelCountdown();
 		OsmandApplication app = getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		routingHelper.removeListener(this);
@@ -208,26 +242,73 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		if (getApp().getRoutingHelper().isRouteCalculated()) {
 			zoomMapToRoute();
 		}
-		startNavigationIfReady();
+		startCountdownIfReady();
 	}
 
-	public boolean isStartNavigationOnRouteReady() {
-		return startNavigationOnRouteReady;
+	@Override
+	public void onStop(@NonNull LifecycleOwner owner) {
+		cancelCountdown();
 	}
 
-	private void startNavigationIfReady() {
-		if (startNavigationOnRouteReady && !calculating && !Algorithms.isEmpty(routeRows)) {
-			getApp().runInUIThread(() -> {
-				if (startNavigationOnRouteReady && getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-					startNavigationOnRouteReady = false;
+	public boolean hasStartCountdown() {
+		return countdownMs > 0;
+	}
+
+	public boolean isCountdownRunning() {
+		return countdownTimer != null;
+	}
+
+	private void startCountdownIfReady() {
+		if (!hasStartCountdown() || countdownDone || isCountdownRunning()
+				|| calculating || Algorithms.isEmpty(routeRows)
+				|| !getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+			return;
+		}
+		if (getApp().getRoutingHelper().getRoute().hasMissingMaps()) {
+			cancelCountdown();
+			showMissingMapsScreen();
+		} else {
+			countdownSeconds = toCountdownSeconds(countdownMs);
+			countdownTimer = new CountDownTimer(countdownMs, COUNTDOWN_INTERVAL_MS) {
+				@Override
+				public void onTick(long millisUntilFinished) {
+					int seconds = toCountdownSeconds(millisUntilFinished);
+					if (seconds != countdownSeconds) {
+						countdownSeconds = seconds;
+						invalidate();
+					}
+				}
+
+				@Override
+				public void onFinish() {
+					countdownTimer = null;
+					countdownDone = true;
 					if (getApp().getRoutingHelper().getRoute().hasMissingMaps()) {
+						invalidate();
 						showMissingMapsScreen();
 					} else {
 						onNavigate();
 					}
 				}
-			});
+			}.start();
+			invalidate();
 		}
+	}
+
+	private static int toCountdownSeconds(long millis) {
+		return (int) Math.ceil(millis / (double) COUNTDOWN_INTERVAL_MS);
+	}
+
+	private void cancelCountdown() {
+		if (!hasStartCountdown() || countdownDone) {
+			return;
+		}
+		countdownDone = true;
+		if (countdownTimer != null) {
+			countdownTimer.cancel();
+			countdownTimer = null;
+		}
+		invalidate();
 	}
 
 	private Template createTemplateWithRoute(@NonNull Header header) {
@@ -235,8 +316,13 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		for (Row row : routeRows) {
 			paneBuilder.addRow(row);
 		}
+		String startTitle = getApp().getString(R.string.shared_string_control_start);
+		if (isCountdownRunning()) {
+			startTitle = getApp().getString(R.string.ltr_or_rtl_combine_with_brackets, startTitle,
+					String.valueOf(countdownSeconds));
+		}
 		paneBuilder.addAction(new Action.Builder()
-				.setTitle(getApp().getString(R.string.shared_string_control_start))
+				.setTitle(startTitle)
 				.setOnClickListener(this::onNavigate)
 				.build());
 		PaneTemplate.Builder paneTemplateBuilder = new PaneTemplate.Builder(paneBuilder.build());
@@ -279,6 +365,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	}
 
 	private void onNavigate() {
+		cancelCountdown();
 		getApp().getOsmandMap().getMapActions().startNavigation();
 		setResult(searchResult);
 		finish();
@@ -293,13 +380,17 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	private void zoomMapToRoute() {
 		RoutingHelper rh = getApp().getRoutingHelper();
 		QuadRect mapRect = RoutingHelperUtils.getRouteRect(getApp(), rh.getRoute());
-		if (mapRect != null) {
+		// during navigation the map follows the location. Route listeners get the event even if this preview has just been closed
+		if (mapRect != null && !rh.isFollowingMode()) {
 			adjustMapToRect(getApp().getMapViewTrackingUtilities().getDefaultLocation(), mapRect);
 		}
 	}
 
 	@Override
 	public void routeWasCancelled() {
+		if (isCountdownRunning()) {
+			cancelCountdown();
+		}
 		if (!getApp().getRoutingHelper().isRoutePlanningMode()) {
 			finish();
 		}
