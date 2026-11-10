@@ -42,6 +42,9 @@ public class SpatialSearchRanking {
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
+	/** "lidl espoo": a POI that the map places in another city than the one the query named. More than a POI can score
+	 *  (0.15 name + 1.6 landmark + 0.5 rating + 2 near + 1 exact), so however close it is, it stays below the named city */
+	public double wOutsideCity = 6.0;
 	/** elo above MIN_ELO_RATING at which the rating term saturates */
 	public double ratingSpan = 1200.0;
 
@@ -133,13 +136,13 @@ public class SpatialSearchRanking {
 		Double km = center == null ? null : SpatialSearchResult.getDistance(r, center) / 1000.0;
 		return score(nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
 				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r))
-				- (head.atom.ruleSpelling ? wRuleSpelling : 0);
+				- (head.atom.ruleSpelling ? wRuleSpelling : 0)
+				- (outsideMatchedCity(r) ? wOutsideCity : 0);
 	}
 
 	/**
 	 * "lidl espoo": the bbox of Espoo covers Helsinki. A POI is outside the named city when its tag groups hold
-	 * a settlement of the same rank under another name; it goes a tier below (see {@link SpatialSearchResult#compare}),
-	 * as any score penalty let a near Lidl of Vantaa beat the Lidls of Helsinki. No tag groups - nothing changes.
+	 * a settlement of the same rank under another name; it loses wOutsideCity. No tag groups - nothing changes.
 	 */
 	static boolean outsideMatchedCity(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r.getFirstRef();

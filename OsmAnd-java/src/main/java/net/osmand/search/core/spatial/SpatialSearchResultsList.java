@@ -654,7 +654,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		if (ctx.ranking != null) {
 			for (SpatialSearchResult r : finalResult) {
 				r.score = ctx.ranking.score(r, ctx.location);
-				r.outsideCity = SpatialSearchRanking.outsideMatchedCity(r);
 			}
 		}
 		Collections.sort(finalResult, (o1, o2) -> SpatialSearchResult.compare(o1, o2, ctx.location, ctx.ranking));
