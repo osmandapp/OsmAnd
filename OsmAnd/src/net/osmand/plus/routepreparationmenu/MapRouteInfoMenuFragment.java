@@ -295,7 +295,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 	private boolean adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
-		if (menu == null || menu.isSelectFromMap() || mapActivity == null) {
+		if (menu == null || menu.isSelectFromMap() || mapActivity == null || mapActivity.getMapView().getView() == null) {
 			return false;
 		}
 
@@ -309,16 +309,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 			if (!isPortrait()) {
 				tileBoxWidthPx = tb.getPixWidth() - getWidth();
 			} else {
-				View mapView = mapActivity.getMapView().getView();
-				if (mapView == null) {
-					// No map view on the phone screen, e.g. when Android Auto has taken the map
-					return false;
-				}
 				// The map down to the menu card, which is drawn below the top shadow of the menu view
 				int[] menuParent = new int[2];
 				int[] map = new int[2];
 				((View) getMainView().getParent()).getLocationOnScreen(menuParent);
-				mapView.getLocationOnScreen(map);
+				mapActivity.getMapView().getView().getLocationOnScreen(map);
 				tileBoxHeightPx = menuParent[1] + y + getShadowHeight() - map[1];
 			}
 			if (r.left != 0 && r.right != 0) {
