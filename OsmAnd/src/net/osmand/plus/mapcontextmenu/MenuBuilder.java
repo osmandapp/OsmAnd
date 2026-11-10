@@ -53,6 +53,9 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.ZoomLevel;
+import net.osmand.binary.ObfConstants;
+import net.osmand.osm.edit.Entity.EntityType;
+import net.osmand.plus.gallery.online.FotoshiGalleryAdapter;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -331,6 +334,16 @@ public class MenuBuilder {
 	public void buildPhotosRow(@NonNull ViewGroup view, @Nullable Object object) {
 		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos) {
 			Map<String, String> imageParams = new LinkedHashMap<>(getAdditionalImageParams());
+			// Local provider parameter, consumed before the existing image-service request.
+			if (object instanceof Amenity) {
+				Amenity amenity = (Amenity) object;
+				EntityType type = ObfConstants.getOsmEntityType(amenity);
+				long id = type == null ? 0 : ObfConstants.getOsmObjectId(amenity);
+				if (id > 0 && (type == EntityType.NODE || type == EntityType.WAY || type == EntityType.RELATION)) {
+					imageParams.put(FotoshiGalleryAdapter.OSM_ID_PARAM,
+							type == EntityType.NODE ? "n" + id : type == EntityType.WAY ? "w" + id : "r" + id);
+				}
+			}
 			GalleryKey.Location galleryKey = new GalleryKey.Location(latLon, imageParams);
 			buildOnlinePhotosRow(view, galleryKey);
 			buildPluginGalleryRows(view, galleryKey);

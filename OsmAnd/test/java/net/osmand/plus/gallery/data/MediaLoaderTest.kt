@@ -168,4 +168,52 @@ class MediaLoaderTest {
 		assertEquals(2, delegate.loads)
 		assertSame(fromDisk, reloaded.loaded.single())
 	}
+	@Test
+	fun incrementalUpdateKeepsListenersForTheFinalProviderResult() {
+		lateinit var update: (MediaHolder) -> Unit
+		lateinit var finish: (MediaHolder) -> Unit
+		loader.registerDelegate(GalleryKey.Location::class, object : MediaLoadDelegate {
+			override fun load(key: GalleryKey, onStarted: () -> Unit, onResult: (MediaHolder) -> Unit, onError: () -> Unit) = Unit
+			override fun loadWithUpdates(key: GalleryKey, onStarted: () -> Unit, onUpdate: (MediaHolder) -> Unit,
+				onResult: (MediaHolder) -> Unit, onError: () -> Unit) {
+				update = onUpdate
+				finish = onResult
+				onStarted()
+			}
+		})
+		val recorder = Recorder()
+		loader.load(key, recorder)
+		val partial = Holder(false)
+		update(partial)
+		assertSame(partial, repository.get(key))
+		assertEquals(listOf(partial), recorder.loaded)
+		val final = Holder(true)
+		finish(final)
+		assertEquals(listOf(partial, final), recorder.loaded)
+		assertSame(final, repository.get(key))
+	}
+
+	@Test
+	fun cancelledListenerDoesNotReceiveLateProviderUpdates() {
+		lateinit var update: (MediaHolder) -> Unit
+		lateinit var finish: (MediaHolder) -> Unit
+		var cancelled = false
+		loader.registerDelegate(GalleryKey.Location::class, object : MediaLoadDelegate {
+			override fun load(key: GalleryKey, onStarted: () -> Unit, onResult: (MediaHolder) -> Unit, onError: () -> Unit) = Unit
+			override fun loadWithUpdates(key: GalleryKey, onStarted: () -> Unit, onUpdate: (MediaHolder) -> Unit,
+				onResult: (MediaHolder) -> Unit, onError: () -> Unit) {
+				update = onUpdate
+				finish = onResult
+			}
+			override fun cancel(key: GalleryKey) { cancelled = true }
+		})
+		val recorder = Recorder()
+		loader.load(key, recorder)
+		loader.cancel(key, recorder)
+		update(Holder(false))
+		finish(Holder(true))
+		assertTrue(cancelled)
+		assertTrue(recorder.loaded.isEmpty())
+	}
+
 }

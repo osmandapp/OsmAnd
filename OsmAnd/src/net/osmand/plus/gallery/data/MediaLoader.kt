@@ -60,10 +60,14 @@ class MediaLoader(
 			return
 		}
 
-		delegate.load(
+		delegate.loadWithUpdates(
 			key = key,
 			onStarted = {
 				listeners[key]?.forEach { it.onLoadingStarted(key) }
+			},
+			onUpdate = { holder ->
+				repository.put(key, holder)
+				listeners[key]?.toList()?.forEach { it.onLoaded(key, holder) }
 			},
 			onResult = { holder ->
 				repository.put(key, holder)

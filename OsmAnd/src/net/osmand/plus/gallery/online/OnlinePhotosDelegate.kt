@@ -27,6 +27,14 @@ class OnlinePhotosDelegate(
 		onStarted: () -> Unit,
 		onResult: (MediaHolder) -> Unit,
 		onError: () -> Unit
+	) = loadWithUpdates(key, onStarted, {}, onResult, onError)
+
+	override fun loadWithUpdates(
+		key: GalleryKey,
+		onStarted: () -> Unit,
+		onUpdate: (MediaHolder) -> Unit,
+		onResult: (MediaHolder) -> Unit,
+		onError: () -> Unit
 	) {
 		if (key !is GalleryKey.Location) {
 			onError()
@@ -60,6 +68,11 @@ class OnlinePhotosDelegate(
 			val loadImagesListener = object : GetOnlineImagesTask.GetImageCardsListener {
 
 				override fun onTaskStarted() = onStarted()
+
+				override fun onPartialResult(holder: OnlinePhotosHolder) {
+					holder.keepItemsFrom(previous)
+					onUpdate(holder)
+				}
 
 				override fun onFinish(holder: OnlinePhotosHolder) {
 					activeTasks.remove(key)
