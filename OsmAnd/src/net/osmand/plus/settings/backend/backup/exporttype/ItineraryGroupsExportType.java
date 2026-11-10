@@ -55,6 +55,11 @@ class ItineraryGroupsExportType extends AbstractExportType {
 		return object instanceof MapMarkersGroup;
 	}
 
+	@Override
+	public boolean isAvailableInFreeVersion() {
+		return true;
+	}
+
 	@NonNull
 	@Override
 	public ExportCategory getRelatedExportCategory() {

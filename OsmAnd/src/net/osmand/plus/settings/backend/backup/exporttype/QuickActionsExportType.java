@@ -64,6 +64,11 @@ class QuickActionsExportType extends AbstractExportType {
 		return object instanceof ButtonStateBean;
 	}
 
+	@Override
+	public boolean isAvailableInFreeVersion() {
+		return true;
+	}
+
 	@NonNull
 	@Override
 	public ExportCategory getRelatedExportCategory() {
