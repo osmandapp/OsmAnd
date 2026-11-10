@@ -248,7 +248,8 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 		val app = osmandApp
 		val activity = requireActivity()
 		val continueDownload = onReplaced ?: Runnable { restartDownload(activity) }
-		dismiss()
+		// the server may answer after the app went to the background
+		dismissAllowingStateLoss()
 		freeVersionMapDownloads.replaceFreeRegion(region)
 		val items = mapsToDelete.values.flatten()
 		if (items.isEmpty()) {
