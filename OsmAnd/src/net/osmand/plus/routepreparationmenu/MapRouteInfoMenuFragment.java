@@ -106,6 +106,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	}
 
 	@Override
+	public boolean resolveNightMode() {
+		// Follow the current profile like MapRouteInfoMenu, which paints the rest of this view
+		return app.getDaynightHelper().isNightMode(settings.getApplicationMode(), getThemeUsageContext());
+	}
+
+	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		MapActivity mapActivity = requireMapActivity();
