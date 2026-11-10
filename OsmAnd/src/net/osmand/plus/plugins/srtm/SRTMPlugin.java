@@ -328,10 +328,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 
-	public boolean isHillshadeMode() {
-		return getTerrainMode().isHillshade();
-	}
-
 	// Terrain shadows are drawn on the 3D relief, so they turn it on also without OsmAnd Pro
 	public boolean isTerrainShadowsEnabled() {
 		return app.useOpenGlRenderer() && isTerrainLayerEnabled() && getTerrainMode().isTerrainShadows();

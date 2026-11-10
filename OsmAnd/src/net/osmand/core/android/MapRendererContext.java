@@ -623,8 +623,10 @@ public class MapRendererContext {
 		}
 		ElevationConfiguration elevationConfiguration = new ElevationConfiguration();
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		boolean disableVertexHillshade = plugin != null && plugin.isTerrainLayerEnabled() && plugin.isHillshadeMode();
-		if (disableVertexHillshade) {
+		// The vertex hillshade is drawn only as Terrain shadows, as on iOS
+		if (plugin != null && plugin.isTerrainShadowsEnabled()) {
+			elevationConfiguration.setVisualizationAlpha(plugin.getTerrainTransparency() / 255f);
+		} else {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}
@@ -632,9 +634,6 @@ public class MapRendererContext {
 			elevationConfiguration.setZScaleFactor(plugin.getVerticalExaggerationScale());
 			elevationConfiguration.setHillshadeSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
 			elevationConfiguration.setHillshadeSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
-			if (plugin.isTerrainShadowsEnabled()) {
-				elevationConfiguration.setVisualizationAlpha(plugin.getTerrainTransparency() / 255f);
-			}
 		}
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
 	}
