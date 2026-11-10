@@ -301,7 +301,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 	private boolean adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
-		if (menu == null || menu.isSelectFromMap() || mapActivity == null) {
+		if (menu == null || menu.isSelectFromMap() || mapActivity == null || mapActivity.getMapView().getView() == null) {
 			return false;
 		}
 
