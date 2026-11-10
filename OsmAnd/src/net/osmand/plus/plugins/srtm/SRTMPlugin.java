@@ -491,13 +491,6 @@ public class SRTMPlugin extends OsmandPlugin {
 				} else if (itemId == R.string.shared_string_terrain) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.TERRAIN, viewCoordinates);
 					return false;
-				} else if (itemId == R.string.relief_3d) {
-					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.RELIEF_3D, viewCoordinates);
-					} else {
-						ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
-					}
-					return false;
 				}
 				return true;
 			}
@@ -535,18 +528,6 @@ public class SRTMPlugin extends OsmandPlugin {
 						updateLayers(mapActivity, mapActivity);
 						mapActivity.refreshMapComplete();
 					});
-				} else if (itemId == R.string.relief_3d) {
-					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
-						settings.ENABLE_3D_MAPS.set(isChecked);
-						item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-						item.setSelected(isChecked);
-						item.setDescription(app.getString(isChecked ? get3DBuildingDetailLvlDescription() : R.string.shared_string_off));
-						uiAdapter.onDataSetChanged();
-
-						app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(mapActivity));
-					} else {
-						ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
-					}
 				}
 				return true;
 			}
@@ -581,10 +562,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		);
 
 		addBuildin3DItem(adapter, mapActivity);
-
-		if (app.useOpenGlRenderer()) {
-			add3DReliefItem(adapter, mapActivity, listener);
-		}
 	}
 
 	private void addBuildin3DItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
@@ -629,26 +606,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	private int get3DBuildingDetailLvlDescription() {
 		boolean level = BUILDINGS_3D_DETAIL_LEVEL.get();
 		return Building3DDetailLevel.Companion.fromValue(level).getLabelResId();
-	}
-
-	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity, @NonNull ItemClickListener listener) {
-		ContextMenuItem item = new ContextMenuItem(RELIEF_3D_ID)
-				.setTitleId(R.string.relief_3d, app)
-				.setIcon(R.drawable.ic_action_3d_relief)
-				.setListener(listener);
-
-		boolean enabled3DMode = settings.ENABLE_3D_MAPS.get();
-		if (!InAppPurchaseUtils.is3dMapsAvailable(app)) {
-			boolean nightMode = isNightMode(activity, app);
-			item.setUseNaturalSecondIconColor(true);
-			item.setSecondaryIcon(PurchasingUtils.getProFeatureIconId(nightMode));
-		} else {
-			item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
-			item.setSelected(enabled3DMode);
-			item.setSecondaryIcon(R.drawable.ic_action_additional_option);
-			item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
-		}
-		adapter.addItem(item);
 	}
 
 	private void createSphericalMapItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
