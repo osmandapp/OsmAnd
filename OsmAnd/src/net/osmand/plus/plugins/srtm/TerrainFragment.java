@@ -240,10 +240,12 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		View colorSchemeBtn = root.findViewById(R.id.color_scheme_button);
 		colorSchemeBtn.setOnClickListener(view -> {
 			List<PopUpMenuItem> menuItems = new ArrayList<>();
+			TerrainType selectedType = srtmPlugin.getTerrainMode().getType();
 			for (TerrainMode mode : TerrainMode.values(app)) {
 				if (mode.isDefaultMode() && (!mode.isTerrainShadows() || app.useOpenGlRenderer())) {
 					menuItems.add(new PopUpMenuItem.Builder(app)
 							.setTitle(mode.getType().getName(app))
+							.setSelected(mode.getType() == selectedType)
 							.showTopDivider(mode.isTerrainShadows())
 							.setOnClickListener(v -> setupTerrainMode(mode))
 							.create());
