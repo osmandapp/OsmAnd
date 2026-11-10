@@ -361,6 +361,10 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public float getVerticalExaggerationScale() {
+		// Vertical exaggeration stays an OsmAnd Pro feature, also when Terrain shadows turn 3D relief on without it
+		if (!InAppPurchaseUtils.is3dMapsAvailable(app)) {
+			return MIN_VERTICAL_EXAGGERATION;
+		}
 		return normalizeVerticalExaggerationScale(app.getSettings().VERTICAL_EXAGGERATION_SCALE.get());
 	}
 
