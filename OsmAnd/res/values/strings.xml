@@ -11,6 +11,10 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="visualization">Visualization</string>
+	<string name="terrain_shadows">Terrain shadows</string>
+	<string name="terrain_shadows_description">Real-time dynamic shading for 3D terrain. Highlights landscape geometry with minimal performance impact.</string>
+	<string name="terrain_shadows_relief_3d_footer">3D Relief is automatically enabled, as it is required to render Terrain shadows.</string>
 	<string name="update_maps_to_use_new_search">Update maps to use the new search (%1$s)</string>
 	<string name="free_region_not_chosen_descr">The region of your first downloaded map becomes your free region.</string>
 	<string name="free_region_banner_descr">All maps of %1$s are free.</string>

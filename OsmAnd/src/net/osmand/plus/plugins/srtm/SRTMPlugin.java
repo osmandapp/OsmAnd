@@ -142,10 +142,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		});
 		settings.ENABLE_3D_MAPS.addListener(enable3DMapsListener);
 
-		terrainListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		terrainListener = change -> app.runInUIThread(this::updateTerrainRendering);
 		TERRAIN.addListener(terrainListener);
 
-		terrainModeListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		terrainModeListener = change -> app.runInUIThread(this::updateTerrainRendering);
 		TERRAIN_MODE.addListener(terrainModeListener);
 		verticalExaggerationListener = scale -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
@@ -189,6 +189,18 @@ public class SRTMPlugin extends OsmandPlugin {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.updateElevationConfiguration();
+		}
+	}
+
+	private void updateTerrainRendering() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.updateElevationConfiguration();
+			if (mapContext.isHeightmapsActive() != is3DMapsEnabled()) {
+				mapContext.recreateHeightmapProvider();
+				// 3D tracks take their heights from the heightmaps, as on an ENABLE_3D_MAPS change in MapLayers
+				app.getOsmandMap().getMapLayers().getGpxLayer().setInvalidated(true);
+			}
 		}
 	}
 
@@ -283,7 +295,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (terrainLayer != null) {
 			app.getOsmandMap().getMapView().removeLayer(terrainLayer);
 		}
-		if (TERRAIN.get()) {
+		if (TERRAIN.get() && !getTerrainMode().isTerrainShadows()) {
 			terrainLayer = new TerrainLayer(context, this);
 			app.getOsmandMap().getMapView().addLayer(terrainLayer, 0.6f);
 		}
@@ -300,7 +312,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	// If enabled, map should be rendered with elevation data (in 3D)
 	public boolean is3DMapsEnabled() {
-		return is3DReliefAllowed() && settings.ENABLE_3D_MAPS.get();
+		return is3DReliefAllowed() && settings.ENABLE_3D_MAPS.get() || isTerrainShadowsEnabled();
 	}
 
 	public boolean is3DReliefAllowed() {
@@ -320,6 +332,11 @@ public class SRTMPlugin extends OsmandPlugin {
 		return getTerrainMode().isHillshade();
 	}
 
+	// Terrain shadows are drawn on the 3D relief, so they turn it on also without OsmAnd Pro
+	public boolean isTerrainShadowsEnabled() {
+		return app.useOpenGlRenderer() && isTerrainLayerEnabled() && getTerrainMode().isTerrainShadows();
+	}
+
 	public TerrainMode getTerrainMode() {
 		return TerrainMode.getByKey(TERRAIN_MODE.get());
 	}
@@ -330,6 +347,9 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public void setTerrainTransparency(int transparency, TerrainMode mode) {
 		mode.setTransparency(transparency);
+		if (mode.isTerrainShadows()) {
+			updateElevationConfiguration();
+		}
 	}
 
 	public void setTerrainZoomValues(int minZoom, int maxZoom, TerrainMode mode) {
@@ -341,6 +361,10 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public float getVerticalExaggerationScale() {
+		// Vertical exaggeration stays an OsmAnd Pro feature, also when Terrain shadows turn 3D relief on without it
+		if (!InAppPurchaseUtils.is3dMapsAvailable(app)) {
+			return MIN_VERTICAL_EXAGGERATION;
+		}
 		return normalizeVerticalExaggerationScale(app.getSettings().VERTICAL_EXAGGERATION_SCALE.get());
 	}
 
@@ -357,7 +381,11 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void resetTransparencyToDefault() {
-		getTerrainMode().resetTransparencyToDefault();
+		TerrainMode mode = getTerrainMode();
+		mode.resetTransparencyToDefault();
+		if (mode.isTerrainShadows()) {
+			updateElevationConfiguration();
+		}
 	}
 
 	public void resetVerticalExaggerationToDefault() {
