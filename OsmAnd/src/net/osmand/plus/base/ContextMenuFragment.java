@@ -456,6 +456,7 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 			((InterceptorLinearLayout) mainView).setListener(slideTouchListener);
 		}
 		mainView.setOnTouchListener(slideTouchListener);
+		mainView.setOnHoverListener((v, event) -> true);
 
 		return view;
 	}
