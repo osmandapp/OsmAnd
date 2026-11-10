@@ -327,20 +327,6 @@ public class OsmAndFormatter {
 		return app.getString(R.string.ltr_or_rtl_combine_via_space, formattedValue, app.getString(R.string.shared_string_sec));
 	}
 
-	// unlike calculateRoundedDist, does not round down to 1-2-5 steps: 300 km stays 300 km, not 200 km
-	public static double roundToWholeMainUnits(double distInMeters, @NonNull OsmandApplication ctx) {
-		MetricsConstants mc = ctx.getSettings().METRIC_SYSTEM.get();
-		float mainUnitInMeters;
-		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
-		} else {
-			mainUnitInMeters = METERS_IN_ONE_MILE;
-		}
-		return Math.max(1, Math.round(distInMeters / mainUnitInMeters)) * mainUnitInMeters;
-	}
-
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();

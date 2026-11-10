@@ -1158,16 +1158,27 @@ public class SearchUICore {
 	}
 
 	public int getMinimalSearchRadius(SearchPhrase phrase) {
+		SearchCoreAPI api = getMinimalSearchRadiusAPI(phrase);
+		return api != null ? api.getMinimalSearchRadius(phrase) : Integer.MAX_VALUE;
+	}
+
+	public boolean isSpatialSearchRadius(SearchPhrase phrase) {
+		return getMinimalSearchRadiusAPI(phrase) instanceof SpatialTextSearchAPI;
+	}
+
+	private SearchCoreAPI getMinimalSearchRadiusAPI(SearchPhrase phrase) {
+		SearchCoreAPI minimalRadiusAPI = null;
 		int radius = Integer.MAX_VALUE;
 		for (SearchCoreAPI api : apis) {
 			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) != -1) {
 				int apiMinimalRadius = api.getMinimalSearchRadius(phrase);
 				if (apiMinimalRadius > 0 && apiMinimalRadius < radius) {
 					radius = apiMinimalRadius;
+					minimalRadiusAPI = api;
 				}
 			}
 		}
-		return radius;
+		return minimalRadiusAPI;
 	}
 
 	public int getNextSearchRadius(SearchPhrase phrase) {

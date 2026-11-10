@@ -303,6 +303,7 @@ public class SearchUICoreGenericTest {
 		SearchPhrase phrase = core.getPhrase();
 		Assert.assertTrue(core.isSearchMoreAvailable(phrase));
 		Assert.assertEquals(300 * 1000, core.getMinimalSearchRadius(phrase));
+		Assert.assertTrue(core.isSpatialSearchRadius(phrase));
 		Assert.assertEquals(500 * 1000, core.getNextSearchRadius(phrase));
 
 		core.updateSettings(core.getSearchSettings().setRadiusLevel(2));
