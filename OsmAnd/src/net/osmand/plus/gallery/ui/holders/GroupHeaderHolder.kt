@@ -3,6 +3,7 @@ package net.osmand.plus.gallery.ui.holders
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
@@ -36,6 +37,7 @@ class GroupHeaderHolder(itemView: View, private val app: OsmandApplication, priv
 		}
 		boundType = item.type
 		boundCollapsed = item.collapsed
+		ViewCompat.setStateDescription(itemView, app.getString(if (item.collapsed) R.string.access_collapsed_list else R.string.access_expanded_list))
 		itemView.setOnClickListener { onClick(item.type) }
 	}
 }

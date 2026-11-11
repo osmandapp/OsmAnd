@@ -55,7 +55,7 @@ class MediaLibraryListViewHolder(
 	}
 
 	companion object {
-		private const val ROW_MIN_HEIGHT_DP = 68f
+		private const val ROW_MIN_HEIGHT_DP = 72f
 		private const val ATTACHED_ROW_MIN_HEIGHT_DP = 100f
 	}
 }

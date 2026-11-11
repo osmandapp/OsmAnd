@@ -137,14 +137,15 @@ public class AmenityUIHelper extends MenuBuilder {
 			List<String> iconNameCandidates = nonEmptyIconNames(
 					poiAdditionalIconName, poiAdditionalCategoryName, firstType.getIconKeyName());
 			return AmenityTagEntriesBuilder.buildPoiTypesGroupEntry(poiAdditionalCategoryName, firstType.getKeyName(),
-					firstType.getPoiAdditionalCategoryTranslation(), categoryTypes, firstType.getOrder(), 0,
-					iconNameCandidates, R.drawable.ic_action_note_dark, true, baseEntry.collapsableCategory);
+					firstType.getPoiAdditionalCategoryTranslation(), categoryTypes, baseEntry.collapsableEntries,
+					firstType.getOrder(), 0, iconNameCandidates, R.drawable.ic_action_note_dark, true,
+					baseEntry.collapsableCategory);
 		}
 		PoiCategory groupCategory = firstType.getCategory();
 		return AmenityTagEntriesBuilder.buildPoiTypesGroupEntry(groupCategory.getKeyName(),
 				groupCategory.getKeyName(), groupCategory.getTranslation(), categoryTypes,
-				PoiType.DEFAULT_GROUP_ORDER, 0, List.of(groupCategory.getIconKeyName()), 0,
-				false, baseEntry.collapsableCategory);
+				null, PoiType.DEFAULT_GROUP_ORDER, 0,
+				List.of(groupCategory.getIconKeyName()), 0, false, baseEntry.collapsableCategory);
 	}
 
 	@Nullable
@@ -285,8 +286,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			case PLAIN:
 				return buildCollapsableViewFromEntries(context, data.collapsableEntries);
 			case POI_TYPE_GROUP:
-				return getPoiTypeCollapsableView(context, true, data.collapsablePoiTypes,
-						data.poiAdditional, data.collapsableCategory);
+				return getPoiTypeCollapsableView(context, true, data);
 			case ELEVATION_PILLS: {
 				Set<String> texts = new LinkedHashSet<>();
 				for (AmenityTagEntry entry : data.collapsableEntries) {
@@ -603,23 +603,24 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	private CollapsableView getPoiTypeCollapsableView(Context context, boolean collapsed,
-	                                                  @NonNull List<PoiType> categoryTypes,
-	                                                  boolean poiAdditional, PoiCategory type) {
-
+	                                                  @NonNull AmenityTagEntry group) {
+		List<PoiType> categoryTypes = group.collapsablePoiTypes;
 		List<TextViewEx> buttons = new ArrayList<>();
 
 		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		for (PoiType pt : categoryTypes) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
-			String name = poiAdditional
+			String name = group.poiAdditional
 					? AmenityTagEntriesBuilder.getValueLabelParts(pt).getTagValue() : pt.getTranslation();
-			button.setText(name);
-			PoiCategory category = pt.getCategory() != null ? pt.getCategory() : type;
+			String value = group.getCollapsableEntryValue(pt.getKeyName());
+			button.setText(Algorithms.isEmpty(value) ? name
+					: app.getString(R.string.ltr_or_rtl_combine_via_colon, name, value));
+			PoiCategory category = pt.getCategory() != null ? pt.getCategory() : group.collapsableCategory;
 
 			button.setOnClickListener(v -> {
 				PoiUIFilter filter = category != null
-						? app.getPoiFilters().getPoiTypeFilter(category.getKeyName(), pt.getKeyName(), poiAdditional) : null;
+						? app.getPoiFilters().getPoiTypeFilter(category.getKeyName(), pt.getKeyName(), group.poiAdditional) : null;
 				if (filter != null) {
 					getMapActivity().getFragmentsHelper().showQuickSearch(filter);
 				}

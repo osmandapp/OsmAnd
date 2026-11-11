@@ -96,6 +96,26 @@ class AmenitySearcher(private val mapPoiTypes: MapPoiTypes?) {
 			this.mainAmenityType = subType
 		}
 
+		/**
+		 * Builds a request from object attributes without requiring a [MapObject].
+		 * [osmId] is the unpacked OSM ID, or zero when unknown. [type] determines the search
+		 * radius; relations use a larger area. [tags] provide the location-and-type fallback,
+		 * and [checkOriginName] also matches the persisted [Amenity.toStringEn] name.
+		 */
+		constructor(
+			latLon: KLatLon?, osmId: Long, type: EntityType?, wikidata: String?,
+			names: List<String>?, tags: Map<String, String>?, mainAmenityType: String?, checkOriginName: Boolean
+		) {
+			this.latLon = latLon
+			this.osmId = osmId
+			this.type = type
+			this.wikidata = wikidata
+			this.names = names
+			this.tags = tags
+			this.mainAmenityType = mainAmenityType
+			this.checkOriginName = checkOriginName
+		}
+
 		fun getMainAmenityType(): String? = mainAmenityType
 	}
 

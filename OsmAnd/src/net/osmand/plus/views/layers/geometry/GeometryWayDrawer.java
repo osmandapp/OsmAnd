@@ -149,6 +149,48 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		}
 	}
 
+	/**
+	 * Arrows in the middle of the dashes of paths stroked with {@code DashPathEffect(intervals, 0)}, which starts
+	 * the pattern anew on every contour. The step between arrows is kept the nearest whole number of dashes.
+	 */
+	public void drawArrowsOnDashes(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, @NonNull List<Path> paths,
+	                               @NonNull float[] intervals, @NonNull GeometryWayStyle<?> style) {
+		float period = 0;
+		for (float interval : intervals) {
+			period += interval;
+		}
+		if (period <= 0) {
+			return;
+		}
+		int dashesPerArrow = (int) Math.max(1, Math.round(style.getPointStepPx(1) / period));
+		float arrowStep = dashesPerArrow * period;
+		float halfDash = intervals[0] / 2;
+		int firstArrowDash = dashesPerArrow / 2;
+		float firstArrow = firstArrowDash * period + halfDash;
+		int w = tb.getPixWidth();
+		int h = tb.getPixHeight();
+		int left = -w / 4;
+		int right = w + w / 4;
+		int top = -h / 4;
+		int bottom = h + h / 4;
+		PathMeasure measure = new PathMeasure();
+		float[] position = new float[2];
+		float[] tangent = new float[2];
+		for (Path path : paths) {
+			measure.setPath(path, false);
+			do {
+				float length = measure.getLength();
+				for (float distance = firstArrow; distance + halfDash <= length; distance += arrowStep) {
+					if (measure.getPosTan(distance, position, tangent)
+							&& GeometryWayPathAlgorithms.isIn(position[0], position[1], left, top, right, bottom)) {
+						double angle = Math.toDegrees(Math.atan2(tangent[1], tangent[0])) + 90;
+						getArrowPathPoint(position[0], position[1], style, angle, 0).draw(canvas, context);
+					}
+				}
+			} while (measure.nextContour());
+		}
+	}
+
 	protected void drawFullBorder(@NonNull Canvas canvas, int zoom, @NonNull List<DrawPathData> pathsData) {
 	}
 

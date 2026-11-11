@@ -47,6 +47,7 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchWord;
 import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -55,6 +56,8 @@ import java.util.Calendar;
 import java.util.List;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
+
+	private static final int SPATIAL_SEARCH_RADIUS_STEP = 50;
 
 	private final OsmandApplication app;
 	private final FragmentActivity activity;
@@ -289,9 +292,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		String textTitle;
 		int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
 		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
-			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+					+ getFormattedSearchRadius(app, searchPhrase, minimalSearchRadius);
 		} else {
 			textTitle = app.getString(R.string.search_nothing_found);
 		}
@@ -360,9 +362,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		String textTitle;
 		int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
 		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
-			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+					+ getFormattedSearchRadius(app, searchPhrase, minimalSearchRadius);
 		} else {
 			textTitle = app.getString(R.string.search_nothing_found);
 		}
@@ -692,13 +693,37 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		SearchWord word = searchPhrase.getLastSelectedWord();
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
 		if (word != null && word.getType() != null && word.getType().equals(POI_TYPE)) {
-			float rd = (float) OsmAndFormatter.calculateRoundedDist(
-					searchUICore.getNextSearchRadius(searchPhrase), app);
 			return app.getString(R.string.increase_search_radius_to,
-					OsmAndFormatter.getFormattedDistance(rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS));
+					getFormattedSearchRadius(app, searchPhrase, searchUICore.getNextSearchRadius(searchPhrase)));
 		} else {
 			return app.getString(R.string.increase_search_radius);
 		}
+	}
+
+	@NonNull
+	public static String getFormattedSearchRadius(@NonNull OsmandApplication app,
+	                                              @NonNull SearchPhrase searchPhrase, int radius) {
+		if (app.getSearchUICore().getCore().isSpatialSearchRadius(searchPhrase)) {
+			OsmAndFormatterParams params = new OsmAndFormatterParams();
+			params.setForcePreciseValue(true);
+			params.setExtraDecimalPrecision(0);
+			return OsmAndFormatter.getFormattedDistance(roundSpatialSearchRadius(app, radius), app, params);
+		}
+		float rd = (float) OsmAndFormatter.calculateRoundedDist(radius, app);
+		return OsmAndFormatter.getFormattedDistance(rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+	}
+
+	// the spatial search radii are whole km (300, 400, 500, 700): km are shown as is, mi and nm rounded to 50
+	private static float roundSpatialSearchRadius(@NonNull OsmandApplication app, int radius) {
+		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
+		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+			return radius;
+		}
+		boolean nauticalMiles = mc == MetricsConstants.NAUTICAL_MILES_AND_METERS
+				|| mc == MetricsConstants.NAUTICAL_MILES_AND_FEET;
+		float mainUnitInMeters = nauticalMiles ? OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE : OsmAndFormatter.METERS_IN_ONE_MILE;
+		long mainUnits = Math.round(radius / mainUnitInMeters / SPATIAL_SEARCH_RADIUS_STEP) * SPATIAL_SEARCH_RADIUS_STEP;
+		return Math.max(SPATIAL_SEARCH_RADIUS_STEP, mainUnits) * mainUnitInMeters;
 	}
 
 	public void toggleCheckbox(int position, CheckBox ch) {

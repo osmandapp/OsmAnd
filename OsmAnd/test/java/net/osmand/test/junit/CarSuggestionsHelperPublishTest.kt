@@ -105,6 +105,11 @@ class CarSuggestionsHelperPublishTest {
 		return Pair(carContext, recordingManager)
 	}
 
+	private fun historyCards(suggestions: List<Suggestion>): List<Suggestion> =
+		suggestions.filterNot { suggestion ->
+			suggestion.identifier.startsWith(CarSuggestionsHelper.PREVIOUS_ROUTE_ID_PREFIX)
+		}
+
 	private fun updateOnMainSync(carContext: TestCarContext) {
 		InstrumentationRegistry.getInstrumentation().runOnMainSync {
 			helper.update(carContext)
@@ -142,9 +147,10 @@ class CarSuggestionsHelperPublishTest {
 		updateOnMainSync(carContext)
 
 		assertEquals(1, recordingManager.publications.size)
-		val suggestions = recordingManager.publications[0]
+		val publication = recordingManager.publications[0]
+		val suggestions = historyCards(publication)
 
-		assertTrue("Suggestions count must be between 1 and $MAX_SUGGESTIONS", suggestions.size in 1..MAX_SUGGESTIONS)
+		assertTrue("Suggestions count must be between 1 and $MAX_SUGGESTIONS", publication.size in 1..MAX_SUGGESTIONS)
 		assertTrue("Suggestions must contain at least the 2 test entries", suggestions.size >= 2)
 
 		assertTrue("First suggestion card must be entry B", suggestions[0].identifier.contains(pdB.name))
@@ -227,11 +233,12 @@ class CarSuggestionsHelperPublishTest {
 		updateOnMainSync(carContext)
 		assertEquals(2, recordingManager.publications.size)
 
-		val secondPublication = recordingManager.publications[1]
+		val firstPublication = historyCards(recordingManager.publications[0])
+		val secondPublication = historyCards(recordingManager.publications[1])
 		assertTrue("Second publication must not be empty", secondPublication.isNotEmpty())
-		assertTrue("Newest entry must occupy the first card slot", secondPublication[0].identifier.contains(pdB.name))
+		assertTrue("Newest entry must occupy the first history card slot", secondPublication[0].identifier.contains(pdB.name))
 		assertEquals(pdB.name, secondPublication[0].title.toString())
-		assertEquals(recordingManager.publications[0][0].action, secondPublication[1].action)
+		assertEquals(firstPublication[0].action, secondPublication[1].action)
 	}
 
 	@Test

@@ -303,6 +303,7 @@ public class SearchUICoreGenericTest {
 		SearchPhrase phrase = core.getPhrase();
 		Assert.assertTrue(core.isSearchMoreAvailable(phrase));
 		Assert.assertEquals(300 * 1000, core.getMinimalSearchRadius(phrase));
+		Assert.assertTrue(core.isSpatialSearchRadius(phrase));
 		Assert.assertEquals(500 * 1000, core.getNextSearchRadius(phrase));
 
 		core.updateSettings(core.getSearchSettings().setRadiusLevel(2));
@@ -315,6 +316,24 @@ public class SearchUICoreGenericTest {
 		phrase = core.resetPhrase("Tatranska magistrala");
 		Assert.assertFalse(core.isSearchMoreAvailable(phrase));
 		Assert.assertEquals(700 * 1000, core.getMinimalSearchRadius(phrase));
+	}
+
+	@Test
+	public void testCategoryRadiusIsNotSpatialSearchRadius() {
+		// a selected category is searched by its own api in 10 km steps, rounded as in the classic search
+		SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
+		core.init(true);
+		SearchResult category = new SearchResult(core.resetPhrase("Charging station"));
+		category.object = MapPoiTypes.getDefault().getPoiTypeByKey("charging_station");
+		category.objectType = ObjectType.POI_TYPE;
+		category.localeName = "Charging station";
+		category.location = new LatLon(48.8735, 2.35);
+		core.selectSearchResult(category);
+
+		SearchPhrase phrase = core.getPhrase();
+		Assert.assertNotNull(category.object);
+		Assert.assertEquals(10 * 1000, core.getMinimalSearchRadius(phrase));
+		Assert.assertFalse(core.isSpatialSearchRadius(phrase));
 	}
 
 	private City createCity() {

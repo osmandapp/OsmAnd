@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.TXT_EXT;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HILLSHADE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.SLOPE;
+import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.TERRAIN_SHADOWS;
 
 import android.content.Context;
 
@@ -34,12 +35,15 @@ public class TerrainMode {
 	public static final String COLOR_SLOPE_PREFIX = "slope_";
 
 	public static final String HEIGHT_PREFIX = "height_";
+	// 60 %: with the darker core shader this matches the 5.3 look of the 3D relief shadows
+	public static final int TERRAIN_SHADOWS_DEFAULT_TRANSPARENCY = 153;
 	private static TerrainMode[] cachedTerrainModes;
 
 	public enum TerrainType {
 		HILLSHADE(R.string.shared_string_hillshade),
 		SLOPE(R.string.shared_string_slope),
-		HEIGHT(R.string.altitude);
+		HEIGHT(R.string.altitude),
+		TERRAIN_SHADOWS(R.string.terrain_shadows);
 
 		final int nameRes;
 
@@ -56,7 +60,8 @@ public class TerrainMode {
 		public GradientPaletteCategory toPaletteCategory() {
 			return switch (this) {
 				case SLOPE -> GradientPaletteCategory.TERRAIN_SLOPE;
-				case HILLSHADE -> GradientPaletteCategory.TERRAIN_HILLSHADE;
+				// Terrain shadows have no palette, their screen shows no legend
+				case HILLSHADE, TERRAIN_SHADOWS -> GradientPaletteCategory.TERRAIN_HILLSHADE;
 				case HEIGHT -> GradientPaletteCategory.TERRAIN_ALTITUDE;
 			};
 		}
@@ -77,7 +82,8 @@ public class TerrainMode {
 		OsmandSettings settings = app.getSettings();
 		MIN_ZOOM = settings.registerIntPreference(type + "_min_zoom", 3).makeProfile();
 		MAX_ZOOM = settings.registerIntPreference(type + "_max_zoom", 17).makeProfile();
-		TRANSPARENCY = settings.registerIntPreference(type + "_transparency", type == HILLSHADE ? 100 : 80).makeProfile();
+		int defaultTransparency = type == HILLSHADE ? 100 : type == TERRAIN_SHADOWS ? TERRAIN_SHADOWS_DEFAULT_TRANSPARENCY : 80;
+		TRANSPARENCY = settings.registerIntPreference(type + "_transparency", defaultTransparency).makeProfile();
 	}
 
 	@NonNull
@@ -126,6 +132,7 @@ public class TerrainMode {
 				}
 			}
 		}
+		modes.add(new TerrainMode(app, DEFAULT_KEY, TERRAIN_SHADOWS, TERRAIN_SHADOWS.getName(app)));
 		cachedTerrainModes = modes.toArray(new TerrainMode[0]);
 	}
 
@@ -172,6 +179,10 @@ public class TerrainMode {
 
 	public boolean isHillshade() {
 		return type == HILLSHADE;
+	}
+
+	public boolean isTerrainShadows() {
+		return type == TERRAIN_SHADOWS;
 	}
 
 	public TerrainType getType() {

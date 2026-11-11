@@ -77,15 +77,19 @@ class AdditionalInfoBundle(
 	): MutableList<AmenityTagEntry> {
 		val category = getCategory()
 		val collectedPoiTypes = LinkedHashMap<String, MutableList<PoiType>>()
-		val entries = collectPlainRows(allowNoteTag, preferredLangs, category, collectedPoiTypes, genericRowKeys)
+		val socketGroup = SocketTagGroup(poiTypes)
+		val entries = collectPlainRows(allowNoteTag, preferredLangs, category, collectedPoiTypes,
+			socketGroup, genericRowKeys)
 		entries.addAll(collectCollapsableGroups(category))
 		entries.addAll(collectPoiTypeGroups(category, collectedPoiTypes))
+		collectSocketGroup(category, socketGroup.getItems())?.let { entries.add(it) }
 		return entries
 	}
 
 	private fun collectPlainRows(
 		allowNoteTag: Boolean, preferredLangs: List<String>?, category: PoiCategory?,
-		collectedPoiTypes: MutableMap<String, MutableList<PoiType>>, genericRowKeys: Set<String>
+		collectedPoiTypes: MutableMap<String, MutableList<PoiType>>,
+		socketGroup: SocketTagGroup, genericRowKeys: Set<String>
 	): MutableList<AmenityTagEntry> {
 		val showDefaultTags = isDefaultForCategory()
 		val entries = ArrayList<AmenityTagEntry>()
@@ -103,6 +107,9 @@ class AdditionalInfoBundle(
 			val resolvedType = resolvePoiType(category, key, strValue)
 			val additionalType = resolvedType.additionalType
 			val categoryType = resolvedType.categoryType
+			if (socketGroup.add(additionalType, strValue)) {
+				continue
+			}
 			if (isFilterOnlyOrGrouped(additionalType)) {
 				continue
 			}
@@ -168,15 +175,7 @@ class AdditionalInfoBundle(
 				continue
 			}
 			val poiAdditionalCategoryName = categoryTypes[0].getPoiAdditionalCategory() ?: continue
-			entries.add(
-				AmenityTagEntry.Builder(poiAdditionalCategoryName)
-					.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP)
-					.setCollapsablePoiTypes(categoryTypes)
-					.setCollapsableCategory(category)
-					.setPoiAdditional(true)
-					.setOrder(categoryTypes[0].getOrder())
-					.build()
-			)
+			entries.add(poiAdditionalGroupBuilder(poiAdditionalCategoryName, categoryTypes, category).build())
 		}
 		return entries
 	}
@@ -198,6 +197,27 @@ class AdditionalInfoBundle(
 			)
 		}
 		return entries
+	}
+
+	private fun poiAdditionalGroupBuilder(
+		name: String, types: List<PoiType>, category: PoiCategory?
+	): AmenityTagEntry.Builder =
+		AmenityTagEntry.Builder(name)
+			.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP)
+			.setCollapsablePoiTypes(types)
+			.setCollapsableCategory(category)
+			.setPoiAdditional(true)
+			.setOrder(types[0].getOrder())
+
+	private fun collectSocketGroup(
+		category: PoiCategory?, items: List<SocketTagGroup.Item>
+	): AmenityTagEntry? {
+		val groupName = items.firstOrNull()?.type?.getPoiAdditionalCategory() ?: return null
+		return poiAdditionalGroupBuilder(groupName, items.map { it.type }, category)
+			.setCollapsableEntries(items.map {
+				AmenityTagEntry.Builder(it.type.getKeyName()).setValue(it.value).build()
+			})
+			.build()
 	}
 
 	private fun toLocalizedAmenityTagEntry(

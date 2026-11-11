@@ -142,10 +142,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		});
 		settings.ENABLE_3D_MAPS.addListener(enable3DMapsListener);
 
-		terrainListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		terrainListener = change -> app.runInUIThread(this::updateTerrainRendering);
 		TERRAIN.addListener(terrainListener);
 
-		terrainModeListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		terrainModeListener = change -> app.runInUIThread(this::updateTerrainRendering);
 		TERRAIN_MODE.addListener(terrainModeListener);
 		verticalExaggerationListener = scale -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
@@ -189,6 +189,18 @@ public class SRTMPlugin extends OsmandPlugin {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.updateElevationConfiguration();
+		}
+	}
+
+	private void updateTerrainRendering() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.updateElevationConfiguration();
+			if (mapContext.isHeightmapsActive() != is3DMapsEnabled()) {
+				mapContext.recreateHeightmapProvider();
+				// 3D tracks take their heights from the heightmaps, as on an ENABLE_3D_MAPS change in MapLayers
+				app.getOsmandMap().getMapLayers().getGpxLayer().setInvalidated(true);
+			}
 		}
 	}
 
@@ -283,7 +295,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (terrainLayer != null) {
 			app.getOsmandMap().getMapView().removeLayer(terrainLayer);
 		}
-		if (TERRAIN.get()) {
+		if (TERRAIN.get() && !getTerrainMode().isTerrainShadows()) {
 			terrainLayer = new TerrainLayer(context, this);
 			app.getOsmandMap().getMapView().addLayer(terrainLayer, 0.6f);
 		}
@@ -300,7 +312,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	// If enabled, map should be rendered with elevation data (in 3D)
 	public boolean is3DMapsEnabled() {
-		return is3DReliefAllowed() && settings.ENABLE_3D_MAPS.get();
+		return is3DReliefAllowed() && settings.ENABLE_3D_MAPS.get() || isTerrainShadowsEnabled();
 	}
 
 	public boolean is3DReliefAllowed() {
@@ -316,8 +328,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 
-	public boolean isHillshadeMode() {
-		return getTerrainMode().isHillshade();
+	// Terrain shadows are drawn on the 3D relief, so they turn it on also without OsmAnd Pro
+	public boolean isTerrainShadowsEnabled() {
+		return app.useOpenGlRenderer() && isTerrainLayerEnabled() && getTerrainMode().isTerrainShadows();
 	}
 
 	public TerrainMode getTerrainMode() {
@@ -330,6 +343,9 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public void setTerrainTransparency(int transparency, TerrainMode mode) {
 		mode.setTransparency(transparency);
+		if (mode.isTerrainShadows()) {
+			updateElevationConfiguration();
+		}
 	}
 
 	public void setTerrainZoomValues(int minZoom, int maxZoom, TerrainMode mode) {
@@ -341,6 +357,10 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public float getVerticalExaggerationScale() {
+		// Vertical exaggeration stays an OsmAnd Pro feature, also when Terrain shadows turn 3D relief on without it
+		if (!InAppPurchaseUtils.is3dMapsAvailable(app)) {
+			return MIN_VERTICAL_EXAGGERATION;
+		}
 		return normalizeVerticalExaggerationScale(app.getSettings().VERTICAL_EXAGGERATION_SCALE.get());
 	}
 
@@ -357,7 +377,11 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void resetTransparencyToDefault() {
-		getTerrainMode().resetTransparencyToDefault();
+		TerrainMode mode = getTerrainMode();
+		mode.resetTransparencyToDefault();
+		if (mode.isTerrainShadows()) {
+			updateElevationConfiguration();
+		}
 	}
 
 	public void resetVerticalExaggerationToDefault() {
@@ -467,13 +491,6 @@ public class SRTMPlugin extends OsmandPlugin {
 				} else if (itemId == R.string.shared_string_terrain) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.TERRAIN, viewCoordinates);
 					return false;
-				} else if (itemId == R.string.relief_3d) {
-					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.RELIEF_3D, viewCoordinates);
-					} else {
-						ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
-					}
-					return false;
 				}
 				return true;
 			}
@@ -511,18 +528,6 @@ public class SRTMPlugin extends OsmandPlugin {
 						updateLayers(mapActivity, mapActivity);
 						mapActivity.refreshMapComplete();
 					});
-				} else if (itemId == R.string.relief_3d) {
-					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
-						settings.ENABLE_3D_MAPS.set(isChecked);
-						item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-						item.setSelected(isChecked);
-						item.setDescription(app.getString(isChecked ? get3DBuildingDetailLvlDescription() : R.string.shared_string_off));
-						uiAdapter.onDataSetChanged();
-
-						app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(mapActivity));
-					} else {
-						ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
-					}
 				}
 				return true;
 			}
@@ -557,10 +562,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		);
 
 		addBuildin3DItem(adapter, mapActivity);
-
-		if (app.useOpenGlRenderer()) {
-			add3DReliefItem(adapter, mapActivity, listener);
-		}
 	}
 
 	private void addBuildin3DItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
@@ -605,26 +606,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	private int get3DBuildingDetailLvlDescription() {
 		boolean level = BUILDINGS_3D_DETAIL_LEVEL.get();
 		return Building3DDetailLevel.Companion.fromValue(level).getLabelResId();
-	}
-
-	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity, @NonNull ItemClickListener listener) {
-		ContextMenuItem item = new ContextMenuItem(RELIEF_3D_ID)
-				.setTitleId(R.string.relief_3d, app)
-				.setIcon(R.drawable.ic_action_3d_relief)
-				.setListener(listener);
-
-		boolean enabled3DMode = settings.ENABLE_3D_MAPS.get();
-		if (!InAppPurchaseUtils.is3dMapsAvailable(app)) {
-			boolean nightMode = isNightMode(activity, app);
-			item.setUseNaturalSecondIconColor(true);
-			item.setSecondaryIcon(PurchasingUtils.getProFeatureIconId(nightMode));
-		} else {
-			item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
-			item.setSelected(enabled3DMode);
-			item.setSecondaryIcon(R.drawable.ic_action_additional_option);
-			item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
-		}
-		adapter.addItem(item);
 	}
 
 	private void createSphericalMapItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {

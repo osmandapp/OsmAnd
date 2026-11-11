@@ -69,7 +69,6 @@ import net.osmand.plus.plugins.panoramax.PanoramaxFiltersFragment;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.srtm.building.Buildings3DFragment;
 import net.osmand.plus.plugins.srtm.ContourLinesMenu;
-import net.osmand.plus.plugins.srtm.Relief3DFragment;
 import net.osmand.plus.plugins.srtm.TerrainFragment;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
@@ -336,8 +335,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.osm_notes);
 		} else if (isCurrentType(TERRAIN)) {
 			tv.setText(R.string.shared_string_terrain);
-		} else if (isCurrentType(RELIEF_3D)) {
-			tv.setText(R.string.relief_3d);
 		} else if (isCurrentType(BUILDINGS_3D)) {
 			tv.setText(R.string.enable_3d_objects);
 		} else if (isCurrentType(WIKIPEDIA)) {
@@ -606,8 +603,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					NauticalDepthContourFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TERRAIN)) {
 					TerrainFragment.showInstance(fragmentManager);
-				} else if (isCurrentType(RELIEF_3D)) {
-					Relief3DFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(BUILDINGS_3D)) {
 					Buildings3DFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(WEATHER)) {
@@ -1038,7 +1033,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isCurrentTypeHasIndividualFragment() {
 		return isCurrentType(
-				CONFIGURE_MAP, MAPILLARY, PANORAMAX, TERRAIN, RELIEF_3D, MAP_ROUTES, RENDERING_CLASS,
+				CONFIGURE_MAP, MAPILLARY, PANORAMAX, TERRAIN, MAP_ROUTES, RENDERING_CLASS,
 				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS,
 				NAUTICAL_DEPTH, COORDINATE_GRID, BUILDINGS_3D
 		);
