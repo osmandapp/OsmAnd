@@ -1,0 +1,562 @@
+package net.osmand.plus.plugins.topoprint.compose
+
+import net.osmand.PlatformUtil
+import org.apache.commons.logging.Log
+import java.util.Calendar
+import java.util.Locale
+import kotlin.math.cos
+import kotlin.math.hypot
+import kotlin.math.sin
+import kotlin.math.sqrt
+
+/**
+ * Composes the print-ready map SVG, ported from `topo_map_generator.py`
+ * (`draw_frame`/`draw_grid`/`draw_label`/`draw_scale_bar`/`draw_compass`).
+ *
+ * All coordinates are paper millimetres; the root viewBox spans the paper.
+ * The paper is true-north-up. The basemap raster is rendered Mercator-north-up
+ * and therefore embedded axis-aligned, centred on the frame, at its true
+ * georeferenced size (corner UTM spans x scale). Every grid line is
+ * drawn by interpolating its true UTM value along the georeferenced raster
+ * edges (top/bottom for easting lines, left/right for northing lines), so the
+ * grid inherits the convergence directly from the corner coordinates - no
+ * per-sheet rotation is applied to the map content.
+ *
+ * @param raster basemap source; `pngFileName` is the basemap file placed
+ *               next to the SVG (embedded as a data URI by the pipeline)
+ * @param attributionLines data-source credit lines (see [MapAttribution])
+ */
+class SvgMapComposer(
+	private val geometry: PrintGeometry,
+	private val label: String,
+	private val raster: Raster,
+	private val createdTimeMillis: Long,
+	private val attributionLines: List<String>
+) {
+
+	/** Georeferenced basemap raster: true UTM coordinates of its four corners. */
+	data class Raster(
+		val pngFileName: String,
+		val eastingTopLeft: Double,
+		val northingTopLeft: Double,
+		val eastingTopRight: Double,
+		val northingTopRight: Double,
+		val eastingBottomLeft: Double,
+		val northingBottomLeft: Double,
+		val eastingBottomRight: Double,
+		val northingBottomRight: Double
+	)
+
+	private val params = geometry.params
+	private val layout = params.layout
+	private val k = geometry.kMm
+
+	// Exact UTM spans of the raster in paper millimetres (top/bottom and
+	// left/right edges averaged against the UTM non-linearity). Placed
+	// axis-aligned and centred, the raster matches its true paper footprint
+	// within the UTM point-scale factor (<=0.1mm at 1:25000).
+	private val rasterWidthMm = ((raster.eastingTopRight - raster.eastingTopLeft +
+			raster.eastingBottomRight - raster.eastingBottomLeft) / 2.0) * k
+	private val rasterHeightMm = ((raster.northingTopLeft - raster.northingBottomLeft +
+			raster.northingTopRight - raster.northingBottomRight) / 2.0) * k
+
+	/** Placed basemap top-left corner in frame coordinates (set by [appendBasemapImage]). */
+	private var imageTlX = 0.0
+	private var imageTlY = 0.0
+
+	/** Builds the complete SVG document text. */
+	fun compose(): String {
+		val sb = StringBuilder(1 shl 20)
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+		sb.append("<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" ")
+		sb.append("viewBox=\"0 0 ${fmt(layout.paperWidthMm)} ${fmt(layout.paperHeightMm)}\" ")
+		sb.append("width=\"${fmt(layout.paperWidthMm)}mm\" height=\"${fmt(layout.paperHeightMm)}mm\">\n")
+		appendClipDef(sb)
+		appendTitle(sb)
+		appendFrame(sb)
+		appendScaleBar(sb)
+		appendCompass(sb)
+		sb.append("</svg>\n")
+		return sb.toString()
+	}
+
+	private fun appendClipDef(sb: StringBuilder) {
+		sb.append("  <defs><clipPath id=\"frame_clip\"><rect x=\"0\" y=\"0\" ")
+		sb.append("width=\"${fmt(layout.mapWidthMm)}\" height=\"${fmt(layout.mapHeightMm)}\" fill=\"none\"/>")
+		sb.append("</clipPath></defs>\n")
+	}
+
+	// ------------------------------------------------------------------- title
+
+	private fun appendTitle(sb: StringBuilder) {
+		val fontSize = layout.topMarginMm / 5
+		val labelY = layout.topMarginMm - fontSize * 1.5
+		val calendar = Calendar.getInstance().apply { timeInMillis = createdTimeMillis }
+		val dateText = "${calendar.get(Calendar.YEAR)}.${calendar.get(Calendar.MONTH) + 1}"
+
+		sb.append("  <g id=\"label\">\n")
+		sb.append(text("1:${params.scaleDenominator}", layout.leftMarginMm, labelY, fontSize, "start"))
+		sb.append(text(escape(label), layout.paperWidthMm / 2, labelY, fontSize, "middle"))
+		sb.append(text(dateText, layout.paperWidthMm - layout.rightMarginMm, labelY, fontSize, "end"))
+		sb.append("  </g>\n")
+	}
+
+	// ------------------------------------------------------------------- frame
+
+	private fun appendFrame(sb: StringBuilder) {
+		val labelSize = layout.leftMarginMm / 5
+		val prefixSize = labelSize * 0.8
+		val topLabelY = -labelSize * 0.8
+		val bottomLabelY = layout.mapHeightMm + labelSize * 1.5
+		val leftLabelX = -labelSize * 0.8
+		val rightLabelX = layout.mapWidthMm + labelSize * 0.8
+
+		sb.append("  <g id=\"frame\" transform=\"translate(${fmt(layout.leftMarginMm)} ${fmt(layout.topMarginMm)})\">\n")
+		sb.append("    <rect x=\"0\" y=\"0\" width=\"${fmt(layout.mapWidthMm)}\" height=\"${fmt(layout.mapHeightMm)}\" ")
+		sb.append("stroke=\"#000000\" stroke-width=\"1.0\" fill=\"none\"/>\n")
+
+		sb.append("    <g clip-path=\"url(#frame_clip)\">\n")
+		appendBasemapImage(sb)
+		sb.append("      <g id=\"grid\">\n")
+		appendGrid(sb)
+		sb.append("      </g>\n")
+		sb.append("    </g>\n")
+
+		appendGridLabels(sb, labelSize, prefixSize, topLabelY, bottomLabelY, leftLabelX, rightLabelX)
+		sb.append("  </g>\n")
+	}
+
+	private fun appendBasemapImage(sb: StringBuilder) {
+		// Axis-aligned and centred: the raster is rendered Mercator-north-up,
+		// the paper is true-north-up, so pixel axes match the paper axes and
+		// the georeferenced corners form an axis-aligned rectangle (verified
+		// against geodesic corner distances, <=0.1mm). The calibration makes
+		// the raster's corner-averaged centre coincide with the requested
+		// map centre, hence centring is the correct placement. Rotating the
+		// image by the convergence would rotate the whole map content.
+		imageTlX = (layout.mapWidthMm - rasterWidthMm) / 2.0
+		imageTlY = (layout.mapHeightMm - rasterHeightMm) / 2.0
+		LOG.info("placement: gamma=${geometry.convergenceDeg} k=$k imageTl=($imageTlX,$imageTlY) " +
+				"imageSize=($rasterWidthMm,$rasterHeightMm) frame=(${layout.mapWidthMm}x${layout.mapHeightMm})")
+		val href = escape(raster.pngFileName)
+		sb.append("      <image xlink:href=\"$href\" href=\"$href\" ")
+		sb.append("x=\"${fmt(imageTlX)}\" y=\"${fmt(imageTlY)}\" width=\"${fmt(rasterWidthMm)}\" height=\"${fmt(rasterHeightMm)}\" ")
+		sb.append("preserveAspectRatio=\"none\"/>\n")
+	}
+
+	// -------------------------------------------------------------------- grid
+
+	private data class GridLine(val metres: Long, val startX: Double, val startY: Double,
+	                            val endX: Double, val endY: Double)
+
+	/**
+	 * Grid spacing in ground metres: the smallest 1/2/5×10ⁿ unit whose
+	 * on-paper spacing reaches 2 cm at this scale. Neighbouring 1/2/5
+	 * candidates are at most 2.5× apart, so the spacing always stays under
+	 * the 8 cm upper bound; smaller paper at the same scale naturally picks
+	 * smaller units through the same rule.
+	 */
+	private fun gridStepMeters(): Long {
+		val steps = longArrayOf(100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000,
+				100000, 200000, 500000, 1000000, 2000000, 5000000)
+		for (step in steps) {
+			if (step * 1000.0 / params.scaleDenominator >= 20.0) {
+				return step
+			}
+		}
+		return steps.last()
+	}
+
+	/**
+	 * Vertical easting grid lines, interpolated along the georeferenced
+	 * top and bottom raster edges. The line positions inherit the UTM
+	 * convergence from the corner coordinates: on the true-north-up paper the
+	 * lines tilt by the local grid convergence without any explicit rotation.
+	 */
+	private fun eastingLines(): List<GridLine> {
+		val result = mutableListOf<GridLine>()
+		val step = gridStepMeters()
+		val from = Math.ceil(maxOf(raster.eastingTopLeft, raster.eastingBottomLeft).toDouble() / step).toLong()
+		val to = Math.floor(minOf(raster.eastingTopRight, raster.eastingBottomRight).toDouble() / step).toLong()
+		val spanTop = raster.eastingTopRight - raster.eastingTopLeft
+		val spanBottom = raster.eastingBottomRight - raster.eastingBottomLeft
+		for (m in from..to) {
+			val easting = m * step
+			val fxTop = (easting - raster.eastingTopLeft) / spanTop
+			val fxBottom = (easting - raster.eastingBottomLeft) / spanBottom
+			result.add(GridLine(easting,
+				imageTlX + fxTop * rasterWidthMm, imageTlY,
+				imageTlX + fxBottom * rasterWidthMm, imageTlY + rasterHeightMm))
+		}
+		return result
+	}
+
+	/** Horizontal northing grid lines, interpolated along the left and right raster edges. */
+	private fun northingLines(): List<GridLine> {
+		val result = mutableListOf<GridLine>()
+		val step = gridStepMeters()
+		val from = Math.ceil(raster.northingBottomRight.toDouble() / step).toLong()
+		val to = Math.floor(raster.northingTopLeft.toDouble() / step).toLong()
+		val spanLeft = raster.northingTopLeft - raster.northingBottomLeft
+		val spanRight = raster.northingTopRight - raster.northingBottomRight
+		for (m in from..to) {
+			val northing = m * step
+			val fyLeft = (raster.northingTopLeft - northing) / spanLeft
+			val fyRight = (raster.northingTopRight - northing) / spanRight
+			result.add(GridLine(northing,
+				imageTlX, imageTlY + fyLeft * rasterHeightMm,
+				imageTlX + rasterWidthMm, imageTlY + fyRight * rasterHeightMm))
+		}
+		return result
+	}
+
+	/** Grid lines at true grid positions, straight between the raster edge crossings. */
+	private fun appendGrid(sb: StringBuilder) {
+		for (line in eastingLines()) {
+			sb.append(line(line.startX, line.startY, line.endX, line.endY))
+		}
+		for (line in northingLines()) {
+			sb.append(line(line.startX, line.startY, line.endX, line.endY))
+		}
+	}
+
+	/**
+	 * Diagnostic: for whole-kilometre UTM intersections, the paper-mm position
+	 * where the vector grid is drawn versus where the placed raster puts the
+	 * same ground point (linear interpolation between the georeferenced
+	 * corners). With the corner-interpolated grid the two models coincide by
+	 * construction; a non-zero residual indicates a regression. Reported for
+	 * pipeline observability.
+	 */
+	fun gridVsRasterResiduals(points: List<Pair<Double, Double>>): String {
+		val spanTop = raster.eastingTopRight - raster.eastingTopLeft
+		val spanBottom = raster.eastingBottomRight - raster.eastingBottomLeft
+		val spanLeft = raster.northingTopLeft - raster.northingBottomLeft
+		val spanRight = raster.northingTopRight - raster.northingBottomRight
+		val sb = StringBuilder()
+		for ((easting, northing) in points) {
+			val fxTop = (easting - raster.eastingTopLeft) / spanTop
+			val fxBottom = (easting - raster.eastingBottomLeft) / spanBottom
+			val fyLeft = (raster.northingTopLeft - northing) / spanLeft
+			val fyRight = (raster.northingTopRight - northing) / spanRight
+			// grid line position at the point's northing (bilinear of the two edge crossings)
+			val fN = (raster.northingTopLeft - northing) / spanLeft
+			val gridX = imageTlX + (fxTop + (fxBottom - fxTop) * fN) * rasterWidthMm
+			val fE = (easting - raster.eastingTopLeft) / spanTop
+			val gridY = imageTlY + (fyLeft + (fyRight - fyLeft) * fE) * rasterHeightMm
+			val rasterX = imageTlX + (easting - raster.eastingTopLeft) / spanTop * rasterWidthMm
+			val rasterY = imageTlY + (raster.northingTopLeft - northing) / spanLeft * rasterHeightMm
+			sb.append(String.format(Locale.US,
+				"E%.0f/N%.0f grid=(%.3f,%.3f)mm raster=(%.3f,%.3f)mm d=%.3fmm; ",
+				easting, northing, gridX, gridY, rasterX, rasterY,
+				hypot(gridX - rasterX, gridY - rasterY)))
+		}
+		return sb.toString()
+	}
+
+	private fun appendGridLabels(sb: StringBuilder, labelSize: Double, prefixSize: Double,
+	                             topLabelY: Double, bottomLabelY: Double,
+	                             leftLabelX: Double, rightLabelX: Double) {
+		val labels = StringBuilder()
+		for (line in eastingLines()) {
+			val gradX = line.endX - line.startX
+			val gradY = line.endY - line.startY
+			if (gradY == 0.0) continue
+			val t0 = -line.startY / gradY
+			if (t0 >= 0) {
+				val x0 = line.startX + t0 * gradX
+				if (x0 in 0.0..layout.mapWidthMm) {
+					val (prefix, standard) = gridLabelParts(line.metres)
+					labels.append(text("$prefix", x0, topLabelY, prefixSize, "end"))
+					labels.append(text(standard, x0, topLabelY, labelSize, "start"))
+				}
+			}
+			val t1 = (layout.mapHeightMm - line.startY) / gradY
+			if (t1 <= 1.0) {
+				val x1 = line.startX + t1 * gradX
+				if (x1 in 0.0..layout.mapWidthMm) {
+					val (prefix, standard) = gridLabelParts(line.metres)
+					labels.append(text("$prefix", x1, bottomLabelY, prefixSize, "end"))
+					labels.append(text(standard, x1, bottomLabelY, labelSize, "start"))
+				}
+			}
+		}
+
+		val left = StringBuilder()
+		val right = StringBuilder()
+		for (line in northingLines()) {
+			val gradX = line.endX - line.startX
+			val gradY = line.endY - line.startY
+			if (gradX == 0.0) continue
+			val t0 = -line.startX / gradX
+			if (t0 >= 0) {
+				val y0 = line.startY + t0 * gradY
+				if (y0 in 0.0..layout.mapHeightMm) {
+					val (prefix, standard) = gridLabelParts(line.metres)
+					left.append(text("$prefix", layout.mapHeightMm - y0, 0.0, prefixSize, "end"))
+					left.append(text(standard, layout.mapHeightMm - y0, 0.0, labelSize, "start"))
+				}
+			}
+			val t1 = (layout.mapWidthMm - line.startX) / gradX
+			if (t1 <= 1.0) {
+				val y1 = line.startY + t1 * gradY
+				if (y1 in 0.0..layout.mapHeightMm) {
+					val (prefix, standard) = gridLabelParts(line.metres)
+					right.append(text("$prefix", y1, 0.0, prefixSize, "end"))
+					right.append(text(standard, y1, 0.0, labelSize, "start"))
+				}
+			}
+		}
+
+		sb.append("    <!-- grid labels -->\n")
+		sb.append(labels)
+		sb.append("    <g transform=\"translate(${fmt(leftLabelX)} ${fmt(layout.mapHeightMm)}) rotate(-90)\">")
+		sb.append(left).append("</g>\n")
+		sb.append("    <g transform=\"translate(${fmt(rightLabelX)} 0) rotate(90)\">")
+		sb.append(right).append("</g>\n")
+	}
+
+	// --------------------------------------------------------------- scale bar
+
+	private fun appendScaleBar(sb: StringBuilder) {
+		val fontSize = layout.bottomMarginMm * 0.6 / 15
+		val barHeight = fontSize / 2
+		val barY = fontSize * 6
+		val textY = barY - fontSize
+		val unitY = barY + fontSize * 1.5
+
+		// Survey-style two-part bar: a left extension of one base unit in
+		// fine grey/white steps, then the main section counting up from 0
+		// at its start. The division scheme follows the ground length of
+		// half the map width: under 2 km → 10 m fine / 100 m unit with all
+		// labels in plain metres ("m"); otherwise → 100 m fine / 1 km unit
+		// ("1 / 0.5 / 0", "km"). A fine step under 3 mm on paper is
+		// multiplied by 5 (10→50 m, 100→500 m) when under 2 mm on paper.
+		// "Half the page" below refers to half the paper width.
+		val minBarMm = layout.mapWidthMm / 3.0
+		val halfPaperMm = layout.paperWidthMm / 2.0
+		val halfGroundM = halfPaperMm * params.scaleDenominator / 1000.0
+		val metricMode = halfGroundM < 2000.0
+		val unitM = if (metricMode) 100L else 1000L
+		var fineM = if (metricMode) 10L else 100L
+		if (fineM * 1000.0 / params.scaleDenominator < 2.0) {
+			fineM *= 5L
+		}
+		val unitMm = unitM * 1000.0 / params.scaleDenominator
+		val fineMm = fineM * 1000.0 / params.scaleDenominator
+		val needUnits = Math.ceil(minBarMm / unitMm).toInt().coerceAtLeast(1)
+		// Hard cap: the whole bar (fine extension + main section) takes at
+		// most half of the paper width.
+		val pageCapUnits = (halfPaperMm / unitMm).toInt() - 1
+		val mainUnits = when {
+			needUnits >= 10 -> 10
+			needUnits >= 5 -> 5
+			else -> needUnits
+		}.coerceIn(0, pageCapUnits.coerceAtLeast(0))
+		val barWidth = unitMm * (1 + mainUnits)
+
+		val segments = mutableListOf<Pair<Double, Double>>()
+		// 0–1 unit drawn in fine steps (mm on paper, capped at the unit
+		// paper length): 100 m / 500 m / 10 m per segment.
+		var x = 0.0
+		while (x < unitMm - 0.01) {
+			val w = minOf(fineMm, unitMm - x)
+			segments.add(Pair(x, x + w))
+			x += w
+		}
+		for (k in 1..mainUnits) {
+			segments.add(Pair(unitMm * k, unitMm * (k + 1)))
+		}
+
+		sb.append("  <g id=\"scale_bar\" transform=\"translate(${fmt(layout.leftMarginMm)} ")
+		sb.append("${fmt(layout.paperHeightMm - layout.bottomMarginMm)})\">\n")
+		for ((idx, seg) in segments.withIndex()) {
+			sb.append("    <rect x=\"${fmt(seg.first)}\" y=\"${fmt(barY - barHeight)}\" ")
+			sb.append("width=\"${fmt(seg.second - seg.first)}\" height=\"${fmt(barHeight)}\" stroke=\"#000000\" stroke-width=\"0.2\" ")
+			sb.append("fill=\"${if (idx % 2 == 0) "#cccccc" else "none"}\"/>\n")
+		}
+		// Labels: the fine extension reads unit / unit/2 / 0 (left to
+		// right) — "1 / 0.5 / 0" in km mode, plain metres otherwise — and
+		// the main section counts up from 0 at its start: every unit when
+		// it is under 5 units, otherwise only 1 and 5 (and 10 for a
+		// 10-unit main section).
+		fun unitLabel(units: Int): String =
+			if (unitM == 1000L) trimNumber(units.toDouble()) else (units * unitM).toString()
+		sb.append(text(unitLabel(1), 0.0, textY, fontSize, "middle"))
+		if (unitMm / 2.0 >= 4.0) {
+			val halfLabel = if (unitM == 1000L) "0.5" else (unitM / 2L).toString()
+			sb.append(text(halfLabel, unitMm / 2.0, textY, fontSize, "middle"))
+		}
+		sb.append(text("0", unitMm, textY, fontSize, "middle"))
+		if (mainUnits < 5) {
+			for (k in 1..mainUnits) {
+				sb.append(text(unitLabel(k), unitMm * (k + 1), textY, fontSize, "middle"))
+			}
+		} else {
+			sb.append(text(unitLabel(1), unitMm * 2, textY, fontSize, "middle"))
+			sb.append(text(unitLabel(5), unitMm * 6, textY, fontSize, "middle"))
+			if (mainUnits == 10) {
+				sb.append(text(unitLabel(10), unitMm * 11, textY, fontSize, "middle"))
+			}
+		}
+		sb.append(text(if (unitM == 1000L) "km" else "m", barWidth, unitY, fontSize, "end"))
+		sb.append(text("WGS84 UTM Zone ${geometry.zoneLabel}", 0.0,
+			unitY + fontSize * 1.5, fontSize, "start"))
+		val gray = GRAY_COLOR
+		val centerUtm = geometry.centerUtm
+		sb.append(text("Parameters: ${geometry.zoneLabel} ${centerUtm.easting.toInt()} " +
+				"${centerUtm.northing.toInt()} 1:${params.scaleDenominator}",
+			0.0, unitY + fontSize * 3, fontSize, "start", color = gray))
+		sb.append(text("Map is provided by OsmAnd Maps &amp; Navigation https://osmand.net/",
+			0.0, unitY + fontSize * 4.5, fontSize, "start", color = gray))
+		// Data-source credits: reflect what actually contributed to this
+		// render (space-bounded, see MapAttribution); the OsmAnd license
+		// stays the authoritative full list.
+		attributionLines.forEachIndexed { index, line ->
+			sb.append(text(line, 0.0,
+				unitY + fontSize * (6 + index * 1.5), fontSize, "start", color = gray))
+		}
+		sb.append("  </g>\n")
+	}
+
+	// ----------------------------------------------------------------- compass
+
+	private fun appendCompass(sb: StringBuilder) {
+		val compassSize = layout.bottomMarginMm * 0.6
+		val lineLength = compassSize * 0.85
+		val gamma = geometry.convergenceDeg
+		val gammaRad = Math.toRadians(gamma)
+		val decl = geometry.declinationDeg
+		val declRad = Math.toRadians(decl)
+
+		val starRadius = (compassSize - lineLength) * 0.2
+		val starTransform = "translate(0 ${fmt(compassSize - lineLength)}) rotate(-90)"
+
+		val labelSize = compassSize / 15
+		val labelMargin = labelSize / 2
+		val angleSize = compassSize / 20
+		val angleMargin = angleSize / 2
+
+		sb.append("  <g id=\"compass\" transform=\"translate(")
+		sb.append("${fmt(layout.paperWidthMm - layout.rightMarginMm - compassSize * 0.5)} ")
+		sb.append("${fmt(layout.paperHeightMm - layout.bottomMarginMm + (layout.bottomMarginMm - compassSize) / 4)})\">\n")
+
+		// True north line + label.
+		sb.append("    <path d=\"M 0 ${fmt(compassSize)} L 0 ${fmt(compassSize - lineLength)}\" ")
+		sb.append("stroke=\"#000000\" stroke-width=\"0.2\" fill=\"none\"/>\n")
+		sb.append(text("TN", labelMargin, compassSize - lineLength + labelMargin, labelSize, "start"))
+
+		// Magnetic north.
+		val mnX = lineLength * sin(declRad)
+		val mnY = compassSize - lineLength * cos(declRad)
+		sb.append("    <path d=\"M 0 ${fmt(compassSize)} L ${fmt(mnX)} ${fmt(mnY)}\" ")
+		sb.append("stroke=\"#000000\" stroke-width=\"0.1\" fill=\"none\"/>\n")
+		val mnAnchor = if (mnX < 0) "end" else "start"
+		val mnTextX = if (mnX < 0) mnX - labelMargin else mnX + labelMargin
+		sb.append(text("MN", mnTextX, mnY + labelSize * 1.5, labelSize, mnAnchor))
+		val mnAngleAnchor = if (decl < 0) "end" else "start"
+		val mnAngleX = lineLength * 0.5 * sin(declRad) + (if (decl < 0) -angleMargin else angleMargin)
+		sb.append(text("${fmt2(decl)}°", mnAngleX,
+			compassSize - lineLength * 0.5 * cos(declRad) - angleMargin, angleSize, mnAngleAnchor))
+		sb.append("    <path id=\"tn_mn_arc\" d=\"M 0 ${fmt(compassSize - lineLength * 0.85)} ")
+		sb.append("A ${fmt(lineLength * 0.85)} ${fmt(lineLength * 0.85)} 0 0 0 ")
+		sb.append("${fmt(lineLength * 0.85 * sin(declRad))} ${fmt(compassSize - lineLength * 0.85 * cos(declRad))}\" ")
+		sb.append("fill=\"none\" stroke=\"#000000\" stroke-width=\"0.1\" stroke-dasharray=\"0.1 0.8\"/>\n")
+
+		// Grid north.
+		val gnX = lineLength * 0.75 * sin(gammaRad)
+		val gnY = compassSize - lineLength * 0.75 * cos(gammaRad)
+		sb.append("    <path d=\"M 0 ${fmt(compassSize)} L ${fmt(gnX)} ${fmt(gnY)}\" ")
+		sb.append("stroke=\"#000000\" stroke-width=\"0.1\" fill=\"none\"/>\n")
+		val gnAnchor = if (gnX < 0) "end" else "start"
+		val gnTextX = if (gnX < 0) gnX - labelMargin else gnX + labelMargin
+		sb.append(text("GN", gnTextX, gnY + labelMargin, labelSize, gnAnchor))
+		val gnAngleAnchor = if (gamma < 0) "end" else "start"
+		val gnAngleX = lineLength * 0.375 * sin(gammaRad) + (if (gamma < 0) -angleMargin else angleMargin)
+		sb.append(text("${fmt2(gamma)}°", gnAngleX,
+			compassSize - lineLength * 0.375 * cos(gammaRad) - angleMargin, angleSize, gnAngleAnchor))
+		sb.append("    <path id=\"tn_gn_arc\" d=\"M 0 ${fmt(compassSize - lineLength * 0.75)} ")
+		sb.append("A ${fmt(lineLength * 0.75)} ${fmt(lineLength * 0.75)} 0 0 0 ${fmt(gnX)} ${fmt(gnY)}\" ")
+		sb.append("fill=\"none\" stroke=\"#000000\" stroke-width=\"0.1\" stroke-dasharray=\"0.1 0.8\"/>\n")
+
+		// Compass star.
+		sb.append("    <path d=\"${starPath(starRadius)}\" fill=\"#000000\" transform=\"$starTransform\"/>\n")
+		sb.append("  </g>\n")
+	}
+
+	/** Five-pointed compass star, ported from `draw_star_path`. */
+	private fun starPath(radius: Double): String {
+		val innerRadius = radius * (3 - sqrt(5.0)) / 2
+		val sb = StringBuilder()
+		sb.append("M ${fmt(radius)} 0")
+		var angle = 36
+		while (angle < 360) {
+			val rad = Math.toRadians(angle.toDouble())
+			val nextRad = Math.toRadians((angle + 36).toDouble())
+			sb.append(" L ${fmt(innerRadius * cos(rad))} ${fmt(innerRadius * sin(rad))}")
+			sb.append(" L ${fmt(radius * cos(nextRad))} ${fmt(radius * sin(nextRad))}")
+			angle += 72
+		}
+		sb.append(" Z")
+		return sb.toString()
+	}
+
+	// ----------------------------------------------------------------- helpers
+
+	private fun line(x1: Double, y1: Double, x2: Double, y2: Double): String =
+		"          <path d=\"M ${fmt(x1)} ${fmt(y1)} L ${fmt(x2)} ${fmt(y2)}\" " +
+				"stroke=\"#000000\" stroke-width=\"0.1\" fill=\"none\"/>\n"
+
+	private fun text(content: String, x: Double, y: Double, fontSize: Double, anchor: String,
+	                 color: String = "#000000"): String =
+		"      <text x=\"${fmt(x)}\" y=\"${fmt(y)}\" fill=\"$color\" stroke=\"$color\" stroke-width=\"0.1\" " +
+				"font-family=\"$FONT_FAMILY\" font-size=\"${fmt(fontSize)}\" text-anchor=\"$anchor\">$content</text>\n"
+
+	/**
+	 * Splits a grid line's UTM value (metres) into the two-part edge label:
+	 * the downsized prefix (millions + hundred-thousands digits) and the
+	 * normal-size standard digits — thousands+hectometres when the grid unit
+	 * is finer than 1 km (e.g. 730500 m on a 500 m grid → "7" + "305"),
+	 * thousands only at km-or-coarser units (731000 m on a 1 km grid →
+	 * "7" + "31").
+	 */
+	private fun gridLabelParts(metres: Long): Pair<Long, String> {
+		val subKmGrid = gridStepMeters() < 1000L
+		val prefix = metres / 100000L
+		val standardDigits = if (subKmGrid) 3 else 2
+		val divisor = if (subKmGrid) 100L else 1000L
+		val modulus = if (subKmGrid) 1000L else 100L
+		val standard = String.format(Locale.US, "%0${standardDigits}d", metres / divisor % modulus)
+		return Pair(prefix, standard)
+	}
+
+	private fun escape(value: String): String = value
+		.replace("&", "&amp;")
+		.replace("<", "&lt;")
+		.replace(">", "&gt;")
+		.replace("\"", "&quot;")
+
+	private fun trimNumber(value: Double): String {
+		val formatted = String.format(Locale.US, "%.1f", value)
+		return if (formatted.endsWith(".0")) formatted.substring(0, formatted.length - 2) else formatted
+	}
+
+	private fun fmt(value: Double): String {
+		var formatted = String.format(Locale.US, "%.4f", value)
+		while (formatted.contains(".") && formatted.endsWith("0")) {
+			formatted = formatted.substring(0, formatted.length - 1)
+		}
+		if (formatted.endsWith(".")) {
+			formatted = formatted.substring(0, formatted.length - 1)
+		}
+		return if (formatted == "-0") "0" else formatted
+	}
+
+	private fun fmt2(value: Double): String = String.format(Locale.US, "%.2f", value)
+
+	companion object {
+		private val LOG: Log = PlatformUtil.getLog(SvgMapComposer::class.java)
+		private const val FONT_FAMILY = "Noto Sans CJK SC, Noto Sans, sans-serif"
+		private const val GRAY_COLOR = "#808080"
+	}
+}

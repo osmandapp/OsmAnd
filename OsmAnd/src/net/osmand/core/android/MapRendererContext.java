@@ -104,6 +104,16 @@ public class MapRendererContext {
 	private float cachedReferenceTileSize;
 	private boolean heightmapsActive;
 
+	// Offscreen print overrides (both null on the live map): mapDensityOverride
+	// replaces settings.MAP_DENSITY for the base map presentation;
+	// symbolsScaleOverride replaces settings.TEXT_SCALE (symbolsScaleFactor) —
+	// the poster's knob for label size and, through collision avoidance,
+	// label density, independent of the app setting.
+	@Nullable
+	private Float mapDensityOverride;
+	@Nullable
+	private Float symbolsScaleOverride;
+
 	public boolean showDebugPrimivitisationTiles = false;
 
 	public MapRendererContext(OsmandApplication app, float density) {
@@ -191,6 +201,25 @@ public class MapRendererContext {
 		return density;
 	}
 
+	/**
+	 * Overrides the MAP_DENSITY setting (mapScaleFactor) used by the base map
+	 * presentation of this context. Null restores the setting-driven
+	 * behaviour. Call before {@link #updateMapSettings(boolean)}.
+	 */
+	public void setMapDensityOverride(@Nullable Float mapDensityOverride) {
+		this.mapDensityOverride = mapDensityOverride;
+	}
+
+	/**
+	 * Overrides the TEXT_SCALE setting (symbolsScaleFactor) used by this
+	 * context's presentation — label size, and through collision avoidance
+	 * label density, for offscreen print rendering. Null restores the
+	 * setting-driven behaviour. Call before {@link #updateMapSettings(boolean)}.
+	 */
+	public void setSymbolsScaleOverride(@Nullable Float symbolsScaleOverride) {
+		this.symbolsScaleOverride = symbolsScaleOverride;
+	}
+
 	protected int getRasterTileSize() {
 		float mapDensity = OsmandMap.getMapDensitySettings(app);
 		float mapDensityAligned = mapDensity > 2.0f ? 2.0f : Math.min(mapDensity, 1.0f);
@@ -248,11 +277,12 @@ public class MapRendererContext {
 		// must match getRasterTileSize(): the raster tile size and the style scale factor
 		// are two halves of the same magnifier, mixing the phone and the Android Auto values
 		// stretches the rendered tiles
-		float mapDensity = OsmandMap.getMapDensitySettings(app);
-		float textScale = settings.TEXT_SCALE.get();
+		float mapDensity = mapDensityOverride != null ? mapDensityOverride : OsmandMap.getMapDensitySettings(app);
+		float textScale = symbolsScaleOverride != null ? symbolsScaleOverride : settings.TEXT_SCALE.get();
 		QStringStringHash styleSettings = getMapStyleSettings();
 
-		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, styleSettings, density, mapDensity, textScale);
+		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, styleSettings,
+				density, mapDensity, textScale, mapDensityOverride, symbolsScaleOverride);
 		boolean recreateMapPresentation = cachedMapPresentation == null
 				|| cachedMapPresentation.shouldRecreateMapPresentation(pres);
 		boolean languageParamsChanged = cachedMapPresentation != null
@@ -722,6 +752,10 @@ public class MapRendererContext {
 		float displayDensityFactor;
 		float mapScaleFactor;
 		float symbolsScaleFactor;
+		@Nullable
+		Float mapDensityOverride;
+		@Nullable
+		Float symbolsScaleOverride;
 
 		public CachedMapPresentation(@NonNull String langId,
 		                             @NonNull LanguagePreference langPref,
@@ -729,7 +763,9 @@ public class MapRendererContext {
 		                             QStringStringHash styleSettings,
 		                             float displayDensityFactor,
 		                             float mapScaleFactor,
-		                             float symbolsScaleFactor) {
+		                             float symbolsScaleFactor,
+		                             @Nullable Float mapDensityOverride,
+		                             @Nullable Float symbolsScaleOverride) {
 			this.langId = langId;
 			this.langPref = langPref;
 			this.mapStyle = mapStyle;
@@ -737,6 +773,8 @@ public class MapRendererContext {
 			this.displayDensityFactor = displayDensityFactor;
 			this.mapScaleFactor = mapScaleFactor;
 			this.symbolsScaleFactor = symbolsScaleFactor;
+			this.mapDensityOverride = mapDensityOverride;
+			this.symbolsScaleOverride = symbolsScaleOverride;
 		}
 
 		public boolean shouldRecreateMapPresentation(@NonNull CachedMapPresentation other) {
@@ -744,6 +782,8 @@ public class MapRendererContext {
 					|| Double.compare(mapScaleFactor, other.mapScaleFactor) != 0
 					|| Double.compare(symbolsScaleFactor, other.symbolsScaleFactor) != 0
 					|| !Algorithms.objectEquals(mapStyle, other.mapStyle)
+					|| !Algorithms.objectEquals(mapDensityOverride, other.mapDensityOverride)
+					|| !Algorithms.objectEquals(symbolsScaleOverride, other.symbolsScaleOverride)
 					|| styleSettingsChanged(other);
 		}
 
