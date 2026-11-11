@@ -111,6 +111,21 @@ public class TransportRouteProvidersTest {
 	}
 
 	@Test
+	public void sameResolvedDepartureReachesEveryProvider() throws Exception {
+		StubProvider first = new StubProvider(null);
+		StubProvider second = new StubProvider(null);
+		providers.add(first);
+		providers.add(second);
+		calculate(null);
+		calculate(0L);
+		assertEquals(NOW, first.requests.get(0).getDepartureTimeSec());
+		assertEquals(NOW, second.requests.get(0).getDepartureTimeSec());
+		// 0 is a real time (the epoch), not a synonym of "now"
+		assertEquals(0L, first.requests.get(1).getDepartureTimeSec());
+		assertEquals(0L, second.requests.get(1).getDepartureTimeSec());
+	}
+
+	@Test
 	public void requestParamsAreReadOnly() throws Exception {
 		StubProvider p = new StubProvider(null);
 		providers.add(p);

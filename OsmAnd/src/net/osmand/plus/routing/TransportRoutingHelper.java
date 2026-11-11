@@ -77,6 +77,7 @@ public class TransportRoutingHelper {
 
 	private LatLon startLocation;
 	private LatLon endLocation;
+	private volatile Long departureTimeSec;
 
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
@@ -117,6 +118,20 @@ public class TransportRoutingHelper {
 
 	public LatLon getEndLocation() {
 		return endLocation;
+	}
+
+	/**
+	 * The "depart at" time of the next calculations in epoch seconds, or null for "now". It is forgotten
+	 * when the route is cancelled. Only a {@link TransportRouteProvider} receives it, the OBF planner has
+	 * no timetable to use it with. Call {@link #recalculateRouteDueToSettingsChange()} to apply a change.
+	 */
+	@Nullable
+	public Long getDepartureTimeSec() {
+		return departureTimeSec;
+	}
+
+	public void setDepartureTimeSec(@Nullable Long departureTimeSec) {
+		this.departureTimeSec = departureTimeSec;
 	}
 
 	public int getCurrentRoute() {
@@ -228,6 +243,7 @@ public class TransportRoutingHelper {
 		TransportRouteCalculationParams params = new TransportRouteCalculationParams();
 		params.start = start;
 		params.end = end;
+		params.departureTimeSec = departureTimeSec;
 		params.mode = applicationMode;
 		params.type = RouteService.OSMAND;
 		params.ctx = app;
@@ -371,6 +387,9 @@ public class TransportRoutingHelper {
 			}
 		});
 		this.endLocation = newFinalLocation;
+		if (newFinalLocation == null) {
+			departureTimeSec = null;
+		}
 		stopCalculation();
 	}
 
@@ -429,6 +448,8 @@ public class TransportRoutingHelper {
 
 		public LatLon start;
 		public LatLon end;
+		/** Epoch seconds the traveller wants to leave the start at, null for "now". */
+		public Long departureTimeSec;
 
 		public OsmandApplication ctx;
 		public ApplicationMode mode;
@@ -556,7 +577,7 @@ public class TransportRoutingHelper {
 
 			TransportRouteProviders providers = transportRoutingHelper.routeProviders;
 			if (!providers.isEmpty()) {
-				List<TransportRouteResult> providerRoutes = providers.calculate(params.start, params.end, null,
+				List<TransportRouteResult> providerRoutes = providers.calculate(params.start, params.end, params.departureTimeSec,
 						params.params, cfg, params.calculationProgress);
 				if (providerRoutes != null) {
 					return providerRoutes;
