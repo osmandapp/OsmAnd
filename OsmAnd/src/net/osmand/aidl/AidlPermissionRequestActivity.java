@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +49,9 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 	public static final String EXTRA_GROUPS = "groups";
 	public static final String EXTRA_GRANTED_GROUPS = "granted_groups";
 
+	private static final String CHECKED_GROUPS_KEY = "checked_groups";
+
+	private final Set<AidlPermissionGroup> granted = new LinkedHashSet<>();
 	@Nullable
 	private AlertDialog dialog;
 
@@ -64,7 +68,17 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 			return;
 		}
 		// also after a recreation (rotation, theme): the old dialog is gone with the old window
-		showDialog(app, pack, requested);
+		showDialog(app, pack, requested, savedInstanceState);
+	}
+
+	@Override
+	protected void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		ArrayList<String> ids = new ArrayList<>();
+		for (AidlPermissionGroup group : granted) {
+			ids.add(group.getId());
+		}
+		outState.putStringArrayList(CHECKED_GROUPS_KEY, ids);
 	}
 
 	@Override
@@ -76,7 +90,8 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 		}
 	}
 
-	private void showDialog(OsmandApplication app, String pack, List<AidlPermissionGroup> requested) {
+	private void showDialog(OsmandApplication app, String pack, List<AidlPermissionGroup> requested,
+	                        @Nullable Bundle savedInstanceState) {
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		Context context = new ContextThemeWrapper(this,
 				nightMode ? R.style.OsmandMaterialDarkTheme : R.style.OsmandMaterialLightTheme);
@@ -91,10 +106,12 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 			LOG.error(e);
 		}
 		ConnectedApp connectedApp = app.getAidlApi().getOrCreateConnectedApp(pack);
-		Set<AidlPermissionGroup> granted = new LinkedHashSet<>();
+		List<String> checkedIds = savedInstanceState != null
+				? savedInstanceState.getStringArrayList(CHECKED_GROUPS_KEY) : null;
 		for (AidlPermissionGroup group : requested) {
-			// only safe groups are preselected, the user turns on the others
-			if (group.isSafe() || connectedApp.isEnabled() && connectedApp.isGroupGranted(group)) {
+			// after a recreation the user's choice, else only safe groups are preselected, the user turns on the others
+			if (checkedIds != null ? checkedIds.contains(group.getId())
+					: group.isSafe() || connectedApp.isEnabled() && connectedApp.isGroupGranted(group)) {
 				granted.add(group);
 			}
 		}
