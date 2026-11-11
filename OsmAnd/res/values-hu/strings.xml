@@ -5425,5 +5425,6 @@
     <string name="free_region_other_regions_need_maps_plus">Más régiókhoz szükség van a Maps+ alkalmazásra: %1$s</string>
     <string name="visualization">Megjelenítés</string>
     <string name="terrain_shadows">Domborzatárnyékolás</string>
-    <string name="terrain_shadows_description">Valós idejű dinamikus árnyékolás 3D terephez. Kiemeli a táj geometriáját minimális teljesítménybeli hatással.</string>
+    <string name="terrain_shadows_description">Valós idejű dinamikus árnyékolás 3D-domborzathoz. Kiemeli a táj geometriáját, miközben a teljesítményre gyakorolt hatása minimális.</string>
+    <string name="terrain_shadows_relief_3d_footer">A 3D-domborzat automatikusan lett engedélyezve, mivel ez szükséges a terepárnyékok megjelenítéséhez.</string>
 </resources>
