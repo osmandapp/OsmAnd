@@ -5423,4 +5423,7 @@
     <string name="outdated_maps_warning_title">Frissítse a saját térképeit</string>
     <string name="outdated_maps_warning_descr">Az új kereső használatához szükség van az ehhez a verzióhoz tartozó térképekre. Frissítse az összes saját térképét; ez ingyenes.</string>
     <string name="free_region_other_regions_need_maps_plus">Más régiókhoz szükség van a Maps+ alkalmazásra: %1$s</string>
+    <string name="visualization">Megjelenítés</string>
+    <string name="terrain_shadows">Domborzatárnyékolás</string>
+    <string name="terrain_shadows_description">Valós idejű dinamikus árnyékolás 3D terephez. Kiemeli a táj geometriáját minimális teljesítménybeli hatással.</string>
 </resources>
