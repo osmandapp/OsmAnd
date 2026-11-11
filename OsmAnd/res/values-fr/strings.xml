@@ -5425,4 +5425,8 @@
     <string name="outdated_maps_warning_title">Mettre à jour vos cartes</string>
     <string name="outdated_maps_warning_descr">La nouvelle recherche fonctionne avec les cartes de cette version. Mettez à jour toutes vos cartes, c\'est gratuit.</string>
     <string name="free_region_other_regions_need_maps_plus">D\'autres régions requièrent Maps+ : %1$s</string>
+    <string name="terrain_shadows">Ombrage du relief</string>
+    <string name="terrain_shadows_description">Ombrage dynamique et temps réel du relief 3D. Met en valeur la géométrie du paysage avec un impact minimal sur les performances.</string>
+    <string name="terrain_shadows_relief_3d_footer">Le relief 3D est activé automatiquement car il est requis pour afficher l\'ombrage du relief.</string>
+    <string name="visualization">Visualisation</string>
 </resources>
