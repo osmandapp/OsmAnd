@@ -698,20 +698,31 @@ class SvgMapComposer(
 			sb.append("width=\"${fmt(seg.second - seg.first)}\" height=\"${fmt(barHeight)}\" stroke=\"#000000\" stroke-width=\"0.2\" ")
 			sb.append("fill=\"${if (idx % 2 == 0) "#cccccc" else "none"}\"/>\n")
 		}
-		sb.append(text(spec.unitLabel(1), 0.0, textY, fontSize, "middle"))
-		if (unitMm / 2.0 >= 4.0) {
-			sb.append(text(spec.halfLabel, unitMm / 2.0, textY, fontSize, "middle"))
-		}
-		sb.append(text("0", unitMm, textY, fontSize, "middle"))
-		if (mainUnits < 5) {
-			for (k in 1..mainUnits) {
-				sb.append(text(spec.unitLabel(k), unitMm * (k + 1), textY, fontSize, "middle"))
+		if (mainUnits == 0) {
+			// Extension-only bar: nothing follows the extension, so it reads
+			// like a plain ruler — 0 at the left edge, the base unit (the
+			// bar's maximum) at its right end.
+			sb.append(text("0", 0.0, textY, fontSize, "middle"))
+			if (unitMm / 2.0 >= 4.0) {
+				sb.append(text(spec.halfLabel, unitMm / 2.0, textY, fontSize, "middle"))
 			}
+			sb.append(text(spec.unitLabel(1), unitMm, textY, fontSize, "middle"))
 		} else {
-			sb.append(text(spec.unitLabel(1), unitMm * 2, textY, fontSize, "middle"))
-			sb.append(text(spec.unitLabel(5), unitMm * 6, textY, fontSize, "middle"))
-			if (mainUnits == 10) {
-				sb.append(text(spec.unitLabel(10), unitMm * 11, textY, fontSize, "middle"))
+			sb.append(text(spec.unitLabel(1), 0.0, textY, fontSize, "middle"))
+			if (unitMm / 2.0 >= 4.0) {
+				sb.append(text(spec.halfLabel, unitMm / 2.0, textY, fontSize, "middle"))
+			}
+			sb.append(text("0", unitMm, textY, fontSize, "middle"))
+			if (mainUnits < 5) {
+				for (k in 1..mainUnits) {
+					sb.append(text(spec.unitLabel(k), unitMm * (k + 1), textY, fontSize, "middle"))
+				}
+			} else {
+				sb.append(text(spec.unitLabel(1), unitMm * 2, textY, fontSize, "middle"))
+				sb.append(text(spec.unitLabel(5), unitMm * 6, textY, fontSize, "middle"))
+				if (mainUnits == 10) {
+					sb.append(text(spec.unitLabel(10), unitMm * 11, textY, fontSize, "middle"))
+				}
 			}
 		}
 		sb.append(text(spec.caption, barWidth, unitY, fontSize, "end"))
