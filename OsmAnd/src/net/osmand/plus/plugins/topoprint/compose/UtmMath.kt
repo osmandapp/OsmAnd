@@ -84,10 +84,14 @@ object UtmMath {
 	}
 
 	/**
-	 * Converts to UTM forcing the given zone. Needed for points whose
-	 * automatic zone differs from the map centre's zone (e.g. a wide print
-	 * extent near a zone boundary) — mixing zones inside one map breaks
-	 * all easting arithmetic.
+	 * Converts to UTM forcing the given zone, with the hemisphere taken from
+	 * the point's own latitude.
+	 *
+	 * WARNING: each point gets its own hemisphere convention, so northings of
+	 * points on opposite sides of the equator differ by ~10,000,000 m and
+	 * must never be mixed arithmetically. For sheet-wide geometry (frames,
+	 * grids, coverage checks) use [fromLatLon] with an explicit hemisphere —
+	 * the centre's — so northings stay continuous across the equator.
 	 */
 	fun fromLatLon(latitude: Double, longitude: Double, zoneNumber: Int): UtmCoordinate {
 		val point = UTMPoint.LLtoUTM(

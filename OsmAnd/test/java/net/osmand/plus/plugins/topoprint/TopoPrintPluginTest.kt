@@ -5,8 +5,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.topoprint.compose.PosterGeometry
-import net.osmand.plus.plugins.topoprint.compose.SvgPosterComposer
+import net.osmand.plus.plugins.topoprint.compose.PrintGeometry
+import net.osmand.plus.plugins.topoprint.compose.SvgMapComposer
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -57,7 +57,7 @@ class TopoPrintPluginTest {
 		assertEquals(expectedWidthPx, params.rasterWidthPx)
 
 		// Poster geometry for the UTM 50S 431000 4425000 test point.
-		val geometry = PosterGeometry.compute(params, 39.972342, 116.191987, -7.5)
+		val geometry = PrintGeometry.compute(params, 39.972342, 116.191987, -7.5)
 		assertEquals(50, geometry.centerUtm.zoneNumber)
 		assertEquals("50S", geometry.zoneLabel)
 		// The poster uses the numerical convergence (bearing centre →
@@ -68,13 +68,13 @@ class TopoPrintPluginTest {
 		assertTrue(geometry.rotatedCoverageHeightMeters >= params.mapHeightMeters)
 
 		// SVG composition: raster rectangle slightly larger than the grid frame.
-		val raster = SvgPosterComposer.Raster(
+		val raster = SvgMapComposer.Raster(
 			"test_basemap.png",
 			eastingTopLeft = geometry.grid.left - 500.0, northingTopLeft = geometry.grid.top + 500.0,
 			eastingTopRight = geometry.grid.right + 500.0, northingTopRight = geometry.grid.top + 500.0,
 			eastingBottomLeft = geometry.grid.left - 500.0, northingBottomLeft = geometry.grid.bottom - 500.0,
 			eastingBottomRight = geometry.grid.right + 500.0, northingBottomRight = geometry.grid.bottom - 500.0)
-		val svg = SvgPosterComposer(geometry, "北京冒烟测试", raster, 1767225600000L).compose()
+		val svg = SvgMapComposer(geometry, "北京冒烟测试", raster, 1767225600000L).compose()
 		assertTrue(svg.contains("<g id=\"frame\""))
 		assertTrue(svg.contains("<g id=\"grid\">"))
 		assertTrue(svg.contains("<g id=\"scale_bar\""))
@@ -88,14 +88,14 @@ class TopoPrintPluginTest {
 	@Test
 	fun testGridLandsOnTrueUtmPositionsOverBasemap() {
 		val params = PrintParameters(PaperSize.A4, PrintOrientation.PORTRAIT, 300, 25000)
-		val geometry = PosterGeometry.compute(params, 39.972342, 116.191987, -7.5)
-		val raster = SvgPosterComposer.Raster(
+		val geometry = PrintGeometry.compute(params, 39.972342, 116.191987, -7.5)
+		val raster = SvgMapComposer.Raster(
 			"test_basemap.png",
 			eastingTopLeft = geometry.bbox.left - 800.0, northingTopLeft = geometry.bbox.top + 800.0,
 			eastingTopRight = geometry.bbox.right + 800.0, northingTopRight = geometry.bbox.top + 800.0,
 			eastingBottomLeft = geometry.bbox.left - 800.0, northingBottomLeft = geometry.bbox.bottom - 800.0,
 			eastingBottomRight = geometry.bbox.right + 800.0, northingBottomRight = geometry.bbox.bottom - 800.0)
-		val svg = SvgPosterComposer(geometry, "placement", raster, 1767225600000L).compose()
+		val svg = SvgMapComposer(geometry, "placement", raster, 1767225600000L).compose()
 
 		val imageRegex = Regex("<image [^>]*x=\"([-0-9.]+)\" y=\"([-0-9.]+)\" " +
 				"width=\"([-0-9.]+)\" height=\"([-0-9.]+)\"")

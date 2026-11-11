@@ -71,8 +71,11 @@ class SvgMapComposer(
 		sb.append("width=\"${fmt(layout.paperWidthMm)}mm\" height=\"${fmt(layout.paperHeightMm)}mm\">\n")
 		appendClipDef(sb)
 		appendTitle(sb)
-		appendFrame(sb)
-		appendScaleBar(sb)
+		// Evaluate once and share: the frame draws the secondary grid from
+		// it and the scale bar lists the secondary zone in the same colour.
+		val zone2 = secondaryZone()
+		appendFrame(sb, zone2)
+		appendScaleBar(sb, zone2)
 		appendCompass(sb)
 		sb.append("</svg>\n")
 		return sb.toString()
@@ -101,7 +104,7 @@ class SvgMapComposer(
 
 	// ------------------------------------------------------------------- frame
 
-	private fun appendFrame(sb: StringBuilder) {
+	private fun appendFrame(sb: StringBuilder, zone2: Int?) {
 		val labelSize = layout.leftMarginMm / 5
 		val prefixSize = labelSize * 0.8
 		val topLabelY = -labelSize * 0.8
@@ -118,7 +121,6 @@ class SvgMapComposer(
 		sb.append("      <g id=\"grid\">\n")
 		appendGrid(sb)
 		sb.append("      </g>\n")
-		val zone2 = secondaryZone()
 		val secondary = if (zone2 == null) emptyList() else secondaryPolylines(zone2)
 		if (secondary.isNotEmpty()) {
 			sb.append("      <g id=\"grid_secondary\">\n")
@@ -405,7 +407,7 @@ class SvgMapComposer(
 	}
 
 	/** Occupied span of a two-part grid label centred on `position`. */
-	private fun labelInterval(position: Double, prefix: Any, prefixSize: Double,
+	private fun labelInterval(position: Double, prefix: Long, prefixSize: Double,
 	                          standard: String, standardSize: Double): Pair<Double, Double> =
 		Pair(position - prefix.toString().length * prefixSize * 0.62,
 			position + standard.length * standardSize * 0.62)
@@ -600,7 +602,7 @@ class SvgMapComposer(
 	 * row band, its imperial mirror one band below (as on USGS sheets). The
 	 * gray annotation block sits below both bars.
 	 */
-	private fun appendScaleBar(sb: StringBuilder) {
+	private fun appendScaleBar(sb: StringBuilder, zone2: Int?) {
 		val fontSize = layout.bottomMarginMm * 0.6 / 15
 		val barHeight = fontSize / 2
 		val minBarMm = layout.mapWidthMm / 3.0
@@ -610,8 +612,14 @@ class SvgMapComposer(
 		sb.append("${fmt(layout.paperHeightMm - layout.bottomMarginMm)})\">\n")
 		appendScaleBarRow(sb, metricBarSpec(minBarMm, halfPaperMm),
 			fontSize * 6, fontSize, barHeight, minBarMm, halfPaperMm)
+		// The imperial bar may run up to the map width minus the compass
+		// (declination indicator) width, keeping a gap so the two never
+		// touch.
+		val compassSize = layout.bottomMarginMm * 0.6
+		val gap = layout.bottomMarginMm * 0.1
 		appendScaleBarRow(sb, imperialBarSpec(minBarMm, halfPaperMm),
-			fontSize * 10.5, fontSize, barHeight, minBarMm, halfPaperMm)
+			fontSize * 10.5, fontSize, barHeight, minBarMm,
+			layout.mapWidthMm - compassSize - gap)
 
 		// Gray annotations, rebased below the imperial bar's caption row.
 		val unitY = fontSize * 12
@@ -621,11 +629,14 @@ class SvgMapComposer(
 		sb.append(text(zoneLine, 0.0,
 			unitY + fontSize * 1.5, fontSize, "start"))
 		// A sheet spanning two zones lists the secondary zone after the
-		// centre zone, in the secondary grid's pale red.
-		val zone2 = secondaryZone()
+		// centre zone, in the secondary grid's pale red. The separator is
+		// drawn as its own run so the estimate only has to cover one gap.
 		if (zone2 != null) {
-			val offset = (zoneLine.length + 2) * fontSize * 0.62
-			sb.append(text("$zone2${geometry.zoneBand}", offset,
+			val sep = " / "
+			sb.append(text(sep, zoneLine.length * fontSize * 0.62,
+				unitY + fontSize * 1.5, fontSize, "start"))
+			sb.append(text("$zone2${geometry.zoneBand}",
+				(zoneLine.length + sep.length) * fontSize * 0.62,
 				unitY + fontSize * 1.5, fontSize, "start", SECONDARY_COLOR))
 		}
 		sb.append(text("Parameters: ${geometry.zoneLabel} ${centerUtm.easting.toInt()} " +
@@ -646,20 +657,22 @@ class SvgMapComposer(
 	 * its start. Labels sit above the bar, the unit caption below its right
 	 * end. The division scheme follows the ground length of a third of the
 	 * map width; the whole bar (extension + main section) takes at most
-	 * half of the paper width. Labels: the fine extension reads unit /
-	 * unit/2 / 0 (left to right) and the main section counts up from 0 at
-	 * its start: every unit when it is under 5 units, otherwise only 1 and
-	 * 5 (and 10 for a 10-unit main section).
+	 * [maxBarMm] — half of the paper width for the metric bar, the full map
+	 * width for the imperial one (a mile bar is wide in paper terms and
+	 * USGS sheets let it span most of the map). Labels: the fine extension
+	 * reads unit / unit/2 / 0 (left to right) and the main section counts
+	 * up from 0 at its start: every unit when it is under 5 units,
+	 * otherwise only 1 and 5 (and 10 for a 10-unit main section).
 	 */
 	private fun appendScaleBarRow(sb: StringBuilder, spec: BarSpec, topMm: Double,
 	                              fontSize: Double, barHeight: Double,
-	                              minBarMm: Double, halfPaperMm: Double) {
+	                              minBarMm: Double, maxBarMm: Double) {
 		val textY = topMm - fontSize
 		val unitY = topMm + fontSize * 1.5
 		val unitMm = spec.unitMeters * 1000.0 / params.scaleDenominator
 		val fineMm = spec.fineMeters * 1000.0 / params.scaleDenominator
 		val needUnits = Math.ceil(minBarMm / unitMm).toInt().coerceAtLeast(1)
-		val pageCapUnits = (halfPaperMm / unitMm).toInt() - 1
+		val pageCapUnits = (maxBarMm / unitMm).toInt() - 1
 		val mainUnits = when {
 			needUnits >= 10 -> 10
 			needUnits >= 5 -> 5
@@ -728,19 +741,29 @@ class SvgMapComposer(
 	}
 
 	/**
-	 * Imperial mirror of the metric bar (USGS-style). Mile bars use whole
-	 * base units (1/2/5×10ⁿ miles): the fine extension subdivides the unit
-	 * into ten 0.1-unit steps and reads unit / 0.5 / 0 (so a 1-mile bar
-	 * reads 1 → 0.5 → 0 with 0.1-mile steps). Larger-scale maps use decimal
-	 * feet base units (100 ft, 1000 ft) with the same unit/10 subdivision.
-	 * As in the metric bar, a fine step under 2 mm on paper is multiplied
-	 * by 5.
+	 * Imperial mirror of the metric bar (USGS-style). USGS 7.5'-quad scales
+	 * (1:24000/25000) prefer miles outright: the 1000-ft rung is skipped so
+	 * they get a mile bar reading 1 → 0.5 → 0. Even larger scales reach
+	 * miles naturally (the 1000-ft rung no longer fits in five sections),
+	 * and the largest scales keep the 100/1000-ft rungs.
+	 * Mile bars use whole base units (1/2/5×10ⁿ miles): the fine extension
+	 * subdivides the unit into ten 0.1-unit steps. As in the metric bar, a
+	 * fine step under 2 mm on paper is multiplied by 5.
 	 */
 	private fun imperialBarSpec(minBarMm: Double, halfPaperMm: Double): BarSpec {
 		val ftM = 0.3048
 		val miM = 1609.344
-		val ladder = doubleArrayOf(100 * ftM, 1000 * ftM, miM, 2 * miM,
-				5 * miM, 10 * miM, 20 * miM, 50 * miM)
+		// USGS 7.5'-quad scales and smaller: skip the 1000-ft rung so the
+		// mile rungs win (a 1000-ft bar would otherwise claim exactly five
+		// main sections at 1:25000 on A4 portrait). Even larger scales reach
+		// miles naturally once the 1000-ft paper length exceeds the five-
+		// section budget; the largest scales keep the 100/1000-ft rungs.
+		val ladder = if (params.scaleDenominator >= 24000)
+			doubleArrayOf(100 * ftM, miM, 2 * miM,
+					5 * miM, 10 * miM, 20 * miM, 50 * miM)
+		else
+			doubleArrayOf(100 * ftM, 1000 * ftM, miM, 2 * miM,
+					5 * miM, 10 * miM, 20 * miM, 50 * miM)
 		var unitMeters = ladder.last()
 		for (candidate in ladder) {
 			if (Math.ceil(minBarMm / (candidate * 1000.0 / params.scaleDenominator)) <= 5.0) {
