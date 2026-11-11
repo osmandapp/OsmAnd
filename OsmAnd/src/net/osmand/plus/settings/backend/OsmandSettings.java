@@ -3459,7 +3459,17 @@ public class OsmandSettings {
 
 	// An explicit user choice clears the local fallback before retrying V2.
 	public void setOpenGlRendererEnabled(boolean enabled) {
-		USE_OPENGL_RENDER.set(enabled);
+		boolean hasStoredValue = USE_OPENGL_RENDER.isSet();
+		boolean sameValue = USE_OPENGL_RENDER.get() == enabled;
+		if (!hasStoredValue || !sameValue) {
+			if (!USE_OPENGL_RENDER.set(enabled)) {
+				return;
+			}
+			if (sameValue) {
+				// Export the first explicit choice even if it matches the default.
+				updateLastPreferencesEditTime(globalPreferences);
+			}
+		}
 		OPENGL_RENDER_FALLBACK_TO_LEGACY.set(false);
 	}
 
