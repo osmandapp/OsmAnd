@@ -12,6 +12,7 @@ import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
+import net.osmand.router.TimedTransportRoute;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.router.TransportRoutingConfiguration;
@@ -76,26 +77,59 @@ public final class GtfsTransportResultAdapter {
 		public long[] arrivalSec = new long[0], departureSec = new long[0];
 	}
 
-	public static final class GtfsSegment extends TransportRouteResultSegment {
+	public static final class GtfsSegment extends TransportRouteResultSegment implements TimedTransportRoute {
 		/** Scheduled boarding departure and alighting arrival, epoch seconds. */
 		public long boardSec, alightSec;
 		public int tripIdx = -1, routeIdx = -1;
+		ZoneId zone = ZoneId.of("UTC");
+
+		@Override
+		public long getDepartureTimeSec() {
+			return boardSec;
+		}
+
+		@Override
+		public long getArrivalTimeSec() {
+			return alightSec;
+		}
+
+		@Override
+		public ZoneId getTimeZone() {
+			return zone;
+		}
 	}
 
 	/**
 	 * Overrides the two time getters whose stock versions add per type-pair default change times from the
 	 * router config and ignore the real waits: the card total (travel + walk) equals the planned duration.
 	 */
-	public static final class GtfsResult extends TransportRouteResult {
+	public static final class GtfsResult extends TransportRouteResult implements TimedTransportRoute {
 		/** Epoch seconds. */
 		public final long departSec, arriveSec;
 		public final GtfsItinerary itinerary;
+		private final ZoneId zone;
 
-		GtfsResult(TransportRoutingConfiguration cfg, GtfsItinerary itinerary) {
+		GtfsResult(TransportRoutingConfiguration cfg, GtfsItinerary itinerary, ZoneId zone) {
 			super(cfg);
 			this.itinerary = itinerary;
 			this.departSec = itinerary.departSec;
 			this.arriveSec = itinerary.arriveSec;
+			this.zone = zone;
+		}
+
+		@Override
+		public long getDepartureTimeSec() {
+			return departSec;
+		}
+
+		@Override
+		public long getArrivalTimeSec() {
+			return arriveSec;
+		}
+
+		@Override
+		public ZoneId getTimeZone() {
+			return zone;
 		}
 
 		@Override
@@ -144,7 +178,8 @@ public final class GtfsTransportResultAdapter {
 				return null;
 			}
 		}
-		GtfsResult res = new GtfsResult(cfg, it);
+		ZoneId zone = zone();
+		GtfsResult res = new GtfsResult(cfg, it, zone);
 		res.setRouteTime(Math.max(0, it.arriveSec - it.departSec));
 		long dayStart = localMidnight(it.departSec);
 		double pendingWalk = 0;
@@ -163,6 +198,7 @@ public final class GtfsTransportResultAdapter {
 			seg.travelTime = (int) Math.max(0, leg.endSec - leg.startSec);
 			seg.travelDistApproximate = route.getDistance();
 			seg.depTime = (int) ((leg.startSec - dayStart) / 10);
+			seg.zone = zone;
 			seg.boardSec = leg.startSec;
 			seg.alightSec = leg.endSec;
 			seg.tripIdx = leg.tripIdx;
@@ -177,8 +213,12 @@ public final class GtfsTransportResultAdapter {
 		return res;
 	}
 
+	private ZoneId zone() {
+		return index.getZone() != null ? index.getZone() : ZoneId.of("UTC");
+	}
+
 	private long localMidnight(long epochSec) {
-		ZoneId zone = index.getZone() != null ? index.getZone() : ZoneId.of("UTC");
+		ZoneId zone = zone();
 		return Instant.ofEpochSecond(epochSec).atZone(zone).toLocalDate().atStartOfDay(zone).toEpochSecond();
 	}
 

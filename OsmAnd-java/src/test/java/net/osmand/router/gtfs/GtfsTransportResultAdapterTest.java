@@ -31,6 +31,8 @@ import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Way;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.TimedTransportRoute;
+import net.osmand.router.TransportClockFormat;
 import net.osmand.router.TransportRoutePlanner;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRouteResult;
@@ -129,6 +131,26 @@ public class GtfsTransportResultAdapterTest {
 		long h8 = day + 8 * 3600;
 		return itin(h8, h8 + 36 * 60, walk(h8, h8 + 300, 300), ride("t1", 0, 4), walk(h8 + 20 * 60, h8 + 27 * 60, 450),
 				ride("t2", 0, 2), walk(h8 + 33 * 60, h8 + 36 * 60, 250));
+	}
+
+	@Test
+	public void resultAndSegmentsCarryClockTimesInTheAgencyZone() {
+		GtfsResult res = adapter.convert(twoRides());
+		long h8 = day + 8 * 3600;
+		TimedTransportRoute timedResult = res;
+		assertEquals(h8, timedResult.getDepartureTimeSec());
+		assertEquals(h8 + 36 * 60, timedResult.getArrivalTimeSec());
+		assertEquals(GtfsFixture.NY, timedResult.getTimeZone());
+		TimedTransportRoute first = (TimedTransportRoute) res.getSegments().get(0);
+		TimedTransportRoute second = (TimedTransportRoute) res.getSegments().get(1);
+		assertEquals(epoch(TUE, "08:10"), first.getDepartureTimeSec());
+		assertEquals(epoch(TUE, "08:20"), first.getArrivalTimeSec());
+		assertEquals(epoch(TUE, "08:28"), second.getDepartureTimeSec());
+		assertEquals(epoch(TUE, "08:33"), second.getArrivalTimeSec());
+		assertEquals(GtfsFixture.NY, first.getTimeZone());
+		TransportClockFormat fmt = new TransportClockFormat(true, Locale.US);
+		assertEquals("08:10 \u2013 08:20", fmt.formatRange(first));
+		assertEquals("08:28", fmt.formatDeparture(second));
 	}
 
 	// ---------------------------------------------------------------- ported checks: counts and times
