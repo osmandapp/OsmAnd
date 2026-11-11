@@ -4,7 +4,10 @@ import static net.osmand.util.MapUtils.VECTOR_LINE_EARTH_RADIUS_METERS;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+
+import java.util.Collections;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -52,6 +55,7 @@ public class RouteGeometryWay extends
 	@NonNull
 	private List<Integer> forceIncludedIndexes = new ArrayList<>();
 	private List<ClimbSegment> climbSegments = new ArrayList<>();
+	private boolean climbSegmentsChanged = false;
 	private static final int CLIMB_COLOR = 0xFF006400; // Dark green
 
 	private Integer customDirectionArrowColor;
@@ -103,8 +107,10 @@ public class RouteGeometryWay extends
 	 * Set climb segments to be highlighted on the route
 	 */
 	public void setClimbSegments(@NonNull List<ClimbSegment> segments) {
-		this.climbSegments = new ArrayList<>(segments);
-		this.coloringChanged = true;
+		if (!this.climbSegments.equals(segments)) {
+			this.climbSegments = new ArrayList<>(segments);
+			this.climbSegmentsChanged = true;
+		}
 	}
 
 	/**
@@ -113,6 +119,13 @@ public class RouteGeometryWay extends
 	@NonNull
 	public List<ClimbSegment> getClimbSegments() {
 		return new ArrayList<>(climbSegments);
+	}
+
+	/**
+	 * Check if there are any climb segments
+	 */
+	public boolean hasClimbSegments() {
+		return !climbSegments.isEmpty();
 	}
 
 	@Override
@@ -124,20 +137,20 @@ public class RouteGeometryWay extends
 	}
 
 	public boolean updateRoute(@NonNull RotatedTileBox tb, @NonNull RouteCalculationResult route) {
-		if (coloringChanged || tb.getMapDensity() != getMapDensity() || this.route != route) {
+		if (coloringChanged || climbSegmentsChanged || tb.getMapDensity() != getMapDensity() || this.route != route) {
 			this.route = route;
 			coloringChanged = false;
+			climbSegmentsChanged = false;
 			List<Location> locations = route.getImmutableAllLocations();
 			if (coloringType.isGradient()) {
 				updateGradientWay(tb, locations);
 			} else if (coloringType.isRouteInfoAttribute()) {
 				updateSolidMultiColorRoute(tb, locations, route.getOriginalRoute());
-			} else if (!climbSegments.isEmpty()) {
-				// Create a style map with dark green for climb segments
-				Map<Integer, GeometryWayStyle<?>> styleMap = createClimbStyleMap(locations);
-				updateWay(locations, styleMap, tb);
 			} else {
-				updateWay(locations, tb);
+				// Create style map with climb segments if present
+				Map<Integer, GeometryWayStyle<?>> styleMap = !climbSegments.isEmpty() ? 
+						createClimbStyleMap(locations) : Collections.emptyMap();
+				updateWay(locations, styleMap, tb);
 			}
 			return true;
 		}
@@ -149,19 +162,25 @@ public class RouteGeometryWay extends
 	 */
 	@NonNull
 	private Map<Integer, GeometryWayStyle<?>> createClimbStyleMap(@NonNull List<Location> locations) {
-		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
+		Map<Integer, GeometryWayStyle<?>> styleMap = new LinkedHashMap<>();
+		float lineWidth = customWidth > 0 ? customWidth : getContext().getAttrs().defaultWidth;
+		
+		// Create dark green style for climb segments
+		int arrowColor = customDirectionArrowColor != null ? customDirectionArrowColor : Color.BLACK;
+		GeometrySolidWayStyle<?> climbStyle = new GeometrySolidWayStyle<>(
+				getContext(), CLIMB_COLOR, lineWidth, arrowColor, false);
+		
+		// Get the default style for non-climb segments
 		GeometryWayStyle<?> defaultStyle = getDefaultWayStyle();
 		
 		for (ClimbSegment climb : climbSegments) {
-			// Create a style with dark green color for the climb segment
-			// We need to use the MultiColoringGeometryWay's getSolidWayStyle method
-			// But we don't have access to it directly, so we'll create a simple style
-			GeometrySolidWayStyle<?> climbStyle = new GeometrySolidWayStyle<>(
-					getContext(), CLIMB_COLOR, defaultStyle.width != null ? defaultStyle.width : 12f,
-					0, false);
-			
-			// Add the style for the start index
+			// Add the climb style at the start index
 			styleMap.put(climb.startIndex, climbStyle);
+			// Add the default style at endIndex+1 to reset to normal route color
+			// Only add if endIndex+1 is within bounds and after startIndex
+			if (climb.endIndex + 1 < locations.size() && climb.endIndex + 1 > climb.startIndex) {
+				styleMap.put(climb.endIndex + 1, defaultStyle);
+			}
 		}
 		
 		return styleMap;

@@ -62,6 +62,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private final TransportRoutingHelper transportHelper;
 	private Location lastRouteProjection;
 	private final ClimbDetector climbDetector;
+	private RouteCalculationResult lastClimbDetectionRoute;
 
 	private final ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
@@ -508,11 +509,21 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			routeGeometry.setRouteStyleParams(routeLineColor, routeLineWidth, shouldShowDirectionArrows,
 					getDirectionArrowsColor(), actualColoringType, routeInfoAttribute, routeGradientPalette);
 			
-			// Detect and set climb segments for highlighting
+			// Detect and set climb segments for highlighting - only for active navigation and when route changes
 			List<Location> locations = route.getImmutableAllLocations();
-			if (locations != null && locations.size() >= 2 && !helper.isPublicTransportMode()) {
+			boolean shouldDetectClimbs = locations != null && locations.size() >= 2 && 
+					!helper.isPublicTransportMode() && helper.isFollowingMode();
+			
+			// Only recompute climbs when route changes to avoid flickering
+			// Don't call setClimbSegments here - it will be handled in updateRoute via the route object
+			if (shouldDetectClimbs && (lastClimbDetectionRoute != route || routeGeometry == null)) {
 				List<ClimbSegment> climbs = climbDetector.detectClimbs(locations);
 				routeGeometry.setClimbSegments(climbs);
+				lastClimbDetectionRoute = route;
+			} else if (!shouldDetectClimbs && lastClimbDetectionRoute != null) {
+				// Clear climb segments when not navigating
+				routeGeometry.setClimbSegments(new ArrayList<>());
+				lastClimbDetectionRoute = null;
 			}
 			
 			boolean routeUpdated = routeGeometry.updateRoute(tileBox, route);
@@ -545,18 +556,18 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					currentLocation.setLatitude(tileBox.getLatitude());
 					currentLocation.setLongitude(tileBox.getLongitude());
 				}
-				List<Location> locations = route.getImmutableAllLocations();
+				List<Location> routeLocations = route.getImmutableAllLocations();
 				int currentRoute = route.getCurrentRouteForLocation(currentLocation);
 				if (currentRoute > 0) {
-					Location previousRouteLocation = locations.get(currentRoute - 1);
-					Location currentRouteLocation = locations.get(currentRoute);
+					Location previousRouteLocation = routeLocations.get(currentRoute - 1);
+					Location currentRouteLocation = routeLocations.get(currentRoute);
 					lastProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation, currentRouteLocation);
 					float calcbearing = !MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation) ? previousRouteLocation.bearingTo(currentRouteLocation) :
 							previousRouteLocation.bearingTo(currentLocation);
 					lastProjection.setBearing(MapUtils.normalizeDegrees360(calcbearing));
 					if (currentLocation.distanceTo(lastProjection) > helper.getMaxAllowedProjectDist(currentLocation)) {
 						lastProjection = null;
-					} else if (app.getSettings().SNAP_TO_ROAD.get() && currentRoute + 1 < locations.size()) {
+					} else if (app.getSettings().SNAP_TO_ROAD.get() && currentRoute + 1 < routeLocations.size()) {
 						// Not needed here as this code for preview turns
 //						Location nextRouteLocation = locations.get(currentRoute + 1);
 //						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,

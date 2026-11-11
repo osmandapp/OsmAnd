@@ -686,48 +686,63 @@ public class ClimbsCountWidget extends SimpleWidget {
 	}
 
 	private void showClimbProfileOverlay(@NonNull CurrentClimbInfo climbInfo) {
-		if (climbProfileOverlay != null) {
-			// Update existing overlay
-			updateOverlayContent(climbInfo);
-			return;
-		}
+		// First hide any existing overlay to avoid duplicates
+		hideClimbProfileOverlay();
 
 		// Create overlay from layout
-		climbProfileOverlay = mapActivity.getLayoutInflater().inflate(R.layout.climb_profile_overlay, null);
+		try {
+			climbProfileOverlay = mapActivity.getLayoutInflater().inflate(R.layout.climb_profile_overlay, null);
 
-		// Configure overlay
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-				ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.WRAP_CONTENT
-		);
-		params.gravity = Gravity.BOTTOM;
-		params.setMargins(0, 0, 0, 0);
+			// Configure overlay
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+					ViewGroup.LayoutParams.MATCH_PARENT,
+					ViewGroup.LayoutParams.WRAP_CONTENT
+			);
+			params.gravity = Gravity.BOTTOM;
+			params.setMargins(0, 0, 0, 0);
 
-		climbProfileOverlay.setLayoutParams(params);
+			climbProfileOverlay.setLayoutParams(params);
 
-		// Add to map activity
-		ViewGroup rootView = mapActivity.findViewById(android.R.id.content);
-		if (rootView != null) {
-			rootView.addView(climbProfileOverlay);
+			// Add to map activity
+			ViewGroup rootView = mapActivity.findViewById(android.R.id.content);
+			if (rootView != null) {
+				// Remove from any existing parent first
+				ViewGroup existingParent = (ViewGroup) climbProfileOverlay.getParent();
+				if (existingParent != null) {
+					existingParent.removeView(climbProfileOverlay);
+				}
+				rootView.addView(climbProfileOverlay);
+			} else {
+				// Can't add overlay without root view
+				hideClimbProfileOverlay();
+				return;
+			}
+
+			// Add elevation profile view programmatically
+			FrameLayout elevationContainer = climbProfileOverlay.findViewById(R.id.climb_profile_elevation_container);
+			if (elevationContainer != null) {
+				elevationProfileView = new ElevationProfileView(mapActivity);
+				elevationContainer.addView(elevationProfileView,
+					new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+			}
+
+			// Update content
+			updateOverlayContent(climbInfo);
+		} catch (Exception e) {
+			// If anything goes wrong, clean up
+			hideClimbProfileOverlay();
 		}
-
-		// Add elevation profile view programmatically
-		FrameLayout elevationContainer = climbProfileOverlay.findViewById(R.id.climb_profile_elevation_container);
-		if (elevationContainer != null) {
-			elevationProfileView = new ElevationProfileView(mapActivity);
-			elevationContainer.addView(elevationProfileView,
-				new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-		}
-
-		// Update content
-		updateOverlayContent(climbInfo);
 	}
 
 	private void hideClimbProfileOverlay() {
 		if (climbProfileOverlay != null) {
 			ViewGroup parent = (ViewGroup) climbProfileOverlay.getParent();
 			if (parent != null) {
-				parent.removeView(climbProfileOverlay);
+				try {
+					parent.removeView(climbProfileOverlay);
+				} catch (Exception e) {
+					// Ignore - view might already be removed
+				}
 			}
 			climbProfileOverlay = null;
 			elevationProfileView = null;
