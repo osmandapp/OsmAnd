@@ -159,6 +159,6 @@ data class PrintParameters(
 		val SUPPORTED_DPI = intArrayOf(150, 300, 600)
 
 		@JvmField
-		val SUPPORTED_SCALES = intArrayOf(5000, 10000, 25000, 50000, 100000)
+		val SUPPORTED_SCALES = intArrayOf(5000, 10000, 24000, 25000, 50000, 63360, 100000)
 	}
 }

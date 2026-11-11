@@ -151,7 +151,7 @@ class SvgMapComposer(
 
 	/**
 	 * Grid spacing in ground metres: the smallest 1/2/5×10ⁿ unit whose
-	 * on-paper spacing reaches 2 cm at this scale. Neighbouring 1/2/5
+	 * on-paper spacing reaches 3 cm at this scale. Neighbouring 1/2/5
 	 * candidates are at most 2.5× apart, so the spacing always stays under
 	 * the 8 cm upper bound; smaller paper at the same scale naturally picks
 	 * smaller units through the same rule.
@@ -160,7 +160,7 @@ class SvgMapComposer(
 		val steps = longArrayOf(100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000,
 				100000, 200000, 500000, 1000000, 2000000, 5000000)
 		for (step in steps) {
-			if (step * 1000.0 / params.scaleDenominator >= 20.0) {
+			if (step * 1000.0 / params.scaleDenominator >= 30.0) {
 				return step
 			}
 		}
@@ -318,92 +318,42 @@ class SvgMapComposer(
 
 	// --------------------------------------------------------------- scale bar
 
+	/** One scale-bar row: base unit, fine extension step and label formatting. */
+	private class BarSpec(
+		val unitMeters: Double,
+		val fineMeters: Double,
+		/** Value label for a run of k base units, e.g. "2" (km) or "2000" (ft). */
+		val unitLabel: (Int) -> String,
+		/** Label at the middle of the fine extension (half a base unit). */
+		val halfLabel: String,
+		/** Unit caption at the right bar end. */
+		val caption: String
+	)
+
+	/**
+	 * Survey-style bar pair on the sheet bottom: the metric bar on the first
+	 * row band, its imperial mirror one band below (as on USGS sheets). The
+	 * gray annotation block sits below both bars.
+	 */
 	private fun appendScaleBar(sb: StringBuilder) {
 		val fontSize = layout.bottomMarginMm * 0.6 / 15
 		val barHeight = fontSize / 2
-		val barY = fontSize * 6
-		val textY = barY - fontSize
-		val unitY = barY + fontSize * 1.5
-
-		// Survey-style two-part bar: a left extension of one base unit in
-		// fine grey/white steps, then the main section counting up from 0
-		// at its start. The division scheme follows the ground length of
-		// half the map width: under 2 km → 10 m fine / 100 m unit with all
-		// labels in plain metres ("m"); otherwise → 100 m fine / 1 km unit
-		// ("1 / 0.5 / 0", "km"). A fine step under 3 mm on paper is
-		// multiplied by 5 (10→50 m, 100→500 m) when under 2 mm on paper.
-		// "Half the page" below refers to half the paper width.
 		val minBarMm = layout.mapWidthMm / 3.0
 		val halfPaperMm = layout.paperWidthMm / 2.0
-		val halfGroundM = halfPaperMm * params.scaleDenominator / 1000.0
-		val metricMode = halfGroundM < 2000.0
-		val unitM = if (metricMode) 100L else 1000L
-		var fineM = if (metricMode) 10L else 100L
-		if (fineM * 1000.0 / params.scaleDenominator < 2.0) {
-			fineM *= 5L
-		}
-		val unitMm = unitM * 1000.0 / params.scaleDenominator
-		val fineMm = fineM * 1000.0 / params.scaleDenominator
-		val needUnits = Math.ceil(minBarMm / unitMm).toInt().coerceAtLeast(1)
-		// Hard cap: the whole bar (fine extension + main section) takes at
-		// most half of the paper width.
-		val pageCapUnits = (halfPaperMm / unitMm).toInt() - 1
-		val mainUnits = when {
-			needUnits >= 10 -> 10
-			needUnits >= 5 -> 5
-			else -> needUnits
-		}.coerceIn(0, pageCapUnits.coerceAtLeast(0))
-		val barWidth = unitMm * (1 + mainUnits)
-
-		val segments = mutableListOf<Pair<Double, Double>>()
-		// 0–1 unit drawn in fine steps (mm on paper, capped at the unit
-		// paper length): 100 m / 500 m / 10 m per segment.
-		var x = 0.0
-		while (x < unitMm - 0.01) {
-			val w = minOf(fineMm, unitMm - x)
-			segments.add(Pair(x, x + w))
-			x += w
-		}
-		for (k in 1..mainUnits) {
-			segments.add(Pair(unitMm * k, unitMm * (k + 1)))
-		}
 
 		sb.append("  <g id=\"scale_bar\" transform=\"translate(${fmt(layout.leftMarginMm)} ")
 		sb.append("${fmt(layout.paperHeightMm - layout.bottomMarginMm)})\">\n")
-		for ((idx, seg) in segments.withIndex()) {
-			sb.append("    <rect x=\"${fmt(seg.first)}\" y=\"${fmt(barY - barHeight)}\" ")
-			sb.append("width=\"${fmt(seg.second - seg.first)}\" height=\"${fmt(barHeight)}\" stroke=\"#000000\" stroke-width=\"0.2\" ")
-			sb.append("fill=\"${if (idx % 2 == 0) "#cccccc" else "none"}\"/>\n")
-		}
-		// Labels: the fine extension reads unit / unit/2 / 0 (left to
-		// right) — "1 / 0.5 / 0" in km mode, plain metres otherwise — and
-		// the main section counts up from 0 at its start: every unit when
-		// it is under 5 units, otherwise only 1 and 5 (and 10 for a
-		// 10-unit main section).
-		fun unitLabel(units: Int): String =
-			if (unitM == 1000L) trimNumber(units.toDouble()) else (units * unitM).toString()
-		sb.append(text(unitLabel(1), 0.0, textY, fontSize, "middle"))
-		if (unitMm / 2.0 >= 4.0) {
-			val halfLabel = if (unitM == 1000L) "0.5" else (unitM / 2L).toString()
-			sb.append(text(halfLabel, unitMm / 2.0, textY, fontSize, "middle"))
-		}
-		sb.append(text("0", unitMm, textY, fontSize, "middle"))
-		if (mainUnits < 5) {
-			for (k in 1..mainUnits) {
-				sb.append(text(unitLabel(k), unitMm * (k + 1), textY, fontSize, "middle"))
-			}
-		} else {
-			sb.append(text(unitLabel(1), unitMm * 2, textY, fontSize, "middle"))
-			sb.append(text(unitLabel(5), unitMm * 6, textY, fontSize, "middle"))
-			if (mainUnits == 10) {
-				sb.append(text(unitLabel(10), unitMm * 11, textY, fontSize, "middle"))
-			}
-		}
-		sb.append(text(if (unitM == 1000L) "km" else "m", barWidth, unitY, fontSize, "end"))
-		sb.append(text("WGS84 UTM Zone ${geometry.zoneLabel}", 0.0,
-			unitY + fontSize * 1.5, fontSize, "start"))
+		appendScaleBarRow(sb, metricBarSpec(minBarMm, halfPaperMm),
+			fontSize * 6, fontSize, barHeight, minBarMm, halfPaperMm)
+		appendScaleBarRow(sb, imperialBarSpec(minBarMm, halfPaperMm),
+			fontSize * 10.5, fontSize, barHeight, minBarMm, halfPaperMm)
+
+		// Gray annotations, rebased below the imperial bar's caption row.
+		val unitY = fontSize * 12
 		val gray = GRAY_COLOR
 		val centerUtm = geometry.centerUtm
+		sb.append(text("WGS84 UTM Zone ${geometry.zoneLabel}", 0.0,
+			unitY + fontSize * 1.5, fontSize, "start"))
 		sb.append(text("Parameters: ${geometry.zoneLabel} ${centerUtm.easting.toInt()} " +
 				"${centerUtm.northing.toInt()} 1:${params.scaleDenominator}",
 			0.0, unitY + fontSize * 3, fontSize, "start", color = gray))
@@ -417,6 +367,132 @@ class SvgMapComposer(
 				unitY + fontSize * (6 + index * 1.5), fontSize, "start", color = gray))
 		}
 		sb.append("  </g>\n")
+	}
+
+	/**
+	 * Draws one survey-style bar row: a left extension of one base unit in
+	 * fine grey/white steps, then the main section counting up from 0 at
+	 * its start. Labels sit above the bar, the unit caption below its right
+	 * end. The division scheme follows the ground length of a third of the
+	 * map width; the whole bar (extension + main section) takes at most
+	 * half of the paper width. Labels: the fine extension reads unit /
+	 * unit/2 / 0 (left to right) and the main section counts up from 0 at
+	 * its start: every unit when it is under 5 units, otherwise only 1 and
+	 * 5 (and 10 for a 10-unit main section).
+	 */
+	private fun appendScaleBarRow(sb: StringBuilder, spec: BarSpec, topMm: Double,
+	                              fontSize: Double, barHeight: Double,
+	                              minBarMm: Double, halfPaperMm: Double) {
+		val textY = topMm - fontSize
+		val unitY = topMm + fontSize * 1.5
+		val unitMm = spec.unitMeters * 1000.0 / params.scaleDenominator
+		val fineMm = spec.fineMeters * 1000.0 / params.scaleDenominator
+		val needUnits = Math.ceil(minBarMm / unitMm).toInt().coerceAtLeast(1)
+		val pageCapUnits = (halfPaperMm / unitMm).toInt() - 1
+		val mainUnits = when {
+			needUnits >= 10 -> 10
+			needUnits >= 5 -> 5
+			else -> needUnits
+		}.coerceIn(0, pageCapUnits.coerceAtLeast(0))
+		val barWidth = unitMm * (1 + mainUnits)
+
+		val segments = mutableListOf<Pair<Double, Double>>()
+		// 0–1 unit drawn in fine steps (mm on paper, capped at the unit
+		// paper length).
+		var x = 0.0
+		while (x < unitMm - 0.01) {
+			val w = minOf(fineMm, unitMm - x)
+			segments.add(Pair(x, x + w))
+			x += w
+		}
+		for (k in 1..mainUnits) {
+			segments.add(Pair(unitMm * k, unitMm * (k + 1)))
+		}
+
+		for ((idx, seg) in segments.withIndex()) {
+			sb.append("    <rect x=\"${fmt(seg.first)}\" y=\"${fmt(topMm - barHeight)}\" ")
+			sb.append("width=\"${fmt(seg.second - seg.first)}\" height=\"${fmt(barHeight)}\" stroke=\"#000000\" stroke-width=\"0.2\" ")
+			sb.append("fill=\"${if (idx % 2 == 0) "#cccccc" else "none"}\"/>\n")
+		}
+		sb.append(text(spec.unitLabel(1), 0.0, textY, fontSize, "middle"))
+		if (unitMm / 2.0 >= 4.0) {
+			sb.append(text(spec.halfLabel, unitMm / 2.0, textY, fontSize, "middle"))
+		}
+		sb.append(text("0", unitMm, textY, fontSize, "middle"))
+		if (mainUnits < 5) {
+			for (k in 1..mainUnits) {
+				sb.append(text(spec.unitLabel(k), unitMm * (k + 1), textY, fontSize, "middle"))
+			}
+		} else {
+			sb.append(text(spec.unitLabel(1), unitMm * 2, textY, fontSize, "middle"))
+			sb.append(text(spec.unitLabel(5), unitMm * 6, textY, fontSize, "middle"))
+			if (mainUnits == 10) {
+				sb.append(text(spec.unitLabel(10), unitMm * 11, textY, fontSize, "middle"))
+			}
+		}
+		sb.append(text(spec.caption, barWidth, unitY, fontSize, "end"))
+	}
+
+	/**
+	 * Metric bar. The division scheme follows the ground length of half the
+	 * paper width: under 2 km → 10 m fine / 100 m unit with all labels in
+	 * plain metres ("m"); otherwise → 100 m fine / 1 km unit
+	 * ("1 / 0.5 / 0", "km"). A fine step under 2 mm on paper is multiplied
+	 * by 5 (10→50 m, 100→500 m).
+	 */
+	private fun metricBarSpec(minBarMm: Double, halfPaperMm: Double): BarSpec {
+		val halfGroundM = halfPaperMm * params.scaleDenominator / 1000.0
+		val metricMode = halfGroundM < 2000.0
+		val unitM = if (metricMode) 100L else 1000L
+		var fineM = if (metricMode) 10L else 100L
+		if (fineM * 1000.0 / params.scaleDenominator < 2.0) {
+			fineM *= 5L
+		}
+		return BarSpec(
+			unitMeters = unitM.toDouble(),
+			fineMeters = fineM.toDouble(),
+			unitLabel = { k -> if (metricMode) (k * unitM).toString() else trimNumber(k.toDouble()) },
+			halfLabel = if (metricMode) (unitM / 2L).toString() else "0.5",
+			caption = if (metricMode) "m" else "km")
+	}
+
+	/**
+	 * Imperial mirror of the metric bar (USGS-style). Mile bars use whole
+	 * base units (1/2/5×10ⁿ miles): the fine extension subdivides the unit
+	 * into ten 0.1-unit steps and reads unit / 0.5 / 0 (so a 1-mile bar
+	 * reads 1 → 0.5 → 0 with 0.1-mile steps). Larger-scale maps use decimal
+	 * feet base units (100 ft, 1000 ft) with the same unit/10 subdivision.
+	 * As in the metric bar, a fine step under 2 mm on paper is multiplied
+	 * by 5.
+	 */
+	private fun imperialBarSpec(minBarMm: Double, halfPaperMm: Double): BarSpec {
+		val ftM = 0.3048
+		val miM = 1609.344
+		val ladder = doubleArrayOf(100 * ftM, 1000 * ftM, miM, 2 * miM,
+				5 * miM, 10 * miM, 20 * miM, 50 * miM)
+		var unitMeters = ladder.last()
+		for (candidate in ladder) {
+			if (Math.ceil(minBarMm / (candidate * 1000.0 / params.scaleDenominator)) <= 5.0) {
+				unitMeters = candidate
+				break
+			}
+		}
+		val unitFt = unitMeters / ftM
+		val milesMode = unitFt >= 5279.5
+		var fineMeters = unitMeters / 10.0
+		if (fineMeters * 1000.0 / params.scaleDenominator < 2.0) {
+			fineMeters *= 5.0
+		}
+		return BarSpec(
+			unitMeters = unitMeters,
+			fineMeters = fineMeters,
+			unitLabel = { k ->
+				if (milesMode) trimNumber(k * unitMeters / miM)
+				else Math.round(k * unitFt).toString()
+			},
+			halfLabel = if (milesMode) trimNumber2(unitMeters / miM / 2.0)
+				else Math.round(unitFt / 2.0).toString(),
+			caption = if (milesMode) "mi" else "ft")
 	}
 
 	// ----------------------------------------------------------------- compass
@@ -539,6 +615,15 @@ class SvgMapComposer(
 	private fun trimNumber(value: Double): String {
 		val formatted = String.format(Locale.US, "%.1f", value)
 		return if (formatted.endsWith(".0")) formatted.substring(0, formatted.length - 2) else formatted
+	}
+
+	/** Like [trimNumber] but keeps a second decimal (0.25 stays 0.25). */
+	private fun trimNumber2(value: Double): String {
+		var formatted = String.format(Locale.US, "%.2f", value)
+		while (formatted.endsWith("0")) {
+			formatted = formatted.substring(0, formatted.length - 1)
+		}
+		return if (formatted.endsWith(".")) formatted.substring(0, formatted.length - 1) else formatted
 	}
 
 	private fun fmt(value: Double): String {
