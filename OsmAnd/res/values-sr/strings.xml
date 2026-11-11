@@ -5477,4 +5477,21 @@
     <string name="public_transport_route_out_of_memory">Рута јавног превоза је предугачка за израчунавање на овом уређају. Изаберите ближе одредиште.</string>
     <string name="cast_shadows">Сенке</string>
     <string name="release_5_5">• Просторна претрага укључена је подразумевано: претрага око одређене локације, боље рангирање, синоними, толеранција на грешке у куцању\n\n • 3D објекти бацају сенке, уз могућност подешавања правца сунца\n\n • Додатак Панорамакс: приказ фотографија са нивоа улице на мапи\n\n • Библиотека медија: све фотографије, видео-записи и аудио-белешке на једном месту\n\n • Линије трагова приказане испрекиданим или тачкастим цртама, подразумевани изглед по фасцикли са траговима\n\n • Подешавања брзине кретања за планирање руте и процену времена доласка\n\n • Андроид Ауто: недавне дестинације, аутоматски режим слободне вожње, Гугл Асистент и Џемини\n\n • Брза радња за приказивање или скривање трагова\n\n • Ознаке на изохипсама (линије висине) окренуте су узбрдо</string>
+    <string name="update_maps_to_use_new_search">Ажурирајте мапе да бисте користили нову претрагу (%1$s)</string>
+    <string name="free_region_not_chosen_descr">Регион ваше прве преузете мапе постаје ваш бесплатни регион.</string>
+    <string name="free_region_banner_descr">Све мапе од %1$s су бесплатне.</string>
+    <string name="free_region_other_title">%1$s није ваш бесплатни регион</string>
+    <string name="free_region_other_descr">Бесплатна верзија укључује мапе једног региона. Да бисте преузели %1$s, мапе осталих региона ће бити обрисане.</string>
+    <string name="free_region_will_be_deleted">Биће обрисано</string>
+    <string name="free_region_maps_stay">Прегледна мапа света, контурне линије и остале мапе додатака остају.</string>
+    <string name="free_region_delete_and_download">Обриши и преузми</string>
+    <string name="free_region_replace_used_title">Бесплатна замена већ коришћених</string>
+    <string name="free_region_not_eligible_email_descr">Оставите своју е-пошту да бисте поново заменили свој бесплатни регион или добили неограничена преузимања мапа.</string>
+    <string name="free_region_email_helper">Слаћемо вам ОсмАнд вести. Можете се одјавити у било ком тренутку.</string>
+    <string name="free_region_email_maps_deleted">Мапе за %1$s (%2$s) ће бити обрисане.</string>
+    <string name="free_region_send_and_replace">Пошаљи и замени</string>
+    <string name="free_region_not_eligible_buy_descr">Ваш бесплатни регион је %1$s. Да бисте преузели %2$s и задржали тренутне мапе, потражите неограничено преузимање мапа.</string>
+    <string name="outdated_maps_warning_title">Ажурирајте своје мапе</string>
+    <string name="outdated_maps_warning_descr">Новој претрази су потребне мапе ове верзије. Ажурирајте све своје мапе - бесплатно је.</string>
+    <string name="free_region_other_regions_need_maps_plus">Осталим регионима су потребне Мапе+: %1$s</string>
 </resources>

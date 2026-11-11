@@ -106,6 +106,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	}
 
 	@Override
+	public boolean resolveNightMode() {
+		// Follow the current profile like MapRouteInfoMenu, which paints the rest of this view
+		return app.getDaynightHelper().isNightMode(settings.getApplicationMode(), getThemeUsageContext());
+	}
+
+	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		MapActivity mapActivity = requireMapActivity();
@@ -295,7 +301,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 	private boolean adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
-		if (menu == null || menu.isSelectFromMap() || mapActivity == null) {
+		if (menu == null || menu.isSelectFromMap() || mapActivity == null || mapActivity.getMapView().getView() == null) {
 			return false;
 		}
 

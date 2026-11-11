@@ -4016,7 +4016,7 @@
     <string name="feature_available_as_part_of_plan">%1$s disponibile come parte del piano %2$s</string>
     <string name="shared_string_included">Incluso</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="map_widget_glide_average_desc">Mostra il rapporto di planata medio per l\'intervallo impostato.</string>
+    <string name="map_widget_glide_average_desc">Mostra il rapporto di planata medio o la velocità verticale media per l\'intervallo impostato.</string>
     <string name="map_widget_glide_target_desc">Mostra il rapporto di planata necessario per raggiungere il punto di destinazione.</string>
     <string name="average_glide_ratio">Rapporto di planata medio</string>
     <string name="glide_ratio_to_target">Rapporto di planata rispetto al target</string>
@@ -4696,7 +4696,7 @@
     <string name="show_image_previews">Mostra l\'immagine precedente</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Inverti la visibilità della griglia di coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
-    <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunte: falesie e aree di arrampicata sulla mappa\n\n• La ricerca degli indirizzi negli Stati Uniti è stata migliorata\n\n• Aggiunto TTS ebraico per la navigazione</string>
+    <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta la griglia delle coordinate con le coordinate geografiche\n\n• Aggiunta la possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dalla tappa successiva; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più prominenti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunte: falesie e aree di arrampicata sulla mappa\n\n• La ricerca degli indirizzi negli USA è stata migliorata\n\n• Aggiunto TTS ebraico per la navigazione</string>
     <string name="equator">Equatore</string>
     <string name="prime_meridian">Primo meridiano</string>
     <string name="meridian_180">180º meridiano</string>
@@ -5435,4 +5435,7 @@
     <string name="flyovers">Sorvoli</string>
     <string name="select_tracks">Selezione tracce</string>
     <string name="storage_directory_visible_external">Archivio esterno visibile</string>
+    <string name="update_maps_to_use_new_search">Aggiorna le mappe per usare la nuova ricerca (%1$s)</string>
+    <string name="free_region_not_chosen_descr">La regione della prima mappa scaricata diventa la tua regione gratuita.</string>
+    <string name="free_region_banner_descr">Tutte le mappe di %1$s sono gratuite.</string>
 </resources>

@@ -623,8 +623,10 @@ public class MapRendererContext {
 		}
 		ElevationConfiguration elevationConfiguration = new ElevationConfiguration();
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		boolean disableVertexHillshade = plugin != null && plugin.isTerrainLayerEnabled() && plugin.isHillshadeMode();
-		if (disableVertexHillshade) {
+		// The vertex hillshade is drawn only as Terrain shadows, as on iOS
+		if (plugin != null && plugin.isTerrainShadowsEnabled()) {
+			elevationConfiguration.setVisualizationAlpha(plugin.getTerrainTransparency() / 255f);
+		} else {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}

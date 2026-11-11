@@ -5847,4 +5847,25 @@
     <string name="flyover_recording">Gravando um vídeo do mapa: %1$s</string>
     <string name="flyovers">Viadutos</string>
     <string name="multimedia_notes_view_descr">Suas anotações de áudio e vídeo estão em %1$s.</string>
+    <string name="update_maps_to_use_new_search">Atualizar os mapas para usar a nova função de pesquisa (%1$s)</string>
+    <string name="free_region_not_chosen_descr">A região do seu primeiro mapa baixado passa a ser sua região gratuita.</string>
+    <string name="free_region_banner_descr">Todos os mapas de %1$s são gratuitos.</string>
+    <string name="free_region_other_title">%1$s não é sua região gratuita</string>
+    <string name="free_region_other_descr">A versão gratuita inclui mapas de uma região. Para baixar %1$s, os mapas de outras regiões serão excluídos.</string>
+    <string name="free_region_will_be_deleted">Será excluído</string>
+    <string name="free_region_maps_stay">O mapa geral do mundo, as linhas de contorno e outros mapas do plug-in permanecem.</string>
+    <string name="free_region_delete_and_download">Excluir e baixar</string>
+    <string name="free_region_replace_used_title">Substituição gratuita de peças já utilizadas</string>
+    <string name="free_region_not_eligible_email_descr">Insira seu e-mail para alterar sua região gratuitamente mais uma vez ou para ter acesso a downloads ilimitados de mapas.</string>
+    <string name="free_region_email_helper">Enviaremos notícias sobre o OsmAnd. Você pode cancelar a assinatura a qualquer momento.</string>
+    <string name="free_region_email_maps_deleted">Os mapas de %1$s (%2$s) serão excluídos.</string>
+    <string name="free_region_send_and_replace">Enviar e substituir</string>
+    <string name="free_region_not_eligible_buy_descr">Sua região gratuita é %1$s. Para baixar %2$s e manter seus mapas atuais, adquira o plano de downloads ilimitados de mapas.</string>
+    <string name="outdated_maps_warning_title">Atualize seus mapas</string>
+    <string name="outdated_maps_warning_descr">A nova função de busca requer mapas desta versão. Atualize todos os seus mapas — é grátis.</string>
+    <string name="free_region_other_regions_need_maps_plus">Outras regiões precisam do Maps+: %1$s</string>
+    <string name="aidl_group_system_descr">Arquivos, registros, localização falsa</string>
+    <string name="public_transport_route_out_of_memory">O trajeto do transporte público é muito longo para ser calculado neste aparelho. Escolha um destino mais próximo.</string>
+    <string name="release_5_5">• Pesquisa espacial ativada por padrão: pesquisa nas proximidades de um local, melhor classificação, sinônimos, tolerância a erros de digitação\n\n • Edifícios em 3D projetam sombras, com direção do sol ajustável\n\n • Plug-in Panoramax: imagens em nível de rua no mapa\n\n • Biblioteca de mídia: todas as fotos, vídeos e notas de áudio em um só lugar\n\n • Linhas de trilha tracejadas e pontilhadas; aparência padrão por pasta de trilha\n\n • Configurações de velocidade de viagem para cálculo de rota e tempo de chegada\n\n • Android Auto: destinos recentes, Free Ride automático, Google Assistente e Gemini\n\n • Ação rápida para mostrar ou ocultar trilhas\n\n • Rótulos das linhas de contorno voltados para a subida</string>
+    <string name="duplicate_map_standard_exists_desc">Você já possui o mapa padrão para %1$s. Baixar o mapa apenas de estradas resultará na duplicação de dados e poderá prejudicar o desempenho.\n\nA substituição removerá os dados de pesquisa de endereços e de pontos de interesse (POI) incluídos no mapa padrão.</string>
 </resources>

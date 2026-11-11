@@ -84,6 +84,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				view, filteredInfo, allowOnlineWiki);
 	}
 
+	@Nullable
+	protected View.OnClickListener getWikipediaClickListener(@NonNull Map<String, Object> filteredInfo) {
+		return createAmenityDescriptionBuilder().getWikipediaClickListener(filteredInfo);
+	}
+
 	@NonNull
 	private AmenityDescriptionBuilder createAmenityDescriptionBuilder() {
 		return new AmenityDescriptionBuilder(this, amenity, infoBundle, isLightContent());

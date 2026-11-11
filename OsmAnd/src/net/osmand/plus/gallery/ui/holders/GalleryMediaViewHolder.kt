@@ -124,6 +124,7 @@ class GalleryMediaViewHolder(
 
 		val mediaItem = galleryItem.mediaItem
 		boundMediaItem = mediaItem
+		clickOverlay.contentDescription = mediaItem.title
 		cancelLoadingImage()
 		setupView(imageSizePx, nightMode)
 		bindSelection(selectionMode, selected, nightMode)

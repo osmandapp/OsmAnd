@@ -960,7 +960,7 @@
     <string name="poi_boat_sharing">Μερισμός σκάφους</string>
     <string name="poi_dock">Αποβάθρα</string>
     <string name="poi_cutline">Γραμμή αποκοπής</string>
-    <string name="poi_toilets">Δημόσια τουαλέτα, τουαλέτες</string>
+    <string name="poi_toilets">Δημόσια τουαλέτα;τουαλέτες;τουαλέτα;δημόσιες τουαλέτες</string>
     <string name="poi_shower">Ντουζιέρα</string>
     <string name="poi_sauna">Σάουνα</string>
     <string name="poi_brothel">Οίκος ανοχής</string>
@@ -971,9 +971,9 @@
     <string name="poi_bank">Τράπεζα</string>
     <string name="poi_payment_terminal">Τερματικό πληρωμών</string>
     <string name="poi_money_lender">Δάνεια</string>
-    <string name="poi_pawnbroker">Ενεχυροδανειστής</string>
+    <string name="poi_pawnbroker">Ενεχυροδανειστής;ενεχυροδανειστήριο;ενέχυρο</string>
     <string name="poi_bureau_de_change">Ανταλλακτήριο συναλλάγματος</string>
-    <string name="poi_accountant">Λογιστικά</string>
+    <string name="poi_accountant">Λογιστικά;Λογιστής;Λογιστική;Ορκωτός λογιστής;Φοροτεχνικός</string>
     <string name="poi_bitcoin_yes">Πληρωμή με Bitcoin</string>
     <string name="poi_cave_entrance">Είσοδος σπηλαίου</string>
     <string name="poi_peak">Βουνοκορφή</string>
@@ -4743,4 +4743,5 @@
     <string name="poi_authentication_none_no">Απαιτείται ταυτοποίηση: όχι</string>
     <string name="poi_permanent_camping_yes">Μόνιμη κατασκήνωση: ναι</string>
     <string name="poi_permanent_camping_only">Μόνιμη καταστήνωση: μόνο;Μόνο μόνιμη κατασκήνωση</string>
+    <string name="poi_route_activity_type_motocross">Μοτοκρός</string>
 </resources>

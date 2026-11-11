@@ -433,7 +433,7 @@
     <string name="shared_string_my_location">Sijaintini</string>
     <string name="shared_string_my_places">Omat paikat</string>
     <string name="shared_string_my_favorites">Suosikit</string>
-    <string name="shared_string_tracks">Reittini</string>
+    <string name="shared_string_tracks">Reitit</string>
     <string name="shared_string_audio">Ääni</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Kuva</string>
@@ -860,7 +860,7 @@
     <string name="navigate_point_zone">Vyöhyke</string>
     <string name="navigate_point_northing">Pohjoiseen</string>
     <string name="navigate_point_easting">Itään</string>
-    <string name="download_tab_local">Asennetut</string>
+    <string name="download_tab_local">Paikallinen</string>
     <string name="no_internet_connection">Lataus ei onnistu, tarkista Internet-yhteytesi.</string>
     <string name="everything_up_to_date">Kaikki tiedostot ovat päivitettyjä</string>
     <string name="use_opengl_render">Käytä OpenGL hahmottamista</string>

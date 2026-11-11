@@ -39,7 +39,6 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.TrackFolder;
-import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.routing.ColoringType;
@@ -195,9 +194,8 @@ public class FileUtils {
 
 	private static void updateGpxMetadata(@NonNull GpxFile gpxFile, @NonNull String name) {
 		if (gpxFile.isOsmAndOrigin()) {
-			Metadata metadata = gpxFile.getMetadata();
-			if (!Algorithms.stringsEqual(name, metadata.getName())) {
-				metadata.setName(name);
+			if (!Algorithms.stringsEqual(name, gpxFile.getMetadata().getName())) {
+				gpxFile.updateTrackName(name);
 				SaveGpxHelper.saveGpx(gpxFile);
 			}
 		}

@@ -452,7 +452,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		} else if (mapActivity != null) {
 			GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
 			if (showOnMap) {
-				params.showOnMap().selectedByUser().addToMarkers().addToHistory();
+				params.showOnMap().selectedByUser().addToMarkers();
 			} else {
 				params.hideFromMap();
 			}

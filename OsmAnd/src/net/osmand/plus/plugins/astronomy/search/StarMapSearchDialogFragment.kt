@@ -146,6 +146,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private var filterPopup: PopupWindow? = null
 	private var filterAndSortJob: Job? = null
 	private var filterAndSortRequestId = 0
+	private var catalogDescriptions: Map<String, String>? = null
+	private var catalogDescriptionsJob: Job? = null
 
 	private var currentMode: ScreenMode = ScreenMode.EXPLORE
 	private var currentFullSearchMode: FullSearchMode = FullSearchMode.INPUT
@@ -1109,7 +1111,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun refreshPreparedEntries() {
 		val parent = parentFragment as? StarMapFragment
-		val preparedData = searchPreparedDataFactory.create(requireContext(), parent)
+		val preparedData = searchPreparedDataFactory.create(requireContext(), parent, catalogDescriptions.orEmpty())
 		preparedEntries.clear()
 		preparedEntries.addAll(preparedData.entries)
 		preparedCatalogEntries.clear()
@@ -1117,6 +1119,23 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		widToDisplayName.clear()
 		widToDisplayName.putAll(preparedData.widToDisplayName)
 		searchHelper.updateComputationContext(preparedData.computationContext)
+		loadCatalogDescriptions()
+	}
+
+	private fun loadCatalogDescriptions() {
+		if (view == null || catalogDescriptions != null || catalogDescriptionsJob?.isActive == true) {
+			return
+		}
+		catalogDescriptionsJob = viewLifecycleOwner.lifecycleScope.launch {
+			val descriptions = searchPreparedDataFactory.loadCatalogDescriptions(app)
+			catalogDescriptions = descriptions
+			val updatedEntries = preparedCatalogEntries.map { it.copy(description = descriptions[it.catalog.wid]) }
+			preparedCatalogEntries.clear()
+			preparedCatalogEntries.addAll(updatedEntries)
+			if (shouldShowCatalogEntries()) {
+				applyFiltersAndSort(scrollToTop = false)
+			}
+		}
 	}
 
 	private fun shouldShowInfoHeader(): Boolean {
