@@ -28,7 +28,7 @@ public enum AidlPermissionGroup {
 	SEARCH("search", R.drawable.ic_action_search_dark, R.string.shared_string_search, R.string.aidl_group_search_descr, true,
 			"search"),
 	LOCATION("location", R.drawable.ic_action_my_location, R.string.shared_string_my_location, R.string.aidl_group_location_descr, false,
-			"getAppInfo", "getMapWidgetValues"),
+			"getAppInfo", "getMapWidgetValues", "registerForUpdates"),
 	NAVIGATION("navigation", R.drawable.ic_action_gdirections_dark, R.string.shared_string_navigation, R.string.aidl_group_navigation_descr, false,
 			"navigate", "navigateGpx", "navigateSearch", "pauseNavigation", "resumeNavigation", "stopNavigation",
 			"muteNavigation", "unmuteNavigation", "addRoadBlock", "removeRoadBlock", "getBlockedRoads", "registerForNavUpdates",
