@@ -159,13 +159,14 @@ public class SpatialSearchRanking {
 	}
 
 	private static boolean outsideCity(Amenity a, City c) {
-		String kind = settlementRank(c.getType().name().toLowerCase(Locale.ROOT));
+		// a town is of the rank of a city: the town Leonding borders the city Linz
+		String kind = c.getType() == City.CityType.TOWN ? "city" : c.getType().name().toLowerCase(Locale.ROOT);
 		boolean sameKind = false;
 		for (List<TagValuePair> group : a.getTagGroups().values()) {
 			boolean kindMatches = false, nameMatches = false;
 			for (TagValuePair p : group) {
 				if (p.tag.equals("place")) {
-					kindMatches = kind.equals(settlementRank(p.value));
+					kindMatches = kind.equals("town".equals(p.value) ? "city" : p.value);
 				} else if (p.tag.equals("name") || p.tag.startsWith("name:")) {
 					nameMatches |= isNameOf(c, p.value);
 				}
@@ -176,11 +177,6 @@ public class SpatialSearchRanking {
 			sameKind |= kindMatches;
 		}
 		return sameKind;
-	}
-
-	/** a town is of the rank of a city: the town Leonding borders the city Linz */
-	private static String settlementRank(String place) {
-		return "town".equals(place) ? "city" : place;
 	}
 
 	private static boolean isNameOf(City c, String name) {
