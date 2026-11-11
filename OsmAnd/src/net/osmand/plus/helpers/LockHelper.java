@@ -41,7 +41,6 @@ import java.util.Set;
 public class LockHelper implements SensorEventListener, StateChangedListener<ApplicationMode> {
 
 	private static final Log LOG = PlatformUtil.getLog(LockHelper.class);
-	private static final int LOCK_SCREEN_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 8;
 	private static final int LOCK_TIMEOUT_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 9;
 
 	private static final int SENSOR_SENSITIVITY = 4;
