@@ -382,6 +382,7 @@ public class RoutingOptionsHelper {
 			case CalculateAltitudeItem.KEY -> new CalculateAltitudeItem();
 			case ShowAlongTheRouteItem.KEY -> new ShowAlongTheRouteItem();
 			case AvoidPTTypesRoutingParameter.KEY -> new AvoidPTTypesRoutingParameter();
+			case DepartAtRoutingParameter.KEY -> app.getTransportRoutingHelper().hasRouteProviders() ? new DepartAtRoutingParameter() : null;
 			case AvoidRoadsRoutingParameter.KEY -> new AvoidRoadsRoutingParameter();
 			case GpxLocalRoutingParameter.KEY -> new GpxLocalRoutingParameter();
 			case TimeConditionalRoutingItem.KEY -> new TimeConditionalRoutingItem();

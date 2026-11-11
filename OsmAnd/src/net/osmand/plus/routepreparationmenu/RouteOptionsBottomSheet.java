@@ -47,6 +47,7 @@ import net.osmand.plus.routepreparationmenu.data.parameters.AvoidPTTypesRoutingP
 import net.osmand.plus.routepreparationmenu.data.parameters.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.CalculateAltitudeItem;
 import net.osmand.plus.routepreparationmenu.data.parameters.CustomizeRouteLineRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.DepartAtRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.DividerItem;
 import net.osmand.plus.routepreparationmenu.data.parameters.GpxLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameter;
@@ -60,6 +61,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -74,6 +76,7 @@ import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -187,6 +190,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				items.add(createShowAlongTheRouteItem(optionsItem));
 			} else if (optionsItem instanceof RouteSimulationItem) {
 				items.add(createRouteSimulationItem());
+			} else if (optionsItem instanceof DepartAtRoutingParameter) {
+				items.add(createDepartAtItem(optionsItem));
 			} else if (optionsItem instanceof AvoidPTTypesRoutingParameter) {
 				items.add(createAvoidPTTypesItem(optionsItem));
 			} else if (optionsItem instanceof AvoidRoadsRoutingParameter) {
@@ -466,6 +471,30 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 					AvoidRoadsBottomSheetDialogFragment.showInstance(mapActivity, RouteOptionsBottomSheet.this, applicationMode, null, selectedModeColor);
 					updateMenu();
 				})
+				.create();
+	}
+
+	@NonNull
+	private BaseBottomSheetItem createDepartAtItem(@NonNull LocalRoutingParameter optionsItem) {
+		Long departureTimeSec = app.getTransportRoutingHelper().getDepartureTimeSec();
+		String description = departureTimeSec == null ? getString(R.string.depart_now)
+				: OsmAndFormatter.getFormattedDateTime(app, departureTimeSec * 1000);
+		return new BottomSheetItemWithDescription.Builder()
+				.setDescription(description)
+				.setDescriptionColorId(departureTimeSec == null
+						? ColorUtilities.getSecondaryTextColorId(nightMode) : ColorUtilities.getActiveColorId(nightMode))
+				.setIcon(getContentIcon(optionsItem.getActiveIconId()))
+				.setTitle(getString(R.string.depart_at))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setOnClickListener(view -> new DepartAtDialog(mapActivity).show(() -> {
+					TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+					Long departure = transportRoutingHelper.getDepartureTimeSec();
+					app.getRoutingHelper().onSettingsChanged(applicationMode, true);
+					// cancelling a route that has no destination yet forgets the time that was just chosen
+					transportRoutingHelper.setDepartureTimeSec(departure);
+					updateMenu();
+					dismiss();
+				}))
 				.create();
 	}
 
@@ -793,6 +822,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY,
 				DividerItem.KEY,
+				DepartAtRoutingParameter.KEY,
 				AvoidPTTypesRoutingParameter.KEY,
 				// ShowAlongTheRouteItem.KEY,
 				// DividerItem.KEY,

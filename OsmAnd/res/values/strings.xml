@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="depart_at">Depart at</string>
+	<string name="depart_now">Now</string>
 	<string name="visualization">Visualization</string>
 	<string name="terrain_shadows">Terrain shadows</string>
 	<string name="terrain_shadows_description">Real-time dynamic shading for 3D terrain. Highlights landscape geometry with minimal performance impact.</string>
