@@ -20,11 +20,13 @@ import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.shared.routing.ColoringType;
+import net.osmand.plus.routing.ClimbDetector.ClimbSegment;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.RouteActionPoint;
+import net.osmand.plus.views.layers.geometry.GeometrySolidWayStyle;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
 import net.osmand.shared.ColorPalette;
 import net.osmand.util.Algorithms;
@@ -35,6 +37,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import gnu.trove.list.array.TByteArrayList;
 import gnu.trove.list.array.TIntArrayList;
@@ -48,6 +51,8 @@ public class RouteGeometryWay extends
 	private RouteCalculationResult route;
 	@NonNull
 	private List<Integer> forceIncludedIndexes = new ArrayList<>();
+	private List<ClimbSegment> climbSegments = new ArrayList<>();
+	private static final int CLIMB_COLOR = 0xFF006400; // Dark green
 
 	private Integer customDirectionArrowColor;
 
@@ -94,6 +99,22 @@ public class RouteGeometryWay extends
 		this.gradientPalette = gradientPalette;
 	}
 
+	/**
+	 * Set climb segments to be highlighted on the route
+	 */
+	public void setClimbSegments(@NonNull List<ClimbSegment> segments) {
+		this.climbSegments = new ArrayList<>(segments);
+		this.coloringChanged = true;
+	}
+
+	/**
+	 * Get current climb segments
+	 */
+	@NonNull
+	public List<ClimbSegment> getClimbSegments() {
+		return new ArrayList<>(climbSegments);
+	}
+
 	@Override
 	protected void updatePaints(@Nullable Float width, @NonNull ColoringType routeColoringType) {
 		super.updatePaints(width, routeColoringType);
@@ -111,12 +132,39 @@ public class RouteGeometryWay extends
 				updateGradientWay(tb, locations);
 			} else if (coloringType.isRouteInfoAttribute()) {
 				updateSolidMultiColorRoute(tb, locations, route.getOriginalRoute());
+			} else if (!climbSegments.isEmpty()) {
+				// Create a style map with dark green for climb segments
+				Map<Integer, GeometryWayStyle<?>> styleMap = createClimbStyleMap(locations);
+				updateWay(locations, styleMap, tb);
 			} else {
 				updateWay(locations, tb);
 			}
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Create a style map that colors climb segments in dark green
+	 */
+	@NonNull
+	private Map<Integer, GeometryWayStyle<?>> createClimbStyleMap(@NonNull List<Location> locations) {
+		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
+		GeometryWayStyle<?> defaultStyle = getDefaultWayStyle();
+		
+		for (ClimbSegment climb : climbSegments) {
+			// Create a style with dark green color for the climb segment
+			// We need to use the MultiColoringGeometryWay's getSolidWayStyle method
+			// But we don't have access to it directly, so we'll create a simple style
+			GeometrySolidWayStyle<?> climbStyle = new GeometrySolidWayStyle<>(
+					getContext(), CLIMB_COLOR, defaultStyle.width != null ? defaultStyle.width : 12f,
+					0, false);
+			
+			// Add the style for the start index
+			styleMap.put(climb.startIndex, climbStyle);
+		}
+		
+		return styleMap;
 	}
 
 	public void setForceIncludedPointIndexesFromActionPoints(@Nullable List<RouteActionPoint> actionPoints) {
@@ -142,6 +190,8 @@ public class RouteGeometryWay extends
 		cachedSegments.clear();
 		super.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lastProjection, startLocationIndex);
 	}
+
+
 
 	@Override
 	protected boolean shouldSkipLocation(@Nullable TByteArrayList simplification, Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {

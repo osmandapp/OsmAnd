@@ -35,6 +35,8 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.BaseRouteLayer;
 import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
+import net.osmand.plus.routing.ClimbDetector;
+import net.osmand.plus.routing.ClimbDetector.ClimbSegment;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWayContext;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
@@ -49,6 +51,8 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
@@ -57,6 +61,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private final RoutingHelper helper;
 	private final TransportRoutingHelper transportHelper;
 	private Location lastRouteProjection;
+	private final ClimbDetector climbDetector;
 
 	private final ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
@@ -97,6 +102,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		this.transportHelper = helper.getTransportRoutingHelper();
 		this.chartPointsHelper = new ChartPointsHelper(app);
 		this.coloringAvailabilityCache = new ColoringTypeAvailabilityCache(app);
+		this.climbDetector = new ClimbDetector();
 	}
 
 	public RoutingHelper getHelper() {
@@ -501,6 +507,14 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			boolean shouldShowDirectionArrows = shouldShowDirectionArrows();
 			routeGeometry.setRouteStyleParams(routeLineColor, routeLineWidth, shouldShowDirectionArrows,
 					getDirectionArrowsColor(), actualColoringType, routeInfoAttribute, routeGradientPalette);
+			
+			// Detect and set climb segments for highlighting
+			List<Location> locations = route.getImmutableAllLocations();
+			if (locations != null && locations.size() >= 2 && !helper.isPublicTransportMode()) {
+				List<ClimbSegment> climbs = climbDetector.detectClimbs(locations);
+				routeGeometry.setClimbSegments(climbs);
+			}
+			
 			boolean routeUpdated = routeGeometry.updateRoute(tileBox, route);
 			boolean shouldShowTurnArrows = shouldShowTurnArrows();
 
