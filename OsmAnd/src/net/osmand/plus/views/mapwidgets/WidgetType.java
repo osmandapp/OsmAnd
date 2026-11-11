@@ -151,7 +151,10 @@ public enum WidgetType {
 
 	// Bottom panel
 	ROUTE_INFO("route_info", R.string.map_widget_route_information, R.string.map_widget_route_information_desc, R.drawable.widget_route_info_day, R.drawable.widget_route_info_night, 0, null, NAVIGATION_POINTS, BOTTOM),
-	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);
+	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM),
+	
+	// Right panel
+	CLIMBS_COUNT("climbs_count", R.string.map_widget_climbs_count, R.string.map_widget_climbs_count_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, ALTITUDE, RIGHT);
 
 	public static final String INTERMEDIATE_TIME_WIDGET_LEGACY = "intermediate_time";
 	public static final String NAVIGATION_TIME_WIDGET_LEGACY = "time";
@@ -396,6 +399,8 @@ public enum WidgetType {
 			return new RouteInfoWidgetInfoFragment();
 		} else if (this == STREET_NAME) {
 			return new StreetNameWidgetInfoFragment();
+		} else if (this == CLIMBS_COUNT) {
+			return new ClimbsCountWidgetInfoFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
