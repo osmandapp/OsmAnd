@@ -1,27 +1,23 @@
 package net.osmand.shared.gpx
 
 import net.osmand.shared.io.KFile
-import net.osmand.shared.util.KLock
-import net.osmand.shared.util.synchronized
+import net.osmand.shared.io.exclusiveSink
 import net.osmand.shared.xml.XmlPullParser
 import okio.Buffer
+import okio.BufferedSink
 import okio.FileSystem
 import okio.IOException
 import okio.SYSTEM
+import okio.Sink
 import okio.buffer
 import okio.use
-import kotlin.random.Random
 
 /** Copies a GPX without round-tripping its contents through the GPX model. */
-class GpxFileCopy internal constructor(private val fileSystem: FileSystem) {
-
-	private companion object {
-		// Okio's JVM/Android sink(mustCreate = true) checks existence before opening the file.
-		// Serialize publication across instances instead of relying on that check being atomic.
-		val publicationLock = KLock()
-	}
-
-	constructor() : this(FileSystem.SYSTEM)
+class GpxFileCopy internal constructor(
+	private val fileSystem: FileSystem,
+	private val createDestination: (KFile) -> Sink
+) {
+	constructor() : this(FileSystem.SYSTEM, KFile::exclusiveSink)
 
 	/**
 	 * Copies a UTF-8 GPX 1.1 document, updating metadata/name and the non-empty name of its
@@ -30,47 +26,37 @@ class GpxFileCopy internal constructor(private val fileSystem: FileSystem) {
 	 * are preserved. This deliberately does not use GpxUtilities.writeGpxFile.
 	 *
 	 * The caller chooses the final filename and whether this policy applies to the creator.
-	 * Run off the UI thread: the input and edited XML are held in memory. Malformed XML, DTDs,
-	 * other encodings and ambiguous name elements fail before creating the destination.
-	 * The destination's parent must exist. An existing destination, including the source itself,
-	 * is refused. Concurrent calls to this API targeting the same file cannot both win.
+	 * Run off the UI thread: the source XML is held in memory. Malformed XML, DTDs, other
+	 * encodings and ambiguous name elements fail before creating the destination.
+	 * The parent must exist. Exclusive creation refuses any existing destination, including
+	 * symbolic links and the source itself, without a check-then-open race.
 	 *
-	 * A completed sibling temporary file is moved over an exclusively created empty reservation.
-	 * Readers should discover the copy only after this method returns. A process crash can leave
-	 * the temporary file or empty reservation; this is not a crash-durable transaction. Other
-	 * writers must coordinate destination creation with the caller: Okio does not provide an
-	 * atomic no-replace move on every target. They must not replace/delete the reservation.
+	 * Register/show the copy only after success. Write/close failures remove the incomplete
+	 * destination; cleanup failures are attached to the original exception. A process crash
+	 * can leave a partial copy, but never truncates the source or an existing destination.
+	 * The caller owns the new path during this synchronous operation: other code must not
+	 * delete or replace it before completion. There is no cancellation or crash-durability API.
 	 */
 	@Throws(IOException::class)
 	fun copyWithUpdatedNames(source: KFile, destination: KFile, newName: String) {
-		val original = fileSystem.read(source.path) { readByteArray() }
-		val updated = try {
-			GpxNameEdits(original.decodeToString(throwOnInvalidSequence = true)).apply(newName)
-				.encodeToByteArray(throwOnInvalidSequence = true)
+		val edits = try {
+			val xml = fileSystem.read(source.path) { readByteArray() }
+				.decodeToString(throwOnInvalidSequence = true)
+			GpxNameEdits(xml).also { it.prepare(newName) }
 		} catch (e: Exception) {
 			throw IOException("Cannot update GPX names: ${e.message}", e)
 		}
-
-		val parent = destination.path.parent ?: throw IOException("Destination must have a parent")
-		val temporary = parent / ".${destination.name()}.${Random.nextLong().toULong()}.tmp"
-		// Acquire the sink outside the try: a failed exclusive create does not own that path.
-		val sink = fileSystem.sink(temporary, mustCreate = true)
-		var reserved = false
+		// Do not delete anything if exclusive creation fails: we do not own that file.
+		val sink = createDestination(destination)
 		try {
-			sink.buffer().use { it.write(updated) }
-			synchronized(publicationLock) {
-				val reservation = fileSystem.sink(destination.path, mustCreate = true)
-				reserved = true
-				reservation.close()
-				fileSystem.atomicMove(temporary, destination.path)
-				reserved = false
-			}
-		} finally {
+			sink.buffer().use { edits.writeTo(it) }
+		} catch (failure: Throwable) {
 			try {
-				if (reserved) fileSystem.delete(destination.path)
-			} finally {
-				fileSystem.delete(temporary)
+				fileSystem.delete(destination.path)
+			} catch (cleanup: Throwable) {
+				failure.addSuppressed(cleanup)
 			}
+			throw failure
 		}
 	}
 }
@@ -88,7 +74,9 @@ private class GpxNameEdits(private val xml: String) {
 	private data class Edit(val start: Int, val end: Int, val replacement: String)
 	private data class Tag(val start: Int, val end: Int, val qualifiedName: String, val closing: Boolean, val empty: Boolean)
 
-	fun apply(newName: String): String {
+	private val edits = mutableListOf<Edit>()
+
+	fun prepare(newName: String) {
 		val escaped = escapeName(newName)
 		// Preflight BEFORE invoking the platform parser, whose entity handling differs by target.
 		// A DTD must never be expanded or resolved while locating edits in the original text.
@@ -180,37 +168,42 @@ private class GpxNameEdits(private val xml: String) {
 		check(metadata?.name?.hasElements != true && (trackCount != 1 || firstTrack?.name?.hasElements != true)) {
 			"A name contains child elements"
 		}
-		val edits = mutableListOf<Edit>()
 		if (metadata == null) {
 			val prefix = gpx.tag.qualifiedName.substringBefore(':', "").let { if (it.isEmpty()) "" else "$it:" }
-			insertChild(gpx, "<${prefix}metadata><${prefix}name>$escaped</${prefix}name></${prefix}metadata>", edits)
+			insertChild(gpx, "<${prefix}metadata><${prefix}name>$escaped</${prefix}name></${prefix}metadata>")
 		} else {
 			val name = metadata.name
 			if (name == null) {
 				val prefix = metadata.tag.qualifiedName.substringBefore(':', "").let { if (it.isEmpty()) "" else "$it:" }
-				insertChild(metadata, "<${prefix}name>$escaped</${prefix}name>", edits)
+				insertChild(metadata, "<${prefix}name>$escaped</${prefix}name>")
 			} else if (name.text.toString() != newName) {
-				replaceName(name, escaped, edits)
+				replaceName(name, escaped)
 			}
 		}
 		if (trackCount == 1) {
 			firstTrack?.name?.let {
-				if (it.text.isNotEmpty() && it.text.toString() != newName) replaceName(it, escaped, edits)
+				if (it.text.isNotEmpty() && it.text.toString() != newName) replaceName(it, escaped)
 			}
 		}
-		return buildString {
-			var offset = 0
-			for (edit in edits.sortedBy { it.start }) {
-				check(edit.start >= offset) { "Overlapping name edits" }
-				append(xml, offset, edit.start)
-				append(edit.replacement)
-				offset = edit.end
-			}
-			append(xml, offset, xml.length)
+		edits.sortBy { it.start }
+		var end = 0
+		for (edit in edits) {
+			check(edit.start >= end && edit.end >= edit.start && edit.end <= xml.length) { "Invalid name edits" }
+			end = edit.end
 		}
 	}
 
-	private fun insertChild(parent: Element, child: String, edits: MutableList<Edit>) {
+	fun writeTo(sink: BufferedSink) {
+		var offset = 0
+		for (edit in edits) {
+			sink.writeUtf8(xml, offset, edit.start)
+			sink.writeUtf8(edit.replacement)
+			offset = edit.end
+		}
+		sink.writeUtf8(xml, offset, xml.length)
+	}
+
+	private fun insertChild(parent: Element, child: String) {
 		if (parent.tag.empty) {
 			edits.add(Edit(parent.tag.end - 2, parent.tag.end, ">$child</${parent.tag.qualifiedName}>"))
 		} else {
@@ -218,10 +211,10 @@ private class GpxNameEdits(private val xml: String) {
 		}
 	}
 
-	private fun replaceName(name: Element, escaped: String, edits: MutableList<Edit>) {
+	private fun replaceName(name: Element, escaped: String) {
 		check(!name.hasElements) { "A name contains child elements" }
 		if (name.tag.empty) {
-			insertChild(name, escaped, edits)
+			insertChild(name, escaped)
 			return
 		}
 		var offset = name.tag.end

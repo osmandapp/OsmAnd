@@ -1,11 +1,9 @@
 package net.osmand.shared.gpx
 
 import net.osmand.shared.io.KFile
+import net.osmand.shared.io.exclusiveSink
 import okio.FileSystem
-import okio.ForwardingFileSystem
 import okio.IOException
-import okio.Path
-import okio.Sink
 import java.util.concurrent.CyclicBarrier
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -29,15 +27,12 @@ class GpxFileCopyConcurrencyTest {
 			fs.write(source.path) { writeUtf8("<gpx><metadata><name>Old</name></metadata></gpx>") }
 			val calls = (0 until workers).map { index ->
 				executor.submit<Boolean> {
-					val racingFs = object : ForwardingFileSystem(fs) {
-						override fun sink(file: Path, mustCreate: Boolean): Sink {
-							// Reach publication together, using separate operation instances.
-							if (file != destination.path) barrier.await(10, TimeUnit.SECONDS)
-							return super.sink(file, mustCreate)
-						}
+					val copier = GpxFileCopy(fs) { file ->
+						barrier.await(10, TimeUnit.SECONDS)
+						file.exclusiveSink()
 					}
 					try {
-						GpxFileCopy(racingFs).copyWithUpdatedNames(source, destination, "Copy $index")
+						copier.copyWithUpdatedNames(source, destination, "Copy $index")
 						true
 					} catch (_: IOException) {
 						false

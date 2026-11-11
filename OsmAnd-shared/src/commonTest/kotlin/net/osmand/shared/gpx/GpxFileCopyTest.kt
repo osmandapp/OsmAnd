@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx
 
 import net.osmand.shared.io.KFile
+import net.osmand.shared.io.exclusiveSink
 import okio.Buffer
 import okio.FileSystem
 import okio.ForwardingFileSystem
@@ -8,7 +9,6 @@ import okio.ForwardingSink
 import okio.IOException
 import okio.Path
 import okio.SYSTEM
-import okio.Sink
 import kotlin.random.Random
 import kotlin.test.AfterTest
 import kotlin.test.Test
@@ -195,39 +195,61 @@ class GpxFileCopyTest {
 	}
 
 	@Test
-	fun removesOnlyItsOwnFilesAfterWriteOrPublicationFailure() {
+	fun removesIncompleteCopyAfterWriteOrCloseFailure() {
 		for (failWrite in listOf(true, false)) {
 			writeSource("<gpx/>".encodeToByteArray())
-			val failingFs = object : ForwardingFileSystem(fs) {
-				override fun sink(file: Path, mustCreate: Boolean): Sink {
-					val sink = super.sink(file, mustCreate)
-					return if (!failWrite) sink else object : ForwardingSink(sink) {
-						override fun write(source: Buffer, byteCount: Long) {
+			val copier = GpxFileCopy(fs) { file ->
+				object : ForwardingSink(file.exclusiveSink()) {
+					override fun write(source: Buffer, byteCount: Long) {
+						if (failWrite) {
 							super.write(source, minOf(3, byteCount))
 							throw IOException("Injected write failure")
 						}
+						super.write(source, byteCount)
+					}
+					override fun close() {
+						super.close()
+						if (!failWrite) throw IOException("Injected close failure")
 					}
 				}
-				override fun atomicMove(source: Path, target: Path) {
-					throw IOException("Injected publication failure")
-				}
 			}
-			assertFailsWith<IOException> { GpxFileCopy(failingFs).copyWithUpdatedNames(source, destination, "New") }
+			assertFailsWith<IOException> { copier.copyWithUpdatedNames(source, destination, "New") }
 			assertEquals(listOf(source.path), fs.list(directory))
 			assertEquals("<gpx/>", fs.read(source.path) { readUtf8() })
 		}
 	}
 
 	@Test
-	fun refusesDestinationCreatedWhilePreparingCopy() {
+	fun retainsOriginalFailureWhenCleanupAlsoFails() {
 		writeSource("<gpx/>".encodeToByteArray())
-		val racingFs = object : ForwardingFileSystem(fs) {
-			override fun sink(file: Path, mustCreate: Boolean): Sink {
-				if (file == destination.path) fs.write(destination.path) { writeUtf8("other writer") }
-				return super.sink(file, mustCreate)
+		val failingFs = object : ForwardingFileSystem(fs) {
+			override fun delete(path: Path, mustExist: Boolean) {
+				throw IOException("Injected cleanup failure")
 			}
 		}
-		assertFailsWith<IOException> { GpxFileCopy(racingFs).copyWithUpdatedNames(source, destination, "New") }
+		val copier = GpxFileCopy(failingFs) { file ->
+			object : ForwardingSink(file.exclusiveSink()) {
+				override fun write(source: Buffer, byteCount: Long) {
+					super.write(source, minOf(3, byteCount))
+					throw IOException("Injected write failure")
+				}
+			}
+		}
+		val failure = assertFailsWith<IOException> { copier.copyWithUpdatedNames(source, destination, "New") }
+		assertEquals("Injected write failure", failure.message)
+		assertEquals("Injected cleanup failure", failure.suppressedExceptions.single().message)
+		assertEquals("<gp", fs.read(destination.path) { readUtf8() })
+		assertEquals("<gpx/>", fs.read(source.path) { readUtf8() })
+	}
+
+	@Test
+	fun refusesDestinationCreatedWhilePreparingCopy() {
+		writeSource("<gpx/>".encodeToByteArray())
+		val copier = GpxFileCopy(fs) { file ->
+			fs.write(file.path) { writeUtf8("other writer") }
+			file.exclusiveSink()
+		}
+		assertFailsWith<IOException> { copier.copyWithUpdatedNames(source, destination, "New") }
 		assertEquals("other writer", fs.read(destination.path) { readUtf8() })
 		assertEquals(setOf(source.path, destination.path), fs.list(directory).toSet())
 	}

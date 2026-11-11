@@ -116,6 +116,10 @@ kotlin {
 			implementation("org.jetbrains.kotlin:kotlin-test:2.0.0")
             implementation("io.ktor:ktor-client-mock:$ktorVersion")
 		}
+		androidInstrumentedTest.dependencies {
+			implementation("org.jetbrains.kotlin:kotlin-test-junit:2.0.0")
+			implementation("androidx.test:runner:1.7.0")
+		}
 		jvmTest.dependencies {
 			// only to check the generated tables still say what junidecode says
 			implementation("com.moparisthebest:junidecode:$junidecodeVersion")
@@ -132,6 +136,7 @@ android {
 	}
 	defaultConfig {
 		minSdk = 24
+		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 	}
 }
 
