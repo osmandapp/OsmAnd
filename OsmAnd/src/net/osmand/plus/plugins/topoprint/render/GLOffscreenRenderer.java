@@ -950,6 +950,12 @@ public class GLOffscreenRenderer implements MapRendererViewListener {
 			}
 		}
 		tileView = null;
+		// The EGL hand-over leaves the main renderer waiting for its first
+		// frame request. After a successful capture the just-drawn frame acts
+		// as one; on the cancel/fail paths nothing else triggers a redraw and
+		// the map stays blank until the user happens to touch it — nudge it
+		// explicitly (queued after this method finishes the teardown).
+		app.runInUIThread(() -> app.getOsmandMap().getMapView().refreshMap());
 	}
 
 	/**

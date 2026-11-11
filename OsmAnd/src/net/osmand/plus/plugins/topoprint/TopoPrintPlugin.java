@@ -398,6 +398,10 @@ public class TopoPrintPlugin extends OsmandPlugin {
 						}
 					}
 				});
+		// Publish the task only now that it exists: the cancel listeners above
+		// read taskHolder[0], which was still empty when the dialog was built
+		// (the task is created after progress.show()).
+		taskHolder[0] = task;
 		new Thread(task::run, "TopoPrintGenerate").start();
 	}
 
