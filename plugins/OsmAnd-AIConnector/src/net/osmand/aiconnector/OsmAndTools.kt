@@ -22,6 +22,7 @@ import net.osmand.aidlapi.gpx.HideGpxParams
 import net.osmand.aidlapi.gpx.ShowGpxParams
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams
+import net.osmand.aidlapi.info.AApiAccess
 import net.osmand.aidlapi.logcat.ALogcatListenerParams
 import net.osmand.aidlapi.logcat.OnLogcatMessageParams
 import net.osmand.aidlapi.info.AMapWidgetValue
@@ -72,10 +73,31 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 		return "${ConnectorSettings.OSMAND_PACKAGES[pack] ?: "OsmAnd"} ($pack)"
 	}
 
-	private fun refused(group: String) = "OsmAnd refused the call. It needs the '$group' permission group for " +
-			"OsmAnd AI Connector in ${osmandApp()}: ask the user to open that app > Menu > Plugins > " +
-			"OsmAnd AI Connector and turn on '$group'. Each OsmAnd app on the phone keeps its own permissions. " +
-			"The arguments may also be invalid."
+	private fun refused(group: Group): String {
+		// null from an OsmAnd without getApiAccess, which cannot tell why it refused
+		val access = bridge.get().apiAccess
+		return when {
+			access == null -> "OsmAnd refused the call. It needs the '${group.title}' permission group for " +
+					"OsmAnd AI Connector in ${osmandApp()}: ask the user to open that app > Menu > Plugins > " +
+					"OsmAnd AI Connector and turn on '${group.title}'. Each OsmAnd app on the phone keeps its own permissions. " +
+					"The arguments may also be invalid."
+			!access.isEnabled -> "OsmAnd refused the call: OsmAnd AI Connector is turned off in ${osmandApp()}. " +
+					"Ask the user to turn it on in that app > Menu > Plugins."
+			!isGranted(access, group) -> "OsmAnd refused the call: it needs the '${group.title}' permission group, " +
+					"which OsmAnd AI Connector does not have in ${osmandApp()}. Ask the user to open that app > Menu > Plugins > " +
+					"OsmAnd AI Connector and turn on '${group.title}'. Each OsmAnd app on the phone keeps its own permissions."
+			else -> "OsmAnd did not do it, though OsmAnd AI Connector has the '${group.title}' permission group: " +
+					"the arguments may be invalid."
+		}
+	}
+
+	private fun isGranted(access: AApiAccess, group: Group) = access.groups.any { it.id == group.id && it.isGranted }
+
+	/** True when OsmAnd says it refuses the calls of the group; an older OsmAnd cannot tell. */
+	private fun isRefused(group: Group): Boolean {
+		val access = bridge.get().apiAccess ?: return false
+		return !access.isEnabled || !isGranted(access, group)
+	}
 
 	private val tools = listOf(
 		Tool(
@@ -582,7 +604,7 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 		.put("content", JSONArray().put(JSONObject().put("type", "text").put("text", text)))
 		.put("isError", isError)
 
-	private fun check(group: String, ok: Boolean) {
+	private fun check(group: Group, ok: Boolean) {
 		if (!ok) throw ToolError(refused(group))
 	}
 
@@ -610,18 +632,24 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 			// an older OsmAnd lacks newer calls and refuses them like a missing permission
 			.put("osmand_version", bridge.versionName(bridge.boundPackage ?: bridge.preferredPackage))
 			.put("connector_version", BuildConfig.VERSION_NAME)
-		// refreshMap is in the Map group that every connected app gets by default
-		if (!api.refreshMap()) {
+		// null from an OsmAnd without getApiAccess; refreshMap is in the Map group that every connected app gets by default
+		val access = api.apiAccess
+		val enabled = access?.isEnabled ?: api.refreshMap()
+		if (!enabled) {
 			o.put("enabled", false).put("hint", refused(MAP))
 			return o
 		}
-		// groups that have a call without side effects; the others are checked when a tool is called
-		o.put("groups", JSONObject()
-			.put(MAP, true)
-			.put(SETTINGS, readPref("application_mode", null) != null)
-			.put(TRACKS_VIEW, api.getActiveGpx(ArrayList()))
-			.put(RECORDING, api.gpxRecordingInfo != null)
-			.put(LOCATION, api.appInfo != null))
+		o.put("groups", if (access != null) {
+			JSONObject().apply { access.groups.forEach { put(it.id, it.isGranted) } }
+		} else {
+			// groups that have a call without side effects; the others are checked when a tool is called
+			JSONObject()
+				.put(MAP.id, true)
+				.put(SETTINGS.id, readPref("application_mode", null) != null)
+				.put(TRACKS_VIEW.id, api.getActiveGpx(ArrayList()))
+				.put(RECORDING.id, api.gpxRecordingInfo != null)
+				.put(LOCATION.id, api.appInfo != null)
+		})
 		o.put("enabled", true)
 			.put("screen_open", api.isFragmentOpen)
 			.put("context_menu_open", api.isMenuOpen)
@@ -776,6 +804,8 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 			val id = ids.getString(i)
 			out.put(id, readPref(id, profile) ?: JSONObject.NULL)
 		}
+		// OsmAnd returns no value both for an unknown id and for any id without the Settings group
+		if (out.keys().asSequence().any { out.isNull(it) } && isRefused(SETTINGS)) throw ToolError(refused(SETTINGS))
 		return out
 	}
 
@@ -979,17 +1009,20 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 			.put("required", JSONArray(required))
 }
 
-private const val MAP = "Map"
-private const val LOCATION = "My Position"
-private const val SCREEN = "Screenshots"
-private const val SEARCH = "Search"
-private const val NAVIGATION = "Navigation"
-private const val FAVORITES = "Favorites"
-private const val TRACKS_VIEW = "Tracks: view"
-private const val TRACKS_EDIT = "Tracks: edit"
-private const val RECORDING = "Trip recording"
-private const val SETTINGS = "Settings"
-private const val SYSTEM = "System"
+/** A permission group: its id in OsmAnd's API and its name on OsmAnd's screen of the connected app. */
+private class Group(val id: String, val title: String)
+
+private val MAP = Group("map", "Map")
+private val LOCATION = Group("location", "My Position")
+private val SCREEN = Group("screen", "Screenshots")
+private val SEARCH = Group("search", "Search")
+private val NAVIGATION = Group("navigation", "Navigation")
+private val FAVORITES = Group("favorites", "Favorites")
+private val TRACKS_VIEW = Group("tracks_view", "Tracks: view")
+private val TRACKS_EDIT = Group("tracks_edit", "Tracks: edit")
+private val RECORDING = Group("recording", "Trip recording")
+private val SETTINGS = Group("settings", "Settings")
+private val SYSTEM = Group("system", "System")
 
 private const val MAX_LOG_LINES = 5000
 private val GUIDE_TOPICS = listOf("flyover")
