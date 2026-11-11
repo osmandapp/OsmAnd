@@ -45,8 +45,18 @@ public class SpatialSearchRanking {
 	/** "lidl espoo": a POI that the map places in another city than the one the query named. More than a POI can score
 	 *  (0.15 name + 1.6 landmark + 0.5 rating + 2 near + 1 exact), so however close it is, it stays below the named city */
 	public double wOutsideCity = 6.0;
+	/** share of the way to the named city added to a POI's distance from the centre of the city: see distanceViaCity */
+	public double wayToCityShare = 0.7;
+	/** km beyond the bbox of the named city over which distanceViaCity comes into full effect */
+	public double wayToCityRampKm = 5.0;
 	/** elo above MIN_ELO_RATING at which the rating term saturates */
 	public double ratingSpan = 1200.0;
+
+	private final SpatialPoiSearch poiSearch;
+
+	public SpatialSearchRanking(SpatialPoiSearch poiSearch) {
+		this.poiSearch = poiSearch;
+	}
 
 	// name
 	private static final double NAME_EXACT = 1.00;
@@ -54,6 +64,8 @@ public class SpatialSearchRanking {
 	private static final double NAME_CONTAINS = 0.65;
 	private static final double NAME_OTHER = 0.50;
 	private static final double NAME_KIND_ONLY = 0.15;
+
+	private static final String TOP_INDEX_PREFIX = "top_index_";
 
 	// type
 	private static final double TYPE_ADMIN = 1.00; // a country or a region IS the place it names
@@ -134,6 +146,9 @@ public class SpatialSearchRanking {
 			return 0;
 		}
 		Double km = center == null ? null : SpatialSearchResult.getDistance(r, center) / 1000.0;
+		if (km != null) {
+			km = Math.min(km, distanceViaCity(r, center, km));
+		}
 		return score(nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
 				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r))
 				- (head.atom.ruleSpelling ? wRuleSpelling : 0)
@@ -149,16 +164,89 @@ public class SpatialSearchRanking {
 		if (head == null || !(head.atom.object instanceof Amenity a) || Algorithms.isEmpty(a.getTagGroups())) {
 			return false;
 		}
+		SpatialSearchResultRef city = matchedCity(r);
+		return city != null && Boolean.FALSE.equals(inCity(a, (City) city.atom.object));
+	}
+
+	/** the settlement the query named together with the object */
+	private static SpatialSearchResultRef matchedCity(SpatialSearchResult r) {
 		for (int i = 1; i < r.objs.size(); i++) {
 			if (r.objs.get(i).atom.object instanceof City c && c.getType() != null
 					&& c.getType().storedAsSeparateAdminEntity() && c.getType() != City.CityType.POSTCODE) {
-				return outsideCity(a, c);
+				return r.objs.get(i);
 			}
 		}
-		return false;
+		return null;
 	}
 
-	private static boolean outsideCity(Amenity a, City c) {
+	/**
+	 * "lidl espoo" from Vantaa, 23 km off the centre of Espoo: the Lidls of Espoo are 15-27 km from the person, so
+	 * ordered by that distance the first screen is the edge of Espoo next to Vantaa. For a person outside the bbox of
+	 * the named city, a POI of that city is as far as from the city's place node plus a share of the way to it, when
+	 * that is nearer: the centre comes first, a shop on the near edge stays on the first screen.
+	 * Only when the map says the POI is in that city and the query named the POI itself, not its kind: a word for a
+	 * kind asks for the nearest one ("cafe amsterdam"). Grows over wayToCityRampKm from the bbox, so that
+	 * a step across the line of the bbox does not reorder the results.
+	 *
+	 * @return km, or infinity when the distance from the person stays
+	 */
+	private double distanceViaCity(SpatialSearchResult r, LatLon person, double direct) {
+		SpatialSearchResultRef city = matchedCity(r);
+		LatLon poi = r.getLatLon();
+		if (city == null || poi == null || !(r.getFirstRef().atom.object instanceof Amenity a)
+				|| Algorithms.isEmpty(a.getTagGroups())) {
+			return Double.POSITIVE_INFINITY;
+		}
+		City c = (City) city.atom.object;
+		LatLon centre = c.getLocation();
+		if (centre == null || !Boolean.TRUE.equals(inCity(a, c)) || insideCityBbox(city.atom, c, person)
+				|| !namedItself(r.getFirstRef())) {
+			return Double.POSITIVE_INFINITY;
+		}
+		double via = (MapUtils.getDistance(centre, poi) + wayToCityShare * MapUtils.getDistance(person, centre)) / 1000.0;
+		return direct + Math.min(1, distanceFromBbox(city.atom, person) / wayToCityRampKm) * (via - direct);
+	}
+
+	private static boolean insideCityBbox(NameIndexAtom atom, City c, LatLon person) {
+		int[] b = atom.coords == null ? null : atom.coords.bbox31;
+		if (b == null) {
+			// no bbox: the radius of its kind around the place
+			return MapUtils.getDistance(person, c.getLocation()) <= c.getType().getRadius();
+		}
+		int x = MapUtils.get31TileNumberX(person.getLongitude()), y = MapUtils.get31TileNumberY(person.getLatitude());
+		return x >= Math.min(b[0], b[2]) && x <= Math.max(b[0], b[2])
+				&& y >= Math.min(b[1], b[3]) && y <= Math.max(b[1], b[3]);
+	}
+
+	private double distanceFromBbox(NameIndexAtom atom, LatLon person) {
+		int[] b = atom.coords == null ? null : atom.coords.bbox31;
+		if (b == null) {
+			return wayToCityRampKm;
+		}
+		int x = MapUtils.get31TileNumberX(person.getLongitude()), y = MapUtils.get31TileNumberY(person.getLatitude());
+		return distKm(x, y, Math.min(b[0], b[2]), Math.min(b[1], b[3]), Math.max(b[0], b[2]), Math.max(b[1], b[3]));
+	}
+
+	/**
+	 * The query named the object by its brand or by its whole name. A word that also names a category is a word for
+	 * a kind, even when a chain carries it: "pharmacy" is in the index of brands through "CVS Pharmacy".
+	 */
+	private boolean namedItself(SpatialSearchResultRef ref) {
+		boolean brand = false;
+		for (SpatialSearchToken t : ref.tokens) {
+			for (int id : t.poiCategoryIds) {
+				SpatialPoiSearch.SpatialPoiType type = poiSearch.getById(id);
+				if (type == null || type.getKey() == null || !type.getKey().startsWith(TOP_INDEX_PREFIX)) {
+					return false;
+				}
+				brand |= ref.atom.poiTypes != null && ref.atom.poiTypes.contains(id);
+			}
+		}
+		return brand || nameScore(ref) == NAME_EXACT && !queryIsKind(ref);
+	}
+
+	/** @return true: the tag groups of the POI name this city; false: another settlement of its rank; null: none */
+	private static Boolean inCity(Amenity a, City c) {
 		String kind = settlementRank(c.getType().name().toLowerCase(Locale.ROOT));
 		boolean sameKind = false;
 		for (List<TagValuePair> group : a.getTagGroups().values()) {
@@ -171,11 +259,11 @@ public class SpatialSearchRanking {
 				}
 			}
 			if (kindMatches && nameMatches) {
-				return false;
+				return true;
 			}
 			sameKind |= kindMatches;
 		}
-		return sameKind;
+		return sameKind ? false : null;
 	}
 
 	/** a town is of the rank of a city: the town Leonding borders the city Linz */
