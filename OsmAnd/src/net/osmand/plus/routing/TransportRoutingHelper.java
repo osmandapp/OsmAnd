@@ -28,6 +28,8 @@ import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.TransportRoutePlanner;
+import net.osmand.router.TransportRouteProvider;
+import net.osmand.router.TransportRouteProviders;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.router.TransportRoutingConfiguration;
@@ -82,6 +84,8 @@ public class TransportRoutingHelper {
 
 	private TransportRouteCalculationProgressCallback progressRoute;
 
+	private final TransportRouteProviders routeProviders = new TransportRouteProviders();
+
 
 	public TransportRoutingHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -89,6 +93,22 @@ public class TransportRoutingHelper {
 
 	public void setRoutingHelper(@NonNull RoutingHelper routingHelper) {
 		this.routingHelper = routingHelper;
+	}
+
+	/**
+	 * Registers a source of public transport routes that is asked before the OBF based planner.
+	 * See {@link TransportRouteProvider} for the contract.
+	 */
+	public void addRouteProvider(@NonNull TransportRouteProvider provider) {
+		routeProviders.add(provider);
+	}
+
+	public void removeRouteProvider(@NonNull TransportRouteProvider provider) {
+		routeProviders.remove(provider);
+	}
+
+	public boolean hasRouteProviders() {
+		return !routeProviders.isEmpty();
 	}
 
 	public LatLon getStartLocation() {
@@ -533,6 +553,18 @@ public class TransportRoutingHelper {
 			}
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
+
+			TransportRouteProviders providers = transportRoutingHelper.routeProviders;
+			if (!providers.isEmpty()) {
+				List<TransportRouteResult> providerRoutes = providers.calculate(params.start, params.end, null,
+						params.params, cfg, params.calculationProgress);
+				if (providerRoutes != null) {
+					return providerRoutes;
+				}
+				if (params.calculationProgress.isCancelled) {
+					return null;
+				}
+			}
 
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
 			ctx.calculationProgress = params.calculationProgress;
