@@ -328,7 +328,7 @@ public class PoiSearchCompatTest {
 					copy.readAmenityBboxes(k, copyOf(ktiles)));
 			for (int id = 0; id < 64; id++) {
 				assertEquals(m + " tag group " + id, tagValues(j.getTagValues(id)),
-						copyTagValues(k.getTagValues(id)));
+						copyTagValues(copy.getTagGroups(k).getTagValues(id)));
 			}
 			// asking again finds nothing left to read, on both sides
 			assertEquals(m + " read bboxes again", java.readAmenityBboxes(j, new TLongHashSet(jtiles)),

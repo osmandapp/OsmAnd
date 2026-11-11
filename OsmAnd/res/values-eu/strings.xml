@@ -5026,4 +5026,9 @@
     <string name="media_storage_camera_folder_note_descr">Audioa /OsmAnd-en gordeko da.</string>
     <string name="always_keep_local_copy">Audioa /OsmAnd-en gordeko da</string>
     <string name="always_keep_local_copy_description">Multimedia erantsita geratzen da jatorrizkoa galeriatik edo fitxategietatik ezabatu arren.</string>
+    <string name="update_maps_to_use_new_search">Eguneratu mapak bilaketa berria erabiltzeko (%1$s)</string>
+    <string name="free_region_not_chosen_descr">Deskargatutako lehen maparen eskualdea doako eskualdea bihurtzen da.</string>
+    <string name="free_region_banner_descr">%1$s-en mapa guztiak doakoak dira.</string>
+    <string name="free_region_other_title">%1$s ez da zure doako eskualdea</string>
+    <string name="free_region_other_descr">Doako bertsioak eskualde bateko mapak biltzen ditu. %1$s deskargatzeko, beste eskualdeetako mapak ezabatu egingo dira.</string>
 </resources>

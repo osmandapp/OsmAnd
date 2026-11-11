@@ -584,32 +584,40 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 					return rc1
 				}
 			})
-			if (!diffsByRegion.isEmpty()) {
-				val finalSort: MutableList<BinaryMapIndexReader> = ArrayList()
-				for (i in indexes.indices) {
-					val currFile = indexes[i]
-					val diffs = diffsByRegion[currFile.getRegionName()]
-					if (diffs != null) {
-						finalSort.addAll(diffs)
-						finalSort.add(currFile)
-					} else {
-						finalSort.add(currFile)
-					}
+		}
+		// the live updates go back without a location too: java leaves them out of the search then
+		if (!diffsByRegion.isEmpty()) {
+			val finalSort: MutableList<BinaryMapIndexReader> = ArrayList()
+			for (i in indexes.indices) {
+				val currFile = indexes[i]
+				// once, before the first file of the region: java adds them again before its wiki file
+				val diffs = diffsByRegion.remove(currFile.getRegionName().lowercase())
+				if (diffs != null) {
+					finalSort.addAll(diffs)
+					finalSort.add(currFile)
+				} else {
+					finalSort.add(currFile)
 				}
-				indexes.clear()
-				indexes.addAll(finalSort)
 			}
+			// the updates of a region not searched, as when only the file of a selected result is: java drops them
+			for (diffs in diffsByRegion.values) {
+				finalSort.addAll(diffs)
+			}
+			indexes.clear()
+			indexes.addAll(finalSort)
 		}
 	}
 
-	private fun getDiffsByRegion(indexes: MutableList<BinaryMapIndexReader>): Map<String, MutableList<BinaryMapIndexReader>> {
-		val result = HashMap<String, MutableList<BinaryMapIndexReader>>()
+	private fun getDiffsByRegion(indexes: MutableList<BinaryMapIndexReader>): MutableMap<String, MutableList<BinaryMapIndexReader>> {
+		// in the order of the files, which the updates of regions not searched keep
+		val result = LinkedHashMap<String, MutableList<BinaryMapIndexReader>>()
 		val it = indexes.iterator()
 		while (it.hasNext()) {
 			val r = it.next()
 			val filename = r.getFile().name()
 			if (DIFF_FILE_NAME.matches(filename)) {
-				val currRegionName = r.getRegionName()
+				// iOS names its live updates in lower case, "germany_berlin_europe_25_10_28.live.obf"
+				val currRegionName = r.getRegionName().lowercase()
 				val list = result[currRegionName]
 				if (list != null) {
 					list.add(r)
@@ -754,7 +762,7 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 		const val ALLDELIMITERS = "\\s|,"
 		const val ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-"
 		private val reg = Regex(ALLDELIMITERS)
-		private val DIFF_FILE_NAME = Regex("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+\\.obf")
+		private val DIFF_FILE_NAME = Regex("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+(\\.live)?\\.obf")
 
 		private val commonWordsComparator: Comparator<String> = object : Comparator<String> {
 			val instance = CommonWords.getInstance()

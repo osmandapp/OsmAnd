@@ -5406,4 +5406,21 @@
     <string name="public_transport_route_out_of_memory">Túl hosszú a tömegközlekedési útvonal ahhoz, hogy ezen az eszközön kiszámítható legyen. Válasszon egy közelebbi úti célt.</string>
     <string name="build_update_size_estimated">becsült letöltési idő: ~%1$s</string>
     <string name="release_5_5">• A térbeli keresés alapértelmezés szerint be van kapcsolva: hely környékén történő keresés, jobb rangsorolás, szinonimák, elírás-tolerancia\n\n • A 3D épületek árnyékot vetnek; a nap iránya beállítható\n\n • Panoramax bővítmény: utcaszintű képek a térképen\n\n • Médiakönyvtár: az összes fénykép, videó és hangjegyzet egy helyen\n\n • Szaggatott és pontozott útvonalvonalak, alapértelmezett megjelenés útvonalmappánként\n\n • Utazási sebesség-beállítások az útvonaltervezéshez és az érkezési idő kiszámításához\n\n • Android Auto: legutóbbi úti célok, automatikus „Szabad utazás” funkció, Google Assistant és Gemini\n\n • Gyorsművelet az útvonalak megjelenítéséhez vagy elrejtéséhez\n\n • A kontúrvonalak feliratai felfelé néznek</string>
+    <string name="update_maps_to_use_new_search">Térképek frissítése az új kereső használatához (%1$s)</string>
+    <string name="free_region_not_chosen_descr">Az elsőként letöltött térkép régiója lesz a saját ingyenes régiója.</string>
+    <string name="free_region_banner_descr">%1$s összes térképe ingyenes.</string>
+    <string name="free_region_other_title">%1$s nem az Ön ingyenes régiója</string>
+    <string name="free_region_other_descr">Az ingyenes verzió egyetlen régió térképeit tartalmazza. A(z) %1$s nevű régió letöltéséhez a többi régió térképei törlődnek.</string>
+    <string name="free_region_will_be_deleted">Törölve lesz</string>
+    <string name="free_region_maps_stay">Az áttekintő világtérkép, a szintvonalak és a többi bővítménytérkép megmarad.</string>
+    <string name="free_region_delete_and_download">Törlés és letöltés</string>
+    <string name="free_region_replace_used_title">Az egyszeri ingyenes csere már fel lett használva</string>
+    <string name="free_region_not_eligible_email_descr">Adja meg az e-mail-címét, hogy egyszer lecserélhesse az ingyenes régióját, vagy a korlátlan térképletöltés megszerzéséhez.</string>
+    <string name="free_region_email_helper">OsmAnd-hírleveleket fog kapni, amelyekről bármikor leiratkozhat.</string>
+    <string name="free_region_email_maps_deleted">%1$s (%2$s) térképei törölve lesznek.</string>
+    <string name="free_region_send_and_replace">Küldés és csere</string>
+    <string name="free_region_not_eligible_buy_descr">%1$s a saját ingyenes régiója. Ha le szeretné letölteni a(z) %2$s nevű régiót, de meg akarja tartani a jelenlegi térképeit, vásároljon korlátlan térképletöltést.</string>
+    <string name="outdated_maps_warning_title">Frissítse a saját térképeit</string>
+    <string name="outdated_maps_warning_descr">Az új kereső használatához szükség van az ehhez a verzióhoz tartozó térképekre. Frissítse az összes saját térképét; ez ingyenes.</string>
+    <string name="free_region_other_regions_need_maps_plus">Más régiókhoz szükség van a Maps+ alkalmazásra: %1$s</string>
 </resources>

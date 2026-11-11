@@ -274,6 +274,16 @@ class CodedInputStream(private val handle: FileHandle, bufferSize: Int = DEFAULT
 		limit = oldLimit
 	}
 
+	/** Restores the enclosing limit even if reading a nested message fails. */
+	internal inline fun <T> withLimit(byteLimit: Long, read: () -> T): T {
+		val oldLimit = pushLimitLong(byteLimit)
+		try {
+			return read()
+		} finally {
+			popLimit(oldLimit)
+		}
+	}
+
 	fun getBytesUntilLimit(): Long = limit - getTotalBytesRead()
 
 	fun skipRawBytes(size: Long) {
