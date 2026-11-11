@@ -81,6 +81,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
+import net.osmand.router.TimedTransportRoute;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.shared.gpx.GpxFile;
@@ -444,7 +445,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		Drawable icon = getContentIcon(drawableResId);
 
 		Typeface typeface = FontCache.getMediumFont();
-		String timeText = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
+		String timeText = getTimeText(segment, false, startTime[0]);
 
 		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop));
 		secondaryText.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -524,7 +525,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		}
 		// fix later for schedule
 		startTime[0] += (int) segment.getTravelTime();
-		String textTime = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
+		String textTime = getTimeText(segment, true, startTime[0]);
 
 		secondaryText = new SpannableString(getString(R.string.exit_at));
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -604,14 +605,14 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			boolean last = i == segments.size() - 1;
 			TransportRouteResultSegment segment = segments.get(i);
 			if (first) {
-				buildStartItem(parent, startPoint, startTime, segment, routeResult.getWalkSpeed());
+				buildStartItem(parent, startPoint, startTime, segment, routeResult, routeResult.getWalkSpeed());
 			}
 			TransportRouteResultSegment next = !last ? segments.get(i + 1) : null;
 			buildSegmentItem(parent, segment, next, startTime, routeResult.getWalkSpeed(),
 					routeResult.getChangeTime(segment, next));
 
 			if (last) {
-				buildDestinationItem(parent, endPoint, startTime, segment, routeResult.getWalkSpeed());
+				buildDestinationItem(parent, endPoint, startTime, segment, routeResult, routeResult.getWalkSpeed());
 			}
 			if (showDivider && !last) {
 				buildRowDivider(parent, true);
@@ -619,8 +620,21 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		}
 	}
 
+	/**
+	 * The clock time (departure or arrival) when the result or segment is a {@link TimedTransportRoute},
+	 * else the elapsed time since the start as shown before.
+	 */
+	@NonNull
+	private String getTimeText(@NonNull Object resultOrSegment, boolean arrival, int elapsedSec) {
+		if (resultOrSegment instanceof TimedTransportRoute timed) {
+			return arrival ? OsmAndFormatter.getTransportClockFormat(app).formatArrival(timed)
+					: OsmAndFormatter.getTransportClockFormat(app).formatDeparture(timed);
+		}
+		return OsmAndFormatter.getFormattedDurationShortMinutes(elapsedSec);
+	}
+
 	private void buildStartItem(@NonNull View view, TargetPoint start, int[] startTime,
-								TransportRouteResultSegment segment, double walkSpeed) {
+								TransportRouteResultSegment segment, TransportRouteResult routeResult, double walkSpeed) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
 		LinearLayout imagesContainer = (LinearLayout) createImagesContainer(view.getContext());
@@ -637,7 +651,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			name = getString(R.string.shared_string_my_location);
 		}
 		Spannable startTitle = new SpannableString(name);
-		String text = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
+		String text = getTimeText(routeResult, false, startTime[0]);
 
 		int drawableId = start == null ? R.drawable.ic_action_location_color : R.drawable.list_startpoint;
 		Drawable icon = app.getUIUtilities().getIcon(drawableId);
@@ -730,7 +744,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	private void buildDestinationItem(@NonNull View view, TargetPoint destination, int[] startTime,
-									  TransportRouteResultSegment segment, double walkSpeed) {
+									  TransportRouteResultSegment segment, TransportRouteResult routeResult, double walkSpeed) {
 		Typeface typeface = FontCache.getMediumFont();
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
@@ -760,7 +774,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		buildRowDivider(infoContainer, true);
 		addWalkRouteIcon(imagesContainer);
 
-		String timeStr = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0] + walkTime);
+		String timeStr = getTimeText(routeResult, true, startTime[0] + walkTime);
 		String name = getRoutePointDescription(destination.getLatLon(), destination.getOnlyName());
 		SpannableString title = new SpannableString(name);
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

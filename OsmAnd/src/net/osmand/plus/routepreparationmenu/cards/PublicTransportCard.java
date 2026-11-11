@@ -30,6 +30,7 @@ import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.router.TimedTransportRoute;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
@@ -214,6 +215,9 @@ public class PublicTransportCard extends MapBaseCard {
 		List<TransportRouteResultSegment> segments = routeResult.getSegments();
 		String name = segments.get(0).getStart().getName(preferredMapLang, transliterateNames);
 		String firstLine = Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_from)) + " " + name;
+		if (routeResult instanceof TimedTransportRoute timed) {
+			firstLine = OsmAndFormatter.getTransportClockFormat(app).formatRange(timed) + "  •  " + firstLine;
+		}
 
 		if (segments.size() > 1) {
 			firstLine += "  •  " + app.getString(R.string.transfers_size, (segments.size() - 1));
