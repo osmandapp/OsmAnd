@@ -308,4 +308,19 @@ public class TopoPrintSettingsFragment extends BaseSettingsFragment {
 	public static boolean showInstance(@NonNull MapActivity mapActivity) {
 		return BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.TOPOPRINT_SETTINGS);
 	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		// Redraw the map as the screen closes, so the preview frame and its
+		// label immediately reflect any settings changed here (paper size,
+		// scale, orientation…) without waiting for a map interaction.
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null && getActivity() instanceof MapActivity) {
+			mapActivity = (MapActivity) getActivity();
+		}
+		if (mapActivity != null) {
+			mapActivity.refreshMap();
+		}
+	}
 }
