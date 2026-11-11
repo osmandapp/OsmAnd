@@ -5551,4 +5551,8 @@
     <string name="outdated_maps_warning_title">Opdater dine kort</string>
     <string name="outdated_maps_warning_descr">Den nye søgefunktion kræver kort i denne version. Opdater alle dine kort – det er gratis.</string>
     <string name="free_region_other_regions_need_maps_plus">Andre regioner skal bruge Maps+: %1$s</string>
+    <string name="visualization">Visualisering</string>
+    <string name="terrain_shadows">Terrænskygger</string>
+    <string name="terrain_shadows_description">Dynamisk skyggeeffekt i realtid til 3D-terræn. Fremhæver landskabets geometri med minimal indvirkning på ydeevnen.</string>
+    <string name="terrain_shadows_relief_3d_footer">3D-relief aktiveres automatisk, da det er nødvendigt for at gengive terrænskygger.</string>
 </resources>
