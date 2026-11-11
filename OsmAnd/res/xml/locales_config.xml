@@ -64,6 +64,7 @@
 	<locale android:name="ml" />
 	<locale android:name="mn" />
 	<locale android:name="mr" />
+	<locale android:name="ms" />
 	<locale android:name="my" />
 	<locale android:name="nap" />
 	<locale android:name="nb" />

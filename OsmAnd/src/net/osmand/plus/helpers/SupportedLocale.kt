@@ -64,6 +64,7 @@ enum class SupportedLocale(
 	LITHUANIAN         ("lt",      "lt",      R.string.lang_lt),
 	LATVIAN            ("lv",      "lv",      R.string.lang_lv),
 	MACEDONIAN         ("mk",      "mk",      R.string.lang_mk),
+	MALAY              ("ms",      "ms",      R.string.lang_ms, incomplete = true),
 	MALAYALAM          ("ml",      "ml",      R.string.lang_ml),
 	MARATHI            ("mr",      "mr",      R.string.lang_mr,    incomplete = true),
 	NORWEGIAN_BOKMAL   ("nb",      "nb",      R.string.lang_nb),
