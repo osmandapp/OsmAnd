@@ -1009,8 +1009,8 @@
     <string name="poi_beacon_safe_water">Σήμανση ασφαλών υδάτων</string>
     <string name="poi_beacon_special_purpose">Φάρος ειδικού σκοπού</string>
     <string name="poi_berth">Προβλήτα</string>
-    <string name="poi_seamark_building">Κτίριο σημαντήρα</string>
-    <string name="poi_seamark_bridge">Γέφυρα σημαντήρα</string>
+    <string name="poi_seamark_building">Κτίριο θαλάσσιας σημάνσης</string>
+    <string name="poi_seamark_bridge">Γέφυρα θαλάσσιας σημάνσης</string>
     <string name="poi_buoy_cardinal">Τεταρτοκυκλικός σημαντήρας</string>
     <string name="poi_buoy_isolated_danger">Σημαντήρας, απομονωμένος κίνδυνος</string>
     <string name="poi_buoy_lateral">Πλευρικός Σημαντήρας</string>
@@ -1026,7 +1026,7 @@
     <string name="poi_harbour_basin">Λιμενολεκάνη</string>
     <string name="poi_seamark_harbour">Λιμάνι</string>
     <string name="poi_landmark">Ορόσημο</string>
-    <string name="poi_seamark_light">Σήμανση φωτός</string>
+    <string name="poi_seamark_light">Σημάνση φωτός</string>
     <string name="poi_seamark_light_major">Σήμανση μεγάλου φωτός</string>
     <string name="poi_seamark_light_minor">Σήμανση μικρού φωτός</string>
     <string name="poi_seamark_light_float">Σήμανση επιπλέοντος φωτός</string>
@@ -1035,7 +1035,7 @@
     <string name="poi_lock_basin">Λεκάνη θυροφράγματος</string>
     <string name="poi_notice">Σήμανση προειδοποίησης</string>
     <string name="poi_pile">Σωρός</string>
-    <string name="poi_seamark_dyke">Θαλάσσιο ανάχωμα</string>
+    <string name="poi_seamark_dyke">Ανάχωμα θαλάσσιας σημάνσης</string>
     <string name="poi_radar_transponder">Αναμεταδότης ραντάρ, θαλάσσια σήμανση</string>
     <string name="poi_radio_station">Ραδιοσταθμός, θαλάσσια σήμανση</string>
     <string name="poi_signal_station_traffic">Σταθμός σημάτων, κυκλοφορία</string>
@@ -1417,16 +1417,16 @@
     <string name="poi_farmland">Χωράφι</string>
     <string name="poi_logging">Υλοτομία</string>
     <string name="poi_sand">Άμμος</string>
-    <string name="poi_windfall">Πεσμένος καρπός</string>
+    <string name="poi_windfall">Πεσμένα δέντρα</string>
     <string name="poi_dead_wood">Νεκρό ξύλο</string>
-    <string name="poi_passing_place">Πλάτωμα μονόδρομου</string>
+    <string name="poi_passing_place">Διαπλάτυνση μονόδρομου</string>
     <string name="poi_level">Επίπεδο</string>
     <string name="poi_rtsa_scale">Κλίμακα RTSA</string>
     <string name="poi_piste_difficulty_easy">Εύκολη</string>
     <string name="poi_piste_difficulty_intermediate">Μεσαία</string>
     <string name="poi_piste_difficulty_advanced">Δύσκολη</string>
-    <string name="poi_piste_difficulty_novice">Αρχάριοι</string>
-    <string name="poi_piste_difficulty_expert">Ειδικός</string>
+    <string name="poi_piste_difficulty_novice">Αρχάρια</string>
+    <string name="poi_piste_difficulty_expert">Ειδική</string>
     <string name="poi_piste_difficulty_freeride">Ελεύθερη διαδρομή</string>
     <string name="poi_piste_grooming_classic">Κλασική</string>
     <string name="poi_piste_grooming_classic_skating">Κλασική+παγοδρομία</string>
@@ -3509,7 +3509,7 @@
     <string name="poi_books_children">Παιδικά</string>
     <string name="poi_atoll">Ατόλη</string>
     <string name="poi_denotation">Σημασία</string>
-    <string name="poi_park_ride">Δρομολόγιο λεωφορείου από τα προάστια προς το κέντρο της πόλης</string>
+    <string name="poi_park_ride">Στάθμευση και μετεπιβίβαση</string>
     <string name="poi_hazard">Κίνδυνος</string>
     <string name="poi_rtsa_scale_filter">Κατηγορία δυσκολίας</string>
     <string name="poi_healthcare_speciality_radiotherapy">Ραδιοθεραπεία</string>
@@ -3533,7 +3533,7 @@
     <string name="poi_childcare">Φροντίδα παιδιών;Βρεφικός σταθμός</string>
     <string name="poi_denotation_natural_monument">Φυσικό μνημείο</string>
     <string name="poi_denotation_landmark">Διακριτό σημείο</string>
-    <string name="poi_park_ride_yes">Δρομολόγιο λεωφορείου από τα προάστια προς το κέντρο της πόλης: ναι</string>
+    <string name="poi_park_ride_yes">Στάθμευση και μετεπιβίβαση: ναι</string>
     <string name="poi_park_ride_train">Τρένο</string>
     <string name="poi_park_ride_bus">Λεωφορείο</string>
     <string name="poi_park_ride_metro">Μετρό</string>
