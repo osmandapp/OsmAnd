@@ -2334,10 +2334,10 @@ public class RouteResultPreparation {
 			if (isSwitchToLink(curr, result.get(i - 1))) {
 				continue;
 			}
-			if (isKeepTurn(turnType) && isHighSpeakPriority(curr)) {
+			if (isActiveAtKeepSide(turnType) && isHighSpeakPriority(curr)) {
 				continue;
 			}
-			if (isForkByLanes(curr, result.get(i - 1))) {
+			if (isActiveAtKeepSide(turnType) && isForkByLanes(curr, result.get(i - 1))) {
 				continue;
 			}
 			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
@@ -2465,11 +2465,17 @@ public class RouteResultPreparation {
 
 	private boolean findActiveIndexByLanes(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes,
 	                                       RouteSegmentResult prevSegm, RouteSegmentResult currentSegm) {
-		int[] prevCntLanes = parseTurnLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
+		int[] prevCntLanes = null;
+		if (prevSegm.getObject().getOneway() == 0) {
+			prevCntLanes = parseTurnLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
+		}
 		if (prevCntLanes == null) {
 			prevCntLanes = parseLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
 		}
-		int[] curCntLanes = parseTurnLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
+		int[] curCntLanes = null;
+		if (currentSegm.getObject().getOneway() == 0) {
+			curCntLanes = parseTurnLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
+		}
 		if (curCntLanes == null) {
 			curCntLanes = parseLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
 		}
@@ -2478,7 +2484,7 @@ public class RouteResultPreparation {
 				&& prevCntLanes.length > curCntLanes.length
 				&& prevCntLanes.length == curCntLanes.length + attachedLanesCount) {
 			if (rs.roadsOnLeft == 0 && rs.roadsOnRight > 0) {
-				pair[0] = 0;47.72376, 11.74627
+				pair[0] = 0;
 				pair[1] = curCntLanes.length - 1;
 				pair[2] = directions[0];
 				int secondary = TurnType.getSecondaryTurn(rawLanes[0]);
@@ -2639,6 +2645,20 @@ public class RouteResultPreparation {
 			}
 		}
 		return false;
+	}
+
+	private boolean isActiveAtKeepSide(TurnType t) {
+		int[] lanes = t.getLanes();
+		if (lanes == null || lanes.length == 0) {
+			return true;
+		}
+		if (t.keepRight()) {
+			return lanes[lanes.length - 1] % 2 == 1;
+		}
+		if (t.keepLeft()) {
+			return lanes[0] % 2 == 1;
+		}
+		return true;
 	}
 
 	private boolean isKeepTurn(TurnType t) {
