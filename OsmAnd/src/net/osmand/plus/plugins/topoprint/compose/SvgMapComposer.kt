@@ -76,7 +76,7 @@ class SvgMapComposer(
 		val zone2 = secondaryZone()
 		appendFrame(sb, zone2)
 		appendScaleBar(sb, zone2)
-		appendCompass(sb)
+		appendCompass(sb, zone2)
 		sb.append("</svg>\n")
 		return sb.toString()
 	}
@@ -485,6 +485,22 @@ class SvgMapComposer(
 	}
 
 	/**
+	 * Convergence of the secondary zone's grid at the sheet centre, measured
+	 * numerically like the primary one ([UtmMath.gridConvergenceDegrees]):
+	 * the true bearing from the centre to a point the bbox height due
+	 * grid-north in zone-2 coordinates.
+	 */
+	private fun secondaryConvergenceDeg(zone2: Int): Double {
+		val letter = geometry.centerUtm.zoneLetter
+		val centre = UtmMath.toLatLon(geometry.centerUtm)
+		val inZone2 = UtmMath.fromLatLon(centre.first, centre.second,
+			zone2, geometry.centerUtm.isNorthern)
+		val north2 = UtmMath.toLatLon(UtmCoordinate(zone2, letter,
+			inZone2.easting, inZone2.northing + geometry.bbox.heightMeters))
+		return UtmMath.bearingDegrees(centre, north2)
+	}
+
+	/**
 	 * Zone-2 grid lines mapped onto the sheet. Each line is sampled in
 	 * zone-2 coordinates (constant easting or northing), converted back to
 	 * lat/lon and re-projected into the centre zone, so the drawn polyline
@@ -802,7 +818,7 @@ class SvgMapComposer(
 
 	// ----------------------------------------------------------------- compass
 
-	private fun appendCompass(sb: StringBuilder) {
+	private fun appendCompass(sb: StringBuilder, zone2: Int?) {
 		val compassSize = layout.bottomMarginMm * 0.6
 		val lineLength = compassSize * 0.85
 		val gamma = geometry.convergenceDeg
@@ -859,6 +875,28 @@ class SvgMapComposer(
 		sb.append("    <path id=\"tn_gn_arc\" d=\"M 0 ${fmt(compassSize - lineLength * 0.75)} ")
 		sb.append("A ${fmt(lineLength * 0.75)} ${fmt(lineLength * 0.75)} 0 0 0 ${fmt(gnX)} ${fmt(gnY)}\" ")
 		sb.append("fill=\"none\" stroke=\"#000000\" stroke-width=\"0.1\" stroke-dasharray=\"0.1 0.8\"/>\n")
+
+		// Secondary-zone grid north: the same correction-angle indication as
+		// the primary grid, in the secondary grid's colour. The convergence of
+		// the zone-2 grid at the sheet centre is measured numerically like the
+		// primary one; a shorter radius keeps its arc clear of the primary's.
+		if (zone2 != null) {
+			val gamma2 = secondaryConvergenceDeg(zone2)
+			val gamma2Rad = Math.toRadians(gamma2)
+			val gn2X = lineLength * 0.55 * sin(gamma2Rad)
+			val gn2Y = compassSize - lineLength * 0.55 * cos(gamma2Rad)
+			sb.append("    <path d=\"M 0 ${fmt(compassSize)} L ${fmt(gn2X)} ${fmt(gn2Y)}\" ")
+			sb.append("stroke=\"$SECONDARY_COLOR\" stroke-width=\"0.1\" fill=\"none\"/>\n")
+			val gn2Anchor = if (gn2X < 0) "end" else "start"
+			val gn2AngleX = lineLength * 0.275 * sin(gamma2Rad) +
+					(if (gamma2 < 0) -angleMargin else angleMargin)
+			sb.append(text("${fmt2(gamma2)}°", gn2AngleX,
+				compassSize - lineLength * 0.275 * cos(gamma2Rad) - angleMargin,
+				angleSize, gn2Anchor, SECONDARY_COLOR))
+			sb.append("    <path id=\"tn_gn2_arc\" d=\"M 0 ${fmt(compassSize - lineLength * 0.55)} ")
+			sb.append("A ${fmt(lineLength * 0.55)} ${fmt(lineLength * 0.55)} 0 0 0 ${fmt(gn2X)} ${fmt(gn2Y)}\" ")
+			sb.append("fill=\"none\" stroke=\"$SECONDARY_COLOR\" stroke-width=\"0.1\" stroke-dasharray=\"0.1 0.8\"/>\n")
+		}
 
 		// Compass star.
 		sb.append("    <path d=\"${starPath(starRadius)}\" fill=\"#000000\" transform=\"$starTransform\"/>\n")

@@ -150,14 +150,21 @@ object UtmMath {
 		val topCenter = toLatLon(
 			UtmCoordinate(bbox.zoneNumber, bbox.zoneLetter, bbox.center.easting, bbox.top.toDouble())
 		)
-		val phi1 = Math.toRadians(centerLatLon.first)
-		val phi2 = Math.toRadians(topCenter.first)
-		val deltaLambda = Math.toRadians(topCenter.second - centerLatLon.second)
+		return bearingDegrees(centerLatLon, topCenter)
+	}
+
+	/**
+	 * Initial true bearing from one lat/lon to another, in degrees —
+	 * atan2(E, N) of the centre→target direction.
+	 */
+	fun bearingDegrees(from: Pair<Double, Double>, to: Pair<Double, Double>): Double {
+		val phi1 = Math.toRadians(from.first)
+		val phi2 = Math.toRadians(to.first)
+		val deltaLambda = Math.toRadians(to.second - from.second)
 		val sinDelta = Math.sin(deltaLambda)
 		val y = sinDelta * Math.cos(phi2)
 		val x = Math.cos(phi1) * Math.sin(phi2) -
 				Math.sin(phi1) * Math.cos(phi2) * Math.cos(deltaLambda)
-		// atan2(E, N) of the centre→top-centre bearing, i.e. the bearing itself.
 		return Math.toDegrees(Math.atan2(y, x))
 	}
 
