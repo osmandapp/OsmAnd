@@ -174,13 +174,16 @@ class PrintMapTask(
 			val georef = renderResult.georef
 			log.info("georef: px=${georef.widthPx}x${georef.heightPx} tl=${georef.topLeft} tr=${georef.topRight} " +
 					"br=${georef.bottomRight} bl=${georef.bottomLeft}")
-			// All map geometry is expressed in the centre's UTM zone; force
-			// the zone so a print extent near a zone boundary stays consistent.
+			// All map geometry is expressed in the centre's UTM zone and
+			// hemisphere; forcing both keeps a print extent near a zone
+			// boundary or across the equator consistent (northings stay
+			// continuous instead of jumping by the 10M false northing).
 			val zone = geometry.bbox.center.zoneNumber
-			val topLeft = UtmMath.fromLatLon(georef.topLeft.latitude, georef.topLeft.longitude, zone)
-			val topRight = UtmMath.fromLatLon(georef.topRight.latitude, georef.topRight.longitude, zone)
-			val bottomLeft = UtmMath.fromLatLon(georef.bottomLeft.latitude, georef.bottomLeft.longitude, zone)
-			val bottomRight = UtmMath.fromLatLon(georef.bottomRight.latitude, georef.bottomRight.longitude, zone)
+			val isNorthern = geometry.bbox.center.isNorthern
+			val topLeft = UtmMath.fromLatLon(georef.topLeft.latitude, georef.topLeft.longitude, zone, isNorthern)
+			val topRight = UtmMath.fromLatLon(georef.topRight.latitude, georef.topRight.longitude, zone, isNorthern)
+			val bottomLeft = UtmMath.fromLatLon(georef.bottomLeft.latitude, georef.bottomLeft.longitude, zone, isNorthern)
+			val bottomRight = UtmMath.fromLatLon(georef.bottomRight.latitude, georef.bottomRight.longitude, zone, isNorthern)
 			log.info("raster utm: tl=${topLeft.easting},${topLeft.northing} " +
 					"br=${bottomRight.easting},${bottomRight.northing} (zone $zone)")
 			val raster = SvgMapComposer.Raster(

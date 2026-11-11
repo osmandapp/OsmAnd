@@ -118,9 +118,19 @@ class SvgMapComposer(
 		sb.append("      <g id=\"grid\">\n")
 		appendGrid(sb)
 		sb.append("      </g>\n")
+		val zone2 = secondaryZone()
+		val secondary = if (zone2 == null) emptyList() else secondaryPolylines(zone2)
+		if (secondary.isNotEmpty()) {
+			sb.append("      <g id=\"grid_secondary\">\n")
+			for (line in secondary) {
+				sb.append(polylinePath(line))
+			}
+			sb.append("      </g>\n")
+		}
 		sb.append("    </g>\n")
 
-		appendGridLabels(sb, labelSize, prefixSize, topLabelY, bottomLabelY, leftLabelX, rightLabelX)
+		appendGridLabels(sb, labelSize, prefixSize, topLabelY, bottomLabelY,
+			leftLabelX, rightLabelX, zone2, secondary)
 		sb.append("  </g>\n")
 	}
 
@@ -254,8 +264,13 @@ class SvgMapComposer(
 
 	private fun appendGridLabels(sb: StringBuilder, labelSize: Double, prefixSize: Double,
 	                             topLabelY: Double, bottomLabelY: Double,
-	                             leftLabelX: Double, rightLabelX: Double) {
+	                             leftLabelX: Double, rightLabelX: Double,
+	                             zone2: Int?, secondary: List<SecondaryLine>) {
 		val labels = StringBuilder()
+		val topIntervals = EdgeIntervals()
+		val bottomIntervals = EdgeIntervals()
+		val leftIntervals = EdgeIntervals()
+		val rightIntervals = EdgeIntervals()
 		for (line in eastingLines()) {
 			val gradX = line.endX - line.startX
 			val gradY = line.endY - line.startY
@@ -267,6 +282,7 @@ class SvgMapComposer(
 					val (prefix, standard) = gridLabelParts(line.metres)
 					labels.append(text("$prefix", x0, topLabelY, prefixSize, "end"))
 					labels.append(text(standard, x0, topLabelY, labelSize, "start"))
+					topIntervals.add(labelInterval(x0, prefix, prefixSize, standard, labelSize))
 				}
 			}
 			val t1 = (layout.mapHeightMm - line.startY) / gradY
@@ -276,6 +292,7 @@ class SvgMapComposer(
 					val (prefix, standard) = gridLabelParts(line.metres)
 					labels.append(text("$prefix", x1, bottomLabelY, prefixSize, "end"))
 					labels.append(text(standard, x1, bottomLabelY, labelSize, "start"))
+					bottomIntervals.add(labelInterval(x1, prefix, prefixSize, standard, labelSize))
 				}
 			}
 		}
@@ -293,6 +310,10 @@ class SvgMapComposer(
 					val (prefix, standard) = gridLabelParts(line.metres)
 					left.append(text("$prefix", layout.mapHeightMm - y0, 0.0, prefixSize, "end"))
 					left.append(text(standard, layout.mapHeightMm - y0, 0.0, labelSize, "start"))
+					// Rotated group: use a symmetric conservative span so the
+					// anchor-direction subtleties can never cause overlap.
+					val half = maxOf(prefix.toString().length * prefixSize, standard.length * labelSize) * 0.62
+					leftIntervals.add(y0 - half to y0 + half)
 				}
 			}
 			val t1 = (layout.mapWidthMm - line.startX) / gradX
@@ -302,6 +323,63 @@ class SvgMapComposer(
 					val (prefix, standard) = gridLabelParts(line.metres)
 					right.append(text("$prefix", y1, 0.0, prefixSize, "end"))
 					right.append(text(standard, y1, 0.0, labelSize, "start"))
+					// Rotated group: symmetric conservative span.
+					val half = maxOf(prefix.toString().length * prefixSize, standard.length * labelSize) * 0.62
+					rightIntervals.add(y1 - half to y1 + half)
+				}
+			}
+		}
+
+		// Secondary-zone labels: pale red, one font size below the primary
+		// labels. When the crossing position is taken the label slides along
+		// the edge (left/right on the top and bottom edges, up/down on the
+		// side edges) in whole-label steps until a free slot fits; it is
+		// dropped only when no slot fits at all.
+		if (zone2 != null && secondary.isNotEmpty()) {
+			val size2 = labelSize * 0.8
+			val prefix2 = size2 * 0.8
+			for (line in secondary) {
+				val (prefixValue, standard) = gridLabelParts(line.metres)
+				val prefix = prefixValue.toString()
+				val hw = prefix.length * prefix2 * 0.62
+				val sw = standard.length * size2 * 0.62
+				if (line.isEasting) {
+					for (x in crossingsY(line, 0.0)) {
+						if (x !in 0.0..layout.mapWidthMm) continue
+						val anchor = freePosition(topIntervals, x, hw, sw, 0.0, layout.mapWidthMm)
+							?: continue
+						labels.append(text(prefix, anchor, topLabelY, prefix2, "end", SECONDARY_COLOR))
+						labels.append(text(standard, anchor, topLabelY, size2, "start", SECONDARY_COLOR))
+						topIntervals.add(anchor - hw to anchor + sw)
+					}
+					for (x in crossingsY(line, layout.mapHeightMm)) {
+						if (x !in 0.0..layout.mapWidthMm) continue
+						val anchor = freePosition(bottomIntervals, x, hw, sw, 0.0, layout.mapWidthMm)
+							?: continue
+						labels.append(text(prefix, anchor, bottomLabelY, prefix2, "end", SECONDARY_COLOR))
+						labels.append(text(standard, anchor, bottomLabelY, size2, "start", SECONDARY_COLOR))
+						bottomIntervals.add(anchor - hw to anchor + sw)
+					}
+				} else {
+					// Rotated groups: symmetric conservative span, same as
+					// the primary labels, so overlap is impossible.
+					val half = maxOf(prefix.length * prefix2, standard.length * size2) * 0.62
+					for (y in crossingsX(line, 0.0)) {
+						if (y !in 0.0..layout.mapHeightMm) continue
+						val anchor = freePosition(leftIntervals, y, half, half, 0.0, layout.mapHeightMm)
+							?: continue
+						left.append(text(prefix, layout.mapHeightMm - anchor, 0.0, prefix2, "end", SECONDARY_COLOR))
+						left.append(text(standard, layout.mapHeightMm - anchor, 0.0, size2, "start", SECONDARY_COLOR))
+						leftIntervals.add(anchor - half to anchor + half)
+					}
+					for (y in crossingsX(line, layout.mapWidthMm)) {
+						if (y !in 0.0..layout.mapHeightMm) continue
+						val anchor = freePosition(rightIntervals, y, half, half, 0.0, layout.mapHeightMm)
+							?: continue
+						right.append(text(prefix, anchor, 0.0, prefix2, "end", SECONDARY_COLOR))
+						right.append(text(standard, anchor, 0.0, size2, "start", SECONDARY_COLOR))
+						rightIntervals.add(anchor - half to anchor + half)
+					}
 				}
 			}
 		}
@@ -312,6 +390,195 @@ class SvgMapComposer(
 		sb.append(left).append("</g>\n")
 		sb.append("    <g transform=\"translate(${fmt(rightLabelX)} 0) rotate(90)\">")
 		sb.append(right).append("</g>\n")
+	}
+
+	/** Occupied coordinate intervals along one frame edge, for label collision checks. */
+	private class EdgeIntervals {
+		private val intervals = mutableListOf<Pair<Double, Double>>()
+
+		fun add(interval: Pair<Double, Double>) {
+			intervals.add(interval)
+		}
+
+		fun isFree(from: Double, to: Double): Boolean =
+			intervals.none { from < it.second && to > it.first }
+	}
+
+	/** Occupied span of a two-part grid label centred on `position`. */
+	private fun labelInterval(position: Double, prefix: Any, prefixSize: Double,
+	                          standard: String, standardSize: Double): Pair<Double, Double> =
+		Pair(position - prefix.toString().length * prefixSize * 0.62,
+			position + standard.length * standardSize * 0.62)
+
+	/**
+	 * Anchor for a label whose preferred position is `preferred`: slides
+	 * along the edge in whole-label steps (right, left, then further out)
+	 * until the [hw, sw] span fits into a free slot between `min` and `max`.
+	 * Returns null when no slot fits within the search range.
+	 */
+	private fun freePosition(intervals: EdgeIntervals, preferred: Double,
+	                         hw: Double, sw: Double, min: Double, max: Double): Double? {
+		val step = hw + sw
+		for (k in 0..8) {
+			val sign = if (k == 0) 0.0 else if (k % 2 == 1) 1.0 else -1.0
+			val candidate = preferred + sign * ((k + 1) / 2) * step
+			if (candidate - hw >= min && candidate + sw <= max &&
+					intervals.isFree(candidate - hw, candidate + sw)) {
+				return candidate
+			}
+		}
+		return null
+	}
+
+	// ---------------------------------------------------------- secondary grid
+
+	/** A zone-2 grid line mapped onto the sheet: its grid value in zone-2
+	 *  metres and the sampled polyline in frame millimetres. */
+	private class SecondaryLine(
+		val metres: Long,
+		val isEasting: Boolean,
+		val points: List<Pair<Double, Double>>
+	)
+
+	/**
+	 * Paper position (frame mm) of a centre-zone UTM point: bilinear
+	 * interpolation between the georeferenced raster edges — the same model
+	 * the primary grid uses (see [gridVsRasterResiduals]).
+	 */
+	private fun paperPos(easting: Double, northing: Double): Pair<Double, Double> {
+		val spanTop = raster.eastingTopRight - raster.eastingTopLeft
+		val spanBottom = raster.eastingBottomRight - raster.eastingBottomLeft
+		val spanLeft = raster.northingTopLeft - raster.northingBottomLeft
+		val spanRight = raster.northingTopRight - raster.northingBottomRight
+		val fxTop = (easting - raster.eastingTopLeft) / spanTop
+		val fxBottom = (easting - raster.eastingBottomLeft) / spanBottom
+		val fyLeft = (raster.northingTopLeft - northing) / spanLeft
+		val fyRight = (raster.northingTopRight - northing) / spanRight
+		val x = imageTlX + (fxTop + (fxBottom - fxTop) * fyLeft) * rasterWidthMm
+		val y = imageTlY + (fyLeft + (fyRight - fyLeft) * fxTop) * rasterHeightMm
+		return x to y
+	}
+
+	/**
+	 * The adjacent UTM zone whose grid appears on this sheet — a raster
+	 * corner falls into it — or null when the whole sheet lies inside the
+	 * centre zone.
+	 */
+	private fun secondaryZone(): Int? {
+		val zone1 = geometry.centerUtm.zoneNumber
+		val letter = geometry.centerUtm.zoneLetter
+		val corners = listOf(
+			UtmCoordinate(zone1, letter, raster.eastingTopLeft, raster.northingTopLeft),
+			UtmCoordinate(zone1, letter, raster.eastingTopRight, raster.northingTopRight),
+			UtmCoordinate(zone1, letter, raster.eastingBottomLeft, raster.northingBottomLeft),
+			UtmCoordinate(zone1, letter, raster.eastingBottomRight, raster.northingBottomRight))
+		for (corner in corners) {
+			val (lat, lon) = UtmMath.toLatLon(corner)
+			val natural = UtmMath.fromLatLon(lat, lon).zoneNumber
+			if (natural != zone1) {
+				return natural
+			}
+		}
+		return null
+	}
+
+	/**
+	 * Zone-2 grid lines mapped onto the sheet. Each line is sampled in
+	 * zone-2 coordinates (constant easting or northing), converted back to
+	 * lat/lon and re-projected into the centre zone, so the drawn polyline
+	 * inherits the relative rotation between the two grids.
+	 */
+	private fun secondaryPolylines(zone2: Int): List<SecondaryLine> {
+		val zone1 = geometry.centerUtm.zoneNumber
+		val letter = geometry.centerUtm.zoneLetter
+		val isNorthern = geometry.centerUtm.isNorthern
+		val step = gridStepMeters().toDouble()
+		val samples = 24
+
+		fun toPaper(easting2: Double, northing2: Double): Pair<Double, Double> {
+			val (lat, lon) = UtmMath.toLatLon(UtmCoordinate(zone2, letter, easting2, northing2))
+			// Centre-hemisphere conversion: keeps northings continuous for
+			// sheets that cross the equator.
+			val centre = UtmMath.fromLatLon(lat, lon, zone1, isNorthern)
+			return paperPos(centre.easting, centre.northing)
+		}
+
+		// Zone-2 extents of the raster corners (forced into zone 2).
+		val cornerCoords = listOf(
+			raster.eastingTopLeft to raster.northingTopLeft,
+			raster.eastingTopRight to raster.northingTopRight,
+			raster.eastingBottomLeft to raster.northingBottomLeft,
+			raster.eastingBottomRight to raster.northingBottomRight)
+		val eastings2 = mutableListOf<Double>()
+		val northings2 = mutableListOf<Double>()
+		for ((easting1, northing1) in cornerCoords) {
+			val (lat, lon) = UtmMath.toLatLon(UtmCoordinate(zone1, letter, easting1, northing1))
+			val inZone2 = UtmMath.fromLatLon(lat, lon, zone2, isNorthern)
+			eastings2.add(inZone2.easting)
+			northings2.add(inZone2.northing)
+		}
+		val minE2 = eastings2.minOrNull() ?: return emptyList()
+		val maxE2 = eastings2.maxOrNull() ?: return emptyList()
+		val minN2 = northings2.minOrNull() ?: return emptyList()
+		val maxN2 = northings2.maxOrNull() ?: return emptyList()
+
+		val lines = mutableListOf<SecondaryLine>()
+		var e2 = Math.ceil(minE2 / step) * step
+		while (e2 <= maxE2) {
+			val points = (0..samples).map {
+				toPaper(e2, minN2 + (maxN2 - minN2) * it / samples)
+			}
+			lines.add(SecondaryLine(Math.round(e2), true, points))
+			e2 += step
+		}
+		var n2 = Math.ceil(minN2 / step) * step
+		while (n2 <= maxN2) {
+			val points = (0..samples).map {
+				toPaper(minE2 + (maxE2 - minE2) * it / samples, n2)
+			}
+			lines.add(SecondaryLine(Math.round(n2), false, points))
+			n2 += step
+		}
+		return lines
+	}
+
+	/** Pale red dashed SVG path of a secondary grid line. */
+	private fun polylinePath(line: SecondaryLine): String {
+		val start = line.points.first()
+		val rest = line.points.drop(1).joinToString(" ") {
+			"L ${fmt(it.first)} ${fmt(it.second)}"
+		}
+		return "          <path d=\"M ${fmt(start.first)} ${fmt(start.second)} $rest\" " +
+				"stroke=\"$SECONDARY_COLOR\" stroke-width=\"0.2\" " +
+				"stroke-dasharray=\"1.2 0.8\" fill=\"none\"/>\n"
+	}
+
+	/** X positions where the polyline crosses the horizontal line `y`. */
+	private fun crossingsY(line: SecondaryLine, y: Double): List<Double> {
+		val result = mutableListOf<Double>()
+		var prev = line.points.first()
+		for (point in line.points.drop(1)) {
+			if ((prev.second - y) * (point.second - y) <= 0.0 && prev.second != point.second) {
+				val t = (y - prev.second) / (point.second - prev.second)
+				result.add(prev.first + t * (point.first - prev.first))
+			}
+			prev = point
+		}
+		return result.distinctBy { Math.round(it * 100.0) }
+	}
+
+	/** Y positions where the polyline crosses the vertical line `x`. */
+	private fun crossingsX(line: SecondaryLine, x: Double): List<Double> {
+		val result = mutableListOf<Double>()
+		var prev = line.points.first()
+		for (point in line.points.drop(1)) {
+			if ((prev.first - x) * (point.first - x) <= 0.0 && prev.first != point.first) {
+				val t = (x - prev.first) / (point.first - prev.first)
+				result.add(prev.second + t * (point.second - prev.second))
+			}
+			prev = point
+		}
+		return result.distinctBy { Math.round(it * 100.0) }
 	}
 
 	// --------------------------------------------------------------- scale bar
@@ -350,8 +617,17 @@ class SvgMapComposer(
 		val unitY = fontSize * 12
 		val gray = GRAY_COLOR
 		val centerUtm = geometry.centerUtm
-		sb.append(text("WGS84 UTM Zone ${geometry.zoneLabel}", 0.0,
+		val zoneLine = "WGS84 UTM Zone ${geometry.zoneLabel}"
+		sb.append(text(zoneLine, 0.0,
 			unitY + fontSize * 1.5, fontSize, "start"))
+		// A sheet spanning two zones lists the secondary zone after the
+		// centre zone, in the secondary grid's pale red.
+		val zone2 = secondaryZone()
+		if (zone2 != null) {
+			val offset = (zoneLine.length + 2) * fontSize * 0.62
+			sb.append(text("$zone2${geometry.zoneBand}", offset,
+				unitY + fontSize * 1.5, fontSize, "start", SECONDARY_COLOR))
+		}
 		sb.append(text("Parameters: ${geometry.zoneLabel} ${centerUtm.easting.toInt()} " +
 				"${centerUtm.northing.toInt()} 1:${params.scaleDenominator}",
 			0.0, unitY + fontSize * 3, fontSize, "start", color = gray))
@@ -591,7 +867,16 @@ class SvgMapComposer(
 	 * thousands only at km-or-coarser units (731000 m on a 1 km grid →
 	 * "7" + "31").
 	 */
-	private fun gridLabelParts(metres: Long): Pair<Long, String> {
+	private fun gridLabelParts(rawMetres: Long): Pair<Long, String> {
+		// Standard display convention for northings: drop the 10M false
+		// northing above the equator (southern centre convention) and take
+		// the 10M complement below it (northern centre convention dipping
+		// across the equator). Eastings never trigger either branch.
+		val metres = when {
+			rawMetres >= 10_000_000L -> rawMetres - 10_000_000L
+			rawMetres < 0L -> rawMetres + 10_000_000L
+			else -> rawMetres
+		}
 		val subKmGrid = gridStepMeters() < 1000L
 		val prefix = metres / 100000L
 		val standardDigits = if (subKmGrid) 3 else 2
@@ -638,5 +923,6 @@ class SvgMapComposer(
 		private val LOG: Log = PlatformUtil.getLog(SvgMapComposer::class.java)
 		private const val FONT_FAMILY = "Noto Sans CJK SC, Noto Sans, sans-serif"
 		private const val GRAY_COLOR = "#808080"
+		private const val SECONDARY_COLOR = "#cc5555"
 	}
 }

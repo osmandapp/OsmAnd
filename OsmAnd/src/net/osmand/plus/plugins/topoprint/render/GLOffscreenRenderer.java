@@ -592,14 +592,17 @@ public class GLOffscreenRenderer implements MapRendererViewListener {
 			return null;
 		}
 		int zone = UtmMath.INSTANCE.fromLatLon(center.getLatitude(), center.getLongitude()).getZoneNumber();
-		double eastTopLeft = UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone).getEasting();
-		double eastTopRight = UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone).getEasting();
-		double eastBottomLeft = UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone).getEasting();
-		double eastBottomRight = UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone).getEasting();
-		double northTopLeft = UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone).getNorthing();
-		double northTopRight = UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone).getNorthing();
-		double northBottomLeft = UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone).getNorthing();
-		double northBottomRight = UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone).getNorthing();
+		// Sheet-wide hemisphere convention keeps northings continuous across
+		// the equator (see rasterCoversMapFrame).
+		boolean isNorthern = center.getLatitude() >= 0.0;
+		double eastTopLeft = UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone, isNorthern).getEasting();
+		double eastTopRight = UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone, isNorthern).getEasting();
+		double eastBottomLeft = UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone, isNorthern).getEasting();
+		double eastBottomRight = UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone, isNorthern).getEasting();
+		double northTopLeft = UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone, isNorthern).getNorthing();
+		double northTopRight = UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone, isNorthern).getNorthing();
+		double northBottomLeft = UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone, isNorthern).getNorthing();
+		double northBottomRight = UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone, isNorthern).getNorthing();
 		double measuredWidth = ((eastTopRight + eastBottomRight) - (eastTopLeft + eastBottomLeft)) / 2.0;
 		double measuredHeight = ((northTopLeft + northTopRight) - (northBottomLeft + northBottomRight)) / 2.0;
 		Log.i(TAG, "coverage measure: measured=" + measuredWidth + "x" + measuredHeight
@@ -802,24 +805,29 @@ public class GLOffscreenRenderer implements MapRendererViewListener {
 	private boolean rasterCoversMapFrame(@NonNull LatLon tl, @NonNull LatLon tr,
 	                                     @NonNull LatLon br, @NonNull LatLon bl) {
 		int zone = UtmMath.INSTANCE.fromLatLon(center.getLatitude(), center.getLongitude()).getZoneNumber();
+		// Sheet-wide hemisphere convention: a frame crossing the equator must
+		// keep its northings continuous — mixing the per-point hemisphere
+		// makes the southern corners jump ~10,000 km and fails the coverage
+		// check for a perfectly centred sheet.
+		boolean isNorthern = center.getLatitude() >= 0.0;
 		double mapHalfW = params.getMapWidthMeters() / 2.0;
 		double mapHalfH = params.getMapHeightMeters() / 2.0;
-		double cE = UtmMath.INSTANCE.fromLatLon(center.getLatitude(), center.getLongitude(), zone).getEasting();
-		double cN = UtmMath.INSTANCE.fromLatLon(center.getLatitude(), center.getLongitude(), zone).getNorthing();
+		double cE = UtmMath.INSTANCE.fromLatLon(center.getLatitude(), center.getLongitude(), zone, isNorthern).getEasting();
+		double cN = UtmMath.INSTANCE.fromLatLon(center.getLatitude(), center.getLongitude(), zone, isNorthern).getNorthing();
 		double eMin = cE - mapHalfW;
 		double eMax = cE + mapHalfW;
 		double nMin = cN - mapHalfH;
 		double nMax = cN + mapHalfH;
 		double[] eastings = {
-				UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone).getEasting(),
-				UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone).getEasting(),
-				UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone).getEasting(),
-				UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone).getEasting()};
+				UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone, isNorthern).getEasting(),
+				UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone, isNorthern).getEasting(),
+				UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone, isNorthern).getEasting(),
+				UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone, isNorthern).getEasting()};
 		double[] northings = {
-				UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone).getNorthing(),
-				UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone).getNorthing(),
-				UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone).getNorthing(),
-				UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone).getNorthing()};
+				UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone, isNorthern).getNorthing(),
+				UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone, isNorthern).getNorthing(),
+				UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone, isNorthern).getNorthing(),
+				UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone, isNorthern).getNorthing()};
 		double rEMin = Double.MAX_VALUE, rEMax = -Double.MAX_VALUE;
 		double rNMin = Double.MAX_VALUE, rNMax = -Double.MAX_VALUE;
 		for (double e : eastings) {

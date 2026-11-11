@@ -19,7 +19,7 @@ data class UtmCoordinate(
 	val northing: Double
 ) {
 	val isNorthern: Boolean
-		get() = zoneLetter >= 'N'
+		get() = zoneLetter == 'N'
 
 	/** Longitude of the zone's central meridian in degrees. */
 	val centralMeridianDegrees: Double
@@ -93,6 +93,21 @@ object UtmMath {
 		val point = UTMPoint.LLtoUTM(
 			LatLonPoint(latitude, longitude), Ellipsoid.WGS_84, UTMPoint(),
 			zoneNumber, latitude >= 0.0
+		)
+		return UtmCoordinate(point.zone_number, point.zone_letter, point.easting, point.northing)
+	}
+
+	/**
+	 * Converts to UTM forcing both the zone and the hemisphere. A sheet that
+	 * crosses the equator must use one hemisphere convention throughout, so
+	 * its northings stay continuous: with the centre's hemisphere a point on
+	 * the far side of the equator simply takes a negative northing (or one
+	 * above 10M in the southern convention) instead of jumping 10,000 km.
+	 */
+	fun fromLatLon(latitude: Double, longitude: Double, zoneNumber: Int, isNorthern: Boolean): UtmCoordinate {
+		val point = UTMPoint.LLtoUTM(
+			LatLonPoint(latitude, longitude), Ellipsoid.WGS_84, UTMPoint(),
+			zoneNumber, isNorthern
 		)
 		return UtmCoordinate(point.zone_number, point.zone_letter, point.easting, point.northing)
 	}
