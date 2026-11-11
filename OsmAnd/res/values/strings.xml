@@ -11,6 +11,38 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="gtfs_plugin_name">Transit timetables (GTFS)</string>
+	<string name="gtfs_plugin_description">Plan public transport trips offline from timetables you import yourself. Add the GTFS .zip files of your transit agencies; OsmAnd builds an index on this device and uses it, with departure times, for public transport routes. Where the timetables do not cover a trip, the usual map based planner is used.</string>
+	<string name="gtfs_feeds">Feeds</string>
+	<string name="gtfs_no_feeds">No feeds imported yet</string>
+	<string name="gtfs_add_feeds">Add GTFS feeds</string>
+	<string name="gtfs_add_feeds_descr">Select one or more GTFS .zip files. They are copied into OsmAnd\'s storage and indexed on this device.</string>
+	<string name="gtfs_remove_feed_question">Remove %1$s and rebuild the index?</string>
+	<string name="gtfs_index">Timetable index</string>
+	<string name="gtfs_index_none">No index yet. Add a GTFS feed to build one.</string>
+	<string name="gtfs_index_error">The index cannot be used (%1$s). Rebuild it or import the feeds again.</string>
+	<string name="gtfs_index_summary">Built %1$s, %2$s\n%3$d stops, %4$d routes, %5$d trips</string>
+	<string name="gtfs_schedule_dates">Schedules from %1$s to %2$s</string>
+	<string name="gtfs_schedule_ended">Schedules ended on %1$s. Trips after that day cannot be planned; import a newer feed.</string>
+	<string name="gtfs_schedule_not_started">Schedules start on %1$s.</string>
+	<string name="gtfs_schedule_none">The feeds contain no service days.</string>
+	<string name="gtfs_rebuild_index">Rebuild index</string>
+	<string name="gtfs_rebuild_index_descr">Build the index again from the stored feeds</string>
+	<string name="gtfs_max_walk">Maximum walking distance</string>
+	<string name="gtfs_max_walk_descr">To the first and from the last stop, and between stops</string>
+	<string name="gtfs_working">%1$s</string>
+	<string name="gtfs_stage_copying">Copying %1$s (%2$d of %3$d)</string>
+	<string name="gtfs_stage_removing">Removing %1$s</string>
+	<string name="gtfs_stage_building">Building the index: %1$s</string>
+	<string name="gtfs_cancel_work">Cancel</string>
+	<string name="gtfs_work_done">Imported %1$d stops and %2$d trips (index %3$s)</string>
+	<string name="gtfs_work_done_skipped">%1$d trips without usable times were skipped</string>
+	<string name="gtfs_work_index_removed">All feeds removed, the index was deleted</string>
+	<string name="gtfs_work_cancelled">Cancelled, the previous index is unchanged</string>
+	<string name="gtfs_work_no_space">Not enough free storage: %1$s. Free some space and try again.</string>
+	<string name="gtfs_work_out_of_memory">Not enough memory to build the index. Close other apps and try again, or import fewer feeds at once.</string>
+	<string name="gtfs_work_failed">Could not import the feed: %1$s. The previous index is unchanged.</string>
+	<string name="gtfs_work_cannot_read">Cannot read the selected file: %1$s</string>
 	<string name="depart_at">Depart at</string>
 	<string name="depart_now">Now</string>
 	<string name="visualization">Visualization</string>
