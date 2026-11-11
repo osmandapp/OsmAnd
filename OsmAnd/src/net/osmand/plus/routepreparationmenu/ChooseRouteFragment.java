@@ -55,6 +55,8 @@ import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.gtfs.GtfsTransitPlugin;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
@@ -904,6 +906,10 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 			dismiss(false);
 			if (app.getRoutingHelper().isPublicTransportMode()) {
 				mapActivity.getMapActions().startNavigation();
+				GtfsTransitPlugin gtfs = PluginsHelper.getActivePlugin(GtfsTransitPlugin.class);
+				if (gtfs != null) {
+					gtfs.startGuidance();
+				}
 			}
 		});
 	}

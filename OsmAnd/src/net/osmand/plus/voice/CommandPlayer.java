@@ -126,6 +126,14 @@ public abstract class CommandPlayer {
 	@NonNull
 	public abstract List<String> playCommands(@NonNull CommandBuilder builder);
 
+	/**
+	 * Speaks a ready-made sentence that is not one of the navigation commands (for example transit guidance).
+	 * Returns false when this voice cannot, as with recorded voice packs, or when voice prompts are muted.
+	 */
+	public boolean speak(@NonNull String text) {
+		return false;
+	}
+
 	public abstract void stop();
 
 	@NonNull

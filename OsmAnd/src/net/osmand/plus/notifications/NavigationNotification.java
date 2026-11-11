@@ -32,6 +32,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.TargetPoint;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.gtfs.GtfsGuidanceSession;
+import net.osmand.plus.plugins.gtfs.GtfsTransitPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -135,6 +138,13 @@ public class NavigationNotification extends OsmandNotification {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (isUsedByService(service)) {
 			color = app.getColor(R.color.osmand_orange);
+
+			GtfsTransitPlugin gtfs = PluginsHelper.getActivePlugin(GtfsTransitPlugin.class);
+			GtfsGuidanceSession guidance = gtfs != null ? gtfs.getGuidanceSession() : null;
+			if (guidance != null) {
+				// a timetable trip is being guided: the step replaces the road-routing texts and buttons
+				return guidance.buildNotification(createBuilder(wearable));
+			}
 
 			String distanceStr = OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app,
 					OsmAndFormatterParams.USE_LOWER_BOUNDS);

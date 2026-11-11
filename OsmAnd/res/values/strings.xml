@@ -11,6 +11,34 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="gtfs_guide_title">Transit trip</string>
+	<string name="gtfs_guide_walk">Walk to %1$s</string>
+	<string name="gtfs_guide_walk_destination">Walk to your destination</string>
+	<string name="gtfs_guide_walk_left">%1$s to go</string>
+	<string name="gtfs_guide_board">Board %1$s at %2$s, departs %3$s</string>
+	<string name="gtfs_guide_board_toward">Board %1$s toward %2$s at %3$s, departs %4$s</string>
+	<string name="gtfs_guide_transfer">Transfer to %1$s at %2$s, departs %3$s</string>
+	<string name="gtfs_guide_transfer_toward">Transfer to %1$s toward %2$s at %3$s, departs %4$s</string>
+	<string name="gtfs_guide_ride_started">Get off at %1$s, %2$s</string>
+	<string name="gtfs_guide_next_stop">Next stop: %1$s. %2$s left</string>
+	<string name="gtfs_guide_get_off_next">Next stop: get off at %1$s</string>
+	<string name="gtfs_guide_missed">You missed %1$s at %2$s, which left at %3$s</string>
+	<string name="gtfs_guide_replan_offer">Replan from now?</string>
+	<string name="gtfs_guide_off_route">You are off route. Replan from here?</string>
+	<string name="gtfs_guide_route_resumed">Back on route</string>
+	<string name="gtfs_guide_arrived">You have arrived</string>
+	<string name="gtfs_guide_planning_new">Planning a new trip</string>
+	<string name="gtfs_guide_on_board">I\'m on board</string>
+	<string name="gtfs_guide_got_off">I got off</string>
+	<string name="gtfs_guide_skip">Skip</string>
+	<string name="gtfs_guide_replan">Replan</string>
+	<string name="gtfs_guide_cancel">Cancel</string>
+	<string name="gtfs_guide_no_index">The timetable index is not available, guidance cannot start</string>
+	<string name="gtfs_guide_replan_failed">No timetable trip found from here, guidance ended</string>
+	<plurals name="gtfs_guide_stops">
+		<item quantity="one">%d stop</item>
+		<item quantity="other">%d stops</item>
+	</plurals>
 	<string name="gtfs_plugin_name">Transit timetables (GTFS)</string>
 	<string name="gtfs_plugin_description">Plan public transport trips offline from timetables you import yourself. Add the GTFS .zip files of your transit agencies; OsmAnd builds an index on this device and uses it, with departure times, for public transport routes. Where the timetables do not cover a trip, the usual map based planner is used.</string>
 	<string name="gtfs_feeds">Feeds</string>

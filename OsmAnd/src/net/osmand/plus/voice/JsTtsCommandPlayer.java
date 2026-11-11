@@ -187,41 +187,53 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 			bld.append(s).append(' ');
 		}
 		sendAlertToPebble(bld.toString());
-		if (mTts != null && !voiceRouter.isMute() && speechAllowed) {
-			if (ttsRequests++ == 0) {
-				requestAudioFocus();
-				mTts.setAudioAttributes(new AudioAttributes.Builder()
-						.setUsage(settings.AUDIO_USAGE[settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode())].get())
-						.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-						.build());
-				// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
-				if (app != null) {
-					Integer streamModeValue = settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode());
-					OsmandPreference<Integer> pref = settings.VOICE_PROMPT_DELAY[streamModeValue];
-					int vpd = pref == null ? 0 : pref.getModeValue(app.getRoutingHelper().getAppMode());
-					if (vpd > 0) {
-						ttsRequests++;
-						mTts.playSilentUtterance(vpd, TextToSpeech.QUEUE_ADD, "" + System.currentTimeMillis());
-					}
-				}
-			}
-			log.debug("ttsRequests=" + ttsRequests);
-			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "" + System.currentTimeMillis());
-			if (AudioFocusHelperImpl.playbackAuthorized) {
-				if (mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params) == TextToSpeech.ERROR) {
-					// Not queued (the engine is unbound or died), so no completion callback will come
-					stop();
-				}
-			} else {
-				stop();
-			}
-			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
-		}
+		say(bld.toString());
 		// #5966: TTS Utterance for debugging
 		if (app != null && settings.DISPLAY_TTS_UTTERANCE.get()) {
 			app.showToastMessage(bld.toString());
 		}
 		return execute;
+	}
+
+	/** Queues the text on the TTS engine unless muted or not ready; returns whether it was queued. */
+	private boolean say(@NonNull String text) {
+		if (mTts == null || voiceRouter.isMute() || !speechAllowed) {
+			return false;
+		}
+		if (ttsRequests++ == 0) {
+			requestAudioFocus();
+			mTts.setAudioAttributes(new AudioAttributes.Builder()
+					.setUsage(settings.AUDIO_USAGE[settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode())].get())
+					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+					.build());
+			// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
+			if (app != null) {
+				Integer streamModeValue = settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode());
+				OsmandPreference<Integer> pref = settings.VOICE_PROMPT_DELAY[streamModeValue];
+				int vpd = pref == null ? 0 : pref.getModeValue(app.getRoutingHelper().getAppMode());
+				if (vpd > 0) {
+					ttsRequests++;
+					mTts.playSilentUtterance(vpd, TextToSpeech.QUEUE_ADD, "" + System.currentTimeMillis());
+				}
+			}
+		}
+		log.debug("ttsRequests=" + ttsRequests);
+		params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "" + System.currentTimeMillis());
+		if (AudioFocusHelperImpl.playbackAuthorized) {
+			if (mTts.speak(text, TextToSpeech.QUEUE_ADD, params) == TextToSpeech.ERROR) {
+				// Not queued (the engine is unbound or died), so no completion callback will come
+				stop();
+			}
+		} else {
+			stop();
+		}
+		// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
+		return true;
+	}
+
+	@Override
+	public synchronized boolean speak(@NonNull String text) {
+		return say(text);
 	}
 
 	private void sendAlertToPebble(@NonNull String bld) {

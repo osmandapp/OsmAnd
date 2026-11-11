@@ -1,15 +1,18 @@
 package net.osmand.plus.plugins.gtfs
 
 import android.net.Uri
+import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.settings.fragments.SettingsScreenType
 import net.osmand.router.gtfs.GtfsFeedStore
+import net.osmand.router.gtfs.GtfsIndexGuidanceNames
 import net.osmand.router.gtfs.GtfsIndexSource
 import net.osmand.router.gtfs.GtfsIndexSummary
 import net.osmand.router.gtfs.GtfsTransitRouteProvider
+import net.osmand.router.gtfs.GtfsTransportResultAdapter.GtfsResult
 
 /**
  * Offline public transport planning from imported GTFS timetables.
@@ -50,12 +53,83 @@ class GtfsTransitPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 
 	override fun setEnabled(enabled: Boolean) {
 		super.setEnabled(enabled)
+		if (!enabled) {
+			guidanceSession?.stop(false)
+		}
 		refreshProvider()
 	}
 
 	override fun mapActivityCreate(activity: MapActivity) {
 		// the route helper may not have existed yet when the plugin was enabled at start up
 		refreshProvider()
+	}
+
+	override fun mapActivityResume(activity: MapActivity) {
+		panelActivity = activity
+		showPanel()
+	}
+
+	override fun mapActivityPause(activity: MapActivity) {
+		if (panelActivity === activity) {
+			panel?.detach()
+			panel = null
+			panelActivity = null
+		}
+	}
+
+	/** Called for every location, in the foreground and from the navigation service in the background. */
+	override fun updateLocation(location: Location?) {
+		guidanceSession?.onLocation(location)
+	}
+
+	/**
+	 * Starts step by step guidance when the route the user just started is a timetable route; any other
+	 * route is left to the stock behaviour. Returns true if guidance runs.
+	 */
+	fun startGuidance(): Boolean {
+		if (!isEnabled) {
+			return false
+		}
+		val result = app.transportRoutingHelper?.currentRouteResult as? GtfsResult ?: return false
+		val loaded = source.get()
+		if (loaded == null) {
+			app.showToastMessage(net.osmand.plus.R.string.gtfs_guide_no_index)
+			return false
+		}
+		guidanceSession?.stop(false)
+		val started = GtfsGuidanceSession(app, this, result, GtfsIndexGuidanceNames(loaded.index))
+		guidanceSession = started
+		started.start()
+		showPanel()
+		return true
+	}
+
+	/** The running guidance, or null. */
+	var guidanceSession: GtfsGuidanceSession? = null
+		private set
+
+	private var panel: GtfsGuidancePanel? = null
+	private var panelActivity: MapActivity? = null
+
+	fun onGuidanceChanged() {
+		panel?.update()
+	}
+
+	fun onGuidanceEnded(session: GtfsGuidanceSession) {
+		if (guidanceSession === session) {
+			guidanceSession = null
+			panel?.detach()
+			panel = null
+			app.notificationHelper.refreshNotifications()
+		}
+	}
+
+	private fun showPanel() {
+		val session = guidanceSession
+		val activity = panelActivity
+		if (session != null && activity != null && panel == null) {
+			panel = GtfsGuidancePanel(activity, session).also { it.attach() }
+		}
 	}
 
 	/** Registers the provider when the plugin is on and there is an index, and removes it otherwise. */
