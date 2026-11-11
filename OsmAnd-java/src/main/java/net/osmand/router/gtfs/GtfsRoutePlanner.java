@@ -409,8 +409,9 @@ public final class GtfsRoutePlanner {
 				arr[i] = epoch(index.stopTimeArr.get(e) + offsets[k]);
 				dep[i] = epoch(index.stopTimeDep.get(e) + offsets[k]);
 			}
-			return GtfsLeg.ride(trip, index.tripRoute.get(trip), boardSeq, alightSeq, stops, arr, dep,
-					stopPoint(fromStop), stopPoint(toStop));
+			int route = index.tripRoute.get(trip);
+			return GtfsLeg.ride(trip, route, boardSeq, alightSeq, stops, arr, dep, stopPoint(fromStop),
+					stopPoint(toStop), index.getTripId(trip), index.getRouteId(route));
 		}
 	}
 }

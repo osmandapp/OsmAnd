@@ -19,6 +19,8 @@ public final class GtfsLeg {
 
 	// RIDE only, otherwise -1 / null
 	public final int tripIdx, routeIdx;
+	/** "feed:trip_id" and "feed:route_id" of a ride, null for a walk. */
+	public final String tripId, routeId;
 	/** All stops from boarding to alighting, with scheduled times; positions index the trip's stop list. */
 	public final int boardSeq, alightSeq;
 	public final int[] stops;
@@ -26,7 +28,7 @@ public final class GtfsLeg {
 
 	private GtfsLeg(Type type, long startSec, long endSec, int fromStop, int toStop, LatLon from, LatLon to,
 	                int walkMeters, int tripIdx, int routeIdx, int boardSeq, int alightSeq, int[] stops,
-	                long[] arrivalSec, long[] departureSec) {
+	                long[] arrivalSec, long[] departureSec, String tripId, String routeId) {
 		this.type = type;
 		this.startSec = startSec;
 		this.endSec = endSec;
@@ -37,6 +39,8 @@ public final class GtfsLeg {
 		this.walkMeters = walkMeters;
 		this.tripIdx = tripIdx;
 		this.routeIdx = routeIdx;
+		this.tripId = tripId;
+		this.routeId = routeId;
 		this.boardSeq = boardSeq;
 		this.alightSeq = alightSeq;
 		this.stops = stops;
@@ -46,18 +50,18 @@ public final class GtfsLeg {
 
 	static GtfsLeg walk(long startSec, long endSec, int fromStop, int toStop, LatLon from, LatLon to, int meters) {
 		return new GtfsLeg(Type.WALK, startSec, endSec, fromStop, toStop, from, to, meters, -1, -1, -1, -1, null,
-				null, null);
+				null, null, null, null);
 	}
 
 	static GtfsLeg ride(int tripIdx, int routeIdx, int boardSeq, int alightSeq, int[] stops, long[] arrivalSec,
-	                    long[] departureSec, LatLon from, LatLon to) {
+	                    long[] departureSec, LatLon from, LatLon to, String tripId, String routeId) {
 		int n = stops.length;
 		return new GtfsLeg(Type.RIDE, departureSec[0], arrivalSec[n - 1], stops[0], stops[n - 1], from, to, 0,
-				tripIdx, routeIdx, boardSeq, alightSeq, stops, arrivalSec, departureSec);
+				tripIdx, routeIdx, boardSeq, alightSeq, stops, arrivalSec, departureSec, tripId, routeId);
 	}
 
 	GtfsLeg withTimes(long start, long end) {
 		return new GtfsLeg(type, start, end, fromStop, toStop, from, to, walkMeters, tripIdx, routeIdx, boardSeq,
-				alightSeq, stops, arrivalSec, departureSec);
+				alightSeq, stops, arrivalSec, departureSec, tripId, routeId);
 	}
 }

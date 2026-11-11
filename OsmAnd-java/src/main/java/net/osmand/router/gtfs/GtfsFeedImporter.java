@@ -54,6 +54,7 @@ public final class GtfsFeedImporter {
 	private static final double TRANSFER_MAX_METERS = 400;
 	private static final int CANCEL_CHECK_ROWS = 1 << 14;
 	private static final int BUFFER_BYTES = 1 << 18;
+	private static final int RUN_CONNECTIONS = 1 << 20;
 
 	/** Checks that a directory can take the given number of bytes; throws IOException if not. */
 	public interface FreeSpaceCheck {
@@ -220,7 +221,7 @@ public final class GtfsFeedImporter {
 				stopId = new TIntArrayList(), stopParent = new TIntArrayList();
 		final BitSet used = new BitSet();
 		final TIntArrayList routeShort = new TIntArrayList(), routeLong = new TIntArrayList(),
-				routeType = new TIntArrayList(), routeColor = new TIntArrayList();
+				routeType = new TIntArrayList(), routeColor = new TIntArrayList(), routeId = new TIntArrayList();
 		final TIntArrayList tripRoute = new TIntArrayList(), tripService = new TIntArrayList(),
 				tripHeadsign = new TIntArrayList(), tripFirst = new TIntArrayList(), tripCount = new TIntArrayList();
 		final TIntArrayList tfFrom = new TIntArrayList(), tfTo = new TIntArrayList(), tfType = new TIntArrayList(),
@@ -283,6 +284,22 @@ public final class GtfsFeedImporter {
 			if (progress != null && progress.isCancelled()) {
 				throw new ImportException("GTFS import cancelled", true, null);
 			}
+		}
+
+		// Trip ids are unique and many (250 thousand for NYC): keep them as raw bytes, not as String objects,
+		// and append them to the string table when the index is written.
+		byte[] tripIdBytes = new byte[1 << 16];
+		int tripIdLen;
+		final TIntArrayList tripIdEnd = new TIntArrayList();
+
+		void addTripId(String s) {
+			byte[] b = s.getBytes(StandardCharsets.UTF_8);
+			if (tripIdLen + b.length > tripIdBytes.length) {
+				tripIdBytes = Arrays.copyOf(tripIdBytes, Math.max(tripIdBytes.length * 2, tripIdLen + b.length));
+			}
+			System.arraycopy(b, 0, tripIdBytes, tripIdLen, b.length);
+			tripIdLen += b.length;
+			tripIdEnd.add(tripIdLen);
 		}
 
 		int string(String s) {
@@ -445,6 +462,7 @@ public final class GtfsFeedImporter {
 					routeMap.put(c.get(id), routeShort.size() - routeBase);
 					routeShort.add(string(c.get(sn)));
 					routeLong.add(string(c.get(ln)));
+					routeId.add(string(feed + ":" + c.get(id)));
 					routeType.add(c.getInt(ty, 3));
 					int color = GtfsIndex.NO_COLOR;
 					try {
@@ -500,6 +518,7 @@ public final class GtfsFeedImporter {
 					tripRoute.add(r == null ? -1 : routeBase + r);
 					tripService.add(s);
 					tripHeadsign.add(string(c.get(hs)));
+					addTripId(feed + ":" + tid);
 					tripFirst.add(0);
 					tripCount.add(0);
 					if (r == null || s < 0 || frequencyTrips.contains(tid)) {
@@ -770,6 +789,9 @@ public final class GtfsFeedImporter {
 						| ((bf[i + 1] & GtfsIndex.FLAG_NO_DROP_OFF) != 0 ? 2 : 0);
 				store.add(bd[i], ba[i + 1], bs[i], bs[i + 1], trip << 2 | flags);
 			}
+			if (store.size >= RUN_CONNECTIONS) {
+				flushRun(); // bounds the memory of the sort whatever the size of the feed
+			}
 		}
 
 		/** Sorts the feed's connections by departure and writes them as a run file (5 columns). */
@@ -908,14 +930,18 @@ public final class GtfsFeedImporter {
 
 		void write(long feedHash) throws IOException {
 			int tzString = string(zoneId); // register before the string table size is fixed
-			int nStr = strings.size(), ns = stopLat.size(), nt = tripRoute.size(), nr = routeShort.size(),
+			int nPool = strings.size(), nStr = nPool + tripIdEnd.size(), ns = stopLat.size(), nt = tripRoute.size(), nr = routeShort.size(),
 					nf = footTo.length;
 			GtfsCalendar cal = calendar.build(ZoneId.of(zoneId));
 			byte[][] sb = new byte[nStr][];
-			int strBytes = 0;
-			for (int i = 0; i < nStr; i++) {
+			int strBytes = tripIdLen;
+			for (int i = 0; i < nPool; i++) {
 				sb[i] = strings.get(i).getBytes(StandardCharsets.UTF_8);
 				strBytes += sb[i].length;
+			}
+			for (int i = 0; i < tripIdEnd.size(); i++) { // trip ids follow the pooled strings
+				int from = i == 0 ? 0 : tripIdEnd.get(i - 1);
+				sb[nPool + i] = Arrays.copyOfRange(tripIdBytes, from, tripIdEnd.get(i));
 			}
 			int[] counts = new int[GtfsIndex.COUNTS];
 			counts[GtfsIndex.C_STR] = nStr;
@@ -959,12 +985,16 @@ public final class GtfsFeedImporter {
 			put(t, routeLong);
 			put(t, routeType);
 			put(t, routeColor);
+			put(t, routeId);
 			t.position((int) off[GtfsIndex.S_TRIPS]);
 			put(t, tripRoute);
 			put(t, tripService);
 			put(t, tripHeadsign);
 			put(t, tripFirst);
 			put(t, tripCount);
+			for (int i = 0; i < nt; i++) {
+				t.putInt(nPool + i); // trips are numbered in the order their ids were added
+			}
 			t.position((int) off[GtfsIndex.S_CALENDAR]);
 			put(t, cal.weekdayMask);
 			put(t, cal.startDay);

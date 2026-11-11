@@ -26,8 +26,8 @@ import java.util.zip.CRC32;
  * strings   offsets[n+1], UTF-8 bytes
  * stops     lat, lon (degrees * 1e7), name, id, parent (-1), min transfer time at the stop, footpath offsets[n+1]
  * footpaths to, value (metres * 2 for a walk estimate, or seconds * 2 + 1 for a transfers.txt minimum)
- * routes    short name, long name, type, colour (0xRRGGBB or -1)
- * trips     route, service, headsign, first stop-time entry, stop-time count
+ * routes    short name, long name, type, colour (0xRRGGBB or -1), id ("feed:route_id")
+ * trips     route, service, headsign, first stop-time entry, stop-time count, id ("feed:trip_id")
  * calendar  weekday mask, first day, last day, exception offsets[n+1]; then exception day, type
  * connections  departure, arrival, from stop, to stop, trip * 4 + flags     (sorted by departure)
  * stop times   stop + flags, arrival, departure                             (contiguous per trip, in stop order)
@@ -38,7 +38,7 @@ import java.util.zip.CRC32;
  */
 public final class GtfsIndex {
 
-	public static final int VERSION = 1;
+	public static final int VERSION = 2;
 
 	static final byte[] MAGIC = "OSMGTFSI".getBytes(StandardCharsets.US_ASCII);
 	static final int HEADER_SIZE = 192;
@@ -70,8 +70,8 @@ public final class GtfsIndex {
 
 	final IntBuffer stopLat, stopLon, stopName, stopId, stopParent, stopMinTransfer, footOffset;
 	final IntBuffer footTo, footValue;
-	final IntBuffer routeShort, routeLong, routeType, routeColor;
-	final IntBuffer tripRoute, tripService, tripHeadsign, tripFirst, tripCount;
+	final IntBuffer routeShort, routeLong, routeType, routeColor, routeId;
+	final IntBuffer tripRoute, tripService, tripHeadsign, tripFirst, tripCount, tripId;
 	final IntBuffer connDep, connArr, connFrom, connTo, connTrip;
 	final IntBuffer stopTimeStop, stopTimeArr, stopTimeDep;
 
@@ -149,12 +149,14 @@ public final class GtfsIndex {
 		routeLong = view(p + 4L * nr, nr);
 		routeType = view(p + 8L * nr, nr);
 		routeColor = view(p + 12L * nr, nr);
+		routeId = view(p + 16L * nr, nr);
 		p = off[S_TRIPS];
 		tripRoute = view(p, nt);
 		tripService = view(p + 4L * nt, nt);
 		tripHeadsign = view(p + 8L * nt, nt);
 		tripFirst = view(p + 12L * nt, nt);
 		tripCount = view(p + 16L * nt, nt);
+		tripId = view(p + 20L * nt, nt);
 		p = off[S_CONN];
 		connDep = view(p, nc);
 		connArr = view(p + 4L * nc, nc);
@@ -198,8 +200,8 @@ public final class GtfsIndex {
 		size[S_STR_BYTES] = c[C_STR_BYTES];
 		size[S_STOPS] = 4L * (7L * c[C_STOPS] + 1);
 		size[S_FOOT] = 8L * c[C_FOOT];
-		size[S_ROUTES] = 16L * c[C_ROUTES];
-		size[S_TRIPS] = 20L * c[C_TRIPS];
+		size[S_ROUTES] = 20L * c[C_ROUTES];
+		size[S_TRIPS] = 24L * c[C_TRIPS];
 		size[S_CALENDAR] = 4L * (4L * c[C_SERVICES] + 1);
 		size[S_EXCEPTIONS] = 8L * c[C_EXCEPTIONS];
 		size[S_CONN] = 20L * c[C_CONN];
@@ -345,6 +347,16 @@ public final class GtfsIndex {
 	/** Route of the trip, or -1 if trips.txt named an unknown route. */
 	public int getTripRoute(int trip) {
 		return tripRoute.get(trip);
+	}
+
+	/** GTFS route_id as "feed:route_id"; the feed prefix keeps ids of different feeds apart. */
+	public String getRouteId(int route) {
+		return string(routeId.get(route));
+	}
+
+	/** GTFS trip_id as "feed:trip_id" (for GTFS-RT matching, strip the prefix). */
+	public String getTripId(int trip) {
+		return string(tripId.get(trip));
 	}
 
 	public String getTripHeadsign(int trip) {
