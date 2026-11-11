@@ -2,4 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools">
      <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
+     <application>
+          <!-- GTFS self-test, debug builds only. The DUMP permission is held by the adb shell and not by apps. -->
+          <receiver
+               android:name="net.osmand.plus.plugins.gtfs.selftest.GtfsSelfTestReceiver"
+               android:exported="true"
+               android:permission="android.permission.DUMP">
+               <intent-filter>
+                    <action android:name="net.osmand.dev.GTFS_SELFTEST"/>
+               </intent-filter>
+          </receiver>
+          <service
+               android:name="net.osmand.plus.plugins.gtfs.selftest.GtfsSelfTestService"
+               android:exported="true"
+               android:permission="android.permission.DUMP"
+               android:foregroundServiceType="dataSync"/>
+     </application>
 </manifest> 
