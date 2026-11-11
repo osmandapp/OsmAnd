@@ -48,6 +48,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	private static final String CONFIGURE_PROFILE = "configure_profile";
 	private static final String APP_PROFILES = "app_profiles";
 	private static final String PURCHASES_SETTINGS = "purchases_settings";
+	private static final String TRAINING_SETTINGS = "training_settings";
 	private static final String SELECTED_PROFILE = "selected_profile";
 	private static final String CREATE_PROFILE = "create_profile";
 	private static final String REORDER_PROFILES = "reorder_profiles";
@@ -73,6 +74,8 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		setupBackupAndRestorePref();
 		Preference purchasesSettings = requirePreference(PURCHASES_SETTINGS);
 		purchasesSettings.setIcon(getContentIcon(R.drawable.ic_action_purchases));
+		Preference trainingSettings = requirePreference(TRAINING_SETTINGS);
+		trainingSettings.setIcon(getContentIcon(R.drawable.ic_action_training));
 		PreferenceCategory selectedProfile = requirePreference(SELECTED_PROFILE);
 		selectedProfile.setIconSpaceReserved(false);
 		setupConfigureProfilePref();
@@ -143,6 +146,12 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 					BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
 				}
 			}
+		} else if (TRAINING_SETTINGS.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.TRAINING_SETTINGS);
+			}
+			return true;
 		} else if (EXPORT_TO_FILE.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
