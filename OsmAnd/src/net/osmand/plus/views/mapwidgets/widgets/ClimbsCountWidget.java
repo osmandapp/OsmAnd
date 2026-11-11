@@ -238,11 +238,8 @@ public class ClimbsCountWidget extends SimpleWidget {
 	}
 
 	private boolean isRouteAvailable() {
-		if (routingHelper == null || !routingHelper.isFollowingMode()) {
-			return false;
-		}
-		// Route is available if we have a GPX file or a calculated route
-		return routingHelper.getCurrentGPX() != null || routingHelper.getRoute() != null;
+		// Only detect climbs for navigation routes (A to B), not for GPX tracks
+		return routingHelper != null && routingHelper.isFollowingMode() && routingHelper.getRoute() != null;
 	}
 
 	private ClimbsResult calculateClimbs(int minElevation, float minGrade) {
@@ -252,47 +249,46 @@ public class ClimbsCountWidget extends SimpleWidget {
 		result.climbs = new ArrayList<>();
 		climbs.clear();
 
-		// Try to get points from GPX file first, then from calculated route
-		List<WptPt> allPoints = new ArrayList<>();
-		
-		GpxFile gpxFile = routingHelper.getCurrentGPX();
-		if (gpxFile != null) {
-			List<WptPt> gpxPoints = gpxFile.getAllSegmentsPoints();
-			if (gpxPoints != null && !gpxPoints.isEmpty()) {
-				allPoints.addAll(gpxPoints);
-			}
-		}
-		
-		// If no GPX or GPX has no points, try to get points from calculated route
-		if (allPoints.isEmpty()) {
-			RouteCalculationResult route = routingHelper.getRoute();
-			if (route != null) {
-				List<Location> locations = route.getImmutableAllLocations();
-				if (locations != null && !locations.isEmpty()) {
-					for (Location loc : locations) {
-						WptPt point = new WptPt();
-						point.setLat(loc.getLatitude());
-						point.setLon(loc.getLongitude());
-						point.setEle(loc.getAltitude());
-						allPoints.add(point);
-					}
-				}
-			}
-		}
-		
-		if (allPoints.size() < 2) {
+		// Only use points from the calculated navigation route
+		RouteCalculationResult route = routingHelper.getRoute();
+		if (route == null) {
 			return result;
 		}
 
+		List<Location> locations = route.getImmutableAllLocations();
+		if (locations == null || locations.size() < 2) {
+			return result;
+		}
+
+		// Convert Location objects to WptPt
+		List<WptPt> allPoints = new ArrayList<>();
+		for (Location loc : locations) {
+			WptPt point = new WptPt();
+			point.setLat(loc.getLatitude());
+			point.setLon(loc.getLongitude());
+			point.setEle(loc.getAltitude());
+			allPoints.add(point);
+		}
+
+		// Build cumulative distances for all points
+		cumulativeDistances.clear();
+		cumulativeDistances.add(0.0);
+		for (int i = 1; i < allPoints.size(); i++) {
+			WptPt prev = allPoints.get(i - 1);
+			WptPt curr = allPoints.get(i);
+			double dist = MapUtils.getDistance(prev.getLatitude(), prev.getLongitude(), curr.getLatitude(), curr.getLongitude());
+			cumulativeDistances.add(cumulativeDistances.get(i - 1) + dist);
+		}
+		this.cumulativeDistances = new ArrayList<>(cumulativeDistances);
+
 		// Find climbs by identifying uphill segments that meet criteria
-		// A climb ends when there's more than 50m without ascent AND no new climb starts within 200m
-		// Implementation: end climb when there's 200m without ascent (this satisfies both conditions)
+		// Improved algorithm: track peak elevation and end climb when descended significantly
 		int climbStartIndex = 0;
 		boolean inClimb = false;
 		double currentClimbGain = 0;
 		double currentClimbDistance = 0;
-		double netClimbGain = 0; // Net gain from climb start (can go negative temporarily)
-		double distanceSinceLastAscent = 0; // Distance traveled without positive elevation gain
+		double peakElevation = 0; // Track the highest point in the current climb
+		double distanceSincePeak = 0; // Distance since we started descending from peak
 
 		// For building elevation profiles per climb
 		List<Double> climbElevationProfile = new ArrayList<>();
@@ -304,11 +300,11 @@ public class ClimbsCountWidget extends SimpleWidget {
 
 			// Skip if no valid elevation data
 			if (Double.isNaN(prevPoint.getEle()) || Double.isNaN(currPoint.getEle())) {
-				// End current climb if we were in one
-				if (inClimb && netClimbGain >= minElevation) {
-					float avgGrade = calculateGrade(netClimbGain, currentClimbDistance);
+				// End current climb if we were in one and it meets criteria
+				if (inClimb && currentClimbGain >= minElevation) {
+					float avgGrade = calculateGrade(currentClimbGain, currentClimbDistance);
 					if (avgGrade >= minGrade) {
-						Climb climb = createClimb(climbStartIndex, i - 1, netClimbGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
+						Climb climb = createClimb(climbStartIndex, i - 1, currentClimbGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
 						result.climbs.add(climb);
 						climbs.add(climb);
 						result.info.totalClimbs++;
@@ -317,18 +313,15 @@ public class ClimbsCountWidget extends SimpleWidget {
 				inClimb = false;
 				climbElevationProfile = new ArrayList<>();
 				climbDistanceProfile = new ArrayList<>();
+				currentClimbGain = 0;
+				currentClimbDistance = 0;
+				peakElevation = 0;
+				distanceSincePeak = 0;
 				continue;
 			}
 
 			double elevationGain = currPoint.getEle() - prevPoint.getEle();
 			double segmentDistance = MapUtils.getDistance(prevPoint.getLatitude(), prevPoint.getLongitude(), currPoint.getLatitude(), currPoint.getLongitude());
-
-			// Track distance since last ascent for climb termination
-			if (elevationGain > 0) {
-				distanceSinceLastAscent = 0;
-			} else {
-				distanceSinceLastAscent += segmentDistance;
-			}
 
 			if (!inClimb) {
 				// Not in a climb, check if we should start one
@@ -337,7 +330,8 @@ public class ClimbsCountWidget extends SimpleWidget {
 					climbStartIndex = i - 1;
 					currentClimbGain = elevationGain;
 					currentClimbDistance = segmentDistance;
-					netClimbGain = elevationGain;
+					peakElevation = currPoint.getEle();
+					distanceSincePeak = 0;
 					// Start fresh profiles for this climb
 					climbElevationProfile = new ArrayList<>();
 					climbDistanceProfile = new ArrayList<>();
@@ -359,33 +353,38 @@ public class ClimbsCountWidget extends SimpleWidget {
 					climbDistanceProfile.add(climbDistanceProfile.get(climbDistanceProfile.size() - 1) + segmentDistance);
 				}
 
+				// Update peak elevation and distance since peak
+				if (currPoint.getEle() > peakElevation) {
+					peakElevation = currPoint.getEle();
+					distanceSincePeak = 0;
+				} else {
+					distanceSincePeak += segmentDistance;
+				}
+
 				if (elevationGain >= 0) {
 					// Still climbing or flat
 					currentClimbGain += elevationGain;
 					currentClimbDistance += segmentDistance;
-					netClimbGain += elevationGain;
 				} else {
-					// Descending - reduce net gain
-					netClimbGain += elevationGain;
+					// Descending - only track distance, don't reduce gain
 					currentClimbDistance += segmentDistance;
 
-					// End climb if there's been more than 200m without ascent
-					// (this satisfies: >50m without ascent AND no new climb within 200m, since distanceSinceLastAscent resets on ascent)
-					if (distanceSinceLastAscent > 200) {
+					// End climb if we've descended significantly from peak (100m descent OR 200m without ascent)
+					// This handles both long plateaus and actual descents
+					if (distanceSincePeak > 200 || (peakElevation - currPoint.getEle()) > 100) {
 						// End of climb - check if it meets criteria
-						double totalGain = currentClimbGain;
-						if (totalGain >= minElevation) {
-							float avgGrade = calculateGrade(totalGain, currentClimbDistance);
+						if (currentClimbGain >= minElevation) {
+							float avgGrade = calculateGrade(currentClimbGain, currentClimbDistance);
 							if (avgGrade >= minGrade) {
-								Climb climb = createClimb(climbStartIndex, i - 1, totalGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
+								Climb climb = createClimb(climbStartIndex, i - 1, currentClimbGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
 								result.climbs.add(climb);
 								climbs.add(climb);
 								result.info.totalClimbs++;
 							}
 						}
 						inClimb = false;
-						// Reset distance since last ascent
-						distanceSinceLastAscent = 0;
+						climbElevationProfile = new ArrayList<>();
+						climbDistanceProfile = new ArrayList<>();
 					}
 				}
 			}
@@ -402,26 +401,8 @@ public class ClimbsCountWidget extends SimpleWidget {
 			}
 		}
 
-		// Build cumulative distances for all points
-		cumulativeDistances.clear();
-		cumulativeDistances.add(0.0);
-		for (int i = 1; i < allPoints.size(); i++) {
-			WptPt prev = allPoints.get(i - 1);
-			WptPt curr = allPoints.get(i);
-			if (!Double.isNaN(prev.getEle()) && !Double.isNaN(curr.getEle())) {
-				double dist = MapUtils.getDistance(prev.getLatitude(), prev.getLongitude(), curr.getLatitude(), curr.getLongitude());
-				cumulativeDistances.add(cumulativeDistances.get(i - 1) + dist);
-			} else {
-				cumulativeDistances.add(cumulativeDistances.get(i - 1));
-			}
-		}
-		
-		// Also update the member variable
-		this.cumulativeDistances = new ArrayList<>(cumulativeDistances);
-
 		// Calculate completed climbs based on current location
-		RouteCalculationResult route = routingHelper.getRoute();
-		if (route != null && !result.climbs.isEmpty()) {
+		if (!result.climbs.isEmpty()) {
 			int routeDistance = route.getDistanceFromStart();
 			int wholeDistance = route.getWholeDistance();
 
@@ -440,8 +421,6 @@ public class ClimbsCountWidget extends SimpleWidget {
 				}
 			}
 			result.info.completedClimbs = completedCount;
-
-			// Also update completedClimbs member variable for overlay logic
 			this.completedClimbs = completedCount;
 
 			if (wholeDistance == 0) {
@@ -449,7 +428,6 @@ public class ClimbsCountWidget extends SimpleWidget {
 				this.completedClimbs = 0;
 			}
 		} else {
-			result.info.completedClimbs = 0;
 			currentClimbInfo = null;
 			this.completedClimbs = 0;
 		}
