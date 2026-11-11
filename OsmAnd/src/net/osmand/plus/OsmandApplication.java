@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
@@ -247,7 +248,9 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public void onCreate() {
-		if (RestartActivity.isRestartProcess(this)) {
+		// An isolated process (e.g. a WebView renderer) may not call getRunningAppProcesses() and must not init the app
+		boolean isolatedProcess = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && Process.isIsolated();
+		if (isolatedProcess || RestartActivity.isRestartProcess(this)) {
 			return;
 		}
 		long timeToStart = System.currentTimeMillis();
