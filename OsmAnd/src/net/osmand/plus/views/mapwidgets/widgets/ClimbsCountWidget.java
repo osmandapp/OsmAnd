@@ -161,10 +161,11 @@ public class ClimbsCountWidget extends SimpleWidget {
 			canvas.drawPath(path, linePaint);
 
 			// Draw virtual opponent line at position based on VAM target
-			// Opponent starts at the same time as user and rides at speed corresponding to target VAM
-			// opponentRatio = (targetVAM / currentVAM) * progress
+			// If user VAM > target VAM, user is faster, opponent is behind (ratio < 1)
+			// If user VAM < target VAM, user is slower, opponent is ahead (ratio > 1)
+			// opponentRatio = (currentVAM / targetVAM) * progress
 			if (vamTarget > 0 && currentVAM > 0) {
-				double opponentRatio = ((double) vamTarget / currentVAM) * progress;
+				double opponentRatio = ((double) currentVAM / vamTarget) * progress;
 				opponentRatio = Math.max(0, Math.min(1, opponentRatio));
 				int opponentX = (int) (width * opponentRatio);
 				
@@ -686,10 +687,13 @@ public class ClimbsCountWidget extends SimpleWidget {
 	}
 
 	private void showClimbProfileOverlay(@NonNull CurrentClimbInfo climbInfo) {
-		// First hide any existing overlay to avoid duplicates
-		hideClimbProfileOverlay();
+		// Reuse existing overlay if it already exists
+		if (climbProfileOverlay != null) {
+			updateOverlayContent(climbInfo);
+			return;
+		}
 
-		// Create overlay from layout
+		// Create new overlay from layout
 		try {
 			climbProfileOverlay = mapActivity.getLayoutInflater().inflate(R.layout.climb_profile_overlay, null);
 
@@ -706,15 +710,10 @@ public class ClimbsCountWidget extends SimpleWidget {
 			// Add to map activity
 			ViewGroup rootView = mapActivity.findViewById(android.R.id.content);
 			if (rootView != null) {
-				// Remove from any existing parent first
-				ViewGroup existingParent = (ViewGroup) climbProfileOverlay.getParent();
-				if (existingParent != null) {
-					existingParent.removeView(climbProfileOverlay);
-				}
 				rootView.addView(climbProfileOverlay);
 			} else {
 				// Can't add overlay without root view
-				hideClimbProfileOverlay();
+				climbProfileOverlay = null;
 				return;
 			}
 
@@ -730,7 +729,8 @@ public class ClimbsCountWidget extends SimpleWidget {
 			updateOverlayContent(climbInfo);
 		} catch (Exception e) {
 			// If anything goes wrong, clean up
-			hideClimbProfileOverlay();
+			climbProfileOverlay = null;
+			elevationProfileView = null;
 		}
 	}
 
@@ -785,11 +785,12 @@ public class ClimbsCountWidget extends SimpleWidget {
 			elevationText.setText("+" + (int) climb.elevationGain + "m");
 		}
 
-		// Ensure elevation profile view exists and is added to container
+		// Ensure elevation profile view exists and is added to container with proper layout params
 		FrameLayout elevationContainer = climbProfileOverlay.findViewById(R.id.climb_profile_elevation_container);
 		if (elevationContainer != null && elevationProfileView == null) {
 			elevationProfileView = new ElevationProfileView(mapActivity);
-			elevationContainer.addView(elevationProfileView);
+			elevationContainer.addView(elevationProfileView,
+				new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 
 		// Update elevation profile view with data
@@ -798,19 +799,10 @@ public class ClimbsCountWidget extends SimpleWidget {
 			int vamTarget = getVamTarget();
 			elevationProfileView.setData(climb.elevationProfile, climb.distanceProfile, progress, vamTarget, currentVAM);
 		}
-		// Update position indicator
+		// Hide the XML position indicator - we use the red line drawn in ElevationProfileView instead
 		View positionIndicator = climbProfileOverlay.findViewById(R.id.climb_profile_position_indicator);
-		View chartContainer = climbProfileOverlay.findViewById(R.id.climb_profile_chart_container);
-		if (positionIndicator != null && chartContainer != null) {
-			FrameLayout.LayoutParams indicatorParams = (FrameLayout.LayoutParams) positionIndicator.getLayoutParams();
-			if (indicatorParams == null) {
-				indicatorParams = new FrameLayout.LayoutParams(
-						2, // 2dp width
-						ViewGroup.LayoutParams.MATCH_PARENT
-				);
-			}
-			indicatorParams.leftMargin = (int) (chartContainer.getWidth() * progress);
-			positionIndicator.setLayoutParams(indicatorParams);
+		if (positionIndicator != null) {
+			positionIndicator.setVisibility(View.GONE);
 		}
 	}
 
