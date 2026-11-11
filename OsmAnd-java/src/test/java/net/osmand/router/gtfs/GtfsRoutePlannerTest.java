@@ -84,6 +84,10 @@ public class GtfsRoutePlannerTest {
 		assertEquals(epoch(TUE, "08:25"), rides.get(1).arrivalSec[1]);
 		assertEquals(0, rides.get(1).boardSeq);
 		assertEquals(2, rides.get(1).alightSeq);
+		assertEquals("feed:t1", rides.get(0).tripId);
+		assertEquals("feed:R1", rides.get(0).routeId);
+		assertEquals("feed:t2", rides.get(1).tripId);
+		assertEquals("feed:R2", rides.get(1).routeId);
 		assertEquals(2, it.legs.size()); // zero-length walks are not reported
 	}
 
@@ -376,6 +380,24 @@ public class GtfsRoutePlannerTest {
 		assertEquals(epoch(TUE, "08:20"), r.get(0).arriveSec);
 		assertEquals(0, r.get(1).transfers);
 		assertEquals(epoch(TUE, "08:35"), r.get(1).arriveSec);
+	}
+
+	@Test
+	public void legIdsAreNamespacedByFeed() throws IOException {
+		// both feeds use trip t1 on route R1; the second one is the only one that serves C-D
+		File out = new File(tmp.newFolder(), "index.bin");
+		File z1 = GtfsFixture.basic().trip("t1", "R1", "WD", "A 08:00:00", "B 08:10:00").write(tmp.newFolder(), "one.zip");
+		File z2 = GtfsFixture.basic().trip("t1", "R1", "WD", "C 08:00:00", "D 08:10:00").write(tmp.newFolder(), "two.zip");
+		new GtfsFeedImporter(null).importFeeds(java.util.Arrays.asList(z1, z2), out);
+		ix = GtfsIndex.open(out, true);
+		GtfsRoutePlanner p = new GtfsRoutePlanner(ix);
+		GtfsLeg a = rides(p.plan(at('A'), at('B'), epoch(TUE, "07:55"), null, null).get(0)).get(0);
+		GtfsLeg c = rides(p.plan(at('C'), at('D'), epoch(TUE, "07:55"), null, null).get(0)).get(0);
+		assertEquals("one:t1", a.tripId);
+		assertEquals("one:R1", a.routeId);
+		assertEquals("two:t1", c.tripId);
+		assertEquals("two:R1", c.routeId);
+		assertTrue(a.tripIdx != c.tripIdx);
 	}
 
 	@Test

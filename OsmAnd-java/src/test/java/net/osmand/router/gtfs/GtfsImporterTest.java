@@ -81,6 +81,18 @@ public class GtfsImporterTest {
 	}
 
 	@Test
+	public void tripAndRouteIdsRoundTrip() throws IOException {
+		GtfsIndex ix = index(twoLines());
+		assertEquals("feed:R1", ix.getRouteId(0));
+		assertEquals("feed:R2", ix.getRouteId(1));
+		assertEquals("feed:t1", ix.getTripId(0));
+		assertEquals("feed:t2", ix.getTripId(1));
+		assertEquals("feed:t3", ix.getTripId(2));
+		assertEquals("L1", ix.getRouteShortName(0)); // neighbours of the new columns are intact
+		assertEquals(1, ix.getTripRoute(1));
+	}
+
+	@Test
 	public void importIsDeterministic() throws IOException {
 		File a = new File(tmp.newFolder(), "index.bin"), b = new File(tmp.newFolder(), "index.bin");
 		GtfsFixture f = twoLines();
@@ -207,6 +219,11 @@ public class GtfsImporterTest {
 		assertEquals("one:A", ix.getStopId(0));
 		assertEquals("two:A", ix.getStopId(4));
 		assertEquals(10 * 3600, ix.connDep.get(ix.getConnectionCount() - 1)); // merged by departure
+		// the same trip_id and route_id in two feeds stay distinct
+		assertEquals("one:t1", ix.getTripId(0));
+		assertEquals("two:t1", ix.getTripId(3));
+		assertEquals("one:R1", ix.getRouteId(0));
+		assertEquals("two:R1", ix.getRouteId(2));
 		assertEquals(2, ix.getTripRoute(3)); // route indices of feed two start after the two routes of feed one
 	}
 

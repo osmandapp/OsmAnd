@@ -22,7 +22,11 @@ import net.osmand.data.LatLon;
 /**
  * Real-feed check, skipped unless the system property gtfs.mta.dir names a directory with the MTA
  * zips (gtfs_subway, gtfs_b, gtfs_q, gtfs_bx, gtfs_m, gtfs_si, gtfs_busco). It writes a 250 MB index
- * to java.io.tmpdir. The expected counts are those of the feeds downloaded on 2026-11-10.
+ * to java.io.tmpdir. Gradle does not forward -D options to the test JVM and the build files are not
+ * changed for this, so pass them through the environment, for example:
+ * <pre>JAVA_TOOL_OPTIONS="-Dgtfs.mta.dir=/path/to/mta -Djava.io.tmpdir=/roomy/dir" ./gradlew
+ * :OsmAnd-java:cleanTest :OsmAnd-java:test --tests 'net.osmand.router.gtfs.*'</pre>
+ * The expected counts are those of the feeds downloaded on 2026-11-10.
  */
 public class GtfsMtaSmokeTest {
 
