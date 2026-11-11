@@ -8,6 +8,8 @@ import static org.junit.Assert.assertTrue;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
+import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.enums.TracksSortScope;
 
 import org.junit.Test;
@@ -48,6 +50,61 @@ public class TrackSortModeKeyUtilsTest {
 
 		assertNull(TrackSortModeKeyUtils.resolveSortMode(sortModes, "2025",
 				TracksSortScope.ORGANIZED_BY_NAME));
+	}
+
+	@Test
+	public void slashInSmartFolderNameDoesNotCreateAFolderHierarchy() {
+		String trips = SmartFolder.ID_PREFIX + "Trips";
+		String weekend = trips + File.separator + "Weekend";
+		String archive = SmartFolder.ID_PREFIX + "Archive";
+		TracksSortScope scope = TracksSortScope.ORGANIZED_BY_NAME;
+		String groupSuffix = "name__summer";
+		Map<String, TracksSortMode> sortModes = new LinkedHashMap<>();
+		sortModes.put("Weekend", TracksSortMode.DATE_ASCENDING);
+		assertNull(TrackSortModeKeyUtils.resolveSortMode(sortModes, weekend, TracksSortScope.TRACKS));
+
+		sortModes.put(weekend, TracksSortMode.LAST_MODIFIED);
+		sortModes.put(TrackSortModeKeyUtils.getSortModeKey(weekend, scope), TracksSortMode.NAME_ASCENDING);
+		sortModes.put(OrganizedTracksGroup.Companion.getBaseId(weekend) + groupSuffix,
+				TracksSortMode.DATE_DESCENDING);
+		Map<String, TracksSortMode> independentModes = new LinkedHashMap<>(sortModes);
+		assertEquals(TracksSortMode.LAST_MODIFIED,
+				TrackSortModeKeyUtils.resolveSortMode(sortModes, weekend, TracksSortScope.TRACKS));
+
+		sortModes.put(trips, TracksSortMode.NAME_ASCENDING);
+		sortModes.put(TrackSortModeKeyUtils.getSortModeKey(trips, scope), TracksSortMode.NAME_DESCENDING);
+		sortModes.put(OrganizedTracksGroup.Companion.getBaseId(trips) + groupSuffix,
+				TracksSortMode.DATE_ASCENDING);
+		assertTrue(TrackSortModeKeyUtils.moveFolderKeys(sortModes, trips, archive));
+
+		Map<String, TracksSortMode> renamedModes = new LinkedHashMap<>(independentModes);
+		renamedModes.put(archive, TracksSortMode.NAME_ASCENDING);
+		renamedModes.put(TrackSortModeKeyUtils.getSortModeKey(archive, scope), TracksSortMode.NAME_DESCENDING);
+		renamedModes.put(OrganizedTracksGroup.Companion.getBaseId(archive) + groupSuffix,
+				TracksSortMode.DATE_ASCENDING);
+		assertEquals(renamedModes, sortModes);
+
+		assertTrue(TrackSortModeKeyUtils.moveFolderKeys(sortModes, archive, trips));
+		assertTrue(TrackSortModeKeyUtils.removeFolderKeys(sortModes, trips));
+		assertEquals(independentModes, sortModes);
+	}
+
+	@Test
+	public void smartFolderNameRetainsTrailingSlashWhenSavedAndRead() {
+		String trips = SmartFolder.ID_PREFIX + "Trips";
+		String tripsWithSlash = trips + File.separator;
+		Map<String, TracksSortMode> sortModes = new LinkedHashMap<>();
+		sortModes.put(trips, TracksSortMode.NAME_ASCENDING);
+		sortModes.put(TrackSortModeKeyUtils.getSortModeKey(tripsWithSlash, TracksSortScope.TRACKS),
+				TracksSortMode.DATE_ASCENDING);
+
+		Map<String, TracksSortMode> restored = TrackSortModeKeyUtils.parseSortModes(
+				TrackSortModeKeyUtils.serializeSortModes(sortModes));
+		assertEquals(2, restored.size());
+		assertEquals(TracksSortMode.NAME_ASCENDING,
+				TrackSortModeKeyUtils.resolveSortMode(restored, trips, TracksSortScope.TRACKS));
+		assertEquals(TracksSortMode.DATE_ASCENDING,
+				TrackSortModeKeyUtils.resolveSortMode(restored, tripsWithSlash, TracksSortScope.TRACKS));
 	}
 
 	@Test

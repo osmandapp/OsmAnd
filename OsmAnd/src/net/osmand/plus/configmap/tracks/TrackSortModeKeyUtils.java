@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.shared.gpx.data.OrganizedTracksGroup;
+import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.util.Algorithms;
 
@@ -23,6 +24,7 @@ import java.util.Map;
  * non-mutating fallback: the preference is not rewritten during startup. Persisted keys have no
  * version marker, so a top-level key can also be a legacy V1 key of same-named nested folders;
  * explicit rename, move and delete operations still treat it as the key of the top-level folder.</p>
+ * <p>A slash in a Smart Folder name is part of the name and does not imply a hierarchy.</p>
  */
 final class TrackSortModeKeyUtils {
 
@@ -37,7 +39,7 @@ final class TrackSortModeKeyUtils {
 	@Nullable
 	static TracksSortMode resolveSortMode(@NonNull Map<String, TracksSortMode> sortModes,
 	                                      @NonNull String id, @NonNull TracksSortScope scope) {
-		String cleanId = removeExtraFileSeparator(id);
+		String cleanId = normalizeSortModeId(id);
 		TracksSortMode sortMode = sortModes.get(getSortModeKey(cleanId, scope));
 		if (sortMode == null && scope == TracksSortScope.TRACKS) {
 			String legacyId = getLegacyFolderId(cleanId);
@@ -55,7 +57,7 @@ final class TrackSortModeKeyUtils {
 			for (String token : tokens) {
 				String[] tokenParts = token.split(SEPARATOR);
 				if (tokenParts.length == 2) {
-					String internalId = removeExtraFileSeparator(tokenParts[0]);
+					String internalId = normalizeSortModeId(tokenParts[0]);
 					sortModes.put(internalId, TracksSortMode.getByValue(tokenParts[1]));
 				}
 			}
@@ -79,7 +81,7 @@ final class TrackSortModeKeyUtils {
 
 	@NonNull
 	static String getSortModeKey(@NonNull String folderId, @NonNull TracksSortScope scope) {
-		String cleanId = removeExtraFileSeparator(folderId);
+		String cleanId = normalizeSortModeId(folderId);
 		return scope == TracksSortScope.TRACKS ? cleanId : cleanId + SCOPE_SEPARATOR + scope.name();
 	}
 
@@ -154,6 +156,9 @@ final class TrackSortModeKeyUtils {
 
 	@Nullable
 	private static String getLegacyFolderId(@NonNull String folderId) {
+		if (isSmartFolderId(folderId)) {
+			return null;
+		}
 		if (folderId.isEmpty()) {
 			return removeExtraFileSeparator(IndexConstants.GPX_INDEX_DIR);
 		}
@@ -169,12 +174,21 @@ final class TrackSortModeKeyUtils {
 		if (key.equals(folderId)) {
 			return "";
 		}
-		if (key.startsWith(folderId + File.separator)
+		if ((!isSmartFolderId(folderId) && key.startsWith(folderId + File.separator))
 				|| key.startsWith(folderId + SCOPE_SEPARATOR)
 				|| key.startsWith(OrganizedTracksGroup.Companion.getBaseId(folderId))) {
 			return key.substring(folderId.length());
 		}
 		return null;
+	}
+
+	private static boolean isSmartFolderId(@NonNull String id) {
+		return id.startsWith(SmartFolder.ID_PREFIX);
+	}
+
+	@NonNull
+	private static String normalizeSortModeId(@NonNull String id) {
+		return isSmartFolderId(id) ? id : removeExtraFileSeparator(id);
 	}
 
 	@NonNull
