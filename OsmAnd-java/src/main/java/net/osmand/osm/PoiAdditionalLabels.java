@@ -85,10 +85,14 @@ public class PoiAdditionalLabels {
 	}
 
 	public static String getSearchName(AbstractPoiType poiType) {
+		return getSearchName(poiType, poiType.getTranslation());
+	}
+
+	public static String getSearchName(AbstractPoiType poiType, String translation) {
 		if (!poiType.isAdditional()) {
-			return poiType.getTranslation();
+			return translation;
 		}
-		return getSearchName(poiType.getTranslation(), poiType.getEnTranslation(), poiType.getSynonyms(),
+		return getSearchName(translation, poiType.getEnTranslation(), poiType.getSynonyms(),
 				poiType.getPoiAdditionalCategoryTranslation());
 	}
 
