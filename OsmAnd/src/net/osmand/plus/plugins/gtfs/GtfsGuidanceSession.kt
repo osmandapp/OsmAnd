@@ -74,6 +74,14 @@ class GtfsGuidanceSession(
 
 	val isActive: Boolean get() = active
 
+	private val motion = GtfsMotionDetector(app) { likelihood ->
+		handler.post {
+			if (active && !finishing && !replanning) {
+				apply(controller.onMotion(nowSec(), likelihood))
+			}
+		}
+	}
+
 	/** The status for the panel and the notification. */
 	fun status(): GuidanceStatus = controller.status(nowSec())
 
@@ -95,6 +103,7 @@ class GtfsGuidanceSession(
 			AndroidUtils.registerBroadcastReceiver(app, action, receiver, false)
 		}
 		acquireWakeLock()
+		motion.start()
 		apply(controller.start(nowSec()))
 		handler.postDelayed(tick, TICK_MS)
 	}
@@ -135,6 +144,7 @@ class GtfsGuidanceSession(
 			return
 		}
 		active = false
+		motion.stop()
 		handler.removeCallbacksAndMessages(null)
 		helper.removeListener(this)
 		try {

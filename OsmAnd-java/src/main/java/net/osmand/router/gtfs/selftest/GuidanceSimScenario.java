@@ -44,8 +44,8 @@ final class GuidanceSimScenario {
 		TICKS_ONLY("ticks-only (no GPS at all, taps)", false, false, true, true),
 		GPS_WALKS("gps-on-walks (no fixes on rides, taps)", true, false, true, true),
 		GPS_ALL("gps-everywhere (taps)", true, true, true, true),
-		/** Boarding by location only, like a bus rider who does not tap: reports what the engine does, never fails. */
-		GPS_NO_TAP("gps-everywhere-no-taps (informational)", true, true, false, false),
+		/** Boarding and alighting by speed and location only, no taps: auto-detection must succeed. */
+		GPS_NO_TAP("gps-everywhere-no-taps (auto-detect)", true, true, false, true),
 		MISSED("missed-first-vehicle", true, false, false, true),
 		OFF_ROUTE("off-route-walk (700 m detour)", true, false, true, true);
 
