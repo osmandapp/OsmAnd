@@ -5,6 +5,10 @@ public class GtfsPlanOptions {
 
 	/** Longest walk from the start to a first stop and from a last stop to the destination, metres in a straight line. */
 	public double maxWalkMeters = 800;
+	/** Extra weight of walking time when ranking itineraries (1.0 = walking counts double). */
+	public double walkWeight = 1.0;
+	/** Rank penalty per transfer, seconds. */
+	public int transferRankSec = 180;
 	/** Longest walking transfer between two stops (the index holds footpaths up to 400 m). */
 	public double maxTransferWalkMeters = 400;
 	/** Time needed to change vehicles at a stop when the feed does not say otherwise. */

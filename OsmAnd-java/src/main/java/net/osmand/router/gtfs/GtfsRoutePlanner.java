@@ -84,9 +84,16 @@ public final class GtfsRoutePlanner {
 			if (progress != null) {
 				progress.onProgress("Alternatives", 50);
 			}
-			GtfsItinerary other = q.scan(q.without(firstRoute(best)), 0);
-			addAlternative(result, seen, other, best, q.o);
-			if (q.o.maxItineraries > 2 && !q.cancelled()) {
+			// One itinerary per distinct first route: scan again with every route found so far excluded, so a
+			// line that is slightly later (a subway with a longer wait) is not hidden behind two buses.
+			Set<Integer> excluded = new HashSet<>();
+			GtfsItinerary cur = best;
+			for (int round = 0; round < 5 && cur != null && !q.cancelled(); round++) {
+				excluded.add(firstRoute(cur));
+				cur = q.scan(q.without(excluded), 0);
+				addAlternative(result, seen, cur, best, q.o);
+			}
+			if (!q.cancelled()) {
 				addAlternative(result, seen, q.scan(q.active, q.o.transferPenaltySec), best, q.o);
 			}
 		}
@@ -94,14 +101,28 @@ public final class GtfsRoutePlanner {
 			result.clear();
 			return result;
 		}
-		Collections.sort(result, (x, y) -> x.arriveSec != y.arriveSec ? Long.compare(x.arriveSec, y.arriveSec)
-				: Integer.compare(x.transfers, y.transfers));
+		final GtfsPlanOptions ro = q.o;
+		Collections.sort(result, (x, y) -> {
+			long cx = rankCost(x, ro), cy = rankCost(y, ro);
+			return cx != cy ? Long.compare(cx, cy) : Long.compare(x.arriveSec, y.arriveSec);
+		});
 		while (result.size() > Math.max(1, q.o.maxItineraries)) {
 			result.remove(result.size() - 1);
 		}
 		LOG.debug("GTFS plan: " + result.size() + " itineraries, " + q.scanned + " connections scanned, "
 				+ (System.nanoTime() - t0) / 1000000 + " ms");
 		return result;
+	}
+
+	/** Arrival time plus extra weight on walking and transfers, so a slightly earlier but walk-heavy trip does not win. */
+	static long rankCost(GtfsItinerary it, GtfsPlanOptions o) {
+		long walk = 0;
+		for (GtfsLeg l : it.legs) {
+			if (l.type == GtfsLeg.Type.WALK) {
+				walk += l.endSec - l.startSec;
+			}
+		}
+		return it.arriveSec + Math.round(o.walkWeight * walk) + (long) it.transfers * o.transferRankSec;
 	}
 
 	private static void addAlternative(List<GtfsItinerary> result, Set<String> seen, GtfsItinerary alt,
@@ -189,13 +210,13 @@ public final class GtfsRoutePlanner {
 		}
 
 		/** Trip sets of the three days without the trips of one route. */
-		long[][] without(int route) {
+		long[][] without(Set<Integer> routes) {
 			long[][] res = new long[3][];
 			for (int k = 0; k < 3; k++) {
 				res[k] = active[k].clone();
 			}
-			for (int t = 0; route >= 0 && t < index.getTripCount(); t++) {
-				if (index.tripRoute.get(t) == route) {
+			for (int t = 0; t < index.getTripCount(); t++) {
+				if (routes.contains(index.tripRoute.get(t))) {
 					for (int k = 0; k < 3; k++) {
 						res[k][t >> 6] &= ~(1L << (t & 63));
 					}
