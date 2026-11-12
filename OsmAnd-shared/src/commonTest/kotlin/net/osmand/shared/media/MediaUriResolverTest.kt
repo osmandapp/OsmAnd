@@ -47,10 +47,6 @@ class MediaUriResolverTest {
 		)
 		assertEquals(
 			"https://host/hd.jpg",
-			MediaUriResolver.getDetailsLink(remote(MediaOrigin.MAPILLARY, null, "https://host/hd.jpg"))
-		)
-		assertEquals(
-			"https://host/hd.jpg",
 			MediaUriResolver.getDetailsLink(remote(MediaOrigin.OTHER, "https://viewer/page", "https://host/hd.jpg"))
 		)
 	}
@@ -63,5 +59,27 @@ class MediaUriResolverTest {
 
 		assertEquals(PanoramaxApi.getViewerUrl(id), MediaUriResolver.getDetailsLink(item))
 		assertEquals("https://m.example/hd.jpg", MediaUriResolver.getDownloadUri(item))
+	}
+
+	@Test
+	fun mapillaryPhotoLinksToItsPageAndShowsAttribution() {
+		val response = """{"type":"mapillary-photo","key":"5569015689807461","url":"https://osmand.net/api/mapillary/photo-viewer?photo_id=5569015689807461","imageUrl":"https://cdn.example/256.jpg","imageHiresUrl":"https://cdn.example/1024.jpg","timestamp":"1585383644963","username":"dentonny"}"""
+		val item = RemoteMediaFactory.fromJson(response, MediaOrigin.MAPILLARY)!!
+
+		assertEquals("https://www.mapillary.com/app/?pKey=5569015689807461", MediaUriResolver.getDetailsLink(item))
+		assertEquals("https://www.mapillary.com/app/?pKey=5569015689807461", MediaUriResolver.getBrowserUri(item))
+		assertEquals("https://cdn.example/1024.jpg", MediaUriResolver.getDownloadUri(item))
+		assertEquals("dentonny", item.details?.author)
+		assertEquals("2020-03-28T08:20:44.963Z", item.details?.date)
+		assertEquals("CC BY-SA 4.0", item.details?.license)
+	}
+
+	@Test
+	fun otherRemotePhotosKeepNoAttribution() {
+		val response = """{"key":"k","imageUrl":"https://cdn.example/256.jpg","username":"someone"}"""
+		val item = RemoteMediaFactory.fromJson(response, MediaOrigin.OTHER)!!
+
+		assertEquals(null, item.details)
+		assertEquals(null, MediaUriResolver.getBrowserUri(item))
 	}
 }

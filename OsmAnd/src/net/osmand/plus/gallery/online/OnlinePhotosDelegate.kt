@@ -42,7 +42,8 @@ class OnlinePhotosDelegate(
 		val wikidataId = wikiTagData.wikidataId
 		val wikiCategory = wikiTagData.wikiCategory
 		val wikiTitle = wikiTagData.wikiTitle
-		val rawKey = PhotoCacheManager.buildRawKey(wikidataId, wikiCategory, wikiTitle)
+		val wikiFile = wikiTagData.wikiImages.firstOrNull()?.wikiMediaTag
+		val rawKey = PhotoCacheManager.buildRawKey(wikidataId, wikiCategory, wikiTitle, wikiFile)
 
 		if (!app.settings.isInternetConnectionAvailable) {
 			loadFromCache(

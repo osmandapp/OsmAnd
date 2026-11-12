@@ -23,6 +23,9 @@ object RemoteMediaFactory {
 
 	private const val TYPE_URL_PHOTO = "url-photo"
 
+	private const val MAPILLARY_PHOTO_PAGE_URL = "https://www.mapillary.com/app/?pKey="
+	private const val MAPILLARY_LICENSE = "CC BY-SA 4.0"
+
 	@JvmStatic
 	fun fromJson(
 		jsonString: String?,
@@ -59,6 +62,7 @@ object RemoteMediaFactory {
 		val sourceUri = imageObject.optStringOrNull("url")
 		val key = imageObject.optStringOrNull("key")
 		val galleryFullSizeUri = createGalleryFullSizeUri(imageHiresUrl)
+		val mapillary = origin == MediaOrigin.MAPILLARY
 
 		return MediaItem.Remote(
 			id = key ?: mediaUri,
@@ -72,10 +76,19 @@ object RemoteMediaFactory {
 				standardSizeUri = mediaUri,
 				fullSizeUri = galleryFullSizeUri ?: mediaUri
 			),
-			details = null,
-			externalUri = null,
+			details = if (mapillary) createMapillaryDetails(imageObject) else null,
+			externalUri = if (mapillary) key?.let { "$MAPILLARY_PHOTO_PAGE_URL$it" } ?: sourceUri else null,
 			downloadUri = imageHiresUrl ?: mediaUri,
 			metadata = createRemoteMetadata(imageObject)
+		)
+	}
+
+	private fun createMapillaryDetails(imageObject: JsonObject): MediaDetails {
+		val timestamp = parseTimestamp(imageObject.optStringOrNull("timestamp"))
+		return MediaDetails(
+			author = imageObject.optStringOrNull("username"),
+			date = timestamp?.let { Instant.fromEpochMilliseconds(it).toString() },
+			license = MAPILLARY_LICENSE
 		)
 	}
 
