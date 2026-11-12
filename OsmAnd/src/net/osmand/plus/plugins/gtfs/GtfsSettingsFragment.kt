@@ -234,14 +234,6 @@ class GtfsSettingsFragment : BaseSettingsFragment() {
 			.show()
 	}
 
-	/** A transit plan already on screen was ranked with the old setting, so plan it again. */
-	private fun replanShownRoute() {
-		val transit = app.transportRoutingHelper
-		if (app.routingHelper.isPublicTransportMode && transit.routes != null) {
-			transit.recalculateRouteDueToSettingsChange()
-		}
-	}
-
 	private fun walkPrefLabel(percent: Int) = when {
 		percent <= 0 -> getString(R.string.gtfs_walk_pref_fastest)
 		percent <= 100 -> getString(R.string.gtfs_walk_pref_balanced)
@@ -257,7 +249,6 @@ class GtfsSettingsFragment : BaseSettingsFragment() {
 			.setTitle(R.string.gtfs_walk_pref)
 			.setSingleChoiceItems(labels, current) { dialog, which ->
 				plugin.walkWeightPercent.set(values[which])
-				replanShownRoute()
 				dialog.dismiss()
 				setupPreferences()
 			}
@@ -273,7 +264,6 @@ class GtfsSettingsFragment : BaseSettingsFragment() {
 			.setTitle(R.string.gtfs_max_walk)
 			.setSingleChoiceItems(labels, current) { dialog, which ->
 				plugin.maxWalkMeters.set(values[which])
-				replanShownRoute()
 				dialog.dismiss()
 				setupPreferences()
 			}
