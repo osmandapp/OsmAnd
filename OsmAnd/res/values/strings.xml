@@ -64,6 +64,11 @@
 	<string name="gtfs_rebuild_index">Rebuild index</string>
 	<string name="gtfs_rebuild_index_descr">Build the index again from the stored feeds</string>
 	<string name="gtfs_max_walk">Maximum walking distance</string>
+	<string name="gtfs_walk_pref">Walking vs. transit</string>
+	<string name="gtfs_walk_pref_descr">How much walking time counts against a route when ranking</string>
+	<string name="gtfs_walk_pref_fastest">Fastest arrival</string>
+	<string name="gtfs_walk_pref_balanced">Balanced</string>
+	<string name="gtfs_walk_pref_less">Less walking</string>
 	<string name="gtfs_max_walk_descr">To the first and from the last stop, and between stops</string>
 	<string name="gtfs_working">%1$s</string>
 	<string name="gtfs_stage_copying">Copying %1$s (%2$d of %3$d)</string>

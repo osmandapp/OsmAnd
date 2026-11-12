@@ -119,6 +119,12 @@ class GtfsSettingsFragment : BaseSettingsFragment() {
 		walk.setTitle(R.string.gtfs_max_walk)
 		walk.summary = "${plugin.maxWalkMeters.get()} m — ${getString(R.string.gtfs_max_walk_descr)}"
 		walk.icon = getContentIcon(R.drawable.ic_action_pedestrian_dark)
+
+		val pref = add(indexCategory, Preference(requireContext()))
+		pref.key = KEY_WALK_PREF
+		pref.setTitle(R.string.gtfs_walk_pref)
+		pref.summary = "${walkPrefLabel(plugin.walkWeightPercent.get())} — ${getString(R.string.gtfs_walk_pref_descr)}"
+		pref.icon = getContentIcon(R.drawable.ic_action_pedestrian_dark)
 	}
 
 	private fun <T : Preference> add(group: androidx.preference.PreferenceGroup, pref: T): T {
@@ -167,6 +173,7 @@ class GtfsSettingsFragment : BaseSettingsFragment() {
 			key == KEY_CANCEL -> plugin.cancelUpdate()
 			key == KEY_REBUILD -> plugin.rebuildIndex()
 			key == KEY_MAX_WALK -> chooseMaxWalk()
+			key == KEY_WALK_PREF -> chooseWalkPref()
 			key.startsWith(KEY_FEED_PREFIX) -> confirmRemove(key.removePrefix(KEY_FEED_PREFIX))
 			else -> return false
 		}
@@ -227,6 +234,27 @@ class GtfsSettingsFragment : BaseSettingsFragment() {
 			.show()
 	}
 
+	private fun walkPrefLabel(percent: Int) = when {
+		percent <= 0 -> getString(R.string.gtfs_walk_pref_fastest)
+		percent <= 100 -> getString(R.string.gtfs_walk_pref_balanced)
+		else -> getString(R.string.gtfs_walk_pref_less)
+	}
+
+	private fun chooseWalkPref() {
+		val values = intArrayOf(0, 100, 200)
+		val labels = values.map { walkPrefLabel(it) }.toTypedArray()
+		val current = values.indexOf(plugin.walkWeightPercent.get())
+		openDialog?.dismiss()
+		openDialog = AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), nightMode))
+			.setTitle(R.string.gtfs_walk_pref)
+			.setSingleChoiceItems(labels, current) { dialog, which ->
+				plugin.walkWeightPercent.set(values[which])
+				dialog.dismiss()
+				setupPreferences()
+			}
+			.show()
+	}
+
 	private fun chooseMaxWalk() {
 		val values = intArrayOf(400, 600, 800, 1000, 1500, 2000)
 		val labels = values.map { "$it m" }.toTypedArray()
@@ -248,6 +276,7 @@ class GtfsSettingsFragment : BaseSettingsFragment() {
 		const val KEY_CANCEL = "gtfs_cancel"
 		const val KEY_REBUILD = "gtfs_rebuild"
 		const val KEY_MAX_WALK = "gtfs_max_walk"
+		const val KEY_WALK_PREF = "gtfs_walk_pref"
 		const val KEY_FEED_PREFIX = "gtfs_feed:"
 	}
 }

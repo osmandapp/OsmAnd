@@ -29,7 +29,11 @@ class GtfsTransitPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 
 	val store = GtfsFeedStore(app.getAppPath(DIR_NAME))
 	private val source = GtfsIndexSource(store.indexFile)
-	private val provider = GtfsTransitRouteProvider(source) { maxWalkMeters.get() }
+	val walkWeightPercent = registerIntPreference(WALK_WEIGHT_PREF, 0)
+
+	private val provider = GtfsTransitRouteProvider(source) { maxWalkMeters.get() }.also { p ->
+		p.setWalkWeightPercent { walkWeightPercent.get() }
+	}
 	private var providerRegistered = false
 
 	/** The running import, removal or rebuild; changed and read on the UI thread only. */
@@ -192,6 +196,7 @@ class GtfsTransitPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 	companion object {
 		const val PLUGIN_ID = "gtfs.transit.plugin"
 		private const val MAX_WALK_PREF = "gtfs_max_walk_meters"
+		private const val WALK_WEIGHT_PREF = "gtfs_walk_weight_percent"
 		private const val DIR_NAME = "gtfs"
 		const val DEFAULT_MAX_WALK_METERS = 800
 	}

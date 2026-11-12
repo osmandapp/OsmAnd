@@ -21,6 +21,12 @@ public final class GtfsTransitRouteProvider implements TransportRouteProvider {
 
 	private final GtfsIndexSource source;
 	private final IntSupplier maxWalkMeters;
+	private IntSupplier walkWeightPercent = () -> 0;
+
+	/** Extra weight on walking time when ranking, in percent: 0 = fastest arrival, 100 = walking counts double. */
+	public void setWalkWeightPercent(IntSupplier walkWeightPercent) {
+		this.walkWeightPercent = walkWeightPercent;
+	}
 
 	public GtfsTransitRouteProvider(GtfsIndexSource source, IntSupplier maxWalkMeters) {
 		this.source = source;
@@ -39,6 +45,8 @@ public final class GtfsTransitRouteProvider implements TransportRouteProvider {
 		}
 		GtfsPlanOptions options = new GtfsPlanOptions();
 		options.maxWalkMeters = walk;
+		options.walkWeight = walkWeightPercent.getAsInt() / 100.0;
+		options.transferRankSec = options.walkWeight > 0 ? 180 : 0;
 		GtfsProgressListener cancel = new GtfsProgressListener() {
 			@Override
 			public void onProgress(String stage, int percent) {
