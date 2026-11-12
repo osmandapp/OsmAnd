@@ -498,7 +498,7 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 			MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 			WptPt wptPt = currentGpxDisplayItem.getLabelPoint();
 
-			SelectedGpxPoint gpxPoint = new SelectedGpxPoint(selectedGpxFile, wptPt);
+			SelectedGpxPoint gpxPoint = SelectedGpxPoint.createSplitItem(selectedGpxFile, currentGpxDisplayItem);
 			LatLon latLon = new LatLon(wptPt.getLatitude(), wptPt.getLongitude());
 			PointDescription pointDescription = mapLayers.getGpxLayer().getObjectName(gpxPoint);
 			mapLayers.getContextMenuLayer().showContextMenu(latLon, pointDescription, gpxPoint, null);
