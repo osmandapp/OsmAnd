@@ -352,19 +352,22 @@ public class GtfsRoutePlannerTest {
 
 	@Test
 	public void alternativeWithoutTheFirstRoute() throws IOException {
+		// fast ends 750 m short of the destination, slow ends 110 m from it: later, but a different line and less walking
+		LatLon dest = new LatLon(at('C').getLatitude(), at('C').getLongitude() - 0.0013);
 		GtfsFixture f = GtfsFixture.basic()
 				.trip("fast", "R1", "WD", "A 08:00:00", "B 08:10:00")
-				.trip("slow", "R2", "WD", "A 08:02:00", "B 08:20:00");
-		List<GtfsItinerary> r = plan(planner(f), 'A', 'B', TUE, "07:55");
+				.trip("slow", "R2", "WD", "A 08:02:00", "C 08:30:00");
+		GtfsRoutePlanner p = planner(f);
+		List<GtfsItinerary> r = p.plan(at('A'), dest, epoch(TUE, "07:55"), null, null);
 		assertEquals(2, r.size());
 		assertEquals("fast", trip(rides(r.get(0)).get(0)));
 		assertEquals("slow", trip(rides(r.get(1)).get(0)));
 		GtfsPlanOptions o = new GtfsPlanOptions();
 		o.maxItineraries = 1;
-		assertEquals(1, planner(f).plan(at('A'), at('B'), epoch(TUE, "07:55"), o, null).size());
+		assertEquals(1, p.plan(at('A'), dest, epoch(TUE, "07:55"), o, null).size());
 		o.maxItineraries = 3;
-		o.maxAlternativeDelaySec = 300; // 10 minutes later is too much
-		assertEquals(1, planner(f).plan(at('A'), at('B'), epoch(TUE, "07:55"), o, null).size());
+		o.maxAlternativeDelaySec = 300; // 9 minutes later is too much
+		assertEquals(1, p.plan(at('A'), dest, epoch(TUE, "07:55"), o, null).size());
 	}
 
 	@Test

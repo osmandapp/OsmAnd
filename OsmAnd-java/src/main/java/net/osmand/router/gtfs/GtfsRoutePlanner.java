@@ -78,44 +78,85 @@ public final class GtfsRoutePlanner {
 			return result;
 		}
 		result.add(best);
-		Set<String> seen = new HashSet<>();
-		seen.add(signature(best));
+		List<GtfsItinerary> candidates = new ArrayList<>();
 		if (q.o.maxItineraries > 1) {
 			if (progress != null) {
 				progress.onProgress("Alternatives", 50);
 			}
-			GtfsItinerary other = q.scan(q.without(firstRoute(best)), 0);
-			addAlternative(result, seen, other, best, q.o);
+			candidates.add(q.scan(q.without(firstRoute(best)), 0));
 			if (q.o.maxItineraries > 2 && !q.cancelled()) {
-				addAlternative(result, seen, q.scan(q.active, q.o.transferPenaltySec), best, q.o);
+				candidates.add(q.scan(q.active, q.o.transferPenaltySec));
 			}
 		}
 		if (q.cancelled()) {
 			result.clear();
 			return result;
 		}
-		Collections.sort(result, (x, y) -> x.arriveSec != y.arriveSec ? Long.compare(x.arriveSec, y.arriveSec)
-				: Integer.compare(x.transfers, y.transfers));
-		while (result.size() > Math.max(1, q.o.maxItineraries)) {
-			result.remove(result.size() - 1);
-		}
+		addAlternatives(result, candidates, q.o);
 		LOG.debug("GTFS plan: " + result.size() + " itineraries, " + q.scanned + " connections scanned, "
 				+ (System.nanoTime() - t0) / 1000000 + " ms");
 		return result;
 	}
 
-	private static void addAlternative(List<GtfsItinerary> result, Set<String> seen, GtfsItinerary alt,
-	                                   GtfsItinerary best, GtfsPlanOptions o) {
-		if (alt != null && alt.arriveSec - best.arriveSec <= o.maxAlternativeDelaySec && seen.add(signature(alt))) {
-			result.add(alt);
+	/**
+	 * Adds the useful candidates to {@code result} (which holds the best itinerary): the earliest first, skipping
+	 * those that arrive more than the options' delay after the best, that ride the same sequence of routes as an
+	 * itinerary already kept (a later vehicle of the same lines is not a different option), or that are dominated
+	 * by one already kept (no more transfers, no later, no more walking, and not identical in all three to a
+	 * different line sequence). The result is cut to the options' maximum.
+	 */
+	static void addAlternatives(List<GtfsItinerary> result, List<GtfsItinerary> candidates, GtfsPlanOptions o) {
+		GtfsItinerary best = result.get(0);
+		List<GtfsItinerary> sorted = new ArrayList<>();
+		for (GtfsItinerary c : candidates) {
+			if (c != null) {
+				sorted.add(c);
+			}
+		}
+		Collections.sort(sorted, (x, y) -> x.arriveSec != y.arriveSec ? Long.compare(x.arriveSec, y.arriveSec)
+				: Integer.compare(x.transfers, y.transfers));
+		Set<String> seen = new HashSet<>();
+		seen.add(signature(best));
+		for (GtfsItinerary c : sorted) {
+			if (result.size() >= Math.max(1, o.maxItineraries)) {
+				break;
+			}
+			if (c.arriveSec - best.arriveSec > o.maxAlternativeDelaySec || !seen.add(signature(c))) {
+				continue;
+			}
+			boolean dominated = false;
+			for (GtfsItinerary k : result) {
+				dominated |= dominates(k, c);
+			}
+			if (!dominated) {
+				result.add(c);
+			}
 		}
 	}
 
-	private static String signature(GtfsItinerary it) {
+	/** x is no worse than y in transfers, arrival and walking, and better in at least one of them. */
+	private static boolean dominates(GtfsItinerary x, GtfsItinerary y) {
+		int wx = walkMeters(x), wy = walkMeters(y);
+		return x.transfers <= y.transfers && x.arriveSec <= y.arriveSec && wx <= wy
+				&& (x.transfers < y.transfers || x.arriveSec < y.arriveSec || wx < wy);
+	}
+
+	private static int walkMeters(GtfsItinerary it) {
+		int m = 0;
+		for (GtfsLeg l : it.legs) {
+			if (l.type == GtfsLeg.Type.WALK) {
+				m += l.walkMeters;
+			}
+		}
+		return m;
+	}
+
+	/** The routes ridden, in order: the same lines on a later vehicle, or with another transfer stop, are one option. */
+	static String signature(GtfsItinerary it) {
 		StringBuilder sb = new StringBuilder();
 		for (GtfsLeg l : it.legs) {
 			if (l.type == GtfsLeg.Type.RIDE) {
-				sb.append(l.tripIdx).append(':').append(l.boardSeq).append(':').append(l.alightSeq).append(';');
+				sb.append(l.routeIdx).append(';');
 			}
 		}
 		return sb.toString();
