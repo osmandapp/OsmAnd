@@ -44,7 +44,19 @@ class GtfsGuidanceTexts(private val app: OsmandApplication, private val zone: Zo
 
 	/** The extra line, for now the distance left on a walk, or null. */
 	fun detail(status: GuidanceStatus): String? =
-		if (status.walkRemainingM >= 0) {
+		if (status.state == net.osmand.router.gtfs.guidance.GuidanceState.RIDING && status.rideRoute != null
+			&& status.confidence != net.osmand.router.gtfs.guidance.GtfsGuidanceEngine.Confidence.MANUAL) {
+			val head = status.rideHeadsign
+			if (status.confidence == net.osmand.router.gtfs.guidance.GtfsGuidanceEngine.Confidence.ASSUMED) {
+				app.getString(R.string.gtfs_guide_status_assumed, status.rideRoute)
+			} else if (head.isNullOrEmpty()) {
+				app.getString(R.string.gtfs_guide_status_auto_plain, status.rideRoute)
+			} else {
+				app.getString(R.string.gtfs_guide_status_auto, status.rideRoute, head)
+			}
+		} else if (status.needsConfirmation) {
+			app.getString(R.string.gtfs_guide_status_assumed_off)
+		} else if (status.walkRemainingM >= 0) {
 			app.getString(
 				R.string.gtfs_guide_walk_left,
 				OsmAndFormatter.getFormattedDistance(status.walkRemainingM.toFloat(), app)

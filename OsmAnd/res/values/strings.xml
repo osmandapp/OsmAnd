@@ -29,6 +29,12 @@
 	<string name="gtfs_guide_arrived">You have arrived</string>
 	<string name="gtfs_guide_planning_new">Planning a new trip</string>
 	<string name="gtfs_guide_on_board">I\'m on board</string>
+	<string name="gtfs_guide_status_auto">On the %1$s toward %2$s (auto-detected)</string>
+	<string name="gtfs_guide_status_auto_plain">On the %1$s (auto-detected)</string>
+	<string name="gtfs_guide_status_assumed">Assuming you boarded the %1$s</string>
+	<string name="gtfs_guide_status_assumed_off">Assuming you got off</string>
+	<string name="gtfs_guide_not_on_train">Not on this train</string>
+	<string name="gtfs_guide_got_off_here">Got off here</string>
 	<string name="gtfs_guide_got_off">I got off</string>
 	<string name="gtfs_guide_skip">Skip</string>
 	<string name="gtfs_guide_replan">Replan</string>

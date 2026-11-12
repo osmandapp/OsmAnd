@@ -18,7 +18,7 @@ public final class GuidanceController {
 
 	/** What the traveller tapped. */
 	public enum Command {
-		BOARDED, ALIGHTED, SKIP, REPLAN, CANCEL
+		BOARDED, ALIGHTED, SKIP, REPLAN, CANCEL, NOT_ON_TRAIN
 	}
 
 	/** The outcome of one input. */
@@ -84,6 +84,22 @@ public final class GuidanceController {
 		return handle(engine.onLocation(lat, lon, accuracyM, nowSec, hasFix), nowSec, null);
 	}
 
+	public Update onLocation(double lat, double lon, float accuracyM, double speedMps, double bearingDeg, long nowSec,
+	                         boolean hasFix) {
+		if (hasFix && accuracyM <= cfg.maxAccuracyM && !Double.isNaN(lat) && !Double.isNaN(lon)) {
+			haveFix = true;
+			fixLat = lat;
+			fixLon = lon;
+			fixSec = nowSec;
+		}
+		return handle(engine.onLocation(lat, lon, accuracyM, speedMps, bearingDeg, nowSec, hasFix), nowSec, null);
+	}
+
+	/** Vehicle-motion likelihood 0..1 from a phone motion detector. */
+	public Update onMotion(long nowSec, double likelihood) {
+		return handle(engine.onMotion(nowSec, likelihood), nowSec, null);
+	}
+
 	public Update onTick(long nowSec) {
 		return handle(engine.onTick(nowSec), nowSec, null);
 	}
@@ -94,6 +110,8 @@ public final class GuidanceController {
 				return handle(engine.onUserAction(UserAction.BOARDED, nowSec), nowSec, null);
 			case ALIGHTED:
 				return handle(engine.onUserAction(UserAction.ALIGHTED, nowSec), nowSec, null);
+			case NOT_ON_TRAIN:
+				return handle(engine.onUserAction(UserAction.NOT_ON_TRAIN, nowSec), nowSec, null);
 			case SKIP:
 				return handle(engine.onUserAction(UserAction.SKIP_LEG, nowSec), nowSec, null);
 			case CANCEL:
@@ -126,7 +144,14 @@ public final class GuidanceController {
 			key = e.getTextKey();
 			args = e.getArgs();
 		}
-		return new GuidanceStatus(state, key, args, walkRemaining(state, nowSec));
+		String route = null, headsign = null;
+		if (state == GuidanceState.RIDING) {
+			GtfsLeg leg = legs.get(engine.getLegIndex());
+			route = names.routeName(leg);
+			headsign = names.headsign(leg);
+		}
+		return new GuidanceStatus(state, key, args, walkRemaining(state, nowSec),
+				engine.getConfidence(), route, headsign);
 	}
 
 	// ------------------------------------------------------------------ internals

@@ -24,7 +24,32 @@ public final class GuidanceStatus {
 	/** "Replan": plan a new trip from here and now. */
 	public final boolean canReplan;
 
+	/** How the ride/alight state was reached. */
+	public final GtfsGuidanceEngine.Confidence confidence;
+	/** True when the state is assumed (no evidence) and the app may show a quiet "correct me" prompt. */
+	public final boolean needsConfirmation;
+	/** "Not on this train": makes sense while riding on an assumed or detected boarding. */
+	public final boolean canNotOnTrain;
+	/** While riding or waiting: the route and headsign of the current ride (headsign may be null). */
+	public final String rideRoute, rideHeadsign;
+
 	GuidanceStatus(GuidanceState state, String textKey, List<Object> args, int walkRemainingM) {
+		this(state, textKey, args, walkRemainingM, GtfsGuidanceEngine.Confidence.MANUAL);
+	}
+
+	GuidanceStatus(GuidanceState state, String textKey, List<Object> args, int walkRemainingM,
+	               GtfsGuidanceEngine.Confidence confidence) {
+		this(state, textKey, args, walkRemainingM, confidence, null, null);
+	}
+
+	GuidanceStatus(GuidanceState state, String textKey, List<Object> args, int walkRemainingM,
+	               GtfsGuidanceEngine.Confidence confidence, String rideRoute, String rideHeadsign) {
+		this.rideRoute = rideRoute;
+		this.rideHeadsign = rideHeadsign;
+		this.confidence = confidence;
+		this.needsConfirmation = confidence == GtfsGuidanceEngine.Confidence.ASSUMED && (state == GuidanceState.RIDING
+				|| state == GuidanceState.WALK_TO_DEST || state == GuidanceState.TRANSFER_WALK);
+		this.canNotOnTrain = state == GuidanceState.RIDING && confidence != GtfsGuidanceEngine.Confidence.MANUAL;
 		this.state = state;
 		this.textKey = textKey;
 		this.args = Collections.unmodifiableList(args);

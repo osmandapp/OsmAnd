@@ -3,6 +3,7 @@ package net.osmand.router.gtfs.guidance;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import net.osmand.data.LatLon;
 import net.osmand.router.gtfs.DelayProvider;
@@ -27,6 +28,10 @@ public final class GtfsGuidanceEngine {
 	private final GuidanceNames names;
 	private final DelayProvider delays;
 	private final GuidanceConfig cfg;
+	static final double BOARD_SPEED = 4.0, BOARD_SUSTAIN_SEC = 8, PLATFORM_M = 150, DISPLACE_M = 250,
+			ALIGHT_NEAR_M = 175, ALIGHT_SPEED = 1.5, REACQUIRE_M = 400;
+	static final int EARLY_TOL_SEC = 180, ASSUME_BOARD_SEC = 60, LATE_TOL_SEC = 600;
+
 	private final EventLog log = new EventLog();
 
 	private GuidanceState state = GuidanceState.PLANNED;
@@ -42,6 +47,20 @@ public final class GtfsGuidanceEngine {
 	private boolean haveFix;
 	private double fixLat, fixLon;
 	private long fixSec;
+	private static final Logger AUTO = Logger.getLogger("GtfsAuto");
+	/** How sure the engine is of the current ride/alight state. */
+	public enum Confidence { AUTO, ASSUMED, MANUAL }
+	private Confidence confidence = Confidence.AUTO;
+	private double curSpeed = Double.NaN, curBearing = Double.NaN;
+	private long speedHighSince = -1;
+	private long atBoardSec = -1;
+	private boolean fixReacquired;
+	private long motionSec = Long.MIN_VALUE;
+	private double motionLik;
+	private boolean autoBoardLocked;
+	private double prevLat, prevLon;
+	private long prevSec;
+	private boolean havePrev;
 
 	/** Engine with no delays and default thresholds. */
 	public GtfsGuidanceEngine(GtfsItinerary itinerary, GuidanceNames names) {
@@ -94,9 +113,48 @@ public final class GtfsGuidanceEngine {
 	 * advances the clock, like a tick. Epoch seconds earlier than the engine clock are treated as the clock.
 	 */
 	public List<GuidanceEvent> onLocation(double lat, double lon, float accuracyM, long epochSec, boolean hasFix) {
+		return onLocation(lat, lon, accuracyM, Double.NaN, Double.NaN, epochSec, hasFix);
+	}
+
+	public Confidence getConfidence() {
+		return confidence;
+	}
+
+	/** Optional vehicle-motion likelihood (0..1) from a phone motion detector; supporting evidence only. */
+	public List<GuidanceEvent> onMotion(long epochSec, double likelihood) {
+		motionSec = Math.max(clock, epochSec);
+		motionLik = likelihood;
+		return run(epochSec, null, false);
+	}
+
+	/**
+	 * A location update with speed (m/s) and bearing (degrees) when the device reports them (NaN or negative:
+	 * unknown; speed is then derived from consecutive fixes).
+	 */
+	public List<GuidanceEvent> onLocation(double lat, double lon, float accuracyM, double speedMps, double bearingDeg,
+	                                      long epochSec, boolean hasFix) {
 		long now = Math.max(clock, epochSec);
 		boolean usable = hasFix && accuracyM <= cfg.maxAccuracyM && !Double.isNaN(lat) && !Double.isNaN(lon);
 		if (usable && !state.isTerminal()) {
+			fixReacquired = haveFix && now - fixSec > cfg.fixFreshSec;
+			double sp = speedMps >= 0 ? speedMps : Double.NaN;
+			if (Double.isNaN(sp) && havePrev && now - prevSec >= 1 && now - prevSec <= 30) {
+				sp = GeoMath.distance(prevLat, prevLon, lat, lon) / (now - prevSec);
+			}
+			curSpeed = sp;
+			curBearing = bearingDeg;
+			if (!Double.isNaN(sp) && sp >= BOARD_SPEED) {
+				if (speedHighSince < 0) {
+					speedHighSince = now;
+				}
+			} else if (!Double.isNaN(sp)) {
+				speedHighSince = -1;
+			}
+			prevLat = lat;
+			prevLon = lon;
+			prevSec = now;
+			havePrev = true;
+			noteAtBoardStop(lat, lon, now);
 			haveFix = true;
 			fixLat = lat;
 			fixLon = lon;
@@ -155,7 +213,6 @@ public final class GtfsGuidanceEngine {
 				return stepWalk(now);
 			case WAIT_FOR_VEHICLE:
 				if (inferBoarded(now)) {
-					board(now);
 					return true;
 				}
 				if (isMissed(legIdx, now)) {
@@ -165,7 +222,6 @@ public final class GtfsGuidanceEngine {
 				return false;
 			case MISSED:
 				if (inferBoarded(now)) {
-					board(now);
 					return true;
 				}
 				return false;
@@ -203,7 +259,7 @@ public final class GtfsGuidanceEngine {
 		boolean moved = updateProgress(r, now);
 		if (pos == n - 1 && (alightByLocation
 				|| (!useLocation(r, now) && now >= expectedArrival(r, n - 1) + cfg.alightSlackSec))) {
-			alight(now);
+			alight(now, alightByLocation ? Confidence.AUTO : Confidence.ASSUMED);
 			return true;
 		}
 		return moved;
@@ -227,18 +283,24 @@ public final class GtfsGuidanceEngine {
 					cancel(now, "replan");
 				}
 				break;
+			case NOT_ON_TRAIN:
+				if (state == GuidanceState.RIDING) {
+					autoBoardLocked = true;
+					miss(legIdx, now);
+				}
+				break;
 			case BOARDED:
 				onBoardedTap(now);
 				break;
 			case ALIGHTED:
 				if (state == GuidanceState.RIDING || state == GuidanceState.WAIT_FOR_VEHICLE
 						|| state == GuidanceState.MISSED) {
-					alight(now);
+					alight(now, Confidence.MANUAL);
 				}
 				break;
 			case SKIP_LEG:
 				if (state == GuidanceState.RIDING) {
-					alight(now);
+					alight(now, Confidence.MANUAL);
 				} else if (!state.isTerminal() && state != GuidanceState.PLANNED) {
 					log.event(GuidanceEventType.LEG_SKIPPED, now, state).leg(legIdx).emit();
 					enterLeg(legIdx + 1, now, false);
@@ -258,12 +320,12 @@ public final class GtfsGuidanceEngine {
 					log.event(GuidanceEventType.WALK_LEG_ENDED, now, state).leg(legIdx)
 							.points(legs.get(legIdx).from, legs.get(legIdx).to).emit();
 					enterLeg(ride, now, true);
-					board(now);
+					board(now, Confidence.MANUAL);
 				}
 				break;
 			case WAIT_FOR_VEHICLE:
 			case MISSED:
-				board(now);
+				board(now, Confidence.MANUAL);
 				break;
 			default:
 				break;
@@ -291,6 +353,9 @@ public final class GtfsGuidanceEngine {
 		legIdx = idx;
 		pos = 0;
 		alightByLocation = false;
+		autoBoardLocked = false;
+		atBoardSec = -1;
+		confidence = Confidence.AUTO;
 		offStreak = 0;
 		GtfsLeg leg = legs.get(idx);
 		if (leg.type == GtfsLeg.Type.WALK) {
@@ -318,8 +383,11 @@ public final class GtfsGuidanceEngine {
 		enterLeg(legIdx + 1, now, false);
 	}
 
-	private void board(long now) {
+	private void board(long now, Confidence how) {
 		GtfsLeg r = legs.get(legIdx);
+		confidence = how;
+		AUTO.info("board state=" + state + " conf=" + how + " speed=" + curSpeed + " dBoard=" + distToBoard()
+				+ " t=" + now);
 		int n = r.stops.length;
 		pos = 0;
 		alightByLocation = false;
@@ -330,8 +398,10 @@ public final class GtfsGuidanceEngine {
 		updateProgress(r, now);
 	}
 
-	private void alight(long now) {
+	private void alight(long now, Confidence how) {
 		GtfsLeg r = legs.get(legIdx);
+		AUTO.info("alight conf=" + how + " speed=" + curSpeed + " dExit=" + (haveFix ? GeoMath.distance(fixLat, fixLon,
+				stopLocation(r, r.stops.length - 1)) : -1) + " t=" + now);
 		log.event(GuidanceEventType.RIDE_ENDED, now, state).leg(legIdx).stop(r.toStop, r.stops.length - 1).emit();
 		int next = nextRide(legIdx + 1);
 		if (next >= 0) {
@@ -341,6 +411,7 @@ public final class GtfsGuidanceEngine {
 					.args(names.routeName(nr), names.headsign(nr), stopName(nr.fromStop), dep).emit();
 		}
 		enterLeg(legIdx + 1, now, false);
+		confidence = how;
 	}
 
 	private void miss(int rideIdx, long now) {
@@ -378,9 +449,15 @@ public final class GtfsGuidanceEngine {
 		int target = pos;
 		if (useLocation(r, now)) {
 			for (int k = n - 1; k > pos; k--) {
-				if (GeoMath.distance(fixLat, fixLon, stopLocation(r, k)) <= cfg.stopRadiusM) {
+				double d = GeoMath.distance(fixLat, fixLon, stopLocation(r, k));
+				if (k == n - 1) {
+					if (exitReached(d, now)) {
+						target = k;
+						alightByLocation = true;
+						break;
+					}
+				} else if (d <= cfg.stopRadiusM) {
 					target = k;
-					alightByLocation = k == n - 1;
 					break;
 				}
 			}
@@ -416,9 +493,62 @@ public final class GtfsGuidanceEngine {
 		return 0;
 	}
 
-	/** True if the traveller seems to be at a stop after the boarding one, so they must have boarded. */
+	private boolean exitReached(double d, long now) {
+		boolean slow = !Double.isNaN(curSpeed) && curSpeed < ALIGHT_SPEED;
+		boolean res = (Double.isNaN(curSpeed) && d <= cfg.stopRadiusM) || (slow && d <= ALIGHT_NEAR_M)
+				|| (fixReacquired && fixSec == now && d <= REACQUIRE_M);
+		if (res) {
+			AUTO.info("exit evidence d=" + d + " speed=" + curSpeed + " reacquired=" + fixReacquired);
+		}
+		return res;
+	}
+
+	private void noteAtBoardStop(double lat, double lon, long now) {
+		if (state == GuidanceState.WAIT_FOR_VEHICLE || state == GuidanceState.MISSED
+				|| state == GuidanceState.WALK_TO_BOARD || state == GuidanceState.TRANSFER_WALK) {
+			int ride = nextRide(legIdx);
+			LatLon p = ride < 0 ? null : stopLocation(legs.get(ride), 0);
+			if (p != null && GeoMath.distance(lat, lon, p) <= PLATFORM_M) {
+				atBoardSec = now;
+			}
+		}
+	}
+
+	private double distToBoard() {
+		GtfsLeg r = legs.get(legIdx);
+		LatLon p = r.type == GtfsLeg.Type.RIDE ? stopLocation(r, 0) : null;
+		return haveFix && p != null ? GeoMath.distance(fixLat, fixLon, p) : -1;
+	}
+
+	/** Boards by evidence (auto or assumed) or by the old "seen at a later stop" rule; true if it boarded. */
 	private boolean inferBoarded(long now) {
 		GtfsLeg r = legs.get(legIdx);
+		if (!autoBoardLocked && r.type == GtfsLeg.Type.RIDE && atBoardSec >= 0) {
+			long dep = expectedDeparture(r, 0);
+			boolean window = now >= dep - EARLY_TOL_SEC && now <= dep + LATE_TOL_SEC;
+			if (window && isFresh(now)) {
+				LatLon s0 = stopLocation(r, 0), s1 = r.stops.length > 1 ? stopLocation(r, 1) : null;
+				double d0 = s0 == null ? 0 : GeoMath.distance(fixLat, fixLon, s0);
+				boolean toward = s0 == null || s1 == null || GeoMath.distance(fixLat, fixLon, s1)
+						< GeoMath.distance(s0.getLatitude(), s0.getLongitude(), s1);
+				boolean motion = now - motionSec <= 15 && motionLik >= 0.7;
+				boolean sustained = speedHighSince >= 0 && !Double.isNaN(curSpeed) && curSpeed >= BOARD_SPEED
+						&& now - speedHighSince >= BOARD_SUSTAIN_SEC;
+				boolean sustainedMotion = motion && !Double.isNaN(curSpeed) && curSpeed >= 2.5 && d0 > 60;
+				boolean displaced = d0 > DISPLACE_M && !Double.isNaN(curSpeed) && curSpeed >= 3;
+				if (toward && (sustained || displaced || sustainedMotion)) {
+					AUTO.info("board evidence sustained=" + sustained + " displaced=" + displaced + " motion="
+							+ sustainedMotion + " d0=" + d0 + " speed=" + curSpeed);
+					board(now, Confidence.AUTO);
+					return true;
+				}
+			} else if (!isFresh(now) && haveFix && now >= dep + ASSUME_BOARD_SEC && now <= dep + LATE_TOL_SEC
+					&& fixSec >= dep - 180 && atBoardSec == fixSec) {
+				AUTO.info("board assumed: fixes lost at platform, dep+" + (now - dep) + "s");
+				board(now, Confidence.ASSUMED);
+				return true;
+			}
+		}
 		if (!useLocation(r, now)) {
 			return false;
 		}
@@ -426,6 +556,7 @@ public final class GtfsGuidanceEngine {
 		for (int k = 1; k < r.stops.length; k++) {
 			double d = GeoMath.distance(fixLat, fixLon, stopLocation(r, k));
 			if (d <= cfg.stopRadiusM && d < atBoard) {
+				board(now, Confidence.AUTO);
 				return true;
 			}
 		}

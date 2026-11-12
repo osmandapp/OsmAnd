@@ -107,7 +107,10 @@ class GtfsGuidanceSession(
 		handler.post {
 			if (active && !finishing && !replanning) {
 				val accuracy = if (location.hasAccuracy()) location.accuracy else UNKNOWN_ACCURACY_M
-				apply(controller.onLocation(location.latitude, location.longitude, accuracy, nowSec(), true))
+				val speed = if (location.hasSpeed()) location.speed.toDouble() else Double.NaN
+				val bearing = if (location.hasBearing()) location.bearing.toDouble() else Double.NaN
+				android.util.Log.i("GtfsAuto", "fix acc=$accuracy speed=$speed bearing=$bearing state=${controller.engine.state}")
+				apply(controller.onLocation(location.latitude, location.longitude, accuracy, speed, bearing, nowSec(), true))
 			}
 		}
 	}
@@ -159,8 +162,10 @@ class GtfsGuidanceSession(
 			val status = status()
 			// a notification shows three actions: the step's main one, Replan and Cancel (Skip is in the panel)
 			when {
+				status.canNotOnTrain -> builder.addAction(
+					R.drawable.ic_notification_play, app.getString(R.string.gtfs_guide_not_on_train), pending(Command.NOT_ON_TRAIN))
 				status.canAlight -> builder.addAction(
-					R.drawable.ic_notification_play, app.getString(R.string.gtfs_guide_got_off), pending(Command.ALIGHTED))
+					R.drawable.ic_notification_play, app.getString(R.string.gtfs_guide_got_off_here), pending(Command.ALIGHTED))
 				status.canBoard -> builder.addAction(
 					R.drawable.ic_notification_play, app.getString(R.string.gtfs_guide_on_board), pending(Command.BOARDED))
 			}
@@ -301,6 +306,7 @@ class GtfsGuidanceSession(
 		val ACTIONS = mapOf(
 			PREFIX + "BOARDED" to Command.BOARDED,
 			PREFIX + "ALIGHTED" to Command.ALIGHTED,
+			PREFIX + "NOT_ON_TRAIN" to Command.NOT_ON_TRAIN,
 			PREFIX + "SKIP" to Command.SKIP,
 			PREFIX + "REPLAN" to Command.REPLAN,
 			PREFIX + "CANCEL" to Command.CANCEL,

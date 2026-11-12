@@ -8,6 +8,8 @@ public enum UserAction {
 	ALIGHTED,
 	/** Give up the current leg and go on to the next one. */
 	SKIP_LEG,
+	/** "Not on this train": undo an auto-detected or assumed boarding. */
+	NOT_ON_TRAIN,
 	/** Stop guidance. */
 	CANCEL,
 	/** The traveller accepted the offered replan (after MISSED or OFF_ROUTE); the host plans a new trip. */

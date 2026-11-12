@@ -64,7 +64,9 @@ public class GuidanceRandomTimelineTest {
 	private void run(long seed, boolean allowFixes, GtfsItinerary it) {
 		Random r = new Random(seed);
 		GtfsGuidanceEngine e = new GtfsGuidanceEngine(it, names());
-		UserAction[] actions = UserAction.values();
+		// NOT_ON_TRAIN deliberately goes backwards (RIDING -> MISSED), so the monotonic-state invariant excludes it
+		UserAction[] actions = java.util.Arrays.stream(UserAction.values()).filter(a -> a != UserAction.NOT_ON_TRAIN)
+				.toArray(UserAction[]::new);
 		long now = T0 - r.nextInt(300);
 		long lastKey = -1;
 		boolean everFix = false, sawTerminal = false;

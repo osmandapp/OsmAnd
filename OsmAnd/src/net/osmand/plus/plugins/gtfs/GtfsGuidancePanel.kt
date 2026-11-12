@@ -78,11 +78,15 @@ class GtfsGuidancePanel(private val activity: MapActivity, private val session: 
 		detail.text = extra
 		detail.visibility = if (extra == null) View.GONE else View.VISIBLE
 		buttons.removeAllViews()
-		if (status.canBoard) {
+		if (status.canBoard && status.state != net.osmand.router.gtfs.guidance.GuidanceState.WALK_TO_BOARD
+			&& status.state != net.osmand.router.gtfs.guidance.GuidanceState.TRANSFER_WALK) {
 			addButton(R.string.gtfs_guide_on_board, Command.BOARDED)
 		}
+		if (status.canNotOnTrain) {
+			addButton(R.string.gtfs_guide_not_on_train, Command.NOT_ON_TRAIN)
+		}
 		if (status.canAlight) {
-			addButton(R.string.gtfs_guide_got_off, Command.ALIGHTED)
+			addButton(R.string.gtfs_guide_got_off_here, Command.ALIGHTED)
 		}
 		if (status.canSkip) {
 			addButton(R.string.gtfs_guide_skip, Command.SKIP)
@@ -114,7 +118,7 @@ class GtfsGuidancePanel(private val activity: MapActivity, private val session: 
 		val button = Button(activity, null, android.R.attr.borderlessButtonStyle)
 		button.setText(textId)
 		button.isAllCaps = false
-		button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
+		button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
 		button.setTextColor(ColorUtilities.getActiveColor(app, nightMode))
 		button.minWidth = 0
 		button.minimumWidth = 0
