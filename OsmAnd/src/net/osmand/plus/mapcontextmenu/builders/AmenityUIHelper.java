@@ -309,11 +309,17 @@ public class AmenityUIHelper extends MenuBuilder {
 	@NonNull
 	private CollapsableView getOpeningHoursCollapsableView(@NonNull Context context, @NonNull List<AmenityTagEntry> entries) {
 		CollapsableView collapsableView = getCollapsableTextView(context, true, entries.get(0).text);
-		if (entries.size() > 1) {
+		String checkDate = null;
+		for (AmenityTagEntry entry : entries) {
+			if (CHECK_DATE_OPENING_HOURS.equals(entry.key)) {
+				checkDate = entry.text;
+			}
+		}
+		if (!Algorithms.isEmpty(checkDate)) {
 			TextView textView = (TextView) collapsableView.getContentView();
 			SpannableStringBuilder text = new SpannableStringBuilder(textView.getText()).append('\n');
 			int start = text.length();
-			text.append(entries.get(1).text);
+			text.append(checkDate);
 			int end = text.length();
 			int color = ColorUtilities.getSecondaryTextColor(app, !isLightContent());
 			int size = app.getResources().getDimensionPixelSize(R.dimen.default_desc_text_size);
