@@ -187,13 +187,7 @@ public final class GtfsRoutePlanner {
 	}
 
 	private static int walkMeters(GtfsItinerary it) {
-		int m = 0;
-		for (GtfsLeg l : it.legs) {
-			if (l.type == GtfsLeg.Type.WALK) {
-				m += l.walkMeters;
-			}
-		}
-		return m;
+		return it.walkMetersAdjusted;
 	}
 
 	/** The routes ridden, in order: the same lines on a later vehicle, or with another transfer stop, are one option. */
@@ -444,20 +438,21 @@ public final class GtfsRoutePlanner {
 			long end = epoch(arrival);
 			int egress = egressWalk[lastStop];
 			legs.add(GtfsLeg.walk(end - egress, end, lastStop, -1, stopPoint(lastStop), to,
-					(int) Math.round(distance(stopLat[lastStop], stopLon[lastStop], to))));
+					(int) Math.round(distance(stopLat[lastStop], stopLon[lastStop], to)), o.walkDetourFactor));
 			int cur = last;
 			while (true) {
 				int k = kind.get(cur);
 				if (k == ACCESS) {
 					int s = a.get(cur);
 					legs.add(GtfsLeg.walk(epoch(time.get(cur)) - accessWalk[s], epoch(time.get(cur)), -1, s, from,
-							stopPoint(s), (int) Math.round(distance(stopLat[s], stopLon[s], from))));
+							stopPoint(s), (int) Math.round(distance(stopLat[s], stopLon[s], from)), o.walkDetourFactor));
 					break;
 				} else if (k == FOOT) {
 					int ride = b.get(cur), fromStop = index.connTo.get(a.get(ride)), toStop = a.get(cur);
 					legs.add(GtfsLeg.walk(epoch(time.get(ride)), epoch(time.get(cur)), fromStop, toStop,
 							stopPoint(fromStop), stopPoint(toStop), (int) Math.round(GtfsIndex.distanceMeters(
-							stopLat[fromStop], stopLon[fromStop], stopLat[toStop], stopLon[toStop]))));
+							stopLat[fromStop], stopLon[fromStop], stopLat[toStop], stopLon[toStop])),
+							o.walkDetourFactor));
 					cur = ride;
 				} else { // RIDE: the boarding label tells where it began and what came before
 					int board = b.get(cur);
@@ -473,7 +468,8 @@ public final class GtfsRoutePlanner {
 				legs.set(0, first.withTimes(start, start + (first.endSec - first.startSec)));
 			}
 			legs.removeIf(l -> l.type == GtfsLeg.Type.WALK && l.startSec == l.endSec && l.walkMeters == 0);
-			return new GtfsItinerary(legs, legs.get(0).startSec, legs.get(legs.size() - 1).endSec, rideCount - 1);
+			return new GtfsItinerary(legs, legs.get(0).startSec, legs.get(legs.size() - 1).endSec, rideCount - 1,
+					departEpoch);
 		}
 
 		private double distance(int lat, int lon, LatLon p) {

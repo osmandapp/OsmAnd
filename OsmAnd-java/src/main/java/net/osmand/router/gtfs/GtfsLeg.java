@@ -16,6 +16,11 @@ public final class GtfsLeg {
 	public final LatLon from, to;
 	/** Straight-line length of a walk; the real route is for the pedestrian router to find. */
 	public final int walkMeters;
+	/**
+	 * Length of a walk with the detour factor applied (the distance the timing is based on); 0 for a ride.
+	 * {@link #walkMeters} stays the straight-line value.
+	 */
+	public final int walkMetersAdjusted;
 
 	// RIDE only, otherwise -1 / null
 	public final int tripIdx, routeIdx;
@@ -27,8 +32,8 @@ public final class GtfsLeg {
 	public final long[] arrivalSec, departureSec;
 
 	private GtfsLeg(Type type, long startSec, long endSec, int fromStop, int toStop, LatLon from, LatLon to,
-	                int walkMeters, int tripIdx, int routeIdx, int boardSeq, int alightSeq, int[] stops,
-	                long[] arrivalSec, long[] departureSec, String tripId, String routeId) {
+	                int walkMeters, int walkMetersAdjusted, int tripIdx, int routeIdx, int boardSeq, int alightSeq,
+	                int[] stops, long[] arrivalSec, long[] departureSec, String tripId, String routeId) {
 		this.type = type;
 		this.startSec = startSec;
 		this.endSec = endSec;
@@ -37,6 +42,7 @@ public final class GtfsLeg {
 		this.from = from;
 		this.to = to;
 		this.walkMeters = walkMeters;
+		this.walkMetersAdjusted = walkMetersAdjusted;
 		this.tripIdx = tripIdx;
 		this.routeIdx = routeIdx;
 		this.tripId = tripId;
@@ -48,20 +54,26 @@ public final class GtfsLeg {
 		this.departureSec = departureSec;
 	}
 
+	/** A walk whose adjusted length uses the default detour factor. */
 	static GtfsLeg walk(long startSec, long endSec, int fromStop, int toStop, LatLon from, LatLon to, int meters) {
-		return new GtfsLeg(Type.WALK, startSec, endSec, fromStop, toStop, from, to, meters, -1, -1, -1, -1, null,
-				null, null, null, null);
+		return walk(startSec, endSec, fromStop, toStop, from, to, meters, new GtfsPlanOptions().walkDetourFactor);
+	}
+
+	static GtfsLeg walk(long startSec, long endSec, int fromStop, int toStop, LatLon from, LatLon to, int meters,
+	                    double detourFactor) {
+		return new GtfsLeg(Type.WALK, startSec, endSec, fromStop, toStop, from, to, meters,
+				(int) Math.round(meters * detourFactor), -1, -1, -1, -1, null, null, null, null, null);
 	}
 
 	static GtfsLeg ride(int tripIdx, int routeIdx, int boardSeq, int alightSeq, int[] stops, long[] arrivalSec,
 	                    long[] departureSec, LatLon from, LatLon to, String tripId, String routeId) {
 		int n = stops.length;
-		return new GtfsLeg(Type.RIDE, departureSec[0], arrivalSec[n - 1], stops[0], stops[n - 1], from, to, 0,
+		return new GtfsLeg(Type.RIDE, departureSec[0], arrivalSec[n - 1], stops[0], stops[n - 1], from, to, 0, 0,
 				tripIdx, routeIdx, boardSeq, alightSeq, stops, arrivalSec, departureSec, tripId, routeId);
 	}
 
 	GtfsLeg withTimes(long start, long end) {
-		return new GtfsLeg(type, start, end, fromStop, toStop, from, to, walkMeters, tripIdx, routeIdx, boardSeq,
-				alightSeq, stops, arrivalSec, departureSec, tripId, routeId);
+		return new GtfsLeg(type, start, end, fromStop, toStop, from, to, walkMeters, walkMetersAdjusted, tripIdx, routeIdx,
+				boardSeq, alightSeq, stops, arrivalSec, departureSec, tripId, routeId);
 	}
 }

@@ -420,4 +420,53 @@ public class GtfsRoutePlannerTest {
 		assertNotNull(DelayProvider.NONE);
 		assertEquals(0, DelayProvider.NONE.arrivalDelaySec(3, 4));
 	}
+
+	// ------------------------------------------------------------------ reporting
+
+	@Test
+	public void walkLengthsAreReportedStraightAndDetourAdjusted() throws IOException {
+		GtfsFixture f = GtfsFixture.basic().trip("t1", "R1", "WD", "A 08:00:00", "B 08:10:00");
+		LatLon from = new LatLon(at('A').getLatitude(), at('A').getLongitude() - 0.002); // about 170 m west
+		LatLon to = new LatLon(at('B').getLatitude(), at('B').getLongitude() + 0.002);
+		GtfsItinerary it = planner(f).plan(from, to, epoch(TUE, "07:50"), null, null).get(0);
+		int straight = 0, adjusted = 0;
+		for (GtfsLeg l : it.legs) {
+			if (l.type == GtfsLeg.Type.WALK) {
+				assertEquals(Math.round(l.walkMeters * 1.3), l.walkMetersAdjusted);
+				// the time a walk takes is the adjusted length at the walking speed
+				assertEquals(l.walkMetersAdjusted / 1.25, l.endSec - l.startSec, 1);
+				straight += l.walkMeters;
+				adjusted += l.walkMetersAdjusted;
+			} else {
+				assertEquals(0, l.walkMetersAdjusted);
+			}
+		}
+		assertTrue(straight > 300);
+		assertEquals(straight, it.walkMeters);
+		assertEquals(adjusted, it.walkMetersAdjusted);
+	}
+
+	@Test
+	public void detourFactorOfTheOptionsIsUsedForTheAdjustedLength() throws IOException {
+		GtfsFixture f = GtfsFixture.basic().trip("t1", "R1", "WD", "A 08:00:00", "B 08:10:00");
+		LatLon from = new LatLon(at('A').getLatitude(), at('A').getLongitude() - 0.002);
+		GtfsPlanOptions o = new GtfsPlanOptions();
+		o.walkDetourFactor = 1.0;
+		GtfsItinerary it = planner(f).plan(from, at('B'), epoch(TUE, "07:50"), o, null).get(0);
+		assertEquals(it.walkMeters, it.walkMetersAdjusted);
+	}
+
+	@Test
+	public void requestedDepartureAndVehicleTimeAreReportedBesideTheShiftedDeparture() throws IOException {
+		GtfsFixture f = GtfsFixture.basic().trip("t1", "R1", "WD", "A 08:00:00", "B 08:10:00");
+		LatLon from = new LatLon(at('A').getLatitude(), at('A').getLongitude() - 0.002);
+		long request = epoch(TUE, "07:30");
+		GtfsItinerary it = planner(f).plan(from, at('B'), request, null, null).get(0);
+		assertEquals(request, it.requestedDepartSec);
+		assertTrue("the walk is shifted to just before the bus", it.departSec > request + 1500);
+		assertEquals(600, it.inVehicleSec);
+		assertEquals(it.arriveSec - it.departSec, it.durationSec());
+		assertEquals(it.arriveSec - request, it.durationFromRequestSec());
+		assertTrue(it.durationFromRequestSec() > it.durationSec());
+	}
 }
