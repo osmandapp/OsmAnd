@@ -135,7 +135,8 @@ public class ResourceManager {
 		ADDRESS,
 		QUICK_SEARCH,
 		ROUTING,
-		TRANSPORT_ROUTING
+		TRANSPORT_ROUTING,
+		WEAR_RENDERING
 	}
 
 	protected final Map<String, BinaryMapReaderResource> fileReaders = new ConcurrentHashMap<>();

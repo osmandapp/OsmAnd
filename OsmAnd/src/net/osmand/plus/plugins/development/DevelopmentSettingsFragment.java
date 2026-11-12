@@ -32,6 +32,7 @@ import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.wear.WearBridge;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -50,6 +51,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String JAVA_MEMORY = "java_memory";
 	private static final String SIMULATE_UI = "simulate_ui";
+	private static final String REFRESH_WEAR_CONNECTION = "refresh_wear_connection";
 	private static final String VISUALIZING_BUTTON_GRID = "visualizing_button_grid";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
@@ -383,6 +385,16 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			if (activity != null) {
 				SimulateLocationFragment.showInstance(activity.getSupportFragmentManager(), null, false);
 			}
+			return true;
+		} else if (REFRESH_WEAR_CONNECTION.equals(prefId)) {
+			// Play services caches the capability declared by resource, and a stale cache leaves
+			// the watch unable to find the phone with nothing in the app able to shift it. This
+			// re-declares the capability at runtime; it is a manual action rather than something
+			// done at startup, which would bind to Play services on every launch.
+			WearBridge.INSTANCE.refreshConnection(app, message -> {
+				app.showShortToastMessage(message);
+				return kotlin.Unit.INSTANCE;
+			});
 			return true;
 		} else if (SIMULATE_UI.equals(prefId)) {
 			FragmentActivity activity = getActivity();
