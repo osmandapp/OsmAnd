@@ -25,8 +25,17 @@ public class TransportClockFormat {
 		return format(route.getDepartureTimeSec(), route.getTimeZone());
 	}
 
+	/** The arrival clock time, with " +1" (or +2, ...) when it falls on a later local day than the departure. */
 	public String formatArrival(TimedTransportRoute route) {
-		return format(route.getArrivalTimeSec(), route.getTimeZone());
+		return formatWithDayOffset(route.getArrivalTimeSec(), route.getDepartureTimeSec(), route.getTimeZone());
+	}
+
+	/** Clock time of {@code epochSec}, marked +N when its local date is N days after that of {@code referenceSec}. */
+	public String formatWithDayOffset(long epochSec, long referenceSec, ZoneId zone) {
+		long days = java.time.temporal.ChronoUnit.DAYS.between(Instant.ofEpochSecond(referenceSec).atZone(zone).toLocalDate(),
+				Instant.ofEpochSecond(epochSec).atZone(zone).toLocalDate());
+		String clock = format(epochSec, zone);
+		return days > 0 ? clock + " +" + days : clock;
 	}
 
 	/** For example {@code 08:15 - 08:54}. */

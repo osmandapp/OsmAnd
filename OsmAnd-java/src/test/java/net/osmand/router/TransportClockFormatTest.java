@@ -70,7 +70,9 @@ public class TransportClockFormatTest {
 	public void rangeAcrossMidnightShowsBothClocks() {
 		TransportClockFormat f = new TransportClockFormat(true, Locale.US);
 		TimedTransportRoute r = timed(epoch(NY, 23, 50, 0), epoch(NY, 23, 50, 0) + 40 * 60, NY);
-		assertEquals("23:50 – 00:30", f.formatRange(r));
+		assertEquals("23:50 – 00:30 +1", f.formatRange(r));
+		assertEquals("00:30 +1", f.formatArrival(r));
+		assertEquals("23:50", f.formatDeparture(r));
 	}
 
 	@Test
