@@ -200,6 +200,9 @@ final class PlanMatrixScenario {
 		m.put("durationMin", (it.arriveSec - it.departSec) / 60);
 		m.put("transfers", it.transfers);
 		m.put("walkMetersTotal", walkTotal(it));
+		m.put("walkMetersAdjustedTotal", it.walkMetersAdjusted);
+		m.put("durationFromRequestMin", it.durationFromRequestSec() / 60);
+		m.put("inVehicleMin", it.inVehicleSec / 60);
 		boolean crosses = !Instant.ofEpochSecond(it.arriveSec).atZone(zone).toLocalDate()
 				.equals(Instant.ofEpochSecond(it.departSec).atZone(zone).toLocalDate());
 		m.put("crossesMidnight", crosses);

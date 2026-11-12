@@ -20,7 +20,7 @@ import org.junit.rules.TemporaryFolder;
  * The phone self-test scenarios run on the JVM. The clock and runner tests need nothing; the feed tests need the
  * MTA zips: pass them like the smoke test does,
  * <pre>JAVA_TOOL_OPTIONS="-Dgtfs.mta.dir=/fast/agent/cache/mta-gtfs -Dgtfs.selftest.out=/some/dir
- * -Djava.io.tmpdir=/roomy/dir" ./gradlew :OsmAnd-java:cleanTest :OsmAnd-java:test --tests '*GtfsSelfTestOfflineTest'</pre>
+ * -Djava.io.tmpdir=/roomy/dir -Dgtfs.selftest.now=1794448800" ./gradlew :OsmAnd-java:cleanTest :OsmAnd-java:test --tests '*GtfsSelfTestOfflineTest'</pre>
  * With gtfs.selftest.out the report.json and report.txt of the feed run are written there.
  */
 public class GtfsSelfTestOfflineTest {
@@ -31,6 +31,11 @@ public class GtfsSelfTestOfflineTest {
 	private SelfTestEnv host(List<File> zips) throws Exception {
 		SelfTestEnv h = new SelfTestEnv(tmp.newFolder("work"), zips);
 		h.sink = line -> System.out.println("[selftest] " + line);
+		String now = System.getProperty("gtfs.selftest.now"); // epoch seconds: makes the "now" rows repeatable
+		if (now != null && !now.isEmpty()) {
+			long fixed = Long.parseLong(now);
+			h.nowSec = () -> fixed;
+		}
 		h.info.put("host", "jvm " + System.getProperty("java.version"));
 		return h;
 	}

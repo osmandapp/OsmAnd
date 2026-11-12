@@ -28,8 +28,10 @@ import org.apache.commons.logging.Log;
  * <li>Boarding where pickup is not allowed, or alighting where drop-off is not allowed, is never planned.</li>
  * <li>Among equal arrival times the label with fewer rides wins, so the planner does not ride a different
  * line backwards just to catch a trip it could board at the start.</li>
- * <li>Alternatives: the best plan again without the route of its first ride, and again with a penalty per
- * transfer.</li>
+ * <li>Alternatives (see {@link GtfsPlanOptions}): the best plan again without each route of the best itinerary in
+ * turn, and again with every ride costing extra when labels are compared (so a slower option with fewer
+ * transfers can win). They are filtered for duplicate route sequences and dominance, and ranked by arrival with a
+ * tolerance per transfer; the earliest-arrival itinerary is always first.</li>
  * </ul>
  * Walks are straight-line estimates; the caller replaces them with real pedestrian routes. A planner is
  * immutable after construction and {@link #plan} may be called from several threads.
@@ -78,43 +80,116 @@ public final class GtfsRoutePlanner {
 			return result;
 		}
 		result.add(best);
-		Set<String> seen = new HashSet<>();
-		seen.add(signature(best));
+		List<GtfsItinerary> candidates = new ArrayList<>();
 		if (q.o.maxItineraries > 1) {
 			if (progress != null) {
 				progress.onProgress("Alternatives", 50);
 			}
-			// One itinerary per distinct first route: scan again with every route found so far excluded, so a
-			// line that is slightly later (a subway with a longer wait) is not hidden behind two buses.
+			// (a) the best plan again without one of its routes at a time, the first ride's route first
+			List<Integer> banned = ridden(best);
+			for (int i = 0; i < banned.size() && i < q.o.maxRouteBans && !q.cancelled(); i++) {
+				candidates.add(q.scan(q.without(banned.get(i)), 0));
+			}
+			// (a2) one option per distinct first route: scan again with every first route found so far excluded, so
+			// a line that is slightly later (a subway with a longer wait) is not hidden behind two buses
 			Set<Integer> excluded = new HashSet<>();
 			GtfsItinerary cur = best;
 			for (int round = 0; round < 5 && cur != null && !q.cancelled(); round++) {
-				excluded.add(firstRoute(cur));
+				excluded.add(ridden(cur).get(0));
 				cur = q.scan(q.without(excluded), 0);
-				addAlternative(result, seen, cur, best, q.o);
+				candidates.add(cur);
 			}
-			if (!q.cancelled()) {
-				addAlternative(result, seen, q.scan(q.active, q.o.transferPenaltySec), best, q.o);
+			// (b) fewest transfers: every ride costs extra when labels are compared, mildly and then strongly
+			if (q.o.maxItineraries > 2 && best.transfers > 0) {
+				for (int k = 1; k <= 3 && !q.cancelled(); k += 2) {
+					candidates.add(q.scan(q.active, k * q.o.transferPenaltySec));
+				}
+				// (c) the option found (say a 0-transfer Q25) can hide another one of the same kind (the Q44-SBS): once
+				// more without its route, for the first two such options
+				List<GtfsItinerary> found = new ArrayList<>(Collections.singletonList(best));
+				addAlternatives(found, candidates, q.o);
+				for (int i = 1, scans = 0; i < found.size() && scans < 2 && !q.cancelled(); i++) {
+					if (found.get(i).transfers < best.transfers) {
+						scans++;
+						candidates.add(q.scan(q.without(ridden(found.get(i)).get(0)), 3 * q.o.transferPenaltySec));
+					}
+				}
 			}
 		}
 		if (q.cancelled()) {
 			result.clear();
 			return result;
 		}
-		final GtfsPlanOptions ro = q.o;
-		Collections.sort(result, (x, y) -> {
-			long cx = rankCost(x, ro), cy = rankCost(y, ro);
-			return cx != cy ? Long.compare(cx, cy) : Long.compare(x.arriveSec, y.arriveSec);
-		});
-		while (result.size() > Math.max(1, q.o.maxItineraries)) {
-			result.remove(result.size() - 1);
+		addAlternatives(result, candidates, q.o);
+		if (q.o.walkWeight > 0) {
+			// the walking preference may put another option first
+			final GtfsPlanOptions ro = q.o;
+			Collections.sort(result, (x, y) -> Long.compare(rankCost(x, ro), rankCost(y, ro)));
 		}
 		LOG.debug("GTFS plan: " + result.size() + " itineraries, " + q.scanned + " connections scanned, "
 				+ (System.nanoTime() - t0) / 1000000 + " ms");
 		return result;
 	}
 
-	/** Arrival time plus extra weight on walking and transfers, so a slightly earlier but walk-heavy trip does not win. */
+	/**
+	 * Adds the useful candidates to {@code result} (which holds the best itinerary): the earliest first, skipping
+	 * those that arrive more than the options' delay after the best, that ride the same sequence of routes as an
+	 * itinerary already kept (a later vehicle of the same lines is not a different option), or that are dominated
+	 * by one already kept (no more transfers, no later, no more walking, and not identical in all three to a
+	 * different line sequence). The result is cut to the options' maximum.
+	 */
+	static void addAlternatives(List<GtfsItinerary> result, List<GtfsItinerary> candidates, GtfsPlanOptions o) {
+		GtfsItinerary best = result.get(0);
+		List<GtfsItinerary> sorted = new ArrayList<>();
+		for (GtfsItinerary c : candidates) {
+			if (c != null) {
+				sorted.add(c);
+			}
+		}
+		for (GtfsItinerary c : new ArrayList<>(sorted)) {
+			// the same arrival with fewer transfers (a tie the scan can leave open) is the better best
+			if (c.arriveSec == best.arriveSec && c.transfers < best.transfers) {
+				sorted.add(best);
+				sorted.remove(c);
+				best = c;
+				result.set(0, best);
+			}
+		}
+		Collections.sort(sorted, (x, y) -> {
+			long sx = rankSec(x, o), sy = rankSec(y, o);
+			if (sx != sy) {
+				return Long.compare(sx, sy);
+			}
+			if (x.arriveSec != y.arriveSec) {
+				return Long.compare(x.arriveSec, y.arriveSec);
+			}
+			return x.transfers != y.transfers ? Integer.compare(x.transfers, y.transfers)
+					: Integer.compare(walkMeters(x), walkMeters(y));
+		});
+		Set<String> seen = new HashSet<>();
+		seen.add(signature(best));
+		for (GtfsItinerary c : sorted) {
+			if (result.size() >= Math.max(1, o.maxItineraries)) {
+				break;
+			}
+			if (c.arriveSec - best.arriveSec > o.maxAlternativeDelaySec || !seen.add(signature(c))) {
+				continue;
+			}
+			boolean dominated = false;
+			for (GtfsItinerary k : result) {
+				dominated |= dominates(k, c);
+			}
+			if (!dominated) {
+				result.add(c);
+			}
+		}
+	}
+
+	/**
+	 * Order of the alternatives: arrival time plus the tolerance per transfer, so an option with one transfer fewer
+	 * comes first when it arrives no more than the tolerance later. The best itinerary stays first regardless.
+	 */
+	/** Arrival time plus extra weight on walking and transfers (the "walking vs. transit" setting). */
 	static long rankCost(GtfsItinerary it, GtfsPlanOptions o) {
 		long walk = 0;
 		for (GtfsLeg l : it.legs) {
@@ -125,30 +200,41 @@ public final class GtfsRoutePlanner {
 		return it.arriveSec + Math.round(o.walkWeight * walk) + (long) it.transfers * o.transferRankSec;
 	}
 
-	private static void addAlternative(List<GtfsItinerary> result, Set<String> seen, GtfsItinerary alt,
-	                                   GtfsItinerary best, GtfsPlanOptions o) {
-		if (alt != null && alt.arriveSec - best.arriveSec <= o.maxAlternativeDelaySec && seen.add(signature(alt))) {
-			result.add(alt);
-		}
+	private static long rankSec(GtfsItinerary it, GtfsPlanOptions o) {
+		return it.arriveSec + (long) it.transfers * o.fewerTransfersToleranceSec;
 	}
 
-	private static String signature(GtfsItinerary it) {
+	/** x is no worse than y in transfers, arrival and walking, and better in at least one of them. */
+	private static boolean dominates(GtfsItinerary x, GtfsItinerary y) {
+		int wx = walkMeters(x), wy = walkMeters(y);
+		return x.transfers <= y.transfers && x.arriveSec <= y.arriveSec && wx <= wy
+				&& (x.transfers < y.transfers || x.arriveSec < y.arriveSec || wx < wy);
+	}
+
+	private static int walkMeters(GtfsItinerary it) {
+		return it.walkMetersAdjusted;
+	}
+
+	/** The routes ridden, in order: the same lines on a later vehicle, or with another transfer stop, are one option. */
+	static String signature(GtfsItinerary it) {
 		StringBuilder sb = new StringBuilder();
 		for (GtfsLeg l : it.legs) {
 			if (l.type == GtfsLeg.Type.RIDE) {
-				sb.append(l.tripIdx).append(':').append(l.boardSeq).append(':').append(l.alightSeq).append(';');
+				sb.append(l.routeIdx).append(';');
 			}
 		}
 		return sb.toString();
 	}
 
-	private int firstRoute(GtfsItinerary it) {
+	/** The distinct routes of the rides, in the order ridden. */
+	private static List<Integer> ridden(GtfsItinerary it) {
+		List<Integer> res = new ArrayList<>();
 		for (GtfsLeg l : it.legs) {
-			if (l.type == GtfsLeg.Type.RIDE) {
-				return l.routeIdx;
+			if (l.type == GtfsLeg.Type.RIDE && l.routeIdx >= 0 && !res.contains(l.routeIdx)) {
+				res.add(l.routeIdx);
 			}
 		}
-		return -1;
+		return res;
 	}
 
 	/** State of one plan() call: the three service days and the walkable stops around both ends. */
@@ -163,6 +249,7 @@ public final class GtfsRoutePlanner {
 		final long[][] active = new long[3][];
 		final int[] accessWalk, egressWalk; // seconds, -1 if the stop is out of reach
 		long scanned;
+		int penalty; // seconds a ride counts for when labels are compared; 0 for the earliest arrival
 
 		// labels of the scan in progress
 		final TIntArrayList kind = new TIntArrayList(), a = new TIntArrayList(), b = new TIntArrayList(),
@@ -210,6 +297,11 @@ public final class GtfsRoutePlanner {
 		}
 
 		/** Trip sets of the three days without the trips of one route. */
+		long[][] without(int route) {
+			return without(Collections.singleton(route));
+		}
+
+		/** Trip sets of the three days without the trips of the given routes. */
 		long[][] without(Set<Integer> routes) {
 			long[][] res = new long[3][];
 			for (int k = 0; k < 3; k++) {
@@ -236,7 +328,8 @@ public final class GtfsRoutePlanner {
 		}
 
 		/** Scans the connections and returns the best itinerary, or null. */
-		GtfsItinerary scan(long[][] trips, int transferPenalty) {
+		GtfsItinerary scan(long[][] trips, int ridePenalty) {
+			penalty = ridePenalty;
 			kind.clear();
 			a.clear();
 			b.clear();
@@ -272,7 +365,7 @@ public final class GtfsRoutePlanner {
 						k = i;
 					}
 				}
-				if (k < 0 || eff > limit || eff >= bestArrival) {
+				if (k < 0 || eff > limit || (bestLabel >= 0 && eff >= bestArrival + (long) rides.get(bestLabel) * penalty)) {
 					break;
 				}
 				int c = pos[k]++;
@@ -302,9 +395,9 @@ public final class GtfsRoutePlanner {
 					arrivalLabel[stop] = ride;
 				}
 				int stay = index.stopMinTransfer.get(stop) > 0 ? index.stopMinTransfer.get(stop) : o.transferBufferSec;
-				if (before(at + stay + transferPenalty, r, ready[stop], readyLabel[stop])) {
+				if (before(at + stay, r, ready[stop], readyLabel[stop])) {
 					ride = ride >= 0 ? ride : newLabel(RIDE, c, board, r, at, k);
-					ready[stop] = at + stay + transferPenalty;
+					ready[stop] = at + stay;
 					readyLabel[stop] = ride;
 				}
 				if (!improved) {
@@ -322,7 +415,7 @@ public final class GtfsRoutePlanner {
 						continue;
 					}
 					int arrive = at + (listed ? w : walkSeconds(w));
-					int readyAt = arrive + (listed ? 0 : o.transferBufferSec) + transferPenalty;
+					int readyAt = arrive + (listed ? 0 : o.transferBufferSec);
 					boolean newArrival = before(arrive, r, arrival[n], arrivalLabel[n]);
 					boolean newReady = before(readyAt, r, ready[n], readyLabel[n]);
 					if (!newArrival && !newReady) {
@@ -350,9 +443,14 @@ public final class GtfsRoutePlanner {
 			return itinerary(bestLabel, bestStop, bestArrival, rides.get(bestLabel));
 		}
 
-		/** Earlier time wins, then fewer rides. */
+		/** Earlier time (plus the penalty per ride) wins, then fewer rides. */
 		private boolean before(int t, int ridesOfNew, int oldTime, int oldLabel) {
-			return t < oldTime || (t == oldTime && oldLabel >= 0 && ridesOfNew < rides.get(oldLabel));
+			if (oldLabel < 0) {
+				return t < oldTime;
+			}
+			int ridesOld = rides.get(oldLabel);
+			long cn = t + (long) ridesOfNew * penalty, co = oldTime + (long) ridesOld * penalty;
+			return cn < co || (cn == co && ridesOfNew < ridesOld);
 		}
 
 		// ---------------------------------------------------------------- result
@@ -370,20 +468,21 @@ public final class GtfsRoutePlanner {
 			long end = epoch(arrival);
 			int egress = egressWalk[lastStop];
 			legs.add(GtfsLeg.walk(end - egress, end, lastStop, -1, stopPoint(lastStop), to,
-					(int) Math.round(distance(stopLat[lastStop], stopLon[lastStop], to))));
+					(int) Math.round(distance(stopLat[lastStop], stopLon[lastStop], to)), o.walkDetourFactor));
 			int cur = last;
 			while (true) {
 				int k = kind.get(cur);
 				if (k == ACCESS) {
 					int s = a.get(cur);
 					legs.add(GtfsLeg.walk(epoch(time.get(cur)) - accessWalk[s], epoch(time.get(cur)), -1, s, from,
-							stopPoint(s), (int) Math.round(distance(stopLat[s], stopLon[s], from))));
+							stopPoint(s), (int) Math.round(distance(stopLat[s], stopLon[s], from)), o.walkDetourFactor));
 					break;
 				} else if (k == FOOT) {
 					int ride = b.get(cur), fromStop = index.connTo.get(a.get(ride)), toStop = a.get(cur);
 					legs.add(GtfsLeg.walk(epoch(time.get(ride)), epoch(time.get(cur)), fromStop, toStop,
 							stopPoint(fromStop), stopPoint(toStop), (int) Math.round(GtfsIndex.distanceMeters(
-							stopLat[fromStop], stopLon[fromStop], stopLat[toStop], stopLon[toStop]))));
+							stopLat[fromStop], stopLon[fromStop], stopLat[toStop], stopLon[toStop])),
+							o.walkDetourFactor));
 					cur = ride;
 				} else { // RIDE: the boarding label tells where it began and what came before
 					int board = b.get(cur);
@@ -399,7 +498,8 @@ public final class GtfsRoutePlanner {
 				legs.set(0, first.withTimes(start, start + (first.endSec - first.startSec)));
 			}
 			legs.removeIf(l -> l.type == GtfsLeg.Type.WALK && l.startSec == l.endSec && l.walkMeters == 0);
-			return new GtfsItinerary(legs, legs.get(0).startSec, legs.get(legs.size() - 1).endSec, rideCount - 1);
+			return new GtfsItinerary(legs, legs.get(0).startSec, legs.get(legs.size() - 1).endSec, rideCount - 1,
+					departEpoch);
 		}
 
 		private double distance(int lat, int lon, LatLon p) {

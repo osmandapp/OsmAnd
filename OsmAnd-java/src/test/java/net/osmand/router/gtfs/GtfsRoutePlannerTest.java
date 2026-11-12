@@ -352,19 +352,22 @@ public class GtfsRoutePlannerTest {
 
 	@Test
 	public void alternativeWithoutTheFirstRoute() throws IOException {
+		// fast ends 750 m short of the destination, slow ends 110 m from it: later, but a different line and less walking
+		LatLon dest = new LatLon(at('C').getLatitude(), at('C').getLongitude() - 0.0013);
 		GtfsFixture f = GtfsFixture.basic()
 				.trip("fast", "R1", "WD", "A 08:00:00", "B 08:10:00")
-				.trip("slow", "R2", "WD", "A 08:02:00", "B 08:20:00");
-		List<GtfsItinerary> r = plan(planner(f), 'A', 'B', TUE, "07:55");
+				.trip("slow", "R2", "WD", "A 08:02:00", "C 08:30:00");
+		GtfsRoutePlanner p = planner(f);
+		List<GtfsItinerary> r = p.plan(at('A'), dest, epoch(TUE, "07:55"), null, null);
 		assertEquals(2, r.size());
 		assertEquals("fast", trip(rides(r.get(0)).get(0)));
 		assertEquals("slow", trip(rides(r.get(1)).get(0)));
 		GtfsPlanOptions o = new GtfsPlanOptions();
 		o.maxItineraries = 1;
-		assertEquals(1, planner(f).plan(at('A'), at('B'), epoch(TUE, "07:55"), o, null).size());
+		assertEquals(1, p.plan(at('A'), dest, epoch(TUE, "07:55"), o, null).size());
 		o.maxItineraries = 3;
-		o.maxAlternativeDelaySec = 300; // 10 minutes later is too much
-		assertEquals(1, planner(f).plan(at('A'), at('B'), epoch(TUE, "07:55"), o, null).size());
+		o.maxAlternativeDelaySec = 300; // 9 minutes later is too much
+		assertEquals(1, p.plan(at('A'), dest, epoch(TUE, "07:55"), o, null).size());
 	}
 
 	@Test
@@ -416,5 +419,54 @@ public class GtfsRoutePlannerTest {
 		assertTrue(p.plan(at('A'), at('D'), epoch(TUE, "07:55"), null, cancel).isEmpty());
 		assertNotNull(DelayProvider.NONE);
 		assertEquals(0, DelayProvider.NONE.arrivalDelaySec(3, 4));
+	}
+
+	// ------------------------------------------------------------------ reporting
+
+	@Test
+	public void walkLengthsAreReportedStraightAndDetourAdjusted() throws IOException {
+		GtfsFixture f = GtfsFixture.basic().trip("t1", "R1", "WD", "A 08:00:00", "B 08:10:00");
+		LatLon from = new LatLon(at('A').getLatitude(), at('A').getLongitude() - 0.002); // about 170 m west
+		LatLon to = new LatLon(at('B').getLatitude(), at('B').getLongitude() + 0.002);
+		GtfsItinerary it = planner(f).plan(from, to, epoch(TUE, "07:50"), null, null).get(0);
+		int straight = 0, adjusted = 0;
+		for (GtfsLeg l : it.legs) {
+			if (l.type == GtfsLeg.Type.WALK) {
+				assertEquals(Math.round(l.walkMeters * 1.3), l.walkMetersAdjusted);
+				// the time a walk takes is the adjusted length at the walking speed
+				assertEquals(l.walkMetersAdjusted / 1.25, l.endSec - l.startSec, 1);
+				straight += l.walkMeters;
+				adjusted += l.walkMetersAdjusted;
+			} else {
+				assertEquals(0, l.walkMetersAdjusted);
+			}
+		}
+		assertTrue(straight > 300);
+		assertEquals(straight, it.walkMeters);
+		assertEquals(adjusted, it.walkMetersAdjusted);
+	}
+
+	@Test
+	public void detourFactorOfTheOptionsIsUsedForTheAdjustedLength() throws IOException {
+		GtfsFixture f = GtfsFixture.basic().trip("t1", "R1", "WD", "A 08:00:00", "B 08:10:00");
+		LatLon from = new LatLon(at('A').getLatitude(), at('A').getLongitude() - 0.002);
+		GtfsPlanOptions o = new GtfsPlanOptions();
+		o.walkDetourFactor = 1.0;
+		GtfsItinerary it = planner(f).plan(from, at('B'), epoch(TUE, "07:50"), o, null).get(0);
+		assertEquals(it.walkMeters, it.walkMetersAdjusted);
+	}
+
+	@Test
+	public void requestedDepartureAndVehicleTimeAreReportedBesideTheShiftedDeparture() throws IOException {
+		GtfsFixture f = GtfsFixture.basic().trip("t1", "R1", "WD", "A 08:00:00", "B 08:10:00");
+		LatLon from = new LatLon(at('A').getLatitude(), at('A').getLongitude() - 0.002);
+		long request = epoch(TUE, "07:30");
+		GtfsItinerary it = planner(f).plan(from, at('B'), request, null, null).get(0);
+		assertEquals(request, it.requestedDepartSec);
+		assertTrue("the walk is shifted to just before the bus", it.departSec > request + 1500);
+		assertEquals(600, it.inVehicleSec);
+		assertEquals(it.arriveSec - it.departSec, it.durationSec());
+		assertEquals(it.arriveSec - request, it.durationFromRequestSec());
+		assertTrue(it.durationFromRequestSec() > it.durationSec());
 	}
 }
