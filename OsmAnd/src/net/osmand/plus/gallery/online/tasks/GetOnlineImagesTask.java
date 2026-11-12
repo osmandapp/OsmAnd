@@ -109,6 +109,8 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 					if (item != null) {
 						holder.addItem(MAPILLARY_AMENITY, item);
 					}
+				} else {
+					holder.markIncomplete();
 				}
 			}
 			String panoramaxValue = params.remove(Amenity.PANORAMAX);
