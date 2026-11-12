@@ -64,6 +64,8 @@ import java.util.Map.Entry;
 public class MapRendererContext {
 	private static final String TAG = "MapRendererContext";
 	public static final String MAP_TILE_DISK_CACHE_FILE = "map_tiles.db";
+	private static final String LEGACY_HILLSHADE_CACHE_FILE = "hillshade.cache";
+	private static final long TERRAIN_CACHE_KEEP_TIME = 7 * 24 * 60 * 60 * 1000L;
 
 	public static final int OBF_RASTER_LAYER = 0;
 	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
@@ -740,8 +742,41 @@ public class MapRendererContext {
 			}
 			geoTiffCollection.addDirectory(geotiffDir.getAbsolutePath());
 			geoTiffCollection.setLocalCache(sqliteCacheDir.getAbsolutePath());
+			new Thread(this::limitTerrainCacheSize, "TerrainCacheLimit").start();
 		}
 		return geoTiffCollection;
+	}
+
+	/**
+	 * Keeps the terrain caches under the size limit: removes the tiles older than a week first, then all of them
+	 */
+	public void limitTerrainCacheSize() {
+		Algorithms.removeAllFiles(new File(app.getCacheDir(), LEGACY_HILLSHADE_CACHE_FILE));
+		long limitBytes = app.getSettings().TERRAIN_CACHE_SIZE_MB.get() * 1024L * 1024L;
+		if (limitBytes <= 0 || getTerrainCacheSize() <= limitBytes) {
+			return;
+		}
+		GeoTiffCollection geoTiffCollection = getGeoTiffCollection();
+		long now = System.currentTimeMillis();
+		for (long time : new long[] {now - TERRAIN_CACHE_KEEP_TIME, now}) {
+			for (RasterType rasterType : RasterType.values()) {
+				geoTiffCollection.removeOlderTilesFromCache(rasterType, time);
+			}
+			if (getTerrainCacheSize() <= limitBytes) {
+				break;
+			}
+		}
+	}
+
+	public long getTerrainCacheSize() {
+		long size = 0;
+		File[] files = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR).listFiles();
+		if (files != null) {
+			for (File file : files) {
+				size += file.length();
+			}
+		}
+		return size;
 	}
 
 	@Nullable

@@ -127,6 +127,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupMaxRenderingThreadsPref();
 		setupMapTileDiskCachePref();
+		setupTerrainCacheSizePref();
 		setupMemoryAllocatedForRoutingPref();
 		setupGlobalAppAllocatedMemoryPref();
 		setupNativeAppAllocatedMemoryPref();
@@ -281,6 +282,21 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		preference.setEntryValues(entryValues);
 		preference.setDescription(getString(R.string.map_tiles_disk_cache_descr,
 				AndroidUtils.formatSize(app, file.exists() ? file.length() : 0)));
+		preference.setIconSpaceReserved(false);
+	}
+
+	private void setupTerrainCacheSizePref() {
+		Integer[] entryValues = {256, 512, 1024, 2048, 4096};
+		String[] entries = new String[entryValues.length];
+		for (int i = 0; i < entryValues.length; i++) {
+			entries[i] = getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(entryValues[i]), "MB");
+		}
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		long size = mapRendererContext != null ? mapRendererContext.getTerrainCacheSize() : 0;
+		ListPreferenceEx preference = findPreference(settings.TERRAIN_CACHE_SIZE_MB.getId());
+		preference.setEntries(entries);
+		preference.setEntryValues(entryValues);
+		preference.setDescription(getString(R.string.terrain_cache_limit_descr, AndroidUtils.formatSize(app, size)));
 		preference.setIconSpaceReserved(false);
 	}
 
@@ -494,6 +510,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 				mapRendererContext.updateMapTileDiskCache();
 			}
 			setupMapTileDiskCachePref();
+		} else if (prefId.equals(settings.TERRAIN_CACHE_SIZE_MB.getId())) {
+			applyPreference(prefId, applyToAllProfiles, newValue);
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				new Thread(mapRendererContext::limitTerrainCacheSize, "TerrainCacheLimit").start();
+			}
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
