@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.dashboard.DashboardType
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -43,7 +44,12 @@ class GtfsGuidancePanel(private val activity: MapActivity, private val session: 
 		detail.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
 		buttons.orientation = LinearLayout.HORIZONTAL
 		buttons.gravity = Gravity.END
-		root.addView(title)
+		val header = LinearLayout(activity)
+		header.orientation = LinearLayout.HORIZONTAL
+		header.gravity = Gravity.CENTER_VERTICAL
+		header.addView(title, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
+		header.addView(menuButton(), LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+		root.addView(header)
 		root.addView(detail)
 		root.addView(buttons)
 	}
@@ -87,7 +93,24 @@ class GtfsGuidancePanel(private val activity: MapActivity, private val session: 
 		addButton(R.string.gtfs_guide_cancel, Command.CANCEL)
 	}
 
-	private fun addButton(textId: Int, command: Command) {
+	/**
+	 * While a trip is guided the stock navigation UI hides the map's Menu button, so the panel carries one that
+	 * opens the same menu (and from there Plugins and the settings). Cancel ends guidance and navigation.
+	 */
+	private fun menuButton(): Button {
+		val button = styledButton(R.string.gtfs_guide_menu)
+		button.setOnClickListener {
+			MapActivity.clearPrevActivityIntent()
+			if (app.settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get()) {
+				activity.dashboard.setDashboardVisibility(true, DashboardType.DASHBOARD, AndroidUtils.getCenterViewCoordinates(it))
+			} else {
+				activity.openDrawer()
+			}
+		}
+		return button
+	}
+
+	private fun styledButton(textId: Int): Button {
 		val button = Button(activity, null, android.R.attr.borderlessButtonStyle)
 		button.setText(textId)
 		button.isAllCaps = false
@@ -95,6 +118,11 @@ class GtfsGuidancePanel(private val activity: MapActivity, private val session: 
 		button.setTextColor(ColorUtilities.getActiveColor(app, nightMode))
 		button.minWidth = 0
 		button.minimumWidth = 0
+		return button
+	}
+
+	private fun addButton(textId: Int, command: Command) {
+		val button = styledButton(textId)
 		button.setOnClickListener { session.command(command) }
 		buttons.addView(button, LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
 	}

@@ -33,6 +33,7 @@
 	<string name="gtfs_guide_skip">Skip</string>
 	<string name="gtfs_guide_replan">Replan</string>
 	<string name="gtfs_guide_cancel">Cancel</string>
+	<string name="gtfs_guide_menu">Menu</string>
 	<string name="gtfs_guide_no_index">The timetable index is not available, guidance cannot start</string>
 	<string name="gtfs_guide_replan_failed">No timetable trip found from here, guidance ended</string>
 	<plurals name="gtfs_guide_stops">

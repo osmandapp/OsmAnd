@@ -14,6 +14,8 @@ import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.measurementtool.GpxApproximationParams;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.gtfs.GtfsTransitPlugin;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -46,6 +48,13 @@ public class RestoreNavigationHelper {
 	}
 
 	public void checkRestoreRoutingMode() {
+		// A timetable trip is being guided and survives the activity being recreated (rotation, theme change):
+		// restoring the stock route would clear it (and its guidance session) and start a road route.
+		GtfsTransitPlugin gtfs = PluginsHelper.getActivePlugin(GtfsTransitPlugin.class);
+		if (gtfs != null && gtfs.getGuidanceSession() != null) {
+			LOG.info("Try to restore route - GTFS guidance is running, nothing to restore");
+			return;
+		}
 		// This situation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
 		if (settings.FOLLOW_THE_ROUTE.get() && !routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {

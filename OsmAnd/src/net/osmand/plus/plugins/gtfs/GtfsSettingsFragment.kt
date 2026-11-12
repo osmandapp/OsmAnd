@@ -173,6 +173,15 @@ class GtfsSettingsFragment : BaseSettingsFragment() {
 		return true
 	}
 
+	/** The open dialog, dismissed with the view so rotation does not leak its window. */
+	private var openDialog: AlertDialog? = null
+
+	override fun onDestroyView() {
+		openDialog?.dismiss()
+		openDialog = null
+		super.onDestroyView()
+	}
+
 	private fun chooseFiles() {
 		val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
 			.addCategory(Intent.CATEGORY_OPENABLE)
@@ -207,7 +216,8 @@ class GtfsSettingsFragment : BaseSettingsFragment() {
 	}
 
 	private fun confirmRemove(name: String) {
-		AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), nightMode))
+		openDialog?.dismiss()
+		openDialog = AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), nightMode))
 			.setMessage(getString(R.string.gtfs_remove_feed_question, name))
 			.setNegativeButton(R.string.shared_string_cancel, null)
 			.setPositiveButton(R.string.shared_string_remove) { _, _ ->
@@ -221,7 +231,8 @@ class GtfsSettingsFragment : BaseSettingsFragment() {
 		val values = intArrayOf(400, 600, 800, 1000, 1500, 2000)
 		val labels = values.map { "$it m" }.toTypedArray()
 		val current = values.indexOf(plugin.maxWalkMeters.get())
-		AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), nightMode))
+		openDialog?.dismiss()
+		openDialog = AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), nightMode))
 			.setTitle(R.string.gtfs_max_walk)
 			.setSingleChoiceItems(labels, current) { dialog, which ->
 				plugin.maxWalkMeters.set(values[which])
