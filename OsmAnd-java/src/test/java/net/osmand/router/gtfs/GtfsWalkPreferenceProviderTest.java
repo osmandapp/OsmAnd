@@ -1,13 +1,13 @@
-package net.osmand.router.gtfs.selftest;
+package net.osmand.router.gtfs;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,8 +20,6 @@ import net.osmand.data.LatLon;
 import net.osmand.router.TimedTransportRoute;
 import net.osmand.router.TransportRouteRequest;
 import net.osmand.router.TransportRouteResult;
-import net.osmand.router.gtfs.GtfsIndexSource;
-import net.osmand.router.gtfs.GtfsTransitRouteProvider;
 
 /**
  * The "walking vs. transit" setting reaches the planner through the provider: on the Avenue J area to Murrow trip at
@@ -42,15 +40,14 @@ public class GtfsWalkPreferenceProviderTest {
 	public void lessWalkingChangesTheFirstOptionAndFastestKeepsTheEarliestArrival() throws Exception {
 		String dir = System.getProperty("gtfs.mta.dir");
 		Assume.assumeTrue("gtfs.mta.dir is not set", dir != null && !dir.isEmpty());
-		List<File> zips = new ArrayList<>();
+		GtfsFeedStore store = new GtfsFeedStore(tmp.newFolder("feeds"));
 		for (String n : new String[] {"gtfs_b", "gtfs_busco", "gtfs_bx", "gtfs_m", "gtfs_q", "gtfs_si", "gtfs_subway"}) {
 			File f = new File(dir, n + ".zip");
 			Assume.assumeTrue(f + " is missing", f.isFile());
-			zips.add(f);
+			store.addFeed(n + ".zip", Files.newInputStream(f.toPath()), f.length(), null);
 		}
-		SelfTestEnv env = new SelfTestEnv(tmp.newFolder("w"), zips);
-		env.sink = l -> { };
-		GtfsIndexSource source = new GtfsIndexSource(env.ensureIndex());
+		store.rebuild(null);
+		GtfsIndexSource source = new GtfsIndexSource(store.getIndexFile());
 		int[] percent = {0};
 		GtfsTransitRouteProvider p = new GtfsTransitRouteProvider(source, () -> 800);
 		p.setWalkWeightPercent(() -> percent[0]);
