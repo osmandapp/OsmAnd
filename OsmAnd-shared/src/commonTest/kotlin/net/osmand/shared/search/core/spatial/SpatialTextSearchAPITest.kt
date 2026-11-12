@@ -33,6 +33,9 @@ import net.osmand.shared.util.openJavaDump
 import okio.FileSystem
 import okio.Path.Companion.toPath
 import okio.buffer
+import net.osmand.shared.search.core.SearchPhrase
+import net.osmand.shared.search.core.SearchSettings
+import kotlin.test.assertEquals
 import kotlin.test.Test
 import kotlin.test.assertTrue
 import kotlin.test.fail
@@ -62,6 +65,28 @@ class SpatialTextSearchAPITest {
 	private var names: SpatialPoiSearch? = null
 	private val languages = HashSet<String>()
 	private val languageNames = HashSet<String>()
+
+	@Test
+	fun radiusExpansionStopsAfterSevenHundredKilometers() {
+		SearchPhraseTest.setUp
+		val rules = SpatialSearchQueryRulesTest.rulesDir()
+		try {
+			val api = SpatialTextSearchAPI(MapPoiTypes.getDefault(), rules.toString())
+			for (text in listOf("Amsterdam", "Amsterdam ")) {
+				val initialRadius = if (text.endsWith(" ")) 400_000 else 300_000
+				for (level in 1..4) {
+					val settings = SearchSettings(emptyList()).setLang("en", false).setRadiusLevel(level)
+					val phrase = SearchPhrase.emptyPhrase(settings).generateNewPhrase(text, settings)
+					assertEquals(if (level == 1) initialRadius else if (level == 2) 500_000 else 700_000,
+						api.getMinimalSearchRadius(phrase), "$text level $level")
+					assertEquals(if (level == 1) 500_000 else 700_000, api.getNextSearchRadius(phrase))
+					assertEquals(level < 3, api.isSearchMoreAvailable(phrase))
+				}
+			}
+		} finally {
+			FileSystem.SYSTEM.deleteRecursively(rules)
+		}
+	}
 
 	@Test
 	fun sameAsJava() {
