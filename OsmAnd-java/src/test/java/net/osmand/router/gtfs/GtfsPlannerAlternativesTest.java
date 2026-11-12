@@ -16,6 +16,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import net.osmand.data.LatLon;
+
 /** Alternatives of {@link GtfsRoutePlanner}: deduplication, dominance, generation and ranking. */
 public class GtfsPlannerAlternativesTest {
 
@@ -144,5 +146,96 @@ public class GtfsPlannerAlternativesTest {
 				.trip("fast", "R1", "WD", "A 08:00:00", "B 08:10:00")
 				.trip("slow", "R2", "WD", "A 08:02:00", "B 08:20:00");
 		assertEquals(1, plan(f, 'A', 'B', "07:55", null).size());
+	}
+
+	// ------------------------------------------------------------------ generation
+
+	@Test
+	public void slowerDirectRideAppearsBesideTheFasterTransfer() throws IOException {
+		// like Q44-SBS beside 7X+E: the direct ride arrives 15 minutes later than the best, with one transfer fewer
+		GtfsFixture f = GtfsFixture.basic()
+				.trip("first", "R1", "WD", "A 08:00:00", "B 08:10:00")
+				.trip("second", "R2", "WD", "B 08:13:00", "C 08:20:00")
+				.trip("direct", "R1", "WD", "A 08:01:00", "C 08:35:00");
+		List<GtfsItinerary> r = plan(f, 'A', 'C', "07:55", null);
+		assertEquals(2, r.size());
+		assertEquals(Arrays.asList("R1", "R2"), routes(r.get(0)));
+		assertEquals(Arrays.asList("R1"), routes(r.get(1)));
+		assertEquals(epoch(TUE, "08:35"), r.get(1).arriveSec);
+	}
+
+	@Test
+	public void banningTheSecondRouteFindsAnotherConnection() throws IOException {
+		// banning R1 (the first ride) leaves nothing; banning R2 gives R1 + R3, later but ending 85 m from the goal
+		GtfsFixture f = GtfsFixture.basic().row("routes.txt", "R3,L3,Line Three,3,")
+				.trip("a", "R1", "WD", "A 08:00:00", "B 08:10:00")
+				.trip("b", "R2", "WD", "B 08:13:00", "C 08:20:00")
+				.trip("c", "R3", "WD", "B 08:14:00", "D 08:40:00");
+		LatLon dest = new LatLon(at('D').getLatitude(), at('D').getLongitude() - 0.001);
+		List<GtfsItinerary> r = planner(f).plan(at('A'), dest, epoch(TUE, "07:55"), null, null);
+		assertEquals(2, r.size());
+		assertEquals(Arrays.asList("R1", "R2"), routes(r.get(0)));
+		assertEquals(Arrays.asList("R1", "R3"), routes(r.get(1)));
+	}
+
+	@Test
+	public void routeBansAreCapped() throws IOException {
+		GtfsFixture f = GtfsFixture.basic().row("routes.txt", "R3,L3,Line Three,3,")
+				.trip("a", "R1", "WD", "A 08:00:00", "B 08:10:00")
+				.trip("b", "R2", "WD", "B 08:13:00", "C 08:20:00")
+				.trip("c", "R3", "WD", "B 08:14:00", "D 08:40:00");
+		LatLon dest = new LatLon(at('D').getLatitude(), at('D').getLongitude() - 0.001);
+		GtfsPlanOptions o = new GtfsPlanOptions();
+		o.maxRouteBans = 1;
+		assertEquals(1, planner(f).plan(at('A'), dest, epoch(TUE, "07:55"), o, null).size());
+	}
+
+	@Test
+	public void bestItineraryDoesNotDependOnTheAlternativeSearch() throws IOException {
+		GtfsFixture f = GtfsFixture.basic()
+				.trip("first", "R1", "WD", "A 08:00:00", "B 08:10:00")
+				.trip("second", "R2", "WD", "B 08:13:00", "C 08:20:00")
+				.trip("direct", "R1", "WD", "A 08:01:00", "C 08:35:00");
+		GtfsPlanOptions one = new GtfsPlanOptions();
+		one.maxItineraries = 1;
+		GtfsRoutePlanner p = planner(f);
+		GtfsItinerary alone = p.plan(at('A'), at('C'), epoch(TUE, "07:55"), one, null).get(0);
+		GtfsItinerary first = p.plan(at('A'), at('C'), epoch(TUE, "07:55"), null, null).get(0);
+		assertEquals(alone.arriveSec, first.arriveSec);
+		assertEquals(alone.transfers, first.transfers);
+		assertEquals(routes(alone), routes(first));
+	}
+
+	// ------------------------------------------------------------------ ranking
+
+	@Test
+	public void fewerTransfersWinWithinTheTolerance() {
+		GtfsItinerary best = itinerary(10000, 200, 1, 2);
+		GtfsItinerary oneTransfer = itinerary(10200, 100, 3, 4);
+		GtfsItinerary directLater = itinerary(10400, 150, 5); // 200 s after the other, 1 transfer fewer
+		GtfsItinerary directMuchLater = itinerary(10900, 50, 6);
+		GtfsPlanOptions o = new GtfsPlanOptions(); // 300 s per transfer
+		o.maxItineraries = 4;
+		assertEquals(Arrays.asList(best, directLater, oneTransfer, directMuchLater),
+				accept(o, best, oneTransfer, directMuchLater, directLater));
+		o.fewerTransfersToleranceSec = 0; // pure arrival order
+		assertEquals(Arrays.asList(best, oneTransfer, directLater, directMuchLater),
+				accept(o, best, oneTransfer, directMuchLater, directLater));
+	}
+
+	@Test
+	public void bestStaysFirstEvenWhenAnAlternativeScoresBetter() {
+		GtfsItinerary best = itinerary(10000, 200, 1, 2);
+		GtfsItinerary direct = itinerary(10100, 200, 3);
+		List<GtfsItinerary> r = accept(new GtfsPlanOptions(), best, direct);
+		assertSame(best, r.get(0));
+		assertSame(direct, r.get(1));
+	}
+
+	@Test
+	public void sameArrivalWithFewerTransfersTakesTheFirstPlace() {
+		GtfsItinerary best = itinerary(10000, 100, 1, 2);
+		GtfsItinerary tie = itinerary(10000, 200, 3);
+		assertEquals(Arrays.asList(tie, best), accept(new GtfsPlanOptions(), best, tie));
 	}
 }
