@@ -238,4 +238,24 @@ public class GtfsPlannerAlternativesTest {
 		GtfsItinerary tie = itinerary(10000, 200, 3);
 		assertEquals(Arrays.asList(tie, best), accept(new GtfsPlanOptions(), best, tie));
 	}
+
+	// ------------------------------------------------------------------ walking speed
+
+	@Test
+	public void walkSpeedIsConfigurableAndDefaultsTo125() throws IOException {
+		assertEquals(1.25, new GtfsPlanOptions().walkSpeedMps, 0);
+		GtfsFixture f = GtfsFixture.basic().trip("t1", "R1", "WD", "A 08:00:00", "B 08:10:00");
+		LatLon from = new LatLon(at('A').getLatitude(), at('A').getLongitude() - 0.002);
+		GtfsRoutePlanner p = planner(f);
+		long[] secs = new long[2];
+		double[] speeds = {1.25, 1.35};
+		for (int i = 0; i < 2; i++) {
+			GtfsPlanOptions o = new GtfsPlanOptions();
+			o.walkSpeedMps = speeds[i];
+			GtfsLeg walk = p.plan(from, at('B'), epoch(TUE, "07:50"), o, null).get(0).legs.get(0);
+			secs[i] = walk.endSec - walk.startSec;
+			assertEquals(walk.walkMetersAdjusted / speeds[i], secs[i], 1);
+		}
+		assertEquals(true, secs[1] < secs[0]);
+	}
 }
