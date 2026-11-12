@@ -5374,4 +5374,15 @@
     <string name="crash_report_sent">Bericht gesendet. Vielen Dank!</string>
     <string name="coordinate_format_primary">Primär</string>
     <string name="rendering_attr_surface_clay_name">Ton</string>
+    <string name="astro_eclipse_below_horizon">%1$s • unter dem Horizont (%2$.1f°)</string>
+    <string name="rendering_attr_surface_laterite_name">Laterit</string>
+    <string name="flyover_recording">Aufnahme eines Kartenvideos: %1$s</string>
+    <string name="coordinate_format_cancel_changes_message">Änderungen an den Koordinatenformaten verwerfen?</string>
+    <string name="astro_lunar_eclipse_below_horizon">%1$s • Mond unter dem Horizont (%2$.1f°)</string>
+    <string name="astro_lunar_eclipse_simple_status">%1$s • Mondhöhe: %2$.1f°</string>
+    <string name="coordinate_format_add_title">Format hinzufügen</string>
+    <string name="ais_connection_udp_desc">Empfängt Daten, die im lokalen Netzwerk gesendet werden. Es ist keine Adresse erforderlich.</string>
+    <string name="tracks_backup_promo_button">OsmAnd Pro holen</string>
+    <string name="astro_lunar_eclipse_rendering_note">Kartenfarbton: Mond über dem Horizont. Die Farben und Helligkeit der Schatten sind schematisch dargestellt.</string>
+    <string name="astro_eclipse_phase_penumbral">Halbschatten</string>
 </resources>
