@@ -38,10 +38,10 @@ class SpatialPoiSearchTest {
 
 	@Test
 	fun testMatchedNameOfValueIsCutBeforeColon() {
-		val poiSearch = createPoiSearch(mapOf("subway_station" to "Станція метро: так;Subway station: yes;metro"))
+		val poiSearch = createPoiSearch(mapOf("smoking_yes" to "Куріння: дозволено;Rauchen: erlaubt"))
 
-		assertEquals("Станція метро", getMatchedName(poiSearch, "станція", "subway_station"))
-		assertEquals("Subway station", getMatchedName(poiSearch, "subway", "subway_station"))
+		assertEquals("Куріння", getMatchedName(poiSearch, "куріння", "smoking_yes"))
+		assertEquals("Rauchen", getMatchedName(poiSearch, "rauchen", "smoking_yes"))
 	}
 
 	private fun createPoiSearch(phrases: Map<String, String>): SpatialPoiSearch {

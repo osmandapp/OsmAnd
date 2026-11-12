@@ -29,11 +29,10 @@ public class SpatialPoiSearchTest {
 
 	@Test
 	public void testMatchedNameOfValueIsCutBeforeColon() throws IOException {
-		SpatialPoiSearch poiSearch = createPoiSearch(Map.of(
-				"subway_station", "Станція метро: так;Subway station: yes;metro"));
+		SpatialPoiSearch poiSearch = createPoiSearch(Map.of("smoking_yes", "Куріння: дозволено;Rauchen: erlaubt"));
 
-		Assert.assertEquals("Станція метро", getMatchedName(poiSearch, "станція", "subway_station"));
-		Assert.assertEquals("Subway station", getMatchedName(poiSearch, "subway", "subway_station"));
+		Assert.assertEquals("Куріння", getMatchedName(poiSearch, "куріння", "smoking_yes"));
+		Assert.assertEquals("Rauchen", getMatchedName(poiSearch, "rauchen", "smoking_yes"));
 	}
 
 	private static SpatialPoiSearch createPoiSearch(Map<String, String> phrases) {
