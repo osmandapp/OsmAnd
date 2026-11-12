@@ -315,6 +315,14 @@ public class GLOffscreenRenderer implements MapRendererViewListener {
 		// rows are bottom-up (vertically flipped relative to screen space).
 		offscreenView.enableFrameReader();
 		printContext.setMapRendererView(offscreenView);
+		// Paper maps are metric: 3D relief displaces and shades the terrain,
+		// shifting features against the printed UTM grid. setMapRendererView
+		// just attached the elevation provider (SRTM 3D maps enabled) — strip
+		// it from the print viewport. The live map is unaffected: restore()
+		// rebinds a context whose setMapRendererView re-runs
+		// recreateHeightmapProvider() per the SRTM setting.
+		offscreenView.resetElevationDataProvider();
+		Log.i(TAG, "print viewport: elevation data provider reset (3D relief off)");
 		mainHandler.post(this::step3ConfigureTarget);
 	}
 
