@@ -1292,6 +1292,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		unfilteredResultCollection = source;
 		renderSearchResult(getFilteredResultCollection(source), false);
 		updateTopFilterChips();
+		addMoreButton(isSearchMoreAvailable(source.getPhrase()));
 	}
 
 	@NonNull
