@@ -16,14 +16,12 @@ import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.shared.SharedUtil;
-import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.gpx.DataItem;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
@@ -166,17 +164,9 @@ public class GpxSettingsItem extends FileSettingsItem {
 		return new FileSettingsItemReader(this) {
 			@Override
 			public File readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile, @Nullable String entryName) throws IOException, IllegalArgumentException {
-				super.readFromStream(inputStream, inputFile, entryName);
-
-				GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
-				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(file.getAbsolutePath());
-				if (selectedGpxFile != null) {
-					GpxFile gpxFile = SharedUtil.loadGpxFile(file);
-					GpxSelectionParams params = GpxSelectionParams.newInstance()
-							.showOnMap().syncGroup().setSelectedByUser(selectedGpxFile.selectedByUser);
-					gpxHelper.selectGpxFile(gpxFile, params);
-				} else {
-					gpxHelper.onGpxFileAvailable(file.getAbsolutePath());
+				File downloadedFile = super.readFromStream(inputStream, inputFile, entryName);
+				if (file.equals(downloadedFile)) {
+					app.getSelectedGpxHelper().onGpxFileReplaced(file.getAbsolutePath());
 				}
 				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 				KFile kFile = SharedUtil.kFile(file);

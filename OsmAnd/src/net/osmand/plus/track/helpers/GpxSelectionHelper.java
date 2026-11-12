@@ -412,20 +412,31 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	/** Restores a pending selection whose file has just appeared, for example after a cloud download. */
-	public void onGpxFileAvailable(@NonNull String path) {
-		boolean retry = false;
-		synchronized (pendingSelections) {
-			PendingSelection selection = pendingSelections.get(path);
-			if (selection != null && selection.restoreAttempted) {
-				selection.restoreAttempted = false;
-				selection.restoreAttempts = 0;
-				retry = true;
+	/** Restores a pending or shown selection after its GPX file appears or is replaced on disk. */
+	public void onGpxFileReplaced(@NonNull String path) {
+		app.runInUIThread(() -> {
+			synchronized (pendingSelections) {
+				PendingSelection pending = pendingSelections.get(path);
+				int generation = restoreGeneration.get();
+				if (pending != null) {
+					// Replace the entry so a callback reading the previous file cannot apply it.
+					pendingSelections.put(path, new PendingSelection(path, pending.selectedByUser,
+							pending.color, pending.hiddenGroups, generation));
+				} else {
+					SelectedGpxFile selected = getSelectedFileByPath(path);
+					if (selected == null) {
+						return;
+					}
+					GpxFile gpx = selected.getGpxFile();
+					int color = gpx.getColor(0);
+					pendingSelections.put(path, new PendingSelection(path, selected.selectedByUser,
+							color != 0 ? color : null, saveHiddenGroups(gpx), generation));
+				}
 			}
-		}
-		if (retry && !app.isApplicationInitializing()) {
-			app.runInUIThread(this::startPendingGpxRestore);
-		}
+			if (!app.isApplicationInitializing()) {
+				startPendingGpxRestore();
+			}
+		});
 	}
 
 	private boolean readSelections(@Nullable String load) {
