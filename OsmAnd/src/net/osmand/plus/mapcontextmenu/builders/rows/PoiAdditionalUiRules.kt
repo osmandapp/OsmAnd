@@ -6,6 +6,7 @@ import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.CuisineRowBehavior
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.DistanceRowBehaviour
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.EleRowBehaviour
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.CapacityRowBehaviour
+import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.CheckDateRowBehaviour
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.LiquidCapacityRowBehaviour
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.MaxWeightRowBehaviour
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.MetricRowBehaviour
@@ -105,6 +106,11 @@ object PoiAdditionalUiRules {
             key = Amenity.POPULATION,
             isNeedLinks = false,
             behavior = PopulationRowBehaviour
+        ),
+        PoiAdditionalUiRule(
+            key = Amenity.CHECK_DATE,
+            isNeedLinks = false,
+            behavior = CheckDateRowBehaviour
         ),
         PoiAdditionalUiRule(
             key = "internet_access_fee_yes",
