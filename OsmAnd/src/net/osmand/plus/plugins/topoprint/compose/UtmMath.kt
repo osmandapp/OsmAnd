@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.topoprint.compose
 import com.jwetherell.openmap.common.Ellipsoid
 import com.jwetherell.openmap.common.LatLonPoint
 import com.jwetherell.openmap.common.UTMPoint
+import net.osmand.data.LatLon
 
 /**
  * UTM coordinates within a single zone, used for the printed map frame and
@@ -166,6 +167,28 @@ object UtmMath {
 		val x = Math.cos(phi1) * Math.sin(phi2) -
 				Math.sin(phi1) * Math.cos(phi2) * Math.cos(deltaLambda)
 		return Math.toDegrees(Math.atan2(y, x))
+	}
+
+	/**
+	 * Hemisphere convention for a centre latitude: 'N' for lat >= 0.0 — the
+	 * same rule the openmap implementation uses for its zone letter. All
+	 * sheet-wide conversions must share the centre's convention so northings
+	 * stay continuous across the equator.
+	 */
+	fun isNorthern(latitude: Double): Boolean = latitude >= 0.0
+
+	/**
+	 * Equirectangular ground distance in meters (~111.32 km per degree,
+	 * longitude scaled by cos of the target latitude) — the cheap drift
+	 * metric the GL capture gates compare against their tolerances. Accurate
+	 * far below the 0.2% print tolerances at the few-kilometre scales where
+	 * it is used.
+	 */
+	fun distanceMeters(from: LatLon, to: LatLon): Double {
+		val metersPerDegLat = 111320.0
+		val metersPerDegLon = 111320.0 * Math.cos(Math.toRadians(to.latitude))
+		return Math.hypot((from.latitude - to.latitude) * metersPerDegLat,
+				(from.longitude - to.longitude) * metersPerDegLon)
 	}
 
 	/**

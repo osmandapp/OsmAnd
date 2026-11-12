@@ -11,9 +11,6 @@ import android.graphics.Typeface;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.jwetherell.openmap.common.LatLonPoint;
-import com.jwetherell.openmap.common.UTMPoint;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
@@ -21,6 +18,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.topoprint.PrintParameters;
 import net.osmand.plus.plugins.topoprint.TopoPrintPlugin;
+import net.osmand.plus.plugins.topoprint.compose.UtmCoordinate;
+import net.osmand.plus.plugins.topoprint.compose.UtmMath;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -82,18 +81,20 @@ public class PrintPreviewLayer extends OsmandMapLayer {
 
 		PrintParameters params = plugin.getPrintParameters();
 		LatLon center = tb.getCenterLatLon();
-		UTMPoint centerUtm = toUtm(center);
-		if (centerUtm == null) {
+		UtmCoordinate centerUtm;
+		try {
+			centerUtm = UtmMath.INSTANCE.fromLatLon(center.getLatitude(), center.getLongitude());
+		} catch (Exception e) {
 			return;
 		}
 		double halfWidthMeters = params.getMapWidthMeters() / 2;
 		double halfHeightMeters = params.getMapHeightMeters() / 2;
 
 		LatLon[] corners = {
-				utmToLatLon(centerUtm, centerUtm.northing + halfHeightMeters, centerUtm.easting - halfWidthMeters),
-				utmToLatLon(centerUtm, centerUtm.northing + halfHeightMeters, centerUtm.easting + halfWidthMeters),
-				utmToLatLon(centerUtm, centerUtm.northing - halfHeightMeters, centerUtm.easting + halfWidthMeters),
-				utmToLatLon(centerUtm, centerUtm.northing - halfHeightMeters, centerUtm.easting - halfWidthMeters)
+				toLatLon(centerUtm, centerUtm.getEasting() - halfWidthMeters, centerUtm.getNorthing() + halfHeightMeters),
+				toLatLon(centerUtm, centerUtm.getEasting() + halfWidthMeters, centerUtm.getNorthing() + halfHeightMeters),
+				toLatLon(centerUtm, centerUtm.getEasting() + halfWidthMeters, centerUtm.getNorthing() - halfHeightMeters),
+				toLatLon(centerUtm, centerUtm.getEasting() - halfWidthMeters, centerUtm.getNorthing() - halfHeightMeters)
 		};
 
 		framePath.reset();
@@ -148,20 +149,12 @@ public class PrintPreviewLayer extends OsmandMapLayer {
 	}
 
 	@Nullable
-	private static UTMPoint toUtm(@NonNull LatLon latLon) {
+	private static LatLon toLatLon(@NonNull UtmCoordinate template, double easting, double northing) {
 		try {
-			return new UTMPoint(new LatLonPoint(latLon.getLatitude(), latLon.getLongitude()));
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	@Nullable
-	private static LatLon utmToLatLon(@NonNull UTMPoint template, double northing, double easting) {
-		try {
-			UTMPoint point = new UTMPoint(northing, easting, template.zone_number, template.zone_letter);
-			LatLonPoint latLon = point.toLatLonPoint();
-			return new LatLon(latLon.getLatitude(), latLon.getLongitude());
+			kotlin.Pair<Double, Double> latLon = UtmMath.INSTANCE.toLatLon(
+					new UtmCoordinate(template.getZoneNumber(), template.getZoneLetter(),
+							easting, northing));
+			return new LatLon(latLon.getFirst(), latLon.getSecond());
 		} catch (Exception e) {
 			return null;
 		}

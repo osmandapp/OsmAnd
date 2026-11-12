@@ -468,16 +468,19 @@ class SvgMapComposer(
 	 * corner falls into it — or null when the whole sheet lies inside the
 	 * centre zone.
 	 */
-	private fun secondaryZone(): Int? {
-		val zone1 = geometry.centerUtm.zoneNumber
-		val letter = geometry.centerUtm.zoneLetter
-		val corners = listOf(
+	/** Lat/lon of the four georeferenced raster corners (centre-zone UTM → lat/lon). */
+	private fun rasterCornerLatLons(zone1: Int, letter: Char): List<Pair<Double, Double>> =
+		listOf(
 			UtmCoordinate(zone1, letter, raster.eastingTopLeft, raster.northingTopLeft),
 			UtmCoordinate(zone1, letter, raster.eastingTopRight, raster.northingTopRight),
 			UtmCoordinate(zone1, letter, raster.eastingBottomLeft, raster.northingBottomLeft),
-			UtmCoordinate(zone1, letter, raster.eastingBottomRight, raster.northingBottomRight))
-		for (corner in corners) {
-			val (lat, lon) = UtmMath.toLatLon(corner)
+			UtmCoordinate(zone1, letter, raster.eastingBottomRight, raster.northingBottomRight)
+		).map { UtmMath.toLatLon(it) }
+
+	private fun secondaryZone(): Int? {
+		val zone1 = geometry.centerUtm.zoneNumber
+		val letter = geometry.centerUtm.zoneLetter
+		for ((lat, lon) in rasterCornerLatLons(zone1, letter)) {
 			val natural = UtmMath.fromLatLon(lat, lon).zoneNumber
 			if (natural != zone1) {
 				return natural
@@ -524,15 +527,9 @@ class SvgMapComposer(
 		}
 
 		// Zone-2 extents of the raster corners (forced into zone 2).
-		val cornerCoords = listOf(
-			raster.eastingTopLeft to raster.northingTopLeft,
-			raster.eastingTopRight to raster.northingTopRight,
-			raster.eastingBottomLeft to raster.northingBottomLeft,
-			raster.eastingBottomRight to raster.northingBottomRight)
 		val eastings2 = mutableListOf<Double>()
 		val northings2 = mutableListOf<Double>()
-		for ((easting1, northing1) in cornerCoords) {
-			val (lat, lon) = UtmMath.toLatLon(UtmCoordinate(zone1, letter, easting1, northing1))
+		for ((lat, lon) in rasterCornerLatLons(zone1, letter)) {
 			val inZone2 = UtmMath.fromLatLon(lat, lon, zone2, isNorthern)
 			eastings2.add(inZone2.easting)
 			northings2.add(inZone2.northing)

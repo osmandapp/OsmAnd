@@ -11,6 +11,7 @@ import net.osmand.plus.plugins.topoprint.compose.Geomagnetism
 import net.osmand.plus.plugins.topoprint.compose.PrintGeometry
 import net.osmand.plus.plugins.topoprint.compose.SvgMapComposer
 import net.osmand.plus.plugins.topoprint.compose.UtmMath
+import net.osmand.plus.plugins.topoprint.compose.UtmQuadrilateral
 import net.osmand.plus.plugins.topoprint.export.SvgToPngRenderer
 import org.apache.commons.logging.Log
 import java.io.BufferedReader
@@ -180,22 +181,20 @@ class PrintMapTask(
 			// continuous instead of jumping by the 10M false northing).
 			val zone = geometry.bbox.center.zoneNumber
 			val isNorthern = geometry.bbox.center.isNorthern
-			val topLeft = UtmMath.fromLatLon(georef.topLeft.latitude, georef.topLeft.longitude, zone, isNorthern)
-			val topRight = UtmMath.fromLatLon(georef.topRight.latitude, georef.topRight.longitude, zone, isNorthern)
-			val bottomLeft = UtmMath.fromLatLon(georef.bottomLeft.latitude, georef.bottomLeft.longitude, zone, isNorthern)
-			val bottomRight = UtmMath.fromLatLon(georef.bottomRight.latitude, georef.bottomRight.longitude, zone, isNorthern)
-			log.info("raster utm: tl=${topLeft.easting},${topLeft.northing} " +
-					"br=${bottomRight.easting},${bottomRight.northing} (zone $zone)")
+			val quad = UtmQuadrilateral.fromLatLons(zone, isNorthern,
+				georef.topLeft, georef.topRight, georef.bottomRight, georef.bottomLeft)
+			log.info("raster utm: tl=${quad.topLeft.easting},${quad.topLeft.northing} " +
+					"br=${quad.bottomRight.easting},${quad.bottomRight.northing} (zone $zone)")
 			val raster = SvgMapComposer.Raster(
 				pngFileName = basemapFile.name,
-				eastingTopLeft = topLeft.easting,
-				northingTopLeft = topLeft.northing,
-				eastingTopRight = topRight.easting,
-				northingTopRight = topRight.northing,
-				eastingBottomLeft = bottomLeft.easting,
-				northingBottomLeft = bottomLeft.northing,
-				eastingBottomRight = bottomRight.easting,
-				northingBottomRight = bottomRight.northing
+				eastingTopLeft = quad.topLeft.easting,
+				northingTopLeft = quad.topLeft.northing,
+				eastingTopRight = quad.topRight.easting,
+				northingTopRight = quad.topRight.northing,
+				eastingBottomLeft = quad.bottomLeft.easting,
+				northingBottomLeft = quad.bottomLeft.northing,
+				eastingBottomRight = quad.bottomRight.easting,
+				northingBottomRight = quad.bottomRight.northing
 			)
 
 			if (!saveBasemap(renderResult.bitmap, basemapFile)) {

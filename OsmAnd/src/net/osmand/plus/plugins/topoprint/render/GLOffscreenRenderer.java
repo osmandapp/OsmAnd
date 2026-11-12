@@ -23,6 +23,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.topoprint.PrintParameters;
 import net.osmand.plus.plugins.topoprint.TopoPrintPlugin;
 import net.osmand.plus.plugins.topoprint.compose.UtmMath;
+import net.osmand.plus.plugins.topoprint.compose.UtmQuadrilateral;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.PointLocationLayer;
@@ -459,10 +460,7 @@ public class GLOffscreenRenderer implements MapRendererViewListener {
 	}
 
 	private static double distanceMeters(@NonNull LatLon from, @NonNull LatLon to) {
-		double metersPerDegLat = 111320.0;
-		double metersPerDegLon = 111320.0 * Math.cos(Math.toRadians(to.getLatitude()));
-		return Math.hypot((from.getLatitude() - to.getLatitude()) * metersPerDegLat,
-				(from.getLongitude() - to.getLongitude()) * metersPerDegLon);
+		return UtmMath.INSTANCE.distanceMeters(from, to);
 	}
 
 	/** Fresh settle budget for one calibration round or gate retry. */
@@ -602,17 +600,10 @@ public class GLOffscreenRenderer implements MapRendererViewListener {
 		int zone = UtmMath.INSTANCE.fromLatLon(center.getLatitude(), center.getLongitude()).getZoneNumber();
 		// Sheet-wide hemisphere convention keeps northings continuous across
 		// the equator (see rasterCoversMapFrame).
-		boolean isNorthern = center.getLatitude() >= 0.0;
-		double eastTopLeft = UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone, isNorthern).getEasting();
-		double eastTopRight = UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone, isNorthern).getEasting();
-		double eastBottomLeft = UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone, isNorthern).getEasting();
-		double eastBottomRight = UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone, isNorthern).getEasting();
-		double northTopLeft = UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone, isNorthern).getNorthing();
-		double northTopRight = UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone, isNorthern).getNorthing();
-		double northBottomLeft = UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone, isNorthern).getNorthing();
-		double northBottomRight = UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone, isNorthern).getNorthing();
-		double measuredWidth = ((eastTopRight + eastBottomRight) - (eastTopLeft + eastBottomLeft)) / 2.0;
-		double measuredHeight = ((northTopLeft + northTopRight) - (northBottomLeft + northBottomRight)) / 2.0;
+		boolean isNorthern = UtmMath.INSTANCE.isNorthern(center.getLatitude());
+		UtmQuadrilateral quad = UtmQuadrilateral.fromLatLons(zone, isNorthern, tl, tr, br, bl);
+		double measuredWidth = quad.getAveragedWidthMeters();
+		double measuredHeight = quad.getAveragedHeightMeters();
 		Log.i(TAG, "coverage measure: measured=" + measuredWidth + "x" + measuredHeight
 				+ " requested=" + widthMeters + "x" + heightMeters);
 		if (measuredWidth <= 0 || measuredHeight <= 0) {
@@ -817,7 +808,7 @@ public class GLOffscreenRenderer implements MapRendererViewListener {
 		// keep its northings continuous — mixing the per-point hemisphere
 		// makes the southern corners jump ~10,000 km and fails the coverage
 		// check for a perfectly centred sheet.
-		boolean isNorthern = center.getLatitude() >= 0.0;
+		boolean isNorthern = UtmMath.INSTANCE.isNorthern(center.getLatitude());
 		double mapHalfW = params.getMapWidthMeters() / 2.0;
 		double mapHalfH = params.getMapHeightMeters() / 2.0;
 		double cE = UtmMath.INSTANCE.fromLatLon(center.getLatitude(), center.getLongitude(), zone, isNorthern).getEasting();
@@ -826,32 +817,12 @@ public class GLOffscreenRenderer implements MapRendererViewListener {
 		double eMax = cE + mapHalfW;
 		double nMin = cN - mapHalfH;
 		double nMax = cN + mapHalfH;
-		double[] eastings = {
-				UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone, isNorthern).getEasting(),
-				UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone, isNorthern).getEasting(),
-				UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone, isNorthern).getEasting(),
-				UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone, isNorthern).getEasting()};
-		double[] northings = {
-				UtmMath.INSTANCE.fromLatLon(tl.getLatitude(), tl.getLongitude(), zone, isNorthern).getNorthing(),
-				UtmMath.INSTANCE.fromLatLon(tr.getLatitude(), tr.getLongitude(), zone, isNorthern).getNorthing(),
-				UtmMath.INSTANCE.fromLatLon(br.getLatitude(), br.getLongitude(), zone, isNorthern).getNorthing(),
-				UtmMath.INSTANCE.fromLatLon(bl.getLatitude(), bl.getLongitude(), zone, isNorthern).getNorthing()};
-		double rEMin = Double.MAX_VALUE, rEMax = -Double.MAX_VALUE;
-		double rNMin = Double.MAX_VALUE, rNMax = -Double.MAX_VALUE;
-		for (double e : eastings) {
-			rEMin = Math.min(rEMin, e);
-			rEMax = Math.max(rEMax, e);
-		}
-		for (double n : northings) {
-			rNMin = Math.min(rNMin, n);
-			rNMax = Math.max(rNMax, n);
-		}
-		// Mercator-north-up raster corners form a slightly rotated quadrilateral
-		// in UTM; the axis-aligned raster rect bounds approximate the coverage.
-		boolean covered = rEMin <= eMin && rEMax >= eMax && rNMin <= nMin && rNMax >= nMax;
+		UtmQuadrilateral quad = UtmQuadrilateral.fromLatLons(zone, isNorthern, tl, tr, br, bl);
+		boolean covered = quad.containsFrame(eMin, eMax, nMin, nMax);
 		if (!covered) {
 			Log.w(TAG, "frame rect in UTM: E[" + eMin + "," + eMax + "] N[" + nMin + "," + nMax
-					+ "] raster rect: E[" + rEMin + "," + rEMax + "] N[" + rNMin + "," + rNMax + "]");
+					+ "] raster rect: E[" + quad.getEastingMin() + "," + quad.getEastingMax()
+					+ "] N[" + quad.getNorthingMin() + "," + quad.getNorthingMax() + "]");
 		}
 		return covered;
 	}
