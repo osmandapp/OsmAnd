@@ -3288,8 +3288,8 @@
     <string name="poi_scooter_yes">Roller</string>
     <string name="poi_scooter_no">Roller nem</string>
     <string name="poi_truck_no">Teherautóval nem használható</string>
-    <string name="poi_parking_fee_yes">van</string>
-    <string name="poi_parking_fee_no">nincs</string>
+    <string name="poi_parking_fee_yes">Parkolási díj: van</string>
+    <string name="poi_parking_fee_no">Parkolási díj: nincs</string>
     <string name="poi_parking_fee">Parkolási díj</string>
     <string name="poi_amperage">Áramerősség (A)</string>
     <string name="poi_charging_station_output">Töltőpont teljesítménye</string>
@@ -4380,8 +4380,8 @@
     <string name="poi_climbing_grade_novice">Újonc</string>
     <string name="poi_climbing_grade_beginner">Kezdő</string>
     <string name="poi_climbing_bolt_anchor">Horgony</string>
-    <string name="poi_climbing_bolts_yes">vannak</string>
-    <string name="poi_climbing_bolts_no">nincsenek</string>
+    <string name="poi_climbing_bolts_yes">Sziklamászó csavarok: vannak</string>
+    <string name="poi_climbing_bolts_no">Sziklamászó csavarok: nincsenek</string>
     <string name="poi_climbing_quality_medium">Közepes</string>
     <string name="poi_climbing_rock_basalt">Mászókőzet: bazalt</string>
     <string name="poi_climbing_grade_saxon_mean">Átlagos útvonal (szász fokozat)</string>

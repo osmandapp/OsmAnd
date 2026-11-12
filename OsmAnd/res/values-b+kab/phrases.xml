@@ -267,7 +267,7 @@
     <string name="poi_caravans_yes">Tiɣlamin: ih</string>
     <string name="poi_washing_machine_yes">Tamacint n usired: ih</string>
     <string name="poi_scout_yes">Ih</string>
-    <string name="poi_backcountry_no">Uhu</string>
+    <string name="poi_backcountry_no">Azaɣar: uhu</string>
     <string name="poi_backcountry_yes">Azaɣar: ih</string>
     <string name="poi_tents_yes">Iqiḍunen: tessireg</string>
     <string name="poi_massage_chinese">Tacinwatt</string>
@@ -364,7 +364,7 @@
     <string name="poi_logging">Journalisation</string>
     <string name="poi_farmland">Akal n tkerrazt</string>
     <string name="poi_garden">Tibḥirt</string>
-    <string name="poi_traffic_signals_sound_no">Uhu</string>
+    <string name="poi_traffic_signals_sound_no">Imesli: uhu</string>
     <string name="poi_traffic_signals_sound_yes">Imesli: ih</string>
     <string name="poi_tactile_paving_yes">Anasiw annalan: ih</string>
     <string name="poi_smoking_yes">Akeyyef: tessireg</string>

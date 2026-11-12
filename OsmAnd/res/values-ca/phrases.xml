@@ -1350,7 +1350,7 @@
     <string name="poi_fireplace_no">Sense llar de foc</string>
     <string name="poi_tactile_paving_no">Sense pavimentació tàctil</string>
     <string name="poi_traffic_signals_sound_yes">So: sí</string>
-    <string name="poi_traffic_signals_sound_no">No</string>
+    <string name="poi_traffic_signals_sound_no">So: no</string>
     <string name="poi_traffic_signals_sound_walk">Només quan es pot caminar</string>
     <string name="poi_rescue_station">Estació de rescat</string>
     <string name="poi_services">Àrea de servei</string>
@@ -3122,8 +3122,8 @@
     <string name="poi_water_place_access_community">Comunitat</string>
     <string name="poi_water_place_access_family">Família</string>
     <string name="poi_water_place_access_multifamilies">Multifamílies</string>
-    <string name="poi_parking_fee_yes">Sí</string>
-    <string name="poi_parking_fee_no">No</string>
+    <string name="poi_parking_fee_yes">Tarifa d\'aparcament: sí</string>
+    <string name="poi_parking_fee_no">Tarifa d\'aparcament: no</string>
     <string name="poi_post_street">Carrer</string>
     <string name="poi_checkpoint_type_code">Codi</string>
     <string name="poi_books_religion">Religió</string>

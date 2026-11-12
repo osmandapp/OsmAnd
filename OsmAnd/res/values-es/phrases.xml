@@ -3280,8 +3280,8 @@
     <string name="poi_scooter_yes">Escúter: sí</string>
     <string name="poi_scooter_no">Escúter: no</string>
     <string name="poi_truck_no">Camión: no</string>
-    <string name="poi_parking_fee_yes">Sí</string>
-    <string name="poi_parking_fee_no">No</string>
+    <string name="poi_parking_fee_yes">Tarifa de aparcamiento: sí</string>
+    <string name="poi_parking_fee_no">Tarifa de aparcamiento: no</string>
     <string name="poi_parking_fee">Aparcamiento tarifado</string>
     <string name="poi_amperage">Amperaje</string>
     <string name="poi_charging_station_output">Salida de la estación de carga</string>
@@ -4378,14 +4378,14 @@
     <string name="poi_climbing_grade_expert">Experto</string>
     <string name="poi_climbing_grade_elite">Élite</string>
     <string name="poi_climbing_bolt_anchor">Ancla</string>
-    <string name="poi_climbing_bolts_no">No</string>
+    <string name="poi_climbing_bolts_no">Pernos de escalada: no</string>
     <string name="poi_climbing_bolts">Pernos de escalada</string>
     <string name="poi_climbing_speed_yes">Velocidad: si</string>
     <string name="poi_climbing_grade_filter">Nivel de la escalada</string>
     <string name="poi_climbing_rock_gritstone">Roca para escalar: arenisca</string>
     <string name="poi_climbing_rock_basalt">Roca para escalar: basalto</string>
     <string name="poi_climbing_grade_uiaa_max">Ruta más difícil (grado UIAA)</string>
-    <string name="poi_climbing_bolts_yes">Sí</string>
+    <string name="poi_climbing_bolts_yes">Pernos de escalada: sí</string>
     <string name="poi_climbing_quality_medium">Medio</string>
     <string name="poi_climbing_grade_french_max">Ruta más difícil (grado francés)</string>
     <string name="poi_climbing_bolt_abseil">Rápel</string>

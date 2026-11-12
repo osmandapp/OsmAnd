@@ -1151,7 +1151,7 @@
     <string name="poi_fee_yes">Apmaksa: jā</string>
     <string name="poi_fee_no">Apmaksa: nē</string>
     <string name="poi_drinking_water_yes">Dzeramais ūdens: jā</string>
-    <string name="poi_drinking_water_no">Nē</string>
+    <string name="poi_drinking_water_no">Dzeramais ūdens: nē</string>
     <string name="poi_supervised_yes">Uzraudzīts</string>
     <string name="poi_supervised_no">Bez uzraudzības</string>
     <string name="poi_seasonal_yes">Sezonas: jā</string>
@@ -1334,7 +1334,7 @@
     <string name="poi_toll_hgv_yes">Maksas kravas automašīnām</string>
     <string name="poi_tactile_paving_yes">Taktīlais segums (īpaša reljefaina josla): jā</string>
     <string name="poi_traffic_signals_sound_yes">Skaņa: jā</string>
-    <string name="poi_traffic_signals_sound_no">Nē</string>
+    <string name="poi_traffic_signals_sound_no">Skaņa: nē</string>
     <string name="poi_traffic_signals_sound_walk">Tikai tad, kad atļauts iet</string>
     <string name="poi_rescue_station">Glābšanas stacijas</string>
     <string name="poi_mini_roundabout">Mini aplis</string>
@@ -1976,7 +1976,7 @@
     <string name="poi_openfire_yes">Kurināt ugunskuru atļauts</string>
     <string name="poi_openfire_no">Kurināt ugunskuru aizliegts</string>
     <string name="poi_backcountry_yes">Lauku apvidus: jā</string>
-    <string name="poi_backcountry_no">Nē</string>
+    <string name="poi_backcountry_no">Lauku apvidus: nē</string>
     <string name="poi_survey_point">Ğeodēziskā zīme;ģeodēziskais punkts</string>
     <string name="poi_village_green">Piemājas mauriņš</string>
     <string name="poi_craft_rigger">Ceļamkrāni un celtņi</string>

@@ -1633,7 +1633,7 @@
     <string name="poi_playground_activitypanel">Veiklos skydelis</string>
     <string name="poi_playground_horizontal_bar">Horizontali juosta</string>
     <string name="poi_access_yes">Bendra prieiga: taip</string>
-    <string name="poi_parking_fee_yes">Taip</string>
+    <string name="poi_parking_fee_yes">Mokestis už stovėjimą: taip</string>
     <string name="poi_furniture_no">Baldai: ne</string>
     <string name="poi_heating_no">Šildymas: ne</string>
     <string name="poi_mattress_no">Čiužinys: ne</string>
@@ -1643,9 +1643,9 @@
     <string name="poi_dry_cleaning_no">Sausas valymas: ne</string>
     <string name="poi_fridge_no">Šaldytuvas: ne</string>
     <string name="poi_membership_no">Narystė: ne</string>
-    <string name="poi_parking_fee_no">Ne</string>
+    <string name="poi_parking_fee_no">Mokestis už stovėjimą: ne</string>
     <string name="poi_coffee_no">Kava: ne</string>
-    <string name="poi_climbing_bolts_yes">Taip</string>
+    <string name="poi_climbing_bolts_yes">Kopimo kabliukai: taip</string>
     <string name="poi_socket_cee_blue">Lizdas: CEE mėlynas</string>
     <string name="poi_judo">Dziudo</string>
     <string name="poi_health_service_prevention_no">Sveikatos priežiūros paslaugos: prevencija: ne</string>
@@ -2433,7 +2433,7 @@
     <string name="poi_museum_language">Kalbos</string>
     <string name="poi_museum_health">Sveikatos</string>
     <string name="poi_climbing_quality_medium">Vidutinė</string>
-    <string name="poi_climbing_bolts_no">Ne</string>
+    <string name="poi_climbing_bolts_no">Kopimo kabliukai: ne</string>
     <string name="poi_socket_type3a_voltage">Lizdas: 3a tipas: įtampa</string>
     <string name="poi_socket_type3a_output">Lizdas: 3a tipas: išvestis</string>
     <string name="poi_socket_cee_red_125a_voltage">Lizdas: CEE raudonas 125A: įtampa</string>
@@ -5014,7 +5014,7 @@
     <string name="poi_climbing_area">Alpinizmo zona</string>
     <string name="poi_climbing_route">Alpinizmo maršrutas</string>
     <string name="poi_climbing_route_bottom">Alpinizmo maršruto apačia</string>
-    <string name="poi_cafe_yes">Taip</string>
+    <string name="poi_cafe_yes">Kavinė: taip</string>
     <string name="poi_sled_yes">Rogutės: taip</string>
     <string name="poi_sled_no">Rogutės: ne</string>
     <string name="poi_dog_sled_yes">Šunų kinkinys: taip</string>

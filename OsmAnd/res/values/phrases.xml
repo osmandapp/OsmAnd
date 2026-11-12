@@ -3953,8 +3953,8 @@
 	<string name="poi_scooter_no">Scooter: no</string>
 	<string name="poi_truck_no">Truck: no</string>
 
-	<string name="poi_parking_fee_yes">Yes</string>
-	<string name="poi_parking_fee_no">No</string>
+	<string name="poi_parking_fee_yes">Parking fee: yes</string>
+	<string name="poi_parking_fee_no">Parking fee: no</string>
 	<string name="poi_parking_fee">Parking fee</string>
 
 	<string name="poi_amperage">Amperage</string>
@@ -5158,8 +5158,8 @@
 	<string name="poi_climbing_bolt_abseil">Abseil</string>
 	<string name="poi_climbing_bolt_anchor">Anchor</string>
 
-	<string name="poi_climbing_bolts_yes">Yes</string>
-	<string name="poi_climbing_bolts_no">No</string>
+	<string name="poi_climbing_bolts_yes">Climbing bolts: yes</string>
+	<string name="poi_climbing_bolts_no">Climbing bolts: no</string>
 	<string name="poi_climbing_bolts">Climbing bolts</string>
 	<string name="poi_climbing_quality_medium">Medium</string>
 
