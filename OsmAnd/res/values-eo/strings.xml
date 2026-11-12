@@ -5463,4 +5463,16 @@
     <string name="detach_media_title_plural">Ĉu malligi %1$d aŭdvidaĵojn?</string>
     <string name="detach_media_descr">La dosiero ne estos plu videbla kun tiu ĉi ŝatata punkto. Tamen ĝi restos en via aparato kaj en la biblioteko de aŭdvidaĵoj.</string>
     <string name="detach_media_descr_plural">La dosieroj ne estos plu videblaj kun tiu ĉi ŝatata punkto. Tamen ili restos en via aparato kaj en la biblioteko de aŭdvidaĵoj.</string>
+    <string name="shared_string_detach">Malligi</string>
+    <string name="media_delete_failed">Ne povas forigi aŭdvidaĵon.</string>
+    <string name="media_detach_failed">Ne povas malligi aŭdvidaĵon.</string>
+    <string name="media_library_empty_title">Ankoraŭ neniu aŭdvidaĵo</string>
+    <string name="media_library_empty_descr">Kreu fotan, filman aŭ sonan noton sur la mapo, aŭ kunligu aŭdvidaĵon al ŝatata punkto. Ĉio – kion vi registros aŭ kunligos – aperos tie ĉi.</string>
+    <string name="shared_string_grid">krado</string>
+    <string name="shared_string_group">grupigi</string>
+    <string name="gallery_sort_size_large_small">dosiergrando (malkreskante)</string>
+    <string name="gallery_sort_size_small_large">dosiergrando (kreskante)</string>
+    <string name="media_attached_more_count">+%1$d</string>
+    <string name="latest_builds">Plej novaj kompilaĵoj</string>
+    <string name="osmand_api_permission_missing">%1$s: aktivigu “%2$s” en la Menuo → Kromprogramoj</string>
 </resources>
