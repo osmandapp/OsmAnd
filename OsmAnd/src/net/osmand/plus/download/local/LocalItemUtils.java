@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.map.ITileSource;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.TileSourceManager;
@@ -206,7 +207,7 @@ public class LocalItemUtils {
 		} else if (name.endsWith(BINARY_MAP_INDEX_EXT)) {
 			return name.endsWith(BINARY_ROAD_MAP_INDEX_EXT) ? ROAD_DATA : MAP_DATA;
 		} else if (path.startsWith(app.getCacheDir().getAbsolutePath()) && (path.contains(WEATHER_FORECAST_DIR)
-				|| path.contains(GEOTIFF_SQLITE_CACHE_DIR))) {
+				|| path.contains(GEOTIFF_SQLITE_CACHE_DIR) || name.equals(MapRendererContext.MAP_TILE_DISK_CACHE_FILE))) {
 			return file.isFile() ? CACHE : null;
 		} else if (path.contains(COLOR_PALETTE_DIR) && name.endsWith(TXT_EXT)) {
 			return COLOR_DATA;
@@ -237,6 +238,8 @@ public class LocalItemUtils {
 				return context.getString(R.string.shared_string_slope);
 			} else if (fileName.equals("weather_tiffs.db")) {
 				return context.getString(R.string.weather_online);
+			} else if (fileName.equals(MapRendererContext.MAP_TILE_DISK_CACHE_FILE)) {
+				return context.getString(R.string.shared_string_map);
 			}
 		} else if (CollectionUtils.equalsToAny(type, VOICE_DATA, TTS_VOICE_DATA)) {
 			return FileNameTranslationHelper.getVoiceName(context, fileName);
