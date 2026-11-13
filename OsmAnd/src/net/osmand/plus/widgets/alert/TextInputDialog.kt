@@ -17,8 +17,8 @@ import net.osmand.plus.utils.UiUtilities
  * [CustomAlert.showInput].
  *
  * The positive button passes the text to `onSave` only when [validator] returns no error;
- * otherwise the error is shown under the field and the dialog stays open. The error is cleared
- * as soon as the text is valid again.
+ * otherwise the error is shown under the field and the dialog stays open. While an error is shown,
+ * it follows the text and is cleared as soon as the text is valid again.
  */
 class TextInputDialog(
 	private val context: Context,
@@ -44,7 +44,7 @@ class TextInputDialog(
 		editText.setText(initialText)
 		editText.setSelection(initialText.length)
 		editText.doAfterTextChanged {
-			if (inputLayout.error != null && validator(it?.toString().orEmpty()) == null) inputLayout.error = null
+			if (inputLayout.error != null) inputLayout.error = validator(it?.toString().orEmpty())
 		}
 
 		val dialog = MaterialAlertDialogBuilder(materialContext)
