@@ -4214,6 +4214,10 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_gpx_track">Track</string>
     <string name="max_speed">Maximum speed</string>
     <string name="average_speed">Average speed</string>
+    <string name="max_power">Maximum power</string>
+    <string name="average_power">Average power</string>
+    <string name="intensity_factor">Intensity Factor</string>
+    <string name="training_stress_score">Training Stress Score</string>
     <string name="shared_string_time_moving">Time moving</string>
     <string name="shared_string_time_span">Time span</string>
     <string name="shared_string_max">Max</string>
