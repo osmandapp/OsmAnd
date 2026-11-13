@@ -105,6 +105,7 @@ object MediaItemMenu {
 		else entry.title.substringBeforeLast('.')
 		TextInputDialog(activity, nightMode, R.string.shared_string_rename, R.string.shared_string_name).apply {
 			initialText = currentName
+			positiveButtonId = R.string.shared_string_rename
 			validator = {
 				when {
 					it.isBlank() -> activity.getString(R.string.empty_name)
