@@ -5868,4 +5868,9 @@
     <string name="public_transport_route_out_of_memory">O trajeto do transporte público é muito longo para ser calculado neste aparelho. Escolha um destino mais próximo.</string>
     <string name="release_5_5">• Pesquisa espacial ativada por padrão: pesquisa nas proximidades de um local, melhor classificação, sinônimos, tolerância a erros de digitação\n\n • Edifícios em 3D projetam sombras, com direção do sol ajustável\n\n • Plug-in Panoramax: imagens em nível de rua no mapa\n\n • Biblioteca de mídia: todas as fotos, vídeos e notas de áudio em um só lugar\n\n • Linhas de trilha tracejadas e pontilhadas; aparência padrão por pasta de trilha\n\n • Configurações de velocidade de viagem para cálculo de rota e tempo de chegada\n\n • Android Auto: destinos recentes, Free Ride automático, Google Assistente e Gemini\n\n • Ação rápida para mostrar ou ocultar trilhas\n\n • Rótulos das linhas de contorno voltados para a subida</string>
     <string name="duplicate_map_standard_exists_desc">Você já possui o mapa padrão para %1$s. Baixar o mapa apenas de estradas resultará na duplicação de dados e poderá prejudicar o desempenho.\n\nA substituição removerá os dados de pesquisa de endereços e de pontos de interesse (POI) incluídos no mapa padrão.</string>
+    <string name="visualization">Visualização</string>
+    <string name="terrain_shadows">Sombras do terreno</string>
+    <string name="terrain_shadows_description">Sombreamento dinâmico em tempo real para terrenos 3D. Realça a geometria da paisagem com impacto mínimo no desempenho.</string>
+    <string name="cast_shadows">Sombras</string>
+    <string name="terrain_shadows_relief_3d_footer">O relevo 3D é ativado automaticamente, pois é necessário para renderizar as sombras do terreno.</string>
 </resources>

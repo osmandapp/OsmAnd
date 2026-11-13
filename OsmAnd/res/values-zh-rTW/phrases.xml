@@ -40,8 +40,8 @@
     <string name="poi_military">軍事地</string>
     <string name="poi_user_defined_other">使用者定義</string>
     <string name="poi_palaeontological_site">古生物遺址</string>
-    <string name="poi_bakery">麵包店;蛋糕店</string>
-    <string name="poi_alcohol">酒品店</string>
+    <string name="poi_bakery">麵包店</string>
+    <string name="poi_alcohol">酒品店；酒類專賣店；酒類；酒舖</string>
     <string name="poi_convenience">便利商店;便利店;便利超商</string>
     <string name="poi_mall">購物中心</string>
     <string name="poi_beverages">飲料店</string>
@@ -51,7 +51,7 @@
     <string name="poi_greengrocer">蔬果店;蔬果零售店</string>
     <string name="poi_seafood">海産店</string>
     <string name="poi_confectionery">糖果店;糕餅店;糕餅行</string>
-    <string name="poi_ice_cream">霜淇淋店</string>
+    <string name="poi_ice_cream">冰淇淋店</string>
     <string name="poi_supermarket">超市;超級市場</string>
     <string name="poi_tea">茶飲店</string>
     <string name="poi_dairy">乳品店</string>
@@ -66,7 +66,7 @@
     <string name="poi_bag">包包店;箱包店</string>
     <string name="poi_bathroom_furnishing">衛浴設備</string>
     <string name="poi_bed">寢具商店</string>
-    <string name="poi_boutique">時尚精品;精品店</string>
+    <string name="poi_boutique">時尚精品</string>
     <string name="poi_carpet">地毯店</string>
     <string name="poi_charity">義賣店;慈善商店</string>
     <string name="poi_chemist">藥局;藥妝店</string>
@@ -449,7 +449,7 @@
     <string name="poi_aquarium">水族館</string>
     <string name="poi_theme_park">主題公園</string>
     <string name="poi_attraction">旅遊景點;名勝;觀光景點</string>
-    <string name="poi_attraction_amusement_ride">遊戲機</string>
+    <string name="poi_attraction_amusement_ride">遊樂設施;摩天輪;碰碰車</string>
     <string name="poi_attraction_animal">動物（遊樂園）</string>
     <string name="poi_attraction_big_wheel">摩天輪</string>
     <string name="poi_attraction_carousel">旋轉木馬</string>
@@ -801,7 +801,7 @@
     <string name="poi_entrance">入口</string>
     <string name="poi_entrance_exit">出口</string>
     <string name="poi_highway_crossing">行人穿越道</string>
-    <string name="poi_cheese">奶酪商店</string>
+    <string name="poi_cheese">起司商店；起司</string>
     <string name="poi_chocolate">巧克力商店</string>
     <string name="poi_coffee">咖啡館</string>
     <string name="poi_pasta">麵食店</string>
@@ -1883,7 +1883,7 @@
     <string name="poi_clothes_denim">牛仔服裝</string>
     <string name="poi_clothes_workwear">工作服</string>
     <string name="poi_clothes_hats">帽子</string>
-    <string name="poi_tourism_yes">觀光目的</string>
+    <string name="poi_tourism_yes">觀光目的：是</string>
     <string name="poi_clothes_fur">毛皮</string>
     <string name="poi_clothes_leather">皮革</string>
     <string name="poi_clothes_costumes">服裝</string>
@@ -5238,4 +5238,5 @@
     <string name="poi_payment_contactless_xlt_eusk_yes">Eusko 感應支付</string>
     <string name="poi_payment_contactless_xlt_flor_yes">Florain 感應支付</string>
     <string name="poi_hitchhiking_stop">搭便車</string>
+    <string name="poi_internet_access_fee">網際網路存取費用</string>
 </resources>
