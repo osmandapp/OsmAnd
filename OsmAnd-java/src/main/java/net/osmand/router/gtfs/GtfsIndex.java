@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
-import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.StandardOpenOption;
@@ -59,7 +58,7 @@ public final class GtfsIndex {
 
 	public static final int NO_COLOR = -1;
 
-	private final MappedByteBuffer map;
+	private final ByteBuffer map; // typed ByteBuffer: MappedByteBuffer has JDK 9+ only overrides (see GtfsAndroidNioCompatTest)
 	private final long fileSize;
 	private final long feedHash;
 	private final int feedCount, validFrom, validTo;
@@ -182,8 +181,8 @@ public final class GtfsIndex {
 
 	private IntBuffer view(long offset, long n) {
 		ByteBuffer b = map.duplicate();
-		b.position((int) offset);
-		b.limit((int) (offset + 4 * n));
+		((java.nio.Buffer) b).position((int) offset);
+		((java.nio.Buffer) b).limit((int) (offset + 4 * n));
 		return b.slice().order(ByteOrder.LITTLE_ENDIAN).asIntBuffer();
 	}
 
@@ -221,7 +220,7 @@ public final class GtfsIndex {
 	                      int[] counts) {
 		long[] off = sectionOffsets(counts);
 		b.order(ByteOrder.LITTLE_ENDIAN);
-		b.position(0);
+		((java.nio.Buffer) b).position(0);
 		b.put(MAGIC);
 		b.putInt(H_VERSION, VERSION);
 		b.putInt(H_FEEDS, feedCount);
@@ -242,7 +241,7 @@ public final class GtfsIndex {
 	public boolean verifyChecksum() {
 		CRC32 crc = new CRC32();
 		ByteBuffer b = map.duplicate();
-		b.position(CRC_FROM);
+		((java.nio.Buffer) b).position(CRC_FROM);
 		crc.update(b);
 		return crc.getValue() == map.getLong(H_CRC);
 	}
@@ -386,7 +385,7 @@ public final class GtfsIndex {
 		int s = strOffsets.get(i), e = strOffsets.get(i + 1);
 		byte[] b = new byte[e - s];
 		ByteBuffer d = map.duplicate();
-		d.position((int) strBase + s);
+		((java.nio.Buffer) d).position((int) strBase + s);
 		d.get(b);
 		return new String(b, StandardCharsets.UTF_8);
 	}

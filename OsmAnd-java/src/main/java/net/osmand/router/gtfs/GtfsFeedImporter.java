@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
-import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.AtomicMoveNotSupportedException;
@@ -190,11 +189,11 @@ public final class GtfsFeedImporter {
 		}
 
 		void flush() throws IOException {
-			buf.flip();
+			((java.nio.Buffer) buf).flip();
 			while (buf.hasRemaining()) {
 				ch.write(buf);
 			}
-			buf.clear();
+			((java.nio.Buffer) buf).clear();
 		}
 
 		void close() throws IOException {
@@ -812,16 +811,16 @@ public final class GtfsFeedImporter {
 				for (int col = 0; col < 5; col++) {
 					for (int i = 0; i < n; i++) {
 						if (!bb.hasRemaining()) {
-							bb.flip();
+							((java.nio.Buffer) bb).flip();
 							while (bb.hasRemaining()) {
 								ch.write(bb);
 							}
-							bb.clear();
+							((java.nio.Buffer) bb).clear();
 						}
 						bb.putInt(store.get(col, (int) keys[i]));
 					}
 				}
-				bb.flip();
+				((java.nio.Buffer) bb).flip();
 				while (bb.hasRemaining()) {
 					ch.write(bb);
 				}
@@ -958,18 +957,18 @@ public final class GtfsFeedImporter {
 			ByteBuffer t = ByteBuffer.allocate((int) off[GtfsIndex.S_CONN]).order(ByteOrder.LITTLE_ENDIAN);
 			int from = calendar.getValidFrom(), to = calendar.getValidTo();
 			GtfsIndex.putHeader(t, zips.size(), feedHash, from, to, tzString, counts);
-			t.position((int) off[GtfsIndex.S_STR_OFFS]);
+			((java.nio.Buffer) t).position((int) off[GtfsIndex.S_STR_OFFS]);
 			int acc = 0;
 			for (byte[] b : sb) {
 				t.putInt(acc);
 				acc += b.length;
 			}
 			t.putInt(acc);
-			t.position((int) off[GtfsIndex.S_STR_BYTES]);
+			((java.nio.Buffer) t).position((int) off[GtfsIndex.S_STR_BYTES]);
 			for (byte[] b : sb) {
 				t.put(b);
 			}
-			t.position((int) off[GtfsIndex.S_STOPS]);
+			((java.nio.Buffer) t).position((int) off[GtfsIndex.S_STOPS]);
 			put(t, stopLat);
 			put(t, stopLon);
 			put(t, stopName);
@@ -977,16 +976,16 @@ public final class GtfsFeedImporter {
 			put(t, stopParent);
 			put(t, selfTransfer);
 			put(t, footOffset);
-			t.position((int) off[GtfsIndex.S_FOOT]);
+			((java.nio.Buffer) t).position((int) off[GtfsIndex.S_FOOT]);
 			put(t, footTo);
 			put(t, footValue);
-			t.position((int) off[GtfsIndex.S_ROUTES]);
+			((java.nio.Buffer) t).position((int) off[GtfsIndex.S_ROUTES]);
 			put(t, routeShort);
 			put(t, routeLong);
 			put(t, routeType);
 			put(t, routeColor);
 			put(t, routeId);
-			t.position((int) off[GtfsIndex.S_TRIPS]);
+			((java.nio.Buffer) t).position((int) off[GtfsIndex.S_TRIPS]);
 			put(t, tripRoute);
 			put(t, tripService);
 			put(t, tripHeadsign);
@@ -995,15 +994,15 @@ public final class GtfsFeedImporter {
 			for (int i = 0; i < nt; i++) {
 				t.putInt(nPool + i); // trips are numbered in the order their ids were added
 			}
-			t.position((int) off[GtfsIndex.S_CALENDAR]);
+			((java.nio.Buffer) t).position((int) off[GtfsIndex.S_CALENDAR]);
 			put(t, cal.weekdayMask);
 			put(t, cal.startDay);
 			put(t, cal.endDay);
 			put(t, cal.exceptionOffset);
-			t.position((int) off[GtfsIndex.S_EXCEPTIONS]);
+			((java.nio.Buffer) t).position((int) off[GtfsIndex.S_EXCEPTIONS]);
 			put(t, cal.exceptionDay);
 			put(t, cal.exceptionType);
-			t.position(0);
+			((java.nio.Buffer) t).position(0);
 			try (FileChannel ch = FileChannel.open(out.toPath(), StandardOpenOption.CREATE, StandardOpenOption.WRITE,
 					StandardOpenOption.READ, StandardOpenOption.TRUNCATE_EXISTING)) {
 				while (t.hasRemaining()) {
@@ -1036,18 +1035,18 @@ public final class GtfsFeedImporter {
 			ByteBuffer bb = ByteBuffer.allocateDirect(1 << 20);
 			long pos = GtfsIndex.CRC_FROM;
 			while (pos < size) {
-				bb.clear();
+				((java.nio.Buffer) bb).clear();
 				int r = ch.read(bb, pos);
 				if (r <= 0) {
 					break;
 				}
-				bb.flip();
+				((java.nio.Buffer) bb).flip();
 				crc.update(bb);
 				pos += r;
 			}
 			ByteBuffer cb = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
 			cb.putLong(crc.getValue());
-			cb.flip();
+			((java.nio.Buffer) cb).flip();
 			ch.write(cb, GtfsIndex.H_CRC);
 		}
 
@@ -1062,11 +1061,11 @@ public final class GtfsFeedImporter {
 					FileChannel rc = FileChannel.open(runFiles.get(r).toPath(), StandardOpenOption.READ);
 					open.add(rc);
 					cnt[r] = runSizes.get(r);
-					MappedByteBuffer mb = rc.map(FileChannel.MapMode.READ_ONLY, 0, rc.size());
+					ByteBuffer mb = rc.map(FileChannel.MapMode.READ_ONLY, 0, rc.size());
 					for (int col = 0; col < 5; col++) {
 						ByteBuffer d = mb.duplicate();
-						d.position(col * cnt[r] * 4);
-						d.limit((col + 1) * cnt[r] * 4);
+						((java.nio.Buffer) d).position(col * cnt[r] * 4);
+						((java.nio.Buffer) d).limit((col + 1) * cnt[r] * 4);
 						cols[r][col] = d.slice().order(ByteOrder.LITTLE_ENDIAN).asIntBuffer();
 					}
 				}
@@ -1113,11 +1112,11 @@ public final class GtfsFeedImporter {
 		}
 
 		long drain(FileChannel ch, ByteBuffer bb, long pos) throws IOException {
-			bb.flip();
+			((java.nio.Buffer) bb).flip();
 			while (bb.hasRemaining()) {
 				pos += ch.write(bb, pos);
 			}
-			bb.clear();
+			((java.nio.Buffer) bb).clear();
 			return pos;
 		}
 	}
