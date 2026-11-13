@@ -35,6 +35,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.VolumeUnit;
+import net.osmand.router.TransportClockFormat;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
@@ -218,6 +219,12 @@ public class OsmAndFormatter {
 		int hours = totalMinutes / 60;
 		int minutes = totalMinutes % 60;
 		return String.format(Locale.US, "%d:%02d", hours, minutes);
+	}
+
+	/** Clock text for timetable based transport results, 24 or 12 hour as the device is set. */
+	@NonNull
+	public static TransportClockFormat getTransportClockFormat(@NonNull Context context) {
+		return new TransportClockFormat(android.text.format.DateFormat.is24HourFormat(context), Locale.getDefault());
 	}
 
 	@NonNull

@@ -28,6 +28,8 @@ import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.TransportRoutePlanner;
+import net.osmand.router.TransportRouteProvider;
+import net.osmand.router.TransportRouteProviders;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.router.TransportRoutingConfiguration;
@@ -75,12 +77,15 @@ public class TransportRoutingHelper {
 
 	private LatLon startLocation;
 	private LatLon endLocation;
+	private volatile Long departureTimeSec;
 
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
 	private long lastTimeEvaluatedRoute;
 
 	private TransportRouteCalculationProgressCallback progressRoute;
+
+	private final TransportRouteProviders routeProviders = new TransportRouteProviders();
 
 
 	public TransportRoutingHelper(@NonNull OsmandApplication app) {
@@ -91,12 +96,42 @@ public class TransportRoutingHelper {
 		this.routingHelper = routingHelper;
 	}
 
+	/**
+	 * Registers a source of public transport routes that is asked before the OBF based planner.
+	 * See {@link TransportRouteProvider} for the contract.
+	 */
+	public void addRouteProvider(@NonNull TransportRouteProvider provider) {
+		routeProviders.add(provider);
+	}
+
+	public void removeRouteProvider(@NonNull TransportRouteProvider provider) {
+		routeProviders.remove(provider);
+	}
+
+	public boolean hasRouteProviders() {
+		return !routeProviders.isEmpty();
+	}
+
 	public LatLon getStartLocation() {
 		return startLocation;
 	}
 
 	public LatLon getEndLocation() {
 		return endLocation;
+	}
+
+	/**
+	 * The "depart at" time of the next calculations in epoch seconds, or null for "now". It is forgotten
+	 * when the route is cancelled. Only a {@link TransportRouteProvider} receives it, the OBF planner has
+	 * no timetable to use it with. Call {@link #recalculateRouteDueToSettingsChange()} to apply a change.
+	 */
+	@Nullable
+	public Long getDepartureTimeSec() {
+		return departureTimeSec;
+	}
+
+	public void setDepartureTimeSec(@Nullable Long departureTimeSec) {
+		this.departureTimeSec = departureTimeSec;
 	}
 
 	public int getCurrentRoute() {
@@ -208,6 +243,7 @@ public class TransportRoutingHelper {
 		TransportRouteCalculationParams params = new TransportRouteCalculationParams();
 		params.start = start;
 		params.end = end;
+		params.departureTimeSec = departureTimeSec;
 		params.mode = applicationMode;
 		params.type = RouteService.OSMAND;
 		params.ctx = app;
@@ -351,6 +387,9 @@ public class TransportRoutingHelper {
 			}
 		});
 		this.endLocation = newFinalLocation;
+		if (newFinalLocation == null) {
+			departureTimeSec = null;
+		}
 		stopCalculation();
 	}
 
@@ -409,6 +448,8 @@ public class TransportRoutingHelper {
 
 		public LatLon start;
 		public LatLon end;
+		/** Epoch seconds the traveller wants to leave the start at, null for "now". */
+		public Long departureTimeSec;
 
 		public OsmandApplication ctx;
 		public ApplicationMode mode;
@@ -533,6 +574,18 @@ public class TransportRoutingHelper {
 			}
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
+
+			TransportRouteProviders providers = transportRoutingHelper.routeProviders;
+			if (!providers.isEmpty()) {
+				List<TransportRouteResult> providerRoutes = providers.calculate(params.start, params.end, params.departureTimeSec,
+						params.params, cfg, params.calculationProgress);
+				if (providerRoutes != null) {
+					return providerRoutes;
+				}
+				if (params.calculationProgress.isCancelled) {
+					return null;
+				}
+			}
 
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
 			ctx.calculationProgress = params.calculationProgress;
