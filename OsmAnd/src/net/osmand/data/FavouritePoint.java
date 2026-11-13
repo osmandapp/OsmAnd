@@ -151,10 +151,6 @@ public class FavouritePoint implements LocationPoint, Linkable {
 	}
 
 	public int getIconIdOrDefault(@NonNull Context ctx) {
-		if(iconId == 0 && !Algorithms.isEmpty(getCategory())) {
-			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-			iconId = app.getFavoritesHelper().getOriginalIconId(this);
-		}
 		return iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 	}
 
