@@ -3461,8 +3461,8 @@
     <string name="poi_charging_station_output">Излаз станице пуњења</string>
     <string name="poi_amperage">Ампеража</string>
     <string name="poi_parking_fee">Цена паркирања</string>
-    <string name="poi_parking_fee_no">Не</string>
-    <string name="poi_parking_fee_yes">Да</string>
+    <string name="poi_parking_fee_no">Накнада паркирања: не</string>
+    <string name="poi_parking_fee_yes">Накнада паркирања: да</string>
     <string name="poi_truck_no">Камион: не</string>
     <string name="poi_scooter_no">Скутер: не</string>
     <string name="poi_scooter_yes">Скутер: да</string>
@@ -4384,8 +4384,8 @@
     <string name="poi_playground_hopscotch">Игралиште за класике</string>
     <string name="poi_playground_teenshelter">Тинејџерско склониште</string>
     <string name="poi_climbing_grade_saxon">Саксонска класа пењања</string>
-    <string name="poi_climbing_bolts_yes">Да</string>
-    <string name="poi_climbing_bolts_no">Не</string>
+    <string name="poi_climbing_bolts_yes">Вијци успона: да</string>
+    <string name="poi_climbing_bolts_no">Вијци успона: не</string>
     <string name="poi_climbing_bolts">Вијци за пењање</string>
     <string name="poi_climbing_quality_medium">Средње</string>
     <string name="poi_trampoline_park">Парк са трамполином</string>

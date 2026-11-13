@@ -3293,8 +3293,8 @@
     <string name="poi_scooter_yes">Σκούτερ: ναι</string>
     <string name="poi_scooter_no">Σκούτερ: όχι</string>
     <string name="poi_truck_no">Φορτηγό: όχι</string>
-    <string name="poi_parking_fee_yes">Ναι</string>
-    <string name="poi_parking_fee_no">Όχι</string>
+    <string name="poi_parking_fee_yes">Χρέωση στάθμευσης: ναι</string>
+    <string name="poi_parking_fee_no">Χρέωση στάθμευσης: όχι</string>
     <string name="poi_parking_fee">Τέλος στάθμευσης</string>
     <string name="poi_amperage">Αμπέρ</string>
     <string name="poi_charging_station_output">Έξοδος σταθμού φόρτισης</string>
@@ -3909,7 +3909,7 @@
     <string name="poi_lit">Φωτισμός</string>
     <string name="poi_piste_type">Είδος πίστας</string>
     <string name="poi_piste_oneway">Πίστα μιας κατεύθυνσης</string>
-    <string name="poi_cafe_yes">Ναι</string>
+    <string name="poi_cafe_yes">Καφέ: ναι</string>
     <string name="poi_access_notes">Σημειώσεις πρόσβασης</string>
     <string name="poi_us_maps_recreation_area_activity_winter_sports">Χειμερινά αθλήματα</string>
     <string name="poi_routes_winter_sport">Χειμερινά αθλήματα</string>
@@ -4199,8 +4199,8 @@
     <string name="poi_socket_typee_voltage_low">Χαμηλή</string>
     <string name="poi_climbing_rock_basalt">Πέτρωμα αναρρίχησης: βασάλτης</string>
     <string name="poi_osmwiki">Δημοφιλή μέρη (Βικιπαίδεια)</string>
-    <string name="poi_climbing_bolts_yes">Ναι</string>
-    <string name="poi_climbing_bolts_no">Όχι</string>
+    <string name="poi_climbing_bolts_yes">Μπουλόνια αναρρίχησης: ναι</string>
+    <string name="poi_climbing_bolts_no">Μπουλόνια αναρρίχησης: όχι</string>
     <string name="poi_hiking_yes">Κατάλληλο για πεζοπορία: ναι</string>
     <string name="poi_self_checkout_yes">Αυτοεξυπηρέτηση: ναι</string>
     <string name="poi_self_checkout_only">Αυτοεξυπηρέτηση: μόνο</string>

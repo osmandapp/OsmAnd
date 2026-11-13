@@ -2902,8 +2902,8 @@
     <string name="poi_charging_station_output">Stație de încărcare putere de ieșire</string>
     <string name="poi_amperage">Amperaj</string>
     <string name="poi_parking_fee">Taxă de parcare</string>
-    <string name="poi_parking_fee_no">Nu</string>
-    <string name="poi_parking_fee_yes">Da</string>
+    <string name="poi_parking_fee_no">Taxă parcare: nu</string>
+    <string name="poi_parking_fee_yes">Taxă parcare: da</string>
     <string name="poi_truck_no">Camion: nu</string>
     <string name="poi_scooter_no">Scooter: nu</string>
     <string name="poi_scooter_yes">Scooter: da</string>
@@ -4393,10 +4393,10 @@
     <string name="poi_climbing_speed_yes">Viteză: da</string>
     <string name="poi_climbing_grade_french_max">Cel mai greu traseu (grade franceze)</string>
     <string name="poi_climbing_grade_uiaa_max">Cel mai greu traseu (grade UIAA)</string>
-    <string name="poi_climbing_bolts_yes">Da</string>
+    <string name="poi_climbing_bolts_yes">Bolțuri de cățărare: da</string>
     <string name="poi_climbing_grade_aliens">Extratereștri</string>
     <string name="poi_climbing_bolt_abseil">Coborâre în rapel</string>
-    <string name="poi_climbing_bolts_no">Nu</string>
+    <string name="poi_climbing_bolts_no">Bolțuri de cățărare: nu</string>
     <string name="poi_climbing_quality_medium">Medie</string>
     <string name="poi_trampoline_park">Parc de trambuline</string>
     <string name="poi_socket_chademo_voltage_filter">Tensiune conector CHAdeMO</string>
@@ -4879,7 +4879,7 @@
     <string name="poi_route_activity_type_all_terrain_vehicle">ATV (All-Terrain Vehicle)</string>
     <string name="poi_route_activity_type_enduro_motorcycling">Motociclism Enduro</string>
     <string name="poi_route_activity_type_inline_skates">Role</string>
-    <string name="poi_cafe_yes">Da</string>
+    <string name="poi_cafe_yes">Cafea: da</string>
     <string name="poi_climbing_boulder">Escaladă bouldering</string>
     <string name="poi_payment_parkster_no">Parkster: nu</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Accesul interzis pietonilor în tunel</string>

@@ -3281,8 +3281,8 @@
     <string name="poi_scooter_yes">Skuter: tak</string>
     <string name="poi_scooter_no">Skuter: nie</string>
     <string name="poi_truck_no">Ciężarówka: nie</string>
-    <string name="poi_parking_fee_yes">Tak</string>
-    <string name="poi_parking_fee_no">Nie</string>
+    <string name="poi_parking_fee_yes">Opłata parkingowa: tak</string>
+    <string name="poi_parking_fee_no">Opłata parkingowa: nie</string>
     <string name="poi_parking_fee">Opłata parkingowa</string>
     <string name="poi_amperage">Natężenie prądu</string>
     <string name="poi_charging_station_output">Moc stacji ładowania</string>
@@ -4374,8 +4374,8 @@
     <string name="poi_climbing_grade_elite">Dla elity</string>
     <string name="poi_climbing_grade_super_elite">Dla super elity</string>
     <string name="poi_climbing_grade_aliens">Dla obcych</string>
-    <string name="poi_climbing_bolts_yes">Tak</string>
-    <string name="poi_climbing_bolts_no">Nie</string>
+    <string name="poi_climbing_bolts_yes">Śruby wspinaczkowe: tak</string>
+    <string name="poi_climbing_bolts_no">Śruby wspinaczkowe: nie</string>
     <string name="poi_blowhole">Szczelina</string>
     <string name="poi_skate">Skateshop</string>
     <string name="poi_payment_visa_contactless_no">Karta zbliżeniowa Visa: nie</string>
@@ -4759,7 +4759,7 @@
     <string name="poi_state_approved">Stan: zatwierdzone</string>
     <string name="poi_state_active">Stan: aktywne</string>
     <string name="poi_state_under_construction">Stan: w budowie</string>
-    <string name="poi_cafe_yes">Tak</string>
+    <string name="poi_cafe_yes">Kawiarnia: tak</string>
     <string name="poi_contact_website">Strona internetowa</string>
     <string name="poi_hang_gliding">Lotniarstwo</string>
     <string name="poi_us_maps_recreation_area_activity_campground_camping">Kemping na polu namiotowym</string>

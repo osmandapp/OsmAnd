@@ -3276,13 +3276,13 @@
     <string name="poi_socket_as3112_current">Enchufe: AS/NZS 3112: corriente</string>
     <string name="poi_socket_as3112_output">Enchufe: AS/NZS 3112: salida</string>
     <string name="poi_car_no">Automóvil: no</string>
-    <string name="poi_bicycle_yes">Sí</string>
+    <string name="poi_bicycle_yes">Acceso en bicicleta: sí</string>
     <string name="poi_bicycle_no">Bicicleta: no</string>
     <string name="poi_scooter_yes">Escúter: sí</string>
     <string name="poi_scooter_no">Escúter: no</string>
     <string name="poi_truck_no">Camión: no</string>
-    <string name="poi_parking_fee_yes">Sí</string>
-    <string name="poi_parking_fee_no">No</string>
+    <string name="poi_parking_fee_yes">Estacionamiento tarifado: sí</string>
+    <string name="poi_parking_fee_no">Estacionamiento tarifado: no</string>
     <string name="poi_parking_fee">Estacionamiento tarifado</string>
     <string name="poi_amperage">Amperaje</string>
     <string name="poi_charging_station_output">Salida de la estación de carga</string>
@@ -4383,8 +4383,8 @@
     <string name="poi_climbing_grade_aliens">Extraterrestres</string>
     <string name="poi_climbing_bolt_abseil">Rápel</string>
     <string name="poi_climbing_bolt_anchor">Anclaje</string>
-    <string name="poi_climbing_bolts_yes">Sí</string>
-    <string name="poi_climbing_bolts_no">No</string>
+    <string name="poi_climbing_bolts_yes">Pernos de escalada: sí</string>
+    <string name="poi_climbing_bolts_no">Pernos de escalada: no</string>
     <string name="poi_climbing_bolts">Pernos de escalada</string>
     <string name="poi_climbing_grade_filter">Nivel de escalada</string>
     <string name="poi_climbing_bolt">Perno de escalada</string>
@@ -4937,7 +4937,7 @@
     <string name="poi_climbing_area">Área de escalada</string>
     <string name="poi_climbing_route">Ruta de escalada</string>
     <string name="poi_climbing_route_bottom">Ruta de escalada inferior</string>
-    <string name="poi_cafe_yes">Sí</string>
+    <string name="poi_cafe_yes">Cafetería: sí</string>
     <string name="poi_sled_yes">Trineo: sí</string>
     <string name="poi_sled_no">Trineo: no</string>
     <string name="poi_dog_sled_yes">Trineo de perros: sí</string>
