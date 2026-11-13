@@ -24,6 +24,18 @@ public class TurnType {
 	public static final int RNLB = 14; // Roundabout left
 	private static final int[] TURNS_ORDER = {TU, TSHL, TL, TSLL, C, TSLR, TR, TSHR, TRU};
 
+	// Lane modifiers: describe the whole lane, never change its turns (kept in a parallel array)
+	public static final int MOD_SHARED = 1 << 0; // both_ways: lane shared with oncoming traffic (TWLTL/TWRTL)
+	public static final int MOD_MERGE_LEFT = 1 << 1;
+	public static final int MOD_MERGE_RIGHT = 1 << 2;
+	public static final int MOD_BUS = 1 << 3;
+	public static final int MOD_TAXI = 1 << 4;
+	public static final int MOD_BICYCLE = 1 << 5;
+	public static final int MOD_HOV = 1 << 6;
+	public static final int MOD_NO_CHANGE_LEFT = 1 << 7;
+	public static final int MOD_NO_CHANGE_RIGHT = 1 << 8;
+	public static final int MOD_CONDITIONAL = 1 << 9;
+
 	public static TurnType straight() {
 		return valueOf(C, false);
 	}
@@ -136,6 +148,7 @@ public class TurnType {
 	private float turnAngle;
 	private boolean skipToSpeak;
 	private int[] lanes;
+	private int[] modifiers; // parallel to lanes, null = no modifiers
 	private boolean possiblyLeftTurn;
 	private boolean possiblyRightTurn;
 	private List<Float> otherTurnAngles;
@@ -210,6 +223,36 @@ public class TurnType {
 	// 11-15 bits - tertiary turn
 	public void setLanes(int[] lanes) {
 		this.lanes = lanes;
+		if (modifiers != null && (lanes == null || lanes.length != modifiers.length)) {
+			modifiers = null; // lane count changed: drop, never shift
+		}
+	}
+
+	// Call after setLanes: modifiers that don't match the lanes are dropped
+	public void setModifiers(int[] modifiers) {
+		if (modifiers == null || lanes == null || modifiers.length != lanes.length) {
+			this.modifiers = null;
+		} else {
+			this.modifiers = modifiers;
+		}
+	}
+
+	public int[] getModifiers() {
+		return modifiers;
+	}
+
+	public int getModifier(int lane) {
+		return modifiers != null && lane >= 0 && lane < modifiers.length ? modifiers[lane] : 0;
+	}
+
+	public boolean hasModifier(int lane, int mod) {
+		return (getModifier(lane) & mod) != 0;
+	}
+
+	// Replaces setLanes(other.getLanes()) where the lanes move to another TurnType
+	public void copyLanesFrom(TurnType other) {
+		setLanes(other.lanes);
+		setModifiers(other.modifiers);
 	}
 	
 	// Note that the primary turn will be the one displayed on the map.

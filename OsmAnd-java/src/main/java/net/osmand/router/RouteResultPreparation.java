@@ -2029,6 +2029,54 @@ public class RouteResultPreparation {
 		return convertReverseLanes(turnLanes);
 	}
 
+	/**
+	 * Lane modifiers of the segment, in the same order as getTurnLanesString(segment).
+	 * Returns null when no lane has a modifier or lanesCount does not match the tags.
+	 */
+	protected static int[] getLaneModifiers(RouteSegmentResult segment, int lanesCount) {
+		if (lanesCount <= 0) {
+			return null;
+		}
+		RouteDataObject ro = segment.getObject();
+		int[] mods = new int[lanesCount];
+		boolean any = false;
+
+		// merged turn:lanes:both_ways lanes are the first (left) or the last (right) lanes of turn:lanes:<dir>
+		if (ro.getOneway() == 0) {
+			String dir = segment.isForwardDirection() ? "forward" : "backward";
+			int lanesDir = Algorithms.parseIntSilently(ro.getValue("lanes:" + dir), 0);
+			int merged = countMergedBothWaysLanes(ro, dir, lanesDir);
+			if (merged > 0 && lanesCount == lanesDir + merged) {
+				boolean left = ro.getValue("turn:lanes:both_ways").startsWith("left");
+				for (int k = 0; k < merged; k++) {
+					mods[left ? k : lanesCount - 1 - k] |= TurnType.MOD_SHARED;
+				}
+				any = true;
+			}
+		}
+		return any ? mods : null;
+	}
+
+	/**
+	 * Number of turn:lanes:both_ways lanes the generator merged into turn:lanes:<dir>
+	 * (all-left values go first, all-right values go last), 0 if nothing was merged.
+	 * Merged only when turn:lanes:<dir> has exactly lanesDir + both_ways lanes.
+	 */
+	protected static int countMergedBothWaysLanes(RouteDataObject ro, String dir, int lanesDir) {
+		String bw = ro.getValue("turn:lanes:both_ways");
+		String turnLanes = ro.getValue("turn:lanes:" + dir);
+		if (bw == null || turnLanes == null || lanesDir <= 0) {
+			return 0;
+		}
+		String[] bwLanes = bw.split("\\|", -1);
+		for (String lane : bwLanes) {
+			if (!lane.equals(bwLanes[0]) || !(lane.equals("left") || lane.equals("right"))) {
+				return 0;
+			}
+		}
+		return turnLanes.split("\\|", -1).length == lanesDir + bwLanes.length ? bwLanes.length : 0;
+	}
+
 	private static String convertReverseLanes(String turnLanes) {
 		if (turnLanes == null || REVERSE_LANE.equals(turnLanes) || !turnLanes.endsWith(REVERSE_LANE)) {
 			return turnLanes;
@@ -2078,18 +2126,16 @@ public class RouteResultPreparation {
 				// we should get direction to detect forward or backward
 				double cmp = ro.directionRoute(0, true);
 				
-				if(Math.abs(MapUtils.alignAngleDifference(dirToNorthEastPi -cmp)) < Math.PI / 2) {
-					if(ro.getValue("lanes:forward") != null) {
-						lns = Integer.parseInt(ro.getValue("lanes:forward"));
-					}
-				} else {
-					if(ro.getValue("lanes:backward") != null) {
-					lns = Integer.parseInt(ro.getValue("lanes:backward"));
-					}
+				String dir = Math.abs(MapUtils.alignAngleDifference(dirToNorthEastPi - cmp)) < Math.PI / 2 ? "forward" : "backward";
+				if (ro.getValue("lanes:" + dir) != null) {
+					lns = Integer.parseInt(ro.getValue("lanes:" + dir));
 				}
 				if (lns == 0 && ro.getValue("lanes") != null) {
-					lns = Integer.parseInt(ro.getValue("lanes")) / 2;
+					int bothWays = Algorithms.parseIntSilently(ro.getValue("lanes:both_ways"), 0);
+					lns = (Integer.parseInt(ro.getValue("lanes")) - bothWays) / 2;
 				}
+				// lanes counted the same way as turn:lanes:<dir>, which has the merged both_ways lanes
+				lns += countMergedBothWaysLanes(ro, dir, lns);
 			} else {
 				lns = Integer.parseInt(ro.getValue("lanes"));
 			}
