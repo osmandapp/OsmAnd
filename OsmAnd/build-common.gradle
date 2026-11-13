@@ -5,13 +5,6 @@ tasks.register('printc') {
 }
 
 android {
-	// OsmAnd's Version.checkOpenGlExists() scans nativeLibraryDir on the
-	// filesystem for libOsmAndCoreWithJNI.so, which requires unpacked libs.
-	packagingOptions {
-		jniLibs {
-			useLegacyPackaging = true
-		}
-	}
     compileSdk osmand_compileSdk
     buildToolsVersion = osmand_buildToolsVersion
     // compileNdkVersion "android-ndk-r17b"

@@ -55,4 +55,3 @@ OsmAnd-java/src/test/resources/approximation/*
 #Shared library resources
 OsmAnd-shared/src/androidMain/resources/
 OsmAnd-shared/src/jvmMain/resources/
-build_541.sh

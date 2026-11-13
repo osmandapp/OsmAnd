@@ -31,48 +31,6 @@ android {
 			keyPassword "android"
 		}
 
-		topo {
-			// Release signing for the standalone TopoPrint APK. Priority:
-			// 1. ~/keys/topo-release-signing.properties  (non-interactive, CI)
-			//    storeFile=/home/<user>/keys/topo_release.keystore
-			//    storePassword=... keyAlias=topo keyPassword=...
-			// 2. TOPO_KEY_PASSWORD env var
-			// 3. development keystore fallback
-			def propsFile = new File(System.getenv("TOPO_SIGNING_PROPS")
-					?: System.getProperty("user.home") + "/keys/topo-release-signing.properties")
-			def signingReady = false
-			if (propsFile.canRead()) {
-				def p = new Properties()
-				propsFile.withInputStream { p.load(it) }
-				if (p.storePassword != null && p.keyPassword != null) {
-					storeFile file(p.containsKey("storeFile")
-							? p.storeFile : System.getProperty("user.home") + "/keys/topo_release.keystore")
-					storePassword p.storePassword
-					keyAlias p.containsKey("keyAlias") ? p.keyAlias : "topo"
-					keyPassword p.keyPassword
-					signingReady = true
-				}
-			}
-			if (!signingReady) {
-				def envPass = System.getenv("TOPO_KEY_PASSWORD")
-				if (envPass != null && !envPass.isEmpty()) {
-					storeFile file(System.getProperty("user.home") + "/keys/topo_release.keystore")
-					storePassword envPass
-					keyAlias "topo"
-					// set the key password equal to the keystore password; if
-					// yours differs, use the properties file instead
-					keyPassword envPass
-					signingReady = true
-				}
-			}
-			if (!signingReady) {
-				storeFile development.storeFile
-				storePassword development.storePassword
-				keyAlias development.keyAlias
-				keyPassword development.keyPassword
-			}
-		}
-
 		publishing {
 			storeFile file("/var/lib/jenkins/osmand_key")
 			storePassword System.getenv("OSMAND_APK_PASSWORD")

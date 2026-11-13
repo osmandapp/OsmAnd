@@ -281,8 +281,7 @@ public class MapRendererContext {
 		float textScale = symbolsScaleOverride != null ? symbolsScaleOverride : settings.TEXT_SCALE.get();
 		QStringStringHash styleSettings = getMapStyleSettings();
 
-		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, styleSettings,
-				density, mapDensity, textScale, mapDensityOverride, symbolsScaleOverride);
+		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, styleSettings, density, mapDensity, textScale);
 		boolean recreateMapPresentation = cachedMapPresentation == null
 				|| cachedMapPresentation.shouldRecreateMapPresentation(pres);
 		boolean languageParamsChanged = cachedMapPresentation != null
@@ -752,10 +751,6 @@ public class MapRendererContext {
 		float displayDensityFactor;
 		float mapScaleFactor;
 		float symbolsScaleFactor;
-		@Nullable
-		Float mapDensityOverride;
-		@Nullable
-		Float symbolsScaleOverride;
 
 		public CachedMapPresentation(@NonNull String langId,
 		                             @NonNull LanguagePreference langPref,
@@ -763,9 +758,7 @@ public class MapRendererContext {
 		                             QStringStringHash styleSettings,
 		                             float displayDensityFactor,
 		                             float mapScaleFactor,
-		                             float symbolsScaleFactor,
-		                             @Nullable Float mapDensityOverride,
-		                             @Nullable Float symbolsScaleOverride) {
+		                             float symbolsScaleFactor) {
 			this.langId = langId;
 			this.langPref = langPref;
 			this.mapStyle = mapStyle;
@@ -773,8 +766,6 @@ public class MapRendererContext {
 			this.displayDensityFactor = displayDensityFactor;
 			this.mapScaleFactor = mapScaleFactor;
 			this.symbolsScaleFactor = symbolsScaleFactor;
-			this.mapDensityOverride = mapDensityOverride;
-			this.symbolsScaleOverride = symbolsScaleOverride;
 		}
 
 		public boolean shouldRecreateMapPresentation(@NonNull CachedMapPresentation other) {
@@ -782,8 +773,6 @@ public class MapRendererContext {
 					|| Double.compare(mapScaleFactor, other.mapScaleFactor) != 0
 					|| Double.compare(symbolsScaleFactor, other.symbolsScaleFactor) != 0
 					|| !Algorithms.objectEquals(mapStyle, other.mapStyle)
-					|| !Algorithms.objectEquals(mapDensityOverride, other.mapDensityOverride)
-					|| !Algorithms.objectEquals(symbolsScaleOverride, other.symbolsScaleOverride)
 					|| styleSettingsChanged(other);
 		}
 
