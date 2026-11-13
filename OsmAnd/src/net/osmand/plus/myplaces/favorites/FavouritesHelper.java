@@ -59,6 +59,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class FavouritesHelper {
@@ -80,6 +82,7 @@ public class FavouritesHelper {
 
 	private List<FavoritesListener> listeners = new ArrayList<>();
 	private final Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
+	private final ExecutorService originalIconsExecutor = Executors.newSingleThreadExecutor();
 	private final FavoritesListener saveFavoritesListener = new FavoritesListener() {
 		@Override
 		public void onSavingFavoritesFinished(boolean success) {
@@ -319,6 +322,7 @@ public class FavouritesHelper {
 		}
 		favoritesLoaded = true;
 		notifyListeners();
+		searchOriginalIcons(getFavouritePoints());
 	}
 
 	private void applyPendingDeletions(@NonNull Map<String, FavoriteGroup> groups,
@@ -1114,6 +1118,36 @@ public class FavouritesHelper {
 			}
 		}
 		return 0;
+	}
+
+	/**
+	 * A point saved from a POI without an icon of its own shows the icon of that POI. Finding the POI
+	 * reads the map files, so it is done once per load, in the background.
+	 */
+	public void searchOriginalIcons(@NonNull List<FavouritePoint> points) {
+		originalIconsExecutor.execute(() -> {
+			boolean found = false;
+			for (FavouritePoint point : points) {
+				if (point.getIconId() != 0 || Algorithms.isEmpty(point.getCategory())) {
+					continue;
+				}
+				int iconId = getOriginalIconId(point);
+				if (iconId != 0) {
+					found = true;
+					app.runInUIThread(() -> {
+						if (point.getIconId() == 0) {
+							point.setIconId(iconId);
+						}
+					});
+				}
+			}
+			if (found) {
+				app.runInUIThread(() -> {
+					updateLastModifiedTime();
+					app.getOsmandMap().refreshMap();
+				});
+			}
+		});
 	}
 
 	public void updateGroupIconName(@NonNull FavoriteGroup group, @NonNull String iconName,

@@ -83,6 +83,7 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GpxFile
 		}
 		favoritesHelper.sortAll();
 		favoritesHelper.saveCurrentPointsIntoFile(false);
+		favoritesHelper.searchOriginalIcons(favourites);
 	}
 
 	@NonNull
